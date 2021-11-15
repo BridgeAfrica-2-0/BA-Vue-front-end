@@ -18,18 +18,18 @@
                     <b-col cols="12" md="12">
                       <div>
                         <b-table-simple hover small caption-top responsive>
-                          <b-tbody>
+                          <b-tbody v-if="getUserInfos.length >0 ">
                             <b-tr>
                               <b-td class="a-text text"> {{ $t("settings.name") }} </b-td>
 
                               <b-td class="a-text text">
-                                <b-link href="#">Blezour Blec</b-link>
+                                <b-link href="#" @click="userInfos">{{getUserInfos.name}}</b-link>
                               </b-td>
                             </b-tr>
                             <br />
 
                             <b-tr>
-                              <b-td class="a-text text"> {{ $t("settings.public_url") }} </b-td>
+                              <b-td class="a-text text" @click="userInfos"> {{ $t("settings.public_url") }} </b-td>
 
                               <b-td class="text"
                                 ><b-link href="#">
@@ -44,7 +44,7 @@
                               <b-td class="a-text text"> {{ $t("settings.email") }} </b-td>
 
                               <b-td class="a-text text">
-                                <b-link href="#">BlezourBlec@gmail.com</b-link>
+                                <b-link href="#">{{getUserInfos.email}}</b-link>
                               </b-td>
                             </b-tr>
                             <br />
@@ -53,7 +53,7 @@
                               <b-td class="a-text text">{{ $t("settings.phone") }} </b-td>
 
                               <b-td class="a-text text">
-                                <b-link href="#">+237 82325939</b-link>
+                                <b-link href="#">{{getUserInfos.phone}}</b-link>
                               </b-td>
                             </b-tr>
                             <br />
@@ -62,7 +62,7 @@
                               <b-td class="a-text text"> {{ $t("settings.dob") }} </b-td>
 
                               <b-td class="a-text text">
-                                <b-link href="#">21/08/2020</b-link>
+                                <b-link href="#">{{getUserInfos.dob}}</b-link>
                               </b-td>
                             </b-tr>
                             <br />
@@ -71,7 +71,7 @@
                               <b-td class="a-text text"> {{ $t("settings.gender") }} </b-td>
 
                               <b-td class="a-text text">
-                                <b-link href="#">Male</b-link>
+                                <b-link href="#">{{getUserInfos.gender}}</b-link>
                               </b-td>
                             </b-tr>
                             <br />
@@ -80,7 +80,7 @@
                               <b-td class="a-text text"> {{ $t("settings.country") }} </b-td>
 
                               <b-td class="a-text text">
-                                <b-link href="#">Cameroon</b-link>
+                                <b-link href="#">{{getUserInfos.country.name}}</b-link>
                               </b-td>
                             </b-tr>
 
@@ -90,7 +90,7 @@
                               <b-td class="a-text tetx"> {{ $t("settings.city") }} </b-td>
 
                               <b-td class="a-text text">
-                                <b-link href="#">Yaounde</b-link>
+                                <b-link href="#">{{getUserInfos.city}}</b-link>
                               </b-td>
                             </b-tr>
                             <br />
@@ -99,11 +99,34 @@
                               <b-td class="a-text text"> {{ $t("settings.neighbourhood") }}</b-td>
 
                               <b-td class="a-text text">
-                                <b-link href="#">Nkozoa</b-link>
+                                <b-link href="#">{{getUserInfos.neighbor}}</b-link>
                               </b-td>
                             </b-tr>
                             <br />
+                               <div>
+                              <b-button variant="warning" v-b-modal.modal-10>Edit </b-button>
 
+                              <b-modal id="modal-10" title="Edit your information here"  hide-footer>
+                               
+                              <!-- <b-form @submit="onSubmit" >
+                                <b-form-group
+                                  id="input-group-1"
+                                  label="Email address:"
+                                  label-for="input-1"
+                                  description="We'll never share your email with anyone else."
+                                >
+                                  <b-form-input
+                                    id="input-1"
+
+                                    type="email"
+                                    placeholder="Enter email"
+                                    required
+                                  ></b-form-input>
+                                </b-form-group>
+                               </b-form> -->
+
+                              </b-modal>
+                            </div>
                             <br />
 
                             <br />
@@ -261,6 +284,10 @@ export default {
       if (this.size > 992) return true;
       return false;
     },
+
+    getUserInfos(){
+      return this.$store.state.profileSettingsEdit.userInfos;
+    }
   },
 
   data() {
@@ -269,7 +296,25 @@ export default {
     };
   },
 
+  methods: {
+    userInfos(){ 
+      this.$store
+      .dispatch("profileSettingsEdit/userInfos")
+      .then(response =>{
+        console.log(response);
+        console.log(this.getUserInfos);
+      })
+      .catch((err) => {
+         
+          console.log('--------- error: ');
+          console.error(err);
+        });
+    }
+  },
+
   mounted() {
+    this.userInfos();
+
     var that = this;
     window.onresize = function() {
       that.size = window.innerWidth;

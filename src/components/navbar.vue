@@ -300,7 +300,11 @@
                         </div> -->
                         <div class="d-flex flex-column ml-3">
                           <div>{{ notification.notification_text }}</div>
-                          <div class="small text-muted">1m</div>
+                          <div class="small text-muted">
+                            <span class="text-capitalize">
+                              {{ notification.created_at | moment("from", "now") }}
+                            </span>
+                          </div>
                         </div>
                       </div>
                     </div>

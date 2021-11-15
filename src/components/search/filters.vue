@@ -423,7 +423,7 @@
     <b-modal ref="myfilters" id="Neighbourhood" hide-footer title=" ">
       <b-form-group
         label-cols-lg="12"
-        :label="Neighbourhood"
+        :label="$t('search.Neighbourhood')"
         label-size="md"
         label-class="font-weight-bold pt-0"
         class="mb-0 text-left"

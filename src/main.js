@@ -23,7 +23,7 @@ import plugin from './http';
 
 Vue.use(plugin);
 
-// import firebase from "firebase";
+
 IconifyIcon.addIcon('home', homeIconData);
 
 Vue.use(Vuex);
@@ -32,15 +32,16 @@ Vue.use(VueAxios, axios);
 import LoadScript from 'vue-plugin-load-script';
 import InfiniteLoading from 'vue-infinite-loading';
 
-import { loader } from './mixins';
-
 Vue.use(InfiniteLoading, {
-    /* options */
+  /* options */
 });
 Vue.use(LoadScript);
 
 Vue.use(ReadMore);
 Vue.prototype.$axios = axios;
+
+// import Notifications from 'vue-notification'
+// Vue.use(Notifications)
 
 // const firebaseConfig = {
 //   apiKey: process.env.API_KEY,
@@ -69,18 +70,18 @@ Vue.prototype.$axios = axios;
 //   });
 
 Vue.use(VueSocialauth, {
-    providers: {
-        facebook: {
-            clientId: process.env.VUE_APP_FACEBOOK_CLIENT_ID,
-            client_secret: process.env.VUE_APP_FACEBOOK_CLIENT_SECRETE,
-            redirectUri: process.env.VUE_APP_FACEBOOK_RETURN_URL,
-        },
-        google: {
-            clientId: process.env.VUE_APP_GOOGLE_CLIENT_ID,
-            client_secret: process.env.VUE_APP_GOOGLE_CLIENT_SECRETE,
-            redirectUri: process.env.VUE_APP_GOOGLE_RETURN_URL,
-        },
+  providers: {
+    facebook: {
+      clientId: process.env.VUE_APP_FACEBOOK_CLIENT_ID,
+      client_secret: process.env.VUE_APP_FACEBOOK_CLIENT_SECRETE,
+      redirectUri: process.env.VUE_APP_FACEBOOK_RETURN_URL,
     },
+    google: {
+      clientId: process.env.VUE_APP_GOOGLE_CLIENT_ID,
+      client_secret: process.env.VUE_APP_GOOGLE_CLIENT_SECRETE,
+      redirectUri: process.env.VUE_APP_GOOGLE_RETURN_URL,
+    },
+  },
 });
 
 import FlashMessage from '@smartweb/vue-flash-message';
@@ -135,25 +136,25 @@ Vue.use(IconsPlugin);
 //import InfiniteLoading from "vue-infinite-loading";
 
 Vue.use(InfiniteLoading, {
-    /* options */
+  /* options */
 });
 
 Vue.use(VueGoogleMaps, {
-    load: {
-        key: 'AIzaSyAGZU6cqra18t1fhN1AbzRsEc_pgt7n2C8',
-        libraries: 'places',
-    },
-    autobindAllEvents: false,
-    installComponents: true,
+  load: {
+    key: 'AIzaSyAGZU6cqra18t1fhN1AbzRsEc_pgt7n2C8',
+    libraries: 'places',
+  },
+  autobindAllEvents: false,
+  installComponents: true,
 });
 
- import VueLoading from 'vue-loading-overlay';
- import 'vue-loading-overlay/dist/vue-loading.css';
+import VueLoading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
 
 import VueYoutube from 'vue-youtube'
 
 Vue.use(VueYoutube)
- Vue.use(VueLoading);
+Vue.use(VueLoading);
 
 import VueAgile from 'vue-agile';
 
@@ -177,64 +178,37 @@ Vue.use(VueEasyLightbox);
 Vue.config.productionTip = false;
 var user = null;
 
-// import VueEcho from 'vue-echo-laravel';
-// import Echo from 'laravel-echo'
-// const io = require("socket.io-client")
-// if (process.client) {
-
-//     window.Echo = new Echo({
-//             broadcaster: 'socket.io',
-//             host: "loclhost:7000",
-//             client: require('socket.io-client'),
-//             auth: { headers: { Authorization: 'Bearer ' + JSON.parse(localStorage.getItem('user')).accessToken } }
-//         })
-//         // Vue.use(VueEcho, {
-//         //     broadcaster: 'socket.io',
-//         //     host: process.env.VUE_APP_API_URL_DEV,
-//         // });
-
-// }
-
-// Vue.prototype.$echo = Echo
-
-// import VueEcho from 'vue-echo-laravel';
-// window.io = require('socket.io-client')
-
-// Vue.use(VueEcho, {
-//     broadcaster: 'socket.io',
-//     host: "localhost:6001",
-//     auth: { headers: { Authorization: 'Bearer ' + JSON.parse(localStorage.getItem('user')).accessToken } }
-// });
+// import './pusher-notification';
+import './redis-notification'
 
 new Vue({
-    router,
-    store,
-    i18n,
-
-    created() {
-        const userInfo = localStorage.getItem('user');
-        if (userInfo) {
-            const userData = JSON.parse(userInfo);
-            user = userData;
-            this.$store.commit('auth/setUserData', userData);
+  router,
+  store,
+  i18n,
+  created() {
+    const userInfo = localStorage.getItem('user');
+    if (userInfo) {
+      const userData = JSON.parse(userInfo);
+      user = userData;
+      this.$store.commit('auth/setUserData', userData);
+    }
+    axios.interceptors.response.use(
+      response => response,
+      error => {
+        if (error.response.status === 401) {
+          // this.$store.dispatch('auth/logout');
+          console.log('error has ocurred', error);
         }
-        axios.interceptors.response.use(
-            response => response,
-            error => {
-                if (error.response.status === 401) {
-                    // this.$store.dispatch('auth/logout');
-                    console.log('error has ocurred', error);
-                }
-                return Promise.reject(error);
-            },
-        );
+        return Promise.reject(error);
+      },
+    );
 
-        axios.interceptors.request.use(function(config) {
-            if (user != null) {
-                config.headers.Authorization = `Bearer  ${user.accessToken}`;
-            }
-            return config;
-        });
-    },
-    render: h => h(App),
+    axios.interceptors.request.use(function (config) {
+      if (user != null) {
+        config.headers.Authorization = `Bearer  ${user.accessToken}`;
+      }
+      return config;
+    });
+  },
+  render: h => h(App),
 }).$mount('#app');

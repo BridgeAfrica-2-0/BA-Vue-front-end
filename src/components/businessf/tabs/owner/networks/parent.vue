@@ -265,10 +265,10 @@
       </b-button>
     </b-modal>
   </div>
-  
-  <div v-else class="text-center">
+
+  <!-- <div v-else class="text-center">
     <b-spinner variant="primary" :label=" $t('network.Text_Centered')" style="width: 3rem; height: 3rem;"></b-spinner>
-  </div>
+  </div> -->
 
 </template>
 

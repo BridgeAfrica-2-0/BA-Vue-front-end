@@ -43,6 +43,8 @@
     "Reset": "Rénitialiser",
     "Apply": "Appliquer",
     "Details": "Détails",
-    "Members": "Membres"
+    "Members": "Membres",
+    "User_blocked": "Utilisateur bloqué",
+    "Unable_to_blocked_User": "Impossible de bloquer l'utilisateur"
 
 }

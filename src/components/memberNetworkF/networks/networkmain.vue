@@ -35,8 +35,8 @@
                 >
 
                 <b-dropdown-item>
-                  <b-icon icon="geo-alt" variant="primary"></b-icon> Get
-                  {{ $t('memnetwork.Direction') }}</b-dropdown-item
+                  <b-icon icon="geo-alt" variant="primary"></b-icon> 
+                  {{ $t('memnetwork.Get_Direction') }}</b-dropdown-item
                 >
               </b-dropdown>
             </b-col>

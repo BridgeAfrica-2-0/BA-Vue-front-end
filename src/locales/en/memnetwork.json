@@ -43,6 +43,7 @@
     "Reset": "Reset",
     "Apply": "Apply",
     "Details": "Details",
-    "Members": "Members"
-
+    "Members": "Members",
+    "User_blocked": "User blocked",
+    "Unable_to_blocked_User": "Unable to block User"
 }

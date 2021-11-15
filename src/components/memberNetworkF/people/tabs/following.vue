@@ -149,7 +149,7 @@ export default {
         this.loading = false;
         this.flashMessage.show({
           status: "success",
-          message: "User blocked"
+          message: this.$t('memnetwork.User_blocked')
         });
       })
       .catch(err => {
@@ -157,7 +157,7 @@ export default {
         this.loading = false;
         this.flashMessage.show({
           status: "error",
-          message: "Unable to blocked User"
+          message: this.$t('memnetwork.Unable_to_blocked_User')
         });
       });
     }

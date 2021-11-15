@@ -23,7 +23,7 @@ import plugin from './http';
 
 Vue.use(plugin);
 
-// import firebase from "firebase";
+
 IconifyIcon.addIcon('home', homeIconData);
 
 Vue.use(Vuex);
@@ -32,8 +32,6 @@ Vue.use(VueAxios, axios);
 import LoadScript from 'vue-plugin-load-script';
 import InfiniteLoading from 'vue-infinite-loading';
 
-import { loader } from './mixins';
-
 Vue.use(InfiniteLoading, {
   /* options */
 });
@@ -41,6 +39,9 @@ Vue.use(LoadScript);
 
 Vue.use(ReadMore);
 Vue.prototype.$axios = axios;
+
+// import Notifications from 'vue-notification'
+// Vue.use(Notifications)
 
 // const firebaseConfig = {
 //   apiKey: process.env.API_KEY,
@@ -96,9 +97,11 @@ Vue.use(VueMaterial);
 import Lightbox from '@morioh/v-lightbox';
 import * as VueGoogleMaps from 'gmap-vue';
 
+
 import VueSplide from "@splidejs/vue-splide";
 Vue.use(VueSplide);
 import "@splidejs/splide/dist/css/themes/splide-default.min.css";
+
 
 // global register
 Vue.use(VueGallerySlideshow);
@@ -175,11 +178,13 @@ Vue.use(VueEasyLightbox);
 Vue.config.productionTip = false;
 var user = null;
 
+// import './pusher-notification';
+import './redis-notification'
+
 new Vue({
   router,
   store,
   i18n,
-
   created() {
     const userInfo = localStorage.getItem('user');
     if (userInfo) {
@@ -198,7 +203,7 @@ new Vue({
       },
     );
 
-    axios.interceptors.request.use(function(config) {
+    axios.interceptors.request.use(function (config) {
       if (user != null) {
         config.headers.Authorization = `Bearer  ${user.accessToken}`;
       }

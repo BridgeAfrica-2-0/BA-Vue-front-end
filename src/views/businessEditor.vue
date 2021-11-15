@@ -1,5 +1,7 @@
  <template>
   <div class="" style="overflow-y: hidden; padding:0px">
+    
+     <span v-if="isloaded">
     <navbar />
 
     <div class="container-fluid">
@@ -35,6 +37,9 @@
    
 
     <Footer />
+
+     </span>
+
   </div>
 </template>
 
@@ -66,6 +71,8 @@ export default {
   },
   data() {
     return {
+       foll_id:null,
+       isloaded: false,
       selectedId: 0,
       bottomSelectedId: 0,
       url_data: null,
@@ -84,6 +91,51 @@ export default {
     };
   },
 
+
+  
+
+
+ created() {
+    this.foll_id = this.$route.params.id;  
+
+    this.$store
+      .dispatch("businessOwner/roleCheck", this.foll_id)
+      .then((data) => {
+
+
+        console.log("this is a miother fudcker");
+        console.log(data);
+       
+        let role= data.data.data.role;
+          switch (role) {
+            
+           
+
+            case "owner" : this.$router.push({ name: "BusinessOwner",params: { id: this.foll_id } });; 
+            break;
+
+            case "visitor" :  this.$router.push({ name: "BusinessFollower",params: { id: this.foll_id } });
+            break;
+          }
+
+        this.isloaded = true;
+      })
+      .catch((error) => {
+        console.log({ error: error });
+
+        console.log(error.response.status );
+
+         if (error.response.status == 404) {
+           
+            this.$router.push({ name: "notFound" });
+          } 
+
+
+      });
+  },
+
+
+
   methods: {
     businessInfo() {
       this.$store
@@ -95,6 +147,8 @@ export default {
           console.log({ err: err });
         });
     },
+
+
 
     CommunityBusiness() {
       this.$store

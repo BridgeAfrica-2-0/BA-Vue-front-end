@@ -1,0 +1,14 @@
+{
+    "Verification": "Vérification",
+    "You_will_get_an_OTP_by_SMS": "Vous allez recevoir un OTP par SMS",
+    "OTP": "OTP",
+    "Verify": "Vérifier",
+    "Didnt_recieved_the_verification_OTP": "Vous n'avez pas reçu l'OTP de vérification?",
+    "Resend_OTP": "Renvoyer OTP",
+    "Successfully_Send": "Envoyé avec succès",
+    "SMS_successfully_send_check_your_inbox": "SMS envoyé avec succès. Consultez votre messagerie",
+    "Send_Failed": "Échec d'envoi",
+    "Message_not_send": "Le message n'a pas été envoyé",
+    "Verification_Failed": "Échec de la vérification",
+    "Unable_to_verify_your_account": "Impossible de vérifier votre compte"
+}

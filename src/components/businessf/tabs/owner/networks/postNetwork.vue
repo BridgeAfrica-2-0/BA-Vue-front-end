@@ -242,7 +242,7 @@
                   </span>
                 </div>
                 <br />
-                <div v-for="hyperlink in createPost.hyperlinks" :key="hyperlink.fileName" class="bordder">
+                <!-- <div v-for="hyperlink in createPost.hyperlinks" :key="hyperlink.fileName" class="bordder">
                   <span class="float-left"> {{ hyperlink.fileName }} </span>
                   <span class="float-right" @click="deleteItem(hyperlink.fileName)"> delete </span>
                 </div>
@@ -255,7 +255,101 @@
 
                     <img :src="movie.link" />
                   </div>
+                </div> -->
+
+
+
+
+
+
+
+
+<div class="h300px">
+                  <div
+                    v-for="hyperlink in createPost.hyperlinks"
+                    :key="hyperlink.fileName"
+                    class="bordder"
+                  >
+                    <span class="float-left"> {{ hyperlink.fileName }} </span>
+                    <span
+                      class="float-right"
+                      @click="deleteItem(hyperlink.fileName)"
+                    >
+                      delete
+                    </span>
+                  </div>
+
+                  <div
+                    v-for="movie in createPost.movies"
+                    :key="movie.fileName"
+                    class=""
+                  >
+                    <div id="preview">
+                      <span
+                        class="upload-cancel"
+                        @click="deleteItem(movie.fileName)"
+                      >
+                        <b-icon icon="x-circle" class="oorange"> </b-icon>
+                      </span>
+
+                      <span> </span>
+                      <img v-if="movie.fileType == 'image'" :src="movie.link" />
+
+                      <video v-else width="97%" height="240" autoplay>
+                        <source :src="movie.link" type="video/mp4" />
+                      </video>
+                    </div>
+                  </div>
                 </div>
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <b-progress
+                  v-if="isUploading"
+                  :value="uploadPercentage"
+                  variant="primary"
+                  class="m13"
+                  show-progress
+                  :animated="animate"
+                ></b-progress>
+                <hr />
+
                 <br />
                 <span>
                   <b-button @click="submitPost" variant="primary" block :disabled="loading">
@@ -270,15 +364,23 @@
           </b-modal>
         </div>
       </div>
+
       <Post
         v-for="item in owner_post"
-        :key="item.post_id"
+        :key="item.id"
         :item="item"
         :editPost="() => editPost(item)"
         :deletePost="() => deletePost(item)"
         :isOwner="profile.id == item.user_id"
       />
-      <infinite-loading @infinite="infiniteHandler"></infinite-loading>
+   
+      
+      <infinite-loading
+        :identifier="infiniteId"
+        ref="infiniteLoading"
+        @infinite="infiniteHandler"
+      ></infinite-loading>
+
     </b-card>
   </div>
 </template>
@@ -296,6 +398,9 @@ export default {
     return {
       page: 1,
       loading: false,
+      infiniteId: +new Date(),
+        uploadPercentage: 0,
+       isUploading: false,
       // post:this.$store.state.networkProfile.ownerPost,
       url: null,
       delete: [],
@@ -350,6 +455,57 @@ export default {
       auth: 'auth/profilConnected',
     }),
 
+    
+      mapmediae(media){
+
+       let mediaarr=[];
+
+       media.forEach((item) => {
+
+        let type = this.checkMediaType(item.media_type);
+       if(type != "video") {  
+        mediaarr.push(item.media_url);
+         }
+
+       });
+
+      return mediaarr;
+
+    },
+
+
+
+    
+      mapvideo(media){
+
+       let mediaarr=[];
+
+       media.forEach((item) => {
+
+        let type = this.checkMediaType(item.media_type);
+       if(type == "video") {  
+        mediaarr.push(item.media_url);
+         }
+
+       });
+
+      return mediaarr;
+
+    },
+
+
+    checkMediaType(media){
+
+     return media.split("/")[0] ;    
+
+    },
+
+    
+  getId (video_url) {
+      return this.$youtube.getIdFromUrl(video_url)
+    },
+
+
     async getAuth() {
       const response = await this.$repository.share.WhoIsConnect({ networkId: this.$route.params.id });
 
@@ -358,6 +514,11 @@ export default {
     
 
     infiniteHandler($state) {
+
+       if (this.page == 1) {
+        this.owner_post.splice(0);
+      }
+
       this.axios
         .get('network/show/post/' + this.url + '/' + this.page)
         .then(({ data }) => {
@@ -380,8 +541,10 @@ export default {
       return this.axios
         .delete('network/' + this.$route.params.id + '/post/' + post.id)
 
-        .then(() => this.ownerPost())
+       // .then(() => this.ownerPost())
         .then(() => {
+          this.page = 1;
+          this.infiniteId += 1;
           this.flashMessage.show({
             status: 'success',
             blockClass: 'custom-block-class',
@@ -447,6 +610,8 @@ export default {
           this.ownerPost();
         })
         .then(() => {
+          this.page = 1;
+          this.infiniteId += 1;
           this.flashMessage.show({
             status: 'success',
             blockClass: 'custom-block-class',
@@ -476,21 +641,24 @@ export default {
     chooseDocument() {
       document.getElementById('chosefile').click();
     },
-    selectMovies(event) {
+
+
+
+   selectMovies(event) {
       const file = event.target;
+
       if (file.files) {
+        console.log("logging start");
         let reader = new FileReader();
         reader.onload = (e) => {
-          //localStorage.setItem("cover_image", e.target.result);
-          //this.user.cover_image = e.target.result;
-          //console.log( "It pass")
-          //console.log( result );
           this.createPost.movies.push({
             target: event.target,
             movie: e.target.result,
             fileName: event.target.files[0].name,
             link: URL.createObjectURL(event.target.files[0]),
+            fileType: e.target.result.match(/^data:([^/]+)\/([^;]+);/)[1] || [],
           });
+          console.log();
         };
         reader.readAsDataURL(file.files[0]);
       }
@@ -501,25 +669,39 @@ export default {
         let reader = new FileReader();
         reader.onload = (e) => {
           result = e.target.result;
-          //localStorage.setItem("cover_image", e.target.result);
-          //this.user.cover_image = e.target.result;
-          //console.log( "It pass")
-          //console.log( result );
+
           return result;
         };
         reader.readAsDataURL(file.files[0]);
       }
     },
-    selectMoviesOutsidePost(event) {
-      console.log(event);
-      this.createPost.movies.push({
-        target: event.target,
-        movie: this.service(event.target),
-        fileName: event.target.files[0].name,
-        link: URL.createObjectURL(event.target.files[0]),
-      });
-      this.$refs['modal-xl'].show();
+
+
+
+ selectMoviesOutsidePost(event) {
+      const file = event.target;
+
+      if (file.files) {
+        let reader = new FileReader();
+        reader.onload = (e) => {
+          this.createPost.movies.push({
+            target: event.target,
+            movie: e.target.result,
+            fileName: event.target.files[0].name,
+            link: URL.createObjectURL(event.target.files[0]),
+            fileType: e.target.result.match(/^data:([^/]+)\/([^;]+);/)[1] || [],
+          });
+        };
+        reader.readAsDataURL(file.files[0]);
+      }
+
+      this.$refs["modal-xl"].show();
     },
+
+
+
+
+
     selectDocument(event) {
       console.log(event);
       this.createPost.hyperlinks.push({
@@ -572,7 +754,7 @@ export default {
 
     async submitPost() {
       this.loading = true;
-
+       this.isUploading = true;
       this.fileImageArr = this.createPost.movies;
 
       let formData2 = new FormData();
@@ -593,9 +775,17 @@ export default {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
+
+          
+          onUploadProgress: function (progressEvent) {
+            this.uploadPercentage = parseInt(
+              Math.round((progressEvent.loaded / progressEvent.total) * 100)
+            );
+          }.bind(this),
+
         })
-        .then(() => this.ownerPost())
-        .then(() => {
+       // .then(() => this.ownerPost())
+        .then((res) => {
           this.flashMessage.show({
             status: 'success',
             blockClass: 'custom-block-class',
@@ -603,7 +793,10 @@ export default {
           });
           // loader.hide()
           this.$refs['modal-xl'].hide();
+           this.isUploading = false;
           this.loading = false;
+          this.page = 1;
+          this.infiniteId += 1;
         })
         .catch((err) => {
           this.loading = false;

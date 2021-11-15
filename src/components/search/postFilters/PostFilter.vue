@@ -65,7 +65,7 @@
           <b-icon
             :icon="buisnessSectionIsVisible ? 'arrow-down' : 'arrow-up'"
           ></b-icon>
-          <span>Buisness</span>
+          <span>{{$t("search.Buisness")}}</span>
         </div>
         <b-collapse
           id="collapse-2"
@@ -135,7 +135,7 @@
           <b-icon
             :icon="networkSectionIsVisible ? 'arrow-down' : 'arrow-up'"
           ></b-icon>
-          <span>Network</span>
+          <span>{{$t("search.Network")}}</span>
         </div>
         <b-collapse
           id="collapse-4"

@@ -1,10 +1,10 @@
 <template>
   <div>
-    <b>WorkPlace</b>  
+    <b>{{ $t('profileowner.WorkPlace') }}</b>  
     <hr />
     <b-link class="mt-4 text-decoration-none" v-b-modal.modal-9>
       <b-icon icon="plus" variant="primary"></b-icon>
-      Add Workplace 
+      {{ $t('profileowner.Add_Workplace') }} 
     </b-link>
 
     <b-list-group-item
@@ -37,11 +37,11 @@
                 >
                   <b-dropdown-item
                     @click="editt(workPlace)"
-                    >Edit</b-dropdown-item
+                    >{{ $t('profileowner.Edit') }}</b-dropdown-item
                   >
                   <b-dropdown-item
                     @click="deleteWorkPlace(workPlace.id)"
-                  >Delete</b-dropdown-item
+                  >{{ $t('profileowner.Delete') }}</b-dropdown-item
                   >
                 </b-dropdown>
               </li>
@@ -73,7 +73,7 @@
     <b-modal
       ref="edit-contact"
       id="edit"
-      title="edit Workplace "
+      :title="$t('profileowner.edit_Workplace') "
       @close="cancel"
       @ok="updatesave"
     >
@@ -88,22 +88,22 @@
       <b-form-input
         class="mt-2"
         v-model="editData.company_name"
-        placeholder="Company"
+        :placeholder="$t('profileowner.Company')"
       ></b-form-input>
       <b-form-input
         class="mt-2"
         v-model="editData.position"
-        placeholder="Position"
+        :placeholder="$t('profileowner.Position')"
       ></b-form-input>
       <b-form-input
         class="mt-2"
         v-model="editData.city_town"
-        placeholder="City"
+        :placeholder="$t('profileowner.City')"
       ></b-form-input>
       <b-form-input
         class="mt-2"
         v-model="editData.job_responsibilities"
-        placeholder="Responsibilities"
+        :placeholder="$t('profileowner.Responsibilities')"
       ></b-form-input>
       <b-form-checkbox
         id="checkbox-1"
@@ -112,29 +112,29 @@
         checked="1"
         unchecked="0"
       >
-        Currently Working
+        {{ $t('profileowner.Currently_Working') }}
       </b-form-checkbox>
-      <label>Start Date</label>
+      <label>{{ $t('profileowner.Start_Date') }}</label>
       <b-form-datepicker
         id="example-datepicker"
         v-model="editData.startDate"
         class="mb-2"
-        placeholder="Start Date"
+        :placeholder="$t('profileowner.Start_Date')"
       ></b-form-datepicker>
-      <label v-if="!editData.currently_working">End Date</label>
+      <label v-if="!editData.currently_working">{{ $t('profileowner.End_Date') }}</label>
       <b-form-datepicker
         v-if="!editData.currently_working"
         id="example-datepicker"
         v-model="editData.endDate"
         class="mb-2"
-        placeholder="End Date"
+        :placeholder="$t('profileowner.End_Date')"
       ></b-form-datepicker>
     </b-modal>
 
     <b-modal
       ref="add-contact"
       id="modal-9"
-      title="Add Workplace "
+      :title="$t('profileowner.Add_Workplace') "
       @close="cancel"
       @ok="save"
     >
@@ -149,22 +149,22 @@
       <b-form-input
         class="mt-2"
         v-model="workPlaceInput.companyName"
-        placeholder="Company"
+        :placeholder="$t('profileowner.Company')"
       ></b-form-input>
       <b-form-input
         class="mt-2"
         v-model="workPlaceInput.position"
-        placeholder="Position"
+        :placeholder="$t('profileowner.Position')"
       ></b-form-input>
       <b-form-input
         class="mt-2"
         v-model="workPlaceInput.cityTown"
-        placeholder="City"
+        :placeholder="$t('profileowner.City')"
       ></b-form-input>
       <b-form-input
         class="mt-2"
         v-model="workPlaceInput.jobResponsibilities"
-        placeholder="Responsibilities"
+        :placeholder="$t('profileowner.Responsibilities')"
       ></b-form-input>
       <b-form-checkbox
         id="checkbox-1"
@@ -172,22 +172,22 @@
         name="checkbox-1"
         :checked="workPlaceInput.currentlyWorking === 1 ? true : false"
       >
-        Currently Working
+        {{ $t('profileowner.Currently_Working') }}
       </b-form-checkbox>
-      <label for="startDate">Start Date</label>
+      <label for="startDate">{{ $t('profileowner.Start_Date') }}</label>
       <b-form-datepicker
         id="startDate"
         v-model="workPlaceInput.startDate"
         class="mb-2"
-        placeholder="Start Date"
+        :placeholder="$t('profileowner.Start_Date')"
       ></b-form-datepicker>
-      <label v-if="!workPlaceInput.currentlyWorking" for="endDate">End Date</label>
+      <label v-if="!workPlaceInput.currentlyWorking" for="endDate">{{ $t('profileowner.End_Date') }}</label>
       <b-form-datepicker
         v-if="!workPlaceInput.currentlyWorking"
         id="endDater"
         v-model="workPlaceInput.endDate"
         class="mb-2"
-        placeholder="End Date"
+        :placeholder="$t('profileowner.End_Date')"
       ></b-form-datepicker>
     </b-modal>
 

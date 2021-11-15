@@ -31,6 +31,7 @@
           <div>
             <div class="d-flex justify-content-start align-items-center">
               <b-form-checkbox
+                class="notif-item-checkbox"
                 :name="`notif-item-${notif.id}`"
                 :value="{ id: notif.id, status: 'check' }"
                 :unchecked-value="{ id: notif.id, status: 'uncheck' }"
@@ -51,6 +52,9 @@
                   ? `${notif.notification_text.slice(0, 226)}...`
                   : notif.notification_text
               }}
+              <!-- {{
+                notif.notification_text
+              }} -->
             </p>
           </div>
           <b-badge v-if="!notif.mark_as_read" pill variant="primary"><span class="text-primary">.</span></b-badge>
@@ -82,7 +86,7 @@ export default {
       message: `Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cum expedita ducimus eaque dolor vero dolorem odio
           veniam adipisci tempora a, accusantium sunt temporibus, quidem vitae dit reiciendis. Corrupti!`,
       page: 1,
-      allNotifs: [],
+      // allNotifs: [],
       isMarkAsRead: false,
       isDelete: false,
     };
@@ -103,17 +107,37 @@ export default {
         };
       });
     },
+    allCheckBox() {
+      return document.querySelectorAll('.notif-item-checkbox input');
+    },
+    ...mapGetters({
+      allNotifs: 'notification/NEW_PROFILE_NOTIFICATION',
+    }),
   },
   methods: {
     toggleAll(checked) {
       if (!checked) {
-        this.selectNotif = [];
+        this.selectedNotif = [];
         console.log('De selected all Notifs');
       } else {
-        this.selectNotif = this.allNotifs.map(notif => notif.id);
+        this.selectedNotif = this.allNotifs.map(notif => notif.id);
         console.log('All notifs', this.selectNotif);
       }
       console.log('Selected All', checked);
+      console.log(this.allCheckBox);
+      this.setCheckMode(checked);
+    },
+    setCheckMode(status) {
+      if (status) {
+        for (const index in this.allCheckBox) {
+          this.allCheckBox[index].checked = true;
+          if (index === 9) break;
+        }
+      } else {
+        for (const index in this.allCheckBox) {
+          this.allCheckBox[index].checked = false;
+        }
+      }
     },
     selectNotif(value) {
       if (value.status === 'check') {
@@ -137,9 +161,10 @@ export default {
           })
           .then(response => {
             console.log(response.data);
-            //this.$store.commit('notifications/MARK_NOTIF_AS_READ', response.data.data);
-            this.markNotifAsRead(response.data.data);
+            this.$store.commit('notification/MARK_PROFILE_NOTIFICATION', response.data.data);
+            // this.markNotifAsRead(response.data.data);
             this.selectedNotif = [];
+            this.setCheckMode(false);
           })
           .finally(() => {
             this.isMarkAsRead = false;
@@ -158,8 +183,7 @@ export default {
           })
           .then(response => {
             console.log(response.data);
-            //this.$store.commit('notifications/DELETE_PROFILE_NOTIF', response.data.data);
-            this.deleteNotif(response.data.data);
+            this.$store.commit('notification/DELETE_PROFILE_NOTIFICATION', response.data.data);
             this.selectedNotif = [];
           })
           .finally(() => {
@@ -178,9 +202,6 @@ export default {
         return notif;
       });
     },
-    deleteNotif(payload) {
-      this.allNotifs = this.allNotifs.filter(notif => !payload.includes(notif.id));
-    },
     infiniteHandler($state) {
       axios
         .get('user/notifications', {
@@ -193,11 +214,9 @@ export default {
           if (data.data.length) {
             this.page += 1;
             if (this.page === 1) {
-              this.allNotifs = data.data;
-              //this.$store.commit('notifications/NEW_PROFILE_NOTIFICATION', { init: true, data: data.data });
+              this.$store.commit('notification/NEW_PROFILE_NOTIFICATION', { init: true, data: data.data });
             } else {
-              this.allNotifs.push(...data.data);
-              //this.$store.commit('notifications/NEW_PROFILE_NOTIFICATION', { init: false, data: data.data });
+              this.$store.commit('notification/NEW_PROFILE_NOTIFICATION', { init: false, data: data.data });
             }
             $state.loaded();
           } else {

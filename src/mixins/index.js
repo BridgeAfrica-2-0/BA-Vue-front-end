@@ -44,14 +44,6 @@ export const FireBase = {
       this.subject = subject;
 
       const message = `<span><b>${this.from}</b></span><br>${this.subject}`;
-
-      // this.$notify({
-      //   group: 'foo',
-      //   type: 'success',
-      //   title: this.title,
-      //   text: message,
-      //   duration: 5000,
-      // });
     },
   },
 

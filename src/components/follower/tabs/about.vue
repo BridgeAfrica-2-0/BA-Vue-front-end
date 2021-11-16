@@ -1,21 +1,21 @@
 <template>
   <div>
-    <b-icon class="icon" variant="primary" icon="person-fill"></b-icon> About
+    <b-icon class="icon" variant="primary" icon="person-fill"></b-icon> {{ $t('profilefollowerAbout.') }}
 
     <hr />
 
     <b-card no-body class="desktop">
       <b-tabs pills card vertical>
-        <b-tab title="BIOGRAPHY" active><Biography /></b-tab>  
-        <b-tab title="CONTACT & BASIC INFO"><ContactandInfo /> </b-tab>
-        <b-tab title="WORK & EDUCATION"><WorkAndEducation /></b-tab>  
+        <b-tab :title="$t('profilefollower.BIOGRAPHY')" active><Biography /></b-tab>  
+        <b-tab :title="$t('profilefollower.CONTACT_BASIC_INFO')"><ContactandInfo /> </b-tab>
+        <b-tab :title="$t('profilefollower.WORK_EDUCATION')"><WorkAndEducation /></b-tab>  
       </b-tabs>
     </b-card>
     <b-card no-body class="mobile p-2">
       <b-tabs pills card justified>
-        <b-tab title="BIOGRAPHY" active><Biography /></b-tab>
-        <b-tab title="CONTACT & BASIC INFO"><ContactAndInfo /> </b-tab>
-        <b-tab title="WORK & EDUCATION"><WorkAndEducation /></b-tab>
+        <b-tab :title="$t('profilefollower.BIOGRAPHY')" active><Biography /></b-tab>
+        <b-tab :title="$t('profilefollower.CONTACT_BASIC_INFO')"><ContactAndInfo /> </b-tab>
+        <b-tab :title="$t('profilefollower.WORK_EDUCATION')"><WorkAndEducation /></b-tab>
       </b-tabs>
     </b-card>
   </div>

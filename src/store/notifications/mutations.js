@@ -15,9 +15,11 @@ export const mutations = {
     if (payload.init) state.profile = state.profile.push(...payload.data);
     else state.profile = [...state.profile, ...payload.data];
   }, // [TYPES.INIT]
+
   [TYPES.DELETE_PROFILE_NOTIFICATION](state, payload) {
     state.profile = state.profile.filter(notif => !payload.includes(notif.id));
   },
+
   [TYPES.MARK_PROFILE_NOTIFICATION](state, payload) {
     state.profile = state.profile.map(notif => {
       if (payload.includes(notif.id)) {

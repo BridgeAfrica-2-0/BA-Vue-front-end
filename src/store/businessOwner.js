@@ -742,7 +742,7 @@ export default {
     async getNotifications({ commit }, id) {
       commit('setLoader', true);
 
-      await axios
+      return await axios
         .get(`notification/business/${id}`)
         .then(res => {
           commit('setLoader', false);
@@ -751,6 +751,8 @@ export default {
           setTimeout(() => {
             commit('setSuccess', false);
           }, 2000);
+
+          return res.data.data
         })
         .catch(err => {
           commit('setLoader', false);

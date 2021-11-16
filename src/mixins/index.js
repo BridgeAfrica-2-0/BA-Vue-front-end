@@ -378,6 +378,7 @@ export const Redis = {
       window.Redis.private($event)
         .listen(".BusinessNotificationEvent", payload => {
           console.log(payload)
+          this.newNotificationBusiness({ init: false, data: payload.data })
         })
     },
 

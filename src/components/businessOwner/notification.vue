@@ -39,7 +39,7 @@
               <b-avatar class="d-inline-block profile-pic" variant="primary" :src="post.image"></b-avatar>
               <h6 class="m-0 d-inline-block ml-2 username">
                 {{ post.reference_type }}
-                <p class="duration">{{ post.created_at }}</p>
+                <p class="duration">{{ post.created_at | fromNow }}</p>
               </h6>
             </span>
             <span class="float-right mt-1"> </span>
@@ -65,7 +65,8 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions, mapGetters, mapMutations } from 'vuex';
+import { fromNow } from '@/helpers';
 export default {
   name: 'notification',
   data: () => ({
@@ -73,25 +74,25 @@ export default {
   }),
 
   beforeMount() {
-    this.getNotifications(this.$route.params.id);
+    this.getNotifications(this.$route.params.id).then((e) => this.realTimeNotification({ init: true, data: e }));
+  },
+
+  filters: {
+    fromNow,
   },
 
   computed: {
     getNotificationsStore() {
-      return this.sendNotifications();
+      return this.getRealTimeNotification.length ? this.getRealTimeNotification : this.sendNotifications();
     },
     loader() {
       return this.getLoader();
     },
+    ...mapGetters({
+      getRealTimeNotification: 'notification/NEW_BUSINESS_NOTIFICATION',
+    }),
   },
   methods: {
-    // getting getters from the store
-    ...mapGetters({
-      sendNotifications: 'businessOwner/sendNotifications',
-      getLoader: 'businessOwner/getLoader',
-      getSuccess: 'businessOwner/getSuccess',
-    }),
-
     // getting actions from the store
     ...mapActions({
       getNotifications: 'businessOwner/getNotifications',
@@ -99,6 +100,18 @@ export default {
       deleteNotifications: 'businessOwner/deleteNotifications',
       delete: 'businessOwner/delete',
     }),
+
+     ...mapGetters({
+      sendNotifications: 'businessOwner/sendNotifications',
+      getLoader: 'businessOwner/getLoader',
+      getSuccess: 'businessOwner/getSuccess',
+    }),
+
+    ...mapMutations({
+      realTimeNotification: 'notification/NEW_BUSINESS_NOTIFICATION',
+    }),
+
+    // getting getters from the store
 
     readAll(data) {
       this.readNotifiactions(data);

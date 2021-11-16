@@ -18,18 +18,18 @@
                     <b-col cols="12" md="12">
                       <div>
                         <b-table-simple hover small caption-top responsive>
-                          <b-tbody v-if="getUserInfos.length >0 ">
+                          <b-tbody v-if="getUserInfos.id">
                             <b-tr>
                               <b-td class="a-text text"> {{ $t("settings.name") }} </b-td>
 
                               <b-td class="a-text text">
-                                <b-link href="#" @click="userInfos">{{getUserInfos.name}}</b-link>
+                                <b-link href="#" >{{getUserInfos.name}}</b-link>
                               </b-td>
                             </b-tr>
                             <br />
 
                             <b-tr>
-                              <b-td class="a-text text" @click="userInfos"> {{ $t("settings.public_url") }} </b-td>
+                              <b-td class="a-text text" > {{ $t("settings.public_url") }} </b-td>
 
                               <b-td class="text"
                                 ><b-link href="#">
@@ -99,31 +99,94 @@
                               <b-td class="a-text text"> {{ $t("settings.neighbourhood") }}</b-td>
 
                               <b-td class="a-text text">
-                                <b-link href="#">{{getUserInfos.neighbor}}</b-link>
+                                <b-link href="#">{{getUserInfos.neigborhood.name}}</b-link>
                               </b-td>
                             </b-tr>
                             <br />
                                <div>
-                              <b-button variant="warning" v-b-modal.modal-10>Edit </b-button>
-
+                              <b-button variant="warning" class="btn btn-primary" v-b-modal.modal-10>Edit </b-button>
+                              <!-- <button class="btn " v-b-modal.modal-10>Edit</button> -->
                               <b-modal id="modal-10" title="Edit your information here"  hide-footer>
                                
-                              <!-- <b-form @submit="onSubmit" >
-                                <b-form-group
-                                  id="input-group-1"
-                                  label="Email address:"
-                                  label-for="input-1"
-                                  description="We'll never share your email with anyone else."
-                                >
-                                  <b-form-input
-                                    id="input-1"
+                                  <form>
+                                      <div class="mb-3">
+                                        <label class="form-label">name</label>
+                                        <input type="text" class="form-control"  v-model="getUserInfos.name">
+                                       
+                                      </div>
+                                      <div class="mb-3">
+                                        <label class="form-label">email</label>
+                                        <input type="email" class="form-control"  v-model="getUserInfos.email">
+                                       </div>
+                                      
+                                       <div class="mb-3">
+                                        <label class="form-label">phone</label>
+                                        <input type="number" class="form-control"  v-model="getUserInfos.phone">
+                                       
+                                      </div>
+                                       <div class="mb-3">
+                                        <label class="form-label">DOB</label>
+                                        <input type="date" class="form-control"  v-model="getUserInfos.dob">
+                                       
+                                      </div>
+                                       <div class="mb-3">
+                                        gender
+                                        
+                                        <b-form-select v-model="selectedGender" :options="genderOptions" ></b-form-select>
+                                     
+                                        
+                                      </div>
+                                       <div class="mb-3">
+                                        <!-- <label class="form-label">country</label>
+                                        <input type="text" class="form-control"  v-model="getUserInfos.country.name"> -->
+                                        country 
+                                         <b-form-select v-model="selectedCounty" :options="country" @change="getRegion"></b-form-select>
+                                       
+                                      </div>
+                                       <div class="mb-3">
+                                        <!-- <label class="form-label">country</label>
+                                        <input type="text" class="form-control"  v-model="getUserInfos.country.name"> -->
+                                        Region 
+                                         <b-form-select v-model="selectedRegion" :options="region" @change="getDivision"></b-form-select>
+                                       
+                                      </div>
 
-                                    type="email"
-                                    placeholder="Enter email"
-                                    required
-                                  ></b-form-input>
-                                </b-form-group>
-                               </b-form> -->
+                                       <div class="mb-3">
+                                        <!-- <label class="form-label">country</label>
+                                        <input type="text" class="form-control"  v-model="getUserInfos.country.name"> -->
+                                        Division 
+                                         <b-form-select v-model="selectedDivision" :options="division" @change="getMunicipality"></b-form-select>
+                                       
+                                      </div>
+
+                                      <div class="mb-3">
+                                        <!-- <label class="form-label">country</label>
+                                        <input type="text" class="form-control"  v-model="getUserInfos.country.name"> -->
+                                        municipality 
+                                         <b-form-select v-model="selectedMunicipality" :options="municipality" @change="getNeighbor"></b-form-select>
+                                       
+                                      </div>
+
+                                      <div class="mb-3">
+                                        <!-- <label class="form-label">country</label>
+                                        <input type="text" class="form-control"  v-model="getUserInfos.country.name"> -->
+                                        Neighbourhood 
+                                         <b-form-select v-model="selectedNeighbor" :options="neighbor" ></b-form-select>
+                                       
+                                      </div>
+
+                                       <div class="mb-3">
+                                        <label class="form-label">city</label>
+                                        <input type="text" class="form-control"  v-model="getUserInfos.city">
+                                       
+                                      </div>
+                                       <div class="mb-3">
+                                        <label class="form-label">neighbourhood</label> {{selectedneigbor}}
+                                         <input type="text" class="form-control"  v-model="getUserInfos.neigborhood.name">
+                                       
+                                      </div>
+                                      <button  class="btn btn-primary" @click="update">save changes</button>
+                                    </form>
 
                               </b-modal>
                             </div>
@@ -175,7 +238,7 @@
                 <b-card-text class="mt-3 text cent">
                   <h3 class="username">{{ $t("settings.chose_payment_method") }}</h3>
 
-                  <b-form-group class="mb-0" v-slot="{ ariaDescribedby }">
+                  <!-- <b-form-group class="mb-0" v-slot="{ ariaDescribedby }">
                     <b-form-radio-group
                       class="pt-2 text"
                       :options="['MTN Mobile Money']"
@@ -189,10 +252,16 @@
                       :options="['Orange Money']"
                       :aria-describedby="ariaDescribedby"
                     ></b-form-radio-group>
+                  </b-form-group> -->
+                  <b-form-group label="select one" v-slot="{ ariaDescribedby }"> 
+                    <b-form-radio v-model="selected" :aria-describedby="ariaDescribedby" name="some-radios" value="MTN">MTN Mobile Money</b-form-radio>
+                    <b-form-radio v-model="selected" :aria-describedby="ariaDescribedby" name="some-radios" value="ORANGE">Orange Money</b-form-radio>
+                   <button class=" btn btn-primary" @click="changePayment">update</button>
+                  
                   </b-form-group>
                 </b-card-text>
               </b-tab>
-
+                  {{currentPass}}
               <b-tab :title="`${$t('settings.password')}`">
                 <b-card-text class="mt-3 text">
                   <h3 class="username">{{ $t("settings.change_current_password") }}</h3>
@@ -211,6 +280,7 @@
                           id="bname"
                           placeholder=""
                           required
+                          v-model="currentPass"
                         ></b-form-input>
                       </b-form-group>
                     </b-container>
@@ -231,6 +301,7 @@
                           id="bname"
                           placeholder=""
                           required
+                          v-model="newPass"
                         ></b-form-input>
                       </b-form-group>
                     </b-container>
@@ -251,14 +322,18 @@
                           id="bname"
                           placeholder=""
                           required
-                        ></b-form-input>
+                          v-model="newPass1"
+                        ></b-form-input> <br> <br> <button class=" btn btn-primary" @click="changePassword">change</button>
                       </b-form-group>
                     </b-container>
                   </div>
 
-                  <br /> </b-card-text
-              ></b-tab>
-            </b-tabs>
+                  <br /> 
+                  </b-card-text
+              >  
+              </b-tab> 
+             
+            </b-tabs>  
           </div>
         </b-col>
         <b-col> </b-col>
@@ -278,6 +353,7 @@ export default {
     Navbar,
     Footer,
   },
+  
 
   computed: {
     vertical() {
@@ -287,12 +363,99 @@ export default {
 
     getUserInfos(){
       return this.$store.state.profileSettingsEdit.userInfos;
+    },
+    country(){
+     let country =[];
+      this.$store.state.auth.country.map(dat =>{
+       country.push({
+          value: dat.id,
+          text: dat.name
+       }
+        )
+      })
+       return country ;
+    },
+
+    region(){
+
+      let region =[];
+      this.$store.state.auth.region.map(dat =>{
+       region.push({
+          value: dat.id,
+          text: dat.name
+       }
+        )
+      })
+      return region;
+    },
+
+    division(){
+      let division =[];
+      this.$store.state.auth.division.map(dat =>{
+       division.push({
+          value: dat.id,
+          text: dat.name
+       }
+        )
+      })
+      return division;
+    },
+
+    municipality(){
+      let municipality =[];
+      this.$store.state.auth.municipality.map(dat =>{
+       municipality.push({
+          value: dat.id,
+          text: dat.name
+       }
+        )
+      })
+      return municipality;
+    },
+
+    neighbor(){
+         let neighbor =[];
+      this.$store.state.auth.locality.map(dat =>{
+       neighbor.push({
+          value: dat.id,
+          text: dat.name
+       }
+        )
+      })
+      return neighbor;
     }
+
+    // locality(){
+
+    //    let locality =[];
+    //   this.$store.state.auth.locality.map(dat =>{
+    //    locality.push({
+    //       value: dat.id,
+    //       text: dat.name
+    //    }
+    //     )
+    //   })
+    //        return locality ;
+    // }
+
   },
 
   data() {
     return {
       size: 0,
+       selected: '',
+       options:'',
+       selectedCounty:'',
+       selectedRegion:'',
+       selectedDivision: '',
+       selectedMunicipality:'',
+       selectedNeighbor: '',
+       currentPass:'',
+       newPass:'',
+       newPass1:'',
+       selectedGender:'',
+       genderOptions: [{value: 'male', text: 'male'}, {value: 'female', text: 'female'}]
+       
     };
   },
 
@@ -303,6 +466,160 @@ export default {
       .then(response =>{
         console.log(response);
         console.log(this.getUserInfos);
+        this.selected =this.$store.state.profileSettingsEdit.userInfos.payement_method ;
+        console.log("-----------------------"+this.selected);
+        // if(this.$store.state.profileSettingsEdit.userInfos.gender == "male"){
+
+        //   }else { this.selectedGender = 1 }
+          this.selectedGender = this.$store.state.profileSettingsEdit.userInfos.gender;
+      })
+      .catch((err) => {
+         
+          console.log('--------- error: ');
+          console.error(err);
+        });
+    },
+    update(e){
+      e.preventDefault();
+      console.log(this.getUserInfos.name);
+      let formData = new FormData();
+      formData.append("name", this.getUserInfos.name);
+      formData.append("email", this.getUserInfos.email);
+      formData.append("phone", this.getUserInfos.phone);
+      formData.append("dob", this.getUserInfos.dob);
+      formData.append("gender", this.selectedGender);
+      formData.append("country_id", this.selectedCounty);
+      formData.append("region_id", this.selectedRegion);
+      formData.append("division_id", this.selectedDivision);
+      formData.append("council_id", this.selectedMunicipality);
+      formData.append("neighborhood_id", this.selectedNeighbor);
+      formData.append("profession", "DEV");
+     
+
+      this.$store
+      .dispatch("profileSettingsEdit/updateUserInfos", formData)
+      .then(response =>{
+        console.log(response);
+        console.log(this.getUserInfos);
+        
+      })
+      .catch((err) => {
+         
+          console.log('--------- error: ');
+          console.error(err);
+        });
+    },
+
+    changePayment(){
+       let formData1 = new FormData();
+       formData1.append("payement_method", this.selected);
+      this.$store
+      .dispatch("profileSettingsEdit/changePayment", formData1)
+      .then(response =>{
+        console.log(response);
+        console.log(this.getUserInfos);
+      })
+      .catch((err) => {
+         
+          console.log('--------- error: ');
+          console.error(err);
+        });
+    },
+
+    getCountry(){
+        this.$store
+      .dispatch("auth/country")
+      .then(response =>{
+        console.log("------------------------");
+        console.log(this.country);
+        
+      })
+      .catch((err) => {
+         
+          console.log('--------- error: ');
+          console.error(err);
+        });
+    },
+
+    changePassword(){
+      let formData2 = new FormData();
+      formData2.append("check_password", this.currentPass);
+      formData2.append("password", this.newPass);
+      formData2.append("password_confirmation", this.newPass1);
+
+       this.$store
+      .dispatch("profileSettingsEdit/changePassword",formData2)
+      .then(response =>{
+        console.log("------------------------");
+        console.log(response.data);
+        
+      })
+      .catch((err) => {
+         
+          console.log('--------- error: ');
+          console.error(err);
+        });
+    },
+
+    getRegion(){
+          let data = { countryId: this.selectedCounty }
+        this.$store
+      .dispatch("auth/region",data)
+      .then(response =>{
+        console.log("------------------------");
+        
+        
+      })
+      .catch((err) => {
+         
+          console.log('--------- error: ');
+          console.error(err);
+        });
+
+      console.log("getregion clicked");
+      console.log(this.selectedCounty);
+    },
+
+    getDivision(){
+         let data = { regionId: this.selectedRegion }
+        this.$store
+      .dispatch("auth/division",data)
+      .then(response =>{
+        console.log("------------------------");
+        
+        
+      })
+      .catch((err) => {
+         
+          console.log('--------- error: ');
+          console.error(err);
+        });
+       console.log("getDivision clicked"); 
+      console.log(this.selectedDivision);
+    },
+
+    getMunicipality(){
+         let data = { divisionId: this.selectedDivision }
+        this.$store
+      .dispatch("auth/municipality",data)
+      .then(response =>{
+        console.log("------------------------");
+        
+      })
+      .catch((err) => {
+         
+          console.log('--------- error: ');
+          console.error(err);
+        });
+    },
+
+    getNeighbor(){
+       let data = { councilId: this.selectedMunicipality }
+        this.$store
+      .dispatch("auth/locality",data)
+      .then(response =>{
+        console.log("------------------------");
+        
       })
       .catch((err) => {
          
@@ -310,11 +627,27 @@ export default {
           console.error(err);
         });
     }
+    // getLocality(){
+      
+    //    this.$store
+    //   .dispatch("auth/locality")
+    //   .then(response =>{
+        
+        
+    //   })
+    //   .catch((err) => {
+         
+    //       console.log('--------- error: ');
+    //       console.error(err);
+    //     });
+    // }
   },
 
   mounted() {
     this.userInfos();
-
+    this.getCountry();
+    // this.getLocality();
+    
     var that = this;
     window.onresize = function() {
       that.size = window.innerWidth;
@@ -353,7 +686,11 @@ export default {
 .mt-15 {
   margin-top: 15px;
 }
-
+.button{
+  background-color: rgb(238, 119, 40);
+  border:none;
+  border-radius: 4px;
+}
 @media only screen and (min-width: 768px) {
   .cent {
     margin-left: 170px;

@@ -1,11 +1,13 @@
 <template>
   <div class="main">
 
-    <div class="images">
+    <div class="images imageslg ">
       <div>
-        <img src="@/assets/img/banner.jpg" v-if="info.user.cover_picture == null " class="banner" />     <img  :src="info.user.cover_picture" v-if="info.user.cover_picture != null " class="banner" />      
+       
+        
+          <img  :src="info.user.cover_picture" v-if="info.user.cover_picture != null " class="banner" />      
       </div>
-      <b-row class="mt-2 mb-2 ">
+      <b-row class="mt-2 mb-2  d-none d-md-block ">
         <b-col cols="6" class="avata">
           <div>     
             
@@ -133,7 +135,7 @@
 
     <div class="body p-2">
       <b-row>
-        <b-col cols="12" class="p-3">
+        <b-col cols="12" class="p-0 p-md-3">
           <b-tabs lazy content-class="mt-3" fill pills>
             <b-tab title="Posts" active>
               <Post />
@@ -336,8 +338,7 @@ computed: {
 .images {
   display: grid;
   width: 100%;
-  padding-left: 30px;
-  padding-right: 30px;
+
 }
 .banner {
   height: 426px;
@@ -461,6 +462,15 @@ p,
   margin-top: 8px;
 }
 
+@media only screen and (min-width: 768px) {
+.imageslg {
+ 
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+}
+
 @media only screen and (max-width: 768px) {
   .m-community {
     position: relative;
@@ -554,4 +564,6 @@ p,
     font-size: 12px;
   }
 }
+
+
 </style>

@@ -18,10 +18,11 @@
         <b-col md="8" cols="7" lg="7" xl="5" sm="5">
            <div class="title textt bold username"> <strong> {{ value.name }}  </strong></div>
           <p class="textt"  >
+            
+
+            <span v-for="cat in value.category" :key="cat.name">   {{cat.name}}  </span>
             <br />
-            {{ value.category }}
-            <br />
-            {{ value.followers }} {{ $t('dashboard.Community') }} <br />
+            {{ count(value.followers)  }} {{ $t('dashboard.Community') }} <br />
 
             <span class="location">
               <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{ $t('dashboard.Douala') }} {{ $t('dashboard.Cameroon') }}
@@ -54,10 +55,13 @@
                 <b-button
                   block
                   size="sm"
-                  class="b-background shadow"
+                 
+                  :class="value.is_follow !== 0 && 'u-btn'"
                   variant="primary"
+                  @click="handleFollow(value)"
                 >
-                  <i class="fas fa-user-plus fa-lg btn-icon"></i>
+                 
+                  <i class="fas fa-lg btn-icon" :class="value.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"></i>
                   <span class="btn-com">{{ $t('dashboard.Community') }}</span>
                 </b-button>
               </b-col>
@@ -104,19 +108,25 @@
         </b-col>
       </b-row>
     </div>
+    
+          <infinite-loading @infinite="infiniteHandler"></infinite-loading>
   </div>
 </template>
 
 <script>
+import axios from "axios";
 export default {
   props: ["title", "image"],
 
   data() {
     return {
+
+       page:1,
       options: {
         rewind: true,
         autoplay: true,
         perPage: 1,
+       
         pagination: false,
 
         type: "loop",
@@ -129,7 +139,89 @@ export default {
     business_around() {
       return this.$store.state.auth.businessAround;
     }
+  },
+
+
+
+
+
+
+  
+   methods: {
+
+       count(number) {
+      if (number >= 1000000) {
+        return number / 1000000 + "M";
+      }
+      if (number >= 1000) {
+        return number / 1000 + "K";
+      } else return number;
+    },
+
+
+
+
+
+ async handleFollow(user) {
+      const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
+      const nextFollowState = user.is_follow === 0 ? 1 : 0;
+      const data = {
+        id: user.id,
+        type: 'business',
+      };
+
+      await axios
+        .post(uri, data)
+        .then(response => {
+
+          console.log(response);
+          user.is_follow = nextFollowState;
+        })
+        .catch(err => console.log(err));
+    },
+
+
+
+
+
+    
+  async  infiniteHandler($state) {
+   
+      let url = "business/around?page="+this.page;
+
+      console.log(url);
+
+    await  axios.get(url)
+        .then(({ data }) => {
+
+               console.log(data.data);
+
+           if (data.data.length) {
+          
+           
+            this.business_around.push(...data.data);
+               this.page += 1;
+
+            $state.loaded();
+          } else {
+            $state.complete();
+          }
+
+         
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+
+
+
+
   }
+
+
+
 };
 </script>
 

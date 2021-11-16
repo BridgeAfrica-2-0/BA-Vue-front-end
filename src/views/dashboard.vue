@@ -229,9 +229,6 @@ export default {
         });
 
 
-    this.CommunityBusiness();
-
-    this.CommunityPeople();
 
     this.businessCommunityTotal();
 

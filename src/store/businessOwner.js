@@ -739,11 +739,11 @@ export default {
     },
 
     // Getting the notifications
-    async getNotifications({ dispatch, commit }) {
+    async getNotifications({ dispatch, commit }, id) {
       commit('setLoader', true);
 
       await axios
-        .get('notification')
+        .get(`notification/business/${id}`)
         .then(res => {
           commit('setLoader', false);
           commit('setSuccess', true);

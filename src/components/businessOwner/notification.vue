@@ -103,9 +103,11 @@ export default {
   name: "notification",
   data: () => ({
     selected: [],
+    testing:0
   }),
-  beforeMount() {
-    this.getNotifications();
+  created() {
+    console.log('created notification')
+    this.getNotifications(this.$router.params.id);
   },
   computed: {
     getNotificationsStore() {
@@ -123,7 +125,7 @@ export default {
       getSuccess: "businessOwner/getSuccess",
     }),
 
-    // getting actions from the store
+    // getting actions from the store 
     ...mapActions({
       getNotifications: "businessOwner/getNotifications",
       readNotifiactions: "businessOwner/readNotifiactions",

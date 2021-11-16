@@ -36,12 +36,13 @@ import networkProfileMedia from "./networkProfileMedia";
 import networkProfileMemberRequest from "./networkProfileMemberRequest";
 import { social } from "./social";
 import { notification } from "./notifications"
+import keywordOperationOnNetwork from './keywordOperationOnNetwork'
 
 //import axios from "axios";
 Vue.use(Vuex);
 
 //axios.defaults.baseURL = process.env.VUE_APP_API_URL;
-axios.defaults.baseURL = "https://3760-154-72-150-26.ngrok.io/api/v1/";
+axios.defaults.baseURL = "https://9011-154-72-150-64.ngrok.io/api/v1/";
 
 export default new Vuex.Store({
   modules: {
@@ -69,6 +70,7 @@ export default new Vuex.Store({
     business,
     networkProfileFeedback,
     NetworkSettings,
+    keywordOperationOnNetwork,
     businessSettingInfo,
     checkout,
     social,

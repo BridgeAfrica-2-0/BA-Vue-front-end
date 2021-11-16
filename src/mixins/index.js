@@ -386,8 +386,6 @@ export const Redis = {
     }
   },
 
-
-
   created() {
     // this.initBusinessNotification()
     this.init()

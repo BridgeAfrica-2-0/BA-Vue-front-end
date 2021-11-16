@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    
+    <FlashMessage />
     <hr />
     <!-- partie mobile--------------------------------------------------------------------- 
     
@@ -73,10 +73,9 @@
                       text="Manage"
                       class="m-md-2"
                     >
-                      <b-dropdown-item>Archive</b-dropdown-item>
-                      <b-dropdown-item>Delete</b-dropdown-item>
-                      <b-dropdown-item>shipped</b-dropdown-item>
-                    <b-dropdown-item>reshedule</b-dropdown-item>
+                      <b-dropdown-item @click="updateStatus(9,'archive')">Archive</b-dropdown-item>
+                      <b-dropdown-item @click="updateStatus(9,'cancel')">Delete</b-dropdown-item>
+                      <b-dropdown-item @click="updateStatus(9,'re-shedule')">reshedule</b-dropdown-item>
                     </b-dropdown>
                   </div>
                 </div>
@@ -124,8 +123,8 @@
 
             <div class="justify-content-center container row">
               <div class="">
-                <button class="buttonm btn shadow text-center">
-                  <h3 class="h3 button-text">Re-order</h3>
+                <button  @click="updateStatus(9,'shipped')" class="buttonm btn shadow text-center">
+                  <h3 class="h3 button-text">shipped</h3>
                 </button>
               </div>
             </div>
@@ -158,10 +157,8 @@
                       text="Manage"
                       class="m-md-2"
                     >
-                      <b-dropdown-item>Archive</b-dropdown-item>
-                      <b-dropdown-item>Delete</b-dropdown-item>
-                      <b-dropdown-item>shipped</b-dropdown-item>
-                    <b-dropdown-item>reshedule</b-dropdown-item>
+                      <b-dropdown-item @click="updateStatus(9,'cancel')">Delete</b-dropdown-item>
+                    <b-dropdown-item  @click="updateStatus(9,'re-shedule')">reshedule</b-dropdown-item>
                     </b-dropdown>
                   </div>
                 </div>
@@ -209,8 +206,8 @@
 
             <div class="justify-content-center container row">
               <div class="">
-                <button class="buttonm btn shadow text-center">
-                  <h3 class="h3 button-text">Re-order</h3>
+                <button @click="updateStatus(9,'shipped')" class="buttonm btn shadow text-center">
+                  <h3 class="h3 button-text">Shipped</h3>
                 </button>
               </div>
             </div>
@@ -243,10 +240,8 @@
                       text="Manage"
                       class="m-md-2"
                     >
-                      <b-dropdown-item>Archive</b-dropdown-item>
-                      <b-dropdown-item>Delete</b-dropdown-item>
-                      <b-dropdown-item>shipped</b-dropdown-item>
-                    <b-dropdown-item>reshedule</b-dropdown-item>
+                      <b-dropdown-item @click="updateStatus(9,'cancel')">Delete</b-dropdown-item>
+                    <b-dropdown-item  @click="updateStatus(9,'re-shedule')">reshedule</b-dropdown-item>
                     </b-dropdown>
                   </div>
                 </div>
@@ -294,8 +289,8 @@
 
             <div class="justify-content-center container row">
               <div class="">
-                <button class="buttonm btn shadow text-center">
-                  <h3 class="h3 button-text">Re-order</h3>
+                <button @click="updateStatus(9,'shipped')" class="buttonm btn shadow text-center">
+                  <h3 class="h3 button-text">Shipped</h3>
                 </button>
               </div>
             </div>
@@ -328,10 +323,8 @@
                       text="Manage"
                       class="m-md-2"
                     >
-                      <b-dropdown-item>Archive</b-dropdown-item>
-                      <b-dropdown-item>Delete</b-dropdown-item>
-                      <b-dropdown-item>shipped</b-dropdown-item>
-                    <b-dropdown-item>reshedule</b-dropdown-item>
+                      <b-dropdown-item @click="updateStatus(9,'archive')">Archive</b-dropdown-item>
+                      <b-dropdown-item @click="updateStatus(9,'cancel')">Delete</b-dropdown-item>
                     </b-dropdown>
                   </div>
                 </div>
@@ -377,13 +370,6 @@
               <br />
             </div>
 
-            <div class="justify-content-center container row">
-              <div class="">
-                <button class="buttonm btn shadow text-center">
-                  <h3 class="h3 button-text">Re-order</h3>
-                </button>
-              </div>
-            </div>
             <div class="justify-content-center container row">
               <br />
               <br />
@@ -493,10 +479,9 @@
                     text="Manage"
                     class="m-md-2"
                   >
-                    <b-dropdown-item>Archive</b-dropdown-item>
-                    <b-dropdown-item>Delete</b-dropdown-item>
-                    <b-dropdown-item>shipped</b-dropdown-item>
-                    <b-dropdown-item>reshedule</b-dropdown-item>
+                    <b-dropdown-item @click="updateStatus(9,'archive')">Archive</b-dropdown-item>
+                    <b-dropdown-item @click="updateStatus(9,'cancel')">Delete</b-dropdown-item>
+                    <b-dropdown-item @click="updateStatus(9,'re-shedule')">reshedule</b-dropdown-item>
                   </b-dropdown>
                 </div>
               </div>
@@ -538,8 +523,8 @@
               </div>
 
               <div class="container d-flex justify-content-end btn-marg">
-                <button class="button btn shadow">
-                  <h3 class="h3 button-text">Re-order</h3>
+                <button @click="updateStatus(9,'shipped')" class="button btn shadow">
+                  <h3 class="h3 button-text">Shipped</h3>
                 </button>
               </div>
 
@@ -575,10 +560,8 @@
                     text="Manage"
                     class="m-md-2"
                   >
-                    <b-dropdown-item>Archive</b-dropdown-item>
-                    <b-dropdown-item>Delete</b-dropdown-item>
-                    <b-dropdown-item>shipped</b-dropdown-item>
-                    <b-dropdown-item>reshedule</b-dropdown-item>
+                    <b-dropdown-item @click="updateStatus(9,'cancel')">Delete</b-dropdown-item>
+                    <b-dropdown-item  @click="updateStatus(9,'re-shedule')">reshedule</b-dropdown-item>
                   </b-dropdown>
                 </div>
               </div>
@@ -618,8 +601,8 @@
               </div>
 
               <div class="container d-flex justify-content-end btn-marg">
-                <button class="button btn shadow">
-                  <h3 class="h3 button-text">Re-order</h3>
+                <button @click="updateStatus(9,'shipped')" class="button btn shadow">
+                  <h3 class="h3 button-text">Shipped</h3>
                 </button>
               </div>
 
@@ -656,10 +639,8 @@
                     text="Manage"
                     class="m-md-2"
                   >
-                    <b-dropdown-item>Archive</b-dropdown-item>
-                    <b-dropdown-item>Delete</b-dropdown-item>
-                    <b-dropdown-item>shipped</b-dropdown-item>
-                    <b-dropdown-item>reshedule</b-dropdown-item>
+                    <b-dropdown-item @click="updateStatus(9,'delete')">Delete</b-dropdown-item>
+                    <b-dropdown-item  @click="updateStatus(9,'re-shedule')">reshedule</b-dropdown-item>
                   </b-dropdown>
                 </div>
               </div>
@@ -699,8 +680,8 @@
               </div>
 
               <div class="container d-flex justify-content-end btn-marg">
-                <button class="button btn shadow">
-                  <h3 class="h3 button-text">Re-order</h3>
+                <button @click="updateStatus(9,'shipped')" class="button btn shadow">
+                  <h3 class="h3 button-text">Shipped</h3>
                 </button>
               </div>
 
@@ -736,8 +717,8 @@
                     text="Manage"
                     class="m-md-2"
                   >
-                    <b-dropdown-item>Archive</b-dropdown-item>
-                    <b-dropdown-item>Delete</b-dropdown-item>
+                    <b-dropdown-item @click="updateStatus(9,'archive')">Archive</b-dropdown-item>
+                    <b-dropdown-item @click="updateStatus(9,'cancel')">Delete</b-dropdown-item>
                   </b-dropdown>
                 </div>
               </div>
@@ -776,12 +757,6 @@
                 <h3 class="text-success">{{ etat }}</h3>
               </div>
 
-              <div class="container d-flex justify-content-end btn-marg">
-                <button class="button btn shadow">
-                  <h3 class="h3 button-text">Re-order</h3>
-                </button>
-              </div>
-
               <div class="justify-content-center container row">
                 <br />
               </div>
@@ -794,6 +769,7 @@
         </div>
       </div>
     </div>
+
   </div>
 </template>
 
@@ -804,6 +780,7 @@ export default {
  
   data() {
     return {
+      url: null,
       selected: "",
       rimg: "",
       status: 1,
@@ -818,7 +795,9 @@ export default {
     };
   },
 
-  mounted() {},
+  mounted() {
+   this.url = this.$route.params.id;
+  },
 
   methods: {
     changeElementType(p) {
@@ -858,6 +837,38 @@ export default {
         dat.classList.remove("green");
       });
       el.classList.add("green");
+    },
+
+    updateStatus(order_id, status) {
+      console.log("updateStatus")
+      console.log("order_id", order_id)
+      console.log("business_id", this.url)
+      console.log("status", status)
+      let formData = new FormData();
+      formData.append("order_id", order_id)
+      formData.append("business_id", this.url)
+      formData.append("status", status)
+      this.$store
+        .dispatch("orderBusiness/updateOrderStatus", 
+        {
+          path: "order/updateOrder",
+          formData: formData
+        })
+        .then(({data}) => {
+          console.log('ohh year');
+          console.log(data);
+          this.flashMessage.show({
+            status: "success",
+            message: "Status Changed To "+status
+          });
+        })
+        .catch(err => {
+          console.log({ err: err });
+          this.flashMessage.show({
+            status: "error",
+            message: "Unable to Change Status"
+          });
+        });
     },
   },
 

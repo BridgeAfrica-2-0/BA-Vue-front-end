@@ -5,7 +5,7 @@
       <div>
         <img src="@/assets/img/banner.jpg" v-if="info.user.cover_picture == null " class="banner" />     <img  :src="info.user.cover_picture" v-if="info.user.cover_picture != null " class="banner" />      
       </div>
-      <b-row class="mt-2 mb-2 options">
+      <b-row class="mt-2 mb-2 ">
         <b-col cols="6" class="avata">
           <div>     
             
@@ -38,32 +38,33 @@
             </b-link>
             <br />
 
-            <span class="k15 duration"> 0{{info.user.community}} Community </span>
+            <span class="k15 duration"> 0{{info.user.community}} {{ $t('profilefollower.Community') }} </span>
           </div>
         </b-col>
         <b-col cols="12">
           <div class="btns">
             <b-button class="community size">
               <i class="fas fa-user-plus  fa-lg btn-icon m-fa "></i>
-              <span class="txt-btn">Community</span></b-button
+              <span class="txt-btn">{{ $t('profilefollower.Community') }}</span></b-button
             >
             <b-button class="message size ml-1">
               <i class="fas fa-envelope fa-lg btn-icon "></i>
-              <span class="txt-btn">Message</span></b-button
+              <span class="txt-btn">{{ $t('profilefollower.Message') }}</span></b-button
             >
 
             <b-dropdown
               size="sm"
               class="ml-2 dropdown"
+              dropleft
               no-caret
-              variant="outline-primary"
+              variant="link"
             >
               <template #button-content>
                 <b-icon-three-dots></b-icon-three-dots>
               </template>
               <b-dropdown-item>
                 <b-icon icon="flag" variant="primary"></b-icon>
-                Report</b-dropdown-item
+                {{ $t('profilefollower.Report') }}</b-dropdown-item
               >
             </b-dropdown>
           </div>
@@ -86,7 +87,7 @@
           <div class="d-inline-block mt-4 ml-4 float-left texts">
             <h6 class="font-weight-bolder name ">  {{info.user.name}}  </h6>
             <p class="details">
-              0{{info.user.community}} Community
+              0{{info.user.community}} {{ $t('profilefollower.Community') }}
             </p>
           </div>
         </b-col>
@@ -98,7 +99,7 @@
           >
             <i class="fas fa-map-marked-alt fa-lg btn-icon "></i>
 
-            <span class="txt-btn">Direction</span></b-button
+            <span class="txt-btn">{{ $t('profilefollower.Direction') }}</span></b-button
           >
         </b-col>
       </b-row>
@@ -106,12 +107,12 @@
     <div class="m-btn mobile mb-2">
       <b-button class="m-msg size" size="sm">
         <i class="fas fa-envelope fa-lg btn-icon "></i>
-        <span class="txt-btn">Message</span>
+        <span class="txt-btn">{{ $t('profilefollower.Message') }}</span>
       </b-button>
 
       <b-button class="direction ml-1 size" size="sm">
         <i class="fas fa-user-plus  fa-lg btn-icon "></i>
-        <span class="txt-btn">Community</span></b-button
+        <span class="txt-btn">{{ $t('profilefollower.Community') }}</span></b-button
       >
 
       <b-dropdown
@@ -125,7 +126,7 @@
         </template>
         <b-dropdown-item>
           <b-icon icon="flag" variant="primary"></b-icon>
-          Report</b-dropdown-item
+          {{ $t('profilefollower.Report') }}</b-dropdown-item
         >
       </b-dropdown>
     </div>
@@ -134,14 +135,14 @@
       <b-row>
         <b-col cols="12" class="p-3">
           <b-tabs lazy content-class="mt-3" fill pills>
-            <b-tab title="Posts" active>
+            <b-tab :title="$t('profilefollower.Posts')" active>
               <Post />
             </b-tab>
-            <b-tab title="About"><About /></b-tab>
-            <b-tab title="Business"><Businesses /></b-tab>
-            <b-tab title="Network"><Network /></b-tab>
-            <b-tab title="Media"><Media /></b-tab>
-            <b-tab title="Community"><Community /></b-tab>
+            <b-tab :title="$t('profilefollower.About')"><About /></b-tab>
+            <b-tab :title="$t('profilefollower.Business')"><Businesses /></b-tab>
+            <b-tab :title="$t('profilefollower.Network')"><Network /></b-tab>
+            <b-tab :title="$t('profilefollower.Media')"><Media /></b-tab>
+            <b-tab :title="$t('profilefollower.Community')"><Community /></b-tab>
           </b-tabs>
         </b-col>
       </b-row>

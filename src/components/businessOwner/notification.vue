@@ -1,28 +1,16 @@
 <template>
-  <div class="container" style=" ">
+  <div class="container" style="">
     <div class="container">
       <b-row>
         <b-col>
-
           <div class="b-bottomn f-left">
-
-            <input
-              class="m-left-top"
-              type="checkbox"
-              @click="selectall($event)"
-            />
+            <input class="m-left-top" type="checkbox" @click="selectall($event)" />
             Select All
           </div>
         </b-col>
         <b-col>
           <div class="b-bottomn f-right">
-            <b-button
-              @click="readAll(selected)"
-              variant="primary"
-              class="a-button-l duration"
-            >
-              Mark as Read</b-button
-            >
+            <b-button @click="readAll(selected)" variant="primary" class="a-button-l duration"> Mark as Read</b-button>
             <b-button
               @click="deleteAll(selected)"
               v-if="testing > 0"
@@ -37,32 +25,19 @@
       <br />
 
       <b-row>
-        <b-col
-          cols="12"
-          class="mr-3"
-          v-for="post in getNotificationsStore"
-          :key="post.id"
-        >
+        <b-col cols="12" class="mr-3" v-for="post in getNotificationsStore" :key="post.id">
           <p class="">
-            <span style="display:inline-flex">
-
+            <span style="display: inline-flex">
               <input
                 class="m-left-top"
-
                 type="checkbox"
                 :value="post.id"
                 :id="post.id"
                 :checked="post.checked"
-
                 @click="check(post, $event)"
-
               />
-              <b-avatar
-                class="d-inline-block profile-pic"
-                variant="primary"
-                :src="post.image"
-              ></b-avatar>
-              <h6 class="m-0  d-inline-block ml-2 username">
+              <b-avatar class="d-inline-block profile-pic" variant="primary" :src="post.image"></b-avatar>
+              <h6 class="m-0 d-inline-block ml-2 username">
                 {{ post.reference_type }}
                 <p class="duration">{{ post.created_at }}</p>
               </h6>
@@ -76,39 +51,31 @@
         </b-col>
 
         <b-col v-if="loader" class="load">
-          <b-spinner
-            style="width: 7rem; height: 7rem;"
-            variant="primary"
-          ></b-spinner>
+          <b-spinner style="width: 7rem; height: 7rem" variant="primary"></b-spinner>
         </b-col>
-        <b-col
-          v-if="!getNotificationsStore && !loader"
-          class="load text-center"
-        >
+        <b-col v-if="!getNotificationsStore && !loader" class="load text-center">
           <b-row class="text-center">
             <p>No notifications to show !!</p>
           </b-row>
         </b-col>
         <hr width="100%" />
       </b-row>
-
-      
     </div>
   </div>
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapGetters } from 'vuex';
 export default {
-  name: "notification",
+  name: 'notification',
   data: () => ({
     selected: [],
-    testing:0
   }),
-  created() {
-    console.log('created notification')
-    this.getNotifications(this.$router.params.id);
+
+  beforeMount() {
+    this.getNotifications(this.$route.params.id);
   },
+
   computed: {
     getNotificationsStore() {
       return this.sendNotifications();
@@ -120,17 +87,17 @@ export default {
   methods: {
     // getting getters from the store
     ...mapGetters({
-      sendNotifications: "businessOwner/sendNotifications",
-      getLoader: "businessOwner/getLoader",
-      getSuccess: "businessOwner/getSuccess",
+      sendNotifications: 'businessOwner/sendNotifications',
+      getLoader: 'businessOwner/getLoader',
+      getSuccess: 'businessOwner/getSuccess',
     }),
 
-    // getting actions from the store 
+    // getting actions from the store
     ...mapActions({
-      getNotifications: "businessOwner/getNotifications",
-      readNotifiactions: "businessOwner/readNotifiactions",
-      deleteNotifications: "businessOwner/deleteNotifications",
-      delete: "businessOwner/delete",
+      getNotifications: 'businessOwner/getNotifications',
+      readNotifiactions: 'businessOwner/readNotifiactions',
+      deleteNotifications: 'businessOwner/deleteNotifications',
+      delete: 'businessOwner/delete',
     }),
 
     readAll(data) {
@@ -152,7 +119,7 @@ export default {
     // select all the notifications
     selectall(e) {
       if (e.target.checked) {
-        console.log("selected");
+        console.log('selected');
         this.getNotificationsStore.forEach((element) => {
           this.selected.push(element);
         });
@@ -162,7 +129,7 @@ export default {
     check(value, e) {
       if (e.target.checked) {
         this.selected.push(value);
-        console.log("selected");
+        console.log('selected');
       }
     },
   },

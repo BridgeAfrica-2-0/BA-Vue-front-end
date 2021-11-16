@@ -739,7 +739,7 @@ export default {
     },
 
     // Getting the notifications
-    async getNotifications({ dispatch, commit }, id) {
+    async getNotifications({ commit }, id) {
       commit('setLoader', true);
 
       await axios

@@ -158,6 +158,7 @@ Vue.use(VueLoading);
 
 import VueAgile from 'vue-agile';
 
+
 Vue.use(VueAgile);
 
 Vue.use(VueSocialSharing);
@@ -174,12 +175,10 @@ import VueEasyLightbox from 'vue-easy-lightbox';
 
 // Method 1. via Vue.use
 Vue.use(VueEasyLightbox);
-
 Vue.config.productionTip = false;
+
 var user = null;
 
-// import './pusher-notification';
-import './redis-notification'
 
 new Vue({
   router,

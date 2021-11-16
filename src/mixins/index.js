@@ -9,6 +9,9 @@ import NoMoreData from "@/components/businessOwner/PaginationMessage"
 import ClipLoader from 'vue-spinner/src/ClipLoader.vue'
 
 
+// import './pusher-notification';
+import { initRedis } from '@/redis-notification'
+
 export const FireBase = {
   data() {
     return {
@@ -347,21 +350,20 @@ export const Redis = {
   computed: {
     ...mapGetters({
       profile: 'auth/profilConnected',
+      token: 'auth/getAuthToken'
     })
   },
+
   methods: {
     ...mapMutations({
       newNotificationBusiness: "notification/NEW_BUSINESS_NOTIFICATION",
       newNotificationProfile: "notification/NEW_PROFILE_NOTIFICATION",
       newNotificationNetwork: "notification/NEW_NETWORK_NOTIFICATION",
-    }),
-
-    ...mapMutations({
       auth: 'auth/profilConnected',
     }),
 
     async getAuth() {
-      const response = await this.$repository.share.WhoIsConnect({ networkId: this.$route.params.id });
+      const response = await this.$repository.share.WhoIsConnect({ networkId: null });
 
       if (response.success) this.auth(response.data);
     },
@@ -373,30 +375,34 @@ export const Redis = {
     },
 
     redis() {
-      const $event = `business-channel.${this.profile.id}`
-      window.Redis.channel($event)
+      const $event = `business-channel${this.profile.id}`
+      window.Redis.private($event)
         .listen(".BusinessNotificationEvent", payload => {
           console.log(payload)
         })
     },
 
     init: async function () {
-      await this.getAuth()
-      this.redis()
+      if (this.profile) {
+        initRedis(this.token)
+        await this.getAuth()
+        this.redis()
+      }
     }
   },
 
   created() {
-    // this.initBusinessNotification()
     this.init()
+    this.$store.watch(
+      state => state.auth.user.accessToken,
+      () => initRedis(this.token),
+      { deep: true }
+    );
   }
 }
 
-
 export const FirebaseNotification = {
-
   methods: {
-
     notified() {
       // try {
       //   firebase

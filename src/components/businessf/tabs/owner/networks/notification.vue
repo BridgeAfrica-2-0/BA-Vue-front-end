@@ -68,7 +68,7 @@
                 <div class="duration">{{ moment(notification.created_at).fromNow() }}</div>
               </span>
             </span>
-            <span class="float-right mt-1"> </span>
+            <span v-if="!notification.mark_as_read" class="float-right mt-1"> <b-badge pill variant="primary" class="text-primary">.</b-badge></span>
           </p>
 
           <p class="text">

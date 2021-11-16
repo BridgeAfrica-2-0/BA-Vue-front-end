@@ -344,12 +344,27 @@ export const Pusher = {
 
 export const Redis = {
 
+  computed: {
+    ...mapGetters({
+      profile: 'auth/profilConnected',
+    })
+  },
   methods: {
     ...mapMutations({
       newNotificationBusiness: "notification/NEW_BUSINESS_NOTIFICATION",
       newNotificationProfile: "notification/NEW_PROFILE_NOTIFICATION",
       newNotificationNetwork: "notification/NEW_NETWORK_NOTIFICATION",
     }),
+
+    ...mapMutations({
+      auth: 'auth/profilConnected',
+    }),
+
+    async getAuth() {
+      const response = await this.$repository.share.WhoIsConnect({ networkId: this.$route.params.id });
+
+      if (response.success) this.auth(response.data);
+    },
 
     initBusinessNotification: async function () {
       const response = this.$repository.notification.business()
@@ -358,17 +373,24 @@ export const Redis = {
     },
 
     redis() {
-      console.log("call echo redis")
-      window.Redis.channel('user.545')
-        .listen(".UserEvent", payload => {
+      const $event = `business-channel.${this.profile.id}`
+      window.Redis.channel($event)
+        .listen(".BusinessNotificationEvent", payload => {
           console.log(payload)
         })
+    },
+
+    init: async function () {
+      await this.getAuth()
+      this.redis()
     }
   },
 
+
+
   created() {
-    this.initBusinessNotification()
-    this.redis()
+    // this.initBusinessNotification()
+    this.init()
   }
 }
 

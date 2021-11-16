@@ -9,8 +9,8 @@ import passrecover from './passrecover.json'
 import welcome from './welcome.json'
 import dashboard from './dashboard.json'
 import profileowner from './profileowner.json'
-import {network} from './network.json'
-import {messaging} from './messaging.json'
+import network from './network.json'
+import messaging from './messaging.json'
 
 export const defaultLocale = 'en'
 

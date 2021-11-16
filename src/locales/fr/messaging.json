@@ -1,3 +1,23 @@
 {
-    
-}
+    "Messages" :"Messages",
+    "Search_inbox":"Recherche dans la boîte de réception",
+    "User":"Utilisateur",
+    "Search_chat_list":"Recherche dans la liste des conversation",
+    "Spinning":"Tirage",
+    "Business":"Entreprise",
+    "Network":"Réseau",
+    "Online":"En ligne",
+    "Search_message":"Recherche un Message",
+    "View_Profile":"Voir le profil",
+    "Disable_Notification":"Désactiver la notification",
+    "Delete_Contact":"Supprimer le contact",
+    "Delete_Chat":"Supprimer la converstion",
+    "Select_a_chat":"Sélectionnez un conversation",
+    "Enter_a_message":"Entrez le message",
+    "Contact_Info":"Informations de contact",
+    "Options":"Options",
+    "Block_Messages":"Bloquer les messages",
+    "Report_User":"Rapport de l'utilisateur",
+    "To":"À",
+    "Type_the_name_of_person_or_Business":"saisissez le nom de la personne ou de l'entreprise"
+ }

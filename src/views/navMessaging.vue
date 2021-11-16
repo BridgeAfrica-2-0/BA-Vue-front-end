@@ -18,7 +18,7 @@
                   ></b-avatar>
                 </b-col>
                 <b-col>
-                  <h4 class="title m-10">{{ $t('network.Messages') }} </h4>
+                  <h4 class="title m-10">{{ $t('messaging.Messages') }} </h4>
                 </b-col>
                 <b-col>
                   <b-icon
@@ -29,7 +29,7 @@
                 </b-col>
               </b-row>
               <b-container>
-                <input type="text" class="form-control input-background" :placeholder=" $t('network.Search_inbox')" />
+                <input type="text" class="form-control input-background" :placeholder="$t('messaging.Search_inbox')" />
               </b-container>
             </div>
             <div>
@@ -92,14 +92,14 @@
               <b-row class="mt-12">
                 <b-col>
                   <b-tabs content-class="mt-12 ma-4 pt-6" fill lazy>
-                    <b-tab :title="$t('network.User')" active @click="getChatList({ type: 'user' })">
+                    <b-tab :title="$t('messaging.User')" active @click="getChatList({ type: 'user' })">
                       <!-- Users Chats Available  -->
                       <b-row class="pa-6">
                         <b-col class="mb-6 pb-6">
                           <input
                             v-model="searchQuery"
                             class="form-control input-background"
-                            :placeholder="$t('network.Search_chat_list')"
+                            :placeholder="$t('messaging.Search_chat_list')"
                             @keypress.enter="
                               getChatList({
                                 type: 'user',
@@ -112,7 +112,7 @@
 
                       <div class="messages">
                         <div v-if="loader" class="text-center mt-6 pt-6">
-                          <b-spinner variant="primary" label="$t('network.Spinning')" class="centralizer"></b-spinner>
+                          <b-spinner variant="primary" label="$t('messaging.Spinning')" class="centralizer"></b-spinner>
                         </div>
                         <b-row
                           v-else
@@ -160,14 +160,14 @@
                       <!-- End Chats -->
                     </b-tab>
 
-                    <b-tab :title="$t('network.Business')" @click="getChatList({ type: 'business' })">
+                    <b-tab :title="$t('messaging.Business')" @click="getChatList({ type: 'business' })">
                       <!-- Business Chats Available  -->
                       <b-row class="pa-6">
                         <b-col class="mb-6 pb-6">
                           <input
                             v-model="searchQuery"
                             class="form-control input-background"
-                            :placeholder="$t('network.Search_chat_list')"
+                            :placeholder="$t('messaging.Search_chat_list')"
                             @keypress.enter="
                               getChatList({
                                 type: 'business',
@@ -180,7 +180,7 @@
 
                       <div class="messages">
                         <div v-if="loader" class="text-center mt-12 pt-12">
-                          <b-spinner variant="primary" :label="$t('network.Spinning')" class="centralizer"></b-spinner>
+                          <b-spinner variant="primary" :label="$t('messaging.Spinning')" class="centralizer"></b-spinner>
                         </div>
                         <b-row
                           v-else
@@ -227,14 +227,14 @@
 
                       <!-- End Chats -->
                     </b-tab>
-                    <b-tab :title="$t('network.Network')" @click="getChatList({ type: 'network' })">
+                    <b-tab :title="$t('messaging.Network')" @click="getChatList({ type: 'network' })">
                       <!-- network Chats Available  -->
                       <b-row class="pa-6">
                         <b-col class="mb-6 pb-6">
                           <input
                             v-model="searchQuery"
                             class="form-control input-background"
-                            placeholder=" $t('network.Search_chat_list') "
+                            :placeholder=" $t('messaging.Search_chat_list') "
                             @keypress.enter="
                               getChatList({
                                 type: 'network',
@@ -247,7 +247,7 @@
 
                       <div class="messages">
                         <div v-if="loader" class="text-center mt-12 pt-12">
-                          <b-spinner variant="primary" :label="$t('network.Spinning')" class="centralizer"></b-spinner>
+                          <b-spinner variant="primary" :label="$t('messaging.Spinning')" class="centralizer"></b-spinner>
                         </div>
                         <b-row
                           v-else
@@ -324,7 +324,7 @@
 
                   <b-col class="detale">
                     <h6>{{ chatSelected.name }}</h6>
-                    <small>{{ $t('network.Online') }}  </small>
+                    <small>{{ $t('messaging.Online') }}  </small>
                   </b-col>
                   <b-col cols="3">
                     <b-row class="mt-3">
@@ -348,7 +348,7 @@
 
                   <b-col class="detail" @click="info = true">
                     <h5>{{ chatSelected.name }}</h5>
-                    <p>{{ $t('network.Online') }} </p>
+                    <p>{{ $t('messaging.Online') }} </p>
                   </b-col>
                   <b-col class="col-4">
                     <input
@@ -361,7 +361,7 @@
                       "
                       type="text"
                       class="form-control input-background mb-6 pb-6"
-                      :placeholder=" $t('network.Search_message')"
+                      :placeholder=" $t('messaging.Search_message')"
                     />
                   </b-col>
                   <b-col class="col-3">
@@ -392,13 +392,13 @@
                             <b-icon-three-dots class="primary"></b-icon-three-dots>
                           </template>
 
-                          <b-dropdown-item-button @click="showInfo(true)"> {{ $t('network.View_Profile') }}  </b-dropdown-item-button>
+                          <b-dropdown-item-button @click="showInfo(true)"> {{ $t('messaging.View_Profile') }}  </b-dropdown-item-button>
 
-                          <b-dropdown-item-button>{{ $t('network.Disable_Notification') }}   </b-dropdown-item-button>
+                          <b-dropdown-item-button>{{ $t('messaging.Disable_Notification') }}   </b-dropdown-item-button>
 
-                          <b-dropdown-item-button> {{ $t('network.Delete_Contact') }}  </b-dropdown-item-button>
+                          <b-dropdown-item-button> {{ $t('messaging.Delete_Contact') }}  </b-dropdown-item-button>
 
-                          <b-dropdown-item-button> {{ $t('network.Delete_Chat') }}  </b-dropdown-item-button>
+                          <b-dropdown-item-button> {{ $t('messaging.Delete_Chat') }}  </b-dropdown-item-button>
                         </b-dropdown>
                       </b-col>
                     </b-row>
@@ -431,7 +431,7 @@
 
               <section v-if="chatSelected.active" class="chats" style="margin-left: 1px" ref="feed">
                 <div v-if="loader" class="text-center mt-12 pt-12">
-                  <b-spinner variant="primary" :label=" $t('network.Spinning')" class="spinner centralizer"></b-spinner>
+                  <b-spinner variant="primary" :label=" $t('messaging.Spinning')" class="spinner centralizer"></b-spinner>
                 </div>
                 <div v-else v-for="chat in userToUser" :key="chat.id">
                   <div v-if="currentUser.user.id != chat.sender_id">
@@ -512,7 +512,7 @@
 
               <section v-else class="chats" style="margin-left: 1px" ref="feed">
                 <div class="mt-12 pt-12">
-                  <h1 class="text-center">{{ $t('network.Select_a_chat') }} </h1>
+                  <h1 class="text-center">{{ $t('messaging.Select_a_chat') }} </h1>
                 </div>
               </section>
 
@@ -546,7 +546,7 @@
                       v-model="input"
                       @keypress.enter="send"
                       class="input-background"
-                      placeholder="$t('network.Enter_a_message')"
+                      :placeholder="$t('messaging.Enter_a_message')"
                     ></b-form-input>
 
                     <div class="wrapper">
@@ -624,7 +624,7 @@
               <b-button class="primary-bg" @click="showInfo(false)">
                 <fas-icon :icon="['fas', 'arrow-left']" />
               </b-button>
-              <span class="cnt-info"> {{ $t('network.Contact_Info') }} </span>
+              <span class="cnt-info"> {{ $t('messaging.Contact_Info') }} </span>
             </div>
             <div class="info-bottom">
               <b-avatar
@@ -635,21 +635,21 @@
               ></b-avatar>
               <div class="info-detail">
                 <h1 class="info-name">{{ receiver.name }}</h1>
-                <b-link class="primary">{{ $t('network.View_Profile') }} </b-link>
+                <b-link class="primary">{{ $t('messaging.View_Profile') }} </b-link>
               </div>
             </div>
             <div>
               <ul>
-                <li>{{ $t('network.Options') }} </li>
+                <li>{{ $t('messaging.Options') }} </li>
                 <li>
                   <b-row
-                    ><b-col> {{ $t('network.Block_Messages') }} </b-col>
+                    ><b-col> {{ $t('messaging.Block_Messages') }} </b-col>
                     <b-col>
                       <b-form-checkbox v-model="checked" name="check-button" class="primary" switch> </b-form-checkbox>
                     </b-col>
                   </b-row>
                 </li>
-                <li>{{ $t('network.Report_User') }} </li>
+                <li>{{ $t('messaging.Report_User') }} </li>
               </ul>
             </div>
           </b-col>
@@ -659,14 +659,14 @@
             <div class="new-msg back-image" style="margin-right: 17px">
               <div class="info-nav">
                 <b-row>
-                  <b-col class="col-1 mt-3"> {{ $t('network.To') }} </b-col>
+                  <b-col class="col-1 mt-3"> {{ $t('messaging.To') }} </b-col>
                   <b-col>
                     <b-form-input
                       id="textarea"
                       v-model="searchQuery"
                       class="input-background"
                       style="width: 100%"
-                      :placeholder=" $t('network.Type_the_name_of_person_or_Business')"
+                      :placeholder="$t('messaging.Type_the_name_of_person_or_Business')"
                       @keydown="searchUser(searchQuery)"
                     ></b-form-input>
 
@@ -674,7 +674,7 @@
 
                     <div class="table-responsive">
                       <div v-if="loader" class="text-center mt-12 pt-12">
-                        <b-spinner variant="primary" :label="$t('network.Spinning')"></b-spinner>
+                        <b-spinner variant="primary" :label="$t('messaging.Spinning')"></b-spinner>
                       </div>
                       <table v-else class="table">
                         <thead>

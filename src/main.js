@@ -98,9 +98,9 @@ import Lightbox from '@morioh/v-lightbox';
 import * as VueGoogleMaps from 'gmap-vue';
 
 
-import VueSplide from "@splidejs/vue-splide";
-Vue.use(VueSplide);
-import "@splidejs/splide/dist/css/themes/splide-default.min.css";
+// import VueSplide from "@splidejs/vue-splide";
+// Vue.use(VueSplide);
+// import "@splidejs/splide/dist/css/themes/splide-default.min.css";
 
 
 // global register
@@ -158,6 +158,7 @@ Vue.use(VueLoading);
 
 import VueAgile from 'vue-agile';
 
+
 Vue.use(VueAgile);
 
 Vue.use(VueSocialSharing);
@@ -174,10 +175,9 @@ import VueEasyLightbox from 'vue-easy-lightbox';
 
 // Method 1. via Vue.use
 Vue.use(VueEasyLightbox);
-
 Vue.config.productionTip = false;
-var user = null;
 
+var user = null;
 
 
 new Vue({

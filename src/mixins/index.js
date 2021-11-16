@@ -8,7 +8,7 @@ import NotFound from "@/components/NotFoundComponent"
 import NoMoreData from "@/components/businessOwner/PaginationMessage"
 import ClipLoader from 'vue-spinner/src/ClipLoader.vue'
 
-//import  {initPusher} from '@/pusher-notification';
+// import './pusher-notification';
 import { initRedis } from '@/redis-notification'
 
 export const FireBase = {
@@ -46,14 +46,6 @@ export const FireBase = {
       this.subject = subject;
 
       const message = `<span><b>${this.from}</b></span><br>${this.subject}`;
-
-      // this.$notify({
-      //   group: 'foo',
-      //   type: 'success',
-      //   title: this.title,
-      //   text: message,
-      //   duration: 5000,
-      // });
     },
   },
 
@@ -353,14 +345,12 @@ export const Pusher = {
 }
 
 export const Redis = {
-  data: () => ({
-    $event: null,
-  }),
 
   computed: {
     ...mapGetters({
-      authToken: 'auth/getAuthToken'
-    }),
+      profile: 'auth/profilConnected',
+      token: 'auth/getAuthToken'
+    })
   },
 
   methods: {
@@ -368,10 +358,13 @@ export const Redis = {
       newNotificationBusiness: "notification/NEW_BUSINESS_NOTIFICATION",
       newNotificationProfile: "notification/NEW_PROFILE_NOTIFICATION",
       newNotificationNetwork: "notification/NEW_NETWORK_NOTIFICATION",
+      auth: 'auth/profilConnected',
     }),
 
-    lauchRedis() {
-      initRedis(this.authToken)
+    async getAuth() {
+      const response = await this.$repository.share.WhoIsConnect({ networkId: null });
+
+      if (response.success) this.auth(response.data);
     },
 
     initBusinessNotification: async function () {
@@ -381,34 +374,34 @@ export const Redis = {
     },
 
     redis() {
-      this.lauchRedis()
-      console.log("call echo redis")
-      window.Redis.channel('user.545')
-        .listen(".UserEvent", payload => {
+      const $event = `business-channel${this.profile.id}`
+      window.Redis.private($event)
+        .listen(".BusinessNotificationEvent", payload => {
           console.log(payload)
         })
+    },
+
+    init: async function () {
+      if (this.profile) {
+        initRedis(this.token)
+        await this.getAuth()
+        this.redis()
+      }
     }
   },
 
   created() {
-    this.initBusinessNotification()
-    this.redis()
-
+    this.init()
     this.$store.watch(
-      () => this.authToken,
-      () => console.log('ok change'),
-      {
-        deep: true
-      }
-    )
+      state => state.auth.user.accessToken,
+      () => initRedis(this.token),
+      { deep: true }
+    );
   }
 }
 
-
 export const FirebaseNotification = {
-
   methods: {
-
     notified() {
       // try {
       //   firebase

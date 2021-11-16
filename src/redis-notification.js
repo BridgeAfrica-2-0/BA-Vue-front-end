@@ -1,18 +1,15 @@
-import Echo from "laravel-echo";
-import { getRootSchemeForRedis } from "@/helpers"
-
-
+import Echo from 'laravel-echo';
+window.io = require('socket.io-client')
 
 export const initRedis = (token) => {
-  window.io = require('socket.io-client')
+  console.log("Init redis")
   window.Redis = new Echo({
-    broadcaster: "socket.io",
-    host: `${getRootSchemeForRedis()}:6601`,
+    broadcaster: 'socket.io',
+    host: 'https://28fa-154-72-150-64.ngrok.io',
     auth: {
       headers: {
-        authorization: token
-      }
-    }
+        Authorization: token,
+      },
+    },
   });
 }
-

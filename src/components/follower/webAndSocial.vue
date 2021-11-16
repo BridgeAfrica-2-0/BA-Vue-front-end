@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b class="social">Web & Soial Links</b>
+    <b class="social">{{ $t('profilefollower.Web_Soial_Links') }}</b>
     <hr />
     
 

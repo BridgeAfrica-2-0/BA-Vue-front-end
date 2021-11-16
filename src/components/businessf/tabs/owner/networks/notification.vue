@@ -166,8 +166,11 @@ export default {
   },
   
   computed: {
+    // notifications() {
+    //   return this.$store.state.networkNotification.notifications;
+    // },
     notifications() {
-      return this.$store.state.networkNotification.notifications;
+      return this.$store.getters['notification/getters/networks'];
     },
   },
 

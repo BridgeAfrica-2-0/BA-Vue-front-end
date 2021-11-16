@@ -398,9 +398,7 @@ height: 10px;
   font-size: 10px !important;
   margin-left: -15px;
 } 
-.m{
-  /* margin-left: 10px; */
-}
+
 .ligne{
   width: 100%;
 }
@@ -475,11 +473,7 @@ height: 10px;
 
 @media only screen and (min-width: 400px) {
 
-  
-
-  .size {
-    /* width: 70px; */
-  }
 
 }
+
 </style>

@@ -6,8 +6,8 @@
       :id="modal"
       modal="modal-1"
       :isActivated="strategy"
-      title="Share to people"
-      placeholder="Search for people..."
+      :title="$t('search.Share_to_people')"
+      :placeholder="$t('search.Search_for_people')"
       subtitle="All peoples"
       :type="type"
       :post="post"
@@ -18,8 +18,8 @@
       :id="modal"
       modal="modal-2"
       :isActivated="strategy"
-      title="Share to network"
-      placeholder="Search for network..."
+      :title="$t('search.Share_to_network')"
+      :placeholder="$t('search.Search_for_network')"
       subtitle="All networks"
       :type="type"
       :post="post"
@@ -28,7 +28,7 @@
         <div class="d-flex align-items-center py-3 px-2 mb-2 border">
           <b-avatar class="mr-3"></b-avatar>
           <p>
-            <span class="mr-auto">Share Post As ...</span><br />
+            <span class="mr-auto">{{$t("search.Share_Post_As")}}</span><br />
             <span class="mr-auto">J. Circlehead</span>
           </p>
         </div>
@@ -40,8 +40,8 @@
       :id="modal"
       modal="modal-5"
       :isActivated="strategy"
-      title="Send Inbox"
-      placeholder="Search for network..."
+      :title="$t('search.Send_Inbox')"
+      :placeholder="$t('search.Search_for_network')"
       subtitle="All networks"
       :type="type"
       :post="post"
@@ -51,7 +51,7 @@
           <div class="d-flex align-items-center py-3 px-2 mb-2">
             <b-avatar class="mr-3"></b-avatar>
             <p>
-              <span class="mr-auto">Share Post As ...</span><br />
+              <span class="mr-auto">{{$t("search.Share_Post_As")}} </span><br />
               <span class="mr-auto">2h</span>
             </p>
           </div>
@@ -72,8 +72,8 @@
     <Box
       :id="modal"
       modal="modal-3"
-      title="Share business"
-      placeholder="Search for business..."
+      :title="$t('search.Share_business')"
+      :placeholder="$t('search.Search_for_business')"
       subtitle="All business"
       :type="type"
       :post="post"
@@ -83,7 +83,7 @@
         <div class="d-flex align-items-center py-3 px-2 mb-2 border">
           <b-avatar class="mr-3"></b-avatar>
           <p>
-            <span class="mr-auto">Share Post As ...</span><br />
+            <span class="mr-auto">{{$t("search.Share_Post_As")}}</span><br />
             <span class="mr-auto">J. Circlehead</span>
           </p>
         </div>
@@ -105,7 +105,7 @@
         <fas-icon class="primary ml-3" icon="['fas', 'share']" />
       </template>
 
-      <b-dropdown-text class="box-title"> Share </b-dropdown-text>
+      <b-dropdown-text class="box-title"> {{$t("search.Share")}} </b-dropdown-text>
 
       <b-dropdown-item
         class="d-flex py-2 cursor-pointer"
@@ -115,7 +115,7 @@
           <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
         </span>
         <div class="d-flex flex-column ml-1">
-          <span>Share to your Profile</span>
+          <span>{{$t("search.Share_to_your_Profile")}}</span>
         </div>
       </b-dropdown-item>
 
@@ -127,7 +127,7 @@
           <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
         </span>
         <div class="d-flex flex-column ml-1">
-          <span>Share to News Feed</span>
+          <span>{{$t("search.Share_to_News_Feed")}}</span>
         </div>
       </b-dropdown-item>
 
@@ -140,7 +140,7 @@
           <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
         </span>
         <div class="d-flex flex-column ml-1">
-          <span>Share to Network</span>
+          <span>{{$t("search.Share_to_Network")}}</span>
         </div>
       </b-dropdown-item>
 
@@ -153,7 +153,7 @@
           <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
         </span>
         <div class="d-flex flex-column ml-1">
-          <span>Share to Business</span>
+          <span>{{$t("search.Share_to_Business")}}</span>
         </div>
       </b-dropdown-item>
 
@@ -168,7 +168,7 @@
           <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
         </span>
         <div class="d-flex flex-column ml-1">
-          <span>Share to commnunity</span>
+          <span>{{$t("search.Share_to_commnunity")}}</span>
         </div>
       </b-dropdown-item>
 
@@ -182,7 +182,7 @@
               <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
             </span>
             <div class="d-flex flex-column ml-3">
-              <span>Share to People</span>
+              <span>{{$t("search.Share_to_People")}}</span>
             </div>
           </div>
 
@@ -195,7 +195,7 @@
               <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
             </span>
             <div class="d-flex flex-column ml-3">
-              <span>Share to Network</span>
+              <span>{{$t("search.Share_to_Network")}}</span>
             </div>
           </div>
 
@@ -208,7 +208,7 @@
               <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
             </span>
             <div class="d-flex flex-column ml-3">
-              <span>Share to Business</span>
+              <span>{{$t("search.Share_to_Business")}}</span>
             </div>
           </div>
         </div>
@@ -219,7 +219,7 @@
           <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
         </span>
         <div class="d-flex flex-column ml-1">
-          <span>Copy link</span>
+          <span>{{$t("search.Copy_link")}}</span>
         </div>
       </b-dropdown-item>
 
@@ -234,7 +234,7 @@
           <b-icon-share-fill class="col-bg"></b-icon-share-fill>
         </span>
         <div class="d-flex flex-column ml-1">
-          <span>Share via</span>
+          <span>{{$t("search.Share_via")}}</span>
         </div>
       </b-dropdown-item>
       <b-popover target="sharing-via" triggers="hover" placement="left">
@@ -246,7 +246,7 @@
               <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
             </span>
             <div class="d-flex flex-column ml-3">
-              <span>Share to your profile</span>
+              <span>{{$t("search.Share_to_your_profile")}}</span>
             </div>
           </div>
 
@@ -257,7 +257,7 @@
               <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
             </span>
             <div class="d-flex flex-column ml-3">
-              <span>Share to network</span>
+              <span>{{$t("search.Share_to_network")}}</span>
             </div>
           </div>
 
@@ -268,7 +268,7 @@
               <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
             </span>
             <div class="d-flex flex-column ml-3">
-              <span>Share to your business</span>
+              <span>{{$t("search.Share_to_your_business")}}</span>
             </div>
           </div>
         </div>

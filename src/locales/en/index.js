@@ -10,6 +10,7 @@ import welcome from './welcome.json'
 import dashboard from './dashboard.json'
 import profileowner from './profileowner.json'
 import {network} from './network.json'
+import {messaging} from './messaging.json'
 
 export const defaultLocale = 'en'
 
@@ -25,4 +26,5 @@ export const en = {
     profileowner: profileowner,
     welcome: welcome,
     network:network,
+    messaging: messaging,
 }

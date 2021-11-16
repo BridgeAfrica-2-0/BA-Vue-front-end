@@ -743,6 +743,7 @@ export default {
       search: '',
       chatSearchKeyword: '',
       tabIndex: 2,
+      type:'',
 
       // socket: io("https://ba-chat-server.herokuapp.com", {
       //   transports: ["websocket", "polling", "flashsocket"],
@@ -837,6 +838,9 @@ export default {
     };
   },
   computed: {
+    ctaSelected() {
+      return this.$store.getters['businessChat/getSelectedChat'];
+    },
     chatId() {
       return this.$store.getters['businessChat/getSelectedChatId'];
     },
@@ -851,10 +855,6 @@ export default {
     },
     chatList() {
       return this.$store.getters['businessChat/getChatList'];
-    },
-
-    type() {
-      return this.$store.getters['businessChat/getChatType'];
     },
 
     currentUser() {
@@ -887,14 +887,17 @@ export default {
     },
   },
   mounted() {
-    // if (this.chatList) {
-    // this.getChatList({ type: 'business' });
-    // } else console.log('chatlist Not empty!');
+    if (this.chatList) {
+    this.getChatList({ type: this.type });
+    } 
   },
   async created() {
     this.$store.commit('businessChat/setCurrentBizId', this.$route.params.id);
     await this.getBizs();
-    this.tabIndex = this.$route.query.msgTabId
+    this.tabIndex = this.$route.query.msgTabId;
+    if (this.tabIndex) {
+      this.selectedChat({ chat: this.ctaSelected, id: this.ctaSelected.id });
+    }
 
     if (this.tabIndex == 1) {
       this.getChatList({ type: 'business' });

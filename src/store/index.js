@@ -31,6 +31,7 @@ import UserProfileOwner from "./UserProfileOwner"
 import { search } from "./search";
 import userChat from "./messaging/user";
 import businessChat from "./messaging/business";
+import networkChat from "./messaging/network";
 import businessSettingInfo from "./businessSettingInfo"
 import networkProfileCommunitySidebar from "./networkProfileCommunitySidebar";
 import networkProfileFeedback from "./networkProfileFeedback";
@@ -63,6 +64,7 @@ export default new Vuex.Store({
         search,
         UserProfileOwner,
         userChat,
+        networkChat,
         businessChat,
         businessGeneral,
         businessRole,

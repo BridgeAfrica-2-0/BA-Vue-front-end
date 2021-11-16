@@ -37,10 +37,6 @@ export default {
         getChatList(state) {
             return state.chatList;
         },
-
-        getSelectedChatId(state) {
-            return state.selectedChatId;
-        },
         getSelectedChat(state) {
             return state.selectedChat;
         },
@@ -85,9 +81,7 @@ export default {
             state.chatList = data
         },
 
-        setSelectedChatId(state, data) {
-            state.selectedChatId = data
-        },
+
         setSelectedChat(state, data) {
             state.selectedChat = data
         },
@@ -132,7 +126,7 @@ export default {
             let keyword = data.keyword ? '/' + data.keyword : ''
 
             if (data.type == 'user') {
-                axios.get(`/messages/businessUser/${state.currentBizId+keyword}`)
+                axios.get(`/messages/networkUser/${state.currentBizId+keyword}`)
                     .then((res) => {
                         commit("setLoader", false);
                         console.log("business chat list: ", res.data.data);
@@ -144,8 +138,8 @@ export default {
                         commit("setLoader", false);
                         console.log(err);
                     })
-            } else if (data.type == 'business') {
-                axios.get(`/messages/businessListing/${state.currentBizId + keyword}`)
+            } else if (data.type == 'network') {
+                axios.get(`/messages/networkListing/${state.currentBizId + keyword}`)
                     .then((res) => {
                         commit("setLoader", false);
                         console.log("Business chat list: ", res.data.data);
@@ -158,7 +152,7 @@ export default {
                         console.log(err);
                     })
             } else {
-                axios.get(`/messages/businessNetwork/${state.currentBizId + keyword}`)
+                axios.get(`/messages/networkBusiness/${state.currentBizId + keyword}`)
                     .then((res) => {
                         commit("setLoader", false);
                         console.log("Business chat list: ", res.data.data);
@@ -179,8 +173,8 @@ export default {
             commit("setUsers", []);
             console.log("[DEBUG]", data);
 
-            if (data.type == 'business') {
-                axios.post(`/messages/BusinesstoBusiness`, data)
+            if (data.type == 'network') {
+                axios.post(`/messages/NetworktoNetwork`, data)
                     .then((res) => {
                         console.log("Message saved...", res.data.data);
                     })
@@ -188,7 +182,7 @@ export default {
                         console.log(err);
                     })
             } else if (data.type == 'user') {
-                axios.post(`/messages/BusinesstoUser`, data)
+                axios.post(`/messages/NetworktoUser`, data)
                     .then((res) => {
                         console.log("Message saved...", res.data.data);
                     })
@@ -196,7 +190,7 @@ export default {
                         console.log(err);
                     })
             } else {
-                axios.post(`/messages/BusinesstoNetwork`, data)
+                axios.post(`/messages/NetworktoBusiness`, data)
                     .then((res) => {
                         console.log("Message saved...", res.data.data);
                     })
@@ -211,7 +205,7 @@ export default {
             console.log("[DEBUG] user to user", data);
             let keyword = data.keyword ? '/' + data.keyword : ''
 
-            await axios.get(`/messages/${state.currentBizId}/business/${data.receiverID + keyword}`)
+            await axios.get(`/messages/${state.currentBizId}/network/${data.receiverID + keyword}`)
                 .then((res) => {
                     commit("setLoader", false);
                     console.log("Business to business: ", res.data.data);
@@ -227,7 +221,7 @@ export default {
             console.log("[DEBUG] user to business", data);
             let keyword = data.keyword ? '/' + data.keyword : ''
 
-            await axios.get(`/messages/business/${state.currentBizId}/user/${data.receiverID + keyword}`)
+            await axios.get(`/messages/network/${state.currentBizId}/user/${data.receiverID + keyword}`)
                 .then((res) => {
                     commit("setLoader", false);
                     console.log("User to business: ", res.data.data);
@@ -244,7 +238,7 @@ export default {
             let keyword = data.keyword ? '/' + data.keyword : ''
 
 
-            await axios.get(`/messages/business/${state.currentBizId}/network/${data.receiverID + keyword}`)
+            await axios.get(`/messages/network/${state.currentBizId}/business/${data.receiverID + keyword}`)
                 .then((res) => {
                     commit("setLoader", false);
                     console.log("User to network: ", res.data.data);

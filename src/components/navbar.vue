@@ -586,12 +586,15 @@ export default {
       hasLauchNetworkRequest: 'social/INIT',
       user: 'auth/profilConnected',
     }),
+    activeAccount() {
+      return this.$store.getters['auth/profilConnected'];
+    }
   },
 
   created() {
     this.init();
     this.getUsers();
-
+    console.log("Active connected", this.activeAccount);
   },
 
   methods: {

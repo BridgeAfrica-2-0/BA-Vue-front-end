@@ -75,6 +75,7 @@
                   size="sm"
                   class="b-background shadow"
                   variant="primary"
+                  @click="cta_business(value)"
                 >
                   <i class="fas fa-envelope fa-lg btn-icon"></i>
                   <span class="btn-text">Message</span>
@@ -129,6 +130,13 @@ export default {
     business_around() {
       return this.$store.state.auth.businessAround;
     }
+  },
+  methods:{
+    cta_business(data) {
+      console.log(data);
+      this.$store.commit("businessChat/setSelectedChat", data)
+      this.$router.push({ path: '/business_owner/2', query: { tabId: 1, msgTabId: 1 } });
+    },
   }
 };
 </script>

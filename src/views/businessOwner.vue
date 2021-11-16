@@ -85,7 +85,7 @@ export default {
     };
   },
   created(){
-    this.selectedId = this.$route.query.tabId
+    this.selectedId = this.$route.query.tabId ? this.$route.query.tabId:'0'
   },
 
   methods: {

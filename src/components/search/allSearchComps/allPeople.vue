@@ -68,6 +68,7 @@
                           variant="primary"
                           size="sm"
                           class="b-background flexx pobtn shadow"
+                          @click="cta_business(user.user)"
                         >
                           <i class="fas fa-envelope   fa-lg btn-icon "></i>
                           <span class="btn-text">Message</span>
@@ -111,10 +112,30 @@ export default {
     users() {
       return this.$store.getters["allSearch/getPeoples"];
     },
+    activeAccount() {
+      return this.$store.getters['auth/profilConnected'];
+    },
     loader() {
       return this.$store.getters["allSearch/getLoader"];
     },
   },
+  methods:{
+    cta_business(data) {
+      console.log(data);
+      this.$store.commit('businessChat/setSelectedChat', data);
+      
+      let path = '';
+      if (this.activeAccount.user_type == 'business') {
+        path = '/business_owner/' + this.activeAccount.id;
+      } else if (this.activeAccount.user_type == 'network') {
+        path = '/';
+      } else path = '/messaging';
+
+      // this.$router.push({ path: `${path}`, query: { tabId: 1, msgTabId: 1 } });
+      this.$router.push({ path: `/business_owner/${this.activeAccount.id}`, query: { tabId: 1, msgTabId: 0 } });
+
+    },
+  }
 };
 </script>
 

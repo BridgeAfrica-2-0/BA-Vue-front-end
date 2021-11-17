@@ -281,7 +281,7 @@ export default {
         this.indeterminate = true;
         this.flashMessage.show({
           status: "success",
-          message: "Marked As Read"
+          message: "Notification(s) Deleted"
         });
       })
       .catch(err => {
@@ -289,7 +289,7 @@ export default {
         this.indeterminate = true;
         this.flashMessage.show({
           status: "error",
-          message: "Unable To Mark As Read"
+          message: "Unable To Deleted Notification(s)"
         });
       });
 		},

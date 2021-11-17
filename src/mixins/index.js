@@ -380,7 +380,9 @@ export const Redis = {
     redis() {
       console.log("call echo redis");
       // const $event = `user.${this.profile.id}`
-      const $event = `business-channel.${this.profile.id}`
+      const $event = `business-channel.${this.profile.id}`;
+      console.log("$event", $event);
+      console.log(window.Redis.private($event));
       // window.Redis.channel($event)
       window.Redis.private($event)
         .listen(".BusinessNotificationEvent", payload => {
@@ -388,6 +390,7 @@ export const Redis = {
           console.log("payload")
           console.log(payload)
         })
+        console.log("end echo redis");
     }
   },
 

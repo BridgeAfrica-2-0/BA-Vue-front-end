@@ -450,8 +450,10 @@
                 <div v-if="loader" class="text-center mt-12 pt-12">
                   <b-spinner variant="primary" label="Spinning" class="spinner centralizer"></b-spinner>
                 </div>
-                <div v-else v-for="(chat,index) in chats" :key="index">
-                  <div v-if="2 != chat.sender_business_id">
+                <div v-else v-for="(chat, index) in chats" :key="index">
+                  {{chat}}
+                  <br><br>
+                  <div v-if="currentBizId != chat.sender_network_id">
                     <b-row class="p-4">
                       <b-col>
                         <p v-if="chat.attachment" class="msg-text mt-0 text">
@@ -464,7 +466,7 @@
                           </small>
                         </p>
                         <p v-if="chat.message" class="msg-text mt-0 text">
-                          {{ chat.message }}<b> ->///{{ chat.sender_business_id }}</b>
+                          {{ chat.message }}<b> ->///{{ chat.sender_network_id }}</b>
                           <small class="float-right mt-2 text-white pr-1 pt-1">
                             {{ chat.created_at }}
                           </small>
@@ -485,7 +487,7 @@
                           </small>
                         </p>
                         <p v-if="chat.message" id="sent" class="msg-text-sent text">
-                          {{ chat.message }} ->///{{ chat.sender_business_id }}
+                          {{ chat.message }} ->///{{ chat.sender_network_id }}
                           <small class="float-right mt-2 text-white pr-1 pt-1">
                             {{ getCreatedAt(chat.created_at) }}
                           </small>
@@ -744,7 +746,7 @@ export default {
       chatSearchKeyword: '',
       tabIndex: 0,
       type: '',
-      chatId:null,
+      chatId: null,
 
       // socket: io("https://ba-chat-server.herokuapp.com", {
       //   transports: ["websocket", "polling", "flashsocket"],
@@ -773,12 +775,14 @@ export default {
     ctaSelected() {
       return this.$store.getters['networkChat/getSelectedChat'];
     },
-    
+
     currentBizId() {
       return this.$store.getters['networkChat/getCurrentBizId'];
     },
     currentBiz() {
-      return this.$store.getters['networkChat/getCurrentBiz'];
+      // return this.$store.getters['networkChat/getCurrentBiz'];
+      return this.$store.getters['auth/profilConnected'];
+
     },
     bizs() {
       return this.$store.getters['networkChat/getBizs'];
@@ -788,7 +792,8 @@ export default {
     },
 
     currentUser() {
-      return this.$store.getters['userChat/getUser'];
+      // return this.$store.getters['userChat/getUser'];
+      return this.$store.getters['auth/profilConnected'];
     },
     users() {
       return this.$store.getters['userChat/getUsers'];
@@ -880,10 +885,10 @@ export default {
       this.file = '';
       this.filePreview = false;
     },
-    createRoom(receiver_business_id) {
+    createRoom(receiver_network_id) {
       // let sender_business_id = this.currentUser.user.id;
-      let sender_business_id = this.currentBizId;
-      this.room = [receiver_business_id, sender_business_id];
+      let sender_network_id = Number(this.currentBizId);
+      this.room = [receiver_network_id, sender_network_id];
       console.log('ROOMS: ', this.room);
       this.socket.emit('create-biz', this.room);
     },
@@ -989,9 +994,9 @@ export default {
       this.socket.emit('privateMessage', {
         type: this.type,
         message: this.input,
-        sender_business_id: this.currentBizId,
+        sender_network_id: Number(this.currentBizId),
         room: this.room,
-        receiver_business_id: this.chatSelected.id,
+        receiver_network_id: this.chatSelected.id,
         receiver_id: this.chatId,
         attachment: this.file,
       });

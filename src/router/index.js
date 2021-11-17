@@ -47,8 +47,6 @@ import dashboard from "@/views/dashboard";
 import myorders from "@/views/myOders"
 import notFound from "@/components/404"
 
-
-
 import welcome from "@/views/welcome";
 import payment from "@/views/payment";
 

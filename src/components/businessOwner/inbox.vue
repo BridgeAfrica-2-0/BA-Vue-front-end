@@ -858,7 +858,8 @@ export default {
     },
 
     currentUser() {
-      return this.$store.getters['userChat/getUser'];
+      // return this.$store.getters['userChat/getUser'];
+      return this.$store.getters['auth/profilConnected'];
     },
     users() {
       return this.$store.getters['userChat/getUsers'];

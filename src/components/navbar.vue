@@ -601,7 +601,7 @@ export default {
     ...mapActions({
       setNetworks: 'social/FIND_USER_NETWORK',
       setBusiness: 'social/FIND_USER_BUSNESS',
-      lauchNetworkRequest: 'social/INIT',
+      lauchNetworkRequest: 'social/INIT'
     }),
     toggleinfput() {
       this.$refs.mobileinput.style.display = 'block';
@@ -610,10 +610,6 @@ export default {
     getUsers() {
       this.$store
         .dispatch("userChat/GET_USERS",'')
-        .then(() => {
-          console.log("->[Data logged]<-");
-        })
-        .catch(() => console.log("error"));
     },
     toggleinput() {
       this.$refs.mobileinput.style.display = "block";

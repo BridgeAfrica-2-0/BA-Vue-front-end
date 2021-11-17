@@ -1,15 +1,10 @@
 <template>
   <div>
-    <div style="overflow-y: scroll;" class="s-cardd">
-
+    <div style="overflow-y: scroll" class="s-cardd">
       <div v-for="people in peoples" :key="people.id" class="people-style border shadow">
         <b-row class="mb-1">
           <b-col md="3" cols="4" lg="3" class="my-auto">
-            <b-avatar
-              class="p-avater"
-              variant="primary"
-              :src="people.profile_picutre"
-            ></b-avatar>
+            <b-avatar class="p-avater" variant="primary" :src="people.profile_picutre"></b-avatar>
           </b-col>
 
           <b-col md="8" cols="8" lg="8">
@@ -20,18 +15,12 @@
                     <b-row>
                       <b-col md="6" lg="6" cols="6" sm="6" class="mt-lg-2">
                         <div class="mt-2 mt-lg-0 mt-xl-0 username">
-                          <b> {{people.name}} </b>
+                          <b> {{ people.name }} </b>
                         </div>
                       </b-col>
 
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="6"
-                        class="mt-3 mt-lg-2 mt-xl-2"
-                      >
-                        <h6 class="follower">{{people.followers}} Community</h6>
+                      <b-col md="6" lg="6" cols="6" sm="6" class="mt-3 mt-lg-2 mt-xl-2">
+                        <h6 class="follower">{{ people.followers }} Community</h6>
                       </b-col>
                     </b-row>
                   </div>
@@ -45,16 +34,11 @@
                           block
                           variant="primary"
                           size="sm"
-                          class="
-                            b-background
-                            flexx
-                            pobtn
-                            shadow
-                            mr-lg-3 mr-xl-3
-                          "
+                          class="b-background flexx pobtn shadow mr-lg-3 mr-xl-3"
+                          @click="cta(people)"
                         >
                           <i class="fas fa-envelope fa-lg btn-icon"></i>
-                          <span class="btn-text">Message</span>
+                          <span class="btn-text">Messagehgk</span>
                         </b-button>
                       </b-col>
 
@@ -62,13 +46,7 @@
                         <b-button
                           block
                           size="sm"
-                          class="
-                            b-background
-                            flexx
-                            pobtn
-                            shadow
-                            mr-lg-3 mr-xl-3
-                          "
+                          class="b-background flexx pobtn shadow mr-lg-3 mr-xl-3"
                           variant="primary"
                         >
                           <i class="fas fa-user-plus fa-lg btn-icon"></i>
@@ -83,8 +61,6 @@
           </b-col>
         </b-row>
       </div>
-
-      
     </div>
     <!-- {{peoples}} -->
   </div>
@@ -92,7 +68,33 @@
 
 <script>
 export default {
-  props: ["peoples"],
+  props: ['peoples'],
+  computed: {
+    activeAccount() {
+      return this.$store.getters['auth/profilConnected'];
+    },
+    selectedChat() {
+      return this.$store.getters['businessChat/getSelectedChat'];
+    },
+  },
+  methods: {
+    cta(data) {
+      console.log(data);
+      this.$store.commit('businessChat/setSelectedChat', data);
+      // console.log('selected tab:', this.selectedChat);
+
+
+      let path = '';
+      if (this.activeAccount.user_type == 'business') {
+        path = '/business_owner/' + this.activeAccount.id;
+      } else if (this.activeAccount.user_type == 'network') {
+        path = '/';
+      } else path = '/messaging';
+
+      // this.$router.push({ path: `${path}`, query: { tabId: 1, msgTabId: 1 } });
+      this.$router.push({ path: `/business_owner/${this.activeAccount.id}`, query: { tabId: 1, msgTabId: 1 } });
+    },
+  },
 };
 </script>
 

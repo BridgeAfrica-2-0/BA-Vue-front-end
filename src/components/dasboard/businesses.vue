@@ -19,82 +19,43 @@
                 {{ item.category }}
                 <br />
                 {{ count(item.followers) }}
-                {{ $t("business.community") }} <br />
+                {{ $t('business.community') }} <br />
 
-                <span class="location">
-                  <b-icon-geo-alt class="ico"></b-icon-geo-alt
-                  >{{ item.country }}
-                </span>
+                <span class="location"> <b-icon-geo-alt class="ico"></b-icon-geo-alt>{{ item.country }} </span>
                 <br />
-       <read-more
-              more-str="read more"
-              class="readmore"
-              :text="item.about_business"
-              link="#"
-              less-str="read less"
-              :max-chars="20"
-            >
-            </read-more>
+                <read-more
+                  more-str="read more"
+                  class="readmore"
+                  :text="item.about_business"
+                  link="#"
+                  less-str="read less"
+                  :max-chars="20"
+                >
+                </read-more>
               </p>
             </b-col>
 
             <b-col lg="12" xl="4" md="4" cols="12" sm="4">
               <div class="s-button">
                 <b-row>
-                  <b-col
-                    md="12"
-                    lg="4"
-                    xl="12"
-                    sm="12"
-                    cols="4"
-                    class="mt-2 text-center"
-                  >
-                    <b-button
-                      block
-                      size="sm"
-                      class="b-background shadow "
-                      variant="primary"
-                    >
-                      <i class="fas fa-user-plus  fa-lg btn-icon "></i>
-                      <span class="btn-com">{{ $t("business.community") }}</span>
+                  <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2 text-center">
+                    <b-button block size="sm" class="b-background shadow" variant="primary">
+                      <i class="fas fa-user-plus fa-lg btn-icon"></i>
+                      <span class="btn-com">{{ $t('business.community') }}</span>
                     </b-button>
                   </b-col>
 
-                  <b-col
-                    md="12"
-                    lg="4"
-                    xl="12"
-                    sm="12"
-                    cols="4"
-                    class="mt-2 text-center"
-                  >
-                    <b-button
-                      block
-                      size="sm"
-                      class="b-background shadow "
-                      variant="primary"
-                    >
-                      <i class="fas fa-envelope   fa-lg btn-icon "></i>
-                      <span class="btn-text">{{ $t("business.messages") }}</span>
+                  <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2 text-center">
+                    <b-button block size="sm" class="b-background shadow" variant="primary" @click="cta(item)">
+                      <i class="fas fa-envelope fa-lg btn-icon"></i>
+                      <span class="btn-text">{{ $t('business.messages') }}</span>
                     </b-button>
                   </b-col>
 
-                  <b-col
-                    md="12"
-                    lg="4"
-                    xl="12"
-                    sm="12"
-                    cols="4"
-                    class="mt-2 text-center"
-                  >
-                    <b-button
-                      block
-                      size="sm"
-                      class="b-background shadow "
-                      variant="primary"
-                    >
-                      <i class="fas fa-map-marked-alt  fa-lg btn-icon "></i>
-                      <span class="btn-text">{{ $t("business.direction") }}</span>
+                  <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2 text-center">
+                    <b-button block size="sm" class="b-background shadow" variant="primary">
+                      <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
+                      <span class="btn-text">{{ $t('business.direction') }}</span>
                     </b-button>
                   </b-col>
                 </b-row>
@@ -109,7 +70,7 @@
 
 <script>
 export default {
-  props: ["title", "image", "business"],
+  props: ['title', 'image', 'business'],
   data() {
     return {
       options: {
@@ -118,21 +79,39 @@ export default {
         perPage: 1,
         pagination: false,
 
-        type: "loop",
-        perMove: 1
-      }
+        type: 'loop',
+        perMove: 1,
+      },
     };
   },
+  computed: {
+    activeAccount() {
+      return this.$store.getters['auth/profilConnected'];
+    }
+  },
   methods: {
+     cta(data) {
+      console.log(data);
+      this.$store.commit('businessChat/setSelectedChat', data);
+      let path = '';
+      if (this.activeAccount.user_type == 'business') {
+        path = '/business_owner/' + this.activeAccount.id;
+      } else if (this.activeAccount.user_type == 'network') {
+        path = '/';
+      } else path = '/messaging';
+
+      // this.$router.push({ path: `${path}`, query: { tabId: 1, msgTabId: 1 } });
+      this.$router.push({ path: `/business_owner/${this.activeAccount.id}`, query: { tabId: 1, msgTabId: 0 } });
+    },
     count(number) {
       if (number >= 1000000) {
-        return number / 1000000 + "M";
+        return number / 1000000 + 'M';
       }
       if (number >= 1000) {
-        return number / 1000 + "K";
+        return number / 1000 + 'K';
       } else return number;
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -203,13 +182,13 @@ export default {
     color: black;
 
     line-height: 35px;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
 
   .textt {
     color: #000;
 
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 12px;
     line-height: 30px;
@@ -256,13 +235,13 @@ export default {
     color: black;
 
     line-height: 35px;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
 
   .textt {
     color: #000;
 
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;

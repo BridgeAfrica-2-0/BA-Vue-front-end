@@ -13,88 +13,49 @@
                 </splide>
               </div>
             </b-col>
-            <b-col md="5" cols="7" lg="7" xl="5" sm="5">  
+            <b-col md="5" cols="7" lg="7" xl="5" sm="5">
               <p class="textt">
                 <strong class="title"> {{ item.name }} </strong> <br />
                 {{ item.category }}
                 <br />
                 {{ count(item.followers) }}
-                {{ $t("business.community")}} <br />
+                {{ $t('business.community') }} <br />
 
-                <span class="location">
-                  <b-icon-geo-alt class="ico"></b-icon-geo-alt
-                  >{{ item.country }}
-                </span>
+                <span class="location"> <b-icon-geo-alt class="ico"></b-icon-geo-alt>{{ item.country }} </span>
                 <br />
-       <read-more
-              more-str="read more"
-              class="readmore"
-              :text="item.about_business"
-              link="#"
-              less-str="read less"
-              :max-chars="35"
-            >
-            </read-more>
+                <read-more
+                  more-str="read more"
+                  class="readmore"
+                  :text="item.about_business"
+                  link="#"
+                  less-str="read less"
+                  :max-chars="35"
+                >
+                </read-more>
               </p>
             </b-col>
 
             <b-col lg="12" xl="4" md="4" cols="12" sm="4">
               <div class="s-button">
                 <b-row>
-                  <b-col
-                    md="12"
-                    lg="4"
-                    xl="12"
-                    sm="12"
-                    cols="4"
-                    class="mt-2 text-center"
-                  >
-                    <b-button
-                      block
-                      size="sm"
-                      class="b-background shadow "
-                      variant="primary"
-                    >
-                      <i class="fas fa-user-plus  fa-lg btn-icon "></i>
-                      <span class="btn-com">{{ $t("business.community")}}</span>
+                  <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2 text-center">
+                    <b-button block size="sm" class="b-background shadow" variant="primary">
+                      <i class="fas fa-user-plus fa-lg btn-icon"></i>
+                      <span class="btn-com">{{ $t('business.community') }}</span>
                     </b-button>
                   </b-col>
 
-                  <b-col
-                    md="12"
-                    lg="4"
-                    xl="12"
-                    sm="12"
-                    cols="4"
-                    class="mt-2 text-center"
-                  >
-                    <b-button
-                      block
-                      size="sm"
-                      class="b-background shadow "
-                      variant="primary"
-                    >
-                      <i class="fas fa-envelope   fa-lg btn-icon "></i>
-                      <span class="btn-text">{{ $t("business.messages")}}</span>
+                  <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2 text-center">
+                    <b-button block size="sm" class="b-background shadow" variant="primary" @click="cta(item)">
+                      <i class="fas fa-envelope fa-lg btn-icon"></i>
+                      <span class="btn-text">{{ $t('business.messages') }}</span>
                     </b-button>
                   </b-col>
 
-                  <b-col
-                    md="12"
-                    lg="4"
-                    xl="12"
-                    sm="12"
-                    cols="4"
-                    class="mt-2 text-center"
-                  >
-                    <b-button
-                      block
-                      size="sm"
-                      class="b-background shadow "
-                      variant="primary"
-                    >
-                      <i class="fas fa-map-marked-alt  fa-lg btn-icon "></i>
-                      <span class="btn-text">{{ $t("business.direction")}}</span>
+                  <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2 text-center">
+                    <b-button block size="sm" class="b-background shadow" variant="primary">
+                      <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
+                      <span class="btn-text">{{ $t('business.direction') }}</span>
                     </b-button>
                   </b-col>
                 </b-row>
@@ -104,14 +65,14 @@
         </div>
       </b-col>
     </b-row>
-     <infinite-loading @infinite="infiniteHandler"></infinite-loading>
+    <infinite-loading @infinite="infiniteHandler"></infinite-loading>
   </div>
 </template>
 
 <script>
-import axios from "axios";
+import axios from 'axios';
 export default {
-  props: ["type"],
+  props: ['type'],
   data() {
     return {
       page: 1,
@@ -121,98 +82,84 @@ export default {
         perPage: 1,
         pagination: false,
 
-        type: "loop",
-        perMove: 1
-      }
+        type: 'loop',
+        perMove: 1,
+      },
     };
   },
 
-  computed:{
-   
-    businesses(){
-
-      if(this.type=="Follower"){ 
-
-      return  this.$store.state.profile.BcommunityFollower.business_followers;  
-
-       }else{
-
-         return  this.$store.state.profile.BcommunityFollowing.business_following; 
-       }
-   }
-
+  computed: {
+    businesses() {
+      if (this.type == 'Follower') {
+        return this.$store.state.profile.BcommunityFollower.business_followers;
+      } else {
+        return this.$store.state.profile.BcommunityFollowing.business_following;
+      }
+    },
+    activeAccount() {
+      return this.$store.getters['auth/profilConnected'];
+    }
   },
 
   methods: {
+    cta(data) {
+      console.log(data);
+      this.$store.commit('businessChat/setSelectedChat', data);
+      let path = '';
+      if (this.activeAccount.user_type == 'business') {
+        path = '/business_owner/' + this.activeAccount.id;
+      } else if (this.activeAccount.user_type == 'network') {
+        path = '/';
+      } else path = '/messaging';
+
+      // this.$router.push({ path: `${path}`, query: { tabId: 1, msgTabId: 1 } });
+      this.$router.push({ path: `/business_owner/${this.activeAccount.id}`, query: { tabId: 1, msgTabId: 1 } });
+    },
     count(number) {
       if (number >= 1000000) {
-        return number / 1000000 + "M";
+        return number / 1000000 + 'M';
       }
       if (number >= 1000) {
-        return number / 1000 + "K";
+        return number / 1000 + 'K';
       } else return number;
     },
 
-
-
-
-          infiniteHandler($state) { 
-
+    infiniteHandler($state) {
       let url = null;
 
-         if(this.type=="Follower"){  
-          url="profile/business/follower/"
-         }else{
-          url="profile/business/following/";
-         }
+      if (this.type == 'Follower') {
+        url = 'profile/business/follower/';
+      } else {
+        url = 'profile/business/following/';
+      }
       axios
         .get(url + this.page)
         .then(({ data }) => {
-        
-          if(this.type=="Follower"){  
+          if (this.type == 'Follower') {
+            if (data.data.business_followers.length) {
+              this.businesses.push(...data.data.business_followers);
+              this.page += 1;
 
-
-          if (data.data.business_followers.length) {
-            
-         
-            this.businesses.push(...data.data.business_followers); 
-            this.page += 1;
-            
-            $state.loaded();
-
-           }else{
+              $state.loaded();
+            } else {
               $state.complete();
-             
-           }
-        
-          }else{
+            }
+          } else {
+            if (data.data.business_following.length) {
+              this.businesses.push(...data.data.business_following);
+              this.page += 1;
 
-
-
-
-             if (data.data.business_following.length) {
-            
-         
-            this.businesses.push(...data.data.business_following); 
-            this.page += 1;
-            
-            $state.loaded();
-
-           }else{
+              $state.loaded();
+            } else {
               $state.complete();
-             
-           }
-
+            }
           }
-           
         })
         .catch((err) => {
           console.log({ err: err });
         });
     },
-
-
-  }
+  },
 };
 </script>
 
@@ -283,13 +230,13 @@ export default {
     color: black;
 
     line-height: 35px;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
 
   .textt {
     color: #000;
 
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 12px;
     line-height: 30px;
@@ -336,13 +283,13 @@ export default {
     color: black;
 
     line-height: 35px;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
 
   .textt {
     color: #000;
 
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
@@ -439,7 +386,7 @@ export default {
     border-bottom-right-radius: 5px;
 
     background: white;
-   height: 100%;
+    height: 100%;
     background-color: #fff;
     background-clip: border-box;
     border: 1px solid rgba(0, 0, 0, 0.125);

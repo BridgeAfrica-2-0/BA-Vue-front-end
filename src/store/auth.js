@@ -135,7 +135,7 @@ export default {
     },
 
     municipality({ commit }, data) {
-      return axios.get('councils', data).then(({ data }) => {
+      return axios.post("councils", data).then(({ data }) => {
         console.log(data);
         commit('setMunicipality', data.data);
       });
@@ -149,7 +149,7 @@ export default {
     },
 
     division({ commit }, data) {
-      return axios.get('divisions', data).then(({ data }) => {
+      return axios.post("divisions", data).then(({ data }) => {
         console.log(data);
         commit('setDivision', data.data);
       });

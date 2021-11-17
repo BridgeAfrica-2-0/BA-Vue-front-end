@@ -9,11 +9,7 @@
           alt="Cover Image"
         />
         
-         <img  v-if="info.user.cover_picture"
-          :src="info.user.cover_picture"
-          class="img-fluid  banner"
-          alt="Cover Image"
-        />
+        
         <img v-if="info.user.cover_picture" :src="info.user.cover_picture" class="img-fluid banner" alt="Cover Image" />
       </div>
 
@@ -22,7 +18,7 @@
           <b-col cols="12" md="12" class="m-0 p-0 text-left put-top">
             <b-avatar
               v-if="info.user.profile_picture == ''"
-              src="https://placekitten.com/400/300"
+              src=""
               class="avat text-center"
               badge-variant="primary"
               badge-offset="10px"

@@ -24,6 +24,9 @@ import business from "./business";
 import profile from "./profile";
 import networkProfileMembers from "./networkProfileMembers";
 import follower from "./follower";
+import keywordOperationOnNetwork from "./keywordOperationOnNetwork";
+
+
 import networkProfile from "./networkProfile";
 import UserProfileOwner from "./UserProfileOwner"
 import { search } from "./search";
@@ -72,7 +75,11 @@ export default new Vuex.Store({
     business,
     networkProfileFeedback,
     NetworkSettings,
-   
+    
+    keywordOperationOnNetwork,
+    orderBusiness,
+
+    
     businessSettingInfo,
     checkout,
     social,
@@ -82,7 +89,7 @@ export default new Vuex.Store({
     networkProfileMedia,
     networkProfileMemberRequest,
     networkProfile,
-    orderBusiness,
+    
     notification
 
   }

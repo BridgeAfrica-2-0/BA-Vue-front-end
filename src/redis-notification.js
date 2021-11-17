@@ -1,16 +1,16 @@
 import Echo from "laravel-echo";
 
 window.io = require('socket.io-client')
-let token = JSON.parse(localStorage.getItem("user")).accessToken
+let auth = JSON.parse(localStorage.getItem("user"))
 console.log("--------------------")
-console.log("accessToken", token)
+console.log("accessToken", auth)
 console.log("--------------------")
 window.Redis = new Echo({
   broadcaster: "socket.io",
-  host: "https://edcd-154-72-150-109.ngrok.io",
+  host: "https://fb03-154-72-167-3.ngrok.io",
   auth:{
     headers:{ 
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${auth ? auth.accessToken : null}`
     }
   }
 });

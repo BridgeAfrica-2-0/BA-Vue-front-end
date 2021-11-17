@@ -1,41 +1,79 @@
 <template>
-  <div>
-    <FlashMessage />
-   
+  <div class="container">
+    <!--
+    <b-row>
+      <b-col class="f-left">
+        <h5 class=" d-inline-block">
+          Pending Posts
+        </h5>
+      </b-col>
+      <b-col class="f-right"> <span class="">35 Pending</span> </b-col>
+    </b-row>
 
-    <!-- User Posts Listing Section-->   
-    <b-card class="px-md-3">
-      {{owner_post}}
 
-      <div v-for="item in owner_post" :key="item.post_id">
-        <div class="mt-2">
-          <div class="d-inline-flex">
-            <span md="1" class="m-0 p-0">
-              <b-avatar class="d-inline-block avat" variant="primary" :src="item.user_picture "></b-avatar>
-            </span>
-            <div class="pl-2 pl-md-3 pt-md-2">
-              <h5 class="m-0 usernamee">
-                {{ item.user_name }}
-              </h5>
-              <p class="durationn">{{ moment(item.created_at).fromNow() }}</p>
-            </div>
+-->
 
-            <div class="toright pt-2">
-              <b-dropdown variant="link" size="sm" dropleft no-caret>
-                <template #button-content>
-                  <b-icon icon="three-dots" variant="primary" aria-hidden="true"></b-icon>
-                </template>
-
-                <b-dropdown-item-button variant="info" @click="approvedPost(item)">
-                 
-                  Approved
-                </b-dropdown-item-button>
-
-                <b-dropdown-item-button variant="danger" @click="deletePost(item)">
-                
-                  Delete
-                </b-dropdown-item-button>
-              </b-dropdown>
+    <b-row>
+      <b-col cols="12" class="f-left">
+        <div
+          v-for="post in allPendingPost"
+          :key="post.id"
+          :loading="load"
+          class="mb-4"
+        >
+          <div class="mb-2">
+            <div class="f-left">
+              <b-row class="px-md-3">
+                <b-col cols="2" md="1" class="m-0 p-0">
+                  <b-avatar
+                    class="d-inline-block mt-1"
+                    variant="primary"
+                    :src="post.profile_picture"
+                    size="3.5rem"
+                  ></b-avatar>
+                </b-col>
+                <b-col cols="10" md="11" class="pt-2">
+                  <h6 class="m-0 font-weight-bolder">
+                    {{ post.name }}
+                    <span class="float-right">
+                      <b-dropdown
+                        size="lg"
+                        variant="link"
+                        toggle-class="text-decoration-none"
+                        no-caret
+                      >
+                        <template #button-content>
+                          <b-icon-three-dots-vertical></b-icon-three-dots-vertical
+                          ><span class="sr-only">{{ $t('network.Settings') }} </span>
+                        </template>
+                        <b-dropdown-item
+                          @click="approved(post.id)"
+                          :loading="load"
+                        >
+                          {{ $t('network.Approved') }}
+                        </b-dropdown-item>
+                        <b-dropdown-item
+                          @click="unapproved(post.id)"
+                          :loading="load"
+                        >
+                          {{ $t('network.Unapproved') }}
+                        </b-dropdown-item>
+                      </b-dropdown>
+                    </span>
+                  </h6>
+                  <p>
+                    {{ post.created_at }} -
+                    <span class="text-primary">{{ post.comment }}</span>
+                  </p>
+                </b-col>
+              </b-row>
+              <b-row>
+                <b-col cols="12" class="mt-2">
+                  <p class="text-justify text">
+                    {{ post.content }}
+                  </p>
+                </b-col>
+              </b-row>
             </div>
           </div>
           <div class="m-0 p-0">
@@ -67,12 +105,15 @@
           
 
         </div>
-
-        <hr />
-      </div>
-
-      <infinite-loading :identifier="infiniteId" ref="infiniteLoading" @infinite="infiniteHandler"></infinite-loading>
-    </b-card>
+      </b-col>
+    </b-row>
+    <b-row>
+      <b-col>
+        <p class="text-center" v-if="allPendingPost < 1">
+          {{ $t('network.No_Pending_Posts_To_Show') }}
+        </p>
+      </b-col>
+    </b-row>
   </div>
 </template>
 

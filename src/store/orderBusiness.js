@@ -8,6 +8,7 @@ import axios from "axios"
     state: {
       
            all:[],
+           followers: []
    
     },
 
@@ -21,7 +22,11 @@ import axios from "axios"
       },
       reshedule: state => {
         return state.all.filter(val => val.status =="re-shedule")
-      }
+      },
+
+      getfollowers(state) {
+        return state.followers;
+    }
 
   },
 
@@ -30,6 +35,10 @@ import axios from "axios"
         state.all.push(data) 
       },
       
+
+      setfollowers(state, followers) {
+        state.followers = followers;
+    },
       
   },
 
@@ -55,8 +64,36 @@ import axios from "axios"
         
      
     
-    }
+    },
+
+
+    getfollowers( {commit}, businessId ){
+        return axios
+        .get(`business/community/people/${businessId}`)
+        .then(({ data }) => {
+            commit("setfollowers", data.data);
+          console.log(data);
+  
+        })
+      },
+  
+  
+  
+      updateOrderStatus( {commit}, data ){
+        console.log("updateOrderStatus");
+        console.log("data.path",data.path);
+        console.log("data.status",data.formData);
+        return axios
+        .post(`/${data.path}`, data.formData)
+        .then(({ data }) => {
+          console.log(data);
+          return data;
+        })
+      },
     
     
   }
 }
+
+
+  

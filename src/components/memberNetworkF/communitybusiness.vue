@@ -14,17 +14,17 @@
         <b-col md="5" cols="7" lg="9" xl="5" sm="5">
           <p class="textt text">
             <strong class="title"> {{ member.name }} </strong> <br />
-            {{ member.category }}
+            {{ member.category[0].name }}
             <br />
             {{ member.communityNum }}
-            Community <br />
+            {{ $t('memnetwork.Community') }} <br />
 
             <span class="location">
               <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{ member.location_description }}
             </span>
             <br />
             <span v-if="member.about_business.length<65">{{ member.description}}</span>
-            <span v-else >{{ member.about_business.substring(0,65)+"..." }} <b-link>Read More</b-link></span>
+            <span v-else >{{ member.about_business.substring(0,65)+"..." }} <b-link>{{ $t('memnetwork.Read_More') }}</b-link></span>
           </p>
         </b-col>
 
@@ -46,7 +46,7 @@
                   variant="primary"
                 >
                   <i class="fas fa-user-plus fa-lg btn-icon"></i>
-                  <span class="btn-com">Community</span>
+                  <span class="btn-com">{{ $t('memnetwork.Community') }}</span>
                 </b-button>
               </b-col>
 
@@ -65,7 +65,7 @@
                   variant="primary"
                 >
                   <i class="fas fa-envelope fa-lg btn-icon"></i>
-                  <span class="btn-text">Message</span>
+                  <span class="btn-text">{{ $t('memnetwork.Message') }}</span>
                 </b-button>
               </b-col>
 
@@ -84,7 +84,7 @@
                   variant="primary"
                 >
                   <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
-                  <span class="btn-text">Direction</span>
+                  <span class="btn-text">{{ $t('memnetwork.Direction') }}</span>
                 </b-button>
               </b-col>
             </b-row>

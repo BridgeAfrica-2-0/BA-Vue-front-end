@@ -1,6 +1,6 @@
 <template>
-  <div v-if="networkInfo">
-    <b-card title="" class="">
+  <div>
+    <b-card v-if="networkInfo != 0" title="" class="">
       <b-container class="a-center">
         <!-- :src="require('@/assets/img/mayor.jpg')" -->
         <b-avatar
@@ -36,7 +36,7 @@
               style="width: 120px"
               class="a-center"
             >
-              <b-icon icon="pencil"></b-icon> Edit
+              <b-icon icon="pencil"></b-icon> {{ $t('network.Edit') }}
             </b-button>
           </b-col>
         </b-row>
@@ -50,7 +50,7 @@
             <b-col>
               <p class="a-center">
                 <b-icon icon="globe" variant="primary"></b-icon>
-                <span class="pivate text"> Private </span>
+                <span class="pivate text"> {{ $t('network.Private') }} </span>
               </p>
             </b-col>
             <b-col>
@@ -58,13 +58,13 @@
                 <b-icon icon="people-fill" variant="primary"></b-icon>
                 <span class="pivate text">
                   {{ nFormatter(networkInfo.community) }}
-                  community
+                  {{ $t('network.community') }}
                 </span>
               </p>
             </b-col>
           </b-row>
         </b-container>
-        <h6 class="mt-2 font-weight-bolder title">About</h6>
+        <h6 class="mt-2 font-weight-bolder title">{{ $t('network.community') }}</h6>
         <p class="text-justify text">
           <span v-if="networkInfo.description.length < 130">{{
             networkInfo.description
@@ -76,21 +76,24 @@
             <a
               @click="moreText = networkInfo.description"
               style="cursor: pointer"
-              >lire la Suite</a
+              >{{ $t('network.lire_la_Suite') }}</a
             >
           </span>
         </p>
       </b-card-text>
     </b-card>
+    <b-card v-else class="text-center">
+      <b-spinner variant="primary" label="Text Centered" style="width: 3rem; height: 3rem;"></b-spinner>
+    </b-card>
 
     <SidebarCommunity />
 
-    <b-modal hide-footer title="Edit network" size="md" v-model="showModal">
+    <b-modal hide-footer :title=" $t('network.Edit_network')" size="md" v-model="showModal">
       <b-container>
         <b-form v-if="updateNetwork_form">
           <b-form-group
             label-cols-lg="12"
-            label="Network Name"
+            :label=" $t('network.Network_Name')"
             label-size="md"
             label-class="font-weight-bold pt-0"
             class="mb-0"
@@ -107,7 +110,7 @@
 
           <b-form-group
             label-cols-lg="12"
-            label=" Brief Description"
+            :label=" $t('network.Brief_Description')"
             label-size="md"
             label-class="font-weight-bold pt-0"
             class="mb-0"
@@ -124,7 +127,7 @@
 
           <b-form-group
             label-cols-lg="12"
-            label="Email"
+            :label=" $t('network.Email')"
             label-size="md"
             label-class="font-weight-bold pt-0"
             class="mb-0"
@@ -141,7 +144,7 @@
 
           <b-form-group
             label-cols-lg="12"
-            label="Tel 1"
+            :label=" $t('network.Tel_1')"
             label-size="md"
             label-class="font-weight-bold pt-0"
             class="mb-0"
@@ -158,7 +161,7 @@
 
           <b-form-group
             label-cols-lg="12"
-            label="Tel 2"
+            :label=" $t('network.Tel_2')"
             label-size="md"
             label-class="font-weight-bold pt-0"
             class="mb-0"
@@ -175,7 +178,7 @@
 
           <b-form-group
             label-cols-lg="12"
-            label="Location"
+            :label=" $t('network.Location')"
             label-size="md"
             label-class="font-weight-bold pt-0"
             class="mb-0"
@@ -192,7 +195,7 @@
 
           <b-form-group
             label-cols-md="6"
-            label="Allow Business to join network"
+            :label=" $t('network.Allow_Business_to_join_network')"
             label-size="md"
             label-class="font-weight-bold pt-0"
             class="mb-0"
@@ -212,14 +215,13 @@
             variant="primary"
             @click="updateNetwork()"
           >
-            <b-spinner v-if="SPupdateN" small type="grow"></b-spinner> Update
-            Network
+            <b-spinner v-if="SPupdateN" small type="grow"></b-spinner> {{ $t('network.Update_Network') }} 
           </b-button>
         </b-form>
       </b-container>
     </b-modal>
 
-    <b-modal hide-footer id="modal-4" title="Upload Profile Picture">
+    <b-modal hide-footer id="modal-4" :title=" $t('network.Upload_Profile_Picture')">
       <div class="w3-container">
         <div class="row pb-3">
           <div
@@ -239,7 +241,7 @@
                 accept="image/*"
               />
             </div>
-            <h4>Upload a New picture</h4>
+            <h4>{{ $t('network.Upload_a_New_picture') }}</h4>
           </div>
 
           <div class="col-sm-6 text-center" v-if="selectedImagePrv">
@@ -249,7 +251,7 @@
             <h1>
               <fas-icon class="primary" :icon="['fas', 'edit']" />
             </h1>
-            <h4>Edit Your New picture</h4>
+            <h4>{{ $t('network.Edit_Your_New_picture') }}</h4>
           </div>
         </div>
       </div>
@@ -259,13 +261,15 @@
         variant="primary"
         @click="submitFile"
       >
-        <b-spinner v-if="SPupdateN" small type="grow"></b-spinner> Upload
+        <b-spinner v-if="SPupdateN" small type="grow"></b-spinner>{{ $t('network.Upload') }} 
       </b-button>
     </b-modal>
   </div>
-  <div v-else class="text-center">
-    <b-spinner variant="primary" label="Text Centered" style="width: 3rem; height: 3rem;"></b-spinner>
-  </div>
+
+  <!-- <div v-else class="text-center">
+    <b-spinner variant="primary" :label=" $t('network.Text_Centered')" style="width: 3rem; height: 3rem;"></b-spinner>
+  </div> -->
+
 </template>
 
 <script>
@@ -291,7 +295,13 @@ export default {
 
   created() {
     this.init();
-    console.log(this.networkInfo);
+    // console.log(this.networkInfo);
+  },
+
+  computed: {
+    networkInfo() {
+      return this.$store.state.networkProfile.networkInfo;
+    },
   },
 
   methods: {
@@ -356,7 +366,7 @@ export default {
           this.getNetworkInfo();
           this.flashMessage.show({
             status: "success",
-            message: "Changes Made Successfuly",
+            message:  this.$t('network.Changes_Made_Successfuly'),
           });
         })
         .catch((err) => {
@@ -364,7 +374,7 @@ export default {
           this.SPupdateN = false;
           this.flashMessage.show({
             status: "error",
-            message: "Unable To Make Changes ",
+            message:  this.$t('network.Unable_To_Make_Changes'),
           });
         });
     },
@@ -386,7 +396,7 @@ export default {
           this.SPupdateN = !this.SPupdateN;
           this.flashMessage.show({
             status: "success",
-            message: "Image Uploaded Successfuly",
+            message:  this.$t('network.Image_Uploaded_Successfuly'),
           });
         })
         .catch((err) => {
@@ -394,7 +404,7 @@ export default {
           this.SPupdateN = !this.SPupdateN;
           this.flashMessage.show({
             status: "error",
-            message: "Unable To Uploaded Image ",
+            message:  this.$t('network.Unable_To_Uploaded_Image') ,
           });
         });
     },

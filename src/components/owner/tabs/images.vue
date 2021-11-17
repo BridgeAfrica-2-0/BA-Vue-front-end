@@ -1,10 +1,12 @@
 <template>
   <div v-if="hasLoadPicture">
-    <b-spinner class="custom-loader" label="Large Spinner"></b-spinner>
+    <b-spinner class="custom-loader" :label="$t('profileowner.Large_Spinner')"></b-spinner>
   </div>
   <div class="row" v-else>
     <div class="container-fluid">
-      <p v-if="!allImages.length && !canUpload" style="font-size: 3rem">No items found</p>
+      <p v-if="!allImages.length && !canUpload" style="font-size: 3rem">
+        {{ $t('profileowner.No_items_found') }}
+      </p>
 
       <b-modal
         id="modalxl"
@@ -32,8 +34,13 @@
 
         <br />
 
-        <b-button @click="submitPosts" variant="primary" block :disabled="loading"
-          ><b-icon icon="cursor-fill" variant="primary"></b-icon> Publish</b-button
+        <b-button
+          @click="submitPosts"
+          variant="primary"
+          block
+          :disabled="loading"
+          ><b-icon icon="cursor-fill" variant="primary"></b-icon>
+          {{ $t('profileowner.Publish') }}</b-button
         >
       </b-modal>
 
@@ -51,7 +58,7 @@
           <a @click="$refs.movie.click()">
             <div class="drag-textt">
               <fas-icon :icon="['fas', 'plus']" />
-              <h3>Add Item</h3>
+              <h3>{{ $t('profileowner.Add_Item') }}</h3>
             </div>
           </a>
         </div>

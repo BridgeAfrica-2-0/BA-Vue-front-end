@@ -1,12 +1,12 @@
 <template>
   <div>
-    <b>Education</b>
+    <b>{{ $t('profileowner.Education') }}</b>
 
 
     <hr />
     <b-link style="text-decoration: none" class="mt-4" v-b-modal.educationModal>
       <b-icon icon="plus" variant="primary"></b-icon>
-      Add University Or High School</b-link
+      {{ $t('profileowner.Add_University_Or_High_School') }}</b-link
     >
     <b-list-group-item
       class="d-flex align-items-center mb-4 "
@@ -20,14 +20,14 @@
         >
           <div class="col">
             <span class="mr-auto">
-              <b>School Name : {{ education.school_name }}</b>
+              <b>{{ $t('profileowner.School_Name') }} : {{ education.school_name }}</b>
             </span>
             <span>
-           <br>   <b>   Major  {{ education.major_subjects }}  </b>
+           <br>   <b>   {{ $t('profileowner.Major') }}  {{ education.major_subjects }}  </b>
             </span>
 
             <p>
-              Duration From {{ education.start_year }} To
+              {{ $t('profileowner.Duration_From') }} {{ education.start_year }} {{ $t('profileowner.To') }}
               {{ education.end_year }}
             </p>
             <p>
@@ -37,11 +37,11 @@
           <div class="col-1">
             <b-dropdown id="dropdown-dropup" dropdown variant="primary-outline">
               <b-dropdown-item @click="edit(education)"
-                >Edit</b-dropdown-item
+                >{{ $t('profileowner.Edit') }}</b-dropdown-item
               >
               <b-dropdown-item
                 @click="deleteEducation(education.id)"
-                >Delete</b-dropdown-item
+                >{{ $t('profileowner.Delete') }}</b-dropdown-item
               >
             </b-dropdown>
           </div>
@@ -55,7 +55,7 @@
      <b-modal
       ref="updateEducationModal"
       id="updateEducationModal"
-      title="Update Education "
+      :title="$t('profileowner.Update_Education')"
       @close="cancel"
       @ok="updatesave"
     >
@@ -70,7 +70,7 @@
       <b-form-input
         class="mt-2 mb-2"
         v-model="editData.school_name"
-        placeholder="School"
+        :placeholder="$t('profileowner.School')"
       ></b-form-input>
 
       <b-form-checkbox
@@ -79,16 +79,16 @@
         name="checkbox-1"
         :value="editData.is_graduated ? 1 : 0"
       >
-        Graduated
+        {{ $t('profileowner.Graduated') }}
       </b-form-checkbox>
-      <label>Duration - From</label>
+      <label>{{ $t('profileowner.Duration_From') }}</label>
       <b-form-datepicker
         id="example-datepicker-1"
         v-model="editData.startDate"
         class="mb-2"
       ></b-form-datepicker>
 
-      <label>To</label>
+      <label>{{ $t('profileowner.To') }}</label>
       <b-form-datepicker
         id="example-datepicker"
         v-model="editData.endDate"
@@ -97,7 +97,7 @@
       <b-form-input
         class="mt-2"
         v-model="editData.major_subjects"
-        placeholder="Major"
+        :placeholder="$t('profileowner.Major')"
       ></b-form-input>
     </b-modal>
 
@@ -108,7 +108,7 @@
     <b-modal
       ref="educationModal"
       id="educationModal"
-      title="Add Education "
+      :title="$t('profileowner.Add_Education')"
       @close="cancel"
       @ok="save"
     >
@@ -123,7 +123,7 @@
       <b-form-input
         class="mt-2 mb-2"
         v-model="educationInput.schoolName"
-        placeholder="School"
+        :placeholder="$t('profileowner.School')"
       ></b-form-input>
 
       <b-form-checkbox
@@ -132,9 +132,9 @@
         name="checkbox-1"
         :value="educationInput.graduated ? 1 : 0"
       >
-        Graduated
+        {{ $t('profileowner.Graduated') }}
       </b-form-checkbox>
-      <label>Duration - From</label>
+      <label>{{ $t('profileowner.Duration_From') }}</label>
       <b-form-datepicker
         id="example-datepicker-1"
         v-model="educationInput.durationFrom"
@@ -150,7 +150,7 @@
       <b-form-input
         class="mt-2"
         v-model="educationInput.major"
-        placeholder="Major"
+        :placeholder="$t('profileowner.Major')"
       ></b-form-input>
     </b-modal>
 

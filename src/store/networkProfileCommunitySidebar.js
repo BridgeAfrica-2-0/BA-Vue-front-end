@@ -5,7 +5,8 @@ export default {
   namespaced: true,
   state: {
     userdetails: [],
-    businessdetails: []
+    businessdetails: [],
+    networkdetails: []
   },
 
   getters: {
@@ -15,6 +16,9 @@ export default {
     getBusinessDetails(state) {
         return state.businessdetails;
     },
+    getNetworkDetails(state) {
+        return state.networkdetails;
+    }
   },
 
   mutations: {
@@ -23,6 +27,9 @@ export default {
     },
     setBusinessDetails(state, businessdetails) {
         state.businessdetails = businessdetails;
+    },
+    setnetworkDetails(state, networkdetails) {
+        state.networkdetails = networkdetails;
     }
   },
 
@@ -44,6 +51,16 @@ export default {
       .get(`network/community/businesses/${networkId}`)
       .then(({ data }) => {
           commit("setBusinessDetails", data.data);
+        console.log(data);
+
+      })
+    },
+
+    getNetworkDetails( {commit}, networkId ){
+      return axios
+      .get(`network/community/networks/${networkId}`)
+      .then(({ data }) => {
+          commit("setnetworkDetails", data.data);
         console.log(data);
 
       })

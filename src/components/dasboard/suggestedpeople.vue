@@ -1,6 +1,9 @@
 <template>
   <div>
     <div class="s-cardd">
+
+
+
       <div
         v-for="value in people_around"
         v-bind:key="value.name"
@@ -35,7 +38,7 @@
                         class="mt-3 mt-lg-1 mt-xl-3"
                       >
                         <h6 class="follower m-15">
-                          {{ value.followers }} {{$t("community")}}
+                          {{ value.followers }} {{ $t('dashboard.Community') }}
                         </h6>
                       </b-col>
                     </b-row>
@@ -59,7 +62,7 @@
                           class="b-background flexx pobtn shadow"
                         >
                           <i class="fas fa-envelope fa-lg btn-icon"></i>
-                          <span class="btn-text">Message</span>
+                          <span class="btn-text">{{ $t('dashboard.Message') }}</span>
                         </b-button>
                       </b-col>
 
@@ -74,10 +77,17 @@
                           block
                           size="sm"
                           class="b-background flexx pobtn shadow"
+                          :class="value.is_follow !== 0 && 'u-btn'"
                           variant="primary"
+                          @click="handleFollow(value)"
                         >
-                          <i class="fas fa-user-plus fa-lg btn-icon"></i>
-                          <span class="btn-com">{{$t("community")}}</span>
+
+                           <i
+                            class="fas fa-lg btn-icon"
+                            :class="value.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"
+                          ></i>
+
+                          <span class="btn-com">{{ $t('dashboard.Community') }}</span>
                         </b-button>
                       </b-col>
                     </b-row>
@@ -87,17 +97,107 @@
             </div>
           </b-col>
         </b-row>
+
+
       </div>
     </div>
+    
+          <infinite-loading @infinite="infiniteHandler"></infinite-loading>
   </div>
 </template>
 
 <script>
+import axios from "axios";
 export default {
+   data() {
+    return {
+      page: 1,
+      options: {
+        rewind: true,
+        autoplay: true,
+        perPage: 1,
+       
+        pagination: false,
+
+        type: "loop",
+        perMove: 1,
+      },
+    };
+  },
+
   computed: {
     people_around() {
       return this.$store.state.auth.peopleAround;
     }
+  },
+
+   methods: {
+
+       count(number) {
+      if (number >= 1000000) {
+        return number / 1000000 + "M";
+      }
+      if (number >= 1000) {
+        return number / 1000 + "K";
+      } else return number;
+    },
+
+
+
+    async handleFollow(user) {
+      const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
+      const nextFollowState = user.is_follow === 0 ? 1 : 0;
+      const data = {
+        id: user.id,
+        type: 'user',
+      };
+
+      await axios
+        .post(uri, data)
+        .then(response => {
+          console.log(response);
+          user.is_follow = nextFollowState;
+        })
+        .catch(err => console.log({err:err}));
+    },
+
+
+
+
+    
+  async  infiniteHandler($state) {
+   
+      let url = "people/around?page="+this.page;
+
+      console.log(url);
+
+    await  axios.get(url)
+        .then(({ data }) => {
+
+               console.log(data.data);
+
+           if (data.data.length) {
+          
+           
+            this.people_around.push(...data.data);
+               this.page += 1;
+
+            $state.loaded();
+          } else {
+            $state.complete();
+          }
+
+         
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+
+
+
+
   }
 };
 </script>

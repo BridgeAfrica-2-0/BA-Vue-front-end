@@ -4,7 +4,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="Network Name"
+          :label="$t('profilefollower.Network_Name')"
           label-size="md"
           label-class="font-weight-bold pt-0"
           class="mb-0"
@@ -18,7 +18,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="Category"
+          :label="$t('profilefollower.Category')"
           label-size="md"
           label-class="font-weight-bold pt-0"
           class="mb-0"
@@ -32,7 +32,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="Phone 1"
+          :label="$t('profilefollower.Phone1')"
           label-size="md"
           label-class="font-weight-bold pt-0"
           class="mb-0"
@@ -46,7 +46,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="Phone 2"
+          :label="$t('profilefollower.Phone2')"
           label-size="md"
           label-class="font-weight-bold pt-0"
           class="mb-0"
@@ -60,7 +60,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="Email"
+          :label="$t('profilefollower.Email')"
           label-size="md"
           label-class="font-weight-bold pt-0"
           class="mb-0"
@@ -74,7 +74,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="Country"
+          :label="$t('profilefollower.Country')"
           label-size="md"
           label-class="font-weight-bold pt-0"
           class="mb-0"
@@ -93,7 +93,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="City"
+          :label="$t('profilefollower.City')"
           label-size="md"
           label-class="font-weight-bold pt-0"
           class="mb-0"
@@ -107,7 +107,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="Neighborhood"
+          :label="$t('profilefollower.Neighborhood')"
           label-size="md"
           label-class="font-weight-bold pt-0"
           class="mb-0"
@@ -121,7 +121,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="Website"
+          :label="$t('profilefollower.Website')"
           label-size="md"
           label-class="font-weight-bold pt-0"
           class="mb-0"
@@ -135,14 +135,14 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label=" Description "
+          :label="$t('profilefollower.Description')"
           label-size="md"
           label-class="font-weight-bold pt-0"
           class="mb-0"
         >
           <b-form-textarea
             id="textarea"
-            placeholder="Enter something..."
+            :placeholder="$t('profilefollower.Enter_something')"
             rows="3"
             max-rows="6"
           ></b-form-textarea>
@@ -155,7 +155,7 @@
         <b-col>
           <div class="b-bottomn f-right">
             <b-button variant="primary" class="a-button-l b-font">
-              Save Changes
+              {{ $t('profilefollower.Save_Changes') }}
             </b-button>
           </div>
         </b-col>

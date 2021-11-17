@@ -202,15 +202,13 @@ export default {
       page: 0,
       currentPage: null,
       searchTitle: "",
+      // members:"",
 
       currentIndex: -1,
       loading: false
     };
   },
   computed: {
-    // rows() {
-    //   return this.$store.state.networkProfileMembers.members.total;
-    // },
     members() {
       return this.$store.state.networkProfileMembers.members;
     },
@@ -257,21 +255,23 @@ export default {
       console.log('keyword: '+data);
       let formData = new FormData();
       formData.append('keyword', data);
-      this.$store
-        .dispatch("networkProfileMembers/getMembers", {
-          path: this.url+"/members/list/"+this.page,
-          formData: formData
-        })
+      // this.$store
+      //   .dispatch("networkProfileMembers/getMembers", {
+      //     path: this.url+"/members/list/"+this.page,
+      //     formData: formData
+      //   })
+      this.axios
+        .post("network/"+this.url+"/members/list/"+this.page, formData)
         .then(({ data }) => {
-          console.log(data);
-       console.log(this.page);
-        if (data.data.length) {
-        this.page += 1;
+        console.log(data);
         console.log(this.page);
-        console.log(...data.data);
-        this.members.push(...data.data);
+        if (data.data.length) {
+          this.page += 1;
+          console.log(this.page);
+          console.log(...data.data);
+          this.members.push(...data.data);
           $state.loaded();
-          } else {
+        } else {
           $state.complete();
         }
       }) .catch((err) => {

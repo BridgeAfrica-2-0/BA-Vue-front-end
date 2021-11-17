@@ -4,7 +4,7 @@
       <b-container class="a-center">
           <!-- :src="require('@/assets/img/mayor.jpg')" -->
         <b-avatar
-          :src="networkInfo[0].image"
+          :src="networkInfo.image"
           variant="primary"
           square
           rounded
@@ -19,19 +19,20 @@
       <b-container>
         <b-row>
           <b-col cols="6">
-            <h6 class="  m-0 p-0 a-center network-name "><b> {{ networkInfo[0].name }}</b></h6>
+            <h6 class="  m-0 p-0 a-center network-name "><b> {{ networkInfo.name }}</b></h6>
           </b-col>
           <b-col cols="6">
             <b-button
               variant="primary"
               size="sm"
               @click="addFollower"
+              :disabled="buttonStatus" 
               style="width: 120px;"
               class="a-center"
             >
               <b-spinner v-if="SPcommunity" small></b-spinner>
               <b-icon v-if="!SPcommunity" icon="pencil"></b-icon> 
-              <span v-if="networkInfo[0].is_follow"> Unfollow</span> <span v-else> Follow</span>
+              <span v-if="networkInfo.is_follow"> Unfollow</span> <span v-else> Follow</span>
             </b-button>
             <b-tooltip target="Follow-Unfollow" variant="secondary">Click To Follow/Unfollow</b-tooltip>
           </b-col>
@@ -53,7 +54,7 @@
               <p class="a-center">
                 <b-icon icon="people-fill" variant="primary"></b-icon>
                 <span class="pivate text">
-                  {{ nFormatter(networkInfo[0].commuity) }}
+                  {{ nFormatter(networkInfo.commuity) }}
                   community 
                 </span>
               </p>
@@ -61,15 +62,15 @@
           </b-row>
         </b-container>
         <h6 class="mt-2 font-weight-bolder title ">About</h6>
-        <p v-if="networkInfo[0].description.length<130" class="text-justify text">{{ networkInfo[0].description }}</p>
+        <p v-if="networkInfo.description.length<130" class="text-justify text">{{ networkInfo.description }}</p>
         <p v-else class="text-justify text">
-          {{ networkInfo[0].description.substring(0,130)+"..." }}
+          {{ networkInfo.description.substring(0,130)+"..." }}
           <span class="d-inline-block float-right">
             <a @click="$bvToast.show('example-toast')" style="cursor:pointer;">lire la Suite</a>
           </span>
         </p>
         <b-toast id="example-toast" static no-auto-hide>
-          {{ networkInfo[0].description }}
+          {{ networkInfo.description }}
         </b-toast>
       </b-card-text>
     </b-card>
@@ -94,6 +95,7 @@ export default {
       networkShow: true,
       showModal: false,
       Pcommunity: false,
+      buttonStatus: false,
       text: "",
       file: '',
 
@@ -125,17 +127,20 @@ export default {
       this.networkShow = false;
     },
     addFollower: function() {
+      this.buttonStatus = true;
       this.SPcommunity = !this.SPcommunity;
       this.axios.post("network/"+this.url+"/about/follow")
       .then(() => {
         this.getNetworkInfo();
         this.SPcommunity = !this.SPcommunity;
-        if (this.networkInfo[0].is_follow) {
+        if (this.networkInfo.is_follow) {
+          this.buttonStatus = false;
           this.flashMessage.show({
             status: "success",
             message: "You Are Not more Following"
           });
         } else {
+          this.buttonStatus = false;
           this.flashMessage.show({
             status: "success",
             message: "You Are Now Following"
@@ -144,6 +149,7 @@ export default {
       })
       .catch(err => {
         console.log({ err: err });
+        this.buttonStatus = false;
         this.flashMessage.show({
           status: "error",
           message: "Unable To follow"

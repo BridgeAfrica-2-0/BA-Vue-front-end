@@ -24,6 +24,9 @@ import business from "./business";
 import profile from "./profile";
 import networkProfileMembers from "./networkProfileMembers";
 import follower from "./follower";
+import keywordOperationOnNetwork from "./keywordOperationOnNetwork";
+
+
 import networkProfile from "./networkProfile";
 import UserProfileOwner from "./UserProfileOwner"
 import { search } from "./search";
@@ -40,8 +43,11 @@ import { notification } from "./notifications"
 // import axios from "axios";
 Vue.use(Vuex);
 
-//  axios.defaults.baseURL = process.env.VUE_APP_API_URL;
-axios.defaults.baseURL = "https://test.maxinemoffett.com/api/v1/";
+  axios.defaults.baseURL = process.env.VUE_APP_API_URL;
+//axios.defaults.baseURL = "https://test.maxinemoffett.com/api/v1/";
+
+//axios.defaults.baseURL = "https://e34d-154-72-150-62.ngrok.io/api/v1/";
+
 
 export default new Vuex.Store({
   modules: {
@@ -69,6 +75,11 @@ export default new Vuex.Store({
     business,
     networkProfileFeedback,
     NetworkSettings,
+    
+    keywordOperationOnNetwork,
+    orderBusiness,
+
+    
     businessSettingInfo,
     checkout,
     social,
@@ -78,7 +89,7 @@ export default new Vuex.Store({
     networkProfileMedia,
     networkProfileMemberRequest,
     networkProfile,
-    orderBusiness,
+    
     notification
 
   }

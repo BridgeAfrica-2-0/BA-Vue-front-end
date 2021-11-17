@@ -10,17 +10,27 @@ import welcome from './welcome.json'
 import dashboard from './dashboard.json'
 import profileowner from './profileowner.json'
 
+
+import memnetwork from './memnetwork.json'
+
+import profilefollower from './network.json'
+
+
 export const defaultLocale = 'en'
 
 export const en = {
 
+
     auth: auth,
     businessf: businessf,
     search: search,
-    network: network,
-    verification: verification,
-    passrecover: passrecover,
-    dashboard: dashboard,
-    profileowner: profileowner,
+
     welcome: welcome,
+    dashboard: dashboard,
+    memnetwork: memnetwork,
+
+    network: network,
+    profilefollower: profilefollower,
+    verification: verification,
+    profileowner: profileowner,
 }

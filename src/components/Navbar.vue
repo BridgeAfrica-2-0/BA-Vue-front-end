@@ -289,68 +289,7 @@
                   ><span class="text-ored"><b-icon-bell-fill class="col-bg"></b-icon-bell-fill></span
                 ></a>
                 <b-popover target="notif" triggers="hover" placement="top">
-                  <div class="popover-body">
-                    <p class="font-weight-bold">Notifications</p>
-                    <hr class="h-divider" />
-
-                    <div class="d-inline-flex flex-row align-items-center suggest-item cursor-pointer">
-                      <div>
-                        <img src="@/assets/img/profile-pic.jpg" class="rounded-circle" alt="" width="30" height="30" />
-                      </div>
-                      <div class="d-flex flex-column ml-3">
-                        <div><span class="font-weight-bold">David</span> started following you</div>
-                        <div class="small text-muted">1m</div>
-                      </div>
-                    </div>
-                    <hr class="h-divider" />
-
-                    <div class="d-inline-flex flex-row align-items-center suggest-item cursor-pointer">
-                      <div>
-                        <img src="@/assets/img/profile-pic.jpg" class="rounded-circle" alt="" width="30" height="30" />
-                      </div>
-                      <div class="d-flex flex-column ml-3">
-                        <div><span class="font-weight-bold">Alina</span> commented on your post</div>
-                        <div class="small text-muted">1m</div>
-                      </div>
-                    </div>
-                    <hr class="h-divider" />
-
-                    <div class="d-inline-flex flex-row align-items-center suggest-item cursor-pointer">
-                      <div>
-                        <img src="@/assets/img/profile-pic.jpg" class="rounded-circle" alt="" width="30" height="30" />
-                      </div>
-                      <div class="d-flex flex-column ml-3">
-                        <div><span class="font-weight-bold">Maxine</span> liked your post</div>
-                        <div class="small text-muted">1m</div>
-                      </div>
-                    </div>
-                    <hr class="h-divider" />
-
-                    <div class="d-inline-flex flex-row align-items-center suggest-item cursor-pointer">
-                      <div>
-                        <img src="@/assets/img/profile-pic.jpg" class="rounded-circle" alt="" width="30" height="30" />
-                      </div>
-                      <div class="d-flex flex-column ml-3">
-                        <div><span class="font-weight-bold">Paul</span> approuved your request to join the network</div>
-                        <div class="small text-muted">1m</div>
-                      </div>
-                    </div>
-                    <hr class="h-divider" />
-
-                    <div class="d-inline-flex flex-row align-items-center suggest-item cursor-pointer">
-                      <div>
-                        <img src="@/assets/img/profile-pic.jpg" class="rounded-circle" alt="" width="30" height="30" />
-                      </div>
-                      <div class="d-flex flex-column ml-3">
-                        <div><span class="font-weight-bold">David</span> started following you</div>
-                        <div class="small text-muted">1m</div>
-                      </div>
-                    </div>
-                    <hr class="h-divider" />
-                    <a href="https://bridgeafrica.info/nav/notifications-view-all.html" class="text-ored"
-                      ><u>See all Notifications</u></a
-                    >
-                  </div>
+                  <NavBarNotifications/>
                 </b-popover>
               </div>
 
@@ -499,12 +438,14 @@
 <script>
 import Button from '@/components/ButtonNavBarFind.vue';
 import Activity from '@/components/ShowActivity.vue';
+import NavBarNotifications from '@/components/NavBarNotifications.vue';
 import { mapGetters, mapActions } from 'vuex';
 export default {
   name: 'navbar',
   components: {
     Button,
     Activity,
+    NavBarNotifications
   },
   props: {
     credentials: {

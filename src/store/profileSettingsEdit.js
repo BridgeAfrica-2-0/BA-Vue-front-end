@@ -3,7 +3,9 @@ import axios from "axios"
   export default {
     namespaced: true,
     state: {
-       userInfos: {}
+       userInfos: {},
+       etat: 0,
+       selectedId:5
     },
 
     getters: {
@@ -18,6 +20,10 @@ import axios from "axios"
     setUserInfos(state, userInfos) {
       state.userInfos = userInfos;
     },
+
+    setEtat(state){
+      state.etat = 1 ;
+    }
  
   },
 
@@ -33,10 +39,10 @@ import axios from "axios"
 
      updateUserInfos({commit}, data){
       return axios.post("/profile/update", data)
-      .then(response =>{
-        console.log(response.data) ;
+      // .then(response =>{
+      //   console.log(response.data) ;
        
-      })
+      // })
      },
 
      changePayment({commit}, data){
@@ -53,6 +59,10 @@ import axios from "axios"
       //   console.log(response) ;
        
       // })
+     },
+     redirection({commit}){
+      commit("setEtat")
+
      }
 
     

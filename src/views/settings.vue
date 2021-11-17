@@ -77,10 +77,47 @@
                             <br />
 
                             <b-tr>
+                              <b-td class="a-text text"> proffession </b-td>
+
+                              <b-td class="a-text text">
+                                <b-link href="#">{{getUserInfos.profession}}</b-link>
+                              </b-td>
+                            </b-tr>
+                            <br />
+
+                            <b-tr>
                               <b-td class="a-text text"> {{ $t("settings.country") }} </b-td>
 
                               <b-td class="a-text text">
                                 <b-link href="#">{{getUserInfos.country.name}}</b-link>
+                              </b-td>
+                            </b-tr>
+                            <br />
+                            <b-tr>
+                              <b-td class="a-text text"> region </b-td>
+
+                              <b-td class="a-text text">
+                                <b-link href="#">{{getUserInfos.region.name}}</b-link>
+                              </b-td>
+                            </b-tr>
+
+                            <br />
+
+                            <b-tr>
+                              <b-td class="a-text text"> Division </b-td>
+
+                              <b-td class="a-text text">
+                                <b-link href="#">{{getUserInfos.division.name}}</b-link>
+                              </b-td>
+                            </b-tr>
+
+                            <br />
+
+                            <b-tr>
+                              <b-td class="a-text text"> municipality </b-td>
+
+                              <b-td class="a-text text">
+                                <b-link href="#">{{getUserInfos.council.name}}</b-link>
                               </b-td>
                             </b-tr>
 
@@ -104,7 +141,7 @@
                             </b-tr>
                             <br />
                                <div>
-                              <b-button variant="warning" class="btn btn-primary" v-b-modal.modal-10>Edit </b-button>
+                              <b-button variant="ligth" class="btn btn-primary button" v-b-modal.modal-10>Edit </b-button>
                               <!-- <button class="btn " v-b-modal.modal-10>Edit</button> -->
                               <b-modal id="modal-10" title="Edit your information here"  hide-footer>
                                
@@ -171,7 +208,7 @@
                                         <!-- <label class="form-label">country</label>
                                         <input type="text" class="form-control"  v-model="getUserInfos.country.name"> -->
                                         Neighbourhood 
-                                         <b-form-select v-model="selectedNeighbor" :options="neighbor" ></b-form-select>
+                                         <b-form-select v-model="selectedNeighbor" :options="neighbor"  ></b-form-select>
                                        
                                       </div>
 
@@ -181,8 +218,7 @@
                                        
                                       </div>
                                        <div class="mb-3">
-                                        <label class="form-label">neighbourhood</label> {{selectedneigbor}}
-                                         <input type="text" class="form-control"  v-model="getUserInfos.neigborhood.name">
+                                        <label class="form-label">{{message1}}</label> 
                                        
                                       </div>
                                       <button  class="btn btn-primary" @click="update">save changes</button>
@@ -201,7 +237,7 @@
                 </b-card-text>
               </b-tab>
 
-              <b-tab :title="`${$t('settings.account_type')}`">
+              <b-tab :title="`${$t('settings.account_type')}`" >
                 <b-card class="mt-15 cent">
                   <div class="text-center">
                     <span class="username text-center mb-3">
@@ -227,7 +263,7 @@
                       alt="Kitten"
                     />
 
-                    <b-button variant="primary" class="text-center mt-3">
+                    <b-button variant="primary" class="text-center mt-3" @click="redirection">
                       {{ $t("settings.upgrade_now") }}
                     </b-button>
                   </div>
@@ -261,7 +297,7 @@
                   </b-form-group>
                 </b-card-text>
               </b-tab>
-                  {{currentPass}}
+                 
               <b-tab :title="`${$t('settings.password')}`">
                 <b-card-text class="mt-3 text">
                   <h3 class="username">{{ $t("settings.change_current_password") }}</h3>
@@ -323,7 +359,11 @@
                           placeholder=""
                           required
                           v-model="newPass1"
-                        ></b-form-input> <br> <br> <button class=" btn btn-primary" @click="changePassword">change</button>
+                        >
+                        
+                        </b-form-input> <br>
+                        <p>{{message}}</p>
+                         <br> <button class=" btn btn-primary" @click="changePassword">change</button>
                       </b-form-group>
                     </b-container>
                   </div>
@@ -454,6 +494,8 @@ export default {
        newPass:'',
        newPass1:'',
        selectedGender:'',
+       message:'',
+       message1:'',
        genderOptions: [{value: 'male', text: 'male'}, {value: 'female', text: 'female'}]
        
     };
@@ -472,6 +514,9 @@ export default {
 
         //   }else { this.selectedGender = 1 }
           this.selectedGender = this.$store.state.profileSettingsEdit.userInfos.gender;
+          // this.selectedCounty = this.getUserInfos.country.id;
+          // console.log("-----------------"+this.selectedCounty);
+         
       })
       .catch((err) => {
          
@@ -501,6 +546,7 @@ export default {
       .then(response =>{
         console.log(response);
         console.log(this.getUserInfos);
+        this.message1 = response.data.message ;
         
       })
       .catch((err) => {
@@ -547,18 +593,25 @@ export default {
       formData2.append("password", this.newPass);
       formData2.append("password_confirmation", this.newPass1);
 
-       this.$store
+      if(this.newPass != this.newPass1){
+        this.message = "the password does not match" ;
+      }else{
+
+        
+        this.$store
       .dispatch("profileSettingsEdit/changePassword",formData2)
       .then(response =>{
         console.log("------------------------");
-        console.log(response.data);
+        console.log(response.data.message);
+        this.message = response.data.message ;
         
       })
       .catch((err) => {
-         
-          console.log('--------- error: ');
+        
+        console.log('--------- error: ');
           console.error(err);
         });
+        }
     },
 
     getRegion(){
@@ -626,7 +679,16 @@ export default {
           console.log('--------- error: ');
           console.error(err);
         });
-    }
+    },
+
+     redirection(){
+        this.$store
+      .dispatch("profileSettingsEdit/redirection")
+      .then(response =>{
+        // this.$router.push({ name: "business_owner", params: { id: 1} }) ;
+        this.$router.push(`business_owner/${1}`)
+      })
+     }
     // getLocality(){
       
     //    this.$store
@@ -661,7 +723,7 @@ export default {
       console.log("lolo");
     }
   },
-};
+}
 </script>
 
 <style>

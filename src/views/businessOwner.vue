@@ -133,7 +133,7 @@ export default {
     }
   },
   computed: {},
-
+   
     created() {
     this.foll_id = this.$route.params.id;  
 
@@ -171,6 +171,11 @@ export default {
 
 
   mounted() {
+
+     if(this.$store.state.profileSettingsEdit.etat == 1){
+          this.selectedId = this.$store.state.profileSettingsEdit.selectedId ;
+    }
+
     this.url_data = this.$route.params.id;
 
 

@@ -10,15 +10,25 @@
 
         <b-col class="col mt-sm-3">
           <b-tabs content-class="mt-3" fill pills>
-            <b-tab title="Posts"><Posts /></b-tab>
-            <b-tab title="Media"><Media /></b-tab>
-            <b-tab title="Members"><Members /></b-tab>
-            <b-tab title="Feedback"><Feedback /></b-tab>
+            <b-tab :title="$t('memnetwork.Posts')"><Posts /></b-tab>
+            <b-tab :title="$t('memnetwork.Media')"><Media /></b-tab>
+            <b-tab :title="$t('memnetwork.Members')"><Members /></b-tab>
+            <b-tab :title="$t('memnetwork.Feedback')"><Feedback /></b-tab>
           </b-tabs>
         </b-col>
       </b-row>
-    </b-container>
+    </b-container><p class="text-center">
+      <span class="display-inline">
+        <b-link @click="$i18n.locale = 'en'"> {{ $t("auth.english") }}</b-link>
+        <span class="vl"></span>
+        <b-link class="ml-2" @click="$i18n.locale = 'fr'">
+          {{ $t("auth.french") }}
+        </b-link>
+      </span>
+      Bridge Africa © 2021
+    </p>
     <Footer />
+
   </div>
 </template>
 
@@ -28,7 +38,7 @@ import Footer from "../components/footer";
 import Posts from "../components/memberNetworkF/postNetwork";
 import Parent from "../components/memberNetworkF/parent";
 import Media from "../components/memberNetworkF/mediaNetwork";
-import Members from "../components/memberNetworkF/memberNetwork";
+import Members from "../components/memberNetworkF/members";
 import Feedback from "../components/memberNetworkF/feedback";
 export default {
   components: {

@@ -1,6 +1,11 @@
 <template>
   <div class="" style="overflow-y: hidden; padding:0px">
+
+     <span v-if="isloaded">
+
     <navbar />
+
+    
 
     <div class="container-fluid">
       <ly-tab
@@ -39,22 +44,20 @@
     </div>
 
     <Footer />
+
+     </span>
   </div>
 </template>
 
 <script>
 import navbar from "@/components/navbar";
 import Business from "../components/businessOwner/business";
-//import Pending from "../components/businessOwner/pending";
-//import Insight from "../components/businessOwner/insight";
-//import Notification from "../components/businessOwner/notification";
+
 import Settings from "../components/businessOwner/settings";
 
 import Inbox from "../components/businessOwner/inbox";
 
 import LyTab from "@/tab/src/index.vue";
-
-import axios from "axios";
 
 import Footer from "../components/footer";
 export default {
@@ -62,18 +65,20 @@ export default {
   components: {
     navbar,
     Business,
-    //Pending,
+   
     LyTab,
     Settings,
-    //  Insight,
+   
     Inbox,
-    // Notification,
+   
     Footer
   },
   data() {
     return {
       selectedId: 0,
       bottomSelectedId: 0,
+      foll_id:null,
+       isloaded: false,
       url_data: null,
       items: [
         { label: "Home ", icon: "" },
@@ -103,27 +108,7 @@ export default {
         });
     },
 
-    CommunityBusiness() {
-      this.$store
-        .dispatch("businessOwner/CommunityBusiness", this.url_data)
-        .then(() => {
-          console.log("hey yeah");
-        })
-        .catch(err => {
-          console.log({ err: err });
-        });
-    },
-
-    CommunityPeople() {
-      this.$store
-        .dispatch("businessOwner/CommunityPeople", this.url_data)
-        .then(() => {
-          console.log("hey yeah");
-        })
-        .catch(err => {
-          console.log({ err: err });
-        });
-    },
+  
 
     businessCommunityTotal() {
       this.$store
@@ -149,19 +134,50 @@ export default {
   },
   computed: {},
 
+    created() {
+    this.foll_id = this.$route.params.id;  
+
+    this.$store
+      .dispatch("businessOwner/roleCheck", this.foll_id)
+      .then((data) => {
+       
+        let role= data.data.data.role;
+          switch (role) {
+            
+           
+
+            case "editor" : this.$router.push({ name: "BusinessEditor",params: { id: this.foll_id } });; 
+            break;
+
+            case "visitor" :  this.$router.push({ name: "BusinessFollower",params: { id: this.foll_id } });
+            break;
+          }
+
+        this.isloaded = true;
+      })
+      .catch((error) => {
+        console.log({ error: error });
+
+        console.log(error.response.status );
+
+         if (error.response.status == 404) {
+           
+            this.$router.push({ name: "notFound" });
+          } 
+
+
+      });
+  },
+
+
   mounted() {
     this.url_data = this.$route.params.id;
 
-    console.log(this.url_data);
 
-    this.businessInfo();
-
-    this.CommunityBusiness();
-
-    this.CommunityPeople();
-
-    this.businessCommunityTotal();
-    this.ownerPost();
+     this.businessInfo();
+   
+     this.businessCommunityTotal();
+     this.ownerPost();
   }
 };
 </script>

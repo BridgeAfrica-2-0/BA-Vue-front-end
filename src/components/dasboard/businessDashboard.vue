@@ -14,7 +14,7 @@
 
           <h6 class="float-right text-success font-weight-bolder">
             <b-button variant="outline-primary" class="upgrade-btn" size="sm"
-              ><b-icon-star></b-icon-star> &nbsp;&nbsp;Upgrade Plan</b-button
+              ><b-icon-star></b-icon-star> &nbsp;&nbsp; {{ $t('dashboard.Upgrade_Plan') }}</b-button
             >
           </h6>
         </h4>
@@ -25,40 +25,40 @@
         <div class="text-lost">
           <b>  {{business.name}}  </b>
           <p class="mb-1">
-              {{business.followers}}  Community <br />
+              {{business.followers}} {{ $t('dashboard.Community') }} <br />
             <span class=""
-              >Current Plan: <span class="text-success">Basic</span></span
+              >{{ $t('dashboard.Current_Plan') }}: <span class="text-success">{{ $t('dashboard.Basic') }}</span></span
             >
           </p>
           <p class="mb-1 mb-3">  <span v-for="cat in business.category" :key="cat.name">  {{cat.name}}  </span> </p>
           <p class="mb-1">
             <b-icon-person-fill class="text-primary"></b-icon-person-fill>
               <router-link :to="'business_owner/'+business.id">
-                 Visit Profile
+                 {{ $t('dashboard.Visit_Profile') }}
           </router-link>
 
 
           </p>
           <p class="mb-1 ">
             <b-icon-chat-fill class="text-primary"></b-icon-chat-fill>
-            Message
+            {{ $t('dashboard.Messages') }}
             <span class="badge rounded-pill bg-primary float-right mt-1">
               {{business.message}}
             </span>
           </p>
           <p class="mb-1 ">
             <b-icon-bell-fill class="text-primary"></b-icon-bell-fill>
-            Notifications
+            {{ $t('dashboard.Notifications') }}
             <span class="badge rounded-pill bg-primary float-right mt-1">  {{business.notification}} </span>
             
           </p>
           <p class="mb-1 ">
             <b-icon-globe class="text-primary"></b-icon-globe>
-            <a > Visit Website</a>
+            <a> {{ $t('dashboard.Visit_Website') }}</a>
           </p>
           <p class="mb-1 ">
             <b-icon-shop class="text-primary"></b-icon-shop>
-            Market Place
+            {{ $t('dashboard.Market_Place') }}
           </p>
         </div>
       </div>

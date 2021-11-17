@@ -2,7 +2,7 @@
   <div>
     <b-card class=" border shadow ">
       <h6 class="title">
-        <fas-icon class="icons" :icon="['fas', 'video']" /> <b> Tutorial </b>
+        <fas-icon class="icons" :icon="['fas', 'video']" /> <b> {{ $t('dashboard.Title') }}</b>
       </h6>
 
       <div class="s-card">
@@ -17,8 +17,8 @@
                 class="s-embed"
               ></b-embed>
               <p class="text">
-                video name <br />
-                video Description
+                {{ $t('dashboard.video_name') }} <br />
+                {{ $t('dashboard.video_description') }}
               </p>
             </div>
           </b-col>

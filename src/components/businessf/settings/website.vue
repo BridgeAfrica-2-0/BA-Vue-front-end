@@ -8,42 +8,42 @@
               <b-table-simple hover small caption-top responsive>
                 <b-thead>
                   <b-tr>
-                    <b-th class="a-text">Website Title</b-th>
-                    <b-th class="a-text">Website Title Goes here</b-th>
+                    <b-th class="a-text">{{$t("businessf.Website_Title")}}</b-th>
+                    <b-th class="a-text">{{$t("businessf.Website_Title_Goes_here")}}</b-th>
                     <b-th> </b-th>
                   </b-tr>
                 </b-thead>
 
                 <b-tbody>
                   <b-tr>
-                    <b-td class="a-text"> Fav Icon</b-td>
-                    <b-td class="a-text">--Not set--</b-td>
+                    <b-td class="a-text"> {{$t("businessf.Fav_Icon")}}</b-td>
+                    <b-td class="a-text">{{$t("businessf.Not_set")}}</b-td>
                     <b-td class="a-text">
-                      <b-link href="#">Upgrade</b-link>
+                      <b-link href="#">{{$t("businessf.Upgrade")}}</b-link>
                     </b-td>
                   </b-tr>
                   <br />
 
                   <b-tr>
-                    <b-td class="a-text"> Subdomain Name</b-td>
+                    <b-td class="a-text"> {{$t("businessf.Subdomain_Name")}}</b-td>
                     <b-td class="a-text">www.website.com/subdomain</b-td>
-                    <b-td><b-link href="#">Upgrade</b-link> </b-td>
+                    <b-td><b-link href="#">{{$t("businessf.Upgrade")}}</b-link> </b-td>
                   </b-tr>
 
                   <br />
 
                   <b-tr>
-                    <b-td class="a-text"> Connect Your Domain</b-td>
-                    <b-td class="a-text">Not Connected</b-td>
-                    <b-td> <b-link href="#">Upgrade</b-link> </b-td>
+                    <b-td class="a-text"> {{$t("businessf.Connect_Your_Domain")}}</b-td>
+                    <b-td class="a-text">{{$t("businessf.Not_Connected")}}</b-td>
+                    <b-td> <b-link href="#">{{$t("businessf.Upgrade")}}</b-link> </b-td>
                   </b-tr>
 
                   <br />
 
                   <b-tr>
                     <b-td class="a-text"> HTTPS</b-td>
-                    <b-td class="a-text">Your Site is not scured </b-td>
-                    <b-td> <b-link href="#">Upgrade</b-link> </b-td>
+                    <b-td class="a-text">{{$t("businessf.Your_Site_is_not_secured")}} </b-td>
+                    <b-td> <b-link href="#">{{$t("businessf.Upgrade")}}</b-link> </b-td>
                   </b-tr>
                 </b-tbody>
               </b-table-simple>
@@ -51,10 +51,10 @@
           </b-col>
 
           <b-col cols="4">
-            <p class="web-template-label">Website Template</p>
+            <p class="web-template-label">{{$t("businessf.Website_Template")}}</p>
 
-            <b-link href="#" class="f-left">Visit Website</b-link>
-            <b-link href="#" class="f-right">Open Editor</b-link>
+            <b-link href="#" class="f-left">{{$t("businessf.Visit_Website")}}</b-link>
+            <b-link href="#" class="f-right">{{$t("businessf.Open_Editor")}}</b-link>
 
             <img
               class="mb-2 img-fluid"

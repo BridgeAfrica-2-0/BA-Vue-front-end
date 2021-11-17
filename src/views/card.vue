@@ -133,12 +133,7 @@ export default {
    margin-left: 90px;
    /* padding-left: 2px; */
 }
-.marg3{
 
-}
-.marg4{
-
-}
 .marg5{
   margin-top: -20px ;
 }

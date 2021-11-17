@@ -1,5 +1,7 @@
 <template>
   <div class="welcome" style="overflow-x: hidden">
+
+     
     <md-progress-bar md-mode="indeterminate" v-if="sendingP" />
 
     <md-progress-bar md-mode="indeterminate" v-if="sendingB" />
@@ -14,24 +16,22 @@
     >
       <div>
         <h4 class="text-center username f-30">
-          Hello <b> {{ username }} </b> let's get started
+          {{ $t('welcome.Hello') }} <b> {{ username }} </b> {{ $t('welcome.letsget_started') }}
         </h4>
         <br />
         <br />
 
         <p class="text f-16">
-          is simply dummy text of the printing and typesetting industry. Lorem
-          Ipsum has been the industry's standard dummy text ever since the
-          1500s, when an unknown printer took a galley of type and scrambled it
-          to make a type specimen book. It has survived not only five centuries,
-          but also the leap into electronic typesetting, remaining essentially
-          unchanged. It was popularised in the 1960s with the release of
-          Letraset sheets containing Lorem Ipsum passages, and more recently
-          with desktop publishing
+          {{ $t("welcome.Welcome") }} {{ $t("welcome.and") }} {{ $t("welcome.thank_you") }} {{ $t("welcome.for_joining") }} BidgeAfrica.com !
+          {{ $t("welcome.On_Bridge_Africa") }} {{ $t("welcome.you_can_quickly") }} {{ $t("welcome.create") }} {{ $t("welcome.your") }} {{ $t("welcome.website") }} {{ $t("welcome.less_than") }} 5 {{ $t("welcome.minutes") }};              
+          {{$t("welcome.access_an_online_marketplace")}} {{$t("welcome.for")}} {{$t("welcome.buying")}} {{$t("welcome.and")}} {{$t("welcome.selling")}} ; 
+          {{$t("welcome.search_for_and_compare")}} {{$t("welcome.product_prices")}} {{$t("welcome.through")}} {{$t("welcome.our")}} {{$t("welcome.localised_business_directly")}}, 
+          {{$t("welcome.and")}} {{$t("welcome.engage")}} {{$t("welcome.with")}} {{$t("welcome.your")}} {{$t("welcome.community")}}. {{$t("welcome.Get_started")}}.
         </p>
 
+
         <b-form-group
-          label="Use BridgeAfirca.com as a"
+          :label="$t('welcome.Use_BridgeAfirca_com_as_a')"
           label-class=" f-20 text-center"
         >
           <b-form-radio-group
@@ -45,7 +45,7 @@
         </b-form-group>
         <div class="text-center">
           <b-button variant="outline-primary" @click="choseModal">
-            Continue <b-icon icon="arrow-right"> </b-icon>
+            {{ $t('welcome.Continue') }} <b-icon icon="arrow-right"> </b-icon>
           </b-button>
         </div>
       </div>
@@ -73,7 +73,7 @@
             />
 
             <tab-content
-              title=" Complete Profile "
+              :title="$t('welcome.Complete_Profile') "
               :before-change="updateUserProfile"
             > 
 
@@ -83,7 +83,7 @@
                     <div id="preview">
                       <img v-if="img_url" :src="img_url" />
                     </div>
-                    <br />
+                   
                     <div class="text-center">
                       <b-button
                         v-if="img_url"
@@ -91,7 +91,7 @@
                         variant="primary"
                         class="mt-3 text-center"
                       >
-                        change Image
+                        {{ $t('welcome.change_Image') }}
                       </b-button>
                     </div>
 
@@ -107,7 +107,7 @@
                       >
                         <div class="drag-text">
                           <i class="fa fa-plus"> </i>
-                          <h3 class="username">Add Profile Photo</h3>
+                          <h3 class="username">{{ $t('welcome.Add_Profile_Photo') }}</h3>
                         </div>
                       </a>
                       <div></div>
@@ -115,20 +115,20 @@
                   </div>
                   <div class="col-md-6">
                     <div class="form-group" label-class="username">
-                      <label for="username" class="username"> DOB :</label
+                      <label for="username" class="username"> {{ $t('welcome.DOB') }} :</label
                       ><br />
                       <input
                         type="date"
                         name="dob"
                         id="dob"
                         v-model="dob"
-                        placeholder="Busness Name"
+                        :placeholder="$t('welcome.Busness_Name')"
                         class="form-control text"
                       />
                     </div>
 
                     <div class="form-group">
-                      <label for="alias" class="username">Gender:</label><br />
+                      <label for="alias" class="username">{{ $t('welcome.Gender') }}:</label><br />
                       <select
                         id="category"
                         v-model="gender"
@@ -136,62 +136,87 @@
                         label-class="text"
                       >
                         <option value="" selected="" disabled="">
-                          Select Gender
+                          {{ $t('welcome.Select_Gender') }}
                         </option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                        <option value="others">other</option>
+                        <option value="male">{{ $t('welcome.Male') }}</option>
+                        <option value="female">{{ $t('welcome.Female') }}</option>
+                        <option value="others">{{ $t('welcome.Other') }}</option>
                       </select>
                     </div>
 
-                    <div class="form-group">
-                      <label for="country" class="username"> Country :</label
-                      ><br />
+                  
+                 
 
-                      <country-select
+
+                  
+                    
+                    <div class="form-group">
+                      <label for="country" class="username"> {{ $t('welcome.Country') }} :</label
+                      ><br />
+                      <multiselect
                         v-model="country"
-                        :country="country"
-                        topCountry="CM"
-                        class="form-control text"
-                      />
+                        @input="PRegion"
+                       :multiple="false"
+                        :placeholder="$t('welcome.Search') "
+                        label="name"
+                        track-by="id"
+                        :options="countries"
+                      
+                       
+                      ></multiselect>
                     </div>
 
+
+
+
+
+
+
+
+                
                     <div class="form-group">
-                      <label for="country" class="username"> Region :</label
+                      <label for="country" class="username"> {{ $t('welcome.Region') }} :</label
                       ><br />
 
-                      <region-select
+                      <multiselect
                         v-model="region"
-                        :country="country"
-                        :region="region"
-                        class="form-control text"
-                      />
+                        @input="Division"
+                        
+                        :placeholder="$t('welcome.Search') "
+                        label="name"
+                        track-by="id"
+                        :options="regions"
+                        :multiple="false"
+                      
+                        
+                      ></multiselect>
                     </div>
+                 
 
                     <div class="form-group">
-                      <label for="city" class="username"> City :</label><br />
+                      <label for="city" class="username"> {{ $t('welcome.City') }} :</label><br />
                       <input
                         type="text"
                         name="alias"
                         id="City"
                         v-model="city"
-                        placeholder="city"
+                        :placeholder="$t('welcome.City')"
                         class="form-control text"
                       />
                     </div>
-
+<!-- 
                     <div class="form-group">
-                      <label for="Neighbor" class="username"> Neighbor :</label
+                      <label for="Neighbor" class="username"> {{ $t('welcome.Neighbor') }} :</label
                       ><br />
                       <input
                         type="text"
                         name="alias"
                         v-model="Neighbor"
                         id="Neighbor"
-                        placeholder="Neighbor"
+                        :placeholder="$t('welcome.Neighbor')"
                         class="form-control text"
                       />
-                    </div>
+                    </div> -->
 
                     <gmap-autocomplete
                       @place_changed="initMarker"
@@ -221,25 +246,24 @@
               </div>
             </tab-content>
 
-            <tab-content title="Follow Businesses">
+            <tab-content :title="$t('welcome.Follow_Businesses')">
               <div class="div-h">
                 <Business />
               </div>
             </tab-content>
 
-            <tab-content title="Follow People">
+            <tab-content :title="$t('welcome.Follow_People')">
               <div class="div-h">
                 <People />
               </div>
             </tab-content>
 
-            <tab-content title="Tutorial">
+            <tab-content :title="$t('welcome.Tutorial')">
               <div class="div-h">
                 <Tutorial />
               </div>
             </tab-content>
 
-            <div class="loader" v-if="loadingWizard"></div>
           </form-wizard>
         </div>
       </div>
@@ -265,7 +289,7 @@
           <form-wizard @on-complete="onComplete">
            
              <tab-content
-              title=" Complete Profile "
+              :title="$t('welcome.Complete_Profile') "
               :before-change="updateUserProfile"
             > 
 
@@ -275,7 +299,7 @@
                     <div id="preview">
                       <img v-if="img_url" :src="img_url" />
                     </div>
-                    <br />
+                  
                     <div class="text-center">
                       <b-button
                         v-if="img_url"
@@ -283,7 +307,7 @@
                         variant="primary"
                         class="mt-3 text-center"
                       >
-                        change Image
+                        {{ $t('welcome.change_Image') }}
                       </b-button>
                     </div>
 
@@ -299,7 +323,7 @@
                       >
                         <div class="drag-text">
                           <i class="fa fa-plus"> </i>
-                          <h3 class="username">Add Profile Photo</h3>
+                          <h3 class="username">{{ $t('welcome.Add_Profile_Photo') }}</h3>
                         </div>
                       </a>
                       <div></div>
@@ -307,20 +331,20 @@
                   </div>
                   <div class="col-md-6">
                     <div class="form-group" label-class="username">
-                      <label for="username" class="username"> DOB :</label
+                      <label for="username" class="username"> {{ $t('welcome.DOB') }} :</label
                       ><br />
                       <input
                         type="date"
                         name="dob"
                         id="dob"
                         v-model="dob"
-                        placeholder="Busness Name"
+                        :placeholder="$t('welcome.Busness_Name')"
                         class="form-control text"
                       />
                     </div>
 
                     <div class="form-group">
-                      <label for="alias" class="username">Gender:</label><br />
+                      <label for="alias" class="username">{{ $t('welcome.Gender') }}:</label><br />
                       <select
                         id="category"
                         v-model="gender"
@@ -328,65 +352,93 @@
                         label-class="text"
                       >
                         <option value="" selected="" disabled="">
-                          Select Gender
+                          {{ $t('welcome.Select_Gender') }}
                         </option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                        <option value="others">other</option>
+                        <option value="male">{{ $t('welcome.Male') }}</option>
+                        <option value="female">{{ $t('welcome.Female') }}</option>
+                        <option value="others">{{ $t('welcome.Other') }}</option>
                       </select>
                     </div>
 
-                    <div class="form-group">
-                      <label for="country" class="username"> Country :</label
-                      ><br />
+                   
 
-                      <country-select
+                    
+
+                      
+                    
+                    <div class="form-group">
+                      <label for="country" class="username"> {{ $t('welcome.Country') }} :</label
+                      ><br />
+                      <multiselect
                         v-model="country"
-                        :country="country"
-                        topCountry="CM"
-                        class="form-control text"
-                      />
+                        @input="PRegion"
+                       :multiple="false"
+                        :placeholder="$t('welcome.Search') "
+                        label="name"
+                        track-by="id"
+                        :options="countries"
+                      
+                       
+                      ></multiselect>
                     </div>
 
+
+
+
+
+
+
+
+                
                     <div class="form-group">
-                      <label for="country" class="username"> Region :</label
+                      <label for="country" class="username"> {{ $t('welcome.Region') }} :</label
                       ><br />
 
-                      <region-select
+                      <multiselect
                         v-model="region"
-                        :country="country"
-                        :region="region"
-                        class="form-control text"
-                      />
+                        @input="Division"
+                        
+                        :placeholder="$t('welcome.Search') "
+                        label="name"
+                        track-by="id"
+                        :options="regions"
+                        :multiple="false"
+                      
+                        
+                      ></multiselect>
                     </div>
 
+
+
+
+
                     <div class="form-group">
-                      <label for="city" class="username"> City :</label><br />
+                      <label for="city" class="username"> {{ $t('welcome.City') }} :</label><br />
                       <input
                         type="text"
                         name="alias"
                         id="City"
                         v-model="city"
-                        placeholder="city"
+                        :placeholder="$t('welcome.City')"
                         class="form-control text"
                       />
                     </div>
 
-                    <div class="form-group">
-                      <label for="Neighbor" class="username"> Neighbor :</label
+                    <!-- <div class="form-group">
+                      <label for="Neighbor" class="username"> {{ $t('welcome.Neighbor') }} :</label
                       ><br />
                       <input
                         type="text"
                         name="alias"
                         v-model="Neighbor"
                         id="Neighbor"
-                        placeholder="Neighbor"
+                        :placeholder="$t('welcome.Neighbor')"
                         class="form-control text"
                       />
-                    </div>
+                    </div> -->
 
                     <div class="form-group">
-                      <label for="Neighbor" class="username"> Adress :</label>
+                      <label for="Neighbor" class="username"> {{ $t('welcome.Adress') }} :</label>
 
                       <gmap-autocomplete
                         @place_changed="initMarker"
@@ -413,7 +465,7 @@
             </tab-content>
 
             <tab-content
-              title="Business Indentity"
+              :title="$t('welcome.Business_Indentity')"
               :before-change="validateBusiness"
             >
               <div class="form-card">
@@ -429,7 +481,7 @@
                     <div id="preview">
                       <img v-if="logoimg_url" :src="logoimg_url" />
                     </div>
-                    <br />
+                  
                     <div class="text-center">
                       <b-button
                         v-if="logoimg_url"
@@ -437,7 +489,7 @@
                         variant="primary"
                         class="mt-3 text-center"
                       >
-                        change Image
+                        {{ $t('welcome.change_Image') }}
                       </b-button>
                     </div>
 
@@ -453,7 +505,7 @@
                       >
                         <div class="drag-text">
                           <i class="fa fa-plus"> </i>
-                          <h3 class="username">Business Logo</h3>
+                          <h3 class="username">{{ $t('welcome.Business_Logo') }}</h3>
                         </div>
                       </a>
                       <div></div>
@@ -462,7 +514,7 @@
                   <div class="col-md-6">
                     <b-form-group
                       id="business_name"
-                      label="Business Name"
+                      :label="$t('welcome.Business_Name')"
                       label-for="business_name"
                     >
                       <b-form-input
@@ -474,20 +526,20 @@
                       ></b-form-input>
 
                       <b-form-invalid-feedback id="business_name-feedback"
-                        >Business Name Is Required.</b-form-invalid-feedback
+                        >{{ $t('welcome.Business_Name_Is_Required') }}.</b-form-invalid-feedback
                       >
                     </b-form-group>
 
                     <div></div>
 
                     <div class="form-group">
-                      <label for="username" class="username">About</label><br />
+                      <label for="username" class="username">{{ $t('welcome.About') }}</label><br />
                       <textarea
                         type="textarea"
                         name="business_about"
                         v-model="about"
                         id="description"
-                        placeholder="Brief description about your Busness"
+                        :placeholder="$t('welcome.Brief_description_about_your_Busness')"
                         class="form-control text"
                       ></textarea>
                     </div>
@@ -495,12 +547,12 @@
                 </div>
 
                 <div>
-                  <label class="typo__label"> Category </label>
+                  <label class="typo__label"> {{ $t('welcome.Category') }} </label>
                   <multiselect
                     v-model="multiselecvalue"
                     @input="subcategories"
-                    tag-placeholder="Add this as new tag"
-                    placeholder="Search or add a tag"
+                    tag-:placeholder= "$t('welcome.Add_this_as_new_tag')"
+                    :placeholder="$t('welcome.Search_or_add_a_tag')"
                     label="name"
                     track-by="id"
                     :options="pcategories"
@@ -511,11 +563,11 @@
                 </div>
 
                 <div>
-                  <label class="typo__label"> Sub Category</label>
+                  <label class="typo__label"> {{ $t('welcome.Sub_Category') }}</label>
                   <multiselect
                     v-model="filterselectvalue"
-                    tag-placeholder="Add this as new tag"
-                    placeholder="Search or add a tag"
+                    tag-:placeholder="$t('welcome.Add_this_as_new_tag')"
+                    :placeholder="$t('welcome.Search_or_add_a_tag')"
                     label="name"
                     track-by="subcategory_id"
                     :options="scategories"
@@ -525,8 +577,9 @@
                   ></multiselect>
                 </div>
 
-                <label class="typo__label">Fiters</label>
-                <div>
+
+                <label  v-if=" filterselectvalue.length" class="typo__label">{{ $t('welcome.Fiters') }}</label>
+                <div  v-if=" filterselectvalue.length">
                   <b-card no-body>
                     <b-tabs pills card vertical>
                       <b-tab
@@ -535,7 +588,7 @@
                         :key="filters.id"
                         active
                         ><b-card-text>
-                          <b-form-group label="Filters">
+                          <b-form-group :label="$t('welcome.Filters')"  class="d-inline-grid"   >
                             <b-form-checkbox-group
                               id=""
                               v-model="select_filterss"
@@ -545,6 +598,7 @@
                                 v-for="fil in filters.filters"
                                 :key="fil.id"
                                 :value="fil.id"
+                                 class="d-inline-grid"
                               >
                                 {{ fil.name }}
                               </b-form-checkbox>
@@ -559,13 +613,13 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="country" class="username"> Country :</label
+                      <label for="country" class="username"> {{ $t('welcome.Country') }} :</label
                       ><br />
                       <multiselect
                         v-model="countryy"
                         @input="Region"
                      
-                        placeholder="Search "
+                        :placeholder="$t('welcome.Search') "
                         label="name"
                         track-by="id"
                         :options="countries"
@@ -577,13 +631,13 @@
 
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="country" class="username"> Region :</label
+                      <label for="country" class="username"> {{ $t('welcome.Region') }} :</label
                       ><br />
                       <multiselect
                         v-model="regionn"
                         @input="Division"
                         
-                        placeholder="Search "
+                        :placeholder="$t('welcome.Search') "
                         label="name"
                         track-by="id"
                         :options="regions"
@@ -596,13 +650,13 @@
 
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="country" class="username"> Division :</label
+                      <label for="country" class="username"> {{ $t('welcome.Division') }} :</label
                       ><br />
                       <multiselect
                         v-model="division"
                         @input="Municipality"
                        
-                        placeholder="Search "
+                        :placeholder="$t('welcome.Search') "
                         label="name"
                         track-by="id"
                         :options="divisions"
@@ -616,14 +670,14 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="country" class="username">
-                        Municipality :</label
+                        {{ $t('welcome.Municipality') }} :</label
                       ><br />
 
                       <multiselect
                         v-model="municipality"
                         @input="Locality"
                       
-                        placeholder="Search "
+                        :placeholder="$t('welcome.Search') "
                         label="name"
                         track-by="id"
                         :options="municipalities"
@@ -638,12 +692,12 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="Neighbor" class="username"> Neighbor :</label
+                      <label for="Neighbor" class="username"> {{ $t('welcome.Neighbor') }} :</label
                       ><br />
                       <multiselect
                         v-model="locality"
                        
-                        placeholder="Search "
+                        :placeholder="$t('welcome.Search') "
                         label="name"
                         track-by="id"
                         :options="localities"
@@ -656,13 +710,13 @@
 
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="city" class="username"> City :</label><br />
+                      <label for="city" class="username"> {{ $t('welcome.City') }} :</label><br />
                       <input
                         type="text"
                         name="alias"
                         id="City"
                         v-model="city"
-                        placeholder="city"
+                        :placeholder="$t('welcome.City')"
                         class="form-control text"
                       />
                     </div>
@@ -672,13 +726,13 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="country" class="username"> Keywords :</label
+                      <label for="country" class="username"> {{ $t('welcome.Keywords') }} :</label
                       ><br />
 
                       <multiselect
                         v-model="business_keyword"
-                        tag-placeholder="Add this as new Keyword"
-                        placeholder="Add New Keyword"
+                        tag-:placeholder="$t('welcome.Add_this_as_new_tag')"
+                        :placeholder="$t('welcome.Add_New_Keyword')"
                         label="name"
                         track-by="id"
                         :options="keywordds"
@@ -691,7 +745,7 @@
 
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="alias" class="username">Language:</label
+                      <label for="alias" class="username">{{ $t('welcome.Language') }}:</label
                       ><br />
                       <select
                         id="category"
@@ -700,10 +754,10 @@
                         v-model="language"
                       >
                         <option value="" selected="" disabled="">
-                          Select Language
+                          {{ $t('welcome.Select_Language') }}
                         </option>
-                        <option>English</option>
-                        <option>Hindi</option>
+                        <option>{{ $t('welcome.English') }}</option>
+                        <option>{{ $t('welcome.Hindi') }}</option>
                       </select>
                     </div>
                   </div>
@@ -712,7 +766,7 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="username" class="username">TimeZone:</label
+                      <label for="username" class="username">{{ $t('welcome.TimeZone') }}:</label
                       ><br />
 
                       <b-form-select
@@ -725,7 +779,7 @@
 
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="Neighbor" class="username"> Adress :</label>
+                      <label for="Neighbor" class="username"> {{ $t('welcome.Adress') }} :</label>
 
                       <gmap-autocomplete
                         @place_changed="initMarker"
@@ -751,30 +805,29 @@
               </div>
             </tab-content>
 
-            <tab-content title="Follow Businesses">
+            <tab-content :title="$t('welcome.Follow_Businesses')">
               <div class="div-h">
                 <Business />
               </div>
             </tab-content>
 
-            <tab-content title="Follow People">
+            <tab-content :title="$t('welcome.Follow_People')">
               <div class="div-h">
                 <People />
               </div>
             </tab-content>
 
-            <tab-content title="Tutorial">
+            <tab-content :title="$t('welcome.Tutorial')">
               <div class="div-h">
                 <Tutorial />
               </div>
             </tab-content>
 
-            <div class="loader" v-if="loadingWizard"></div>
           </form-wizard>
         </div>
       </form>
     </div>
-  </div>
+  </div> 
 </template>
 
 <script>
@@ -803,6 +856,8 @@ export default {
       keywordds:[],
       first_page: "true",
       country: "",
+      coun:"",
+      reg:"",
       countryy: [],
       regionn: [],
       region: "",
@@ -874,6 +929,16 @@ export default {
   },
 
   methods: {
+
+
+      flashErrors(errors) {
+      let err = "";
+      Object.values(errors).forEach((element) => {
+        err = element[0];
+      });
+
+      return err;
+    },
 
     addTag(newTag) {
       const tag = {
@@ -987,6 +1052,27 @@ export default {
         });
     },
 
+
+
+    PRegion(){
+
+
+ let formData2 = new FormData();
+      formData2.append("countryId",  this.selectedpcountry);
+
+        this.$store
+        .dispatch("auth/region", formData2)
+        .then(() => {
+     
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+
+    },
+
+
+
     Region() {
       let formData2 = new FormData();
       formData2.append("countryId", this.selectedcountry);
@@ -1044,7 +1130,7 @@ export default {
     },
 
     setLoading: function (value) {
-      this.loadingWizard = value;
+    //  this.loadingWizard = value;
     },
 
     validateState(name) {
@@ -1120,7 +1206,7 @@ export default {
               this.flashMessage.show({
                 status: "success",
 
-                message: "Business Profile Created",
+                message: this.$t('welcome.Business_Profile_Created'),
               });
               loader.hide();
               resolve(true);
@@ -1137,14 +1223,14 @@ export default {
                 this.flashMessage.show({
                   status: "error",
 
-                  message: err.response.data.message,
+                message: this.flashErrors(err.response.data.errors),
                   blockClass: "custom-block-class",
                 });
               } else {
                 this.flashMessage.show({
                   status: "error",
 
-                  message: "Unable to Create Your Business",
+                  message: this.$t('welcome.Unable_to_Create_Your_Business'),
                   blockClass: "custom-block-class",
                 });
                 console.log({ err: err });
@@ -1241,7 +1327,7 @@ export default {
             this.flashMessage.show({
               status: "success",
               blockClass: "custom-block-class",
-              message: "Business Profile Created",
+              message: this.$t('welcome.Business_Profile_Created'),
             });
 
             resolve(true);
@@ -1258,14 +1344,14 @@ export default {
               this.flashMessage.show({
                 status: "error",
 
-                message: err.response.data.message,
+                 message: this.flashErrors(err.response.data.errors),
                 blockClass: "custom-block-class",
               });
             } else {
               this.flashMessage.show({
                 status: "error",
 
-                message: "Unable to Create Your Business",
+                message: this.$t('welcome.Unable_to_Create_Your_Business'),
                 blockClass: "custom-block-class",
               });
               console.log({ err: err });
@@ -1277,10 +1363,18 @@ export default {
     },
 
     updateUserProfile: function () {
+
+       let loader = this.$loading.show({
+            container: this.fullPage ? null : this.$refs.loader,
+            canCancel: true,
+            onCancel: this.onCancel,
+            color: "#e75c18",
+          });
+
       return new Promise((resolve, reject) => {
         console.log("sending user data");
 
-        this.sendingP = true;
+       
 
         let formData = new FormData();
         formData.append("profile_picture", this.profile_pic);
@@ -1288,13 +1382,13 @@ export default {
         formData.append("dob", this.dob);
         formData.append("gender", this.gender);
         formData.append("city", this.city);
-        formData.append("country", this.country);
-        formData.append("region", this.region);
+        formData.append("country", this.selectedpcountry);
+        formData.append("region", this.selectedpregion);
         formData.append("city", this.city);
         formData.append("neighbor", this.Neighbor);
         formData.append("lat", this.center.lat);
         formData.append("lng", this.center.lng);
-        formData.append("address", this.region);
+        formData.append("address", this.address);
 
         axios
           .post("/complete/profile", formData)
@@ -1302,12 +1396,12 @@ export default {
             console.log(response);
 
             this.step1 = true;
-            this.sending = false;
+            loader.hide();
 
             this.flashMessage.show({
               status: "success",
 
-              message: "Profile Updated",
+              message: this.$t('welcome.Profile_Updated'),
 
               blockClass: "custom-block-class",
             });
@@ -1321,27 +1415,28 @@ export default {
           .catch((err) => {
             console.log({ err: err });
 
-            this.sending = false;
+            loader.hide();
             this.step1 = false;
 
             if (err.response.status == 422) {
               console.log({ err: err });
               console.log(err.response.data.message);
-
+             loader.hide();
               this.flashMessage.show({
                 status: "error",
 
-                message: err.response.data.message,
+              message: this.flashErrors(err.response.data.errors),
                 blockClass: "custom-block-class",
               });
             } else {
               this.flashMessage.show({
                 status: "error",
-                title: "Registration Failed",
-                message: "Unable to update your Information",
+                title: this.$t('welcome.Registration_Failed'),
+                message: this.$t('welcome.Unable_to_update_your_Information'),
                 blockClass: "custom-block-class",
               });
               console.log({ err: err });
+              loader.hide();
             }
 
             resolve(false);
@@ -1406,11 +1501,13 @@ export default {
   },
 
   mounted() {
+
+    this. peopleAround();
     this.locateGeoLocation();
 
     this.Country();
     this.categories();
-
+    
     //this.filters()
 
     //this.Setcategoryfiters()
@@ -1453,6 +1550,17 @@ export default {
       });
       return sub_cat;
     },
+
+     selectedpcountry: function () {
+      return this.country.id;
+    },
+
+
+     selectedpregion: function () {
+      return this.region.id;
+    },  
+
+
     selectedregion: function () {
       let sub_cat = [];
       this.regionn.forEach((item) => {
@@ -1528,7 +1636,7 @@ import "vue-form-wizard/dist/vue-form-wizard.min.css";
 
 #preview img {
   max-width: 100%;
-  max-height: 500px;
+  max-height: 250px;
 }
 
 .wizard-icon-container {

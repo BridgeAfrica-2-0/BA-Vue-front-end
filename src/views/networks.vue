@@ -1,8 +1,8 @@
 <template>
-  <div style="overflow-y: hidden;">
+  <div style="overflow-y: hidden">
     <navbar />
 
-    <div class="container-fluid lynetowrk" style="margin-top:-30px">
+    <div class="container-fluid lynetowrk" style="margin-top: -30px">
       <ly-tab
         v-model="selectedId"
         :items="items"
@@ -16,14 +16,14 @@
     <div class="demo container-fluid p-0">
       <div class="mt-3" v-if="selectedId == '0'">
         <b-row class="center-content">
-          <b-col lg="5" xl="4" class=" ">
+          <b-col lg="5" xl="4" class="">
             <Parent />
           </b-col>
 
           <b-col
             lg="7"
             xl="8"
-            class="order-sm-0 mt-sm-10 mt-md-10 mt-xl-0  marg-tap"
+            class="order-sm-0 mt-sm-10 mt-md-10 mt-xl-0 marg-tap"
           >
             <Default />
           </b-col>
@@ -56,7 +56,19 @@
     </div>
 
     <Footer />
+
+    <p class="text-center">
+      <span class="display-inline">
+        <b-link @click="$i18n.locale = 'en'"> {{ $t("auth.english") }}</b-link>
+        <span class="vl"></span>
+        <b-link class="ml-2" @click="$i18n.locale = 'fr'">
+          {{ $t("auth.french") }}
+        </b-link>
+      </span>
+      Bridge Africa © 2021
+    </p>
   </div>
+
 </template>
 
 <script>
@@ -121,7 +133,6 @@ export default {
   .marg-tap {
     margin-top: 20px;
   }
-
 }
 
 .m-top {
@@ -143,8 +154,6 @@ export default {
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
 }
-
-
 
 .nav-text {
   cursor: pointer;

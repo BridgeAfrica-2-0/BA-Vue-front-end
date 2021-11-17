@@ -24,6 +24,7 @@ import Follower from "../views/follower.vue";
 import Visitor from "../views/visitor.vue";
 import profile_owner from "@/views/profileOwner";
 import businessFollower from "@/views/businessFollower";
+import profileFollower from "@/views/profileFollower";
 import businessOwner from "@/views/businessOwner";
 import businessEditor from "@/views/businessEditor";
 import businessVisitor from "@/views/businessVisitor";
@@ -32,7 +33,9 @@ import forgotPassword from "@/views/forgotPassword";
 import navMessage from "@/views/navMessaging";
 import Blec from "@/views/blec";
 import memberNetworkFollower from "@/views/memberNetworkFollower";
-// import Test from "@/views/test";
+
+import networkEditors from "@/views/networkEditors";
+
 import templateView from "@/views/templateView";
 import webSiteCreate from "@/views/webSiteCreate";
 import webSiteCreateTwo from "@/views/webSiteCreateTwo";
@@ -41,246 +44,293 @@ import confirmPayment from "@/views/confirmPayment";
 import networks from "@/views/networks";
 import dashboard from "@/views/dashboard";
 
-import myorders from "@/views/myOders";
 import card from "@/views/card";
+import myorders from "@/views/myOders"
+import notFound from "@/components/404"
 
 
 
 import welcome from "@/views/welcome";
 
+import ordersdetail from "@/views/odersDetail";
+import businessordersdetail from "@/views/businessordersdetail"
+
+import payment from "@/views/payment";
+
+
 Vue.use(VueRouter);
 
-const routes = [
-  // {
-  //   path: "/test",
-  //   name: "Home",
-  //   component: Test,
+const routes = [{
+  path: "/notFound",
+  name: "notFound",
+  component: notFound,
+},
+
+{
+  path: "/myorders",
+  name: "orders",
+  component: myorders,
+  // meta: {
+  //   auth: true,
   // },
+},
+{
+  path: "/",
+  name: "home",
+  component: dashboard,
+  meta: {
+    auth: true,
+  },
+},
 
-  {
-    path: "/myorders",
-    name: "orders",
-    component: myorders,
-    // meta: {
-    //   auth: true,
-    // },
-  },
-  
-
-  
-  {
-    path: "/",
-    name: "home",
-    component: dashboard,
-    meta: {
-      auth: true,
-    },
-  },
-
-  {
-    path: "/card",
-    name: "card",
-    component: card,
-  },
-
-  {
-    path: "/market",
-    name: "market",
-    component: market,
-  },
-
-  {
-    path: "/welcome",
-    name: "welcome",
-    component: welcome,
-    meta: {
-      auth: true,
-    },
-  },
-
-  {
-    path: "/settings",
-    name: "settings",
-    component: settings,
-  },
-
-  {
-    path: "/dashboard",
-    name: "dashboard",
-    component: dashboard,
-  },
-
-  {
-    path: "/profile_owner",
-    name: "profile_owner",
-    component: profile_owner,
-  },
-  {
-    path: "/template_viewer",
-    name: "templateViewer",
-    component: templateView,
-  },
-  {
-    path: "/business_owner/:id?",
-    name: "BusinessOwner",
-    component: businessOwner,
-  },
+{
+  path: "/market",
+  name: "market",
+  component: market,
+},
+{
+  path: "/checkout",
+  name: "payment",
+  component: payment
+},
 
 
-  {
-    path: "/business_editor/:id?",
-    name: "BusinessEditor",
-    component: businessEditor,
-  },
 
-  {
-    path: "/business_owner_setting_general",
-    name: "businessOwnerSettingGeneral",
-    component: businessOwnerSettingGeneral,
-  },
 
-  {
-    path: "/business_owner/create_website_step_one",
-    name: "createWebSite",
-    component: webSiteCreate,
+{
+  path: "/welcome",
+  name: "welcome",
+  component: welcome,
+  meta: {
+    auth: true,
   },
-  {
-    path: "/business_owner/create_website_step_two",
-    name: "createWebSiteTwo",
-    component: webSiteCreateTwo,
-  },
-  {
-    path: "/business_owner/create_website_plan",
-    name: "payPlan",
-    component: paidPlan,
-  },
-  {
-    path: "/business_owner/create_website_confirm_payment",
-    name: "confirmPayment",
-    component: confirmPayment,
-  },
-  {
-    path: "/business_owner/network/:id?",
-    name: "networks",
-    component: networks,
-  },
-  {
-    path: "/networks",
-    name: "networks",
-    component: networks,
-  },
-  {
-    path: "/login",
-    name: "Login",
-    component: Login,
-  },
+},
 
-  {
-    path: "/signup",
-    name: "signup",
-    component: signup,
-  },
+{
+  path: "/settings",
+  name: "settings",
+  component: settings,
+},
 
-  {
-    path: "/recoverPass1",
-    name: "RecoverPass1",
-    component: RecoverPass1,
+{
+  path: "/dashboard",
+  name: "dashboard",
+  component: dashboard,
+  meta: {
+    auth: true,
   },
+},
 
-  {
-    path: "/verify",
-    name: "verifyAccount",
-    component: verifyAccount,
+{
+  path: "/profile_owner",
+  name: "profile_owner",
+  component: profile_owner,
+  meta: {
+    auth: true,
   },
+},
+{
+  path: "/profilefollower/:id?",
+  name: "ProfileFollower",
+  component: profileFollower,
+  meta: {
+    auth: true,
+  },
+},
+{
+  path: "/template_viewer",
+  name: "templateViewer",
+  component: templateView,
+},
+{
+  path: "/business_owner/:id?",
+  name: "BusinessOwner",
+  component: businessOwner,
+  meta: {
+    auth: true,
+  },
+},
 
-  {
-    path: "/recoverPass2",
-    name: "RecoverPass2",
-    component: RecoverPass2,
-  },
-  {
-    path: "/recoverPass3",
-    name: "RecoverPass3",
-    component: RecoverPass3,
-  },
-  {
-    path: "/businessfollower/:id?",
-    name: "BusinessFollower",
-    component: businessFollower,
-  },
-  {
-    path: "/businessvisitor",
-    name: "BusinessVisitor",
-    component: businessVisitor,
-  },
-  {
-    path: "/services/create",
-    name: "Create",
-    component: createService,
-    beforeEnter: (to, from, next) => {
-      if (store.state.login) {
-        next();
-      } else {
-        next({ name: "Login" });
-      }
-    },
-  },
-  {
-    path: "/services/:id",
-    name: "Service",
-    component: service,
-  },
-  {
-    path: "/services/modify/:id",
-    name: "Modify",
-    component: Modifier,
-    beforeEnter: (to, from, next) => {
-      console.log("dedans");
-      if (store.state.login && store.state.isToi) {
-        next();
-      } else {
-        next({ name: "Login" });
-      }
-    },
-  },
 
-  {
-    path: "/profile/:id?",
-    name: "Follower",
-    component: Follower,
+{
+  path: "/business_editor/:id?",
+  name: "BusinessEditor",
+  component: businessEditor,
+  meta: {
+    auth: true,
   },
-  {
-    path: "/profilevisitor",
-    name: "visitor",
-    component: Visitor,
-  },
-  {
-    path: "/search/:id",
-    name: "Search",
-    component: search,
-  },
-  {
-    path: "/forgotpass",
-    name: "ForgotPassword",
-    component: forgotPassword,
-  },
-  {
-    path: "/messaging",
-    name: "Nav Meassage",
-    component: navMessage,
-  },
+},
 
-  {
-    path: "/blec",
-    name: "Blec",
-    component: Blec,
-  },
+{
+  path: "/business_owner_setting_general",
+  name: "businessOwnerSettingGeneral",
+  component: businessOwnerSettingGeneral,
+},
 
-  {
-    path: "/memberNetworkFollower",
-    name: "Membar Network Follower",
-    component: memberNetworkFollower,
+{
+  path: "/business_owner/create_website_step_one",
+  name: "createWebSite",
+  component: webSiteCreate,
+},
+{
+  path: "/business_owner/create_website_step_two",
+  name: "createWebSiteTwo",
+  component: webSiteCreateTwo,
+},
+{
+  path: "/business_owner/create_website_plan",
+  name: "payPlan",
+  component: paidPlan,
+},
+{
+  path: "/business_owner/create_website_confirm_payment",
+  name: "confirmPayment",
+  component: confirmPayment,
+},
+{
+  path: "/network/:id?",
+  name: "networks",
+  component: networks,
+  meta: {
+    auth: true,
   },
+},
+{
+  path: "/networks/:id?",
+  name: "networks",
+  component: networks,
+  meta: {
+    auth: true,
+  },
+},
+{
+  path: "/network_editors/:id?",
+  name: "NetworkEditors",
+  component: networkEditors,
+  meta: {
+    auth: true,
+  },
+},
+{
+  path: "/login",
+  name: "Login",
+  component: Login,
+},
+
+{
+  path: "/signup",
+  name: "signup",
+  component: signup,
+},
+
+{
+  path: "/recoverPass1",
+  name: "RecoverPass1",
+  component: RecoverPass1,
+},
+
+{
+  path: "/verify",
+  name: "verifyAccount",
+  component: verifyAccount,
+},
+
+{
+  path: "/recoverPass2",
+  name: "RecoverPass2",
+  component: RecoverPass2,
+},
+{
+  path: "/recoverPass3",
+  name: "RecoverPass3",
+  component: RecoverPass3,
+},
+{
+  path: "/businessfollower/:id?",
+  name: "BusinessFollower",
+  component: businessFollower,
+  meta: {
+    auth: true,
+  },
+},
+{
+  path: "/businessvisitor",
+  name: "BusinessVisitor",
+  component: businessVisitor,
+},
+{
+  path: "/services/create",
+  name: "Create",
+  component: createService,
+  beforeEnter: (to, from, next) => {
+    if (store.state.login) {
+      next();
+    } else {
+      next({ name: "Login" });
+    }
+  },
+},
+{
+  path: "/services/:id",
+  name: "Service",
+  component: service,
+},
+{
+  path: "/services/modify/:id",
+  name: "Modify",
+  component: Modifier,
+  beforeEnter: (to, from, next) => {
+    console.log("dedans");
+    if (store.state.login && store.state.isToi) {
+      next();
+    } else {
+      next({ name: "Login" });
+    }
+  },
+},
+
+{
+  path: "/profile/:id?",
+  name: "Follower",
+  component: Follower,
+  meta: {
+    auth: true,
+  },
+},
+{
+  path: "/profilevisitor",
+  name: "visitor",
+  component: Visitor,
+},
+{
+  path: "/search",
+  name: "Search",
+  component: search,
+},
+{
+  path: "/forgotpass",
+  name: "ForgotPassword",
+  component: forgotPassword,
+},
+{
+  path: "/messaging",
+  name: "Nav Meassage",
+  component: navMessage,
+},
+
+{
+  path: "/blec",
+  name: "Blec",
+  component: Blec,
+},
+
+{
+  path: "/memberNetworkFollower/:id?",
+  name: "Membar Network Follower",
+  component: memberNetworkFollower,
+},
+
+
 ];
 
 const router = new VueRouter({

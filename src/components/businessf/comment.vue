@@ -18,7 +18,7 @@
         </p>
         <b-icon icon="suit-heart" variant="primary" aria-hidden="true"></b-icon>
         23
-        <span @click="showReply" class="primary ml-2 reply"><b>Reply</b></span>
+        <span @click="showReply" class="primary ml-2 reply"><b>{{$t("businessf.Reply")}}</b></span>
         <div v-if="reply">
           <b-row class="mt-2">
             <b-col cols="1">
@@ -29,7 +29,7 @@
               ></b-avatar>
             </b-col>
             <b-col cols="11">
-              <input placeholder="Post a Comment" class="comment" type="text" />
+              <input placeholder="$t('businessf.Post_a_Comment')" class="comment" type="text" />
 
               <fas-icon
                 class="primary send-cmt"
@@ -48,7 +48,6 @@ export default {
   data() {
     return {
       reply: false,
-      
       msg:" Lorem Ipsum has been the industry's   this is do goodfive centuries, but  the leap into electronic      this is do goodfive centuries, but  the leap into electronic        this is do goodfive centuries, but  the leap into electronic  this sis sit tit typesetting",
 
     };

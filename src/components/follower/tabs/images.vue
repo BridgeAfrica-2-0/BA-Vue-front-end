@@ -31,7 +31,7 @@
                     />
                   </template>
                   <b-dropdown-item @click="downloadPic(pictures.id)"
-                    >Download</b-dropdown-item
+                    >{{ $t('profilefollower.Download') }}</b-dropdown-item
                   >
                 </b-dropdown>
               </li>

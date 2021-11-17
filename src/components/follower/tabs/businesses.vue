@@ -4,7 +4,7 @@
 			class="primary mr-2 pt-1 icon-size primary"
 			:icon="['fas', 'handshake']"
 		/>
-		Businesses
+		{{ $t('profilefollower.Businesses') }}
 
 		<hr />
 
@@ -29,7 +29,7 @@
 										{{ cat.name }}
 									</span>
 									<br />
-									{{ count(item.followers) }} Community <br />
+									{{ count(item.followers) }} {{ $t('profilefollower.Community') }} <br />
 
 									<span class="location">
 										<b-icon-geo-alt class="ico"></b-icon-geo-alt>
@@ -70,7 +70,7 @@
 												variant="primary"
 											>
 												<i class="fas fa-user-plus  fa-lg btn-icon "></i>
-												<span class="btn-com">Community</span>
+												<span class="btn-com">{{ $t('profilefollower.Community') }}</span>
 											</b-button>
 										</b-col>
 
@@ -89,7 +89,7 @@
 												variant="primary"
 											>
 												<i class="fas fa-envelope   fa-lg btn-icon "></i>
-												<span class="btn-text">Message</span>
+												<span class="btn-text">{{ $t('profilefollower.Message') }}</span>
 											</b-button>
 										</b-col>
 
@@ -108,7 +108,7 @@
 												variant="primary"
 											>
 												<i class="fas fa-map-marked-alt  fa-lg btn-icon "></i>
-												<span class="btn-text">Direction</span>
+												<span class="btn-text">{{ $t('profilefollower.Direction') }}</span>
 											</b-button>
 										</b-col>
 									</b-row>
@@ -123,10 +123,10 @@
 		</div>
 		<div v-show="noBusiness" class="no-business">
 			<b-container>
-				<h2>No Businesses Listed</h2>
+				<h2>{{ $t('profilefollower.No_Businesses_Listed') }}</h2>
 				<hr />
 			</b-container>
-			<p>User has not listed any business. Please check back later</p>
+			<p>{{ $t('profilefollower.User_has_not_listed_any_business') }}. {{ $t('profilefollower.Please_check_back_later') }}</p>
 		</div>
 	</div>
 </template>

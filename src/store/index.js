@@ -40,8 +40,11 @@ import { notification } from "./notifications"
 // import axios from "axios";
 Vue.use(Vuex);
 
-//  axios.defaults.baseURL = process.env.VUE_APP_API_URL;
-axios.defaults.baseURL = "https://test.maxinemoffett.com/api/v1/";
+  axios.defaults.baseURL = process.env.VUE_APP_API_URL;
+//axios.defaults.baseURL = "https://test.maxinemoffett.com/api/v1/";
+
+//axios.defaults.baseURL = "https://e34d-154-72-150-62.ngrok.io/api/v1/";
+
 
 export default new Vuex.Store({
   modules: {
@@ -69,6 +72,7 @@ export default new Vuex.Store({
     business,
     networkProfileFeedback,
     NetworkSettings,
+   
     businessSettingInfo,
     checkout,
     social,

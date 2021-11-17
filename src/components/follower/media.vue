@@ -7,11 +7,11 @@
           :icon="['fas', 'file-image']"
           size="lg"
         />
-        <b> Media </b>
+        <b> {{ $t('profilefollower.Media') }} </b>
       </h6>
        <span class="float-right">
         <b-link
-          ><b-icon icon="eye-fill" variant="primary"> </b-icon> View All
+          ><b-icon icon="eye-fill" variant="primary"> </b-icon> {{ $t('profilefollower.View_All') }}
         </b-link></span
       >
       <CoolLightBox :items="imgaray" :index="index" @close="index = null">

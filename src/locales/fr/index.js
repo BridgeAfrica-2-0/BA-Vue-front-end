@@ -5,7 +5,7 @@ import businessf from './businessf.json'
 import search from './search.json'
 
 //import en from './en.json'
-import auth from './auth.json'
+// import auth from './auth.json'
 import network from './network.json'
 
 
@@ -38,6 +38,6 @@ export const fr = {
     network: network,
     profilefollower: profilefollower,
     verification: verification,
-    passrecover: passrecover,
-    profileowner: profileowner,
+    // passrecover: passrecover,
+    // profileowner: profileowner,
 }

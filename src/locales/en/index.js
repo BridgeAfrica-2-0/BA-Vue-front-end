@@ -19,8 +19,8 @@ export const en = {
 
 
     auth: auth,
-    businessf: businessf,
-    search: search,
+    // businessf: businessf,
+    // search: search,
 
     network: network,
     profilefollower: profilefollower,
@@ -30,7 +30,7 @@ export const en = {
     dashboard: dashboard,
     profileowner: profileowner,
 
-    welcome: welcome,
+    // welcome: welcome,
     memnetwork: memnetwork,
 
 }

@@ -883,7 +883,20 @@ export default {
     this.getUsers();
     this.getChatList({ type: 'user' });
   },
-  created() {
+  async created() {
+     this.$store.commit('businessChat/setCurrentBizId', this.$route.params.id);
+    await this.getBizs();
+    this.tabIndex = this.$route.query.msgTabId;
+    if (this.tabIndex) {
+      this.selectedChat({ chat: this.ctaSelected, id: this.ctaSelected.id });
+    }
+
+    if (this.tabIndex == 1) {
+      this.getChatList({ type: 'business' });
+    } else if (this.tabIndex == 2) {
+      this.getChatList({ type: 'network' });
+    } else this.getChatList({ type: 'user' });
+
     this.socket.on('generalMessage', (data) => {
       console.log('Received');
       console.log(data);

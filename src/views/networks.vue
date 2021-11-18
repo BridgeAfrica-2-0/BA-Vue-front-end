@@ -3,13 +3,7 @@
     <navbar />
 
     <div class="container-fluid lynetowrk" style="margin-top: -30px">
-      <ly-tab
-        v-model="selectedId"
-        :items="items"
-        :options="options"
-        @change="handleChange"
-      >
-      </ly-tab>
+      <ly-tab v-model="selectedId" :items="items" :options="options" @change="handleChange"> </ly-tab>
       <hr class="d-none d-md-block" />
     </div>
 
@@ -20,11 +14,7 @@
             <Parent />
           </b-col>
 
-          <b-col
-            lg="7"
-            xl="8"
-            class="order-sm-0 mt-sm-10 mt-md-10 mt-xl-0 marg-tap"
-          >
+          <b-col lg="7" xl="8" class="order-sm-0 mt-sm-10 mt-md-10 mt-xl-0 marg-tap">
             <Default />
           </b-col>
         </b-row>
@@ -60,19 +50,19 @@
 </template>
 
 <script>
-import navbar from "@/components/navbar";
-import Footer from "@/components/footer";
-import Default from "@/components/businessf/tabs/owner/networks/defaultNetworks";
+import navbar from '@/components/navbar';
+import Footer from '@/components/footer';
+import Default from '@/components/businessf/tabs/owner/networks/defaultNetworks';
 
-import Inbox from "@/components/businessf/tabs/owner/networks/inbox";
-import General from "@/components/businessf/tabs/owner/networks/general";
+import Inbox from '@/components/businessf/tabs/owner/networks/inbox';
+import General from '@/components/businessf/tabs/owner/networks/general';
 
-import LyTab from "@/tab/src/index.vue";
+import LyTab from '@/tab/src/index.vue';
 
-import Parent from "@/components/businessf/tabs/owner/networks/parent";
+import Parent from '@/components/businessf/tabs/owner/networks/parent';
 
 export default {
-  name: "networks",
+  name: 'networks',
   components: {
     General,
 
@@ -90,22 +80,25 @@ export default {
       bottomSelectedId: 0,
 
       items: [
-        { label: "Home ", icon: " " },
+        { label: 'Home ', icon: ' ' },
 
-        { label: "Inbox", icon: " " },
-        { label: "Notification", icon: "" },
-        { label: "Member Request", icon: "" },
-        { label: "Pending Post", icon: "" },
+        { label: 'Inbox', icon: ' ' },
+        { label: 'Notification', icon: '' },
+        { label: 'Member Request', icon: '' },
+        { label: 'Pending Post', icon: '' },
 
-        { label: "Keyword Alert", icon: "" },
+        { label: 'Keyword Alert', icon: '' },
 
-        { label: "Settings", icon: "" },
+        { label: 'Settings', icon: '' },
       ],
 
       options: {
-        activeColor: "#32a400",
+        activeColor: '#32a400',
       },
     };
+  },
+  created() {
+    this.selectedId = this.$route.query.tabId ? this.$route.query.tabId : 0;
   },
 
   methods: {

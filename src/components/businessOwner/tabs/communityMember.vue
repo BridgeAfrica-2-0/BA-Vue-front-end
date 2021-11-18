@@ -36,7 +36,7 @@
                       <div>
                         <b-row class="mt-lg-0">
                           <b-col md="6" lg="12" cols="6" xl="12" class="mt-2 mt-lg-2 mt-xl-2 btn-2 center">
-                            <b-button block variant="primary" size="sm" class="b-background flexx pobtn shadow">
+                            <b-button block variant="primary" size="sm" class="b-background flexx pobtn shadow" @click="cta(item)">
                               <i class="fas fa-envelope fa-lg btn-icon"></i>
                               <span class="btn-text">Message</span>
                             </b-button>
@@ -85,15 +85,14 @@ export default {
   },
 
   computed: {
+     activeAccount() {
+      return this.$store.getters['auth/profilConnected'];
+    },
     users() {
       if (this.type == "Follower") {
-
        return  this.$store.state.businessOwner.UcommunityFollower.user_followers;  
-     
-
       } else {
       return  this.$store.state.businessOwner.UcommunityFollowing.user_following; 
-    
       }
     },
   },
@@ -102,6 +101,19 @@ export default {
  },
 
   methods: {
+    cta(data) {
+      console.log(data);
+      this.$store.commit('businessChat/setSelectedChat', data);
+      let path = '';
+      if (this.activeAccount.user_type == 'business') {
+        path = '/business_owner/' + this.activeAccount.id;
+      } else if (this.activeAccount.user_type == 'network') {
+        path = '/';
+      } else path = '/messaging';
+
+      // this.$router.push({ path: `${path}`, query: { tabId: 1, msgTabId: 1 } });
+      this.$router.push({ path: `/business_owner/${this.activeAccount.id}`, query: { tabId: 1, msgTabId: 0 } });
+    },
 
 
     search(){

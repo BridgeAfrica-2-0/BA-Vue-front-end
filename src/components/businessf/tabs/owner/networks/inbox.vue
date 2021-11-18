@@ -827,7 +827,7 @@ export default {
     // }
   },
   async created() {
-    this.$store.commit('networkChat/setCurrentBizId', this.$route.params.id);
+    this.$store.commit('businessChat/setCurrentBizId', this.$route.params.id);
     await this.getBizs();
     this.tabIndex = this.$route.query.msgTabId;
     if (this.tabIndex) {
@@ -839,6 +839,7 @@ export default {
     } else if (this.tabIndex == 2) {
       this.getChatList({ type: 'network' });
     } else this.getChatList({ type: 'user' });
+
 
     this.socket.on('generalMessage', (data) => {
       console.log('Received');

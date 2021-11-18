@@ -83,18 +83,23 @@ export default {
   methods: {
     cta(data) {
       console.log(data);
-
       this.$store.commit('businessChat/setSelectedChat', data);
-
+      
       let path = '';
+      let msgTabId = null;
       if (this.activeAccount.user_type == 'business') {
+        msgTabId = 1;
         path = '/business_owner/' + this.activeAccount.id;
       } else if (this.activeAccount.user_type == 'network') {
-        path = '/';
-      } else path = '/messaging';
+        msgTabId = 2;
+        path = '/network/' + this.activeAccount.id;
+      } else {
+        msgTabId = 0;
+        path = '/messaging';
+      }
 
-      // this.$router.push({ path: `${path}`, query: { tabId: 1, msgTabId: 1 } });
-      this.$router.push({ path: `/business_owner/${this.activeAccount.id}`, query: { tabId: 1, msgTabId: 1 } });
+      this.$router.push({ path: `${path}`, query: { tabId: 1, msgTabId: msgTabId } });
+      // this.$router.push({ path: `/business_owner/${this.activeAccount.id}`, query: { tabId: 1, msgTabId: 1 } });
     },
   },
 };

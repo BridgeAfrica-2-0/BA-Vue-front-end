@@ -44,9 +44,12 @@ import confirmPayment from "@/views/confirmPayment";
 import networks from "@/views/networks";
 import dashboard from "@/views/dashboard";
 
+import ordersdetail from "@/views/ordersDetail";
+import businessordersdetail from "@/views/businessordersdetail"
+
 import myorders from "@/views/myOders"
 import notFound from "@/components/404"
-
+import card from "@/views/card";
 import welcome from "@/views/welcome";
 import payment from "@/views/payment";
 
@@ -57,7 +60,6 @@ const routes = [{
         name: "notFound",
         component: notFound,
     },
-
     {
         path: "/myorders",
         name: "orders",
@@ -66,9 +68,6 @@ const routes = [{
         //   auth: true,
         // },
     },
-
-
-
     {
         path: "/",
         name: "home",
@@ -88,8 +87,6 @@ const routes = [{
         name: "payment",
         component: payment
     },
-
-
     {
         path: "/govx",
         name: "govx",
@@ -104,7 +101,6 @@ const routes = [{
             auth: true,
         },
     },
-
     {
         path: "/settings",
         name: "settings",
@@ -190,6 +186,22 @@ const routes = [{
         path: "/login",
         name: "Login",
         component: Login,
+    },
+
+    {
+        path: "/card",
+        name: "card",
+        component: card,
+    },
+    {
+        path: "/ordersdetail",
+        name: "ordersdetail",
+        component: ordersdetail,
+    },
+    {
+        path: "/businessordersdetail",
+        name: "businessordersdetail",
+        component: businessordersdetail,
     },
 
     {

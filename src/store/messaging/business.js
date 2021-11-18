@@ -1,4 +1,5 @@
 import axios from "axios";
+import { state } from "../search/state";
 
 export default {
     namespaced: true,
@@ -105,7 +106,8 @@ export default {
     },
 
     actions: {
-        GET_BIZS({ commit, state }, data) {
+        GET_BIZS({ commit, state, getters, rootGetters, rootState }, data) {
+
             commit("setBizs", []);
 
             commit("setLoader", true);
@@ -115,15 +117,16 @@ export default {
                     commit("setLoader", false);
                     let bizs = res.data.data
                     commit("setBizs", bizs);
-                    let curBiz = bizs.filter((biz) => {
-                        return state.currentBizId == biz.id
-                    })
-                    commit("setCurrentBiz", curBiz[0]);
+                    // let curBiz = bizs.filter((biz) => {
+                    //     return state.currentBizId == biz.id
+                    // })
                 })
                 .catch((err) => {
                     commit("setLoader", false);
                     console.log(err);
                 })
+            commit("setCurrentBiz", rootGetters['auth/profilConnected']);
+
         },
         // [NO BUG]
         GET_BIZS_CHAT_LIST({ commit, state }, data) {

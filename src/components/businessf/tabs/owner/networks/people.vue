@@ -38,7 +38,7 @@
                           @click="cta(people)"
                         >
                           <i class="fas fa-envelope fa-lg btn-icon"></i>
-                          <span class="btn-text">Messagehgk</span>
+                          <span class="btn-text">Message</span>
                         </b-button>
                       </b-col>
 
@@ -81,18 +81,22 @@ export default {
     cta(data) {
       console.log(data);
       this.$store.commit('businessChat/setSelectedChat', data);
-      // console.log('selected tab:', this.selectedChat);
-
 
       let path = '';
+      let msgTabId = null;
       if (this.activeAccount.user_type == 'business') {
+        msgTabId = 1;
         path = '/business_owner/' + this.activeAccount.id;
       } else if (this.activeAccount.user_type == 'network') {
-        path = '/';
-      } else path = '/messaging';
+        msgTabId = 2;
+        path = '/network/' + this.activeAccount.id;
+      } else {
+        msgTabId = 0;
+        path = '/messaging';
+      }
 
-      // this.$router.push({ path: `${path}`, query: { tabId: 1, msgTabId: 1 } });
-      this.$router.push({ path: `/business_owner/${this.activeAccount.id}`, query: { tabId: 1, msgTabId: 1 } });
+      this.$router.push({ path: `${path}`, query: { tabId: 1, msgTabId: msgTabId } });
+      // this.$router.push({ path: `/business_owner/${this.activeAccount.id}`, query: { tabId: 1, msgTabId: 0 } });
     },
   },
 };

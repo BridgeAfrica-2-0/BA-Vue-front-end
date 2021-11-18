@@ -308,12 +308,12 @@ export default {
     shareToYourProfile: async function () {
       console.log(this.post);
       let data = {
-        user_profile: '',
+        [`${this.post.poster_type}_profile`]: '',
         post_id: parseInt(this.post.post_id),
-        source_id: parseInt(this.post.user_id),
+        source_id: parseInt(this.post.poster_id),
       };
 
-      if ('profile' !== this.type) data = Object.assign(data, { target_id: this.post.target_id });
+      // if ('user_profile' !== `${this.post.poster_type}_profile`) data = Object.assign(data, { target_id: this.post.target_id });
 
       const request = await this.$repository.share.userPost(data);
 

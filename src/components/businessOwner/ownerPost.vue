@@ -402,6 +402,7 @@
         :businessLogo="business_intro.logo_path"
         :editPost="() => editPost(item)"
         :deletePost="() => deletePost(item)"
+
       />
 
       <infinite-loading :identifier="infiniteId" ref="infiniteLoading" @infinite="infiniteHandler"></infinite-loading>

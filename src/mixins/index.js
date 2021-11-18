@@ -344,6 +344,30 @@ export const Pusher = {
   }
 }
 
+export const WhoIsIt = {
+  computed: {
+    ...mapGetters({
+      profile: 'auth/profilConnected',
+      token: 'auth/getAuthToken'
+    })
+  },
+
+  methods: {
+    ...mapMutations({
+      auth: 'auth/profilConnected',
+    }),
+    async getAuth() {
+      const response = await this.$repository.share.WhoIsConnect({ networkId: null });
+      if (response.success) this.auth(response.data);
+      console.log(this.profile)
+    },
+  },
+
+  created() {
+    this.getAuth()
+  }
+}
+
 export const Redis = {
 
   computed: {

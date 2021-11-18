@@ -5,7 +5,7 @@ export const initRedis = (token) => {
   console.log("Init redis")
   window.Redis = new Echo({
     broadcaster: 'socket.io',
-    host: 'https://28fa-154-72-150-64.ngrok.io',
+    host: 'https://be58-154-72-167-26.ngrok.io',
     auth: {
       headers: {
         Authorization: token,

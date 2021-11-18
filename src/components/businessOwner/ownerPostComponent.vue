@@ -65,10 +65,7 @@
             ><b-icon icon="chat-fill" variant="primary" aria-hidden="true"></b-icon>
             {{ item.comment_count | nFormatter }}
           </span>
-
-          <span>
-            <fas-icon class="primary ml-3" :icon="['fas', 'share']" />
-          </span>
+          <ShareButton :post="item" />
         </b-col>
       </b-row>
     </div>
@@ -115,6 +112,8 @@ import { NoMoreDataForComment } from '@/mixins';
 import Comment from './comment';
 import light from '../lightbox';
 
+import {ShareButton} from '@/components/shareButton'
+
 export default {
   name: 'ownerPostComponent',
   props: ['post', 'mapvideo', 'mapmediae', 'businessLogo', 'editPost', 'deletePost'],
@@ -124,6 +123,7 @@ export default {
     Comment,
     light,
     Loader,
+    ShareButton
   },
 
   watch: {

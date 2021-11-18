@@ -50,9 +50,11 @@ import Networks from "@/components/owner/tabs/networks";
 import Following from "@/components/owner/tabs/memberNetwork";
 import Bussiness from "@/components/owner/tabs/bussiness";
 
+import {WhoIsIt} from "@/mixins"
+
 export default {
   name: "profileOwner",
-
+  mixins:[WhoIsIt],
   components: {
     Bussiness,
     Following,

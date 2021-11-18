@@ -244,7 +244,7 @@ export default {
     },
 
 
-   
+
 
     //set media data
 
@@ -293,7 +293,7 @@ export default {
 
     ownerPost(state, data) {
 
-      
+
       state.ownerPost = data;
     },
 
@@ -384,31 +384,31 @@ export default {
 
   actions: {
 
-    deleteCover({commit}){
+    deleteCover({ commit }) {
 
       return axios
-      .delete('user/cover')
-      .then(({ data }) => {
-        console.log(data);
-      });
+        .delete('user/cover')
+        .then(({ data }) => {
+          console.log(data);
+        });
 
     },
 
 
-    deleteBusiness({commit}, url){
+    deleteBusiness({ commit }, url) {
 
       return axios
-      .delete(url)
-      .then(({ data }) => {
-        console.log(data);
-      });
+        .delete(url)
+        .then(({ data }) => {
+          console.log(data);
+        });
 
     },
-  
 
-  
-    Tcommunity({commit}){
-     
+
+
+    Tcommunity({ commit }) {
+
       return axios
         .get('profile/total/community')
         .then(({ data }) => {
@@ -438,26 +438,24 @@ export default {
           return data;
         });
 
-      },
+    },
 
-   createContact({ commit },payload){
-       
-        console.log(payload)
-        return  axios.post("user/contact-create", {phone:payload.phone}, {
-         
-        })
+    createContact({ commit }, payload) {
+
+      console.log(payload)
+      return axios.post("user/contact-create", { phone: payload.phone }, {
+
+      })
         .then((res) => {
           console.log(res.data);
         })
         .catch((err) => {
           console.log("Something went wrong");
-          console.log({err:err})
+          console.log({ err: err })
         });
- 
-
-   },
 
 
+    },
 
 
 
@@ -465,45 +463,47 @@ export default {
 
 
 
-updateContact({ commit },payload){
-       
-  console.log(payload)
-  return  axios.post("user/contact-update/"+payload.id, {phone:payload.phone}, {
-   
-  })
-  .then((res) => {
-    console.log(res.data);
-  })
-  .catch((err) => {
-    console.log("Something went wrong");
-    console.log({err:err})
-  });
 
 
-},
+    updateContact({ commit }, payload) {
+
+      console.log(payload)
+      return axios.post("user/contact-update/" + payload.id, { phone: payload.phone }, {
+
+      })
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch((err) => {
+          console.log("Something went wrong");
+          console.log({ err: err })
+        });
 
 
-deleteContact({ commit },payload){
-       
-  console.log(payload)
-  return  axios.post("user/contact-delete/"+payload.id,{
-   
-  })
-  .then((res) => {
-    console.log(res.data);
-  })
-  .catch((err) => {
-    console.log("Something went wrong");
-    console.log({err:err})
-  });
+    },
 
 
-},
+    deleteContact({ commit }, payload) {
+
+      console.log(payload)
+      return axios.post("user/contact-delete/" + payload.id, {
+
+      })
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch((err) => {
+          console.log("Something went wrong");
+          console.log({ err: err })
+        });
+
+
+    },
 
 
 
 
-    NcommunityFollower({ commit }){
+    NcommunityFollower({ commit }) {
       return axios
         .get('profile/network/follower')
         .then(({ data }) => {
@@ -887,7 +887,7 @@ deleteContact({ commit },payload){
       return response_;
     },
     async updateUserBasicInfosBirthDate(context, payload) {
-      let date = payload.dateOfBirth.date ;
+      let date = payload.dateOfBirth.date;
       let response_ = null;
       await axios(
 
@@ -1129,7 +1129,7 @@ deleteContact({ commit },payload){
       console.log(payload, "edit user website start +++++");
 
       let response_ = null;
-      await axios.delete("/userIntro/deleteWebLink/" +payload.id)
+      await axios.delete("/userIntro/deleteWebLink/" + payload.id)
         .then(response => {
           console.log("edit user websites response (1) +++++++", response);
           if (response.status !== 200 && response.status !== 201) {
@@ -1154,7 +1154,7 @@ deleteContact({ commit },payload){
       console.log(payload, "edit user website start +++++");
 
       let response_ = null;
-      let url = "/userIntro/updateWebLink/"+payload.id
+      let url = "/userIntro/updateWebLink/" + payload.id
       let formData = new FormData();
       formData.append('webUrl', payload.websites);
       await axios.post(url, formData)
@@ -1273,7 +1273,7 @@ deleteContact({ commit },payload){
             startDate: payload.workPlace.startDate,
             // endDate: null,
             // endDate: payload.workPlace.endDate,
-            endDate: payload.workPlace === true ? null : payload.workPlace.endDate ,
+            endDate: payload.workPlace === true ? null : payload.workPlace.endDate,
           }
         };
       } else if (payload.method === "DELETE") {

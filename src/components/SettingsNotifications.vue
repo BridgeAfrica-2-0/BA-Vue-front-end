@@ -69,7 +69,6 @@
         <b-alert show variant="secondary">No Notifications</b-alert>
       </div>
     </infinite-loading>
-    {{allNotifs}}
   </div>
 </template>
 

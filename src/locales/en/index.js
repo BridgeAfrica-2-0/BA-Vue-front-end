@@ -25,9 +25,9 @@ export const en = {
     // businessf: businessf,
     // search: search,
 
-    network: network,
-    profilefollower: profilefollower,
-    verification: verification,
+    // network: network,
+    // profilefollower: profilefollower,
+    // verification: verification,
     passrecover: passrecover,
     // welcome: welcome,
     dashboard: dashboard,

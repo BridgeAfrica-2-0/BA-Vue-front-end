@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div> test
     <div class="products ">
       <!-- MARKET HEADER BAR -->
       <div class="col-12 d-flex align-items-center justify-content-between">
@@ -34,7 +34,7 @@
     </div>
     <div class="text-center">
       <b-link @click="swap" >Archive</b-link>
-    </div>
+    </div> testtest
     <!-- ADDPRODUCT FORM -->
     <b-modal hide-footer title="Add product" v-model="showModal">
       <b-form>
@@ -331,9 +331,10 @@ export default {
     this.loader = true;
     //get market place products
     this.getProducts();
+    console.log("--test ----");
     //get categories for current business
     const businessId = this.$route.params.id;
-    this.$store.dispatch('market/getBuCategories', businessId);
+    // this.$store.dispatch('market/getBuCategories', businessId);
   },
 };
 </script>

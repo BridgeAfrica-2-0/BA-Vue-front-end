@@ -89,7 +89,8 @@
           </div>
         </b-col>
       </b-row>
-      <!-- {{notifications}} -->
+      {{notifications}}
+      {{newNotifications}}
     </div>
 
     <FlashMessage />
@@ -99,6 +100,7 @@
 
 <script>
 import moment from 'moment';
+import {mapGetters} from 'vuex'
 
 export default {
   name: "notification",
@@ -166,12 +168,13 @@ export default {
   },
   
   computed: {
-    // notifications() {
-    //   return this.$store.state.networkNotification.notifications;
-    // },
     notifications() {
-      return this.$store.getters['notification/getters/networks'];
+      return this.$store.state.networkNotification.notifications;
     },
+
+    ...mapGetters({
+      newNotifications: 'notification/NEW_BUSINESS_NOTIFICATION'
+    })
   },
 
   watch: {
@@ -187,7 +190,14 @@ export default {
         this.indeterminate = true;
         this.selectAll = false;
       }
-    }
+    },
+    newNotifications: function (val) {
+      console.log("newNotifications");
+      console.log(val);
+      this.newNotifications.forEach(e => {
+        this.notifications.push(e)
+      });
+    },
   },
   mounted(){
     this.url = this.$route.params.id
@@ -238,7 +248,7 @@ export default {
       this.$store
       .dispatch("networkNotification/MarkAsRead", 
       {
-        "path": this.url+"/notifications/mark",
+        "path": this.url+"/notifications/mark-read",
         "formData": formData
       })
       .then(({data}) => {
@@ -271,7 +281,7 @@ export default {
       this.$store
       .dispatch("networkNotification/Delete", 
       {
-        "path": this.url+"/notifications/delete",
+        "path": this.url+"/notifications/deleteAll",
         "formData": formData
       })
       .then(({data}) => {

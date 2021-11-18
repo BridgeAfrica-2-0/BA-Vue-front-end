@@ -1,118 +1,132 @@
 <template>
   <div>
-    <div
-      class="people-style shadow"
-      v-for="item in business "
-      :key="item.id"
-    >
-      <b-row>
-        <b-col md="3" xl="3" lg="3" cols="5" sm="3">
-              <div class="center-img">
-            <splide :options="options" class="r-image">
+
+   
+
+        <div class="people-style shadow"   v-for="item in business" :key="item.id" >
+          <b-row>
+
+            <b-col md="8" xl="8" lg="12" cols="12" sm="8">
+              <div class="d-inline-flex">   
+              <div class="center-img ">
+                <splide :options="options" class="r-image">
                   <splide-slide cl>
-                <img :src="item.picture" class="r-image" /> 
-              </splide-slide>
-            </splide> 
-              </div>
-            </b-col>
-            <b-col md="5" cols="7" lg="7" xl="5" sm="5">
-              <p class="text">
-            <strong class="title"> {{ item.name }} </strong> <br />
-                {{ item.category }}
-            <br />
-            {{ item.followers }} {{ $t('dashboard.Community') }} <br />
+                    <img :src="item.picture" class="r-image" />
+                  </splide-slide>
+                </splide>
+              </div>   <div class="pl-3 flx100"> 
+              <p class="textt">
+                <strong class="title"> {{ item.name }} </strong> <br />
+               
+            <span v-for="cat in item.category" :key="cat.name">   {{cat.name}}  </span>
+                <br />
+                {{ count(item.followers) }}
+                {{ $t('dashboard.Community') }} <br />
 
                 <span class="location">
-              <b-icon-geo-alt class="ico"></b-icon-geo-alt>
-              {{ item.location_description }}
-            </span>
-            <br />
-
-            <read-more
+                  <b-icon-geo-alt class="ico"></b-icon-geo-alt
+                  >{{ item.country }}
+                </span>
+                <br />
+       <read-more
               more-str="read more"
               class="readmore"
               :text="item.about_business"
               link="#"
               less-str="read less"
-              :max-chars="50"
+              :max-chars="100"
             >
             </read-more>
               </p>
-            </b-col>
+               </div>
+               </div>
+            </b-col>     
 
-        <b-col lg="12" xl="4" md="4" cols="12" sm="4">
-          <div class="s-button">
-            <b-row>
-              <b-col
-                md="12"
-                lg="4"
-                xl="12"
-                sm="12"
-                cols="4"
-                class="mt-2 text-center"
-              >
-               
+            <b-col lg="12" xl="4" md="4" cols="12" sm="4">
+              <div class="s-button">
+                <b-row>
+                  <b-col
+                    md="12"
+                    lg="4"
+                    xl="12"
+                    sm="12"
+                    cols="4"
+                    class="mt-2 text-center"
+                  >
+                 
 
 
-                <b-button
+                    
+
+
+                 
+                     
+                  <b-button
                   block
                   size="sm"
-                
+                  :disabled="disable"
                   :class="item.is_follow !== 0 && 'u-btn'"
                   variant="primary"
                   @click="handleFollow(item)"
                 >
                  
                   <i class="fas fa-lg btn-icon" :class="item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"></i>
-                  <span class="btn-com"> {{ $t('dashboard.Community') }}</span>
+                  <span class="btn-com">  {{ $t('dashboard.Community') }}</span>
                 </b-button>
 
 
-              </b-col>
 
-              <b-col
-                md="12"
-                lg="4"
-                xl="12"
-                sm="12"
-                cols="4"
-                class="mt-2 text-center"
-              >
-                <b-button
-                  block
-                  size="sm"
-                  class="b-background shadow "
-                  variant="primary"
-                >
-                  <i class="fas fa-envelope   fa-lg btn-icon "></i>
-                  <span class="btn-text">{{ $t('dashboard.Messages') }}</span>
-                </b-button>
-              </b-col>
 
-              <b-col
-                md="12"
-                lg="4"
-                xl="12"
-                sm="12"
-                cols="4"
-                class="mt-2 text-center"
-              >
-                <b-button
-                  block
-                  size="sm"
-                  class="b-background shadow "
-                  variant="primary"
-                >
-                  <i class="fas fa-map-marked-alt  fa-lg btn-icon "></i>
-                  <span class="btn-text">{{ $t('dashboard.Direction') }}</span>
-                </b-button>
-              </b-col>
-            </b-row>
-          </div>
-        </b-col>
-      </b-row>
-      
-    </div>
+
+
+
+
+
+
+                  </b-col>
+
+                  <b-col
+                    md="12"
+                    lg="4"
+                    xl="12"
+                    sm="12"
+                    cols="4"
+                    class="mt-2 text-center"
+                  >
+                    <b-button
+                      block
+                      size="sm"
+                      class="b-background shadow "
+                      variant="primary"
+                    >
+                      <i class="fas fa-envelope   fa-lg btn-icon "></i>
+                      <span class="btn-text">{{ $t('dashboard.Messages') }}</span>
+                    </b-button>
+                  </b-col>
+
+                  <b-col
+                    md="12"
+                    lg="4"
+                    xl="12"
+                    sm="12"
+                    cols="4"
+                    class="mt-2 text-center"
+                  >
+                    <b-button
+                      block
+                      size="sm"
+                      class="b-background shadow "
+                      variant="primary"
+                    >
+                      <i class="fas fa-map-marked-alt  fa-lg btn-icon "></i>
+                      <span class="btn-text">{{ $t('dashboard.Direction') }}</span>
+                    </b-button>
+                  </b-col>
+                </b-row>
+              </div>
+            </b-col>
+          </b-row>
+        </div>
      <infinite-loading @infinite="infiniteHandler"></infinite-loading>
   </div>
 </template>
@@ -125,6 +139,7 @@ export default {
   data() {
     return {
        page: 1,
+       business:[],
       options: {
         rewind: true,
         autoplay: true,
@@ -136,23 +151,21 @@ export default {
       }
     };
   },
-  computed: {
-    business() {
-      return this.$store.getters['hotbusiness/getdetails'];  
-    }
-  },
-  created() {
-    this.$store
-      .dispatch("hotbusiness/getbdetails")
-      .then(() => {
-        console.log("the response");
-      })
-      .catch(err => {
-        console.log({ err: err });
-      });
-  },
+  
+  
 
   methods:{
+
+   
+
+    count(number) {
+      if (number >= 1000000) {
+        return number / 1000000 + "M";
+      }
+      if (number >= 1000) {
+        return number / 1000 + "K";
+      } else return number;
+    },
 
 
     
@@ -207,6 +220,9 @@ export default {
 </script>
 
 <style scoped>
+.flx100{
+    flex-basis:80% !important;
+}
 @media only screen and (min-width: 768px) {
   .btn-text {
     margin-left: 8px;
@@ -238,7 +254,7 @@ export default {
   }
 }
 
-  .btnpngs {
+.btnpngs {
   width: 20px;
   margin-right: 5px;
 }
@@ -293,7 +309,7 @@ export default {
     padding: 1px;
     text-align: left;
 
-    margin-left: -30px;
+    
 
     margin-right: -5px;
 
@@ -346,7 +362,7 @@ export default {
     padding: 1px;
     text-align: left;
 
-    margin-left: 30px;
+    margin-left: 60px;
 
     margin-right: -5px;
 
@@ -395,10 +411,6 @@ export default {
   margin-right: 5px;
 }
 
-.r-image {
-  border-radius: 8px;
-}
-
 @media only screen and (min-width: 768px) {
   .people-style {
     border-top-left-radius: 5px;
@@ -409,8 +421,8 @@ export default {
 
     border-bottom-right-radius: 5px;
 
-    background: white;
-
+    background: white; 
+    height: 100%;
     background-color: #fff;
     background-clip: border-box;
     border: 1px solid rgba(0, 0, 0, 0.125);
@@ -433,7 +445,7 @@ export default {
     border-bottom-right-radius: 5px;
 
     background: white;
-
+   height: 100%;
     background-color: #fff;
     background-clip: border-box;
     border: 1px solid rgba(0, 0, 0, 0.125);

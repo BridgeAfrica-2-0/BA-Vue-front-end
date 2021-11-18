@@ -7,13 +7,15 @@
 
             <b-col md="8" xl="8" lg="12" cols="12" sm="8">
               <div class="d-inline-flex">   
-              <div class="center-img flx100">
+              <div class="center-img ">
                 <splide :options="options" class="r-image">
                   <splide-slide cl>
                     <img :src="item.picture" class="r-image" />
                   </splide-slide>
                 </splide>
-              </div>   <div class="pl-3"> 
+              </div>   <div class="pl-3 flx100"> 
+
+              
               <p class="textt">
                 <strong class="title"> {{ item.name }} </strong> <br />
                
@@ -136,7 +138,7 @@ export default {
   data() {
     return {
       businesses:[],
-      page: 2,
+      page: 1,
       disable:false,
       options: {
         rewind: true,
@@ -150,6 +152,13 @@ export default {
     };
   },
       
+      computed:{  
+
+        biz_id(){
+          return  this.$store.state.dashboard.dBusinessId;
+        }
+        
+      },
 
   methods: {
 
@@ -237,7 +246,7 @@ export default {
 
 <style scoped>
 .flx100{
-    flex-basis:100% !important;
+    flex-basis:80% !important;
 }
 @media only screen and (min-width: 768px) {
   .btn-text {
@@ -325,7 +334,7 @@ export default {
     padding: 1px;
     text-align: left;
 
-    margin-left: -30px;
+    
 
     margin-right: -5px;
 
@@ -378,7 +387,7 @@ export default {
     padding: 1px;
     text-align: left;
 
-    margin-left: 30px;
+    margin-left: 60px;
 
     margin-right: -5px;
 

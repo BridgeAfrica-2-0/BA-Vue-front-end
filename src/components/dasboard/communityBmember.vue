@@ -126,7 +126,7 @@ export default {
   data() {
     return {
       page: 1,
-      biz_id: null,
+     
       users: [],
 
       options: {
@@ -141,6 +141,13 @@ export default {
     };
   },
 
+  computed:{  
+
+        biz_id(){
+          return  this.$store.state.dashboard.dBusinessId;
+        }
+        
+      },
 
 
   methods: {

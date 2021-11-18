@@ -1,6 +1,6 @@
 
 //import fr from './fr.json'
-import auth from './auth.json'
+// import auth from './auth.json'
 import businessf from './businessf.json'
 import search from './search.json'
 
@@ -29,10 +29,10 @@ export const fr = {
     businessf: businessf,
     search: search,
   
-    passrecover: passrecover,
+    // passrecover: passrecover,
     welcome: welcome,
     dashboard: dashboard,
-    profileowner: profileowner,
+    // profileowner: profileowner,
     memnetwork: memnetwork,
 
     network: network,

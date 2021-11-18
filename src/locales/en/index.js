@@ -19,14 +19,14 @@ export const en = {
 
 
     auth: auth,
-    businessf: businessf,
-    search: search,
+    // businessf: businessf,
+    // search: search,
 
     network: network,
     profilefollower: profilefollower,
     verification: verification,
     passrecover: passrecover,
-    welcome: welcome,
+    // welcome: welcome,
     dashboard: dashboard,
     profileowner: profileowner,
 

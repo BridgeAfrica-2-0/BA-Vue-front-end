@@ -12,7 +12,7 @@
               @change="select"
               class="m-left-top username"
             >
-              {{ selectAll ? "Un-select All" : "Select All" }}
+              {{ selectAll ? $t('network.Un_select_All') : $t('network.Select_All') }}
             </b-form-checkbox>
           </div>
         </b-col>
@@ -23,7 +23,7 @@
               @click="MarkAsRead" 
               :disabled="indeterminate ? false : true"
               class="a-button-l duration"
-            >Mark as Read</b-button>
+            >{{ $t('network.Mark_as_Read') }}</b-button>
             &nbsp;
             <b-button 
               variant="outline-primary"

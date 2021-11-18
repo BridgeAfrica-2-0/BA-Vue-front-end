@@ -21,7 +21,7 @@
                 <div class="createdesc botmedia">
                   <div class="botmediades">
                     <h6>{{album.album_name}}</h6>
-                    <p>{{album.almbum_item_number}} Item(s)</p>
+                    <p>{{album.almbum_item_number}} {{ $t('memnetwork.Item_s') }}</p>
                   </div>
                 </div>
               </a>
@@ -35,7 +35,7 @@
 
     <div class="container-flex" v-if="showalbum == true">
       <b-button variant="outline-primary" size="sm" @click="hidealbum">
-        Back
+        {{ $t('memnetwork.Back') }}
       </b-button>
       <span class="text-center ml-2"> {{this.albumName}} </span>
 

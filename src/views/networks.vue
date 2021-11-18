@@ -56,7 +56,6 @@
     </div>
 
     <Footer />
-
     <p class="text-center">
       <span class="display-inline">
         <b-link @click="$i18n.locale = 'en'"> {{ $t("auth.english") }}</b-link>
@@ -102,16 +101,16 @@ export default {
       bottomSelectedId: 0,
 
       items: [
-        { label: "Home ", icon: " " },
+        { label: this.$t('network.Home'), icon: " " },
 
-        { label: "Inbox", icon: " " },
-        { label: "Notification", icon: "" },
-        { label: "Member Request", icon: "" },
-        { label: "Pending Post", icon: "" },
+        { label: this.$t('network.Inbox'), icon: " " },
+        { label: this.$t('network.Notification'), icon: "" },
+        { label: this.$t('network.Member_Request'), icon: "" },
+        { label: this.$t('network.Pending_Post'), icon: "" },
 
-        { label: "Keyword Alert", icon: "" },
+        { label: this.$t('network.Keyword_Alert'), icon: "" },
 
-        { label: "Settings", icon: "" },
+        { label: this.$t('network.Settings'), icon: "" },
       ],
 
       options: {

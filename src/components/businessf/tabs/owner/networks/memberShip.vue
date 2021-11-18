@@ -50,7 +50,7 @@
                         xl="12"
                         class="mt-3 mt-lg-2 mt-xl-0"
                       >
-                        <h6 class="follower">5K Community</h6>
+                        <h6 class="follower">5K {{ $t('network.Community') }}</h6>
                       </b-col>
                     </b-row>
                   </div>
@@ -74,7 +74,7 @@
                           class="b-background flexx pobtn shadow"
                           @click="ApproveRequest(request.user_id)"
                         >
-                          <span class="btn-text text-center">Approve</span>
+                          <span class="btn-text text-center">{{ $t('network.Approve') }}</span>
                         </b-button>
                       </b-col>
 
@@ -93,7 +93,7 @@
                           variant="primary"
                           @click="DeclineRequest(request.user_id)"
                         >
-                          <span class="btn-com text-center">Decline</span>
+                          <span class="btn-com text-center">{{ $t('network.Decline') }}</span>
                         </b-button>
                       </b-col>
                     </b-row>
@@ -107,9 +107,9 @@
       </div>
       <b-row>
         <b-col cols="12">
-          <infinite-loading @infinite="infiniteHandler" ref="infiniteHandler">
-            <div class="text-red" slot="no-more">No More Request</div>
-            <div class="text-red" slot="no-results">No More Request</div>
+          <infinite-loading @infinite="infiniteHandler" ref="infiniteHandler" :identifier="infiniteId">
+            <div class="text-red" slot="no-more">{{ $t('network.No_More_Request') }}</div>
+            <div class="text-red" slot="no-results">{{ $t('network.No_More_Request') }}</div>
           </infinite-loading>
         </b-col>
       </b-row>
@@ -171,7 +171,7 @@ export default {
         this.loading = false;
         this.flashMessage.show({
           status: "success",
-          message: "Request Approved"
+          message: this.$t('network.Request_Approved')
         });
       })
       .catch(err => {
@@ -179,7 +179,7 @@ export default {
         this.loading = false;
         this.flashMessage.show({
           status: "error",
-          message: "Unable to Approve Request"
+          message: this.$t('network.Unable_to_Approve_Request')
         });
       });
     },
@@ -194,7 +194,7 @@ export default {
         this.loading = false;
         this.flashMessage.show({
           status: "success",
-          message: "Request Deleted"
+          message: this.$t('network.Request_Deleted')
         });
       })
       .catch(err => {
@@ -202,7 +202,7 @@ export default {
         this.loading = false;
         this.flashMessage.show({
           status: "error",
-          message: "Unable to Deleted Request"
+          message: this.$t('network.Unable_to_Deleted_Request')
         });
       });
     },

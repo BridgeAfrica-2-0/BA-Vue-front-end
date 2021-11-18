@@ -24,6 +24,9 @@ import business from "./business";
 import profile from "./profile";
 import networkProfileMembers from "./networkProfileMembers";
 import follower from "./follower";
+import keywordOperationOnNetwork from "./keywordOperationOnNetwork";
+
+
 import networkProfile from "./networkProfile";
 import UserProfileOwner from "./UserProfileOwner"
 import { search } from "./search";
@@ -42,8 +45,8 @@ import { notification } from "./notifications"
 Vue.use(Vuex);
 
 // axios.defaults.baseURL = process.env.VUE_APP_API_URL;
-// axios.defaults.baseURL = process.env.VUE_APP_API_URL_EDS;
-axios.defaults.baseURL = "https://9011-154-72-150-64.ngrok.io/api/v1";
+axios.defaults.baseURL = process.env.VUE_APP_API_URL_EDS;
+// axios.defaults.baseURL = "   https://9f87-154-72-167-104.ngrok.io/api/v1";
 
 export default new Vuex.Store({
     modules: {

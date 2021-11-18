@@ -111,6 +111,13 @@
             <span class="md-error" v-if="!$v.form.password.required">
               {{ $t("auth.password_is_required") }}
             </span>
+
+            <span class="md-error" v-if="!$v.form.password.minLength" >
+              {{ $t("auth.password_is_required") }}
+              Password must have at least {{ $v.form.password.$params.minLength.min }} letters.
+            </span>
+
+            
           </md-field>
 
           <md-field :class="getValidationClass('password')">
@@ -125,6 +132,12 @@
             <span class="md-error" v-if="!$v.form.confirmPassword.required"
               > {{ $t("auth.Password_is_required") }}
             </span>
+
+             <span class="md-error" v-if="!$v.form.confirmPassword.sameAsPassword"
+              > {{ $t("auth.Password_is_required") }} 
+               Passwords must be identical.
+            </span>
+
           </md-field>
         </md-card-content>
 
@@ -192,7 +205,7 @@
 import { validationMixin } from "vuelidate";
 import axios from "axios";
 
-import { required, email, minLength } from "vuelidate/lib/validators";
+import { required,sameAs, email, minLength } from "vuelidate/lib/validators";
 
 export default {
   name: "FormValidation",
@@ -213,6 +226,7 @@ export default {
     sending: false,
     lastUser: null,
   }),
+
   validations: {
     form: {
       firstName: {
@@ -225,11 +239,13 @@ export default {
 
       password: {
         required,
+         minLength: minLength(8),
       },
 
       confirmPassword: {
         required,
-        minLength: minLength(4),
+        minLength: minLength(8),
+        sameAsPassword: sameAs('password')
       },
 
       tel: {

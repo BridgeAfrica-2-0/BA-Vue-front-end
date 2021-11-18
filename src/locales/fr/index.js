@@ -1,19 +1,15 @@
-
 //import fr from './fr.json'
 // import auth from './auth.json'
 import businessf from './businessf.json'
 import search from './search.json'
-
-//import en from './en.json'
-import auth from './auth.json'
 import network from './network.json'
-
 
 import verification from './verification.json'
 import passrecover from './passrecover.json'
 import welcome from './welcome.json'
 import dashboard from './dashboard.json'
 import profileowner from './profileowner.json'
+
 
 import memnetwork from './memnetwork.json'
 
@@ -37,7 +33,8 @@ export const fr = {
 
     network: network,
     profilefollower: profilefollower,
-    verification: verification,
-    passrecover: passrecover,
-    profileowner: profileowner,
+    businessf: businessf,
+    search: search,
+    network: network,
+    memnetwork: memnetwork,
 }

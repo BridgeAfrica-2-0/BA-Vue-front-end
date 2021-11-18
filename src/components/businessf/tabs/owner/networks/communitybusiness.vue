@@ -17,7 +17,7 @@
             {{ member.category[0].name }}
             <br />
             {{ member.communityNum }}
-            Community <br />
+            {{ $t('network.Community') }} <br />
 
             <!-- <span class="location">
               <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{ member.location_description }}
@@ -46,7 +46,7 @@
                   variant="primary"
                 >
                   <i class="fas fa-user-plus fa-lg btn-icon"></i>
-                  <span class="btn-com">Community</span>
+                  <span class="btn-com">{{ $t('network.Community') }}</span>
                 </b-button>
               </b-col>
 
@@ -65,7 +65,7 @@
                   variant="primary"
                 >
                   <i class="fas fa-envelope fa-lg btn-icon"></i>
-                  <span class="btn-text">Message</span>
+                  <span class="btn-text">{{ $t('network.Message') }}</span>
                 </b-button>
               </b-col>
 
@@ -84,7 +84,7 @@
                   variant="primary"
                 >
                   <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
-                  <span class="btn-text">Direction</span>
+                  <span class="btn-text">{{ $t('network.Direction') }}</span>
                 </b-button>
               </b-col>
             </b-row>

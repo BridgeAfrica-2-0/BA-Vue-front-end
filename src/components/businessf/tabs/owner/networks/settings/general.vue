@@ -7,7 +7,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="Privacy"
+          :label="$t('network.Privacy')"
           label-size="md"
           label-class="font-weight-bold pt-0 username"
           class="mb-0 text"
@@ -29,7 +29,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="Posting Permissions"
+          :label="$t('network.Posting_Permissions')"
           label-size="md"
           label-class="font-weight-bold pt-0 username"
           class="mb-0 text"
@@ -53,7 +53,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="Post Approval"
+          :label="$t('network.Post_Approval')"
           label-size="md"
           label-class="font-weight-bold pt-0 username"
           class="mb-0"
@@ -76,8 +76,8 @@
       <b-link 
        class="f-left text" 
        v-b-modal="'my-modal'"
-      >Delete Network</b-link>
-      <b-modal id="my-modal" @ok="deleteNetwork">Delete Network!</b-modal>
+      >{{ $t('network.Delete_Network') }}</b-link>
+      <b-modal id="my-modal" @ok="deleteNetwork">{{ $t('network.Delete_Network') }}!</b-modal>
     </b-container>
 
     <div class="b-bottomn">
@@ -85,7 +85,7 @@
         variant="primary"
         class="a-button-l text"
         @click="save"
-      ><b-spinner v-if="load" small type="grow"></b-spinner> Save Changes</b-button>
+      ><b-spinner v-if="load" small type="grow"></b-spinner> {{ $t('network.Save_Changes') }}</b-button>
       <br />
     </div>
   </b-container>

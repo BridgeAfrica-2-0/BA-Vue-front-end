@@ -1,7 +1,8 @@
 <template>
   <b-container fluid>
     <b-container v-if="businessInfo != 0" class="bv-example-row">
-      {{businessInfo}}
+      {{ businessInfo }}<br /><br />
+     {{ editbiz }}
 
       <!-- <Flashback /> -->
 
@@ -15,12 +16,7 @@
               label-class="font-weight-bold pt-0 username"
               class="mb-0"
             >
-              <b-form-input
-                id="bname"
-                v-model="businessInfo.name"
-                name="name"
-                required
-              ></b-form-input>
+              <b-form-input id="bname" v-model="businessInfo.name" name="name" required></b-form-input>
             </b-form-group>
           </b-container>
         </div>
@@ -29,6 +25,7 @@
 
         <div class="b-bottom">
           <b-container>
+            <!-- {{ multiselecvalue }} -->
             <b-form-group
               label-cols-lg="3"
               label="Category"
@@ -56,6 +53,8 @@
 
         <div class="b-bottom">
           <b-container>
+            <!-- {{filterselectvalue}} -->
+
             <b-form-group
               label-cols-lg="3"
               label="Sub Category"
@@ -78,32 +77,24 @@
           </b-container>
         </div>
 
-        <!-- {{filterselectvalue}} -->
-
         <label class="typo__label">Fiters</label>
         <div>
           <b-card no-body>
             <b-tabs pills card vertical>
-              <b-tab
-                :title="filters.name"
-                v-for="filters in filterselectvalue"
-                :key="filters.id"
-                active
+              <b-tab :title="filters.name" v-for="filters in filterselectvalue" :key="filters.id" active
                 ><b-card-text>
-                  <!-- {{filters.filters}} -->
+                  <!-- {{ filters.filters }}
+                  <br /><br />
+                  {{ select_filterss }} -->
                   <b-form-group label="Filters" class="colorblack">
-                    <b-form-checkbox-group
-                      id=""
-                      class="colorblack"
-                      v-model="select_filterss"
-                      name="filters"
-                    >
-                      <b-form-checkbox
-                      class="colorblack"
-                        v-for="fil in filters.filters"
-                        :key="fil.id"
-                        :value="fil.id"
-                      >
+                    <b-form-checkbox-group id="" class="colorblack" v-model="select_filterss" name="filters">
+                      <!-- <span v-for="fil in select_filterss" :key="fil.filter_id">
+                        <b-form-checkbox class="colorblack" :value="fil.filter_id">
+                        {{ fil.name }}
+                      </b-form-checkbox>
+                      </span>
+                      <br>-------------------------------<br> -->
+                      <b-form-checkbox class="colorblack" v-for="fil in filters.filters" :key="fil.id" :value="fil.id">
                         {{ fil.name }}
                       </b-form-checkbox>
                     </b-form-checkbox-group>
@@ -136,7 +127,7 @@
             </b-form-group>
           </b-container>
         </div>
-        
+
         <div class="b-bottom">
           <b-container>
             <b-form-group
@@ -145,7 +136,7 @@
               label-size="md"
               label-class="font-weight-bold pt-0 username"
               class="mb-0"
-            ><VuePhoneNumberInput v-model="businessInfo.phone" />
+              ><VuePhoneNumberInput v-model="businessInfo.phone" />
             </b-form-group>
           </b-container>
         </div>
@@ -158,7 +149,7 @@
               label-size="md"
               label-class="font-weight-bold pt-0 username"
               class="mb-0"
-            ><VuePhoneNumberInput v-model="businessInfo.secondary_phone" />
+              ><VuePhoneNumberInput v-model="businessInfo.secondary_phone" />
             </b-form-group>
           </b-container>
         </div>
@@ -222,7 +213,6 @@
             </b-form-group>
           </b-container>
         </div>
-
 
         <div class="b-bottom">
           <b-container>
@@ -309,7 +299,9 @@
           </b-container>
         </div>
 
-        <!-- {{regions}} -->
+        {{regions}}
+      <br>
+        {{selectedregion}}
 
         <div class="b-bottom">
           <b-container>
@@ -434,13 +426,7 @@
               label-class="font-weight-bold pt-0 username"
               class="mb-0"
             >
-              <b-form-checkbox
-                id=""
-                class="a-text text"
-                name="Aaddress"
-                v-model="Aaddress"
-                value="address A/V"
-              >
+              <b-form-checkbox id="" class="a-text text" name="Aaddress" v-model="Aaddress" value="address A/V">
                 This Business has an address</b-form-checkbox
               >
 
@@ -448,24 +434,15 @@
                 <b-row class="text">
                   <b-col>
                     <p>Street Address</p>
-                    <b-form-input
-                      name=""
-                      v-model="businessInfo.Street"
-                    ></b-form-input>
+                    <b-form-input name="" v-model="businessInfo.Street"></b-form-input>
                   </b-col>
                   <b-col>
                     <p>City</p>
-                    <b-form-input
-                      name=""
-                      v-model="businessInfo.city"
-                    ></b-form-input
+                    <b-form-input name="" v-model="businessInfo.city"></b-form-input
                   ></b-col>
                   <b-col>
                     <p>Postal Code</p>
-                    <b-form-input
-                      name=""
-                      v-model="businessInfo.PostalCode"
-                    ></b-form-input
+                    <b-form-input name="" v-model="businessInfo.PostalCode"></b-form-input
                   ></b-col>
                 </b-row>
                 <br />
@@ -499,7 +476,7 @@
                   value="1"
                   @change="setOpenHours('null', 'null', 'null')"
                 >
-                  {{ openHour ? "Always Open": "Open for selected hours" }}
+                  {{ openHour ? 'Always Open' : 'Open for selected hours' }}
                 </b-form-checkbox>
                 <br />
                 <b-container v-if="!openHour">
@@ -514,7 +491,7 @@
                           value="Mon_disabled"
                           unchecked-value="0"
                         >
-                          {{openHours.day}}</b-form-checkbox
+                          {{ openHours.day }}</b-form-checkbox
                         ></b-col
                       >
 
@@ -524,8 +501,8 @@
                           type="time"
                           @change="setOpenHours(openHours.day, openHours.opening_time, openHours.closing_time)"
                           v-model="openHours.opening_time"
-                        ></b-form-input>
-                      </b-col>- -<b-col
+                        ></b-form-input> </b-col
+                      >- -<b-col
                         ><b-form-input
                           name=""
                           type="time"
@@ -536,7 +513,6 @@
                     </b-row>
                     <br />
                   </div>
-
                 </b-container>
               </b-form-group>
             </b-form-group>
@@ -545,30 +521,31 @@
 
         <div class="b-bottomm">
           <b-button variant="primary" class="a-button-l" @click="updateInfo(businessInfo)"
-          ><b-spinner v-if="Lspinner" small type="grow"></b-spinner>Save Changes</b-button>
+            ><b-spinner v-if="Lspinner" small type="grow"></b-spinner>Save Changes</b-button
+          >
           <br />
           <br />
         </div>
       </b-form>
 
-        <FlashMessage />
+      <FlashMessage />
     </b-container>
     <b-container v-else>
       <div class="text-center">
-        <b-spinner variant="primary" style="width: 3rem; height: 3rem;" label="Large Spinner Text Centered"></b-spinner>
+        <b-spinner variant="primary" style="width: 3rem; height: 3rem" label="Large Spinner Text Centered"></b-spinner>
       </div>
     </b-container>
   </b-container>
 </template>
 
 <script>
-import { validationMixin } from "vuelidate";
-import { required, email, minLength } from "vuelidate/lib/validators";
-import VuePhoneNumberInput from "vue-phone-number-input";
-import "vue-phone-number-input/dist/vue-phone-number-input.css";
-import Multiselect from "vue-multiselect";
+import { validationMixin } from 'vuelidate';
+import { required, email, minLength } from 'vuelidate/lib/validators';
+import VuePhoneNumberInput from 'vue-phone-number-input';
+import 'vue-phone-number-input/dist/vue-phone-number-input.css';
+import Multiselect from 'vue-multiselect';
 export default {
-  name: "info",
+  name: 'info',
   mixins: [validationMixin],
 
   components: {
@@ -583,7 +560,8 @@ export default {
       limit: 20,
       Lspinner: false,
 
-      editbiz: "",
+      editbiz: '',
+
       multiselecvalue: [],
       filterselectvalue: [],
       select_filterss: [],
@@ -593,150 +571,146 @@ export default {
       municipality: [],
       locality: [],
 
-      Aaddress: "",
-      openHour: "",
+      Aaddress: '',
+      openHour: '',
       openDaysStatus: [],
       Odays: {
-        mS: "",
-        mE: "",
-        tuS: "",
-        tuE: "",
-        wS: "",
-        wE: "",
-        thS: "",
-        thE: "",
-        fS: "",
-        fE: "",
-        saS: "",
-        saE: "",
-        suS: "",
-        suE: "",
+        mS: '',
+        mE: '',
+        tuS: '',
+        tuE: '',
+        wS: '',
+        wE: '',
+        thS: '',
+        thE: '',
+        fS: '',
+        fE: '',
+        saS: '',
+        saE: '',
+        suS: '',
+        suE: '',
       },
-      businessForm_email: "",
-      businessForm_website: "",
+      businessForm_email: '',
+      businessForm_website: '',
       openHours: {
-        mondayStart: "",
-        mondayEnd: "",
-        tuesdayStart: "",
-        tuesdayEnd: "",
-        wednesdayStart: "",
-        wednesdayEnd: "",
-        thursdayStart: "",
-        thursdayEnd: "",
-        fridayStart: "",
-        fridayEnd: "",
-        satudayStart: "",
-        satudayEnd: "",
-        sundayStart: "",
-        sundayEnd: "",
+        mondayStart: '',
+        mondayEnd: '',
+        tuesdayStart: '',
+        tuesdayEnd: '',
+        wednesdayStart: '',
+        wednesdayEnd: '',
+        thursdayStart: '',
+        thursdayEnd: '',
+        fridayStart: '',
+        fridayEnd: '',
+        satudayStart: '',
+        satudayEnd: '',
+        sundayStart: '',
+        sundayEnd: '',
       },
       businessForm: {
- 
         openHours: {
-          mondayStart: "",
-          mondayEnd: "",
-          tuesdayStart: "",
-          tuesdayEnd: "",
-          wednesdayStart: "",
-          wednesdayEnd: "",
-          thursdayStart: "",
-          thursdayEnd: "",
-          fridayStart: "",
-          fridayEnd: "",
-          satudayStart: "",
-          satudayEnd: "",
-          sundayStart: "",
-          sundayEnd: "",
+          mondayStart: '',
+          mondayEnd: '',
+          tuesdayStart: '',
+          tuesdayEnd: '',
+          wednesdayStart: '',
+          wednesdayEnd: '',
+          thursdayStart: '',
+          thursdayEnd: '',
+          fridayStart: '',
+          fridayEnd: '',
+          satudayStart: '',
+          satudayEnd: '',
+          sundayStart: '',
+          sundayEnd: '',
         },
       },
 
       timezones: [
-        { label: "(GMT-12:00) International Date Line West", value: "-12" },
-        { label: "(GMT-11:00) Midway Island, Samoa", value: "-11" },
-        { label: "(GMT-10:00) Hawaii", value: "-10" },
-        { label: "(GMT-09:00) Alaska", value: "-9" },
-        { label: "(GMT-08:00) Pacific Time (US & Canada)", value: "-8" },
-        { label: "(GMT-08:00) Tijuana, Baja California", value: "-8" },
-        { label: "(GMT-07:00) Arizona", value: "-7" },
-        { label: "(GMT-07:00) Chihuahua, La Paz, Mazatlan", value: "-7" },
-        { label: "(GMT-07:00) Mountain Time (US & Canada)", value: "-7" },
-        { label: "(GMT-06:00) Central America", value: "-6" },
-        { label: "(GMT-06:00) Central Time (US & Canada)", value: "-6" },
-        { label: "(GMT-05:00) Bogota, Lima, Quito, Rio Branco", value: "-5" },
-        { label: "(GMT-05:00) Eastern Time (US & Canada)", value: "-5" },
-        { label: "(GMT-05:00) Indiana (East)", value: "-5" },
-        { label: "(GMT-04:00) Atlantic Time (Canada)", value: "-4" },
-        { label: "(GMT-04:00) Caracas, La Paz", value: "-4" },
-        { label: "(GMT-04:00) Manaus", value: "-4" },
-        { label: "(GMT-04:00) Santiago", value: "-4" },
-        { label: "(GMT-03:30) Newfoundland", value: "-3.5" },
-        { label: "(GMT-03:00) Brasilia", value: "-3" },
-        { label: "(GMT-03:00) Buenos Aires, Georgetown", value: "-3" },
-        { label: "(GMT-03:00) Greenland", value: "-3" },
-        { label: "(GMT-03:00) Montevideo", value: "-3" },
-        { label: "(GMT-02:00) Mid-Atlantic", value: "-2" },
-        { label: "(GMT-01:00) Cape Verde Is.", value: "-1" },
-        { label: "(GMT-01:00) Azores", value: "-1" },
-        { label: "(GMT+00:00) Casablanca, Monrovia, Reykjavik", value: "0" },
-        { label: "(GMT+00:00) Greenwich Mean Time : Dublin, Edinburgh, Lisbon, London", value: "0" },
-        { label: "(GMT+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna", value: "1" },
-        { label: "(GMT+01:00) Belgrade, Bratislava, Budapest, Ljubljana, Prague", value: "1" },
-        { label: "(GMT+01:00) Brussels, Copenhagen, Madrid, Paris", value: "1" },
-        { label: "(GMT+01:00) Sarajevo, Skopje, Warsaw, Zagreb", value: "1" },
-        { label: "(GMT+01:00) West Central Africa", value: "1" },
-        { label: "(GMT+02:00) Amman", value: "2" },
-        { label: "(GMT+02:00) Athens, Bucharest, Istanbul", value: "2" },
-        { label: "(GMT+02:00) Beirut", value: "2" },
-        { label: "(GMT+02:00) Cairo", value: "2" },
-        { label: "(GMT+02:00) Harare, Pretoria", value: "2" },
-        { label: "(GMT+02:00) Helsinki, Kyiv, Riga, Sofia, Tallinn, Vilnius", value: "2" },
-        { label: "(GMT+02:00) Jerusalem", value: "2" },
-        { label: "(GMT+02:00) Minsk", value: "2" },
-        { label: "(GMT+02:00) Windhoek", value: "2" },
-        { label: "(GMT+03:00) Kuwait, Riyadh, Baghdad", value: "3" },
-        { label: "(GMT+03:00) Moscow, St. Petersburg, Volgograd", value: "3" },
-        { label: "(GMT+03:00) Nairobi", value: "3" },
-        { label: "(GMT+03:00) Tbilisi", value: "3" },
-        { label: "(GMT+03:30) Tehran", value: "3.5" },
-        { label: "(GMT+04:00) Abu Dhabi, Muscat", value: "4" },
-        { label: "(GMT+04:00) Baku", value: "4" },
-        { label: "(GMT+04:00) Yerevan", value: "4" },
-        { label: "(GMT+04:30) Kabul", value: "4.5" },
-        { label: "(GMT+05:00) Yekaterinburg", value: "5" },
-        { label: "(GMT+05:00) Islamabad, Karachi, Tashkent", value: "5" },
-        { label: "(GMT+05:30) Sri Jayawardenapura", value: "5.5" },
-        { label: "(GMT+05:30) Chennai, Kolkata, Mumbai, New Delhi", value: "5.5" },
-        { label: "(GMT+05:45) Kathmandu", value: "5.75" },
-        { label: "(GMT+06:00) Almaty, Novosibirsk", value: "6" },
-        { label: "(GMT+06:00) Astana, Dhaka", value: "6" },
-        { label: "(GMT+06:30) Yangon (Rangoon)", value: "6.5" },
-        { label: "(GMT+07:00) Bangkok, Hanoi, Jakarta", value: "7" },
-        { label: "(GMT+07:00) Krasnoyarsk", value: "7" },
+        { label: '(GMT-12:00) International Date Line West', value: '-12' },
+        { label: '(GMT-11:00) Midway Island, Samoa', value: '-11' },
+        { label: '(GMT-10:00) Hawaii', value: '-10' },
+        { label: '(GMT-09:00) Alaska', value: '-9' },
+        { label: '(GMT-08:00) Pacific Time (US & Canada)', value: '-8' },
+        { label: '(GMT-08:00) Tijuana, Baja California', value: '-8' },
+        { label: '(GMT-07:00) Arizona', value: '-7' },
+        { label: '(GMT-07:00) Chihuahua, La Paz, Mazatlan', value: '-7' },
+        { label: '(GMT-07:00) Mountain Time (US & Canada)', value: '-7' },
+        { label: '(GMT-06:00) Central America', value: '-6' },
+        { label: '(GMT-06:00) Central Time (US & Canada)', value: '-6' },
+        { label: '(GMT-05:00) Bogota, Lima, Quito, Rio Branco', value: '-5' },
+        { label: '(GMT-05:00) Eastern Time (US & Canada)', value: '-5' },
+        { label: '(GMT-05:00) Indiana (East)', value: '-5' },
+        { label: '(GMT-04:00) Atlantic Time (Canada)', value: '-4' },
+        { label: '(GMT-04:00) Caracas, La Paz', value: '-4' },
+        { label: '(GMT-04:00) Manaus', value: '-4' },
+        { label: '(GMT-04:00) Santiago', value: '-4' },
+        { label: '(GMT-03:30) Newfoundland', value: '-3.5' },
+        { label: '(GMT-03:00) Brasilia', value: '-3' },
+        { label: '(GMT-03:00) Buenos Aires, Georgetown', value: '-3' },
+        { label: '(GMT-03:00) Greenland', value: '-3' },
+        { label: '(GMT-03:00) Montevideo', value: '-3' },
+        { label: '(GMT-02:00) Mid-Atlantic', value: '-2' },
+        { label: '(GMT-01:00) Cape Verde Is.', value: '-1' },
+        { label: '(GMT-01:00) Azores', value: '-1' },
+        { label: '(GMT+00:00) Casablanca, Monrovia, Reykjavik', value: '0' },
+        { label: '(GMT+00:00) Greenwich Mean Time : Dublin, Edinburgh, Lisbon, London', value: '0' },
+        { label: '(GMT+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna', value: '1' },
+        { label: '(GMT+01:00) Belgrade, Bratislava, Budapest, Ljubljana, Prague', value: '1' },
+        { label: '(GMT+01:00) Brussels, Copenhagen, Madrid, Paris', value: '1' },
+        { label: '(GMT+01:00) Sarajevo, Skopje, Warsaw, Zagreb', value: '1' },
+        { label: '(GMT+01:00) West Central Africa', value: '1' },
+        { label: '(GMT+02:00) Amman', value: '2' },
+        { label: '(GMT+02:00) Athens, Bucharest, Istanbul', value: '2' },
+        { label: '(GMT+02:00) Beirut', value: '2' },
+        { label: '(GMT+02:00) Cairo', value: '2' },
+        { label: '(GMT+02:00) Harare, Pretoria', value: '2' },
+        { label: '(GMT+02:00) Helsinki, Kyiv, Riga, Sofia, Tallinn, Vilnius', value: '2' },
+        { label: '(GMT+02:00) Jerusalem', value: '2' },
+        { label: '(GMT+02:00) Minsk', value: '2' },
+        { label: '(GMT+02:00) Windhoek', value: '2' },
+        { label: '(GMT+03:00) Kuwait, Riyadh, Baghdad', value: '3' },
+        { label: '(GMT+03:00) Moscow, St. Petersburg, Volgograd', value: '3' },
+        { label: '(GMT+03:00) Nairobi', value: '3' },
+        { label: '(GMT+03:00) Tbilisi', value: '3' },
+        { label: '(GMT+03:30) Tehran', value: '3.5' },
+        { label: '(GMT+04:00) Abu Dhabi, Muscat', value: '4' },
+        { label: '(GMT+04:00) Baku', value: '4' },
+        { label: '(GMT+04:00) Yerevan', value: '4' },
+        { label: '(GMT+04:30) Kabul', value: '4.5' },
+        { label: '(GMT+05:00) Yekaterinburg', value: '5' },
+        { label: '(GMT+05:00) Islamabad, Karachi, Tashkent', value: '5' },
+        { label: '(GMT+05:30) Sri Jayawardenapura', value: '5.5' },
+        { label: '(GMT+05:30) Chennai, Kolkata, Mumbai, New Delhi', value: '5.5' },
+        { label: '(GMT+05:45) Kathmandu', value: '5.75' },
+        { label: '(GMT+06:00) Almaty, Novosibirsk', value: '6' },
+        { label: '(GMT+06:00) Astana, Dhaka', value: '6' },
+        { label: '(GMT+06:30) Yangon (Rangoon)', value: '6.5' },
+        { label: '(GMT+07:00) Bangkok, Hanoi, Jakarta', value: '7' },
+        { label: '(GMT+07:00) Krasnoyarsk', value: '7' },
         {
-          label: "(GMT+08:00) Beijing, Chongqing, Hong Kong, Urumqi",
-          value: "8",
+          label: '(GMT+08:00) Beijing, Chongqing, Hong Kong, Urumqi',
+          value: '8',
         },
-        { label: "(GMT+08:00) Kuala Lumpur, Singapore", value: "8" },
-        { label: "(GMT+08:00) Irkutsk, Ulaan Bataar", value: "8" },
-        { label: "(GMT+08:00) Perth", value: "8" },
-        { label: "(GMT+08:00) Taipei", value: "8" },
+        { label: '(GMT+08:00) Kuala Lumpur, Singapore', value: '8' },
+        { label: '(GMT+08:00) Irkutsk, Ulaan Bataar', value: '8' },
+        { label: '(GMT+08:00) Perth', value: '8' },
+        { label: '(GMT+08:00) Taipei', value: '8' },
       ],
       options: [
-        { text: " Person", value: "person" },
-        { text: " Business ", value: "business" },
+        { text: ' Person', value: 'person' },
+        { text: ' Business ', value: 'business' },
       ],
       OpenHours: [
-        { name: "Always Open", value: "1" },
-        { name: "Open for selected hours", value: "0" },
+        { name: 'Always Open', value: '1' },
+        { name: 'Open for selected hours', value: '0' },
       ],
       multiselec: [
-        { name: "Vue.js", code: "vu" },
-        { name: "Javascript", code: "js" },
-        { name: "Open Source", code: "os" },
+        { name: 'Vue.js', code: 'vu' },
+        { name: 'Javascript', code: 'js' },
+        { name: 'Open Source', code: 'os' },
       ],
-   
-
-      
     };
   },
 
@@ -768,49 +742,49 @@ export default {
     localities() {
       return this.$store.state.auth.locality;
     },
-    selectedcategories: function() {
+    selectedcategories: function () {
       let selectedUsers = [];
       this.multiselecvalue.forEach((item) => {
         selectedUsers.push(item.id);
       });
       return selectedUsers;
     },
-    selectedsubcategories: function() {
+    selectedsubcategories: function () {
       let sub_cat = [];
       this.filterselectvalue.forEach((item) => {
         sub_cat.push(item.sub_cat_id);
       });
       return sub_cat;
     },
-    selectedcountry: function() {
+    selectedcountry: function () {
       let sub_cat = [];
       this.country.forEach((item) => {
         sub_cat.push(item.id);
       });
       return sub_cat;
     },
-    selectedregion: function() {
+    selectedregion: function () {
       let sub_cat = [];
       this.region.forEach((item) => {
         sub_cat.push(item.id);
       });
       return sub_cat;
     },
-    selecteddivision: function() {
+    selecteddivision: function () {
       let sub_cat = [];
       this.division.forEach((item) => {
         sub_cat.push(item.id);
       });
       return sub_cat;
     },
-    selectedmunicipality: function() {
+    selectedmunicipality: function () {
       let sub_cat = [];
       this.municipality.forEach((item) => {
         sub_cat.push(item.id);
       });
       return sub_cat;
     },
-    selectedlocality: function() {
+    selectedlocality: function () {
       let sub_cat = [];
       this.locality.forEach((item) => {
         sub_cat.push(item.id);
@@ -819,7 +793,7 @@ export default {
     },
   },
 
-  mounted(){
+  mounted() {
     this.url = this.$route.params.id;
     this.getBusinessInfo();
     this.editBusiness();
@@ -829,7 +803,7 @@ export default {
 
   methods: {
     validator(tag) {
-      return tag.length > 2 && tag.length < 20
+      return tag.length > 2 && tag.length < 20;
     },
     addTag(newTag) {
       const tag = {
@@ -850,21 +824,22 @@ export default {
 
     categories() {
       this.$store
-        .dispatch("auth/categories")
+        .dispatch('auth/categories')
         .then(() => {
-          console.log("hey yeah");
+          console.log('hey yeah');
         })
         .catch((err) => {
           console.log({ err: err });
         });
     },
     subcategories() {
+      console.log('subcategories here');
       let formData2 = new FormData();
-      formData2.append("categoryId", this.selectedcategories);
+      formData2.append('categoryId', this.selectedcategories);
       this.$store
-        .dispatch("auth/subcategories", formData2)
+        .dispatch('auth/subcategories', formData2)
         .then(() => {
-          console.log("hey yeah");
+          console.log('hey yeah');
         })
         .catch((err) => {
           console.log({ err: err });
@@ -872,9 +847,9 @@ export default {
     },
     filters() {
       this.$store
-        .dispatch("auth/filters")
+        .dispatch('auth/filters')
         .then(() => {
-          console.log("hey yeah");
+          console.log('hey yeah');
         })
         .catch((err) => {
           console.log({ err: err });
@@ -882,9 +857,9 @@ export default {
     },
     Setcategoryfiters() {
       this.$store
-        .dispatch("auth/Setcategoryfiters")
+        .dispatch('auth/Setcategoryfiters')
         .then(() => {
-          console.log("hey yeah");
+          console.log('hey yeah');
         })
         .catch((err) => {
           console.log({ err: err });
@@ -892,9 +867,9 @@ export default {
     },
     Country() {
       this.$store
-        .dispatch("auth/country")
+        .dispatch('auth/country')
         .then(() => {
-          console.log("hey yeah");
+          console.log('hey yeah');
         })
         .catch((err) => {
           console.log({ err: err });
@@ -902,12 +877,12 @@ export default {
     },
     Region() {
       let formData2 = new FormData();
-      formData2.append("countryId", this.selectedcountry);
+      formData2.append('countryId', this.selectedcountry);
 
       this.$store
-        .dispatch("auth/region", formData2)
+        .dispatch('auth/region', formData2)
         .then(() => {
-          console.log("hey yeah");
+          console.log('hey yeah');
         })
         .catch((err) => {
           console.log({ err: err });
@@ -915,12 +890,12 @@ export default {
     },
     Division() {
       let formData2 = new FormData();
-      formData2.append("regionId", this.selectedregion);
+      formData2.append('regionId', this.selectedregion);
 
       this.$store
-        .dispatch("auth/division", formData2)
+        .dispatch('auth/division', formData2)
         .then(() => {
-          console.log("hey yeah");
+          console.log('hey yeah');
         })
         .catch((err) => {
           console.log({ err: err });
@@ -928,102 +903,101 @@ export default {
     },
     Municipality() {
       let formData2 = new FormData();
-      formData2.append("divisionId", this.selecteddivision);
+      formData2.append('divisionId', this.selecteddivision);
 
       this.$store
-        .dispatch("auth/municipality", formData2)
+        .dispatch('auth/municipality', formData2)
         .then(() => {
-          console.log("hey yeah");
+          console.log('hey yeah');
         })
         .catch((err) => {
           console.log({ err: err });
         });
     },
     Locality() {
-      console.log("Locality");
+      console.log('Locality');
       let formData2 = new FormData();
-      formData2.append("councilId", this.selectedmunicipality);
+      formData2.append('councilId', this.selectedmunicipality);
 
       this.$store
-        .dispatch("auth/locality", formData2)
+        .dispatch('auth/locality', formData2)
         .then(() => {
-          console.log("hey yeah");
+          console.log('hey yeah');
         })
         .catch((err) => {
           console.log({ err: err });
         });
     },
-    
 
     setOpenHours(day, startTime, endDay) {
       console.log(day);
       console.log(startTime);
       console.log(endDay);
-      switch(day){
-        case "Monday":
-          console.log("monday");
+      switch (day) {
+        case 'Monday':
+          console.log('monday');
           this.businessInfo['monday'] = day;
           this.businessInfo['mon_start'] = startTime;
           this.businessInfo['mon_end'] = endDay;
           break;
-        case "Tuesday":
-          console.log("Tues_disabled");
+        case 'Tuesday':
+          console.log('Tues_disabled');
           this.businessInfo['tuesday'] = day;
           this.businessInfo['tues_start'] = startTime;
           this.businessInfo['tues_end'] = endDay;
           break;
-        case "Wednesday":
-          console.log("Wed_disabled");
+        case 'Wednesday':
+          console.log('Wed_disabled');
           this.businessInfo['wednesday'] = day;
           this.businessInfo['wed_start'] = startTime;
           this.businessInfo['wed_end'] = endDay;
           break;
-        case "Thursday":
-          console.log("Thursday");
+        case 'Thursday':
+          console.log('Thursday');
           this.businessInfo['thursday'] = day;
           this.businessInfo['thurs_start'] = startTime;
           this.businessInfo['thurs_end'] = endDay;
           break;
-        case "Friday":
-          console.log("Friday");
+        case 'Friday':
+          console.log('Friday');
           this.businessInfo['friday'] = day;
           this.businessInfo['fri_start'] = startTime;
           this.businessInfo['fri_end'] = endDay;
           break;
-        case "Saturday":
-          console.log("Saturday");
+        case 'Saturday':
+          console.log('Saturday');
           this.businessInfo['saturday'] = day;
           this.businessInfo['sat_start'] = startTime;
           this.businessInfo['sat_end'] = endDay;
           break;
-        case "Sunday":
-          console.log("Sunday");
+        case 'Sunday':
+          console.log('Sunday');
           this.businessInfo['sunday'] = day;
           this.businessInfo['sun_start'] = startTime;
           this.businessInfo['sun_end'] = endDay;
           break;
         default:
-          console.log("try looking up for a hint");
-          if(this.openHour){
-            this.businessInfo['monday'] = "monday";
+          console.log('try looking up for a hint');
+          if (this.openHour) {
+            this.businessInfo['monday'] = 'monday';
             this.businessInfo['mon_start'] = startTime;
             this.businessInfo['mon_end'] = endDay;
-            this.businessInfo['tuesday'] = "tuesday";
+            this.businessInfo['tuesday'] = 'tuesday';
             this.businessInfo['tues_start'] = startTime;
             this.businessInfo['tues_end'] = endDay;
-            this.businessInfo['wednesday'] = "wednesday";
+            this.businessInfo['wednesday'] = 'wednesday';
             this.businessInfo['wed_start'] = startTime;
             this.businessInfo['wed_end'] = endDay;
-            this.businessInfo['thursday'] = "thursday";
+            this.businessInfo['thursday'] = 'thursday';
             this.businessInfo['thurs_start'] = startTime;
             this.businessInfo['thurs_end'] = endDay;
-            this.businessInfo['friday'] = "friday";
+            this.businessInfo['friday'] = 'friday';
             this.businessInfo['fri_start'] = startTime;
             this.businessInfo['fri_end'] = endDay;
-            this.businessInfo['saturday'] = "saturday";
+            this.businessInfo['saturday'] = 'saturday';
             this.businessInfo['sat_start'] = startTime;
             this.businessInfo['sat_end'] = endDay;
-            this.businessInfo['sunday'] = "sunday";
+            this.businessInfo['sunday'] = 'sunday';
             this.businessInfo['sun_start'] = startTime;
             this.businessInfo['sun_end'] = endDay;
           }
@@ -1033,37 +1007,44 @@ export default {
 
     getBusinessInfo() {
       console.log('getBusinessInfo function trigard');
-    this.$store
-      .dispatch("businessSettingInfo/getBusinessInfo", this.url)
-      .then(() => {
-        console.log('business data available');
-      })
-      .catch(err => {
-        console.log({ err: err });
-      });
+      this.$store
+        .dispatch('businessSettingInfo/getBusinessInfo', this.url)
+        .then(() => {
+          console.log('business data available');
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
     },
-    editBusiness(){
-      console.log("editBusiness");
-      this.axios.get("business/edit/"+this.url).then(({ data }) => {
-        console.log(data);
-        this.editbiz=data.data;
-        this.setEditData(data.data)
-      }).catch((err) => {
+    editBusiness() {
+      console.log('editBusiness');
+      this.axios
+        .get('business/edit/' + this.url)
+        .then(({ data }) => {
+          console.log('testing: ', data);
+          this.editbiz = data.data;
+          this.setEditData(data.data);
+        })
+        .catch((err) => {
           console.log({ err: err });
         });
     },
 
-     setEditData(business){
-      console.log("setting editBusiness data");
+    setEditData(business) {
+      console.log('setting editBusiness data');
       console.log(business);
-      this.multiselecvalue=business.category;
-      this.filterselectvalue=business.subCategory;
-      this.select_filterss=business.filter;
-      this.country=business.country;
-      this.region=business.region;
-      this.division=business.division
-      this.municipality=business.council
-      this.locality=business.neigborhood;
+      this.multiselecvalue = business.category;
+      this.filterselectvalue = business.subCatFilter;
+      let select_filterss = business.filter;
+      this.country = business.country;
+      this.region = business.region;
+      this.division = business.division;
+      this.municipality = business.council;
+      this.locality = business.neigborhood;
+
+      select_filterss.map((item) => {
+        this.select_filterss.push(item.filter_id);
+      });
 
       this.subcategories();
       this.Region();
@@ -1074,7 +1055,7 @@ export default {
 
     updateInfo: function (businessInfo) {
       this.Lspinner = true;
-      console.log("updateInfo", businessInfo)
+      console.log('updateInfo', businessInfo);
 
       let formData = new FormData();
       formData.append('name', this.businessInfo.name);
@@ -1082,14 +1063,14 @@ export default {
       formData.append('subCategoryId', this.selectedsubcategories);
       formData.append('filterId', this.select_filterss);
 
-      formData.append("country", this.selectedcountry);
-      formData.append("region", this.selectedregion);
-      formData.append("division", this.selecteddivision);
-      formData.append("council", this.selectedmunicipality);
+      formData.append('country', this.selectedcountry);
+      formData.append('region', this.selectedregion);
+      formData.append('division', this.selecteddivision);
+      formData.append('council', this.selectedmunicipality);
 
       formData.append('keywords_alert', String(businessInfo.keywords));
       console.log(String(this.businessInfo.keywords));
-      formData.append('phone', businessInfo.phone);
+      formData.append('primary_phone', businessInfo.phone);
       formData.append('secondary_phone', businessInfo.secondary_phone);
       formData.append('timezone', businessInfo.timezone);
       formData.append('about_business', businessInfo.about_business);
@@ -1099,55 +1080,56 @@ export default {
       formData.append('Street', businessInfo.Street);
       formData.append('city', businessInfo.city);
       formData.append('PostalCode', businessInfo.PostalCode);
+      formData.append('lat', businessInfo.lat);
+      formData.append('lng', businessInfo.lng);
 
       formData.append('monday', businessInfo.monday);
-        formData.append('mon_start', businessInfo.mon_start);
-        formData.append('mon_end', businessInfo.mon_end);
+      formData.append('mon_start', businessInfo.mon_start);
+      formData.append('mon_end', businessInfo.mon_end);
       formData.append('tuesday', businessInfo.tuesday);
-        formData.append('tues_start', businessInfo.tues_start);
-        formData.append('tues_end', businessInfo.tues_end);
+      formData.append('tues_start', businessInfo.tues_start);
+      formData.append('tues_end', businessInfo.tues_end);
       formData.append('wednesday', businessInfo.wednesday);
-        formData.append('wed_start', businessInfo.wed_start);
-        formData.append('wed_end', businessInfo.wed_end);
+      formData.append('wed_start', businessInfo.wed_start);
+      formData.append('wed_end', businessInfo.wed_end);
       formData.append('thursday', businessInfo.thursday);
-        formData.append('thurs_start', businessInfo.thurs_start);
-        formData.append('thurs_end', businessInfo.thurs_end);
+      formData.append('thurs_start', businessInfo.thurs_start);
+      formData.append('thurs_end', businessInfo.thurs_end);
       formData.append('friday', businessInfo.friday);
-        formData.append('fri_start', businessInfo.fri_start);
-        formData.append('fri_end', businessInfo.fri_end);
+      formData.append('fri_start', businessInfo.fri_start);
+      formData.append('fri_end', businessInfo.fri_end);
       formData.append('saturday', businessInfo.saturday);
-        formData.append('sat_start', businessInfo.sat_start);
-        formData.append('sat_end', businessInfo.sat_end);
+      formData.append('sat_start', businessInfo.sat_start);
+      formData.append('sat_end', businessInfo.sat_end);
       formData.append('sunday', businessInfo.sunday);
-        formData.append('sun_start', businessInfo.sun_start);
-        formData.append('sun_end', businessInfo.sun_end);
+      formData.append('sun_start', businessInfo.sun_start);
+      formData.append('sun_end', businessInfo.sun_end);
 
       console.log(formData);
       this.$store
-        .dispatch("businessSettingInfo/UpdateInfomation", {
-          path: "business/update/"+this.url,
+        .dispatch('businessSettingInfo/UpdateInfomation', {
+          path: 'business/update/' + this.url,
           formData: formData,
         })
         .then(({ data }) => {
-        console.log(data);
-        this.getBusinessInfo();
-        console.log(this.business_form);
-        this.Lspinner = false;
-        this.flashMessage.show({
-          status: "success",
-          message: "Changes Made Successfuly"
-        });  
-      })
-      .catch(err => {
-        console.log({ err: err });
-        this.Lspinner = false;
-        this.flashMessage.show({
-          status: "error",
-          message: "Unable To Make Changes"
+          console.log(data);
+          this.getBusinessInfo();
+          console.log(this.business_form);
+          this.Lspinner = false;
+          this.flashMessage.show({
+            status: 'success',
+            message: 'Changes Made Successfuly',
+          });
+        })
+        .catch((err) => {
+          console.log({ err: err });
+          this.Lspinner = false;
+          this.flashMessage.show({
+            status: 'error',
+            message: 'Unable To Make Changes',
+          });
         });
-      });
     },
-
   },
 };
 </script>

@@ -117,7 +117,7 @@ export default {
       } else path = '/messaging';
 
       // this.$router.push({ path: `${path}`, query: { tabId: 1, msgTabId: 1 } });
-      // this.$router.push({ path: `/business_owner/${this.activeAccount.id}`, query: { tabId: 1, msgTabId: 0 } });
+      this.$router.push({ path: `/business_owner/${this.activeAccount.id}`, query: { tabId: 1, msgTabId: 0 } });
 
     }
   }

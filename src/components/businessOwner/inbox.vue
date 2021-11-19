@@ -152,11 +152,11 @@
                             <small class="text-center">
                               {{ getCreatedAt(chat.created_at) }}
                             </small>
-                            <p class="text-center">
+                            <!-- <p class="text-center">
                               <b-badge variant="info">
                                 {{ chat.receiver_id }}
                               </b-badge>
-                            </p>
+                            </p> -->
                           </b-col>
                         </b-row>
                       </div>
@@ -226,11 +226,11 @@
                             <small class="text-center">
                               {{ getCreatedAt(chat.created_at) }}
                             </small>
-                            <p class="text-center">
+                            <!-- <p class="text-center">
                               <b-badge variant="info">
                                 {{ chat.receiver_business_id }}
                               </b-badge>
-                            </p>
+                            </p> -->
                           </b-col>
                         </b-row>
                       </div>
@@ -300,11 +300,11 @@
                             <small class="text-center">
                               {{ getCreatedAt(chat.created_at) }}
                             </small>
-                            <p class="text-center">
+                            <!-- <p class="text-center">
                               <b-badge variant="info">
                                 {{ chat.receiver_network_id }}
                               </b-badge>
-                            </p>
+                            </p> -->
                           </b-col>
                         </b-row>
                       </div>
@@ -451,7 +451,17 @@
                   <b-spinner variant="primary" label="Spinning" class="spinner centralizer"></b-spinner>
                 </div>
                 <div v-else v-for="chat in chats" :key="chat.id">
-                  <div v-if="2 != chat.sender_business_id">
+                  {{ chat }}<br />
+                  <div
+                    v-if="
+                      currentBiz.id !=
+                      (chat.receiver != null
+                        ? chat.receiver.id
+                        : chat.receiver_business != null
+                        ? chat.receiver_business.id
+                        : chat.receiver_network.id)
+                    "
+                  >
                     <b-row class="p-4">
                       <b-col>
                         <p v-if="chat.attachment" class="msg-text mt-0 text">
@@ -464,9 +474,9 @@
                           </small>
                         </p>
                         <p v-if="chat.message" class="msg-text mt-0 text">
-                          {{ chat.message }}<b> ->///{{ chat.sender_business_id }}</b>
+                          {{ chat.message }}
                           <small class="float-right mt-2 text-white pr-1 pt-1">
-                            {{ chat.created_at }}
+                            {{ getCreatedAt(chat.created_at) }}
                           </small>
                         </p>
                       </b-col>
@@ -485,7 +495,7 @@
                           </small>
                         </p>
                         <p v-if="chat.message" id="sent" class="msg-text-sent text">
-                          {{ chat.message }} ->///{{ chat.sender_business_id }}
+                          {{ chat.message }}
                           <small class="float-right mt-2 text-white pr-1 pt-1">
                             {{ getCreatedAt(chat.created_at) }}
                           </small>
@@ -743,14 +753,14 @@ export default {
       search: '',
       chatSearchKeyword: '',
       tabIndex: 2,
-      type:'',
+      type: '',
 
-      // socket: io("https://ba-chat-server.herokuapp.com", {
-      //   transports: ["websocket", "polling", "flashsocket"],
-      // }),
-      socket: io('localhost:7000', {
+      socket: io('https://ba-chat-server.herokuapp.com', {
         transports: ['websocket', 'polling', 'flashsocket'],
       }),
+      // socket: io('localhost:7000', {
+      //   transports: ['websocket', 'polling', 'flashsocket'],
+      // }),
       chatSelected: [],
       showsearch: true,
       selecteduser: false,
@@ -826,7 +836,7 @@ export default {
           id: '6',
         },
       ],
-      message: null,
+      message: {},
       newMsg: false,
       show: false,
       info: false,
@@ -889,8 +899,8 @@ export default {
   },
   mounted() {
     if (this.chatList) {
-    this.getChatList({ type: this.type });
-    } 
+      this.getChatList({ type: this.type });
+    }
   },
   async created() {
     this.$store.commit('businessChat/setCurrentBizId', this.$route.params.id);
@@ -898,13 +908,13 @@ export default {
     this.tabIndex = this.$route.query.msgTabId;
     if (this.tabIndex) {
       this.selectedChat({ chat: this.ctaSelected, id: this.ctaSelected.id });
+    } else {
+      if (this.tabIndex == 1) {
+        this.getChatList({ type: 'business' });
+      } else if (this.tabIndex == 2) {
+        this.getChatList({ type: 'network' });
+      } else this.getChatList({ type: 'user' });
     }
-
-    if (this.tabIndex == 1) {
-      this.getChatList({ type: 'business' });
-    } else if (this.tabIndex == 2) {
-      this.getChatList({ type: 'network' });
-    } else this.getChatList({ type: 'user' });
 
     this.socket.on('generalMessage', (data) => {
       console.log('Received');
@@ -959,7 +969,7 @@ export default {
       this.socket.emit('create-biz', this.room);
     },
     getCreatedAt(data) {
-      return moment(data).format('LT');
+      return moment(data).format('lll');
     },
 
     getBizs(keyword) {
@@ -1075,10 +1085,10 @@ export default {
       console.log('SENT...');
 
       this.scrollToBottom();
-      let today = new Date();
-      let h = today.getHours();
-      let m = today.getMinutes();
-      this.message.timeStamp = h + ':' + m;
+      // let today = new Date();
+      // let h = today.getHours();
+      // let m = today.getMinutes();
+      // this.message.timeStamp = h + ':' + m;
       this.message.message = this.input;
       this.chats.push(this.message);
       this.input = '';

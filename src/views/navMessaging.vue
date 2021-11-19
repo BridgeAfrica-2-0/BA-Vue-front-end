@@ -829,8 +829,8 @@ export default {
       checked: false,
       text: '',
       selected: [],
-      chats: null,
-      messages: null
+      chats: [],
+      messages: []
     };
   },
 
@@ -914,7 +914,7 @@ export default {
       formData.append('message', data.message);
       formData.append('receiver_id', data.receiver_id);
 
-      this.saveMessage(formData);
+      // this.saveMessage(formData);
     });
   },
   methods: {

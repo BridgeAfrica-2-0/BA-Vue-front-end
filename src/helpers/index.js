@@ -9,7 +9,7 @@ export const fullMediaLink = (media) => {
       : media.startsWith(scheme)
         ? media
         : media.startsWith("/storage/") ? `${scheme}${media}`
-          : `https://www.youtube.com/watch?v=${media}`
+          : media
 
     return render
   }

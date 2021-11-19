@@ -271,7 +271,7 @@ export default {
 
             this.flashMessage.show({
               status: "error",
-
+               message: "Email or Password is incorect"
             });
           } else {
             this.flashMessage.show({

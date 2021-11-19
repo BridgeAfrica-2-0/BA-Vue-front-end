@@ -1,11 +1,13 @@
 <template>
   <div class="main">
 
-    <div class="images">
+    <div class="images imageslg ">
       <div>
-        <img src="@/assets/img/banner.jpg" v-if="info.user.cover_picture == null " class="banner" />     <img  :src="info.user.cover_picture" v-if="info.user.cover_picture != null " class="banner" />      
+       
+        
+          <img  :src="info.user.cover_picture" v-if="info.user.cover_picture != null " class="banner" />      
       </div>
-      <b-row class="mt-2 mb-2 ">
+      <b-row class="mt-2 mb-2  d-none d-lg-block ">
         <b-col cols="6" class="avata">
           <div>     
             
@@ -92,15 +94,24 @@
           </div>
         </b-col>
         <b-col cols="2">
-          <b-button
-            class="m-community size"
-            size="sm"
-            style="margin-top: -50px;"
-          >
-            <i class="fas fa-map-marked-alt fa-lg btn-icon "></i>
+         
 
-            <span class="txt-btn">{{ $t('profilefollower.Direction') }}</span></b-button
-          >
+           <b-dropdown
+        class="ml-1 dropdown"
+        no-caret
+        variant="link"
+        size="sm"
+      >
+        <template #button-content>
+          <b-icon icon="three-dots" aria-hidden="true"></b-icon>
+        </template>
+        <b-dropdown-item>
+          <b-icon icon="flag" variant="primary"></b-icon>
+          {{ $t('profilefollower.Report') }}</b-dropdown-item
+        >
+      </b-dropdown>
+
+
         </b-col>
       </b-row>
     </div>
@@ -115,25 +126,12 @@
         <span class="txt-btn">{{ $t('profilefollower.Community') }}</span></b-button
       >
 
-      <b-dropdown
-        class="ml-1 dropdown"
-        no-caret
-        variant="outline-primary"
-        size="sm"
-      >
-        <template #button-content>
-          <b-icon icon="three-dots" aria-hidden="true"></b-icon>
-        </template>
-        <b-dropdown-item>
-          <b-icon icon="flag" variant="primary"></b-icon>
-          {{ $t('profilefollower.Report') }}</b-dropdown-item
-        >
-      </b-dropdown>
+  
     </div>
 
     <div class="body p-2">
       <b-row>
-        <b-col cols="12" class="p-3">
+        <b-col cols="12" class="p-0 p-md-3">
           <b-tabs lazy content-class="mt-3" fill pills>
             <b-tab :title="$t('profilefollower.Posts')" active>
               <Post />
@@ -336,8 +334,7 @@ computed: {
 .images {
   display: grid;
   width: 100%;
-  padding-left: 30px;
-  padding-right: 30px;
+
 }
 .banner {
   height: 426px;
@@ -461,7 +458,16 @@ p,
   margin-top: 8px;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (min-width: 768px) {
+.imageslg {
+ 
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+}
+
+@media only screen and (max-width: 991px) {
   .m-community {
     position: relative;
     left: -75px;
@@ -554,4 +560,6 @@ p,
     font-size: 12px;
   }
 }
+
+
 </style>

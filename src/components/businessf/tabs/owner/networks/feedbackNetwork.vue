@@ -13,12 +13,12 @@
             no-caret
           >
             <template #button-content>
-              <b-icon-filter></b-icon-filter><span class="sr-only">Search</span>
+              <b-icon-filter></b-icon-filter><span class="sr-only">{{ $t('network.Search') }}</span>
             </template>
-            <p class="font-weight-bolder px-3 m-0">Feedbacks Type</p>
-            <b-dropdown-item @click="applyFilter('0')">Any</b-dropdown-item>
-            <b-dropdown-item @click="applyFilter('Improvement')">Suggestion For Improvement</b-dropdown-item>
-            <b-dropdown-item @click="applyFilter('Complain')">Complain</b-dropdown-item>
+            <p class="font-weight-bolder px-3 m-0">{{ $t('network.Feedbacks_Type') }}</p>
+            <b-dropdown-item @click="applyFilter('0')">{{ $t('network.Any') }}</b-dropdown-item>
+            <b-dropdown-item @click="applyFilter('Improvement')">{{ $t('network.Suggestion_For_Improvement') }}</b-dropdown-item>
+            <b-dropdown-item @click="applyFilter('Complain')">{{ $t('network.Complain') }}</b-dropdown-item>
           </b-dropdown>
         </span>
       </b-col>

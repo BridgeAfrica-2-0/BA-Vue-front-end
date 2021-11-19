@@ -173,7 +173,7 @@ export default {
     },
 
     ...mapGetters({
-      newNotifications: 'notification/NEW_BUSINESS_NOTIFICATION'
+      newNotifications: 'notification/NEW_NETWORK_NOTIFICATION'
     })
   },
 

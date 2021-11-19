@@ -14,7 +14,7 @@ export const mutations = {
   [TYPES.NEW_PROFILE_NOTIFICATION](state, payload) {
     console.log(payload)
     if (payload.init) state.profile = state.profile.push(...payload.data);
-    else state.profile = [...state.profile, ...payload.data];
+    else state.profile = [...state.profile, payload.data];
   }, // [TYPES.INIT]
   [TYPES.DELETE_PROFILE_NOTIFICATION](state, payload) {
     state.profile = state.profile.filter(notif => !payload.includes(notif.id));

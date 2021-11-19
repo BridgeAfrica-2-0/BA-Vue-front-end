@@ -10,7 +10,7 @@
 			<b-card-text>
 				<p class="d-flex justify-content-start align-items-start">
 					<b-icon icon="briefcase-fill" class="primary icon-size"></b-icon>
-					<span v-for="cat in business_intro.category" :key="cat - id">
+					<span v-for="cat in business_intro.category" :key="cat.id">
 						{{ cat.name }}
 					</span>
 				</p>
@@ -432,7 +432,10 @@
 			 * @return void
 			 */
 			editContact() {
-				(this.form = this.business_intro), (this.edit2 = !this.edit2);
+				this.$router.push({path:"business_owner/"+this.url, query: {currentTab: 1}})
+				// (this.form = this.business_intro), (this.edit2 = !this.edit2);
+				console.log("editContact");
+				// localStorage.setItem("ba-business-active-tab", 0);
 			},
 
 			/**

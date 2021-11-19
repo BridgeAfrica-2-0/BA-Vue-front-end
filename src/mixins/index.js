@@ -381,6 +381,7 @@ export const Redis = {
         .listen(".UserNotification", payload => {
           console.log("payload")
           console.log(payload)
+          alert(payload.notification.notification_text)
           // this.newNotificationBusiness({ init: false, data: payload.data })
           this.newNotificationProfile({ init: false, data: payload.notification })
           // this.newNotificationNetwork({ init: false, data: payload.data })

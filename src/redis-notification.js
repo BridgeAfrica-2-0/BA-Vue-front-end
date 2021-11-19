@@ -7,7 +7,7 @@ console.log("accessToken", auth)
 console.log("--------------------")
 window.Redis = new Echo({
   broadcaster: "socket.io",
-  host: "https://f95c-154-72-167-104.ngrok.io",
+  host: "https://2734-154-72-150-101.ngrok.io",
   auth:{
     headers:{ 
       Authorization: `Bearer ${auth ? auth.accessToken : null}`

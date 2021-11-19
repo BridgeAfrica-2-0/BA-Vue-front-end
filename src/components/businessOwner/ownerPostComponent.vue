@@ -44,6 +44,64 @@
         </p>
       </div>
 
+      <!-- source post -->
+      <div class="mt-2" v-if="item.source">
+        <div class="d-inline-flex">
+          <span md="1" class="m-0 p-0">
+            <b-avatar class="d-inline-block avat" square variant="primary" :src="item.logo_path"></b-avatar>
+          </span>
+          <div class="pl-2 pl-md-3 pt-md-2">
+            <h5 class="m-0 usernamee">
+              {{ item.bussines_name }}
+            </h5>
+            <p class="durationn">{{ item.created_at | now }}</p>
+          </div>
+        </div>
+        <div class="m-0 p-0">
+          <p class="post-text">
+            <!--     :text="item.content.details"   -->
+            <read-more
+              v-if="item.content"
+              more-str="read more"
+              :text="item.content"
+              link="#"
+              less-str="read less"
+              :max-chars="200"
+            ></read-more>
+          </p>
+        </div>
+
+        <div v-if="item.media.length > 0" class="">
+          <span v-for="video in mapvideo()" :key="video">
+            <youtube
+              class="w-100 videoh"
+              :video-id="getId(video)"
+              :player-vars="playerVars"
+              @playing="playing"
+            ></youtube>
+          </span>
+
+          <light css=" " :cells="item.media.length" :items="mapmediae()"></light>
+        </div>
+        <b-row>
+          <!--   v-if="item.content.movies.length <= 0"  -->
+          <b-col cols="12" class="mt-2">
+            <!--  :src="$store.getters.getProfilePicture"  -->
+          </b-col>
+          <b-col class="mt-1">
+            <span class="mr-3 cursor" @click="onLike"
+              ><b-icon :icon="icon" variant="primary" aria-hidden="true"></b-icon>
+              {{ item.likes_count | nFormatter }}
+            </span>
+            <span class="cursor" @click="() => (showComment = !showComment)"
+              ><b-icon icon="chat-fill" variant="primary" aria-hidden="true"></b-icon>
+              {{ item.comment_count | nFormatter }}
+            </span>
+            <ShareButton :post="item" />
+          </b-col>
+        </b-row>
+      </div>
+      <!-- end source post -->
       <div v-if="item.media.length > 0" class="">
         <span v-for="video in mapvideo()" :key="video">
           <youtube class="w-100 videoh" :video-id="getId(video)" :player-vars="playerVars" @playing="playing"></youtube>
@@ -112,7 +170,7 @@ import { NoMoreDataForComment } from '@/mixins';
 import Comment from './comment';
 import light from '../lightbox';
 
-import {ShareButton} from '@/components/shareButton'
+import { ShareButton } from '@/components/shareButton';
 
 export default {
   name: 'ownerPostComponent',
@@ -123,7 +181,7 @@ export default {
     Comment,
     light,
     Loader,
-    ShareButton
+    ShareButton,
   },
 
   watch: {

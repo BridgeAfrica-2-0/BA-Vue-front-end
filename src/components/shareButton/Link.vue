@@ -14,17 +14,19 @@
 
 
 <script>
-import Button from "@/components/Button";
+import Button from '@/components/Button';
 
 export default {
-  name: "Link",
+  name: 'Link',
 
   props: {
     contact: {
       type: Object,
+      required: true,
     },
     post: {
       type: Object,
+      required: true,
     },
   },
 
@@ -33,22 +35,25 @@ export default {
   },
 
   data: () => ({
-    loading:false
+    loading: false,
   }),
 
   methods: {
     share: async function () {
-      this.loading = true
-      const data = {
-        [this.type]: "",
-        post_id: this.post.post_id,
-        source_id: this.post.user_id,
-        target_id: this.contact.target_id,
+      this.loading = true;
+      let data = {
+        [`${this.post.poster_type}_profile`]: '',
+        post_id: parseInt(this.post.post_id),
+        source_id: parseInt(this.post.poster_id),
       };
-
       const request = await this.$repository.share.userPost(data);
+      if (request.success)
+        this.flashMessage.success({
+          time: 5000,
+          message: `Share to ${this.contact.name}`,
+        });
 
-      this.loading = false
+      this.loading = false;
     },
   },
 };

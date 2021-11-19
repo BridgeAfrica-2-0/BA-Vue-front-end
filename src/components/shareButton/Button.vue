@@ -84,7 +84,7 @@
           <p>
             <span class="mr-auto">{{ $t('search.Share_Post_As') }}</span
             ><br />
-            <span class="mr-auto">J. Circlehead</span>
+            <span class="mr-auto">{{profile.name}}</span>
           </p>
         </div>
       </template>
@@ -101,7 +101,7 @@
 
       <b-dropdown-text class="box-title"> {{ $t('search.Share') }} </b-dropdown-text>
 
-      <b-dropdown-item class="d-flex py-2 cursor-pointer" @click="shareToYourProfile">
+      <b-dropdown-item class="d-flex py-2 cursor-pointer" @click="shareToYourProfile" v-if="$route.name != 'BusinessOwner'">
         <span class="text-ored">
           <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
         </span>
@@ -110,7 +110,7 @@
         </div>
       </b-dropdown-item>
 
-      <b-dropdown-item class="d-flex py-2 cursor-pointer" @click="open('modal-4')">
+      <b-dropdown-item class="d-flex py-2 cursor-pointer" @click="open('modal-4')" v-if="$route.name != 'BusinessOwner'">
         <span class="text-ored">
           <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
         </span>
@@ -119,7 +119,7 @@
         </div>
       </b-dropdown-item>
 
-      <b-dropdown-item v-if="'network' !== type" class="d-flex py-2 cursor-pointer" @click="open('modal-2')">
+      <b-dropdown-item  class="d-flex py-2 cursor-pointer" @click="open('modal-2')">
         <span class="text-ored">
           <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
         </span>
@@ -128,7 +128,7 @@
         </div>
       </b-dropdown-item>
 
-      <b-dropdown-item v-if="'business' !== type" class="d-flex py-2 cursor-pointer" @click="open('modal-3')">
+      <b-dropdown-item class="d-flex py-2 cursor-pointer" @click="open('modal-3')" v-if="$route.name != 'BusinessOwner'">
         <span class="text-ored">
           <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
         </span>
@@ -306,16 +306,14 @@ export default {
     },
 
     shareToYourProfile: async function () {
-      console.log(this.post);
+      
       let data = {
         [`${this.post.poster_type}_profile`]: '',
         post_id: parseInt(this.post.post_id),
         source_id: parseInt(this.post.poster_id),
       };
 
-      // if ('user_profile' !== `${this.post.poster_type}_profile`) data = Object.assign(data, { target_id: this.post.target_id });
-
-      const request = await this.$repository.share.userPost(data);
+      const request = await this.$repository.share.userPost(data, [`${this.post.poster_type}_post`]);
 
       if (request.success)
         this.flashMessage.success({

@@ -74,6 +74,15 @@ const routes = [{
   //   auth: true,
   // },
 },
+
+  
+// {
+
+//   path: "/ordersdetail",
+//   name: "ordersdetail",
+//   component: ordersdetail,
+  
+// },
 {
   path: "/",
   name: "home",

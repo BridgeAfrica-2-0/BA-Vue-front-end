@@ -84,10 +84,3 @@ export default new Vuex.Store({
     notification
   }
 });
-
-
-// @Maxine @Arman @fayole 
-// Working in progress
-// - Fix bug 
-// - Share functionality
-// - comment, like in profile owner, profile follower

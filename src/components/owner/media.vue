@@ -15,8 +15,8 @@
       </h6>
 
       <span class="float-right">
-        <b-link
-          ><b-icon icon="eye-fill" variant="primary"> </b-icon> {{ $t('profileowner.View_All') }}
+        <b-link href="#media">
+          <b-icon icon="eye-fill" variant="primary"> </b-icon> {{ $t('profileowner.View_All') }}
         </b-link></span
       >
 

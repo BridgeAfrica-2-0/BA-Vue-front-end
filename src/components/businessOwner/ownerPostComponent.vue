@@ -12,7 +12,7 @@
           <p class="durationn">{{ item.created_at | now }}</p>
         </div>
 
-        <div class="toright pt-2">
+        <div class="toright pt-2" v-if="canBeDelete">
           <b-dropdown variant="link" size="sm" no-caret>
             <template #button-content>
               <b-icon icon="three-dots" variant="primary" aria-hidden="true"></b-icon>
@@ -116,14 +116,25 @@ import { ShareButton } from '@/components/shareButton';
 
 export default {
   name: 'ownerPostComponent',
-  props: ['post', 'mapvideo', 'mapmediae', 'businessLogo', 'editPost', 'deletePost'],
-
   mixins: [NoMoreDataForComment],
   components: {
     Comment,
     light,
     Loader,
     ShareButton,
+  },
+
+  props: {
+    post: {},
+    mapvideo: {},
+    mapmediae: {},
+    businessLogo: {},
+    editPost: {},
+    deletePost: {},
+    canBeDelete: {
+      type: Boolean,
+      default: () => true,
+    },
   },
 
   watch: {

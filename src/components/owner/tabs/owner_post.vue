@@ -436,8 +436,7 @@
 </template>
 
 <script>
-// import Comment from '../comment';
-// import light from '../../lightbox';
+
 
 import Post from '@/components/businessOwner/ownerPostComponent';
 
@@ -447,8 +446,6 @@ import axios from 'axios';
 export default {
   name: 'postNetwork',
   components: {
-    // Comment,
-    // light,
     Post,
   },
   data() {

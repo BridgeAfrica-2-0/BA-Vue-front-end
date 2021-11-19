@@ -34,7 +34,7 @@
 					</h6>
 					<p class="mb-1">
 						{{ profile.followers }} {{ community }}
-						<span class="float-right m-60"
+						<span class="float-right "
 							>{{ $t('dashboard.Current_Plan') }}: <span class="text-success">{{ $t('dashboard.Basic') }}</span></span
 						>
 					</p>

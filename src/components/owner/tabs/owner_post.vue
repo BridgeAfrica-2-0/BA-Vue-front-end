@@ -4,7 +4,7 @@
     <!-- DOM to Create Post By A UserOwner-->
     <b-card class="px-md-3 mb-3">
       <b-row class="mt-2">
-        <b-col cols="2" md="1" class="m-md-0 p-md-0">
+        <b-col cols="2" md="1" class="m-md-0 p-0">
           <b-avatar
             variant="primary"
             class="img-fluid avat-comment"
@@ -468,7 +468,7 @@
             </span>
             <div class="pl-2 pl-md-3 pt-md-2">
               <h5 class="m-0 usernamee">
-                {{ item.name }}
+                {{ item.user_name }}
               </h5>
               <p class="durationn">{{ moment(item.created_at).fromNow() }}</p>
             </div>

@@ -102,7 +102,8 @@ export default {
 
    data() {
     return {
-      page: 2,
+      page: 1,
+      network: [],
       options: {
         rewind: true,
         autoplay: true,
@@ -116,21 +117,16 @@ export default {
   },
 
 
-   computed: {
+ computed:{  
+
+        biz_id(){
+          return  this.$store.state.dashboard.dBusinessId;
+        }
+        
+      },
+
+
    
-        network(){
-
-      if(this.type=="Follower"){ 
-
-      return  this.$store.state.profile.NcommunityFollower.network_followers;  
-
-       }else{
-
-         return  this.$store.state.profile.NcommunityFollowing.network_following; 
-       }
-   }
-   
-  },
   methods:{
 
 
@@ -153,59 +149,49 @@ export default {
 
 
 
-      infiniteHandler($state) {
 
-        console.log("loading network 1 1")
 
-      let url = null;
 
-         if(this.type=="Follower"){  
-          url="profile/network/follower/"
-         }else{
-          url="profile/network/following/";
-         }
+
+   infiniteHandler($state) {
+      const url =
+        this.type === 'Follower'
+          ? `business/community/business-follower/${this.biz_id}/`
+          : `business/community/business-following/${this.biz_id}/`;
+
       axios
-        .get(url + this.page)   
+        .get(url + this.page)
         .then(({ data }) => {
-          console.log("lading network after response")
-          console.log(data);
-        if(this.type=="Follower"){
-         
+          if (this.type == 'Follower') {
+            if (data.data.business_followers.length) {
+              this.businesses.push(...data.data.business_followers);
+              this.page += 1;
 
-          if (data.data.network_followers.length) {
-            this.page += 1;
-            this.network.push(...data.data.network_followers);
-            
-            
-            $state.loaded();
-           }else{
+              $state.loaded();
+            } else {
               $state.complete();
-           }
-
-
+            }
           } else {
-            
+            if (data.data.business_following.length) {
+              this.businesses.push(...data.data.business_following);
+              this.page += 1;
 
-
-             if (data.data.network_following.length) {
-            this.page += 1;
-      
-            this.network.push(...data.data.network_following);
-            
-            
-            $state.loaded();
-           }else{
+              $state.loaded();
+            } else {
               $state.complete();
-           }
-
-
-
+            }
           }
-        }) 
-        .catch((err) => {
+        })
+        .catch(err => {
           console.log({ err: err });
         });
     },
+
+
+
+
+    
+
 
   }
  

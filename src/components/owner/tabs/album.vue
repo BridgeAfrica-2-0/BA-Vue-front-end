@@ -106,9 +106,9 @@
 
     <div class="container-flex" v-if="showalbum">
       <b-button variant="outline-primary" size="sm" @click="hidealbum">
-        {{ $t('profileowner.Back') }} ++++++++++
+        {{ $t('profileowner.Back') }}
       </b-button>
-      <span class="text-center ml-2 f-20"> {{ this.album_name }} +++++ </span>
+      <span class="text-center ml-2 f-20"> {{ this.album_name }}</span>
 
       <Images
         @update:item="() => updateItem()"

@@ -342,7 +342,19 @@
                     <hr class="h-divider" />
                     <div class="other-menu suggest-item cursor-pointer">
                       <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'globe-americas']" /></span>
-                      Language
+                      
+                      <li class="nav-item dropdown show">
+									      
+									<b-dropdown
+										size="sm"
+										variant="outline"
+										text="English"
+										class="m-2"
+									>
+										<b-dropdown-item-button @click="setLocale('en')">{{$t(auth.English)}}</b-dropdown-item-button>
+										<b-dropdown-item-button @click="setLocale('fr')">{{$t(auth.French)}}</b-dropdown-item-button>
+									</b-dropdown>
+								</li>
                     </div>
                     <hr class="h-divider" />
                     <a @click="logout"
@@ -410,7 +422,18 @@
             <hr class="h-divider" />
             <div class="other-menu suggest-item cursor-pointer">
               <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'globe-americas']" /></span>
-              Language
+              <li class="nav-item dropdown show">
+									      
+									<b-dropdown
+										size="sm"
+										variant="outline"
+										text="English"
+										class="m-2"
+									>
+										<b-dropdown-item-button @click="setLocale('en')">{{$t(auth.English)}}</b-dropdown-item-button>
+										<b-dropdown-item-button @click="setLocale('fr')">{{$t(auth.French)}}</b-dropdown-item-button>
+									</b-dropdown>
+								</li>
             </div>
             <hr class="h-divider" />
             <a

@@ -404,7 +404,10 @@
         :deletePost="() => deletePost(item)"
       />
 
-      <infinite-loading :identifier="infiniteId" ref="infiniteLoading" @infinite="infiniteHandler"></infinite-loading>
+      <infinite-loading :identifier="infiniteId" ref="infiniteLoading" @infinite="infiniteHandler">
+        <div slot="no-more">No more data</div>
+        <div slot="no-results">No results</div>
+      </infinite-loading>
     </b-card>
   </div>
 </template>
@@ -461,14 +464,14 @@ export default {
 
       if (response.success) this.auth(response.data);
     },
-    init: async function () {
+    init: async function() {
       await this.$repository.share.switch(this.$route.params.id, 'business');
     },
 
     mapmediae(media) {
       let mediaarr = [];
 
-      media.forEach((item) => {
+      media.forEach(item => {
         let type = this.checkMediaType(item.media_type);
         if (type != 'video') {
           mediaarr.push(item.media_url);
@@ -481,7 +484,7 @@ export default {
     mapvideo(media) {
       let mediaarr = [];
 
-      media.forEach((item) => {
+      media.forEach(item => {
         let type = this.checkMediaType(item.media_type);
         if (type == 'video') {
           mediaarr.push(item.media_url);
@@ -525,7 +528,7 @@ export default {
             $state.complete();
           }
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -544,7 +547,7 @@ export default {
         .post('business/delete/post/' + post.post_id, {
           name: this.name,
         })
-        .then((response) => {
+        .then(response => {
           console.log(response.data);
 
           this.flashMessage.show({
@@ -555,7 +558,7 @@ export default {
 
           loader.hide();
         })
-        .catch((err) => {
+        .catch(err => {
           this.sending = false;
 
           if (err.response.status == 422) {
@@ -629,7 +632,7 @@ export default {
             'Content-Type': 'multipart/form-data',
           },
         })
-        .then((response) => {
+        .then(response => {
           console.log(response);
 
           this.flashMessage.show({
@@ -641,7 +644,7 @@ export default {
 
           this.$refs['modal-edit'].hide();
         })
-        .catch((err) => {
+        .catch(err => {
           if (err.response.status == 422) {
             console.log({ err: err });
             console.log(err.response.data.message);
@@ -669,8 +672,8 @@ export default {
         });
     },
 
-    chooseImage: function () {},
-    chooseVideo: function () {
+    chooseImage: function() {},
+    chooseVideo: function() {
       document.getElementById('chosefile').click();
     },
     chooseDocument() {
@@ -682,7 +685,7 @@ export default {
       if (file.files) {
         let reader = new FileReader();
 
-        reader.onload = (e) => {
+        reader.onload = e => {
           this.createPost.movies.push({
             target: event.target,
             movie: e.target.result,
@@ -700,7 +703,7 @@ export default {
       let result = null;
       if (file.files) {
         let reader = new FileReader();
-        reader.onload = (e) => {
+        reader.onload = e => {
           result = e.target.result;
 
           return result;
@@ -709,12 +712,12 @@ export default {
       }
     },
 
-    selectMoviesOutsidePost(event) {     
+    selectMoviesOutsidePost(event) {
       const file = event.target;
 
-      if (file.files) {    
+      if (file.files) {
         let reader = new FileReader();
-        reader.onload = (e) => {
+        reader.onload = e => {
           this.createPost.movies.push({
             target: event.target,
             movie: e.target.result,
@@ -751,8 +754,8 @@ export default {
     },
 
     deleteItem(name) {
-      const newHyperlinks = this.createPost.hyperlinks.filter((item) => item.fileName.trim() !== name.trim());
-      const movies = this.createPost.movies.filter((item) => item.fileName.trim() !== name.trim());
+      const newHyperlinks = this.createPost.hyperlinks.filter(item => item.fileName.trim() !== name.trim());
+      const movies = this.createPost.movies.filter(item => item.fileName.trim() !== name.trim());
       this.createPost.hyperlinks = [...newHyperlinks];
       this.createPost.movies = [...movies];
     },
@@ -777,14 +780,14 @@ export default {
         .then(() => {
           console.log('hey yeah');
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
 
     submitPost() {
       this.isUploading = true;
-      
+
       let loader = this.$loading.show({
         container: this.fullPage ? null : this.$refs.loader,
         canCancel: true,
@@ -818,11 +821,11 @@ export default {
             'Content-Type': 'multipart/form-data',
           },
 
-          onUploadProgress: function (progressEvent) {
+          onUploadProgress: function(progressEvent) {
             this.uploadPercentage = parseInt(Math.round((progressEvent.loaded / progressEvent.total) * 100));
           }.bind(this),
         })
-        .then((response) => {
+        .then(response => {
           console.log(response);
 
           this.flashMessage.show({
@@ -838,7 +841,7 @@ export default {
           this.infiniteId += 1;
           console.log('post create complete');
         })
-        .catch((err) => {
+        .catch(err => {
           if (err.response.status == 422) {
             console.log({ err: err });
             console.log(err.response.data.message);
@@ -918,7 +921,7 @@ export default {
   },
 };
 </script>
-<style >
+<style>
 .h-lg-250 {
   height: 350px !important;
 }

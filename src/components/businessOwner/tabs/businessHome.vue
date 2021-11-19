@@ -51,7 +51,7 @@ import comunitiDashboard from "./comunitiDashboard";
 //import Personalise from "./personalise";
 import Post from "../ownerPost";
 export default {
-  name: "posts",
+  name: "posts", 
   components: {
     Intro,
 

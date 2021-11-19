@@ -1,12 +1,14 @@
 <template>
-  <div> test
+  <div>
     <div class="products ">
+   
       <!-- MARKET HEADER BAR -->
       <div class="col-12 d-flex align-items-center justify-content-between">
         <p>
           <b-icon font-scale="1.8" icon="shop" variant="primary" class="mr-2"></b-icon>
           <span class="font-weight-bold">Market</span>
         </p>
+            <b-button class="bg-danger pos" variant="outline-primary"  @click="displayOrders">{{my_orders}}</b-button >
         <b-button variant="outline-primary" @click="createProduct">Add Product</b-button>
       </div>
       <div class="col-12">
@@ -15,7 +17,7 @@
 
       <!-- MARKET PRODUCT LIST -->
       <div class="col-md-6" v-for="(product, index) in products" :key="index">
-        <Product :product="product" />
+        <Product v-show="!orders" :product="product" />
       </div>
       <b-col v-if="loader" class="load">
         <b-spinner style="width: 7rem; height: 7rem;" variant="primary"></b-spinner>
@@ -25,7 +27,7 @@
       </b-col>
     </div>
 
-    <button class="order-button" @click="displayOrders">my orders</button>
+   
     <div class="orders">
       <Orders v-show="orders" ref="orders" />
     </div>
@@ -34,7 +36,7 @@
     </div>
     <div class="text-center">
       <b-link @click="swap" >Archive</b-link>
-    </div> testtest
+    </div> 
     <!-- ADDPRODUCT FORM -->
     <b-modal hide-footer title="Add product" v-model="showModal">
       <b-form>
@@ -176,9 +178,10 @@ export default {
   },
   data() {
     return {
+       options: ['list', 'of', 'options'],
       orders: true,
       archive: false,
-
+       my_orders: 'market',
       showModal: false,
       load: false,
       loader: false,
@@ -199,6 +202,7 @@ export default {
         filterId: '',
         tax: '',
         kg: '',
+       
       },
       products: [],
       val: '',
@@ -216,7 +220,7 @@ export default {
   },
   computed: {
     BuCategories() {
-      return this.$store.state.market.categories;
+      return this.$store.state.auth.categories;
     },
     scategories() {
       return this.$store.state.auth.subcategories;
@@ -244,6 +248,12 @@ export default {
     },
     displayOrders() {
       this.status = !this.status;
+       this.orders = !this.orders;
+       if(this.orders == true){
+         this.my_orders = "market";
+       }else {
+         this.my_orders= "my orders"
+       }
       console.log('----' + this.status);
     },
     getProducts: async function() {
@@ -340,6 +350,9 @@ export default {
 </script>
 
 <style scoped>
+.pos{
+  margin-left: 100px;
+}
 .order-button {
   height: 40px;
   color: white;

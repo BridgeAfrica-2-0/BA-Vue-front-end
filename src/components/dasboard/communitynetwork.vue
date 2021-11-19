@@ -12,7 +12,7 @@
         <b-col md="3" xl="3" lg="3" cols="5" sm="3">
           <div class="center-img">
             <img :src="item.picture" class="r-image" />
-          </div>
+          </div>  
         </b-col>
         <b-col md="5" cols="7"  lg="7" xl="5" sm="5">
          
@@ -27,15 +27,15 @@
               <b-icon-geo-alt class="ico"></b-icon-geo-alt>
               {{ item.location_description }}
             </span>
-            <br />
+            <br />   
        
         <read-more
               more-str="read more"
-              class="readmore"
+              class="readmore"    
               :text="item.about_network"
               link="#"
               less-str="read less"
-              :max-chars="35"
+              :max-chars="100"
             >
             </read-more>
 
@@ -46,15 +46,21 @@
           <div class="s-button">
             <b-row>
               <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2">
-                <b-button
+               
+
+               <b-button
                   block
                   size="sm"
                   class="b-background shadow"
+                  :class="item.is_follow !== 0 && 'u-btn'"
                   variant="primary"
+                  @click="handleFollow(item)"
                 >
                   <i class="fas fa-user-plus  fa-lg btn-icon "></i>
-                  <span class="btn-com" v-b-modal.modal-sm>{{ $t('dashboard.Community') }}</span>
+                  <span class="btn-com">{{ $t('profileowner.Community') }}</span>
                 </b-button>
+
+                
               </b-col>
 
               <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2">
@@ -96,7 +102,7 @@ export default {
 
    data() {
     return {
-      page: 1,
+      page: 2,
       options: {
         rewind: true,
         autoplay: true,
@@ -126,6 +132,26 @@ export default {
    
   },
   methods:{
+
+
+
+      async handleFollow(user) {
+      const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
+      const nextFollowState = user.is_follow === 0 ? 1 : 0;
+      const data = {
+        id: user.id,
+        type: 'network',
+      };
+
+      await axios
+        .post(uri, data)
+        .then(response => {
+          user.is_follow = nextFollowState;
+        })
+        .catch(err => console.log(err));
+    },
+
+
 
       infiniteHandler($state) {
 

@@ -1,25 +1,25 @@
 <template>
-  <b-container>
-    <flashMessage />
+  <b-container v-if="networkinfo != 0">
+    
+    <FlashMessage />
 
     <div class="">
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="Privacy"
+          :label="$t('network.Privacy')"
           label-size="md"
           label-class="font-weight-bold pt-0 username"
           class="mb-0 text"
         >
-          <b-form-group class="mb-0" v-slot="{ ariaDescribedby }">
+          <b-form-group class="mb-0" >
             <b-form-radio-group
               class="pt-2 text"
-              v-model="privacy"
+              v-model="networkinfo[0].setting_value"
               :options="['Public', 'Private']"
-              :aria-describedby="ariaDescribedby"
             ></b-form-radio-group>
           </b-form-group>
-          <div class="mt-3">{{ privacy }}</div>
+          <!-- <div class="mt-3">{{ privacy }}</div> -->
         </b-form-group>
       </b-container>
       <hr />
@@ -29,21 +29,20 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="Posting Permissions"
+          :label="$t('network.Posting_Permissions')"
           label-size="md"
           label-class="font-weight-bold pt-0 username"
           class="mb-0 text"
         >
-          <b-form-group class="mb-0" v-slot="{ ariaDescribedby }">
+          <b-form-group class="mb-0" >
             <b-form-radio-group
               :options="options"
-              v-model="permissions"
-              :aria-describedby="ariaDescribedby"
+              v-model="networkinfo[1].setting_value"
               name="radio-options"
               @change="check"
             ></b-form-radio-group>
           </b-form-group>
-          <div class="mt-3">{{ permissions }}</div>
+          <!-- <div class="mt-3">{{ permissions }}</div> -->
         </b-form-group>
       </b-container>
 
@@ -54,31 +53,31 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="Post Approval"
+          :label="$t('network.Post_Approval')"
           label-size="md"
           label-class="font-weight-bold pt-0 username"
           class="mb-0"
-          v-slot="{ ariaDescribedby }"
         >
           <b-form-checkbox-group
             class="text"
             name="checkbox-options"
             :options="lists"
-            v-model="approval"
-            :aria-describedby="ariaDescribedby"
+            v-model="networkinfo[2].setting_value"
             @change="test"
           >
           </b-form-checkbox-group>
         </b-form-group>
-        <div class="mt-3">{{ approval }}</div>
+        <!-- <div class="mt-3">{{ approval }}</div> -->
       </b-container>
       <hr />
     </div>
 
     <b-container>
-      <b-link href="#foo" class="f-left text" v-on:click="deleteNetwork"
-        >Delete Network</b-link
-      >
+      <b-link 
+       class="f-left text" 
+       v-b-modal="'my-modal'"
+      >{{ $t('network.Delete_Network') }}</b-link>
+      <b-modal id="my-modal" @ok="deleteNetwork">{{ $t('network.Delete_Network') }}!</b-modal>
     </b-container>
 
     <div class="b-bottomn">
@@ -86,10 +85,13 @@
         variant="primary"
         class="a-button-l text"
         @click="save"
-        :loading="load"
-        >Save Changes</b-button
-      >
+      ><b-spinner v-if="load" small type="grow"></b-spinner> {{ $t('network.Save_Changes') }}</b-button>
       <br />
+    </div>
+  </b-container>
+  <b-container v-else>
+    <div class="text-center">
+      <b-spinner style="width: 6rem; height: 6rem;" label="Text Centered Large Spinner" variant="primary"></b-spinner>
     </div>
   </b-container>
 </template>
@@ -117,10 +119,6 @@ export default {
         text: "Member",
         value: "member",
       },
-      {
-        text: "Editor And Member",
-        value: "editor and member",
-      },
     ],
     lists: [
       {
@@ -133,64 +131,110 @@ export default {
         value: "editor and admin approval",
         disabled: false,
       },
-      {
-        text: "Approve only member post",
-        value: "only member post approval",
-        disabled: false,
-      },
     ],
   }),
 
   computed: {
     ...mapGetters({
-      getNetwork: "networkSetting/getNetwork",
+      getNetwork: "networkSettings/getNetwork",
     }),
+    networkinfo() {
+      return this.$store.state.NetworkSettings.networkinfo;
+    },
+  },
+
+  mounted() {
+    this.url = this.$route.params.id;
+    this.getNetworkInfo();
   },
 
   methods: {
     ...mapActions({
-      generalSave: "networkSetting/generalSave",
+      generalSave: "networkSettings/generalSave",
+      networkDelete: "networkSettings/networkDelete"
     }),
 
     check() {
-      if (this.permissions == "admin") {
+      if (this.networkinfo[1].setting_value == "admin") {
         this.lists[0].disabled = true;
         this.lists[1].disabled = true;
-        this.lists[2].disabled = true;
-      } else if (this.permissions == "editor") {
+      } else if (this.networkinfo[1].setting_value == "editor") {
         this.lists[0].disabled = false;
-        this.lists[1].disabled = false;
-        this.lists[2].disabled = true;
-      } else if (this.permissions == "member") {
-        this.lists[0].disabled = true;
         this.lists[1].disabled = true;
-        this.lists[2].disabled = false;
-      } else if (this.permissions == "editor and member") {
+      } else if (this.networkinfo[1].setting_value == "member") {
         this.lists[0].disabled = false;
         this.lists[1].disabled = false;
-        this.lists[2].disabled = true;
       }
+    },
+
+    getNetworkInfo() {
+      console.log("getNetworkInfo");
+      this.$store
+        .dispatch("NetworkSettings/getnetworkinfo", "settings/general/"+this.url)
+        .then(() => {
+          console.log('getNetworkInfo');
+        })
+        .catch(err => {
+          console.log({ err: err });
+        });
     },
 
     save() {
       this.laod = true;
-      this.networkId = this.getNetwork.id;
-      let payload = {
-        networkId: this.networkId,
-        privacy: this.privacy,
-        post_permission: this.permissions,
-        post_approval: this.approval,
-      };
-      this.generalSave(payload)
-        .then(() => {
+      let formData = new FormData()
+      formData.append("privacy", this.networkinfo[0].setting_value)
+      formData.append("post_permission", this.networkinfo[1].setting_value)
+      formData.append("post_approval", this.networkinfo[2].setting_value)
+      this.$store
+        .dispatch("NetworkSettings/generalSave", 
+        {
+          path: "general-settings/"+this.url,
+          formData: formData
+        })
+        .then(({data}) => {
+          console.log(data);
+          this.getNetworkInfo();
           this.load = false;
-          alert("Successful");
+          this.flashMessage.show({
+            status: "success",
+            message: "Changes Made Successfully"
+          });
         })
         .catch((err) => {
-          this.load = false;
           console.log(err);
+          this.load = false;
+          this.flashMessage.show({
+            status: "error",
+            message: "Unable To Make Changes"
+          });
         });
     },
+
+    deleteNetwork: function(){
+      console.log("deleteNetwork: "+this.url);
+      this.$store
+      .dispatch("NetworkSettings/networkDelete", 
+      {
+        path: "settings/delete-network/"+this.url,
+      })
+      .then(({data}) => {
+        console.log(data);
+        console.log('ohh yeah');
+        this.flashMessage.show({
+          status: "success",
+          message: "Network Deleted"
+        });
+          
+      })
+      .catch(err => {
+        console.log({ err: err });
+        this.flashMessage.show({
+          status: "error",
+          message: "Unable To Delete Network"
+        });
+      });
+		},
+
   },
 };
 </script>

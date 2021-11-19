@@ -1,180 +1,97 @@
 <template>
-  <div class="lalla">
-    <b-card
-      class="border-0 p-0 m-0"
-      style="
-    padding: 3px;"
-    >
-      <div class=" border shadow   p-tab p-3">
-        <span>
-          <h6 class="title">
-            <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
-            <b> COMMUNITY </b> <span class="h4-color"> {{ nFormatter(total.total_community)}} </span>
-          </h6>
-        </span>
+    <div class="lalala">
+    <div class=" border mt-2 ">
+      <span>
+        <h6 class="title m-3">
+          <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
+          <b> COMMUNITY </b> <span class="h4-color"> {{ nFormatter(total.total_community) }} </span>
+        </h6>
+      </span>
 
-        <b-tabs lazy pills content-class="mt-3  f-left ">
-          <b-tab active>
-            <template slot="title">
-              People
-              <span class="spa-color">
-               {{ nFormatter(total.total_people)}} 
-              </span>
-            </template>
+      <b-tabs pills lazy content-class="mt-3  f-left ">
+        <b-tab active>
+          <template slot="title">
+            People <span class="spa-color"> {{ nFormatter(total.total_people) }} </span>
+          </template>
 
-            <div>
-              <b-row>
-                <b-col class="p-2">
-                  <b-tabs lazy fill pills content-class="mt-3  f-left m-up">
-                    <b-tab active>
-                      <template slot="title">
-                        Followers
-                        <span class="spa-color">
-                         {{ nFormatter(total.total_user_follower)}}
-                        </span>
-                      </template>
+          <div>
+            <b-row>
+              <b-col>
+                <b-tabs lazy fill pills content-class="mt-3  f-left m-up">
+                  <b-tab active>
+                    <template slot="title">
+                      Followers <span class="spa-color"> {{ nFormatter(total.total_user_follower) }} </span>
+                    </template>
 
-                      <div class="s-comcard">
-                       
-                          <div>
-                            <People type="Follower"
-                            />
-                          </div>
-                      
-                      </div>
-                    </b-tab>
+                    <div class="s-comcard"><People type="Follower" /></div>
+                  </b-tab>
 
-                    <b-tab>
-                      <template slot="title">
-                        Following
-                        <span class="spa-color">
-                           {{ nFormatter(total.total_user_following)}}
-                        </span>
-                      </template>
+                  <b-tab>
+                    <template slot="title">
+                      Following <span class="spa-color"> {{ nFormatter(total.total_user_following) }} </span>
+                    </template>
 
-                      <div class="s-comcard">
-                       
-                          <div>
-                            <People
-                              type="Following"
-                            />
-                          </div>
-                      
-                      </div>
-                    </b-tab>
-                  </b-tabs>
-                </b-col>
-              </b-row>
-            </div>
-          </b-tab>
+                    <div class="s-comcard"><People type="Following" /></div>
+                  </b-tab>
+                </b-tabs>
+              </b-col>
+            </b-row>
+          </div>
+        </b-tab>
 
-          <b-tab>
-            <template slot="title">
-              Businesses 
-              <span class="spa-color">
-               {{ nFormatter(total.total_business)}}
-              </span>
-            </template>
+        <b-tab>
+          <template slot="title">
+            Businesses <span class="spa-color"> {{ nFormatter(total.total_business) }} </span>
+          </template>
 
-            <div>
-              <b-tabs  lazy fill pills content-class="mt-3  f-left m-up checkcheck">
-                <b-tab active>
-                  <template slot="title">
-                    Followers
-                    <span class="spa-color">
-                    {{ nFormatter(total.total_business_follower)}}
-                    </span>
-                  </template>
+          <div>
+            <b-tabs lazy fill pills content-class="mt-3  f-left m-up checkcheck">
+              <b-tab active>
+                <template slot="title">
+                  Followers <span class="spa-color"> {{ nFormatter(total.total_business_follower) }} </span>
+                </template>
 
-                  <div class="s-comcard">
-                    
-                      <div>
-                        <Business
-                         type="Follower"
-                        />
-                      </div>
-                   
-                  </div>
-                </b-tab>
+                <div class="s-comcard"><Business type="Follower" /></div>
+              </b-tab>
 
-                <b-tab>
-                  <template slot="title">
-                    Following
-                    <span class="spa-color">
-                      {{ nFormatter(total.total_business_following)}}
-                    </span>
-                  </template>
+              <b-tab>
+                <template slot="title">
+                  Following <span class="spa-color"> {{ nFormatter(total.total_business_following) }}</span>
+                </template>
 
-                  <div class="s-comcard">
-                  
-                      <div>
-                        <Business
-                         type="Following"
-                        />
-                      </div>
-                    
-                  </div>
-                </b-tab>
-              </b-tabs>
-            </div>
-          </b-tab>
+                <div class="s-comcard"><Business type="following" /></div>
+              </b-tab>
+            </b-tabs>
+          </div>
+        </b-tab>
 
+        <b-tab>
+          <template slot="title">
+            Network <span class="spa-color"> {{ nFormatter(total.total_network) }}</span>
+          </template>
 
-                    <b-tab>
-            <template slot="title">
-              Network
-              <span class="spa-color">
-             {{ nFormatter(total.total_network)}}
-              </span>
-            </template>
+          <div>
+            <b-tabs lazy fill pills content-class="mt-3  f-left m-up checkcheck">
+              <b-tab active>
+                <template slot="title">
+                  Followers <span class="spa-color"> {{ nFormatter(total.total_network_follower) }} </span>
+                </template>
 
-            <div>
-              <b-tabs lazy fill pills content-class="mt-3  f-left m-up checkcheck">
-                <b-tab active>
-                  <template slot="title">
-                    Followers
-                    <span class="spa-color">
-                   {{ nFormatter(total.total_network_follower)}}
-                    </span>
-                  </template>
+                <div class="s-comcard"><Network type="Follower" /></div>
+              </b-tab>
 
-                  <div class="s-comcard">
-                   
-                      <div>
-                        <Network
-                           type="Follower"
-                        />
-                      </div>
-                    
-                  </div>
-                </b-tab>
+              <b-tab>
+                <template slot="title">
+                  Following <span class="spa-color"> {{ nFormatter(total.total_network_following) }} </span>
+                </template>
 
-                <b-tab>
-                  <template slot="title">
-                    Following
-                    <span class="spa-color">
-                      {{ nFormatter(total.total_network_following)}}
-                    </span>
-                  </template>
-
-                  <div class="s-comcard">
-                  
-                      <div class="p-2">
-                        <Network
-                          type="Following"
-                        />
-                      </div>
-                    
-                  </div>
-                </b-tab>
-              </b-tabs>
-            </div>
-          </b-tab>
-
-
-        </b-tabs>
-      </div>
-    </b-card>
+                <div class="s-comcard"><Network type="Following" /></div>
+              </b-tab>
+            </b-tabs>
+          </div>
+        </b-tab>
+      </b-tabs>
+    </div>
   </div>
 </template>
 
@@ -276,9 +193,9 @@ export default {
   },
   computed: {
 
-      total(){
-    return  this.$store.state.profile.Tcommunity;
-   },
+        total() {
+      return this.$store.state.businessOwner.Tcommunity;
+    },
 
     business() {
       return this.$store.getters["dashboardcommunity/getProfileCommunity"];

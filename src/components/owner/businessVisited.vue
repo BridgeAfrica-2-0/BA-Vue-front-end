@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b>Business Visited</b>
+    <b>{{ $t('profileowner.Business_Visited') }}</b>
     <hr />
     <div class="row">
       <div class="col">
@@ -9,8 +9,8 @@
           <div class="datails">
             <div class="row">
               <div class="col">
-                <span class="mr-auto"> <b>Business Name Here</b> </span>
-                <p>Category Name here - 1.1 M Followers</p>
+                <span class="mr-auto"> <b>{{ $t('profileowner.Business_Name_Here') }}</b> </span>
+                <p>{{ $t('profileowner.Category_Name_here') }} - {{ $t('profileowner.11M_Followers') }}</p>
               </div>
               <div class="col-1">
                 <b-dropdown
@@ -19,23 +19,22 @@
                   variant="primary-outline"
                   class="dropdown-style"
                 >
-                  <b-dropdown-item href="#">Edit</b-dropdown-item>
-                  <b-dropdown-item href="#">Delete</b-dropdown-item>
+                  <b-dropdown-item href="#">{{ $t('profileowner.Edit') }}</b-dropdown-item>
+                  <b-dropdown-item href="#">{{ $t('profileowner.Delete') }}</b-dropdown-item>
                 </b-dropdown>
               </div>
             </div>
-            <b-link class="text-decoration-none">Get Directions</b-link>
+            <b-link class="text-decoration-none">{{ $t('profileowner.Get_Directions') }}</b-link>
           </div>
         </b-list-group-item>
         <b-link class="mt-4 text-decoration-none" v-b-modal.modal-5>
-          <b-icon icon="plus" variant="primary"></b-icon>Add Other
-          Businesses</b-link
+          <b-icon icon="plus" variant="primary"></b-icon>{{ $t('profileowner.Add_Other_Businesses') }}</b-link
         >
         <b-modal
           class="modal w-25"
           hide-footer
           id="modal-5"
-          title="Add other Business"
+          :title="$t('profileowner.Add_other_Business')"
         >
           <b-form>
             <div>
@@ -43,7 +42,7 @@
                 <div class="col">
                   <b-form-input
                     v-model="business"
-                    placeholder="Business"
+                    :placeholder="$t('profileowner.Business')"
                     required
                   ></b-form-input>
                 </div>
@@ -62,7 +61,7 @@
               class="ml-2 mt-2 position-relative add-btn"
               type="submit"
               variant="primary"
-              >Add</b-button
+              >{{ $t('profileowner.Add') }}</b-button
             >
           </b-form>
         </b-modal>

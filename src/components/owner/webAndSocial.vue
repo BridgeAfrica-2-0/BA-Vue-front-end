@@ -1,15 +1,15 @@
 <template>
   <div>
-    <b>Web & Soial Links</b>
+    <b>{{ $t('profileowner.Web_Soial_Links') }}</b>
     <hr />
     <div>
       <b-link class="text-decoration-none" v-b-modal.modal-7
         ><b-icon icon="globe" variant="primary"></b-icon>
-        https://www.yourwebsite.com</b-link
+        {{ $t('profileowner.https_www_yourwebsite_com') }}</b-link
       >
     </div>
     <b-link class="text-decoration-none" v-b-modal.modal-7
-      ><b-icon icon="plus" variant="primary"></b-icon> Add a Website</b-link
+      ><b-icon icon="plus" variant="primary"></b-icon> {{ $t('profileowner.Add_a_Website') }}</b-link
     >
     <b-modal id="modal-7" title="Add a Website">
       <div>
@@ -17,7 +17,7 @@
           <div class="col">
             <b-form-input
               v-model="business"
-              placeholder="Your Website"
+              placeholder="$t('profileowner.Your_Website')"
             ></b-form-input>
           </div>
           <div class="col-4">
@@ -41,7 +41,7 @@
       >
     </div>
     <b-link class="text-decoration-none" v-b-modal.modal-8
-      ><b-icon icon="plus" variant="primary"></b-icon> Add a Social Link</b-link
+      ><b-icon icon="plus" variant="primary"></b-icon> {{ $t('profileowner.Add_a_Social_Link') }}</b-link
     >
     <b-modal id="modal-8" title="Add other Link">
       <div>
@@ -59,7 +59,7 @@
           <div class="col">
             <b-form-input
               v-model="business"
-              placeholder="Social link"
+              :placeholder="$t('profileowner.Social_link')"
             ></b-form-input>
           </div>
           <div class="col">

@@ -8,7 +8,7 @@ export default {
     success: {
       state: false,
       succes: false,
-      msg: "",    
+      msg: "",
     },
     notifications: [],
     checked: false,
@@ -18,7 +18,7 @@ export default {
     pendingPosts: [],
 
     Following: [],
-    Followers: [],   
+    Followers: [],
 
     peopleFollowing: [],
     peopleFollowers: [],
@@ -235,6 +235,19 @@ export default {
       state.albums = newState
     },
 
+    updatePost(state, payload) {
+      const strategy = {
+        "add:comment:count": (uuid) => state.ownerPost.map(post => (post.post_id == uuid) ? { ...post, comment_count: post.comment_count + 1 } : post)
+      }
+
+      try {
+        state.ownerPost = strategy[payload.action](payload.uuid)
+      } catch (error) {
+        throw new Error(error)
+      }
+
+    },
+
     removeAlbum(state, uuid) {
       state.albums = state.albums.filter(album => album.id != uuid)
     },
@@ -374,6 +387,20 @@ export default {
       return num;
     },
 
+
+
+
+    roleCheck({ commit },id){
+        
+      
+      return axios.get("business/role-check?id="+id)
+        .then((data) => {
+          return data;
+        });
+
+
+    },
+
     loadMore({ commit }, url) {
 
       return axios.get(url)
@@ -387,13 +414,13 @@ export default {
       let response_ = null;
       const id_Business = 2;
       await axios("business/info" +
-          "/" +
-          payload.business_id,
+        "/" +
+        payload.business_id,
         {
           method: "GET",
           headers: {
             Accept: "application/json",
-           
+
           }
         }
       )
@@ -412,7 +439,7 @@ export default {
           });
           response_ = response;
         })
-        .catch(error => {});
+        .catch(error => { });
       return response_;
     },
 
@@ -420,15 +447,15 @@ export default {
     async updateUserBusinessAbout(context, payload) {
       let response_ = null;
       const id_Business = 47;
-      await axios( "business/update" +
-          "/" +
-          payload.business_id,
+      await axios("business/update" +
+        "/" +
+        payload.business_id,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
-           
+
           },
           body: JSON.stringify({
             name: payload.business_about.name,
@@ -575,9 +602,13 @@ export default {
     },
 
     async createAlbum({ commit }, { id, data }) {
-      const res = await axios.post("business/album/create/" + id, data);
-      commit("newAlbum", res.data);
+      const res = await axios.post("business/album/create/" + id, data)
+      .then(({ data }) => {
+        commit("newAlbum", data.data);
+        console.log(data);
+      });
     },
+
     CommunityPeople({ commit }, businessId) {
       return axios
         .get("business/community/people/" + businessId)
@@ -586,8 +617,6 @@ export default {
           console.log(data);
         });
     },
-
-
 
     updateAlbum({ commit }, payload) {
       return axios.post(

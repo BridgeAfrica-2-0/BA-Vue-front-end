@@ -2,9 +2,8 @@
   <div>
     <div class="s-ccard">
       <b-row>
-
-        
-        <b-col lg="6" sm="12" class="p-2" v-for="item in people" :key="item.id">
+ 
+        <b-col lg="6" sm="12" class="p-2" v-for="item in users" :key="item.id">
           <div class="people-style border shadow">
             <b-row class="mb-1">
               <b-col md="3" cols="4" sm="4" class="my-auto">
@@ -42,7 +41,7 @@
                           >
                             <h6 class="follower m-15">
                               {{ count(item.followers) }}
-                              Community
+                             {{ $t('dashboard.Community') }}
                             </h6>
                           </b-col>
                         </b-row>
@@ -66,7 +65,7 @@
                               class="b-background flexx pobtn shadow"
                             >
                               <i class="fas fa-envelope   fa-lg btn-icon "></i>
-                              <span class="btn-text">Message</span>
+                              <span class="btn-text"> {{ $t('dashboard.Messages') }}</span>
                             </b-button>
                           </b-col>
 
@@ -77,15 +76,30 @@
                             xl="12"
                             class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
                           >
+                           
+
+
+
                             <b-button
-                              block
-                              size="sm"
-                              class="b-background flexx pobtn shadow"
-                              variant="primary"
-                            >
-                              <i class="fas fa-user-plus  fa-lg btn-icon "></i>
-                              <span class="btn-com">Community</span>
-                            </b-button>
+                          block
+                          size="sm"
+                          class="b-background flexx pobtn shadow"
+                          :class="item.is_follow !== 0 && 'u-btn'"
+                          variant="primary"
+                          @click="handleFollow(item)"
+                        >
+
+                           <i
+                            class="fas fa-lg btn-icon"
+                            :class="item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"
+                          ></i>
+
+                          <span class="btn-com">{{ $t('dashboard.Community') }}</span>
+                        </b-button>
+
+
+
+
                           </b-col>
                         </b-row>
                       </div>
@@ -97,13 +111,45 @@
           </div>
         </b-col>
       </b-row>
+
+       <infinite-loading @infinite="infiniteHandler"></infinite-loading>
+
     </div>
   </div>
 </template>
 
 <script>
+import axios from "axios";  
 export default {
-  props: ["people"],
+  props: ['type'],
+
+  data() {
+    return {
+      page: 1,
+     
+      users: [],
+
+      options: {
+        rewind: true,
+        autoplay: true,
+        perPage: 1,
+        pagination: false,
+
+        type: "loop",
+        perMove: 1,
+      },
+    };
+  },
+
+  computed:{  
+
+        biz_id(){
+          return  this.$store.state.dashboard.dBusinessId;
+        }
+        
+      },
+
+
   methods: {
     count(number) {
       if (number >= 1000000) {
@@ -112,11 +158,68 @@ export default {
       if (number >= 1000) {
         return number / 1000 + "K";
       } else return number;
-    }
+    },
+
+
+     async handleFollow(user) {
+      const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
+      const nextFollowState = user.is_follow === 0 ? 1 : 0;
+      const data = {
+        id: user.id,
+        type: 'user',
+      };
+
+      await axios
+        .post(uri, data)
+        .then(response => {
+          console.log(response);
+          user.is_follow = nextFollowState;
+        })
+        .catch(err => console.log({err:err}));
+    },
+
+
+   infiniteHandler($state) {
+      const url =
+        this.type === 'Follower'
+          ? `business/community/people-follower/${this.biz_id}/`
+          : `business/community/people-following/${this.biz_id}/`;
+
+      axios
+        .get(url + this.page)
+        .then(({ data }) => {
+          if (this.type == 'Follower') {
+            if (data.data.user_followers.length) {
+              this.page += 1;
+
+              this.users.push(...data.data.user_followers);
+              $state.loaded();
+            } else {
+              $state.complete();
+            }
+          } else {
+            if (data.data.user_following.length) {
+              this.page += 1;
+
+              this.users.push(...data.data.user_following);
+              $state.loaded();
+            } else {
+              $state.complete();
+            }
+          }
+        })
+        .catch(err => {
+          console.log({ err: err });
+        });
+    },
+
+
+
+
   }
 };
 </script>
-
+    
 <style scoped>
 @media only screen and (min-width: 768px) {
   .btn-text {
@@ -152,8 +255,8 @@ export default {
   }
 
   .s-ccard {
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 5px;
+    padding-right: 5px;
   }
 }
 
@@ -485,7 +588,7 @@ f-right {
   }
 
   .pobtn {
-    font-size: 10px;
+    font-size: 10px;  
   }
   .e-name {
     text-align: left;

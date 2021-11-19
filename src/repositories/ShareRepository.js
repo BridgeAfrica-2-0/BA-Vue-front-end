@@ -65,9 +65,12 @@ class Repository {
     }
   }
 
-  async switch(uuid, type="network") {
+  async switch(uuid, type = "network") {
     try {
-      const response = ("network" == type) ? await axios.post(`switch`, {networkId:uuid}) :  (uuid) ? await axios.get(`switch?id=${uuid}`) : await axios.get(`switch`)
+      const response = ("network" == type) 
+      ? await axios.post(`switch`, { networkId: uuid }) 
+      : (uuid) ? await axios.post(`switch?id=${uuid}`) : await axios.post(`switch`)
+      
       return {
         success: true,
         data: response.data.message
@@ -76,13 +79,12 @@ class Repository {
     } catch (error) {
       return {
         success: false,
-        data: error
+        data: error.response.message
       }
     }
   }
 
-
-  async WhoIsConnect({networkId}) {
+  async WhoIsConnect({ networkId }) {
     try {
       const response = await axios.get(`interface?networkId=${networkId}`)
       return {
@@ -93,7 +95,7 @@ class Repository {
     } catch (error) {
       return {
         success: false,
-        data: error
+        data: error.response.message
       }
     }
   }
@@ -108,7 +110,7 @@ class Repository {
     } catch (error) {
       return {
         success: false,
-        data: error
+        data: error.response.message
       }
     }
   }
@@ -124,7 +126,7 @@ class Repository {
     } catch (error) {
       return {
         success: false,
-        data: error
+        data: error.response.message
       }
     }
   }
@@ -140,7 +142,7 @@ class Repository {
     } catch (error) {
       return {
         success: false,
-        data: error
+        data: error.response.message
       }
     }
   }
@@ -156,7 +158,23 @@ class Repository {
     } catch (error) {
       return {
         success: false,
-        data: error
+        data: error.response.message
+      }
+    }
+  }
+
+  async createBusinessComment({ post, data }) {
+    try {
+      const response = await axios.post(`post/comment/${post}`, data)
+      return {
+        success: true,
+        data: response.data.message
+      }
+
+    } catch (error) {
+      return {
+        success: false,
+        data: error.response.message
       }
     }
   }
@@ -172,7 +190,7 @@ class Repository {
     } catch (error) {
       return {
         success: false,
-        data: error
+        data: error.response.message
       }
     }
   }
@@ -188,7 +206,7 @@ class Repository {
     } catch (error) {
       return {
         success: false,
-        data: error
+        data: error.response.message
       }
     }
   }

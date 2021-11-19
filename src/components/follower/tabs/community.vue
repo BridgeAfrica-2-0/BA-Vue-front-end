@@ -2,15 +2,15 @@
   <div class=" p-0 mt-3">
     <div class="container-fluid border">
       <b-tabs pills content-class="mt-3  f-left">
-        <b-tab title="People" active>
+        <b-tab :title="$t('profilefollower.People')" active>
           <People />
         </b-tab>
 
-        <b-tab title="Businesses">
+        <b-tab :title="$t('profilefollower.Businesses')">
           <Business />
         </b-tab>
 
-        <b-tab title="Netwoks">
+        <b-tab :title="$t('profilefollower.Netwoks')">
           <Network />
         </b-tab>
       </b-tabs>

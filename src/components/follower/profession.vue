@@ -1,6 +1,6 @@
 <template>
   <div v-if="profession">
-    <b class="profession">Profession</b> 
+    <b class="profession">{{ $t('profilefollower.Profession') }}</b> 
     <hr />
       <div class="datails">
        

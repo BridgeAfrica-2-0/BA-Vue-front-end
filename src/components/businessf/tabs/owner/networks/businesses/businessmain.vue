@@ -6,16 +6,16 @@
       </div>
       <div class=" col details">
         <h4>
-          <b-link class="link">Business Name</b-link>
+          <b-link class="link">{{ $t('network.Business_Name') }}</b-link>
         </h4>
         <p>
-          <a href="">mywebsite.com</a> <br />
-          <strong>Category:</strong> Business Category <br />
-          <strong>Community:</strong> 1.1M Community <br />
-          <strong>Location:</strong> Neighbourhood, city country <br />
-          <strong>Keyword:</strong> Keyword 1 Keyword 2 Keyword 3 <br />
-          <strong>About:</strong> Lorem ipsum, dolor sit amet consectetur
-          adipisicing elit. <b-link>Read More</b-link>
+          <a href="">{{ $t('network.mywebsite_com') }}</a> <br />
+          <strong>{{ $t('network.Category') }}:</strong> {{ $t('network.Business_Category') }} <br />
+          <strong>{{ $t('network.Community') }}:</strong> {{ $t('network.11M_Community') }} <br />
+          <strong>{{ $t('network.Location') }}:</strong> {{ $t('network.Neighbourhood') }}, {{ $t('network.City') }}, {{ $t('network.Country') }} <br />
+          <strong>{{ $t('network.Keyword') }}:</strong> {{ $t('network.Keyword') }} 1 {{ $t('network.Keyword') }} 2 {{ $t('network.Keyword') }} 3 <br />
+          <strong>{{ $t('network.About') }}:</strong> Lorem ipsum, dolor sit amet consectetur
+          adipisicing elit. <b-link>{{ $t('network.Read_More') }}</b-link>
         </p>
       </div>
       <div>
@@ -31,19 +31,18 @@
               >
                 <b-dropdown-item>
                   <b-icon icon="chat-fill" variant="primary"></b-icon>
-                  Message</b-dropdown-item
+                  {{ $t('network.Message') }}</b-dropdown-item
                 >
 
                 <b-dropdown-item>
-                  <b-icon icon="geo-alt" variant="primary"></b-icon> Get
-                  Direction</b-dropdown-item
+                  <b-icon icon="geo-alt" variant="primary"></b-icon> {{ $t('network.Get_Direction') }}</b-dropdown-item
                 >
               </b-dropdown>
             </b-col>
             <b-col>
               <b-button class=" community  mt-2" size="sm">
                 <b-icon icon="plus"></b-icon>
-                Community</b-button
+                {{ $t('network.Community') }}</b-button
               >
             </b-col>
           </b-row>

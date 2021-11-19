@@ -128,14 +128,13 @@ import Insight from "@/components/businessOwner/insight";
 export default {
   name: "settings",
 
-  props: ["currenttab"],
+  props: ["currenttab", 'isAccountType'],
 
   watch: {
     currenttab: {
       immediate: true,
       handler(newVal, oldVal) {
         console.log(newVal, oldVal);
-
         if (newVal == 3) {
           this.selectedIdd = "8";
           this.tabIndex = "5";
@@ -154,6 +153,15 @@ export default {
         if (newVal == 5) {
           this.selectedIdd = "0";
           this.tabIndex = "0";
+        }
+      },
+    },
+    isAccountType: {
+      immediate: true,
+      handler(newVal, oldVal){
+        if (newVal) {
+          this.selectedIdd = "0";
+          this.tabIndex = "7";
         }
       },
     },
@@ -194,7 +202,6 @@ export default {
       },
     };
   },
-
   methods: {},
 };
 </script>

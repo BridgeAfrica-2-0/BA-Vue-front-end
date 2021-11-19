@@ -18,20 +18,15 @@
           <div class="container">
             <span class="text text-left">
               <br />
-              Make more money by unlocking your marketplace features where you
-              can sell products and services directly to customer and recieve
-              instant payments
+              Make more money by unlocking your marketplace features where you can sell products and services directly
+              to customer and recieve instant payments
             </span>
           </div>
           <img src="@/assets/img/buynow.png" class="buynow" alt="buy now" />
           <div class="container text-center">
-            <img
-              src="@/assets/img/fruits.jpg"
-              class="img-fluid  banner"
-              alt="Kitten"
-            />
+            <img src="@/assets/img/fruits.jpg" class="img-fluid  banner" alt="Kitten" />
 
-            <b-button variant="primary" class="text-center mt-3">
+            <b-button variant="primary" @click="changeToAccountType" class="text-center mt-3">
               Upgrade Now
             </b-button>
           </div>
@@ -46,18 +41,24 @@
 </template>
 
 <script>
-import Intro from "../intro";
-import comunitiDashboard from "./comunitiDashboard";
+import Intro from '../intro';
+import comunitiDashboard from './comunitiDashboard';
 //import Personalise from "./personalise";
-import Post from "../ownerPost";
+import Post from '../ownerPost';
 export default {
-  name: "posts", 
+  name: 'posts',
   components: {
     Intro,
 
     comunitiDashboard,
     // Personalise,
     Post,
+  },
+
+  methods: {
+    changeToAccountType() {
+      this.$emit('change-to-account-type', true);
+    },
   },
 };
 </script>

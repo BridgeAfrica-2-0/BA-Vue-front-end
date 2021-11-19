@@ -20,7 +20,7 @@
     </div>
 
     <div class=" " v-if="selectedId == '0'">
-      <Business />
+      <Business @change-to-account-type="changeToAccountType" />
     </div>
 
     <div class="mt-3" v-if="selectedId == '1'">
@@ -40,7 +40,7 @@
     </div>
 
     <div class="mt-3" v-if="selectedId == '5'">
-      <Settings v-bind:currenttab="selectedId" />
+      <Settings v-bind:currenttab="selectedId" :isAccountType="isAccountType" />
     </div>
 
     <Footer />
@@ -80,6 +80,7 @@ export default {
       foll_id:null,
        isloaded: false,
       url_data: null,
+      isAccountType: false,
       items: [
         { label: "Home ", icon: "" },
 
@@ -92,7 +93,7 @@ export default {
       ],
       options: {
         activeColor: "#1d98bd"
-      }
+      },
     };
   },
 
@@ -108,7 +109,11 @@ export default {
         });
     },
 
-  
+    changeToAccountType(val) {
+      console.log("Account type in main => ",val);
+      this.selectedId = '5';
+      this.isAccountType = val;
+    },
 
     businessCommunityTotal() {
       this.$store

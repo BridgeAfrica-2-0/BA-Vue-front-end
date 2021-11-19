@@ -6,7 +6,7 @@
         <b-row class="center-content">
           <b-col cols="12">
             <b-tabs lazy content-class="mt-3 mobile-tab" fill pills v-model="currentTab">
-              <b-tab title="Home"><HomePage /></b-tab>
+              <b-tab title="Home"><HomePage @change-to-account-type="changeToAccountType" /></b-tab>
               <b-tab title="About"><About /></b-tab>
               <b-tab title="Media"><Media type="business" /></b-tab>
               <b-tab title="Market"><MarketPlace /></b-tab>
@@ -45,7 +45,11 @@ export default {
     };
   },
   computed: {},
-  methods: {},
+  methods: {
+    changeToAccountType(val){
+      this.$emit('change-to-account-type', val);
+    }
+  },
   created() {
     this.currentTab =
       localStorage.getItem('ba-business-active-tab') !== null ? localStorage.getItem('ba-business-active-tab') : 0;

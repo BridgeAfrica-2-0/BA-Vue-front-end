@@ -67,7 +67,10 @@
       </div>
     </div>
 
-    <infinite-loading @infinite="infiniteHandler"></infinite-loading>
+    <infinite-loading @infinite="infiniteHandler">
+      <div slot="no-more">No more data</div>
+      <div slot="no-results">No results</div>
+    </infinite-loading>
   </div>
 </template>
 

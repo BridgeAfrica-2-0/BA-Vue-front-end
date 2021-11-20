@@ -432,7 +432,7 @@
 			 * @return void
 			 */
 			editContact() {
-				this.$router.push({path:"business_owner/"+this.url, query: {currentTab: 1}})
+				this.$router.push({path:"/business_owner/"+this.url, query: {currentTab: 1}})
 				// (this.form = this.business_intro), (this.edit2 = !this.edit2);
 				console.log("editContact");
 				// localStorage.setItem("ba-business-active-tab", 0);

@@ -47,9 +47,10 @@ export default {
   computed: {},
   methods: {},
   created() {
-    this.currentTab =
+    // this.currentTab =
       // localStorage.getItem('ba-business-active-tab') !== null ? localStorage.getItem('ba-business-active-tab') : 0;
     this.currentTab = this.$route.query.currentTab ? this.$route.query.currentTab : 0;
+    console.log(this.currentTab);
   },
 
   watch: {

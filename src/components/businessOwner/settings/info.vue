@@ -1,8 +1,8 @@
 <template>
   <b-container fluid>
     <b-container v-if="businessInfo != 0" class="bv-example-row">
-      {{ businessInfo }}<br /><br />
-     {{ editbiz }}
+      <!-- {{ businessInfo }}<br /><br /> -->
+      <!-- {{ editbiz }} -->
 
       <!-- <Flashback /> -->
 
@@ -53,7 +53,7 @@
 
         <div class="b-bottom">
           <b-container>
-            <!-- {{filterselectvalue}} -->
+            <!-- {{ filterselectvalue }} -->
 
             <b-form-group
               label-cols-lg="3"
@@ -88,12 +88,6 @@
                   {{ select_filterss }} -->
                   <b-form-group label="Filters" class="colorblack">
                     <b-form-checkbox-group id="" class="colorblack" v-model="select_filterss" name="filters">
-                      <!-- <span v-for="fil in select_filterss" :key="fil.filter_id">
-                        <b-form-checkbox class="colorblack" :value="fil.filter_id">
-                        {{ fil.name }}
-                      </b-form-checkbox>
-                      </span>
-                      <br>-------------------------------<br> -->
                       <b-form-checkbox class="colorblack" v-for="fil in filters.filters" :key="fil.id" :value="fil.id">
                         {{ fil.name }}
                       </b-form-checkbox>
@@ -107,6 +101,7 @@
 
         <div class="b-bottom">
           <b-container>
+            <!-- {{ businessInfo.keywords }} -->
             <b-form-group
               label-cols-lg="3"
               label="Search Keywords"
@@ -276,6 +271,7 @@
         </div>
 
         <!-- {{countries}} -->
+        <!-- {{ country }} -->
 
         <div class="b-bottom">
           <b-container>
@@ -299,9 +295,9 @@
           </b-container>
         </div>
 
-        {{regions}}
-      <br>
-        {{selectedregion}}
+        <!-- {{ region }} -->
+        <!-- <br /> -->
+        <!-- {{ selectedregion }} -->
 
         <div class="b-bottom">
           <b-container>
@@ -326,6 +322,7 @@
         </div>
 
         <!-- {{divisions}} -->
+        <!-- {{ division }} -->
 
         <div class="b-bottom">
           <b-container>
@@ -350,6 +347,7 @@
         </div>
 
         <!-- {{municipalities}} -->
+        <!-- {{ municipality }} -->
 
         <div class="b-bottom">
           <b-container>
@@ -374,6 +372,7 @@
         </div>
 
         <!-- {{localities}} -->
+        <!-- {{ locality }} -->
 
         <div class="b-bottom">
           <b-container>
@@ -479,6 +478,8 @@
                   {{ openHour ? 'Always Open' : 'Open for selected hours' }}
                 </b-form-checkbox>
                 <br />
+
+                <!-- {{ businessInfo.business_open_hours }} -->
                 <b-container v-if="!openHour">
                   <div v-for="openHours in businessInfo.business_open_hours" :key="openHours.id">
                     <b-row>
@@ -745,49 +746,49 @@ export default {
     selectedcategories: function () {
       let selectedUsers = [];
       this.multiselecvalue.forEach((item) => {
-        selectedUsers.push(item.id);
+        selectedUsers.push(item.category_id);
       });
       return selectedUsers;
     },
     selectedsubcategories: function () {
       let sub_cat = [];
       this.filterselectvalue.forEach((item) => {
-        sub_cat.push(item.sub_cat_id);
+        sub_cat.push(item.subcategory_id);
       });
       return sub_cat;
     },
     selectedcountry: function () {
       let sub_cat = [];
       this.country.forEach((item) => {
-        sub_cat.push(item.id);
+        sub_cat.push(item.country_id);
       });
       return sub_cat;
     },
     selectedregion: function () {
       let sub_cat = [];
       this.region.forEach((item) => {
-        sub_cat.push(item.id);
+        sub_cat.push(item.region_id);
       });
       return sub_cat;
     },
     selecteddivision: function () {
       let sub_cat = [];
       this.division.forEach((item) => {
-        sub_cat.push(item.id);
+        sub_cat.push(item.division_id);
       });
       return sub_cat;
     },
     selectedmunicipality: function () {
       let sub_cat = [];
       this.municipality.forEach((item) => {
-        sub_cat.push(item.id);
+        sub_cat.push(item.council_id);
       });
       return sub_cat;
     },
     selectedlocality: function () {
       let sub_cat = [];
       this.locality.forEach((item) => {
-        sub_cat.push(item.id);
+        sub_cat.push(item.neighborhood_id);
       });
       return sub_cat;
     },
@@ -1067,8 +1068,9 @@ export default {
       formData.append('region', this.selectedregion);
       formData.append('division', this.selecteddivision);
       formData.append('council', this.selectedmunicipality);
+      formData.append('neigborhood', this.selectedlocality);
 
-      formData.append('keywords_alert', String(businessInfo.keywords));
+      formData.append('keywords', String(businessInfo.keywords));
       console.log(String(this.businessInfo.keywords));
       formData.append('primary_phone', businessInfo.phone);
       formData.append('secondary_phone', businessInfo.secondary_phone);

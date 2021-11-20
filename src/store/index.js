@@ -24,6 +24,9 @@ import business from "./business";
 import profile from "./profile";
 import networkProfileMembers from "./networkProfileMembers";
 import follower from "./follower";
+import keywordOperationOnNetwork from "./keywordOperationOnNetwork";
+
+
 import networkProfile from "./networkProfile";
 import UserProfileOwner from "./UserProfileOwner"
 import { search } from "./search";
@@ -36,13 +39,10 @@ import networkProfileMedia from "./networkProfileMedia";
 import networkProfileMemberRequest from "./networkProfileMemberRequest";
 import { social } from "./social";
 import { notification } from "./notifications"
-import keywordOperationOnNetwork from './keywordOperationOnNetwork'
 
-//import axios from "axios";
 Vue.use(Vuex);
-
-//axios.defaults.baseURL = process.env.VUE_APP_API_URL;
-axios.defaults.baseURL = "https://bf61-154-72-150-127.ngrok.io/api/v1/";
+// axios.defaults.baseURL = process.env.VUE_APP_API_URL;
+axios.defaults.baseURL = "https://3537-154-72-150-18.ngrok.io/api/v1/"
 
 export default new Vuex.Store({
   modules: {
@@ -71,6 +71,7 @@ export default new Vuex.Store({
     networkProfileFeedback,
     NetworkSettings,
     keywordOperationOnNetwork,
+    orderBusiness,
     businessSettingInfo,
     checkout,
     social,
@@ -80,7 +81,7 @@ export default new Vuex.Store({
     networkProfileMedia,
     networkProfileMemberRequest,
     networkProfile,
-    orderBusiness,
     notification
   }
 });
+

@@ -9,7 +9,7 @@
           </b-input-group-prepend>
           <b-form-input
             aria-label="Text input with checkbox"
-            placeholder="Search Something"
+            :placeholder="$t('memnetwork.Search_Something')"
             type="text"
             class="form-control"
             v-model="searchTitle"
@@ -40,8 +40,8 @@
     <b-row >
       <b-col col="12">
         <infinite-loading @infinite="infiniteHandler">
-          <div class="text-red" slot="no-more">No More Request</div>
-          <div class="text-red" slot="no-results">No More Request</div>
+          <div class="text-red" slot="no-more">{{ $t('memnetwork.No_More_Request') }}</div>
+          <div class="text-red" slot="no-results">{{ $t('memnetwork.No_More_Request') }}</div>
         </infinite-loading>
       </b-col>
     </b-row>
@@ -149,7 +149,7 @@ export default {
         this.loading = false;
         this.flashMessage.show({
           status: "success",
-          message: "User blocked"
+          message: this.$t('memnetwork.User_blocked')
         });
       })
       .catch(err => {
@@ -157,7 +157,7 @@ export default {
         this.loading = false;
         this.flashMessage.show({
           status: "error",
-          message: "Unable to blocked User"
+          message: this.$t('memnetwork.Unable_to_blocked_User')
         });
       });
     }

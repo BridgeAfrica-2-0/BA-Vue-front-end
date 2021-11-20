@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b class="work">WorkPlace</b>
+    <b class="work">{{ $t('profilefollower.WorkPlace') }}</b>
     <hr />
 
     <div class="row" v-for="workPlace in work" :key="workPlace.id">

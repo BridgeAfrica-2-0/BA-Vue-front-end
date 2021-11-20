@@ -12,7 +12,7 @@
           <p class="durationn">{{ item.created_at | now }}</p>
         </div>
 
-        <div class="toright pt-2">
+        <div class="toright pt-2" v-if="canBeDelete">
           <b-dropdown variant="link" size="sm" no-caret>
             <template #button-content>
               <b-icon icon="three-dots" variant="primary" aria-hidden="true"></b-icon>
@@ -105,7 +105,7 @@
             ><b-icon icon="chat-fill" variant="primary" aria-hidden="true"></b-icon>
             {{ item.comment_count | nFormatter }}
           </span>
-          <ShareButton :post="item" />
+          <ShareButton :post="item" :type="'profile'" />
         </b-col>
       </b-row>
     </div>
@@ -146,7 +146,7 @@
 <script>
 import { formatNumber, fromNow } from '@/helpers';
 import Loader from '@/components/Loader';
-import { mapMutations } from 'vuex';
+import { mapMutations, mapGetters } from 'vuex';
 import { NoMoreDataForComment } from '@/mixins';
 
 import Comment from './comment';
@@ -156,14 +156,25 @@ import { ShareButton } from '@/components/shareButton';
 
 export default {
   name: 'ownerPostComponent',
-  props: ['post', 'mapvideo', 'mapmediae', 'businessLogo', 'editPost', 'deletePost'],
-
   mixins: [NoMoreDataForComment],
   components: {
     Comment,
     light,
     Loader,
     ShareButton,
+  },
+
+  props: {
+    post: {},
+    mapvideo: {},
+    mapmediae: {},
+    businessLogo: {},
+    editPost: {},
+    deletePost: {},
+    canBeDelete: {
+      type: Boolean,
+      default: () => true,
+    },
   },
 
   watch: {
@@ -198,6 +209,9 @@ export default {
     icon() {
       return this.post.is_liked ? 'suit-heart-fill' : 'suit-heart';
     },
+    ...mapGetters({
+      profile: 'auth/profilConnected',
+    }),
   },
 
   methods: {
@@ -214,8 +228,8 @@ export default {
         this.processLike = true;
 
         const request = await this.$repository.share.postLike({
-          post: this.post.post_id,
-          network: this.$route.params.id,
+          post: this.post.post_id ? this.post.post_id : this.post.id,
+          network: this.$route.params.id ? this.$route.params.id : this.profile.id,
         });
 
         if (request.success)
@@ -235,10 +249,11 @@ export default {
       if (!(this.comment.trim().length > 2 && !this.createCommentRequestIsActive)) return false;
       this.createCommentRequestIsActive = true;
       this.loadComment = true;
+
       const request = await this.$repository.share.createComment({
-        post: this.post.post_id,
+        post: this.post.post_id ? this.post.post_id : this.post.id,
         data: {
-          networkId: this.$route.params.id,
+          networkId: this.$route.params.id ? this.$route.params.id : this.profile.id,
           comment: this.comment,
         },
       });
@@ -266,7 +281,7 @@ export default {
       this.loadComment = true;
 
       const request = await this.$repository.post.fetch({
-        uuid: this.post.post_id,
+        uuid: this.post.post_id ? this.post.post_id : this.post.id,
         page: this.page,
       });
 

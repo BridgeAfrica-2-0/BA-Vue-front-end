@@ -167,7 +167,7 @@ export const commentMixinsBuisness = {
     },
 
     onShowReply: async function () {
-      this.loadComment = true
+      this.loadComment = true;
       const request = await this.$repository.share.fetchReplyComment({
         post: this.uuid,
         comment: this.comment.comment_id,
@@ -361,6 +361,24 @@ export const WhoIsIt = {
       const response = await this.$repository.share.WhoIsConnect({ networkId: null });
       if (response.success) this.auth(response.data);
       console.log(this.profile)
+    },
+  },
+
+  created() {
+    this.getAuth()
+  }
+}
+
+export const knowWhoIsConnected = {
+
+  methods: {
+    ...mapMutations({
+      auth: 'auth/profilConnected',
+    }),
+    async getAuth() {
+      const response = await this.$repository.share.WhoIsConnect({ networkId: this.$route.params.id });
+
+      if (response.success) this.auth(response.data);
     },
   },
 

@@ -2,7 +2,7 @@
   <div>
     <b-card>
       <p class="title">
-        <b>Your Feedback is about</b>
+        <b>{{ $t('memnetwork.Your_Feedback_is_about') }}</b>
         <b class="text-center"><b-spinner v-if="spinner" variant="primary" label="Text Centered"></b-spinner></b>
       </p>
       <b-form-select
@@ -10,17 +10,17 @@
         v-model="feedbackForm.title"
         :options="options"
       ></b-form-select>
-      <p class="mt-2 username "><b>Brief description of your feedback</b></p>
+      <p class="mt-2 username "><b>{{ $t('memnetwork.Brief_description_of_your_feedback') }}</b></p>
       <b-form-textarea
         id="textarea"
         v-model="feedbackForm.description"
-        placeholder="Enter something..."
+        :placeholder="$t('memnetwork.Enter_something')"
         rows="3"
         class="text"
         max-rows="6"
         required
       ></b-form-textarea>
-      <b-button class="float-right mt-2" variant="primary" @click="createFeedback()"> Submit</b-button>
+      <b-button class="float-right mt-2" variant="primary" @click="createFeedback()"> {{ $t('memnetwork.Submit') }}</b-button>
     </b-card>
 
     <fas-icon
@@ -29,7 +29,7 @@
       @click="filterFeedback"
     />
     <b-card class="mt-3" v-if="filterData">
-      <p class="primary text"><strong>Feedback Type</strong></p>
+      <p class="primary text"><strong>{{ $t('memnetwork.Feedback_Type') }}</strong></p>
       <b-form-select
         required
         v-model="filterData"
@@ -39,10 +39,10 @@
       ></b-form-select>
       <b-row class="float-right mt-2">
         <b-col>
-          <b-button class="reset">Reset</b-button>
+          <b-button class="reset">{{ $t('memnetwork.Reset') }}</b-button>
         </b-col>
         <b-col>
-          <b-button variant="primary" @click="filterFeedback, applyFilter()" class="apply">Apply</b-button>
+          <b-button variant="primary" @click="filterFeedback, applyFilter()" class="apply">{{ $t('memnetwork.') }}{{ $t('memnetwork.Apply') }}</b-button>
         </b-col>
       </b-row>
     </b-card>

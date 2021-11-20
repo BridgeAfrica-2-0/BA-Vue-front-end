@@ -4,7 +4,7 @@
     <!-- DOM to Create Post By A UserOwner-->
     <b-card class="px-md-3 mb-3">
       <b-row class="mt-2">
-        <b-col cols="2" md="1" class="m-md-0 p-md-0">
+        <b-col cols="2" md="1" class="m-md-0 p-0">
           <b-avatar variant="primary" class="img-fluid avat-comment" :src="info.user.profile_picture"></b-avatar>
         </b-col>
         <b-col cols="9" md="11" class="p-0 m-0 pr-3">
@@ -327,99 +327,16 @@
         </div>
       </div>
 
-      <div v-for="item in owner_post" :key="item.post_id">
-        <div class="mt-2">
-          <div class="d-inline-flex">
-            <span md="1" class="m-0 p-0">
-              <b-avatar class="d-inline-block avat" variant="primary" :src="item.profile_picture"></b-avatar>
-            </span>
-            <div class="pl-2 pl-md-3 pt-md-2">
-              <h5 class="m-0 usernamee">
-                {{ item.name }}
-              </h5>
-              <p class="durationn">{{ moment(item.created_at).fromNow() }}</p>
-            </div>
-
-            <div class="toright pt-2">
-              <b-dropdown variant="link" size="sm" no-caret>
-                <template #button-content>
-                  <b-icon icon="three-dots" variant="primary" aria-hidden="true"></b-icon>
-                </template>
-
-                <b-dropdown-item-button variant="info" @click="editPost(item)">
-                  <b-icon icon="pencil" aria-hidden="true"></b-icon>
-                  {{ $t('profileowner.Edit') }}
-                </b-dropdown-item-button>
-
-                <b-dropdown-item-button variant="danger" @click="deletePost(item)">
-                  <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
-                  {{ $t('profileowner.Delete') }}
-                </b-dropdown-item-button>
-              </b-dropdown>
-            </div>
-          </div>
-          <div class="m-0 p-0">
-            <p class="post-text">
-              <!--     :text="item.content.details"   -->
-              <read-more
-                v-if="item.content"
-                more-str="read more"
-                :text="item.content"
-                link="#"
-                less-str="read less"
-                :max-chars="200"
-              ></read-more>
-            </p>
-          </div>
-
-          <div v-if="item.media.length > 0" class="">
-            <span v-for="video in mapvideo(item.media)" :key="video">
-              <youtube
-                class="w-100 videoh"
-                :video-id="getId(video)"
-                :player-vars="playerVars"
-                @playing="playing"
-              ></youtube>
-            </span>
-
-            <light css=" " :cells="item.media.length" :items="mapmediae(item.media)"></light>
-          </div>
-          <b-row>
-            <!--   v-if="item.content.movies.length <= 0"  -->
-            <b-col cols="12" class="mt-2">
-              <!--  :src="$store.getters.getProfilePicture"  -->
-            </b-col>
-            <b-col class="mt-1">
-              <span class="mr-3"
-                ><b-icon icon="suit-heart" variant="primary" aria-hidden="true"></b-icon>
-                {{ nFormatter(item.likes_count) }}
-              </span>
-              <span
-                ><b-icon icon="chat-fill" variant="primary" aria-hidden="true"></b-icon>
-                {{ nFormatter(item.comment_count) }}
-              </span>
-              <ShareButton :post="item" :type="'profile'" />
-            </b-col>
-          </b-row>
-
-          <!--  :src="$store.getters.getProfilePicture"  -->
-        </div>
-
-        <div class="mt-2 d-inline-flex w-100">
-          <div class="m-md-0 p-md-0">
-            <b-avatar variant="primary" :src="info.user.profile_picture" class="img-fluid avat-comment"></b-avatar>
-          </div>
-
-          <div class="p-0 m-0 pr-3 inline-comment">
-            <input :placeholder="$t('profileowner.Post_a_Comment')" class="comment" type="text" />
-
-            <fas-icon class="primary send-cmt" :icon="['fas', 'paper-plane']" />
-          </div>
-        </div>
-
-        <Comment v-for="comment in item.comments" :key="comment.id" :comment="comment" />
-        <hr />
-      </div>
+      <Post
+        v-for="(item, index) in owner_post"
+        :key="index"
+        :post="item"
+        :mapvideo="() => mapvideo(item.media)"
+        :mapmediae="() => mapmediae(item.media)"
+        :businessLogo="item.profile_picture"
+        :editPost="() => editPost(item)"
+        :deletePost="() => deletePost(item)"
+      />
 
       <infinite-loading :identifier="infiniteId" ref="infiniteLoading" @infinite="infiniteHandler"></infinite-loading>
     </b-card>
@@ -427,26 +344,22 @@
 </template>
 
 <script>
-import { ShareButton } from '@/components/shareButton';
-import Comment from '../comment';
-import light from '../../lightbox';
 
-import moment from 'moment';
+
+import Post from '@/components/businessOwner/ownerPostComponent';
+
 import axios from 'axios';
 
 export default {
   name: 'postNetwork',
   components: {
-    Comment,
-    light,
-    ShareButton,
+    Post,
   },
   data() {
     return {
       playerVars: {
         autoplay: 0,
       },
-      moment: moment,
       page: 1,
       infiniteId: +new Date(),
       post: this.$store.state.businessOwner.ownerPost,

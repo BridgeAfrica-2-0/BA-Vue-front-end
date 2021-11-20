@@ -5,11 +5,11 @@
       class="primary mr-2 pt-1 icon-size primary"
       :icon="['fas', 'handshake']"
     />
-    Network
+    {{ $t('profilefollower.Network') }}
 
     <hr />
     <b-modal id="modal-sm" size="sm" hide-header>
-      Do you want to join this network? 
+      {{ $t('profilefollower.Do_you_want_to_join_this_network') }} 
     </b-modal>
 
 
@@ -30,7 +30,7 @@
             <strong class="net-title"> {{ item.name }} </strong> <br />
              <span class="m-1" v-for=" cat in item.categories" :key="cat "> {{cat}}  </span>
             <br />
-            {{ item.followers }} Community <br />
+            {{ item.followers }} {{ $t('profilefollower.Community') }} <br />
 
             <span class="location">
               <b-icon-geo-alt class="ico"></b-icon-geo-alt>
@@ -60,7 +60,7 @@
                   variant="primary"
                 >
                   <i class="fas fa-user-plus  fa-lg btn-icon "></i>
-                  <span class="btn-com" v-b-modal.modal-sm>Community</span>
+                  <span class="btn-com" v-b-modal.modal-sm>{{ $t('profilefollower.Community') }}</span>
                 </b-button>
               </b-col>
 
@@ -72,7 +72,7 @@
                   variant="primary"
 
                   ><i class="fas fa-envelope   fa-lg btn-icon "></i>
-                  <span class="btn-text">Message</span>
+                  <span class="btn-text">{{ $t('profilefollower.Message') }}</span>
                 </b-button>
               </b-col>
 

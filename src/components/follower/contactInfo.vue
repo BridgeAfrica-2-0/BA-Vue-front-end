@@ -1,10 +1,10 @@
 <template>
   <div class="txt">
-    <b class="contact">Contact Infomation</b>
+    <b class="contact">{{ $t('profilefollower.Contact_Infomation') }}</b>
     <hr />
     <div class="contact row" >
       <div class="col">
-        Mobile Phone:
+        {{ $t('profilefollower.Mobile_Phone') }}:
       </div>
       <div class="col">
        {{info.user.phone}}

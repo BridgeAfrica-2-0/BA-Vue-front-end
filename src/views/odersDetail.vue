@@ -309,6 +309,7 @@ color: #e75c18;
   margin-top: 5px;
   margin-left: -3px;
   margin-right: -3px;
+  width: 190px !important;
 }
   .margtotal {
   margin-left: 350px;

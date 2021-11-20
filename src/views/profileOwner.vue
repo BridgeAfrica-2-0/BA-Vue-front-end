@@ -29,10 +29,10 @@
     </div>
     <p class="text-center">
       <span class="display-inline">
-        <b-link @click="$i18n.locale = 'en'"> {{ $t("auth.english") }}</b-link>
+        <b-link @click="$i18n.locale = 'en'"> {{ $t('auth.english') }}</b-link>
         <span class="vl"></span>
         <b-link class="ml-2" @click="$i18n.locale = 'fr'">
-          {{ $t("auth.french") }}
+          {{ $t('auth.french') }}
         </b-link>
       </span>
       Bridge Africa © 2021
@@ -41,14 +41,15 @@
 </template>
 
 <script>
-import navbar from "@/components/navbar";
-import headPage from "@/components/ownerHeadpage";
-import Post from "@/components/owner/tabs/posts";
-import About from "@/components/owner/tabs/about";
-import Media from "@/components/owner/tabs/media";
-import Networks from "@/components/owner/tabs/networks";
-import Following from "@/components/owner/tabs/memberNetwork";
-import Bussiness from "@/components/owner/tabs/bussiness";
+import navbar from '@/components/navbar';
+import headPage from '@/components/ownerHeadpage';
+import Post from '@/components/owner/tabs/posts';
+import About from '@/components/owner/tabs/about';
+import Media from '@/components/owner/tabs/media';
+import Networks from '@/components/owner/tabs/networks';
+import Following from '@/components/owner/tabs/memberNetwork';
+import Bussiness from '@/components/owner/tabs/bussiness';
+import { mapMutations } from 'vuex';
 
 import {WhoIsIt} from "@/mixins"
 
@@ -64,12 +65,11 @@ export default {
     About,
     Media,
     Networks,
-   
   },
   data() {
     return {
       tabIndex: null,
-      tabs: ["#post", "#about", "#business", "#media", "#community"],
+      tabs: ['#post', '#about', '#business', '#media', '#community'],
     };
   },
 
@@ -81,12 +81,22 @@ export default {
       console.log(from);
     },
   },
+
   methods: {
+    ...mapMutations({
+      auth: 'auth/profilConnected',
+    }),
+    async getAuth() {
+      const response = await this.$repository.share.switch(null, 'reset');
+
+      if (response.success) this.auth(response.data);
+    },
+
     ownerPost() {
       this.$store
-        .dispatch("UserProfileOwner/ownerPost", this.url_data)
+        .dispatch('UserProfileOwner/ownerPost', this.url_data)
         .then(() => {
-          console.log("hey yeah");
+          console.log('hey yeah');
         })
         .catch((err) => {
           console.log({ err: err });
@@ -94,11 +104,13 @@ export default {
     },
   },
   computed: {},
-   created() {
-      this.tabIndex = this.tabs.findIndex(tab => tab === this.$route.hash);
-      
-      this.$store
-      .dispatch("profile/loadUserPostIntro", null)
+
+  created() {
+    this.getAuth()
+    this.tabIndex = this.tabs.findIndex((tab) => tab === this.$route.hash);
+
+    this.$store
+      .dispatch('profile/loadUserPostIntro', null)
       .then((response) => {
         console.log(response);
       })
@@ -106,52 +118,51 @@ export default {
         console.log(error);
       });
   },
-  mounted(){
-
+  mounted() {
     this.$store
-      .dispatch("profile/Tcommunity", null)
-      .then((response) => {})
-      .catch((error) => {
-        console.log({ error: error });
-      });
-
-    this.$store
-      .dispatch("follower/UcommunityFollower", null)
+      .dispatch('profile/Tcommunity', null)
       .then((response) => {})
       .catch((error) => {
         console.log({ error: error });
       });
 
     this.$store
-      .dispatch("profile/UcommunityFollowing", null)
+      .dispatch('follower/UcommunityFollower', null)
       .then((response) => {})
       .catch((error) => {
         console.log({ error: error });
       });
 
     this.$store
-      .dispatch("profile/BcommunityFollower", null)
+      .dispatch('profile/UcommunityFollowing', null)
       .then((response) => {})
       .catch((error) => {
         console.log({ error: error });
       });
 
     this.$store
-      .dispatch("profile/BcommunityFollowing", null)
+      .dispatch('profile/BcommunityFollower', null)
       .then((response) => {})
       .catch((error) => {
         console.log({ error: error });
       });
 
-      this.$store
-      .dispatch("profile/NcommunityFollower", null)
+    this.$store
+      .dispatch('profile/BcommunityFollowing', null)
       .then((response) => {})
       .catch((error) => {
         console.log({ error: error });
       });
 
-      this.$store
-      .dispatch("profile/NcommunityFollowing", null)
+    this.$store
+      .dispatch('profile/NcommunityFollower', null)
+      .then((response) => {})
+      .catch((error) => {
+        console.log({ error: error });
+      });
+
+    this.$store
+      .dispatch('profile/NcommunityFollowing', null)
       .then((response) => {})
       .catch((error) => {
         console.log({ error: error });

@@ -18,11 +18,11 @@
   </div>  -->
 
   <div>
-    <b class="basic">Places you lived</b>
+    <b class="basic">{{ $t('profilefollower.Places_you_lived') }}</b>
     <hr />
     <div class="basic row">
       <div class="col">
-        Current City:
+        {{ $t('profilefollower.Current_City') }}:
       </div>
       <div class="col">
         {{info.user.city}}
@@ -30,7 +30,7 @@
     </div>
     <div class=" basic row">
       <div class="col">
-         Home City:
+         {{ $t('profilefollower.Home_City') }}:
       </div>
       <div class="col">
         {{ info.user.home_town }}

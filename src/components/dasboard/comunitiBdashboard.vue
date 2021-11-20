@@ -183,7 +183,7 @@
 <script>
 import People from "@/components/dasboard/communityBmember";
 import Business from "@/components/dasboard/communityBbusiness";
-import Network from "@/components/dasboard/communitynetwork";
+import Network from "@/components/dasboard/communityBnetwork";
 
 export default {
   name: "comunitiDashboard",

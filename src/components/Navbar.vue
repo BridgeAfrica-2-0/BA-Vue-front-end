@@ -301,14 +301,14 @@
 <script>
 import Button from '@/components/ButtonNavBarFind.vue';
 import Activity from '@/components/ShowActivity.vue';
-import MessageNotification from '@/components/NavBarMessageNotification';
+import NavBarNotifications from '@/components/NavBarNotifications.vue';
 import { mapGetters, mapActions } from 'vuex';
 export default {
   name: 'navbar',
   components: {
     Button,
     Activity,
-    MessageNotification,
+    NavBarNotifications
   },
   props: {
     credentials: {

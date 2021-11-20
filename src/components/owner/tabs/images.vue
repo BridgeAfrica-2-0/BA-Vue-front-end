@@ -24,13 +24,7 @@
             <source :src="img_url" />
           </video>
         </div>
-        <!-- <b-form-textarea
-          id="textarea-small"
-          class="mb-2 border-none"
-          v-model="text"
-          placeholder="Enter a description"
-        >
-        </b-form-textarea> -->
+  
 
         <br />
 
@@ -73,7 +67,6 @@
             :content="image.content"
             :imageProps="imageProps"
           />
-          <br />
         </div>
       </div>
 

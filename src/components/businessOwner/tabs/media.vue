@@ -40,7 +40,6 @@ export default {
           console.log({ err: err });
         });
     },
-
     getImages() {
       this.$store
         .dispatch("businessOwner/getImages", this.url_data)

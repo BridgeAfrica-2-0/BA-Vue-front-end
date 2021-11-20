@@ -8,7 +8,7 @@
             <b-tabs lazy content-class="mt-3 mobile-tab" fill pills >
               <b-tab title="Home"><HomePage /></b-tab>
               <b-tab title="About"><About /></b-tab>
-              <b-tab title="Media"><Media /></b-tab>
+              <b-tab title="Media"><Media :type="'business'"/></b-tab>
               <b-tab title="Market"><MarketPlace /></b-tab>
               <b-tab title="Networks"><Networks /></b-tab> 
               <b-tab title="Community"><Followers /></b-tab>
@@ -20,10 +20,11 @@
   </div>
 </template>
 
+
 <script>
 import HomePage from "./tabs/businessHome";   
 import About from "@/components/businessOwner/tabs/about";
-import Media from "@/components/businessOwner/tabs/media";
+import Media from "@/components/owner/tabs/media";
 import MarketPlace from "@/components/businessOwner/tabs/marketPlace";
 import Followers from "@/components/businessOwner/tabs/memberNetwork";
 import Networks from "@/components/businessOwner/tabs/networks";

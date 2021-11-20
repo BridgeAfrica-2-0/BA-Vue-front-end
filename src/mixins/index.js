@@ -426,11 +426,11 @@ export const Redis = {
     },
 
     init: async function () {
-      if (this.profile) {
-        initRedis(this.token)
-        await this.getAuth()
-        this.redis()
-      }
+      // if (this.profile) {
+      //   initRedis(this.token)
+      //   await this.getAuth()
+      //   this.redis()
+      // }
     }
   },
 

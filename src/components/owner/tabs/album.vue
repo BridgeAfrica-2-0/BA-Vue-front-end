@@ -19,11 +19,11 @@
             <div ref="creatform">
               <b-form>
                 <b-form-input :placeholder="$t('profileowner.Album_name')" v-model="albumInfo.name"></b-form-input>
-                <b-form-input
+                <!-- <b-form-input
                   :placeholder="$t('profileowner.Album_Type')"
                   class="mt-2"
                   v-model="albumInfo.type"
-                ></b-form-input>
+                ></b-form-input> -->
                 <b-button class="mt-2" variant="primary" @click="createAlbums" :disabled="loading || canCreateAlbum">
                   {{ $t('profileowner.Create') }}</b-button
                 >

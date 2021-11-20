@@ -1,63 +1,49 @@
  <template>
-  <div class="" style="overflow-y: hidden; padding:0px">
-    
-     <span v-if="isloaded">
-    <navbar />
+  <div class="" style="overflow-y: hidden; padding: 0px">
+    <span v-if="isloaded">
+      <navbar />
 
-    <div class="container-fluid">
-      <ly-tab
-        v-model="selectedId"
-        :items="items"
-        :options="options"
-        class="center-ly"
-      >
-      </ly-tab>
+      <div class="container-fluid">
+        <ly-tab v-model="selectedId" :items="items" :options="options" class="center-ly"> </ly-tab>
 
-      <hr width="100%" class="d-none" d-md-block />
-    </div>
+        <hr width="100%" class="d-none" d-md-block />
+      </div>
 
-    <div class="mt-3" v-if="selectedId == '0'">
-      <Business />
-    </div>
+      <div class="mt-3" v-if="selectedId == '0'">
+        <Business />
+      </div>
 
-    <div class="mt-3" v-if="selectedId == '1'">
-      <Inbox />
-    </div>
+      <div class="mt-3" v-if="selectedId == '1'">
+        <Inbox />
+      </div>
 
-    <div class="mt-3" v-if="selectedId == '2'">
-      <Settings v-bind:currenttab="selectedId" />
-    </div>
+      <div class="mt-3" v-if="selectedId == '2'">
+        <Settings v-bind:currenttab="selectedId" />
+      </div>
 
-    
+      <div class="mt-3" v-if="selectedId == '3'">
+        <Settings v-bind:currenttab="selectedId" />
+      </div>
 
-    <div class="mt-3" v-if="selectedId == '3'">
-      <Settings v-bind:currenttab="selectedId" />
-    </div>
-
-   
-
-    <Footer />
-
-     </span>
-
+      <Footer />
+    </span>
   </div>
 </template>
 
 <script>
-import navbar from "@/components/navbar";
-import Business from "../components/businessEditor/business";
+import navbar from '@/components/navbar';
+import Business from '../components/businessEditor/business';
 
-import Settings from "../components/businessEditor/settings";
+import Settings from '../components/businessEditor/settings';
 
-import Inbox from "../components/businessOwner/inbox";
+import Inbox from '../components/businessOwner/inbox';
 
-import LyTab from "@/tab/src/index.vue";
+import LyTab from '@/tab/src/index.vue';
 
-import axios from "axios";
+import Footer from '../components/footer';
 
-import Footer from "../components/footer";
 export default {
-  name: "Home",
+  name: 'Home',
   components: {
     navbar,
     Business,
@@ -66,133 +52,113 @@ export default {
     Settings,
 
     Inbox,
- 
-    Footer
+
+    Footer,
   },
   data() {
     return {
-       foll_id:null,
-       isloaded: false,
+      foll_id: null,
+      isloaded: false,
       selectedId: 0,
       bottomSelectedId: 0,
       url_data: null,
       items: [
-        { label: "Home ", icon: "" },
+        { label: 'Home ', icon: '' },
 
-        { label: "Inbox", icon: "" },
-        { label: "Notification", icon: "" },
-       
-        { label: "Insight", icon: "" },
+        { label: 'Inbox', icon: '' },
+        { label: 'Notification', icon: '' },
 
+        { label: 'Insight', icon: '' },
       ],
       options: {
-        activeColor: "#1d98bd"
-      }
+        activeColor: '#1d98bd',
+      },
     };
   },
 
-
-  
-
-
- created() {
-    this.foll_id = this.$route.params.id;  
+  created() {
+    this.foll_id = this.$route.params.id;
 
     this.$store
-      .dispatch("businessOwner/roleCheck", this.foll_id)
+      .dispatch('businessOwner/roleCheck', this.foll_id)
       .then((data) => {
-
-
-        console.log("this is a miother fudcker");
         console.log(data);
-       
-        let role= data.data.data.role;
-          switch (role) {
-            
-           
 
-            case "owner" : this.$router.push({ name: "BusinessOwner",params: { id: this.foll_id } });; 
+        let role = data.data.data.role;
+        switch (role) {
+          case 'visitor':
+            this.$router.push({ name: 'BusinessFollower', params: { id: this.foll_id } });
             break;
-
-            case "visitor" :  this.$router.push({ name: "BusinessFollower",params: { id: this.foll_id } });
-            break;
-          }
+        }
 
         this.isloaded = true;
       })
       .catch((error) => {
         console.log({ error: error });
 
-        console.log(error.response.status );
+        console.log(error.response.status);
 
-         if (error.response.status == 404) {
-           
-            this.$router.push({ name: "notFound" });
-          } 
-
-
+        if (error.response.status == 404) {
+          this.$router.push({ name: 'notFound' });
+        }
       });
   },
-
-
 
   methods: {
     businessInfo() {
       this.$store
-        .dispatch("businessOwner/businessInfo", this.url_data)
+        .dispatch('businessOwner/businessInfo', this.url_data)
         .then(() => {
-          console.log("hey yeah");
+          console.log('hey yeah');
         })
-        .catch(err => {
+        .catch((err) => {
           console.log({ err: err });
         });
     },
 
-
-
     CommunityBusiness() {
       this.$store
-        .dispatch("businessOwner/CommunityBusiness", this.url_data)
+        .dispatch('businessOwner/CommunityBusiness', this.url_data)
         .then(() => {
-          console.log("hey yeah");
+          console.log('hey yeah');
         })
-        .catch(err => {
+        .catch((err) => {
           console.log({ err: err });
         });
     },
 
     CommunityPeople() {
       this.$store
-        .dispatch("businessOwner/CommunityPeople", this.url_data)
+        .dispatch('businessOwner/CommunityPeople', this.url_data)
         .then(() => {
-          console.log("hey yeah");
+          console.log('hey yeah');
         })
-        .catch(err => {
+        .catch((err) => {
           console.log({ err: err });
         });
     },
 
     businessCommunityTotal() {
       this.$store
-        .dispatch("businessOwner/businessCommunityTotal", this.url_data)
+        .dispatch('businessOwner/businessCommunityTotal', this.url_data)
         .then(() => {
-          console.log("hey yeah");
+          console.log('hey yeah');
         })
-        .catch(err => {
+        .catch((err) => {
           console.log({ err: err });
         });
     },
 
     ownerPost() {
       this.$store
-        .dispatch("businessOwner/ownerPost", this.url_data)
+        .dispatch('businessOwner/ownerPost', this.url_data)
         .then(() => {
-          console.log("hey yeah");
+          console.log('hey yeah');
         })
-        .catch(err => {
+        .catch((err) => {
           console.log({ err: err });
         });
-    }
+    },
   },
   computed: {},
 
@@ -209,7 +175,7 @@ export default {
 
     this.businessCommunityTotal();
     this.ownerPost();
-  }
+  },
 };
 </script>
 

@@ -1,19 +1,25 @@
 <template>
   <div>
-    <div class="products ">
-   
-      <!-- MARKET HEADER BAR -->
-      <div class="col-12 d-flex align-items-center justify-content-between">
+      <div class="row d-flex align-items-center justify-content-between ">
+        <div class="col-2 col-md-8">
         <p>
           <b-icon font-scale="1.8" icon="shop" variant="primary" class="mr-2"></b-icon>
           <span class="font-weight-bold">Market</span>
         </p>
-            <b-button class="bg-danger pos" variant="outline-primary"  @click="displayOrders">{{my_orders}}</b-button >
-        <b-button variant="outline-primary" @click="createProduct">Add Product</b-button>
+        </div>
+        <div class="col col-md text-center">
+            <b-button class=" pos" variant="outline-primary"  @click="displayOrders">{{my_orders}}</b-button >
+        </div>
+        <div class="col col-md ">
+           <b-button variant="outline-primary" @click="createProduct">Add Product</b-button>
+           </div>
       </div>
       <div class="col-12">
         <hr class="h-divider" />
       </div>
+    <div class="products ">
+   
+      <!-- MARKET HEADER BAR -->
 
       <!-- MARKET PRODUCT LIST -->
       <div class="col-md-6" v-for="(product, index) in products" :key="index">
@@ -351,7 +357,8 @@ export default {
 
 <style scoped>
 .pos{
-  margin-left: 100px;
+  /* margin-left: 900px; */
+  margin-bottom: 22px;
 }
 .order-button {
   height: 40px;

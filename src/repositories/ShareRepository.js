@@ -6,7 +6,7 @@ class Repository {
     try {
       const response = await axios.post(`share/user?poster_type=${type}`, credentials)
       return {
-        success: (response.data.message) ? true : false
+        success:true
       }
 
     } catch (error) {

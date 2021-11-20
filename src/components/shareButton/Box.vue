@@ -32,7 +32,7 @@ export default {
 
   watch: {
     id: function (value) {
-      if (this.isActivated && this.modal == this.id) this.getContacts();
+      if (this.modal == this.id) this.getContacts();
     },
   },
 

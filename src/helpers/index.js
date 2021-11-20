@@ -4,7 +4,7 @@ import axios from "axios"
 export const getRootSchemeForRedis = () => axios.defaults.baseURL.substring(0, axios.defaults.baseURL.length - 8)
 
 export const fullMediaLink = (media) => {
-  console.log(media)
+
   if (media) {
     const scheme = axios.defaults.baseURL.substring(0, axios.defaults.baseURL.length - 8)
     const render = media.startsWith("https://www.youtube.com")
@@ -19,6 +19,7 @@ export const fullMediaLink = (media) => {
 }
 
 export const fromNow = (dateTime) => {
+  console.log(dateTime)
   const data = (new Date(dateTime)).toISOString()
   const newDate = moment(data, "YYYYMMDD")
   return newDate.fromNow()

@@ -101,7 +101,7 @@
 
       <b-dropdown-text class="box-title"> {{ $t('search.Share') }} </b-dropdown-text>
 
-      <b-dropdown-item class="d-flex py-2 cursor-pointer" @click="shareToYourProfile" v-if="$route.name != 'BusinessOwner'">
+      <b-dropdown-item class="d-flex py-2 cursor-pointer" @click="shareToYourProfile" v-if="$route.name != 'BusinessOwner' ||  $route.name != 'profile_owner' ">
         <span class="text-ored">
           <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
         </span>
@@ -110,7 +110,7 @@
         </div>
       </b-dropdown-item>
 
-      <b-dropdown-item class="d-flex py-2 cursor-pointer" @click="open('modal-4')" v-if="$route.name != 'BusinessOwner'">
+      <b-dropdown-item class="d-flex py-2 cursor-pointer" @click="open('modal-4')" v-if="$route.name != 'BusinessOwner' ||   $route.name != 'profile_owner' ">
         <span class="text-ored">
           <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
         </span>
@@ -128,7 +128,7 @@
         </div>
       </b-dropdown-item>
 
-      <b-dropdown-item class="d-flex py-2 cursor-pointer" @click="open('modal-3')" v-if="$route.name != 'BusinessOwner'">
+      <b-dropdown-item class="d-flex py-2 cursor-pointer" @click="open('modal-3')" v-if="$route.name != 'BusinessOwner' || 'business' != profile.user_type">
         <span class="text-ored">
           <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
         </span>
@@ -309,11 +309,11 @@ export default {
       
       let data = {
         [`${this.post.poster_type}_profile`]: '',
-        post_id: parseInt(this.post.post_id),
-        source_id: parseInt(this.post.poster_id),
+        post_id: parseInt(this.post.post_id ? this.post.post_id : this.post.id),
+        source_id: parseInt(this.post.user_id),
       };
 
-      const request = await this.$repository.share.userPost(data, [`${this.post.poster_type}_post`]);
+      const request = await this.$repository.share.userPost(data, [`${this.post.poster_type}`]);
 
       if (request.success)
         this.flashMessage.success({

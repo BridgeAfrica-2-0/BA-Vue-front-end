@@ -1,6 +1,6 @@
 <template>
   <b-list-group-item class="d-flex align-items-center">
-    <b-avatar class="mr-3"></b-avatar>
+    <b-avatar class="mr-3" :src="contact.logo"></b-avatar>
     <span class="mr-auto">{{ contact.name }}</span>
     <Button
       @click.native="share"
@@ -45,8 +45,9 @@ export default {
         [`${this.post.poster_type}_profile`]: '',
         post_id: parseInt(this.post.post_id),
         source_id: parseInt(this.post.poster_id),
+        target_id: this.contact.id,
       };
-      const request = await this.$repository.share.userPost(data);
+      const request = await this.$repository.share.userPost(data, [`${this.post.poster_type}`]);
       if (request.success)
         this.flashMessage.success({
           time: 5000,

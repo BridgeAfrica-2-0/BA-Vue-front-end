@@ -42,7 +42,7 @@ import keywordOperationOnNetwork from './keywordOperationOnNetwork'
 Vue.use(Vuex);
 
 //axios.defaults.baseURL = process.env.VUE_APP_API_URL;
-axios.defaults.baseURL = "https://223a-154-72-150-127.ngrok.io/api/v1/";
+axios.defaults.baseURL = "https://bf61-154-72-150-127.ngrok.io/api/v1/";
 
 export default new Vuex.Store({
   modules: {

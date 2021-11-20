@@ -53,6 +53,7 @@ export const FireBase = {
     console.info('create notification info');
   },
 }
+
 export const loader = {
   methods: {
     onNotified(text) {

@@ -2,7 +2,7 @@
   <div class="img-gall-item img-size">
     <a v-if="typeOfMedia() == 'image' && !loading"
       ><b-img
-        class="card-img btn p-0 album-img img-size"
+        class="card-img btn p-0 album-img"
         thumbnail
         fluid
         rounded
@@ -40,13 +40,13 @@
               <b-icon icon="three-dots-vertical" color="white" variant="light"> </b-icon>
             </template>
             <b-dropdown-item @click="onDownloadPic()"> {{ $t('profileowner.Download') }}</b-dropdown-item>
-            <b-dropdown-item href="#" @click="onSetProfilePic()" v-if="!['video'].includes(typeOfMedia())">{{
+            <b-dropdown-item href="#" @click="onSetProfilePic()" v-if="canUpload && !['video'].includes(typeOfMedia())">{{
               $t('profileowner.Make_Profile_Picture')
             }}</b-dropdown-item>
-            <b-dropdown-item @click="onSetCoverPic()" v-if="!['video'].includes(typeOfMedia())">{{
+            <b-dropdown-item  @click="onSetCoverPic()" v-if="canUpload && !['video'].includes(typeOfMedia())">{{
               $t('profileowner.Make_Cover_Photo')
             }}</b-dropdown-item>
-            <b-dropdown-item href="#" @click="onDeleteImage()">{{ $t('profileowner.Delete') }}</b-dropdown-item>
+            <b-dropdown-item href="#" @click="onDeleteImage()" v-if="canUpload">{{ $t('profileowner.Delete') }}</b-dropdown-item>
           </b-dropdown>
         </li>
       </ul>
@@ -62,6 +62,7 @@ export default {
     'im',
     'imageProps',
     'content',
+    'canUpload',
     'typeOfMedia',
     'getFullMediaLink',
     'getYoutubeKey',

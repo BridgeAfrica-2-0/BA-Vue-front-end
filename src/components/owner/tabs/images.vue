@@ -24,7 +24,6 @@
             <source :src="img_url" />
           </video>
         </div>
-  
 
         <br />
 
@@ -33,7 +32,7 @@
         >
       </b-modal>
 
-      <div class="createp img-gall image-wrapp" v-if="canUpload">
+      <div class="createp img-gall image-wrapp img-size" v-if="canUpload">
         <div class="">
           <input
             type="file"
@@ -66,6 +65,7 @@
             :deleteImage="() => deleteImage(im.id, cmp)"
             :content="image.content"
             :imageProps="imageProps"
+            :canUpload="canUpload"
           />
         </div>
       </div>
@@ -93,6 +93,12 @@ export default {
   props: {
     album: {},
     canUpload: {
+      type: Boolean,
+      default: function () {
+        return false;
+      },
+    },
+     addItem: {
       type: Boolean,
       default: function () {
         return false;
@@ -451,7 +457,10 @@ export default {
 </script>
 
 <style scoped>
-
+.img-size {
+  width: 266px !important;
+  height: 266px !important;
+}
 .botmediadess-position {
   text-align: center;
   bottom: -45%;

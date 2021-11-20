@@ -1,8 +1,8 @@
 <template>
-  <div class="img-gall-item">
+  <div class="img-gall-item img-size">
     <a v-if="typeOfMedia() == 'image' && !loading"
       ><b-img
-        class="card-img btn p-0 album-img"
+        class="card-img btn p-0 album-img img-size"
         thumbnail
         fluid
         rounded
@@ -12,11 +12,7 @@
         v-bind="imageProps"
       ></b-img>
     </a>
-    <video
-      controls
-      v-else-if="typeOfMedia() == 'video' && !loading"
-      class="card-img btn p-0 album-img"
-    >
+    <video controls v-else-if="typeOfMedia() == 'video' && !loading" class="card-img btn p-0 album-img">
       <source :src="getFullMediaLink()" />
     </video>
     <youtube
@@ -33,45 +29,24 @@
       ></b-spinner>
     </div>
     <b-modal hide-footer :id="`modal-${im.id}`" title="Details" size="md">
-      <img
-        class="card-img"
-        :src="getFullMediaLink()"
-        @click="() => showImg()"
-        alt="media_img"
-      />
+      <img class="card-img" :src="getFullMediaLink()" @click="() => showImg()" alt="media_img" />
       <p class="my-4">{{ content }}</p>
     </b-modal>
     <div class="mediadesc" v-if="!['youtube'].includes(typeOfMedia())">
       <ul class="navbar-nav pull-right options">
         <li class="nav-item dropdown m-0 p-0">
-          <b-dropdown
-            size="sm"
-            class="float-right"
-            variant="link"
-            toggle-class="text-decoration-none"
-            no-caret
-          >
+          <b-dropdown size="sm" class="float-right" variant="link" toggle-class="text-decoration-none" no-caret>
             <template #button-content>
-              <b-icon icon="three-dots-vertical" color="white" variant="light">
-              </b-icon>
+              <b-icon icon="three-dots-vertical" color="white" variant="light"> </b-icon>
             </template>
-            <b-dropdown-item @click="onDownloadPic()">
-              {{ $t('profileowner.Download') }}</b-dropdown-item
-            >
-            <b-dropdown-item
-              href="#"
-              @click="onSetProfilePic()"
-              v-if="!['video'].includes(typeOfMedia())"
-              >{{ $t('profileowner.Make_Profile_Picture') }}</b-dropdown-item
-            >
-            <b-dropdown-item
-              @click="onSetCoverPic()"
-              v-if="!['video'].includes(typeOfMedia())"
-              >{{ $t('profileowner.Make_Cover_Photo') }}</b-dropdown-item
-            >
-            <b-dropdown-item href="#" @click="onDeleteImage()"
-              >{{ $t('profileowner.Delete') }}</b-dropdown-item
-            >
+            <b-dropdown-item @click="onDownloadPic()"> {{ $t('profileowner.Download') }}</b-dropdown-item>
+            <b-dropdown-item href="#" @click="onSetProfilePic()" v-if="!['video'].includes(typeOfMedia())">{{
+              $t('profileowner.Make_Profile_Picture')
+            }}</b-dropdown-item>
+            <b-dropdown-item @click="onSetCoverPic()" v-if="!['video'].includes(typeOfMedia())">{{
+              $t('profileowner.Make_Cover_Photo')
+            }}</b-dropdown-item>
+            <b-dropdown-item href="#" @click="onDeleteImage()">{{ $t('profileowner.Delete') }}</b-dropdown-item>
           </b-dropdown>
         </li>
       </ul>
@@ -84,17 +59,17 @@
 <script>
 export default {
   props: [
-    "im",
-    "imageProps",
-    "content",
-    "typeOfMedia",
-    "getFullMediaLink",
-    "getYoutubeKey",
-    "showImg",
-    "downloadPic",
-    "setProfilePic",
-    "setCoverPic",
-    "deleteImage",
+    'im',
+    'imageProps',
+    'content',
+    'typeOfMedia',
+    'getFullMediaLink',
+    'getYoutubeKey',
+    'showImg',
+    'downloadPic',
+    'setProfilePic',
+    'setCoverPic',
+    'deleteImage',
   ],
 
   data() {
@@ -105,7 +80,7 @@ export default {
 
   methods: {
     async onDownloadPic() {
-      console.log(this.loading)
+      console.log(this.loading);
       this.loading = true;
       this.loading = await this.downloadPic();
     },
@@ -122,7 +97,7 @@ export default {
     },
     //set image as profile pic
 
-   async  onSetProfilePic() {
+    async onSetProfilePic() {
       this.loading = true;
       this.loading = await this.setProfilePic();
     },
@@ -131,6 +106,10 @@ export default {
 </script>
 
 <style scoped>
+.img-size {
+  width: 266px !important;
+  height: 266px !important;
+}
 .botmediadess-position {
   text-align: center;
   bottom: -45%;

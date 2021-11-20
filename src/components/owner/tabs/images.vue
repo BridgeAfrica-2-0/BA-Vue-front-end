@@ -451,6 +451,7 @@ export default {
 </script>
 
 <style scoped>
+
 .botmediadess-position {
   text-align: center;
   bottom: -45%;

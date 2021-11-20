@@ -4,7 +4,7 @@
     <div class="row">
       <div class="container-fluid" v-if="showalbum == false">
         <div class="one2">
-          <div class="createp img-gall image-wrapp">
+          <div class="createp img-gall image-wrapp img-size">
             <div class="">
               <a v-b-modal.createalbumModal>
                 <div class="drag-textt">
@@ -403,6 +403,10 @@ export default {
 </script>
 
 <style scoped>
+.img-size {
+  width: 266px !important;
+  height: 266px !important;
+}
 ._vue-flash-msg-body._vue-flash-msg-body_success,
 ._vue-flash-msg-body._vue-flash-msg-body_error {
   z-index: 10000 !important;

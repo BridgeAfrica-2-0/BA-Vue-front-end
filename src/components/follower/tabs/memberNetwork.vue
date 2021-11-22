@@ -6,7 +6,7 @@
         style="padding:0px; margin-left: -12px;
     margin-right: -12px;"
       >
-        <b-tabs pills content-class="mt-3 f-left">
+        <b-tabs pills lazy content-class="mt-3 f-left">
           <b-tab :title="$t('profilefollower.People')" active> <People /> </b-tab>
   
           <b-tab :title="$t('profilefollower.Businesses')" > <Businesses /> </b-tab>

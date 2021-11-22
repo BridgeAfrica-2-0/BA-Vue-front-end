@@ -3,8 +3,8 @@
     <FlashMessage style="z-index: 99999" :position="'right top'" />
 
     <Box
-      :id="modal"
       modal="modal-1"
+      :id="modal"
       :isActivated="strategy"
       :title="$t('search.Share_to_people')"
       :placeholder="$t('search.Search_for_people')"
@@ -15,13 +15,13 @@
     <!-- Share to people -->
 
     <Box
-      :id="modal"
       modal="modal-2"
+      :id="modal"
       :isActivated="strategy"
       :title="$t('search.Share_to_network')"
       :placeholder="$t('search.Search_for_network')"
       subtitle="All networks"
-      :type="type"
+      :type="'business'"
       :post="post"
     >
       <template v-slot:owner>
@@ -30,7 +30,7 @@
           <p>
             <span class="mr-auto">{{ $t('search.Share_Post_As') }}</span
             ><br />
-            <span class="mr-auto">J. Circlehead</span>
+            <span class="mr-auto">{{ profile.name }}</span>
           </p>
         </div>
       </template>
@@ -38,7 +38,6 @@
     <!-- Share to network -->
 
     <Box
-      :id="modal"
       modal="modal-5"
       :isActivated="strategy"
       :title="$t('search.Send_Inbox')"
@@ -68,13 +67,14 @@
     </Box>
     <!-- Send Inbox -->
 
+
     <Box
-      :id="modal"
       modal="modal-3"
+      :id="modal"
       :title="$t('search.Share_business')"
       :placeholder="$t('search.Search_for_business')"
       subtitle="All business"
-      :type="type"
+      :type="'business'"
       :post="post"
       :isActivated="strategy"
     >
@@ -84,14 +84,14 @@
           <p>
             <span class="mr-auto">{{ $t('search.Share_Post_As') }}</span
             ><br />
-            <span class="mr-auto">{{profile.name}}</span>
+            <span class="mr-auto">{{ profile.name }}</span>
           </p>
         </div>
       </template>
     </Box>
     <!-- modal-3 -->
 
-    <Post :id="modal" :isActivated="strategy" modal="modal-4" />
+    <Post :id="modal" :isActivated="strategy" modal="modal-10" :post="post" :auth="profile" :hidden="() => this.$bvModal.hide('modal-10')"/>
     <!-- modal-4 -->
 
     <b-dropdown size="lg" variant="link" toggle-class="text-decoration-none" no-caret position="bottom">
@@ -101,7 +101,11 @@
 
       <b-dropdown-text class="box-title"> {{ $t('search.Share') }} </b-dropdown-text>
 
-      <b-dropdown-item class="d-flex py-2 cursor-pointer" @click="shareToYourProfile" v-if="$route.name != 'BusinessOwner' ||  $route.name != 'profile_owner' ">
+      <b-dropdown-item
+        class="d-flex py-2 cursor-pointer"
+        @click="shareToYourProfile"
+        v-if="$route.name != 'BusinessOwner' ? ($route.name != 'profile_owner' ? true : false) : false"
+      >
         <span class="text-ored">
           <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
         </span>
@@ -110,7 +114,11 @@
         </div>
       </b-dropdown-item>
 
-      <b-dropdown-item class="d-flex py-2 cursor-pointer" @click="open('modal-4')" v-if="$route.name != 'BusinessOwner' ||   $route.name != 'profile_owner' ">
+      <b-dropdown-item
+        class="d-flex py-2 cursor-pointer"
+        @click="open('modal-10')"
+        v-if="$route.name != 'BusinessOwner' ? ($route.name != 'profile_owner' ? true : false) : false"
+      >
         <span class="text-ored">
           <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
         </span>
@@ -119,7 +127,7 @@
         </div>
       </b-dropdown-item>
 
-      <b-dropdown-item  class="d-flex py-2 cursor-pointer" @click="open('modal-2')">
+      <b-dropdown-item class="d-flex py-2 cursor-pointer" @click="open('modal-2')">
         <span class="text-ored">
           <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
         </span>
@@ -128,7 +136,11 @@
         </div>
       </b-dropdown-item>
 
-      <b-dropdown-item class="d-flex py-2 cursor-pointer" @click="open('modal-3')" v-if="$route.name != 'BusinessOwner' || 'business' != profile.user_type">
+      <b-dropdown-item
+        class="d-flex py-2 cursor-pointer"
+        @click="open('modal-3')"
+        v-if="$route.name != 'BusinessOwner' ? ('business' != profile.user_type ? true : false) : false"
+      >
         <span class="text-ored">
           <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
         </span>
@@ -168,7 +180,6 @@
 
           <div
             v-if="'network' !== type"
-            @mousedown="open('modal-5')"
             class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer"
           >
             <span class="text-ored">
@@ -274,39 +285,43 @@ export default {
   data: () => ({
     modal: null,
     type: null,
-    strategy: null,
+    strategy: false,
   }),
 
   created() {
-    this.strategy = {
-      user: () => 'profile',
-      business: () => 'business',
-      network: () => 'network',
-    };
-
-    this.type = this.strategy[this.profile.user_type]();
+    console.log(this.profile, 'how are tyou');
+    console.log('$route.name', this.$route.name);
+    console.log('typee', this.profile.user_type);
+    console.log(this.post)
+    this.type = this.profile.user_type;
+    this.type = this.profile.user_type;
   },
 
   computed: {
-    computed: {
-      ...mapGetters({
-        profile: 'auth/profilConnected',
-      }),
-    },
-    strategy: function () {
-      if (['modal-1', 'modal-2', 'modal-3', 'modal-4', 'modal-5'].includes(this.modal)) return true;
-      else return false;
+    ...mapGetters({
+      profile: 'auth/profilConnected',
+    }),
+  },
+
+  watch: {
+    modal: function (value) {
+      console.log('yes he change', value);
+      this.strategy = ['modal-1', 'modal-2', 'modal-3', 'modal-4', 'modal-5'].includes(this.modal) ? true : false;
     },
   },
 
   methods: {
     open(id) {
-      this.$bvModal.show(id);
+      console.log(id);
       this.modal = id;
+      this.$bvModal.show(id);
+      console.log(`${id}___BV_modal_outer_`);
+      const hack = document.getElementsByClassName(`${id}___BV_modal_outer_`);
+
+      console.log(hack);
     },
 
     shareToYourProfile: async function () {
-      
       let data = {
         [`${this.post.poster_type}_profile`]: '',
         post_id: parseInt(this.post.post_id ? this.post.post_id : this.post.id),

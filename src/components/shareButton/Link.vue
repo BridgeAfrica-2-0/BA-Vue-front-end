@@ -28,6 +28,9 @@ export default {
       type: Object,
       required: true,
     },
+    actionType: {
+      required: true,
+    },
   },
 
   components: {
@@ -40,11 +43,12 @@ export default {
 
   methods: {
     share: async function () {
+      console.log(this.post);
       this.loading = true;
       let data = {
-        [`${this.post.poster_type}_profile`]: '',
-        post_id: parseInt(this.post.post_id),
-        source_id: parseInt(this.post.poster_id),
+        [`${this.post.poster_type}_${this.actionType}`]: '',
+        post_id: parseInt(this.post.post_id ? this.post.post_id : this.post.id),
+        source_id: parseInt(this.post.user_id),
         target_id: this.contact.id,
       };
       const request = await this.$repository.share.userPost(data, [`${this.post.poster_type}`]);

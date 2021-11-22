@@ -11,158 +11,143 @@
             />
           </div>
         </b-col>
-        <b-col cols="7" sm="8" md="7" >
-         <p class="text">
-            <strong class="title"> <b-link  @click="productDetails">  Sneakers Blec cc  </b-link>  </strong> <br /> <strong> {{$t("businessf.Description")}} </strong>  <br />    <span class="text">
-            This is just a dummy text dumy dummy things are always dummy and dummy add  things are always dummy  hjykt    </span>
-            <b-link class="text"> {{$t("businessf.see_more")}}   </b-link>   <br />
-             
-            <span class="price"> <strong> 12,000 Fcfa  </strong> </span> <br />
-            
+        <b-col cols="7" sm="8" md="7">
+          <p class="text">
+            <strong class="title cursor-pointer" @click="productDetails">
+              {{ product.name }}
+            </strong>
+            <br />
+            <strong> Description </strong> <br />
+            {{ product.description.substring(0, 30) }}
+            <b-link v-if="product.description.length >= 30"> see more </b-link>
+            <br />
+
+            <span class="price">
+              <strong> {{ product.price }} </strong>
+            </span>
+            <br />
           </p>
-
-
-          <span class="float-right">    <b-button variant="primary" class=""> {{$t("businessf.Buy_now")}} </b-button>     </span>
-
-
-        </b-col>
-
-        
-
-        
-      </b-row>
-
-
-      <div>
-
-
-            
-          <br />    
-
-        </div>
-
-
-    </div>
-   
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div>
-    <b-modal
-      v-model="viewProduct"
-      hide-footer
-      title="$t('businessf.Product_Details')"
-      size="xl"
-    >
-      <b-row>
-        <b-col cols="5" class="mx-auto">
-          <b-img
-            class="img-fluid"
-            src="https://picsum.photos/600/300/?image=25"
-          ></b-img>
-        </b-col>
-        <b-col>
-          <h2 class="mb-4 text-center">{{$t("businessf.Product_Name")}}</h2>
-          <p><span class="stock">{{$t("businessf.In_Stock")}}</span></p>
-          <p>0.00 XAF</p>
-          <hr />
-          <b-row>
-            <b-col>
-              <b-button variant="primary">{{$t("businessf.Message")}}</b-button>
-            </b-col>
-            <b-col>
-              <b-button variant="outline-dark" class="float-right"
-                >{{$t("businessf.Checkout_on_website")}}</b-button
-              >
-            </b-col>
-          </b-row>
-          <hr />
-          <h5>{{$t("businessf.Product_Description")}}</h5>
           <p>
             <b-button variant="primary" @click="handleAddToCard"
-              ><span>{{$t("businessf.Add_to_Cart")}}</span>
+              ><span>Add to Cart</span>
             </b-button>
           </p>
-          <hr />
-
-
-
-
-
-
-
-
-
-
-
-          <b-row>
-            <b-col class="">
-              <span class="mr-3"
-                ><b-icon
-                  icon="suit-heart"
-                  variant="primary"
-                  aria-hidden="true"
-                ></b-icon>
-                23</span
-              >
-              <span
-                ><b-icon
-                  icon="chat-fill"
-                  variant="primary"
-                  aria-hidden="true"
-                ></b-icon>
-                123</span
-              >
-            </b-col>
-            <b-col class="">
-              <b-icon
-                class="float-right"
-                icon="share-fill"
-                variant="primary"
-                aria-hidden="true"
-              ></b-icon>
-            </b-col>
-          </b-row>
-          <br />
-          <b-row class="mt-2">
-            <b-col>
-              <b-avatar
-                variant="info"
-                src="https://placekitten.com/300/300"
-                size="2rem"
-              ></b-avatar>
-              <input :placeholder="$t('businessf.Post_a_Comment')" class="comment" type="text" />
-
-              <fas-icon
-                class="primary send-cmt"
-                :icon="['fas', 'paper-plane']"
-              />
-            </b-col>
-          </b-row>
-          <Comment />
-          <b-row>
-            <b-col class="col-1"></b-col>
-            <b-col>
-              <Comment />
-            </b-col>
-          </b-row>
         </b-col>
       </b-row>
-    </b-modal>
+
       <!-- <div>
         <br />
       </div> -->
     </div>
+    <!-- EDIT PRODUCT MODAL -->
+
+    <b-modal hide-footer title="Edit product">
+      <b-form>
+        <b-row>
+          <b-col cols="12" md="6">
+            <b-form-group
+              id="input-group-1"
+              label="Product Name"
+              label-for="input-1"
+              label-size="sm"
+            >
+              <b-form-input
+                id="input-1"
+                class="mt-1"
+                type="text"
+                required
+              ></b-form-input>
+            </b-form-group>
+
+            <b-form-group
+              id="input-group-1"
+              label="Product Description"
+              label-for="input-1"
+              label-size="sm"
+            >
+              <b-textarea
+                id="input-1"
+                class="mt-2"
+                type="text"
+                required
+              ></b-textarea>
+            </b-form-group>
+          </b-col>
+          <b-col cols="12" md="6">
+            <div class="image-upload-wrap">
+              <a href="#" data-toggle="modal" data-target="#createalbumModal">
+                <div class="drag-text">
+                  <i class="fa fa-plus"></i>
+                  <h6>Product Image</h6>
+                </div>
+              </a>
+              <div></div>
+            </div>
+          </b-col>
+        </b-row>
+
+        <b-form-group
+          id="input-group-1"
+          label="product Price"
+          label-for="input-1"
+          label-size="sm"
+        >
+          <b-form-input class="mt-1" id="price"></b-form-input>
+        </b-form-group>
+
+        <b-form-checkbox
+          id="checkbox-1"
+          name="checkbox-1"
+          value="accepted"
+          unchecked-value="not_accepted"
+        >
+          This Product Is On Discount
+        </b-form-checkbox>
+
+        <b-form-group
+          id="conditions"
+          label="Conditions"
+          label-for="input-1"
+          label-size="sm"
+        >
+          <b-form-input class="mt-1" id="conditions"></b-form-input>
+        </b-form-group>
+
+        <b-form-checkbox
+          id="checkbox-1"
+          name="checkbox-1"
+          value="accepted"
+          unchecked-value="not_accepted"
+        >
+          This Item Is A Service ?
+        </b-form-checkbox>
+
+        <b-form-checkbox
+          id="checkbox-1"
+          name="checkbox-1"
+          value="accepted"
+          unchecked-value="not_accepted"
+        >
+          In stock
+        </b-form-checkbox>
+
+        <b-form-checkbox
+          id="checkbox-1"
+          name="checkbox-1"
+          value="accepted"
+          unchecked-value="not_accepted"
+        >
+          Published
+        </b-form-checkbox>
+
+        <b-button class="mt-2 btn-block" variant="primary"> Add</b-button>
+      </b-form>
+    </b-modal>
+    <!-- PRODUCT DETAILS MODAL -->
+      <!-- <div>
+        <br />
+      </div> -->
+    <!-- </div> -->
     <!-- EDIT PRODUCT MODAL -->
 
     <b-modal hide-footer title="$t('businessf.Edit_product')">
@@ -267,12 +252,12 @@
         <b-button class="mt-2 btn-block" variant="primary"> {{$t("businessf.Add")}}</b-button>
       </b-form>
     </b-modal>
-     PRODUCT DETAILS MODAL
+     <!-- PRODUCT DETAILS MODAL -->
     <ProductDetails
       @closemodal="closeDetailsProduct"
       :showModal="viewProduct"
       :product="product"
-      /> 
+    />
   </div>
 </template>
 

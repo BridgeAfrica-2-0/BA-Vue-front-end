@@ -1,8 +1,6 @@
 <template>
   <div>
-    <b-modal id="modal-sm" size="sm" hide-header>
-      Do you want to join this network?
-    </b-modal>
+    <b-modal id="modal-sm" size="sm" hide-header> Do you want to join this network? </b-modal>
 
     <div class="people-style shadow" v-for="item in network" :key="item.id">
       <b-row>
@@ -41,15 +39,15 @@
               </b-col>
 
               <b-col md="12" lg="4" xl="4" sm="12" cols="4" class="mt-2 text-center">
-                <b-button block size="sm" class="b-background shadow " variant="primary">
-                  <i class="fas fa-envelope   fa-lg btn-icon "></i>
+                <b-button block size="sm" class="b-background shadow" variant="primary" @click="cta(item)">
+                  <i class="fas fa-envelope fa-lg btn-icon"></i>
                   <span class="btn-text">Message</span>
                 </b-button>
               </b-col>
 
               <b-col md="12" lg="4" xl="4" sm="12" cols="4" class="mt-2 text-center">
-                <b-button block size="sm" class="b-background shadow " variant="primary">
-                  <i class="fas fa-map-marked-alt  fa-lg btn-icon "></i>
+                <b-button block size="sm" class="b-background shadow" variant="primary">
+                  <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
                   <span class="btn-text">Direction</span>
                 </b-button>
               </b-col>
@@ -93,6 +91,9 @@ export default {
         return this.$store.state.profile.NcommunityFollowing.network_following;
       }
     },
+    activeAccount() {
+      return this.$store.getters['auth/profilConnected'];
+    },
   },
 
   mounted() {
@@ -101,6 +102,20 @@ export default {
   },
 
   methods: {
+    cta(data) {
+      console.log(data);
+      this.$store.commit('businessChat/setSelectedChat', data);
+
+      let path = '';
+      if (this.activeAccount.user_type == 'business') {
+        path = '/business_owner/' + this.activeAccount.id;
+      } else if (this.activeAccount.user_type == 'network') {
+        path = '/';
+      } else path = '/messaging';
+
+      // this.$router.push({ path: `${path}`, query: { tabId: 1, msgTabId: 1 } });
+      this.$router.push({ path: `/business_owner/${this.activeAccount.id}`, query: { tabId: 1, msgTabId: 2 } });
+    },
     infiniteHandler($state) {
       console.log('loading network 1 1');
 
@@ -135,7 +150,7 @@ export default {
             }
           }
         })
-        .catch(err => {
+        .catch((err) => {
           console.log({ err: err });
         });
     },
@@ -150,10 +165,10 @@ export default {
 
       await axios
         .post(uri, data)
-        .then(response => {
+        .then((response) => {
           user.is_follow = nextFollowState;
         })
-        .catch(err => console.log(err));
+        .catch((err) => console.log(err));
     },
   },
 };

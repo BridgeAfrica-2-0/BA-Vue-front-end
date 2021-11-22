@@ -3,7 +3,7 @@
     <FlashMessage style="z-index: 99999" :position="'right top'" />
 
     <Box
-      modal="modal-1"
+      :modal="`modal-1-${uuid}`"
       :id="modal"
       :isActivated="strategy"
       :title="$t('search.Share_to_people')"
@@ -15,7 +15,7 @@
     <!-- Share to people -->
 
     <Box
-      modal="modal-2"
+      :modal="`modal-2-${uuid}`"
       :id="modal"
       :isActivated="strategy"
       :title="$t('search.Share_to_network')"
@@ -38,7 +38,7 @@
     <!-- Share to network -->
 
     <Box
-      modal="modal-5"
+      :modal="`modal-5-${uuid}`"
       :isActivated="strategy"
       :title="$t('search.Send_Inbox')"
       :placeholder="$t('search.Search_for_network')"
@@ -67,9 +67,8 @@
     </Box>
     <!-- Send Inbox -->
 
-
     <Box
-      modal="modal-3"
+      :modal="`modal-3-${uuid}`"
       :id="modal"
       :title="$t('search.Share_business')"
       :placeholder="$t('search.Search_for_business')"
@@ -91,7 +90,14 @@
     </Box>
     <!-- modal-3 -->
 
-    <Post :id="modal" :isActivated="strategy" modal="modal-10" :post="post" :auth="profile" :hidden="() => this.$bvModal.hide('modal-10')"/>
+    <Post
+      :id="modal"
+      :isActivated="strategy"
+      :modal="`modal-10-${uuid}`"
+      :post="post"
+      :auth="profile"
+      :hidden="() => this.$bvModal.hide(`modal-10-${uuid}`)"
+    />
     <!-- modal-4 -->
 
     <b-dropdown size="lg" variant="link" toggle-class="text-decoration-none" no-caret position="bottom">
@@ -116,8 +122,8 @@
 
       <b-dropdown-item
         class="d-flex py-2 cursor-pointer"
-        @click="open('modal-10')"
-        v-if="$route.name != 'BusinessOwner' ? ($route.name != 'profile_owner' ? true : false) : false"
+        @click="open(`modal-10-${uuid}`)"
+        v-if="$route.name != 'BusinessOwner' || $route.name != 'BusinessEditor' ? ($route.name != 'profile_owner' ? true : false) : false"
       >
         <span class="text-ored">
           <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
@@ -127,7 +133,7 @@
         </div>
       </b-dropdown-item>
 
-      <b-dropdown-item class="d-flex py-2 cursor-pointer" @click="open('modal-2')">
+      <b-dropdown-item class="d-flex py-2 cursor-pointer" @click="open(`modal-2-${uuid}`)">
         <span class="text-ored">
           <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
         </span>
@@ -138,7 +144,7 @@
 
       <b-dropdown-item
         class="d-flex py-2 cursor-pointer"
-        @click="open('modal-3')"
+        @click="open(`modal-3-${uuid}`)"
         v-if="$route.name != 'BusinessOwner' ? ('business' != profile.user_type ? true : false) : false"
       >
         <span class="text-ored">
@@ -192,7 +198,7 @@
 
           <div
             v-if="'business' !== type"
-            @mousedown="open('modal-5')"
+            @mousedown="open(`modal-5-${uuid}`)"
             class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer"
           >
             <span class="text-ored">
@@ -286,14 +292,11 @@ export default {
     modal: null,
     type: null,
     strategy: false,
+    uuid: null,
   }),
 
   created() {
-    console.log(this.profile, 'how are tyou');
-    console.log('$route.name', this.$route.name);
-    console.log('typee', this.profile.user_type);
-    console.log(this.post)
-    this.type = this.profile.user_type;
+    this.uuid = this.post.post_id ? this.post.post_id : this.post.id;
     this.type = this.profile.user_type;
   },
 
@@ -322,6 +325,12 @@ export default {
     },
 
     shareToYourProfile: async function () {
+      let loader = this.$loading.show({
+        container: this.fullPage ? null : this.$refs.creatform,
+        canCancel: true,
+        onCancel: this.onCancel,
+        color: '#e75c18',
+      });
       let data = {
         [`${this.post.poster_type}_profile`]: '',
         post_id: parseInt(this.post.post_id ? this.post.post_id : this.post.id),
@@ -329,7 +338,7 @@ export default {
       };
 
       const request = await this.$repository.share.userPost(data, [`${this.post.poster_type}`]);
-
+      loader.hide();
       if (request.success)
         this.flashMessage.success({
           time: 5000,

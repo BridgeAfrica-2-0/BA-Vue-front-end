@@ -48,7 +48,12 @@
       <div class="mt-2 p-2 post-border" v-if="item.source">
         <div class="d-inline-flex">
           <span md="1" class="m-0 p-0">
-            <b-avatar class="d-inline-block avat avatar-border" square variant="primary" :src="item.logo_path"></b-avatar>
+            <b-avatar
+              class="d-inline-block avat avatar-border"
+              square
+              variant="primary"
+              :src="item.logo_path"
+            ></b-avatar>
           </span>
           <div class="pl-2 pl-md-3 pt-md-2">
             <h5 class="m-0 usernamee">
@@ -297,9 +302,8 @@ export default {
 };
 </script>
 <style >
-
 .avatar-border {
-    border-radius: 50px !important;
+  border-radius: 50px !important;
 }
 .post-border {
   border: 1px solid rgba(0, 0, 0, 0.125);

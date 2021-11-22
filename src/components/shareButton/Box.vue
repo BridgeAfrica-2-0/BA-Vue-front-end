@@ -6,8 +6,14 @@
     <h6 class="mt-3 fw-b">{{ subtitle }}</h6>
 
     <b-list-group>
-      <Loader v-if="loading" />
-      <Contact v-for="(contact, index) in contacts" :contact="contact" :key="index" :post="post" />
+      <Loader v-if="loading && hasbeLoad" />
+      <Contact
+        v-for="(contact, index) in contacts"
+        :contact="contact"
+        :key="index"
+        :post="post"
+        :actionType="actionType"
+      />
     </b-list-group>
   </b-modal>
 </template>
@@ -23,7 +29,8 @@ export default {
   watch: {
     id: function (value, oldValue) {
       console.log(value, oldValue);
-      if (['modal-2', 'modal-3'].includes(this.modal)) this.getContacts();
+
+      if (this.modal.startsWith('modal-2') || this.modal.startsWith('modal-3')) this.getContacts();
     },
   },
 
@@ -37,6 +44,7 @@ export default {
     text: '',
     contacts: [],
     actionType: null,
+    hasbeLoad: false,
   }),
 
   props: {
@@ -75,18 +83,18 @@ export default {
     getContacts: async function () {
       this.loading = true;
       const response = await this.$repository.share.getNetworkorBusiness();
-      console.log(this.type);
-      console.log(response.data);
+      
 
       if ('network' != this.type) {
         this.contacts = response.data.network;
-        this.actionType = 'business';
+        this.actionType = 'network';
       } else {
         this.contacts = response.data.business;
-        this.actionType = 'network';
+        this.actionType = 'business';
       }
 
       this.loading = false;
+      this.hasbeLoad = true;
     },
   },
 };

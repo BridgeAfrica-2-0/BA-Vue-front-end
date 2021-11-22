@@ -305,7 +305,6 @@
         :businessLogo="business_intro.logo_path"
         :editPost="() => editPost(item)"
         :deletePost="() => deletePost(item)"
-
       />
 
       <infinite-loading :identifier="infiniteId" ref="infiniteLoading" @infinite="infiniteHandler"></infinite-loading>
@@ -613,10 +612,10 @@ export default {
       }
     },
 
-    selectMoviesOutsidePost(event) {     
+    selectMoviesOutsidePost(event) {
       const file = event.target;
 
-      if (file.files) {    
+      if (file.files) {
         let reader = new FileReader();
         reader.onload = (e) => {
           this.createPost.movies.push({
@@ -688,7 +687,7 @@ export default {
 
     submitPost() {
       this.isUploading = true;
-      
+
       let loader = this.$loading.show({
         container: this.fullPage ? null : this.$refs.loader,
         canCancel: true,

@@ -17,7 +17,7 @@
       ></b-form-textarea>
 
       <div class="body mb-3 py-1">
-        <img class="img-fluid" src="https://i.wifegeek.com/200426/4085d03b.jpg" />
+        <img class="img-fluid" :src="post.media[0].media_url" v-if="post.media.length"/>
         <div class="p-2">
           <strong style="font-size: 18px">{{ post.user_name }}</strong>
           <h6 style="color: #ddd">{{ post.updated_at | fromNow }}</h6>
@@ -72,10 +72,6 @@ export default {
 
   filters: {
     fromNow,
-  },
-  created() {
-    console.log(this.auth);
-    console.log(this.post);
   },
 };
 </script>

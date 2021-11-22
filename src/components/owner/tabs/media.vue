@@ -10,7 +10,7 @@
         </div>
 
         <Images
-          :canUpload="canUpload"
+          :isEditor="isEditor"
           :hasLoadPicture="!hasLoadPicture"
           :images="all()"
           :albumName="'notFound'"
@@ -23,7 +23,7 @@
         <div v-if="!hasLoadAlbum">
           <b-spinner class="load" :label="$t('profileowner.Large_Spinner')"></b-spinner>
         </div>
-        <Album :canUpload="canUpload" :type="type" v-else :getAlbums="getAlbums" :getImages="getImages"/>
+        <Album :isEditor="isEditor" :type="type" v-else :getAlbums="getAlbums" :getImages="getImages"/>
       </b-tab>
     </b-tabs>
   </div>
@@ -45,9 +45,9 @@ export default {
         return ['profile', 'network', 'business'].indexOf(value) !== -1;
       },
     },
-    canUpload:{
+    isEditor:{
       type:Boolean,
-      default: () => true
+      default: () => false
     }
   },
   data: function () {

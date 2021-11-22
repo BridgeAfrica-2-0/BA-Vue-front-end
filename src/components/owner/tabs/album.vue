@@ -151,8 +151,9 @@ export default {
   },
 
   props: {
-    canUpload: {
+    isEditor: {
       type: Boolean,
+      required:true
     },
     type: {
       type: String,

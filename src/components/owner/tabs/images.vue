@@ -65,7 +65,7 @@
             :deleteImage="() => deleteImage(im.id, cmp)"
             :content="image.content"
             :imageProps="imageProps"
-            :canUpload="canUpload"
+            :isEditor="isEditor"
           />
         </div>
       </div>
@@ -92,11 +92,9 @@ export default {
   },
   props: {
     album: {},
-    canUpload: {
+    isEditor: {
       type: Boolean,
-      default: function () {
-        return false;
-      },
+     required:true
     },
      addItem: {
       type: Boolean,

@@ -18,7 +18,7 @@
         </b-col>
         <b-col md="5" cols="7" lg="7" xl="7" sm="5">
           <p class="textt">
-            <strong class="title"> {{business.name}} </strong> <br />
+            <strong class="title"> {{business.name.substring(0,10)+"..."}} </strong> <br />
             {{business.category}}
             <br />
             {{business.followers}} {{ $t('network.Community')}} <br />
@@ -27,8 +27,8 @@
               <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{business.location_description}}
             </span>
             <br />
-            <span v-if="business.about_business.length<65">{{ business.about_business}}</span>
-            <span v-else >{{ business.about_business.substring(0,65)+"..." }} <b-link>{{ $t('network.Read_More') }}</b-link></span>
+            <span v-if="business.about_business.length<15">{{ business.about_business}}</span>
+            <span v-else >{{ business.about_business.substring(0,15)+"..." }} <b-link>{{ $t('network.Read_More') }}</b-link></span>
           </p>
         </b-col>
 

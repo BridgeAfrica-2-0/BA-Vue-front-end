@@ -56,23 +56,23 @@
         </b-tab>
         <b-tab>
           <template slot="title">
-            {{ $t('network.Networks') }} <span class="spa-color"> {{nFormatter(businessdetails.total_Network)}} </span>
+            {{ $t('network.Networks') }} <span class="spa-color">{{nFormatter(networkdetails.total_Network)}}</span>
           </template>
           <div>
             <b-tabs fill pills content-class="mt-3  f-left m-up checkcheck">
               <b-tab active>
                 <template slot="title">
-                  {{ $t('network.Followers') }} <span class="spa-color"> {{nFormatter(businessdetails.total_followers)}} </span>
+                  {{ $t('network.Followers') }} <span class="spa-color"> {{nFormatter(networkdetails.total_followers)}} </span>
                 </template>
                 <!-- <div class="s-comcard">{{networkdetails.Network_followers}}</div> -->
-                <div class="s-comcard"><Network :networks="networkdetails.Network_followers" /></div>
+                <div class="s-comcard"><Network :networks="networkdetails.Network_followers" @handleFollow="handleFollow" /></div>
               </b-tab>
               <b-tab>
                 <template slot="title">
-                   {{ $t('network.Following') }}<span class="spa-color"> {{nFormatter(businessdetails.totat_following)}} </span>
+                   {{ $t('network.Following') }}<span class="spa-color"> {{nFormatter(networkdetails.totat_following)}} </span>
                 </template>
-                <div class="s-comcard">{{networkdetails.Network_following}}</div>
-                <!-- <div class="s-comcard"><Network :networks="networkdetails.Network_following" /></div> -->
+                <!-- <div class="s-comcard">{{networkdetails.Network_following}}</div> -->
+                <div class="s-comcard"><Network :networks="networkdetails.Network_following" @handleFollow="handleFollow" /></div>
               </b-tab>
             </b-tabs>
           </div>
@@ -159,21 +159,21 @@ export default {
         console.log({ err: err });
       });
     },
-    async handleFollow(user) {
-      console.log("handleFollow", user)
-      const url = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
+    async handleFollow(Comdata) {
+      console.log("handleFollow", Comdata)
+      const url = Comdata.is_follow === 0 ? `/follow-community` : `/unfollow`;
       console.log("uri", url)
-      const nextFollowState = user.is_follow === 0 ? 1 : 0;
+      const nextFollowState = Comdata.is_follow === 0 ? 1 : 0;
       const data = {
-        id: user.id,
-        type: 'user',
+        id: Comdata.id,
+        type: Comdata.type,
       };
 
       await this.axios
         .post(url, data)
         .then(response => {
           console.log("response", response);
-          user.is_follow = nextFollowState;
+          Comdata.is_follow = nextFollowState;
         })
         .catch(err => console.log(err));
     },

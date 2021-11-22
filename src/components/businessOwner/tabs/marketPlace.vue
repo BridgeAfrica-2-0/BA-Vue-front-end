@@ -4,17 +4,10 @@
       <!-- MARKET HEADER BAR -->
       <div class="col-12 d-flex align-items-center justify-content-between">
         <p>
-          <b-icon
-            font-scale="1.8"
-            icon="shop"
-            variant="primary"
-            class="mr-2"
-          ></b-icon>
+          <b-icon font-scale="1.8" icon="shop" variant="primary" class="mr-2"></b-icon>
           <span class="font-weight-bold">Market</span>
         </p>
-        <b-button variant="outline-primary" @click="createProduct"
-          >Add Product</b-button
-        >
+        <b-button variant="outline-primary" @click="createProduct">Add Product</b-button>
       </div>
       <div class="col-12">
         <hr class="h-divider" />
@@ -25,61 +18,39 @@
         <Product :product="product" />
       </div>
       <b-col v-if="loader" class="load">
-        <b-spinner
-          style="width: 7rem; height: 7rem;"
-          variant="primary"
-        ></b-spinner>
+        <b-spinner style="width: 7rem; height: 7rem;" variant="primary"></b-spinner>
       </b-col>
       <b-col class="my-4 load" v-if="products.length < 1 && !loader">
         <p>No Products in Market !!</p>
       </b-col>
+    </div>
+
+    <button class="order-button" @click="displayOrders">my orders</button>
+    <div class="orders">
+      <Orders v-show="orders" ref="orders" />
+    </div>
+    <div class="archive">
+      <Archive v-show="archive" ref="archive" />
+    </div>
+    <div class="text-center">
+      <b-link @click="swap" >Archive</b-link>
     </div>
     <!-- ADDPRODUCT FORM -->
     <b-modal hide-footer title="Add product" v-model="showModal">
       <b-form>
         <b-row>
           <b-col cols="12" md="6">
-            <b-form-group
-              id="input-group-1"
-              label="Product Name"
-              label-for="input-1"
-              label-size="sm"
-            >
-              <b-form-input
-                id="input-1"
-                class="mt-1"
-                type="text"
-                v-model="newProduct.name"
-                required
-              ></b-form-input>
+            <b-form-group id="input-group-1" label="Product Name" label-for="input-1" label-size="sm">
+              <b-form-input id="input-1" class="mt-1" type="text" v-model="newProduct.name" required></b-form-input>
             </b-form-group>
 
-            <b-form-group
-              id="input-group-1"
-              label="Product Description"
-              label-for="input-1"
-              label-size="sm"
-            >
-              <b-textarea
-                id="input-1"
-                class="mt-2"
-                v-model="newProduct.description"
-                type="text"
-                required
-              ></b-textarea>
+            <b-form-group id="input-group-1" label="Product Description" label-for="input-1" label-size="sm">
+              <b-textarea id="input-1" class="mt-2" v-model="newProduct.description" type="text" required></b-textarea>
             </b-form-group>
           </b-col>
           <b-col cols="12" md="6">
             <div class="image-upload-wrap" @click="picImage">
-              <input
-                type="file"
-                name=""
-                @change="getImage"
-                accept="image/*"
-                id="image"
-                v-show="false"
-                required
-              />
+              <input type="file" name="" @change="getImage" accept="image/*" id="image" v-show="false" required />
               <a href="#" data-toggle="modal" data-target="#createalbumModal">
                 <div class="drag-text">
                   <i class="fa fa-plus"></i>
@@ -91,19 +62,8 @@
           </b-col>
         </b-row>
 
-        <b-form-group
-          id="input-group-1"
-          label="Product Price"
-          label-for="input-1"
-          label-size="sm"
-        >
-          <b-form-input
-            v-model="newProduct.price"
-            class="mt-1"
-            type="number"
-            id="price"
-            required
-          ></b-form-input>
+        <b-form-group id="input-group-1" label="Product Price" label-for="input-1" label-size="sm">
+          <b-form-input v-model="newProduct.price" class="mt-1" type="number" id="price" required></b-form-input>
         </b-form-group>
         <b-form-checkbox
           id="checkbox-1"
@@ -115,35 +75,17 @@
           This Product Is On Discount
         </b-form-checkbox>
 
-        <b-form-group
-          id="conditions"
-          label="Conditions"
-          label-for="input-1"
-          label-size="sm"
-        >
-          <b-form-input
-            v-model="newProduct.condition"
-            class="mt-1"
-            id="conditions"
-            required
-          ></b-form-input>
+        <b-form-group id="conditions" label="Conditions" label-for="input-1" label-size="sm">
+          <b-form-input v-model="newProduct.condition" class="mt-1" id="conditions" required></b-form-input>
         </b-form-group>
 
         <!-- CHECKBOX FLEX BOX -->
         <div class="d-flex justify-content-between align-items-start flex-wrap">
-          <b-form-checkbox
-            value="1"
-            v-model="newProduct.is_service"
-            unchecked-value="0"
-          >
+          <b-form-checkbox value="1" v-model="newProduct.is_service" unchecked-value="0">
             This Item Is A Service ?
           </b-form-checkbox>
 
-          <b-form-checkbox
-            value="1"
-            v-model="newProduct.in_stock"
-            unchecked-value="0"
-          >
+          <b-form-checkbox value="1" v-model="newProduct.in_stock" unchecked-value="0">
             In stock
           </b-form-checkbox>
 
@@ -152,33 +94,11 @@
           </b-form-checkbox>
         </div>
         <!-- TAX and KG -->
-        <b-form-group
-          id="tax"
-          label="Tax"
-          label-for="input-tax"
-          label-size="sm"
-        >
-          <b-form-input
-            v-model="newProduct.tax"
-            class="mt-1"
-            id="tax"
-            type="number"
-            required
-          ></b-form-input>
+        <b-form-group id="tax" label="Tax" label-for="input-tax" label-size="sm">
+          <b-form-input v-model="newProduct.tax" class="mt-1" id="tax" type="number" required></b-form-input>
         </b-form-group>
-        <b-form-group
-          id="kg"
-          label="Kilogramme"
-          label-for="input-kg"
-          label-size="sm"
-        >
-          <b-form-input
-            v-model="newProduct.kg"
-            class="mt-1"
-            id="kg"
-            type="number"
-            required
-          ></b-form-input>
+        <b-form-group id="kg" label="Kilogramme" label-for="input-kg" label-size="sm">
+          <b-form-input v-model="newProduct.kg" class="mt-1" id="kg" type="number" required></b-form-input>
         </b-form-group>
         <!-- CATEGORIES -->
         <div class="mt-2">
@@ -214,25 +134,11 @@
         <div>
           <b-card no-body>
             <b-tabs pills card vertical>
-              <b-tab
-                :title="filters.name"
-                v-for="filters in filterselectvalue"
-                :key="filters.id"
-                active
+              <b-tab :title="filters.name" v-for="filters in filterselectvalue" :key="filters.id" active
                 ><b-card-text>
                   <b-form-group label="Filters" class="colorblack">
-                    <b-form-checkbox-group
-                      id=""
-                      class="colorblack"
-                      v-model="select_filterss"
-                      name="filters"
-                    >
-                      <b-form-checkbox
-                        class="colorblack"
-                        v-for="fil in filters.filters"
-                        :key="fil.id"
-                        :value="fil.id"
-                      >
+                    <b-form-checkbox-group id="" class="colorblack" v-model="select_filterss" name="filters">
+                      <b-form-checkbox class="colorblack" v-for="fil in filters.filters" :key="fil.id" :value="fil.id">
                         {{ fil.name }}
                       </b-form-checkbox>
                     </b-form-checkbox-group>
@@ -255,49 +161,56 @@
 </template>
 
 <script>
-import Product from "../product";
-import axios from "axios";
-import MultiSelect from "vue-multiselect";
+import Product from '../product';
+import axios from 'axios';
+import MultiSelect from 'vue-multiselect';
+import Orders from '@/views/businessOwnerOrders';
+import Archive from '../archive';
 export default {
-  name: "MarketPlace",
+  name: 'MarketPlace',
   components: {
     MultiSelect,
     Product,
+    Orders,
+    Archive,
   },
   data() {
     return {
+      orders: true,
+      archive: false,
+
       showModal: false,
       load: false,
       loader: false,
       newProduct: {
-        name: "",
-        description: "",
+        name: '',
+        description: '',
         picture: null,
-        price: "",
-        in_stock: "",
+        price: '',
+        in_stock: '',
         on_discount: false,
         discount_price: 0,
-        condition: "",
+        condition: '',
         is_service: null,
         status: 1,
-        business_id: "",
-        categoryId: "",
-        subCategoryId: "",
-        filterId: "",
-        tax: "",
-        kg: "",
+        business_id: '',
+        categoryId: '',
+        subCategoryId: '',
+        filterId: '',
+        tax: '',
+        kg: '',
       },
       products: [],
-      val: "",
-      msg: "",
+      val: '',
+      msg: '',
       success: false,
       multiselecvalue: [],
       filterselectvalue: [],
       select_filterss: [],
       multiselec: [
-        { name: "Vue.js", code: "vu" },
-        { name: "Javascript", code: "js" },
-        { name: "Open Source", code: "os" },
+        { name: 'Vue.js', code: 'vu' },
+        { name: 'Javascript', code: 'js' },
+        { name: 'Open Source', code: 'os' },
       ],
     };
   },
@@ -320,15 +233,28 @@ export default {
     },
   },
   methods: {
+    swap(){
+      console.log("orders: ",this.orders);
+      console.log("archive: ",this.archive);
+      this.orders = !this.orders;
+      this.archive = !this.archive;
+      console.log("-------------------");
+      console.log("orders: ",this.orders);
+      console.log("archive: ",this.archive);
+    },
+    displayOrders() {
+      this.status = !this.status;
+      console.log('----' + this.status);
+    },
     getProducts: async function() {
       await axios
-        .get("/market")
-        .then((res) => {
+        .get('/market')
+        .then(res => {
           console.log(res.data);
           this.products = res.data.data;
           console.log(this.products);
         })
-        .catch((error) => {
+        .catch(error => {
           console.log(error);
         })
         .finally(() => {
@@ -342,27 +268,25 @@ export default {
       //init data
       this.newProduct.business_id = this.$route.params.id;
       this.newProduct.categoryId = this.multiselecvalue.id;
-      this.newProduct.subCategoryId = this.filterselectvalue
-        .map((el) => el.subcategory_id)
-        .join();
+      this.newProduct.subCategoryId = this.filterselectvalue.map(el => el.subcategory_id).join();
       this.newProduct.filterId = this.select_filterss.join();
 
       //transform product data in form data
       for (const key in this.newProduct) {
         fd.append(key, this.newProduct[key]);
       }
-      console.log("NEW PRODUCT", this.newProduct);
+      console.log('NEW PRODUCT', this.newProduct);
       axios
-        .post("market", fd)
-        .then((res) => {
+        .post('market', fd)
+        .then(res => {
           this.load = false;
-          (this.success = true), (this.val = "success");
-          this.msg = "Operation was successful !!";
+          (this.success = true), (this.val = 'success');
+          this.msg = 'Operation was successful !!';
           this.getProducts();
         })
-        .catch((err) => {
+        .catch(err => {
           this.load = false;
-          (this.success = true), (this.val = "danger");
+          (this.success = true), (this.val = 'danger');
           this.msg = "Something wen't wrong !!";
 
           setTimeout(() => {
@@ -371,7 +295,7 @@ export default {
         });
     },
     picImage() {
-      document.querySelector("#image").click();
+      document.querySelector('#image').click();
     },
     getImage(e) {
       console.log(e.target.files[0]);
@@ -383,8 +307,8 @@ export default {
     subcategories() {
       //get subcategories
       let formData2 = new FormData();
-      formData2.append("categoryId", this.selectedcategories);
-      this.$store.dispatch("auth/subcategories", formData2);
+      formData2.append('categoryId', this.selectedcategories);
+      this.$store.dispatch('auth/subcategories', formData2);
     },
     addTag(newTag) {
       const tag = {
@@ -409,12 +333,19 @@ export default {
     this.getProducts();
     //get categories for current business
     const businessId = this.$route.params.id;
-    this.$store.dispatch("market/getBuCategories", businessId);
+    this.$store.dispatch('market/getBuCategories', businessId);
   },
 };
 </script>
 
 <style scoped>
+.order-button {
+  height: 40px;
+  color: white;
+  border-radius: 5px;
+  border: none;
+  background-color: #e75c18;
+}
 .load {
   display: flex;
   justify-content: center;

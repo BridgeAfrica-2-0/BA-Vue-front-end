@@ -1,48 +1,58 @@
 <template>
-  <div class="mx-auto" style="overflow-y: hidden;">
+  <div class="mx-auto" style="overflow-y: hidden">
     <navbar></navbar>
     <head-page></head-page>
-    <div class=" container-fluid text-justify   corps prof center-content">
-      <b-row class=""> 
+    <div class="container-fluid text-justify corps prof center-content">
+      <b-row class="">
         <b-col cols="12" class="p-3">
-          <b-tabs content-class="mt-3" pills small fill  v-model="tabIndex">
-            <b-tab :title="`${$t('profile_owner.posts')}`"   href="#post">
+          <b-tabs content-class="mt-3" pills small fill lazy v-model="tabIndex">
+            <b-tab :title="$t('profileowner.Posts')" href="#post">
               <Post />
             </b-tab>
-            <b-tab title="About" href="#about"><About /></b-tab>
-            <b-tab title="Business"  href="#business" class="m-0 p-0">
+            <b-tab :title="$t('profileowner.About')" href="#about"><About /></b-tab>
+            <b-tab :title="$t('profileowner.Business')" href="#business" class="m-0 p-0">
               <bussiness />
             </b-tab>
-            <b-tab title="Media" href="#media">
+            <b-tab :title="$t('profileowner.Media')" href="#media">
               <Media type="profile" />
             </b-tab>
-            <b-tab title="Networks">
+            <b-tab :title="$t('profileowner.Networks')">
               <Networks />
             </b-tab>
-            
-            <!-- <b-tab :title="`${$t('profile_owner.media')}`"   href="#media"><Media /></b-tab> -->
-            <b-tab :title="`${$t('profile_owner.community')}`"  href="#community" class="m-0 p-0"
-              ><following></following>  </b-tab>
-            
+
+            <b-tab :title="$t('profileowner.Community')" href="#community" class="m-0 p-0">
+              <following />
+            </b-tab>
           </b-tabs>
         </b-col>
       </b-row>
     </div>
+    <p class="text-center">
+      <span class="display-inline">
+        <b-link @click="$i18n.locale = 'en'"> {{ $t('auth.english') }}</b-link>
+        <span class="vl"></span>
+        <b-link class="ml-2" @click="$i18n.locale = 'fr'">
+          {{ $t('auth.french') }}
+        </b-link>
+      </span>
+      Bridge Africa © 2021
+    </p>
   </div>
 </template>
 
 <script>
-import navbar from "@/components/navbar";
-import headPage from "@/components/ownerHeadpage";
-import Post from "@/components/owner/tabs/posts";
-import About from "@/components/owner/tabs/about";
-import Media from "@/components/owner/tabs/media";
-import Networks from "@/components/owner/tabs/networks";
-import Following from "@/components/owner/tabs/memberNetwork";
-import Bussiness from "@/components/owner/tabs/bussiness";
+import navbar from '@/components/navbar';
+import headPage from '@/components/ownerHeadpage';
+import Post from '@/components/owner/tabs/posts';
+import About from '@/components/owner/tabs/about';
+import Media from '@/components/owner/tabs/media';
+import Networks from '@/components/owner/tabs/networks';
+import Following from '@/components/owner/tabs/memberNetwork';
+import Bussiness from '@/components/owner/tabs/bussiness';
+import { mapMutations } from 'vuex';
 
 export default {
-  name: "profileOwner",
+  name: 'profileOwner',
 
   components: {
     Bussiness,
@@ -55,117 +65,107 @@ export default {
     Networks,
   },
   data() {
-    return {   
-       tabIndex:null,
-       tabs: ['#post','#about', '#business', '#media', '#community'],
-
+    return {
+      tabIndex: null,
+      tabs: ['#post', '#about', '#business', '#media', '#community'],
     };
   },
 
-   watch:{
-    $route (to, from){
-        console.log(to.hash);
-        this.tabIndex = this.tabs.findIndex(tab => tab === to.hash);
-        
-        console.log(from);
-    }
+  watch: {
+    $route(to, from) {
+      console.log(to.hash);
+      this.tabIndex = this.tabs.findIndex((tab) => tab === to.hash);
+
+      console.log(from);
+    },
   },
+
   methods: {
+    ...mapMutations({
+      auth: 'auth/profilConnected',
+    }),
+    async getAuth() {
+      const response = await this.$repository.share.switch(null, 'reset');
+
+      if (response.success) this.auth(response.data);
+    },
 
     ownerPost() {
       this.$store
-        .dispatch("UserProfileOwner/ownerPost", this.url_data)
+        .dispatch('UserProfileOwner/ownerPost', this.url_data)
         .then(() => {
-          console.log("hey yeah");
+          console.log('hey yeah');
         })
-        .catch(err => {
+        .catch((err) => {
           console.log({ err: err });
         });
-    }
+    },
   },
-
- 
   computed: {},
-   created() {
-      this.tabIndex = this.tabs.findIndex(tab => tab === this.$route.hash);
-      
-      this.$store
-      .dispatch("profile/loadUserPostIntro", null)
+
+  created() {
+    this.getAuth()
+    this.tabIndex = this.tabs.findIndex((tab) => tab === this.$route.hash);
+
+    this.$store
+      .dispatch('profile/loadUserPostIntro', null)
       .then((response) => {
-         console.log(response);
+        console.log(response);
       })
       .catch((error) => {
         console.log(error);
       });
   },
-  mounted(){
+  mounted() {
+    this.$store
+      .dispatch('profile/Tcommunity', null)
+      .then((response) => {})
+      .catch((error) => {
+        console.log({ error: error });
+      });
 
     this.$store
-      .dispatch("profile/Tcommunity", null)
-      .then((response) => {
-       
-      })  
+      .dispatch('follower/UcommunityFollower', null)
+      .then((response) => {})
       .catch((error) => {
-        console.log({error:error});
-      });
- 
-      this.$store
-      .dispatch("follower/UcommunityFollower", null)
-      .then((response) => {
-       
-      })
-      .catch((error) => {
-        console.log({error:error});
+        console.log({ error: error });
       });
 
-      this.$store
-      .dispatch("profile/UcommunityFollowing", null)
-      .then((response) => {
-       
-      })
+    this.$store
+      .dispatch('profile/UcommunityFollowing', null)
+      .then((response) => {})
       .catch((error) => {
-        console.log({error:error});
+        console.log({ error: error });
       });
 
-     
-   
-      this.$store
-      .dispatch("profile/BcommunityFollower", null)
-      .then((response) => {
-       
-      })
+    this.$store
+      .dispatch('profile/BcommunityFollower', null)
+      .then((response) => {})
       .catch((error) => {
-        console.log({error:error});
+        console.log({ error: error });
       });
 
-     
-      this.$store
-      .dispatch("profile/BcommunityFollowing", null)
-      .then((response) => {
-       
-      })
+    this.$store
+      .dispatch('profile/BcommunityFollowing', null)
+      .then((response) => {})
       .catch((error) => {
-        console.log({error:error});
+        console.log({ error: error });
       });
 
-      this.$store
-      .dispatch("profile/NcommunityFollower", null)
-      .then((response) => {
-       
-      })
+    this.$store
+      .dispatch('profile/NcommunityFollower', null)
+      .then((response) => {})
       .catch((error) => {
-        console.log({error:error});
+        console.log({ error: error });
       });
 
-      this.$store
-      .dispatch("profile/NcommunityFollowing", null)
-      .then((response) => {
-       
-      })
+    this.$store
+      .dispatch('profile/NcommunityFollowing', null)
+      .then((response) => {})
       .catch((error) => {
-        console.log({error:error});
+        console.log({ error: error });
       });
-  }
+  },
 };
 </script>
 

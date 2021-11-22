@@ -1,12 +1,16 @@
 <template>
   <div id="app" class="" ref="formContainer">
+    <!-- <notifications group="foo" /> -->
     <router-view />
   </div>
 </template>
 <script>
 /* eslint-disable */
 
-export default {};
+import { Redis } from '@/mixins';
+export default {
+  mixins: [Redis],
+};
 </script>
 
 
@@ -17,7 +21,7 @@ export default {};
 @import "./assets/css/style.css";
 @import "./assets/css/bootstrap.css";
 
-@import "./assets/icon/iconfont.css";
+@import './assets/icon/iconfont.css';
 
 
 

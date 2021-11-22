@@ -1,61 +1,121 @@
 <template>
   <div>
-    <b-row>
+    <b-row> 
       <b-col lg="6" sm="12" class="p-2" v-for="item in businesses" :key="item.id">
         <div class="people-style shadow">
           <b-row>
-            <b-col md="3" xl="3" lg="3" cols="5" sm="3">
-              <div class="center-img">
+
+            <b-col md="8" xl="8" lg="12" cols="12" sm="8">
+              <div class="d-inline-flex">   
+              <div class="center-img ">
                 <splide :options="options" class="r-image">
                   <splide-slide cl>
                     <img :src="item.picture" class="r-image" />
                   </splide-slide>
                 </splide>
-              </div>
-            </b-col>
-            <b-col md="5" cols="7" lg="7" xl="5" sm="5">
+              </div>   <div class="pl-3 flx100"> 
               <p class="textt">
                 <strong class="title"> {{ item.name }} </strong> <br />
-                {{ item.category }}
+               
+            <span v-for="cat in item.category" :key="cat.name">   {{cat.name}}  </span>
                 <br />
                 {{ count(item.followers) }}
-                {{ $t('business.community') }} <br />
+                {{ $t('dashboard.Community') }} <br />
 
-                <span class="location"> <b-icon-geo-alt class="ico"></b-icon-geo-alt>{{ item.country }} </span>
+                <span class="location">
+                  <b-icon-geo-alt class="ico"></b-icon-geo-alt
+                  >{{ item.country }}
+                </span>
                 <br />
-                <read-more
-                  more-str="read more"
-                  class="readmore"
-                  :text="item.about_business"
-                  link="#"
-                  less-str="read less"
-                  :max-chars="35"
-                >
-                </read-more>
+       <read-more
+              more-str="read more"
+              class="readmore"
+              :text="item.about_business"
+              link="#"
+              less-str="read less"
+              :max-chars="100"
+            >
+            </read-more>
               </p>
-            </b-col>
+               </div>
+               </div>
+            </b-col>     
 
             <b-col lg="12" xl="4" md="4" cols="12" sm="4">
               <div class="s-button">
                 <b-row>
-                  <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2 text-center">
-                    <b-button block size="sm" class="b-background shadow" variant="primary">
-                      <i class="fas fa-user-plus fa-lg btn-icon"></i>
-                      <span class="btn-com">{{ $t('business.community') }}</span>
+                  <b-col
+                    md="12"
+                    lg="4"
+                    xl="12"
+                    sm="12"
+                    cols="4"
+                    class="mt-2 text-center"
+                  >
+                 
+
+
+                    
+
+
+
+                  <b-button
+                  block
+                  size="sm"
+                  :disabled="disable"
+                  :class="item.is_follow !== 0 && 'u-btn'"
+                  variant="primary"
+                  @click="handleFollow(item)"
+                >
+                 
+                  <i class="fas fa-lg btn-icon" :class="item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"></i>
+                  <span class="btn-com"> {{ $t('dashboard.Community') }}</span>
+                </b-button>
+
+
+
+
+
+
+
+
+                  </b-col>
+
+                  <b-col
+                    md="12"
+                    lg="4"
+                    xl="12"
+                    sm="12"
+                    cols="4"
+                    class="mt-2 text-center"
+                  >
+                    <b-button
+                      block
+                      size="sm"
+                      class="b-background shadow "
+                      variant="primary"
+                    >
+                      <i class="fas fa-envelope   fa-lg btn-icon "></i>
+                      <span class="btn-text">{{ $t('dashboard.Messages') }}</span>
                     </b-button>
                   </b-col>
 
-                  <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2 text-center">
-                    <b-button block size="sm" class="b-background shadow" variant="primary" @click="cta(item)">
-                      <i class="fas fa-envelope fa-lg btn-icon"></i>
-                      <span class="btn-text">{{ $t('business.messages') }}</span>
-                    </b-button>
-                  </b-col>
-
-                  <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2 text-center">
-                    <b-button block size="sm" class="b-background shadow" variant="primary">
-                      <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
-                      <span class="btn-text">{{ $t('business.direction') }}</span>
+                  <b-col
+                    md="12"
+                    lg="4"
+                    xl="12"
+                    sm="12"
+                    cols="4"
+                    class="mt-2 text-center"
+                  >
+                    <b-button
+                      block
+                      size="sm"
+                      class="b-background shadow "
+                      variant="primary"
+                    >
+                      <i class="fas fa-map-marked-alt  fa-lg btn-icon "></i>
+                      <span class="btn-text">{{ $t('dashboard.Direction') }}</span>
                     </b-button>
                   </b-col>
                 </b-row>
@@ -65,105 +125,155 @@
         </div>
       </b-col>
     </b-row>
-    <infinite-loading @infinite="infiniteHandler"></infinite-loading>
+     <infinite-loading @infinite="infiniteHandler"></infinite-loading>
   </div>
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 export default {
-  props: ['type'],
+  props: ["type"],
   data() {
     return {
-      page: 1,
+      page: 2,
+      disable:false,
       options: {
         rewind: true,
         autoplay: true,
         perPage: 1,
         pagination: false,
 
-        type: 'loop',
-        perMove: 1,
-      },
+        type: "loop",
+        perMove: 1
+      }
     };
   },
 
-  computed: {
-    businesses() {
-      if (this.type == 'Follower') {
-        return this.$store.state.profile.BcommunityFollower.business_followers;
-      } else {
-        return this.$store.state.profile.BcommunityFollowing.business_following;
-      }
-    },
-    activeAccount() {
-      return this.$store.getters['auth/profilConnected'];
-    }
+  computed:{
+   
+    businesses(){
+
+      if(this.type=="Follower"){ 
+
+      return  this.$store.state.profile.BcommunityFollower.business_followers;  
+
+       }else{
+
+         return  this.$store.state.profile.BcommunityFollowing.business_following; 
+       }
+   }
+
   },
 
   methods: {
-    cta(data) {
-      console.log(data);
-      this.$store.commit('businessChat/setSelectedChat', data);
-      let path = '';
-      if (this.activeAccount.user_type == 'business') {
-        path = '/business_owner/' + this.activeAccount.id;
-      } else if (this.activeAccount.user_type == 'network') {
-        path = '/';
-      } else path = '/messaging';
 
-      // this.$router.push({ path: `${path}`, query: { tabId: 1, msgTabId: 1 } });
-      this.$router.push({ path: `/business_owner/${this.activeAccount.id}`, query: { tabId: 1, msgTabId: 1 } });
+
+
+     async handleFollow(user) {
+       this.disable=true;
+      const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
+      const nextFollowState = user.is_follow === 0 ? 1 : 0;
+      const data = {
+        id: user.id,
+        type: 'business',
+      };
+      
+
+      console.log(data);
+      await axios
+        .post(uri, data)
+        .then(response => {
+
+          console.log(response);
+          user.is_follow = nextFollowState;
+            this.disable=false;
+        })
+        .catch(err => console.log({err:err}));
+          this.disable=false;
     },
+
+
+
+
     count(number) {
       if (number >= 1000000) {
-        return number / 1000000 + 'M';
+        return number / 1000000 + "M";
       }
       if (number >= 1000) {
-        return number / 1000 + 'K';
+        return number / 1000 + "K";
       } else return number;
     },
 
-    infiniteHandler($state) {
+
+
+
+          infiniteHandler($state) { 
+
+
+            
+
       let url = null;
 
-      if (this.type == 'Follower') {
-        url = 'profile/business/follower/';
-      } else {
-        url = 'profile/business/following/';
-      }
+         if(this.type=="Follower"){  
+          url="profile/business/follower/"
+         }else{
+          url="profile/business/following/";
+         }
       axios
         .get(url + this.page)
         .then(({ data }) => {
-          if (this.type == 'Follower') {
-            if (data.data.business_followers.length) {
-              this.businesses.push(...data.data.business_followers);
-              this.page += 1;
+        
+          if(this.type=="Follower"){  
 
-              $state.loaded();
-            } else {
-              $state.complete();
-            }
-          } else {
-            if (data.data.business_following.length) {
-              this.businesses.push(...data.data.business_following);
-              this.page += 1;
 
-              $state.loaded();
-            } else {
+          if (data.data.business_followers.length) {
+            
+         
+            this.businesses.push(...data.data.business_followers); 
+            this.page += 1;
+            
+            $state.loaded();
+
+           }else{
               $state.complete();
-            }
+             
+           }
+        
+          }else{
+
+
+
+
+             if (data.data.business_following.length) {
+            
+         
+            this.businesses.push(...data.data.business_following); 
+            this.page += 1;
+            
+            $state.loaded();
+
+           }else{
+              $state.complete();
+             
+           }
+
           }
+           
         })
         .catch((err) => {
           console.log({ err: err });
         });
     },
-  },
+
+
+  }
 };
 </script>
 
 <style scoped>
+.flx100{
+    flex-basis:80% !important;
+}
 @media only screen and (min-width: 768px) {
   .btn-text {
     margin-left: 8px;
@@ -230,13 +340,13 @@ export default {
     color: black;
 
     line-height: 35px;
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 
   .textt {
     color: #000;
 
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 12px;
     line-height: 30px;
@@ -250,7 +360,6 @@ export default {
     padding: 1px;
     text-align: left;
 
-    margin-left: -30px;
 
     margin-right: -5px;
 
@@ -283,13 +392,13 @@ export default {
     color: black;
 
     line-height: 35px;
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 
   .textt {
     color: #000;
 
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
@@ -303,7 +412,7 @@ export default {
     padding: 1px;
     text-align: left;
 
-    margin-left: 30px;
+    margin-left: 60px;
 
     margin-right: -5px;
 
@@ -386,7 +495,7 @@ export default {
     border-bottom-right-radius: 5px;
 
     background: white;
-    height: 100%;
+   height: 100%;
     background-color: #fff;
     background-clip: border-box;
     border: 1px solid rgba(0, 0, 0, 0.125);

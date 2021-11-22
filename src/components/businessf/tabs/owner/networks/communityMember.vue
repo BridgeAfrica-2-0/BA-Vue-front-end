@@ -24,7 +24,7 @@
                         cols="6"
                         
                         xl="12"
-                        class="mt-lg-2"
+                        class="mt-2 mt-lg-1 mt-xl-2"
                       >
                        <div class="mt-3 mt-lg-0 mt-xl-0 username">
                           <b> howty Itz blec </b>
@@ -33,27 +33,12 @@
 
                       <b-col md="6" lg="12" cols="6" xl="12" class="mt-3 mt-lg-1 mt-xl-3">
                         <h6 class="follower m-15">
-                          {{ member.communityNum }}
-                          Community
+                          {{  member.communityNum }}
+                          {{ $t('network.Community') }}
                         </h6>
                       </b-col>
-                      <b-col
-                        @click="$emit('BlockUser', member.id)"
-                        md="6"
-                        lg="12"
-                        cols="6"
-                       
-                        xl="12"
-                        class="mt-3 mt-lg-1 mt-xl-3"
-                        style="cursor: pointer"
-                      >
-                        <b-icon
-                          font-scale="1"
-                          icon="exclamation-octagon"
-                          v-b-tooltip.hover
-                          title="Block This User"
-                          variant="danger"
-                        ></b-icon>
+                      <b-col @click="$emit('BlockUser', member.id)" md="6" lg="12" cols="6" xl="12" class="mt-1 mt-lg-1 mt-xl-2" style="cursor:pointer;">
+                        <b-icon font-scale="1" icon="exclamation-octagon" v-b-tooltip.hover title="Block This User" variant="danger"></b-icon>
                       </b-col>
                     </b-row>
                   </div>
@@ -111,9 +96,15 @@
                         xl="12"
                         class="mt-lg-2"
                       >
-                       <div class="mt-3 mt-lg-0 mt-xl-0 username">
-                          <b> howty Itz blec </b>
-                       </div>
+                        <b-button
+                          block
+                          variant="primary"
+                          size="sm"
+                          class="b-background flexx pobtn shadow"
+                        >
+                          <i class="fas fa-envelope fa-lg btn-icon"></i>
+                          <span class="btn-text">{{ $t('network.Message') }}</span>
+                        </b-button>
                       </b-col>
 
                       <b-col
@@ -143,7 +134,7 @@
                       <b-col md="6" lg="12" cols="6" xl="12" class="mt-2 mt-lg-2 mt-xl-2 btn-2 center">
                         <b-button block size="sm" class="b-background flexx pobtn shadow" variant="primary">
                           <i class="fas fa-user-plus fa-lg btn-icon"></i>
-                          <span class="btn-com">Community</span>
+                          <span class="btn-com">{{ $t('network.Community') }}</span>
                         </b-button>
                       </b-col>
                     </b-row>

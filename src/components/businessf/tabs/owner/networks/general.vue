@@ -1,265 +1,65 @@
 <template>
-
-  <div >
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-   
-    <div class="mt-3  d-block d-md-none" v-if="selectedIdd == '2'" >  
-          <Notification />  
-           
-   </div> 
-
-
-
-   
-    <div class="mt-3  d-block d-md-none" v-if="selectedIdd == '3'" >  
-            <MemberShip />  
-           
-   </div> 
-
-
-
-
-
-    <div class="mt-3  d-block d-md-none" v-if="selectedIdd == '4'" >        
-            <PendingPost />
-           
-   </div> 
-
-
-
-
-    <div class="mt-3  d-block d-md-none" v-if="selectedIdd == '5'" >  
-           <KeywordAlert />
-           
-   </div> 
-
-
-
-
-
-    <div class="mt-3 d-block d-md-none" v-if="selectedIdd == '6'" >  
-
-
-         
-    
- <div class="d-block d-md-none" style="margin-top: 30px;" >
-   
-
-
-  <ly-tab    
-    v-model="seetings_id"
-    :items="items"
-    :options="options"
-    class="center-ly"
-    vertical
-   >
-  </ly-tab>
-
-
- </div>   
-           
-  
-<div class="mt-3 d-block d-md-none" v-if="seetings_id == '0'" >  
-           <General />
-
-
-
-
-</div>  
-
-
-
-
-
-
-
-<div class="mt-3 d-block d-md-none" v-if="seetings_id == '1'" >  
-         <Roles /> 
-
-
-
-
-</div> 
-
-
-
- 
-<div class="mt-3 d-block d-md-none" v-if="seetings_id == '2'" >  
-          <Settings />
-
-
-
-
-</div> 
-
-
-
-
-
-
-
-
- 
-<div class="mt-3 d-block d-md-none" v-if="seetings_id == '3'" >  
-          <Blocking />
-
-
-
-
-</div> 
-
-
-
-
-
-
-   </div> 
-
-
-
-<div class="mt-3 d-block d-md-none" v-if="selectedIdd == '7'" >  
-             <Settings />
-           
-   </div> 
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-   <b-row class="center-content d-none d-md-block">    <b-col cols="10">    
-
-
-
-
-
-    
-
-      <div class="bv-example-row">   
-        
-        <div>
-          <b-tabs pills  v-model="tabIndex"    vertical  class="itzlala"   nav-wrapper-class="w-15" >
-            <b-tab  title="Notifications">
-             
-
-              <b-card-text> <Notification /> </b-card-text
-            ></b-tab>
-
-
-            
-        <b-tab title="General">
-              
-              <b-card-text> <General /> </b-card-text
-            ></b-tab>
-
-
-       
-
-        <b-tab title="Network Roles">
-              
-              <b-card-text> <Roles /> </b-card-text
-            ></b-tab>
-
-
-            
-            <b-tab title="Network Info">
-             
-              <b-card-text> <Settings /> </b-card-text
-            ></b-tab>
-
-
-
-           
-
-
-
-
-
-
-
-
-
-
-             <b-tab title="Member Request" >
-             
-
-              <b-card-text> <MemberShip /> </b-card-text
-            ></b-tab>         
-
-
-
-          
-            <b-tab title="Pending Post">
-              
-              <b-card-text> <PendingPost /> </b-card-text
-            ></b-tab>
-
-
-
-
-
-
-            <b-tab title="Keyword Alert">                       
-             
-              <b-card-text> <KeywordAlert /> </b-card-text
-            ></b-tab>
-
-           
-
-
-           
-           <b-tab title="Blocking">
-             
-              <b-card-text> <Blocking /> </b-card-text
-            ></b-tab>
-
-  
-
-
-
-
-
-
-            
-
-
-          </b-tabs>
-
-
-
-          
+  <div>
+    <div class="mt-3 d-block d-md-none" v-if="seetings_id == '3'">
+      <Blocking />
+    </div>
+
+    <div class="mt-3 d-block d-md-none" v-if="selectedIdd == '7'">
+      <Settings />
+    </div>
+
+    <b-row class="center-content d-none d-md-block">
+      <b-col cols="10">
+        <div class="bv-example-row">
+          <div>
+            <b-tabs
+              pills
+              v-model="tabIndex"
+              vertical
+              class="itzlala"
+              nav-wrapper-class="w-15"
+            >
+              <b-tab :title="$t('network.Notifications')">
+                <b-card-text> <Notification /> </b-card-text
+              ></b-tab>
+
+              <b-tab :title="$t('network.General')">
+                <b-card-text> <General /> </b-card-text
+              ></b-tab>
+
+              <b-tab :title="$t('network.Network_Roles')">
+                <b-card-text> <Roles /> </b-card-text
+              ></b-tab>
+
+              <b-tab :title="$t('network.Network_Info')">
+                <b-card-text> <Settings /> </b-card-text
+              ></b-tab>
+
+              <b-tab :title="$t('network.Member_Request')">
+                <b-card-text> <MemberShip /> </b-card-text
+              ></b-tab>
+
+              <b-tab :title="$t('network.Pending_Post')">
+                <b-card-text> <PendingPost /> </b-card-text
+              ></b-tab>
+
+              <b-tab :title="$t('network.Keyword_Alert')">
+                <b-card-text> <KeywordAlert /> </b-card-text
+              ></b-tab>
+
+              <b-tab :title="$t('network.Blocking')">
+                <b-card-text> <Blocking /> </b-card-text
+              ></b-tab>
+            </b-tabs>
+          </div>
         </div>
-      </div>
 
-      <br />
+        <br />
 
-      <br />
-
-
-       </b-col>    <b-col cols="2">    </b-col>   </b-row>
-   
+        <br />
+      </b-col>
+      <b-col cols="2"> </b-col>
+    </b-row>
   </div>
 </template>
 
@@ -283,102 +83,47 @@ import LyTab from "@/tab/src/index.vue";
 
 
 export default {
-  name: "settings",
+  name: 'settings',
 
-   props: ["currenttab"],
+  props: ['currenttab'],
 
-  
-  
-
-   watch: { 
-
-
-
-
-currenttab: {
-    immediate: true,
-    handler(newVal) {
-        
-      console.log(newVal)
-
-      
-           if(newVal==3){
-            
-            this.selectedIdd ="3";
-
-            this.tabIndex="1"
-
-            
-            
-           }
+  watch: {
+    currenttab: {
+      immediate: true,
+      handler(newVal) {
+        console.log(newVal);
 
 
-             if(newVal==2){
-            
-           this.selectedIdd ="2";
-            this.tabIndex="0";
-       
-            
-           }
+        if (newVal == 2) {
+          this.selectedIdd = '2';
+          this.tabIndex = '0';
+        }
 
+        if (newVal == 3) {
+          this.selectedIdd = '3';
+          this.tabIndex = '4';
+        }
 
-           
+        if (newVal == 4) {
+          this.selectedIdd = '4';
+          this.tabIndex = '2';
+        }
 
-  if(newVal==4){
-            
-            this.selectedIdd ="4";
-           this.tabIndex="2";
-            
-           }
+        if (newVal == 5) {
+          this.selectedIdd = '5';
+          this.tabIndex = '3';
+        }
 
+        if (newVal == 6) {
+          this.selectedIdd = '6';
+          this.tabIndex = '1';
+        }
 
-
-
-
-           
-  if(newVal==5){
-
-    
-            
-            this.selectedIdd ="5";
-           this.tabIndex="3";
-            
-           }
-
-
-
-
-
-             
-  if(newVal==6){
-
-    
-            
-            this.selectedIdd ="6";
-           this.tabIndex="1";
-            
-           }
-
-
-
-
-  
-  if(newVal==7){
-
-    
-            
-            this.selectedIdd ="7";
-           this.tabIndex="5";
-            
-           }
-
-
-
-
-
-
-
-
+        if (newVal == 7) {
+          this.selectedIdd = '7';
+          this.tabIndex = '5';
+        }
+      },
     },
   },
 
@@ -443,8 +188,7 @@ currenttab: {
 </script>
 
 <style scoped>
-
-.border-none{
+.border-none {
   border: none;
 }
 .card-header {
@@ -474,20 +218,11 @@ currenttab: {
   float: right;
 }
 
-
 @media only screen and (max-width: 768px) {
-
-.t-color {
-
-  font-size: 16px;
-
+  .t-color {
+    font-size: 16px;
+  }
 }
-
-
-
-}
-
-
 
 .f-left {
   float: left;
@@ -520,61 +255,42 @@ currenttab: {
   }
 }
 
-
-
-.center-content{
-
-
+.center-content {
   padding-right: 20px;
   padding-left: 20px;
+}
 
-}   
-
-
-.w-15{
+.w-15 {
   width: 15%;
 }
 
-.card-text{          
-
-  margin-left: 100px;       
+.card-text {
+  margin-left: 100px;
 }
 
-
-
-.t-color:hover{
-
-  color:#cc4d0d;
+.t-color:hover {
+  color: #cc4d0d;
 }
-
 
 t-color:focus {
-
-  color:#f1eae7;
+  color: #f1eae7;
 }
 
 t-color.active {
-
-  color:#f1eae7;
+  color: #f1eae7;
 }
 
-
-.nav-link:hover, .nav-link:focus {
-    text-decoration: none;
+.nav-link:hover,
+.nav-link:focus {
+  text-decoration: none;
 }
-
-
 </style>
 
-<style> 
-
+<style>
 @media only screen and (max-width: 768px) {
- .itzlala .nav-link {
+  .itzlala .nav-link {
     display: block;
     padding: 4px;
-}}
-
-
-
-
-   </style>
+  }
+}
+</style>

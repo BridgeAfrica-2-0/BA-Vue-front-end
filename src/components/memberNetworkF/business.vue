@@ -19,15 +19,14 @@
             <strong class="title"> Super Car ltd </strong> <br />
             Car marketing
             <br />
-            20k Community <br />
+            {{business.followers}} {{ $t('memnetwork.Community') }} <br />
 
             <span class="location">
               <b-icon-geo-alt class="ico"></b-icon-geo-alt> Douala cameroon
             </span>
             <br />
-
-            super best car seller in the world adipisicing elit. lorem epsep
-            this is <b-link>Read More</b-link>
+            <span v-if="business.about_business.length<65">{{ business.about_business}}</span>
+            <span v-else >{{ business.about_business.substring(0,65)+"..." }} <b-link>{{ $t('memnetwork.Read_More') }}</b-link></span>
           </p>
         </b-col>
 
@@ -48,8 +47,8 @@
                   class="b-background shadow "
                   variant="primary"
                 >
-                  <i class="fas fa-user-plus  fa-lg btn-icon "></i>
-                  <span class="btn-com">Community</span>
+                  <i class="fas fa-user-plus fa-lg btn-icon"></i>
+                  <span class="btn-com">{{ $t('memnetwork.Community') }}</span>
                 </b-button>
               </b-col>
 
@@ -67,8 +66,8 @@
                   class="b-background shadow "
                   variant="primary"
                 >
-                  <i class="fas fa-envelope   fa-lg btn-icon "></i>
-                  <span class="btn-text">Message</span>
+                  <i class="fas fa-envelope fa-lg btn-icon"></i>
+                  <span class="btn-text">{{ $t('memnetwork.Message') }}</span>
                 </b-button>
               </b-col>
 
@@ -86,8 +85,8 @@
                   class="b-background shadow "
                   variant="primary"
                 >
-                  <i class="fas fa-map-marked-alt  fa-lg btn-icon "></i>
-                  <span class="btn-text">Direction</span>
+                  <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
+                  <span class="btn-text">{{ $t('memnetwork.Direction') }}</span>
                 </b-button>
               </b-col>
             </b-row>

@@ -19,8 +19,14 @@
                         </div>
                       </b-col>
 
-                      <b-col md="6" lg="6" cols="6" sm="6" class="mt-3 mt-lg-2 mt-xl-2">
-                        <h6 class="follower">{{ people.followers }} Community</h6>
+                      <b-col
+                        md="6"
+                        lg="6"
+                        cols="6"
+                        sm="6"
+                        class="mt-3 mt-lg-2 mt-xl-2"
+                      >
+                        <h6 class="follower">{{people.followers}} {{ $t('network.Community') }}</h6>
                       </b-col>
                     </b-row>
                   </div>
@@ -44,7 +50,8 @@
                           class="b-background flexx pobtn shadow mr-lg-3 mr-xl-3"
                           @click="cta(people)"
                         >
-                           <i class="fas fa-envelope   fa-lg btn-icon "></i>  <span class="btn-text">Message</span> 
+                          <i class="fas fa-envelope fa-lg btn-icon"></i>
+                          <span class="btn-text">{{ $t('network.Message') }}</span>
                         </b-button>
                       </b-col>
 
@@ -62,7 +69,8 @@
                           class="b-background flexx pobtn shadow mr-lg-3 mr-xl-3"
                           variant="primary"
                         >
-                                      <i class="fas fa-user-plus  fa-lg btn-icon "></i>  <span class="btn-com">Community</span>
+                          <i class="fas fa-user-plus fa-lg btn-icon"></i>
+                          <span class="btn-com">{{ $t('network.Community') }}</span>
                         </b-button>
                       </b-col>
                     </b-row>

@@ -13,6 +13,7 @@ import businessOwner from "./businessOwner";
 import networkDetails from "./networkDetails";
 import dashboardcommunity from "./dashboardcommunity";
 import networkSetting from "./networkSetting";
+import orderBusiness from './orderBusiness';
 import NetworkSettings from "./NetworkSettings";
 import networkProfileMembers from "./networkProfileMembers";
 import ProfileAndBusinessDetails from "./ProfileAndBusinessDetails";
@@ -23,6 +24,9 @@ import market from "./market";
 import hotbusiness from "./hotbusiness";
 import profile from "./profile";
 import follower from "./follower";
+import keywordOperationOnNetwork from "./keywordOperationOnNetwork";
+
+
 import networkProfile from "./networkProfile";
 import UserProfileOwner from "./UserProfileOwner"
 import { search } from "./search";
@@ -38,6 +42,8 @@ import { social } from "./social";
 import productComments from "./productComments";
 import productDetails from "./productDetails";
 import cart from "./cart";
+import { notification } from "./notifications"
+
 
 // axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 axios.defaults.baseURL = process.env.VUE_APP_API_URL_DEV;
@@ -82,7 +88,11 @@ export default new Vuex.Store({
         productDetails,
         cart,
         dashboardcommunity,
-        market
+        market,
+        keywordOperationOnNetwork,
 
-    },
+        orderBusiness,
+
+        notification
+    }
 });

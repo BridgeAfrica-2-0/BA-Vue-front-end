@@ -34,19 +34,11 @@ export default {
 
   actions: {
 
-    getmembers( {commit}, path ){
-      console.log(path);
-      return axios
-      .post(`network/${path}`)
-      .then(({ data }) => {
-          commit("setmembers", data.data);
-        console.log(data);
-      })
-    },
-    getMembers( data ){
+    getMembers( {commit}, data ){
+      console.log("getMembers");
+      console.log("data", data);
       console.log(data.path);
-      return axios
-      .post('network/'+data.path, data.formData)
+      return axios.post('network/'+data.path, data.formData)
       .then(({ data }) => {
         console.log(data);
         return data;
@@ -54,6 +46,7 @@ export default {
     },
 
     makeAdmin( data ){
+      console.log("makeAdmin");
       console.log(data.path);
       return axios
       .post(`network/${data.path}`)
@@ -64,6 +57,7 @@ export default {
     },
 
     removeAsAdmin( data ){
+      console.log("removeAsAdmin");
       console.log(data.path);
       return axios
       .put(`network/${data.path}`)

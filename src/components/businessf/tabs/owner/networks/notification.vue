@@ -11,14 +11,14 @@
               @click="select"
               class="m-left-top username"
             >
-              {{ selectAll ? "Un-select All" : "Select All" }}
+              {{ selectAll ? $t('network.Un_select_All') : $t('network.Select_All') }}
             </b-form-checkbox>
           </div>
         </b-col>
         <b-col>
           <div class="b-bottomn f-right">
             <b-button variant="primary" class="a-button-l duration">
-              Mark as Read</b-button
+              {{ $t('network.Mark_as_Read') }}</b-button
             >
           </div>
         </b-col>
@@ -56,12 +56,13 @@
 
           <hr width="100%" />
         </b-col>
-        <div>
-          Selected: <strong>{{ selected }}</strong
-          ><br />
-          All Selected: <strong>{{ allSelected }}</strong>
-
-        </div>
+      </b-row>
+      <b-row>
+        <b-col>
+          <p class="text-center" v-if="allNotifications < 1">
+            {{ $t('network.No_Notifications_To_Show') }}
+          </p>
+        </b-col>
       </b-row>
     </div>
   </div>

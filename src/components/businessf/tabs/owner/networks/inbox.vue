@@ -16,7 +16,7 @@
                   ></b-avatar>
                 </b-col>
                 <b-col>
-                  <h4 class="title m-10">Messages</h4>
+                  <h3 class="mt-4 title">{{ $t('network.Messages')}}</h3>
                 </b-col>
                 <b-col>
                   <b-icon
@@ -26,9 +26,11 @@
                   ></b-icon>
                 </b-col>
               </b-row>
-              <b-container>
-                <input type="text" class="form-control input-background" placeholder="Search inbox" />
-              </b-container>
+              <input
+                type="text"
+                class="form-control input-background"
+                :placeholder="$t('network.Search_inbox')"
+              />
             </div>
             <div>
               <div class="messages-mobile">
@@ -62,16 +64,9 @@
           </b-col>
           <!-- ---- -->
 
-          <b-col class="pr-0">
-            <div class="right">
-              <b-row>
-                <b-col class="p-2">
-                  <b-avatar
-                    class="d-inline-block profile-pic"
-                    variant="primary"
-                    src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
-                    square
-                  ></b-avatar>
+                <b-col class="detale">
+                  <h6>Louis Litt</h6>
+                  <small>{{ $t('network.Online')}}</small>
                 </b-col>
                 <b-col>
                   <h1 class="mt-4 title text-bold">
@@ -315,7 +310,6 @@
                 </b-col>
               </b-row>
             </div>
-          </b-col>
 
           <!-- selected Chat  -->
           <b-col
@@ -643,7 +637,7 @@
               <b-button class="primary-bg" @click="showInfo(false)">
                 <fas-icon :icon="['fas', 'arrow-left']" />
               </b-button>
-              <span class="cnt-info"> Contact Info</span>
+              <span class="cnt-info"> {{ $t('network.Contact_Info') }}</span>
             </div>
             <div class="info-bottom">
               <b-avatar
@@ -654,21 +648,23 @@
               ></b-avatar>
               <div class="info-detail">
                 <h1 class="info-name">{{ receiver.name }}</h1>
-                <b-link class="primary">View Profile</b-link>
+                <b-link class="primary">{{ $t('network.View_Profile')}}</b-link>
               </div>
             </div>
             <div>
               <ul>
-                <li>Options</li>
+                <li>{{ $t('network.Options') }}</li>
                 <li>
                   <b-row
-                    ><b-col> Block Messages </b-col>
+                    ><b-col>
+                      {{ $t('network.Block_Messages') }}
+                    </b-col>
                     <b-col>
                       <b-form-checkbox v-model="checked" name="check-button" class="primary" switch> </b-form-checkbox>
                     </b-col>
                   </b-row>
                 </li>
-                <li>Report User</li>
+                <li>{{ $t('network.Report_User') }}</li>
               </ul>
             </div>
           </b-col>
@@ -726,10 +722,10 @@
 </template>
 
 <script>
-import EmojiPicker from 'vue-emoji-picker';
-import io from 'socket.io-client';
-import convertSize from 'convert-size';
-import moment from 'moment';
+import EmojiPicker from "vue-emoji-picker";
+import io from "socket.io-client";
+import convertSize from "convert-size";
+import moment from "moment";
 
 export default {
   components: {
@@ -738,26 +734,26 @@ export default {
   data() {
     return {
       filePreview: false,
-      file: '',
-      room: '',
+      file: "",
+      room: "",
       online: [],
-      input: '',
-      search: '',
-      chatSearchKeyword: '',
+      input: "",
+      search: "",
+      chatSearchKeyword: "",
       tabIndex: 0,
-      type: '',
+      type: "",
       chatId: null,
 
       // socket: io("https://ba-chat-server.herokuapp.com", {
       //   transports: ["websocket", "polling", "flashsocket"],
       // }),
-      socket: io('localhost:7000', {
-        transports: ['websocket', 'polling', 'flashsocket'],
+      socket: io("localhost:7000", {
+        transports: ["websocket", "polling", "flashsocket"],
       }),
       chatSelected: [],
       showsearch: true,
       selecteduser: false,
-      searchQuery: '',
+      searchQuery: "",
       resources1: null,
       resources: null,
       message: null,
@@ -765,7 +761,7 @@ export default {
       show: false,
       info: false,
       checked: false,
-      text: '',
+      text: "",
       selected: [],
 
       messages: null,
@@ -773,47 +769,46 @@ export default {
   },
   computed: {
     ctaSelected() {
-      return this.$store.getters['networkChat/getSelectedChat'];
+      return this.$store.getters["networkChat/getSelectedChat"];
     },
 
     currentBizId() {
-      return this.$store.getters['networkChat/getCurrentBizId'];
+      return this.$store.getters["networkChat/getCurrentBizId"];
     },
     currentBiz() {
       // return this.$store.getters['networkChat/getCurrentBiz'];
-      return this.$store.getters['auth/profilConnected'];
-
+      return this.$store.getters["auth/profilConnected"];
     },
     bizs() {
-      return this.$store.getters['networkChat/getBizs'];
+      return this.$store.getters["networkChat/getBizs"];
     },
     chatList() {
-      return this.$store.getters['networkChat/getChatList'];
+      return this.$store.getters["networkChat/getChatList"];
     },
 
     currentUser() {
       // return this.$store.getters['userChat/getUser'];
-      return this.$store.getters['auth/profilConnected'];
+      return this.$store.getters["auth/profilConnected"];
     },
     users() {
-      return this.$store.getters['userChat/getUsers'];
+      return this.$store.getters["userChat/getUsers"];
     },
     chats() {
-      return this.$store.getters['networkChat/getChats'];
+      return this.$store.getters["networkChat/getChats"];
     },
 
     loader() {
-      return this.$store.getters['networkChat/getLoader'];
+      return this.$store.getters["networkChat/getLoader"];
     },
     receiver() {
-      return this.chats[0] ? this.chats[0].receiver : '';
+      return this.chats[0] ? this.chats[0].receiver : "";
     },
     resultQuery() {
       if (this.searchQuery) {
         return this.users.filter((user) => {
           return this.searchQuery
             .toLowerCase()
-            .split(' ')
+            .split(" ")
             .every((v) => user.name.toLowerCase().includes(v));
         });
       } else {
@@ -827,7 +822,7 @@ export default {
     // }
   },
   async created() {
-    this.$store.commit('businessChat/setCurrentBizId', this.$route.params.id);
+    this.$store.commit("businessChat/setCurrentBizId", this.$route.params.id);
     await this.getBizs();
     this.tabIndex = this.$route.query.msgTabId;
     if (this.tabIndex) {
@@ -835,28 +830,27 @@ export default {
     }
 
     if (this.tabIndex == 1) {
-      this.getChatList({ type: 'business' });
+      this.getChatList({ type: "business" });
     } else if (this.tabIndex == 2) {
-      this.getChatList({ type: 'network' });
-    } else this.getChatList({ type: 'user' });
+      this.getChatList({ type: "network" });
+    } else this.getChatList({ type: "user" });
 
-
-    this.socket.on('generalMessage', (data) => {
-      console.log('Received');
+    this.socket.on("generalMessage", (data) => {
+      console.log("Received");
       console.log(data);
       this.messages.push(data);
     });
-    this.socket.on('privateMessage', (data) => {
-      console.log('Received');
+    this.socket.on("privateMessage", (data) => {
+      console.log("Received");
       console.log(data);
       this.chats.push(data);
       console.log(this.chats);
 
       let formData = new FormData();
-      formData.append('attachment', data.attachment);
-      formData.append('sender_business_id', data.sender_business_id);
-      formData.append('message', data.message);
-      formData.append('receiver_business_id', data.receiver_business_id);
+      formData.append("attachment", data.attachment);
+      formData.append("sender_business_id", data.sender_business_id);
+      formData.append("message", data.message);
+      formData.append("receiver_business_id", data.receiver_business_id);
       let elmts = {
         type: this.type,
         message: data.message,
@@ -883,85 +877,89 @@ export default {
       // return convertSize(data);
     },
     dismissed() {
-      this.file = '';
+      this.file = "";
       this.filePreview = false;
     },
     createRoom(receiver_network_id) {
       // let sender_business_id = this.currentUser.user.id;
       let sender_network_id = Number(this.currentBizId);
       this.room = [receiver_network_id, sender_network_id];
-      console.log('ROOMS: ', this.room);
-      this.socket.emit('create-biz', this.room);
+      console.log("ROOMS: ", this.room);
+      this.socket.emit("create-biz", this.room);
     },
     getCreatedAt(data) {
-      return moment(data).format('LT');
+      return moment(data).format("LT");
     },
 
     getBizs(keyword) {
       this.$store
-        .dispatch('networkChat/GET_BIZS', keyword)
+        .dispatch("networkChat/GET_BIZS", keyword)
         .then(() => {
-          console.log('currentBiz: ', this.currentBiz);
+          console.log("currentBiz: ", this.currentBiz);
         })
-        .catch(() => console.log('error'));
+        .catch(() => console.log("error"));
     },
     getChatList(data) {
       // alert("Clicked!")
       // this.type = data.type;
-      console.log('tab type:', this.tabIndex);
+      console.log("tab type:", this.tabIndex);
 
       this.scrollToBottom();
       this.$store
-        .dispatch('networkChat/GET_BIZS_CHAT_LIST', data)
+        .dispatch("networkChat/GET_BIZS_CHAT_LIST", data)
         .then(() => {})
-        .catch(() => console.log('error'));
+        .catch(() => console.log("error"));
     },
 
     async histBizToBiz(data) {
       await this.$store
-        .dispatch('networkChat/GET_BIZ_TO_BIZ', data)
+        .dispatch("networkChat/GET_BIZ_TO_BIZ", data)
         .then(() => {})
-        .catch(() => console.log('error'));
+        .catch(() => console.log("error"));
     },
     async histBizToUser(receiverId) {
       await this.$store
-        .dispatch('networkChat/GET_BIZ_TO_USER', receiverId)
+        .dispatch("networkChat/GET_BIZ_TO_USER", receiverId)
         .then(() => {})
-        .catch(() => console.log('error'));
+        .catch(() => console.log("error"));
     },
     async histBizToNetwork(receiverId) {
       await this.$store
-        .dispatch('networkChat/GET_BIZ_TO_NETWORK', receiverId)
+        .dispatch("networkChat/GET_BIZ_TO_NETWORK", receiverId)
         .then(() => {})
-        .catch(() => console.log('error'));
+        .catch(() => console.log("error"));
     },
     saveMessage(data) {
-      console.log('[DEBUG SAVE]', data);
+      console.log("[DEBUG SAVE]", data);
       this.$store
-        .dispatch('networkChat/SAVE_BUSINESS_CHAT', data)
+        .dispatch("networkChat/SAVE_BUSINESS_CHAT", data)
         .then(() => {
-          console.log('Chat saved');
+          console.log("Chat saved");
         })
-        .catch(() => console.log('error'));
+        .catch(() => console.log("error"));
     },
     selectedChat(data) {
-      console.log('type tabs:', this.tabIndex);
+      console.log("type tabs:", this.tabIndex);
       // this.scrollToBottom();
       this.createRoom(data.id);
       this.chatId = data.id;
       let receiver = { receiverID: data.id, keyword: null };
-      if (data.type == 'user') {
+      if (data.type == "user") {
         this.histBizToUser(receiver);
-      } else if (data.type == 'network') {
+      } else if (data.type == "network") {
         this.histBizToNetwork(receiver);
       } else {
         this.histBizToBiz(receiver);
       }
       this.newMsg = false;
       // this.chatSelected = { active: true, clickedId: data.id, ...data.chat };
-      this.chatSelected = { active: true, clickedId: data.id, name: data.chat.name };
+      this.chatSelected = {
+        active: true,
+        clickedId: data.id,
+        name: data.chat.name,
+      };
 
-      console.log('[DEBUG] Chat selected:', this.chatSelected);
+      console.log("[DEBUG] Chat selected:", this.chatSelected);
     },
 
     // selected chat ID or receiver ID
@@ -970,11 +968,11 @@ export default {
 
     searchChatList(keyword) {
       this.$store
-        .dispatch('userChat/GET_USERS', keyword)
+        .dispatch("userChat/GET_USERS", keyword)
         .then(() => {
-          console.log('->[Data logged]<-');
+          console.log("->[Data logged]<-");
         })
-        .catch(() => console.log('error'));
+        .catch(() => console.log("error"));
     },
 
     send() {
@@ -992,7 +990,7 @@ export default {
       //   let formData = new FormData();
       //   attachment = formData.append("file", this.file);
       // } else attachment = null;
-      this.socket.emit('privateMessage', {
+      this.socket.emit("privateMessage", {
         type: this.type,
         message: this.input,
         sender_network_id: Number(this.currentBizId),
@@ -1007,11 +1005,11 @@ export default {
       //   sender: this.currentUser.user.name,
       //   date: new Date(),
       // });
-      console.log('SENT...');
+      console.log("SENT...");
       this.scrollToBottom();
 
       this.chats.push(this.message);
-      this.input = '';
+      this.input = "";
       this.dismissed();
     },
 
@@ -1043,19 +1041,19 @@ export default {
       console.log(this.checked);
     },
     newMessage(arg) {
-      console.log('hey');
+      console.log("hey");
       this.newMsg = arg;
       this.show = false;
     },
     handleFileUpload() {
       this.file = this.$refs.file.files[0];
       this.filePreview = true;
-      console.log('preview:', this.filePreview);
+      console.log("preview:", this.filePreview);
     },
     scrollToBottom() {
       this.$refs.feed.scrollTo({
         top: this.$refs.feed.scrollHeight + 2000,
-        behavior: 'smooth',
+        behavior: "smooth",
       });
       // this.$refs.feed.scrollTop = this.$refs.feed.scrollHeight - this.$refs.feed.clientHeight;
       console.log(this.$refs.feed.scrollTop);
@@ -1110,7 +1108,7 @@ export default {
 }
 
 .back-image {
-  background-image: url('../../../../../assets/message_back.jpg');
+  background-image: url("../../../../../assets/message_back.jpg");
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -1477,7 +1475,7 @@ li {
   justify-content: space-between;
 }
 .emoji-picker .emojis:after {
-  content: '';
+  content: "";
   flex: auto;
 }
 .emoji-picker .emojis span {

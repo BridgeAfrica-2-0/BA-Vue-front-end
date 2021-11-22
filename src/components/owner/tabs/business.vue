@@ -16,7 +16,7 @@
             <strong class="title"> {{ item.name }}</strong> <br />
             {{ item.category }}
             <br />
-            {{ count(item.followers) }} Community <br />
+            {{ count(item.followers) }} {{ $t('profileowner.Community') }} <br />
 
             <span class="location"> <b-icon-geo-alt class="ico"></b-icon-geo-alt>{{ item.country }} </span>
             <br />
@@ -44,22 +44,34 @@
                   variant="primary"
                   @click="handleFollow(item)"
                 >
-                  <i class="fas fa-lg btn-icon" :class="item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"></i>
-                  <span class="btn-com">Community</span>
+                  <i class="fas fa-user-plus  fa-lg btn-icon "></i>
+                  <span class="btn-com">{{ $t('profileowner.Community') }}</span>
                 </b-button>
               </b-col>
 
               <b-col md="12" lg="4" xl="4" sm="12" cols="4" class="mt-2 text-center">
                 <b-button block size="sm" class="b-background shadow " variant="primary">
                   <i class="fas fa-envelope   fa-lg btn-icon "></i>
-                  <span class="btn-text">Message</span>
+                  <span class="btn-text">{{ $t('profileowner.Message') }}</span>
                 </b-button>
               </b-col>
 
-              <b-col md="12" lg="4" xl="4" sm="12" cols="4" class="mt-2 text-center">
-                <b-button block size="sm" class="b-background shadow " variant="primary">
-                  <i class="fas fa-map-marked-alt  fa-lg btn-icon"></i>
-                  <span class="btn-text">Direction</span>
+              <b-col
+                md="12"
+                lg="4"
+                xl="4"
+                sm="12"
+                cols="4"
+                class="mt-2 text-center"
+              >
+                <b-button
+                  block
+                  size="sm"
+                  class="b-background shadow "
+                  variant="primary"
+                >
+                  <i class="fas fa-map-marked-alt  fa-lg btn-icon "></i>
+                  <span class="btn-text">{{ $t('profileowner.Direction') }}</span>
                 </b-button>
               </b-col>
             </b-row>

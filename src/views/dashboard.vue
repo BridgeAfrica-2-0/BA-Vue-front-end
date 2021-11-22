@@ -11,8 +11,8 @@
         <b-card class=" border shadow hselect">
           <b-row>
             <b-col md="6" sm="12" class="">
-              <h6 class="font-weight-bolder text-design">
-                {{$t('dashboard.use_bridge')}} 
+              <h6 class="font-weight-bolder text-design text-center t-center">
+                {{$t('dashboard.Use_Bridge_Africa_as_Yourself_or_as_one_of_your_businesses')}} 
               </h6>
             </b-col>
             <b-col sm="12" md="6" class="mb-3">
@@ -48,7 +48,7 @@
             <div>
               <b-card class=" border shadow pr-3" style="height:350px">
                 <h6 class="font-weight-bolder text-design">
-                  {{$t('dashboard.use_bridge')}} 
+                  {{$t('dashboard.Use_Bridge_Africa_as_Yourself_or_as_one_of_your_businesses')}} 
                 </h6>
                 <b-form-select
                   v-model="selectedb"
@@ -105,7 +105,7 @@
                   :icon="['fas', 'hands-helping']"
                   size="lg"
                 />
-                <b> {{$t('dashboard.hot_bussinesses').toUpperCase()}} </b>
+                <b> {{$t('dashboard.HOT_BUSINESSES').toUpperCase()}} </b>
               </h6>
 
               <div class="  p-tab">
@@ -121,7 +121,7 @@
                   :icon="['fas', 'project-diagram']"
                   size="lg"
                 />
-                <b> {{$t('dashboard.popular_networks').toUpperCase()}}</b>
+                <b> {{$t('dashboard.POPULAR_NETWORKS').toUpperCase()}}</b>
               </h6>
 
               <div class=""><Popularnetwork /></div>
@@ -130,6 +130,16 @@
         </b-row>
       </div>
     </div>
+    <p class="text-center">
+      <span class="display-inline">
+        <b-link @click="$i18n.locale = 'en'"> {{ $t("auth.english") }}</b-link>
+        <span class="vl"></span>
+        <b-link class="ml-2" @click="$i18n.locale = 'fr'">
+          {{ $t("auth.french") }}
+        </b-link>
+      </span>
+      Bridge Africa © 2021
+    </p>
   </div>
 </template>
 
@@ -197,7 +207,7 @@ export default {
   methods: {
 
 
-    switchBusiness(value){
+   async switchBusiness(value){
 
        console.log("business switch"+value);
  
@@ -216,7 +226,7 @@ export default {
      this.$store.commit("dashboard/setdBusinessId", value);
 
 
-      this.$store
+    await  this.$store
         .dispatch("dashboard/dashboardBusiness", value)
         .then(() => {
           console.log("business switch");
@@ -226,9 +236,6 @@ export default {
         });
 
 
-    this.CommunityBusiness();
-
-    this.CommunityPeople();
 
     this.businessCommunityTotal();
 

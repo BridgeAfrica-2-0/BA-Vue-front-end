@@ -2,31 +2,46 @@
   <div>
     <b-row class="mt-2">
       <b-col>
-          <b-avatar
+        <b-avatar
           variant="info"
           src="https://placekitten.com/300/300"
-          
           class="avat-comment"
         ></b-avatar>
         <span class="float-right">
-          <b-dropdown size="sm" variant="outline "  class="primary">
-            <template class="more" #button-content>
-             
-            </template>
-            <b-dropdown-item> Edit </b-dropdown-item>
-            <b-dropdown-item>Delete</b-dropdown-item>
+          <b-dropdown size="sm" variant="outline " class="primary">
+            <template class="more" #button-content> </template>
+            <b-dropdown-item>{{ $t("network.Edit") }}</b-dropdown-item>
+            <b-dropdown-item>{{ $t("network.Delete") }}</b-dropdown-item>
           </b-dropdown>
         </span>
         <p class="msg text">
-
-            <read-more more-str="read more" :text="msg" link="#" less-str="read less" :max-chars="15000" > </read-more>
-
-         
-
+          <read-more
+            more-str="read more"
+            :text="msg"
+            link="#"
+            less-str="read less"
+            :max-chars="15000"
+          >
+          </read-more>
         </p>
-        <b-icon icon="suit-heart" variant="primary" aria-hidden="true"></b-icon>
-        23
-        <span @click="showReply" class="primary ml-2 reply"><b>Reply</b></span>
+        <b-icon
+          :icon="icon"
+          variant="primary"
+          aria-hidden="true"
+          class="cursor"
+          @click="onLike"
+        ></b-icon>
+        {{ comment.comment_likes | nFormatter }}
+        <b-icon
+          icon="chat"
+          variant="primary"
+          aria-hidden="true"
+          class="cursor"
+        ></b-icon>
+        {{ comment.reply_comment_count | nFormatter }}
+        <span @click="showReply" class="primary ml-2 reply"
+          ><b>{{ $t("network.Reply") }}</b></span
+        >
         <div v-if="reply">
           <b-row class="mt-2">
             <b-col cols="1">
@@ -37,7 +52,17 @@
               ></b-avatar>
             </b-col>
             <b-col cols="11">
-              <input placeholder="Post a Comment" class="comment" type="text" />
+              <input
+                :placeholder="$t('network.Post_a_Comment')"
+                class="comment"
+                type="text"
+                @keypress.enter="onReply"
+                v-model="text"
+              />
+              <b-spinner
+                style="color: rgb(231, 92, 24); position: absolute; right: 17px"
+                v-if="createPostRequestIsActive"
+              ></b-spinner>
 
               <fas-icon
                 class="primary send-cmt"
@@ -56,9 +81,8 @@ export default {
   data() {
     return {
       reply: false,
-      
-      msg:" Lorem Ipsum has been the industry's   this is do goodfive centuries, but  the leap into electronic      this is do goodfive centuries, but  the leap into electronic        this is do goodfive centuries, but  the leap into electronic  this sis sit tit typesetting",
 
+      msg: " Lorem Ipsum has been the industry's   this is do goodfive centuries, but  the leap into electronic      this is do goodfive centuries, but  the leap into electronic        this is do goodfive centuries, but  the leap into electronic  this sis sit tit typesetting",
     };
   },
   methods: {
@@ -70,7 +94,7 @@ export default {
 </script>
 
 <style scoped>
-.msg{
+.msg {
   background-color: #ddd;
   padding: 20px;
   border-radius: 25px;
@@ -106,35 +130,23 @@ export default {
     margin-left: 88%;
   }
 
-
-  .avat-comment{
-   width: 40px;
-      height: 40px;  
+  .avat-comment {
+    width: 40px;
+    height: 40px;
+  }
 }
-
-
-}
-
-
 
 @media only screen and (min-width: 768px) {
-  
-
-
-  .avat-comment{
-     width: 36px;
-      height: 36px;    
+  .avat-comment {
+    width: 36px;
+    height: 36px;
+  }
 }
-
-
-}
-
-
 </style>
 
 
-<style>   #readmore{
+<style>
+#readmore {
   color: #e75c18;
-
 }
-     </style>
+</style>

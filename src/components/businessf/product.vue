@@ -144,6 +144,115 @@
       </b-form>
     </b-modal>
     <!-- PRODUCT DETAILS MODAL -->
+      <!-- <div>
+        <br />
+      </div> -->
+    <!-- </div> -->
+    <!-- EDIT PRODUCT MODAL -->
+
+    <b-modal hide-footer title="$t('businessf.Edit_product')">
+      <b-form>
+        <b-row>
+          <b-col cols="12" md="6">
+            <b-form-group
+              id="input-group-1"
+              :label="$t('businessf.Product_Name')"
+              label-for="input-1"
+              label-size="sm"
+            >
+              <b-form-input
+                id="input-1"
+                class="mt-1"
+                type="text"
+                required
+              ></b-form-input>
+            </b-form-group>
+
+            <b-form-group
+              id="input-group-1"
+              :label="$t('businessf.Product_Description')"
+              label-for="input-1"
+              label-size="sm"
+            >
+              <b-textarea
+                id="input-1"
+                class="mt-2"
+                type="text"
+                required
+              ></b-textarea>
+            </b-form-group>
+          </b-col>
+          <b-col cols="12" md="6">
+            <div class="image-upload-wrap">
+              <a href="#" data-toggle="modal" data-target="#createalbumModal">
+                <div class="drag-text">
+                  <i class="fa fa-plus"></i>
+                  <h6>{{$t("businessf.Product_Image")}}</h6>
+                </div>
+              </a>
+              <div></div>
+            </div>
+          </b-col>
+        </b-row>
+
+        <b-form-group
+          id="input-group-1"
+          :label="$t('businessf.product_Price')"
+          label-for="input-1"
+          label-size="sm"
+        >
+          <b-form-input class="mt-1" id="price"></b-form-input>
+        </b-form-group>
+
+        <b-form-checkbox
+          id="checkbox-1"
+          name="checkbox-1"
+          value="accepted"
+          unchecked-value="not_accepted"
+        >
+          {{$t("businessf.This_Product_Is_On_Discount")}}
+        </b-form-checkbox>
+
+        <b-form-group
+          id="conditions"
+          :label="$t('businessf.Conditions')"
+          label-for="input-1"
+          label-size="sm"
+        >
+          <b-form-input class="mt-1" id="conditions"></b-form-input>
+        </b-form-group>
+
+        <b-form-checkbox
+          id="checkbox-1"
+          name="checkbox-1"
+          value="accepted"
+          unchecked-value="not_accepted"
+        >
+          {{$t("businessf.This_Item_Is_A_Service")}} ?
+        </b-form-checkbox>
+
+        <b-form-checkbox
+          id="checkbox-1"
+          name="checkbox-1"
+          value="accepted"
+          unchecked-value="not_accepted"
+        >
+          {{$t("businessf.In_stock")}}
+        </b-form-checkbox>
+
+        <b-form-checkbox
+          id="checkbox-1"
+          name="checkbox-1"
+          value="accepted"
+          unchecked-value="not_accepted"
+        >
+          {{$t("businessf.Published")}}
+        </b-form-checkbox>
+
+        <b-button class="mt-2 btn-block" variant="primary"> {{$t("businessf.Add")}}</b-button>
+      </b-form>
+    </b-modal>
+     <!-- PRODUCT DETAILS MODAL -->
     <ProductDetails
       @closemodal="closeDetailsProduct"
       :showModal="viewProduct"

@@ -21,26 +21,27 @@
             {{ product.description.substring(0, 30) }}
             <b-link v-if="product.description.length >= 30"> see more </b-link>
             <br />
-
+                
             <span class="price">
               <strong> {{ product.price }} </strong>
             </span>
             <br />
+            
           </p>
           
-            <div class="col">
-              <div class="row align-self-center my-2 pos">
+          
+              <div class=" align-self-center  pos">
             <b-button variant="primary" 
-              >Buy Now
+              >buy now
             </b-button>
             </div>
 
-            <div class="row align-self-center pos">
-            <b-button variant="primary" @click="handleAddToCard"
-              >Add to Cart
+            <div class=" align-self-center pos my-2">
+            <b-button variant="primary" class="p-0" @click="handleAddToCard"
+              >add to cart
             </b-button>
             </div>
-            </div>
+            
           
         </b-col>
       </b-row>

@@ -53,7 +53,7 @@ import welcome from "@/views/welcome";
 
 import ordersdetail from "@/views/odersDetail";
 import businessordersdetail from "@/views/businessordersdetail"
-
+import businessOwnerOrders from "@/views/businessOwnerOrders"
 import payment from "@/views/payment";
 
 
@@ -73,6 +73,14 @@ const routes = [
     // meta: {
     //   auth: true,
     // },
+  },
+
+  
+  {
+    path: "/businessOwnerOrders",
+    name: "businessOwnerOrders",
+    component: businessOwnerOrders,
+  
   },
 
   {

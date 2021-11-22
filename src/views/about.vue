@@ -306,6 +306,80 @@
         </div>
       </div>
     </div>
+    <!-- Section About -->
+
+    <div class="container-fluid mt-2">
+      <div class="row">
+        <div class="col-md-6 pt-md-5">
+          <div class="my-5">
+            <h1 class="color-black text-center font-arvo about-heading text-center pt-4">ABOUT</h1>
+            <h1 class="color-black mt-md-4 text-center font-arvo about-heading text-center">BRIDGE AFRICA.COM</h1>
+          </div>
+          <div class="video pl-md-5 py-5">
+            <video
+              class="elementor-video my-4"
+              src="http://info.bridgeafrica.com/wp-content/uploads/2021/07/sceen-video.mp4"
+              autoplay=""
+              loop=""
+              muted="muted"
+              playsinline=""
+              controlslist="nodownload"
+            ></video>
+            <p class="text-center color-black font-weight-bold video-desc pt-5">
+              A 3-in-1 platform that integrates SMEs into the Digital Economy through website creation, database
+              integration, and networking. Currently in its 3rd iteration, we are rebuilding to turn bridgeafrica.com
+              into a 4-in-1 tool by adding an online market place and improve the user interface.
+            </p>
+          </div>
+        </div>
+        <div class="col-md-3 pr-md-0">
+          <div class="d-none d-md-block">
+            <img
+              src="http://info.bridgeafrica.com/wp-content/uploads/2021/07/tissu-choisit.jpg"
+              alt="black image"
+              class="black-img"
+            />
+          </div>
+          <div class="our-wins bg-black">
+            <h4 class="font-arvo text-center font-weight-bold text-light py-4">Our Wins</h4>
+            <div class="container pb-3">
+              <p class="text-left text-light">
+                Bridgeafrica.com was voted <b>App of the Year</b> by the International Telecommunication Union for its
+                contribution towards the realisation of SDGs 1 and 8.
+              </p>
+              <p class="text-left text-light">
+                We have worked with the United Nation’s IFAD to <b>digitalise 750 agricultural SMEs</b> across 4 regions
+                in Cameroon.
+              </p>
+              <p class="text-left text-light">
+                We currently have over <b>7,000 users</b> and are working to expand to Africa.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 pl-md-0">
+          <div class="specific-main-div px-3">
+            <h5 class="text-md-left text-center  specific-heading">BRIDGE</h5>
+            <h5 class="text-md-left text-center specific-heading">AFRICA.COM</h5>
+            <h5 class="text-md-left text-center specific-heading">SPECIFIC INFO</h5>
+            <p>
+              Businesses in Africa still suffer from the digital divide, which limits their integration into the digital
+              economy. To break these barriers, our bridgeafrica.com platform enables the 87.5% of businesses that lack
+              websites to easily get one online and offline via SMS; while our localised business directory makes them
+              visible. Our online marketplace will also enable the 99% of businesses that had never sold online to
+              engage in e-commerce.
+            </p>
+          </div>
+          <div class="d-none d-md-block yellow-img">
+            <img
+              data-v-e7ab893a=""
+              src="http://info.bridgeafrica.com/wp-content/uploads/2021/07/blocks-image-73-1.jpg"
+              alt="Yello Image"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -346,6 +420,10 @@ export default {};
   margin-left: -6px;
   font-size: 16px;
   overflow-x: hidden;
+}
+.bg-black {
+  background-color: #000000;
+  color: #000000;
 }
 .bg-img {
   background-color: #010000;
@@ -470,6 +548,35 @@ export default {};
   height: 712px;
   max-height: 712px;
 }
+.about-heading {
+  font-size: 36px;
+  font-weight: bold;
+}
+.video-desc {
+  margin-top: 50px;
+  line-height: 35px;
+  font-size: 16px;
+}
+.black-img {
+  width: 100%;
+  height: 700px;
+  object-fit: cover;
+}
+.specific-heading {
+  font-size: 24px;
+  font-weight: 400;
+}
+.specific-main-div {
+  min-height: 700px;
+  padding-top: 250px;
+}
+.specific-main-div p {
+  line-height: 30px;
+}
+.yellow-img img{
+  width: 100%;
+  height: 385px;
+}
 @media only screen and (max-width: 600px) {
   .header-img-text {
     font-size: 27px;
@@ -480,6 +587,9 @@ export default {};
   }
   .bg-img {
     height: 50vh;
+  }
+  .video-desc {
+    margin-top: 0;
   }
   .welcome-heading {
     font-size: 18px;
@@ -497,6 +607,10 @@ export default {};
   }
   .functionality-flex {
     flex-direction: column;
+  }
+  .specific-main-div {
+    height: auto;
+    padding-top: 50px;
   }
 }
 </style>

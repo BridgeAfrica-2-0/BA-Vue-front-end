@@ -341,20 +341,12 @@
                     </div>
                     <hr class="h-divider" />
                     <div class="other-menu suggest-item cursor-pointer">
-                      <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'globe-americas']" /></span>
-                      
-                      <li class="nav-item dropdown show">
-									      
-									<b-dropdown
-										size="sm"
-										variant="outline"
-										text="English"
-										class="m-2"
-									>
-										<b-dropdown-item-button @click="setLocale('en')">{{$t(auth.English)}}</b-dropdown-item-button>
-										<b-dropdown-item-button @click="setLocale('fr')">{{$t(auth.French)}}</b-dropdown-item-button>
-									</b-dropdown>
-								</li>
+                      <b-link v-b-toggle="'collapse-2'" class="m-1"><fas-icon class="violet search" :icon="['fas', 'globe-americas']" />  Language</b-link>
+
+                      <b-collapse id="collapse-2" class="mt-1">
+                        <b-card-text @click="$i18n.locale = 'en'" class="cursor-pointer mb-1">{{$t('auth.english')}}</b-card-text>
+                        <b-card-text @click="$i18n.locale = 'fr'">{{$t('auth.french')}}</b-card-text>
+                      </b-collapse>
                     </div>
                     <hr class="h-divider" />
                     <a @click="logout"
@@ -421,19 +413,12 @@
             </div>
             <hr class="h-divider" />
             <div class="other-menu suggest-item cursor-pointer">
-              <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'globe-americas']" /></span>
-              <li class="nav-item dropdown show">
-									      
-									<b-dropdown
-										size="sm"
-										variant="outline"
-										text="English"
-										class="m-2"
-									>
-										<b-dropdown-item-button @click="setLocale('en')">{{$t(auth.English)}}</b-dropdown-item-button>
-										<b-dropdown-item-button @click="setLocale('fr')">{{$t(auth.French)}}</b-dropdown-item-button>
-									</b-dropdown>
-								</li>
+              <b-link v-b-toggle="'collapse-2'" class="m-1"><fas-icon class="violet search" :icon="['fas', 'globe-americas']" />  Language</b-link>
+
+                      <b-collapse id="collapse-2" class="mt-1">
+                        <b-card-text @click="$i18n.locale = 'en'" class="cursor-pointer mb-1">{{$t('auth.english')}}</b-card-text>
+                        <b-card-text @click="$i18n.locale = 'fr'">{{$t('auth.french')}}</b-card-text>
+                      </b-collapse>
             </div>
             <hr class="h-divider" />
             <a

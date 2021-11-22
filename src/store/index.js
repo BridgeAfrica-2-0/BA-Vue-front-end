@@ -40,9 +40,9 @@ import { notification } from "./notifications"
 // import axios from "axios";
 Vue.use(Vuex);
  //axios.defaults.baseURL = process.env.VUE_APP_API_URL;
-  axios.defaults.baseURL = "https://edson.maxinemoffett.com/api/v1/";
+ // axios.defaults.baseURL = "https://edson.maxinemoffett.com/api/v1/";
 
-//axios.defaults.baseURL = "https://88f0-154-72-150-114.ngrok.io/api/v1/";
+axios.defaults.baseURL = "https://f1df-154-72-167-62.ngrok.io/api/v1/";
 
 //axios.defaults.baseURL = "https://qa-bridgeafrica-api.maxinemoffett.com/api/v1/";
 

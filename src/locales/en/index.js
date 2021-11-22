@@ -7,7 +7,7 @@ import passrecover from './passrecover.json'
 import welcome from './welcome.json'
 import dashboard from './dashboard.json'
 import profileowner from './profileowner.json'
-import profilefollower from './network.json'
+import profilefollower from './profilefollower.json'
 
 export const defaultLocale = 'en'
 

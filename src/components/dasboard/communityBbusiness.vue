@@ -60,13 +60,14 @@
                     
 
 
-
+  
                   <b-button
                   block
                   size="sm"
                   :disabled="disable"
                   :class="item.is_follow !== 0 && 'u-btn'"
                   variant="primary"
+                    :id="'followbtn'+item.id"
                   @click="handleFollow(item)"
                 >
                  
@@ -164,8 +165,11 @@ export default {
 
 
 
+   
      async handleFollow(user) {
-       this.disable=true;
+
+      document.getElementById("followbtn"+user.id).disabled = true;
+       
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
@@ -179,12 +183,17 @@ export default {
 
           console.log(response);
           user.is_follow = nextFollowState;
-            this.disable=false;
+         document.getElementById("followbtn"+user.id).disabled = false;
+            
         })
-        .catch(err => console.log(err));
-          this.disable=false;
+        .catch(err =>{  
+          
+          console.log(err)  ;
+           document.getElementById("followbtn"+user.id).disabled =  false;
+          
+        });
+         
     },
-
 
 
 

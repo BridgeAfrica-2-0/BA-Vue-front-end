@@ -40,15 +40,9 @@ import networkProfileMemberRequest from "./networkProfileMemberRequest";
 import { social } from "./social";
 import { notification } from "./notifications"
 
-// import axios from "axios";
 Vue.use(Vuex);
- //axios.defaults.baseURL = process.env.VUE_APP_API_URL;
-axios.defaults.baseURL = "https://test.maxinemoffett.com/api/v1/";
-
-//axios.defaults.baseURL = "https://7ebd-154-72-150-125.ngrok.io/api/v1/";
-
-//axios.defaults.baseURL = "https://qa-bridgeafrica-api.maxinemoffett.com/api/v1/";
-
+// axios.defaults.baseURL = process.env.VUE_APP_API_URL;
+axios.defaults.baseURL = "https://223a-154-72-150-127.ngrok.io/api/v1/"
 
 export default new Vuex.Store({
   modules: {
@@ -76,11 +70,8 @@ export default new Vuex.Store({
     business,
     networkProfileFeedback,
     NetworkSettings,
-    
     keywordOperationOnNetwork,
     orderBusiness,
-
-    
     businessSettingInfo,
     checkout,
     social,
@@ -90,9 +81,7 @@ export default new Vuex.Store({
     networkProfileMedia,
     networkProfileMemberRequest,
     networkProfile,
-    
     notification
-
   }
 });
 

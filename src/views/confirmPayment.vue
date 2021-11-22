@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import navbar from "@/components/navbar";
+import navbar from "@/components/ngavbar";
 import Footer from "@/components/footer";
 import ValidatePay from "@/components/businessf/tabs/owner/validatePay";
 

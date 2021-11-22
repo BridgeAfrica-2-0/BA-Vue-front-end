@@ -66,11 +66,13 @@
                   size="sm"
                   :disabled="disable"
                   :class="item.is_follow !== 0 && 'u-btn'"
+                  :id="'followbtn'+item.id"
+                 
                   variant="primary"
                   @click="handleFollow(item)"
                 >
                  
-                  <i class="fas fa-lg btn-icon" :class="item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"></i>
+                  <i class="fas fa-lg btn-icon"  :class="item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"></i>
                   <span class="btn-com">  {{ $t('dashboard.Community') }}</span>
                 </b-button>
 
@@ -139,6 +141,7 @@ export default {
   data() {
     return {
        page: 1,
+       isloading:false,
        business:[],
       options: {
         rewind: true,
@@ -170,6 +173,8 @@ export default {
 
     
      async handleFollow(user) {
+
+      document.getElementById("followbtn"+user.id).disabled = true;
        
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
@@ -184,10 +189,16 @@ export default {
 
           console.log(response);
           user.is_follow = nextFollowState;
+         document.getElementById("followbtn"+user.id).disabled = false;
             
         })
-        .catch(err => console.log(err));
+        .catch(err =>{  
           
+          console.log(err)  ;
+           document.getElementById("followbtn"+user.id).disabled =  false;
+          
+        });
+         
     },
 
     
@@ -220,6 +231,9 @@ export default {
 </script>
 
 <style scoped>
+
+
+
 .flx100{
     flex-basis:80% !important;
 }
@@ -471,5 +485,12 @@ export default {
   .btn {
     display: flex;
   }
+}
+</style>
+
+<style >
+  .u-btn {
+  filter: grayscale(0.6);
+  
 }
 </style>

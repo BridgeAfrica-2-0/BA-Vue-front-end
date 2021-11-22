@@ -189,13 +189,16 @@
     <hr class="localfoter" />
 
     <p class="text-center">
+     
       <span class="display-inline">
-        <b-link @click="$i18n.locale = 'en'"> {{ $t("auth.english") }}</b-link>
-        <span class="vl"></span>
-        <b-link class="ml-2" @click="$i18n.locale = 'fr'">
+        <b-link @click=" setLang('en')  "> {{ $t("auth.english") }} </b-link>
+        <span class="vl"></span> 
+        <b-link class="ml-2"  @click="setLang('fr')">
           {{ $t("auth.french") }}
         </b-link>
       </span>
+
+
       Bridge Africa © 2021
     </p>
   </div>
@@ -271,6 +274,13 @@ export default {
         .catch((err) => {
           console.log({ err: err });
         });
+    },
+
+    setLang(data){
+        
+         console.log(data);
+          this.$i18n.locale = data;
+         this.$store.commit("auth/setAppLanguage", data);
     },
 
 

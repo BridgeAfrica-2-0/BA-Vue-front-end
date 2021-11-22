@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-modal id="modal-sm" size="sm" hide-header>
-      Do you want to join this network?
+      {{ $t('network.Do_you_want_to_join_this_network') }} ?
     </b-modal>
 
     <div class="people-style shadow" v-for="item in network" :key="item.id">
@@ -17,9 +17,9 @@
             <strong class="title"> {{ item.name }} </strong> <br />
             {{ item.category }}
             <br />
-            {{ item.followers }} Community<br />
+            {{ item.followers }} {{ $t('network.Community') }} <br />
 
-            {{ item.about_network }} <b-link>Read More</b-link>
+            {{ item.about_network }} <b-link>{{ $t('network.Read_More') }} </b-link>
           </p>
         </b-col>
 
@@ -36,21 +36,21 @@
                   @click="handleFollow(item)"
                 >
                   <i class="fas fa-lg btn-icon" :class="item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"></i>
-                  <span class="btn-com">Community</span>
+                  <span class="btn-com">{{ $t('network.Community') }} </span>
                 </b-button>
               </b-col>
 
               <b-col md="12" lg="4" xl="4" sm="12" cols="4" class="mt-2 text-center">
                 <b-button block size="sm" class="b-background shadow " variant="primary">
                   <i class="fas fa-envelope   fa-lg btn-icon "></i>
-                  <span class="btn-text">Message</span>
+                  <span class="btn-text">{{ $t('network.Message') }} </span>
                 </b-button>
               </b-col>
 
               <b-col md="12" lg="4" xl="4" sm="12" cols="4" class="mt-2 text-center">
                 <b-button block size="sm" class="b-background shadow " variant="primary">
                   <i class="fas fa-map-marked-alt  fa-lg btn-icon "></i>
-                  <span class="btn-text">Direction</span>
+                  <span class="btn-text">{{ $t('network.Direction') }} </span>
                 </b-button>
               </b-col>
             </b-row>

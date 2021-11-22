@@ -141,8 +141,26 @@
    "Update_post":"Update post",
    "Enter_something":"Enter something",
    "Your_3_Posts_are_pending_for_approval":"Your 3 Posts are pending for approval",
-   "View_All":"View All"
    
+   "Ticket_Support":"Ticket Support",
+   "Intergration":"Intergration",
+   "Premium_Template":"Premium Template",
+   "Remove_Ads":"Remove Ads",
+   "Subscribe_Now":"Subscribe Now",
+   "Advanced":"Advanced",
+   "month":"month",
+   "Subdomain_URL":"Subdomain URL",
+   "Free_Domain_for_year":"Free Domain for 1 year",
+   "Connect_Your_domain":"Connect Your domain",
+   "SSL_Certificate":"SSL Certificate",
+   "Premium_Support":"Premium Support",
+   "email_phone":"email, phone",
+   "Create_Post":"Create Post",
+   "Do_you_want_to_join_this_network":"Do you want to join this network",
+   "Read_More":"Read More",
+   "Direction":"Direction"
+   
+
     
 
 }

@@ -402,6 +402,82 @@
         ></iframe>
       </div>
     </section>
+
+    <!-- Blog -->
+
+    <div class="bg-black mb-md-5 py-5">
+      <h3 class="text-center font-arvo text-light">Our Blog</h3>
+      <div class="row">
+        <div class="col-md-4"></div>
+      </div>
+    </div>
+
+    <!-- Team -->
+
+    <div class="mt-5">
+      <h1 class="color-black text-center font-arvo functionality-heading text-center letter-spacing">MEET OUR TEAM</h1>
+      <div class="row justify-content-center p-5">
+        <div class="col-md-3 m-3 border border-dark team-div px-5 pt-5">
+          <img
+            src="http://info.bridgeafrica.com/wp-content/uploads/2020/02/lorenzo-thegem-person-160.png"
+            alt="img"
+            class="rounded-circle d-block m-auto team-img"
+          />
+          <p class="text-center team-name color-black mt-5">Lorenzo Tencati</p>
+          <p class="text-center team-position color-black">Advisory Board to CEO</p>
+        </div>
+
+        <div class="col-md-3 m-3 border border-dark team-div px-5 pt-5">
+          <img
+            src="http://info.bridgeafrica.com/wp-content/uploads/2020/02/bruno.png"
+            alt="img"
+            class="rounded-circle d-block m-auto team-img"
+          />
+          <p class="text-center team-name color-black mt-5">Ittia Bruno</p>
+          <p class="text-center team-position color-black">COO</p>
+        </div>
+
+        <div class="col-md-3 m-3 border border-dark team-div px-5 pt-5">
+          <img
+            src="http://info.bridgeafrica.com/wp-content/uploads/2020/02/lengweh-blaise-thegem-person.png"
+            alt="img"
+            class="rounded-circle d-block m-auto team-img"
+          />
+          <p class="text-center team-name color-black mt-5">Lengweh Blaise</p>
+          <p class="text-center team-position color-black">CTO</p>
+        </div>
+
+        <div class="col-md-3 m-3 border border-dark team-div px-5 pt-5">
+          <img
+            src="http://info.bridgeafrica.com/wp-content/uploads/2020/02/arlet.jpg"
+            alt="img"
+            class="rounded-circle d-block m-auto team-img"
+          />
+          <p class="text-center team-name color-black mt-5">Arlette Moussang</p>
+          <p class="text-center team-position color-black">Editor</p>
+        </div>
+
+        <div class="col-md-3 m-3 border border-dark team-div px-5 pt-5">
+          <img
+            src="http://info.bridgeafrica.com/wp-content/uploads/2020/02/eunice.jpg"
+            alt="img"
+            class="rounded-circle d-block m-auto team-img"
+          />
+          <p class="text-center team-name color-black mt-5">Abre Eunice</p>
+          <p class="text-center team-position color-black">Administrative Assistant</p>
+        </div>
+
+        <div class="col-md-3 m-3 border border-dark team-div px-5 pt-5">
+          <img
+            src="http://info.bridgeafrica.com/wp-content/uploads/2020/02/maxines.png"
+            alt="img"
+            class="rounded-circle d-block m-auto team-img"
+          />
+          <p class="text-center team-name color-black mt-5">Maxine Meffo</p>
+          <p class="text-center team-position color-black">Co-founder</p>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -604,6 +680,30 @@ export default {};
 }
 .biz-konnect-video iframe {
   min-height: 100vh;
+}
+.letter-spacing {
+  letter-spacing: 0.05em;
+  color: #332f2f;
+}
+.team-name {
+  font-size: 24px;
+}
+.team-position {
+  margin-top: 20px;
+  font-size: 12px;
+  font-weight: bold;
+}
+.team-div {
+  transition: all 0.5s;
+  cursor: pointer;
+  border-bottom: 6px solid #e94a47 !important;
+}
+.team-div:hover {
+  background-color: #cecece;
+}
+.team-img {
+  height: 130px;
+  width: 130px;
 }
 @media only screen and (max-width: 600px) {
   .header-img-text {

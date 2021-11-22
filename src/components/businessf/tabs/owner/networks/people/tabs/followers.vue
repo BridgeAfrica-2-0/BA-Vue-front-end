@@ -115,7 +115,7 @@ export default {
       this.axios
       .post("network/"+this.url+"/people/follower/"+this.page, formData)
       .then(({ data }) => {
-       console.log(data);
+       console.log(data.data);
        console.log(this.page);
         if(keyword){
           this.displayfollowers = data.data;
@@ -142,11 +142,12 @@ export default {
         
     BlockUser(user_id) {
       this.loading = true;
+      console.log("----",user_id);
       console.log("network/"+this.url+"/lock/user/"+user_id);
-      this.axios.delete("network/"+this.url+"/lock/user/"+user_id)
+      this.axios.post("network/"+this.url+"/lock/user/"+user_id)
       .then(response => {
         console.log(response);
-        this.blockUsers();
+        // this.blockUsers();
         this.loading = false;
         this.flashMessage.show({
           status: "success",

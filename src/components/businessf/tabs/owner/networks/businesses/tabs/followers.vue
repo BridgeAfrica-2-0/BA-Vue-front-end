@@ -118,6 +118,7 @@ export default {
        console.log(this.page);
         if(keyword){
           this.displayfollowers = data.data;
+       
           this.searchTitle = "";
           $state.complete();
         }else{
@@ -127,6 +128,7 @@ export default {
             console.log(...data.data);
             this.businessfollowers.push(...data.data);
             this.displayfollowers = this.businessfollowers;
+               console.log("----",this.displayfollowers );
             $state.loaded();
           } else {
             $state.complete();

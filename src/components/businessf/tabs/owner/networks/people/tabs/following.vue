@@ -142,10 +142,10 @@ export default {
     BlockUser(user_id) {
       this.loading = true;
       console.log("network/"+this.url+"/lock/user/"+user_id);
-      this.axios.delete("network/"+this.url+"/lock/user/"+user_id)
+      this.axios.post("network/"+this.url+"/lock/user/"+user_id)
       .then(response => {
         console.log(response);
-        this.blockUsers();
+        // this.blockUsers();
         this.loading = false;
         this.flashMessage.show({
           status: "success",

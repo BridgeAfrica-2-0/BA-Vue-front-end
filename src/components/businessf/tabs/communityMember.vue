@@ -41,7 +41,7 @@
                           >
                             <h6 class="follower m-15">
                               {{ count(item.followers) }}
-                              Community
+                              Communit
                             </h6>
                           </b-col>
                         </b-row>
@@ -83,7 +83,7 @@
                               variant="primary"
                             >
                               <i class="fas fa-user-plus  fa-lg btn-icon "></i>
-                              <span class="btn-com">Community</span>
+                              <span class="btn-com">Communit</span>
                             </b-button>
                           </b-col>
                         </b-row>

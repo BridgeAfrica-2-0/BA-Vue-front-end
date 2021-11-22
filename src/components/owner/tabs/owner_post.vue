@@ -344,8 +344,6 @@
 </template>
 
 <script>
-
-
 import Post from '@/components/businessOwner/ownerPostComponent';
 
 import axios from 'axios';
@@ -469,8 +467,6 @@ export default {
     },
 
     deletePost(post) {
-      console.log(post);
-
       let loader = this.$loading.show({
         container: this.fullPage ? null : this.$refs.creatform,
         canCancel: true,
@@ -478,13 +474,10 @@ export default {
         color: '#e75c18',
       });
 
+      const path = `user/post/delete/${post.post_id ? post.post_id : post.id}`;
       axios
-        .delete('user/post/delete/' + post.post_id, {
-          name: this.name,
-        })
+        .delete(path)
         .then((response) => {
-          console.log(response.data);
-
           this.flashMessage.show({
             status: 'success',
             blockClass: 'custom-block-class',
@@ -524,7 +517,7 @@ export default {
     editPost(postarray) {
       this.edit_description = postarray.content;
       this.edit_image = postarray.media;
-      this.edit_id = postarray.post_id;
+      this.edit_id = postarray.post_id ? postarray.post_id : postarray.id;
 
       console.log(this.edit_image);
 

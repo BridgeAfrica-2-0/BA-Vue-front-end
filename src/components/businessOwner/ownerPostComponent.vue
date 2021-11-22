@@ -3,7 +3,7 @@
     <div class="mt-2">
       <div class="d-inline-flex">
         <span md="1" class="m-0 p-0">
-          <b-avatar class="d-inline-block avat" square variant="primary" :src="item.logo_path"></b-avatar>
+          <b-avatar class="d-inline-block avat avatar-border" square variant="primary" :src="item.logo_path"></b-avatar>
         </span>
         <div class="pl-2 pl-md-3 pt-md-2">
           <h5 class="m-0 usernamee">
@@ -48,7 +48,7 @@
       <div class="mt-2 p-2 post-border" v-if="item.source">
         <div class="d-inline-flex">
           <span md="1" class="m-0 p-0">
-            <b-avatar class="d-inline-block avat" square variant="primary" :src="item.logo_path"></b-avatar>
+            <b-avatar class="d-inline-block avat avatar-border" square variant="primary" :src="item.logo_path"></b-avatar>
           </span>
           <div class="pl-2 pl-md-3 pt-md-2">
             <h5 class="m-0 usernamee">
@@ -112,7 +112,7 @@
 
     <div class="mt-2 d-inline-flex w-100">
       <div class="m-md-0 p-md-0">
-        <b-avatar variant="primary" square :src="businessLogo" class="img-fluid avat-comment"></b-avatar>
+        <b-avatar variant="primary" square :src="businessLogo" class="img-fluid avat-comment avatar-border"></b-avatar>
       </div>
 
       <div class="p-0 m-0 pr-3 inline-comment">
@@ -297,6 +297,10 @@ export default {
 };
 </script>
 <style >
+
+.avatar-border {
+    border-radius: 50px !important;
+}
 .post-border {
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 10px;

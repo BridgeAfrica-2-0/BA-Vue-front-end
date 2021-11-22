@@ -5,11 +5,10 @@
         <img
           v-if="info.user.cover_picture == ''"
           src="@/assets/img/banner.jpg"
-          class="img-fluid  banner"
+          class="img-fluid banner"
           alt="Cover Image"
         />
-        
-        
+
         <img v-if="info.user.cover_picture" :src="info.user.cover_picture" class="img-fluid banner" alt="Cover Image" />
       </div>
 
@@ -82,7 +81,7 @@
 
                     <b-dropdown
                       id="dropdown-1"
-                      class="float-right  dot-btn mt-2 mt-sm-2 mt-md-0 mr-3"
+                      class="float-right dot-btn mt-2 mt-sm-2 mt-md-0 mr-3"
                       no-caret
                       variant="outline"
                       style="border-color: #ffD20; color: #ffD20"
@@ -94,17 +93,14 @@
                       <b-dropdown-item @click="selectCover"> Change Cover</b-dropdown-item>
 
                       <b-dropdown-item @click="RemoveCover"> Remove cover </b-dropdown-item>
-                       <b-dropdown-item @click="RemoveProfile"> Remove Profile </b-dropdown-item>
-
-
-                      
+                      <b-dropdown-item @click="RemoveProfile"> Remove Profile </b-dropdown-item>
 
                       <!--
                       <b-dropdown-item
                         >Invite Friends On Bridge Africa</b-dropdown-item
                       >
 -->
-                      <b-dropdown-item @click="viewAs" >View As</b-dropdown-item>
+                      <b-dropdown-item @click="viewAs">View As</b-dropdown-item>
                     </b-dropdown>
                   </span>
                 </div>
@@ -382,33 +378,21 @@ export default {
         });
     },
 
+    viewAs() {
+      let id = this.info.user.id;
 
-viewAs(){
+      this.$router.push({ name: 'Follower', params: { id: id } });
+    },
 
-  let id= this.info.user.id;
-
-
-  this.$router.push({ name: "Follower",params: { id:id}  });
-    
-
-},
-
-
-   RemoveProfile(){
-        
-         let loader = this.$loading.show({
+    RemoveProfile() {
+      let loader = this.$loading.show({
         container: this.fullPage ? null : this.$refs.preview,
         canCancel: true,
         onCancel: this.onCancel,
         color: '#e75c18',
       });
 
-
-
-
-
-
-       this.axios
+      this.axios
         .get('user/remove-cover')
         .then((response) => {
           console.log(response);
@@ -429,39 +413,26 @@ viewAs(){
         })
         .catch((err) => {
           console.log({ err: err });
-         
-            this.flashMessage.show({
-              status: 'error',
-              message: 'Unable to remove your cover',
-              blockClass: 'custom-block-class',
-            });
-            console.log({ err: err });
-            loader.hide();
-          
+
+          this.flashMessage.show({
+            status: 'error',
+            message: 'Unable to remove your cover',
+            blockClass: 'custom-block-class',
+          });
+          console.log({ err: err });
+          loader.hide();
         });
-
-
-
     },
 
-
-
-
-    RemoveCover(){
-        
-         let loader = this.$loading.show({
+    RemoveCover() {
+      let loader = this.$loading.show({
         container: this.fullPage ? null : this.$refs.preview,
         canCancel: true,
         onCancel: this.onCancel,
         color: '#e75c18',
       });
 
-
-
-
-
-
-       this.axios
+      this.axios
         .get('user/remove-cover')
         .then((response) => {
           console.log(response);
@@ -482,22 +453,16 @@ viewAs(){
         })
         .catch((err) => {
           console.log({ err: err });
-         
-            this.flashMessage.show({
-              status: 'error',
-              message: 'Unable to remove your profile',
-              blockClass: 'custom-block-class',
-            });
-            console.log({ err: err });
-            loader.hide();
-          
+
+          this.flashMessage.show({
+            status: 'error',
+            message: 'Unable to remove your profile',
+            blockClass: 'custom-block-class',
+          });
+          console.log({ err: err });
+          loader.hide();
         });
-
-
-
     },
-
-
 
     submitCroppedCover() {
       this.cropedImage = this.$refs.cropper.getCroppedCanvas().toDataURL();
@@ -619,8 +584,6 @@ viewAs(){
           }
         });
     },
-
-    
   },
 
   mounted() {
@@ -856,23 +819,23 @@ viewAs(){
 .gradient{
 
   background-image: linear-gradient(1deg, black, transparent);  */
-	/*  background-image: url("../assets/img/profile_back.png");  
+/*  background-image: url("../assets/img/profile_back.png");  
 
 } 
  */
 
-	.edit-btn:hover {
-		border-color: #b39500 !important ;
-		background-color: #b39500 !important ;
-	}
+.edit-btn:hover {
+  border-color: #b39500 !important ;
+  background-color: #b39500 !important ;
+}
 
-	.btn:focus {
-		border-color: #b39500 !important;
-		background-color: #b39500 !important ;
-	}
+.btn:focus {
+  border-color: #b39500 !important;
+  background-color: #b39500 !important ;
+}
 
-	.btn:active {
-		border-color: #e4c229 !important;
-		background-color: #b39500 !important ;
-	}
+.btn:active {
+  border-color: #e4c229 !important;
+  background-color: #b39500 !important ;
+}
 </style>

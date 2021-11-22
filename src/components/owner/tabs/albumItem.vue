@@ -31,7 +31,7 @@
       </div>
     </a>
 
-    <div class="mediadesc" v-if="canUpload">
+    <div class="mediadesc" v-if="isEditor">
       <ul class="navbar-nav pull-right options">
         <li class="nav-item dropdown">
           <b-dropdown size="sm" class="call-action" variant="link" toggle-class="text-decoration-none" no-caret>
@@ -55,7 +55,7 @@ import defaultImage from '@/assets/img/nothing.jpg';
 import { fullMediaLink } from '@/helpers';
 
 export default {
-  props: ['album', 'type', 'deleteAlbums', 'editAlbum', 'canBeUpdate', 'showAlbumPictures', 'canUpload'],
+  props: ['album', 'type', 'deleteAlbums', 'editAlbum', 'canBeUpdate', 'showAlbumPictures', 'isEditor'],
 
   data: () => ({
     upHere: false,

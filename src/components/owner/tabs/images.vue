@@ -4,7 +4,7 @@
   </div>
   <div class="row" v-else>
     <div class="container-fluid">
-      <p v-if="!allImages.length && !canUpload" style="font-size: 3rem">
+      <p v-if="!allImages.length" style="font-size: 3rem">
         {{ $t('profileowner.No_items_found') }}
       </p>
 
@@ -32,7 +32,7 @@
         >
       </b-modal>
 
-      <div class="createp img-gall image-wrapp img-size" v-if="canUpload">
+      <div class="createp img-gall image-wrapp img-size" v-if="showCreateForm">
         <div class="">
           <input
             type="file"
@@ -92,10 +92,7 @@ export default {
   },
   props: {
     album: {},
-    isEditor: {
-      type: Boolean,
-     required:true
-    },
+    isEditor: {},
      addItem: {
       type: Boolean,
       default: function () {
@@ -117,6 +114,10 @@ export default {
       default: function () {
         return false;
       },
+    },
+    showCreateForm: {
+      type: Boolean,
+      required:true,
     },
     images: {
       type: Array,
@@ -156,6 +157,7 @@ export default {
   },
 
   created() {
+    
     this.allImages = this.images;
 
     this.pattern = {

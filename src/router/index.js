@@ -89,10 +89,6 @@ const routes = [
     name: "payment",
     component: payment
   },
-
-
-
-
   {
     path: "/welcome",
     name: "welcome",

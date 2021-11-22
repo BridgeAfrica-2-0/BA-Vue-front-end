@@ -11,6 +11,7 @@
 
         <Images
           :isEditor="isEditor"
+          :showCreateForm="false"
           :hasLoadPicture="!hasLoadPicture"
           :images="all()"
           :albumName="'notFound'"
@@ -18,12 +19,13 @@
           :type="type"
           v-else
         />
+
       </b-tab>
       <b-tab :title="$t('profileowner.Albums')" @click="getAlbums">
         <div v-if="!hasLoadAlbum">
           <b-spinner class="load" :label="$t('profileowner.Large_Spinner')"></b-spinner>
         </div>
-        <Album :isEditor="isEditor" :type="type" v-else :getAlbums="getAlbums" :getImages="getImages"/>
+        <Album :isEditor="isEditor" :type="type" v-else :getAlbums="getAlbums" :getImages="getImages" />
       </b-tab>
     </b-tabs>
   </div>
@@ -45,10 +47,10 @@ export default {
         return ['profile', 'network', 'business'].indexOf(value) !== -1;
       },
     },
-    isEditor:{
-      type:Boolean,
-      default: () => false
-    }
+    isEditor: {
+      type: Boolean,
+      default: () => true,
+    },
   },
   data: function () {
     return {
@@ -57,7 +59,7 @@ export default {
       hasLoadPicture: false,
       showAlbum: false,
       strategy: null,
-      addItem:false
+      addItem: false,
     };
   },
 
@@ -103,7 +105,7 @@ export default {
           .dispatch(type.album, this.urlData)
           .then(() => {
             this.hasLoadAlbum = true;
-            this.addItem = true
+            this.addItem = true;
           })
           .catch((err) => {
             this.hasLoadAlbum = true;
@@ -124,7 +126,7 @@ export default {
           .dispatch(type.image, this.urlData)
           .then(() => {
             this.hasLoadPicture = true;
-            this.addItem = true
+            this.addItem = true;
           })
           .catch((err) => {
             this.hasLoadPicture = true;

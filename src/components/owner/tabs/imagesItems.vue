@@ -39,14 +39,19 @@
             <template #button-content>
               <b-icon icon="three-dots-vertical" color="white" variant="light"> </b-icon>
             </template>
+
             <b-dropdown-item @click="onDownloadPic()"> {{ $t('profileowner.Download') }}</b-dropdown-item>
-            <b-dropdown-item href="#" @click="onSetProfilePic()" v-if="canUpload && !['video'].includes(typeOfMedia())">{{
-              $t('profileowner.Make_Profile_Picture')
-            }}</b-dropdown-item>
-            <b-dropdown-item  @click="onSetCoverPic()" v-if="canUpload && !['video'].includes(typeOfMedia())">{{
-              $t('profileowner.Make_Cover_Photo')
-            }}</b-dropdown-item>
-            <b-dropdown-item href="#" @click="onDeleteImage()" v-if="canUpload">{{ $t('profileowner.Delete') }}</b-dropdown-item>
+            
+            <b-dropdown-item href="#" @click="onSetProfilePic()" v-if="isEditor && !['video'].includes(typeOfMedia())">
+              {{$t('profileowner.Make_Profile_Picture')}}
+            </b-dropdown-item>
+
+            <b-dropdown-item  @click="onSetCoverPic()" v-if="isEditor && !['video'].includes(typeOfMedia())">
+              {{ $t('profileowner.Make_Cover_Photo')}}
+            </b-dropdown-item>
+            <b-dropdown-item href="#" @click="onDeleteImage()" v-if="isEditor">
+              {{ $t('profileowner.Delete') }} 
+            </b-dropdown-item>
           </b-dropdown>
         </li>
       </ul>
@@ -63,6 +68,7 @@ export default {
     'imageProps',
     'content',
     'canUpload',
+    'isEditor',
     'typeOfMedia',
     'getFullMediaLink',
     'getYoutubeKey',

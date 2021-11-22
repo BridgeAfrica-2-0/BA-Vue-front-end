@@ -4,7 +4,7 @@
     <div class="row">
       <div class="container-fluid" v-if="showalbum == false">
         <div class="one2">
-          <div class="createp img-gall image-wrapp img-size">
+          <div class="createp img-gall image-wrapp img-size" v-if="isEditor">
             <div class="">
               <a v-b-modal.createalbumModal>
                 <div class="drag-textt">
@@ -35,7 +35,7 @@
             :canBeUpdate="canBeUpdate(album)"
             :showAlbumPictures="() => showAlbumPictures(album)"
             :type="type"
-            :canUpload="canUpload"
+            :isEditor="isEditor"
           />
         </div>
 
@@ -108,13 +108,14 @@
 
       <Images
         @update:item="() => updateItem()"
+        :showCreateForm="isEditor"
         :hasLoadPicture="hasLoadPicture"
         :album="album_id"
         :type="type"
         :albumName="album_name"
         :showAlbum="canViewAlbum"
+        :isEditor="isEditor"
         :canUpload="
-          canUpload &&
           ['profile_picture', 'Profile', 'Cover', 'cover_photo', 'Cover Photo', 'logo', 'Logo', 'post'].includes(
             album_name,
           )

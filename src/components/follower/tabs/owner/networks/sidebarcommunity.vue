@@ -4,14 +4,14 @@
       <span>
         <h6 class="title m-3">
           <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
-          <b> COMMUNITY </b> <span class="h4-color"> 7K </span>
+          <b> {{ $t('profilefollower.COMMUNITY') }} </b> <span class="h4-color"> 7K </span>
         </h6>
       </span>
 
       <b-tabs pills content-class="mt-3  f-left ">
         <b-tab active>
           <template slot="title">
-            People <span class="spa-color"> 7K </span>
+            {{ $t('profilefollower.People') }} <span class="spa-color"> 7K </span>
           </template>
 
           <div>
@@ -20,7 +20,7 @@
                 <b-tabs fill pills content-class="mt-3  f-left m-up">
                   <b-tab active>
                     <template slot="title">
-                      Followers <span class="spa-color"> 7K </span>
+                      {{ $t('profilefollower.Followers') }} <span class="spa-color"> 7K </span>
                     </template>
 
                     <div class="s-comcard"><People /></div>
@@ -28,7 +28,7 @@
 
                   <b-tab>
                     <template slot="title">
-                      Following <span class="spa-color"> 7K </span>
+                      {{ $t('profilefollower.Following') }} <span class="spa-color"> 7K </span>
                     </template>
 
                     <div class="s-comcard"><People /></div>
@@ -41,14 +41,14 @@
 
         <b-tab>
           <template slot="title">
-            Businesses <span class="spa-color"> 7K </span>
+            {{ $t('profilefollower.Businesses') }} <span class="spa-color"> 7K </span>
           </template>
 
           <div>
             <b-tabs fill pills content-class="mt-3  f-left m-up checkcheck">
               <b-tab active>
                 <template slot="title">
-                  Followers <span class="spa-color"> 7K </span>
+                  {{ $t('profilefollower.Followers') }} <span class="spa-color"> 7K </span>
                 </template>
 
                 <div class="s-comcard"><Business /></div>
@@ -56,7 +56,7 @@
 
               <b-tab>
                 <template slot="title">
-                  Following <span class="spa-color"> 7K </span>
+                  {{ $t('profilefollower.Following') }} <span class="spa-color"> 7K </span>
                 </template>
 
                 <div class="s-comcard"><Business /></div>

@@ -24,6 +24,9 @@ import business from "./business";
 import profile from "./profile";
 import networkProfileMembers from "./networkProfileMembers";
 import follower from "./follower";
+import keywordOperationOnNetwork from "./keywordOperationOnNetwork";
+
+
 import networkProfile from "./networkProfile";
 import UserProfileOwner from "./UserProfileOwner"
 import { search } from "./search";
@@ -37,15 +40,8 @@ import networkProfileMemberRequest from "./networkProfileMemberRequest";
 import { social } from "./social";
 import { notification } from "./notifications"
 
-// import axios from "axios";
 Vue.use(Vuex);
- //axios.defaults.baseURL = process.env.VUE_APP_API_URL;
-  axios.defaults.baseURL = "https://edson.maxinemoffett.com/api/v1/";
-
-//axios.defaults.baseURL = "https://88f0-154-72-150-114.ngrok.io/api/v1/";
-
-//axios.defaults.baseURL = "https://qa-bridgeafrica-api.maxinemoffett.com/api/v1/";
-
+ axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 
 export default new Vuex.Store({
   modules: {
@@ -73,7 +69,8 @@ export default new Vuex.Store({
     business,
     networkProfileFeedback,
     NetworkSettings,
-   
+    keywordOperationOnNetwork,
+    orderBusiness,
     businessSettingInfo,
     checkout,
     social,
@@ -83,9 +80,7 @@ export default new Vuex.Store({
     networkProfileMedia,
     networkProfileMemberRequest,
     networkProfile,
-    orderBusiness,
     notification
-
   }
 });
 

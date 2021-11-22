@@ -1,6 +1,26 @@
 <template>
   <div>
     <div class="products ">
+      <!-- MARKET HEADER BAR -->
+      <div class="col-12 d-flex align-items-center justify-content-between">
+        <p>
+          <b-icon
+            font-scale="1.8"
+            icon="shop"
+            variant="primary"
+            class="mr-2"
+          ></b-icon>
+          <span class="font-weight-bold">Market</span>
+        </p>
+        <b-button variant="outline-primary" @click="createProduct"
+          >Add Product</b-button
+        >
+      </div>
+      <div class="col-12">
+        <hr class="h-divider" />
+      </div>
+
+      <!-- MARKET PRODUCT LIST -->
       <div class="col-md-6" v-for="(product, index) in products" :key="index">
         <Product :product="product" />
       </div>
@@ -10,15 +30,11 @@
           variant="primary"
         ></b-spinner>
       </b-col>
-      <b-col v-if="products.lentgh < 1 && !loader" class="load">
-        <p>No notifications to show !!</p>
+      <b-col class="my-4 load" v-if="products.length < 1 && !loader">
+        <p>No Products in Market !!</p>
       </b-col>
     </div>
-          <button class="button" @click="displayOrders">my orders</button>
-          <div class="orders"  >
-            
-            <Orders />
-          </div>
+    <!-- ADDPRODUCT FORM -->
     <b-modal hide-footer title="Add product" v-model="showModal">
       <b-form>
         <b-row>
@@ -62,6 +78,7 @@
                 accept="image/*"
                 id="image"
                 v-show="false"
+                required
               />
               <a href="#" data-toggle="modal" data-target="#createalbumModal">
                 <div class="drag-text">
@@ -76,30 +93,24 @@
 
         <b-form-group
           id="input-group-1"
-          label="Product Description"
+          label="Product Price"
           label-for="input-1"
           label-size="sm"
         >
           <b-form-input
             v-model="newProduct.price"
             class="mt-1"
+            type="number"
             id="price"
+            required
           ></b-form-input>
         </b-form-group>
-
-        <b-form-checkbox
-          value="1"
-          v-model="newProduct.on_discount"
-          unchecked-value="0"
-        >
-          <b-form-input class="mt-1" id="price"></b-form-input>
-        </b-form-checkbox>
-
         <b-form-checkbox
           id="checkbox-1"
+          v-model="newProduct.on_discount"
           name="checkbox-1"
-          value="accepted"
-          unchecked-value="not_accepted"
+          value="1"
+          unchecked-value="0"
         >
           This Product Is On Discount
         </b-form-checkbox>
@@ -114,31 +125,127 @@
             v-model="newProduct.condition"
             class="mt-1"
             id="conditions"
+            required
           ></b-form-input>
         </b-form-group>
 
-        <b-form-checkbox
-          value="1"
-          v-model="newProduct.is_service"
-          unchecked-value="0"
-        >
-          This Item Is A Service ?
-        </b-form-checkbox>
+        <!-- CHECKBOX FLEX BOX -->
+        <div class="d-flex justify-content-between align-items-start flex-wrap">
+          <b-form-checkbox
+            value="1"
+            v-model="newProduct.is_service"
+            unchecked-value="0"
+          >
+            This Item Is A Service ?
+          </b-form-checkbox>
 
-        <b-form-checkbox
-          value="1"
-          v-model="newProduct.in_stock"
-          unchecked-value="0"
-        >
-          In stock
-        </b-form-checkbox>
+          <b-form-checkbox
+            value="1"
+            v-model="newProduct.in_stock"
+            unchecked-value="0"
+          >
+            In stock
+          </b-form-checkbox>
 
-        <b-form-checkbox value="1" unchecked-value="0">
-          Published
-        </b-form-checkbox>
+          <b-form-checkbox value="1" unchecked-value="0">
+            Published
+          </b-form-checkbox>
+        </div>
+        <!-- TAX and KG -->
+        <b-form-group
+          id="tax"
+          label="Tax"
+          label-for="input-tax"
+          label-size="sm"
+        >
+          <b-form-input
+            v-model="newProduct.tax"
+            class="mt-1"
+            id="tax"
+            type="number"
+            required
+          ></b-form-input>
+        </b-form-group>
+        <b-form-group
+          id="kg"
+          label="Kilogramme"
+          label-for="input-kg"
+          label-size="sm"
+        >
+          <b-form-input
+            v-model="newProduct.kg"
+            class="mt-1"
+            id="kg"
+            type="number"
+            required
+          ></b-form-input>
+        </b-form-group>
+        <!-- CATEGORIES -->
+        <div class="mt-2">
+          <label class="typo__label"> Category </label>
+          <multi-select
+            v-model="multiselecvalue"
+            @input="subcategories"
+            tag-placeholder="Add this as new tag"
+            placeholder="Search or add a tag"
+            label="name"
+            track-by="id"
+            :options="BuCategories"
+            :taggable="true"
+            @tag="addTag"
+          ></multi-select>
+        </div>
+        <!-- SUB-CATEGORIES -->
+        <div class="mt-2">
+          <label class="typo__label"> Sub Category</label>
+          <multi-select
+            v-model="filterselectvalue"
+            tag-placeholder="Add this as new tag"
+            placeholder="Search or add a tag"
+            label="name"
+            track-by="subcategoryId"
+            :options="scategories"
+            :multiple="true"
+            :taggable="true"
+            @tag="addFilter"
+          ></multi-select>
+        </div>
+        <label class="typo__label">Fiters </label>
+        <div>
+          <b-card no-body>
+            <b-tabs pills card vertical>
+              <b-tab
+                :title="filters.name"
+                v-for="filters in filterselectvalue"
+                :key="filters.id"
+                active
+                ><b-card-text>
+                  <b-form-group label="Filters" class="colorblack">
+                    <b-form-checkbox-group
+                      id=""
+                      class="colorblack"
+                      v-model="select_filterss"
+                      name="filters"
+                    >
+                      <b-form-checkbox
+                        class="colorblack"
+                        v-for="fil in filters.filters"
+                        :key="fil.id"
+                        :value="fil.id"
+                      >
+                        {{ fil.name }}
+                      </b-form-checkbox>
+                    </b-form-checkbox-group>
+                  </b-form-group>
+                </b-card-text></b-tab
+              >
+            </b-tabs>
+          </b-card>
+        </div>
+
         <b-alert v-if="success" :variant="val" show> {{ msg }} </b-alert>
         <b-button @click="addProduct" class="mt-2 btn-block" variant="primary">
-          <b-spinner v-if="load" variant="white"></b-spinner>
+          <b-spinner small v-if="load" variant="white"></b-spinner>
 
           Add</b-button
         >
@@ -150,66 +257,101 @@
 <script>
 import Product from "../product";
 import axios from "axios";
-import Orders from "@/views/businessOwnerOrders";
+import MultiSelect from "vue-multiselect";
 export default {
+  name: "MarketPlace",
+  components: {
+    MultiSelect,
+    Product,
+  },
   data() {
     return {
-      status: false,
       showModal: false,
       load: false,
       loader: false,
       newProduct: {
         name: "",
         description: "",
-        picture: "",
+        picture: null,
         price: "",
         in_stock: "",
-        on_discount: null,
-        discount_price: "",
+        on_discount: false,
+        discount_price: 0,
         condition: "",
         is_service: null,
+        status: 1,
+        business_id: "",
+        categoryId: "",
+        subCategoryId: "",
+        filterId: "",
+        tax: "",
+        kg: "",
       },
       products: [],
       val: "",
       msg: "",
       success: false,
+      multiselecvalue: [],
+      filterselectvalue: [],
+      select_filterss: [],
+      multiselec: [
+        { name: "Vue.js", code: "vu" },
+        { name: "Javascript", code: "js" },
+        { name: "Open Source", code: "os" },
+      ],
     };
   },
-  components: {
-    Product,
-    Orders
-  },
-  beforeMount() {
-    this.loader = true;
-    axios.defaults.headers.common["Authorization"] =
-      "Bearer " + localStorage.getItem("access_token");
-    this.getProducts();
+  computed: {
+    BuCategories() {
+      return this.$store.state.market.categories;
+    },
+    scategories() {
+      return this.$store.state.auth.subcategories;
+    },
+    selectedcategories: function() {
+      let selectedCatUsers = [];
+      if (this.multiselecvalue.id) {
+        // selectedUsers.push(item.id);
+        selectedCatUsers.push(this.multiselecvalue.id);
+      } else {
+        selectedCatUsers.push(this.multiselecvalue.category_id);
+      }
+      return selectedCatUsers;
+    },
   },
   methods: {
-    displayOrders(){ 
-      this.status = !this.status ;
-      console.log("----"+ this.status);
-    },
-    getProducts() {
-      axios.get("market").then((res) => { console.log("-------"+res.data.data);
-        this.loader = false ;
-
-        this.products = res.data.data.data;
-      });
+    getProducts: async function() {
+      await axios
+        .get("/market")
+        .then((res) => {
+          console.log(res.data);
+          this.products = res.data.data;
+          console.log(this.products);
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+        .finally(() => {
+          this.loader = false;
+        });
     },
     addProduct() {
       this.load = true;
       let fd = new FormData();
-      fd.append("name", this.newProduct.name);
-      fd.append("description", this.newProduct.description);
-      fd.append("picture", this.newProduct.picture);
-      fd.append("price", this.newProduct.price);
-      fd.append("in_stock", this.newProduct.in_stock);
-      fd.append("on_discount", this.newProduct.on_discount);
-      fd.append("discount_price", this.newProduct.discount_price);
-      fd.append("condition", this.newProduct.condition);
-      fd.append("is_service", this.newProduct.is_service);
 
+      //init data
+      this.newProduct.business_id = this.$route.params.id;
+      this.newProduct.categoryId = this.multiselecvalue.id;
+      this.newProduct.subCategoryId = this.filterselectvalue
+        .map((el) => el.subcategory_id)
+        .join();
+      this.newProduct.filterId = this.select_filterss.join();
+
+      //transform product data in form data
+      for (const key in this.newProduct) {
+        fd.append(key, this.newProduct[key]);
+      }
+      console.log("NEW PRODUCT", this.newProduct);
       axios
         .post("market", fd)
         .then((res) => {
@@ -232,24 +374,47 @@ export default {
       document.querySelector("#image").click();
     },
     getImage(e) {
+      console.log(e.target.files[0]);
       this.newProduct.picture = e.target.files[0];
     },
     createProduct() {
       this.showModal = !this.showModal;
     },
+    subcategories() {
+      //get subcategories
+      let formData2 = new FormData();
+      formData2.append("categoryId", this.selectedcategories);
+      this.$store.dispatch("auth/subcategories", formData2);
+    },
+    addTag(newTag) {
+      const tag = {
+        name: newTag,
+        id: newTag.substring(0, 2) + Math.floor(Math.random() * 10000000),
+      };
+      this.multiselec.push(tag);
+      this.multiselecvalue.push(tag);
+    },
+    addFilter(newTag) {
+      const tag = {
+        name: newTag,
+        id: newTag.substring(0, 2) + Math.floor(Math.random() * 10000000),
+      };
+      this.multiselec.push(tag);
+      this.filterselectvalue.push(tag);
+    },
+  },
+  beforeMount() {
+    this.loader = true;
+    //get market place products
+    this.getProducts();
+    //get categories for current business
+    const businessId = this.$route.params.id;
+    this.$store.dispatch("market/getBuCategories", businessId);
   },
 };
 </script>
 
 <style scoped>
-.button {
-  width: 120px;
-  height: 40px;
-  color: white;
-  border-radius: 5px;
-  border: none;
-  background-color: #e75c18;
-}
 .load {
   display: flex;
   justify-content: center;

@@ -78,6 +78,7 @@
                 data-original-title=""
                 title=""
               />
+                
 
               <input
                 id="search-location"
@@ -86,7 +87,7 @@
                 list="browsers"
                 data-toggle="popover"
                 class="form-control search-h"
-                placeholder="Where"
+                placeholder="Where "
                 aria-label="search bridge africa"
                 data-original-title=""
                 title=""
@@ -94,7 +95,7 @@
 
               <datalist id="browsers">
                 <option value=" Current Location "></option>
-                <option value="Yaounde" />
+                <option value="Yaounde " />
               </datalist>
               <slot name="button">
                 <Button />
@@ -545,12 +546,11 @@
 </template>
 
 <script>
+
 import Button from '@/components/ButtonNavBarFind.vue';
 import Activity from '@/components/ShowActivity.vue';
 
 import { mapGetters, mapActions } from 'vuex';
-
-
 
 export default {
   name: 'navbar',
@@ -564,13 +564,14 @@ export default {
       type: Object,
       default: function () {
         return {
-          keyword: "",
-          placeholder: "",
+
+          keyword: '',
+          placeholder: '',
         };
-      },
       },
 
     },
+  },
 
   data() {
     return {
@@ -578,41 +579,27 @@ export default {
       shownav: false,
     };
   },
+
   computed: {
-    users() {
-      return this.$store.getters["userChat/getUsers"];
-    },
-     ...mapGetters({
+    ...mapGetters({
       hasLauchNetworkRequest: 'social/INIT',
       user: 'auth/profilConnected',
     }),
-    activeAccount() {
-      return this.$store.getters['auth/profilConnected'];
-    }
   },
 
   created() {
     this.init();
-    this.getUsers();
-    console.log("Active connected", this.activeAccount);
   },
 
   methods: {
     ...mapActions({
       setNetworks: 'social/FIND_USER_NETWORK',
       setBusiness: 'social/FIND_USER_BUSNESS',
-      lauchNetworkRequest: 'social/INIT'
+      lauchNetworkRequest: 'social/INIT',
     }),
     toggleinfput() {
       this.$refs.mobileinput.style.display = 'block';
       this.isActive = true;
-    },
-    getUsers() {
-      this.$store
-        .dispatch("userChat/GET_USERS",'')
-    },
-    toggleinput() {
-      this.$refs.mobileinput.style.display = "block";
     },
 
 

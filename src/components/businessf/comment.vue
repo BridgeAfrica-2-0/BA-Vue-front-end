@@ -48,6 +48,7 @@ export default {
   data() {
     return {
       reply: false,
+      
       msg:" Lorem Ipsum has been the industry's   this is do goodfive centuries, but  the leap into electronic      this is do goodfive centuries, but  the leap into electronic        this is do goodfive centuries, but  the leap into electronic  this sis sit tit typesetting",
 
     };

@@ -32,7 +32,9 @@
       <Settings v-bind:currenttab="selectedId" />
     </div>
 
-   
+    <div class="mt-3" v-if="selectedId == '4'">
+      <Settings v-bind:currenttab="selectedId" />
+    </div>
 
     <Footer />
   </div>
@@ -77,6 +79,7 @@ export default {
        
         { label: "Insight", icon: "" },
 
+        { label: "Settings", icon: "" }
       ],
       options: {
         activeColor: "#1d98bd"

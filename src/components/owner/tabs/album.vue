@@ -40,14 +40,13 @@
           </b-modal>
 
           <AlbumItem
-            v-for="album in strategy[type]().albums"
+            v-for="album in getAlbums"
             :key="album.id"
             :album="album"
             :editAlbum="() => editAlbum(album)"
             :deleteAlbums="() => deleteAlbums(album.id)"
-            :canBeUpdate="!canBeUpdate(album)"
+            :canBeUpdate="() => canBeUpdate(album)"
             :showAlbumPictures="() => showAlbumPictures(album)"
-            :type="type"
           />
         </div>
 
@@ -122,6 +121,7 @@
         </div>
       </div>
     </div>
+
     <!-- show  images in an album -->
 
     <div class="container-flex" v-if="showalbum">
@@ -131,19 +131,17 @@
       <span class="text-center ml-2 f-20"> {{ this.album_name }} </span>
 
       <Images
-        @update:item="() => updateItem()"
         :hasLoadPicture="hasLoadPicture"
         :album="album_id"
-        :type="type"
         :albumName="album_name"
         :showAlbum="canViewAlbum"
         :canUpload="
-          ['profile_picture', 'Profile', 'Cover', 'cover_photo', 'logo', 'post'].includes(
-            album_name
-          ) ? false: true || canUpload
+          ['profile_picture', 'cover_photo', 'post'].indexOf(album_name) == -1
+            ? true
+            : canUpload
         "
-        :images="strategy[type]().showAlbumImages"
-        @reste="hidealbum"
+        :images="albumImages"
+        @close:album="() => hidealbum()"
       />
     </div>
   </div>
@@ -162,17 +160,11 @@ export default {
     Images,
     AlbumItem,
   },
-
   props: {
     canUpload: {
       type: Boolean,
     },
-    type: {
-      type: String,
-      require: true,
-    },
   },
-
   data: function () {
     return {
       hasLoadPicture: true,
@@ -191,36 +183,10 @@ export default {
       album_name: "",
       album_type: "",
       edit_name: "",
-      strategy: null,
     };
   },
-  created() {
+  mounted() {
     this.url = this.$route.params.id;
-
-    this.strategy = {
-      business: () => ({
-        albums: this.getAlbumsBusiness,
-        showalbum: this.getAlbumProfileImages,
-        showAlbumImages: this.albumImagesBusiness,
-        createAlbum: this.createAlbumBusiness,
-        fetchAlbums: this.fetchAlbumsBusiness,
-        deleteAlbum: this.deleteAlbumBusiness,
-        remove: this.removeBusiness,
-        updateAlbum: this.updateAlbumBusiness,
-        mapUpdate: this.mapUpdateBusiness,
-      }),
-      profile: () => ({
-        albums: this.getAlbumsProfile,
-        showalbum: this.getAlbumImages,
-        showAlbumImages: this.albumImagesProfile,
-        createAlbum: this.createAlbum,
-        fetchAlbums: this.fetchAlbums,
-        deleteAlbum: this.deleteAlbum,
-        updateAlbum: this.updateAlbum,
-        remove: this.remove,
-        mapUpdate: this.mapUpdate,
-      }),
-    };
   },
 
   filters: {
@@ -232,13 +198,9 @@ export default {
 
   computed: {
     ...mapGetters({
-      getAlbumsProfile: "UserProfileOwner/getAlbums",
-      getAlbumImageProfile: "UserProfileOwner/getAlbumImage",
-      albumImagesProfile: "UserProfileOwner/getalbumImages",
-
-      getAlbumsBusiness: "businessOwner/getAlbums",
-      getAlbumImageBusiness: "businessOwner/getAlbumImage",
-      albumImagesBusiness: "businessOwner/getalbumImages",
+      getAlbums: "UserProfileOwner/getAlbums",
+      getAlbumImage: "UserProfileOwner/getAlbumImage",
+      albumImages: "UserProfileOwner/getalbumImages",
     }),
 
     canCreateAlbum() {
@@ -253,12 +215,6 @@ export default {
       deleteAlbum: "UserProfileOwner/deleteAlbum",
       getAlbumImages: "UserProfileOwner/getAlbumImages",
       fetchAlbums: "UserProfileOwner/getAlbums",
-
-      createAlbumBusiness: "businessOwner/createAlbum",
-      getAlbumProfileImages: "businessOwner/getAlbumImages",
-      fetchAlbumsBusiness: "businessOwner/getAlbums",
-      deleteAlbumBusiness: "businessOwner/deletedAlbum",
-      updateAlbumBusiness: "businessOwner/updatedAlbum",
     }),
 
     getFullMediaLink: fullMediaLink,
@@ -270,9 +226,6 @@ export default {
     ...mapMutations({
       mapUpdate: "UserProfileOwner/updateAlbum",
       remove: "UserProfileOwner/removeAlbum",
-
-      mapUpdateBusiness: "businessOwner/updateAlbum",
-      removeBusiness: "businessOwner/removeAlbum",
     }),
 
     hidealbum() {
@@ -280,48 +233,27 @@ export default {
     },
 
     showAlbumPictures(album) {
-      const credentials =
-        "business" == this.type
-          ? {
-              data: { businessId: this.$route.params.id, albumId: album.id },
-            }
-          : { data: album.id };
-
-      return this.strategy[this.type]()
-        .showalbum(credentials.data)
+      this.getAlbumImages(album.id)
         .then(() => {
           this.album_id = album.id;
           this.album_name = album.name;
           this.showalbum = true;
           this.hasLoadPicture = false;
-          return true
         })
         .catch(() => {
           this.hasLoadPicture = false;
-          return false
         });
     },
 
     canBeUpdate(album) {
-      return ["profile_picture", 'Profile', 'Cover', "cover_photo", "logo", "post"].includes(
-        album.name
-      )
-        ? false
-        : true;
+      return  ["Profile", "Cover", "post"].includes(album.name) ? false : true;
     },
 
     createAlbums() {
       this.loading = true;
-
-      const data =
-        "business" == this.type
-          ? { id: this.$route.params.id, data: this.albumInfo }
-          : this.albumInfo;
-
-      this.strategy[this.type]()
-        .createAlbum(data)
+      this.createAlbum(this.albumInfo)
         .then(() => {
-          this.strategy[this.type]().fetchAlbums(this.$route.params.id);
+          this.fetchAlbums();
         })
         .then(() => {
           this.$bvModal.hide("createalbumModal");
@@ -360,13 +292,12 @@ export default {
     updateAlbums(id, name) {
       this.loading = true;
 
-      this.strategy[this.type]()
-        .updateAlbum({
-          id: id,
-          name: name,
-        })
+      this.updateAlbum({
+        id: id,
+        name: name,
+      })
         .then(() => {
-          this.strategy[this.type]().mapUpdate({ name, id });
+          this.mapUpdate({ name, id });
           this.$bvModal.hide("editalbum");
           this.flashMessage.show({
             status: "success",
@@ -386,15 +317,9 @@ export default {
     },
 
     deleteAlbums(id) {
-      const data =
-        "business" == this.type
-          ? { businessID: this.$route.params.id, albumID: id }
-          : id;
-
-      this.strategy[this.type]()
-        .deleteAlbum(data)
+      this.deleteAlbum(id)
         .then(() => {
-          this.strategy[this.type]().remove(id);
+          this.remove(id);
           this.flashMessage.show({
             status: "success",
             message: "Album Deleted",
@@ -422,6 +347,7 @@ export default {
   background: #e75c18 !important;
   border-radius: 50%;
 }
+
 </style>
 
 <style>

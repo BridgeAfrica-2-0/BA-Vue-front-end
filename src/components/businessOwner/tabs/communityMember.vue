@@ -64,7 +64,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 export default {
   props: ['type', 'searchh'],
   data() {
@@ -196,6 +195,11 @@ export default {
 
 <style scoped>
 @media only screen and (min-width: 768px) {
+  .s-cardd {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
   .btn-text {
     margin-left: 8px;
   }
@@ -230,7 +234,7 @@ export default {
 
   .s-cardd {
     padding-left: 6px;
-    padding-right: 1px;
+    padding-right: 2px;
   }
 }
 
@@ -266,7 +270,7 @@ export default {
 
 .a-left {
   text-align: left;
-  /*align-content: left;*/
+  align-content: left;
 }
 
 hr {
@@ -287,12 +291,12 @@ hr {
 
 f-right {
   text-align: right;
-  /*align-content: right;*/
+  align-content: right;
 }
 
 .f-left {
   text-align: left;
-  /*align-content: left;*/
+  align-content: left;
 }
 
 @media only screen and (max-width: 768px) {
@@ -392,8 +396,8 @@ f-right {
     border: 1px solid rgba(0, 0, 0, 0.125);
     margin-bottom: 10px;
 
-    margin-right: 5px;
-    margin-left: 3px;
+    margin-right: 1px;
+    margin-left: 1px;
   }
 
   h6 {
@@ -446,8 +450,8 @@ f-right {
     border: 1px solid rgba(0, 0, 0, 0.125);
     margin-bottom: 10px;
 
-    margin-right: 2px;
-    margin-left: 6px;
+    margin-right: 1px;
+    margin-left: 1px;
   }
 
   h6 {

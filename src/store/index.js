@@ -1,30 +1,27 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
+import checkout from "./checkout";
 
 import auth from "./auth";
-import businessBlocking from "./businessBlocking";
 import dashboard from "./dashboard";
+import businessBlocking from "./businessBlocking";
 import businessGeneral from "./businessGeneral";
 import businessRole from "./businessRole";
 import businessAccountType from "./businessAccountType";
 import businessOwner from "./businessOwner";
-import marketSearch from "./marketSearch";
-import networkSearch from "./networkSearch";
-import allSearch from "./allSearch";
-import ProfileAndBusinessDetails from "./ProfileAndBusinessDetails";
-import networkProfileCommunity from "./networkProfileCommunity";
 import networkDetails from "./networkDetails";
-
-// import dashboardCommunity from "./dashboardcommunity";
-
+import dashboardcommunity from "./dashboardcommunity";
+import networkSetting from "./networkSetting";
 import NetworkSettings from "./NetworkSettings";
-import checkout from "./checkout";
-import businessFollowers from "./businessFollowers";
-import hotbusiness from "./hotbusiness";
-import business from "./business";
-import profile from "./profile";
 import networkProfileMembers from "./networkProfileMembers";
+import ProfileAndBusinessDetails from "./ProfileAndBusinessDetails";
+
+import businessFollowers from "./businessFollowers";
+import business from "./business";
+import market from "./market";
+import hotbusiness from "./hotbusiness";
+import profile from "./profile";
 import follower from "./follower";
 import networkProfile from "./networkProfile";
 import UserProfileOwner from "./UserProfileOwner"
@@ -38,9 +35,9 @@ import networkProfileFeedback from "./networkProfileFeedback";
 import networkProfileMedia from "./networkProfileMedia";
 import networkProfileMemberRequest from "./networkProfileMemberRequest";
 import { social } from "./social";
-
-// import axios from "axios";
-Vue.use(Vuex);
+import productComments from "./productComments";
+import productDetails from "./productDetails";
+import cart from "./cart";
 
 // axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 axios.defaults.baseURL = process.env.VUE_APP_API_URL_DEV;
@@ -50,7 +47,6 @@ export default new Vuex.Store({
     modules: {
         auth,
         networkDetails,
-        // dashboardcommunity,
         ProfileAndBusinessDetails,
         businessOwner,
         businessBlocking,
@@ -82,7 +78,11 @@ export default new Vuex.Store({
         networkProfileMedia,
         networkProfileMemberRequest,
         networkProfile,
+        productComments,
+        productDetails,
+        cart,
+        dashboardcommunity,
+        market
 
-
-    }
+    },
 });

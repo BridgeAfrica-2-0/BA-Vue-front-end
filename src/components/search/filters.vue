@@ -15,14 +15,14 @@
           >
             {{ subCat.name }}
           </b-form-radio>
-          <b-link v-b-modal="'myModalllo'">See all</b-link>
+          <b-link v-b-modal="'myModalllo'">{{$t("search.See_all")}}</b-link>
           <hr />
         </span>
 
         <b-spinner
           v-if="filterLoader"
           variant="primary"
-          label="Spinning"
+         :label="$t('search.Spinning')"
         ></b-spinner>
         <span v-if="subFilter.length">
           <h6>Filters</h6>
@@ -38,7 +38,7 @@
             {{ filter.name }}
           </b-form-radio>
 
-          <b-link v-b-modal="'myModalll'"> See all </b-link>
+          <b-link v-b-modal="'myModalll'"> {{$t("search.See_all")}} </b-link>
           <hr />
         </span>
         <span v-if="noFilter.length">
@@ -61,7 +61,7 @@
         </div>
 
         <br />
-        <b-button variant="primary" class="m-3 float-right"> Search </b-button>
+        <b-button variant="primary" class="m-3 float-right"> {{$t("search.Search")}} </b-button>
       </b-modal>
 
       <b-form-checkbox
@@ -80,7 +80,7 @@
       <span v-if="showform == true">
         <b-form-group
           label-cols-lg="3"
-          label="Region"
+         :label="$t('search.Region')"
           label-size="md"
           label-class="font-weight-bold pt-0"
           class="mb-0 text-left"
@@ -88,14 +88,14 @@
         </b-form-group>
 
         <b-form-select v-model="selected">
-          <b-form-select-option value="a"> Yaounde </b-form-select-option>
+          <b-form-select-option value="a"> {{$t("search.Yaounde")}} </b-form-select-option>
         </b-form-select>
 
         <br />
 
         <b-form-group
           label-cols-lg="3"
-          label="Division"
+         :label="$t('search.Division')"
           label-size="md"
           label-class="font-weight-bold pt-0 text-left"
           class="mb-0"
@@ -103,14 +103,14 @@
         </b-form-group>
 
         <b-form-select v-model="selected">
-          <b-form-select-option value="a"> My Location </b-form-select-option>
+          <b-form-select-option value="a"> {{$t("search.My_Location")}} </b-form-select-option>
         </b-form-select>
 
         <br />
 
         <b-form-group
           label-cols-lg="12"
-          label=" Sub Division"
+         :label=" $t('search.Sub_Division')"
           label-size="md"
           label-class="font-weight-bold pt-0 text-left"
           class="mb-0"
@@ -118,14 +118,14 @@
         </b-form-group>
 
         <b-form-select v-model="selected">
-          <b-form-select-option value="a"> My Location </b-form-select-option>
+          <b-form-select-option value="a"> {{$t("search.My_Location")}} </b-form-select-option>
         </b-form-select>
 
         <br />
 
         <b-form-group
           label-cols-lg="3"
-          label="City"
+         :label="$t('search.City')"
           label-size="md"
           label-class="font-weight-bold pt-0 text-left"
           class="mb-0"
@@ -133,7 +133,7 @@
         </b-form-group>
 
         <b-form-select v-model="selected">
-          <b-form-select-option value="a"> My Location </b-form-select-option>
+          <b-form-select-option value="a"> {{$t("search.My_Location")}} </b-form-select-option>
         </b-form-select>
         <br />
         <hr />
@@ -141,7 +141,7 @@
 
       <b-form-group
         label-cols-lg="12"
-        label="Neighbourhood"
+       :label="$t('search.Neighbourhood')"
         label-size="md"
         label-class="font-weight-bold pt-0"
         class="mb-0 text-left"
@@ -163,7 +163,7 @@
         >
       </b-form-group>
 
-      <b-link v-b-modal="'Neighbourhood'"> See all </b-link>
+      <b-link v-b-modal="'Neighbourhood'"> {{$t("search.See_all")}} </b-link>
 
       <br />
 
@@ -171,7 +171,7 @@
 
       <b-form-group
         label-cols-lg="12"
-        label="Distance"
+       :label="$t('search.Distance')"
         label-size="md"
         label-class="font-weight-bold pt-0 text-left"
         class="mb-0 text-left"
@@ -197,7 +197,7 @@
 
       <div>
         <span v-if="filterType == '4'">
-          <label>Price Range</label>
+          <label>{{$t("search.Price_Range")}}</label>
           <b-form-input
             id="range-2"
             v-model="priceRange"
@@ -226,7 +226,7 @@
       <div v-if="categories.length > 0">
         <b-form-group
           label-cols-lg="3"
-          label="Categories"
+         :label="$t('search.Categories')"
           label-size="md"
           label-class="font-weight-bold pt-0"
           class="mb-0 pt-6 text-left"
@@ -246,7 +246,7 @@
       <!-- 
       <b-form-group
         label-cols-lg="12"
-        label="Neighbourhood"
+       :label="$t('search.Neighbourhood')"
         label-size="md"
         label-class="font-weight-bold pt-0"
         class="mb-0 text-left"
@@ -276,7 +276,7 @@
 
       <b-form-group
         label-cols-lg="12"
-        label="Distance"
+       :label="$t('search.Distance')"
         label-size="md"
         label-class="font-weight-bold pt-0 text-left"
         class="mb-0"
@@ -318,7 +318,7 @@
         <div v-if="categories.length > 0">
           <b-form-group
             label-cols-lg="3"
-            label="Categories"
+           :label="$t('search.Categories')"
             label-size="md"
             label-class="font-weight-bold pt-0"
             class="mb-0 pt-6 text-left"
@@ -337,7 +337,7 @@
         <div>
           <b-form-group
             label-cols-lg="3"
-            label="Country"
+           :label="$t('search.Country')"
             label-size="md"
             label-class="font-weight-bold pt-0"
             class="mb-0 pt-6 text-left"
@@ -357,7 +357,7 @@
         <div v-if="networkFilter.region">
           <b-form-group
             label-cols-lg="3"
-            label="Region"
+           :label="$t('search.Region')"
             label-size="md"
             label-class="font-weight-bold pt-0"
             class="mb-0 text-left"
@@ -378,7 +378,7 @@
         <div v-if="networkFilter.division">
           <b-form-group
             label-cols-lg="3"
-            label="Division"
+           :label="$t('search.Division')"
             label-size="md"
             label-class="font-weight-bold pt-0"
             class="mb-0 text-left"
@@ -398,7 +398,7 @@
         <div v-if="networkFilter.council">
           <b-form-group
             label-cols-lg="3"
-            label="Council"
+           :label="$t('search.Council')"
             label-size="md"
             label-class="font-weight-bold pt-0"
             class="mb-0 text-left"
@@ -418,7 +418,7 @@
         <div v-if="networkFilter.neighbourhood">
           <b-form-group
             label-cols-lg="3"
-            label="Neighbourhood"
+           :label="$t('search.Neighbourhood')"
             label-size="md"
             label-class="font-weight-bold pt-0"
             class="mb-0 text-left"
@@ -447,7 +447,7 @@
     <div v-if="filterType == '2'">
       <b-form-group
         label-cols-lg="3"
-        label="Profession"
+       :label="Profession"
         label-size="md"
         label-class="font-weight-bold pt-0"
         class="mb-0 text-left"
@@ -459,7 +459,7 @@
       <br />
       <b-form-group
         label-cols-lg="3"
-        label="Community"
+       :label="Community"
         label-size="md"
         label-class="font-weight-bold pt-0"
         class="mb-0 text-left"
@@ -491,7 +491,7 @@
     <div v-if="filterType == '5'">
       <b-form-group
         label-cols-lg="12"
-        label="Posted Date"
+       :label="Posted Date"
         label-size="md"
         label-class="font-weight-bold pt-0 text-left"
         class="mb-0"
@@ -532,7 +532,7 @@
     <b-modal ref="myfilters" id="Neighbourhood" hide-footer title=" ">
       <b-form-group
         label-cols-lg="12"
-        label="Neighbourhood"
+       :label="Neighbourhood"
         label-size="md"
         label-class="font-weight-bold pt-0"
         class="mb-0 text-left"
@@ -558,7 +558,7 @@
     <b-modal ref="myfilters" id="distance" hide-footer title=" ">
       <b-form-group
         label-cols-lg="12"
-        label="Distance"
+       :label="Distance"
         label-size="md"
         label-class="font-weight-bold pt-0 text-left"
         class="mb-0 text-left"

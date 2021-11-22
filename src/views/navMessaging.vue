@@ -1,7 +1,6 @@
 <template>
   <div>
     <Navbar />
-
     <b-container>
       <div class="chat-box">
         <b-row>
@@ -575,7 +574,7 @@
                             class="emoji-picker"
                             :style="{
                               top: display.y + 'px',
-                              left: display.x + 'px',
+                              left: display.x + 'px'
                             }"
                           >
                             <div class="emoji-picker__search">
@@ -724,7 +723,7 @@ export default {
   components: {
     Navbar,
     Footer,
-    EmojiPicker,
+    EmojiPicker
   },
   data() {
     return {
@@ -838,8 +837,8 @@ export default {
     focus: {
       inserted(el) {
         el.focus();
-      },
-    },
+      }
+    }
   },
   computed: {
     chatList() {

@@ -9,13 +9,7 @@
         <img class="card-img album-img" :src="cover(album.cover)" alt="" />
       </span>
       <div class="createdesc botmedia">
-        <div class="botmediadess-position" v-if="loading">
-          <b-spinner
-            style="width: 3rem; height: 3rem; color: #e75c18"
-            label="Large Spinner"
-          ></b-spinner>
-        </div>
-        <div class="botmediadess-position" v-else>
+        <div class="botmediadess-position">
           <h6 style="font-size: 26px; font-weight: bold">
             {{ album.name }}
           </h6>
@@ -27,7 +21,7 @@
             v-if="upHere"
             variant="outline-primary"
             size="sm"
-            @click="show"
+            @click="showAlbumPictures"
           >
             Show
           </b-button>
@@ -35,7 +29,7 @@
       </div>
     </a>
 
-    <div class="mediadesc" v-if="!canBeUpdate">
+    <div class="mediadesc" v-if="canBeUpdate">
       <ul class="navbar-nav pull-right options">
         <li class="nav-item dropdown">
           <b-dropdown
@@ -64,11 +58,9 @@
 import defaultImage from "@/assets/img/nothing.jpg";
 
 import { fullMediaLink } from "@/helpers";
-
 export default {
   props: [
     "album",
-    "type",
     "deleteAlbums",
     "editAlbum",
     "canBeUpdate",
@@ -77,7 +69,6 @@ export default {
 
   data: () => ({
     upHere: false,
-    loading: false,
   }),
 
   filters: {
@@ -87,16 +78,17 @@ export default {
     },
   },
 
+  computed: {
+    canCreateAlbum() {
+      return this.albumInfo.name && this.albumInfo.type ? false : true;
+    },
+  },
+
   methods: {
     getFullMediaLink: fullMediaLink,
 
     cover(cover) {
       return cover.length ? this.getFullMediaLink(cover[0]) : defaultImage;
-    },
-
-    show: async function () {
-      this.loading = true;
-      this.loading = await this.showAlbumPictures();
     },
   },
 };

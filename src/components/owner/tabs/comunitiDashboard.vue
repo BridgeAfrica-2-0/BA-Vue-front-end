@@ -8,16 +8,16 @@
         </h6>
       </span>
 
-      <b-tabs lazy pills content-class="mt-3  f-left ">
+      <b-tabs pills content-class="mt-3  f-left ">
         <b-tab active>
-          <template slot="title">     
+          <template slot="title">
             People <span class="spa-color">  </span>
           </template>  
 
           <div>
             <b-row>
               <b-col>
-                <b-tabs lazy fill pills content-class="mt-3  f-left m-up">
+                <b-tabs fill pills content-class="mt-3  f-left m-up">
                   <b-tab active>
                     <template slot="title">
                       Followers <span class="spa-color">  </span>
@@ -39,13 +39,13 @@
           </div>
         </b-tab>
 
-        <b-tab >
+        <b-tab>
           <template slot="title">
             Businesses <span class="spa-color">  </span>
           </template>
 
           <div>
-            <b-tabs lazy fill pills content-class="mt-3  f-left m-up checkcheck">
+            <b-tabs fill pills content-class="mt-3  f-left m-up checkcheck">
               <b-tab active>
                 <template slot="title">
                   Followers <span class="spa-color">  </span>
@@ -76,7 +76,7 @@
           </template>
 
           <div>
-            <b-tabs lazy fill pills content-class="mt-3  f-left m-up checkcheck">
+            <b-tabs fill pills content-class="mt-3  f-left m-up checkcheck">
               <b-tab active>
                 <template slot="title">
                   Followers <span class="spa-color">  </span>

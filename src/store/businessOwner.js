@@ -1,5 +1,6 @@
-import axios from 'axios';
-axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('access_token');
+import axios from "axios";
+axios.defaults.headers.common["Authorization"] =
+    "Bearer " + localStorage.getItem("access_token");
 export default {
     namespaced: true,
     state: {
@@ -364,7 +365,6 @@ export default {
         },
 
     },
-
     actions: {
         nFormatter(num) {
             if (num >= 1000000000) {
@@ -847,5 +847,5 @@ export default {
                 responseType: "blob"
             });
         },
-    },
-};
+    }
+}

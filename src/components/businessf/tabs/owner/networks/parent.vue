@@ -13,9 +13,7 @@
       <b-container>
         <b-row>
           <b-col cols="6">
-            <h6 class="m-0 p-0 a-center network-name">
-              <b> {{ networkInfo.name }}</b>
-            </h6>
+            <h6 class="  m-0 p-0 a-center network-name "><b> Heavy Gym </b></h6>
           </b-col>
           <b-col cols="6">
             <b-button variant="primary" size="sm" @click="addNetwork" style="width: 120px" class="a-center">
@@ -31,7 +29,7 @@
         <b-container>
           <b-row>
             <b-col>
-              <p class="a-center">
+              <p class="a-center ">
                 <b-icon icon="globe" variant="primary"></b-icon>
                 <span class="pivate text"> {{ $t('network.Private') }} </span>
               </p>
@@ -65,7 +63,7 @@
 
     <b-modal hide-footer :title="$t('network.Edit_network')" size="md" v-model="showModal">
       <b-container>
-        <b-form v-if="updateNetwork_form">
+        <b-form>
           <b-form-group
             label-cols-lg="12"
             :label="$t('network.Network_Name')"
@@ -85,10 +83,9 @@
             class="mb-0"
           >
             <b-form-textarea
-              id="description"
-              v-model="updateNetwork_form.description"
-              name="description"
-              type="text"
+              id="textarea"
+              v-model="text"
+              placeholder="Enter something..."
               rows="3"
               max-rows="6"
             ></b-form-textarea>
@@ -112,14 +109,7 @@
             label-class="font-weight-bold pt-0"
             class="mb-0"
           >
-            <b-form-input
-              id="tel-1"
-              v-model="updateNetwork_form.primary_phone"
-              name="primary_phone"
-              type="tel"
-              required
-            >
-            </b-form-input>
+            <b-form-input id="tel-1" placeholder="" required> </b-form-input>
           </b-form-group>
 
           <b-form-group
@@ -129,13 +119,7 @@
             label-class="font-weight-bold pt-0"
             class="mb-0"
           >
-            <b-form-input
-              id="tel-2"
-              v-model="updateNetwork_form.secondary_phone"
-              name="secondary_phone"
-              type="tel"
-              required
-            >
+            <b-form-input id="network_name" placeholder="" required>
             </b-form-input>
           </b-form-group>
 
@@ -181,10 +165,7 @@
             <h4>{{ $t('network.Upload_a_New_picture') }}</h4>
           </div>
 
-          <div class="col-sm-6 text-center" v-if="selectedImagePrv">
-            <b-img :src="selectedImagePrv" rounded fluid alt="Image"></b-img>
-          </div>
-          <div class="col-sm-6 text-center" v-else>
+          <div class="col-sm-6 text-center">
             <h1>
               <fas-icon class="primary" :icon="['fas', 'edit']" />
             </h1>
@@ -209,7 +190,6 @@ export default {
   name: 'parent',
   data() {
     return {
-      url: null,
       networkShow: true,
       showModal: false,
       SPupdateN: false,
@@ -236,11 +216,6 @@ export default {
   },
 
   methods: {
-    init: async function () {
-      this.url = this.$route.params.id;
-      await this.getNetworkInfo();
-    },
-
     openNetwork() {
       this.networkShow = false;
     },

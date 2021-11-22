@@ -76,16 +76,75 @@
           </div>
         </b-tab> -->
       </b-tabs>
+      
     </div>
+
+         
+
+
+        <b-tab >
+
+            <template slot="title"  >
+             Businesses  <span class="spa-color">  7K   </span>
+            </template>
+        
+        
+     <div>
+      <b-tabs fill pills content-class="mt-3  f-left m-up checkcheck">
+        <b-tab  active>
+
+         <template slot="title"  >
+             Followers  <span class="spa-color">  7K   </span>
+            </template>
+        
+         
+
+
+         <div class="s-comcard">      <Business />     </div>
+
+ 
+         
+        </b-tab>
+
+        <b-tab >
+        
+
+            <template slot="title"  >
+             Following  <span class="spa-color">  7K   </span>
+            </template>
+        
+        <div class="s-comcard">    <Business />     </div>
+ 
+        </b-tab>
+      </b-tabs>
+    </div>
+
+
+
+        </b-tab>
+
+    
+
+
+
+
+
+
+
+
   </div>
 </template>
+
 <script>
+
+
 import People from "./people";
 import Business from "./business";
 // import Network from "./network";
 export default {
-  name: "sidebarcommunity",
-  components: {
+  name: "comunitiDashboard",
+
+   components: {
     People,
     Business,
     // Network
@@ -162,35 +221,66 @@ export default {
 </script>
 
 <style >
-.lala .nav-fill {
-  margin-top: -19px;
-  border: 1px solid rgba(0, 0, 0, 0.125);
-}
 
-.spa-color {
+  
+
+
+   .lala .nav-fill{
+   
+    margin-top: -19px;
+     border: 1px solid rgba(0, 0, 0, 0.125);
+  }
+
+
+
+
+
+
+
+
+.spa-color{
   color: white;
   margin-left: 10px;
   font-size: 14px;
 }
 
-.h4-color {
+
+.h4-color{
   color: orangered;
   margin-left: 10px;
   font-size: 14px;
 }
 
-.m-up {
-  margin-top: -5px;
+.m-up{
+
+  margin-top:-5px;
 }
 
+
+
+
+ 
 @media only screen and (min-width: 768px) {
-  .title {
+
+  
+
+  .title{
     font-size: 20px;
   }
-}
 
+
+ }
+
+
+
+
+
+
+ 
 @media only screen and (min-width: 768px) {
-  .title {
+
+  
+  .title{
     font-size: 16px;
   }
 }

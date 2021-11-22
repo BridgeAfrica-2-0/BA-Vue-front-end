@@ -24,7 +24,6 @@ import Follower from "../views/follower.vue";
 import Visitor from "../views/visitor.vue";
 import profile_owner from "@/views/profileOwner";
 import businessFollower from "@/views/businessFollower";
-import profileFollower from "@/views/profileFollower";
 import businessOwner from "@/views/businessOwner";
 import businessEditor from "@/views/businessEditor";
 import businessVisitor from "@/views/businessVisitor";
@@ -60,14 +59,9 @@ const routes = [{
         name: "notFound",
         component: notFound,
     },
-    {
-        path: "/myorders",
-        name: "orders",
-        component: myorders,
-        // meta: {
-        //   auth: true,
-        // },
-    },
+
+
+
     {
         path: "/",
         name: "home",
@@ -87,11 +81,6 @@ const routes = [{
         name: "payment",
         component: payment
     },
-    {
-        path: "/govx",
-        name: "govx",
-        component: govx,
-    },
 
     {
         path: "/welcome",
@@ -101,6 +90,7 @@ const routes = [{
             auth: true,
         },
     },
+
     {
         path: "/settings",
         name: "settings",
@@ -119,11 +109,6 @@ const routes = [{
         component: profile_owner,
     },
     {
-        path: "/profilefollower/:id?",
-        name: "ProfileFollower",
-        component: profileFollower,
-    },
-    {
         path: "/template_viewer",
         name: "templateViewer",
         component: templateView,
@@ -133,7 +118,6 @@ const routes = [{
         name: "BusinessOwner",
         component: businessOwner,
     },
-
 
     {
         path: "/business_editor/:id?",
@@ -168,40 +152,24 @@ const routes = [{
         component: confirmPayment,
     },
     {
-        path: "/network/:id?",
-        name: "networks",
+        path: "/business_owner/network/:id?",
+        name: "networks_business",
         component: networks,
     },
     {
-        path: "/networks/:id?",
+        path: "/networks",
         name: "networks",
         component: networks,
     },
-    {
-        path: "/network_editors/:id?",
-        name: "NetworkEditors",
-        component: networkEditors,
-    },
+    // {
+    //   path: "/network_editors/:id?",
+    //   name: "NetworkEditors",
+    //   component: networkEditors,
+    // },
     {
         path: "/login",
         name: "Login",
         component: Login,
-    },
-
-    {
-        path: "/card",
-        name: "card",
-        component: card,
-    },
-    {
-        path: "/ordersdetail",
-        name: "ordersdetail",
-        component: ordersdetail,
-    },
-    {
-        path: "/businessordersdetail",
-        name: "businessordersdetail",
-        component: businessordersdetail,
     },
 
     {
@@ -306,11 +274,10 @@ const routes = [{
     },
 
     {
-        path: "/memberNetworkFollower/:id?",
+        path: "/memberNetworkFollower",
         name: "Membar Network Follower",
         component: memberNetworkFollower,
     },
-
 ];
 
 const router = new VueRouter({

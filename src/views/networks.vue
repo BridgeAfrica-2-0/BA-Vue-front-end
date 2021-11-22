@@ -1,5 +1,5 @@
 <template>
-  <div style="overflow-y: hidden">
+  <div style="overflow-y: hidden;">
     <navbar />
 
     <div class="container-fluid lynetowrk" style="margin-top: -30px">
@@ -10,7 +10,7 @@
     <div class="demo container-fluid p-0">
       <div class="mt-3" v-if="selectedId == '0'">
         <b-row class="center-content">
-          <b-col lg="5" xl="4" class="">
+          <b-col lg="5" xl="4" class=" ">
             <Parent />
           </b-col>
 
@@ -114,6 +114,7 @@ export default {
   .marg-tap {
     margin-top: 20px;
   }
+
 }
 
 .m-top {
@@ -135,6 +136,8 @@ export default {
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
 }
+
+
 
 .nav-text {
   cursor: pointer;

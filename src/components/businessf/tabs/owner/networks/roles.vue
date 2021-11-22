@@ -13,12 +13,15 @@
             label-class="font-weight-bold pt-0"
             class="mb-0"
           >
-            <b-form-select v-model="roleAssignment.user">
-              <b-form-select-option
-                v-for="(member, index) in memberString"
-                :key="index"
-                >{{ member }}</b-form-select-option
-              >
+            <b-form-select
+              id="follower"
+              v-model="form.user_id"
+              :options="followers"
+              name="user"
+              value-field="id"
+              text-field="name"
+              class="mb-3"
+            >
             </b-form-select>
           </b-form-group>
         </b-col>
@@ -31,22 +34,21 @@
             label-class="font-weight-bold pt-0"
             class="mb-0"
           >
-      
-      <b-form-select v-model="roleAssignment.role" class="mb-3">
-              <b-form-select-option
-                v-for="(member, index) in roleString"
-                :key="index"
-                >{{ roleString }}</b-form-select-option
-              >
+            <b-form-select
+              id="role"
+              v-model="form.role_id"
+              :options="roles"
+              name="role"
+              value-field="id"
+              text-field="name"
+              class="mb-3"
+            >
             </b-form-select>
           </b-form-group>
         </b-col>
 
         <b-col>
-          <b-button
-            variant="primary"
-            class="assign-btn"
-            @click="assign(user.id, role.id)"
+          <b-button variant="primary" class="assign-btn" @click="assignRole()"
             >Assign</b-button
           >
         </b-col>
@@ -68,35 +70,10 @@
     <div class="b-bottom">
       <b-container>
         <h5 class="a-text">Existing Editors</h5>
-        <span v-for="editor in editors" :key="editor.id">
+        <span v-for="editor in allEditors" :key="editor.id">
           <span class="d-flex align-items-center m-list">
-            <b-avatar class="mr-3 profile-pic"></b-avatar>
-            <span class="mr-auto username">J. Circlehead</span>
-            <span>
-              <div>
-                <b-dropdown
-                  size="lg"
-                  variant="link"
-                  toggle-class="text-decoration-none"
-                  no-caret
-                >
-                  <template #button-content>
-                    <b-icon icon="three-dots-vertical" font-scale="1"></b-icon>
-                  </template>
-                  <b-dropdown-item href="#">Edit</b-dropdown-item>
-                  <b-dropdown-item href="#"> Delete </b-dropdown-item>
-                </b-dropdown>
-              </div>
-            </span>
-          </span>
-
-          <span class="d-flex align-items-center">
-            <b-avatar
-              variant="primary"
-              text="BV"
-              class="mr-3 profile-pic"
-            ></b-avatar>
-            <span class="mr-auto">itz blec blec</span>
+            <b-avatar class="mr-3 profile-pic" :src="editor.picture"></b-avatar>
+            <span class="mr-auto username">{{ editor.name }}</span>
             <span>
               <div>
                 <b-dropdown
@@ -129,123 +106,148 @@
       </b-container>
     </div>
 
-    <div class="b-bottom">
-      <b-container>
-        <h5 class="a-text">Existing Editors</h5>
-        <span>
-          <span
-            v-for="editor in allEditors"
-            :key="editor.id"
-            class="d-flex align-items-center m-list"
-          >
-            <b-avatar class="mr-3 profile-pic">
-              <img :src="editor.image" alt="" />
-            </b-avatar>
-            <span class="mr-auto username">{{ editor.name }}</span>
-            <span>
-              <div>
-                <b-dropdown
-                  size="lg"
-                  variant="link"
-                  toggle-class="text-decoration-none"
-                  no-caret
-                >
-                  <template #button-content>
-                    <b-icon icon="three-dots-vertical" font-scale="1"></b-icon>
-                  </template>
-                  <b-dropdown-item @click="editEditors(editor.id)"
-                    >Edit</b-dropdown-item
-                  >
-                  <b-dropdown-item @click="deleteEditors(editor.id)">
-                    Delete
-                  </b-dropdown-item>
-                </b-dropdown>
-              </div>
-            </span>
-          </span>
-        </span>
-      </b-container>
-    </div>
   </b-container>
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
 export default {
   name: "roles",
-  data: () => ({
-    roleString: [],
-    memberString: [],
-    roleAssignment: {
-      user: "",
-      role: "",
-    },
-    networkId: "",
-    load: "",
-  }),
-  async beforeMount() {
-    this.getRoles();
-
-    this.allRoles.forEach((role) => {
-      this.roleString.push(role);
-    });
-
-    this.allMembers.forEach((member) => {
-      this.memberString.push(member);
-    });
+  data() {
+    return {
+      url: this.$route.params.id,
+      clickedObject: {},
+      form: {
+        user_id: "",
+        role_id: "",
+        follower: ""
+      }
+    };
   },
   computed: {
-    ...mapGetters({
-      getNetwork: "networkSetting/getNetwork",
-      allRoles: "networkSetting/allRoles",
-      allMembers: "networkSetting/allMembers",
-      allEditors: "networkSetting/allEditors",
-    }),
+    followers() {
+      return this.$store.state.NetworkSettings.followers;
+    },
+    roles() {
+      return this.$store.state.NetworkSettings.roles;
+    },
+    editors() {
+      return this.$store.state.NetworkSettings.editors;
+    }
+  },
+
+  mounted() {
+    this.getFollowers();
+    this.getRoles();
+    this.displayEditor();
   },
   methods: {
-    ...mapActions({
-      getRoles: "networkSetting/getRoles",
-      getMembers: "networkSetting/getMembers",
-      assignRole: "networkSetting/assignRole",
-      getEditors: "networkSetting/getEditors",
-      editEditor: "networkSetting/editEditor",
-      deleteEditor: "networkSetting/deleteEditor",
-    }),
-
-    assign(user_id, role_id) {
-      this.networkId = this.getNetwork.id;
-      let payload = {
-        networkId: this.networkId,
-        user_id: user_id,
-        role_id: role_id,
-      };
-      this.assignRole(payload);
-    },
-
-    editEditors(id) {
-      this.load = true;
-      this.editEditor(id)
+    getFollowers() {
+      this.$store
+        .dispatch("NetworkSettings/getfollowers")
         .then(() => {
-          this.load = false;
+          console.log("ohh yeah");
         })
-        .catch((err) => {
-          this.load = false;
-          console.log(err);
+        .catch(err => {
+          console.log({ err: err });
+        });
+    },
+    getRoles() {
+      this.$store
+        .dispatch("NetworkSettings/getroles")
+        .then(() => {
+          console.log("ohh yeah");
+        })
+        .catch(err => {
+          console.log({ err: err });
+        });
+    },
+    displayEditor() {
+      this.$store
+        .dispatch("NetworkSettings/geteditors")
+        .then(() => {
+          console.log("ohh yeah");
+        })
+        .catch(err => {
+          console.log({ err: err });
+        });
+    },
+    editEditor: function(clickedObject) {
+      this.$bvModal.hide("edit-editor");
+      let formData = new FormData();
+      formData.append("user_id", clickedObject.user_id);
+      formData.append("role_id", this.form.role_id);
+      this.axios
+        .post("/network/roles/" + this.url + "/assign", formData)
+        .then(() => {
+          this.displayEditor();
+          console.log("ohh yeah");
+          this.flashMessage.show({
+            status: "success",
+            message: "New Role Assigned"
+          });
+        })
+        .catch(err => {
+          console.log({ err: err });
+          this.flashMessage.show({
+            status: "error",
+            message: "Unable to Assigned New Role"
+          });
+        });
+    },
+    assignRole: function() {
+      console.log(this.url);
+      console.log(this.form);
+      this.axios
+        .post("/network/assignRole/" + this.url, this.form)
+        .then(() => {
+          this.displayEditor();
+          console.log("ohh yeah");
+          this.flashMessage.show({
+            status: "success",
+            message: "New Role Assigned"
+          });
+        })
+        .catch(err => {
+          console.log({ err: err });
+          this.flashMessage.show({
+            status: "error",
+            message: "Unable to Assigned New Role"
+          });
+        });
+    },
+    deleteEditor: function(editor) {
+      this.$bvModal.hide("delete-editor");
+      var formData = this.toFormData(editor);
+      this.axios
+        .delete("/network/roles/" + this.editor.user_id)
+        .then(() => {
+          this.displayEditor();
+          console.log("ohh yeah");
+          this.flashMessage.show({
+            status: "success",
+            message: "Editor Deleted"
+          });
+        })
+        .catch(err => {
+          console.log({ err: err });
+          this.flashMessage.show({
+            status: "error",
+            message: "Unable To Delete Editor"
+          });
         });
     },
 
-    deleteEditors(id) {
-      this.load = true;
-      this.deleteEditor(id)
-        .then(() => {
-          this.load = false;
-        })
-        .catch((err) => {
-          this.load = false;
-          console.log(err);
-        });
+    toFormData: function(obj) {
+      var form_data = new FormData();
+      for (var key in obj) {
+        form_data.append(key, obj[key]);
+      }
+      return form_data;
     },
-  },
+    selectObject(object) {
+      this.clickedObject = object;
+    }
+  }
 };
 </script>
 

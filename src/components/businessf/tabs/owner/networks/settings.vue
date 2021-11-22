@@ -9,12 +9,7 @@
           label-class="font-weight-bold pt-0"
           class="mb-0"
         >
-          <b-form-input
-            id="bname"
-            placeholder=""
-            v-model="item.networkName"
-            required
-          ></b-form-input>
+          <b-form-input id="bname" placeholder="" v-model="item.networkName" required></b-form-input>
         </b-form-group>
       </b-container>
     </div>
@@ -27,14 +22,8 @@
           label-size="md"
           label-class="font-weight-bold pt-0"
           class="mb-0"
-          v-model="item.category"
         >
-          <b-form-input
-            id="bname"
-            placeholder=""
-            v-model="item.category"
-            required
-          ></b-form-input>
+          <b-form-input id="bname" placeholder="" v-model="item.category" required></b-form-input>
         </b-form-group>
       </b-container>
     </div>
@@ -46,14 +35,10 @@
           label="Phone 1"
           label-size="md"
           label-class="font-weight-bold pt-0"
+          :state="phone1"
           class="mb-0"
         >
-          <b-form-input
-            id="bname"
-            placeholder=""
-            v-model="item.phoneOne"
-            required
-          ></b-form-input>
+          <b-form-input id="bname" placeholder="" v-model="item.phoneOne" required></b-form-input>
         </b-form-group>
       </b-container>
     </div>
@@ -67,31 +52,15 @@
           label-class="font-weight-bold pt-0"
           class="mb-0"
         >
-          <b-form-input
-            id="bname"
-            placeholder=""
-            v-model="item.phoneTwo"
-            required
-          ></b-form-input>
+          <b-form-input id="bname" placeholder="" v-model="item.phoneTwo" required></b-form-input>
         </b-form-group>
       </b-container>
     </div>
 
     <div class="b-bottom">
       <b-container>
-        <b-form-group
-          label-cols-lg="3"
-          label="Email"
-          label-size="md"
-          label-class="font-weight-bold pt-0"
-          class="mb-0"
-        >
-          <b-form-input
-            id="bname"
-            placeholder=""
-            v-model="item.email"
-            required
-          ></b-form-input>
+        <b-form-group label-cols-lg="3" label="Email" label-size="md" label-class="font-weight-bold pt-0" class="mb-0">
+          <b-form-input id="bname" placeholder="" v-model="item.email" required></b-form-input>
         </b-form-group>
       </b-container>
     </div>
@@ -105,31 +74,15 @@
           label-class="font-weight-bold pt-0"
           class="mb-0"
         >
-          <country-select
-            v-model="item.country"
-            :country="country"
-            topCountry="US"
-            class="form-control"
-          />
+          <country-select v-model="item.country" :country="country" topCountry="US" class="form-control" />
         </b-form-group>
       </b-container>
     </div>
 
     <div class="b-bottom">
       <b-container>
-        <b-form-group
-          label-cols-lg="3"
-          label="City"
-          label-size="md"
-          label-class="font-weight-bold pt-0"
-          class="mb-0"
-        >
-          <b-form-input
-            id="bname"
-            placeholder=""
-            v-model="item.city"
-            required
-          ></b-form-input>
+        <b-form-group label-cols-lg="3" label="City" label-size="md" label-class="font-weight-bold pt-0" class="mb-0">
+          <b-form-input id="bname" placeholder="" v-model="item.city" required></b-form-input>
         </b-form-group>
       </b-container>
     </div>
@@ -143,12 +96,7 @@
           label-class="font-weight-bold pt-0"
           class="mb-0"
         >
-          <b-form-input
-            id="bname"
-            placeholder=""
-            v-model="item.neighborhood"
-            required
-          ></b-form-input>
+          <b-form-input id="bname" placeholder="" v-model="item.neighborhood" required></b-form-input>
         </b-form-group>
       </b-container>
     </div>
@@ -162,12 +110,7 @@
           label-class="font-weight-bold pt-0"
           class="mb-0"
         >
-          <b-form-input
-            id="bname"
-            placeholder=""
-            v-model="item.website"
-            required
-          ></b-form-input>
+          <b-form-input id="bname" placeholder="" v-model="item.website" required></b-form-input>
         </b-form-group>
       </b-container>
     </div>
@@ -183,10 +126,10 @@
         >
           <b-form-textarea
             id="textarea"
-            placeholder="Enter something..."
+            v-model="form.Description"
+            :placeholder="networkinfo.Description"
             rows="3"
             max-rows="6"
-            v-model="item.description"
           ></b-form-textarea>
         </b-form-group>
       </b-container>
@@ -196,12 +139,7 @@
       <b-row>
         <b-col>
           <div class="b-bottomn f-right">
-            <b-button
-              @click="saveChanges"
-              variant="primary"
-              class="a-button-l b-font"
-              :loading="loader"
-            >
+            <b-button @click="saveChanges" variant="primary" class="a-button-l b-font" :loading="loader">
               Save Changes
             </b-button>
           </div>
@@ -214,33 +152,34 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapGetters } from 'vuex';
 export default {
-  name: "general",
+  name: 'general',
   data: () => ({
     item: {
-      networkName: "",
-      category: "",
-      phoneOne: "",
-      phoneTwo: "",
-      email: "",
-      country: "",
-      city: "",
-      neighborhood: "",
-      website: "",
-      description: "",
+      networkName: '',
+      category: '',
+      phoneOne: '',
+      phoneTwo: '',
+      email: '',
+      country: '',
+      city: '',
+      neighborhood: '',
+      website: '',
+      description: '',
     },
+    country: '',
     loader: null,
   }),
   computed: {
     ...mapGetters({
-      getNetworks: "networkSetting/getNetworks",
+      getNetworksData: 'networkSetting/getNetworks',
     }),
   },
   methods: {
     ...mapActions({
-      saveChange: "networkSetting/saveChange",
-      getNetworks: "networkSetting/getNetworks",
+      saveChange: 'networkSetting/saveChange',
+      getNetworks: 'networkSetting/getNetworks',
     }),
     saveChanges() {
       this.loader = true;
@@ -249,7 +188,7 @@ export default {
         .then(() => {
           this.loader = false;
         })
-        .catch((err) => {
+        .catch(err => {
           this.loader = false;
           console.log(err);
         });
@@ -257,7 +196,7 @@ export default {
   },
   beforeMount() {
     this.getNetworks();
-    return this.getNetworks.id;
+    // return this.getNetworksData.id;
   },
 };
 </script>

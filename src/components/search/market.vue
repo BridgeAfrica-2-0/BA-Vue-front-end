@@ -1,12 +1,8 @@
 <template>
   <div>
-    <b-spinner v-if="prodLoader" variant="primary" label="Spinning"></b-spinner>
+    <!-- {{ products }} -->
 
-    <b-alert v-if="products.data.length === 0" show variant="warning"
-      ><a href="#" class="alert-link">
-        No product available for that search!
-      </a></b-alert
-    >
+    <b-spinner v-if="prodLoader" variant="primary" label="Spinning"></b-spinner>
 
     <div
       class="people-style shadow"
@@ -39,20 +35,18 @@
         </b-col>
       </b-row>
     </div>
-
     <!-- pagination -->
+
     <b-pagination
-      v-if="products.next || products.previous"
       v-model="currentPage"
       :total-rows="total"
       :per-page="per_page"
       aria-controls="my-table"
       @change="changePage"
       align="center"
-      :disabled="products.data.length > 0 ? false : true"
     ></b-pagination>
-    <!-- End pagination -->
     
+    <!-- End pagination -->
     <b-modal hide-footer title="Edit product">
       <b-form>
         <b-row>
@@ -417,8 +411,9 @@ export default {
   data() {
     return {
       viewProduct: false,
-      total: 0,
-      per_page: 10,
+      prodLoader: false,
+      total:0,
+      per_page:10,
       list: [],
       currentPage: 1,
       nextLoad: false,
@@ -426,52 +421,49 @@ export default {
   },
   computed: {
     products() {
-      return this.$store.getters["marketSearch/getProducts"];
-    },
-    prodLoader() {
-      return this.$store.getters["marketSearch/getLoader"];
+      return this.$store.state.market.products;
     },
   },
   created() {
-    if (!this.products.length) this.getProducts();
+    if (!this.products.length) {
+      this.getProducts();
+    }
   },
 
   methods: {
     changePage(value) {
-      // this.$store.commit("marketSearch/setProducts", '');
-      // this.$store.commit("marketSearch/setLoader", true);
-
-      // this.prodLoader = true;
+      this.$store.commit("setProducts", []);
+      this.prodLoader = true;
       this.currentPage = value;
 
       this.$store
-        .dispatch("marketSearch/nextPage", this.currentPage)
+        .dispatch("market/nextPage", this.currentPage)
         .then((res) => {
           console.log("products list: ");
           console.log(this.products);
-          // this.prodLoader = false;
+          this.prodLoader = false;
         })
         .catch((err) => {
-          // this.prodLoader = false;
+          this.prodLoader = false;
           console.log("products error: ");
           console.error(err);
         });
     },
 
     async getProducts() {
-      // this.prodLoader = true;
+      this.prodLoader = true;
       console.log("loader: ", this.prodLoader);
 
       await this.$store
-        .dispatch("marketSearch/getProducts")
+        .dispatch("market/getProducts")
         .then((res) => {
           console.log("products list: ");
           console.log(this.products);
-          // this.prodLoader = false;
-          this.total = this.products.total;
+          this.prodLoader = false;
+          this.total = this.products.total
         })
         .catch((err) => {
-          // this.prodLoader = false;
+          this.prodLoader = false;
           console.log("loader: ", this.prodLoader);
           console.log("products error: ");
           console.error(err);

@@ -166,7 +166,7 @@ export default {
         console.log(data);
         console.log(this.currentPage);
         if (data.data.length) {
-          this.page += 1;
+          this.currentPage += 1;
           console.log(this.currentPage);
           console.log(...data.data);
           this.feedbacks.push(...data.data);

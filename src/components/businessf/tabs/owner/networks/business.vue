@@ -3,6 +3,7 @@
 
     <div v-for="business in businesses" :key="business.id"  class="people-style shadow">
       <b-row>
+        <div style="display:none;">{{business['type']= 'business'}}</div>
         <b-col md="3" xl="5" lg="5" cols="5" sm="3">
           <div class="center-img">
             <splide :options="options" class="r-image">
@@ -47,8 +48,9 @@
                   size="sm"
                   class="b-background shadow"
                   variant="primary"
+                  @click="$emit('handleFollow', business)"
                 >
-                  <i class="fas fa-user-plus fa-lg btn-icon"></i>
+                  <i :class="business.is_follow ? 'fas fa-user-minus fa-lg btn-icon':'fas fa-user-plus fa-lg btn-icon'"></i>
                   <span class="btn-com">{{ $t('network.Community')}}</span>
                 </b-button>
               </b-col>

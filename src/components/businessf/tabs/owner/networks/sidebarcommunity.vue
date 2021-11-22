@@ -20,13 +20,13 @@
                     <template slot="title">
                       {{ $t('network.Followers') }} <span class="spa-color"> {{nFormatter(userdetails.total_followers)}} </span>
                     </template>
-                    <div class="s-comcard"><People :peoples="userdetails.user_followers" /></div>
+                    <div class="s-comcard"><People :peoples="userdetails.user_followers" @handleFollow="handleFollow" /></div>
                   </b-tab>
                   <b-tab>
                     <template slot="title">
                       {{ $t('network.Following') }} <span class="spa-color"> {{nFormatter(userdetails.totat_following)}} </span>
                     </template>
-                    <div class="s-comcard"><People :peoples="userdetails.user_following" /></div>
+                    <div class="s-comcard"><People :peoples="userdetails.user_following" @handleFollow="handleFollow" /></div>
                   </b-tab>
                 </b-tabs>
               </b-col>
@@ -43,18 +43,18 @@
                 <template slot="title">
                   {{ $t('network.Followers') }} <span class="spa-color"> {{nFormatter(businessdetails.total_followers)}} </span>
                 </template>
-                <div class="s-comcard"><Business :businesses="businessdetails.Business_followers" /></div>
+                <div class="s-comcard"><Business :businesses="businessdetails.Business_followers" @handleFollow="handleFollow" /></div>
               </b-tab>
               <b-tab>
                 <template slot="title">
                   {{ $t('network.Following') }} <span class="spa-color"> {{nFormatter(businessdetails.totat_following)}} </span>
                 </template>
-                <div class="s-comcard"><Business :businesses="businessdetails.Business_following" /></div>
+                <div class="s-comcard"><Business :businesses="businessdetails.Business_following" @handleFollow="handleFollow" /></div>
               </b-tab>
             </b-tabs>
           </div>
         </b-tab>
-        <!-- <b-tab>
+        <b-tab>
           <template slot="title">
             {{ $t('network.Networks') }} <span class="spa-color"> {{nFormatter(businessdetails.total_Network)}} </span>
           </template>
@@ -64,17 +64,19 @@
                 <template slot="title">
                   {{ $t('network.Followers') }} <span class="spa-color"> {{nFormatter(businessdetails.total_followers)}} </span>
                 </template>
+                <!-- <div class="s-comcard">{{networkdetails.Network_followers}}</div> -->
                 <div class="s-comcard"><Network :networks="networkdetails.Network_followers" /></div>
               </b-tab>
               <b-tab>
                 <template slot="title">
                    {{ $t('network.Following') }}<span class="spa-color"> {{nFormatter(businessdetails.totat_following)}} </span>
                 </template>
-                <div class="s-comcard"><Network :networks="networkdetails.Network_following" /></div>
+                <div class="s-comcard">{{networkdetails.Network_following}}</div>
+                <!-- <div class="s-comcard"><Network :networks="networkdetails.Network_following" /></div> -->
               </b-tab>
             </b-tabs>
           </div>
-        </b-tab> -->
+        </b-tab>
       </b-tabs>
     </div>
   </div>
@@ -82,13 +84,13 @@
 <script>
 import People from "./people";
 import Business from "./business";
-// import Network from "./network";
+import Network from "./network";
 export default {
   name: "sidebarcommunity",
   components: {
     People,
     Business,
-    // Network
+    Network
   },
   data() {
     return {
@@ -156,6 +158,24 @@ export default {
       .catch(err => {
         console.log({ err: err });
       });
+    },
+    async handleFollow(user) {
+      console.log("handleFollow", user)
+      const url = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
+      console.log("uri", url)
+      const nextFollowState = user.is_follow === 0 ? 1 : 0;
+      const data = {
+        id: user.id,
+        type: 'user',
+      };
+
+      await this.axios
+        .post(url, data)
+        .then(response => {
+          console.log("response", response);
+          user.is_follow = nextFollowState;
+        })
+        .catch(err => console.log(err));
     },
   }
 };

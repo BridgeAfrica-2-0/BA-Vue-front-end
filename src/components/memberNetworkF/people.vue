@@ -76,16 +76,10 @@
                         <b-button
                           block
                           size="sm"
-                          class="
-                            b-background
-                            flexx
-                            pobtn
-                            shadow
-                            mr-lg-3 mr-xl-3
-                          "
+                          class="b-background flexx pobtn shadow mr-lg-3 mr-xl-3"
                           variant="primary"
                         >
-                          <i class="fas fa-user-plus fa-lg btn-icon"></i>
+                          <i :class="people.is_follow ? 'fas fa-user-minus fa-lg btn-icon':'fas fa-user-plus fa-lg btn-icon'"></i>
                           <span class="btn-com">Community</span>
                         </b-button>
                       </b-col>

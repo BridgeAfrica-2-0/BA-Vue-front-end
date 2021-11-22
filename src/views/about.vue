@@ -380,6 +380,28 @@
         </div>
       </div>
     </div>
+
+    <!-- Our Resources -->
+
+    <!-- WELCOME TO BIZ KONNECT -->
+    <section class="mt-4 p-3">
+      <h1 class="color-black text-center font-arvo functionality-heading text-center">WELCOME TO BIZ KONNECT</h1>
+      <div class="container text-center">
+        Our weekly Biz Konnect TV show, running for more than 1 year now and aired on Cameroon’s national television
+        channel (CRTV), promotes SMEs that are on bridgeafrica.com, and is an ideal vitrine to give nation-wide
+        visibility to entrepreneurs
+      </div>
+      <div class="biz-konnect-video">
+        <iframe
+          width="1440"
+          src="https://www.youtube.com/embed/EEsHZTkWNIU"
+          title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </section>
   </div>
 </template>
 <script>
@@ -573,9 +595,15 @@ export default {};
 .specific-main-div p {
   line-height: 30px;
 }
-.yellow-img img{
+.yellow-img img {
   width: 100%;
   height: 385px;
+}
+.biz-konnect-video {
+  margin-top: 30px;
+}
+.biz-konnect-video iframe {
+  min-height: 100vh;
 }
 @media only screen and (max-width: 600px) {
   .header-img-text {
@@ -609,8 +637,15 @@ export default {};
     flex-direction: column;
   }
   .specific-main-div {
-    height: auto;
+    min-height: 100px;
     padding-top: 50px;
+  }
+  .yellow-img img {
+    width: 100%;
+    height: 0;
+  }
+  .biz-konnect-video iframe {
+    min-height: 40vh;
   }
 }
 </style>

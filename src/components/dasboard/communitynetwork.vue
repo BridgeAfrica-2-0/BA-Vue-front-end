@@ -54,6 +54,7 @@
                   class="b-background shadow"
                   :class="item.is_follow !== 0 && 'u-btn'"
                   variant="primary"
+                  :id="'followbtn'+item.id"
                   @click="handleFollow(item)"
                 >
                   <i class="fas fa-user-plus  fa-lg btn-icon "></i>
@@ -135,7 +136,9 @@ export default {
 
 
 
-      async handleFollow(user) {
+   
+    async handleFollow(user) {
+       document.getElementById("followbtn"+user.id).disabled = true;
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
@@ -147,8 +150,11 @@ export default {
         .post(uri, data)
         .then(response => {
           user.is_follow = nextFollowState;
+           document.getElementById("followbtn"+user.id).disabled =  false;
         })
-        .catch(err => console.log(err));
+        .catch(err =>{   console.log(err)
+         document.getElementById("followbtn"+user.id).disabled =  false;
+        });
     },
 
 

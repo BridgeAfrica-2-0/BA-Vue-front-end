@@ -418,7 +418,7 @@ viewAs(){
               console.log(response);
               this.flashMessage.show({
                 status: 'success',
-                message: 'Cover removed successfully',
+                message: 'profile removed successfully',
                 blockClass: 'custom-block-class',
               });
               loader.hide();
@@ -462,7 +462,7 @@ viewAs(){
 
 
        this.axios
-        .get('user/remove-cover')
+        .get('user/upload-cover')
         .then((response) => {
           console.log(response);
           this.$store
@@ -485,7 +485,7 @@ viewAs(){
          
             this.flashMessage.show({
               status: 'error',
-              message: 'Unable to remove your profile',
+              message: 'Unable to remove your cover',
               blockClass: 'custom-block-class',
             });
             console.log({ err: err });

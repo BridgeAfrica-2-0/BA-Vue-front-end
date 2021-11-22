@@ -48,6 +48,7 @@ import { notification } from "./notifications"
 // axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 axios.defaults.baseURL = process.env.VUE_APP_API_URL_DEV;
 // axios.defaults.baseURL = process.env.VUE_APP_API_URL_EDS;
+Vue.use(Vuex);
 
 export default new Vuex.Store({
     modules: {

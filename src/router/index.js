@@ -107,11 +107,11 @@ const routes = [{
     },
 
 
-    {
-        path: "/govx",
-        name: "govx",
-        component: govx,
-    },
+    // {
+    //     path: "/govx",
+    //     name: "govx",
+    //     component: govx,
+    // },
 
     {
         path: "/welcome",

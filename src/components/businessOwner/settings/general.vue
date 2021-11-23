@@ -286,20 +286,25 @@ export default {
   margin-top: 20px;
   margin-bottom: 30px;
   padding-bottom: 10px;
+
   border-bottom: 0.5px solid;
   border-color: gray;
 }
+
 .b-bottomn {
  
   margin-bottom: 30px;
   padding-bottom: 10px;
 }
+
 .f-left {
   float: left;
 }
+
 .tabs {
   width: 100%;
 }
+
 .a-button-l {
   margin-bottom: 1000px;
   align-content: right;
@@ -315,6 +320,7 @@ export default {
   position: relative;
   top: 40px;
 }
+
 @media only screen and (max-width: 768px) {
   .settings {
     top: -5px;

@@ -60,6 +60,7 @@
                           variant="primary"
                           size="sm"
                           class="b-background flexx pobtn shadow"
+                          @click="cta_business(value)"
                         >
                           <i class="fas fa-envelope fa-lg btn-icon"></i>
                           <span class="btn-text">{{ $t('dashboard.Message') }}</span>
@@ -130,6 +131,27 @@ export default {
   computed: {
     old_people_around() {
       return this.$store.state.auth.peopleAround;
+    },
+     activeAccount() {
+      return this.$store.getters['auth/profilConnected'];
+    }, 
+  },
+  methods:{
+   cta_business(data) {
+      console.log(data);
+      console.log("active accounts: ",this.activeAccount);
+      this.$store.commit('businessChat/setSelectedChat', data);
+      
+      let path = '';
+      if (this.activeAccount.user_type == 'business') {
+        path = '/business_owner/' + this.activeAccount.id;
+      } else if (this.activeAccount.user_type == 'network') {
+        path = '/';
+      } else path = '/messaging';
+
+      // this.$router.push({ path: `${path}`, query: { tabId: 1, msgTabId: 1 } });
+      this.$router.push({ path: `/business_owner/${this.activeAccount.id}`, query: { tabId: 1, msgTabId: 0 } });
+
     }
   },
 

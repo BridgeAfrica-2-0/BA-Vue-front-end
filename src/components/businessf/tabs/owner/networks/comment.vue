@@ -4,20 +4,20 @@
       <b-col>
         <b-avatar
           variant="info"
-          :src="comment.user_picture"
+          src="https://placekitten.com/300/300"
           class="avat-comment"
         ></b-avatar>
         <span class="float-right">
           <b-dropdown size="sm" variant="outline " class="primary">
             <template class="more" #button-content> </template>
-            <b-dropdown-item>{{ $t('network.Edit') }}</b-dropdown-item>
-            <b-dropdown-item>{{ $t('network.Delete') }}</b-dropdown-item>
+            <b-dropdown-item>{{ $t("network.Edit") }}</b-dropdown-item>
+            <b-dropdown-item>{{ $t("network.Delete") }}</b-dropdown-item>
           </b-dropdown>
         </span>
         <p class="msg text">
           <read-more
             more-str="read more"
-            :text="comment.comment"
+            :text="msg"
             link="#"
             less-str="read less"
             :max-chars="15000"
@@ -39,7 +39,9 @@
           class="cursor"
         ></b-icon>
         {{ comment.reply_comment_count | nFormatter }}
-        <span @click="showReply" class="primary ml-2 reply"><b>{{ $t('network.Reply') }}</b></span>
+        <span @click="showReply" class="primary ml-2 reply"
+          ><b>{{ $t("network.Reply") }}</b></span
+        >
         <div v-if="reply">
           <b-row class="mt-2">
             <b-col cols="1">
@@ -65,17 +67,6 @@
               <fas-icon
                 class="primary send-cmt"
                 :icon="['fas', 'paper-plane']"
-                @click="onReply"
-                v-if="text.trim().length > 2 && !createPostRequestIsActive"
-              />
-            </b-col>
-            <b-col cols="12" class="mt-4">
-              <Comment
-                v-for="obj in comments"
-                :key="obj.id"
-                :item="obj"
-                :uuid="uuid"
-                type="reply"
               />
             </b-col>
           </b-row>
@@ -86,40 +77,23 @@
 </template>
 
 <script>
-import Comment from "./commentReply";
-import { commentMixins } from "@/mixins";
-
 export default {
-  mixins: [commentMixins],
-  props: {
-    item: {
-      type: Object,
-      required: true,
-    },
-    uuid: {
-      required: true,
-    },
-    type: {
-      type: String,
-      required: true,
-      validator: function (value) {
-        if (["comment"].includes(value)) return true;
-      },
-      default: function () {
-        return "comment";
-      },
-    },
+  data() {
+    return {
+      reply: false,
+
+      msg: " Lorem Ipsum has been the industry's   this is do goodfive centuries, but  the leap into electronic      this is do goodfive centuries, but  the leap into electronic        this is do goodfive centuries, but  the leap into electronic  this sis sit tit typesetting",
+    };
   },
-  components: {
-    Comment,
+  methods: {
+    showReply() {
+      this.reply = !this.reply;
+    },
   },
 };
 </script>
 
 <style scoped>
-.cursor {
-  cursor: pointer;
-}
 .msg {
   background-color: #ddd;
   padding: 20px;

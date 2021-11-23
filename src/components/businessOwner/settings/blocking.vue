@@ -124,6 +124,7 @@ export default {
   position: relative;
   top: 40px;
 }
+
 @media only screen and (max-width: 768px) {
   .settings {
     top: -5px;

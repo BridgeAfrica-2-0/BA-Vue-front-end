@@ -1,8 +1,6 @@
 <template>
   <div class="p-2">
-    <b-modal id="modal-sm" size="sm" hide-header>
-      Do you want to join this network?
-    </b-modal>
+    <b-modal id="modal-sm" size="sm" hide-header> Do you want to join this network? </b-modal>
 
     <b-row>
       <b-col lg="6" sm="12" class="p-2" v-for="item in network" :key="item.id">
@@ -35,14 +33,14 @@
                 <b-row>
                   <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2">
                     <b-button block size="sm" class="b-background shadow" variant="primary">
-                      <i class="fas fa-user-plus  fa-lg btn-icon "></i>
+                      <i class="fas fa-user-plus fa-lg btn-icon"></i>
                       <span class="btn-com" v-b-modal.modal-sm>Community</span>
                     </b-button>
                   </b-col>
 
                   <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2">
-                    <b-button block size="sm" class="b-background shadow" variant="primary"
-                      ><i class="fas fa-envelope   fa-lg btn-icon "></i>
+                    <b-button block size="sm" class="b-background shadow" variant="primary" @click="cta(item)"
+                      ><i class="fas fa-envelope fa-lg btn-icon"></i>
                       <span class="btn-text">Message</span>
                     </b-button>
                   </b-col>
@@ -80,6 +78,9 @@ export default {
     };
   },
   computed: {
+    activeAccount() {
+      return this.$store.getters['auth/profilConnected'];
+    },
     network() {
       if (this.type == 'Follower') {
         return this.$store.state.profile.NcommunityFollower.network_followers;
@@ -90,6 +91,19 @@ export default {
   },
 
   methods: {
+    cta(data) {
+      console.log(data);
+      this.$store.commit('businessChat/setSelectedChat', data);
+      let path = '';
+      if (this.activeAccount.user_type == 'business') {
+        path = '/business_owner/' + this.activeAccount.id;
+      } else if (this.activeAccount.user_type == 'network') {
+        path = '/';
+      } else path = '/messaging';
+
+      // this.$router.push({ path: `${path}`, query: { tabId: 1, msgTabId: 1 } });
+      this.$router.push({ path: `/business_owner/${this.activeAccount.id}`, query: { tabId: 1, msgTabId: 2 } });
+    },
     search() {
       console.log('search started');
       console.log(this.type);
@@ -143,7 +157,7 @@ export default {
             }
           }
         })
-        .catch(err => {
+        .catch((err) => {
           console.log({ err: err });
         });
     },

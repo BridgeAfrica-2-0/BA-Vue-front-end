@@ -4,6 +4,12 @@
       <fas-icon class="icons" :icon="['fas', 'project-diagram']" size="lg" />
       <span class="t-color"> Network </span>
 
+      <b-button
+        class="float-right"
+        @click="showmodal(true, 'add')"
+        variant="primary"
+        >Add Network</b-button
+      >
       <hr />    
       <b-row>
         <b-col

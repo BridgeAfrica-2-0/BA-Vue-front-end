@@ -1,6 +1,11 @@
 <template>
   <div class="" style="overflow-y: hidden; padding:0px">
+
+     <span v-if="isloaded">
+
     <navbar />
+
+    
 
     <div class="container-fluid">
       <ly-tab
@@ -39,6 +44,8 @@
     </div>
 
     <Footer />
+
+     </span>
   </div>
 </template>
 
@@ -70,6 +77,8 @@ export default {
     return {
       selectedId: 0,
       bottomSelectedId: 0,
+      foll_id:null,
+       isloaded: false,
       url_data: null,
       items: [
         { label: "Home ", icon: "" },
@@ -129,15 +138,37 @@ export default {
     this.foll_id = this.$route.params.id;  
 
     this.$store
-      .dispatch("follower/loadUserPostIntro", this.foll_id)
-      .then((response) => {
+      .dispatch("businessOwner/roleCheck", this.foll_id)
+      .then((data) => {
+       
+        let role= data.data.data.role;
+          switch (role) {
+            
+           
+
+            case "editor" : this.$router.push({ name: "BusinessEditor",params: { id: this.foll_id } });; 
+            break;
+
+            case "visitor" :  this.$router.push({ name: "BusinessFollower",params: { id: this.foll_id } });
+            break;
+          }
+
         this.isloaded = true;
       })
       .catch((error) => {
         console.log({ error: error });
+
+        console.log(error.response.status );
+
+         if (error.response.status == 404) {
+           
+            this.$router.push({ name: "notFound" });
+          } 
+
+
       });
   },
-  
+
 
   mounted() {
     this.url_data = this.$route.params.id;

@@ -387,6 +387,20 @@ export default {
       return num;
     },
 
+
+
+
+    roleCheck({ commit },id){
+        
+      
+      return axios.get("business/role-check?id="+id)
+        .then((data) => {
+          return data;
+        });
+
+
+    },
+
     loadMore({ commit }, url) {
 
       return axios.get(url)
@@ -394,6 +408,14 @@ export default {
           return data;
         });
 
+    },
+
+    updateBusinessBiographie({commit}, data){
+
+      return axios.post(`business/update-biography/${data.business_id}`, data.data)
+        .then((data) => {
+          console.log(data);
+        });
     },
 
     async loadUserBusinessAbout(context, payload) {

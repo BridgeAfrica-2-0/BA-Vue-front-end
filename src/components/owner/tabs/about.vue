@@ -1,23 +1,32 @@
 <template>
-  <div>
+  <div>   
+
+
+
     <b-icon class="icon" variant="primary" icon="person-fill"></b-icon> About
 
-    <hr />
+    <hr /> 
 
-    <b-card no-body class="desktop">
-      <b-tabs pills card vertical>
-        <b-tab :title="$t('profileowner.BIOGRAPHY')" active><Biography /></b-tab>  
-        <b-tab :title="$t('profileowner.CONTACT_BASIC_INFO')"><ContactandInfo /> </b-tab>
-        <b-tab :title="$t('profileowner.WORK_EDUCATION')"><WorkAndEducation /></b-tab>  
-      </b-tabs>
-    </b-card>
-    <b-card no-body class="mobile p-2">
+
+    <b-card v-if="window.width<768"  no-body class="mobile p-2">
       <b-tabs pills card justified>
         <b-tab :title="$t('profileowner.BIOGRAPHY')" active><Biography /></b-tab>
         <b-tab :title="$t('profileowner.CONTACT_BASIC_INFO')"><ContactandInfo /> </b-tab>
         <b-tab :title="$t('profileowner.WORK_EDUCATION')"><WorkAndEducation /></b-tab>
       </b-tabs>
     </b-card>
+
+
+    <b-card v-else no-body class="desktop">
+      <b-tabs pills card vertical>
+        <b-tab :title="$t('profileowner.BIOGRAPHY')" active><Biography /></b-tab>  
+        <b-tab :title="$t('profileowner.CONTACT_BASIC_INFO')"><ContactandInfo /> </b-tab>
+        <b-tab :title="$t('profileowner.WORK_EDUCATION')"><WorkAndEducation /></b-tab>  
+      </b-tabs>
+    </b-card>
+
+    
+
   </div>
 </template>
 
@@ -34,10 +43,23 @@ export default {
   data() {
     return {
       size: 0,
+      mobile:null,
       profile_about: null,
+
+       window: {
+            width: 0,
+            height: 0
+        }
+
     };
   },
   created() {
+
+  
+   window.addEventListener('resize', this.handleResize);
+        this.handleResize();
+
+
     this.profile_about = JSON.parse(
             JSON.stringify(this.$store.getters['profile/getProfileAbout'])
     );
@@ -58,6 +80,7 @@ export default {
             });
   },
   computed: {
+
     vertical() {
       if (this.size > 768) return true;
       return false;
@@ -72,7 +95,22 @@ export default {
     window.onresize = function() {
       that.size = window.innerWidth;
     };
-  }
+  },
+
+
+
+   destroyed() {
+        window.removeEventListener('resize', this.handleResize);
+    },
+
+    methods: {
+        handleResize() {
+            this.window.width = window.innerWidth;
+            this.window.height = window.innerHeight;
+        }
+    }
+
+
 };
 </script>
 
@@ -89,6 +127,8 @@ export default {
   background-color: rgb(242, 242, 242);
   border: none;
 }
+
+
 
 span {
   margin-left: 8px;

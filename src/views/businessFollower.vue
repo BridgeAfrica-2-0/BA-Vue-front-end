@@ -1,19 +1,12 @@
 <template>
   <div>
+    
+     <span v-if="isloaded">
     <navbar />
     <Business />
    
     <Footer />
-    <p class="text-center">
-      <span class="display-inline">
-        <b-link @click="$i18n.locale = 'en'"> {{ $t("english") }}</b-link>
-        <span class="vl"></span>
-        <b-link class="ml-2" @click="$i18n.locale = 'fr'">
-          {{ $t("french") }}
-        </b-link>
-      </span>
-      Bridge Africa © 2021
-    </p>
+     </span>
   </div>
   
   
@@ -36,9 +29,37 @@ export default {
   data() {
     return {
       tabIndex: null,
+       foll_id:null,
+       isloaded: false,
       tabs: ['#post', '#about', '#business', '#media', '#community'],
     };
   },
+    created() {
+    this.foll_id = this.$route.params.id;  
+
+    this.$store
+      .dispatch("businessOwner/roleCheck", this.foll_id)
+      .then((data) => {
+       
+        this.isloaded = true;
+      })
+      .catch((error) => {
+        console.log({ error: error });
+
+        console.log(error.response.status );
+
+         if (error.response.status == 404) {
+           
+            this.$router.push({ name: "notFound" });
+          } 
+
+
+      });
+  },
+
+
+
+
   watch: {
     $route(to, from) {
       console.log(to.hash);

@@ -1,7 +1,7 @@
 <template>
   <div class="p-2">
     <b-modal id="modal-sm" size="sm" hide-header>
-      Do you want to join this network? 
+      {{ $t('profilefollower.Do_you_want_to_join_this_network') }} 
     </b-modal>
 
 
@@ -22,7 +22,7 @@
             <strong class="net-title"> {{ item.name }} </strong> <br />
             {{ item.category }}
             <br />
-            {{ item.followers }} Community <br />
+            {{ item.followers }} {{ $t('profilefollower.Community') }} <br />
 
             <span class="location">
               <b-icon-geo-alt class="ico"></b-icon-geo-alt>
@@ -30,7 +30,7 @@
             </span>
             <br />
 
-            {{ item.about_network }} <b-link>Read More</b-link>
+            {{ item.about_network }} <b-link>{{ $t('profilefollower.Read_More') }}</b-link>
           </p>
         </b-col>
 
@@ -38,14 +38,19 @@
           <div class="s-button">
             <b-row>
               <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2">
-                <b-button
+               
+               <b-button
                   block
                   size="sm"
-                  class="b-background shadow"
+                   :id="'followbtn'+item.id"
+                  :disabled="disable"
+                  :class="item.is_follow !== 0 && 'u-btn'"
                   variant="primary"
+                  @click="handleFollow(item)"
                 >
-                  <i class="fas fa-user-plus  fa-lg btn-icon "></i>
-                  <span class="btn-com" v-b-modal.modal-sm>Community</span>
+                 
+                  <i class="fas fa-lg btn-icon" :class="item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"></i>
+                  <span class="btn-com"> {{ $t('dashboard.Community') }}</span>
                 </b-button>
               </b-col>
 
@@ -57,7 +62,7 @@
                   variant="primary"
 
                   ><i class="fas fa-envelope   fa-lg btn-icon "></i>
-                  <span class="btn-text">Message</span>
+                  <span class="btn-text">{{ $t('profilefollower.Message') }}</span>
                 </b-button>
               </b-col>
 
@@ -151,6 +156,33 @@ export default {
     
 
     },
+
+
+
+
+ async handleFollow(user) {
+       document.getElementById("followbtn"+user.id).disabled = true;
+      const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
+      const nextFollowState = user.is_follow === 0 ? 1 : 0;
+      const data = {
+        id: user.id,
+        type: 'network',
+      };
+
+      await axios
+        .post(uri, data)
+        .then(response => {
+          user.is_follow = nextFollowState;
+           document.getElementById("followbtn"+user.id).disabled =  false;
+        })
+        .catch(err =>{   console.log(err)
+         document.getElementById("followbtn"+user.id).disabled =  false;
+        });
+    },
+
+
+
+
 
     
       infiniteHandler($state) {

@@ -21,7 +21,7 @@ import VueSocialSharing from 'vue-social-sharing';
 
 // import plugin from './http';
 
-Vue.use(plugin);
+// Vue.use(plugin);
 Vue.use(require('vue-moment'));
 
 IconifyIcon.addIcon('home', homeIconData);

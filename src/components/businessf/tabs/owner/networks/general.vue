@@ -79,7 +79,7 @@ import Notification from "@/components/businessf/tabs/owner/networks/notificatio
 import Settings from "@/components/businessf/tabs/owner/networks/settings";
 import General from "@/components/businessf/tabs/owner/networks/settings/general";
 import Blocking from "@/components/businessf/tabs/owner/networks/settings/blocking";
-import LyTab from "@/tab/src/index.vue";
+// import LyTab from "@/tab/src/index.vue";
 
 
 export default {
@@ -140,7 +140,7 @@ export default {
     KeywordAlert,
     PendingPost,
     Settings,
-    LyTab
+    // LyTab
    
    
   },

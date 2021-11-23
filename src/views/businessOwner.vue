@@ -94,9 +94,7 @@ export default {
       },
     };
   },
-  created() {
-    this.selectedId = this.$route.query.tabId ? this.$route.query.tabId : "0";
-  },
+
 
   methods: {
     businessInfo() {
@@ -156,6 +154,8 @@ export default {
   },
 
   created() {
+    this.selectedId = this.$route.query.tabId ? this.$route.query.tabId : "0";
+
     this.foll_id = this.$route.params.id;
 
     this.$store

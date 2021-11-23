@@ -152,10 +152,8 @@ export default {
       // this.$router.push({ path: `${path}`, query: { tabId: 1, msgTabId: 1 } });
       this.$router.push({ path: `/business_owner/${this.activeAccount.id}`, query: { tabId: 1, msgTabId: 0 } });
 
-    }
-  },
+    },
 
-   methods: {
 
        count(number) {
       if (number >= 1000000) {

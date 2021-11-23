@@ -32,15 +32,16 @@ import businessChat from './messaging/business';
 import { notification } from './notifications';
 
 // import UserProfileOwner from "./UserProfileOwner";
-import networkProfile from './networkProfile';
-import UserProfileOwner from './UserProfileOwner';
+
 import businessSettingInfo from './businessSettingInfo';
 import networkProfileCommunitySidebar from './networkProfileCommunitySidebar';
 import networkProfileFeedback from './networkProfileFeedback';
 import networkProfileMedia from './networkProfileMedia';
 import networkProfileMemberRequest from './networkProfileMemberRequest';
 import profileOrders from './profileOrders';
-import { search } from './search';
+import keywordOperationOnNetwork from './keywordOperationOnNetwork';
+
+
 import { social } from './social';
 
 Vue.use(Vuex);

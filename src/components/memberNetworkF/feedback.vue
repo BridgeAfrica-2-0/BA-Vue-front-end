@@ -3,7 +3,7 @@
     <b-card>
       <p class="title">
         <b>{{ $t('network.Your_Feedback_is_about') }}</b>
-        <b class="text-center"><b-spinner v-if="spinner" variant="primary" label=" $t('network.Text_Centered')"></b-spinner></b>
+        <b class="text-center"><b-spinner v-if="spinner" variant="primary" label="Text_Centered"></b-spinner></b>
       </p>
       <b-form-select
         required

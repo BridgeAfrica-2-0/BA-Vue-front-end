@@ -19,6 +19,7 @@
       </b-row>
     </b-container>
     <Footer />
+    
       <p class="text-center">
       <span class="display-inline">
         <b-link @click="$i18n.locale = 'en'"> {{ $t("auth.english") }}</b-link>

@@ -12,12 +12,12 @@
         <button
           type="button"
           class="btn btn-outline-primary float-md-right"
-          data-toggle="modal"
-          data-target="#dobModal"
-          v-b-modal.modal-6
+       
+        
+          v-b-modal.dobbb
         >
           {{ $t('profileowner.Edit') }}
-        </button>
+        </button>   
       </div>
 
       <b-modal
@@ -186,8 +186,8 @@
       </b-modal>
 
       <b-modal
-        id="modal-6"
-        ref="model-6"
+        id="dobbb"
+        ref="dobbb"
         :title="$t('profileowner.Edit_Date_of_Birth')"
         hide-footer
         @close="cancel"

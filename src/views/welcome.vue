@@ -1,6 +1,6 @@
 <template>
   <div class="welcome" style="overflow-x: hidden">
-
+       
      
     <md-progress-bar md-mode="indeterminate" v-if="sendingP" />
 

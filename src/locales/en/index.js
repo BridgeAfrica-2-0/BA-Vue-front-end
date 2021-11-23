@@ -16,6 +16,7 @@ import memnetwork from './memnetwork.json'
 import profilefollower from './network.json'
 
 
+
 export const defaultLocale = 'en'
 
 export const en = {

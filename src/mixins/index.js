@@ -152,7 +152,7 @@ export const commentMixinsBuisness = {
       auth: 'auth/profilConnected',
     }),
 
-    onLike: async function() {
+    onLike: async function () {
       const request = await this.$repository.share.commentLike({
         comment: this.comment.comment_id,
         network: this.profile.id,
@@ -164,12 +164,12 @@ export const commentMixinsBuisness = {
           comment_likes: !this.comment.is_liked
             ? this.comment.comment_likes + 1
             : this.comment.comment_likes
-            ? this.comment.comment_likes - 1
-            : 0,
+              ? this.comment.comment_likes - 1
+              : 0,
         });
     },
 
-    onShowReply: async function() {
+    onShowReply: async function () {
       this.loadComment = true;
       const request = await this.$repository.share.fetchReplyComment({
         post: this.uuid,
@@ -186,7 +186,8 @@ export const commentMixinsBuisness = {
       this.loadComment = false;
     },
 
-    onReply: async function() {
+
+    onReply: async function () {
       if (!(this.text.trim().length > 2 && !this.createPostRequestIsActive)) return false;
 
       this.createPostRequestIsActive = true;
@@ -256,7 +257,7 @@ export const commentMixins = {
   },
 
   methods: {
-    onLike: async function() {
+    onLike: async function () {
       const request = await this.$repository.share.commentLike({
         comment: this.comment.comment_id,
         network: this.profile.id,
@@ -268,12 +269,12 @@ export const commentMixins = {
           comment_likes: !this.comment.is_liked
             ? this.comment.comment_likes + 1
             : this.comment.comment_likes
-            ? this.comment.comment_likes - 1
-            : 0,
+              ? this.comment.comment_likes - 1
+              : 0,
         });
     },
 
-    onShowReply: async function() {
+    onShowReply: async function () {
       const request = await this.$repository.share.fetchReplyComment({
         post: this.uuid,
         comment: this.comment.comment_id,
@@ -283,7 +284,7 @@ export const commentMixins = {
       if (request.success) this.comments = request.data;
     },
 
-    onReply: async function() {
+    onReply: async function () {
       if (!(this.text.trim().length > 2 && !this.createPostRequestIsActive)) return false;
 
       this.createPostRequestIsActive = true;
@@ -341,6 +342,24 @@ export const Pusher = {
   },
 };
 
+export const knowWhoIsConnected = {
+
+  methods: {
+    ...mapMutations({
+      auth: 'auth/profilConnected',
+    }),
+    async getAuth() {
+      const response = await this.$repository.share.WhoIsConnect({ networkId: this.$route.params.id });
+
+      if (response.success) this.auth(response.data);
+    },
+  },
+
+  created() {
+    this.getAuth()
+  }
+}
+
 export const Redis = {
   methods: {
     ...mapMutations({
@@ -349,7 +368,7 @@ export const Redis = {
       newNotificationNetwork: 'notification/NEW_NETWORK_NOTIFICATION',
     }),
 
-    initBusinessNotification: async function() {
+    initBusinessNotification: async function () {
       const response = this.$repository.notification.business();
       if (response.status) this.newNotificationBusiness({ init: true, data: response.data });
     },

@@ -12,19 +12,19 @@
         <div @click="openAlbum" class="overlay">
           <div>
             <span class="text-hover">
-              <div>Album Name</div>
-              <span> {{images.length}} item(s)</span>
+              <div>{{ $t('profilefollower.Album_Name') }}</div>
+              <span> {{images.length}} {{ $t('profilefollower.item_s') }}</span>
             </span>
           </div>
         </div>
       </div>
     </div>
     <div v-if="pictureShow">
-      <b-button @click="back" variant="primary">Back</b-button>
+      <b-button @click="back" variant="primary">{{ $t('profilefollower.Back') }}</b-button>
 
       <div class="album-detail">
-        <div class="album-name"><b>Album Name</b></div>
-        <span> {{ images.length }} Pictures </span>
+        <div class="album-name"><b>{{ $t('profilefollower.Album_Name') }}</b></div>
+        <span> {{ images.length }} {{ $t('profilefollower.Pictures') }} </span>
       </div>
       <div class="albums">
         <div v-for="item in images" :key="item.id" class="p-4 image">
@@ -45,7 +45,7 @@
             src="https://picsum.photos/300/150/?image=41"
           ></b-img>
           <b-row>
-            <h3 class="ml-3">Picture Title</h3>
+            <h3 class="ml-3">{{ $t('profilefollower.Picture_Title') }}</h3>
             <b-icon
               icon="download"
               class="download-view mt-1"

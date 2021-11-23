@@ -33,9 +33,9 @@ import forgotPassword from "@/views/forgotPassword";
 import navMessage from "@/views/navMessaging";
 import Blec from "@/views/blec";
 import memberNetworkFollower from "@/views/memberNetworkFollower";
-import govx from "@/views/test";
+
 import networkEditors from "@/views/networkEditors";
-// import Test from "@/views/test";
+
 import templateView from "@/views/templateView";
 import webSiteCreate from "@/views/webSiteCreate";
 import webSiteCreateTwo from "@/views/webSiteCreateTwo";
@@ -44,6 +44,7 @@ import confirmPayment from "@/views/confirmPayment";
 import networks from "@/views/networks";
 import dashboard from "@/views/dashboard";
 
+import card from "@/views/card";
 import myorders from "@/views/myOders"
 import archivedOrders from "@/views/archivedOrders"
 import notFound from "@/components/404"
@@ -316,33 +317,34 @@ const routes = [{
     },
 
 
+
 ];
 
 const router = new VueRouter({
-    mode: "history",
-    base: process.env.BASE_URL,
-    routes,
+  mode: "history",
+  base: process.env.BASE_URL,
+  routes,
 });
 
 router.beforeEach((to, from, next) => {
-    const loggedIn = localStorage.getItem("user");
+  const loggedIn = localStorage.getItem("user");
 
-    if (to.matched.some((record) => record.meta.auth) && !loggedIn) {
-        next("/login");
+  if (to.matched.some((record) => record.meta.auth) && !loggedIn) {
+    next("/login");
 
-        return;
+    return;
+  }
+
+  if (to.matched.some((record) => record.meta.auth)) {
+    const dat = localStorage.getItem("user");
+    const userdata = JSON.parse(dat);
+
+    if (userdata.user.verified_at == null) {
+      //  next("/verify");
     }
+  }
 
-    if (to.matched.some((record) => record.meta.auth)) {
-        const dat = localStorage.getItem("user");
-        const userdata = JSON.parse(dat);
-
-        if (userdata.user.verified_at == null) {
-            //  next("/verify");
-        }
-    }
-
-    next();
+  next();
 });
 
 export default router;

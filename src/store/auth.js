@@ -1,10 +1,11 @@
-import axios from "axios";
+import axios from 'axios';
 axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 
 export default {
   namespaced: true,
 
   state: {
+    appLanguage: 'fr',
     user: [],
     isVerified: null,
     passwordToken: null,
@@ -21,19 +22,38 @@ export default {
     municipality: [],
     locality: [],
     division: [],
-    profilConnected: null
+    profilConnected: null,
   },
 
   mutations: {
     setUserData(state, userData) {
       state.user = userData;
-      state.profilConnected = { ...userData.user, user_type: "user" }
+      state.profilConnected = { ...userData.user, user_type: 'user' };
 
-      localStorage.setItem("user", JSON.stringify(userData));
+      localStorage.setItem('user', JSON.stringify(userData));
       axios.defaults.headers.common.Authorization = `Bearer ${userData.accessToken}`;
 
-      const userInfo = localStorage.getItem("user");
+      const userInfo = localStorage.getItem('user');
     },
+
+
+
+    setAppLanguage(state, language) {
+      state.appLanguage = language;
+      localStorage.setItem("lang", language); // Whenever we change the appLanguage we save it to the localStorage
+    },
+
+
+    setUserDataa(state, userData) {
+      state.user.user = userData.user;
+
+      localStorage.setItem("user.user", JSON.stringify(userData.user));
+
+
+    },
+
+
+
 
     setCountry(state, data) {
       state.country = data;
@@ -92,142 +112,140 @@ export default {
     },
 
     clearUserData() {
-      localStorage.removeItem("user");
+      localStorage.removeItem('user');
       location.reload();
     },
 
     profilConnected(state, payload) {
-      state.profilConnected = payload
-    }
+      state.profilConnected = payload;
+    },
   },
 
   actions: {
     login({ commit }, credentials) {
       return axios.post("user/login", credentials).then(({ data }) => {
+        console.log(data);
         commit("setUserData", data.data);
       });
     },
 
     country({ commit }) {
-      return axios.get("countries").then(({ data }) => {
-        commit("setCountry", data.data);
+      return axios.get('countries').then(({ data }) => {
+        commit('setCountry', data.data);
       });
     },
 
     region({ commit }, data) {
-      return axios.post("regions", data).then(({ data }) => {
+      return axios.post('regions', data).then(({ data }) => {
         console.log(data);
-        commit("setRegion", data.data);
+        commit('setRegion', data.data);
       });
     },
 
     municipality({ commit }, data) {
-      return axios.get("councils", data).then(({ data }) => {
+      return axios.post("councils", data).then(({ data }) => {
         console.log(data);
-        commit("setMunicipality", data.data);
+        commit('setMunicipality', data.data);
       });
     },
 
     locality({ commit }, data) {
-      return axios.post("neighborhoods", data).then(({ data }) => {
+      return axios.post('neighborhoods', data).then(({ data }) => {
         console.log(data);
-        commit("setLocality", data.data);
+        commit('setLocality', data.data);
       });
     },
 
     division({ commit }, data) {
-      return axios.get("divisions", data).then(({ data }) => {
+      return axios.post("divisions", data).then(({ data }) => {
         console.log(data);
-        commit("setDivision", data.data);
+        commit('setDivision', data.data);
       });
     },
 
     categories({ commit }) {
-      return axios.get("category").then(({ data }) => {
+      return axios.get('category').then(({ data }) => {
         console.log(data);
-        commit("setCategories", data.data);
+        commit('setCategories', data.data);
       });
     },
 
     subcategories({ commit }, data) {
-      return axios.post("catergory/subcategory", data).then(({ data }) => {
+      return axios.post('catergory/subcategory', data).then(({ data }) => {
         console.log(data);
-        commit("setSubcategories", data.data);
+        commit('setSubcategories', data.data);
       });
     },
 
-    filters({ commit }) {
-      return axios.get("user/completewelcome").then(({ data }) => {
-        console.log(data);
-        commit("setFilters", data.data);
-      });
-    },
+  
 
-    Setcategoryfiters({ commit }) {
-      return axios.get("user/completewelcome").then(({ data }) => {
-        console.log(data);
-        commit("Setcategoryfiters", data.data);
-      });
-    },
 
     completeWelcome({ commit }) {
-      return axios.get("user/completewelcome").then(({ data }) => {
+      return axios.get('user/completewelcome').then(({ data }) => {
         console.log(data);
-        commit("setUserData", data.data);
+        commit("setUserDataa", data.data);
       });
     },
 
+
     businessAround({ commit }) {
-      return axios.get("business/around").then(({ data }) => {
-        commit("setBusinessAround", data.data);
+      return axios.get('business/around').then(({ data }) => {
+        commit('setBusinessAround', data.data);
         console.log(data);
       });
     },
 
     peopleAround({ commit }) {
-      return axios.get("people/around").then(({ data }) => {
-        commit("setPeopleAround", data.data);
+      return axios.get('people/around').then(({ data }) => {
+        commit('setPeopleAround', data.data);
         console.log(data);
       });
     },
 
     storeRegisterData({ commit }, userdata) {
-      commit("setUserData", userdata);
+      commit('setUserData', userdata);
     },
 
     logout({ commit }) {
-      commit("clearUserData");
+      commit('clearUserData');
     },
 
     recoverPassword2({ commit }, data) {
-      return axios.post("user/reset", data).then(({ data }) => {
+      return axios.post('user/reset', data).then(({ data }) => {
         console.log(data);
 
-        commit("setPasswordToken", data.data);
+        commit('setPasswordToken', data.data);
       });
     },
 
     verify({ commit }, mydata) {
-      const url = "user/verifyOtp/" + this.state.auth.user.user.id;
+      const url = 'user/verifyOtp/' + this.state.auth.user.user.id;
 
       return axios.post(url, mydata).then(({ data }) => {
         console.log(data.data);
 
-        commit("setUserData", data.data);
+        commit('setUserData', data.data);
       });
     },
+
+  
+
   },
 
   getters: {
-    isLogged: (state) => !!state.user,
-    isVerified: (state) => !!state.user,
-    user: (state) => state.user,
+    isLogged: state => !!state.user,
+    isVerified: state => !!state.user,
+    user: state => state.user,
 
     getAuthToken(state) {
-      return `Bearer ${state.user.accessToken}`
+      return `Bearer ${state.user.accessToken}`;
     },
 
-    profilConnected: (state) => state.profilConnected
+    profilConnected: state => state.profilConnected,
+
+    
+      getAppLanguage: (state) => state.appLanguage
+    
 
   },
 };

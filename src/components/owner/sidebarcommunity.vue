@@ -103,9 +103,9 @@
 </template>
 
 <script>
-	import Business from "@/components/follower/tabs/business";
-	import People from "@/components/follower/tabs/people";
-	import Network from "@/components/follower/tabs/network";
+	import Business from "@/components/owner/tabs/business";
+	import People from "@/components/owner/tabs/people";
+	import Network from "@/components/owner/tabs/network";
 	export default {
 		name: "comunitiDashboard",
 

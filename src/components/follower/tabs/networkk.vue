@@ -5,11 +5,11 @@
       class="primary mr-2 pt-1 icon-size primary"
       :icon="['fas', 'handshake']"
     />
-    Network
+    {{ $t('profilefollower.Network') }}
 
     <hr />
     <b-modal id="modal-sm" size="sm" hide-header>
-      Do you want to join this network? 
+      {{ $t('profilefollower.Do_you_want_to_join_this_network') }} 
     </b-modal>
 
 
@@ -30,7 +30,7 @@
             <strong class="net-title"> {{ item.name }} </strong> <br />
              <span class="m-1" v-for=" cat in item.categories" :key="cat "> {{cat}}  </span>
             <br />
-            {{ item.followers }} Community <br />
+            {{ item.followers }} {{ $t('profilefollower.Community') }} <br />
 
             <span class="location">
               <b-icon-geo-alt class="ico"></b-icon-geo-alt>
@@ -44,24 +44,33 @@
                 :text="item.description"
                 link="#"
                 less-str="read less"
-                :max-chars="200"
+                :max-chars="100"
               ></read-more>
-          </p>
+          </p>  
         </b-col>
 
         <b-col lg="12" md="4" xl="4" cols="12" sm="4">
           <div class="s-button">
             <b-row>
               <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2">
-                <b-button
+               
+
+
+               <b-button
                   block
                   size="sm"
-                  class="b-background shadow"
+                  :disabled="disable"
+                   :id="'followbtn'+item.id"
+                  :class="item.is_follow !== 0 && 'u-btn'"
                   variant="primary"
+                  @click="handleFollow(item)"
                 >
-                  <i class="fas fa-user-plus  fa-lg btn-icon "></i>
-                  <span class="btn-com" v-b-modal.modal-sm>Community</span>
+                 
+                  <i class="fas fa-lg btn-icon" :class="item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"></i>
+                  <span class="btn-com"> {{ $t('dashboard.Community') }}</span>
                 </b-button>
+
+
               </b-col>
 
               <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2">
@@ -72,7 +81,7 @@
                   variant="primary"
 
                   ><i class="fas fa-envelope   fa-lg btn-icon "></i>
-                  <span class="btn-text">Message</span>
+                  <span class="btn-text">{{ $t('profilefollower.Message') }}</span>
                 </b-button>
               </b-col>
 
@@ -103,6 +112,7 @@ export default {
    data() {
     return {
       page: 1,
+      network:[],
       foll_id:'',
        options: {
         rewind: true,
@@ -117,7 +127,7 @@ export default {
   },
   computed: {
    
-        network(){
+        old_network(){
  
       
 
@@ -131,20 +141,44 @@ export default {
 
    mounted(){
 
-      this.foll_id = this.$route.params.id;
+      this.foll_id = this.$route.params.id;    
      
   },
 
   methods:{ 
 
+
+
+
+async handleFollow(user) {
+       document.getElementById("followbtn"+user.id).disabled = true;
+      const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
+      const nextFollowState = user.is_follow === 0 ? 1 : 0;
+      const data = {
+        id: user.id,
+        type: 'network',
+      };
+
+      await axios
+        .post(uri, data)
+        .then(response => {
+          user.is_follow = nextFollowState;
+           document.getElementById("followbtn"+user.id).disabled =  false;
+        })
+        .catch(err =>{   console.log(err)
+         document.getElementById("followbtn"+user.id).disabled =  false;
+        });
+    },
+
+
+
+
     
       
        infiniteHandler($state) {
 
-     let url = "network?page=" + this.page+"&id="+this.foll_id;
+     let url = "network?id="+this.foll_id +"&page=" + this.page;
 
-         
-          console.log( "network?page=" + this.page+"&id="+this.foll_id);
           if(this.page==1){
         
          this.network.splice(0);
@@ -152,7 +186,7 @@ export default {
       }
          
       axios
-        .get(url + this.page)
+        .get(url)
         .then(({ data }) => {
           console.log(data.data);
           if (data.data.length) {

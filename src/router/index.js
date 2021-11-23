@@ -44,6 +44,7 @@ import confirmPayment from "@/views/confirmPayment";
 import networks from "@/views/networks";
 import dashboard from "@/views/dashboard";
 
+import ordersdetail from "@/views/ordersDetail";
 import businessordersdetail from "@/views/businessordersdetail"
 
 import card from "@/views/card";
@@ -55,6 +56,7 @@ import notFound from "@/components/404"
 import welcome from "@/views/welcome";
 
 import ordersdetail from "@/views/odersDetail";
+import businessordersdetail from "@/views/businessordersdetail"
 
 import payment from "@/views/payment";
 

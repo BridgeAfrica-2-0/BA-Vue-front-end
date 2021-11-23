@@ -188,6 +188,42 @@ export default {
     },
   },
 
+  created() {
+    this.foll_id = this.$route.params.id;
+
+    this.$store
+      .dispatch("businessOwner/roleCheck", this.foll_id)
+      .then((data) => {
+        let role = data.data.data.role;
+        switch (role) {
+          case "editor":
+            this.$router.push({
+              name: "BusinessEditor",
+              params: { id: this.foll_id },
+            });
+            break;
+
+          case "visitor":
+            this.$router.push({
+              name: "BusinessFollower",
+              params: { id: this.foll_id },
+            });
+            break;
+        }
+
+        this.isloaded = true;
+      })
+      .catch((error) => {
+        console.log({ error: error });
+
+        console.log(error.response.status);
+
+        if (error.response.status == 404) {
+          this.$router.push({ name: "notFound" });
+        }
+      });
+  },
+
   mounted() {
     this.url_data = this.$route.params.id;
 

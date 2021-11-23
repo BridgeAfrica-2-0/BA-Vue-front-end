@@ -4,6 +4,7 @@
       <b-col lg="6" sm="12" class="p-2" v-for="item in businesses" :key="item.id">
         <div class="people-style shadow">
           <b-row>
+
             <b-col md="8" xl="8" lg="12" cols="12" sm="8">
               <div class="d-inline-flex">   
               <div class="center-img ">
@@ -38,7 +39,7 @@
                 >
                 </read-more>
               </p>
-               <!-- </div> -->
+               </div>
             </b-col>     
 
             <b-col lg="12" xl="4" md="4" cols="12" sm="4">

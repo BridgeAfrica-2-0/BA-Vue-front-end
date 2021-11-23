@@ -1,5 +1,5 @@
 <template>
-  <div class="about pb-3">
+  <div class="about">
     <header class="position-relative">
       <b-navbar toggleable="lg" variant="faded" sticky="true" type="light">
         <div class="container">
@@ -520,7 +520,7 @@
           class="contact-img"
         />
       </div>
-      <h5 class="text-light font-arvo text-center mt-5 text-capitalize contact-heading">
+      <h5 class="text-light font-arvo text-center mt-5 text-capitalize contact-heading px-2">
         digitalzins busingess and consumers in afica
       </h5>
       <h3 class="text-light text-center font-arvo text-uppercase contact-heading my-5">
@@ -558,8 +558,125 @@
             class="sub-input my-3 contact-msg"
           ></b-form-textarea>
         </div>
-        <div class="col-md-3 my-5">
-          <b-button variant="primary" class="font-weight-bold font-arvo text-uppercase btn-block">Submit Message</b-button>
+        <div class="col-md-2 my-5">
+          <b-button variant="primary" class="font-weight-bold font-arvo text-uppercase btn-block"
+            >Submit Message</b-button
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- Social Icons -->
+
+    <section class="social-icons py-5">
+      <h2 class="text-light font-arvo text-center font-weight-bold text-capitalize">
+        Visit us on social media platforms
+      </h2>
+      <div class="row justify-content-center my-5">
+        <div class="col-md-7">
+          <p class="text-center font-mont text-light font-weight-bold">
+            We hope you enjoy our products and services as much as we enjoy offering them to you. If you have any
+            questions or comments, please don’t hesitate to contact us. via the media below.
+          </p>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-md-4">
+          <div class="d-flex flex-row justify-content-around">
+            <a href="https://twitter.com/bridgeafricacom" target="_blank" class="social-icon">
+              <i class="fab fa-twitter-square"></i>
+            </a>
+            <a href="http://facebook.com/bridgeafricacom" target="_blank" class="social-icon">
+              <i class="fab fa-facebook-square"></i>
+            </a>
+            <a href="https://www.youtube.com/channel/UC8JjdBDrz7GsqnO7kpEEHvA" target="_blank" class="social-icon">
+              <i class="fab fa-youtube"></i>
+            </a>
+            <a href="https://twitter.com/bridgeafricacom" target="_blank" class="social-icon">
+              <i class="fab fa-instagram"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+
+    <section class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3 py-4">
+            <div class="d-flex position-relative">
+              <img
+                width="963"
+                height="380"
+                src="http://info.bridgeafrica.com/wp-content/uploads/2021/07/logo.png"
+                alt="LogoF"
+              />
+              <h3 class="text-light font-arvo position-absolute footer-icon-text font-weight-bold">
+                Bridge <br />
+                Africa
+              </h3>
+            </div>
+            <div class="footer-icons-div d-flex flex-row justify-content-around my-4">
+              <a href="https://twitter.com/bridgeafricacom" target="_blank" class="footer-icons">
+                <i class="fab fa-twitter-square"></i>
+              </a>
+              <a href="http://facebook.com/bridgeafricacom" target="_blank" class="footer-icons">
+                <i class="fab fa-facebook-square"></i>
+              </a>
+              <a href="https://www.youtube.com/channel/UC8JjdBDrz7GsqnO7kpEEHvA" target="_blank" class="footer-icons">
+                <i class="fab fa-youtube"></i>
+              </a>
+              <a href="https://twitter.com/bridgeafricacom" target="_blank" class="footer-icons">
+                <i class="fab fa-instagram"></i>
+              </a>
+            </div>
+            <p class="text-center text-md-left"><span class="text-primary">&copy; 2021</span> Bridge Africa</p>
+          </div>
+          <div class="col-md-3 py-4">
+            <h5 class="font-arvo text-center text-md-leftfont-weight-bold ">
+              OUR ADDRESS
+            </h5>
+            <p class="mt-5 font-weight-bold text-center text-md-left">
+              International Handicraft Center, Rond-point Intendance
+            </p>
+            <p class="mb-1 font-weight-bold text-center text-md-left">
+              Yaoundé
+            </p>
+            <p class="font-weight-bold text-center text-md-left">Cameroon</p>
+          </div>
+          <div class="col-md-3 py-4">
+            <h5 class="font-arvo text-center text-md-left font-weight-bold">
+              USEFUL LINK
+            </h5>
+            <p class="mt-5">
+              <a href="#" class="color-white d-block font-weight-bold text-center text-md-left">
+                BRIDGEAFRICA.COM
+              </a>
+              <a href="#" class="color-white d-block font-weight-bold text-center text-md-left">
+                BRIDGEAFRICA.COM
+              </a>
+
+              <a href="#" class="color-white d-block font-weight-bold text-center text-md-left">
+                ABOUT US
+              </a>
+              <a href="#" class="color-white d-block font-weight-bold text-center text-md-left">
+                CONTACT US
+              </a>
+            </p>
+          </div>
+          <div class="col-md-3 py-4">
+            <h5 class="font-arvo text-left font-weight-bold text-center text-md-left">
+              WORKING HOURS
+            </h5>
+            <p class="mt-5 text-center text-md-left">
+              Monday-Friday: 09AM – 05PM
+            </p>
+            <p class="text-center text-md-left">
+              Saturday: 9AM – 01PM
+            </p>
+          </div>
         </div>
       </div>
     </section>
@@ -619,6 +736,9 @@ export default {
 .bg-black {
   background-color: #000000;
   color: #000000;
+}
+.color-white {
+  color: #ffffff;
 }
 .bg-img {
   background-color: #010000;
@@ -872,6 +992,35 @@ export default {
 .contact-msg {
   width: 100%;
 }
+.social-icons {
+  background-image: url('http://info.bridgeafrica.com/wp-content/uploads/2021/07/shiny-dust-on-black-background-overlay-layer-7YKB5W3-scaled-1.jpg');
+  width: 100%;
+  min-height: 50vh;
+}
+.social-icon {
+  font-size: 62px;
+  text-decoration: none;
+  color: #b6c5c8;
+}
+.footer {
+  margin-top: 2px;
+  width: 100%;
+  min-height: 30vh;
+  background-color: #000000;
+  color: #ffffff;
+}
+.footer-icon-text {
+  /* top: 15px; */
+  left: 30%;
+}
+.footer-icons {
+  font-size: 32px;
+  text-decoration: none;
+  color: #e75c18;
+}
+.footer-icons-div {
+  width: 70%;
+}
 @media only screen and (max-width: 660px) {
   .header-img-text {
     font-size: 27px;
@@ -916,6 +1065,16 @@ export default {
   }
   .contact-img {
     width: 85%;
+  }
+  .social-icon {
+    font-size: 36px;
+  }
+  .footer-icon-text {
+    left: 50%;
+    top: 30px;
+  }
+  .footer-icons-div {
+    width: 100%;
   }
 }
 </style>

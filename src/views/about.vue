@@ -382,7 +382,61 @@
     </div>
 
     <!-- Our Resources -->
+    <section class="resources bg-black py-5 px-4">
+      <h1 class="text-center font-arvo text-light">Our Resources</h1>
+      <div class="row justify-content-center my-5">
+        <div class="col-md-8">
+          <div class="d-flex justify-content-around tabs-resource">
+            <b-button
+              pill
+              :variant="selectedResource == 'all' ? 'primary' : 'outline-primary'"
+              @click="changeResource('all')"
+              >Show All</b-button
+            >
+            <b-button
+              pill
+              :variant="selectedResource == 'bridgeafrica' ? 'primary' : 'outline-primary'"
+              @click="changeResource('bridgeafrica')"
+              >BridgeAfrica.com</b-button
+            >
+            <b-button
+              pill
+              :variant="selectedResource == 'cameroon' ? 'primary' : 'outline-primary'"
+              @click="changeResource('cameroon')"
+              >Cameroon Gallery</b-button
+            >
+            <b-button
+              pill
+              :variant="selectedResource == 'cunsulting' ? 'primary' : 'outline-primary'"
+              @click="changeResource('cunsulting')"
+              >Consulting</b-button
+            >
+            <b-button
+              pill
+              :variant="selectedResource == 'media' ? 'primary' : 'outline-primary'"
+              @click="changeResource('media')"
+              >Media Production</b-button
+            >
+          </div>
+        </div>
+      </div>
 
+      <div class="row">
+        <div v-for="resource in getResources" :key="resource.id" class="col-md-4 mt-4 resource-div">
+          <div class="resource-img-div">
+            <img :src="resource.img_url" alt="..." class="resource-img" />
+          </div>
+          <div class="resource-title">
+            <p v-if="resource.title.length > 25">{{ resource.title.substring(0, 25) }}...</p>
+            <p v-else>
+              {{ resource.title }}
+            </p>
+
+            <div class="resource-line"></div>
+          </div>
+        </div>
+      </div>
+    </section>
     <!-- WELCOME TO BIZ KONNECT -->
     <section class="mt-4 p-3">
       <h1 class="color-black text-center font-arvo functionality-heading text-center">WELCOME TO BIZ KONNECT</h1>
@@ -405,7 +459,7 @@
 
     <!-- Blog -->
 
-    <div class="bg-black mb-md-5 py-5">
+    <section class="bg-black mb-md-5 py-5">
       <h1 class="text-center font-arvo text-light">Our Blog</h1>
       <div class="row px-4">
         <div class="col-md-4 mt-3">
@@ -426,7 +480,7 @@
             <h5>Creating the Next Generation of Leaders at Your Company (Demo)</h5>
           </div>
         </div>
-    
+
         <div class="col-md-4 mt-3">
           <div class="blog-img-div position-relative">
             <img src="https://bridgeafricaventures.com/wp-content/uploads/2021/07/post3.jpg" alt="..." />
@@ -446,7 +500,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </section>
 
     <!-- Team -->
 
@@ -723,13 +777,67 @@ export default {
   data() {
     return {
       subEmail: '',
+      selectedResource: 'all',
       contact: {
         name: '',
         email: '',
         website: '',
         msg: '',
       },
+      resources: [
+        {
+          id: '1',
+          title: 'HOW TO USE BRIDGEAFRICA.COM',
+          img_url:
+            'http://info.bridgeafrica.com/wp-content/uploads/2021/07/WSIS-thumbnail-1024x592-1-thegem-portfolio-masonry.png',
+          tag: ['bridgeafrica', 'cameroon', 'cunsulting', 'media'],
+        },
+        {
+          id: '2',
+          title: 'BETA LAUNCH OF BRIDGEAFRICA',
+          img_url:
+            'http://info.bridgeafrica.com/wp-content/uploads/2021/07/THINDFDF-1024x743-1-thegem-portfolio-masonry.png',
+          tag: ['bridgeafrica', 'cameroon'],
+        },
+        {
+          id: '3',
+          title: 'BridgeAfrica.com Partners with Pea Jeunes (Demo)',
+          img_url:
+            'http://info.bridgeafrica.com/wp-content/uploads/2021/07/mapoure-1024x576-1-thegem-portfolio-masonry.png',
+          tag: ['bridgeafrica', 'media'],
+        },
+        {
+          id: '4',
+          title: 'BridgeAfrica.com Gives Digital Literacy Training (Demo)',
+          img_url: 'http://info.bridgeafrica.com/wp-content/uploads/2021/07/000000.png',
+          tag: ['cunsulting', 'media'],
+        },
+        {
+          id: '5',
+          title: 'Cameroon Gallery Commercial (Demo)',
+          img_url:
+            'http://info.bridgeafrica.com/wp-content/uploads/2021/07/caeroon-gallery-thegem-portfolio-masonry.jpg',
+          tag: ['cameroon', 'media'],
+        },
+      ],
     };
+  },
+  computed: {
+    getResources() {
+      if (this.selectedResource == 'all') {
+        return this.resources;
+      }
+      return this.resources.filter(res => {
+        if (res.tag.includes(this.selectedResource)) {
+          return res;
+        }
+      });
+    },
+  },
+  methods: {
+    changeResource(resource) {
+      this.selectedResource = resource;
+    },
   },
 };
 </script>
@@ -1096,6 +1204,54 @@ export default {
 .blog-img-div:hover .share-icon {
   display: block;
 }
+.resource-div {
+  transition: all 0.5s;
+  cursor: pointer;
+}
+.resource-div:hover .resource-img-div .resource-img {
+  opacity: 0.6;
+  -webkit-transform: scale(1.3);
+  transform: scale(1.3);
+}
+.resource-div:hover .resource-title .resource-line{
+  width: 50%;
+}
+
+.resource-img-div {
+  height: 275px;
+  width: 100%;
+  overflow: hidden;
+}
+.resource-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 1;
+  -webkit-transform: scale(1);
+  transform: scale(1);
+  -webkit-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
+}
+.resource-title {
+  padding: 30px 0;
+  background-color: #ffffff;
+  color: #000000;
+  text-align: center;
+}
+.resource-title p {
+  text-align: center;
+  font-size: 20px;
+  letter-spacing: 0px;
+  font-weight: 700;
+  font-family: 'Arvo';
+}
+.resource-line {
+  border: 1px solid black;
+  width: 30%;
+  margin: auto;
+  -webkit-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
+}
 @media only screen and (max-width: 660px) {
   .header-img-text {
     font-size: 27px;
@@ -1150,6 +1306,9 @@ export default {
   }
   .footer-icons-div {
     width: 100%;
+  }
+  .tabs-resource {
+    flex-direction: column;
   }
 }
 </style>

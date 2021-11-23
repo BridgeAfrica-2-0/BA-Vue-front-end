@@ -1,7 +1,7 @@
 <template>
   <div class="about">
     <header class="position-relative">
-      <b-navbar toggleable="lg" variant="faded" sticky="true" type="light">
+      <b-navbar toggleable="lg" variant="faded" type="light">
         <div class="container">
           <div class="col-md-12 col-lg-2 col-xl-2 text-center">
             <a class="d-inline-block align-top mt-1" href="#">
@@ -1124,6 +1124,9 @@ export default {
   cursor: auto;
   width: 100%;
 }
+.contact-input:focus {
+  width: 100%;
+}
 .contact-input.name {
   background-image: url('../assets/icons/user.png');
 }
@@ -1134,6 +1137,9 @@ export default {
   background-image: url('../assets/icons/world-wide-web.png');
 }
 .contact-msg {
+  width: 100%;
+}
+.contact-msg:focus {
   width: 100%;
 }
 .social-icons {
@@ -1213,7 +1219,7 @@ export default {
   -webkit-transform: scale(1.3);
   transform: scale(1.3);
 }
-.resource-div:hover .resource-title .resource-line{
+.resource-div:hover .resource-title .resource-line {
   width: 50%;
 }
 

@@ -124,7 +124,7 @@
           <label class="f-12">
             {{ $t("auth.by_loging_in_you_agree_to_bridge_africa") }}
           </label>
-          <br />
+          <br /> 
 
           <label class="f-12">
             <b-link href="#"> {{ $t("auth.terms_and_conditions") }} </b-link> &
@@ -143,13 +143,17 @@
     <hr class="localfoter" />
 
     <p class="text-center">
+
+
       <span class="display-inline">
-        <b-link @click="$i18n.locale = 'en'"> {{ $t("auth.english") }} </b-link>
-        <span class="vl"></span>
-        <b-link class="ml-2" @click="$i18n.locale = 'fr'">
+        <b-link @click=" setLang('en')  "> {{ $t("auth.english") }} </b-link>
+        <span class="vl"></span> 
+        <b-link class="ml-2"  @click="setLang('fr')">
           {{ $t("auth.french") }}
         </b-link>
       </span>
+
+      
       Bridge Africa © 2021
     </p>
   </div>
@@ -189,13 +193,32 @@ export default {
     }
   },
   methods: {
-    getValidationClass(fieldName) {
+    getValidationClass(fieldName) { 
       const field = this.$v.form[fieldName];
       if (field) {
         return {
           "md-invalid": field.$invalid && field.$dirty
         };
       }
+    },
+
+    setLang(data){
+        
+         console.log(data);
+          this.$i18n.locale = data;
+         this.$store.commit("auth/setAppLanguage", data);
+    },
+
+    flashErrors(errors) {
+      let err = "";
+      if(errors){   
+      Object.values(errors).forEach((element) => {
+        err = element[0];
+      });
+
+      }
+
+      return err;
     },
 
     authProvider(provider) {
@@ -206,7 +229,7 @@ export default {
           self.socialLogin(provider, response);
           console.log(response);
         })
-        .catch(err => {
+        .catch(err => {  
           console.log({ err: err });
         });
     },
@@ -271,7 +294,7 @@ export default {
 
             this.flashMessage.show({
               status: "error",
-
+              message: err.response.data.message+ " "+ this.flashErrors(err.response.data.errors),
             });
           } else {
             this.flashMessage.show({

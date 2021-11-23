@@ -21,9 +21,9 @@
                   v-b-modal.modal-8
               /></a>
 
-              <b-modal id="modal-8" title="Details">
+              <b-modal id="modal-8" :title="$t('network.Details')">
                 <img class="card-img" src="@/assets/img/m1.jpg" alt="" />
-                <h4>Post Title</h4>
+                <h4>{{ $t('network.Post_Title')}}</h4>
                 <p class="my-4">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
                   Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum
@@ -47,14 +47,14 @@
                           :icon="['fas', 'ellipsis-v']"
                         />
                       </template>
-                      <b-dropdown-item href="#">Download</b-dropdown-item>
+                      <b-dropdown-item href="#">{{ $t('network.Download') }}</b-dropdown-item>
                       <b-dropdown-item href="#"
-                        >Make Profile Picture</b-dropdown-item
+                        >{{ $t('network.Make_Profile_Picture') }}</b-dropdown-item
                       >
                       <b-dropdown-item href="#"
-                        >Make Cover Photo</b-dropdown-item
+                        >{{ $t('network.Make_Cover_Photo') }}</b-dropdown-item
                       >
-                      <b-dropdown-item href="#">Delete</b-dropdown-item>
+                      <b-dropdown-item href="#">{{ $t('network.Delete') }}</b-dropdown-item>
                     </b-dropdown>
                   </li>
                 </ul>
@@ -69,9 +69,9 @@
                   v-b-modal.modal-a
               /></a>
 
-              <b-modal id="modal-a" title="Details">
+              <b-modal id="modal-a" :title="$t('network.Details')">
                 <img class="card-img" src="@/assets/img/m2.jpg" alt="" />
-                <h4>Post Title</h4>
+                <h4>{{ $t('network.Post_Title')}}</h4>
                 <p class="my-4">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
                   Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum
@@ -95,14 +95,14 @@
                           :icon="['fas', 'ellipsis-v']"
                         />
                       </template>
-                      <b-dropdown-item href="#">Download</b-dropdown-item>
+                      <b-dropdown-item href="#">{{ $t('network.Download')}}</b-dropdown-item>
                       <b-dropdown-item href="#"
-                        >Make Profile Picture</b-dropdown-item
+                        >{{ $t('network.Make_Profile_Picture')}}</b-dropdown-item
                       >
                       <b-dropdown-item href="#"
-                        >Make Cover Photo</b-dropdown-item
+                        >{{ $t('network.Make_Cover_Photo')}}</b-dropdown-item
                       >
-                      <b-dropdown-item href="#">Delete</b-dropdown-item>
+                      <b-dropdown-item href="#">{{ $t('network.Delete')}}</b-dropdown-item>
                     </b-dropdown>
                   </li>
                 </ul>
@@ -120,9 +120,9 @@
                   v-b-modal.modal-b
               /></a>
 
-              <b-modal id="modal-b" title="Details">
+              <b-modal id="modal-b" :title="$t('network.Details')">
                 <img class="card-img" src="@/assets/img/m3.jpg" alt="" />
-                <h4>Post Title</h4>
+                <h4>{{ $t('network.Post_Title')}}</h4>
                 <p class="my-4">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
                   Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum
@@ -146,14 +146,14 @@
                           :icon="['fas', 'ellipsis-v']"
                         />
                       </template>
-                      <b-dropdown-item href="#">Download</b-dropdown-item>
+                      <b-dropdown-item href="#">{{ $t('network.Download')}}</b-dropdown-item>
                       <b-dropdown-item href="#"
-                        >Make Profile Picture</b-dropdown-item
+                        >{{ $t('network.Make_Profile_Picture')}}</b-dropdown-item
                       >
                       <b-dropdown-item href="#"
-                        >Make Cover Photo</b-dropdown-item
+                        >{{ $t('network.Make_Cover_Photo')}}</b-dropdown-item
                       >
-                      <b-dropdown-item href="#">Delete</b-dropdown-item>
+                      <b-dropdown-item href="#">{{ $t('network.Delete')}}</b-dropdown-item>
                     </b-dropdown>
                   </li>
                 </ul>
@@ -179,14 +179,14 @@
                           :icon="['fas', 'ellipsis-v']"
                         />
                       </template>
-                      <b-dropdown-item href="#">Download</b-dropdown-item>
+                      <b-dropdown-item href="#">{{ $t('network.Download')}}</b-dropdown-item>
                       <b-dropdown-item href="#"
-                        >Make Profile Picture</b-dropdown-item
+                        >{{ $t('network.Make_Profile_Picture')}}</b-dropdown-item
                       >
                       <b-dropdown-item href="#"
-                        >Make Cover Photo</b-dropdown-item
+                        >{{ $t('network.Make_Cover_Photo')}}</b-dropdown-item
                       >
-                      <b-dropdown-item href="#">Delete</b-dropdown-item>
+                      <b-dropdown-item href="#">{{ $t('network.Delete')}}</b-dropdown-item>
                     </b-dropdown>
                   </li>
                 </ul>
@@ -212,14 +212,14 @@
                           :icon="['fas', 'ellipsis-v']"
                         />
                       </template>
-                      <b-dropdown-item href="#">Download</b-dropdown-item>
+                      <b-dropdown-item href="#">{{ $t('network.Download')}}</b-dropdown-item>
                       <b-dropdown-item href="#"
-                        >Make Profile Picture</b-dropdown-item
+                        >{{ $t('network.Make_Profile_Picture')}}</b-dropdown-item
                       >
                       <b-dropdown-item href="#"
-                        >Make Cover Photo</b-dropdown-item
+                        >{{ $t('network.Make_Cover_Photo')}}</b-dropdown-item
                       >
-                      <b-dropdown-item href="#">Delete</b-dropdown-item>
+                      <b-dropdown-item href="#">{{ $t('network.Delete')}}</b-dropdown-item>
                     </b-dropdown>
                   </li>
                 </ul>
@@ -245,14 +245,14 @@
                           :icon="['fas', 'ellipsis-v']"
                         />
                       </template>
-                      <b-dropdown-item href="#">Download</b-dropdown-item>
+                      <b-dropdown-item href="#">{{ $t('network.Download')}}</b-dropdown-item>
                       <b-dropdown-item href="#"
-                        >Make Profile Picture</b-dropdown-item
+                        >{{ $t('network.Make_Profile_Picture')}}</b-dropdown-item
                       >
                       <b-dropdown-item href="#"
-                        >Make Cover Photo</b-dropdown-item
+                        >{{ $t('network.Make_Cover_Photo')}}</b-dropdown-item
                       >
-                      <b-dropdown-item href="#">Delete</b-dropdown-item>
+                      <b-dropdown-item href="#">{{ $t('network.Delete')}}</b-dropdown-item>
                     </b-dropdown>
                   </li>
                 </ul>
@@ -278,14 +278,14 @@
                           :icon="['fas', 'ellipsis-v']"
                         />
                       </template>
-                      <b-dropdown-item href="#">Download</b-dropdown-item>
+                      <b-dropdown-item href="#">{{ $t('network.Download')}}</b-dropdown-item>
                       <b-dropdown-item href="#"
-                        >Make Profile Picture</b-dropdown-item
+                        >{{ $t('network.Make_Profile_Picture')}}</b-dropdown-item
                       >
                       <b-dropdown-item href="#"
-                        >Make Cover Photo</b-dropdown-item
+                        >{{ $t('network.Make_Cover_Photo')}}</b-dropdown-item
                       >
-                      <b-dropdown-item href="#">Delete</b-dropdown-item>
+                      <b-dropdown-item href="#">{{ $t('network.Delete')}}</b-dropdown-item>
                     </b-dropdown>
                   </li>
                 </ul>
@@ -312,14 +312,14 @@
                           :icon="['fas', 'ellipsis-v']"
                         />
                       </template>
-                      <b-dropdown-item href="#">Download</b-dropdown-item>
+                      <b-dropdown-item href="#">{{ $t('network.Download')}}</b-dropdown-item>
                       <b-dropdown-item href="#"
-                        >Make Profile Picture</b-dropdown-item
+                        >{{ $t('network.Make_Profile_Picture')}}</b-dropdown-item
                       >
                       <b-dropdown-item href="#"
-                        >Make Cover Photo</b-dropdown-item
+                        >{{ $t('network.Make_Cover_Photo')}}</b-dropdown-item
                       >
-                      <b-dropdown-item href="#">Delete</b-dropdown-item>
+                      <b-dropdown-item href="#">{{ $t('network.Delete')}}</b-dropdown-item>
                     </b-dropdown>
                   </li>
                 </ul>

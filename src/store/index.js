@@ -37,12 +37,13 @@ import networkProfileMemberRequest from './networkProfileMemberRequest';
 import { social } from './social';
 import { notification } from './notifications';
 
-// import axios from "axios";
-Vue.use(Vuex);
 
+Vue.use(Vuex);
+ axios.defaults.baseURL = process.env.VUE_APP_API_URL;
+ //axios.defaults.baseURL = "https://test.maxinemoffett.com/api/v1/";
 //  axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 // axios.defaults.baseURL = "https://test.maxinemoffett.com/api/v1/";
-axios.defaults.baseURL = process.env.VUE_APP_API_URL_DEV;
+
 
 export default new Vuex.Store({
   modules: {
@@ -70,6 +71,7 @@ export default new Vuex.Store({
     business,
     networkProfileFeedback,
     NetworkSettings,
+   keywordOperationOnNetwork,
     businessSettingInfo,
     checkout,
     social,

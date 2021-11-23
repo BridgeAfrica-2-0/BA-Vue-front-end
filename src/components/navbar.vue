@@ -207,6 +207,7 @@
                       ><u>See all Notifications</u></a
                     >
                   </div>
+
                 </b-popover>
               </div>
               <!-- Notifications Ended -->
@@ -355,6 +356,7 @@
 <script>
 import Button from '@/components/ButtonNavBarFind.vue';
 import Activity from '@/components/ShowActivity.vue';
+import NavBarNotifications from '@/components/NavBarNotifications.vue';
 import { mapGetters, mapActions } from 'vuex';
 import axios from 'axios';
 
@@ -363,6 +365,7 @@ export default {
   components: {
     Button,
     Activity,
+    NavBarNotifications
   },
   props: {
     credentials: {

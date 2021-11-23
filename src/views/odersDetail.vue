@@ -309,6 +309,7 @@ color: #e75c18;
   margin-top: 5px;
   margin-left: -3px;
   margin-right: -3px;
+  width: 190px !important;
 }
   .margtotal {
   margin-left: 350px;
@@ -390,9 +391,7 @@ height: 8px;
   font-size: 10px !important;
   margin-left: -15px;
 } 
-.m{
-  /* margin-left: 10px; */
-}
+
 .ligne{
   width: 100%;
 }

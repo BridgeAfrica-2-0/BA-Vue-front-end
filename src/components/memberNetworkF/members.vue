@@ -8,7 +8,7 @@
           </b-input-group-prepend>
           <b-form-input
             aria-label="Text input with checkbox"
-            placeholder="Search Something"
+            :placeholder="$t('network.Search_Something')"
             type="text"
             class="form-control"
             v-model="searchTitle"
@@ -21,7 +21,8 @@
     <b-row class="mt-4">
       <b-col cols="12">
         <h6 class="font-weight-bolder">
-          Network Admins ({{nFormatter(admins.length)}})
+          {{ $t('network.Network_Admins') }} 
+          ({{nFormatter(admins.length)}})
         </h6>
         <hr width="100%" />
         <b-skeleton-wrapper :loading="loading">
@@ -50,7 +51,8 @@
               </p>
             </div>
           </div>
-          <div v-else>No Result On Admins</div>
+          <div v-else>{{ $t('network.No_Result_On_Admins') }} 
+</div>
         </b-skeleton-wrapper>
       </b-col>
     </b-row>
@@ -58,7 +60,8 @@
     <b-row class="mt-4">
       <b-col cols="12" >
         <h6 class="font-weight-bolder">
-          Bussiness ({{nFormatter(business.length)}})
+          {{ $t('network.Bussiness') }} 
+ ({{nFormatter(business.length)}})
         </h6>
         <hr width="100%" />
         <b-skeleton-wrapper :loading="loading">
@@ -88,7 +91,8 @@
               </p>
             </div>
           </div>
-          <div v-else>No Result On Networks</div>
+          <div v-else>{{ $t('network.No_Result_On_Networks') }} 
+</div>
         </b-skeleton-wrapper>
       </b-col>
     </b-row>
@@ -96,7 +100,8 @@
     <b-row class="mt-4" >
       <b-col cols="12">
         <h6 class="font-weight-bolder">
-          All Members ({{nFormatter(members.length)}})
+          {{ $t('network.All_Members') }} 
+({{nFormatter(members.length)}})
         </h6>
         <hr width="100%" />
         <b-skeleton-wrapper :loading="loading">
@@ -127,8 +132,10 @@
       </b-col>
       <b-col col="12">
         <infinite-loading @infinite="infiniteHandler">
-          <div class="text-red" slot="no-more">No More Request</div>
-          <div class="text-red" slot="no-results">No More Request</div>
+          <div class="text-red" slot="no-more">{{ $t('network.No_More_Request') }} 
+</div>
+          <div class="text-red" slot="no-results">{{ $t('network.No_More_Request') }} 
+</div>
         </infinite-loading>
       </b-col>
     </b-row>

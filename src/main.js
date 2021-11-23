@@ -33,7 +33,7 @@ import LoadScript from 'vue-plugin-load-script';
 import InfiniteLoading from 'vue-infinite-loading';
 
 Vue.use(InfiniteLoading, {
-  /* options */
+    /* options */
 });
 Vue.use(LoadScript);
 
@@ -70,18 +70,18 @@ Vue.prototype.$axios = axios;
 //   });
 
 Vue.use(VueSocialauth, {
-  providers: {
-    facebook: {
-      clientId: process.env.VUE_APP_FACEBOOK_CLIENT_ID,
-      client_secret: process.env.VUE_APP_FACEBOOK_CLIENT_SECRETE,
-      redirectUri: process.env.VUE_APP_FACEBOOK_RETURN_URL,
+    providers: {
+        facebook: {
+            clientId: process.env.VUE_APP_FACEBOOK_CLIENT_ID,
+            client_secret: process.env.VUE_APP_FACEBOOK_CLIENT_SECRETE,
+            redirectUri: process.env.VUE_APP_FACEBOOK_RETURN_URL,
+        },
+        google: {
+            clientId: process.env.VUE_APP_GOOGLE_CLIENT_ID,
+            client_secret: process.env.VUE_APP_GOOGLE_CLIENT_SECRETE,
+            redirectUri: process.env.VUE_APP_GOOGLE_RETURN_URL,
+        },
     },
-    google: {
-      clientId: process.env.VUE_APP_GOOGLE_CLIENT_ID,
-      client_secret: process.env.VUE_APP_GOOGLE_CLIENT_SECRETE,
-      redirectUri: process.env.VUE_APP_GOOGLE_RETURN_URL,
-    },
-  },
 });
 
 import FlashMessage from '@smartweb/vue-flash-message';
@@ -98,9 +98,9 @@ import Lightbox from '@morioh/v-lightbox';
 import * as VueGoogleMaps from 'gmap-vue';
 
 
- import VueSplide from "@splidejs/vue-splide";
- Vue.use(VueSplide);
- import "@splidejs/splide/dist/css/themes/splide-default.min.css";
+//  import VueSplide from "@splidejs/vue-splide";
+//  Vue.use(VueSplide);
+//  import "@splidejs/splide/dist/css/themes/splide-default.min.css";
 
 
 // global register
@@ -136,16 +136,16 @@ Vue.use(IconsPlugin);
 //import InfiniteLoading from "vue-infinite-loading";
 
 Vue.use(InfiniteLoading, {
-  /* options */
+    /* options */
 });
 
 Vue.use(VueGoogleMaps, {
-  load: {
-    key: 'AIzaSyAGZU6cqra18t1fhN1AbzRsEc_pgt7n2C8',
-    libraries: 'places',
-  },
-  autobindAllEvents: false,
-  installComponents: true,
+    load: {
+        key: 'AIzaSyAGZU6cqra18t1fhN1AbzRsEc_pgt7n2C8',
+        libraries: 'places',
+    },
+    autobindAllEvents: false,
+    installComponents: true,
 });
 
 import VueLoading from 'vue-loading-overlay';
@@ -182,47 +182,47 @@ var user = null;
 import './redis-notification'
 
 new Vue({
-  router,
-  store,
-  i18n,
-  created() {
-    const userInfo = localStorage.getItem('user');
-    i18n.locale = localStorage.getItem('lang'); 
-    
-
-    console.log( i18n.locale );
-    
-    if (userInfo) {
-      const userData = JSON.parse(userInfo);
-      user = userData;
-      this.$store.commit('auth/setUserData', userData);
-    }
-    axios.interceptors.response.use(
-      response => response,
-      error => {
-        if (error.response) {
-          if (error.response.status === 401) {
-           this.$store.dispatch('auth/logout');
-          console.log('error has ocurred', error);
+    router,
+    store,
+    i18n,
+    created() {
+        const userInfo = localStorage.getItem('user');
+        i18n.locale = localStorage.getItem('lang');
 
 
-          }
+        console.log(i18n.locale);
+
+        if (userInfo) {
+            const userData = JSON.parse(userInfo);
+            user = userData;
+            this.$store.commit('auth/setUserData', userData);
         }
-        return Promise.reject(error);
-      },
-    );
+        axios.interceptors.response.use(
+            response => response,
+            error => {
+                if (error.response) {
+                    if (error.response.status === 401) {
+                        this.$store.dispatch('auth/logout');
+                        console.log('error has ocurred', error);
 
-    axios.interceptors.request.use(function (config) {
-      if (user != null) {
-        config.headers.Authorization = `Bearer  ${user.accessToken}`;
-      }
 
-      
-    
-      config.headers.common['Language'] =  i18n.locale;
-    
-      return config;
-    });
-  },
-  render: h => h(App),
+                    }
+                }
+                return Promise.reject(error);
+            },
+        );
+
+        axios.interceptors.request.use(function(config) {
+            if (user != null) {
+                config.headers.Authorization = `Bearer  ${user.accessToken}`;
+            }
+
+
+
+            config.headers.common['Language'] = i18n.locale;
+
+            return config;
+        });
+    },
+    render: h => h(App),
 }).$mount('#app');

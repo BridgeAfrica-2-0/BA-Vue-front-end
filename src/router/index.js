@@ -299,7 +299,6 @@ const routes = [
     name: "Nav Meassage",
     component: navMessage,
   },
-
   {
     path: "/blec",
     name: "Blec",
@@ -316,8 +315,6 @@ const routes = [
     name: "notFound",
     component: notFound,
   },
-
-
 ];
 
 const router = new VueRouter({

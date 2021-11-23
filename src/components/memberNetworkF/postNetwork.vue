@@ -1,19 +1,19 @@
 <template>
   <div>
     <FlashMessage />
-      <Post
-        v-for="(item, index) in owner_post"
-        :key="index"
-        :post="item"
-        :mapvideo="() => mapvideo(item.media)"
-        :mapmediae="() => mapmediae(item.media)"
-        :businessLogo="item.user_picture"
-        :editPost="() => editPost(item)"
-        :deletePost="() => deletePost(item)"
-        class="p-3"
-      />
-      <infinite-loading @infinite="infiniteHandler"></infinite-loading>
-
+    <Post
+      v-for="(item, index) in owner_post"
+      :key="index"
+      :post="item"
+      :mapvideo="() => mapvideo(item.media)"
+      :mapmediae="() => mapmediae(item.media)"
+      :businessLogo="item.user_picture"
+      :editPost="() => editPost(item)"
+      :deletePost="() => deletePost(item)"
+      :canBeDelete="false"
+      class="p-3"
+    />
+    <infinite-loading @infinite="infiniteHandler"></infinite-loading>
   </div>
 </template>
 

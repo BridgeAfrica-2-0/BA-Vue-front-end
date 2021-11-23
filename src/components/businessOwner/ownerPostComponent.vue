@@ -106,16 +106,16 @@
             ><b-icon :icon="icon" variant="primary" aria-hidden="true"></b-icon>
             {{ item.likes_count | nFormatter }}
           </span>
-          <span class="cursor" @click="() => (showComment = !showComment)"
+          <span class="cursor" @click="toggle"
             ><b-icon icon="chat-fill" variant="primary" aria-hidden="true"></b-icon>
             {{ item.comment_count | nFormatter }}
           </span>
-          <ShareButton :post="item" :type="'profile'" /> 
+          <ShareButton :post="item" :type="'profile'" v-if="canBeDelete" />
         </b-col>
       </b-row>
     </div>
 
-    <div class="mt-2 d-inline-flex w-100">
+    <div class="mt-2 d-inline-flex w-100" v-if="canBeDelete">
       <div class="m-md-0 p-md-0">
         <b-avatar variant="primary" square :src="businessLogo" class="img-fluid avat-comment avatar-border"></b-avatar>
       </div>
@@ -227,7 +227,13 @@ export default {
       return this.$youtube.getIdFromUrl(video_url);
     },
 
+    toggle() {
+      if (!this.canBeDelete) return false;
+      this.showComment = !this.showComment;
+    },
+
     onLike: async function () {
+      if (!this.canBeDelete) return false;
       if (!this.processLike) {
         this.processLike = true;
 

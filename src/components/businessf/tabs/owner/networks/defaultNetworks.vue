@@ -6,7 +6,7 @@
           <h6 class="h6">{{ $t('network.Posts') }}
           </h6>
         </template>
-
+ 
         <post-network></post-network>
       </b-tab>
       <b-tab>

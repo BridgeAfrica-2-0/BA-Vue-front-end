@@ -52,18 +52,13 @@ import networkProfileMedia from "./networkProfileMedia";
 import networkProfileMemberRequest from "./networkProfileMemberRequest";
 import networkNotification from "./networkNotification";
 import { social } from "./social";
-import productComments from "./productComments";
-import productDetails from "./productDetails";
-import cart from "./cart";
-import { notification } from "./notifications"
+
+import { notification } from "./notifications";
+import cart from "./cart"
 
 Vue.use(Vuex);
+ axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 
-
-axios.defaults.baseURL = process.env.VUE_APP_API_URL;
-// axios.defaults.baseURL = process.env.VUE_APP_API_URL_DEV;
-// axios.defaults.baseURL = process.env.VUE_APP_API_URL_EDS;
-Vue.use(Vuex);
 
 export default new Vuex.Store({
     modules: {
@@ -109,7 +104,10 @@ export default new Vuex.Store({
         networkNotification,
 
 
-        orderBusiness,
+
+    
+    cart,
+
 
         notification
     }

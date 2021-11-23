@@ -23,10 +23,14 @@ export const en = {
 
 
     auth: auth,
-    businessf: businessf,
-    search: search,
+    // businessf: businessf,
+    // search: search,
 
-    welcome: welcome,
+    // network: network,
+    // profilefollower: profilefollower,
+    // verification: verification,
+    passrecover: passrecover,
+    // welcome: welcome,
     dashboard: dashboard,
     memnetwork: memnetwork,
 

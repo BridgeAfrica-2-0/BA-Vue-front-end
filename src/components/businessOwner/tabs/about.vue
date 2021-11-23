@@ -121,7 +121,7 @@
       @ok="validate('editAddress')"
       @keyup="validate('editAddress')"
     >
-      <b-form @submit.prevent="validate('editAddress')">
+      <b-form @submit.prevent="validate('modifyBiography')">
         <div class="form-group">
           <label for="title">Bussiness Name:</label><br />
           <input
@@ -591,6 +591,13 @@ export default {
             this.openNow.closing_time +
             " PM";
     },
+
+    // business_about_input(){
+    //   this.business_about_input = JSON.parse(
+    //     JSON.stringify(this.business_about)
+    //   );
+    //   return this.business_about_input;
+    // }
   },
   methods: {
     selectHour(day) {
@@ -633,12 +640,18 @@ export default {
           );
           console.log(this.$store.getters["businessOwner/getBusinessAbout"]);
           console.log("Modify Business Biography start++++");
+          console.log("-------",this.business_about_input.about_business);
+          console.log("-----"+this.business_id);
           this.test();
+          var data = {  business_id: this.business_id,
+          data : {
+              about_business: this.business_about_input.about_business,
+             
+              name: this.business_about_input.name
+              }
+            } ;
           this.$store
-            .dispatch("businessOwner/updateUserBusinessAbout", {
-              business_about: this.business_about_input,
-              business_id: this.business_id,
-            })
+            .dispatch("businessOwner/updateBusinessBiographie",data )
             .then((response) => {
               console.log(
                 "fetch finished on the database response (3) ",

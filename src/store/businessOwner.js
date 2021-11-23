@@ -394,6 +394,46 @@ export default {
         loadMore({ commit }, url) {
 
 
+    updateBusinessBiographie({commit}, data){
+
+      return axios.post(`business/update-biography/${data.business_id}`, data.data)
+        .then((data) => {
+          console.log(data);
+        });
+    },
+
+    async loadUserBusinessAbout(context, payload) {
+      let response_ = null;
+      const id_Business = 2;
+      await axios("business/info" +
+        "/" +
+        payload.business_id,
+        {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+
+          }
+        }
+      )
+        .then(response => {
+          if (response.status !== 200 && response.status !== 201) {
+            throw 'Error from the server';
+          }
+          return response.data;
+        })
+        .then(response => {
+          if (!response) {
+            throw new Error('Error for loading Business About +++++');
+          }
+          context.commit('updateUserBusinessAbout', {
+            businessAbout: response.data,
+          });
+          response_ = response;
+        })
+        .catch(error => { });
+      return response_;
+    },
 
         },
 

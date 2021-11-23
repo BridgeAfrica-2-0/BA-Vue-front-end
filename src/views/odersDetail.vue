@@ -391,9 +391,7 @@ height: 8px;
   font-size: 10px !important;
   margin-left: -15px;
 } 
-.m{
-  /* margin-left: 10px; */
-}
+
 .ligne{
   width: 100%;
 }

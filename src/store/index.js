@@ -41,51 +41,49 @@ import networkNotification from "./networkNotification";
 import { social } from "./social";
 import { notification } from "./notifications"
 
-// import axios from "axios";
 Vue.use(Vuex);
-
-// axios.defaults.baseURL = process.env.VUE_APP_API_URL;
-axios.defaults.baseURL = process.env.VUE_APP_API_URL_EDS;
-// axios.defaults.baseURL = "https://a7c4-154-72-167-97.ngrok.io/api/v1";
+ axios.defaults.baseURL = process.env.VUE_APP_API_URL_EDS;
+ axios.defaults.baseURL = "https://test.maxinemoffett.com/api/v1/";
 
 export default new Vuex.Store({
-    modules: {
-        auth,
-        networkDetails,
-        dashboardcommunity,
-        ProfileAndBusinessDetails,
-        businessOwner,
-        businessBlocking,
-        dashboard,
-        hotbusiness,
-        networkProfileMembers,
-        marketSearch,
-        networkSearch,
-        allSearch,
-        profile,
-        follower,
-        search,
-        UserProfileOwner,
-        userChat,
-        businessChat,
-        businessGeneral,
-        businessRole,
-        businessAccountType,
-        business,
-        networkProfileFeedback,
-        NetworkSettings,
-        businessSettingInfo,
-        checkout,
-        social,
-        businessFollowers,
-        networkProfileCommunitySidebar,
-        networkProfileCommunity,
-        networkProfileMedia,
-        networkProfileMemberRequest,
-        networkProfile,
-        orderBusiness,
-        networkNotification,
-        notification
+  modules: {
+    auth,
+    networkDetails,
+    dashboardcommunity,
+    ProfileAndBusinessDetails,
+    businessOwner,
+    businessBlocking,
+    dashboard,
+    hotbusiness,
+    networkProfileMembers,
+    marketSearch,
+    networkSearch,
+    allSearch,
+    profile,
+    follower,
+    search,
+    UserProfileOwner,
+    userChat,
+    businessChat,
+    businessGeneral,
+    businessRole,
+    businessAccountType,
+    business,
+    networkProfileFeedback,
+    NetworkSettings,
+    keywordOperationOnNetwork,
+    orderBusiness,
+    businessSettingInfo,
+    checkout,
+    social,
+    businessFollowers,
+    networkProfileCommunitySidebar,
+    networkProfileCommunity,
+    networkProfileMedia,
+    networkProfileMemberRequest,
+    networkProfile,
+    networkNotification,
+    notification
   }
 });
 

@@ -1,5 +1,6 @@
 <template>
   <div>
+    <FlashMessage />
     <div class="people-style p-3 shadow">
       <b-row>
         <b-col cols="5" lg="4" sm="4" md="5">
@@ -21,7 +22,6 @@
             {{ product.description.substring(0, 30) }}
             <b-link v-if="product.description.length >= 30"> see more </b-link>
             <br />
-
             <span class="price">
               <strong> {{ product.price }} </strong>
             </span>
@@ -144,19 +144,19 @@
       </b-form>
     </b-modal>
     <!-- PRODUCT DETAILS MODAL -->
-      <!-- <div>
+    <!-- <div>
         <br />
       </div> -->
     <!-- </div> -->
     <!-- EDIT PRODUCT MODAL -->
 
-    <b-modal hide-footer title="$t('businessf.Edit_product')">
+    <b-modal hide-footer title="Edit product">
       <b-form>
         <b-row>
           <b-col cols="12" md="6">
             <b-form-group
               id="input-group-1"
-              :label="$t('businessf.Product_Name')"
+              label="Product Name"
               label-for="input-1"
               label-size="sm"
             >
@@ -170,7 +170,7 @@
 
             <b-form-group
               id="input-group-1"
-              :label="$t('businessf.Product_Description')"
+              label="Product Description"
               label-for="input-1"
               label-size="sm"
             >
@@ -187,7 +187,7 @@
               <a href="#" data-toggle="modal" data-target="#createalbumModal">
                 <div class="drag-text">
                   <i class="fa fa-plus"></i>
-                  <h6>{{$t("businessf.Product_Image")}}</h6>
+                  <h6>Product Image</h6>
                 </div>
               </a>
               <div></div>
@@ -197,7 +197,7 @@
 
         <b-form-group
           id="input-group-1"
-          :label="$t('businessf.product_Price')"
+          label="product Price"
           label-for="input-1"
           label-size="sm"
         >
@@ -210,12 +210,12 @@
           value="accepted"
           unchecked-value="not_accepted"
         >
-          {{$t("businessf.This_Product_Is_On_Discount")}}
+          This Product Is On Discount
         </b-form-checkbox>
 
         <b-form-group
           id="conditions"
-          :label="$t('businessf.Conditions')"
+          label="Conditions"
           label-for="input-1"
           label-size="sm"
         >
@@ -228,7 +228,7 @@
           value="accepted"
           unchecked-value="not_accepted"
         >
-          {{$t("businessf.This_Item_Is_A_Service")}} ?
+          This Item Is A Service ?
         </b-form-checkbox>
 
         <b-form-checkbox
@@ -237,7 +237,7 @@
           value="accepted"
           unchecked-value="not_accepted"
         >
-          {{$t("businessf.In_stock")}}
+          In stock
         </b-form-checkbox>
 
         <b-form-checkbox
@@ -246,13 +246,13 @@
           value="accepted"
           unchecked-value="not_accepted"
         >
-          {{$t("businessf.Published")}}
+          Published
         </b-form-checkbox>
 
-        <b-button class="mt-2 btn-block" variant="primary"> {{$t("businessf.Add")}}</b-button>
+        <b-button class="mt-2 btn-block" variant="primary"> Add</b-button>
       </b-form>
     </b-modal>
-     <!-- PRODUCT DETAILS MODAL -->
+    <!-- PRODUCT DETAILS MODAL -->
     <ProductDetails
       @closemodal="closeDetailsProduct"
       :showModal="viewProduct"
@@ -273,6 +273,12 @@ export default {
   components: {
     ProductDetails,
   },
+
+  computed: {
+    getStatus() {
+      return this.$store.state.cart.status;
+    },
+  },
   methods: {
     /**
      * Used to view produduct details
@@ -286,8 +292,24 @@ export default {
       this.viewProduct = false;
     },
     handleAddToCard() {
-      console.log("add to card");
-      this.$store.dispatch("cart/addToCart", this.product.id);
+      console.log("add to card ", this.product.id);
+      this.$store
+        .dispatch("cart/addToCart", this.product.id)
+        .then((response) => {
+          console.log("----", this.getStatus);
+
+          this.flashMessage.show({
+            status: "success",
+            message: this.getStatus,
+          });
+        })
+        .catch((error) => {
+          console.log(error);
+          this.flashMessage.show({
+            status: "error",
+            message: "error occur",
+          });
+        });
     },
   },
 };
@@ -301,11 +323,9 @@ export default {
 .cursor-pointer {
   cursor: pointer;
 }
-
 p {
   text-align: left;
 }
-
 input {
   border-radius: 15px;
   padding: 5px;
@@ -320,7 +340,6 @@ input:focus {
   position: relative;
   left: -24px;
 }
-
 .prod {
   max-width: 14rem;
   cursor: pointer;
@@ -348,160 +367,119 @@ h6 {
 .reply {
   cursor: pointer;
 }
-
 @media only screen and (min-width: 768px) {
+  .pos {
+    margin-left: 200px;
+  }
   .center-img {
     margin-right: -60px;
   }
 }
-
 .buybtn {
   width: 100px;
 }
-
 .marketbtn {
   margin-bottom: 3px;
   float: right;
 }
-
 .price {
   font-size: 18px;
 }
-
 .people-style {
   border-top-left-radius: 10px;
-
   border-bottom-left-radius: 10px;
-
   border-top-right-radius: 5px;
-
   border-bottom-right-radius: 5px;
-
   background: white;
-
   background-color: #fff;
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
   margin-bottom: 10px;
 }
-
 @media only screen and (max-width: 540px) {
   .text {
     color: #000;
-
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
     color: rgba(117, 114, 128, 1);
     text-align: left;
-
     font-weight: normal;
     line-height: 20px;
     font-style: normal;
-
     padding: 1px;
     text-align: left;
-
     margin-left: -30px;
-
     line-height: 25px;
   }
-
   .r-image {
     border-top-left-radius: 10px;
-
     border-bottom-left-radius: 10px;
-
     border-top-right-radius: 10px;
-
     border-bottom-right-radius: 10px;
-
     width: 100px;
     height: 100px;
     padding: 4px;
   }
-
   .title {
     font-size: 16px;
     color: black;
-
     line-height: 35px;
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
-
   .btn {
     padding-top: 6px;
     font-size: 10px;
-
     height: 28px;
     width: 85px;
   }
 }
-
 @media only screen and (min-width: 540px) and (max-width: 762px) {
   .text {
     color: #000;
-
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
     color: rgba(117, 114, 128, 1);
     text-align: left;
-
     font-weight: normal;
     line-height: 20px;
     font-style: normal;
-
     padding: 1px;
     text-align: left;
-
     margin-right: -5px;
-
     line-height: 25px;
   }
-
   .r-image {
     border-top-left-radius: 10px;
-
     border-bottom-left-radius: 10px;
-
     border-top-right-radius: 10px;
-
     border-bottom-right-radius: 10px;
-
     height: 100px;
     width: 100px;
-
     padding: 4px;
   }
-
   .btn {
     padding-top: 6px;
-
     height: 38px;
     min-width: 123px;
   }
-
   .title {
     font-size: 20px;
     color: black;
-
     line-height: 35px;
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 }
-
 .discount {
   color: orange;
   margin-left: 60px;
 }
-
 p {
   text-align: left;
 }
-
 input {
   border-radius: 15px;
   padding: 5px;
@@ -516,7 +494,6 @@ input:focus {
   position: relative;
   left: -24px;
 }
-
 .prod {
   max-width: 14rem;
   cursor: pointer;
@@ -545,7 +522,6 @@ input:focus {
   top: -28px;
   cursor: pointer;
 }
-
 h6 {
   text-align: center;
   font-weight: bold;
@@ -563,56 +539,40 @@ h6 {
 .reply {
   cursor: pointer;
 }
-
 @media only screen and (min-width: 762px) {
   .text {
     color: #000;
-
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
     color: rgba(117, 114, 128, 1);
     text-align: left;
-
     font-weight: normal;
     line-height: 20px;
     font-style: normal;
-
     padding: 1px;
     text-align: left;
-
     margin-right: -5px;
-
     line-height: 25px;
   }
-
   .r-image {
     border-top-left-radius: 10px;
-
     border-bottom-left-radius: 10px;
-
     border-top-right-radius: 10px;
-
     border-bottom-right-radius: 10px;
-
     height: 160px;
     width: 160px;
-
     padding: 4px;
   }
-
   .btn {
     padding-top: 6px;
-
     height: 38px;
     width: 123px;
   }
-
   .title {
     font-size: 20px;
     color: black;
-
     line-height: 35px;
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }

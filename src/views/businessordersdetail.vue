@@ -1,23 +1,25 @@
-<template >
+<template>
   <div>
     <navbar />
     <div class="container body p-0">
-      <h1>Order Details</h1>
+      <h1 >Order Details</h1>
 
-      <div class="card my-2 shadow">
+      <div class="card  my-2 shadow">
         <div class="card-body row">
           <div class="col">
             <span class="marge row">
-              <span class="bold m"><h3>Order</h3></span>
-              <span class="text-success order m"><h3>#12324253</h3></span>
+              <span class="bold m "><h3>Order</h3></span>
+              <span class="text-success order m"
+                ><h3>#{{ orderDetails.orderId }}</h3></span
+              >
             </span>
             <span class="flou marge1"
-              ><h3 class="marge1">yaoundé, 12/12/2021,12:00</h3></span
+              ><h3 class="  marge1">{{ moment(orderDetails.orderDate).format("YYYY-MM-DD HH:mm:ss") }}</h3></span
             >
           </div>
-          <div class="col">
-            <span class="">
-              <h3 class="margtotal">Total : 199500 Fcfa</h3>
+          <div class="col ">
+            <span class=" ">
+              <h3 class="margtotal ">Total : {{ orderDetails.TotalPrice }} XAF</h3>
             </span>
           </div>
         </div>
@@ -26,47 +28,29 @@
       <div class="card my-1 shadow">
         <div class="card-body row">
           <div class="col">
-            <span class="mr-2 row"
-              ><fas-icon
-                class="couleur search card"
-                :icon="['fas', 'cart-arrow-down']"
-              />
-              Card</span
+            <span class="mr-2 row "
+              ><fas-icon class="couleur search card" :icon="['fas', 'cart-arrow-down']" /> Card</span
             >
             <span class="row">
-              <span class="my-1 col"> <h3>sold by: marcellin , danaz</h3></span>
+              <span class="my-1 col">
+                <h3>sold by: {{ orderDetails.businessesName[0] }}</h3></span
+              >
 
               <div>
-                <button
-                  v-b-modal="'my-modal'"
-                  variant="ligth"
-                  class="border mx-4 button"
-                >
-                  <span class="mr-3 row"
-                    ><fas-icon
-                      class="couleur1 search margbtn"
-                      :icon="['fas', 'envelope']"
-                    />
+                <button v-b-modal="'my-modal'" variant="ligth" class="border mx-4 button">
+                  <span class="mr-3 row "
+                    ><fas-icon class="couleur1 search margbtn " :icon="['fas', 'envelope']" />
                     <h3 class="couleur1">Chat Now</h3>
                   </span>
                 </button>
                 <b-modal id="my-modal">
                   <div class="container">
-                    <span
-                      class="mr-3 row"
-                      @click="cta({ id: 2, name: 'Handel Marcellin' })"
-                      ><fas-icon
-                        class="couleur search"
-                        :icon="['fas', 'envelope']"
-                      />
+                    <span class="mr-3 row"
+                      ><fas-icon class="couleur search" :icon="['fas', 'envelope']" />
                       <h3>chat with Marcellin</h3>
                     </span>
                     <span class="mr-3 row"
-                      ><fas-icon
-                        class="couleur search"
-                        :icon="['fas', 'envelope']"
-                        @click="cta({ id: 2, name: 'Danaz Bethoven' })"
-                      />
+                      ><fas-icon class="couleur search" :icon="['fas', 'envelope']" />
                       <h3>chat with danaz</h3>
                     </span>
                   </div>
@@ -77,99 +61,70 @@
         </div>
       </div>
 
-      <div class="card my-1 cardborder">
-        <div class="card-body">
+      <div class="card my-1  cardborder">
+        <div class="card-body ">
           <div class="row container mx-5 rowmobile">
             <b-avatar id="a1" class="avatar" text=" "></b-avatar>
-
-            <b-progress
-              id="p1"
-              :value="value"
-              :max="max"
-              variant="success"
-              class="mb-3 size"
-            >
-            </b-progress>
-
+            <b-progress id="p1" :value="value" :max="max" variant="success" class="mb-3 size"> </b-progress>
             <b-avatar id="a2" class="avatar" text=" "></b-avatar>
-
-            <b-progress
-              id="p2"
-              :value="value"
-              :max="max"
-              variant="success"
-              class="mb-3 size"
-            ></b-progress>
-
+            <b-progress id="p2" :value="value" :max="max" variant="success" class="mb-3 size"></b-progress>
             <b-avatar id="a3" class="avatar" text=" "></b-avatar>
-            <b-progress
-              id="p3"
-              :value="value"
-              :max="max"
-              variant="success "
-              class="mb-3 size"
-            ></b-progress>
-
+            <b-progress id="p3" :value="value" :max="max" variant="success " class="mb-3 size"></b-progress>
             <b-avatar id="a4" class="avatar" text=" "></b-avatar>
-            <b-progress
-              id="p4"
-              :value="value"
-              :max="max"
-              variant="success"
-              class="mb-3 size"
-            ></b-progress>
-
+            <b-progress id="p4" :value="value" :max="max" variant="success" class="mb-3 size"></b-progress>
             <b-avatar id="a5" class="avatar" text=" "></b-avatar>
-            <b-progress
-              id="p5"
-              :value="value"
-              :max="max"
-              variant="success"
-              class="mb-3 size"
-            ></b-progress>
+            <b-progress id="p5" :value="value" :max="max" variant="success" class="mb-3 size"></b-progress>
           </div>
           <div class="row sizestate container">
             <div class="col-2 text-center"><h3>order</h3></div>
-            <div class="col-2 text-center"><h3>processing</h3></div>
-            <div class="col-2 text-start"><h3 class="t">shipped</h3></div>
-            <div class="col-2 text-start"><h3 class="t">delivred</h3></div>
-            <div class="col-3 text-start">
-              <h3 class="t">payment received</h3>
-            </div>
+            <div class="col-2  text-center "><h3>processing</h3></div>
+            <div class="col-2 text-start "><h3 class="t">shipped</h3></div>
+            <div class="col-2 text-start "><h3 class="t">delivred</h3></div>
+            <div class="col-3 text-start "><h3 class="t">payment received</h3></div>
           </div>
 
-          <div class="justify-content-between row my-5" v-for="i in 2" :key="i">
-            <div class="col-3 margimg">
+          <div class="justify-content-between row my-5" v-for="item in orderDetails.orderItems" :key="item.id">
+            <div class="col-3   margimg">
               <splide :options="{ rewind: true }" class="r-img">
-                <splide-slide cl v-for="(im, index) in img" :key="index">
-                  <img :src="img[index]" class="r-img" />
+                <splide-slide >
+                  <img :src="item.product_picture" class="r-img" />
                 </splide-slide>
               </splide>
             </div>
             <div class="ligne"><br /></div>
 
-            <div class="col-3 text-end bold margtext">
-              <h3 class="h3 margm2">Name:</h3>
-              <h3 class="h3 margm2">product ID :</h3>
-
-              <h3 class="h3 margm2">Quantity:</h3>
-              <h3 class="h3 margm2">price :</h3>
-              <h3 class="h3 margm2">shipping cost:</h3>
-              <h3 class="h3 margm2">total cost :</h3>
+            <div class="col-6   text-end   margtext">
+              <div class="row">
+                 <div class="col-3 bold"><h3 class="h3 margm2">Name:</h3></div>
+                <div class="col"> <h3>{{ item.product_name }}</h3></div>
+              </div>
+              <div class="row">
+                <div class="col-3 bold"><h3 class="h3 margm2">product ID :</h3></div>
+                <div class="col"><h3>{{ item.product_id }}</h3></div>
+              </div>
+              <div class="row">
+                <div class="col-3 bold">  <h3 class="h3 margm2">Quantity:</h3></div>
+                <div class="col"><h3>{{ item.quantity }}</h3></div>
+              </div>
+              <div class="row">
+                <div class="col-3 bold"> <h3 class="h3 margm2">price :</h3></div>
+                <div class="col"> <h3>{{ item.price }} XAF</h3></div>
+              </div>
+              <div class="row">
+                <div class="col-3 bold"><h3 class="h3 margm2">shipping cost:</h3></div>
+                <div class="col"> <h3>{{ item.shipping_amount }} XAF</h3></div>
+              </div>
+              <div class="row">
+                <div class="col-3 bold"><h3 class="h3 margm2">total cost :</h3></div>
+                <div class="col"><h3>{{ parseInt(item.sub_total) + parseInt(item.tax_amount) + parseInt(item.shipping_amount) }} XAF</h3></div>
+              </div>
             </div>
 
-            <div class="col-3 text-start margtext">
-              <h3>sneaker</h3>
-              <h3>#125FF55</h3>
-              <h3>4</h3>
-              <h3>2000 Fcfa</h3>
-              <h3>1000 Fcfa</h3>
-              <h3>9000 Fcfa</h3>
-            </div>
+           
 
             <div class="col margtext">
               <h3 class="bold1">status</h3>
-              <h3 class="text-success">pending</h3>
+              <h3 class="text-success">{{ item.status }}</h3>
             </div>
 
             <div class="col margtext">
@@ -184,15 +139,47 @@
               <br />
             </div>
           </div>
+          <div v-if="show" class="text-center">
+              <b-spinner label="Spinning"></b-spinner>
+          </div>
+              
+           <b-pagination
+     
+      v-model="currentPage"
+      :total-rows="total"
+      :per-page="per_page"
+      aria-controls="my-table"
+      @change="changePage"
+      align="center"
+    
+    ></b-pagination>
+    
         </div>
       </div>
 
-      <div class="row my-1">
+      <div class="row my-1 ">
         <div class="col-6">
           <div class="card shipad shadow">
-            <div class="card-body row">
-              <span>shipping Adress</span>
-              <br /><br /><br />
+            <div class="card-body ">
+              <div class="row bold text-center"><h3>shipping Adress</h3></div>
+              <br />
+              <div class="row">
+                <div class="col-3 bold"><h3>city</h3></div>
+                <div class="col"> {{orderDetails.shippingAdress.city}}</div>
+              </div>
+               <div class="row">
+                <div class="col-3 bold"><h3>name</h3></div>
+                <div class="col"> {{orderDetails.shippingAdress.name}}</div>
+              </div>
+              <div class="row">
+                <div class="col-3 bold"><h3>phone</h3></div>
+                <div class="col"> {{orderDetails.shippingAdress.phone}}</div>
+              </div>
+               <div class="row">
+                <div class="col-3 bold"><h3>email</h3></div>
+                <div class="col"> {{orderDetails.shippingAdress.email}}</div>
+              </div>
+              
             </div>
           </div>
         </div>
@@ -204,22 +191,24 @@
               <div class="col bold">
                 <span class="row">
                   <span class="col"><h3>Total summary :</h3></span>
-                  <span class="col">10000 Fcfa</span></span
+                  <span class="col">{{ orderDetails.TotalPrice }} XAF</span></span
                 >
                 <span class="row">
                   <span class="col"><h3>Total price :</h3></span>
-                  <span class="col">15000 Fcfa</span></span
+                  <span class="col">{{ orderDetails.Total }} XAF</span></span
                 >
                 <span class="row">
                   <span class="col"><h3>total shipping fee :</h3></span
-                  ><span class="col"> 1600 Fcfa</span></span
+                  ><span class="col">
+                    {{ parseInt(orderDetails.Total) - parseInt(orderDetails.TotalPrice) }} XAF</span
+                  ></span
                 >
               </div>
               <div class="row"><hr class="hr" /></div>
 
               <div class="row bold">
                 <span class="col"><h3>Total :</h3></span>
-                <span class="col"> 20000 Fcfa</span>
+                <span class="col"> {{ orderDetails.TotalPrice }} XAF</span>
               </div>
             </div>
           </div>
@@ -234,55 +223,110 @@
 </template>
 
 <script>
-import navbar from "@/components/navbar.vue";
+import navbar from '@/components/navbar.vue';
+import moment from 'moment';
 export default {
   components: { navbar },
   data() {
     return {
+      moment: moment,
+      show:true,
+      currentPage: 1,
+      per_page: 5,
+      total: 10,
       value: 0,
       max: 50,
-      img: ["http://urlr.me/YMQXD", "https://placekitten.com/400/300"],
+      img: ['http://urlr.me/YMQXD', 'https://placekitten.com/400/300'],
       status: 2,
     };
   },
-  computed: {
-    activeAccount() {
-      return this.$store.getters["auth/profilConnected"];
-    },
-  },
+
   mounted() {
-    const progress = document.querySelectorAll(".size");
-    for (let i = 1; i <= progress.length; i++) {
-      let a = document.getElementById("a" + i);
-      let p = document.getElementById("p" + i);
-      if (i <= this.status) {
-        p.classList.add("bg-success");
-        a.classList.add("bg-success");
-      } else {
-        p.classList.add("bg-secondary");
-        a.classList.add("bg-secondary");
-      }
+    
+
+    this.getBusinessOrderDetails();
+  
+  },
+
+  computed: {
+    orderDetails() {
+      return this.$store.getters['businessOrderDetails/getOrderDetails'];
+    },
+    getTotal(){
+      return this.$store.getters['businessOrderDetails/getTotal'];
+    },
+
+     getStatus(){
+        return this.$store.getters['profileOrderDetail/getStatus'];
     }
   },
-  methods: {
-    cta(data) {
-      console.log(data);
-      this.$store.commit("businessChat/setSelectedChat", data);
-      let path = "";
-      if (this.activeAccount.user_type == "business") {
-        path = "/business_owner/" + this.activeAccount.id;
-      } else if (this.activeAccount.user_type == "network") {
-        path = "/";
-      } else path = "/messaging";
 
-      // this.$router.push({ path: `${path}`, query: { tabId: 1, msgTabId: 1 } });
-      this.$router.push({
-        path: `/business_owner/${this.activeAccount.id}`,
-        query: { tabId: 1, msgTabId: 0 },
+  methods: {
+
+     transition(){console.log("transition");
+        const progress = document.querySelectorAll('.size');
+    console.log(progress);
+    for (let i = 1; i <= progress.length; i++) {
+      let a = document.getElementById('a' + i);
+      let p = document.getElementById('p' + i);
+      if (i <= this.status) {
+        p.classList.add('bg-success');
+        a.classList.add('bg-success');
+        console.log(p);
+      } else {
+        p.classList.add('bg-secondary');
+        a.classList.add('bg-secondary');
+        console.log(p);
+      }
+    }
+     },
+
+    getBusinessOrderDetails() {
+      let url = window.location.href.split("/")
+      
+      let data = {
+        orderId: 23,
+        businessId: url[url.length -1]
+      }
+      this.$store.dispatch('businessOrderDetails/getOrderDetails', data).then(response => {
+        console.log(response);
+        this.show = false
+         this.status = this.getStatus
+          this.transition();
       });
+    },
+
+  changePage(value) {
+        this.show = true;
+     
+      this.currentPage = value;
+       let url = window.location.href.split("/")
+      let data = {
+        orderId: 23,
+        businessId:  url[url.length -1],
+        page: this.currentPage 
+      } 
+      this.$store
+        .dispatch("businessOrderDetails/nextPage", data)
+        .then((res) => {
+          console.log("products total: ");
+          // console.log(this.products);
+          // this.prodLoader = false;
+          this.total =this.getTotal
+        console.log(this.total);
+          this.show = false
+          this.status = this.getStatus;
+           this.transition();
+        })
+        .catch((err) => {
+          // this.prodLoader = false; business_owner/ordersdetail
+          console.log("products error: ");
+          console.error(err);
+        });
     },
   },
 };
+
 </script>
 
 <style scoped>
@@ -416,7 +460,7 @@ export default {
     font-size: 10px !important;
     margin-left: -15px;
   }
-
+ 
   .ligne {
     width: 100%;
   }
@@ -453,11 +497,7 @@ export default {
   .margbtn {
     margin-left: 13px;
   }
-  /* .margm2 {
-  margin-left: 11px;
-  margin-right: -20px;
-  font-weight: bold;
-} */
+ 
 
   .r-img {
     border-radius: 4px;
@@ -482,6 +522,6 @@ export default {
   }
 }
 
-@media only screen and (min-width: 400px) {
-}
+
+
 </style>

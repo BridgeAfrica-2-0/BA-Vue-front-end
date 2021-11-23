@@ -1,6 +1,6 @@
    
 <template>
-  <div class="container" style=" ">
+  <div class="container" style="">
     <div class="container">
       <b-row>
         <b-col>
@@ -12,25 +12,31 @@
               @change="select"
               class="m-left-top username"
             >
-              {{ selectAll ? $t('network.Un_select_All') : $t('network.Select_All') }}
+              {{
+                selectAll
+                  ? $t("network.Un_select_All")
+                  : $t("network.Select_All")
+              }}
             </b-form-checkbox>
           </div>
         </b-col>
         <b-col>
           <div class="b-bottomn f-right">
-            <b-button 
-              variant="primary" 
-              @click="MarkAsRead" 
+            <b-button
+              variant="primary"
+              @click="MarkAsRead"
               :disabled="indeterminate ? false : true"
               class="a-button-l duration"
-            >{{ $t('network.Mark_as_Read') }}</b-button>
+              >{{ $t("network.Mark_as_Read") }}</b-button
+            >
             &nbsp;
-            <b-button 
+            <b-button
               variant="outline-primary"
-              @click="Delete" 
+              @click="Delete"
               :disabled="indeterminate ? false : true"
               class="a-button-l duration"
-            >Delete</b-button>
+              >Delete</b-button
+            >
           </div>
         </b-col>
       </b-row>
@@ -42,38 +48,49 @@
           ><br />
           All Selected: <strong>{{ selectAll }}</strong>
         </div>
-        <b-col cols="12"
+        <b-col
+          cols="12"
           :class="{ active: index == currentPage }"
           v-for="(notification, index) in notifications.data"
           :key="index"
         >
-          <div :class="notification.mark_as_read ? 'text-secondary' : 'font-weight-bold'">
-          <p class="">
-            <span style="display:inline-flex">
-              <b-form-checkbox
-                name="checkbox-1"
-                v-model="selected"
-                :value="notification.id"
-                @change="updateCheckall"
-                :disabled="notification.mark_as_read ? true : false"
-                class="m-left-top"
-              ></b-form-checkbox>
-              <b-avatar
-                class="d-inline-block profile-pic"
-                variant="primary"
-                :text="notification.reference_type.charAt(0,1)"
-              ></b-avatar>
-              <span class="m-0  d-inline-block ml-2 username">
-                {{ notification.reference_type }}
-                <div class="duration">{{ moment(notification.created_at).fromNow() }}</div>
+          <div
+            :class="
+              notification.mark_as_read ? 'text-secondary' : 'font-weight-bold'
+            "
+          >
+            <p class="">
+              <span style="display: inline-flex">
+                <b-form-checkbox
+                  name="checkbox-1"
+                  v-model="selected"
+                  :value="notification.id"
+                  @change="updateCheckall"
+                  :disabled="notification.mark_as_read ? true : false"
+                  class="m-left-top"
+                ></b-form-checkbox>
+                <b-avatar
+                  class="d-inline-block profile-pic"
+                  variant="primary"
+                  :text="notification.reference_type.charAt(0, 1)"
+                ></b-avatar>
+                <span class="m-0 d-inline-block ml-2 username">
+                  {{ notification.reference_type }}
+                  <div class="duration">
+                    {{ moment(notification.created_at).fromNow() }}
+                  </div>
+                </span>
               </span>
-            </span>
-            <span v-if="!notification.mark_as_read" class="float-right mt-1"> <b-badge pill variant="primary" class="text-primary">.</b-badge></span>
-          </p>
+              <span v-if="!notification.mark_as_read" class="float-right mt-1">
+                <b-badge pill variant="primary" class="text-primary"
+                  >.</b-badge
+                ></span
+              >
+            </p>
 
-          <p class="text">
-            {{ notification.notification_text }}
-          </p>
+            <p class="text">
+              {{ notification.notification_text }}
+            </p>
           </div>
 
           <hr width="100%" />
@@ -89,18 +106,17 @@
           </div>
         </b-col>
       </b-row>
-      {{notifications}}
-      {{newNotifications}}
+      {{ notifications }}
+      {{ newNotifications }}
     </div>
 
     <FlashMessage />
-
   </div>
 </template>
 
 <script>
-import moment from 'moment';
-import {mapGetters} from 'vuex'
+import moment from "moment";
+import { mapGetters } from "vuex";
 
 export default {
   name: "notification",
@@ -108,10 +124,10 @@ export default {
     return {
       url: null,
       moment: moment,
-      loader:false,
+      loader: false,
       currentPage: 0,
 
-      // notifications: [ 
+      // notifications: [
       //   {
       //     "data": [
       //         {
@@ -163,18 +179,18 @@ export default {
       // ],
       selected: [],
       selectAll: false,
-      indeterminate: false
+      indeterminate: false,
     };
   },
-  
+
   computed: {
     notifications() {
       return this.$store.state.networkNotification.notifications;
     },
 
     ...mapGetters({
-      newNotifications: 'notification/NEW_NETWORK_NOTIFICATION'
-    })
+      newNotifications: "notification/NEW_NETWORK_NOTIFICATION",
+    }),
   },
 
   watch: {
@@ -194,28 +210,41 @@ export default {
     newNotifications: function (val) {
       console.log("newNotifications");
       console.log(val);
-      this.newNotifications.forEach(e => {
-        this.notifications.push(e)
+      this.newNotifications.forEach((e) => {
+        this.notifications.push(e);
       });
     },
+
+    updateCheckall: function () {
+      if (this.users.length === this.selected.length) {
+        this.selectAll = true;
+      } else {
+        this.selectAll = false;
+      }
+    },
   },
-  mounted(){
-    this.url = this.$route.params.id
-    this.getNotifications() 
+  mounted() {
+    this.url = this.$route.params.id;
+    this.getNotifications();
   },
   methods: {
     select(checked) {
-      console.log("this.selectAll: "+this.selectAll);
-      console.log("checked: "+checked);
+      console.log("this.selectAll: " + this.selectAll);
+      console.log("checked: " + checked);
       this.selected = [];
       if (checked) {
         for (let notification in this.notifications.data) {
-            this.selected.push(this.notifications.data[notification].id.toString());
-            console.log("this.notifications.data[notification].id: "+this.notifications.data[notification].id);
+          this.selected.push(
+            this.notifications.data[notification].id.toString()
+          );
+          console.log(
+            "this.notifications.data[notification].id: " +
+              this.notifications.data[notification].id
+          );
         }
       }
     },
-    updateCheckall: function() {
+    updateCheckall: function () {
       if (this.notifications.data.length === this.selected.length) {
         this.selectAll = true;
       } else {
@@ -223,96 +252,91 @@ export default {
       }
     },
     getNotifications() {
-      console.log('getNotifications Mounted');
-    this.$store
-      .dispatch("networkNotification/getNotifications", 
-      {
-        "id":this.url,
-        "path":"notifications?page="+this.currentPage
+      console.log("getNotifications Mounted");
+      this.$store
+        .dispatch("networkNotification/getNotifications", {
+          id: this.url,
+          path: "notifications?page=" + this.currentPage,
         })
-      .then(() => {
-        console.log('ohh yeah');
-      })
-      .catch(err => {
-        console.log({ err: err });
-      });
+        .then(() => {
+          console.log("ohh yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
     },
 
-    MarkAsRead: function(){
+    MarkAsRead: function () {
       this.indeterminate = false;
       let formData = new FormData();
       for (let i = 0; i < this.selected.length; i++) {
         console.log(this.selected[i]);
-        formData.append('ids['+i+']', this.selected[i]);
+        formData.append("ids[" + i + "]", this.selected[i]);
       }
       this.$store
-      .dispatch("networkNotification/MarkAsRead", 
-      {
-        "path": this.url+"/notifications/mark-read",
-        "formData": formData
-      })
-      .then(({data}) => {
-        console.log(data);
-        console.log('ohh yeah');
-        this.getNotifications();
-        this.indeterminate = true;
-        this.flashMessage.show({
-          status: "success",
-          message: "Marked As Read"
+        .dispatch("networkNotification/MarkAsRead", {
+          path: this.url + "/notifications/mark-read",
+          formData: formData,
+        })
+        .then(({ data }) => {
+          console.log(data);
+          console.log("ohh yeah");
+          this.getNotifications();
+          this.indeterminate = true;
+          this.flashMessage.show({
+            status: "success",
+            message: "Marked As Read",
+          });
+        })
+        .catch((err) => {
+          console.log({ err: err });
+          this.indeterminate = true;
+          this.flashMessage.show({
+            status: "error",
+            message: "Unable To Mark As Read",
+          });
         });
-      })
-      .catch(err => {
-        console.log({ err: err });
-        this.indeterminate = true;
-        this.flashMessage.show({
-          status: "error",
-          message: "Unable To Mark As Read"
-        });
-      });
-		},
+    },
 
-    Delete: function(){
+    Delete: function () {
       this.indeterminate = false;
       let formData = new FormData();
       for (let i = 0; i < this.selected.length; i++) {
         console.log(this.selected[i]);
-        formData.append('ids['+i+']', this.selected[i]);
+        formData.append("ids[" + i + "]", this.selected[i]);
       }
       this.$store
-      .dispatch("networkNotification/Delete", 
-      {
-        "path": this.url+"/notifications/deleteAll",
-        "formData": formData
-      })
-      .then(({data}) => {
-        console.log(data);
-        console.log('ohh yeah');
-        this.getNotifications();
-        this.indeterminate = true;
-        this.flashMessage.show({
-          status: "success",
-          message: "Notification(s) Deleted"
+        .dispatch("networkNotification/Delete", {
+          path: this.url + "/notifications/deleteAll",
+          formData: formData,
+        })
+        .then(({ data }) => {
+          console.log(data);
+          console.log("ohh yeah");
+          this.getNotifications();
+          this.indeterminate = true;
+          this.flashMessage.show({
+            status: "success",
+            message: "Notification(s) Deleted",
+          });
+        })
+        .catch((err) => {
+          console.log({ err: err });
+          this.indeterminate = true;
+          this.flashMessage.show({
+            status: "error",
+            message: "Unable To Deleted Notification(s)",
+          });
         });
-      })
-      .catch(err => {
-        console.log({ err: err });
-        this.indeterminate = true;
-        this.flashMessage.show({
-          status: "error",
-          message: "Unable To Deleted Notification(s)"
-        });
-      });
-		},
+    },
 
     handlePageChange(value) {
-      console.log("value: "+value)
-      console.log("currentPage: "+this.currentPage)
+      console.log("value: " + value);
+      console.log("currentPage: " + this.currentPage);
       this.currentPage = value;
-      this.getNotifications(); 
+      this.getNotifications();
     },
-
-  }
-
+  },
 };
 </script>
 

@@ -1,7 +1,6 @@
 <template>
   <div>
     <Navbar />
-
     <b-container>
       <div class="chat-box">
         <b-row>
@@ -575,7 +574,7 @@
                             class="emoji-picker"
                             :style="{
                               top: display.y + 'px',
-                              left: display.x + 'px',
+                              left: display.x + 'px'
                             }"
                           >
                             <div class="emoji-picker__search">
@@ -724,7 +723,7 @@ export default {
   components: {
     Navbar,
     Footer,
-    EmojiPicker,
+    EmojiPicker
   },
   data() {
     return {
@@ -829,123 +828,8 @@ export default {
       checked: false,
       text: '',
       selected: [],
-      chats: [
-        {
-          id: 0,
-          type: 'received',
-          name: 'Louis Litt',
-          timeStamp: '3:00 PM',
-
-          message:
-            'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.',
-        },
-        {
-          id: 1,
-          type: 'sent',
-          name: 'Louis Litt',
-          timeStamp: '3:00 PM',
-          message:
-            'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.',
-        },
-        {
-          id: 2,
-          type: 'received',
-          name: 'Louis Litt',
-          timeStamp: '3:00 PM',
-          message:
-            'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.',
-        },
-        {
-          id: 3,
-          type: 'sent',
-          name: 'Louis Litt',
-          timeStamp: '3:00 PM',
-          message:
-            'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.',
-        },
-        {
-          id: 4,
-          type: 'received',
-          name: 'Louis Litt',
-          timeStamp: '3:00 PM',
-          message:
-            'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.',
-        },
-        {
-          id: 5,
-          type: 'sent',
-          name: 'Louis Litt',
-          timeStamp: '3:00 PM',
-          message:
-            'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.',
-        },
-      ],
-      messages: [
-        {
-          id: 0,
-          name: 'Blezour blec',
-          message: 'Hello Blec lola blec ',
-          timeStamp: '3:00pm',
-          messageCount: '10',
-        },
-        {
-          id: 1,
-          name: 'Blec blezour blec',
-          message: 'yoo nigga sup lola blec',
-          timeStamp: '7:00am',
-          messageCount: '60',
-        },
-
-        {
-          id: 3,
-          name: 'baba blecc ',
-          message: 'Lorem ipsum la lola blec vlr ',
-          timeStamp: '9:00am',
-          messageCount: '60',
-        },
-        {
-          id: 4,
-          name: 'Louis Litt',
-          message: 'Lorem  sit amet this is goo.',
-          timeStamp: '6:00am',
-          messageCount: '6',
-        },
-        {
-          id: 5,
-          name: 'Louis Litt',
-          message: 'Lorem this   sit amet.',
-          timeStamp: '7:00am',
-          messageCount: '100',
-        },
-        {
-          id: 6,
-          name: 'Louis Litt',
-          message: 'Lorem ithe amet.',
-          timeStamp: '7:00am',
-          messageCount: '3',
-        },
-        {
-          id: 7,
-          name: 'Louis Litt',
-          message: 'Lordol sit amet.',
-          timeStamp: '7:00am',
-          messageCount: '10',
-        },
-        {
-          id: 8,
-          name: 'Louis Litt',
-          message: 'Lorem vheck ',
-          timeStamp: '7:00am',
-          messageCount: '40',
-        },
-        {
-          id: 9,
-          name: 'Louis Litt',
-          message: 'Lorem papa .',
-          timeStamp: '7:00am',
-          messageCount: '15',
-        },
-      ],
+      chats: [],
+      messages: []
     };
   },
 
@@ -953,8 +837,8 @@ export default {
     focus: {
       inserted(el) {
         el.focus();
-      },
-    },
+      }
+    }
   },
   computed: {
     chatList() {
@@ -998,7 +882,20 @@ export default {
     this.getUsers();
     this.getChatList({ type: 'user' });
   },
-  created() {
+  async created() {
+     this.$store.commit('businessChat/setCurrentBizId', this.$route.params.id);
+    await this.getBizs();
+    this.tabIndex = this.$route.query.msgTabId;
+    if (this.tabIndex) {
+      this.selectedChat({ chat: this.ctaSelected, id: this.ctaSelected.id });
+    }
+
+    if (this.tabIndex == 1) {
+      this.getChatList({ type: 'business' });
+    } else if (this.tabIndex == 2) {
+      this.getChatList({ type: 'network' });
+    } else this.getChatList({ type: 'user' });
+
     this.socket.on('generalMessage', (data) => {
       console.log('Received');
       console.log(data);
@@ -1016,7 +913,7 @@ export default {
       formData.append('message', data.message);
       formData.append('receiver_id', data.receiver_id);
 
-      this.saveMessage(formData);
+      // this.saveMessage(formData);
     });
   },
   methods: {

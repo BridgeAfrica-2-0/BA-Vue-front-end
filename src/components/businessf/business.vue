@@ -60,10 +60,9 @@
             <span>{{$t("businessf.Direction")}}</span></b-button
           >
           <b-dropdown
-            class="ml-2   dot-btn mt-2 mt-sm-2 mt-md-0 "
+            class="ml-2  options dot-btn mt-2 mt-sm-2 mt-md-0 "
             no-caret
-            dropleft
-            variant="link"
+            variant="outline-primary"
           >
             <template #button-content>
               <b-icon-three-dots></b-icon-three-dots>

@@ -98,7 +98,7 @@
 <script>
 import Business from '@/components/businessOwner/tabs/business';
 import People from '@/components/businessOwner/tabs/people';
-import Network from '@/components/businessOwner/tabs/network';
+import Network from '@/components/businessOwner/tabs/networks';
 export default {
   name: 'comunitiDashboard',
 

@@ -29,59 +29,64 @@ import UserProfileOwner from './UserProfileOwner';
 import { search } from './search';
 import userChat from './messaging/user';
 import businessChat from './messaging/business';
+import { notification } from './notifications';
+
+// import UserProfileOwner from "./UserProfileOwner";
+import networkProfile from './networkProfile';
+import UserProfileOwner from './UserProfileOwner';
 import businessSettingInfo from './businessSettingInfo';
 import networkProfileCommunitySidebar from './networkProfileCommunitySidebar';
 import networkProfileFeedback from './networkProfileFeedback';
 import networkProfileMedia from './networkProfileMedia';
 import networkProfileMemberRequest from './networkProfileMemberRequest';
+import profileOrders from './profileOrders';
+import { search } from './search';
 import { social } from './social';
-import { notification } from './notifications';
-
 
 Vue.use(Vuex);
- axios.defaults.baseURL = process.env.VUE_APP_API_URL;
- //axios.defaults.baseURL = "https://test.maxinemoffett.com/api/v1/";
+axios.defaults.baseURL = process.env.VUE_APP_API_URL;
+//axios.defaults.baseURL = "https://test.maxinemoffett.com/api/v1/";
 //  axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 // axios.defaults.baseURL = "https://test.maxinemoffett.com/api/v1/";
 
 
 export default new Vuex.Store({
-  modules: {
-    auth,
-    networkDetails,
-    dashboardcommunity,
-    ProfileAndBusinessDetails,
-    businessOwner,
-    businessBlocking,
-    dashboard,
-    hotbusiness,
-    networkProfileMembers,
-    marketSearch,
-    networkSearch,
-    allSearch,
-    profile,
-    follower,
-    search,
-    UserProfileOwner,
-    userChat,
-    businessChat,
-    businessGeneral,
-    businessRole,
-    businessAccountType,
-    business,
-    networkProfileFeedback,
-    NetworkSettings,
-   keywordOperationOnNetwork,
-    businessSettingInfo,
-    checkout,
-    social,
-    businessFollowers,
-    networkProfileCommunitySidebar,
-    networkProfileCommunity,
-    networkProfileMedia,
-    networkProfileMemberRequest,
-    networkProfile,
-    orderBusiness,
-    notification,
-  },
+    modules: {
+        auth,
+        networkDetails,
+        dashboardcommunity,
+        ProfileAndBusinessDetails,
+        businessOwner,
+        businessBlocking,
+        dashboard,
+        hotbusiness,
+        networkProfileMembers,
+        marketSearch,
+        networkSearch,
+        allSearch,
+        profile,
+        follower,
+        search,
+        UserProfileOwner,
+        userChat,
+        businessChat,
+        businessGeneral,
+        businessRole,
+        businessAccountType,
+        business,
+        networkProfileFeedback,
+        NetworkSettings,
+        keywordOperationOnNetwork,
+        businessSettingInfo,
+        checkout,
+        social,
+        businessFollowers,
+        networkProfileCommunitySidebar,
+        networkProfileCommunity,
+        networkProfileMedia,
+        networkProfileMemberRequest,
+        networkProfile,
+        orderBusiness,
+        notification,
+    },
 });

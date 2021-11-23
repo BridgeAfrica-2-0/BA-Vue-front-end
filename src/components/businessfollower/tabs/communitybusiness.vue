@@ -39,22 +39,22 @@
               <div class="s-button">
                 <b-row>
                   <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2 text-center">
-                    <b-button block size="sm" class="b-background shadow " variant="primary">
-                      <i class="fas fa-user-plus  fa-lg btn-icon "></i>
+                    <b-button block size="sm" class="b-background shadow" variant="primary">
+                      <i class="fas fa-user-plus fa-lg btn-icon"></i>
                       <span class="btn-com">Community</span>
                     </b-button>
                   </b-col>
 
                   <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2 text-center">
-                    <b-button block size="sm" class="b-background shadow " variant="primary">
-                      <i class="fas fa-envelope   fa-lg btn-icon "></i>
+                    <b-button block size="sm" class="b-background shadow" variant="primary" @click="cta(item)">
+                      <i class="fas fa-envelope fa-lg btn-icon"></i>
                       <span class="btn-text">Message</span>
                     </b-button>
                   </b-col>
 
                   <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2 text-center">
-                    <b-button block size="sm" class="b-background shadow " variant="primary">
-                      <i class="fas fa-map-marked-alt  fa-lg btn-icon "></i>
+                    <b-button block size="sm" class="b-background shadow" variant="primary">
+                      <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
                       <span class="btn-text">Direction</span>
                     </b-button>
                   </b-col>
@@ -71,7 +71,7 @@
 </template>
 
 <script>
-import moment from 'moment';
+// import moment from 'moment';
 import axios from 'axios';
 
 export default {
@@ -94,6 +94,9 @@ export default {
   },
 
   computed: {
+    activeAccount() {
+      return this.$store.getters['auth/profilConnected'];
+    },
     businesses() {
       if (this.type == 'Follower') {
         return this.$store.state.profile.BcommunityFollower.business_followers;
@@ -103,7 +106,21 @@ export default {
     },
   },
 
+
   methods: {
+    cta(data) {
+      console.log(data);
+      this.$store.commit('businessChat/setSelectedChat', data);
+      let path = '';
+      if (this.activeAccount.user_type == 'business') {
+        path = '/business_owner/' + this.activeAccount.id;
+      } else if (this.activeAccount.user_type == 'network') {
+        path = '/';
+      } else path = '/messaging';
+
+      // this.$router.push({ path: `${path}`, query: { tabId: 1, msgTabId: 1 } });
+      this.$router.push({ path: `/business_owner/${this.activeAccount.id}`, query: { tabId: 1, msgTabId: 1 } });
+    },
     count(number) {
       if (number >= 1000000) {
         return number / 1000000 + 'M';
@@ -161,7 +178,7 @@ export default {
             }
           }
         })
-        .catch(err => {
+        .catch((err) => {
           console.log({ err: err });
         });
     },

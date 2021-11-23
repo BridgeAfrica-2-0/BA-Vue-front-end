@@ -1,5 +1,6 @@
 <template>
-  <div> <FlashMessage />
+  <div>
+    <FlashMessage />
     <div class="people-style p-3 shadow">
       <b-row>
         <b-col cols="5" lg="4" sm="4" md="5">
@@ -21,28 +22,16 @@
             {{ product.description.substring(0, 30) }}
             <b-link v-if="product.description.length >= 30"> see more </b-link>
             <br />
-                
             <span class="price">
               <strong> {{ product.price }} </strong>
             </span>
             <br />
-            
           </p>
-          
-          
-              <div class=" align-self-center  pos">
-            <b-button variant="primary" 
-              >buy now
+          <p>
+            <b-button variant="primary" @click="handleAddToCard"
+              ><span>Add to Cart</span>
             </b-button>
-            </div>
-
-            <div class=" align-self-center pos my-2">
-            <b-button variant="primary" class="p-0" @click="handleAddToCard"
-              >add to cart
-            </b-button>
-            </div>
-            
-          
+          </p>
         </b-col>
       </b-row>
 
@@ -50,6 +39,115 @@
         <br />
       </div> -->
     </div>
+    <!-- EDIT PRODUCT MODAL -->
+
+    <b-modal hide-footer title="Edit product">
+      <b-form>
+        <b-row>
+          <b-col cols="12" md="6">
+            <b-form-group
+              id="input-group-1"
+              label="Product Name"
+              label-for="input-1"
+              label-size="sm"
+            >
+              <b-form-input
+                id="input-1"
+                class="mt-1"
+                type="text"
+                required
+              ></b-form-input>
+            </b-form-group>
+
+            <b-form-group
+              id="input-group-1"
+              label="Product Description"
+              label-for="input-1"
+              label-size="sm"
+            >
+              <b-textarea
+                id="input-1"
+                class="mt-2"
+                type="text"
+                required
+              ></b-textarea>
+            </b-form-group>
+          </b-col>
+          <b-col cols="12" md="6">
+            <div class="image-upload-wrap">
+              <a href="#" data-toggle="modal" data-target="#createalbumModal">
+                <div class="drag-text">
+                  <i class="fa fa-plus"></i>
+                  <h6>Product Image</h6>
+                </div>
+              </a>
+              <div></div>
+            </div>
+          </b-col>
+        </b-row>
+
+        <b-form-group
+          id="input-group-1"
+          label="product Price"
+          label-for="input-1"
+          label-size="sm"
+        >
+          <b-form-input class="mt-1" id="price"></b-form-input>
+        </b-form-group>
+
+        <b-form-checkbox
+          id="checkbox-1"
+          name="checkbox-1"
+          value="accepted"
+          unchecked-value="not_accepted"
+        >
+          This Product Is On Discount
+        </b-form-checkbox>
+
+        <b-form-group
+          id="conditions"
+          label="Conditions"
+          label-for="input-1"
+          label-size="sm"
+        >
+          <b-form-input class="mt-1" id="conditions"></b-form-input>
+        </b-form-group>
+
+        <b-form-checkbox
+          id="checkbox-1"
+          name="checkbox-1"
+          value="accepted"
+          unchecked-value="not_accepted"
+        >
+          This Item Is A Service ?
+        </b-form-checkbox>
+
+        <b-form-checkbox
+          id="checkbox-1"
+          name="checkbox-1"
+          value="accepted"
+          unchecked-value="not_accepted"
+        >
+          In stock
+        </b-form-checkbox>
+
+        <b-form-checkbox
+          id="checkbox-1"
+          name="checkbox-1"
+          value="accepted"
+          unchecked-value="not_accepted"
+        >
+          Published
+        </b-form-checkbox>
+
+        <b-button class="mt-2 btn-block" variant="primary"> Add</b-button>
+      </b-form>
+    </b-modal>
+    <!-- PRODUCT DETAILS MODAL -->
+    <!-- <div>
+        <br />
+      </div> -->
+    <!-- </div> -->
     <!-- EDIT PRODUCT MODAL -->
 
     <b-modal hide-footer title="Edit product">
@@ -176,10 +274,10 @@ export default {
     ProductDetails,
   },
 
-  computed : {
-    getStatus(){
-      return this.$store.state.cart.status ;
-    }
+  computed: {
+    getStatus() {
+      return this.$store.state.cart.status;
+    },
   },
   methods: {
     /**
@@ -195,25 +293,23 @@ export default {
     },
     handleAddToCard() {
       console.log("add to card ", this.product.id);
-      this.$store.dispatch("cart/addToCart", this.product.id)
-      .then(response => {
-       
-        console.log("----",this.getStatus);
+      this.$store
+        .dispatch("cart/addToCart", this.product.id)
+        .then((response) => {
+          console.log("----", this.getStatus);
 
-        this.flashMessage.show({
-              status: 'success',
-              message: this.getStatus,
-              
-            });
-      })
-      .catch((error) => {
-        console.log(error);
           this.flashMessage.show({
-              status: 'error',
-              message: "error occur",
-              
-            });
-      });;
+            status: "success",
+            message: this.getStatus,
+          });
+        })
+        .catch((error) => {
+          console.log(error);
+          this.flashMessage.show({
+            status: "error",
+            message: "error occur",
+          });
+        });
     },
   },
 };
@@ -272,7 +368,7 @@ h6 {
   cursor: pointer;
 }
 @media only screen and (min-width: 768px) {
-  .pos{
+  .pos {
     margin-left: 200px;
   }
   .center-img {

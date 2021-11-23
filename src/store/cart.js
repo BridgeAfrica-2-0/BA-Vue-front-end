@@ -1,34 +1,34 @@
 import axios from "axios";
 
 export default {
-namespaced: true,
+    namespaced: true,
 
- state : {
-  cart: [],
-  status: ''
-},
+    state: {
+        cart: [],
+        status: ''
+    },
 
-mutations: {
-  setStatus(state, status){
-      state.status = status;
-  }
-},
- actions : {
+    mutations: {
+        setStatus(state, status) {
+            state.status = status;
+        }
+    },
+    actions: {
 
-  async addToCart({ commit }, idproduct) {
-    await axios
-      .post(`market/product/${idproduct}/cart/add`)
-      .then((response) => {
-       
-        console.log(response.data);
-        console.log(response.data.message);
-        commit('setStatus', response.data.message) ;
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  },
- }
+        async addToCart({ commit }, idproduct) {
+            await axios
+                .post(`market/product/${idproduct}/cart/add`)
+                .then((response) => {
+
+                    console.log(response.data);
+                    console.log(response.data.message);
+                    commit('setStatus', response.data.message);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
+    }
 
 
 

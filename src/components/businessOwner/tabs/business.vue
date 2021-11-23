@@ -40,6 +40,7 @@
                   block
                   size="sm"
                   class="b-background shadow"
+                  :id="'followbtn'+item.id"
                   :class="item.is_follow !== 0 && 'u-btn'"
                   variant="primary"
                   @click="handleFollow(item)"
@@ -154,20 +155,31 @@ export default {
         });
     },
 
-    async handleFollow(user) {
+   async handleFollow(user) {
+      
+      console.log("yoo ma gee");
+       document.getElementById("followbtn"+user.id).disabled = true;
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
         id: user.id,
-        type: 'business',
+        type: 'user',
       };
 
       await axios
         .post(uri, data)
-        .then(response => {
+        .then(({ data }) => {
+          console.log(data);
           user.is_follow = nextFollowState;
+           document.getElementById("followbtn"+user.id).disabled = false;
         })
-        .catch(err => console.log(err));
+         
+          .catch((err) =>{  
+          
+          console.log({err:err})  ;
+           document.getElementById("followbtn"+user.id).disabled =  false;
+          
+        });
     },
   },
 };

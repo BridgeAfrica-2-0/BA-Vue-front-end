@@ -49,15 +49,23 @@
                     cols="4"
                     class="mt-2 text-center"
                   >
+                  
                     <b-button
-                      block
-                      size="sm"
-                      class="b-background shadow "
-                      variant="primary"
-                    >
-                      <i class="fas fa-user-plus  fa-lg btn-icon "></i>
-                      <span class="btn-com">Community</span>
-                    </b-button>
+                  block
+                  size="sm"
+                  class="b-background shadow"
+                  :id="'followbtn'+item.id"
+                  :class="item.is_follow !== 0 && 'u-btn'"
+                  variant="primary"
+                  @click="handleFollow(item)"
+                >
+                  <i class="fas fa-lg btn-icon" :class="item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"></i>
+                  <span class="btn-com">Community</span>
+                </b-button>
+
+
+
+
                   </b-col>
 
                   <b-col
@@ -164,6 +172,34 @@ export default {
       } else return number;
     },
 
+
+
+ async handleFollow(user) {
+      
+      console.log("yoo ma gee");
+       document.getElementById("followbtn"+user.id).disabled = true;
+      const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
+      const nextFollowState = user.is_follow === 0 ? 1 : 0;
+      const data = {
+        id: user.id,
+        type: 'user',
+      };
+
+      await axios
+        .post(uri, data)
+        .then(({ data }) => {
+          console.log(data);
+          user.is_follow = nextFollowState;
+           document.getElementById("followbtn"+user.id).disabled = false;
+        })
+         
+          .catch((err) =>{  
+          
+          console.log({err:err})  ;
+           document.getElementById("followbtn"+user.id).disabled =  false;
+          
+        });
+    },
 
     
 

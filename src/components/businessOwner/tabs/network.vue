@@ -9,7 +9,7 @@
         <b-col md="3" xl="5" lg="5" cols="5" sm="3">
           <div class="center-img">
             <img :src="item.picture" class="r-image" />
-          </div>
+          </div>   
         </b-col>
 
         <b-col md="5" cols="7" lg="7" xl="7" sm="5">
@@ -33,6 +33,7 @@
                   class="b-background shadow"
                   :class="item.is_follow !== 0 && 'u-btn'"
                   variant="primary"
+                   :id="'followbtn'+item.id"
                   @click="handleFollow(item)"
                 >
                   <i class="fas fa-lg btn-icon" :class="item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"></i>
@@ -141,6 +142,7 @@ export default {
     },
 
     async handleFollow(user) {
+       document.getElementById("followbtn"+user.id).disabled = true;
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
@@ -152,9 +154,14 @@ export default {
         .post(uri, data)
         .then(response => {
           user.is_follow = nextFollowState;
+           document.getElementById("followbtn"+user.id).disabled =  false;
         })
-        .catch(err => console.log(err));
+        .catch(err =>{   console.log(err)
+         document.getElementById("followbtn"+user.id).disabled =  false;
+        });
     },
+
+    
   },
 };
 </script>

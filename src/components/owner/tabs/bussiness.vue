@@ -802,7 +802,7 @@
                       <strong class="title">
                         {{ business.name }}
                       </strong>
-                      <br />  {{business.category}}
+                      <br />  
                         <span
                           class=""
                           v-for="cat in business.category"

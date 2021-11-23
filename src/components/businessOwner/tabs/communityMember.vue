@@ -3,7 +3,7 @@
     <div class="s-ccard">
     
       <b-row>
-        <b-col lg="6" sm="12" class="p-2" v-for="item in users" :key="item.id">
+           <b-col lg="6" sm="12" class="p-2" v-for="item in users" :key="item.id">
           <div class="people-style border shadow">
             <b-row class="mb-1">
               <b-col md="3" cols="4" sm="4" class="my-auto">
@@ -43,10 +43,29 @@
                           </b-col>
 
                           <b-col md="6" lg="12" cols="6" xl="12" class="mt-2 mt-lg-2 mt-xl-2 btn-2 center">
-                            <b-button block size="sm" class="b-background flexx pobtn shadow" variant="primary">
-                              <i class="fas fa-user-plus fa-lg btn-icon"></i>
-                              <span class="btn-com">Community</span>
-                            </b-button>
+
+
+
+
+                         <b-button
+                          block
+                          size="sm"
+                           :id="'followbtn'+item.id"
+                         class="b-background flexx pobtn shadow"
+                          :class="item.is_follow !== 0 && 'u-btn'"
+                          variant="primary"
+                          @click="handleFollow(item)"
+                        >
+
+                           <i
+                            class="fas fa-lg btn-icon"
+                            :class="item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"
+                          ></i>
+
+                          <span class="btn-com">{{ $t('dashboard.Community') }}</span>
+                        </b-button>     
+
+
                           </b-col>
                         </b-row>
                       </div>
@@ -123,6 +142,37 @@ export default {
 
       this.$refs.infiniteLoading.attemptLoad();
     },
+
+
+
+     async handleFollow(user) {
+      
+      console.log("yoo ma gee");
+       document.getElementById("followbtn"+user.id).disabled = true;
+      const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
+      const nextFollowState = user.is_follow === 0 ? 1 : 0;
+      const data = {
+        id: user.id,
+        type: 'user',
+      };
+
+      await axios
+        .post(uri, data)
+        .then(({ data }) => {
+          console.log(data);
+          user.is_follow = nextFollowState;
+           document.getElementById("followbtn"+user.id).disabled = false;
+        })
+         
+          .catch((err) =>{  
+          
+          console.log({err:err})  ;
+           document.getElementById("followbtn"+user.id).disabled =  false;
+          
+        });
+    },
+
+
 
     count(number) {
       if (number >= 1000000) {

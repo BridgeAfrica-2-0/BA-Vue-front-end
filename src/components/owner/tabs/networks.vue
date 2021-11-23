@@ -190,7 +190,7 @@
 
                <div>
                   <label class="typo__label"> {{ $t('profileowner.Category') }} </label>
-                  {{selectedcategories}}
+                 
                   <multiselect
                     v-model="multiselecvalue"
                    

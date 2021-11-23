@@ -103,7 +103,7 @@ export default {
                     console.log(err);
                 })
         },
-        // [NO BUGs]
+        // [NO BUG]
         GET_USERS_CHAT_LIST({ commit, state }, data) {
             commit("setUsers", []);
 

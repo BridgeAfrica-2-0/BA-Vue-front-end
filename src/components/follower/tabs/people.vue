@@ -1,10 +1,18 @@
 <template>
   <div>
     <div class="s-cardd">
-      <div class="people-style border shadow" v-for="item in users" :key="item.id">
+      <div
+        class="people-style border shadow"
+        v-for="item in users"
+        :key="item.id"
+      >
         <b-row class="mb-1">
           <b-col md="3" cols="4" lg="3" class="my-auto">
-            <b-avatar class="p-avater" variant="primary" :src="item.profile_picture"></b-avatar>
+            <b-avatar
+              class="p-avater"
+              variant="primary"
+              :src="item.profile_picture"
+            ></b-avatar>
           </b-col>
 
           <b-col md="8" cols="8" lg="8">
@@ -19,8 +27,17 @@
                         </div>
                       </b-col>
 
-                      <b-col md="6" lg="6" cols="6" sm="6" class="mt-3 mt-lg-2 mt-xl-2">
-                        <h6 class="follower">{{ count(item.followers) }} {{ $t('profilefollower.Community') }}</h6>
+                      <b-col
+                        md="6"
+                        lg="6"
+                        cols="6"
+                        sm="6"
+                        class="mt-3 mt-lg-2 mt-xl-2"
+                      >
+                        <h6 class="follower">
+                          {{ count(item.followers) }}
+                          {{ $t("profilefollower.Community") }}
+                        </h6>
                       </b-col>
                     </b-row>
                   </div>
@@ -29,20 +46,41 @@
                 <b-col lg="12" xl="12" cols="12" sm="12" md="12">
                   <div class="e-name">
                     <b-row class="mt-lg-0">
-                      <b-col md="6" lg="6" cols="6" sm="6" xl="6" class="mt-2 mt-lg-2 mt-xl-2 btn-2 center">
+                      <b-col
+                        md="6"
+                        lg="6"
+                        cols="6"
+                        sm="6"
+                        xl="6"
+                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
+                      >
                         <b-button
                           block
                           variant="primary"
                           size="sm"
-                          class="b-background flexx pobtn shadow mr-lg-3 mr-xl-3"
-                          @click="cta(item)"
+                          class="
+                            b-background
+                            flexx
+                            pobtn
+                            shadow
+                            mr-lg-3 mr-xl-3
+                          "
                         >
                           <i class="fas fa-envelope fa-lg btn-icon"></i>
-                          <span class="btn-text">{{ $t('profilefollower.Message') }}</span>
+                          <span class="btn-text">{{
+                            $t("profilefollower.Message")
+                          }}</span>
                         </b-button>
                       </b-col>
 
-                      <b-col md="6" lg="6" cols="6" sm="6" xl="6" class="mt-2 mt-lg-2 mt-xl-2 btn-2 center">
+                      <b-col
+                        md="6"
+                        lg="6"
+                        cols="6"
+                        sm="6"
+                        xl="6"
+                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
+                      >
                         <b-button
                           block
                           size="sm"
@@ -54,10 +92,16 @@
                         >
                           <i
                             class="fas fa-lg btn-icon"
-                            :class="item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"
+                            :class="
+                              item.is_follow !== 0
+                                ? 'fa-user-minus'
+                                : 'fa-user-plus'
+                            "
                           ></i>
 
-                          <span class="btn-com">{{ $t('dashboard.Community') }}</span>
+                          <span class="btn-com">{{
+                            $t("dashboard.Community")
+                          }}</span>
                         </b-button>
                       </b-col>
                     </b-row>
@@ -75,22 +119,22 @@
 </template>
 
 <script>
-// import moment from "moment";
-import axios from 'axios';
+import moment from "moment";
+import axios from "axios";
 export default {
-  props: ['type'],
+  props: ["type"],
   data() {
     return {
       page: 1,
       users: [],
-      foll_id: '',
+      foll_id: "",
       options: {
         rewind: true,
         autoplay: true,
         perPage: 1,
         pagination: false,
 
-        type: 'loop',
+        type: "loop",
         perMove: 1,
       },
     };
@@ -102,20 +146,7 @@ export default {
 
   computed: {
     old_users() {
-      if (this.type == 'Follower') {
-        return this.$store.state.profile.UcommunityFollower.user_followers;
-      } else {
-        return this.$store.state.profile.UcommunityFollowing.user_following;
-      }
-    },
-  },
-
-  computed: {
-    activeAccount() {
-      return this.$store.getters['auth/profilConnected'];
-    },
-    users() {
-      if (this.type == 'Follower') {
+      if (this.type == "Follower") {
         return this.$store.state.profile.UcommunityFollower.user_followers;
       } else {
         return this.$store.state.profile.UcommunityFollowing.user_following;
@@ -124,28 +155,14 @@ export default {
   },
 
   methods: {
-    cta(data) {
-      console.log(data);
-      this.$store.commit('businessChat/setSelectedChat', data);
-      let path = '';
-      if (this.activeAccount.user_type == 'business') {
-        path = '/business_owner/' + this.activeAccount.id;
-      } else if (this.activeAccount.user_type == 'network') {
-        path = '/';
-      } else path = '/messaging';
-
-      // this.$router.push({ path: `${path}`, query: { tabId: 1, msgTabId: 1 } });
-      this.$router.push({ path: `/business_owner/${this.activeAccount.id}`, query: { tabId: 1, msgTabId: 0 } });
-    },
-
     async handleFollow(user) {
-      console.log('yoo ma gee');
-      document.getElementById('followbtn' + user.id).disabled = true;
+      console.log("yoo ma gee");
+      document.getElementById("followbtn" + user.id).disabled = true;
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
         id: user.id,
-        type: 'user',
+        type: "user",
       };
 
       await axios
@@ -153,37 +170,37 @@ export default {
         .then(({ data }) => {
           console.log(data);
           user.is_follow = nextFollowState;
-          document.getElementById('followbtn' + user.id).disabled = false;
+          document.getElementById("followbtn" + user.id).disabled = false;
         })
 
         .catch((err) => {
           console.log({ err: err });
-          document.getElementById('followbtn' + user.id).disabled = false;
+          document.getElementById("followbtn" + user.id).disabled = false;
         });
     },
 
     count(number) {
       if (number >= 1000000) {
-        return number / 1000000 + 'M';
+        return number / 1000000 + "M";
       }
       if (number >= 1000) {
-        return number / 1000 + 'K';
+        return number / 1000 + "K";
       } else return number;
     },
 
     infiniteHandler($state) {
-      console.log('hahahahahahahah');
+      console.log("hahahahahahahah");
       let url = null;
 
-      if (this.type == 'Follower') {
-        url = 'profile/user/follower/';
+      if (this.type == "Follower") {
+        url = "profile/user/follower/";
       } else {
-        url = 'profile/user/following/';
+        url = "profile/user/following/";
       }
       axios
-        .get(url + this.page + '?id=' + this.foll_id)
+        .get(url + this.page + "?id=" + this.foll_id)
         .then(({ data }) => {
-          if (this.type == 'Follower') {
+          if (this.type == "Follower") {
             if (data.data.user_followers.length) {
               this.page += 1;
 

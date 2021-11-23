@@ -1,10 +1,18 @@
 <template>
   <div>
     <div style="overflow-y: scroll" class="s-cardd">
-      <div v-for="people in peoples" :key="people.id" class="people-style border shadow">
+      <div
+        v-for="people in peoples"
+        :key="people.id"
+        class="people-style border shadow"
+      >
         <b-row class="mb-1">
           <b-col md="3" cols="4" lg="3" class="my-auto">
-            <b-avatar class="p-avater" variant="primary" :src="people.profile_picutre"></b-avatar>
+            <b-avatar
+              class="p-avater"
+              variant="primary"
+              :src="people.profile_picutre"
+            ></b-avatar>
           </b-col>
 
           <b-col md="8" cols="8" lg="8">
@@ -19,8 +27,16 @@
                         </div>
                       </b-col>
 
-                      <b-col md="6" lg="6" cols="6" sm="6" class="mt-3 mt-lg-2 mt-xl-2">
-                        <h6 class="follower">{{ people.followers }} {{ $t('network.Community') }}</h6>
+                      <b-col
+                        md="6"
+                        lg="6"
+                        cols="6"
+                        sm="6"
+                        class="mt-3 mt-lg-2 mt-xl-2"
+                      >
+                        <h6 class="follower">
+                          {{ people.followers }} {{ $t("network.Community") }}
+                        </h6>
                       </b-col>
                     </b-row>
                   </div>
@@ -29,28 +45,58 @@
                 <b-col lg="12" xl="12" cols="12" sm="12" md="12">
                   <div class="e-name">
                     <b-row class="mt-lg-0">
-                      <b-col md="6" lg="6" cols="6" sm="6" xl="6" class="mt-2 mt-lg-2 mt-xl-2 btn-2 center">
+                      <b-col
+                        md="6"
+                        lg="6"
+                        cols="6"
+                        sm="6"
+                        xl="6"
+                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
+                      >
                         <b-button
                           block
                           variant="primary"
                           size="sm"
-                          class="b-background flexx pobtn shadow mr-lg-3 mr-xl-3"
+                          class="
+                            b-background
+                            flexx
+                            pobtn
+                            shadow
+                            mr-lg-3 mr-xl-3
+                          "
                           @click="cta(people)"
                         >
                           <i class="fas fa-envelope fa-lg btn-icon"></i>
-                          <span class="btn-text">{{ $t('network.Message') }}</span>
+                          <span class="btn-text">{{
+                            $t("network.Message")
+                          }}</span>
                         </b-button>
                       </b-col>
 
-                      <b-col md="6" lg="6" cols="6" sm="6" xl="6" class="mt-2 mt-lg-2 mt-xl-2 btn-2 center">
+                      <b-col
+                        md="6"
+                        lg="6"
+                        cols="6"
+                        sm="6"
+                        xl="6"
+                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
+                      >
                         <b-button
                           block
                           size="sm"
-                          class="b-background flexx pobtn shadow mr-lg-3 mr-xl-3"
+                          class="
+                            b-background
+                            flexx
+                            pobtn
+                            shadow
+                            mr-lg-3 mr-xl-3
+                          "
                           variant="primary"
                         >
                           <i class="fas fa-user-plus fa-lg btn-icon"></i>
-                          <span class="btn-com">{{ $t('network.Community') }}</span>
+                          <span class="btn-com">{{
+                            $t("network.Community")
+                          }}</span>
                         </b-button>
                       </b-col>
                     </b-row>
@@ -62,40 +108,42 @@
         </b-row>
       </div>
     </div>
-    <!-- {{peoples}} -->
   </div>
 </template>
 
 <script>
 export default {
-  props: ['peoples'],
+  props: ["peoples"],
   computed: {
     activeAccount() {
-      return this.$store.getters['auth/profilConnected'];
+      return this.$store.getters["auth/profilConnected"];
     },
     selectedChat() {
-      return this.$store.getters['businessChat/getSelectedChat'];
+      return this.$store.getters["businessChat/getSelectedChat"];
     },
   },
   methods: {
     cta(data) {
       console.log(data);
-      this.$store.commit('businessChat/setSelectedChat', data);
+      this.$store.commit("businessChat/setSelectedChat", data);
 
-      let path = '';
+      let path = "";
       let msgTabId = null;
-      if (this.activeAccount.user_type == 'business') {
+      if (this.activeAccount.user_type == "business") {
         msgTabId = 1;
-        path = '/business_owner/' + this.activeAccount.id;
-      } else if (this.activeAccount.user_type == 'network') {
+        path = "/business_owner/" + this.activeAccount.id;
+      } else if (this.activeAccount.user_type == "network") {
         msgTabId = 2;
-        path = '/network/' + this.activeAccount.id;
+        path = "/network/" + this.activeAccount.id;
       } else {
         msgTabId = 0;
-        path = '/messaging';
+        path = "/messaging";
       }
 
-      this.$router.push({ path: `${path}`, query: { tabId: 1, msgTabId: msgTabId } });
+      this.$router.push({
+        path: `${path}`,
+        query: { tabId: 1, msgTabId: msgTabId },
+      });
       // this.$router.push({ path: `/business_owner/${this.activeAccount.id}`, query: { tabId: 1, msgTabId: 0 } });
     },
   },

@@ -1,7 +1,13 @@
 <template>
   <div class="p-2">
     <b-row>
-      <b-col lg="6" sm="12" class="p-2" v-for="item in businesses" :key="item.id">
+      <b-col
+        lg="6"
+        sm="12"
+        class="p-2"
+        v-for="item in businesses"
+        :key="item.id"
+      >
         <div class="people-style shadow h-100">
           <b-row>
             <b-col md="3" xl="3" lg="3" cols="5" sm="3">
@@ -17,12 +23,17 @@
               <p class="textt">
                 <strong class="title"> {{ item.name }} </strong> <br />
 
-                <span v-for="cat in item.category" :key="cat.name"> {{ cat.name }} </span>
+                <span v-for="cat in item.category" :key="cat.name">
+                  {{ cat.name }}
+                </span>
                 <br />
                 {{ count(item.followers) }}
-                {{ $t('profileowner.Community') }} <br />
+                {{ $t("profileowner.Community") }} <br />
 
-                <span class="location"> <b-icon-geo-alt class="ico"></b-icon-geo-alt>{{ item.country }} </span>
+                <span class="location">
+                  <b-icon-geo-alt class="ico"></b-icon-geo-alt
+                  >{{ item.country }}
+                </span>
                 <br />
                 <read-more
                   more-str="read more"
@@ -39,7 +50,14 @@
             <b-col lg="12" xl="4" md="4" cols="12" sm="4">
               <div class="s-button">
                 <b-row>
-                  <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2 text-center">
+                  <b-col
+                    md="12"
+                    lg="4"
+                    xl="12"
+                    sm="12"
+                    cols="4"
+                    class="mt-2 text-center"
+                  >
                     <b-button
                       block
                       size="sm"
@@ -51,23 +69,58 @@
                     >
                       <i
                         class="fas fa-lg btn-icon"
-                        :class="item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"
+                        :class="
+                          item.is_follow !== 0
+                            ? 'fa-user-minus'
+                            : 'fa-user-plus'
+                        "
                       ></i>
-                      <span class="btn-com"> {{ $t('dashboard.Community') }}</span>
+                      <span class="btn-com">
+                        {{ $t("dashboard.Community") }}</span
+                      >
                     </b-button>
                   </b-col>
 
-                  <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2 text-center">
-                    <b-button block size="sm" class="b-background shadow" variant="primary" @click="cta(item)">
+                  <b-col
+                    md="12"
+                    lg="4"
+                    xl="12"
+                    sm="12"
+                    cols="4"
+                    class="mt-2 text-center"
+                  >
+                    <b-button
+                      block
+                      size="sm"
+                      class="b-background shadow"
+                      variant="primary"
+                      @click="cta(item)"
+                    >
                       <i class="fas fa-envelope fa-lg btn-icon"></i>
-                      <span class="btn-text">{{ $t('profileowner.Message') }}</span>
+                      <span class="btn-text">{{
+                        $t("profileowner.Message")
+                      }}</span>
                     </b-button>
                   </b-col>
 
-                  <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2 text-center">
-                    <b-button block size="sm" class="b-background shadow" variant="primary">
+                  <b-col
+                    md="12"
+                    lg="4"
+                    xl="12"
+                    sm="12"
+                    cols="4"
+                    class="mt-2 text-center"
+                  >
+                    <b-button
+                      block
+                      size="sm"
+                      class="b-background shadow"
+                      variant="primary"
+                    >
                       <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
-                      <span class="btn-text">{{ $t('profileowner.Direction') }}</span>
+                      <span class="btn-text">{{
+                        $t("profileowner.Direction")
+                      }}</span>
                     </b-button>
                   </b-col>
                 </b-row>
@@ -78,16 +131,20 @@
       </b-col>
     </b-row>
 
-    <infinite-loading :identifier="infiniteId" @infinite="infiniteHandler" ref="infiniteLoading"></infinite-loading>
+    <infinite-loading
+      :identifier="infiniteId"
+      @infinite="infiniteHandler"
+      ref="infiniteLoading"
+    ></infinite-loading>
   </div>
 </template>
 
 <script>
-// import moment from 'moment';
-import axios from 'axios';
+import moment from "moment";
+import axios from "axios";
 
 export default {
-  props: ['type', 'searchh'],
+  props: ["type", "searchh"],
 
   data() {
     return {
@@ -100,7 +157,7 @@ export default {
         perPage: 1,
         pagination: false,
 
-        type: 'loop',
+        type: "loop",
         perMove: 1,
       },
     };
@@ -108,17 +165,17 @@ export default {
 
   computed: {
     activeAccount() {
-      return this.$store.getters['auth/profilConnected'];
+      return this.$store.getters["auth/profilConnected"];
     },
     businesses() {
-      if (this.type == 'Follower') {
+      if (this.type == "Follower") {
         return this.$store.state.profile.BcommunityFollower.business_followers;
       } else {
         return this.$store.state.profile.BcommunityFollowing.business_following;
       }
     },
     oldbusinesses() {
-      if (this.type == 'Follower') {
+      if (this.type == "Follower") {
         return this.$store.state.profile.BcommunityFollower.business_followers;
       } else {
         return this.$store.state.profile.BcommunityFollowing.business_following;
@@ -127,36 +184,23 @@ export default {
   },
 
   methods: {
-    cta(data) {
-      console.log(data);
-      this.$store.commit('businessChat/setSelectedChat', data);
-      let path = '';
-      if (this.activeAccount.user_type == 'business') {
-        path = '/business_owner/' + this.activeAccount.id;
-      } else if (this.activeAccount.user_type == 'network') {
-        path = '/';
-      } else path = '/messaging';
-
-      // this.$router.push({ path: `${path}`, query: { tabId: 1, msgTabId: 1 } });
-      this.$router.push({ path: `/business_owner/${this.activeAccount.id}`, query: { tabId: 1, msgTabId: 1 } });
-    },
     count(number) {
       if (number >= 1000000) {
-        return number / 1000000 + 'M';
+        return number / 1000000 + "M";
       }
       if (number >= 1000) {
-        return number / 1000 + 'K';
+        return number / 1000 + "K";
       } else return number;
     },
 
     async handleFollow(user) {
-      document.getElementById('followbtn' + user.id).disabled = true;
+      document.getElementById("followbtn" + user.id).disabled = true;
 
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
         id: user.id,
-        type: 'business',
+        type: "business",
       };
 
       await axios
@@ -164,21 +208,27 @@ export default {
         .then((response) => {
           console.log(response);
           user.is_follow = nextFollowState;
-          document.getElementById('followbtn' + user.id).disabled = false;
+          document.getElementById("followbtn" + user.id).disabled = false;
         })
         .catch((err) => {
           console.log(err);
-          document.getElementById('followbtn' + user.id).disabled = false;
+          document.getElementById("followbtn" + user.id).disabled = false;
         });
     },
 
     search() {
-      console.log('search started');
+      console.log("search started");
 
-      if (this.type == 'Follower') {
-        this.$store.commit('profile/setBcommunityFollower', { business_followers: [], total_business_follower: 0 });
+      if (this.type == "Follower") {
+        this.$store.commit("profile/setBcommunityFollower", {
+          business_followers: [],
+          total_business_follower: 0,
+        });
       } else {
-        this.$store.commit('profile/setBcommunityFollowing', { business_following: [], total_business_following: 0 });
+        this.$store.commit("profile/setBcommunityFollowing", {
+          business_following: [],
+          total_business_following: 0,
+        });
       }
 
       this.page = 1;
@@ -190,17 +240,17 @@ export default {
     infiniteHandler($state) {
       let url = null;
 
-      if (this.type == 'Follower') {
-        url = 'profile/business/follower/';
+      if (this.type == "Follower") {
+        url = "profile/business/follower/";
       } else {
-        url = 'profile/business/following/';
+        url = "profile/business/following/";
       }
       axios
-        .get(url + this.page + '?keyword=' + this.searchh)
+        .get(url + this.page + "?keyword=" + this.searchh)
         .then(({ data }) => {
           console.log(data);
 
-          if (this.type == 'Follower') {
+          if (this.type == "Follower") {
             if (data.data.business_followers.length) {
               this.businesses.push(...data.data.business_followers);
               this.page += 1;
@@ -295,13 +345,13 @@ export default {
     color: black;
 
     line-height: 35px;
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 
   .textt {
     color: #000;
 
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 12px;
     line-height: 30px;
@@ -348,13 +398,13 @@ export default {
     color: black;
 
     line-height: 35px;
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 
   .textt {
     color: #000;
 
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;

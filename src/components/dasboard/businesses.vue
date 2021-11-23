@@ -1,113 +1,142 @@
 <template>
   <div>
-   
+    <b-row>
+      <div
+        v-for="business in business"
+        :key="business.id"
+        class="people-style shadow h-100"
+      >
+        <div class="d-inline-flex">
+          <div>
+            <div class="center-img">
+              <splide :options="options" class="r-image">
+                <splide-slide cl>
+                  <img :src="business.logo_path" class="r-image" />
+                </splide-slide>
+              </splide>
+            </div>
+          </div>
 
+          <div class="flex80">
+            <p class="textt text">
+              <strong class="title">
+                {{ business.name }}
+              </strong>
+              <br />
+              <span v-if="Array.isArray(business.category)">
+                <span class="" v-for="cat in business.category" :key="cat.name">
+                  {{ cat.name }}
+                </span>
+              </span>
+              <br />
+              {{ business.community }} {{ $t("profileowner.Community") }} <br />
 
+              <span class="location">
+                <b-icon-geo-alt class="ico"></b-icon-geo-alt>
+                {{ business.city }}
+                <span v-for="nei in business.neigborhood" :key="nei.id">
+                  {{ nei.name }}
+                </span>
+              </span>
+              <br />
 
-        
+              <read-more
+                more-str="read more"
+                class="readmore"
+                :text="business.about_business"
+                link="#"
+                less-str="read less"
+                :max-chars="100"
+              >
+              </read-more>
+            </p>
+          </div>
+        </div>
+      </div>
 
-            
-              <div    v-for="business in business" :key="business.id" class="people-style shadow h-100 ">
-               
-                <div class="d-inline-flex">
-                  <div >
-                    <div class="center-img">
-                      <splide :options="options" class="r-image">
-                        <splide-slide cl>
-                          <img :src="business.logo_path" class="r-image" />
-                        </splide-slide>
-                      </splide>
-                    </div>
-                  </div>
+      <b-col md="5" cols="7" lg="7" xl="5" sm="5">
+        <p class="textt">
+          <strong class="title"> {{ item.name }} </strong> <br />
+          {{ item.category }}
+          <br />
+          {{ count(item.followers) }}
+          {{ $t("business.community") }} <br />
 
-                  <div class="flex80">
-                    <p class="textt text">
-                      <strong class="title">
-                        {{ business.name }}
-                      </strong>
-                      <br />
-                      <span v-if="Array.isArray(business.category)">
-                        <span
-                          class=""
-                          v-for="cat in business.category"
-                          :key="cat.name"
-                        >
-                          {{ cat.name }}
-                        </span>
-                      </span>
-                      <br />
-                      {{ business.community }} {{ $t('profileowner.Community') }} <br />
+          <span class="location">
+            <b-icon-geo-alt class="ico"></b-icon-geo-alt>{{ item.country }}
+          </span>
+          <br />
+          <read-more
+            more-str="read more"
+            class="readmore"
+            :text="item.about_business"
+            link="#"
+            less-str="read less"
+            :max-chars="20"
+          >
+          </read-more>
+        </p>
+      </b-col>
 
-                      <span class="location">
-                        <b-icon-geo-alt class="ico"></b-icon-geo-alt>
-                        {{ business.city }}
-                        <span v-for="nei in business.neigborhood" :key="nei.id">
-                          {{ nei.name }}
-                        </span>
-                      </span>
-                      <br />
-
-                      <read-more
-                        more-str="read more"
-                        class="readmore"
-                        :text="business.about_business"
-                        link="#"
-                        less-str="read less"
-                        :max-chars="100"
-                      >
-                      </read-more>
-                    </p>
-                  </div>
-                </div>
-              </div>
+      <b-col lg="12" xl="4" md="4" cols="12" sm="4">
+        <div class="s-button">
+          <b-row>
+            <b-col
+              md="12"
+              lg="4"
+              xl="12"
+              sm="12"
+              cols="4"
+              class="mt-2 text-center"
+            >
+              <b-button
+                block
+                size="sm"
+                class="b-background shadow"
+                variant="primary"
+              >
+                <i class="fas fa-user-plus fa-lg btn-icon"></i>
+                <span class="btn-com">{{ $t("business.community") }}</span>
+              </b-button>
             </b-col>
-            <b-col md="5" cols="7" lg="7" xl="5" sm="5">
-              <p class="textt">
-                <strong class="title"> {{ item.name }} </strong> <br />
-                {{ item.category }}
-                <br />
-                {{ count(item.followers) }}
-                {{ $t('business.community') }} <br />
 
-                <span class="location"> <b-icon-geo-alt class="ico"></b-icon-geo-alt>{{ item.country }} </span>
-                <br />
-                <read-more
-                  more-str="read more"
-                  class="readmore"
-                  :text="item.about_business"
-                  link="#"
-                  less-str="read less"
-                  :max-chars="20"
-                >
-                </read-more>
-              </p>
+            <b-col
+              md="12"
+              lg="4"
+              xl="12"
+              sm="12"
+              cols="4"
+              class="mt-2 text-center"
+            >
+              <b-button
+                block
+                size="sm"
+                class="b-background shadow"
+                variant="primary"
+                @click="cta(item)"
+              >
+                <i class="fas fa-envelope fa-lg btn-icon"></i>
+                <span class="btn-text">{{ $t("business.messages") }}</span>
+              </b-button>
             </b-col>
 
-            <b-col lg="12" xl="4" md="4" cols="12" sm="4">
-              <div class="s-button">
-                <b-row>
-                  <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2 text-center">
-                    <b-button block size="sm" class="b-background shadow" variant="primary">
-                      <i class="fas fa-user-plus fa-lg btn-icon"></i>
-                      <span class="btn-com">{{ $t('business.community') }}</span>
-                    </b-button>
-                  </b-col>
-
-                  <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2 text-center">
-                    <b-button block size="sm" class="b-background shadow" variant="primary" @click="cta(item)">
-                      <i class="fas fa-envelope fa-lg btn-icon"></i>
-                      <span class="btn-text">{{ $t('business.messages') }}</span>
-                    </b-button>
-                  </b-col>
-
-                  <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2 text-center">
-                    <b-button block size="sm" class="b-background shadow" variant="primary">
-                      <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
-                      <span class="btn-text">{{ $t('business.direction') }}</span>
-                    </b-button>
-                  </b-col>
-                </b-row>
-              </div>
+            <b-col
+              md="12"
+              lg="4"
+              xl="12"
+              sm="12"
+              cols="4"
+              class="mt-2 text-center"
+            >
+              <b-button
+                block
+                size="sm"
+                class="b-background shadow"
+                variant="primary"
+              >
+                <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
+                <span class="btn-text">{{ $t("business.direction") }}</span>
+              </b-button>
             </b-col>
           </b-row>
         </div>
@@ -118,7 +147,7 @@
 
 <script>
 export default {
-  props: ['title', 'image', 'business'],
+  props: ["title", "image", "business"],
   data() {
     return {
       options: {
@@ -127,36 +156,39 @@ export default {
         perPage: 1,
         pagination: false,
 
-        type: 'loop',
+        type: "loop",
         perMove: 1,
       },
     };
   },
   computed: {
     activeAccount() {
-      return this.$store.getters['auth/profilConnected'];
+      return this.$store.getters["auth/profilConnected"];
     },
   },
   methods: {
     cta(data) {
       console.log(data);
-      this.$store.commit('businessChat/setSelectedChat', data);
-      let path = '';
-      if (this.activeAccount.user_type == 'business') {
-        path = '/business_owner/' + this.activeAccount.id;
-      } else if (this.activeAccount.user_type == 'network') {
-        path = '/';
-      } else path = '/messaging';
+      this.$store.commit("businessChat/setSelectedChat", data);
+      let path = "";
+      if (this.activeAccount.user_type == "business") {
+        path = "/business_owner/" + this.activeAccount.id;
+      } else if (this.activeAccount.user_type == "network") {
+        path = "/";
+      } else path = "/messaging";
 
       // this.$router.push({ path: `${path}`, query: { tabId: 1, msgTabId: 1 } });
-      this.$router.push({ path: `/business_owner/${this.activeAccount.id}`, query: { tabId: 1, msgTabId: 0 } });
+      this.$router.push({
+        path: `/business_owner/${this.activeAccount.id}`,
+        query: { tabId: 1, msgTabId: 0 },
+      });
     },
     count(number) {
       if (number >= 1000000) {
-        return number / 1000000 + 'M';
+        return number / 1000000 + "M";
       }
       if (number >= 1000) {
-        return number / 1000 + 'K';
+        return number / 1000 + "K";
       } else return number;
     },
   },
@@ -229,13 +261,13 @@ export default {
     color: black;
 
     line-height: 35px;
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 
   .textt {
     color: #000;
 
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 12px;
     line-height: 30px;
@@ -280,13 +312,13 @@ export default {
     color: black;
 
     line-height: 35px;
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 
   .textt {
     color: #000;
 
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;

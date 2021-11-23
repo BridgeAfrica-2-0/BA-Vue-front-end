@@ -1,6 +1,10 @@
 <template>
   <div>
-    <div v-for="business in businesses" :key="business.id" class="people-style shadow">
+    <div
+      v-for="business in businesses"
+      :key="business.id"
+      class="people-style shadow"
+    >
       <b-row>
         <b-col md="3" xl="5" lg="5" cols="5" sm="3">
           <div class="center-img">
@@ -16,16 +20,19 @@
             <strong class="title"> {{ business.name }} </strong> <br />
             {{ business.category }}
             <br />
-            {{ business.followers }} {{ $t('network.Community') }} <br />
+            {{ business.followers }} {{ $t("network.Community") }} <br />
 
             <span class="location">
-              <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{ business.location_description }}
+              <b-icon-geo-alt class="ico"></b-icon-geo-alt>
+              {{ business.location_description }}
             </span>
             <br />
-            <span v-if="business.about_business.length < 65">{{ business.about_business }}</span>
+            <span v-if="business.about_business.length < 65">{{
+              business.about_business
+            }}</span>
             <span v-else
-              >{{ business.about_business.substring(0, 65) + '...' }}
-              <b-link>{{ $t('network.Read_More') }}</b-link></span
+              >{{ business.about_business.substring(0, 65) + "..." }}
+              <b-link>{{ $t("network.Read_More") }}</b-link></span
             >
           </p>
         </b-col>
@@ -33,24 +40,61 @@
         <b-col lg="12" xl="12" md="4" cols="12" sm="4">
           <div class="s-button">
             <b-row>
-              <b-col md="12" lg="4" xl="4" sm="12" cols="4" class="mt-2 text-center">
-                <b-button block size="sm" class="b-background shadow" variant="primary">
+              <b-col
+                md="12"
+                lg="4"
+                xl="4"
+                sm="12"
+                cols="4"
+                class="mt-2 text-center"
+              >
+                <b-button
+                  block
+                  size="sm"
+                  class="b-background shadow"
+                  variant="primary"
+                >
                   <i class="fas fa-user-plus fa-lg btn-icon"></i>
-                  <span class="btn-com">{{ $t('network.Community') }}</span>
+                  <span class="btn-com">{{ $t("network.Community") }}</span>
                 </b-button>
               </b-col>
 
-              <b-col md="12" lg="4" xl="4" sm="12" cols="4" class="mt-2 text-center">
-                <b-button block size="sm" class="b-background shadow" variant="primary" @click="cta(business)">
+              <b-col
+                md="12"
+                lg="4"
+                xl="4"
+                sm="12"
+                cols="4"
+                class="mt-2 text-center"
+              >
+                <b-button
+                  block
+                  size="sm"
+                  class="b-background shadow"
+                  variant="primary"
+                  @click="cta(business)"
+                >
                   <i class="fas fa-envelope fa-lg btn-icon"></i>
-                  <span class="btn-text">{{ $t('network.Message') }}</span>
+                  <span class="btn-text">{{ $t("network.Message") }}</span>
                 </b-button>
               </b-col>
 
-              <b-col md="12" lg="4" xl="4" sm="12" cols="4" class="mt-2 text-center">
-                <b-button block size="sm" class="b-background shadow" variant="primary">
+              <b-col
+                md="12"
+                lg="4"
+                xl="4"
+                sm="12"
+                cols="4"
+                class="mt-2 text-center"
+              >
+                <b-button
+                  block
+                  size="sm"
+                  class="b-background shadow"
+                  variant="primary"
+                >
                   <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
-                  <span class="btn-text">{{ $t('network.Direction') }}</span>
+                  <span class="btn-text">{{ $t("network.Direction") }}</span>
                 </b-button>
               </b-col>
             </b-row>
@@ -63,7 +107,7 @@
 
 <script>
 export default {
-  props: ['businesses'],
+  props: ["businesses", "title", "image"],
 
   data() {
     return {
@@ -73,30 +117,33 @@ export default {
         perPage: 1,
         pagination: false,
 
-        type: 'loop',
+        type: "loop",
         perMove: 1,
       },
     };
   },
   computed: {
     activeAccount() {
-      return this.$store.getters['auth/profilConnected'];
+      return this.$store.getters["auth/profilConnected"];
     },
   },
   methods: {
     cta(data) {
       console.log(data);
-      this.$store.commit('businessChat/setSelectedChat', data);
+      this.$store.commit("businessChat/setSelectedChat", data);
 
-      let path = '';
-      if (this.activeAccount.user_type == 'business') {
-        path = '/business_owner/' + this.activeAccount.id;
-      } else if (this.activeAccount.user_type == 'network') {
-        path = '/';
-      } else path = '/messaging';
+      let path = "";
+      if (this.activeAccount.user_type == "business") {
+        path = "/business_owner/" + this.activeAccount.id;
+      } else if (this.activeAccount.user_type == "network") {
+        path = "/";
+      } else path = "/messaging";
 
       // this.$router.push({ path: `${path}`, query: { tabId: 1, msgTabId: 1 } });
-      this.$router.push({ path: `/business_owner/${this.activeAccount.id}`, query: { tabId: 1, msgTabId: 1 } });
+      this.$router.push({
+        path: `/business_owner/${this.activeAccount.id}`,
+        query: { tabId: 1, msgTabId: 1 },
+      });
     },
   },
 };
@@ -160,60 +207,60 @@ export default {
   }
 
   .s-button {
-    padding: 15px;
-    margin-top: -15px;
-  }
-
-  .title {
-    font-size: 16px;
-    color: black;
-
     line-height: 35px;
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
+}
 
-  .textt {
-    color: #000;
+.title {
+  font-size: 16px;
+  color: black;
 
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-weight: normal;
-    font-size: 14px;
-    line-height: 30px;
-    color: rgba(117, 114, 128, 1);
-    text-align: left;
+  line-height: 35px;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
 
-    font-weight: normal;
-    line-height: 20px;
-    font-style: normal;
+.textt {
+  color: #000;
 
-    padding: 1px;
-    text-align: left;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 30px;
+  color: rgba(117, 114, 128, 1);
+  text-align: left;
 
-    margin-left: -30px;
+  font-weight: normal;
+  line-height: 20px;
+  font-style: normal;
 
-    margin-right: -5px;
+  padding: 1px;
+  text-align: left;
 
-    line-height: 25px;
-  }
+  margin-left: -30px;
 
-  .location {
-    margin-bottom: 30px;
-  }
+  margin-right: -5px;
 
-  .btn {
-    padding-top: 6px;
-    font-size: 10px;
+  line-height: 25px;
+}
 
-    height: 28px;
-    width: 85px;
-  }
+.location {
+  margin-bottom: 30px;
+}
 
-  .r-image {
-    border-radius: 8px;
+.btn {
+  padding-top: 6px;
+  font-size: 10px;
 
-    height: 100px;
-    width: 100px;
-  }
+  height: 28px;
+  width: 85px;
+}
+
+.r-image {
+  border-radius: 8px;
+
+  height: 100px;
+  width: 100px;
 }
 
 @media only screen and (min-width: 768px) {
@@ -222,13 +269,13 @@ export default {
     color: black;
 
     line-height: 35px;
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 
   .textt {
     color: #000;
 
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;

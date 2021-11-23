@@ -3,7 +3,13 @@
     <navbar />
 
     <div class="container-fluid lynetowrk" style="margin-top: -30px">
-      <ly-tab v-model="selectedId" :items="items" :options="options" @change="handleChange"> </ly-tab>
+      <ly-tab
+        v-model="selectedId"
+        :items="items"
+        :options="options"
+        @change="handleChange"
+      >
+      </ly-tab>
       <hr class="d-none d-md-block" />
     </div>
 
@@ -14,7 +20,11 @@
             <Parent />
           </b-col>
 
-          <b-col lg="7" xl="8" class="order-sm-0 mt-sm-10 mt-md-10 mt-xl-0 marg-tap">
+          <b-col
+            lg="7"
+            xl="8"
+            class="order-sm-0 mt-sm-10 mt-md-10 mt-xl-0 marg-tap"
+          >
             <Default />
           </b-col>
         </b-row>
@@ -48,10 +58,10 @@
     <Footer />
     <p class="text-center">
       <span class="display-inline">
-        <b-link @click="$i18n.locale = 'en'"> {{ $t('auth.english') }}</b-link>
+        <b-link @click="$i18n.locale = 'en'"> {{ $t("auth.english") }}</b-link>
         <span class="vl"></span>
         <b-link class="ml-2" @click="$i18n.locale = 'fr'">
-          {{ $t('auth.french') }}
+          {{ $t("auth.french") }}
         </b-link>
       </span>
       Bridge Africa © 2021
@@ -60,19 +70,19 @@
 </template>
 
 <script>
-import navbar from '@/components/navbar';
-import Footer from '@/components/footer';
-import Default from '@/components/businessf/tabs/owner/networks/defaultNetworks';
+import navbar from "@/components/navbar";
+import Footer from "@/components/footer";
+import Default from "@/components/businessf/tabs/owner/networks/defaultNetworks";
 
-import Inbox from '@/components/businessf/tabs/owner/networks/inbox';
-import General from '@/components/businessf/tabs/owner/networks/general';
+import Inbox from "@/components/businessf/tabs/owner/networks/inbox";
+import General from "@/components/businessf/tabs/owner/networks/general";
 
-import LyTab from '@/tab/src/index.vue';
+import LyTab from "@/tab/src/index.vue";
 
-import Parent from '@/components/businessf/tabs/owner/networks/parent';
+import Parent from "@/components/businessf/tabs/owner/networks/parent";
 
 export default {
-  name: 'networks',
+  name: "networks",
   components: {
     General,
 
@@ -90,20 +100,20 @@ export default {
       bottomSelectedId: 0,
 
       items: [
-        { label: this.$t('network.Home'), icon: ' ' },
+        { label: this.$t("network.Home"), icon: " " },
 
-        { label: this.$t('network.Inbox'), icon: ' ' },
-        { label: this.$t('network.Notification'), icon: '' },
-        { label: this.$t('network.Member_Request'), icon: '' },
-        { label: this.$t('network.Pending_Post'), icon: '' },
+        { label: this.$t("network.Inbox"), icon: " " },
+        { label: this.$t("network.Notification"), icon: "" },
+        { label: this.$t("network.Member_Request"), icon: "" },
+        { label: this.$t("network.Pending_Post"), icon: "" },
 
-        { label: this.$t('network.Keyword_Alert'), icon: '' },
+        { label: this.$t("network.Keyword_Alert"), icon: "" },
 
-        { label: this.$t('network.Settings'), icon: '' },
+        { label: this.$t("network.Settings"), icon: "" },
       ],
 
       options: {
-        activeColor: '#32a400',
+        activeColor: "#32a400",
       },
     };
   },

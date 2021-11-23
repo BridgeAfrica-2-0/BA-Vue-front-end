@@ -14,42 +14,84 @@
             </b-col>
             <b-col md="7" cols="7" lg="5" sm="5">
               <p class="textt">
-                <strong class="title"> {{ $t('search.Super_Car_ltd') }} </strong> <br />
-                {{ $t('search.Car_marketing') }}
+                <strong class="title">
+                  {{ $t("search.Super_Car_ltd") }}
+                </strong>
                 <br />
-                {{ $t('search.20k_Community') }} <br />
+                {{ $t("search.Car_marketing") }}
+                <br />
+                {{ $t("search.20k_Community") }} <br />
 
                 <span class="location">
-                  <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{ $t('search.Douala_cameroon') }}
+                  <b-icon-geo-alt class="ico"></b-icon-geo-alt>
+                  {{ $t("search.Douala_cameroon") }}
                 </span>
                 <br />
 
-                super best car seller in the world adipisicing elit. lorem epsep this is
-                <b-link>{{ $t('search.Read_More') }}</b-link>
+                super best car seller in the world adipisicing elit. lorem epsep
+                this is
+                <b-link>{{ $t("search.Read_More") }}</b-link>
               </p>
             </b-col>
 
             <b-col lg="4" md="12" xl="4" cols="12" sm="4">
               <div class="s-button">
                 <b-row>
-                  <b-col md="4" lg="12" xl="12" sm="12" cols="4" class="mt-2 text-center">
-                    <b-button block size="sm" class="b-background shadow" variant="primary">
+                  <b-col
+                    md="4"
+                    lg="12"
+                    xl="12"
+                    sm="12"
+                    cols="4"
+                    class="mt-2 text-center"
+                  >
+                    <b-button
+                      block
+                      size="sm"
+                      class="b-background shadow"
+                      variant="primary"
+                    >
                       <i class="fas fa-user-plus fa-lg btn-icon"></i>
-                      <span class="btn-com">{{ $t('search.Community') }}</span>
+                      <span class="btn-com">{{ $t("search.Community") }}</span>
                     </b-button>
                   </b-col>
 
-                  <b-col md="4" lg="12" xl="12" sm="12" cols="4" class="mt-2 text-center">
-                    <b-button block size="sm" class="b-background shadow" variant="primary" @click="bussinessOwnerMsg">
+                  <b-col
+                    md="4"
+                    lg="12"
+                    xl="12"
+                    sm="12"
+                    cols="4"
+                    class="mt-2 text-center"
+                  >
+                    <b-button
+                      block
+                      size="sm"
+                      class="b-background shadow"
+                      variant="primary"
+                      @click="bussinessOwnerMsg"
+                    >
                       <i class="fas fa-envelope fa-lg btn-icon"></i>
-                      <span class="btn-text">{{ $t('search.Message') }}</span>
+                      <span class="btn-text">{{ $t("search.Message") }}</span>
                     </b-button>
                   </b-col>
 
-                  <b-col md="4" lg="12" xl="12" sm="12" cols="4" class="mt-2 text-center">
-                    <b-button block size="sm" class="b-background shadow" variant="primary">
+                  <b-col
+                    md="4"
+                    lg="12"
+                    xl="12"
+                    sm="12"
+                    cols="4"
+                    class="mt-2 text-center"
+                  >
+                    <b-button
+                      block
+                      size="sm"
+                      class="b-background shadow"
+                      variant="primary"
+                    >
                       <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
-                      <span class="btn-text">{{ $t('search.Direction') }}</span>
+                      <span class="btn-text">{{ $t("search.Direction") }}</span>
                     </b-button>
                   </b-col>
                 </b-row>
@@ -64,7 +106,7 @@
 
 <script>
 export default {
-  props: ['title', 'image'],
+  props: ["title", "image"],
 
   data() {
     return {
@@ -73,25 +115,25 @@ export default {
         autoplay: true,
         perPage: 1,
         width: 800,
-        height: '17rem',
-        gap: '1rem',
-        type: 'loop',
+        height: "17rem",
+        gap: "1rem",
+        type: "loop",
         perMove: 1,
         pagination: false,
 
         margin: {
-          right: '5rem',
-          left: '5rem',
+          right: "5rem",
+          left: "5rem",
         },
 
         breakpoints: {
           760: {
             perPage: 1,
-            gap: '1rem',
+            gap: "1rem",
           },
           1500: {
             perPage: 1,
-            gap: '1rem',
+            gap: "1rem",
           },
         },
       },
@@ -100,8 +142,8 @@ export default {
   computer: {
     chatSelected() {
       return {
-        type: 'business',
-        biz: '2',
+        type: "business",
+        biz: "2",
       };
     },
   },
@@ -109,7 +151,11 @@ export default {
   methods: {
     cta_business() {
       this.$store
-        .dispatch('businessChat/cta_business', { receiverId: 4, name: '135woods ed...', type: 'business' })
+        .dispatch("businessChat/cta_business", {
+          receiverId: 4,
+          name: "135woods ed...",
+          type: "business",
+        })
         .then((res) => {
           console.log(res);
         })
@@ -119,17 +165,17 @@ export default {
     },
     getChatList() {
       this.$store
-        .dispatch('businessChat/GET_BIZS_CHAT_LIST', { type: 'business' })
+        .dispatch("businessChat/GET_BIZS_CHAT_LIST", { type: "business" })
         .then(() => {
-          console.log('->[Data logged]<-');
+          console.log("->[Data logged]<-");
         })
-        .catch(() => console.log('error'));
+        .catch(() => console.log("error"));
     },
 
     async bussinessOwnerMsg() {
       this.cta_business();
       await this.getChatList();
-      this.$router.push({ path: '/business_owner/2', query: { tabId: 1 } });
+      this.$router.push({ path: "/business_owner/2", query: { tabId: 1 } });
     },
   },
 };
@@ -202,13 +248,13 @@ export default {
     color: black;
 
     line-height: 35px;
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 
   .textt {
     color: #000;
 
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 12px;
     line-height: 30px;
@@ -255,13 +301,13 @@ export default {
     color: black;
 
     line-height: 35px;
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 
   .textt {
     color: #000;
 
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;

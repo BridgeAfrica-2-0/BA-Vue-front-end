@@ -1,7 +1,6 @@
 .DS_Store
 node_modules
 /dist
-.vs
 
 
 # local env files
@@ -18,6 +17,7 @@ pnpm-debug.log*
 # Editor directories and files
 .idea
 .vscode
+.vs/
 *.suo
 *.ntvs*
 *.njsproj
@@ -26,3 +26,4 @@ pnpm-debug.log*
 yarn.lock
 package-lock.json
 yarn.lock
+src/components/Navbar.vue

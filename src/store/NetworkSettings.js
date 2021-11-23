@@ -88,7 +88,7 @@ export default {
       return axios.get("/network/roles/list")
       .then(({ data }) => {
         commit("setroles", data.data);
-        console.log(data);
+        console.log("ROLES",data);
         console.log("roles data");
       });
     },

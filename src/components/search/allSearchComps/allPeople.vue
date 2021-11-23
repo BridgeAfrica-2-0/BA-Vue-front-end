@@ -1,11 +1,11 @@
 <template>
   <div>
     <div class="">
-      <b-spinner v-if="loader" variant="primary" :label="$t('search.Spinning')"></b-spinner>
+      <b-spinner v-if="loader" variant="primary" label="Spinning"></b-spinner>
 
     <b-alert v-if="users.total == 0" show variant="warning"
       ><a href="#" class="alert-link">
-        {{$t("search.No_data_available_for_that_search")}}!
+        No data available for that search!
       </a></b-alert
     >
       <div class="people-style border shadow" v-for="(user, index) in users.data.data"
@@ -46,7 +46,7 @@
                         xl="12"
                         class="mt-3 mt-lg-1 mt-xl-0"
                       >
-                        <h6 class="follower text">{{$t("search.5K_Community")}}</h6>
+                        <h6 class="follower text">5K Community</h6>
                       </b-col>
                     </b-row>
                   </div>
@@ -71,7 +71,7 @@
                           @click="cta_business(user.user)"
                         >
                           <i class="fas fa-envelope   fa-lg btn-icon "></i>
-                          <span class="btn-text">{{$t("search.Message")}}</span>
+                          <span class="btn-text">Message</span>
                         </b-button>
                       </b-col>
 
@@ -90,7 +90,7 @@
                           variant="primary"
                         >
                           <i class="fas fa-user-plus  fa-lg btn-icon "></i>
-                          <span class="btn-com">{{$t("search.Community")}}</span>
+                          <span class="btn-com">Community</span>
                         </b-button>
                       </b-col>
                     </b-row>

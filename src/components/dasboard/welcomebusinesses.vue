@@ -1,6 +1,10 @@
 <template>
   <div>
-    <div v-for="value in business_around" v-bind:key="value.name" class="people-style shadow">
+    <div
+      v-for="value in business_around"
+      v-bind:key="value.name"
+      class="people-style shadow"
+    >
       <b-row>
         <b-col md="4" xl="3" lg="3" cols="5" sm="3">
           <div class="center-img">
@@ -16,12 +20,15 @@
             <strong> {{ value.name }} </strong>
           </div>
           <p class="textt">
-            <span v-for="cat in value.category" :key="cat.name"> {{ cat.name }} </span>
+            <span v-for="cat in value.category" :key="cat.name">
+              {{ cat.name }}
+            </span>
             <br />
-            {{ count(value.followers) }} {{ $t('dashboard.Community') }} <br />
+            {{ count(value.followers) }} {{ $t("dashboard.Community") }} <br />
 
             <span class="location">
-              <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{ $t('dashboard.Douala') }} {{ $t('dashboard.Cameroon') }}
+              <b-icon-geo-alt class="ico"></b-icon-geo-alt>
+              {{ $t("dashboard.Douala") }} {{ $t("dashboard.Cameroon") }}
             </span>
             <br />
 
@@ -40,7 +47,14 @@
         <b-col lg="12" xl="4" md="12" cols="12" sm="4">
           <div class="s-button">
             <b-row>
-              <b-col md="4" lg="4" xl="12" sm="12" cols="4" class="mt-2 text-center">
+              <b-col
+                md="4"
+                lg="4"
+                xl="12"
+                sm="12"
+                cols="4"
+                class="mt-2 text-center"
+              >
                 <b-button
                   block
                   size="sm"
@@ -49,22 +63,52 @@
                   variant="primary"
                   @click="handleFollow(value)"
                 >
-                  <i class="fas fa-lg btn-icon" :class="value.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"></i>
-                  <span class="btn-com">{{ $t('dashboard.Community') }}</span>
+                  <i
+                    class="fas fa-lg btn-icon"
+                    :class="
+                      value.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'
+                    "
+                  ></i>
+                  <span class="btn-com">{{ $t("dashboard.Community") }}</span>
                 </b-button>
               </b-col>
 
-              <b-col md="4" lg="4" xl="12" sm="12" cols="4" class="mt-2 text-center">
-                <b-button block size="sm" class="b-background shadow" variant="primary" @click="cta_business(value)">
+              <b-col
+                md="4"
+                lg="4"
+                xl="12"
+                sm="12"
+                cols="4"
+                class="mt-2 text-center"
+              >
+                <b-button
+                  block
+                  size="sm"
+                  class="b-background shadow"
+                  variant="primary"
+                  @click="cta_business(value)"
+                >
                   <i class="fas fa-envelope fa-lg btn-icon"></i>
-                  <span class="btn-text">{{ $t('dashboard.Message') }}</span>
+                  <span class="btn-text">{{ $t("dashboard.Message") }}</span>
                 </b-button>
               </b-col>
 
-              <b-col md="4" lg="4" xl="12" sm="12" cols="4" class="mt-2 text-center">
-                <b-button block size="sm" class="b-background shadow" variant="primary">
+              <b-col
+                md="4"
+                lg="4"
+                xl="12"
+                sm="12"
+                cols="4"
+                class="mt-2 text-center"
+              >
+                <b-button
+                  block
+                  size="sm"
+                  class="b-background shadow"
+                  variant="primary"
+                >
                   <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
-                  <span class="btn-text">{{ $t('dashboard.Direction') }}</span>
+                  <span class="btn-text">{{ $t("dashboard.Direction") }}</span>
                 </b-button>
               </b-col>
             </b-row>
@@ -78,9 +122,9 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 export default {
-  props: ['title', 'image'],
+  props: ["title", "image"],
 
   data() {
     return {
@@ -92,7 +136,7 @@ export default {
 
         pagination: false,
 
-        type: 'loop',
+        type: "loop",
         perMove: 1,
       },
     };
@@ -106,27 +150,30 @@ export default {
   methods: {
     cta_business(data) {
       console.log(data);
-      this.$store.commit('businessChat/setSelectedChat', data);
-      this.$router.push({ path: '/business_owner/2', query: { tabId: 1, msgTabId: 1 } });
+      this.$store.commit("businessChat/setSelectedChat", data);
+      this.$router.push({
+        path: "/business_owner/2",
+        query: { tabId: 1, msgTabId: 1 },
+      });
     },
 
     count(number) {
       if (number >= 1000000) {
-        return number / 1000000 + 'M';
+        return number / 1000000 + "M";
       }
       if (number >= 1000) {
-        return number / 1000 + 'K';
+        return number / 1000 + "K";
       } else return number;
     },
 
     async handleFollow(user) {
-      document.getElementById('followbtn' + user.id).disabled = true;
+      document.getElementById("followbtn" + user.id).disabled = true;
 
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
         id: user.id,
-        type: 'business',
+        type: "business",
       };
 
       await axios
@@ -134,16 +181,16 @@ export default {
         .then((response) => {
           console.log(response);
           user.is_follow = nextFollowState;
-          document.getElementById('followbtn' + user.id).disabled = false;
+          document.getElementById("followbtn" + user.id).disabled = false;
         })
         .catch((err) => {
           console.log(err);
-          document.getElementById('followbtn' + user.id).disabled = false;
+          document.getElementById("followbtn" + user.id).disabled = false;
         });
     },
 
     async infiniteHandler($state) {
-      let url = 'business/around?page=' + this.page;
+      let url = "business/around?page=" + this.page;
 
       console.log(url);
 
@@ -244,13 +291,13 @@ export default {
     color: black;
 
     line-height: 35px;
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 
   .textt {
     color: #000;
 
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 12px;
     line-height: 30px;
@@ -297,13 +344,13 @@ export default {
     color: black;
 
     line-height: 35px;
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 
   .textt {
     color: #000;
 
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;

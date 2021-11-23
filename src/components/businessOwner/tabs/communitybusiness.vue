@@ -271,7 +271,7 @@ export default {
 
     font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: normal;
-    font-size: 12px;
+    font-size: 14px;
     line-height: 30px;
     color: rgba(117, 114, 128, 1);
     text-align: left;
@@ -349,9 +349,9 @@ export default {
 
   .btn {
     padding-top: 6px;
-
     height: 38px;
     width: 123px;
+    font-size: 14px;
   }
 
   .r-image {
@@ -424,8 +424,6 @@ export default {
     background-clip: border-box;
     border: 1px solid rgba(0, 0, 0, 0.125);
     margin-bottom: 10px;
-    margin-right: -8px;
-    margin-left: -8px;
 
     padding: 7px;
   }
@@ -444,6 +442,26 @@ export default {
 @media only screen and (max-width: 520px) {
   .btn {
     display: flex;
+  }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1265px) {
+  .textt {
+    color: #000;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 30px;
+    color: rgba(117, 114, 128, 1);
+    text-align: left;
+    font-weight: normal;
+    line-height: 20px;
+    font-style: normal;
+    padding: 1px;
+    text-align: left;
+    margin-left: 55px;
+    margin-right: -5px;
+    line-height: 25px;
   }
 }
 </style>

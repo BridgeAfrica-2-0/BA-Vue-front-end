@@ -46,9 +46,12 @@ import dashboard from "@/views/dashboard";
 
 import businessordersdetail from "@/views/businessordersdetail"
 
+import card from "@/views/card";
 import myorders from "@/views/myOders"
 import notFound from "@/components/404"
-import card from "@/views/card";
+
+
+
 import welcome from "@/views/welcome";
 
 import ordersdetail from "@/views/odersDetail";

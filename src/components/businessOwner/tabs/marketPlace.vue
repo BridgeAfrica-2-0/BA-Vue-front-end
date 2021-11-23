@@ -1,20 +1,25 @@
 <template>
   <div>
-    <div class="products ">
+    <div class="products">
       <!-- MARKET HEADER BAR -->
       <div class="col-12 d-flex align-items-center justify-content-between">
         <p>
           <b-icon font-scale="1.8" icon="shop" variant="primary" class="mr-2"></b-icon>
           <span class="font-weight-bold">Market</span>
         </p>
-        <b-button variant="outline-primary" @click="createProduct">Add Product</b-button>
+        <div>
+          <b-button variant="outline-primary" @click="createProduct">Add Product</b-button>
+          <b-button variant="primary" @click="isShowOrders = !isShowOrders" class="ml-3"
+            ><span v-if="!isShowOrders">My Orders</span> <span v-else>Market</span></b-button
+          >
+        </div>
       </div>
       <div class="col-12">
         <hr class="h-divider" />
       </div>
 
       <!-- MARKET PRODUCT LIST -->
-      <div class="col-md-6" v-for="(product, index) in products" :key="index">
+      <div v-show="!isShowOrders" class="col-md-6" v-for="(product, index) in products" :key="index">
         <Product :product="product" />
       </div>
       <b-col v-if="loader" class="load">
@@ -23,6 +28,9 @@
       <b-col class="my-4 load" v-if="products.length < 1 && !loader">
         <p>No Products in Market !!</p>
       </b-col>
+      <div v-if="isShowOrders" class="col-12 orders">
+        <Orders />
+      </div>
     </div>
 
     <button class="order-button" @click="displayOrders">my orders</button>
@@ -212,6 +220,7 @@ export default {
         { name: 'Javascript', code: 'js' },
         { name: 'Open Source', code: 'os' },
       ],
+      isShowOrders: false,
     };
   },
   computed: {
@@ -339,6 +348,9 @@ export default {
 </script>
 
 <style scoped>
+.orders{
+  margin: 0 auto;
+}
 .order-button {
   height: 40px;
   color: white;

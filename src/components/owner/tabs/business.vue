@@ -1,20 +1,22 @@
 <template>
   <div>
+
     <div class="people-style shadow" v-for="item in businesses" :key="item.id">
       <b-row>
         <b-col md="3" xl="5" lg="5" cols="5" sm="3">
           <div class="center-img">
             <splide :options="options" class="r-image">
               <splide-slide>
-                <img :src="item.picture" class="r-image" />
+                <img :src="item.picture" class="r-image" />  
               </splide-slide>
             </splide>
-          </div>
+          </div>    
         </b-col>
         <b-col md="5" cols="7" lg="7" xl="7" sm="5">
           <p class="textt">
             <strong class="title"> {{ item.name }}</strong> <br />
-            {{ item.category }}
+           
+            <span v-for="cat in item.category" :key="cat.name">   {{cat.name}}  </span>
             <br />
             {{ count(item.followers) }} {{ $t('profileowner.Community') }} <br />
 
@@ -36,17 +38,32 @@
           <div class="s-button">
             <b-row>
               <b-col md="12" lg="4" xl="4" sm="12" cols="4" class="mt-2 text-center">
+               
+
+
+
+
+
                 <b-button
                   block
+                   class="b-background shadow"
                   size="sm"
-                  class="b-background shadow"
+                  :disabled="disable"
                   :class="item.is_follow !== 0 && 'u-btn'"
                   variant="primary"
+                  :id="'followbtn'+item.id"
                   @click="handleFollow(item)"
+                
                 >
-                  <i class="fas fa-user-plus  fa-lg btn-icon "></i>
-                  <span class="btn-com">{{ $t('profileowner.Community') }}</span>
-                </b-button>
+                 
+                  <i class="fas fa-lg btn-icon" :class="item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"></i>
+                  <span class="btn-com"> {{ $t('dashboard.Community') }}</span>
+                </b-button>   
+
+
+
+
+
               </b-col>
 
               <b-col md="12" lg="4" xl="4" sm="12" cols="4" class="mt-2 text-center">
@@ -107,10 +124,7 @@ export default {
     };
   },
 
-  mounted() {
-    this.biz_id = this.$route.params.id !== undefined ? this.$route.params.id : this.$router.push('notFound'); //! need some review
-    // this.biz_id = this.$route.params.id !== undefined ? this.$route.params.id : 1; //! need some review
-  },
+ 
 
   computed: {
     old_businesses() {
@@ -135,8 +149,8 @@ export default {
     infiniteHandler($state) {
       const url =
         this.type === 'Follower'
-          ? `profile/business/follower/${this.biz_id}/`
-          : `profile/business/following/${this.biz_id}/`;
+          ? `profile/business/follower/`
+          : `profile/business/following/`;
 
       axios
         .get(url + this.page)
@@ -164,9 +178,13 @@ export default {
         .catch(err => {
           console.log({ err: err });
         });
-    },
+    },       
 
-    async handleFollow(user) {
+   
+     async handleFollow(user) {
+
+      document.getElementById("followbtn"+user.id).disabled = true;
+       
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
@@ -177,10 +195,22 @@ export default {
       await axios
         .post(uri, data)
         .then(response => {
+
+          console.log(response);
           user.is_follow = nextFollowState;
+         document.getElementById("followbtn"+user.id).disabled = false;
+            
         })
-        .catch(err => console.log(err));
+        .catch(err =>{  
+          
+          console.log(err)  ;
+           document.getElementById("followbtn"+user.id).disabled =  false;
+          
+        });
+         
     },
+
+
   },
 };
 </script>

@@ -79,6 +79,7 @@
                           class="b-background flexx pobtn shadow"
                           :class="value.is_follow !== 0 && 'u-btn'"
                           variant="primary"
+                           :id="'followbtn'+value.id"
                           @click="handleFollow(value)"
                         >
 
@@ -112,6 +113,7 @@ export default {
    data() {
     return {
       page: 1,
+      people_around:[],
       options: {
         rewind: true,
         autoplay: true,
@@ -126,7 +128,7 @@ export default {
   },
 
   computed: {
-    people_around() {
+    old_people_around() {
       return this.$store.state.auth.peopleAround;
     }
   },
@@ -145,6 +147,9 @@ export default {
 
 
     async handleFollow(user) {
+      
+      console.log("yoo ma gee");
+       document.getElementById("followbtn"+user.id).disabled = true;
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
@@ -154,13 +159,19 @@ export default {
 
       await axios
         .post(uri, data)
-        .then(response => {
-          console.log(response);
+        .then(({ data }) => {
+          console.log(data);
           user.is_follow = nextFollowState;
+           document.getElementById("followbtn"+user.id).disabled = false;
         })
-        .catch(err => console.log({err:err}));
+         
+          .catch((err) =>{  
+          
+          console.log({err:err})  ;
+           document.getElementById("followbtn"+user.id).disabled =  false;
+          
+        });
     },
-
 
 
 

@@ -19,7 +19,17 @@
             <br />
            {{ item.followers }} {{ $t('profileowner.Community') }}<br />
 
-           {{ item.about_network }} <b-link>{{ $t('profileowner.Read_More') }}</b-link>
+        
+
+            <read-more
+              more-str="read more"
+              class="readmore"
+              :text="item.about_network"
+              link="#"
+              less-str="read less"
+              :max-chars="100"
+            >
+            </read-more>
           </p>
         </b-col>
 
@@ -32,10 +42,14 @@
                   size="sm"
                   class="b-background shadow"
                   :class="item.is_follow !== 0 && 'u-btn'"
+                   :id="'followbtn'+item.id"
                   variant="primary"
                   @click="handleFollow(item)"
                 >
-                  <i class="fas fa-user-plus  fa-lg btn-icon "></i>
+                 <i
+                            class="fas fa-lg btn-icon"
+                            :class="item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"
+                          ></i>
                   <span class="btn-com">{{ $t('profileowner.Community') }}</span>
                 </b-button>
               </b-col>
@@ -71,7 +85,6 @@ export default {
   data() {
     return {
       page: 1,
-      biz_id: null,
       network: [],
       options: {
         rewind: true,
@@ -86,13 +99,7 @@ export default {
   },
 
   computed: {
-    old_network() {
-      if (this.type == 'Follower') {
-        return this.$store.state.businessOwner.NcommunityFollower.network_followers;
-      } else {
-        return this.$store.state.profile.NcommunityFollowing.network_following;
-      }
-    },
+  
   },
 
   methods: {
@@ -101,8 +108,8 @@ export default {
 
       const url =
         this.type === 'Follower'
-          ? `profile/network/follower/${this.biz_id}/`
-          : `profile/network/following/${this.biz_id}/`;
+          ? `profile/network/follower/`
+          : `profile/network/following/`;
 
       axios
         .get(url + this.page)
@@ -136,6 +143,7 @@ export default {
     },
 
     async handleFollow(user) {
+       document.getElementById("followbtn"+user.id).disabled = true;
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
@@ -147,8 +155,11 @@ export default {
         .post(uri, data)
         .then(response => {
           user.is_follow = nextFollowState;
+           document.getElementById("followbtn"+user.id).disabled =  false;
         })
-        .catch(err => console.log(err));
+        .catch(err =>{   console.log(err)
+         document.getElementById("followbtn"+user.id).disabled =  false;
+        });
     },
   },
 };

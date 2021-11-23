@@ -312,7 +312,7 @@ computed: {
 
 .btns {
   margin-left: 670px;
-  margin-top: -80px;
+ 
 }
 
 .options {

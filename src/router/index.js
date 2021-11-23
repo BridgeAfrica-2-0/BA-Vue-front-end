@@ -33,9 +33,9 @@ import forgotPassword from "@/views/forgotPassword";
 import navMessage from "@/views/navMessaging";
 import Blec from "@/views/blec";
 import memberNetworkFollower from "@/views/memberNetworkFollower";
-import govx from "@/views/test";
+
 import networkEditors from "@/views/networkEditors";
-// import Test from "@/views/test";
+
 import templateView from "@/views/templateView";
 import webSiteCreate from "@/views/webSiteCreate";
 import webSiteCreateTwo from "@/views/webSiteCreateTwo";
@@ -44,6 +44,7 @@ import confirmPayment from "@/views/confirmPayment";
 import networks from "@/views/networks";
 import dashboard from "@/views/dashboard";
 
+import card from "@/views/card";
 import myorders from "@/views/myOders"
 import notFound from "@/components/404"
 
@@ -94,11 +95,7 @@ const routes = [{
 },
 
 
-{
-  path: "/govx",
-  name: "govx",
-  component: govx,
-},
+
 
 {
   path: "/welcome",

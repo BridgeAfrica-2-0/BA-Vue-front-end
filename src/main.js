@@ -98,9 +98,9 @@ import Lightbox from '@morioh/v-lightbox';
 import * as VueGoogleMaps from 'gmap-vue';
 
 
-import VueSplide from "@splidejs/vue-splide";
-Vue.use(VueSplide);
-import "@splidejs/splide/dist/css/themes/splide-default.min.css";
+ import VueSplide from "@splidejs/vue-splide";
+ Vue.use(VueSplide);
+ import "@splidejs/splide/dist/css/themes/splide-default.min.css";
 
 
 // global register
@@ -148,13 +148,13 @@ Vue.use(VueGoogleMaps, {
   installComponents: true,
 });
 
-import VueLoading from 'vue-loading-overlay';
-import 'vue-loading-overlay/dist/vue-loading.css';
+//  import VueLoading from 'vue-loading-overlay';
+//  import 'vue-loading-overlay/dist/vue-loading.css';
 
 import VueYoutube from 'vue-youtube'
 
 Vue.use(VueYoutube)
-Vue.use(VueLoading);
+//  Vue.use(VueLoading);
 
 import VueAgile from 'vue-agile';
 
@@ -187,6 +187,11 @@ new Vue({
   i18n,
   created() {
     const userInfo = localStorage.getItem('user');
+    i18n.locale = localStorage.getItem('lang'); 
+    
+
+    console.log( i18n.locale );
+    
     if (userInfo) {
       const userData = JSON.parse(userInfo);
       user = userData;
@@ -195,9 +200,13 @@ new Vue({
     axios.interceptors.response.use(
       response => response,
       error => {
-        if (error.response.status === 401) {
-          // this.$store.dispatch('auth/logout');
+        if (error.response) {
+          if (error.response.status === 401) {
+           this.$store.dispatch('auth/logout');
           console.log('error has ocurred', error);
+
+
+          }
         }
         return Promise.reject(error);
       },
@@ -207,6 +216,11 @@ new Vue({
       if (user != null) {
         config.headers.Authorization = `Bearer  ${user.accessToken}`;
       }
+
+      
+    
+      config.headers.common['Language'] =  i18n.locale;
+    
       return config;
     });
   },

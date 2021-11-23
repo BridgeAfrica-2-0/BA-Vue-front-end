@@ -67,7 +67,10 @@ class Repository {
 
   async switch(uuid, type = "network") {
     try {
-      const response = ("network" == type) ? await axios.post(`switch`, { networkId: uuid }) : (uuid) ? await axios.post(`switch?id=${uuid}`) : await axios.post(`switch`)
+      const response = ("network" == type) 
+      ? await axios.post(`switch`, { networkId: uuid }) 
+      : (uuid) ? await axios.post(`switch?id=${uuid}`) : await axios.post(`switch`)
+      
       return {
         success: true,
         data: response.data.message

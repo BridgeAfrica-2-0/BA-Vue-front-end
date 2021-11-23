@@ -1,7 +1,14 @@
 <template>
   <div>
-    <b-card class="border shadow " style="height:300px">
-      <span>
+
+
+
+    
+
+
+
+    <b-card class="border shadow " style="height:300px; ">
+      <span class="">
         <h6 class="mybusi">
           <fas-icon class="icons" :icon="['fas', 'hands-helping']" size="lg" />
           <b> {{ $t('dashboard.My_Businesses') }} </b>  
@@ -22,7 +29,15 @@
             </b-col>
           </b-row>
         </div>
+        
         <Business  :business="business"   v-if="business.lenght !=0" />
+
+
+
+
+
+
+
       </div>
     </b-card>
   </div>
@@ -63,6 +78,7 @@ export default {
 
   .mybusi {
     font-size: 20px;
+    margin-left:20px
   }
 }
 
@@ -104,5 +120,11 @@ export default {
   overflow: auto;
   overflow-x: hidden;
   padding: 15px;
+
+}
+
+.card-body{
+  padding-left: 1px !important;
+    padding-right: 1px !important;
 }
 </style>

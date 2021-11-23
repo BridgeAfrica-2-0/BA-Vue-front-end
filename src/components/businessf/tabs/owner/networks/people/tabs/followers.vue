@@ -9,7 +9,7 @@
           </b-input-group-prepend>
           <b-form-input
             aria-label="Text input with checkbox"
-            placeholder="Search Something"
+            :placeholder="$t('network.Search_Something')"
             type="text"
             class="form-control"
             v-model="searchTitle"
@@ -33,15 +33,16 @@
             </b-card>
           </template>
         <div style="display:none;">{{member['communityNum'] = nFormatter(member.followers)}}</div>
-        <CommunityMembers :member="member" @BlockUser="BlockUser" />
+        <div style="display:none;">{{member['type'] = "user"}}</div>
+        <CommunityMembers :member="member" @BlockUser="BlockUser" @handleFollow="handleFollow" />
         </b-skeleton-wrapper>
       </b-col>
     </b-row>
     <b-row >
       <b-col col="12">
         <infinite-loading @infinite="infiniteHandler">
-          <div class="text-red" slot="no-more">No More Request</div>
-          <div class="text-red" slot="no-results">No More Request</div>
+          <div class="text-red" slot="no-more">{{ $t('network.No_More_Request') }}</div>
+          <div class="text-red" slot="no-results">{{ $t('network.No_More_Request') }}</div>
         </infinite-loading>
       </b-col>
     </b-row>
@@ -161,7 +162,26 @@ export default {
           message: "Unable to blocked User"
         });
       });
-    }
+    },
+
+    async handleFollow(Comdata) {
+      console.log("handleFollow", Comdata)
+      const url = Comdata.is_follow === 0 ? `/follow-community` : `/unfollow`;
+      console.log("uri", url)
+      const nextFollowState = Comdata.is_follow === 0 ? 1 : 0;
+      const data = {
+        id: Comdata.id,
+        type: Comdata.type,
+      };
+
+      await this.axios
+        .post(url, data)
+        .then(response => {
+          console.log("response", response);
+          Comdata.is_follow = nextFollowState;
+        })
+        .catch(err => console.log(err));
+    },
 
   }
 };

@@ -9,11 +9,7 @@
           alt="Cover Image"
         />
         
-         <img  v-if="info.user.cover_picture"
-          :src="info.user.cover_picture"
-          class="img-fluid  banner"
-          alt="Cover Image"
-        />
+        
         <img v-if="info.user.cover_picture" :src="info.user.cover_picture" class="img-fluid banner" alt="Cover Image" />
       </div>
 
@@ -22,7 +18,7 @@
           <b-col cols="12" md="12" class="m-0 p-0 text-left put-top">
             <b-avatar
               v-if="info.user.profile_picture == ''"
-              src="https://placekitten.com/400/300"
+              src=""
               class="avat text-center"
               badge-variant="primary"
               badge-offset="10px"
@@ -98,13 +94,17 @@
                       <b-dropdown-item @click="selectCover"> Change Cover</b-dropdown-item>
 
                       <b-dropdown-item @click="RemoveCover"> Remove cover </b-dropdown-item>
+                       <b-dropdown-item @click="RemoveProfile"> Remove Profile </b-dropdown-item>
+
+
+                      
 
                       <!--
                       <b-dropdown-item
                         >Invite Friends On Bridge Africa</b-dropdown-item
                       >
 -->
-                      <b-dropdown-item>View As</b-dropdown-item>
+                      <b-dropdown-item @click="viewAs" >View As</b-dropdown-item>
                     </b-dropdown>
                   </span>
                 </div>
@@ -382,6 +382,123 @@ export default {
         });
     },
 
+
+viewAs(){
+
+  let id= this.info.user.id;
+
+
+  this.$router.push({ name: "Follower",params: { id:id}  });
+    
+
+},
+
+
+   RemoveProfile(){
+        
+         let loader = this.$loading.show({
+        container: this.fullPage ? null : this.$refs.preview,
+        canCancel: true,
+        onCancel: this.onCancel,
+        color: '#e75c18',
+      });
+
+
+
+
+
+
+       this.axios
+        .get('user/remove-cover')
+        .then((response) => {
+          console.log(response);
+          this.$store
+            .dispatch('profile/loadUserPostIntro', null)
+            .then((response) => {
+              console.log(response);
+              this.flashMessage.show({
+                status: 'success',
+                message: 'profile removed successfully',
+                blockClass: 'custom-block-class',
+              });
+              loader.hide();
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        })
+        .catch((err) => {
+          console.log({ err: err });
+         
+            this.flashMessage.show({
+              status: 'error',
+              message: 'Unable to remove your cover',
+              blockClass: 'custom-block-class',
+            });
+            console.log({ err: err });
+            loader.hide();
+          
+        });
+
+
+
+    },
+
+
+
+
+    RemoveCover(){
+        
+         let loader = this.$loading.show({
+        container: this.fullPage ? null : this.$refs.preview,
+        canCancel: true,
+        onCancel: this.onCancel,
+        color: '#e75c18',
+      });
+
+
+
+
+
+
+       this.axios
+        .get('user/upload-cover')
+        .then((response) => {
+          console.log(response);
+          this.$store
+            .dispatch('profile/loadUserPostIntro', null)
+            .then((response) => {
+              console.log(response);
+              this.flashMessage.show({
+                status: 'success',
+                message: 'Profile removed successfully',
+                blockClass: 'custom-block-class',
+              });
+              loader.hide();
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        })
+        .catch((err) => {
+          console.log({ err: err });
+         
+            this.flashMessage.show({
+              status: 'error',
+              message: 'Unable to remove your cover',
+              blockClass: 'custom-block-class',
+            });
+            console.log({ err: err });
+            loader.hide();
+          
+        });
+
+
+
+    },
+
+
+
     submitCroppedCover() {
       this.cropedImage = this.$refs.cropper.getCroppedCanvas().toDataURL();
       this.$refs.cropper.getCroppedCanvas().toBlob((blob) => {
@@ -502,6 +619,8 @@ export default {
           }
         });
     },
+
+    
   },
 
   mounted() {

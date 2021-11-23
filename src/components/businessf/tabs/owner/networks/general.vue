@@ -46,36 +46,36 @@
       <b-col cols="10">
         <div class="bv-example-row">
           <div>
-            <b-tabs lazy pills v-model="tabIndex" vertical class="itzlala" nav-wrapper-class="w-15">
-              <b-tab title="Notifications">
+            <b-tabs pills v-model="tabIndex" vertical class="itzlala" nav-wrapper-class="w-15">
+              <b-tab :title="$t('network.Notifications')">
                 <b-card-text> <Notification /> </b-card-text
               ></b-tab>
 
-              <b-tab title="General">
+              <b-tab :title="$t('network.General')">
                 <b-card-text> <General /> </b-card-text
               ></b-tab>
 
-              <b-tab title="Network Roles">
+              <b-tab :title="$t('network.Network_Roles')">
                 <b-card-text> <Roles /> </b-card-text
               ></b-tab>
 
-              <b-tab title="Network Info">
+              <b-tab :title="$t('network.Network_Info')">
                 <b-card-text> <Settings /> </b-card-text
               ></b-tab>
 
-              <b-tab title="Member Request">
+              <b-tab :title="$t('network.Member_Request')">
                 <b-card-text> <MemberShip /> </b-card-text
               ></b-tab>
 
-              <b-tab title="Pending Post">
+              <b-tab :title="$t('network.Pending_Post')">
                 <b-card-text> <PendingPost /> </b-card-text
               ></b-tab>
 
-              <b-tab title="Keyword Alert">
+              <b-tab :title="$t('network.Keyword_Alert')">
                 <b-card-text> <KeywordAlert /> </b-card-text
               ></b-tab>
 
-              <b-tab title="Blocking">
+              <b-tab :title="$t('network.Blocking')">
                 <b-card-text> <Blocking /> </b-card-text
               ></b-tab>
             </b-tabs>

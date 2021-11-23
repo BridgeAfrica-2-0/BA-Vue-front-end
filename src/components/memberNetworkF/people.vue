@@ -76,17 +76,12 @@
                         <b-button
                           block
                           size="sm"
-                          class="
-                            b-background
-                            flexx
-                            pobtn
-                            shadow
-                            mr-lg-3 mr-xl-3
-                          "
+                          class="b-background flexx pobtn shadow mr-lg-3 mr-xl-3"
                           variant="primary"
                         >
                           <i class="fas fa-user-plus fa-lg btn-icon"></i>
                           <span class="btn-com">{{ $t('network.Community') }} </span>
+
                         </b-button>
                       </b-col>
                     </b-row>

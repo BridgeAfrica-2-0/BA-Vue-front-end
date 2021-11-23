@@ -24,6 +24,9 @@ import business from "./business";
 import profile from "./profile";
 import networkProfileMembers from "./networkProfileMembers";
 import follower from "./follower";
+import keywordOperationOnNetwork from "./keywordOperationOnNetwork";
+
+
 import networkProfile from "./networkProfile";
 import UserProfileOwner from "./UserProfileOwner"
 import { search } from "./search";
@@ -34,14 +37,13 @@ import networkProfileCommunitySidebar from "./networkProfileCommunitySidebar";
 import networkProfileFeedback from "./networkProfileFeedback";
 import networkProfileMedia from "./networkProfileMedia";
 import networkProfileMemberRequest from "./networkProfileMemberRequest";
+import networkNotification from "./networkNotification";
 import { social } from "./social";
 import { notification } from "./notifications"
 
-// import axios from "axios";
 Vue.use(Vuex);
-
-//  axios.defaults.baseURL = process.env.VUE_APP_API_URL;
-axios.defaults.baseURL = "https://test.maxinemoffett.com/api/v1/";
+ axios.defaults.baseURL = process.env.VUE_APP_API_URL_EDS;
+ axios.defaults.baseURL = "https://test.maxinemoffett.com/api/v1/";
 
 export default new Vuex.Store({
   modules: {
@@ -84,9 +86,8 @@ export default new Vuex.Store({
     networkProfileMedia,
     networkProfileMemberRequest,
     networkProfile,
-    orderBusiness,
+    networkNotification,
     notification
-
   }
 });
 

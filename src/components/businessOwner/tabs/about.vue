@@ -209,7 +209,6 @@
                 :key="filters.id"
                 active
                 ><b-card-text>
-                  <!-- {{filters.filters}} -->
                   <b-form-group label="Filters" class="colorblack">
                     <b-form-checkbox-group
                       id=""

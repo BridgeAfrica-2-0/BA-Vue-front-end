@@ -92,7 +92,7 @@ export default {
     },
 
     getroles({ commit }) {
-      return axios.get("/network/roles/list")
+      return axios.get("/network/roles/show-roles")
       .then(({ data }) => {
         commit("setroles", data.data);
         console.log(data);
@@ -172,6 +172,14 @@ export default {
     },
 
     networkDelete({ commit }, payload) {
+      console.log("payload", payload)
+      return axios.delete(`/network/${payload.path}`)
+      .then(({ data }) => {
+        return data;
+      });
+    },
+
+    deleteEditor({ commit }, payload) {
       console.log("payload", payload)
       return axios.delete(`/network/${payload.path}`)
       .then(({ data }) => {

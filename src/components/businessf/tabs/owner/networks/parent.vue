@@ -316,6 +316,7 @@ export default {
     },
 
     getNetworkInfo() {
+      console.log("getNetworkInfo");
       this.$store
         .dispatch('networkProfile/getnetworkInfo', this.url)
         .then(() => {

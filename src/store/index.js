@@ -39,10 +39,11 @@ import networkProfileMedia from "./networkProfileMedia";
 import networkProfileMemberRequest from "./networkProfileMemberRequest";
 import networkNotification from "./networkNotification";
 import { social } from "./social";
-import { notification } from "./notifications"
+import { notification } from "./notifications";
+import cart from "./cart"
 
 Vue.use(Vuex);
- axios.defaults.baseURL = process.env.VUE_APP_API_URL_EDS;
+ axios.defaults.baseURL = process.env.VUE_APP_API_URL;
  axios.defaults.baseURL = "https://test.maxinemoffett.com/api/v1/";
 
 export default new Vuex.Store({
@@ -86,7 +87,7 @@ export default new Vuex.Store({
     networkProfileMedia,
     networkProfileMemberRequest,
     networkProfile,
-    networkNotification,
+    cart,
     notification
   }
 });

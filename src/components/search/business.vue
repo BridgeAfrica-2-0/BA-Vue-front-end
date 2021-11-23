@@ -1,9 +1,7 @@
 <template>
   <div>
 
-  <b-spinner v-if="prodLoader" variant="primary" label="Spinning"></b-spinner>
-
-<NotFound v-if="!business.data.length && !prodLoader" :title="title" />
+<NotFoundComponent v-if=" !business.data  && !prodLoader" :title="title" />
     <div class="people-style shadow" v-for="biz in business.data" :key="biz.business_id">   
       <b-row>
         <b-col md="3" xl="3" lg="3" cols="5" sm="3">
@@ -23,7 +21,7 @@
             <strong class="title"> {{biz.name}} </strong> <br />
             <span v-for="cat in biz.category" :key="cat.name"> {{cat.name}} </span>
             <br />
-            {{ count( biz.followers) }} Community <br />
+            {{ count( biz.followers) }} {{$t("search.Community")}} <br />
 
             <span class="location">
               <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{ biz.country }}
@@ -60,7 +58,7 @@
                   variant="primary"
                 >
                   <i class="fas fa-user-plus  fa-lg btn-icon "></i>
-                  <span class="btn-com">Community</span>
+                  <span class="btn-com">{{$t("search.Community")}}</span>
                 </b-button>
               </b-col>
 
@@ -79,7 +77,7 @@
                   variant="primary"
                 >
                   <i class="fas fa-envelope   fa-lg btn-icon "></i>
-                  <span class="btn-text">Message</span>
+                  <span class="btn-text">{{$t("search.Message")}}</span>
                 </b-button>
               </b-col>
 
@@ -98,7 +96,7 @@
                   variant="primary"
                 >
                   <i class="fas fa-map-marked-alt  fa-lg btn-icon "></i>
-                  <span class="btn-text">Direction</span>
+                  <span class="btn-text">{{$t("search.Direction")}}</span>
                 </b-button>
               </b-col>
             </b-row>
@@ -124,8 +122,14 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+
+import NotFoundComponent from "@/components/NotFoundComponent";
 export default {
-  props: ["title", "image"],
+  props: [ "image"],
+  components: {
+    NotFoundComponent,
+   
+  },
 
   data() {
     return {
@@ -135,8 +139,8 @@ export default {
       list: [],
       currentPage: 1,
       nextLoad: false,
-     
-
+      title:"No Business Found",  
+      
       options: {
         rewind: true,
         autoplay: true,

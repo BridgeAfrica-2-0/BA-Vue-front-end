@@ -1,11 +1,13 @@
 <template>
   <div>
     <div>
-      <b-spinner v-if="loader" variant="primary" label="Spinning"></b-spinner>
+      <b-spinner v-if="loader" 
+                 variant="primary" 
+                 :label="$t('search.Spinning')"></b-spinner>
 
       <b-alert v-if="posts.total == 0" show variant="warning"
         ><a href="#" class="alert-link">
-          No data available for that search!
+          {{$t("search.No_data_available_for_that_search")}}!
         </a></b-alert
       >
 
@@ -22,7 +24,7 @@
             </b-col>
             <b-col cols="10" md="11" class="pt-2">
               <h5 class="m-0 font-weight-bolder">Blezour Blec</h5>
-              <p class="duration">1h Ago</p>
+              <p class="duration">{{$t("search.1h_Ago")}}</p>
             </b-col>
           </b-row>
           <b-row>

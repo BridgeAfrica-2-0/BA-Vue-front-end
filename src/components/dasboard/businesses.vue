@@ -1,16 +1,64 @@
 <template>
   <div>
-    <b-row>
-      <b-col lg="12" sm="12" class="p-2" v-for="item in business" :key="item.id">
-        <div class="people-style shadow">
-          <b-row>
-            <b-col md="3" xl="3" lg="3" cols="5" sm="3">
-              <div class="center-img">
-                <splide :options="options" class="r-image">
-                  <splide-slide cl>
-                    <img :src="item.picture" class="r-image" />
-                  </splide-slide>
-                </splide>
+   
+
+
+
+        
+
+            
+              <div    v-for="business in business" :key="business.id" class="people-style shadow h-100 ">
+               
+                <div class="d-inline-flex">
+                  <div >
+                    <div class="center-img">
+                      <splide :options="options" class="r-image">
+                        <splide-slide cl>
+                          <img :src="business.logo_path" class="r-image" />
+                        </splide-slide>
+                      </splide>
+                    </div>
+                  </div>
+
+                  <div class="flex80">
+                    <p class="textt text">
+                      <strong class="title">
+                        {{ business.name }}
+                      </strong>
+                      <br />
+                      <span v-if="Array.isArray(business.category)">
+                        <span
+                          class=""
+                          v-for="cat in business.category"
+                          :key="cat.name"
+                        >
+                          {{ cat.name }}
+                        </span>
+                      </span>
+                      <br />
+                      {{ business.community }} {{ $t('profileowner.Community') }} <br />
+
+                      <span class="location">
+                        <b-icon-geo-alt class="ico"></b-icon-geo-alt>
+                        {{ business.city }}
+                        <span v-for="nei in business.neigborhood" :key="nei.id">
+                          {{ nei.name }}
+                        </span>
+                      </span>
+                      <br />
+
+                      <read-more
+                        more-str="read more"
+                        class="readmore"
+                        :text="business.about_business"
+                        link="#"
+                        less-str="read less"
+                        :max-chars="100"
+                      >
+                      </read-more>
+                    </p>
+                  </div>
+                </div>
               </div>
             </b-col>
             <b-col md="5" cols="7" lg="7" xl="5" sm="5">
@@ -87,10 +135,10 @@ export default {
   computed: {
     activeAccount() {
       return this.$store.getters['auth/profilConnected'];
-    }
+    },
   },
   methods: {
-     cta(data) {
+    cta(data) {
       console.log(data);
       this.$store.commit('businessChat/setSelectedChat', data);
       let path = '';
@@ -116,6 +164,9 @@ export default {
 </script>
 
 <style scoped>
+.flex80 {
+  flex-basis: 80% !important;
+}
 @media only screen and (min-width: 768px) {
   .btn-text {
     margin-left: 8px;
@@ -126,10 +177,6 @@ export default {
   }
   .btn-icon {
     margin-top: 3px;
-  }
-
-  .center-img {
-    margin-right: -60px;
   }
 }
 
@@ -194,15 +241,13 @@ export default {
     line-height: 30px;
     color: rgba(117, 114, 128, 1);
     text-align: left;
-
+    margin-left: 3px;
     font-weight: normal;
     line-height: 20px;
     font-style: normal;
 
     padding: 1px;
     text-align: left;
-
-    margin-left: -30px;
 
     margin-right: -5px;
 

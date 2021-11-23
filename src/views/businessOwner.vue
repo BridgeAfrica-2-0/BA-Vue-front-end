@@ -1,38 +1,40 @@
 <template>
   <div class="" style="overflow-y: hidden; padding: 0px">
-    <navbar />
+    <span v-if="isloaded">
+      <navbar />
 
-    <div class="container-fluid">
-      <ly-tab v-model="selectedId" :items="items" :options="options" class="center-ly"> </ly-tab>
+      <div class="container-fluid">
+        <ly-tab v-model="selectedId" :items="items" :options="options" class="center-ly"> </ly-tab>
 
-      <hr width="100%" class="d-none" d-md-block />
-    </div>
+        <hr width="100%" class="d-none" d-md-block />
+      </div>
 
-    <div class="mt-3" v-if="selectedId == '0'">
-      <Business />
-    </div>
+      <div class="mt-3" v-if="selectedId == '0'">
+        <Business />
+      </div>
 
-    <div class="mt-3" v-if="selectedId == '1'">
-      <Inbox />
-    </div>
+      <div class="mt-3" v-if="selectedId == '1'">
+        <Inbox />
+      </div>
 
-    <div class="mt-3" v-if="selectedId == '2'">
-      <Settings v-bind:currenttab="selectedId" />
-    </div>
+      <div class="mt-3" v-if="selectedId == '2'">
+        <Settings v-bind:currenttab="selectedId" />
+      </div>
 
-    <div class="mt-3" v-if="selectedId == '3'">
-      <Settings v-bind:currenttab="selectedId" />
-    </div>
+      <div class="mt-3" v-if="selectedId == '3'">
+        <Settings v-bind:currenttab="selectedId" />
+      </div>
 
-    <div class="mt-3" v-if="selectedId == '4'">
-      <Settings v-bind:currenttab="selectedId" />
-    </div>
+      <div class="mt-3" v-if="selectedId == '4'">
+        <Settings v-bind:currenttab="selectedId" />
+      </div>
 
-    <div class="mt-3" v-if="selectedId == '5'">
-      <Settings v-bind:currenttab="selectedId" />
-    </div>
+      <div class="mt-3" v-if="selectedId == '5'">
+        <Settings v-bind:currenttab="selectedId" />
+      </div>
 
-    <Footer />
+      <Footer />
+    </span>
   </div>
 </template>
 
@@ -66,8 +68,10 @@ export default {
   },
   data() {
     return {
-      selectedId:0,
+      selectedId: 0,
       bottomSelectedId: 0,
+      foll_id: null,
+      isloaded: false,
       url_data: null,
       items: [
         { label: 'Home ', icon: '' },
@@ -81,11 +85,11 @@ export default {
       ],
       options: {
         activeColor: '#1d98bd',
-      }
+      },
     };
   },
-  created(){
-    this.selectedId = this.$route.query.tabId ? this.$route.query.tabId:'0'
+  created() {
+    this.selectedId = this.$route.query.tabId ? this.$route.query.tabId : '0';
   },
 
   methods: {
@@ -143,6 +147,36 @@ export default {
           console.log({ err: err });
         });
     },
+  },
+
+  created() {
+    this.foll_id = this.$route.params.id;
+
+    this.$store
+      .dispatch('businessOwner/roleCheck', this.foll_id)
+      .then((data) => {
+        let role = data.data.data.role;
+        switch (role) {
+          case 'editor':
+            this.$router.push({ name: 'BusinessEditor', params: { id: this.foll_id } });
+            break;
+
+          case 'visitor':
+            this.$router.push({ name: 'BusinessFollower', params: { id: this.foll_id } });
+            break;
+        }
+
+        this.isloaded = true;
+      })
+      .catch((error) => {
+        console.log({ error: error });
+
+        console.log(error.response.status);
+
+        if (error.response.status == 404) {
+          this.$router.push({ name: 'notFound' });
+        }
+      });
   },
 
   mounted() {

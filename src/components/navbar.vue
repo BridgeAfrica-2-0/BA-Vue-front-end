@@ -60,10 +60,9 @@
                   <option value=" Current Location "></option>
                   <option value="Yaounde " />
                 </datalist>
-              </b-input-group>       
-            </span> 
+              </b-input-group>
+            </span>
           </form>
-
           <span class="d-none d-lg-block">
             <form class="form-inline input-group b-shadow b-radius">
               <input
@@ -86,7 +85,7 @@
                 list="browsers"
                 data-toggle="popover"
                 class="form-control search-h"
-                placeholder="Where"
+                placeholder="Where "
                 aria-label="search bridge africa"
                 data-original-title=""
                 title=""
@@ -94,10 +93,10 @@
 
               <datalist id="browsers">
                 <option value=" Current Location "></option>
-                <option value="Yaounde" />
+                <option value="Yaounde " />
               </datalist>
               <slot name="button">
-                <Button />
+                <Button @click.native="getKeyword" />
               </slot>
             </form>
           </span>
@@ -125,11 +124,11 @@
           <div style="float: right">
             <b-collapse id="nav-collapse" is-nav>
               <div class="nav-item">
-                <a class="nav-link text-dark hov" href=""> Home </a>
+                <a @click.prevent="navLink('home')" class="nav-link text-dark hov" href=""> Home </a>
               </div>
 
               <div class="nav-item">
-                <a class="nav-link text-dark hov" href=""> Market </a>
+                <a @click.prevent="navLink('market')" class="nav-link text-dark hov" href=""> Market </a>
               </div>
 
               <div class="nav-item">
@@ -290,113 +289,7 @@
                   ><span class="text-ored"><b-icon-bell-fill class="col-bg"></b-icon-bell-fill></span
                 ></a>
                 <b-popover target="notif" triggers="hover" placement="top">
-                  <div class="popover-body">
-                    <p class="font-weight-bold">Notifications</p>
-                    <hr class="h-divider" />
-
-                    <div
-                      class="
-                        d-inline-flex
-                        flex-row
-                        align-items-center
-                        suggest-item
-                        cursor-pointer
-                      "
-                    >
-
-                      <div>
-                        <img src="@/assets/img/profile-pic.jpg" class="rounded-circle" alt="" width="30" height="30" />
-                      </div>
-                      <div class="d-flex flex-column ml-3">
-                        <div><span class="font-weight-bold">David</span> started following you</div>
-                        <div class="small text-muted">1m</div>
-                      </div>
-                    </div>
-                    <hr class="h-divider" />
-
-                    <div
-                      class="
-                        d-inline-flex
-                        flex-row
-                        align-items-center
-                        suggest-item
-                        cursor-pointer
-                      "
-                    >
-
-                      <div>
-                        <img src="@/assets/img/profile-pic.jpg" class="rounded-circle" alt="" width="30" height="30" />
-                      </div>
-                      <div class="d-flex flex-column ml-3">
-                        <div><span class="font-weight-bold">Alina</span> commented on your post</div>
-                        <div class="small text-muted">1m</div>
-                      </div>
-                    </div>
-                    <hr class="h-divider" />
-
-                    <div
-                      class="
-                        d-inline-flex
-                        flex-row
-                        align-items-center
-                        suggest-item
-                        cursor-pointer
-                      "
-                    >
-
-                      <div>
-                        <img src="@/assets/img/profile-pic.jpg" class="rounded-circle" alt="" width="30" height="30" />
-                      </div>
-                      <div class="d-flex flex-column ml-3">
-                        <div><span class="font-weight-bold">Maxine</span> liked your post</div>
-                        <div class="small text-muted">1m</div>
-                      </div>
-                    </div>
-                    <hr class="h-divider" />
-
-                    <div
-                      class="
-                        d-inline-flex
-                        flex-row
-                        align-items-center
-                        suggest-item
-                        cursor-pointer
-                      "
-                    >
-
-                      <div>
-                        <img src="@/assets/img/profile-pic.jpg" class="rounded-circle" alt="" width="30" height="30" />
-                      </div>
-                      <div class="d-flex flex-column ml-3">
-                        <div><span class="font-weight-bold">Paul</span> approuved your request to join the network</div>
-                        <div class="small text-muted">1m</div>
-                      </div>
-                    </div>
-                    <hr class="h-divider" />
-
-                    <div
-                      class="
-                        d-inline-flex
-                        flex-row
-                        align-items-center
-                        suggest-item
-                        cursor-pointer
-                      "
-                    >
-
-                      <div>
-                        <img src="@/assets/img/profile-pic.jpg" class="rounded-circle" alt="" width="30" height="30" />
-                      </div>
-                      <div class="d-flex flex-column ml-3">
-                        <div><span class="font-weight-bold">David</span> started following you</div>
-                        <div class="small text-muted">1m</div>
-                      </div>
-                    </div>
-                    <hr class="h-divider" />
-                    <a href="https://bridgeafrica.info/nav/notifications-view-all.html" class="text-ored"
-                      ><u>See all Notifications</u></a
-                    >
-                  </div>
+                  <NavBarNotifications />
                 </b-popover>
               </div>
 
@@ -428,11 +321,9 @@
 
                     <hr />
 
-
                     <router-link
                       to="/myorders/"
                       class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
-
                     >
                       <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'cart-arrow-down']" /></span>
                       My orders
@@ -455,13 +346,9 @@
                     </div>
                     <hr class="h-divider" />
                     <a
-                      href="https://bridgeafrica.info/nav/owner-other-menu.html"
-                      class="
-                        other-menu
-                        suggest-item
-                        cursor-pointer
-                        text-decoration-none text-dark
-                      "
+                      @click="logout"
+                      href="#"
+                      class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
                     >
                       <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'sign-out-alt']" /></span>
                       Logout
@@ -500,7 +387,6 @@
 
             <hr class="mup" />
 
-
             <router-link to="/myorders/" class="other-menu suggest-item cursor-pointer text-decoration-none text-dark">
               <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'cart-arrow-down']" /></span>
               My orders
@@ -523,15 +409,7 @@
               Language
             </div>
             <hr class="h-divider" />
-            <a
-              href="https://bridgeafrica.info/nav/owner-other-menu.html"
-              class="
-                other-menu
-                suggest-item
-                cursor-pointer
-                text-decoration-none text-dark
-              "
-            >
+            <a href="#" @click="logout" class="other-menu suggest-item cursor-pointer text-decoration-none text-dark">
               <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'sign-out-alt']" /></span>
               Logout
             </a>
@@ -547,31 +425,26 @@
 <script>
 import Button from '@/components/ButtonNavBarFind.vue';
 import Activity from '@/components/ShowActivity.vue';
-
+import NavBarNotifications from '@/components/NavBarNotifications.vue';
 import { mapGetters, mapActions } from 'vuex';
-
-
-
 export default {
   name: 'navbar',
   components: {
     Button,
     Activity,
-
+    NavBarNotifications,
   },
   props: {
     credentials: {
       type: Object,
       default: function () {
         return {
-          keyword: "",
-          placeholder: "",
+          keyword: '',
+          placeholder: 'All',
         };
       },
-      },
-
     },
-
+  },
   data() {
     return {
       isActive: false,
@@ -579,70 +452,93 @@ export default {
     };
   },
   computed: {
-    users() {
-      return this.$store.getters["userChat/getUsers"];
-    },
-     ...mapGetters({
+    ...mapGetters({
       hasLauchNetworkRequest: 'social/INIT',
       user: 'auth/profilConnected',
     }),
     activeAccount() {
       return this.$store.getters['auth/profilConnected'];
-    }
+    },
   },
-
   created() {
     this.init();
     this.getUsers();
-    console.log("Active connected", this.activeAccount);
+    console.log('Active connected', this.activeAccount);
   },
-
   methods: {
     ...mapActions({
       setNetworks: 'social/FIND_USER_NETWORK',
       setBusiness: 'social/FIND_USER_BUSNESS',
-      lauchNetworkRequest: 'social/INIT'
+      lauchNetworkRequest: 'social/INIT',
+      Logout: 'auth/logout',
     }),
+
+    getKeyword() {
+      if (!this.credentials.keyword) return false;
+
+      if (this.$route.name != 'Search') {
+        this.$store
+          .dispatch('allSearch/SEARCH', {
+            keyword: this.credentials.keyword,
+          })
+          .catch((err) => {
+            console.log('Error erro!');
+          });
+
+        this.$router.push({ name: 'Search' });
+      }
+    },
+    navLink(type) {
+      const link = {
+        home: () => {
+          const routeName = this.profile ? 'dashbord' : 'home';
+          if (this.$route.name != routeName) this.$router.push({ name: routeName });
+        },
+        market: () => {
+          if (this.$route.name != 'market') this.$router.push({ name: 'market' });
+        },
+      };
+      try {
+        link[type]();
+      } catch (error) {
+        throw new Error(error);
+      }
+    },
     toggleinfput() {
       this.$refs.mobileinput.style.display = 'block';
       this.isActive = true;
     },
     getUsers() {
-      this.$store
-        .dispatch("userChat/GET_USERS",'')
-    },
-    toggleinput() {
-      this.$refs.mobileinput.style.display = "block";
+      this.$store.dispatch('userChat/GET_USERS', '');
     },
 
+    logout() {
+      this.Logout();
+    },
+
+    toggleinput() {
+      this.$refs.mobileinput.style.display = 'block';
+    },
 
     getNetworks: async function () {
       let request = await this.$repository.share.getNetworks();
-
       if (request.success) this.setNetworks(request.data);
     },
-
     getBusiness: async function () {
       let request = await this.$repository.share.getBusiness();
-
       if (request.success) this.setBusiness(request.data);
     },
-
     init() {
       try {
         if (!this.hasLauchNetworkRequest) {
-          console.log('init navbar', this.hasLauchNetworkRequest);
           this.getNetworks();
           this.getBusiness();
-
           this.lauchNetworkRequest();
         }
       } catch (error) {
         console.log(error);
       }
     },
-
-
     togglenav() {
       if (this.shownav == false) {
         this.shownav = true;
@@ -833,8 +729,17 @@ export default {
     margin-top: -145px !important;
   }
 }
-
+.shadow-nav {
+  box-shadow: 0 0.25rem 0.5rem rgb(0 0 0 / 10%) !important;
+}
 .mup {
   margin-top: -5px;
+}
+.fixed-top {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1030;
 }
 </style>

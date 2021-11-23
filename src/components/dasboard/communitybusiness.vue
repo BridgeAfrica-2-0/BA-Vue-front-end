@@ -1,11 +1,13 @@
 <template>
   <div>
-    <b-row>
+    <b-row> 
       <b-col lg="6" sm="12" class="p-2" v-for="item in businesses" :key="item.id">
         <div class="people-style shadow">
           <b-row>
-            <b-col md="3" xl="3" lg="3" cols="5" sm="3">
-              <div class="center-img">
+
+            <b-col md="8" xl="8" lg="12" cols="12" sm="8">
+              <div class="d-inline-flex">   
+              <div class="center-img ">
                 <splide :options="options" class="r-image">
                   <splide-slide cl>
                     <img :src="item.picture" class="r-image" />
@@ -16,10 +18,11 @@
             <b-col md="5" cols="7" lg="7" xl="5" sm="5">
               <p class="textt">
                 <strong class="title"> {{ item.name }} </strong> <br />
-                {{ item.category }}
+               
+             <span v-for="cat in item.category" :key="cat.name">   {{cat.name}}  </span>
                 <br />
                 {{ count(item.followers) }}
-                {{ $t('business.community') }} <br />
+                {{ $t('dashboard.Community') }} <br />
 
                 <span class="location"> <b-icon-geo-alt class="ico"></b-icon-geo-alt>{{ item.country }} </span>
                 <br />
@@ -33,7 +36,8 @@
                 >
                 </read-more>
               </p>
-            </b-col>
+               </div>
+            </b-col>     
 
             <b-col lg="12" xl="4" md="4" cols="12" sm="4">
               <div class="s-button">
@@ -75,7 +79,8 @@ export default {
   props: ['type'],
   data() {
     return {
-      page: 1,
+      page: 2,
+      disable: false,
       options: {
         rewind: true,
         autoplay: true,
@@ -98,7 +103,7 @@ export default {
     },
     activeAccount() {
       return this.$store.getters['auth/profilConnected'];
-    }
+    },
   },
 
   methods: {
@@ -115,6 +120,30 @@ export default {
       // this.$router.push({ path: `${path}`, query: { tabId: 1, msgTabId: 1 } });
       this.$router.push({ path: `/business_owner/${this.activeAccount.id}`, query: { tabId: 1, msgTabId: 1 } });
     },
+
+    async handleFollow(user) {
+      document.getElementById('followbtn' + user.id).disabled = true;
+
+      const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
+      const nextFollowState = user.is_follow === 0 ? 1 : 0;
+      const data = {
+        id: user.id,
+        type: 'business',
+      };
+
+      await axios
+        .post(uri, data)
+        .then((response) => {
+          console.log(response);
+          user.is_follow = nextFollowState;
+          document.getElementById('followbtn' + user.id).disabled = false;
+        })
+        .catch((err) => {
+          console.log(err);
+          document.getElementById('followbtn' + user.id).disabled = false;
+        });
+    },
+
     count(number) {
       if (number >= 1000000) {
         return number / 1000000 + 'M';
@@ -164,6 +193,9 @@ export default {
 </script>
 
 <style scoped>
+.flx100 {
+  flex-basis: 80% !important;
+}
 @media only screen and (min-width: 768px) {
   .btn-text {
     margin-left: 8px;
@@ -250,8 +282,6 @@ export default {
     padding: 1px;
     text-align: left;
 
-    margin-left: -30px;
-
     margin-right: -5px;
 
     line-height: 25px;
@@ -303,7 +333,7 @@ export default {
     padding: 1px;
     text-align: left;
 
-    margin-left: 30px;
+    margin-left: 60px;
 
     margin-right: -5px;
 

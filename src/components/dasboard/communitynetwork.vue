@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-modal id="modal-sm" size="sm" hide-header>
-      {{ $t('network.do_you_want_join_network') }}
+      {{ $t('dashboard.Do_you_want_to_join_this_network') }}
     </b-modal>
 
     <b-row>
@@ -18,7 +18,7 @@
                 <strong class="net-title"> {{ item.name }} </strong> <br />
                 {{ item.category }}
                 <br />
-                {{ item.followers }} Community <br />
+                {{ item.followers }} {{ $t('dashboard.Community') }} <br />
 
                 <span class="location">
                   <b-icon-geo-alt class="ico"></b-icon-geo-alt>
@@ -32,7 +32,7 @@
                   :text="item.about_network"
                   link="#"
                   less-str="read less"
-                  :max-chars="35"
+                  :max-chars="100"
                 >
                 </read-more>
               </p>
@@ -42,16 +42,24 @@
               <div class="s-button">
                 <b-row>
                   <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2">
-                    <b-button block size="sm" class="b-background shadow" variant="primary">
+                    <b-button
+                      block
+                      size="sm"
+                      class="b-background shadow"
+                      :class="item.is_follow !== 0 && 'u-btn'"
+                      variant="primary"
+                      :id="'followbtn' + item.id"
+                      @click="handleFollow(item)"
+                    >
                       <i class="fas fa-user-plus fa-lg btn-icon"></i>
-                      <span class="btn-com" v-b-modal.modal-sm>{{ $t('network.community') }}</span>
+                      <span class="btn-com">{{ $t('profileowner.Community') }}</span>
                     </b-button>
                   </b-col>
 
                   <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2">
                     <b-button block size="sm" class="b-background shadow" variant="primary" @click="cta(item)"
                       ><i class="fas fa-envelope fa-lg btn-icon"></i>
-                      <span class="btn-text">{{ $t('network.messages') }}</span>
+                      <span class="btn-text">{{ $t('dashboard.Messages') }}</span>
                     </b-button>
                   </b-col>
 
@@ -74,7 +82,7 @@ export default {
 
   data() {
     return {
-      page: 1,
+      page: 2,
       options: {
         rewind: true,
         autoplay: true,
@@ -97,7 +105,7 @@ export default {
     },
     activeAccount() {
       return this.$store.getters['auth/profilConnected'];
-    }
+    },
   },
   methods: {
     cta(data) {
@@ -113,6 +121,28 @@ export default {
       // this.$router.push({ path: `${path}`, query: { tabId: 1, msgTabId: 1 } });
       this.$router.push({ path: `/business_owner/${this.activeAccount.id}`, query: { tabId: 1, msgTabId: 1 } });
     },
+
+    async handleFollow(user) {
+      document.getElementById('followbtn' + user.id).disabled = true;
+      const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
+      const nextFollowState = user.is_follow === 0 ? 1 : 0;
+      const data = {
+        id: user.id,
+        type: 'network',
+      };
+
+      await axios
+        .post(uri, data)
+        .then((response) => {
+          user.is_follow = nextFollowState;
+          document.getElementById('followbtn' + user.id).disabled = false;
+        })
+        .catch((err) => {
+          console.log(err);
+          document.getElementById('followbtn' + user.id).disabled = false;
+        });
+    },
+
     infiniteHandler($state) {
       console.log('loading network 1 1');
 

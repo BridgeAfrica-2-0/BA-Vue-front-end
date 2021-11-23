@@ -5,7 +5,8 @@
         <Button @click.native="strategY['all']" v-if="selectedId == 0" />
         <Button @click.native="strategY['network']" v-if="selectedId == 3" />
         <Button @click.native="strategY['market']" v-if="selectedId == 4" />
-        <Button @click.native="strategY['1']" v-if="selectedId == 1" />
+        <Button @click.native="strategY['business']" v-if="selectedId == 1" />
+
 
         <Button @click.native="strategies" v-if="[2, 5].includes(selectedId)" />
       </template>
@@ -28,21 +29,21 @@
           <b-link class="cat" @click="SetCat('Agriculture')">
             <img class="img-fluid picture logo-img" src="@/assets/icons/mobile/agriculture.png" />
 
-            Agriculture
+            {{$t("search.Agriculture")}}
           </b-link>
         </b-col>
 
         <b-col cols="3" class="text-center">
           <b-link class="cat" @click="SetCat('Restaurants')">
             <img class="img-fluid picture logo-img" src="@/assets/icons/mobile/restaurants.png" />
-            Restaurants
+            {{$t("search.Restaurants")}}
           </b-link>
         </b-col>
 
         <b-col cols="3" class="text-center">
           <b-link class="cat" @click="SetCat('Clothing')">
             <img class="img-fluid picture logo-img" src="@/assets/icons/mobile/clothing.png" />
-            Clothing
+            {{$t("search.Clothing")}}
           </b-link>
         </b-col>
 
@@ -57,7 +58,7 @@
         <b-col cols="3" class="text-center mt-2">
           <b-link class="cat" @click="SetCat('Electronics')">
             <img class="img-fluid picture logo-img" src="@/assets/icons/mobile/electronics.png" />
-            Electronics
+            {{$t("search.Electronics")}}
           </b-link>
         </b-col>
 
@@ -65,21 +66,21 @@
           <b-link class="cat" @click="SetCat('Handicraft')">
             <img class="img-fluid picture logo-img" src="@/assets/icons/mobile/handicrft 2.png" />
 
-            Handicraft
+            {{$t("search.Handicraft")}}
           </b-link>
         </b-col>
 
         <b-col cols="3" class="text-center mt-2">
           <b-link class="cat" @click="SetCat('HU')">
             <img class="img-fluid picture logo-img" src="@/assets/icons/mobile/health unit.png" />
-            Health
+            {{$t("search.Health")}}
           </b-link>
         </b-col>
 
         <b-col cols="3" class="text-center mt-2">
           <b-link class="cat" v-b-modal="'myModalla'">
             <img class="img-fluid picture logo-img" src="@/assets/icons/more.png" />
-            More
+            {{$t("search.More")}}
           </b-link>
         </b-col>
       </b-row>
@@ -88,13 +89,13 @@
         <b-row>
           <b-col cols="6" class="p-2">
             <p>
-              <b-link @click="SetCat('Handicraft')" href="#"> Handicraft </b-link>
+              <b-link @click="SetCat('Handicraft')" href="#"> {{$t("search.Handicraft")}} </b-link>
             </p>
 
-            <p><b-link @click="SetCat('Hotels')" href="#"> Hotels </b-link></p>
+            <p><b-link @click="SetCat('Hotels')" href="#"> {{$t("search.Hotels")}} </b-link></p>
 
             <p>
-              <b-link @click="SetCat('Transport')" href="#"> Transport </b-link>
+              <b-link @click="SetCat('Transport')" href="#"> {{$t("search.Transport")}} </b-link>
             </p>
 
             <p>
@@ -105,25 +106,25 @@
             </p>
 
             <p>
-              <b-link @click="SetCat('Station')" href="#"> Station </b-link>
+              <b-link @click="SetCat('Station')" href="#"> {{$t("search.Station")}} </b-link>
             </p>
           </b-col>
 
           <b-col cols="6" class="p-2">
             <p>
-              <b-link @click="SetCat('Auto Mechanics')" href="#"> Auto Mechanics </b-link>
+              <b-link @click="SetCat('Auto Mechanics')" href="#"> {{$t("search.Auto_Mechanics")}} </b-link>
             </p>
             <p>
-              <b-link @click="SetCat('Carding')" href="#"> Carding </b-link>
+              <b-link @click="SetCat('Carding')" href="#"> {{$t("search.Carding")}} </b-link>
             </p>
 
             <p>
-              <b-link @click="SetCat('Education')" href="#"> Education </b-link>
+              <b-link @click="SetCat('Education')" href="#"> {{$t("search.Education")}} </b-link>
             </p>
             <p>
               <b-link @click="SetCat('Professional')" href="#">
-                Professional <br />
-                Service</b-link
+                {{$t("search.Professional")}} <br />
+                {{$t("search.Service")}}</b-link
               >
             </p>
           </b-col>
@@ -134,7 +135,7 @@
     <div class="container-fluid medium-filters">
       <b-row>
         <b-col cols="3">
-          <b-button class="shadow border mob-btn" v-b-modal="'myModall'"> Filter </b-button>
+          <b-button class="shadow border mob-btn" v-b-modal="'myModall'"> {{$t("search.Filter")}} </b-button>
         </b-col>
 
         <b-modal ref="myfilters" id="myModall" hide-footer title=" ">
@@ -156,7 +157,7 @@
             <hr />
 
             <span v-if="categories_filters.length">
-              <h6>Filters</h6>
+              <h6>{{$t("search.Filters")}}</h6>
             </span>
             <div style="column-count: 2">
               <b-form-checkbox
@@ -174,7 +175,7 @@
             <span v-if="showform == true">
               <b-form-group
                 label-cols-lg="3"
-                label="Region"
+                :label="$t('search.Region')"
                 label-size="md"
                 label-class="font-weight-bold pt-0"
                 class="mb-0 text-left"
@@ -182,14 +183,14 @@
               </b-form-group>
 
               <b-form-select v-model="selected">
-                <b-form-select-option value="a"> Yaounde </b-form-select-option>
+                <b-form-select-option value="a"> {{$t("search.Yaounde")}} </b-form-select-option>
               </b-form-select>
 
               <br />
 
               <b-form-group
                 label-cols-lg="3"
-                label="Division"
+                :label="$t('search.Division')"
                 label-size="md"
                 label-class="font-weight-bold pt-0 text-left"
                 class="mb-0"
@@ -197,14 +198,14 @@
               </b-form-group>
 
               <b-form-select v-model="selected">
-                <b-form-select-option value="a"> My Location </b-form-select-option>
+                <b-form-select-option value="a"> {{$t("search.My_Location")}} </b-form-select-option>
               </b-form-select>
 
               <br />
 
               <b-form-group
                 label-cols-lg="12"
-                label=" Sub Division"
+                :label="$t('search.Sub_Division')"
                 label-size="md"
                 label-class="font-weight-bold pt-0 text-left"
                 class="mb-0"
@@ -212,14 +213,14 @@
               </b-form-group>
 
               <b-form-select v-model="selected">
-                <b-form-select-option value="a"> My Location </b-form-select-option>
+                <b-form-select-option value="a"> {{$t("search.My_Location")}} </b-form-select-option>
               </b-form-select>
 
               <br />
 
               <b-form-group
                 label-cols-lg="3"
-                label="City"
+                :label="$t('search.City')"
                 label-size="md"
                 label-class="font-weight-bold pt-0 text-left"
                 class="mb-0"
@@ -227,7 +228,7 @@
               </b-form-group>
 
               <b-form-select v-model="selected">
-                <b-form-select-option value="a"> My Location </b-form-select-option>
+                <b-form-select-option value="a"> {{$t("search.My_Location")}} </b-form-select-option>
               </b-form-select>
 
               <br />
@@ -237,7 +238,7 @@
 
             <b-form-group
               label-cols-lg="12"
-              label="Neighbourhood"
+              :label="$t('search.Neighbourhood')"
               label-size="md"
               label-class="font-weight-bold pt-0"
               class="mb-0 text-left"
@@ -257,7 +258,7 @@
 
             <b-form-group
               label-cols-lg="12"
-              label="Distance"
+              :label="$t('search.Distance')"
               label-size="md"
               label-class="font-weight-bold pt-0 text-left"
               class="mb-0"
@@ -271,7 +272,7 @@
               <b-form-checkbox id="" class="a-text" name="" value=""> 25km</b-form-checkbox>
             </b-form-group>
 
-            <b-button variant="primary" class="m-3 float-right"> Search </b-button>
+            <b-button variant="primary" class="m-3 float-right"> {{$t("search.Search")}} </b-button>
           </div>
 
           <div class="d-block text-center"></div>
@@ -282,15 +283,15 @@
     <div class="container-fluid mobile-filters mt-2 mb-3">
       <b-row>
         <b-col cols="5">
-          <b-button class="shadow border mob-btn" id="show-btn" @click="showFilters"> Filter </b-button>
+          <b-button class="shadow border mob-btn" id="show-btn" @click="showFilters"> {{$t("search.Filter")}} </b-button>
         </b-col>
 
         <b-col cols="3" md>
-          <b-button class="shadow border mob-btn" @click="togglelist"> List </b-button>
+          <b-button class="shadow border mob-btn" @click="togglelist"> {{$t("search.List")}} </b-button>
         </b-col>
 
         <b-col cols="4">
-          <b-button class="shadow border mob-btn" @click="togglemap()"> Map </b-button>
+          <b-button class="shadow border mob-btn" @click="togglemap()"> {{$t("search.Map")}} </b-button>
         </b-col>
       </b-row>
     </div>
@@ -312,7 +313,7 @@
 
             <div id="all" v-if="selectedId == '0'">
               <h6>
-                Sponsored Result
+                {{$t("search.Sponsored_Result")}}
                 <fas-icon class="icons" :icon="['fas', 'exclamation-circle']" size="lg" />
               </h6>
 
@@ -322,23 +323,25 @@
 
               <h6>
                 <fas-icon class="icons" :icon="['fas', 'hands-helping']" size="lg" />
-                Businesses
+
+                {{$t("search.Businesses")}}
+
               </h6>
 
               <MiniBusiness />
 
               <span class="float-right mb-3" @click="selectedId = 1">
-                <b-link href="#top"> see more </b-link>
+                <b-link href="#top"> {{$t("search.see_more")}} </b-link>
               </span>
               <br />
 
               <hr />
               <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
-              <h6>People</h6>
+              <h6>{{$t("search.People")}}</h6>
 
               <MiniPeople />
               <span class="float-right mb-3" @click="selectedId = 2">
-                <b-link href="#top"> see more </b-link>
+                <b-link href="#top"> {{$t("search.see_more")}} </b-link>
               </span>
               <br />
 
@@ -346,12 +349,12 @@
 
               <h6>
                 <fas-icon class="icons" :icon="['fas', 'project-diagram']" size="lg" />
-                Network
+                {{$t("search.Network")}}
               </h6>
 
               <MiniNetwork />
               <span class="float-right mb-3" @click="selectedId = 3">
-                <b-link href="#top"> see more </b-link>
+                <b-link href="#top"> {{$t("search.see_more")}} </b-link>
               </span>
               <br />
 
@@ -359,13 +362,13 @@
 
               <h6>
                 <fas-icon class="icons" :icon="['fas', 'store']" size="lg" />
-                Market
+                {{$t("search.Market")}}
               </h6>
 
               <MiniMarket />
 
               <span class="float-right mb-3" @click="selectedId = 4">
-                <b-link href="#top"> see more </b-link>
+                <b-link href="#top"> {{$t("search.see_more")}} </b-link>
               </span>
               <br />
 
@@ -373,13 +376,13 @@
 
               <h6>
                 <fas-icon class="icons" :icon="['fab', 'readme']" size="lg" />
-                Post
+                {{$t("search.Post")}}
               </h6>
 
               <MiniPost />
 
               <span class="float-right mb-3" @click="selectedId = 5">
-                <b-link href="#top"> see more </b-link>
+                <b-link href="#top"> {{$t("search.see_more")}} </b-link>
               </span>
               <br />
 
@@ -391,15 +394,19 @@
             <div id="businesses" v-if="selectedId == '1'">
               <h6>
                 <fas-icon class="icons" :icon="['fas', 'hands-helping']" size="lg" />
-                Businesses
+
+                {{$t("search.Businesses")}}
               </h6>
+  <b-spinner v-if="prodLoaderr" variant="primary" :label="$t('search.Spinning')"></b-spinner>
+
             </div>
+            
 
             <!-- filter out only people -->
 
             <div v-if="selectedId == '2'">
               <h6>
-                Sponsored Result
+                {{$t("search.Sponsored_Result")}}
                 <fas-icon class="icons" :icon="['fas', 'exclamation-circle']" size="lg" />
               </h6>
 
@@ -408,7 +415,7 @@
               </div>
               <h6>
                 <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
-                People
+                {{$t("search.People")}}
               </h6>
             </div>
 
@@ -419,7 +426,7 @@
             <div v-if="selectedId == '3'">
               <h6>
                 <fas-icon class="icons" :icon="['fas', 'project-diagram']" size="lg" />
-                Networks
+                {{$t("search.Networks")}}
               </h6>
 
               <Network />
@@ -430,7 +437,7 @@
             <div v-if="selectedId == '4'">
               <h6>
                 <fas-icon class="icons" :icon="['fas', 'store']" size="lg" />
-                Market
+                {{$t("search.Market")}}
               </h6>
 
               <div>
@@ -439,16 +446,16 @@
 
               <h6 class="mb-3">
                 <fas-icon class="icons" :icon="['fas', 'store']" size="lg" />
-                Market
+                {{$t("search.Market")}}
                 <div class="float-right">
                   <b-button size="sm" variant="outline-primary" @click="getProducts">
                     <b-spinner small v-if="prodLoader"></b-spinner>
-                    <span v-else>Load All market Products</span>
+                    <span v-else>{{$t("search.Load_All_market_Products")}}</span>
                   </b-button>
                 </div>
               </h6>
               <b-alert v-model="showDismissibleAlert" variant="success" dismissible>
-                List of products up to date
+                {{$t("search.List_of_products_up_to_date")}}
               </b-alert>
               <Market class="mt-3" />
             </div>
@@ -459,6 +466,16 @@
         </b-col>
       </b-row>
     </div>
+        <p class="text-center">
+      <span class="display-inline">
+        <b-link @click="$i18n.locale = 'en'"> {{ $t("auth.english") }}</b-link>
+        <span class="vl"></span>
+        <b-link class="ml-2" @click="$i18n.locale = 'fr'">
+          {{ $t("auth.french") }}
+        </b-link>
+      </span>
+      Bridge Africa © 2021
+    </p>
   </div>
 </template>
 
@@ -493,7 +510,7 @@ import BusinessComponent from '@/components/search/business';
 
 import { loader } from '@/mixins';
 
-import { mapActions } from 'vuex';
+import { mapGetters,  mapActions } from 'vuex';
 
 export default {
   components: {
@@ -524,17 +541,26 @@ export default {
   mixins: [loader],
 
   computed: {
+
+    
+ ...mapGetters({
+     
+      prodLoaderr: "business/getloadingState"
+
+    }),
+
     products() {
       return this.$store.state.market.products;
     },
   },
 
   created() {
+    this.getLocation();
     this.strategY = {
       users: () => this.onFindUser(),
       all: () => this.getKeyword(),
       market: () => this.searchProducts(),
-      network: () => this.searchNetworks(),
+     network: () => this.searchNetworks(),
       business: () => this.onFindBusiness(),
     };
     this.getKeyword();
@@ -1521,14 +1547,13 @@ export default {
         });
     },
 
-    onFindBusiness() {
+  async  onFindBusiness() {
       this.$store.commit('business/setLoading', true);
 
-      console.log('loolodidhd ddhdjddh');
-      console.log(this.searchParams.keyword.trim());
-      if (this.searchParams.keyword.trim())
-        this.findBusiness({ keyword: this.searchParams.keyword, location: this.searchParams.location });
-      this.$store.commit('business/setLoading', false);
+       if (this.searchParams.keyword.trim())
+        console.log("init search");
+      await  this.findBusiness({ keyword: this.searchParams.keyword, location: this.searchParams.location });
+       this.$store.commit('business/setLoading', false);
     },
 
     async getProducts() {
@@ -1592,7 +1617,29 @@ export default {
       setCallback: 'search/SET_CURRENT_PAGINATE_CALLBACK',
       reset: 'search/RESET_RESULT',
       findBusiness: 'business/FIND_BUSINESS',
+       getGeo: 'business/getGeo',
     }),
+
+    getLocation(){
+
+       
+        const success = (position) => {
+            const latitude  = position.coords.latitude;
+            const longitude = position.coords.longitude;
+
+        this.getGeo({lat:latitude, lng:longitude});
+        };
+
+        const error = (err) => {
+            console.log(error)
+        };
+
+        // This will open permission popup
+        navigator.geolocation.getCurrentPosition(success, error);
+  
+
+
+    },
 
     initialize() {
       this.strategy = {

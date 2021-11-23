@@ -16,7 +16,7 @@
                   ></b-avatar>
                 </b-col>
                 <b-col>
-                  <h4 class="title m-10">Messages</h4>
+                  <h3 class="mt-4 title">{{ $t('network.Messages') }}</h3>
                 </b-col>
                 <b-col>
                   <b-icon
@@ -26,9 +26,7 @@
                   ></b-icon>
                 </b-col>
               </b-row>
-              <b-container>
-                <input type="text" class="form-control input-background" placeholder="Search inbox" />
-              </b-container>
+              <input type="text" class="form-control input-background" :placeholder="$t('network.Search_inbox')" />
             </div>
             <div>
               <div class="messages-mobile">
@@ -451,8 +449,8 @@
                   <b-spinner variant="primary" label="Spinning" class="spinner centralizer"></b-spinner>
                 </div>
                 <div v-else v-for="(chat, index) in chats" :key="index">
-                  {{chat}}
-                  <br><br>
+                  {{ chat }}
+                  <br /><br />
                   <div v-if="currentBizId != chat.sender_network_id">
                     <b-row class="p-4">
                       <b-col>
@@ -643,7 +641,7 @@
               <b-button class="primary-bg" @click="showInfo(false)">
                 <fas-icon :icon="['fas', 'arrow-left']" />
               </b-button>
-              <span class="cnt-info"> Contact Info</span>
+              <span class="cnt-info"> {{ $t('network.Contact_Info') }}</span>
             </div>
             <div class="info-bottom">
               <b-avatar
@@ -654,21 +652,23 @@
               ></b-avatar>
               <div class="info-detail">
                 <h1 class="info-name">{{ receiver.name }}</h1>
-                <b-link class="primary">View Profile</b-link>
+                <b-link class="primary">{{ $t('network.View_Profile') }}</b-link>
               </div>
             </div>
             <div>
               <ul>
-                <li>Options</li>
+                <li>{{ $t('network.Options') }}</li>
                 <li>
                   <b-row
-                    ><b-col> Block Messages </b-col>
+                    ><b-col>
+                      {{ $t('network.Block_Messages') }}
+                    </b-col>
                     <b-col>
                       <b-form-checkbox v-model="checked" name="check-button" class="primary" switch> </b-form-checkbox>
                     </b-col>
                   </b-row>
                 </li>
-                <li>Report User</li>
+                <li>{{ $t('network.Report_User') }}</li>
               </ul>
             </div>
           </b-col>
@@ -782,7 +782,6 @@ export default {
     currentBiz() {
       // return this.$store.getters['networkChat/getCurrentBiz'];
       return this.$store.getters['auth/profilConnected'];
-
     },
     bizs() {
       return this.$store.getters['networkChat/getBizs'];
@@ -839,7 +838,6 @@ export default {
     } else if (this.tabIndex == 2) {
       this.getChatList({ type: 'network' });
     } else this.getChatList({ type: 'user' });
-
 
     this.socket.on('generalMessage', (data) => {
       console.log('Received');

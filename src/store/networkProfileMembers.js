@@ -34,11 +34,11 @@ export default {
 
   actions: {
 
-    getMembers( data ){
+    getMembers( {commit}, data ){
       console.log("getMembers");
+      console.log("data", data);
       console.log(data.path);
-      return axios
-      .post('network/'+data.path, data.formData)
+      return axios.post('network/'+data.path, data.formData)
       .then(({ data }) => {
         console.log(data);
         return data;

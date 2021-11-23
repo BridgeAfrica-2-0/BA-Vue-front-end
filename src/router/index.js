@@ -33,9 +33,9 @@ import forgotPassword from "@/views/forgotPassword";
 import navMessage from "@/views/navMessaging";
 import Blec from "@/views/blec";
 import memberNetworkFollower from "@/views/memberNetworkFollower";
-import govx from "@/views/test";
+
 import networkEditors from "@/views/networkEditors";
-// import Test from "@/views/test";
+
 import templateView from "@/views/templateView";
 import webSiteCreate from "@/views/webSiteCreate";
 import webSiteCreateTwo from "@/views/webSiteCreateTwo";
@@ -47,11 +47,17 @@ import dashboard from "@/views/dashboard";
 import ordersdetail from "@/views/ordersDetail";
 import businessordersdetail from "@/views/businessordersdetail"
 
+import card from "@/views/card";
 import myorders from "@/views/myOders"
 import notFound from "@/components/404"
 import card from "@/views/card";
 import welcome from "@/views/welcome";
+
+import ordersdetail from "@/views/odersDetail";
+import businessordersdetail from "@/views/businessordersdetail"
+
 import payment from "@/views/payment";
+
 
 Vue.use(VueRouter);
 
@@ -60,6 +66,7 @@ const routes = [{
         name: "notFound",
         component: notFound,
     },
+
     {
         path: "/myorders",
         name: "orders",
@@ -87,11 +94,9 @@ const routes = [{
         name: "payment",
         component: payment
     },
-    {
-        path: "/govx",
-        name: "govx",
-        component: govx,
-    },
+
+
+
 
     {
         path: "/welcome",
@@ -101,6 +106,7 @@ const routes = [{
             auth: true,
         },
     },
+
     {
         path: "/settings",
         name: "settings",
@@ -111,17 +117,26 @@ const routes = [{
         path: "/dashboard",
         name: "dashboard",
         component: dashboard,
+        meta: {
+            auth: true,
+        },
     },
 
     {
         path: "/profile_owner",
         name: "profile_owner",
         component: profile_owner,
+        meta: {
+            auth: true,
+        },
     },
     {
         path: "/profilefollower/:id?",
         name: "ProfileFollower",
         component: profileFollower,
+        meta: {
+            auth: true,
+        },
     },
     {
         path: "/template_viewer",
@@ -132,6 +147,9 @@ const routes = [{
         path: "/business_owner/:id?",
         name: "BusinessOwner",
         component: businessOwner,
+        meta: {
+            auth: true,
+        },
     },
 
 
@@ -139,6 +157,9 @@ const routes = [{
         path: "/business_editor/:id?",
         name: "BusinessEditor",
         component: businessEditor,
+        meta: {
+            auth: true,
+        },
     },
 
     {
@@ -171,37 +192,30 @@ const routes = [{
         path: "/network/:id?",
         name: "networks",
         component: networks,
+        meta: {
+            auth: true,
+        },
     },
     {
         path: "/networks/:id?",
         name: "networks",
         component: networks,
+        meta: {
+            auth: true,
+        },
     },
     {
         path: "/network_editors/:id?",
         name: "NetworkEditors",
         component: networkEditors,
+        meta: {
+            auth: true,
+        },
     },
     {
         path: "/login",
         name: "Login",
         component: Login,
-    },
-
-    {
-        path: "/card",
-        name: "card",
-        component: card,
-    },
-    {
-        path: "/ordersdetail",
-        name: "ordersdetail",
-        component: ordersdetail,
-    },
-    {
-        path: "/businessordersdetail",
-        name: "businessordersdetail",
-        component: businessordersdetail,
     },
 
     {
@@ -236,6 +250,9 @@ const routes = [{
         path: "/businessfollower/:id?",
         name: "BusinessFollower",
         component: businessFollower,
+        meta: {
+            auth: true,
+        },
     },
     {
         path: "/businessvisitor",
@@ -277,6 +294,9 @@ const routes = [{
         path: "/profile/:id?",
         name: "Follower",
         component: Follower,
+        meta: {
+            auth: true,
+        },
     },
     {
         path: "/profilevisitor",
@@ -284,7 +304,7 @@ const routes = [{
         component: Visitor,
     },
     {
-        path: "/search/:id",
+        path: "/search",
         name: "Search",
         component: search,
     },
@@ -310,6 +330,7 @@ const routes = [{
         name: "Membar Network Follower",
         component: memberNetworkFollower,
     },
+
 
 ];
 

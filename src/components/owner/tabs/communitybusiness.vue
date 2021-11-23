@@ -2,7 +2,7 @@
   <div class="p-2">
     <b-row>
       <b-col lg="6" sm="12" class="p-2" v-for="item in businesses" :key="item.id">
-        <div class="people-style shadow">
+        <div class="people-style shadow h-100">
           <b-row>
             <b-col md="3" xl="3" lg="3" cols="5" sm="3">
               <div class="center-img">
@@ -16,10 +16,11 @@
             <b-col md="5" cols="7" lg="7" xl="5" sm="5">
               <p class="textt">
                 <strong class="title"> {{ item.name }} </strong> <br />
-                {{ item.category }}
+
+                <span v-for="cat in item.category" :key="cat.name"> {{ cat.name }} </span>
                 <br />
                 {{ count(item.followers) }}
-                Community <br />
+                {{ $t('profileowner.Community') }} <br />
 
                 <span class="location"> <b-icon-geo-alt class="ico"></b-icon-geo-alt>{{ item.country }} </span>
                 <br />
@@ -29,7 +30,7 @@
                   :text="item.about_business"
                   link="#"
                   less-str="read less"
-                  :max-chars="15"
+                  :max-chars="100"
                 >
                 </read-more>
               </p>
@@ -39,23 +40,34 @@
               <div class="s-button">
                 <b-row>
                   <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2 text-center">
-                    <b-button block size="sm" class="b-background shadow" variant="primary">
-                      <i class="fas fa-user-plus fa-lg btn-icon"></i>
-                      <span class="btn-com">Community</span>
+                    <b-button
+                      block
+                      size="sm"
+                      :disabled="disable"
+                      :class="item.is_follow !== 0 && 'u-btn'"
+                      variant="primary"
+                      :id="'followbtn' + item.id"
+                      @click="handleFollow(item)"
+                    >
+                      <i
+                        class="fas fa-lg btn-icon"
+                        :class="item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"
+                      ></i>
+                      <span class="btn-com"> {{ $t('dashboard.Community') }}</span>
                     </b-button>
                   </b-col>
 
                   <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2 text-center">
                     <b-button block size="sm" class="b-background shadow" variant="primary" @click="cta(item)">
                       <i class="fas fa-envelope fa-lg btn-icon"></i>
-                      <span class="btn-text">Message</span>
+                      <span class="btn-text">{{ $t('profileowner.Message') }}</span>
                     </b-button>
                   </b-col>
 
                   <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2 text-center">
                     <b-button block size="sm" class="b-background shadow" variant="primary">
                       <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
-                      <span class="btn-text">Direction</span>
+                      <span class="btn-text">{{ $t('profileowner.Direction') }}</span>
                     </b-button>
                   </b-col>
                 </b-row>
@@ -80,6 +92,7 @@ export default {
   data() {
     return {
       page: 1,
+      businesses: [],
       infiniteId: +new Date(),
       options: {
         rewind: true,
@@ -98,6 +111,13 @@ export default {
       return this.$store.getters['auth/profilConnected'];
     },
     businesses() {
+      if (this.type == 'Follower') {
+        return this.$store.state.profile.BcommunityFollower.business_followers;
+      } else {
+        return this.$store.state.profile.BcommunityFollowing.business_following;
+      }
+    },
+    oldbusinesses() {
       if (this.type == 'Follower') {
         return this.$store.state.profile.BcommunityFollower.business_followers;
       } else {
@@ -127,6 +147,29 @@ export default {
       if (number >= 1000) {
         return number / 1000 + 'K';
       } else return number;
+    },
+
+    async handleFollow(user) {
+      document.getElementById('followbtn' + user.id).disabled = true;
+
+      const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
+      const nextFollowState = user.is_follow === 0 ? 1 : 0;
+      const data = {
+        id: user.id,
+        type: 'business',
+      };
+
+      await axios
+        .post(uri, data)
+        .then((response) => {
+          console.log(response);
+          user.is_follow = nextFollowState;
+          document.getElementById('followbtn' + user.id).disabled = false;
+        })
+        .catch((err) => {
+          console.log(err);
+          document.getElementById('followbtn' + user.id).disabled = false;
+        });
     },
 
     search() {

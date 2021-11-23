@@ -4,55 +4,53 @@
     <b-row>
       <b-col cols="12" class="mx-auto">
         <b-input-group class="mb-2 px-md-3 mx-auto">
-          <b-input-group-prepend @onclick="search" is-text>
+          <b-input-group-prepend @click="search" is-text style="cursor:pointer;">
             <b-icon-search class="text-primary border-none"></b-icon-search>
           </b-input-group-prepend>
           <b-form-input
             aria-label="Text input with checkbox"
-            placeholder="Search Something"
+            :placeholder="$t('memnetwork.Search_Something')"
             type="text"
             class="form-control"
             v-model="searchTitle"
-            @keyup="search"
           ></b-form-input>
         </b-input-group>
       </b-col>
     </b-row>
     <br/>
 
-
-    <b-row>
-      <b-col v-if="businessfollowers.total == 0" >
-        No Community Members
-      </b-col>
-      <b-col col="6" class="ml-0 mr-0"
-        :class="{ active: index == currentIndex }"
-        v-for="(member, index) in businessfollowers.data"
-        :key="index"
-        v-else
+    <b-row cols="1">
+      <b-col class="ml-0 mr-0"
+        v-for="member in displayfollowers"
+        :key="member.id"
       >
-        <div style="display:none;">{{member['communityNum'] = nFormatter(member.followers)}}</div>
-        <CommunityBusiness :member="member" />
+        <b-skeleton-wrapper :loading="loading" >
+          <template #loading>
+            <b-card>
+              <b-skeleton width="85%"></b-skeleton>
+              <b-skeleton width="55%"></b-skeleton>
+              <b-skeleton width="70%"></b-skeleton>
+            </b-card>
+          </template>
+          <div style="display:none;">{{member['communityNum'] = nFormatter(member.followers)}}</div>
+          <CommunityBusiness :member="member"/>
+        </b-skeleton-wrapper>
       </b-col>
     </b-row>
-    <b-row  v-if="businessfollowers.total != 0">
-      <b-col cols="12">
-        <span class="float-right">
-          <b-pagination
-            v-model="currentPage"
-            :total-rows="businessfollowers.total"
-            :per-page="perPage"
-            @change="handlePageChange"
-            aria-controls="my-table"
-          ></b-pagination>
-        </span>
+    <b-row >
+      <b-col col="12">
+        <infinite-loading @infinite="infiniteHandler">
+          <div class="text-red" slot="no-more">{{ $t('memnetwork.No_More_Request') }}</div>
+          <div class="text-red" slot="no-results">{{ $t('memnetwork.No_More_Request') }}</div>
+        </infinite-loading>
       </b-col>
     </b-row>
+
+    <FlashMessage />
   </div>
 </template>
 
 <script>
-
 import CommunityBusiness from "../../communitybusiness"
 export default {
   components: {
@@ -61,21 +59,15 @@ export default {
   data() {
     return {
       url:null,
-      perPage: null,
-      currentPage: null,
       searchTitle: "",
-      currentIndex: -1,
+      page: 0,
+      loading: false,
+      businessfollowers: [],
+      displayfollowers: []
     };
-  },
-  computed: {
-    businessfollowers() {
-      return this.$store.state.networkProfileCommunity.businessfollowers;
-    }
   },
   mounted(){
     this.url = this.$route.params.id;
-    this.perpage = this.businessfollowers.per_page;
-    this.businessFollowers();
   },
   methods:{
     nFormatter: function(num) {
@@ -90,38 +82,63 @@ export default {
       }
       return num;
     },
-    getRequestDatas(searchTitle, currentPage) {
+
+    getRequestDatas(searchTitle) {
       let data = "";
       if (searchTitle) {
-        data = "/"+searchTitle;
-      }else if (currentPage) {
-        data = "/?page="+currentPage;
+        data = searchTitle;
       }
       console.log(data);
       return data;
     },
-    search() {
-      console.log("searching...");
-      console.log(this.searchTitle);
-      this.businessFollowers()
-    },
-    handlePageChange(value) {
-      this.currentPage = value;
-      console.log(this.currentPage);
-      this.businessFollowers();
-    },
 
-    businessFollowers() {
-      let data = this.getRequestDatas(this.searchTitle, this.currentPage)
-    this.$store
-      .dispatch("networkProfileCommunity/getBusinessFollowers", this.url+"/business/follower"+data)
-      .then(() => {
-        console.log('ohh year: business followers');
-      })
-      .catch(err => {
-        console.log({ err: err });
-      });
+    search() {
+      if(this.searchTitle){
+        this.loading = true;
+        this.page -= 1;
+        console.log("searching...");
+        console.log(this.searchTitle);
+        this.infiniteHandler();
+      }else{
+        console.log("Empty search title: "+this.searchTitle);
+        this.infiniteHandler();
+      }
     },
+    
+    infiniteHandler($state) {
+      console.log("loop");
+      const keyword = this.getRequestDatas(this.searchTitle);
+      console.log('keyword: '+keyword);
+      let formData = new FormData();
+      formData.append('keyword', keyword);
+      console.log("network/"+this.url+"/business/follower/"+this.page);
+      this.axios
+      .post("network/"+this.url+"/business/follower/"+this.page, formData)
+      .then(({ data }) => {
+       console.log(data);
+       console.log(this.page);
+        if(keyword){
+          this.displayfollowers = data.data;
+          this.searchTitle = "";
+          $state.complete();
+        }else{
+          if (data.data.length) {
+            this.page += 1;
+            console.log(this.page);
+            console.log(...data.data);
+            this.businessfollowers.push(...data.data);
+            this.displayfollowers = this.businessfollowers;
+            $state.loaded();
+          } else {
+            $state.complete();
+          }
+        }
+      }) .catch((err) => {
+          console.log({ err: err });
+      })
+      this.loading = false;
+    }
+
   }
 };
 </script>

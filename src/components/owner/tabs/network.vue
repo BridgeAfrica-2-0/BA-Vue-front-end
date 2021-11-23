@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-modal id="modal-sm" size="sm" hide-header>
-      Do you want to join this network?
+      {{ $t('profileowner.Do_you_want_to_join_this_network') }}
     </b-modal>
 
     <div class="people-style shadow" v-for="item in network" :key="item.id">
@@ -17,9 +17,19 @@
             <strong class="title"> {{ item.name }} </strong> <br />
             {{ item.category }}
             <br />
-            {{ item.followers }} Community<br />
+           {{ item.followers }} {{ $t('profileowner.Community') }}<br />
 
-            {{ item.about_network }} <b-link>Read More</b-link>
+        
+
+            <read-more
+              more-str="read more"
+              class="readmore"
+              :text="item.about_network"
+              link="#"
+              less-str="read less"
+              :max-chars="100"
+            >
+            </read-more>
           </p>
         </b-col>
 
@@ -32,25 +42,29 @@
                   size="sm"
                   class="b-background shadow"
                   :class="item.is_follow !== 0 && 'u-btn'"
+                   :id="'followbtn'+item.id"
                   variant="primary"
                   @click="handleFollow(item)"
                 >
-                  <i class="fas fa-lg btn-icon" :class="item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"></i>
-                  <span class="btn-com">Community</span>
+                 <i
+                            class="fas fa-lg btn-icon"
+                            :class="item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"
+                          ></i>
+                  <span class="btn-com">{{ $t('profileowner.Community') }}</span>
                 </b-button>
               </b-col>
 
               <b-col md="12" lg="4" xl="4" sm="12" cols="4" class="mt-2 text-center">
                 <b-button block size="sm" class="b-background shadow " variant="primary">
                   <i class="fas fa-envelope   fa-lg btn-icon "></i>
-                  <span class="btn-text">Message</span>
+                  <span class="btn-text">{{ $t('profileowner.Message') }}</span>
                 </b-button>
               </b-col>
 
               <b-col md="12" lg="4" xl="4" sm="12" cols="4" class="mt-2 text-center">
                 <b-button block size="sm" class="b-background shadow " variant="primary">
                   <i class="fas fa-map-marked-alt  fa-lg btn-icon "></i>
-                  <span class="btn-text">Direction</span>
+                  <span class="btn-text">{{ $t('profileowner.Direction') }}</span>
                 </b-button>
               </b-col>
             </b-row>
@@ -71,7 +85,6 @@ export default {
   data() {
     return {
       page: 1,
-      biz_id: null,
       network: [],
       options: {
         rewind: true,
@@ -86,13 +99,7 @@ export default {
   },
 
   computed: {
-    old_network() {
-      if (this.type == 'Follower') {
-        return this.$store.state.businessOwner.NcommunityFollower.network_followers;
-      } else {
-        return this.$store.state.profile.NcommunityFollowing.network_following;
-      }
-    },
+  
   },
 
   methods: {
@@ -101,8 +108,8 @@ export default {
 
       const url =
         this.type === 'Follower'
-          ? `profile/network/follower/${this.biz_id}/`
-          : `profile/network/following/${this.biz_id}/`;
+          ? `profile/network/follower/`
+          : `profile/network/following/`;
 
       axios
         .get(url + this.page)
@@ -136,6 +143,7 @@ export default {
     },
 
     async handleFollow(user) {
+       document.getElementById("followbtn"+user.id).disabled = true;
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
@@ -147,8 +155,11 @@ export default {
         .post(uri, data)
         .then(response => {
           user.is_follow = nextFollowState;
+           document.getElementById("followbtn"+user.id).disabled =  false;
         })
-        .catch(err => console.log(err));
+        .catch(err =>{   console.log(err)
+         document.getElementById("followbtn"+user.id).disabled =  false;
+        });
     },
   },
 };

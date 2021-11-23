@@ -24,7 +24,7 @@
                           <b-col md="6" lg="12" cols="6" xl="12" class="mt-3 mt-lg-1 mt-xl-3">
                             <h6 class="follower m-15">
                               {{ count(item.followers) }}
-                              Community
+                              {{ $t('profileowner.Community') }}
                             </h6>
                           </b-col>
                         </b-row>
@@ -35,16 +35,28 @@
                       <div>
                         <b-row class="mt-lg-0">
                           <b-col md="6" lg="12" cols="6" xl="12" class="mt-2 mt-lg-2 mt-xl-2 btn-2 center">
-                            <b-button block variant="primary" size="sm" class="b-background flexx pobtn shadow" @click="cta(item)">
+                            <b-button block variant="primary" size="sm" class="b-background flexx pobtn shadow">
                               <i class="fas fa-envelope fa-lg btn-icon"></i>
-                              <span class="btn-text">Message</span>
+                              <span class="btn-text">{{ $t('profileowner.Message') }}</span>
                             </b-button>
                           </b-col>
 
                           <b-col md="6" lg="12" cols="6" xl="12" class="mt-2 mt-lg-2 mt-xl-2 btn-2 center">
-                            <b-button block size="sm" class="b-background flexx pobtn shadow" variant="primary">
-                              <i class="fas fa-user-plus fa-lg btn-icon"></i>
-                              <span class="btn-com">Community</span>
+                            <b-button
+                              block
+                              size="sm"
+                              class="b-background flexx pobtn shadow"
+                              :class="item.is_follow !== 0 && 'u-btn'"
+                              :id="'followbtn' + item.id"
+                              variant="primary"
+                              @click="handleFollow(item)"
+                            >
+                              <i
+                                class="fas fa-lg btn-icon"
+                                :class="item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"
+                              ></i>
+
+                              <span class="btn-com">{{ $t('dashboard.Community') }}</span>
                             </b-button>
                           </b-col>
                         </b-row>
@@ -60,16 +72,17 @@
       <infinite-loading :identifier="infiniteId" @infinite="infiniteHandler" ref="infiniteLoading"></infinite-loading>
     </div>
   </div>
-</template>
+</template>  
 
 <script>
 import axios from 'axios';
 export default {
-  props: ['type', 'searchh'],
+  props: ["type","searchh"],   
   data() {
     return {
       page: 1,
-      infiniteId: +new Date(),
+      users:[],
+       infiniteId: +new Date(),
       options: {
         rewind: true,
         autoplay: true,
@@ -88,13 +101,16 @@ export default {
     },
     users() {
       if (this.type == 'Follower') {
+    old_users() {
+      if (this.type == "Follower") {
+
         return this.$store.state.profile.UcommunityFollower.user_followers;
         // return this.$store.state.profile.UcommunityFollower.user_followers;
       } else {
         return this.$store.state.profile.UcommunityFollowing.user_following;
         // return this.$store.state.profile.UcommunityFollower.user_followers;
       }
-    },
+    }}
   },
 
   methods: {
@@ -111,14 +127,52 @@ export default {
       // this.$router.push({ path: `${path}`, query: { tabId: 1, msgTabId: 1 } });
       this.$router.push({ path: `/business_owner/${this.activeAccount.id}`, query: { tabId: 1, msgTabId: 0 } });
     },
-    search() {
-      console.log('search started');
 
-      if (this.type == 'Follower') {
-        this.$store.commit('profile/setUcommunityFollower', { user_followers: [], total_user_follower: 0 });
-      } else {
-        this.$store.commit('profile/setUcommunityFollowing', { user_following: [], total_user_following: 0 });
-      }
+
+ async handleFollow(user) {
+      
+      console.log("yoo ma gee");
+       document.getElementById("followbtn"+user.id).disabled = true;
+      const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
+      const nextFollowState = user.is_follow === 0 ? 1 : 0;
+      const data = {
+        id: user.id,
+        type: 'user',
+      };
+
+      await axios
+        .post(uri, data)
+        .then(({ data }) => {
+          console.log(data);
+          user.is_follow = nextFollowState;
+           document.getElementById("followbtn"+user.id).disabled = false;
+        })
+         
+          .catch((err) =>{  
+          
+          console.log({err:err})  ;
+           document.getElementById("followbtn"+user.id).disabled =  false;
+          
+        });
+    },
+
+
+
+
+
+    search(){
+     
+       console.log('search started');
+       
+         if(this.type=="Follower"){ 
+         
+        this.$store.commit("profile/setUcommunityFollower",{ "user_followers": [ ], "total_user_follower": 0 }); 
+
+       }else{
+       
+        
+        this.$store.commit("profile/setUcommunityFollowing",{ "user_following": [ ], "total_user_following": 0 }); 
+       }
 
       this.page = 1;
       this.infiniteId += 1;
@@ -174,7 +228,7 @@ export default {
         .catch((err) => {
           console.log({ err: err });
         });
-    },
+    },}
   },
 };
 </script>

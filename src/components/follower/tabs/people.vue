@@ -20,7 +20,7 @@
                       </b-col>
 
                       <b-col md="6" lg="6" cols="6" sm="6" class="mt-3 mt-lg-2 mt-xl-2">
-                        <h6 class="follower">{{ count(item.followers) }} Community</h6>
+                        <h6 class="follower">{{ count(item.followers) }} {{ $t('profilefollower.Community') }}</h6>
                       </b-col>
                     </b-row>
                   </div>
@@ -38,7 +38,7 @@
                           @click="cta(item)"
                         >
                           <i class="fas fa-envelope fa-lg btn-icon"></i>
-                          <span class="btn-text">Message</span>
+                          <span class="btn-text">{{ $t('profilefollower.Message') }}</span>
                         </b-button>
                       </b-col>
 
@@ -46,11 +46,18 @@
                         <b-button
                           block
                           size="sm"
-                          class="b-background flexx pobtn shadow mr-lg-3 mr-xl-3"
+                          :id="'followbtn' + item.id"
+                          class="b-background flexx pobtn shadow"
+                          :class="item.is_follow !== 0 && 'u-btn'"
                           variant="primary"
+                          @click="handleFollow(item)"
                         >
-                          <i class="fas fa-user-plus fa-lg btn-icon"></i>
-                          <span class="btn-com">Community</span>
+                          <i
+                            class="fas fa-lg btn-icon"
+                            :class="item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"
+                          ></i>
+
+                          <span class="btn-com">{{ $t('dashboard.Community') }}</span>
                         </b-button>
                       </b-col>
                     </b-row>
@@ -75,6 +82,7 @@ export default {
   data() {
     return {
       page: 1,
+      users: [],
       foll_id: '',
       options: {
         rewind: true,
@@ -90,6 +98,16 @@ export default {
 
   mounted() {
     this.foll_id = this.$route.params.id;
+  },
+
+  computed: {
+    old_users() {
+      if (this.type == 'Follower') {
+        return this.$store.state.profile.UcommunityFollower.user_followers;
+      } else {
+        return this.$store.state.profile.UcommunityFollowing.user_following;
+      }
+    },
   },
 
   computed: {
@@ -118,6 +136,30 @@ export default {
 
       // this.$router.push({ path: `${path}`, query: { tabId: 1, msgTabId: 1 } });
       this.$router.push({ path: `/business_owner/${this.activeAccount.id}`, query: { tabId: 1, msgTabId: 0 } });
+    },
+
+    async handleFollow(user) {
+      console.log('yoo ma gee');
+      document.getElementById('followbtn' + user.id).disabled = true;
+      const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
+      const nextFollowState = user.is_follow === 0 ? 1 : 0;
+      const data = {
+        id: user.id,
+        type: 'user',
+      };
+
+      await axios
+        .post(uri, data)
+        .then(({ data }) => {
+          console.log(data);
+          user.is_follow = nextFollowState;
+          document.getElementById('followbtn' + user.id).disabled = false;
+        })
+
+        .catch((err) => {
+          console.log({ err: err });
+          document.getElementById('followbtn' + user.id).disabled = false;
+        });
     },
 
     count(number) {

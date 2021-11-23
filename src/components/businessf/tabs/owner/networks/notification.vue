@@ -11,14 +11,14 @@
               unchecked-value="not_accepted"
               @click="selectAll"
             >
-              {{ selectAll ? "Un-select All" : "Select All" }}
+              {{ selectAll ? $t('network.Un_select_All') : $t('network.Select_All') }}
             </b-form-checkbox>
           </div>
         </b-col>
         <b-col>
           <div class="b-bottomn f-right">
             <b-button variant="primary" class="a-button-l duration">
-              Mark as Read</b-button
+              {{ $t('network.Mark_as_Read') }}</b-button
             >
           </div>
         </b-col>
@@ -66,7 +66,7 @@
       <b-row>
         <b-col>
           <p class="text-center" v-if="allNotifications < 1">
-            No Notifications To Show
+            {{ $t('network.No_Notifications_To_Show') }}
           </p>
         </b-col>
       </b-row>

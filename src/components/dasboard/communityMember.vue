@@ -24,7 +24,7 @@
                           <b-col md="6" lg="12" cols="6" xl="12" class="mt-3 mt-lg-1 mt-xl-3">
                             <h6 class="follower m-15">
                               {{ count(item.followers) }}
-                              {{ $t('profile.community') }}
+                              {{ $t('dashboard.Community') }}
                             </h6>
                           </b-col>
                         </b-row>
@@ -35,16 +35,34 @@
                       <div>
                         <b-row class="mt-lg-0">
                           <b-col md="6" lg="12" cols="6" xl="12" class="mt-2 mt-lg-2 mt-xl-2 btn-2 center">
-                            <b-button block variant="primary" size="sm" class="b-background flexx pobtn shadow">
+                            <b-button
+                              block
+                              variant="primary"
+                              size="sm"
+                              class="b-background flexx pobtn shadow"
+                              @click="cta(item)"
+                            >
                               <i class="fas fa-envelope fa-lg btn-icon"></i>
-                              <span class="btn-text"> {{ $t('profile.messages') }}</span>
+                              <span class="btn-text"> {{ $t('dashboard.Messages') }}</span>
                             </b-button>
                           </b-col>
 
                           <b-col md="6" lg="12" cols="6" xl="12" class="mt-2 mt-lg-2 mt-xl-2 btn-2 center">
-                            <b-button block size="sm" class="b-background flexx pobtn shadow" variant="primary"  @click="cta(item)">
-                              <i class="fas fa-user-plus fa-lg btn-icon"></i>
-                              <span class="btn-com">{{ $t('profile.community') }}</span>
+                            <b-button
+                              block
+                              size="sm"
+                              class="b-background flexx pobtn shadow"
+                              :class="item.is_follow !== 0 && 'u-btn'"
+                              :id="'followbtn' + item.id"
+                              variant="primary"
+                              @click="handleFollow(item)"
+                            >
+                              <i
+                                class="fas fa-lg btn-icon"
+                                :class="item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"
+                              ></i>
+
+                              <span class="btn-com">{{ $t('dashboard.Community') }}</span>
                             </b-button>
                           </b-col>
                         </b-row>
@@ -70,7 +88,7 @@ export default {
 
   data() {
     return {
-      page: 1,
+      page: 2,
       options: {
         rewind: true,
         autoplay: true,
@@ -93,7 +111,7 @@ export default {
     },
     activeAccount() {
       return this.$store.getters['auth/profilConnected'];
-    }
+    },
   },
 
   methods: {
@@ -118,8 +136,34 @@ export default {
         return number / 1000 + 'K';
       } else return number;
     },
+
+    async handleFollow(user) {
+      console.log('yoo ma gee');
+      document.getElementById('followbtn' + user.id).disabled = true;
+      const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
+      const nextFollowState = user.is_follow === 0 ? 1 : 0;
+      const data = {
+        id: user.id,
+        type: 'user',
+      };
+
+      await axios
+        .post(uri, data)
+        .then(({ data }) => {
+          console.log(data);
+          user.is_follow = nextFollowState;
+          document.getElementById('followbtn' + user.id).disabled = false;
+        })
+
+        .catch((err) => {
+          console.log({ err: err });
+          document.getElementById('followbtn' + user.id).disabled = false;
+        });
+    },
+
     infiniteHandler($state) {
       console.log('hahahahahahahah');
+
       let url = null;
 
       if (this.type == 'Follower') {
@@ -134,23 +178,29 @@ export default {
             if (data.data.user_followers.length) {
               this.page += 1;
 
-              this.users.push(...data.data.user_followers);
-              $state.loaded();
-            } else {
-              $state.complete();
-            }
-          } else {
-            if (data.data.user_following.length) {
-              this.page += 1;
+              if (this.type == 'Follower') {
+                if (data.data.user_followers.length) {
+                  this.page += 1;
 
-              this.users.push(...data.data.user_following);
-              $state.loaded();
-            } else {
-              $state.complete();
+                  this.users.push(...data.data.user_followers);
+                  $state.loaded();
+                } else {
+                  $state.complete();
+                }
+              } else {
+                if (data.data.user_following.length) {
+                  this.page += 1;
+
+                  this.users.push(...data.data.user_following);
+                  $state.loaded();
+                } else {
+                  $state.complete();
+                }
+              }
+
+              console.log(data);
             }
           }
-
-          console.log(data);
         })
         .catch((err) => {
           console.log({ err: err });

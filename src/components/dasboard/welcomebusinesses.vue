@@ -1,39 +1,36 @@
 <template>
   <div>
-    <div
-      v-for="value in business_around"
-      v-bind:key="value.name"
-      class="people-style shadow"
-    >
+    <div v-for="value in business_around" v-bind:key="value.name" class="people-style shadow">
       <b-row>
         <b-col md="4" xl="3" lg="3" cols="5" sm="3">
           <div class="center-img">
             <splide :options="options" class="r-image">
               <splide-slide cl>
-                <img :src="value.logo_path" class="r-image" />      
+                <img :src="value.logo_path" class="r-image" />
               </splide-slide>
             </splide>
           </div>
         </b-col>
         <b-col md="8" cols="7" lg="7" xl="5" sm="5">
-           <div class="title textt bold username"> <strong> {{ value.name }}  </strong></div>
-          <p class="textt"  >
+          <div class="title textt bold username">
+            <strong> {{ value.name }} </strong>
+          </div>
+          <p class="textt">
+            <span v-for="cat in value.category" :key="cat.name"> {{ cat.name }} </span>
             <br />
-            {{ value.category }}
-            <br />
-            {{ value.followers }} Community <br />
+            {{ count(value.followers) }} {{ $t('dashboard.Community') }} <br />
 
             <span class="location">
-              <b-icon-geo-alt class="ico"></b-icon-geo-alt> Douala cameroon
+              <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{ $t('dashboard.Douala') }} {{ $t('dashboard.Cameroon') }}
             </span>
             <br />
 
             <read-more
-              more-str="read more"
+              :more-str="$t('read_more')"
               class="readmore"
               :text="value.about_business"
               link="#"
-              less-str="read less"
+              :less-str="$t('read_less')"
               :max-chars="50"
             >
             </read-more>
@@ -43,61 +40,31 @@
         <b-col lg="12" xl="4" md="12" cols="12" sm="4">
           <div class="s-button">
             <b-row>
-              <b-col
-                md="4"
-                lg="4"
-                xl="12"
-                sm="12"
-                cols="4"
-                class="mt-2 text-center"
-              >
+              <b-col md="4" lg="4" xl="12" sm="12" cols="4" class="mt-2 text-center">
                 <b-button
                   block
                   size="sm"
-                  class="b-background shadow"
+                  :id="'followbtn' + value.id"
+                  :class="value.is_follow !== 0 && 'u-btn'"
                   variant="primary"
+                  @click="handleFollow(value)"
                 >
-                  <i class="fas fa-user-plus fa-lg btn-icon"></i>
-                  <span class="btn-com">Community</span>
+                  <i class="fas fa-lg btn-icon" :class="value.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"></i>
+                  <span class="btn-com">{{ $t('dashboard.Community') }}</span>
                 </b-button>
               </b-col>
 
-              <b-col
-                md="4"
-                lg="4"
-                xl="12"
-                sm="12"
-                cols="4"
-                class="mt-2 text-center"
-              >
-                <b-button
-                  block
-                  size="sm"
-                  class="b-background shadow"
-                  variant="primary"
-                  @click="cta_business(value)"
-                >
+              <b-col md="4" lg="4" xl="12" sm="12" cols="4" class="mt-2 text-center">
+                <b-button block size="sm" class="b-background shadow" variant="primary" @click="cta_business(value)">
                   <i class="fas fa-envelope fa-lg btn-icon"></i>
-                  <span class="btn-text">Message</span>
+                  <span class="btn-text">{{ $t('dashboard.Message') }}</span>
                 </b-button>
               </b-col>
 
-              <b-col
-                md="4"
-                lg="4"
-                xl="12"
-                sm="12"
-                cols="4"
-                class="mt-2 text-center"
-              >
-                <b-button
-                  block
-                  size="sm"
-                  class="b-background shadow"
-                  variant="primary"
-                >
+              <b-col md="4" lg="4" xl="12" sm="12" cols="4" class="mt-2 text-center">
+                <b-button block size="sm" class="b-background shadow" variant="primary">
                   <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
-                  <span class="btn-text">Direction</span>
+                  <span class="btn-text">{{ $t('dashboard.Direction') }}</span>
                 </b-button>
               </b-col>
             </b-row>
@@ -105,56 +72,111 @@
         </b-col>
       </b-row>
     </div>
+
+    <infinite-loading @infinite="infiniteHandler"></infinite-loading>
   </div>
 </template>
 
 <script>
+import axios from 'axios';
 export default {
-  props: ["title", "image"],
+  props: ['title', 'image'],
 
   data() {
     return {
+      page: 1,
       options: {
         rewind: true,
         autoplay: true,
         perPage: 1,
+
         pagination: false,
 
-        type: "loop",
-        perMove: 1
-      }
+        type: 'loop',
+        perMove: 1,
+      },
     };
   },
 
   computed: {
     business_around() {
       return this.$store.state.auth.businessAround;
-    }
+    },
   },
-  methods:{
+  methods: {
     cta_business(data) {
       console.log(data);
-      this.$store.commit("businessChat/setSelectedChat", data)
+      this.$store.commit('businessChat/setSelectedChat', data);
       this.$router.push({ path: '/business_owner/2', query: { tabId: 1, msgTabId: 1 } });
     },
-  }
+
+    count(number) {
+      if (number >= 1000000) {
+        return number / 1000000 + 'M';
+      }
+      if (number >= 1000) {
+        return number / 1000 + 'K';
+      } else return number;
+    },
+
+    async handleFollow(user) {
+      document.getElementById('followbtn' + user.id).disabled = true;
+
+      const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
+      const nextFollowState = user.is_follow === 0 ? 1 : 0;
+      const data = {
+        id: user.id,
+        type: 'business',
+      };
+
+      await axios
+        .post(uri, data)
+        .then((response) => {
+          console.log(response);
+          user.is_follow = nextFollowState;
+          document.getElementById('followbtn' + user.id).disabled = false;
+        })
+        .catch((err) => {
+          console.log(err);
+          document.getElementById('followbtn' + user.id).disabled = false;
+        });
+    },
+
+    async infiniteHandler($state) {
+      let url = 'business/around?page=' + this.page;
+
+      console.log(url);
+
+      await axios
+        .get(url)
+        .then(({ data }) => {
+          console.log(data.data);
+
+          if (data.data.length) {
+            this.business_around.push(...data.data);
+            this.page += 1;
+
+            $state.loaded();
+          } else {
+            $state.complete();
+          }
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+  },
 };
 </script>
 
 <style scoped>
-
-
- .username {
-    
-    text-overflow: ellipsis;
-    overflow: hidden;
-    width: 100%;
-    height: 1.6em;
-    white-space: nowrap;
-  }
-
-
-
+.username {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 100%;
+  height: 1.6em;
+  white-space: nowrap;
+}
 
 @media only screen and (min-width: 768px) {
   .btn-text {
@@ -222,13 +244,13 @@ export default {
     color: black;
 
     line-height: 35px;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
 
   .textt {
     color: #000;
 
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 12px;
     line-height: 30px;
@@ -275,13 +297,13 @@ export default {
     color: black;
 
     line-height: 35px;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
 
   .textt {
     color: #000;
 
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
@@ -409,6 +431,6 @@ export default {
 
 <style >
 .readmore p {
-    margin: 0px !important;
+  margin: 0px !important;
 }
 </style>

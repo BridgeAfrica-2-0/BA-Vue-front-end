@@ -16,14 +16,17 @@
             <strong class="title"> {{ business.name }} </strong> <br />
             {{ business.category }}
             <br />
-            {{ business.followers }} Community <br />
+            {{ business.followers }} {{ $t('network.Community') }} <br />
 
             <span class="location">
               <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{ business.location_description }}
             </span>
             <br />
             <span v-if="business.about_business.length < 65">{{ business.about_business }}</span>
-            <span v-else>{{ business.about_business.substring(0, 65) + '...' }} <b-link>Read More</b-link></span>
+            <span v-else
+              >{{ business.about_business.substring(0, 65) + '...' }}
+              <b-link>{{ $t('network.Read_More') }}</b-link></span
+            >
           </p>
         </b-col>
 
@@ -33,21 +36,21 @@
               <b-col md="12" lg="4" xl="4" sm="12" cols="4" class="mt-2 text-center">
                 <b-button block size="sm" class="b-background shadow" variant="primary">
                   <i class="fas fa-user-plus fa-lg btn-icon"></i>
-                  <span class="btn-com">Community</span>
+                  <span class="btn-com">{{ $t('network.Community') }}</span>
                 </b-button>
               </b-col>
 
               <b-col md="12" lg="4" xl="4" sm="12" cols="4" class="mt-2 text-center">
                 <b-button block size="sm" class="b-background shadow" variant="primary" @click="cta(business)">
                   <i class="fas fa-envelope fa-lg btn-icon"></i>
-                  <span class="btn-text">Message</span>
+                  <span class="btn-text">{{ $t('network.Message') }}</span>
                 </b-button>
               </b-col>
 
               <b-col md="12" lg="4" xl="4" sm="12" cols="4" class="mt-2 text-center">
                 <b-button block size="sm" class="b-background shadow" variant="primary">
                   <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
-                  <span class="btn-text">Direction</span>
+                  <span class="btn-text">{{ $t('network.Direction') }}</span>
                 </b-button>
               </b-col>
             </b-row>
@@ -73,18 +76,18 @@ export default {
         type: 'loop',
         perMove: 1,
       },
-    }
+    };
   },
   computed: {
     activeAccount() {
       return this.$store.getters['auth/profilConnected'];
-    }
+    },
   },
-  methods:{
+  methods: {
     cta(data) {
       console.log(data);
       this.$store.commit('businessChat/setSelectedChat', data);
-      
+
       let path = '';
       if (this.activeAccount.user_type == 'business') {
         path = '/business_owner/' + this.activeAccount.id;
@@ -94,9 +97,8 @@ export default {
 
       // this.$router.push({ path: `${path}`, query: { tabId: 1, msgTabId: 1 } });
       this.$router.push({ path: `/business_owner/${this.activeAccount.id}`, query: { tabId: 1, msgTabId: 1 } });
-
     },
-  }
+  },
 };
 </script>
 

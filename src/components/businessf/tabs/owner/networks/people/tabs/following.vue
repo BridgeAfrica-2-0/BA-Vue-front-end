@@ -9,7 +9,7 @@
           </b-input-group-prepend>
           <b-form-input
             aria-label="Text input with checkbox"
-            placeholder="Search Something"
+            :placeholder="$t('network.Search_Something')"
             type="text"
             class="form-control"
             v-model="searchTitle"
@@ -19,7 +19,7 @@
     </b-row>
     <br/>
 
-    <b-row cols="2">
+    <b-row cols="1">
       <b-col class="ml-0 mr-0"
         v-for="member in displayfollowing"
         :key="member.id"
@@ -40,8 +40,8 @@
     <b-row >
       <b-col col="12">
         <infinite-loading @infinite="infiniteHandler">
-          <div class="text-red" slot="no-more">No More Request</div>
-          <div class="text-red" slot="no-results">No More Request</div>
+          <div class="text-red" slot="no-more">{{ $t('network.No_More_Request') }}</div>
+          <div class="text-red" slot="no-results">{{ $t('network.No_More_Request') }}</div>
         </infinite-loading>
       </b-col>
     </b-row>

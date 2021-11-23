@@ -60,7 +60,7 @@ export default {
     return {
       url:null,
       searchTitle: "",
-      page: 0,
+      page: 1,
       loading: false,
       peoplefollowers: [],
       displayfollowers: []
@@ -112,10 +112,14 @@ export default {
       let formData = new FormData();
       formData.append('keyword', keyword);
       console.log("network/"+this.url+"/people/follower/"+this.page);
+      let lien = "";
+      if(keyword == ""){
+          lien =  'network/'+this.url+'/people/follower/'+this.page;
+      }else{ lien ='network/'+this.url+'/people/follower/'+this.page+','+ formData}
       this.axios
-      .post("network/"+this.url+"/people/follower/"+this.page, formData)
-      .then(({ data }) => {
-       console.log(data.data);
+      .post(lien)
+      .then( ({data})  => {
+       console.log(data);
        console.log(this.page);
         if(keyword){
           this.displayfollowers = data.data;

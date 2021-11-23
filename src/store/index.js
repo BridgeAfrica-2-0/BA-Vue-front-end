@@ -44,9 +44,9 @@ import { notification } from "./notifications"
 Vue.use(Vuex);
 
   // axios.defaults.baseURL = "https://team2dev.maxinemoffett.com/api/v1";
-// axios.defaults.baseURL = "https://edson.maxinemoffett.com/api/v1/";
+axios.defaults.baseURL = "https://edson.maxinemoffett.com/api/v1/";
 
-axios.defaults.baseURL = "https://13fd-154-72-167-62.ngrok.io/api/v1/";
+// axios.defaults.baseURL = "https://13fd-154-72-167-62.ngrok.io/api/v1/";
 
 
 export default new Vuex.Store({

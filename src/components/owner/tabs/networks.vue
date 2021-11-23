@@ -1,16 +1,18 @@
 <template>
 
   <div class="t-color">
+
+  
     
     <div>
       <fas-icon class="icons" :icon="['fas', 'project-diagram']" size="lg" />
-      <span class="t-color">  Network </span>
+      <span class="t-color">  {{ $t('profileowner.Network') }} </span>
 
       <b-button
-        class="btn btn-outline-primary pull-right float-right mb-2 blec-font"
+        class="btn btn-outline-primary pull-right float-right mb-2 blec-font"   
         style="margin-top: -6px"
         @click="showmodal(true, 'add')"
-        >Add Network</b-button
+        >{{ $t('profileowner.Add_Network') }}</b-button
       >
 
       <hr />   
@@ -71,7 +73,7 @@
                       <br />   
                    
                       
-                      <span class="m-1" v-for=" cat in network.categories" :key="cat "> {{cat}}  </span>
+                      <span class="m-1" v-for=" cat in network.assign_categories" :key="cat.id "> {{cat.name}}  </span>
                       <br />
                       
                     {{ network.member_count }}  Community  <br />
@@ -112,12 +114,12 @@
 
     <div class="h-100 w-100" v-if="networks.length < 1 && !loader">
       <div class="mx-auto text-center my-5">
-        <h2 class="my-3">Builds networks around your Business</h2>
-        <p class="my-2">Create network to stay in touch with just the people</p>
-        <p class="my-2">you want Engage, share, Make Plans and much more</p>
+        <h2 class="my-3">{{$t('profileowner.Build_networks_around_your_Business')}}</h2>
+        <p class="my-2">{{$t('profileowner.Create_network_to_stay_in_touch_with_just_the_people')}}</p>
+        <p class="my-2">{{$t('profileowner.you_want_Engage_share_Make_Plans_and_much_more')}}</p>
         <p class="my-3">
           <b-button @click="showmodal(true, 'add')" variant="primary"
-            >Add Network</b-button
+            >{{ $t('profileowner.Add_Network') }}</b-button
           >
         </p>
       </div>
@@ -125,7 +127,7 @@
 
     <b-modal
       hide-footer
-      :title="editNet ? 'Edit network' : 'Add Network'"
+      :title="editNet ? $t('profileowner.Edit_network') : $t('profileowner.Add_Network')"
       size="lg"
       v-model="showModal"
       ref="netmodal"
@@ -157,10 +159,10 @@
               </a>
               <div class="post-pending pt-2">
                 <p>
-                  Approval Required <br />
-                  Bridge Africa admin will review your request to create a
-                  network and notify you upon approval you can the change the
-                  network settings and invite people to join your network
+                  {{$t('profileowner.Approval_Required')}} <br />
+                  {{$t('profileowner.Bridge_Africa_admin_will_review_your_request')}}  {{$t('profileowner.to_create_a')}}
+                  {{$t('profileowner.network')}} {{$t('profileowner.and')}} {{$t('profileowner.notify_you')}} {{$t('profileowner.upon_approval_you_can_the_change_the')}}
+                  {{$t('profileowner.network_settings')}} {{$t('profileowner.and')}} {{$t('profileowner.invite_people_to_join_your_network')}}
                 </p>
               </div>
             </div>
@@ -169,7 +171,7 @@
             <b-col md="6">
               <b-form-group
                 label-cols-lg="12"
-                label="Network Name"
+                :label="$t('profileowner.Network_Name')"
                 label-size="md"
                 label-class=" pt-0 "
                 class="mb-0"
@@ -184,27 +186,33 @@
               </b-form-group>
             </b-col>
             <b-col md="6">
-              <b-form-group
-                label-cols-lg="12"
-                label="Network Category"
-                label-size="md"
-                label-class=" pt-0"
-                class="mb-0"
-              >
-                <b-form-input
-                  v-model="createdNetwork.network_category"
-                  id="network_name"
-                  placeholder=""
-                  required
-                >
-                </b-form-input>
-              </b-form-group>
+            
+
+               <div>
+                  <label class="typo__label"> {{ $t('profileowner.Category') }} </label>
+                  {{selectedcategories}}
+                  <multiselect
+                    v-model="multiselecvalue"
+                   
+                    :placeholder="$t('profileowner.Search_or_add_a_tag')"
+                    :label="$t('profileowner.name')"
+                    track-by="id"
+                    :options="pcategories"
+                    :multiple="true"
+                    :taggable="true"
+                   
+                  ></multiselect>
+                </div>
+
+
+
+
             </b-col>
 
             <b-col md="6">
               <b-form-group
                 label-cols-lg="12"
-                label="Network Address"
+                :label="$t('profileowner.Network_Address')"
                 label-size="md"
                 label-class=" pt-0"
                 class="mb-0"
@@ -221,11 +229,11 @@
 
             <b-col md="6">
               <div class="form-group">
-                <label for="country" class="username"> Country :</label><br />
+                <label for="country" class="username"> {{ $t('profileowner.Country') }} :</label><br />
   <multiselect
                   v-model="country"
                   @input="Region"
-                  placeholder="Search "
+                  :placeholder="$t('profileowner.Search')"
                   label="name"
                   track-by="id"
                   :options="countries"
@@ -235,12 +243,12 @@
             </b-col>
             <b-col md="6">
               <div class="form-group">
-                <label for="country" class="username"> Region :</label><br />
+                <label for="country" class="username"> {{ $t('profileowner.Region') }} :</label><br />
 
                 <multiselect
                   v-model="region"
                   @input="Division"
-                  placeholder="Search"
+                  :placeholder="$t('profileowner.Search')"
                   label="name"
                   track-by="id"
                   :options="regions"
@@ -250,11 +258,11 @@
             </b-col>
             <b-col md="6">
               <div class="form-group">
-                <label for="country" class="username"> Division :</label><br />
+                <label for="country" class="username"> {{ $t('profileowner.Division') }} :</label><br />
             <multiselect
                   v-model="division"
                   @input="Municipality"
-                  placeholder="Search"
+                  :placeholder="$t('profileowner.Search')"
                   label="name"
                   track-by="id"
                   :options="divisions"
@@ -264,13 +272,13 @@
             </b-col>
             <b-col md="6">
               <div class="form-group">
-                <label for="country" class="username"> Municipality :</label
+                <label for="country" class="username"> {{ $t('profileowner.Municipality') }} :</label
                 ><br />
 
              <multiselect
                   v-model="municipality"
                   @input="Locality"
-                  placeholder="Search"
+                  :placeholder="$t('profileowner.Search')"
                   label="name"
                   track-by="id"
                   :options="municipalities"
@@ -280,10 +288,10 @@
             </b-col>
             <b-col md="6">
               <div class="form-group">
-                <label for="Neighbor" class="username"> Neighbor :</label><br />
+                <label for="Neighbor" class="username"> {{ $t('profileowner.Neighbor') }} :</label><br />
                 <multiselect
                   v-model="locality"
-                  placeholder="Search"
+                  :placeholder="$t('profileowner.Search')"
                   label="name"
                   track-by="id"
                   :options="localities"
@@ -294,7 +302,7 @@
             <b-col md="6">
               <b-form-group
                 label-cols-lg="12"
-                label="City"
+                :label="$t('profileowner.City')"
                 label-size="md"
                 label-class=" pt-0"
                 class="mb-0"
@@ -311,7 +319,7 @@
             <b-col md="6">
               <b-form-group
                 label-cols-lg="12"
-                label="Primary Phone"
+                :label="$t('profileowner.Primary_Phone')"
                 label-size="md"
                 label-class="pt-0"
                 class="mb-0"
@@ -328,7 +336,7 @@
             <b-col md="6">
               <b-form-group
                 label-cols-lg="12"
-                label="Secondary Phone"
+                :label="$t('profileowner.Secondary_Phone')"
                 label-size="md"
                 label-class=" pt-0"
                 class="mb-0"
@@ -345,7 +353,7 @@
             <b-col md="6">
               <b-form-group
                 label-cols-lg="12"
-                label=" Brief Description"
+                :label="$t('profileowner.Brief_Description') "
                 label-size="md"
                 label-class=" pt-0"
                 class="mb-0"
@@ -353,7 +361,7 @@
                 <b-form-textarea
                   id="textarea"
                   v-model="createdNetwork.description"
-                  placeholder="Enter something..."
+                  :placeholder="$t('profileowner.Enter_something')"
                   rows="3"
                   max-rows="6"
                 ></b-form-textarea>
@@ -362,7 +370,7 @@
             <b-col md="6">
               <b-form-group
                 label-cols-lg="12"
-                label="Purpose Of Network"
+                :label="$t('profileowner.Purpose_Of_Network')"
                 label-size="md"
                 label-class=" pt-0"
                 class="mb-0"
@@ -379,7 +387,7 @@
             <b-col md="6">
               <b-form-group
                 label-cols-lg="12"
-                label="Special Needs"
+                :label="$t('profileowner.Special_Needs')"
                 label-size="md"
                 label-class=" pt-0"
                 class="mb-0"
@@ -396,7 +404,7 @@
             <b-col md="6">
               <b-form-group
                 label-cols-lg="12"
-                label="Network Image"
+                :label="$t('profileowner.Network_Image')"
                 label-size="md"
                 label-class="pt-0"
                 class="mb-0"
@@ -421,7 +429,7 @@
                     variant="primary"
                     class="mt-3 text-center"
                   >
-                    change Image
+                    {{ $t('profileowner.change_Image') }}
                   </b-button>
                 </div>
 
@@ -437,7 +445,7 @@
                   >
                     <div class="drag-text">
                       <i class="fa fa-plus"> </i>
-                      <h3 class="username">Business Logo</h3>
+                      <h3 class="username">{{ $t('profileowner.Business_Logo') }}</h3>
                     </div>
                   </a>
                   <div></div>
@@ -447,7 +455,7 @@
             <b-col md="6">
               <b-form-group
                 label-cols-md="6"
-                label="Allow Business to join network"
+                :label="$t('profileowner.Allow_Business_to_join_network')"
                 label-size="md"
                 label-class=" pt-0"
                 class="mb-0"
@@ -469,7 +477,7 @@
           >
           <b-spinner v-if="loader" variant="primary"></b-spinner>
           <b-button @click="action" class="mt-2 button-btn" variant="primary">
-            {{ editNet ? "Edit Network" : "Add Network" }}
+            {{ editNet ? $t('profileowner.Edit_Network') : $t('profileowner.Add_Network') }}
           </b-button>
         </b-form>
       </b-container>
@@ -516,6 +524,7 @@ export default {
   data() {
     return {
       page: 1,
+      multiselecvalue: [],
       infiniteId: 1,
       logoimg_url: null,
       BaseURL: process.env.VUE_APP_API_URL,
@@ -580,8 +589,9 @@ export default {
   },
 
   mounted() {
-    //this.getNetworks();
+    
     this.Country();
+    this.categories();
     
   },
 
@@ -594,6 +604,27 @@ export default {
      
      
     },
+
+     pcategories() {
+      return this.$store.state.auth.categories;
+    },
+
+
+     selectedcategories: function () {
+      let selectedUsers = [];
+
+      this.multiselecvalue.forEach((item) => {
+        if (item.id) {
+          selectedUsers.push(item.id);
+        } else {
+          selectedUsers.push(item.category_id);
+        }
+      });
+      return selectedUsers;
+    },
+
+
+
 
     pagee: function(){
        return this.page;
@@ -647,6 +678,20 @@ export default {
 
       return err;
     },
+
+
+
+     categories() {
+      this.$store
+        .dispatch("auth/categories")
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
 
     netCategory(category){
     let cat="";
@@ -803,7 +848,7 @@ return cat;
               this.flashMessage.show({
                 status: "error",
 
-                message: "Unable to Create Your Network",
+                message: err.response.statusText,
                 blockClass: "custom-block-class",
               });
               console.log({ err: err });
@@ -955,8 +1000,8 @@ return cat;
       fd.append("primary_phone", this.createdNetwork.primary_phone);
       fd.append("secondary_phone", this.createdNetwork.secondary_phone);
       fd.append("email", "dev@bav.com");
-      fd.append("network_category", this.createdNetwork.network_category);
-      fd.append("network_category_id", 1);
+      fd.append("network_categories", this.selectedcategories);
+      
       fd.append("description", this.createdNetwork.description);
       fd.append("purpose", this.createdNetwork.purpose);
       fd.append("special_needs", this.createdNetwork.special_needs);
@@ -969,7 +1014,7 @@ return cat;
 
       fd.append("allow_business", this.createdNetwork.allow_business);
       if (this.editNet) {
-        fd.append("_method", "PUT");
+        fd.append("_method", "POST");
         let data = {
           data: fd,
           id: this.createdNetwork.id,
@@ -1007,7 +1052,7 @@ return cat;
 
 
       axios
-        .get("network/edit/"+network.id)
+        .get("network/"+network.id+"/edit-infos/")   
         .then(({ data }) => {
           console.log(data);
 
@@ -1036,7 +1081,7 @@ return cat;
       this.createdNetwork.business_id = network.business_id;
       this.createdNetwork.address = network.address;
       this.createdNetwork.neighbourhood = network.neighbourhood;    
-      this.createdNetwork.network_category =  this.netCategory( network.categories);
+      this.createdNetwork.network_categories =  this.netCategory( network.categories);
       this.createdNetwork.description = network.description;
       this.createdNetwork.purpose = network.purpose;
       this.createdNetwork.special_needs = network.special_needs;

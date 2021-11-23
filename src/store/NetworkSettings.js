@@ -11,6 +11,7 @@ export default {
     blocknetworks: [],
     blockbusiness: [],
     networkinfo: [],
+    editnetworkinfo: [],
     general: [],
   },
 
@@ -33,8 +34,11 @@ export default {
     getblockbusinesses(state) {
       return state.blockbusiness;
     },
-    getNinfo(state) {
+    getnetworkinfo(state) {
       return state.networkinfo;
+    },
+    getEditNetworkInfo(state) {
+      return state.editnetworkinfo;
     }
   },
   
@@ -70,6 +74,9 @@ export default {
     },
     setnetworkinfo(state, networkinfo) {
       state.networkinfo = networkinfo;
+    },
+    seteditnetworkinfo(state, editnetworkinfo) {
+      state.editnetworkinfo = editnetworkinfo;
     }
   },
 
@@ -93,14 +100,15 @@ export default {
       });
     },
 
-    geteditors({ commit }, businessId) {
-      return axios.get(`/network/roles/user/${businessId}`).then(({ data }) => {
+    geteditors({ commit }, networkId) {
+      return axios.post(`/network/${networkId}/members/editor`).then(({ data }) => {
         commit("seteditors", data.data);
         console.log(data);
       });
     },
-    updateEditor({ commit }, businessId) {
-      return axios.get(`/network/roles/user/${businessId}`).then(({ data }) => {
+    updateEditor({ commit }, data) {
+      console.log("updateEditor", data);
+      return axios.post(`/network/${data.path}`, data.formData).then(({ data }) => {
         console.log(data);
         return data;
       });
@@ -140,6 +148,12 @@ export default {
         console.log(data);
       });
     },
+    getEditNetworkInfo({ commit }, networkId) {
+      return axios.get(`/network/edit/${networkId}`).then(({ data }) => {
+        commit("seteditnetworkinfo", data.data);
+        console.log(data);
+      });
+    },
 
     generalSave({ commit }, payload) {
       console.log("payload", payload)
@@ -160,6 +174,14 @@ export default {
     networkDelete({ commit }, payload) {
       console.log("payload", payload)
       return axios.delete(`/network/${payload.path}`)
+      .then(({ data }) => {
+        return data;
+      });
+    },
+
+    updateNetworkInfo({ commit }, data) {
+      console.log("updateNetworkInfo", data)
+      return axios.post(`/network/${data.path}`, data.formData)
       .then(({ data }) => {
         return data;
       });

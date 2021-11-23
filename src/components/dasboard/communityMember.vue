@@ -41,7 +41,7 @@
                           >
                             <h6 class="follower m-15">
                               {{ count(item.followers) }}
-                             {{ $t("profile.community") }}
+                             {{ $t('dashboard.Community') }}
                             </h6>
                           </b-col>
                         </b-row>
@@ -65,7 +65,7 @@
                               class="b-background flexx pobtn shadow"
                             >
                               <i class="fas fa-envelope   fa-lg btn-icon "></i>
-                              <span class="btn-text"> {{ $t("profile.messages") }}</span>
+                              <span class="btn-text"> {{ $t('dashboard.Messages') }}</span>
                             </b-button>
                           </b-col>
 
@@ -76,15 +76,31 @@
                             xl="12"
                             class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
                           >
+                           
+
+
+
                             <b-button
-                              block
-                              size="sm"
-                              class="b-background flexx pobtn shadow"
-                              variant="primary"
-                            >
-                              <i class="fas fa-user-plus  fa-lg btn-icon "></i>
-                              <span class="btn-com">{{ $t("profile.community") }}</span>
-                            </b-button>
+                          block
+                          size="sm"
+                          class="b-background flexx pobtn shadow"
+                          :class="item.is_follow !== 0 && 'u-btn'"
+                           :id="'followbtn'+item.id"
+                          variant="primary"
+                          @click="handleFollow(item)"
+                        >
+
+                           <i
+                            class="fas fa-lg btn-icon"
+                            :class="item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"
+                          ></i>
+
+                          <span class="btn-com">{{ $t('dashboard.Community') }}</span>
+                        </b-button>
+
+
+
+
                           </b-col>
                         </b-row>
                       </div>
@@ -98,6 +114,7 @@
       </b-row>
 
        <infinite-loading @infinite="infiniteHandler"></infinite-loading>
+
     </div>
   </div>
 </template>
@@ -109,7 +126,7 @@ export default {
 
   data() {
     return {
-      page: 1,
+      page: 2,
       options: {
         rewind: true,
         autoplay: true,
@@ -145,10 +162,43 @@ export default {
     },
 
 
+     async handleFollow(user) {
+      
+      console.log("yoo ma gee");
+       document.getElementById("followbtn"+user.id).disabled = true;
+      const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
+      const nextFollowState = user.is_follow === 0 ? 1 : 0;
+      const data = {
+        id: user.id,
+        type: 'user',
+      };
+
+      await axios
+        .post(uri, data)
+        .then(({ data }) => {
+          console.log(data);
+          user.is_follow = nextFollowState;
+           document.getElementById("followbtn"+user.id).disabled = false;
+        })
+         
+          .catch((err) =>{  
+          
+          console.log({err:err})  ;
+           document.getElementById("followbtn"+user.id).disabled =  false;
+          
+        });
+    },
+
+
+
     
     infiniteHandler($state) {
       console.log("hahahahahahahah");
+
+      
       let url = null;
+
+       
 
       if (this.type == "Follower") {
       url = "profile/user/follower/";
@@ -166,7 +216,7 @@ export default {
            
             if (this.type == "Follower") {
              
-
+     
                if (data.data.user_followers.length) {
            this.page += 1;
            

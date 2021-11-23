@@ -9,19 +9,23 @@
               <a v-b-modal.createalbumModal>
                 <div class="drag-textt">
                   <fas-icon :icon="['fas', 'plus']" />
-                  <h3>Create Album</h3>
+                  <h3>{{ $t('profileowner.Create_Album') }}</h3>
                 </div>
               </a>
             </div>
           </div>
 
-          <b-modal hide-footer title="Create album" id="createalbumModal">
+          <b-modal hide-footer :title="$t('profileowner.Create_album')" id="createalbumModal">
             <div ref="creatform">
               <b-form>
-                <b-form-input placeholder="Album name" v-model="albumInfo.name"></b-form-input>
-                <b-form-input placeholder="Album Type" class="mt-2" v-model="albumInfo.type"></b-form-input>
+                <b-form-input :placeholder="$t('profileowner.Album_name')" v-model="albumInfo.name"></b-form-input>
+                <b-form-input
+                  :placeholder="$t('profileowner.Album_Type')"
+                  class="mt-2"
+                  v-model="albumInfo.type"
+                ></b-form-input>
                 <b-button class="mt-2" variant="primary" @click="createAlbums" :disabled="loading || canCreateAlbum">
-                  Create</b-button
+                  {{ $t('profileowner.Create') }}</b-button
                 >
               </b-form>
             </div>
@@ -42,14 +46,14 @@
         <b-modal hide-footer title="Edit album" ref="editalbum" id="editalbum">
           <div ref="creatform">
             <b-form>
-              <b-form-input placeholder="Album name" v-model="editName"></b-form-input>
+              <b-form-input :placeholder="$t('profileowner.Album_name')" v-model="editName"></b-form-input>
               <b-button
                 class="mt-2"
                 variant="primary"
                 @click="update"
                 :disabled="loading || editName.trim().length ? false : true"
               >
-                Update</b-button
+                {{ $t('profileowner.Update') }}</b-button
               >
             </b-form>
           </div>
@@ -71,21 +75,23 @@
                           data-toggle="dropdown"
                           aria-haspopup="true"
                           aria-expanded="false"
-                          >Custom Album 1 <i class="fa fa-caret-down" aria-hidden="true"></i
+                          >{{ $t('profileowner.Custom_Album_1') }} <i class="fa fa-caret-down" aria-hidden="true"></i
                         ></a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                          <a class="dropdown-item" data-toggle="modal" data-target="#namealbumModal">Edit Name</a>
-                          <a class="dropdown-item">Delete Album</a>
+                          <a class="dropdown-item" data-toggle="modal" data-target="#namealbumModal">{{
+                            $t('profileowner.Edit_Name')
+                          }}</a>
+                          <a class="dropdown-item">{{ $t('profileowner.Delete_Album') }}</a>
                         </div>
                       </li>
                     </ul>
                   </div>
                   <div class="input-group col-md-12 text-center mb-4 selec">
-                    <label class="col-md-4 control-label pr-0 text-design">14 Items - </label>
+                    <label class="col-md-4 control-label pr-0 text-design">{{ $t('profileowner.14_Items') }} - </label>
                     <div class="col-md-5 pl-0 pr-0">
                       <select id="gender" class="form-control w-100">
-                        <option>Public</option>
-                        <option>Private</option>
+                        <option>{{ $t('profileowner.') }}</option>
+                        <option>{{ $t('profileowner.PublicPrivate') }}</option>
                       </select>
                     </div>
                   </div>
@@ -99,8 +105,10 @@
     <!-- show  images in an album -->
 
     <div class="container-flex" v-if="showalbum">
-      <b-button variant="outline-primary" size="sm" @click="hidealbum"> Back </b-button>
-      <span class="text-center ml-2 f-20"> {{ this.album_name }} </span>
+      <b-button variant="outline-primary" size="sm" @click="hidealbum">
+        {{ $t('profileowner.Back') }}
+      </b-button>
+      <span class="text-center ml-2 f-20"> {{ this.album_name }}</span>
 
       <Images
         @update:item="() => updateItem()"
@@ -110,13 +118,21 @@
         :albumName="album_name"
         :showAlbum="canViewAlbum"
         :canUpload="
-          ['profile_picture', 'Profile', 'Cover', 'cover_photo', 'Cover Photo', 'logo', 'Logo', 'post'].includes(album_name)
+          ['profile_picture', 'Profile', 'Cover', 'cover_photo', 'Cover Photo', 'logo', 'Logo', 'post'].includes(
+            album_name,
+          )
             ? false
             : true
         "
         :images="strategy[type]().showAlbumImages"
         @reste="hidealbum"
       />
+
+      <div class="container-fluid" v-if="!strategy[type]().showAlbumImages.length">
+        <p style="font-size: 3rem">
+          {{ $t('profileowner.No_items_found') }}
+        </p>
+      </div>
     </div>
   </div>
 </template>
@@ -130,6 +146,7 @@ import { mapActions, mapGetters, mapMutations } from 'vuex';
 import defaultImage from '@/assets/img/nothing.jpg';
 
 import { fullMediaLink } from '@/helpers';
+
 export default {
   components: {
     Images,
@@ -144,8 +161,8 @@ export default {
       type: String,
       require: true,
     },
-    getImages:{},
-    getAlbums:{}
+    getImages: {},
+    getAlbums: {},
   },
 
   data: function () {
@@ -169,6 +186,7 @@ export default {
       strategy: null,
     };
   },
+
   created() {
     this.url = this.$route.params.id;
 
@@ -217,7 +235,7 @@ export default {
     }),
 
     canCreateAlbum() {
-      return this.albumInfo.name && this.albumInfo.type ? false : true;
+      return this.albumInfo.name ? false : true;
     },
   },
 
@@ -278,7 +296,9 @@ export default {
     },
 
     canBeUpdate(album) {
-      return ['profile_picture', 'Profile', 'Cover', 'cover_photo', 'Cover Photo', 'logo', 'Logo', 'post'].includes(album.name)
+      return ['profile_picture', 'Profile', 'Cover', 'cover_photo', 'Cover Photo', 'logo', 'Logo', 'post'].includes(
+        album.name,
+      )
         ? false
         : true;
     },
@@ -292,8 +312,7 @@ export default {
         .createAlbum(data)
         .then(() => {
           this.strategy[this.type]().fetchAlbums(this.$route.params.id);
-          this.getAlbums()
-
+          this.getAlbums();
         })
         .then(() => {
           this.$bvModal.hide('createalbumModal');
@@ -309,7 +328,7 @@ export default {
           this.loading = false;
         })
         .catch((error) => {
-          console.log(error)
+          console.log(error);
           this.loading = false;
           this.sending = false;
           this.$bvModal.hide('createalbumModal');

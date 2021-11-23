@@ -9,14 +9,14 @@
         <span>
           <h6 class="title">
             <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
-            <b>  {{ $t("business.community").toUpperCase() }} </b> <span class="h4-color"> {{totalcommunity.total}} </span>
+            <b>  {{ $t('dashboard.Community') }} </b> <span class="h4-color"> {{totalcommunity.total}} </span>
           </h6>
         </span>
 
         <b-tabs lazy pills content-class="mt-3  f-left ">
           <b-tab active>
             <template slot="title">
-              {{ $t("business.people") }}
+              {{ $t('dashboard.People') }}
               <span class="spa-color">
                 {{peoplecommunity.total_people}} 
               </span>
@@ -29,7 +29,7 @@
 
                     <b-tab active>
                       <template slot="title">
-                        {{ $t("business.followers") }}
+                        {{ $t('dashboard.Followers') }}
                         <span class="spa-color">
                           {{peoplecommunity.total_followers}}
                         </span>
@@ -48,7 +48,7 @@
 
                     <b-tab>
                       <template slot="title">
-                        {{ $t("business.following") }}
+                        {{ $t('dashboard.Following') }}
                         <span class="spa-color">
                           {{peoplecommunity.total_following}} 
                         </span>
@@ -72,7 +72,7 @@
 
           <b-tab>
             <template slot="title">
-              {{ $t("business.businesses") }}
+              {{ $t('dashboard.Businesses') }}
               <span class="spa-color">
                 {{ count(businesscommunity.total_Business) }}
               </span>
@@ -82,7 +82,7 @@
               <b-tabs lazy fill pills content-class="mt-3  f-left m-up checkcheck">
                 <b-tab active>
                   <template slot="title">
-                     {{ $t("business.followers") }}
+                     {{ $t('dashboard.Followers') }}
                     <span class="spa-color">
                       {{ count(businesscommunity.total_followers) }}
                     </span>
@@ -101,7 +101,7 @@
 
                 <b-tab>
                   <template slot="title">
-                    {{ $t("business.following") }}
+                    {{ $t('dashboard.Following') }}
                     <span class="spa-color">
                      {{businesscommunity.totat_following}}
                     </span>
@@ -125,7 +125,7 @@
 
           <b-tab>
             <template slot="title">
-             {{ $t("business.network") }}
+             {{ $t('dashboard.Network') }}
               <span class="spa-color">
                0
               </span>
@@ -135,7 +135,7 @@
               <b-tabs lazy fill pills content-class="mt-3  f-left m-up checkcheck">
                 <b-tab active>
                   <template slot="title">
-                   {{ $t("business.followers ") }}
+                   {{ $t('dashboard.Followers') }}
                     <span class="spa-color">
                      0
                     </span>
@@ -154,7 +154,7 @@
 
                 <b-tab>
                   <template slot="title">
-                    {{ $t("business.following") }}
+                    {{ $t('dashboard.Following') }}
                     <span class="spa-color">
                  0
                     </span>
@@ -183,7 +183,7 @@
 <script>
 import People from "@/components/dasboard/communityBmember";
 import Business from "@/components/dasboard/communityBbusiness";
-import Network from "@/components/dasboard/communitynetwork";
+import Network from "@/components/dasboard/communityBnetwork";
 
 export default {
   name: "comunitiDashboard",

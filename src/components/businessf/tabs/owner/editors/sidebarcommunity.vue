@@ -4,13 +4,13 @@
       <span>
         <h6 class="title m-3">
           <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
-          <b> COMMUNITY </b> <span class="h4-color"> {{nFormatter(userdetails.total_people+businessdetails.total_Business)}}</span>
+          <b> COMMUNITY</b> <span class="h4-color"> {{nFormatter(userdetails.total_people+businessdetails.total_Business)}}</span>
         </h6>
       </span>
       <b-tabs pills content-class="mt-3  f-left ">
         <b-tab active>
           <template slot="title">
-            People <span class="spa-color"> {{nFormatter(userdetails.total_people)}} </span>
+           People  <span class="spa-color"> {{nFormatter(userdetails.total_people)}} </span>
           </template>
           <div>
             <b-row>
@@ -18,15 +18,15 @@
                 <b-tabs fill pills content-class="mt-3  f-left m-up">
                   <b-tab active>
                     <template slot="title">
-                      Followers <span class="spa-color"> {{nFormatter(userdetails.total_followers)}} </span>
+                      Followers<span class="spa-color"> {{nFormatter(userdetails.total_followers)}} </span>
                     </template>
-                    <div class="s-comcard"><People :peoples="userdetails.user_followers"  @nFormatter="nFormatter"/></div>
+                    <div class="s-comcard"><People :peoples="userdetails.user_followers" @handleFollow="handleFollow" /></div>
                   </b-tab>
                   <b-tab>
                     <template slot="title">
                       Following <span class="spa-color"> {{nFormatter(userdetails.totat_following)}} </span>
                     </template>
-                    <div class="s-comcard"><People :peoples="userdetails.user_following"  @nFormatter="nFormatter"/></div>
+                    <div class="s-comcard"><People :peoples="userdetails.user_following" @handleFollow="handleFollow" /></div>
                   </b-tab>
                 </b-tabs>
               </b-col>
@@ -35,7 +35,7 @@
         </b-tab>
         <b-tab>
           <template slot="title">
-            Businesses <span class="spa-color"> {{nFormatter(businessdetails.total_Business)}} </span>
+            Businesses<span class="spa-color"> {{nFormatter(businessdetails.total_Business)}} </span>
           </template>
           <div>
             <b-tabs fill pills content-class="mt-3  f-left m-up checkcheck">
@@ -43,13 +43,36 @@
                 <template slot="title">
                   Followers <span class="spa-color"> {{nFormatter(businessdetails.total_followers)}} </span>
                 </template>
-                <div class="s-comcard"><Business :businesses="businessdetails.Business_followers" @nFormatter="nFormatter"/></div>
+                <div class="s-comcard"><Business :businesses="businessdetails.Business_followers" @handleFollow="handleFollow" /></div>
               </b-tab>
               <b-tab>
                 <template slot="title">
-                  Following <span class="spa-color"> {{nFormatter(businessdetails.totat_following)}} </span>
+                  {Following <span class="spa-color"> {{nFormatter(businessdetails.totat_following)}} </span>
                 </template>
-                <div class="s-comcard"><Business :businesses="businessdetails.Business_following" @nFormatter="nFormatter"/></div>
+                <div class="s-comcard"><Business :businesses="businessdetails.Business_following" @handleFollow="handleFollow" /></div>
+              </b-tab>
+            </b-tabs>
+          </div>
+        </b-tab>
+        <b-tab>
+          <template slot="title">
+            Networks <span class="spa-color">{{nFormatter(networkdetails.total_Network)}}</span>
+          </template>
+          <div>
+            <b-tabs fill pills content-class="mt-3  f-left m-up checkcheck">
+              <b-tab active>
+                <template slot="title">
+                  Followers <span class="spa-color"> {{nFormatter(networkdetails.total_followers)}} </span>
+                </template>
+                <!-- <div class="s-comcard">{{networkdetails.Network_followers}}</div> -->
+                <div class="s-comcard"><Network :networks="networkdetails.Network_followers" @handleFollow="handleFollow" /></div>
+              </b-tab>
+              <b-tab>
+                <template slot="title">
+                   Following<span class="spa-color"> {{nFormatter(networkdetails.totat_following)}} </span>
+                </template>
+                <!-- <div class="s-comcard">{{networkdetails.Network_following}}</div> -->
+                <div class="s-comcard"><Network :networks="networkdetails.Network_following" @handleFollow="handleFollow" /></div>
               </b-tab>
             </b-tabs>
           </div>
@@ -61,11 +84,13 @@
 <script>
 import People from "./people";
 import Business from "./business";
+import Network from "./network";
 export default {
   name: "sidebarcommunity",
   components: {
     People,
     Business,
+    Network
   },
   data() {
     return {
@@ -78,12 +103,16 @@ export default {
     },
     businessdetails() {
       return this.$store.state.networkProfileCommunitySidebar.businessdetails;
+    },
+    networkdetails() {
+      return this.$store.state.networkProfileCommunitySidebar.networkdetails;
     }
   },
   mounted(){
     this.url = this.$route.params.id;
     this.UserDetails();
     this.businessDetails();
+    this.networkDetails();
   },
   methods:{    
     nFormatter: function(num) {
@@ -98,6 +127,7 @@ export default {
       }
       return num;
     },
+
     UserDetails() {
     this.$store
       .dispatch("networkProfileCommunitySidebar/getUserDetails", this.url)
@@ -118,6 +148,35 @@ export default {
         console.log({ err: err });
       });
     },
+    networkDetails() {
+    console.log('networkDetails');
+    this.$store
+      .dispatch("networkProfileCommunitySidebar/getNetworkDetails", this.url)
+      .then(() => {
+        console.log('ohh year');
+      })
+      .catch(err => {
+        console.log({ err: err });
+      });
+    },
+    async handleFollow(Comdata) {
+      console.log("handleFollow", Comdata)
+      const url = Comdata.is_follow === 0 ? `/follow-community` : `/unfollow`;
+      console.log("uri", url)
+      const nextFollowState = Comdata.is_follow === 0 ? 1 : 0;
+      const data = {
+        id: Comdata.id,
+        type: Comdata.type,
+      };
+
+      await this.axios
+        .post(url, data)
+        .then(response => {
+          console.log("response", response);
+          Comdata.is_follow = nextFollowState;
+        })
+        .catch(err => console.log(err));
+    },
   }
 };
 </script>
@@ -127,24 +186,29 @@ export default {
   margin-top: -19px;
   border: 1px solid rgba(0, 0, 0, 0.125);
 }
+
 .spa-color {
   color: white;
   margin-left: 10px;
   font-size: 14px;
 }
+
 .h4-color {
   color: orangered;
   margin-left: 10px;
   font-size: 14px;
 }
+
 .m-up {
   margin-top: -5px;
 }
+
 @media only screen and (min-width: 768px) {
   .title {
     font-size: 20px;
   }
 }
+
 @media only screen and (min-width: 768px) {
   .title {
     font-size: 16px;

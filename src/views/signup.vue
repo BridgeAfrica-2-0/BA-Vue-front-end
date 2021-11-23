@@ -4,7 +4,7 @@
       <md-card class="md-layout-item md-size-50 md-small-size-100 p-card">
         <md-card-header>
           <div class="md-title center">
-            {{ $t("Sign_Up_On_Bridge_Africa") }}
+            {{ $t("auth.Sign_Up_On_Bridge_Africa") }}
           </div>
         </md-card-header>
         <FlashMessage />
@@ -17,7 +17,7 @@
                   class="md-raised md-primary b-w"
                 >
                   <b-icon icon="facebook" aria-hidden="true"></b-icon>
-                  {{ $t("Sign_Up_with_facebook") }}
+                  {{ $t("auth.Sign_Up_with_facebook") }}
                 </md-button>
               </b-col>
 
@@ -28,7 +28,7 @@
                   style="color: white"
                 >
                   <b-icon icon="google" aria-hidden="true"></b-icon>
-                  {{ $t("Sign_Up_with_Google") }}
+                  {{ $t("auth.Sign_Up_with_Google") }}
                 </md-button>
               </b-col>
             </b-row>
@@ -36,12 +36,12 @@
 
           <br />
 
-          <p class="t-center">- {{ $t("OR") }} -</p>
+          <p class="t-center">- {{ $t("auth.OR") }} -</p>
 
           <div class="md-layout md-gutter">
             <div class="md-layout-item md-small-size-100 m-left">
               <md-field :class="getValidationClass('firstName')">
-                <label for="first_name"> {{ $t("First_Name") }} </label>
+                <label for="first_name"> {{ $t("auth.First_Name") }} </label>
                 <md-input
                   type="text"
                   name="firstName"
@@ -50,14 +50,14 @@
                   :disabled="sending"
                 />
                 <span class="md-error" v-if="!$v.form.firstName.required">
-                  {{ $t("First_Name_is_required") }}
+                  {{ $t("auth.First_Name_is_required") }}
                 </span>
               </md-field>
             </div>
 
             <div class="md-layout-item md-small-size-100">
               <md-field :class="getValidationClass('lastName')">
-                <label for="lastName"> {{ $t("Last_Name") }} </label>
+                <label for="lastName"> {{ $t("auth.Last_Name") }} </label>
                 <md-input
                   type="text"
                   name="lastName"
@@ -66,14 +66,14 @@
                   :disabled="sending"
                 />
                 <span class="md-error" v-if="!$v.form.lastName.required">
-                  {{ $t("last_Name_is_required") }}
+                  {{ $t("auth.last_Name_is_required") }}
                 </span>
               </md-field>
             </div>
           </div>
 
           <md-field :class="getValidationClass('email')">
-            <label for="email"> {{ $t("email") }} </label>
+            <label for="email"> {{ $t("auth.email") }} </label>
             <md-input
               type="email"
               name="email"
@@ -83,23 +83,23 @@
               :disabled="sending"
             />
             <span class="md-error" v-if="!$v.form.email.required">
-              {{ $t("the_email_is_required") }}
+              {{ $t("auth.the_email_is_required") }}
             </span>
             <span class="md-error" v-else-if="!$v.form.email.email"
-              >{{ $t("invalid_email") }}
+              >{{ $t("auth.invalid_email") }}
             </span>
           </md-field>
 
           <md-field :class="getValidationClass('tel')">
-            <label for="tel"> {{ $t("Tel") }} </label>
+            <label for="tel"> {{ $t("auth.Tel") }} </label>
             <md-input type="number" name="tel" id="tel" v-model="form.tel" />
             <span class="md-error" v-if="!$v.form.tel.required">
-              {{ $t("tel_is_required") }}
+              {{ $t("auth.tel_is_required") }}
             </span>
           </md-field>
 
           <md-field :class="getValidationClass('password')">
-            <label for="password"> {{ $t("Password") }} </label>
+            <label for="password"> {{ $t("auth.Password") }} </label>
             <md-input
               type="password"
               name="password"
@@ -109,12 +109,19 @@
             />
 
             <span class="md-error" v-if="!$v.form.password.required">
-              {{ $t("password_is_required") }}
+              {{ $t("auth.password_is_required") }}
             </span>
+
+            <span class="md-error" v-if="!$v.form.password.minLength" >
+              {{ $t("auth.password_is_required") }}
+              Password must have at least {{ $v.form.password.$params.minLength.min }} letters.
+            </span>
+
+            
           </md-field>
 
           <md-field :class="getValidationClass('password')">
-            <label for="confirmPassword"> {{ $t("confirm_password") }} </label>
+            <label for="confirmPassword"> {{ $t("auth.confirm_password") }} </label>
             <md-input
               type="password"
               name="confirmPassword"
@@ -123,8 +130,14 @@
               :disabled="sending"
             />
             <span class="md-error" v-if="!$v.form.confirmPassword.required"
-              >Password is required {{ $t("password_is_required") }}
+              > {{ $t("auth.Password_is_required") }}
             </span>
+
+             <span class="md-error" v-if="!$v.form.confirmPassword.sameAsPassword"
+              > {{ $t("auth.Password_is_required") }} 
+               Passwords must be identical.
+            </span>
+
           </md-field>
         </md-card-content>
 
@@ -139,13 +152,13 @@
                 style="color: white"
                 :disabled="sending"
               >
-                {{ $t("signup") }}
+                {{ $t("auth.signup") }}
               </md-button>
             </b-col>
             <b-col cols="6">
               <router-link to="login">
                 <md-button class="md-raised f-right"
-                  >{{ $t("login") }}
+                  >{{ $t("auth.login") }}
                 </md-button>
               </router-link>
             </b-col>
@@ -156,12 +169,12 @@
           <br />
           <br />
 
-          <label> {{ $t("by_loging_in_you_agree_to_bridge_africa") }} </label>
+          <label> {{ $t("auth.by_loging_in_you_agree_to_bridge_africa") }} </label>
           <br />
 
           <label>
-            <b-link href="#">{{ $t("terms_and_conditions") }} </b-link> &
-            <b-link href="#"> {{ $t("Privacy_policies") }}</b-link>
+            <b-link href="#">{{ $t("auth.terms_and_conditions") }} </b-link> &
+            <b-link href="#"> {{ $t("auth.Privacy_policies") }}</b-link>
           </label>
         </div>
       </md-card>
@@ -169,20 +182,23 @@
       <div class="md-layout-item md-size-50 md-small-size-100 b-div"></div>
 
       <md-snackbar :md-active.sync="userSaved">
-        {{ $t("the_user") }} {{ lastUser }} {{ $t("was_saved_with_success") }}
+        {{ $t("auth.the_user") }} {{ lastUser }} {{ $t("auth.was_saved_with_success") }}
       </md-snackbar>
     </form>
 
     <hr class="localfoter" />
 
     <p class="text-center">
+     
       <span class="display-inline">
-        <b-link @click="$i18n.locale = 'en'"> {{ $t("english") }}</b-link>
-        <span class="vl"></span>
-        <b-link class="ml-2" @click="$i18n.locale = 'fr'">
-          {{ $t("french") }}
+        <b-link @click=" setLang('en')  "> {{ $t("auth.english") }} </b-link>
+        <span class="vl"></span> 
+        <b-link class="ml-2"  @click="setLang('fr')">
+          {{ $t("auth.french") }}
         </b-link>
       </span>
+
+
       Bridge Africa © 2021
     </p>
   </div>
@@ -192,7 +208,7 @@
 import { validationMixin } from "vuelidate";
 import axios from "axios";
 
-import { required, email, minLength } from "vuelidate/lib/validators";
+import { required,sameAs, email, minLength } from "vuelidate/lib/validators";
 
 export default {
   name: "FormValidation",
@@ -213,6 +229,7 @@ export default {
     sending: false,
     lastUser: null,
   }),
+
   validations: {
     form: {
       firstName: {
@@ -225,11 +242,13 @@ export default {
 
       password: {
         required,
+         minLength: minLength(8),
       },
 
       confirmPassword: {
         required,
-        minLength: minLength(4),
+        minLength: minLength(8),
+        sameAsPassword: sameAs('password')
       },
 
       tel: {
@@ -255,6 +274,23 @@ export default {
         .catch((err) => {
           console.log({ err: err });
         });
+    },
+
+    setLang(data){
+        
+         console.log(data);
+          this.$i18n.locale = data;
+         this.$store.commit("auth/setAppLanguage", data);
+    },
+
+
+     flashErrors(errors) {
+      let err = "";
+      Object.values(errors).forEach((element) => {
+        err = element[0];
+      });
+
+      return err;
     },
 
     socialLogin(provider, response) {
@@ -331,7 +367,8 @@ export default {
             this.flashMessage.show({
               status: "error",
 
-              message: err.response.data.message,
+              message: this.flashErrors(err.response.data.errors),
+               blockClass: "custom-block-class",
             });
           } else {
             this.flashMessage.show({

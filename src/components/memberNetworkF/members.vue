@@ -3,25 +3,26 @@
     <b-row>
       <b-col cols="12" class="mx-auto">
         <b-input-group class="mb-2 px-md-3 mx-auto">
-          <b-input-group-prepend @onclick="search" is-text>
+          <b-input-group-prepend @onclick="search" is-text style="cursor:pointer;">
             <b-icon-search class="text-primary border-none"></b-icon-search>
           </b-input-group-prepend>
           <b-form-input
             aria-label="Text input with checkbox"
-            placeholder="Search Something"
+            :placeholder="$t('network.Search_Something')"
             type="text"
             class="form-control"
             v-model="searchTitle"
-            @change="search"
+            @keyup="search" 
           ></b-form-input>
         </b-input-group>
       </b-col>
     </b-row>
 
-    <b-row class="mt-4" v-if="admins.length != 0">
+    <b-row class="mt-4">
       <b-col cols="12">
-        <h6 class="username">
-          Network Admins ({{nFormatter(admins.length)}})
+        <h6 class="font-weight-bolder">
+          {{ $t('network.Network_Admins') }} 
+          ({{nFormatter(admins.length)}})
         </h6>
         <hr width="100%" />
         <b-skeleton-wrapper :loading="loading">
@@ -32,7 +33,7 @@
               <b-skeleton width="70%"></b-skeleton>
             </b-card>
           </template>
-          <div class="scroll">
+          <div class="scroll" v-if="admins.length != 0">
             <div v-for="admin in admins" :key="admin.id">
               <p class="">
                 <span class="">
@@ -50,14 +51,17 @@
               </p>
             </div>
           </div>
+          <div v-else>{{ $t('network.No_Result_On_Admins') }} 
+</div>
         </b-skeleton-wrapper>
       </b-col>
     </b-row>
 
-    <b-row class="mt-4" v-if="business.length != 0">
+    <b-row class="mt-4">
       <b-col cols="12" >
         <h6 class="font-weight-bolder">
-          Bussiness ({{nFormatter(business.length)}})
+          {{ $t('network.Bussiness') }} 
+ ({{nFormatter(business.length)}})
         </h6>
         <hr width="100%" />
         <b-skeleton-wrapper :loading="loading">
@@ -68,7 +72,7 @@
               <b-skeleton width="70%"></b-skeleton>
             </b-card>
           </template>
-          <div class="scroll">
+          <div class="scroll" v-if="business.length != 0">
             <div v-for="busines in business" :key="busines.id">
               <p class="">
                 <span class="">
@@ -87,14 +91,17 @@
               </p>
             </div>
           </div>
+          <div v-else>{{ $t('network.No_Result_On_Networks') }} 
+</div>
         </b-skeleton-wrapper>
       </b-col>
     </b-row>
 
-    <b-row class="mt-4" v-if="members.total != 0">
+    <b-row class="mt-4" >
       <b-col cols="12">
         <h6 class="font-weight-bolder">
-          All Members ({{nFormatter(members.total)}})
+          {{ $t('network.All_Members') }} 
+({{nFormatter(members.length)}})
         </h6>
         <hr width="100%" />
         <b-skeleton-wrapper :loading="loading">
@@ -105,11 +112,7 @@
               <b-skeleton width="70%"></b-skeleton>
             </b-card>
           </template>
-          <div          
-            :class="{ active: index == currentIndex }"
-            v-for="(member, index) in members.data"
-            :key="index"
-          >
+          <div v-for="member in members" :key="member.id" >
             <p class="">
               <span class="">
                 <b-avatar
@@ -127,43 +130,38 @@
           </div>
         </b-skeleton-wrapper>
       </b-col>
-    </b-row>
-
-    <b-row v-if="members.total != 0">
-      <b-col cols="12">
-        <span class="float-right">
-          <b-pagination
-            v-model="currentPage"
-            :total-rows="rows"
-            :per-page="perPage"
-            @change="handlePageChange"
-            aria-controls="my-table"
-          ></b-pagination>
-        </span>
+      <b-col col="12">
+        <infinite-loading @infinite="infiniteHandler">
+          <div class="text-red" slot="no-more">{{ $t('network.No_More_Request') }} 
+</div>
+          <div class="text-red" slot="no-results">{{ $t('network.No_More_Request') }} 
+</div>
+        </infinite-loading>
       </b-col>
     </b-row>
+
     <FlashMessage />
+
   </div>
 </template>
 
 <script>
 export default {
-  name: "members",
+  name: "member",
   data() {
     return {
       url:null,
       perPage: null,
+      page: 0,
       currentPage: null,
       searchTitle: "",
+      // members:"",
 
       currentIndex: -1,
-      loading: false,
+      loading: false
     };
   },
   computed: {
-    rows() {
-      return this.$store.state.networkProfileMembers.members.total;
-    },
     members() {
       return this.$store.state.networkProfileMembers.members;
     },
@@ -176,7 +174,6 @@ export default {
   },
   mounted(){
     this.url = this.$route.params.id
-    this.getMembers()
     this.getAdmins()
     this.getBusiness()
   },
@@ -195,40 +192,57 @@ export default {
       return num;
     },
 
-    getRequestDatas(searchTitle, currentPage) {
+    getRequestDatas(searchTitle) {
       let data = "";
 
       if (searchTitle) {
         data = searchTitle;
-      }else if (currentPage) {
-        data = "?page="+currentPage;
       }
       console.log(data);
       return data;
     },
 
-    getMembers() {
-      this.loading = true;
-      const data = this.getRequestDatas(this.searchTitle, this.currentPage);
-      this.$store
-        .dispatch("networkProfileMembers/getmembers", this.url+"/members/list/"+data)
-        .then(() => {
-          this.perPage = this.members.per_page;
-          this.currentPage = this.members.current_page;
-          console.log('Members Available');
-          console.log(this.perPage );
-          this.loading = false;
-        })
-        .catch(err => {
+    infiniteHandler($state) {
+      console.log("loop");
+      const data = this.getRequestDatas(this.searchTitle);
+      console.log('keyword: '+data);
+      let formData = new FormData();
+      formData.append('keyword', data);
+      // this.$store
+      //   .dispatch("networkProfileMembers/getMembers", {
+      //     path: this.url+"/members/list/"+this.page,
+      //     formData: formData
+      //   })
+      this.axios
+        .post("network/"+this.url+"/members/list/"+this.page, formData)
+        .then(({ data }) => {
+        console.log(data);
+        console.log(this.page);
+        if (data.data.length) {
+          this.page += 1;
+          console.log(this.page);
+          console.log(...data.data);
+          this.members.push(...data.data);
+          $state.loaded();
+        } else {
+          $state.complete();
+        }
+      }) .catch((err) => {
           console.log({ err: err });
-          this.loading = false;
-        });
+      })
     },
+
+
+
     getAdmins() {
       this.loading = true;
-      const data = this.getRequestDatas(this.searchTitle, 0);
+      const data = this.getRequestDatas(this.searchTitle);
+      console.log('keyword: '+data);
       this.$store
-        .dispatch("networkProfileMembers/getadmins", this.url+"/members/admin/"+data)
+        .dispatch("networkProfileMembers/getadmins", {
+          'path':this.url+"/members/admin",
+          'keyword':data
+          })
         .then(() => {
           console.log('Admins Available');
           this.loading = false;
@@ -238,11 +252,15 @@ export default {
           this.loading = false;
         });
     },
+ 
     getBusiness() {
       this.loading = true;
-      const data = this.getRequestDatas(this.searchTitle, 0);
+      const data = this.getRequestDatas(this.searchTitle);
       this.$store
-        .dispatch("networkProfileMembers/getbusiness", this.url+"/members/business/"+data)
+        .dispatch("networkProfileMembers/getbusiness", {
+          'path':this.url+"/members/business",
+          'keyword':data
+          })
         .then(() => {
           console.log('Business Available');
           this.loading = false;
@@ -255,18 +273,16 @@ export default {
     search() {
       // this.loading = true;
       this.loading = true;
+      this.page -= 1;
       console.log("searching...");
       console.log(this.searchTitle);
-      this.getMembers();
+      this.infiniteHandler();
       this.getAdmins();
       this.getBusiness();
     },
-    handlePageChange(value) {
-      this.loading = true;
-      this.currentPage = value;
-      console.log(this.currentPage);
-      this.getMembers();
-    },
+
+
+
 
   }
 };

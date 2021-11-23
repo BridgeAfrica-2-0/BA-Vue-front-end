@@ -2,16 +2,16 @@
   <b-container>
     <b-container class="bv-example-row">
       <p class="t-left text">
-        Blocked users can no longer see things you post on your business, invite
-        your business to networks, strat a conversation, or follow your
-        business.
+        {{ $t('network.Blocked_users_can_no_longer_see_things_you_post_on_your_business') }}, 
+        {{ $t('network.invite_your_business_to_networks') }}, {{ $t('network.strat_a_conversation') }}, 
+        {{ $t('network.or_follow_your_business') }}.
       </p>
     </b-container>
 
     <b-container v-if="blockusers != 0 || blocknetworks != 0 || blockbusiness != 0" class="bv-example-row">
       <div v-if="blockusers != 0">
         <h6 class="font-weight-bolder">
-          Blocked Users ({{blockusers.length}})
+          {{ $t('network.Blocked_Users') }} ({{blockusers.length}})
         </h6>
         <hr width="100%" />
         <b-list-group v-for="blockuser in blockusers" :key="blockuser.id">
@@ -32,14 +32,14 @@
                 size="4em"
               ></b-avatar>
               <span class="mr-auto">{{blockuser.name}}</span>
-              <span class="mr-auto float-right mt-1" @click="UnblockUser(blockuser)"><b-link href="#">Unblock</b-link></span>
+              <span class="mr-auto float-right mt-1" @click="UnblockUser(blockuser)"><b-link href="#">{{ $t('network.Unblock') }}</b-link></span>
             </b-list>
           </b-skeleton-wrapper>
         </b-list-group>
       </div>
       <div v-if="blocknetworks != 0">
         <h6 class="font-weight-bolder">
-          Blocked Users ({{blocknetworks.length}})
+          {{ $t('network.Blocked_Users') }} ({{blocknetworks.length}})
         </h6>
         <hr width="100%" />
         <b-list-group v-for="blocknetwork in blocknetworks" :key="blocknetwork.id">
@@ -60,14 +60,14 @@
                 size="4em"
               ></b-avatar>
               <span class="mr-auto">{{blocknetwork.name}}</span>
-              <span class="mr-auto float-right mt-1" @click="UnblockNetwork(blocknetwork)"><b-link href="#">Unblock</b-link></span>
+              <span class="mr-auto float-right mt-1" @click="UnblockNetwork(blocknetwork)"><b-link href="#">{{ $t('network.Unblock') }}</b-link></span>
             </b-list>
           </b-skeleton-wrapper>
         </b-list-group>
       </div>
       <div v-if="blockbusiness != 0">
         <h6 class="font-weight-bolder">
-          Blocked Users ({{blockbusiness.length}})
+          {{ $t('network.Blocked_Users') }} ({{blockbusiness.length}})
         </h6>
         <hr width="100%" />
         <b-list-group v-for="blockbusines in blockbusiness" :key="blockbusines.id">
@@ -88,7 +88,7 @@
                 size="4em"
               ></b-avatar>
               <span class="mr-auto">{{blockbusines.name}}</span>
-              <span class="mr-auto float-right mt-1" @click="UnblockBusines(blockbusines)"><b-link href="#">Unblock</b-link></span>
+              <span class="mr-auto float-right mt-1" @click="UnblockBusines(blockbusines)"><b-link href="#">{{ $t('network.Unblock') }}</b-link></span>
             </b-list>
           </b-skeleton-wrapper>
         </b-list-group>
@@ -96,7 +96,7 @@
     </b-container>
     <b-container v-else>
       <b-card bg-variant="white" text-variant="black" class="text-center">
-        <b-card-text>No Blocked User Available.</b-card-text>
+        <b-card-text>{{ $t('network.No_Blocked_User_Available') }}.</b-card-text>
       </b-card>
     </b-container>
 

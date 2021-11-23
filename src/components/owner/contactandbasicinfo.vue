@@ -1,28 +1,28 @@
 <template>
   <div>
     <div class="row">
-      <h6 class="col-md-12"><b>Basic Information</b></h6>
+      <h6 class="col-md-12"><b>{{ $t('profileowner.Basic_Information') }}</b></h6>
 
       <hr />
     </div>
     <div class="row mb-1">
-      <div class="col-md-4">Date Of Birth</div>
+      <div class="col-md-4">{{ $t('profileowner.Date_Of_Birth') }}</div>
       <div class="col-md-4">{{ info.user.dob }}</div>
       <div class="col-md-4">
         <button
           type="button"
           class="btn btn-outline-primary float-md-right"
-          data-toggle="modal"
-          data-target="#dobModal"
-          v-b-modal.modal-6
+       
+        
+          v-b-modal.dobbb
         >
-          Edit
-        </button>
+          {{ $t('profileowner.Edit') }}
+        </button>   
       </div>
 
       <b-modal
         id="phonemodal"
-        title="Add Phone Number"
+        :title="$t('profileowner.Add_Phone_Number')"
         hide-footer
         ref="phonemodal"
         @close="cancel"
@@ -37,7 +37,7 @@
             <b-form-input
               class="mt-2 mb-2"
               v-model="info.user.phone"
-              placeholder="phone"
+              :placeholder="$t('profileowner.phone')"
               type="text"
               required
             ></b-form-input>
@@ -51,7 +51,7 @@
 
       <b-modal
         id="currentcityModal"
-        title="Add current city"
+        :title="$t('profileowner.Add_current_city')"
         hide-footer
         ref="currentcityModal"
         @close="cancel"
@@ -65,7 +65,7 @@
           >
             <b-form-input
               class="mt-2 mb-2"
-              placeholder="current city"
+              :placeholder="$t('profileowner.Current_City')"
               type="text"
               v-model="info.user.city"
             ></b-form-input>
@@ -80,7 +80,7 @@
       <b-modal
         id="hometownModal"
         ref="hometownModal"
-        title="Add home town"
+        :title="$t('profileowner.Add_home_town')"
         hide-footer
         @close="cancel"
       >
@@ -94,7 +94,7 @@
             <b-form-input
               class="mt-2 mb-2"
               v-model="info.user.home_town"
-              placeholder="home town"
+              :placeholder="$t('profileowner.home_town')"
             ></b-form-input>
 
             <div class="fosrm-group text-right w-100">
@@ -107,7 +107,7 @@
       <b-modal
         id="websiteModal"
         ref="websiteModal"
-        title="Add a website"
+        :title="$t('profileowner.Add_a_website')"
         hide-footer
         @close="cancel"
       >
@@ -120,7 +120,7 @@
           >
             <b-form-input
               class="mt-2 mb-2"
-              placeholder="Website"
+              :placeholder="$t('profileowner.Website')"
               v-model="websiteInput"
             ></b-form-input>
 
@@ -134,7 +134,7 @@
       <b-modal
         id="websiteEModal"
         ref="websiteEModal"
-        title="Edit website"
+        :title="$t('profileowner.Edit_website')"
         hide-footer
         @close="cancel"
       >
@@ -147,7 +147,7 @@
           >
             <b-form-input
               class="mt-2 mb-2"
-              placeholder="Website"
+              :placeholder="$t('profileowner.Website')"
               v-model="websiteInput"
             ></b-form-input>
 
@@ -160,7 +160,7 @@
 
       <b-modal
         id="sociallinkModal"
-        title="Add A social link"
+        :title="$t('profileowner.Add_A_social_link')"
         hide-footer
         ref="sociallinkModal"
         @close="cancel"
@@ -174,7 +174,7 @@
           >
             <b-form-input
               class="mt-2 mb-2"
-              placeholder="soclial link"
+              :placeholder="$t('profileowner.soclial_link')"
               v-model="sociallinkInput"
             ></b-form-input>
 
@@ -186,9 +186,9 @@
       </b-modal>
 
       <b-modal
-        id="modal-6"
-        ref="model-6"
-        title="Edit Date of Birth"
+        id="dobbb"
+        ref="dobbb"
+        :title="$t('profileowner.Edit_Date_of_Birth')"
         hide-footer
         @close="cancel"
       >
@@ -199,20 +199,20 @@
               <label class="col-md-3 pl-0 pr-0 control-label">Birth Year</label>
               <div class="col-md-9 pr-0 pl-0">
                 <div class="form-group">
-                  <b-form-datepicker id="example-datepicker" v-model="birthDate.date" class="mb-2"></b-form-datepicker>
+                  <b-form-datepicker id="example-datepicker" v-model="birthDate.date" :max="max" class="mb-2"></b-form-datepicker>
                 </div>
               </div>
             </div>
             <div class="fosrm-group text-right w-100">
-              <button type="button" class="btn btn-dark pr-1" @click="cancel">
-                cancel
+              <button type="button" class="btn btn-dark pr-1" @click="$bvModal.hide('modal-6')">
+                {{ $t('profileowner.Cancel') }}
               </button>
               <button
                 type="button"
                 class="btn btn-primary orange"
                 @click="saveBirthDate"
               >
-                Save
+                {{ $t('profileowner.Save') }}
               </button>
             </div>
           </form>
@@ -220,7 +220,7 @@
       </b-modal>
     </div>
     <div class="row">
-      <div class="col-md-4">Gender</div>
+      <div class="col-md-4">{{ $t('profileowner.Gender') }}</div>
       <div class="col-md-4">{{ info.user.gender }}</div>
       <div class="col-md-4">
         <button
@@ -230,11 +230,11 @@
           data-target="#genderModal"
           v-b-modal.modal-7
         >
-          Edit
+          {{ $t('profileowner.Edit') }}
         </button>
         <b-modal
           id="modal-7"
-          title="Add/Edit Gender"
+          :title="$t('profileowner.Add_Edit_Gender')"
           hide-footer
           ref="modal-7"
           @close="cancel"
@@ -246,7 +246,7 @@
                   class="col-md-4 control-label"
                   style="align-items: first baseline"
                   for="gender"
-                  >Gender
+                  >{{ $t('profileowner.Gender') }}
                 </label>
                 <div class="col-md-8 pl-0 pr-0">
                   <select
@@ -254,8 +254,8 @@
                     class="form-control w-100"
                     v-model="basicInfo.gender"
                   >
-                    <option value="M">Male</option>
-                    <option value="F">Female</option>
+                    <option value="M">{{ $t('profileowner.Male') }}</option>
+                    <option value="F">{{ $t('profileowner.Female') }}</option>
                   </select>
                 </div>
               </div>
@@ -266,7 +266,7 @@
                   class="btn btn-primary orange"
                   @click="saveGender"
                 >
-                  Save
+                  {{ $t('profileowner.Save') }}
                 </button>
               </div>
             </form>
@@ -276,11 +276,11 @@
     </div>
 
     <div class="row">
-      <h6 class="col-md-12"><b>Contact Information</b></h6>
+      <h6 class="col-md-12"><b>{{ $t('profileowner.Contact_Information') }}</b></h6>
     </div>
     <hr />
     <div class="row mb-1 mt-3">
-      <div class="col-md-4">Phone</div>
+      <div class="col-md-4">{{ $t('profileowner.Phone') }}</div>
       <div class="col-md-4">{{ info.user.phone }}</div>
       <div class="col-md-4">
         <button
@@ -290,17 +290,17 @@
           data-target="#phonemodal"
           v-b-modal.phonemodal
         >
-          Edit
+          {{ $t('profileowner.Edit') }}
         </button>
       </div>
     </div>
 
     <div class="row">
-      <div class="col-md-12"><b>Places you lived</b></div>
+      <div class="col-md-12"><b>{{ $t('profileowner.Places_you_lived') }}</b></div>
     </div>
     <hr>
     <div class="row mb-4">
-      <div class="col-md-4">City :</div>
+      <div class="col-md-4">{{ $t('profileowner.City') }} :</div>
       <div class="col-md-4">{{ info.user.city }}</div>
       <div class="col-md-4">
         <button
@@ -310,12 +310,12 @@
           data-target="#currentcityModal"
           v-b-modal.currentcityModal
         >
-          Edit
+          {{ $t('profileowner.Edit') }}
         </button>
       </div>
     </div>
     <div class="row mb-4">
-      <div class="col-md-4">Home Town :</div>
+      <div class="col-md-4">{{ $t('profileowner.Home_Town') }} :</div>
       <div class="col-md-4">{{ info.user.home_town }}</div>
       <div class="col-md-4">
         <button
@@ -325,13 +325,13 @@
           data-target="#hometownModal"
           v-b-modal.hometownModal
         >
-          Edit
+          {{ $t('profileowner.Edit') }}
         </button>
       </div>
     </div>
     <div class="row mb-4">
       <div class="col">
-        <h6 class="mb-0"><b>Web &amp; Social Links</b></h6>
+        <h6 class="mb-0"><b>{{ $t('profileowner.Web') }} &amp; {{ $t('profileowner.Social_Links') }}</b></h6>
         <hr />
         <div class="media">
           <div class="media-body">
@@ -340,7 +340,7 @@
                 class="primary float-left mr-1 mt-1"
                 :icon="['fas', 'plus-circle']"
               />
-              Add a Website</a
+              {{ $t('profileowner.Add_a_Website') }}</a
             ><br />
 
             <div v-for="website in info.user_websites" :key="website.id">
@@ -362,10 +362,10 @@
                     variant="primary-outline"
                   >
                     <b-dropdown-item @click="edit('website', website)"
-                      >Edit</b-dropdown-item
+                      >{{ $t('profileowner.Edit') }}</b-dropdown-item
                     >
                     <b-dropdown-item @click="deleteWebsite(website)"
-                      >Delete</b-dropdown-item
+                      >{{ $t('profileowner.Delete') }}</b-dropdown-item
                     >
                   </b-dropdown>
                 </li>
@@ -421,7 +421,11 @@
 import moment from "moment";
 export default {
   data() {
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+     const maxDate = new Date(today)
     return {
+      max: maxDate,
       websiteId: null,
       basicInfo: {
         dateOfBirth: { day: "12", month: "1", year: "2000" },

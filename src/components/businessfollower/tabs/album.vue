@@ -20,9 +20,7 @@
     <!-- show  images in an album -->
 
     <div class="container-flex" v-if="showalbum">
-      <b-button variant="outline-primary" size="sm" @click="hidealbum">
-        Back
-      </b-button>
+      <b-button variant="outline-primary" size="sm" @click="hidealbum"> Back </b-button>
       <span class="text-center ml-2 f-20"> {{ this.album_name }} </span>
 
       <Images
@@ -40,6 +38,12 @@
         :images="strategy[type]().showAlbumImages"
         @reste="hidealbum"
       />
+
+      <div class="container-fluid" v-if="!strategy[type]().showAlbumImages.length">
+        <p style="font-size: 3rem">
+          {{ $t('profileowner.No_items_found') }}
+        </p>
+      </div>
     </div>
   </div>
 </template>
@@ -68,7 +72,7 @@ export default {
     },
   },
 
-  data: function() {
+  data: function () {
     return {
       hasLoadPicture: true,
       canViewAlbum: true,
@@ -121,7 +125,7 @@ export default {
 
   filters: {
     path: fullMediaLink,
-    plural: function(val) {
+    plural: function (val) {
       return val ? `${val} items` : 'No item';
     },
   },
@@ -288,7 +292,7 @@ export default {
             message: 'Album Deleted',
           });
         })
-        .catch(err => {
+        .catch((err) => {
           this.sending = false;
 
           this.flashMessage.show({

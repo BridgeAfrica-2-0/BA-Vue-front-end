@@ -460,9 +460,7 @@ export default {
     font-size: 10px !important;
     margin-left: -15px;
   }
-  .m {
-    /* margin-left: 10px; */
-  }
+ 
   .ligne {
     width: 100%;
   }
@@ -499,11 +497,7 @@ export default {
   .margbtn {
     margin-left: 13px;
   }
-  /* .margm2 {
-  margin-left: 11px;
-  margin-right: -20px;
-  font-weight: bold;
-} */
+ 
 
   .r-img {
     border-radius: 4px;
@@ -528,9 +522,6 @@ export default {
   }
 }
 
-@media only screen and (min-width: 400px) {
-  .size {
-    /* width: 70px; */
-  }
-}
+
+
 </style>

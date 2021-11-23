@@ -406,9 +406,45 @@
     <!-- Blog -->
 
     <div class="bg-black mb-md-5 py-5">
-      <h3 class="text-center font-arvo text-light">Our Blog</h3>
-      <div class="row">
-        <div class="col-md-4"></div>
+      <h1 class="text-center font-arvo text-light">Our Blog</h1>
+      <div class="row px-4">
+        <div class="col-md-4 mt-3">
+          <div class="blog-img-div position-relative">
+            <img src="https://bridgeafricaventures.com/wp-content/uploads/2021/07/post3.jpg" alt="..." />
+            <h5>Creating the Next Generation of Leaders at Your Company (Demo)</h5>
+          </div>
+        </div>
+        <div class="col-md-4 mt-3">
+          <div class="blog-img-div position-relative">
+            <img src="https://bridgeafricaventures.com/wp-content/uploads/2021/07/post3.jpg" alt="..." />
+            <h5>Creating the Next Generation of Leaders at Your Company (Demo)</h5>
+          </div>
+        </div>
+        <div class="col-md-4 mt-3">
+          <div class="blog-img-div position-relative">
+            <img src="https://bridgeafricaventures.com/wp-content/uploads/2021/07/post3.jpg" alt="..." />
+            <h5>Creating the Next Generation of Leaders at Your Company (Demo)</h5>
+          </div>
+        </div>
+    
+        <div class="col-md-4 mt-3">
+          <div class="blog-img-div position-relative">
+            <img src="https://bridgeafricaventures.com/wp-content/uploads/2021/07/post3.jpg" alt="..." />
+            <h5>Creating the Next Generation of Leaders at Your Company (Demo)</h5>
+          </div>
+        </div>
+        <div class="col-md-4 mt-3">
+          <div class="blog-img-div position-relative">
+            <img src="https://bridgeafricaventures.com/wp-content/uploads/2021/07/post3.jpg" alt="..." />
+            <h5>Creating the Next Generation of Leaders at Your Company (Demo)</h5>
+          </div>
+        </div>
+        <div class="col-md-4 mt-3">
+          <div class="blog-img-div position-relative">
+            <img src="https://bridgeafricaventures.com/wp-content/uploads/2021/07/post3.jpg" alt="..." />
+            <h5>Creating the Next Generation of Leaders at Your Company (Demo)</h5>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -1020,6 +1056,45 @@ export default {
 }
 .footer-icons-div {
   width: 70%;
+}
+.blog-img-div h5 {
+  color: #ffffff;
+  text-align: center;
+  position: absolute;
+  bottom: 10px;
+  -webkit-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
+}
+.blog-img-div {
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+  cursor: pointer;
+
+  -webkit-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
+}
+.blog-img-div img {
+  opacity: 1;
+  -webkit-transform: scale(1);
+  transform: scale(1);
+  -webkit-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
+}
+.blog-img-div:hover img {
+  opacity: 0.6;
+  -webkit-transform: scale(1.3);
+  transform: scale(1.3);
+}
+.blog-img-div:hover h5 {
+  top: 125px;
+}
+.blog-img-div .share-icon {
+  font-size: 16px;
+  color: #000000;
+}
+.blog-img-div:hover .share-icon {
+  display: block;
 }
 @media only screen and (max-width: 660px) {
   .header-img-text {

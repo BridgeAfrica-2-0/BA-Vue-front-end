@@ -6,21 +6,21 @@
       <b-row class="">
         <b-col cols="12" class="p-3">
           <b-tabs content-class="mt-3" pills small fill lazy v-model="tabIndex">
-            <b-tab title="Posts" href="#post">
+            <b-tab :title="$t('profilefollower.Posts')" href="#post">
               <Post />
             </b-tab>
-            <b-tab title="About" href="#about"><About /></b-tab>
-            <b-tab title="Business" href="#business" class="m-0 p-0">
+            <b-tab :title="$t('profilefollower.About')" href="#about"><About /></b-tab>
+            <b-tab :title="$t('profilefollower.Business')" href="#business" class="m-0 p-0">
               <bussiness />
             </b-tab>
-            <b-tab title="Media" href="#media">
+            <b-tab :title="$t('profilefollower.Media')" href="#media">
               <Media type="profile" />
             </b-tab>
-            <b-tab title="Networks">
+            <b-tab :title="$t('profilefollower.Networks')">
               <Networks />
             </b-tab>
 
-            <b-tab title="Community" href="#community" class="m-0 p-0">
+            <b-tab :title="$t('profilefollower.Community')" href="#community" class="m-0 p-0">
               <following />
             </b-tab>
           </b-tabs>
@@ -40,9 +40,11 @@ import Networks from "@/components/businessfollower/tabs/networks";
 import Following from "@/components/owner/tabs/memberNetwork";
 import Bussiness from "@/components/owner/tabs/bussiness";
 
+import {knowWhoIsConnected} from "@/mixins"
+
 export default {
   name: "ProfileFollower",
-
+  mixins:[knowWhoIsConnected],
   components: {
     Bussiness,
     Following,

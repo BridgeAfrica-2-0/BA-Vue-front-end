@@ -11,7 +11,7 @@
         <b-card class=" border shadow hselect">
           <b-row>
             <b-col md="6" sm="12" class="">
-              <h6 class="font-weight-bolder text-design">
+              <h6 class="font-weight-bolder text-design text-center t-center">
                 {{$t('dashboard.Use_Bridge_Africa_as_Yourself_or_as_one_of_your_businesses')}} 
               </h6>
             </b-col>
@@ -200,7 +200,7 @@ export default {
   methods: {
 
 
-    switchBusiness(value){
+   async switchBusiness(value){
 
        console.log("business switch"+value);
  
@@ -219,7 +219,7 @@ export default {
      this.$store.commit("dashboard/setdBusinessId", value);
 
 
-      this.$store
+    await  this.$store
         .dispatch("dashboard/dashboardBusiness", value)
         .then(() => {
           console.log("business switch");
@@ -229,9 +229,6 @@ export default {
         });
 
 
-    this.CommunityBusiness();
-
-    this.CommunityPeople();
 
     this.businessCommunityTotal();
 

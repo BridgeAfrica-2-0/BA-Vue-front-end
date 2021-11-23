@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div> <FlashMessage />
     <div class="people-style p-3 shadow">
       <b-row>
         <b-col cols="5" lg="4" sm="4" md="5">
@@ -21,17 +21,28 @@
             {{ product.description.substring(0, 30) }}
             <b-link v-if="product.description.length >= 30"> see more </b-link>
             <br />
-
+                
             <span class="price">
               <strong> {{ product.price }} </strong>
             </span>
             <br />
+            
           </p>
-          <p>
-            <b-button variant="primary" @click="handleAddToCard"
-              ><span>Add to Cart</span>
+          
+          
+              <div class=" align-self-center  pos">
+            <b-button variant="primary" 
+              >buy now
             </b-button>
-          </p>
+            </div>
+
+            <div class=" align-self-center pos my-2">
+            <b-button variant="primary" class="p-0" @click="handleAddToCard"
+              >add to cart
+            </b-button>
+            </div>
+            
+          
         </b-col>
       </b-row>
 
@@ -164,6 +175,12 @@ export default {
   components: {
     ProductDetails,
   },
+
+  computed : {
+    getStatus(){
+      return this.$store.state.cart.status ;
+    }
+  },
   methods: {
     /**
      * Used to view produduct details
@@ -177,8 +194,26 @@ export default {
       this.viewProduct = false;
     },
     handleAddToCard() {
-      console.log("add to card");
-      this.$store.dispatch("cart/addToCart", this.product.id);
+      console.log("add to card ", this.product.id);
+      this.$store.dispatch("cart/addToCart", this.product.id)
+      .then(response => {
+       
+        console.log("----",this.getStatus);
+
+        this.flashMessage.show({
+              status: 'success',
+              message: this.getStatus,
+              
+            });
+      })
+      .catch((error) => {
+        console.log(error);
+          this.flashMessage.show({
+              status: 'error',
+              message: "error occur",
+              
+            });
+      });;
     },
   },
 };
@@ -192,11 +227,9 @@ export default {
 .cursor-pointer {
   cursor: pointer;
 }
-
 p {
   text-align: left;
 }
-
 input {
   border-radius: 15px;
   padding: 5px;
@@ -211,7 +244,6 @@ input:focus {
   position: relative;
   left: -24px;
 }
-
 .prod {
   max-width: 14rem;
   cursor: pointer;
@@ -239,160 +271,119 @@ h6 {
 .reply {
   cursor: pointer;
 }
-
 @media only screen and (min-width: 768px) {
+  .pos{
+    margin-left: 200px;
+  }
   .center-img {
     margin-right: -60px;
   }
 }
-
 .buybtn {
   width: 100px;
 }
-
 .marketbtn {
   margin-bottom: 3px;
   float: right;
 }
-
 .price {
   font-size: 18px;
 }
-
 .people-style {
   border-top-left-radius: 10px;
-
   border-bottom-left-radius: 10px;
-
   border-top-right-radius: 5px;
-
   border-bottom-right-radius: 5px;
-
   background: white;
-
   background-color: #fff;
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
   margin-bottom: 10px;
 }
-
 @media only screen and (max-width: 540px) {
   .text {
     color: #000;
-
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
     color: rgba(117, 114, 128, 1);
     text-align: left;
-
     font-weight: normal;
     line-height: 20px;
     font-style: normal;
-
     padding: 1px;
     text-align: left;
-
     margin-left: -30px;
-
     line-height: 25px;
   }
-
   .r-image {
     border-top-left-radius: 10px;
-
     border-bottom-left-radius: 10px;
-
     border-top-right-radius: 10px;
-
     border-bottom-right-radius: 10px;
-
     width: 100px;
     height: 100px;
     padding: 4px;
   }
-
   .title {
     font-size: 16px;
     color: black;
-
     line-height: 35px;
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
-
   .btn {
     padding-top: 6px;
     font-size: 10px;
-
     height: 28px;
     width: 85px;
   }
 }
-
 @media only screen and (min-width: 540px) and (max-width: 762px) {
   .text {
     color: #000;
-
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
     color: rgba(117, 114, 128, 1);
     text-align: left;
-
     font-weight: normal;
     line-height: 20px;
     font-style: normal;
-
     padding: 1px;
     text-align: left;
-
     margin-right: -5px;
-
     line-height: 25px;
   }
-
   .r-image {
     border-top-left-radius: 10px;
-
     border-bottom-left-radius: 10px;
-
     border-top-right-radius: 10px;
-
     border-bottom-right-radius: 10px;
-
     height: 100px;
     width: 100px;
-
     padding: 4px;
   }
-
   .btn {
     padding-top: 6px;
-
     height: 38px;
     min-width: 123px;
   }
-
   .title {
     font-size: 20px;
     color: black;
-
     line-height: 35px;
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 }
-
 .discount {
   color: orange;
   margin-left: 60px;
 }
-
 p {
   text-align: left;
 }
-
 input {
   border-radius: 15px;
   padding: 5px;
@@ -407,7 +398,6 @@ input:focus {
   position: relative;
   left: -24px;
 }
-
 .prod {
   max-width: 14rem;
   cursor: pointer;
@@ -436,7 +426,6 @@ input:focus {
   top: -28px;
   cursor: pointer;
 }
-
 h6 {
   text-align: center;
   font-weight: bold;
@@ -454,56 +443,40 @@ h6 {
 .reply {
   cursor: pointer;
 }
-
 @media only screen and (min-width: 762px) {
   .text {
     color: #000;
-
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
     color: rgba(117, 114, 128, 1);
     text-align: left;
-
     font-weight: normal;
     line-height: 20px;
     font-style: normal;
-
     padding: 1px;
     text-align: left;
-
     margin-right: -5px;
-
     line-height: 25px;
   }
-
   .r-image {
     border-top-left-radius: 10px;
-
     border-bottom-left-radius: 10px;
-
     border-top-right-radius: 10px;
-
     border-bottom-right-radius: 10px;
-
     height: 160px;
     width: 160px;
-
     padding: 4px;
   }
-
   .btn {
     padding-top: 6px;
-
     height: 38px;
     width: 123px;
   }
-
   .title {
     font-size: 20px;
     color: black;
-
     line-height: 35px;
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }

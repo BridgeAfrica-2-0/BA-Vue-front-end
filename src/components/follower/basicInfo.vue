@@ -1,10 +1,10 @@
 <template>
   <div>
-    <b class="basic">Basic Infomation</b>
+    <b class="basic">{{ $t('profilefollower.') }}{{ $t('profilefollower.Basic_Infomation') }}</b>
     <hr />
     <div class="basic row">
       <div class="col">
-        Date Of Birth:
+        {{ $t('profilefollower.Date_Of_Birth') }}:
       </div>
       <div class="col">
         {{ info.user.dob }}
@@ -12,7 +12,7 @@
     </div>
     <div class=" basic row">
       <div class="col">
-        Gender:
+        {{ $t('profilefollower.Gender') }}:
       </div>
       <div class="col">
         {{ info.user.gender }}

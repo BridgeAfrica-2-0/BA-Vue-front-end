@@ -12,7 +12,7 @@
 
       <CoolLightBox :items="imgaray" :index="index" @close="index = null"> </CoolLightBox>
 
-      <b-row>
+      <b-row> 
         <b-col
           cols="6"
           md="4"

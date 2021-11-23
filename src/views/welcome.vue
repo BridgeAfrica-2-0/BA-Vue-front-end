@@ -1,5 +1,7 @@
 <template>
   <div class="welcome" style="overflow-x: hidden">
+       
+     
     <md-progress-bar md-mode="indeterminate" v-if="sendingP" />
 
     <md-progress-bar md-mode="indeterminate" v-if="sendingB" />
@@ -81,7 +83,7 @@
                     <div id="preview">
                       <img v-if="img_url" :src="img_url" />
                     </div>
-                    <br />
+                   
                     <div class="text-center">
                       <b-button
                         v-if="img_url"
@@ -142,29 +144,54 @@
                       </select>
                     </div>
 
+                  
+                 
+
+
+                  
+                    
                     <div class="form-group">
                       <label for="country" class="username"> {{ $t('welcome.Country') }} :</label
                       ><br />
-
-                      <country-select
+                      <multiselect
                         v-model="country"
-                        :country="country"
-                        topCountry="CM"
-                        class="form-control text"
-                      />
+                        @input="PRegion"
+                       :multiple="false"
+                        :placeholder="$t('welcome.Search') "
+                        label="name"
+                        track-by="id"
+                        :options="countries"
+                      
+                       
+                      ></multiselect>
                     </div>
 
+
+
+
+
+
+
+
+                
                     <div class="form-group">
                       <label for="country" class="username"> {{ $t('welcome.Region') }} :</label
                       ><br />
 
-                      <region-select
+                      <multiselect
                         v-model="region"
-                        :country="country"
-                        :region="region"
-                        class="form-control text"
-                      />
+                        @input="Division"
+                        
+                        :placeholder="$t('welcome.Search') "
+                        label="name"
+                        track-by="id"
+                        :options="regions"
+                        :multiple="false"
+                      
+                        
+                      ></multiselect>
                     </div>
+                 
 
                     <div class="form-group">
                       <label for="city" class="username"> {{ $t('welcome.City') }} :</label><br />
@@ -177,7 +204,7 @@
                         class="form-control text"
                       />
                     </div>
-
+<!-- 
                     <div class="form-group">
                       <label for="Neighbor" class="username"> {{ $t('welcome.Neighbor') }} :</label
                       ><br />
@@ -189,7 +216,7 @@
                         :placeholder="$t('welcome.Neighbor')"
                         class="form-control text"
                       />
-                    </div>
+                    </div> -->
 
                     <gmap-autocomplete
                       @place_changed="initMarker"
@@ -237,7 +264,6 @@
               </div>
             </tab-content>
 
-            <div class="loader" v-if="loadingWizard"></div>
           </form-wizard>
         </div>
       </div>
@@ -273,7 +299,7 @@
                     <div id="preview">
                       <img v-if="img_url" :src="img_url" />
                     </div>
-                    <br />
+                  
                     <div class="text-center">
                       <b-button
                         v-if="img_url"
@@ -334,29 +360,57 @@
                       </select>
                     </div>
 
+                   
+
+                    
+
+                      
+                    
                     <div class="form-group">
                       <label for="country" class="username"> {{ $t('welcome.Country') }} :</label
                       ><br />
-
-                      <country-select
+                      <multiselect
                         v-model="country"
-                        :country="country"
-                        topCountry="CM"
-                        class="form-control text"
-                      />
+                        @input="PRegion"
+                       :multiple="false"
+                        :placeholder="$t('welcome.Search') "
+                        label="name"
+                        track-by="id"
+                        :options="countries"
+                      
+                       
+                      ></multiselect>
                     </div>
 
+
+
+
+
+
+
+
+                
                     <div class="form-group">
                       <label for="country" class="username"> {{ $t('welcome.Region') }} :</label
                       ><br />
 
-                      <region-select
+                      <multiselect
                         v-model="region"
-                        :country="country"
-                        :region="region"
-                        class="form-control text"
-                      />
+                        @input="Division"
+                        
+                        :placeholder="$t('welcome.Search') "
+                        label="name"
+                        track-by="id"
+                        :options="regions"
+                        :multiple="false"
+                      
+                        
+                      ></multiselect>
                     </div>
+
+
+
+
 
                     <div class="form-group">
                       <label for="city" class="username"> {{ $t('welcome.City') }} :</label><br />
@@ -370,7 +424,7 @@
                       />
                     </div>
 
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                       <label for="Neighbor" class="username"> {{ $t('welcome.Neighbor') }} :</label
                       ><br />
                       <input
@@ -381,7 +435,7 @@
                         :placeholder="$t('welcome.Neighbor')"
                         class="form-control text"
                       />
-                    </div>
+                    </div> -->
 
                     <div class="form-group">
                       <label for="Neighbor" class="username"> {{ $t('welcome.Adress') }} :</label>
@@ -427,7 +481,7 @@
                     <div id="preview">
                       <img v-if="logoimg_url" :src="logoimg_url" />
                     </div>
-                    <br />
+                  
                     <div class="text-center">
                       <b-button
                         v-if="logoimg_url"
@@ -499,7 +553,7 @@
                     @input="subcategories"
                     tag-:placeholder= "$t('welcome.Add_this_as_new_tag')"
                     :placeholder="$t('welcome.Search_or_add_a_tag')"
-                    :label="$t('welcome.Name')"
+                    label="name"
                     track-by="id"
                     :options="pcategories"
                     :multiple="true"
@@ -514,7 +568,7 @@
                     v-model="filterselectvalue"
                     tag-:placeholder="$t('welcome.Add_this_as_new_tag')"
                     :placeholder="$t('welcome.Search_or_add_a_tag')"
-                    :label="$t('welcome.Name')"
+                    label="name"
                     track-by="subcategory_id"
                     :options="scategories"
                     :multiple="true"
@@ -523,8 +577,9 @@
                   ></multiselect>
                 </div>
 
-                <label class="typo__label">{{ $t('welcome.Fiters') }}</label>
-                <div>
+
+                <label  v-if=" filterselectvalue.length" class="typo__label">{{ $t('welcome.Fiters') }}</label>
+                <div  v-if=" filterselectvalue.length">
                   <b-card no-body>
                     <b-tabs pills card vertical>
                       <b-tab
@@ -533,7 +588,7 @@
                         :key="filters.id"
                         active
                         ><b-card-text>
-                          <b-form-group :label="$t('welcome.Filters')">
+                          <b-form-group :label="$t('welcome.Filters')"  class="d-inline-grid"   >
                             <b-form-checkbox-group
                               id=""
                               v-model="select_filterss"
@@ -543,6 +598,7 @@
                                 v-for="fil in filters.filters"
                                 :key="fil.id"
                                 :value="fil.id"
+                                 class="d-inline-grid"
                               >
                                 {{ fil.name }}
                               </b-form-checkbox>
@@ -564,7 +620,7 @@
                         @input="Region"
                      
                         :placeholder="$t('welcome.Search') "
-                        :label="$t('welcome.Name')"
+                        label="name"
                         track-by="id"
                         :options="countries"
                         :multiple="true"
@@ -582,7 +638,7 @@
                         @input="Division"
                         
                         :placeholder="$t('welcome.Search') "
-                        :label="$t('welcome.Name')"
+                        label="name"
                         track-by="id"
                         :options="regions"
                         :multiple="true"
@@ -601,7 +657,7 @@
                         @input="Municipality"
                        
                         :placeholder="$t('welcome.Search') "
-                        :label="$t('welcome.Name')"
+                        label="name"
                         track-by="id"
                         :options="divisions"
                         :multiple="true"
@@ -622,7 +678,7 @@
                         @input="Locality"
                       
                         :placeholder="$t('welcome.Search') "
-                        :label="$t('welcome.Name')"
+                        label="name"
                         track-by="id"
                         :options="municipalities"
                         :multiple="true"
@@ -642,7 +698,7 @@
                         v-model="locality"
                        
                         :placeholder="$t('welcome.Search') "
-                        :label="$t('welcome.Name')"
+                        label="name"
                         track-by="id"
                         :options="localities"
                         :multiple="true"
@@ -677,7 +733,7 @@
                         v-model="business_keyword"
                         tag-:placeholder="$t('welcome.Add_this_as_new_tag')"
                         :placeholder="$t('welcome.Add_New_Keyword')"
-                        :label="$t('welcome.Name')"
+                        label="name"
                         track-by="id"
                         :options="keywordds"
                         :multiple="true"
@@ -767,12 +823,11 @@
               </div>
             </tab-content>
 
-            <div class="loader" v-if="loadingWizard"></div>
           </form-wizard>
         </div>
       </form>
     </div>
-  </div>
+  </div> 
 </template>
 
 <script>
@@ -801,6 +856,8 @@ export default {
       keywordds:[],
       first_page: "true",
       country: "",
+      coun:"",
+      reg:"",
       countryy: [],
       regionn: [],
       region: "",
@@ -872,6 +929,16 @@ export default {
   },
 
   methods: {
+
+
+      flashErrors(errors) {
+      let err = "";
+      Object.values(errors).forEach((element) => {
+        err = element[0];
+      });
+
+      return err;
+    },
 
     addTag(newTag) {
       const tag = {
@@ -985,6 +1052,27 @@ export default {
         });
     },
 
+
+
+    PRegion(){
+
+
+ let formData2 = new FormData();
+      formData2.append("countryId",  this.selectedpcountry);
+
+        this.$store
+        .dispatch("auth/region", formData2)
+        .then(() => {
+     
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+
+    },
+
+
+
     Region() {
       let formData2 = new FormData();
       formData2.append("countryId", this.selectedcountry);
@@ -1042,7 +1130,7 @@ export default {
     },
 
     setLoading: function (value) {
-      this.loadingWizard = value;
+    //  this.loadingWizard = value;
     },
 
     validateState(name) {
@@ -1135,7 +1223,7 @@ export default {
                 this.flashMessage.show({
                   status: "error",
 
-                  message: err.response.data.message,
+                message: this.flashErrors(err.response.data.errors),
                   blockClass: "custom-block-class",
                 });
               } else {
@@ -1256,7 +1344,7 @@ export default {
               this.flashMessage.show({
                 status: "error",
 
-                message: err.response.data.message,
+                 message: this.flashErrors(err.response.data.errors),
                 blockClass: "custom-block-class",
               });
             } else {
@@ -1275,10 +1363,18 @@ export default {
     },
 
     updateUserProfile: function () {
+
+       let loader = this.$loading.show({
+            container: this.fullPage ? null : this.$refs.loader,
+            canCancel: true,
+            onCancel: this.onCancel,
+            color: "#e75c18",
+          });
+
       return new Promise((resolve, reject) => {
         console.log("sending user data");
 
-        this.sendingP = true;
+       
 
         let formData = new FormData();
         formData.append("profile_picture", this.profile_pic);
@@ -1286,13 +1382,13 @@ export default {
         formData.append("dob", this.dob);
         formData.append("gender", this.gender);
         formData.append("city", this.city);
-        formData.append("country", this.country);
-        formData.append("region", this.region);
+        formData.append("country", this.selectedpcountry);
+        formData.append("region", this.selectedpregion);
         formData.append("city", this.city);
         formData.append("neighbor", this.Neighbor);
         formData.append("lat", this.center.lat);
         formData.append("lng", this.center.lng);
-        formData.append("address", this.region);
+        formData.append("address", this.address);
 
         axios
           .post("/complete/profile", formData)
@@ -1300,7 +1396,7 @@ export default {
             console.log(response);
 
             this.step1 = true;
-            this.sending = false;
+            loader.hide();
 
             this.flashMessage.show({
               status: "success",
@@ -1319,17 +1415,17 @@ export default {
           .catch((err) => {
             console.log({ err: err });
 
-            this.sending = false;
+            loader.hide();
             this.step1 = false;
 
             if (err.response.status == 422) {
               console.log({ err: err });
               console.log(err.response.data.message);
-
+             loader.hide();
               this.flashMessage.show({
                 status: "error",
 
-                message: err.response.data.message,
+              message: this.flashErrors(err.response.data.errors),
                 blockClass: "custom-block-class",
               });
             } else {
@@ -1340,6 +1436,7 @@ export default {
                 blockClass: "custom-block-class",
               });
               console.log({ err: err });
+              loader.hide();
             }
 
             resolve(false);
@@ -1404,11 +1501,13 @@ export default {
   },
 
   mounted() {
+
+    this. peopleAround();
     this.locateGeoLocation();
 
     this.Country();
     this.categories();
-
+    
     //this.filters()
 
     //this.Setcategoryfiters()
@@ -1451,6 +1550,17 @@ export default {
       });
       return sub_cat;
     },
+
+     selectedpcountry: function () {
+      return this.country.id;
+    },
+
+
+     selectedpregion: function () {
+      return this.region.id;
+    },  
+
+
     selectedregion: function () {
       let sub_cat = [];
       this.regionn.forEach((item) => {
@@ -1526,7 +1636,7 @@ import "vue-form-wizard/dist/vue-form-wizard.min.css";
 
 #preview img {
   max-width: 100%;
-  max-height: 500px;
+  max-height: 250px;
 }
 
 .wizard-icon-container {

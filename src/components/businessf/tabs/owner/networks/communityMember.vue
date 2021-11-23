@@ -115,25 +115,14 @@
                         xl="12"
                         class="mt-3 mt-lg-1 mt-xl-3"
                       >
-                        <h6 class="follower m-15">5K Community</h6>
-                      </b-col>
-                    </b-row>
-                  </div>
-                </b-col>
-
-                <b-col lg="6" xl="6" cols="12"  md="12">
-                  <div>
-                    <b-row class="mt-lg-0">
-                      <b-col md="6" lg="12" cols="6" xl="12" class="mt-2 mt-lg-2 mt-xl-2 btn-2 center">
-                        <b-button block variant="primary" size="sm" class="b-background flexx pobtn shadow" @click="cta(member)">
-                          <i class="fas fa-envelope fa-lg btn-icon"></i>
-                          <span class="btn-text">Message</span>
-                        </b-button>
-                      </b-col>
-
-                      <b-col md="6" lg="12" cols="6" xl="12" class="mt-2 mt-lg-2 mt-xl-2 btn-2 center">
-                        <b-button block size="sm" class="b-background flexx pobtn shadow" variant="primary">
-                          <i class="fas fa-user-plus fa-lg btn-icon"></i>
+                        <b-button
+                          block
+                          size="sm"
+                          class="b-background flexx pobtn shadow"
+                          variant="primary"
+                          @click="$emit('handleFollow', member)"
+                        >
+                          <i :class="member.is_follow ? 'fas fa-user-minus fa-lg btn-icon':'fas fa-user-plus fa-lg btn-icon'"></i>
                           <span class="btn-com">{{ $t('network.Community') }}</span>
                         </b-button>
                       </b-col>

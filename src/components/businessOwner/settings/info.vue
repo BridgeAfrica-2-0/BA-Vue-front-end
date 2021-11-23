@@ -1,10 +1,9 @@
 <template>
   <b-container fluid>
     <b-container v-if="businessInfo != 0" class="bv-example-row">
-      <!-- {{ businessInfo }}<br /><br /> -->
-      <!-- {{ editbiz }} -->
+      <!-- {{businessInfo}} -->
 
-      <!-- <Flashback /> -->
+      <FlashMessage />
 
       <b-form>
         <div class="b-bottom">

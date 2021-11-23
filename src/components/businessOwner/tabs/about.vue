@@ -123,7 +123,7 @@
       @ok="validate('editAddress')"
       @keyup="validate('editAddress')"
     >
-      <b-form @submit.prevent="validate('editAddress')">
+      <b-form @submit.prevent="validate('modifyBiography')">
         <div class="form-group">
           <label for="title">Bussiness Name:</label><br />
           <input
@@ -180,14 +180,66 @@
 
         <div class="form-group">
           <label for="alias">Category:</label><br />
-          <b-form-select
-            v-model="business_about_input.category"
-            :options="categories"
-            class="mb-3"
-            value-field="item"
-            text-field="name"
-            required
-          ></b-form-select>
+          <multiselect
+            v-model="multiselecvalue"
+            @input="subcategories"
+            tag-placeholder="Add this as new tag"
+            placeholder="Search or add a tag"
+            label="name"
+            track-by="id"
+            :options="pcategories"
+            :multiple="true"
+            :taggable="true"
+            @tag="addTag"
+          ></multiselect>
+        </div>
+
+        <div class="form-group">
+          <label for="alias">Sub-Category:</label><br />
+          <multiselect
+            v-model="filterselectvalue"
+            tag-placeholder="Add this as new tag"
+            placeholder="Search or add a tag"
+            label="name"
+            track-by="subcategory_id"
+            :options="scategories"
+            :multiple="true"
+            :taggable="true"
+            @tag="addFilter"
+          ></multiselect>
+        </div>
+
+        <label class="typo__label">Fiters</label>
+        <div>
+          <b-card no-body>
+            <b-tabs pills card vertical>
+              <b-tab
+                :title="filters.name"
+                v-for="filters in filterselectvalue"
+                :key="filters.id"
+                active
+                ><b-card-text>
+                  <b-form-group label="Filters" class="colorblack">
+                    <b-form-checkbox-group
+                      id=""
+                      class="colorblack"
+                      v-model="select_filterss"
+                      name="filters"
+                    >
+                      <b-form-checkbox
+                      class="colorblack"
+                        v-for="fil in filters.filters"
+                        :key="fil.id"
+                        :value="fil.id"
+                      >
+                        {{ fil.name }}
+                      </b-form-checkbox>
+                    </b-form-checkbox-group>
+                  </b-form-group>
+                </b-card-text>
+              </b-tab>
+            </b-tabs>
+          </b-card>
         </div>
 
         <div class="form-group">
@@ -537,7 +589,14 @@ export default {
             " AM - " +
             this.openNow.closing_time +
             " PM";
-    }
+    },
+
+    // business_about_input(){
+    //   this.business_about_input = JSON.parse(
+    //     JSON.stringify(this.business_about)
+    //   );
+    //   return this.business_about_input;
+    // }
   },
   methods: {
     selectHour(day) {
@@ -579,14 +638,23 @@ export default {
           );
           console.log(this.$store.getters["businessOwner/getBusinessAbout"]);
           console.log("Modify Business Biography start++++");
+          console.log("-------",this.business_about_input.about_business);
+          console.log("-----"+this.business_id);
           this.test();
+          var data = {  business_id: this.business_id,
+          data : {
+              about_business: this.business_about_input.about_business,
+             
+              name: this.business_about_input.name
+              }
+            } ;
           this.$store
-            .dispatch("businessOwner/updateUserBusinessAbout", {
-              business_about: this.business_about_input,
-              business_id: this.business_id,
-            })
-            .then(response => {
-              console.log("fetch finished on the database response (3) ", response);
+            .dispatch("businessOwner/updateBusinessBiographie",data )
+            .then((response) => {
+              console.log(
+                "fetch finished on the database response (3) ",
+                response
+              );
               console.log("Modify Business Biography end++++");
             })
             .catch(error => {

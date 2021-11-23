@@ -2,6 +2,7 @@
   <div>
     <div v-for="business in businesses" :key="business.id" class="people-style shadow">
       <b-row>
+        <div style="display:none;">{{business['type']= 'business'}}</div>
         <b-col md="3" xl="5" lg="5" cols="5" sm="3">
           <div class="center-img">
             <splide :options="options" class="r-image">
@@ -13,8 +14,8 @@
         </b-col>
         <b-col md="5" cols="7"  lg="7" xl="7"  sm="5">
           <p class="textt">
-            <strong class="title"> {{ business.name }} </strong> <br />
-            {{ business.category }}
+            <strong class="title"> {{business.name.substring(0,10)+"..."}} </strong> <br />
+            {{business.category}}
             <br />
             {{business.followers}} {{ $t('network.Community')}} <br />
 
@@ -22,8 +23,8 @@
               <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{ business.location_description }}
             </span>
             <br />
-            <span v-if="business.about_business.length<65">{{ business.about_business}}</span>
-            <span v-else >{{ business.about_business.substring(0,65)+"..." }} <b-link>{{ $t('network.Read_More') }}</b-link></span>
+            <span v-if="business.about_business.length<15">{{ business.about_business}}</span>
+            <span v-else >{{ business.about_business.substring(0,15)+"..." }} <b-link>{{ $t('network.Read_More') }}</b-link></span>
           </p>
         </b-col>
 
@@ -35,9 +36,22 @@
         <b-col lg="12" xl="12" md="4" cols="12" sm="4">
           <div class="s-button">
             <b-row>
-              <b-col md="12" lg="4" xl="4" sm="12" cols="4" class="mt-2 text-center">
-                <b-button block size="sm" class="b-background shadow" variant="primary">
-                  <i class="fas fa-user-plus fa-lg btn-icon"></i>
+              <b-col
+                md="12"
+                lg="4"
+                xl="4"
+                sm="12"
+                cols="4"
+                class="mt-2 text-center"
+              >
+                <b-button
+                  block
+                  size="sm"
+                  class="b-background shadow"
+                  variant="primary"
+                  @click="$emit('handleFollow', business)"
+                >
+                  <i :class="business.is_follow ? 'fas fa-user-minus fa-lg btn-icon':'fas fa-user-plus fa-lg btn-icon'"></i>
                   <span class="btn-com">{{ $t('network.Community')}}</span>
                 </b-button>
               </b-col>

@@ -75,22 +75,17 @@
           </b-skeleton-wrapper>
         </div>
       </b-col>
-      <b-col v-if="feedbacks.per_page < feedbacks.total" cols="12">
-        <span class="float-right">
-          <b-pagination
-            v-model="currentPage"
-            :total-rows="feedbacks.total"
-            :per-page="feedbacks.per_page"
-            @change="handlePageChange"
-            aria-controls="my-table"
-          ></b-pagination>
-        </span>
+      <b-col col="12">
+        <infinite-loading @infinite="infiniteHandler" ref="infiniteLoading">
+          <div class="text-red" slot="no-more">No More Request</div>
+          <div class="text-red" slot="no-results">No More Request</div>
+        </infinite-loading>
       </b-col>
     </b-row>
 
     <FlashMessage />
     
-  </b-row>
+  <!-- </b-row> -->
   <b-row>
     <b-col cols="12">
       <span class="float-right">
@@ -164,8 +159,14 @@ export default {
   name: "feedbackNetwork",
   data() {
     return {
-      selected: 1,
-      text: "",
+      url: null,
+      moment: moment,
+      filter: "0",
+      filterData: false,
+      loading: false,
+      currentPage: 0,
+      currentIndex: -1,
+      feedbacks: [],
       options: [
         { value: "1", text: "suggestion for improvement" },
         { value: "2", text: "Progress to your program" },
@@ -173,6 +174,108 @@ export default {
       ],
     };
   },
+  mounted(){
+    this.url = this.$route.params.id;
+  },
+  methods: {
+    filterFeedback() {
+      this.filterData = !this.filterData;
+    },
+    getRequestDatas(filterData) {
+      let data = "";
+      if (filterData) {
+        console.log("Status true");
+        if (filterData == 0) 
+          data = "";
+        else
+          data = filterData;
+      }
+      console.log(data);
+      return data;
+    },
+    applyFilter(data){
+      this.loading = true;
+      this.feedbacks = [];
+      this.filterData = data
+      console.log("searching...");
+      console.log(this.filterData);
+      this.$nextTick(() => {
+        this.page = 0;
+        this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
+      });
+    },
+
+    infiniteHandler($state) {
+      console.log("loop");
+      const data = this.getRequestDatas(this.filterData);
+      console.log('keyword: '+data);
+      let formData = new FormData();
+      formData.append('keyword', data);
+      // this.$store
+      //   .dispatch("networkProfileMembers/getMembers", {
+      //     path: this.url+"/members/list/"+this.page,
+      //     formData: formData
+      //   })
+      this.axios
+        .post("network/"+this.url+"/feedbacks/"+this.currentPage, formData)
+        .then(({ data }) => {
+        console.log(data);
+        console.log(this.currentPage);
+        if (data.data.length) {
+          this.currentPage += 1;
+          console.log(this.currentPage);
+          console.log(...data.data);
+          this.feedbacks.push(...data.data);
+          this.loading = false;
+          $state.loaded();
+        } else {
+          this.loading = false;
+          $state.complete();
+        }
+      }) .catch((err) => {
+        this.loading = false;
+        console.log({ err: err });
+      })
+    },
+
+    deleteFeedback: function(user_id){
+      this.loading = true;
+      let info = {
+        user_id: user_id,
+        url: this.url,
+      };
+      this.$store
+      .dispatch("networkProfileFeedback/feedbackRequests", {
+        method:'DELETE',
+        data: info
+      })
+      .then(response => {
+        this.$nextTick(() => {
+          this.page = 0;
+          this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
+        });
+        this.loading = false;
+        console.log(response);
+        console.log('ohh yeah');
+        this.flashMessage.show({
+          status: "success",
+          message: "Feedback Deleted"
+        });
+      })
+      .catch( err => {
+        this.$nextTick(() => {
+          this.page = 0;
+          this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
+        });
+        console.log({ err: err });
+        this.loading = false;
+        this.flashMessage.show({
+          status: "error",
+          message: "Unable to Deleted Feedback"
+        });
+      });
+		},
+  }
 };
 </script>
 

@@ -26,6 +26,7 @@ import hotbusiness from "./hotbusiness";
 import profile from "./profile";
 import follower from "./follower";
 import keywordOperationOnNetwork from "./keywordOperationOnNetwork";
+import businessOrderDetails from "./businessOrderDetails";
 
 // import UserProfileOwner from "./UserProfileOwner";
 import networkProfile from './networkProfile';
@@ -50,63 +51,63 @@ import networkProfileCommunitySidebar from "./networkProfileCommunitySidebar";
 import networkProfileFeedback from "./networkProfileFeedback";
 import networkProfileMedia from "./networkProfileMedia";
 import networkProfileMemberRequest from "./networkProfileMemberRequest";
+// import networkNotification from "./networkNotification";
 import { social } from "./social";
-import productComments from "./productComments";
-import productDetails from "./productDetails";
-import cart from "./cart";
-import { notification } from "./notifications"
+import { notification } from "./notifications";
+import cart from "./cart"
 
 
 // axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 // axios.defaults.baseURL = process.env.VUE_APP_API_URL_DEV;
 // axios.defaults.baseURL = process.env.VUE_APP_API_URL_EDS;
 Vue.use(Vuex);
-axios.defaults.baseURL = process.env.VUE_APP_API_URL;
+
+ axios.defaults.baseURL = process.env.VUE_APP_API_URL;
+ //axios.defaults.baseURL = "https://test.maxinemoffett.com/api/v1/";
 
 export default new Vuex.Store({
-    modules: {
-        auth,
-        networkDetails,
-        ProfileAndBusinessDetails,
-        businessOwner,
-        businessBlocking,
-        dashboard,
-        hotbusiness,
-        networkProfileMembers,
-        marketSearch,
-        networkSearch,
-        allSearch,
-        profile,
-        follower,
-        search,
-        UserProfileOwner,
-        userChat,
-        networkChat,
-        businessChat,
-        businessGeneral,
-        businessRole,
-        businessAccountType,
-        business,
-        networkProfileFeedback,
-        NetworkSettings,
-        businessSettingInfo,
-        checkout,
-        social,
-        businessFollowers,
-        networkProfileCommunitySidebar,
-        networkProfileCommunity,
-        networkProfileMedia,
-        networkProfileMemberRequest,
-        networkProfile,
-        productComments,
-        productDetails,
-        cart,
-        dashboardcommunity,
-        market,
-        keywordOperationOnNetwork,
+  modules: {
+    auth,
+    networkDetails,
+    dashboardcommunity,
+    ProfileAndBusinessDetails,
+    businessOwner,
+    businessBlocking,
+    dashboard,
+    hotbusiness,
+    networkProfileMembers,
+    marketSearch,
+    networkSearch,
+    allSearch,
+    profile,
+    follower,
+    search,
+    UserProfileOwner,
+    userChat,
+    businessChat,
+    businessGeneral,
+    businessRole,
+    businessAccountType,
+    business,
+    networkProfileFeedback,
+    NetworkSettings,
+   keywordOperationOnNetwork,
+    businessSettingInfo,
+    checkout,
+    social,
+    businessFollowers,
+    networkProfileCommunitySidebar,
+    networkProfileCommunity,
+    networkProfileMedia,
+    networkProfileMemberRequest,
+    networkProfile,
+    businessOrderDetails,
+    cart,
+    notification
+  }
+});
 
         orderBusiness,
 
         notification
-    }
-});
+    

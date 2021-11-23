@@ -62,16 +62,13 @@
           </b-row>
         </b-container>
         <h6 class="mt-2 font-weight-bolder title ">About</h6>
-        <p v-if="networkInfo.description.length<130" class="text-justify text">{{ networkInfo.description }}</p>
-        <p v-else class="text-justify text">
-          {{ networkInfo.description.substring(0,130)+"..." }}
-          <span class="d-inline-block float-right">
-            <a @click="$bvToast.show('example-toast')" style="cursor:pointer;">lire la Suite</a>
+        <p class="text-justify text">
+          <span v-if="networkInfo.description.length < 130">{{ networkInfo.description }}</span>
+          <span v-else>{{ networkInfo.description.substring(0, 130) + moreText }}</span>
+          <span v-if="moreText === '...'" class="d-inline-block float-right">
+            <a @click="moreText = networkInfo.description" style="cursor: pointer">{{ $t('network.lire_la_Suite') }}</a>
           </span>
         </p>
-        <b-toast id="example-toast" static no-auto-hide>
-          {{ networkInfo.description }}
-        </b-toast>
       </b-card-text>
     </b-card>
     

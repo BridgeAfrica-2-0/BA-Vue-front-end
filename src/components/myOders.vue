@@ -53,19 +53,33 @@
               <b-form-select v-model="selected" :options="options"></b-form-select>
             </div>
           </div>
-          <!-- ALL ORDERS MOBILE-->
-          <div id="orderAllList" class="allorders">
-            <div v-for="order in currentOrdersShow" :key="order.oderId">
-              <div class="row">
-                <div class="col">
-                  <span class="gras"
-                    >Order <span class="text-success order">#{{ order.oderId }}</span>
-                    <br />
-                    <span class="flou row" style="margin-left: 1px"
-                      ><span class="mr-1">{{ order.shippingAddress }}</span
-                      >- <span class="ml-1">{{ momentFormat(order.dateCreated) }}</span></span
-                    >
-                  </span>
+          <div v-for="i in etat1" :key="i">
+            <!-- <div class="justify-content-start  row marghr"> -->
+            <!-- <div class="justify-content-start container"> -->
+
+            <div class="row">
+              <div class="col">
+                <span class="gras"
+                  >Order <span class="text-success order">#12324253</span>
+                  <br />
+                  <span class="flou row" style="margin-left: 1px"
+                    >yaoundé 12/12/2021 12H00</span
+                  >
+                </span>
+              </div>
+
+              <div class="col">
+                <div class="row drop">
+                  <b-dropdown
+                    variant="ligth"
+                    id="dropdown-1"
+                    text="Manage"
+                    class="m-md-2 noborder"
+                  >
+                    <b-dropdown-item>archive</b-dropdown-item>
+                    <b-dropdown-item>delete</b-dropdown-item>
+                    <b-dropdown-item>Completed</b-dropdown-item>
+                  </b-dropdown>
                 </div>
 
                 <div class="col">
@@ -115,16 +129,11 @@
                 <br />
               </div>
 
-              <div class="justify-content-center container row">
-                <div class="">
-                  <button class="buttonm btn shadow text-center">
-                    <h3 class="h3 button-text">Re-order</h3>
-                  </button>
-                </div>
-              </div>
-              <div class="justify-content-center container row">
-                <br />
-                <br />
+            <div class="justify-content-center container row">
+              <div class="">
+                <button class="buttonm btn shadow text-center" @click="handleReOrder(9)">
+                  <h3 class="h3 button-text">Re-order</h3>
+                </button>
               </div>
               <!-- <hr /> -->
             </div>
@@ -151,19 +160,18 @@
             </div>
           </div>
 
-          <!-- IN PROGRESS ORDERS MOBILE -->
-          <div id="orderInProgress" class="inprogress-order">
-            <div v-for="order in currentOrdersPending" :key="order.oderId">
-              <div class="row">
-                <div class="col">
-                  <span class="gras"
-                    >Order <span class="text-success order">#{{ order.oderId }}</span>
-                    <br />
-                    <span class="flou row" style="margin-left: 1px"
-                      ><span class="mr-1">{{ order.shippingAddress }}</span
-                      >- <span class="ml-1">{{ momentFormat(order.dateCreated) }}</span></span
-                    >
-                  </span>
+              <div class="col">
+                <div class="row drop">
+                  <b-dropdown
+                    variant="ligth"
+                    id="dropdown-1"
+                    text="Manage"
+                    class="m-md-2"
+                  >
+                    <b-dropdown-item>archive</b-dropdown-item>
+                    <b-dropdown-item>delete</b-dropdown-item>
+                    <b-dropdown-item>Completed</b-dropdown-item>
+                  </b-dropdown>
                 </div>
 
                 <div class="col">
@@ -213,16 +221,11 @@
                 <br />
               </div>
 
-              <div class="justify-content-center container row">
-                <div class="">
-                  <button class="buttonm btn shadow text-center">
-                    <h3 class="h3 button-text">Re-order</h3>
-                  </button>
-                </div>
-              </div>
-              <div class="justify-content-center container row">
-                <br />
-                <br />
+            <div class="justify-content-center container row">
+              <div class="">
+                <button class="buttonm btn shadow text-center" @click="handleReOrder(9)">
+                  <h3 class="h3 button-text">Re-order</h3>
+                </button>
               </div>
               <!-- <hr /> -->
             </div>
@@ -245,19 +248,30 @@
               <b-form-select v-model="selected" :options="options"></b-form-select>
             </div>
           </div>
-          <!-- IN COMPLETE ORDERS MOBILE -->
-          <div id="orderComplete" class="complete-order">
-            <div v-for="order in currentOrdersComplete" :key="order.oderId">
-              <div class="row">
-                <div class="col">
-                  <span class="gras"
-                    >Order <span class="text-success order">#{{ order.oderId }}</span>
-                    <br />
-                    <span class="flou row" style="margin-left: 1px"
-                      ><span class="mr-1">{{ order.shippingAddress }}</span
-                      >- <span class="ml-1">{{ momentFormat(order.dateCreated) }}</span></span
-                    >
-                  </span>
+          <div v-for="i in etat1" :key="i">
+            <div class="row">
+              <div class="col">
+                <span class="gras"
+                  >Order <span class="text-success order">#12324253</span>
+                  <br />
+                  <span class="flou row" style="margin-left: 1px"
+                    >yaoundé 12/12/2021 12H00</span
+                  >
+                </span>
+              </div>
+
+              <div class="col">
+                <div class="row drop">
+                  <b-dropdown
+                    variant="ligth"
+                    id="dropdown-1"
+                    text="Manage"
+                    class="m-md-2"
+                  >
+                    <b-dropdown-item>archive</b-dropdown-item>
+                    <b-dropdown-item>delete</b-dropdown-item>
+                    
+                  </b-dropdown>
                 </div>
 
                 <div class="col">
@@ -307,12 +321,11 @@
                 <br />
               </div>
 
-              <div class="justify-content-center container row">
-                <div class="">
-                  <button class="buttonm btn shadow text-center">
-                    <h3 class="h3 button-text">Re-order</h3>
-                  </button>
-                </div>
+            <div class="justify-content-center container row">
+              <div class="">
+                <button class="buttonm btn shadow text-center" @click="handleReOrder(9)">
+                  <h3 class="h3 button-text">Re-order</h3>
+                </button>
               </div>
               <div class="justify-content-center container row">
                 <br />
@@ -401,27 +414,18 @@
                 <br />
               </div>
 
-              <div class="justify-content-center container row">
-                <div class="">
-                  <button class="buttonm btn shadow text-center">
-                    <h3 class="h3 button-text">Re-order</h3>
-                  </button>
-                </div>
-              </div>
-              <div class="justify-content-center container row">
-                <br />
                 <br />
               </div>
               <!-- <hr /> -->
             </div>
             <div class="col-12 d-flex justify-content-center">
-              <b-pagination
                 v-model="currentPageCancel"
                 pills
                 aria-controls="orderCancel"
                 :per-page="per_page"
                 :total-rows="ordersCancel.length"
-              ></b-pagination>
+              >
+              <!-- </b-pagination> -->
             </div>
           </div>
         </div>
@@ -499,16 +503,20 @@
               <b-form-select v-model="selected" :options="options"></b-form-select>
             </div>
           </div>
-          <div id="orderAllDesk">
-            <div v-for="order in currentOrdersShow" :key="order.oderId">
-              <div class="justify-content-start container">
-                <div class="container d-flex justify-content-end btn-marg">
-                  <div class="manage">
-                    <b-dropdown variant="ligth" id="dropdown-1" text="Manage" class="m-md-2">
-                      <b-dropdown-item>Archive</b-dropdown-item>
-                      <b-dropdown-item>Delete</b-dropdown-item>
-                    </b-dropdown>
-                  </div>
+          <div v-for="i in etat1" :key="i">
+            <div class="justify-content-start container">
+              <div class="container d-flex justify-content-end btn-marg">
+                <div class="manage">
+                  <b-dropdown
+                    variant="ligth"
+                    id="dropdown-1"
+                    text="Manage"
+                    class="m-md-2"
+                  >
+                    <b-dropdown-item>Archive</b-dropdown-item>
+                    <b-dropdown-item>Delete</b-dropdown-item>
+                    <b-dropdown-item>Completed</b-dropdown-item>
+                  </b-dropdown>
                 </div>
                 <router-link to="detail">
                   <span class="gras">Order</span>
@@ -550,11 +558,11 @@
                   <h3 class="text-success">{{ order.status }}</h3>
                 </div>
 
-                <div class="container d-flex justify-content-end btn-marg">
-                  <button class="button btn shadow">
-                    <h3 class="h3 button-text">Re-order</h3>
-                  </button>
-                </div>
+              <div class="float-right btn-marg">
+                <button class="button btn shadow" @click="handleReOrder(9)">
+                  <h3 class="h3 button-text">Re-order</h3>
+                </button>
+              </div>
 
                 <div class="justify-content-center container row">
                   <br />
@@ -639,11 +647,11 @@
                   <h3 class="text-success">{{ order.status }}</h3>
                 </div>
 
-                <div class="container d-flex justify-content-end btn-marg">
-                  <button class="button btn shadow">
-                    <h3 class="h3 button-text">Re-order</h3>
-                  </button>
-                </div>
+              <div class="container d-flex justify-content-end btn-marg">
+                <button class="button btn shadow" @click="handleReOrder(9)">
+                  <h3 class="h3 button-text">Re-order</h3>
+                </button>
+              </div>
 
                 <div class="justify-content-center container row">
                   <br />
@@ -725,11 +733,11 @@
                   <h3 class="text-success">{{ order.status }}</h3>
                 </div>
 
-                <div class="container d-flex justify-content-end btn-marg">
-                  <button class="button btn shadow">
-                    <h3 class="h3 button-text">Re-order</h3>
-                  </button>
-                </div>
+              <div class="container d-flex justify-content-end btn-marg">
+                <button class="button btn shadow" @click="handleReOrder(9)">
+                  <h3 class="h3 button-text">Re-order</h3>
+                </button>
+              </div>
 
                 <div class="justify-content-center container row">
                   <br />
@@ -811,11 +819,11 @@
                   <h3 class="text-success">{{ order.status }}</h3>
                 </div>
 
-                <div class="container d-flex justify-content-end btn-marg">
-                  <button class="button btn shadow">
-                    <h3 class="h3 button-text">Re-order</h3>
-                  </button>
-                </div>
+              <div class="container d-flex justify-content-end btn-marg">
+                <button class="button btn shadow" @click="handleReOrder(9)">
+                  <h3 class="h3 button-text">Re-order</h3>
+                </button>
+              </div>
 
                 <div class="justify-content-center container row">
                   <br />
@@ -843,8 +851,8 @@
 </template>
 
 <script>
-import navbar from './navbar.vue';
-import moment from 'moment';
+import axios from "axios";
+import navbar from "./navbar.vue";
 
 export default {
   components: { navbar },
@@ -919,6 +927,13 @@ export default {
     },
     formatMoney(money) {
       return this.formatObject.format(money);
+    },
+    handleReOrder(id){
+      axios.get(`/order/action/${id}/reorder`)
+          .then(response => {
+            console.log(response);
+          })
+          .catch(error => console.log(error));
     },
   },
   computed: {
@@ -1010,7 +1025,7 @@ export default {
   margin-right: 50px;
 }
 .btn-marg {
-  margin-top: -30px;
+  margin-top: 100px;
 }
 .r-img {
   border-radius: 5px;

@@ -1,30 +1,36 @@
 import axios from "axios";
 
-const state = {
+export default {
+namespaced: true,
+
+ state : {
   cart: [],
-};
-const getters = {};
-const actions = {
+  status: ''
+},
+
+mutations: {
+  setStatus(state, status){
+      state.status = status;
+  }
+},
+ actions : {
+
   async addToCart({ commit }, idproduct) {
     await axios
-      .post(`market/product/cart/add`, {
-        product_id: idproduct,
-      })
+      .post(`market/product/${idproduct}/cart/add`)
       .then((response) => {
-        commit;
+       
         console.log(response.data);
+        console.log(response.data.message);
+        commit('setStatus', response.data.message) ;
       })
       .catch((error) => {
         console.log(error);
       });
   },
-};
-const mutations = {};
+ }
 
-export default {
-  namespaced: true,
-  state,
-  getters,
-  actions,
-  mutations,
+
+
+
 };

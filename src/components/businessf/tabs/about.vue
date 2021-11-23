@@ -13,7 +13,7 @@
         ></iframe>
       </div>
       <b-row>
-        <b-col>
+      <b-col>
           <div class="mb-2 p-4">
             <h4 class="mb-4 text-center">
               <b-icon icon="info-circle-fill" class="primary mr-2"></b-icon>
@@ -24,7 +24,7 @@
             </p>
           </div>
         </b-col>
-        <b-col>
+         <b-col>
           <div class="p-4">
             <p>
               <b-icon icon="briefcase-fill" class="primary icon"></b-icon>
@@ -78,6 +78,9 @@
 export default {
   data() {
     return {
+      business_id:null,
+      business_about: [],
+
       edit1: false,
       edit2: false,
       leftTitle: "About Mapoure Agrobusiness",

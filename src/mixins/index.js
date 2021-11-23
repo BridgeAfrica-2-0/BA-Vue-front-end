@@ -162,10 +162,8 @@ export const commentMixinsBuisness = {
                 this.comment = Object.assign(this.comment, {
                     is_liked: this.comment.is_liked ? 0 : 1,
                     comment_likes: !this.comment.is_liked ?
-                        this.comment.comment_likes + 1 :
-                        this.comment.comment_likes ?
-                        this.comment.comment_likes - 1 :
-                        0,
+                        this.comment.comment_likes + 1 : this.comment.comment_likes ?
+                        this.comment.comment_likes - 1 : 0,
                 });
         },
 
@@ -267,10 +265,8 @@ export const commentMixins = {
                 this.comment = Object.assign(this.comment, {
                     is_liked: this.comment.is_liked ? 0 : 1,
                     comment_likes: !this.comment.is_liked ?
-                        this.comment.comment_likes + 1 :
-                        this.comment.comment_likes ?
-                        this.comment.comment_likes - 1 :
-                        0,
+                        this.comment.comment_likes + 1 : this.comment.comment_likes ?
+                        this.comment.comment_likes - 1 : 0,
                 });
         },
 
@@ -361,24 +357,52 @@ export const knowWhoIsConnected = {
 }
 
 export const Redis = {
+
+    computed: {
+        ...mapGetters({
+            profile: "auth/profilConnected"
+        })
+    },
+
     methods: {
         ...mapMutations({
-            newNotificationBusiness: 'notification/NEW_BUSINESS_NOTIFICATION',
-            newNotificationProfile: 'notification/NEW_PROFILE_NOTIFICATION',
-            newNotificationNetwork: 'notification/NEW_NETWORK_NOTIFICATION',
+            newNotificationBusiness: "notification/NEW_BUSINESS_NOTIFICATION",
+            newNotificationProfile: "notification/NEW_PROFILE_NOTIFICATION",
+            newNotificationNetwork: "notification/NEW_NETWORK_NOTIFICATION",
+            auth: "auth/profilConnected"
         }),
 
+        async getAut() {
+            const response = await this.$repository.share.WhoIsConnect({ businessId: this.route.params.id });
+            if (response.access) this.auth(response.data);
+        },
+
         initBusinessNotification: async function() {
-            const response = this.$repository.notification.business();
-            if (response.status) this.newNotificationBusiness({ init: true, data: response.data });
+            const response = this.$repository.notification.business()
+            if (response.status)
+                this.newNotificationBusiness({ init: true, data: response.data })
         },
 
         redis() {
-            console.log('call echo redis');
-            window.Redis.channel('user.1').listen('.UserEvent', payload => {
-                console.log(payload);
-            });
-        },
+            console.log("call echo redis");
+            // const $event = `user.${this.profile.id}`
+            console.log("${this.profile.id}", this.profile.id);
+            const $event = `user.${this.profile.id}`;
+            console.log("$event", $event);
+            console.log(window.Redis.private($event));
+            // window.Redis.channel($event)
+            window.Redis.private($event)
+                // .listen(".BusinessNotificationEvent", payload => {
+                .listen(".UserNotification", payload => {
+                    console.log("payload")
+                    console.log(payload)
+                    alert(payload.notification.notification_text)
+                        // this.newNotificationBusiness({ init: false, data: payload.data })
+                    this.newNotificationProfile({ init: false, data: payload.notification })
+                        // this.newNotificationNetwork({ init: false, data: payload.data })
+                })
+            console.log("end echo redis");
+        }
     },
 
     created() {

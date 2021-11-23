@@ -50,6 +50,7 @@ import networkProfileCommunitySidebar from "./networkProfileCommunitySidebar";
 import networkProfileFeedback from "./networkProfileFeedback";
 import networkProfileMedia from "./networkProfileMedia";
 import networkProfileMemberRequest from "./networkProfileMemberRequest";
+import networkNotification from "./networkNotification";
 import { social } from "./social";
 import productComments from "./productComments";
 import productDetails from "./productDetails";
@@ -59,67 +60,57 @@ import { notification } from "./notifications"
 Vue.use(Vuex);
 
 
+axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 // axios.defaults.baseURL = process.env.VUE_APP_API_URL_DEV;
 // axios.defaults.baseURL = process.env.VUE_APP_API_URL_EDS;
-
-axios.defaults.baseURL = process.env.VUE_APP_API_URL;
+Vue.use(Vuex);
 
 export default new Vuex.Store({
-        modules: {
-            auth,
-            networkDetails,
-            ProfileAndBusinessDetails,
-            businessOwner,
-            businessBlocking,
-            dashboard,
-            hotbusiness,
-            networkProfileMembers,
-            marketSearch,
-            networkSearch,
-            allSearch,
-            profile,
-            follower,
-            search,
-            UserProfileOwner,
-            userChat,
-            networkChat,
-            businessChat,
-            businessGeneral,
-            businessRole,
-            businessAccountType,
-            business,
-            networkProfileFeedback,
-            NetworkSettings,
-            businessSettingInfo,
-            checkout,
-            social,
-            businessFollowers,
-            networkProfileCommunitySidebar,
-            networkProfileCommunity,
-            networkProfileMedia,
-            networkProfileMemberRequest,
-            networkProfile,
-            <<
-            <<
-            << < HEAD
-            notification
+    modules: {
+        auth,
+        networkDetails,
+        dashboardcommunity,
+        ProfileAndBusinessDetails,
+        businessOwner,
+        businessBlocking,
+        dashboard,
+        hotbusiness,
+        networkProfileMembers,
+        marketSearch,
+        networkSearch,
+        allSearch,
+        profile,
+        follower,
+        search,
+        UserProfileOwner,
+        userChat,
+        businessChat,
+        businessGeneral,
+        businessRole,
+        businessAccountType,
+        business,
+        networkProfileFeedback,
+        NetworkSettings,
+        // profile,
+        // follower,
+        // search,
+        //keywordOperationOnNetwork,
 
-        }
+        // UserProfileOwner,
+        businessSettingInfo,
+        checkout,
+        social,
+        businessFollowers,
+        networkProfileCommunitySidebar,
+        networkProfileCommunity,
+        networkProfileMedia,
+        networkProfileMemberRequest,
+        networkProfile,
+        networkNotification,
 
-    }) ===
-    ===
-    =
-    productComments,
-    productDetails,
-    cart,
-    dashboardcommunity,
-    market,
-    keywordOperationOnNetwork,
 
-    orderBusiness,
+        orderBusiness,
 
-    notification
-}
-}); >>>
->>>
-> main
+        notification
+    }
+});

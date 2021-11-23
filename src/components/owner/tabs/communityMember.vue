@@ -77,12 +77,12 @@
 <script>
 import axios from 'axios';
 export default {
-  props: ["type","searchh"],   
+  props: ['type', 'searchh'],
   data() {
     return {
       page: 1,
-      users:[],
-       infiniteId: +new Date(),
+      users: [],
+      infiniteId: +new Date(),
       options: {
         rewind: true,
         autoplay: true,
@@ -101,16 +101,22 @@ export default {
     },
     users() {
       if (this.type == 'Follower') {
-    old_users() {
-      if (this.type == "Follower") {
-
         return this.$store.state.profile.UcommunityFollower.user_followers;
         // return this.$store.state.profile.UcommunityFollower.user_followers;
       } else {
         return this.$store.state.profile.UcommunityFollowing.user_following;
         // return this.$store.state.profile.UcommunityFollower.user_followers;
       }
-    }}
+    },
+    old_users() {
+      if (this.type == 'Follower') {
+        return this.$store.state.profile.UcommunityFollower.user_followers;
+        // return this.$store.state.profile.UcommunityFollower.user_followers;
+      } else {
+        return this.$store.state.profile.UcommunityFollowing.user_following;
+        // return this.$store.state.profile.UcommunityFollower.user_followers;
+      }
+    },
   },
 
   methods: {
@@ -128,11 +134,9 @@ export default {
       this.$router.push({ path: `/business_owner/${this.activeAccount.id}`, query: { tabId: 1, msgTabId: 0 } });
     },
 
-
- async handleFollow(user) {
-      
-      console.log("yoo ma gee");
-       document.getElementById("followbtn"+user.id).disabled = true;
+    async handleFollow(user) {
+      console.log('yoo ma gee');
+      document.getElementById('followbtn' + user.id).disabled = true;
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
@@ -145,34 +149,23 @@ export default {
         .then(({ data }) => {
           console.log(data);
           user.is_follow = nextFollowState;
-           document.getElementById("followbtn"+user.id).disabled = false;
+          document.getElementById('followbtn' + user.id).disabled = false;
         })
-         
-          .catch((err) =>{  
-          
-          console.log({err:err})  ;
-           document.getElementById("followbtn"+user.id).disabled =  false;
-          
+
+        .catch((err) => {
+          console.log({ err: err });
+          document.getElementById('followbtn' + user.id).disabled = false;
         });
     },
 
+    search() {
+      console.log('search started');
 
-
-
-
-    search(){
-     
-       console.log('search started');
-       
-         if(this.type=="Follower"){ 
-         
-        this.$store.commit("profile/setUcommunityFollower",{ "user_followers": [ ], "total_user_follower": 0 }); 
-
-       }else{
-       
-        
-        this.$store.commit("profile/setUcommunityFollowing",{ "user_following": [ ], "total_user_following": 0 }); 
-       }
+      if (this.type == 'Follower') {
+        this.$store.commit('profile/setUcommunityFollower', { user_followers: [], total_user_follower: 0 });
+      } else {
+        this.$store.commit('profile/setUcommunityFollowing', { user_following: [], total_user_following: 0 });
+      }
 
       this.page = 1;
       this.infiniteId += 1;
@@ -228,7 +221,7 @@ export default {
         .catch((err) => {
           console.log({ err: err });
         });
-    },}
+    },
   },
 };
 </script>

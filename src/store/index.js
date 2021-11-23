@@ -37,15 +37,14 @@ import networkProfileCommunitySidebar from "./networkProfileCommunitySidebar";
 import networkProfileFeedback from "./networkProfileFeedback";
 import networkProfileMedia from "./networkProfileMedia";
 import networkProfileMemberRequest from "./networkProfileMemberRequest";
+import networkNotification from "./networkNotification";
 import { social } from "./social";
 import { notification } from "./notifications";
 import cart from "./cart"
 
 Vue.use(Vuex);
-
  axios.defaults.baseURL = process.env.VUE_APP_API_URL;
  axios.defaults.baseURL = "https://test.maxinemoffett.com/api/v1/";
-
 
 export default new Vuex.Store({
   modules: {
@@ -73,8 +72,12 @@ export default new Vuex.Store({
     business,
     networkProfileFeedback,
     NetworkSettings,
-    keywordOperationOnNetwork,
-    orderBusiness,
+    // profile,
+    // follower,
+    // search,
+     //keywordOperationOnNetwork,
+
+    // UserProfileOwner,
     businessSettingInfo,
     checkout,
     social,
@@ -84,9 +87,7 @@ export default new Vuex.Store({
     networkProfileMedia,
     networkProfileMemberRequest,
     networkProfile,
-
     cart,
-
     notification
   }
 });

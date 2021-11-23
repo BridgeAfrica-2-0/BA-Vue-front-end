@@ -44,8 +44,9 @@
                   size="sm"
                   class="b-background shadow"
                   variant="primary"
+                  @click="$emit('handleFollow', member)"
                 >
-                  <i class="fas fa-user-plus fa-lg btn-icon"></i>
+                  <i :class="member.is_follow ? 'fas fa-user-minus fa-lg btn-icon':'fas fa-user-plus fa-lg btn-icon'"></i>
                   <span class="btn-com">{{ $t('network.Community') }}</span>
                 </b-button>
               </b-col>

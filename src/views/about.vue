@@ -478,10 +478,107 @@
         </div>
       </div>
     </div>
+
+    <!-- Subscribe -->
+
+    <section class="subscribe container">
+      <div class="row">
+        <div class="col-md-4 px-md-0 d-none d-md-block">
+          <img src="http://info.bridgeafrica.com/wp-content/uploads/2021/07/contact2.png" alt="Women" class="sub-img" />
+        </div>
+        <div class="col-md-4 px-md-0">
+          <div class="bg-black sub-div d-flex flex-column justify-content-center">
+            <h5 class="text-light font-arvo text-center">SUBSCRIBE FOR NEWSLETTER</h5>
+            <h2 class="text-light font-arvo text-center sub-heading">STAY IN TOUCH</h2>
+            <b-form-input
+              v-model="subEmail"
+              placeholder="Your Email Address"
+              class="sub-input d-block mx-auto my-3"
+            ></b-form-input>
+
+            <b-button pill variant="primary" class="font-arvo sub-btn d-block mx-auto py-md-2 mt-md-3"
+              >Subscribe To News</b-button
+            >
+          </div>
+        </div>
+        <div class="col-md-4 px-md-0 d-none d-md-block">
+          <img
+            src="http://info.bridgeafrica.com/wp-content/uploads/2021/07/Gem-Lane-contact.jpg"
+            alt="Calling Man"
+            class="sub-img"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Us Form -->
+    <section class="contact-us-form mt-3">
+      <div class="d-flex justify-content-center">
+        <img
+          src="http://info.bridgeafrica.com/wp-content/uploads/2021/07/BAV-horizontal-white-2048x733.png"
+          alt="Logo"
+          class="contact-img"
+        />
+      </div>
+      <h5 class="text-light font-arvo text-center mt-5 text-capitalize contact-heading">
+        digitalzins busingess and consumers in afica
+      </h5>
+      <h3 class="text-light text-center font-arvo text-uppercase contact-heading my-5">
+        Contact US
+      </h3>
+      <div class="row mx-md-4 mx-2">
+        <div class="col-md-4">
+          <b-form-input
+            v-model="contact.name"
+            placeholder="Name*"
+            class="sub-input d-block mx-auto my-3 contact-input name"
+          ></b-form-input>
+        </div>
+        <div class="col-md-4">
+          <b-form-input
+            v-model="contact.email"
+            placeholder="Email*"
+            class="sub-input d-block mx-auto my-3 contact-input email"
+          ></b-form-input>
+        </div>
+        <div class="col-md-4">
+          <b-form-input
+            v-model="contact.website"
+            placeholder="Website*"
+            class="sub-input d-block mx-auto my-3 contact-input website"
+          ></b-form-input>
+        </div>
+        <div class="col-md-12">
+          <b-form-textarea
+            id="textarea"
+            v-model="contact.msg"
+            placeholder="Enter something..."
+            rows="3"
+            min-rows="6"
+            class="sub-input my-3 contact-msg"
+          ></b-form-textarea>
+        </div>
+        <div class="col-md-3 my-5">
+          <b-button variant="primary" class="font-weight-bold font-arvo text-uppercase btn-block">Submit Message</b-button>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      subEmail: '',
+      contact: {
+        name: '',
+        email: '',
+        website: '',
+        msg: '',
+      },
+    };
+  },
+};
 </script>
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Arvo&display=swap');
@@ -705,7 +802,77 @@ export default {};
   height: 130px;
   width: 130px;
 }
-@media only screen and (max-width: 600px) {
+.sub-img {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+}
+.sub-div {
+  width: 100%;
+  min-height: 350px;
+}
+.sub-heading {
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  margin-top: 10px;
+}
+.sub-input {
+  background-color: #181828;
+  border: none;
+  color: #ffffff;
+  outline: none;
+  width: 84%;
+  padding: 14px;
+}
+.sub-input:focus {
+  background-color: #181828;
+  border: none;
+  color: #ffffff;
+  outline: none;
+  width: 84%;
+  box-shadow: none;
+}
+.sub-btn {
+  width: 84%;
+  font-size: 19px;
+  letter-spacing: 0.05em;
+  font-weight: bold;
+}
+.contact-us-form {
+  width: 100%;
+  min-height: 100vh;
+  background-image: url(http://info.bridgeafrica.com/wp-content/uploads/2021/07/blocks-image-05.jpg);
+}
+.contact-img {
+  margin-top: 5.5rem;
+  width: 35%;
+}
+.contact-heading {
+  letter-spacing: 0.05em;
+}
+.contact-input {
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-size: 16px 18px;
+  background-position: 98% 50%;
+  cursor: auto;
+  width: 100%;
+}
+.contact-input.name {
+  background-image: url('../assets/icons/user.png');
+}
+.contact-input.email {
+  background-image: url('../assets/icons/envelope.png');
+}
+.contact-input.website {
+  background-image: url('../assets/icons/world-wide-web.png');
+}
+.contact-msg {
+  width: 100%;
+}
+@media only screen and (max-width: 660px) {
   .header-img-text {
     font-size: 27px;
     padding: 60px 40px;
@@ -746,6 +913,9 @@ export default {};
   }
   .biz-konnect-video iframe {
     min-height: 40vh;
+  }
+  .contact-img {
+    width: 85%;
   }
 }
 </style>

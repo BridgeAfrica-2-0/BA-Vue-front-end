@@ -1,6 +1,7 @@
 <template>
   <div>
     <Navbar />
+
     <b-container>
       <div class="chat-box">
         <b-row>
@@ -147,11 +148,11 @@
                             <small class="text-center">
                               {{ getCreatedAt(chat.created_at) }}
                             </small>
-                            <p class="text-center">
+                            <!-- <p class="text-center">
                               <b-badge variant="info">
                                 {{ chat.receiver_id }}
                               </b-badge>
-                            </p>
+                            </p> -->
                           </b-col>
                         </b-row>
                       </div>
@@ -215,11 +216,11 @@
                             <small class="text-center">
                               {{ getCreatedAt(chat.created_at) }}
                             </small>
-                            <p class="text-center">
+                            <!-- <p class="text-center">
                               <b-badge variant="info">
                                 {{ chat.receiver_id }}
                               </b-badge>
-                            </p>
+                            </p> -->
                           </b-col>
                         </b-row>
                       </div>
@@ -282,11 +283,11 @@
                             <small class="text-center">
                               {{ getCreatedAt(chat.created_at) }}
                             </small>
-                            <p class="text-center">
+                            <!-- <p class="text-center">
                               <b-badge variant="info">
                                 {{ chat.receiver_id }}
                               </b-badge>
-                            </p>
+                            </p> -->
                           </b-col>
                         </b-row>
                       </div>
@@ -442,13 +443,13 @@
                             {{ chat.attachment.size }}
                           </b>
                           <small class="float-right mt-2 text-white pr-1 pt-1">
-                            {{ chat.created_at }}
+                            {{ getCreatedAt(chat.created_at) }}
                           </small>
                         </p>
                         <p v-if="chat.message" class="msg-text mt-0 text">
                           {{ chat.message }}
                           <small class="float-right mt-2 text-white pr-1 pt-1">
-                            {{ chat.created_at }}
+                            {{ getCreatedAt(chat.created_at) }}
                           </small>
                         </p>
                       </b-col>
@@ -463,7 +464,7 @@
                             {{ chat.attachment.size }}
                           </b>
                           <small class="float-right mt-2 text-white pr-1 pt-1">
-                            {{ chat.created_at }}
+                            {{ getCreatedAt(chat.created_at) }}
                           </small>
                         </p>
                         <p v-if="chat.message" id="sent" class="msg-text-sent text">
@@ -574,7 +575,7 @@
                             class="emoji-picker"
                             :style="{
                               top: display.y + 'px',
-                              left: display.x + 'px'
+                              left: display.x + 'px',
                             }"
                           >
                             <div class="emoji-picker__search">
@@ -723,7 +724,7 @@ export default {
   components: {
     Navbar,
     Footer,
-    EmojiPicker
+    EmojiPicker,
   },
   data() {
     return {
@@ -829,7 +830,7 @@ export default {
       text: '',
       selected: [],
       chats: [],
-      messages: []
+      messages: [],
     };
   },
 
@@ -837,8 +838,8 @@ export default {
     focus: {
       inserted(el) {
         el.focus();
-      }
-    }
+      },
+    },
   },
   computed: {
     chatList() {
@@ -882,39 +883,22 @@ export default {
     this.getUsers();
     this.getChatList({ type: 'user' });
   },
-  async created() {
-     this.$store.commit('businessChat/setCurrentBizId', this.$route.params.id);
-    await this.getBizs();
+  created() {
+    this.$store.commit('businessChat/setCurrentBizId', this.$route.params.id);
+
     this.tabIndex = this.$route.query.msgTabId;
     if (this.tabIndex) {
       this.selectedChat({ chat: this.ctaSelected, id: this.ctaSelected.id });
+      if (this.tabIndex == 1) {
+        this.getChatList({ type: 'business' });
+      } else if (this.tabIndex == 2) {
+        this.getChatList({ type: 'network' });
+      } else this.getChatList({ type: 'user' });
+    } else {
+      this.tabIndex = 0;
     }
 
-    if (this.tabIndex == 1) {
-      this.getChatList({ type: 'business' });
-    } else if (this.tabIndex == 2) {
-      this.getChatList({ type: 'network' });
-    } else this.getChatList({ type: 'user' });
-
-    this.socket.on('generalMessage', (data) => {
-      console.log('Received');
-      console.log(data);
-      this.messages.push(data);
-    });
-    this.socket.on('privateMessage', (data) => {
-      console.log('Received');
-      console.log(data);
-      this.userToUser.push(data);
-      console.log(this.userToUser);
-
-      let formData = new FormData();
-      formData.append('attachment', data.attachment);
-      formData.append('sender_id', data.sender_id);
-      formData.append('message', data.message);
-      formData.append('receiver_id', data.receiver_id);
-
-      // this.saveMessage(formData);
-    });
+    this.socketListenners();
   },
   methods: {
     convert(data) {
@@ -931,8 +915,36 @@ export default {
       console.log('ROOMS: ', this.room);
       this.socket.emit('create', this.room);
     },
+    socketListenners() {
+      this.socket.on('privateMessage', (data) => {
+        console.log('Received');
+        console.log(data);
+        this.userToUser.push(data);
+        console.log('message: ', this.userToUser);
+
+        let formData = new FormData();
+        formData.append('attachment', data.attachment);
+        formData.append('sender_id', data.sender_id);
+        formData.append('message', data.message);
+        formData.append('receiver_id', data.receiver_id);
+
+        // this.saveMessage(formData);
+        this.saveMessage(data);
+      });
+      this.socket.on('generalMessage', (data) => {
+        console.log('Received');
+        console.log(data);
+        this.messages.push(data);
+      });
+    },
     getCreatedAt(data) {
-      return moment(data).format('LT');
+
+      if (moment(data).isBefore(moment())) {
+        return moment(data).format('lll');
+      } else {
+       // return moment(data).format('LT');
+        return moment(data).fromNow();
+      }
     },
     getUsers() {
       this.$store
@@ -943,6 +955,8 @@ export default {
         .catch(() => console.log('error'));
     },
     getChatList(data) {
+      this.chatSelected.active = false;
+      this.newMsg = false;
       this.scrollToBottom();
       this.$store
         .dispatch('userChat/GET_USERS_CHAT_LIST', data)
@@ -1072,7 +1086,7 @@ export default {
         behavior: 'smooth',
       });
       // this.$refs.feed.scrollTop = this.$refs.feed.scrollHeight - this.$refs.feed.clientHeight;
-      console.log(this.$refs.feed.scrollTop);
+      // console.log(this.$refs.feed.scrollTop);
     },
     send() {
       let formData = new FormData();
@@ -1111,6 +1125,7 @@ export default {
       this.message.timeStamp = h + ':' + m;
       this.message.message = this.input;
       this.chats.push(this.message);
+
       this.input = '';
       this.dismissed();
     },

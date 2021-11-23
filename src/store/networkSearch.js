@@ -11,7 +11,8 @@ export default {
         neighbourhoods: [],
 
         prodLoader: false,
-        success: false
+        success: false,
+        token: "51|HZT2jfu5klFDkJhpvEI6dBhAQBDEdBQ2fABwhhaf"
     },
     getters: {
         getNetworks(state) {

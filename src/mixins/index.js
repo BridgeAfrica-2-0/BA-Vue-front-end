@@ -8,6 +8,8 @@ import NotFound from "@/components/NotFoundComponent"
 import NoMoreData from "@/components/businessOwner/PaginationMessage"
 import ClipLoader from 'vue-spinner/src/ClipLoader.vue'
 
+
+
 // import './pusher-notification';
 import { initRedis } from '@/redis-notification'
 
@@ -426,21 +428,21 @@ export const Redis = {
     },
 
     init: async function () {
-      // if (this.profile) {
-      //   initRedis(this.token)
-      //   await this.getAuth()
-      //   this.redis()
-      // }
+      if (this.profile) {
+        initRedis(this.token)
+        await this.getAuth()
+        this.redis()
+      }
     }
   },
 
   created() {
-    this.init()
-    this.$store.watch(
-      state => state.auth.user.accessToken,
-      () => initRedis(this.token),
-      { deep: true }
-    );
+    // this.init()
+    // this.$store.watch(
+    //   state => state.auth.user.accessToken,
+    //   () => initRedis(this.token),
+    //   { deep: true }
+    // );
   }
 }
 
@@ -475,4 +477,48 @@ export const FirebaseNotification = {
     console.log("call laravel firebase")
     this.notified()
   }
+}
+
+
+
+export const PostComponentMixin = {
+
+  data: () => ({
+
+  }),
+
+  methods: {
+    checkMediaType(media) {
+      return media.split('/')[0];
+    },
+    mapmediae(media) {
+      let mediaarr = [];
+
+      media.forEach((item) => {
+        let type = this.checkMediaType(item.media_type);
+        if (type != 'video') {
+          mediaarr.push(item.media_url);
+        }
+      });
+
+      return mediaarr;
+    },
+
+    mapvideo(media) {
+      let mediaarr = [];
+      media.forEach((item) => {
+        let type = this.checkMediaType(item.media_type);
+        if (type == 'video') {
+          mediaarr.push(item.media_url);
+        }
+      });
+
+      return mediaarr;
+    },
+  }
+}
+
+export const AllPostFeatureMixin = {
+  mixins:[PostComponentMixin],
+
 }

@@ -48,8 +48,6 @@ import card from "@/views/card";
 import myorders from "@/views/myOders"
 import notFound from "@/components/404"
 
-
-
 import welcome from "@/views/welcome";
 
 import ordersdetail from "@/views/odersDetail";
@@ -178,14 +176,6 @@ const routes = [
     path: "/business_owner/create_website_confirm_payment",
     name: "confirmPayment",
     component: confirmPayment,
-  },
-  {
-    path: "/network/:id?",
-    name: "networks",
-    component: networks,
-    meta: {
-      auth: true,
-    },
   },
   {
     path: "/networks/:id?",

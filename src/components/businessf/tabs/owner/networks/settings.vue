@@ -1,20 +1,15 @@
 <template>
-  <b-container style="text-align:left">
+  <b-container style="text-align: left">
     <div class="b-bottom">
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          :label=  "$t('network.Network_Name')"
+          :label="$t('network.Network_Name')"
           label-size=" md"
           label-class="font-weight-bold pt-0"
           class="mb-0"
         >
-          <b-form-input
-            id="bname"
-            placeholder=""
-            v-model="item.networkName"
-            required
-          ></b-form-input>
+          <b-form-input id="bname" placeholder="" v-model="item.networkName" required></b-form-input>
         </b-form-group>
       </b-container>
     </div>
@@ -23,18 +18,13 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          :label=" $t('network.Category')"
+          :label="$t('network.Category')"
           label-size="md"
           label-class=" font-weight-bold pt-0"
           class="mb-0"
           v-model="item.category"
         >
-          <b-form-input
-            id="bname"
-            placeholder=""
-            v-model="item.category"
-            required
-          ></b-form-input>
+          <b-form-input id="bname" placeholder="" v-model="item.category" required></b-form-input>
         </b-form-group>
       </b-container>
     </div>
@@ -43,17 +33,12 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          :label=" $t('network.Phone_1')"
+          :label="$t('network.Phone_1')"
           label-size="md"
           label-class="font-weight-bold pt-0"
           class="mb-0"
         >
-          <b-form-input
-            id="bname"
-            placeholder=""
-            v-model="item.phoneOne"
-            required
-          ></b-form-input>
+          <b-form-input id="bname" placeholder="" v-model="item.phoneOne" required></b-form-input>
         </b-form-group>
       </b-container>
     </div>
@@ -62,17 +47,12 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          :label=" $t('network.Phone_2')"
+          :label="$t('network.Phone_2')"
           label-size="md"
           label-class="font-weight-bold pt-0"
           class="mb-0"
         >
-          <b-form-input
-            id="bname"
-            placeholder=""
-            v-model="item.phoneTwo"
-            required
-          ></b-form-input>
+          <b-form-input id="bname" placeholder="" v-model="item.phoneTwo" required></b-form-input>
         </b-form-group>
       </b-container>
     </div>
@@ -81,17 +61,12 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          :label=" $t('network.Email')"
+          :label="$t('network.Email')"
           label-size="md"
           label-class="font-weight-bold pt-0"
           class="mb-0"
         >
-          <b-form-input
-            id="bname"
-            placeholder=""
-            v-model="item.email"
-            required
-          ></b-form-input>
+          <b-form-input id="bname" placeholder="" v-model="item.email" required></b-form-input>
         </b-form-group>
       </b-container>
     </div>
@@ -100,17 +75,12 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          :label=" $t('network.Country')"
+          :label="$t('network.Country')"
           label-size="md"
           label-class="font-weight-bold pt-0"
           class="mb-0"
         >
-          <country-select
-            v-model="item.country"
-            :country="country"
-            topCountry="US"
-            class="form-control"
-          />
+          <country-select v-model="item.country" :country="country" topCountry="US" class="form-control" />
         </b-form-group>
       </b-container>
     </div>
@@ -119,17 +89,12 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          :label=" $t('network.City')"
+          :label="$t('network.City')"
           label-size="md"
           label-class="font-weight-bold pt-0"
           class="mb-0"
         >
-          <b-form-input
-            id="bname"
-            placeholder=""
-            v-model="item.city"
-            required
-          ></b-form-input>
+          <b-form-input id="bname" placeholder="" v-model="item.city" required></b-form-input>
         </b-form-group>
       </b-container>
     </div>
@@ -138,17 +103,12 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          :label=" $t('network.Neighborhood')"
+          :label="$t('network.Neighborhood')"
           label-size="md"
           label-class="font-weight-bold pt-0"
           class="mb-0"
         >
-          <b-form-input
-            id="bname"
-            placeholder=""
-            v-model="item.neighborhood"
-            required
-          ></b-form-input>
+          <b-form-input id="bname" placeholder="" v-model="item.neighborhood" required></b-form-input>
         </b-form-group>
       </b-container>
     </div>
@@ -157,17 +117,12 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          :label=" $t('network.Website')"
+          :label="$t('network.Website')"
           label-size="md"
           label-class="font-weight-bold pt-0"
           class="mb-0"
         >
-          <b-form-input
-            id="bname"
-            placeholder=""
-            v-model="item.website"
-            required
-          ></b-form-input>
+          <b-form-input id="bname" placeholder="" v-model="item.website" required></b-form-input>
         </b-form-group>
       </b-container>
     </div>
@@ -176,14 +131,14 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          :label="  $t('network.Description') "
+          :label="$t('network.Description')"
           label-size="md"
           label-class="font-weight-bold pt-0"
           class="mb-0"
         >
           <b-form-textarea
             id="textarea"
-            :placeholder=" $t('network.Enter_something')"
+            :placeholder="$t('network.Enter_something')"
             rows="3"
             max-rows="6"
             v-model="item.description"
@@ -196,12 +151,7 @@
       <b-row>
         <b-col>
           <div class="b-bottomn f-right">
-            <b-button
-              @click="saveChanges"
-              variant="primary"
-              class="a-button-l b-font"
-              :loading="loader"
-            >
+            <b-button @click="saveChanges" variant="primary" class="a-button-l b-font" :loading="loader">
               {{ $t('network.Save_Changes') }}
             </b-button>
           </div>
@@ -214,33 +164,33 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapGetters } from 'vuex';
 export default {
-  name: "general",
+  name: 'general',
   data: () => ({
     item: {
-      networkName: "",
-      category: "",
-      phoneOne: "",
-      phoneTwo: "",
-      email: "",
-      country: "",
-      city: "",
-      neighborhood: "",
-      website: "",
-      description: "",
+      networkName: '',
+      category: '',
+      phoneOne: '',
+      phoneTwo: '',
+      email: '',
+      country: '',
+      city: '',
+      neighborhood: '',
+      website: '',
+      description: '',
     },
     loader: null,
   }),
   computed: {
     ...mapGetters({
-      getNetworks: "networkSetting/getNetworks",
+      getNetworks: 'networkSetting/getNetworks',
     }),
   },
   methods: {
     ...mapActions({
-      saveChange: "networkSetting/saveChange",
-      getNetworks: "networkSetting/getNetworks",
+      saveChange: 'networkSetting/saveChange',
+      getNetworks: 'networkSetting/getNetworks',
     }),
     saveChanges() {
       this.loader = true;

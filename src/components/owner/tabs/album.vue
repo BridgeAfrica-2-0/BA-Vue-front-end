@@ -47,7 +47,7 @@
                 class="mt-2"
                 variant="primary"
                 @click="update"
-                :disabled="loading || editName.trim().length ? false : true"
+                :disabled="loading ? true : editName.trim().length ? false : true"
               >
                 {{ $t('profileowner.Update') }}</b-button
               >
@@ -126,11 +126,7 @@
         @reste="hidealbum"
       />
 
-      <div class="container-fluid" v-if="!strategy[type]().showAlbumImages.length">
-        <p style="font-size: 3rem">
-          {{ $t('profileowner.No_items_found') }}
-        </p>
-      </div>
+ 
     </div>
   </div>
 </template>
@@ -154,7 +150,7 @@ export default {
   props: {
     isEditor: {
       type: Boolean,
-      required:true
+      required: true,
     },
     type: {
       type: String,
@@ -212,6 +208,18 @@ export default {
         remove: this.remove,
         mapUpdate: this.mapUpdate,
       }),
+
+      network: () => ({
+        albums: this.getAlbumsNetwork,
+        showalbum: this.getAlbumNetworkImages,
+        showAlbumImages: this.albumImagesNetwork,
+        createAlbum: this.createAlbumNetwork,
+        fetchAlbums: this.fetchAlbumsNetwork,
+        deleteAlbum: this.deleteAlbumNetwork,
+        updateAlbum: this.updateAlbumNetwork,
+        remove: this.removeNetwork,
+        mapUpdate: this.mapUpdateNetwork,
+      }),
     };
   },
 
@@ -231,6 +239,10 @@ export default {
       getAlbumsBusiness: 'businessOwner/getAlbums',
       getAlbumImageBusiness: 'businessOwner/getAlbumImage',
       albumImagesBusiness: 'businessOwner/getalbumImages',
+
+      getAlbumsNetwork: 'networkProfileMedia/getAlbums',
+      getAlbumImageNetwork: 'networkProfileMedia/getAlbumImage',
+      albumImagesNetwork: 'networkProfileMedia/getAlbumImages',
     }),
 
     canCreateAlbum() {
@@ -251,6 +263,12 @@ export default {
       fetchAlbumsBusiness: 'businessOwner/getAlbums',
       deleteAlbumBusiness: 'businessOwner/deletedAlbum',
       updateAlbumBusiness: 'businessOwner/updatedAlbum',
+
+      createAlbumNetwork: 'networkProfileMedia/createAlbum',
+      getAlbumNetworkImages: 'networkProfileMedia/getAlbumImages',
+      fetchAlbumsNetwork: 'networkProfileMedia/getAlbums',
+      deleteAlbumNetwork: 'networkProfileMedia/deletedAlbum',
+      updateAlbumNetwork: 'networkProfileMedia/updatedAlbum',
     }),
 
     getFullMediaLink: fullMediaLink,
@@ -265,6 +283,9 @@ export default {
 
       mapUpdateBusiness: 'businessOwner/updateAlbum',
       removeBusiness: 'businessOwner/removeAlbum',
+
+      mapUpdateNetwork: 'networkProfileMedia/updateAlbum',
+      removeNetwork: 'networkProfileMedia/removeAlbum',
     }),
 
     hidealbum() {
@@ -273,7 +294,7 @@ export default {
 
     showAlbumPictures(album) {
       const credentials =
-        'business' == this.type
+        'business' == this.type || 'network' == this.type
           ? {
               data: { businessId: this.$route.params.id, albumId: album.id },
             }
@@ -305,7 +326,10 @@ export default {
     createAlbums() {
       this.loading = true;
 
-      const data = 'business' == this.type ? { id: this.$route.params.id, data: this.albumInfo } : this.albumInfo;
+      const data =
+        'business' == this.type || 'network' == this.type
+          ? { id: this.$route.params.id, data: this.albumInfo }
+          : this.albumInfo;
 
       this.strategy[this.type]()
         .createAlbum(data)
@@ -369,6 +393,7 @@ export default {
         })
         .catch((error) => {
           this.sending = false;
+          this.loading = false;
           this.flashMessage.show({
             status: 'error',
             message: error.response.data.message,
@@ -377,7 +402,8 @@ export default {
     },
 
     deleteAlbums(id) {
-      const data = 'business' == this.type ? { businessID: this.$route.params.id, albumID: id } : id;
+      const data =
+        'business' == this.type || 'network' == this.type ? { businessID: this.$route.params.id, albumID: id } : id;
 
       this.strategy[this.type]()
         .deleteAlbum(data)

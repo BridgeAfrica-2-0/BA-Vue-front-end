@@ -5,26 +5,16 @@
     <b-card class="px-md-3 mb-3 mt-2">
       <b-row class="mt-2">
         <b-col cols="3" md="1" class="m-md-0 p-md-0">
-          <b-avatar
-            variant="primary"
-            class="img-fluid avat-comment"
-            :src="business_logo"
-          ></b-avatar>
+          <b-avatar variant="primary" class="img-fluid avat-comment" :src="business_logo"></b-avatar>
         </b-col>
         <b-col cols="9" md="11" class="p-0 m-0 pr-3">
-          <input
-            placeholder="Post a business update"
-            v-b-modal.modal-xl
-            class="comment"
-            type="text"
-          />
+          <input placeholder="Post a business update" v-b-modal.modal-xl class="comment" type="text" />
           <fas-icon class="primary send-cmt" :icon="['fas', 'paper-plane']" />
         </b-col>
       </b-row>
       <hr width="100%" class="m-up" />
       <b-row>
         <b-col cols="12" md="12" class="m-0 p-0">
-
           <input
             type="file"
             id="chosefile"
@@ -44,11 +34,7 @@
                 @click="$refs.movie.click()"
                 class="post-btn"
               >
-                <fas-icon
-                  class="icons"
-                  :icon="['fas', 'photo-video']"
-                  size="lg"
-                />
+                <fas-icon class="icons" :icon="['fas', 'photo-video']" size="lg" />
                 <span class="username"> Photo/ Video </span>
               </b-button>
             </b-col>
@@ -75,18 +61,8 @@
             </b-col>
             <!-- Post-->
             <b-col cols="3" class="text-right p-0 m-0">
-              <b-button
-                title="Add Hyperlink"
-                size="sm"
-                variant="outline-primary"
-                @click="createPost_"
-                class="post-btn"
-              >
-                <fas-icon
-                  class="icons"
-                  :icon="['fas', 'paper-plane']"
-                  size="lg"
-                />
+              <b-button title="Add Hyperlink" size="sm" variant="outline-primary" @click="createPost_" class="post-btn">
+                <fas-icon class="icons" :icon="['fas', 'paper-plane']" size="lg" />
                 <span class="username"> Post </span>
               </b-button>
             </b-col>
@@ -96,8 +72,8 @@
       <div class="pending-post-view pt-2 mt-3">
         <p>
           Your 3 Post(s) are pending for approval.&nbsp;&nbsp;&nbsp;&nbsp;<a
-            @click="this.$router.push({ name: '/pendingPost'})"
-            style="color: #e75c18; text-decoration:underline;"
+            @click="this.$router.push({ name: '/pendingPost' })"
+            style="color: #e75c18; text-decoration: underline"
             >View All</a
           >
         </p>
@@ -105,530 +81,320 @@
     </b-card>
 
     <!-- User Posts Listing Section-->
-    <b-card class="px-md-3">
-      <div class="">
-        <div
-          class="col-md-12 col-lg-12 d-flex align-items-stretch mb-lg-0"
-          style="padding-left: 0; padding-top: 3px;"
-        >
-          <!-- <b-button v-b-modal.modal-xl variant="primary">xl modal</b-button> -->
-          <!-- Modal For Create Post User-->
-           <!--   edit array   -->
-          <b-modal
-            id="modal-edit"
-            ref="modal-edit"
-            centered
-            hide-footer
-            title="Update Post"
-            @hidden="resetPostData"
-          >
-            <b-row ref="loader">
-              <b-col cols="1" class="m-0 p-0"></b-col>
-              <b-col cols="2" class="m-0 p-0">
-                <b-avatar
-                  class="d-inline-block avat"
-                  variant="primary"
-                  :src="imageProfile"
-                ></b-avatar>
-              </b-col>
-              <b-col cols="9" class="pt-2" style="margin-left:-5px">
-                <h5 class="m-0 font-weight-bolder">{{ profileNamePost }} </h5>
-              </b-col>
-            </b-row>
-            <b-row>
-              <b-col cols="1" md="1" cl ass="m-0 p-0"></b-col>
-              <b-col cols="10" md="10" class="m-0 p-0">
-                <br />
-                <div class="cursor">
-                  <b-form-textarea
-                    id="textarea-small"
-                    class="mb-2 border-none"
-                    placeholder="Post a network update"
-                    v-model="edit_description"
-                    :class="{
-                      'is-valid': createPost.postNetworkUpdate !== '',
-                      'is-invalid': createPost.postNetworkUpdate === ''
-                    }"
-                  ></b-form-textarea>
 
-                  <i></i>
-                </div>
-                <div class="bordder">
-                  <span class="float-left"> Add to Your Post </span>
-                  <span class="float-right">
-                    <b-button-group size="sm" class="">
-                      <input id="video" type="file" hidden />
-                      <input
-                        id="image"
-                        type="file"
-                        hidden
-                        @change="selectMovies"
-                        accept="video/mpeg,video/mp4,image/*"
-                        ref="movies"
-                      />
-                      <input
-                        id="document"
-                        type="file"
-                        @change="selectDocument"
-                        hidden
-                        accept="application/pdf"
-                        ref="document"
-                      />
-
-                      <b-button
-                        title="Add Movie"
-                        size="sm"
-                        variant="outline-primary"
-                        @click="$refs.movies.click()"
-                      >
-                        <fas-icon
-                          class="icons"
-                          :icon="['fas', 'photo-video']"
-                          size="lg"
-                        />
-                      </b-button>
-                      <b-button
-                        title="Add Hyperlink"
-                        size="sm"
-                        variant="outline-primary"
-                        @click="$refs.document.click()"
-                      >
-                        <fas-icon
-                          class="icons"
-                          :icon="['fas', 'file']"
-                          size="lg"
-                        />
-                      </b-button>
-                    </b-button-group>
-                  </span>
-                </div>
-                <br />
-                <div
-                  v-for="hyperlink in createPost.hyperlinks"
-                  :key="hyperlink.fileName"
-                  class="bordder"
-                >  
-                  <span class="float-left"> {{ hyperlink.fileName }}  </span>
-                  <span
-                    class="float-right"
-                    @click="deleteItem(hyperlink.fileName)"
-                  >delete
-                  </span>
-                </div>
-                <div
-                  v-for="(movie, index) in edit_image"
-                  :key="movie.id"
-                  class=""
-                >  
-                  <div id="preview">
-                    <span class="upload-cancel" @click="deleteImage(index,movie )">
-                     <b-icon icon="x-circle" class="oorange">  </b-icon>
-                    </span>
-                    <img :src="movie.media_url" />
-                  </div>
-                </div>
-                <br />
-                <div
-                  v-for="movie in createPost.movies"
-                  :key="movie.fileName"
-                  class=""
-                >  
-                  <div id="preview">
-                     <span class="upload-cancel" @click="deleteItem(movie.fileName)">
-                     <b-icon icon="x-circle" class="oorange">  </b-icon>
-                  </span>
-                      <img :src="movie.link" />
-                    </div>
-                </div>
-                <br />
-
-                <span>
-                  <b-button @click="updatePost" variant="primary" block
-                    ><b-icon icon="cursor-fill" variant="primary"></b-icon>
-                    Publish</b-button
-                  >
-                </span>
-              </b-col>
-              <b-col cols="1" md="1" class="m-0 p-0"></b-col>
-            </b-row>
-          </b-modal>
-
-          <b-modal
-            id="modal-xl"
-            ref="modal-xl"
-            centered
-            hide-footer
-            title="Create Post"
-            @hidden="resetPostData"
-          >
-            <b-row ref="loader">
-              <b-col cols="1" class="m-0 p-0"></b-col>
-              <b-col cols="2" class="m-0 p-0">
-                <b-avatar
-                  class="d-inline-block avat"
-                  variant="primary"
-                  :src="imageProfile"
-                ></b-avatar>
-              </b-col>
-              <b-col cols="9" class="pt-2" style="margin-left:-5px">
-                <h5 class="m-0 font-weight-bolder">{{ profileNamePost }} profileNamePost</h5>
-              </b-col>
-            </b-row>
-            <b-row>
-              <b-col cols="1" md="1" cl ass="m-0 p-0"></b-col>
-              <b-col cols="10" md="10" class="m-0 p-0">
-                <br />
-                <div class="cursor">
-                  <b-form-textarea
-                    id="textarea-small"
-                    class="mb-2 border-none"
-                    placeholder="Post a business update"
-                    v-model="createPost.postNetworkUpdate"
-                    :class="{
-                      'is-valid': createPost.postNetworkUpdate !== '',
-                      'is-invalid': createPost.postNetworkUpdate === ''
-                    }"
-                  ></b-form-textarea>
-
-                  <i></i>
-                </div>
-                <div class="bordder">
-                  <span class="float-left"> Add to Your Post </span>
-                  <span class="float-right">
-                    <b-button-group size="sm" class="">
-                      <input id="video" type="file" hidden />
-                      <input
-                        id="image"
-                        type="file"
-                        hidden
-                        @change="selectMovies"
-                        accept="video/mpeg,video/mp4,image/*"
-                        ref="movies"
-                      />
-                      <input
-                        id="document"
-                        type="file"
-                        @change="selectDocument"
-                        hidden
-                        accept="application/pdf"
-                        ref="document"
-                      />
-
-                      <b-button
-                        title="Add Movie"
-                        size="sm"
-                        variant="outline-primary"
-                        @click="$refs.movies.click()"
-                      >
-                        <fas-icon
-                          class="icons"
-                          :icon="['fas', 'photo-video']"
-                          size="lg"
-                        />
-                      </b-button>
-                      <b-button
-                        title="Add Hyperlink"
-                        size="sm"
-                        variant="outline-primary"
-                        @click="$refs.document.click()"
-                      >
-                        <fas-icon
-                          class="icons"
-                          :icon="['fas', 'file']"
-                          size="lg"
-                        />
-                      </b-button>
-                    </b-button-group>
-                  </span>
-                </div>
-                <br />
-                <div
-                  v-for="hyperlink in createPost.hyperlinks"
-                  :key="hyperlink.fileName"
-                  class="bordder"
-                >  
-                  <span class="float-left"> {{ hyperlink.fileName }}  </span>
-                  <span
-                    class="float-right"
-                    @click="deleteItem(hyperlink.fileName)"
-                  >
-                    delete
-                  </span>
-                </div>
-
-                <div
-                  v-for="movie in createPost.movies"
-                  :key="movie.fileName"
-                  class=""
-                >  
-                  <div id="preview">
-                     <span class="upload-cancel" @click="deleteItem(movie.fileName)">
-                     <b-icon icon="x-circle" class="oorange">  </b-icon>
-                  </span>
-
-                      <img :src="movie.link" />
-                    </div>
-                </div>
-                <br />
-                <span>
-                  <b-button @click="submitPost" variant="primary" block
-                    ><b-icon icon="cursor-fill" variant="primary"></b-icon>
-                    Publish</b-button
-                  >
-                </span>
-              </b-col>
-              <b-col cols="1" md="1" class="m-0 p-0"></b-col>
-            </b-row>
-          </b-modal>
-        </div>
-      </div>
-
-         <!--<b-row
-        class="mt-4"
-        v-for="item in $store.getters.getPostLists"
-        :key="item.post_id"
-      >-->
-      
-       <b-row class="mt-4"   v-for="item in owner_post"  :key="item.post_id" > 
-     
-
-      <!--  :src="$store.getters.getProfilePicture"-->
-        <b-col cols="12" class="mt-4">
-          <b-row>
-            <b-col cols="2" md="1" class="m-0 p-0">
-             
-              <b-avatar
-                class="d-inline-block avat"
-                variant="primary"
-               :src="item.logo_path"
-              ></b-avatar>
+    <div class="">
+      <div class="col-md-12 col-lg-12 d-flex align-items-stretch mb-lg-0" style="padding-left: 0; padding-top: 3px">
+        <!-- <b-button v-b-modal.modal-xl variant="primary">xl modal</b-button> -->
+        <!-- Modal For Create Post User-->
+        <!--   edit array   -->
+        <b-modal id="modal-edit" ref="modal-edit" centered hide-footer title="Update Post" @hidden="resetPostData">
+          <b-row ref="loader">
+            <b-col cols="1" class="m-0 p-0"></b-col>
+            <b-col cols="2" class="m-0 p-0">
+              <b-avatar class="d-inline-block avat" variant="primary" :src="imageProfile"></b-avatar>
             </b-col>
-            <b-col cols="10" md="11" class="pt-2">
-              <h5 class="m-0 font-weight-bolder">
-                {{item.bussines_name}}   
-                <span class="float-right">
-                  <b-dropdown variant="outline-primary" size="sm" no-caret>
-                    <template #button-content>
-                      <b-icon icon="three-dots" aria-hidden="true"></b-icon>
-                    </template>
-
-                    <!--
-                            <b-dropdown-item-button>
-                              <b-icon icon="lock-fill" aria-hidden="true"></b-icon>
-                              Locked <span class="sr-only">(Click to unlock)</span>
-                            </b-dropdown-item-button>
-                            <b-dropdown-divider></b-dropdown-divider>
-                            -->
-
-                    <b-dropdown-item-button variant="info"    @click="editPost(item)" >
-                      <b-icon icon="pencil" aria-hidden="true" ></b-icon>
-                      Edit
-                    </b-dropdown-item-button>
-
-                    <b-dropdown-item-button variant="danger"   @click="deletePost(item)" >
-                      <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
-                      Delete
-                    </b-dropdown-item-button>
-                  </b-dropdown>
-                </span>
-              </h5>
-              <p class="duration">  {{  moment(item.created_at).fromNow() }} </p>   
+            <b-col cols="9" class="pt-2" style="margin-left: -5px">
+              <h5 class="m-0 font-weight-bolder">{{ profileNamePost }}</h5>
             </b-col>
           </b-row>
           <b-row>
-            <b-col cols="12" class="mt-2">
-              <p class="post-text">
+            <b-col cols="1" md="1" cl ass="m-0 p-0"></b-col>
+            <b-col cols="10" md="10" class="m-0 p-0">
+              <br />
+              <div class="cursor">
+                <b-form-textarea
+                  id="textarea-small"
+                  class="mb-2 border-none"
+                  placeholder="Post a network update"
+                  v-model="edit_description"
+                  :class="{
+                    'is-valid': createPost.postNetworkUpdate !== '',
+                    'is-invalid': createPost.postNetworkUpdate === '',
+                  }"
+                ></b-form-textarea>
 
-                <!--     :text="item.content.details"   -->
-                <read-more
-                  more-str="read more"
-                  :text="item.content"
-                  link="#"
-                  less-str="read less"
-                  :max-chars="200"
-                ></read-more>
-              </p>
-            </b-col>
-          </b-row>
-          <b-row>
-            <b-col v-if="item.media.length > 0" cols="12" class="mt-2">
-              <div  class=""> 
-                 <lightbox :cells="item.media.length" :items="item.media.map(function(a) {return a.media_url})"></lightbox> 
+                <i></i>
               </div>
-            </b-col>
-            <!--   v-if="item.content.movies.length <= 0"  -->
-            <b-col
-              cols="12"
-              class="mt-2"
-            >
-            <!--  :src="$store.getters.getProfilePicture"  -->
-            </b-col>
-            <b-col class="mt-1">
-              <span class="mr-3"
-                ><b-icon
-                  icon="suit-heart"
-                  variant="primary"
-                  aria-hidden="true"
-                ></b-icon>
-                {{  nFormatter(item.likes_count)  }}   </span
-              >
-              <span
-                ><b-icon
-                  icon="chat-fill"
-                  variant="primary"
-                  aria-hidden="true"
-                ></b-icon>
-                {{  nFormatter(item.comment_count)  }}    </span
-              >
+              <div class="bordder">
+                <span class="float-left"> Add to Your Post </span>
+                <span class="float-right">
+                  <b-button-group size="sm" class="">
+                    <input id="video" type="file" hidden />
+                    <input
+                      id="image"
+                      type="file"
+                      hidden
+                      @change="selectMovies"
+                      accept="video/mpeg,video/mp4,image/*"
+                      ref="movies"
+                    />
+                    <input
+                      id="document"
+                      type="file"
+                      @change="selectDocument"
+                      hidden
+                      accept="application/pdf"
+                      ref="document"
+                    />
+
+                    <b-button title="Add Movie" size="sm" variant="outline-primary" @click="$refs.movies.click()">
+                      <fas-icon class="icons" :icon="['fas', 'photo-video']" size="lg" />
+                    </b-button>
+                    <b-button title="Add Hyperlink" size="sm" variant="outline-primary" @click="$refs.document.click()">
+                      <fas-icon class="icons" :icon="['fas', 'file']" size="lg" />
+                    </b-button>
+                  </b-button-group>
+                </span>
+              </div>
+              <br />
+              <div v-for="hyperlink in createPost.hyperlinks" :key="hyperlink.fileName" class="bordder">
+                <span class="float-left"> {{ hyperlink.fileName }} </span>
+                <span class="float-right" @click="deleteItem(hyperlink.fileName)">delete </span>
+              </div>
+              <div v-for="(movie, index) in edit_image" :key="movie.id" class="">
+                <div id="preview">
+                  <span class="upload-cancel" @click="deleteImage(index, movie)">
+                    <b-icon icon="x-circle" class="oorange"> </b-icon>
+                  </span>
+                  <img :src="movie.media_url" />
+                </div>
+              </div>
+              <br />
+              <div v-for="movie in createPost.movies" :key="movie.fileName" class="">
+                <div id="preview">
+                  <span class="upload-cancel" @click="deleteItem(movie.fileName)">
+                    <b-icon icon="x-circle" class="oorange"> </b-icon>
+                  </span>
+                  <img :src="movie.link" />
+                </div>
+              </div>
+              <br />
+
               <span>
-                <fas-icon class="primary ml-3" :icon="['fas', 'share']" />
+                <b-button @click="updatePost" variant="primary" block
+                  ><b-icon icon="cursor-fill" variant="primary"></b-icon> Publish</b-button
+                >
               </span>
             </b-col>
+            <b-col cols="1" md="1" class="m-0 p-0"></b-col>
           </b-row>
-<!--  :src="$store.getters.getProfilePicture"  -->
-          <b-row class="mt-2">
-            <b-col cols="3" md="1" class="m-md-0 p-md-0">
-              <b-avatar
-                variant="primary"
-                class="img-fluid avat-comment"
-              ></b-avatar>
+        </b-modal>
+
+        <b-modal id="modal-xl" ref="modal-xl" centered hide-footer title="Create Post" @hidden="resetPostData">
+          <b-row ref="loader">
+            <b-col cols="1" class="m-0 p-0"></b-col>
+            <b-col cols="2" class="m-0 p-0">
+              <b-avatar class="d-inline-block avat" variant="primary" :src="imageProfile"></b-avatar>
             </b-col>
-            <b-col cols="9" md="11" class="p-0 m-0 pr-3">
-              <input placeholder="Post a Comment" class="comment" type="text" />
-              <fas-icon
-                class="primary send-cmt"
-                :icon="['fas', 'paper-plane']"
-              />
+            <b-col cols="9" class="pt-2" style="margin-left: -5px">
+              <h5 class="m-0 font-weight-bolder">{{ profileNamePost }} profileNamePost</h5>
             </b-col>
           </b-row>
-        </b-col>
-        
-        <Comment
-          v-for="comment in item.comments"
-          :key="comment.id"
-          :comment="comment"
-        />  
-      
-      </b-row>
-      <infinite-loading @infinite="infiniteHandler"></infinite-loading>
-    </b-card>
+          <b-row>
+            <b-col cols="1" md="1" cl ass="m-0 p-0"></b-col>
+            <b-col cols="10" md="10" class="m-0 p-0">
+              <br />
+              <div class="cursor">
+                <b-form-textarea
+                  id="textarea-small"
+                  class="mb-2 border-none"
+                  placeholder="Post a business update"
+                  v-model="createPost.postNetworkUpdate"
+                  :class="{
+                    'is-valid': createPost.postNetworkUpdate !== '',
+                    'is-invalid': createPost.postNetworkUpdate === '',
+                  }"
+                ></b-form-textarea>
+
+                <i></i>
+              </div>
+              <div class="bordder">
+                <span class="float-left"> Add to Your Post </span>
+                <span class="float-right">
+                  <b-button-group size="sm" class="">
+                    <input id="video" type="file" hidden />
+                    <input
+                      id="image"
+                      type="file"
+                      hidden
+                      @change="selectMovies"
+                      accept="video/mpeg,video/mp4,image/*"
+                      ref="movies"
+                    />
+                    <input
+                      id="document"
+                      type="file"
+                      @change="selectDocument"
+                      hidden
+                      accept="application/pdf"
+                      ref="document"
+                    />
+
+                    <b-button title="Add Movie" size="sm" variant="outline-primary" @click="$refs.movies.click()">
+                      <fas-icon class="icons" :icon="['fas', 'photo-video']" size="lg" />
+                    </b-button>
+                    <b-button title="Add Hyperlink" size="sm" variant="outline-primary" @click="$refs.document.click()">
+                      <fas-icon class="icons" :icon="['fas', 'file']" size="lg" />
+                    </b-button>
+                  </b-button-group>
+                </span>
+              </div>
+              <br />
+              <div v-for="hyperlink in createPost.hyperlinks" :key="hyperlink.fileName" class="bordder">
+                <span class="float-left"> {{ hyperlink.fileName }} </span>
+                <span class="float-right" @click="deleteItem(hyperlink.fileName)"> delete </span>
+              </div>
+
+              <div v-for="movie in createPost.movies" :key="movie.fileName" class="">
+                <div id="preview">
+                  <span class="upload-cancel" @click="deleteItem(movie.fileName)">
+                    <b-icon icon="x-circle" class="oorange"> </b-icon>
+                  </span>
+
+                  <img :src="movie.link" />
+                </div>
+              </div>
+              <br />
+              <span>
+                <b-button @click="submitPost" variant="primary" block
+                  ><b-icon icon="cursor-fill" variant="primary"></b-icon> Publish</b-button
+                >
+              </span>
+            </b-col>
+            <b-col cols="1" md="1" class="m-0 p-0"></b-col>
+          </b-row>
+        </b-modal>
+      </div>
+    </div>
+    <Post
+      v-for="(item, index) in owner_post"
+      :key="index"
+      :post="item"
+      :mapvideo="() => mapvideo(item.media)"
+      :mapmediae="() => mapmediae(item.media)"
+      :businessLogo="item.profile_picture"
+      :editPost="() => editPost(item)"
+      :deletePost="() => deletePost(item)"
+      :canBeDelete="false"
+    />
+
+    <infinite-loading @infinite="infiniteHandler"></infinite-loading>
   </div>
 </template>
 
 <script>
-import Comment from "./comment";
-import moment from 'moment'
-import axios from "axios";
+import { AllPostFeatureMixin } from '@/mixins';
+import Post from '@/components/businessOwner/ownerPostComponent';
 export default {
-  name: "postNetwork",
+  name: 'postNetwork',
+  mixins: [AllPostFeatureMixin],
+
   components: {
-   Comment
+    Post,
   },
+
   data() {
     return {
-      moment: moment,
-      page:1,
-     // post:this.$store.state.networkProfile.ownerPost,
-     url:null,
-     delete:[],
-     edit_description:null,
-     edit_image:null,
-     edit_id:null,
-    
+      page: 1,
+      // post:this.$store.state.networkProfile.ownerPost,
+      url: null,
+      delete: [],
+      edit_description: null,
+      edit_image: null,
+      edit_id: null,
+
       fullPage: false,
       images: [
-        "https://i.wifegeek.com/200426/f9459c52.jpg",
-        "https://i.wifegeek.com/200426/5ce1e1c7.jpg",
-        "https://i.wifegeek.com/200426/5fa51df3.jpg",
-        "https://i.wifegeek.com/200426/663181fe.jpg",
-        "https://i.wifegeek.com/200426/2d110780.jpg",
-        "https://i.wifegeek.com/200426/e73cd3fa.jpg",
-        "https://i.wifegeek.com/200426/15160d6e.jpg",
-        "https://i.wifegeek.com/200426/d0c881ae.jpg",
-        "https://i.wifegeek.com/200426/a154fc3d.jpg",
-        "https://i.wifegeek.com/200426/71d3aa60.jpg",
-        "https://i.wifegeek.com/200426/d17ce9a0.jpg",
-        "https://i.wifegeek.com/200426/7c4deca9.jpg",
-        "https://i.wifegeek.com/200426/64672676.jpg",
-        "https://i.wifegeek.com/200426/de6ab9c6.jpg",
-        "https://i.wifegeek.com/200426/d8bcb6a7.jpg",
-        "https://i.wifegeek.com/200426/4085d03b.jpg",
-        "https://i.wifegeek.com/200426/177ef44c.jpg",
-        "https://i.wifegeek.com/200426/d74d9040.jpg",
-        "https://i.wifegeek.com/200426/81e24a47.jpg",
-        "https://i.wifegeek.com/200426/43e2e8bb.jpg"
+        'https://i.wifegeek.com/200426/f9459c52.jpg',
+        'https://i.wifegeek.com/200426/5ce1e1c7.jpg',
+        'https://i.wifegeek.com/200426/5fa51df3.jpg',
+        'https://i.wifegeek.com/200426/663181fe.jpg',
+        'https://i.wifegeek.com/200426/2d110780.jpg',
+        'https://i.wifegeek.com/200426/e73cd3fa.jpg',
+        'https://i.wifegeek.com/200426/15160d6e.jpg',
+        'https://i.wifegeek.com/200426/d0c881ae.jpg',
+        'https://i.wifegeek.com/200426/a154fc3d.jpg',
+        'https://i.wifegeek.com/200426/71d3aa60.jpg',
+        'https://i.wifegeek.com/200426/d17ce9a0.jpg',
+        'https://i.wifegeek.com/200426/7c4deca9.jpg',
+        'https://i.wifegeek.com/200426/64672676.jpg',
+        'https://i.wifegeek.com/200426/de6ab9c6.jpg',
+        'https://i.wifegeek.com/200426/d8bcb6a7.jpg',
+        'https://i.wifegeek.com/200426/4085d03b.jpg',
+        'https://i.wifegeek.com/200426/177ef44c.jpg',
+        'https://i.wifegeek.com/200426/d74d9040.jpg',
+        'https://i.wifegeek.com/200426/81e24a47.jpg',
+        'https://i.wifegeek.com/200426/43e2e8bb.jpg',
       ],
-      imagees: [
-        "https://i.wifegeek.com/200426/f9459c52.jpg",
-        "https://i.wifegeek.com/200426/5ce1e1c7.jpg"
-      ],
+      imagees: ['https://i.wifegeek.com/200426/f9459c52.jpg', 'https://i.wifegeek.com/200426/5ce1e1c7.jpg'],
       ima: [
-        "https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg",
-        "https://pbs.twimg.com/media/DKO62sVXUAA0_AL.jpg",
-        "https://i.wifegeek.com/200426/5ce1e1c7.jpg"
+        'https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg',
+        'https://pbs.twimg.com/media/DKO62sVXUAA0_AL.jpg',
+        'https://i.wifegeek.com/200426/5ce1e1c7.jpg',
       ],
       createPost: {
-       // profile_picture: this.$store.getters.getProfilePicture,
-        postNetworkUpdate: "",
+        // profile_picture: this.$store.getters.getProfilePicture,
+        postNetworkUpdate: '',
         movies: [],
-        hyperlinks: []
+        hyperlinks: [],
       },
       isSubmitted: false,
-       fileImageArr: [],
-      
+      fileImageArr: [],
     };
   },
   computed: {
     imageProfile() {
-       return "yoo"
+      return 'yoo';
     },
-   
+
     business_logo() {
-      return  this.$store.state.networkProfile.networkInfo.logo_path;  
+      return this.$store.state.networkProfile.networkInfo.logo_path;
     },
     owner_post() {
-      return  this.$store.state.networkProfile.ownerPost;  
+      return this.$store.state.networkProfile.ownerPost;
     },
     profileNamePost() {
-    return "yoo";
-    }
+      return 'yoo';
+    },
   },
   mounted() {
     this.url = this.$route.params.id;
   },
-  
+
   methods: {
-     nFormatter(num) {
+    nFormatter(num) {
       if (num >= 1000000000) {
-         return (num / 1000000000).toFixed(1).replace(/\.0$/, '') + 'G';
+        return (num / 1000000000).toFixed(1).replace(/\.0$/, '') + 'G';
       }
       if (num >= 1000000) {
-         return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+        return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
       }
       if (num >= 1000) {
-         return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+        return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
       }
       return num;
     },
-     infiniteHandler($state) {
-      this.axios.get('network/show/post/'+this.url+"/"+this.page)
-      .then(({ data }) => {
-      // commit('ownerPost', data.data);
-      //  console.log(data);
-      if (data.data.length) {
-        this.page += 1;
-        this.owner_post.push(...data.data);
-          $state.loaded();
+    infiniteHandler($state) {
+      this.axios
+        .get('network/show/post/' + this.url + '/' + this.page)
+        .then(({ data }) => {
+          // commit('ownerPost', data.data);
+          //  console.log(data);
+          if (data.data.length) {
+            this.page += 1;
+            this.owner_post.push(...data.data);
+            $state.loaded();
           } else {
-          $state.complete();
-        }
-      }) .catch((err) => {
+            $state.complete();
+          }
+        })
+        .catch((err) => {
           console.log({ err: err });
-      })
+        });
     },
-    deletePost(post){
+    deletePost(post) {
       console.log(post);
-          
+
       // let loader = this.$loading.show({
       //   container: this.fullPage ? null : this.$refs.creatform,
       //   canCancel: true,
@@ -636,121 +402,121 @@ export default {
       //   color: "#e75c18",
       // });
       this.axios
-        .post("network/delete/post/"+post.post_id, {
+        .post('network/delete/post/' + post.post_id, {
           name: this.name,
         })
         .then((response) => {
           console.log(response.data);
           this.ownerPost();
           this.flashMessage.show({
-            status: "success",
-            blockClass: "custom-block-class",
-            message: "Post Deleted",
+            status: 'success',
+            blockClass: 'custom-block-class',
+            message: 'Post Deleted',
           });
           // loader.hide();
-        }) .catch((err) => {
-        this.sending = false;
-        if (err.response.status == 422) {
-          console.log({ err: err });
-          this.flashMessage.show({
-            status: "error",
-             blockClass: "custom-block-class",
-            message: err.response.data.message,
-          });
-          // loader.hide();
-        } else {
-          this.flashMessage.show({
-            status: "error",
-             blockClass: "custom-block-class",
-            message: "Unable to Delete your Post",
-          });
-          console.log({ err: err });
-          // loader.hide();
-        }
-      });
+        })
+        .catch((err) => {
+          this.sending = false;
+          if (err.response.status == 422) {
+            console.log({ err: err });
+            this.flashMessage.show({
+              status: 'error',
+              blockClass: 'custom-block-class',
+              message: err.response.data.message,
+            });
+            // loader.hide();
+          } else {
+            this.flashMessage.show({
+              status: 'error',
+              blockClass: 'custom-block-class',
+              message: 'Unable to Delete your Post',
+            });
+            console.log({ err: err });
+            // loader.hide();
+          }
+        });
     },
-    
-    editPost(postarray){
-      this.edit_description=postarray.content;
-      this.edit_image=postarray.media;
-      this.edit_id=postarray.post_id; 
+
+    editPost(postarray) {
+      this.edit_description = postarray.content;
+      this.edit_image = postarray.media;
+      this.edit_id = postarray.post_id;
       console.log(this.edit_image);
-      this.$refs["modal-edit"].show();
+      this.$refs['modal-edit'].show();
     },
-    updatePost(){
+    updatePost() {
       // let loader = this.$loading.show({
       //   container: this.fullPage ? null : this.$refs.loader,
       //   canCancel: true,
       //   onCancel: this.onCancel,
       //   color:"#e75c18"
       // });
-    //  const fileImage = this.createPost.movies[0].target.files[0];
-      this.fileImageArr=this.createPost.movies;
+      //  const fileImage = this.createPost.movies[0].target.files[0];
+      this.fileImageArr = this.createPost.movies;
       let formData2 = new FormData();
       this.delete.forEach((value, index) => {
-        formData2.append("deleteImg["+index+"]", value.id);
+        formData2.append('deleteImg[' + index + ']', value.id);
         console.log(value);
       });
       this.fileImageArr.forEach((value, index) => {
-        formData2.append("media["+index+"]", value.target.files[0]);
+        formData2.append('media[' + index + ']', value.target.files[0]);
         console.log(value);
       });
-      formData2.append("type", "image");
+      formData2.append('type', 'image');
       //    formData2.append("media", this.createPost.hyperlinks);
-      formData2.append("content", this.edit_description);
+      formData2.append('content', this.edit_description);
       this.axios
-      .post("network/edit/post/"+this.edit_id, formData2, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
-      .then((response) => {
-        console.log(response);
-        this.ownerPost();
-        this.flashMessage.show({
-          status: "success",
-            blockClass: "custom-block-class",
-          message: "Content successfuly uploaded",
+        .post('network/edit/post/' + this.edit_id, formData2, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        })
+        .then((response) => {
+          console.log(response);
+          this.ownerPost();
+          this.flashMessage.show({
+            status: 'success',
+            blockClass: 'custom-block-class',
+            message: 'Content successfuly uploaded',
+          });
+          // loader.hide();
+          this.$refs['modal-edit'].hide();
+        })
+        .catch((err) => {
+          if (err.response.status == 422) {
+            console.log({ err: err });
+            console.log(err.response.data.message);
+            this.flashMessage.show({
+              status: 'error',
+              message: err.response.data.message,
+              blockClass: 'custom-block-class',
+            });
+            // loader.hide()
+            this.$refs['modal-edit'].hide();
+          } else {
+            this.flashMessage.show({
+              status: 'error',
+              message: 'Unable to Update your post',
+              blockClass: 'custom-block-class',
+            });
+            console.log({ err: err });
+            // loader.hide()
+            this.$refs['modal-edit'].hide();
+          }
         });
-        // loader.hide();
-        this.$refs["modal-edit"].hide();
-      }) .catch((err) => {
-        if (err.response.status == 422) {
-          console.log({ err: err });
-          console.log(err.response.data.message);
-          this.flashMessage.show({
-            status: "error",
-            message: err.response.data.message,
-            blockClass: "custom-block-class",
-          });
-          // loader.hide()
-          this.$refs["modal-edit"].hide();
-        } else {
-          this.flashMessage.show({
-            status: "error",
-            message: "Unable to Update your post",
-            blockClass: "custom-block-class",
-          });
-          console.log({ err: err });
-          // loader.hide()
-          this.$refs["modal-edit"].hide();
-        }
-      });
     },
-    chooseImage: function() {
-   
-    },
-    chooseVideo: function() {
-      document.getElementById("chosefile").click();
+    chooseImage: function () {},
+    chooseVideo: function () {
+      document.getElementById('chosefile').click();
     },
     chooseDocument() {
-      document.getElementById("chosefile").click();
+      document.getElementById('chosefile').click();
     },
     selectMovies(event) {
       const file = event.target;
       if (file.files) {
         let reader = new FileReader();
-        reader.onload = e => {
+        reader.onload = (e) => {
           //localStorage.setItem("cover_image", e.target.result);
           //this.user.cover_image = e.target.result;
           //console.log( "It pass")
@@ -759,7 +525,7 @@ export default {
             target: event.target,
             movie: e.target.result,
             fileName: event.target.files[0].name,
-             link:  URL.createObjectURL(event.target.files[0])
+            link: URL.createObjectURL(event.target.files[0]),
           });
         };
         reader.readAsDataURL(file.files[0]);
@@ -769,7 +535,7 @@ export default {
       let result = null;
       if (file.files) {
         let reader = new FileReader();
-        reader.onload = e => {
+        reader.onload = (e) => {
           result = e.target.result;
           //localStorage.setItem("cover_image", e.target.result);
           //this.user.cover_image = e.target.result;
@@ -786,16 +552,16 @@ export default {
         target: event.target,
         movie: this.service(event.target),
         fileName: event.target.files[0].name,
-        link:  URL.createObjectURL(event.target.files[0])
+        link: URL.createObjectURL(event.target.files[0]),
       });
-      this.$refs["modal-xl"].show();
+      this.$refs['modal-xl'].show();
     },
     selectDocument(event) {
       console.log(event);
       this.createPost.hyperlinks.push({
         target: event.target,
         document: this.service(event.target),
-        fileName: event.target.files[0].name
+        fileName: event.target.files[0].name,
       });
     },
     selectDocumentOutsidePost(event) {
@@ -803,38 +569,34 @@ export default {
       this.createPost.hyperlinks.push({
         target: event.target,
         document: this.service(event.target),
-        fileName: event.target.files[0].name
+        fileName: event.target.files[0].name,
       });
-      this.$refs["modal-xl"].show();
+      this.$refs['modal-xl'].show();
     },
     createPost_() {
-      this.$refs["modal-xl"].show();
+      this.$refs['modal-xl'].show();
     },
     deleteItem(name) {
-      const newHyperlinks = this.createPost.hyperlinks.filter(
-        item => item.fileName.trim() !== name.trim()
-      );
-      const movies = this.createPost.movies.filter(
-        item => item.fileName.trim() !== name.trim()
-      );
+      const newHyperlinks = this.createPost.hyperlinks.filter((item) => item.fileName.trim() !== name.trim());
+      const movies = this.createPost.movies.filter((item) => item.fileName.trim() !== name.trim());
       this.createPost.hyperlinks = [...newHyperlinks];
       this.createPost.movies = [...movies];
     },
     deleteImage(id, eve) {
       this.edit_image.splice(id, 1);
       this.delete.push({
-        id:eve.id
-      }); 
+        id: eve.id,
+      });
       console.log(this.delete);
-    },     
+    },
     onCancel() {
-      console.log('User cancelled the loader.')
+      console.log('User cancelled the loader.');
     },
     ownerPost() {
       this.$store
-        .dispatch("networkProfile/ownerPost", this.url)
+        .dispatch('networkProfile/ownerPost', this.url)
         .then(() => {
-          console.log("hey yeah");
+          console.log('hey yeah');
         })
         .catch((err) => {
           console.log({ err: err });
@@ -848,71 +610,72 @@ export default {
       //   color:"#e75c18"
       // });
       const fileImage = this.createPost.movies[0].target.files[0];
-      this.fileImageArr=this.createPost.movies;
+      this.fileImageArr = this.createPost.movies;
       let formData2 = new FormData();
       this.fileImageArr.forEach((value, index) => {
-        formData2.append("media["+index+"]", value.target.files[0]);
+        formData2.append('media[' + index + ']', value.target.files[0]);
         console.log(value);
         console.log(value.target.files[0]);
-        console.log("testingggg");
+        console.log('testingggg');
       });
       console.log(this.fileImageArr);
-      formData2.append("type", "image");
+      formData2.append('type', 'image');
       //formData2.append("media", this.createPost.hyperlinks);
-      formData2.append("content", this.createPost.postNetworkUpdate);
+      formData2.append('content', this.createPost.postNetworkUpdate);
       this.axios
-      .post("network/post/create/"+this.url, formData2, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
-      .then((response) => {
-        console.log(response);
-        this.flashMessage.show({
-          status: "success",
-            blockClass: "custom-block-class",
-          message: "Content successfuly uploaded",
+        .post('network/post/create/' + this.url, formData2, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        })
+        .then((response) => {
+          console.log(response);
+          this.flashMessage.show({
+            status: 'success',
+            blockClass: 'custom-block-class',
+            message: 'Content successfuly uploaded',
+          });
+          // loader.hide()
+          this.$refs['modal-xl'].hide();
+          this.ownerPost();
+        })
+        .catch((err) => {
+          if (err.response.status == 422) {
+            console.log({ err: err });
+            console.log(err.response.data.message);
+            this.flashMessage.show({
+              status: 'error',
+              message: err.response.data.message,
+              blockClass: 'custom-block-class',
+            });
+            // loader.hide()
+          } else {
+            this.flashMessage.show({
+              status: 'error',
+              message: 'Unable to Create Your Post',
+              blockClass: 'custom-block-class',
+            });
+            console.log({ err: err });
+            // loader.hide()
+          }
         });
-        // loader.hide()
-        this.$refs["modal-xl"].hide();
-        this.ownerPost();
-      }) .catch((err) => {
-        if (err.response.status == 422) {
-          console.log({ err: err });
-          console.log(err.response.data.message);
-          this.flashMessage.show({
-            status: "error",
-            message: err.response.data.message,
-            blockClass: "custom-block-class",
-          });
-          // loader.hide()
-        } else {
-          this.flashMessage.show({
-            status: "error",
-            message: "Unable to Create Your Post",
-            blockClass: "custom-block-class",
-          });
-          console.log({ err: err });
-          // loader.hide()
-        } 
-      });
     },
     showModal() {
-      this.$refs["modal-3"].show();
+      this.$refs['modal-3'].show();
     },
     hideModal() {
-      this.$refs["modal-3"].hide();
+      this.$refs['modal-3'].hide();
     },
     resetPostData() {
-      console.log("Test");
-      console.log("Reinitialisation des donnees du POST");
+      console.log('Test');
+      console.log('Reinitialisation des donnees du POST');
       if (!this.isSubmitted) {
         this.createPost.hyperlinks = [];
         this.createPost.movies = [];
-        this.createPost.postNetworkUpdate = "";
+        this.createPost.postNetworkUpdate = '';
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -926,26 +689,24 @@ export default {
   justify-content: center;
   align-items: center;
 }
-.upload-cancel{
-  
-    z-index: 1;
-  
-     margin-top: -40%;
-    float: right;
+.upload-cancel {
+  z-index: 1;
+
+  margin-top: -40%;
+  float: right;
 }
-.upload-cancel:hover{
-   color:orange;
-   font-size:24px;
+.upload-cancel:hover {
+  color: orange;
+  font-size: 24px;
 }
-.oorange{
-  color:red;
+.oorange {
+  color: red;
   font-size: 20px;
-  
 }
 #preview img {
-    object-fit: cover;
-    width: 100% !important;
-    height: 200px !important;
+  object-fit: cover;
+  width: 100% !important;
+  height: 200px !important;
 }
 .pending-post-view {
   background-color: #8bd06c;

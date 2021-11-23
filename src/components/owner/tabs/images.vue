@@ -66,6 +66,7 @@
             :content="image.content"
             :imageProps="imageProps"
             :isEditor="isEditor"
+            :type="type"
           />
         </div>
       </div>
@@ -93,7 +94,7 @@ export default {
   props: {
     album: {},
     isEditor: {},
-     addItem: {
+    addItem: {
       type: Boolean,
       default: function () {
         return false;
@@ -117,7 +118,7 @@ export default {
     },
     showCreateForm: {
       type: Boolean,
-      required:true,
+      required: true,
     },
     images: {
       type: Array,
@@ -157,7 +158,6 @@ export default {
   },
 
   created() {
-    
     this.allImages = this.images;
 
     this.pattern = {
@@ -178,6 +178,15 @@ export default {
         onDownloadPic: this.onDownloadPicBusiness,
         getAlbumImages: this.getAlbumImagesBusiness,
         updateItem: this.updateItemBusiness,
+      }),
+      network: () => ({
+        submitPost: this.submitPostNetwork,
+        setProfilePicture: this.setProfilePictureNetwork,
+        setCoverPicture: this.setCoverPictureNetwork,
+        deleteImagePicture: this.deleteImagePictureNetwork,
+        onDownloadPic: this.onDownloadPicNetwork,
+        getAlbumImages: this.getAlbumImagesNetwork,
+        updateItem: this.updateItemNetwork,
       }),
     };
 
@@ -217,11 +226,19 @@ export default {
       deleteImagePictureBusiness: 'businessOwner/deleteImage',
       onDownloadPicBusiness: 'businessOwner/downloadPic',
       getAlbumImagesBusiness: 'businessOwner/getAlbumImages',
+
+      submitPostNetwork: 'networkProfileMedia/submitPost',
+      setProfilePictureNetwork: 'networkProfileMedia/setProfilePic',
+      setCoverPictureNetwork: 'networkProfileMedia/setCoverPic',
+      deleteImagePictureNetwork: 'networkProfileMedia/deleteImage',
+      onDownloadPicNetwork: 'networkProfileMedia/downloadPic',
+      getAlbumImagesNetwork: 'networkProfileMedia/getAlbumImages',
     }),
 
     ...mapMutations({
       updateItem: 'UserProfileOwner/updateAlbumItem',
       updateItemBusiness: 'businessOwner/updateAlbumItem',
+      updateItemNetwork: 'networkProfileMedia/updateAlbumItem',
     }),
 
     getFullMediaLink: fullMediaLink,
@@ -351,7 +368,7 @@ export default {
 
     setCoverPic(id) {
       this.loading = true;
-      const data = 'business' == this.type ? { businessID: this.$route.params.id, albumID: id } : id;
+      const data = ('business' == this.type || 'network' == this.type) ? { businessID: this.$route.params.id, albumID: id } : id;
 
       this.pattern[this.type]()
         .setCoverPicture(data)
@@ -377,7 +394,7 @@ export default {
 
     setProfilePic(id) {
       this.loading = true;
-      const data = 'business' == this.type ? { businessID: this.$route.params.id, albumID: id } : id;
+      const data = ('business' == this.type || 'network' == this.type) ? { businessID: this.$route.params.id, albumID: id } : id;
       this.pattern[this.type]()
         .setProfilePicture(data)
         .then(() => {
@@ -408,11 +425,11 @@ export default {
       formData.append('dob', this.text);
       let payload = {
         albumID: albumId,
-        businessID: 'business' == this.type ? this.$route.params.id : null,
+        businessID: ('business' == this.type || 'network' == this.type) ? this.$route.params.id : null,
         data: formData,
       };
 
-      const data = 'business' == this.type ? { businessId: this.$route.params.id, albumId } : albumId;
+      const data = ('business' == this.type || 'network' == this.type)? { businessId: this.$route.params.id, albumId } : albumId;
 
       this.pattern[this.type]()
         .submitPost(payload)

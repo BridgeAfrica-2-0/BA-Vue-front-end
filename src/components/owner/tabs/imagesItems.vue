@@ -1,5 +1,5 @@
 <template>
-  <div class="img-gall-item img-size">
+  <div class="img-gall-item img-size" :ref="`sHowMedia-${im.id}`">
     <a v-if="typeOfMedia() == 'image' && !loading"
       ><b-img
         class="card-img btn p-0 album-img"
@@ -41,16 +41,19 @@
             </template>
 
             <b-dropdown-item @click="onDownloadPic()"> {{ $t('profileowner.Download') }}</b-dropdown-item>
-            
+
             <b-dropdown-item href="#" @click="onSetProfilePic()" v-if="isEditor && !['video'].includes(typeOfMedia())">
-              {{$t('profileowner.Make_Profile_Picture')}}
+              {{ $t('profileowner.Make_Profile_Picture') }}
             </b-dropdown-item>
 
-            <b-dropdown-item  @click="onSetCoverPic()" v-if="isEditor && !['video'].includes(typeOfMedia())">
-              {{ $t('profileowner.Make_Cover_Photo')}}
+            <b-dropdown-item
+              @click="onSetCoverPic()"
+              v-if="isEditor && !['video'].includes(typeOfMedia()) && type != 'network'"
+            >
+              {{ $t('profileowner.Make_Cover_Photo') }}
             </b-dropdown-item>
             <b-dropdown-item href="#" @click="onDeleteImage()" v-if="isEditor">
-              {{ $t('profileowner.Delete') }} 
+              {{ $t('profileowner.Delete') }}
             </b-dropdown-item>
           </b-dropdown>
         </li>
@@ -69,6 +72,7 @@ export default {
     'content',
     'canUpload',
     'isEditor',
+    'type',
     'typeOfMedia',
     'getFullMediaLink',
     'getYoutubeKey',
@@ -87,26 +91,60 @@ export default {
 
   methods: {
     async onDownloadPic() {
-      console.log(this.loading);
+      let loader = this.$loading.show({
+        container: this.$refs[`sHowMedia-${this.im.id}`],
+        canCancel: true,
+        onCancel: this.onCancel,
+        color: '#e75c18',
+      });
+
       this.loading = true;
       this.loading = await this.downloadPic();
+
+      loader.hide();
     },
 
     async onDeleteImage() {
+      let loader = this.$loading.show({
+        container: this.$refs[`sHowMedia-${this.im.id}`],
+        canCancel: true,
+        onCancel: this.onCancel,
+        color: '#e75c18',
+      });
+
       this.loading = true;
       this.loading = await this.deleteImage();
+
+      loader.hide();
     },
     //set an image as a cover photo
 
     async onSetCoverPic() {
+      let loader = this.$loading.show({
+        container: this.$refs[`sHowMedia-${this.im.id}`],
+        canCancel: true,
+        onCancel: this.onCancel,
+        color: '#e75c18',
+      });
+
       this.loading = true;
       this.loading = await this.setCoverPic();
+
+      loader.hide();
     },
     //set image as profile pic
 
     async onSetProfilePic() {
+      let loader = this.$loading.show({
+        container: this.$refs[`sHowMedia-${this.im.id}`],
+        canCancel: true,
+        onCancel: this.onCancel,
+        color: '#e75c18',
+      });
       this.loading = true;
       this.loading = await this.setProfilePic();
+
+      loader.hide();
     },
   },
 };

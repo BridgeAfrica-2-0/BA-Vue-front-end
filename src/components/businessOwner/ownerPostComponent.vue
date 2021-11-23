@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="p-3 card-border my-3">
     <div class="mt-2">
       <div class="d-inline-flex">
         <span md="1" class="m-0 p-0">
@@ -110,7 +110,7 @@
             ><b-icon icon="chat-fill" variant="primary" aria-hidden="true"></b-icon>
             {{ item.comment_count | nFormatter }}
           </span>
-          <ShareButton :post="item" :type="'profile'" />
+          <ShareButton :post="item" :type="'profile'" /> 
         </b-col>
       </b-row>
     </div>
@@ -144,7 +144,6 @@
     <Comment v-for="comment in comments" :key="comment.id" :item="comment" :uuid="post.post_id" />
     <Loader v-if="loadComment" />
     <NoMoreData v-if="comments.length && !loadComment" :hasData="hasData" @click.native="onShowComment" />
-    <hr />
   </div>
 </template>
 
@@ -302,6 +301,10 @@ export default {
 };
 </script>
 <style >
+.card-border {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+}
 .avatar-border {
   border-radius: 50px !important;
 }
@@ -600,6 +603,6 @@ export default {
 }
 .toright {
   position: absolute;
-  right: 1%;
+  right: 3%;
 }
 </style>

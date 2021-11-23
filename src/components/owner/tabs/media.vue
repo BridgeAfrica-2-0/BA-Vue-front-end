@@ -19,7 +19,6 @@
           :type="type"
           v-else
         />
-
       </b-tab>
       <b-tab :title="$t('profileowner.Albums')" @click="getAlbums">
         <div v-if="!hasLoadAlbum">
@@ -72,6 +71,7 @@ export default {
     ...mapGetters({
       getProfilePictures: 'UserProfileOwner/getImages',
       getBusinessPictures: 'businessOwner/getAllImages',
+      getNetworkPictures: 'networkProfileMedia/getImages',
     }),
   },
 
@@ -153,6 +153,11 @@ export default {
         album: 'UserProfileOwner/getAlbums',
         image: 'UserProfileOwner/getImages',
         pictures: this.getProfilePictures,
+      }),
+      network: () => ({
+        album: 'networkProfileMedia/getAlbums',
+        image: 'networkProfileMedia/getImages',
+        pictures: this.getNetworkPictures,
       }),
     };
 

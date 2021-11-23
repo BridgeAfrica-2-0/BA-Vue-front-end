@@ -73,89 +73,177 @@
     </b-card>
 
     <!-- User Posts Listing Section-->
-    <b-card class="px-md-3">
-      <div class="">
-        <div class="col-md-12 col-lg-12 d-flex align-items-stretch mb-lg-0" style="padding-left: 0; padding-top: 3px">
-          <b-modal id="modal-edit" ref="modal-edit" centered hide-footer title="Update Post" @hidden="resetPostData">
-            <b-row ref="loader">
-              <b-col cols="1" class="m-0 p-0"></b-col>
-              <b-col cols="2" class="m-0 p-0">
-                <b-avatar class="d-inline-block avat" variant="primary" :src="business_intro.logo_path"></b-avatar>
-              </b-col>
-              <b-col cols="9" class="pt-2" style="margin-left: -5px">
-                <h5 class="m-0 font-weight-bolder">
-                  {{ business_intro.name }}
-                </h5>
-              </b-col>
-            </b-row>
-            <b-row>
-              <b-col cols="1" md="1" cl ass="m-0 p-0"></b-col>
-              <b-col cols="10" md="10" class="m-0 p-0">
-                <br />
-                <div class="cursor">
-                  <b-form-textarea
-                    id="textarea-small"
-                    autofocus
-                    class="mb-2 border-none"
-                    placeholder="Post a business update"
-                    v-model="edit_description"
-                  ></b-form-textarea>
 
-                  <i></i>
-                </div>
-                <div class="bordder">
-                  <span class="float-left"> Add to Your Post </span>
-                  <span class="float-right">
-                    <b-button-group size="sm" class="">
-                      <input id="video" type="file" hidden />
-                      <input
-                        id="image"
-                        type="file"
-                        hidden
-                        @change="selectMovies"
-                        accept="video/mpeg,video/mp4,image/*"
-                        ref="movies"
-                      />
-                      <input
-                        id="document"
-                        type="file"
-                        @change="selectDocument"
-                        hidden
-                        accept="application/pdf"
-                        ref="document"
-                      />
+    <div class="">
+      <div class="col-md-12 col-lg-12 d-flex align-items-stretch mb-lg-0" style="padding-left: 0; padding-top: 3px">
+        <b-modal id="modal-edit" ref="modal-edit" centered hide-footer title="Update Post" @hidden="resetPostData">
+          <b-row ref="loader">
+            <b-col cols="1" class="m-0 p-0"></b-col>
+            <b-col cols="2" class="m-0 p-0">
+              <b-avatar class="d-inline-block avat" variant="primary" :src="business_intro.logo_path"></b-avatar>
+            </b-col>
+            <b-col cols="9" class="pt-2" style="margin-left: -5px">
+              <h5 class="m-0 font-weight-bolder">
+                {{ business_intro.name }}
+              </h5>
+            </b-col>
+          </b-row>
+          <b-row>
+            <b-col cols="1" md="1" cl ass="m-0 p-0"></b-col>
+            <b-col cols="10" md="10" class="m-0 p-0">
+              <br />
+              <div class="cursor">
+                <b-form-textarea
+                  id="textarea-small"
+                  autofocus
+                  class="mb-2 border-none"
+                  placeholder="Post a business update"
+                  v-model="edit_description"
+                ></b-form-textarea>
 
-                      <b-button title="Add Movie" size="sm" variant="outline-primary" @click="$refs.movies.click()">
-                        <fas-icon class="icons" :icon="['fas', 'photo-video']" size="lg" />
-                      </b-button>
-                      <b-button
-                        title="Add Hyperlink"
-                        size="sm"
-                        variant="outline-primary"
-                        @click="$refs.document.click()"
-                      >
-                        <fas-icon class="icons" :icon="['fas', 'file']" size="lg" />
-                      </b-button>
-                    </b-button-group>
+                <i></i>
+              </div>
+              <div class="bordder">
+                <span class="float-left"> Add to Your Post </span>
+                <span class="float-right">
+                  <b-button-group size="sm" class="">
+                    <input id="video" type="file" hidden />
+                    <input
+                      id="image"
+                      type="file"
+                      hidden
+                      @change="selectMovies"
+                      accept="video/mpeg,video/mp4,image/*"
+                      ref="movies"
+                    />
+                    <input
+                      id="document"
+                      type="file"
+                      @change="selectDocument"
+                      hidden
+                      accept="application/pdf"
+                      ref="document"
+                    />
+
+                    <b-button title="Add Movie" size="sm" variant="outline-primary" @click="$refs.movies.click()">
+                      <fas-icon class="icons" :icon="['fas', 'photo-video']" size="lg" />
+                    </b-button>
+                    <b-button title="Add Hyperlink" size="sm" variant="outline-primary" @click="$refs.document.click()">
+                      <fas-icon class="icons" :icon="['fas', 'file']" size="lg" />
+                    </b-button>
+                  </b-button-group>
+                </span>
+              </div>
+              <br />
+
+              <div v-for="hyperlink in createPost.hyperlinks" :key="hyperlink.fileName" class="bordder">
+                <span class="float-left"> {{ hyperlink.fileName }} </span>
+                <span class="float-right" @click="deleteItem(hyperlink.fileName)"> delete </span>
+              </div>
+
+              <div v-for="(movie, index) in edit_image" :key="movie.id" class="">
+                <div id="preview">
+                  <span class="upload-cancel" @click="deleteImage(index, movie)">
+                    <b-icon icon="x-circle" class="oorange"> </b-icon>
                   </span>
-                </div>
-                <br />
 
+                  <img :src="movie.media_url" />
+                </div>
+              </div>
+              <br />
+
+              <div v-for="movie in createPost.movies" :key="movie.fileName" class="">
+                <div id="preview">
+                  <span class="upload-cancel" @click="deleteItem(movie.fileName)">
+                    <b-icon icon="x-circle" class="oorange"> </b-icon>
+                  </span>
+
+                  <img :src="movie.link" />
+                </div>
+              </div>
+              <br />
+
+              <b-progress
+                :value="uploadPercentage"
+                variant="primary"
+                class="m13"
+                show-progress
+                :animated="animate"
+              ></b-progress>
+
+              <span>
+                <b-button @click="updatePost" variant="primary" block
+                  ><b-icon icon="cursor-fill" variant="primary"></b-icon> Publish</b-button
+                >
+              </span>
+            </b-col>
+            <b-col cols="1" md="1" class="m-0 p-0"></b-col>
+          </b-row>
+        </b-modal>
+
+        <b-modal id="modal-xl" ref="modal-xl" centered hide-footer title="Create Post" @hidden="resetPostData">
+          <b-row ref="loader">
+            <b-col cols="1" class="m-0 p-0"></b-col>
+            <b-col cols="2" class="m-0 p-0">
+              <b-avatar class="d-inline-block avat" variant="primary" square :src="business_intro.logo_path"></b-avatar>
+            </b-col>
+            <b-col cols="9" class="pt-2" style="margin-left: -5px">
+              <h5 class="m-0 font-weight-bolder">
+                {{ business_intro.name }}
+              </h5>
+            </b-col>
+          </b-row>
+          <b-row>
+            <b-col cols="1" md="1" cl ass="m-0 p-0"></b-col>
+            <b-col cols="10" md="10" class="m-0 p-0">
+              <br />
+              <div class="cursor">
+                <b-form-textarea
+                  id="textarea-small"
+                  autofocus
+                  class="mb-2 border-none"
+                  placeholder="Post a business update"
+                  v-model="createPost.postBusinessUpdate"
+                ></b-form-textarea>
+              </div>
+              <div class="bordder">
+                <span class="float-left"> Add to Your Post </span>
+                <span class="float-right">
+                  <b-button-group size="sm" class="">
+                    <input id="video" type="file" hidden />
+                    <input
+                      id="image"
+                      type="file"
+                      hidden
+                      @change="selectMovies"
+                      accept="video/mpeg,video/mp4,image/*"
+                      ref="movies"
+                    />
+                    <input
+                      id="document"
+                      type="file"
+                      @change="selectDocument"
+                      hidden
+                      accept="application/pdf"
+                      ref="document"
+                    />
+
+                    <b-button title="Add Movie" size="sm" variant="outline-primary" @click="$refs.movies.click()">
+                      <fas-icon class="icons" :icon="['fas', 'photo-video']" size="lg" />
+                    </b-button>
+                    <b-button title="Add Hyperlink" size="sm" variant="outline-primary" @click="$refs.document.click()">
+                      <fas-icon class="icons" :icon="['fas', 'file']" size="lg" />
+                    </b-button>
+                  </b-button-group>
+                </span>
+              </div>
+              <br />
+
+              <div class="h300px">
                 <div v-for="hyperlink in createPost.hyperlinks" :key="hyperlink.fileName" class="bordder">
                   <span class="float-left"> {{ hyperlink.fileName }} </span>
                   <span class="float-right" @click="deleteItem(hyperlink.fileName)"> delete </span>
                 </div>
-
-                <div v-for="(movie, index) in edit_image" :key="movie.id" class="">
-                  <div id="preview">
-                    <span class="upload-cancel" @click="deleteImage(index, movie)">
-                      <b-icon icon="x-circle" class="oorange"> </b-icon>
-                    </span>
-
-                    <img :src="movie.media_url" />
-                  </div>
-                </div>
-                <br />
 
                 <div v-for="movie in createPost.movies" :key="movie.fileName" class="">
                   <div id="preview">
@@ -163,152 +251,48 @@
                       <b-icon icon="x-circle" class="oorange"> </b-icon>
                     </span>
 
-                    <img :src="movie.link" />
+                    <span> </span>
+                    <img v-if="movie.fileType == 'image'" :src="movie.link" />
+
+                    <video v-else width="97%" height="240" autoplay>
+                      <source :src="movie.link" type="video/mp4" />
+                    </video>
                   </div>
                 </div>
-                <br />
-
-                <b-progress
-                  :value="uploadPercentage"
-                  variant="primary"
-                  class="m13"
-                  show-progress
-                  :animated="animate"
-                ></b-progress>
-
-                <span>
-                  <b-button @click="updatePost" variant="primary" block
-                    ><b-icon icon="cursor-fill" variant="primary"></b-icon> Publish</b-button
-                  >
-                </span>
-              </b-col>
-              <b-col cols="1" md="1" class="m-0 p-0"></b-col>
-            </b-row>
-          </b-modal>
-
-          <b-modal id="modal-xl" ref="modal-xl" centered hide-footer title="Create Post" @hidden="resetPostData">
-            <b-row ref="loader">
-              <b-col cols="1" class="m-0 p-0"></b-col>
-              <b-col cols="2" class="m-0 p-0">
-                <b-avatar
-                  class="d-inline-block avat"
-                  variant="primary"
-                  square
-                  :src="business_intro.logo_path"
-                ></b-avatar>
-              </b-col>
-              <b-col cols="9" class="pt-2" style="margin-left: -5px">
-                <h5 class="m-0 font-weight-bolder">
-                  {{ business_intro.name }}
-                </h5>
-              </b-col>
-            </b-row>
-            <b-row>
-              <b-col cols="1" md="1" cl ass="m-0 p-0"></b-col>
-              <b-col cols="10" md="10" class="m-0 p-0">
-                <br />
-                <div class="cursor">
-                  <b-form-textarea
-                    id="textarea-small"
-                    autofocus
-                    class="mb-2 border-none"
-                    placeholder="Post a business update"
-                    v-model="createPost.postBusinessUpdate"
-                  ></b-form-textarea>
-                </div>
-                <div class="bordder">
-                  <span class="float-left"> Add to Your Post </span>
-                  <span class="float-right">
-                    <b-button-group size="sm" class="">
-                      <input id="video" type="file" hidden />
-                      <input
-                        id="image"
-                        type="file"
-                        hidden
-                        @change="selectMovies"
-                        accept="video/mpeg,video/mp4,image/*"
-                        ref="movies"
-                      />
-                      <input
-                        id="document"
-                        type="file"
-                        @change="selectDocument"
-                        hidden
-                        accept="application/pdf"
-                        ref="document"
-                      />
-
-                      <b-button title="Add Movie" size="sm" variant="outline-primary" @click="$refs.movies.click()">
-                        <fas-icon class="icons" :icon="['fas', 'photo-video']" size="lg" />
-                      </b-button>
-                      <b-button
-                        title="Add Hyperlink"
-                        size="sm"
-                        variant="outline-primary"
-                        @click="$refs.document.click()"
-                      >
-                        <fas-icon class="icons" :icon="['fas', 'file']" size="lg" />
-                      </b-button>
-                    </b-button-group>
-                  </span>
-                </div>
-                <br />
-
-                <div class="h300px">
-                  <div v-for="hyperlink in createPost.hyperlinks" :key="hyperlink.fileName" class="bordder">
-                    <span class="float-left"> {{ hyperlink.fileName }} </span>
-                    <span class="float-right" @click="deleteItem(hyperlink.fileName)"> delete </span>
-                  </div>
-
-                  <div v-for="movie in createPost.movies" :key="movie.fileName" class="">
-                    <div id="preview">
-                      <span class="upload-cancel" @click="deleteItem(movie.fileName)">
-                        <b-icon icon="x-circle" class="oorange"> </b-icon>
-                      </span>
-
-                      <span> </span>
-                      <img v-if="movie.fileType == 'image'" :src="movie.link" />
-
-                      <video v-else width="97%" height="240" autoplay>
-                        <source :src="movie.link" type="video/mp4" />
-                      </video>
-                    </div>
-                  </div>
-                </div>
-                <b-progress
-                  v-if="isUploading"
-                  :value="uploadPercentage"
-                  variant="primary"
-                  class="m13"
-                  show-progress
-                  :animated="animate"
-                ></b-progress>
-                <hr />
-                <span>
-                  <b-button @click="submitPost" variant="primary" block
-                    ><b-icon icon="cursor-fill" variant="primary"></b-icon> Publish</b-button
-                  >
-                </span>
-              </b-col>
-              <b-col cols="1" md="1" class="m-0 p-0"></b-col>
-            </b-row>
-          </b-modal>
-        </div>
+              </div>
+              <b-progress
+                v-if="isUploading"
+                :value="uploadPercentage"
+                variant="primary"
+                class="m13"
+                show-progress
+                :animated="animate"
+              ></b-progress>
+              <hr />
+              <span>
+                <b-button @click="submitPost" variant="primary" block
+                  ><b-icon icon="cursor-fill" variant="primary"></b-icon> Publish</b-button
+                >
+              </span>
+            </b-col>
+            <b-col cols="1" md="1" class="m-0 p-0"></b-col>
+          </b-row>
+        </b-modal>
       </div>
+    </div>
 
-      <Post
-        v-for="(item, index) in owner_post"
-        :key="index"
-        :post="item"
-        :mapvideo="() => mapvideo(item.media)"
-        :mapmediae="() => mapmediae(item.media)"
-        :businessLogo="business_intro.logo_path"
-        :editPost="() => editPost(item)"
-        :deletePost="() => deletePost(item)"
-      />
+    <Post
+      v-for="(item, index) in owner_post"
+      :key="index"
+      :post="item"
+      :mapvideo="() => mapvideo(item.media)"
+      :mapmediae="() => mapmediae(item.media)"
+      :businessLogo="business_intro.logo_path"
+      :editPost="() => editPost(item)"
+      :deletePost="() => deletePost(item)"
+    />
 
-      <infinite-loading :identifier="infiniteId" ref="infiniteLoading" @infinite="infiniteHandler"></infinite-loading>
-    </b-card>
+    <infinite-loading :identifier="infiniteId" ref="infiniteLoading" @infinite="infiniteHandler"></infinite-loading>
   </div>
 </template>
 

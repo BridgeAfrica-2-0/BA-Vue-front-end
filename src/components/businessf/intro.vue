@@ -12,7 +12,7 @@
           <b-icon icon="geo-alt-fill" class="primary"></b-icon> Mokolo, {{$t("businessf.Yaounde")}},
           {{$t("businessf.Cameroon")}}
         </p>
-        <p><b-icon icon="link" class="primary"></b-icon> {{$t("businessf.www_business_com")}}</p>
+        <p><b-icon icon="link" class="primary"></b-icon>www.business.com</p>
         <p>
           <b-icon icon="people-fill" class="primary"></b-icon>  {{business_intro.community}} {{$t("businessf.Community")}}
         </p>

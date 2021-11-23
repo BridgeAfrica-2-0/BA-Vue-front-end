@@ -12,12 +12,9 @@
       >
         <!-- Text slides with image -->
         <b-carousel-slide
-          :img-src="require('@/assets/img/dash1.png')"
+          :img-src="require('@/assets/img/dashboard.png')"
         ></b-carousel-slide>
 
-        <b-carousel-slide
-          :img-src="require('@/assets/img/dash2.jpg')"
-        ></b-carousel-slide>
       </b-carousel>
     </div>
   </div>

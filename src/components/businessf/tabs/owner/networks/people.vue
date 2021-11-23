@@ -1,26 +1,21 @@
 <template>
   <div>
-    <div style="overflow-y: scroll;" class="s-cardd">
-
+    <div style="overflow-y: scroll" class="s-cardd">
       <div v-for="people in peoples" :key="people.id" class="people-style border shadow">
         <b-row class="mb-1">
           <b-col md="3" cols="4" lg="3" class="my-auto">
-            <b-avatar
-              class="p-avater"
-              variant="primary"
-              :src="people.profile_picutre"
-            ></b-avatar>
+            <b-avatar class="p-avater" variant="primary" :src="people.profile_picutre"></b-avatar>
           </b-col>
 
-          <b-col md="8" cols="8" lg="8">
+          <b-col md="8" cols="8" lg="8" >
             <div>
               <b-row class="shift">
-                <b-col md="12" lg="12" sm="12" cols="12">
+                <b-col md="12" lg="12"  sm="12" cols="12">
                   <div class="e-name">
                     <b-row>
                       <b-col md="6" lg="6" cols="6" sm="6" class="mt-lg-2">
                         <div class="mt-2 mt-lg-0 mt-xl-0 username">
-                          <b> {{people.name}} </b>
+                          <b> {{ people.name }} </b>
                         </div>
                       </b-col>
 
@@ -31,7 +26,7 @@
                         sm="6"
                         class="mt-3 mt-lg-2 mt-xl-2"
                       >
-                        <h6 class="follower">{{people.followers}} Community</h6>
+                        <h6 class="follower">{{people.followers}} {{ $t('network.Community') }}</h6>
                       </b-col>
                     </b-row>
                   </div>
@@ -40,39 +35,42 @@
                 <b-col lg="12" xl="12" cols="12" sm="12" md="12">
                   <div class="e-name">
                     <b-row class="mt-lg-0">
-                      <b-col md="6" lg="6" cols="6" sm="6" xl="6" class="mt-2 mt-lg-2 mt-xl-2 btn-2 center">
+                      <b-col
+                        md="6"
+                        lg="6"
+                        cols="6"
+                        sm="6"
+                        xl="6"
+                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
+                      >
                         <b-button
                           block
                           variant="primary"
                           size="sm"
-                          class="
-                            b-background
-                            flexx
-                            pobtn
-                            shadow
-                            mr-lg-3 mr-xl-3
-                          "
+                          class="b-background flexx pobtn shadow mr-lg-3 mr-xl-3"
+                          @click="cta(people)"
                         >
                           <i class="fas fa-envelope fa-lg btn-icon"></i>
-                          <span class="btn-text">Message</span>
+                          <span class="btn-text">{{ $t('network.Message') }}</span>
                         </b-button>
                       </b-col>
 
-                      <b-col md="6" lg="6" cols="6" sm="6" xl="6" class="mt-2 mt-lg-2 mt-xl-2 btn-2 center">
+                      <b-col
+                        md="6"
+                        lg="6"
+                        cols="6"
+                        sm="6"
+                        xl="6"
+                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
+                      >
                         <b-button
                           block
                           size="sm"
-                          class="
-                            b-background
-                            flexx
-                            pobtn
-                            shadow
-                            mr-lg-3 mr-xl-3
-                          "
+                          class="b-background flexx pobtn shadow mr-lg-3 mr-xl-3"
                           variant="primary"
                         >
                           <i class="fas fa-user-plus fa-lg btn-icon"></i>
-                          <span class="btn-com">Community</span>
+                          <span class="btn-com">{{ $t('network.Community') }}</span>
                         </b-button>
                       </b-col>
                     </b-row>
@@ -83,74 +81,136 @@
           </b-col>
         </b-row>
       </div>
-
-      
     </div>
-    <!-- {{peoples}} -->
   </div>
 </template>
 
 <script>
 export default {
-  props: ["peoples"],
+  props: ['peoples'],
+  computed: {
+    activeAccount() {
+      return this.$store.getters['auth/profilConnected'];
+    },
+    selectedChat() {
+      return this.$store.getters['businessChat/getSelectedChat'];
+    },
+  },
+  methods: {
+    cta(data) {
+      console.log(data);
+      this.$store.commit('businessChat/setSelectedChat', data);
+
+      let path = '';
+      let msgTabId = null;
+      if (this.activeAccount.user_type == 'business') {
+        msgTabId = 1;
+        path = '/business_owner/' + this.activeAccount.id;
+      } else if (this.activeAccount.user_type == 'network') {
+        msgTabId = 2;
+        path = '/network/' + this.activeAccount.id;
+      } else {
+        msgTabId = 0;
+        path = '/messaging';
+      }
+
+      this.$router.push({ path: `${path}`, query: { tabId: 1, msgTabId: msgTabId } });
+      // this.$router.push({ path: `/business_owner/${this.activeAccount.id}`, query: { tabId: 1, msgTabId: 0 } });
+    },
+  },
 };
 </script>
 
 <style scoped>
-@media only screen and (min-width: 768px) {
-  .s-cardd {
-    padding-left: 6px;
+
+
+
+@media only screen and (min-width: 768px) {  
+  .s-cardd{
+
+  padding-left: 6px;
     padding-right: 2px;
-  }
 
-  .btn-text {
-    margin-left: 8px;
-  }
-
-  .btn-com {
-    margin-left: 4px;
-  }
-  .btn-icon {
-    margin-top: 3px;
-  }
 }
+
+
+.btn-text{
+
+   margin-left: 8px;
+}
+
+.btn-com{
+  margin-left:4px;
+}
+.btn-icon{
+  margin-top:3px;
+}
+
+
+}
+
 
 @media only screen and (max-width: 768px) {
-  .btn-icon {
-    margin-top: 3px;
-  }
 
-  .btn-text {
-    margin-left: 5px;
-  }
+    
 
-  .btn-com {
-    margin-left: 3px;
-  }
+    .btn-icon{
+  margin-top:3px;
 }
+
+
+.btn-text{
+
+   margin-left: 5px;
+}
+
+
+.btn-com{
+  margin-left:3px;
+}
+
+
+}
+
+
+
+
+
 
 @media only screen and (max-width: 768px) {
-  .btnpngs {
-    width: 16px;
-    margin-right: 5px;
-  }
+     
 
-  .s-cardd {
-    padding-left: 6px;
-    padding-right: 2px;
-  }
+     .btnpngs{
+      width: 16px;
+    margin-right: 5px;
 }
+
+.s-cardd{
+
+  padding-left: 6px;
+    padding-right: 2px;
+
+}
+
+}
+
+
 
 @media only screen and (min-width: 768px) {
-  .btnpngs {
-    width: 20px;
+
+      .btnpngs{
+      width: 20px;
     margin-right: 5px;
-  }
 }
 
-.btn {
+
+}
+
+.btn{
   border-radius: 5px;
 }
+
+
 
 .flexx {
   display: inline-flex;
@@ -255,11 +315,13 @@ f-right {
 }
 
 @media only screen and (min-width: 1200px) {
-  .btn {
+  
+
+  .btn{
     width: 123px;
     height: 38px;
-    font-size: 14px;
-  }
+    font-size:14px;
+}
 
   .center {
     text-align: left;
@@ -271,6 +333,8 @@ f-right {
     margin-right: -15px;
     margin-top: 3px;
   }
+
+  
 
   .btn-2 {
     margin-left: 0px;
@@ -297,6 +361,8 @@ f-right {
     background-clip: border-box;
     border: 1px solid rgba(0, 0, 0, 0.125);
     margin-bottom: 10px;
+
+    
   }
 
   h6 {
@@ -306,6 +372,7 @@ f-right {
   h7 {
     font-size: 10px;
   }
+
 
   .btn {
     display: flex;
@@ -324,6 +391,7 @@ f-right {
   }
 
   .btn-2 {
+   
     width: 90px;
   }
 
@@ -347,6 +415,8 @@ f-right {
     background-clip: border-box;
     border: 1px solid rgba(0, 0, 0, 0.125);
     margin-bottom: 10px;
+
+   
   }
 
   h6 {
@@ -357,123 +427,155 @@ f-right {
     font-size: 10px;
   }
 
+  
   .btn {
     display: flex;
     font-size: 10px;
   }
 }
 
-@media only screen and (min-width: 764px) {
-  .p-buttons {
-    margin-right: 50px;
-    margin-left: 50px;
-    margin-bottom: 5px;
-    margin-top: 7px;
-    padding-right: 5px;
-  }
 
-  .p-avater {
+ @media only screen and  (min-width: 764px) {
+.p-buttons {
+  margin-right: 50px;
+  margin-left: 50px;
+  margin-bottom: 5px;
+  margin-top: 7px;
+  padding-right: 5px;
+}
+
+.p-avater {
+    
     width: 75px;
     height: 75px;
     margin-bottom: -4px;
     margin-left: -5px;
-  }
+}
 
-  .btn {
+
+
+.btn{
     width: 123px;
     height: 38px;
-    font-size: 14px;
-  }
+    font-size:14px;
+}
 
-  .center {
-    text-align: left;
-  }
+.center{
+  text-align: left;
+}
 
-  .username {
-    font-size: 18px;
-    text-overflow: ellipsis;
+
+.username{
+  font-size: 18px;
+  text-overflow: ellipsis;
     overflow: hidden;
     width: 100%;
     height: 1.2em;
     white-space: nowrap;
-  }
-
-  .follower {
-    font-size: 10px;
-  }
-
-  .shift {
-    margin-left: -40px;
-  }
 }
 
+.follower{
+    font-size: 10px;
+  
+}
+
+.shift{
+  margin-left: -40px;
+}
+
+ }
+
+
+
+
 @media only screen and (min-width: 764px) and (max-width: 991.18px) {
-  .center {
+  
+  .center{
     text-align: left;
   }
+
 }
 
 @media only screen and (max-width: 762px) {
-  .username {
-    font-size: 16px;
-    text-overflow: ellipsis;
+
+.username{
+  font-size: 16px;
+  text-overflow: ellipsis;
     overflow: hidden;
     width: 100%;
     height: 1.2em;
     white-space: nowrap;
-  }
+}
 
-  .btn {
-    width: 85px;
+.btn{width: 85px;
     height: 28px;
     font-size: 10px;
-  }
+    }
 
-  .p-avater {
+
+
+    .p-avater {
     width: 75px;
     height: 75px;
     margin-bottom: -8px;
     margin-left: -5px;
     margin-top: -4px;
-  }
+}
 
-  .shift {
-    margin-left: -40px;
-  }
+.shift{
+  margin-left: -40px;
+}
 
-  .follower {
+.follower {
     font-size: 10px;
     text-align: left;
-  }
+    
+}
 
-  .center {
-    text-align: left;
-  }
+.center{
+  text-align: left;
+}
 
-  .a-text {
-    margin-top: 2px;
-  }
+.a-text {
+  margin-top: 2px;
+}
+
 
   .pobtn {
     font-size: 10px;
+   
   }
-  .e-name {
+  .e-name{
     text-align: left;
-    margin-left: -20px;
+     margin-left:-20px
   }
 }
 
 @media only screen and (max-width: 521px) {
-  .e-name {
+    .e-name{
     text-align: left;
+   
   }
+    
 }
 
+
+
+
 @media only screen and (min-width: 992px) and (max-width: 1421px) {
-  .btn {
+
+       
+
+
+
+  .btn{
     width: 115px;
     height: 38px;
-    font-size: 14px;
-  }
+    font-size:14px;
 }
+
+
+}
+
+
 </style>

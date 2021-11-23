@@ -1,43 +1,33 @@
 <template>
-  <div>
-    
+
+  <div class="container">
+    <FlashMessage />
+    <hr />    
     <!-- partie mobile--------------------------------------------------------------------- 
     
     ----------------------DEBUT -----------------------------------------------------
     -->
     <div id="hidemobile">
       <div class="justify-content-between d-flex row cd B" style="margin-left: 7px">
-        <div
-          id="m1"
-          class="mobile green t col transition pl-4"
-          @click="changeElementType(1)"
-        >
+        <div id="m1" class="mobile green t col transition pl-4" @click="changeElementType(1)">
           <div class="cercle1">1</div>
           <h2 class="h2 text-position">All</h2>
         </div>
 
-        <div
-          id="m2"
-          class="mobile1 col t start-50"
-          @click="changeElementType(2)"
-        >
+        <div id="m2" class="mobile1 col t start-50" @click="changeElementType(2)">
           <div class="cercle2">2</div>
 
           <h2 class="h2 text-position text-center">In process</h2>
         </div>
 
-        <div
-          id="m3"
-          class="mobile3 col t start-50"
-          @click="changeElementType(3)"
-        >
+        <div id="m3" class="mobile3 col t start-50" @click="changeElementType(3)">
           <div class="cercle2">3</div>
 
           <h2 class="h2 text-position text-center">re-shedule</h2>
         </div>
         <div id="m4" class="mobile2 col t" @click="changeElementType(4)">
           <div class="cercle2">4</div>
-          <h2 class="h2 text-position text-center">Shipped </h2>
+          <h2 class="h2 text-position text-center">Shipped</h2>
         </div>
       </div>
 
@@ -46,7 +36,6 @@
         <div class="col">
           <h3 class="text-danger text-center margclear">clear history</h3>
         </div>
-        
       </div>
       <hr />
 
@@ -55,13 +44,10 @@
           <div class="show row">
             <div class="col-3">Show:</div>
             <div class="col">
-              <b-form-select
-                v-model="selected"
-                :options="options"
-              ></b-form-select>
+              <b-form-select v-model="selected" :options="options"></b-form-select>
             </div>
           </div>
-          <div v-for="i in etat1" :key="i">
+          <div v-for="(item, index) in getAll" :key="index">
             <div class="justify-content-start container row marghr">
               <div class="justify-content-start container">
                 <div class="container d-flex justify-content-end btn-marg">
@@ -72,30 +58,30 @@
                       text="Manage"
                       class="m-md-2"
                     >
-                      <b-dropdown-item>Archive</b-dropdown-item>
-                      <b-dropdown-item>Delete</b-dropdown-item>
+                      <b-dropdown-item @click="updateStatus(9,'archive')">Archive</b-dropdown-item>
+                      <b-dropdown-item @click="updateStatus(9,'cancel')">Delete</b-dropdown-item>
                       <b-dropdown-item>shipped</b-dropdown-item>
-                    <b-dropdown-item>reshedule</b-dropdown-item>
+                      <b-dropdown-item @click="updateStatus(9,'re-shedule')">reshedule</b-dropdown-item>
                     </b-dropdown>
                   </div>
                 </div>
                 <span class="gras">Order</span>
-                <span class="text-success order">#12324253</span> <br />
-                <span class="flou">yaoundé 12/12/2021 12H00</span>
+                <span class="text-success order">#{{item.oderId}}</span> <br />
+                <span class="flou">{{item.shippingAddress}} {{moment(item.dateCreated).format('DD/MM/YYYY HH:mm')}} </span>
               </div>
 
-             <span class="row posstatus">
+              <span class="row posstatus">
                 <p class="h3 statusp">status:</p>
-              <h3 class="text-success h3 margstatus ">{{ i }}</h3>
-             </span>
+                <h3 class="text-success h3 margstatus">{{ item.status }}</h3>
+              </span>
             </div>
             <hr />
 
             <div class="justify-content-center row">
               <div class="col-4 margimg">
                 <splide :options="{ rewind: true }" class="r-img1">
-                  <splide-slide cl v-for="(im, index) in img" :key="index">
-                    <img :src="img[index]" class="r-img1" />
+                  <splide-slide cl v-for="(im, index) in item.productImg " :key="index">
+                    <img :src="item.productImg[index]" class="r-img1" />
                   </splide-slide>
                 </splide>
               </div>
@@ -109,11 +95,11 @@
               </div>
 
               <div class="col-4">
-                <h3 class="h3">4</h3>
+                <h3 class="h3"> {{item.Totalproduct}} </h3>
 
-                <h3 class="h3">12000 XAF</h3>
-                <h3 class="h3">10000 XAF</h3>
-                <h3 class="h3">13000 XAF</h3>
+                <h3 class="h3">{{item.Totalprice}} XAF</h3>
+                <h3 class="h3">{{item.shipping_cost}} XAF</h3>
+                <h3 class="h3">{{item.total}} XAF</h3>
               </div>
             </div>
 
@@ -123,8 +109,8 @@
 
             <div class="justify-content-center container row">
               <div class="">
-                <button class="buttonm btn shadow text-center">
-                  <h3 class="h3 button-text">Re-order</h3>
+                <button  @click="updateStatus(9,'shipped')" class="buttonm btn shadow text-center">
+                  <h3 class="h3 button-text">shipped</h3>
                 </button>
               </div>
             </div>
@@ -134,19 +120,31 @@
             </div>
             <!-- <hr /> -->
           </div>
+            <div class="overflow-auto">
+            <div>
+              <h6 class="text-center">Pages {{ currentPage }}</h6>
+              <b-pagination
+                @input="getpage"
+                v-model="currentPage"
+                pills
+                :total-rows="rows"
+                :per-page="perPage"
+                align="center"
+                size="sm"
+              ></b-pagination>
+            </div>
+            </div>
+
         </div>
 
         <div v-if="status == 2" class="inprogress">
           <div class="show row">
             <div class="col-3">Show:</div>
             <div class="col">
-              <b-form-select
-                v-model="selected"
-                :options="options"
-              ></b-form-select>
+              <b-form-select v-model="selected" :options="options"></b-form-select>
             </div>
           </div>
-          <div v-for="i in 4" :key="i">
+          <div v-for="(item, index) in getProcess" :key="index">
             <div class="justify-content-start container row marghr">
               <div class="justify-content-start container">
                 <div class="container d-flex justify-content-end btn-marg">
@@ -157,30 +155,31 @@
                       text="Manage"
                       class="m-md-2"
                     >
-                      <b-dropdown-item>Archive</b-dropdown-item>
-                      <b-dropdown-item>Delete</b-dropdown-item>
+                    <b-dropdown-item>Archive</b-dropdown-item>
+                    
                       <b-dropdown-item>shipped</b-dropdown-item>
-                    <b-dropdown-item>reshedule</b-dropdown-item>
+                      <b-dropdown-item @click="updateStatus(9,'cancel')">Delete</b-dropdown-item>
+                    <b-dropdown-item  @click="updateStatus(9,'re-shedule')">reshedule</b-dropdown-item>
                     </b-dropdown>
                   </div>
                 </div>
                 <span class="gras">Order</span>
-                <span class="text-success order">#12324253</span> <br />
-                <span class="flou">yaoundé 12/12/2021 12H00</span>
+                 <span class="text-success order">#{{item.oderId}}</span> <br />
+                <span class="flou">{{item.shippingAddress}} {{moment(item.dateCreated).format('DD/MM/YYYY HH:mm')}} </span>
               </div>
 
               <span class="row posstatus">
                 <p class="h3 statusp">status:</p>
-              <h3 class="text-success h3 margstatus ">{{ etat }}</h3>
-             </span>
+                <h3 class="text-success h3 margstatus">{{ item.status  }}</h3>
+              </span>
             </div>
             <hr />
 
             <div class="justify-content-center row">
               <div class="col-4 margimg">
                 <splide :options="{ rewind: true }" class="r-img1">
-                  <splide-slide cl v-for="(im, index) in img" :key="index">
-                    <img :src="img[index]" class="r-img1" />
+                  <splide-slide cl v-for="(im, index) in item.productImg " :key="index">
+                    <img :src="item.productImg[index]" class="r-img1" />
                   </splide-slide>
                 </splide>
               </div>
@@ -194,11 +193,11 @@
               </div>
 
               <div class="col-4">
-                <h3 class="h3">4</h3>
+                <h3 class="h3"> {{item.Totalproduct}} </h3>
 
-                <h3 class="h3">12000 XAF</h3>
-                <h3 class="h3">10000 XAF</h3>
-                <h3 class="h3">13000 XAF</h3>
+                <h3 class="h3">{{item.Totalprice}} XAF</h3>
+                <h3 class="h3">{{item.shipping_cost}} XAF</h3>
+                <h3 class="h3">{{item.total}} XAF</h3>
               </div>
             </div>
 
@@ -208,8 +207,8 @@
 
             <div class="justify-content-center container row">
               <div class="">
-                <button class="buttonm btn shadow text-center">
-                  <h3 class="h3 button-text">Re-order</h3>
+                <button @click="updateStatus(9,'shipped')" class="buttonm btn shadow text-center">
+                  <h3 class="h3 button-text">Shipped</h3>
                 </button>
               </div>
             </div>
@@ -219,19 +218,30 @@
             </div>
             <!-- <hr /> -->
           </div>
+            <div class="overflow-auto">
+            <div>
+              <h6 class="text-center">Pages {{ currentPage }}</h6>
+              <b-pagination
+                @input="getpage"
+                v-model="currentPage"
+                pills
+                :total-rows="rows"
+                :per-page="perPage"
+                align="center"
+                size="sm"
+              ></b-pagination>
+            </div>
+            </div>
         </div>
 
         <div v-if="status == 3" class="complete">
           <div class="show row">
             <div class="col-3">Show:</div>
             <div class="col">
-              <b-form-select
-                v-model="selected"
-                :options="options"
-              ></b-form-select>
+              <b-form-select v-model="selected" :options="options"></b-form-select>
             </div>
           </div>
-          <div v-for="i in 4" :key="i">
+          <div v-for="(item, index) in getReshedule" :key="index">
             <div class="justify-content-start container row marghr">
               <div class="justify-content-start container">
                 <div class="container d-flex justify-content-end btn-marg">
@@ -241,31 +251,34 @@
                       id="dropdown-1"
                       text="Manage"
                       class="m-md-2"
+                      
                     >
-                      <b-dropdown-item>Archive</b-dropdown-item>
-                      <b-dropdown-item>Delete</b-dropdown-item>
-                      <b-dropdown-item>shipped</b-dropdown-item>
+
+                    <b-dropdown-item>Delete</b-dropdown-item>
+                    <b-dropdown-item>shipped</b-dropdown-item>
                     <b-dropdown-item>reshedule</b-dropdown-item>
+                      <b-dropdown-item @click="updateStatus(9,'cancel')">Delete</b-dropdown-item>
+                    <b-dropdown-item  @click="updateStatus(9,'re-shedule')">reshedule</b-dropdown-item>
                     </b-dropdown>
                   </div>
                 </div>
                 <span class="gras">Order</span>
-                <span class="text-success order">#12324253</span> <br />
-                <span class="flou">yaoundé 12/12/2021 12H00</span>
+                 <span class="text-success order">#{{item.oderId}}</span> <br />
+                <span class="flou">{{item.shippingAddress}} {{moment(item.dateCreated).format('DD/MM/YYYY HH:mm')}} </span>
               </div>
 
               <span class="row posstatus">
                 <p class="h3 statusp">status:</p>
-              <h3 class="text-success h3 margstatus ">{{ etat }}</h3>
-             </span>
+                <h3 class="text-success h3 margstatus">{{ item.status  }}</h3>
+              </span>
             </div>
             <hr />
 
             <div class="justify-content-center row">
               <div class="col-4 margimg">
                 <splide :options="{ rewind: true }" class="r-img1">
-                  <splide-slide cl v-for="(im, index) in img" :key="index">
-                    <img :src="img[index]" class="r-img1" />
+                  <splide-slide cl v-for="(im, index) in item.productImg " :key="index">
+                    <img :src="item.productImg[index]" class="r-img1" />
                   </splide-slide>
                 </splide>
               </div>
@@ -279,11 +292,11 @@
               </div>
 
               <div class="col-4">
-                <h3 class="h3">4</h3>
+                 <h3 class="h3"> {{item.Totalproduct}} </h3>
 
-                <h3 class="h3">12000 XAF</h3>
-                <h3 class="h3">10000 XAF</h3>
-                <h3 class="h3">13000 XAF</h3>
+                <h3 class="h3">{{item.Totalprice}} XAF</h3>
+                <h3 class="h3">{{item.shipping_cost}} XAF</h3>
+                <h3 class="h3">{{item.total}} XAF</h3>
               </div>
             </div>
 
@@ -293,8 +306,8 @@
 
             <div class="justify-content-center container row">
               <div class="">
-                <button class="buttonm btn shadow text-center">
-                  <h3 class="h3 button-text">Re-order</h3>
+                <button @click="updateStatus(9,'shipped')" class="buttonm btn shadow text-center">
+                  <h3 class="h3 button-text">Shipped</h3>
                 </button>
               </div>
             </div>
@@ -304,19 +317,32 @@
             </div>
             <!-- <hr /> -->
           </div>
+
+          <div class="overflow-auto">
+            <div>
+              <h6 class="text-center">Pages {{ currentPage }}</h6>
+              <b-pagination
+                @input="getpage"
+                v-model="currentPage"
+                pills
+                :total-rows="rows"
+                :per-page="perPage"
+                align="center"
+                size="sm"
+              ></b-pagination>
+            </div>
+            </div>
+
         </div>
 
         <div v-if="status == 4" class="cancel">
           <div class="show row">
             <div class="col-3">Show:</div>
             <div class="col">
-              <b-form-select
-                v-model="selected"
-                :options="options"
-              ></b-form-select>
+              <b-form-select v-model="selected" :options="options"></b-form-select>
             </div>
           </div>
-          <div v-for="i in 4" :key="i">
+          <div v-for="(item, index) in getShipped" :key="index">
             <div class="justify-content-start container row marghr">
               <div class="justify-content-start container">
                 <div class="container d-flex justify-content-end btn-marg">
@@ -327,30 +353,30 @@
                       text="Manage"
                       class="m-md-2"
                     >
-                      <b-dropdown-item>Archive</b-dropdown-item>
-                      <b-dropdown-item>Delete</b-dropdown-item>
+                      <b-dropdown-item @click="updateStatus(9,'archive')">Archive</b-dropdown-item>
+                      <b-dropdown-item @click="updateStatus(9,'cancel')">Delete</b-dropdown-item>   
                       <b-dropdown-item>shipped</b-dropdown-item>
-                    <b-dropdown-item>reshedule</b-dropdown-item>
+                      <b-dropdown-item>reshedule</b-dropdown-item>    
                     </b-dropdown>
                   </div>
                 </div>
                 <span class="gras">Order</span>
-                <span class="text-success order">#12324253</span> <br />
-                <span class="flou">yaoundé 12/12/2021 12H00</span>
+                <span class="text-success order">#{{item.oderId}}</span> <br />
+                <span class="flou">{{item.shippingAddress}} {{moment(item.dateCreated).format('DD/MM/YYYY HH:mm')}} </span>
               </div>
 
               <span class="row posstatus">
                 <p class="h3 statusp">status:</p>
-              <h3 class="text-success h3 margstatus ">{{ etat }}</h3>
-             </span>
+                <h3 class="text-success h3 margstatus">{{ item.status }}</h3>
+              </span>
             </div>
             <hr />
 
             <div class="justify-content-center row">
               <div class="col-4 margimg">
                 <splide :options="{ rewind: true }" class="r-img1">
-                  <splide-slide cl v-for="(im, index) in img" :key="index">
-                    <img :src="img[index]" class="r-img1" />
+                  <splide-slide cl v-for="(im, index) in item.productImg " :key="index">
+                    <img :src="item.productImg[index]" class="r-img1" />
                   </splide-slide>
                 </splide>
               </div>
@@ -364,11 +390,11 @@
               </div>
 
               <div class="col-4">
-                <h3 class="h3">4</h3>
+                <h3 class="h3"> {{item.Totalproduct}} </h3>
 
-                <h3 class="h3">12000 XAF</h3>
-                <h3 class="h3">10000 XAF</h3>
-                <h3 class="h3">13000 XAF</h3>
+                <h3 class="h3">{{item.Totalprice}} XAF</h3>
+                <h3 class="h3">{{item.shipping_cost}} XAF</h3>
+                <h3 class="h3">{{item.total}} XAF</h3>
               </div>
             </div>
 
@@ -376,19 +402,27 @@
               <br />
             </div>
 
-            <div class="justify-content-center container row">
-              <div class="">
-                <button class="buttonm btn shadow text-center">
-                  <h3 class="h3 button-text">Re-order</h3>
-                </button>
-              </div>
-            </div>
             <div class="justify-content-center container row">
               <br />
               <br />
             </div>
             <!-- <hr /> -->
           </div>
+
+          <div class="overflow-auto">
+            <div>
+              <h6 class="text-center">Pages {{ currentPage }}</h6>
+              <b-pagination
+                @input="getpage"
+                v-model="currentPage"
+                pills
+                :total-rows="rows"
+                :per-page="perPage"
+                align="center"
+                size="sm"
+              ></b-pagination>
+            </div>
+            </div>
         </div>
       </div>
     </div>
@@ -403,11 +437,7 @@
       <div class="row parent">
         <b-avatar id="a1" class="avatar bg-success" text="1"></b-avatar>
         <h2 class="text cursor" @click="changeElementType(1)">All</h2>
-        <div
-          id="p1"
-          class="progress prog cursor gris bg-success"
-          @click="changeElementType(1)"
-        >
+        <div id="p1" class="progress prog cursor gris bg-success" @click="changeElementType(1)">
           <div
             class="progress-bar bg-success"
             role="progressbar"
@@ -419,11 +449,7 @@
 
         <b-avatar id="a2" class="avatar" text="2"></b-avatar>
         <h2 class="text cursor" @click="changeElementType(2)">In Process</h2>
-        <div
-          id="p2"
-          class="progress prog cursor gris"
-          @click="changeElementType(2)"
-        >
+        <div id="p2" class="progress prog cursor gris" @click="changeElementType(2)">
           <div
             class="progress-bar bg-success"
             role="progressbar"
@@ -434,12 +460,8 @@
         </div>
 
         <b-avatar id="a3" class="avatar" text="3"></b-avatar>
-        <h2 class="text cursor" @click="changeElementType(3)"> Re-shedule</h2>
-        <div
-          id="p3"
-          class="progress prog cursor gris"
-          @click="changeElementType(3)"
-        >
+        <h2 class="text cursor" @click="changeElementType(3)">Re-shedule</h2>
+        <div id="p3" class="progress prog cursor gris" @click="changeElementType(3)">
           <div
             class="progress-bar bg-success"
             role="progressbar"
@@ -451,11 +473,7 @@
 
         <b-avatar id="a4" class="avatar" text="4"></b-avatar>
         <h2 class="text cursor" @click="changeElementType(4)">Shipped</h2>
-        <div
-          id="p4"
-          class="progress prog cursor gris"
-          @click="changeElementType(4)"
-        >
+        <div id="p4" class="progress prog cursor gris" @click="changeElementType(4)">
           <div
             class="progress-bar bg-success"
             role="progressbar"
@@ -467,7 +485,7 @@
       </div>
 
       <div class="justify-content-between container row my-4">
-        <div class="col order"><h3 class="bold1">My orders</h3></div>
+        <div class="col order"><h3 class="bold1" >My orders</h3></div>
         <div class="status"><h3 class="text-danger">clear history</h3></div>
       </div>
 
@@ -476,13 +494,10 @@
           <div class="show row">
             <div class="col-3">Show:</div>
             <div class="col">
-              <b-form-select
-                v-model="selected"
-                :options="options"
-              ></b-form-select>
+              <b-form-select v-model="selected" :options="options"></b-form-select>
             </div>
           </div>
-          <div v-for="i in etat1" :key="i">
+          <div v-for="item in getAll" :key="item.oderId">
             <div class="justify-content-start container">
               <div class="container d-flex justify-content-end btn-marg">
                 <div class="manage">
@@ -492,26 +507,26 @@
                     text="Manage"
                     class="m-md-2"
                   >
-                    <b-dropdown-item>Archive</b-dropdown-item>
-                    <b-dropdown-item>Delete</b-dropdown-item>
+                    <b-dropdown-item @click="updateStatus(9,'archive')">Archive</b-dropdown-item>
+                    <b-dropdown-item @click="updateStatus(9,'cancel')">Delete</b-dropdown-item>
                     <b-dropdown-item>shipped</b-dropdown-item>
-                    <b-dropdown-item>reshedule</b-dropdown-item>
+                    <b-dropdown-item @click="updateStatus(9,'re-shedule')">reshedule</b-dropdown-item>
                   </b-dropdown>
                 </div>
               </div>
-              <router-link to="/business_owner/ordersdetail">
-              <span class="gras">Order</span>
-              <span class="text-success">#12324253</span> <br />
-              </router-link>
-              <span class="flou">yaoundé 12/12/2021 12H00</span>
+
+              <span class="gras" >Order</span>
+              <span class="text-success">#{{ item.oderId }}</span> <br />
+
+              <span class="flou">{{ item.shippingAddress }}{{ moment(item.dateCreated).format('DD/MM/YYYY HH:mm') }}</span>
               <hr />
             </div>
 
             <div class="justify-content-between row">
               <div class="col-3">
                 <splide :options="{ rewind: true }" class="r-img">
-                  <splide-slide cl v-for="(im, index) in img" :key="index">
-                    <img :src="img[index]" class="r-img" />
+                  <splide-slide cl v-for="(im, index) in item.productImg " :key="index">
+                    <img :src="item.productImg[index]" class="r-img" />
                   </splide-slide>
                 </splide>
               </div>
@@ -525,20 +540,20 @@
               </div>
 
               <div class="col-3 text-start">
-                <h3>4</h3>
-                <h3>2000 Fcfa</h3>
-                <h3>4000 Fcfa</h3>
-                <h3>6000 XAF</h3>
+                <h3>{{ item.Totalproduct }}</h3>
+                <h3>{{ item.Totalprice }} Fcfa</h3>
+                <h3>{{ item.shipping_cost }} Fcfa</h3>
+                <h3>{{ item.total }} Fcfa</h3>
               </div>
 
               <div class="col" id="hidedesktop1">
                 <h3 class="bold1">status</h3>
-                <h3 class="text-success">{{ i }}</h3>
+                <h3 class="text-success">{{ item.status }}</h3>
               </div>
 
               <div class="container d-flex justify-content-end btn-marg">
-                <button class="button btn shadow">
-                  <h3 class="h3 button-text">Re-order</h3>
+                <button @click="updateStatus(9,'shipped')" class="button btn shadow">
+                  <h3 class="h3 button-text">Shipped</h3>
                 </button>
               </div>
 
@@ -549,6 +564,21 @@
               <div class="justify-content-center container row">
                 <br />
               </div>
+            </div>
+          </div>
+
+          <div class="overflow-auto">
+            <div>
+              <h6 class="text-center">Pages {{ currentPage }}</h6>
+              <b-pagination
+                @input="getpage"
+                v-model="currentPage"
+                pills
+                :total-rows="rows"
+                :per-page="perPage"
+                align="center"
+                size="sm"
+              ></b-pagination>
             </div>
           </div>
         </div>
@@ -557,14 +587,11 @@
           <div class="show row">
             <div class="col-3">Show:</div>
             <div class="col">
-              <b-form-select
-                v-model="selected"
-                :options="options"
-              ></b-form-select>
+              <b-form-select v-model="selected" :options="options"></b-form-select>
             </div>
           </div>
 
-          <div v-for="i in 4" :key="i">
+          <div v-for="(item, index) in getProcess" :key="index">
             <div class="justify-content-start container">
               <div class="container d-flex justify-content-end btn-marg">
                 <div class="manage">
@@ -574,24 +601,25 @@
                     text="Manage"
                     class="m-md-2"
                   >
-                    <b-dropdown-item>Archive</b-dropdown-item>
-                    <b-dropdown-item>Delete</b-dropdown-item>
+                    <b-dropdown-item @click="updateStatus(9,'cancel')">Delete</b-dropdown-item>
+                    <b-dropdown-item  @click="updateStatus(9,'re-shedule')">reshedule</b-dropdown-item>
+
                     <b-dropdown-item>shipped</b-dropdown-item>
                     <b-dropdown-item>reshedule</b-dropdown-item>
                   </b-dropdown>
                 </div>
               </div>
               <span class="gras">Order</span>
-              <span class="text-success">#12324253</span> <br />
-              <span class="flou">yaoundé 12/12/2021 12H00</span>
+              <span class="text-success"># {{ item.oderId }}</span> <br />
+              <span class="flou">{{ item.shippingAddress }} {{ moment(item.dateCreated).format('DD/MM/YYYY HH:mm') }}</span>
               <hr />
             </div>
 
             <div class="justify-content-between row">
               <div class="col-3">
                 <splide :options="{ rewind: true }" class="r-img">
-                  <splide-slide cl v-for="(im, index) in img" :key="index">
-                    <img :src="img[index]" class="r-img" />
+                  <splide-slide cl v-for="(im, index) in item.productImg " :key="index">
+                    <img :src="item.productImg[index]" class="r-img" />
                   </splide-slide>
                 </splide>
               </div>
@@ -605,20 +633,20 @@
               </div>
 
               <div class="col-3 text-start">
-                <h3>4</h3>
-                <h3>2000 Fcfa</h3>
-                <h3>4000 Fcfa</h3>
-                <h3>6000 XAF</h3>
+                <h3>{{ item.Totalproduct }}</h3>
+                <h3>{{ item.Totalprice }} Fcfa</h3>
+                <h3>{{ item.shipping_cost }} Fcfa</h3>
+                <h3>{{ item.total }} Fcfa</h3>
               </div>
 
               <div class="col" id="hidedesktop1">
                 <h3 class="bold1">status</h3>
-                <h3 class="text-success">{{ etat }}</h3>
+                <h3 class="text-success">{{ item.status }}</h3>
               </div>
 
               <div class="container d-flex justify-content-end btn-marg">
-                <button class="button btn shadow">
-                  <h3 class="h3 button-text">Re-order</h3>
+                <button @click="updateStatus(9,'shipped')" class="button btn shadow">
+                  <h3 class="h3 button-text">Shipped</h3>
                 </button>
               </div>
 
@@ -629,6 +657,20 @@
               <div class="justify-content-center container row">
                 <br />
               </div>
+            </div>
+          </div>
+          <div class="overflow-auto">
+            <div>
+              <h6 class="text-center">Pages {{ currentPage }}</h6>
+              <b-pagination
+                @input="getpage"
+                v-model="currentPage"
+                pills
+                :total-rows="rows"
+                :per-page="perPage"
+                align="center"
+                size="sm"
+              ></b-pagination>
             </div>
           </div>
         </div>
@@ -638,14 +680,11 @@
           <div class="show row">
             <div class="col-3">Show:</div>
             <div class="col">
-              <b-form-select
-                v-model="selected"
-                :options="options"
-              ></b-form-select>
+              <b-form-select v-model="selected" :options="options"></b-form-select>
             </div>
           </div>
 
-          <div v-for="i in 4" :key="i">
+          <div v-for="(item, index) in getReshedule" :key="index">
             <div class="justify-content-start container">
               <div class="container d-flex justify-content-end btn-marg">
                 <div class="manage">
@@ -655,24 +694,22 @@
                     text="Manage"
                     class="m-md-2"
                   >
-                    <b-dropdown-item>Archive</b-dropdown-item>
-                    <b-dropdown-item>Delete</b-dropdown-item>
-                    <b-dropdown-item>shipped</b-dropdown-item>
-                    <b-dropdown-item>reshedule</b-dropdown-item>
+                    <b-dropdown-item @click="updateStatus(9,'delete')">Delete</b-dropdown-item>
+                    <b-dropdown-item  @click="updateStatus(9,'re-shedule')">reshedule</b-dropdown-item>
                   </b-dropdown>
                 </div>
               </div>
               <span class="gras">Order</span>
-              <span class="text-success">#12324253</span> <br />
-              <span class="flou">yaoundé 12/12/2021 12H00</span>
+              <span class="text-success">#{{ item.oderId }}</span> <br />
+              <span class="flou">{{ item.shippingAddress }}, {{ moment(item.dateCreated).format('DD/MM/YYYY HH:mm') }}</span>
               <hr />
             </div>
 
             <div class="justify-content-between row">
               <div class="col-3">
                 <splide :options="{ rewind: true }" class="r-img">
-                  <splide-slide cl v-for="(im, index) in img" :key="index">
-                    <img :src="img[index]" class="r-img" />
+                  <splide-slide cl v-for="(im, index) in item.productImg " :key="index">
+                    <img :src="item.productImg[index]" class="r-img" />
                   </splide-slide>
                 </splide>
               </div>
@@ -686,30 +723,45 @@
               </div>
 
               <div class="col-3 text-start">
-                <h3>4</h3>
-                <h3>2000 Fcfa</h3>
-                <h3>4000 Fcfa</h3>
-                <h3>6000 XAF</h3>
+                <h3>{{ item.Totalproduct }}</h3>
+                <h3>{{ item.Totalprice }} Fcfa</h3>
+                <h3>{{ item.shipping_cost }} Fcfa</h3>
+                <h3>{{ item.total }} XAF</h3>
               </div>
 
               <div class="col" id="hidedesktop1">
                 <h3 class="bold1">status</h3>
-                <h3 class="text-success">{{ etat }}</h3>
+                <h3 class="text-success">{{ item.status }}</h3>
               </div>
 
               <div class="container d-flex justify-content-end btn-marg">
-                <button class="button btn shadow">
-                  <h3 class="h3 button-text">Re-order</h3>
+                <button @click="updateStatus(9,'shipped')" class="button btn shadow">
+                  <h3 class="h3 button-text">Shipped</h3>
                 </button>
               </div>
 
-              <div class="justify-content-center container row">
+              <div class="justify-content-cetatenter container row">
                 <br />
               </div>
 
               <div class="justify-content-center container row">
                 <br />
               </div>
+            </div>
+          </div>
+
+          <div class="overflow-auto">
+            <div>
+              <h6 class="text-center">Pages {{ currentPage }}</h6>
+              <b-pagination
+                @input="getpage"
+                v-model="currentPage"
+                pills
+                :total-rows="rows"
+                :per-page="perPage"
+                align="center"
+                size="sm"
+              ></b-pagination>
             </div>
           </div>
         </div>
@@ -718,14 +770,11 @@
           <div class="show row">
             <div class="col-3">Show:</div>
             <div class="col">
-              <b-form-select
-                v-model="selected"
-                :options="options"
-              ></b-form-select>
+              <b-form-select v-model="selected" :options="options"></b-form-select>
             </div>
           </div>
 
-          <div v-for="i in 4" :key="i">
+          <div v-for="(item, index) in getShipped" :key="index">
             <div class="justify-content-start container">
               <div class="container d-flex justify-content-end btn-marg">
                 <div class="manage">
@@ -735,22 +784,22 @@
                     text="Manage"
                     class="m-md-2"
                   >
-                    <b-dropdown-item>Archive</b-dropdown-item>
-                    <b-dropdown-item>Delete</b-dropdown-item>
+                    <b-dropdown-item @click="updateStatus(9,'archive')">Archive</b-dropdown-item>
+                    <b-dropdown-item @click="updateStatus(9,'cancel')">Delete</b-dropdown-item>
                   </b-dropdown>
                 </div>
               </div>
               <span class="gras">Order</span>
-              <span class="text-success">#12324253</span> <br />
-              <span class="flou">yaoundé 12/12/2021 12H00</span>
+              <span class="text-success"># {{ item.oderId }}</span> <br />
+              <span class="flou">{{ item.shippingAddress }}, {{ moment(item.dateCreated).format('DD/MM/YYYY HH:mm') }}</span>
               <hr />
             </div>
 
             <div class="justify-content-between row">
               <div class="col-3">
                 <splide :options="{ rewind: true }" class="r-img">
-                  <splide-slide cl v-for="(im, index) in img" :key="index">
-                    <img :src="img[index]" class="r-img" />
+                  <splide-slide cl v-for="(im, index) in item.productImg " :key="index">
+                    <img :src="item.productImg[index]" class="r-img" />
                   </splide-slide>
                 </splide>
               </div>
@@ -764,21 +813,15 @@
               </div>
 
               <div class="col-3 text-start">
-                <h3>4</h3>
-                <h3>2000 Fcfa</h3>
-                <h3>4000 Fcfa</h3>
-                <h3>6000 XAF</h3>
+                <h3>{{ item.Totalproduct }}</h3>
+                <h3>{{ item.Totalprice }} Fcfa</h3>
+                <h3>{{ item.shipping_cost }} Fcfa</h3>
+                <h3>{{ item.total }} Fcfa</h3>
               </div>
 
               <div class="col" id="hidedesktop1">
                 <h3 class="bold1">status</h3>
-                <h3 class="text-success">{{ etat }}</h3>
-              </div>
-
-              <div class="container d-flex justify-content-end btn-marg">
-                <button class="button btn shadow">
-                  <h3 class="h3 button-text">Re-order</h3>
-                </button>
+                <h3 class="text-success">{{ item.status }}</h3>
               </div>
 
               <div class="justify-content-center container row">
@@ -790,74 +833,216 @@
               </div>
             </div>
           </div>
+
+          <div class="overflow-auto">
+            <div>
+              <h6 class="text-center">Pages {{ currentPage }}</h6>
+              <b-pagination
+                @input="getpage"
+                v-model="currentPage"
+                pills
+                :total-rows="rows"
+                :per-page="perPage"
+                align="center"
+                size="sm"
+              ></b-pagination>
+            </div>
+            </div>
         </div>
+
+       
+        
       </div>
     </div>
+
   </div>
 </template>
 
 <script>
-
+import moment from 'moment';
 
 export default {
- 
   data() {
     return {
-      selected: "",
-      rimg: "",
+      moment: moment,
+      rows: 0,
+      currentPage: 0,
+      perPage: 10,
+      selected: '',
+      rimg: '',
+      url: null,
+      
       status: 1,
-      etat: "All",
-      img: ["http://urlr.me/YMQXD", "https://placekitten.com/400/300"],
+      etat: 'All',
+      
       options: [
-        { value: null, text: "Please select an option" },
-        { value: "a", text: "last 5 days" },
-        { value: "b", text: "last 10 days" },
+        { value: null, text: 'Please select an option' },
+        { value: 'a', text: 'last 5 days' },
+        { value: 'b', text: 'last 10 days' },
       ],
-      etat1: ["in process", "complete", "cancel"],
+      etat1: ['in process', 'complete', 'cancel']
+      
+      
     };
   },
 
-  mounted() {},
+  
+
+
+  mounted() {
+    this.url = this.$route.params.id;
+   let url =  window.location.href.split("/");
+   let data = url[window.location.href.split("/").length - 1];
+   console.log(data);
+   this.$store
+     .dispatch('orderBusiness/getOrder', data)
+     .then(() => {
+       console.log('hey yeah');
+     
+       this.rows = this.limitall
+     })
+     .catch((err) => {
+       console.log({ err: err });
+     });
+
+   
+ },
+
 
   methods: {
     changeElementType(p) {
-      console.log("------------------" + p);
+      console.log('------------------' + p);
       this.status = p;
 
       if (p == 1) {
-        this.etat = "All";
+        this.etat = 'All';
+        this.rows = this.limitall;
+      
+        this.currentPage= 1;
       } else if (p == 2) {
-        this.etat = "In process";
+        this.etat = 'In process';
+        this.rows = this.limitprocess;
+        this.currentPage= 1;
       } else if (p == 3) {
-        this.etat = "Re-shedule";
+        this.etat = 'Re-shedule';
+        this.rows = this.limitshedule;
+        this.currentPage= 1;
       } else if (p == 4) {
-        this.etat = "Shipped";
+        this.etat = 'Shipped';
+        this.rows = this.limitshipped;
+        this.currentPage= 1;
       }
       //transition partie desktop
-      const a = document.getElementById("a" + p);
-      const pr = document.getElementById("p" + p);
+      const a = document.getElementById('a' + p);
+      const pr = document.getElementById('p' + p);
 
-      const as = document.querySelectorAll(".avatar");
+      const as = document.querySelectorAll('.avatar');
       as.forEach((dat) => {
-        dat.classList.remove("bg-success");
+        dat.classList.remove('bg-success');
       });
-      a.classList.add("bg-success");
+      a.classList.add('bg-success');
 
-      const ps = document.querySelectorAll(".progress");
+      const ps = document.querySelectorAll('.progress');
       ps.forEach((dat) => {
-        dat.classList.remove("bg-success");
+        dat.classList.remove('bg-success');
       });
-      pr.classList.add("bg-success");
+      pr.classList.add('bg-success');
 
       //transition partie mobile
 
-      const el = document.getElementById("m" + p);
-      const els = document.querySelectorAll(".t");
+      const el = document.getElementById('m' + p);
+      const els = document.querySelectorAll('.t');
       els.forEach((dat) => {
-        dat.classList.remove("green");
+        dat.classList.remove('green');
       });
-      el.classList.add("green");
+      el.classList.add('green');
     },
+    getpage() {
+      let start = this.getCurrentpage * this.perPage;
+         console.log(this.getCurrentpage);
+     
+    },
+
+
+
+
+    updateStatus(order_id, status) {
+      console.log("updateStatus")
+      console.log("order_id", order_id)
+      console.log("business_id", this.url)
+      console.log("status", status)
+      let formData = new FormData();
+      formData.append("order_id", order_id)
+      formData.append("business_id", this.url)
+      formData.append("status", status)
+      this.$store
+        .dispatch("orderBusiness/updateOrderStatus", 
+        {
+          path: "order/updateOrder",
+          formData: formData
+        })
+        .then(({data}) => {
+          console.log('ohh year');
+          console.log(data);
+          this.flashMessage.show({
+            status: "success",
+            message: "Status Changed To "+status
+          });
+        })
+        .catch(err => {
+          console.log({ err: err });
+          this.flashMessage.show({
+            status: "error",
+            message: "Unable to Change Status"
+          });
+        });
+    },
+    
+
+    
+
+    
+  },
+
+  computed: {
+
+    getCurrentpage() {
+      return this.currentPage;
+    },
+
+     getAll () {
+       let start = this.getCurrentpage * this.perPage;
+    return  this.$store.state.orderBusiness.all.slice(start - this.perPage, start - this.perPage+this.perPage )
+  },
+    getProcess () {
+      let start = this.getCurrentpage * this.perPage;
+    return this.$store.getters["orderBusiness/process"].slice(start - this.perPage, start - this.perPage+this.perPage );
+  },
+
+  getReshedule () {
+    let start = this.getCurrentpage * this.perPage;
+    return this.$store.getters["orderBusiness/reshedule"].slice(start - this.perPage, start - this.perPage+this.perPage );
+  },
+  getShipped () {
+    let start = this.getCurrentpage * this.perPage;
+    return this.$store.getters["orderBusiness/shipped"].slice(start - this.perPage, start - this.perPage+this.perPage );
+  },
+
+limitall(){
+  return  this.$store.state.orderBusiness.all.length ;
+},
+
+limitprocess(){
+  return this.$store.getters["orderBusiness/process"].length;
+},
+
+limitshedule(){
+  return this.$store.getters["orderBusiness/reshedule"].length ;
+},
+limitshipped(){
+  return this.$store.getters["orderBusiness/shipped"].length;
+}
+    
   },
 
 
@@ -870,10 +1055,9 @@ export default {
   color: #b6b2b2;
 }
 .show {
-    margin-left: 2px;
+  margin-left: 2px;
   margin-bottom: 70px;
-   width: 370px;
-
+  width: 370px;
 }
 .manage {
   margin-bottom: -60px;
@@ -987,7 +1171,7 @@ h3 {
   margin-top: 30px;
   margin-bottom: -20px;
 }
-.posstatus{
+.posstatus {
   margin-left: 195px;
   margin-top: -18px;
 }
@@ -1195,14 +1379,14 @@ h3 {
   }
   .cercle2 {
     margin-left: 50px !important;
-    width: 18px ;
+    width: 18px;
     height: 18px;
-     line-height: 20px;
+    line-height: 20px;
   }
-.cercle1{
-   width: 18px ;
+  .cercle1 {
+    width: 18px;
     height: 18px;
-}
+  }
 
   #hidedesktop {
     display: none;
@@ -1219,8 +1403,8 @@ h3 {
   }
   .cercle2 {
     margin-left: 3px !important;
-     width: 17px;
-       height: 17px;
+    width: 17px;
+    height: 17px;
   }
   .gras {
     font-size: 12px !important;
@@ -1237,21 +1421,21 @@ h3 {
   .marghr {
     margin-bottom: -20px;
   }
-  .manage{
+  .manage {
     margin-top: -6px !important;
     margin-right: -12px !important;
   }
 }
-  @media only screen and (max-width: 470px) {
-    .h2 {
-      font-size: 10px !important;
-      margin-left: 5px;
-    }
-    .cercle2 {
-      margin-left: -4px !important;
-    }
-  
-   .manage{
+@media only screen and (max-width: 470px) {
+  .h2 {
+    font-size: 10px !important;
+    margin-left: 5px;
+  }
+  .cercle2 {
+    margin-left: -4px !important;
+  }
+
+  .manage {
     margin-top: -6px !important;
     margin-right: -12px !important;
   }

@@ -37,7 +37,7 @@
                     class="mt-3 mt-lg-1 mt-xl-0"
                   >
                     <h6 class="follower text">
-                      {{ people.followers }} Community
+                      {{ people.followers }} {{$t("search.Community")}}
                     </h6>
                   </b-col>
                 </b-row>
@@ -62,7 +62,7 @@
                       class="b-background flexx pobtn shadow"
                     >
                       <i class="fas fa-envelope fa-lg btn-icon"></i>
-                      <span class="btn-text">Message</span>
+                      <span class="btn-text">{{$t("search.Message")}}</span>
                     </b-button>
                   </b-col>
 
@@ -81,7 +81,7 @@
                       variant="primary"
                     >
                       <i class="fas fa-user-plus fa-lg btn-icon"></i>
-                      <span class="btn-com">Community</span>
+                      <span class="btn-com">{{$t("search.Community")}}</span>
                     </b-button>
                   </b-col>
                 </b-row>
@@ -100,7 +100,6 @@ export default {
   props: {
     people: {
       type: Object,
-      require: true,
     },
   },
 };

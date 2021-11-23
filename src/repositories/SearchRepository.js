@@ -17,7 +17,7 @@ class Repository {
       console.log(error)
       return {
         success: false,
-        data: error
+        data: error.response.message
       }
     }
   }
@@ -35,7 +35,7 @@ class Repository {
     } catch (error) {
       return {
         success: false,
-        data: error
+        data: error.response.message
       }
     }
   }
@@ -52,7 +52,7 @@ class Repository {
     } catch (error) {
       return {
         success: false,
-        data: error
+        data: error.response.message
       }
     }
   }
@@ -69,13 +69,12 @@ class Repository {
     } catch (error) {
       return {
         success: false,
-        data: error
+        data: error.response.message
       }
     }
   }
 
 }
-
 
 export default new Repository()
 

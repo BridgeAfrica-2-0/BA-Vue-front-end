@@ -4,13 +4,13 @@
         <div class="d-flex align-items-center py-1 px-2">
           <b-avatar class="mr-3"></b-avatar>
             <p>
-              <span class="mr-auto">Share as</span><br>
+              <span class="mr-auto">{{$t("search.Share_as")}}</span><br>
               <span class="mr-auto">J. Circlehead</span>
             </p>
           </div>
         <div>
 
-        <b-form-textarea placeholder="What your mind" class="input-search"></b-form-textarea>
+        <b-form-textarea :placeholder="$t('search.What_your_mind')" class="input-search"></b-form-textarea>
 
         <div class="body mb-3 py-1">
            <img

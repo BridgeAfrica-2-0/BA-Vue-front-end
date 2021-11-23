@@ -2,41 +2,6 @@
   <div>
     <div id="app">
       <div id="verify-container">
-
-
-
-         <div class=content>
-  <div class="wrapper-1">
-    <div class="wrapper-2">
-      <h1 class="h1text">Thank you !</h1>
-      <p>CHECK YOUR EMAIL NOW! </p>
-      <br>   
-      <p class="small-text">IMPORTANT: To Temporaly activate your account, verify your email address through the message we just emailed you.
-
-NOTE: IT MAY LAND IN YOUR SPAM FOLDER  </p>
-      <button class="go-home">
-      go home
-      </button>
-    </div>
-    
-</div>
-</div>
-
-
-
-<link href="https://fonts.googleapis.com/css?family=Kaushan+Script|Source+Sans+Pro" rel="stylesheet">
-
-
-
-
-
-
-
-
-
-
-
-
         <div class="c516 c513">
           <div>
             <div v-if="showemail" class="c515 c512" id="verify-container">
@@ -44,10 +9,10 @@ NOTE: IT MAY LAND IN YOUR SPAM FOLDER  </p>
                 <div>
                   <h1 class="text-center">Welcome!</h1>
                   <br />
-                  <p class="text-center">Create a free membership to shop special discounts on premium brands, travel and tickets.</p>
+                  <h5 class="text-center">Create a free membership to shop special discounts on premium brands, travel and tickets.</h5>
 
                   <br />
-                 
+                  <br />
 
                   <div>
                     <div style="padding-top: 15px">
@@ -548,7 +513,7 @@ NOTE: IT MAY LAND IN YOUR SPAM FOLDER  </p>
                       </div>
 
                       <div v-if="showlawenforcementstatus">
-                        <h1 class="no-padding-bottom"> Status </h1>
+                        <h1 class="no-padding-bottom">Profession 003</h1>
                         <br />
 
                         <li
@@ -648,7 +613,7 @@ NOTE: IT MAY LAND IN YOUR SPAM FOLDER  </p>
                       </div>
 
                       <div v-if="showlawenforcementstatus">
-                        <h1 class="no-padding-bottom">Status</h1>
+                        <h1 class="no-padding-bottom">Profession</h1>
                         <br />
 
                         <li
@@ -802,14 +767,70 @@ NOTE: IT MAY LAND IN YOUR SPAM FOLDER  </p>
 
               <div v-if="complete" class="c515 c512" id="verify-container">
                 <div class="c516 c513">
-                
+                  <!-- 
 
 
 
 
 
-   
 
+
+<div v-if="show_status">
+                        <h1 class="no-padding-bottom">What's your Status?</h1>
+                        <br>
+                        <li
+                          class="MuiListItem-root MuiListItem-gutters"
+                          tabindex="0"
+                          v-for="blec in branch"
+                          :key="blec.id"
+                          @click="setStatus(blec)"
+                          style="
+                            margin-bottom: -1px;
+                            border: 1px solid rgb(224, 224, 224);
+                            font-size: 14px;
+                            cursor: pointer;
+                          "
+                        >
+                          <div
+                            class="MuiListItemText-root"
+                            style="font-size: 14px; cursor: pointer"
+                          >
+                            {{ blec.name }}
+                          </div>
+                          <div class="MuiListItemIcon-root">
+                            <svg
+                              class="MuiSvgIcon-root"
+                              focusable="false"
+                              viewBox="0 0 24 24"
+                              aria-hidden="true"
+                            >
+                              <path
+                                d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
+                              ></path>
+                            </svg>
+                          </div>
+                        </li>
+                        <svg
+                          class="MuiSvgIcon-root"
+                          focusable="false"
+                          viewBox="0 0 24 24"
+                          aria-hidden="true"
+                          style="
+                            width: 20px;
+                            height: 20px;
+                            vertical-align: bottom;
+                            margin: 0px -2px 0px -6px;
+                            color: rgb(0, 161, 223);
+                          "
+                        >
+                          <path
+                            d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"
+                          ></path>
+                        </svg>
+                        <a href="#" @click="resetStatus"> back </a>
+                      </div>
+
+ -->
 
                   <div v-if="show_selected_doc" class="" id="verify-container">
                     <div class="c516 c513">
@@ -1046,7 +1067,7 @@ NOTE: IT MAY LAND IN YOUR SPAM FOLDER  </p>
                         
                   <div v-if="show_complete_form">
                     <h1> You're almost there! .</h1>
-                    <p class="mt-3">    Our team will review your Documents within 48 hours. Please complete the form below and we'll contact you when you're approved. </p>
+                    <p class="mt-3">    Our team will review your {{doc_name}} within 48 hours. Please complete the form below and we'll contact you when you're approved. </p>
                     <br />
                     <form>
                       <div>
@@ -1383,22 +1404,6 @@ NOTE: IT MAY LAND IN YOUR SPAM FOLDER  </p>
             </div>
           </div>
         </div>
-		
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <!-- copying end here -->
       </div>
     </div>
   </div>
@@ -1407,13 +1412,6 @@ NOTE: IT MAY LAND IN YOUR SPAM FOLDER  </p>
 <script>
 import axios from 'axios';
 export default {
-
-
-
-
- 
-
-
   data() {
     return {
       message: 'Hello Vue!',
@@ -1457,7 +1455,7 @@ export default {
       branch: [],
       doc_options: [],
       profile_pic: null,
-      dob: null,
+      dob: [],
       first_name: null,
       last_name: null,
 
@@ -1955,7 +1953,7 @@ export default {
 
     storeData() {
 
-     // this.isDisabled=true;
+      this.isDisabled=true;
 
       if(this.password == null){
 
@@ -1979,9 +1977,6 @@ export default {
           doc2=this.document[1].target.files[0]
       }
 
-      
-
-
       let formData2 = new FormData();
       formData2.append('first_name', this.first_name);
       formData2.append('last_name', this.last_name);
@@ -1989,13 +1984,14 @@ export default {
       formData2.append('profession', this.profession_name);
       formData2.append('branch', this.branch_name);
       formData2.append('status', this.status_name);
-      formData2.append('doctype', this.doc_name);
+      formData2.append('doctype', this.status_name);
       formData2.append('password', this.password);
       formData2.append('document1', doc1);
       formData2.append('document2', doc2);
-       formData2.append('dob', this.dob);
+
        formData2.append('zip', this.zip);
         formData2.append('tel', this.tel);
+         formData2.append('doc_name', this.doc_name);
          
 
 
@@ -2040,7 +2036,6 @@ export default {
       console.log(value);
 
       this.departemnet_name = value.name;
-      this.branch_name=value.name;
       this.show_departement = false;
       this.showlawenforcementstatus = true;
     },
@@ -2068,7 +2063,6 @@ export default {
       this.show_form = true;
 
       this.departement_status = value.name;
-      this.status_name=value.name;
 
       this.showlawenforcementstatus = false;
       this.complete = true;
@@ -2118,7 +2112,7 @@ export default {
       this.complete = true;
     },
 
-   async getStarted() {
+    getStarted() {
       if (this.email == null) {
         this.email_error = true;
         this.error_description = 'Email is Required';
@@ -2126,28 +2120,25 @@ export default {
         let formData2 = new FormData();
         formData2.append('email', this.email);
 
-      await  axios
-          .post('api/widget/json/post/verify_email', formData2, {
+        axios
+          .post('api/widget/json/post/validate-email', formData2, {
             headers: {
               'Content-Type': 'multipart/form-data',
             },
           })
           .then((res) => {
             console.log(res);
-
-            
-           this.showemail = false;
-           
+            alert('user data saved');
           })
           .catch((error) => {
             console.log({ error: error });
             // Manage errors if found any
-            console.log(error.response.data);
-this.showemail = false;
+
             this.email_error = true;
-            this.error_description = error.response.data;
+            this.error_description = 'Invalid Email';
           });
 
+        this.showemail = false;
       }
     },
 
@@ -2224,129 +2215,13 @@ this.showemail = false;
       this.show_status = true;
     },
   },
-
-
-
-
-
-
-
-
-
-
-
-// start copying from here
-
-
 };
 </script>
-
-
-
-
-<style >
-  
-
-
-
- 
-.welcomebody{
-background: #ffffff;
-background: linear-gradient(to bottom, #ffffff 0%,#e1e8ed 100%);
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e1e8ed',GradientType=0 );
-    height: 100%;
-        margin: 0;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-  
-}
-
-.wrapper-1{
-  width:100%;
-  height:100vh;
-  display: flex;
-flex-direction: column;
-}
-.wrapper-2{
-  padding :30px;
-  text-align:center;
-}
-.h1text{
-    font-family: 'Kaushan Script', cursive;
-  font-size:4em;
-  letter-spacing:3px;
-  color:#2a2d36 ;
-  margin:0;
-  margin-bottom:20px;
-}
-.wrapper-2 p{
-  margin:0;
-  font-size:1.3em;
-  color:#aaa;
-  font-family: 'Source Sans Pro', sans-serif;
-  letter-spacing:1px;
-}
-.go-home{
-  color:#fff;
-  background:#2a2d36;
-  border:none;
-  padding:10px 50px;
-  margin:30px 0;
-  border-radius:30px;
-  text-transform:capitalize;
-  box-shadow: 0 10px 16px 1px rgba(174, 199, 251, 1);
-}
-.footer-like{
-  margin-top: auto; 
-  background:#D7E6FE;
-  padding:6px;
-  text-align:center;
-}
-.footer-like p{
-  margin:0;
-  padding:4px;
-  color:#5892FF;
-  font-family: 'Source Sans Pro', sans-serif;
-  letter-spacing:1px;
-}
-.footer-like p a{
-  text-decoration:none;
-  color:#5892FF;
-  font-weight:600;
-}
-
-@media (min-width:360px){
-  .h1text{
-    font-size:4.5em;
-  }
-  .go-home{
-    margin-bottom:20px;
-  }
-}
-
-@media (min-width:600px){
-  .content{
-  max-width:1000px;
-  margin:0 auto;
-}
-  .wrapper-1{
-  height: initial;
-  max-width:620px;
-  margin:0 auto;
-  margin-top:50px;
-  box-shadow: 4px 8px 40px 8px rgba(88, 146, 255, 0.2);
-}
-  
-}
-
-</style>
  
 <style >
 
 
-.small-text{
-  font-size: 1em !important;
-}
+
 .activee{
 
     background: gray !important; 

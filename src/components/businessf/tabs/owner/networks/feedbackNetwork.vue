@@ -13,12 +13,12 @@
             no-caret
           >
             <template #button-content>
-              <b-icon-filter></b-icon-filter><span class="sr-only">Search</span>
+              <b-icon-filter></b-icon-filter><span class="sr-only">{{ $t('network.Search') }}</span>
             </template>
-            <p class="font-weight-bolder px-3 m-0">Feedbacks Type</p>
-            <b-dropdown-item @click="applyFilter('0')">Any</b-dropdown-item>
-            <b-dropdown-item @click="applyFilter('Improvement')">Suggestion For Improvement</b-dropdown-item>
-            <b-dropdown-item @click="applyFilter('Complain')">Complain</b-dropdown-item>
+            <p class="font-weight-bolder px-3 m-0">{{ $t('network.Feedbacks_Type') }}</p>
+            <b-dropdown-item @click="applyFilter('0')">{{ $t('network.Any') }}</b-dropdown-item>
+            <b-dropdown-item @click="applyFilter('Improvement')">{{ $t('network.Suggestion_For_Improvement') }}</b-dropdown-item>
+            <b-dropdown-item @click="applyFilter('Complain')">{{ $t('network.Complain') }}</b-dropdown-item>
           </b-dropdown>
         </span>
       </b-col>
@@ -90,120 +90,89 @@
 
     <FlashMessage />
     
-  </div>
+  </b-row>
+  <b-row>
+    <b-col cols="12">
+      <span class="float-right">
+
+        <b-dropdown size="lg"  variant="link" toggle-class="text-decoration-none pull-left" right  class="pull-left" no-caret>
+          <template #button-content>
+            <b-icon-filter></b-icon-filter><span class="sr-only">Search</span>
+          </template>
+          <p class="font-weight-bolder px-3 m-0">Feedbacks Type</p>
+         
+          <b-dropdown-item href="#">suggestion for improvement</b-dropdown-item>
+          
+        </b-dropdown>
+
+
+      </span>
+
+
+
+    </b-col>
+  </b-row>
+  <b-row>
+    <b-col cols="12">
+      <div v-for="i in 4" :key="i" class="mb-4">
+        <b-card
+            class="mb-2"
+        >
+          <b-card-text>
+            <b-row class="px-md-3">
+              <b-col cols="2" md="1" class="m-0 p-0">
+                <b-avatar
+                    class="d-inline-block"
+                    variant="info"
+                    src="https://business.bridgeafrica.info/assets/img/team/3.png"
+                    square
+                    size="3.5rem"
+                    rounded="xl"
+                ></b-avatar>
+              </b-col>
+              <b-col cols="10" md="11" class="pt-2">
+                <h5 class="m-0 font-weight-bolder  feedback-name ">
+                <b-link>  Mapoure Agrobusiness  </b-link>   
+                </h5>
+                <p>1h Ago </p>
+              </b-col>
+            </b-row>
+            <b-row>
+              <b-col cols="12" class="mt-2">
+                <p class="text-justify feedback-sent">
+                  Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                  Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                  Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                  Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                  <br>
+                  <br>
+                  Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                  Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                </p>
+              </b-col>
+            </b-row>
+          </b-card-text>
+        </b-card>
+      </div>
+    </b-col>
+  </b-row>
+</div>
 </template>
 
 <script>
-
-import moment from 'moment';
 export default {
   name: "feedbackNetwork",
   data() {
     return {
-      url: null,
-      moment: moment,
-      filter: "0",
-      filterData: false,
-      loading: false,
-      currentPage: null,
-      currentIndex: -1,
+      selected: 1,
+      text: "",
       options: [
-        { value: "Improvement", text: "Suggestion for Improvement" },
-        { value: "Complaints", text: "Complaints" }
+        { value: "1", text: "suggestion for improvement" },
+        { value: "2", text: "Progress to your program" },
+        { value: "3", text: "New Idea for PEA-JEUNES" },
       ],
-      filters: [
-        { value: "0", text: "Any" },
-        { value: "Improvement", text: "Suggestion for Improvement" },
-        { value: "Complaints", text: "Complaints" }
-      ],
-      feedbackForm: {
-        title: "Improvement",
-        description: "",
-      },
     };
   },
-  computed: {
-    feedbacks() {
-      return this.$store.state.networkProfileFeedback.feedbacks;
-    },
-  },
-  mounted(){
-    this.url = this.$route.params.id;
-    this.displayFeedback(); 
-  },
-  methods: {
-    filterFeedback() {
-      this.filterData = !this.filterData;
-    },
-    getRequestDatas(filterData, currentPage) {
-      let data = "";
-      if (filterData) {
-        data = "/"+filterData;
-      }else if (currentPage) {
-        data = "/?page="+currentPage;
-      }
-      console.log(data);
-      return data;
-    },
-    applyFilter(data){
-      this.loading = true;
-      this.filterData = data
-      console.log("searching...");
-      console.log(this.filterData);
-      this.displayFeedback();
-    },
-    displayFeedback() {
-      this.loading = true;
-      const data = this.getRequestDatas(this.filterData, this.currentPage);
-      this.$store
-      .dispatch("networkProfileFeedback/getFeedbacks", this.url+"/feedback"+data)
-      .then(() => {
-        this.loading = false;
-        console.log('ohh yeah');
-      })
-      .catch( err => {
-        console.log({ err: err });
-        this.loading = false;
-      });
-    },
-
-    deleteFeedback: function(user_id){
-      this.loading = true;
-      let info = {
-        user_id: user_id,
-        url: this.url,
-      };
-      this.$store
-      .dispatch("networkProfileFeedback/feedbackRequests", {
-        method:'DELETE',
-        data: info
-      })
-      .then(response => {
-        this.displayFeedback();
-        this.loading = false;
-        console.log(response);
-        console.log('ohh yeah');
-        this.flashMessage.show({
-          status: "success",
-          message: "Feedback Deleted"
-        });
-      })
-      .catch( err => {
-         this.displayFeedback();
-        console.log({ err: err });
-        this.loading = false;
-        this.flashMessage.show({
-          status: "error",
-          message: "Unable to Deleted Feedback"
-        });
-      });
-		},
-    handlePageChange(value) {
-      this.currentPage = value;
-      console.log(this.currentPage);
-      this.displayFeedback();
-    },
-  }
 };
 </script>
 
@@ -213,19 +182,24 @@ export default {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 20px;
   }
+
   .feedback-sent {
     font-size: 14px;
     font-family: Arial, Helvetica, sans-serif;
   }
 }
+
 @media (max-width: 762px) {
   .feedback-name {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 16px;
   }
+
   .feedback-sent {
     font-size: 12px;
     font-family: Arial, Helvetica, sans-serif;
   }
 }
 </style>
+
+

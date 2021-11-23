@@ -36,7 +36,7 @@
                       <div>
                         <b-row class="mt-lg-0">
                           <b-col md="6" lg="12" cols="6" xl="12" class="mt-2 mt-lg-2 mt-xl-2 btn-2 center">
-                            <b-button block variant="primary" size="sm" class="b-background flexx pobtn shadow">
+                            <b-button block variant="primary" size="sm" class="b-background flexx pobtn shadow" @click="cta(item)">
                               <i class="fas fa-envelope fa-lg btn-icon"></i>
                               <span class="btn-text">Message</span>
                             </b-button>
@@ -64,7 +64,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 export default {
   props: ['type', 'searchh'],
   data() {
@@ -85,15 +84,14 @@ export default {
   },
 
   computed: {
+     activeAccount() {
+      return this.$store.getters['auth/profilConnected'];
+    },
     users() {
       if (this.type == "Follower") {
-
        return  this.$store.state.businessOwner.UcommunityFollower.user_followers;  
-     
-
       } else {
       return  this.$store.state.businessOwner.UcommunityFollowing.user_following; 
-    
       }
     },
   },
@@ -102,6 +100,19 @@ export default {
  },
 
   methods: {
+    cta(data) {
+      console.log(data);
+      this.$store.commit('businessChat/setSelectedChat', data);
+      let path = '';
+      if (this.activeAccount.user_type == 'business') {
+        path = '/business_owner/' + this.activeAccount.id;
+      } else if (this.activeAccount.user_type == 'network') {
+        path = '/';
+      } else path = '/messaging';
+
+      // this.$router.push({ path: `${path}`, query: { tabId: 1, msgTabId: 1 } });
+      this.$router.push({ path: `/business_owner/${this.activeAccount.id}`, query: { tabId: 1, msgTabId: 0 } });
+    },
 
 
     search(){
@@ -184,6 +195,11 @@ export default {
 
 <style scoped>
 @media only screen and (min-width: 768px) {
+  .s-cardd {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
   .btn-text {
     margin-left: 8px;
   }
@@ -218,7 +234,7 @@ export default {
 
   .s-cardd {
     padding-left: 6px;
-    padding-right: 1px;
+    padding-right: 2px;
   }
 }
 
@@ -254,7 +270,7 @@ export default {
 
 .a-left {
   text-align: left;
-  /*align-content: left;*/
+  align-content: left;
 }
 
 hr {
@@ -275,12 +291,12 @@ hr {
 
 f-right {
   text-align: right;
-  /*align-content: right;*/
+  align-content: right;
 }
 
 .f-left {
   text-align: left;
-  /*align-content: left;*/
+  align-content: left;
 }
 
 @media only screen and (max-width: 768px) {
@@ -380,8 +396,8 @@ f-right {
     border: 1px solid rgba(0, 0, 0, 0.125);
     margin-bottom: 10px;
 
-    margin-right: 5px;
-    margin-left: 3px;
+    margin-right: 1px;
+    margin-left: 1px;
   }
 
   h6 {
@@ -434,8 +450,8 @@ f-right {
     border: 1px solid rgba(0, 0, 0, 0.125);
     margin-bottom: 10px;
 
-    margin-right: 2px;
-    margin-left: 6px;
+    margin-right: 1px;
+    margin-left: 1px;
   }
 
   h6 {

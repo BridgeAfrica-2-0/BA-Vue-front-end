@@ -60,10 +60,9 @@
             <span>{{$t("businessf.Direction")}}</span></b-button
           >
           <b-dropdown
-            class="ml-2   dot-btn mt-2 mt-sm-2 mt-md-0 "
+            class="ml-2  options dot-btn mt-2 mt-sm-2 mt-md-0 "
             no-caret
-            dropleft
-            variant="link"
+            variant="outline-primary"
           >
             <template #button-content>
               <b-icon-three-dots></b-icon-three-dots>
@@ -126,7 +125,7 @@
           <b-tabs lazy content-class="mt-3 p-0" fill pills>
             <b-tab  :title="$t('businessf.Home')"><HomePage /></b-tab>
             <b-tab :title="$t('businessf.About')"><About /></b-tab>
-            <b-tab :title="$t('businessf.Media')"><Media /></b-tab>
+            <b-tab type="business" :title="$t('businessf.Media')"><Media /></b-tab>
             <b-tab :title="$t('businessf.Market')"><MarketPlace /></b-tab>
             <b-tab :title="$t('businessf.Networks')"><Networks /></b-tab>
             <b-tab :title="$t('businessf.Community')"><Community /></b-tab>
@@ -140,7 +139,7 @@
 <script>
 import HomePage from '../businessf/tabs/businessHome';
 import About from './tabs/about';
-import Media from './tabs/media';
+import Media from '@/components/owner/tabs/media';
 import MarketPlace from './tabs/marketPlace';
 import Community from './tabs/memberNetwork';
 import Networks from './tabs/networks';

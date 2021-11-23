@@ -60,9 +60,7 @@
                 ><b-link> Open now</b-link>
 
                 <b-dropdown size="sm" variant="transperent">
-                  <template #button-content>
-                    10:00AM - 7:00PM
-                  </template>
+                  <template #button-content> 10:00AM - 7:00PM </template>
                   <b-dropdown-item> 10:00AM - 7:00PM</b-dropdown-item>
                 </b-dropdown></span
               >
@@ -78,6 +76,9 @@
 export default {
   data() {
     return {
+      business_id: null,
+      business_about: [],
+
       edit1: false,
       edit2: false,
       leftTitle: "About Mapoure Agrobusiness",
@@ -112,8 +113,8 @@ export default {
 
     validate(idForm) {
       this.$bvModal.hide(idForm);
-    }
-  }
+    },
+  },
 };
 </script>
 

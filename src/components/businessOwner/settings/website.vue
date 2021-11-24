@@ -87,25 +87,26 @@
         <!-- Premium -->
         <b-modal v-model="modalShowPremium" size="xl" hide-footer="true" header-bg-variant="light" body-bg-variant="light">
           <b-row>
-            <b-col cols="8">
-              <h5><b-icon icon="check-circle-fill" variant="success"></b-icon> NORMAL ACCOUNT (BASIC ACCOUNT)</h5><br>
-              <p><b>These are the features with the normal account</b></p>
+            <b-col cols="7">
+              <h5><b-icon icon="check-circle-fill" variant="success"></b-icon> UPGRADE TO PREMIUM</h5><br>
+              <p><b>By upgrading your account you can get all feature to improve your business</b></p>
               <p class="descrip">
-                <b-icon icon="check2" variant="success" class="h5"></b-icon> Website with a unique domain name,phone number, GPS location.<br/>
-                <b-icon icon="check2" variant="success" class="h5"></b-icon> Have community engagement untionality like messaging and gathering of followers.<br/>
-                <b-icon icon="check2" variant="success" class="h5"></b-icon> Marketplace to display products and services, photos, price and will allow interaction with customers.
+                <b-icon icon="check2" variant="success" class="h5"></b-icon> All the functionalities as in the normal account.<br/>
+                <b-icon icon="check2" variant="success" class="h5"></b-icon> Ability to directy exchange money between the customer and the business owner.<br/>
+                <b-icon icon="check2" variant="success" class="h5"></b-icon> Shipping calculation.<br/>
+                <b-icon icon="check2" variant="success" class="h5"></b-icon> Advanced business verification.
               </p>
             </b-col>
             <b-col>
               <h4>Choose Your Plan</h4>
               <br>
               <b-row>
-                <b-col><span class="success">Most Popular:</span> Monthly<br/>Billed Monthly</b-col>
+                <b-col><span text-variant="success">Most Popular:</span> Monthly<br/>Billed Monthly</b-col>
                 <b-col>4000XAF / Month <b-button variant="primary">Select</b-button></b-col>
               </b-row>
               <br/>
               <b-row>
-                <b-col><span class="success">Best Value:</span> Yearly<br/>Billed Anually - 36000XAF</b-col>
+                <b-col><span text-variant="success">Best Value:</span> Yearly<br/>Billed Anually - 36000XAF</b-col>
                 <b-col>3000XAF / month <b-button variant="primary">Select</b-button></b-col>
               </b-row>
             </b-col>

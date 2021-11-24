@@ -70,10 +70,10 @@
       </b-row>
       <div class="pending-post-view pt-2 mt-3">
         <p>
-          {{ $t('network.Your_3_Posts_are_pending_for_approval') }} .&nbsp;&nbsp;&nbsp;&nbsp;<a
+          {{ $t('network.Your_3_Post_s_are_pending_for_approval') }}.&nbsp;&nbsp;&nbsp;&nbsp;<a
             @click="this.$router.push({ name: '/pendingPost' })"
             style="color: #e75c18; text-decoration: underline"
-            > {{ $t('network.View_All') }} </a
+            >{{ $t('network.View_All') }}</a
           >
         </p>
       </div>
@@ -179,7 +179,7 @@
             </b-row>
           </b-modal>
 
-          <b-modal id="modal-xl" ref="modal-xl" centered hide-footer title="Create Post" @hidden="resetPostData">
+          <b-modal id="modal-xl" ref="modal-xl" centered hide-footer :title=" $t('network.Create_Post')" @hidden="resetPostData">
             <b-row ref="loader">
               <b-col cols="1" class="m-0 p-0"></b-col>
               <b-col cols="2" class="m-0 p-0">

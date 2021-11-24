@@ -13,7 +13,7 @@
                   >
                     <div class="drag-textt">
                       <fas-icon :icon="['fas', 'plus']" />
-                      <h3>Create Album</h3>
+                      <h3>{{ $t('network.Create_Album') }}</h3>
                     </div>
                   </a>
                 </div>
@@ -21,10 +21,10 @@
 
 
 
-              <b-modal hide-footer title="Create album" id="createalbumModal" >
+              <b-modal hide-footer :title="$t('network.Create_Album')" id="createalbumModal" >
       <b-form>
-        <b-form-input placeholder="Album name"></b-form-input>
-        <b-button class="mt-2" variant="primary"> Create</b-button>
+        <b-form-input :placeholder="$t('network.Album_Name')"></b-form-input>
+        <b-button class="mt-2" variant="primary"> {{ $t('network.Create') }}</b-button>
       </b-form>
     </b-modal>
 
@@ -44,8 +44,8 @@
                   />
                   <div class="createdesc botmedia">
                     <div class="botmediades">
-                      <h6>Profile Picture</h6>
-                      <p>36 Items</p>
+                      <h6>{{ $t('network.Profile_Picture') }}</h6>
+                      <p>36 {{ $t('network.Items') }}</p>
                     </div>
                   </div>
                 </a>
@@ -70,10 +70,10 @@
                       </template>
                   
                       <b-dropdown-item href="#"
-                        >Edit</b-dropdown-item
+                        >{{ $t('network.Edit') }}</b-dropdown-item
                       >
                       
-                      <b-dropdown-item href="#">Delete</b-dropdown-item>
+                      <b-dropdown-item href="#">{{ $t('network.Delete') }}</b-dropdown-item>
                     </b-dropdown>
                   </li>
                 </ul>
@@ -92,8 +92,8 @@
                   />
                   <div class="createdesc botmedia">
                     <div class="botmediades">
-                      <h6>Cover Photos</h6>
-                      <p>36 Items</p>
+                      <h6>{{ $t('network.Cover_Photos') }}</h6>
+                      <p>36 {{ $t('network.Items') }}</p>
                     </div>
                   </div>
                 </a>
@@ -117,10 +117,10 @@
                       </template>
                   
                       <b-dropdown-item href="#"
-                        >Edit</b-dropdown-item
+                        >{{ $t('network.Edit') }}</b-dropdown-item
                       >
                       
-                      <b-dropdown-item href="#">Delete</b-dropdown-item>
+                      <b-dropdown-item href="#">{{ $t('network.Delete') }}</b-dropdown-item>
                     </b-dropdown>
                   </li>
                 </ul>
@@ -140,8 +140,8 @@
                   />
                   <div class="createdesc botmedia">
                     <div class="botmediades">
-                      <h6>Custom Album 1</h6>
-                      <p>13 Items</p>
+                      <h6>{{ $t('network.Custom_Album') }} 1</h6>
+                      <p>13 {{ $t('network.Items') }}</p>
                     </div>
                   </div>
                 </a>
@@ -166,10 +166,10 @@
                       </template>
                   
                       <b-dropdown-item href="#"
-                        >Edit</b-dropdown-item
+                        >{{ $t('network.Edit') }}</b-dropdown-item
                       >
                       
-                      <b-dropdown-item href="#">Delete</b-dropdown-item>
+                      <b-dropdown-item href="#">{{ $t('network.Delete') }}</b-dropdown-item>
                     </b-dropdown>
                   </li>
                 </ul>
@@ -187,8 +187,8 @@
                   />
                   <div class="createdesc botmedia">
                     <div class="botmediades">
-                      <h6>Custom Album 2</h6>
-                      <p>23 Items</p>
+                      <h6>{{ $t('network.Custom_Album') }} 2</h6>
+                      <p>23 {{ $t('network.Items') }}</p>
                     </div>
                   </div>
                 </a>
@@ -212,10 +212,10 @@
                       </template>
                   
                       <b-dropdown-item href="#"
-                        >Edit</b-dropdown-item
+                        >{{ $t('network.Edit') }}</b-dropdown-item
                       >
                       
-                      <b-dropdown-item href="#">Delete</b-dropdown-item>
+                      <b-dropdown-item href="#">{{ $t('network.Delete') }}</b-dropdown-item>
                     </b-dropdown>
                   </li>
                 </ul>
@@ -238,8 +238,8 @@
                   />
                   <div class="createdesc botmedia">
                     <div class="botmediades">
-                      <h6>Custom Album 3</h6>
-                      <p>33 Items</p>
+                      <h6>{{ $t('network.Custom_Album') }} 3</h6>
+                      <p>33 {{ $t('network.Items') }}</p>
                     </div>
                   </div>
                 </a>
@@ -262,10 +262,10 @@
                       </template>
                   
                       <b-dropdown-item href="#"
-                        >Edit</b-dropdown-item
+                        >{{ $t('network.Edit') }}</b-dropdown-item
                       >
                       
-                      <b-dropdown-item href="#">Delete</b-dropdown-item>
+                      <b-dropdown-item href="#">{{ $t('network.Delete') }}</b-dropdown-item>
                     </b-dropdown>
                   </li>
                 </ul>
@@ -297,7 +297,7 @@
                               data-toggle="dropdown"
                               aria-haspopup="true"
                               aria-expanded="false"
-                              >Custom Album 1
+                              >{{ $t('network.Custom_Album') }} 1
                               <i class="fa fa-caret-down" aria-hidden="true"></i
                             ></a>
                             <div
@@ -308,9 +308,9 @@
                                 class="dropdown-item"
                                 data-toggle="modal"
                                 data-target="#namealbumModal"
-                                >Edit Name</a
+                                >{{ $t('network.Edit_Name') }}</a
                               >
-                              <a class="dropdown-item">Delete Album</a>
+                              <a class="dropdown-item">{{ $t('network.Delete_Album') }}</a>
                             </div>
                           </li>
                         </ul>
@@ -319,12 +319,12 @@
                         <label
                           class="col-md-4 control-label pr-0 text-design"
                           for="name"
-                          >14 Items -
+                          >14 {{ $t('network.Items') }} -
                         </label>
                         <div class="col-md-5 pl-0 pr-0">
                           <select id="gender" class="form-control w-100">
-                            <option>Public</option>
-                            <option>Private</option>
+                            <option>{{ $t('network.Public') }}</option>
+                            <option>{{ $t('network.Private') }}</option>
                           </select>
                         </div>
                       </div>
@@ -352,7 +352,7 @@
 <div class="container-flex"   v-if="showalbum == true "  >  
       
 
-      <b-button variant="outline-primary" size="sm" @click="hidealbum"> Back </b-button>     <span class="text-center ml-2">      Album Name  </span>
+      <b-button variant="outline-primary" size="sm" @click="hidealbum"> {{ $t('network.Back') }} </b-button>     <span class="text-center ml-2">      {{ $t('network.Album_Name') }}  </span>
     
       <Images />    </div>
 
@@ -367,6 +367,27 @@ import Images from "./images";
 
 export default {
   components: {Images},
+  methods: {
+
+
+      hidealbum(){
+
+         this.showalbum=false;
+      },
+
+
+
+       showlbum(){
+
+         this.showalbum=true;
+      },
+
+
+      
+    onClick(i) {
+      this.index = i;
+    }
+  },
   data: function() {
       
     return {
@@ -409,21 +430,7 @@ export default {
       ],
       index: 0
     };
-  },
-  methods: {
-    hidealbum() {
-      this.showalbum = false;
-    },
-
-    showlbum() {
-      this.showalbum = true;
-    },
-
-    onClick(i) {
-      this.index = i;
-    }
-  },
-  
+  }
 };
 </script>
 

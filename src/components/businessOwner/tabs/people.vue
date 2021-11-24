@@ -35,8 +35,9 @@
                           variant="primary"
                           size="sm"
                           class="b-background flexx pobtn shadow mr-lg-3 mr-xl-3"
+                          @click="cta(item)"
                         >
-                          <i class="fas fa-envelope   fa-lg btn-icon "></i>
+                          <i class="fas fa-envelope fa-lg btn-icon"></i>
                           <span class="btn-text">Message</span>
                         </b-button>
                       </b-col>
@@ -98,7 +99,30 @@ export default {
     // this.biz_id = this.$route.params.id !== undefined ? this.$route.params.id : 1; //! need some review
   },
 
+  computed: {
+    activeAccount() {
+      return this.$store.getters['auth/profilConnected'];
+    },
+  },
+
   methods: {
+
+
+       cta(data) {
+      console.log(data);
+      this.$store.commit('businessChat/setSelectedChat', data);
+      let path = '';
+      if (this.activeAccount.user_type == 'business') {
+        path = '/business_owner/' + this.activeAccount.id;
+      } else if (this.activeAccount.user_type == 'network') {
+        path = '/';
+      } else path = '/messaging';
+
+      // this.$router.push({ path: `${path}`, query: { tabId: 1, msgTabId: 1 } });
+      this.$router.push({ path: `/business_owner/${this.activeAccount.id}`, query: { tabId: 1, msgTabId: 0 } });
+    },
+
+
     count(number) {
       if (number >= 1000000) {
         return number / 1000000 + 'M';

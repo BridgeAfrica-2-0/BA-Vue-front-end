@@ -17,8 +17,10 @@
                 class="s-embed"
               ></b-embed>
               <p class="text">
+
                 {{ $t('dashboard.video_name') }} <br />
                 {{ $t('dashboard.video_description') }}
+
               </p>
             </div>
           </b-col>

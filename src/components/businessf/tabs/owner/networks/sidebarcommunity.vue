@@ -20,13 +20,13 @@
                     <template slot="title">
                       {{ $t('network.Followers') }} <span class="spa-color"> {{nFormatter(userdetails.total_followers)}} </span>
                     </template>
-                    <div class="s-comcard"><People :peoples="userdetails.user_followers" /></div>
+                    <div class="s-comcard"><People :peoples="userdetails.user_followers" @handleFollow="handleFollow" /></div>
                   </b-tab>
                   <b-tab>
                     <template slot="title">
                       {{ $t('network.Following') }} <span class="spa-color"> {{nFormatter(userdetails.totat_following)}} </span>
                     </template>
-                    <div class="s-comcard"><People :peoples="userdetails.user_following" /></div>
+                    <div class="s-comcard"><People :peoples="userdetails.user_following" @handleFollow="handleFollow" /></div>
                   </b-tab>
                 </b-tabs>
               </b-col>
@@ -43,52 +43,113 @@
                 <template slot="title">
                   {{ $t('network.Followers') }} <span class="spa-color"> {{nFormatter(businessdetails.total_followers)}} </span>
                 </template>
-                <div class="s-comcard"><Business :businesses="businessdetails.Business_followers" /></div>
+                <div class="s-comcard"><Business :businesses="businessdetails.Business_followers" @handleFollow="handleFollow" /></div>
               </b-tab>
               <b-tab>
                 <template slot="title">
                   {{ $t('network.Following') }} <span class="spa-color"> {{nFormatter(businessdetails.totat_following)}} </span>
                 </template>
-                <div class="s-comcard"><Business :businesses="businessdetails.Business_following" /></div>
+                <div class="s-comcard"><Business :businesses="businessdetails.Business_following" @handleFollow="handleFollow" /></div>
               </b-tab>
             </b-tabs>
           </div>
         </b-tab>
-        <!-- <b-tab>
+        <b-tab>
           <template slot="title">
-            {{ $t('network.Networks') }} <span class="spa-color"> {{nFormatter(businessdetails.total_Network)}} </span>
+            {{ $t('network.Networks') }} <span class="spa-color">{{nFormatter(networkdetails.total_Network)}}</span>
           </template>
           <div>
             <b-tabs fill pills content-class="mt-3  f-left m-up checkcheck">
               <b-tab active>
                 <template slot="title">
-                  {{ $t('network.Followers') }} <span class="spa-color"> {{nFormatter(businessdetails.total_followers)}} </span>
+                  {{ $t('network.Followers') }} <span class="spa-color"> {{nFormatter(networkdetails.total_followers)}} </span>
                 </template>
-                <div class="s-comcard"><Network :networks="networkdetails.Network_followers" /></div>
+                <!-- <div class="s-comcard">{{networkdetails.Network_followers}}</div> -->
+                <div class="s-comcard"><Network :networks="networkdetails.Network_followers" @handleFollow="handleFollow" /></div>
               </b-tab>
               <b-tab>
                 <template slot="title">
-                   {{ $t('network.Following') }}<span class="spa-color"> {{nFormatter(businessdetails.totat_following)}} </span>
+                   {{ $t('network.Following') }}<span class="spa-color"> {{nFormatter(networkdetails.totat_following)}} </span>
                 </template>
-                <div class="s-comcard"><Network :networks="networkdetails.Network_following" /></div>
+                <!-- <div class="s-comcard">{{networkdetails.Network_following}}</div> -->
+                <div class="s-comcard"><Network :networks="networkdetails.Network_following" @handleFollow="handleFollow" /></div>
               </b-tab>
             </b-tabs>
           </div>
-        </b-tab> -->
+        </b-tab>
+      </b-tabs>
+      
+    </div>
+
+         
+
+
+        <b-tab >
+
+            <template slot="title"  >
+             Businesses  <span class="spa-color">  7K   </span>
+            </template>
+        
+        
+     <div>
+      <b-tabs fill pills content-class="mt-3  f-left m-up checkcheck">
+        <b-tab  active>
+
+         <template slot="title"  >
+             Followers  <span class="spa-color">  7K   </span>
+            </template>
+        
+         
+
+
+         <div class="s-comcard">      <Business />     </div>
+
+ 
+         
+        </b-tab>
+
+        <b-tab >
+        
+
+            <template slot="title"  >
+             Following  <span class="spa-color">  7K   </span>
+            </template>
+        
+        <div class="s-comcard">    <Business />     </div>
+ 
+        </b-tab>
       </b-tabs>
     </div>
+
+
+
+        </b-tab>
+
+    
+
+
+
+
+
+
+
+
   </div>
 </template>
+
 <script>
+
+
 import People from "./people";
 import Business from "./business";
-// import Network from "./network";
+import Network from "./network";
 export default {
-  name: "sidebarcommunity",
-  components: {
+  name: "comunitiDashboard",
+
+   components: {
     People,
     Business,
-    // Network
+    Network
   },
   data() {
     return {
@@ -157,40 +218,89 @@ export default {
         console.log({ err: err });
       });
     },
+    async handleFollow(Comdata) {
+      console.log("handleFollow", Comdata)
+      const url = Comdata.is_follow === 0 ? `/follow-community` : `/unfollow`;
+      console.log("uri", url)
+      const nextFollowState = Comdata.is_follow === 0 ? 1 : 0;
+      const data = {
+        id: Comdata.id,
+        type: Comdata.type,
+      };
+
+      await this.axios
+        .post(url, data)
+        .then(response => {
+          console.log("response", response);
+          Comdata.is_follow = nextFollowState;
+        })
+        .catch(err => console.log(err));
+    },
   }
 };
 </script>
 
 <style >
-.lala .nav-fill {
-  margin-top: -19px;
-  border: 1px solid rgba(0, 0, 0, 0.125);
-}
 
-.spa-color {
+  
+
+
+   .lala .nav-fill{
+   
+    margin-top: -19px;
+     border: 1px solid rgba(0, 0, 0, 0.125);
+  }
+
+
+
+
+
+
+
+
+.spa-color{
   color: white;
   margin-left: 10px;
   font-size: 14px;
 }
 
-.h4-color {
+
+.h4-color{
   color: orangered;
   margin-left: 10px;
   font-size: 14px;
 }
 
-.m-up {
-  margin-top: -5px;
+.m-up{
+
+  margin-top:-5px;
 }
 
+
+
+
+ 
 @media only screen and (min-width: 768px) {
-  .title {
+
+  
+
+  .title{
     font-size: 20px;
   }
-}
 
+
+ }
+
+
+
+
+
+
+ 
 @media only screen and (min-width: 768px) {
-  .title {
+
+  
+  .title{
     font-size: 16px;
   }
 }

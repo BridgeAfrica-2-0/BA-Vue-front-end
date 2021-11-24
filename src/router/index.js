@@ -255,7 +255,7 @@ const routes = [{
 
 {
   path: "/business/:id?",
-  name: "BusinessFollower",
+  name: "Business",
   component: businessFollower,
   meta: {
     auth: true,

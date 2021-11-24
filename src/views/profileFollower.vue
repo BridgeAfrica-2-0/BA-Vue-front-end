@@ -40,9 +40,11 @@ import Networks from "@/components/businessfollower/tabs/networks";
 import Following from "@/components/owner/tabs/memberNetwork";
 import Bussiness from "@/components/owner/tabs/bussiness";
 
+import {knowWhoIsConnected} from "@/mixins"
+
 export default {
   name: "ProfileFollower",
-
+  mixins:[knowWhoIsConnected],
   components: {
     Bussiness,
     Following,

@@ -1,7 +1,7 @@
 <template>
   <div>
     <head-page-owner></head-page-owner>
-    <div class="row">
+    <div class="row">    
       <div class="text-justify mt-2 container-fluid">
         <b-row class="center-content">
           <b-col cols="12">
@@ -63,7 +63,7 @@ export default {
 
     this.currentTab =tab;
   }
-  },
+  },  
 
 
   watch: {
@@ -78,7 +78,7 @@ export default {
       this.currentTab = this.tabs.findIndex((tab) => tab === to.hash);
 
     },
-    
+
   
 
   },

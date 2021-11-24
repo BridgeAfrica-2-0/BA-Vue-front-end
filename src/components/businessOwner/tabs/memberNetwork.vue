@@ -10,7 +10,7 @@
       </b-card>
     </div>
   </div>
-</template>
+</template>   
 
 <script>
 import People from '@/components/businessOwner/tabs/people/people';

@@ -23,10 +23,7 @@
                 {{ count(item.followers) }}
                 {{ $t('dashboard.Community') }} <br />
 
-                <span class="location">
-                  <b-icon-geo-alt class="ico"></b-icon-geo-alt
-                  >{{ item.country }}
-                </span>
+                <span class="location"> <b-icon-geo-alt class="ico"></b-icon-geo-alt>{{ item.country }} </span>
                 <br />
        <read-more
               more-str="read more"
@@ -91,14 +88,11 @@
                     cols="4"
                     class="mt-2 text-center"
                   >
-                    <b-button
-                      block
-                      size="sm"
-                      class="b-background shadow "
-                      variant="primary"
-                    >
-                      <i class="fas fa-envelope   fa-lg btn-icon "></i>
-                      <span class="btn-text">{{ $t('dashboard.Messages') }}</span>
+                    
+
+                    <b-button block size="sm" class="b-background shadow" variant="primary" @click="cta(item)">
+                      <i class="fas fa-envelope fa-lg btn-icon"></i>
+                      <span class="btn-text">Message</span>
                     </b-button>
                   </b-col>
 
@@ -127,19 +121,19 @@
         </div>
       </b-col>
     </b-row>
-     
-      <infinite-loading :identifier="infiniteId"  @infinite="infiniteHandler"  ref="infiniteLoading" ></infinite-loading>
+
+    <infinite-loading :identifier="infiniteId" @infinite="infiniteHandler" ref="infiniteLoading"></infinite-loading>
   </div>
 </template>
 
 <script>
-import moment from "moment";
-import axios from "axios";
+// import moment from 'moment';
+import axios from 'axios';
 
 export default {
-  props: ["type", "searchh"],
-  
-   data() {
+  props: ['type', 'searchh'],
+
+  data() {
     return {
       businesses:[],
       biz_id:null,
@@ -151,9 +145,9 @@ export default {
         perPage: 1,
         pagination: false,
 
-        type: "loop",
-        perMove: 1
-      }
+        type: 'loop',
+        perMove: 1,
+      },
     };
   },
 
@@ -169,25 +163,41 @@ export default {
 
           return  this.$store.state.businessOwner.BcommunityFollowing.business_following; 
        }
-   }
+   },
 
-  },
-
-   mounted(){
-
-    this.biz_id = this.$route.params.id; 
-  },
-   
-  methods: {
-    count(number) {
-      if (number >= 1000000) {
-        return number / 1000000 + "M";
-      }
-      if (number >= 1000) {
-        return number / 1000 + "K";
-      } else return number;
+    activeAccount() {
+      return this.$store.getters['auth/profilConnected'];
     },
 
+  },
+
+  mounted() {
+    this.biz_id = this.$route.params.id;
+  },
+
+  methods: {
+    
+    cta(data) {
+      console.log(data);
+      this.$store.commit('businessChat/setSelectedChat', data);
+      let path = '';
+      if (this.activeAccount.user_type == 'business') {
+        path = '/business_owner/' + this.activeAccount.id;
+      } else if (this.activeAccount.user_type == 'network') {
+        path = '/';
+      } else path = '/messaging';
+
+      // this.$router.push({ path: `${path}`, query: { tabId: 1, msgTabId: 1 } });
+      this.$router.push({ path: `/business_owner/${this.activeAccount.id}`, query: { tabId: 1, msgTabId: 1 } });
+    },
+    count(number) {
+      if (number >= 1000000) {
+        return number / 1000000 + 'M';
+      }
+      if (number >= 1000) {
+        return number / 1000 + 'K';
+      } else return number;
+    },
 
 
  async handleFollow(user) {
@@ -236,76 +246,47 @@ export default {
       this.page = 1;
       this.infiniteId += 1;
 
-     
-     this.$refs.infiniteLoading.attemptLoad();
-    
-
+      this.$refs.infiniteLoading.attemptLoad();
     },
 
-
-     
-
-
-     
-          infiniteHandler($state) { 
-           
-
+    infiniteHandler($state) {
       let url = null;
 
-         if(this.type=="Follower"){  
-         url = "business/community/business-follower/"+this.biz_id+"/";
-         }else{
-           url = "business/community/business-following/"+this.biz_id+"/";
-         }
+      if (this.type == 'Follower') {
+        url = 'business/community/business-follower/' + this.biz_id + '/';
+      } else {
+        url = 'business/community/business-following/' + this.biz_id + '/';
+      }
       axios
-        .get(url + this.page+"?keyword="+this.searchh )
+        .get(url + this.page + '?keyword=' + this.searchh)
         .then(({ data }) => {
           console.log(data);
-        
-          if(this.type=="Follower"){  
 
+          if (this.type == 'Follower') {
+            if (data.data.business_followers.length) {
+              this.businesses.push(...data.data.business_followers);
+              this.page += 1;
 
-          if (data.data.business_followers.length) {
-            
-         
-            this.businesses.push(...data.data.business_followers); 
-            this.page += 1;
-            
-            $state.loaded();
-
-           }else{
+              $state.loaded();
+            } else {
               $state.complete();
-             
-           }
-        
-          }else{
+            }
+          } else {
+            if (data.data.business_following.length) {
+              this.businesses.push(...data.data.business_following);
+              this.page += 1;
 
-
-
-
-             if (data.data.business_following.length) {
-            
-         
-            this.businesses.push(...data.data.business_following); 
-            this.page += 1;
-            
-            $state.loaded();
-
-           }else{
+              $state.loaded();
+            } else {
               $state.complete();
-             
-           }
-
+            }
           }
-           
         })
         .catch((err) => {
           console.log({ err: err });
         });
     },
-
-
-  }
+  },
 };
 </script>
 
@@ -376,15 +357,15 @@ export default {
     color: black;
 
     line-height: 35px;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
 
   .textt {
     color: #000;
 
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: normal;
-    font-size: 12px;
+    font-size: 14px;
     line-height: 30px;
     color: rgba(117, 114, 128, 1);
     text-align: left;
@@ -429,13 +410,13 @@ export default {
     color: black;
 
     line-height: 35px;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
 
   .textt {
     color: #000;
 
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
@@ -462,9 +443,9 @@ export default {
 
   .btn {
     padding-top: 6px;
-
     height: 38px;
     width: 123px;
+    font-size: 14px;
   }
 
   .r-image {
@@ -537,8 +518,6 @@ export default {
     background-clip: border-box;
     border: 1px solid rgba(0, 0, 0, 0.125);
     margin-bottom: 10px;
-    margin-right: -8px;
-    margin-left: -8px;
 
     padding: 7px;
   }
@@ -557,6 +536,26 @@ export default {
 @media only screen and (max-width: 520px) {
   .btn {
     display: flex;
+  }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1265px) {
+  .textt {
+    color: #000;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 30px;
+    color: rgba(117, 114, 128, 1);
+    text-align: left;
+    font-weight: normal;
+    line-height: 20px;
+    font-style: normal;
+    padding: 1px;
+    text-align: left;
+    margin-left: 55px;
+    margin-right: -5px;
+    line-height: 25px;
   }
 }
 </style>

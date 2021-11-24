@@ -70,9 +70,9 @@ export default {
 }
 
 .nav-item.active .nav-link span {
-  color: #e94a47 !important;
+  color: #e75c18 !important;
 }
 .nav-item:hover .nav-link span {
-  color: #e94a47 !important;
+  color: #e75c18 !important;
 }
 </style>

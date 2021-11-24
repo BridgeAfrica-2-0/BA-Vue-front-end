@@ -57,6 +57,7 @@ import businessordersdetail from "@/views/businessordersdetail"
 
 import payment from "@/views/payment";
 import about from "@/views/about";
+import contact from "@/views/contact";
 
 
 Vue.use(VueRouter);
@@ -91,6 +92,14 @@ const routes = [{
     // meta: {
     //   auth: true,
     // },
+},
+{
+  path: '/contact',
+  name: 'contact',
+  component: contact,
+  // meta: {
+  //   auth: true,
+  // },
 },
 
 {

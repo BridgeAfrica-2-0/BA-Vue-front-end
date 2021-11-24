@@ -1,0 +1,19 @@
+{
+    "All":"Tous",
+    "In_progress":"En cours",
+    "Complete":"Complet",
+    "My_orders":"Mes ordres",
+    "clear_history":"Effacer l'historique",
+    "Show":"Montrer",
+    "Order":"Commander",
+    "archive":"Archives",
+    "delete":"Supprimer",
+    "status":"Statut",
+    "Product_Qty":"Produit Qte",
+    "Price":"Prix",
+    "shipping_cost":"Frais d'expédition",
+    "Total":"Total",
+    "Re_order":"Commander à nouveau",
+    "In_Progress":"En cours",
+    "Cancel":"Annuler"
+}

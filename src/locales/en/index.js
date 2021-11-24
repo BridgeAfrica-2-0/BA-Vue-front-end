@@ -9,7 +9,8 @@ import passrecover from './passrecover.json'
 import welcome from './welcome.json'
 import dashboard from './dashboard.json'
 import profileowner from './profileowner.json'
-
+import Order from './Order.json'
+import myOrders from './myOrders.json'
 export const defaultLocale = 'en'
 
 export const en = {
@@ -23,4 +24,6 @@ export const en = {
     dashboard: dashboard,
     profileowner: profileowner,
     welcome: welcome,
+    Order:Order,
+    myOrders:myOrders,
 }

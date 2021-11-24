@@ -21,9 +21,10 @@ export default {
 
   actions: {
 
-    getaccounts( {commit}, businessId ){
+    getaccounts( {commit}, Data ){
+      console.log("getaccounts");
       return axios
-      .get(`business/community/people/${businessId}`)
+      .get(`business/${Data.path}`)
       .then(({ data }) => {
           commit("setaccounts", data.data);
         console.log(data);

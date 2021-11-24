@@ -1,5 +1,5 @@
 <template>
-  <div class="p-3 card-border my-3" ref="`post-${item.post_id ? item.post_id : item.id}`">
+  <div class="p-3 card-border my-3" style="position: relative">
     <div class="mt-2">
       <div class="d-inline-flex">
         <span md="1" class="m-0 p-0">
@@ -12,7 +12,7 @@
           <p class="durationn">{{ item.created_at | now }}</p>
         </div>
 
-        <div class="toright" v-if="canBeDelete">
+        <div class="toright" v-if="isYourOwnPost && canBeDelete">
           <b-dropdown variant="link" size="sm" no-caret>
             <template #button-content>
               <b-icon icon="three-dots" variant="primary" aria-hidden="true"></b-icon>
@@ -158,9 +158,11 @@ import light from '../lightbox';
 
 import { ShareButton } from '@/components/shareButton';
 
+import {isYourOwnPostMixins} from '@/mixins'
+
 export default {
   name: 'ownerPostComponent',
-  mixins: [NoMoreDataForComment],
+  mixins: [NoMoreDataForComment,isYourOwnPostMixins],
   components: {
     Comment,
     light,
@@ -213,9 +215,7 @@ export default {
     icon() {
       return this.post.is_liked ? 'suit-heart-fill' : 'suit-heart';
     },
-    ...mapGetters({
-      profile: 'auth/profilConnected',
-    }),
+  
   },
 
   methods: {

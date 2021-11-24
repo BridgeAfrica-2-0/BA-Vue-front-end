@@ -95,7 +95,7 @@
           <hr />
         </div> -->
 
-        <Post
+         <Post
           v-for="(item, index) in owner_post"
           :key="index"
           :post="item"
@@ -105,7 +105,6 @@
           :editPost="(f) => f"
           :deletePost="(f) => f"
         />
-
         <infinite-loading :identifier="infiniteId" ref="infiniteLoading" @infinite="infiniteHandler"></infinite-loading>
       </div>
     </b-card>
@@ -113,12 +112,12 @@
 </template>
 
 <script>
-import { PostComponentMixin } from '@/mixins';
+import { isYourOwnPostMixins } from '@/mixins';
 import Post from '@/components/businessOwner/ownerPostComponent';
 
 export default {
   name: 'postNetwork',
-  mixins: [PostComponentMixin],
+  mixins: [isYourOwnPostMixins],
   components: {
     Post,
   },

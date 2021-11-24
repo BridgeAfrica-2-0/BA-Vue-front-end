@@ -107,24 +107,16 @@
 
       <b-dropdown-text class="box-title"> {{ $t('search.Share') }} </b-dropdown-text>
 
-      <b-dropdown-item
-        class="d-flex py-2 cursor-pointer"
-        @click="shareToYourProfile"
-        v-if="$route.name != 'BusinessOwner' ? ($route.name != 'profile_owner' ? true : false) : false"
-      >
+      <b-dropdown-item class="d-flex py-2 cursor-pointer" @click="shareToYourProfile" v-if="isYourOwnPost">
         <span class="text-ored">
           <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
         </span>
         <div class="d-flex flex-column ml-1">
-          <span>{{ $t('search.Share_to_your_Profile') }}</span>
+          <span>{{ $t('search.Share_to_your_Profile') }} </span>
         </div>
       </b-dropdown-item>
 
-      <b-dropdown-item
-        class="d-flex py-2 cursor-pointer"
-        @click="open(`modal-10-${uuid}`)"
-        v-if="$route.name != 'BusinessOwner' || $route.name != 'BusinessEditor' ? ($route.name != 'profile_owner' ? true : false) : false"
-      >
+      <b-dropdown-item class="d-flex py-2 cursor-pointer" @click="open(`modal-10-${uuid}`)" v-if="isYourOwnPost">
         <span class="text-ored">
           <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
         </span>
@@ -304,6 +296,16 @@ export default {
     ...mapGetters({
       profile: 'auth/profilConnected',
     }),
+  },
+
+  isYourOwnPost() {
+    const isItOwnerPage = this.$route.name == 'BusinessOwner' || this.$route.name == 'profile_owner' ? true : false;
+
+    const isYourOwn =
+      (this.profile.id == this.post.post_id ? this.post.post_id : this.post.id) &&
+      this.profile.user_type == this.post.poster_type;
+
+    return isItOwnerPage ? true : isYourOwn && this.$route.name == 'dashboard' ? false : true;
   },
 
   watch: {

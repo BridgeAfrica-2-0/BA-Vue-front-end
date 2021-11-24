@@ -483,10 +483,6 @@ export const FirebaseNotification = {
 
 export const PostComponentMixin = {
 
-  data: () => ({
-
-  }),
-
   methods: {
     checkMediaType(media) {
       return media.split('/')[0];

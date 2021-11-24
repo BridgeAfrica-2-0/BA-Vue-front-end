@@ -19,7 +19,6 @@ export const fullMediaLink = (media) => {
 }
 
 export const fromNow = (dateTime) => {
-  console.log(dateTime)
   const data = (new Date(dateTime)).toISOString()
   const newDate = moment(data, "YYYYMMDD")
   return newDate.fromNow()

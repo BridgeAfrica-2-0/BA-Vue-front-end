@@ -115,7 +115,7 @@
       </b-row>
     </div>
 
-    <div class="mt-2 d-inline-flex w-100" v-if="canBeDelete">
+    <div class="mt-2 d-inline-flex w-100" v-if="(profile.id == item.post_id ? item.post_id : item.id) && canBeDelete">
       <div class="m-md-0 p-md-0">
         <b-avatar variant="primary" square :src="businessLogo" class="img-fluid avat-comment avatar-border"></b-avatar>
       </div>

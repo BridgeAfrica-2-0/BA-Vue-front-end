@@ -42,6 +42,8 @@ import { notification } from "./notifications"
 
 Vue.use(Vuex);
 // axios.defaults.baseURL = process.env.VUE_APP_API_URL;
+//.defaults.baseURL = "https://221e-154-72-167-30.ngrok.io/api/v1/"
+
 axios.defaults.baseURL = "https://221e-154-72-167-30.ngrok.io/api/v1/"
 
 export default new Vuex.Store({

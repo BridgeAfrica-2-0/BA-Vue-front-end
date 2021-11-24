@@ -43,11 +43,11 @@
 </template>
 
 <script>
-//import FeedbackNetwork from "@/components/businessf/tabs/owner/networks/feedbackNetwork";
-//import MediaNetwork from "@/components/businessf/tabs/owner/networks/mediaNetwork";
+import FeedbackNetwork from "@/components/businessf/tabs/owner/networks/feedbackNetwork";
+import MediaNetwork from "@/components/businessf/tabs/owner/networks/mediaNetwork";
 import MemberNetwork from "@/components/businessf/tabs/owner/networks/memberNetwork";
 
-//import Members from "@/components/businessf/tabs/owner/networks/member";
+import Members from "@/components/businessf/tabs/owner/networks/member";
 
 import PostNetwork from "@/components/businessf/tabs/owner/networks/postNetwork";
 
@@ -56,9 +56,9 @@ export default {
   components: {
     PostNetwork,
     MemberNetwork,
-    // MediaNetwork,
-    // Members,
-    // FeedbackNetwork
+    MediaNetwork,
+    Members,
+    FeedbackNetwork
   }
 };
 </script>

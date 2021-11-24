@@ -15,8 +15,6 @@
         hide-footer
         :title="'image' == media ? 'Upload image' : 'Upload video'"
       >
-        <br />
-
         <div id="preview" ref="preview" v-if="img_url">
           <img :src="img_url" v-if="'image' == media" />
 
@@ -32,7 +30,7 @@
         >
       </b-modal>
 
-      <div class="createp img-gall image-wrapp img-size" v-if="showCreateForm">
+      <div class="createp img-gall image-wrapp img-size" v-if="showCreateForm" @click="$refs.movie.click()">
         <div class="">
           <input
             type="file"
@@ -43,7 +41,7 @@
             ref="movie"
           />
 
-          <a @click="$refs.movie.click()">
+          <a>
             <div class="drag-textt">
               <fas-icon :icon="['fas', 'plus']" />
               <h3>{{ $t('profileowner.Add_Item') }}</h3>
@@ -368,7 +366,8 @@ export default {
 
     setCoverPic(id) {
       this.loading = true;
-      const data = ('business' == this.type || 'network' == this.type) ? { businessID: this.$route.params.id, albumID: id } : id;
+      const data =
+        'business' == this.type || 'network' == this.type ? { businessID: this.$route.params.id, albumID: id } : id;
 
       this.pattern[this.type]()
         .setCoverPicture(data)
@@ -394,7 +393,8 @@ export default {
 
     setProfilePic(id) {
       this.loading = true;
-      const data = ('business' == this.type || 'network' == this.type) ? { businessID: this.$route.params.id, albumID: id } : id;
+      const data =
+        'business' == this.type || 'network' == this.type ? { businessID: this.$route.params.id, albumID: id } : id;
       this.pattern[this.type]()
         .setProfilePicture(data)
         .then(() => {
@@ -425,11 +425,12 @@ export default {
       formData.append('dob', this.text);
       let payload = {
         albumID: albumId,
-        businessID: ('business' == this.type || 'network' == this.type) ? this.$route.params.id : null,
+        businessID: 'business' == this.type || 'network' == this.type ? this.$route.params.id : null,
         data: formData,
       };
 
-      const data = ('business' == this.type || 'network' == this.type)? { businessId: this.$route.params.id, albumId } : albumId;
+      const data =
+        'business' == this.type || 'network' == this.type ? { businessId: this.$route.params.id, albumId } : albumId;
 
       this.pattern[this.type]()
         .submitPost(payload)
@@ -667,5 +668,10 @@ export default {
   font-weight: 100;
   text-transform: uppercase;
   color: #000;
+  width: 120px;
+  height: 120px;
+  position: absolute;
+  top: 25%;
+  left: 25%;
 }
 </style>

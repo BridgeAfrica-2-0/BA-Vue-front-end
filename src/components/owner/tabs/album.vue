@@ -4,9 +4,9 @@
     <div class="row">
       <div class="container-fluid" v-if="showalbum == false">
         <div class="one2">
-          <div class="createp img-gall image-wrapp img-size" v-if="isEditor">
+          <div class="createp img-gall image-wrapp img-size" v-if="isEditor" v-b-modal.createalbumModal>
             <div class="">
-              <a v-b-modal.createalbumModal>
+              <a>
                 <div class="drag-textt">
                   <fas-icon :icon="['fas', 'plus']" />
                   <h3>{{ $t('profileowner.Create_Album') }}</h3>
@@ -125,8 +125,6 @@
         :images="strategy[type]().showAlbumImages"
         @reste="hidealbum"
       />
-
- 
     </div>
   </div>
 </template>
@@ -606,5 +604,10 @@ export default {
   font-weight: 100;
   text-transform: uppercase;
   color: #000;
+  width: 120px;
+  height: 120px;
+  position: absolute;
+  top: 25%;
+  left: 25%;
 }
 </style>

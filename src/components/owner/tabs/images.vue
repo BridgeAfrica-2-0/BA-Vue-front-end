@@ -2,7 +2,7 @@
   <div v-if="hasLoadPicture">
     <b-spinner class="custom-loader" :label="$t('profileowner.Large_Spinner')"></b-spinner>
   </div>
-  <div class="row" v-else>
+  <div class="row" v-else> 
     <div class="container-fluid">
       <p v-if="!allImages.length" style="font-size: 3rem">
         {{ $t('profileowner.No_items_found') }}
@@ -30,7 +30,7 @@
         >
       </b-modal>
 
-      <div class="createp img-gall image-wrapp img-size" v-if="showCreateForm" @click="$refs.movie.click()">
+      <div class="createp img-gall image-wrapp img-size" v-if="canUpload && showCreateForm" @click="$refs.movie.click()">
         <div class="">
           <input
             type="file"

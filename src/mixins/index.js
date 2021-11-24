@@ -484,7 +484,7 @@ export const isYourOwnPostMixins = {
 
   computed: {
     isYourOwnPost() {
-      return (this.profile.id == this.item.post_id ? this.item.post_id : this.item.id) && (this.profile.user_type == this.item.poster_type)
+      return (this.profile.id == this.item.user_id) && (this.profile.user_type == this.item.poster_type)
     },
     ...mapGetters({
       profile: 'auth/profilConnected',

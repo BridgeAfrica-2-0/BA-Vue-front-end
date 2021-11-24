@@ -296,16 +296,14 @@ export default {
     ...mapGetters({
       profile: 'auth/profilConnected',
     }),
-  },
 
-  isYourOwnPost() {
-    const isItOwnerPage = this.$route.name == 'BusinessOwner' || this.$route.name == 'profile_owner' ? true : false;
+    isYourOwnPost() {
+      const isItOwnerPage = this.$route.name == 'BusinessOwner' || this.$route.name == 'profile_owner' ? true : false;
 
-    const isYourOwn =
-      (this.profile.id == this.post.post_id ? this.post.post_id : this.post.id) &&
-      this.profile.user_type == this.post.poster_type;
+      const isYourOwn = this.profile.id == this.post.user_id && this.profile.user_type == this.post.poster_type;
 
-    return isItOwnerPage ? true : isYourOwn && this.$route.name == 'dashboard' ? false : true;
+      return !isItOwnerPage ? true : isYourOwn && this.$route.name == 'dashboard' ? false : true;
+    },
   },
 
   watch: {

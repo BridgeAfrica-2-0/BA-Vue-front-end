@@ -199,12 +199,12 @@
               <label class="col-md-3 pl-0 pr-0 control-label">Birth Year</label>
               <div class="col-md-9 pr-0 pl-0">
                 <div class="form-group">
-                  <b-form-datepicker id="example-datepicker" v-model="birthDate.date" class="mb-2"></b-form-datepicker>
+                  <b-form-datepicker id="example-datepicker" v-model="birthDate.date" :max="max" class="mb-2"></b-form-datepicker>
                 </div>
               </div>
             </div>
             <div class="fosrm-group text-right w-100">
-              <button type="button" class="btn btn-dark pr-1" @click="cancel">
+              <button type="button" class="btn btn-dark pr-1" @click="$bvModal.hide('modal-6')">
                 {{ $t('profileowner.Cancel') }}
               </button>
               <button
@@ -421,7 +421,11 @@
 import moment from "moment";
 export default {
   data() {
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+     const maxDate = new Date(today)
     return {
+      max: maxDate,
       websiteId: null,
       basicInfo: {
         dateOfBirth: { day: "12", month: "1", year: "2000" },

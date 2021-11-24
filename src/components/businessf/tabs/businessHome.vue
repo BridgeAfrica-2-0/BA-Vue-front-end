@@ -5,11 +5,11 @@
         <Intro />
         <Media />      
         <Followers />
-        <HotBusiness />
+        <HotBusiness  class="mb-md-3"  />
       </b-col>
       
 
-      <b-col md="8"  lg="7"  xl="8">
+      <b-col md="12"  lg="7"  xl="8">
 
         <Post />
 
@@ -21,7 +21,7 @@
 
 <script>
 import Intro from "../intro";
-import Followers from "./comunitiDashboard";
+import Followers from "@/components/businessOwner/tabs/comunitiDashboard";
 import HotBusiness from "../hotBusinesses";
 import Post from "../ownerPost";
 import Media from "../../media";

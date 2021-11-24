@@ -802,8 +802,7 @@
                       <strong class="title">
                         {{ business.name }}
                       </strong>
-                      <br />
-                      <span v-if="Array.isArray(business.category)">
+                      <br />  
                         <span
                           class=""
                           v-for="cat in business.category"
@@ -811,7 +810,7 @@
                         >
                           {{ cat.name }}
                         </span>
-                      </span>
+                      
                       <br />
                       {{ business.community }} {{ $t('profileowner.Community') }} <br />
 

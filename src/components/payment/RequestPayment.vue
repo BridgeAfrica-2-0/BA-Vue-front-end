@@ -9,6 +9,7 @@
 					<b-form-input
 						placeholder="237 6XX XXX XXX"
 						id="number"
+						v-model="number"
 						type="tel"
 					></b-form-input>
 				</div>
@@ -67,11 +68,12 @@
 					currency: "XAF",
 					minimumFractionDigits: 2,
 				}),
+				number: '',
 			};
 		},
 		methods: {
 			confirmPayment() {
-				this.$emit("confirmpayment");
+				this.$emit('confirmpayment', {number: this.number, amount: this.price, operator: this.operator});
 			},
 			formatMoney(money) {
 				return this.formatObject.format(money);

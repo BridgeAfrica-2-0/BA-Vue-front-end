@@ -1,5 +1,5 @@
 <template>
-  <div class="p-3 card-border my-3">
+  <div class="p-3 card-border my-3" ref="`post-${item.post_id ? item.post_id : item.id}`">
     <div class="mt-2">
       <div class="d-inline-flex">
         <span md="1" class="m-0 p-0">
@@ -12,7 +12,7 @@
           <p class="durationn">{{ item.created_at | now }}</p>
         </div>
 
-        <div class="toright pt-2" v-if="canBeDelete">
+        <div class="toright" v-if="canBeDelete">
           <b-dropdown variant="link" size="sm" no-caret>
             <template #button-content>
               <b-icon icon="three-dots" variant="primary" aria-hidden="true"></b-icon>
@@ -607,8 +607,14 @@ export default {
 .post-text p {
   margin: 0px;
 }
+
 .toright {
   position: absolute;
-  right: 3%;
+  right: 6%;
+  border: 1px solid #e75c18;
+}
+.toright:hover {
+  color: white;
+  border: 1px solid #ddd;
 }
 </style>

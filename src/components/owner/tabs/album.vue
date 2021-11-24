@@ -119,8 +119,6 @@
           ['profile_picture', 'Profile', 'Cover', 'cover_photo', 'Cover Photo', 'logo', 'Logo', 'post'].includes(
             album_name,
           )
-            ? true
-            : false
         "
         :images="strategy[type]().showAlbumImages"
         @reste="hidealbum"

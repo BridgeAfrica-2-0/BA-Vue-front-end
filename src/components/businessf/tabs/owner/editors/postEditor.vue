@@ -99,7 +99,7 @@
           </b-row>
           <b-row>
             <b-col cols="1" md="1" cl ass="m-0 p-0"></b-col>
-            <b-col cols="10" md="10" class="m-0 p-0">
+            <b-col cols="10" md="10" class="m-0 p-0" ref="updatePost">
               <br />
               <div class="cursor">
                 <b-form-textarea
@@ -171,8 +171,8 @@
               <br />
 
               <span>
-                <b-button @click="updatePost" variant="primary" block
-                  ><b-icon icon="cursor-fill" variant="primary"></b-icon> Publish</b-button
+                <b-button @click="updatePost" variant="primary" block :disabled="loading"
+                  ><b-icon icon="cursor-fill" variant="primary"></b-icon>Publish</b-button
                 >
               </span>
             </b-col>
@@ -256,7 +256,7 @@
               </div>
               <br />
               <span>
-                <b-button @click="submitPost" variant="primary" block
+                <b-button @click="submitPost" variant="primary" block :disabled="loading"
                   ><b-icon icon="cursor-fill" variant="primary"></b-icon> Publish</b-button
                 >
               </span>
@@ -267,6 +267,7 @@
       </div>
     </div>
     <Post
+      
       v-for="(item, index) in owner_post"
       :key="index"
       :post="item"
@@ -275,7 +276,6 @@
       :businessLogo="item.profile_picture"
       :editPost="() => editPost(item)"
       :deletePost="() => deletePost(item)"
-      
     />
 
     <infinite-loading @infinite="infiniteHandler"></infinite-loading>
@@ -304,34 +304,7 @@ export default {
       edit_id: null,
 
       fullPage: false,
-      images: [
-        'https://i.wifegeek.com/200426/f9459c52.jpg',
-        'https://i.wifegeek.com/200426/5ce1e1c7.jpg',
-        'https://i.wifegeek.com/200426/5fa51df3.jpg',
-        'https://i.wifegeek.com/200426/663181fe.jpg',
-        'https://i.wifegeek.com/200426/2d110780.jpg',
-        'https://i.wifegeek.com/200426/e73cd3fa.jpg',
-        'https://i.wifegeek.com/200426/15160d6e.jpg',
-        'https://i.wifegeek.com/200426/d0c881ae.jpg',
-        'https://i.wifegeek.com/200426/a154fc3d.jpg',
-        'https://i.wifegeek.com/200426/71d3aa60.jpg',
-        'https://i.wifegeek.com/200426/d17ce9a0.jpg',
-        'https://i.wifegeek.com/200426/7c4deca9.jpg',
-        'https://i.wifegeek.com/200426/64672676.jpg',
-        'https://i.wifegeek.com/200426/de6ab9c6.jpg',
-        'https://i.wifegeek.com/200426/d8bcb6a7.jpg',
-        'https://i.wifegeek.com/200426/4085d03b.jpg',
-        'https://i.wifegeek.com/200426/177ef44c.jpg',
-        'https://i.wifegeek.com/200426/d74d9040.jpg',
-        'https://i.wifegeek.com/200426/81e24a47.jpg',
-        'https://i.wifegeek.com/200426/43e2e8bb.jpg',
-      ],
-      imagees: ['https://i.wifegeek.com/200426/f9459c52.jpg', 'https://i.wifegeek.com/200426/5ce1e1c7.jpg'],
-      ima: [
-        'https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg',
-        'https://pbs.twimg.com/media/DKO62sVXUAA0_AL.jpg',
-        'https://i.wifegeek.com/200426/5ce1e1c7.jpg',
-      ],
+      loading: false,
       createPost: {
         // profile_picture: this.$store.getters.getProfilePicture,
         postNetworkUpdate: '',
@@ -388,23 +361,19 @@ export default {
             $state.complete();
           }
         })
-        .catch((err) => {
-          console.log({ err: err });
-        });
+        .catch((err) => {});
     },
     deletePost(post) {
       console.log(post);
 
-      // let loader = this.$loading.show({
-      //   container: this.fullPage ? null : this.$refs.creatform,
-      //   canCancel: true,
-      //   onCancel: this.onCancel,
-      //   color: "#e75c18",
-      // });
+      let loader = this.$loading.show({
+        container: this.$refs[`post-${post.post_id ? post.post_id : post.id}`],
+        canCancel: true,
+        onCancel: this.onCancel,
+        color: '#e75c18',
+      });
       this.axios
-        .post('network/delete/post/' + post.post_id, {
-          name: this.name,
-        })
+        .delete(`network/${this.$route.params.id}/post/${post.post_id ? post.post_id : post.id}`)
         .then((response) => {
           console.log(response.data);
           this.ownerPost();
@@ -413,26 +382,23 @@ export default {
             blockClass: 'custom-block-class',
             message: 'Post Deleted',
           });
-          // loader.hide();
+          loader.hide();
         })
         .catch((err) => {
+          loader.hide();
           this.sending = false;
           if (err.response.status == 422) {
-            console.log({ err: err });
             this.flashMessage.show({
               status: 'error',
               blockClass: 'custom-block-class',
               message: err.response.data.message,
             });
-            // loader.hide();
           } else {
             this.flashMessage.show({
               status: 'error',
               blockClass: 'custom-block-class',
-              message: 'Unable to Delete your Post',
+              message: err.response.data.message,
             });
-            console.log({ err: err });
-            // loader.hide();
           }
         });
     },
@@ -440,31 +406,32 @@ export default {
     editPost(postarray) {
       this.edit_description = postarray.content;
       this.edit_image = postarray.media;
-      this.edit_id = postarray.post_id;
+      this.edit_id = postarray.post_id ? postarray.post_id : postarray.id;
       console.log(this.edit_image);
       this.$refs['modal-edit'].show();
     },
     updatePost() {
-      // let loader = this.$loading.show({
-      //   container: this.fullPage ? null : this.$refs.loader,
-      //   canCancel: true,
-      //   onCancel: this.onCancel,
-      //   color:"#e75c18"
-      // });
-      //  const fileImage = this.createPost.movies[0].target.files[0];
+      this.loading = true;
       this.fileImageArr = this.createPost.movies;
+
       let formData2 = new FormData();
       this.delete.forEach((value, index) => {
         formData2.append('deleteImg[' + index + ']', value.id);
-        console.log(value);
       });
       this.fileImageArr.forEach((value, index) => {
         formData2.append('media[' + index + ']', value.target.files[0]);
-        console.log(value);
       });
       formData2.append('type', 'image');
       //    formData2.append("media", this.createPost.hyperlinks);
       formData2.append('content', this.edit_description);
+
+      let loader = this.$loading.show({
+        container: this.$refs.updatePost,
+        canCancel: true,
+        onCancel: this.onCancel,
+        color: '#e75c18',
+      });
+
       this.axios
         .post('network/edit/post/' + this.edit_id, formData2, {
           headers: {
@@ -473,34 +440,32 @@ export default {
         })
         .then((response) => {
           console.log(response);
-          this.ownerPost();
+          this.loading = false;
           this.flashMessage.show({
             status: 'success',
             blockClass: 'custom-block-class',
             message: 'Content successfuly uploaded',
           });
-          // loader.hide();
+          loader.hide();
           this.$refs['modal-edit'].hide();
         })
         .catch((err) => {
+          this.loading = false;
+          loader.hide();
           if (err.response.status == 422) {
-            console.log({ err: err });
             console.log(err.response.data.message);
             this.flashMessage.show({
               status: 'error',
               message: err.response.data.message,
               blockClass: 'custom-block-class',
             });
-            // loader.hide()
             this.$refs['modal-edit'].hide();
           } else {
             this.flashMessage.show({
               status: 'error',
-              message: 'Unable to Update your post',
+              message: err.response.data.message,
               blockClass: 'custom-block-class',
             });
-            console.log({ err: err });
-            // loader.hide()
             this.$refs['modal-edit'].hide();
           }
         });
@@ -517,10 +482,6 @@ export default {
       if (file.files) {
         let reader = new FileReader();
         reader.onload = (e) => {
-          //localStorage.setItem("cover_image", e.target.result);
-          //this.user.cover_image = e.target.result;
-          //console.log( "It pass")
-          //console.log( result );
           this.createPost.movies.push({
             target: event.target,
             movie: e.target.result,
@@ -537,10 +498,7 @@ export default {
         let reader = new FileReader();
         reader.onload = (e) => {
           result = e.target.result;
-          //localStorage.setItem("cover_image", e.target.result);
-          //this.user.cover_image = e.target.result;
-          //console.log( "It pass")
-          //console.log( result );
+
           return result;
         };
         reader.readAsDataURL(file.files[0]);
@@ -576,6 +534,7 @@ export default {
     createPost_() {
       this.$refs['modal-xl'].show();
     },
+
     deleteItem(name) {
       const newHyperlinks = this.createPost.hyperlinks.filter((item) => item.fileName.trim() !== name.trim());
       const movies = this.createPost.movies.filter((item) => item.fileName.trim() !== name.trim());
@@ -587,7 +546,6 @@ export default {
       this.delete.push({
         id: eve.id,
       });
-      console.log(this.delete);
     },
     onCancel() {
       console.log('User cancelled the loader.');
@@ -598,25 +556,15 @@ export default {
         .then(() => {
           console.log('hey yeah');
         })
-        .catch((err) => {
-          console.log({ err: err });
-        });
+        .catch((err) => {});
     },
     submitPost() {
-      // let loader = this.$loading.show({
-      //   container: this.fullPage ? null : this.$refs.loader,
-      //   canCancel: true,
-      //   onCancel: this.onCancel,
-      //   color:"#e75c18"
-      // });
+      this.loading = true;
       const fileImage = this.createPost.movies[0].target.files[0];
       this.fileImageArr = this.createPost.movies;
       let formData2 = new FormData();
       this.fileImageArr.forEach((value, index) => {
         formData2.append('media[' + index + ']', value.target.files[0]);
-        console.log(value);
-        console.log(value.target.files[0]);
-        console.log('testingggg');
       });
       console.log(this.fileImageArr);
       formData2.append('type', 'image');
@@ -630,6 +578,7 @@ export default {
         })
         .then((response) => {
           console.log(response);
+          this.loading = false;
           this.flashMessage.show({
             status: 'success',
             blockClass: 'custom-block-class',
@@ -640,8 +589,8 @@ export default {
           this.ownerPost();
         })
         .catch((err) => {
+          this.loading = false;
           if (err.response.status == 422) {
-            console.log({ err: err });
             console.log(err.response.data.message);
             this.flashMessage.show({
               status: 'error',
@@ -652,10 +601,10 @@ export default {
           } else {
             this.flashMessage.show({
               status: 'error',
-              message: 'Unable to Create Your Post',
+              message: err.response.data.message,
               blockClass: 'custom-block-class',
             });
-            console.log({ err: err });
+
             // loader.hide()
           }
         });

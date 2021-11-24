@@ -140,13 +140,16 @@
                   role="button"
                   data-original-title=""
                   title=""
-                  ><span class="text-ored"><fas-icon class="primary" :icon="['fas', 'comment']" /><b-badge class="msg-number">{{hasNewMessage}}</b-badge></span
-                ></a>
+                  ><span class="text-ored"
+                    ><fas-icon class="primary" :icon="['fas', 'comment']" /><b-badge class="msg-number">{{
+                      hasNewMessage
+                    }}</b-badge></span
+                  ></a
+                >
 
                 <a id="messages" class="nav-link" role="button" data-original-title="" title="" v-else
-                  ><span class="text-ored"><fas-icon class="primary" :icon="['fas', 'comment']" />
-                      
-                    </span></a>
+                  ><span class="text-ored"><fas-icon class="primary" :icon="['fas', 'comment']" /> </span
+                ></a>
 
                 <MessageNotification v-if="hasNewMessage" />
               </div>
@@ -156,12 +159,12 @@
                   ><span class="text-ored"><b-icon-bell-fill class="col-bg"></b-icon-bell-fill></span
                 ></a>
                 <b-popover target="notif" triggers="hover" placement="top">
-                  <NavBarNotifications/>
+                  <NavBarNotifications />
                 </b-popover>
               </div>
 
               <div class="nav-item" id="profilepic">
-                <a class="nav-link text-dark" href="">
+                <a class="nav-link text-dark" href="" @click.prevent="switchToProfile">
                   <span><img :src="user.profile_picture" class="rounded-circle" alt="" width="50" height="50" /></span>
                 </a>
               </div>
@@ -302,13 +305,13 @@
 import Button from '@/components/ButtonNavBarFind.vue';
 import Activity from '@/components/ShowActivity.vue';
 import NavBarNotifications from '@/components/NavBarNotifications.vue';
-import { mapGetters, mapActions } from 'vuex';
+import { mapGetters, mapActions, mapMutations } from 'vuex';
 export default {
   name: 'navbar',
   components: {
     Button,
     Activity,
-    NavBarNotifications
+    NavBarNotifications,
   },
   props: {
     credentials: {
@@ -332,6 +335,7 @@ export default {
       hasLauchNetworkRequest: 'social/INIT',
       hasNewMessage: 'notification/HAS_MESSAGE',
       user: 'auth/profilConnected',
+      auth: 'auth/user',
     }),
   },
   created() {
@@ -343,6 +347,10 @@ export default {
       setBusiness: 'social/FIND_USER_BUSNESS',
       lauchNetworkRequest: 'social/INIT',
       Logout: 'auth/logout',
+    }),
+
+    ...mapMutations({
+      profile: 'auth/profilConnected',
     }),
 
     getKeyword() {
@@ -389,6 +397,21 @@ export default {
     logout: async function () {
       const response = await this.$repository.notification.logOut();
       if (response.success) this.Logout();
+    },
+
+    switchToProfile: async function () {
+      let loader = this.$loading.show({
+        container: this.$refs.formContainer,
+        canCancel: true,
+        onCancel: this.onCancel,
+        color: '#e75c18',
+      });
+
+      const response = await this.$repository.share.switch(null, 'reset');
+      if (response.success) {
+        loader.hide();
+        this.profile({ ...this.auth.user, user_type: 'user' });
+      }
     },
 
     toggleinput() {

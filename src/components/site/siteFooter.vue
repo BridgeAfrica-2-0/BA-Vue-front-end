@@ -126,4 +126,9 @@ export default {};
 .color-white {
   color: #ffffff;
 }
+@media only screen and (max-width: 660px) {
+  .footer-icons-div {
+    width: 100%;
+  }
+}
 </style>

@@ -15,10 +15,10 @@
             <b-nav-item href="#">
               <span class="text-dark font-arvo nav-span">Home</span>
             </b-nav-item>
-            <b-nav-item href="#" class="ml-md-3" :class="currentRouteName == 'about' ? 'active' : ''">
+            <b-nav-item href="/about" class="ml-md-3" :class="currentRouteName == 'about' ? 'active' : ''">
               <span class="text-dark font-arvo nav-span">About Us</span>
             </b-nav-item>
-            <b-nav-item href="#" class="ml-md-3" :class="currentRouteName == 'contact' ? 'active' : ''">
+            <b-nav-item href="/contact" class="ml-md-3" :class="currentRouteName == 'contact' ? 'active' : ''">
               <span class="text-dark font-arvo nav-span">Contact Us</span>
             </b-nav-item>
             <b-nav-item href="#" class="ml-md-3">

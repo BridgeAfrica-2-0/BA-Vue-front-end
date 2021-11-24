@@ -177,5 +177,15 @@ export default {
   .keep-in-touch-header h1 {
     font-size: 24px;
   }
+  .address {
+    min-height: 40vh;
+    width: 90%;
+    margin: auto;
+    margin-top: -15vh;
+  }
+  .address-div {
+    border-right: none;
+    border-bottom: 1px solid #d3d3d3;
+  }
 }
 </style>

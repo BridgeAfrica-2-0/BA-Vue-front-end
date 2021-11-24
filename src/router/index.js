@@ -252,6 +252,17 @@ const routes = [{
     auth: true,
   },
 },
+
+{
+  path: "/business/:id?",
+  name: "BusinessFollower",
+  component: businessFollower,
+  meta: {
+    auth: true,
+  },
+},
+
+
 {
   path: "/businessvisitor",
   name: "BusinessVisitor",

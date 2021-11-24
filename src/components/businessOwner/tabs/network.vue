@@ -97,8 +97,8 @@ export default {
   },
 
   mounted() {
-    this.biz_id = this.$route.params.id !== undefined ? this.$route.params.id : this.$router.push('notFound'); //! need some review
-    // this.biz_id = this.$route.params.id !== undefined ? this.$route.params.id : 1; //! need some review
+    
+     this.biz_id = this.$route.params.id 
   },
 
   methods: {

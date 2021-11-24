@@ -2,34 +2,46 @@
   <div>
     <div class="people-style shadow" v-for="item in businesses" :key="item.id">
       <b-row>
-        <b-col md="3" xl="5" lg="5" cols="5" sm="3">
-          <div class="center-img">
-            <splide :options="options" class="r-image">
-              <splide-slide>
-                <img :src="item.picture" class="r-image" />
-              </splide-slide>
-            </splide>
-          </div>
-        </b-col>
-        <b-col md="5" cols="7" lg="7" xl="7" sm="5">
-          <p class="textt">
-            <strong class="title"> {{ item.name }}</strong> <br />
-            {{ item.category }}
-            <br />
-            {{ count(item.followers) }} Community <br />
+        <b-col md="8" xl="12" lg="12" cols="12" sm="8">
+          
 
-            <span class="location"> <b-icon-geo-alt class="ico"></b-icon-geo-alt>{{ item.country }} </span>
-            <br />
-            <read-more
+
+
+
+          <div class="d-inline-flex">   
+              <div class="center-img ">
+                <splide :options="options" class="r-image">
+                  <splide-slide cl>
+                    <img :src="item.picture" class="r-image" />
+                  </splide-slide>
+                </splide>
+              </div>   <div class="flx100"> 
+              <p class="textt">
+                <strong class="title"> {{ item.name }} </strong> <br />
+               
+            <span v-for="cat in item.category" :key="cat.name">   {{cat.name}}  </span>
+                <br />
+                {{ count(item.followers) }}
+                {{ $t('dashboard.Community') }} <br />
+
+                <span class="location">
+                  <b-icon-geo-alt class="ico"></b-icon-geo-alt
+                  >{{ item.country }}
+                </span>
+                <br />
+       <read-more
               more-str="read more"
               class="readmore"
               :text="item.about_business"
               link="#"
               less-str="read less"
-              :max-chars="15"
+              :max-chars="75"
             >
             </read-more>
-          </p>
+              </p>
+               </div>
+               </div>
+        
         </b-col>
 
         <b-col lg="12" xl="12" md="4" cols="12" sm="4">
@@ -275,7 +287,7 @@ export default {
     padding: 1px;
     text-align: left;
 
-    margin-left: -30px;
+    margin-left: 2px;
 
     margin-right: -5px;
 
@@ -328,7 +340,7 @@ export default {
     padding: 1px;
     text-align: left;
 
-    margin-left: 30px;
+    margin-left: 65px;
 
     margin-right: -5px;
 

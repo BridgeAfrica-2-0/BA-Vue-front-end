@@ -111,8 +111,8 @@ export default {
             
            
 
-            case "owner" : this.$router.push({ name: "BusinessOwner",params: { id: this.foll_id } });; 
-            break;
+            // case "owner" : this.$router.push({ name: "BusinessOwner",params: { id: this.foll_id } });; 
+            // break;
 
             case "visitor" :  this.$router.push({ name: "BusinessFollower",params: { id: this.foll_id } });
             break;

@@ -6,7 +6,7 @@
     <navbar />
 
     
-
+       
     <div class="container-fluid">
       <ly-tab
         v-model="selectedId"
@@ -80,6 +80,8 @@ export default {
       foll_id:null,
        isloaded: false,
       url_data: null,
+    
+
       items: [
         { label: "Home ", icon: "" },
 
@@ -95,6 +97,10 @@ export default {
       }
     };
   },
+
+
+ 
+
 
   methods: {
     businessInfo() {
@@ -135,6 +141,7 @@ export default {
   computed: {},
 
     created() {
+      
     this.foll_id = this.$route.params.id;  
 
     this.$store

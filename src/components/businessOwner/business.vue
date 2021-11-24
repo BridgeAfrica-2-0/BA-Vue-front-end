@@ -42,20 +42,50 @@ export default {
   data() {
     return {
       currentTab: 0,
+      tabIndex: null,
+      tabs: ["#post", "#about", "#media", "#market", "#community"],
     };
   },
   computed: {},
   methods: {},
   created() {
+
+  
+   let tab = this.tabs.findIndex(tab => tab === this.$route.hash)
+
+  if(tab==-1){
+    
+    
     this.currentTab =
       localStorage.getItem('ba-business-active-tab') !== null ? localStorage.getItem('ba-business-active-tab') : 0;
+
+  } else{
+
+    this.currentTab =tab;
+  }
   },
+
 
   watch: {
     currentTab: (newVal, oldVal) => {
       localStorage.setItem('ba-business-active-tab', newVal);
     },
+
+
+   
+  $route(to, from) {
+      console.log(to.hash);
+      this.currentTab = this.tabs.findIndex((tab) => tab === to.hash);
+
+    },
+    
+  
+
   },
+
+
+  
+
 };
 </script>
 

@@ -89,6 +89,7 @@ export default {
   data() {
     return {
       page: 1,
+      users:[],
        biz_id:null,
        infiniteId: +new Date(),
       options: {
@@ -104,7 +105,7 @@ export default {
   },
 
   computed: {
-    users() {
+    old_users() {
       if (this.type == "Follower") {
 
        return  this.$store.state.businessOwner.UcommunityFollower.user_followers;  

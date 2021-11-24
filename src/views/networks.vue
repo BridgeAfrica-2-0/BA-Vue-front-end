@@ -65,7 +65,7 @@
         </b-link>
       </span>
       Bridge Africa © 2021
-    </p>
+    </p> 
   </div>
 
 </template>

@@ -46,7 +46,7 @@
       </b-col>
     </b-row>
     
-    <FlashMessage />
+    <!-- <FlashMessage /> -->
   </div>
 </template>
 

@@ -263,7 +263,7 @@
       >
         <b-spinner v-if="SPupdateN" small type="grow"></b-spinner>{{ $t('network.Upload') }} 
       </b-button>
-    </b-modal>
+    </b-modal> 
   </div>
 
   <!-- <div v-else class="text-center">

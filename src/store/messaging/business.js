@@ -5,7 +5,7 @@ export default {
     namespaced: true,
     state: {
         currentBizId: null,
-        currentBiz: null,
+        currentBiz: [],
         bizs: [],
         chats: [],
         chatList: [],
@@ -106,26 +106,33 @@ export default {
     },
 
     actions: {
-        GET_BIZS({ commit, state, getters, rootGetters, rootState }, data) {
+        async GET_BIZS({ commit, state, getters, rootGetters, rootState }, data) {
 
             commit("setBizs", []);
 
             commit("setLoader", true);
+
             let keyword = data ? '/' + data : ''
-            axios.get(`/business/all${keyword}`)
+            await axios.get(`/business/all${keyword}`)
                 .then((res) => {
                     commit("setLoader", false);
                     let bizs = res.data.data
+
+                    console.log('businesses:', bizs)
                     commit("setBizs", bizs);
-                    // let curBiz = bizs.filter((biz) => {
-                    //     return state.currentBizId == biz.id
-                    // })
+                    let curBiz = bizs.filter((biz) => {
+                        return state.currentBizId == biz.id
+                    })
+                    commit("setCurrentBiz", curBiz);
+
                 })
                 .catch((err) => {
                     commit("setLoader", false);
                     console.log(err);
                 })
-            commit("setCurrentBiz", rootGetters['auth/profilConnected']);
+                // commit("setCurrentBiz", rootGetters['auth/profilConnected']);
+                // console.log("current biz:", curBiz);
+
 
         },
         // [NO BUG]

@@ -85,7 +85,7 @@ const routes = [{
 },
 
 {
-    path: '/about-us',
+    path: '/about',
     name: 'about',
     component: about,
     // meta: {

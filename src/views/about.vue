@@ -1,38 +1,8 @@
 <template>
   <div class="about">
-    <header class="position-relative">
-      <b-navbar toggleable="lg" variant="faded" type="light">
-        <div class="container">
-          <div class="col-md-12 col-lg-2 col-xl-2 text-center">
-            <a class="d-inline-block align-top mt-1" href="#">
-              <img src="@/assets/logo.png" alt="" class="balogo" loading="lazy" />
-            </a>
-          </div>
-
-          <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-
-          <b-collapse id="nav-collapse" is-nav>
-            <b-navbar-nav class="ml-auto text-center">
-              <b-nav-item href="#">
-                <span class="text-dark font-arvo nav-span">Home</span>
-              </b-nav-item>
-              <b-nav-item href="#" class="active ml-md-3">
-                <span class="text-dark font-arvo nav-span">About Us</span>
-              </b-nav-item>
-              <b-nav-item href="#" class="ml-md-3">
-                <span class="text-dark font-arvo nav-span">Contact Us</span>
-              </b-nav-item>
-              <b-nav-item href="#" class="ml-md-3">
-                <span class="text-dark font-arvo nav-span">Login</span>
-              </b-nav-item>
-              <b-nav-item href="#" class="ml-md-3">
-                <span class="text-dark font-arvo nav-span">Sign Up</span>
-              </b-nav-item>
-            </b-navbar-nav>
-          </b-collapse>
-        </div>
-      </b-navbar>
-    </header>
+    <!-- Header -->
+    <site-header />
+    <!-- BG -->
     <div class="bg-img d-flex align-items-end pb-5 px-2">
       <div class="d-none d-md-block px-5">
         <div class="header-img-text text-light font-rob">
@@ -647,10 +617,12 @@
 <script>
 import Contact from '../components/site/contact';
 import SiteFooter from '../components/site/siteFooter';
+import SiteHeader from '../components/site/siteHeader';
 export default {
   components: {
     Contact,
     SiteFooter,
+    SiteHeader,
   },
   data() {
     return {
@@ -739,10 +711,6 @@ export default {
 }
 .nav-item.active .nav-link span {
   color: #e94a47 !important;
-}
-.nav-span {
-  font-size: 14px;
-  font-weight: bold;
 }
 .about {
   margin-left: -6px;

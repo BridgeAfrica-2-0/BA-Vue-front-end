@@ -1,63 +1,26 @@
 <template>
   <div>
+    <b-modal id="modal-sm" size="sm" hide-header>
+      Do you want to join this network?
+    </b-modal>
 
-   <div class=" border mt-2 ">
-
-     <span>
-        <h6 class="title m-1">
-          <fas-icon
-                  class="icons"
-                  :icon="['fas', 'hands-helping']"
-                  size="lg"
-                />
-          <b> Hot Businesses </b> 
-        </h6>
-      </span>
-
-   <div class="ovver">  
-
-        <div class="people-style shadow" v-for="item in business" :key="item.id">
+    <div class="people-style shadow" v-for="item in network" :key="item.id">
       <b-row>
-        <b-col md="8" xl="12" lg="12" cols="12" sm="8">
-          
+        <b-col md="3" xl="5" lg="5" cols="5" sm="3">
+          <div class="center-img">
+            <img :src="item.picture" class="r-image" />
+          </div>   
+        </b-col>
 
+        <b-col md="5" cols="7" lg="7" xl="7" sm="5">
+          <p class="textt">
+            <strong class="title"> {{ item.name }} </strong> <br />
+            {{ item.category }}
+            <br />
+            {{ item.followers }} Community<br />
 
-
-
-          <div class="d-inline-flex">   
-              <div class="center-img ">
-                <splide :options="options" class="r-image">
-                  <splide-slide cl>
-                    <img :src="item.picture" class="r-image" />
-                  </splide-slide>
-                </splide>
-              </div>   <div class="flx100"> 
-              <p class="textt">
-                <strong class="title"> {{ item.name }} </strong> <br />
-               
-            <span v-for="cat in item.category" :key="cat.name">   {{cat.name}}  </span>
-                <br />
-                {{ count(item.followers) }}
-                {{ $t('dashboard.Community') }} <br />
-
-                <span class="location">
-                  <b-icon-geo-alt class="ico"></b-icon-geo-alt
-                  >{{ item.country }}
-                </span>
-                <br />
-       <read-more
-              more-str="read more"
-              class="readmore"
-              :text="item.about_business"
-              link="#"
-              less-str="read less"
-              :max-chars="75"
-            >
-            </read-more>
-              </p>
-               </div>
-               </div>
-        
+            {{ item.about_network }} <b-link>Read More</b-link>
+          </p>
         </b-col>
 
         <b-col lg="12" xl="12" md="4" cols="12" sm="4">
@@ -68,9 +31,9 @@
                   block
                   size="sm"
                   class="b-background shadow"
-                  :id="'followbtn'+item.id"
                   :class="item.is_follow !== 0 && 'u-btn'"
                   variant="primary"
+                   :id="'followbtn'+item.id"
                   @click="handleFollow(item)"
                 >
                   <i class="fas fa-lg btn-icon" :class="item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"></i>
@@ -87,7 +50,7 @@
 
               <b-col md="12" lg="4" xl="4" sm="12" cols="4" class="mt-2 text-center">
                 <b-button block size="sm" class="b-background shadow " variant="primary">
-                  <i class="fas fa-map-marked-alt  fa-lg btn-icon"></i>
+                  <i class="fas fa-map-marked-alt  fa-lg btn-icon "></i>
                   <span class="btn-text">Direction</span>
                 </b-button>
               </b-col>
@@ -95,119 +58,115 @@
           </div>
         </b-col>
       </b-row>
-    </div> 
-     <infinite-loading @infinite="infiniteHandler"></infinite-loading>
-      </div>
-  </div>
+    </div>
+
+    <infinite-loading @infinite="infiniteHandler"></infinite-loading>
   </div>
 </template>
 
 <script>
-import axios from "axios";  
-export default {
-  props: ["title", "image"],
+import axios from 'axios';
 
+export default {
+  props: ['type'],
   data() {
     return {
-       page: 1,
-       isloading:false,
-       business:[],
+      page: 1,
+      biz_id: null,
+      network: [],
       options: {
         rewind: true,
         autoplay: true,
         perPage: 1,
         pagination: false,
 
-        type: "loop",
-        perMove: 1
-      }
+        type: 'loop',
+        perMove: 1,
+      },
     };
   },
-  
-  
 
-  methods:{
-
-   
-
-    count(number) {
-      if (number >= 1000000) {
-        return number / 1000000 + "M";
+  computed: {
+    old_network() {
+      if (this.type == 'Follower') {
+        return this.$store.state.businessOwner.NcommunityFollower.network_followers;
+      } else {
+        return this.$store.state.profile.NcommunityFollowing.network_following;
       }
-      if (number >= 1000) {
-        return number / 1000 + "K";
-      } else return number;
+    },
+  },
+
+  mounted() {
+    
+     this.biz_id = this.$route.params.id 
+  },
+
+  methods: {
+    infiniteHandler($state) {
+      console.log('loading network 1 1');
+
+      const url =
+        this.type === 'Follower'
+          ? `business/community/network-follower/${this.biz_id}/`
+          : `business/community/network-following/${this.biz_id}/`;
+
+      axios
+        .get(url + this.page)
+        .then(({ data }) => {
+          console.log('lading network after response');
+          console.log(data);
+          if (this.type == 'Follower') {
+            if (data.data.network_followers.length) {
+              this.page += 1;
+              this.network.push(...data.data.network_followers);
+
+              $state.loaded();
+            } else {
+              $state.complete();
+            }
+          } else {
+            if (data.data.network_following.length) {
+              this.page += 1;
+
+              this.network.push(...data.data.network_following);
+
+              $state.loaded();
+            } else {
+              $state.complete();
+            }
+          }
+        })
+        .catch(err => {
+          console.log({ err: err });
+        });
     },
 
-
-    
-     async handleFollow(user) {
-
-      document.getElementById("followbtn"+user.id).disabled = true;
-       
+    async handleFollow(user) {
+       document.getElementById("followbtn"+user.id).disabled = true;
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
         id: user.id,
-        type: 'business',
+        type: 'network',
       };
 
       await axios
         .post(uri, data)
         .then(response => {
-
-          console.log(response);
           user.is_follow = nextFollowState;
-         document.getElementById("followbtn"+user.id).disabled = false;
-            
-        })
-        .catch(err =>{  
-          
-          console.log(err)  ;
            document.getElementById("followbtn"+user.id).disabled =  false;
-          
+        })
+        .catch(err =>{   console.log(err)
+         document.getElementById("followbtn"+user.id).disabled =  false;
         });
-         
     },
 
     
-    infiniteHandler($state) {
-     
-      let url = "profile/hot/business/";
-  
-   
-      axios
-        .get(url + this.page)
-        .then(({ data }) => {
-
-      if (data.data.length) {
-           this.page += 1;
-           
-              this.business.push(...data.data);
-            $state.loaded();
-          } else {
-            $state.complete();
-          }
-
-         
-        })
-        .catch((err) => {
-          console.log({ err: err });
-        });
-    },
-  }
+  },
 };
 </script>
 
 <style scoped>
-
-
-.ovver{
-
-  height: 300px;
-    overflow: auto;
-    overflow-x: hidden;
-}
 @media only screen and (min-width: 768px) {
   .btn-text {
     margin-left: 8px;
@@ -260,7 +219,6 @@ export default {
   text-align: center;
 
   padding: 15px;
-  padding-top: 2px
 }
 
 @media only screen and (max-width: 768px) {
@@ -298,7 +256,7 @@ export default {
     padding: 1px;
     text-align: left;
 
-    margin-left: 2px;
+    margin-left: -30px;
 
     margin-right: -5px;
 
@@ -351,7 +309,7 @@ export default {
     padding: 1px;
     text-align: left;
 
-    margin-left: 65px;
+    margin-left: 30px;
 
     margin-right: -5px;
 

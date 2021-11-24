@@ -3,7 +3,7 @@
     <div class="s-ccard">
     
       <b-row>
-        <b-col lg="6" sm="12" class="p-2" v-for="item in users" :key="item.id">
+           <b-col lg="6" sm="12" class="p-2" v-for="item in users" :key="item.id">
           <div class="people-style border shadow">
             <b-row class="mb-1">
               <b-col md="3" cols="4" sm="4" class="my-auto">
@@ -36,17 +36,38 @@
                       <div>
                         <b-row class="mt-lg-0">
                           <b-col md="6" lg="12" cols="6" xl="12" class="mt-2 mt-lg-2 mt-xl-2 btn-2 center">
+                          
+
                             <b-button block variant="primary" size="sm" class="b-background flexx pobtn shadow" @click="cta(item)">
-                              <i class="fas fa-envelope fa-lg btn-icon"></i>
-                              <span class="btn-text">Message</span>
-                            </b-button>
+                                <i class="fas fa-envelope fa-lg btn-icon"></i>
+                                <span class="btn-text">Message</span>
+                              </b-button>
                           </b-col>
 
                           <b-col md="6" lg="12" cols="6" xl="12" class="mt-2 mt-lg-2 mt-xl-2 btn-2 center">
-                            <b-button block size="sm" class="b-background flexx pobtn shadow" variant="primary">
-                              <i class="fas fa-user-plus fa-lg btn-icon"></i>
-                              <span class="btn-com">Community</span>
-                            </b-button>
+
+
+
+
+                         <b-button
+                          block
+                          size="sm"
+                           :id="'followbtn'+item.id"
+                         class="b-background flexx pobtn shadow"
+                          :class="item.is_follow !== 0 && 'u-btn'"
+                          variant="primary"
+                          @click="handleFollow(item)"
+                        >
+
+                           <i
+                            class="fas fa-lg btn-icon"
+                            :class="item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"
+                          ></i>
+
+                          <span class="btn-com">{{ $t('dashboard.Community') }}</span>
+                        </b-button>     
+
+
                           </b-col>
                         </b-row>
                       </div>
@@ -64,11 +85,13 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   props: ['type', 'searchh'],
   data() {
     return {
       page: 1,
+      users:[],
        biz_id:null,
        infiniteId: +new Date(),
       options: {
@@ -84,14 +107,20 @@ export default {
   },
 
   computed: {
-     activeAccount() {
+
+    activeAccount() {
       return this.$store.getters['auth/profilConnected'];
     },
-    users() {
+
+    old_users() {
       if (this.type == "Follower") {
+
        return  this.$store.state.businessOwner.UcommunityFollower.user_followers;  
+     
+
       } else {
       return  this.$store.state.businessOwner.UcommunityFollowing.user_following; 
+    
       }
     },
   },
@@ -100,6 +129,10 @@ export default {
  },
 
   methods: {
+
+
+
+
     cta(data) {
       console.log(data);
       this.$store.commit('businessChat/setSelectedChat', data);
@@ -114,7 +147,7 @@ export default {
       this.$router.push({ path: `/business_owner/${this.activeAccount.id}`, query: { tabId: 1, msgTabId: 0 } });
     },
 
-
+    
     search(){
      
        console.log('search started');
@@ -134,6 +167,37 @@ export default {
 
       this.$refs.infiniteLoading.attemptLoad();
     },
+
+
+
+     async handleFollow(user) {
+      
+      console.log("yoo ma gee");
+       document.getElementById("followbtn"+user.id).disabled = true;
+      const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
+      const nextFollowState = user.is_follow === 0 ? 1 : 0;
+      const data = {
+        id: user.id,
+        type: 'user',
+      };
+
+      await axios
+        .post(uri, data)
+        .then(({ data }) => {
+          console.log(data);
+          user.is_follow = nextFollowState;
+           document.getElementById("followbtn"+user.id).disabled = false;
+        })
+         
+          .catch((err) =>{  
+          
+          console.log({err:err})  ;
+           document.getElementById("followbtn"+user.id).disabled =  false;
+          
+        });
+    },
+
+
 
     count(number) {
       if (number >= 1000000) {
@@ -195,11 +259,6 @@ export default {
 
 <style scoped>
 @media only screen and (min-width: 768px) {
-  .s-cardd {
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-
   .btn-text {
     margin-left: 8px;
   }
@@ -234,7 +293,7 @@ export default {
 
   .s-cardd {
     padding-left: 6px;
-    padding-right: 2px;
+    padding-right: 1px;
   }
 }
 
@@ -270,7 +329,7 @@ export default {
 
 .a-left {
   text-align: left;
-  align-content: left;
+  /*align-content: left;*/
 }
 
 hr {
@@ -291,12 +350,12 @@ hr {
 
 f-right {
   text-align: right;
-  align-content: right;
+  /*align-content: right;*/
 }
 
 .f-left {
   text-align: left;
-  align-content: left;
+  /*align-content: left;*/
 }
 
 @media only screen and (max-width: 768px) {
@@ -396,8 +455,8 @@ f-right {
     border: 1px solid rgba(0, 0, 0, 0.125);
     margin-bottom: 10px;
 
-    margin-right: 1px;
-    margin-left: 1px;
+    margin-right: 5px;
+    margin-left: 3px;
   }
 
   h6 {
@@ -450,8 +509,8 @@ f-right {
     border: 1px solid rgba(0, 0, 0, 0.125);
     margin-bottom: 10px;
 
-    margin-right: 1px;
-    margin-left: 1px;
+    margin-right: 2px;
+    margin-left: 6px;
   }
 
   h6 {

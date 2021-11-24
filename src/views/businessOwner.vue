@@ -1,46 +1,51 @@
 <template>
-  <div class="" style="overflow-y: hidden; padding: 0px">
-    <span v-if="isloaded">
-      <navbar />
+  <div class="" style="overflow-y: hidden; padding:0px">
 
-      <div class="container-fluid">
-        <ly-tab
-          v-model="selectedId"
-          :items="items"
-          :options="options"
-          class="center-ly"
-        >
-        </ly-tab>
+     <span v-if="isloaded">
 
-        <hr width="100%" class="d-none" d-md-block />
-      </div>
+    <navbar />
 
-      <div class="mt-3" v-if="selectedId == '0'">
-        <Business />
-      </div>
+    
+       
+    <div class="container-fluid">
+      <ly-tab
+        v-model="selectedId"
+        :items="items"
+        :options="options"
+        class="center-ly"
+      >
+      </ly-tab>
 
-      <div class="mt-3" v-if="selectedId == '1'">
-        <Inbox />
-      </div>
+      <hr width="100%" class="d-none" d-md-block />
+    </div>
 
-      <div class="mt-3" v-if="selectedId == '2'">
-        <Settings v-bind:currenttab="selectedId" />
-      </div>
+    <div class=" " v-if="selectedId == '0'">
+      <Business />
+    </div>
 
-      <div class="mt-3" v-if="selectedId == '3'">
-        <Settings v-bind:currenttab="selectedId" />
-      </div>
+    <div class="mt-3" v-if="selectedId == '1'">
+      <Inbox />
+    </div>
 
-      <div class="mt-3" v-if="selectedId == '4'">
-        <Settings v-bind:currenttab="selectedId" />
-      </div>
+    <div class="mt-3" v-if="selectedId == '2'">
+      <Settings v-bind:currenttab="selectedId" />
+    </div>
 
-      <div class="mt-3" v-if="selectedId == '5'">
-        <Settings v-bind:currenttab="selectedId" />
-      </div>
+    <div class="mt-3" v-if="selectedId == '3'">
+      <Settings v-bind:currenttab="selectedId" />
+    </div>
 
-      <Footer />
-    </span>
+    <div class="mt-3" v-if="selectedId == '4'">
+      <Settings v-bind:currenttab="selectedId" />
+    </div>
+
+    <div class="mt-3" v-if="selectedId == '5'">
+      <Settings v-bind:currenttab="selectedId" />
+    </div>
+
+    <Footer />
+
+     </span>
   </div>
 </template>
 
@@ -79,6 +84,8 @@ export default {
       foll_id: null,
       isloaded: false,
       url_data: null,
+    
+
       items: [
         { label: "Home ", icon: "" },
 
@@ -94,6 +101,9 @@ export default {
       },
     };
   },
+
+
+ 
 
 
   methods: {

@@ -30,9 +30,6 @@ import { search } from './search';
 import userChat from './messaging/user';
 import businessChat from './messaging/business';
 import { notification } from './notifications';
-
-// import UserProfileOwner from "./UserProfileOwner";
-
 import businessSettingInfo from './businessSettingInfo';
 import networkProfileCommunitySidebar from './networkProfileCommunitySidebar';
 import networkProfileFeedback from './networkProfileFeedback';
@@ -45,8 +42,8 @@ import keywordOperationOnNetwork from './keywordOperationOnNetwork';
 import { social } from './social';
 
 Vue.use(Vuex);
-axios.defaults.baseURL = process.env.VUE_APP_API_URL_DEV;
-//axios.defaults.baseURL = "https://test.maxinemoffett.com/api/v1/";
+//axios.defaults.baseURL = process.env.VUE_APP_API_URL_DEV;
+axios.defaults.baseURL = "https://test.maxinemoffett.com/api/v1/";
 //  axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 
 

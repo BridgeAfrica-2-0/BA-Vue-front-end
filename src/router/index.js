@@ -2,7 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 //import Home from "../views/home.vue";
 import Login from "../views/login.vue";
-
+import home1 from "@/views/home1.vue";
 import signup from "../views/signup.vue";
 
 import RecoverPass1 from "../views/recoverPassword1.vue";
@@ -66,7 +66,12 @@ const routes = [{
         name: "notFound",
         component: notFound,
     },
-
+    {
+        path: "/home1",
+        name: "home1",
+        component: home1,
+        
+    },
     {
         path: "/myorders",
         name: "orders",

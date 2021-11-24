@@ -1,7 +1,7 @@
 <template>
   <div>
     <head-page-owner></head-page-owner>
-    <div class="row">
+    <div class="row">    
       <div class="text-justify mt-2 container-fluid">
         <b-row class="center-content">
           <b-col cols="12">
@@ -42,22 +42,50 @@ export default {
   data() {
     return {
       currentTab: 0,
+      tabIndex: null,
+      tabs: ["#post", "#about", "#media", "#market", "#community"],
     };
   },
   computed: {},
   methods: {},
   created() {
-    // this.currentTab =
-      // localStorage.getItem('ba-business-active-tab') !== null ? localStorage.getItem('ba-business-active-tab') : 0;
-    // this.currentTab = this.$route.query.currentTab ? this.$route.query.currentTab : 0;
-    console.log(this.currentTab);
-  },
+
+  
+   let tab = this.tabs.findIndex(tab => tab === this.$route.hash)
+
+  if(tab==-1){
+    
+    
+    this.currentTab =
+      localStorage.getItem('ba-business-active-tab') !== null ? localStorage.getItem('ba-business-active-tab') : 0;
+
+  } else{
+
+    this.currentTab =tab;
+  }
+  },  
+
 
   watch: {
     currentTab: (newVal, oldVal) => {
       localStorage.setItem('ba-business-active-tab', newVal);
     },
+
+
+   
+  $route(to, from) {
+      console.log(to.hash);
+      this.currentTab = this.tabs.findIndex((tab) => tab === to.hash);
+
+    },
+
+  
+
   },
+
+
+  
+
 };
 </script>
 

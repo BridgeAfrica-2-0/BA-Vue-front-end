@@ -44,7 +44,6 @@ import confirmPayment from "@/views/confirmPayment";
 import networks from "@/views/networks";
 import dashboard from "@/views/dashboard";
 
-import card from "@/views/card";
 import myorders from "@/views/myOders"
 import notFound from "@/components/404"
 
@@ -253,6 +252,17 @@ const routes = [{
     auth: true,
   },
 },
+
+{
+  path: "/business/:id?",
+  name: "Business",
+  component: businessFollower,
+  meta: {
+    auth: true,
+  },
+},
+
+
 {
   path: "/businessvisitor",
   name: "BusinessVisitor",

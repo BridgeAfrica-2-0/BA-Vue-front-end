@@ -37,13 +37,13 @@ import networkProfileCommunitySidebar from "./networkProfileCommunitySidebar";
 import networkProfileFeedback from "./networkProfileFeedback";
 import networkProfileMedia from "./networkProfileMedia";
 import networkProfileMemberRequest from "./networkProfileMemberRequest";
-import networkNotification from "./networkNotification";
+//import networkNotification from "./networkNotification";
 import { social } from "./social";
 import { notification } from "./notifications"
 
 Vue.use(Vuex);
- axios.defaults.baseURL = process.env.VUE_APP_API_URL_EDS;
-//  axios.defaults.baseURL = "https://test.maxinemoffett.com/api/v1/";
+// axios.defaults.baseURL = process.env.VUE_APP_API_URL_EDS;
+  axios.defaults.baseURL = "https://edson.maxinemoffett.com/api/v1/";
 
 export default new Vuex.Store({
   modules: {
@@ -82,7 +82,7 @@ export default new Vuex.Store({
     networkProfileMedia,
     networkProfileMemberRequest,
     networkProfile,
-    networkNotification,
+  //  networkNotification,
     notification
   }
 });

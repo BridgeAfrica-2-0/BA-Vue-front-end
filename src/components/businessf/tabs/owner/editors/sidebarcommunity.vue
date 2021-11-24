@@ -4,7 +4,7 @@
       <span>
         <h6 class="title m-3">
           <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
-          <b> COMMUNITY</b> <span class="h4-color"> {{nFormatter(userdetails.total_people+businessdetails.total_Business)}}</span>
+          <b> COMMUNITY</b> <span class="h4-color"> {{nFormatter(userdetails.total_people+businessdetails.total_Business+networkdetails.total_Network)}}</span>
         </h6>
       </span>
       <b-tabs pills content-class="mt-3  f-left ">

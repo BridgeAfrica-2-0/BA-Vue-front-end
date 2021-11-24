@@ -18,16 +18,12 @@
         </b-col>
         <b-col md="5" cols="7" lg="7" xl="7" sm="5">
           <p class="textt">
-            <<<<<<< HEAD
-            <strong class="title"> {{ business.name }} </strong> <br />
-            {{ business.category }}
-            =======
+           
             <strong class="title">
               {{ business.name.substring(0, 10) + "..." }}
             </strong>
             <br />
             {{ business.category }}
-            >>>>>>> 1be7185e2f17680f51453c95ca066f6ce34db4ff
             <br />
             {{ business.followers }} {{ $t("network.Community") }} <br />
 

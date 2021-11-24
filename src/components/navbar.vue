@@ -356,7 +356,7 @@
 <script>
 import Button from '@/components/ButtonNavBarFind.vue';
 import Activity from '@/components/ShowActivity.vue';
-import NavBarNotifications from '@/components/NavBarNotifications.vue';
+// import NavBarNotifications from '@/components/NavBarNotifications.vue';
 import { mapGetters, mapActions } from 'vuex';
 import axios from 'axios';
 
@@ -365,7 +365,7 @@ export default {
   components: {
     Button,
     Activity,
-    NavBarNotifications
+    // NavBarNotifications
   },
   props: {
     credentials: {

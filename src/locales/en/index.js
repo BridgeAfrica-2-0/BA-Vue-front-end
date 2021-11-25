@@ -10,7 +10,6 @@ import welcome from './welcome.json'
 import dashboard from './dashboard.json'
 import profileowner from './profileowner.json'
 
-
 import memnetwork from './memnetwork.json'
 
 import profilefollower from './network.json'

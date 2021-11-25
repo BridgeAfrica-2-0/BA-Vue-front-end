@@ -21,47 +21,9 @@
     <br />
 
     <b-container class="payment-type">
-      <!-- <b-form-group v-slot="{ ariaDescribedby }">
-        <b-form-radio id="mtn" name="mtn" class="text" value="mtn">MTN Mobile Payment</b-form-radio>
-        <br />
-        <b-form-radio id="Mobile Payment" name="mobile-payment" value="mobile-money" class="text">
-          Orange Mobile Payment
-        </b-form-radio>
-
-        <br />
-
-        <b-form-radio
-          :aria-describedby="ariaDescribedby"
-          id="Credit-card"
-          name="credit-card"
-          class="text"
-          value="credit-card"
-        >
-          Express Union</b-form-radio
-        >
-
-        <br />
-
-        <b-form-radio
-          :aria-describedby="ariaDescribedby"
-          id="Credit-card"
-          name="credit-card"
-          class="text"
-          value="credit-card"
-        >
-          GIMAC
-        </b-form-radio>
-      </b-form-group> -->
 
       <b-card>
         <div class="">
-          <!-- <div class="row p-2">
-            <div class="col">
-              <button @click="showRewiew" class="float-left p-2 btn btn-primary">
-                Back
-              </button>
-            </div>
-          </div> -->
 
           <div class="my-4 operator">
             <div class="">
@@ -131,9 +93,7 @@
               <button
                 @click="requestPayment"
                 class="float-right btn-custom p-2 btn btn-primary mt-2"
-              >
-                Pay: {{ formatMoney(price) }}
-              </button>
+              > Confirm Payment</button>
             </div>
           </div>
         </div>
@@ -145,34 +105,85 @@
         <p class="text">Your payment information is secure</p>
       </div>
     </b-container>
+    <b-modal v-model="RequestPayment" title="Enter your MTN Mobile Money number" size="md" hide-footer>
+      <!-- <div class="card-header px-0 text-black border-bottom-0  bg-white h-50">
+        Enter your MTN Mobile Money number
+      </div> -->
+      <div class="px-0">
+        <div class="row">
+          <div class="col-10 col-sm-9 col-md-8">
+            <b-form-input
+              placeholder="237 6XX XXX XXX"
+              id="number"
+              v-model="number"
+              type="tel"
+            ></b-form-input>
+          </div>
+          <div class="col-2 col-sm-3 col-md-4 px-0 btn-custom-box">
+            <b-button
+              variant="primary"
+              class="font-weight-light btn-custom text-14 shadow-sm"
+              >CHANGE</b-button
+            >
+          </div>
+        </div>
+        <div class="row my-3">
+          <div class="col btn-custom-box">
+            <b-button
+              variant="primary"
+              class="font-weight-light shadow-sm btn-custom text-14"
+              @click="confirmPayment"
+              >PAY {{formatMoney(2000)}}</b-button
+            >
+          </div>
+        </div>
+        <div class="row my-3">
+          <div class="col body-font-size">
+            <p>
+              Please make sure your account balance is greater than 13 000XAF,
+              Otherwise your payment will not be completed.
+            </p>
+            <p>
+              Reference NO: XXXXXXXXXXXX
+            </p>
+          </div>
+        </div>
+      </div>
+    </b-modal>
   </b-container>
 </template>
 
 <script>
 export default {
   name: 'payment',
-  props: {
-    price: {
-      type: Number,
-      default: 0,
-    },
-  },
   data() {
     return {
+      url:null,
+      RequestPayment: false,
       operator: '',
       formatObject: new Intl.NumberFormat('fr-FR', {
         style: 'currency',
         currency: 'XAF',
         minimumFractionDigits: 2,
       }),
+      number: '',
     };
   },
+
+  mounted(){
+    this.url = this.$route.params.id;
+  },
+
   methods: {
     showRewiew() {
       this.$emit('showreview');
     },
     requestPayment() {
-      if (this.operator !== '' && this.price > 0) this.$emit('requestpayment', this.price);
+      console.log("requestPayment");
+      console.log("this.operator", this.operator);
+      this.RequestPayment = !this.RequestPayment;
+      if (this.operator !== '') 
+        this.$emit('requestpayment', this.operator);
     },
     formatMoney(money) {
       return this.formatObject.format(money);

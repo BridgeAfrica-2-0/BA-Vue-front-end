@@ -18,7 +18,7 @@
       </b-col>
     </b-row>
 
-    <b-row class="mt-4" v-if="admins.length != 0">
+    <b-row class="mt-4">
       <b-col cols="12">
         <h6 class="font-weight-bolder">
           {{ $t('network.Network_Admins') }} ({{nFormatter(admins.length)}})

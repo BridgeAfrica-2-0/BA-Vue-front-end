@@ -1,13 +1,10 @@
 <template>
   <div>
-    <div style="overflow-y: scroll" class="s-cardd">
-      <div
-        v-for="people in peoples"
-        :key="people.id"
-        class="people-style border shadow"
-      >
+    <div style="overflow-y: scroll;" class="s-cardd">
+
+      <div v-for="people in peoples" :key="people.id" class="people-style border shadow">
         <b-row class="mb-1">
-          <div style="display: none">{{ (people["type"] = "user") }}</div>
+          <div style="display:none;">{{people['type']= 'user'}}</div>
           <b-col md="3" cols="4" lg="3" class="my-auto">
             <b-avatar
               class="p-avater"
@@ -24,7 +21,7 @@
                     <b-row>
                       <b-col md="6" lg="6" cols="6" sm="6" class="mt-lg-2">
                         <div class="mt-2 mt-lg-0 mt-xl-0 username">
-                          <b> {{ people.name.substring(0, 10) + "..." }} </b>
+                          <b> {{people.name.substring(0,10)+"..."}} </b>
                         </div>
                       </b-col>
 
@@ -35,9 +32,7 @@
                         sm="6"
                         class="mt-3 mt-lg-2 mt-xl-2"
                       >
-                        <h6 class="follower">
-                          {{ people.followers }} {{ $t("network.Community") }}
-                        </h6>
+                        <h6 class="follower">{{people.followers}} {{ $t('network.Community') }}</h6>
                       </b-col>
                     </b-row>
                   </div>
@@ -46,14 +41,7 @@
                 <b-col lg="12" xl="12" cols="12" sm="12" md="12">
                   <div class="e-name">
                     <b-row class="mt-lg-0">
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="6"
-                        xl="6"
-                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
-                      >
+                      <b-col md="6" lg="6" cols="6" sm="6" xl="6" class="mt-2 mt-lg-2 mt-xl-2 btn-2 center">
                         <b-button
                           block
                           variant="primary"
@@ -65,46 +53,22 @@
                             shadow
                             mr-lg-3 mr-xl-3
                           "
-                          @click="cta(people)"
                         >
                           <i class="fas fa-envelope fa-lg btn-icon"></i>
-                          <span class="btn-text">{{
-                            $t("network.Message")
-                          }}</span>
+                          <span class="btn-text">{{ $t('network.Message') }}</span>
                         </b-button>
                       </b-col>
 
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="6"
-                        xl="6"
-                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
-                      >
+                      <b-col md="6" lg="6" cols="6" sm="6" xl="6" class="mt-2 mt-lg-2 mt-xl-2 btn-2 center">
                         <b-button
                           block
                           size="sm"
-                          class="
-                            b-background
-                            flexx
-                            pobtn
-                            shadow
-                            mr-lg-3 mr-xl-3
-                          "
+                          class="b-background flexx pobtn shadow mr-lg-3 mr-xl-3"
                           variant="primary"
                           @click="$emit('handleFollow', people)"
                         >
-                          <i
-                            :class="
-                              people.is_follow
-                                ? 'fas fa-user-minus fa-lg btn-icon'
-                                : 'fas fa-user-plus fa-lg btn-icon'
-                            "
-                          ></i>
-                          <span class="btn-com">{{
-                            $t("network.Community")
-                          }}</span>
+                          <i :class="people.is_follow ? 'fas fa-user-minus fa-lg btn-icon':'fas fa-user-plus fa-lg btn-icon'"></i>
+                          <span class="btn-com">{{ $t('network.Community') }}</span>
                         </b-button>
                       </b-col>
                     </b-row>
@@ -115,46 +79,16 @@
           </b-col>
         </b-row>
       </div>
+
+      
     </div>
+    <!-- {{peoples}} -->
   </div>
 </template>
 
 <script>
 export default {
   props: ["peoples"],
-  computed: {
-    activeAccount() {
-      return this.$store.getters["auth/profilConnected"];
-    },
-    selectedChat() {
-      return this.$store.getters["businessChat/getSelectedChat"];
-    },
-  },
-  methods: {
-    cta(data) {
-      console.log(data);
-      this.$store.commit("businessChat/setSelectedChat", data);
-
-      let path = "";
-      let msgTabId = null;
-      if (this.activeAccount.user_type == "business") {
-        msgTabId = 1;
-        path = "/business_owner/" + this.activeAccount.id;
-      } else if (this.activeAccount.user_type == "network") {
-        msgTabId = 2;
-        path = "/network/" + this.activeAccount.id;
-      } else {
-        msgTabId = 0;
-        path = "/messaging";
-      }
-
-      this.$router.push({
-        path: `${path}`,
-        query: { tabId: 1, msgTabId: msgTabId },
-      });
-      // this.$router.push({ path: `/business_owner/${this.activeAccount.id}`, query: { tabId: 1, msgTabId: 0 } });
-    },
-  },
 };
 </script>
 

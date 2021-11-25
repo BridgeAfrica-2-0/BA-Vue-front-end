@@ -26,7 +26,7 @@
         <!--  <h1 class="logo mr-auto"><a href="index.html">Arsha</a></h1>
       Uncomment below if you prefer to use an image logo -->
         <a href="index.html" class="logo mr-auto"
-          ><img src="../assets/img/logo.png" alt="" class="img-fluid b-logo"
+          ><img src="../assets/img/logobr.png" alt="" class="img-fluid b-logo"
         /></a>
 
         <nav class="nav-menu d-none d-lg-block">
@@ -197,7 +197,7 @@
 
     <!-- <br> <br> -->
     <section id="about" class="about mt-md-30">
-      <div class="container" data-aos="fade-up">
+      <div class="container aos-init aos-animate" data-aos="fade-up">
         <div class="section-title">
           <h3 class="head-text bridge-header">
             Find Businesses & Institutions
@@ -718,7 +718,7 @@
             <div class="col-lg-3 col-md-6 footer-contact">
               <div class="row">
                 <div class="col-6">
-                  <img src="../assets/img/logo.png" width="200px" alt="" />
+                  <img src="../assets/img/logobr.png" width="200px" alt="" />
                 </div>
 
                 <div class="col-6 bblogo">Bridge Africa</div>
@@ -793,6 +793,8 @@
       </div>
     </footer>
     <!-- End Footer -->
+
+    <!-- <div id="preloader"></div> -->
   </div>
 </template>
 
@@ -812,20 +814,28 @@
 // import "../assets/vendor/aos/aos.js";
 
 import "../assets/js/main.js";
-
+// import "../assets/js/js.js";
 export default {};
 </script>
 
-<style src="../assets/vendor/bootstrap/css/bootstrap.min.css" lang="css"></style>
-<style src="../assets/vendor/icofont/icofont.min.css" lang="css"></style>
-<style src="../assets/vendor/boxicons/css/boxicons.min.css" lang="css"></style>
-<style src="../assets/vendor/remixicon/remixicon.css" lang="css"></style>
-<style src="../assets/vendor/venobox/venobox.css" lang="css"></style>
-<style src="../assets/vendor/owl.carousel/assets/owl.carousel.min.css"></style>
-<style src="../assets/vendor/aos/aos.css" lang="css"></style>
-<style src="../assets/css/style1.css" lang="css"></style>
-
 <style>
+
+
+@import "../assets/vendor/bootstrap/css/bootstrap.min.css" ; 
+ @import "../assets/vendor/boxicons/css/boxicons.min.css" ;
+@import "../assets/vendor/remixicon/remixicon.css" ;
+@import "../assets/vendor/venobox/venobox.css" ;
+
+@import "../assets/css/style1.css" ;
+
+
+@import "../assets/css/style.css";
+@import "../assets/vendor/aos/aos.css" ;
+@import "../assets/vendor/owl.carousel/assets/owl.carousel.min.css";
+@import "../assets/vendor/icofont/icofont.min.css";
+@import url("https://fonts.googleapis.com/css2?family=Merriweather&family=Merriweather+Sans:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Jost:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i");
+
 .blec-container {
   position: absolute;
   margin-top: -50px;

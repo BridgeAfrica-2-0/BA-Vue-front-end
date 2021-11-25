@@ -6,9 +6,9 @@ var v2 = document.getElementById("Test_Video2");
 var v3 = document.getElementById("Test_Video3");
 
 
-v.playbackRate = 0.8;
-v2.playbackRate = 0.8;
-v3.playbackRate = 0.8;
+// v.playbackRate = 0.8;
+// v2.playbackRate = 0.8;
+// v3.playbackRate = 0.8;
 
 
 
@@ -220,13 +220,7 @@ window.addEventListener("scroll", () => {
         if (cur_pos <= bottom) {
        //
        
-       
-       
-       
-       
-       
-       
-       
+      
        main_nav.find('li').removeClass('active');
         }
         main_nav.find('a[href="#' + $(this).attr('id') + '"]').parent('li').addClass('active');
@@ -276,46 +270,47 @@ window.addEventListener("scroll", () => {
   });
 
   // Porfolio isotope and filter
-  $(window).on('load', function() {
-    var portfolioIsotope = $('.portfolio-container').isotope({
-      itemSelector: '.portfolio-item'
-    });
+  // $(window).on('load', function() {
+  //   var portfolioIsotope = $('.portfolio-container').isotope({
+  //     itemSelector: '.portfolio-item'
+  //   });
 
-    $('#portfolio-flters li').on('click', function() {
-      $("#portfolio-flters li").removeClass('filter-active');
-      $(this).addClass('filter-active');
+  //   $('#portfolio-flters li').on('click', function() {
+  //     $("#portfolio-flters li").removeClass('filter-active');
+  //     $(this).addClass('filter-active');
 
-      portfolioIsotope.isotope({
-        filter: $(this).data('filter')
-      });
-      aos_init();
-    });
+  //     portfolioIsotope.isotope({
+  //       filter: $(this).data('filter')
+  //     });
+  //     aos_init();
+  //   });
 
-    // Initiate venobox (lightbox feature used in portofilo)
-    $(document).ready(function() {
-      $('.venobox').venobox({
-        'share': false
-      });
-    });
-  });
+//     // Initiate venobox (lightbox feature used in portofilo)
+//     $(document).ready(function() {
+//       $('.venobox').venobox({
+//         'share': false
+//       });
+//     });
+//   });
 
-  // Portfolio details carousel
-  $(".portfolio-details-carousel").owlCarousel({
-    autoplay: true,
-    dots: true,
-    loop: true,
-    items: 1
-  });
+//   // Portfolio details carousel
+//   $(".portfolio-details-carousel").owlCarousel({
+//     autoplay: true,
+//     dots: true,
+//     loop: true,
+//     items: 1
+//   });
 
-  // Init AOS
-  function aos_init() {
-    AOS.init({
-      duration: 100,
-      once: true
-    });
-  }
-  $(window).on('load', function() {
-    aos_init();
-  });     
+//   // Init AOS
+//   function aos_init() {
+//     AOS.init({
+//       duration: 100,
+//       once: true
+//     });
+//   }
+//   $(window).on('load', function() {
+//     aos_init();
+//   });     
 
-})();
+// })(jQuery);
+})

@@ -163,10 +163,12 @@ export default {
     },
   },
 
+
   created() {
     this.selectedId = this.$route.query.tabId ? this.$route.query.tabId : "0";
 
     this.foll_id = this.$route.params.id;
+
 
     this.$store
       .dispatch("businessOwner/roleCheck", this.foll_id)
@@ -202,6 +204,11 @@ export default {
   },
 
   mounted() {
+
+     if(this.$store.state.profileSettingsEdit.etat == 1){
+          this.selectedId = this.$store.state.profileSettingsEdit.selectedId ;
+    }
+
     this.url_data = this.$route.params.id;
 
     console.log(this.url_data);

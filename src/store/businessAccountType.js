@@ -30,6 +30,16 @@ export default {
         console.log(data);
 
       })
+    },
+
+    confirmPayment( {commit}, Data ){
+      console.log("confirmPayment");
+      return axios
+      .post(`business/${Data.path}`, Data.formData)
+      .then(({ data }) => {
+        console.log(data);
+        return data
+      })
     }
 
   },

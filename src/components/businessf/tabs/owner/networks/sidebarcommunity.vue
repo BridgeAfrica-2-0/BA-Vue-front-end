@@ -78,34 +78,18 @@
           </div>
         </b-tab>
       </b-tabs>
-      
     </div>
-
-         
-
-
-    
-
-
-
-
-
-
 
 
   </div>
 </template>
-
 <script>
-
-
 import People from "./people";
 import Business from "./business";
 import Network from "./network";
 export default {
-  name: "comunitiDashboard",
-
-   components: {
+  name: "sidebarcommunity",
+  components: {
     People,
     Business,
     Network
@@ -200,6 +184,10 @@ export default {
 </script>
 
 <style >
+.lala .nav-fill {
+  margin-top: -19px;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+}
 
   .s-cardd{
     overflow-x: hidden;
@@ -225,43 +213,24 @@ export default {
   font-size: 14px;
 }
 
-
-.h4-color{
+.h4-color {
   color: orangered;
   margin-left: 10px;
   font-size: 14px;
 }
 
-.m-up{
-
-  margin-top:-5px;
+.m-up {
+  margin-top: -5px;
 }
 
-
-
-
- 
 @media only screen and (min-width: 768px) {
-
-  
-
-  .title{
+  .title {
     font-size: 20px;
   }
+}
 
-
- }
-
-
-
-
-
-
- 
 @media only screen and (min-width: 768px) {
-
-  
-  .title{
+  .title {
     font-size: 16px;
   }
 }

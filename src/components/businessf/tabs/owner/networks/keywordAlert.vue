@@ -1,17 +1,5 @@
 <template>
-  <div class="a-left container" >
-
-    <!--
-    <h5 class=" d-inline-block">
-      Keywords Alerts
-    </h5>
-
-    <hr width="100%" />
-
-    -->
-
-
-
+  <div class="a-left container">
     <b-row>
       <b-col cols="12">
         <div class="">
@@ -80,7 +68,7 @@
 
         <div v-for="post in posts" :key="post.id" class="mb-4">
           <div class="mb-2">
-            <div>    
+            <div>
               <b-row class="px-md-3">
                 <b-col cols="2" md="1" class="m-0 p-0">
                   <b-avatar
@@ -111,8 +99,6 @@
                         <b-dropdown-item href="#" @click="unApprovePost(post.id)">
                           {{ $t('network.Decline') }}
                         </b-dropdown-item>
-
-
                       </b-dropdown>
                     </span>
                   </h5>

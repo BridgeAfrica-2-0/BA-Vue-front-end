@@ -30,7 +30,7 @@
 						class="col-12 mt-3 text-center text-success font-weight-bold title-font-size"
 					>
 						<p class="link">
-							<b-icon icon="arrow-left-circle-fill"></b-icon> Back to Shooping
+							<b-icon icon="arrow-left-circle-fill"></b-icon> Back to Shopping
 						</p>
 					</div>
 				</div>

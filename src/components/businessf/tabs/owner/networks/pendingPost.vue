@@ -15,7 +15,12 @@
 
     <b-row>
       <b-col cols="12" class="f-left">
-        <div v-for="i in 4" :key="i" class="mb-4">
+        <div
+          v-for="post in allPendingPost"
+          :key="post.id"
+          :loading="load"
+          class="mb-4"
+        >
           <div class="mb-2">
             <div class="f-left">
               <b-row class="px-md-3">
@@ -23,13 +28,13 @@
                   <b-avatar
                     class="d-inline-block mt-1"
                     variant="primary"
-                    src="https://business.bridgeafrica.info/assets/img/team/3.png"
+                    :src="post.profile_picture"
                     size="3.5rem"
                   ></b-avatar>
                 </b-col>
                 <b-col cols="10" md="11" class="pt-2">
                   <h6 class="m-0 font-weight-bolder">
-                    Mapoure Agrobusiness
+                    {{ post.name }}
                     <span class="float-right">
                       <b-dropdown
                         size="lg"
@@ -57,25 +62,15 @@
                     </span>
                   </h6>
                   <p>
-                    1h Ago -
-                    <span class="text-primary">Commented on a Post</span>
+                    {{ post.created_at }} -
+                    <span class="text-primary">{{ post.comment }}</span>
                   </p>
                 </b-col>
               </b-row>
               <b-row>
                 <b-col cols="12" class="mt-2">
                   <p class="text-justify text">
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the 1500s, Lorem Ipsum is
-                    simply dummy text of the printing and typesetting industry.
-                    Lorem Ipsum has been the industry's standard dummy text ever
-                    since the 1500s,
-                    <br />
-                    <br />
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the 1500s,
+                    {{ post.content }}
                   </p>
                 </b-col>
               </b-row>

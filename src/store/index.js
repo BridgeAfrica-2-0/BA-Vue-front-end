@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import axios from 'axios';
 import auth from './auth';
+import profileOrderDetail from './profileOrderDetail';
 import businessBlocking from './businessBlocking';
 import dashboard from './dashboard';
 import businessGeneral from './businessGeneral';
@@ -37,7 +38,7 @@ import networkProfileMedia from './networkProfileMedia';
 import networkProfileMemberRequest from './networkProfileMemberRequest';
 import profileOrders from './profileOrders';
 import keywordOperationOnNetwork from './keywordOperationOnNetwork';
-
+import profileSettingsEdit from "./profileSettingsEdit"
 
 import { social } from './social';
 
@@ -85,6 +86,9 @@ export default new Vuex.Store({
         networkProfileMemberRequest,
         networkProfile,
         orderBusiness,
-        notification,
-    },
+        profileOrderDetail,
+        profileSettingsEdit
+
+    }
 });
+

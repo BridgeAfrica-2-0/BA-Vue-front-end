@@ -134,7 +134,7 @@
             <h5 class="font-weight-bold">{{ $t('network.Remove_Ads') }}</h5>
           </div>
           <div class="text1">
-            <h5 class="font-weight-bold">{{ $t('network.Free_Domain_for_1_year') }}</h5>
+            <h5 class="font-weight-bold">{{ $t('network.Free_Domain_for_year') }}</h5>
             <p>{{ $t('network.S0_Value') }}</p>
           </div>
           <div class="text1">
@@ -146,7 +146,7 @@
 
           <div class="text1">
             <h5 class="font-weight-bold">{{ $t('network.Premium_Support') }}</h5>
-            <p>{{ $t('network.email_,_phone') }}</p>
+            <p>{{ $t('network.email_phone') }}</p>
           </div>
           <div class="btn-wrap free3 text-center">
             <a href="#" class="btn-buy"></a>

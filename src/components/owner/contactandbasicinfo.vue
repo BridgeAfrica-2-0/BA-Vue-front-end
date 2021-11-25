@@ -12,12 +12,12 @@
         <button
           type="button"
           class="btn btn-outline-primary float-md-right"
-          data-toggle="modal"
-          data-target="#dobModal"
-          v-b-modal.modal-6
+       
+        
+          v-b-modal.dobbb
         >
           {{ $t('profileowner.Edit') }}
-        </button>
+        </button>   
       </div>
 
       <b-modal
@@ -186,8 +186,8 @@
       </b-modal>
 
       <b-modal
-        id="modal-6"
-        ref="model-6"
+        id="dobbb"
+        ref="dobbb"
         :title="$t('profileowner.Edit_Date_of_Birth')"
         hide-footer
        
@@ -199,7 +199,7 @@
               <label class="col-md-3 pl-0 pr-0 control-label">Birth Year</label>
               <div class="col-md-9 pr-0 pl-0">
                 <div class="form-group">
-                  <b-form-datepicker id="example-datepicker" v-model="birthDate.date" class="mb-2" :max="max"></b-form-datepicker>
+                  <b-form-datepicker id="example-datepicker" v-model="birthDate.date" :max="max" class="mb-2"></b-form-datepicker>
                 </div>
               </div>
             </div>
@@ -421,10 +421,11 @@
 import moment from "moment";
 export default {
   data() {
-      const now = new Date()
-      const today = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+     const maxDate = new Date(today)
     return {
-      max:today,
+      max: maxDate,
       websiteId: null,
       basicInfo: {
         dateOfBirth: { day: "12", month: "1", year: "2000" },

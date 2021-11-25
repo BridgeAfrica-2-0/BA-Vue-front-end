@@ -16,18 +16,13 @@
     </b-row>
     <br />
 
-    <b-row>
-      <b-col md="12" lg="6">
         <CommunityMembers  :searchh="keywords" ref="search" type="Following"  />
-      </b-col>  
-
-      
-    </b-row>
+     
   </div>
 </template>
 
 <script>
-import CommunityMembers from "../../communitynetwork";
+import CommunityMembers from "../../communityMember";
 export default {
   data() {
     return {

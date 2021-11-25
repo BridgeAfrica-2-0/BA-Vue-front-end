@@ -2,7 +2,7 @@
   <div>
 
     
-    <div class="people-style shadow"  v-for="item in businesses" :key="item.id">
+    <div class="people-style shadow h-100"  v-for="item in businesses" :key="item.id">
       <b-row>
         <b-col md="3" xl="5" lg="5" cols="5" sm="3">
           <div class="center-img">
@@ -19,7 +19,8 @@
         <b-col md="5" cols="7" lg="7" xl="7" sm="5">
           <p class="textt">
             <strong class="title"> {{ item.name }}</strong> <br />
-            {{ item.category }}
+           
+            <span v-for="cat in item.category" :key="cat.name">   {{cat.name}}  </span>
             <br />
             {{ count(item.followers) }} {{ $t('profilefollower.Community') }} <br />
 
@@ -33,7 +34,7 @@
               :text="item.about_business"
               link="#"
               less-str="read less"
-              :max-chars="15"
+              :max-chars="100"
             >
             </read-more>
           </p>
@@ -50,15 +51,22 @@
                 cols="4"
                 class="mt-2 text-center"
               >
-                <b-button
+                
+                   <b-button
                   block
                   size="sm"
-                  class="b-background shadow "
+                    :id="'followbtn'+item.id"
+                  :disabled="disable"
+                  :class="item.is_follow !== 0 && 'u-btn'"  
                   variant="primary"
+                  @click="handleFollow(item)"
                 >
-                  <i class="fas fa-user-plus  fa-lg btn-icon "></i>
-                  <span class="btn-com">{{ $t('profilefollower.Community') }}</span>
+                 
+                  <i class="fas fa-lg btn-icon" :class="item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"></i>
+                  <span class="btn-com"> {{ $t('dashboard.Community') }}</span>
                 </b-button>
+
+                
               </b-col>
 
               <b-col
@@ -118,6 +126,7 @@ export default {
   data() {
     return {
       page: 1,
+      businesses:[],
       foll_id: '',
       options: {
         rewind: true,
@@ -139,7 +148,7 @@ mounted(){
 
   computed:{
  
-   businesses(){
+  old_businesses(){
 
       if(this.type=="Follower"){ 
 
@@ -163,6 +172,38 @@ mounted(){
       if (number >= 1000) {
         return number / 1000 + "K";
       } else return number;
+    },
+
+
+  
+     
+     async handleFollow(user) {
+
+      document.getElementById("followbtn"+user.id).disabled = true;
+       
+      const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
+      const nextFollowState = user.is_follow === 0 ? 1 : 0;
+      const data = {
+        id: user.id,
+        type: 'business',
+      };
+
+      await axios
+        .post(uri, data)
+        .then(response => {
+
+          console.log(response);
+          user.is_follow = nextFollowState;
+         document.getElementById("followbtn"+user.id).disabled = false;
+            
+        })
+        .catch(err =>{  
+          
+          console.log(err)  ;
+           document.getElementById("followbtn"+user.id).disabled =  false;
+          
+        });
+         
     },
 
       

@@ -70,10 +70,10 @@
       </b-row>
       <div class="pending-post-view pt-2 mt-3">
         <p>
-          {{ $t('network.Your_3_Posts_are_pending_for_approval') }} .&nbsp;&nbsp;&nbsp;&nbsp;<a
+          {{ $t('network.Your_3_Post_s_are_pending_for_approval') }}.&nbsp;&nbsp;&nbsp;&nbsp;<a
             @click="this.$router.push({ name: '/pendingPost' })"
             style="color: #e75c18; text-decoration: underline"
-            > {{ $t('network.View_All') }} </a
+            >{{ $t('network.View_All') }}</a
           >
         </p>
       </div>

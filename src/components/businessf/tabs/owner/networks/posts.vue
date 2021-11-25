@@ -30,14 +30,14 @@
           </template>
           <b-dropdown-item-button v-on:click="deletePost(post.id)">
             <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
-            Delete
+            {{ $t('network.Delete') }} 
           </b-dropdown-item-button>
         </b-dropdown>
       </b-col>
     </b-row>
     <b-modal hide-footer ref="modal-1">
       <b-img fluid-grow src="https://picsum.photos/300/150/?image=41"></b-img>
-      <h3>Post Title</h3>
+      <h3>{{ $t('network.Post_Title') }} </h3>
       <p class="text">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
         quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id

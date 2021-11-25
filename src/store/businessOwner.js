@@ -410,6 +410,14 @@ export default {
 
     },
 
+    updateBusinessBiographie({commit}, data){
+
+      return axios.post(`business/update-biography/${data.business_id}`, data.data)
+        .then((data) => {
+          console.log(data);
+        });
+    },
+
     async loadUserBusinessAbout(context, payload) {
       let response_ = null;
       const id_Business = 2;

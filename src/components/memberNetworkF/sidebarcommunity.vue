@@ -20,13 +20,13 @@
                     <template slot="title">
                       Followers <span class="spa-color"> {{nFormatter(userdetails.total_followers)}} </span>
                     </template>
-                    <div class="s-comcard"><People :peoples="userdetails.user_followers" /></div>
+                    <div class="s-comcard"><People :peoples="userdetails.user_followers" @handleFollow="handleFollow" /></div>
                   </b-tab>
                   <b-tab>
                     <template slot="title">
                       Following <span class="spa-color"> {{nFormatter(userdetails.totat_following)}} </span>
                     </template>
-                    <div class="s-comcard"><People :peoples="userdetails.user_following" /></div>
+                    <div class="s-comcard"><People :peoples="userdetails.user_following" @handleFollow="handleFollow" /></div>
                   </b-tab>
                 </b-tabs>
               </b-col>
@@ -43,13 +43,13 @@
                 <template slot="title">
                   Followers <span class="spa-color"> {{nFormatter(businessdetails.total_followers)}} </span>
                 </template>
-                <div class="s-comcard"><Business :businesses="businessdetails.Business_followers" /></div>
+                <div class="s-comcard"><Business :businesses="businessdetails.Business_followers" @handleFollow="handleFollow" /></div>
               </b-tab>
               <b-tab>
                 <template slot="title">
                   Following <span class="spa-color"> {{nFormatter(businessdetails.totat_following)}} </span>
                 </template>
-                <div class="s-comcard"><Business :businesses="businessdetails.Business_following" /></div>
+                <div class="s-comcard"><Business :businesses="businessdetails.Business_following" @handleFollow="handleFollow" /></div>
               </b-tab>
             </b-tabs>
           </div>
@@ -118,6 +118,24 @@ export default {
       .catch(err => {
         console.log({ err: err });
       });
+    },
+    async handleFollow(Comdata) {
+      console.log("handleFollow", Comdata)
+      const url = Comdata.is_follow === 0 ? `/follow-community` : `/unfollow`;
+      console.log("uri", url)
+      const nextFollowState = Comdata.is_follow === 0 ? 1 : 0;
+      const data = {
+        id: Comdata.id,
+        type: Comdata.type,
+      };
+
+      await this.axios
+        .post(url, data)
+        .then(response => {
+          console.log("response", response);
+          Comdata.is_follow = nextFollowState;
+        })
+        .catch(err => console.log(err));
     },
   }
 };

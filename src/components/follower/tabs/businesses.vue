@@ -4,118 +4,136 @@
 			class="primary mr-2 pt-1 icon-size primary"
 			:icon="['fas', 'handshake']"
 		/>
-		Businesses
+		{{ $t('profilefollower.Businesses') }}
 
-		<hr />
+		<hr />    
 
 		<div class="business" v-if="noBusiness == false">
 			<b-row>
 				<b-col lg="6" class="p-0 mb-2" v-for="item in busineses" :key="item.id">
-					<div class="people-style shadow h-100">
-						<b-row>
-							<b-col md="3" xl="3" lg="3" cols="5" sm="3">
-								<div class="center-img">
-									<splide :options="options" class="r-image">
-										<splide-slide cl>
-											<img :src="item.logo_path" class="r-image" />
-										</splide-slide>
-									</splide>
-								</div>
-							</b-col>
-							<b-col md="5" cols="7" lg="9" xl="5" sm="5">
-								<p class="textt text">
-									<strong class="title"> {{ item.name }} </strong> <br />
-									<span v-for="cat in item.category" :key="cat.id">
-										{{ cat.name }}
-									</span>
-									<br />
-									{{ count(item.followers) }} Community <br />
+					
+					  <div class="people-style shadow h-100">
+          <b-row>
 
-									<span class="location">
-										<b-icon-geo-alt class="ico"></b-icon-geo-alt>
-										{{ item.city }},
-										<span v-for="nei in item.neigborhood" :key="nei.id">
-											{{ nei.name }}
-										</span>
-									</span>
-									<br />
+            <b-col md="8" xl="8" lg="12" cols="12" sm="8">
+              <div class="d-inline-flex">   
+              <div class="center-img ">
+                <splide :options="options" class="r-image">
+                  <splide-slide cl>
+                    <img :src="item.picture" class="r-image" />
+                  </splide-slide>
+                </splide>
+              </div>   <div class="flx100"> 
+              <p class="textt">
+                <strong class="title"> {{ item.name }} </strong> <br />
+               
+            <span v-for="cat in item.category" :key="cat.name">   {{cat.name}}  </span>
+                <br />
+                {{ count(item.followers) }}
+                {{ $t('dashboard.Community') }} <br />
 
-									<read-more
-										more-str="read more"
-										class="readmore"
-										:text="item.about_business"
-										link="#"
-										less-str="read less"
-										:max-chars="100"
-									>
-									</read-more>
-								</p>
-							</b-col>
+                <span class="location">
+                  <b-icon-geo-alt class="ico"></b-icon-geo-alt
+                  >{{ item.country }}
+                </span>
+                <br />
+       <read-more
+              more-str="read more"
+              class="readmore"
+              :text="item.about_business"
+              link="#"
+              less-str="read less"
+              :max-chars="100"
+            >
+            </read-more>
+              </p>
+               </div>
+               </div>
+            </b-col>     
 
-							<b-col lg="12" xl="4" md="4" cols="12" sm="4">
-								<div class="s-button">
-									<b-row>
-										<b-col
-											md="12"
-											lg="4"
-											xl="12"
-											sm="12"
-											cols="4"
-											class="mt-2 text-center"
-										>
-											<b-button
-												block
-												size="sm"
-												class="b-background shadow "
-												variant="primary"
-											>
-												<i class="fas fa-user-plus  fa-lg btn-icon "></i>
-												<span class="btn-com">Community</span>
-											</b-button>
-										</b-col>
+            <b-col lg="12" xl="4" md="4" cols="12" sm="4">
+              <div class="s-button">
+                <b-row>
+                  <b-col
+                    md="12"
+                    lg="4"
+                    xl="12"
+                    sm="12"
+                    cols="4"
+                    class="mt-2 text-center"
+                  >
+                 
 
-										<b-col
-											md="12"
-											lg="4"
-											xl="12"
-											sm="12"
-											cols="4"
-											class="mt-2 text-center"
-										>
-											<b-button
-												block
-												size="sm"
-												class="b-background shadow "
-												variant="primary"
-											>
-												<i class="fas fa-envelope   fa-lg btn-icon "></i>
-												<span class="btn-text">Message</span>
-											</b-button>
-										</b-col>
 
-										<b-col
-											md="12"
-											lg="4"
-											xl="12"
-											sm="12"
-											cols="4"
-											class="mt-2 text-center"
-										>
-											<b-button
-												block
-												size="sm"
-												class="b-background shadow "
-												variant="primary"
-											>
-												<i class="fas fa-map-marked-alt  fa-lg btn-icon "></i>
-												<span class="btn-text">Direction</span>
-											</b-button>
-										</b-col>
-									</b-row>
-								</div>
-							</b-col>
-						</b-row>
-					</div>
+                    
+
+
+
+                  <b-button
+                  block
+                  size="sm"  
+                  :disabled="disable"
+                    :id="'followbtn'+item.id"
+                  :class="item.is_follow !== 0 && 'u-btn'"
+                  variant="primary"
+                  @click="handleFollow(item)"
+                >
+                 
+                  <i class="fas fa-lg btn-icon" :class="item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"></i>
+                  <span class="btn-com ml-1"> {{ $t('dashboard.Community') }}</span>
+                </b-button>
+
+
+
+
+
+
+
+
+                  </b-col>
+
+                  <b-col
+                    md="12"
+                    lg="4"
+                    xl="12"
+                    sm="12"
+                    cols="4"
+                    class="mt-2 text-center"
+                  >
+                    <b-button
+                      block
+                      size="sm"
+                      class="b-background shadow "
+                      variant="primary"
+                    >
+                      <i class="fas fa-envelope   fa-lg btn-icon "></i>
+                      <span class="btn-text">{{ $t('dashboard.Messages') }}</span>
+                    </b-button>
+                  </b-col>
+
+                  <b-col
+                    md="12"
+                    lg="4"
+                    xl="12"
+                    sm="12"
+                    cols="4"
+                    class="mt-2 text-center"
+                  >
+                    <b-button
+                      block
+                      size="sm"
+                      class="b-background shadow "
+                      variant="primary"
+                    >
+                      <i class="fas fa-map-marked-alt  fa-lg btn-icon "></i>
+                      <span class="btn-text">{{ $t('dashboard.Direction') }}</span>
+                    </b-button>
+                  </b-col>
+                </b-row>
+              </div>
+            </b-col>
+          </b-row>
+        </div>
 				</b-col>
 			</b-row>
 
@@ -123,10 +141,10 @@
 		</div>
 		<div v-show="noBusiness" class="no-business">
 			<b-container>
-				<h2>No Businesses Listed</h2>
+				<h2>{{ $t('profilefollower.No_Businesses_Listed') }}</h2>
 				<hr />
 			</b-container>
-			<p>User has not listed any business. Please check back later</p>
+			<p>{{ $t('profilefollower.User_has_not_listed_any_business') }}. {{ $t('profilefollower.Please_check_back_later') }}</p>
 		</div>
 	</div>
 </template>
@@ -152,6 +170,38 @@
 				} else return number;
 			},
 
+
+  
+     async handleFollow(user) {
+
+      document.getElementById("followbtn"+user.id).disabled = true;
+       
+      const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
+      const nextFollowState = user.is_follow === 0 ? 1 : 0;
+      const data = {
+        id: user.id,
+        type: 'business',
+      };
+
+      await axios
+        .post(uri, data)
+        .then(response => {
+
+          console.log(response);
+          user.is_follow = nextFollowState;
+         document.getElementById("followbtn"+user.id).disabled = false;
+            
+        })
+        .catch(err =>{  
+          
+          console.log(err)  ;
+           document.getElementById("followbtn"+user.id).disabled =  false;
+          
+        });
+         
+    },
+
+
 			infiniteHandler($state) {
 				if (this.page == 1) {
 					this.busineses.splice(0);
@@ -176,6 +226,9 @@
 						console.log({ err: err });
 					});
 			},
+
+
+
 		},
 		computed: {
 			busineses() {
@@ -195,6 +248,38 @@
 </script>
 
 <style scoped>
+
+@media only screen and (min-width: 768px) {
+  .btn-text {
+    margin-left: 8px;
+  }
+
+  .btn-com {
+    margin-left: 4px;
+  }
+  .btn-icon {
+    margin-top: 3px;
+  }
+
+  
+}
+
+@media only screen and (max-width: 768px) {
+  .btn-icon {
+    margin-top: 3px;
+  }
+
+  .btn-text {
+    margin-left: 5px;
+  }
+
+  .btn-com {
+    margin-left: 3px;
+  }
+}
+
+
+
 	.no-business {
 	  border: 1px solid #ccc;
 	  width: 50%;

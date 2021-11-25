@@ -6,12 +6,17 @@
       <b-row>
         <b-col cols="12" md="12" lg="9" xl="9">
           <div>
-            <b-tabs
-              pills
-              :vertical="vertical"
-              class="itzlala"
-              nav-wrapper-class="w-15"
-            >
+            <b-tabs pills :vertical="vertical" class="itzlala" nav-wrapper-class="w-15">
+              <!-- NOTIFICATIONS TAB -->
+              <b-tab title="Notifications">
+                <b-card-text class="mt-3">
+                  <b-row>
+                    <b-col cols="12" md="12">
+                      <SettingsNotifications/>
+                    </b-col>
+                  </b-row>
+                </b-card-text>
+              </b-tab>
               <b-tab :title="`${$t('settings.general')}`">
                 <b-card-text class="mt-3">
                   <b-row>
@@ -20,7 +25,7 @@
                         <b-table-simple hover small caption-top responsive>
                           <b-tbody v-if="getUserInfos.id">
                             <b-tr>
-                              <b-td class="a-text text"> {{ $t("settings.name") }} </b-td>
+                              <b-td class="a-text text"> {{ $t('settings.name') }} </b-td>
 
                               <b-td class="a-text text">
                                 <b-link href="#" >{{getUserInfos.name}}</b-link>
@@ -29,7 +34,9 @@
                             <br />
 
                             <b-tr>
+
                               <b-td class="a-text text" > {{ $t("settings.public_url") }} </b-td>
+
 
                               <b-td class="text"
                                 ><b-link href="#">
@@ -41,7 +48,7 @@
                             <br />
 
                             <b-tr>
-                              <b-td class="a-text text"> {{ $t("settings.email") }} </b-td>
+                              <b-td class="a-text text"> {{ $t('settings.email') }} </b-td>
 
                               <b-td class="a-text text">
                                 <b-link href="#">{{getUserInfos.email}}</b-link>
@@ -50,7 +57,7 @@
                             <br />
 
                             <b-tr>
-                              <b-td class="a-text text">{{ $t("settings.phone") }} </b-td>
+                              <b-td class="a-text text">{{ $t('settings.phone') }} </b-td>
 
                               <b-td class="a-text text">
                                 <b-link href="#">{{getUserInfos.phone}}</b-link>
@@ -59,7 +66,7 @@
                             <br />
 
                             <b-tr>
-                              <b-td class="a-text text"> {{ $t("settings.dob") }} </b-td>
+                              <b-td class="a-text text"> {{ $t('settings.dob') }} </b-td>
 
                               <b-td class="a-text text">
                                 <b-link href="#">{{getUserInfos.dob}}</b-link>
@@ -68,7 +75,7 @@
                             <br />
 
                             <b-tr>
-                              <b-td class="a-text text"> {{ $t("settings.gender") }} </b-td>
+                              <b-td class="a-text text"> {{ $t('settings.gender') }} </b-td>
 
                               <b-td class="a-text text">
                                 <b-link href="#">{{getUserInfos.gender}}</b-link>
@@ -86,7 +93,7 @@
                             <br />
 
                             <b-tr>
-                              <b-td class="a-text text"> {{ $t("settings.country") }} </b-td>
+                              <b-td class="a-text text"> {{ $t('settings.country') }} </b-td>
 
                               <b-td class="a-text text">
                                 <b-link href="#">{{getUserInfos.country.name}}</b-link>
@@ -124,7 +131,7 @@
                             <br />
 
                             <b-tr>
-                              <b-td class="a-text tetx"> {{ $t("settings.city") }} </b-td>
+                              <b-td class="a-text tetx"> {{ $t('settings.city') }} </b-td>
 
                               <b-td class="a-text text">
                                 <b-link href="#">{{getUserInfos.city}}</b-link>
@@ -133,7 +140,7 @@
                             <br />
 
                             <b-tr>
-                              <b-td class="a-text text"> {{ $t("settings.neighbourhood") }}</b-td>
+                              <b-td class="a-text text"> {{ $t('settings.neighbourhood') }}</b-td>
 
                               <b-td class="a-text text">
                                 <b-link href="#">{{getUserInfos.neigborhood.name}}</b-link>
@@ -241,30 +248,24 @@
                 <b-card class="mt-15 cent">
                   <div class="text-center">
                     <span class="username text-center mb-3">
-                      <b> {{ $t("settings.upgrade_your_business_account") }} </b>
+                      <b> {{ $t('settings.upgrade_your_business_account') }} </b>
                     </span>
                   </div>
 
                   <div class="container">
                     <span class="text text-left">
                       <br />
-                     {{ $t("settings.make_more_money") }}
+                      {{ $t('settings.make_more_money') }}
                     </span>
                   </div>
-                  <img
-                    src="@/assets/img/buynow.png"
-                    class="buynow"
-                    alt="buy now"
-                  />
+                  <img src="@/assets/img/buynow.png" class="buynow" alt="buy now" />
                   <div class="container text-center">
-                    <img
-                      src="@/assets/img/fruits.jpg"
-                      class="img-fluid banner"
-                      alt="Kitten"
-                    />
+                    <img src="@/assets/img/fruits.jpg" class="img-fluid banner" alt="Kitten" />
+
 
                     <b-button variant="primary" class="text-center mt-3" @click="redirection">
                       {{ $t("settings.upgrade_now") }}
+
                     </b-button>
                   </div>
                 </b-card>
@@ -272,7 +273,7 @@
 
               <b-tab :title="`${$t('settings.payment')}`">
                 <b-card-text class="mt-3 text cent">
-                  <h3 class="username">{{ $t("settings.chose_payment_method") }}</h3>
+                  <h3 class="username">{{ $t('settings.chose_payment_method') }}</h3>
 
                   <!-- <b-form-group class="mb-0" v-slot="{ ariaDescribedby }">
                     <b-form-radio-group
@@ -300,24 +301,26 @@
                  
               <b-tab :title="`${$t('settings.password')}`">
                 <b-card-text class="mt-3 text">
-                  <h3 class="username">{{ $t("settings.change_current_password") }}</h3>
+                  <h3 class="username">{{ $t('settings.change_current_password') }}</h3>
                   <br />
 
                   <div class="b-bottom">
                     <b-container>
                       <b-form-group
                         label-cols-lg="3"
-                        :label="`${$t('settings.current_password') }`"
+                        :label="`${$t('settings.current_password')}`"
                         label-size="md"
                         label-class=" text"
                         class="mb-0"
                       >
+
                         <b-form-input
                           id="bname"
                           placeholder=""
                           required
                           v-model="currentPass"
                         ></b-form-input>
+
                       </b-form-group>
                     </b-container>
                   </div>
@@ -328,17 +331,19 @@
                     <b-container>
                       <b-form-group
                         label-cols-lg="3"
-                        :label="`${$t('settings.new_password') }`"
+                        :label="`${$t('settings.new_password')}`"
                         label-size="md"
                         label-class=" text"
                         class="mb-0"
                       >
+
                         <b-form-input
                           id="bname"
                           placeholder=""
                           required
                           v-model="newPass"
                         ></b-form-input>
+
                       </b-form-group>
                     </b-container>
                   </div>
@@ -349,11 +354,12 @@
                     <b-container>
                       <b-form-group
                         label-cols-lg="3"
-                        :label="`${$t('settings.confirm_password') }`"
+                        :label="`${$t('settings.confirm_password')}`"
                         label-size="md"
                         label-class="text"
                         class="mb-0"
                       >
+
                         <b-form-input
                           id="bname"
                           placeholder=""
@@ -364,6 +370,7 @@
                         </b-form-input> <br>
                         <p>{{message}}</p>
                          <br> <button class=" btn btn-primary" @click="changePassword">change</button>
+
                       </b-form-group>
                     </b-container>
                   </div>
@@ -385,13 +392,15 @@
 </template>
 
 <script>
-import Navbar from "@/components/navbar";
-import Footer from "@/components/footer";
+import Navbar from '@/components/navbar';
+import Footer from '@/components/footer';
+import SettingsNotifications from '@/components/SettingsNotifications.vue'
 
 export default {
   components: {
     Navbar,
     Footer,
+    SettingsNotifications
   },
   
 
@@ -715,12 +724,12 @@ export default {
       that.size = window.innerWidth;
       console.log(that);
 
-      console.log("lolo");
+      console.log('lolo');
     };
 
-    if (that.size == "") {
+    if (that.size == '') {
       that.size = window.innerWidth;
-      console.log("lolo");
+      console.log('lolo');
     }
   },
 }

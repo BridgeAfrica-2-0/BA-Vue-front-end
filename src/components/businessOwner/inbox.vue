@@ -1,5 +1,6 @@
 <template>
   <div>
+  
     <b-container>
       <div class="chat-box">
         <b-row>
@@ -48,34 +49,56 @@
                     </span>
                   </b-col>
 
+
+
                   <b-col class="col-2 text-center">
-                    <small> {{ message.timeStamp }} </small>
-                    <p class="">
-                      <b-badge variant="info">
-                        {{ message.messageCount }}
-                      </b-badge>
-                    </p>
+                    <small> {{ message.timeStamp }} </small> <p class="">   <b-badge variant="info"> {{ message.messageCount }} </b-badge>   </p>
                   </b-col>
-                </b-row>
+
+
+
+
+
+
+
+
+
+                  </b-row>
+
+
+
+
+                  
+
+
+
+
+
+                </div>
               </div>
-            </div>
+            
           </b-col>
           <!-- ---- -->
 
-          <b-col class="pr-0">
-            <div class="right">
+            <b-col class="pr-0" >
+            <div class="right ">
               <b-row>
                 <b-col class="p-2">
-                  <b-avatar
-                    class="d-inline-block profile-pic"
-                    variant="primary"
-                    src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
-                    square
-                  ></b-avatar>
+                
+
+                 <b-avatar
+                class="d-inline-block profile-pic"
+                variant="primary"
+              src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
+                square
+               
+              ></b-avatar>
+
+
                 </b-col>
                 <b-col>
                   <h1 class="mt-4 title text-bold">
-                    {{ currentUser.user.name.split(' ')[0] }}
+                    {{ currentBiz ? currentBiz.name : 'loading...' }}
                   </h1>
                 </b-col>
                 <b-col>
@@ -89,15 +112,15 @@
 
               <b-row class="mt-12">
                 <b-col>
-                  <b-tabs content-class="mt-12 ma-4 pt-6" fill lazy>
-                    <b-tab title="Users" active @click="getChatList({ type: 'user' })">
+                  <b-tabs v-model="tabIndex" content-class="mt-12 ma-4 pt-6" fill>
+                    <b-tab title="Users" @click="getChatList({ type: 'user' })">
                       <!-- Users Chats Available  -->
                       <b-row class="pa-6">
                         <b-col class="mb-6 pb-6">
                           <input
                             v-model="searchQuery"
                             class="form-control input-background"
-                            placeholder="Search chat list"
+                            :placeholder="`Search chat list ${tabIndex}`"
                             @keypress.enter="
                               getChatList({
                                 type: 'user',
@@ -152,18 +175,17 @@
                             <small class="text-center">
                               {{ getCreatedAt(chat.created_at) }}
                             </small>
-                            <p class="text-center">
+                            <!-- <p class="text-center">
                               <b-badge variant="info">
                                 {{ chat.receiver_id }}
                               </b-badge>
-                            </p>
+                            </p> -->
                           </b-col>
                         </b-row>
                       </div>
 
                       <!-- End Chats -->
                     </b-tab>
-
                     <b-tab title="Business" @click="getChatList({ type: 'business' })">
                       <!-- Business Chats Available  -->
                       <b-row class="pa-6">
@@ -171,7 +193,7 @@
                           <input
                             v-model="searchQuery"
                             class="form-control input-background"
-                            placeholder="Search chat list"
+                            :placeholder="`Search chat list ${tabIndex}`"
                             @keypress.enter="
                               getChatList({
                                 type: 'business',
@@ -227,11 +249,11 @@
                             <small class="text-center">
                               {{ getCreatedAt(chat.created_at) }}
                             </small>
-                            <p class="text-center">
+                            <!-- <p class="text-center">
                               <b-badge variant="info">
                                 {{ chat.receiver_business_id }}
                               </b-badge>
-                            </p>
+                            </p> -->
                           </b-col>
                         </b-row>
                       </div>
@@ -245,7 +267,7 @@
                           <input
                             v-model="searchQuery"
                             class="form-control input-background"
-                            placeholder="Search chat list"
+                            :placeholder="`Search chat list ${tabIndex}`"
                             @keypress.enter="
                               getChatList({
                                 type: 'network',
@@ -301,11 +323,11 @@
                             <small class="text-center">
                               {{ getCreatedAt(chat.created_at) }}
                             </small>
-                            <p class="text-center">
+                            <!-- <p class="text-center">
                               <b-badge variant="info">
                                 {{ chat.receiver_network_id }}
                               </b-badge>
-                            </p>
+                            </p> -->
                           </b-col>
                         </b-row>
                       </div>
@@ -452,7 +474,17 @@
                   <b-spinner variant="primary" label="Spinning" class="spinner centralizer"></b-spinner>
                 </div>
                 <div v-else v-for="chat in chats" :key="chat.id">
-                  <div v-if="2 != chat.sender_business_id">
+                  {{ chat }}<br />
+                  <div
+                    v-if="
+                      currentBiz.id !=
+                      (chat.receiver != null
+                        ? chat.receiver.id
+                        : chat.receiver_business != null
+                        ? chat.receiver_business.id
+                        : chat.receiver_network.id)
+                    "
+                  >
                     <b-row class="p-4">
                       <b-col>
                         <p v-if="chat.attachment" class="msg-text mt-0 text">
@@ -465,9 +497,9 @@
                           </small>
                         </p>
                         <p v-if="chat.message" class="msg-text mt-0 text">
-                          {{ chat.message }}<b> ->///{{ chat.sender_business_id }}</b>
+                          {{ chat.message }}
                           <small class="float-right mt-2 text-white pr-1 pt-1">
-                            {{ chat.created_at }}
+                            {{ getCreatedAt(chat.created_at) }}
                           </small>
                         </p>
                       </b-col>
@@ -486,7 +518,7 @@
                           </small>
                         </p>
                         <p v-if="chat.message" id="sent" class="msg-text-sent text">
-                          {{ chat.message }} ->///{{ chat.sender_business_id }}
+                          {{ chat.message }}
                           <small class="float-right mt-2 text-white pr-1 pt-1">
                             {{ getCreatedAt(chat.created_at) }}
                           </small>
@@ -495,6 +527,24 @@
                     </b-row>
                   </div>
                 </div>
+                <div v-if="chat.type == 'sent'">
+                  <b-row class="p-4">
+                    <b-col>
+                      <p class="sent-name">
+                        <span class="name">{{ chat.name }}</span
+                        > 
+                      </p>
+                      <p id="sent" class="msg-text-sent text">
+                        {{ chat.message }}  
+                         <span class="float-right mt-2 white">   {{ chat.timeStamp }}  </span> 
+                      </p>
+                    </b-col>
+                    <b-avatar variant="primary" src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
+                    
+                    ></b-avatar>
+                  </b-row>
+                </div>
+              
               </section>
 
               <!-- <section v-else class="chats" style="margin-left: 1px" ref="feed">
@@ -640,7 +690,7 @@
           <b-col v-if="info">
             <div class="info-nav">
               <b-button class="primary-bg" @click="showInfo(false)">
-                <fas-icon :icon="['fas', 'arrow-left']" />
+               <fas-icon :icon="['fas', 'arrow-left']" />
               </b-button>
               <span class="cnt-info"> Contact Info</span>
             </div>
@@ -648,7 +698,7 @@
               <b-avatar
                 class="info-avatar"
                 variant="primary"
-                src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
+               src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
                 size="200"
               ></b-avatar>
               <div class="info-detail">
@@ -661,7 +711,9 @@
                 <li>Options</li>
                 <li>
                   <b-row
-                    ><b-col> Block Messages </b-col>
+                    ><b-col>
+                      Block Messages
+                    </b-col>
                     <b-col>
                       <b-form-checkbox v-model="checked" name="check-button" class="primary" switch> </b-form-checkbox>
                     </b-col>
@@ -670,6 +722,9 @@
                 <li>Report User</li>
               </ul>
             </div>
+
+
+            
           </b-col>
 
           <!-- New message -->
@@ -677,8 +732,12 @@
             <div class="new-msg back-image" style="margin-right: 17px">
               <div class="info-nav">
                 <b-row>
-                  <b-col class="col-1 mt-3"> To </b-col>
+                  <b-col class="col-1 mt-3">
+                    To
+                  </b-col>
                   <b-col>
+                   
+
                     <b-form-input
                       id="textarea"
                       v-model="searchQuery"
@@ -721,6 +780,7 @@
         </b-row>
       </div>
     </b-container>
+  
   </div>
 </template>
 
@@ -743,14 +803,15 @@ export default {
       input: '',
       search: '',
       chatSearchKeyword: '',
-      chatId: '',
+      tabIndex: 2,
       type: '',
-      // socket: io("https://ba-chat-server.herokuapp.com", {
-      //   transports: ["websocket", "polling", "flashsocket"],
-      // }),
-      socket: io('localhost:7000', {
+
+      socket: io('https://ba-chat-server.herokuapp.com', {
         transports: ['websocket', 'polling', 'flashsocket'],
       }),
+      // socket: io('localhost:7000', {
+      //   transports: ['websocket', 'polling', 'flashsocket'],
+      // }),
       chatSelected: [],
       showsearch: true,
       selecteduser: false,
@@ -826,12 +887,7 @@ export default {
           id: '6',
         },
       ],
-      message: {
-        type: '',
-        name: '{{ receiver.name }}',
-        timeStamp: '',
-        message: '',
-      },
+      message: {},
       newMsg: false,
       show: false,
       info: false,
@@ -839,83 +895,32 @@ export default {
       text: '',
       selected: [],
 
-      messages: [
-        {
-          id: 0,
-          name: 'Blezour blec',
-          message: 'Hello Blec lola blec ',
-          timeStamp: '3:00pm',
-          messageCount: '10',
-        },
-        {
-          id: 1,
-          name: 'Blec blezour blec',
-          message: 'yoo nigga sup lola blec',
-          timeStamp: '7:00am',
-          messageCount: '60',
-        },
-
-        {
-          id: 3,
-          name: 'baba blecc ',
-          message: 'Lorem ipsum la lola blec vlr ',
-          timeStamp: '9:00am',
-          messageCount: '60',
-        },
-        {
-          id: 4,
-          name: 'Louis Litt',
-          message: 'Lorem  sit amet this is goo.',
-          timeStamp: '6:00am',
-          messageCount: '6',
-        },
-        {
-          id: 5,
-          name: 'Louis Litt',
-          message: 'Lorem this   sit amet.',
-          timeStamp: '7:00am',
-          messageCount: '100',
-        },
-        {
-          id: 6,
-          name: 'Louis Litt',
-          message: 'Lorem ithe amet.',
-          timeStamp: '7:00am',
-          messageCount: '3',
-        },
-        {
-          id: 7,
-          name: 'Louis Litt',
-          message: 'Lordol sit amet.',
-          timeStamp: '7:00am',
-          messageCount: '10',
-        },
-        {
-          id: 8,
-          name: 'Louis Litt',
-          message: 'Lorem vheck ',
-          timeStamp: '7:00am',
-          messageCount: '40',
-        },
-        {
-          id: 9,
-          name: 'Louis Litt',
-          message: 'Lorem papa .',
-          timeStamp: '7:00am',
-          messageCount: '15',
-        },
-      ],
+      messages: null,
     };
   },
   computed: {
+    ctaSelected() {
+      return this.$store.getters['businessChat/getSelectedChat'];
+    },
+    chatId() {
+      return this.$store.getters['businessChat/getSelectedChatId'];
+    },
+    currentBizId() {
+      return this.$store.getters['businessChat/getCurrentBizId'];
+    },
+    currentBiz() {
+      return this.$store.getters['businessChat/getCurrentBiz'];
+    },
     bizs() {
       return this.$store.getters['businessChat/getBizs'];
     },
     chatList() {
       return this.$store.getters['businessChat/getChatList'];
     },
+
     currentUser() {
-      return this.$store.getters['userChat/getUser'];
+      // return this.$store.getters['userChat/getUser'];
+      return this.$store.getters['auth/profilConnected'];
     },
     users() {
       return this.$store.getters['userChat/getUsers'];
@@ -925,7 +930,7 @@ export default {
     },
 
     loader() {
-      return this.$store.getters['userChat/getLoader'];
+      return this.$store.getters['businessChat/getLoader'];
     },
     receiver() {
       return this.chats[0] ? this.chats[0].receiver : '';
@@ -944,10 +949,24 @@ export default {
     },
   },
   mounted() {
-    this.getBizs();
-    this.getChatList({ type: 'user' });
+    if (this.chatList) {
+      this.getChatList({ type: this.type });
+    }
   },
-  created() {
+  async created() {
+    this.$store.commit('businessChat/setCurrentBizId', this.$route.params.id);
+    await this.getBizs();
+    this.tabIndex = this.$route.query.msgTabId;
+    if (this.tabIndex) {
+      this.selectedChat({ chat: this.ctaSelected, id: this.ctaSelected.id });
+    } else {
+      if (this.tabIndex == 1) {
+        this.getChatList({ type: 'business' });
+      } else if (this.tabIndex == 2) {
+        this.getChatList({ type: 'network' });
+      } else this.getChatList({ type: 'user' });
+    }
+
     this.socket.on('generalMessage', (data) => {
       console.log('Received');
       console.log(data);
@@ -995,64 +1014,52 @@ export default {
     },
     createRoom(receiver_business_id) {
       // let sender_business_id = this.currentUser.user.id;
-      let sender_business_id = 2;
+      let sender_business_id = this.currentBizId;
       this.room = [receiver_business_id, sender_business_id];
       console.log('ROOMS: ', this.room);
       this.socket.emit('create-biz', this.room);
     },
     getCreatedAt(data) {
-      return moment(data).format('LT');
+      return moment(data).format('lll');
     },
+    
 
     getBizs(keyword) {
       this.$store
         .dispatch('businessChat/GET_BIZS', keyword)
-        .then(() => {})
+        .then(() => {
+          console.log('currentBiz: ', this.currentBiz);
+        })
         .catch(() => console.log('error'));
     },
     getChatList(data) {
       // alert("Clicked!")
-      this.type = data.type;
+      // this.type = data.type;
+      console.log('tab type:', this.tabIndex);
+
       this.scrollToBottom();
       this.$store
         .dispatch('businessChat/GET_BIZS_CHAT_LIST', data)
-        .then(() => {
-          console.log('->[Data logged]<-');
-        })
+        .then(() => {})
         .catch(() => console.log('error'));
     },
 
     async histBizToBiz(data) {
       await this.$store
         .dispatch('businessChat/GET_BIZ_TO_BIZ', data)
-        .then(() => {
-          this.socket.emit('addUser', {
-            socketID: this.socket.id,
-            ...this.receiver,
-          });
-        })
+        .then(() => {})
         .catch(() => console.log('error'));
     },
     async histBizToUser(receiverId) {
       await this.$store
         .dispatch('businessChat/GET_BIZ_TO_USER', receiverId)
-        .then(() => {
-          this.socket.emit('addUser', {
-            socketID: this.socket.id,
-            ...this.receiver,
-          });
-        })
+        .then(() => {})
         .catch(() => console.log('error'));
     },
     async histBizToNetwork(receiverId) {
       await this.$store
         .dispatch('businessChat/GET_BIZ_TO_NETWORK', receiverId)
-        .then(() => {
-          this.socket.emit('addUser', {
-            socketID: this.socket.id,
-            ...this.receiver,
-          });
-        })
+        .then(() => {})
         .catch(() => console.log('error'));
     },
     saveMessage(data) {
@@ -1065,6 +1072,7 @@ export default {
         .catch(() => console.log('error'));
     },
     selectedChat(data) {
+      console.log('type tabs:', this.tabIndex);
       // this.scrollToBottom();
       this.createRoom(data.id);
       this.chatId = data.id;
@@ -1077,9 +1085,16 @@ export default {
         this.histBizToBiz(receiver);
       }
       this.newMsg = false;
-      this.chatSelected = { active: true, clickedId: data.id, ...data.chat };
+      // this.chatSelected = { active: true, clickedId: data.id, ...data.chat };
+      this.chatSelected = { active: true, clickedId: data.id, name: data.chat.name };
+
       console.log('[DEBUG] Chat selected:', this.chatSelected);
     },
+
+    // selected chat ID or receiver ID
+    // type
+    //
+
     searchChatList(keyword) {
       this.$store
         .dispatch('userChat/GET_USERS', keyword)
@@ -1107,7 +1122,7 @@ export default {
       this.socket.emit('privateMessage', {
         type: this.type,
         message: this.input,
-        sender_business_id: this.currentUser.user.id,
+        sender_business_id: this.currentBizId,
         room: this.room,
         receiver_business_id: this.chatSelected.id,
         receiver_id: this.chatId,
@@ -1122,10 +1137,10 @@ export default {
       console.log('SENT...');
 
       this.scrollToBottom();
-      let today = new Date();
-      let h = today.getHours();
-      let m = today.getMinutes();
-      this.message.timeStamp = h + ':' + m;
+      // let today = new Date();
+      // let h = today.getHours();
+      // let m = today.getMinutes();
+      // this.message.timeStamp = h + ':' + m;
       this.message.message = this.input;
       this.chats.push(this.message);
       this.input = '';
@@ -1147,9 +1162,6 @@ export default {
       this.selecteduser = true;
     },
 
-    showsearchh() {
-      this.showsearch = true;
-    },
 
     showMessages(arg) {
       this.show = arg;
@@ -1195,7 +1207,7 @@ export default {
 }
 .right {
   padding: 10px;
-  border-right: 2px solid #ccc;
+      border-right: 2px solid #ccc;
 }
 .primary-bg,
 .primary-bg:hover {
@@ -1205,25 +1217,35 @@ export default {
 
 .chat-box {
   position: relative;
-
+ 
   border: solid 2px rgb(223, 223, 223);
   margin-bottom: 100px;
+ 
+ 
+  
 }
+
+
+
+
 
 .chat-nav {
   position: relative;
   min-height: 70px;
-  border-right: 2px solid #ccc;
-
+    border-right: 2px solid #ccc;
+    
   width: 100%;
-
+  
   padding: 10px;
+
 }
 .chats {
   border: 2px solid green;
   height: 740px;
   overflow-y: scroll;
   overflow-x: hidden;
+  
+  
 }
 
 .back-image {
@@ -1246,6 +1268,7 @@ h1 {
   overflow-y: scroll;
   overflow-x: hidden;
   height: 710px;
+
 }
 .txt {
   font-size: 13px;
@@ -1256,12 +1279,15 @@ h1 {
   color: #fff;
 }
 .message {
+ 
   cursor: pointer;
 }
 .message:hover {
   background-color: #e75d29;
   color: #fff;
 }
+
+
 
 .msg-icon {
   font-size: 20px;
@@ -1353,7 +1379,7 @@ li {
   background-color: #ccc;
 }
 @media only screen and (max-width: 768px) {
-  .m-10 {
+  .m-10{
     margin-top: 10px;
   }
   .mobile {
@@ -1368,7 +1394,7 @@ li {
   .chat-nav {
     position: relative;
     min-height: 70px;
-
+   
     width: 100%;
     padding: 10px;
     border-right: none;
@@ -1395,7 +1421,7 @@ li {
   }
   #textarea {
     margin-left: 0px;
-
+    
     margin-top: 5px;
     margin-bottom: 5px;
   }
@@ -1420,10 +1446,11 @@ li {
     overflow-x: hidden;
     height: 690px;
     border-top: none;
-    overflow-x: hidden;
+        overflow-x: hidden;
     width: 97%;
   }
   .message {
+   
     cursor: pointer;
     width: 100%;
   }
@@ -1461,54 +1488,69 @@ li {
   }
 }
 
+
+
 ::-webkit-scrollbar {
   width: 4px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: #f1f1f1; 
 }
-
+ 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #888;
+  background: #888; 
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: #555; 
 }
 
-.input-background {
+.input-background{
   background-color: #ccc;
   border-radius: 20px;
 }
 
-.icon-top {
-  margin-top: 14px;
+
+.icon-top{
+
+      margin-top: 14px;
 }
 
-.profile-pic {
-  width: 64px !important;
-  height: 64px !important;
+
+
+.profile-pic{
+  
+  width: 64px  !important;
+  height: 64px  !important;
 }
 
-.drop-hover:hover {
+
+.drop-hover:hover{
+   background-color: white;
+}
+
+
+.drop-hover:active{
+   background-color: white;
+}
+
+
+.drop-hover:hover{
   background-color: white;
 }
 
-.drop-hover:active {
-  background-color: white;
-}
 
-.drop-hover:hover {
-  background-color: white;
-}
-
-.duration {
+.duration{
   margin-top: 5px;
 }
+
+
+
+
 
 .wrapper {
   position: relative;
@@ -1525,7 +1567,7 @@ li {
 }
 
 .regular-input:focus {
-  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
+  box-shadow: 0 0 0 3px rgba(66,153,225,.5);
 }
 
 .emoji-invoker {
@@ -1545,14 +1587,17 @@ li {
   fill: #b1c6d0;
 }
 
-.svgg {
+
+.svgg{
+
   margin-top: -120px;
-  margin-left: -20px;
+    margin-left: -20px;
 }
 
 .emoji-picker {
-  top: -370px !important;
-  left: 0px !important;
+
+      top: -370px !important;
+      left: 0px !important;
 
   position: absolute;
   z-index: 1;
@@ -1578,8 +1623,8 @@ li {
   padding: 0.5rem 1rem;
   outline: none;
   height: 32px;
-
-  width: 90%;
+  
+   width: 90%;
 }
 .emoji-picker h5 {
   margin-bottom: 0;
@@ -1606,4 +1651,8 @@ li {
   background: #ececec;
   cursor: pointer;
 }
+
+
+
+
 </style>

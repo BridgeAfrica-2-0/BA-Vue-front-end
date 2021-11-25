@@ -4,7 +4,7 @@
 
       <b-icon icon="person-fill"  class="icon-size" variant="primary"></b-icon>
       <b>
-        About
+        {{ $t('network.About') }}
       </b>
 
       <hr />
@@ -50,16 +50,16 @@
 
 
         <p>
-          <b-icon icon="briefcase-fill" class="primary icon-size"></b-icon> Agriculture
+          <b-icon icon="briefcase-fill" class="primary icon-size"></b-icon> {{ $t('network.Agriculture') }}
         </p>
-        <p><b-icon icon="search" class="primary icon-size"></b-icon> Chicken Seller</p>
+        <p><b-icon icon="search" class="primary icon-size"></b-icon> {{ $t('network.Chicken_Seller') }}</p>
         <p>
-          <b-icon icon="geo-alt-fill" class="primary icon-size"></b-icon> Mokolo, Yaounde,
-          Cameroon
+          <b-icon icon="geo-alt-fill" class="primary icon-size"></b-icon> {{ $t('network.Mokolo') }}, {{ $t('network.Yaounde') }},
+          {{ $t('network.Cameroon') }}
         </p>
-        <p><b-icon icon="link" class="primary icon-size"></b-icon> www.business.com</p>
+        <p><b-icon icon="link" class="primary icon-size"></b-icon> {{ $t('network.www_business_com') }}</p>
         <p>
-          <b-icon icon="people-fill" class="primary icon-size"></b-icon> 1.1M Community
+          <b-icon icon="people-fill" class="primary icon-size"></b-icon> {{ $t('network.11M_Community') }}
         </p>
         <p>
           <b-icon icon="telephone-fill" class="primary icon-size"></b-icon>
@@ -67,17 +67,17 @@
         </p>
         <p>
           <b-icon icon="envelope-fill" class="primary icon-size"></b-icon>
-          info@business.com
+          {{ $t('network.info_business_com') }}
         </p>
         <p>
           <b-icon icon="clock" class="primary icon-size"></b-icon>
-          <b-link> Open now</b-link>
+          <b-link> {{ $t('network.Open_now') }}</b-link>
           <br />
           <b-dropdown size="sm" variant="transperent">
             <template #button-content>
-              10:00AM - 7:00PM
+              {{ $t('network.1000AM_700PM') }}
             </template>
-            <b-dropdown-item> 10:00AM - 7:00PM</b-dropdown-item>
+            <b-dropdown-item> {{ $t('network.1000AM_700PM') }}</b-dropdown-item>
           </b-dropdown>
         </p>
       </b-card-text>
@@ -96,7 +96,7 @@
     <b-modal
       id="bv-modal-example1"
       hide-footer
-      title="Business Name"
+      :title="$t('network.Business_Name')"
       v-model="edit1"
       size="md"
     >
@@ -109,7 +109,7 @@
     <b-modal
       id="bv-modal-example2"
       hide-footer
-      title="Edit Address"
+      :title="$t('network.Edit_Address')"
       v-model="edit2"
     >
       <b-form>
@@ -118,12 +118,12 @@
 
 
           <div class="form-group">
-                        <label for="username">Busness Name:</label><br />
+                        <label for="username">{{ $t('network.Busness_Name') }}:</label><br />
                         <input
                           type="text"
                           name="username"
                           id="username"
-                          placeholder="Busness Name"
+                          :placeholder="$t('network.Busness_Name')"
                           class="form-control"
                         />
                       </div>
@@ -133,28 +133,28 @@
 
                       
                       <div class="form-group">
-                        <label for="alias">Category:</label><br />
+                        <label for="alias">{{ $t('network.Category') }}:</label><br />
                         <select id="category" class="form-control ">
                           <option value="" selected="" disabled=""
-                            >Select Category</option
+                            >{{ $t('network.Select_Category') }}</option
                           >
-                          <option>Category1</option>
-                          <option>Category2</option>
+                          <option>{{ $t('network.Category1') }}</option>
+                          <option>{{ $t('network.Category2') }}</option>
                         </select>
                       </div>
 
 
 
                       <div class="form-group">
-                        <label for="username">Keywords</label><br />
+                        <label for="username">{{ $t('network.Keywords') }}</label><br />
                         <div class="col-md-12 pl-0 pr-0">
-                          No Choices
+                          {{ $t('network.No_Choices') }}
 
                           <input
                           type="text"
                           name="alias"
                           id="alias"
-                          placeholder="Enter your Keywords"
+                          :placeholder="$t('network.Enter_your_Keywords')"
                           class="form-control"
                         />
 
@@ -162,7 +162,7 @@
                     </div>
         <b-form-group
           id="input-group-1"
-          label="Country"
+          :label="$t('network.Country')"
           label-for="input-1"
           label-size="sm"
         >
@@ -176,7 +176,7 @@
         </b-form-group>
         <b-form-group
           id="input-group-2"
-          label="City"
+          :label="$t('network.City')"
           label-for="input-2"
           label-size="sm"
         >
@@ -190,7 +190,7 @@
         </b-form-group>
         <b-form-group
           id="input-group-2"
-          label="Neigbourhood"
+          :label="$t('network.Neigbourhood')"
           label-for="input-2"
           label-size="sm"
         >
@@ -209,7 +209,7 @@
         
         <b-form-group
           id="input-group-2"
-          label="Phone Contact"
+          :label="$t('network.Phone_Contact')"
           label-for="input-2"
           label-size="sm"
         >
@@ -223,7 +223,7 @@
         </b-form-group>
         <b-form-group
           id="input-group-2"
-          label="Business Email"
+          :label="$t('network.Business_Email')"
           label-for="input-2"
           label-size="sm"
         >
@@ -244,7 +244,7 @@
           variant="primary"
           @click="validate('bv-modal-example2')"
         >
-          Modify
+          {{ $t('network.Modify') }}
         </b-button>
       </b-form>
     </b-modal>

@@ -8,10 +8,10 @@ export const getters = {
   }, // [TYPES.NEW_BUSINESS_NOTIFICATION]
 
   [TYPES.NEW_PROFILE_NOTIFICATION](state) {
-    return state.networks
+    return state.profile
   }, //[TYPES.NEW_PROFILE_NOTIFICATION]
 
   [TYPES.NEW_NETWORK_NOTIFICATION](state) {
-    return state.profile
+    return state.networks
   }, // [TYPES.NEW_NETWORK_NOTIFICATION]
 }

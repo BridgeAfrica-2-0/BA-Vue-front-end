@@ -32,7 +32,7 @@
                       >
                         <h6 class="follower m-15">
                           {{  member.communityNum }}
-                          Community
+                          {{ $t('network.Community') }}
                         </h6>
                       </b-col>
                       <b-col @click="$emit('BlockUser', member.id)" md="6" lg="12" cols="6" xl="12" class="mt-1 mt-lg-1 mt-xl-2" style="cursor:pointer;">
@@ -59,7 +59,7 @@
                           class="b-background flexx pobtn shadow"
                         >
                           <i class="fas fa-envelope fa-lg btn-icon"></i>
-                          <span class="btn-text">Message</span>
+                          <span class="btn-text">{{ $t('network.Message') }}</span>
                         </b-button>
                       </b-col>
 
@@ -75,9 +75,10 @@
                           size="sm"
                           class="b-background flexx pobtn shadow"
                           variant="primary"
+                          @click="$emit('handleFollow', member)"
                         >
-                          <i class="fas fa-user-plus fa-lg btn-icon"></i>
-                          <span class="btn-com">Community</span>
+                          <i :class="member.is_follow ? 'fas fa-user-minus fa-lg btn-icon':'fas fa-user-plus fa-lg btn-icon'"></i>
+                          <span class="btn-com">{{ $t('network.Community') }}</span>
                         </b-button>
                       </b-col>
                     </b-row>

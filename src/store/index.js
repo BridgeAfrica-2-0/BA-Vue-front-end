@@ -37,7 +37,7 @@ import networkProfileMedia from './networkProfileMedia';
 import networkProfileMemberRequest from './networkProfileMemberRequest';
 import profileOrders from './profileOrders';
 import keywordOperationOnNetwork from './keywordOperationOnNetwork';
-
+import profileSettingsEdit from "./profileSettingsEdit"
 
 import { social } from './social';
 
@@ -84,7 +84,8 @@ export default new Vuex.Store({
         networkProfileMemberRequest,
         networkProfile,
         orderBusiness,
-        profileOrderDetail
+        profileOrderDetail,
+        profileSettingsEdit
 
     }
 });

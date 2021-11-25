@@ -23,8 +23,8 @@ export const en = {
 
 
     auth: auth,
-     businessf: businessf,
-    search: search,
+    // businessf: businessf,
+    // search: search,
 
     // network: network,
     // profilefollower: profilefollower,
@@ -32,6 +32,9 @@ export const en = {
     passrecover: passrecover,
     // welcome: welcome,
     dashboard: dashboard,
+    profileowner: profileowner,
+
+    // welcome: welcome,
     memnetwork: memnetwork,
 
     network: network,

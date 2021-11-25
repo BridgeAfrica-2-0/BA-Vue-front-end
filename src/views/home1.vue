@@ -14,10 +14,10 @@
       <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
 
       <!-- Google Fonts -->
-      <link
+      <!-- <link
         href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Jost:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
         rel="stylesheet"
-      />
+      /> -->
     </head>
 
     <!-- ======= Header ======= -->
@@ -29,7 +29,7 @@
           ><img src="../assets/img/logobr.png" alt="" class="img-fluid b-logo"
         /></a>
 
-        <nav class="nav-menu d-none d-lg-block">
+        <!-- <nav class="nav-menu d-none d-lg-block">
           <ul>
             <li class="active"><a href="index.html">Home</a></li>
             <li><a href="http://info.bridgeafrica.com/">About Us</a></li>
@@ -42,10 +42,46 @@
 
             <li><a href="#">Signup</a></li>
           </ul>
-        </nav>
+        </nav> -->
+
+
+      <div>
+  <b-navbar toggleable="sm" type="ligth" variant="ligth">
+   
+
+    <b-navbar-toggle target="nav-collapse ">
+      <template :default=" expanded ">
+        <b-icon v-if="expanded" icon="justify" class="couleur" @click="Expanded(1)"></b-icon>
+        <b-icon v-else icon="X" class="couleur" @click="Expanded(2)"></b-icon>
+      </template>
+    </b-navbar-toggle>
+
+    <b-collapse id="nav-collapse" is-nav>
+      
+
+      <!-- Right aligned nav items -->
+      <b-navbar-nav class="ml-auto">
+       
+      <b-nav-item href="#">Home</b-nav-item>
+       <b-nav-item href="#">About Us</b-nav-item>
+        <b-nav-item href="#">Contact Us</b-nav-item>
+         <b-nav-item href="#">About Us</b-nav-item>
+         <b-nav-item href="#">Login</b-nav-item>
+        <b-nav-item href="#">Sign Up</b-nav-item>
+
+
+      </b-navbar-nav>
+    </b-collapse>
+  </b-navbar>
+</div>
+
+
+
+
+
         <!-- .nav-menu -->
 
-        <a
+        <!-- <a
           href="#about"
           class="black d-lg-none"
           style="color: black; font-weight: bold; font-size: 18px"
@@ -57,7 +93,7 @@
           class="get-started-btn d-lg-none"
           style="font-size: 18px"
           >Sign Up</a
-        >
+        > -->
       </div>
     </header>
     <!-- End Header -->
@@ -195,7 +231,7 @@
       </div>
     </div>
 
-    <!-- <br> <br> -->
+    <br> <br>
     <section id="about" class="about mt-md-30">
       <div class="container aos-init aos-animate" data-aos="fade-up">
         <div class="section-title">
@@ -815,7 +851,24 @@
 
 import "../assets/js/main.js";
 // import "../assets/js/js.js";
-export default {};
+export default {
+
+  data(){
+    return {
+      expanded:true
+    }
+  },
+
+  methods:{
+    Expanded(a){
+      if(a== 1){
+        this.expanded= false;
+      }else if(a == 2){
+         this.expanded= true;
+      }
+    }
+  }
+};
 </script>
 
 <style>
@@ -836,6 +889,10 @@ export default {};
 @import url("https://fonts.googleapis.com/css2?family=Merriweather&family=Merriweather+Sans:wght@300&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Jost:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i");
 
+.couleur{
+  color: #e75c18 ;
+  font-weight: bold;
+}
 .blec-container {
   position: absolute;
   margin-top: -50px;

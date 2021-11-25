@@ -8,7 +8,7 @@ import verification from './verification.json'
 //import passrecover from './passrecover.json'
 import welcome from './welcome.json'
 import dashboard from './dashboard.json'
-//import profileowner from './profileowner.json'
+import profileowner from './profileowner.json'
 
 
 import memnetwork from './memnetwork.json'
@@ -28,7 +28,7 @@ export const fr = {
     // passrecover: passrecover,
     welcome: welcome,
     dashboard: dashboard,
-    // profileowner: profileowner,
+    profileowner: profileowner,
     // memnetwork: memnetwork,
     verification: verification,
     // network: network,

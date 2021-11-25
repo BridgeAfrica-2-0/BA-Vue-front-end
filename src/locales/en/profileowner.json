@@ -38,6 +38,7 @@
     "Municipality": "Municipality",
     "Neighbor": "Neighborhood",
     "Adress": "Address",
+    "Phone": "Phone",
     "Phone1": "Phone1",
     "Phone2": "Phone2",
     "Website": "Website",
@@ -230,5 +231,11 @@
     "Edit_Profile": "Edit Profile",
     "Album_Type": "Album Type",
     "to_create_a": "to create a",
-    "network": "network"
+    "network": "network",
+    "Upload_Your_Logo": "Upload Your Logo",
+    "Crop_Cover_Photo": "Crop Cover Photo",
+    "Upload_Cover_Picture": "Upload Cover Picture",
+    "Upload_a_New_Picture": "Upload a New Picture",
+    "Edit_Your_New_Picture": "Edit Your New Picture",
+    "Upload_Cover_Photo": "Upload Cover Photo"
 }

@@ -47,7 +47,6 @@ Vue.use(Vuex);
 //  axios.defaults.baseURL = "https://test.maxinemoffett.com/api/v1/";
 
 
-
 export default new Vuex.Store({
     modules: {
         auth,
@@ -85,6 +84,8 @@ export default new Vuex.Store({
         networkProfileMemberRequest,
         networkProfile,
         orderBusiness,
-        notification,
-    },
+        profileOrderDetail
+
+    }
 });
+

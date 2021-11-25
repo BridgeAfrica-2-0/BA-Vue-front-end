@@ -120,7 +120,7 @@
             
           </md-field>
 
-          <md-field :class="getValidationClass('password')">
+          <md-field :class="getValidationClass('confirmPassword')">
             <label for="confirmPassword"> {{ $t("auth.confirm_password") }} </label>
             <md-input
               type="password"
@@ -130,12 +130,12 @@
               :disabled="sending"
             />
             <span class="md-error" v-if="!$v.form.confirmPassword.required"
-              > {{ $t("auth.Password_is_required") }}
+              >   {{ $t("auth.password_is_required") }}
             </span>
 
              <span class="md-error" v-if="!$v.form.confirmPassword.sameAsPassword"
-              > {{ $t("auth.Password_is_required") }} 
-               Passwords must be identical.
+              > {{ $t("auth.password_identical") }} 
+               
             </span>
 
           </md-field>
@@ -247,8 +247,8 @@ export default {
 
       confirmPassword: {
         required,
-        minLength: minLength(8),
-        sameAsPassword: sameAs('password')
+         minLength: minLength(8),
+         sameAsPassword: sameAs('password')
       },
 
       tel: {

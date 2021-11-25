@@ -195,7 +195,10 @@
       <b-button style="float: right" class="mt-2" variant="primary" @click="submitFile">
         <b-spinner v-if="SPupdateN" small type="grow"></b-spinner>{{ $t('network.Upload') }}
       </b-button>
-    </b-modal>
+
+    </b-modal> 
+  </div>
+
 
 
     <b-modal id="modal-4" ref="modal-4" centered hide-footer :title="$t('network.Upload_a_New_picture')" >

@@ -152,7 +152,7 @@ export const commentMixinsBuisness = {
       auth: 'auth/profilConnected',
     }),
 
-    onLike: async function() {
+    onLike: async function () {
       const request = await this.$repository.share.commentLike({
         comment: this.comment.comment_id,
         network: this.profile.id,
@@ -164,12 +164,12 @@ export const commentMixinsBuisness = {
           comment_likes: !this.comment.is_liked
             ? this.comment.comment_likes + 1
             : this.comment.comment_likes
-            ? this.comment.comment_likes - 1
-            : 0,
+              ? this.comment.comment_likes - 1
+              : 0,
         });
     },
 
-    onShowReply: async function() {
+    onShowReply: async function () {
       this.loadComment = true;
       const request = await this.$repository.share.fetchReplyComment({
         post: this.uuid,
@@ -186,7 +186,8 @@ export const commentMixinsBuisness = {
       this.loadComment = false;
     },
 
-    onReply: async function() {
+
+    onReply: async function () {
       if (!(this.text.trim().length > 2 && !this.createPostRequestIsActive)) return false;
 
       this.createPostRequestIsActive = true;
@@ -256,7 +257,7 @@ export const commentMixins = {
   },
 
   methods: {
-    onLike: async function() {
+    onLike: async function () {
       const request = await this.$repository.share.commentLike({
         comment: this.comment.comment_id,
         network: this.profile.id,
@@ -268,12 +269,12 @@ export const commentMixins = {
           comment_likes: !this.comment.is_liked
             ? this.comment.comment_likes + 1
             : this.comment.comment_likes
-            ? this.comment.comment_likes - 1
-            : 0,
+              ? this.comment.comment_likes - 1
+              : 0,
         });
     },
 
-    onShowReply: async function() {
+    onShowReply: async function () {
       const request = await this.$repository.share.fetchReplyComment({
         post: this.uuid,
         comment: this.comment.comment_id,
@@ -283,7 +284,7 @@ export const commentMixins = {
       if (request.success) this.comments = request.data;
     },
 
-    onReply: async function() {
+    onReply: async function () {
       if (!(this.text.trim().length > 2 && !this.createPostRequestIsActive)) return false;
 
       this.createPostRequestIsActive = true;
@@ -341,25 +342,71 @@ export const Pusher = {
   },
 };
 
-export const Redis = {
+export const knowWhoIsConnected = {
+
   methods: {
     ...mapMutations({
-      newNotificationBusiness: 'notification/NEW_BUSINESS_NOTIFICATION',
-      newNotificationProfile: 'notification/NEW_PROFILE_NOTIFICATION',
-      newNotificationNetwork: 'notification/NEW_NETWORK_NOTIFICATION',
+      auth: 'auth/profilConnected',
+    }),
+    async getAuth() {
+      const response = await this.$repository.share.WhoIsConnect({ networkId: this.$route.params.id });
+
+      if (response.success) this.auth(response.data);
+    },
+  },
+
+  created() {
+    this.getAuth()
+  }
+}
+
+export const Redis = {
+
+  computed: {
+    ...mapGetters({
+      profile: "auth/profilConnected"
+    })
+  },
+
+  methods: {
+    ...mapMutations({
+      newNotificationBusiness: "notification/NEW_BUSINESS_NOTIFICATION",
+      newNotificationProfile: "notification/NEW_PROFILE_NOTIFICATION",
+      newNotificationNetwork: "notification/NEW_NETWORK_NOTIFICATION",
+      auth: "auth/profilConnected"
     }),
 
-    initBusinessNotification: async function() {
-      const response = this.$repository.notification.business();
-      if (response.status) this.newNotificationBusiness({ init: true, data: response.data });
+    async getAut() {
+      const response = await this.$repository.share.WhoIsConnect({ businessId: this.route.params.id});
+      if(response.access) this.auth(response.data);
+    },
+
+    initBusinessNotification: async function () {
+      const response = this.$repository.notification.business()
+      if (response.status)
+        this.newNotificationBusiness({ init: true, data: response.data })
     },
 
     redis() {
-      console.log('call echo redis');
-      window.Redis.channel('user.1').listen('.UserEvent', payload => {
-        console.log(payload);
-      });
-    },
+      console.log("call echo redis");
+      // const $event = `user.${this.profile.id}`
+      console.log("${this.profile.id}", this.profile.id);
+      const $event = `user.${this.profile.id}`;
+      console.log("$event", $event);
+      console.log(window.Redis.private($event));
+      // window.Redis.channel($event)
+      window.Redis.private($event)
+        // .listen(".BusinessNotificationEvent", payload => {
+        .listen(".UserNotification", payload => {
+          console.log("payload")
+          console.log(payload)
+          alert(payload.notification.notification_text)
+          // this.newNotificationBusiness({ init: false, data: payload.data })
+          this.newNotificationProfile({ init: false, data: payload.notification })
+          // this.newNotificationNetwork({ init: false, data: payload.data })
+        })
+        console.log("end echo redis");
+    }
   },
 
   created() {

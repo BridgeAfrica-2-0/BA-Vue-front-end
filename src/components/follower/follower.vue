@@ -7,7 +7,7 @@
         
           <img  :src="info.user.cover_picture" v-if="info.user.cover_picture != null " class="banner" />      
       </div>
-      <b-row class="mt-2 mb-2  d-none d-md-block ">
+      <b-row class="mt-2 mb-2  d-none d-lg-block ">
         <b-col cols="6" class="avata">
           <div>     
             
@@ -94,15 +94,24 @@
           </div>
         </b-col>
         <b-col cols="2">
-          <b-button
-            class="m-community size"
-            size="sm"
-            style="margin-top: -50px;"
-          >
-            <i class="fas fa-map-marked-alt fa-lg btn-icon "></i>
+         
 
-            <span class="txt-btn">{{ $t('profilefollower.Direction') }}</span></b-button
-          >
+           <b-dropdown
+        class="ml-1 dropdown"
+        no-caret
+        variant="link"
+        size="sm"
+      >
+        <template #button-content>
+          <b-icon icon="three-dots" aria-hidden="true"></b-icon>
+        </template>
+        <b-dropdown-item>
+          <b-icon icon="flag" variant="primary"></b-icon>
+          {{ $t('profilefollower.Report') }}</b-dropdown-item
+        >
+      </b-dropdown>
+
+
         </b-col>
       </b-row>
     </div>
@@ -117,20 +126,7 @@
         <span class="txt-btn">{{ $t('profilefollower.Community') }}</span></b-button
       >
 
-      <b-dropdown
-        class="ml-1 dropdown"
-        no-caret
-        variant="outline-primary"
-        size="sm"
-      >
-        <template #button-content>
-          <b-icon icon="three-dots" aria-hidden="true"></b-icon>
-        </template>
-        <b-dropdown-item>
-          <b-icon icon="flag" variant="primary"></b-icon>
-          {{ $t('profilefollower.Report') }}</b-dropdown-item
-        >
-      </b-dropdown>
+  
     </div>
 
     <div class="body p-2">
@@ -316,7 +312,7 @@ computed: {
 
 .btns {
   margin-left: 670px;
-  margin-top: -80px;
+ 
 }
 
 .options {
@@ -471,7 +467,7 @@ p,
 
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 991px) {
   .m-community {
     position: relative;
     left: -75px;

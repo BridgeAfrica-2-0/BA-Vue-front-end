@@ -17,10 +17,10 @@
           <div class="mb-2 p-4">
             <h4 class="mb-4 text-center">
               <b-icon icon="info-circle-fill" class="primary mr-2"></b-icon>
-              <b>{{ business_about.name }}</b>
+              <b>{{ leftTitle }}</b>
             </h4>
             <p class="txt">
-              {{ business_about.about_business }}
+              {{ textToo }}
             </p>
           </div>
         </b-col>
@@ -28,31 +28,31 @@
           <div class="p-4">
             <p>
               <b-icon icon="briefcase-fill" class="primary icon"></b-icon>
-              <span v-for="category in business_about.category" :key="category.id">{{category.name}}, </span>
+              <span>Agriculture</span>
             </p>
             <p>
               <b-icon icon="search" class="primary icon"></b-icon>
-              <span>{{ business_about.name }}</span>
+              <span>Chicken Seller</span>
             </p>
             <p>
               <b-icon icon="geo-alt-fill" class="primary icon"></b-icon>
-              <span>{{ business_about.address }}, {{ business_about.city }}, {{ business_about.country[0].name }}</span>
+              <span>Mokolo, Yaounde, Cameroon</span>
             </p>
             <p>
               <b-icon icon="link" class="primary icon"></b-icon>
-              <span>{{ business_about.website }}</span>
+              <span>www.business.com</span>
             </p>
             <p>
               <b-icon icon="people-fill" class="primary icon"></b-icon>
-              <span>{{nFormatter(business_about.community)}} Community</span>
+              <span>1.1M Community</span>
             </p>
             <p>
               <b-icon icon="telephone-fill" class="primary icon"></b-icon>
-              <span>{{ business_about.phone }}</span>
+              <span>+1(542) 565- 536</span>
             </p>
             <p>
               <b-icon icon="envelope-fill" class="primary icon"></b-icon>
-              <span> {{ business_about.email }}</span>
+              <span> info@business.com</span>
             </p>
             <p>
               <b-icon icon="clock" class="primary icon"></b-icon>
@@ -60,14 +60,8 @@
                 ><b-link> Open now</b-link>
 
                 <b-dropdown size="sm" variant="transperent">
-                  <template #button-content>
-                    {{ hoursOpen }}
-                  </template>
-                  <b-dropdown-item
-                    v-for="day in business_about.business_open_hours"
-                    :key="day.day"
-                    @click="selectHour(day)"
-                  > {{ day.opening_time }}AM - {{ day.closing_time }}PM</b-dropdown-item>
+                  <template #button-content> 10:00AM - 7:00PM </template>
+                  <b-dropdown-item> 10:00AM - 7:00PM</b-dropdown-item>
                 </b-dropdown></span
               >
             </p>
@@ -82,21 +76,12 @@
 export default {
   data() {
     return {
-      business_id:null,
+      business_id: null,
+      business_about: [],
 
       edit1: false,
       edit2: false,
-      openNow: null,
-      dayOfWorks: [
-        { day: "Monday", opening_time: null, closing_time: null, check: false },
-        { day: "Tuesday", opening_time: null, closing_time: null, check: false },
-        { day: "Wednesday", opening_time: null, closing_time: null, check: false },
-        { day: "Thursday", opening_time: null, closing_time: null, check: false },
-        { day: "Friday", opening_time: null, closing_time: null, check: false },
-        { day: "Saturday", opening_time: null, closing_time: null, check: false },
-        { day: "Sunday", opening_time: null, closing_time: null, check: false }
-      ],
-
+      leftTitle: "About Mapoure Agrobusiness",
       textToo:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit.\n" +
         "              Asperiores temporibus, rerum iste id obcaecati quae odit accusamus\n" +
@@ -117,46 +102,6 @@ export default {
       email: "info@businessname.com",
     };
   },
-
-  created() {
-    this.business_id = this.$route.params.id;
-    console.log("Load Business About start +++++");
-    this.$store
-      .dispatch("businessOwner/loadUserBusinessAbout",  {
-        business_id:this.business_id
-      })
-      .then(response => {
-        console.log(response, "load business about response end response (3) ++++");
-        this.dayOfWorks = this.initialize(this.dayOfWorks);
-        console.log(this.business_about);
-      })
-      .catch(error => {
-        console.log("error from the server or browser error(2) ++++", error);
-      })
-      .finally(() => {
-        this.business_about = JSON.parse(
-          JSON.stringify(this.$store.getters["businessOwner/getBusinessAbout"])
-        );
-        console.log(this.business_about);
-      });
-  },
-
-  computed: {
-    hoursOpen() {
-      console.log();
-      return this.openNow === null
-        ? "Nothing"
-        : this.openNow.opening_time +
-            " AM - " +
-            this.openNow.closing_time +
-            " PM";
-    }
-  },
-
-  mounted(){
-    this.business_id = this.$route.params.id;
-  },
-
   methods: {
     editBio() {
       this.edit1 = !this.edit1;
@@ -169,23 +114,7 @@ export default {
     validate(idForm) {
       this.$bvModal.hide(idForm);
     },
-    selectHour(day) {
-      this.openNow = day;
-    },
-
-    nFormatter: function(num) {
-      if (num >= 1000000000) {
-        return (num / 1000000000).toFixed(1).replace(/\.0$/, "") + "G";
-      }
-      if (num >= 1000000) {
-        return (num / 1000000).toFixed(1).replace(/\.0$/, "") + "M";
-      }
-      if (num >= 1000) {
-        return (num / 1000).toFixed(1).replace(/\.0$/, "") + "K";
-      }
-      return num;
-    },
-  }
+  },
 };
 </script>
 

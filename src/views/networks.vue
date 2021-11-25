@@ -67,7 +67,6 @@
       Bridge Africa © 2021
     </p> 
   </div>
-
 </template>
 
 <script>
@@ -101,22 +100,25 @@ export default {
       bottomSelectedId: 0,
 
       items: [
-        { label: this.$t('network.Home'), icon: " " },
+        { label: this.$t("network.Home"), icon: " " },
 
-        { label: this.$t('network.Inbox'), icon: " " },
-        { label: this.$t('network.Notification'), icon: "" },
-        { label: this.$t('network.Member_Request'), icon: "" },
-        { label: this.$t('network.Pending_Post'), icon: "" },
+        { label: this.$t("network.Inbox"), icon: " " },
+        { label: this.$t("network.Notification"), icon: "" },
+        { label: this.$t("network.Member_Request"), icon: "" },
+        { label: this.$t("network.Pending_Post"), icon: "" },
 
-        { label: this.$t('network.Keyword_Alert'), icon: "" },
+        { label: this.$t("network.Keyword_Alert"), icon: "" },
 
-        { label: this.$t('network.Settings'), icon: "" },
+        { label: this.$t("network.Settings"), icon: "" },
       ],
 
       options: {
         activeColor: "#32a400",
       },
     };
+  },
+  created() {
+    this.selectedId = this.$route.query.tabId ? this.$route.query.tabId : 0;
   },
 
   methods: {

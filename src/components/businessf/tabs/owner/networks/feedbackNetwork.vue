@@ -75,16 +75,11 @@
           </b-skeleton-wrapper>
         </div>
       </b-col>
-      <b-col v-if="feedbacks.per_page < feedbacks.total" cols="12">
-        <span class="float-right">
-          <b-pagination
-            v-model="currentPage"
-            :total-rows="feedbacks.total"
-            :per-page="feedbacks.per_page"
-            @change="handlePageChange"
-            aria-controls="my-table"
-          ></b-pagination>
-        </span>
+      <b-col col="12">
+        <infinite-loading @infinite="infiniteHandler" ref="infiniteLoading">
+          <div class="text-red" slot="no-more">No More Request</div>
+          <div class="text-red" slot="no-results">No More Request</div>
+        </infinite-loading>
       </b-col>
     </b-row>
 
@@ -105,8 +100,9 @@ export default {
       filter: "0",
       filterData: false,
       loading: false,
-      currentPage: null,
+      currentPage: 0,
       currentIndex: -1,
+      feedbacks: [],
       options: [
         { value: "Improvement", text: "Suggestion for Improvement" },
         { value: "Complaints", text: "Complaints" }
@@ -122,49 +118,68 @@ export default {
       },
     };
   },
-  computed: {
-    feedbacks() {
-      return this.$store.state.networkProfileFeedback.feedbacks;
-    },
-  },
   mounted(){
     this.url = this.$route.params.id;
-    this.displayFeedback(); 
   },
   methods: {
     filterFeedback() {
       this.filterData = !this.filterData;
     },
-    getRequestDatas(filterData, currentPage) {
+    getRequestDatas(filterData) {
       let data = "";
       if (filterData) {
-        data = "/"+filterData;
-      }else if (currentPage) {
-        data = "/?page="+currentPage;
+        console.log("Status true");
+        if (filterData == 0) 
+          data = "";
+        else
+          data = filterData;
       }
       console.log(data);
       return data;
     },
     applyFilter(data){
       this.loading = true;
+      this.feedbacks = [];
       this.filterData = data
       console.log("searching...");
       console.log(this.filterData);
-      this.displayFeedback();
-    },
-    displayFeedback() {
-      this.loading = true;
-      const data = this.getRequestDatas(this.filterData, this.currentPage);
-      this.$store
-      .dispatch("networkProfileFeedback/getFeedbacks", this.url+"/feedback"+data)
-      .then(() => {
-        this.loading = false;
-        console.log('ohh yeah');
-      })
-      .catch( err => {
-        console.log({ err: err });
-        this.loading = false;
+      this.$nextTick(() => {
+        this.page = 0;
+        this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
       });
+    },
+
+    infiniteHandler($state) {
+      console.log("loop");
+      const data = this.getRequestDatas(this.filterData);
+      console.log('keyword: '+data);
+      let formData = new FormData();
+      formData.append('keyword', data);
+      // this.$store
+      //   .dispatch("networkProfileMembers/getMembers", {
+      //     path: this.url+"/members/list/"+this.page,
+      //     formData: formData
+      //   })
+      this.axios
+        .post("network/"+this.url+"/feedbacks/"+this.currentPage, formData)
+        .then(({ data }) => {
+        console.log(data);
+        console.log(this.currentPage);
+        if (data.data.length) {
+          this.currentPage += 1;
+          console.log(this.currentPage);
+          console.log(...data.data);
+          this.feedbacks.push(...data.data);
+          this.loading = false;
+          $state.loaded();
+        } else {
+          this.loading = false;
+          $state.complete();
+        }
+      }) .catch((err) => {
+        this.loading = false;
+        console.log({ err: err });
+      })
     },
 
     deleteFeedback: function(user_id){
@@ -179,7 +194,10 @@ export default {
         data: info
       })
       .then(response => {
-        this.displayFeedback();
+        this.$nextTick(() => {
+          this.page = 0;
+          this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
+        });
         this.loading = false;
         console.log(response);
         console.log('ohh yeah');
@@ -189,7 +207,10 @@ export default {
         });
       })
       .catch( err => {
-         this.displayFeedback();
+        this.$nextTick(() => {
+          this.page = 0;
+          this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
+        });
         console.log({ err: err });
         this.loading = false;
         this.flashMessage.show({
@@ -198,11 +219,6 @@ export default {
         });
       });
 		},
-    handlePageChange(value) {
-      this.currentPage = value;
-      console.log(this.currentPage);
-      this.displayFeedback();
-    },
   }
 };
 </script>

@@ -11,6 +11,7 @@ export default {
     blocknetworks: [],
     blockbusiness: [],
     networkinfo: [],
+    editnetworkinfo: [],
     general: [],
   },
 
@@ -33,8 +34,11 @@ export default {
     getblockbusinesses(state) {
       return state.blockbusiness;
     },
-    getNinfo(state) {
+    getnetworkinfo(state) {
       return state.networkinfo;
+    },
+    getEditNetworkInfo(state) {
+      return state.editnetworkinfo;
     }
   },
   
@@ -70,6 +74,9 @@ export default {
     },
     setnetworkinfo(state, networkinfo) {
       state.networkinfo = networkinfo;
+    },
+    seteditnetworkinfo(state, editnetworkinfo) {
+      state.editnetworkinfo = editnetworkinfo;
     }
   },
 
@@ -85,7 +92,7 @@ export default {
     },
 
     getroles({ commit }) {
-      return axios.get("/network/roles/list")
+      return axios.get("/network/roles/show-roles")
       .then(({ data }) => {
         commit("setroles", data.data);
         console.log(data);
@@ -141,6 +148,12 @@ export default {
         console.log(data);
       });
     },
+    getEditNetworkInfo({ commit }, networkId) {
+      return axios.get(`/network/edit/${networkId}`).then(({ data }) => {
+        commit("seteditnetworkinfo", data.data);
+        console.log(data);
+      });
+    },
 
     generalSave({ commit }, payload) {
       console.log("payload", payload)
@@ -161,6 +174,22 @@ export default {
     networkDelete({ commit }, payload) {
       console.log("payload", payload)
       return axios.delete(`/network/${payload.path}`)
+      .then(({ data }) => {
+        return data;
+      });
+    },
+
+    deleteEditor({ commit }, payload) {
+      console.log("payload", payload)
+      return axios.delete(`/network/${payload.path}`)
+      .then(({ data }) => {
+        return data;
+      });
+    },
+
+    updateNetworkInfo({ commit }, data) {
+      console.log("updateNetworkInfo", data)
+      return axios.post(`/network/${data.path}`, data.formData)
       .then(({ data }) => {
         return data;
       });

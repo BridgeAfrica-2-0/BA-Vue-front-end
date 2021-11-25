@@ -11,7 +11,7 @@
         <b-card class=" border shadow hselect">
           <b-row>
             <b-col md="6" sm="12" class="">
-              <h6 class="font-weight-bolder text-design">
+              <h6 class="font-weight-bolder text-design text-center t-center">
                 {{$t('dashboard.Use_Bridge_Africa_as_Yourself_or_as_one_of_your_businesses')}} 
               </h6>
             </b-col>
@@ -145,24 +145,31 @@
 
 <script>
 import Navbar from "@/components/navbar";
+
 import CarousselDashboard from "@/components/dasboard/carousselDashboard";
+
 import BusinessDashboard from "@/components/dasboard/businessDashboard";
+
 import ComunitiDashboard from "@/components/dasboard/comunitiDashboard";
 
 import ComunitiBdashboard from "@/components/dasboard/comunitiBdashboard";
 
 import Insights from "@/components/dasboard/insights";
+
 import CommunityActivity from "@/components/dasboard/communityActivity";
 
 import CommunityBactivity from "@/components/dasboard/communityBactivity";
 
 import Tutorial from "@/components/dasboard/tutorial";
+
 import Profile from "@/components/dasboard/profile";
 
 import Business from "@/components/dasboard/hotbusiness";
 
 import Map from "@/components/dasboard/map";
+
 import EmptyBusiness from "@/components/dasboard/emptybusiness";
+
 import Popularnetwork from "@/components/dasboard/popularnetwork";
 export default {
   name: "dashboard",
@@ -200,7 +207,7 @@ export default {
   methods: {
 
 
-    switchBusiness(value){
+   async switchBusiness(value){
 
        console.log("business switch"+value);
  
@@ -219,7 +226,7 @@ export default {
      this.$store.commit("dashboard/setdBusinessId", value);
 
 
-      this.$store
+    await  this.$store
         .dispatch("dashboard/dashboardBusiness", value)
         .then(() => {
           console.log("business switch");
@@ -373,6 +380,7 @@ export default {
 .icon-color {
   color: #e75c18;
 }
+
 .icons {
   color: #e75c18;
   width: 24px;
@@ -391,10 +399,12 @@ export default {
 .card-body {
   padding: 8px;
 }
+
 .card {
   padding: 0px;
   padding-top: 15px;
 }
+
 @media only screen and (min-width: 768px) {
   .titlle {
     font-size: 20px;
@@ -407,6 +417,7 @@ margin-left: -15px;
 }
 
 }
+
 @media only screen and (max-width: 768px) {
   .titlle {
     font-size: 16px;
@@ -431,13 +442,16 @@ margin-left: -20px;
   overflow-y: auto;
   overflow-x: hidden;
 }
+
 .logo-img {
   width: 60px;
 }
+
 @media only screen and (max-width: 768px) {
   h4 {
     font-size: 15px;
   }
+
   .logo-img {
     width: 30px;
   }
@@ -445,56 +459,71 @@ margin-left: -20px;
     font-size: 10px;
   }
 }
+
 .p-card {
   margin: 2px;
+
   border: 0px;
 }
+
 .search-form {
   margin-top: 10px;
   margin-bottom: 20px;
   text-align: right;
 }
+
 .m-component {
   margin: -20px;
 }
+
 .w-50 {
   width: 50%;
   height: 50px;
 }
+
 select option {
   margin: 40px;
   background: white;
   color: black;
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
 }
+
 .wi-25 {
   width: 25%;
   height: 50px;
 }
+
 .b-groupe {
   background-color: orangered;
+
   border-top-right-radius: 15px;
   border-bottom-right-radius: 15px;
   border-style: none;
   color: white;
 }
+
 .custom-select {
   display: inherit;
 }
+
 .color-sit {
   color: white;
 }
+
 select {
   -webkit-appearance: none;
   -moz-appearance: none;
   text-indent: 1px;
   text-overflow: "";
 }
+
 .a-center {
   align-content: center;
   text-align: center;
+
   margin-top: 15px;
 }
+
 .div-h {
   height: 350px;
   overflow: auto;

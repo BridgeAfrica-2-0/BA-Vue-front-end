@@ -16,14 +16,15 @@ import memnetwork from './memnetwork.json'
 import profilefollower from './network.json'
 
 
+
 export const defaultLocale = 'en'
 
 export const en = {
 
 
     auth: auth,
-    // businessf: businessf,
-    // search: search,
+     businessf: businessf,
+    search: search,
 
     // network: network,
     // profilefollower: profilefollower,

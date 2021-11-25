@@ -67,7 +67,7 @@ const routes = [{
         component: notFound,
     },
     {
-        path: "/home1",
+        path: "/",
         name: "home1",
         component: home1,
         
@@ -92,7 +92,7 @@ const routes = [{
 
 
     {
-        path: "/",
+        path: "/dashboard",
         name: "home",
         component: dashboard,
         meta: {
@@ -294,7 +294,7 @@ const routes = [{
         component: Visitor,
     },
     {
-        path: "/search/:id",
+        path: "/search/",
         name: "Search",
         component: search,
     },

@@ -60,14 +60,14 @@
       
 
       <!-- Right aligned nav items -->
-      <b-navbar-nav class="ml-auto">
+      <b-navbar-nav class="ml-auto bold" >
        
-      <b-nav-item href="#">Home</b-nav-item>
+      <b-nav-item > <router-link to="/">Home</router-link></b-nav-item>
        <b-nav-item href="#">About Us</b-nav-item>
         <b-nav-item href="#">Contact Us</b-nav-item>
          <b-nav-item href="#">About Us</b-nav-item>
-         <b-nav-item href="#">Login</b-nav-item>
-        <b-nav-item href="#">Sign Up</b-nav-item>
+         <b-nav-item href="#"><router-link to="/login">Login </router-link></b-nav-item>
+        <b-nav-item ><router-link to="/signup">Signup </router-link></b-nav-item>
 
 
       </b-navbar-nav>
@@ -124,6 +124,7 @@
             aria-label=""
             data-original-title=""
             title=""
+            v-model="word1"
           />
         </div>
 
@@ -133,7 +134,7 @@
               class="input-group-text border-left-0 color-mobile"
               style="width: 40px; border-right: none; background-color: white"
             >
-              <i class="bx bx-map" style="color: #e75c18" font-scale="1.5"></i>
+              <i class="bx bx-map" style="color: #e75c18" font-scale="1.5"> tt</i>
             </span>
           </div>
 
@@ -147,6 +148,7 @@
             aria-label=""
             data-original-title=""
             title=""
+            v-model="word2"
           />
         </div>
       </form>
@@ -428,11 +430,16 @@
               </p>
 
               <div class="text-center w-100">
+                <router-link to="login">
+
                 <button
                   class="btn btn-primary mt-5 bridge-btn float-left bridge-btn"
+                 
                 >
                   Sign up
                 </button>
+                </router-link>
+               
               </div>
             </div>
           </div>
@@ -466,7 +473,7 @@
                 <img
                   src="../assets/img/african-farmer.jpg"
                   height="700px"
-                  class="d-none d-xl-block"
+                  class="d-none d-xl-block taillev1"
                   style="margin-left: -70px"
                   alt=""
                 />
@@ -501,11 +508,16 @@
               </p>
 
               <div class="text-center w-100">
+               <router-link to="login">
+
                 <button
                   class="btn btn-primary mt-5 bridge-btn float-left bridge-btn"
+                
                 >
                   Sign up
                 </button>
+               </router-link>
+               
               </div>
             </div>
           </div>
@@ -560,11 +572,15 @@
               </p>
 
               <div class="text-center w-100">
+                <router-link to="login">
+
                 <button
                   class="btn btn-primary mt-5 bridge-btn float-left bridge-btn"
+                  @click="community"
                 >
                   Sign up
                 </button>
+                </router-link>
               </div>
             </div>
           </div>
@@ -618,11 +634,15 @@
               </p>
 
               <div class="text-center w-100">
+                <router-link to="login">
+
                 <button
                   class="btn btn-primary mt-5 bridge-btn float-left bridge-btn"
+                  @click="On"
                 >
                   Sign up
                 </button>
+                </router-link>
               </div>
             </div>
           </div>
@@ -736,10 +756,12 @@
                 businesses who lack digital know-how through our army of digital
                 coaches
               </p>
+                <router-link to="login">
 
               <button class="btn btn-primary mt-5 bridge-btn bridge-btn mb-3">
                 See Videos
               </button>
+              </router-link>
             </div>
           </div>
         </div>
@@ -855,11 +877,38 @@ export default {
 
   data(){
     return {
-      expanded:true
+      expanded:true,
+      word1:'',
+      word2:''
     }
   },
 
+
+  mounted(){
+    
+  },
+
   methods:{
+
+    businessOwner(){
+      this.$store
+    .dispatch("homeRedirection/businessInfos")
+    .then(res => {
+      this.$router.push({ name: 'BusinessOwner', params: { id: this.$store.state.homeRedirection.idbissf} })
+      console.log(this.$store.state.homeRedirection.idbissf);
+    })
+    .catch(err =>{
+      console.log(err);
+    })
+    },
+    search(){
+        this.$router.push({ name: 'Search' })
+    },
+
+    community(){
+       this.$router.push({ name: 'signup' })
+    },
+
     Expanded(a){
       if(a== 1){
         this.expanded= false;
@@ -882,7 +931,7 @@ export default {
 @import "../assets/css/style1.css" ;
 
 
-@import "../assets/css/style.css";
+/* @import "../assets/css/style.css"; */
 @import "../assets/vendor/aos/aos.css" ;
 @import "../assets/vendor/owl.carousel/assets/owl.carousel.min.css";
 @import "../assets/vendor/icofont/icofont.min.css";
@@ -891,7 +940,14 @@ export default {
 
 .couleur{
   color: #e75c18 ;
+  
+}
+.bold{
   font-weight: bold;
+  font-size: 16px;
+}
+.taillev1{
+  height: 504px !important;
 }
 .blec-container {
   position: absolute;
@@ -1020,7 +1076,7 @@ export default {
 
   .business-vid1 {
     height: 704px;
-
+    width: 396px;
     z-index: 1;
     position: relative;
   }

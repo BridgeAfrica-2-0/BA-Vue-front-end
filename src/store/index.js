@@ -40,14 +40,14 @@ import networkProfileMedia from './networkProfileMedia';
 import networkProfileMemberRequest from './networkProfileMemberRequest';
 import profileOrders from './profileOrders';
 import keywordOperationOnNetwork from './keywordOperationOnNetwork';
-
+import homeRedirection from './homeRedirection';
 
 import { social } from './social';
 
 Vue.use(Vuex);
-axios.defaults.baseURL = process.env.VUE_APP_API_URL_DEV;
+// axios.defaults.baseURL = process.env.VUE_APP_API_URL_DEV;
 //axios.defaults.baseURL = "https://test.maxinemoffett.com/api/v1/";
-//  axios.defaults.baseURL = process.env.VUE_APP_API_URL;
+ axios.defaults.baseURL = "https://qa-bridgeafrica-api.maxinemoffett.com/api/v1";
 
 
 export default new Vuex.Store({
@@ -88,5 +88,6 @@ export default new Vuex.Store({
         networkProfile,
         orderBusiness,
         notification,
+        homeRedirection
     },
 });

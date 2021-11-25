@@ -35,8 +35,9 @@
                           variant="primary"
                           size="sm"
                           class="b-background flexx pobtn shadow mr-lg-3 mr-xl-3"
+                          @click="cta(item)"
                         >
-                          <i class="fas fa-envelope   fa-lg btn-icon "></i>
+                          <i class="fas fa-envelope fa-lg btn-icon"></i>
                           <span class="btn-text">Message</span>
                         </b-button>
                       </b-col>
@@ -45,6 +46,7 @@
                         <b-button
                           block
                           size="sm"
+                           :id="'followbtn'+item.id"
                           class="b-background flexx pobtn shadow mr-lg-3 mr-xl-3"
                           :class="item.is_follow !== 0 && 'u-btn'"
                           variant="primary"
@@ -81,7 +83,7 @@ export default {
       page: 1,
       biz_id: null,
       users: [],
-      options: {
+      options: {  
         rewind: true,
         autoplay: true,
         perPage: 1,
@@ -98,7 +100,30 @@ export default {
     // this.biz_id = this.$route.params.id !== undefined ? this.$route.params.id : 1; //! need some review
   },
 
+  computed: {
+    activeAccount() {
+      return this.$store.getters['auth/profilConnected'];
+    },
+  },
+
   methods: {
+
+
+       cta(data) {
+      console.log(data);
+      this.$store.commit('businessChat/setSelectedChat', data);
+      let path = '';
+      if (this.activeAccount.user_type == 'business') {
+        path = '/business_owner/' + this.activeAccount.id;
+      } else if (this.activeAccount.user_type == 'network') {
+        path = '/';
+      } else path = '/messaging';
+
+      // this.$router.push({ path: `${path}`, query: { tabId: 1, msgTabId: 1 } });
+      this.$router.push({ path: `/business_owner/${this.activeAccount.id}`, query: { tabId: 1, msgTabId: 0 } });
+    },
+
+
     count(number) {
       if (number >= 1000000) {
         return number / 1000000 + 'M';
@@ -143,6 +168,9 @@ export default {
     },
 
     async handleFollow(user) {
+      
+      console.log("yoo ma gee");
+       document.getElementById("followbtn"+user.id).disabled = true;
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
@@ -152,11 +180,20 @@ export default {
 
       await axios
         .post(uri, data)
-        .then(response => {
+        .then(({ data }) => {
+          console.log(data);
           user.is_follow = nextFollowState;
+           document.getElementById("followbtn"+user.id).disabled = false;
         })
-        .catch(err => console.log(err));
+         
+          .catch((err) =>{  
+          
+          console.log({err:err})  ;
+           document.getElementById("followbtn"+user.id).disabled =  false;
+          
+        });
     },
+
   },
 };
 </script>

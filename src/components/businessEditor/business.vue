@@ -5,7 +5,7 @@
       <div  class="text-justify mt-2 container-fluid" >
         <b-row class="center-content" >
           <b-col cols="12">
-            <b-tabs lazy content-class="mt-3 mobile-tab" fill pills >
+            <b-tabs lazy content-class="mt-3 mobile-tab"  v-model="currentTab"  fill pills >
               <b-tab title="Home"><HomePage /></b-tab>
               <b-tab title="About"><About /></b-tab>
               <b-tab title="Media"><Media :type="'business'"/></b-tab>
@@ -19,7 +19,6 @@
     </div>
   </div>
 </template>
-
 
 <script>
 import HomePage from "./tabs/businessHome";   
@@ -42,10 +41,52 @@ export default {
      Networks
   },
   data() {
-    return {};
+    return {
+       currentTab: 0,
+      tabIndex: null,
+      tabs: ["#post", "#about", "#media", "#market", "#community"],
+    };
   },
   computed: {},
-  methods: {}
+
+    created() {
+
+  
+   let tab = this.tabs.findIndex(tab => tab === this.$route.hash)
+
+  if(tab==-1){
+    
+    
+    this.currentTab =
+      localStorage.getItem('ba-businesse-active-tab') !== null ? localStorage.getItem('ba-businesse-active-tab') : 0;
+
+  } else{
+
+    this.currentTab =tab;
+  }
+  },  
+
+  methods: {},
+
+    watch: {
+    currentTab: (newVal, oldVal) => {
+      localStorage.setItem('ba-business-active-tab', newVal);
+    },
+
+
+   
+  $route(to, from) {
+      console.log(to.hash);
+      this.currentTab = this.tabs.findIndex((tab) => tab === to.hash);
+
+    },
+
+  
+
+  },
+
+
+
 };
 </script>
 

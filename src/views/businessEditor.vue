@@ -4,7 +4,13 @@
       <navbar />
 
       <div class="container-fluid">
-        <ly-tab v-model="selectedId" :items="items" :options="options" class="center-ly"> </ly-tab>
+        <ly-tab
+          v-model="selectedId"
+          :items="items"
+          :options="options"
+          class="center-ly"
+        >
+        </ly-tab>
 
         <hr width="100%" class="d-none" d-md-block />
       </div>
@@ -22,6 +28,10 @@
       </div>
 
       <div class="mt-3" v-if="selectedId == '3'">
+        <Settings v-bind:currenttab="selectedId" />
+      </div>
+
+      <div class="mt-3" v-if="selectedId == '4'">
         <Settings v-bind:currenttab="selectedId" />
       </div>
 
@@ -68,7 +78,7 @@ export default {
         { label: 'Inbox', icon: '' },
         { label: 'Notification', icon: '' },
 
-        { label: 'Insight', icon: '' },
+        { label: "Settings", icon: "" }
       ],
       options: {
         activeColor: '#1d98bd',

@@ -4,7 +4,12 @@
       <div class="container-fluid">
         <div class="col-md-12 col-lg-2 col-xl-2 text-center">
           <span class="d-block d-lg-none">
-            <b-icon icon="house-fill" style="float: left" font-scale="1.5; margin-top:5px" variant="primary"></b-icon>
+            <b-icon
+              icon="house-fill"
+              style="float: left"
+              font-scale="1.5; margin-top:5px"
+              variant="primary"
+            ></b-icon>
           </span>
 
           <a class="d-inline-block align-top mt-1" href="#">
@@ -16,8 +21,15 @@
           <form class="d-block d-lg-none">
             <b-input-group class="b-shadow mt-3">
               <div class="input-group-append color-mobile" style="border: none">
-                <span class="input-group-text border-left-0 color-mobile" style="width: 40px; border-right: none">
-                  <b-icon icon="search" style="color: #e75c18" font-scale="1.5"></b-icon>
+                <span
+                  class="input-group-text border-left-0 color-mobile"
+                  style="width: 40px; border-right: none"
+                >
+                  <b-icon
+                    icon="search"
+                    style="color: #e75c18"
+                    font-scale="1.5"
+                  ></b-icon>
                 </span>
               </div>
 
@@ -37,9 +49,19 @@
 
             <span style="display: none" ref="mobileinput">
               <b-input-group class="b-shadow mt-2">
-                <div class="input-group-append color-mobile" style="border: none">
-                  <span class="input-group-text border-left-0 color-mobile" style="width: 40px; border-right: none">
-                    <b-icon icon="geo-alt" style="color: #e75c18" font-scale="1.5"></b-icon>
+                <div
+                  class="input-group-append color-mobile"
+                  style="border: none"
+                >
+                  <span
+                    class="input-group-text border-left-0 color-mobile"
+                    style="width: 40px; border-right: none"
+                  >
+                    <b-icon
+                      icon="geo-alt"
+                      style="color: #e75c18"
+                      font-scale="1.5"
+                    ></b-icon>
                   </span>
                 </div>
 
@@ -124,13 +146,26 @@
           <div style="float: right">
             <b-collapse id="nav-collapse" is-nav>
               <div class="nav-item">
-                <a @click.prevent="navLink('home')" class="nav-link text-dark hov" href=""> Home </a>
+                <a
+                  @click.prevent="navLink('home')"
+                  class="nav-link text-dark hov"
+                  href=""
+                >
+                  Home
+                </a>
               </div>
 
               <div class="nav-item">
-                <router-link :to="{ name: 'market' }" class="nav-link text-dark hov" href=""> Market </router-link>
+                <router-link
+                  :to="{ name: 'market' }"
+                  class="nav-link text-dark hov"
+                  href=""
+                >
+                  Market
+                </router-link>
               </div>
 
+              <!-- Messages Started -->
               <div class="nav-item">
                 <a
                   v-if="hasNewMessage"
@@ -141,31 +176,150 @@
                   data-original-title=""
                   title=""
                   ><span class="text-ored"
-                    ><fas-icon class="primary" :icon="['fas', 'comment']" /><b-badge class="msg-number">{{
+                    ><fas-icon
+                      class="primary"
+                      :icon="['fas', 'comment']"
+                    /><b-badge class="msg-number">{{
                       hasNewMessage
                     }}</b-badge></span
                   ></a
                 >
 
-                <a id="messages" class="nav-link" role="button" data-original-title="" title="" v-else
-                  ><span class="text-ored"><fas-icon class="primary" :icon="['fas', 'comment']" /> </span
+                <a
+                  id="messages"
+                  class="nav-link"
+                  role="button"
+                  data-original-title=""
+                  title=""
+                  v-else
+                  ><span class="text-ored"
+                    ><fas-icon
+                      class="primary"
+                      :icon="['fas', 'comment']"
+                    /> </span
                 ></a>
-
-                <MessageNotification v-if="hasNewMessage" />
-              </div>
-
-              <div class="nav-item">
-                <a id="notif" class="nav-link" data-toggle="popover" role="button" data-original-title="" title=""
-                  ><span class="text-ored"><b-icon-bell-fill class="col-bg"></b-icon-bell-fill></span
-                ></a>
-                <b-popover target="notif" triggers="hover" placement="top">
-                  <NavBarNotifications />
+                <b-popover target="messages" triggers="hover" placement="top">
+                  <div class="popover-body">
+                    <p class="font-weight-bold">Messages</p>
+                    <div v-for="message in messages" :key="message.id">
+                      <hr class="h-divider" />
+                      <div
+                        class="
+                          d-inline-flex
+                          flex-row
+                          justify-content-between
+                          align-items-center
+                          suggest-item
+                          cursor-pointer
+                        "
+                      >
+                        <div class="d-inline-flex flex-row align-items-center">
+                          <div>
+                            <img
+                              src="@/assets/img/profile-pic.jpg"
+                              class="rounded-circle"
+                              alt=""
+                              width="30"
+                              height="30"
+                            />
+                          </div>
+                          <div class="d-flex flex-column ml-1 line-size">
+                            <div class="font-weight-bold">
+                              {{
+                                message.sender_business
+                                  ? message.sender_business.name
+                                  : ""
+                              }}
+                            </div>
+                            <div class="small text-muted">
+                              {{ message.message.substring(0, 20) }}
+                            </div>
+                          </div>
+                        </div>
+                        <div class="small text-muted">
+                          {{ message.created_at | moment("from", "now") }}
+                        </div>
+                      </div>
+                    </div>
+                    <hr class="h-divider" />
+                    <a
+                      href="https://bridgeafrica.info/nav/inbox.html"
+                      class="text-ored"
+                      ><u>See Inbox</u></a
+                    >
+                  </div>
                 </b-popover>
               </div>
+              <!-- Messages Ended -->
+              <!-- Notifications Started -->
+              <div class="nav-item">
+                <a
+                  id="notif"
+                  class="nav-link"
+                  data-toggle="popover"
+                  role="button"
+                  data-original-title=""
+                  title=""
+                  ><span class="text-ored"
+                    ><b-icon-bell-fill class="col-bg"></b-icon-bell-fill></span
+                ></a>
+                <b-popover target="notif" triggers="hover" placement="top">
+                  <div class="popover-body">
+                    <p class="font-weight-bold">Notifications</p>
+                    <div
+                      v-for="notification in notifications"
+                      :key="notification.id"
+                    >
+                      <hr class="h-divider" />
+                      <div
+                        class="
+                          d-inline-flex
+                          flex-row
+                          align-items-center
+                          suggest-item
+                          cursor-pointer
+                        "
+                      >
+                        <!-- <div>
+                          <img src="@/assets/img/profile-pic.jpg" class="rounded-circle" alt="" width="30" height="30" />
+                        </div> -->
+                        <div class="d-flex flex-column ml-3">
+                          <div>{{ notification.notification_text }}</div>
+                          <div class="small text-muted">
+                            <span class="text-capitalize">
+                              {{
+                                notification.created_at | moment("from", "now")
+                              }}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <hr class="h-divider" />
 
+                    <a
+                      href="https://bridgeafrica.info/nav/notifications-view-all.html"
+                      class="text-ored"
+                      ><u>See all Notifications</u></a
+                    >
+                  </div>
+                </b-popover>
+              </div>
+              <!-- Notifications Ended -->
               <div class="nav-item" id="profilepic">
-                <a class="nav-link text-dark" href="" @click.prevent="switchToProfile">
-                  <span><img :src="user.profile_picture" class="rounded-circle" alt="" width="50" height="50" /></span>
+                <a
+                  class="nav-link text-dark"
+                  href=""
+                  @click.prevent="switchToProfile"
+                >
+                  <span
+                    ><img
+                      :src="user.profile_picture"
+                      class="rounded-circle"
+                      alt=""
+                      width="50"
+                      height="50"
+                  /></span>
                 </a>
               </div>
 
@@ -185,7 +339,15 @@
                 </a>
                 <b-popover target="other-menu" triggers="hover" placement="top">
                   <div class="popover-body">
-                    <div class="d-inline-flex flex-row align-items-center mb-1 w-full">
+                    <div
+                      class="
+                        d-inline-flex
+                        flex-row
+                        align-items-center
+                        mb-1
+                        w-full
+                      "
+                    >
                       <Activity />
                     </div>
 
@@ -193,37 +355,72 @@
 
                     <router-link
                       :to="{ name: 'orders' }"
-                      class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+                      class="
+                        other-menu
+                        suggest-item
+                        cursor-pointer
+                        text-decoration-none text-dark
+                      "
                     >
-                      <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'cart-arrow-down']" /></span>
+                      <span class="mr-2"
+                        ><fas-icon
+                          class="violet search"
+                          :icon="['fas', 'cart-arrow-down']"
+                      /></span>
                       My orders
                     </router-link>
                     <hr class="h-divider" />
 
                     <router-link
                       :to="{ name: 'settings' }"
-                      class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+                      class="
+                        other-menu
+                        suggest-item
+                        cursor-pointer
+                        text-decoration-none text-dark
+                      "
                     >
-                      <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'cogs']" /></span>
+                      <span class="mr-2"
+                        ><fas-icon
+                          class="violet search"
+                          :icon="['fas', 'cogs']"
+                      /></span>
                       Account Settings
                     </router-link>
                     <hr class="h-divider" />
                     <div class="other-menu suggest-item cursor-pointer">
-                      <span class="mr-1"><fas-icon class="violet search" :icon="['fas', 'question']" /></span>
+                      <span class="mr-1"
+                        ><fas-icon
+                          class="violet search"
+                          :icon="['fas', 'question']"
+                      /></span>
                       Help and Support
                     </div>
                     <hr class="h-divider" />
                     <div class="other-menu suggest-item cursor-pointer">
-                      <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'globe-americas']" /></span>
+                      <span class="mr-2"
+                        ><fas-icon
+                          class="violet search"
+                          :icon="['fas', 'globe-americas']"
+                      /></span>
                       Language
                     </div>
                     <hr class="h-divider" />
                     <a
                       @click="logout"
                       href="#"
-                      class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+                      class="
+                        other-menu
+                        suggest-item
+                        cursor-pointer
+                        text-decoration-none text-dark
+                      "
                     >
-                      <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'sign-out-alt']" /></span>
+                      <span class="mr-2"
+                        ><fas-icon
+                          class="violet search"
+                          :icon="['fas', 'sign-out-alt']"
+                      /></span>
                       Logout
                     </a>
                   </div>
@@ -238,7 +435,13 @@
             <div class="mt-3">
               <div class="d-inline-flex flex-row align-items-center">
                 <div>
-                  <img src="@/assets/img/profile-pic.jpg" class="rounded-circle" alt="" width="30" height="30" />
+                  <img
+                    src="@/assets/img/profile-pic.jpg"
+                    class="rounded-circle"
+                    alt=""
+                    width="30"
+                    height="30"
+                  />
                 </div>
                 <div class="d-flex flex-column ml-1 line-size">
                   <div class="font-weight-bold">{{ user.name }}</div>
@@ -250,7 +453,13 @@
 
               <div class="d-inline-flex flex-row align-items-center mb-1">
                 <div>
-                  <img src="@/assets/img/logo3.png" class="rounded-circle" alt="" width="25" height="25" />
+                  <img
+                    src="@/assets/img/logo3.png"
+                    class="rounded-circle"
+                    alt=""
+                    width="25"
+                    height="25"
+                  />
                 </div>
                 <div class="ml-3 mt-2">
                   <p class="font-weight-bold">Your Businesses</p>
@@ -262,34 +471,69 @@
 
             <router-link
               :to="{ name: 'orders' }"
-              class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+              class="
+                other-menu
+                suggest-item
+                cursor-pointer
+                text-decoration-none text-dark
+              "
             >
-              <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'cart-arrow-down']" /></span>
+              <span class="mr-2"
+                ><fas-icon
+                  class="violet search"
+                  :icon="['fas', 'cart-arrow-down']"
+              /></span>
               My orders
             </router-link>
             <hr class="h-divider" />
 
             <router-link
               :to="{ name: 'settings' }"
-              class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+              class="
+                other-menu
+                suggest-item
+                cursor-pointer
+                text-decoration-none text-dark
+              "
             >
-              <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'cogs']" /></span>
+              <span class="mr-2"
+                ><fas-icon class="violet search" :icon="['fas', 'cogs']"
+              /></span>
 
               Account Settings
             </router-link>
             <hr class="h-divider" />
             <div class="other-menu suggest-item cursor-pointer">
-              <span class="mr-1"><fas-icon class="violet search" :icon="['fas', 'question']" /></span>
+              <span class="mr-1"
+                ><fas-icon class="violet search" :icon="['fas', 'question']"
+              /></span>
               Help and Support
             </div>
             <hr class="h-divider" />
             <div class="other-menu suggest-item cursor-pointer">
-              <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'globe-americas']" /></span>
+              <span class="mr-2"
+                ><fas-icon
+                  class="violet search"
+                  :icon="['fas', 'globe-americas']"
+              /></span>
               Language
             </div>
             <hr class="h-divider" />
-            <a href="#" @click="logout" class="other-menu suggest-item cursor-pointer text-decoration-none text-dark">
-              <span class="mr-2"><fas-icon class="violet search" :icon="['fas', 'sign-out-alt']" /></span>
+            <a
+              href="#"
+              @click="logout"
+              class="
+                other-menu
+                suggest-item
+                cursor-pointer
+                text-decoration-none text-dark
+              "
+            >
+              <span class="mr-2"
+                ><fas-icon
+                  class="violet search"
+                  :icon="['fas', 'sign-out-alt']"
+              /></span>
               Logout
             </a>
           </div>
@@ -302,24 +546,26 @@
 </template>
 
 <script>
-import Button from '@/components/ButtonNavBarFind.vue';
-import Activity from '@/components/ShowActivity.vue';
-import NavBarNotifications from '@/components/NavBarNotifications.vue';
-import { mapGetters, mapActions, mapMutations } from 'vuex';
+import Button from "@/components/ButtonNavBarFind.vue";
+import Activity from "@/components/ShowActivity.vue";
+// import NavBarNotifications from '@/components/NavBarNotifications.vue';
+import { mapGetters, mapActions, mapMutations } from "vuex";
+import axios from "axios";
+
 export default {
-  name: 'navbar',
+  name: "navbar",
   components: {
     Button,
     Activity,
-    NavBarNotifications,
+    // NavBarNotifications
   },
   props: {
     credentials: {
       type: Object,
       default: function () {
         return {
-          keyword: '',
-          placeholder: 'All',
+          keyword: "",
+          placeholder: "All",
         };
       },
     },
@@ -328,51 +574,56 @@ export default {
     return {
       isActive: false,
       shownav: false,
+      notifications: [],
+      messages: [],
     };
   },
   computed: {
     ...mapGetters({
-      hasLauchNetworkRequest: 'social/INIT',
-      hasNewMessage: 'notification/HAS_MESSAGE',
-      user: 'auth/profilConnected',
-      auth: 'auth/user',
+      hasLauchNetworkRequest: "social/INIT",
+      hasNewMessage: "notification/HAS_MESSAGE",
+      user: "auth/profilConnected",
+      auth: "auth/user",
     }),
   },
   created() {
     this.init();
+    this.getNotifications();
+    this.getMessages();
   },
   methods: {
     ...mapActions({
-      setNetworks: 'social/FIND_USER_NETWORK',
-      setBusiness: 'social/FIND_USER_BUSNESS',
-      lauchNetworkRequest: 'social/INIT',
-      Logout: 'auth/logout',
+      setNetworks: "social/FIND_USER_NETWORK",
+      setBusiness: "social/FIND_USER_BUSNESS",
+      lauchNetworkRequest: "social/INIT",
+      Logout: "auth/logout",
     }),
 
     ...mapMutations({
-      profile: 'auth/profilConnected',
+      profile: "auth/profilConnected",
     }),
 
     getKeyword() {
       if (!this.credentials.keyword) return false;
 
-      if (this.$route.name != 'Search') {
+      if (this.$route.name != "Search") {
         this.$store
-          .dispatch('allSearch/SEARCH', {
+          .dispatch("allSearch/SEARCH", {
             keyword: this.credentials.keyword,
           })
           .catch((err) => {
-            console.log('Error erro!');
+            console.log("Error erro!");
           });
 
-        this.$router.push({ name: 'Search' });
+        this.$router.push({ name: "Search" });
       }
     },
     navLink(type) {
       const link = {
         home: () => {
-          const routeName = this.profile ? 'dashbord' : 'home';
-          if (this.$route.name != routeName) this.$router.push({ name: routeName });
+          const routeName = this.profile ? "dashbord" : "home";
+          if (this.$route.name != routeName)
+            this.$router.push({ name: routeName });
         },
       };
       try {
@@ -382,16 +633,16 @@ export default {
       }
     },
     toggleinfput() {
-      this.$refs.mobileinput.style.display = 'block';
+      this.$refs.mobileinput.style.display = "block";
       this.isActive = true;
     },
     getUsers() {
       this.$store
-        .dispatch('userChat/GET_USERS', '')
+        .dispatch("userChat/GET_USERS", "")
         .then(() => {
-          console.log('->[Data logged]<-');
+          console.log("->[Data logged]<-");
         })
-        .catch(() => console.log('error'));
+        .catch(() => console.log("error"));
     },
 
     logout: async function () {
@@ -404,18 +655,18 @@ export default {
         container: this.$refs.formContainer,
         canCancel: true,
         onCancel: this.onCancel,
-        color: '#e75c18',
+        color: "#e75c18",
       });
 
-      const response = await this.$repository.share.switch(null, 'reset');
+      const response = await this.$repository.share.switch(null, "reset");
       if (response.success) {
         loader.hide();
-        this.profile({ ...this.auth.user, user_type: 'user' });
+        this.profile({ ...this.auth.user, user_type: "user" });
       }
     },
 
     toggleinput() {
-      this.$refs.mobileinput.style.display = 'block';
+      this.$refs.mobileinput.style.display = "block";
     },
 
     getNetworks: async function () {
@@ -445,6 +696,23 @@ export default {
         this.shownav = false;
         console.log(this.shownav);
       }
+    },
+    async getNotifications() {
+      await axios
+        .get(`notification/latest/user`)
+        .then((response) => {
+          console.warn(response.data.data);
+          this.notifications = response.data.data;
+        })
+        .catch((error) => console.log("Error In Notification  => " + error));
+    },
+    async getMessages() {
+      await axios
+        .get(`messages/latest/user`)
+        .then((response) => {
+          this.messages = response.data.data;
+        })
+        .catch((error) => console.log(error));
     },
   },
 };
@@ -591,7 +859,7 @@ export default {
 }
 
 .text-dark {
-  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: normal;
   font-size: 14px;
   line-height: 20px;

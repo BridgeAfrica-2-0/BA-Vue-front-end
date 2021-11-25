@@ -5,6 +5,7 @@ export default {
   namespaced: true,
 
   state: {
+    appLanguage: 'fr',
     user: [],
     isVerified: null,
     passwordToken: null,
@@ -33,6 +34,13 @@ export default {
       axios.defaults.headers.common.Authorization = `Bearer ${userData.accessToken}`;
 
       const userInfo = localStorage.getItem('user');
+    },
+
+
+
+    setAppLanguage(state, language) {
+      state.appLanguage = language;
+      localStorage.setItem("lang", language); // Whenever we change the appLanguage we save it to the localStorage
     },
 
 
@@ -119,8 +127,11 @@ export default {
     },
 
     country({ commit }) {
-      return axios.get('countries').then(({ data }) => {
-        commit('setCountry', data.data);
+
+      return axios.get("countries").then(({ data }) => {
+        console.log(data.data);
+        commit("setCountry", data.data);
+
       });
     },
 
@@ -216,6 +227,9 @@ export default {
         commit('setUserData', data.data);
       });
     },
+
+  
+
   },
 
   getters: {
@@ -228,5 +242,10 @@ export default {
     },
 
     profilConnected: state => state.profilConnected,
+
+    
+      getAppLanguage: (state) => state.appLanguage
+    
+
   },
 };

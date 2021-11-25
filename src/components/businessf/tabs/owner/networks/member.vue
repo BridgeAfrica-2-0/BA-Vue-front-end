@@ -187,7 +187,7 @@
       </b-col>
     </b-row>
 
-    <FlashMessage />
+    <!-- <FlashMessage /> -->
 
   </div>
 </template>
@@ -260,8 +260,15 @@ export default {
       //     path: this.url+"/members/list/"+this.page,
       //     formData: formData
       //   })
+
+      let lien = "";
+      if(data == ""){
+          lien =  'network/'+this.url+'/members/list/'+this.page;
+      }else{ lien ='network/'+this.url+'/members/list/'+this.page+','+ formData}
+
+
       this.axios
-        .post("network/"+this.url+"/members/list/"+this.page, formData)
+        .post(lien)
         .then(({ data }) => {
         console.log(data);
         console.log(this.page);
@@ -329,23 +336,27 @@ export default {
     },
 
     makeAdmin: function(user_id){
+      console.log(user_id);
       this.loading = true;
+       let path = {
+        url:this.url,
+        id: user_id 
+       };
+
       this.$store
-        .dispatch("networkProfileMembers/makeAdmin", {
-          path: this.url+"/make/admin/"+user_id
-        })
+        .dispatch("networkProfileMembers/makeAdmin", path)
         .then(({ data }) => {
           console.log(data);
         console.log('ohh yeah');
+        this.flashMessage.show({
+          status: "success",
+          message: 'make as editor successfuly'
+        });
         this.searchTitle = "";
-        this.getMembers();
+        // this.getMembers();
         this.getAdmins();
         this.getBusiness();
         this.loading = false;
-        this.flashMessage.show({
-          status: "success",
-          message: this.$t('network.The_Member_Is_Now_Admin')
-        });
       })
       .catch(err => {
         console.log({ err: err });
@@ -358,15 +369,18 @@ export default {
     },
     removeAsAdmin: function(user_id){
       this.loading = true;
+      console.log("----",user_id);
+      let path = {
+        url:this.url,
+        id: user_id
+      };
       this.$store
-        .dispatch("networkProfileMembers/removeAsAdmin", {
-          path: this.url+"/remove/admin/"+user_id
-        })
+        .dispatch("networkProfileMembers/removeAsAdmin", path)
         .then(({ data }) => {
           console.log(data);
         console.log('ohh yeah');
         this.searchTitle = "";
-        this.getMembers();
+        // this.getMembers();
         this.getAdmins();
         this.getBusiness();
         this.loading = false;
@@ -386,15 +400,17 @@ export default {
 		},
     removeFromNetworks: function(user_id){
       this.loading = true;
+      let path = {
+        url:this.url,
+        id: user_id
+      };
       this.$store
-        .dispatch("networkProfileMembers/removeAsAdmin", {
-          path: this.url+"/member/remove/"+user_id
-        })
+        .dispatch("networkProfileMembers/removeAsAdmin", path)
         .then(({ data }) => {
           console.log(data);
         console.log('ohh yeah');
         this.searchTitle = "";
-        this.getMembers();
+        // this.getMembers();
         this.getAdmins();
         this.getBusiness();
         this.loading = false;

@@ -10,7 +10,12 @@
           <b-icon icon="briefcase-fill" class="primary"></b-icon>
           <span v-for="cat in business_intro.category" :key="cat.id"> {{ cat.name }} </span>
         </p>
-        <p><b-icon icon="search" class="primary"></b-icon> {{ business_intro.keywords }}</p>
+        <p><b-icon icon="search" class="primary"></b-icon>  
+        	<span v-for="(keyword, index) in business_intro.keywords" :key="index"
+						>{{ keyword }},
+					</span>
+          <!-- {{business_intro.keywords}}  -->
+        </p>
         <p>
           <b-icon icon="geo-alt-fill" class="primary"></b-icon> Mokolo, {{ $t('businessf.Yaounde') }},
           {{ $t('businessf.Cameroon') }}

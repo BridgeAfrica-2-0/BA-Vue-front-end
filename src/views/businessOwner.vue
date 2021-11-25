@@ -4,7 +4,13 @@
       <navbar />
 
       <div class="container-fluid">
-        <ly-tab v-model="selectedId" :items="items" :options="options" class="center-ly"> </ly-tab>
+        <ly-tab
+          v-model="selectedId"
+          :items="items"
+          :options="options"
+          class="center-ly"
+        >
+        </ly-tab>
 
         <hr width="100%" class="d-none" d-md-block />
       </div>
@@ -17,41 +23,50 @@
         <Inbox />
       </div>
 
-      <div class="mt-3" v-if="selectedId == '2'">
-        <Settings v-bind:currenttab="selectedId" />
-      </div>
+      <div class="container-fluid">
+        <ly-tab
+          v-model="selectedId"
+          :items="items"
+          :options="options"
+          class="center-ly"
+        >
+        </ly-tab>
 
-      <div class="mt-3" v-if="selectedId == '3'">
-        <Settings v-bind:currenttab="selectedId" />
-      </div>
+        <div class="mt-3" v-if="selectedId == '2'">
+          <Settings v-bind:currenttab="selectedId" />
+        </div>
 
-      <div class="mt-3" v-if="selectedId == '4'">
-        <Settings v-bind:currenttab="selectedId" />
-      </div>
+        <div class="mt-3" v-if="selectedId == '3'">
+          <Settings v-bind:currenttab="selectedId" />
+        </div>
 
-      <div class="mt-3" v-if="selectedId == '5'">
-        <Settings v-bind:currenttab="selectedId" />
-      </div>
+        <div class="mt-3" v-if="selectedId == '4'">
+          <Settings v-bind:currenttab="selectedId" />
+        </div>
 
+        <div class="mt-3" v-if="selectedId == '5'">
+          <Settings v-bind:currenttab="selectedId" />
+        </div>
+      </div>
       <Footer />
     </span>
   </div>
 </template>
 
 <script>
-import navbar from '@/components/navbar';
-import Business from '../components/businessOwner/business';
+import navbar from "@/components/navbar";
+import Business from "../components/businessOwner/business";
 
-import Settings from '../components/businessOwner/settings';
+import Settings from "../components/businessOwner/settings";
 
-import Inbox from '../components/businessOwner/inbox';
+import Inbox from "../components/businessOwner/inbox";
 
-import LyTab from '@/tab/src/index.vue';
+import LyTab from "@/tab/src/index.vue";
 
-import Footer from '../components/footer';
-import { WhoIsIt } from '@/mixins';
+import Footer from "../components/footer";
+import { WhoIsIt } from "@/mixins";
 export default {
-  name: 'Home',
+  name: "Home",
   mixins: [WhoIsIt],
   components: {
     navbar,
@@ -71,18 +86,19 @@ export default {
       foll_id: null,
       isloaded: false,
       url_data: null,
+
       items: [
-        { label: 'Home ', icon: '' },
+        { label: "Home ", icon: "" },
 
-        { label: 'Inbox', icon: '' },
-        { label: 'Notification', icon: '' },
-        { label: 'Pending Post', icon: '' },
-        { label: 'Insight', icon: '' },
+        { label: "Inbox", icon: "" },
+        { label: "Notification", icon: "" },
+        { label: "Pending Post", icon: "" },
+        { label: "Insight", icon: "" },
 
-        { label: 'Settings', icon: '' },
+        { label: "Settings", icon: "" },
       ],
       options: {
-        activeColor: '#1d98bd',
+        activeColor: "#1d98bd",
       },
     };
   },
@@ -90,9 +106,31 @@ export default {
   methods: {
     businessInfo() {
       this.$store
-        .dispatch('businessOwner/businessInfo', this.url_data)
+        .dispatch("businessOwner/businessInfo", this.url_data)
         .then(() => {
-          console.log('hey yeah');
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+    CommunityBusiness() {
+      this.$store
+        .dispatch("businessOwner/CommunityBusiness", this.url_data)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+    CommunityPeople() {
+      this.$store
+        .dispatch("businessOwner/CommunityPeople", this.url_data)
+        .then(() => {
+          console.log("hey yeah");
         })
         .catch((err) => {
           console.log({ err: err });
@@ -101,9 +139,9 @@ export default {
 
     businessCommunityTotal() {
       this.$store
-        .dispatch('businessOwner/businessCommunityTotal', this.url_data)
+        .dispatch("businessOwner/businessCommunityTotal", this.url_data)
         .then(() => {
-          console.log('hey yeah');
+          console.log("hey yeah");
         })
         .catch((err) => {
           console.log({ err: err });
@@ -112,31 +150,38 @@ export default {
 
     ownerPost() {
       this.$store
-        .dispatch('businessOwner/ownerPost', this.url_data)
+        .dispatch("businessOwner/ownerPost", this.url_data)
         .then(() => {
-          console.log('hey yeah');
+          console.log("hey yeah");
         })
         .catch((err) => {
           console.log({ err: err });
         });
     },
   },
-  computed: {},
 
   created() {
+    this.selectedId = this.$route.query.tabId ? this.$route.query.tabId : "0";
+
     this.foll_id = this.$route.params.id;
 
     this.$store
-      .dispatch('businessOwner/roleCheck', this.foll_id)
+      .dispatch("businessOwner/roleCheck", this.foll_id)
       .then((data) => {
         let role = data.data.data.role;
         switch (role) {
-          case 'editor':
-            this.$router.push({ name: 'BusinessEditor', params: { id: this.foll_id } });
+          case "editor":
+            this.$router.push({
+              name: "BusinessEditor",
+              params: { id: this.foll_id },
+            });
             break;
 
-          case 'visitor':
-            this.$router.push({ name: 'BusinessFollower', params: { id: this.foll_id } });
+          case "visitor":
+            this.$router.push({
+              name: "BusinessFollower",
+              params: { id: this.foll_id },
+            });
             break;
         }
 
@@ -148,15 +193,25 @@ export default {
         console.log(error.response.status);
 
         if (error.response.status == 404) {
-          this.$router.push({ name: 'notFound' });
+          this.$router.push({ name: "notFound" });
         }
       });
   },
 
   mounted() {
+    if (this.$store.state.profileSettingsEdit.etat == 1) {
+      this.selectedId = this.$store.state.profileSettingsEdit.selectedId;
+    }
+
     this.url_data = this.$route.params.id;
 
+    console.log(this.url_data);
+
     this.businessInfo();
+
+    this.CommunityBusiness();
+
+    this.CommunityPeople();
 
     this.businessCommunityTotal();
     this.ownerPost();

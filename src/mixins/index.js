@@ -403,13 +403,12 @@ export const Redis = {
       newNotificationBusiness: "notification/NEW_BUSINESS_NOTIFICATION",
       newNotificationProfile: "notification/NEW_PROFILE_NOTIFICATION",
       newNotificationNetwork: "notification/NEW_NETWORK_NOTIFICATION",
-      auth: 'auth/profilConnected',
+      auth: "auth/profilConnected"
     }),
 
-    async getAuth() {
-      const response = await this.$repository.share.WhoIsConnect({ networkId: null });
-
-      if (response.success) this.auth(response.data);
+    async getAut() {
+      const response = await this.$repository.share.WhoIsConnect({ businessId: this.route.params.id });
+      if (response.access) this.auth(response.data);
     },
 
     initBusinessNotification: async function () {
@@ -418,7 +417,7 @@ export const Redis = {
         this.newNotificationBusiness({ init: true, data: response.data })
     },
 
-    redis() {
+    listenBusinessEvent() {
       const $event = `business-channel${this.profile.id}`
       window.Redis.private($event)
         .listen(".BusinessNotificationEvent", payload => {
@@ -426,6 +425,17 @@ export const Redis = {
           this.newNotificationBusiness({ init: false, data: payload.data })
         })
     },
+
+    listenProfileEvent() {
+
+      const $event = `user.${this.profile.id}`;
+
+      window.Redis.private($event)
+        .listen(".UserNotification", payload => {
+          this.newNotificationProfile({ init: false, data: payload.notification })
+        })
+    },
+
 
     init: async function () {
       if (this.profile) {
@@ -436,6 +446,10 @@ export const Redis = {
     }
   },
 
+  beforeCreate() {
+    // this.init()
+  },
+  
   created() {
     // this.init()
     // this.$store.watch(
@@ -492,8 +506,6 @@ export const isYourOwnPostMixins = {
 
   }
 }
-
-
 
 export const PostComponentMixin = {
 

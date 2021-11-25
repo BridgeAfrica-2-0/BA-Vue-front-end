@@ -33,6 +33,7 @@ import forgotPassword from "@/views/forgotPassword";
 import navMessage from "@/views/navMessaging";
 import Blec from "@/views/blec";
 import memberNetworkFollower from "@/views/memberNetworkFollower";
+import memberNetwork from "@/views/memberNetwork";
 
 import networkEditors from "@/views/networkEditors";
 
@@ -44,9 +45,10 @@ import confirmPayment from "@/views/confirmPayment";
 import networks from "@/views/networks";
 import dashboard from "@/views/dashboard";
 
-import card from "@/views/card";
 import myorders from "@/views/myOders"
 import notFound from "@/components/404"
+
+
 
 import welcome from "@/views/welcome";
 
@@ -59,6 +61,11 @@ import payment from "@/views/payment";
 Vue.use(VueRouter);
 
 const routes = [
+  {
+    path: "/notFound",
+    name: "notFound",
+    component: notFound,
+  },
 
   {
     path: "/myorders",
@@ -178,6 +185,14 @@ const routes = [
     component: confirmPayment,
   },
   {
+    path: "/network/:id?",
+    name: "networks",
+    component: networks,
+    meta: {
+      auth: true,
+    },
+  },
+  {
     path: "/networks/:id?",
     name: "networks",
     component: networks,
@@ -235,6 +250,17 @@ const routes = [
       auth: true,
     },
   },
+
+  {
+    path: "/business/:id?",
+    name: "Business",
+    component: businessFollower,
+    meta: {
+      auth: true,
+    },
+  },
+
+
   {
     path: "/businessvisitor",
     name: "BusinessVisitor",
@@ -299,10 +325,11 @@ const routes = [
     name: "Nav Meassage",
     component: navMessage,
   },
+
   {
-    path: "/blec",
-    name: "Blec",
-    component: Blec,
+    path: "/memberNetwork/:id?",
+    name: "memberNetwork",
+    component: memberNetwork,
   },
 
   {
@@ -310,11 +337,13 @@ const routes = [
     name: "Membar Network Follower",
     component: memberNetworkFollower,
   },
+
   {
     path: "*",
     name: "notFound",
     component: notFound,
   },
+
 ];
 
 const router = new VueRouter({

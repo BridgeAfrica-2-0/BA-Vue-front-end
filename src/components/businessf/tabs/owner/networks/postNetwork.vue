@@ -179,7 +179,7 @@
             </b-row>
           </b-modal>
 
-          <b-modal id="modal-xl" ref="modal-xl" centered hide-footer :title=" $t('network.Create_Post')" @hidden="resetPostData">
+          <b-modal id="modal-xl" ref="modal-xl" centered hide-footer title="Create Post" @hidden="resetPostData">
             <b-row ref="loader">
               <b-col cols="1" class="m-0 p-0"></b-col>
               <b-col cols="2" class="m-0 p-0">

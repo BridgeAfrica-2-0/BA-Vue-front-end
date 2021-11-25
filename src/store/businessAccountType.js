@@ -21,13 +21,24 @@ export default {
 
   actions: {
 
-    getaccounts( {commit}, businessId ){
+    getaccounts( {commit}, Data ){
+      console.log("getaccounts");
       return axios
-      .get(`business/community/people/${businessId}`)
+      .get(`business/${Data.path}`)
       .then(({ data }) => {
           commit("setaccounts", data.data);
         console.log(data);
 
+      })
+    },
+
+    confirmPayment( {commit}, Data ){
+      console.log("confirmPayment");
+      return axios
+      .post(`business/${Data.path}`, Data.formData)
+      .then(({ data }) => {
+        console.log(data);
+        return data
       })
     }
 

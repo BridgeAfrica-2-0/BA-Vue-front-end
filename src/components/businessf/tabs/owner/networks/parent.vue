@@ -197,7 +197,7 @@
       </b-button>
 
     </b-modal> 
-  </div>
+ 
 
 
 

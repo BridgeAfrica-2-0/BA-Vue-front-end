@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import axios from 'axios';
 import auth from './auth';
+import profileOrderDetail from './profileOrderDetail';
 import businessBlocking from './businessBlocking';
 import dashboard from './dashboard';
 import businessGeneral from './businessGeneral';
@@ -42,11 +43,9 @@ import profileSettingsEdit from "./profileSettingsEdit"
 import { social } from './social';
 
 Vue.use(Vuex);
-
-
- axios.defaults.baseURL = process.env.VUE_APP_API_URL_EDS;
-//  axios.defaults.baseURL = "https://test.maxinemoffett.com/api/v1/";
-
+//axios.defaults.baseURL = process.env.VUE_APP_API_URL_DEV;
+axios.defaults.baseURL = "https://edson.maxinemoffett.com/api/v1/";
+//  axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 
 
 export default new Vuex.Store({

@@ -33,6 +33,7 @@ import forgotPassword from "@/views/forgotPassword";
 import navMessage from "@/views/navMessaging";
 import Blec from "@/views/blec";
 import memberNetworkFollower from "@/views/memberNetworkFollower";
+import memberNetwork from "@/views/memberNetwork";
 
 import networkEditors from "@/views/networkEditors";
 
@@ -329,9 +330,9 @@ const routes = [{
 },
 
 {
-  path: "/blec",
-  name: "Blec",
-  component: Blec,
+  path: "/memberNetwork/:id?",
+  name: "memberNetwork",
+  component: memberNetwork,
 },
 
 {

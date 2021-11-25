@@ -56,6 +56,7 @@ import ordersdetail from "@/views/odersDetail";
 import businessordersdetail from "@/views/businessordersdetail"
 
 import payment from "@/views/payment";
+import cart from "@/views/card";
 
 
 Vue.use(VueRouter);
@@ -92,6 +93,11 @@ const routes = [{
   path: "/checkout",
   name: "payment",
   component: payment
+},
+{
+  path: "/cart",
+  name: "cart",
+  component: cart
 },
 
 

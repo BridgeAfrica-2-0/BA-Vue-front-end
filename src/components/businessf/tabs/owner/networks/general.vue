@@ -1,41 +1,7 @@
 <template>
   <div>
-    <div class="mt-3 d-block d-md-none" v-if="selectedIdd == '2'">
-      <Notification />
-    </div>
-
-    <div class="mt-3 d-block d-md-none" v-if="selectedIdd == '3'">
-      <MemberShip />
-    </div>
-
-    <div class="mt-3 d-block d-md-none" v-if="selectedIdd == '4'">
-      <PendingPost />
-    </div>
-
-    <div class="mt-3 d-block d-md-none" v-if="selectedIdd == '5'">
-      <KeywordAlert />
-    </div>
-
-    <div class="mt-3 d-block d-md-none" v-if="selectedIdd == '6'">
-      <div class="d-block d-md-none" style="margin-top: 30px">
-        <ly-tab v-model="seetings_id" :items="items" :options="options" class="center-ly" vertical> </ly-tab>
-      </div>
-
-      <div class="mt-3 d-block d-md-none" v-if="seetings_id == '0'">
-        <General />
-      </div>
-
-      <div class="mt-3 d-block d-md-none" v-if="seetings_id == '1'">
-        <Roles />
-      </div>
-
-      <div class="mt-3 d-block d-md-none" v-if="seetings_id == '2'">
-        <Settings />
-      </div>
-
-      <div class="mt-3 d-block d-md-none" v-if="seetings_id == '3'">
-        <Blocking />
-      </div>
+    <div class="mt-3 d-block d-md-none" v-if="seetings_id == '3'">
+      <Blocking />
     </div>
 
     <div class="mt-3 d-block d-md-none" v-if="selectedIdd == '7'">
@@ -46,36 +12,42 @@
       <b-col cols="10">
         <div class="bv-example-row">
           <div>
-            <b-tabs pills v-model="tabIndex" vertical class="itzlala" nav-wrapper-class="w-15">
-              <b-tab title="Notifications">
+            <b-tabs
+              pills
+              v-model="tabIndex"
+              vertical
+              class="itzlala"
+              nav-wrapper-class="w-15"
+            >
+              <b-tab :title="$t('network.Notifications')">
                 <b-card-text> <Notification /> </b-card-text
               ></b-tab>
 
-              <b-tab title="General">
+              <b-tab :title="$t('network.General')">
                 <b-card-text> <General /> </b-card-text
               ></b-tab>
 
-              <b-tab title="Network Roles">
+              <b-tab :title="$t('network.Network_Roles')">
                 <b-card-text> <Roles /> </b-card-text
               ></b-tab>
 
-              <b-tab title="Network Info">
+              <b-tab :title="$t('network.Network_Info')">
                 <b-card-text> <Settings /> </b-card-text
               ></b-tab>
 
-              <b-tab title="Member Request">
+              <b-tab :title="$t('network.Member_Request')">
                 <b-card-text> <MemberShip /> </b-card-text
               ></b-tab>
 
-              <b-tab title="Pending Post">
+              <b-tab :title="$t('network.Pending_Post')">
                 <b-card-text> <PendingPost /> </b-card-text
               ></b-tab>
 
-              <b-tab title="Keyword Alert">
+              <b-tab :title="$t('network.Keyword_Alert')">
                 <b-card-text> <KeywordAlert /> </b-card-text
               ></b-tab>
 
-              <b-tab title="Blocking">
+              <b-tab :title="$t('network.Blocking')">
                 <b-card-text> <Blocking /> </b-card-text
               ></b-tab>
             </b-tabs>
@@ -92,19 +64,23 @@
 </template>
 
 <script>
-import Roles from '@/components/businessf/tabs/owner/networks/roles';
 
-import MemberShip from '@/components/businessf/tabs/owner/networks/memberShip';
-import KeywordAlert from '@/components/businessf/tabs/owner/networks/keywordAlert';
 
-import PendingPost from '@/components/businessf/tabs/owner/networks/pendingPost';
 
-import Notification from '@/components/businessf/tabs/owner/networks/notification';
+import Roles from "@/components/businessf/tabs/owner/networks/roles";
 
-import Settings from '@/components/businessf/tabs/owner/networks/settings';
-import General from '@/components/businessf/tabs/owner/networks/settings/general';
-import Blocking from '@/components/businessf/tabs/owner/networks/settings/blocking';
-import LyTab from '@/tab/src/index.vue';
+import MemberShip from "@/components/businessf/tabs/owner/networks/memberShip";
+import KeywordAlert from "@/components/businessf/tabs/owner/networks/keywordAlert";
+
+import PendingPost from "@/components/businessf/tabs/owner/networks/pendingPost";
+
+import Notification from "@/components/businessf/tabs/owner/networks/notification";
+
+import Settings from "@/components/businessf/tabs/owner/networks/settings";
+import General from "@/components/businessf/tabs/owner/networks/settings/general";
+import Blocking from "@/components/businessf/tabs/owner/networks/settings/blocking";
+// import LyTab from "@/tab/src/index.vue";
+
 
 export default {
   name: 'settings',
@@ -151,7 +127,11 @@ export default {
     },
   },
 
+
+
+
   components: {
+   
     Roles,
     Notification,
     Blocking,
@@ -160,24 +140,50 @@ export default {
     KeywordAlert,
     PendingPost,
     Settings,
-    LyTab,
+    // LyTab
+   
+   
   },
 
-  data() {
+
+
+ data() {
     return {
       size: 0,
       tabIndex: 1,
-      selectedIdd: 0,
-      seetings_id: 0,
+       selectedIdd: 0,
+       seetings_id:0,
       bottomSelectedId: 0,
-      items: [{ label: 'General' }, { label: 'Network Info' }, { label: 'Network Roles ' }, { label: 'Blocking' }],
+       items: [
+        {label: 'General' },
+       
+        {label: 'Network Info' },
+        
+         {label: 'Network Roles '}, 
+         
+         {label: 'Blocking'},
+
+       
+        
+      ],
       options: {
-        activeColor: '#1d98bd',
+        activeColor: '#1d98bd'
       },
-    };
+
+     
+    
+
+
+
+    }
   },
 
-  methods: {},
+ 
+  methods: {
+
+   
+  },
+  
 };
 </script>
 

@@ -1,9 +1,8 @@
 <template>
-  <div class="p-2">
+  <div>
     <b-modal id="modal-sm" size="sm" hide-header>
-      Do you want to join this network? 
+       {{ $t('dashboard.Do_you_want_to_join_this_network') }}
     </b-modal>
-
 
     <b-row>
         <b-col lg="6" sm="12" class="p-2" v-for="item in network" :key="item.id">
@@ -13,8 +12,8 @@
         <b-col md="3" xl="3" lg="3" cols="5" sm="3">
           <div class="center-img">
             <img :src="item.picture" class="r-image" />
-          </div>
-        </b-col>
+          </div>  
+        </b-col>   
         <b-col md="5" cols="7"  lg="7" xl="5" sm="5">
          
 
@@ -22,15 +21,24 @@
             <strong class="net-title"> {{ item.name }} </strong> <br />
             {{ item.category }}
             <br />
-            {{ item.followers }} Community <br />
+            {{ item.followers }} {{ $t('dashboard.Community') }} <br />
 
             <span class="location">
               <b-icon-geo-alt class="ico"></b-icon-geo-alt>
               {{ item.location_description }}
             </span>
-            <br />
+            <br />   
+       
+        <read-more
+              more-str="read more"
+              class="readmore"    
+              :text="item.about_network"
+              link="#"
+              less-str="read less"
+              :max-chars="100"
+            >
+            </read-more>
 
-            {{ item.about_network }} <b-link>Read More</b-link>
           </p>
         </b-col>
 
@@ -38,15 +46,22 @@
           <div class="s-button">
             <b-row>
               <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2">
-                <b-button
+               
+
+               <b-button
                   block
                   size="sm"
                   class="b-background shadow"
+                  :class="item.is_follow !== 0 && 'u-btn'"
                   variant="primary"
+                  :id="'followbtn'+item.id"
+                  @click="handleFollow(item)"
                 >
                   <i class="fas fa-user-plus  fa-lg btn-icon "></i>
-                  <span class="btn-com" v-b-modal.modal-sm>Community</span>
+                  <span class="btn-com">{{ $t('profileowner.Community') }}</span>
                 </b-button>
+
+                
               </b-col>
 
               <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2">
@@ -57,7 +72,7 @@
                   variant="primary"
 
                   ><i class="fas fa-envelope   fa-lg btn-icon "></i>
-                  <span class="btn-text">Message</span>
+                  <span class="btn-text">{{ $t('dashboard.Messages') }}</span>
                 </b-button>
               </b-col>
 
@@ -73,24 +88,23 @@
       </b-row>
     </div>
         </b-col>
-    </b-row>
 
-     
- 
-      <infinite-loading :identifier="infiniteId"  @infinite="infiniteHandler"  ref="infiniteLoading" ></infinite-loading> 
-  
+         
+         
+    </b-row>
+    <infinite-loading @infinite="infiniteHandler"></infinite-loading>  
   </div>
 </template>
 
 <script>
 import axios from "axios";
 export default {
-  props: ["type","searchh"],
+  props: ["type"],
+
    data() {
     return {
       page: 1,
-       biz_id:null,
-      infiniteId: +new Date(),
+      network: [],
       options: {
         rewind: true,
         autoplay: true,
@@ -102,115 +116,92 @@ export default {
       }
     };
   },
-  computed: {
+
+
+ computed:{  
+
+        biz_id(){
+          return  this.$store.state.dashboard.dBusinessId;
+        }
+        
+      },
+
+
    
-        network(){   
-
-      if(this.type=="Follower"){ 
-
-      return  this.$store.state.businessOwner.NcommunityFollower.network_followers;    
-
-       }else{
-
-         return  this.$store.state.profile.NcommunityFollowing.network_following; 
-       }
-   }
-   
-  },
-
-
-   mounted(){
-    this.biz_id = this.$route.params.id;
- },
-
-
   methods:{
-   
 
 
-        search(){
-     
-       console.log('search started');
-       console.log(this.type);
-        
-         if(this.type=="Follower"){ 
-         console.log("follower");
-        this.$store.commit("profile/setNcommunityFollower",{ "network_followers": [ ], "total_network_follower": 0 }); 
 
-       }else{
-       
-        
-        this.$store.commit("profile/setNcommunityFollowing",{ "network_following": [ ], "total_network_following": 0 }); 
-       }
-
-      this.page = 1;
-      this.infiniteId += 1;
-
-     
-     this.$refs.infiniteLoading.attemptLoad();
     
+    async handleFollow(user) {
+       document.getElementById("followbtn"+user.id).disabled = true;
+      const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
+      const nextFollowState = user.is_follow === 0 ? 1 : 0;
+      const data = {
+        id: user.id,
+        type: 'network',
+      };
 
+      await axios
+        .post(uri, data)
+        .then(response => {
+          user.is_follow = nextFollowState;
+           document.getElementById("followbtn"+user.id).disabled =  false;
+        })
+        .catch(err =>{   console.log(err)
+         document.getElementById("followbtn"+user.id).disabled =  false;
+        });
     },
 
-    
-      infiniteHandler($state) {
 
 
-      let url = null;
 
-         if(this.type=="Follower"){  
-         url = "business/community/visitor/network-follower/"+this.biz_id+"/";
-         }else{
-          url = "business/community/visitor/network-following/"+this.biz_id+"/";
-         }
-         
-      console.log(url + this.page+"?keyword="+this.searchh);
+
+
+
+   infiniteHandler($state) {
+      const url =
+        this.type === 'Follower'
+          ? `business/community/business-follower/${this.biz_id}/`
+          : `business/community/business-following/${this.biz_id}/`;
+
       axios
-        .get(url + this.page+"?keyword="+this.searchh)   
+        .get(url + this.page)
         .then(({ data }) => {
-          console.log("lading network after response")
-          console.log(data);
-        if(this.type=="Follower"){
-         
+          if (this.type == 'Follower') {
+            if (data.data.business_followers.length) {
+              this.businesses.push(...data.data.business_followers);
+              this.page += 1;
 
-          if (data.data.network_followers.length) {
-            this.page += 1;
-            this.network.push(...data.data.network_followers);
-            
-            
-            $state.loaded();
-           }else{
+              $state.loaded();
+            } else {
               $state.complete();
-           }
-
-
+            }
           } else {
-            
+            if (data.data.business_following.length) {
+              this.businesses.push(...data.data.business_following);
+              this.page += 1;
 
-
-             if (data.data.network_following.length) {
-            this.page += 1;
-      
-            this.network.push(...data.data.network_following);
-            
-            
-            $state.loaded();
-           }else{
+              $state.loaded();
+            } else {
               $state.complete();
-           }
-
-
-
+            }
           }
-        }) 
-        .catch((err) => {
+        })
+        .catch(err => {
           console.log({ err: err });
         });
     },
 
-  }
-  
 
+
+
+    
+
+
+  }
+ 
+  
 };
 </script>
 
@@ -470,7 +461,7 @@ Width:160px
   border-bottom-right-radius: 5px;
 
   background: white;
-
+ height: 100%;
   background-color: #fff;
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
@@ -500,7 +491,7 @@ Width:160px
   border-top-right-radius: 5px;
 
   border-bottom-right-radius: 5px;
-
+ height: 100%;
 
 
 

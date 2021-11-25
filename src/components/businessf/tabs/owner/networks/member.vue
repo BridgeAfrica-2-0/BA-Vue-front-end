@@ -8,7 +8,7 @@
           </b-input-group-prepend>
           <b-form-input
             aria-label="Text input with checkbox"
-            placeholder="Search Something"
+            :aria-invalid="$t('network.Search_something')"
             type="text"
             class="form-control"
             v-model="searchTitle"
@@ -18,10 +18,10 @@
       </b-col>
     </b-row>
 
-    <b-row class="mt-4">
+    <b-row class="mt-4" v-if="admins.length != 0">
       <b-col cols="12">
         <h6 class="font-weight-bolder">
-          Network Admins ({{nFormatter(admins.length)}})
+          {{ $t('network.Network_Admins') }} ({{nFormatter(admins.length)}})
         </h6>
         <hr width="100%" />
         <b-skeleton-wrapper :loading="loading">
@@ -56,20 +56,20 @@
                   >
                     <template #button-content>
                       <b-icon-three-dots-vertical></b-icon-three-dots-vertical
-                      ><span class="sr-only">Settings</span>
+                      ><span class="sr-only">{{ $t('network.Settings') }}</span>
                     </template>
                     <b-dropdown-item href="#" @click="removeAsAdmin(admin.user_id)">
-                      <b-icon-trash-fill></b-icon-trash-fill> Remove as Admin
+                      <b-icon-trash-fill></b-icon-trash-fill> {{ $t('network.Remove_as_Admin') }}
                     </b-dropdown-item>
                     <b-dropdown-item href="#" @click="removeFromNetworks(admin.user_id)">
-                      <b-icon-trash-fill></b-icon-trash-fill> Remove From Networks
+                      <b-icon-trash-fill></b-icon-trash-fill> {{ $t('network.Remove_From_Networks') }}
                     </b-dropdown-item>
                   </b-dropdown>
                 </span>
               </p>
             </div>
           </div>
-          <div v-else>No Result On Admins</div>
+          <div v-else>{{ $t('network.No_Result_On_Admins') }}</div>
         </b-skeleton-wrapper>
       </b-col>
     </b-row>
@@ -77,7 +77,7 @@
     <b-row class="mt-4">
       <b-col cols="12" >
         <h6 class="font-weight-bolder">
-          Bussiness ({{nFormatter(business.length)}})
+          {{ $t('network.Bussiness') }} ({{nFormatter(business.length)}})
         </h6>
         <hr width="100%" />
         <b-skeleton-wrapper :loading="loading">
@@ -113,17 +113,17 @@
                   >
                     <template #button-content>
                       <b-icon-three-dots-vertical></b-icon-three-dots-vertical
-                      ><span class="sr-only">Settings</span>
+                      ><span class="sr-only">{{ $t('network.Settings') }}</span>
                     </template>
                     <b-dropdown-item href="#" @click="removeFromNetworks(busines.business_id)">
-                      <b-icon-trash-fill></b-icon-trash-fill> Remove From Networks
+                      <b-icon-trash-fill></b-icon-trash-fill> {{ $t('network.Remove_From_Networks') }}
                     </b-dropdown-item>
                   </b-dropdown>
                 </span>
               </p>
             </div>
           </div>
-          <div v-else>No Result On Networks</div>
+          <div v-else>{{ $t('network.No_Result_On_Networks') }}</div>
         </b-skeleton-wrapper>
       </b-col>
     </b-row>
@@ -131,7 +131,7 @@
     <b-row class="mt-4" >
       <b-col cols="12">
         <h6 class="font-weight-bolder">
-          All Members ({{nFormatter(members.length)}})
+          {{ $t('network.All_Members') }} ({{nFormatter(members.length)}})
         </h6>
         <hr width="100%" />
         <b-skeleton-wrapper :loading="loading">
@@ -165,13 +165,13 @@
                 >
                   <template #button-content>
                     <b-icon-three-dots-vertical></b-icon-three-dots-vertical
-                    ><span class="sr-only">Settings</span>
+                    ><span class="sr-only">{{ $t('network.Settings') }}</span>
                   </template>
                   <b-dropdown-item href="#" @click="makeAdmin(member.user_id)">
-                    <b-icon-person-plus-fill></b-icon-person-plus-fill> Make Admin
+                    <b-icon-person-plus-fill></b-icon-person-plus-fill> {{ $t('network.Make_Admin') }}
                   </b-dropdown-item>
                   <b-dropdown-item href="#" @click="removeFromNetworks(member.user_id)">
-                    <b-icon-trash-fill></b-icon-trash-fill> Remove From Networks
+                    <b-icon-trash-fill></b-icon-trash-fill> {{ $t('network.Remove_From_Networks') }}
                   </b-dropdown-item>
                 </b-dropdown>
               </span>
@@ -181,8 +181,8 @@
       </b-col>
       <b-col col="12">
         <infinite-loading @infinite="infiniteHandler">
-          <div class="text-red" slot="no-more">No More Request</div>
-          <div class="text-red" slot="no-results">No More Request</div>
+          <div class="text-red" slot="no-more">{{ $t('network.No_More_Request') }}</div>
+          <div class="text-red" slot="no-results">{{ $t('network.No_More_Request') }}</div>
         </infinite-loading>
       </b-col>
     </b-row>
@@ -344,7 +344,7 @@ export default {
         this.loading = false;
         this.flashMessage.show({
           status: "success",
-          message: "The Member Is Now Admin"
+          message: this.$t('network.The_Member_Is_Now_Admin')
         });
       })
       .catch(err => {
@@ -352,7 +352,7 @@ export default {
         this.loading = false;
         this.flashMessage.show({
           status: "error",
-          message: "Unable To Set Member As Admin"
+          message: this.$t('network.Unable_To_Set_Member_As_Admin')
         });
       });
     },
@@ -372,7 +372,7 @@ export default {
         this.loading = false;
         this.flashMessage.show({
           status: "success",
-          message: "Member Successfully Removerd As Admin"
+          message: this.$t('network.Member_Successfully_Removed_As_Admin')
         });
       })
       .catch(err => {
@@ -380,7 +380,7 @@ export default {
         this.loading = false;
         this.flashMessage.show({
           status: "error",
-          message: "Unable To Removerd Member As Admin"
+          message: this.$t('network.Unable_To_Remove_Member_As_Admin')
         });
       });
 		},
@@ -400,7 +400,7 @@ export default {
         this.loading = false;
         this.flashMessage.show({
           status: "success",
-          message: "Member Successfully Removerd From Network"
+          message: this.$t('network.Member_Successfully_Removed_From_Network')
         });
       })
       .catch(err => {
@@ -408,7 +408,7 @@ export default {
         this.loading = false;
         this.flashMessage.show({
           status: "error",
-          message: "Unable to Removerd Member From Network"
+          message: this.$t('network.Unable_to_Remove_Member_From_Network')
         });
       });
 		},

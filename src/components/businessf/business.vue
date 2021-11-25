@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <div class="splide" v-if="!business_info.cover.length == 0">
+    <div class="splide" v-if="business_info.cover.length">
       <splide :options="options" class="banner r-image">
         <splide-slide v-for="cover in business_info.cover" :key="cover.id">
           <img :src="cover.media_url" class="r-image" />
@@ -23,10 +23,12 @@
         </splide-slide>
       </splide>
     </div>
-
+ <router-link to="#media">
     <b-button class=" float-right see-all">
-      {{$t("businessf.See_All")}}
+      {{$t("businessf.See_All")}} 
     </b-button>
+ </router-link>
+
 
     <b-row class="mt-4 desktop container-fluid">
       <b-col>
@@ -101,16 +103,16 @@
       </b-row>
     </div>
     <div class="mb-1 m-btn">
-      <b-button class="message m-fol">
+      <b-button class="message   size">
         <i class="fas fa-envelope fa-lg btn-icon "></i> <span>{{$t("businessf.Message")}}</span>
       </b-button>
 
-      <b-button class="direction ml-1 m-msg size" variant="primary">
+      <b-button class="direction ml-1 size" variant="primary">
         <i class="fas fa-map-marked-alt fa-lg btn-icon "></i>
         <span>{{$t("businessf.Direction")}}</span></b-button
       >
 
-      <b-dropdown class="ml-1 options dot-btn mt-1 mt-sm-2 mt-md-0 " no-caret variant="outline-primary">
+      <b-dropdown class="ml-1  dot-btn mt-1 mt-sm-2 mt-md-0 " no-caret variant="link">
         <template #button-content>
           <b-icon-three-dots></b-icon-three-dots>
         </template>
@@ -123,10 +125,10 @@
     <div class="body">
       <b-row>
         <b-col cols="12" class="p-0">
-          <b-tabs lazy content-class="mt-3 p-0" fill pills>
+          <b-tabs lazy content-class="mt-3 p-0"  v-model="currentTab" fill pills>
             <b-tab  :title="$t('businessf.Home')"><HomePage /></b-tab>
             <b-tab :title="$t('businessf.About')"><About /></b-tab>
-            <b-tab :title="$t('businessf.Media')"><Media /></b-tab>
+            <b-tab type="business" :title="$t('businessf.Media')"><Media /></b-tab>
             <b-tab :title="$t('businessf.Market')"><MarketPlace /></b-tab>
             <b-tab :title="$t('businessf.Networks')"><Networks /></b-tab>
             <b-tab :title="$t('businessf.Community')"><Community /></b-tab>
@@ -140,9 +142,9 @@
 <script>
 import HomePage from '../businessf/tabs/businessHome';
 import About from './tabs/about';
-import Media from './tabs/media';
+import Media from '@/components/businessOwner/tabs/media';
 import MarketPlace from './tabs/marketPlace';
-import Community from './tabs/memberNetwork';
+import Community from '@/components/businessOwner/tabs/memberNetwork';
 import Networks from './tabs/networks';
 
 export default {
@@ -159,6 +161,9 @@ export default {
   data() {
     return {
       url_data: null,
+      currentTab: 0,
+      tabIndex: null,
+      tabs: ["#post", "#about", "#media", "#market", "#community"],
       options: {
         rewind: true,
         autoplay: true,
@@ -190,7 +195,44 @@ export default {
   created() {
     this.url_data = this.$route.params.id;
     this.businessInfo();
+
+
+    
+   let tab = this.tabs.findIndex(tab => tab === this.$route.hash)
+
+  if(tab==-1){
+    
+    
+    this.currentTab =
+      localStorage.getItem('ba-business-active-tab') !== null ? localStorage.getItem('ba-business-active-tab') : 0;
+
+  } else{
+
+    this.currentTab =tab;
+  }
+
+
   },
+
+    watch: {
+    currentTab: (newVal, oldVal) => {
+      localStorage.setItem('ba-business-active-tab', newVal);
+    },
+
+
+   
+  $route(to, from) {
+      console.log(to.hash);
+      this.currentTab = this.tabs.findIndex((tab) => tab === to.hash);
+
+    },
+
+  
+
+  },
+
+
+
 
   mounted() {
     console.log(this.url_data);

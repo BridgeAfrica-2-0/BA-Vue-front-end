@@ -29,7 +29,7 @@
                 </b-col>
                 <b-col cols="10" md="11" class="pt-2">
                   <h6 class="m-0 font-weight-bolder">
-                    Mapoure Agrobusiness
+                    {{ $t('profilefollower.Mapoure_Agrobusiness') }}
                     <span class="float-right">
                       <b-dropdown
                         size="lg"
@@ -39,26 +39,26 @@
                       >
                         <template #button-content>
                           <b-icon-three-dots-vertical></b-icon-three-dots-vertical
-                          ><span class="sr-only">Settings</span>
+                          ><span class="sr-only">{{ $t('profilefollower.Settings') }}</span>
                         </template>
                         <b-dropdown-item href="#">
-                          Ignore
+                          {{ $t('profilefollower.Ignore') }}
                         </b-dropdown-item>
                         <b-dropdown-item href="#">
-                          Delete a Comment
+                          {{ $t('profilefollower.Delete_a_Comment') }}
                         </b-dropdown-item>
                         <b-dropdown-item href="#">
-                          Send Messge To User
+                          {{ $t('profilefollower.Send_Message_To_User') }}
                         </b-dropdown-item>
                         <b-dropdown-item href="#">
-                          Remove User
+                          {{ $t('profilefollower.Remove_User') }}
                         </b-dropdown-item>
                       </b-dropdown>
                     </span>
                   </h6>
                   <p>
-                    1h Ago -
-                    <span class="text-primary">Commented on a Post</span>
+                    {{ $t('profilefollower.1h_Ago')}} -
+                    <span class="text-primary">{{ $t('profilefollower.Commented_on_a_Post') }}</span>
                   </p>
                 </b-col>
               </b-row>

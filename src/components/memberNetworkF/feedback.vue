@@ -2,7 +2,7 @@
   <div>
     <b-card>
       <p class="title">
-        <b>Your Feedback is about</b>
+        <b>{{ $t('memnetwork.Your_Feedback_is_about') }}</b>
         <b class="text-center"><b-spinner v-if="spinner" variant="primary" label="Text Centered"></b-spinner></b>
       </p>
       <b-form-select
@@ -10,17 +10,17 @@
         v-model="feedbackForm.title"
         :options="options"
       ></b-form-select>
-      <p class="mt-2 username "><b>Brief description of your feedback</b></p>
+      <p class="mt-2 username "><b>{{ $t('memnetwork.Brief_description_of_your_feedback') }}</b></p>
       <b-form-textarea
         id="textarea"
         v-model="feedbackForm.description"
-        placeholder="Enter something..."
+        :placeholder="$t('memnetwork.Enter_something')"
         rows="3"
         class="text"
         max-rows="6"
         required
       ></b-form-textarea>
-      <b-button class="float-right mt-2" variant="primary" @click="createFeedback()"> Submit</b-button>
+      <b-button class="float-right mt-2" variant="primary" @click="createFeedback()"> {{ $t('memnetwork.Submit') }}</b-button>
     </b-card>
 
     <fas-icon
@@ -29,7 +29,7 @@
       @click="filterFeedback"
     />
     <b-card class="mt-3" v-if="filterData">
-      <p class="primary text"><strong>Feedback Type</strong></p>
+      <p class="primary text"><strong>{{ $t('memnetwork.Feedback_Type') }}</strong></p>
       <b-form-select
         required
         v-model="filterData"
@@ -39,17 +39,17 @@
       ></b-form-select>
       <b-row class="float-right mt-2">
         <b-col>
-          <b-button class="reset">Reset</b-button>
+          <b-button class="reset">{{ $t('memnetwork.Reset') }}</b-button>
         </b-col>
         <b-col>
-          <b-button variant="primary" @click="filterFeedback, applyFilter()" class="apply">Apply</b-button>
+          <b-button variant="primary" @click="filterFeedback, applyFilter()" class="apply">{{ $t('memnetwork.') }}{{ $t('memnetwork.Apply') }}</b-button>
         </b-col>
       </b-row>
     </b-card>
 
     <b-card 
       :class="{ active: index == currentIndex }"
-      v-for="(feedback, index) in feedbacks.data"
+      v-for="(feedback, index) in feedbacks"
       :key="index"
       class="mt-5"
     >
@@ -75,17 +75,12 @@
        {{feedback.description}}
       </p>
     </b-card>
-    <b-row v-if="feedbacks.per_page < feedbacks.total">
-      <b-col cols="12">
-        <span class="float-right">
-          <b-pagination
-            v-model="currentPage"
-            :total-rows="feedbacks.total"
-            :per-page="feedbacks.per_page"
-            @change="handlePageChange"
-            aria-controls="my-table"
-          ></b-pagination>
-        </span>
+    <b-row>
+      <b-col col="12">
+        <infinite-loading @infinite="infiniteHandler" ref="infiniteLoading">
+          <div class="text-red" slot="no-more">No More Request</div>
+          <div class="text-red" slot="no-results">No More Request</div>
+        </infinite-loading>
       </b-col>
     </b-row>
 
@@ -107,17 +102,18 @@ export default {
       filterData: false,
       spinner: false,
 
-      currentPage: null,
+      currentPage: 0,
       currentIndex: -1,
+      feedbacks: [],
 
       options: [
         { value: "Improvement", text: "Suggestion for Improvement" },
-        { value: "Complaints", text: "Complaints" }
+        { value: "Complain", text: "Complains" }
       ],
       filters: [
         { value: "0", text: "Any" },
         { value: "Improvement", text: "Suggestion for Improvement" },
-        { value: "Complaints", text: "Complaints" }
+        { value: "Complain", text: "Complains" }
       ],
       feedbackForm: {
         title: "Improvement",
@@ -125,47 +121,65 @@ export default {
       },
     };
   },
-  computed: {
-    feedbacks() {
-      return this.$store.state.networkProfileFeedback.feedbacks;
-    },
-  },
+  computed: {},
   mounted(){
     this.url = this.$route.params.id;
-    this.displayFeedback(); 
   },
   methods: {
     filterFeedback() {
       this.filterData = !this.filterData;
     },
 
-    getRequestDatas(filterData, currentPage) {
+    getRequestDatas(filterData) {
       let data = "";
       if (filterData) {
-        data = "/"+filterData;
-      }else if (currentPage) {
-        data = "/?page="+currentPage;
+        console.log("Status true");
+        if (filterData == 0) 
+          data = "";
+        else
+          data = filterData;
       }
       console.log(data);
       return data;
     },
 
     applyFilter(){
+      this.loading = true;
+      this.feedbacks = [];
+      this.filterData
       console.log("searching...");
       console.log(this.filterData);
-      this.displayFeedback();
-    },
-
-    displayFeedback() {
-      const data = this.getRequestDatas(this.filterData, this.currentPage);
-      this.$store
-      .dispatch("networkProfileFeedback/getFeedbacks", this.url+"/feedback"+data)
-      .then(() => {
-        console.log('ohh yeah');
-      })
-      .catch( err => {
-        console.log({ err: err });
+      this.$nextTick(() => {
+        this.page = 0;
+        this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
       });
+    },
+    infiniteHandler($state) {
+      console.log("loop");
+      const data = this.getRequestDatas(this.filterData);
+      console.log('keyword: '+data);
+      let formData = new FormData();
+      formData.append('keyword', data);
+      this.axios
+        .post("network/"+this.url+"/feedbacks/"+this.currentPage, formData)
+        .then(({ data }) => {
+        console.log(data);
+        console.log(this.currentPage);
+        if (data.data.length) {
+          this.currentPage += 1;
+          console.log(this.currentPage);
+          console.log(...data.data);
+          this.feedbacks.push(...data.data);
+          this.loading = false;
+          $state.loaded();
+        } else {
+          this.loading = false;
+          $state.complete();
+        }
+      }) .catch((err) => {
+        this.loading = false;
+        console.log({ err: err });
+      })
     },
 
     createFeedback: function(){
@@ -177,7 +191,11 @@ export default {
       console.log('description', this.feedbackForm.description);
       this.axios.post("network/"+this.url+"/feedback/create", formData)
       .then(() => {
-        this.displayFeedback();
+        this.feedbacks = [];
+        this.$nextTick(() => {
+          this.page = 0;
+          this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
+        });
         console.log('ohh yeah');
         this.spinner = false;
         this.flashMessage.show({

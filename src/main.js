@@ -19,11 +19,11 @@ import ReadMore from 'vue-read-more';
 import VueSocialauth from 'vue-social-auth';
 import VueSocialSharing from 'vue-social-sharing';
 
-import plugin from './http';
+// import plugin from './http';
 
-Vue.use(plugin);
+// Vue.use(plugin);
+Vue.use(require('vue-moment'));
 
-// import firebase from "firebase";
 IconifyIcon.addIcon('home', homeIconData);
 
 Vue.use(Vuex);
@@ -32,8 +32,6 @@ Vue.use(VueAxios, axios);
 import LoadScript from 'vue-plugin-load-script';
 import InfiniteLoading from 'vue-infinite-loading';
 
-import { loader } from './mixins';
-
 Vue.use(InfiniteLoading, {
     /* options */
 });
@@ -41,6 +39,9 @@ Vue.use(LoadScript);
 
 Vue.use(ReadMore);
 Vue.prototype.$axios = axios;
+
+// import Notifications from 'vue-notification'
+// Vue.use(Notifications)
 
 // const firebaseConfig = {
 //   apiKey: process.env.API_KEY,
@@ -97,9 +98,11 @@ import Lightbox from '@morioh/v-lightbox';
 import * as VueGoogleMaps from 'gmap-vue';
 
 
+
 import VueSplide from "@splidejs/vue-splide";
 Vue.use(VueSplide);
 import "@splidejs/splide/dist/css/themes/splide-default.min.css";
+
 
 
 // global register
@@ -147,13 +150,13 @@ Vue.use(VueGoogleMaps, {
     installComponents: true,
 });
 
- import VueLoading from 'vue-loading-overlay';
- import 'vue-loading-overlay/dist/vue-loading.css';
+//  import VueLoading from 'vue-loading-overlay';
+//  import 'vue-loading-overlay/dist/vue-loading.css';
 
 import VueYoutube from 'vue-youtube'
 
 Vue.use(VueYoutube)
- Vue.use(VueLoading);
+    //  Vue.use(VueLoading);
 
 import VueAgile from 'vue-agile';
 
@@ -177,42 +180,20 @@ Vue.use(VueEasyLightbox);
 Vue.config.productionTip = false;
 var user = null;
 
-// import VueEcho from 'vue-echo-laravel';
-// import Echo from 'laravel-echo'
-// const io = require("socket.io-client")
-// if (process.client) {
-
-//     window.Echo = new Echo({
-//             broadcaster: 'socket.io',
-//             host: "loclhost:7000",
-//             client: require('socket.io-client'),
-//             auth: { headers: { Authorization: 'Bearer ' + JSON.parse(localStorage.getItem('user')).accessToken } }
-//         })
-//         // Vue.use(VueEcho, {
-//         //     broadcaster: 'socket.io',
-//         //     host: process.env.VUE_APP_API_URL_DEV,
-//         // });
-
-// }
-
-// Vue.prototype.$echo = Echo
-
-// import VueEcho from 'vue-echo-laravel';
-// window.io = require('socket.io-client')
-
-// Vue.use(VueEcho, {
-//     broadcaster: 'socket.io',
-//     host: "localhost:6001",
-//     auth: { headers: { Authorization: 'Bearer ' + JSON.parse(localStorage.getItem('user')).accessToken } }
-// });
+// import './pusher-notification';
+import './redis-notification'
 
 new Vue({
     router,
     store,
     i18n,
-
     created() {
         const userInfo = localStorage.getItem('user');
+        i18n.locale = localStorage.getItem('lang');
+
+
+        console.log(i18n.locale);
+
         if (userInfo) {
             const userData = JSON.parse(userInfo);
             user = userData;
@@ -221,9 +202,13 @@ new Vue({
         axios.interceptors.response.use(
             response => response,
             error => {
-                if (error.response.status === 401) {
-                    // this.$store.dispatch('auth/logout');
-                    console.log('error has ocurred', error);
+                if (error.response) {
+                    if (error.response.status === 401) {
+                        this.$store.dispatch('auth/logout');
+                        console.log('error has ocurred', error);
+
+
+                    }
                 }
                 return Promise.reject(error);
             },
@@ -233,6 +218,11 @@ new Vue({
             if (user != null) {
                 config.headers.Authorization = `Bearer  ${user.accessToken}`;
             }
+
+
+
+            config.headers.common['Language'] = i18n.locale;
+
             return config;
         });
     },

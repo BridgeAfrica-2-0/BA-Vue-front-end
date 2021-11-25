@@ -802,8 +802,7 @@
                       <strong class="title">
                         {{ business.name }}
                       </strong>
-                      <br />
-                      <span v-if="Array.isArray(business.category)">
+                      <br />  
                         <span
                           class=""
                           v-for="cat in business.category"
@@ -811,7 +810,7 @@
                         >
                           {{ cat.name }}
                         </span>
-                      </span>
+                      
                       <br />
                       {{ business.community }} {{ $t('profileowner.Community') }} <br />
 
@@ -1360,7 +1359,7 @@ export default {
         formData2.append("neigborhood", this.selectedlocality);
         formData2.append("lat", this.center.lat);
         formData2.append("lng", this.center.lng);
-        formData2.append("phone1", this.phone1);
+        formData2.append("primary_phone", this.phone1);
         formData2.append("phone2", this.phone2);
         formData2.append("email", this.email);
         formData2.append("website", this.website);
@@ -1453,7 +1452,7 @@ export default {
         formData2.append("neigborhood", this.selectedlocality);
         formData2.append("lat", this.center.lat);
         formData2.append("lng", this.center.lng);
-        formData2.append("phone1", this.phone1);
+        formData2.append("primary_phone", this.phone1);
         formData2.append("phone2", this.phone2);
         formData2.append("email", this.email);
         formData2.append("website", this.website);

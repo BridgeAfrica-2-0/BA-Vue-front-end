@@ -4,10 +4,10 @@
       <b-row>
         <b-col class="f-left">
           <h6 class=" d-inline-block">
-            Membership Requests
+           {{ $t('network.Membership_Requests')}} 
           </h6>
         </b-col>
-        <b-col class="f-right"> <span class="">35 Pending</span> </b-col>
+        <b-col class="f-right"> <span class="">35 {{ $t('network.Pending') }}</span> </b-col>
       </b-row>
     </div>
 
@@ -31,14 +31,14 @@
           </b-input-group-prepend>
           <b-form-input
             aria-label="Text input with checkbox"
-            placeholder="Search Something"
+            :placeholder=" $t('network.Search_Something')"
           ></b-form-input>
         </b-input-group>
 
 
       </b-col>
 
-      <b-col cols="3">  <b-button variant="primary" block  class="mem-btn"> Send Request </b-button>   </b-col>
+      <b-col cols="3">  <b-button variant="primary" block  class="mem-btn"> {{ $t('network.Send_Request') }} </b-button>   </b-col>
 
     </b-row>
 
@@ -108,7 +108,7 @@
 
                     <h6 class="follower">
                      
-                      5K Follower 
+                      {{ $t('network.K_Follower ') }}
                       
                     </h6>
 
@@ -133,7 +133,7 @@
                       size="sm"
                       class="b-background  flexx pobtn"
                     >
-                      <b-icon icon="chat" class="mr-1"> </b-icon> Message
+                      <b-icon icon="chat" class="mr-1"> </b-icon>{{ $t('network.Message') }}
                     </b-button>
 
                       </b-col >
@@ -144,7 +144,7 @@
                       class="b-background flexx  pobtn"
                       variant="primary"
                     >
-                      <b-icon icon="plus-circle" class="mr-1"> </b-icon> community
+                      <b-icon icon="plus-circle" class="mr-1"> </b-icon>{{ $t('network.community') }} 
                     </b-button>  </b-col >  </b-row>      </div>
 
 
@@ -167,13 +167,13 @@
           >
             <template #button-content>
               <b-icon-three-dots-vertical></b-icon-three-dots-vertical
-              ><span class="sr-only">Settings</span>
+              ><span class="sr-only">{{ $t('network.Settings') }}</span>
             </template>
             <b-dropdown-item href="#">
-              Approve
+              {{ $t('network.Approve') }}
             </b-dropdown-item>
             <b-dropdown-item href="#">
-              Reject
+              {{ $t('network.Reject') }}
             </b-dropdown-item>
           </b-dropdown>
         </span>      </b-col>
@@ -249,7 +249,7 @@
 
                     <h6 class="follower">
                      
-                      5K Follower 
+                      5{{ $t('network.K_Follower') }} 
                       
                     </h6>
 
@@ -274,7 +274,7 @@
                       size="sm"
                       class="b-background  flexx pobtn"
                     >
-                      <b-icon icon="chat" class="mr-1"> </b-icon> Message
+                      <b-icon icon="chat" class="mr-1"> </b-icon> {{ $t('network.Message') }}
                     </b-button>
 
                       </b-col >
@@ -285,7 +285,7 @@
                       class="b-background flexx  pobtn"
                       variant="primary"
                     >
-                      <b-icon icon="plus-circle" class="mr-1"> </b-icon> community
+                      <b-icon icon="plus-circle" class="mr-1"> </b-icon> {{ $t('network.community') }}
                     </b-button>  </b-col >  </b-row>      </div>
 
 
@@ -308,13 +308,13 @@
           >
             <template #button-content>
               <b-icon-three-dots-vertical></b-icon-three-dots-vertical
-              ><span class="sr-only">Settings</span>
+              ><span class="sr-only">{{ $t('network.Settings') }}</span>
             </template>
             <b-dropdown-item href="#">
-              Approve
+              {{ $t('network.Approve') }}
             </b-dropdown-item>
             <b-dropdown-item href="#">
-              Reject
+              {{ $t('network.Reject') }}
             </b-dropdown-item>
           </b-dropdown>
         </span>      </b-col>

@@ -3,23 +3,10 @@
 
     <div class="container-fluid " style="padding:0px">
      
-
-
-
-
-
-    
-   <div class="splide"   v-if="!business_info.cover.length==0"  >
+   <div class="splide"   v-if="business_info.cover.length"  >
 
     <splide :options="options" class="banner r-image"   >  
      
- 
-  
-  
-  
-  
-           
-    
   
    <splide-slide   v-for="cover in business_info.cover" :key="  cover.id" >
          
@@ -117,12 +104,12 @@
               </splide>
 
    </div>
-
+ <router-link to="#media">
 <b-button class=" float-right see-all">
       See All
-    </b-button>
+    </b-button>    
 
-   
+ </router-link>
 
      
       <div  class="container-fluid logo-container">
@@ -331,7 +318,7 @@
 
  -->
 
-                  <b-dropdown-item>View As</b-dropdown-item> 
+            <b-dropdown-item  @click="viewAs"  >View As</b-dropdown-item> 
                 </b-dropdown>
 
                 
@@ -391,6 +378,30 @@ export default {
 
     
 methods: {
+
+
+
+ businessInfo() {
+      this.$store
+        .dispatch("businessOwner/businessInfo", this.url)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch(err => {
+          console.log({ err: err });
+        });
+    },
+
+
+    viewAs(){
+
+  
+
+
+  this.$router.push({ name: "Business",params: { id:this.url}  });
+    
+
+},
 
 
 setlogo(e){
@@ -471,7 +482,7 @@ selectCover(){
           .then((response) => {
             console.log(response);
 
-           
+           this.businessInfo();
 
             this.flashMessage.show({
               status: "success",
@@ -492,22 +503,8 @@ selectCover(){
 
             
 
-            if (err.response.status == 422) {
-              console.log({ err: err });
-              
 
-              this.flashMessage.show({
-                status: "error",
-
-                message: err.response.data.message,
-                blockClass: "custom-block-class",
-              });
-
-
-               loader.hide()
-      
-
-            } else {
+           
               this.flashMessage.show({
                 status: "error",
                 
@@ -518,7 +515,7 @@ selectCover(){
 
                loader.hide()
      
-            }
+            
 
           });
 
@@ -558,7 +555,7 @@ selectCover(){
           .then((response) => {
             console.log(response);
 
-           
+             this.businessInfo();
 
             this.flashMessage.show({
               status: "success",

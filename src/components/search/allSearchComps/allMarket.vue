@@ -57,7 +57,7 @@
           <b-col cols="12" md="6">
             <b-form-group
               id="input-group-1"
-              label="$t('search.Product_Name')"
+              :label="$t('search.Product_Name')"
               label-for="input-1"
               label-size="sm"
             >
@@ -71,7 +71,7 @@
 
             <b-form-group
               id="input-group-1"
-              label="$t('search.ProductDescription')"
+              :label="$t('search_Description')"
               label-for="input-1"
               label-size="sm"
             >

@@ -394,19 +394,19 @@ export default {
     width: 200px;
   }
 
-  .marge {
-    margin-right: 380px;
-  }
-  .marge1 {
-    margin-right: 300px;
-  }
-  .size {
-    height: 5px;
-    margin-top: 5px;
-    margin-left: -3px;
-    margin-right: -3px;
-    width: 180px;
-  }
+.marge {
+  margin-right: 380px;
+}
+.marge1 {
+  margin-right: 300px;
+}
+.size {
+  height: 5px;
+  margin-top: 5px;
+  margin-left: -3px;
+  margin-right: -3px;
+  width: 190px !important;
+}
   .margtotal {
     margin-left: 50px;
   }
@@ -465,31 +465,31 @@ export default {
     font-weight: bold !important;
   }
 
-  .margtext .text-success {
-    font-size: 10px !important;
-  }
-  .margtext h3 {
-    margin-left: -16px;
-    margin-right: -20px;
-  }
-  .margtext .text-success {
-    font-size: 9px !important;
-  }
-  .avatar {
-    width: 8px;
-    height: 8px;
-  }
-  .marge1 {
-    /* margin-right: 300px; */
-    font-size: 10px !important;
-    margin-left: -15px;
-  }
-  .m {
-    /* margin-left: 10px; */
-  }
-  .ligne {
-    width: 100%;
-  }
+.margtext .text-success{
+  font-size: 10px !important;
+ 
+}
+.margtext h3{
+  margin-left: -16px;
+  margin-right: -20px;
+}
+.margtext .text-success{
+  font-size: 9px !important;
+  
+}
+.avatar{
+width: 8px;
+height: 8px;
+}
+.marge1 {
+  /* margin-right: 300px; */
+  font-size: 10px !important;
+  margin-left: -15px;
+} 
+
+.ligne{
+  width: 100%;
+}
   .progress {
     width: 200px;
   }

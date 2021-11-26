@@ -21,7 +21,7 @@ import profilefollower from './network.json'
 export const defaultLocale = 'fr'
 
 export const fr = {
- 
+
   auth: auth,
   businessf:businessf,
   search: search,
@@ -36,7 +36,7 @@ export const fr = {
     verification: verification,
    
     profilefollower: profilefollower,
-    businessf: businessf,
+
 
     network: network,
    

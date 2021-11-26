@@ -804,7 +804,7 @@
                       class="input-background"
                       style="width: 100%"
                       placeholder="Type the name of person or Business..."
-                      @keydown="getBizs(searchQuery)"
+                      @keydown.enter="getAll(searchQuery)"
                     ></b-form-input>
 
                     <br />
@@ -812,21 +812,22 @@
                 </b-row>
                 <b-row>
                   <b-col>
-                    <div>
+                    <div class="new-msg-filter-list">
                       <div v-if="loader" class="text-center mt-6 pt-6">
                         <b-spinner
                           variant="primary"
                           label="Spinning"
                         ></b-spinner>
                       </div>
-                      <table v-else class="table new-msg-filter-list">
+                      <table v-else class="table">
                         <b-row style="overflow-x: hidden !important">
                           <b-col>
                             <b-form-checkbox
                               id="all"
-                              v-model="status"
+                              v-model="allSelectedMulty"
                               name="all"
                               value="accepted"
+                              @change="selectedAllMulty"
                             >
                               All
                             </b-form-checkbox>
@@ -834,21 +835,20 @@
                           <b-col>
                             <b-form-checkbox
                               id="people"
-                              v-model="status"
+                              v-model="peopleMulty"
                               name="people"
-                              value="accepted"
-                              unchecked-value="not_accepted"
+                              @change="peopleAllMulty"
                             >
                               People
                             </b-form-checkbox>
                           </b-col>
+
                           <b-col>
                             <b-form-checkbox
                               id="business"
-                              v-model="status"
+                              v-model="businessMulty"
                               name="business"
-                              value="accepted"
-                              unchecked-value="not_accepted"
+                              @change="businessAllMulty"
                             >
                               Business
                             </b-form-checkbox>
@@ -856,14 +856,15 @@
                           <b-col>
                             <b-form-checkbox
                               id="networks"
-                              v-model="status"
                               name="networks"
-                              value="accepted"
-                              unchecked-value="not_accepted"
+                              v-model="networkMulty"
+                              @change="networkAllMulty"
                             >
                               Network
                             </b-form-checkbox>
                           </b-col>
+                          <!--
+
                           <b-col>
                             <b-form-checkbox
                               id="editors"
@@ -885,32 +886,103 @@
                             >
                               Members
                             </b-form-checkbox>
-                          </b-col>
+                          </b-col> -->
                         </b-row>
-                        <!-- <tbody
-                          class=""
-                          v-for="(elmt, index) in 10"
-                          :key="index"
-                        > -->
-                        <tbody>
+                        {{
+                          selectedMulty
+                        }}
+                        <!-- <b-row class="new-msg-filter-list"> -->
+                        <tbody v-if="allSelection">
+                          <!-- <tr
+                              v-for="(biz, index) in bizs"
+                              :key="index"
+                              class="p-2 message"
+                              @click="selectedChat({ chat: biz, id: biz.id })"
+                            > -->
+                          <h2>All</h2>
+                          <tr
+                            v-for="(elmt, index) in all"
+                            :key="index"
+                            class="p-2 message"
+                          >
+                            <td>
+                              <b-form-group>
+                                <b-form-checkbox-group
+                                  id="checkbox-group-2"
+                                  v-model="selectedMulty"
+                                  name="flavour-2"
+                                >
+                                  <b-form-checkbox
+                                    :id="index + '_id'"
+                                    :name="elmt.name"
+                                    :value="elmt.id"
+                                  >
+                                    <b-avatar
+                                      class="d-inline-block"
+                                      variant="primary"
+                                      size="30"
+                                    ></b-avatar>
+                                    <span class="bold"> {{ elmt.name }} </span>
+                                  </b-form-checkbox>
+                                </b-form-checkbox-group>
+                              </b-form-group>
+                            </td>
+                          </tr>
+                        </tbody>
+                        <tbody v-else>
                           <tr
                             v-for="(biz, index) in bizs"
                             :key="index"
                             class="p-2 message"
-                            @click="selectedChat({ chat: biz, id: biz.id })"
                           >
                             <td>
-                              <b-avatar
-                                class="d-inline-block"
-                                variant="primary"
-                                size="30"
-                              ></b-avatar>
-                              <span class="bold"> {{ biz.name }} </span>
+                              <b-form-group>
+                                <b-form-checkbox-group
+                                  id="checkbox-group-2"
+                                  v-model="selectedMulty"
+                                  name="flavour-2"
+                                >
+                                  <b-form-checkbox
+                                    :id="index + '_id'"
+                                    :name="biz.name"
+                                    :value="biz.id"
+                                  >
+                                    <b-avatar
+                                      class="d-inline-block"
+                                      variant="primary"
+                                      size="30"
+                                    ></b-avatar>
+                                    <span class="bold"> {{ biz.name }} </span>
+                                  </b-form-checkbox>
+                                </b-form-checkbox-group>
+                              </b-form-group>
                             </td>
                           </tr>
                         </tbody>
                       </table>
                     </div>
+                    <b-button
+                      class="float-left"
+                      variant="primary"
+                      @click="$bvModal.show('group-name')"
+                      :disabled="selectedMulty.length ? false : true"
+                      ><b-icon
+                        icon="arrow-left"
+                        class="text-bold"
+                        variant="white"
+                      ></b-icon
+                    ></b-button>
+                    <!-- <b-button
+                      class="float-left"
+                      variant="primary"
+                      @click="selectedMultyChat()"
+                      :disabled="selectedMulty.length ? false : true"
+                      ><b-icon
+                        icon="arrow-left"
+                        class="text-bold"
+                        variant="white"
+                      ></b-icon
+                    ></b-button> -->
                   </b-col>
                 </b-row>
               </div>
@@ -918,7 +990,20 @@
           </b-col>
         </b-row>
       </div>
+
+      <!-- Modals -->
+      <!-- create group -->
+      <b-modal id="group-name" hide-footer>
+    
+    <div class="d-block text-center">
+      <h3>The Group Name:</h3>
+      <b-form-input v-model='groupName' id="input-large" size="lg" autofocus placeholder="Enter your name"></b-form-input>
+    </div>
+    
+    <b-button class="mt-3" block @click="selectedMultyChat()">Create</b-button>
+  </b-modal>
     </b-container>
+
   </div>
 </template>
 
@@ -934,6 +1019,18 @@ export default {
   },
   data() {
     return {
+      groupName:'',
+      allSelection: true,
+      allSelectedMulty: false,
+      peopleMulty: false,
+      businessMulty: false,
+      networkMulty: false,
+
+      selectedMulty: [],
+      peopleSelectedAllMulty: [],
+      businessSelectedAllMulty: [],
+      networkSelectedAllMulty: [],
+
       filePreview: false,
       file: "",
       room: "",
@@ -1037,11 +1134,23 @@ export default {
       checked: false,
       text: "",
       selected: [],
-
       messages: null,
     };
   },
   computed: {
+    all() {
+      return this.$store.getters["businessChat/getAll"];
+    },
+    allNetworks() {
+      return this.$store.getters["businessChat/getAllNetworks"];
+    },
+    allUsers() {
+      return this.$store.getters["businessChat/getAllUsers"];
+    },
+    allBusiness() {
+      return this.$store.getters["businessChat/getAllBusinesses"];
+    },
+
     ctaSelected() {
       return this.$store.getters["businessChat/getSelectedChat"];
     },
@@ -1054,6 +1163,7 @@ export default {
     currentBiz() {
       return this.$store.getters["businessChat/getCurrentBiz"][0];
     },
+
     bizs() {
       return this.$store.getters["businessChat/getBizs"];
     },
@@ -1095,6 +1205,7 @@ export default {
     if (this.chatList.length < 0) {
       this.getChatList({ type: "business" });
     }
+    this.getAll();
     this.getBizs();
   },
   created() {
@@ -1133,6 +1244,61 @@ export default {
     },
   },
   methods: {
+    selectedAllMulty() {
+      this.allSelection = true;
+      this.selectedMulty = [];
+      if (this.allSelectedMulty) {
+        this.all.map((biz) => {
+          this.selectedMulty.push(biz.id);
+        });
+      } else {
+        this.selectedMulty = [];
+      }
+    },
+    peopleAllMulty() {
+      // this.bizs = this.allUsers;
+      this.allSelection = false;
+      this.$store.commit("businessChat/setBizs", this.allUsers);
+
+      this.selectedMulty = [];
+      if (this.peopleMulty) {
+        this.bizs.map((biz) => {
+          this.selectedMulty.push(biz.id);
+        });
+      } else {
+        this.selectedMulty = [];
+      }
+    },
+    businessAllMulty() {
+      // this.bizs = this.allBusiness;
+      this.$store.commit("businessChat/setBizs", this.allBusiness);
+
+      this.allSelection = false;
+
+      this.selectedMulty = [];
+      if (this.businessMulty) {
+        this.bizs.map((biz) => {
+          this.selectedMulty.push(biz.id);
+        });
+      } else {
+        this.selectedMulty = [];
+      }
+    },
+    networkAllMulty() {
+      // this.bizs = this.allNetworks;
+      this.$store.commit("businessChat/setBizs", this.allNetworks);
+
+      this.allSelection = false;
+
+      this.selectedMulty = [];
+      if (this.networkMulty) {
+        this.bizs.map((biz) => {
+          this.selectedMulty.push(biz.id);
+        });
+      } else {
+        this.selectedMulty = [];
+      }
+    },
     convert(data) {
       return data;
       // return convertSize(data);
@@ -1171,6 +1337,13 @@ export default {
         this.saveMessage(elmts);
       });
     },
+    createGroup(receiver_business_id) {
+      // let sender_business_id = this.currentUser.user.id;
+      let sender_business_id = this.currentBizId;
+      this.room = [sender_business_id, ...this.selectedMulty];
+      console.log("ROOMS: ", this.room);
+      this.socket.emit("create-group", sender_business_id);
+    },
     createRoom(receiver_business_id) {
       // let sender_business_id = this.currentUser.user.id;
       let sender_business_id = this.currentBizId;
@@ -1186,7 +1359,16 @@ export default {
         return moment(data).fromNow();
       }
     },
-
+    async getAll(keyword) {
+      this.allSelection = true;
+      await this.$store.dispatch("businessChat/GET_ALL", keyword);
+    },
+    getNetworks(keyword) {
+      this.$store.dispatch("businessChat/GET_NETWORKS", keyword);
+    },
+    getUsers(keyword) {
+      this.$store.dispatch("businessChat/GET_USERS", keyword);
+    },
     getBizs(keyword) {
       this.$store
         .dispatch("businessChat/GET_BIZS", keyword)
@@ -1236,6 +1418,27 @@ export default {
           console.log("Chat saved");
         })
         .catch(() => console.log("error"));
+    },
+    selectedMultyChat() {
+      this.$bvModal.hide('group-name')
+      console.log("type tabs:", this.tabIndex);
+      // console.log("selected Chat:", data);
+      this.createGroup();
+      let dumId = 7
+      // this.chatId = data.id;
+      this.$store.commit("businessChat/setSelectedChatId", dumId);
+      let receiver = { receiverID: dumId, keyword: null };
+       this.histBizToUser(receiver);
+
+      this.newMsg = false;
+      // this.chatSelected = { active: true, clickedId: data.id, ...data.chat };
+      this.chatSelected = {
+        active: true,
+        clickedId: dumId,
+        name: this.groupName,
+      };
+
+      console.log("[DEBUG] Chat selected:", this.chatSelected);
     },
     selectedChat(data) {
       console.log("type tabs:", this.tabIndex);
@@ -1358,8 +1561,12 @@ export default {
 
 <style scoped>
 .new-msg-filter-list {
-  border: 1px solid green;
-  max-height: 10% !important;
+  padding: 15px !important;
+  /* border: 1px solid black; */
+  max-height: 600px !important;
+  overflow-y: auto;
+  overflow-x: hidden;
+  /* background-color: lightblue; */
 }
 .spinner {
   font-size: 30px;
@@ -1393,11 +1600,10 @@ export default {
   position: relative;
   min-height: 70px;
   border-right: 2px solid #ccc;
-
   width: 100%;
-
   padding: 10px;
 }
+
 .chats {
   border: 2px solid green;
   height: 740px;

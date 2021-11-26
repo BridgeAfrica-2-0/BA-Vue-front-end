@@ -89,8 +89,8 @@
 
       <div>
         <b-row>
-          <b-col sm="12" lg="8" class="" > <CommunityActivity  v-if="selectedb == 'owner'" />      <CommunityBactivity    v-if="selectedb != 'owner'" />    </b-col>
-          <b-col sm="12" lg="4" class="" > <Tutorial /> </b-col>
+          <b-col sm="12" lg="7" class="" > <CommunityActivity  v-if="selectedb == 'owner'" />      <CommunityBactivity    v-if="selectedb != 'owner'" />    </b-col>
+          <b-col sm="12" lg="5" class="" > <Tutorial /> </b-col>
         </b-row>
       </div>
       <br />

@@ -106,50 +106,55 @@
       </div>
     </b-container>
     <b-modal v-model="RequestPayment" title="Enter your MTN Mobile Money number" size="md" hide-footer>
-      <!-- <div class="card-header px-0 text-black border-bottom-0  bg-white h-50">
-        Enter your MTN Mobile Money number
-      </div> -->
-      <div class="px-0">
-        <div class="row">
-          <div class="col-10 col-sm-9 col-md-8">
-            <b-form-input
-              placeholder="237 6XX XXX XXX"
-              id="number"
-              v-model="number"
-              type="tel"
-            ></b-form-input>
+      <div v-if="congratulation" class="px-0">
+        <b-overlay :show="show" rounded="sm">
+          <div class="row">
+            <div class="col-10 col-sm-9 col-md-8">
+              <b-form-input
+                placeholder="237 6XX XXX XXX"
+                id="number"
+                v-model="number"
+                type="tel"
+              ></b-form-input>
+            </div>
+            <div class="col-2 col-sm-3 col-md-4 px-0 btn-custom-box">
+              <b-button
+                variant="primary"
+                class="font-weight-light btn-custom text-14 shadow-sm"
+                >CHANGE</b-button
+              >
+            </div>
           </div>
-          <div class="col-2 col-sm-3 col-md-4 px-0 btn-custom-box">
-            <b-button
-              variant="primary"
-              class="font-weight-light btn-custom text-14 shadow-sm"
-              >CHANGE</b-button
-            >
+          <div class="row my-3">
+            <div class="col btn-custom-box">
+              <b-button
+                variant="primary"
+                class="font-weight-light shadow-sm btn-custom text-14"
+                @click="confirmPayment"
+                >PAY {{formatMoney(2000)}}</b-button
+              >
+            </div>
           </div>
-        </div>
-        <div class="row my-3">
-          <div class="col btn-custom-box">
-            <b-button
-              variant="primary"
-              class="font-weight-light shadow-sm btn-custom text-14"
-              @click="confirmPayment"
-              >PAY {{formatMoney(2000)}}</b-button
-            >
+          <div class="row my-3">
+            <div class="col body-font-size">
+              <p>
+                Please make sure your account balance is greater than 13 000XAF,
+                Otherwise your payment will not be completed.
+              </p>
+              <p>
+                Reference NO: XXXXXXXXXXXX
+              </p>
+
+
+            </div>
           </div>
-        </div>
-        <div class="row my-3">
-          <div class="col body-font-size">
-            <p>
-              Please make sure your account balance is greater than 13 000XAF,
-              Otherwise your payment will not be completed.
-            </p>
-            <p>
-              Reference NO: XXXXXXXXXXXX
-            </p>
-          </div>
-        </div>
+        </b-overlay>
+      </div>
+      <div v-else class="text-center">
+        <h3><b>🥳❗Transaction Completed❗🥳</b></h3>
       </div>
     </b-modal>
+
   </b-container>
 </template>
 
@@ -167,6 +172,9 @@ export default {
         minimumFractionDigits: 2,
       }),
       number: '',
+
+      show: false,
+      congratulation: false
     };
   },
 
@@ -178,6 +186,7 @@ export default {
     showRewiew() {
       this.$emit('showreview');
     },
+
     requestPayment() {
       console.log("requestPayment");
       console.log("this.operator", this.operator);
@@ -185,6 +194,31 @@ export default {
       if (this.operator !== '') 
         this.$emit('requestpayment', this.operator);
     },
+    confirmPayment() {
+      this.show = true;
+      console.log("confirmPayment");
+      console.log("this.PaymentForm.type", "this.PaymentForm.type")
+      console.log("this.PaymentForm.price", "price")
+      let formData = new FormData();
+      formData.append("type", "this.PaymentForm.type")
+      formData.append("time", "this.PaymentForm.type")
+      this.$store
+      .dispatch("businessAccountType/confirmPayment", {
+        path: `community/people/${this.url}`,
+        data: formData
+        })
+      .then(({data}) => {
+        console.log('ohh yeah');
+        console.log(data);
+        this.show = false
+      })
+      .catch(err => {
+        this.show = false
+        this.congratulation = true
+        console.log({ err: err });
+      });
+    },
+
     formatMoney(money) {
       return this.formatObject.format(money);
     },

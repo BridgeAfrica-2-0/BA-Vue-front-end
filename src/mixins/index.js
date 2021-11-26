@@ -391,11 +391,21 @@ export const knowWhoIsConnected = {
 
 export const Redis = {
 
+  data: () => ({
+    strategy: null,
+  }),
+
   computed: {
     ...mapGetters({
       profile: 'auth/profilConnected',
       token: 'auth/getAuthToken'
     })
+  },
+
+  watch: {
+    '$store.state.auth.profilConnected': function () {
+      this.updateEventListener(this.$store.state.auth.profilConnected.user_type)
+    }
   },
 
   methods: {
@@ -406,7 +416,7 @@ export const Redis = {
       auth: "auth/profilConnected"
     }),
 
-    async getAut() {
+    async getAuth() {
       const response = await this.$repository.share.WhoIsConnect({ businessId: this.route.params.id });
       if (response.access) this.auth(response.data);
     },
@@ -418,7 +428,9 @@ export const Redis = {
     },
 
     listenBusinessEvent() {
+      initRedis(this.token)
       const $event = `business-channel${this.profile.id}`
+
       window.Redis.private($event)
         .listen(".BusinessNotificationEvent", payload => {
           console.log(payload)
@@ -427,7 +439,7 @@ export const Redis = {
     },
 
     listenProfileEvent() {
-
+      initRedis(this.token)
       const $event = `user.${this.profile.id}`;
 
       window.Redis.private($event)
@@ -436,27 +448,30 @@ export const Redis = {
         })
     },
 
+    updateEventListener(type) {
+      try {
+        this.strategy[type]()
+      } catch (error) {
+        console.error(new Error(error))
+      }
+    },
 
     init: async function () {
       if (this.profile) {
-        initRedis(this.token)
         await this.getAuth()
-        this.redis()
+        this.updateEventListener(this.profile.user_type)
       }
     }
   },
 
-  beforeCreate() {
-    // this.init()
-  },
-  
+
   created() {
-    // this.init()
-    // this.$store.watch(
-    //   state => state.auth.user.accessToken,
-    //   () => initRedis(this.token),
-    //   { deep: true }
-    // );
+    this.strategy = {
+      user: () => this.listenProfileEvent(),
+      business: () => this.listenBusinessEvent(),
+      network: () => null,
+    }
+    this.init()
   }
 }
 

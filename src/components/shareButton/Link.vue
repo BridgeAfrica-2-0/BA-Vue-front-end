@@ -4,7 +4,7 @@
     <span class="mr-auto">{{ contact.name }}</span>
     <Button
       @click.native="share"
-      :loading="loading"
+      :disabled="loading"
       :title="$t('search.Send')"
       style="width: 20%"
       styleClass="btn shadow  btn btn-bg flex btn p-2 btn-primary btn-sm btn-block btn-primary btn-sm btn-block"

@@ -306,12 +306,12 @@
                 </b-popover>
               </div>
               <!-- Notifications Ended -->
-              <div class="nav-item" id="profilepic">
-                <a
-                  class="nav-link text-dark"
-                  href=""
-                  @click.prevent="switchToProfile"
-                >
+              <div
+                class="nav-item"
+                id="profilepic"
+                @click.prevent="switchToProfile"
+              >
+                <a class="nav-link text-dark" href="">
                   <span
                     ><img
                       :src="user.profile_picture"
@@ -660,9 +660,9 @@ export default {
 
       const response = await this.$repository.share.switch(null, "reset");
       if (response.success) {
-        loader.hide();
         this.profile({ ...this.auth.user, user_type: "user" });
       }
+      loader.hide();
     },
 
     toggleinput() {

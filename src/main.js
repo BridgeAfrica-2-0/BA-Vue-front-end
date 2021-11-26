@@ -19,9 +19,12 @@ import ReadMore from 'vue-read-more';
 import VueSocialauth from 'vue-social-auth';
 import VueSocialSharing from 'vue-social-sharing';
 
+// don't comment that 2 line URGENT
 import plugin from './http';
-
 Vue.use(plugin);
+
+
+
 Vue.use(require('vue-moment'));
 
 IconifyIcon.addIcon('home', homeIconData);
@@ -147,13 +150,14 @@ Vue.use(VueGoogleMaps, {
     installComponents: true,
 });
 
-//  import VueLoading from 'vue-loading-overlay';
-//  import 'vue-loading-overlay/dist/vue-loading.css';
+import VueLoading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
+Vue.use(VueLoading);
 
 import VueYoutube from 'vue-youtube'
 
 Vue.use(VueYoutube)
-//  Vue.use(VueLoading);
+
 
 import VueAgile from 'vue-agile';
 

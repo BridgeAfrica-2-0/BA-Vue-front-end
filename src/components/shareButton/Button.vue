@@ -26,11 +26,11 @@
     >
       <template v-slot:owner>
         <div class="d-flex align-items-center py-3 px-2 mb-2 border">
-          <b-avatar class="mr-3"></b-avatar>
+          <b-avatar class="mr-3" :src="profile.profile_picture"></b-avatar>
           <p>
             <span class="mr-auto">{{ $t("search.Share_Post_As") }}</span
             ><br />
-            <span class="mr-auto">{{ profile.name }}</span>
+            <span class="mr-auto bold">{{ profile.name }}</span>
           </p>
         </div>
       </template>
@@ -82,11 +82,11 @@
     >
       <template v-slot:owner>
         <div class="d-flex align-items-center py-3 px-2 mb-2 border">
-          <b-avatar class="mr-3"></b-avatar>
+          <b-avatar class="mr-3" :src="profile.profile_picture"></b-avatar>
           <p>
             <span class="mr-auto">{{ $t("search.Share_Post_As") }}</span
             ><br />
-            <span class="mr-auto">{{ profile.name }}</span>
+            <span class="mr-auto bold">{{ profile.name }}</span>
           </p>
         </div>
       </template>
@@ -121,7 +121,7 @@
       <b-dropdown-item
         class="d-flex py-2 cursor-pointer"
         @click="shareToYourProfile"
-        v-if="isYourOwnPost"
+        v-if="!isYourOwnPost"
       >
         <span class="text-ored">
           <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
@@ -134,7 +134,7 @@
       <b-dropdown-item
         class="d-flex py-2 cursor-pointer"
         @click="open(`modal-10-${uuid}`)"
-        v-if="isYourOwnPost"
+        v-if="!isYourOwnPost"
       >
         <span class="text-ored">
           <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
@@ -366,6 +366,8 @@ export default {
   created() {
     this.uuid = this.post.post_id ? this.post.post_id : this.post.id;
     this.type = this.profile.user_type;
+
+    console.log(this.profile)
   },
 
   computed: {
@@ -445,6 +447,9 @@ export default {
 </script>
 
 <style scoped>
+.bold{
+  font-weight: bold;
+}
 .border {
   border-radius: 12px;
 }

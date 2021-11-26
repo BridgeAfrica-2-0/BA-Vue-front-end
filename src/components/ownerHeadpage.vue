@@ -350,7 +350,7 @@ export default {
               console.log(response);
               this.flashMessage.show({
                 status: 'success',
-                message: 'Logo Updated',
+                message: this.$t('profileowner.Logo_Updated'),
                 blockClass: 'custom-block-class',
               });
               loader.hide();
@@ -373,7 +373,7 @@ export default {
           } else {
             this.flashMessage.show({
               status: 'error',
-              message: 'Unable to set your Logo',
+              message: this.$t('profileowner.Unable_to_set_your_Logo'),
               blockClass: 'custom-block-class',
             });
             console.log({ err: err });
@@ -418,7 +418,7 @@ viewAs(){
               console.log(response);
               this.flashMessage.show({
                 status: 'success',
-                message: 'profile removed successfully',
+                message: this.$t('profileowner.profile_removed_successfully'),
                 blockClass: 'custom-block-class',
               });
               loader.hide();
@@ -432,7 +432,7 @@ viewAs(){
          
             this.flashMessage.show({
               status: 'error',
-              message: 'Unable to remove your cover',
+              message: this.$t('profileowner.Unable_to_remove_your_cover'),
               blockClass: 'custom-block-class',
             });
             console.log({ err: err });
@@ -471,7 +471,7 @@ viewAs(){
               console.log(response);
               this.flashMessage.show({
                 status: 'success',
-                message: 'Profile removed successfully',
+                message: this.$t('profileowner.Profile_removed_successfully'),
                 blockClass: 'custom-block-class',
               });
               loader.hide();
@@ -485,7 +485,7 @@ viewAs(){
          
             this.flashMessage.show({
               status: 'error',
-              message: 'Unable to remove your cover',
+              message: this.$t('profileowner.Unable_to_remove_your_cover'),
               blockClass: 'custom-block-class',
             });
             console.log({ err: err });
@@ -527,7 +527,7 @@ viewAs(){
                 console.log(response);
                 this.flashMessage.show({
                   status: 'success',
-                  message: 'Cover Updated',
+                  message: this.$t('profileowner.Cover_Updated'),
                   blockClass: 'custom-block-class',
                 });
                 loader.hide();
@@ -552,7 +552,7 @@ viewAs(){
             } else {
               this.flashMessage.show({
                 status: 'error',
-                message: 'Unable to upload your image',
+                message: this.$t('profileowner.Unable_to_upload_your_image'),
                 blockClass: 'custom-block-class',
               });
               console.log({ err: err });
@@ -585,7 +585,7 @@ viewAs(){
               console.log(response);
 
               this.flashMessage.success({
-                message: 'Operation successful',
+                message: this.$t('profileowner.Operation_successful'),
                 blockClass: 'custom-block-class',
               });
               loader.hide();
@@ -613,7 +613,7 @@ viewAs(){
           } else {
             this.flashMessage.show({
               status: 'error',
-              message: 'Can not delete your cover',
+              message: this.$t('profileowner.Can_not_delete_your_cover'),
               blockClass: 'custom-block-class',
             });
           }

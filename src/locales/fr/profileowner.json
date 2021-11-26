@@ -239,5 +239,14 @@
     "Upload_Cover_Picture": "Téléchargez une photo de couverture",
     "Upload_a_New_Picture": "Téléchargez une nouvelle photo",
     "Edit_Your_New_Picture": "Modifiez votre nouvelle phote",
-    "Upload_Cover_Photo": "Téléchargez une photo de couverture"
+    "Upload_Cover_Photo": "Téléchargez une photo de couverture",
+    "Logo_Updated": "Logo mis à jour",
+    "Unable_to_set_your_Logo": "Impossible de définir votre logo",
+    "profile_removed_successfully": "Profil supprimé avec succès",
+    "Unable_to_upload_your_image": "Impossible de télécharger votre image",
+    "Profile_removed_successfully": "Profil supprimé avec succès",
+    "Unable_to_remove_your_cover": "Impossible de retirer votre couverture",
+    "Cover_Updated": "Couverture mise à jour",
+    "Operation_successful": "Opération réussie",
+    "Can_not_delete_your_cover": "Impossible de supprimer votre couverture"
 }

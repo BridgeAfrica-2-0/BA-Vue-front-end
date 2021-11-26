@@ -237,5 +237,14 @@
     "Upload_Cover_Picture": "Upload Cover Picture",
     "Upload_a_New_Picture": "Upload a New Picture",
     "Edit_Your_New_Picture": "Edit Your New Picture",
-    "Upload_Cover_Photo": "Upload Cover Photo"
+    "Upload_Cover_Photo": "Upload Cover Photo",
+    "Logo_Updated": "Logo Updated",
+    "Unable_to_set_your_Logo": "Unable to set your Logo",
+    "profile_removed_successfully": "profile removed successfully",
+    "Unable_to_upload_your_image": "Unable to upload your image",
+    "Profile_removed_successfully": "Profile removed successfully",
+    "Unable_to_remove_your_cover": "Unable to remove your cover",
+    "Cover_Updated": "Cover Updated",
+    "Operation_successful": "Operation Successful",
+    "Can_not_delete_your_cover": "Can not delete your cover"
 }

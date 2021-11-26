@@ -2,10 +2,11 @@
   <div style="overflow-x: hidden; color: black">
     <Nav :credentials.sync="searchParams" id="top">
       <template v-slot:button>
-        <Button @click.native="strategy['all']" v-if="selectedId == 0" />
-        <Button @click.native="strategy['network']" v-if="selectedId == 3" />
-        <Button @click.native="strategy['market']" v-if="selectedId == 4" />
-        <Button @click.native="strategy['1']" v-if="selectedId == 1" />
+        <Button @click.native="strategY['all']" v-if="selectedId == 0" />
+        <Button @click.native="strategY['network']" v-if="selectedId == 3" />
+        <Button @click.native="strategY['market']" v-if="selectedId == 4" />
+        <Button @click.native="strategY['business']" v-if="selectedId == 1" />
+
 
         <Button @click.native="strategies" v-if="[2, 5].includes(selectedId)" />
       </template>
@@ -322,7 +323,9 @@
 
               <h6>
                 <fas-icon class="icons" :icon="['fas', 'hands-helping']" size="lg" />
+
                 {{$t("search.Businesses")}}
+
               </h6>
 
               <MiniBusiness />
@@ -391,9 +394,13 @@
             <div id="businesses" v-if="selectedId == '1'">
               <h6>
                 <fas-icon class="icons" :icon="['fas', 'hands-helping']" size="lg" />
+
                 {{$t("search.Businesses")}}
               </h6>
+  <b-spinner v-if="prodLoaderr" variant="primary" :label="$t('search.Spinning')"></b-spinner>
+
             </div>
+            
 
             <!-- filter out only people -->
 
@@ -503,7 +510,7 @@ import BusinessComponent from '@/components/search/business';
 
 import { loader } from '@/mixins';
 
-import { mapActions } from 'vuex';
+import { mapGetters,  mapActions } from 'vuex';
 
 export default {
   components: {
@@ -534,17 +541,26 @@ export default {
   mixins: [loader],
 
   computed: {
+
+    
+ ...mapGetters({
+     
+      prodLoaderr: "business/getloadingState"
+
+    }),
+
     products() {
       return this.$store.state.market.products;
     },
   },
 
   created() {
-    this.strategy = {
+    this.getLocation();
+    this.strategY = {
       users: () => this.onFindUser(),
       all: () => this.getKeyword(),
       market: () => this.searchProducts(),
-      network: () => this.searchNetworks(),
+     network: () => this.searchNetworks(),
       business: () => this.onFindBusiness(),
     };
     this.getKeyword();
@@ -558,6 +574,7 @@ export default {
         cat_id: '',
         placeholder: 'Find In All',
       },
+      strategY: null,
 
       alert: false,
       showDismissibleAlert: false,
@@ -1530,14 +1547,13 @@ export default {
         });
     },
 
-    onFindBusiness() {
+  async  onFindBusiness() {
       this.$store.commit('business/setLoading', true);
 
-      console.log('loolodidhd ddhdjddh');
-      console.log(this.searchParams.keyword.trim());
-      if (this.searchParams.keyword.trim())
-        this.findBusiness({ keyword: this.searchParams.keyword, location: this.searchParams.location });
-      this.$store.commit('business/setLoading', false);
+       if (this.searchParams.keyword.trim())
+        console.log("init search");
+      await  this.findBusiness({ keyword: this.searchParams.keyword, location: this.searchParams.location });
+       this.$store.commit('business/setLoading', false);
     },
 
     async getProducts() {
@@ -1601,7 +1617,29 @@ export default {
       setCallback: 'search/SET_CURRENT_PAGINATE_CALLBACK',
       reset: 'search/RESET_RESULT',
       findBusiness: 'business/FIND_BUSINESS',
+       getGeo: 'business/getGeo',
     }),
+
+    getLocation(){
+
+       
+        const success = (position) => {
+            const latitude  = position.coords.latitude;
+            const longitude = position.coords.longitude;
+
+        this.getGeo({lat:latitude, lng:longitude});
+        };
+
+        const error = (err) => {
+            console.log(error)
+        };
+
+        // This will open permission popup
+        navigator.geolocation.getCurrentPosition(success, error);
+  
+
+
+    },
 
     initialize() {
       this.strategy = {

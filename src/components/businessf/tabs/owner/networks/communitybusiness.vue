@@ -14,10 +14,10 @@
         <b-col md="5" cols="7" lg="9" xl="5" sm="5">
           <p class="textt text">
             <strong class="title"> {{ member.name }} </strong> <br />
-            {{ member.category[0].name }}
+              <span v-if="member.category.length">  {{ member.category[0].name }}</span>
             <br />
             {{ member.communityNum }}
-            Community <br />
+            {{ $t('network.Community') }} <br />
 
             <!-- <span class="location">
               <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{ member.location_description }}
@@ -44,9 +44,10 @@
                   size="sm"
                   class="b-background shadow"
                   variant="primary"
+                  @click="$emit('handleFollow', member)"
                 >
-                  <i class="fas fa-user-plus fa-lg btn-icon"></i>
-                  <span class="btn-com">Community</span>
+                  <i :class="member.is_follow ? 'fas fa-user-minus fa-lg btn-icon':'fas fa-user-plus fa-lg btn-icon'"></i>
+                  <span class="btn-com">{{ $t('network.Community') }}</span>
                 </b-button>
               </b-col>
 
@@ -65,7 +66,7 @@
                   variant="primary"
                 >
                   <i class="fas fa-envelope fa-lg btn-icon"></i>
-                  <span class="btn-text">Message</span>
+                  <span class="btn-text">{{ $t('network.Message') }}</span>
                 </b-button>
               </b-col>
 
@@ -84,7 +85,7 @@
                   variant="primary"
                 >
                   <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
-                  <span class="btn-text">Direction</span>
+                  <span class="btn-text">{{ $t('network.Direction') }}</span>
                 </b-button>
               </b-col>
             </b-row>

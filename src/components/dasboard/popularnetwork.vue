@@ -40,15 +40,21 @@
 					<div class="s-button">
 						<b-row>
 							<b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2">
-								<b-button
-									block
-									size="sm"
-									class="b-background shadow"
-									variant="primary"
-								>
-									<i class="fas fa-user-plus  fa-lg btn-icon "></i>
-									<span class="btn-com" v-b-modal.modal-sm>{{ $t('dashboard.Community') }}</span>
-								</b-button>
+								
+								 <b-button
+                  block
+                  size="sm"
+                  class="b-background shadow"
+                  :class="item.is_follow !== 0 && 'u-btn'"
+                  variant="primary"
+                  :id="'followbtn'+item.id"
+                  @click="handleFollow(item)"
+                >
+                  <i class="fas fa-user-plus  fa-lg btn-icon "></i>
+                  <span class="btn-com">{{ $t('profileowner.Community') }}</span>
+                </b-button>
+
+
 							</b-col>
 
 							<b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2">
@@ -134,6 +140,31 @@
 						console.log({ err: err });
 					});
 			},
+
+
+
+			
+    async handleFollow(user) {
+       document.getElementById("followbtn"+user.id).disabled = true;
+      const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
+      const nextFollowState = user.is_follow === 0 ? 1 : 0;
+      const data = {
+        id: user.id,
+        type: 'network',
+      };
+
+      await axios
+        .post(uri, data)
+        .then(response => {
+          user.is_follow = nextFollowState;
+           document.getElementById("followbtn"+user.id).disabled =  false;
+        })
+        .catch(err =>{   console.log(err)
+         document.getElementById("followbtn"+user.id).disabled =  false;
+        });
+    },
+
+	
 		},
 	};
 </script>

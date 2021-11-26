@@ -2,29 +2,28 @@
   <div class="p-2">
     <b-row>
       <b-col lg="6" sm="12" class="p-2" v-for="item in businesses" :key="item.id">
-        <div class="people-style shadow">
+         
+          <div class="people-style shadow h-100">
           <b-row>
-            <b-col md="3" xl="3" lg="3" cols="5" sm="3">
-              <div class="center-img">
+
+            <b-col md="8" xl="8" lg="12" cols="12" sm="8">
+              <div class="d-inline-flex">   
+              <div class="center-img ">
                 <splide :options="options" class="r-image">
                   <splide-slide cl>
-                    <img :src="item.picture" class="r-image" />   
+                    <img :src="item.picture" class="r-image" />
                   </splide-slide>
                 </splide>
-              </div>
-            </b-col>
-            <b-col md="5" cols="7" lg="7" xl="5" sm="5">
+              </div>   <div class="flx100"> 
               <p class="textt">
                 <strong class="title"> {{ item.name }} </strong> <br />
-                {{ item.category }}
+               
+            <span v-for="cat in item.category" :key="cat.name">   {{cat.name}}  </span>
                 <br />
                 {{ count(item.followers) }}
-                Community <br />
+                {{ $t('dashboard.Community') }} <br />
 
-                <span class="location">
-                  <b-icon-geo-alt class="ico"></b-icon-geo-alt
-                  >{{ item.country }}
-                </span>
+                <span class="location"> <b-icon-geo-alt class="ico"></b-icon-geo-alt>{{ item.country }} </span>
                 <br />
        <read-more
               more-str="read more"
@@ -32,11 +31,13 @@
               :text="item.about_business"
               link="#"
               less-str="read less"
-              :max-chars="15"
+              :max-chars="100"
             >
             </read-more>
               </p>
-            </b-col>
+               </div>
+               </div>
+            </b-col>     
 
             <b-col lg="12" xl="4" md="4" cols="12" sm="4">
               <div class="s-button">
@@ -49,15 +50,34 @@
                     cols="4"
                     class="mt-2 text-center"
                   >
-                    <b-button
-                      block
-                      size="sm"
-                      class="b-background shadow "
-                      variant="primary"
-                    >
-                      <i class="fas fa-user-plus  fa-lg btn-icon "></i>
-                      <span class="btn-com">Community</span>
-                    </b-button>
+                 
+
+
+                    
+
+
+
+                  <b-button
+                  block
+                  size="sm"  
+                  :disabled="disable"
+                    :id="'followbtn'+item.id"
+                  :class="item.is_follow !== 0 && 'u-btn'"
+                  variant="primary"
+                  @click="handleFollow(item)"
+                >
+                 
+                  <i class="fas fa-lg btn-icon" :class="item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"></i>
+                  <span class="btn-com ml-1"> {{ $t('dashboard.Community') }}</span>
+                </b-button>
+
+
+
+
+
+
+
+
                   </b-col>
 
                   <b-col
@@ -68,13 +88,10 @@
                     cols="4"
                     class="mt-2 text-center"
                   >
-                    <b-button
-                      block
-                      size="sm"
-                      class="b-background shadow "
-                      variant="primary"
-                    >
-                      <i class="fas fa-envelope   fa-lg btn-icon "></i>
+                    
+
+                    <b-button block size="sm" class="b-background shadow" variant="primary" @click="cta(item)">
+                      <i class="fas fa-envelope fa-lg btn-icon"></i>
                       <span class="btn-text">Message</span>
                     </b-button>
                   </b-col>
@@ -94,7 +111,7 @@
                       variant="primary"
                     >
                       <i class="fas fa-map-marked-alt  fa-lg btn-icon "></i>
-                      <span class="btn-text">Direction</span>
+                      <span class="btn-text">{{ $t('dashboard.Direction') }}</span>
                     </b-button>
                   </b-col>
                 </b-row>
@@ -104,20 +121,21 @@
         </div>
       </b-col>
     </b-row>
-     
-      <infinite-loading :identifier="infiniteId"  @infinite="infiniteHandler"  ref="infiniteLoading" ></infinite-loading>
+
+    <infinite-loading :identifier="infiniteId" @infinite="infiniteHandler" ref="infiniteLoading"></infinite-loading>
   </div>
 </template>
 
 <script>
-import moment from "moment";
-import axios from "axios";
+// import moment from 'moment';
+import axios from 'axios';
 
 export default {
-  props: ["type", "searchh"],
-  
-   data() {
+  props: ['type', 'searchh'],
+
+  data() {
     return {
+      businesses:[],
       biz_id:null,
       page: 1,
       infiniteId: +new Date(),
@@ -127,15 +145,15 @@ export default {
         perPage: 1,
         pagination: false,
 
-        type: "loop",
-        perMove: 1
-      }
+        type: 'loop',
+        perMove: 1,
+      },
     };
   },
 
   computed:{
    
-    businesses(){
+    old_businesses(){
 
       if(this.type=="Follower"){ 
 
@@ -145,25 +163,69 @@ export default {
 
           return  this.$store.state.businessOwner.BcommunityFollowing.business_following; 
        }
-   }
+   },
+
+    activeAccount() {
+      return this.$store.getters['auth/profilConnected'];
+    },
 
   },
 
-   mounted(){
-
-    this.biz_id = this.$route.params.id; 
+  mounted() {
+    this.biz_id = this.$route.params.id;
   },
-   
+
   methods: {
+    
+    cta(data) {
+      console.log(data);
+      this.$store.commit('businessChat/setSelectedChat', data);
+      let path = '';
+      if (this.activeAccount.user_type == 'business') {
+        path = '/business_owner/' + this.activeAccount.id;
+      } else if (this.activeAccount.user_type == 'network') {
+        path = '/';
+      } else path = '/messaging';
+
+      // this.$router.push({ path: `${path}`, query: { tabId: 1, msgTabId: 1 } });
+      this.$router.push({ path: `/business_owner/${this.activeAccount.id}`, query: { tabId: 1, msgTabId: 1 } });
+    },
     count(number) {
       if (number >= 1000000) {
-        return number / 1000000 + "M";
+        return number / 1000000 + 'M';
       }
       if (number >= 1000) {
-        return number / 1000 + "K";
+        return number / 1000 + 'K';
       } else return number;
     },
 
+
+ async handleFollow(user) {
+      
+      console.log("yoo ma gee");
+       document.getElementById("followbtn"+user.id).disabled = true;
+      const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
+      const nextFollowState = user.is_follow === 0 ? 1 : 0;
+      const data = {
+        id: user.id,
+        type: 'user',
+      };
+
+      await axios
+        .post(uri, data)
+        .then(({ data }) => {
+          console.log(data);
+          user.is_follow = nextFollowState;
+           document.getElementById("followbtn"+user.id).disabled = false;
+        })
+         
+          .catch((err) =>{  
+          
+          console.log({err:err})  ;
+           document.getElementById("followbtn"+user.id).disabled =  false;
+          
+        });
+    },
 
     
 
@@ -184,76 +246,47 @@ export default {
       this.page = 1;
       this.infiniteId += 1;
 
-     
-     this.$refs.infiniteLoading.attemptLoad();
-    
-
+      this.$refs.infiniteLoading.attemptLoad();
     },
 
-
-     
-
-
-     
-          infiniteHandler($state) { 
-           
-
+    infiniteHandler($state) {
       let url = null;
 
-         if(this.type=="Follower"){  
-         url = "business/community/business-follower/"+this.biz_id+"/";
-         }else{
-           url = "business/community/business-following/"+this.biz_id+"/";
-         }
+      if (this.type == 'Follower') {
+        url = 'business/community/business-follower/' + this.biz_id + '/';
+      } else {
+        url = 'business/community/business-following/' + this.biz_id + '/';
+      }
       axios
-        .get(url + this.page+"?keyword="+this.searchh )
+        .get(url + this.page + '?keyword=' + this.searchh)
         .then(({ data }) => {
           console.log(data);
-        
-          if(this.type=="Follower"){  
 
+          if (this.type == 'Follower') {
+            if (data.data.business_followers.length) {
+              this.businesses.push(...data.data.business_followers);
+              this.page += 1;
 
-          if (data.data.business_followers.length) {
-            
-         
-            this.businesses.push(...data.data.business_followers); 
-            this.page += 1;
-            
-            $state.loaded();
-
-           }else{
+              $state.loaded();
+            } else {
               $state.complete();
-             
-           }
-        
-          }else{
+            }
+          } else {
+            if (data.data.business_following.length) {
+              this.businesses.push(...data.data.business_following);
+              this.page += 1;
 
-
-
-
-             if (data.data.business_following.length) {
-            
-         
-            this.businesses.push(...data.data.business_following); 
-            this.page += 1;
-            
-            $state.loaded();
-
-           }else{
+              $state.loaded();
+            } else {
               $state.complete();
-             
-           }
-
+            }
           }
-           
         })
         .catch((err) => {
           console.log({ err: err });
         });
     },
-
-
-  }
+  },
 };
 </script>
 
@@ -324,15 +357,15 @@ export default {
     color: black;
 
     line-height: 35px;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
 
   .textt {
     color: #000;
 
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: normal;
-    font-size: 12px;
+    font-size: 14px;
     line-height: 30px;
     color: rgba(117, 114, 128, 1);
     text-align: left;
@@ -344,7 +377,7 @@ export default {
     padding: 1px;
     text-align: left;
 
-    margin-left: -30px;
+    margin-left: 2px;
 
     margin-right: -5px;
 
@@ -377,13 +410,13 @@ export default {
     color: black;
 
     line-height: 35px;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
 
   .textt {
     color: #000;
 
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
@@ -397,7 +430,7 @@ export default {
     padding: 1px;
     text-align: left;
 
-    margin-left: 30px;
+    margin-left: 65px;
 
     margin-right: -5px;
 
@@ -410,9 +443,9 @@ export default {
 
   .btn {
     padding-top: 6px;
-
     height: 38px;
     width: 123px;
+    font-size: 14px;
   }
 
   .r-image {
@@ -485,8 +518,6 @@ export default {
     background-clip: border-box;
     border: 1px solid rgba(0, 0, 0, 0.125);
     margin-bottom: 10px;
-    margin-right: -8px;
-    margin-left: -8px;
 
     padding: 7px;
   }
@@ -505,6 +536,26 @@ export default {
 @media only screen and (max-width: 520px) {
   .btn {
     display: flex;
+  }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1265px) {
+  .textt {
+    color: #000;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 30px;
+    color: rgba(117, 114, 128, 1);
+    text-align: left;
+    font-weight: normal;
+    line-height: 20px;
+    font-style: normal;
+    padding: 1px;
+    text-align: left;
+    margin-left: 55px;
+    margin-right: -5px;
+    line-height: 25px;
   }
 }
 </style>

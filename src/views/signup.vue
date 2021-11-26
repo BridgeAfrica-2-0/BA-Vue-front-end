@@ -111,6 +111,13 @@
             <span class="md-error" v-if="!$v.form.password.required">
               {{ $t("auth.password_is_required") }}
             </span>
+
+            <span class="md-error" v-if="!$v.form.password.minLength" >
+              {{ $t("auth.password_is_required") }}
+              {{ $t("auth.Password_must_have_at_least") }} {{ $v.form.password.$params.minLength.min }} letters.
+            </span>
+
+            
           </md-field>
 
           <md-field :class="getValidationClass('password')">
@@ -125,6 +132,12 @@
             <span class="md-error" v-if="!$v.form.confirmPassword.required"
               > {{ $t("auth.Password_is_required") }}
             </span>
+
+             <span class="md-error" v-if="!$v.form.confirmPassword.sameAsPassword"
+              > {{ $t("auth.Password_is_required") }} 
+               {{ $t("auth.Passwords_must_be_identical") }} .
+            </span>
+
           </md-field>
         </md-card-content>
 
@@ -176,13 +189,16 @@
     <hr class="localfoter" />
 
     <p class="text-center">
+     
       <span class="display-inline">
-        <b-link @click="$i18n.locale = 'en'"> {{ $t("auth.english") }}</b-link>
-        <span class="vl"></span>
-        <b-link class="ml-2" @click="$i18n.locale = 'fr'">
+        <b-link @click=" setLang('en')  "> {{ $t("auth.english") }} </b-link>
+        <span class="vl"></span> 
+        <b-link class="ml-2"  @click="setLang('fr')">
           {{ $t("auth.french") }}
         </b-link>
       </span>
+
+
       Bridge Africa © 2021
     </p>
   </div>
@@ -192,7 +208,7 @@
 import { validationMixin } from "vuelidate";
 import axios from "axios";
 
-import { required, email, minLength } from "vuelidate/lib/validators";
+import { required,sameAs, email, minLength } from "vuelidate/lib/validators";
 
 export default {
   name: "FormValidation",
@@ -213,6 +229,7 @@ export default {
     sending: false,
     lastUser: null,
   }),
+
   validations: {
     form: {
       firstName: {
@@ -225,11 +242,13 @@ export default {
 
       password: {
         required,
+         minLength: minLength(8),
       },
 
       confirmPassword: {
         required,
-        minLength: minLength(4),
+        minLength: minLength(8),
+        sameAsPassword: sameAs('password')
       },
 
       tel: {
@@ -257,6 +276,23 @@ export default {
         });
     },
 
+    setLang(data){
+        
+         console.log(data);
+          this.$i18n.locale = data;
+         this.$store.commit("auth/setAppLanguage", data);
+    },
+
+
+     flashErrors(errors) {
+      let err = "";
+      Object.values(errors).forEach((element) => {
+        err = element[0];
+      });
+
+      return err;
+    },
+
     socialLogin(provider, response) {
       this.$http
         .post("user/social/" + provider, response)
@@ -268,7 +304,7 @@ export default {
           this.flashMessage.show({
             status: "success",
 
-            message: "Successfully Register",
+            message: this.$t('auth.Successfully_Register'),
           });
 
           this.$router.push({ name: "welcome" });
@@ -314,9 +350,9 @@ export default {
 
           this.flashMessage.show({
             status: "success",
-            title: "Successfully Register",
+            title: this.$t('auth.Successfully_Register'),
             message:
-              "Thanks for registering. You will get your otp code in a second",
+              this.$t('auth.Thanks_for_registering_You_will_get_your_otp_code_in_a_second'),
           });
 
           this.$router.push({ name: "verifyAccount" });
@@ -331,13 +367,14 @@ export default {
             this.flashMessage.show({
               status: "error",
 
-              message: err.response.data.message,
+              message: this.flashErrors(err.response.data.errors),
+               blockClass: "custom-block-class",
             });
           } else {
             this.flashMessage.show({
               status: "error",
-              title: "Registration Failed",
-              message: "Unable to store this data",
+              title: this.$t('auth.Registration_Failed'),
+              message: this.$t('auth.Unable_to_store_this_data'),
             });
             console.log({ err: err });
           }

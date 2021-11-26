@@ -1,6 +1,9 @@
 <template>
   <div>
     <div class="s-cardd">
+
+
+
       <div
         v-for="value in people_around"
         v-bind:key="value.name"
@@ -57,6 +60,7 @@
                           variant="primary"
                           size="sm"
                           class="b-background flexx pobtn shadow"
+                          @click="cta_business(value)"
                         >
                           <i class="fas fa-envelope fa-lg btn-icon"></i>
                           <span class="btn-text">{{ $t('dashboard.Message') }}</span>
@@ -74,9 +78,17 @@
                           block
                           size="sm"
                           class="b-background flexx pobtn shadow"
+                          :class="value.is_follow !== 0 && 'u-btn'"
                           variant="primary"
+                           :id="'followbtn'+value.id"
+                          @click="handleFollow(value)"
                         >
-                          <i class="fas fa-user-plus fa-lg btn-icon"></i>
+
+                           <i
+                            class="fas fa-lg btn-icon"
+                            :class="value.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"
+                          ></i>
+
                           <span class="btn-com">{{ $t('dashboard.Community') }}</span>
                         </b-button>
                       </b-col>
@@ -87,17 +99,136 @@
             </div>
           </b-col>
         </b-row>
+
+
       </div>
     </div>
+    
+          <infinite-loading @infinite="infiniteHandler"></infinite-loading>
   </div>
 </template>
 
 <script>
+import axios from "axios";
 export default {
+   data() {
+    return {
+      page: 1,
+      people_around:[],
+      options: {
+        rewind: true,
+        autoplay: true,
+        perPage: 1,
+       
+        pagination: false,
+
+        type: "loop",
+        perMove: 1,
+      },
+    };
+  },
+
   computed: {
-    people_around() {
+    old_people_around() {
       return this.$store.state.auth.peopleAround;
-    }
+    },
+     activeAccount() {
+      return this.$store.getters['auth/profilConnected'];
+    }, 
+  },
+  methods:{
+   cta_business(data) {
+      console.log(data);
+      console.log("active accounts: ",this.activeAccount);
+      this.$store.commit('businessChat/setSelectedChat', data);
+      
+      let path = '';
+      if (this.activeAccount.user_type == 'business') {
+        path = '/business_owner/' + this.activeAccount.id;
+      } else if (this.activeAccount.user_type == 'network') {
+        path = '/';
+      } else path = '/messaging';
+
+      // this.$router.push({ path: `${path}`, query: { tabId: 1, msgTabId: 1 } });
+      this.$router.push({ path: `/business_owner/${this.activeAccount.id}`, query: { tabId: 1, msgTabId: 0 } });
+
+    },
+
+
+       count(number) {
+      if (number >= 1000000) {
+        return number / 1000000 + "M";
+      }
+      if (number >= 1000) {
+        return number / 1000 + "K";
+      } else return number;
+    },
+
+
+
+    async handleFollow(user) {
+      
+      console.log("yoo ma gee");
+       document.getElementById("followbtn"+user.id).disabled = true;
+      const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
+      const nextFollowState = user.is_follow === 0 ? 1 : 0;
+      const data = {
+        id: user.id,
+        type: 'user',
+      };
+
+      await axios
+        .post(uri, data)
+        .then(({ data }) => {
+          console.log(data);
+          user.is_follow = nextFollowState;
+           document.getElementById("followbtn"+user.id).disabled = false;
+        })
+         
+          .catch((err) =>{  
+          
+          console.log({err:err})  ;
+           document.getElementById("followbtn"+user.id).disabled =  false;
+          
+        });
+    },
+
+
+
+    
+  async  infiniteHandler($state) {
+   
+      let url = "people/around?page="+this.page;
+
+      console.log(url);
+
+    await  axios.get(url)
+        .then(({ data }) => {
+
+               console.log(data.data);
+
+           if (data.data.length) {
+          
+           
+            this.people_around.push(...data.data);
+               this.page += 1;
+
+            $state.loaded();
+          } else {
+            $state.complete();
+          }
+
+         
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+
+
+
+
   }
 };
 </script>

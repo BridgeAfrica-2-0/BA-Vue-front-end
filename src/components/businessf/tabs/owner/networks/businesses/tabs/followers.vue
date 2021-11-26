@@ -8,7 +8,7 @@
           </b-input-group-prepend>
           <b-form-input
             aria-label="Text input with checkbox"
-            placeholder="Search Something"
+            :placeholder="$t('network.Search_Something')"
             type="text"
             class="form-control"
             v-model="searchTitle"
@@ -32,20 +32,21 @@
             </b-card>
           </template>
           <div style="display:none;">{{member['communityNum'] = nFormatter(member.followers)}}</div>
-          <CommunityBusiness :member="member" @BlockUser="BlockUser" />
+          <div style="display:none;">{{member['type'] = "business"}}</div>
+          <CommunityBusiness :member="member" @BlockUser="BlockUser" @handleFollow="handleFollow" />
         </b-skeleton-wrapper>
       </b-col>
     </b-row>
     <b-row >
       <b-col col="12">
         <infinite-loading @infinite="infiniteHandler">
-          <div class="text-red" slot="no-more">No More Request</div>
-          <div class="text-red" slot="no-results">No More Request</div>
+          <div class="text-red" slot="no-more">{{ $t('network.No_More_Request') }}</div>
+          <div class="text-red" slot="no-results">{{ $t('network.No_More_Request') }}</div>
         </infinite-loading>
       </b-col>
     </b-row>
 
-    <FlashMessage />
+    <!-- <FlashMessage /> -->
   </div>
 </template>
 
@@ -59,7 +60,7 @@ export default {
     return {
       url:null,
       searchTitle: "",
-      page: 0,
+      page: 1,
       loading: false,
       businessfollowers: [],
       displayfollowers: []
@@ -111,13 +112,19 @@ export default {
       let formData = new FormData();
       formData.append('keyword', keyword);
       console.log("network/"+this.url+"/business/follower/"+this.page);
+      let lien = "";
+      if(keyword == ""){
+          lien =  'network/'+this.url+'/business/follower/'+this.page;
+      }else{ lien ='network/'+this.url+'/business/follower/'+this.page+','+ formData}
+
       this.axios
-      .post("network/"+this.url+"/business/follower/"+this.page, formData)
+      .post(lien)
       .then(({ data }) => {
        console.log(data);
        console.log(this.page);
         if(keyword){
           this.displayfollowers = data.data;
+       
           this.searchTitle = "";
           $state.complete();
         }else{
@@ -127,6 +134,7 @@ export default {
             console.log(...data.data);
             this.businessfollowers.push(...data.data);
             this.displayfollowers = this.businessfollowers;
+               console.log("----",this.displayfollowers );
             $state.loaded();
           } else {
             $state.complete();
@@ -156,10 +164,28 @@ export default {
         this.loading = false;
         this.flashMessage.show({
           status: "error",
-          message: "Unable to blocked User"
+          message: err.response.data.message 
         });
       });
-    }
+    },
+    async handleFollow(Comdata) {
+      console.log("handleFollow", Comdata)
+      const url = Comdata.is_follow === 0 ? `/follow-community` : `/unfollow`;
+      console.log("uri", url)
+      const nextFollowState = Comdata.is_follow === 0 ? 1 : 0;
+      const data = {
+        id: Comdata.id,
+        type: Comdata.type,
+      };
+
+      await this.axios
+        .post(url, data)
+        .then(response => {
+          console.log("response", response);
+          Comdata.is_follow = nextFollowState;
+        })
+        .catch(err => console.log(err));
+    },
 
   }
 };

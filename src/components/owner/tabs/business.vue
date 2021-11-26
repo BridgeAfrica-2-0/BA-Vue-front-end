@@ -1,20 +1,22 @@
 <template>
   <div>
+
     <div class="people-style shadow" v-for="item in businesses" :key="item.id">
       <b-row>
         <b-col md="3" xl="5" lg="5" cols="5" sm="3">
           <div class="center-img">
             <splide :options="options" class="r-image">
               <splide-slide>
-                <img :src="item.picture" class="r-image" />
+                <img :src="item.picture" class="r-image" />  
               </splide-slide>
             </splide>
-          </div>
+          </div>    
         </b-col>
         <b-col md="5" cols="7" lg="7" xl="7" sm="5">
           <p class="textt">
             <strong class="title"> {{ item.name }}</strong> <br />
-            {{ item.category }}
+           
+            <span v-for="cat in item.category" :key="cat.name">   {{cat.name}}  </span>
             <br />
             {{ count(item.followers) }} {{ $t('profileowner.Community') }} <br />
 
@@ -36,17 +38,32 @@
           <div class="s-button">
             <b-row>
               <b-col md="12" lg="4" xl="4" sm="12" cols="4" class="mt-2 text-center">
+               
+
+
+
+
+
                 <b-button
                   block
+                   class="b-background shadow"
                   size="sm"
-                  class="b-background shadow"
+                  :disabled="disable"
                   :class="item.is_follow !== 0 && 'u-btn'"
                   variant="primary"
+                  :id="'followbtn'+item.id"
                   @click="handleFollow(item)"
+                
                 >
-                  <i class="fas fa-user-plus  fa-lg btn-icon "></i>
-                  <span class="btn-com">{{ $t('profileowner.Community') }}</span>
-                </b-button>
+                 
+                  <i class="fas fa-lg btn-icon" :class="item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"></i>
+                  <span class="btn-com"> {{ $t('dashboard.Community') }}</span>
+                </b-button>   
+
+
+
+
+
               </b-col>
 
               <b-col md="12" lg="4" xl="4" sm="12" cols="4" class="mt-2 text-center">
@@ -107,10 +124,7 @@ export default {
     };
   },
 
-  mounted() {
-    this.biz_id = this.$route.params.id !== undefined ? this.$route.params.id : this.$router.push('notFound'); //! need some review
-    // this.biz_id = this.$route.params.id !== undefined ? this.$route.params.id : 1; //! need some review
-  },
+ 
 
   computed: {
     old_businesses() {
@@ -135,14 +149,15 @@ export default {
     infiniteHandler($state) {
       const url =
         this.type === 'Follower'
-          ? `profile/business/follower/${this.biz_id}/`
-          : `profile/business/following/${this.biz_id}/`;
+          ? `profile/business/follower/`
+          : `profile/business/following/`;
 
       axios
         .get(url + this.page)
         .then(({ data }) => {
           if (this.type == 'Follower') {
             if (data.data.business_followers.length) {
+              console.info(...data.data.business_followers);
               this.businesses.push(...data.data.business_followers);
               this.page += 1;
 
@@ -164,9 +179,13 @@ export default {
         .catch(err => {
           console.log({ err: err });
         });
-    },
+    },       
 
-    async handleFollow(user) {
+   
+     async handleFollow(user) {
+
+      document.getElementById("followbtn"+user.id).disabled = true;
+       
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
@@ -177,10 +196,22 @@ export default {
       await axios
         .post(uri, data)
         .then(response => {
+
+          console.log(response);
           user.is_follow = nextFollowState;
+         document.getElementById("followbtn"+user.id).disabled = false;
+            
         })
-        .catch(err => console.log(err));
+        .catch(err =>{  
+          
+          console.log(err)  ;
+           document.getElementById("followbtn"+user.id).disabled =  false;
+          
+        });
+         
     },
+
+
   },
 };
 </script>
@@ -272,47 +303,47 @@ export default {
     line-height: 20px;
     font-style: normal;
 
-    padding: 1px;
-    text-align: left;
+			padding: 1px;
+			text-align: left;
 
-    margin-left: -30px;
+			margin-left: -30px;
 
-    margin-right: -5px;
+			margin-right: -5px;
 
-    line-height: 25px;
-  }
+			line-height: 25px;
+		}
 
-  .location {
-    margin-bottom: 30px;
-  }
+		.location {
+			margin-bottom: 30px;
+		}
 
-  .btn {
-    padding-top: 6px;
-    font-size: 10px;
+		.btn {
+			padding-top: 6px;
+			font-size: 10px;
 
-    height: 28px;
-    width: 85px;
-  }
+			height: 28px;
+			width: 85px;
+		}
 
-  .r-image {
-    border-radius: 8px;
+		.r-image {
+			border-radius: 8px;
 
-    height: 100px;
-    width: 100px;
-  }
-}
+			height: 100px;
+			width: 100px;
+		}
+	}
 
-@media only screen and (min-width: 768px) {
-  .title {
-    font-size: 20px;
-    color: black;
+	@media only screen and (min-width: 768px) {
+		.title {
+			font-size: 20px;
+			color: black;
 
     line-height: 35px;
     font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
 
-  .textt {
-    color: #000;
+		.textt {
+			color: #000;
 
     font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: normal;
@@ -321,134 +352,134 @@ export default {
     color: rgba(117, 114, 128, 1);
     text-align: left;
 
-    font-weight: normal;
-    line-height: 20px;
-    font-style: normal;
+			font-weight: normal;
+			line-height: 20px;
+			font-style: normal;
 
-    padding: 1px;
-    text-align: left;
+			padding: 1px;
+			text-align: left;
 
-    margin-left: 30px;
+			margin-left: 30px;
 
-    margin-right: -5px;
+			margin-right: -5px;
 
-    line-height: 25px;
-  }
+			line-height: 25px;
+		}
 
-  .location {
-    margin-bottom: 30px;
-  }
+		.location {
+			margin-bottom: 30px;
+		}
 
-  .btn {
-    padding-top: 6px;
-    height: 38px;
-    width: 110px;
-    font-size: 12px;
-    margin-left: -10px;
+		.btn {
+			padding-top: 6px;
+			height: 38px;
+			width: 110px;
+			font-size: 12px;
+			margin-left: -10px;
 
-    padding-top: 8px;
-  }
+			padding-top: 8px;
+		}
 
-  .r-image {
-    border-radius: 8px;
+		.r-image {
+			border-radius: 8px;
 
-    height: 160px;
-    width: 160px;
-  }
-}
+			height: 160px;
+			width: 160px;
+		}
+	}
 
-.stock {
-  color: green;
-}
+	.stock {
+		color: green;
+	}
 
-.b1 {
-  width: 100px;
-  margin-left: -20px;
-}
+	.b1 {
+		width: 100px;
+		margin-left: -20px;
+	}
 
-.b2 {
-  width: 120px;
+	.b2 {
+		width: 120px;
 
-  margin-left: -15px;
-}
+		margin-left: -15px;
+	}
 
-.btn {
-  display: flex;
-}
+	.btn {
+		display: flex;
+	}
 
-.ico {
-  margin-right: 5px;
-}
+	.ico {
+		margin-right: 5px;
+	}
 
-@media only screen and (min-width: 768px) {
-  .people-style {
-    border-top-left-radius: 5px;
+	@media only screen and (min-width: 768px) {
+		.people-style {
+			border-top-left-radius: 5px;
 
-    border-bottom-left-radius: 5px;
+			border-bottom-left-radius: 5px;
 
-    border-top-right-radius: 5px;
+			border-top-right-radius: 5px;
 
-    border-bottom-right-radius: 5px;
+			border-bottom-right-radius: 5px;
 
-    background: white;
+			background: white;
 
-    background-color: #fff;
-    background-clip: border-box;
-    border: 1px solid rgba(0, 0, 0, 0.125);
-    margin-bottom: 10px;
+			background-color: #fff;
+			background-clip: border-box;
+			border: 1px solid rgba(0, 0, 0, 0.125);
+			margin-bottom: 10px;
 
-    margin-right: 8px;
+			margin-right: 8px;
 
-    padding: 7px;
-  }
-}
+			padding: 7px;
+		}
+	}
 
-@media only screen and (max-width: 768px) {
-  .people-style {
-    border-top-left-radius: 5px;
+	@media only screen and (max-width: 768px) {
+		.people-style {
+			border-top-left-radius: 5px;
 
-    border-bottom-left-radius: 5px;
+			border-bottom-left-radius: 5px;
 
-    border-top-right-radius: 5px;
+			border-top-right-radius: 5px;
 
-    border-bottom-right-radius: 5px;
+			border-bottom-right-radius: 5px;
 
-    background: white;
+			background: white;
 
-    background-color: #fff;
-    background-clip: border-box;
-    border: 1px solid rgba(0, 0, 0, 0.125);
-    margin-bottom: 10px;
+			background-color: #fff;
+			background-clip: border-box;
+			border: 1px solid rgba(0, 0, 0, 0.125);
+			margin-bottom: 10px;
 
-    margin-right: 8px;
+			margin-right: 8px;
 
-    padding: 7px;
-  }
+			padding: 7px;
+		}
 
-  .btn {
-    display: flex;
+		.btn {
+			display: flex;
 
-    padding-right: 60px;
-  }
+			padding-right: 60px;
+		}
 
-  h4 {
-    font-size: 15px;
-  }
-}
+		h4 {
+			font-size: 15px;
+		}
+	}
 
-@media only screen and (max-width: 520px) {
-  .btn {
-    display: flex;
-  }
-}
+	@media only screen and (max-width: 520px) {
+		.btn {
+			display: flex;
+		}
+	}
 
-@media only screen and (min-width: 992px) and (max-width: 1331px) {
-  .btn {
-    width: 98px;
-    height: 33px;
-    font-size: 12px;
-    margin-left: -10px;
-    padding-top: 8px;
-  }
-}
+	@media only screen and (min-width: 992px) and (max-width: 1331px) {
+		.btn {
+			width: 98px;
+			height: 33px;
+			font-size: 12px;
+			margin-left: -10px;
+			padding-top: 8px;
+		}
+	}
 </style>

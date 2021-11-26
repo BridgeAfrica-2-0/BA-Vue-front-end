@@ -141,7 +141,7 @@
 
             <div class="justify-content-center container row">
               <div class="">
-                <button class="buttonm btn shadow text-center">
+                <button class="buttonm btn shadow text-center" @click="handleReOrder(9)">
                   <h3 class="h3 button-text">{{$t("myOrders.Re_order")}}</h3>
                 </button>
               </div>
@@ -186,6 +186,7 @@
                   >
                     <b-dropdown-item>{{$t("myOrders.archive")}}</b-dropdown-item>
                     <b-dropdown-item>{{$t("myOrders.delete")}}</b-dropdown-item>
+                    <b-dropdown-item>Completed</b-dropdown-item>
                   </b-dropdown>
                 </div>
 
@@ -230,7 +231,7 @@
 
             <div class="justify-content-center container row">
               <div class="">
-                <button class="buttonm btn shadow text-center">
+                <button class="buttonm btn shadow text-center" @click="handleReOrder(9)">
                   <h3 class="h3 button-text">{{$t("myOrders.Re_order")}}</h3>
                 </button>
               </div>
@@ -319,7 +320,7 @@
 
             <div class="justify-content-center container row">
               <div class="">
-                <button class="buttonm btn shadow text-center">
+                <button class="buttonm btn shadow text-center" @click="handleReOrder(9)">
                   <h3 class="h3 button-text">{{$t("myOrders.Re_order")}}</h3>
                 </button>
               </div>
@@ -408,7 +409,7 @@
 
             <div class="justify-content-center container row">
               <div class="">
-                <button class="buttonm btn shadow text-center">
+                <button class="buttonm btn shadow text-center" @click="handleReOrder(9)">
                   <h3 class="h3 button-text">{{$t("myOrders.Re_order")}}</h3>
                 </button>
               </div>
@@ -524,6 +525,7 @@
                   >
                     <b-dropdown-item>{{$t("myOrders.Archive")}}</b-dropdown-item>
                     <b-dropdown-item>{{$t("myOrders.Delete")}}</b-dropdown-item>
+                    <b-dropdown-item>Completed</b-dropdown-item>
                   </b-dropdown>
                 </div>
               </div>
@@ -565,7 +567,7 @@
               </div>
 
               <div class="container d-flex justify-content-end btn-marg">
-                <button class="button btn shadow">
+                <button class="button btn shadow" @click="handleReOrder(9)">
                   <h3 class="h3 button-text">{{$t("myOrders.Re_order")}}</h3>
                 </button>
               </div>
@@ -643,7 +645,7 @@
               </div>
 
               <div class="container d-flex justify-content-end btn-marg">
-                <button class="button btn shadow">
+<button class="button btn shadow" @click="handleReOrder(9)">
                   <h3 class="h3 button-text">{{$t("myOrders.Re_order")}}</h3>
                 </button>
               </div>
@@ -721,7 +723,7 @@
               </div>
 
               <div class="container d-flex justify-content-end btn-marg">
-                <button class="button btn shadow">
+                <button class="button btn shadow" @click="handleReOrder(9)">
                   <h3 class="h3 button-text">{{$t("myOrders.Re_order")}}</h3>
                 </button>
               </div>
@@ -799,7 +801,7 @@
               </div>
 
               <div class="container d-flex justify-content-end btn-marg">
-                <button class="button btn shadow">
+                <button class="button btn shadow" @click="handleReOrder(9)">
                   <h3 class="h3 button-text">{{$t("myOrders.Re_order")}}</h3>
                 </button>
               </div>
@@ -820,6 +822,7 @@
 </template>
 
 <script>
+import axios from "axios";
 import navbar from "./navbar.vue";
 
 export default {
@@ -879,6 +882,13 @@ export default {
       });
       el.classList.add("green");
     },
+    handleReOrder(id){
+      axios.get(`/order/action/${id}/reorder`)
+          .then(response => {
+            console.log(response);
+          })
+          .catch(error => console.log(error));
+    },
   },
 
   mounted() {},
@@ -924,7 +934,7 @@ export default {
   margin-right: 50px;
 }
 .btn-marg {
-  margin-top: -30px;
+  margin-top: 100px;
 }
 .r-img {
   border-radius: 5px;

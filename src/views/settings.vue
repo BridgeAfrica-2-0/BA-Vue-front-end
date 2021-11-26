@@ -6,30 +6,37 @@
       <b-row>
         <b-col cols="12" md="12" lg="9" xl="9">
           <div>
-            <b-tabs
-              pills
-              :vertical="vertical"
-              class="itzlala"
-              nav-wrapper-class="w-15"
-            >
+            <b-tabs pills :vertical="vertical" class="itzlala" nav-wrapper-class="w-15">
+              <!-- NOTIFICATIONS TAB -->
+              <b-tab title="Notifications">
+                <b-card-text class="mt-3">
+                  <b-row>
+                    <b-col cols="12" md="12">
+                      <SettingsNotifications/>
+                    </b-col>
+                  </b-row>
+                </b-card-text>
+              </b-tab>
               <b-tab :title="`${$t('settings.general')}`">
                 <b-card-text class="mt-3">
                   <b-row>
                     <b-col cols="12" md="12">
                       <div>
                         <b-table-simple hover small caption-top responsive>
-                          <b-tbody>
+                          <b-tbody v-if="getUserInfos.id">
                             <b-tr>
-                              <b-td class="a-text text"> {{ $t("settings.name") }} </b-td>
+                              <b-td class="a-text text"> {{ $t('settings.name') }} </b-td>
 
                               <b-td class="a-text text">
-                                <b-link href="#">Blezour Blec</b-link>
+                                <b-link href="#" >{{getUserInfos.name}}</b-link>
                               </b-td>
                             </b-tr>
                             <br />
 
                             <b-tr>
-                              <b-td class="a-text text"> {{ $t("settings.public_url") }} </b-td>
+
+                              <b-td class="a-text text" > {{ $t("settings.public_url") }} </b-td>
+
 
                               <b-td class="text"
                                 ><b-link href="#">
@@ -41,69 +48,191 @@
                             <br />
 
                             <b-tr>
-                              <b-td class="a-text text"> {{ $t("settings.email") }} </b-td>
+                              <b-td class="a-text text"> {{ $t('settings.email') }} </b-td>
 
                               <b-td class="a-text text">
-                                <b-link href="#">BlezourBlec@gmail.com</b-link>
+                                <b-link href="#">{{getUserInfos.email}}</b-link>
                               </b-td>
                             </b-tr>
                             <br />
 
                             <b-tr>
-                              <b-td class="a-text text">{{ $t("settings.phone") }} </b-td>
+                              <b-td class="a-text text">{{ $t('settings.phone') }} </b-td>
 
                               <b-td class="a-text text">
-                                <b-link href="#">+237 82325939</b-link>
+                                <b-link href="#">{{getUserInfos.phone}}</b-link>
                               </b-td>
                             </b-tr>
                             <br />
 
                             <b-tr>
-                              <b-td class="a-text text"> {{ $t("settings.dob") }} </b-td>
+                              <b-td class="a-text text"> {{ $t('settings.dob') }} </b-td>
 
                               <b-td class="a-text text">
-                                <b-link href="#">21/08/2020</b-link>
+                                <b-link href="#">{{getUserInfos.dob}}</b-link>
                               </b-td>
                             </b-tr>
                             <br />
 
                             <b-tr>
-                              <b-td class="a-text text"> {{ $t("settings.gender") }} </b-td>
+                              <b-td class="a-text text"> {{ $t('settings.gender') }} </b-td>
 
                               <b-td class="a-text text">
-                                <b-link href="#">Male</b-link>
+                                <b-link href="#">{{getUserInfos.gender}}</b-link>
                               </b-td>
                             </b-tr>
                             <br />
 
                             <b-tr>
-                              <b-td class="a-text text"> {{ $t("settings.country") }} </b-td>
+                              <b-td class="a-text text"> proffession </b-td>
 
                               <b-td class="a-text text">
-                                <b-link href="#">Cameroon</b-link>
+                                <b-link href="#">{{getUserInfos.profession}}</b-link>
+                              </b-td>
+                            </b-tr>
+                            <br />
+
+                            <b-tr>
+                              <b-td class="a-text text"> {{ $t('settings.country') }} </b-td>
+
+                              <b-td class="a-text text">
+                                <b-link href="#">{{getUserInfos.country.name}}</b-link>
+                              </b-td>
+                            </b-tr>
+                            <br />
+                            <b-tr>
+                              <b-td class="a-text text"> region </b-td>
+
+                              <b-td class="a-text text">
+                                <b-link href="#">{{getUserInfos.region.name}}</b-link>
                               </b-td>
                             </b-tr>
 
                             <br />
 
                             <b-tr>
-                              <b-td class="a-text tetx"> {{ $t("settings.city") }} </b-td>
+                              <b-td class="a-text text"> Division </b-td>
 
                               <b-td class="a-text text">
-                                <b-link href="#">Yaounde</b-link>
+                                <b-link href="#">{{getUserInfos.division.name}}</b-link>
+                              </b-td>
+                            </b-tr>
+
+                            <br />
+
+                            <b-tr>
+                              <b-td class="a-text text"> municipality </b-td>
+
+                              <b-td class="a-text text">
+                                <b-link href="#">{{getUserInfos.council.name}}</b-link>
+                              </b-td>
+                            </b-tr>
+
+                            <br />
+
+                            <b-tr>
+                              <b-td class="a-text tetx"> {{ $t('settings.city') }} </b-td>
+
+                              <b-td class="a-text text">
+                                <b-link href="#">{{getUserInfos.city}}</b-link>
                               </b-td>
                             </b-tr>
                             <br />
 
                             <b-tr>
-                              <b-td class="a-text text"> {{ $t("settings.neighbourhood") }}</b-td>
+                              <b-td class="a-text text"> {{ $t('settings.neighbourhood') }}</b-td>
 
                               <b-td class="a-text text">
-                                <b-link href="#">Nkozoa</b-link>
+                                <b-link href="#">{{getUserInfos.neigborhood.name}}</b-link>
                               </b-td>
                             </b-tr>
                             <br />
+                               <div>
+                              <b-button variant="ligth" class="btn btn-primary button" v-b-modal.modal-10>Edit </b-button>
+                              <!-- <button class="btn " v-b-modal.modal-10>Edit</button> -->
+                              <b-modal id="modal-10" title="Edit your information here"  hide-footer>
+                               
+                                  <form>
+                                      <div class="mb-3">
+                                        <label class="form-label">name</label>
+                                        <input type="text" class="form-control"  v-model="getUserInfos.name">
+                                       
+                                      </div>
+                                      <div class="mb-3">
+                                        <label class="form-label">email</label>
+                                        <input type="email" class="form-control"  v-model="getUserInfos.email">
+                                       </div>
+                                      
+                                       <div class="mb-3">
+                                        <label class="form-label">phone</label>
+                                        <input type="number" class="form-control"  v-model="getUserInfos.phone">
+                                       
+                                      </div>
+                                       <div class="mb-3">
+                                        <label class="form-label">DOB</label>
+                                        <input type="date" class="form-control"  v-model="getUserInfos.dob">
+                                       
+                                      </div>
+                                       <div class="mb-3">
+                                        gender
+                                        
+                                        <b-form-select v-model="selectedGender" :options="genderOptions" ></b-form-select>
+                                     
+                                        
+                                      </div>
+                                       <div class="mb-3">
+                                        <!-- <label class="form-label">country</label>
+                                        <input type="text" class="form-control"  v-model="getUserInfos.country.name"> -->
+                                        country 
+                                         <b-form-select v-model="selectedCounty" :options="country" @change="getRegion"></b-form-select>
+                                       
+                                      </div>
+                                       <div class="mb-3">
+                                        <!-- <label class="form-label">country</label>
+                                        <input type="text" class="form-control"  v-model="getUserInfos.country.name"> -->
+                                        Region 
+                                         <b-form-select v-model="selectedRegion" :options="region" @change="getDivision"></b-form-select>
+                                       
+                                      </div>
 
+                                       <div class="mb-3">
+                                        <!-- <label class="form-label">country</label>
+                                        <input type="text" class="form-control"  v-model="getUserInfos.country.name"> -->
+                                        Division 
+                                         <b-form-select v-model="selectedDivision" :options="division" @change="getMunicipality"></b-form-select>
+                                       
+                                      </div>
+
+                                      <div class="mb-3">
+                                        <!-- <label class="form-label">country</label>
+                                        <input type="text" class="form-control"  v-model="getUserInfos.country.name"> -->
+                                        municipality 
+                                         <b-form-select v-model="selectedMunicipality" :options="municipality" @change="getNeighbor"></b-form-select>
+                                       
+                                      </div>
+
+                                      <div class="mb-3">
+                                        <!-- <label class="form-label">country</label>
+                                        <input type="text" class="form-control"  v-model="getUserInfos.country.name"> -->
+                                        Neighbourhood 
+                                         <b-form-select v-model="selectedNeighbor" :options="neighbor"  ></b-form-select>
+                                       
+                                      </div>
+
+                                       <div class="mb-3">
+                                        <label class="form-label">city</label>
+                                        <input type="text" class="form-control"  v-model="getUserInfos.city">
+                                       
+                                      </div>
+                                       <div class="mb-3">
+                                        <label class="form-label">{{message1}}</label> 
+                                       
+                                      </div>
+                                      <button  class="btn btn-primary" @click="update">save changes</button>
+                                    </form>
+
+                              </b-modal>
+                            </div>
                             <br />
 
                             <br />
@@ -115,34 +244,28 @@
                 </b-card-text>
               </b-tab>
 
-              <b-tab :title="`${$t('settings.account_type')}`">
+              <b-tab :title="`${$t('settings.account_type')}`" >
                 <b-card class="mt-15 cent">
                   <div class="text-center">
                     <span class="username text-center mb-3">
-                      <b> {{ $t("settings.upgrade_your_business_account") }} </b>
+                      <b> {{ $t('settings.upgrade_your_business_account') }} </b>
                     </span>
                   </div>
 
                   <div class="container">
                     <span class="text text-left">
                       <br />
-                     {{ $t("settings.make_more_money") }}
+                      {{ $t('settings.make_more_money') }}
                     </span>
                   </div>
-                  <img
-                    src="@/assets/img/buynow.png"
-                    class="buynow"
-                    alt="buy now"
-                  />
+                  <img src="@/assets/img/buynow.png" class="buynow" alt="buy now" />
                   <div class="container text-center">
-                    <img
-                      src="@/assets/img/fruits.jpg"
-                      class="img-fluid banner"
-                      alt="Kitten"
-                    />
+                    <img src="@/assets/img/fruits.jpg" class="img-fluid banner" alt="Kitten" />
 
-                    <b-button variant="primary" class="text-center mt-3">
+
+                    <b-button variant="primary" class="text-center mt-3" @click="redirection">
                       {{ $t("settings.upgrade_now") }}
+
                     </b-button>
                   </div>
                 </b-card>
@@ -150,9 +273,9 @@
 
               <b-tab :title="`${$t('settings.payment')}`">
                 <b-card-text class="mt-3 text cent">
-                  <h3 class="username">{{ $t("settings.chose_payment_method") }}</h3>
+                  <h3 class="username">{{ $t('settings.chose_payment_method') }}</h3>
 
-                  <b-form-group class="mb-0" v-slot="{ ariaDescribedby }">
+                  <!-- <b-form-group class="mb-0" v-slot="{ ariaDescribedby }">
                     <b-form-radio-group
                       class="pt-2 text"
                       :options="['MTN Mobile Money']"
@@ -166,29 +289,38 @@
                       :options="['Orange Money']"
                       :aria-describedby="ariaDescribedby"
                     ></b-form-radio-group>
+                  </b-form-group> -->
+                  <b-form-group label="select one" v-slot="{ ariaDescribedby }"> 
+                    <b-form-radio v-model="selected" :aria-describedby="ariaDescribedby" name="some-radios" value="MTN">MTN Mobile Money</b-form-radio>
+                    <b-form-radio v-model="selected" :aria-describedby="ariaDescribedby" name="some-radios" value="ORANGE">Orange Money</b-form-radio>
+                   <button class=" btn btn-primary" @click="changePayment">update</button>
+                  
                   </b-form-group>
                 </b-card-text>
               </b-tab>
-
+                 
               <b-tab :title="`${$t('settings.password')}`">
                 <b-card-text class="mt-3 text">
-                  <h3 class="username">{{ $t("settings.change_current_password") }}</h3>
+                  <h3 class="username">{{ $t('settings.change_current_password') }}</h3>
                   <br />
 
                   <div class="b-bottom">
                     <b-container>
                       <b-form-group
                         label-cols-lg="3"
-                        :label="`${$t('settings.current_password') }`"
+                        :label="`${$t('settings.current_password')}`"
                         label-size="md"
                         label-class=" text"
                         class="mb-0"
                       >
+
                         <b-form-input
                           id="bname"
                           placeholder=""
                           required
+                          v-model="currentPass"
                         ></b-form-input>
+
                       </b-form-group>
                     </b-container>
                   </div>
@@ -199,16 +331,19 @@
                     <b-container>
                       <b-form-group
                         label-cols-lg="3"
-                        :label="`${$t('settings.new_password') }`"
+                        :label="`${$t('settings.new_password')}`"
                         label-size="md"
                         label-class=" text"
                         class="mb-0"
                       >
+
                         <b-form-input
                           id="bname"
                           placeholder=""
                           required
+                          v-model="newPass"
                         ></b-form-input>
+
                       </b-form-group>
                     </b-container>
                   </div>
@@ -219,23 +354,33 @@
                     <b-container>
                       <b-form-group
                         label-cols-lg="3"
-                        :label="`${$t('settings.confirm_password') }`"
+                        :label="`${$t('settings.confirm_password')}`"
                         label-size="md"
                         label-class="text"
                         class="mb-0"
                       >
+
                         <b-form-input
                           id="bname"
                           placeholder=""
                           required
-                        ></b-form-input>
+                          v-model="newPass1"
+                        >
+                        
+                        </b-form-input> <br>
+                        <p>{{message}}</p>
+                         <br> <button class=" btn btn-primary" @click="changePassword">change</button>
+
                       </b-form-group>
                     </b-container>
                   </div>
 
-                  <br /> </b-card-text
-              ></b-tab>
-            </b-tabs>
+                  <br /> 
+                  </b-card-text
+              >  
+              </b-tab> 
+             
+            </b-tabs>  
           </div>
         </b-col>
         <b-col> </b-col>
@@ -247,43 +392,347 @@
 </template>
 
 <script>
-import Navbar from "@/components/navbar";
-import Footer from "@/components/footer";
+import Navbar from '@/components/navbar';
+import Footer from '@/components/footer';
+import SettingsNotifications from '@/components/SettingsNotifications.vue'
 
 export default {
   components: {
     Navbar,
     Footer,
+    SettingsNotifications
   },
+  
 
   computed: {
     vertical() {
       if (this.size > 992) return true;
       return false;
     },
+
+    getUserInfos(){
+      return this.$store.state.profileSettingsEdit.userInfos;
+    },
+    country(){
+     let country =[];
+      this.$store.state.auth.country.map(dat =>{
+       country.push({
+          value: dat.id,
+          text: dat.name
+       }
+        )
+      })
+       return country ;
+    },
+
+    region(){
+
+      let region =[];
+      this.$store.state.auth.region.map(dat =>{
+       region.push({
+          value: dat.id,
+          text: dat.name
+       }
+        )
+      })
+      return region;
+    },
+
+    division(){
+      let division =[];
+      this.$store.state.auth.division.map(dat =>{
+       division.push({
+          value: dat.id,
+          text: dat.name
+       }
+        )
+      })
+      return division;
+    },
+
+    municipality(){
+      let municipality =[];
+      this.$store.state.auth.municipality.map(dat =>{
+       municipality.push({
+          value: dat.id,
+          text: dat.name
+       }
+        )
+      })
+      return municipality;
+    },
+
+    neighbor(){
+         let neighbor =[];
+      this.$store.state.auth.locality.map(dat =>{
+       neighbor.push({
+          value: dat.id,
+          text: dat.name
+       }
+        )
+      })
+      return neighbor;
+    }
+
+    // locality(){
+
+    //    let locality =[];
+    //   this.$store.state.auth.locality.map(dat =>{
+    //    locality.push({
+    //       value: dat.id,
+    //       text: dat.name
+    //    }
+    //     )
+    //   })
+    //        return locality ;
+    // }
+
   },
 
   data() {
     return {
       size: 0,
+       selected: '',
+       options:'',
+       selectedCounty:'',
+       selectedRegion:'',
+       selectedDivision: '',
+       selectedMunicipality:'',
+       selectedNeighbor: '',
+       currentPass:'',
+       newPass:'',
+       newPass1:'',
+       selectedGender:'',
+       message:'',
+       message1:'',
+       genderOptions: [{value: 'male', text: 'male'}, {value: 'female', text: 'female'}]
+       
     };
   },
 
+  methods: {
+    userInfos(){ 
+      this.$store
+      .dispatch("profileSettingsEdit/userInfos")
+      .then(response =>{
+        console.log(response);
+        console.log(this.getUserInfos);
+        this.selected =this.$store.state.profileSettingsEdit.userInfos.payement_method ;
+        console.log("-----------------------"+this.selected);
+        // if(this.$store.state.profileSettingsEdit.userInfos.gender == "male"){
+
+        //   }else { this.selectedGender = 1 }
+          this.selectedGender = this.$store.state.profileSettingsEdit.userInfos.gender;
+          // this.selectedCounty = this.getUserInfos.country.id;
+          // console.log("-----------------"+this.selectedCounty);
+         
+      })
+      .catch((err) => {
+         
+          console.log('--------- error: ');
+          console.error(err);
+        });
+    },
+    update(e){
+      e.preventDefault();
+      console.log(this.getUserInfos.name);
+      let formData = new FormData();
+      formData.append("name", this.getUserInfos.name);
+      formData.append("email", this.getUserInfos.email);
+      formData.append("phone", this.getUserInfos.phone);
+      formData.append("dob", this.getUserInfos.dob);
+      formData.append("gender", this.selectedGender);
+      formData.append("country_id", this.selectedCounty);
+      formData.append("region_id", this.selectedRegion);
+      formData.append("division_id", this.selectedDivision);
+      formData.append("council_id", this.selectedMunicipality);
+      formData.append("neighborhood_id", this.selectedNeighbor);
+      formData.append("profession", "DEV");
+     
+
+      this.$store
+      .dispatch("profileSettingsEdit/updateUserInfos", formData)
+      .then(response =>{
+        console.log(response);
+        console.log(this.getUserInfos);
+        this.message1 = response.data.message ;
+        
+      })
+      .catch((err) => {
+         
+          console.log('--------- error: ');
+          console.error(err);
+        });
+    },
+
+    changePayment(){
+       let formData1 = new FormData();
+       formData1.append("payement_method", this.selected);
+      this.$store
+      .dispatch("profileSettingsEdit/changePayment", formData1)
+      .then(response =>{
+        console.log(response);
+        console.log(this.getUserInfos);
+      })
+      .catch((err) => {
+         
+          console.log('--------- error: ');
+          console.error(err);
+        });
+    },
+
+    getCountry(){
+        this.$store
+      .dispatch("auth/country")
+      .then(response =>{
+        console.log("------------------------");
+        console.log(this.country);
+        
+      })
+      .catch((err) => {
+         
+          console.log('--------- error: ');
+          console.error(err);
+        });
+    },
+
+    changePassword(){
+      let formData2 = new FormData();
+      formData2.append("check_password", this.currentPass);
+      formData2.append("password", this.newPass);
+      formData2.append("password_confirmation", this.newPass1);
+
+      if(this.newPass != this.newPass1){
+        this.message = "the password does not match" ;
+      }else{
+
+        
+        this.$store
+      .dispatch("profileSettingsEdit/changePassword",formData2)
+      .then(response =>{
+        console.log("------------------------");
+        console.log(response.data.message);
+        this.message = response.data.message ;
+        
+      })
+      .catch((err) => {
+        
+        console.log('--------- error: ');
+          console.error(err);
+        });
+        }
+    },
+
+    getRegion(){
+          let data = { countryId: this.selectedCounty }
+        this.$store
+      .dispatch("auth/region",data)
+      .then(response =>{
+        console.log("------------------------");
+        
+        
+      })
+      .catch((err) => {
+         
+          console.log('--------- error: ');
+          console.error(err);
+        });
+
+      console.log("getregion clicked");
+      console.log(this.selectedCounty);
+    },
+
+    getDivision(){
+         let data = { regionId: this.selectedRegion }
+        this.$store
+      .dispatch("auth/division",data)
+      .then(response =>{
+        console.log("------------------------");
+        
+        
+      })
+      .catch((err) => {
+         
+          console.log('--------- error: ');
+          console.error(err);
+        });
+       console.log("getDivision clicked"); 
+      console.log(this.selectedDivision);
+    },
+
+    getMunicipality(){
+         let data = { divisionId: this.selectedDivision }
+        this.$store
+      .dispatch("auth/municipality",data)
+      .then(response =>{
+        console.log("------------------------");
+        
+      })
+      .catch((err) => {
+         
+          console.log('--------- error: ');
+          console.error(err);
+        });
+    },
+
+    getNeighbor(){
+       let data = { councilId: this.selectedMunicipality }
+        this.$store
+      .dispatch("auth/locality",data)
+      .then(response =>{
+        console.log("------------------------");
+        
+      })
+      .catch((err) => {
+         
+          console.log('--------- error: ');
+          console.error(err);
+        });
+    },
+
+     redirection(){
+        this.$store
+      .dispatch("profileSettingsEdit/redirection")
+      .then(response =>{
+        // this.$router.push({ name: "business_owner", params: { id: 1} }) ;
+        this.$router.push(`business_owner/${1}`)
+      })
+     }
+    // getLocality(){
+      
+    //    this.$store
+    //   .dispatch("auth/locality")
+    //   .then(response =>{
+        
+        
+    //   })
+    //   .catch((err) => {
+         
+    //       console.log('--------- error: ');
+    //       console.error(err);
+    //     });
+    // }
+  },
+
   mounted() {
+    this.userInfos();
+    this.getCountry();
+    // this.getLocality();
+    
     var that = this;
     window.onresize = function() {
       that.size = window.innerWidth;
       console.log(that);
 
-      console.log("lolo");
+      console.log('lolo');
     };
 
-    if (that.size == "") {
+    if (that.size == '') {
       that.size = window.innerWidth;
-      console.log("lolo");
+      console.log('lolo');
     }
   },
-};
+}
 </script>
 
 <style>
@@ -308,7 +757,11 @@ export default {
 .mt-15 {
   margin-top: 15px;
 }
-
+.button{
+  background-color: rgb(238, 119, 40);
+  border:none;
+  border-radius: 4px;
+}
 @media only screen and (min-width: 768px) {
   .cent {
     margin-left: 170px;

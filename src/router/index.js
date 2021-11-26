@@ -33,9 +33,10 @@ import forgotPassword from "@/views/forgotPassword";
 import navMessage from "@/views/navMessaging";
 import Blec from "@/views/blec";
 import memberNetworkFollower from "@/views/memberNetworkFollower";
- import govx from "@/views/test";
+import memberNetwork from "@/views/memberNetwork";
+
 import networkEditors from "@/views/networkEditors";
-// import Test from "@/views/test";
+
 import templateView from "@/views/templateView";
 import webSiteCreate from "@/views/webSiteCreate";
 import webSiteCreateTwo from "@/views/webSiteCreateTwo";
@@ -55,6 +56,7 @@ import ordersdetail from "@/views/odersDetail";
 import businessordersdetail from "@/views/businessordersdetail"
 import businessOwnerOrders from "@/views/businessOwnerOrders"
 import payment from "@/views/payment";
+import cart from "@/views/card";
 
 
 Vue.use(VueRouter);
@@ -319,18 +321,67 @@ const routes = [
     name: "Nav Meassage",
     component: navMessage,
   },
-
-  {
-    path: "/blec",
-    name: "Blec",
-    component: Blec,
+},
+{
+  path: "/services/:id",
+  name: "Service",
+  component: service,
+},
+{
+  path: "/services/modify/:id",
+  name: "Modify",
+  component: Modifier,
+  beforeEnter: (to, from, next) => {
+    console.log("dedans");
+    if (store.state.login && store.state.isToi) {
+      next();
+    } else {
+      next({ name: "Login" });
+    }
   },
+},
 
-  {
-    path: "/memberNetworkFollower/:id?",
-    name: "Membar Network Follower",
-    component: memberNetworkFollower,
+{
+  path: "/profile/:id?",
+  name: "Follower",
+  component: Follower,
+  meta: {
+    auth: true,
   },
+},
+{
+  path: "/profilevisitor",
+  name: "visitor",
+  component: Visitor,
+},
+{
+  path: "/search",
+  name: "Search",
+  component: search,
+},
+{
+  path: "/forgotpass",
+  name: "ForgotPassword",
+  component: forgotPassword,
+},
+{
+  path: "/messaging",
+  name: "Nav Meassage",
+  component: navMessage,
+},
+
+{
+  path: "/memberNetwork/:id?",
+  name: "memberNetwork",
+  component: memberNetwork,
+},
+
+{
+  path: "/memberNetworkFollower/:id?",
+  name: "Membar Network Follower",
+  component: memberNetworkFollower,
+},
+
 
 ];
 

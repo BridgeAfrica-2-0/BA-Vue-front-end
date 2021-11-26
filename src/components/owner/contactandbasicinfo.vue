@@ -190,7 +190,7 @@
         ref="dobbb"
         :title="$t('profileowner.Edit_Date_of_Birth')"
         hide-footer
-        @close="cancel"
+       
       >
         <div class="modal-body">
           <form class="form-inline" action="" method="post">

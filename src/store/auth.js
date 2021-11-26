@@ -130,8 +130,11 @@ export default {
     },
 
     country({ commit }) {
-      return axios.get('countries').then(({ data }) => {
-        commit('setCountry', data.data);
+
+      return axios.get("countries").then(({ data }) => {
+        console.log(data.data);
+        commit("setCountry", data.data);
+
       });
     },
 

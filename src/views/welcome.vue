@@ -16,7 +16,7 @@
     >
       <div>
         <h4 class="text-center username f-30">
-          {{ $t('welcome.Hello') }} <b> {{ username }} </b> {{ $t('welcome.letsget_started') }}
+          {{ $t('welcome.Hello') }} <b> {{ username }} </b>{{ $t('welcome.letsget_started') }}
         </h4>
         <br />
         <br />
@@ -908,8 +908,8 @@ export default {
       ],
 
       options: [
-        { text: " Person", value: "person" },
-        { text: " Business ", value: "business" },
+        { text:  this.$t('welcome.Person'), value: "person" },
+        { text:  this.$t('welcome.Business'), value: "business" },
       ],
 
       category: "",

@@ -14,7 +14,7 @@
         <b-col md="5" cols="7" lg="9" xl="5" sm="5">
           <p class="textt text">
             <strong class="title"> {{ member.name }} </strong> <br />
-            {{ member.category[0].name }}
+              <span v-if="member.category.length">  {{ member.category[0].name }}</span>
             <br />
             {{ member.communityNum }}
             {{ $t('network.Community') }} <br />

@@ -38,7 +38,7 @@
               v-model="form.role"
               :options="roles"
               name="roles"
-              value-field="name"
+              value-field="id"
               text-field="name"
               class="mb-3"
             ></b-form-select>
@@ -131,7 +131,7 @@
                     v-model="form.role"
                     :options="roles"
                     name="role"
-                    value-field="name"
+                    value-field="id"
                     text-field="name"
                     class="mb-3"
                   >
@@ -287,9 +287,10 @@ export default {
       });
 		},
     deleteEditor: function(clickedObject){
+      console.log("deleteEditor");
       this.$store
         .dispatch("NetworkSettings/deleteEditor", {
-          path: "business/role/delete/"+clickedObject.user_id,
+          path: "network/role/delete/"+clickedObject.user_id,
         })
         .then(({ data }) => {
         console.log(data);
@@ -305,7 +306,7 @@ export default {
         console.log({ err: err });
         this.flashMessage.show({
           status: "error",
-          message: "this.$t('network.Unable_To_Delete_Editor')"
+          message: this.$t('network.Unable_To_Delete_Editor')
         });
       });
 		},

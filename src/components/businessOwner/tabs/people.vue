@@ -15,7 +15,7 @@
                     <b-row>
                       <b-col md="6" lg="6" cols="6" sm="6" class="mt-lg-2">
                         <div class="mt-2 mt-lg-0 mt-xl-0 username">
-                          <b> {{ people.name }} </b>
+                          <b> {{ item.name }} </b>
                         </div>
                       </b-col>
 
@@ -46,6 +46,7 @@
                         <b-button
                           block
                           size="sm"
+                           :id="'followbtn'+item.id"
                           class="b-background flexx pobtn shadow mr-lg-3 mr-xl-3"
                           :class="item.is_follow !== 0 && 'u-btn'"
                           variant="primary"
@@ -81,7 +82,7 @@ export default {
       page: 1,
       biz_id: null,
       users: [],
-      options: {
+      options: {  
         rewind: true,
         autoplay: true,
         perPage: 1,
@@ -92,19 +93,22 @@ export default {
       },
     };
   },
-  computed: {
-    activeAccount() {
-      return this.$store.getters['auth/profilConnected'];
-    },
-  },
 
   mounted() {
     this.biz_id = this.$route.params.id !== undefined ? this.$route.params.id : this.$router.push('notFound'); //! need some review
     // this.biz_id = this.$route.params.id !== undefined ? this.$route.params.id : 1; //! need some review
   },
 
+  computed: {
+    activeAccount() {
+      return this.$store.getters['auth/profilConnected'];
+    },
+  },
+
   methods: {
-    cta(data) {
+
+
+       cta(data) {
       console.log(data);
       this.$store.commit('businessChat/setSelectedChat', data);
       let path = '';
@@ -117,6 +121,8 @@ export default {
       // this.$router.push({ path: `${path}`, query: { tabId: 1, msgTabId: 1 } });
       this.$router.push({ path: `/business_owner/${this.activeAccount.id}`, query: { tabId: 1, msgTabId: 0 } });
     },
+
+
     count(number) {
       if (number >= 1000000) {
         return number / 1000000 + 'M';
@@ -155,12 +161,15 @@ export default {
             }
           }
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
 
     async handleFollow(user) {
+      
+      console.log("yoo ma gee");
+       document.getElementById("followbtn"+user.id).disabled = true;
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
@@ -170,17 +179,31 @@ export default {
 
       await axios
         .post(uri, data)
-        .then((response) => {
+        .then(({ data }) => {
+          console.log(data);
           user.is_follow = nextFollowState;
+           document.getElementById("followbtn"+user.id).disabled = false;
         })
-        .catch((err) => console.log(err));
+         
+          .catch((err) =>{  
+          
+          console.log({err:err})  ;
+           document.getElementById("followbtn"+user.id).disabled =  false;
+          
+        });
     },
+
   },
 };
 </script>
 
 <style scoped>
 @media only screen and (min-width: 768px) {
+  .s-cardd {
+    padding-left: 6px;
+    padding-right: 6px;
+  }
+
   .btn-text {
     margin-left: 8px;
   }
@@ -213,9 +236,9 @@ export default {
     margin-right: 5px;
   }
 
-  .s-ccard {
-    padding-left: 7px;
-    padding-right: 5px;
+  .s-cardd {
+    padding-left: 4px;
+    padding-right: 4px;
   }
 }
 
@@ -316,7 +339,7 @@ f-right {
 }
 
 .follower {
-  font-size: 12px;
+  font-size: 10px;
 }
 
 .people-style {
@@ -333,7 +356,6 @@ f-right {
   background-color: #fff;
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
-  margin: 5px;
   margin-bottom: 10px;
 }
 
@@ -342,7 +364,6 @@ f-right {
     width: 123px;
     height: 38px;
     font-size: 14px;
-    padding-top: 8px;
   }
 
   .center {
@@ -381,9 +402,6 @@ f-right {
     background-clip: border-box;
     border: 1px solid rgba(0, 0, 0, 0.125);
     margin-bottom: 10px;
-
-    margin-right: 2px;
-    margin-left: 2px;
   }
 
   h6 {
@@ -434,9 +452,6 @@ f-right {
     background-clip: border-box;
     border: 1px solid rgba(0, 0, 0, 0.125);
     margin-bottom: 10px;
-
-    margin-right: 2px;
-    margin-left: 2px;
   }
 
   h6 {
@@ -470,10 +485,9 @@ f-right {
   }
 
   .btn {
-    width: 105px;
+    width: 123px;
     height: 38px;
-    font-size: 12px;
-    padding-top: 8px;
+    font-size: 14px;
   }
 
   .center {
@@ -560,12 +574,11 @@ f-right {
   }
 }
 
-@media only screen and (min-width: 992px) and (max-width: 1331px) {
+@media only screen and (min-width: 992px) and (max-width: 1421px) {
   .btn {
     width: 115px;
-    height: 30px;
-    font-size: 12px;
-    padding-top: 8px;
+    height: 38px;
+    font-size: 14px;
   }
 }
 </style>

@@ -3,55 +3,76 @@
     <b-modal id="modal-sm" size="sm" hide-header> Do you want to join this network? </b-modal>
 
     <b-row>
-      <b-col lg="6" sm="12" class="p-2" v-for="item in network" :key="item.id">
-        <div class="people-style shadow">
-          <b-row>
-            <b-col md="3" xl="3" lg="3" cols="5" sm="3">
-              <div class="center-img">
-                <img :src="item.picture" class="r-image" />
-              </div>
-            </b-col>
-            <b-col md="5" cols="7" lg="7" xl="5" sm="5">
-              <p class="textt">
-                <strong class="net-title"> {{ item.name }} </strong> <br />
-                {{ item.category }}
-                <br />
-                {{ item.followers }} Community <br />
+        <b-col lg="6" sm="12" class="p-2" v-for="item in network" :key="item.id">
 
-                <span class="location">
-                  <b-icon-geo-alt class="ico"></b-icon-geo-alt>
-                  {{ item.location_description }}
-                </span>
-                <br />
+    <div class="people-style shadow">
+      <b-row>
+        <b-col md="3" xl="3" lg="3" cols="5" sm="3">
+          <div class="center-img">
+            <img :src="item.picture" class="r-image" />
+          </div>
+        </b-col>
+        <b-col md="5" cols="7"  lg="7" xl="5" sm="5">
+         
 
-                {{ item.about_network }} <b-link>Read More</b-link>
-              </p>
-            </b-col>
+          <p class="textt">
+            <strong class="net-title"> {{ item.name }} </strong> <br />
+            {{ item.category }}
+            <br />
+            {{ item.followers }} Community <br />
 
-            <b-col lg="12" md="4" xl="4" cols="12" sm="4">
-              <div class="s-button">
-                <b-row>
-                  <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2">
-                    <b-button block size="sm" class="b-background shadow" variant="primary">
-                      <i class="fas fa-user-plus fa-lg btn-icon"></i>
-                      <span class="btn-com" v-b-modal.modal-sm>Community</span>
-                    </b-button>
-                  </b-col>
+            <span class="location">
+              <b-icon-geo-alt class="ico"></b-icon-geo-alt>
+              {{ item.location_description }}
+            </span>
+            <br />
 
-                  <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2">
-                    <b-button block size="sm" class="b-background shadow" variant="primary" @click="cta(item)"
+            {{ item.about_network }} <b-link>Read More</b-link>
+          </p>
+        </b-col>
+
+        <b-col lg="12" md="4" xl="4" cols="12" sm="4">
+          <div class="s-button">
+            <b-row>
+              <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2">
+               
+
+               <b-button
+                  block
+                  size="sm"
+                  class="b-background shadow"
+                  :class="item.is_follow !== 0 && 'u-btn'"
+                  variant="primary"
+                   :id="'followbtn'+item.id"
+                  @click="handleFollow(item)"
+                >
+                  <i class="fas fa-lg btn-icon" :class="item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"></i>
+                  <span class="btn-com">Community</span>
+                </b-button>
+
+
+                
+              </b-col>
+
+              <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2">
+                <b-button block size="sm" class="b-background shadow" variant="primary" @click="cta(item)"
                       ><i class="fas fa-envelope fa-lg btn-icon"></i>
                       <span class="btn-text">Message</span>
                     </b-button>
-                  </b-col>
+              </b-col>
 
-                  <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2"> </b-col>
-                </b-row>
-              </div>
-            </b-col>
-          </b-row>
-        </div>
-      </b-col>
+            <b-col md="12"  lg="4"  xl="12" sm="12" cols="4" class="mt-2"> 
+
+            
+
+            </b-col>  
+   </b-row>
+
+          </div>
+        </b-col>
+      </b-row>
+    </div>
+        </b-col>
     </b-row>
 
     <infinite-loading :identifier="infiniteId" @infinite="infiniteHandler" ref="infiniteLoading"></infinite-loading>
@@ -123,7 +144,37 @@ export default {
       this.$refs.infiniteLoading.attemptLoad();
     },
 
-    infiniteHandler($state) {
+
+
+
+
+     async handleFollow(user) {
+       document.getElementById("followbtn"+user.id).disabled = true;
+      const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
+      const nextFollowState = user.is_follow === 0 ? 1 : 0;
+      const data = {
+        id: user.id,
+        type: 'network',
+      };
+
+      await axios
+        .post(uri, data)
+        .then(response => {
+          user.is_follow = nextFollowState;
+           document.getElementById("followbtn"+user.id).disabled =  false;
+        })
+        .catch(err =>{   console.log(err)
+         document.getElementById("followbtn"+user.id).disabled =  false;
+        });
+    },
+
+
+
+
+    
+      infiniteHandler($state) {
+
+
       let url = null;
 
       if (this.type == 'Follower') {

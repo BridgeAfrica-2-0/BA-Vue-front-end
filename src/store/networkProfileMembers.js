@@ -45,22 +45,22 @@ export default {
       })
     },
 
-    makeAdmin( data ){
+    makeAdmin({commit} ,data ){
       console.log("makeAdmin");
-      console.log(data.path);
+      console.log(data); 
       return axios
-      .post(`network/${data.path}`)
+      .put(`network/${data.url}/make/editor/${data.id}`)
       .then(({ data }) => {
         console.log(data);
         return data;
       })
     },
 
-    removeAsAdmin( data ){
+    removeAsAdmin({commit}, data ){
       console.log("removeAsAdmin");
-      console.log(data.path);
+      console.log(data);  
       return axios
-      .put(`network/${data.path}`)
+      .delete(`network/${data.url}/members/remove/${data.id}`)
       .then(({ data }) => {
         console.log(data);
         return data;

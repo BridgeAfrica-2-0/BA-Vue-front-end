@@ -2,6 +2,8 @@
 import auth from './auth.json'
 import businessf from './businessf.json'
 import search from './search.json'
+import Order from './Order.json'
+import myOrders from './myOrders.json'
 import network from './network.json'
 
 import verification from './verification.json'
@@ -19,22 +21,23 @@ import profilefollower from './network.json'
 export const defaultLocale = 'fr'
 
 export const fr = {
-
-
-    auth: auth,
-    // businessf: businessf,
-    // search: search,
+ 
+  auth: auth,
+  businessf:businessf,
+  search: search,
+  Order:Order,
+  myOrders:myOrders,
   
-    // passrecover: passrecover,
+   passrecover: passrecover,
     welcome: welcome,
     dashboard: dashboard,
-    // profileowner: profileowner,
-    // memnetwork: memnetwork,
-
-    // network: network,
+     profileowner: profileowner,
+     memnetwork: memnetwork,
+    verification: verification,
+   
     profilefollower: profilefollower,
     businessf: businessf,
-    search: search,
+
     network: network,
-    memnetwork: memnetwork,
+   
 }

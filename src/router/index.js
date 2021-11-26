@@ -125,11 +125,11 @@ const routes = [
   },
 
 
-  {
-    path: "/govx",
-    name: "govx",
-    component: govx,
-  },
+  // {
+  //   path: "/govx",
+  //   name: "govx",
+  //   component: govx,
+  // },
 
   {
     path: "/welcome",
@@ -321,7 +321,7 @@ const routes = [
     name: "Nav Meassage",
     component: navMessage,
   },
-},
+
 {
   path: "/services/:id",
   name: "Service",

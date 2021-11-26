@@ -556,7 +556,7 @@ export default {
         console.log(response);
         console.log(this.getUserInfos);
         this.message1 = response.data.message ;
-        
+        this.userInfos();
       })
       .catch((err) => {
          

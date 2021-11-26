@@ -17,7 +17,10 @@ import IconifyIcon from '@iconify/vue';
 import homeIconData from '@iconify-icons/mdi-light/home';
 import ReadMore from 'vue-read-more';
 import VueSocialauth from 'vue-social-auth';
-import VueSocialSharing from 'vue-social-sharing';
+
+
+import ShareNetwork from 'vue-social-sharing';
+Vue.use(ShareNetwork);
 
 // don't comment that 2 line URGENT
 import plugin from './http';
@@ -164,7 +167,7 @@ import VueAgile from 'vue-agile';
 
 Vue.use(VueAgile);
 
-Vue.use(VueSocialSharing);
+
 import CoolLightBox from 'vue-cool-lightbox';
 import 'vue-cool-lightbox/dist/vue-cool-lightbox.min.css';
 

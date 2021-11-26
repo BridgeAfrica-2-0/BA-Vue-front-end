@@ -417,7 +417,13 @@ export const Redis = {
     }),
 
     async getAuth() {
-      const response = await this.$repository.share.WhoIsConnect({ businessId: this.route.params.id });
+      let response = null
+      try {
+        response = await this.$repository.share.WhoIsConnect({ businessId: this.route.params.id });
+      } catch (error) {
+        response = await this.$repository.share.WhoIsConnect({ businessId: null });
+      }
+
       if (response.access) this.auth(response.data);
     },
 
@@ -439,7 +445,7 @@ export const Redis = {
     },
 
     listenProfileEvent() {
-      initRedis(this.token)
+      // initRedis(this.token)
       const $event = `user.${this.profile.id}`;
 
       window.Redis.private($event)
@@ -471,7 +477,7 @@ export const Redis = {
       business: () => this.listenBusinessEvent(),
       network: () => null,
     }
-    this.init()
+    // this.init()
   }
 }
 

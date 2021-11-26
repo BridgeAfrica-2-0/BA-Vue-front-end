@@ -11,7 +11,7 @@
     <h6 class="mt-3 fw-b">{{ subtitle }}</h6>
 
     <b-list-group>
-      <Loader v-if="loading && hasbeLoad" />
+      <Loader v-if="loading" />
       <Contact
         v-for="(contact, index) in contacts"
         :contact="contact"

@@ -121,7 +121,7 @@
       <b-dropdown-item
         class="d-flex py-2 cursor-pointer"
         @click="shareToYourProfile"
-        v-if="!isYourOwnPost"
+        v-if="isYourOwnPost"
       >
         <span class="text-ored">
           <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
@@ -134,7 +134,7 @@
       <b-dropdown-item
         class="d-flex py-2 cursor-pointer"
         @click="open(`modal-10-${uuid}`)"
-        v-if="!isYourOwnPost"
+        v-if="isYourOwnPost"
       >
         <span class="text-ored">
           <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
@@ -147,6 +147,13 @@
       <b-dropdown-item
         class="d-flex py-2 cursor-pointer"
         @click="open(`modal-2-${uuid}`)"
+        v-if="
+          $route.name != 'networks'
+            ? 'network' != profile.user_type
+              ? true
+              : false
+            : false
+        "
       >
         <span class="text-ored">
           <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
@@ -159,13 +166,7 @@
       <b-dropdown-item
         class="d-flex py-2 cursor-pointer"
         @click="open(`modal-3-${uuid}`)"
-        v-if="
-          $route.name != 'BusinessOwner'
-            ? 'business' != profile.user_type
-              ? true
-              : false
-            : false
-        "
+        v-if="$route.name != 'networks' ? true : false"
       >
         <span class="text-ored">
           <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
@@ -263,7 +264,7 @@
 
       <b-dropdown-item
         class="d-flex py-2 cursor-pointer"
-        id="sharing-via"
+        :id="`sharing-via-${uuid}`"
         data-toggle="popover"
         role="button"
         data-original-title=""
@@ -275,7 +276,11 @@
           <span>{{ $t("search.Share_via") }}</span>
         </div>
       </b-dropdown-item>
-      <b-popover target="sharing-via" triggers="hover" placement="left">
+      <b-popover
+        :target="`sharing-via-${uuid}`"
+        :triggers="['click', 'hover']"
+        placement="left"
+      >
         <div class="popover-body">
           <div
             class="
@@ -291,7 +296,13 @@
               <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
             </span>
             <div class="d-flex flex-column ml-3">
-              <span>{{ $t("search.Share_to_your_profile") }}</span>
+              <Social
+                @mousedown="onShare"
+                :network="'Email'"
+                :post="post"
+                :title="'Share via Email'"
+              >
+              </Social>
             </div>
           </div>
 
@@ -309,7 +320,13 @@
               <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
             </span>
             <div class="d-flex flex-column ml-3">
-              <span>{{ $t("search.Share_to_network") }}</span>
+              <Social
+                @mousedown="onShare"
+                :network="'facebook'"
+                :post="post"
+                :title="'Share via Facebook'"
+              >
+              </Social>
             </div>
           </div>
 
@@ -327,7 +344,36 @@
               <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
             </span>
             <div class="d-flex flex-column ml-3">
-              <span>{{ $t("search.Share_to_your_business") }}</span>
+              <Social
+                :network="'Twitter'"
+                :post="post"
+                :title="'Share via Twitter'"
+              >
+              </Social>
+            </div>
+          </div>
+
+          <div
+            class="
+              d-inline-flex
+              flex-row
+              align-items-center
+              suggest-item
+              py-2
+              cursor-pointer
+            "
+          >
+            <span class="text-ored">
+              <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
+            </span>
+            <div class="d-flex flex-column ml-3">
+              <Social
+                @mousedown="open"
+                :network="'WhatsApp'"
+                :post="post"
+                :title="'Share via Whatsapp'"
+              >
+              </Social>
             </div>
           </div>
         </div>
@@ -336,9 +382,9 @@
   </div>
 </template>
 
-
 <script>
 import Box from "./Box";
+import Social from "./Social";
 import Post from "./SharePost";
 
 import { mapGetters } from "vuex";
@@ -354,6 +400,7 @@ export default {
   components: {
     Box,
     Post,
+    Social,
   },
 
   data: () => ({
@@ -366,8 +413,7 @@ export default {
   created() {
     this.uuid = this.post.post_id ? this.post.post_id : this.post.id;
     this.type = this.profile.user_type;
-
-    console.log(this.profile)
+    console.log(this.post, this.uuid);
   },
 
   computed: {
@@ -386,8 +432,8 @@ export default {
         this.profile.id == this.post.user_id &&
         this.profile.user_type == this.post.poster_type;
 
-      return !isItOwnerPage
-        ? true
+      return isItOwnerPage
+        ? false
         : isYourOwn && this.$route.name == "dashboard"
         ? false
         : true;
@@ -409,11 +455,12 @@ export default {
   },
 
   methods: {
+    onShare() {
+      console.log("on share");
+    },
     open(id) {
-      console.log(id);
       this.modal = id;
       this.$bvModal.show(id);
-      console.log(`${id}___BV_modal_outer_`);
       const hack = document.getElementsByClassName(`${id}___BV_modal_outer_`);
 
       console.log(hack);
@@ -447,7 +494,7 @@ export default {
 </script>
 
 <style scoped>
-.bold{
+.bold {
   font-weight: bold;
 }
 .border {

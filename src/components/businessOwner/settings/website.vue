@@ -34,14 +34,14 @@
                 </b-tbody>
               </b-table-simple>
             </div>
-            <b-button variant="outline" class="btn-outline-primary" @click="deleteAccount()">
+            <!-- <b-button variant="outline" class="btn-outline-primary" v-b-modal.PackageDelete>
               Delete Account
-            </b-button>
+            </b-button> -->
           </b-col>
 
         </b-row>
         <!-- Basics -->
-        <b-modal v-model="modalShowBasics" size="xl" hide-footer="true" no-stacking header-bg-variant="light" body-bg-variant="light">
+        <b-modal v-model="modalShowBasics" centered  size="xl" hide-footer="true" no-stacking header-bg-variant="light" body-bg-variant="light">
           <b-row>
             <b-col cols="8">
               <h5><b-icon icon="check-circle-fill" variant="success"></b-icon> NORMAL ACCOUNT (BASIC ACCOUNT)</h5><br>
@@ -70,7 +70,7 @@
         </b-modal>
 
         <!-- Premium -->
-        <b-modal v-model="modalShowPremium" size="xl" hide-footer="true" header-bg-variant="light" body-bg-variant="light" no-stacking>
+        <b-modal v-model="modalShowPremium" centered  size="xl" hide-footer="true" header-bg-variant="light" body-bg-variant="light" no-stacking>
           <b-row>
             <b-col cols="7">
               <h5><b-icon icon="check-circle-fill" variant="success"></b-icon> UPGRADE TO PREMIUM</h5><br>
@@ -99,7 +99,7 @@
         </b-modal>
 
         <!-- Package Selection -->
-        <b-modal id="PackageSelection" title="Select Your Package" size="md" hide-footer no-stacking>
+        <b-modal id="PackageSelection" centered  title="Select Your Package" size="md" hide-footer no-stacking>
           <div class="">
             <div class="my-4 operator">
               <div class="">
@@ -176,7 +176,7 @@
         </b-modal>
 
         <!-- Request Payment -->
-        <b-modal id="AcRequestPayment" title="Enter your MTN Mobile Money number" size="md" hide-footer>
+        <b-modal id="AcRequestPayment" centered  title="Enter your MTN Mobile Money number" size="md" hide-footer>
           <div v-if="!congratulation" class="px-0">
             <b-overlay :show="show" rounded="sm">
               <div class="row">
@@ -227,6 +227,45 @@
           </div>
           <FlashMessage />
         </b-modal>
+
+        <!-- Delete Account -->
+        <!-- <b-modal id="PackageDelete" centered  title="Delete Acitve Package❗❗" size="sm" hide-footer class="alert alert-success">
+          <div class="">
+            <div>
+              <b-table-simple responsive>
+                <b-thead>
+                  <b-tr>
+                    <b-th class="a-text username"> Package </b-th>
+                    <b-th>Information</b-th>
+                  </b-tr>
+                </b-thead>
+                <b-tbody>
+                  <b-tr>
+                    <b-td class="a-text"> Name: </b-td>
+                    <b-td class="a-text"> {{Packages.user_actived_plan[0].name}} </b-td>
+                  </b-tr>
+                  <b-tr>
+                    <b-td class="a-text"> Start Date: </b-td>
+                    <b-td class="a-text"> {{Packages.user_actived_plan[0].start_at}} </b-td>
+                  </b-tr>
+                  <b-tr>
+                    <b-td class="a-text"> Expiring Date: </b-td>
+                    <b-td class="a-text"> {{Packages.user_actived_plan[0].expired_at}} </b-td>
+                  </b-tr>
+                </b-tbody>
+              </b-table-simple>
+            </div>
+
+            <div class="row p-2">
+              <div class="col">
+                <button
+                  @click="deletePackage()"
+                  class="float-right btn-custom p-2 btn btn-primary mt-2"
+                > Delete</button>
+              </div>
+            </div>
+          </div>
+        </b-modal> -->
 
       </b-container>
 
@@ -375,28 +414,25 @@ export default {
       return this.formatObject.format(money);
     },
 
-    deleteAccounts: function(){
-      let formData = new FormData();
-      // formData.append('name', this.form.name);
-      // formData.append('role', this.form.role);
-      this.axios.delete("business/account/delete/"+this.url, formData)
-      .then(() => {
-        console.log('ohh yeah');
-        this.displayEditor();
-        this.flashMessage.show({
-          status: "success",
-          message: "Editor Deleted"
-        });
+    // deletePackage: function(){
+    //   this.axios.delete("business/account/delete/"+this.url, formData)
+    //   .then(() => {
+    //     console.log('ohh yeah');
+    //     this.displayEditor();
+    //     this.flashMessage.show({
+    //       status: "success",
+    //       message: "Editor Deleted"
+    //     });
           
-      })
-      .catch(err => {
-        console.log({ err: err });
-        this.flashMessage.show({
-          status: "error",
-          message: "Unable To Delete Editor"
-        });
-      });
-		},
+    //   })
+    //   .catch(err => {
+    //     console.log({ err: err });
+    //     this.flashMessage.show({
+    //       status: "error",
+    //       message: "Unable To Delete Editor"
+    //     });
+    //   });
+		// },
 
     getNow: function() {
       const today = new Date();

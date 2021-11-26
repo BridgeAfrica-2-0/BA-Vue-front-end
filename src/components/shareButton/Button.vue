@@ -297,7 +297,6 @@
             </span>
             <div class="d-flex flex-column ml-3">
               <Social
-                @mousedown="onShare"
                 :network="'Email'"
                 :post="post"
                 :title="'Share via Email'"
@@ -321,7 +320,6 @@
             </span>
             <div class="d-flex flex-column ml-3">
               <Social
-                @mousedown="onShare"
                 :network="'facebook'"
                 :post="post"
                 :title="'Share via Facebook'"

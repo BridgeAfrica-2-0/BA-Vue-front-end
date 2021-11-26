@@ -131,7 +131,7 @@
             <h3>ITEMS {{ rowsOrder }}</h3>
           </div>
           <div class="col">
-            <h3>10000 XAF</h3>
+            <h3>{{ getTotalPrice }} XAF</h3>
           </div>
         </div>
         <br />
@@ -167,7 +167,7 @@ export default {
   data() {
     return {
       currentPage: 1,
-      per_page: 4,
+      per_page: 5,
       loading: false,
       error: false,
       formatObject: new Intl.NumberFormat("fr-FR", {
@@ -194,13 +194,18 @@ export default {
     rowsOrder() {
       let rows = 1;
       if (this.cart["data"]) {
-        rows = this.cart["data"].length;
+        rows = this.cart.total;
       }
+
       return rows;
       // return this.order_items.length;
     },
     cart() {
       return this.$store.state.checkout.cart;
+    },
+    getTotalPrice() {
+      let totalItems = this.cart.total;
+      return 0;
     },
   },
   methods: {

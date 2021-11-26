@@ -134,7 +134,7 @@
               class="input-group-text border-left-0 color-mobile"
               style="width: 40px; border-right: none; background-color: white"
             >
-              <i class="bx bx-map" style="color: #e75c18" font-scale="1.5"> tt</i>
+              <i class="bx bx-map" style="color: #e75c18" font-scale="1.5"> </i>
             </span>
           </div>
 
@@ -148,6 +148,7 @@
             aria-label=""
             data-original-title=""
             title=""
+            v-on:click="toggleinput()"
             v-model="word2"
           />
         </div>
@@ -172,10 +173,11 @@
               type="search"
               data-toggle="popover"
               class="form-control search-h"
-              placeholder="Find Pharmacy"
               aria-label=""
               data-original-title=""
               title=""
+              placeholder="All"
+              v-model="credentials.keyword"
             />
 
             <input
@@ -195,8 +197,10 @@
               <option value=" Current Location "></option>
               <option value="Yaounde " />
             </datalist>
-
-            <div
+             <slot name="button">
+                <Button @click.native="getKeyword" />
+              </slot>
+            <!-- <div
               class="input-group-append"
               style="
                 color: white;
@@ -207,7 +211,7 @@
               <span class="input-group-text border-left-0 orange">
                 <i class="icofont-search-2 f-20"></i>
               </span>
-            </div>
+            </div> -->
           </form>
         </div>
       </div>
@@ -576,7 +580,7 @@
 
                 <button
                   class="btn btn-primary mt-5 bridge-btn float-left bridge-btn"
-                  @click="community"
+                 
                 >
                   Sign up
                 </button>
@@ -638,7 +642,7 @@
 
                 <button
                   class="btn btn-primary mt-5 bridge-btn float-left bridge-btn"
-                  @click="On"
+                 
                 >
                   Sign up
                 </button>
@@ -873,8 +877,9 @@
 
 import "../assets/js/main.js";
 // import "../assets/js/js.js";
+import Button from '@/components/ButtonNavBarFind.vue';
 export default {
-
+  components: {Button},
   data(){
     return {
       expanded:true,
@@ -886,6 +891,18 @@ export default {
 
   mounted(){
     
+  },
+
+  props: {
+    credentials: {
+      type: Object,
+      default: function () {
+        return {
+          keyword: '',
+          placeholder: 'All',
+        };
+      },
+    },
   },
 
   methods:{
@@ -915,7 +932,28 @@ export default {
       }else if(a == 2){
          this.expanded= true;
       }
-    }
+    },
+
+     toggleinput() {
+      this.$refs.mobileinput.style.display = "block";
+    },
+
+    getKeyword() { console.log(this.credentials.keyword)
+      if (!this.credentials.keyword) return false;
+
+      if (this.$route.name != 'Search') {
+        this.$store
+          .dispatch('allSearch/SEARCH', {
+            keyword: this.credentials.keyword,
+          })
+          .catch((err) => {
+            console.log('Error erro!');
+          });
+
+        this.$router.push({ name: 'Search' });
+      }
+    },
+
   }
 };
 </script>

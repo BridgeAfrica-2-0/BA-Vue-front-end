@@ -166,7 +166,7 @@
       <b-dropdown-item
         class="d-flex py-2 cursor-pointer"
         @click="open(`modal-3-${uuid}`)"
-        v-if="$route.name != 'networks' ? true : false"
+        v-if="isYourOwnPost"
       >
         <span class="text-ored">
           <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
@@ -268,6 +268,7 @@
         data-toggle="popover"
         role="button"
         data-original-title=""
+        ref="button"
       >
         <span class="text-ored">
           <b-icon-share-fill class="col-bg"></b-icon-share-fill>
@@ -276,10 +277,12 @@
           <span>{{ $t("search.Share_via") }}</span>
         </div>
       </b-dropdown-item>
+
       <b-popover
         :target="`sharing-via-${uuid}`"
-        :triggers="['click', 'hover']"
+        :triggers="['hover', 'click']"
         placement="left"
+        focus 
       >
         <div class="popover-body">
           <div
@@ -423,18 +426,16 @@ export default {
       const isItOwnerPage =
         this.$route.name == "BusinessOwner" ||
         this.$route.name == "profile_owner"
-          ? true
-          : false;
+          ? false
+          : true;
 
       const isYourOwn =
         this.profile.id == this.post.user_id &&
         this.profile.user_type == this.post.poster_type;
 
       return isItOwnerPage
-        ? false
-        : isYourOwn && this.$route.name == "dashboard"
-        ? false
-        : true;
+        ? isYourOwn && this.$route.name == "dashboard" ? false : true
+        : false
     },
   },
 

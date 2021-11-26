@@ -445,7 +445,7 @@ export const Redis = {
     },
 
     listenProfileEvent() {
-      // initRedis(this.token)
+      initRedis(this.token)
       const $event = `user.${this.profile.id}`;
 
       window.Redis.private($event)

@@ -327,12 +327,12 @@ export default {
     },
 
     submitLogo() {
-      let loader = this.$loading.show({
-        container: this.fullPage ? null : this.$refs.preview,
-        canCancel: true,
-        onCancel: this.onCancel,
-        color: '#e75c18',
-      });
+      // let loader = this.$loading.show({
+      //   container: this.fullPage ? null : this.$refs.preview,
+      //   canCancel: true,
+      //   onCancel: this.onCancel,
+      //   color: '#e75c18',
+      // });
 
       let formData = new FormData();
       formData.append('image', this.profile_photo);
@@ -353,7 +353,7 @@ export default {
                 message: 'Logo Updated',
                 blockClass: 'custom-block-class',
               });
-              loader.hide();
+              // loader.hide();
               this.$refs['modalxl'].hide();
             })
             .catch((error) => {
@@ -369,7 +369,7 @@ export default {
               message: err.response.data.message,
               blockClass: 'custom-block-class',
             });
-            loader.hide();
+            // loader.hide();
           } else {
             this.flashMessage.show({
               status: 'error',
@@ -377,7 +377,7 @@ export default {
               blockClass: 'custom-block-class',
             });
             console.log({ err: err });
-            loader.hide();
+            // loader.hide();
           }
         });
     },

@@ -16,7 +16,7 @@
 						<b-card-title class="title-font-size d-inline-block mb-0">
 							Order Summary
 						</b-card-title>
-						<b-button class="btn-my-cart" variant="primary"
+						<b-button @click="gotoCart" class="btn-my-cart" variant="primary"
 							><b-icon icon="cart" class="mr-2"></b-icon>My Cart</b-button
 						>
 					</div>
@@ -30,7 +30,7 @@
 						class="col-12 mt-3 text-center text-success font-weight-bold title-font-size"
 					>
 						<p class="link">
-							<b-icon icon="arrow-left-circle-fill"></b-icon> Back to Shooping
+							<b-icon icon="arrow-left-circle-fill"></b-icon> Back to Shopping
 						</p>
 					</div>
 				</div>
@@ -52,6 +52,9 @@
 			handleSwitchStep() {
 				this.$emit("switchstep", 2);
 			},
+			gotoCart(){
+				this.$router.push('/cart');
+			}
 		},
 		data() {
 			return {
@@ -111,6 +114,7 @@
 				],
 			};
 		},
+
 	};
 </script>
 

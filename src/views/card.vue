@@ -66,6 +66,9 @@
             </div>
           </div> <hr>
         </div>
+        <div class="d-flex justify-content-center">
+        <b-pagination v-model="currentPage" pills :total-rows="rows"></b-pagination>
+        </div>
       </div>
       <div class=" line"></div>
       <div class="col-12 col-md-3 color">
@@ -108,6 +111,8 @@ export default {
   components : {navbar}, 
   data() {
     return {
+      rows: 5,
+      currentPage: 1,
       img: ["http://urlr.me/YMQXD", "https://placekitten.com/400/300"],
     };
   },

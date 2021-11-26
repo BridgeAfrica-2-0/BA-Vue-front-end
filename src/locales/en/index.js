@@ -9,6 +9,8 @@ import passrecover from './passrecover.json'
 import welcome from './welcome.json'
 import dashboard from './dashboard.json'
 import profileowner from './profileowner.json'
+import Order from './Order.json'
+import myOrders from './myOrders.json'
 
 import memnetwork from './memnetwork.json'
 
@@ -33,4 +35,7 @@ export const en = {
     profilefollower: profilefollower,
     verification: verification,
     profileowner: profileowner,
+    welcome: welcome,
+    Order:Order,
+    myOrders:myOrders,
 }

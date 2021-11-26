@@ -42,7 +42,7 @@
                 <lightbox
                   :cells="item.media.length"
                   :items="
-                    item.media.map(function (a) {
+                    item.map(function (a) {
                       return a.media_url;
                     })
                   "

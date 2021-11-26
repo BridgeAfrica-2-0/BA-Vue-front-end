@@ -1,9 +1,9 @@
 <template
 	><b-card class="">
 		<div class="card-header title-font-size font-weight-bold bg-white h-50">
-			Review and confirm your Order ( {{ cartLenght }} item)
+			{{$t("Order.Review_and_confirm_your_Order")}} ( {{ cartLenght }} {{$t("Order.item")}})
 			<br />
-			Business: Largo
+			{{$t("Order.Business")}}: Largo
 		</div>
 		<div class="order card-body">
 			<div>
@@ -15,7 +15,7 @@
 							class="btn text-14 btn-custom btn-primary px-5 shadow-sm"
 						>
 							<b-spinner v-if="loading" small variant="light"></b-spinner>
-							Order
+							{{$t("Order.Order")}}
 						</button>
 					</div>
 				</div>

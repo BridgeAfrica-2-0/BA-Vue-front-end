@@ -19,9 +19,9 @@ import ReadMore from 'vue-read-more';
 import VueSocialauth from 'vue-social-auth';
 import VueSocialSharing from 'vue-social-sharing';
 
-// import plugin from './http';
+import plugin from './http';
 
-// Vue.use(plugin);
+Vue.use(plugin);
 Vue.use(require('vue-moment'));
 
 IconifyIcon.addIcon('home', homeIconData);

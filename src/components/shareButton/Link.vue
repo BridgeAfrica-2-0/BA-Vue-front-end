@@ -1,5 +1,5 @@
 <template>
-  <b-list-group-item class="d-flex align-items-center">
+  <b-list-group-item class="d-flex align-items-center py-0">
     <b-avatar class="mr-3" :src="contact.logo"></b-avatar>
     <span class="mr-auto">{{ contact.name }}</span>
     <Button

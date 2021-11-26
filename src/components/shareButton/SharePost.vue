@@ -27,6 +27,7 @@
     </div>
 
     <Button
+    
       @click.native="sharing"
       :loading="loading"
       title="Publish"

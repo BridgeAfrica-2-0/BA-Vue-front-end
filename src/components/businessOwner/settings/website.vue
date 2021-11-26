@@ -25,7 +25,7 @@
                     :variant="Package.id === Packages.user_actived_plan[0].package_id ? 'secondary':' '" 
                     style="cursor:pointer"
                   >
-                    <b-td class="a-text"> {{Package.name}} </b-td>
+                    <b-td class="a-text" style="text-transform: capitalize;"> {{Package.name}} </b-td>
                     <b-td class="a-text">
                       <b-link>{{Package.id === Packages.user_actived_plan[0].package_id ? 'Current':'Upgrade'}}</b-link>
                       <span class="text-success"> Expires in {{moment(Packages.user_actived_plan[0].expired_at).fromNow()}}</span>

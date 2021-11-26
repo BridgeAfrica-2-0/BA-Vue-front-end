@@ -6,10 +6,10 @@
         <b-col md="3">
           <b-card title="" header-tag="header" footer-tag="footer">
             <template #header>
-              <h6 class="mb-0 d-inline-block">Intro</h6>
+              <h6 class="mb-0 d-inline-block">{{ $t('dashboard.Intro') }}</h6>
               <span class="float-right btn m-0 p-0 mt-1 action-intro"
-                ><b-icon icon="pencil-fill" variant="primary"></b-icon> Edit
-                Profile</span
+                ><b-icon icon="pencil-fill" variant="primary"></b-icon> 
+                {{ $t('dashboard.Edit_Profile') }}</span
               >
             </template>
             <img
@@ -18,24 +18,24 @@
             />
             <b-card-text class="text-left text-size mt-2">
               <p>
-                <b-icon icon="briefcase-fill" variant="primary"></b-icon> Work
-                at: Current or Last Organization
+                <b-icon icon="briefcase-fill" variant="primary"></b-icon> 
+                {{ $t('dashboard.Work_at') }}: {{ $t('dashboard.Current_or_Last_Organization') }}
               </p>
               <p>
-                <b-icon icon="book-fill" variant="primary"></b-icon> Studied at:
-                Last Education
+                <b-icon icon="book-fill" variant="primary"></b-icon> {{ $t('dashboard.Studied_at') }}:
+                {{ $t('dashboard.Last_Education') }}
               </p>
               <p>
-                <b-icon icon="house-fill" variant="primary"></b-icon> Home Town
-                Name:Dummy
+                <b-icon icon="house-fill" variant="primary"></b-icon> 
+                {{ $t('dashboard.Home_Town_Name') }}:Dummy
               </p>
               <p>
-                <b-icon icon="geo-alt-fill" variant="primary"></b-icon> Current
-                City Name:Dummy
+                <b-icon icon="geo-alt-fill" variant="primary"></b-icon> 
+                {{ $t('dashboard.Current_City_Name') }}:Dummy
               </p>
               <p>
-                <b-icon icon="people-fill" variant="primary"></b-icon> Followed
-                by: 525
+                <b-icon icon="people-fill" variant="primary"></b-icon> 
+                {{ $t('dashboard.Followed_by') }}: 525
               </p>
             </b-card-text>
           </b-card>
@@ -43,10 +43,10 @@
           <b-card class="text-center mt-2 p-2">
             <div class="">
               <h6 class="font-weight-bolder">
-                Invite friends on Bridge Africa
+                {{ $t('dashboard.Invite_friends_on_Bridge_Africa') }}
               </h6>
               <b-button variant="outline-primary" class="btn-block mt-2">
-                <b-icon-plus></b-icon-plus> Invite</b-button
+                <b-icon-plus></b-icon-plus> {{ $t('dashboard.Invite') }}</b-button
               >
             </div>
           </b-card>
@@ -54,7 +54,7 @@
         <b-col md="9">
           <b-card class="p-2">
             <h3 class="font-weight-bolder">
-              Welcome to Bridge Africa, Maxine
+              {{ $t('dashboard.Welcome_to_Bridge_Africa') }}, Maxine
             </h3>
             <hr width="100%" />
 
@@ -62,7 +62,7 @@
               <div class="my-border rounded-circle welcome-section-number mr-2">
                 1
               </div>
-              <div class="h5 font-weight-bold mb-0">Follow People</div>
+              <div class="h5 font-weight-bold mb-0">{{ $t('dashboard.Follow_People') }}</div>
             </div>
             <hr width="100%" />
 
@@ -80,13 +80,13 @@
                 </span>
                 <span class="float-right mt-1">
                   <b-button variant="outline-primary" class="mt-2"
-                    >Follow
+                    >{{ $t('dashboard.Follow') }}
                   </b-button>
                 </span>
               </p>
               <hr width="100%" />
             </div>
-            <h5 class="px-1"><a href="#">See All</a></h5>
+            <h5 class="px-1"><a href="#">{{ $t('dashboard.See_All') }}</a></h5>
             <br />
             <br />
 
@@ -94,7 +94,7 @@
               <div class="my-border rounded-circle welcome-section-number mr-2">
                 2
               </div>
-              <div class="h5 font-weight-bold mb-0">Follow Bussiness</div>
+              <div class="h5 font-weight-bold mb-0">{{ $t('dashboard.Follow_Bussiness') }}</div>
             </div>
             <hr width="100%" />
 
@@ -112,13 +112,13 @@
                 </span>
                 <span class="float-right mt-1">
                   <b-button variant="outline-primary" class="mt-2"
-                    >Follow
+                    >{{ $t('dashboard.Follow') }}
                   </b-button>
                 </span>
               </p>
               <hr width="100%" />
             </div>
-            <h5 class="px-1"><a href="#">See All</a></h5>
+            <h5 class="px-1"><a href="#">{{ $t('dashboard.See_All') }}</a></h5>
             <br />
             <br />
 
@@ -127,19 +127,19 @@
                 3
               </div>
               <div class="h5 font-weight-bold mb-0">
-                Update your profile picture
+                {{ $t('dashboard.Update_your_profile_picture') }}
               </div>
             </div>
             <hr width="100%" />
             <div class="h-100 w-100">
               <div class="mx-auto text-center my-5">
                 <b-button variant="outline-primary" class="my-2">
-                  Upload Picture</b-button
+                  {{ $t('dashboard.Upload_Picture') }}</b-button
                 >
-                <p class="m-0">Or</p>
-                <p class="mb-2">No Profile Pic</p>
-                <p class="my-0"><a href="#">Take A Photo</a></p>
-                <p class="my-2">With Your webcam</p>
+                <p class="m-0">{{ $t('dashboard.Or') }}</p>
+                <p class="mb-2">{{ $t('dashboard.No_Profile_Pic') }}</p>
+                <p class="my-0"><a href="#">{{ $t('dashboard.Take_A_Photo') }}</a></p>
+                <p class="my-2">{{ $t('dashboard.With_Your_webcam') }}</p>
               </div>
             </div>
             <hr width="100%" />
@@ -154,10 +154,10 @@
                     3
                   </div>
                   <div class="h5 font-weight-bold mb-0">
-                    Get to know your setting <br />
+                    {{ $t('dashboard.Get_to_know_your_setting') }} <br />
                     <span class="small"
-                      >Control how you share information <br />
-                      with people or business</span
+                      >{{ $t('dashboard.Control_how_you_share_information') }} <br />
+                      {{ $t('dashboard.with_people_or_business') }}</span
                     >
                   </div>
                 </div>
@@ -165,7 +165,7 @@
               <b-col cols="5">
                 <p class="">
                   <b-button variant="outline-primary" class="my-2 float-right">
-                    Upload Picture</b-button
+                    {{ $t('dashboard.Upload_Picture') }}</b-button
                   >
                 </p>
               </b-col>

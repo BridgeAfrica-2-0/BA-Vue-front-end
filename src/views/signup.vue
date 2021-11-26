@@ -114,7 +114,7 @@
 
             <span class="md-error" v-if="!$v.form.password.minLength" >
               {{ $t("auth.password_is_required") }}
-              Password must have at least {{ $v.form.password.$params.minLength.min }} letters.
+              {{ $t("auth.Password_must_have_at_least") }} {{ $v.form.password.$params.minLength.min }} letters.
             </span>
 
             
@@ -134,8 +134,8 @@
             </span>
 
              <span class="md-error" v-if="!$v.form.confirmPassword.sameAsPassword"
-              > {{ $t("auth.password_identical") }} 
-               
+              > {{ $t("auth.Password_is_required") }} 
+               {{ $t("auth.Passwords_must_be_identical") }} .
             </span>
 
           </md-field>
@@ -304,7 +304,7 @@ export default {
           this.flashMessage.show({
             status: "success",
 
-            message: "Successfully Register",
+            message: this.$t('auth.Successfully_Register'),
           });
 
           this.$router.push({ name: "welcome" });
@@ -350,9 +350,9 @@ export default {
 
           this.flashMessage.show({
             status: "success",
-            title: "Successfully Register",
+            title: this.$t('auth.Successfully_Register'),
             message:
-              "Thanks for registering. You will get your otp code in a second",
+              this.$t('auth.Thanks_for_registering_You_will_get_your_otp_code_in_a_second'),
           });
 
           this.$router.push({ name: "verifyAccount" });
@@ -373,8 +373,8 @@ export default {
           } else {
             this.flashMessage.show({
               status: "error",
-              title: "Registration Failed",
-              message: "Unable to store this data",
+              title: this.$t('auth.Registration_Failed'),
+              message: this.$t('auth.Unable_to_store_this_data'),
             });
             console.log({ err: err });
           }

@@ -22,16 +22,14 @@ export const fr = {
 
 
     auth: auth,
-    // businessf: businessf,
-    // search: search,
   
-    // passrecover: passrecover,
+    passrecover: passrecover,
     welcome: welcome,
     dashboard: dashboard,
-    // profileowner: profileowner,
+    profileowner: profileowner,
     // memnetwork: memnetwork,
-
-    // network: network,
+    verification: verification,
+  
     profilefollower: profilefollower,
     businessf: businessf,
     search: search,

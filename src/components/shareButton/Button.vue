@@ -282,7 +282,7 @@
         :target="`sharing-via-${uuid}`"
         :triggers="['hover', 'click']"
         placement="left"
-        focus 
+        focus
       >
         <div class="popover-body">
           <div
@@ -414,7 +414,6 @@ export default {
   created() {
     this.uuid = this.post.post_id ? this.post.post_id : this.post.id;
     this.type = this.profile.user_type;
-    console.log(this.post, this.uuid);
   },
 
   computed: {
@@ -434,8 +433,10 @@ export default {
         this.profile.user_type == this.post.poster_type;
 
       return isItOwnerPage
-        ? isYourOwn && this.$route.name == "dashboard" ? false : true
-        : false
+        ? isYourOwn && this.$route.name == "dashboard"
+          ? false
+          : true
+        : false;
     },
   },
 
@@ -454,15 +455,9 @@ export default {
   },
 
   methods: {
-    onShare() {
-      console.log("on share");
-    },
     open(id) {
       this.modal = id;
       this.$bvModal.show(id);
-      const hack = document.getElementsByClassName(`${id}___BV_modal_outer_`);
-
-      console.log(hack);
     },
 
     shareToYourProfile: async function () {

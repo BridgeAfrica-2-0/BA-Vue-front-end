@@ -2,7 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 //import Home from "../views/home.vue";
 import Login from "../views/login.vue";
-
+import home1 from "@/views/home1.vue";
 import signup from "../views/signup.vue";
 
 import RecoverPass1 from "../views/recoverPassword1.vue";
@@ -31,7 +31,7 @@ import businessVisitor from "@/views/businessVisitor";
 import search from "@/views/search";
 import forgotPassword from "@/views/forgotPassword";
 import navMessage from "@/views/navMessaging";
-import Blec from "@/views/blec";
+
 import memberNetworkFollower from "@/views/memberNetworkFollower";
 import memberNetwork from "@/views/memberNetwork";
 
@@ -56,6 +56,8 @@ import ordersdetail from "@/views/odersDetail";
 import businessordersdetail from "@/views/businessordersdetail"
 import businessOwnerOrders from "@/views/businessOwnerOrders"
 import payment from "@/views/payment";
+import about from "@/views/about";
+import contact from "@/views/contact";
 import cart from "@/views/card";
 
 
@@ -77,6 +79,39 @@ const routes = [
     // },
   },
 
+   {
+        path: "/",
+        name: "home1",
+        component: home1,
+        
+    },
+{
+    path: '/about',
+    name: 'about',
+    component: about,
+    // meta: {
+    //   auth: true,
+    // },
+},
+{
+  path: '/contact',
+  name: 'contact',
+  component: contact,
+  // meta: {
+  //   auth: true,
+  // },
+},
+
+{
+  path: "/market",
+  name: "market",
+  component: market,
+},
+{
+  path: "/checkout",
+  name: "payment",
+  component: payment
+},
   
   {
     path: "/businessOwnerOrders",
@@ -105,7 +140,7 @@ const routes = [
 
   
   {
-    path: "/",
+    path: "/dashboard",
     name: "home",
     component: dashboard,
     meta: {

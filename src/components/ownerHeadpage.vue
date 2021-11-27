@@ -42,7 +42,7 @@
                   <b> {{ info.user.name }} </b>
                 </div>
 
-                <span class="duration float-left"> {{ nFormatter(total.total_community) }} Community </span>
+                <span class="duration float-left"> {{ nFormatter(total.total_community) }} {{ $t('profileowner.Community') }} </span>
               </h6>
             </span>
 
@@ -77,7 +77,7 @@
                       v-b-modal.modal-upp
                     >
                       <fas-icon class="mr-2" :icon="['fas', 'pencil-alt']" size="lg" />
-                      Edit
+                      {{ $t('profileowner.Edit') }}
                     </b-button>
 
                     <b-dropdown
@@ -91,10 +91,10 @@
                         <b-icon-three-dots></b-icon-three-dots>
                       </template>
 
-                      <b-dropdown-item @click="selectCover"> Change Cover</b-dropdown-item>
+                      <b-dropdown-item @click="selectCover"> {{ $t('profileowner.Change_Cover') }}</b-dropdown-item>
 
-                      <b-dropdown-item @click="RemoveCover"> Remove cover </b-dropdown-item>
-                       <b-dropdown-item @click="RemoveProfile"> Remove Profile </b-dropdown-item>
+                      <b-dropdown-item @click="RemoveCover"> {{ $t('profileowner.Remove_Cover') }} </b-dropdown-item>
+                       <b-dropdown-item @click="RemoveProfile"> {{ $t('profileowner.Remove_Profile') }} </b-dropdown-item>
 
 
                       
@@ -104,13 +104,13 @@
                         >Invite Friends On Bridge Africa</b-dropdown-item
                       >
 -->
-                      <b-dropdown-item @click="viewAs" >View As</b-dropdown-item>
+                      <b-dropdown-item @click="viewAs" >{{ $t('profileowner.View_As') }}</b-dropdown-item>
                     </b-dropdown>
                   </span>
                 </div>
               </div>
             </div>
-            <b-modal id="logomodal" ref="logomodal" @ok="submitLogo" title="Upload Your Logo">
+            <b-modal id="logomodal" ref="logomodal" @ok="submitLogo" :title="$t('profileowner.Upload_Your_Logo')">
               <div class="w3-container">
                 <div id="preview">
                   <img :src="img_url" />
@@ -124,7 +124,7 @@
               ref="coverphotoCrop"
               ok-title="Crop and Save"
               @ok="submitCroppedCover"
-              title="Crop  Cover photo"
+              :title="$t('profileowner.Crop_Cover_Photo')" 
             >
               <div class="w3-container">
                 <div id="preview">
@@ -139,7 +139,7 @@
               </div>
             </b-modal>
 
-            <b-modal id="modal-upp" ref="modal" title="Upload Cover Picture">
+            <b-modal id="modal-upp" ref="modal" :title="$t('profileowner.Upload_Cover_Picture')">
               <div class="w3-container">
                 <div class="row pb3">
                   <div class="col-sm-6 text-center" style="border-right: 1px solid rgb(222, 226, 230)">
@@ -160,7 +160,7 @@
                           class=""
                         ></path>
                       </svg>
-                      <h4>Upload a New picture</h4>
+                      <h4>{{ $t('profileowner.Upload_a_New_picture') }} </h4>
                     </h1>
                   </div>
                   <div class="col-sm-6 text-center">
@@ -182,14 +182,14 @@
                         ></path>
                       </svg>
                     </h1>
-                    <h4>Edit Your New picture</h4>
+                    <h4>{{ $t('profileowner.Edit_Your_New_Picture') }} </h4>
                   </div>
                 </div>
               </div>
             </b-modal>
 
             <!-- second modal box  to edit the big cover photo -->
-            <b-modal id="coverphoto" ref="coverphoto" @ok="submitCover" title="Upload  Cover photo">
+            <b-modal id="coverphoto" ref="coverphoto" @ok="submitCover" :title="$t('profileowner.Upload_Cover_Photo')">
               <div class="w3-container">
                 <div id="preview">
                   <img :src="img_url" />
@@ -350,7 +350,7 @@ export default {
               console.log(response);
               this.flashMessage.show({
                 status: 'success',
-                message: 'Logo Updated',
+                message: this.$t('profileowner.Logo_Updated'),
                 blockClass: 'custom-block-class',
               });
               // loader.hide();
@@ -373,7 +373,7 @@ export default {
           } else {
             this.flashMessage.show({
               status: 'error',
-              message: 'Unable to set your Logo',
+              message: this.$t('profileowner.Unable_to_set_your_Logo'),
               blockClass: 'custom-block-class',
             });
             console.log({ err: err });
@@ -418,7 +418,7 @@ viewAs(){
               console.log(response);
               this.flashMessage.show({
                 status: 'success',
-                message: 'profile removed successfully',
+                message: this.$t('profileowner.profile_removed_successfully'),
                 blockClass: 'custom-block-class',
               });
               loader.hide();
@@ -432,7 +432,7 @@ viewAs(){
          
             this.flashMessage.show({
               status: 'error',
-              message: 'Unable to remove your cover',
+              message: this.$t('profileowner.Unable_to_remove_your_cover'),
               blockClass: 'custom-block-class',
             });
             console.log({ err: err });
@@ -471,7 +471,7 @@ viewAs(){
               console.log(response);
               this.flashMessage.show({
                 status: 'success',
-                message: 'Profile removed successfully',
+                message: this.$t('profileowner.Profile_removed_successfully'),
                 blockClass: 'custom-block-class',
               });
               loader.hide();
@@ -485,7 +485,7 @@ viewAs(){
          
             this.flashMessage.show({
               status: 'error',
-              message: 'Unable to remove your cover',
+              message: this.$t('profileowner.Unable_to_remove_your_cover'),
               blockClass: 'custom-block-class',
             });
             console.log({ err: err });
@@ -527,7 +527,7 @@ viewAs(){
                 console.log(response);
                 this.flashMessage.show({
                   status: 'success',
-                  message: 'Cover Updated',
+                  message: this.$t('profileowner.Cover_Updated'),
                   blockClass: 'custom-block-class',
                 });
                 loader.hide();
@@ -552,7 +552,7 @@ viewAs(){
             } else {
               this.flashMessage.show({
                 status: 'error',
-                message: 'Unable to upload your image',
+                message: this.$t('profileowner.Unable_to_upload_your_image'),
                 blockClass: 'custom-block-class',
               });
               console.log({ err: err });
@@ -585,7 +585,7 @@ viewAs(){
               console.log(response);
 
               this.flashMessage.success({
-                message: 'Operation successful',
+                message: this.$t('profileowner.Operation_successful'),
                 blockClass: 'custom-block-class',
               });
               loader.hide();
@@ -613,7 +613,7 @@ viewAs(){
           } else {
             this.flashMessage.show({
               status: 'error',
-              message: 'Can not delete your cover',
+              message: this.$t('profileowner.Can_not_delete_your_cover'),
               blockClass: 'custom-block-class',
             });
           }

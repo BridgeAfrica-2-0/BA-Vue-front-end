@@ -146,13 +146,13 @@
           <div style="float: right">
             <b-collapse id="nav-collapse" is-nav>
               <div class="nav-item">
-                <a
-                  @click.prevent="navLink('home')"
+                <router-link
+                  :to="{ name: navLink('home') }"
                   class="nav-link text-dark hov"
                   href=""
                 >
-                  Home
-                </a>
+                  Home {{navLink('home')}}
+                </router-link>
               </div>
 
               <div class="nav-item">
@@ -621,13 +621,11 @@ export default {
     navLink(type) {
       const link = {
         home: () => {
-          const routeName = this.profile ? "dashbord" : "home";
-          if (this.$route.name != routeName)
-            this.$router.push({ name: routeName });
+          return this.profile ? "dashbord" : "home1";
         },
       };
       try {
-        link[type]();
+        return link[type]();
       } catch (error) {
         throw new Error(error);
       }

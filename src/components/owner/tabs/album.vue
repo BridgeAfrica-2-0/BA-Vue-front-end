@@ -4,9 +4,9 @@
     <div class="row">
       <div class="container-fluid" v-if="showalbum == false">
         <div class="one2">
-          <div class="createp img-gall image-wrapp">
+          <div class="createp img-gall image-wrapp img-size" v-if="isEditor" v-b-modal.createalbumModal>
             <div class="">
-              <a v-b-modal.createalbumModal>
+              <a>
                 <div class="drag-textt">
                   <fas-icon :icon="['fas', 'plus']" />
                   <h3>{{ $t('profileowner.Create_Album') }}</h3>
@@ -19,11 +19,6 @@
             <div ref="creatform">
               <b-form>
                 <b-form-input :placeholder="$t('profileowner.Album_name')" v-model="albumInfo.name"></b-form-input>
-                <b-form-input
-                  :placeholder="$t('profileowner.Album_Type')"
-                  class="mt-2"
-                  v-model="albumInfo.type"
-                ></b-form-input>
                 <b-button class="mt-2" variant="primary" @click="createAlbums" :disabled="loading || canCreateAlbum">
                   {{ $t('profileowner.Create') }}</b-button
                 >
@@ -40,6 +35,7 @@
             :canBeUpdate="canBeUpdate(album)"
             :showAlbumPictures="() => showAlbumPictures(album)"
             :type="type"
+            :isEditor="isEditor"
           />
         </div>
 
@@ -51,7 +47,7 @@
                 class="mt-2"
                 variant="primary"
                 @click="update"
-                :disabled="loading || editName.trim().length ? false : true"
+                :disabled="loading ? true : editName.trim().length ? false : true"
               >
                 {{ $t('profileowner.Update') }}</b-button
               >
@@ -112,27 +108,21 @@
 
       <Images
         @update:item="() => updateItem()"
+        :showCreateForm="isEditor"
         :hasLoadPicture="hasLoadPicture"
         :album="album_id"
         :type="type"
         :albumName="album_name"
         :showAlbum="canViewAlbum"
+        :isEditor="isEditor"
         :canUpload="
           ['profile_picture', 'Profile', 'Cover', 'cover_photo', 'Cover Photo', 'logo', 'Logo', 'post'].includes(
             album_name,
           )
-            ? false
-            : true
         "
         :images="strategy[type]().showAlbumImages"
         @reste="hidealbum"
       />
-
-      <div class="container-fluid" v-if="!strategy[type]().showAlbumImages.length">
-        <p style="font-size: 3rem">
-          {{ $t('profileowner.No_items_found') }}
-        </p>
-      </div>
     </div>
   </div>
 </template>
@@ -154,8 +144,9 @@ export default {
   },
 
   props: {
-    canUpload: {
+    isEditor: {
       type: Boolean,
+      required: true,
     },
     type: {
       type: String,
@@ -213,6 +204,18 @@ export default {
         remove: this.remove,
         mapUpdate: this.mapUpdate,
       }),
+
+      network: () => ({
+        albums: this.getAlbumsNetwork,
+        showalbum: this.getAlbumNetworkImages,
+        showAlbumImages: this.albumImagesNetwork,
+        createAlbum: this.createAlbumNetwork,
+        fetchAlbums: this.fetchAlbumsNetwork,
+        deleteAlbum: this.deleteAlbumNetwork,
+        updateAlbum: this.updateAlbumNetwork,
+        remove: this.removeNetwork,
+        mapUpdate: this.mapUpdateNetwork,
+      }),
     };
   },
 
@@ -232,6 +235,10 @@ export default {
       getAlbumsBusiness: 'businessOwner/getAlbums',
       getAlbumImageBusiness: 'businessOwner/getAlbumImage',
       albumImagesBusiness: 'businessOwner/getalbumImages',
+
+      getAlbumsNetwork: 'networkProfileMedia/getAlbums',
+      getAlbumImageNetwork: 'networkProfileMedia/getAlbumImage',
+      albumImagesNetwork: 'networkProfileMedia/getAlbumImages',
     }),
 
     canCreateAlbum() {
@@ -252,6 +259,12 @@ export default {
       fetchAlbumsBusiness: 'businessOwner/getAlbums',
       deleteAlbumBusiness: 'businessOwner/deletedAlbum',
       updateAlbumBusiness: 'businessOwner/updatedAlbum',
+
+      createAlbumNetwork: 'networkProfileMedia/createAlbum',
+      getAlbumNetworkImages: 'networkProfileMedia/getAlbumImages',
+      fetchAlbumsNetwork: 'networkProfileMedia/getAlbums',
+      deleteAlbumNetwork: 'networkProfileMedia/deletedAlbum',
+      updateAlbumNetwork: 'networkProfileMedia/updatedAlbum',
     }),
 
     getFullMediaLink: fullMediaLink,
@@ -266,6 +279,9 @@ export default {
 
       mapUpdateBusiness: 'businessOwner/updateAlbum',
       removeBusiness: 'businessOwner/removeAlbum',
+
+      mapUpdateNetwork: 'networkProfileMedia/updateAlbum',
+      removeNetwork: 'networkProfileMedia/removeAlbum',
     }),
 
     hidealbum() {
@@ -274,7 +290,7 @@ export default {
 
     showAlbumPictures(album) {
       const credentials =
-        'business' == this.type
+        'business' == this.type || 'network' == this.type
           ? {
               data: { businessId: this.$route.params.id, albumId: album.id },
             }
@@ -306,7 +322,10 @@ export default {
     createAlbums() {
       this.loading = true;
 
-      const data = 'business' == this.type ? { id: this.$route.params.id, data: this.albumInfo } : this.albumInfo;
+      const data =
+        'business' == this.type || 'network' == this.type
+          ? { id: this.$route.params.id, data: this.albumInfo }
+          : this.albumInfo;
 
       this.strategy[this.type]()
         .createAlbum(data)
@@ -370,6 +389,7 @@ export default {
         })
         .catch((error) => {
           this.sending = false;
+          this.loading = false;
           this.flashMessage.show({
             status: 'error',
             message: error.response.data.message,
@@ -378,7 +398,8 @@ export default {
     },
 
     deleteAlbums(id) {
-      const data = 'business' == this.type ? { businessID: this.$route.params.id, albumID: id } : id;
+      const data =
+        'business' == this.type || 'network' == this.type ? { businessID: this.$route.params.id, albumID: id } : id;
 
       this.strategy[this.type]()
         .deleteAlbum(data)
@@ -403,6 +424,10 @@ export default {
 </script>
 
 <style scoped>
+.img-size {
+  width: 266px !important;
+  height: 266px !important;
+}
 ._vue-flash-msg-body._vue-flash-msg-body_success,
 ._vue-flash-msg-body._vue-flash-msg-body_error {
   z-index: 10000 !important;
@@ -577,5 +602,10 @@ export default {
   font-weight: 100;
   text-transform: uppercase;
   color: #000;
+  width: 120px;
+  height: 120px;
+  position: absolute;
+  top: 25%;
+  left: 25%;
 }
 </style>

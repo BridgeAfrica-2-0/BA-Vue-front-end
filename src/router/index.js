@@ -2,7 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 //import Home from "../views/home.vue";
 import Login from "../views/login.vue";
-
+import home1 from "@/views/home1.vue";
 import signup from "../views/signup.vue";
 
 import RecoverPass1 from "../views/recoverPassword1.vue";
@@ -31,7 +31,7 @@ import businessVisitor from "@/views/businessVisitor";
 import search from "@/views/search";
 import forgotPassword from "@/views/forgotPassword";
 import navMessage from "@/views/navMessaging";
-import Blec from "@/views/blec";
+
 import memberNetworkFollower from "@/views/memberNetworkFollower";
 import memberNetwork from "@/views/memberNetwork";
 
@@ -56,6 +56,8 @@ import ordersdetail from "@/views/odersDetail";
 import businessordersdetail from "@/views/businessordersdetail"
 import businessOwnerOrders from "@/views/businessOwnerOrders"
 import payment from "@/views/payment";
+import about from "@/views/about";
+import contact from "@/views/contact";
 import cart from "@/views/card";
 
 
@@ -77,12 +79,45 @@ const routes = [
     // },
   },
 
-  
+  {
+    path: "/",
+    name: "home1",
+    component: home1,
+
+  },
+  {
+    path: '/about',
+    name: 'about',
+    component: about,
+    // meta: {
+    //   auth: true,
+    // },
+  },
+  {
+    path: '/contact',
+    name: 'contact',
+    component: contact,
+    // meta: {
+    //   auth: true,
+    // },
+  },
+
+  {
+    path: "/market",
+    name: "market",
+    component: market,
+  },
+  {
+    path: "/checkout",
+    name: "payment",
+    component: payment
+  },
+
   {
     path: "/businessOwnerOrders",
     name: "businessOwnerOrders",
     component: businessOwnerOrders,
-  
+
   },
 
   {
@@ -101,11 +136,8 @@ const routes = [
     //   auth: true,
     // },
   },
-  
-
-  
   {
-    path: "/",
+    path: "/dashboard",
     name: "home",
     component: dashboard,
     meta: {
@@ -123,9 +155,6 @@ const routes = [
     name: "payment",
     component: payment
   },
-
-
-
   {
     path: "/welcome",
     name: "welcome",
@@ -139,12 +168,6 @@ const routes = [
     path: "/settings",
     name: "settings",
     component: settings,
-  },
-
-  {
-    path: "/dashboard",
-    name: "dashboard",
-    component: dashboard,
   },
 
   {
@@ -273,11 +296,6 @@ const routes = [
     },
   },
   {
-    path: "/services/:id",
-    name: "Service",
-    component: service,
-  },
-  {
     path: "/services/modify/:id",
     name: "Modify",
     component: Modifier,
@@ -292,17 +310,33 @@ const routes = [
   },
 
   {
-    path: "/profile/:id?",
-    name: "Follower",
-    component: Follower,
-  },
-  {
     path: "/profilevisitor",
     name: "visitor",
     component: Visitor,
   },
   {
     path: "/search/:id",
+    name: "Search",
+    component: search,
+  },
+
+  {
+    path: "/services/:id",
+    name: "Service",
+    component: service,
+  },
+
+  {
+    path: "/profile/:id?",
+    name: "Follower",
+    component: Follower,
+    meta: {
+      auth: true,
+    },
+  },
+
+  {
+    path: "/search",
     name: "Search",
     component: search,
   },
@@ -317,66 +351,23 @@ const routes = [
     component: navMessage,
   },
 
-{
-  path: "/services/:id",
-  name: "Service",
-  component: service,
-},
-{
-  path: "/services/modify/:id",
-  name: "Modify",
-  component: Modifier,
-  beforeEnter: (to, from, next) => {
-    console.log("dedans");
-    if (store.state.login && store.state.isToi) {
-      next();
-    } else {
-      next({ name: "Login" });
-    }
+  {
+    path: "/memberNetwork/:id?",
+    name: "memberNetwork",
+    component: memberNetwork,
   },
-},
 
-{
-  path: "/profile/:id?",
-  name: "Follower",
-  component: Follower,
-  meta: {
-    auth: true,
+  {
+    path: "/memberNetworkFollower/:id?",
+    name: "Membar Network Follower",
+    component: memberNetworkFollower,
   },
-},
-{
-  path: "/profilevisitor",
-  name: "visitor",
-  component: Visitor,
-},
-{
-  path: "/search",
-  name: "Search",
-  component: search,
-},
-{
-  path: "/forgotpass",
-  name: "ForgotPassword",
-  component: forgotPassword,
-},
-{
-  path: "/messaging",
-  name: "Nav Meassage",
-  component: navMessage,
-},
 
-{
-  path: "/memberNetwork/:id?",
-  name: "memberNetwork",
-  component: memberNetwork,
-},
-
-{
-  path: "/memberNetworkFollower/:id?",
-  name: "Membar Network Follower",
-  component: memberNetworkFollower,
-},
-
+  {
+    path: "*",
+    name: "notFound",
+    component: notFound,
+  },
 
 ];
 

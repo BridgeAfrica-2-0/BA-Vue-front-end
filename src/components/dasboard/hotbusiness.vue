@@ -194,7 +194,7 @@ export default {
         })
         .catch(err =>{  
           
-          console.log(err)  ;
+          console.log({err:err})  ;
            document.getElementById("followbtn"+user.id).disabled =  false;
           
         });

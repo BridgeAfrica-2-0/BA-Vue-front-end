@@ -17,22 +17,6 @@ import networkProfileCommunity from './networkProfileCommunity';
 import networkDetails from './networkDetails';
 import dashboardcommunity from './dashboardcommunity';
 import orderBusiness from './orderBusiness';
-<<<<<<< HEAD
-import NetworkSettings from "./NetworkSettings";
-import networkProfileMembers from "./networkProfileMembers";
-import ProfileAndBusinessDetails from "./ProfileAndBusinessDetails";
-
-import businessFollowers from "./businessFollowers";
-import business from "./business";
-import market from "./market";
-import hotbusiness from "./hotbusiness";
-import profile from "./profile";
-import follower from "./follower";
-import keywordOperationOnNetwork from "./keywordOperationOnNetwork";
-import businessOrderDetails from "./businessOrderDetails";
-
-// import UserProfileOwner from "./UserProfileOwner";
-=======
 import NetworkSettings from './NetworkSettings';
 import checkout from './checkout';
 import businessFollowers from './businessFollowers';
@@ -41,7 +25,6 @@ import business from './business';
 import profile from './profile';
 import networkProfileMembers from './networkProfileMembers';
 import follower from './follower';
->>>>>>> 4d6df2670bce3f8f1b9cdc061b702bdce641c396
 import networkProfile from './networkProfile';
 import UserProfileOwner from './UserProfileOwner';
 import { search } from './search';
@@ -58,32 +41,14 @@ import keywordOperationOnNetwork from './keywordOperationOnNetwork';
 
 import homeRedirection from './homeRedirection';
 
-<<<<<<< HEAD
-import networkProfile from "./networkProfile";
-import UserProfileOwner from "./UserProfileOwner"
-import { search } from "./search";
-import userChat from "./messaging/user";
-import businessChat from "./messaging/business";
-import networkChat from "./messaging/network";
-import businessSettingInfo from "./businessSettingInfo"
-import networkProfileCommunitySidebar from "./networkProfileCommunitySidebar";
-import networkProfileFeedback from "./networkProfileFeedback";
-import networkProfileMedia from "./networkProfileMedia";
-import networkProfileMemberRequest from "./networkProfileMemberRequest";
-// import networkNotification from "./networkNotification";
-import { social } from "./social";
-import { notification } from "./notifications";
-import cart from "./cart"
-=======
 import profileSettingsEdit from "./profileSettingsEdit"
->>>>>>> 4d6df2670bce3f8f1b9cdc061b702bdce641c396
 
 
 import { social } from './social';
-
+  
 Vue.use(Vuex);
 
-<<<<<<< HEAD
+
  axios.defaults.baseURL = process.env.VUE_APP_API_URL;
  //axios.defaults.baseURL = "https://test.maxinemoffett.com/api/v1/";
 
@@ -129,11 +94,14 @@ export default new Vuex.Store({
   }
 });
 
+/*=======
 =======
+// axios.defaults.baseURL = "https://test.maxinemoffett.com/api/v1/";*/
 
-//axios.defaults.baseURL = process.env.VUE_APP_API_URL_DEV;
-axios.defaults.baseURL = "https://test.maxinemoffett.com/api/v1/"; 
- // axios.defaults.baseURL = process.env.VUE_APP_API_URL;
+
+ axios.defaults.baseURL = process.env.VUE_APP_API_URL;
+
+
 
 
 export default new Vuex.Store({
@@ -172,19 +140,16 @@ export default new Vuex.Store({
         networkProfileMedia,
         networkProfileMemberRequest,
         networkProfile,
->>>>>>> 4d6df2670bce3f8f1b9cdc061b702bdce641c396
+
         orderBusiness,
         notification,
         homeRedirection,
         profileOrderDetail,
         profileSettingsEdit
 
-<<<<<<< HEAD
-        notification
+
     
-=======
     }
 });
 
 
->>>>>>> 4d6df2670bce3f8f1b9cdc061b702bdce641c396

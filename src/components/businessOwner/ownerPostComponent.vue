@@ -3,7 +3,7 @@
     <div class="mt-2">
       <div class="d-inline-flex">
         <span md="1" class="m-0 p-0">
-          <b-avatar class="d-inline-block avat avatar-border" square variant="primary" :src="item.logo_path"></b-avatar>
+          <b-avatar class=" avat" square variant="primary" :src="item.logo_path"></b-avatar>
         </span>
         <div class="pl-2 pl-md-3 pt-md-2">
           <h5 class="m-0 usernamee">

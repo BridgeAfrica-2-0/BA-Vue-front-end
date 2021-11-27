@@ -218,10 +218,8 @@ export default {
         this.userProfileOwnerInput.workedAt = this.userProfileOwner.workedAt;
         this.userProfileOwnerInput.studiedAt = this.userProfileOwner.studiedAt;
         this.userProfileOwnerInput.homeTown = this.userProfileOwner.homeTown;
-        this.userProfileOwnerInput.currentCity =
-          this.userProfileOwner.currentCity;
-        this.userProfileOwnerInput.numbersOfFollowers =
-          this.userProfileOwner.numbersOfFollowers;
+        this.userProfileOwnerInput.currentCity = this.userProfileOwner.currentCity;
+        this.userProfileOwnerInput.numbersOfFollowers = this.userProfileOwner.numbersOfFollowers;
         return response;
       })
       .catch((error) => {
@@ -236,7 +234,7 @@ export default {
       });
   },
   computed: {
-    info: function () {
+    info: function() {
       return this.$store.getters["profile/getUserPostIntro"];
     },
 

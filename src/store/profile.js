@@ -454,16 +454,7 @@ export default {
           console.log({ err: err })
         });
 
-
     },
-
-
-
-
-
-
-
-
 
     updateContact({ commit }, payload) {
 

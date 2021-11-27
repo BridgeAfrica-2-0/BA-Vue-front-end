@@ -157,6 +157,7 @@ export default {
         .then(({ data }) => {
           if (this.type == 'Follower') {
             if (data.data.business_followers.length) {
+              console.info(...data.data.business_followers);
               this.businesses.push(...data.data.business_followers);
               this.page += 1;
 

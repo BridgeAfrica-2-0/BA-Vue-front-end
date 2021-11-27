@@ -27,7 +27,6 @@ import plugin from './http';
 Vue.use(plugin);
 
 
-
 Vue.use(require('vue-moment'));
 
 IconifyIcon.addIcon('home', homeIconData);
@@ -160,7 +159,6 @@ Vue.use(VueLoading);
 import VueYoutube from 'vue-youtube'
 
 Vue.use(VueYoutube)
-
 
 import VueAgile from 'vue-agile';
 

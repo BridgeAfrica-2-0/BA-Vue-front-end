@@ -39,7 +39,7 @@
             </div>
             <div class="operator-select-box">
               <b-form-radio
-                v-model="operator"
+                v-model="PaymentForm.operator"
                 name="operator"
                 value="MTN"
                 class="operator-select"
@@ -59,7 +59,7 @@
             </div>
             <div class="operator-select-box">
               <b-form-radio
-                v-model="operator"
+                v-model="PaymentForm.operator"
                 name="operator"
                 value="ORANGE"
                 class="operator-select"
@@ -91,7 +91,7 @@
           <div class="row p-2">
             <div class="col">
               <button
-                @click="requestPayment"
+                @click="AcRequestPayment = true"
                 class="float-right btn-custom p-2 btn btn-primary mt-2"
               > Confirm Payment</button>
             </div>
@@ -105,51 +105,60 @@
         <p class="text">Your payment information is secure</p>
       </div>
     </b-container>
-    <b-modal v-model="RequestPayment" title="Enter your MTN Mobile Money number" size="md" hide-footer>
-      <!-- <div class="card-header px-0 text-black border-bottom-0  bg-white h-50">
-        Enter your MTN Mobile Money number
-      </div> -->
-      <div class="px-0">
-        <div class="row">
-          <div class="col-10 col-sm-9 col-md-8">
-            <b-form-input
-              placeholder="237 6XX XXX XXX"
-              id="number"
-              v-model="number"
-              type="tel"
-            ></b-form-input>
+
+        <!-- Request Payment -->
+        <b-modal v-model="AcRequestPayment" title="Enter your MTN Mobile Money number" size="md" hide-footer>
+          <div v-if="!congratulation" class="px-0">
+            <b-overlay :show="show" rounded="sm">
+              <div class="row">
+                <div class="col-10 col-sm-9 col-md-8">
+                  <b-form-input
+                    placeholder="237 6XX XXX XXX"
+                    id="number"
+                    v-model="PaymentForm.phone"
+                    type="tel"
+                  ></b-form-input>
+                </div>
+                <div class="col-2 col-sm-3 col-md-4 px-0 btn-custom-box">
+                  <!-- <b-button
+                    variant="primary"
+                    class="font-weight-light btn-custom text-14 shadow-sm"
+                  >CHANGE</b-button> -->
+                  <b-button
+                    variant="primary"
+                    class="font-weight-light shadow-sm btn-custom text-14"
+                    @click="confirmPayment"
+                  >PAY</b-button>
+                </div>
+              </div>
+              <!-- <div class="row my-3">
+                <div class="col btn-custom-box">
+                  <b-button
+                    variant="primary"
+                    class="font-weight-light shadow-sm btn-custom text-14"
+                    @click="confirmPayment"
+                  >PAY</b-button>
+                </div>
+              </div> -->
+              <div class="row my-3">
+                <div class="col body-font-size">
+                  <p>
+                    Please make sure your account balance is greater than 13 000XAF,
+                    Otherwise your payment will not be completed.
+                  </p>
+                  <p>
+                    Reference NO: XXXXXXXXXXXX
+                  </p>
+                </div>
+              </div>
+            </b-overlay>
           </div>
-          <div class="col-2 col-sm-3 col-md-4 px-0 btn-custom-box">
-            <b-button
-              variant="primary"
-              class="font-weight-light btn-custom text-14 shadow-sm"
-              >CHANGE</b-button
-            >
+          <div v-else class="text-center">
+            <h3><b>🥳❗Transaction Completed❗🥳</b></h3>
           </div>
-        </div>
-        <div class="row my-3">
-          <div class="col btn-custom-box">
-            <b-button
-              variant="primary"
-              class="font-weight-light shadow-sm btn-custom text-14"
-              @click="confirmPayment"
-              >PAY {{formatMoney(2000)}}</b-button
-            >
-          </div>
-        </div>
-        <div class="row my-3">
-          <div class="col body-font-size">
-            <p>
-              Please make sure your account balance is greater than 13 000XAF,
-              Otherwise your payment will not be completed.
-            </p>
-            <p>
-              Reference NO: XXXXXXXXXXXX
-            </p>
-          </div>
-        </div>
-      </div>
-    </b-modal>
+          <FlashMessage />
+        </b-modal>
+
   </b-container>
 </template>
 
@@ -159,7 +168,7 @@ export default {
   data() {
     return {
       url:null,
-      RequestPayment: false,
+      AcRequestPayment: false,
       operator: '',
       formatObject: new Intl.NumberFormat('fr-FR', {
         style: 'currency',
@@ -167,6 +176,16 @@ export default {
         minimumFractionDigits: 2,
       }),
       number: '',
+      PaymentForm: {
+        subscribe: 'type',
+        phone: '',
+        operator: '',
+        package_id: 'null',
+        type: 'null'
+      },
+
+      show: false,
+      congratulation: false
     };
   },
 
@@ -178,6 +197,7 @@ export default {
     showRewiew() {
       this.$emit('showreview');
     },
+
     requestPayment() {
       console.log("requestPayment");
       console.log("this.operator", this.operator);
@@ -185,6 +205,41 @@ export default {
       if (this.operator !== '') 
         this.$emit('requestpayment', this.operator);
     },
+    confirmPayment() {
+      this.show = true;
+      console.log("PaymentForm:", this.PaymentForm);
+      let formData = new FormData();
+      // formData.append("subscribe", this.PaymentForm.subscribe)
+      formData.append("phone", this.PaymentForm.phone)
+      formData.append("operator", this.PaymentForm.operator)
+      // formData.append("package_id", this.PaymentForm.package_id)
+       this.$store
+      .dispatch("businessAccountType/confirmPayment", {
+        path: `settings/packages/${this.url}`,
+        data: formData
+        })
+      .then(({data}) => {
+        console.log(data);
+        console.log('ohh yeah');
+        this.show = false;
+        this.congratulation = true;
+        this.getAccounts();
+        this.flashMessage.show({
+          status: "success",
+          message: "Payment Complete"
+        });
+      })
+      .catch(err => {
+        this.show = false
+        this.congratulation = false
+        console.log({ err: err });
+        this.flashMessage.show({
+          status: "error",
+          message: "Unable Complete Payment"
+        });
+      });
+    },
+
     formatMoney(money) {
       return this.formatObject.format(money);
     },
@@ -192,6 +247,17 @@ export default {
 };
 </script>
 
+
+<style scoped>
+.descrip{
+  font-size: 14px;
+}
+.btn-custom {
+  height: 38px;
+  min-width: 123px;
+  font-size: 14px;
+}
+</style>
 <style scoped>
 .payment-type {
   background-color: #f7f7f7;

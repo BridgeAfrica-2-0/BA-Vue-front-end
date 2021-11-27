@@ -2,7 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 //import Home from "../views/home.vue";
 import Login from "../views/login.vue";
-
+import home1 from "@/views/home1.vue";
 import signup from "../views/signup.vue";
 
 import RecoverPass1 from "../views/recoverPassword1.vue";
@@ -54,8 +54,10 @@ import welcome from "@/views/welcome";
 
 import ordersdetail from "@/views/odersDetail";
 import businessordersdetail from "@/views/businessordersdetail"
-
+import businessOwnerOrders from "@/views/businessOwnerOrders"
 import payment from "@/views/payment";
+import about from "@/views/about";
+import cart from "@/views/card";
 
 
 Vue.use(VueRouter);
@@ -68,6 +70,44 @@ const routes = [
   },
 
   {
+    path: "/myorders/detail",
+    name: "ordersdetail",
+    component: ordersdetail,
+    // meta: {
+    //   auth: true,
+    // },
+  },
+
+  {
+    path: "/",
+    name: "home1",
+    component: home1,
+
+  },
+  {
+    path: '/about-us',
+    name: 'about',
+    component: about,
+    // meta: {
+    //   auth: true,
+    // },
+  },
+  {
+    path: "/businessOwnerOrders",
+    name: "businessOwnerOrders",
+    component: businessOwnerOrders,
+
+  },
+
+  {
+    path: "/business_owner/ordersdetail",
+    name: "ordersdetail",
+    component: businessordersdetail,
+    // meta: {
+    //   auth: true,
+    // },
+  },
+  {
     path: "/myorders",
     name: "orders",
     component: myorders,
@@ -76,7 +116,7 @@ const routes = [
     // },
   },
   {
-    path: "/",
+    path: "/dashboard",
     name: "home",
     component: dashboard,
     meta: {
@@ -110,29 +150,14 @@ const routes = [
   },
 
   {
-    path: "/dashboard",
-    name: "dashboard",
-    component: dashboard,
-    meta: {
-      auth: true,
-    },
-  },
-
-  {
     path: "/profile_owner",
     name: "profile_owner",
     component: profile_owner,
-    meta: {
-      auth: true,
-    },
   },
   {
     path: "/profilefollower/:id?",
     name: "ProfileFollower",
     component: profileFollower,
-    meta: {
-      auth: true,
-    },
   },
   {
     path: "/template_viewer",
@@ -143,9 +168,6 @@ const routes = [
     path: "/business_owner/:id?",
     name: "BusinessOwner",
     component: businessOwner,
-    meta: {
-      auth: true,
-    },
   },
 
 
@@ -153,9 +175,6 @@ const routes = [
     path: "/business_editor/:id?",
     name: "BusinessEditor",
     component: businessEditor,
-    meta: {
-      auth: true,
-    },
   },
 
   {
@@ -185,28 +204,19 @@ const routes = [
     component: confirmPayment,
   },
   {
+    path: "/business_owner/network/:id?",
+    name: "networks",
+    component: networks,
+  },
+  {
     path: "/network/:id?",
     name: "networks",
     component: networks,
-    meta: {
-      auth: true,
-    },
-  },
-  {
-    path: "/networks/:id?",
-    name: "networks",
-    component: networks,
-    meta: {
-      auth: true,
-    },
   },
   {
     path: "/network_editors/:id?",
     name: "NetworkEditors",
     component: networkEditors,
-    meta: {
-      auth: true,
-    },
   },
   {
     path: "/login",
@@ -246,21 +256,7 @@ const routes = [
     path: "/businessfollower/:id?",
     name: "BusinessFollower",
     component: businessFollower,
-    meta: {
-      auth: true,
-    },
   },
-
-  {
-    path: "/business/:id?",
-    name: "Business",
-    component: businessFollower,
-    meta: {
-      auth: true,
-    },
-  },
-
-
   {
     path: "/businessvisitor",
     name: "BusinessVisitor",
@@ -279,11 +275,6 @@ const routes = [
     },
   },
   {
-    path: "/services/:id",
-    name: "Service",
-    component: service,
-  },
-  {
     path: "/services/modify/:id",
     name: "Modify",
     component: Modifier,
@@ -298,6 +289,23 @@ const routes = [
   },
 
   {
+    path: "/profilevisitor",
+    name: "visitor",
+    component: Visitor,
+  },
+  {
+    path: "/search/:id",
+    name: "Search",
+    component: search,
+  },
+
+  {
+    path: "/services/:id",
+    name: "Service",
+    component: service,
+  },
+
+  {
     path: "/profile/:id?",
     name: "Follower",
     component: Follower,
@@ -305,11 +313,7 @@ const routes = [
       auth: true,
     },
   },
-  {
-    path: "/profilevisitor",
-    name: "visitor",
-    component: Visitor,
-  },
+
   {
     path: "/search",
     name: "Search",

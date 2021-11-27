@@ -38,15 +38,16 @@ import networkProfileMedia from './networkProfileMedia';
 import networkProfileMemberRequest from './networkProfileMemberRequest';
 import profileOrders from './profileOrders';
 import keywordOperationOnNetwork from './keywordOperationOnNetwork';
+
+import homeRedirection from './homeRedirection';
+
 import profileSettingsEdit from "./profileSettingsEdit"
+
 
 import { social } from './social';
 
 Vue.use(Vuex);
-// axios.defaults.baseURL = process.env.VUE_APP_API_URL;
-//.defaults.baseURL = "https://221e-154-72-167-30.ngrok.io/api/v1/"
-
-axios.defaults.baseURL = "https://533a-154-72-167-65.ngrok.io/api/v1/"
+axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 
 export default new Vuex.Store({
     modules: {
@@ -85,9 +86,12 @@ export default new Vuex.Store({
         networkProfileMemberRequest,
         networkProfile,
         orderBusiness,
+        notification,
+        homeRedirection,
         profileOrderDetail,
         profileSettingsEdit
 
     }
 });
+
 

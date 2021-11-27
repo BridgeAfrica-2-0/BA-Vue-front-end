@@ -436,7 +436,6 @@ export const Redis = {
     listenBusinessEvent() {
       initRedis(this.token)
       const $event = `business-channel${this.profile.id}`
-
       window.Redis.private($event)
         .listen(".BusinessNotificationEvent", payload => {
           console.log(payload)
@@ -451,6 +450,16 @@ export const Redis = {
       window.Redis.private($event)
         .listen(".UserNotification", payload => {
           this.newNotificationProfile({ init: false, data: payload.notification })
+        })
+    },
+
+    listenNetworkeEvent() {
+      initRedis(this.token)
+      const $event = `user.${this.profile.id}`;
+
+      window.Redis.private($event)
+        .listen(".NetworkNotification", payload => {
+          this.newNotificationNetwork({ init: false, data: payload.notification })
         })
     },
 
@@ -475,7 +484,7 @@ export const Redis = {
     this.strategy = {
       user: () => this.listenProfileEvent(),
       business: () => this.listenBusinessEvent(),
-      network: () => null,
+      network: () => this.listenNetworkeEvent(),
     }
     // this.init()
   }

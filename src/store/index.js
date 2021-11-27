@@ -92,7 +92,7 @@ export default new Vuex.Store({
         orderBusiness,
 
         notification,
-        homeRedirection
+        homeRedirection,
 
         profileOrderDetail,
         profileSettingsEdit

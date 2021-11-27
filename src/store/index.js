@@ -35,6 +35,7 @@ import networkProfileCommunitySidebar from './networkProfileCommunitySidebar';
 import networkProfileFeedback from './networkProfileFeedback';
 import networkProfileMedia from './networkProfileMedia';
 import networkProfileMemberRequest from './networkProfileMemberRequest';
+import networkNotification from './networkNotification';
 import profileOrders from './profileOrders';
 import keywordOperationOnNetwork from './keywordOperationOnNetwork';
 
@@ -83,6 +84,7 @@ export default new Vuex.Store({
         networkProfileCommunity,
         networkProfileMedia,
         networkProfileMemberRequest,
+        networkNotification,
         networkProfile,
         orderBusiness,
         notification,

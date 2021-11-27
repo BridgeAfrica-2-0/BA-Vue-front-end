@@ -166,8 +166,10 @@
           </b-button>
         </b-form>
       </b-container>
+      <FlashMessage />
     </b-modal>
 
+    <!-- Edit Profile Picture -->
     <b-modal hide-footer id="" :title="$t('network.Upload_Profile_Picture')">
       <div class="w3-container">
         <div class="row pb-3">
@@ -195,6 +197,7 @@
       <b-button style="float: right" class="mt-2" variant="primary" @click="submitFile">
         <b-spinner v-if="SPupdateN" small type="grow"></b-spinner>{{ $t('network.Upload') }}
       </b-button>
+      <FlashMessage />
     </b-modal>
 
 

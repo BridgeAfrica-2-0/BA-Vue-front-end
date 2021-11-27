@@ -7,7 +7,7 @@
           <div class="d-inline-flex">
             <span md="1" class="m-0 p-0">
               <b-avatar
-                class="d-inline-block avat"
+                class="d-inline-block avat mt-1"
                 variant="primary"
                 :src="post.logo_path"
               ></b-avatar>

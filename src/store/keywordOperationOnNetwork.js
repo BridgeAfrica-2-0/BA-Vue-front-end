@@ -45,7 +45,8 @@ import axios from "axios"
     },
 
     DbListKeyWord({commit}, id){
-      return axios.get("alerts/listAlertnetwork"+id)
+      return axios.get(`network/${id}/keyword-alert/list`)
+      // return axios.get("alerts/listAlertnetwork"+id)
       .then(response =>{
         console.log(response.data.data) ;
         commit("setDbListKeyWord", response.data.data);

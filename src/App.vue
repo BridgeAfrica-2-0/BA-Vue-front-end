@@ -1,20 +1,76 @@
 <template>
   <div id="app" class="" ref="formContainer">
+
+
+     <transition
+        name="fade"
+        mode="out-in"
+
+        @beforeLeave="beforeLeave"
+        @enter="enter"
+        @afterEnter="afterEnter"
+      >
+        <router-view/>
+      </transition>
+
+      
     <!-- <notifications group="foo" /> -->
-    <router-view />
+    <!-- <router-view /> -->
   </div>
 </template>
 <script>
-/* eslint-disable */
+
 
 import { Redis } from "@/mixins";
 export default {
   mixins: [Redis],
+
+   data() {
+    return {
+      prevHeight: 0,
+    };
+  },
+
+  methods: {
+    beforeLeave(element) {
+      this.prevHeight = getComputedStyle(element).height;
+    },
+    enter(element) {
+      const { height } = getComputedStyle(element);
+
+      element.style.height = this.prevHeight;
+
+      setTimeout(() => {
+        element.style.height = height;
+      });
+    },
+    afterEnter(element) {
+      element.style.height = 'auto';
+    },
+  },
 };
 </script>
 
 
 <style lang="less">
+
+.fade-enter-active,
+.fade-leave-active {
+  transition-duration: 0.3s;
+  transition-property: height, opacity;
+  transition-timing-function: ease;
+  overflow: hidden;
+}
+
+.fade-enter,
+.fade-leave-active {
+  opacity: 0
+}
+
+
+
+
+
 @import "./assets/css/main.css";
 @import "./assets/css/style.css";
 @import "./assets/css/bootstrap.css";

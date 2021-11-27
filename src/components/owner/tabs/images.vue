@@ -54,7 +54,6 @@
             hidden
             ref="movie"
           />
-
           <a @click="$refs.movie.click()">
             <div class="drag-textt">
               <fas-icon :icon="['fas', 'plus']" />

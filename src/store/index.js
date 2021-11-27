@@ -29,6 +29,8 @@ import UserProfileOwner from './UserProfileOwner';
 import { search } from './search';
 import userChat from './messaging/user';
 import businessChat from './messaging/business';
+import networkChat from './messaging/network';
+
 import { notification } from './notifications';
 
 // import UserProfileOwner from "./UserProfileOwner";
@@ -70,6 +72,7 @@ export default new Vuex.Store({
         UserProfileOwner,
         userChat,
         businessChat,
+        networkChat,
         businessGeneral,
         businessRole,
         businessAccountType,

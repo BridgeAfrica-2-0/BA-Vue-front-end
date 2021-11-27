@@ -13,6 +13,7 @@
       :deletePost="() => deletePost(item)"
       :canBeDelete="false"
     />
+    <infinite-loading @infinite="infiniteHandler"></infinite-loading>
   </div>
 </template>
 

@@ -12,7 +12,7 @@
         @change="handleChange"
       >
       </ly-tab>
-      <hr class="d-none d-md-block" />
+      <hr class="d-none d-md-block" /> 
     </div>
 
     <div class="demo container-fluid p-0">
@@ -88,7 +88,6 @@ export default {
   name: "networks",
   components: {
     General,
-
     LyTab,
     Default,
     Inbox,

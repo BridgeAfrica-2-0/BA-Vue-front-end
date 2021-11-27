@@ -17,6 +17,7 @@
         :contact="contact"
         :key="index"
         :post="post"
+        :actionType="actionType"
       />
     </b-list-group>
   </b-modal>
@@ -31,8 +32,9 @@ export default {
   name: "Box",
 
   watch: {
-    id: function (value) {
-      if (this.isActivated && this.modal == this.id) this.getContacts();
+    id: function (value, oldValue) {
+      if (this.modal.startsWith("modal-2") || this.modal.startsWith("modal-3"))
+        this.getContacts();
     },
   },
 
@@ -45,14 +47,16 @@ export default {
     loading: false,
     text: "",
     contacts: [],
+    actionType: null,
+    hasbeLoad: false,
   }),
 
   props: {
-    id: {},
     isActivated: {
       type: Boolean,
       required: true,
     },
+    id: {},
     modal: {
       type: String,
       required: true,
@@ -84,10 +88,16 @@ export default {
       this.loading = true;
       const response = await this.$repository.share.getNetworkorBusiness();
 
-      if ("network" == this.type) this.contacts = response.data.network;
-      else this.contacts = response.data.business;
+      if ("network" != this.type) {
+        this.contacts = response.data.network;
+        this.actionType = "network";
+      } else {
+        this.contacts = response.data.business;
+        this.actionType = "business";
+      }
 
       this.loading = false;
+      this.hasbeLoad = true;
     },
   },
 };

@@ -79,45 +79,45 @@ const routes = [
     // },
   },
 
-   {
-        path: "/",
-        name: "home1",
-        component: home1,
-        
-    },
-{
+  {
+    path: "/",
+    name: "home1",
+    component: home1,
+
+  },
+  {
     path: '/about',
     name: 'about',
     component: about,
     // meta: {
     //   auth: true,
     // },
-},
-{
-  path: '/contact',
-  name: 'contact',
-  component: contact,
-  // meta: {
-  //   auth: true,
-  // },
-},
+  },
+  {
+    path: '/contact',
+    name: 'contact',
+    component: contact,
+    // meta: {
+    //   auth: true,
+    // },
+  },
 
-{
-  path: "/market",
-  name: "market",
-  component: market,
-},
-{
-  path: "/checkout",
-  name: "payment",
-  component: payment
-},
-  
+  {
+    path: "/market",
+    name: "market",
+    component: market,
+  },
+  {
+    path: "/checkout",
+    name: "payment",
+    component: payment
+  },
+
   {
     path: "/businessOwnerOrders",
     name: "businessOwnerOrders",
     component: businessOwnerOrders,
-  
+
   },
 
   {
@@ -136,9 +136,6 @@ const routes = [
     //   auth: true,
     // },
   },
-  
-
-  
   {
     path: "/dashboard",
     name: "home",
@@ -158,9 +155,6 @@ const routes = [
     name: "payment",
     component: payment
   },
-
-
-
   {
     path: "/welcome",
     name: "welcome",
@@ -174,12 +168,6 @@ const routes = [
     path: "/settings",
     name: "settings",
     component: settings,
-  },
-
-  {
-    path: "/dashboard",
-    name: "dashboard",
-    component: dashboard,
   },
 
   {
@@ -308,11 +296,6 @@ const routes = [
     },
   },
   {
-    path: "/services/:id",
-    name: "Service",
-    component: service,
-  },
-  {
     path: "/services/modify/:id",
     name: "Modify",
     component: Modifier,
@@ -327,17 +310,33 @@ const routes = [
   },
 
   {
-    path: "/profile/:id?",
-    name: "Follower",
-    component: Follower,
-  },
-  {
     path: "/profilevisitor",
     name: "visitor",
     component: Visitor,
   },
   {
     path: "/search/:id",
+    name: "Search",
+    component: search,
+  },
+
+  {
+    path: "/services/:id",
+    name: "Service",
+    component: service,
+  },
+
+  {
+    path: "/profile/:id?",
+    name: "Follower",
+    component: Follower,
+    meta: {
+      auth: true,
+    },
+  },
+
+  {
+    path: "/search",
     name: "Search",
     component: search,
   },
@@ -352,66 +351,23 @@ const routes = [
     component: navMessage,
   },
 
-{
-  path: "/services/:id",
-  name: "Service",
-  component: service,
-},
-{
-  path: "/services/modify/:id",
-  name: "Modify",
-  component: Modifier,
-  beforeEnter: (to, from, next) => {
-    console.log("dedans");
-    if (store.state.login && store.state.isToi) {
-      next();
-    } else {
-      next({ name: "Login" });
-    }
+  {
+    path: "/memberNetwork/:id?",
+    name: "memberNetwork",
+    component: memberNetwork,
   },
-},
 
-{
-  path: "/profile/:id?",
-  name: "Follower",
-  component: Follower,
-  meta: {
-    auth: true,
+  {
+    path: "/memberNetworkFollower/:id?",
+    name: "Membar Network Follower",
+    component: memberNetworkFollower,
   },
-},
-{
-  path: "/profilevisitor",
-  name: "visitor",
-  component: Visitor,
-},
-{
-  path: "/search",
-  name: "Search",
-  component: search,
-},
-{
-  path: "/forgotpass",
-  name: "ForgotPassword",
-  component: forgotPassword,
-},
-{
-  path: "/messaging",
-  name: "Nav Meassage",
-  component: navMessage,
-},
 
-{
-  path: "/memberNetwork/:id?",
-  name: "memberNetwork",
-  component: memberNetwork,
-},
-
-{
-  path: "/memberNetworkFollower/:id?",
-  name: "Membar Network Follower",
-  component: memberNetworkFollower,
-},
-
+  {
+    path: "*",
+    name: "notFound",
+    component: notFound,
+  },
 
 ];
 

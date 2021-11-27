@@ -4,29 +4,19 @@
      <span v-if="isloaded">
     <navbar />
 
-    <div class="container-fluid lynetowrk" style="margin-top:-30px">
-      <ly-tab
-        v-model="selectedId"
-        :items="items"
-        :options="options"
-        @change="handleChange"
-      >
-      </ly-tab>
+    <div class="container-fluid lynetowrk" style="margin-top: -30px">
+      <ly-tab v-model="selectedId" :items="items" :options="options" @change="handleChange"> </ly-tab>
       <hr class="d-none d-md-block" />
     </div>
 
     <div class="demo container-fluid p-0">
       <div class="mt-3" v-if="selectedId == '0'">
         <b-row class="center-content">
-          <b-col lg="5" xl="4" class=" ">
+          <b-col lg="5" xl="4" class="">
             <Parent />
           </b-col>
 
-          <b-col
-            lg="7"
-            xl="8"
-            class="order-sm-0 mt-sm-10 mt-md-10 mt-xl-0  marg-tap"
-          >
+          <b-col lg="7" xl="8" class="order-sm-0 mt-sm-10 mt-md-10 mt-xl-0 marg-tap">
             <Default />
           </b-col>
         </b-row>
@@ -56,7 +46,6 @@
         <General v-bind:currenttab="selectedId" />
       </div>
     </div>
-
     <Footer />
 
      </span>
@@ -64,28 +53,27 @@
 </template>
 
 <script>
-import navbar from "@/components/navbar";
-import Footer from "@/components/footer";
-import Default from "@/components/businessf/tabs/owner/editors/defaultEditors";
+import navbar from '@/components/navbar';
+import Footer from '@/components/footer';
+import Default from '@/components/businessf/tabs/owner/editors/defaultEditors';
 
-import Inbox from "@/components/businessf/tabs/owner/editors/inbox";
-import General from "@/components/businessf/tabs/owner/editors/general";
+import Inbox from '@/components/businessf/tabs/owner/editors/inbox';
+import General from '@/components/businessf/tabs/owner/editors/general';
 
-import LyTab from "@/tab/src/index.vue";
+import LyTab from '@/tab/src/index.vue';
 
-import Parent from "@/components/businessf/tabs/owner/editors/parent";
+import Parent from '@/components/businessf/tabs/owner/editors/parent';
 
 export default {
-  name: "editors",
+  name: 'editors',
   components: {
     General,
-
     LyTab,
     Default,
     Inbox,
     navbar,
     Footer,
-    Parent
+    Parent,
   },
 
   data() {
@@ -96,21 +84,21 @@ export default {
       isloaded:false,
 
       items: [
-        { label: this.$t('network.Home'), icon: " " },
+        { label: this.$t('network.Home'), icon: ' ' },
 
-        { label: this.$t('network.Inbox'), icon: " " },
-        { label: this.$t('network.Notification'), icon: "" },
-        { label: this.$t('network.Member_Request'), icon: "" },
-        { label: this.$t('network.Pending_Post'), icon: "" },
+        { label: this.$t('network.Inbox'), icon: ' ' },
+        { label: this.$t('network.Notification'), icon: '' },
+        { label: this.$t('network.Member_Request'), icon: '' },
+        { label: this.$t('network.Pending_Post'), icon: '' },
 
-        { label: this.$t('network.Keyword_Alert'), icon: "" },
+        { label: this.$t('network.Keyword_Alert'), icon: '' },
 
-        { label: this.$t('network.Settings'), icon: "" },
+        { label: this.$t('network.Settings'), icon: '' },
       ],
 
       options: {
-        activeColor: "#32a400"
-      }
+        activeColor: '#32a400',
+      },
     };
   },
 
@@ -167,8 +155,8 @@ created(){
   methods: {
     handleChange(item, index) {
       console.log(item, index);
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -177,7 +165,6 @@ created(){
   .marg-tap {
     margin-top: 20px;
   }
-
 }
 
 .m-top {
@@ -199,8 +186,6 @@ created(){
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
 }
-
-
 
 .nav-text {
   cursor: pointer;

@@ -52,9 +52,6 @@ export default {
 
     },
 
-
-
-
     setCountry(state, data) {
       state.country = data;
     },
@@ -180,7 +177,7 @@ export default {
       });
     },
 
-  
+
 
 
     completeWelcome({ commit }) {

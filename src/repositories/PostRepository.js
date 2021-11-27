@@ -33,6 +33,21 @@ class Repository {
     }
   }
 
+  async showInboxMessage() {
+    try {
+      const response = await axios.get(`user/message/`)
+      return {
+        success: true,
+        data: response.data.data
+      }
+    } catch (error) {
+      return {
+        success: false,
+        data: error.response.message
+      }
+    }
+  }
+
 }
 
 export default new Repository()

@@ -3,8 +3,8 @@
     <fas-icon class="violet mr-2 pt-1 icon-size primary" :icon="['fas', 'file-image']" />{{ $t('profileowner.Media') }}
 
     <hr />
-    <b-tabs content-class="mt-3" pills>
-      <b-tab :title="$t('profileowner.Posts')" active @click="getImages">
+    <b-tabs content-class="mt-3" v-model="tabIndex" pills>
+      <b-tab :title="$t('profileowner.Posts')" @click="getImages">
         <div v-if="!hasLoadPicture">
           <b-spinner class="load" :label="$t('profileowner.Large_Spinner')"></b-spinner>
         </div>
@@ -50,6 +50,9 @@ export default {
       type: Boolean,
       default: () => true,
     },
+    isablum: {
+        type: Boolean,
+      },
   },
   data: function () {
     return {
@@ -58,6 +61,7 @@ export default {
       hasLoadPicture: false,
       showAlbum: false,
       strategy: null,
+      tabIndex: 0,
       addItem: false,
     };
   },
@@ -142,7 +146,9 @@ export default {
 
   created() {
     this.urlData = this.$route.params.id;
-
+    if (this.isablum) {
+      this.tabIndex = 1;
+    }
     this.strategy = {
       business: () => ({
         album: 'businessOwner/getAlbums',

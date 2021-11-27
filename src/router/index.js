@@ -56,6 +56,7 @@ import ordersdetail from "@/views/odersDetail";
 import businessordersdetail from "@/views/businessordersdetail"
 import businessOwnerOrders from "@/views/businessOwnerOrders"
 import payment from "@/views/payment";
+import about from "@/views/about";
 import cart from "@/views/card";
 
 
@@ -83,6 +84,25 @@ const routes = [
         component: home1,
         
     },
+{
+    path: '/about-us',
+    name: 'about',
+    component: about,
+    // meta: {
+    //   auth: true,
+    // },
+},
+
+{
+  path: "/market",
+  name: "market",
+  component: market,
+},
+{
+  path: "/checkout",
+  name: "payment",
+  component: payment
+},
   
   {
     path: "/businessOwnerOrders",
@@ -131,11 +151,6 @@ const routes = [
   },
 
 
-  {
-    path: "/govx",
-    name: "govx",
-    component: govx,
-  },
 
   {
     path: "/welcome",
@@ -327,7 +342,7 @@ const routes = [
     name: "Nav Meassage",
     component: navMessage,
   },
-},
+
 {
   path: "/services/:id",
   name: "Service",

@@ -31,7 +31,7 @@ import businessVisitor from "@/views/businessVisitor";
 import search from "@/views/search";
 import forgotPassword from "@/views/forgotPassword";
 import navMessage from "@/views/navMessaging";
-import Blec from "@/views/blec";
+
 import memberNetworkFollower from "@/views/memberNetworkFollower";
 import memberNetwork from "@/views/memberNetwork";
 
@@ -57,6 +57,7 @@ import businessordersdetail from "@/views/businessordersdetail"
 import businessOwnerOrders from "@/views/businessOwnerOrders"
 import payment from "@/views/payment";
 import about from "@/views/about";
+import contact from "@/views/contact";
 import cart from "@/views/card";
 
 
@@ -85,12 +86,20 @@ const routes = [
         
     },
 {
-    path: '/about-us',
+    path: '/about',
     name: 'about',
     component: about,
     // meta: {
     //   auth: true,
     // },
+},
+{
+  path: '/contact',
+  name: 'contact',
+  component: contact,
+  // meta: {
+  //   auth: true,
+  // },
 },
 
 {

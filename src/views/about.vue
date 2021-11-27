@@ -1,38 +1,8 @@
 <template>
   <div class="about">
-    <header class="position-relative">
-      <b-navbar toggleable="lg" variant="faded" type="light">
-        <div class="container">
-          <div class="col-md-12 col-lg-2 col-xl-2 text-center">
-            <a class="d-inline-block align-top mt-1" href="#">
-              <img src="@/assets/logo.png" alt="" class="balogo" loading="lazy" />
-            </a>
-          </div>
-
-          <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-
-          <b-collapse id="nav-collapse" is-nav>
-            <b-navbar-nav class="ml-auto text-center">
-              <b-nav-item href="#">
-                <span class="text-dark font-arvo nav-span">Home</span>
-              </b-nav-item>
-              <b-nav-item href="#" class="active ml-md-3">
-                <span class="text-dark font-arvo nav-span">About Us</span>
-              </b-nav-item>
-              <b-nav-item href="#" class="ml-md-3">
-                <span class="text-dark font-arvo nav-span">Contact Us</span>
-              </b-nav-item>
-              <b-nav-item href="#" class="ml-md-3">
-                <span class="text-dark font-arvo nav-span">Login</span>
-              </b-nav-item>
-              <b-nav-item href="#" class="ml-md-3">
-                <span class="text-dark font-arvo nav-span">Sign Up</span>
-              </b-nav-item>
-            </b-navbar-nav>
-          </b-collapse>
-        </div>
-      </b-navbar>
-    </header>
+    <!-- Header -->
+    <site-header />
+    <!-- BG -->
     <div class="bg-img d-flex align-items-end pb-5 px-2">
       <div class="d-none d-md-block px-5">
         <div class="header-img-text text-light font-rob">
@@ -601,60 +571,9 @@
       </div>
     </section>
 
-    <!-- Contact Us Form -->
-    <section class="contact-us-form mt-3">
-      <div class="d-flex justify-content-center">
-        <img
-          src="http://info.bridgeafrica.com/wp-content/uploads/2021/07/BAV-horizontal-white-2048x733.png"
-          alt="Logo"
-          class="contact-img"
-        />
-      </div>
-      <h5 class="text-light font-arvo text-center mt-5 text-capitalize contact-heading px-2">
-        digitalzins busingess and consumers in afica
-      </h5>
-      <h3 class="text-light text-center font-arvo text-uppercase contact-heading my-5">
-        Contact US
-      </h3>
-      <div class="row mx-md-4 mx-2">
-        <div class="col-md-4">
-          <b-form-input
-            v-model="contact.name"
-            placeholder="Name*"
-            class="sub-input d-block mx-auto my-3 contact-input name"
-          ></b-form-input>
-        </div>
-        <div class="col-md-4">
-          <b-form-input
-            v-model="contact.email"
-            placeholder="Email*"
-            class="sub-input d-block mx-auto my-3 contact-input email"
-          ></b-form-input>
-        </div>
-        <div class="col-md-4">
-          <b-form-input
-            v-model="contact.website"
-            placeholder="Website*"
-            class="sub-input d-block mx-auto my-3 contact-input website"
-          ></b-form-input>
-        </div>
-        <div class="col-md-12">
-          <b-form-textarea
-            id="textarea"
-            v-model="contact.msg"
-            placeholder="Enter something..."
-            rows="3"
-            min-rows="6"
-            class="sub-input my-3 contact-msg"
-          ></b-form-textarea>
-        </div>
-        <div class="col-md-2 my-5">
-          <b-button variant="primary" class="font-weight-bold font-arvo text-uppercase btn-block"
-            >Submit Message</b-button
-          >
-        </div>
-      </div>
-    </section>
+    <!-- Contact Component -->
+
+    <contact />
 
     <!-- Social Icons -->
 
@@ -692,98 +611,23 @@
 
     <!-- Footer -->
 
-    <section class="footer">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-3 py-4">
-            <div class="d-flex position-relative">
-              <img
-                width="963"
-                height="380"
-                src="http://info.bridgeafrica.com/wp-content/uploads/2021/07/logo.png"
-                alt="LogoF"
-              />
-              <h3 class="text-light font-arvo position-absolute footer-icon-text font-weight-bold">
-                Bridge <br />
-                Africa
-              </h3>
-            </div>
-            <div class="footer-icons-div d-flex flex-row justify-content-around my-4">
-              <a href="https://twitter.com/bridgeafricacom" target="_blank" class="footer-icons">
-                <i class="fab fa-twitter-square"></i>
-              </a>
-              <a href="http://facebook.com/bridgeafricacom" target="_blank" class="footer-icons">
-                <i class="fab fa-facebook-square"></i>
-              </a>
-              <a href="https://www.youtube.com/channel/UC8JjdBDrz7GsqnO7kpEEHvA" target="_blank" class="footer-icons">
-                <i class="fab fa-youtube"></i>
-              </a>
-              <a href="https://twitter.com/bridgeafricacom" target="_blank" class="footer-icons">
-                <i class="fab fa-instagram"></i>
-              </a>
-            </div>
-            <p class="text-center text-md-left"><span class="text-primary">&copy; 2021</span> Bridge Africa</p>
-          </div>
-          <div class="col-md-3 py-4">
-            <h5 class="font-arvo text-center text-md-leftfont-weight-bold ">
-              OUR ADDRESS
-            </h5>
-            <p class="mt-5 font-weight-bold text-center text-md-left">
-              International Handicraft Center, Rond-point Intendance
-            </p>
-            <p class="mb-1 font-weight-bold text-center text-md-left">
-              Yaoundé
-            </p>
-            <p class="font-weight-bold text-center text-md-left">Cameroon</p>
-          </div>
-          <div class="col-md-3 py-4">
-            <h5 class="font-arvo text-center text-md-left font-weight-bold">
-              USEFUL LINK
-            </h5>
-            <p class="mt-5">
-              <a href="#" class="color-white d-block font-weight-bold text-center text-md-left">
-                BRIDGEAFRICA.COM
-              </a>
-              <a href="#" class="color-white d-block font-weight-bold text-center text-md-left">
-                BRIDGEAFRICA.COM
-              </a>
-
-              <a href="#" class="color-white d-block font-weight-bold text-center text-md-left">
-                ABOUT US
-              </a>
-              <a href="#" class="color-white d-block font-weight-bold text-center text-md-left">
-                CONTACT US
-              </a>
-            </p>
-          </div>
-          <div class="col-md-3 py-4">
-            <h5 class="font-arvo text-left font-weight-bold text-center text-md-left">
-              WORKING HOURS
-            </h5>
-            <p class="mt-5 text-center text-md-left">
-              Monday-Friday: 09AM – 05PM
-            </p>
-            <p class="text-center text-md-left">
-              Saturday: 9AM – 01PM
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
+    <site-footer />
   </div>
 </template>
 <script>
+import Contact from '../components/site/contact';
+import SiteFooter from '../components/site/siteFooter';
+import SiteHeader from '../components/site/siteHeader';
 export default {
+  components: {
+    Contact,
+    SiteFooter,
+    SiteHeader,
+  },
   data() {
     return {
       subEmail: '',
       selectedResource: 'all',
-      contact: {
-        name: '',
-        email: '',
-        website: '',
-        msg: '',
-      },
       resources: [
         {
           id: '1',
@@ -867,10 +711,6 @@ export default {
 }
 .nav-item.active .nav-link span {
   color: #e94a47 !important;
-}
-.nav-span {
-  font-size: 14px;
-  font-weight: bold;
 }
 .about {
   margin-left: -6px;
@@ -1151,25 +991,6 @@ export default {
   font-size: 62px;
   text-decoration: none;
   color: #b6c5c8;
-}
-.footer {
-  margin-top: 2px;
-  width: 100%;
-  min-height: 30vh;
-  background-color: #000000;
-  color: #ffffff;
-}
-.footer-icon-text {
-  /* top: 15px; */
-  left: 30%;
-}
-.footer-icons {
-  font-size: 32px;
-  text-decoration: none;
-  color: #e75c18;
-}
-.footer-icons-div {
-  width: 70%;
 }
 .blog-img-div h5 {
   color: #ffffff;

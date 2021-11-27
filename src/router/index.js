@@ -2,7 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 //import Home from "../views/home.vue";
 import Login from "../views/login.vue";
-
+import home1 from "@/views/home1.vue";
 import signup from "../views/signup.vue";
 
 import RecoverPass1 from "../views/recoverPassword1.vue";
@@ -78,6 +78,12 @@ const routes = [
     // },
   },
 
+   {
+        path: "/",
+        name: "home1",
+        component: home1,
+        
+    },
 {
     path: '/about-us',
     name: 'about',
@@ -125,7 +131,7 @@ const routes = [
 
   
   {
-    path: "/",
+    path: "/dashboard",
     name: "home",
     component: dashboard,
     meta: {

@@ -1,5 +1,7 @@
 //import fr from './fr.json'
 import auth from './auth.json'
+import home from './home.json'
+
 import businessf from './businessf.json'
 import search from './search.json'
 import Order from './Order.json'
@@ -23,6 +25,7 @@ export const defaultLocale = 'fr'
 export const fr = {
 
     auth: auth,
+    home: home,
     businessf: businessf,
     search: search,
     Order: Order,

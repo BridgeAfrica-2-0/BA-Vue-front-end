@@ -10,7 +10,8 @@
         </div>
 
         <Images
-          :canUpload="canUpload"
+          :isEditor="isEditor"
+          :showCreateForm="false"
           :hasLoadPicture="!hasLoadPicture"
           :images="all()"
           :albumName="'notFound'"
@@ -23,7 +24,7 @@
         <div v-if="!hasLoadAlbum">
           <b-spinner class="load" :label="$t('profileowner.Large_Spinner')"></b-spinner>
         </div>
-        <Album :canUpload="!canUpload" :type="type" v-else :getAlbums="getAlbums" :getImages="getImages"/>
+        <Album :isEditor="isEditor" :type="type" v-else :getAlbums="getAlbums" :getImages="getImages" />
       </b-tab>
     </b-tabs>
   </div>
@@ -45,15 +46,19 @@ export default {
         return ['profile', 'network', 'business'].indexOf(value) !== -1;
       },
     },
+    isEditor: {
+      type: Boolean,
+      default: () => true,
+    },
   },
   data: function () {
     return {
-      canUpload: false,
       loading: false,
       hasLoadAlbum: false,
       hasLoadPicture: false,
       showAlbum: false,
       strategy: null,
+      addItem: false,
     };
   },
 
@@ -66,6 +71,7 @@ export default {
     ...mapGetters({
       getProfilePictures: 'UserProfileOwner/getImages',
       getBusinessPictures: 'businessOwner/getAllImages',
+      getNetworkPictures: 'networkProfileMedia/getImages',
     }),
   },
 
@@ -99,6 +105,7 @@ export default {
           .dispatch(type.album, this.urlData)
           .then(() => {
             this.hasLoadAlbum = true;
+            this.addItem = true;
           })
           .catch((err) => {
             this.hasLoadAlbum = true;
@@ -119,6 +126,7 @@ export default {
           .dispatch(type.image, this.urlData)
           .then(() => {
             this.hasLoadPicture = true;
+            this.addItem = true;
           })
           .catch((err) => {
             this.hasLoadPicture = true;
@@ -145,6 +153,11 @@ export default {
         album: 'UserProfileOwner/getAlbums',
         image: 'UserProfileOwner/getImages',
         pictures: this.getProfilePictures,
+      }),
+      network: () => ({
+        album: 'networkProfileMedia/getAlbums',
+        image: 'networkProfileMedia/getImages',
+        pictures: this.getNetworkPictures,
       }),
     };
 

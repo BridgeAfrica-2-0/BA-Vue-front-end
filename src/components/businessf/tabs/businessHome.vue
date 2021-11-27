@@ -1,20 +1,16 @@
 <template>
   <div>
     <b-row>
-       <b-col md="12" lg="5" xl="4" >
+      <b-col md="12" lg="5" xl="4">
         <Intro />
-        <Media />      
+        <Media />
         <Followers />
         <HotBusiness  class="mb-md-3"  />
       </b-col>
-      
 
-      <b-col md="12"  lg="7"  xl="8">
-
+      <b-col md="8" lg="7" xl="8">
         <Post />
-
       </b-col>
-
     </b-row>
   </div>
 </template>
@@ -26,7 +22,7 @@ import HotBusiness from "../hotBusinesses";
 import Post from "../ownerPost";
 import Media from "../../media";
 export default {
-  name: "posts",
+  name: 'posts',
   components: {
     Intro,
     Followers,

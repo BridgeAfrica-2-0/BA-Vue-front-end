@@ -208,7 +208,6 @@ export default {
 
   created() {
     console.log("Load User Info");
-	console.log(this.userProfileOwner);
     this.$store
       .dispatch("profile/loadUserPostIntro", null)
       .then((response) => {

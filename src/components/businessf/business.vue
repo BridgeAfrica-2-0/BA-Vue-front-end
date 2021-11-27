@@ -128,7 +128,7 @@
           <b-tabs lazy content-class="mt-3 p-0"  v-model="currentTab" fill pills>
             <b-tab  :title="$t('businessf.Home')"><HomePage /></b-tab>
             <b-tab :title="$t('businessf.About')"><About /></b-tab>
-            <b-tab type="business" :title="$t('businessf.Media')"><Media /></b-tab>
+            <b-tab type="business" :title="$t('businessf.Media')"><Media :type="'business'" :isEditor="false"/></b-tab>
             <b-tab :title="$t('businessf.Market')"><MarketPlace /></b-tab>
             <b-tab :title="$t('businessf.Networks')"><Networks /></b-tab>
             <b-tab :title="$t('businessf.Community')"><Community /></b-tab>

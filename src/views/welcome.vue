@@ -121,7 +121,7 @@
 
                        <b-form-datepicker  name="dob" :max="min" id="dob"
 
-                        v-model="dob" class=" text"  :locale=" this.$i18n.locale"  :placeholder="$t('welcome.Busness_Name')"></b-form-datepicker>
+                        v-model="dob" class=" text"  :locale=" this.$i18n.locale"  :placeholder="$t('welcome.DOB')"></b-form-datepicker>
 
                     </div>
 
@@ -335,7 +335,7 @@
 
                          <b-form-datepicker  name="dob" :max="min" id="dob"
 
-                        v-model="dob" class=" text"   :placeholder="$t('welcome.Busness_Name')"></b-form-datepicker>
+                        v-model="dob" class=" text"   :placeholder="$t('welcome.DOB')"></b-form-datepicker>
 
                     </div>
 
@@ -746,14 +746,15 @@
                       <select
                         id="category"
                         class="form-control text"
+                        @input="switchLang"
                         name="language"
                         v-model="language"
                       >
                         <option value="" selected="" disabled="">
                           {{ $t('welcome.Select_Language') }}
                         </option>
-                        <option>{{ $t('welcome.English') }}</option>
-                        <option>{{ $t('welcome.Hindi') }}</option>
+                        <option value="en">{{ $t('welcome.English') }}</option>
+                        <option value="fr">{{ $t('welcome.French') }}</option>
                       </select>
                     </div>
                   </div>
@@ -927,6 +928,19 @@ export default {
   },
 
   methods: {
+
+
+
+     switchLang(){
+  
+     
+         
+          this.$i18n.locale = this.language;
+         this.$store.commit("auth/setAppLanguage", this.language);
+
+
+     },
+
 
 
       flashErrors(errors) {

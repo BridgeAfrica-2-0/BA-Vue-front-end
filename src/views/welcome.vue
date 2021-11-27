@@ -16,7 +16,7 @@
     >
       <div>
         <h4 class="text-center username f-30">
-          {{ $t('welcome.Hello') }} <b> {{ username }} </b> {{ $t('welcome.letsget_started') }}
+          {{ $t('welcome.Hello') }} <b> {{ username }} </b>{{ $t('welcome.letsget_started') }}
         </h4>
         <br />
         <br />
@@ -113,18 +113,16 @@
                       <div></div>
                     </div>
                   </div>
+                 
                   <div class="col-md-6">
                     <div class="form-group" label-class="username">
                       <label for="username" class="username"> {{ $t('welcome.DOB') }} :</label
                       ><br />
-                      <input
-                        type="date"
-                        name="dob"
-                        id="dob"
-                        v-model="dob"
-                        :placeholder="$t('welcome.Busness_Name')"
-                        class="form-control text"
-                      />
+
+                       <b-form-datepicker  name="dob" :max="min" id="dob"
+
+                        v-model="dob" class=" text"  :locale=" this.$i18n.locale"  :placeholder="$t('welcome.DOB')"></b-form-datepicker>
+
                     </div>
 
                     <div class="form-group">
@@ -333,14 +331,12 @@
                     <div class="form-group" label-class="username">
                       <label for="username" class="username"> {{ $t('welcome.DOB') }} :</label
                       ><br />
-                      <input
-                        type="date"
-                        name="dob"
-                        id="dob"
-                        v-model="dob"
-                        :placeholder="$t('welcome.Busness_Name')"
-                        class="form-control text"
-                      />
+                     
+
+                         <b-form-datepicker  name="dob" :max="min" id="dob"
+
+                        v-model="dob" class=" text"   :placeholder="$t('welcome.DOB')"></b-form-datepicker>
+
                     </div>
 
                     <div class="form-group">
@@ -750,14 +746,15 @@
                       <select
                         id="category"
                         class="form-control text"
+                        @input="switchLang"
                         name="language"
                         v-model="language"
                       >
                         <option value="" selected="" disabled="">
                           {{ $t('welcome.Select_Language') }}
                         </option>
-                        <option>{{ $t('welcome.English') }}</option>
-                        <option>{{ $t('welcome.Hindi') }}</option>
+                        <option value="en">{{ $t('welcome.English') }}</option>
+                        <option value="fr">{{ $t('welcome.French') }}</option>
                       </select>
                     </div>
                   </div>
@@ -841,7 +838,7 @@ import axios from "axios";
 
 import Multiselect from "vue-multiselect";
 import { validationMixin } from "vuelidate";
-
+import moment from 'moment';
 import { required, email, minLength } from "vuelidate/lib/validators";
 
 export default {
@@ -850,6 +847,8 @@ export default {
     return {
       useas: "",
       municipality: [],
+      min: moment().subtract(18, 'years').format('YYYY-MM-DD'),
+        moment: moment,
       locality: [],
       division: [],
       selectedusecase: "",
@@ -908,8 +907,8 @@ export default {
       ],
 
       options: [
-        { text: " Person", value: "person" },
-        { text: " Business ", value: "business" },
+        { text:  this.$t('welcome.Person'), value: "person" },
+        { text:  this.$t('welcome.Business'), value: "business" },
       ],
 
       category: "",
@@ -929,6 +928,19 @@ export default {
   },
 
   methods: {
+
+
+
+     switchLang(){
+  
+     
+         
+          this.$i18n.locale = this.language;
+         this.$store.commit("auth/setAppLanguage", this.language);
+
+
+     },
+
 
 
       flashErrors(errors) {

@@ -18,7 +18,8 @@ export default {
   components: {
     Followers,
     Following
-  }
+  },
+  props: ["businesses"]
 };
 </script>
 

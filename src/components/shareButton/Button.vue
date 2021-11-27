@@ -1,49 +1,49 @@
 <template>
-  <div>
+  <div style="display: inline-block">
     <FlashMessage style="z-index: 99999" :position="'right top'" />
 
     <Box
+      :modal="`modal-1-${uuid}`"
       :id="modal"
-      modal="modal-1"
       :isActivated="strategy"
       :title="$t('search.Share_to_people')"
       :placeholder="$t('search.Search_for_people')"
       subtitle="All peoples"
-      :type="type"
+      :type="'network'"
       :post="post"
     />
-    <!-- modal-1 -->
+    <!-- Share to people -->
 
     <Box
+      :modal="`modal-2-${uuid}`"
       :id="modal"
-      modal="modal-2"
       :isActivated="strategy"
       :title="$t('search.Share_to_network')"
       :placeholder="$t('search.Search_for_network')"
       subtitle="All networks"
-      :type="type"
+      :type="'business'"
       :post="post"
     >
       <template v-slot:owner>
         <div class="d-flex align-items-center py-3 px-2 mb-2 border">
-          <b-avatar class="mr-3"></b-avatar>
+          <b-avatar class="mr-3" :src="profile.profile_picture"></b-avatar>
           <p>
-            <span class="mr-auto">{{$t("search.Share_Post_As")}}</span><br />
-            <span class="mr-auto">J. Circlehead</span>
+            <span class="mr-auto">{{ $t("search.Share_Post_As") }}</span
+            ><br />
+            <span class="mr-auto bold">{{ profile.name }}</span>
           </p>
         </div>
       </template>
     </Box>
-    <!-- modal-2 -->
+    <!-- Share to network -->
 
     <Box
-      :id="modal"
-      modal="modal-5"
+      :modal="`modal-5-${uuid}`"
       :isActivated="strategy"
       :title="$t('search.Send_Inbox')"
       :placeholder="$t('search.Search_for_network')"
       subtitle="All networks"
-      :type="type"
+      :type="'network'"
       :post="post"
     >
       <template v-slot:owner>
@@ -51,7 +51,8 @@
           <div class="d-flex align-items-center py-3 px-2 mb-2">
             <b-avatar class="mr-3"></b-avatar>
             <p>
-              <span class="mr-auto">{{$t("search.Share_Post_As")}} </span><br />
+              <span class="mr-auto">{{ $t("search.Share_Post_As") }} </span
+              ><br />
               <span class="mr-auto">2h</span>
             </p>
           </div>
@@ -67,31 +68,39 @@
         </div>
       </template>
     </Box>
-    <!-- modal-5 -->
+    <!-- Send Inbox -->
 
     <Box
+      :modal="`modal-3-${uuid}`"
       :id="modal"
-      modal="modal-3"
       :title="$t('search.Share_business')"
       :placeholder="$t('search.Search_for_business')"
       subtitle="All business"
-      :type="type"
+      :type="'business'"
       :post="post"
       :isActivated="strategy"
     >
       <template v-slot:owner>
         <div class="d-flex align-items-center py-3 px-2 mb-2 border">
-          <b-avatar class="mr-3"></b-avatar>
+          <b-avatar class="mr-3" :src="profile.profile_picture"></b-avatar>
           <p>
-            <span class="mr-auto">{{$t("search.Share_Post_As")}}</span><br />
-            <span class="mr-auto">J. Circlehead</span>
+            <span class="mr-auto">{{ $t("search.Share_Post_As") }}</span
+            ><br />
+            <span class="mr-auto bold">{{ profile.name }}</span>
           </p>
         </div>
       </template>
     </Box>
     <!-- modal-3 -->
 
-    <Post :id="modal" :isActivated="strategy" modal="modal-4" />
+    <Post
+      :id="modal"
+      :isActivated="strategy"
+      :modal="`modal-10-${uuid}`"
+      :post="post"
+      :auth="profile"
+      :hidden="() => this.$bvModal.hide(`modal-10-${uuid}`)"
+    />
     <!-- modal-4 -->
 
     <b-dropdown
@@ -102,58 +111,68 @@
       position="bottom"
     >
       <template #button-content>
-        <fas-icon class="primary ml-3" icon="['fas', 'share']" />
+        <b-icon class="primary ml-3" icon="share" />
       </template>
 
-      <b-dropdown-text class="box-title"> {{$t("search.Share")}} </b-dropdown-text>
+      <b-dropdown-text class="box-title">
+        {{ $t("search.Share") }}
+      </b-dropdown-text>
 
       <b-dropdown-item
         class="d-flex py-2 cursor-pointer"
         @click="shareToYourProfile"
+        v-if="isYourOwnPost"
       >
         <span class="text-ored">
           <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
         </span>
         <div class="d-flex flex-column ml-1">
-          <span>{{$t("search.Share_to_your_Profile")}}</span>
+          <span>{{ $t("search.Share_to_your_Profile") }} </span>
         </div>
       </b-dropdown-item>
 
       <b-dropdown-item
         class="d-flex py-2 cursor-pointer"
-        @click="open('modal-4')"
+        @click="open(`modal-10-${uuid}`)"
+        v-if="isYourOwnPost"
       >
         <span class="text-ored">
           <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
         </span>
         <div class="d-flex flex-column ml-1">
-          <span>{{$t("search.Share_to_News_Feed")}}</span>
+          <span>{{ $t("search.Share_to_News_Feed") }}</span>
         </div>
       </b-dropdown-item>
 
       <b-dropdown-item
-        v-if="'network' !== type"
         class="d-flex py-2 cursor-pointer"
-        @click="open('modal-2')"
+        @click="open(`modal-2-${uuid}`)"
+        v-if="
+          $route.name != 'networks'
+            ? 'network' != profile.user_type
+              ? true
+              : false
+            : false
+        "
       >
         <span class="text-ored">
           <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
         </span>
         <div class="d-flex flex-column ml-1">
-          <span>{{$t("search.Share_to_Network")}}</span>
+          <span>{{ $t("search.Share_to_Network") }}</span>
         </div>
       </b-dropdown-item>
 
       <b-dropdown-item
-        v-if="'business' !== type"
         class="d-flex py-2 cursor-pointer"
-        @click="open('modal-3')"
+        @click="open(`modal-3-${uuid}`)"
+        v-if="isYourOwnPost"
       >
         <span class="text-ored">
           <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
         </span>
         <div class="d-flex flex-column ml-1">
-          <span>{{$t("search.Share_to_Business")}}</span>
+          <span>{{ $t("search.Share_to_Business") }}</span>
         </div>
       </b-dropdown-item>
 
@@ -168,7 +187,7 @@
           <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
         </span>
         <div class="d-flex flex-column ml-1">
-          <span>{{$t("search.Share_to_commnunity")}}</span>
+          <span>{{ $t("search.Share_to_commnunity") }}</span>
         </div>
       </b-dropdown-item>
 
@@ -176,39 +195,59 @@
         <div class="popover-body">
           <div
             @mousedown="open('modal-1')"
-            class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer"
+            class="
+              d-inline-flex
+              flex-row
+              align-items-center
+              suggest-item
+              py-2
+              cursor-pointer
+            "
           >
             <span class="text-ored">
               <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
             </span>
             <div class="d-flex flex-column ml-3">
-              <span>{{$t("search.Share_to_People")}}</span>
+              <span>{{ $t("search.Share_to_People") }}</span>
             </div>
           </div>
 
           <div
             v-if="'network' !== type"
-            @mousedown="open('modal-5')"
-            class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer"
+            class="
+              d-inline-flex
+              flex-row
+              align-items-center
+              suggest-item
+              py-2
+              cursor-pointer
+            "
           >
             <span class="text-ored">
               <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
             </span>
             <div class="d-flex flex-column ml-3">
-              <span>{{$t("search.Share_to_Network")}}</span>
+              <span>{{ $t("search.Share_to_Network") }}</span>
             </div>
           </div>
 
           <div
             v-if="'business' !== type"
-            @mousedown="open('modal-5')"
-            class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer"
+            @mousedown="open(`modal-5-${uuid}`)"
+            class="
+              d-inline-flex
+              flex-row
+              align-items-center
+              suggest-item
+              py-2
+              cursor-pointer
+            "
           >
             <span class="text-ored">
               <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
             </span>
             <div class="d-flex flex-column ml-3">
-              <span>{{$t("search.Share_to_Business")}}</span>
+              <span>{{ $t("search.Share_to_Business") }}</span>
             </div>
           </div>
         </div>
@@ -219,56 +258,123 @@
           <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
         </span>
         <div class="d-flex flex-column ml-1">
-          <span>{{$t("search.Copy_link")}}</span>
+          <span>{{ $t("search.Copy_link") }}</span>
         </div>
       </b-dropdown-item>
 
       <b-dropdown-item
         class="d-flex py-2 cursor-pointer"
-        id="sharing-via"
+        :id="`sharing-via-${uuid}`"
         data-toggle="popover"
         role="button"
         data-original-title=""
+        ref="button"
       >
         <span class="text-ored">
           <b-icon-share-fill class="col-bg"></b-icon-share-fill>
         </span>
         <div class="d-flex flex-column ml-1">
-          <span>{{$t("search.Share_via")}}</span>
+          <span>{{ $t("search.Share_via") }}</span>
         </div>
       </b-dropdown-item>
-      <b-popover target="sharing-via" triggers="hover" placement="left">
+
+      <b-popover
+        :target="`sharing-via-${uuid}`"
+        :triggers="['hover', 'click']"
+        placement="left"
+        focus
+      >
         <div class="popover-body">
           <div
-            class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer"
+            class="
+              d-inline-flex
+              flex-row
+              align-items-center
+              suggest-item
+              py-2
+              cursor-pointer
+            "
           >
             <span class="text-ored">
               <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
             </span>
             <div class="d-flex flex-column ml-3">
-              <span>{{$t("search.Share_to_your_profile")}}</span>
+              <Social
+                :network="'Email'"
+                :post="post"
+                :title="'Share via Email'"
+              >
+              </Social>
             </div>
           </div>
 
           <div
-            class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer"
+            class="
+              d-inline-flex
+              flex-row
+              align-items-center
+              suggest-item
+              py-2
+              cursor-pointer
+            "
           >
             <span class="text-ored">
               <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
             </span>
             <div class="d-flex flex-column ml-3">
-              <span>{{$t("search.Share_to_network")}}</span>
+              <Social
+                :network="'facebook'"
+                :post="post"
+                :title="'Share via Facebook'"
+              >
+              </Social>
             </div>
           </div>
 
           <div
-            class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer"
+            class="
+              d-inline-flex
+              flex-row
+              align-items-center
+              suggest-item
+              py-2
+              cursor-pointer
+            "
           >
             <span class="text-ored">
               <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
             </span>
             <div class="d-flex flex-column ml-3">
-              <span>{{$t("search.Share_to_your_business")}}</span>
+              <Social
+                :network="'Twitter'"
+                :post="post"
+                :title="'Share via Twitter'"
+              >
+              </Social>
+            </div>
+          </div>
+
+          <div
+            class="
+              d-inline-flex
+              flex-row
+              align-items-center
+              suggest-item
+              py-2
+              cursor-pointer
+            "
+          >
+            <span class="text-ored">
+              <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
+            </span>
+            <div class="d-flex flex-column ml-3">
+              <Social
+                @mousedown="open"
+                :network="'WhatsApp'"
+                :post="post"
+                :title="'Share via Whatsapp'"
+              >
+              </Social>
             </div>
           </div>
         </div>
@@ -277,10 +383,12 @@
   </div>
 </template>
 
-
 <script>
 import Box from "./Box";
+import Social from "./Social";
 import Post from "./SharePost";
+
+import { mapGetters } from "vuex";
 
 export default {
   name: "ShareButton",
@@ -288,53 +396,87 @@ export default {
     post: {
       type: Object,
     },
-    type: {
-      type: String,
-      validator: function (value) {
-        if (["network", "business", "profile"].includes(value)) return true;
-      },
-    },
   },
 
   components: {
     Box,
     Post,
+    Social,
   },
 
   data: () => ({
     modal: null,
+    type: null,
+    strategy: false,
+    uuid: null,
   }),
 
+  created() {
+    this.uuid = this.post.post_id ? this.post.post_id : this.post.id;
+    this.type = this.profile.user_type;
+  },
+
   computed: {
-    strategy: function () {
-      if (
-        ["modal-1", "modal-2", "modal-3", "modal-4", "modal-5"].includes(
-          this.modal
-        )
-      )
-        return true;
-      else return false;
+    ...mapGetters({
+      profile: "auth/profilConnected",
+    }),
+
+    isYourOwnPost() {
+      const isItOwnerPage =
+        this.$route.name == "BusinessOwner" ||
+        this.$route.name == "profile_owner"
+          ? false
+          : true;
+
+      const isYourOwn =
+        this.profile.id == this.post.user_id &&
+        this.profile.user_type == this.post.poster_type;
+
+      return isItOwnerPage
+        ? isYourOwn && this.$route.name == "dashboard"
+          ? false
+          : true
+        : false;
+    },
+  },
+
+  watch: {
+    modal: function (value) {
+      this.strategy = [
+        "modal-1",
+        "modal-2",
+        "modal-3",
+        "modal-4",
+        "modal-5",
+      ].includes(this.modal)
+        ? true
+        : false;
     },
   },
 
   methods: {
     open(id) {
-      this.$bvModal.show(id);
       this.modal = id;
+      this.$bvModal.show(id);
     },
 
     shareToYourProfile: async function () {
+      let loader = this.$loading.show({
+        container: this.fullPage ? null : this.$refs.creatform,
+        canCancel: true,
+        onCancel: this.onCancel,
+        color: "#e75c18",
+      });
       let data = {
-        [this.type]: "",
-        post_id: parseInt(this.post.post_id),
+        [`${this.post.poster_type}_profile`]: "",
+        post_id: parseInt(this.post.post_id ? this.post.post_id : this.post.id),
         source_id: parseInt(this.post.user_id),
       };
 
-      if ("profile" !== this.type)
-        data = Object.assign(data, { target_id: this.post.target_id });
-
-      const request = await this.$repository.share.userPost(data);
-
+      const request = await this.$repository.share.userPost(data, [
+        `${this.post.poster_type}`,
+      ]);
+      loader.hide();
       if (request.success)
         this.flashMessage.success({
           time: 5000,
@@ -346,6 +488,9 @@ export default {
 </script>
 
 <style scoped>
+.bold {
+  font-weight: bold;
+}
 .border {
   border-radius: 12px;
 }

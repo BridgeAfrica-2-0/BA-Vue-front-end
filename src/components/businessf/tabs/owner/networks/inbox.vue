@@ -1,27 +1,149 @@
 <template>
   <div>
+  
     <b-container>
       <div class="chat-box">
-        <b-row>
-          <!-- Mobile -->
-          <b-col class="pr-0" cols="12" xl="4" v-if="show">
-            <div class="right-mobile">
+          <b-row>
+
+      
+            <b-col class="pr-0" cols="12" xl="4" v-if="show"  >
+             
+              <div class="right-mobile">
+                <b-row>
+                  <b-col>
+                    
+
+                    <b-avatar
+                class="d-inline-block profile-pic"
+                variant="primary"
+                 src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
+               square
+               
+                 ></b-avatar>
+
+
+
+
+
+
+                  </b-col>
+                  <b-col>
+                    <h4 class="title m-10">{{ $t('network.Messages')}}</h4>
+                  </b-col>
+                  <b-col>
+                    <b-icon
+                      @click="newMessage(true)"
+                      class="new-message primary icon-size m-10 float-right"
+                      icon="pencil-square"
+                    ></b-icon>
+                  </b-col>
+                </b-row>
+                <b-container>
+                  <input
+                    type="text"
+                    class="form-control input-background"
+                    :placeholder=" $t('network.Search_inbox')"
+                  />
+
+
+                 
+
+
+
+                </b-container>
+              </div>
+              <div>
+                <div class="messages-mobile">
+
+
+                  <b-row
+                    v-for="message in messages"
+                    :key="message.id"
+                    class="p-2 message"
+                    @click="showMessages(false)"
+                  >
+                   
+                    
+
+
+
+                    <b-col class="col-10">
+                  
+
+                     <span style="display:inline-flex mb-2">
+              
+              <b-avatar
+                class="d-inline-block profile-pic"
+                variant="primary"
+              src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
+               
+              ></b-avatar>
+
+
+              <h6 class="d-inline-block ml-2  ">
+                <b class="bold"> {{message.name}}</b>
+                 <p class="duration">{{ message.startMessage }}</p>
+              </h6>
+             </span>
+
+            
+                  </b-col>
+
+
+
+                  <b-col class="col-2 text-center">
+                    <small> {{ message.timeStamp }} </small> <p class="">   <b-badge variant="info"> {{ message.messageCount }} </b-badge>   </p>
+                  </b-col>
+
+
+
+
+
+
+
+
+
+                  </b-row>
+
+
+
+
+                  
+
+
+
+
+
+                </div>
+              </div>
+            </b-col>
+        
+
+            <b-col class="pr-0" >
+            <div class="right ">
               <b-row>
-                <b-col>
-                  <b-avatar
-                    class="d-inline-block profile-pic"
-                    variant="primary"
-                    src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
-                    square
-                  ></b-avatar>
+                <b-col class="p-2">
+                
+
+                 <b-avatar
+                class="d-inline-block profile-pic"
+                variant="primary"
+              src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
+                square
+               
+              ></b-avatar>
+
+
                 </b-col>
                 <b-col>
-                  <h4 class="title m-10">Messages</h4>
+
+                  <h3 class="mt-4 title">{{ $t('network.Messages')}}</h3>
+
                 </b-col>
                 <b-col>
                   <b-icon
                     @click="newMessage(true)"
-                    class="new-message primary icon-size m-10 float-right"
+                    class="new-message primary icon-size float-right"
                     icon="pencil-square"
                   ></b-icon>
                 </b-col>
@@ -35,42 +157,38 @@
               </b-container>
             </div>
             <div>
-              <div class="messages-mobile">
+              <div class="messages">
+
+
+
+                  
                 <b-row
                   v-for="message in messages"
                   :key="message.id"
                   class="p-2 message"
-                  @click="showMessages(false)"
+                  @click="showInfo(false)"
                 >
-                  <b-col class="col-10">
-                    <span style="display: inline-flex mb-2">
-                      <b-avatar
-                        class="d-inline-block profile-pic"
-                        variant="primary"
-                        src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
-                      ></b-avatar>
+                  <b-col class="col-9">
+                  
 
-                      <h6 class="d-inline-block ml-2">
-                        <b class="bold"> {{ message.name }}</b>
-                        <p class="duration">{{ message.startMessage }}</p>
-                      </h6>
-                    </span>
+                     <span style="display:inline-flex">
+              
+              <b-avatar
+                class="d-inline-block profile-pic"
+                variant="primary"
+                src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
+               
+              ></b-avatar>
+
+
+              <h6 class="mt-2  d-inline-block ml-2  ">
+                <b class="bold"> {{message.name}}</b>
+                 <p class="duration">{{ message.startMessage }}</p>
+              </h6>
+            </span>
+
+            
                   </b-col>
-
-                  <b-col class="col-2 text-center">
-                    <small> {{ message.timeStamp }} </small>
-                    <p class="">
-                      <b-badge variant="info">
-                        {{ message.messageCount }}
-                      </b-badge>
-                    </p>
-                  </b-col>
-                </b-row>
-              </div>
-            </div>
-          </b-col>
-          <!-- ---- -->
-
           <b-col class="pr-0">
             <div class="right">
               <b-row>
@@ -873,6 +991,7 @@
                 <li>
                   <b-row
                     ><b-col> Block Messages </b-col>
+
                     <b-col>
                       <b-form-checkbox
                         v-model="checked"
@@ -884,6 +1003,7 @@
                     </b-col>
                   </b-row>
                 </li>
+
                 <li>Report User</li>
               </ul>
             </div>
@@ -913,6 +1033,7 @@
                 </b-row>
                 <b-row>
                   <b-col>
+
                     <div class="new-msg-filter-list">
                       <div v-if="loader" class="text-center mt-6 pt-6">
                         <b-spinner
@@ -1083,6 +1204,158 @@
                   </b-col>
                 </b-row>
               </div>
+
+                   
+
+                    <b-form-input
+                    id="textarea"
+                    v-model="searchQuery"
+                    class="input-background"
+                    style="width: 100%"
+                    :placeholder="$t('network.Type_the_name_of_person_or_Business')"
+                     @click="showsearchh()"
+                  ></b-form-input>  
+
+         <br/>
+                   
+                   
+
+
+
+        
+           
+        <div class="table-responsive"  v-if="showsearch == true"  style="overflow-x:hidden" >   
+
+            <table v-if="resources.length" class="table">
+                <thead>
+                    <tr>
+                        
+                        <td>      <b-row>    <b-col cols="6">      <span class="bold " >  {{ $t('network.Send_to_all') }}   </span>   </b-col>    <b-col >  <span > 
+                          
+                           <input type="checkbox" @click="selectAll" v-model="allSelected" /> 
+
+                           </span>       </b-col>  </b-row> </td>
+
+
+                    </tr>
+                </thead>
+                <tbody>
+
+                  <tr>     </tr>
+
+
+                    <tr v-for="item in resultQuery" :key="item.key"   class="p-2 message"
+                 >
+                        <td>     
+                          
+                          <b-row>    <b-col cols="6">        <b-avatar
+                class="d-inline-block "
+                variant="primary"
+                size="30"
+               
+
+                v-bind:src="item.profile"
+               
+              ></b-avatar>
+
+
+   <span class="bold " >   {{item.name}}   </span>   </b-col>      <b-col>     <span > <b-form-checkbox class="" id="" name="" v-model="userIds"  :value="item.id" >
+
+
+                  
+                </b-form-checkbox>   </span>   </b-col>     </b-row>  </td>    
+                    </tr>
+                </tbody>
+
+                
+            </table>
+            <b-button variant="primary" size="sm" class="pl-3 pr-3" >  {{ $t('network.Send') }}   </b-button>
+        </div>
+      
+      
+
+
+
+
+
+       
+
+
+
+
+
+                  </b-col>
+                </b-row>
+              </div>
+
+
+
+
+
+              <div class="bottom newMsg-bottom">
+                <b-row>
+                  
+                  
+
+   
+
+
+
+
+
+
+                    <b-col cols="2" class="p-0">   
+
+                      <b-icon
+                        class="msg-icon primary icon-size     icon-top float-right text-right"
+                        icon="paperclip"
+                      ></b-icon>    
+                      
+                      
+                      </b-col>       <b-col cols="8"  class="p-0">        
+
+
+
+
+
+      
+       
+        <b-form-input
+                    id="textarea"
+                    v-model="text"
+                    class="input-background"
+                  
+                    :placeholder="$t('network.Enter_something')"
+                  ></b-form-input>     
+
+                  
+   </b-col>
+                    
+   
+
+      <b-col cols="2"  class="p-0">   
+
+                      <b-icon
+                        @click="send"
+                        class="msg-icon primary icon-size icon-top "
+                        icon="cursor-fill"
+                      ></b-icon>
+                  
+   
+           </b-col>    
+
+    
+
+
+
+
+
+
+
+                 
+                </b-row>
+              </div>
+
             </div>
           </b-col>
         </b-row>
@@ -1115,17 +1388,20 @@
         </div>
       </b-modal>
     </b-container>
+  
   </div>
 </template>
 
 <script>
+
 import EmojiPicker from "vue-emoji-picker";
 import io from "socket.io-client";
 import moment from "moment";
 
 export default {
   components: {
-    EmojiPicker,
+   
+        EmojiPicker,
   },
   data() {
     return {
@@ -1240,6 +1516,7 @@ export default {
         },
       ],
       message: {},
+
       newMsg: false,
       show: false,
       info: false,
@@ -1349,9 +1626,10 @@ export default {
     }
   },
   directives: {
+
     focus: {
       inserted(el) {
-        el.focus();
+        el.focus()
       },
     },
   },
@@ -1511,8 +1789,9 @@ export default {
 
       this.$store.dispatch("networkChat/GET_BIZS_CHAT_LIST", data);
       this.scrollToBottom();
-    },
 
+    },
+    
     async histBizToBiz(data) {
       console.log("search data:", data);
       if (data.type == "user") {
@@ -1669,14 +1948,24 @@ export default {
       this.input += emoji;
     },
 
-    append(emoji) {
-      this.input += emoji;
-    },
 
-    selectuser() {
-      this.showsearch = false;
-      this.selecteduser = true;
-    },
+        
+
+   selectuser(){
+
+     this.showsearch = false ;
+
+     this.selecteduser=true ;
+
+   },
+
+showsearchh(){
+
+
+       this.showsearch = true ;
+}
+   
+   ,
 
     showMessages(arg) {
       this.show = arg;
@@ -1701,6 +1990,21 @@ export default {
       console.log(this.$refs.feed.scrollTop);
     },
   },
+
+
+  computed: {
+    resultQuery(){
+      if(this.searchQuery){
+      return this.resources.filter((item)=>{
+        return this.searchQuery.toLowerCase().split(' ').every(v => item.name.toLowerCase().includes(v))
+      })
+      }else{
+        return this.resources;
+      }
+    }
+  }
+
+
 };
 </script>
 
@@ -1729,20 +2033,27 @@ export default {
 }
 .right {
   padding: 10px;
-  border-right: 2px solid #ccc;
+      border-right: 2px solid #ccc;
 }
 .primary-bg,
 .primary-bg:hover {
-  background-color: #e75c18;
+  
   border: none;
 }
 
 .chat-box {
   position: relative;
-
+ 
   border: solid 2px rgb(223, 223, 223);
   margin-bottom: 100px;
+ 
+ 
+  
 }
+
+
+
+
 
 .chat-nav {
   position: relative;
@@ -1750,6 +2061,7 @@ export default {
   border-right: 2px solid #ccc;
   width: 100%;
   padding: 10px;
+
 }
 
 .chats {
@@ -1757,13 +2069,17 @@ export default {
   height: 740px;
   overflow-y: scroll;
   overflow-x: hidden;
+  
+  
 }
 
-.back-image {
-  background-image: url("../../../../../assets/message_back.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
+.back-image{
+   background-image: url("../../../../../assets/message_back.jpg");
+   background-repeat: no-repeat;
+    background-size: cover;
 }
+
+
 input {
   margin-top: 10px;
 }
@@ -1780,22 +2096,21 @@ h1 {
   overflow-y: scroll;
   overflow-x: hidden;
   height: 710px;
+
 }
 .txt {
   font-size: 13px;
 }
-
-.messageSelected {
-  background-color: #f09675;
-  color: #fff;
-}
 .message {
+ 
   cursor: pointer;
 }
 .message:hover {
   background-color: #e75d29;
   color: #fff;
 }
+
+
 
 .msg-icon {
   font-size: 20px;
@@ -1807,7 +2122,7 @@ h1 {
   margin-top: 10px;
 }
 .msg-text {
-  max-width: 60%;
+  width: 60%;
   border-radius: 25px;
   color: #fff;
   background-color: #ed9970;
@@ -1816,7 +2131,7 @@ h1 {
 }
 .msg-text-sent {
   position: relative;
-  max-width: 50%;
+  min-width: 60%;
   border-radius: 25px;
   background-color: #bfbfbf;
   padding: 10px;
@@ -1827,17 +2142,20 @@ h1 {
 }
 
 #sent {
-  float: right;
   margin-left: 200px;
 }
 .sent-name {
   margin-left: 400px;
 }
 .bottom {
-  padding-left: 50px;
-  min-height: 60px;
-  border-bottom-right-radius: 15px;
-  background-color: white;
+  
+    padding-left: 10px;
+    
+    height: 60px;
+ 
+    border-bottom-right-radius: 15px;
+    background-color: white;
+
 }
 .detail {
   margin-left: -40px;
@@ -1854,8 +2172,8 @@ h1 {
 .info-nav {
   position: relative;
   min-height: 70px;
-  height: 70px;
   width: 100%;
+  height: 70px;
   padding: 10px;
 }
 .cnt-info {
@@ -1881,13 +2199,13 @@ li {
   width: 100%;
 }
 .newMsg-bottom {
-  margin-top: 710px;
+  margin-top: 717px;
 }
 .new-msg {
   background-color: #ccc;
 }
 @media only screen and (max-width: 768px) {
-  .m-10 {
+  .m-10{
     margin-top: 10px;
   }
   .mobile {
@@ -1902,7 +2220,7 @@ li {
   .chat-nav {
     position: relative;
     min-height: 70px;
-
+   
     width: 100%;
     padding: 10px;
     border-right: none;
@@ -1929,7 +2247,7 @@ li {
   }
   #textarea {
     margin-left: 0px;
-
+    
     margin-top: 5px;
     margin-bottom: 5px;
   }
@@ -1954,10 +2272,11 @@ li {
     overflow-x: hidden;
     height: 690px;
     border-top: none;
-    overflow-x: hidden;
+        overflow-x: hidden;
     width: 97%;
   }
   .message {
+   
     cursor: pointer;
     width: 100%;
   }
@@ -1995,54 +2314,69 @@ li {
   }
 }
 
+
+
 ::-webkit-scrollbar {
   width: 4px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: #f1f1f1; 
 }
-
+ 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #888;
+  background: #888; 
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: #555; 
 }
 
-.input-background {
+.input-background{
   background-color: #ccc;
   border-radius: 20px;
 }
 
-.icon-top {
-  margin-top: 14px;
+
+.icon-top{
+
+      margin-top: 14px;
 }
 
-.profile-pic {
-  width: 64px !important;
-  height: 64px !important;
+
+
+.profile-pic{
+  
+  width: 64px  !important;
+  height: 64px  !important;
 }
 
-.drop-hover:hover {
+
+.drop-hover:hover{
+   background-color: white;
+}
+
+
+.drop-hover:active{
+   background-color: white;
+}
+
+
+.drop-hover:hover{
   background-color: white;
 }
 
-.drop-hover:active {
-  background-color: white;
-}
 
-.drop-hover:hover {
-  background-color: white;
-}
-
-.duration {
+.duration{
   margin-top: 5px;
 }
+
+
+
+
 
 .wrapper {
   position: relative;
@@ -2059,7 +2393,7 @@ li {
 }
 
 .regular-input:focus {
-  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
+  box-shadow: 0 0 0 3px rgba(66,153,225,.5);
 }
 
 .emoji-invoker {
@@ -2079,14 +2413,17 @@ li {
   fill: #b1c6d0;
 }
 
-.svgg {
+
+.svgg{
+
   margin-top: -120px;
-  margin-left: -20px;
+    margin-left: -20px;
 }
 
 .emoji-picker {
-  top: -370px !important;
-  left: 0px !important;
+
+      top: -370px !important;
+      left: 0px !important;
 
   position: absolute;
   z-index: 1;
@@ -2112,8 +2449,8 @@ li {
   padding: 0.5rem 1rem;
   outline: none;
   height: 32px;
-
-  width: 90%;
+  
+   width: 90%;
 }
 .emoji-picker h5 {
   margin-bottom: 0;
@@ -2140,4 +2477,8 @@ li {
   background: #ececec;
   cursor: pointer;
 }
+
+
+
+
 </style>

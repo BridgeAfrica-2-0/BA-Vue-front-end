@@ -146,7 +146,7 @@
     "Blocking":"Blocking",
     "Your_payment_information_is_secure":"Your payment information is secure",
     "Read_more":"Read more",
-    "Add_new_Credit_Debit_card":"Add new_Credit_Debit_card",
+    "Add_new_Credit_Debit_card":"Add new Credit Debit card",
     "Credit_Debit_card":"Credit Debit card",
     "Read_More":"Read More",
     "Product_Details":"Product Details",
@@ -154,7 +154,6 @@
     "Type_the_name_of_person_or_group":"Type the name of person or group",
     "Buy_now":"Buy now",
     "item":"item",
-    "www_business_com":"www business com",
     "Search_inbox":"Search inbox",
     "Edit_Address":"Edit Address",
     "Busness_Name":"Busness Name",
@@ -171,9 +170,12 @@
     "product_Price":"product Price",
     "Product_Image":"Product Image",
     "Edit_product":"Edit product",
-    "Add_to_Cart":"Ajouter au panier",
+    "Add_to_Cart":"Add to Cart",
     "This_Item_Is_A_Service":"This Item Is A Service",
-    "In_stock":"In stock"
+    "In_stock":"In stock",
+    "20k_Community":"20k Community",
+    "Car_marketing":"Car marketing",
+    "Search_Something":"Search Something"
 
     
 

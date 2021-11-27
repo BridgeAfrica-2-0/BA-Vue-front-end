@@ -206,7 +206,7 @@
 				if (this.page == 1) {
 					this.busineses.splice(0);
 				}
-				let url = "business/userBusiness/" + this.page + "?id=" + this.foll_id;
+				let url = "business/user?id=" + this.foll_id+"&page="+this.page;
 
 				this.$store
 					.dispatch("follower/loadMoreUserBusiness", url)

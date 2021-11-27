@@ -17,8 +17,9 @@ import Following from "./tabs/following";
 export default {
   components: {
     Followers,
-    Following,
+    Following
   },
+  props: ["businesses"]
 };
 </script>
 

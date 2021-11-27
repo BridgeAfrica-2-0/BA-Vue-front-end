@@ -10,12 +10,12 @@
       </b-card>
     </div>
   </div>
-</template>
+</template>   
 
 <script>
-import People from '@/components/businessOwner/tabs/people';
-import Businesses from '@/components/businessOwner/tabs/business';
-import Network from '@/components/businessOwner/tabs/networks';
+import People from '@/components/businessOwner/tabs/people/people';
+import Businesses from '@/components/businessOwner/tabs/businesses/businesses';
+import Network from '@/components/businessOwner/tabs/network/network';
 
 export default {
   name: 'memberNetwork',

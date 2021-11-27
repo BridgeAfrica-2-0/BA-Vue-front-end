@@ -49,7 +49,7 @@
 
     <b-card 
       :class="{ active: index == currentIndex }"
-      v-for="(feedback, index) in feedbacks.data"
+      v-for="(feedback, index) in feedbacks"
       :key="index"
       class="mt-5"
     >
@@ -75,17 +75,12 @@
        {{feedback.description}}
       </p>
     </b-card>
-    <b-row v-if="feedbacks.per_page < feedbacks.total">
-      <b-col cols="12">
-        <span class="float-right">
-          <b-pagination
-            v-model="currentPage"
-            :total-rows="feedbacks.total"
-            :per-page="feedbacks.per_page"
-            @change="handlePageChange"
-            aria-controls="my-table"
-          ></b-pagination>
-        </span>
+    <b-row>
+      <b-col col="12">
+        <infinite-loading @infinite="infiniteHandler" ref="infiniteLoading">
+          <div class="text-red" slot="no-more">No More Request</div>
+          <div class="text-red" slot="no-results">No More Request</div>
+        </infinite-loading>
       </b-col>
     </b-row>
 
@@ -107,17 +102,18 @@ export default {
       filterData: false,
       spinner: false,
 
-      currentPage: null,
+      currentPage: 0,
       currentIndex: -1,
+      feedbacks: [],
 
       options: [
         { value: "Improvement", text: "Suggestion for Improvement" },
-        { value: "Complaints", text: "Complaints" }
+        { value: "Complain", text: "Complains" }
       ],
       filters: [
         { value: "0", text: "Any" },
         { value: "Improvement", text: "Suggestion for Improvement" },
-        { value: "Complaints", text: "Complaints" }
+        { value: "Complain", text: "Complains" }
       ],
       feedbackForm: {
         title: "Improvement",
@@ -125,47 +121,65 @@ export default {
       },
     };
   },
-  computed: {
-    feedbacks() {
-      return this.$store.state.networkProfileFeedback.feedbacks;
-    },
-  },
+  computed: {},
   mounted(){
     this.url = this.$route.params.id;
-    this.displayFeedback(); 
   },
   methods: {
     filterFeedback() {
       this.filterData = !this.filterData;
     },
 
-    getRequestDatas(filterData, currentPage) {
+    getRequestDatas(filterData) {
       let data = "";
       if (filterData) {
-        data = "/"+filterData;
-      }else if (currentPage) {
-        data = "/?page="+currentPage;
+        console.log("Status true");
+        if (filterData == 0) 
+          data = "";
+        else
+          data = filterData;
       }
       console.log(data);
       return data;
     },
 
     applyFilter(){
+      this.loading = true;
+      this.feedbacks = [];
+      this.filterData
       console.log("searching...");
       console.log(this.filterData);
-      this.displayFeedback();
-    },
-
-    displayFeedback() {
-      const data = this.getRequestDatas(this.filterData, this.currentPage);
-      this.$store
-      .dispatch("networkProfileFeedback/getFeedbacks", this.url+"/feedback"+data)
-      .then(() => {
-        console.log('ohh yeah');
-      })
-      .catch( err => {
-        console.log({ err: err });
+      this.$nextTick(() => {
+        this.page = 0;
+        this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
       });
+    },
+    infiniteHandler($state) {
+      console.log("loop");
+      const data = this.getRequestDatas(this.filterData);
+      console.log('keyword: '+data);
+      let formData = new FormData();
+      formData.append('keyword', data);
+      this.axios
+        .post("network/"+this.url+"/feedbacks/"+this.currentPage, formData)
+        .then(({ data }) => {
+        console.log(data);
+        console.log(this.currentPage);
+        if (data.data.length) {
+          this.currentPage += 1;
+          console.log(this.currentPage);
+          console.log(...data.data);
+          this.feedbacks.push(...data.data);
+          this.loading = false;
+          $state.loaded();
+        } else {
+          this.loading = false;
+          $state.complete();
+        }
+      }) .catch((err) => {
+        this.loading = false;
+        console.log({ err: err });
+      })
     },
 
     createFeedback: function(){
@@ -177,7 +191,11 @@ export default {
       console.log('description', this.feedbackForm.description);
       this.axios.post("network/"+this.url+"/feedback/create", formData)
       .then(() => {
-        this.displayFeedback();
+        this.feedbacks = [];
+        this.$nextTick(() => {
+          this.page = 0;
+          this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
+        });
         console.log('ohh yeah');
         this.spinner = false;
         this.flashMessage.show({

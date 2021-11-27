@@ -32,7 +32,7 @@
                       >
                         <h6 class="follower m-15">
                           {{  member.communityNum }}
-                          Community
+                          Communit
                         </h6>
                       </b-col>
                       <b-col @click="$emit('BlockUser', member.id)" md="6" lg="12" cols="6" xl="12" class="mt-1 mt-lg-1 mt-xl-2" style="cursor:pointer;">

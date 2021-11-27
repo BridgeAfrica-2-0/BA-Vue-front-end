@@ -35,7 +35,7 @@
           required
           id="textarea"
           v-model="bio.user.biography"
-          placeholder="Enter something..."
+          :placeholder="$t('profileowner.Enter_something')"
           rows="3"
           max-rows="6"
         ></b-form-textarea>
@@ -61,9 +61,9 @@ export default {
       access: null,
       info_access: null,
       options: [
-        { value: null, text: "Select" },
-        { value: "private", text: "Private" },
-        { value: "public", text: "Public" },
+        { value: null, text: this.$t('profileowner.Select') },
+        { value: "private", text: this.$t('profileowner.Private') },
+        { value: "public", text: this.$t('profileowner.Public') },
       ],
       biography: {
         info_access: null,

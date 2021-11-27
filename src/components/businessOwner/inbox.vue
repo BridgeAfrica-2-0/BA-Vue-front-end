@@ -27,12 +27,21 @@
                 </b-col>
               </b-row>
               <b-container>
-                <input type="text" class="form-control input-background" placeholder="Search inbox" />
+                <input
+                  type="text"
+                  class="form-control input-background"
+                  placeholder="Search inbox"
+                />
               </b-container>
             </div>
             <div>
               <div class="messages-mobile">
-                <b-row v-for="message in messages" :key="message.id" class="p-2 message" @click="showMessages(false)">
+                <b-row
+                  v-for="message in messages"
+                  :key="message.id"
+                  class="p-2 message"
+                  @click="showMessages(false)"
+                >
                   <b-col class="col-10">
                     <span style="display: inline-flex mb-2">
                       <b-avatar
@@ -75,7 +84,9 @@
                 </b-col>
                 <b-col>
                   <h1 class="mt-4 title text-bold">
-                    {{ currentUser.user.name.split(' ')[0] }}
+                    {{
+                      currentBiz ? currentBiz.name.split(" ")[0] : "loading..."
+                    }}
                   </h1>
                 </b-col>
                 <b-col>
@@ -89,15 +100,19 @@
 
               <b-row class="mt-12">
                 <b-col>
-                  <b-tabs content-class="mt-12 ma-4 pt-6" fill lazy>
-                    <b-tab title="Users" active @click="getChatList({ type: 'user' })">
+                  <b-tabs
+                    v-model="tabIndex"
+                    content-class="mt-12 ma-4 pt-6"
+                    fill
+                  >
+                    <b-tab title="Users" @click="getChatList({ type: 'user' })">
                       <!-- Users Chats Available  -->
                       <b-row class="pa-6">
                         <b-col class="mb-6 pb-6">
                           <input
                             v-model="searchQuery"
                             class="form-control input-background"
-                            placeholder="Search chat list"
+                            :placeholder="`Search chat list ${tabIndex}`"
                             @keypress.enter="
                               getChatList({
                                 type: 'user',
@@ -109,69 +124,80 @@
                       </b-row>
 
                       <div class="messages">
-                        <div v-if="loader" class="text-center mt-6 pt-6">
-                          <b-spinner variant="primary" label="Spinning" class="centralizer"></b-spinner>
+                        <div v-if="loader" class="text-center">
+                          <b-spinner
+                            variant="primary"
+                            label="Spinning"
+                            class="centralizer"
+                          ></b-spinner>
                         </div>
-                        <b-row
-                          v-else
-                          v-for="(chat, index) in chatList"
-                          :key="index"
-                          :class="[
-                            'p-2 message ',
-                            {
-                              messageSelected:
-                                chat.receiver_id == (chatSelected.clickedId != null ? chatSelected.clickedId : false)
-                                  ? chatSelected.active
-                                  : false,
-                            },
-                          ]"
-                          @click="
-                            selectedChat({
-                              type: 'user',
-                              chat: chat,
-                              id: chat.receiver_id,
-                            })
-                          "
-                        >
-                          <b-col class="col-9">
-                            <span style="display: inline-flex">
-                              <b-avatar
-                                class="d-inline-block profile-pic"
-                                variant="primary"
-                                src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
-                              ></b-avatar>
+                        <div v-if="chatList.length > 0">
+                          <b-row
+                            v-for="(chat, index) in chatList"
+                            :key="index"
+                            :class="[
+                              'p-2 message ',
+                              {
+                                messageSelected:
+                                  chat.receiver_id ==
+                                  (chatSelected.clickedId != null
+                                    ? chatSelected.clickedId
+                                    : false)
+                                    ? chatSelected.active
+                                    : false,
+                              },
+                            ]"
+                            @click="
+                              selectedChat({
+                                type: 'user',
+                                chat: chat,
+                                id: chat.receiver_id,
+                              })
+                            "
+                          >
+                            <b-col class="col-9">
+                              <span style="display: inline-flex">
+                                <b-avatar
+                                  class="d-inline-block profile-pic"
+                                  variant="primary"
+                                  src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
+                                ></b-avatar>
 
-                              <h6 class="mt-2 d-inline-block ml-2">
-                                <b class="bold"> {{ chat.name }}</b>
-                                <p class="duration">{{ chat.message }}</p>
-                              </h6>
-                            </span>
-                          </b-col>
+                                <h6 class="mt-2 d-inline-block ml-2">
+                                  <b class="bold"> {{ chat.name }}</b>
+                                  <p class="duration">{{ chat.message }}</p>
+                                </h6>
+                              </span>
+                            </b-col>
 
-                          <b-col class="col-3 text-center">
-                            <small class="text-center">
-                              {{ getCreatedAt(chat.created_at) }}
-                            </small>
-                            <p class="text-center">
+                            <b-col class="col-3 text-center">
+                              <small class="text-center">
+                                {{ getCreatedAt(chat.created_at) }}
+                              </small>
+                              <!-- <p class="text-center">
                               <b-badge variant="info">
                                 {{ chat.receiver_id }}
                               </b-badge>
-                            </p>
-                          </b-col>
-                        </b-row>
+                            </p> -->
+                            </b-col>
+                          </b-row>
+                        </div>
+                        <h2 v-else>No chat</h2>
                       </div>
 
                       <!-- End Chats -->
                     </b-tab>
-
-                    <b-tab title="Business" @click="getChatList({ type: 'business' })">
+                    <b-tab
+                      title="Business"
+                      @click="getChatList({ type: 'business' })"
+                    >
                       <!-- Business Chats Available  -->
                       <b-row class="pa-6">
                         <b-col class="mb-6 pb-6">
                           <input
                             v-model="searchQuery"
                             class="form-control input-background"
-                            placeholder="Search chat list"
+                            :placeholder="`Search chat list ${tabIndex}`"
                             @keypress.enter="
                               getChatList({
                                 type: 'business',
@@ -183,69 +209,80 @@
                       </b-row>
 
                       <div class="messages">
-                        <div v-if="loader" class="text-center mt-12 pt-12">
-                          <b-spinner variant="primary" label="Spinning" class="centralizer"></b-spinner>
+                        <div v-if="loader" class="text-center">
+                          <b-spinner
+                            variant="primary"
+                            label="Spinning"
+                            class="centralizer"
+                          ></b-spinner>
                         </div>
-                        <b-row
-                          v-else
-                          v-for="(chat, index) in chatList"
-                          :key="index"
-                          :class="[
-                            'p-2 message ',
-                            {
-                              messageSelected:
-                                chat.receiver_business_id ==
-                                (chatSelected.clickedId != null ? chatSelected.clickedId : false)
-                                  ? chatSelected.active
-                                  : false,
-                            },
-                          ]"
-                          @click="
-                            selectedChat({
-                              type: 'business',
-                              chat: chat,
-                              id: chat.receiver_business_id,
-                            })
-                          "
-                        >
-                          <b-col class="col-9">
-                            <span style="display: inline-flex">
-                              <b-avatar
-                                class="d-inline-block profile-pic"
-                                variant="primary"
-                                src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
-                              ></b-avatar>
+                        <div v-if="chatList.length > 0">
+                          <b-row
+                            v-for="(chat, index) in chatList"
+                            :key="index"
+                            :class="[
+                              'p-2 message ',
+                              {
+                                messageSelected:
+                                  chat.receiver_business_id ==
+                                  (chatSelected.clickedId != null
+                                    ? chatSelected.clickedId
+                                    : false)
+                                    ? chatSelected.active
+                                    : false,
+                              },
+                            ]"
+                            @click="
+                              selectedChat({
+                                type: 'business',
+                                chat: chat,
+                                id: chat.receiver_business_id,
+                              })
+                            "
+                          >
+                            <b-col class="col-9">
+                              <span style="display: inline-flex">
+                                <b-avatar
+                                  class="d-inline-block profile-pic"
+                                  variant="primary"
+                                  src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
+                                ></b-avatar>
 
-                              <h6 class="mt-2 d-inline-block ml-2">
-                                <b class="bold"> {{ chat.name }}</b>
-                                <p class="duration">{{ chat.message }}</p>
-                              </h6>
-                            </span>
-                          </b-col>
+                                <h6 class="mt-2 d-inline-block ml-2">
+                                  <b class="bold"> {{ chat.name }}</b>
+                                  <p class="duration">{{ chat.message }}</p>
+                                </h6>
+                              </span>
+                            </b-col>
 
-                          <b-col class="col-3 text-center">
-                            <small class="text-center">
-                              {{ getCreatedAt(chat.created_at) }}
-                            </small>
-                            <p class="text-center">
+                            <b-col class="col-3 text-center">
+                              <small class="text-center">
+                                {{ getCreatedAt(chat.created_at) }}
+                              </small>
+                              <!-- <p class="text-center">
                               <b-badge variant="info">
                                 {{ chat.receiver_business_id }}
                               </b-badge>
-                            </p>
-                          </b-col>
-                        </b-row>
+                            </p> -->
+                            </b-col>
+                          </b-row>
+                        </div>
+                        <h2 v-else>No chat</h2>
                       </div>
 
                       <!-- End Chats -->
                     </b-tab>
-                    <b-tab title="Network" @click="getChatList({ type: 'network' })">
+                    <b-tab
+                      title="Network"
+                      @click="getChatList({ type: 'network' })"
+                    >
                       <!-- network Chats Available  -->
                       <b-row class="pa-6">
                         <b-col class="mb-6 pb-6">
                           <input
                             v-model="searchQuery"
                             class="form-control input-background"
-                            placeholder="Search chat list"
+                            :placeholder="`Search chat list ${tabIndex}`"
                             @keypress.enter="
                               getChatList({
                                 type: 'network',
@@ -258,7 +295,11 @@
 
                       <div class="messages">
                         <div v-if="loader" class="text-center mt-12 pt-12">
-                          <b-spinner variant="primary" label="Spinning" class="centralizer"></b-spinner>
+                          <b-spinner
+                            variant="primary"
+                            label="Spinning"
+                            class="centralizer"
+                          ></b-spinner>
                         </div>
                         <b-row
                           v-else
@@ -269,7 +310,9 @@
                             {
                               messageSelected:
                                 chat.receiver_network_id ==
-                                (chatSelected.clickedId != null ? chatSelected.clickedId : false)
+                                (chatSelected.clickedId != null
+                                  ? chatSelected.clickedId
+                                  : false)
                                   ? chatSelected.active
                                   : false,
                             },
@@ -301,11 +344,11 @@
                             <small class="text-center">
                               {{ getCreatedAt(chat.created_at) }}
                             </small>
-                            <p class="text-center">
+                            <!-- <p class="text-center">
                               <b-badge variant="info">
                                 {{ chat.receiver_network_id }}
                               </b-badge>
-                            </p>
+                            </p> -->
                           </b-col>
                         </b-row>
                       </div>
@@ -330,7 +373,12 @@
               <div class="chat-nav shadow">
                 <b-row class="mobile">
                   <b-col class="col-1">
-                    <b-icon @click="showMessages(true)" icon="arrow-left" aria-hidden="true" class="primary"></b-icon>
+                    <b-icon
+                      @click="showMessages(true)"
+                      icon="arrow-left"
+                      aria-hidden="true"
+                      class="primary"
+                    ></b-icon>
                   </b-col>
                   <b-col class="col-3">
                     <b-avatar
@@ -342,7 +390,7 @@
 
                   <b-col class="detale">
                     <h6>{{ chatSelected.name }}</h6>
-                    <small>Online </small>
+                    <!-- <small>Online </small> -->
                   </b-col>
                   <b-col cols="3">
                     <b-row class="mt-3">
@@ -350,7 +398,12 @@
                         <b-icon icon="search" class="primary"></b-icon>
                       </b-col>
                       <b-col class="col-3">
-                        <b-icon icon="three-dots" @click="showInfo(true)" aria-hidden="true" class="primary"></b-icon>
+                        <b-icon
+                          icon="three-dots"
+                          @click="showInfo(true)"
+                          aria-hidden="true"
+                          class="primary"
+                        ></b-icon>
                       </b-col>
                     </b-row>
                   </b-col>
@@ -366,13 +419,14 @@
 
                   <b-col class="detail" @click="info = true">
                     <h5>{{ chatSelected.name }}</h5>
-                    <p>Online</p>
+                    <!-- <p>Online</p> -->
                   </b-col>
                   <b-col class="col-4">
                     <input
                       v-model="chatSearchKeyword"
                       @keypress.enter="
                         histBizToBiz({
+                          type: type,
                           receiverID: chatId,
                           keyword: chatSearchKeyword,
                         })
@@ -388,6 +442,7 @@
                         <b-icon
                           @click="
                             histBizToBiz({
+                              type: type,
                               receiverID: chatId,
                               keyword: chatSearchKeyword,
                             })
@@ -407,16 +462,26 @@
                           variant="outline-light"
                         >
                           <template #button-content>
-                            <b-icon-three-dots class="primary"></b-icon-three-dots>
+                            <b-icon-three-dots
+                              class="primary"
+                            ></b-icon-three-dots>
                           </template>
 
-                          <b-dropdown-item-button @click="showInfo(true)"> View Profile </b-dropdown-item-button>
+                          <b-dropdown-item-button @click="showInfo(true)">
+                            View Profile
+                          </b-dropdown-item-button>
 
-                          <b-dropdown-item-button> Disable Notification </b-dropdown-item-button>
+                          <b-dropdown-item-button>
+                            Disable Notification
+                          </b-dropdown-item-button>
 
-                          <b-dropdown-item-button> Delete Contact </b-dropdown-item-button>
+                          <b-dropdown-item-button>
+                            Delete Contact
+                          </b-dropdown-item-button>
 
-                          <b-dropdown-item-button> Delete Chat </b-dropdown-item-button>
+                          <b-dropdown-item-button>
+                            Delete Chat
+                          </b-dropdown-item-button>
                         </b-dropdown>
                       </b-col>
                     </b-row>
@@ -447,12 +512,22 @@
                 </b-row> -->
               </div>
 
-              <section v-if="chatSelected.active" class="chats" style="margin-left: 1px" ref="feed">
+              <section
+                v-if="chatSelected.active"
+                class="chats"
+                style="margin-left: 1px"
+                ref="feed"
+              >
                 <div v-if="loader" class="text-center mt-12 pt-12">
-                  <b-spinner variant="primary" label="Spinning" class="spinner centralizer"></b-spinner>
+                  <b-spinner
+                    variant="primary"
+                    label="Spinning"
+                    class="spinner centralizer"
+                  ></b-spinner>
                 </div>
                 <div v-else v-for="chat in chats" :key="chat.id">
-                  <div v-if="2 != chat.sender_business_id">
+                  <!-- {{ chat }}<br /> -->
+                  <div v-if="currentBiz.id != chat.sender_business_id">
                     <b-row class="p-4">
                       <b-col>
                         <p v-if="chat.attachment" class="msg-text mt-0 text">
@@ -465,9 +540,9 @@
                           </small>
                         </p>
                         <p v-if="chat.message" class="msg-text mt-0 text">
-                          {{ chat.message }}<b> ->///{{ chat.sender_business_id }}</b>
+                          {{ chat.message }}
                           <small class="float-right mt-2 text-white pr-1 pt-1">
-                            {{ chat.created_at }}
+                            {{ getCreatedAt(chat.created_at) }}
                           </small>
                         </p>
                       </b-col>
@@ -476,7 +551,11 @@
                   <div v-else>
                     <b-row class="p-4">
                       <b-col>
-                        <p v-if="chat.attachment" id="sent" class="msg-text-sent text">
+                        <p
+                          v-if="chat.attachment"
+                          id="sent"
+                          class="msg-text-sent text"
+                        >
                           {{ chat.attachment.name }}...
                           <b class="">
                             {{ chat.attachment.size }}
@@ -485,8 +564,12 @@
                             {{ chat.created_at }}
                           </small>
                         </p>
-                        <p v-if="chat.message" id="sent" class="msg-text-sent text">
-                          {{ chat.message }} ->///{{ chat.sender_business_id }}
+                        <p
+                          v-if="chat.message"
+                          id="sent"
+                          class="msg-text-sent text"
+                        >
+                          {{ chat.message }}
                           <small class="float-right mt-2 text-white pr-1 pt-1">
                             {{ getCreatedAt(chat.created_at) }}
                           </small>
@@ -539,8 +622,17 @@
                   <!-- <p class="py-2 text-primary" v-if="this.file">
                     {{ this.file.name }} <b class="text-bold">{{ convert(this.file.size) }}</b>
                   </p> -->
-                  <b-alert :show="this.filePreview" class="mt-4" variant="warning" dismissible @dismissed="dismissed">
-                    {{ this.file.name }}<b class="pl-2 text-bold">{{ convert(this.file.size) }}</b>
+                  <b-alert
+                    :show="this.filePreview"
+                    class="mt-4"
+                    variant="warning"
+                    dismissible
+                    @dismissed="dismissed"
+                  >
+                    {{ this.file.name
+                    }}<b class="pl-2 text-bold">{{
+                      convert(this.file.size)
+                    }}</b>
                   </b-alert>
                 </b-row>
                 <b-row v-if="!checked">
@@ -548,12 +640,24 @@
                     <label for="file">
                       <b-icon
                         for="file"
-                        class="msg-icon primary icon-size icon-top float-right text-right"
+                        class="
+                          msg-icon
+                          primary
+                          icon-size icon-top
+                          float-right
+                          text-right
+                        "
                         icon="paperclip"
                       >
                       </b-icon>
                       <i class="ion-images"></i>
-                      <input style="display: none" type="file" id="file" ref="file" @change="handleFileUpload()" />
+                      <input
+                        style="display: none"
+                        type="file"
+                        id="file"
+                        ref="file"
+                        @change="handleFileUpload()"
+                      />
                     </label>
 
                     <!-- <button v-on:click="submitFile()">Submit</button> -->
@@ -588,7 +692,10 @@
                             />
                           </svg>
                         </div>
-                        <div slot="emoji-picker" slot-scope="{ emojis, insert, display }">
+                        <div
+                          slot="emoji-picker"
+                          slot-scope="{ emojis, insert, display }"
+                        >
                           <div
                             class="emoji-picker"
                             :style="{
@@ -600,7 +707,10 @@
                               <input type="text" v-model="search" v-focus />
                             </div>
                             <div>
-                              <div v-for="(emojiGroup, category) in emojis" :key="category">
+                              <div
+                                v-for="(emojiGroup, category) in emojis"
+                                :key="category"
+                              >
                                 <h5>{{ category }}</h5>
                                 <div class="emojis">
                                   <span
@@ -663,7 +773,13 @@
                   <b-row
                     ><b-col> Block Messages </b-col>
                     <b-col>
-                      <b-form-checkbox v-model="checked" name="check-button" class="primary" switch> </b-form-checkbox>
+                      <b-form-checkbox
+                        v-model="checked"
+                        name="check-button"
+                        class="primary"
+                        switch
+                      >
+                      </b-form-checkbox>
                     </b-col>
                   </b-row>
                 </li>
@@ -673,7 +789,10 @@
           </b-col>
 
           <!-- New message -->
-          <b-col v-if="newMsg == true && info == false" class="p-0 col-xl-8 col-12">
+          <b-col
+            v-if="newMsg == true && info == false"
+            class="p-0 col-xl-8 col-12"
+          >
             <div class="new-msg back-image" style="margin-right: 17px">
               <div class="info-nav">
                 <b-row>
@@ -685,34 +804,185 @@
                       class="input-background"
                       style="width: 100%"
                       placeholder="Type the name of person or Business..."
-                      @keydown="getBizs(searchQuery)"
+                      @keydown.enter="getAll(searchQuery)"
                     ></b-form-input>
 
                     <br />
-
-                    <div class="table-responsive">
-                      <div v-if="loader" class="text-center mt-12 pt-12">
-                        <b-spinner variant="primary" label="Spinning"></b-spinner>
+                  </b-col>
+                </b-row>
+                <b-row>
+                  <b-col>
+                    <div class="new-msg-filter-list">
+                      <div v-if="loader" class="text-center mt-6 pt-6">
+                        <b-spinner
+                          variant="primary"
+                          label="Spinning"
+                        ></b-spinner>
                       </div>
                       <table v-else class="table">
-                        <thead>
-                          <tr></tr>
-                        </thead>
-                        <tbody>
+                        <b-row style="overflow-x: hidden !important">
+                          <b-col>
+                            <b-form-checkbox
+                              id="all"
+                              v-model="allSelectedMulty"
+                              name="all"
+                              value="accepted"
+                              @change="selectedAllMulty"
+                            >
+                              All
+                            </b-form-checkbox>
+                          </b-col>
+                          <b-col>
+                            <b-form-checkbox
+                              id="people"
+                              v-model="peopleMulty"
+                              name="people"
+                              @change="peopleAllMulty"
+                            >
+                              People
+                            </b-form-checkbox>
+                          </b-col>
+
+                          <b-col>
+                            <b-form-checkbox
+                              id="business"
+                              v-model="businessMulty"
+                              name="business"
+                              @change="businessAllMulty"
+                            >
+                              Business
+                            </b-form-checkbox>
+                          </b-col>
+                          <b-col>
+                            <b-form-checkbox
+                              id="networks"
+                              name="networks"
+                              v-model="networkMulty"
+                              @change="networkAllMulty"
+                            >
+                              Network
+                            </b-form-checkbox>
+                          </b-col>
+                          <!--
+
+                          <b-col>
+                            <b-form-checkbox
+                              id="editors"
+                              v-model="status"
+                              name="editors"
+                              value="accepted"
+                              unchecked-value="not_accepted"
+                            >
+                              Editors
+                            </b-form-checkbox>
+                          </b-col>
+                          <b-col>
+                            <b-form-checkbox
+                              id="members"
+                              v-model="status"
+                              name="members"
+                              value="accepted"
+                              unchecked-value="not_accepted"
+                            >
+                              Members
+                            </b-form-checkbox>
+                          </b-col> -->
+                        </b-row>
+                        {{
+                          selectedMulty
+                        }}
+                        <!-- <b-row class="new-msg-filter-list"> -->
+                        <tbody v-if="allSelection">
+                          <!-- <tr
+                              v-for="(biz, index) in bizs"
+                              :key="index"
+                              class="p-2 message"
+                              @click="selectedChat({ chat: biz, id: biz.id })"
+                            > -->
+                          <h2>All</h2>
+                          <tr
+                            v-for="(elmt, index) in all"
+                            :key="index"
+                            class="p-2 message"
+                          >
+                            <td>
+                              <b-form-group>
+                                <b-form-checkbox-group
+                                  id="checkbox-group-2"
+                                  v-model="selectedMulty"
+                                  name="flavour-2"
+                                >
+                                  <b-form-checkbox
+                                    :id="index + '_id'"
+                                    :name="elmt.name"
+                                    :value="elmt.id"
+                                  >
+                                    <b-avatar
+                                      class="d-inline-block"
+                                      variant="primary"
+                                      size="30"
+                                    ></b-avatar>
+                                    <span class="bold"> {{ elmt.name }} </span>
+                                  </b-form-checkbox>
+                                </b-form-checkbox-group>
+                              </b-form-group>
+                            </td>
+                          </tr>
+                        </tbody>
+                        <tbody v-else>
                           <tr
                             v-for="(biz, index) in bizs"
                             :key="index"
                             class="p-2 message"
-                            @click="selectedChat({ chat: biz, id: biz.id })"
                           >
                             <td>
-                              <b-avatar class="d-inline-block" variant="primary" size="30"></b-avatar>
-                              <span class="bold"> {{ biz.name }} </span>
+                              <b-form-group>
+                                <b-form-checkbox-group
+                                  id="checkbox-group-2"
+                                  v-model="selectedMulty"
+                                  name="flavour-2"
+                                >
+                                  <b-form-checkbox
+                                    :id="index + '_id'"
+                                    :name="biz.name"
+                                    :value="biz.id"
+                                  >
+                                    <b-avatar
+                                      class="d-inline-block"
+                                      variant="primary"
+                                      size="30"
+                                    ></b-avatar>
+                                    <span class="bold"> {{ biz.name }} </span>
+                                  </b-form-checkbox>
+                                </b-form-checkbox-group>
+                              </b-form-group>
                             </td>
                           </tr>
                         </tbody>
                       </table>
                     </div>
+                    <b-button
+                      class="float-left"
+                      variant="primary"
+                      @click="$bvModal.show('group-name')"
+                      :disabled="selectedMulty.length ? false : true"
+                      ><b-icon
+                        icon="arrow-left"
+                        class="text-bold"
+                        variant="white"
+                      ></b-icon
+                    ></b-button>
+                    <!-- <b-button
+                      class="float-left"
+                      variant="primary"
+                      @click="selectedMultyChat()"
+                      :disabled="selectedMulty.length ? false : true"
+                      ><b-icon
+                        icon="arrow-left"
+                        class="text-bold"
+                        variant="white"
+                      ></b-icon
+                    ></b-button> -->
                   </b-col>
                 </b-row>
               </div>
@@ -720,15 +990,28 @@
           </b-col>
         </b-row>
       </div>
+
+      <!-- Modals -->
+      <!-- create group -->
+      <b-modal id="group-name" hide-footer>
+    
+    <div class="d-block text-center">
+      <h3>The Group Name:</h3>
+      <b-form-input v-model='groupName' id="input-large" size="lg" autofocus placeholder="Enter your name"></b-form-input>
+    </div>
+    
+    <b-button class="mt-3" block @click="selectedMultyChat()">Create</b-button>
+  </b-modal>
     </b-container>
+
   </div>
 </template>
 
 <script>
-import EmojiPicker from 'vue-emoji-picker';
-import io from 'socket.io-client';
-import convertSize from 'convert-size';
-import moment from 'moment';
+import EmojiPicker from "vue-emoji-picker";
+import io from "socket.io-client";
+import convertSize from "convert-size";
+import moment from "moment";
 
 export default {
   components: {
@@ -736,206 +1019,181 @@ export default {
   },
   data() {
     return {
+      groupName:'',
+      allSelection: true,
+      allSelectedMulty: false,
+      peopleMulty: false,
+      businessMulty: false,
+      networkMulty: false,
+
+      selectedMulty: [],
+      peopleSelectedAllMulty: [],
+      businessSelectedAllMulty: [],
+      networkSelectedAllMulty: [],
+
       filePreview: false,
-      file: '',
-      room: '',
+      file: "",
+      room: "",
       online: [],
-      input: '',
-      search: '',
-      chatSearchKeyword: '',
-      chatId: '',
-      type: '',
+      input: "",
+      search: "",
+      chatSearchKeyword: "",
+      tabIndex: 2,
+      type: "",
       // socket: io("https://ba-chat-server.herokuapp.com", {
       //   transports: ["websocket", "polling", "flashsocket"],
       // }),
-      socket: io('localhost:7000', {
-        transports: ['websocket', 'polling', 'flashsocket'],
+      socket: io("localhost:7000", {
+        transports: ["websocket", "polling", "flashsocket"],
       }),
       chatSelected: [],
       showsearch: true,
       selecteduser: false,
-      searchQuery: '',
+      searchQuery: "",
       resources1: [
-        { title: 'ABE Attendance', uri: 'aaaa.com', category: 'a', icon: null },
+        { title: "ABE Attendance", uri: "aaaa.com", category: "a", icon: null },
         {
-          title: 'Accounting Services',
-          uri: 'aaaa.com',
-          category: 'a',
+          title: "Accounting Services",
+          uri: "aaaa.com",
+          category: "a",
           icon: null,
         },
-        { title: 'Administration', uri: 'aaaa.com', category: 'a', icon: null },
+        { title: "Administration", uri: "aaaa.com", category: "a", icon: null },
         {
-          title: 'Advanced Student Lookup',
-          uri: 'bbbb.com',
-          category: 'b',
+          title: "Advanced Student Lookup",
+          uri: "bbbb.com",
+          category: "b",
           icon: null,
         },
-        { title: 'Art & Sciences', uri: 'bbbb.com', category: 'b', icon: null },
+        { title: "Art & Sciences", uri: "bbbb.com", category: "b", icon: null },
         {
-          title: 'Auxiliares Services',
-          uri: 'bbbb.com',
-          category: 'b',
+          title: "Auxiliares Services",
+          uri: "bbbb.com",
+          category: "b",
           icon: null,
         },
-        { title: 'Basic Skills', uri: 'cccc.com', category: 'c', icon: null },
+        { title: "Basic Skills", uri: "cccc.com", category: "c", icon: null },
         {
-          title: 'Board of Trustees',
-          uri: 'dddd.com',
-          category: 'd',
+          title: "Board of Trustees",
+          uri: "dddd.com",
+          category: "d",
           icon: null,
         },
       ],
       resources: [
         {
-          name: 'blezour blec',
-          profile: 'https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg',
-          type: 'person',
-          id: '1',
+          name: "blezour blec",
+          profile:
+            "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
+          type: "person",
+          id: "1",
         },
         {
-          name: 'itz blec blec',
-          profile: 'https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg',
-          type: 'person',
-          id: '2',
-        },
-
-        {
-          name: 'Maxine Moffet',
-          profile: 'https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg',
-          type: 'person',
-          id: '3',
+          name: "itz blec blec",
+          profile:
+            "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
+          type: "person",
+          id: "2",
         },
 
         {
-          name: 'Alicia kays',
-          profile: 'https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg',
-          type: 'person',
-          id: '4',
+          name: "Maxine Moffet",
+          profile:
+            "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
+          type: "person",
+          id: "3",
         },
 
         {
-          name: 'Lorem Ipsum',
-          profile: 'https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg',
-          type: 'person',
-          id: '5',
+          name: "Alicia kays",
+          profile:
+            "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
+          type: "person",
+          id: "4",
+        },
+
+        {
+          name: "Lorem Ipsum",
+          profile:
+            "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
+          type: "person",
+          id: "5",
         },
         {
-          name: 'blezour blec',
-          profile: 'https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg',
-          type: 'person',
-          id: '6',
+          name: "blezour blec",
+          profile:
+            "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
+          type: "person",
+          id: "6",
         },
       ],
-      message: {
-        type: '',
-        name: '{{ receiver.name }}',
-        timeStamp: '',
-        message: '',
-      },
+      message: {},
       newMsg: false,
       show: false,
       info: false,
       checked: false,
-      text: '',
+      text: "",
       selected: [],
-
-      messages: [
-        {
-          id: 0,
-          name: 'Blezour blec',
-          message: 'Hello Blec lola blec ',
-          timeStamp: '3:00pm',
-          messageCount: '10',
-        },
-        {
-          id: 1,
-          name: 'Blec blezour blec',
-          message: 'yoo nigga sup lola blec',
-          timeStamp: '7:00am',
-          messageCount: '60',
-        },
-
-        {
-          id: 3,
-          name: 'baba blecc ',
-          message: 'Lorem ipsum la lola blec vlr ',
-          timeStamp: '9:00am',
-          messageCount: '60',
-        },
-        {
-          id: 4,
-          name: 'Louis Litt',
-          message: 'Lorem  sit amet this is goo.',
-          timeStamp: '6:00am',
-          messageCount: '6',
-        },
-        {
-          id: 5,
-          name: 'Louis Litt',
-          message: 'Lorem this   sit amet.',
-          timeStamp: '7:00am',
-          messageCount: '100',
-        },
-        {
-          id: 6,
-          name: 'Louis Litt',
-          message: 'Lorem ithe amet.',
-          timeStamp: '7:00am',
-          messageCount: '3',
-        },
-        {
-          id: 7,
-          name: 'Louis Litt',
-          message: 'Lordol sit amet.',
-          timeStamp: '7:00am',
-          messageCount: '10',
-        },
-        {
-          id: 8,
-          name: 'Louis Litt',
-          message: 'Lorem vheck ',
-          timeStamp: '7:00am',
-          messageCount: '40',
-        },
-        {
-          id: 9,
-          name: 'Louis Litt',
-          message: 'Lorem papa .',
-          timeStamp: '7:00am',
-          messageCount: '15',
-        },
-      ],
+      messages: null,
     };
   },
   computed: {
+    all() {
+      return this.$store.getters["businessChat/getAll"];
+    },
+    allNetworks() {
+      return this.$store.getters["businessChat/getAllNetworks"];
+    },
+    allUsers() {
+      return this.$store.getters["businessChat/getAllUsers"];
+    },
+    allBusiness() {
+      return this.$store.getters["businessChat/getAllBusinesses"];
+    },
+
+    ctaSelected() {
+      return this.$store.getters["businessChat/getSelectedChat"];
+    },
+    chatId() {
+      return this.$store.getters["businessChat/getSelectedChatId"];
+    },
+    currentBizId() {
+      return this.$store.getters["businessChat/getCurrentBizId"];
+    },
+    currentBiz() {
+      return this.$store.getters["businessChat/getCurrentBiz"][0];
+    },
+
     bizs() {
-      return this.$store.getters['businessChat/getBizs'];
+      return this.$store.getters["businessChat/getBizs"];
     },
     chatList() {
-      return this.$store.getters['businessChat/getChatList'];
+      return this.$store.getters["businessChat/getChatList"];
     },
+
     currentUser() {
-      return this.$store.getters['userChat/getUser'];
+      // return this.$store.getters['userChat/getUser'];
+      return this.$store.getters["auth/profilConnected"];
     },
     users() {
-      return this.$store.getters['userChat/getUsers'];
+      return this.$store.getters["userChat/getUsers"];
     },
     chats() {
-      return this.$store.getters['businessChat/getChats'];
+      return this.$store.getters["businessChat/getChats"];
     },
 
     loader() {
-      return this.$store.getters['userChat/getLoader'];
+      return this.$store.getters["businessChat/getLoader"];
     },
     receiver() {
-      return this.chats[0] ? this.chats[0].receiver : '';
+      return this.chats[0] ? this.chats[0].receiver : "";
     },
     resultQuery() {
       if (this.searchQuery) {
         return this.users.filter((user) => {
           return this.searchQuery
             .toLowerCase()
-            .split(' ')
+            .split(" ")
             .every((v) => user.name.toLowerCase().includes(v));
         });
       } else {
@@ -944,37 +1202,39 @@ export default {
     },
   },
   mounted() {
+    if (this.chatList.length < 0) {
+      this.getChatList({ type: "business" });
+    }
+    this.getAll();
     this.getBizs();
-    this.getChatList({ type: 'user' });
   },
   created() {
-    this.socket.on('generalMessage', (data) => {
-      console.log('Received');
-      console.log(data);
-      this.messages.push(data);
-    });
-    this.socket.on('privateMessage', (data) => {
-      console.log('Received');
-      console.log(data);
-      this.chats.push(data);
-      console.log(this.chats);
+    this.socketListenners();
 
-      let formData = new FormData();
-      formData.append('attachment', data.attachment);
-      formData.append('sender_business_id', data.sender_business_id);
-      formData.append('message', data.message);
-      formData.append('receiver_business_id', data.receiver_business_id);
-      let elmts = {
-        type: this.type,
-        message: data.message,
-        sender_business_id: this.currentUser.user.id,
-        receiver_business_id: this.chatSelected.id,
-        receiver_network_id: this.chatSelected.id,
-        receiver_id: this.chatId,
-      };
+    this.$store.commit(
+      "businessChat/setCurrentBizId",
+      Number(this.$route.params.id)
+    );
+    console.log("router params:", this.currentBizId);
+    this.tabIndex = this.$route.query.msgTabId
+      ? this.$route.query.msgTabId
+      : false;
+    if (this.tabIndex != false) {
+      if (this.tabIndex == 1) {
+        this.getChatList({ type: "business" });
+      } else if (this.tabIndex == 2) {
+        this.getChatList({ type: "network" });
+      } else {
+        this.tabIndex = 0;
+        this.getChatList({ type: "user" });
+      }
 
-      // this.saveMessage(elmts);
-    });
+      this.selectedChat({ chat: this.ctaSelected, id: this.ctaSelected.id });
+    } else {
+      // alert("hey")
+      this.tabIndex = 1;
+      this.getChatList({ type: "business" });
+    }
   },
   directives: {
     focus: {
@@ -983,110 +1243,236 @@ export default {
       },
     },
   },
-
   methods: {
+    selectedAllMulty() {
+      this.allSelection = true;
+      this.selectedMulty = [];
+      if (this.allSelectedMulty) {
+        this.all.map((biz) => {
+          this.selectedMulty.push(biz.id);
+        });
+      } else {
+        this.selectedMulty = [];
+      }
+    },
+    peopleAllMulty() {
+      // this.bizs = this.allUsers;
+      this.allSelection = false;
+      this.$store.commit("businessChat/setBizs", this.allUsers);
+
+      this.selectedMulty = [];
+      if (this.peopleMulty) {
+        this.bizs.map((biz) => {
+          this.selectedMulty.push(biz.id);
+        });
+      } else {
+        this.selectedMulty = [];
+      }
+    },
+    businessAllMulty() {
+      // this.bizs = this.allBusiness;
+      this.$store.commit("businessChat/setBizs", this.allBusiness);
+
+      this.allSelection = false;
+
+      this.selectedMulty = [];
+      if (this.businessMulty) {
+        this.bizs.map((biz) => {
+          this.selectedMulty.push(biz.id);
+        });
+      } else {
+        this.selectedMulty = [];
+      }
+    },
+    networkAllMulty() {
+      // this.bizs = this.allNetworks;
+      this.$store.commit("businessChat/setBizs", this.allNetworks);
+
+      this.allSelection = false;
+
+      this.selectedMulty = [];
+      if (this.networkMulty) {
+        this.bizs.map((biz) => {
+          this.selectedMulty.push(biz.id);
+        });
+      } else {
+        this.selectedMulty = [];
+      }
+    },
     convert(data) {
       return data;
       // return convertSize(data);
     },
     dismissed() {
-      this.file = '';
+      this.file = "";
       this.filePreview = false;
+    },
+    socketListenners() {
+      console.log("listenning...");
+      // this.socket.on("generalMessage", (data) => {
+      //   console.log("Received");
+      //   console.log(data);
+      //   this.messages.push(data);
+      // });
+      this.socket.on("privateMessage", (data) => {
+        console.log("Received");
+        console.log(data);
+        this.chats.push(data);
+        console.log(this.chats);
+
+        let formData = new FormData();
+        formData.append("attachment", data.attachment);
+        formData.append("sender_business_id", data.sender_business_id);
+        formData.append("message", data.message);
+        formData.append("receiver_business_id", data.receiver_business_id);
+        let elmts = {
+          type: this.type,
+          message: data.message,
+          sender_business_id: this.currentBiz.id,
+          receiver_business_id: this.chatSelected.id,
+          receiver_network_id: this.chatSelected.id,
+          receiver_id: this.chatId,
+        };
+
+        this.saveMessage(elmts);
+      });
+    },
+    createGroup(receiver_business_id) {
+      // let sender_business_id = this.currentUser.user.id;
+      let sender_business_id = this.currentBizId;
+      this.room = [sender_business_id, ...this.selectedMulty];
+      console.log("ROOMS: ", this.room);
+      this.socket.emit("create-group", sender_business_id);
     },
     createRoom(receiver_business_id) {
       // let sender_business_id = this.currentUser.user.id;
-      let sender_business_id = 2;
+      let sender_business_id = this.currentBizId;
       this.room = [receiver_business_id, sender_business_id];
-      console.log('ROOMS: ', this.room);
-      this.socket.emit('create-biz', this.room);
+      console.log("ROOMS: ", this.room);
+      this.socket.emit("create-biz", this.room);
     },
     getCreatedAt(data) {
-      return moment(data).format('LT');
+      if (moment(data).isBefore(moment())) {
+        return moment(data).format("lll");
+      } else {
+        // return moment(data).format('LT');
+        return moment(data).fromNow();
+      }
     },
-
+    async getAll(keyword) {
+      this.allSelection = true;
+      await this.$store.dispatch("businessChat/GET_ALL", keyword);
+    },
+    getNetworks(keyword) {
+      this.$store.dispatch("businessChat/GET_NETWORKS", keyword);
+    },
+    getUsers(keyword) {
+      this.$store.dispatch("businessChat/GET_USERS", keyword);
+    },
     getBizs(keyword) {
       this.$store
-        .dispatch('businessChat/GET_BIZS', keyword)
-        .then(() => {})
-        .catch(() => console.log('error'));
+        .dispatch("businessChat/GET_BIZS", keyword)
+        .then(() => {
+          console.log("currentBiz: ", this.currentBiz);
+        })
+        .catch(() => console.log("error"));
     },
     getChatList(data) {
       // alert("Clicked!")
       this.type = data.type;
+      this.chatSelected.active = false;
+      this.newMsg = false;
+      console.log("tab type:", this.tabIndex);
+
+      this.$store.dispatch("businessChat/GET_BIZS_CHAT_LIST", data);
       this.scrollToBottom();
-      this.$store
-        .dispatch('businessChat/GET_BIZS_CHAT_LIST', data)
-        .then(() => {
-          console.log('->[Data logged]<-');
-        })
-        .catch(() => console.log('error'));
     },
 
     async histBizToBiz(data) {
-      await this.$store
-        .dispatch('businessChat/GET_BIZ_TO_BIZ', data)
-        .then(() => {
-          this.socket.emit('addUser', {
-            socketID: this.socket.id,
-            ...this.receiver,
-          });
-        })
-        .catch(() => console.log('error'));
+      console.log("search data:", data);
+      if (data.type == "user") {
+        await this.$store.dispatch("businessChat/GET_BIZ_TO_USER", data);
+      } else if (data.type == "network") {
+        await this.$store.dispatch("businessChat/GET_BIZ_TO_NETWORK", data);
+      } else {
+        await this.$store.dispatch("businessChat/GET_BIZ_TO_BIZ", data);
+      }
     },
     async histBizToUser(receiverId) {
       await this.$store
-        .dispatch('businessChat/GET_BIZ_TO_USER', receiverId)
-        .then(() => {
-          this.socket.emit('addUser', {
-            socketID: this.socket.id,
-            ...this.receiver,
-          });
-        })
-        .catch(() => console.log('error'));
+        .dispatch("businessChat/GET_BIZ_TO_USER", receiverId)
+        .then(() => {})
+        .catch(() => console.log("error"));
     },
     async histBizToNetwork(receiverId) {
       await this.$store
-        .dispatch('businessChat/GET_BIZ_TO_NETWORK', receiverId)
-        .then(() => {
-          this.socket.emit('addUser', {
-            socketID: this.socket.id,
-            ...this.receiver,
-          });
-        })
-        .catch(() => console.log('error'));
+        .dispatch("businessChat/GET_BIZ_TO_NETWORK", receiverId)
+        .then(() => {})
+        .catch(() => console.log("error"));
     },
     saveMessage(data) {
-      console.log('[DEBUG SAVE]', data);
+      console.log("[DEBUG SAVE]", data);
       this.$store
-        .dispatch('businessChat/SAVE_BUSINESS_CHAT', data)
+        .dispatch("businessChat/SAVE_BUSINESS_CHAT", data)
         .then(() => {
-          console.log('Chat saved');
+          console.log("Chat saved");
         })
-        .catch(() => console.log('error'));
+        .catch(() => console.log("error"));
+    },
+    selectedMultyChat() {
+      this.$bvModal.hide('group-name')
+      console.log("type tabs:", this.tabIndex);
+      // console.log("selected Chat:", data);
+      this.createGroup();
+      let dumId = 7
+      // this.chatId = data.id;
+      this.$store.commit("businessChat/setSelectedChatId", dumId);
+      let receiver = { receiverID: dumId, keyword: null };
+       this.histBizToUser(receiver);
+
+      this.newMsg = false;
+      // this.chatSelected = { active: true, clickedId: data.id, ...data.chat };
+      this.chatSelected = {
+        active: true,
+        clickedId: dumId,
+        name: this.groupName,
+      };
+
+      console.log("[DEBUG] Chat selected:", this.chatSelected);
     },
     selectedChat(data) {
+      console.log("type tabs:", this.tabIndex);
       // this.scrollToBottom();
+      console.log("selected Chat:", data);
       this.createRoom(data.id);
-      this.chatId = data.id;
+      // this.chatId = data.id;
+      this.$store.commit("businessChat/setSelectedChatId", data.id);
       let receiver = { receiverID: data.id, keyword: null };
-      if (data.type == 'user') {
+      if (data.type == "user") {
         this.histBizToUser(receiver);
-      } else if (data.type == 'network') {
+      } else if (data.type == "network") {
         this.histBizToNetwork(receiver);
       } else {
         this.histBizToBiz(receiver);
       }
       this.newMsg = false;
-      this.chatSelected = { active: true, clickedId: data.id, ...data.chat };
-      console.log('[DEBUG] Chat selected:', this.chatSelected);
+      // this.chatSelected = { active: true, clickedId: data.id, ...data.chat };
+      this.chatSelected = {
+        active: true,
+        clickedId: data.id,
+        name: data.chat.name,
+      };
+
+      console.log("[DEBUG] Chat selected:", this.chatSelected);
     },
+
     searchChatList(keyword) {
       this.$store
-        .dispatch('userChat/GET_USERS', keyword)
+        .dispatch("userChat/GET_USERS", keyword)
         .then(() => {
-          console.log('->[Data logged]<-');
+          console.log("->[Data logged]<-");
         })
-        .catch(() => console.log('error'));
+        .catch(() => console.log("error"));
     },
 
     send() {
@@ -1104,10 +1490,10 @@ export default {
       //   let formData = new FormData();
       //   attachment = formData.append("file", this.file);
       // } else attachment = null;
-      this.socket.emit('privateMessage', {
+      this.socket.emit("privateMessage", {
         type: this.type,
         message: this.input,
-        sender_business_id: this.currentUser.user.id,
+        sender_business_id: this.currentBiz.id,
         room: this.room,
         receiver_business_id: this.chatSelected.id,
         receiver_id: this.chatId,
@@ -1119,21 +1505,17 @@ export default {
       //   sender: this.currentUser.user.name,
       //   date: new Date(),
       // });
-      console.log('SENT...');
 
-      this.scrollToBottom();
-      let today = new Date();
-      let h = today.getHours();
-      let m = today.getMinutes();
-      this.message.timeStamp = h + ':' + m;
-      this.message.message = this.input;
-      this.chats.push(this.message);
-      this.input = '';
+      console.log("SENT...");
+
+      // this.message.message = this.input;
+      // this.chats.push(this.message);
+      this.input = "";
       this.dismissed();
+      this.scrollToBottom();
     },
 
-    //-------
-
+    //---------------
     insert(emoji) {
       this.input += emoji;
     },
@@ -1147,10 +1529,6 @@ export default {
       this.selecteduser = true;
     },
 
-    showsearchh() {
-      this.showsearch = true;
-    },
-
     showMessages(arg) {
       this.show = arg;
     },
@@ -1160,19 +1538,19 @@ export default {
       console.log(this.checked);
     },
     newMessage(arg) {
-      console.log('hey');
+      console.log("hey");
       this.newMsg = arg;
       this.show = false;
     },
     handleFileUpload() {
       this.file = this.$refs.file.files[0];
       this.filePreview = true;
-      console.log('preview:', this.filePreview);
+      console.log("preview:", this.filePreview);
     },
     scrollToBottom() {
       this.$refs.feed.scrollTo({
         top: this.$refs.feed.scrollHeight + 2000,
-        behavior: 'smooth',
+        behavior: "smooth",
       });
       // this.$refs.feed.scrollTop = this.$refs.feed.scrollHeight - this.$refs.feed.clientHeight;
       console.log(this.$refs.feed.scrollTop);
@@ -1182,6 +1560,14 @@ export default {
 </script>
 
 <style scoped>
+.new-msg-filter-list {
+  padding: 15px !important;
+  /* border: 1px solid black; */
+  max-height: 600px !important;
+  overflow-y: auto;
+  overflow-x: hidden;
+  /* background-color: lightblue; */
+}
 .spinner {
   font-size: 30px;
   width: 08%;
@@ -1214,11 +1600,10 @@ export default {
   position: relative;
   min-height: 70px;
   border-right: 2px solid #ccc;
-
   width: 100%;
-
   padding: 10px;
 }
+
 .chats {
   border: 2px solid green;
   height: 740px;
@@ -1227,7 +1612,7 @@ export default {
 }
 
 .back-image {
-  background-image: url('../../assets/message_back.jpg');
+  background-image: url("../../assets/message_back.jpg");
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -1594,7 +1979,7 @@ li {
   justify-content: space-between;
 }
 .emoji-picker .emojis:after {
-  content: '';
+  content: "";
   flex: auto;
 }
 .emoji-picker .emojis span {

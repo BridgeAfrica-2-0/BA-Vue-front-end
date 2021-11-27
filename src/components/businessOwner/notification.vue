@@ -3,14 +3,8 @@
     <div class="container">
       <b-row>
         <b-col>
-
-          <div class="b-bottomn f-left">
-
-            <input
-              class="m-left-top"
-              type="checkbox"
-              @click="selectall($event)"
-            />
+          <div class="b-bottom f-left">
+            <input @click="selectall" type="checkbox" />
             Select All
           </div>
         </b-col>
@@ -25,7 +19,7 @@
             >
             <b-button
               @click="deleteAll(selected)"
-              v-if="testing > 0"
+              v-if="selected.length > 0"
               variant="primary"
               class="a-button-l duration ml-1"
             >
@@ -45,17 +39,13 @@
         >
           <p class="">
             <span style="display:inline-flex">
-
               <input
-                class="m-left-top"
-
+                @click="select(post.id)"
                 type="checkbox"
-                :value="post.id"
-                :id="post.id"
-                :checked="post.checked"
-
-                @click="check(post, $event)"
-
+                v-model="status"
+                value="accepted"
+                class="m-left-top"
+                unchecked-value="not_accepted"
               />
               <b-avatar
                 class="d-inline-block profile-pic"
@@ -91,8 +81,6 @@
         </b-col>
         <hr width="100%" />
       </b-row>
-
-      
     </div>
   </div>
 </template>
@@ -102,6 +90,7 @@ import { mapActions, mapGetters } from "vuex";
 export default {
   name: "notification",
   data: () => ({
+    all: 24,
     selected: [],
   }),
   beforeMount() {
@@ -148,30 +137,23 @@ export default {
     },
 
     // select all the notifications
-    selectall(e) {
-      if (e.target.checked) {
-        console.log("selected");
-        this.getNotificationsStore.forEach((element) => {
-          this.selected.push(element);
-        });
-      }
+    selectall() {
+      this.getNotificationsStore.forEach((element) => {
+        this.selected.push(element);
+      });
     },
-
-    check(value, e) {
-      if (e.target.checked) {
-        this.selected.push(value);
-        console.log("selected");
+    select(notification, index) {
+      if (this.selected[index]) {
+        this.selected.splice(index, 1);
+        return;
       }
+      this.selected.push(notification);
     },
   },
 };
 </script>
 
 <style scoped>
-.my-checkbox {
-  margin-right: 10px;
-}
-
 .load {
   display: flex;
   justify-content: center;
@@ -188,10 +170,7 @@ export default {
   margin-top: 20px;
   margin-bottom: 30px;
   padding-bottom: 10px;
-  margin-left: 10px;
-
-  border-bottom: 0.5px solid;
-  border-color: gray;
+  margin-left: -15px;
 }
 
 .m-left {

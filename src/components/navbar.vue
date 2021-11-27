@@ -398,12 +398,12 @@
                     </div>
                     <hr class="h-divider" />
                     <div class="other-menu suggest-item cursor-pointer">
-                      <span class="mr-2"
-                        ><fas-icon
-                          class="violet search"
-                          :icon="['fas', 'globe-americas']"
-                      /></span>
-                      Language
+                      <b-link v-b-toggle="'collapse-2'" class="m-1"><fas-icon class="violet search" :icon="['fas', 'globe-americas']" />  Language</b-link>
+
+                      <b-collapse id="collapse-2" class="mt-1">
+                        <b-card-text @click="$i18n.locale = 'en'" class="cursor-pointer mb-1">{{$t('auth.english')}}</b-card-text>
+                        <b-card-text @click="$i18n.locale = 'fr'">{{$t('auth.french')}}</b-card-text>
+                      </b-collapse>
                     </div>
                     <hr class="h-divider" />
                     <a
@@ -511,12 +511,12 @@
             </div>
             <hr class="h-divider" />
             <div class="other-menu suggest-item cursor-pointer">
-              <span class="mr-2"
-                ><fas-icon
-                  class="violet search"
-                  :icon="['fas', 'globe-americas']"
-              /></span>
-              Language
+              <b-link v-b-toggle="'collapse-2'" class="m-1"><fas-icon class="violet search" :icon="['fas', 'globe-americas']" />  Language</b-link>
+
+                      <b-collapse id="collapse-2" class="mt-1">
+                        <b-card-text @click="$i18n.locale = 'en'" class="cursor-pointer mb-1">{{$t('auth.english')}}</b-card-text>
+                        <b-card-text @click="$i18n.locale = 'fr'">{{$t('auth.french')}}</b-card-text>
+                      </b-collapse>
             </div>
             <hr class="h-divider" />
             <a

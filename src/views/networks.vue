@@ -1,5 +1,7 @@
 <template>
   <div style="overflow-y: hidden">
+
+     <span v-if="isloaded">
     <navbar />
 
     <div class="container-fluid lynetowrk" style="margin-top: -30px">
@@ -10,7 +12,7 @@
         @change="handleChange"
       >
       </ly-tab>
-      <hr class="d-none d-md-block" />
+      <hr class="d-none d-md-block" /> 
     </div>
 
     <div class="demo container-fluid p-0">
@@ -25,7 +27,7 @@
             xl="8"
             class="order-sm-0 mt-sm-10 mt-md-10 mt-xl-0 marg-tap"
           >
-            <Default />
+            <Default /> 
           </b-col>
         </b-row>
       </div>
@@ -65,7 +67,8 @@
         </b-link>
       </span>
       Bridge Africa © 2021
-    </p>
+    </p> 
+     </span>
   </div>
 </template>
 
@@ -85,7 +88,6 @@ export default {
   name: "networks",
   components: {
     General,
-
     LyTab,
     Default,
     Inbox,
@@ -98,6 +100,8 @@ export default {
     return {
       selectedId: 0,
       bottomSelectedId: 0,
+      foll_id:null,
+      isloaded:false,
 
       items: [
         { label: this.$t("network.Home"), icon: " " },
@@ -119,12 +123,65 @@ export default {
   },
   created() {
     this.selectedId = this.$route.query.tabId ? this.$route.query.tabId : 0;
+
+      this.foll_id = this.$route.params.id;
+
+        console.log("babyoobba");
+    this.$store
+      .dispatch("networkDetails/roleCheck", this.foll_id)
+      .then((data) => {
+      
+        let role = data.data.data;
+        console.log(role);
+        switch (role) {
+          case "follower":
+            this.$router.push({
+              name: "Membar Network Follower",
+              params: { id: this.foll_id },
+            });
+            break;
+
+          case "network_editor":
+            this.$router.push({
+              name: "NetworkEditors",
+              params: { id: this.foll_id },
+            });
+            break;
+
+            case "network_member":
+            this.$router.push({
+              name: "memberNetwork",
+              params: { id: this.foll_id },
+            });
+            break;
+
+            
+        }
+
+        this.isloaded = true;
+      })
+      .catch((error) => {
+        console.log({ error: error });
+
+        console.log(error.response.status);
+
+        if (error.response.status == 404) {
+          this.$router.push({ name: "notFound" });
+        }
+      });
+
+
   },
 
   methods: {
     handleChange(item, index) {
       console.log(item, index);
     },
+
+  
+
+
+
   },
 };
 </script>

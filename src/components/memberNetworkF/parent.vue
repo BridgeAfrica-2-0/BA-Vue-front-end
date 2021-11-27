@@ -31,15 +31,21 @@
               class="a-center"
             >
               <b-spinner v-if="SPcommunity" small></b-spinner>
-              <b-icon v-if="!SPcommunity" icon="pencil"></b-icon> 
-              <span v-if="networkInfo.is_follow"> Unfollow</span> <span v-else> Follow</span>
+              
+
+                <i
+                            class="fas fa-lg btn-icon"
+                            :class="networkInfo.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"
+                          ></i>
+
+              <span class="ml-1" v-if="networkInfo.is_follow"> Unfollow</span> <span v-else> Follow</span>
             </b-button>
             <b-tooltip target="Follow-Unfollow" variant="secondary">Click To Follow/Unfollow</b-tooltip>
           </b-col>
         </b-row>
       </b-container>
 
-      <br />
+      <br /> 
 
       <b-card-text class="text-left">
         <b-container>
@@ -54,7 +60,7 @@
               <p class="a-center">
                 <b-icon icon="people-fill" variant="primary"></b-icon>
                 <span class="pivate text">
-                  {{ nFormatter(networkInfo.commuity) }}
+                  {{ nFormatter(networkInfo.community) }}
                   community 
                 </span>
               </p>
@@ -62,16 +68,22 @@
           </b-row>
         </b-container>
         <h6 class="mt-2 font-weight-bolder title ">About</h6>
-        <p v-if="networkInfo.description.length<130" class="text-justify text">{{ networkInfo.description }}</p>
-        <p v-else class="text-justify text">
-          {{ networkInfo.description.substring(0,130)+"..." }}
-          <span class="d-inline-block float-right">
-            <a @click="$bvToast.show('example-toast')" style="cursor:pointer;">lire la Suite</a>
-          </span>
+        <p class="text-justify text">
+
+
+           <read-more
+              more-str="read more"
+              class="readmore"
+              :text="networkInfo.description"
+              link="#"
+              less-str="read less"
+              :max-chars="100"
+            >
+            </read-more>
+
+
+         
         </p>
-        <b-toast id="example-toast" static no-auto-hide>
-          {{ networkInfo.description }}
-        </b-toast>
       </b-card-text>
     </b-card>
     
@@ -83,7 +95,7 @@
 </template>
 
 <script>
-import SidebarCommunity from "@/components/businessf/tabs/owner/editors/sidebarcommunity";
+import SidebarCommunity from '@/components/businessf/tabs/owner/networks/sidebarcommunity';
 export default {
   name: "parent",
   components: {

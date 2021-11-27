@@ -410,6 +410,14 @@ export default {
 
     },
 
+    updateBusinessBiographie({commit}, data){
+
+      return axios.post(`business/update-biography/${data.business_id}`, data.data)
+        .then((data) => {
+          console.log(data);
+        });
+    },
+
     async loadUserBusinessAbout(context, payload) {
       let response_ = null;
       const id_Business = 2;
@@ -739,11 +747,11 @@ export default {
     },
 
     // Getting the notifications
-    async getNotifications({ dispatch, commit }) {
+    async getNotifications({ commit }, id) {
       commit('setLoader', true);
 
-      await axios
-        .get('notification')
+      return await axios
+        .get(`notification/business/${id}`)
         .then(res => {
           commit('setLoader', false);
           commit('setSuccess', true);
@@ -751,6 +759,8 @@ export default {
           setTimeout(() => {
             commit('setSuccess', false);
           }, 2000);
+
+          return res.data.data
         })
         .catch(err => {
           commit('setLoader', false);

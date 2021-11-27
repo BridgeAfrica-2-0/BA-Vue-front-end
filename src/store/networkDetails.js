@@ -4,7 +4,7 @@ export default {
   namespaced: true,
 
   state: {
-    ndetails: []
+    ndetails: []   
   },
 
   actions: {
@@ -15,7 +15,20 @@ export default {
         console.log('lalaads shskdjdjdd djdjdhdjee djeejejeje ejsjsjsjsjs jcjcjcjcjc ');
         console.log(data);
       });
-    }
+    },
+
+    roleCheck({ commit },id){
+        
+      
+      return axios.get("network/"+id+"/determine-role")
+        .then((data) => {
+          return data;
+        });
+
+
+    },
+
+    
   },
 
   mutations: {

@@ -6,10 +6,10 @@
         <b-col md="3">
           <b-card title="" header-tag="header" footer-tag="footer">
             <template #header>
-              <h6 class="mb-0 d-inline-block">Intro</h6>
+              <h6 class="mb-0 d-inline-block">{{ $t('dashboard.Intro') }}</h6>
               <span class="float-right btn m-0 p-0 mt-1 action-intro"
-                ><b-icon icon="pencil-fill" variant="primary"></b-icon> Edit
-                Profile</span
+                ><b-icon icon="pencil-fill" variant="primary"></b-icon>
+                {{ $t('dashboard.Edit_Profile') }}</span
               >
             </template>
             <img
@@ -18,24 +18,24 @@
             />
             <b-card-text class="text-left text-size mt-2">
               <p>
-                <b-icon icon="briefcase-fill" variant="primary"></b-icon> Work
-                at: Current or Last Organization
+                <b-icon icon="briefcase-fill" variant="primary"></b-icon> 
+                {{ $t('dashboard.Work_at') }}: {{ $t('dashboard.Current_or_Last_Organization') }}
               </p>
               <p>
-                <b-icon icon="book-fill" variant="primary"></b-icon> Studied at:
-                Last Education
+                <b-icon icon="book-fill" variant="primary"></b-icon> {{ $t('dashboard.Studied_at') }}:
+                {{ $t('dashboard.Last_Education') }}
               </p>
               <p>
-                <b-icon icon="house-fill" variant="primary"></b-icon> Home Town
-                Name:Dummy
+                <b-icon icon="house-fill" variant="primary"></b-icon> {{ $t('dashboard.') }}
+                {{ $t('dashboard.Home_Town_Name') }}:Dummy
               </p>
               <p>
-                <b-icon icon="geo-alt-fill" variant="primary"></b-icon> Current
-                City Name:Dummy
+                <b-icon icon="geo-alt-fill" variant="primary"></b-icon> 
+                {{ $t('dashboard.Current_City_Name') }}:Dummy
               </p>
               <p>
-                <b-icon icon="people-fill" variant="primary"></b-icon> Followed
-                by: 525
+                <b-icon icon="people-fill" variant="primary"></b-icon> 
+                {{ $t('dashboard.Followed_by') }}: 525
               </p>
             </b-card-text>
           </b-card>
@@ -43,10 +43,10 @@
           <b-card class="text-center mt-2 p-2">
             <div class="">
               <h6 class="font-weight-bolder">
-                Invite friends on Bridge Africa
+                {{ $t('dashboard.Invite_friends_on_Bridge_Africa') }}
               </h6>
               <b-button variant="outline-primary" class="btn-block mt-2">
-                <b-icon-plus></b-icon-plus> Invite</b-button
+                <b-icon-plus></b-icon-plus> {{ $t('dashboard.Invite') }}</b-button
               >
             </div>
           </b-card>
@@ -57,13 +57,13 @@
         <b-col md="3">
           <b-card class="text-center mt-2 p-2" v-if="!bussinessExist">
             <div class="">
-              <h6 class="font-weight-bolder">Setup your business identity</h6>
+              <h6 class="font-weight-bolder">{{ $t('dashboard.Setup_your_business_identity') }}</h6>
               <p>
-                Create your business profile so the people can search you, see
-                your products, communicate with you and much more
+                {{ $t('dashboard.Create_your_business_profile_so_the_people_can_search_you') }}, 
+                {{ $t('dashboard.see_your_products') }}, {{ $t('dashboard.communicate_with_you_and_much_more') }}
               </p>
               <b-button variant="outline-primary" class="btn-block mt-2">
-                Add Business</b-button
+                {{ $t('dashboard.Add_Business') }}</b-button
               >
             </div>
           </b-card>
@@ -83,43 +83,43 @@
                 </b-col>
                 <b-col cols="8" class="m-0 p-0 my-auto">
                   <h6 class="text-blue font-weight-bolder m-0 p-1 ">
-                    1.1 M Followers
+                    1.1 M {{ $t('dashboard.Followers') }}
                   </h6>
-                  <p class="m-0 p-1">Category Name Here</p>
-                  <p class="m-0 p-1">Current Plan: Basic</p>
+                  <p class="m-0 p-1">{{ $t('dashboard.Category_Name_Here') }}</p>
+                  <p class="m-0 p-1">{{ $t('dashboard.Current_Plan') }}: {{ $t('dashboard.Basic') }}</p>
                 </b-col>
               </b-row>
               <b-row class="mt-2">
                 <b-col cols="12" class="text-left text-size">
                   <p>
-                    <b-icon icon="person-fill" variant="primary"></b-icon> view
-                    Profile
+                    <b-icon icon="person-fill" variant="primary"></b-icon> 
+                    {{ $t('dashboard.view_Profile') }}
                   </p>
                   <p>
-                    <b-icon icon="chat-fill" variant="primary"></b-icon> Message
+                    <b-icon icon="chat-fill" variant="primary"></b-icon> {{ $t('dashboard.Message') }}
                     <span class="float-right badge badge-pill badge-success"
                       >3</span
                     >
                   </p>
                   <p>
                     <b-icon icon="bell-fill" variant="primary"></b-icon>
-                    Notifications
+                    {{ $t('dashboard.Notifications') }}
                     <span class="float-right badge badge-pill badge-success"
                       >9+</span
                     >
                   </p>
                   <p>
-                    <b-icon icon="globe2" variant="primary"></b-icon> Visite
-                    Website
+                    <b-icon icon="globe2" variant="primary"></b-icon> 
+                    {{ $t('dashboard.Visit_Website') }}
                   </p>
                   <p>
                     <b-icon icon="arrow-repeat" variant="primary"></b-icon>
-                    Upgrade Plan
+                    {{ $t('dashboard.Upgrade_Plan') }}
                   </p>
                 </b-col>
               </b-row>
               <b-button variant="outline-primary" class="btn-block mt-2">
-                Add Business</b-button
+                {{ $t('dashboard.Add_Business') }}</b-button
               >
             </div>
           </b-card>
@@ -129,7 +129,7 @@
           <b-card title="" header-tag="header" footer-tag="footer">
             <template #header>
               <h6 class="mb-0 d-inline-block font-weight-bolder">
-                Hot Businesses
+                {{ $t('dashboard.Hot_Businesses') }}
               </h6>
               <span class="float-right btn m-0 p-0 mt-1 action-intro"
                 ><b-icon-chevron-left
@@ -146,17 +146,17 @@
             />
             <b-card-text class="text-left text-size mt-2">
               <h6 class="text-blue font-weight-bolder m-0 p-1 ">
-                Business Name Here
+                {{ $t('dashboard.Business_Name_Here') }}
               </h6>
-              <p class="m-0 p-1">Business Category</p>
-              <p class="m-0 p-1">1.1 M Followers</p>
-              <p class="m-0 p-1">Neighborhood, City, Country</p>
-              <p class="m-0 p-1">Keyword 1, Keyword 2, Keyword 3</p>
+              <p class="m-0 p-1">{{ $t('dashboard.Business_Category') }}</p>
+              <p class="m-0 p-1">1.1 M {{ $t('dashboard.Followers') }}</p>
+              <p class="m-0 p-1">{{ $t('dashboard.Neighborhood') }}, {{ $t('dashboard.City') }}, {{ $t('dashboard.Country') }}</p>
+              <p class="m-0 p-1">{{ $t('dashboard.Keyword') }} 1, {{ $t('dashboard.Keyword') }} 2, {{ $t('dashboard.Keyword') }} 3</p>
               <b-button variant="primary" class="mt-2" size="sm">
-                Contact Us</b-button
+                {{ $t('dashboard.Contact_Us') }}</b-button
               >
               <b-button variant="primary" class="mt-2 float-right" size="sm">
-                Follow</b-button
+                {{ $t('dashboard.Follow') }}</b-button
               >
             </b-card-text>
           </b-card>
@@ -165,7 +165,7 @@
           <b-card title="" header-tag="header" footer-tag="footer">
             <template #header>
               <h6 class="mb-0 d-inline-block font-weight-bolder">
-                Popular Networks
+                {{ $t('dashboard.Popular_Networks') }}
               </h6>
               <span class="float-right btn m-0 p-0 mt-1 action-intro"
                 ><b-icon-chevron-left
@@ -182,12 +182,12 @@
             />
             <b-card-text class="text-left text-size mt-2">
               <h6 class="text-blue font-weight-bolder m-0 p-1 ">
-                Network Name Here
+                {{ $t('dashboard.Network_Name_Here') }}
               </h6>
-              <p class="m-0 p-1">Business Name Here</p>
-              <p class="m-0 p-1">1.1 M Members</p>
+              <p class="m-0 p-1">{{ $t('dashboard.Business_Name_Here') }}</p>
+              <p class="m-0 p-1">1.1 M {{ $t('dashboard.Members') }}</p>
               <b-button variant="outline-primary" class="btn-block mt-2">
-                Join</b-button
+                {{ $t('dashboard.Join') }}</b-button
               >
             </b-card-text>
           </b-card>

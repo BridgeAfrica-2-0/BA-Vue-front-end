@@ -1,9 +1,9 @@
 <template>
   <div>
-    <b-spinner v-if="loader" variant="primary" label="Spinning"></b-spinner>
+    <b-spinner v-if="loader" variant="primary" :label="$t('search.Spinning')"></b-spinner>
 
     <b-alert v-if="networks.total == 0 || networks.data.length == 0" show variant="warning"
-      ><a href="#" class="alert-link"> No Network available! </a>
+      ><a href="#" class="alert-link">{{$t("search.No_Network_available")}}! </a>
     </b-alert>
 
     <div
@@ -26,7 +26,7 @@
             <br />
             {{ network.purpose }}
             <br />
-            {{ network.member_count }} Community member <br />
+            {{ network.member_count }} {{$t("search.Community_member")}} <br />
 
             <span class="location">
               <b-icon-geo-alt class="ico"></b-icon-geo-alt>
@@ -35,7 +35,7 @@
             <br />
             {{ network.description }}
             <br />
-            <b-link>Read More</b-link>
+            <b-link>{{$t("search.Read_More")}}</b-link>
           </p>
         </b-col>
 
@@ -58,7 +58,7 @@
                   variant="primary"
                 >
                   <i class="fas fa-user-plus fa-lg btn-icon"></i>
-                  <span class="btn-com" v-b-modal.modal-sm>Community</span>
+                  <span class="btn-com" v-b-modal.modal-sm>{{$t("search.Community")}}</span>
                 </b-button>
               </b-col>
 
@@ -68,10 +68,9 @@
                   size="sm"
                   class="b-background shadow"
                   variant="primary"
-                  @click="cta_business(network)"
                 >
                   <i class="fas fa-envelope fa-lg btn-icon"></i>
-                  <span class="btn-text">Message</span>
+                  <span class="btn-text">{{$t("search.Message")}}</span>
                 </b-button>
               </b-col>
 
@@ -98,7 +97,7 @@
     <!-- End pagination -->
 
     <b-modal id="modal-sm" size="sm" hide-header>
-      Do you want to join this network?
+      {{$t("search.Do_you_want_to_join_this_network")}}?
     </b-modal>
   </div>
 </template>
@@ -133,21 +132,6 @@ export default {
       this.currentPage = value;
       console.log("[debug] page before:", value);
       // this.networkSearch();
-    },
-     cta_business(data) {
-      console.log(data);
-      this.$store.commit('businessChat/setSelectedChat', data);
-      
-      let path = '';
-      if (this.activeAccount.user_type == 'business') {
-        path = '/business_owner/' + this.activeAccount.id;
-      } else if (this.activeAccount.user_type == 'network') {
-        path = '/';
-      } else path = '/messaging';
-
-      // this.$router.push({ path: `${path}`, query: { tabId: 1, msgTabId: 1 } });
-      this.$router.push({ path: `/business_owner/${this.activeAccount.id}`, query: { tabId: 1, msgTabId: 0 } });
-
     },
 
   },

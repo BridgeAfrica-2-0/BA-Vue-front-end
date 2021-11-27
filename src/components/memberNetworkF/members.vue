@@ -35,7 +35,9 @@
           <div class="scroll" v-if="admins.length != 0">
             <div v-for="admin in admins" :key="admin.id">
               <p class="">
+                 <router-link :to="'/profile/'+admin.user_id">
                 <span class="">
+                 
                   <b-avatar
                     class="d-inline-block"
                     variant="primary"
@@ -47,6 +49,8 @@
                     {{admin.fullname}}
                   </h5>
                 </span>
+
+                 </router-link>
               </p>
             </div>
           </div>
@@ -69,9 +73,12 @@
               <b-skeleton width="70%"></b-skeleton>
             </b-card>
           </template>
+
+         
           <div class="scroll" v-if="business.length != 0">
             <div v-for="busines in business" :key="busines.id">
               <p class="">
+                <router-link :to="'/business/'+busines.business_id">
                 <span class="">
                   <b-avatar
                     class="d-inline-block"
@@ -85,6 +92,7 @@
                     {{busines.name}}
                   </h5>
                 </span>
+                </router-link>
               </p>
             </div>
           </div>
@@ -107,8 +115,11 @@
               <b-skeleton width="70%"></b-skeleton>
             </b-card>
           </template>
-          <div v-for="member in members" :key="member.id" >
+          <div v-for="member in members" :key="member.user_id" >
             <p class="">
+
+              <router-link :to="'/profile/'+member.user_id">
+
               <span class="">
                 <b-avatar
                   class="d-inline-block"
@@ -121,12 +132,14 @@
                   {{member.fullname}}
                 </h5>
               </span>
+
+              </router-link>
             </p>
           </div>
         </b-skeleton-wrapper>
       </b-col>
       <b-col col="12">
-        <infinite-loading @infinite="infiniteHandler">
+        <infinite-loading   :identifier="infiniteId"  ref="infiniteLoading"   @infinite="infiniteHandler">
           <div class="text-red" slot="no-more">No More Request</div>
           <div class="text-red" slot="no-results">No More Request</div>
         </infinite-loading>
@@ -144,18 +157,18 @@ export default {
   data() {
     return {
       url:null,
+      members:[],
       perPage: null,
-      page: 0,
+      page: 1,
       currentPage: null,
       searchTitle: "",
-      // members:"",
-
+      infiniteId : 1,
       currentIndex: -1,
       loading: false
     };
   },
   computed: {
-    members() {
+    old_members() {
       return this.$store.state.networkProfileMembers.members;
     },
     admins() {
@@ -196,25 +209,28 @@ export default {
     },
 
     infiniteHandler($state) {
-      console.log("loop");
+     
       const data = this.getRequestDatas(this.searchTitle);
       console.log('keyword: '+data);
-      let formData = new FormData();
-      formData.append('keyword', data);
-      // this.$store
-      //   .dispatch("networkProfileMembers/getMembers", {
-      //     path: this.url+"/members/list/"+this.page,
-      //     formData: formData
-      //   })
+     
+      let url='';
+      if(data==null) {
+     url="network/"+this.url+"/members/list/"+this.page+"?keyword="+data;
+
+      }else{
+         url="network/"+this.url+"/members/list/"+this.page;
+      }
+    
+    console.log(url);
       this.axios
-        .post("network/"+this.url+"/members/list/"+this.page, formData)
+        .post(url)
         .then(({ data }) => {
-        console.log(data);
+        
         console.log(this.page);
         if (data.data.length) {
           this.page += 1;
-          console.log(this.page);
-          console.log(...data.data);
+        
+        
           this.members.push(...data.data);
           $state.loaded();
         } else {
@@ -265,11 +281,12 @@ export default {
     },
     search() {
       // this.loading = true;
+      this.members=[];
       this.loading = true;
-      this.page -= 1;
+      this.page = 1;
       console.log("searching...");
       console.log(this.searchTitle);
-      this.infiniteHandler();
+      this.infiniteId += 1;
       this.getAdmins();
       this.getBusiness();
     },

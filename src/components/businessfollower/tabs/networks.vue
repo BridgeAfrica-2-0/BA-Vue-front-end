@@ -91,7 +91,15 @@
       <b-container>
         <b-form>
           <div v-if="!editNet" class="row sub-sidebar-2 pending-post-view mt-4 pb-0">
-            <div class="col-md-12 col-lg-12 d-flex align-items-stretch mb-lg-0 styling">
+            <div
+              class="
+                col-md-12 col-lg-12
+                d-flex
+                align-items-stretch
+                mb-lg-0
+                styling
+              "
+            >
               <a
                 class="nav-link text-dark"
                 href="#"
@@ -425,11 +433,11 @@ export default {
   },
 
   computed: {
-    profileNetworks: function () {
+    profileNetworks: function() {
       return this.$store.state.profile.profilenetwork;
     },
 
-    pagee: function () {
+    pagee: function() {
       return this.page;
     },
 
@@ -453,20 +461,20 @@ export default {
       return this.$store.state.auth.locality;
     },
 
-    selectedcountry: function () {
+    selectedcountry: function() {
       return this.country.id;
     },
-    selectedregion: function () {
+    selectedregion: function() {
       return this.region.id;
     },
 
-    selecteddivision: function () {
+    selecteddivision: function() {
       return this.division.id;
     },
-    selectedmunicipality: function () {
+    selectedmunicipality: function() {
       return this.municipality.id;
     },
-    selectedlocality: function () {
+    selectedlocality: function() {
       return this.locality.id;
     },
   },
@@ -474,7 +482,7 @@ export default {
   methods: {
     flashErrors(errors) {
       let err = '';
-      Object.values(errors).forEach((element) => {
+      Object.values(errors).forEach(element => {
         err = element[0];
       });
 
@@ -484,7 +492,7 @@ export default {
     netCategory(category) {
       let cat = '';
 
-      category.forEach((item) => {
+      category.forEach(item => {
         cat = cat + item + ',';
       });
 
@@ -501,7 +509,7 @@ export default {
         .then(() => {
           console.log('hey yeah');
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -521,7 +529,7 @@ export default {
         .then(() => {
           console.log('hey yeah');
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -535,7 +543,7 @@ export default {
         .then(() => {
           console.log('hey yeah');
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -549,7 +557,7 @@ export default {
         .then(() => {
           console.log('hey yeah');
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -563,7 +571,7 @@ export default {
         .then(() => {
           console.log('hey yeah');
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -588,7 +596,7 @@ export default {
         .then(() => {
           console.log('hey yeah');
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
     },
@@ -615,7 +623,7 @@ export default {
             $state.complete();
           }
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
 
           if (err.response.status == 422) {
@@ -648,7 +656,7 @@ export default {
 
       axios
         .post('network', newNetwork)
-        .then((res) => {
+        .then(res => {
           loader.hide();
           this.success.state = true;
           this.success.msg = 'Operation was successful !!';
@@ -672,7 +680,7 @@ export default {
           this.page = 1;
           this.infiniteId += 1;
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
           this.success.state = true;
           this.flashMessage.show({
@@ -701,7 +709,7 @@ export default {
 
       axios
         .post(`network/${editedNetwork.id}`, editedNetwork.data)
-        .then((res) => {
+        .then(res => {
           this.success.state = true;
           this.success.msg = 'Operation was successful !!';
           setTimeout(() => {
@@ -710,7 +718,7 @@ export default {
           this.getNetworks();
           loader.hide();
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
           this.success.state = true;
           this.success.msg = "Something wen't wrong !!";
@@ -743,7 +751,7 @@ export default {
     deleteNetwork(network) {
       axios
         .delete(`network/${network.id}`)
-        .then((res) => {
+        .then(res => {
           this.success.state = true;
           this.success.msg = 'Operation was successful !!';
           setTimeout(() => {
@@ -751,7 +759,7 @@ export default {
           }, 5000);
           this.getNetworks();
         })
-        .catch((err) => {
+        .catch(err => {
           this.success.state = true;
           this.success.msg = "Something wen't wrong !!";
           setTimeout(() => {
@@ -831,7 +839,7 @@ export default {
           this.municipality = data.data.council[0];
           this.locality = data.data.locality[0];
         })
-        .catch((err) => {
+        .catch(err => {
           console.log({ err: err });
         });
 

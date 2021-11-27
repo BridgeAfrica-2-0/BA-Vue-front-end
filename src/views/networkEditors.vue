@@ -1,5 +1,7 @@
 <template>
   <div style="overflow-y: hidden;">
+
+     <span v-if="isloaded">
     <navbar />
 
     <div class="container-fluid lynetowrk" style="margin-top:-30px">
@@ -56,6 +58,8 @@
     </div>
 
     <Footer />
+
+     </span>
   </div>
 </template>
 
@@ -88,6 +92,8 @@ export default {
     return {
       selectedId: 0,
       bottomSelectedId: 0,
+      foll_id:null,
+      isloaded:false,
 
       items: [
         { label: this.$t('network.Home'), icon: " " },
@@ -107,6 +113,56 @@ export default {
       }
     };
   },
+
+
+
+created(){
+
+   this.foll_id = this.$route.params.id;
+
+        console.log("babyoobba");
+    this.$store
+      .dispatch("networkDetails/roleCheck", this.foll_id)
+      .then((data) => {
+      
+        let role = data.data.data;
+        console.log(role);
+        switch (role) {
+          case "follower":
+            this.$router.push({
+              name: "BuMembar Network FollowernessEditor",
+              params: { id: this.foll_id },
+            });
+            break;
+
+         
+
+            case "network_member":
+            this.$router.push({
+              name: "memberNetwork",
+              params: { id: this.foll_id },
+            });
+            break;
+
+            
+        }
+
+        this.isloaded = true;
+      })
+      .catch((error) => {
+        console.log({ error: error });
+
+        console.log(error.response.status);
+
+        if (error.response.status == 404) {
+          this.$router.push({ name: "notFound" });
+        }
+      });
+
+
+
+},
+
 
   methods: {
     handleChange(item, index) {

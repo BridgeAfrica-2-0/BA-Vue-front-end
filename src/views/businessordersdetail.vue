@@ -2,22 +2,24 @@
   <div>
     <navbar />
     <div class="container body p-0">
-      <h1>Order Details</h1>
+      <h1 >Order Details</h1>
 
-      <div class="card my-2 shadow">
+      <div class="card  my-2 shadow">
         <div class="card-body row">
           <div class="col">
             <span class="marge row">
-              <span class="bold m"><h3>Order</h3></span>
-              <span class="text-success order m"><h3>#12324253</h3></span>
+              <span class="bold m "><h3>Order</h3></span>
+              <span class="text-success order m"
+                ><h3>#{{ orderDetails.orderId }}</h3></span
+              >
             </span>
             <span class="flou marge1"
-              ><h3 class="marge1">yaoundé, 12/12/2021,12:00</h3></span
+              ><h3 class="  marge1">{{ moment(orderDetails.orderDate).format("YYYY-MM-DD HH:mm:ss") }}</h3></span
             >
           </div>
-          <div class="col">
-            <span class="">
-              <h3 class="margtotal">Total : 199500 Fcfa</h3>
+          <div class="col ">
+            <span class=" ">
+              <h3 class="margtotal ">Total : {{ orderDetails.TotalPrice }} XAF</h3>
             </span>
           </div>
         </div>
@@ -26,12 +28,8 @@
       <div class="card my-1 shadow">
         <div class="card-body row">
           <div class="col">
-            <span class="mr-2 row"
-              ><fas-icon
-                class="couleur search card"
-                :icon="['fas', 'cart-arrow-down']"
-              />
-              Card</span
+            <span class="mr-2 row "
+              ><fas-icon class="couleur search card" :icon="['fas', 'cart-arrow-down']" /> Card</span
             >
             <span class="row">
               <span class="my-1 col">
@@ -39,36 +37,20 @@
               >
 
               <div>
-                <button
-                  v-b-modal="'my-modal'"
-                  variant="ligth"
-                  class="border mx-4 button"
-                >
-                  <span class="mr-3 row"
-                    ><fas-icon
-                      class="couleur1 search margbtn"
-                      :icon="['fas', 'envelope']"
-                    />
+                <button v-b-modal="'my-modal'" variant="ligth" class="border mx-4 button">
+                  <span class="mr-3 row "
+                    ><fas-icon class="couleur1 search margbtn " :icon="['fas', 'envelope']" />
                     <h3 class="couleur1">Chat Now</h3>
                   </span>
                 </button>
                 <b-modal id="my-modal">
                   <div class="container">
-                    <span
-                      class="mr-3 row"
-                      @click="cta({ id: 2, name: 'Handel Marcellin' })"
-                      ><fas-icon
-                        class="couleur search"
-                        :icon="['fas', 'envelope']"
-                      />
+                    <span class="mr-3 row"
+                      ><fas-icon class="couleur search" :icon="['fas', 'envelope']" />
                       <h3>chat with Marcellin</h3>
                     </span>
                     <span class="mr-3 row"
-                      ><fas-icon
-                        class="couleur search"
-                        :icon="['fas', 'envelope']"
-                        @click="cta({ id: 2, name: 'Danaz Bethoven' })"
-                      />
+                      ><fas-icon class="couleur search" :icon="['fas', 'envelope']" />
                       <h3>chat with danaz</h3>
                     </span>
                   </div>
@@ -79,69 +61,30 @@
         </div>
       </div>
 
-      <div class="card my-1 cardborder">
-        <div class="card-body">
+      <div class="card my-1  cardborder">
+        <div class="card-body ">
           <div class="row container mx-5 rowmobile">
             <b-avatar id="a1" class="avatar" text=" "></b-avatar>
-
-            <b-progress
-              id="p1"
-              :value="value"
-              :max="max"
-              variant="success"
-              class="mb-3 size"
-            >
-            </b-progress>
-
+            <b-progress id="p1" :value="value" :max="max" variant="success" class="mb-3 size"> </b-progress>
             <b-avatar id="a2" class="avatar" text=" "></b-avatar>
-
-            <b-progress
-              id="p2"
-              :value="value"
-              :max="max"
-              variant="success"
-              class="mb-3 size"
-            ></b-progress>
-
+            <b-progress id="p2" :value="value" :max="max" variant="success" class="mb-3 size"></b-progress>
             <b-avatar id="a3" class="avatar" text=" "></b-avatar>
-            <b-progress
-              id="p3"
-              :value="value"
-              :max="max"
-              variant="success "
-              class="mb-3 size"
-            ></b-progress>
-
+            <b-progress id="p3" :value="value" :max="max" variant="success " class="mb-3 size"></b-progress>
             <b-avatar id="a4" class="avatar" text=" "></b-avatar>
-            <b-progress
-              id="p4"
-              :value="value"
-              :max="max"
-              variant="success"
-              class="mb-3 size"
-            ></b-progress>
-
+            <b-progress id="p4" :value="value" :max="max" variant="success" class="mb-3 size"></b-progress>
             <b-avatar id="a5" class="avatar" text=" "></b-avatar>
-            <b-progress
-              id="p5"
-              :value="value"
-              :max="max"
-              variant="success"
-              class="mb-3 size"
-            ></b-progress>
+            <b-progress id="p5" :value="value" :max="max" variant="success" class="mb-3 size"></b-progress>
           </div>
           <div class="row sizestate container">
             <div class="col-2 text-center"><h3>order</h3></div>
-            <div class="col-2 text-center"><h3>processing</h3></div>
-            <div class="col-2 text-start"><h3 class="t">shipped</h3></div>
-            <div class="col-2 text-start"><h3 class="t">delivred</h3></div>
-            <div class="col-3 text-start">
-              <h3 class="t">payment received</h3>
-            </div>
+            <div class="col-2  text-center "><h3>processing</h3></div>
+            <div class="col-2 text-start "><h3 class="t">shipped</h3></div>
+            <div class="col-2 text-start "><h3 class="t">delivred</h3></div>
+            <div class="col-3 text-start "><h3 class="t">payment received</h3></div>
           </div>
 
-          <div class="justify-content-between row my-5" v-for="i in 2" :key="i">
-            <div class="col-3 margimg">
+          <div class="justify-content-between row my-5" v-for="item in orderDetails.orderItems" :key="item.id">
+            <div class="col-3   margimg">
               <splide :options="{ rewind: true }" class="r-img">
                 <splide-slide >
                   <img :src="item.product_picture" class="r-img" />
@@ -149,10 +92,6 @@
               </splide>
             </div>
             <div class="ligne"><br /></div>
-
-            <div class="col-3 text-end bold margtext">
-              <h3 class="h3 margm2">Name:</h3>
-              <h3 class="h3 margm2">product ID :</h3>
 
             <div class="col-6   text-end   margtext">
               <div class="row">
@@ -181,14 +120,7 @@
               </div>
             </div>
 
-            <div class="col-3 text-start margtext">
-              <h3>sneaker</h3>
-              <h3>#125FF55</h3>
-              <h3>4</h3>
-              <h3>2000 Fcfa</h3>
-              <h3>1000 Fcfa</h3>
-              <h3>9000 Fcfa</h3>
-            </div>
+           
 
             <div class="col margtext">
               <h3 class="bold1">status</h3>
@@ -225,7 +157,7 @@
         </div>
       </div>
 
-      <div class="row my-1">
+      <div class="row my-1 ">
         <div class="col-6">
           <div class="card shipad shadow">
             <div class="card-body ">
@@ -308,11 +240,7 @@ export default {
       status: 2,
     };
   },
-  computed: {
-    activeAccount() {
-      return this.$store.getters["auth/profilConnected"];
-    },
-  },
+
   mounted() {
     
 
@@ -395,24 +323,6 @@ export default {
           console.log("products error: ");
           console.error(err);
         });
-    },
-  },
-  methods: {
-    cta(data) {
-      console.log(data);
-      this.$store.commit("businessChat/setSelectedChat", data);
-      let path = "";
-      if (this.activeAccount.user_type == "business") {
-        path = "/business_owner/" + this.activeAccount.id;
-      } else if (this.activeAccount.user_type == "network") {
-        path = "/";
-      } else path = "/messaging";
-
-      // this.$router.push({ path: `${path}`, query: { tabId: 1, msgTabId: 1 } });
-      this.$router.push({
-        path: `/business_owner/${this.activeAccount.id}`,
-        query: { tabId: 1, msgTabId: 0 },
-      });
     },
   },
 };
@@ -550,6 +460,7 @@ export default {
     font-size: 10px !important;
     margin-left: -15px;
   }
+ 
   .ligne {
     width: 100%;
   }
@@ -586,11 +497,7 @@ export default {
   .margbtn {
     margin-left: 13px;
   }
-  /* .margm2 {
-  margin-left: 11px;
-  margin-right: -20px;
-  font-weight: bold;
-} */
+ 
 
   .r-img {
     border-radius: 4px;
@@ -615,6 +522,6 @@ export default {
   }
 }
 
-@media only screen and (min-width: 400px) {
-}
+
+
 </style>

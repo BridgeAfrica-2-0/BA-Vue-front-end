@@ -8,7 +8,7 @@
             variant="primary"
             class="icon-size"
           ></b-icon>
-          Intro</b
+          </b
         >
       </h6>
 
@@ -72,7 +72,7 @@
 export default {
   computed:{
      info :function(){
-        return this.$store.getters['follower/getUserPostIntro'];
+        return this.$store.getters['follower/getUserPost'];
       }
   }
 };

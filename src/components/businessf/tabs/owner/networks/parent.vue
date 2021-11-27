@@ -195,6 +195,7 @@
       <b-button style="float: right" class="mt-2" variant="primary" @click="submitFile">
         <b-spinner v-if="SPupdateN" small type="grow"></b-spinner>{{ $t('network.Upload') }}
       </b-button>
+<<<<<<< HEAD
     </b-modal>
 
 
@@ -226,6 +227,42 @@
           <br />
           <br />
 
+=======
+
+    </b-modal> 
+ 
+
+
+
+    <b-modal id="modal-4" ref="modal-4" centered hide-footer :title="$t('network.Upload_a_New_picture')" >
+      <b-row>
+        <b-col cols="1" md="1" cl ass="m-0 p-0"></b-col>
+        <b-col cols="10" md="10" class="m-0 p-0">
+          <br />
+          <div class="bordder">
+            <span class="float-left">{{ $t('network.Edit_Your_New_picture') }}</span>
+            <span class="float-right">
+              <b-button-group size="sm" class="">
+                <input id="video" type="file" hidden />
+                <input
+                  hidden
+                  type="file" 
+                  id="file" 
+                  ref="file" 
+                  @change="handleFileUpload" 
+                  name="img" 
+                  accept="image/*" 
+                />
+                <b-button title="Add Profile Image" size="sm" variant="outline-primary" @click="$refs.file.click()">
+                  <fas-icon class="icons" :icon="['fas', 'photo-video']" size="lg" />
+                </b-button>
+              </b-button-group>
+            </span>
+          </div>
+          <br />
+          <br />
+
+>>>>>>> 4d6df2670bce3f8f1b9cdc061b702bdce641c396
           <div class="h300px" v-if="selectedImagePrv">
             <div id="preview">
               <span> </span>
@@ -316,6 +353,7 @@ export default {
     },
 
     getNetworkInfo() {
+      console.log("getNetworkInfo");
       this.$store
         .dispatch('networkProfile/getnetworkInfo', this.url)
         .then(() => {

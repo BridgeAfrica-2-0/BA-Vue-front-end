@@ -1,13 +1,14 @@
 <template>
-  <b-container>
-    <div class="s-card">
-      <div class="people-style border shadow">
+  <div>
+    <div class="s-cardd">
+
+      <div v-for="people in peoples" :key="people.id" class="people-style border shadow">
         <b-row class="mb-1">
           <b-col md="3" cols="4" lg="3" class="my-auto">
             <b-avatar
               class="p-avater"
               variant="primary"
-              src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
+              :src="people.profile_picutre"
             ></b-avatar>
           </b-col>
 
@@ -19,91 +20,7 @@
                     <b-row>
                       <b-col md="6" lg="6" cols="6" sm="6" class="mt-lg-2">
                         <div class="mt-2 mt-lg-0 mt-xl-0 username">
-                          <b> howty Itz blec </b>
-                        </div>
-                      </b-col>
-
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="6"
-                        class="mt-3 mt-lg-2 mt-xl-2"
-                      >
-                        <h6 class="follower">5K Community</h6>
-                      </b-col>
-                    </b-row>
-                  </div>
-                </b-col>
-
-                <b-col lg="12" xl="12" cols="12" sm="12" md="12">
-                  <div class="e-name">
-                    <b-row class="mt-lg-0">
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="6"
-                        xl="6"
-                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
-                      >
-                        <b-button
-                          block
-                          variant="primary"
-                          size="sm"
-                          class="b-background flexx pobtn shadow mr-lg-3 mr-xl-3"
-                        >
-                          <i class="fas fa-envelope   fa-lg btn-icon "></i>
-                          <span class="btn-text">Message</span>
-                        </b-button>
-                      </b-col>
-
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="6"
-                        xl="6"
-                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
-                      >
-                        <b-button
-                          block
-                          size="sm"
-                          class="b-background flexx pobtn shadow mr-lg-3 mr-xl-3"
-                          variant="primary"
-                        >
-                          <i class="fas fa-user-plus  fa-lg btn-icon "></i>
-                          <span class="btn-com">Community</span>
-                        </b-button>
-                      </b-col>
-                    </b-row>
-                  </div>
-                </b-col>
-              </b-row>
-            </div>
-          </b-col>
-        </b-row>
-      </div>
-
-      <div class="people-style border shadow">
-        <b-row class="mb-1">
-          <b-col md="3" cols="4" lg="3" class="my-auto">
-            <b-avatar
-              class="p-avater"
-              variant="primary"
-              src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
-            ></b-avatar>
-          </b-col>
-
-          <b-col md="8" cols="8" lg="8">
-            <div>
-              <b-row class="shift">
-                <b-col md="12" lg="12" sm="12" cols="12">
-                  <div class="e-name">
-                    <b-row>
-                      <b-col md="6" lg="6" cols="6" sm="6" class="mt-lg-2">
-                        <div class="mt-2 mt-lg-0 mt-xl-0 username">
-                          <b> howty Itz blec </b>
+                          <b> {{people.name}} </b>
                         </div>
                       </b-col>
 
@@ -135,7 +52,13 @@
                           block
                           variant="primary"
                           size="sm"
-                          class="b-background flexx pobtn shadow mr-lg-3 mr-xl-3"
+                          class="
+                            b-background
+                            flexx
+                            pobtn
+                            shadow
+                            mr-lg-3 mr-xl-3
+                          "
                         >
                           <i class="fas fa-envelope fa-lg btn-icon"></i>
                           <span class="btn-text">{{ $t('network.Message') }} </span>
@@ -254,15 +177,23 @@
         </b-row>
       </div>
     </div>
-  </b-container>
+    <!-- {{peoples}} -->
+  </div>
 </template>
 
 <script>
-export default {};
+export default {
+  props: ["peoples"],
+};
 </script>
 
 <style scoped>
 @media only screen and (min-width: 768px) {
+  .s-cardd {
+    padding-left: 6px;
+    padding-right: 2px;
+  }
+
   .btn-text {
     margin-left: 8px;
   }
@@ -295,9 +226,9 @@ export default {};
     margin-right: 5px;
   }
 
-  .s-card {
-    padding-left: 5px;
-    padding-right: 5px;
+  .s-cardd {
+    padding-left: 6px;
+    padding-right: 2px;
   }
 }
 
@@ -457,9 +388,6 @@ f-right {
     background-clip: border-box;
     border: 1px solid rgba(0, 0, 0, 0.125);
     margin-bottom: 10px;
-
-    margin-right: -15px;
-    margin-left: -15px;
   }
 
   h6 {
@@ -510,9 +438,6 @@ f-right {
     background-clip: border-box;
     border: 1px solid rgba(0, 0, 0, 0.125);
     margin-bottom: 10px;
-
-    margin-right: -15px;
-    margin-left: -15px;
   }
 
   h6 {

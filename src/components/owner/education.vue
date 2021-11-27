@@ -141,7 +141,7 @@
         class="mb-2"
       ></b-form-datepicker>
 
-      <label>To</label>
+      <label>{{ $t('profileowner.To') }}</label>
       <b-form-datepicker
         id="example-datepicker"
         v-model="educationInput.durationTo"
@@ -165,9 +165,9 @@ export default {
     return {
       editData:[],
       options: [
-        { value: null, text: "Select" },
-        { value: "private", text: "Private" },
-        { value: "public", text: "Public" }
+        { value: null, text: this.$t('profileowner.Select') },
+        { value: "private", text: this.$t('profileowner.Private') },
+        { value: "public", text: this.$t('profileowner.Public') }
       ],
       // educations: [],
       educationInput: {

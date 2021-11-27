@@ -83,8 +83,9 @@
       </b-col>
     </b-row>
 
-    <FlashMessage />
+    <!-- <FlashMessage /> -->
     
+<<<<<<< HEAD
   <!-- </b-row> -->
   <b-row>
     <b-col cols="12">
@@ -152,9 +153,14 @@
     </b-col>
   </b-row>
 </div>
+=======
+  </div>
+>>>>>>> 4d6df2670bce3f8f1b9cdc061b702bdce641c396
 </template>
 
 <script>
+
+import moment from 'moment';
 export default {
   name: "feedbackNetwork",
   data() {
@@ -168,10 +174,18 @@ export default {
       currentIndex: -1,
       feedbacks: [],
       options: [
-        { value: "1", text: "suggestion for improvement" },
-        { value: "2", text: "Progress to your program" },
-        { value: "3", text: "New Idea for PEA-JEUNES" },
+        { value: "Improvement", text: "Suggestion for Improvement" },
+        { value: "Complaints", text: "Complaints" }
       ],
+      filters: [
+        { value: "0", text: "Any" },
+        { value: "Improvement", text: "Suggestion for Improvement" },
+        { value: "Complaints", text: "Complaints" }
+      ],
+      feedbackForm: {
+        title: "Improvement",
+        description: "",
+      },
     };
   },
   mounted(){
@@ -285,24 +299,19 @@ export default {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 20px;
   }
-
   .feedback-sent {
     font-size: 14px;
     font-family: Arial, Helvetica, sans-serif;
   }
 }
-
 @media (max-width: 762px) {
   .feedback-name {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 16px;
   }
-
   .feedback-sent {
     font-size: 12px;
     font-family: Arial, Helvetica, sans-serif;
   }
 }
 </style>
-
-

@@ -13,26 +13,33 @@
           <fas-icon class="icons" :icon="['fas', 'hands-helping']" size="lg" />
           <b> {{ $t('dashboard.My_Businesses') }} </b>  
         </h6>
+
       </span>
       <div class="s-card " style="overflow: -moz-scrollbars-vertical">
-        <div v-if="business.lenght ==0">
+
+         <div v-if="business.lenght"> 
+        
+        <Business  :business="business"   v-if="business.lenght !=0" />
+         </div>
+
+
+        <div  v-else >
           <b-row>
             <b-col>
               <div class="p-top">
                 <br />
                 <h6>{{ $t('dashboard.No_Business') }}</h6>
-
+   <router-link to="profile_owner#business">
                 <b-button variant="primary" class="busi-btn">
                   {{ $t('dashboard.Add_Business') }}
                 </b-button>
+   </router-link>
               </div>
             </b-col>
           </b-row>
         </div>
-        
-        <Business  :business="business"   v-if="business.lenght !=0" />
 
-
+       
 
 
 

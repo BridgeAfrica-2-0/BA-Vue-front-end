@@ -1,10 +1,10 @@
 <template>
   <div>
 
-         <b-row>
+    <b-row>
       <b-col cols="12" class="mx-auto">
         <b-input-group class="mb-2 px-md-3 mx-auto">
-          <b-input-group-prepend is-text>
+          <b-input-group-prepend @click="search" is-text style="cursor:pointer;">
             <b-icon-search class="text-primary border-none"></b-icon-search>
           </b-input-group-prepend>
           <b-form-input
@@ -47,7 +47,7 @@
       </b-col>
     </b-row>
     
-    <FlashMessage />
+    <!-- <FlashMessage /> -->
   </div>
 </template>
 
@@ -61,7 +61,11 @@ export default {
     return {
       url:null,
       searchTitle: "",
+<<<<<<< HEAD
       page: 0,
+=======
+      page: 1,
+>>>>>>> 4d6df2670bce3f8f1b9cdc061b702bdce641c396
       loading: false,
       peoplefollowers: [],
       displayfollowers: []
@@ -113,9 +117,19 @@ export default {
       let formData = new FormData();
       formData.append('keyword', keyword);
       console.log("network/"+this.url+"/people/follower/"+this.page);
+<<<<<<< HEAD
       this.axios
       .post("network/"+this.url+"/people/follower/"+this.page, formData)
       .then(({ data }) => {
+=======
+      let lien = "";
+      if(keyword == ""){
+          lien =  'network/'+this.url+'/people/follower/'+this.page;
+      }else{ lien ='network/'+this.url+'/people/follower/'+this.page+','+ formData}
+      this.axios
+      .post(lien)
+      .then( ({data})  => {
+>>>>>>> 4d6df2670bce3f8f1b9cdc061b702bdce641c396
        console.log(data);
        console.log(this.page);
         if(keyword){
@@ -143,11 +157,20 @@ export default {
         
     BlockUser(user_id) {
       this.loading = true;
+<<<<<<< HEAD
       console.log("network/"+this.url+"/lock/user/"+user_id);
       this.axios.delete("network/"+this.url+"/lock/user/"+user_id)
       .then(response => {
         console.log(response);
         this.blockUsers();
+=======
+      console.log("----",user_id);
+      console.log("network/"+this.url+"/lock/user/"+user_id);
+      this.axios.post("network/"+this.url+"/lock/user/"+user_id)
+      .then(response => {
+        console.log(response);
+        // this.blockUsers();
+>>>>>>> 4d6df2670bce3f8f1b9cdc061b702bdce641c396
         this.loading = false;
         this.flashMessage.show({
           status: "success",
@@ -184,7 +207,7 @@ export default {
     },
 
   }
-}
+};
 </script>
 
 <style>

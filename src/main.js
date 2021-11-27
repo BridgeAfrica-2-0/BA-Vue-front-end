@@ -17,12 +17,17 @@ import IconifyIcon from '@iconify/vue';
 import homeIconData from '@iconify-icons/mdi-light/home';
 import ReadMore from 'vue-read-more';
 import VueSocialauth from 'vue-social-auth';
-import VueSocialSharing from 'vue-social-sharing';
 
-// import plugin from './http';
 
-// Vue.use(plugin);
+import ShareNetwork from 'vue-social-sharing';
+Vue.use(ShareNetwork);
 
+// don't comment that 2 line URGENT
+import plugin from './http';
+Vue.use(plugin);
+
+
+Vue.use(require('vue-moment'));
 
 IconifyIcon.addIcon('home', homeIconData);
 
@@ -33,7 +38,7 @@ import LoadScript from 'vue-plugin-load-script';
 import InfiniteLoading from 'vue-infinite-loading';
 
 Vue.use(InfiniteLoading, {
-  /* options */
+    /* options */
 });
 Vue.use(LoadScript);
 
@@ -70,18 +75,18 @@ Vue.prototype.$axios = axios;
 //   });
 
 Vue.use(VueSocialauth, {
-  providers: {
-    facebook: {
-      clientId: process.env.VUE_APP_FACEBOOK_CLIENT_ID,
-      client_secret: process.env.VUE_APP_FACEBOOK_CLIENT_SECRETE,
-      redirectUri: process.env.VUE_APP_FACEBOOK_RETURN_URL,
+    providers: {
+        facebook: {
+            clientId: process.env.VUE_APP_FACEBOOK_CLIENT_ID,
+            client_secret: process.env.VUE_APP_FACEBOOK_CLIENT_SECRETE,
+            redirectUri: process.env.VUE_APP_FACEBOOK_RETURN_URL,
+        },
+        google: {
+            clientId: process.env.VUE_APP_GOOGLE_CLIENT_ID,
+            client_secret: process.env.VUE_APP_GOOGLE_CLIENT_SECRETE,
+            redirectUri: process.env.VUE_APP_GOOGLE_RETURN_URL,
+        },
     },
-    google: {
-      clientId: process.env.VUE_APP_GOOGLE_CLIENT_ID,
-      client_secret: process.env.VUE_APP_GOOGLE_CLIENT_SECRETE,
-      redirectUri: process.env.VUE_APP_GOOGLE_RETURN_URL,
-    },
-  },
 });
 
 import FlashMessage from '@smartweb/vue-flash-message';
@@ -98,11 +103,17 @@ import Lightbox from '@morioh/v-lightbox';
 import * as VueGoogleMaps from 'gmap-vue';
 
 
+<<<<<<< HEAD
 
  import VueSplide from "@splidejs/vue-splide";
  Vue.use(VueSplide);
  import "@splidejs/splide/dist/css/themes/splide-default.min.css";
 
+=======
+import VueSplide from "@splidejs/vue-splide";
+Vue.use(VueSplide);
+import "@splidejs/splide/dist/css/themes/splide-default.min.css";
+>>>>>>> 4d6df2670bce3f8f1b9cdc061b702bdce641c396
 
 
 // global register
@@ -138,31 +149,41 @@ Vue.use(IconsPlugin);
 //import InfiniteLoading from "vue-infinite-loading";
 
 Vue.use(InfiniteLoading, {
-  /* options */
+    /* options */
 });
 
 Vue.use(VueGoogleMaps, {
-  load: {
-    key: 'AIzaSyAGZU6cqra18t1fhN1AbzRsEc_pgt7n2C8',
-    libraries: 'places',
-  },
-  autobindAllEvents: false,
-  installComponents: true,
+    load: {
+        key: 'AIzaSyAGZU6cqra18t1fhN1AbzRsEc_pgt7n2C8',
+        libraries: 'places',
+    },
+    autobindAllEvents: false,
+    installComponents: true,
 });
 
+<<<<<<< HEAD
 //  import VueLoading from 'vue-loading-overlay';
 //  import 'vue-loading-overlay/dist/vue-loading.css';
+=======
+import VueLoading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
+Vue.use(VueLoading);
+>>>>>>> 4d6df2670bce3f8f1b9cdc061b702bdce641c396
 
 import VueYoutube from 'vue-youtube'
 
 Vue.use(VueYoutube)
+<<<<<<< HEAD
 //  Vue.use(VueLoading);
+=======
+>>>>>>> 4d6df2670bce3f8f1b9cdc061b702bdce641c396
 
 import VueAgile from 'vue-agile';
 
+
 Vue.use(VueAgile);
 
-Vue.use(VueSocialSharing);
+
 import CoolLightBox from 'vue-cool-lightbox';
 import 'vue-cool-lightbox/dist/vue-cool-lightbox.min.css';
 
@@ -176,55 +197,53 @@ import VueEasyLightbox from 'vue-easy-lightbox';
 
 // Method 1. via Vue.use
 Vue.use(VueEasyLightbox);
-
 Vue.config.productionTip = false;
+
 var user = null;
 
-// import './pusher-notification';
-import './redis-notification'
 
 new Vue({
-  router,
-  store,
-  i18n,
-  created() {
-    const userInfo = localStorage.getItem('user');
-    i18n.locale = localStorage.getItem('lang'); 
-    
-
-    console.log( i18n.locale );
-    
-    if (userInfo) {
-      const userData = JSON.parse(userInfo);
-      user = userData;
-      this.$store.commit('auth/setUserData', userData);
-    }
-    axios.interceptors.response.use(
-      response => response,
-      error => {
-        if (error.response) {
-          if (error.response.status === 401) {
-           this.$store.dispatch('auth/logout');
-          console.log('error has ocurred', error);
+    router,
+    store,
+    i18n,
+    created() {
+        const userInfo = localStorage.getItem('user');
+        i18n.locale = localStorage.getItem('lang');
 
 
-          }
+        console.log(i18n.locale);
+
+        if (userInfo) {
+            const userData = JSON.parse(userInfo);
+            user = userData;
+            this.$store.commit('auth/setUserData', userData);
         }
-        return Promise.reject(error);
-      },
-    );
+        axios.interceptors.response.use(
+            response => response,
+            error => {
+                if (error.response) {
+                    if (error.response.status === 401) {
+                        this.$store.dispatch('auth/logout');
+                        console.log('error has ocurred', error);
 
-    axios.interceptors.request.use(function (config) {
-      if (user != null) {
-        config.headers.Authorization = `Bearer  ${user.accessToken}`;
-      }
 
-      
-    
-      config.headers.common['Language'] =  i18n.locale;
-    
-      return config;
-    });
-  },
-  render: h => h(App),
+                    }
+                }
+                return Promise.reject(error);
+            },
+        );
+
+        axios.interceptors.request.use(function (config) {
+            if (user != null) {
+                config.headers.Authorization = `Bearer  ${user.accessToken}`;
+            }
+
+
+
+            config.headers.common['Language'] = i18n.locale;
+
+            return config;
+        });
+    },
+    render: h => h(App),
 }).$mount('#app');

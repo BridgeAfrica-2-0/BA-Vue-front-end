@@ -1,10 +1,10 @@
 <template>
   <div>
 
-         <b-row>
+    <b-row>
       <b-col cols="12" class="mx-auto">
         <b-input-group class="mb-2 px-md-3 mx-auto">
-          <b-input-group-prepend is-text>
+          <b-input-group-prepend @click="search" is-text style="cursor:pointer;">
             <b-icon-search class="text-primary border-none"></b-icon-search>
           </b-input-group-prepend>
           <b-form-input
@@ -18,7 +18,6 @@
       </b-col>
     </b-row>
     <br/>
- 
 
     <b-row cols="1">
       <b-col class="ml-0 mr-0"
@@ -144,10 +143,17 @@ export default {
     BlockUser(user_id) {
       this.loading = true;
       console.log("network/"+this.url+"/lock/user/"+user_id);
+<<<<<<< HEAD
       this.axios.delete("network/"+this.url+"/lock/user/"+user_id)
       .then(response => {
         console.log(response);
         this.blockUsers();
+=======
+      this.axios.post("network/"+this.url+"/lock/user/"+user_id)
+      .then(response => {
+        console.log(response);
+        // this.blockUsers();
+>>>>>>> 4d6df2670bce3f8f1b9cdc061b702bdce641c396
         this.loading = false;
         this.flashMessage.show({
           status: "success",
@@ -184,7 +190,7 @@ export default {
     },
 
   }
-}
+};
 </script>
 
 <style>

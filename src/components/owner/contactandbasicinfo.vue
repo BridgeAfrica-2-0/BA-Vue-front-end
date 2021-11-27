@@ -43,7 +43,7 @@
             ></b-form-input>
 
             <div class="fosrm-group text-right w-100">
-              <button type="submit" class="btn btn-primary orange">Save</button>
+              <button type="submit" class="btn btn-primary orange">{{ $t('profileowner.Save') }} </button>
             </div>
           </form>
         </div>
@@ -71,7 +71,7 @@
             ></b-form-input>
 
             <div class="fosrm-group text-right w-100">
-              <button type="submit" class="btn btn-primary orange">Save</button>
+              <button type="submit" class="btn btn-primary orange">{{ $t('profileowner.Save') }} </button>
             </div>
           </form>
         </div>
@@ -98,7 +98,7 @@
             ></b-form-input>
 
             <div class="fosrm-group text-right w-100">
-              <button type="submit" class="btn btn-primary orange">Save</button>
+              <button type="submit" class="btn btn-primary orange">{{ $t('profileowner.Save') }} </button>
             </div>
           </form>
         </div>
@@ -125,7 +125,7 @@
             ></b-form-input>
 
             <div class="fosrm-group text-right w-100">
-              <button type="submit" class="btn btn-primary orange">Save</button>
+              <button type="submit" class="btn btn-primary orange">{{ $t('profileowner.Save') }} </button>
             </div>
           </form>
         </div>
@@ -152,7 +152,7 @@
             ></b-form-input>
 
             <div class="fosrm-group text-right w-100">
-              <button type="submit" class="btn btn-primary orange">Save</button>
+              <button type="submit" class="btn btn-primary orange">{{ $t('profileowner.Save') }} </button>
             </div>
           </form>
         </div>
@@ -179,7 +179,7 @@
             ></b-form-input>
 
             <div class="fosrm-group text-right w-100">
-              <button type="submit" class="btn btn-primary orange">Save</button>
+              <button type="submit" class="btn btn-primary orange">{{ $t('profileowner.Save') }}</button>
             </div>
           </form>
         </div>
@@ -190,13 +190,13 @@
         ref="dobbb"
         :title="$t('profileowner.Edit_Date_of_Birth')"
         hide-footer
-        @close="cancel"
+       
       >
         <div class="modal-body">
           <form class="form-inline" action="" method="post">
 
             <div class="input-group col-md-12 pl-0 pr-0 mb-4 selec">
-              <label class="col-md-3 pl-0 pr-0 control-label">Birth Year</label>
+              <label class="col-md-3 pl-0 pr-0 control-label">{{ $t('profileowner.Birth_Year') }}</label>
               <div class="col-md-9 pr-0 pl-0">
                 <div class="form-group">
                   <b-form-datepicker id="example-datepicker" v-model="birthDate.date" :max="max" class="mb-2"></b-form-datepicker>

@@ -11,7 +11,7 @@
         <b-col class="col mt-sm-3">
           <b-tabs content-class="mt-3" fill pills>
             <b-tab :title="$t('memnetwork.Posts')"><Posts /></b-tab>
-            <b-tab :title="$t('memnetwork.Media')"><Media /></b-tab>
+            <b-tab :title="$t('memnetwork.Media')"><Media :type="'network'" :isEditor="false"/></b-tab>
             <b-tab :title="$t('memnetwork.Members')"><Members /></b-tab>
             <b-tab :title="$t('memnetwork.Feedback')"><Feedback /></b-tab>
           </b-tabs>
@@ -37,8 +37,8 @@ import Navbar from "../components/navbar";
 import Footer from "../components/footer";
 import Posts from "../components/memberNetworkF/postNetwork";
 import Parent from "../components/memberNetworkF/parent";
-import Media from "../components/memberNetworkF/mediaNetwork";
-import Members from "../components/memberNetworkF/memberNetwork";
+import Media from "@/components/owner/tabs/media";
+import Members from "../components/memberNetworkF/members";
 import Feedback from "../components/memberNetworkF/feedback";
 export default {
   components: {
@@ -48,8 +48,8 @@ export default {
     Media,
     Members,
     Parent,
-    Feedback
-  }
+    Feedback,
+  },
 };
 </script>
 

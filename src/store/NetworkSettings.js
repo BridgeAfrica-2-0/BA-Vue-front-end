@@ -92,10 +92,10 @@ export default {
     },
 
     getroles({ commit }) {
-      return axios.get("/network/roles/list")
+      return axios.get("/network/roles/show-roles")
       .then(({ data }) => {
         commit("setroles", data.data);
-        console.log("ROLES",data);
+        console.log(data);
         console.log("roles data");
       });
     },
@@ -179,6 +179,17 @@ export default {
       });
     },
 
+<<<<<<< HEAD
+=======
+    deleteEditor({ commit }, payload) {
+      console.log("payload", payload)
+      return axios.delete(`/network/${payload.path}`)
+      .then(({ data }) => {
+        return data;
+      });
+    },
+
+>>>>>>> 4d6df2670bce3f8f1b9cdc061b702bdce641c396
     updateNetworkInfo({ commit }, data) {
       console.log("updateNetworkInfo", data)
       return axios.post(`/network/${data.path}`, data.formData)

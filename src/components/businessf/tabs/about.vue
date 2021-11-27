@@ -60,9 +60,7 @@
                 ><b-link> Open now</b-link>
 
                 <b-dropdown size="sm" variant="transperent">
-                  <template #button-content>
-                    10:00AM - 7:00PM
-                  </template>
+                  <template #button-content> 10:00AM - 7:00PM </template>
                   <b-dropdown-item> 10:00AM - 7:00PM</b-dropdown-item>
                 </b-dropdown></span
               >
@@ -78,7 +76,11 @@
 export default {
   data() {
     return {
+<<<<<<< HEAD
       business_id:null,
+=======
+      business_id: null,
+>>>>>>> 4d6df2670bce3f8f1b9cdc061b702bdce641c396
       business_about: [],
 
       edit1: false,
@@ -115,8 +117,8 @@ export default {
 
     validate(idForm) {
       this.$bvModal.hide(idForm);
-    }
-  }
+    },
+  },
 };
 </script>
 

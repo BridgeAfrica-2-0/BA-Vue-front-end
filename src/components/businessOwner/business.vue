@@ -1,16 +1,23 @@
 <template>
   <div>
-    <head-page-owner></head-page-owner>
+    <head-page-owner @goto-cover-images="gotoCoverImages"></head-page-owner>
     <div class="row">
-      <div  class="text-justify mt-2 container-fluid" >
-        <b-row class="center-content" >
+      <div class="text-justify mt-2 container-fluid">
+        <b-row class="center-content">
           <b-col cols="12">
-            <b-tabs lazy content-class="mt-3 mobile-tab" fill pills >
+            <b-tabs
+              lazy
+              content-class="mt-3 mobile-tab"
+              fill
+              pills
+              v-model="currentTab"
+            >
               <b-tab title="Home"><HomePage /></b-tab>
               <b-tab title="About"><About /></b-tab>
-              <b-tab title="Media"><Media /></b-tab>
+              <b-tab title="Media"
+                ><Media :isalbum="isCover" type="business"
+              /></b-tab>
               <b-tab title="Market"><MarketPlace /></b-tab>
-              <b-tab title="Networks"><Networks /></b-tab> 
               <b-tab title="Community"><Followers /></b-tab>
             </b-tabs>
           </b-col>
@@ -21,14 +28,13 @@
 </template>
 
 <script>
-
-import HomePage from '../businessOwner/tabs/businessHome';
-import About from './tabs/about';
-import Media from '@/components/owner/tabs/media';
-import MarketPlace from './tabs/marketPlace';
-import Followers from './tabs/memberNetwork';
+import HomePage from "../businessOwner/tabs/businessHome";
+import About from "./tabs/about";
+import Media from "@/components/owner/tabs/media";
+import MarketPlace from "./tabs/marketPlace";
+import Followers from "./tabs/memberNetwork";
 //import Networks from "./tabs/networks";
-import HeadPageOwner from '@/components/businessOwner/headPageOwner';
+import HeadPageOwner from "@/components/businessOwner/headPageOwner";
 export default {
   name: "Home",
   components: {
@@ -38,61 +44,78 @@ export default {
     Media,
     MarketPlace,
     Followers,
-     Networks
+    //  Networks
   },
   data() {
-    return {};
+    return {
+      currentTab: 0,
+      tabIndex: null,
+      isCover: false,
+      tabs: ["#post", "#about", "#media", "#market", "#community"],
+    };
   },
   computed: {},
+<<<<<<< HEAD
   methods: {},
   created() {
     // this.currentTab =
       // localStorage.getItem('ba-business-active-tab') !== null ? localStorage.getItem('ba-business-active-tab') : 0;
     // this.currentTab = this.$route.query.currentTab ? this.$route.query.currentTab : 0;
     console.log(this.currentTab);
+=======
+  methods: {
+    gotoCoverImages() {
+      console.log("parent cover method");
+      this.isCover = true;
+      this.currentTab = 2;
+    },
+  },
+  created() {
+    let tab = this.tabs.findIndex((tab) => tab === this.$route.hash);
+
+    if (tab == -1) {
+      this.currentTab =
+        localStorage.getItem("ba-business-active-tab") !== null
+          ? localStorage.getItem("ba-business-active-tab")
+          : 0;
+    } else {
+      this.currentTab = tab;
+    }
+>>>>>>> 4d6df2670bce3f8f1b9cdc061b702bdce641c396
   },
 
   watch: {
     currentTab: (newVal, oldVal) => {
+<<<<<<< HEAD
       localStorage.setItem('ba-business-active-tab', newVal);
+=======
+      localStorage.setItem("ba-business-active-tab", newVal);
+    },
+
+    $route(to, from) {
+      console.log(to.hash);
+      this.currentTab = this.tabs.findIndex((tab) => tab === to.hash);
+>>>>>>> 4d6df2670bce3f8f1b9cdc061b702bdce641c396
     },
   },
 };
 </script>
 
-
 <style>
-
-
-
-
 @media only screen and (max-width: 768px) {
-   
-
-  .mobile-tab .nav-fill > .nav-link, .nav-fill .nav-item {
+  .mobile-tab .nav-fill > .nav-link,
+  .nav-fill .nav-item {
     flex: 1 1 auto;
     text-align: center;
     width: 20px;
+  }
 }
-
-
-}
-
-
-
-
 </style>
 
-
-
 <style scoped>
-
-
-
-alig{
-
-  padding-left:70px;
-   padding-right:70px
+alig {
+  padding-left: 70px;
+  padding-right: 70px;
 }
 .images {
   display: flex;
@@ -126,22 +149,11 @@ img {
   }
 }
 
-
-
 @media only screen and (min-width: 768px) {
- 
   .center-content {
     padding-right: 63px;
 
     padding-left: 63px;
-
   }
-
 }
-
-
-
-
-
-
 </style>

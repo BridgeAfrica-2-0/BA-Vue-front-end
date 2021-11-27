@@ -1,4 +1,3 @@
-
 import AppRepository from "./repositories"
 
 export default {

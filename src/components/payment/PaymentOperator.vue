@@ -110,7 +110,7 @@
 				this.$emit("showreview");
 			},
 			requestPayment() {
-				if (this.operator !== "" && this.price > 0)
+				// if (this.operator !== "" && this.price > 0)
 					this.$emit("requestpayment", this.price);
 			},
 			formatMoney(money) {

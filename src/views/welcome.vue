@@ -16,7 +16,7 @@
     >
       <div>
         <h4 class="text-center username f-30">
-          {{ $t('welcome.Hello') }} <b> {{ username }} </b> {{ $t('welcome.letsget_started') }}
+          {{ $t('welcome.Hello') }} <b> {{ username }} </b>{{ $t('welcome.letsget_started') }}
         </h4>
         <br />
         <br />
@@ -113,18 +113,16 @@
                       <div></div>
                     </div>
                   </div>
+                 
                   <div class="col-md-6">
                     <div class="form-group" label-class="username">
                       <label for="username" class="username"> {{ $t('welcome.DOB') }} :</label
                       ><br />
-                      <input
-                        type="date"
-                        name="dob"
-                        id="dob"
-                        v-model="dob"
-                        :placeholder="$t('welcome.Busness_Name')"
-                        class="form-control text"
-                      />
+
+                       <b-form-datepicker  name="dob" :max="min" id="dob"
+
+                        v-model="dob" class=" text"  :locale=" this.$i18n.locale"  :placeholder="$t('welcome.Busness_Name')"></b-form-datepicker>
+
                     </div>
 
                     <div class="form-group">
@@ -333,14 +331,12 @@
                     <div class="form-group" label-class="username">
                       <label for="username" class="username"> {{ $t('welcome.DOB') }} :</label
                       ><br />
-                      <input
-                        type="date"
-                        name="dob"
-                        id="dob"
-                        v-model="dob"
-                        :placeholder="$t('welcome.Busness_Name')"
-                        class="form-control text"
-                      />
+                     
+
+                         <b-form-datepicker  name="dob" :max="min" id="dob"
+
+                        v-model="dob" class=" text"   :placeholder="$t('welcome.Busness_Name')"></b-form-datepicker>
+
                     </div>
 
                     <div class="form-group">
@@ -841,7 +837,7 @@ import axios from "axios";
 
 import Multiselect from "vue-multiselect";
 import { validationMixin } from "vuelidate";
-
+import moment from 'moment';
 import { required, email, minLength } from "vuelidate/lib/validators";
 
 export default {
@@ -850,6 +846,8 @@ export default {
     return {
       useas: "",
       municipality: [],
+      min: moment().subtract(18, 'years').format('YYYY-MM-DD'),
+        moment: moment,
       locality: [],
       division: [],
       selectedusecase: "",
@@ -908,8 +906,8 @@ export default {
       ],
 
       options: [
-        { text: " Person", value: "person" },
-        { text: " Business ", value: "business" },
+        { text:  this.$t('welcome.Person'), value: "person" },
+        { text:  this.$t('welcome.Business'), value: "business" },
       ],
 
       category: "",

@@ -101,7 +101,7 @@
 <script>
 import Business from "@/components/businessf/tabs/business";
 import People from "@/components/businessf/tabs/people";
-import Network from "@/components/businessf/tabs/network";
+import Network from "@/components/businessf/tabs/networks";
 export default {
   name: "comunitiDashboard",  
   components: {

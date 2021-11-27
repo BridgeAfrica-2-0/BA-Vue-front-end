@@ -1,12 +1,17 @@
 // import * as firebase from 'firebase/app';
 // import 'firebase/messaging';
 
-import { mapGetters, mapActions, mapMutations } from 'vuex';
-import { formatNumber, fromNow } from '@/helpers';
+import { mapGetters, mapActions, mapMutations } from "vuex";
+import { formatNumber, fromNow } from "@/helpers";
 
-import NotFound from '@/components/NotFoundComponent';
-import NoMoreData from '@/components/businessOwner/PaginationMessage';
-import ClipLoader from 'vue-spinner/src/ClipLoader.vue';
+import NotFound from "@/components/NotFoundComponent"
+import NoMoreData from "@/components/businessOwner/PaginationMessage"
+import ClipLoader from 'vue-spinner/src/ClipLoader.vue'
+
+
+
+// import './pusher-notification';
+import { initRedis } from '@/redis-notification'
 
 export const FireBase = {
   data() {
@@ -21,7 +26,7 @@ export const FireBase = {
 
   methods: {
     receiveMessage() {
-      console.log('call echo firebase');
+      console.log("call echo firebase")
       // try {
       //   firebase.messaging().onMessage((payload) => {
       //     // debugger
@@ -43,79 +48,73 @@ export const FireBase = {
       this.subject = subject;
 
       const message = `<span><b>${this.from}</b></span><br>${this.subject}`;
-
-      // this.$notify({
-      //   group: 'foo',
-      //   type: 'success',
-      //   title: this.title,
-      //   text: message,
-      //   duration: 5000,
-      // });
     },
   },
 
   created() {
     console.info('create notification info');
   },
-};
+}
+
 export const loader = {
   methods: {
     onNotified(text) {
       this.$notify({
-        group: 'notification',
-        title: 'Important message',
-        type: 'warn',
+        group: "notification",
+        title: "Important message",
+        type: "warn",
         duration: 5000,
         text,
       });
     },
     ...mapActions({
-      setLoaderState: 'search/LOADING',
-    }),
+      setLoaderState: "search/LOADING"
+    })
   },
   computed: {
     ...mapGetters({
-      loaderState: 'search/LOADING',
-    }),
+      loaderState: "search/LOADING"
+    })
   },
   data: () => ({
-    overlay: null,
+    overlay: null
   }),
-};
+
+}
 
 export const search = {
   components: {
     NotFound,
-    ScrollLoader: ClipLoader,
+    ScrollLoader: ClipLoader
   },
   props: {
     title: {
-      type: String,
-    },
+      type: String
+    }
   },
 
   data: () => ({
-    haveNotData: false,
+    haveNotData: false
   }),
 
   destroyed() {
     this.page(1);
     this.$store.commit('search/RESET_RESULT');
-    window.removeEventListener('scroll', this.onscroll);
+    window.removeEventListener('scroll', this.onscroll)
   },
 
   computed: {
     ...mapGetters({
-      callback: 'search/GET_CURRENT_PAGINATE_CALLBACK',
-      getStack: 'search/STACK_VALUE',
+      callback: "search/GET_CURRENT_PAGINATE_CALLBACK",
+      getStack: "search/STACK_VALUE",
     }),
   },
   methods: {
     ...mapActions({
-      page: 'search/SET_CURRENT_PAGINATION_PAGE',
+      page: "search/SET_CURRENT_PAGINATION_PAGE",
     }),
-  },
-};
+  }
+}
 
 export const commentMixinsBuisness = {
   data() {
@@ -123,9 +122,9 @@ export const commentMixinsBuisness = {
       reply: false,
       comment: null,
       comments: [],
-      text: '',
+      text: "",
       createPostRequestIsActive: false,
-      loadComment: false,
+      loadComment: false
     };
   },
 
@@ -138,7 +137,7 @@ export const commentMixinsBuisness = {
       profile: 'auth/profilConnected',
     }),
     icon() {
-      return this.comment.is_liked ? 'suit-heart-fill' : 'suit-heart';
+      return this.comment.is_liked ? "suit-heart-fill" : "suit-heart";
     },
   },
 
@@ -183,15 +182,15 @@ export const commentMixinsBuisness = {
         this.page = request.data.length ? this.page + 1 : this.page;
       }
 
-      this.loadComment = false;
+      this.loadComment = false
     },
 
-
     onReply: async function () {
-      if (!(this.text.trim().length > 2 && !this.createPostRequestIsActive)) return false;
+      if (!(this.text.trim().length > 2 && !this.createPostRequestIsActive))
+        return false;
 
-      this.createPostRequestIsActive = true;
-      this.loadComment = true;
+      this.createPostRequestIsActive = true
+      this.loadComment = true
 
       const request = await this.$repository.share.createReplyComment({
         post: this.uuid,
@@ -203,16 +202,16 @@ export const commentMixinsBuisness = {
       });
 
       if (request.success) {
-        this.page = 1;
+        this.page = 1
         this.onShowReply();
-        this.text = '';
+        this.text = "";
 
         this.comment = Object.assign(this.comment, {
           reply_comment_count: this.comment.reply_comment_count + 1,
         });
       }
-      this.createPostRequestIsActive = false;
-      this.loadComment = false;
+      this.createPostRequestIsActive = false
+      this.loadComment = false
     },
 
     showReply() {
@@ -220,25 +219,26 @@ export const commentMixinsBuisness = {
       if (this.reply) this.onShowReply();
     },
   },
-};
+}
 
 export const NoMoreDataForComment = {
   components: {
-    NoMoreData,
+    NoMoreData
   },
   data: () => ({
     hasData: true,
-    page: 1,
-  }),
-};
+    page: 1
+  })
+}
 
 export const commentMixins = {
+
   data() {
     return {
       reply: false,
       comment: null,
       comments: [],
-      text: '',
+      text: "",
       createPostRequestIsActive: false,
     };
   },
@@ -247,7 +247,7 @@ export const commentMixins = {
   },
   computed: {
     icon() {
-      return this.comment.is_liked ? 'suit-heart-fill' : 'suit-heart';
+      return this.comment.is_liked ? "suit-heart-fill" : "suit-heart";
     },
   },
 
@@ -281,13 +281,15 @@ export const commentMixins = {
         page: 1,
       });
 
+
       if (request.success) this.comments = request.data;
     },
 
     onReply: async function () {
-      if (!(this.text.trim().length > 2 && !this.createPostRequestIsActive)) return false;
+      if (!(this.text.trim().length > 2 && !this.createPostRequestIsActive))
+        return false;
 
-      this.createPostRequestIsActive = true;
+      this.createPostRequestIsActive = true
 
       const request = await this.$repository.share.createReplyComment({
         post: this.uuid,
@@ -300,14 +302,16 @@ export const commentMixins = {
 
       if (request.success) {
         this.onShowReply();
-        this.text = '';
+        this.text = "";
 
         this.comment = Object.assign(this.comment, {
           reply_comment_count: this.comment.reply_comment_count + 1,
         });
+
+
       }
 
-      this.createPostRequestIsActive = false;
+      this.createPostRequestIsActive = false
     },
 
     showReply() {
@@ -315,32 +319,57 @@ export const commentMixins = {
       if (this.reply) this.onShowReply();
     },
   },
-};
+}
 
 export const Pusher = {
+
   methods: {
     ...mapMutations({
-      newNotificationBusiness: 'notification/NEW_BUSINESS_NOTIFICATION',
-      newNotificationProfile: 'notification/NEW_PROFILE_NOTIFICATION',
-      newNotificationNetwork: 'notification/NEW_NETWORK_NOTIFICATION',
+      newNotificationBusiness: "notification/NEW_BUSINESS_NOTIFICATION",
+      newNotificationProfile: "notification/NEW_PROFILE_NOTIFICATION",
+      newNotificationNetwork: "notification/NEW_NETWORK_NOTIFICATION",
     }),
 
     pusher() {
       // Network notification
-      window.Echo.channel('network-11-5').listen('NetworkNotificationEvent', payload => console.log(payload));
+      window.Echo.channel('network-11-5')
+        .listen("NetworkNotificationEvent", payload => console.log(payload))
 
       // Business notification
-      window.Echo.channel('network-11-5').listen('NetworkNotificationEvent', payload =>
-        this.newNotificationBusiness(payload),
-      );
+      window.Echo.channel('network-11-5')
+        .listen("NetworkNotificationEvent", payload => this.newNotificationBusiness(payload))
+    }
+  },
+
+  created() {
+    console.log("call echo pusher")
+    this.pusher()
+  }
+}
+
+export const WhoIsIt = {
+  computed: {
+    ...mapGetters({
+      profile: 'auth/profilConnected',
+      token: 'auth/getAuthToken'
+    })
+  },
+
+  methods: {
+    ...mapMutations({
+      auth: 'auth/profilConnected',
+    }),
+    async getAuth() {
+      const response = await this.$repository.share.WhoIsConnect({ networkId: null });
+      if (response.success) this.auth(response.data);
+      console.log(this.profile)
     },
   },
 
   created() {
-    console.log('call echo pusher');
-    this.pusher();
-  },
-};
+    this.getAuth()
+  }
+}
 
 export const knowWhoIsConnected = {
 
@@ -361,32 +390,106 @@ export const knowWhoIsConnected = {
 }
 
 export const Redis = {
+
+  data: () => ({
+    strategy: null,
+  }),
+
+  computed: {
+    ...mapGetters({
+      profile: 'auth/profilConnected',
+      token: 'auth/getAuthToken'
+    })
+  },
+
+  watch: {
+    '$store.state.auth.profilConnected': function () {
+      this.updateEventListener(this.$store.state.auth.profilConnected.user_type)
+    }
+  },
+
   methods: {
     ...mapMutations({
-      newNotificationBusiness: 'notification/NEW_BUSINESS_NOTIFICATION',
-      newNotificationProfile: 'notification/NEW_PROFILE_NOTIFICATION',
-      newNotificationNetwork: 'notification/NEW_NETWORK_NOTIFICATION',
+      newNotificationBusiness: "notification/NEW_BUSINESS_NOTIFICATION",
+      newNotificationProfile: "notification/NEW_PROFILE_NOTIFICATION",
+      newNotificationNetwork: "notification/NEW_NETWORK_NOTIFICATION",
+      auth: "auth/profilConnected"
     }),
 
-    initBusinessNotification: async function () {
-      const response = this.$repository.notification.business();
-      if (response.status) this.newNotificationBusiness({ init: true, data: response.data });
+    async getAuth() {
+      let response = null
+      try {
+        response = await this.$repository.share.WhoIsConnect({ businessId: this.route.params.id });
+      } catch (error) {
+        response = await this.$repository.share.WhoIsConnect({ businessId: null });
+      }
+
+      if (response.access) this.auth(response.data);
     },
 
-    redis() {
-      console.log('call echo redis');
-      window.Redis.channel('user.1').listen('.UserEvent', payload => {
-        console.log(payload);
-      });
+    initBusinessNotification: async function () {
+      const response = this.$repository.notification.business()
+      if (response.status)
+        this.newNotificationBusiness({ init: true, data: response.data })
     },
+
+    listenBusinessEvent() {
+      initRedis(this.token)
+      const $event = `business-channel${this.profile.id}`
+
+      window.Redis.private($event)
+        .listen(".BusinessNotificationEvent", payload => {
+          console.log(payload)
+          this.newNotificationBusiness({ init: false, data: payload.data })
+        })
+    },
+
+    listenProfileEvent() {
+      // initRedis(this.token)
+      const $event = `user.${this.profile.id}`;
+
+      window.Redis.private($event)
+        .listen(".UserNotification", payload => {
+          this.newNotificationProfile({ init: false, data: payload.notification })
+        })
+    },
+
+    listenNetworkeEvent() {
+      // initRedis(this.token)
+      const $event = `user.${this.profile.id}`;
+
+      window.Redis.private($event)
+        .listen(".NetworkNotification", payload => {
+          this.newNotificationNetwork({ init: false, data: payload.notification })
+        })
+    },
+
+    updateEventListener(type) {
+      try {
+        this.strategy[type]()
+      } catch (error) {
+        console.error(new Error(error))
+      }
+    },
+
+    init: async function () {
+      if (this.profile) {
+        await this.getAuth()
+        this.updateEventListener(this.profile.user_type)
+      }
+    }
   },
+
 
   created() {
-    this.initBusinessNotification();
-    //this.$repository.notification.profile();
-    this.redis();
-  },
-};
+    this.strategy = {
+      user: () => this.listenProfileEvent(),
+      business: () => this.listenBusinessEvent(),
+      network: () => this.listenNetworkeEvent(),
+    }
+    // this.init()
+  }
+}
 
 export const FirebaseNotification = {
   methods: {
@@ -412,11 +515,63 @@ export const FirebaseNotification = {
       // } catch (error) {
       //   console.log(error);
       // }
-    },
+    }
   },
 
   created() {
-    console.log('call laravel firebase');
-    this.notified();
-  },
-};
+    console.log("call laravel firebase")
+    this.notified()
+  }
+}
+
+
+export const isYourOwnPostMixins = {
+
+  computed: {
+    isYourOwnPost() {
+      return (this.profile.id == this.item.user_id) && (this.profile.user_type == this.item.poster_type)
+    },
+    ...mapGetters({
+      profile: 'auth/profilConnected',
+    }),
+
+  }
+}
+
+export const PostComponentMixin = {
+
+  methods: {
+    checkMediaType(media) {
+      return media.split('/')[0];
+    },
+    mapmediae(media) {
+      let mediaarr = [];
+
+      media.forEach((item) => {
+        let type = this.checkMediaType(item.media_type);
+        if (type != 'video') {
+          mediaarr.push(item.media_url);
+        }
+      });
+
+      return mediaarr;
+    },
+
+    mapvideo(media) {
+      let mediaarr = [];
+      media.forEach((item) => {
+        let type = this.checkMediaType(item.media_type);
+        if (type == 'video') {
+          mediaarr.push(item.media_url);
+        }
+      });
+
+      return mediaarr;
+    },
+  }
+}
+
+export const AllPostFeatureMixin = {
+  mixins: [PostComponentMixin],
+
+}

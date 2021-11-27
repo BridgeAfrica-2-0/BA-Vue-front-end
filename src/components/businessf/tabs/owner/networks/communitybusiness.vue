@@ -14,7 +14,7 @@
         <b-col md="5" cols="7" lg="9" xl="5" sm="5">
           <p class="textt text">
             <strong class="title"> {{ member.name }} </strong> <br />
-            {{ member.category[0].name }}
+              <span v-if="member.category.length">  {{ member.category[0].name }}</span>
             <br />
             {{ member.communityNum }}
             {{ $t('network.Community') }} <br />
@@ -44,8 +44,9 @@
                   size="sm"
                   class="b-background shadow"
                   variant="primary"
+                  @click="$emit('handleFollow', member)"
                 >
-                  <i class="fas fa-user-plus fa-lg btn-icon"></i>
+                  <i :class="member.is_follow ? 'fas fa-user-minus fa-lg btn-icon':'fas fa-user-plus fa-lg btn-icon'"></i>
                   <span class="btn-com">{{ $t('network.Community') }}</span>
                 </b-button>
               </b-col>

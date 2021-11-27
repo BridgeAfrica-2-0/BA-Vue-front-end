@@ -79,31 +79,21 @@ export default {
     setSubmitPost(state, payload) {
       state.images = payload;
     },
-
     setProfilePic(state, payload) {
       state.images = payload;
     },
-
     setCoverPic(state, payload) {
       state.images = payload;
     },
-
     deleteImage(state, payload) {
       state.images = payload;
     },
-
     downloadPic(state, payload) {
       state.images = payload;
     },
 
-
     updateAlbum(state, payload) {
       const newState = state.albums.map(album => (album.id == payload.id) ? Object.assign(album, { name: payload.name }) : album)
-      state.albums = newState
-    },
-
-    updateAlbumItem(state, payload) {
-      const newState = state.albums.map(album => (album.id == payload.id) ? Object.assign(album, { items: ('remove' == payload.action) ? parseInt(album.items) - 1 : parseInt(album.items) + 1 }) : album)
       state.albums = newState
     },
 
@@ -123,7 +113,6 @@ export default {
       const res = await axios.get("profile/post/media/");
       commit("ownerPostImages", res.data);
     },
-
 
     async getAlbumImages({ commit }, id) {
       const res = await axios.get(`profile/album/pictures/${id}`);
@@ -156,7 +145,7 @@ export default {
     },
 
     async submitPost({ commit }, payload) {
-      return axios.post(`profile/upload/${payload.albumID}`, payload.data);
+      return axios.post(`profile/upload/${payload.id}`, payload.data);
     },
 
     async setProfilePic({ commit }, id) {

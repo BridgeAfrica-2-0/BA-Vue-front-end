@@ -6,8 +6,8 @@
         <span class="float-right">
           <b-dropdown size="sm" variant="outline " class="primary">
             <template class="more" #button-content> </template>
-            <b-dropdown-item> Edit </b-dropdown-item>
-            <b-dropdown-item>Delete</b-dropdown-item>
+            <b-dropdown-item> {{ $t('businessowner.Edit') }} </b-dropdown-item>
+            <b-dropdown-item>{{ $t('businessowner.Delete') }}</b-dropdown-item>
           </b-dropdown>
         </span>
         <p class="msg text">

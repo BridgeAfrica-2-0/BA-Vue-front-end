@@ -20,7 +20,7 @@
                       </b-col>
 
                       <b-col md="6" lg="6" cols="6" sm="6" class="mt-3 mt-lg-2 mt-xl-2">
-                        <h6 class="follower">{{ count(item.followers) }} Community</h6>
+                        <h6 class="follower">{{ count(item.followers) }} {{ $t('businessowner.Community') }}</h6>
                       </b-col>
                     </b-row>
                   </div>
@@ -38,7 +38,7 @@
                           @click="cta(item)"
                         >
                           <i class="fas fa-envelope fa-lg btn-icon"></i>
-                          <span class="btn-text">Message</span>
+                          <span class="btn-text"> {{ $t('businessowner.Message') }}</span>
                         </b-button>
                       </b-col>
 
@@ -56,7 +56,7 @@
                             class="fas fa-lg btn-icon"
                             :class="item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"
                           ></i>
-                          <span class="btn-com">Community</span>
+                          <span class="btn-com"> {{ $t('businessowner.Community') }}</span>
                         </b-button>
                       </b-col>
                     </b-row>

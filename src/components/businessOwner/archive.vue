@@ -22,19 +22,19 @@
                       text="Manage"
                       class="m-md-2"
                     >
-                      <b-dropdown-item @click="updateStatus(9,'archive')">Archive</b-dropdown-item>
-                      <b-dropdown-item @click="updateStatus(9,'cancel')">Delete</b-dropdown-item>
-                      <b-dropdown-item @click="updateStatus(9,'re-shedule')">reshedule</b-dropdown-item>
+                      <b-dropdown-item @click="updateStatus(9,'archive')">{{ $t('businessowner.Archive') }}</b-dropdown-item>
+                      <b-dropdown-item @click="updateStatus(9,'cancel')">{{ $t('businessowner.Delete') }}</b-dropdown-item>
+                      <b-dropdown-item @click="updateStatus(9,'re-shedule')">{{ $t('businessowner.Reshedule') }}</b-dropdown-item>
                     </b-dropdown>
                   </div>
                 </div>
-                <span class="gras">Order</span>
+                <span class="gras">{{ $t('businessowner.Order') }}</span>
                 <span class="text-success order">#12324253</span> <br />
                 <span class="flou">yaoundé 12/12/2021 12H00</span>
               </div>
 
              <span class="row posstatus">
-                <p class="h3 statusp">status:</p>
+                <p class="h3 statusp">{{ $t('businessowner.status') }}:</p>
               <h3 class="text-success h3 margstatus ">{{ i }}</h3>
              </span>
             </div>
@@ -50,11 +50,11 @@
               </div>
 
               <div class="col-4 text-end">
-                <h3 class="h3 margm2">Product Qte :</h3>
-                <h3 class="h3 margm2">Price:</h3>
+                <h3 class="h3 margm2">{{ $t('businessowner.Product_Qte') }} :</h3>
+                <h3 class="h3 margm2">{{ $t('businessowner.Price') }}:</h3>
 
-                <h3 class="h3 margm2">shipping cost:</h3>
-                <h3 class="h3 margm2">Total :</h3>
+                <h3 class="h3 margm2">{{ $t('businessowner.shipping_cost') }}:</h3>
+                <h3 class="h3 margm2">{{ $t('businessowner.Total') }} :</h3>
               </div>
 
               <div class="col-4">
@@ -73,7 +73,7 @@
             <div class="justify-content-center container row">
               <div class="">
                 <button  @click="updateStatus(9,'shipped')" class="buttonm btn shadow text-center">
-                  <h3 class="h3 button-text">shipped</h3>
+                  <h3 class="h3 button-text">{{ $t('businessowner.shipped') }}</h3>
                 </button>
               </div>
             </div>
@@ -98,8 +98,8 @@
       <!-- navigation--------------- -->
 
       <div class="justify-content-between container row my-4">
-        <div class="col order"><h3 class="bold1">My orders</h3></div>
-        <div class="status"><h3 class="text-danger">clear history</h3></div>
+        <div class="col order"><h3 class="bold1">{{ $t('businessowner.My_orders') }}</h3></div>
+        <div class="status"><h3 class="text-danger">{{ $t('businessowner.clear_history') }}</h3></div>
       </div>
 
       <div>
@@ -114,14 +114,14 @@
                     text="Manage"
                     class="m-md-2"
                   >
-                    <b-dropdown-item @click="updateStatus(9,'archive')">Archive</b-dropdown-item>
-                    <b-dropdown-item @click="updateStatus(9,'cancel')">Delete</b-dropdown-item>
-                    <b-dropdown-item @click="updateStatus(9,'re-shedule')">reshedule</b-dropdown-item>
+                    <b-dropdown-item @click="updateStatus(9,'archive')">{{ $t('businessowner.Archive') }}</b-dropdown-item>
+                    <b-dropdown-item @click="updateStatus(9,'cancel')">{{ $t('businessowner.Delete') }}</b-dropdown-item>
+                    <b-dropdown-item @click="updateStatus(9,'re-shedule')">{{ $t('businessowner.Reshedule') }}</b-dropdown-item>
                   </b-dropdown>
                 </div>
               </div>
               <router-link to="/business_owner/ordersdetail">
-              <span class="gras">Order</span>
+              <span class="gras">{{ $t('businessowner.Order') }}</span>
               <span class="text-success">#12324253</span> <br />
               </router-link>
               <span class="flou">yaoundé 12/12/2021 12H00</span>
@@ -138,11 +138,11 @@
               </div>
 
               <div class="col-2 text-end text-start bold">
-                <h3>Product Qte :</h3>
-                <h3>Price :</h3>
+                <h3>{{ $t('businessowner.Product_Qte') }} :</h3>
+                <h3>{{ $t('businessowner.Price') }} :</h3>
 
-                <h3>shipping cost:</h3>
-                <h3>Total :</h3>
+                <h3>{{ $t('businessowner.shipping_cost') }}:</h3>
+                <h3>{{ $t('businessowner.Total') }} :</h3>
               </div>
 
               <div class="col-3 text-start">
@@ -153,13 +153,13 @@
               </div>
 
               <div class="col" id="hidedesktop1">
-                <h3 class="bold1">status</h3>
+                <h3 class="bold1">{{ $t('businessowner.status') }}</h3>
                 <h3 class="text-success">{{ i }}</h3>
               </div>
 
               <div class="container d-flex justify-content-end btn-marg">
                 <button @click="updateStatus(9,'shipped')" class="button btn shadow">
-                  <h3 class="h3 button-text">Shipped</h3>
+                  <h3 class="h3 button-text">{{ $t('businessowner.Shipped') }}</h3>
                 </button>
               </div>
 

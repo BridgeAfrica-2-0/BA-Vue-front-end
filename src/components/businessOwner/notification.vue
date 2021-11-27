@@ -5,7 +5,7 @@
         <b-col>
           <div class="b-bottom f-left">
             <input @click="selectall" type="checkbox" />
-            Select All
+            {{ $t('businessowner.Select_All') }}
           </div>
         </b-col>
         <b-col>
@@ -15,7 +15,7 @@
               variant="primary"
               class="a-button-l duration"
             >
-              Mark as Read</b-button
+              {{ $t('businessowner.Mark_as_Read') }}</b-button
             >
             <b-button
               @click="deleteAll(selected)"
@@ -23,7 +23,7 @@
               variant="primary"
               class="a-button-l duration ml-1"
             >
-              Delete</b-button
+              {{ $t('businessowner.Delete') }}</b-button
             >
           </div>
         </b-col>
@@ -76,7 +76,7 @@
           class="load text-center"
         >
           <b-row class="text-center">
-            <p>No notifications to show !!</p>
+            <p>{{ $t('businessowner.No_notifications_to_show') }} !!</p>
           </b-row>
         </b-col>
         <hr width="100%" />

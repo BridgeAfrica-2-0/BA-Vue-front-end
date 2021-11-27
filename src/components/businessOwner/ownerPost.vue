@@ -9,7 +9,7 @@
           <b-avatar variant="primary" square class="img-fluid avat-comment" :src="business_intro.logo_path"></b-avatar>
         </b-col>
         <b-col cols="9" md="11" class="p-0 m-0 pr-3">
-          <input :placeholder="$t('profileowner.Post_a_business_update')" v-b-modal.modal-xl class="comment" type="text" />
+          <input :placeholder="$t('businessowner.Post_a_business_update')" v-b-modal.modal-xl class="comment" type="text" />
           <fas-icon class="primary send-cmt" :icon="['fas', 'paper-plane']" />
         </b-col>
       </b-row>
@@ -29,14 +29,14 @@
             <!-- Add Movie -->
             <b-col cols="5" class="text-right m-0 p-0">
               <b-button
-                :title="$t('profileowner.Add_Movie')"
+                :title="$t('businessowner.Add_Movie')"
                 size="sm"
                 variant="outline-primary"
                 @click="$refs.movie.click()"
                 class="post-btn"
               >
                 <fas-icon class="icons" :icon="['fas', 'photo-video']" size="lg" />
-                <span class="username"> {{ $t('profileowner.Photo_Video') }}</span>
+                <span class="username"> {{ $t('businessowner.Photo_Video') }}</span>
               </b-button>
             </b-col>
             <!-- Attach File-->
@@ -50,21 +50,21 @@
                 ref="document2"
               />
               <b-button
-                :title="$t('profileowner.Add_Hyperlink')"
+                :title="$t('businessowner.Add_Hyperlink')"
                 size="sm"
                 variant="outline-primary"
                 @click="$refs.document2.click()"
                 class="post-btn"
               >
                 <fas-icon class="icons" :icon="['fas', 'file']" size="lg" />
-                <span class="username"> {{ $t('profileowner.Attach_File') }} </span>
+                <span class="username"> {{ $t('businessowner.Attach_File') }} </span>
               </b-button>
             </b-col>
             <!-- Post-->
             <b-col cols="3" class="text-right p-0 m-0">
-              <b-button :title="$t('profileowner.Add_Hyperlink')" size="sm" variant="outline-primary" @click="createPost_" class="post-btn">
+              <b-button :title="$t('businessowner.Add_Hyperlink')" size="sm" variant="outline-primary" @click="createPost_" class="post-btn">
                 <fas-icon class="icons" :icon="['fas', 'paper-plane']" size="lg" />
-                <span class="username"> {{ $t('profileowner.Post') }} </span>
+                <span class="username"> {{ $t('businessowner.Post') }} </span>
               </b-button>
             </b-col>
           </b-row>
@@ -76,7 +76,7 @@
     <b-card class="px-md-3">
       <div class="">
         <div class="col-md-12 col-lg-12 d-flex align-items-stretch mb-lg-0" style="padding-left: 0; padding-top: 3px">
-          <b-modal id="modal-edit" ref="modal-edit" centered hide-footer :title="$t('profileowner.Update_Post')" @hidden="resetPostData">
+          <b-modal id="modal-edit" ref="modal-edit" centered hide-footer :title="$t('businessowner.Update_Post')" @hidden="resetPostData">
             <b-row ref="loader">
               <b-col cols="1" class="m-0 p-0"></b-col>
               <b-col cols="2" class="m-0 p-0">
@@ -97,14 +97,14 @@
                     id="textarea-small"
                     autofocus
                     class="mb-2 border-none"
-                    :placeholder="$t('profileowner.Post_a_business_update')"
+                    :placeholder="$t('businessowner.Post_a_business_update')"
                     v-model="edit_description"
                   ></b-form-textarea>
 
                   <i></i>
                 </div>
                 <div class="bordder">
-                  <span class="float-left"> {{ $t('profileowner.Add_to_Your_Post') }} </span>
+                  <span class="float-left"> {{ $t('businessowner.Add_to_Your_Post') }} </span>
                   <span class="float-right">
                     <b-button-group size="sm" class="">
                       <input id="video" type="file" hidden />
@@ -125,11 +125,11 @@
                         ref="document"
                       />
 
-                      <b-button :title="$t('profileowner.Add_Movie')" size="sm" variant="outline-primary" @click="$refs.movies.click()">
+                      <b-button :title="$t('businessowner.Add_Movie')" size="sm" variant="outline-primary" @click="$refs.movies.click()">
                         <fas-icon class="icons" :icon="['fas', 'photo-video']" size="lg" />
                       </b-button>
                       <b-button
-                        :title="$t('profileowner.Add_Hyperlink')"
+                        :title="$t('businessowner.Add_Hyperlink')"
                         size="sm"
                         variant="outline-primary"
                         @click="$refs.document.click()"
@@ -143,7 +143,7 @@
 
                 <div v-for="hyperlink in createPost.hyperlinks" :key="hyperlink.fileName" class="bordder">
                   <span class="float-left"> {{ hyperlink.fileName }} </span>
-                  <span class="float-right" @click="deleteItem(hyperlink.fileName)"> {{ $t('profileowner.delete') }} </span>
+                  <span class="float-right" @click="deleteItem(hyperlink.fileName)"> {{ $t('businessowner.delete') }} </span>
                 </div>
 
                 <div v-for="(movie, index) in edit_image" :key="movie.id" class="">
@@ -178,7 +178,7 @@
 
                 <span>
                   <b-button @click="updatePost" variant="primary" block
-                    ><b-icon icon="cursor-fill" variant="primary"></b-icon> {{ $t('profileowner.Publish') }}</b-button
+                    ><b-icon icon="cursor-fill" variant="primary"></b-icon> {{ $t('businessowner.Publish') }}</b-button
                   >
                 </span>
               </b-col>
@@ -186,7 +186,7 @@
             </b-row>
           </b-modal>
 
-          <b-modal id="modal-xl" ref="modal-xl" centered hide-footer :title="$t('profileowner.Create_Post')" @hidden="resetPostData">
+          <b-modal id="modal-xl" ref="modal-xl" centered hide-footer :title="$t('businessowner.Create_Post')" @hidden="resetPostData">
             <b-row ref="loader">
               <b-col cols="1" class="m-0 p-0"></b-col>
               <b-col cols="2" class="m-0 p-0">
@@ -212,12 +212,12 @@
                     id="textarea-small"
                     autofocus
                     class="mb-2 border-none"
-                    :placeholder="$t('profileowner.Post_a_business_update')"
+                    :placeholder="$t('businessowner.Post_a_business_update')"
                     v-model="createPost.postBusinessUpdate"
                   ></b-form-textarea>
                 </div>
                 <div class="bordder">
-                  <span class="float-left"> {{ $t('profileowner.Add_to_Your_Post') }} </span>
+                  <span class="float-left"> {{ $t('businessowner.Add_to_Your_Post') }} </span>
                   <span class="float-right">
                     <b-button-group size="sm" class="">
                       <input id="video" type="file" hidden />
@@ -238,11 +238,11 @@
                         ref="document"
                       />
 
-                      <b-button :title="$t('profileowner.Add_Movie')" size="sm" variant="outline-primary" @click="$refs.movies.click()">
+                      <b-button :title="$t('businessowner.Add_Movie')" size="sm" variant="outline-primary" @click="$refs.movies.click()">
                         <fas-icon class="icons" :icon="['fas', 'photo-video']" size="lg" />
                       </b-button>
                       <b-button
-                        :title="$t('profileowner.Add_Hyperlink')"
+                        :title="$t('businessowner.Add_Hyperlink')"
                         size="sm"
                         variant="outline-primary"
                         @click="$refs.document.click()"
@@ -257,7 +257,7 @@
                 <div class="h300px">
                   <div v-for="hyperlink in createPost.hyperlinks" :key="hyperlink.fileName" class="bordder">
                     <span class="float-left"> {{ hyperlink.fileName }} </span>
-                    <span class="float-right" @click="deleteItem(hyperlink.fileName)"> {{ $t('profileowner.delete') }} </span>
+                    <span class="float-right" @click="deleteItem(hyperlink.fileName)"> {{ $t('businessowner.delete') }} </span>
                   </div>
 
                   <div v-for="movie in createPost.movies" :key="movie.fileName" class="">
@@ -286,7 +286,7 @@
                 <hr />
                 <span>
                   <b-button @click="submitPost" variant="primary" block
-                    ><b-icon icon="cursor-fill" variant="primary"></b-icon> {{ $t('profileowner.Publish') }}</b-button
+                    ><b-icon icon="cursor-fill" variant="primary"></b-icon> {{ $t('businessowner.Publish') }}</b-button
                   >
                 </span>
               </b-col>

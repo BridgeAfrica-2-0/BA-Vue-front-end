@@ -106,7 +106,7 @@
    </div>
  <router-link to="#media">
 <b-button class=" float-right see-all">
-      See All
+      {{ $t('businessowner.See_All') }}
     </b-button>    
 
  </router-link>
@@ -307,7 +307,7 @@
     
 
                   <b-dropdown-item  @click="selectCover" 
-                    > Change Cover</b-dropdown-item
+                    > {{ $t('businessowner.Change_Cover') }}</b-dropdown-item
                   >
 
 
@@ -318,7 +318,7 @@
 
  -->
 
-            <b-dropdown-item  @click="viewAs"  >View As</b-dropdown-item> 
+            <b-dropdown-item  @click="viewAs"  >{{ $t('businessowner.View_As') }}</b-dropdown-item> 
                 </b-dropdown>
 
                 

@@ -2,7 +2,7 @@
   <div>
     <b-card class="mt-4" header-tag="header" footer-tag="footer">
       <p class="t-center">
-        <b>Invite your followers to follow this business</b>
+        <b>{{ $t('businessowner.Invite_your_followers_to_follow_this_business') }}</b>
       </p>
       <input class="form-control mb-2" placeholder="Search ..." type="text" />
       
@@ -39,7 +39,7 @@
               </b-col>
              
 
-              <b-col>    <span class="follow" > <h7>   7k Community  </h7> </span>  </b-col>  </b-row>
+              <b-col>    <span class="follow" > <h7>   7k {{ $t('businessowner.Community') }}  </h7> </span>  </b-col>  </b-row>
             </div>
 
             <div class="p-buttons">
@@ -57,7 +57,7 @@
                     class="b-background f-15"
                     style="font-size:15px"
                   >
-                    <b-icon icon="plus" class="ico   f-15 "> </b-icon> Invite
+                    <b-icon icon="plus" class="ico   f-15 "> </b-icon> {{ $t('businessowner.Invite') }}
                   </b-button>
                 </b-col>
                 <b-col cols="3">
@@ -118,7 +118,7 @@
               </b-col>
              
 
-              <b-col>    <span class="follow" > <h7>   7k Community  </h7> </span>  </b-col>  </b-row>
+              <b-col>    <span class="follow" > <h7>   7k {{ $t('businessowner.Community')}}  </h7> </span>  </b-col>  </b-row>
             </div>
 
             <div class="p-buttons">
@@ -136,7 +136,7 @@
                     class="b-background f-15"
                     style="font-size:15px"
                   >
-                    <b-icon icon="plus" class="ico   f-15 "> </b-icon> Invite
+                    <b-icon icon="plus" class="ico   f-15 "> </b-icon> {{ $t('businessowner.Invite')}}
                   </b-button>
                 </b-col>
                 <b-col cols="3">
@@ -197,7 +197,7 @@
               </b-col>
              
 
-              <b-col>    <span class="follow" > <h7>   7k Community  </h7> </span>  </b-col>  </b-row>
+              <b-col>    <span class="follow" > <h7>   7k {{ $t('businessowner.Community')}}  </h7> </span>  </b-col>  </b-row>
             </div>
 
             <div class="p-buttons">
@@ -215,7 +215,7 @@
                     class="b-background f-15"
                     style="font-size:15px"
                   >
-                    <b-icon icon="plus" class="ico   f-15 "> </b-icon> Invite
+                    <b-icon icon="plus" class="ico   f-15 "> </b-icon> {{ $t('businessowner.Invite')}}
                   </b-button>
                 </b-col>
                 <b-col cols="3">
@@ -235,7 +235,7 @@
       </b-card-text>
 
       <span class="float-right">
-        <a class="primary" href="#">See More</a>
+        <a class="primary" href="#">{{ $t('businessowner.See_More') }}</a>
       </span>
     </b-card>
   </div>

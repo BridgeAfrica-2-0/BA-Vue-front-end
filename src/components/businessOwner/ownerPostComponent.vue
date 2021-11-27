@@ -20,12 +20,12 @@
 
             <b-dropdown-item-button variant="info" @click="editPost">
               <b-icon icon="pencil" aria-hidden="true"></b-icon>
-              Edit
+              {{ $t('businessowner.Edit') }}
             </b-dropdown-item-button>
 
             <b-dropdown-item-button variant="danger" @click="deletePost">
               <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
-              Delete
+              {{ $t('businessowner.Delete') }}
             </b-dropdown-item-button>
           </b-dropdown>
         </div>

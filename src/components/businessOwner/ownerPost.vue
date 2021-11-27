@@ -345,7 +345,7 @@
                       </video>
                     </div>
                   </div>
-                </div></div>
+                </div>
                 <b-progress
                   v-if="isUploading"
                   :value="uploadPercentage"

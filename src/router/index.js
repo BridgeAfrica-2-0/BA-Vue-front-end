@@ -56,6 +56,7 @@ import ordersdetail from "@/views/odersDetail";
 import businessordersdetail from "@/views/businessordersdetail"
 import businessOwnerOrders from "@/views/businessOwnerOrders"
 import payment from "@/views/payment";
+import about from "@/views/about";
 import cart from "@/views/card";
 
 
@@ -77,6 +78,25 @@ const routes = [
     // },
   },
 
+{
+    path: '/about-us',
+    name: 'about',
+    component: about,
+    // meta: {
+    //   auth: true,
+    // },
+},
+
+{
+  path: "/market",
+  name: "market",
+  component: market,
+},
+{
+  path: "/checkout",
+  name: "payment",
+  component: payment
+},
   
   {
     path: "/businessOwnerOrders",

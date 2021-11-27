@@ -22,7 +22,7 @@
 
     <!-- ======= Header ======= -->
     <header id="header" class="fixed-topp">
-      <div class="container d-flex align-items-center">
+      <div class=" d-flex align-items-center">
         <!--  <h1 class="logo mr-auto"><a href="index.html">Arsha</a></h1>
       Uncomment below if you prefer to use an image logo -->
         <a href="index.html" class="logo mr-auto"
@@ -60,7 +60,7 @@
       
 
       <!-- Right aligned nav items -->
-      <b-navbar-nav class="ml-auto bold" >
+      <b-navbar-nav class="ml-auto bold size_nav" >
        
       <b-nav-item > <router-link to="/">Home</router-link></b-nav-item>
        <b-nav-item href="#">About Us</b-nav-item>
@@ -160,7 +160,7 @@
       <div class="container">
         <div class="search">
           <div class="topp-div d-none d-md-none d-lg-block">
-            <p>
+            <p class="text_box">
               Empowering Businesses And Consumers With Digital Presence To Buy
               And Sell Online
             </p>
@@ -1074,6 +1074,18 @@ export default {
 }
 
 @media only screen and (min-width: 768px) {
+  .b-logo{
+    width: 178px !important;
+    height: 70px !important;
+  }
+  .size_nav{
+    font-size: 18px !important;
+  }
+  .text_box{
+    font-size: 25px !important;
+    /* height: 166px !important;
+    width: 500px !important; */
+  }
   .input-block {
     padding-left: 200px !important;
     padding-right: 200px;
@@ -1098,7 +1110,8 @@ export default {
   }
 
   .search-h {
-    height: 50px;
+    height: 50px !important;
+    
   }
 
   .ca-img {

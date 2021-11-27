@@ -17,7 +17,7 @@
     <section class="keep-in-touch">
       <div class="keep-in-touch-header">
         <h1 class="font-arvo text-light text-center">
-          KEEP IN TOUCH
+          {{ $t('contact.KEEP_IN_TOUCH') }} 
         </h1>
       </div>
     </section>
@@ -28,10 +28,10 @@
           <div class="address-div">
             <img src="../assets/maps-and-flags.png" alt="..." class="address-img" />
             <h5 class="text-primary font-arvo text-center">
-              ADDRESS
+              {{ $t('contact.ADDRESS') }}
             </h5>
             <p class="text-center address-text">
-              International Handricraft Center, Rond-point Intendance, Yaound<span>é, Cameroon</span>
+              {{ $t('contact.International_Handricraft_Center') }}, Rond-point Intendance, Yaounde<span>é, Cameroon</span>
             </p>
           </div>
         </div>
@@ -40,10 +40,10 @@
           <div class="address-div">
             <img src="../assets/cell-phone.png" alt="..." class="address-img" />
             <h5 class="text-primary font-arvo text-center">
-              PHONE
+              {{ $t('contact.PHONE') }}
             </h5>
             <p class="text-center address-text">
-              Mobile: +273 697 157 690
+              {{ $t('contact.Mobile') }}: +273 697 157 690
             </p>
           </div>
         </div>
@@ -52,7 +52,7 @@
           <div class="address-div">
             <img src="../assets/paper-plane.png" alt="..." class="address-img" />
             <h5 class="text-primary font-arvo text-center">
-              E-MAIL
+              {{ $t('contact.EMAIL') }}
             </h5>
             <p class="text-center address-text">
               info@bridgeafrica.com

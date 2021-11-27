@@ -103,17 +103,9 @@ import Lightbox from '@morioh/v-lightbox';
 import * as VueGoogleMaps from 'gmap-vue';
 
 
-<<<<<<< HEAD
-
- import VueSplide from "@splidejs/vue-splide";
- Vue.use(VueSplide);
- import "@splidejs/splide/dist/css/themes/splide-default.min.css";
-
-=======
 import VueSplide from "@splidejs/vue-splide";
 Vue.use(VueSplide);
 import "@splidejs/splide/dist/css/themes/splide-default.min.css";
->>>>>>> 4d6df2670bce3f8f1b9cdc061b702bdce641c396
 
 
 // global register
@@ -161,22 +153,13 @@ Vue.use(VueGoogleMaps, {
     installComponents: true,
 });
 
-<<<<<<< HEAD
-//  import VueLoading from 'vue-loading-overlay';
-//  import 'vue-loading-overlay/dist/vue-loading.css';
-=======
 import VueLoading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
 Vue.use(VueLoading);
->>>>>>> 4d6df2670bce3f8f1b9cdc061b702bdce641c396
 
 import VueYoutube from 'vue-youtube'
 
 Vue.use(VueYoutube)
-<<<<<<< HEAD
-//  Vue.use(VueLoading);
-=======
->>>>>>> 4d6df2670bce3f8f1b9cdc061b702bdce641c396
 
 import VueAgile from 'vue-agile';
 

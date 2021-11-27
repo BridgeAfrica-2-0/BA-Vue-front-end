@@ -120,7 +120,7 @@
             data-toggle="popover"
             class="form-control search-mobile"
             style="border-left: none"
-            placeholder="Find Pharmacy"
+            :placeholder="$t('home.Find_Pharmacy')"
             aria-label=""
             data-original-title=""
             title=""
@@ -144,7 +144,7 @@
             data-toggle="popover"
             class="form-control search-mobile"
             style="border-left: none"
-            placeholder="Find Pharmacy"
+            :placeholder="$t('home.Find_Pharmacy')"
             aria-label=""
             data-original-title=""
             title=""
@@ -175,7 +175,7 @@
               aria-label=""
               data-original-title=""
               title=""
-              placeholder="All"
+              :placeholder="$t('home.All')"
               v-model="credentials.keyword"
             />
 
@@ -186,15 +186,15 @@
               list="browsers"
               data-toggle="popover"
               class="form-control search-h"
-              placeholder="Where "
+              :placeholder="$t('home.Where') "
               aria-label="search bridge africa"
               data-original-title=""
               title=""
             />
 
             <datalist id="browsers">
-              <option value=" Current Location "></option>
-              <option value="Yaounde " />
+              <option :value="$t('home.Current_Location') "></option>
+              <option :value="$t('home.Yaounde') " />
             </datalist>
              <slot name="button">
                 <Button @click.native="getKeyword" />
@@ -566,7 +566,7 @@
             "
           >
             <div class="content">
-              <h3 class="bridge-header">Community Engagement</h3>
+              <h3 class="bridge-header">{{$t('home.Community_Engagement')}}</h3>
               <p>
                 {{ $t('home.We_allow_businesses_and_consumers_to_follow_one_another') }} , 
                 {{ $t('home.receive_notifications_and_send_direct_messages') }}
@@ -751,7 +751,7 @@
             &nbsp;
 
             <div class="content">
-              <h3 class="bridge-header">Digital literacy</h3>
+              <h3 class="bridge-header">{{ $t('home.Digital_literacy') }}</h3>
               <p>
                 {{ $t('home.We_provide_face_to_face_digital_literacy_trainings') }} 
                 {{ $t('home.for_businesses_who_lack_digital_know_how_through_our_army_of_digital_coaches') }}
@@ -895,7 +895,7 @@ export default {
       default: function () {
         return {
           keyword: '',
-          placeholder: 'All',
+          placeholder: this.$t('home.All'),
         };
       },
     },

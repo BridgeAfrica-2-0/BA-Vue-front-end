@@ -121,7 +121,7 @@
 
                        <b-form-datepicker  name="dob" :max="min" id="dob"
 
-                        v-model="dob" class=" text"  :locale=" this.$i18n.locale"  :placeholder="$t('welcome.Busness_Name')"></b-form-datepicker>
+                        v-model="dob" class=" text"  :locale=" this.$i18n.locale"  :placeholder="$t('welcome.DOB')"></b-form-datepicker>
 
                     </div>
 
@@ -335,7 +335,7 @@
 
                          <b-form-datepicker  name="dob" :max="min" id="dob"
 
-                        v-model="dob" class=" text"   :placeholder="$t('welcome.Busness_Name')"></b-form-datepicker>
+                        v-model="dob" class=" text"   :placeholder="$t('welcome.DOB')"></b-form-datepicker>
 
                     </div>
 

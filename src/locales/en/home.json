@@ -41,5 +41,13 @@
     "Friday": "Friday",
     "09AM_05PM": "09AM - 05PM",
     "Saturday": "Saturday",
-    "09AM_01PM": "09AM - 01PM"
+    "09AM_01PM": "09AM - 01PM",
+    "Posts": "Posts",
+    "About": "About",
+    "Business": "Business",
+    "Media": "Media",
+    "Following": "Following",
+    "Where": "Where",
+    "For_businesses_and_consumers_in_zones_of_low_or_no_internet_penetration": "For businesses and consumers in zones of low or no internet penetration",
+    "our_platform_works_offline_via_SMS_and_USSD": "our platform works offline via SMS and USSD"
 }

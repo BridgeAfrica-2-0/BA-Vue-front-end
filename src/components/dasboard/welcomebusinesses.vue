@@ -1,10 +1,13 @@
 <template>
-  <div>
+  <div >
+
+
     <div
       v-for="value in business_around"
       v-bind:key="value.name"
       class="people-style shadow"
     >
+
       <b-row>
         <b-col md="4" xl="3" lg="3" cols="5" sm="3">
           <div class="center-img">
@@ -16,7 +19,7 @@
           </div>
         </b-col>
         <b-col md="8" cols="7" lg="7" xl="5" sm="5">
-           <div class="title textt bold username"> <strong> {{ value.name }}  </strong></div>
+             <div class="title textt bold username"> <router-link    :to="'business/'+value.id">     <strong> {{ value.name }}  </strong>   </router-link>  </div>
           <p class="textt"  >
             
 
@@ -25,7 +28,7 @@
             {{ count(value.followers)  }} {{ $t('dashboard.Community') }} <br />
 
             <span class="location">
-              <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{ $t('dashboard.Douala') }} {{ $t('dashboard.Cameroon') }}
+              <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{value.city}}  <span class="ml-2" v-for="nie in value.neigborhood"  :key="nie.id" >  {{nie.name}} </span>   
             </span>
             <br />
 
@@ -107,9 +110,11 @@
           </div>
         </b-col>
       </b-row>
+      
+          
+
     </div>
-    
-          <infinite-loading @infinite="infiniteHandler"></infinite-loading>
+    <infinite-loading @infinite="infiniteHandler"></infinite-loading>
   </div>
 </template>
 
@@ -503,5 +508,11 @@ export default {
 <style >
 .readmore p {
     margin: 0px !important;
+}
+
+.h-400{
+  height:500px;
+  overflow:auto;
+  overflow-x: hidden;
 }
 </style>

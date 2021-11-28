@@ -14,18 +14,18 @@
             id="textarea-small"
             size="sm"
             class="mb-2"
-            placeholder="Whats On Your, Mind ?"
+            :placeholder="$t('businessowner.Whats_On_Your_Mind') "
           ></b-form-textarea>
           <span class="float-left">
             <b-button-group size="sm" class="">
-              <b-button title="Add Image" size="sm" variant="outline-primary">
+              <b-button :title="$t('businessowner.Add_Image')" size="sm" variant="outline-primary">
                 <b-icon icon="card-image" aria-hidden="true"></b-icon>
               </b-button>
-              <b-button title="Add Movie" size="sm" variant="outline-primary">
+              <b-button :title="$t('businessowner.Add_Movie')" size="sm" variant="outline-primary">
                 <b-icon icon="camera-video-fill" aria-hidden="true"></b-icon>
               </b-button>
               <b-button
-                title="Add Hyperlink"
+                :title=" $t('businessowner.Add_Hyperlink')"
                 size="sm"
                 variant="outline-primary"
               >
@@ -36,7 +36,7 @@
           <span class="float-right">
             <b-button variant="outline-primary" size="sm"
               ><b-icon icon="cursor-fill" variant="primary"></b-icon>
-              Post</b-button
+              {{ $t('businessowner.Post') }}</b-button
             >
           </span>
         </b-col>
@@ -60,10 +60,10 @@
           </a>
           <div class="post-pending pt-2">
             <p>
-              Your 3 Post(s) are pending for approval.&nbsp;&nbsp;&nbsp;&nbsp;<a
+              {{ $t('businessowner.Your_3_Post_s_are_pending_for_approval') }}.&nbsp;&nbsp;&nbsp;&nbsp;<a
                 href="#"
                 class="text-design"
-                >View All</a
+                >{{ $t('businessowner.View_All') }}</a
               >
             </p>
           </div>
@@ -83,46 +83,46 @@
             </b-col>
             <b-col cols="10" md="11" class="pt-2">
               <h5 class="m-0 font-weight-bolder">
-                Mapoure Agrobusiness
+                {{ $t('businessowner.Mapoure_Agrobusiness')}}
                 <span class="float-right">
                   <b-dropdown variant="outline-primary" size="sm">
                     <template #button-content>
                       <b-icon icon="three-dots" aria-hidden="true"></b-icon>
-                      More
+                      {{ $t('businessowner.More')}}
                     </template>
                     <b-dropdown-item-button>
                       <b-icon icon="lock-fill" aria-hidden="true"></b-icon>
-                      Locked <span class="sr-only">(Click to unlock)</span>
+                      {{ $t('businessowner.Locked')}} <span class="sr-only">({{ $t('businessowner.Click_to_unlock')}})</span>
                     </b-dropdown-item-button>
                     <b-dropdown-divider></b-dropdown-divider>
-                    <b-dropdown-group header="Choose options" class="small">
+                    <b-dropdown-group :header="$t('businessowner.Choose_options')" class="small">
                       <b-dropdown-item-button>
                         <b-icon icon="blank" aria-hidden="true"></b-icon>
-                        Option A <span class="sr-only">(Not selected)</span>
+                        {{ $t('businessowner.Option') }} A <span class="sr-only">( {{ $t('businessowner.Not_selected')  }})</span>
                       </b-dropdown-item-button>
                       <b-dropdown-item-button>
                         <b-icon icon="check" aria-hidden="true"></b-icon>
-                        Option B <span class="sr-only">(Selected)</span>
+                        {{$t('businessowner.Option')}} B <span class="sr-only">({{$t('businessowner.Selected')}})</span>
                       </b-dropdown-item-button>
                       <b-dropdown-item-button>
                         <b-icon icon="blank" aria-hidden="true"></b-icon>
-                        Option C <span class="sr-only">(Not selected)</span>
+                        {{$t('businessowner.Option')}} C <span class="sr-only">({{ $t('businessowner.Not_selected') }})</span>
                       </b-dropdown-item-button>
                     </b-dropdown-group>
                     <b-dropdown-divider></b-dropdown-divider>
-                    <b-dropdown-item-button>Some action</b-dropdown-item-button>
+                    <b-dropdown-item-button>{{$t('businessowner.Some_action')}}</b-dropdown-item-button>
                     <b-dropdown-item-button
-                      >Some other action</b-dropdown-item-button
+                      >{{$t('businessowner.Some_other_action')}}</b-dropdown-item-button
                     >
                     <b-dropdown-divider></b-dropdown-divider>
                     <b-dropdown-item-button variant="danger">
                       <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
-                      Delete
+                      {{$t('businessowner.Delete')}}
                     </b-dropdown-item-button>
                   </b-dropdown>
                 </span>
               </h5>
-              <p>1h Ago</p>
+              <p>{{$t('businessowner.1h_Ago')}}</p>
             </b-col>
           </b-row>
           <b-row>
@@ -180,7 +180,7 @@
                   ></b-input-group-text>
                 </template>
                 <b-form-input
-                  placeholder="Post  A Comment"
+                  :placeholder="$t('businessowner.Post_A_Comment')"
                   class="border-right-0"
                 ></b-form-input>
               </b-input-group>
@@ -202,46 +202,46 @@
             </b-col>
             <b-col cols="10" md="11" class="pt-2">
               <h5 class="m-0 font-weight-bolder">
-                Mapoure Agrobusiness
+                {{ $t('businessowner.Mapoure_Agrobusiness')}}
                 <span class="float-right">
                   <b-dropdown variant="outline-primary" size="sm">
                     <template #button-content>
                       <b-icon icon="three-dots" aria-hidden="true"></b-icon>
-                      More
+                      {{ $t('businessowner.More')}}
                     </template>
                     <b-dropdown-item-button>
                       <b-icon icon="lock-fill" aria-hidden="true"></b-icon>
-                      Locked <span class="sr-only">(Click to unlock)</span>
+                      {{ $t('businessowner.Locked')}} <span class="sr-only">({{ $t('businessowner.Click_to_unlock')}})</span>
                     </b-dropdown-item-button>
                     <b-dropdown-divider></b-dropdown-divider>
-                    <b-dropdown-group header="Choose options" class="small">
+                    <b-dropdown-group :header="$t('businessowner.Choose_options')" class="small">
                       <b-dropdown-item-button>
                         <b-icon icon="blank" aria-hidden="true"></b-icon>
-                        Option A <span class="sr-only">(Not selected)</span>
+                        Option A <span class="sr-only">({{ $t('businessowner.Not_selected') }})</span>
                       </b-dropdown-item-button>
                       <b-dropdown-item-button>
                         <b-icon icon="check" aria-hidden="true"></b-icon>
-                        Option B <span class="sr-only">(Selected)</span>
+                        {{$t('businessowner.Option')}} B <span class="sr-only">({{$t('businessowner.Selected')}})</span>
                       </b-dropdown-item-button>
                       <b-dropdown-item-button>
                         <b-icon icon="blank" aria-hidden="true"></b-icon>
-                        Option C <span class="sr-only">(Not selected)</span>
+                        {{$t('businessowner.Option')}} C <span class="sr-only">({{ $t('businessowner.Not_selected') }})</span>
                       </b-dropdown-item-button>
                     </b-dropdown-group>
                     <b-dropdown-divider></b-dropdown-divider>
-                    <b-dropdown-item-button>Some action</b-dropdown-item-button>
+                    <b-dropdown-item-button>{{$t('businessowner.Some_action')}}</b-dropdown-item-button>
                     <b-dropdown-item-button
-                      >Some other action</b-dropdown-item-button
+                      >{{$t('businessowner.Some_other_action')}}</b-dropdown-item-button
                     >
                     <b-dropdown-divider></b-dropdown-divider>
                     <b-dropdown-item-button variant="danger">
                       <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
-                      Delete
+                      {{$t('businessowner.Delete')}}
                     </b-dropdown-item-button>
                   </b-dropdown>
                 </span>
               </h5>
-              <p>1h Ago</p>
+              <p>{{$t('businessowner.1h_Ago')}}</p>
             </b-col>
           </b-row>
           <b-row>
@@ -295,7 +295,7 @@
                   ></b-input-group-text>
                 </template>
                 <b-form-input
-                  placeholder="Post  A Comment"
+                  :placeholder="$t('businessowner.Post_A_Comment')"
                   class="border-right-0"
                 ></b-form-input>
               </b-input-group>
@@ -317,46 +317,46 @@
             </b-col>
             <b-col cols="10" md="11" class="pt-2">
               <h5 class="m-0 font-weight-bolder">
-                Mapoure Agrobusiness
+                {{ $t('businessowner.Mapoure_Agrobusiness')}}
                 <span class="float-right">
                   <b-dropdown variant="outline-primary" size="sm">
                     <template #button-content>
                       <b-icon icon="three-dots" aria-hidden="true"></b-icon>
-                      More
+                      {{ $t('businessowner.More')}}
                     </template>
                     <b-dropdown-item-button>
                       <b-icon icon="lock-fill" aria-hidden="true"></b-icon>
-                      Locked <span class="sr-only">(Click to unlock)</span>
+                      {{ $t('businessowner.Locked')}} <span class="sr-only">({{ $t('businessowner.Click_to_unlock')}})</span>
                     </b-dropdown-item-button>
                     <b-dropdown-divider></b-dropdown-divider>
-                    <b-dropdown-group header="Choose options" class="small">
+                    <b-dropdown-group :header="$t('businessowner.Choose_options')" class="small">
                       <b-dropdown-item-button>
                         <b-icon icon="blank" aria-hidden="true"></b-icon>
-                        Option A <span class="sr-only">(Not selected)</span>
+                        Option A <span class="sr-only">({{ $t('businessowner.Not_selected') }})</span>
                       </b-dropdown-item-button>
                       <b-dropdown-item-button>
                         <b-icon icon="check" aria-hidden="true"></b-icon>
-                        Option B <span class="sr-only">(Selected)</span>
+                        {{$t('businessowner.Option')}} B <span class="sr-only">({{$t('businessowner.Selected')}})</span>
                       </b-dropdown-item-button>
                       <b-dropdown-item-button>
                         <b-icon icon="blank" aria-hidden="true"></b-icon>
-                        Option C <span class="sr-only">(Not selected)</span>
+                        {{$t('businessowner.Option')}} C <span class="sr-only">({{ $t('businessowner.Not_selected') }})</span>
                       </b-dropdown-item-button>
                     </b-dropdown-group>
                     <b-dropdown-divider></b-dropdown-divider>
-                    <b-dropdown-item-button>Some action</b-dropdown-item-button>
+                    <b-dropdown-item-button>{{$t('businessowner.Some_action')}}</b-dropdown-item-button>
                     <b-dropdown-item-button
-                      >Some other action</b-dropdown-item-button
+                      >{{$t('businessowner.Some_other_action')}}</b-dropdown-item-button
                     >
                     <b-dropdown-divider></b-dropdown-divider>
                     <b-dropdown-item-button variant="danger">
                       <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
-                      Delete
+                      {{$t('businessowner.Delete')}}
                     </b-dropdown-item-button>
                   </b-dropdown>
                 </span>
               </h5>
-              <p>1h Ago</p>
+              <p>{{$t('businessowner.1h_Ago')}}</p>
             </b-col>
           </b-row>
           <b-row>
@@ -410,7 +410,7 @@
                       ></b-input-group-text>
                     </template>
                     <b-form-input
-                      placeholder="Post  A Comment"
+                      :placeholder="$t('businessowner.Post_A_Comment')"
                       class="border-right-0"
                     ></b-form-input>
                   </b-input-group>
@@ -434,46 +434,46 @@
             </b-col>
             <b-col cols="10" md="11" class="pt-2">
               <h5 class="m-0 font-weight-bolder">
-                Mapoure Agrobusiness
+                {{ $t('businessowner.Mapoure_Agrobusiness')}}
                 <span class="float-right">
                   <b-dropdown variant="outline-primary" size="sm">
                     <template #button-content>
                       <b-icon icon="three-dots" aria-hidden="true"></b-icon>
-                      More
+                      {{ $t('businessowner.More')}}
                     </template>
                     <b-dropdown-item-button>
                       <b-icon icon="lock-fill" aria-hidden="true"></b-icon>
-                      Locked <span class="sr-only">(Click to unlock)</span>
+                      {{ $t('businessowner.Locked')}} <span class="sr-only">({{ $t('businessowner.Click_to_unlock')}})</span>
                     </b-dropdown-item-button>
                     <b-dropdown-divider></b-dropdown-divider>
-                    <b-dropdown-group header="Choose options" class="small">
+                    <b-dropdown-group :header="$t('businessowner.Choose_options')" class="small">
                       <b-dropdown-item-button>
                         <b-icon icon="blank" aria-hidden="true"></b-icon>
-                        Option A <span class="sr-only">(Not selected)</span>
+                        Option A <span class="sr-only">({{ $t('businessowner.Not_selected') }})</span>
                       </b-dropdown-item-button>
                       <b-dropdown-item-button>
                         <b-icon icon="check" aria-hidden="true"></b-icon>
-                        Option B <span class="sr-only">(Selected)</span>
+                        {{$t('businessowner.Option')}} B <span class="sr-only">({{$t('businessowner.Selected')}})</span>
                       </b-dropdown-item-button>
                       <b-dropdown-item-button>
                         <b-icon icon="blank" aria-hidden="true"></b-icon>
-                        Option C <span class="sr-only">(Not selected)</span>
+                        {{$t('businessowner.Option')}} C <span class="sr-only">({{ $t('businessowner.Not_selected') }})</span>
                       </b-dropdown-item-button>
                     </b-dropdown-group>
                     <b-dropdown-divider></b-dropdown-divider>
-                    <b-dropdown-item-button>Some action</b-dropdown-item-button>
+                    <b-dropdown-item-button>{{$t('businessowner.Some_action')}}</b-dropdown-item-button>
                     <b-dropdown-item-button
-                      >Some other action</b-dropdown-item-button
+                      >{{$t('businessowner.Some_other_action')}}</b-dropdown-item-button
                     >
                     <b-dropdown-divider></b-dropdown-divider>
                     <b-dropdown-item-button variant="danger">
                       <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
-                      Delete
+                      {{$t('businessowner.Delete')}}
                     </b-dropdown-item-button>
                   </b-dropdown>
                 </span>
               </h5>
-              <p>1h Ago</p>
+              <p>{{$t('businessowner.1h_Ago')}}</p>
             </b-col>
           </b-row>
           <b-row>
@@ -524,7 +524,7 @@
                       ></b-input-group-text>
                     </template>
                     <b-form-input
-                      placeholder="Post  A Comment"
+                      :placeholder="$t('businessowner.Post_A_Comment')"
                       class="border-right-0"
                     ></b-form-input>
                   </b-input-group>

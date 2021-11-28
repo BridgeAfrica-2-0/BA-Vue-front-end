@@ -82,7 +82,7 @@
 
     <b-modal hide-footer :title="$t('businessowner.Create_album')" v-model="showModal">
       <b-form>
-        <b-form-input v-model="text" placeholder="Album name"></b-form-input>
+        <b-form-input v-model="text" :placeholder="$t('businessowner.Album_name')"></b-form-input>
         <b-button class="mt-2" variant="primary"> {{ $t('businessowner.Create') }}</b-button>
       </b-form>
     </b-modal>

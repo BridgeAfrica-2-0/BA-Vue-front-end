@@ -112,7 +112,7 @@
                           <input
                             v-model="searchQuery"
                             class="form-control input-background"
-                            :placeholder="$t('businessowner.')`Search chat list ${tabIndex}`"
+                            :placeholder="`Search chat list ${tabIndex}`"
                             @keypress.enter="
                               getChatList({
                                 type: 'user',
@@ -182,7 +182,7 @@
                             </b-col>
                           </b-row>
                         </div>
-                        <h2 v-else>{{ $t('businessowner.No_chat')}}</h2>
+                        <h2 v-else>{{ $t('businessowner.No_chat') }}</h2>
                       </div>
 
                       <!-- End Chats -->
@@ -197,7 +197,7 @@
                           <input
                             v-model="searchQuery"
                             class="form-control input-background"
-                            :placeholder="$t('businessowner.Search_chat_list')` ${tabIndex}`"
+                            :placeholder="`Search chat list ${tabIndex}`"
                             @keypress.enter="
                               getChatList({
                                 type: 'business',
@@ -267,7 +267,7 @@
                             </b-col>
                           </b-row>
                         </div>
-                        <h2 v-else>{{ $t('businessowner.No_chat')}}</h2>
+                        <h2 v-else>{{ $t('businessowner.No_chat') }}</h2>
                       </div>
 
                       <!-- End Chats -->
@@ -282,7 +282,7 @@
                           <input
                             v-model="searchQuery"
                             class="form-control input-background"
-                            :placeholder="$t('businessowner.')`Search chat list ${tabIndex}`"
+                            :placeholder="`Search chat list ${tabIndex}`"
                             @keypress.enter="
                               getChatList({
                                 type: 'network',
@@ -433,7 +433,7 @@
                       "
                       type="text"
                       class="form-control input-background mb-6 pb-6"
-                      :placeholder="$t('businessowner.Search_message')"
+                      placeholder="Search message"
                     />
                   </b-col>
                   <b-col class="col-3">
@@ -668,7 +668,7 @@
                       v-model="input"
                       @keypress.enter="send"
                       class="input-background"
-                      :placeholder="$t('businessowner.Enter_a_message')"
+                      placeholder="Enter a message..."
                     ></b-form-input>
 
                     <div class="wrapper">
@@ -752,7 +752,7 @@
               <b-button class="primary-bg" @click="showInfo(false)">
                 <fas-icon :icon="['fas', 'arrow-left']" />
               </b-button>
-              <span class="cnt-info"> {{ $t('businessowner.Contact_Info') }}</span>
+              <span class="cnt-info">{{ $t('businessowner.Contact_Info') }} </span>
             </div>
             <div class="info-bottom">
               <b-avatar
@@ -796,14 +796,14 @@
             <div class="new-msg back-image" style="margin-right: 17px">
               <div class="info-nav">
                 <b-row>
-                  <b-col class="col-1 mt-3"> {{ $t('businessowner.To') }} </b-col>
+                  <b-col class="col-1 mt-3"> To </b-col>
                   <b-col>
                     <b-form-input
                       id="textarea"
                       v-model="searchQuery"
                       class="input-background"
                       style="width: 100%"
-                      :placeholder="$t('businessowner.Type_the_name_of_person_or_Business')"
+                      placeholder="Type the name of person or Business..."
                       @keydown.enter="getAll(searchQuery)"
                     ></b-form-input>
 
@@ -839,7 +839,7 @@
                               name="people"
                               @change="peopleAllMulty"
                             >
-                              {{ $t('businessowner.People') }}
+                              People
                             </b-form-checkbox>
                           </b-col>
 
@@ -899,7 +899,7 @@
                               class="p-2 message"
                               @click="selectedChat({ chat: biz, id: biz.id })"
                             > -->
-                          <h2>{{ $t('businessowner.All') }}</h2>
+                          <h2>All</h2>
                           <tr
                             v-for="(elmt, index) in all"
                             :key="index"
@@ -997,7 +997,7 @@
     
     <div class="d-block text-center">
       <h3>{{ $t('businessowner.The_Group_Name') }}:</h3>
-      <b-form-input v-model='groupName' id="input-large" size="lg" autofocus :placeholder="$t('businessowner.Enter_your_name')"></b-form-input>
+      <b-form-input v-model='groupName' id="input-large" size="lg" autofocus placeholder="Enter your name"></b-form-input>
     </div>
     
     <b-button class="mt-3" block @click="selectedMultyChat()">{{ $t('businessowner.Create') }}</b-button>

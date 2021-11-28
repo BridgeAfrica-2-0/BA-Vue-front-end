@@ -1,7 +1,7 @@
 <template>
   <div>
     <h5 class="font-weight-bolder d-inline-block">
-      <b-icon-chat-fill></b-icon-chat-fill> Pending Posts
+      <b-icon-chat-fill></b-icon-chat-fill> {{ $t('businessowner.') }}Pending Posts
     </h5>
     <span class="float-right">35 Pending</span>
     <hr width="100%" />
@@ -40,17 +40,17 @@
                           Delete a Comment
                         </b-dropdown-item>
                         <b-dropdown-item href="#">
-                          Send Messge To User
+                          {{ $t('businessowner.Send_Messge_To_User') }}
                         </b-dropdown-item>
                         <b-dropdown-item href="#">
-                          Remove User
+                          {{ $t('businessowner.Remove_User') }}
                         </b-dropdown-item>
                       </b-dropdown>
                     </span>
                   </h5>
                   <p>
-                    1h Ago -
-                    <span class="text-primary">Commented on a Post</span>
+                    {{ $t('businessowner.1h_Ago') }} -
+                    <span class="text-primary">{{ $t('businessowner.Commented_on_a_Post') }}</span>
                   </p>
                 </b-col>
               </b-row>

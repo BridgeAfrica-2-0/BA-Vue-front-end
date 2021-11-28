@@ -114,7 +114,7 @@
     <b-modal
       id="biographyModal"
       hide-footer
-      title="Business Biography"
+      :title="$t('businessowner.Business_Biography')"
       size="md"
       ref="biographyModal"
       @close="cancel"
@@ -128,7 +128,7 @@
             type="text"
             name="title"
             id="title"
-            placeholder="Title"
+            :placeholder="$t('businessowner.Title')"
             class="form-control"
             v-model="business_about_input.name"
             required
@@ -143,7 +143,7 @@
             name="description"
             v-model="business_about_input.location_description"
             class="mb-3 form-control"
-            placeholder="description"
+            :placeholder="$t('businessowner.description')"
             required
           ></textarea>
         </div>
@@ -157,7 +157,7 @@
       id="addressBusinessModal"
       ref="addressBusinessModal"
       hide-footer
-      title="Edit Address"
+      :title="$t('businessowner.Edit_Address')"
       size="lg"
       @close="cancel"
       @keyup="validate('editAddress')"
@@ -169,7 +169,7 @@
             type="text"
             name="username"
             id="username"
-            placeholder="Business Name"
+            :placeholder="$t('businessowner.Business_Name')"
             v-model="business_about_input.name"
             class="form-control"
             required
@@ -181,9 +181,9 @@
           <multiselect
             v-model="multiselecvalue"
             @input="subcategories"
-            tag-placeholder="Add this as new tag"
-            placeholder="Search or add a tag"
-            label="name"
+            :tag-placeholder="$t('businessowner.Add_this_as_new_tag')"
+            :placeholder="$t('businessowner.Search_or_add_a_tag')"
+            :label="$t('businessowner.name')"
             track-by="id"
             :options="pcategories"
             :multiple="true"
@@ -196,9 +196,9 @@
           <label for="alias">{{ $t('businessowner.Sub_Category') }}:</label><br />
           <multiselect
             v-model="filterselectvalue"
-            tag-placeholder="Add this as new tag"
-            placeholder="Search or add a tag"
-            label="name"
+            :tag-placeholder="$t('businessowner.Add_this_as_new_tag')"
+            :placeholder="$t('businessowner.Search_or_add_a_tag')"
+            :label="$t('businessowner.name')"
             track-by="subcategory_id"
             :options="scategories"
             :multiple="true"
@@ -217,7 +217,7 @@
                 :key="filters.id"
                 active
                 ><b-card-text>
-                  <b-form-group label="Filters" class="colorblack">
+                  <b-form-group :label="$t('businessowner.Filters')" class="colorblack">
                     <b-form-checkbox-group
                       id=""
                       class="colorblack"
@@ -249,7 +249,7 @@
               type="text"
               name="alias"
               id="alias"
-              placeholder="Enter your Keywords"
+              :placeholder="$t('businessowner.Enter_your_Keywords')"
               v-model="business_about_input.keywords"
               class="form-control"
               required
@@ -258,7 +258,7 @@
         </div>
         <b-form-group
           id="input-group-1"
-          label="Country"
+          :label="$t('businessowner.Country')"
           label-for="input-1"
           label-size="sm"
         >
@@ -272,7 +272,7 @@
         </b-form-group>
         <b-form-group
           id="input-group-2"
-          label="City"
+          :label="$t('businessowner.City')"
           label-for="input-2"
           label-size="sm"
         >
@@ -286,7 +286,7 @@
         </b-form-group>
         <b-form-group
           id="input-group-2"
-          label="Neigbourhood"
+          :label="$t('businessowner.Neigbourhood')"
           label-for="input-2"
           label-size="sm"
         >
@@ -301,7 +301,7 @@
 
         <b-form-group
           id="input-group-2"
-          label="Website"
+          :label="$t('businessowner.Website')"
           label-for="input-2"
           label-size="sm"
         >
@@ -316,7 +316,7 @@
 
         <b-form-group
           id="input-group-2"
-          label="Phone Contact"
+          :label="$t('businessowner.Phone_Contact')"
           label-for="input-2"
           label-size="sm"
         >
@@ -331,7 +331,7 @@
 
         <b-form-group
           id="input-group-2"
-          label="Business Email"
+          :label="$t('businessowner.Business_Email')"
           label-for="input-2"
           label-size="sm"
         >
@@ -340,7 +340,7 @@
             class="mt-1"
             v-model="business_about_input.email"
             type="email"
-            placeholder="Enter your email"
+            :placeholder="$t('businessowner.Enter_your_email')"
             required
           ></b-form-input>
         </b-form-group>
@@ -349,7 +349,7 @@
           <b-container>
             <b-form-group
               label-cols-lg="12"
-              label="Business Hours"
+              :label="$t('businessowner.Busines_Hours')"
               label-size="md"
               label-class=" pt-0 "
               class="mb-0"

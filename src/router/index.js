@@ -69,6 +69,12 @@ const routes = [
     name: "notFound",
     component: notFound,
   },
+  {
+    path: "/cart",
+    name: "cart",
+    component: cart,
+  },
+
 
   {
     path: "/myorders/detail",

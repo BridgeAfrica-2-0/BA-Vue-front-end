@@ -1,23 +1,17 @@
 <template>
   <div>
-  
     <div>
       <div class="chat-box">
         <b-row class="row">
           <div v-if="show">
             <b-col class="pr-0">
               <div class="right-mobile">
-                
                 <b-row>
                   <b-col>
-                    <b-avatar
-                      variant="primary"
-                      text="LV"
-                      size="50"
-                    ></b-avatar>
+                    <b-avatar variant="primary" text="LV" size="50"></b-avatar>
                   </b-col>
                   <b-col>
-                    <h4>{{$t("businessf.Messages")}}</h4>
+                    <h4>{{ $t("businessf.Messages") }}</h4>
                   </b-col>
                   <b-col>
                     <b-icon
@@ -55,7 +49,7 @@
                       <p class="txt">{{ message.startMessage }}</p>
                     </b-col>
                     <b-col class="col-3">
-                      <small> {{ message.timeStamp }} </small>
+                      <small> {{ message.timeStamp }}</small>
                     </b-col>
                   </b-row>
                 </div>
@@ -70,7 +64,7 @@
                   <b-avatar variant="primary" text="BV" size="40"></b-avatar>
                 </b-col>
                 <b-col>
-                  <h3 class="">{{$t("businessf.Messages")}}</h3>
+                  <h3 class="">{{ $t("businessf.Messages") }}</h3>
                 </b-col>
                 <b-col>
                   <b-icon
@@ -109,7 +103,10 @@
             </div>
           </b-col>
 
-          <b-col cols="8" v-if="show == false && info == false && newMsg == false">
+          <b-col
+            cols="8"
+            v-if="show == false && info == false && newMsg == false"
+          >
             <div class="chat-nav">
               <b-row class="mobile">
                 <b-col class="col-1">
@@ -125,7 +122,7 @@
                 </b-col>
                 <b-col class="detale">
                   <h6>Louis Litt</h6>
-                  <small>{{$t("businessf.Online")}}</small>
+                  <small>{{ $t("businessf.Online") }}</small>
                 </b-col>
                 <b-col>
                   <b-row class="mt-3">
@@ -151,7 +148,7 @@
                 </b-col>
                 <b-col class="detail">
                   <h5>Louis Litt</h5>
-                  <p>{{$t("businessf.Online")}}</p>
+                  <p>{{ $t("businessf.Online") }}</p>
                 </b-col>
                 <b-col class="col-4">
                   <b-row class="mt-3 ml-5">
@@ -250,17 +247,23 @@
                 </b-col>
               </b-row>
               <p v-if="checked" class="ml-5">
-                {{$t("businessf.You_have_blocked_messages_and_calls_from_this_user")}}.
-                <b-link @click="showInfo(true)">{{$t("businessf.Unblock_Now")}}</b-link>
+                {{
+                  $t(
+                    "businessf.You_have_blocked_messages_and_calls_from_this_user"
+                  )
+                }}.
+                <b-link @click="showInfo(true)">{{
+                  $t("businessf.Unblock_Now")
+                }}</b-link>
               </p>
             </div>
           </b-col>
           <b-col v-if="info">
             <div class="info-nav">
               <b-button class="primary-bg" @click="showInfo(false)">
-               <fas-icon :icon="['fas', 'arrow-left']" />
+                <fas-icon :icon="['fas', 'arrow-left']" />
               </b-button>
-              <span class="cnt-info"> {{$t("businessf.Contact_Info")}}</span>
+              <span class="cnt-info"> {{ $t("businessf.Contact_Info") }}</span>
             </div>
             <div class="info-bottom">
               <b-avatar
@@ -271,16 +274,18 @@
               ></b-avatar>
               <div class="info-detail">
                 <h1 class="info-name">Louis Litt</h1>
-                <b-link class="primary">{{$t("businessf.View_Profile")}}</b-link>
+                <b-link class="primary">{{
+                  $t("businessf.View_Profile")
+                }}</b-link>
               </div>
             </div>
             <div>
               <ul>
-                <li>{{$t("businessf.Options")}}</li>
+                <li>{{ $t("businessf.Options") }}</li>
                 <li>
                   <b-row
                     ><b-col>
-                      {{$t("businessf.Block_Messages")}}
+                      {{ $t("businessf.Block_Messages") }}
                     </b-col>
                     <b-col>
                       <b-form-checkbox
@@ -293,18 +298,18 @@
                     </b-col>
                   </b-row>
                 </li>
-                <li>{{$t("businessf.Report_User")}}</li>
+                <li>{{ $t("businessf.Report_User") }}</li>
               </ul>
             </div>
             <div class="info-media">
-             <b-row>
-               <b-col>
-                  {{$t("businessf.Media")}}
-               </b-col>
-               <b-col cols="3">
-                 <b-link>{{$t("businessf.See_All")}}</b-link>
-               </b-col>
-             </b-row>
+              <b-row>
+                <b-col>
+                  {{ $t("businessf.Media") }}
+                </b-col>
+                <b-col cols="3">
+                  <b-link>{{ $t("businessf.See_All") }}</b-link>
+                </b-col>
+              </b-row>
               <div class="media">
                 <img
                   src="@/assets/img/about1.jpg"
@@ -343,9 +348,7 @@
             <div class="new-msg">
               <div class="info-nav">
                 <b-row>
-                  <b-col class="col-1 mt-3">
-                    To
-                  </b-col>
+                  <b-col class="col-1 mt-3"> To </b-col>
                   <b-col>
                     <input
                       type="text"
@@ -394,18 +397,12 @@
         </b-row>
       </div>
     </div>
-   
   </div>
 </template>
 
 <script>
-
-
 export default {
-  components: {
- 
-
-  },
+  components: {},
   data() {
     return {
       message: {

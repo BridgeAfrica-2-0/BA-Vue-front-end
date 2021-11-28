@@ -78,7 +78,7 @@
         </b-row>
       </div>
 
-      <div>
+      <div class="mt-3">
         <b-row>
           <b-col sm="12" lg="6" class="">
             <b-card class="border shadow card card-hight">

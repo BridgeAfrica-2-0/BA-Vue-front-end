@@ -25,14 +25,10 @@
           v-for="(network, index) in profileNetworks"
           :key="index"
         >
-
-        
-        
-
+   
 
          <div class="people-style shadow h-100">
-                <b-link
-                >
+             
                   <div class="float-right others">
 
 
@@ -52,7 +48,7 @@
   
                     
                   </div>
-                </b-link>
+            
                 <div class="inline-flex">
                   <div >
                     <div class="center-img">
@@ -66,14 +62,14 @@
                     <p class="textt text">
                      
                       <strong class="title">
-                       <router-link to="/businessfollower">
-                          {{ network.name }} <span v-if="network.is_approve == 1">  (Approved) </span>    <span v-else> (UnApproved)  </span>
+                       <router-link :to="'/network/'+network.id">
+                          {{ network.name }}  <span v-if="network.is_approve == 1">  (Approved) </span>    <span v-else> (UnApproved)  </span>
                         </router-link>
                       </strong>
                       <br />   
-                   
+<!--                    
                       
-                      <span class="m-1" v-for=" cat in network.assign_categories" :key="cat.id "> {{cat.name}}  </span>
+                      <span class="m-1" v-for=" cat in network.assign_categories" :key="cat.id "> {{cat.name}}  </span> -->
                       <br />
                       
                     {{ network.member_count }}  Community  <br />
@@ -527,6 +523,7 @@ export default {
       multiselecvalue: [],
       infiniteId: 1,
       logoimg_url: null,
+      profileNetworks:[],
       BaseURL: process.env.VUE_APP_API_URL,
       showModal: false,
       selectedFile: "",
@@ -598,7 +595,7 @@ export default {
   
 
   computed: {
-    profileNetworks: function () {
+    old_profileNetworks: function () {
       
       return this.$store.state.profile.profilenetwork;
      
@@ -1052,7 +1049,7 @@ return cat;
 
 
       axios
-        .get("network/"+network.id+"/edit-infos/")   
+        .get("network/"+network.id+"/edit-infos")   
         .then(({ data }) => {
           console.log(data);
 
@@ -1081,7 +1078,7 @@ return cat;
       this.createdNetwork.business_id = network.business_id;
       this.createdNetwork.address = network.address;
       this.createdNetwork.neighbourhood = network.neighbourhood;    
-      this.createdNetwork.network_categories =  this.netCategory( network.categories);
+      this.createdNetwork.network_categories =  this.netCategory( network.assign_categories);
       this.createdNetwork.description = network.description;
       this.createdNetwork.purpose = network.purpose;
       this.createdNetwork.special_needs = network.special_needs;

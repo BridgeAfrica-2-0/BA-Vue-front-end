@@ -1,26 +1,31 @@
 <template>
   <div>
+   
     <b-row class="mt-2">
-      <b-col>
+      <b-col> 
         <b-avatar variant="info" :src="comment.picture" class="avat-comment"></b-avatar>
-        <span class="float-right">
-          <b-dropdown size="sm" variant="outline " class="primary">
+        
+        <div class="msg text">
+
+          <span class="float-right" style="    margin-right: -10px;">
+          <b-dropdown size="sm" variant="outline primary " class="primary">
             <template class="more" #button-content> </template>
             <b-dropdown-item> Edit </b-dropdown-item>
             <b-dropdown-item>Delete</b-dropdown-item>
-          </b-dropdown>
+          </b-dropdown>  
         </span>
-        <p class="msg text">
-          <read-more more-str="read more" :text="comment.comment" link="#" less-str="read less" :max-chars="15000">
+
+          <p class="username mb-0 "> <router-link :to="'profile/'+comment.id" > {{comment.name}}   </router-link> </p>
+          <read-more more-str="read more" :text="comment.comment" link="#" less-str="read less" :max-chars="15000" class="mb-1 text-left">
           </read-more>
-        </p>
+        </div>
         <b-icon :icon="icon" variant="primary" aria-hidden="true" @click="onLike" class="cursor"></b-icon>
         {{ comment.comment_likes | nFormatter }}
         <span @click="showReply" class="primary ml-2 reply"><b>Reply</b></span>
         <div v-if="reply">
           <b-row class="mt-2">
             <b-col cols="1">
-              <b-avatar variant="info" :src="comment.picture" class="avat-comment"></b-avatar>
+              <b-avatar v-if="comment.user_type='user'" variant="info" :src="comment.picture" class="avat-comment"></b-avatar>     <b-avatar  v-else variant="info" square :src="comment.picture" class="avat-comment"></b-avatar>    
             </b-col>
             <b-col cols="11"
               ><input
@@ -96,11 +101,12 @@ export default {
 }
 .msg {
   background-color: #ddd;
-  padding: 20px;
+  padding: 10px 20px 0px;
   border-radius: 25px;
   border: solid 1px #ccc;
   margin-left: 40px;
   margin-top: -40px;
+  width: fit-content;
 }
 .reply {
   cursor: pointer;

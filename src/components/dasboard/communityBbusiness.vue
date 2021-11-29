@@ -17,7 +17,7 @@
 
               
               <p class="textt">
-                <strong class="title"> {{ item.name }} </strong> <br />
+                <strong class="title"> <router-link    :to="'business/'+item.id">    {{ item.name }}  </router-link> </strong> <br />
                
             <span v-for="cat in item.category" :key="cat.name">   {{cat.name}}  </span>
                 <br />

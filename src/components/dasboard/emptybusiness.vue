@@ -3,10 +3,6 @@
 
 
 
-    
-
-
-
     <b-card class="border shadow " style="height:300px; ">
       <span class="">
         <h6 class="mybusi">
@@ -17,9 +13,9 @@
       </span>
       <div class="s-card " style="overflow: -moz-scrollbars-vertical">
 
-         <div v-if="business.lenght"> 
+         <div v-if="business.length"> 
         
-        <Business  :business="business"   v-if="business.lenght !=0" />
+        <Business  :business="business"   />
          </div>
 
 
@@ -30,7 +26,7 @@
                 <br />
                 <h6>{{ $t('dashboard.No_Business') }}</h6>
    <router-link to="profile_owner#business">
-                <b-button variant="primary" class="busi-btn">
+                <b-button variant="primary" class="busi-btn">  
                   {{ $t('dashboard.Add_Business') }}
                 </b-button>
    </router-link>

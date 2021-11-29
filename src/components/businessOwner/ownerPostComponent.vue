@@ -1,9 +1,10 @@
 <template>
   <div class="p-3 card-border my-3" style="position: relative">
+
     <div class="mt-2">
       <div class="d-inline-flex">
-        <span md="1" class="m-0 p-0">
-          <b-avatar class=" avat" square variant="primary" :src="item.logo_path"></b-avatar>
+        <span md="1" class="m-0 p-0"> 
+          <b-avatar  v-if="usertype=='user'" class=" avat"  variant="primary" :src="item.user_picture"></b-avatar>  <b-avatar v-else  class=" avat" square variant="primary" :src="item.logo_path"></b-avatar>
         </span>
         <div class="pl-2 pl-md-3 pt-md-2">
           <h5 class="m-0 usernamee">
@@ -172,6 +173,10 @@ export default {
 
   props: {
     post: {},
+    usertype:{
+      
+      default: () => null,
+    },
     mapvideo: {},
     mapmediae: {},
     businessLogo: {},
@@ -611,10 +616,10 @@ export default {
 .toright {
   position: absolute;
   right: 6%;
-  border: 1px solid #e75c18;
+  /* border: 1px solid #e75c18; */
 }
 .toright:hover {
   color: white;
-  border: 1px solid #ddd;
+  /* border: 1px solid #ddd; */
 }
 </style>

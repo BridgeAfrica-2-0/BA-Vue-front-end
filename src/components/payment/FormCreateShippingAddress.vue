@@ -205,6 +205,7 @@
 		},
 		created(){
 			this.getcountries();
+			console.log(this.form.country);
 			
 		},
 		computed: {
@@ -229,12 +230,10 @@
 		},
 		mounted() {
 			// this.$store.dispatch("auth/country");
-			// if (this.mode !== "create") {
-			// 	this.getRegions(this.form.country_id);
-			// 	this.getDivisions(this.form.region_id);
-			// 	this.getCouncils(this.form.division_id);
-			// 	this.getNeigbourhoods(this.form.council_id);
-			// }
+			if (this.mode !== "create") {
+				this.getRegions(this.form.country);
+				this.getDestinations(this.form.region);
+			}
 		},
 		methods: {
 			onSubmit(event) {

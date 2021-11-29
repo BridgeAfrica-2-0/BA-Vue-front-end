@@ -50,11 +50,7 @@
             <h3 class="text-danger text-center margclear bg-warning">clear history</h3>
             </div> -->
       <div class="justify-content-between row my-4">
-        <div class="col order">
-          <h3 class="margclear1 bold1 font-20">
-            {{$t("myOrders.My_orders")}}
-          </h3>
-        </div>
+        <div class="col order"><h3 class="margclear1 bold1">{{$t("myOrders.My_orders")}}</h3></div>
         <div class="col">
           <h3 class="text-danger text-center margclear">{{$t("myOrders.clear_history")}}</h3>
         </div>
@@ -904,10 +900,6 @@ export default {
 .flou {
   color: #b6b2b2;
 }
-.font-20{
-  font-size: 20px;
-}
-
 .show {
   margin-left: 2px;
   margin-bottom: 70px;

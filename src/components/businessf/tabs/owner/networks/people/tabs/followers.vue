@@ -47,7 +47,7 @@
       </b-col>
     </b-row>
     
-    <FlashMessage />
+    <!-- <FlashMessage /> -->
   </div>
 </template>
 
@@ -61,7 +61,7 @@ export default {
     return {
       url:null,
       searchTitle: "",
-      page: 0,
+      page: 1,
       loading: false,
       peoplefollowers: [],
       displayfollowers: []
@@ -113,9 +113,13 @@ export default {
       let formData = new FormData();
       formData.append('keyword', keyword);
       console.log("network/"+this.url+"/people/follower/"+this.page);
+      let lien = "";
+      if(keyword == ""){
+          lien =  'network/'+this.url+'/people/follower/'+this.page;
+      }else{ lien ='network/'+this.url+'/people/follower/'+this.page+','+ formData}
       this.axios
-      .post("network/"+this.url+"/people/follower/"+this.page, formData)
-      .then(({ data }) => {
+      .post(lien)
+      .then( ({data})  => {
        console.log(data);
        console.log(this.page);
         if(keyword){
@@ -143,11 +147,12 @@ export default {
         
     BlockUser(user_id) {
       this.loading = true;
+      console.log("----",user_id);
       console.log("network/"+this.url+"/lock/user/"+user_id);
-      this.axios.delete("network/"+this.url+"/lock/user/"+user_id)
+      this.axios.post("network/"+this.url+"/lock/user/"+user_id)
       .then(response => {
         console.log(response);
-        this.blockUsers();
+        // this.blockUsers();
         this.loading = false;
         this.flashMessage.show({
           status: "success",

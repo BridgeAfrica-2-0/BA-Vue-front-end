@@ -43,7 +43,7 @@
             ></b-form-input>
 
             <div class="fosrm-group text-right w-100">
-              <button type="submit" class="btn btn-primary orange">Save</button>
+              <button type="submit" class="btn btn-primary orange">{{ $t('profileowner.Save') }} </button>
             </div>
           </form>
         </div>
@@ -71,7 +71,7 @@
             ></b-form-input>
 
             <div class="fosrm-group text-right w-100">
-              <button type="submit" class="btn btn-primary orange">Save</button>
+              <button type="submit" class="btn btn-primary orange">{{ $t('profileowner.Save') }} </button>
             </div>
           </form>
         </div>
@@ -98,7 +98,7 @@
             ></b-form-input>
 
             <div class="fosrm-group text-right w-100">
-              <button type="submit" class="btn btn-primary orange">Save</button>
+              <button type="submit" class="btn btn-primary orange">{{ $t('profileowner.Save') }} </button>
             </div>
           </form>
         </div>
@@ -125,7 +125,7 @@
             ></b-form-input>
 
             <div class="fosrm-group text-right w-100">
-              <button type="submit" class="btn btn-primary orange">Save</button>
+              <button type="submit" class="btn btn-primary orange">{{ $t('profileowner.Save') }} </button>
             </div>
           </form>
         </div>
@@ -152,7 +152,7 @@
             ></b-form-input>
 
             <div class="fosrm-group text-right w-100">
-              <button type="submit" class="btn btn-primary orange">Save</button>
+              <button type="submit" class="btn btn-primary orange">{{ $t('profileowner.Save') }} </button>
             </div>
           </form>
         </div>
@@ -179,32 +179,39 @@
             ></b-form-input>
 
             <div class="fosrm-group text-right w-100">
-              <button type="submit" class="btn btn-primary orange">Save</button>
+              <button type="submit" class="btn btn-primary orange">{{ $t('profileowner.Save') }}</button>
             </div>
           </form>
         </div>
-      </b-modal>
+      </b-modal>      
 
-      <b-modal
+      <b-modal     
         id="dobbb"
         ref="dobbb"
         :title="$t('profileowner.Edit_Date_of_Birth')"
         hide-footer
-        @close="cancel"
+       
       >
         <div class="modal-body">
           <form class="form-inline" action="" method="post">
 
             <div class="input-group col-md-12 pl-0 pr-0 mb-4 selec">
-              <label class="col-md-3 pl-0 pr-0 control-label">Birth Year</label>
+              <label class="col-md-3 pl-0 pr-0 control-label">{{ $t('profileowner.Birth_Year') }}</label>
               <div class="col-md-9 pr-0 pl-0">
                 <div class="form-group">
-                  <b-form-datepicker id="example-datepicker" v-model="birthDate.date" :max="max" class="mb-2"></b-form-datepicker>
+
+                    <b-form-datepicker  name="dob" :max="min" id="dob"
+
+                         v-model="birthDate.date" class=" text"  :locale=" this.$i18n.locale"  :placeholder="$t('welcome.DOB')"></b-form-datepicker>
+
+                
+
+
                 </div>
               </div>
             </div>
             <div class="fosrm-group text-right w-100">
-              <button type="button" class="btn btn-dark pr-1" @click="$bvModal.hide('modal-6')">
+              <button type="button" class="btn btn-dark pr-1 mr-3" @click="$bvModal.hide('modal-6')">
                 {{ $t('profileowner.Cancel') }}
               </button>
               <button
@@ -228,6 +235,7 @@
           class="btn btn-outline-primary float-md-right"
           data-toggle="modal"
           data-target="#genderModal"
+          @click="getgender()"
           v-b-modal.modal-7
         >
           {{ $t('profileowner.Edit') }}
@@ -249,10 +257,12 @@
                   >{{ $t('profileowner.Gender') }}
                 </label>
                 <div class="col-md-8 pl-0 pr-0">
+
+                
                   <select
                     id="gender"
                     class="form-control w-100"
-                    v-model="basicInfo.gender"
+                    v-model="usergen"
                   >
                     <option value="M">{{ $t('profileowner.Male') }}</option>
                     <option value="F">{{ $t('profileowner.Female') }}</option>
@@ -425,8 +435,11 @@ export default {
     const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
      const maxDate = new Date(today)
     return {
+       min: moment().subtract(18, 'years').format('YYYY-MM-DD'),
+        moment: moment,
       max: maxDate,
       websiteId: null,
+      usergen:null,
       basicInfo: {
         dateOfBirth: { day: "12", month: "1", year: "2000" },
         gender: "M",
@@ -466,6 +479,8 @@ export default {
       });
   },
   computed: {
+
+
     birthDate() {
       let dob = this.info.user.dob;
       let check = moment(dob, "YYYY/MM/DD");
@@ -480,6 +495,20 @@ export default {
     },
   },
   methods: {
+
+    
+    getgender(){
+   
+     if(this.info.user.gender =="female")  {  
+        this.usergen="F"
+     }else{
+      
+        this.usergen="M"
+     }
+
+    },
+
+
     cancel() {
       console.log("Cancel edit birth date user  ++++++");
       this.basicInfo = JSON.parse(
@@ -495,8 +524,7 @@ export default {
           dateOfBirth: this.birthDate,
         })
         .then((response) => {
-          console.log("save new birth date user response (3) +++++", response);
-          console.log("save new birth date user end +++++");
+         
           this.$store
             .dispatch("profile/loadUserPostIntro", null)
             .then((response) => {
@@ -507,21 +535,19 @@ export default {
             });
         })
         .catch((error) => {
-          console.log(
-            "not save new birth date user end error (2) +++++",
-            error
-          );
+         
         })
         .finally(() => {
-          this.$refs["model-6"].hide();
+          this.$refs["dobbb"].hide();
         });
     },
-    saveGender() {
+    
+    saveGender() {  
       console.log("save new gender user start +++++");
       console.log(this.basicInfo.gender);
       this.$store
         .dispatch("profile/updateUserBasicInfosGender", {
-          gender: this.basicInfo.gender,
+          gender: this.usergen,
         })
         .then((response) => {
           this.$store

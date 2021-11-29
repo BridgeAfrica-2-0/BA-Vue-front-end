@@ -9,7 +9,8 @@ import passrecover from './passrecover.json'
 import welcome from './welcome.json'
 import dashboard from './dashboard.json'
 import profileowner from './profileowner.json'
-
+import Order from './Order.json'
+import myOrders from './myOrders.json'
 
 import memnetwork from './memnetwork.json'
 
@@ -23,19 +24,17 @@ export const en = {
 
 
     auth: auth,
-     businessf: businessf,
+    businessf: businessf,
     search: search,
-
-    // network: network,
-    // profilefollower: profilefollower,
-    // verification: verification,
+    network: network,
     passrecover: passrecover,
-    // welcome: welcome,
+    welcome: welcome,
     dashboard: dashboard,
     memnetwork: memnetwork,
-
-    network: network,
-    profilefollower: profilefollower,
+   profilefollower: profilefollower,
     verification: verification,
     profileowner: profileowner,
+  
+    Order:Order,
+    myOrders:myOrders,
 }

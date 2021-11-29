@@ -1,7 +1,8 @@
 <template>
   <div>
 
-<NotFoundComponent v-if=" !business.data  && !prodLoader" :title="title" />
+
+<NotFoundComponent v-if=" !business.data.length  && !prodLoader" :title="title" />
     <div class="people-style shadow" v-for="biz in business.data" :key="biz.business_id">   
       <b-row>
         <b-col md="3" xl="3" lg="3" cols="5" sm="3">
@@ -108,7 +109,7 @@
   
 
 
-    <b-pagination v-if="business.data"
+    <b-pagination v-if="business.data.length"
       v-model="currentPage"
       :total-rows="total"
       :per-page="per_page"

@@ -27,7 +27,7 @@ export default {
       return axios
       .get(`network/${dataInfo.id}/${dataInfo.path}`)
       .then(({ data }) => {
-          commit("setNotifications", data);
+          commit("setNotifications", data.data);
         console.log(data);
         console.log(`network/${dataInfo.id}/${dataInfo.path}`);
       })

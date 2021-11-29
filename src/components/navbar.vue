@@ -147,11 +147,11 @@
             <b-collapse id="nav-collapse" is-nav>
               <div class="nav-item">
                 <router-link
-                  :to="{ name: navLink('home') }"
+                  to="/dashboard"
                   class="nav-link text-dark hov"
                   href=""
                 >
-                  Home {{ navLink("home") }}
+                  {{ navLink("home") }}
                 </router-link>
               </div>
 
@@ -689,7 +689,6 @@ export default {
         this.newNotification(newRouteNotificationApi);
         this.newMessage(newRouteMessageApi);
       } catch (error) {
-        
         return new Error(error);
       }
     },
@@ -729,7 +728,9 @@ export default {
     navLink(type) {
       const link = {
         home: () => {
-          return this.user ? "dashbord" : "home1";
+          // return this.profile ? "dashbord" : "dashboard";
+
+          return "dashbord";
         },
       };
       try {
@@ -753,7 +754,11 @@ export default {
 
     logout: async function () {
       const response = await this.$repository.notification.logOut();
-      if (response.success) this.Logout();
+      if (response.success) {
+        this.Logout();
+      } else {
+        this.Logout();
+      }
     },
 
     switchToProfile: async function () {

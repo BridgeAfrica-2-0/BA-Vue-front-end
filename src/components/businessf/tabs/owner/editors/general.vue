@@ -120,7 +120,7 @@ export default {
         if (newVal == 3) {
           this.selectedIdd = '3';
 
-          this.tabIndex = '1';
+          this.tabIndex = '4';
         }
 
         if (newVal == 2) {
@@ -130,12 +130,12 @@ export default {
 
         if (newVal == 4) {
           this.selectedIdd = '4';
-          this.tabIndex = '2';
+          this.tabIndex = '5';
         }
 
         if (newVal == 5) {
           this.selectedIdd = '5';
-          this.tabIndex = '3';
+          this.tabIndex = '6';
         }
 
         if (newVal == 6) {

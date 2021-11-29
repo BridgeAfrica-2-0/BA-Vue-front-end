@@ -16,15 +16,6 @@
 					</span>
           <!-- {{business_intro.keywords}}  -->
         </p>
-<<<<<<< HEAD
-        <p><b-icon icon="search" class="primary"></b-icon>  
-        	<span v-for="(keyword, index) in business_intro.keywords" :key="index"
-						>{{ keyword }},
-					</span>
-          <!-- {{business_intro.keywords}}  -->
-        </p>
-=======
->>>>>>> 4d6df2670bce3f8f1b9cdc061b702bdce641c396
         <p>
           <b-icon icon="geo-alt-fill" class="primary"></b-icon> Mokolo, {{ $t('businessf.Yaounde') }},
           {{ $t('businessf.Cameroon') }}

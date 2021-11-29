@@ -170,29 +170,6 @@ export default {
   computed: {
     notifications() {
       return this.$store.state.networkNotification.notifications;
-<<<<<<< HEAD
-    },
-
-    ...mapGetters({
-      newNotifications: 'notification/NEW_NETWORK_NOTIFICATION'
-    })
-  },
-
-  watch: {
-    selected(newValue, oldValue) {
-      // Handle changes in individual notifications checkboxes
-      if (newValue.length === 0) {
-        this.indeterminate = false;
-        this.selectAll = false;
-      } else if (newValue.length === this.notifications.data.length) {
-        this.indeterminate = false;
-        this.selectAll = true;
-      } else {
-        this.indeterminate = true;
-        this.selectAll = false;
-      }
-=======
->>>>>>> 4d6df2670bce3f8f1b9cdc061b702bdce641c396
     },
     newNotifications: function (val) {
       console.log("newNotifications");
@@ -206,26 +183,6 @@ export default {
       newNotifications: 'notification/NEW_NETWORK_NOTIFICATION'
     })
   },
-<<<<<<< HEAD
-  mounted(){
-    this.url = this.$route.params.id
-    this.getNotifications() 
-  },
-  methods: {
-    select(checked) {
-      console.log("this.selectAll: "+this.selectAll);
-      console.log("checked: "+checked);
-      this.selected = [];
-      if (checked) {
-        for (let notification in this.notifications.data) {
-            this.selected.push(this.notifications.data[notification].id.toString());
-            console.log("this.notifications.data[notification].id: "+this.notifications.data[notification].id);
-        }
-      }
-    },
-    updateCheckall: function() {
-      if (this.notifications.data.length === this.selected.length) {
-=======
 
   watch: {
     selected(newValue, oldValue) {
@@ -235,14 +192,11 @@ export default {
         this.selectAll = false;
       } else if (newValue.length === this.notifications.data.length) {
         this.indeterminate = false;
->>>>>>> 4d6df2670bce3f8f1b9cdc061b702bdce641c396
         this.selectAll = true;
       } else {
         this.selectAll = false;
       }
     },
-<<<<<<< HEAD
-=======
     newNotifications: function (val) {
       console.log("newNotifications");
       console.log(val);
@@ -274,7 +228,6 @@ export default {
         this.selectAll = false;
       }
     },
->>>>>>> 4d6df2670bce3f8f1b9cdc061b702bdce641c396
     getNotifications() {
       console.log('getNotifications Mounted');
     this.$store

@@ -84,13 +84,8 @@
               <b-avatar variant="primary" :src="info.user.profile_picture" class="img-fluid avat-comment"></b-avatar>
             </div>
 
-<<<<<<< HEAD
-            <div class="p-0 m-0 pr-3 inline-comment">
-              <input placeholder="Post a Comment" class="comment" type="text" />
-=======
             <div  class="p-0 m-0 pr-3 inline-comment">
               <input :placeholder="$t('dashboard.Post_a_Comment')" class="comment" type="text" />
->>>>>>> main
 
               <fas-icon class="primary send-cmt" :icon="['fas', 'paper-plane']" />
             </div>

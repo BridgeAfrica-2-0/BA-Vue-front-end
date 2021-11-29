@@ -1,16 +1,11 @@
 <template>
   <div>
-<<<<<<< HEAD
     <b-modal id="modal-sm" size="sm" hide-header>
       {{ $t('network.Do_you_want_to_join_this_network') }} ?
     </b-modal>
 
     <div class="people-style shadow" v-for="item in network" :key="item.id">
 
-=======
-<!-- {{networks}} -->
-    <div v-for="network in networks" :key="network.id"  class="people-style shadow">
->>>>>>> 4d6df2670bce3f8f1b9cdc061b702bdce641c396
       <b-row>
         <div style="display:none;">{{network['type']= 'network'}}</div>
         <b-col md="3" xl="5" lg="5" cols="5" sm="3">
@@ -29,7 +24,6 @@
           <p class="textt">
             <strong class="title"> {{network.name.substring(0,10)+"..." }} </strong> <br />
             <!-- {{network.category ? network.category[0].name : "null"}} -->
-<<<<<<< HEAD
             <br />
 
 
@@ -42,17 +36,6 @@
             <span v-if="network.description.length<15">{{ network.description}}</span>
             <span v-else >{{ network.description.substring(0,15)+"..." }} <b-link>{{ $t('network.Read_More') }}</b-link></span>
 
-=======
-            <br />
-            {{network.followers}} {{ $t('network.Community')}} <br />
-
-            <span class="location">
-              <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{network.address}}
-            </span>
-            <br />
-            <span v-if="network.description.length<15">{{ network.description}}</span>
-            <span v-else >{{ network.description.substring(0,15)+"..." }} <b-link>{{ $t('network.Read_More') }}</b-link></span>
->>>>>>> 4d6df2670bce3f8f1b9cdc061b702bdce641c396
           </p>
         </b-col>
 
@@ -74,7 +57,6 @@
                   variant="primary"
                   @click="$emit('handleFollow', network)"
                 >
-<<<<<<< HEAD
                   <i class="fas fa-lg btn-icon" :class="item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"></i>
                   <span class="btn-com">{{ $t('network.Community') }} </span>
                 </b-button>
@@ -92,48 +74,6 @@
                   <i class="fas fa-map-marked-alt  fa-lg btn-icon "></i>
                   <span class="btn-text">{{ $t('network.Direction') }} </span>
 
-=======
-                  <i :class="network.is_follow ? 'fas fa-user-minus fa-lg btn-icon':'fas fa-user-plus fa-lg btn-icon'"></i>
-                  <span class="btn-com">{{ $t('network.Community')}}</span>
-                </b-button>
-              </b-col>
-
-              <b-col
-                md="12"
-                lg="4"
-                xl="4"
-                sm="12"
-                cols="4"
-                class="mt-2 text-center"
-              >
-                <b-button
-                  block
-                  size="sm"
-                  class="b-background shadow"
-                  variant="primary"
-                >
-                  <i class="fas fa-envelope fa-lg btn-icon"></i>
-                  <span class="btn-text">{{ $t('network.Message') }}</span>
-                </b-button>
-              </b-col>
-
-              <b-col
-                md="12"
-                lg="4"
-                xl="4"
-                sm="12"
-                cols="4"
-                class="mt-2 text-center"
-              >
-                <b-button
-                  block
-                  size="sm"
-                  class="b-background shadow"
-                  variant="primary"
-                >
-                  <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
-                  <span class="btn-text">{{ $t('network.Direction') }}</span>
->>>>>>> 4d6df2670bce3f8f1b9cdc061b702bdce641c396
                 </b-button>
               </b-col>
             </b-row>
@@ -164,10 +104,6 @@ export default {
     };
   },
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 4d6df2670bce3f8f1b9cdc061b702bdce641c396
 };
 </script>
 

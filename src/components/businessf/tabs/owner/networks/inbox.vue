@@ -1204,7 +1204,7 @@
                   </b-col>
                 </b-row>
               </div>
-
+            </div>
                    
 
                     <b-form-input
@@ -1527,6 +1527,8 @@ export default {
     };
   },
   computed: {
+
+    
     all() {
       return this.$store.getters["networkChat/getAll"];
     },
@@ -1992,17 +1994,6 @@ showsearchh(){
   },
 
 
-  computed: {
-    resultQuery(){
-      if(this.searchQuery){
-      return this.resources.filter((item)=>{
-        return this.searchQuery.toLowerCase().split(' ').every(v => item.name.toLowerCase().includes(v))
-      })
-      }else{
-        return this.resources;
-      }
-    }
-  }
 
 
 };

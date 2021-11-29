@@ -187,8 +187,6 @@
       </b-col>
     </b-row>
 
-    <FlashMessage />
-
   </div>
 </template>
 

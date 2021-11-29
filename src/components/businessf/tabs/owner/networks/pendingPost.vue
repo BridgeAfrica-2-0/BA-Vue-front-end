@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <!--
+    
     <b-row>
       <b-col class="f-left">
         <h5 class=" d-inline-block">
@@ -10,9 +10,7 @@
       <b-col class="f-right"> <span class="">35 Pending</span> </b-col>
     </b-row>
 
-
--->
-
+{{allPendingPost}}
     <b-row>
       <b-col cols="12" class="f-left">
         <div
@@ -102,9 +100,15 @@
 
             <light css=" " :cells="item.media.length" :items="mapmediae(item.media)"></light>
           </div>
-          
+
 
         </div>
+      </b-col>
+      <b-col cols="12">
+        <infinite-loading ref="infiniteLoading" @infinite="infiniteHandler">
+            <!-- <div class="text-red" slot="no-more">{{ $t('network.No_More_Request') }}</div>
+            <div class="text-red" slot="no-results">{{ $t('network.No_More_Request') }}</div> -->
+        </infinite-loading>
       </b-col>
     </b-row>
     <b-row>
@@ -114,6 +118,17 @@
         </p>
       </b-col>
     </b-row>
+    <!-- <b-row> -->
+          <!-- <b-col cols="12"> -->
+        <!-- <infinite-loading @infinite="infiniteHandler"> -->
+            <!-- <div class="text-red" slot="no-more">{{ $t('network.No_More_Request') }}</div>
+            <div class="text-red" slot="no-results">{{ $t('network.No_More_Request') }}</div> -->
+        <!-- </infinite-loading> -->
+             <!-- <infinite-loading
+        ref="infiniteLoading"
+        @infinite="infiniteHandler"
+      ></infinite-loading> -->
+      <!-- </b-col></b-row> -->
   </div>
 </template>
 
@@ -164,6 +179,16 @@ export default {
       isSubmitted: false,
       fileImageArr: [],
     };
+  },
+
+  computed: {
+    ...mapGetters({
+      info: "networkSetting/getNetwork",
+      owner_post: "networkSetting/allPendingPost",
+    }),
+  },
+  mounted() {
+    this.url = this.$route.params.id;
   },
 
   methods: {
@@ -225,20 +250,19 @@ export default {
       console.log('reoading');
     },
 
-
-
-   
-
     infiniteHandler($state) {
-      let url='network/show/posts/pending/'+this.url+'?page='+this.page; 
-
+      console.log("infiniteHandler fired")
+      let url='show/posts/pending/'+this.url+'?page='+this.page; 
+      console.log(url)
        if (this.page == 1) {
         this.owner_post.splice(0);
+        console.log("this.owner_post.splice(0);")
       }
        this.$store
-        .dispatch("networkSetting/loadMore", url)
+        .dispatch("NetworkSettings/loadMore", url)
         .then(({ data }) => {
-          
+          console.log("NetworkSettings/loadMore", url)
+          console.log(data)
           if (data.data.length) {
             this.page += 1;
 
@@ -253,8 +277,7 @@ export default {
         });
     },
 
-
-      approved(id) {
+    approved(id) {
 
 
          let loader = this.$loading.show({
@@ -303,10 +326,6 @@ export default {
         });
     },
 
-
-
-
-
     unapproved(id) {
        let loader = this.$loading.show({
         container: this.fullPage ? null : this.$refs.creatform,
@@ -354,18 +373,6 @@ export default {
         });
     },
 
-
-
-
-
-
-
-
-
- 
-   
-
-
     ownerPost() {
       this.$store
         .dispatch('profile/ownerPost')
@@ -376,10 +383,6 @@ export default {
           console.log({ err: err });
         });
     },
-
-
-
-
 
     showModal() {
       this.$refs['modal-3'].show();
@@ -397,19 +400,7 @@ export default {
       }
     },
   },
-  computed: {
 
-    ...mapGetters({
-      info: "networkSetting/getNetwork",
-      owner_post: "networkSetting/allPendingPost",
-    }),
-
-   
-   
-  },
-  mounted() {
-    this.url = this.$route.params.id;
-  },
 };
 </script>
 

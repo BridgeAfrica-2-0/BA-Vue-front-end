@@ -4,8 +4,6 @@
       <!-- {{ businessInfo }}<br /><br /> -->
       <!-- {{ editbiz }} -->
 
-      <FlashMessage />
-
       <b-form>
         <div class="b-bottom">
           <b-container>
@@ -582,7 +580,6 @@
         </div>
       </b-form>
 
-      <FlashMessage />
     </b-container>
     <b-container v-else>
       <div class="text-center">

@@ -1,7 +1,6 @@
 <template>
   <div id="app" class="" ref="formContainer">
-
-
+    <div id="flashmessage"><FlashMessage /></div>
     <!-- <notifications group="foo" /> -->
     <router-view />
   </div>
@@ -9,7 +8,7 @@
 <script>
 /* eslint-disable */
 
-import { Redis } from '@/mixins';
+import { Redis } from "@/mixins";
 export default {
   mixins: [Redis],
 };
@@ -17,25 +16,23 @@ export default {
 
 
 <style lang="less">
-
-
 @import "./assets/css/main.css";
 @import "./assets/css/style.css";
 @import "./assets/css/bootstrap.css";
 
-@import './assets/icon/iconfont.css';
+@import "./assets/icon/iconfont.css";
 
-
-
-  @import "https://pro.fontawesome.com/releases/v5.10.0/css/all.css";
-
+@import "https://pro.fontawesome.com/releases/v5.10.0/css/all.css";
 
 #app {
-  font-family: Open Sans, Helvetica Neue, Helvetica, Arial, sans-serif;    
+  font-family: Open Sans, Helvetica Neue, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
   margin-left: 5px;
+}
+#flashmessage{
+  z-index: 9999 !important;
 }
 .primary {
   color: #e75c18;
@@ -58,7 +55,7 @@ export default {
 .nav-link {
   color: #000;
 }
-li .nav-link:hover{
+li .nav-link:hover {
   background-color: #e75c18;
   color: #fff;
 }
@@ -83,7 +80,7 @@ li .nav-link:hover{
 .purple-bg {
   background-color: #6263;
 }
-.card-header{
+.card-header {
   border: none;
   background-color: red;
 }

@@ -1,6 +1,7 @@
 <template>
   <div id="app" class="" ref="formContainer">
     <!-- <notifications group="foo" /> -->
+    <FlashMessage />
     <router-view />
   </div>
 </template>

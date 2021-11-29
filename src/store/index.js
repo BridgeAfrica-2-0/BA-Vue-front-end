@@ -10,6 +10,7 @@ import businessRole from './businessRole';
 import businessAccountType from './businessAccountType';
 import businessOwner from './businessOwner';
 import marketSearch from './marketSearch';
+import market from './market';
 import networkSearch from './networkSearch';
 import allSearch from './allSearch';
 import ProfileAndBusinessDetails from './ProfileAndBusinessDetails';
@@ -67,6 +68,7 @@ export default new Vuex.Store({
         hotbusiness,
         networkProfileMembers,
         marketSearch,
+        market,
         networkSearch,
         allSearch,
         profile,

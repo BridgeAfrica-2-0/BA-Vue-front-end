@@ -138,7 +138,7 @@ const routes = [
   },
   {
     path: "/dashboard",
-    name: "home",
+    name: "dashboard",
     component: dashboard,
     meta: {
       auth: true,

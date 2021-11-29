@@ -286,9 +286,11 @@ export default {
         SAVE_BUSINESS_CHAT({ commit }, data) {
             // commit("setUsers", []);
             console.log("[DEBUG]", data);
+            var payload = data.data
+            var type = data.type
 
-            if (data.type == 'business') {
-                axios.post(`/messages/BusinesstoBusiness`, data, {
+            if (type == 'business') {
+                axios.post(`/messages/BusinesstoBusiness`, payload, {
                         headers: {
                             'Content-Type': 'multipart/form-data'
                         }
@@ -299,8 +301,8 @@ export default {
                     .catch((err) => {
                         console.log(err);
                     })
-            } else if (data.type == 'user') {
-                axios.post(`/messages/BusinesstoUser`, data, {
+            } else if (type == 'user') {
+                axios.post(`/messages/BusinesstoUser`, payload, {
                         headers: {
                             'Content-Type': 'multipart/form-data'
                         }
@@ -312,7 +314,7 @@ export default {
                         console.log(err);
                     })
             } else {
-                axios.post(`/messages/BusinesstoNetwork`, data)
+                axios.post(`/messages/BusinesstoNetwork`, payload)
                     .then((res) => {
                         console.log("Message saved...", res.data.data);
                     })

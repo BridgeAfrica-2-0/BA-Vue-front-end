@@ -40,8 +40,7 @@
             hidden
             ref="movie"
           />
-
-          <a>
+          <a @click="$refs.movie.click()">
             <div class="drag-textt">
               <fas-icon :icon="['fas', 'plus']" />
               <h3>{{ $t('profileowner.Add_Item') }}</h3>

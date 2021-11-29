@@ -970,7 +970,7 @@ export default {
   id = setInterval(frame, 5);
   function frame() {
     if (pos == 50) {
-      clearInterval(id);elem.style.left = 0 + 'px';
+      clearInterval(id);
     } else {
       pos++;
       // elem.style.top = pos + 'px';

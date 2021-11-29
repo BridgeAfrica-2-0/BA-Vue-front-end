@@ -166,7 +166,6 @@
           </b-button>
         </b-form>
       </b-container>
-      <FlashMessage />
     </b-modal>
 
     <!-- Edit Profile Picture -->

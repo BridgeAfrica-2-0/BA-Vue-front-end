@@ -5,12 +5,12 @@
       <span class="t-color"> Network </span>
 
       <b-button
-        class="float-right"
+        class="float-right w-auto"
         @click="showmodal(true, 'add')"
         variant="primary"
         >Add Network</b-button
       >
-      <hr />    
+      <hr />
       <b-row>
         <b-col
           cols="12"
@@ -19,7 +19,7 @@
           class="p-0 mb-2"
           v-for="network in network"
           :key="network.id"
-        >   
+        >
           <div class="people-style shadow h-100">
             <b-row>
               <b-col md="3" xl="3" lg="3" cols="5" sm="3">
@@ -30,7 +30,9 @@
               <b-col md="5" cols="7" lg="7" xl="5" sm="5">
                 <p class="textt">
                   <strong class="net-title"> {{ network.name }} </strong> <br />
-              <span v-for="cat in network.categories" :key="cat" >  {{cat}} </span>
+                  <span v-for="cat in network.categories" :key="cat">
+                    {{ cat }}
+                  </span>
                   <br />
                   {{ network.followers }} Community <br />
 
@@ -40,14 +42,14 @@
                   </span>
                   <br />
 
-              <read-more
-                v-if="network.description"
-                more-str="read more"
-                :text="network.description"
-                link="#"
-                less-str="read less"
-                :max-chars="200"
-              ></read-more>  
+                  <read-more
+                    v-if="network.description"
+                    more-str="read more"
+                    :text="network.description"
+                    link="#"
+                    less-str="read less"
+                    :max-chars="200"
+                  ></read-more>
                 </p>
               </b-col>
 
@@ -87,11 +89,9 @@
             </b-row>
           </div>
         </b-col>
-
       </b-row>
 
-      
-        <infinite-loading @infinite="infiniteHandler"></infinite-loading>
+      <infinite-loading @infinite="infiniteHandler"></infinite-loading>
     </div>
   </div>
 </template>
@@ -103,7 +103,7 @@ export default {
     return {
       page: 1,
       biz_id: null,
-     
+
       BaseURL: process.env.VUE_APP_API_URL,
       showModal: false,
       selectedFile: "",
@@ -139,7 +139,6 @@ export default {
   },
 
   computed: {
-
     network() {
       return this.$store.state.businessOwner.networks;
     },
@@ -155,8 +154,6 @@ export default {
     },
   },
   methods: {
-    
-
     ...mapActions({
       addNetwork: "businessOwner/addNetwork",
       getNetworks: "businessOwner/getNetworks",
@@ -169,14 +166,13 @@ export default {
       if (this.page == 1) {
         this.network.splice(0);
       }
-   this.$store
+      this.$store
         .dispatch("businessOwner/loadMore", url)
         .then(({ data }) => {
           console.log(data.data);
           if (data.data.length) {
-           
-              this.network.push(...data.data);
-            
+            this.network.push(...data.data);
+
             this.page += 1;
 
             $state.loaded();
@@ -498,5 +494,9 @@ export default {
   .btn {
     display: flex;
   }
+}
+
+.w-auto {
+  widows: auto;
 }
 </style>

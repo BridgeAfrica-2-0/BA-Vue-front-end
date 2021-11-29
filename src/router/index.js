@@ -67,6 +67,12 @@ const routes = [
     name: "notFound",
     component: notFound,
   },
+  {
+    path: "/cart",
+    name: "cart",
+    component: cart,
+  },
+
 
   {
     path: "/myorders/detail",
@@ -136,7 +142,7 @@ const routes = [
   },
   {
     path: "/dashboard",
-    name: "home",
+    name: "dashboard",
     component: dashboard,
     meta: {
       auth: true,
@@ -276,6 +282,14 @@ const routes = [
     name: "BusinessFollower",
     component: businessFollower,
   },
+
+  {
+    path: "/business/:id?",
+    name: "BusinessFollower",
+    component: businessFollower,
+  },
+
+
   {
     path: "/businessvisitor",
     name: "BusinessVisitor",

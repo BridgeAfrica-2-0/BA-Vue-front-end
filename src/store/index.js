@@ -10,6 +10,7 @@ import businessRole from './businessRole';
 import businessAccountType from './businessAccountType';
 import businessOwner from './businessOwner';
 import marketSearch from './marketSearch';
+import market from './market';
 import networkSearch from './networkSearch';
 import allSearch from './allSearch';
 import ProfileAndBusinessDetails from './ProfileAndBusinessDetails';
@@ -50,13 +51,12 @@ import { social } from './social';
 
 Vue.use(Vuex);
 
+
 // axios.defaults.baseURL = "https://test.maxinemoffett.com/api/v1/";
 
 
 axios.defaults.baseURL = process.env.VUE_APP_API_URL_DEV;
 // axios.defaults.baseURL = process.env.VUE_APP_API_URL_DEV_COU
-
-
 
 export default new Vuex.Store({
     modules: {
@@ -70,6 +70,7 @@ export default new Vuex.Store({
         hotbusiness,
         networkProfileMembers,
         marketSearch,
+        market,
         networkSearch,
         allSearch,
         profile,

@@ -8,14 +8,131 @@
         {{$t("search.No_data_available_for_that_search")}}!
       </a></b-alert
     >
+
+
+
+
+   
+
+
+     <div class="people-style border shadow"  v-for="item in users.data.data"
+      :key="item.id"  >
+
+     
+
+            <b-row class="mb-1">
+              <b-col md="3" cols="4" sm="4" class="my-auto">
+                <b-avatar
+                  class="p-avater"
+                  variant="primary"
+                  :src="item.profile_picture"
+                ></b-avatar>
+              </b-col>
+
+              <b-col md="8" cols="8" sm="8">
+                <div>
+                  <b-row class="shift">
+                    <b-col md="12" lg="6" xl="6">
+                      <div class="e-name">
+                        <b-row>
+                          <b-col
+                            md="6"
+                            lg="12"
+                            cols="6"
+                            xl="12"
+                            class="mt-lg-2"
+                          >
+                            <div class="mt-3 mt-lg-0 mt-xl-0 username">
+                            <router-link  >  <b> {{ item.name }} </b>   </router-link> 
+                            </div>
+                          </b-col>
+
+                          <b-col
+                            md="6"
+                            lg="12"
+                            cols="6"
+                            xl="12"
+                            class="mt-3 mt-lg-1 mt-xl-3"
+                          >
+                            <h6 class="follower m-15">
+                              {{ count(item.followers) }}
+                              {{ $t('profileowner.Community') }}
+                            </h6>
+                          </b-col>
+                        </b-row>
+                      </div>
+                    </b-col>
+
+                    <b-col lg="6" xl="6" cols="12" md="12">
+                      <div>
+                        <b-row class="mt-lg-0">
+                          <b-col
+                            md="6"
+                            lg="12"
+                            cols="6"
+                            xl="12"
+                            class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
+                          >
+                            <b-button
+                              block
+                              variant="primary"
+                              size="sm"
+                              class="b-background flexx pobtn shadow"
+                            >
+                              <i class="fas fa-envelope   fa-lg btn-icon "></i>
+                              <span class="btn-text">{{ $t('profileowner.Message') }}</span>
+                            </b-button>
+                          </b-col>
+
+                          <b-col
+                            md="6"
+                            lg="12"
+                            cols="6"
+                            xl="12"
+                            class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
+                          >
+                              <b-button
+                          block
+                          size="sm"
+                          class="b-background flexx pobtn shadow"
+                          :class="item.is_follow !== 0 && 'u-btn'"
+                          :id="'followbtn'+item.id"
+                          variant="primary"
+                          @click="handleFollow(item)"
+                        >
+
+                           <i
+                            class="fas fa-lg btn-icon"
+                            :class="item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"
+                          ></i>
+
+                          <span class="btn-com">{{ $t('dashboard.Community') }}</span>
+                        </b-button>
+
+                          </b-col>
+                        </b-row>
+                      </div>
+                    </b-col>
+                  </b-row>
+                </div>
+              </b-col>
+            </b-row>
+          </div>
+
+
+
+
+
       <div class="people-style border shadow" v-for="(user, index) in users.data.data"
       :key="index">
+
+     
         <b-row class="mb-1">
           <b-col md="3" cols="4" sm="3" class="my-auto">
             <b-avatar
               class="p-avater"
               variant="primary"
-              src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
+              :src="user.profile_picture"
             ></b-avatar>
           </b-col>
 
@@ -34,7 +151,7 @@
                         class="mt-lg-2"
                       >
                         <div class="mt-2 mt-lg-0 mt-xl-0 username">
-                          <b> {{user.user.name}} </b>
+                          <b> {{user.name}} </b>
                         </div>
                       </b-col>
 
@@ -105,6 +222,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
 
   computed: {
@@ -115,6 +233,57 @@ export default {
       return this.$store.getters["allSearch/getLoader"];
     },
   },
+
+
+methods:{   
+
+
+  count(number) {
+      if (number >= 1000000) {
+        return number / 1000000 + "M";
+      }
+      if (number >= 1000) {
+        return number / 1000 + "K";
+      } else return number;
+    },
+
+
+
+
+
+ async handleFollow(user) {
+      
+      console.log("yoo ma gee");
+       document.getElementById("followbtn"+user.id).disabled = true;
+      const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
+      const nextFollowState = user.is_follow === 0 ? 1 : 0;
+      const data = {
+        id: user.id,
+        type: 'user',
+      };
+
+      await axios
+        .post(uri, data)
+        .then(({ data }) => {
+          console.log(data);
+          user.is_follow = nextFollowState;
+           document.getElementById("followbtn"+user.id).disabled = false;
+        })
+         
+          .catch((err) =>{  
+          
+          console.log({err:err})  ;
+           document.getElementById("followbtn"+user.id).disabled =  false;
+          
+        });
+    },
+
+}
+  
+
+
+
+
 };
 </script>
 

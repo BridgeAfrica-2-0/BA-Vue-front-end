@@ -19,19 +19,14 @@
             {{ album.items | plural }}
           </p>
 
-          <b-button
-            v-if="upHere"
-            variant="outline-primary"
-            size="sm"
-            @click="show"
-          >
+          <b-button v-if="upHere" variant="outline-primary" size="sm" @click="show">
             {{ $t('profileowner.Show') }}
           </b-button>
         </div>
       </div>
     </a>
 
-    <div class="mediadesc" v-if="canBeUpdate">
+    <div class="mediadesc" v-if="canBeUpdate && isEditor">
       <ul class="navbar-nav pull-right options">
         <li class="nav-item dropdown">
           <b-dropdown size="sm" class="call-action" variant="link" toggle-class="text-decoration-none" no-caret>
@@ -55,7 +50,7 @@ import defaultImage from '@/assets/img/nothing.jpg';
 import { fullMediaLink } from '@/helpers';
 
 export default {
-  props: ['album', 'type', 'deleteAlbums', 'editAlbum', 'canBeUpdate', 'showAlbumPictures'],
+  props: ['album', 'type', 'deleteAlbums', 'editAlbum', 'canBeUpdate', 'showAlbumPictures', 'isEditor'],
 
   data: () => ({
     upHere: false,

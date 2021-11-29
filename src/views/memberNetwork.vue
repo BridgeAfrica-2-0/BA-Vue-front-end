@@ -1,15 +1,16 @@
 <template>
   <div>
+     <span v-if="isloaded">
     <Navbar />
 
     <b-container fluid class="content">
       <b-row>
-        <b-col lg="5" xl="4" class=" ">
+        <b-col lg="5" xl="4" class=" ">  
           <Parent />
         </b-col>
 
         <b-col class="col mt-sm-3">
-          <b-tabs content-class="mt-3" fill pills>
+          <b-tabs content-class="mt-3" lazy fill pills>
             <b-tab :title="$t('memnetwork.Posts')"><Posts /></b-tab>
             <b-tab :title="$t('memnetwork.Media')"><Media /></b-tab>
             <b-tab :title="$t('memnetwork.Members')"><Members /></b-tab>
@@ -29,13 +30,16 @@
     </p>
     <Footer />
 
+     </span>
+
   </div>
 </template>
 
 <script>
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
-import Posts from "../components/memberNetworkF/postNetwork";
+//import Posts from "../components/memberNetworkF/postNetwork";
+import Posts from "@/components/businessf/tabs/owner/networks/postNetwork";
 import Parent from "../components/memberNetworkF/parent";
 import Media from "../components/memberNetworkF/mediaNetwork";
 import Members from "../components/memberNetworkF/members";
@@ -50,6 +54,55 @@ export default {
     Parent,
     Feedback,
   },
+
+data() {
+    return {
+      selectedId: 0,
+      bottomSelectedId: 0,
+      foll_id:null,
+      isloaded:false,
+
+    }},
+  
+
+created(){
+
+   this.foll_id = this.$route.params.id;
+
+    this.$store
+      .dispatch("networkDetails/roleCheck", this.foll_id)
+      .then((data) => {
+      
+        let role = data.data.data;
+        console.log(role);
+        switch (role) {
+          case "follower":
+            this.$router.push({
+              name: "Membar Network Follower",
+              params: { id: this.foll_id },
+            });
+            break;
+
+         
+            
+        }
+
+        this.isloaded = true;
+      })
+      .catch((error) => {
+        console.log({ error: error });
+
+        console.log(error.response.status);
+
+        if (error.response.status == 404) {
+        //  this.$router.push({ name: "notFound" });
+        }
+      });
+
+
+
+},
+
 };
 </script>
 

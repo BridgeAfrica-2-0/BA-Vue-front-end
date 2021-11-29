@@ -28,7 +28,11 @@
                     <b-td class="a-text" style="text-transform: capitalize;"> {{Package.name}} </b-td>
                     <b-td class="a-text">
                       <b-link>{{Package.id === Packages.user_actived_plan[0].package_id ? 'Current':'Upgrade'}}</b-link>
-                      <span class="text-success"> Expires in {{moment(Packages.user_actived_plan[0].expired_at).fromNow()}}</span>
+                      <span class="text-success">
+                        {{
+                          Package.id === Packages.user_actived_plan[0].package_id ? 'Expires '+moment(Packages.user_actived_plan[0].expired_at).fromNow():' '}}
+                         <!-- Expires in {{moment(Packages.user_actived_plan[0].expired_at).fromNow()}} -->
+                        </span>
                     </b-td>
                   </b-tr>
                 </b-tbody>
@@ -349,6 +353,7 @@ export default {
 
     ToggleModal(AccType, Package_id) {
       console.log("AccType: ", AccType);
+      this.congratulation = false;
       this.PaymentForm.type = AccType;
       if(AccType === "basic"){
         this.PaymentForm.package_id = Package_id;
@@ -386,7 +391,7 @@ export default {
        this.$store
       .dispatch("businessAccountType/confirmPayment", {
         path: `settings/packages/${this.url}`,
-        data: formData
+        formData: formData
         })
       .then(({data}) => {
         console.log(data);

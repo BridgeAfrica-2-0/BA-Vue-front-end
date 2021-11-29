@@ -17,11 +17,16 @@ import IconifyIcon from '@iconify/vue';
 import homeIconData from '@iconify-icons/mdi-light/home';
 import ReadMore from 'vue-read-more';
 import VueSocialauth from 'vue-social-auth';
-import VueSocialSharing from 'vue-social-sharing';
 
- import plugin from './http';
 
+import ShareNetwork from 'vue-social-sharing';
+Vue.use(ShareNetwork);
+
+// don't comment that 2 line URGENT
+import plugin from './http';
 Vue.use(plugin);
+
+
 Vue.use(require('vue-moment'));
 
 IconifyIcon.addIcon('home', homeIconData);
@@ -98,12 +103,9 @@ import Lightbox from '@morioh/v-lightbox';
 import * as VueGoogleMaps from 'gmap-vue';
 
 
-
 import VueSplide from "@splidejs/vue-splide";
 Vue.use(VueSplide);
 import "@splidejs/splide/dist/css/themes/splide-default.min.css";
-
-
 
 // global register
 Vue.use(VueGallerySlideshow);
@@ -135,11 +137,11 @@ import '@/assets/css/bootstrap.css';
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 
-//import InfiniteLoading from "vue-infinite-loading";
+// import InfiniteLoading from "vue-infinite-loading";
 
-Vue.use(InfiniteLoading, {
-    /* options */
-});
+// Vue.use(InfiniteLoading, {
+//     options 
+// });
 
 Vue.use(VueGoogleMaps, {
     load: {
@@ -150,19 +152,20 @@ Vue.use(VueGoogleMaps, {
     installComponents: true,
 });
 
- import VueLoading from 'vue-loading-overlay';
- import 'vue-loading-overlay/dist/vue-loading.css';
+import VueLoading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
+Vue.use(VueLoading);
 
 import VueYoutube from 'vue-youtube'
 
 Vue.use(VueYoutube)
-      Vue.use(VueLoading);
 
 import VueAgile from 'vue-agile';
 
+
 Vue.use(VueAgile);
 
-Vue.use(VueSocialSharing);
+
 import CoolLightBox from 'vue-cool-lightbox';
 import 'vue-cool-lightbox/dist/vue-cool-lightbox.min.css';
 
@@ -176,12 +179,10 @@ import VueEasyLightbox from 'vue-easy-lightbox';
 
 // Method 1. via Vue.use
 Vue.use(VueEasyLightbox);
-
 Vue.config.productionTip = false;
+
 var user = null;
 
-// import './pusher-notification';
-import './redis-notification'
 
 new Vue({
     router,
@@ -214,7 +215,7 @@ new Vue({
             },
         );
 
-        axios.interceptors.request.use(function(config) {
+        axios.interceptors.request.use(function (config) {
             if (user != null) {
                 config.headers.Authorization = `Bearer  ${user.accessToken}`;
             }

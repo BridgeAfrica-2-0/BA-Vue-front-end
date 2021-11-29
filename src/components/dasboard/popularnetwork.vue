@@ -159,7 +159,7 @@
           user.is_follow = nextFollowState;
            document.getElementById("followbtn"+user.id).disabled =  false;
         })
-        .catch(err =>{   console.log(err)
+        .catch(err =>{   console.log({err:err})
          document.getElementById("followbtn"+user.id).disabled =  false;
         });
     },

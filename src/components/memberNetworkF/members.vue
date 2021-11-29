@@ -139,7 +139,7 @@
         </b-skeleton-wrapper>
       </b-col>
       <b-col col="12">
-        <infinite-loading @infinite="infiniteHandler">
+        <infinite-loading   :identifier="infiniteId"  ref="infiniteLoading"   @infinite="infiniteHandler">
           <div class="text-red" slot="no-more">No More Request</div>
           <div class="text-red" slot="no-results">No More Request</div>
         </infinite-loading>
@@ -162,8 +162,7 @@ export default {
       page: 1,
       currentPage: null,
       searchTitle: "",
-   
-
+      infiniteId : 1,
       currentIndex: -1,
       loading: false
     };
@@ -210,26 +209,28 @@ export default {
     },
 
     infiniteHandler($state) {
-      console.log("loop");
+     
       const data = this.getRequestDatas(this.searchTitle);
       console.log('keyword: '+data);
-      let formData = new FormData();
-      formData.append('keyword', data);
-      // this.$store
-      //   .dispatch("networkProfileMembers/getMembers", {
-      //     path: this.url+"/members/list/"+this.page,
-      //     formData: formData
-      //   })
+     
+      let url='';
+      if(data==null) {
+     url="network/"+this.url+"/members/list/"+this.page+"?keyword="+data;
+
+      }else{
+         url="network/"+this.url+"/members/list/"+this.page;
+      }
     
+    console.log(url);
       this.axios
-        .post("network/"+this.url+"/members/list/"+this.page, formData)
+        .post(url)
         .then(({ data }) => {
-        console.log(data);
+        
         console.log(this.page);
         if (data.data.length) {
           this.page += 1;
-          console.log(this.page);
-          console.log(...data.data);
+        
+        
           this.members.push(...data.data);
           $state.loaded();
         } else {
@@ -285,7 +286,7 @@ export default {
       this.page = 1;
       console.log("searching...");
       console.log(this.searchTitle);
-      this.infiniteHandler();
+      this.infiniteId += 1;
       this.getAdmins();
       this.getBusiness();
     },

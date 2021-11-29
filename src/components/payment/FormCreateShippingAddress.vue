@@ -55,7 +55,7 @@
 					>
 						<b-form-select
 							id="country-input"
-							v-model="form.country_id"
+							v-model="form.country"
 							:options="countries"
 							value-field="id"
 							text-field="name"
@@ -73,17 +73,17 @@
 					>
 						<b-form-select
 							id="region-input"
-							v-model="form.region_id"
+							v-model="form.region"
 							:options="regions"
 							value-field="id"
 							text-field="name"
-							@change="getDivisions"
+							@change="getDestinations"
 							required
 						></b-form-select>
 					</b-form-group>
 				</div>
 			</div>
-			<div class="row">
+			<!-- <div class="row">
 				<div class="col">
 					<b-form-group
 						class="body-font-size"
@@ -120,8 +120,8 @@
 						></b-form-select>
 					</b-form-group>
 				</div>
-			</div>
-			<b-form-group
+			</div> -->
+			<!-- <b-form-group
 				class="body-font-size"
 				id="input-group-city"
 				label="City :"
@@ -133,9 +133,24 @@
 					type="text"
 					required
 				></b-form-input>
+			</b-form-group> -->
+			<b-form-group
+				class="body-font-size"
+				id="input-group-region"
+				label="Destination :"
+				label-for="destination-input"
+			>
+				<b-form-select
+					id="destination-input"
+					v-model="form.city"
+					:options="destinations"
+					value-field="id"
+					text-field="name"
+					required
+				></b-form-select>
 			</b-form-group>
 
-			<b-form-group
+			<!-- <b-form-group
 				class="body-font-size"
 				id="input-group-neigbourhood"
 				label="neigbourhood :"
@@ -149,7 +164,7 @@
 					text-field="name"
 					required
 				></b-form-select>
-			</b-form-group>
+			</b-form-group> -->
 
 			<div class="d-flex justify-content-between align-items-center">
 				<b-button class="btn-custom mr-3" type="submit" variant="primary">
@@ -165,6 +180,7 @@
 </template>
 
 <script>
+	import axios from "axios";
 	export default {
 		name: "FormCreateShippingAddress",
 		props: {
@@ -182,36 +198,43 @@
 			return {
 				errorAppend: false,
 				loading: false,
+				countries: [],
+				regions: [],
+				destinations: []
 			};
+		},
+		created(){
+			this.getcountries();
+			
 		},
 		computed: {
 			username() {
 				return this.$store.state.auth.user.user.name;
 			},
-			countries() {
-				return this.$store.state.auth.country;
-			},
-			regions() {
-				return this.$store.state.auth.region;
-			},
-			divisions() {
-				return this.$store.state.auth.division;
-			},
-			councils() {
-				return this.$store.state.auth.municipality;
-			},
-			neigbourhoods() {
-				return this.$store.state.auth.locality;
-			},
+			// countries() {
+			// 	return this.$store.state.auth.country;
+			// },
+			// regions() {
+			// 	return this.$store.state.auth.region;
+			// },
+			// divisions() {
+			// 	return this.$store.state.auth.division;
+			// },
+			// councils() {
+			// 	return this.$store.state.auth.municipality;
+			// },
+			// neigbourhoods() {
+			// 	return this.$store.state.auth.locality;
+			// },
 		},
 		mounted() {
-			this.$store.dispatch("auth/country");
-			if (this.mode !== "create") {
-				this.getRegions(this.form.country_id);
-				this.getDivisions(this.form.region_id);
-				this.getCouncils(this.form.division_id);
-				this.getNeigbourhoods(this.form.council_id);
-			}
+			// this.$store.dispatch("auth/country");
+			// if (this.mode !== "create") {
+			// 	this.getRegions(this.form.country_id);
+			// 	this.getDivisions(this.form.region_id);
+			// 	this.getCouncils(this.form.division_id);
+			// 	this.getNeigbourhoods(this.form.council_id);
+			// }
 		},
 		methods: {
 			onSubmit(event) {
@@ -289,28 +312,88 @@
 					this.$emit("closecshippingm");
 				}
 			},
-			getRegions(country_id) {
-				this.form.region_id = undefined;
-				this.form.division_id = undefined;
-				this.form.council_id = undefined;
-				this.form.neighbourhood_id = undefined;
-				this.$store.dispatch("auth/region", { countryId: country_id });
+			async getcountries(){
+				this.loading = true;
+				await axios.get(`shipping-address/get-country`)
+					.then(res =>{
+						// this.countries = res.data.data
+						let data = [];
+						for (let i = 0; i < res.data.data.length; i++) {
+							let country = {
+								id : res.data.data[i].country,
+								name: res.data.data[i].country
+							};
+							data.push(country)
+						}
+						this.countries = data;
+						this.loading = false;
+						
+					})
+					.catch(err => console.dir(err))
 			},
-			getDivisions(region_id) {
-				this.form.division_id = undefined;
-				this.form.council_id = undefined;
-				this.form.neighbourhood_id = undefined;
-				this.$store.dispatch("auth/division", { regionId: region_id });
+			async getRegions(country) {
+				this.loading = true;
+				console.log(country);
+				let data = {
+					country: country
+				}
+				await axios.post(`shipping-address/select-region`, data)
+						.then(res =>{ 
+							let data = [];
+							for (let i = 0; i < res.data.data.length; i++) {
+								let region = {
+									id : res.data.data[i].regions,
+									name: res.data.data[i].regions
+								};
+								data.push(region)
+							}
+							this.loading = false;
+							this.regions = data;
+						})
+						.catch(err => console.dir(err));
+				// this.form.region_id = undefined;
+				// this.form.division_id = undefined;
+				// this.form.council_id = undefined;
+				// this.form.neighbourhood_id = undefined;
+				// this.$store.dispatch("auth/region", { countryId: country_id });
 			},
-			getCouncils(division_id) {
-				this.form.council_id = undefined;
-				this.form.neighbourhood_id = undefined;
-				this.$store.dispatch("auth/municipality", { divisionId: division_id });
-			},
-			getNeigbourhoods(council_id) {
-				this.form.neighbourhood_id = undefined;
-				this.$store.dispatch("auth/locality", { councilId: council_id });
-			},
+			async getDestinations(region){
+				this.loading = true;
+				console.log(region);
+				let data = {
+					region: region
+				}
+				await axios.post(`shipping-address/select-destination`, data)
+						.then(res =>{ 
+							let data = [];
+							for (let i = 0; i < res.data.data.length; i++) {
+								let region = {
+									id : res.data.data[i].destinations,
+									name: res.data.data[i].destinations
+								};
+								data.push(region)
+							}
+							this.destinations = data;
+							this.loading = false;
+							console.log(res.data.data);
+						})
+						.catch(err => console.dir(err));
+			}
+			// getDivisions(region_id) {
+			// 	this.form.division_id = undefined;
+			// 	this.form.council_id = undefined;
+			// 	this.form.neighbourhood_id = undefined;
+			// 	this.$store.dispatch("auth/division", { regionId: region_id });
+			// },
+			// getCouncils(division_id) {
+			// 	this.form.council_id = undefined;
+			// 	this.form.neighbourhood_id = undefined;
+			// 	this.$store.dispatch("auth/municipality", { divisionId: division_id });
+			// },
+			// getNeigbourhoods(council_id) {
+			// 	this.form.neighbourhood_id = undefined;
+			// 	this.$store.dispatch("auth/locality", { councilId: council_id });
+			// },
 		},
 	};
 </script>

@@ -18,6 +18,7 @@ const getters = {
 }
 const actions = {
   async createShipping({ commit }, newShippingAdd) {
+    console.log(newShippingAdd);
     await axios.post("shipping-address", newShippingAdd)
       .then((response) => {
         console.log(response.data)

@@ -1,7 +1,6 @@
 <template>
-  <b-container v-if="editnetworkinfo" style="text-align:left">
+  <b-container v-if="editnetworkinfo != 0" style="text-align:left">
     <!-- {{editnetworkinfo}} -->
-    <FlashMessage />
     <div class="b-bottom">
       <b-container>
         <b-form-group
@@ -94,6 +93,8 @@
 
     <div class="b-bottom">
       <b-container>
+        <!-- {{country}}-----------
+        {{countries}} -->
         <b-form-group
           label-cols-lg="3"
           :label="$t('network.Country')"
@@ -115,6 +116,8 @@
     </div>
     <div class="b-bottom">
       <b-container>
+        <!-- {{region}}------------
+        {{regions}} -->
         <b-form-group
           label-cols-lg="3"
           :label="$t('network.City')"
@@ -135,10 +138,12 @@
       </b-container>
     </div>
     <div class="b-bottom">
+      <!-- {{division}}----------
+      {{divisions}} -->
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          :label="$t('network.Neighborhood')"
+          :label=" $t('network.Division')"
           label-size="md"
           label-class="font-weight-bold pt-0"
           class="mb-0"
@@ -157,9 +162,11 @@
     </div>
     <div class="b-bottom">
       <b-container>
+        <!-- {{municipality}}-------
+        {{municipalities}} -->
         <b-form-group
           label-cols-lg="3"
-          :label="$t('network.Website')"
+          :label=" $t('network.Municipality')"
           label-size="md"
           label-class="font-weight-bold pt-0"
           class="mb-0"
@@ -178,6 +185,8 @@
     </div>
     <div class="b-bottom">
       <b-container>
+        <!-- {{locality}}--------
+        {{localities}} -->
         <b-form-group
           label-cols-lg="3"
           label="Neighborhood"
@@ -189,7 +198,7 @@
             v-model="locality"
             placeholder="Search"
             label="name"
-            track-by="id"
+            track-by="neighborhood_id"
             :options="localities"
             :multiple="true"
           ></multiselect>
@@ -235,6 +244,7 @@
     </b-container>
 
     <br />
+    <FlashMessage />
   </b-container>
   <b-container v-else>
     <div class="text-center">
@@ -272,6 +282,7 @@ export default {
       getNetworks: 'networkSetting/getNetworks',
     }),
     editnetworkinfo() {
+    //   return this.$store.state.NetworkSettings.networkinfo;
       return this.$store.state.NetworkSettings.editnetworkinfo;
     },
     pcategories() {
@@ -355,6 +366,7 @@ export default {
     getEditNetworkInfo() {
       console.log("getEditNetworkInfo");
       this.$store
+        // .dispatch("NetworkSettings/getnetworkinfo", this.url)
         .dispatch("NetworkSettings/getEditNetworkInfo", this.url)
         .then(() => {
           console.log("Edit Network Information Available ");
@@ -429,7 +441,6 @@ export default {
       console.log("Locality");
       let formData2 = new FormData();
       formData2.append("councilId", this.selectedmunicipality);
-
       this.$store
         .dispatch("auth/locality", formData2)
         .then(() => {
@@ -443,11 +454,36 @@ export default {
       console.log("setting Network data");
       console.log(this.editnetworkinfo);
       this.multiselecvalue=this.editnetworkinfo.assign_categories;
-      this.country=this.editnetworkinfo.country;
-      this.region=this.editnetworkinfo.region;
-      this.division=this.editnetworkinfo.division;
-      this.municipality=this.editnetworkinfo.council;
-      this.locality=this.editnetworkinfo.neighborhood;
+      this.countries.forEach(e => {
+        if(e.name == this.editnetworkinfo.country){
+          this.country.push(e)
+        }
+      });
+      this.regions.forEach(e => {
+        if(e.name == this.editnetworkinfo.region){
+          this.region.push(e)
+        }
+      });
+      this.divisions.forEach(e => {
+        if(e.name == this.editnetworkinfo.division){
+          this.division.push(e)
+        }
+      });
+      this.municipalities.forEach(e => {
+        if(e.name == this.editnetworkinfo.council){
+          this.municipality.push(e)
+        }
+      });
+      this.localities.forEach(e => {
+        if(e.name == this.editnetworkinfo.neighborhood){
+          this.locality.push(e)
+        }
+      });
+      // this.country=this.editnetworkinfo.country;
+      // this.region=this.editnetworkinfo.region;
+      // this.division=this.editnetworkinfo.division;
+      // this.municipality=this.editnetworkinfo.council;
+      // this.locality=this.editnetworkinfo.neighborhood;
 
       this.Region();
       this.Division();

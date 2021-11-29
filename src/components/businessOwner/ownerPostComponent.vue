@@ -1,5 +1,6 @@
 <template>
   <div class="p-3 card-border my-3" style="position: relative">
+
     <div class="mt-2">
       <div class="d-inline-flex">
         <span md="1" class="m-0 p-0">
@@ -217,6 +218,10 @@ export default {
 
   props: {
     post: {},
+    usertype:{
+      
+      default: () => null,
+    },
     mapvideo: {},
     mapmediae: {},
     businessLogo: {},
@@ -662,10 +667,10 @@ export default {
 .toright {
   position: absolute;
   right: 6%;
-  border: 1px solid #e75c18;
+  /* border: 1px solid #e75c18; */
 }
 .toright:hover {
   color: white;
-  border: 1px solid #ddd;
+  /* border: 1px solid #ddd; */
 }
 </style>

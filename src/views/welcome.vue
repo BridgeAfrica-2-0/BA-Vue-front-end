@@ -1,7 +1,7 @@
 <template>
   <div class="welcome" style="overflow-x: hidden">
-       
-     
+   
+
     <md-progress-bar md-mode="indeterminate" v-if="sendingP" />
 
     <md-progress-bar md-mode="indeterminate" v-if="sendingB" />
@@ -10,7 +10,7 @@
 
     <div
       v-if="first_page == 'true'"
-      class="container border mt-5 modal-lg p-welcome"
+      class="container border mt-5 modal-lg p-welcome "
       id="modal-3"
       ref="modal-3"
     >
@@ -54,7 +54,7 @@
     <div class="modal-backdro">
       <div
         v-if="selectedusecase == 'person'"
-        class="container border mt-4 modal-lg"
+        class="container border mt-4 modal-lg p-1"
         ref="modal-1"
         id="modal-1"
       >
@@ -121,7 +121,7 @@
 
                        <b-form-datepicker  name="dob" :max="min" id="dob"
 
-                        v-model="dob" class=" text"  :locale=" this.$i18n.locale"  :placeholder="$t('welcome.Busness_Name')"></b-form-datepicker>
+                        v-model="dob" class=" text"  :locale=" this.$i18n.locale"  :placeholder="$t('welcome.DOB')"></b-form-datepicker>
 
                     </div>
 
@@ -245,14 +245,16 @@
             </tab-content>
 
             <tab-content :title="$t('welcome.Follow_Businesses')">
-              <div class="div-h">
+              <div class="div-h h-400">
                 <Business />
+               
               </div>
             </tab-content>
 
             <tab-content :title="$t('welcome.Follow_People')">
-              <div class="div-h">
-                <People />
+              <div class="div-h h-400">
+
+               <People />
               </div>
             </tab-content>
 
@@ -335,7 +337,7 @@
 
                          <b-form-datepicker  name="dob" :max="min" id="dob"
 
-                        v-model="dob" class=" text"   :placeholder="$t('welcome.Busness_Name')"></b-form-datepicker>
+                        v-model="dob" class=" text"   :placeholder="$t('welcome.DOB')"></b-form-datepicker>
 
                     </div>
 
@@ -535,7 +537,7 @@
                         name="business_about"
                         v-model="about"
                         id="description"
-                        :placeholder="$t('welcome.Brief_description_about_your_Busness')"
+                        :placeholder="$t('welcome.brief_des')"
                         class="form-control text"
                       ></textarea>
                     </div>
@@ -742,22 +744,26 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="alias" class="username">{{ $t('welcome.Language') }}:</label
-                      ><br />
+                      ><br />  
                       <select
                         id="category"
                         class="form-control text"
+                      
                         name="language"
                         v-model="language"
                       >
                         <option value="" selected="" disabled="">
                           {{ $t('welcome.Select_Language') }}
                         </option>
-                        <option>{{ $t('welcome.English') }}</option>
-                        <option>{{ $t('welcome.Hindi') }}</option>
+                        <option value="fr">{{ $t('welcome.English') }}</option>
+                        <option value="en">{{ $t('auth.french') }}</option>
                       </select>
+
+
+
                     </div>
                   </div>
-                </div>
+                </div>  
 
                 <div class="row">
                   <div class="col-md-6">
@@ -802,13 +808,15 @@
             </tab-content>
 
             <tab-content :title="$t('welcome.Follow_Businesses')">
-              <div class="div-h">
+              <div class="div-h h-400">
                 <Business />
+            
               </div>
             </tab-content>
 
             <tab-content :title="$t('welcome.Follow_People')">
-              <div class="div-h">
+            
+              <div class="div-h h-400">
                 <People />
               </div>
             </tab-content>
@@ -927,6 +935,22 @@ export default {
   },
 
   methods: {
+
+
+
+    //  switchLang(value){
+  
+    //  console.log(this.language);
+         
+    //       this.$i18n.locale = this.language;
+
+    //      this.$store.commit("auth/setAppLanguage", this.language);
+
+          
+
+
+    //  },
+
 
 
       flashErrors(errors) {

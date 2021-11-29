@@ -284,6 +284,14 @@ const routes = [
     name: "BusinessFollower",
     component: businessFollower,
   },
+
+  {
+    path: "/business/:id?",
+    name: "BusinessFollower",
+    component: businessFollower,
+  },
+
+
   {
     path: "/businessvisitor",
     name: "BusinessVisitor",

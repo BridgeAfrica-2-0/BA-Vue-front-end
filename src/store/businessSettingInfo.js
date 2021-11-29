@@ -45,7 +45,6 @@ export default {
         })
     },
 
-
     subcategories({ commit }, data) {
       return axios.post("catergory/subcategory", data).then(({ data }) => {
         commit("setSubcategories", data.data);

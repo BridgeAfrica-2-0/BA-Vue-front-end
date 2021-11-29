@@ -1,5 +1,8 @@
 <template>
   <div>
+
+
+
     <b-row> 
       <b-col lg="6" sm="12" class="p-2" v-for="item in businesses" :key="item.id">
         <div class="people-style shadow">
@@ -15,7 +18,7 @@
                 </splide>
               </div>   <div class="pl-3 flx100"> 
               <p class="textt">
-                <strong class="title"> {{ item.name }} </strong> <br />
+                <strong class="title">   <router-link    :to="'business/'+item.id">   {{ item.name }}    </router-link> </strong> <br />
                
             <span v-for="cat in item.category" :key="cat.name">   {{cat.name}}  </span>
                 <br />
@@ -23,9 +26,8 @@
                 {{ $t('dashboard.Community') }} <br />
 
                 <span class="location">
-                  <b-icon-geo-alt class="ico"></b-icon-geo-alt
-                  >{{ item.country }}
-                </span>
+              <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{item.city}}  <span class="ml-2" v-for="nie in item.neigborhood"  :key="nie.id" >  {{nie.name}} </span>   
+            </span>
                 <br />
        <read-more
               more-str="read more"

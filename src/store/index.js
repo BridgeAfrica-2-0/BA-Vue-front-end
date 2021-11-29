@@ -38,6 +38,8 @@ import networkProfileMedia from './networkProfileMedia';
 import networkProfileMemberRequest from './networkProfileMemberRequest';
 import profileOrders from './profileOrders';
 import keywordOperationOnNetwork from './keywordOperationOnNetwork';
+import businessOrderDetails from './businessOrderDetails';
+import cart from './cart';
 
 import homeRedirection from './homeRedirection';
 
@@ -104,52 +106,52 @@ export default new Vuex.Store({
 
 
 
-export default new Vuex.Store({
-    modules: {
-        auth,
-        networkDetails,
-        dashboardcommunity,
-        ProfileAndBusinessDetails,
-        businessOwner,
-        businessBlocking,
-        dashboard,
-        hotbusiness,
-        networkProfileMembers,
-        marketSearch,
-        networkSearch,
-        allSearch,
-        profile,
-        follower,
-        search,
-        UserProfileOwner,
-        userChat,
-        businessChat,
-        businessGeneral,
-        businessRole,
-        businessAccountType,
-        business,
-        networkProfileFeedback,
-        NetworkSettings,
-        keywordOperationOnNetwork,
-        businessSettingInfo,
-        checkout,
-        social,
-        businessFollowers,
-        networkProfileCommunitySidebar,
-        networkProfileCommunity,
-        networkProfileMedia,
-        networkProfileMemberRequest,
-        networkProfile,
+// export default new Vuex.Store({
+//     modules: {
+//         auth,
+//         networkDetails,
+//         dashboardcommunity,
+//         ProfileAndBusinessDetails,
+//         businessOwner,
+//         businessBlocking,
+//         dashboard,
+//         hotbusiness,
+//         networkProfileMembers,
+//         marketSearch,
+//         networkSearch,
+//         allSearch,
+//         profile,
+//         follower,
+//         search,
+//         UserProfileOwner,
+//         userChat,
+//         businessChat,
+//         businessGeneral,
+//         businessRole,
+//         businessAccountType,
+//         business,
+//         networkProfileFeedback,
+//         NetworkSettings,
+//         keywordOperationOnNetwork,
+//         businessSettingInfo,
+//         checkout,
+//         social,
+//         businessFollowers,
+//         networkProfileCommunitySidebar,
+//         networkProfileCommunity,
+//         networkProfileMedia,
+//         networkProfileMemberRequest,
+//         networkProfile,
 
-        orderBusiness,
-        notification,
-        homeRedirection,
-        profileOrderDetail,
-        profileSettingsEdit
+//         orderBusiness,
+//         notification,
+//         homeRedirection,
+//         profileOrderDetail,
+//         profileSettingsEdit
 
 
     
-    }
-});
+//     }
+// });
 
 

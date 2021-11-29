@@ -10,15 +10,9 @@
     >
 
 
-
-
-   
-
-
      <div class="people-style border shadow"  v-for="item in users.data.data"
       :key="item.id"  >
 
-     
 
             <b-row class="mb-1">
               <b-col md="3" cols="4" sm="4" class="my-auto">
@@ -43,7 +37,7 @@
                             class="mt-lg-2"
                           >
                             <div class="mt-3 mt-lg-0 mt-xl-0 username">
-                            <router-link  >  <b> {{ item.name }} </b>   </router-link> 
+                            <router-link :to="'profile/'+item.id" >  <b> {{ item.name }} </b>   </router-link> 
                             </div>
                           </b-col>
 
@@ -123,100 +117,6 @@
 
 
 
-      <div class="people-style border shadow" v-for="(user, index) in users.data.data"
-      :key="index">
-
-     
-        <b-row class="mb-1">
-          <b-col md="3" cols="4" sm="3" class="my-auto">
-            <b-avatar
-              class="p-avater"
-              variant="primary"
-              :src="user.profile_picture"
-            ></b-avatar>
-          </b-col>
-
-          <b-col md="8" cols="8" sm="8">
-            <div>
-              <b-row class="shift">
-                <b-col md="12" lg="6" xl="6" sm="6">
-                  <div class="e-name">
-                    <b-row>
-                      <b-col
-                        md="6"
-                        lg="12"
-                        cols="6"
-                        sm="12"
-                        xl="12"
-                        class="mt-lg-2"
-                      >
-                        <div class="mt-2 mt-lg-0 mt-xl-0 username">
-                          <b> {{user.name}} </b>
-                        </div>
-                      </b-col>
-
-                      <b-col
-                        md="6"
-                        lg="12"
-                        cols="6"
-                        sm="12"
-                        xl="12"
-                        class="mt-3 mt-lg-1 mt-xl-0"
-                      >
-                        <h6 class="follower text">{{$t("search.5K_Community")}}</h6>
-                      </b-col>
-                    </b-row>
-                  </div>
-                </b-col>
-
-                <b-col lg="6" xl="6" cols="12" sm="6" md="12">
-                  <div>
-                    <b-row class="mt-lg-0">
-                      <b-col
-                        md="6"
-                        lg="12"
-                        cols="6"
-                        sm="12"
-                        xl="12"
-                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
-                      >
-                        <b-button
-                          block
-                          variant="primary"
-                          size="sm"
-                          class="b-background flexx pobtn shadow"
-                        >
-                          <i class="fas fa-envelope   fa-lg btn-icon "></i>
-                          <span class="btn-text">{{$t("search.Message")}}</span>
-                        </b-button>
-                      </b-col>
-
-                      <b-col
-                        md="6"
-                        lg="12"
-                        cols="6"
-                        sm="12"
-                        xl="12"
-                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
-                      >
-                        <b-button
-                          block
-                          size="sm"
-                          class="b-background flexx pobtn shadow"
-                          variant="primary"
-                        >
-                          <i class="fas fa-user-plus  fa-lg btn-icon "></i>
-                          <span class="btn-com">{{$t("search.Community")}}</span>
-                        </b-button>
-                      </b-col>
-                    </b-row>
-                  </div>
-                </b-col>
-              </b-row>
-            </div>
-          </b-col>
-        </b-row>
-      </div>
     </div>
   </div>
 </template>

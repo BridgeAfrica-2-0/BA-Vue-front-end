@@ -5,12 +5,34 @@
     <b-form-input
       :placeholder="placeholder"
       class="input-search"
-      v-model="text"
+      v-model="name"
       type="search"
+      @keypress.enter="getUsers(name)"
     ></b-form-input>
-    <h6 class="mt-3 fw-b">{{ subtitle }}</h6>
 
-    <b-list-group>
+    <h6 class="mt-3 fw-b">{{ subtitle }}</h6>
+    <b-list-group v-if="listElmts" class="ma-2">
+      <!-- {{listElmts[0]}} -->
+      <Loader v-if="loading" />
+      <b-list-group-item
+        class="d-flex align-items-center py-0"
+        v-for="(elmt, index) in listElmts"
+        :key="index"
+      >
+        <b-avatar class="mr-3" :src="elmt.profile_picture"></b-avatar>
+        <span class="mr-auto">{{ elmt.name }}</span>
+        <!-- <Button
+          @click.native="share"
+          :disabled="loading"
+          :title="$t('search.Send')"
+          style="width: 20%"
+          styleClass="btn shadow  btn btn-bg flex btn p-2 btn-primary btn-sm btn-block btn-primary btn-sm btn-block"
+        /> -->
+        <b-button variant="primary">Send</b-button>
+      </b-list-group-item>
+    </b-list-group>
+
+    <b-list-group v-else>
       <Loader v-if="loading" />
       <Contact
         v-for="(contact, index) in contacts"
@@ -46,12 +68,14 @@ export default {
   data: () => ({
     loading: false,
     text: "",
+    name: "",
     contacts: [],
     actionType: null,
     hasbeLoad: false,
   }),
 
   props: {
+    listElmts: { type: Array },
     isActivated: {
       type: Boolean,
       required: true,
@@ -82,8 +106,16 @@ export default {
       required: true,
     },
   },
+  computed: {
+    loader() {
+      return this.$store.getters["businessChat/getLoader"];
+    },
+  },
 
   methods: {
+    getUsers(keyword) {
+      this.$store.dispatch("businessChat/GET_USERS", keyword);
+    },
     getContacts: async function () {
       this.loading = true;
       const response = await this.$repository.share.getNetworkorBusiness();

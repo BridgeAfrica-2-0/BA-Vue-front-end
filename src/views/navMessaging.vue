@@ -86,7 +86,7 @@
                 </b-col>
                 <b-col>
                   <h1 class="mt-4 title text-bold">
-                    {{ currentUser.user.name.split(" ")[0] }}
+                    {{ currentUser?currentUser.user.name.split(" ")[0]:"loading..." }}
                   </h1>
                 </b-col>
                 <b-col>

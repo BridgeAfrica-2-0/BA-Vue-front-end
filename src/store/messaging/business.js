@@ -121,6 +121,18 @@ export default {
     },
 
     actions: {
+        CREATE_GROUP({ commit }, data) {
+
+            commit("setLoader", true);
+            return axios.post(`/group/create`, data)
+                .then((res) => {
+                    commit("setLoader", false);
+                })
+                .catch((err) => {
+                    commit("setLoader", false);
+                    console.log(err);
+                })
+        },
         async GET_ALL({ commit, state }, data) {
             let keyword = data ? '/' + data : ''
             var users = []
@@ -130,11 +142,19 @@ export default {
             axios.get(`/user/all-user${keyword}`)
                 .then((res) => {
                     commit("setLoader", false);
-                    users = res.data.data
+                    let result = res.data.data
+                    result.map((user) => {
+                        users.push({ accountType: 'people', ...user })
+                    })
+
                     axios.get(`/business/all${keyword}`)
                         .then((biz) => {
                             commit("setLoader", false);
-                            businesses = biz.data.data
+
+                            let result = biz.data.data
+                            result.map((user) => {
+                                businesses.push({ accountType: 'business', ...user })
+                            })
                             console.log("Bizs:", businesses);
                             // return axios.get(`/networks${keyword}`)
                             //     .then((res) => {

@@ -151,7 +151,7 @@
                   class="nav-link text-dark hov"
                   href=""
                 >
-                  Home {{navLink('home')}}
+                  Home {{ navLink("home") }}
                 </router-link>
               </div>
 
@@ -398,11 +398,23 @@
                     </div>
                     <hr class="h-divider" />
                     <div class="other-menu suggest-item cursor-pointer">
-                      <b-link v-b-toggle="'collapse-2'" class="m-1"><fas-icon class="violet search" :icon="['fas', 'globe-americas']" />  Language</b-link>
+                      <b-link v-b-toggle="'collapse-2'" class="m-1"
+                        ><fas-icon
+                          class="violet search"
+                          :icon="['fas', 'globe-americas']"
+                        />
+                        Language</b-link
+                      >
 
                       <b-collapse id="collapse-2" class="mt-1">
-                        <b-card-text @click="$i18n.locale = 'en'" class="cursor-pointer mb-1">{{$t('auth.english')}}</b-card-text>
-                        <b-card-text @click="$i18n.locale = 'fr'">{{$t('auth.french')}}</b-card-text>
+                        <b-card-text
+                          @click="$i18n.locale = 'en'"
+                          class="cursor-pointer mb-1"
+                          >{{ $t("auth.english") }}</b-card-text
+                        >
+                        <b-card-text @click="$i18n.locale = 'fr'">{{
+                          $t("auth.french")
+                        }}</b-card-text>
                       </b-collapse>
                     </div>
                     <hr class="h-divider" />
@@ -511,12 +523,24 @@
             </div>
             <hr class="h-divider" />
             <div class="other-menu suggest-item cursor-pointer">
-              <b-link v-b-toggle="'collapse-2'" class="m-1"><fas-icon class="violet search" :icon="['fas', 'globe-americas']" />  Language</b-link>
+              <b-link v-b-toggle="'collapse-2'" class="m-1"
+                ><fas-icon
+                  class="violet search"
+                  :icon="['fas', 'globe-americas']"
+                />
+                Language</b-link
+              >
 
-                      <b-collapse id="collapse-2" class="mt-1">
-                        <b-card-text @click="$i18n.locale = 'en'" class="cursor-pointer mb-1">{{$t('auth.english')}}</b-card-text>
-                        <b-card-text @click="$i18n.locale = 'fr'">{{$t('auth.french')}}</b-card-text>
-                      </b-collapse>
+              <b-collapse id="collapse-2" class="mt-1">
+                <b-card-text
+                  @click="$i18n.locale = 'en'"
+                  class="cursor-pointer mb-1"
+                  >{{ $t("auth.english") }}</b-card-text
+                >
+                <b-card-text @click="$i18n.locale = 'fr'">{{
+                  $t("auth.french")
+                }}</b-card-text>
+              </b-collapse>
             </div>
             <hr class="h-divider" />
             <a
@@ -588,6 +612,7 @@ export default {
   },
   created() {
     this.init();
+    this.getUsers();
     this.getNotifications();
     this.getMessages();
   },
@@ -635,12 +660,7 @@ export default {
       this.isActive = true;
     },
     getUsers() {
-      this.$store
-        .dispatch("userChat/GET_USERS", "")
-        .then(() => {
-          console.log("->[Data logged]<-");
-        })
-        .catch(() => console.log("error"));
+      this.$store.dispatch("userChat/GET_USERS", "");
     },
 
     logout: async function () {

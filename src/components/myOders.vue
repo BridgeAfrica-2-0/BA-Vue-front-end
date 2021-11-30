@@ -13,39 +13,45 @@
       >
         <div
           id="m1"
-          class="mobile green t col transition pl-4"
+          class="mobile green t col transition d-flex justify-content-center"
           @click="changeElementType(1)"
         >
-          <div class="cercle1">1</div>
-          <h2 class="h2 text-position">{{ $t("myOrders.All") }}</h2>
+          <div class="cercle1 align-self-center">1</div>
+          <h2 class="h2 align-self-center mx-1 mb-0">
+            {{ $t("myOrders.All") }}
+          </h2>
         </div>
 
         <div
           id="m2"
-          class="mobile1 col t start-50"
+          class="mobile1 col t start-50 d-flex justify-content-center"
           @click="changeElementType(2)"
         >
-          <div class="cercle2">2</div>
+          <div class="cercle2 align-self-center">2</div>
 
-          <h2 class="h2 text-position text-center">
+          <h2 class="h2 align-self-center mx-1 mb-0">
             {{ $t("myOrders.In_progress") }}
           </h2>
         </div>
 
         <div
           id="m3"
-          class="mobile3 col t start-50"
+          class="mobile3 col t start-50 d-flex justify-content-center"
           @click="changeElementType(3)"
         >
-          <div class="cercle2">3</div>
+          <div class="cercle2 align-self-center">3</div>
 
-          <h2 class="h2 text-position text-center">
+          <h2 class="h2 align-self-center mx-1 mb-0">
             {{ $t("myOrders.Complete") }}
           </h2>
         </div>
-        <div id="m4" class="mobile2 col t" @click="changeElementType(4)">
-          <div class="cercle2">4</div>
-          <h2 class="h2 text-position text-center">Cancel</h2>
+        <div
+          id="m4"
+          class="mobile2 col t px-4 d-flex justify-content-center"
+          @click="changeElementType(4)"
+        >
+          <div class="cercle2 align-self-center">4</div>
+          <h2 class="h2 align-self-center ml-1 mb-0">Cancel</h2>
         </div>
       </div>
 
@@ -919,9 +925,9 @@ export default {
       this.status = p;
 
       if (p == 1) {
-        this.etat = "All";
+        this.getOrders();
       } else if (p == 2) {
-        this.etat = "pending";
+        this.getOrderByStatus("pending");
       } else if (p == 3) {
         this.etat = "complete";
       } else if (p == 4) {
@@ -955,6 +961,17 @@ export default {
     async getOrders() {
       await axios
         .get(`orders/all`)
+        .then((res) => {
+          this.totalOrders = res.data.total;
+          this.perPage = res.data.per_page;
+          this.orders = res.data.data;
+          console.log(res.data);
+        })
+        .catch((err) => console.log(err));
+    },
+    async getOrderByStatus(status) {
+      await axios
+        .get(`order/shipping-checkout/orders/${status}`)
         .then((res) => {
           this.totalOrders = res.data.total;
           this.perPage = res.data.per_page;
@@ -1121,7 +1138,7 @@ h3 {
 }
 /*  end style mobile------------------------- */
 .cercle1 {
-  margin-top: 15px;
+  /* margin-top: 15px; */
   border-radius: 50%;
   width: 20px;
   height: 20px;
@@ -1133,7 +1150,7 @@ h3 {
   line-height: 23px;
 }
 .cercle2 {
-  margin-top: 15px;
+  /* margin-top: 15px; */
   border-radius: 50%;
   width: 20px;
   height: 20px;
@@ -1214,10 +1231,10 @@ h3 {
   background-color: #28a745;
 }
 .text-position {
-  line-height: 25px;
+  /* line-height: 25px;
   margin-top: -22px;
   font-size: 14px;
-  margin-left: 5px;
+  margin-left: 5px; */
 }
 /* .button-text{
     color:white;

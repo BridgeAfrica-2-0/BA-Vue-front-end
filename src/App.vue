@@ -10,10 +10,7 @@
     >
       <router-view />
     </transition>
-
-    <!-- <notifications group="foo" /> -->
-    /* <FlashMessage /> */
-    <router-view />
+   
   </div>
 </template>
 <script>

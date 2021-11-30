@@ -107,7 +107,7 @@
     </b-container>
 
         <!-- Request Payment -->
-        <b-modal v-model="AcRequestPayment" title="Enter your MTN Mobile Money number" size="md" hide-footer>
+        <b-modal v-model="AcRequestPayment" :title="$t('businessowner.Enter_your_MTN_Mobile_Money_number')" size="md" hide-footer>
           <div v-if="!congratulation" class="px-0">
             <b-overlay :show="show" rounded="sm">
               <div class="row">

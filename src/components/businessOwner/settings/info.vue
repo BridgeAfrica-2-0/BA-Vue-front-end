@@ -509,7 +509,7 @@
                   value="1"
                   @change="setOpenHours('null', 'null', 'null')"
                 >
-                  {{ openHour ? "Always Open" : "Open for selected hours" }}
+                  {{ openHour ? "Always Open" : $t('businessowner.Open_for_selected_hours') }}
                 </b-form-checkbox>
                 <br />
 

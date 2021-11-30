@@ -105,7 +105,7 @@
                     content-class="mt-12 ma-4 pt-6"
                     fill
                   >
-                    <b-tab title="Users" @click="getChatList({ type: 'user' })">
+                    <b-tab :title="$t('businessowner.Users')" @click="getChatList({ type: 'user' })">
                       <!-- Users Chats Available  -->
                       <b-row class="pa-6">
                         <b-col class="mb-6 pb-6">
@@ -188,7 +188,7 @@
                       <!-- End Chats -->
                     </b-tab>
                     <b-tab
-                      title="Business"
+                      :title="$t('businessowner.Business')"
                       @click="getChatList({ type: 'business' })"
                     >
                       <!-- Business Chats Available  -->
@@ -273,7 +273,7 @@
                       <!-- End Chats -->
                     </b-tab>
                     <b-tab
-                      title="Network"
+                      :title="$t('businessowner.Network')"
                       @click="getChatList({ type: 'network' })"
                     >
                       <!-- network Chats Available  -->
@@ -668,7 +668,7 @@
                       v-model="input"
                       @keypress.enter="send"
                       class="input-background"
-                      placeholder="Enter a message..."
+                      :placeholder="$t('businessowner.Enter_a_message')"
                     ></b-form-input>
 
                     <div class="wrapper">

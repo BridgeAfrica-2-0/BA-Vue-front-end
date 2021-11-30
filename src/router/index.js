@@ -394,6 +394,8 @@ const routes = [
     } else {
       next({ name: "Login" });
     }
+  }
+},
 
   {
     path: "/memberNetwork/:id?",

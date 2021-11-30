@@ -7,7 +7,7 @@
       @enter="enter"
       @afterEnter="afterEnter"
     >
-      <router-view />
+     
     </transition>
 
     <!-- <notifications group="foo" /> -->

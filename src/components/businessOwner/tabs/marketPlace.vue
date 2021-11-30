@@ -298,7 +298,7 @@ export default {
       options: ["list", "of", "options"],
       orders: true,
       archive: false,
-      my_orders: "market",
+      my_orders: this.$t('businessowner.market'),
       showModal: false,
       load: false,
       loader: false,

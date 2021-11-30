@@ -83,7 +83,7 @@
 
         <b-form-group
           id="input-group-1"
-          :label="$t('businessowner.product_Price')"
+          :label="$t('businessowner.Product_Price')"
           label-for="input-1"
           label-size="sm"
         >

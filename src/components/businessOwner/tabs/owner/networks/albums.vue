@@ -6,7 +6,7 @@
           <div class="create" @click="createAlbum">
             <div class="text">
               <b-icon icon="plus"></b-icon>
-              <p>Create Album</p>
+              <p>{{ $t('businessowner.Create_Album') }}</p>
             </div>
           </div>
         </b-col>
@@ -19,7 +19,7 @@
           ></b-img>
           <span class="album-text">
             <div>{{ post.name }}</div>
-            <span> {{ post.items.length }} item(s)</span>
+            <span> {{ post.items.length }} {{ $t('businessowner.item_s') }}</span>
           </span>
           <b-dropdown
             class="options"
@@ -32,11 +32,11 @@
             </template>
             <b-dropdown-item-button @click="openAlbum">
               <b-icon icon="pencil-fill" aria-hidden="true"></b-icon>
-              Edit
+              {{ $t('businessowner.Edit') }}
             </b-dropdown-item-button>
             <b-dropdown-item-button>
               <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
-              Delete
+              {{ $t('businessowner.Delete') }}
             </b-dropdown-item-button>
           </b-dropdown>
         </b-col>
@@ -44,9 +44,9 @@
     </b-row>
 
     <div v-if="pictureShow">
-      <b-button @click="back" variant="primary">Back</b-button>
+      <b-button @click="back" variant="primary">{{ $t('businessowner.Back') }}</b-button>
 
-      <div class="album-name">Album Name</div>
+      <div class="album-name">{{ $t('businessowner.Album_Name') }}</div>
       <b-row>
         <div class="albums">
           <b-modal hide-footer v-model="modalShow">
@@ -62,7 +62,7 @@
             <input id="default-btn" type="file" @change="onFileChange" />
             <div class="text">
               <b-icon icon="plus"></b-icon>
-              <p>Add Photo</p>
+              <p>{{ $t('businessowner.Add_Photo') }}</p>
             </div>
           </div>
         </b-col>
@@ -82,8 +82,8 @@
 
     <b-modal hide-footer title="Create album" v-model="showModal">
       <b-form>
-        <b-form-input v-model="text" placeholder="Album name"></b-form-input>
-        <b-button class="mt-2" variant="primary"> Create</b-button>
+        <b-form-input v-model="text" :placeholder="$t('businessowner.Album_name')"></b-form-input>
+        <b-button class="mt-2" variant="primary"> {{ $t('businessowner.Create') }}</b-button>
       </b-form>
     </b-modal>
   </div>

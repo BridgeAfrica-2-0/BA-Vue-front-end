@@ -124,7 +124,7 @@
               <span class="gras">{{ $t('businessowner.Order') }}</span>
               <span class="text-success">#12324253</span> <br />
               </router-link>
-              <span class="flou">yaoundé 12/12/2021 12H00</span>
+              <span class="flou">{{ $t('businessowner.Yaounde') }} 12/12/2021 12H00</span>
               <hr />
             </div>
 

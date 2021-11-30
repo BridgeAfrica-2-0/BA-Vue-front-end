@@ -294,7 +294,7 @@
             <div class="my-auto ">
               <span class="float-right">
 
-                <b-button variant="primary" class="edit-btn  d-none d-md-inline"     @click="selectCover"  > <fas-icon class="mr-2" :icon="['fas', 'pencil-alt']" size="lg" />   Add Cover </b-button>
+                <b-button variant="primary" class="edit-btn  d-none d-md-inline"     @click="selectCover"  > <fas-icon class="mr-2" :icon="['fas', 'pencil-alt']" size="lg" />   {{ $t('businessowner.Add_Cover') }} </b-button>
                 
                 
                 <b-dropdown id="dropdown-1" class="float-right  mt-2 mt-sm-2 mt-md-0  dot-btn" no-caret variant="outline-primary">

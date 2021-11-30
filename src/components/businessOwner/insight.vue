@@ -41,7 +41,7 @@
               <b-card-text class="f-right">
                 <b-icon
                   v-b-tooltip.hover
-                  title="Tooltip content goes in here"
+                  :title="t('businessowner.Tooltip_content_goes_in_here')"
                   icon="exclamation-circle-fill"
                   variant="dark"
                 ></b-icon>
@@ -80,7 +80,7 @@
               <b-card-text class="f-right">
                 <b-icon
                         v-b-tooltip.hover
-                        title="Tooltip content goes in here"
+                        :title="t('businessowner.Tooltip_content_goes_in_here')"
                         icon="exclamation-circle-fill"
                         variant="dark"
                 ></b-icon>

@@ -1,14 +1,14 @@
 <template>
   <b-container>
     <b-container>
-      <p class="text">Select a payment method for your bridget africa account</p>
+      <p class="text">{{ $t('businessowner.Select_a_payment_method_for_your_bridget_africa_account') }}</p>
     </b-container>
 
     <div class="b-bottom">
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="Country"
+          :label="$t('businessowner.Country')"
           label-size="md"
           label-class="font-weight-bold pt-0 username"
           class="mb-0"
@@ -93,7 +93,7 @@
               <button
                 @click="AcRequestPayment = true"
                 class="float-right btn-custom p-2 btn btn-primary mt-2"
-              > Confirm Payment</button>
+              > {{ $t('businessowner.Confirm_Payment') }}</button>
             </div>
           </div>
         </div>
@@ -102,7 +102,7 @@
 
 
       <div class="mb-0">
-        <p class="text">Your payment information is secure</p>
+        <p class="text">{{ $t('businessowner.Your_payment_information_is_secure') }}</p>
       </div>
     </b-container>
 
@@ -128,7 +128,7 @@
                     variant="primary"
                     class="font-weight-light shadow-sm btn-custom text-14"
                     @click="confirmPayment"
-                  >PAY</b-button>
+                  >{{ $t('businessowner.PAY') }}</b-button>
                 </div>
               </div>
               <!-- <div class="row my-3">
@@ -143,8 +143,8 @@
               <div class="row my-3">
                 <div class="col body-font-size">
                   <p>
-                    Please make sure your account balance is greater than 13 000XAF,
-                    Otherwise your payment will not be completed.
+                    {{ $t('businessowner.Please_make_sure_your_account_balance_is_greater_than') }} 13 000XAF,
+                    {{ $t('businessowner.Otherwise_your_payment_will_not_be_completed') }}.
                   </p>
                   <p>
                     Reference NO: XXXXXXXXXXXX
@@ -154,7 +154,7 @@
             </b-overlay>
           </div>
           <div v-else class="text-center">
-            <h3><b>🥳❗Transaction Completed❗🥳</b></h3>
+            <h3><b>🥳❗{{ $t('businessowner.Transaction_Completed') }}❗🥳</b></h3>
           </div>
           <FlashMessage />
         </b-modal>

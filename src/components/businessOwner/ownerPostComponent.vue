@@ -77,7 +77,7 @@
 
       <div class="p-0 m-0 pr-3 inline-comment">
         <input
-          placeholder="Post a Comment"
+          :placeholder="$t('businessowner.Post_a_Comment')"
           class="comment"
           type="text"
           v-model="comment"

@@ -6,7 +6,7 @@
           <b-card-text>
             <b-form-group
               id="fieldset-1"
-              label="Your Feedback is about"
+              :label="$t('businessowner.Your_Feedback_is_about')"
               class="font-weight-bolder"
               label-for="input-1"
             >
@@ -18,7 +18,7 @@
             </b-form-group>
             <b-form-group
               id="fieldset-1"
-              label="Brief description of your feedback"
+              :label="$t('businessowner.Brief_description_of_your_feedback')"
               label-for="textarea"
               class="font-weight-bolder"
             >
@@ -32,7 +32,7 @@
           </b-card-text>
 
           <b-button href="#" class="float-right" variant="primary">
-            Post
+            {{ $t('businessowner.Post') }}
           </b-button>
         </b-card>
       </b-col>
@@ -47,15 +47,15 @@
             no-caret
           >
             <template #button-content>
-              <b-icon-filter></b-icon-filter><span class="sr-only">Search</span>
+              <b-icon-filter></b-icon-filter><span class="sr-only">{{ $t('businessowner.Search') }}</span>
             </template>
-            <p class="font-weight-bolder px-3 m-0">Feedbacks Type</p>
-            <b-dropdown-item href="#">Any</b-dropdown-item>
+            <p class="font-weight-bolder px-3 m-0">{{ $t('businessowner.Feedbacks_Type') }}</p>
+            <b-dropdown-item href="#">{{ $t('businessowner.Any') }}</b-dropdown-item>
             <b-dropdown-item href="#"
-              >suggestion for improvement</b-dropdown-item
+              >{{ $t('businessowner.suggestion_for_improvement') }}</b-dropdown-item
             >
-            <b-dropdown-item href="#">Progress to your program</b-dropdown-item>
-            <b-dropdown-item href="#">New Idea for PEA-JEUNES</b-dropdown-item>
+            <b-dropdown-item href="#">{{ $t('businessowner.Progress_to_your_program') }}</b-dropdown-item>
+            <b-dropdown-item href="#">{{ $t('businessowner.New_Idea_for_PEA_JEUNES') }}</b-dropdown-item>
           </b-dropdown>
         </span>
       </b-col>
@@ -76,10 +76,10 @@
                 </b-col>
                 <b-col cols="10" md="11" class="pt-2">
                   <h5 class="m-0 font-weight-bolder">
-                    Mapoure Agrobusiness
+                    {{ $t('businessowner.Mapoure_Agrobusiness') }}
                   </h5>
                   <p>
-                    1h Ago - <span class="text-primary">Feedback Type</span>
+                    {{ $t('businessowner.1h_Ago') }} - <span class="text-primary">{{ $t('businessowner.Feedback_Type') }}</span>
                   </p>
                 </b-col>
               </b-row>

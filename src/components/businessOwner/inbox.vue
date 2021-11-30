@@ -433,7 +433,7 @@
                       "
                       type="text"
                       class="form-control input-background mb-6 pb-6"
-                      placeholder="Search message"
+                      :placeholder="$t('businessowner.Search_message')"
                     />
                   </b-col>
                   <b-col class="col-3">
@@ -803,7 +803,7 @@
                       v-model="searchQuery"
                       class="input-background"
                       style="width: 100%"
-                      placeholder="Type the name of person or Business..."
+                      :placeholder="$t('businessowner.Type_the_name_of_person_or_Business')"
                       @keydown.enter="getAll(searchQuery)"
                     ></b-form-input>
 
@@ -839,7 +839,7 @@
                               name="people"
                               @change="peopleAllMulty"
                             >
-                              People
+                              {{ $t('businessowner.People') }}
                             </b-form-checkbox>
                           </b-col>
 
@@ -899,7 +899,7 @@
                               class="p-2 message"
                               @click="selectedChat({ chat: biz, id: biz.id })"
                             > -->
-                          <h2>All</h2>
+                          <h2> {{ $t('businessowner.All') }}</h2>
                           <tr
                             v-for="(elmt, index) in all"
                             :key="index"
@@ -997,7 +997,7 @@
     
     <div class="d-block text-center">
       <h3>{{ $t('businessowner.The_Group_Name') }}:</h3>
-      <b-form-input v-model='groupName' id="input-large" size="lg" autofocus placeholder="Enter your name"></b-form-input>
+      <b-form-input v-model='groupName' id="input-large" size="lg" autofocus :placeholder="$t('businessowner.Enter_your_name')"></b-form-input>
     </div>
     
     <b-button class="mt-3" block @click="selectedMultyChat()">{{ $t('businessowner.Create') }}</b-button>

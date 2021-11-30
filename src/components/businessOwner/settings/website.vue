@@ -11,10 +11,10 @@
               <b-table-simple hover caption-top responsive>
                 <b-thead>
                   <b-tr>
-                    <b-th class="a-text username"> Account Type </b-th>
+                    <b-th class="a-text username"> {{ $t('businessowner.Account_Type') }} </b-th>
 
                     <b-th>
-                      Status
+                      {{ $t('businessowner.Status') }}
                     </b-th>
                   </b-tr>
                 </b-thead>
@@ -28,7 +28,7 @@
                     <b-td class="a-text" style="text-transform: capitalize;"> {{Package.name}} </b-td>
                     <b-td class="a-text">
                       <b-link>{{Package.id === Packages.user_actived_plan[0].package_id ? 'Current':'Upgrade'}}</b-link>
-                      <span class="text-success"> Expires in {{moment(Packages.user_actived_plan[0].expired_at).fromNow()}}</span>
+                      <span class="text-success"> {{ $t('businessowner.Expires_in') }} {{moment(Packages.user_actived_plan[0].expired_at).fromNow()}}</span>
                     </b-td>
                   </b-tr>
                 </b-tbody>
@@ -44,25 +44,25 @@
         <b-modal v-model="modalShowBasics" centered  size="xl" hide-footer="true" no-stacking header-bg-variant="light" body-bg-variant="light">
           <b-row>
             <b-col cols="8">
-              <h5><b-icon icon="check-circle-fill" variant="success"></b-icon> NORMAL ACCOUNT (BASIC ACCOUNT)</h5><br>
-              <p><b>These are the features with the normal account</b></p>
+              <h5><b-icon icon="check-circle-fill" variant="success"></b-icon> {{ $t('businessowner.NORMAL_ACCOUNT') }} ({{ $t('businessowner.BASIC_ACCOUNT') }})</h5><br>
+              <p><b>{{ $t('businessowner.These_are_the_features_with_the_normal_account') }}</b></p>
               <p class="descrip">
-                <b-icon icon="check2" variant="success" class="h5"></b-icon> Website with a unique domain name,phone number, GPS location.<br/>
-                <b-icon icon="check2" variant="success" class="h5"></b-icon> Have community engagement untionality like messaging and gathering of followers.<br/>
-                <b-icon icon="check2" variant="success" class="h5"></b-icon> Marketplace to display products and services, photos, price and will allow interaction with customers.
+                <b-icon icon="check2" variant="success" class="h5"></b-icon> {{ $t('businessowner.Website_with_a_unique_domain_name') }},{{ $t('businessowner.phone_number') }}, {{ $t('businessowner.GPS_location') }}.<br/>
+                <b-icon icon="check2" variant="success" class="h5"></b-icon> {{ $t('businessowner.Have_community_engagement_untionality_like_messaging_and_gathering_of_followers') }}.<br/>
+                <b-icon icon="check2" variant="success" class="h5"></b-icon> {{ $t('businessowner.Marketplace_to_display_products_and_services') }}, {{ $t('businessowner.photos') }}, {{ $t('businessowner.price_and_will_allow_interaction_with_customers') }}.
               </p>
             </b-col>
             <b-col>
-              <h4>Choose Your Plan</h4>
+              <h4>{{ $t('businessowner.Choose_Your_Plan') }}</h4>
               <br>
               <b-row>
-                <b-col>Monthly</b-col>
-                <b-col><b-button variant="primary" @click="confirmPayment" :disabled="bntStatus">Free</b-button></b-col>
+                <b-col>{{ $t('businessowner.Monthly') }}</b-col>
+                <b-col><b-button variant="primary" @click="confirmPayment" :disabled="bntStatus">{{ $t('businessowner.Free') }}</b-button></b-col>
               </b-row>
               <br/>
               <b-row>
-                <b-col>Yearly</b-col>
-                <b-col><b-button variant="primary" @click="confirmPayment" :disabled="bntStatus">Free</b-button></b-col>
+                <b-col>{{ $t('businessowner.Yearly') }}</b-col>
+                <b-col><b-button variant="primary" @click="confirmPayment" :disabled="bntStatus">{{ $t('businessowner.Free') }}</b-button></b-col>
               </b-row>
             </b-col>
             <FlashMessage />
@@ -73,33 +73,33 @@
         <b-modal v-model="modalShowPremium" centered  size="xl" hide-footer="true" header-bg-variant="light" body-bg-variant="light" no-stacking>
           <b-row>
             <b-col cols="7">
-              <h5><b-icon icon="check-circle-fill" variant="success"></b-icon> UPGRADE TO PREMIUM</h5><br>
-              <p><b>By upgrading your account you can get all feature to improve your business</b></p>
+              <h5><b-icon icon="check-circle-fill" variant="success"></b-icon> {{ $t('businessowner.UPGRADE_TO_PREMIUM') }}</h5><br>
+              <p><b>{{ $t('businessowner.By_upgrading_your_account_you_can_get_all_feature_to_improve_your_business') }}</b></p>
               <p class="descrip">
-                <b-icon icon="check2" variant="success" class="h5"></b-icon> All the functionalities as in the normal account.<br/>
-                <b-icon icon="check2" variant="success" class="h5"></b-icon> Ability to directy exchange money between the customer and the business owner.<br/>
-                <b-icon icon="check2" variant="success" class="h5"></b-icon> Shipping calculation.<br/>
-                <b-icon icon="check2" variant="success" class="h5"></b-icon> Advanced business verification.
+                <b-icon icon="check2" variant="success" class="h5"></b-icon> {{ $t('businessowner.All_the_functionalities_as_in_the_normal_account') }}.<br/>
+                <b-icon icon="check2" variant="success" class="h5"></b-icon> {{ $t('businessowner.Ability_to_directy_exchange_money_between_the_customer_and_the_business_owner') }}.<br/>
+                <b-icon icon="check2" variant="success" class="h5"></b-icon> {{ $t('businessowner.Shipping_calculation') }}.<br/>
+                <b-icon icon="check2" variant="success" class="h5"></b-icon> {{ $t('businessowner.Advanced_business_verification') }}.
               </p>
             </b-col>
             <b-col>
-              <h4>Choose Your Plan</h4>
+              <h4>{{ $t('businessowner.Choose_Your_Plan') }}</h4>
               <br>
               <b-row>
-                <b-col><span class="text-success"><b>Most Popular:</b></span> Monthly<br/>Billed Monthly</b-col>
-                <b-col>{{Packages.premium_package_prices[0]}}XAF/Month <b-button v-b-modal.PackageSelection @click="PaymentForm.subscribe = 'one month'" variant="primary">Select</b-button></b-col>
+                <b-col><span class="text-success"><b>{{ $t('businessowner.Most_Popular') }}:</b></span> {{ $t('businessowner.Monthly') }}<br/>{{ $t('businessowner.Billed_Monthly') }}</b-col>
+                <b-col>{{Packages.premium_package_prices[0]}}XAF/{{ $t('businessowner.Month') }} <b-button v-b-modal.PackageSelection @click="PaymentForm.subscribe = 'one month'" variant="primary">{{ $t('businessowner.Select') }}</b-button></b-col>
               </b-row>
               <br/>
               <b-row>
-                <b-col><span class="text-success"><b>Best Value:</b></span> Yearly<br/>Billed Anually - 36000XAF</b-col>
-                <b-col>{{Packages.premium_package_prices[1]}}XAF/Month <b-button v-b-modal.PackageSelection @click="PaymentForm.subscribe = 'one year'" variant="primary">Select</b-button></b-col>
+                <b-col><span class="text-success"><b>{{ $t('businessowner.Best_Value') }}:</b></span> {{ $t('businessowner.Yearly') }}<br/>{{ $t('businessowner.Billed_Anually') }} - 36000XAF</b-col>
+                <b-col>{{Packages.premium_package_prices[1]}}XAF/{{ $t('businessowner.Month') }} <b-button v-b-modal.PackageSelection @click="PaymentForm.subscribe = 'one year'" variant="primary">{{ $t('businessowner.Select') }}</b-button></b-col>
               </b-row>
             </b-col>
           </b-row>
         </b-modal>
 
         <!-- Package Selection -->
-        <b-modal id="PackageSelection" centered  title="Select Your Package" size="md" hide-footer no-stacking>
+        <b-modal id="PackageSelection" centered  :title="$t('businessowner.Select_Your_Package')" size="md" hide-footer no-stacking>
           <div class="">
             <div class="my-4 operator">
               <div class="">
@@ -169,14 +169,14 @@
                 <button
                   v-b-modal.AcRequestPayment
                   class="float-right btn-custom p-2 btn btn-primary mt-2"
-                > Confirm Payment</button>
+                > {{ $t('businessowner.Confirm_Payment') }}</button>
               </div>
             </div>
           </div>
         </b-modal>
 
         <!-- Request Payment -->
-        <b-modal id="AcRequestPayment" centered  title="Enter your MTN Mobile Money number" size="md" hide-footer>
+        <b-modal id="AcRequestPayment" centered  :title="$t('businessowner.Enter_your_MTN_Mobile_Money_number')" size="md" hide-footer>
           <div v-if="!congratulation" class="px-0">
             <b-overlay :show="show" rounded="sm">
               <div class="row">
@@ -197,7 +197,7 @@
                     variant="primary"
                     class="font-weight-light shadow-sm btn-custom text-14"
                     @click="confirmPayment"
-                  >PAY</b-button>
+                  >{{ $t('businessowner.PAY') }}</b-button>
                 </div>
               </div>
               <!-- <div class="row my-3">
@@ -212,8 +212,8 @@
               <div class="row my-3">
                 <div class="col body-font-size">
                   <p>
-                    Please make sure your account balance is greater than 13 000XAF,
-                    Otherwise your payment will not be completed.
+                    {{ $t('businessowner.Please_make_sure_your_account_balance_is_greater_than') }} 13 000XAF,
+                    {{ $t('businessowner.Otherwise_your_payment_will_not_be_completed') }}.
                   </p>
                   <p>
                     Reference NO: XXXXXXXXXXXX
@@ -223,7 +223,7 @@
             </b-overlay>
           </div>
           <div v-else class="text-center">
-            <h3><b>🥳❗Transaction Completed❗🥳</b></h3>
+            <h3><b>🥳❗{{ $t('businessowner.Transaction_Completed') }}❗🥳</b></h3>
           </div>
           <FlashMessage />
         </b-modal>

@@ -9,7 +9,7 @@
           </b-input-group-prepend>
           <b-form-input
             aria-label="Text input with checkbox"
-            placeholder="Search Something"
+            :placeholder="$t('businessowner.Search_Something')"
           ></b-form-input>
         </b-input-group>
       </b-col>

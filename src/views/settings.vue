@@ -191,7 +191,7 @@
                                         <!-- <label class="form-label">country</label>
                                         <input type="text" class="form-control"  v-model="getUserInfos.country.name"> -->
                                         Region 
-                                         <b-form-select v-model="selectedRegion" :options="region" @change="getDivision"></b-form-select>
+                                         <b-form-select v-model="selectedRegion" :options="region" @change="getDivision" required></b-form-select>
                                        
                                       </div>
 
@@ -199,7 +199,7 @@
                                         <!-- <label class="form-label">country</label>
                                         <input type="text" class="form-control"  v-model="getUserInfos.country.name"> -->
                                         Division 
-                                         <b-form-select v-model="selectedDivision" :options="division" @change="getMunicipality"></b-form-select>
+                                         <b-form-select v-model="selectedDivision" :options="division" @change="getMunicipality" required></b-form-select>
                                        
                                       </div>
 
@@ -207,7 +207,7 @@
                                         <!-- <label class="form-label">country</label>
                                         <input type="text" class="form-control"  v-model="getUserInfos.country.name"> -->
                                         municipality 
-                                         <b-form-select v-model="selectedMunicipality" :options="municipality" @change="getNeighbor"></b-form-select>
+                                         <b-form-select v-model="selectedMunicipality" :options="municipality" @change="getNeighbor" required></b-form-select>
                                        
                                       </div>
 
@@ -215,7 +215,7 @@
                                         <!-- <label class="form-label">country</label>
                                         <input type="text" class="form-control"  v-model="getUserInfos.country.name"> -->
                                         Neighbourhood 
-                                         <b-form-select v-model="selectedNeighbor" :options="neighbor"  ></b-form-select>
+                                         <b-form-select v-model="selectedNeighbor" :options="neighbor" required ></b-form-select>
                                        
                                       </div>
 
@@ -556,7 +556,7 @@ export default {
         console.log(response);
         console.log(this.getUserInfos);
         this.message1 = response.data.message ;
-        
+        this.userInfos();
       })
       .catch((err) => {
          

@@ -23,12 +23,11 @@
         </splide-slide>
       </splide>
     </div>
- <router-link to="#media">
-    <b-button class=" float-right see-all">
-      {{$t("businessf.See_All")}} 
-    </b-button>
- </router-link>
-
+    <router-link to="#media">
+      <b-button class="float-right see-all">
+        {{ $t("businessf.See_All") }}
+      </b-button>
+    </router-link>
 
     <b-row class="mt-4 desktop container-fluid">
       <b-col>
@@ -42,27 +41,37 @@
             </b-link>
             <p>
               <br />
-              {{ business_info.community }} {{$t("businessf.Community")}}
+              {{ business_info.community }} {{ $t("businessf.Community") }}
             </p>
           </div>
         </b-row>
       </b-col>
       <b-col cols="6">
         <div class="float-right">
-          <b-button class="community size" size="sm">
-            <i class="fas fa-user-plus  fa-lg btn-icon "></i>
-            <span>{{$t("businessf.Community")}}</span></b-button
+          <b-button
+            class="community size"
+            size="sm"
+            id="followbtn"
+            :class="hasBeFollow !== 0 && 'u-btn'"
+            @click="handleFollow"
+          >
+            <i
+              :class="`fas ${
+                hasBeFollow ? 'fa-user-minus' : 'fa-user-plus'
+              } fa-lg btn-icon`"
+            ></i>
+            <span> {{ $t("businessf.Community") }}</span></b-button
           >
           <b-button class="message ml-1 size" size="sm">
-            <i class="fas fa-envelope fa-lg btn-icon "></i>
-            <span>{{$t("businessf.Message")}}</span></b-button
+            <i class="fas fa-envelope fa-lg btn-icon"></i>
+            <span>{{ $t("businessf.Message") }}</span></b-button
           >
           <b-button class="direction ml-1 size" variant="primary" size="sm">
-            <i class="fas fa-map-marked-alt fa-lg btn-icon "></i>
-            <span>{{$t("businessf.Direction")}}</span></b-button
+            <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
+            <span>{{ $t("businessf.Direction") }}</span></b-button
           >
           <b-dropdown
-            class="ml-2   dot-btn mt-2 mt-sm-2 mt-md-0 "
+            class="ml-2 dot-btn mt-2 mt-sm-2 mt-md-0"
             no-caret
             dropleft
             variant="link"
@@ -72,7 +81,7 @@
             </template>
             <b-dropdown-item>
               <b-icon icon="flag" variant="primary"></b-icon>
-              {{$t("businessf.Report")}}</b-dropdown-item
+              {{ $t("businessf.Report") }}</b-dropdown-item
             >
           </b-dropdown>
         </div>
@@ -89,46 +98,58 @@
               <h6 class="font-weight-bolder name">{{ business_info.name }}</h6>
               <p class="details">
                 <!-- www.bridgeafrica.com <br /> -->
-                {{ business_info.community }} {{$t("businessf.Community")}}
+                {{ business_info.community }} {{ $t("businessf.Community") }}
               </p>
             </div>
           </b-row>
         </b-col>
         <b-col cols="2">
-          <b-button class="community size" variant="primary">
-            <i class="fas fa-user-plus  fa-lg btn-icon "></i>
-            <span>{{$t("businessf.Community")}}</span></b-button
+          <b-button
+            class="community size"
+            variant="primary"
+            id="followbtn"
+            :class="business_info.is_follow !== 0 && 'u-btn'"
+          >
+            <i class="fas fa-user-plus fa-lg btn-icon"></i>
+            <span>{{ $t("businessf.Community") }}</span></b-button
           >
         </b-col>
       </b-row>
     </div>
     <div class="mb-1 m-btn">
-      <b-button class="message   size">
-        <i class="fas fa-envelope fa-lg btn-icon "></i> <span>{{$t("businessf.Message")}}</span>
+      <b-button class="message size">
+        <i class="fas fa-envelope fa-lg btn-icon"></i>
+        <span>{{ $t("businessf.Message") }}</span>
       </b-button>
 
       <b-button class="direction ml-1 size" variant="primary">
-        <i class="fas fa-map-marked-alt fa-lg btn-icon "></i>
-        <span>{{$t("businessf.Direction")}}</span></b-button
+        <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
+        <span>{{ $t("businessf.Direction") }}</span></b-button
       >
 
-      <b-dropdown class="ml-1  dot-btn mt-1 mt-sm-2 mt-md-0 " no-caret variant="link">
+      <b-dropdown
+        class="ml-1 dot-btn mt-1 mt-sm-2 mt-md-0"
+        no-caret
+        variant="link"
+      >
         <template #button-content>
           <b-icon-three-dots></b-icon-three-dots>
         </template>
         <b-dropdown-item>
           <b-icon icon="flag" variant="primary"></b-icon>
-          {{$t("businessf.Report")}}</b-dropdown-item
+          {{ $t("businessf.Report") }}</b-dropdown-item
         >
       </b-dropdown>
     </div>
     <div class="body">
       <b-row>
         <b-col cols="12" class="p-0">
-          <b-tabs lazy content-class="mt-3 p-0"  v-model="currentTab" fill pills>
-            <b-tab  :title="$t('businessf.Home')"><HomePage /></b-tab>
+          <b-tabs lazy content-class="mt-3 p-0" v-model="currentTab" fill pills>
+            <b-tab :title="$t('businessf.Home')"><HomePage /></b-tab>
             <b-tab :title="$t('businessf.About')"><About /></b-tab>
-            <b-tab type="business" :title="$t('businessf.Media')"><Media :type="'business'" :isEditor="false"/></b-tab>
+            <b-tab type="business" :title="$t('businessf.Media')"
+              ><Media :type="'business'" :isEditor="false"
+            /></b-tab>
             <b-tab :title="$t('businessf.Market')"><MarketPlace /></b-tab>
             <b-tab :title="$t('businessf.Networks')"><Networks /></b-tab>
             <b-tab :title="$t('businessf.Community')"><Community /></b-tab>
@@ -140,15 +161,17 @@
 </template>
 
 <script>
-import HomePage from '../businessf/tabs/businessHome';
-import About from './tabs/about';
-import Media from '@/components/businessOwner/tabs/media';
-import MarketPlace from './tabs/marketPlace';
-import Community from '@/components/businessOwner/tabs/memberNetwork';
-import Networks from './tabs/networks';
+import HomePage from "../businessf/tabs/businessHome";
+import About from "./tabs/about";
+import Media from "@/components/owner/tabs/media";
+import MarketPlace from "./tabs/marketPlace";
+import Community from "@/components/businessOwner/tabs/memberNetwork";
+import Networks from "./tabs/networks";
+
+import axios from "axios";
 
 export default {
-  name: 'Home',
+  name: "Home",
   components: {
     HomePage,
     About,
@@ -160,6 +183,7 @@ export default {
 
   data() {
     return {
+      hasBeFollow: 0,
       url_data: null,
       currentTab: 0,
       tabIndex: null,
@@ -170,17 +194,17 @@ export default {
         perPage: 3,
         pagination: false,
 
-        type: 'loop',
+        type: "loop",
         perMove: 1,
 
         breakpoints: {
-          '760': {
+          760: {
             perPage: 1,
-            gap: '0rem',
+            gap: "0rem",
           },
-          '992': {
+          992: {
             perPage: 2,
-            gap: '1rem',
+            gap: "1rem",
           },
         },
       },
@@ -192,85 +216,96 @@ export default {
       return this.$store.state.businessOwner.businessInfo;
     },
   },
+
   created() {
     this.url_data = this.$route.params.id;
     this.businessInfo();
 
+    let tab = this.tabs.findIndex((tab) => tab === this.$route.hash);
 
-    
-   let tab = this.tabs.findIndex(tab => tab === this.$route.hash)
-
-  if(tab==-1){
-    
-    
-    this.currentTab =
-      localStorage.getItem('ba-business-active-tab') !== null ? localStorage.getItem('ba-business-active-tab') : 0;
-
-  } else{
-
-    this.currentTab =tab;
-  }
-
-
+    if (tab == -1) {
+      this.currentTab =
+        localStorage.getItem("ba-business-active-tab") !== null
+          ? localStorage.getItem("ba-business-active-tab")
+          : 0;
+    } else {
+      this.currentTab = tab;
+    }
   },
 
-    watch: {
+  watch: {
+    "$store.state.businessOwner.businessInfo": function () {
+      this.hasBeFollow = this.$store.state.businessOwner.businessInfo.is_follow;
+    },
     currentTab: (newVal, oldVal) => {
-      localStorage.setItem('ba-business-active-tab', newVal);
+      localStorage.setItem("ba-business-active-tab", newVal);
     },
 
-
-   
-  $route(to, from) {
+    $route(to, from) {
       console.log(to.hash);
       this.currentTab = this.tabs.findIndex((tab) => tab === to.hash);
-
     },
-
-  
-
   },
-
-
-
 
   mounted() {
     console.log(this.url_data);
-
 
     this.businessCommunityTotal();
     this.ownerPost();
   },
   methods: {
+    async handleFollow() {
+      // document.getElementById("followbtn").disabled = true;
+
+      const uri = !this.hasBeFollow ? `/follow-community` : `/unfollow`;
+      const nextFollowState = !this.hasBeFollow ? 1 : 0;
+      const data = {
+        id: this.business_info.id,
+        type: "business",
+      };
+
+      await axios
+        .post(uri, data)
+        .then((response) => {
+          console.log(response);
+          this.hasBeFollow = nextFollowState;
+          // document.getElementById("followbtn").disabled = nextFollowState;
+        })
+        .catch((err) => {
+          console.log(err);
+          // document.getElementById("followbtn").disabled = false;
+        });
+    },
+
     businessInfo() {
       this.$store
-        .dispatch('businessOwner/businessInfo', this.url_data)
+        .dispatch("businessOwner/businessInfo", this.url_data)
         .then(() => {
-          console.log('hey yeah');
+          console.log("hey yeah");
         })
-        .catch(err => {
+        .catch((err) => {
           console.log({ err: err });
         });
     },
 
     businessCommunityTotal() {
       this.$store
-        .dispatch('businessOwner/businessCommunityTotal', this.url_data)
+        .dispatch("businessOwner/businessCommunityTotal", this.url_data)
         .then(() => {
-          console.log('hey yeah');
+          console.log("hey yeah");
         })
-        .catch(err => {
+        .catch((err) => {
           console.log({ err: err });
         });
     },
 
     ownerPost() {
       this.$store
-        .dispatch('businessOwner/ownerPost', this.url_data)
+        .dispatch("businessOwner/ownerPost", this.url_data)
         .then(() => {
-          console.log('hey yeah');
+          console.log("hey yeah");
         })
-        .catch(err => {
+        .catch((err) => {
           console.log({ err: err });
         });
     },
@@ -333,15 +368,15 @@ img {
 }
 
 p {
-  font-family: 'Open Sans Helvetica';
+  font-family: "Open Sans Helvetica";
 }
 span {
   font-size: 16px;
   margin-left: 4px;
-  font-family: 'Open Sans Helvetica';
+  font-family: "Open Sans Helvetica";
 }
 p {
-  font-family: 'Open Sans Helvetica';
+  font-family: "Open Sans Helvetica";
   font-size: 14px;
 }
 .btns {
@@ -382,7 +417,7 @@ p {
   position: relative;
   top: 11px;
   font-size: 20px;
-  font-family: 'Open Sans Helvetica';
+  font-family: "Open Sans Helvetica";
 }
 
 .name-block {
@@ -485,10 +520,10 @@ p {
   .name {
     position: relative;
     font-size: 16px;
-    font-family: 'Open Sans Helvetica';
+    font-family: "Open Sans Helvetica";
   }
   p {
-    font-family: 'Open Sans Helvetica';
+    font-family: "Open Sans Helvetica";
     font-size: 12px;
   }
   .m-fol {

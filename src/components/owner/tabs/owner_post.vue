@@ -411,6 +411,7 @@
 
     <Post
       v-for="(item, index) in owner_post"
+      usertype="user"
       :key="index"
       :post="item"
       :mapvideo="() => mapvideo(item.media)"

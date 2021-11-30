@@ -1,8 +1,6 @@
 <template>
-  <div>
-    <div class="s-cardd">
-
-
+  <div  >
+ 
 
       <div
         v-for="value in people_around"
@@ -14,7 +12,7 @@
             <b-avatar
               class="p-avater"
               variant="primary"
-              :src="value.profile_picture"
+              :src="value.profile_picutre"
             ></b-avatar>
           </b-col>
 
@@ -26,7 +24,7 @@
                     <b-row>
                       <b-col md="6" lg="12" cols="6" xl="12" class="mt-lg-2">
                         <div class="mt-3 mt-lg-0 mt-xl-0 username">
-                          <b> {{ value.name }} </b>
+                    <router-link    :to="'profile/'+value.id">      <b> {{ value.name }} </b></router-link>
                         </div>
                       </b-col>
 
@@ -100,11 +98,11 @@
           </b-col>
         </b-row>
 
-
       </div>
-    </div>
+  
     
-          <infinite-loading @infinite="infiniteHandler"></infinite-loading>
+ <infinite-loading @infinite="infiniteHandler"></infinite-loading>
+         
   </div>
 </template>
 
@@ -114,7 +112,7 @@ export default {
    data() {
     return {
       page: 1,
-      people_around:[],
+     // people_around:[],
       options: {
         rewind: true,
         autoplay: true,
@@ -129,7 +127,7 @@ export default {
   },
 
   computed: {
-    old_people_around() {
+    people_around() {
       return this.$store.state.auth.peopleAround;
     },
      activeAccount() {
@@ -380,7 +378,8 @@ f-right {
   border-bottom-right-radius: 45px;
 
   background: white;
-
+padding-right: 2px;
+    padding-left: 6px;
   background-color: #fff;
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
@@ -423,6 +422,8 @@ f-right {
     border-top-right-radius: 45px;
 
     border-bottom-right-radius: 45px;
+    padding-right: 2px;
+    padding-left: 6px;
 
     background: white;
 
@@ -482,8 +483,8 @@ f-right {
     border: 1px solid rgba(0, 0, 0, 0.125);
     margin-bottom: 10px;
 
-    margin-right: -6px;
-    margin-left: -6px;
+    margin-right: 1px;
+    margin-left: 2px;
   }
 
   h6 {

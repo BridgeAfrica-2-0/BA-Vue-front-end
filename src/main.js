@@ -137,11 +137,11 @@ import '@/assets/css/bootstrap.css';
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 
-//import InfiniteLoading from "vue-infinite-loading";
+// import InfiniteLoading from "vue-infinite-loading";
 
-Vue.use(InfiniteLoading, {
-    /* options */
-});
+// Vue.use(InfiniteLoading, {
+//     options 
+// });
 
 Vue.use(VueGoogleMaps, {
     load: {

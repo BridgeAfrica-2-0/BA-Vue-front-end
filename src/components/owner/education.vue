@@ -20,10 +20,10 @@
         >
           <div class="col">
             <span class="mr-auto">
-              <b>{{ $t('profileowner.School_Name') }} : {{ education.school_name }}</b>
+              <b> {{ education.school_name }}</b>
             </span>
             <span>
-           <br>   <b>   {{ $t('profileowner.Major') }}  {{ education.major_subjects }}  </b>
+           <br>      {{ $t('profileowner.Major') }} : {{ education.major_subjects }} 
             </span>
 
             <p>

@@ -48,8 +48,6 @@ import dashboard from "@/views/dashboard";
 import myorders from "@/views/myOders"
 import notFound from "@/components/404"
 
-
-
 import welcome from "@/views/welcome";
 
 import ordersdetail from "@/views/odersDetail";
@@ -69,6 +67,12 @@ const routes = [
     name: "notFound",
     component: notFound,
   },
+  {
+    path: "/cart",
+    name: "cart",
+    component: cart,
+  },
+
 
   {
     path: "/myorders/detail",
@@ -138,7 +142,7 @@ const routes = [
   },
   {
     path: "/dashboard",
-    name: "home",
+    name: "dashboard",
     component: dashboard,
     meta: {
       auth: true,
@@ -155,6 +159,15 @@ const routes = [
     name: "payment",
     component: payment
   },
+
+
+  // {
+  //   path: "/govx",
+  //   name: "govx",
+  //   component: govx,
+  // },
+
+
   {
     path: "/welcome",
     name: "welcome",
@@ -278,6 +291,14 @@ const routes = [
     name: "BusinessFollower",
     component: businessFollower,
   },
+
+  {
+    path: "/business/:id?",
+    name: "BusinessFollower",
+    component: businessFollower,
+  },
+
+
   {
     path: "/businessvisitor",
     name: "BusinessVisitor",
@@ -351,6 +372,23 @@ const routes = [
     component: navMessage,
   },
 
+{
+  path: "/services/:id",
+  name: "Service",
+  component: service,
+},
+{
+  path: "/services/modify/:id",
+  name: "Modify",
+  component: Modifier,
+  beforeEnter: (to, from, next) => {
+    console.log("dedans");
+    if (store.state.login && store.state.isToi) {
+      next();
+    } else {
+      next({ name: "Login" });
+    }
+
   {
     path: "/memberNetwork/:id?",
     name: "memberNetwork",
@@ -361,6 +399,7 @@ const routes = [
     path: "/memberNetworkFollower/:id?",
     name: "Membar Network Follower",
     component: memberNetworkFollower,
+
   },
 
   {
@@ -372,30 +411,30 @@ const routes = [
 ];
 
 const router = new VueRouter({
-  mode: "history",
-  base: process.env.BASE_URL,
-  routes,
+    mode: "history",
+    base: process.env.BASE_URL,
+    routes,
 });
 
 router.beforeEach((to, from, next) => {
-  const loggedIn = localStorage.getItem("user");
+    const loggedIn = localStorage.getItem("user");
 
-  if (to.matched.some((record) => record.meta.auth) && !loggedIn) {
-    next("/login");
+    if (to.matched.some((record) => record.meta.auth) && !loggedIn) {
+        next("/login");
 
-    return;
-  }
-
-  if (to.matched.some((record) => record.meta.auth)) {
-    const dat = localStorage.getItem("user");
-    const userdata = JSON.parse(dat);
-
-    if (userdata.user.verified_at == null) {
-      //  next("/verify");
+        return;
     }
-  }
 
-  next();
+    if (to.matched.some((record) => record.meta.auth)) {
+        const dat = localStorage.getItem("user");
+        const userdata = JSON.parse(dat);
+
+        if (userdata.user.verified_at == null) {
+            //  next("/verify");
+        }
+    }
+
+    next();
 });
 
 export default router;

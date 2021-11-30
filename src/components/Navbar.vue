@@ -661,7 +661,7 @@ export default {
       this.updateNotificationEvent();
     },
   },
-  
+
   methods: {
     ...mapActions({
       setNetworks: "social/FIND_USER_NETWORK",

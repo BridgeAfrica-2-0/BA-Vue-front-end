@@ -1188,10 +1188,12 @@
                         variant="white"
                       ></b-icon
                     ></b-button> -->
+
                           </b-col>
                         </b-row>
                       </div>
                     </div>
+
 
                     <b-form-input
                       id="textarea"
@@ -1402,6 +1404,8 @@ export default {
     };
   },
   computed: {
+
+    
     all() {
       return this.$store.getters["networkChat/getAll"];
     },
@@ -1854,6 +1858,7 @@ export default {
       console.log(this.$refs.feed.scrollTop);
     },
   },
+
 };
 </script>
 

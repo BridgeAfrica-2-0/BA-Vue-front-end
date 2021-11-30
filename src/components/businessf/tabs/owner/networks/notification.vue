@@ -11,8 +11,7 @@
               name="checkbox-1"
               @change="select"
               class="m-left-top username"
-            >
-              {{ selectAll ? $t('network.Un_select_All') : $t('network.Select_All') }}
+            >{{ selectAll ? $t('network.Un_select_All') : $t('network.Select_All') }}
             </b-form-checkbox>
           </div>
         </b-col>
@@ -44,41 +43,38 @@
         </div>
         <b-col cols="12"
           :class="{ active: index == currentPage }"
-          v-for="(notification, index) in notifications.data"
+          v-for="(notification, index) in notifications"
           :key="index"
         >
           <div :class="notification.mark_as_read ? 'text-secondary' : 'font-weight-bold'">
-          <p class="">
-            <span style="display:inline-flex">
-              <b-form-checkbox
-                name="checkbox-1"
-                v-model="selected"
-                :value="notification.id"
-                @change="updateCheckall"
-                :disabled="notification.mark_as_read ? true : false"
-                class="m-left-top"
-              ></b-form-checkbox>
-              <b-avatar
-                class="d-inline-block profile-pic"
-                variant="primary"
-                :text="notification.reference_type.charAt(0,1)"
-              ></b-avatar>
-              <span class="m-0  d-inline-block ml-2 username">
-                {{ notification.reference_type }}
-                <div class="duration">{{ moment(notification.created_at).fromNow() }}</div>
+            <p class="">
+              <span style="display:inline-flex">
+                <b-form-checkbox
+                  name="checkbox-1"
+                  v-model="selected"
+                  :value="notification.notification_id"
+                  @change="updateCheckall"
+                  :disabled="notification.mark_as_read ? true : false"
+                  class="m-left-top"
+                ></b-form-checkbox>
+                <b-avatar
+                  class="d-inline-block profile-pic"
+                  variant="primary"
+                  :text="notification.data[0].fullname.charAt(0,1)"
+                  :src="notification.data[0].profile_picture"
+                ></b-avatar>
+                <span class="m-0  d-inline-block ml-2 username">
+                  {{ notification.data[0].fullname }}
+                  <div class="duration">{{ moment(notification.created_at).fromNow() }}</div>
+                </span>
               </span>
-            </span>
-            <span v-if="!notification.mark_as_read" class="float-right mt-1"> <b-badge pill variant="primary" class="text-primary">.</b-badge></span>
-          </p>
-
-          <p class="text">
-            {{ notification.notification_text }}
-          </p>
+              <span v-if="!notification.mark_as_read" class="float-right mt-1"> <b-badge pill variant="primary" class="text-primary">.</b-badge></span>
+            </p>
+            <p class="text">{{ notification.notification_text }}</p>                  
           </div>
-
           <hr width="100%" />
         </b-col>
-        <b-col cols="12" v-if="notifications.total > notifications.per_page">
+        <!-- <b-col cols="12" v-if="notifications.total > notifications.per_page">
           <div class="b-bottomn f-right">
             <b-pagination
               v-model="currentPage"
@@ -87,10 +83,10 @@
               @change="handlePageChange"
             ></b-pagination>
           </div>
-        </b-col>
+        </b-col> -->
       </b-row>
-      {{notifications}}
-      {{newNotifications}}
+      <!-- {{notifications}}
+      {{newNotifications}} -->
     </div>
 
     <FlashMessage />
@@ -183,7 +179,7 @@ export default {
       if (newValue.length === 0) {
         this.indeterminate = false;
         this.selectAll = false;
-      } else if (newValue.length === this.notifications.data.length) {
+      } else if (newValue.length === this.notifications.length) {
         this.indeterminate = false;
         this.selectAll = true;
       } else {
@@ -209,14 +205,14 @@ export default {
       console.log("checked: "+checked);
       this.selected = [];
       if (checked) {
-        for (let notification in this.notifications.data) {
-            this.selected.push(this.notifications.data[notification].id.toString());
-            console.log("this.notifications.data[notification].id: "+this.notifications.data[notification].id);
+        for (let notification in this.notifications) {
+            this.selected.push(this.notifications[notification].notification_id.toString());
+            console.log("this.notifications[notification].id: "+this.notifications[notification].notification_id);
         }
       }
     },
     updateCheckall: function() {
-      if (this.notifications.data.length === this.selected.length) {
+      if (this.notifications.length === this.selected.length) {
         this.selectAll = true;
       } else {
         this.selectAll = false;

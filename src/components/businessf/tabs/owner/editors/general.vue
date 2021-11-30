@@ -21,26 +21,26 @@
         <ly-tab v-model="seetings_id" :items="items" :options="options" class="center-ly" vertical> </ly-tab>
       </div>
 
-      <div class="mt-3 d-block d-md-none" v-if="seetings_id == '0'">
+      <!-- <div class="mt-3 d-block d-md-none" v-if="seetings_id == '0'">
         <General />
-      </div>
+      </div> -->
 
       <div class="mt-3 d-block d-md-none" v-if="seetings_id == '1'">
         <Roles />
       </div>
 
-      <div class="mt-3 d-block d-md-none" v-if="seetings_id == '2'">
+      <!-- <div class="mt-3 d-block d-md-none" v-if="seetings_id == '2'">
         <Settings />
-      </div>
+      </div> -->
 
       <div class="mt-3 d-block d-md-none" v-if="seetings_id == '3'">
         <Blocking />
       </div>
     </div>
 
-    <div class="mt-3 d-block d-md-none" v-if="selectedIdd == '7'">
+    <!-- <div class="mt-3 d-block d-md-none" v-if="selectedIdd == '7'">
       <Settings />
-    </div>
+    </div> -->
 
     <b-row class="center-content d-none d-md-block">
       <b-col cols="10">
@@ -50,18 +50,18 @@
               <b-tab :title="$t('network.Notifications')">
                 <b-card-text> <Notification /> </b-card-text
               ></b-tab>
-
+<!-- 
               <b-tab :title="$t('network.General')">
                 <b-card-text> <General /> </b-card-text
-              ></b-tab>
+              ></b-tab> -->
 
               <b-tab :title="$t('network.Network_Roles')">
                 <b-card-text> <Roles /> </b-card-text
               ></b-tab>
-
+<!-- 
               <b-tab :title="$t('network.Network_Info')">
                 <b-card-text> <Settings /> </b-card-text
-              ></b-tab>
+              ></b-tab> -->
 
               <b-tab :title="$t('network.Member_Request')">
                 <b-card-text> <MemberShip /> </b-card-text
@@ -95,14 +95,14 @@
 import Roles from '@/components/businessf/tabs/owner/editors/roles';
 
 import MemberShip from '@/components/businessf/tabs/owner/editors/memberShip';
-import KeywordAlert from '@/components/businessf/tabs/owner/editors/keywordAlert';
+import KeywordAlert from '@/components/businessf/tabs/owner/networks/keywordAlert';
 
-import PendingPost from '@/components/businessf/tabs/owner/editors/pendingPost';
+import PendingPost from '@/components/businessf/tabs/owner/networks/pendingPost';
 
 import Notification from '@/components/businessf/tabs/owner/editors/notification';
 
-import Settings from '@/components/businessf/tabs/owner/editors/settings';
-import General from '@/components/businessf/tabs/owner/editors/settings/general';
+// import Settings from '@/components/businessf/tabs/owner/editors/settings';
+// import General from '@/components/businessf/tabs/owner/editors/settings/general';
 import Blocking from '@/components/businessf/tabs/owner/editors/settings/blocking';
 import LyTab from '@/tab/src/index.vue';
 
@@ -155,11 +155,11 @@ export default {
     Roles,
     Notification,
     Blocking,
-    General,
+    // General,
     MemberShip,
     KeywordAlert,
     PendingPost,
-    Settings,
+    // Settings,
     LyTab,
   },
 

@@ -21,6 +21,7 @@ import profilefollower from './network.json'
 export const defaultLocale = 'fr'
 
 export const fr = {
+
  
   auth: auth,
   // businessf:businessf,
@@ -29,15 +30,16 @@ export const fr = {
   myOrders:myOrders,
   
    passrecover: passrecover,
+
     welcome: welcome,
     dashboard: dashboard,
-     profileowner: profileowner,
-     memnetwork: memnetwork,
+    profileowner: profileowner,
+    memnetwork: memnetwork,
     verification: verification,
-   
+
     profilefollower: profilefollower,
-    businessf: businessf,
+
 
     network: network,
-   
+
 }

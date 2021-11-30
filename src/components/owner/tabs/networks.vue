@@ -24,15 +24,11 @@
           class="p-0 pr-1 mb-2"
           v-for="(network, index) in profileNetworks"
           :key="index"
-        >
-
-        
-        
-
+        >   
+  
 
          <div class="people-style shadow h-100">
-                <b-link
-                >
+             
                   <div class="float-right others">
 
 
@@ -52,7 +48,7 @@
   
                     
                   </div>
-                </b-link>
+            
                 <div class="inline-flex">
                   <div >
                     <div class="center-img">
@@ -66,14 +62,14 @@
                     <p class="textt text">
                      
                       <strong class="title">
-                       <router-link to="/businessfollower">
-                          {{ network.name }} <span v-if="network.is_approve == 1">  (Approved) </span>    <span v-else> (UnApproved)  </span>
+                       <router-link :to="'/network/'+network.id">
+                          {{ network.name }}  <span v-if="network.is_approve == 1">  (Approved) </span>    <span v-else> (UnApproved)  </span>
                         </router-link>
                       </strong>
                       <br />   
-                   
+                 
                       
-                      <span class="m-1" v-for=" cat in network.assign_categories" :key="cat.id "> {{cat.name}}  </span>
+                      <span class="m-1" v-for=" cat in network.assign_categories" :key="cat.id "> {{cat.name}},  </span> 
                       <br />
                       
                     {{ network.member_count }}  Community  <br />
@@ -130,6 +126,7 @@
       :title="editNet ? $t('profileowner.Edit_network') : $t('profileowner.Add_Network')"
       size="lg"
       v-model="showModal"
+       @hidden="resetPostData"
       ref="netmodal"
     >   <FlashMessage />
       <b-container>
@@ -527,6 +524,7 @@ export default {
       multiselecvalue: [],
       infiniteId: 1,
       logoimg_url: null,
+      profileNetworks:[],
       BaseURL: process.env.VUE_APP_API_URL,
       showModal: false,
       selectedFile: "",
@@ -598,7 +596,7 @@ export default {
   
 
   computed: {
-    profileNetworks: function () {
+    old_profileNetworks: function () {
       
       return this.$store.state.profile.profilenetwork;
      
@@ -887,7 +885,7 @@ return cat;
 
           setTimeout(() => {
             this.success.state = false;
-          }, 5000);
+          }, 5);
 
 
           this.getNetworks();
@@ -930,9 +928,16 @@ return cat;
           this.success.msg = "Operation was successful !!";
           setTimeout(() => {
             this.success.state = false;
-          }, 5000);
+          }, 50);
           this.getNetworks();   
           loader.hide();
+
+          this.getNetworks();
+
+          this.page = 1;
+          this.infiniteId += 1;
+
+          this.$refs["netmodal"].hide();
         })
         .catch((err) => {
           console.log({err:err});
@@ -988,7 +993,33 @@ return cat;
           this.loader = false;
         });
     },
-    // Action handler
+
+
+    resetPostData(){
+        
+
+  this.createdNetwork.name ="";
+ this.createdNetwork.address ="";
+   this.createdNetwork.neighbourhood="";
+   this.createdNetwork.city="";
+    this.createdNetwork.primary_phone="";
+ this.createdNetwork.secondary_phone="";
+    this.selectedcategories =[];
+
+     this.createdNetwork.description="";
+
+     this.createdNetwork.purpose="";
+      this.createdNetwork.special_needs="";
+   this.selectedregion=[];
+   this.selectedcountry=[];
+    this.selecteddivision=[];
+    this.selectedmunicipality=[];
+    this.logo='';
+     this.logoimg_url="";
+
+
+    },
+  
     action() {
       const fd = new FormData();
       fd.append("business_id", "1");
@@ -1052,7 +1083,7 @@ return cat;
 
 
       axios
-        .get("network/"+network.id+"/edit-infos/")   
+        .get("network/"+network.id+"/edit-infos")   
         .then(({ data }) => {
           console.log(data);
 
@@ -1081,7 +1112,7 @@ return cat;
       this.createdNetwork.business_id = network.business_id;
       this.createdNetwork.address = network.address;
       this.createdNetwork.neighbourhood = network.neighbourhood;    
-      this.createdNetwork.network_categories =  this.netCategory( network.categories);
+      this.createdNetwork.network_categories =  this.netCategory( network.assign_categories);
       this.createdNetwork.description = network.description;
       this.createdNetwork.purpose = network.purpose;
       this.createdNetwork.special_needs = network.special_needs;

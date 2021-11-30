@@ -18,7 +18,7 @@ export default {
       type: String
     },
     fas: {
-      required: true,
+      default: () => "",
       type: String,
     },
   },

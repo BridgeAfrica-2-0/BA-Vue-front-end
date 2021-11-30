@@ -3,14 +3,15 @@
     <fas-icon class="violet mr-2 pt-1 icon-size primary" :icon="['fas', 'file-image']" />{{ $t('profileowner.Media') }}
 
     <hr />
-    <b-tabs content-class="mt-3" pills>
-      <b-tab :title="$t('profileowner.Posts')" active @click="getImages">
+    <b-tabs content-class="mt-3" v-model="tabIndex" pills>
+      <b-tab :title="$t('profileowner.Posts')" @click="getImages">
         <div v-if="!hasLoadPicture">
           <b-spinner class="load" :label="$t('profileowner.Large_Spinner')"></b-spinner>
         </div>
 
         <Images
-          :canUpload="canUpload"
+          :isEditor="isEditor"
+          :showCreateForm="false"
           :hasLoadPicture="!hasLoadPicture"
           :images="all()"
           :albumName="'notFound'"
@@ -23,7 +24,7 @@
         <div v-if="!hasLoadAlbum">
           <b-spinner class="load" :label="$t('profileowner.Large_Spinner')"></b-spinner>
         </div>
-        <Album :canUpload="!canUpload" :type="type" v-else :getAlbums="getAlbums" :getImages="getImages"/>
+        <Album :isEditor="isEditor" :type="type" v-else :getAlbums="getAlbums" :getImages="getImages" />
       </b-tab>
     </b-tabs>
   </div>
@@ -45,15 +46,23 @@ export default {
         return ['profile', 'network', 'business'].indexOf(value) !== -1;
       },
     },
+    isEditor: {
+      type: Boolean,
+      default: () => true,
+    },
+    isablum: {
+        type: Boolean,
+      },
   },
   data: function () {
     return {
-      canUpload: false,
       loading: false,
       hasLoadAlbum: false,
       hasLoadPicture: false,
       showAlbum: false,
       strategy: null,
+      tabIndex: 0,
+      addItem: false,
     };
   },
 
@@ -66,6 +75,7 @@ export default {
     ...mapGetters({
       getProfilePictures: 'UserProfileOwner/getImages',
       getBusinessPictures: 'businessOwner/getAllImages',
+      getNetworkPictures: 'networkProfileMedia/getImages',
     }),
   },
 
@@ -99,6 +109,7 @@ export default {
           .dispatch(type.album, this.urlData)
           .then(() => {
             this.hasLoadAlbum = true;
+            this.addItem = true;
           })
           .catch((err) => {
             this.hasLoadAlbum = true;
@@ -119,6 +130,7 @@ export default {
           .dispatch(type.image, this.urlData)
           .then(() => {
             this.hasLoadPicture = true;
+            this.addItem = true;
           })
           .catch((err) => {
             this.hasLoadPicture = true;
@@ -134,7 +146,9 @@ export default {
 
   created() {
     this.urlData = this.$route.params.id;
-
+    if (this.isablum) {
+      this.tabIndex = 1;
+    }
     this.strategy = {
       business: () => ({
         album: 'businessOwner/getAlbums',
@@ -145,6 +159,11 @@ export default {
         album: 'UserProfileOwner/getAlbums',
         image: 'UserProfileOwner/getImages',
         pictures: this.getProfilePictures,
+      }),
+      network: () => ({
+        album: 'networkProfileMedia/getAlbums',
+        image: 'networkProfileMedia/getImages',
+        pictures: this.getNetworkPictures,
       }),
     };
 

@@ -12,11 +12,24 @@
           <div
             v-for="(item, index) in business"
             :key="index"
-            class="d-inline-flex flex-row align-items-center suggest-item cursor-pointer w-full"
+            class="
+              d-inline-flex
+              flex-row
+              align-items-center
+              suggest-item
+              cursor-pointer
+              w-full
+            "
             @click="activedBusiness(item)"
           >
             <div>
-              <img :src="item.logo_path" class="rounded-circle" alt="" width="30" height="30" />
+              <img
+                :src="item.logo_path"
+                class="logo-sizee"
+                alt=""
+                width="30"
+                height="30"
+              />
             </div>
             <div class="d-flex flex-column ml-3">
               <div>
@@ -41,10 +54,23 @@
             v-for="(item, index) in networks"
             :key="index"
             @click="activedNetwork(item)"
-            class="d-inline-flex flex-row align-items-center suggest-item cursor-pointer w-full"
+            class="
+              d-inline-flex
+              flex-row
+              align-items-center
+              suggest-item
+              cursor-pointer
+              w-full
+            "
           >
             <div>
-              <img :src="item.network_image" class="rounded-circle" alt="" width="30" height="30" />
+              <img
+                :src="item.network_image"
+                class="logo-sizee"
+                alt=""
+                width="30"
+                height="30"
+              />
             </div>
             <div class="d-flex flex-column ml-3">
               <div>
@@ -59,39 +85,39 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex';
+import { mapGetters, mapMutations } from "vuex";
 export default {
   computed: {
     ...mapGetters({
-      networks: 'social/FIND_USER_NETWORK',
-      business: 'social/FIND_USER_BUSNESS',
-      hasLauchNetworkRequest: 'social/INIT',
+      networks: "social/FIND_USER_NETWORK",
+      business: "social/FIND_USER_BUSNESS",
+      hasLauchNetworkRequest: "social/INIT",
     }),
   },
 
   mounted() {
-    this.$root.$on('bv::collapse::state', (collapseId, isJustShown) => {
-      if (collapseId == 'accordion-2' && isJustShown) {
+    this.$root.$on("bv::collapse::state", (collapseId, isJustShown) => {
+      if (collapseId == "accordion-2" && isJustShown) {
         this.openNetwork = true;
         this.openBusiness = false;
 
         return true;
       }
 
-      if (collapseId == 'accordion-2' && !isJustShown) {
+      if (collapseId == "accordion-2" && !isJustShown) {
         this.openNetwork = false;
         this.openBusiness = false;
 
         return true;
       }
 
-      if (collapseId == 'accordion-1' && isJustShown) {
+      if (collapseId == "accordion-1" && isJustShown) {
         this.openNetwork = false;
         this.openBusiness = true;
 
         return true;
       }
-      if (collapseId == 'accordion-1' && !isJustShown) {
+      if (collapseId == "accordion-1" && !isJustShown) {
         this.openNetwork = false;
         this.openBusiness = false;
 
@@ -107,7 +133,7 @@ export default {
           name: item.business_name,
           profile_picture: item.logo_path,
           id: item.business_id,
-          user_type: 'business',
+          user_type: "business",
         }),
         redirect: (obj) => this.redirection(obj),
       },
@@ -117,7 +143,7 @@ export default {
           name: item.network_name,
           profile_picture: item.network_image,
           id: item.network_id,
-          user_type: 'network',
+          user_type: "network",
         }),
         redirect: (obj) => this.redirection(obj),
       },
@@ -134,7 +160,7 @@ export default {
 
   methods: {
     ...mapMutations({
-      auth: 'auth/profilConnected',
+      auth: "auth/profilConnected",
     }),
 
     redirection(obj) {
@@ -150,7 +176,7 @@ export default {
         this.flashMessage.success({
           time: 5000,
           message:
-            'business' == type
+            "business" == type
               ? `You are now connected as ${item.business_name}`
               : `You are connected as ${item.network_name}`,
         });
@@ -158,8 +184,8 @@ export default {
         this.auth(this.strategy[type].newType(item));
 
         const data = {
-          routeName: 'network' == type ? 'networks' : 'BusinessOwner',
-          routeId: 'network' == type ? item.network_id : item.business_id,
+          routeName: "network" == type ? "networks" : "BusinessOwner",
+          routeId: "network" == type ? item.network_id : item.business_id,
         };
 
         this.strategy[type].redirect(data);
@@ -169,11 +195,11 @@ export default {
     },
 
     activedBusiness(item) {
-      if (!this.pending) this.process(item, 'business');
+      if (!this.pending) this.process(item, "business");
     },
 
     activedNetwork(item) {
-      if (!this.pending) this.process(item, 'network');
+      if (!this.pending) this.process(item, "network");
     },
   },
 };
@@ -197,5 +223,10 @@ export default {
 p {
   overflow-anchor: none;
   margin-bottom: 0;
+}
+.logo-sizee {
+  width: 50px !important;
+  height: 50px !important;
+  object-fit: cover;
 }
 </style>

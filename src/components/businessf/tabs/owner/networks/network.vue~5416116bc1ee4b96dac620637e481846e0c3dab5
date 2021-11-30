@@ -18,9 +18,6 @@ export default {
 };
 </script>
 
-<<<<<<< HEAD:src/components/businessOwner/tabs/network/network.vue
-<style></style>
-=======
 <style scoped>
 @media only screen and (min-width: 768px) {
   .btn-text {
@@ -288,4 +285,3 @@ export default {
   }
 }
 </style>
->>>>>>> main:src/components/businessf/tabs/owner/networks/network.vue~5416116bc1ee4b96dac620637e481846e0c3dab5

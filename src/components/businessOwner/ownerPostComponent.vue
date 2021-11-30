@@ -1,9 +1,15 @@
 <template>
-  <div>
+  <div class="p-3 card-border my-3" style="position: relative">
+
     <div class="mt-2">
       <div class="d-inline-flex">
         <span md="1" class="m-0 p-0">
-          <b-avatar class=" avat" square variant="primary" :src="item.logo_path"></b-avatar>
+          <b-avatar
+            class="avat"
+            square
+            variant="primary"
+            :src="item.logo_path"
+          ></b-avatar>
         </span>
         <div class="pl-2 pl-md-3 pt-md-2">
           <h5 class="m-0 usernamee">
@@ -12,10 +18,14 @@
           <p class="durationn">{{ item.created_at | now }}</p>
         </div>
 
-        <div class="toright pt-2" v-if="canBeDelete">
+        <div class="toright" v-if="isYourOwnPost && canBeDelete">
           <b-dropdown variant="link" size="sm" no-caret>
             <template #button-content>
-              <b-icon icon="three-dots" variant="primary" aria-hidden="true"></b-icon>
+              <b-icon
+                icon="three-dots"
+                variant="primary"
+                aria-hidden="true"
+              ></b-icon>
             </template>
 
             <b-dropdown-item-button variant="info" @click="editPost">
@@ -44,9 +54,67 @@
         </p>
       </div>
 
+      <!-- source post -->
+      <div class="mt-2 p-2 post-border" v-if="item.source">
+        <div class="d-inline-flex">
+          <span md="1" class="m-0 p-0">
+            <b-avatar
+              class="d-inline-block avat avatar-border"
+              square
+              variant="primary"
+              :src="item.logo_path"
+            ></b-avatar>
+          </span>
+          <div class="pl-2 pl-md-3 pt-md-2">
+            <h5 class="m-0 usernamee">
+              {{
+                item.source.user_name
+                  ? item.source.user_name
+                  : item.source.business_name
+              }}
+            </h5>
+            <p class="durationn">{{ item.source.created_at | now }}</p>
+          </div>
+        </div>
+        <div class="m-0 p-0">
+          <p class="post-text">
+            <read-more
+              v-if="item.source.content"
+              more-str="read more"
+              :text="item.source.content"
+              link="#"
+              less-str="read less"
+              :max-chars="200"
+            ></read-more>
+          </p>
+        </div>
+
+        <div v-if="item.source.media.length > 0" class="">
+          <span v-for="video in mapvideo()" :key="video">
+            <youtube
+              class="w-100 videoh"
+              :video-id="getId(video)"
+              :player-vars="playerVars"
+              @playing="playing"
+            ></youtube>
+          </span>
+
+          <light
+            css=" "
+            :cells="item.source.media.length"
+            :items="mapmediae()"
+          ></light>
+        </div>
+      </div>
+      <!-- end source post -->
       <div v-if="item.media.length > 0" class="">
         <span v-for="video in mapvideo()" :key="video">
-          <youtube class="w-100 videoh" :video-id="getId(video)" :player-vars="playerVars" @playing="playing"></youtube>
+          <youtube
+            class="w-100 videoh"
+            :video-id="getId(video)"
+            :player-vars="playerVars"
+            @playing="playing"
+          ></youtube>
         </span>
 
         <light css=" " :cells="item.media.length" :items="mapmediae()"></light>
@@ -61,18 +129,32 @@
             ><b-icon :icon="icon" variant="primary" aria-hidden="true"></b-icon>
             {{ item.likes_count | nFormatter }}
           </span>
-          <span class="cursor" @click="() => (showComment = !showComment)"
-            ><b-icon icon="chat-fill" variant="primary" aria-hidden="true"></b-icon>
+          <span class="cursor" @click="toggle"
+            ><b-icon
+              icon="chat-fill"
+              variant="primary"
+              aria-hidden="true"
+            ></b-icon>
             {{ item.comment_count | nFormatter }}
           </span>
-          <ShareButton :post="item" :type="'profile'" />
+          <ShareButton :post="item" :type="'profile'" v-if="canBeDelete" />
         </b-col>
       </b-row>
     </div>
 
-    <div class="mt-2 d-inline-flex w-100">
+    <div
+      class="mt-2 d-inline-flex w-100"
+      v-if="
+        (profile.id == item.post_id ? item.post_id : item.id) && canBeDelete
+      "
+    >
       <div class="m-md-0 p-md-0">
-        <b-avatar variant="primary" square :src="businessLogo" class="img-fluid avat-comment"></b-avatar>
+        <b-avatar
+          variant="primary"
+          square
+          :src="businessLogo"
+          class="img-fluid avat-comment avatar-border"
+        ></b-avatar>
       </div>
 
       <div class="p-0 m-0 pr-3 inline-comment">
@@ -91,32 +173,42 @@
           class="primary send-cmt"
           :icon="['fas', 'paper-plane']"
           @click="onCreateComment"
-          v-if="comment.trim().length > 2 && !createCommentRequestIsActive"
+          v-if="comment.trim().length >= 1 && !createCommentRequestIsActive"
         />
       </div>
     </div>
 
-    <Comment v-for="comment in comments" :key="comment.id" :item="comment" :uuid="post.post_id" />
+    <Comment
+      v-for="comment in comments"
+      :key="comment.id"
+      :item="comment"
+      :uuid="post.post_id"
+    />
     <Loader v-if="loadComment" />
-    <NoMoreData v-if="comments.length && !loadComment" :hasData="hasData" @click.native="onShowComment" />
-    <hr />
+    <NoMoreData
+      v-if="comments.length && !loadComment"
+      :hasData="hasData"
+      @click.native="onShowComment"
+    />
   </div>
 </template>
 
 <script>
-import { formatNumber, fromNow } from '@/helpers';
-import Loader from '@/components/Loader';
-import { mapMutations, mapGetters } from 'vuex';
-import { NoMoreDataForComment } from '@/mixins';
+import { formatNumber, fromNow } from "@/helpers";
+import Loader from "@/components/Loader";
+import { mapMutations, mapGetters } from "vuex";
+import { NoMoreDataForComment } from "@/mixins";
 
-import Comment from './comment';
-import light from '../lightbox';
+import Comment from "./comment";
+import light from "../lightbox";
 
-import { ShareButton } from '@/components/shareButton';
+import { ShareButton } from "@/components/shareButton";
+
+import { isYourOwnPostMixins } from "@/mixins";
 
 export default {
-  name: 'ownerPostComponent',
-  mixins: [NoMoreDataForComment],
+  name: "ownerPostComponent",
+  mixins: [NoMoreDataForComment, isYourOwnPostMixins],
   components: {
     Comment,
     light,
@@ -126,6 +218,10 @@ export default {
 
   props: {
     post: {},
+    usertype:{
+      
+      default: () => null,
+    },
     mapvideo: {},
     mapmediae: {},
     businessLogo: {},
@@ -149,7 +245,7 @@ export default {
   data: () => ({
     item: null,
     comments: [],
-    comment: '',
+    comment: "",
     showComment: false,
     processLike: false,
     createCommentRequestIsActive: false,
@@ -167,29 +263,34 @@ export default {
 
   computed: {
     icon() {
-      return this.post.is_liked ? 'suit-heart-fill' : 'suit-heart';
+      return this.post.is_liked ? "suit-heart-fill" : "suit-heart";
     },
-    ...mapGetters({
-      profile: 'auth/profilConnected',
-    }),
   },
 
   methods: {
     ...mapMutations({
-      addNewComment: 'networkProfile/updatePost',
+      addNewComment: "networkProfile/updatePost",
     }),
 
     getId(video_url) {
       return this.$youtube.getIdFromUrl(video_url);
     },
 
+    toggle() {
+      if (!this.canBeDelete) return false;
+      this.showComment = !this.showComment;
+    },
+
     onLike: async function () {
+      if (!this.canBeDelete) return false;
       if (!this.processLike) {
         this.processLike = true;
 
         const request = await this.$repository.share.postLike({
           post: this.post.post_id ? this.post.post_id : this.post.id,
-          network: this.$route.params.id ? this.$route.params.id : this.profile.id,
+          network: this.$route.params.id
+            ? this.$route.params.id
+            : this.profile.id,
         });
 
         if (request.success)
@@ -206,28 +307,33 @@ export default {
     },
 
     onCreateComment: async function () {
-      if (!(this.comment.trim().length > 2 && !this.createCommentRequestIsActive)) return false;
+      if (
+        !(this.comment.trim().length > 2 && !this.createCommentRequestIsActive)
+      )
+        return false;
       this.createCommentRequestIsActive = true;
       this.loadComment = true;
 
       const request = await this.$repository.share.createComment({
         post: this.post.post_id ? this.post.post_id : this.post.id,
         data: {
-          networkId: this.$route.params.id ? this.$route.params.id : this.profile.id,
+          networkId: this.$route.params.id
+            ? this.$route.params.id
+            : this.profile.id,
           comment: this.comment,
         },
       });
 
       if (request.success) {
         this.onShowComment();
-        this.comment = '';
-        this.addNewComment({ action: 'add:comment:count', uuid: this.post.id });
+        this.comment = "";
+        this.addNewComment({ action: "add:comment:count", uuid: this.post.id });
         this.post = {
           ...this.post,
           comment_count: this.post.comment_count + 1,
         };
         this.flashMessage.success({
-          message: 'Post created',
+          message: "Post created",
         });
       }
 
@@ -257,6 +363,17 @@ export default {
 };
 </script>
 <style >
+.card-border {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+}
+.avatar-border {
+  border-radius: 50px !important;
+}
+.post-border {
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 10px;
+}
 .cursor {
   cursor: pointer;
 }
@@ -546,8 +663,14 @@ export default {
 .post-text p {
   margin: 0px;
 }
+
 .toright {
   position: absolute;
-  right: 1%;
+  right: 6%;
+  /* border: 1px solid #e75c18; */
+}
+.toright:hover {
+  color: white;
+  /* border: 1px solid #ddd; */
 }
 </style>

@@ -1,11 +1,12 @@
 <template>
   <div class="p-3 card-border my-3" style="position: relative">
-
     <div class="mt-2">
       <div class="d-inline-flex">
         <span md="1" class="m-0 p-0">
           <b-avatar
-            class="avat"
+            :class="`${
+              'user' == item.poster_type ? 'rounded-circle' : ''
+            } logo-sizee avat`"
             square
             variant="primary"
             :src="item.logo_path"
@@ -15,6 +16,7 @@
           <h5 class="m-0 usernamee">
             {{ item.user_name }}
           </h5>
+
           <p class="durationn">{{ item.created_at | now }}</p>
         </div>
 
@@ -150,10 +152,13 @@
     >
       <div class="m-md-0 p-md-0">
         <b-avatar
+          b-avatar
+          :class="`${
+            'user' == item.poster_type ? 'rounded-circle' : ''
+          } logo-sizee-18 avat img-fluid avat-comment avatar-border`"
           variant="primary"
           square
           :src="businessLogo"
-          class="img-fluid avat-comment avatar-border"
         ></b-avatar>
       </div>
 
@@ -193,6 +198,9 @@
   </div>
 </template>
 
+  'user' == user.user_type ? 'rounded-circle' : ''
+                    } logo-sizee`"
+
 <script>
 import { formatNumber, fromNow } from "@/helpers";
 import Loader from "@/components/Loader";
@@ -218,8 +226,7 @@ export default {
 
   props: {
     post: {},
-    usertype:{
-      
+    usertype: {
       default: () => null,
     },
     mapvideo: {},
@@ -394,6 +401,19 @@ export default {
 .custom-block-class {
   position: absolute;
   z-index: 1;
+}
+
+.logo-sizee {
+  width: 70px !important;
+  height: 70px !important;
+  object-fit: cover;
+}
+
+
+.logo-sizee-18 {
+  width: 50px !important;
+  height: 50px !important;
+  object-fit: cover;
 }
 
 #preview {

@@ -1,74 +1,75 @@
 <template>
   <div style="overflow-y: hidden">
+    <span v-if="isloaded">
+      <navbar />
 
-     <span v-if="isloaded">
-    <navbar />
+      <div class="container-fluid lynetowrk" style="margin-top: -30px">
+        <ly-tab
+          v-model="selectedId"
+          :items="items"
+          :options="options"
+          @change="handleChange"
+        >
+        </ly-tab>
+        <hr class="d-none d-md-block" />
+      </div>
 
-    <div class="container-fluid lynetowrk" style="margin-top: -30px">
-      <ly-tab
-        v-model="selectedId"
-        :items="items"
-        :options="options"
-        @change="handleChange"
-      >
-      </ly-tab>
-      <hr class="d-none d-md-block" /> 
-    </div>
+      <div class="demo container-fluid p-0">
+        <div class="mt-3" v-if="selectedId == '0'">
+          <b-row class="center-content">
+            <b-col lg="5" xl="4" class="">
+              <Parent />
+            </b-col>
 
-    <div class="demo container-fluid p-0">
-      <div class="mt-3" v-if="selectedId == '0'">
-        <b-row class="center-content">
-          <b-col lg="5" xl="4" class="">
-            <Parent />
-          </b-col>
+            <b-col
+              lg="7"
+              xl="8"
+              class="order-sm-0 mt-sm-10 mt-md-10 mt-xl-0 marg-tap"
+            >
+              <Default />
+            </b-col>
+          </b-row>
+        </div>
 
-          <b-col
-            lg="7"
-            xl="8"
-            class="order-sm-0 mt-sm-10 mt-md-10 mt-xl-0 marg-tap"
+        <div class="mt-3" v-if="selectedId == '1'">
+          <Inbox />
+        </div>
+
+        <div class="mt-3" v-if="selectedId == '2'">
+          <General v-bind:currenttab="selectedId" />
+        </div>
+
+        <div class="mt-3" v-if="selectedId == '3'">
+          <General v-bind:currenttab="selectedId" />
+        </div>
+
+        <div class="mt-3" v-if="selectedId == '4'">
+          <General v-bind:currenttab="selectedId" />
+        </div>
+
+        <div class="mt-3" v-if="selectedId == '5'">
+          <General v-bind:currenttab="selectedId" />
+        </div>
+
+        <div class="mt-3" v-if="selectedId == '6'">
+          <General v-bind:currenttab="selectedId" />
+        </div>
+      </div>
+
+      <Footer />
+      <p class="text-center">
+        <span class="display-inline">
+          <b-link @click="$i18n.locale = 'en'">
+            {{ $t("auth.english") }}</b-link
           >
-            <Default /> 
-          </b-col>
-        </b-row>
-      </div>
-
-      <div class="mt-3" v-if="selectedId == '1'">
-        <Inbox />
-      </div>
-
-      <div class="mt-3" v-if="selectedId == '2'">
-        <General v-bind:currenttab="selectedId" />
-      </div>
-
-      <div class="mt-3" v-if="selectedId == '3'">
-        <General v-bind:currenttab="selectedId" />
-      </div>
-
-      <div class="mt-3" v-if="selectedId == '4'">
-        <General v-bind:currenttab="selectedId" />
-      </div>
-
-      <div class="mt-3" v-if="selectedId == '5'">
-        <General v-bind:currenttab="selectedId" />
-      </div>
-
-      <div class="mt-3" v-if="selectedId == '6'">
-        <General v-bind:currenttab="selectedId" />
-      </div>
-    </div>
-
-    <Footer />
-    <p class="text-center">
-      <span class="display-inline">
-        <b-link @click="$i18n.locale = 'en'"> {{ $t("auth.english") }}</b-link>
-        <span class="vl"></span>
-        <b-link class="ml-2" @click="$i18n.locale = 'fr'">
-          {{ $t("auth.french") }}
-        </b-link>
-      </span>
-      Bridge Africa © 2021
-    </p> 
-     </span>
+          <span class="vl"></span>
+          <b-link class="ml-2" @click="$i18n.locale = 'fr'">
+            {{ $t("auth.french") }}
+          </b-link>
+        </span>
+        Bridge Africa © 2021
+      </p>
+    </span>
   </div>
 </template>
 
@@ -100,8 +101,8 @@ export default {
     return {
       selectedId: 0,
       bottomSelectedId: 0,
-      foll_id:null,
-      isloaded:false,
+      foll_id: null,
+      isloaded: false,
 
       items: [
         { label: this.$t("network.Home"), icon: " " },
@@ -124,13 +125,12 @@ export default {
   created() {
     this.selectedId = this.$route.query.tabId ? this.$route.query.tabId : 0;
 
-      this.foll_id = this.$route.params.id;
+    this.foll_id = this.$route.params.id;
 
-        console.log("babyoobba");
+    console.log("babyoobba");
     this.$store
       .dispatch("networkDetails/roleCheck", this.foll_id)
       .then((data) => {
-      
         let role = data.data.data;
         console.log(role);
         switch (role) {
@@ -148,14 +148,12 @@ export default {
             });
             break;
 
-            case "network_member":
+          case "network_member":
             this.$router.push({
               name: "memberNetwork",
               params: { id: this.foll_id },
             });
             break;
-
-            
         }
 
         this.isloaded = true;
@@ -166,22 +164,15 @@ export default {
         console.log(error.response.status);
 
         if (error.response.status == 404) {
-        //  this.$router.push({ name: "notFound" });
+          //  this.$router.push({ name: "notFound" });
         }
       });
-
-
   },
 
   methods: {
     handleChange(item, index) {
       console.log(item, index);
     },
-
-  
-
-
-
   },
 };
 </script>

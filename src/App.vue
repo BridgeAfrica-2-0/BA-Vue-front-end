@@ -1,5 +1,6 @@
 <template>
   <div id="app" class="" ref="formContainer">
+    <FlashMessage />
     <transition
       name="fade"
       mode="out-in"
@@ -9,10 +10,6 @@
     >
       <router-view />
     </transition>
-
-    <!-- <notifications group="foo" /> -->
-    <FlashMessage />
-    <router-view />
   </div>
 </template>
 <script>

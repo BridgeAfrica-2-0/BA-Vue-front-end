@@ -614,6 +614,7 @@ export default {
       Lspinner: false,
 
       editbiz: "",
+      loading:false,
 
       multiselecvalue: [],
       filterselectvalue: [],
@@ -1003,9 +1004,7 @@ export default {
     },
 
     setOpenHours(day, startTime, endDay) {
-      console.log(day);
-      console.log(startTime);
-      console.log(endDay);
+      
       switch (day) {
         case "Monday":
           console.log("monday");

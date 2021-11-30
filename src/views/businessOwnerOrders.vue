@@ -67,7 +67,7 @@
                 </div>
                 <span class="gras">{{ $t('businessowner.Order')}}</span>
                 <span class="text-success order">#{{item.oderId}}</span> <br />
-                <span class="flou">{{item.shippingAddress}} {{moment(item.dateCreated).format('DD/MM/YYYY HH:mm')}} </span>
+                <span class="flou"> {{moment(item.dateCreated).format('DD/MM/YYYY HH:mm')}} </span>
               </div>
 
               <span class="row posstatus">
@@ -98,7 +98,7 @@
                 <h3 class="h3"> {{item.Totalproduct}} </h3>
 
                 <h3 class="h3">{{item.Totalprice}} XAF</h3>
-                <h3 class="h3">{{item.shipping_cost}} XAF</h3>
+                <h3 class="h3">{{item.shippingCost}} XAF</h3>
                 <h3 class="h3">{{item.total}} XAF</h3>
               </div>
             </div>
@@ -165,7 +165,7 @@
                 </div>
                 <span class="gras">{{ $t('businessowner.Order')}}</span>
                  <span class="text-success order">#{{item.oderId}}</span> <br />
-                <span class="flou">{{item.shippingAddress}} {{moment(item.dateCreated).format('DD/MM/YYYY HH:mm')}} </span>
+                <span class="flou"> {{moment(item.dateCreated).format('DD/MM/YYYY HH:mm')}} </span>
               </div>
 
               <span class="row posstatus">
@@ -196,7 +196,7 @@
                 <h3 class="h3"> {{item.Totalproduct}} </h3>
 
                 <h3 class="h3">{{item.Totalprice}} XAF</h3>
-                <h3 class="h3">{{item.shipping_cost}} XAF</h3>
+                <h3 class="h3">{{item.shippingCost}} XAF</h3>
                 <h3 class="h3">{{item.total}} XAF</h3>
               </div>
             </div>
@@ -264,7 +264,7 @@
                 </div>
                 <span class="gras">{{ $t('businessowner.Order')}}</span>
                  <span class="text-success order">#{{item.oderId}}</span> <br />
-                <span class="flou">{{item.shippingAddress}} {{moment(item.dateCreated).format('DD/MM/YYYY HH:mm')}} </span>
+                <span class="flou"> {{moment(item.dateCreated).format('DD/MM/YYYY HH:mm')}} </span>
               </div>
 
               <span class="row posstatus">
@@ -295,7 +295,7 @@
                  <h3 class="h3"> {{item.Totalproduct}} </h3>
 
                 <h3 class="h3">{{item.Totalprice}} XAF</h3>
-                <h3 class="h3">{{item.shipping_cost}} XAF</h3>
+                <h3 class="h3">{{item.shippingCost}} XAF</h3>
                 <h3 class="h3">{{item.total}} XAF</h3>
               </div>
             </div>
@@ -362,7 +362,7 @@
                 </div>
                 <span class="gras">{{ $t('businessowner.Order')}}</span>
                 <span class="text-success order">#{{item.oderId}}</span> <br />
-                <span class="flou">{{item.shippingAddress}} {{moment(item.dateCreated).format('DD/MM/YYYY HH:mm')}} </span>
+                <span class="flou"> {{moment(item.dateCreated).format('DD/MM/YYYY HH:mm')}} </span>
               </div>
 
               <span class="row posstatus">
@@ -393,7 +393,7 @@
                 <h3 class="h3"> {{item.Totalproduct}} </h3>
 
                 <h3 class="h3">{{item.Totalprice}} XAF</h3>
-                <h3 class="h3">{{item.shipping_cost}} XAF</h3>
+                <h3 class="h3">{{item.shippingCost}} XAF</h3>
                 <h3 class="h3">{{item.total}} XAF</h3>
               </div>
             </div>
@@ -518,7 +518,7 @@
               <span class="gras" >{{ $t('businessowner.Order') }}</span>
               <span class="text-success">#{{ item.oderId }}</span> <br />
 
-              <span class="flou">{{ item.shippingAddress }}{{ moment(item.dateCreated).format('DD/MM/YYYY HH:mm') }}</span>
+              <span class="flou">{{  }}{{ moment(item.dateCreated).format('DD/MM/YYYY HH:mm') }}</span>
               <hr />
             </div>
 
@@ -541,9 +541,9 @@
 
               <div class="col-3 text-start">
                 <h3>{{ item.Totalproduct }}</h3>
-                <h3>{{ item.Totalprice }} Fcfa</h3>
-                <h3>{{ item.shipping_cost }} Fcfa</h3>
-                <h3>{{ item.total }} Fcfa</h3>
+                <h3>{{ item.Totalprice }} XAF</h3>
+                <h3>{{ item.shippingCost }} XAF</h3>
+                <h3>{{ item.total }} XAF</h3>
               </div>
 
               <div class="col" id="hidedesktop1">
@@ -611,7 +611,7 @@
               </div>
               <span class="gras">{{ $t('businessowner.Order')}}</span>
               <span class="text-success"># {{ item.oderId }}</span> <br />
-              <span class="flou">{{ item.shippingAddress }} {{ moment(item.dateCreated).format('DD/MM/YYYY HH:mm') }}</span>
+              <span class="flou">{{  }} {{ moment(item.dateCreated).format('DD/MM/YYYY HH:mm') }}</span>
               <hr />
             </div>
 
@@ -634,9 +634,9 @@
 
               <div class="col-3 text-start">
                 <h3>{{ item.Totalproduct }}</h3>
-                <h3>{{ item.Totalprice }} Fcfa</h3>
-                <h3>{{ item.shipping_cost }} Fcfa</h3>
-                <h3>{{ item.total }} Fcfa</h3>
+                <h3>{{ item.Totalprice }} XAF</h3>
+                <h3>{{ item.shippingCost }} XAF</h3>
+                <h3>{{ item.total }} XAF</h3>
               </div>
 
               <div class="col" id="hidedesktop1">
@@ -701,7 +701,7 @@
               </div>
               <span class="gras">{{ $t('businessowner.Order')}}</span>
               <span class="text-success">#{{ item.oderId }}</span> <br />
-              <span class="flou">{{ item.shippingAddress }}, {{ moment(item.dateCreated).format('DD/MM/YYYY HH:mm') }}</span>
+              <span class="flou">{{  }}, {{ moment(item.dateCreated).format('DD/MM/YYYY HH:mm') }}</span>
               <hr />
             </div>
 
@@ -724,8 +724,8 @@
 
               <div class="col-3 text-start">
                 <h3>{{ item.Totalproduct }}</h3>
-                <h3>{{ item.Totalprice }} Fcfa</h3>
-                <h3>{{ item.shipping_cost }} Fcfa</h3>
+                <h3>{{ item.Totalprice }} XAF</h3>
+                <h3>{{ item.shippingCost }} XAF</h3>
                 <h3>{{ item.total }} XAF</h3>
               </div>
 
@@ -761,6 +761,7 @@
                 :per-page="perPage"
                 align="center"
                 size="sm"
+               
               ></b-pagination>
             </div>
           </div>
@@ -791,7 +792,7 @@
               </div>
               <span class="gras">{{ $t('businessowner.Order')}}</span>
               <span class="text-success"># {{ item.oderId }}</span> <br />
-              <span class="flou">{{ item.shippingAddress }}, {{ moment(item.dateCreated).format('DD/MM/YYYY HH:mm') }}</span>
+              <span class="flou">{{  }}, {{ moment(item.dateCreated).format('DD/MM/YYYY HH:mm') }}</span>
               <hr />
             </div>
 
@@ -814,9 +815,9 @@
 
               <div class="col-3 text-start">
                 <h3>{{ item.Totalproduct }}</h3>
-                <h3>{{ item.Totalprice }} Fcfa</h3>
-                <h3>{{ item.shipping_cost }} Fcfa</h3>
-                <h3>{{ item.total }} Fcfa</h3>
+                <h3>{{ item.Totalprice }} XAF</h3>
+                <h3>{{ item.shippingCost }} XAF</h3>
+                <h3>{{ item.total }} XAF</h3>
               </div>
 
               <div class="col" id="hidedesktop1">

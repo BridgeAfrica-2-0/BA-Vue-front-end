@@ -100,8 +100,6 @@
       </b-card>
     </b-container>
 
-    <FlashMessage />
-
   </b-container>
 </template>
 

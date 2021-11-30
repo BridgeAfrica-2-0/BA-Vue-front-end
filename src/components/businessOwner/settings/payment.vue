@@ -13,7 +13,7 @@
           label-class="font-weight-bold pt-0 username"
           class="mb-0"
         >
-          <country-select v-model="country" :country="country" topCountry="US" class="form-control text" />
+          <country-select v-model="PaymentForm.country" :country="country" topCountry="US" class="form-control text" />
         </b-form-group>
       </b-container>
     </div>
@@ -21,8 +21,8 @@
     <br />
 
     <b-container class="payment-type">
-
       <b-card>
+        <!-- {{defaultPayment}} -->
         <div class="">
 
           <div class="my-4 operator">
@@ -33,9 +33,7 @@
               />
             </div>
             <div class="operator-name">
-              <p class="mb-0 mx-4 title-font-size font-weight-bold">
-                MTN Mobile Money
-              </p>
+              <p class="mb-0 mx-4 title-font-size font-weight-bold">MTN Mobile Money</p>
             </div>
             <div class="operator-select-box">
               <b-form-radio
@@ -46,7 +44,6 @@
               ></b-form-radio>
             </div>
           </div>
-
           <div class="my-4 operator">
             <div class="">
               <img
@@ -74,9 +71,7 @@
               />
             </div>
             <div class="operator-name">
-              <p class="mb-0 mx-4 title-font-size font-weight-bold">
-                Express Union
-              </p>
+              <p class="mb-0 mx-4 title-font-size font-weight-bold">Express Union</p>
             </div>
             <div class="operator-select-box ml-md-2">
               <b-form-radio
@@ -87,7 +82,6 @@
               ></b-form-radio>
             </div>
           </div>
-
           <div class="row p-2">
             <div class="col">
               <button
@@ -98,66 +92,44 @@
           </div>
         </div>
       </b-card>
-
-
-
       <div class="mb-0">
         <p class="text">{{ $t('businessowner.Your_payment_information_is_secure') }}</p>
       </div>
     </b-container>
 
-        <!-- Request Payment -->
-        <b-modal v-model="AcRequestPayment" :title="$t('businessowner.Enter_your_MTN_Mobile_Money_number')" size="md" hide-footer>
-          <div v-if="!congratulation" class="px-0">
-            <b-overlay :show="show" rounded="sm">
-              <div class="row">
-                <div class="col-10 col-sm-9 col-md-8">
-                  <b-form-input
-                    placeholder="237 6XX XXX XXX"
-                    id="number"
-                    v-model="PaymentForm.phone"
-                    type="tel"
-                  ></b-form-input>
-                </div>
-                <div class="col-2 col-sm-3 col-md-4 px-0 btn-custom-box">
-                  <!-- <b-button
-                    variant="primary"
-                    class="font-weight-light btn-custom text-14 shadow-sm"
-                  >CHANGE</b-button> -->
-                  <b-button
-                    variant="primary"
-                    class="font-weight-light shadow-sm btn-custom text-14"
-                    @click="confirmPayment"
-                  >{{ $t('businessowner.PAY') }}</b-button>
-                </div>
-              </div>
-              <!-- <div class="row my-3">
-                <div class="col btn-custom-box">
-                  <b-button
-                    variant="primary"
-                    class="font-weight-light shadow-sm btn-custom text-14"
-                    @click="confirmPayment"
-                  >PAY</b-button>
-                </div>
-              </div> -->
-              <div class="row my-3">
-                <div class="col body-font-size">
-                  <p>
-                    {{ $t('businessowner.Please_make_sure_your_account_balance_is_greater_than') }} 13 000XAF,
-                    {{ $t('businessowner.Otherwise_your_payment_will_not_be_completed') }}.
-                  </p>
-                  <p>
-                    Reference NO: XXXXXXXXXXXX
-                  </p>
-                </div>
-              </div>
-            </b-overlay>
+    <!-- Request Payment -->
+    <b-modal v-model="AcRequestPayment" title="Enter your Number" size="md" hide-footer>
+        <b-overlay :show="show" rounded="sm">
+          <div class="row">
+            <div class="col-10 col-sm-9 col-md-8">
+              <b-form-input
+                placeholder="237 6XX XXX XXX"
+                id="number"
+                v-model="PaymentForm.phone"
+                type="tel"
+              ></b-form-input>
+            </div>
+            <div class="col-2 col-sm-3 col-md-4 px-0 btn-custom-box">
+              <b-button
+                variant="primary"
+                class="font-weight-light shadow-sm btn-custom text-14"
+                @click="confirmDefaltPayment"
+              >Confirm</b-button>
+            </div>
           </div>
-          <div v-else class="text-center">
-            <h3><b>🥳❗{{ $t('businessowner.Transaction_Completed') }}❗🥳</b></h3>
+          <div class="row my-3">
+            <div class="col body-font-size">
+              <p>
+                Please make sure your account balance is greater than 13 000XAF,
+                Otherwise your payment will not be completed.
+              </p>
+              <p>
+                Reference NO: XXXXXXXXXXXX
+              </p>
+            </div>
           </div>
-          <FlashMessage />
-        </b-modal>
+        </b-overlay>
+    </b-modal>
 
   </b-container>
 </template>
@@ -169,28 +141,30 @@ export default {
     return {
       url:null,
       AcRequestPayment: false,
-      operator: '',
       formatObject: new Intl.NumberFormat('fr-FR', {
         style: 'currency',
         currency: 'XAF',
         minimumFractionDigits: 2,
       }),
-      number: '',
       PaymentForm: {
-        subscribe: 'type',
+        country: '',
         phone: '',
         operator: '',
-        package_id: 'null',
-        type: 'null'
       },
 
       show: false,
-      congratulation: false
     };
+  },
+
+  computed: {
+    defaultPayment() {
+      return this.$store.state.businessAccountType.defaultPayment;
+    }
   },
 
   mounted(){
     this.url = this.$route.params.id;
+    this.DefaultPayment();
   },
 
   methods: {
@@ -205,25 +179,40 @@ export default {
       if (this.operator !== '') 
         this.$emit('requestpayment', this.operator);
     },
-    confirmPayment() {
+    
+    DefaultPayment() {
+      console.log("defaultPayment");
+      this.$store
+      .dispatch("businessAccountType/getDefaultPayment", {
+        path: `${this.url}/settings/get-payement-method`
+        })
+      .then(() => {
+        this.PaymentForm.operator = this.defaultPayment.payement_method;
+        console.log('ohh yeah');
+      })
+      .catch(err => {
+        console.log({ err: err });
+      });
+    },
+
+    confirmDefaltPayment() {
       this.show = true;
-      console.log("PaymentForm:", this.PaymentForm);
+      console.log("confirmDefaltPayment:", this.PaymentForm);
       let formData = new FormData();
-      // formData.append("subscribe", this.PaymentForm.subscribe)
-      formData.append("phone", this.PaymentForm.phone)
-      formData.append("operator", this.PaymentForm.operator)
-      // formData.append("package_id", this.PaymentForm.package_id)
+      // formData.append("country", this.PaymentForm.country)
+      // formData.append("phone", this.PaymentForm.phone)
+      formData.append("payement_method", this.PaymentForm.operator)
        this.$store
       .dispatch("businessAccountType/confirmPayment", {
-        path: `settings/packages/${this.url}`,
-        data: formData
+        path: `${this.url}/settings/get-payement-method`,
+        formData: formData
         })
       .then(({data}) => {
         console.log(data);
         console.log('ohh yeah');
         this.show = false;
-        this.congratulation = true;
-        this.getAccounts();
+        this.AcRequestPayment = false;
+        this.DefaultPayment();
         this.flashMessage.show({
           status: "success",
           message: "Payment Complete"
@@ -231,7 +220,7 @@ export default {
       })
       .catch(err => {
         this.show = false
-        this.congratulation = false
+        this.AcRequestPayment = false
         console.log({ err: err });
         this.flashMessage.show({
           status: "error",

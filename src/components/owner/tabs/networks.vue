@@ -24,8 +24,8 @@
           class="p-0 pr-1 mb-2"
           v-for="(network, index) in profileNetworks"
           :key="index"
-        >
-   
+        >   
+  
 
          <div class="people-style shadow h-100">
              
@@ -67,9 +67,9 @@
                         </router-link>
                       </strong>
                       <br />   
-<!--                    
+                 
                       
-                      <span class="m-1" v-for=" cat in network.assign_categories" :key="cat.id "> {{cat.name}}  </span> -->
+                      <span class="m-1" v-for=" cat in network.assign_categories" :key="cat.id "> {{cat.name}},  </span> 
                       <br />
                       
                     {{ network.member_count }}  Community  <br />
@@ -126,6 +126,7 @@
       :title="editNet ? $t('profileowner.Edit_network') : $t('profileowner.Add_Network')"
       size="lg"
       v-model="showModal"
+       @hidden="resetPostData"
       ref="netmodal"
     >   <FlashMessage />
       <b-container>
@@ -884,7 +885,7 @@ return cat;
 
           setTimeout(() => {
             this.success.state = false;
-          }, 5000);
+          }, 5);
 
 
           this.getNetworks();
@@ -927,9 +928,16 @@ return cat;
           this.success.msg = "Operation was successful !!";
           setTimeout(() => {
             this.success.state = false;
-          }, 5000);
+          }, 50);
           this.getNetworks();   
           loader.hide();
+
+          this.getNetworks();
+
+          this.page = 1;
+          this.infiniteId += 1;
+
+          this.$refs["netmodal"].hide();
         })
         .catch((err) => {
           console.log({err:err});
@@ -985,7 +993,33 @@ return cat;
           this.loader = false;
         });
     },
-    // Action handler
+
+
+    resetPostData(){
+        
+
+  this.createdNetwork.name ="";
+ this.createdNetwork.address ="";
+   this.createdNetwork.neighbourhood="";
+   this.createdNetwork.city="";
+    this.createdNetwork.primary_phone="";
+ this.createdNetwork.secondary_phone="";
+    this.selectedcategories =[];
+
+     this.createdNetwork.description="";
+
+     this.createdNetwork.purpose="";
+      this.createdNetwork.special_needs="";
+   this.selectedregion=[];
+   this.selectedcountry=[];
+    this.selecteddivision=[];
+    this.selectedmunicipality=[];
+    this.logo='';
+     this.logoimg_url="";
+
+
+    },
+  
     action() {
       const fd = new FormData();
       fd.append("business_id", "1");

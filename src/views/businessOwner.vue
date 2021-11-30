@@ -2,7 +2,6 @@
   <div class="" style="overflow-y: hidden; padding: 0px">
     <span v-if="isloaded">
       <navbar />
-
       <div class="container-fluid">
         <ly-tab
           v-model="selectedId"
@@ -11,7 +10,6 @@
           class="center-ly"
         >
         </ly-tab>
-
         <hr width="100%" class="d-none" d-md-block />
       </div>
 
@@ -23,31 +21,31 @@
         <Inbox />
       </div>
 
-      <div class="container-fluid">
+      <!-- <div class="container-fluid">
         <ly-tab
           v-model="selectedId"
           :items="items"
           :options="options"
           class="center-ly"
         >
-        </ly-tab>
+        </ly-tab> -->
 
-        <div class="mt-3" v-if="selectedId == '2'">
-          <Settings v-bind:currenttab="selectedId" />
-        </div>
-
-        <div class="mt-3" v-if="selectedId == '3'">
-          <Settings v-bind:currenttab="selectedId" />
-        </div>
-
-        <div class="mt-3" v-if="selectedId == '4'">
-          <Settings v-bind:currenttab="selectedId" />
-        </div>
-
-        <div class="mt-3" v-if="selectedId == '5'">
-          <Settings v-bind:currenttab="selectedId" />
-        </div>
+      <div class="mt-3" v-if="selectedId == '2'">
+        <Settings v-bind:currenttab="selectedId" />
       </div>
+
+      <div class="mt-3" v-if="selectedId == '3'">
+        <Settings v-bind:currenttab="selectedId" />
+      </div>
+
+      <div class="mt-3" v-if="selectedId == '4'">
+        <Settings v-bind:currenttab="selectedId" />
+      </div>
+
+      <div class="mt-3" v-if="selectedId == '5'">
+        <Settings v-bind:currenttab="selectedId" />
+      </div>
+      <!-- </div> -->
       <Footer />
     </span>
   </div>
@@ -157,6 +155,12 @@ export default {
         .catch((err) => {
           console.log({ err: err });
         });
+    },
+  },
+
+  watch: {
+    "$route.query.tabId": function () {
+      this.selectedId = this.$route.query.tabId;
     },
   },
 

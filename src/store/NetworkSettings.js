@@ -148,8 +148,8 @@ export default {
         console.log(data);
       });
     },
-    getEditNetworkInfo({ commit }, networkId) {
-      return axios.get(`/network/edit/${networkId}`).then(({ data }) => {
+    getEditNetworkInfo({ commit }, netData) {
+      return axios.get(`/network/${netData}`).then(({ data }) => {
         commit("seteditnetworkinfo", data.data);
         console.log(data);
       });

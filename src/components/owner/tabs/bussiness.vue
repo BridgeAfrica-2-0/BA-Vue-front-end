@@ -139,7 +139,7 @@
                   ></multiselect>
                 </div>
 
-                <div>
+                <div  v-if="scategories.length" >
                   <label class="typo__label"> {{ $t('profileowner.Sub_Category') }}</label>
                   <multiselect
                     v-model="filterselectvalue"
@@ -154,8 +154,9 @@
                   ></multiselect>
                 </div>
 
-                <label class="typo__label">{{$t('profileowner.Fiters')}} </label>
-                <div>
+               
+                <div  v-if="filterselectvalue.length">
+                   <label class="typo__label">{{$t('profileowner.Fiters')}} </label>
                   <b-card no-body>
                     <b-tabs pills card vertical>
                       <b-tab
@@ -208,7 +209,7 @@
                     </div>
                   </div>
 
-                  <div class="col-md-6">
+                  <div v-if="regions.length"   class="col-md-6">
                     <div class="form-group">
                       <label for="country" class="username"> {{ $t('profileowner.Region') }} :</label
                       ><br />
@@ -224,7 +225,7 @@
                     </div>
                   </div>
 
-                  <div class="col-md-6">
+                  <div   v-if="divisions.length"   class="col-md-6">
                     <div class="form-group">
                       <label for="country" class="username"> {{ $t('profileowner.Division') }} :</label
                       ><br />
@@ -240,7 +241,7 @@
                     </div>
                   </div>
 
-                  <div class="col-md-6">
+                  <div   v-if="municipalities.length"  class="col-md-6">
                     <div class="form-group">
                       <label for="country" class="username">
                         {{ $t('profileowner.Municipality') }} :</label
@@ -257,10 +258,10 @@
                       ></multiselect>
                     </div>
                   </div>
-                </div>
+                
 
-                <div class="row">
-                  <div class="col-md-6">
+
+                 <div   v-if="localities.length" class="col-md-6">
                     <div class="form-group">
                       <label for="Neighbor" class="username"> {{ $t('profileowner.Neighbor') }} :</label
                       ><br />
@@ -274,8 +275,11 @@
                       ></multiselect>
                     </div>
                   </div>
+                  
 
-                  <b-col md="6">
+   
+
+    <div class="col-md-6">
                     <div class="form-group">
                       <label for="website" class="username"> {{ $t('profileowner.City') }} :</label
                       ><br />
@@ -288,7 +292,11 @@
                         class="form-control text"
                       />
                     </div>
-                  </b-col>
+    </div>
+
+
+
+                 
 
                   <div class="col-md-6">
                     <div class="form-group">
@@ -800,7 +808,7 @@
                   <div>
                     <p class="textt text">
                       <strong class="title">
-                        {{ business.name }}
+                      <router-link :to="'/business_owner/'+business.id">    {{ business.name }}   </router-link>
                       </strong>
                       <br />  
                         <span
@@ -870,6 +878,7 @@ export default {
       bizId: "",
        profileBusiness:[],
       infiniteId: 2,
+      profilebusiness:[],
       editbiz: "",
       selectedusecase: "",
       keywordds: [],
@@ -1599,7 +1608,7 @@ export default {
       return selectedUsers;
     },
 
-    profilebusiness: function () {
+    Old_profilebusiness: function () {
       return this.$store.state.profile.profileBusiness;
     },
 

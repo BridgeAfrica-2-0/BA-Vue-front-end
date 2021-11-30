@@ -95,7 +95,7 @@ created(){
         console.log(error.response.status);
 
         if (error.response.status == 404) {
-          this.$router.push({ name: "notFound" });
+        //  this.$router.push({ name: "notFound" });
         }
       });
 

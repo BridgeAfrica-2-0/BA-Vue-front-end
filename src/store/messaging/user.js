@@ -156,18 +156,44 @@ export default {
 
         SAVE_USERS_CHAT({ commit, dispatch }, data) {
             commit("setUsers", []);
+            console.log("[DEBUG]", data);
+            var payload = data.data
+            var type = data.type
 
-            axios.post(`/messages/UserToUser`, data, {
-                    headers: {
-                        'Content-Type': 'multipart/form-data'
-                    }
-                })
-                .then((res) => {
-                    console.log("Message saved...", res.data.data);
-                })
-                .catch((err) => {
-                    console.log(err);
-                })
+            if (type == 'business') {
+                axios.post(`/messages/UserToBusiness`, payload, {
+                        headers: {
+                            'Content-Type': 'multipart/form-data'
+                        }
+                    })
+                    .then((res) => {
+                        console.log("Message saved...", res.data.data);
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    })
+            } else if (type == 'user') {
+                axios.post(`/messages/UserToUser`, payload, {
+                        headers: {
+                            'Content-Type': 'multipart/form-data'
+                        }
+                    })
+                    .then((res) => {
+                        console.log("Message saved...", res.data.data);
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    })
+            } else {
+                axios.post(`/messages/UserToNetwork`, payload)
+                    .then((res) => {
+                        console.log("Message saved...", res.data.data);
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    })
+            }
+
         },
 
         async GET_USER_TO_USER({ commit }, data) {

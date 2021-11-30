@@ -138,24 +138,95 @@
                       </b-button>
                     </b-button-group>
                   </span>
-                </div>
-                <br />
 
+                  <img :src="movie.link" />
+               
+               
+                </div>
+              </b-col>
+            </b-row>
+            <br />
+
+              <b-progress
+                :value="uploadPercentage"
+                variant="primary"
+                class="m13"
+                show-progress
+                :animated="animate"
+              ></b-progress>
+
+              <span>
+                <b-button @click="updatePost" variant="primary" block
+                  ><b-icon icon="cursor-fill" variant="primary"></b-icon> Publish</b-button
+                >
+              </span>
+            
+            <b-col cols="1" md="1" class="m-0 p-0"></b-col>
+        </b-modal>
+
+        <b-modal id="modal-xl" ref="modal-xl" centered hide-footer title="Create Post" @hidden="resetPostData">
+          <b-row ref="loader">
+            <b-col cols="1" class="m-0 p-0"></b-col>
+            <b-col cols="2" class="m-0 p-0">
+              <b-avatar class="d-inline-block avat" variant="primary" square :src="business_intro.logo_path"></b-avatar>
+            </b-col>
+            <b-col cols="9" class="pt-2" style="margin-left: -5px">
+              <h5 class="m-0 font-weight-bolder">
+                {{ business_intro.name }}
+              </h5>
+            </b-col>
+          </b-row>
+          <b-row>
+            <b-col cols="1" md="1" cl ass="m-0 p-0"></b-col>
+            <b-col cols="10" md="10" class="m-0 p-0">
+              <br />
+              <div class="cursor">
+                <b-form-textarea
+                  id="textarea-small"
+                  autofocus
+                  class="mb-2 border-none"
+                  placeholder="Post a business update"
+                  v-model="createPost.postBusinessUpdate"
+                ></b-form-textarea>
+              </div>
+              <div class="bordder">
+                <span class="float-left"> Add to Your Post </span>
+                <span class="float-right">
+                  <b-button-group size="sm" class="">
+                    <input id="video" type="file" hidden />
+                    <input
+                      id="image"
+                      type="file"
+                      hidden
+                      @change="selectMovies"
+                      accept="video/mpeg,video/mp4,image/*"
+                      ref="movies"
+                    />
+                    <input
+                      id="document"
+                      type="file"
+                      @change="selectDocument"
+                      hidden
+                      accept="application/pdf"
+                      ref="document"
+                    />
+
+                    <b-button title="Add Movie" size="sm" variant="outline-primary" @click="$refs.movies.click()">
+                      <fas-icon class="icons" :icon="['fas', 'photo-video']" size="lg" />
+                    </b-button>
+                    <b-button title="Add Hyperlink" size="sm" variant="outline-primary" @click="$refs.document.click()">
+                      <fas-icon class="icons" :icon="['fas', 'file']" size="lg" />
+                    </b-button>
+                  </b-button-group>
+                </span> 
+              </div>
+              <br />
+
+              <div class="h300px">
                 <div v-for="hyperlink in createPost.hyperlinks" :key="hyperlink.fileName" class="bordder">
                   <span class="float-left"> {{ hyperlink.fileName }} </span>
                   <span class="float-right" @click="deleteItem(hyperlink.fileName)"> {{ $t('businessowner.delete') }} </span>
                 </div>
-
-                <div v-for="(movie, index) in edit_image" :key="movie.id" class="">
-                  <div id="preview">
-                    <span class="upload-cancel" @click="deleteImage(index, movie)">
-                      <b-icon icon="x-circle" class="oorange"> </b-icon>
-                    </span>
-
-                    <img :src="movie.media_url" />
-                  </div>
-                </div>
-                <br />
 
                 <div v-for="movie in createPost.movies" :key="movie.fileName" class="">
                   <div id="preview">
@@ -181,6 +252,7 @@
                     ><b-icon icon="cursor-fill" variant="primary"></b-icon> {{ $t('businessowner.Publish') }}</b-button
                   >
                 </span>
+              </div>
               </b-col>
               <b-col cols="1" md="1" class="m-0 p-0"></b-col>
             </b-row>
@@ -206,7 +278,6 @@
             <b-row>
               <b-col cols="1" md="1" cl ass="m-0 p-0"></b-col>
               <b-col cols="10" md="10" class="m-0 p-0">
-                <br />
                 <div class="cursor">
                   <b-form-textarea
                     id="textarea-small"
@@ -313,15 +384,15 @@
 </template>
 
 <script>
-import moment from 'moment';
-import axios from 'axios';
+import moment from "moment";
+import axios from "axios";
 
-import { mapGetters } from 'vuex';
+import { mapGetters } from "vuex";
 
-import Post from './ownerPostComponent.vue';
+import Post from "./ownerPostComponent.vue";
 
 export default {
-  name: 'postNetwork',
+  name: "postNetwork",
   components: {
     Post,
   },
@@ -345,7 +416,7 @@ export default {
       fullPage: false,
       createPost: {
         // profile_picture: this.$store.getters.getProfilePicture,
-        postBusinessUpdate: '',
+        postBusinessUpdate: "",
         movies: [],
         hyperlinks: [],
       },
@@ -360,12 +431,14 @@ export default {
 
   methods: {
     async getAuth() {
-      const response = await this.$repository.share.WhoIsConnect({ networkId: this.$route.params.id });
+      const response = await this.$repository.share.WhoIsConnect({
+        networkId: this.$route.params.id,
+      });
 
       if (response.success) this.auth(response.data);
     },
     init: async function () {
-      await this.$repository.share.switch(this.$route.params.id, 'business');
+      await this.$repository.share.switch(this.$route.params.id, "business");
     },
 
     mapmediae(media) {
@@ -373,7 +446,7 @@ export default {
 
       media.forEach((item) => {
         let type = this.checkMediaType(item.media_type);
-        if (type != 'video') {
+        if (type != "video") {
           mediaarr.push(item.media_url);
         }
       });
@@ -386,7 +459,7 @@ export default {
 
       media.forEach((item) => {
         let type = this.checkMediaType(item.media_type);
-        if (type == 'video') {
+        if (type == "video") {
           mediaarr.push(item.media_url);
         }
       });
@@ -395,29 +468,29 @@ export default {
     },
 
     checkMediaType(media) {
-      return media.split('/')[0];
+      return media.split("/")[0];
     },
 
     nFormatter(num) {
       if (num >= 1000000000) {
-        return (num / 1000000000).toFixed(1).replace(/\.0$/, '') + 'G';
+        return (num / 1000000000).toFixed(1).replace(/\.0$/, "") + "G";
       }
       if (num >= 1000000) {
-        return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+        return (num / 1000000).toFixed(1).replace(/\.0$/, "") + "M";
       }
       if (num >= 1000) {
-        return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+        return (num / 1000).toFixed(1).replace(/\.0$/, "") + "K";
       }
       return num;
     },
 
     infiniteHandler($state) {
-      let url = 'business/show/post/' + this.url + '/' + this.page;
+      let url = "business/show/post/" + this.url + "/" + this.page;
       if (this.page == 1) {
         this.owner_post.splice(0);
       }
       this.$store
-        .dispatch('businessOwner/loadMore', url)
+        .dispatch("businessOwner/loadMore", url)
         .then(({ data }) => {
           if (data.data.length) {
             this.page += 1;
@@ -440,20 +513,20 @@ export default {
         container: this.fullPage ? null : this.$refs.creatform,
         canCancel: true,
         onCancel: this.onCancel,
-        color: '#e75c18',
+        color: "#e75c18",
       });
 
       axios
-        .post('business/delete/post/' + post.post_id, {
+        .post("business/delete/post/" + post.post_id, {
           name: this.name,
         })
         .then((response) => {
           console.log(response.data);
 
           this.flashMessage.show({
-            status: 'success',
-            blockClass: 'custom-block-class',
-            message: 'Post Deleted',
+            status: "success",
+            blockClass: "custom-block-class",
+            message: "Post Deleted",
           });
 
           loader.hide();
@@ -465,17 +538,17 @@ export default {
             console.log({ err: err });
 
             this.flashMessage.show({
-              status: 'error',
-              blockClass: 'custom-block-class',
+              status: "error",
+              blockClass: "custom-block-class",
               message: err.response.data.message,
             });
 
             loader.hide();
           } else {
             this.flashMessage.show({
-              status: 'error',
-              blockClass: 'custom-block-class',
-              message: 'Unable to Delete your Post',
+              status: "error",
+              blockClass: "custom-block-class",
+              message: "Unable to Delete your Post",
             });
             console.log({ err: err });
 
@@ -491,7 +564,7 @@ export default {
 
       console.log(this.edit_image);
 
-      this.$refs['modal-edit'].show();
+      this.$refs["modal-edit"].show();
     },
 
     updatePost() {
@@ -499,7 +572,7 @@ export default {
         container: this.fullPage ? null : this.$refs.loader,
         canCancel: true,
         onCancel: this.onCancel,
-        color: '#e75c18',
+        color: "#e75c18",
       });
 
       //  const fileImage = this.createPost.movies[0].target.files[0];
@@ -509,40 +582,40 @@ export default {
       let formData2 = new FormData();
 
       this.delete.forEach((value, index) => {
-        formData2.append('deleteImg[' + index + ']', value.id);
+        formData2.append("deleteImg[" + index + "]", value.id);
 
         console.log(value);
       });
 
       this.fileImageArr.forEach((value, index) => {
-        formData2.append('media[' + index + ']', value.target.files[0]);
+        formData2.append("media[" + index + "]", value.target.files[0]);
 
         console.log(value);
       });
 
-      formData2.append('type', 'image');
+      formData2.append("type", "image");
 
       //    formData2.append("media", this.createPost.hyperlinks);
 
-      formData2.append('content', this.edit_description);
+      formData2.append("content", this.edit_description);
 
       this.axios
-        .post('business/update/post/' + this.edit_id, formData2, {
+        .post("business/update/post/" + this.edit_id, formData2, {
           headers: {
-            'Content-Type': 'multipart/form-data',
+            "Content-Type": "multipart/form-data",
           },
         })
         .then((response) => {
           console.log(response);
 
           this.flashMessage.show({
-            status: 'success',
-            blockClass: 'custom-block-class',
-            message: 'Content successfuly uploaded',
+            status: "success",
+            blockClass: "custom-block-class",
+            message: "Content successfuly uploaded",
           });
           loader.hide();
 
-          this.$refs['modal-edit'].hide();
+          this.$refs["modal-edit"].hide();
         })
         .catch((err) => {
           if (err.response.status == 422) {
@@ -550,34 +623,34 @@ export default {
             console.log(err.response.data.message);
 
             this.flashMessage.show({
-              status: 'error',
+              status: "error",
 
               message: err.response.data.message,
-              blockClass: 'custom-block-class',
+              blockClass: "custom-block-class",
             });
 
             loader.hide();
-            this.$refs['modal-edit'].hide();
+            this.$refs["modal-edit"].hide();
           } else {
             this.flashMessage.show({
-              status: 'error',
+              status: "error",
 
-              message: 'Unable to Update your post',
-              blockClass: 'custom-block-class',
+              message: "Unable to Update your post",
+              blockClass: "custom-block-class",
             });
             console.log({ err: err });
             loader.hide();
-            this.$refs['modal-edit'].hide();
+            this.$refs["modal-edit"].hide();
           }
         });
     },
 
     chooseImage: function () {},
     chooseVideo: function () {
-      document.getElementById('chosefile').click();
+      document.getElementById("chosefile").click();
     },
     chooseDocument() {
-      document.getElementById('chosefile').click();
+      document.getElementById("chosefile").click();
     },
     selectMovies(event) {
       const file = event.target;
@@ -612,10 +685,10 @@ export default {
       }
     },
 
-    selectMoviesOutsidePost(event) {     
+    selectMoviesOutsidePost(event) {
       const file = event.target;
 
-      if (file.files) {    
+      if (file.files) {
         let reader = new FileReader();
         reader.onload = (e) => {
           this.createPost.movies.push({
@@ -629,7 +702,7 @@ export default {
         reader.readAsDataURL(file.files[0]);
       }
 
-      this.$refs['modal-xl'].show();
+      this.$refs["modal-xl"].show();
     },
 
     selectDocument(event) {
@@ -647,15 +720,19 @@ export default {
         document: this.service(event.target),
         fileName: event.target.files[0].name,
       });
-      this.$refs['modal-xl'].show();
+      this.$refs["modal-xl"].show();
     },
     createPost_() {
-      this.$refs['modal-xl'].show();
+      this.$refs["modal-xl"].show();
     },
 
     deleteItem(name) {
-      const newHyperlinks = this.createPost.hyperlinks.filter((item) => item.fileName.trim() !== name.trim());
-      const movies = this.createPost.movies.filter((item) => item.fileName.trim() !== name.trim());
+      const newHyperlinks = this.createPost.hyperlinks.filter(
+        (item) => item.fileName.trim() !== name.trim()
+      );
+      const movies = this.createPost.movies.filter(
+        (item) => item.fileName.trim() !== name.trim()
+      );
       this.createPost.hyperlinks = [...newHyperlinks];
       this.createPost.movies = [...movies];
     },
@@ -671,14 +748,14 @@ export default {
     },
 
     onCancel() {
-      console.log('User cancelled the loader.');
+      console.log("User cancelled the loader.");
     },
 
     ownerPost() {
       this.$store
-        .dispatch('businessOwner/ownerPost', this.url)
+        .dispatch("businessOwner/ownerPost", this.url)
         .then(() => {
-          console.log('hey yeah');
+          console.log("hey yeah");
         })
         .catch((err) => {
           console.log({ err: err });
@@ -687,12 +764,12 @@ export default {
 
     submitPost() {
       this.isUploading = true;
-      
+
       let loader = this.$loading.show({
         container: this.fullPage ? null : this.$refs.loader,
         canCancel: true,
         onCancel: this.onCancel,
-        color: '#e75c18',
+        color: "#e75c18",
       });
 
       let fileImage = null;
@@ -705,41 +782,43 @@ export default {
         this.fileImageArr = this.createPost.movies;
 
         this.fileImageArr.forEach((value, index) => {
-          formData2.append('media[' + index + ']', value.target.files[0]);
+          formData2.append("media[" + index + "]", value.target.files[0]);
         });
       }
 
-      formData2.append('type', 'image');
+      formData2.append("type", "image");
 
-      formData2.append('content', this.createPost.postBusinessUpdate);
+      formData2.append("content", this.createPost.postBusinessUpdate);
 
       console.log(formData2);
 
       this.axios
-        .post('business/create/post/' + this.url, formData2, {
+        .post("business/create/post/" + this.url, formData2, {
           headers: {
-            'Content-Type': 'multipart/form-data',
+            "Content-Type": "multipart/form-data",
           },
 
           onUploadProgress: function (progressEvent) {
-            this.uploadPercentage = parseInt(Math.round((progressEvent.loaded / progressEvent.total) * 100));
+            this.uploadPercentage = parseInt(
+              Math.round((progressEvent.loaded / progressEvent.total) * 100)
+            );
           }.bind(this),
         })
         .then((response) => {
           console.log(response);
 
           this.flashMessage.show({
-            status: 'success',
-            blockClass: 'custom-block-class',
-            message: 'Content successfuly uploaded',
+            status: "success",
+            blockClass: "custom-block-class",
+            message: "Content successfuly uploaded",
           });
           this.isUploading = false;
           loader.hide();
-          this.$refs['modal-xl'].hide();
+          this.$refs["modal-xl"].hide();
           this.reloads();
           this.page = 1;
           this.infiniteId += 1;
-          console.log('post create complete');
+          console.log("post create complete");
         })
         .catch((err) => {
           if (err.response.status == 422) {
@@ -747,19 +826,19 @@ export default {
             console.log(err.response.data.message);
 
             this.flashMessage.show({
-              status: 'error',
+              status: "error",
 
               message: err.response.data.message,
-              blockClass: 'custom-block-class',
+              blockClass: "custom-block-class",
             });
 
             loader.hide();
           } else {
             this.flashMessage.show({
-              status: 'error',
+              status: "error",
 
-              message: 'Unable to Create Your Business',
-              blockClass: 'custom-block-class',
+              message: "Unable to Create Your Business",
+              blockClass: "custom-block-class",
             });
             console.log({ err: err });
             loader.hide();
@@ -768,30 +847,30 @@ export default {
     },
 
     reloads() {
-      console.log('reoading');
-      this.$store.commit('profile/ownerPost', []);
+      console.log("reoading");
+      this.$store.commit("profile/ownerPost", []);
     },
 
     showModal() {
-      this.$refs['modal-3'].show();
+      this.$refs["modal-3"].show();
     },
     hideModal() {
-      this.$refs['modal-3'].hide();
+      this.$refs["modal-3"].hide();
     },
     resetPostData() {
-      console.log('Test');
-      console.log('Reinitialisation des donnees du POST');
+      console.log("Test");
+      console.log("Reinitialisation des donnees du POST");
       if (!this.isSubmitted) {
         this.createPost.hyperlinks = [];
         this.createPost.movies = [];
-        this.createPost.postBusinessUpdate = '';
+        this.createPost.postBusinessUpdate = "";
       }
     },
   },
 
   computed: {
     ...mapGetters({
-      profile: 'auth/profilConnected',
+      profile: "auth/profilConnected",
     }),
 
     business_intro() {
@@ -799,7 +878,7 @@ export default {
     },
 
     imageProfile() {
-      return 'yoo';
+      return "yoo";
     },
 
     business_logo() {
@@ -813,7 +892,7 @@ export default {
     },
 
     profileNamePost() {
-      return 'yoo';
+      return "yoo";
     },
   },
   mounted() {

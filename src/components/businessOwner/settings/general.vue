@@ -1,6 +1,7 @@
 <template>
-  <b-container v-if="business_form">
-    <FlashMessage />
+<div>{{business}}</div>
+  <!-- <b-container v-if="business_form">
+
     <div class="b-bottomn">
       <b-button variant="primary" class="a-button-l" @click="updateGeneralInfo()">
         <b-spinner v-if="SPupdateGeneralInfo" small type="grow"></b-spinner> {{ $t('businessowner.Save_Changes') }}
@@ -150,7 +151,7 @@
     <div class="text-center">
       <b-spinner variant="primary" style="width: 3rem; height: 3rem;" label="Large Spinner Text Centered"></b-spinner>
     </div>
-  </b-container>
+  </b-container> -->
 </template>
 
 <script>

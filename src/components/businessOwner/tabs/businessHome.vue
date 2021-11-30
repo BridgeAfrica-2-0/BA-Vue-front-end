@@ -9,7 +9,7 @@
         <br />
 
         <b-card>
-          <div class="text-center ">
+          <div class="text-center">
             <span class="username text-center mb-3">
               <b> {{ $t('businessowner.Upgrade_Your_Business_Account') }} </b>
             </span>
@@ -25,11 +25,7 @@
           </div>
           <img src="@/assets/img/buynow.png" class="buynow" alt="buy now" />
           <div class="container text-center">
-            <img
-              src="@/assets/img/fruits.jpg"
-              class="img-fluid  banner"
-              alt="Kitten"
-            />
+            <img src="@/assets/img/fruits.jpg" class="img-fluid banner" alt="Kitten" />
 
             <b-button variant="primary" class="text-center mt-3">
               {{ $t('businessowner.Upgrade_Now') }}
@@ -46,12 +42,12 @@
 </template>
 
 <script>
-import Intro from "../intro";
-import comunitiDashboard from "./comunitiDashboard";
+import Intro from '../intro';
+import comunitiDashboard from './comunitiDashboard';
 //import Personalise from "./personalise";
-import Post from "../ownerPost";
+import Post from '../ownerPost';
 export default {
-  name: "posts",
+  name: 'posts',
   components: {
     Intro,
 

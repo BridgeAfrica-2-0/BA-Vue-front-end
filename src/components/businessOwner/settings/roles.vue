@@ -34,8 +34,14 @@
             class="mb-0"
           >
             <b-form-select v-model="selected" class="mb-3">
-              <b-form-select-option :value="null">{{ $t('businessowner.Admin') }}</b-form-select-option>
-              <b-form-select-option value="a">{{ $t('businessowner.User') }}</b-form-select-option>
+              <b-form-select-option
+                v-for="role in roles"
+                :value="role.id"
+                :key="role.id"
+                >{{ role.name | format }}</b-form-select-option
+              >
+              <!-- <b-form-select-option :value="null">Admin</b-form-select-option>
+              <b-form-select-option value="a">User</b-form-select-option> -->
             </b-form-select>
           </b-form-group>
         </b-col>
@@ -68,13 +74,13 @@
         <div v-if="editors != 0">
           <b-list-group v-for="editor in editors" :key="editor.id">
             <b-list class="d-flex align-items-center m-list">
-              <b-avatar 
-                class="mr-3" 
+              <b-avatar
+                class="mr-3"
                 :text="editor.name.charAt(0)"
                 :src="editor.profile_picture"
                 size="4em"
               ></b-avatar>
-              <span class="mr-auto">{{editor.name}}</span>
+              <span class="mr-auto">{{ editor.name }}</span>
               <span>
                 <div>
                   <b-dropdown
@@ -117,17 +123,7 @@
                   label-class="font-weight-bold pt-0"
                   class="mb-0"
                 >
-                  <b-form-select
-                    id="role"
-                    v-model="form.role"
-                    :options="roles"
-                    name="role"
-                    value-field="id"
-                    text-field="name"
-                    class="mb-3"
-                  >
-                  </b-form-select>
-                </b-form-group>
+              </b-form-group>
             </div>
             <b-button class="mt-3" block variant="primary" @click="$bvModal.hide('edit-editor'); editEditor(clickedObject)">{{ $t('businessowner.EDIT') }}</b-button>
           </b-modal>
@@ -151,158 +147,163 @@
 export default {
   name: "roles",
   data() {
-			return {
-        url: null,
-        SPassign: false,
-        clickedObject: {},
-        form: {
-          name: "",
-          role: "",
-        },
-        
-			}
-	},
+    return {
+      url: null,
+      SPassign: false,
+      clickedObject: {},
+      form: {
+        name: "",
+        role: "",
+      },
+      hasFollower: false,
+    };
+  },
+
+  watch: {
+    "$store.state.businessRole.followers": function () {
+      this.hasFollower = this.$store.state.businessRole.user_followers.length;
+    },
+  },
+
+  filters:{
+    format: value => value.replace('_', ' ').toUpperCase()
+  },
 
   computed: {
     followers() {
       return this.$store.state.businessRole.followers;
     },
     roles() {
-       return this.$store.state.businessRole.roles;
+      return this.$store.state.businessRole.roles;
     },
     editors() {
       return this.$store.state.businessRole.editors;
     },
   },
- 
-  mounted(){
-    this.url = this.$route.params.id
-    this.getFollowers() 
-    this.getRoles() 
-    this.displayEditor() 
+
+  mounted() {
+    this.url = this.$route.params.id;
+    this.getFollowers();
+    this.getRoles();
+    this.displayEditor();
   },
 
-  methods:{
-     
+  methods: {
     getFollowers() {
-    this.$store
-      .dispatch("businessRole/getfollowers", this.url)
-      .then(() => {
-        console.log('ohh yeah');
-      })
-      .catch(err => {
-        console.log({ err: err });
-      });
+      this.$store
+        .dispatch("businessRole/getfollowers", this.url)
+        .then(() => {
+          console.log("ohh yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
     },
     getRoles() {
-    this.$store
-      .dispatch("businessRole/getroles")
-      .then(() => {
-        console.log('ohh yeah');
-      })
-      .catch( err => {
-        console.log({ err: err });
-      });
+      this.$store
+        .dispatch("businessRole/getroles")
+        .then(() => {
+          console.log("ohh yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
     },
     displayEditor() {
-    this.$store
-      .dispatch("businessRole/geteditors", this.url)
-      .then(() => {
-        console.log('ohh yeah');
-      })
-      .catch( err => {
-        console.log({ err: err });
-      });
+      this.$store
+        .dispatch("businessRole/geteditors", this.url)
+        .then(() => {
+          console.log("ohh yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
     },
-    editEditor: function(clickedObject){
+    editEditor: function (clickedObject) {
       let formData = new FormData();
-      formData.append('role', this.form.role);
+      formData.append("role", this.form.role);
       this.$store
         .dispatch("businessRole/updateEditor", {
-          path: "business/role/update/"+clickedObject.id,
+          path: "business/role/update/" + clickedObject.id,
           formData: formData,
         })
         .then(({ data }) => {
-        console.log(data);
-        console.log('ohh yeah');
-        this.displayEditor();
-        this.flashMessage.show({
-          status: "success",
-          message: "New Role Updated"
+          console.log(data);
+          console.log("ohh yeah");
+          this.displayEditor();
+          this.flashMessage.show({
+            status: "success",
+            message: "New Role Updated",
+          });
+        })
+        .catch((err) => {
+          console.log({ err: err });
+          this.flashMessage.show({
+            status: "error",
+            message: "Unable to Update New Role",
+          });
         });
-      })
-      .catch(err => {
-        console.log({ err: err });
-        this.flashMessage.show({
-          status: "error",
-          message: "Unable to Update New Role"
-        });
-      });
-		},
-    assignRole: function(){
+    },
+    assignRole: function () {
       this.SPassign = true;
       let formData = new FormData();
-      formData.append('user_id', this.form.name);
-      formData.append('role_id', this.form.role);
-      console.log('name: ', this.form.name);
-      console.log('role: ', this.form.role);
+      formData.append("user_id", this.form.name);
+      formData.append("role_id", this.form.role);
+      console.log("name: ", this.form.name);
+      console.log("role: ", this.form.role);
       console.log(formData);
       this.$store
         .dispatch("businessRole/updateEditor", {
-          path: "business/role/assignRole/"+this.url,
+          path: "business/role/assignRole/" + this.url,
           formData: formData,
         })
         .then(({ data }) => {
-        console.log(data);
-        console.log('ohh yeah');
-        this.getFollowers();
-        this.displayEditor();
-        this.SPassign = false;
-        this.flashMessage.show({
-          status: "success",
-          message: "New Role Assigned"
+          console.log(data);
+          console.log("ohh yeah");
+          this.getFollowers();
+          this.displayEditor();
+          this.SPassign = false;
+          this.flashMessage.show({
+            status: "success",
+            message: "New Role Assigned",
+          });
+        })
+        .catch((err) => {
+          console.log({ err: err });
+          this.SPassign = false;
+          this.flashMessage.show({
+            status: "error",
+            message: "Unable to Assigned New Role",
+          });
         });
-          
-      })
-      .catch(err => {
-        console.log({ err: err });
-        this.SPassign = false;
-        this.flashMessage.show({
-          status: "error",
-          message: "Unable to Assigned New Role"
-        });
-      });
-		},
-    deleteEditor: function(clickedObject){
+    },
+    deleteEditor: function (clickedObject) {
       this.$store
         .dispatch("businessRole/deleteEditor", {
-          path: "business/role/delete/"+clickedObject.id,
+          path: "business/role/delete/" + clickedObject.id,
         })
         .then(({ data }) => {
-        console.log(data);
-        console.log('ohh yeah');
-        this.displayEditor();
-        this.flashMessage.show({
-          status: "success",
-          message: "Editor Deleted"
+          console.log(data);
+          console.log("ohh yeah");
+          this.displayEditor();
+          this.flashMessage.show({
+            status: "success",
+            message: "Editor Deleted",
+          });
+        })
+        .catch((err) => {
+          console.log({ err: err });
+          this.flashMessage.show({
+            status: "error",
+            message: "Unable To Delete Editor",
+          });
         });
-          
-      })
-      .catch(err => {
-        console.log({ err: err });
-        this.flashMessage.show({
-          status: "error",
-          message: "Unable To Delete Editor"
-        });
-      });
-		},
+    },
 
-    selectObject(object){
-			this.clickedObject = object
-		},
-
+    selectObject(object) {
+      this.clickedObject = object;
+    },
   },
-
 };
 </script>
 
@@ -350,9 +351,8 @@ export default {
     left: -20px;
   }
 
-
-  .assign-btn{
-    margin-top:30px
+  .assign-btn {
+    margin-top: 30px;
   }
 }
 </style>

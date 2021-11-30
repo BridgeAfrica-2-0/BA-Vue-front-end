@@ -1,10 +1,10 @@
 <template>
 	<div>
 		<b-card title="" header-tag="header" footer-tag="footer">
-			<div style="float:right" class="edit cursor-pointer" @click="editContact">
+			<!-- <div style="float:right" class="edit cursor-pointer" @click="editContact">
 				<b-icon icon="pencil-fill" variant="primary"></b-icon>
-			</div>
-			<h6 class="mb-2"><b>{{$t("businessowner.Intro")}}
+			</div> -->
+			<h6 class="mb-2"><b>{{$t("businessf.Intro")}}
 				</b></h6>
 
 			<b-card-text>

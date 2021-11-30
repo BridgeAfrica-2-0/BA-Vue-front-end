@@ -1,59 +1,35 @@
 <template>
   <b-row class="mt-4">
     <b-col cols="12" class="mt-4">
+      <div class="d-inline-flex">
+        <span md="1" class="m-0 p-0">
+          <b-avatar class="d-inline-block avat" variant="primary" :src="post.logo_path"></b-avatar>
+        </span>
+        <div class="pl-2 pl-md-3 pt-md-2">
+          <h5 class="m-0 usernamee">
+            {{ post.user_name }}
+          </h5>
+          <p class="durationn">{{ moment(post.created_at).fromNow() }}</p>
+        </div>
 
+        <div class="toright pt-2" v-if="isOwner || createDeleteRequestIsActive">
+          <b-dropdown variant="link" size="sm" no-caret>
+            <template #button-content>
+              <b-icon icon="three-dots" variant="primary" aria-hidden="true"></b-icon>
+            </template>
 
-          
-          <div class="d-inline-flex">
-            <span md="1" class="m-0 p-0">
-              <b-avatar
-                class="d-inline-block avat"
-                variant="primary"
-                :src="post.logo_path"
-              ></b-avatar>
-            </span>
-            <div class="pl-2 pl-md-3 pt-md-2">
-              <h5 class="m-0 usernamee">
-                {{ post.user_name }}
-              </h5>
-              <p class="durationn">{{ moment( post.created_at).fromNow() }}</p>
-            </div>
+            <b-dropdown-item-button variant="info" @click="editPost()">
+              <b-icon icon="pencil" aria-hidden="true"></b-icon>
+              {{ $t('network.Edit') }}
+            </b-dropdown-item-button>
 
-            <div class="toright pt-2"  v-if="isOwner || createDeleteRequestIsActive">
-              <b-dropdown variant="link" size="sm" no-caret>
-                <template #button-content>
-                  <b-icon
-                    icon="three-dots"
-                    variant="primary"
-                    aria-hidden="true"
-                  ></b-icon>
-                </template>
-
-                <b-dropdown-item-button variant="info"  @click="editPost()" >
-                  <b-icon icon="pencil" aria-hidden="true"></b-icon>
-                  {{ $t('network.Edit') }} 
-                </b-dropdown-item-button>
-
-                <b-dropdown-item-button
-                  variant="danger"
-                  @click="removePost"    
-                >
-                  <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
-                  {{ $t('network.Delete') }} 
-                </b-dropdown-item-button>
-              </b-dropdown>
-            </div>
-          </div>
-
-
-
-
-
-
-
-
-
-
+            <b-dropdown-item-button variant="danger" @click="removePost">
+              <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
+              {{ $t('network.Delete') }}
+            </b-dropdown-item-button>
+          </b-dropdown>
+        </div>
+      </div>
 
       <b-row>
         <b-col cols="12" class="mt-2">
@@ -69,17 +45,6 @@
         </b-col>
       </b-row>
 
-
-
-
-
-
-
-
-
-
-
-
       <b-row>
         <b-col v-if="post.media.length" cols="12" class="mt-2">
           <div class="">
@@ -93,26 +58,18 @@
             ></light>
           </div>
 
+          <div v-if="post.media.length > 0" class="">
+            <span v-for="video in mapvideo(item.media)" :key="video">
+              <youtube
+                class="w-100 videoh"
+                :video-id="getId(video)"
+                :player-vars="playerVars"
+                @playing="playing"
+              ></youtube>
+            </span>
 
-
-
-
-           <div v-if="post.media.length > 0" class="">
-
-         <span v-for="video in mapvideo(item.media)" :key='video' > 
-
-
-            <youtube  class="w-100 videoh" :video-id="getId(video)" :player-vars="playerVars" @playing="playing"></youtube>
-
-           </span>
- 
-            <light
-              css=" "
-              :cells="item.media.length"
-              :items="mapmediae(item.media)"
-            ></light>
+            <light css=" " :cells="item.media.length" :items="mapmediae(item.media)"></light>
           </div>
-
         </b-col>
         <!--   v-if="post.content.movies.length <= 0"  -->
         <b-col cols="12" class="mt-2">
@@ -124,31 +81,24 @@
             {{ post.likes_count | nFormatter }}
           </span>
           <span class="cursor" @click="() => (showComment = !showComment)"
-            ><b-icon
-              icon="chat-fill"
-              variant="primary"
-              aria-hidden="true"
-            ></b-icon>
+            ><b-icon icon="chat-fill" variant="primary" aria-hidden="true"></b-icon>
             {{ post.comment_count | nFormatter }}
           </span>
           <span class="cursor">
-            <ShareButton
-              type="network"
-              :post="{ post_id: post.post_id, user_id: post.user_id }"
-            />
+            <ShareButton type="network" :post="{ post_id: post.post_id, user_id: post.user_id }" />
           </span>
         </b-col>
       </b-row>
 
       <!--  :src="$store.getters.getProfilePicture"  -->
-     
+
       <div class="mt-2 d-inline-flex w-100">
-          <div class="m-md-0 p-md-0">
+        <div class="m-md-0 p-md-0">
           <b-avatar variant="primary" class="img-fluid avat-comment"></b-avatar>
         </div>
-       <div class="p-0 m-0 pr-3 inline-comment">
+        <div class="p-0 m-0 pr-3 inline-comment">
           <input
-            :placeholder=" $t('network.Post_a_Comment')"
+            :placeholder="$t('network.Post_a_Comment')"
             class="comment"
             type="text"
             v-model="comment"
@@ -166,59 +116,43 @@
           />
         </div>
       </div>
-
-
-
-      
-
-
-
-
-
-
     </b-col>
     <b-col cols="12" class="mt-4" v-if="showComment">
-      <Comment
-        v-for="comment in comments"
-        :key="comment.id"
-        :item="comment"
-        :uuid="post.id"
-        type="comment"
-      />
+      <Comment v-for="comment in comments" :key="comment.id" :item="comment" :uuid="post.id" type="comment" />
     </b-col>
   </b-row>
 </template>
 
 <script>
-import { mapMutations } from "vuex";
-import Comment from "./comment";
-import { ShareButton } from "@/components/shareButton";
-import { formatNumber, fromNow } from "@/helpers";
-import moment from "moment";
-import light from "@/components/lightbox";
+import { mapMutations } from 'vuex';
+import Comment from './comment';
+import { ShareButton } from '@/components/shareButton';
+import { formatNumber, fromNow } from '@/helpers';
+import moment from 'moment';
+import light from '@/components/lightbox';
 
 export default {
-  name: "postNetworkComponent",
+  name: 'postNetworkComponent',
   props: {
     item: {
       type: Object,
       required: true,
     },
-    isOwner:{
-      type:Boolean,
-      required:true
+    isOwner: {
+      type: Boolean,
+      required: true,
     },
-    editPost:{
-      required:true
+    editPost: {
+      required: true,
     },
-    deletePost:{
-      required:true
-    }
+    deletePost: {
+      required: true,
+    },
   },
   components: {
     Comment,
     ShareButton,
-    light
+    light,
   },
 
   created() {
@@ -227,7 +161,7 @@ export default {
 
   data() {
     return {
-       moment: moment,
+      moment: moment,
       post: null,
       comments: [],
       showComment: false,
@@ -235,13 +169,13 @@ export default {
       processLike: false,
       createPostRequestIsActive: false,
       createDeleteRequestIsActive: false,
-      comment: "",
+      comment: '',
     };
   },
 
   computed: {
     icon() {
-      return this.post.is_liked ? "suit-heart-fill" : "suit-heart";
+      return this.post.is_liked ? 'suit-heart-fill' : 'suit-heart';
     },
   },
 
@@ -261,69 +195,46 @@ export default {
 
   methods: {
     ...mapMutations({
-      addNewComment: "networkProfile/updatePost",
+      addNewComment: 'networkProfile/updatePost',
     }),
 
+    mapmediae(media) {
+      let mediaarr = [];
 
-
-
-
-     mapmediae(media){
-
-       let mediaarr=[];
-
-       media.forEach((item) => {
-
+      media.forEach((item) => {
         let type = this.checkMediaType(item.media_type);
-       if(type != "video") {  
-        mediaarr.push(item.media_url);
-         }
-
-       });
+        if (type != 'video') {
+          mediaarr.push(item.media_url);
+        }
+      });
 
       return mediaarr;
-
     },
 
+    mapvideo(media) {
+      let mediaarr = [];
 
-
-    
-      mapvideo(media){
-
-       let mediaarr=[];
-
-       media.forEach((item) => {
-
+      media.forEach((item) => {
         let type = this.checkMediaType(item.media_type);
-       if(type == "video") {  
-        mediaarr.push(item.media_url);
-         }
-
-       });
+        if (type == 'video') {
+          mediaarr.push(item.media_url);
+        }
+      });
 
       return mediaarr;
-
     },
 
-
-    checkMediaType(media){
-
-     return media.split("/")[0] ;    
-
+    checkMediaType(media) {
+      return media.split('/')[0];
     },
 
-  
-
-
-
-  getId (video_url) {
-      return this.$youtube.getIdFromUrl(video_url)
+    getId(video_url) {
+      return this.$youtube.getIdFromUrl(video_url);
     },
 
-
-    removePost: async function(){
-      this.createDeleteRequestIsActive = true
-      this.createDeleteRequestIsActive = await this.deletePost()
+    removePost: async function () {
+      this.createDeleteRequestIsActive = true;
+      this.createDeleteRequestIsActive = await this.deletePost();
     },
 
     onLike: async function () {
@@ -349,8 +260,7 @@ export default {
     },
 
     onCreateComment: async function () {
-      if (!(this.comment.trim().length > 2 && !this.createPostRequestIsActive))
-        return false;
+      if (!(this.comment.trim().length > 2 && !this.createPostRequestIsActive)) return false;
       this.createPostRequestIsActive = true;
       const request = await this.$repository.share.createComment({
         post: this.post.id,
@@ -362,14 +272,14 @@ export default {
 
       if (request.success) {
         this.onShowComment();
-        this.comment = "";
-        this.addNewComment({ action: "add:comment:count", uuid: this.post.id });
+        this.comment = '';
+        this.addNewComment({ action: 'add:comment:count', uuid: this.post.id });
         this.post = {
           ...this.post,
           comment_count: this.post.comment_count + 1,
         };
         this.flashMessage.success({
-          message: "Post created",
+          message: 'Post created',
         });
       }
 
@@ -662,7 +572,7 @@ export default {
 }
 .row.sub-sidebar-2.pending-post-view {
   background-color: #8bd06c;
-  border-color: #000; 
+  border-color: #000;
   border: solid 3px;
 }
 .color-site {
@@ -675,21 +585,18 @@ export default {
     color: black;
   }
 
-   .videoh{
-    
+  .videoh {
     height: 200px !important;
-   }
+  }
 }
 .inline-comment {
   width: 95%;
 }
 
 @media (min-width: 762px) {
-
-   .videoh{
-    
+  .videoh {
     height: 400px !important;
-   }
+  }
 
   .usernamee {
     font-weight: 600;
@@ -733,7 +640,7 @@ export default {
     background-color: #ddd;
     height: 34 px;
     padding-left: 10 px;
-     margin-left: 2%; 
+    margin-left: 2%;
   }
 
   .post-btn {
@@ -858,10 +765,6 @@ export default {
 }
 </style>
 <style>
-
-
-
-
 @media (max-width: 762px) {
   .usernamee {
     font-weight: 600;
@@ -869,23 +772,16 @@ export default {
     color: black;
   }
 
-   .videoh{
-    
+  .videoh {
     height: 200px !important;
-   }
+  }
 }
-
 
 @media (min-width: 762px) {
-
-   .videoh{
-    
+  .videoh {
     height: 400px !important;
-   }
-
+  }
 }
-
-
 
 .custom-block-class {
   position: absolute;

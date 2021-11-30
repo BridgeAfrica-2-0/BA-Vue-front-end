@@ -73,17 +73,18 @@ export default {
 
      async  FIND_BUSINESS({ commit,state }, payload) {
         console.log("business search start");
+        console.log(payload);
       return await axios.get(`search`,  {
         keyword : payload.keyword,
         location : payload.location,
-        lat:state.geo.lat,
-        lng:state.geo.lng,
+        // lat:state.geo.lat,
+        // lng:state.geo.lng,
 
-        categoryId: payload.category,
-        subCategoryId: payload.subcategory,
-        filterId: payload.filter,
-        distance: payload.distance,
-        neighbourhoodId: payload.neighbourhood,
+        // categoryId: payload.category,
+        // subCategoryId: payload.subcategory,
+        // filterId: payload.filter,
+        // distance: payload.distance,
+        // neighbourhoodId: payload.neighbourhood,
         
       }).then(({ data }) => {
         console.log(data);

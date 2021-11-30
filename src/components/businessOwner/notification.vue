@@ -1,5 +1,5 @@
 <template>
-  <div class="container" style=" ">
+  <div class="container" style="">
     <div class="container">
       <b-row>
         <b-col>
@@ -31,12 +31,7 @@
       <br />
 
       <b-row>
-        <b-col
-          cols="12"
-          class="mr-3"
-          v-for="post in getNotificationsStore"
-          :key="post.id"
-        >
+        <b-col cols="12" class="mr-3" v-for="post in getNotificationsStore" :key="post.id">
           <p class="">
             <span style="display:inline-flex">
               <input
@@ -47,14 +42,10 @@
                 class="m-left-top"
                 unchecked-value="not_accepted"
               />
-              <b-avatar
-                class="d-inline-block profile-pic"
-                variant="primary"
-                :src="post.image"
-              ></b-avatar>
-              <h6 class="m-0  d-inline-block ml-2 username">
+              <b-avatar class="d-inline-block profile-pic" variant="primary" :src="post.image"></b-avatar>
+              <h6 class="m-0 d-inline-block ml-2 username">
                 {{ post.reference_type }}
-                <p class="duration">{{ post.created_at }}</p>
+                <p class="duration">{{ post.created_at | fromNow }}</p>
               </h6>
             </span>
             <span class="float-right mt-1"> </span>
@@ -66,15 +57,9 @@
         </b-col>
 
         <b-col v-if="loader" class="load">
-          <b-spinner
-            style="width: 7rem; height: 7rem;"
-            variant="primary"
-          ></b-spinner>
+          <b-spinner style="width: 7rem; height: 7rem" variant="primary"></b-spinner>
         </b-col>
-        <b-col
-          v-if="!getNotificationsStore && !loader"
-          class="load text-center"
-        >
+        <b-col v-if="!getNotificationsStore && !loader" class="load text-center">
           <b-row class="text-center">
             <p>{{ $t('businessowner.No_notifications_to_show') }} !!</p>
           </b-row>
@@ -86,39 +71,54 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapGetters, mapMutations } from 'vuex';
+import { fromNow } from '@/helpers';
 export default {
-  name: "notification",
+  name: 'notification',
   data: () => ({
     all: 24,
     selected: [],
   }),
+
   beforeMount() {
-    this.getNotifications();
+    this.getNotifications(this.$route.params.id).then((e) => this.realTimeNotification({ init: true, data: e }));
   },
+
+  filters: {
+    fromNow,
+  },
+
   computed: {
     getNotificationsStore() {
-      return this.sendNotifications();
+      return this.getRealTimeNotification.length ? this.getRealTimeNotification : this.sendNotifications();
     },
     loader() {
       return this.getLoader();
     },
+    ...mapGetters({
+      getRealTimeNotification: 'notification/NEW_BUSINESS_NOTIFICATION',
+    }),
   },
   methods: {
-    // getting getters from the store
-    ...mapGetters({
-      sendNotifications: "businessOwner/sendNotifications",
-      getLoader: "businessOwner/getLoader",
-      getSuccess: "businessOwner/getSuccess",
-    }),
-
     // getting actions from the store
     ...mapActions({
-      getNotifications: "businessOwner/getNotifications",
-      readNotifiactions: "businessOwner/readNotifiactions",
-      deleteNotifications: "businessOwner/deleteNotifications",
-      delete: "businessOwner/delete",
+      getNotifications: 'businessOwner/getNotifications',
+      readNotifiactions: 'businessOwner/readNotifiactions',
+      deleteNotifications: 'businessOwner/deleteNotifications',
+      delete: 'businessOwner/delete',
     }),
+
+     ...mapGetters({
+      sendNotifications: 'businessOwner/sendNotifications',
+      getLoader: 'businessOwner/getLoader',
+      getSuccess: 'businessOwner/getSuccess',
+    }),
+
+    ...mapMutations({
+      realTimeNotification: 'notification/NEW_BUSINESS_NOTIFICATION',
+    }),
+
+    // getting getters from the store
 
     readAll(data) {
       this.readNotifiactions(data);
@@ -135,7 +135,7 @@ export default {
     deleteOne(id) {
       this.delete(id);
     },
-
+    
     // select all the notifications
     selectall() {
       this.getNotificationsStore.forEach((element) => {

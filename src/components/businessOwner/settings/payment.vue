@@ -114,7 +114,7 @@
                 variant="primary"
                 class="font-weight-light shadow-sm btn-custom text-14"
                 @click="confirmDefaltPayment"
-              >Confirm</b-button>
+              >{{ $t('businessowner.Confirm') }}</b-button>
             </div>
           </div>
           <div class="row my-3">

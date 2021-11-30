@@ -1892,10 +1892,12 @@ export default {
            
 // method to search for a business lol
 
+ this.$store.commit("business/setLoading", true);
+
         this.$store
         .dispatch('marketSearch/getFilter', subCat.id)
         .then((res) => {
-          this.searchProducts({ cat_id: subCat.cat_id, sub_cat: subCat.id });  
+          this.searchBusiness({ cat_id: subCat.cat_id, sub_cat: subCat.id });  
           console.log('Filters: ');
           console.log(res.data.data);
           if (res.data.data.length === 0) {
@@ -1932,6 +1934,7 @@ export default {
     },
 
     searchProducts(data) {
+      
       this.$store
         .dispatch('marketSearch/searchProducts', data)
         .then((res) => {
@@ -1943,35 +1946,60 @@ export default {
     },
 
      searchBusiness(data) {
+
+       this.$store.commit("business/setLoading", true);
       this.$store
         .dispatch('business/FIND_BUSINESS', data)
         .then((res) => {
           // console.log("categories loaded!");
+          this.$store.commit("business/setLoading", false);
         })
         .catch((err) => {
           console.log('Error erro!');
+          this.$store.commit("business/setLoading", false);
         });
     },
 
     searchByFilter(filter) {
       // this.showform = false;
       console.log('[DEBUG] Filter: ', filter);
+
+      if(this.filterType==4){   
       this.searchProducts({
         cat_id: filter.cat_id,
         sub_cat: filter.sub_cat_id,
         filter_id: filter.id
       });
+
+      } else if( this.filterType==1){  
+
+           this.searchBusiness({
+        cat_id: filter.cat_id,
+        sub_cat: filter.sub_cat_id,
+        filter_id: filter.id
+      });
+
+
+      }
     },
 
     searchByDistance(value) {
-      console.log('[DEBUG] PRICE: ', value);
-      console.log('[DEBUG] subcat: ', this.subCategories[0].cat_id);
+   
       let catId = this.subCategories[0].cat_id;
       let data = {
         cat_id: catId,
         price_range: `${[1000, value]}`,
       };
+
+       if(this.filterType==4){   
       this.searchProducts(data);
+
+       } else if( this.filterType==1){  
+
+           this.searchBusiness(data);
+
+
+      }
     },
 
     // Network search filter

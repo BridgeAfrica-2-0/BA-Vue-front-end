@@ -28,7 +28,7 @@ export const en = {
     search: search,
     network: network,
     passrecover: passrecover,
-    welcome: welcome,
+    // welcome: welcome,
     dashboard: dashboard,
     memnetwork: memnetwork,
    profilefollower: profilefollower,

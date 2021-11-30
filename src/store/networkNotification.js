@@ -44,6 +44,18 @@ export default {
         return data;
       })
     },
+
+    Delete( {commit}, dataInfo ){
+      console.log("Store File Delete");
+      console.log(dataInfo.path);
+      console.log(dataInfo.formData); 
+      return axios
+      .post(`/network/${dataInfo.path}`, dataInfo.formData)
+      .then(({ data }) => {
+        console.log(data);
+        return data;
+      })
+    },
  
   },
 };

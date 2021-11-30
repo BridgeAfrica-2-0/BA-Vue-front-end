@@ -415,7 +415,7 @@
     </section>
     <div class="w-100 text-light" @mouseover="animation">  .</div>
     <section id="why-us" class="why-us">
-      <div class="container-fluid">
+      <div class="container-fluid" id="anim">
         <div class="row">
           <div
             class="
@@ -884,6 +884,7 @@
 import "../assets/js/main.js";
 // import "../assets/js/js.js";
 import Button from '@/components/ButtonNavBarFind.vue';
+//import SiteHeader from '../components/site/siteHeader';
 export default {
   components: {Button},
   data(){
@@ -895,9 +896,6 @@ export default {
   },
 
 
-  mounted(){
-    
-  },
 
   props: {
     credentials: {
@@ -974,9 +972,11 @@ export default {
     } else {
       pos++;
       // elem.style.top = pos + 'px';
+      
+
       elem.style.zIndex = "1";
       elem.style.left = pos + 'px';
-    if(pos == 49){
+    if(pos == 50){
        elem.style.left = 0 + 'px';
     }
   } 
@@ -984,6 +984,13 @@ export default {
 
 
   }
+  },
+  mounted(){
+    document.getElementById("why-us").onscroll = function() {
+
+      this.animation();
+    };
+
   }
 };
 </script>
@@ -1015,9 +1022,9 @@ export default {
   font-size: 16px;
 }
 .taillev1{
-  height: 504px !important;
-  width: 200px;
-  margin-left:100px;
+  height: 680px !important;
+  width: 300px;
+  
 }
 .blec-container {
   position: absolute;
@@ -1116,7 +1123,7 @@ export default {
     height: 48px;
   }
   .b-logo{
-    width: 140px !important;
+    width: 100px !important;
     height: 70px !important;
   }
   .size_nav{
@@ -1315,7 +1322,7 @@ header h2 {
 
 .scroll-container {
   min-height: 450px;
-  padding: 2rem 1rem;
+  
   display: flex;
   align-items: center;
   box-sizing: border-box;

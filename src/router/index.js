@@ -86,6 +86,12 @@ const routes = [
 
   },
   {
+    path: "/cart",
+    name: "cart",
+    component: cart,
+
+  },
+  {
     path: '/about',
     name: 'about',
     component: about,

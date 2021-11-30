@@ -591,6 +591,7 @@ export default {
     this.getNotifications();
     this.getMessages();
   },
+  
   methods: {
     ...mapActions({
       setNetworks: "social/FIND_USER_NETWORK",

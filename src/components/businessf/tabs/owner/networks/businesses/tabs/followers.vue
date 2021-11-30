@@ -59,7 +59,7 @@ export default {
     return {
       url:null,
       searchTitle: "",
-      page: 0,
+      page: 1,
       loading: false,
       businessfollowers: [],
       displayfollowers: []
@@ -111,13 +111,19 @@ export default {
       let formData = new FormData();
       formData.append('keyword', keyword);
       console.log("network/"+this.url+"/business/follower/"+this.page);
+      let lien = "";
+      if(keyword == ""){
+          lien =  'network/'+this.url+'/business/follower/'+this.page;
+      }else{ lien ='network/'+this.url+'/business/follower/'+this.page+','+ formData}
+
       this.axios
-      .post("network/"+this.url+"/business/follower/"+this.page, formData)
+      .post(lien)
       .then(({ data }) => {
        console.log(data);
        console.log(this.page);
         if(keyword){
           this.displayfollowers = data.data;
+       
           this.searchTitle = "";
           $state.complete();
         }else{
@@ -127,6 +133,7 @@ export default {
             console.log(...data.data);
             this.businessfollowers.push(...data.data);
             this.displayfollowers = this.businessfollowers;
+               console.log("----",this.displayfollowers );
             $state.loaded();
           } else {
             $state.complete();
@@ -156,7 +163,7 @@ export default {
         this.loading = false;
         this.flashMessage.show({
           status: "error",
-          message: "Unable to blocked User"
+          message: err.response.data.message 
         });
       });
     },

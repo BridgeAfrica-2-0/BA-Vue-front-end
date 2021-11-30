@@ -4,14 +4,17 @@ import { state } from "../search/state";
 export default {
     namespaced: true,
     state: {
+        all: [],
+        users: [],
+        networks: [],
+        businesses: [],
         currentBizId: null,
-        currentBiz: null,
+        currentBiz: [],
         bizs: [],
         chats: [],
         chatList: [],
 
         type: 2,
-
         selectedChat: null,
         selectedChatId: null,
 
@@ -22,6 +25,18 @@ export default {
         // get data
         getCurrentBizId(state) {
             return state.currentBizId;
+        },
+        getAll(state) {
+            return state.all;
+        },
+        getAllUsers(state) {
+            return state.users;
+        },
+        getAllNetworks(state) {
+            return state.networks;
+        },
+        getAllBusinesses(state) {
+            return state.businesses;
         },
         getCurrentBiz(state) {
             return state.currentBiz;
@@ -106,26 +121,116 @@ export default {
     },
 
     actions: {
-        GET_BIZS({ commit, state, getters, rootGetters, rootState }, data) {
+        async GET_ALL({ commit, state }, data) {
+            let keyword = data ? '/' + data : ''
+            var users = []
+            var businesses = []
+            commit("setLoader", true);
 
+            axios.get(`/user/all-user${keyword}`)
+                .then((res) => {
+                    commit("setLoader", false);
+                    users = res.data.data
+                    axios.get(`/business/all${keyword}`)
+                        .then((biz) => {
+                            commit("setLoader", false);
+                            businesses = biz.data.data
+                            console.log("Bizs:", businesses);
+                            // return axios.get(`/networks${keyword}`)
+                            //     .then((res) => {
+                            //         commit("setLoader", false);
+                            //         state.networks = res.data.data
+                            //     })
+                            //     .catch((err) => {
+                            //         commit("setLoader", false);
+                            //         console.log(err);
+                            //     })
+                            state.all = [...users, ...businesses]
+                            state.users = users
+                            state.businesses = businesses
+
+                            console.log(" businesses:", businesses);
+                            console.log(" users:", state.users);
+
+                            console.log(" All:", state.all);
+                        })
+                        .catch((err) => {
+                            commit("setLoader", false);
+                            console.log(err);
+                        })
+
+                })
+
+
+        },
+        GET_USERS({ commit, state }, data) {
             commit("setBizs", []);
+            state.users = []
 
             commit("setLoader", true);
             let keyword = data ? '/' + data : ''
-            axios.get(`/business/all${keyword}`)
+
+            return axios.get(`/user/all-user${keyword}`)
                 .then((res) => {
                     commit("setLoader", false);
-                    let bizs = res.data.data
-                    commit("setBizs", bizs);
-                    // let curBiz = bizs.filter((biz) => {
-                    //     return state.currentBizId == biz.id
-                    // })
+                    let users = res.data.data
+                    state.users = users
+                    commit("setBizs", users);
                 })
                 .catch((err) => {
                     commit("setLoader", false);
                     console.log(err);
                 })
-            commit("setCurrentBiz", rootGetters['auth/profilConnected']);
+        },
+        GET_NETWORKS({ commit, state }, data) {
+            commit("setBizs", []);
+            state.networks = []
+
+            commit("setLoader", true);
+            let keyword = data ? '/' + data : ''
+            let usersFinal = []
+            return axios.get(`/networks${keyword}`)
+                .then((res) => {
+                    commit("setLoader", false);
+                    let networks = res.data.data
+                    state.networks = networks
+                    commit("setBizs", networks);
+                })
+                .catch((err) => {
+                    commit("setLoader", false);
+                    console.log(err);
+                })
+        },
+        async GET_BIZS({ commit, state, getters, rootGetters, rootState }, data) {
+            state.all = []
+            commit("setBizs", []);
+            state.businesses = []
+
+            commit("setLoader", true);
+
+            let keyword = data ? '/' + data : ''
+            await axios.get(`/business/all${keyword}`)
+                .then((res) => {
+                    commit("setLoader", false);
+                    let bizs = res.data.data
+
+                    console.log('businesses:', bizs)
+                    commit("setBizs", bizs);
+                    state.businesses = bizs
+                    let curBiz = bizs.filter((biz) => {
+                        return state.currentBizId == biz.id
+                    })
+                    commit("setCurrentBiz", curBiz);
+                    console.log("current new: ", curBiz);
+
+                })
+                .catch((err) => {
+                    commit("setLoader", false);
+                    console.log(err);
+                })
+                // commit("setCurrentBiz", rootGetters['auth/profilConnected']);
+                // console.log("current biz:", curBiz);
+
 
         },
         // [NO BUG]
@@ -179,11 +284,15 @@ export default {
 
 
         SAVE_BUSINESS_CHAT({ commit }, data) {
-            commit("setUsers", []);
+            // commit("setUsers", []);
             console.log("[DEBUG]", data);
 
             if (data.type == 'business') {
-                axios.post(`/messages/BusinesstoBusiness`, data)
+                axios.post(`/messages/BusinesstoBusiness`, data, {
+                        headers: {
+                            'Content-Type': 'multipart/form-data'
+                        }
+                    })
                     .then((res) => {
                         console.log("Message saved...", res.data.data);
                     })
@@ -191,7 +300,11 @@ export default {
                         console.log(err);
                     })
             } else if (data.type == 'user') {
-                axios.post(`/messages/BusinesstoUser`, data)
+                axios.post(`/messages/BusinesstoUser`, data, {
+                        headers: {
+                            'Content-Type': 'multipart/form-data'
+                        }
+                    })
                     .then((res) => {
                         console.log("Message saved...", res.data.data);
                     })

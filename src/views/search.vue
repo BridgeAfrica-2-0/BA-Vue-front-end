@@ -312,14 +312,14 @@
             <!--filter for all takes just two fields at a time  -->
 
             <div id="all" v-if="selectedId == '0'">
-              <h6>
+              <!-- <h6>
                 {{$t("search.Sponsored_Result")}}
                 <fas-icon class="icons" :icon="['fas', 'exclamation-circle']" size="lg" />
               </h6>
 
               <div>
                 <Sponsor />
-              </div>
+              </div> -->
 
               <h6>
                 <fas-icon class="icons" :icon="['fas', 'hands-helping']" size="lg" />
@@ -411,7 +411,7 @@
               </h6>
 
               <div>
-                <Sponsor />
+                <!-- <Sponsor /> -->
               </div>
               <h6>
                 <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
@@ -435,13 +435,13 @@
             <!-- Filter out just the market -->
 
             <div v-if="selectedId == '4'">
-              <h6>
+              <!-- <h6>
                 <fas-icon class="icons" :icon="['fas', 'store']" size="lg" />
                 {{$t("search.Market")}}
-              </h6>
+              </h6> -->
 
               <div>
-                <Sponsor />
+                <!-- <Sponsor /> -->
               </div>
 
               <h6 class="mb-3">
@@ -466,16 +466,6 @@
         </b-col>
       </b-row>
     </div>
-        <p class="text-center">
-      <span class="display-inline">
-        <b-link @click="$i18n.locale = 'en'"> {{ $t("auth.english") }}</b-link>
-        <span class="vl"></span>
-        <b-link class="ml-2" @click="$i18n.locale = 'fr'">
-          {{ $t("auth.french") }}
-        </b-link>
-      </span>
-      Bridge Africa © 2021
-    </p>
   </div>
 </template>
 

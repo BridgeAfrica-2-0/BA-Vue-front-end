@@ -5,7 +5,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          :label=  "$t('network.Network_Name')"
+          :label="$t('network.Network_Name')"
           label-size=" md"
           label-class="font-weight-bold pt-0"
           class="mb-0"
@@ -24,7 +24,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          :label=" $t('network.Category')"
+          :label="$t('network.Category')"
           label-size="md"
           label-class=" font-weight-bold pt-0"
           class="mb-0"
@@ -48,7 +48,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          :label=" $t('network.Phone_1')"
+          :label="$t('network.Phone_1')"
           label-size="md"
           label-class="font-weight-bold pt-0"
           class="mb-0"
@@ -62,7 +62,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          :label=" $t('network.Phone_2')"
+          :label="$t('network.Phone_2')"
           label-size="md"
           label-class="font-weight-bold pt-0"
           class="mb-0"
@@ -76,7 +76,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          :label=" $t('network.Email')"
+          :label="$t('network.Email')"
           label-size="md"
           label-class="font-weight-bold pt-0"
           class="mb-0"
@@ -97,7 +97,7 @@
         {{countries}} -->
         <b-form-group
           label-cols-lg="3"
-          :label=" $t('network.Country')"
+          :label="$t('network.Country')"
           label-size="md"
           label-class="font-weight-bold pt-0"
           class="mb-0"
@@ -120,7 +120,7 @@
         {{regions}} -->
         <b-form-group
           label-cols-lg="3"
-          :label=" $t('network.City')"
+          :label="$t('network.City')"
           label-size="md"
           label-class="font-weight-bold pt-0"
           class="mb-0"
@@ -210,14 +210,14 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          :label="  $t('network.Description') "
+          :label="$t('network.Description')"
           label-size="md"
           label-class="font-weight-bold pt-0"
           class="mb-0"
         >
           <b-form-textarea
             id="textarea"
-            :placeholder=" $t('network.Enter_something')"
+            :placeholder="$t('network.Enter_something')"
             rows="3"
             max-rows="6"
             v-model="editnetworkinfo.description"
@@ -278,7 +278,7 @@ export default {
   }),
   computed: {
     ...mapGetters({
-      getNetworks: "networkSetting/getNetworks",
+      getNetworks: 'networkSetting/getNetworks',
     }),
     editnetworkinfo() {
     //   return this.$store.state.NetworkSettings.networkinfo;
@@ -359,8 +359,8 @@ export default {
 
   methods: {
     ...mapActions({
-      saveChange: "networkSetting/saveChange",
-      getNetworks: "networkSetting/getNetworks",
+      saveChange: 'networkSetting/saveChange',
+      getNetworks: 'networkSetting/getNetworks',
     }),
     getEditNetworkInfo() {
       console.log("getEditNetworkInfo");

@@ -15,7 +15,7 @@
           <div>
             <b-row>
               <b-col>
-                <b-tabs fill pills content-class="mt-3  f-left m-up">
+                <b-tabs fill lazy pills content-class="mt-3  f-left m-up">
                   <b-tab active>
                     <template slot="title">
                       {{ $t('network.Followers') }} <span class="spa-color"> {{nFormatter(userdetails.total_followers)}} </span>
@@ -38,7 +38,7 @@
             {{ $t('network.Businesses') }} <span class="spa-color"> {{nFormatter(businessdetails.total_Business)}} </span>
           </template>
           <div>
-            <b-tabs fill pills content-class="mt-3  f-left m-up checkcheck">
+            <b-tabs fill pills lazy content-class="mt-3  f-left m-up checkcheck">
               <b-tab active>
                 <template slot="title">
                   {{ $t('network.Followers') }} <span class="spa-color"> {{nFormatter(businessdetails.total_followers)}} </span>
@@ -59,7 +59,7 @@
             {{ $t('network.Networks') }} <span class="spa-color">{{nFormatter(networkdetails.total_Network)}}</span>
           </template>
           <div>
-            <b-tabs fill pills content-class="mt-3  f-left m-up checkcheck">
+            <b-tabs fill pills lazy content-class="mt-3  f-left m-up checkcheck">
               <b-tab active>
                 <template slot="title">
                   {{ $t('network.Followers') }} <span class="spa-color"> {{nFormatter(networkdetails.total_followers)}} </span>
@@ -79,6 +79,8 @@
         </b-tab>
       </b-tabs>
     </div>
+
+
   </div>
 </template>
 <script>
@@ -187,7 +189,25 @@ export default {
   border: 1px solid rgba(0, 0, 0, 0.125);
 }
 
-.spa-color {
+  .s-cardd{
+    overflow-x: hidden;
+  }
+
+
+   .lala .nav-fill{
+   
+    margin-top: -19px;
+     border: 1px solid rgba(0, 0, 0, 0.125);
+  }
+
+
+
+
+
+
+
+
+.spa-color{
   color: white;
   margin-left: 10px;
   font-size: 14px;

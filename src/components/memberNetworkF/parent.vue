@@ -31,15 +31,21 @@
               class="a-center"
             >
               <b-spinner v-if="SPcommunity" small></b-spinner>
-              <b-icon v-if="!SPcommunity" icon="pencil"></b-icon> 
-              <span v-if="networkInfo.is_follow"> Unfollow</span> <span v-else> Follow</span>
+              
+
+                <i
+                            class="fas fa-lg btn-icon"
+                            :class="networkInfo.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"
+                          ></i>
+
+              <span class="ml-1" v-if="networkInfo.is_follow"> Unfollow</span> <span v-else> Follow</span>
             </b-button>
             <b-tooltip target="Follow-Unfollow" variant="secondary">Click To Follow/Unfollow</b-tooltip>
           </b-col>
         </b-row>
       </b-container>
 
-      <br />
+      <br /> 
 
       <b-card-text class="text-left">
         <b-container>
@@ -54,7 +60,7 @@
               <p class="a-center">
                 <b-icon icon="people-fill" variant="primary"></b-icon>
                 <span class="pivate text">
-                  {{ nFormatter(networkInfo.commuity) }}
+                  {{ nFormatter(networkInfo.community) }}
                   community 
                 </span>
               </p>
@@ -63,11 +69,20 @@
         </b-container>
         <h6 class="mt-2 font-weight-bolder title ">About</h6>
         <p class="text-justify text">
-          <span v-if="networkInfo.description.length < 130">{{ networkInfo.description }}</span>
-          <span v-else>{{ networkInfo.description.substring(0, 130) + moreText }}</span>
-          <span v-if="moreText === '...'" class="d-inline-block float-right">
-            <a @click="moreText = networkInfo.description" style="cursor: pointer">{{ $t('network.lire_la_Suite') }}</a>
-          </span>
+
+
+           <read-more
+              more-str="read more"
+              class="readmore"
+              :text="networkInfo.description"
+              link="#"
+              less-str="read less"
+              :max-chars="100"
+            >
+            </read-more>
+
+
+         
         </p>
       </b-card-text>
     </b-card>
@@ -80,7 +95,7 @@
 </template>
 
 <script>
-import SidebarCommunity from "@/components/businessf/tabs/owner/editors/sidebarcommunity";
+import SidebarCommunity from '@/components/businessf/tabs/owner/networks/sidebarcommunity';
 export default {
   name: "parent",
   components: {

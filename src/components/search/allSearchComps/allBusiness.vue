@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-spinner v-if="loader" variant="primary" label="$t('search.Spinning')"></b-spinner>
+    <b-spinner v-if="loader" variant="primary" :label="$t('search.Spinning')"></b-spinner>
 
     <b-alert v-if="businesses.total == 0" show variant="warning"
       ><a href="#" class="alert-link">
@@ -8,114 +8,146 @@
       </a></b-alert
     >
     <div></div>
-    <div
-      class="people-style shadow"
-      v-for="(business, index) in businesses.data"
-      :key="index"
-    >
-      <b-row>
-        <b-col md="3" xl="3" lg="3" cols="5" sm="3">
-          <div class="center-img">
-            <splide :options="options" class="r-image">
-              <splide-slide cl>
-                <img
-                  src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
-                  class="r-image"
-                />
-              </splide-slide>
-            </splide>
-          </div>
-        </b-col>
-        <b-col md="9" cols="7" lg="5" sm="5">
-          <p class="textt">
-            <strong class="title"> {{ business.name }} </strong> <br />
-            <span v-for="(cat,index) in business.category" :key="index">
-              {{ cat.name }},
+
+
+
+
+
+ <div   v-for="item in businesses.data"
+      :key="item.id"  class="people-style shadow h-100">
+          <b-row>
+
+            <b-col md="8" xl="8" lg="12" cols="12" sm="8">
+              <div class="d-inline-flex">   
+              <div class="center-img ">
+                <splide :options="options" class="r-image">
+                  <splide-slide cl>
+                    <img :src="item.logo_path" class="r-image" />
+                  </splide-slide>
+                </splide>
+              </div>   <div class="flx100"> 
+              <p class="textt">
+                <strong class="title">   <router-link    :to="'business/'+item.id">    {{ item.name }}  </router-link> </strong> <br />
+               
+            <span v-for="cat in item.category" :key="cat.name">   {{cat.name}}  </span>
+                <br />
+                {{ count(item.followers) }}
+                {{ $t('dashboard.Community') }} <br />
+
+                <span class="location">
+              <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{item.city}}  <span class="ml-2" v-for="nie in item.neigborhood"  :key="nie.id" >  {{nie.name}} </span>   
             </span>
-            <br />
-            {{ business.followers }}{{$t("search.Followers")}}<br />
+                <br />
+       <read-more
+              more-str="read more"
+              class="readmore"
+              :text="item.about_business"
+              link="#"
+              less-str="read less"
+              :max-chars="100"
+            >
+            </read-more>
+              </p>
+               </div>
+               </div>
+            </b-col>     
 
-            <span class="location">
-              Lat: {{ business.lat }}<br />
-              Long: {{ business.lng }}<br />
-              <b-icon-geo-alt class="ico"></b-icon-geo-alt>
-              {{ business.location_description }}
-            </span>
-            <br />
-            {{ business.about_business }}
-            <br />
-            <b-link>{{$t("search.Read_More")}}</b-link>
-          </p>
-        </b-col>
+            <b-col lg="12" xl="4" md="4" cols="12" sm="4">
+              <div class="s-button">
+                <b-row>
+                  <b-col
+                    md="12"
+                    lg="4"
+                    xl="12"
+                    sm="12"
+                    cols="4"
+                    class="mt-2 text-center"
+                  >
+                 
 
-        <b-col lg="4" md="12" xl="4" cols="12" sm="4">
-          <div class="s-button">
-            <b-row>
-              <b-col
-                md="4"
-                lg="12"
-                xl="12"
-                sm="12"
-                cols="4"
-                class="mt-2 text-center"
-              >
-                <b-button
+
+                    
+
+
+
+                  <b-button
                   block
-                  size="sm"
-                  class="b-background shadow"
+                  size="sm"  
+                  :disabled="disable"
+                    :id="'followbtn'+item.id"
+                  :class="item.is_follow !== 0 && 'u-btn'"
                   variant="primary"
+                  @click="handleFollow(item)"
                 >
-                  <i class="fas fa-user-plus fa-lg btn-icon"></i>
-                  <span class="btn-com">{{$t("search.Community")}}</span>
+                 
+                  <i class="fas fa-lg btn-icon" :class="item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"></i>
+                  <span class="btn-com ml-1"> {{ $t('dashboard.Community') }}</span>
                 </b-button>
-              </b-col>
 
-              <b-col
-                md="4"
-                lg="12"
-                xl="12"
-                sm="12"
-                cols="4"
-                class="mt-2 text-center"
-              >
-                <b-button
-                  block
-                  size="sm"
-                  class="b-background shadow"
-                  variant="primary"
-                >
-                  <i class="fas fa-envelope fa-lg btn-icon"></i>
-                  <span class="btn-text">{{$t("search.Message")}}</span>
-                </b-button>
-              </b-col>
 
-              <b-col
-                md="4"
-                lg="12"
-                xl="12"
-                sm="12"
-                cols="4"
-                class="mt-2 text-center"
-              >
-                <b-button
-                  block
-                  size="sm"
-                  class="b-background shadow"
-                  variant="primary"
-                >
-                  <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
-                  <span class="btn-text">{{$t("search.Direction")}}</span>
-                </b-button>
-              </b-col>
-            </b-row>
-          </div>
-        </b-col>
-      </b-row>
-    </div>
+
+
+
+
+
+
+                  </b-col>
+
+                  <b-col
+                    md="12"
+                    lg="4"
+                    xl="12"
+                    sm="12"
+                    cols="4"
+                    class="mt-2 text-center"
+                  >
+                    
+
+                    <b-button block size="sm" class="b-background shadow" variant="primary" @click="cta(item)">
+                      <i class="fas fa-envelope fa-lg btn-icon"></i>
+                      <span class="btn-text">Message</span>
+                    </b-button>
+                  </b-col>
+
+                  <b-col
+                    md="12"
+                    lg="4"
+                    xl="12"
+                    sm="12"
+                    cols="4"
+                    class="mt-2 text-center"
+                  >
+                    <b-button
+                      block
+                      size="sm"
+                      class="b-background shadow "
+                      variant="primary"
+                    >
+                      <i class="fas fa-map-marked-alt  fa-lg btn-icon "></i>
+                      <span class="btn-text">{{ $t('dashboard.Direction') }}</span>
+                    </b-button>
+                  </b-col>
+                </b-row>
+              </div>
+            </b-col>
+          </b-row>
+        </div>
+
+
+
+
+
+
+
+
   </div>
 </template>
 
 <script>
+
+import moment from "moment";
+import axios from "axios";
+
 export default {
   data() {
     return {
@@ -138,6 +170,55 @@ export default {
       return this.$store.getters["allSearch/getLoader"];
     },
   },
+
+  methods:{
+
+      count(number) {
+      if (number >= 1000000) {
+        return number / 1000000 + "M";
+      }
+      if (number >= 1000) {
+        return number / 1000 + "K";
+      } else return number;
+    },
+
+
+
+
+
+
+     async handleFollow(user) {
+
+      document.getElementById("followbtn"+user.id).disabled = true;
+       
+      const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
+      const nextFollowState = user.is_follow === 0 ? 1 : 0;
+      const data = {
+        id: user.id,
+        type: 'business',
+      };
+
+      await axios
+        .post(uri, data)
+        .then(response => {
+
+          console.log(response);
+          user.is_follow = nextFollowState;
+         document.getElementById("followbtn"+user.id).disabled = false;
+            
+        })
+        .catch(err =>{  
+          
+          console.log(err)  ;
+           document.getElementById("followbtn"+user.id).disabled =  false;
+          
+        });
+         
+    },
+
+
+
+  }
 
 };
 </script>
@@ -229,7 +310,7 @@ export default {
     padding: 1px;
     text-align: left;
 
-    margin-left: -30px;
+    margin-left: 10px;
 
     margin-right: -5px;
 
@@ -282,7 +363,7 @@ export default {
     padding: 1px;
     text-align: left;
 
-    margin-left: 30px;
+    margin-left: 70px;
 
     margin-right: -5px;
 
@@ -348,9 +429,6 @@ export default {
     border: 1px solid rgba(0, 0, 0, 0.125);
     margin-bottom: 10px;
 
-    margin-left: -15px;
-    margin-right: -15px;
-
     margin-right: 8px;
 
     padding: 7px;
@@ -373,8 +451,8 @@ export default {
     background-clip: border-box;
     border: 1px solid rgba(0, 0, 0, 0.125);
     margin-bottom: 10px;
-
-    margin-right: 8px;
+    margin-right: -8px;
+    margin-left: -8px;
 
     padding: 7px;
   }

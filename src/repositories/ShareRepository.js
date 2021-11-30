@@ -2,11 +2,11 @@
 import axios from "axios"
 
 class Repository {
-  async userPost(credentials) {
+  async userPost(credentials,type) {
     try {
-      const response = await axios.post(`share/user`, credentials)
+      const response = await axios.post(`share/user?poster_type=${type}`, credentials)
       return {
-        success: (response.data.message) ? true : false
+        success:true
       }
 
     } catch (error) {
@@ -108,6 +108,7 @@ class Repository {
       }
 
     } catch (error) {
+      console.log(error)
       return {
         success: false,
         data: error.response.message

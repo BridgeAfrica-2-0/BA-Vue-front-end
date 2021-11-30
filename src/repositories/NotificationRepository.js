@@ -2,9 +2,9 @@ import axios from 'axios';
 import store from '@/store'
 
 class Repository {
-  async business() {
+  async business(uuid) {
     try {
-      const response = await axios.get('/business/notificaitons');
+      const response = await axios.get(`/notification/business/${uuid}`);
       return {
         success: true,
         data: response.data.data,

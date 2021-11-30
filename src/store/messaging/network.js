@@ -214,6 +214,52 @@ export default {
         },
         // ----------------------------------------
 
+        SHARE_POST_NETWORK({ commit }, data) {
+            commit("setLoader", true)
+            var payload = data.data
+
+            return axios.post(`/share/post/network`, payload)
+                .then((res) => {
+                    commit("setLoader", false)
+                    console.log("Post shared...", res.data.data);
+                })
+                .catch((err) => {
+                    commit("setLoader", false)
+                    console.log(err);
+                })
+
+        },
+
+        SHARE_POST_USER({ commit }, data) {
+            commit("setLoader", true)
+            var payload = data.data
+
+            return axios.post(`/share/post/network/user`, payload)
+                .then((res) => {
+                    commit("setLoader", false)
+                    console.log("Post shared...", res.data.data);
+                })
+                .catch((err) => {
+                    commit("setLoader", false)
+                    console.log(err);
+                })
+
+        },
+        SHARE_POST_BUSINESS({ commit }, data) {
+            commit("setLoader", true)
+            var payload = data.data
+
+            return axios.post(`/share/post/network/business`, payload)
+                .then((res) => {
+                    commit("setLoader", false)
+                    console.log("Post shared...", res.data.data);
+                })
+                .catch((err) => {
+                    commit("setLoader", false)
+                    console.log(err);
+                })
+
+        }, // --------------------------------
 
         SAVE_BUSINESS_CHAT({ commit }, data) {
             console.log("[DEBUG]", data);
@@ -298,4 +344,6 @@ export default {
         }
 
     }
+};
+}
 };

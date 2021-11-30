@@ -1497,10 +1497,17 @@ export default {
     },
     saveMessage(data) {
       console.log("[DEBUG SAVE]", { data: data, type: this.type });
-      this.$store.dispatch("businessChat/SAVE_BUSINESS_CHAT", {
+      if (this.type == "group") {
+        this.$store.dispatch("businessChat/SAVE_GROUP_CHAT", {
         data: data,
         type: this.type,
       });
+      } else {
+        this.$store.dispatch("businessChat/SAVE_BUSINESS_CHAT", {
+        data: data,
+        type: this.type,
+      });
+      }
     },
     selectedMultyChat() {
       this.$bvModal.hide("group-name");

@@ -1,5 +1,4 @@
 import axios from "axios";
-import { state } from "../search/state";
 
 export default {
     namespaced: true,
@@ -302,6 +301,53 @@ export default {
         },
         // ----------------------------------------
 
+        SHARE_POST_USER({ commit }, data) {
+            commit("setSuccess", false)
+            commit("setLoader", true)
+
+            console.log(data);
+
+            return axios.post(`share/post/business/user`, data)
+                .then((res) => {
+                    console.log("Post shared...", res.data.data);
+                    commit("setSuccess", true)
+                    commit("setLoader", false)
+
+                })
+                .catch((err) => {
+                    commit("setLoader", false)
+                    console.log(err);
+                })
+        },
+        SHARE_POST_BUSINESS({ commit }, data) {
+            commit("setLoader", true)
+
+            return axios.post(`share/post/business`, data)
+                .then((res) => {
+                    commit("setLoader", false)
+                    console.log("Post shared...", res.data.data);
+                })
+                .catch((err) => {
+                    commit("setLoader", false)
+                    console.log(err);
+                })
+        },
+        SHARE_POST_NETWORK({ commit }, data) {
+            commit("setLoader", true)
+            var payload = data.data
+
+            return axios.post(`/share/post/business/network`, payload)
+                .then((res) => {
+                    commit("setLoader", false)
+                    console.log("Post shared...", res.data.data);
+                })
+                .catch((err) => {
+                    commit("setLoader", false)
+                    console.log(err);
+                })
+
+        },
+
 
         SAVE_BUSINESS_CHAT({ commit }, data) {
             // commit("setUsers", []);
@@ -333,8 +379,51 @@ export default {
                     .catch((err) => {
                         console.log(err);
                     })
-            } else {
+            } else if (type == 'network') {
                 axios.post(`/messages/BusinesstoNetwork`, payload)
+                    .then((res) => {
+                        console.log("Message saved...", res.data.data);
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    })
+            }
+        },
+        SAVE_GROUP_CHAT({ commit }, data) {
+            // commit("setUsers", []);
+            console.log("[DEBUG]", data);
+            var payload = data.data
+            var type = data.type
+            let group_id = data.group_id
+            let sender_id = data.sender_id
+
+
+            if (type == 'business') {
+                axios.post(`/group/${group_id}/business/${sender_id}`, payload, {
+                        headers: {
+                            'Content-Type': 'multipart/form-data'
+                        }
+                    })
+                    .then((res) => {
+                        console.log("Message saved...", res.data.data);
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    })
+            } else if (type == 'user') {
+                axios.post(`/group/${group_id}/business/${sender_id}`, payload, {
+                        headers: {
+                            'Content-Type': 'multipart/form-data'
+                        }
+                    })
+                    .then((res) => {
+                        console.log("Message saved...", res.data.data);
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    })
+            } else if (type == 'network') {
+                axios.post(`/group/${group_id}/business/${sender_id}`, payload)
                     .then((res) => {
                         console.log("Message saved...", res.data.data);
                     })

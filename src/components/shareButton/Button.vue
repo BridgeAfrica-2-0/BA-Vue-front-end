@@ -9,18 +9,21 @@
       :title="$t('search.Share_to_people')"
       :placeholder="`${$t('search.Search_for_people')}... press enter`"
       subtitle="All peoples"
-      :type="'network'"
+      :type="'people'"
       :post="post"
       :listElmts="users"
     >
       <template v-slot:owner>
         <div class="d-flex align-items-center py-3 px-2 mb-2 border">
           <b-avatar class="mr-3" :src="profile.profile_picture"></b-avatar>
-          <p>
+          <div>
             <span class="mr-auto">{{ $t("search.Share_Post_As") }}</span
             ><br />
             <span class="mr-auto bold">{{ profile.name }}</span>
-          </p>
+            <p>
+              {{ post.content }}
+            </p>
+          </div>
         </div>
       </template>
     </Box>
@@ -33,8 +36,9 @@
       :title="$t('search.Share_to_network')"
       :placeholder="$t('search.Search_for_network')"
       subtitle="All networks"
-      :type="'business'"
+      :type="'network'"
       :post="post"
+      :listElmts="networks"
     >
       <template v-slot:owner>
         <div class="d-flex align-items-center py-3 px-2 mb-2 border">
@@ -53,10 +57,11 @@
       :modal="`modal-5-${uuid}`"
       :isActivated="strategy"
       :title="$t('search.Send_Inbox')"
-      :placeholder="$t('search.Search_for_network')"
-      subtitle="All networks"
-      :type="'network'"
+      :placeholder="$t('search.Share_business')"
+      subtitle="All Businesses"
+      :type="'business'"
       :post="post"
+      :listElmts="bizs"
     >
       <template v-slot:owner>
         <div class="d-flex flex-direction py-3 px-2 mb-2 border">
@@ -70,11 +75,7 @@
           </div>
           <div class="d-flex align-items-center py-3 px-2 mb-2">
             <p>
-              Le lorem ipsum est, en imprimerie, une provisoire pour calibrer
-              une mise en page, le texte définitif venant remplacer le
-              faux-texte dès qu'il est prêt ou que la mise en page est achevée.
-              Généralement, on utilise un texte en faux latin, le Lorem ipsum ou
-              Lipsum.
+              {{ post.content }}
             </p>
           </div>
         </div>
@@ -357,7 +358,11 @@ export default {
   created() {
     this.uuid = this.post.post_id ? this.post.post_id : this.post.id;
     this.type = this.profile.user_type;
+  },
+  mounted() {
     this.getUsers();
+    this.getBizs();
+    this.getNetworks();
   },
 
   computed: {
@@ -365,7 +370,13 @@ export default {
       profile: "auth/profilConnected",
     }),
     users() {
-      return this.$store.getters["businessChat/getAllUsers"];
+      return this.$store.getters["userChat/getUsers"];
+    },
+    bizs() {
+      return this.$store.getters["businessChat/getAllBusinesses"];
+    },
+    networks() {
+      return this.$store.getters["networkChat/getBizs"];
     },
 
     isYourOwnPost() {
@@ -403,7 +414,13 @@ export default {
 
   methods: {
     getUsers(keyword) {
-      this.$store.dispatch("businessChat/GET_USERS", keyword);
+      this.$store.dispatch("userChat/GET_USERS", keyword);
+    },
+    getBizs(keyword) {
+      this.$store.dispatch("businessChat/GET_BIZS", keyword);
+    },
+    getNetworks(keyword) {
+      this.$store.dispatch("networkChat/GET_BIZS", keyword);
     },
     open(id) {
       this.modal = id;

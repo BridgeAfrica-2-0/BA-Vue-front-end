@@ -12,20 +12,20 @@
 
         <b-collapse id="nav-collapse" is-nav>
           <b-navbar-nav class="ml-auto text-center">
-            <b-nav-item href="#">
-              <span class="text-dark font-arvo nav-span">Home</span>
+            <b-nav-item >
+              <span class="text-dark font-arvo nav-span"><router-link :to="{name: 'home1'}">Home</router-link> </span>
             </b-nav-item>
-            <b-nav-item href="/about" class="ml-md-3" :class="currentRouteName == 'about' ? 'active' : ''">
-              <span class="text-dark font-arvo nav-span">About Us</span>
+            <b-nav-item  class="ml-md-3" :class="currentRouteName == 'about' ? 'active' : ''">
+              <span class="text-dark font-arvo nav-span"><router-link :to="{name: 'about'}">About Us</router-link> </span>
             </b-nav-item>
-            <b-nav-item href="/contact" class="ml-md-3" :class="currentRouteName == 'contact' ? 'active' : ''">
-              <span class="text-dark font-arvo nav-span">Contact Us</span>
+            <b-nav-item  class="ml-md-3" :class="currentRouteName == 'contact' ? 'active' : ''">
+              <span class="text-dark font-arvo nav-span"><router-link :to="{name: 'contact'}">Contact Us</router-link> </span>
             </b-nav-item>
-            <b-nav-item href="#" class="ml-md-3">
-              <span class="text-dark font-arvo nav-span">Login</span>
+            <b-nav-item  class="ml-md-3">
+              <span class="text-dark font-arvo nav-span"> <router-link :to="{name: 'Login'}">Login </router-link> </span>
             </b-nav-item>
-            <b-nav-item href="#" class="ml-md-3">
-              <span class="text-dark font-arvo nav-span">Sign Up</span>
+            <b-nav-item  class="ml-md-3">
+              <span class="text-dark font-arvo nav-span"><router-link :to="{name: 'signup'}">Sign Up </router-link></span>
             </b-nav-item>
           </b-navbar-nav>
         </b-collapse>

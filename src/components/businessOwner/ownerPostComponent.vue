@@ -154,7 +154,7 @@
         <b-avatar
           b-avatar
           :class="`${
-            'user' == item.poster_type ? 'rounded-circle' : ''
+            'user' == profile.user_type ? 'rounded-circle' : ''
           } logo-sizee-18 avat img-fluid avat-comment avatar-border`"
           variant="primary"
           square
@@ -185,21 +185,22 @@
 
     <Comment
       v-for="comment in comments"
-      :key="comment.id"
+      :key="comment.comment_id"
       :item="comment"
       :uuid="post.post_id"
+      onDelete="onDelete(comment.comment_id)"
+      @update-comment="(text) => onUpdate({ uuid: comment.comment_id, text })"
     />
     <Loader v-if="loadComment" />
     <NoMoreData
       v-if="comments.length && !loadComment"
       :hasData="hasData"
+      :moreDataTitle="'Show more comments'"
+      :noDataTitle="'No comment'"
       @click.native="onShowComment"
     />
   </div>
 </template>
-
-  'user' == user.user_type ? 'rounded-circle' : ''
-                    } logo-sizee`"
 
 <script>
 import { formatNumber, fromNow } from "@/helpers";
@@ -286,6 +287,26 @@ export default {
     toggle() {
       if (!this.canBeDelete) return false;
       this.showComment = !this.showComment;
+    },
+
+    onDelete: async function (uuid) {
+      const request = await this.$repository.post.delete(uuid);
+
+      if (request.success) {
+        this.comments = this.comments.filter((e) => e.comment_id == uuid);
+      } else {
+        console.log("error");
+      }
+    },
+
+    onUpdate: async function ({ uuid, text }) {
+      const request = await this.$repository.post.delete({ uuid, text });
+
+      if (request.success) {
+        this.comments = this.comments.filter((e) => e.comment_id == uuid);
+      } else {
+        console.log("error");
+      }
     },
 
     onLike: async function () {
@@ -408,7 +429,6 @@ export default {
   height: 70px !important;
   object-fit: cover;
 }
-
 
 .logo-sizee-18 {
   width: 50px !important;

@@ -999,8 +999,6 @@ export default {
       this.$refs["modal-3"].hide();
     },
     resetPostData() {
-      console.log("Test");
-      console.log("Reinitialisation des donnees du POST");
       if (!this.isSubmitted) {
         this.createPost.hyperlinks = [];
         this.createPost.movies = [];

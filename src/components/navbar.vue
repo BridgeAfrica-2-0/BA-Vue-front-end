@@ -147,11 +147,11 @@
             <b-collapse id="nav-collapse" is-nav>
               <div class="nav-item">
                 <router-link
-                  to="/dashboard"
+                  :to="navLink('home')"
                   class="nav-link text-dark hov"
                   href=""
                 >
-                  {{ navLink("home") }}
+                  {{ "home1" == navLink("home") ? "Home" : "Dashboard" }}
                 </router-link>
               </div>
 
@@ -728,9 +728,7 @@ export default {
     navLink(type) {
       const link = {
         home: () => {
-          // return this.profile ? "dashbord" : "dashboard";
-
-          return "dashbord";
+          return this.profile ? "dashbord" : "home1";
         },
       };
       try {
@@ -816,7 +814,6 @@ export default {
       await axios
         .get(url)
         .then((response) => {
-          console.warn(response.data.data);
           this.notifications = response.data.data;
         })
         .catch((error) => console.log("Error In newNotification  => " + error));
@@ -831,23 +828,23 @@ export default {
         .catch((error) => console.log(error));
     },
 
-    async getNotifications() {
-      await axios
-        .get(`notification/latest/user`)
-        .then((response) => {
-          console.warn(response.data.data);
-          this.notifications = response.data.data;
-        })
-        .catch((error) => console.log("Error In newMessage  => " + error));
-    },
-    async getMessages() {
-      await axios
-        .get(`messages/latest/user`)
-        .then((response) => {
-          this.messages = response.data.data;
-        })
-        .catch((error) => console.log(error));
-    },
+    // async getNotifications() {
+    //   await axios
+    //     .get(`notification/latest/user`)
+    //     .then((response) => {
+    //       console.warn(response.data.data);
+    //       this.notifications = response.data.data;
+    //     })
+    //     .catch((error) => console.log("Error In newMessage  => " + error));
+    // },
+    // async getMessages() {
+    //   await axios
+    //     .get(`messages/latest/user`)
+    //     .then((response) => {
+    //       this.messages = response.data.data;
+    //     })
+    //     .catch((error) => console.log(error));
+    // },
   },
 };
 </script>

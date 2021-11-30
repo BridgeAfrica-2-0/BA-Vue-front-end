@@ -187,8 +187,6 @@ export default {
 }
 
 
-
-
 .m-left-top{
   margin-left: -15px;
 }

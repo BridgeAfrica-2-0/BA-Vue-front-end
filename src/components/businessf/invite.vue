@@ -12,12 +12,6 @@
 
 
 
-
-
-
-
-
-
          
     <div class="people-style border shadow">
       <b-row class="">

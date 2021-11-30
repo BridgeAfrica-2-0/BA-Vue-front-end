@@ -74,7 +74,7 @@
                   @click="handleFollow(item)"
                 >
                   <i class="fas fa-lg btn-icon" :class="item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"></i>
-                  <span class="btn-com">Community</span>
+                  <span class="btn-com">{{ $t('dashboard.Community') }}</span>
                 </b-button>
               </b-col>
 

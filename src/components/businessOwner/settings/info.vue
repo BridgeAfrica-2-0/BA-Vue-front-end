@@ -1,11 +1,6 @@
 <template>
   <b-container fluid>
     <b-container v-if="businessInfo != 0" class="bv-example-row">
-      <!-- {{ businessInfo }}<br /><br /> -->
-      <!-- {{ editbiz }} -->
-
-      <FlashMessage />
-
       <b-form>
         <div class="b-bottom">
           <b-container>
@@ -571,6 +566,7 @@
 
         <div class="b-bottomm">
           <b-button
+          :disabled="loading"
             variant="primary"
             class="a-button-l"
             @click="updateInfo(businessInfo)"
@@ -582,7 +578,6 @@
         </div>
       </b-form>
 
-      <FlashMessage />
     </b-container>
     <b-container v-else>
       <div class="text-center">
@@ -1133,6 +1128,7 @@ export default {
 
     updateInfo: function (businessInfo) {
       this.Lspinner = true;
+      this.loading = true
       console.log("updateInfo", businessInfo);
 
       let formData = new FormData();
@@ -1191,7 +1187,7 @@ export default {
       this.$store
         .dispatch("businessSettingInfo/UpdateInfomation", {
           path: "business/update/" + this.url,
-          formData: formData,
+          data:formData,
         })
         .then(({ data }) => {
           console.log(data);
@@ -1202,14 +1198,17 @@ export default {
             status: "success",
             message: "Changes Made Successfuly",
           });
+          this.loading = false
         })
         .catch((err) => {
           console.log({ err: err });
           this.Lspinner = false;
+          this.loading = false
           this.flashMessage.show({
             status: "error",
             message: "Unable To Make Changes",
           });
+          this.loading = false
         });
     },
   },

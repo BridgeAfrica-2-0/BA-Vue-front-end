@@ -48,8 +48,6 @@ import dashboard from "@/views/dashboard";
 import myorders from "@/views/myOders"
 import notFound from "@/components/404"
 
-
-
 import welcome from "@/views/welcome";
 
 import ordersdetail from "@/views/odersDetail";
@@ -386,30 +384,30 @@ const routes = [
 ];
 
 const router = new VueRouter({
-  mode: "history",
-  base: process.env.BASE_URL,
-  routes,
+    mode: "history",
+    base: process.env.BASE_URL,
+    routes,
 });
 
 router.beforeEach((to, from, next) => {
-  const loggedIn = localStorage.getItem("user");
+    const loggedIn = localStorage.getItem("user");
 
-  if (to.matched.some((record) => record.meta.auth) && !loggedIn) {
-    next("/login");
+    if (to.matched.some((record) => record.meta.auth) && !loggedIn) {
+        next("/login");
 
-    return;
-  }
-
-  if (to.matched.some((record) => record.meta.auth)) {
-    const dat = localStorage.getItem("user");
-    const userdata = JSON.parse(dat);
-
-    if (userdata.user.verified_at == null) {
-      //  next("/verify");
+        return;
     }
-  }
 
-  next();
+    if (to.matched.some((record) => record.meta.auth)) {
+        const dat = localStorage.getItem("user");
+        const userdata = JSON.parse(dat);
+
+        if (userdata.user.verified_at == null) {
+            //  next("/verify");
+        }
+    }
+
+    next();
 });
 
 export default router;

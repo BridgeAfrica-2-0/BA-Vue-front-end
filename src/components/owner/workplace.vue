@@ -18,6 +18,8 @@
             v-for="workPlace in work"
             :key="workPlace.id"
           > 
+
+
             <div class="media-body">
               <h6 class="mb-0">
                 <b>{{ workPlace.company_name }} ({{workPlace.position}})</b>

@@ -23,7 +23,7 @@ export const defaultLocale = 'fr'
 export const fr = {
  
   auth: auth,
-  businessf:businessf,
+  //businessf:businessf,
   search: search,
   Order:Order,
   myOrders:myOrders,

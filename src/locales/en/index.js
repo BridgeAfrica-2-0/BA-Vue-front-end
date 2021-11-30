@@ -35,7 +35,7 @@ export const en = {
     profilefollower: profilefollower,
     verification: verification,
     profileowner: profileowner,
-    welcome: welcome,
+    //welcome: welcome,
     Order:Order,
     myOrders:myOrders,
 }

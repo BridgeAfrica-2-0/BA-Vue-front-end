@@ -1,6 +1,5 @@
 <template>
   <div>
-    <FlashMessage />
     <!-- DOM to Create Post By A UserOwner-->
     <b-card class="px-md-3 mb-3 mt-2">
       <b-row class="mt-2">
@@ -678,6 +677,7 @@ export default {
   .avat {
     width: 64px;
     height: 64px;
+    padding-top: 2vh;
   }
   .send-cmt {
     position: relative;

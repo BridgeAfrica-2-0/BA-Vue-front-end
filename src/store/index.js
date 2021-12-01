@@ -31,8 +31,6 @@ import UserProfileOwner from './UserProfileOwner';
 import { search } from './search';
 import userChat from './messaging/user';
 import businessChat from './messaging/business';
-import networkChat from './messaging/network';
-
 import { notification } from './notifications';
 import businessSettingInfo from './businessSettingInfo';
 import networkProfileCommunitySidebar from './networkProfileCommunitySidebar';
@@ -51,10 +49,14 @@ import profileSettingsEdit from "./profileSettingsEdit"
 import { social } from './social';
 
 
+
 Vue.use(Vuex);
 
-axios.defaults.baseURL = process.env.VUE_APP_API_URL;
+//axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 
+
+
+axios.defaults.baseURL = "https://62c2-154-72-167-79.ngrok.io/api/v1/"
 
 export default new Vuex.Store({
     modules: {
@@ -77,7 +79,6 @@ export default new Vuex.Store({
         UserProfileOwner,
         userChat,
         businessChat,
-        networkChat,
         businessGeneral,
         businessRole,
         businessAccountType,

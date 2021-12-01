@@ -167,12 +167,6 @@ const routes = [
   },
 
 
-  // {
-  //   path: "/govx",
-  //   name: "govx",
-  //   component: govx,
-  // },
-
 
   {
     path: "/welcome",
@@ -310,31 +304,8 @@ const routes = [
     name: "BusinessVisitor",
     component: businessVisitor,
   },
-  {
-    path: "/services/create",
-    name: "Create",
-    component: createService,
-    beforeEnter: (to, from, next) => {
-      if (store.state.login) {
-        next();
-      } else {
-        next({ name: "Login" });
-      }
-    },
-  },
-  {
-    path: "/services/modify/:id",
-    name: "Modify",
-    component: Modifier,
-    beforeEnter: (to, from, next) => {
-      console.log("dedans");
-      if (store.state.login && store.state.isToi) {
-        next();
-      } else {
-        next({ name: "Login" });
-      }
-    },
-  },
+  
+  
 
   {
     path: "/profilevisitor",
@@ -383,18 +354,8 @@ const routes = [
   name: "Service",
   component: service,
 },
-{
-  path: "/services/modify/:id",
-  name: "Modify",
-  component: Modifier,
-  beforeEnter: (to, from, next) => {
-    console.log("dedans");
-    if (store.state.login && store.state.isToi) {
-      next();
-    } else {
-      next({ name: "Login" });
-    }
 
+    
   {
     path: "/memberNetwork/:id?",
     name: "memberNetwork",

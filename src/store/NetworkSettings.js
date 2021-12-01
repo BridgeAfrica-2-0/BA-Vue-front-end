@@ -194,6 +194,14 @@ export default {
         return data;
       });
     },
+ 
+    loadMore({ commit }, PenData) {
+      console.log("loadMore", PenData)
+      return axios.get(`/network/${PenData}`)
+      .then(({ data }) => {
+        return data;
+      });
+    },
 
   },
 

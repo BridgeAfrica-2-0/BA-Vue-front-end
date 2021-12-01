@@ -36,7 +36,7 @@
           >
             <b-form-input
               class="mt-2 mb-2"
-              v-model="info.user.phone"
+              v-model="newcontact"
               :placeholder="$t('profileowner.phone')"
               type="text"
               required
@@ -290,10 +290,12 @@
     </div>
     <hr />
     <div class="row mb-1 mt-3">
-      <div class="col-md-4">{{ $t('profileowner.Phone') }}</div>
-      <div class="col-md-4">{{ info.user.phone }}</div>
+      <div class="col-md-4">   {{ $t('profileowner.default') }}    {{ $t('profileowner.Phone') }}</div>
+      <div class="col-md-4">  {{ info.user.phone }}</div>
+
+      
       <div class="col-md-4">
-        <button
+        <!-- <button
           type="button"
           class="btn btn-outline-primary float-md-right"
           data-toggle="modal"
@@ -301,8 +303,47 @@
           v-b-modal.phonemodal
         >
           {{ $t('profileowner.Edit') }}
-        </button>
+        </button> -->
       </div>
+
+<div class="media-body">   
+      
+      <a  data-toggle="modal"
+          data-target="#phonemodal"
+          v-b-modal.phonemodal >
+              <fas-icon
+                class="primary float-left mr-1 mt-1"
+                :icon="['fas', 'plus-circle']"
+              />
+              Add Contacts </a
+            ><br />
+
+
+
+  <div v-for="con in info.user_contact" :key="con.id">
+                 
+             <span>  {{con.phone_number}}   </span>
+              <ul class="website navbar-nav pull-right">
+                <li class="nav-item dropdown">
+                  <b-dropdown
+                    id="dropdown-dropup"
+                    dropdown
+                    variant="primary-outline"
+                  >
+                    
+                    <b-dropdown-item @click="deleteContact(con.id)"
+                      >{{ $t('profileowner.Delete') }}</b-dropdown-item
+                    >
+                  </b-dropdown>
+                </li>
+              </ul>
+            </div>
+
+
+ </div>
+
+
+
     </div>
 
     <div class="row">
@@ -435,6 +476,7 @@ export default {
     const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
      const maxDate = new Date(today)
     return {
+      newcontact:null,
        min: moment().subtract(18, 'years').format('YYYY-MM-DD'),
         moment: moment,
       max: maxDate,
@@ -574,7 +616,7 @@ export default {
     savePhoneNumber() {
       this.$store
         .dispatch("profile/updateUserBasicInfosMobilePhones", {
-          mobilePhones: this.info.user.phone,
+          mobilePhones: this.newcontact,
         })
         .then((response) => {
           console.log("update phone user response (3) ++++", response);
@@ -586,10 +628,57 @@ export default {
           );
         })
         .finally(() => {
-          console.log("finally save new mobilePhones user ++++++ ");
+           this.$store
+            .dispatch("profile/loadUserPostIntro", null)
+            .then((response) => {
+              console.log(response);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
           this.$refs["phonemodal"].hide();
         });
     },
+
+    deleteContact(num){
+
+           
+           this.$store
+        .dispatch("profile/deleteContact", {
+          id: num,
+        })
+        .then((response) => {
+         this.flashMessage.show({
+                status: "success",
+                message: "Contact Deleted",
+                blockClass: "custom-block-class",
+              });
+
+        })
+        .catch((error) => {
+          console.log(
+            error,
+            "not save new mobilePhones user end error(2) +++++"
+          );
+        })
+        .finally(() => {
+         
+
+          this.$store
+            .dispatch("profile/loadUserPostIntro", null)
+            .then((response) => {
+              console.log(response);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+         
+
+
+        });
+
+    },
+
     saveCurrentCity() {
       console.log("save new current City user start +++++");
       console.log(this.basicInfo.currentCity);

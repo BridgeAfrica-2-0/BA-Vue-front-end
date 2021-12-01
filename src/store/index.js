@@ -56,7 +56,7 @@ Vue.use(Vuex);
 
 
 
-axios.defaults.baseURL = "https://62c2-154-72-167-79.ngrok.io/api/v1/"
+axios.defaults.baseURL = "https://test.maxinemoffett.com/api/v1/"
 
 export default new Vuex.Store({
     modules: {

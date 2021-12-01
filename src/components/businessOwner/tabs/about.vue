@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div ref="about">
     <b-icon icon="person-fill" class="icon-size" variant="primary"></b-icon>
     <b> About </b>
 
@@ -18,28 +18,7 @@
         ></iframe>
       </div>
 
-      <b-row>
-        <b-col>
-          <b-card class="mb-2">
-            <div
-              class="edit"
-              v-b-modal.biographyModal
-              @click="
-                business_about_input = JSON.parse(
-                  JSON.stringify(business_about)
-                )
-              "
-            >
-              <b-icon icon="pencil-fill" variant="primary"></b-icon>
-            </div>
-            <h4 class="mb-4 text-center username">
-              {{ business_about.name }}
-            </h4>
-            <p class="text-justify text">
-              {{ business_about.location_description }}
-            </p>
-          </b-card>
-        </b-col>
+      <b-row v-if="loading">
         <b-col>
           <b-card>
             <b-card-text>
@@ -106,6 +85,27 @@
                 </b-dropdown>
               </p>
             </b-card-text>
+          </b-card>
+        </b-col>
+        <b-col>
+          <b-card class="mb-2">
+            <div
+              class="edit"
+              v-b-modal.biographyModal
+              @click="
+                business_about_input = JSON.parse(
+                  JSON.stringify(business_about)
+                )
+              "
+            >
+              <b-icon icon="pencil-fill" variant="primary"></b-icon>
+            </div>
+            <h4 class="mb-4 text-center username">
+              {{ business_about.name }}
+            </h4>
+            <p class="text-justify text">
+              {{ business_about.location_description }}
+            </p>
           </b-card>
         </b-col>
       </b-row>
@@ -416,6 +416,7 @@
 export default {
   data() {
     return {
+      loading:false,
       business_id: null,
       categories: [
         { item: "Professional_and_home_service", name: "Professionals" },
@@ -554,19 +555,20 @@ export default {
     },
   },
   created() {
-    console.log("Load Business About start +++++");
+    
+      let loader = this.$loading.show({
+        container: this.$refs.about,
+        canCancel: true,
+        onCancel: this.onCancel,
+        color: "#e75c18",
+      });
     this.$store
       .dispatch("businessOwner/loadUserBusinessAbout", {
         business_abobusiness_id: this.business_about_input,
-        business_id: this.business_id,
+        business_id: this.$route.params.id,
       })
       .then((response) => {
-        console.log(
-          response,
-          "load business about response end response (3) ++++"
-        );
         this.dayOfWorks = this.initialize(this.dayOfWorks);
-        console.log(this.business_about);
       })
       .catch((error) => {
         console.log("error from the server or browser error(2) ++++", error);
@@ -576,6 +578,8 @@ export default {
           JSON.stringify(this.$store.getters["businessOwner/getBusinessAbout"])
         );
         console.log(this.business_about);
+        this.loading = true
+        loader.hide()
       });
   },
   mounted() {
@@ -638,20 +642,18 @@ export default {
             "vuex store +++++ " +
               this.$store.getters["businessOwner/getBusinessAbout"]
           );
-          console.log(this.$store.getters["businessOwner/getBusinessAbout"]);
-          console.log("Modify Business Biography start++++");
-          console.log("-------",this.business_about_input.about_business);
-          console.log("-----"+this.business_id);
+      
           this.test();
-          var data = {  business_id: this.business_id,
-          data : {
+          var data = {
+            business_id: this.business_id,
+            data: {
               about_business: this.business_about_input.about_business,
-             
-              name: this.business_about_input.name
-              }
-            } ;
+
+              name: this.business_about_input.name,
+            },
+          };
           this.$store
-            .dispatch("businessOwner/updateBusinessBiographie",data )
+            .dispatch("businessOwner/updateBusinessBiographie", data)
             .then((response) => {
               console.log(
                 "fetch finished on the database response (3) ",

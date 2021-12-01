@@ -19,7 +19,7 @@
     "Message": "Message",
     "Direction": "Direction",
     "Business": "Entreprise",
-    "Add_Business": "Ajouter Entreprise",
+    "Add_Business": "Ajouter Une Entreprise",
     "change_Image": "Changer l'Image",
     "Business_Logo": "Logo d'Entreprise",
     "Business_Name_Is_Required": "Le nom de l'entreprise est requis",
@@ -94,7 +94,7 @@
     "Studied_at": "A étudié à",
     "Home_Town": "Ville Natale",
     "Current_City": "Ville Actuelle",
-    "Business_Name": "Nom d'Entreprise",
+    "Business_Name": "Nom de l'Entreprise",
     "mywebsitecom": "monsiteweb.com",
     "Location": "Localisation",
     "Keyword": "Mot clé",
@@ -111,7 +111,7 @@
     "Save": "Sauvegarder",
     "Cancel": "Annuler",
     "Business_Visited": "Entreprise visité",
-    "Business_Name_Here": "Nom d'Entreprise ici",
+    "Business_Name_Here": "Nom de l'Entreprise ici",
     "Category_Name_here": "Nom de la catégorie ici",
     "11M_Followers": "1.1M Abonnés",
     "Add_Other_Businesses": "Ajouter une autre entreprise",
@@ -248,5 +248,7 @@
     "Unable_to_remove_your_cover": "Impossible de retirer votre couverture",
     "Cover_Updated": "Couverture mise à jour",
     "Operation_successful": "Opération réussie",
-    "Can_not_delete_your_cover": "Impossible de supprimer votre couverture"
+    "Can_not_delete_your_cover": "Impossible de supprimer votre couverture",
+    "Add_Contacts": "Ajouter des Contacts",
+    "default_Phone": "Téléphone par défaut"
 }

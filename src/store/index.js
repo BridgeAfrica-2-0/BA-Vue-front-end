@@ -31,8 +31,6 @@ import UserProfileOwner from './UserProfileOwner';
 import { search } from './search';
 import userChat from './messaging/user';
 import businessChat from './messaging/business';
-import networkChat from './messaging/network';
-
 import { notification } from './notifications';
 import businessSettingInfo from './businessSettingInfo';
 import networkProfileCommunitySidebar from './networkProfileCommunitySidebar';
@@ -50,10 +48,11 @@ import profileSettingsEdit from "./profileSettingsEdit"
 
 import { social } from './social';
 
-
 Vue.use(Vuex);
+
 axios.defaults.baseURL =  "https://alert.maxinemoffett.com/api/v1/";
 // axios.defaults.baseURL = process.env.VUE_APP_API_URL;
+
 
 
 export default new Vuex.Store({
@@ -77,7 +76,6 @@ export default new Vuex.Store({
         UserProfileOwner,
         userChat,
         businessChat,
-        networkChat,
         businessGeneral,
         businessRole,
         businessAccountType,
@@ -103,5 +101,3 @@ export default new Vuex.Store({
 
     }
 });
-
-

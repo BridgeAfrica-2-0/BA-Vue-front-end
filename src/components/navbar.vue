@@ -92,7 +92,7 @@
                 type="search"
                 data-toggle="popover"
                 class="form-control search-h"
-                style=""
+             
                 :placeholder="credentials.placeholder"
                 v-model="credentials.keyword"
                 aria-label=""
@@ -192,12 +192,11 @@
                   data-original-title=""
                   title=""
                   v-else
-                  ><span class="text-ored"
-                    ><fas-icon
-                      class="primary"
-                      :icon="['fas', 'comment']"
-                    /> </span
-                ></a>
+                >
+                  <span class="text-ored"
+                    ><fas-icon class="primary" :icon="['fas', 'comment']" />
+                  </span>
+                </a>
                 <b-popover target="messages" triggers="hover" placement="top">
                   <div class="popover-body">
                     <p class="font-weight-bold">Messages</p>
@@ -400,13 +399,13 @@
                     </div>
                     <hr class="h-divider" />
                     <div class="other-menu suggest-item cursor-pointer">
-                      <b-link v-b-toggle="'collapse-2'" class="m-1"
-                        ><fas-icon
+                      <b-link v-b-toggle="'collapse-2'" class="m-1">
+                        <fas-icon
                           class="violet search"
                           :icon="['fas', 'globe-americas']"
                         />
-                        Language</b-link
-                      >
+                        Language
+                      </b-link>
 
                       <b-collapse id="collapse-2" class="mt-1">
                         <b-card-text
@@ -621,6 +620,9 @@ export default {
   created() {
     console.log("created");
     this.init();
+    this.getUsers();
+    this.getNotifications();
+    this.getMessages();
 
     this.notificationPatterns = {
       user: () => "/notification/latest/user",
@@ -730,7 +732,9 @@ export default {
     navLink(type) {
       const link = {
         home: () => {
-          return this.profile ? "dashbord" : "home1";
+          // return this.profile ? "dashbord" : "dashboard";
+
+          return "dashbord";
         },
       };
       try {
@@ -744,21 +748,13 @@ export default {
       this.isActive = true;
     },
     getUsers() {
-      this.$store
-        .dispatch("userChat/GET_USERS", "")
-        .then(() => {
-          console.log("->[Data logged]<-");
-        })
-        .catch(() => console.log("error"));
+      this.$store.dispatch("userChat/GET_USERS", "");
     },
 
     logout: async function () {
       const response = await this.$repository.notification.logOut();
-      if (response.success) {
-        this.Logout();
-      } else {
-        this.Logout();
-      }
+
+      this.Logout();
     },
 
     switchToProfile: async function () {

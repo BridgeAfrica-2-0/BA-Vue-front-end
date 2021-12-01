@@ -187,7 +187,7 @@
           label-size="sm"
         >
           <b-form-input
-            v-model="newProduct.tax"
+            v-model="newProduct.tax_amount"
             class="mt-1"
             id="tax"
             type="number"
@@ -321,7 +321,7 @@ export default {
         categoryId: "",
         subCategoryId: "",
         filterId: "",
-        tax: "",
+        tax_amount: "",
         kg: "",
       },
       products: [],
@@ -443,6 +443,10 @@ export default {
     createProduct() {
       this.showModal = !this.showModal;
     },
+
+    categories(){
+        this.$store.dispatch("auth/categories");
+    },
     subcategories() {
       //get subcategories
       let formData2 = new FormData();
@@ -474,6 +478,9 @@ export default {
     //get categories for current business
     const businessId = this.$route.params.id;
     // this.$store.dispatch('market/getBuCategories', businessId);
+
+    this.categories();
+    this.subcategories();
   },
 };
 </script>

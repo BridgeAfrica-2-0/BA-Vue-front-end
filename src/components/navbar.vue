@@ -192,12 +192,11 @@
                   data-original-title=""
                   title=""
                   v-else
-                  ><span class="text-ored"
-                    ><fas-icon
-                      class="primary"
-                      :icon="['fas', 'comment']"
-                    /> </span
-                ></a>
+                >
+                  <span class="text-ored"
+                    ><fas-icon class="primary" :icon="['fas', 'comment']" />
+                  </span>
+                </a>
                 <b-popover target="messages" triggers="hover" placement="top">
                   <div class="popover-body">
                     <p class="font-weight-bold">Messages</p>
@@ -398,13 +397,13 @@
                     </div>
                     <hr class="h-divider" />
                     <div class="other-menu suggest-item cursor-pointer">
-                      <b-link v-b-toggle="'collapse-2'" class="m-1"
-                        ><fas-icon
+                      <b-link v-b-toggle="'collapse-2'" class="m-1">
+                        <fas-icon
                           class="violet search"
                           :icon="['fas', 'globe-americas']"
                         />
-                        Language</b-link
-                      >
+                        Language
+                      </b-link>
 
                       <b-collapse id="collapse-2" class="mt-1">
                         <b-card-text
@@ -667,11 +666,8 @@ export default {
 
     logout: async function () {
       const response = await this.$repository.notification.logOut();
-      if (response.success) {
-        this.Logout();
-      } else {
-        this.Logout();
-      }
+
+      this.Logout();
     },
 
     switchToProfile: async function () {

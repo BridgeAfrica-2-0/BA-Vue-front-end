@@ -9,8 +9,7 @@
         </md-card-header>
 
         <md-card-content>
-          <!-- lol -->
-          <FlashMessage />
+        
           <div class="center">
             <b-row>
               <b-col cols="12" md="6" lg="12" xl="6">

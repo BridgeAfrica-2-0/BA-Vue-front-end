@@ -54,7 +54,7 @@
         <div class="bv-example-row">
           <div>
             <b-tabs
-            lazy
+              lazy
               pills
               v-model="tabIndex"
               vertical

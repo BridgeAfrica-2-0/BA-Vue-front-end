@@ -147,11 +147,11 @@
             <b-collapse id="nav-collapse" is-nav>
               <div class="nav-item">
                 <router-link
-                  to="/dashboard"
+                  :to="navLink('home')"
                   class="nav-link text-dark hov"
                   href=""
                 >
-                  {{ navLink("home") }}
+                  {{ "home1" == navLink("home") ? "Home" : "Dashboard" }}
                 </router-link>
               </div>
 
@@ -241,11 +241,9 @@
                       </div>
                     </div>
                     <hr class="h-divider" />
-                    <a
-                      href="https://bridgeafrica.info/nav/inbox.html"
-                      class="text-ored"
-                      ><u>See Inbox</u></a
-                    >
+                    <router-link :to="newRedirection('message')">
+                      <u>See Inbox</u>
+                    </router-link>
                   </div>
                 </b-popover>
               </div>
@@ -296,30 +294,34 @@
                     </div>
                     <hr class="h-divider" />
 
-                    <a
+                    <router-link :to="newRedirection('notification')"
+                      ><u>See all Notifications</u></router-link
+                    >
+                    <!-- <a
                       href="https://bridgeafrica.info/nav/notifications-view-all.html"
                       class="text-ored"
                       ><u>See all Notifications</u></a
-                    >
+                    > -->
                   </div>
                 </b-popover>
               </div>
               <!-- Notifications Ended -->
+
               <div
                 class="nav-item"
                 id="profilepic"
                 @click.prevent="switchToProfile"
               >
-                <a class="nav-link text-dark" href="">
-                  <span
-                    ><img
-                      :src="user.profile_picture"
-                      class="rounded-circle"
-                      alt=""
-                      width="50"
-                      height="50"
-                  /></span>
-                </a>
+                <span
+                  ><img
+                    :src="user.profile_picture"
+                    :class="`${
+                      'user' == user.user_type ? 'rounded-circle' : ''
+                    } logo-sizee`"
+                    alt=""
+                    width="50"
+                    height="50"
+                /></span>
               </div>
 
               <b-tooltip target="profilepic" variant="light" triggers="hover">
@@ -599,6 +601,9 @@ export default {
       shownav: false,
       notifications: [],
       messages: [],
+      notificationPatterns: null,
+      messagePatterns: null,
+      redirectionPatterns: null,
     };
   },
   computed: {
@@ -609,12 +614,56 @@ export default {
       auth: "auth/user",
     }),
   },
+  beforeMount() {
+    console.log("beforeMount");
+  },
   created() {
+    console.log("created");
     this.init();
     this.getUsers();
     this.getNotifications();
     this.getMessages();
+
+    this.notificationPatterns = {
+      user: () => "/notification/latest/user",
+      business: () => `/notification/business/${this.user.id}`,
+      network: () => null,
+    };
+
+    this.messagePatterns = {
+      user: () => "/messages/latest/user",
+      business: () => "/messages/latest/user",
+      network: () => "/messages/latest/user",
+    };
+
+    this.redirectionPatterns = {
+      message: {
+        user: () => null,
+        business: () => ({
+          name: "BusinessOwner",
+          params: { id: this.user.id },
+          query: { tabId: 1 },
+        }),
+        network: () => null,
+      },
+      notification: {
+        business: () => ({
+          name: "BusinessOwner",
+          params: { id: this.user.id },
+          query: { tabId: 2 },
+        }),
+      },
+    };
+
+    this.updateNotificationEvent();
   },
+
+  watch: {
+    "$store.state.auth.profilConnected": function () {
+      this.updateNotificationEvent();
+    },
+  },
+
   methods: {
     ...mapActions({
       setNetworks: "social/FIND_USER_NETWORK",
@@ -626,6 +675,42 @@ export default {
     ...mapMutations({
       profile: "auth/profilConnected",
     }),
+
+    updateNotificationEvent() {
+      try {
+        const newRouteNotificationApi =
+          this.notificationPatterns[
+            this.$store.state.auth.profilConnected.user_type
+          ]();
+
+        const newRouteMessageApi =
+          this.messagePatterns[
+            this.$store.state.auth.profilConnected.user_type
+          ]();
+
+        this.newNotification(newRouteNotificationApi);
+        this.newMessage(newRouteMessageApi);
+      } catch (error) {
+        return new Error(error);
+      }
+    },
+
+    newRedirection(type) {
+      const newPath = this.redirectionPatterns[type][this.user.user_type]();
+
+      if (newPath) {
+        let path = { name: newPath.name };
+
+        if (newPath.params)
+          path = Object.assign(path, { params: newPath.params });
+
+        if (newPath.query) path = Object.assign(path, { query: newPath.query });
+
+        return path;
+      }
+
+      return { name: this.$route.name };
+    },
 
     getKeyword() {
       if (!this.credentials.keyword) return false;
@@ -693,10 +778,12 @@ export default {
       let request = await this.$repository.share.getNetworks();
       if (request.success) this.setNetworks(request.data);
     },
+
     getBusiness: async function () {
       let request = await this.$repository.share.getBusiness();
       if (request.success) this.setBusiness(request.data);
     },
+
     init() {
       try {
         if (!this.hasLauchNetworkRequest) {
@@ -708,6 +795,7 @@ export default {
         console.log(error);
       }
     },
+
     togglenav() {
       if (this.shownav == false) {
         this.shownav = true;
@@ -717,28 +805,52 @@ export default {
         console.log(this.shownav);
       }
     },
-    async getNotifications() {
+
+    async newNotification(url) {
       await axios
-        .get(`notification/latest/user`)
+        .get(url)
         .then((response) => {
-          console.warn(response.data.data);
           this.notifications = response.data.data;
         })
-        .catch((error) => console.log("Error In Notification  => " + error));
+        .catch((error) => console.log("Error In newNotification  => " + error));
     },
-    async getMessages() {
+
+    async newMessage(url) {
       await axios
-        .get(`messages/latest/user`)
+        .get(url)
         .then((response) => {
           this.messages = response.data.data;
         })
         .catch((error) => console.log(error));
     },
+
+    // async getNotifications() {
+    //   await axios
+    //     .get(`notification/latest/user`)
+    //     .then((response) => {
+    //       console.warn(response.data.data);
+    //       this.notifications = response.data.data;
+    //     })
+    //     .catch((error) => console.log("Error In newMessage  => " + error));
+    // },
+    // async getMessages() {
+    //   await axios
+    //     .get(`messages/latest/user`)
+    //     .then((response) => {
+    //       this.messages = response.data.data;
+    //     })
+    //     .catch((error) => console.log(error));
+    // },
   },
 };
 </script>
 
 <style scoped>
+.logo-sizee {
+  width: 50px !important;
+  height: 50px !important;
+  object-fit: cover;
+}
 .hov:hover {
   background-color: #eeeeef;
   border-color: #eeeeef;

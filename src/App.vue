@@ -1,31 +1,24 @@
-<template>
+.<template>
   <div id="app" class="" ref="formContainer">
-
-
-     <transition
-        name="fade"
-        mode="out-in"
-
-        @beforeLeave="beforeLeave"
-        @enter="enter"
-        @afterEnter="afterEnter"
-      >
-        <router-view/>
-      </transition>
-
-      
-    <!-- <notifications group="foo" /> -->
-    <!-- <router-view /> -->
+    <div id="flashmessage"><FlashMessage /></div>
+    <transition
+      name="fade"
+      mode="out-in"
+      @beforeLeave="beforeLeave"
+      @enter="enter"
+      @afterEnter="afterEnter"
+    >
+      <router-view />
+    </transition>
+   
   </div>
 </template>
 <script>
-
-
 import { Redis } from "@/mixins";
 export default {
   mixins: [Redis],
 
-   data() {
+  data() {
     return {
       prevHeight: 0,
     };
@@ -45,7 +38,7 @@ export default {
       });
     },
     afterEnter(element) {
-      element.style.height = 'auto';
+      element.style.height = "auto";
     },
   },
 };
@@ -53,7 +46,6 @@ export default {
 
 
 <style lang="less">
-
 .fade-enter-active,
 .fade-leave-active {
   transition-duration: 0.3s;
@@ -64,12 +56,8 @@ export default {
 
 .fade-enter,
 .fade-leave-active {
-  opacity: 0
+  opacity: 0;
 }
-
-
-
-
 
 @import "./assets/css/main.css";
 @import "./assets/css/style.css";
@@ -85,6 +73,9 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
   margin-left: 5px;
+}
+#flashmessage{
+  z-index: 9999 !important;
 }
 .primary {
   color: #e75c18;

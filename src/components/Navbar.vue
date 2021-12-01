@@ -627,7 +627,7 @@ export default {
     this.notificationPatterns = {
       user: () => "/notification/latest/user",
       business: () => `/notification/business/${this.user.id}`,
-      network: () => null,
+      network: () => "/notification/latest/user"
     };
 
     this.messagePatterns = {
@@ -638,13 +638,13 @@ export default {
 
     this.redirectionPatterns = {
       message: {
-        user: () => null,
         business: () => ({
           name: "BusinessOwner",
           params: { id: this.user.id },
           query: { tabId: 1 },
         }),
         network: () => null,
+        user: () => null,
       },
       notification: {
         business: () => ({
@@ -698,6 +698,11 @@ export default {
     },
 
     newRedirection(type) {
+      console.log(type, '-----------------------------------------')
+      console.log(this.redirectionPatterns[type]);
+      // console.log(this.redirectionPatterns[type][this.user.user_type]());
+
+
       const newPath = this.redirectionPatterns[type][this.user.user_type]();
 
       if (newPath) {

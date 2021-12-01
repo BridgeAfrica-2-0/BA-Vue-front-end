@@ -479,7 +479,7 @@
                   <source src="../assets/video/identity.mp4" type="video/mp4" />
                 </video>
               <!-- </div> -->
-              <div class=" hidde" id="hidde">
+              <div class="sizeimg hidde" id="hidde">
                 <img
                   src="../assets/img/african-farmer.jpg"
                   height="700px"
@@ -1022,9 +1022,10 @@ export default {
   font-size: 16px;
 }
 .taillev1{
-  height: 680px !important;
-  width: 300px;
-  
+    height: 670px !important;
+    width: 400px;
+    margin-left: 130px;
+    margin-right: 190px;
 }
 .blec-container {
   position: absolute;
@@ -1114,6 +1115,12 @@ export default {
 }
 
 @media only screen and (min-width: 768px) {
+
+  .sizeimg{
+    border: solid;
+    margin-left: -190px;
+    margin-right: -20px;
+  }
   .size_video1{
     /* width: 400px !important;
     height: 700px !important; */

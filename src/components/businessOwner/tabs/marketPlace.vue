@@ -33,9 +33,12 @@
       <!-- MARKET HEADER BAR -->
 
       <!-- MARKET PRODUCT LIST -->
-      <div class="col-md-6" v-for="(product, index) in products" :key="index">
-        <Product v-show="!orders" :product="product" />
-      </div>
+          
+        <div class="col-md-6" v-for="(product, index) in products" :key="index">
+          <Product v-show="!orders && market" :product="product" />
+        </div>
+      
+
       <b-col v-if="loader" class="load">
         <b-spinner
           style="width: 7rem; height: 7rem"
@@ -56,7 +59,7 @@
     <div class="archive">
       <Archive v-show="archive" ref="archive" />
     </div>
-    <div class="text-center">
+    <div class="text-center" v-show="orders">
       <b-link @click="swap">Archive</b-link>
     </div>
     <!-- ADDPRODUCT FORM -->
@@ -298,6 +301,7 @@ export default {
       options: ["list", "of", "options"],
       orders: true,
       archive: false,
+      market: false,
       my_orders: "market",
       showModal: false,
       load: false,
@@ -357,15 +361,21 @@ export default {
     swap() {
       console.log("orders: ", this.orders);
       console.log("archive: ", this.archive);
+      console.log("market: ", this.market);
       this.orders = !this.orders;
       this.archive = !this.archive;
+      this.market = false;
+      this.my_orders= "orders";
       console.log("-------------------");
       console.log("orders: ", this.orders);
       console.log("archive: ", this.archive);
+      console.log("archive: ", this.market);
     },
     displayOrders() {
       this.status = !this.status;
       this.orders = !this.orders;
+      this.market = !this.orders;
+      this.archive = false;
       if (this.orders == true) {
         this.my_orders = "market";
       } else {

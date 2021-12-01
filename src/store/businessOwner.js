@@ -390,10 +390,10 @@ export default {
 
 
 
-    roleCheck({ commit },id){
-        
-      
-      return axios.get("business/role-check?id="+id)
+    roleCheck({ commit }, id) {
+
+
+      return axios.get("business/role-check?id=" + id)
         .then((data) => {
           return data;
         });
@@ -410,7 +410,7 @@ export default {
 
     },
 
-    updateBusinessBiographie({commit}, data){
+    updateBusinessBiographie({ commit }, data) {
 
       return axios.post(`business/update-biography/${data.business_id}`, data.data)
         .then((data) => {
@@ -611,10 +611,10 @@ export default {
 
     async createAlbum({ commit }, { id, data }) {
       const res = await axios.post("business/album/create/" + id, data)
-      .then(({ data }) => {
-        commit("newAlbum", data.data);
-        console.log(data);
-      });
+        .then(({ data }) => {
+          commit("newAlbum", data.data);
+          console.log(data);
+        });
     },
 
     CommunityPeople({ commit }, businessId) {

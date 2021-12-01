@@ -19,7 +19,7 @@
          
 
           <p class="textt">
-            <strong class="net-title"> {{ item.name }} </strong> <br />
+            <strong class="net-title">  <router-link    :to="'network/'+item.id">   {{ item.name }}  </router-link> </strong> <br />
             {{ item.category }}
             <br />
             {{ item.followers }} {{ $t('profileowner.Community') }} <br />

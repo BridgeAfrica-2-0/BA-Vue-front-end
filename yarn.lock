@@ -3324,7 +3324,7 @@ create-hmac@^1.1.0, create-hmac@^1.1.4, create-hmac@^1.1.7:
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
 
-cropperjs@^1.1.3:
+cropperjs@^1.5.6:
   version "1.5.12"
   resolved "https://registry.yarnpkg.com/cropperjs/-/cropperjs-1.5.12.tgz#d9c0db2bfb8c0d769d51739e8f916bbc44e10f50"
   integrity sha512-re7UdjE5UnwdrovyhNzZ6gathI4Rs3KGCBSc8HCIjUo5hO42CtzyblmWLj6QWVw7huHyDMfpKxhiO2II77nhDw==
@@ -10342,11 +10342,11 @@ vue-country-select@^0.2.2:
   integrity sha1-9T52Zfvf/Ws2MwcZl+wAfcN6Gm0=
 
 vue-cropperjs@0.5.3:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/vue-cropperjs/-/vue-cropperjs-4.0.0.tgz#931431ff8c81eb50f787acaa527bce14100b5fba"
-  integrity sha512-9x9HFUN2RPpz+AJ9bvnvbtAytW5Q9WeZcMgXqvaRutaCFNGA29rKkKWpUPRy+gn/rFJ5ZpcC1qZO9Hrd3WeqZA==
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/vue-cropperjs/-/vue-cropperjs-4.0.1.tgz#1d4cd2f7b5292ffe83de780c76e4a2dec2b66118"
+  integrity sha512-THkBBhiRHUX188QdVnyQzFWOW2g0oBMbEQ2t7sWenPxpaGZ1tFMePG2878Iw+6z6PRzq+dT0FubTtfZZzdSyxw==
   dependencies:
-    cropperjs "^1.1.3"
+    cropperjs "^1.5.6"
 
 vue-easy-lightbox@^0.16.2:
   version "0.16.2"

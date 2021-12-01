@@ -779,18 +779,6 @@ return cat;
         });
     },
 
-    // getNetworks() {
-    //   this.loader = true;
-    //   axios
-    //     .get("profile/user/networks")
-    //     .then((res) => {
-    //       this.loader = false;
-    //       this.networks = res.data.data;
-    //     })
-    //     .catch((err) => {
-    //       this.loader = false;
-    //     });
-    // },
 
     getNetworks() {
       console.log("network loading !!!!!");
@@ -807,12 +795,7 @@ return cat;
     infiniteHandler($state) {
       console.log("network?page=" + this.page);
       let url = "network?page=" + this.page;
-      if(this.page==1){
-        
-         this.profileNetworks.splice(0);
-        
-      }
-      
+     
        this.$store.dispatch("profile/loadMore",url)
     
         .then(({ data }) => {
@@ -888,10 +871,12 @@ return cat;
           }, 5);
 
 
-          this.getNetworks();
+        //  this.getNetworks();
 
           this.page = 1;
           this.infiniteId += 1;
+          this.profileNetworks=[];
+           this.$refs.infiniteLoading.attemptLoad();
         })
         .catch((err) => {
           console.log({ err: err });
@@ -936,6 +921,8 @@ return cat;
 
           this.page = 1;
           this.infiniteId += 1;
+          this.profileNetworks=[];
+           this.$refs.infiniteLoading.attemptLoad();
 
           this.$refs["netmodal"].hide();
         })
@@ -977,12 +964,18 @@ return cat;
       axios
         .delete(`network/${network.id}`)
         .then((res) => {
+
+          this.page = 1;
+          this.infiniteId += 1;
+          this.profileNetworks=[];
+           this.$refs.infiniteLoading.attemptLoad();
+
           this.success.state = true;
           this.success.msg = "Operation was successful !!";
           setTimeout(() => {
             this.success.state = false;
           }, 5000);
-          this.getNetworks();
+         // this.getNetworks();
         })
         .catch((err) => {
           this.success.state = true;

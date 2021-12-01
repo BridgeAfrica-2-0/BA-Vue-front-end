@@ -115,29 +115,21 @@
           <div class="cercle1">1</div>
           <h2 class="h2 text-position">{{ $t("myOrders.All") }}</h2>
         </div>
-        <div
-          id="m2"
-          class="mobile1 col t start-50"
-          @click="changeElementType(2)"
-        >
+        <div id="m2" class="mobile1 col t start-50" @click="changeTab(2)">
           <div class="cercle2">2</div>
 
           <h2 class="h2 text-position text-center">
             {{ $t("myOrders.In_progress") }}
           </h2>
         </div>
-        <div
-          id="m3"
-          class="mobile3 col t start-50"
-          @click="changeElementType(3)"
-        >
+        <div id="m3" class="mobile3 col t start-50" @click="changeTab(3)">
           <div class="cercle2">3</div>
 
           <h2 class="h2 text-position text-center">
             {{ $t("myOrders.Complete") }}
           </h2>
         </div>
-        <div id="m4" class="mobile2 col t" @click="changeElementType(4)">
+        <div id="m4" class="mobile2 col t" @click="changeTab(4)">
           <div class="cercle2">4</div>
           <h2 class="h2 text-position text-center">Cancel</h2>
         </div>

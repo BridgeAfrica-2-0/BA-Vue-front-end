@@ -10,11 +10,7 @@
     >
      <router-view />
     </transition>
-<<<<<<< HEAD
-   <router-view />
-=======
-
->>>>>>> main
+  
   </div>
 </template>
 <script>

@@ -225,7 +225,11 @@
                       name="filters"
                     >
                       <b-form-checkbox
+<<<<<<< HEAD
+                      class="colorblack"
+=======
                         class="colorblack"
+>>>>>>> 4d6df2670bce3f8f1b9cdc061b702bdce641c396
                         v-for="fil in filters.filters"
                         :key="fil.id"
                         :value="fil.id"

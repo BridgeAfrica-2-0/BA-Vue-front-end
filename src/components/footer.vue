@@ -7,45 +7,45 @@
 						<div class="col-lg-9">
 							<ul class="list-group list-unstyled">
 								<li>
-									<a href="#">{{ $t("footer.home") }}</a>
+									<a href="#">{{ $t("contact.home") }}</a>
 								</li>
 								<li>
-									<a href="#">{{ $t("footer.about_us") }}</a>
+									<a href="#">{{ $t("contact.about_us") }}</a>
 								</li>
 								<li>
-									<a href="#">{{ $t("footer.privacy_policy") }}</a>
+									<a href="#">{{ $t("contact.privacy_policy") }}</a>
 								</li>
 								<li>
-									<a href="#">{{ $t("footer.contact_us") }}</a>
+									<a href="#">{{ $t("contact.contact_us") }}</a>
 								</li>
 								<li>
-									<a href="#">{{ $t("footer.blog") }}</a>
+									<a href="#">{{ $t("contact.blog") }}</a>
 								</li>
 							</ul>
 						</div>
 						<div class="col-lg-3">
 							<ul class="list-group list-unstyled">
 								<li class="nav-item dropdown show">
-									<b>{{ $t("footer.language") }}</b>
+									<b>{{ $t("contact.language") }}</b>
 									<b-dropdown
 										size="sm"
 										variant="outline"
 										text="English"
 										class="m-2"
 									>
-										<b-dropdown-item-button @click="setLocale('en')">English</b-dropdown-item-button>
-										<b-dropdown-item-button @click="setLocale('fr')">French</b-dropdown-item-button>
+										<b-dropdown-item-button @click="setLocale('en')">{{ $t("contact.English") }}</b-dropdown-item-button>
+										<b-dropdown-item-button @click="setLocale('fr')">{{ $t("contact.French") }}</b-dropdown-item-button>
 									</b-dropdown>
 								</li>
 								<li class="nav-item dropdown show">
-									<b>{{ $t("footer.country") }}</b>
+									<b>{{ $t("contact.country") }}</b>
 									<b-dropdown
 										size="sm"
 										variant="outline"
 										text="Cameroon"
 										class="ml-2"
 									>
-										<b-dropdown-item-button>Cameroon</b-dropdown-item-button>
+										<b-dropdown-item-button>{{ $t("contact.Cameroon") }}</b-dropdown-item-button>
 										<b-dropdown-item-button>Nigeria</b-dropdown-item-button>
 									</b-dropdown>
 								</li>
@@ -56,7 +56,7 @@
 				<div class="mt-5 border-top">
 					<div class="col-lg-12 mt-3">
 						<p class="text-center">
-							© Copyright {{ $t("footer.all_rights_reserved") }}
+							© Copyright {{ $t("contact.all_rights_reserved") }}
 						</p>
 					</div>
 				</div>
@@ -133,7 +133,7 @@
 
 <style>
 	::-webkit-scrollbar-track {
-		-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+		box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
 		background-color: #f5f5f5;
 	}
 

@@ -1,6 +1,13 @@
 <template>
   <b-container fluid>
     <b-container v-if="businessInfo != 0" class="bv-example-row">
+<<<<<<< HEAD
+=======
+      <!-- {{businessInfo}} -->
+
+      <FlashMessage />
+
+>>>>>>> ContactUsTranslation
       <b-form>
         <div class="b-bottom">
           <b-container>

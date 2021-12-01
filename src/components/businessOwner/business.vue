@@ -55,6 +55,14 @@ export default {
     };
   },
   computed: {},
+<<<<<<< HEAD
+  methods: {},
+  created() {
+    // this.currentTab =
+      // localStorage.getItem('ba-business-active-tab') !== null ? localStorage.getItem('ba-business-active-tab') : 0;
+    // this.currentTab = this.$route.query.currentTab ? this.$route.query.currentTab : 0;
+    console.log(this.currentTab);
+=======
   methods: {
     gotoCoverImages() {
       console.log("parent cover method");
@@ -73,16 +81,21 @@ export default {
     } else {
       this.currentTab = tab;
     }
+>>>>>>> 4d6df2670bce3f8f1b9cdc061b702bdce641c396
   },
 
   watch: {
     currentTab: (newVal, oldVal) => {
+<<<<<<< HEAD
+      localStorage.setItem('ba-business-active-tab', newVal);
+=======
       localStorage.setItem("ba-business-active-tab", newVal);
     },
 
     $route(to, from) {
       console.log(to.hash);
       this.currentTab = this.tabs.findIndex((tab) => tab === to.hash);
+>>>>>>> 4d6df2670bce3f8f1b9cdc061b702bdce641c396
     },
   },
 };

@@ -1,6 +1,10 @@
 <template>
+<<<<<<< HEAD
+  <div> <FlashMessage />
+=======
   <div>
     <FlashMessage />
+>>>>>>> 4d6df2670bce3f8f1b9cdc061b702bdce641c396
     <div class="people-style p-3 shadow">
       <b-row>
         <b-col cols="5" lg="4" sm="4" md="5">
@@ -22,23 +26,38 @@
             {{ product.description.substring(0, 30) }}
             <b-link v-if="product.description.length >= 30"> see more </b-link>
             <br />
+<<<<<<< HEAD
+                
+=======
+>>>>>>> 4d6df2670bce3f8f1b9cdc061b702bdce641c396
             <span class="price">
               <strong> {{ product.price }} </strong>
             </span>
             <br />
+            
           </p>
-          <p>
-            <b-button variant="primary" @click="handleAddToCard"
-              ><span>Add to Cart</span>
+          
+          
+              <div class=" align-self-center  pos">
+            <b-button variant="primary" 
+              >buy now
             </b-button>
-          </p>
+            </div>
+
+            <div class=" align-self-center pos my-2">
+            <b-button variant="primary" class="p-0" @click="handleAddToCard"
+              >add to cart
+            </b-button>
+            </div>
+            
+          
         </b-col>
       </b-row>
 
       <!-- <div>
         <br />
       </div> -->
-    </div>
+    <!-- </div> -->
     <!-- EDIT PRODUCT MODAL -->
 
     <b-modal hide-footer title="Edit product">
@@ -144,6 +163,8 @@
       </b-form>
     </b-modal>
     <!-- PRODUCT DETAILS MODAL -->
+<<<<<<< HEAD
+=======
     <!-- <div>
         <br />
       </div> -->
@@ -253,6 +274,7 @@
       </b-form>
     </b-modal>
     <!-- PRODUCT DETAILS MODAL -->
+>>>>>>> 4d6df2670bce3f8f1b9cdc061b702bdce641c396
     <ProductDetails
       @closemodal="closeDetailsProduct"
       :showModal="viewProduct"
@@ -274,10 +296,17 @@ export default {
     ProductDetails,
   },
 
+<<<<<<< HEAD
+  computed : {
+    getStatus(){
+      return this.$store.state.cart.status ;
+    }
+=======
   computed: {
     getStatus() {
       return this.$store.state.cart.status;
     },
+>>>>>>> 4d6df2670bce3f8f1b9cdc061b702bdce641c396
   },
   methods: {
     /**
@@ -293,6 +322,27 @@ export default {
     },
     handleAddToCard() {
       console.log("add to card ", this.product.id);
+<<<<<<< HEAD
+      this.$store.dispatch("cart/addToCart", this.product.id)
+      .then(response => {
+       
+        console.log("----",this.getStatus);
+
+        this.flashMessage.show({
+              status: 'success',
+              message: this.getStatus,
+              
+            });
+      })
+      .catch((error) => {
+        console.log(error);
+          this.flashMessage.show({
+              status: 'error',
+              message: "error occur",
+              
+            });
+      });;
+=======
       this.$store
         .dispatch("cart/addToCart", this.product.id)
         .then((response) => {
@@ -310,6 +360,7 @@ export default {
             message: "error occur",
           });
         });
+>>>>>>> 4d6df2670bce3f8f1b9cdc061b702bdce641c396
     },
   },
 };
@@ -368,7 +419,11 @@ h6 {
   cursor: pointer;
 }
 @media only screen and (min-width: 768px) {
+<<<<<<< HEAD
+  .pos{
+=======
   .pos {
+>>>>>>> 4d6df2670bce3f8f1b9cdc061b702bdce641c396
     margin-left: 200px;
   }
   .center-img {

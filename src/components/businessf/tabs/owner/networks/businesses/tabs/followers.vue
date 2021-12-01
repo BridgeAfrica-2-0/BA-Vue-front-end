@@ -165,7 +165,11 @@ export default {
           status: "error",
           message: err.response.data.message 
         });
+<<<<<<< HEAD
+      },
+=======
       });
+>>>>>>> 4d6df2670bce3f8f1b9cdc061b702bdce641c396
     },
     async handleFollow(Comdata) {
       console.log("handleFollow", Comdata)
@@ -187,7 +191,11 @@ export default {
     },
 
   }
+<<<<<<< HEAD
+
+=======
 };
+>>>>>>> 4d6df2670bce3f8f1b9cdc061b702bdce641c396
 </script>
 
 <style>

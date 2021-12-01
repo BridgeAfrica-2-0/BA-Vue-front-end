@@ -78,7 +78,7 @@
             <div class="row">
               <div class="col">
                 <span class="gras"
-                  >{{$t("myOrders.Order")}} <span class="text-success order">#12324253</span>
+                  >Order <span class="text-success order">#12324253</span>
                   <br />
                   <span class="flou row" style="margin-left: 1px"
                     >yaoundé 12/12/2021 12H00</span
@@ -881,6 +881,13 @@ export default {
         dat.classList.remove("green");
       });
       el.classList.add("green");
+    },
+    handleReOrder(id){
+      axios.get(`/order/action/${id}/reorder`)
+          .then(response => {
+            console.log(response);
+          })
+          .catch(error => console.log(error));
     },
     handleReOrder(id){
       axios.get(`/order/action/${id}/reorder`)

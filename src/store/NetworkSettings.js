@@ -179,6 +179,8 @@ export default {
       });
     },
 
+<<<<<<< HEAD
+=======
     deleteEditor({ commit }, payload) {
       console.log("payload", payload)
       return axios.delete(`/network/${payload.path}`)
@@ -187,6 +189,7 @@ export default {
       });
     },
 
+>>>>>>> 4d6df2670bce3f8f1b9cdc061b702bdce641c396
     updateNetworkInfo({ commit }, data) {
       console.log("updateNetworkInfo", data)
       return axios.post(`/network/${data.path}`, data.formData)

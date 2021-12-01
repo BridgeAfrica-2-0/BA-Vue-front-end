@@ -1,7 +1,12 @@
 <template>
   <div>
+<<<<<<< HEAD
+      <div class="row d-flex align-items-center justify-content-between ">
+        <div class="col-2 col-md-8">
+=======
     <div class="row d-flex align-items-center justify-content-between">
       <div class="col-2 col-md-8">
+>>>>>>> 4d6df2670bce3f8f1b9cdc061b702bdce641c396
         <p>
           <b-icon
             font-scale="1.8"
@@ -11,6 +16,16 @@
           ></b-icon>
           <span class="font-weight-bold">Market</span>
         </p>
+<<<<<<< HEAD
+        </div>
+        <div class="col col-md text-center">
+            <b-button class=" pos" variant="outline-primary"  @click="displayOrders">{{my_orders}}</b-button >
+        </div>
+        <div class="col col-md ">
+           <b-button variant="outline-primary" @click="createProduct">Add Product</b-button>
+           </div>
+=======
+>>>>>>> 4d6df2670bce3f8f1b9cdc061b702bdce641c396
       </div>
       <div class="col col-md text-center">
         <b-button
@@ -20,6 +35,10 @@
           >{{ my_orders }}</b-button
         >
       </div>
+<<<<<<< HEAD
+    <div class="products ">
+   
+=======
       <div class="col col-md">
         <b-button variant="outline-primary" @click="createProduct"
           >Add Product</b-button
@@ -30,6 +49,7 @@
       <hr class="h-divider" />
     </div>
     <div class="products">
+>>>>>>> 4d6df2670bce3f8f1b9cdc061b702bdce641c396
       <!-- MARKET HEADER BAR -->
 
       <!-- MARKET PRODUCT LIST -->
@@ -50,6 +70,10 @@
       </div>
     </div>
 
+<<<<<<< HEAD
+   
+=======
+>>>>>>> 4d6df2670bce3f8f1b9cdc061b702bdce641c396
     <div class="orders">
       <Orders v-show="orders" ref="orders" />
     </div>
@@ -57,8 +81,13 @@
       <Archive v-show="archive" ref="archive" />
     </div>
     <div class="text-center">
+<<<<<<< HEAD
+      <b-link @click="swap" >Archive</b-link>
+    </div> 
+=======
       <b-link @click="swap">Archive</b-link>
     </div>
+>>>>>>> 4d6df2670bce3f8f1b9cdc061b702bdce641c396
     <!-- ADDPRODUCT FORM -->
     <b-modal hide-footer title="Add product" v-model="showModal">
       <b-form>
@@ -295,10 +324,17 @@ export default {
   },
   data() {
     return {
+<<<<<<< HEAD
+       options: ['list', 'of', 'options'],
+      orders: true,
+      archive: false,
+       my_orders: 'market',
+=======
       options: ["list", "of", "options"],
       orders: true,
       archive: false,
       my_orders: "market",
+>>>>>>> 4d6df2670bce3f8f1b9cdc061b702bdce641c396
       showModal: false,
       load: false,
       loader: false,
@@ -313,12 +349,22 @@ export default {
         condition: "",
         is_service: null,
         status: 1,
+<<<<<<< HEAD
+        business_id: '',
+        categoryId: '',
+        subCategoryId: '',
+        filterId: '',
+        tax: '',
+        kg: '',
+       
+=======
         business_id: "",
         categoryId: "",
         subCategoryId: "",
         filterId: "",
         tax: "",
         kg: "",
+>>>>>>> 4d6df2670bce3f8f1b9cdc061b702bdce641c396
       },
       products: [],
       val: "",
@@ -365,6 +411,15 @@ export default {
     },
     displayOrders() {
       this.status = !this.status;
+<<<<<<< HEAD
+       this.orders = !this.orders;
+       if(this.orders == true){
+         this.my_orders = "market";
+       }else {
+         this.my_orders= "my orders"
+       }
+      console.log('----' + this.status);
+=======
       this.orders = !this.orders;
       if (this.orders == true) {
         this.my_orders = "market";
@@ -372,6 +427,7 @@ export default {
         this.my_orders = "my orders";
       }
       console.log("----" + this.status);
+>>>>>>> 4d6df2670bce3f8f1b9cdc061b702bdce641c396
     },
     getProducts: async function () {
       await axios
@@ -469,7 +525,11 @@ export default {
 </script>
 
 <style scoped>
+<<<<<<< HEAD
+.pos{
+=======
 .pos {
+>>>>>>> 4d6df2670bce3f8f1b9cdc061b702bdce641c396
   /* margin-left: 900px; */
   margin-bottom: 22px;
 }

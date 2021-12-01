@@ -1,0 +1,37 @@
+{
+    "Mobile":"Mobile",
+    "EMAIL":"EMAIL",
+    "KEEP_IN_TOUCH":"KEEP IN TOUCH",
+    "ADDRESS":"ADDRESS",
+    "International_Handricraft_Center":"International Handricraft Center",
+    "PHONE":"PHONE",
+    
+    "home":"home",
+    "about_us":"about us",
+    "privacy_policy":"privacy policy",
+    "contact_us":"contact us",
+    "blog":"blog",
+    "language":"language",
+    "English":"English",
+    "French":"French",
+    "country":"country",
+    "Cameroon":"Cameroon",
+    "all_rights_reserved":"all rights reserved",
+
+    "Find_Pharmacies":"Find_Pharmacies",
+    "Find_Pharmacy":"Find_Pharmacy",
+    "Where":"Where",
+    "Home":"Home",
+    "Market":"Market",
+    "Messages":"Messages",
+    "Notifications":"Notifications",
+    "See_all_Notifications":"See all Notifications",
+    "Language":"Language",
+    "Logout":"Logout",
+    "Your_Businesses":"Your Businesses",
+    "My_orders":"My orders",
+    "Account_Settings":"Account Settings",
+    "Help_and_Support":"Help and Support",
+    "Active":"Active"
+
+}

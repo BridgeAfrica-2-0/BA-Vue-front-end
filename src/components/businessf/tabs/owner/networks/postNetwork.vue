@@ -285,8 +285,85 @@
                   </div>
                 </div> -->
 
+<<<<<<< HEAD
+                <span>
+                  <b-button @click="updatePost" variant="primary" block :disabled="loading"
+                    ><b-icon icon="cursor-fill" variant="primary"></b-icon>{{ $t('network.Update_post') }}</b-button
+                  >
+                </span>
+              </b-col>
+              <b-col cols="1" md="1" class="m-0 p-0"></b-col>
+            </b-row>
+          </b-modal>
+
+          <b-modal id="modal-xl" ref="modal-xl" centered hide-footer :title=" $t('network.Create_Post')" @hidden="resetPostData">
+            <b-row ref="loader">
+              <b-col cols="1" class="m-0 p-0"></b-col>
+              <b-col cols="2" class="m-0 p-0">
+                <b-avatar class="d-inline-block avat" variant="primary" :src="profile.profile_picture"></b-avatar>
+              </b-col>
+              <b-col cols="9" class="pt-2" style="margin-left: -5px">
+                <h5 class="m-0 font-weight-bolder">{{ profile.name }}</h5>
+              </b-col>
+            </b-row>
+            <b-row>
+              <b-col cols="1" md="1" cl ass="m-0 p-0"></b-col>
+              <b-col cols="10" md="10" class="m-0 p-0">
+                <br />
+                <div class="cursor">
+                  <b-form-textarea
+                    id="textarea-small"
+                    autofocus
+                    class="mb-2 border-none"
+                    :placeholder=" $t('network.Post_a_business_update')"
+                    v-model="createPost.postNetworkUpdate"
+                   
+                  ></b-form-textarea>
+
+                
+                </div>
+                <div class="bordder">
+                  <span class="float-left">{{ $t('network.Add_to_Your_Post') }}  </span>
+                  <span class="float-right">
+                    <b-button-group size="sm" class="">
+                      <input id="video" type="file" hidden />
+                      <input
+                        id="image"
+                        type="file"
+                        hidden
+                        @change="selectMovies"
+                        accept="video/mpeg,video/mp4,image/*"
+                        ref="movies"
+                      />
+                      <input
+                        id="document"
+                        type="file"
+                        @change="selectDocument"
+                        hidden
+                        accept="application/pdf"
+                        ref="document"
+                      />
+
+                      <b-button title="Add Movie" size="sm" variant="outline-primary" @click="$refs.movies.click()">
+                        <fas-icon class="icons" :icon="['fas', 'photo-video']" size="lg" />
+                      </b-button>
+                      <b-button
+                        :title=" $t('network.Add_Hyperlink')"
+                        size="sm"
+                        variant="outline-primary"
+                        @click="$refs.document.click()"
+                      >
+                        <fas-icon class="icons" :icon="['fas', 'file']" size="lg" />
+                      </b-button>
+                    </b-button-group>
+                  </span>
+                </div>
+                <br />
+                <!-- <div v-for="hyperlink in createPost.hyperlinks" :key="hyperlink.fileName" class="bordder">
+=======
               <div class="h300px">
                 <div v-for="hyperlink in createPost.hyperlinks" :key="hyperlink.fileName" class="bordder">
+>>>>>>> 4d6df2670bce3f8f1b9cdc061b702bdce641c396
                   <span class="float-left"> {{ hyperlink.fileName }} </span>
                   <span class="float-right" @click="deleteItem(hyperlink.fileName)"> delete </span>
                 </div>

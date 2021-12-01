@@ -16,6 +16,7 @@ import profileowner from './profileowner.json'
 import memnetwork from './memnetwork.json'
 
 import profilefollower from './network.json'
+import contact from './contact.json'
 
 
 export const defaultLocale = 'fr'
@@ -42,5 +43,6 @@ export const fr = {
 
 
     network: network,
+    contact:contact,
 
 }

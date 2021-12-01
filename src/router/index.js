@@ -46,6 +46,7 @@ import networks from "@/views/networks";
 import dashboard from "@/views/dashboard";
 
 import myorders from "@/views/myOders"
+import archivedOrders from "@/views/archivedOrders"
 import notFound from "@/components/404"
 
 import welcome from "@/views/welcome";

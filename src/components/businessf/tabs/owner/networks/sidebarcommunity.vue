@@ -76,6 +76,50 @@
               </b-tab>
             </b-tabs>
           </div>
+<<<<<<< HEAD
+        </b-tab>
+      </b-tabs>
+      
+    </div>
+
+         
+
+
+        <b-tab >
+
+            <template slot="title"  >
+             Businesses  <span class="spa-color">  7K   </span>
+            </template>
+        
+        
+     <div>
+      <b-tabs fill pills content-class="mt-3  f-left m-up checkcheck">
+        <b-tab  active>
+
+         <template slot="title"  >
+             Followers  <span class="spa-color">  7K   </span>
+            </template>
+        
+         
+
+
+         <div class="s-comcard">      <Business />     </div>
+
+ 
+         
+        </b-tab>
+
+        <b-tab >
+        
+
+            <template slot="title"  >
+             Following  <span class="spa-color">  7K   </span>
+            </template>
+        
+        <div class="s-comcard">    <Business />     </div>
+ 
+=======
+>>>>>>> 4d6df2670bce3f8f1b9cdc061b702bdce641c396
         </b-tab>
       </b-tabs>
     </div>

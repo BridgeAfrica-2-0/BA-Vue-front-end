@@ -36,6 +36,7 @@
       <br />
 
       <b-row>
+        <!-- {{notifications}} -->
         <!-- <div>
           Selected: <strong>{{ selected }}</strong
           ><br />
@@ -46,6 +47,7 @@
           v-for="(notification, index) in notifications"
           :key="index"
         >
+        {{notification.notification_text}}
           <div :class="notification.mark_as_read ? 'text-secondary' : 'font-weight-bold'">
             <p class="">
               <span style="display:inline-flex">

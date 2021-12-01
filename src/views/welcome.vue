@@ -6,7 +6,6 @@
 
     <md-progress-bar md-mode="indeterminate" v-if="sendingB" />
 
-    <FlashMessage />
 
     <div
       v-if="first_page == 'true'"

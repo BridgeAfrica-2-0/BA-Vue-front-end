@@ -10342,9 +10342,15 @@ vue-country-select@^0.2.2:
   integrity sha1-9T52Zfvf/Ws2MwcZl+wAfcN6Gm0=
 
 vue-cropperjs@0.5.3:
+<<<<<<< HEAD
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/vue-cropperjs/-/vue-cropperjs-5.0.0.tgz#7f8cbc460737af3831b4ded634c95905198e329e"
   integrity sha512-RhnC8O33uRZNkn74aiHZwNHnBJOXWlS4P6gsRI0lw4cZlWjKSCywZI9oSI9POlIPI6OYv30jvnHMXGch85tw7w==
+=======
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/vue-cropperjs/-/vue-cropperjs-4.0.1.tgz#1d4cd2f7b5292ffe83de780c76e4a2dec2b66118"
+  integrity sha512-THkBBhiRHUX188QdVnyQzFWOW2g0oBMbEQ2t7sWenPxpaGZ1tFMePG2878Iw+6z6PRzq+dT0FubTtfZZzdSyxw==
+>>>>>>> main
   dependencies:
     cropperjs "^1.5.6"
 

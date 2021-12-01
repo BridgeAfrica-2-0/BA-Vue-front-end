@@ -15,6 +15,7 @@ import myOrders from './myOrders.json'
 import memnetwork from './memnetwork.json'
 
 import profilefollower from './network.json'
+import about from './about.json'
 
 
 
@@ -28,7 +29,7 @@ export const en = {
     search: search,
     network: network,
     passrecover: passrecover,
-    // welcome: welcome,
+     welcome: welcome,
     dashboard: dashboard,
     memnetwork: memnetwork,
    profilefollower: profilefollower,
@@ -37,4 +38,5 @@ export const en = {
   
     Order:Order,
     myOrders:myOrders,
+    about:about,
 }

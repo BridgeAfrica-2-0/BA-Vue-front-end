@@ -1,11 +1,12 @@
 <template>
   <div class="p-3 card-border my-3" style="position: relative">
-
     <div class="mt-2">
       <div class="d-inline-flex">
         <span md="1" class="m-0 p-0">
           <b-avatar
-            class="avat"
+            :class="`${
+              'user' == item.poster_type ? 'rounded-circle' : ''
+            } logo-sizee avat`"
             square
             variant="primary"
             :src="item.logo_path"
@@ -15,6 +16,7 @@
           <h5 class="m-0 usernamee">
             {{ item.user_name }}
           </h5>
+
           <p class="durationn">{{ item.created_at | now }}</p>
         </div>
 
@@ -150,10 +152,13 @@
     >
       <div class="m-md-0 p-md-0">
         <b-avatar
+          b-avatar
+          :class="`${
+            'user' == profile.user_type ? 'rounded-circle' : ''
+          } logo-sizee-18 avat img-fluid avat-comment avatar-border`"
           variant="primary"
           square
           :src="businessLogo"
-          class="img-fluid avat-comment avatar-border"
         ></b-avatar>
       </div>
 
@@ -180,14 +185,18 @@
 
     <Comment
       v-for="comment in comments"
-      :key="comment.id"
+      :key="comment.comment_id"
       :item="comment"
       :uuid="post.post_id"
+      onDelete="onDelete(comment.comment_id)"
+      @update-comment="(text) => onUpdate({ uuid: comment.comment_id, text })"
     />
     <Loader v-if="loadComment" />
     <NoMoreData
       v-if="comments.length && !loadComment"
       :hasData="hasData"
+      :moreDataTitle="'Show more comments'"
+      :noDataTitle="'No comment'"
       @click.native="onShowComment"
     />
   </div>
@@ -218,8 +227,7 @@ export default {
 
   props: {
     post: {},
-    usertype:{
-      
+    usertype: {
       default: () => null,
     },
     mapvideo: {},
@@ -279,6 +287,26 @@ export default {
     toggle() {
       if (!this.canBeDelete) return false;
       this.showComment = !this.showComment;
+    },
+
+    onDelete: async function (uuid) {
+      const request = await this.$repository.post.delete(uuid);
+
+      if (request.success) {
+        this.comments = this.comments.filter((e) => e.comment_id == uuid);
+      } else {
+        console.log("error");
+      }
+    },
+
+    onUpdate: async function ({ uuid, text }) {
+      const request = await this.$repository.post.delete({ uuid, text });
+
+      if (request.success) {
+        this.comments = this.comments.filter((e) => e.comment_id == uuid);
+      } else {
+        console.log("error");
+      }
     },
 
     onLike: async function () {
@@ -394,6 +422,18 @@ export default {
 .custom-block-class {
   position: absolute;
   z-index: 1;
+}
+
+.logo-sizee {
+  width: 70px !important;
+  height: 70px !important;
+  object-fit: cover;
+}
+
+.logo-sizee-18 {
+  width: 50px !important;
+  height: 50px !important;
+  object-fit: cover;
 }
 
 #preview {

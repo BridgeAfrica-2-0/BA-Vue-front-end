@@ -374,7 +374,7 @@
                       title="Groups"
                       @click="getChatList({ type: 'group' })"
                     >
-                      <!-- Business Chats Available  -->
+                      <!-- Group Chats Available  -->
                       <b-row class="pa-6">
                         <b-col class="mb-6 pb-6">
                           <input
@@ -383,7 +383,7 @@
                             :placeholder="`Search chat list ${tabIndex}`"
                             @keypress.enter="
                               getChatList({
-                                type: 'business',
+                                type: 'group',
                                 keyword: searchQuery,
                               })
                             "
@@ -407,7 +407,7 @@
                               'p-2 message ',
                               {
                                 messageSelected:
-                                  chat.receiver_business_id ==
+                                  chat.groupID ==
                                   (chatSelected.clickedId != null
                                     ? chatSelected.clickedId
                                     : false)
@@ -417,9 +417,9 @@
                             ]"
                             @click="
                               selectedChat({
-                                type: 'business',
+                                type: 'group',
                                 chat: chat,
-                                id: chat.receiver_business_id,
+                                id: chat.groupID,
                               })
                             "
                           >
@@ -432,7 +432,7 @@
                                 ></b-avatar>
 
                                 <h6 class="mt-2 d-inline-block ml-2">
-                                  <b class="bold"> {{ chat.name }}</b>
+                                  <b class="bold"> {{ chat.groupName }}</b>
                                   <p class="duration">{{ chat.message }}</p>
                                 </h6>
                               </span>
@@ -627,7 +627,12 @@
                 </div>
                 <div v-else v-for="chat in chats" :key="chat.id">
                   <!-- {{ chat }}<br /> -->
-                  <div v-if="currentBiz.id != chat.sender_business_id">
+                  <div
+                    v-if="
+                      currentBiz.id != chat.sender_business_id &&
+                      currentBiz.id != chat.businessID
+                    "
+                  >
                     <b-row class="p-4">
                       <b-col>
                         <p
@@ -1160,12 +1165,12 @@ export default {
       chatSearchKeyword: "",
       tabIndex: 2,
       type: "",
-      socket: io("https://ba-chat-server.herokuapp.com", {
-        transports: ["websocket", "polling", "flashsocket"],
-      }),
-      // socket: io("localhost:7000", {
+      // socket: io("https://ba-chat-server.herokuapp.com", {
       //   transports: ["websocket", "polling", "flashsocket"],
       // }),
+      socket: io("localhost:7000", {
+        transports: ["websocket", "polling", "flashsocket"],
+      }),
       chatSelected: [],
       showsearch: true,
       selecteduser: false,
@@ -1371,16 +1376,25 @@ export default {
         console.log("group message Received");
         console.log(data);
         this.chats.push(data);
-        let elmts = {
-          type: this.type,
-          message: data.message,
-          sender_business_id: this.currentBiz.id,
-          receiver_business_id: this.chatSelected.id,
-          receiver_network_id: this.chatSelected.id,
-          receiver_id: this.chatId,
-        };
 
-        // this.saveMessage(elmts);
+        this.formData.append("sender_business_id", data.sender_business_id);
+        this.formData.append("message", data.message);
+        this.formData.append("receiver_business_id", data.receiver_business_id);
+        this.formData.append("receiver_network_id", data.receiver_business_id);
+        this.formData.append("receiver_id", data.receiver_business_id);
+        this.formData.append("group_id", data.group_id);
+        this.formData.append("type", data.type);
+
+        // let elmts = {
+        //   type: this.type,
+        //   message: data.message,
+        //   sender_business_id: this.currentBiz.id,
+        //   receiver_business_id: this.chatSelected.id,
+        //   receiver_network_id: this.chatSelected.id,
+        //   receiver_id: this.chatId,
+        // };
+
+        this.saveMessage(this.formData);
       });
       this.socket.on("privateMessage", (data) => {
         console.log("Received");
@@ -1399,6 +1413,8 @@ export default {
       });
     },
     createGroup(receiver_business_id) {
+      this.socket.emit("create-group", this.chatId);
+
       // let sender_business_id = this.currentUser.user.id;
       let membersPeople = this.groupMembers.filter((member) => {
         return member.type == "people";
@@ -1419,15 +1435,14 @@ export default {
       console.log("Business: ", membersBuiness);
       console.log("People: ", membersPeople);
 
-      let sender_business_id = this.currentBizId;
+      let sender_business_id = this.chatId;
       this.room = [sender_business_id, ...this.selectedMulty];
       console.log("ROOMS: ", this.room);
-      this.socket.emit("create-group", sender_business_id);
-      this.$store.dispatch("businessChat/CREATE_GROUP", {
-        groupName: this.groupName,
-        userID: membersPeopleIds,
-        businessID: membersBusinessIds,
-      });
+      // this.$store.dispatch("businessChat/CREATE_GROUP", {
+      //   groupName: this.groupName,
+      //   userID: membersPeopleIds,
+      //   businessID: membersBusinessIds,
+      // });
     },
     createRoom(receiver_business_id) {
       // let sender_business_id = this.currentUser.user.id;
@@ -1495,18 +1510,23 @@ export default {
         .then(() => {})
         .catch(() => console.log("error"));
     },
+    async histBizToGroup(receiverId) {
+      await this.$store.dispatch("businessChat/GET_BIZ_TO_GROUP", receiverId);
+    },
     saveMessage(data) {
       console.log("[DEBUG SAVE]", { data: data, type: this.type });
       if (this.type == "group") {
         this.$store.dispatch("businessChat/SAVE_GROUP_CHAT", {
-        data: data,
-        type: this.type,
-      });
+          data: data,
+          group_id: this.chatId,
+          sender_id: this.currentBizId,
+          type: this.type,
+        });
       } else {
         this.$store.dispatch("businessChat/SAVE_BUSINESS_CHAT", {
-        data: data,
-        type: this.type,
-      });
+          data: data,
+          type: this.type,
+        });
       }
     },
     selectedMultyChat() {
@@ -1536,6 +1556,9 @@ export default {
       // this.scrollToBottom();
       console.log("selected Chat:", data);
       this.createRoom(data.id);
+      if (this.type == "group") {
+        this.createGroup();
+      }
       // this.chatId = data.id;
       this.$store.commit("businessChat/setSelectedChatId", data.id);
       let receiver = { receiverID: data.id, keyword: null };
@@ -1543,8 +1566,10 @@ export default {
         this.histBizToUser(receiver);
       } else if (data.type == "network") {
         this.histBizToNetwork(receiver);
-      } else {
+      } else if (data.type == "business") {
         this.histBizToBiz(receiver);
+      } else {
+        this.histBizToGroup(receiver);
       }
       this.newMsg = false;
       // this.chatSelected = { active: true, clickedId: data.id, ...data.chat };
@@ -1552,9 +1577,8 @@ export default {
         id: data.id,
         active: true,
         clickedId: data.id,
-        name: data.chat.name,
+        name: data.chat.name ? data.chat.name : data.chat.groupName,
       };
-
       console.log("[DEBUG] Chat selected:", this.chatSelected);
     },
 
@@ -1608,6 +1632,7 @@ export default {
         room: this.room,
         receiver_business_id: this.chatSelected.id,
         receiver_id: this.chatId,
+        group_id: this.chatId,
       });
 
       console.log("SENT...");

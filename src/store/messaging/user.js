@@ -155,9 +155,8 @@ export default {
         // SHARE <---------
         SHARE_POST_NETWORK({ commit }, data) {
             commit("setLoader", true)
-            var payload = data.data
 
-            return axios.post(`/share/post/user/network`, payload)
+            return axios.post(`/share/post/user/network`, data)
                 .then((res) => {
                     commit("setLoader", false)
                     console.log("Post shared...", res.data.data);
@@ -170,9 +169,8 @@ export default {
         },
         SHARE_POST_USER({ commit }, data) {
             commit("setLoader", true)
-            var payload = data.data
 
-            return axios.post(`/share/post/user`, payload)
+            return axios.post(`/share/post/user`, data)
                 .then((res) => {
                     commit("setLoader", false)
                     console.log("Post shared...", res.data.data);
@@ -185,9 +183,9 @@ export default {
         },
         SHARE_POST_BUSINESS({ commit }, data) {
             commit("setLoader", true)
-            var payload = data.data
+            console.log("data:", data);
 
-            return axios.post(`/share/post/user/business`, payload)
+            return axios.post(`/share/post/user/business`, data)
                 .then((res) => {
                     commit("setLoader", false)
                     console.log("Post shared...", res.data.data);

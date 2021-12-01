@@ -132,6 +132,26 @@ export default {
                     console.log(err);
                 })
         },
+
+        async GET_GROUPS({ commit, state }, data) {
+            commit("setLoader", true);
+            console.log("[DEBUG] user to user", data);
+            let keyword = data.keyword ? '/' + data.keyword : ''
+
+            await axios.get(`group/list/businesses/${state.currentBizId + keyword }`)
+                .then((res) => {
+                    commit("setLoader", false);
+                    console.log("Business GROUPS: ", res.data.data);
+                    commit("setChatList", res.data.data ? res.data.data : {
+                        data: []
+                    });
+                })
+                .catch((err) => {
+                    commit("setLoader", false);
+                    console.log(err);
+                })
+        },
+
         async GET_ALL({ commit, state }, data) {
             let keyword = data ? '/' + data : ''
             var users = []
@@ -284,7 +304,7 @@ export default {
                         commit("setLoader", false);
                         console.log(err);
                     })
-            } else {
+            } else if (data.type == "network") {
                 axios.get(`/messages/businessNetwork/${state.currentBizId + keyword}`)
                     .then((res) => {
                         commit("setLoader", false);
@@ -297,10 +317,24 @@ export default {
                         commit("setLoader", false);
                         console.log(err);
                     })
+            } else {
+                axios.get(`group/list/businesses/${state.currentBizId + keyword }`)
+                    .then((res) => {
+                        commit("setLoader", false);
+                        console.log("Business GROUPS: ", res.data.data);
+                        commit("setChatList", res.data.data ? res.data.data : {
+                            data: []
+                        });
+                    })
+                    .catch((err) => {
+                        commit("setLoader", false);
+                        console.log(err);
+                    })
             }
         },
         // ----------------------------------------
 
+        // share post
         SHARE_POST_USER({ commit }, data) {
             commit("setSuccess", false)
             commit("setLoader", true)
@@ -334,9 +368,8 @@ export default {
         },
         SHARE_POST_NETWORK({ commit }, data) {
             commit("setLoader", true)
-            var payload = data.data
 
-            return axios.post(`/share/post/business/network`, payload)
+            return axios.post(`/share/post/business/network`, data)
                 .then((res) => {
                     commit("setLoader", false)
                     console.log("Post shared...", res.data.data);
@@ -345,9 +378,8 @@ export default {
                     commit("setLoader", false)
                     console.log(err);
                 })
-
         },
-
+        // ----------
 
         SAVE_BUSINESS_CHAT({ commit }, data) {
             // commit("setUsers", []);
@@ -392,45 +424,22 @@ export default {
         SAVE_GROUP_CHAT({ commit }, data) {
             // commit("setUsers", []);
             console.log("[DEBUG]", data);
-            var payload = data.data
-            var type = data.type
+            let payload = data.data
             let group_id = data.group_id
             let sender_id = data.sender_id
 
+            return axios.post(`/group/${group_id}/business/${sender_id}`, payload, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                })
+                .then((res) => {
+                    console.log("Message saved...", res.data.data);
+                })
+                .catch((err) => {
+                    console.log(err);
+                })
 
-            if (type == 'business') {
-                axios.post(`/group/${group_id}/business/${sender_id}`, payload, {
-                        headers: {
-                            'Content-Type': 'multipart/form-data'
-                        }
-                    })
-                    .then((res) => {
-                        console.log("Message saved...", res.data.data);
-                    })
-                    .catch((err) => {
-                        console.log(err);
-                    })
-            } else if (type == 'user') {
-                axios.post(`/group/${group_id}/business/${sender_id}`, payload, {
-                        headers: {
-                            'Content-Type': 'multipart/form-data'
-                        }
-                    })
-                    .then((res) => {
-                        console.log("Message saved...", res.data.data);
-                    })
-                    .catch((err) => {
-                        console.log(err);
-                    })
-            } else if (type == 'network') {
-                axios.post(`/group/${group_id}/business/${sender_id}`, payload)
-                    .then((res) => {
-                        console.log("Message saved...", res.data.data);
-                    })
-                    .catch((err) => {
-                        console.log(err);
-                    })
-            }
         },
 
         async GET_BIZ_TO_BIZ({ commit, state }, data) {
@@ -475,6 +484,23 @@ export default {
                 .then((res) => {
                     commit("setLoader", false);
                     console.log("User to network: ", res.data.data);
+                    commit("setChats", res.data.data);
+                })
+                .catch((err) => {
+                    commit("setLoader", false);
+                    console.log(err);
+                })
+        },
+        async GET_BIZ_TO_GROUP({ commit, state }, data) {
+            commit("setLoader", true);
+            console.log("[DEBUG]: ", data);
+            let keyword = data.keyword ? '/' + data.keyword : ''
+
+
+            await axios.get(`/group/${data.receiverID + keyword}`)
+                .then((res) => {
+                    commit("setLoader", false);
+                    console.log("Group: ", res.data.data);
                     commit("setChats", res.data.data);
                 })
                 .catch((err) => {

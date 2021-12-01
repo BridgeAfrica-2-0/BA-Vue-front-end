@@ -92,7 +92,7 @@
                 type="search"
                 data-toggle="popover"
                 class="form-control search-h"
-             
+                style=""
                 :placeholder="credentials.placeholder"
                 v-model="credentials.keyword"
                 aria-label=""
@@ -652,8 +652,9 @@ export default {
           params: { id: this.user.id },
           query: { tabId: 2 },
         }),
-          network: () => null,
-          user: () => null,
+        user: () => null,
+        network: () => null,
+
       },
     };
 

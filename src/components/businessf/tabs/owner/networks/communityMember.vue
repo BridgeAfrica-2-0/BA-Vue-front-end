@@ -76,6 +76,7 @@
                           class="b-background flexx pobtn shadow"
                           variant="primary"
                           @click="$emit('handleFollow', member)"
+                          :style="member.is_follow ? 'background-color:#420942;':''"
                         >
                           <i :class="member.is_follow ? 'fas fa-user-minus fa-lg btn-icon':'fas fa-user-plus fa-lg btn-icon'"></i>
                           <span class="btn-com">{{ $t('network.Community') }}</span>

@@ -12,32 +12,32 @@
         </ly-tab>
       </div>
 
-      <div class="mt-3 d-block d-md-none" v-if="seetings_id == '0'">
+      <!-- <div class="mt-3 d-block d-md-none" v-if="seetings_id == '0'">
         <General />
-      </div>
+      </div> -->
 
-      <div class="mt-3 d-block d-md-none" v-if="seetings_id == '4'">
+      <!-- <div class="mt-3 d-block d-md-none" v-if="seetings_id == '4'">
         <Website />
-      </div>
+      </div> -->
 
       <div class="mt-3 d-block d-md-none" v-if="seetings_id == '3'">
         <Payment />
       </div>
 
-      <div class="mt-3 d-block d-md-none" v-if="seetings_id == '2'">
+      <!-- <div class="mt-3 d-block d-md-none" v-if="seetings_id == '2'">
         <Roles />
-      </div>
+      </div> -->
 
-      <div class="mt-3 d-block d-md-none" v-if="seetings_id == '1'">
+      <!-- <div class="mt-3 d-block d-md-none" v-if="seetings_id == '1'">
         <Info />
-      </div>
+      </div> -->
 
       <div class="mt-3 d-block d-md-none" v-if="seetings_id == '5'">
         <Blocking />
       </div>
     </div>
 
-    <div class="mt-3 d-block d-md-none" v-if="selectedIdd == '6'">
+    <div class="mt-3 d-block d-md-none" v-if="selectedIdd == '0'">
       <Notification />
     </div>
 
@@ -54,27 +54,28 @@
         <div class="bv-example-row">
           <div>
             <b-tabs
+              lazy
               pills
               v-model="tabIndex"
               vertical
               class="itzlala"
               nav-wrapper-class="w-15"
             >
-              <b-tab title="General">
+              <!-- <b-tab title="General">
                 <b-card-text> <General /> </b-card-text
-              ></b-tab>
+              ></b-tab> -->
 
               <b-tab title="Notification">
                 <b-card-text> <Notification /> </b-card-text
               ></b-tab>
 
-              <b-tab title="Business Info">
+              <!-- <b-tab title="Business Info">
                 <b-card-text> <Info /> </b-card-text
-              ></b-tab>
+              ></b-tab> -->
 
-              <b-tab title="Business Roles">
+              <!-- <b-tab title="Business Roles">
                 <b-card-text> <Roles /> </b-card-text
-              ></b-tab>
+              ></b-tab> -->
 
               <b-tab title="Insight">
                 <b-card-text> <Insight /> </b-card-text
@@ -84,13 +85,13 @@
                 <b-card-text> <Pending /> </b-card-text
               ></b-tab>
 
-              <b-tab title="Payment">
+              <!-- <b-tab title="Payment">
                 <b-card-text> <Payment /> </b-card-text
-              ></b-tab>
+              ></b-tab> -->
 
-              <b-tab title="Account Type">
+              <!-- <b-tab title="Account Type">
                 <b-card-text> <Website /> </b-card-text
-              ></b-tab>
+              ></b-tab> -->
               <b-tab title="Blocking">
                 <b-card-text> <Blocking /> </b-card-text
               ></b-tab>
@@ -141,8 +142,8 @@ export default {
         }
 
         if (newVal == 2) {
-          this.selectedIdd = "6";
-          this.tabIndex = "1";
+          this.selectedIdd = "0";
+          this.tabIndex = "0";
         }
 
         if (newVal == 4) {
@@ -159,15 +160,15 @@ export default {
   },
 
   components: {
-    General,
-    Roles,
+    // General,
+    // Roles,
     Notification,
     Pending,
     LyTab,
     Insight,
-    Info,
-    Website,
-    Payment,
+    // Info,
+    // Website,
+    // Payment,
     Blocking,
   },
 

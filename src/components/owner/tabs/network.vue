@@ -14,7 +14,7 @@
 
         <b-col md="5" cols="7" lg="7" xl="7" sm="5">
           <p class="textt">
-            <strong class="title">  <router-link    :to="'network/'+item.id">  {{ item.name }}  </router-link> </strong> <br />
+            <strong class="title"> {{ item.name }} </strong> <br />
             {{ item.category }}
             <br />
            {{ item.followers }} {{ $t('profileowner.Community') }}<br />

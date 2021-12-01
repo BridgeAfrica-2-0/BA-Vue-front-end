@@ -703,7 +703,7 @@ export default {
     editPost(postarray) {
       this.edit_description = postarray.content;
       this.edit_image = postarray.media;
-      this.edit_id = postarray.post_id;
+      this.edit_id = postarray.post_id ? postarray.post_id : postarray.id;
 
       console.log(this.edit_image);
 
@@ -967,7 +967,6 @@ export default {
           this.reloads();
           this.page = 1;
           this.infiniteId += 1;
-          
         })
         .catch((err) => {
           if (err.response.status == 422) {
@@ -983,7 +982,7 @@ export default {
               blockClass: "custom-block-class",
             });
           }
-           loader.hide();
+          loader.hide();
         });
     },
 

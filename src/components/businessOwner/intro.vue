@@ -1,9 +1,9 @@
 <template>
 	<div>
 		<b-card title="" header-tag="header" footer-tag="footer">
-			<!-- <div style="float:right" class="edit cursor-pointer" @click="editContact">
+			<div style="float:right" class="edit cursor-pointer" v-b-modal.bv-edit-about>
 				<b-icon icon="pencil-fill" variant="primary"></b-icon>
-			</div> -->
+			</div>
 			<h6 class="mb-2"><b>{{$t("businessf.Intro")}}
 				</b></h6>
 
@@ -114,7 +114,7 @@
 		</b-card>
 
 		<b-modal
-			id="bv-modal-example2"
+			id="bv-edit-about"
 			hide-footer
 			:title="$t('businessf.Edit_Address')"
 			v-model="edit2"

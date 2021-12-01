@@ -1,149 +1,149 @@
 <template>
   <div>
-    <b-spinner
-      v-if="loader"
-      variant="primary"
-      :label="$t('search.Spinning')"
-    ></b-spinner>
+    <b-spinner v-if="loader" variant="primary" :label="$t('search.Spinning')"></b-spinner>
 
-    <b-alert
-      v-if="networks.total == 0 || networks.data.length == 0"
-      show
-      variant="warning"
-      ><a href="#" class="alert-link"
-        >{{ $t("search.No_Network_available") }}!
-      </a>
+    <b-alert v-if="networks.total == 0 || networks.data.length == 0" show variant="warning"
+      ><a href="#" class="alert-link">{{$t("search.No_Network_available")}}! </a>
     </b-alert>
 
-    <div
-      v-for="item in networks.data"
-      :key="item.id"
-      class="people-style shadow h-100"
-    >
-      <b-row>
-        <b-col md="8" xl="8" lg="12" cols="12" sm="8">
-          <div class="d-inline-flex">
-            <div class="center-img">
-              <img :src="item.image" class="r-image" />
-            </div>
-            <div class="flx100">
-              <p class="textt">
-                <strong class="title">
-                  <router-link :to="'business/' + item.id">
-                    {{ item.name }}
-                  </router-link>
-                </strong>
-                <br />
 
-                <span v-for="cat in item.category" :key="cat.name">
-                  {{ cat.name }}
-                </span>
+
+
+
+
+
+
+
+
+
+
+ <div   v-for="item in networks.data"
+      :key="item.id"  class="people-style shadow h-100">
+          <b-row>
+  
+            <b-col md="8" xl="8" lg="12" cols="12" sm="8">
+              <div class="d-inline-flex">   
+              <div class="center-img ">
+                
+                    <img :src="item.image" class="r-image" />
+                 
+              
+              </div>   <div class="flx100"> 
+              <p class="textt">
+                <strong class="title">   <router-link    :to="'business/'+item.id">    {{ item.name }}  </router-link> </strong> <br />
+               
+            <span v-for="cat in item.category" :key="cat.name">   {{cat.name}}  </span>
                 <br />
-                {{ count(item.community) }}
-                {{ $t("dashboard.Community") }} <br />
+                {{ count(item.community) }}  
+                {{ $t('dashboard.Community') }} <br />
 
                 <span class="location">
-                  <b-icon-geo-alt class="ico"></b-icon-geo-alt>
-                  {{ item.country }}
-                  <span class="ml-2"> {{ item.address }} </span>
-                </span>
+              <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{item.country}}  <span class="ml-2" >  {{item.address}} </span>   
+            </span>
                 <br />
-                <read-more
-                  more-str="read more"
-                  class="readmore"
-                  :text="item.description"
-                  link="#"
-                  less-str="read less"
-                  :max-chars="100"
-                >
-                </read-more>
+       <read-more
+              more-str="read more"
+              class="readmore"
+              :text="item.description"
+              link="#"
+              less-str="read less"
+              :max-chars="100"
+            >
+            </read-more>
               </p>
-            </div>
-          </div>
-        </b-col>
+               </div>
+               </div>
+            </b-col>     
 
-        <b-col lg="12" xl="4" md="4" cols="12" sm="4">
-          <div class="s-button">
-            <b-row>
-              <b-col
-                md="12"
-                lg="4"
-                xl="12"
-                sm="12"
-                cols="4"
-                class="mt-2 text-center"
-              >
-                <b-button
+            <b-col lg="12" xl="4" md="4" cols="12" sm="4">
+              <div class="s-button">
+                <b-row>
+                  <b-col
+                    md="12"
+                    lg="4"
+                    xl="12"
+                    sm="12"
+                    cols="4"
+                    class="mt-2 text-center"
+                  >
+                 
+
+
+                    
+
+
+
+                  <b-button
                   block
-                  size="sm"
+                  size="sm"  
                   :disabled="disable"
-                  :id="'followbtn' + item.id"
+                    :id="'followbtn'+item.id"
                   :class="item.is_follow !== 0 && 'u-btn'"
                   variant="primary"
                   @click="handleFollow(item)"
                 >
-                  <i
-                    class="fas fa-lg btn-icon"
-                    :class="
-                      item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'
-                    "
-                  ></i>
-                  <span class="btn-com ml-1">
-                    {{ $t("dashboard.Community") }}</span
+                 
+                  <i class="fas fa-lg btn-icon" :class="item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"></i>
+                  <span class="btn-com ml-1"> {{ $t('dashboard.Community') }}</span>
+                </b-button>
+
+
+
+
+
+
+
+
+                  </b-col>
+
+                  <b-col
+                    md="12"
+                    lg="4"
+                    xl="12"
+                    sm="12"
+                    cols="4"
+                    class="mt-2 text-center"
                   >
-                </b-button>
-              </b-col>
+                    
 
-              <b-col
-                md="12"
-                lg="4"
-                xl="12"
-                sm="12"
-                cols="4"
-                class="mt-2 text-center"
-              >
-                <b-button
-                  block
-                  size="sm"
-                  class="b-background shadow"
-                  variant="primary"
-                  @click="cta(item)"
-                >
-                  <i class="fas fa-envelope fa-lg btn-icon"></i>
-                  <span class="btn-text">Message</span>
-                </b-button>
-              </b-col>
+                    <b-button block size="sm" class="b-background shadow" variant="primary" @click="cta(item)">
+                      <i class="fas fa-envelope fa-lg btn-icon"></i>
+                      <span class="btn-text">Message</span>
+                    </b-button>
+                  </b-col>
 
-              <b-col
-                md="12"
-                lg="4"
-                xl="12"
-                sm="12"
-                cols="4"
-                class="mt-2 text-center"
-              >
-                <b-button
-                  block
-                  size="sm"
-                  class="b-background shadow"
-                  variant="primary"
-                >
-                  <i
-                    class="fas fa-lg btn-icon"
-                    :class="
-                      item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'
-                    "
-                  ></i>
+                  <b-col
+                    md="12"
+                    lg="4"
+                    xl="12"
+                    sm="12"
+                    cols="4"
+                    class="mt-2 text-center"
+                  >
+                    <b-button
+                      block
+                      size="sm"
+                      class="b-background shadow "
+                      variant="primary"
+                    >
+                      <i class="fas fa-lg btn-icon" :class="item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"></i>
+                      
+                      <span class="btn-text"> Join </span>
+                    </b-button>
+                  </b-col>
+                </b-row>
+              </div>
+            </b-col>
+          </b-row>
+        </div>
 
-                  <span class="btn-text"> Join </span>
-                </b-button>
-              </b-col>
-            </b-row>
-          </div>
-        </b-col>
-      </b-row>
-    </div>
 
+
+
+
+    
+
+            
     <!-- pagination -->
 
     <!-- <b-pagination
@@ -160,12 +160,14 @@
     <!-- End pagination -->
 
     <b-modal id="modal-sm" size="sm" hide-header>
-      {{ $t("search.Do_you_want_to_join_this_network") }}?
+      {{$t("search.Do_you_want_to_join_this_network")}}?
     </b-modal>
   </div>
 </template>
 
 <script>
+
+import moment from "moment";
 import axios from "axios";
 
 export default {
@@ -199,7 +201,8 @@ export default {
       // this.networkSearch();
     },
 
-    count(number) {
+
+     count(number) {
       if (number >= 1000000) {
         return number / 1000000 + "M";
       }
@@ -208,28 +211,43 @@ export default {
       } else return number;
     },
 
-    async handleFollow(user) {
-      document.getElementById("followbtn" + user.id).disabled = true;
 
+
+
+
+
+     async handleFollow(user) {
+
+      document.getElementById("followbtn"+user.id).disabled = true;
+       
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
         id: user.id,
-        type: "network",
+        type: 'network',
       };
 
       await axios
         .post(uri, data)
-        .then((response) => {
+        .then(response => {
+
           console.log(response);
           user.is_follow = nextFollowState;
-          document.getElementById("followbtn" + user.id).disabled = false;
+         document.getElementById("followbtn"+user.id).disabled = false;
+            
         })
-        .catch((err) => {
-          console.log(err);
-          document.getElementById("followbtn" + user.id).disabled = false;
+        .catch(err =>{  
+          
+          console.log(err)  ;
+           document.getElementById("followbtn"+user.id).disabled =  false;
+          
         });
+         
     },
+
+
+
+
   },
 };
 </script>

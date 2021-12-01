@@ -27,7 +27,7 @@
         @close="cancel"
       >
         <div>
-        
+          <FlashMessage />
           <form-wizard @on-complete="createBusiness">
             <tab-content :title="$t('profileowner.Business_Indentity')">
               <div class="form-card">
@@ -400,7 +400,7 @@
         @hidden="cancel"
       >
         <div>
-         
+          <FlashMessage />
           <form-wizard @on-complete="updateBusiness">
             <tab-content :title="$t('profileowner.Business_Indentity')">
               <div class="form-card">
@@ -755,9 +755,6 @@
 
       <!-- end of update modal -->
 
-     
-
-
       <div class="row ">
         <div class="col">
           <h6 class="mb-0"><b></b></h6>
@@ -766,7 +763,7 @@
               md="12"
               lg="6"
               class="p-0 mb-2"
-              v-for="business in profileBusinesss"
+              v-for="business in profilebusiness"
               :key="business.business_id"
             >
               <div class="people-style shadow h-100 ">
@@ -849,7 +846,7 @@
               </div>
             </b-col>
             
-          </b-row>   
+          </b-row>
 
           <infinite-loading
             :identifier="infiniteId"
@@ -860,7 +857,7 @@
       </div>
     </div>
   </div>
-</template>   
+</template>
 
 <script>
 import axios from "axios";
@@ -879,8 +876,8 @@ export default {
       useas: "",
       page: 1,
       bizId: "",
-       profileBusinesss:[],
-      infiniteId: +new Date(),
+       profileBusiness:[],
+      infiniteId: 2,
       profilebusiness:[],
       editbiz: "",
       selectedusecase: "",
@@ -959,13 +956,12 @@ export default {
   },
 
   methods: {
-
-  
-
     infiniteHandler($state) {
       console.log("loading started");
 
-     
+      if (this.page == 1) {
+        this.profilebusiness.splice(0);
+      }
       let url = "business/user?page="+this.page;
       
       this.$store
@@ -974,8 +970,8 @@ export default {
           console.log(data);
           if (data.data.length) {
             this.page += 1;
-              
-            this.profileBusinesss.push(...data.data);
+
+            this.profilebusiness.push(...data.data);
             $state.loaded();
           } else {
             $state.complete();
@@ -1017,11 +1013,8 @@ export default {
 
           loader.hide();
 
-         this.page = 1;
+          this.page = 1;
           this.infiniteId += 1;
-          this.profileBusinesss=[];
-           this.$refs.infiniteLoading.attemptLoad();
-
 
           this.flashMessage.show({
             status: "success",
@@ -1216,7 +1209,7 @@ export default {
         });
     },
 
-    profileBusiness() {
+    old_profileBusiness() {
       this.$store
         .dispatch("profile/profileBusiness")
         .then(() => {
@@ -1401,7 +1394,7 @@ export default {
             console.log(response);
 
             this.sendingB = false;
-            // this.profileBusiness();
+            this.profileBusiness();
 
             this.$refs["createBusinessModal"].hide();
             this.flashMessage.show({
@@ -1411,12 +1404,8 @@ export default {
             });
 
             loader.hide();
-            
             this.page = 1;
-          this.infiniteId += 1;
-          this.profileBusinesss=[];
-           this.$refs.infiniteLoading.attemptLoad();
-
+            this.infiniteId += 1;
 
             resolve(true);
           })
@@ -1498,7 +1487,7 @@ export default {
             console.log(response);
 
             this.sendingB = false;
-           // this.profileBusiness();
+            this.profileBusiness();
 
             this.$refs["updateBusinessModal"].hide();
             this.flashMessage.show({
@@ -1508,10 +1497,8 @@ export default {
             });
 
             loader.hide();
-           this.page = 1;
-          this.infiniteId += 1;
-          this.profileBusinesss=[];
-           this.$refs.infiniteLoading.attemptLoad();
+            this.page = 1;
+            this.infiniteId += 1;
 
             resolve(true);
           })

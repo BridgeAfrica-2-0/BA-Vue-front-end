@@ -4,19 +4,10 @@
     <b-card class="px-md-3 mb-3 mt-2">
       <b-row class="mt-2">
         <b-col cols="3" md="1" class="m-md-0 p-md-0">
-          <b-avatar
-            variant="primary"
-            class="img-fluid avat-comment"
-            :src="business_logo"
-          ></b-avatar>
+          <b-avatar variant="primary" class="img-fluid avat-comment" :src="business_logo"></b-avatar>
         </b-col>
         <b-col cols="9" md="11" class="p-0 m-0 pr-3">
-          <input
-            :placeholder="$t('network.Post_a_business_update')"
-            v-b-modal.modal-xl
-            class="comment"
-            type="text"
-          />
+          <input :placeholder="$t('network.Post_a_business_update')" v-b-modal.modal-xl class="comment" type="text" />
           <fas-icon class="primary send-cmt" :icon="['fas', 'paper-plane']" />
         </b-col>
       </b-row>
@@ -42,12 +33,8 @@
                 @click="$refs.movie.click()"
                 class="post-btn"
               >
-                <fas-icon
-                  class="icons"
-                  :icon="['fas', 'photo-video']"
-                  size="lg"
-                />
-                <span class="username"> {{ $t("network.Photo_Video") }} </span>
+                <fas-icon class="icons" :icon="['fas', 'photo-video']" size="lg" />
+                <span class="username"> {{ $t('network.Photo_Video') }} </span>
               </b-button>
             </b-col>
             <!-- Attach File-->
@@ -87,13 +74,13 @@
           </b-row>
         </b-col>
       </b-row>
-      <div v-if="postStatus != 'member'" class="pending-post-view pt-2 mt-3">
+      <div class="pending-post-view pt-2 mt-3">
         <p>
-          {{$t("network.Your")}} {{pendingPost.data}} {{$t("network.Posts_are_pending_for_approval")}}.&nbsp;&nbsp;&nbsp;&nbsp;
-          <a
-            @click="this.selectedIdd = '4', this.tabIndex = '5'"
-            style="color: #e75c18; text-decoration: underline; cursor:pointer"
-          >{{ $t("network.View_All") }}</a>
+          {{ $t('network.Your_3_Post_s_are_pending_for_approval') }}.&nbsp;&nbsp;&nbsp;&nbsp;<a
+            @click="this.$router.push({ name: '/pendingPost' })"
+            style="color: #e75c18; text-decoration: underline"
+            >{{ $t('network.View_All') }}</a
+          >
         </p>
       </div>
     </b-card>
@@ -274,10 +261,7 @@
 
                 <div v-for="movie in createPost.movies" :key="movie.fileName" class="">
                   <div id="preview">
-                    <span
-                      class="upload-cancel"
-                      @click="deleteItem(movie.fileName)"
-                    >
+                    <span class="upload-cancel" @click="deleteItem(movie.fileName)">
                       <b-icon icon="x-circle" class="oorange"> </b-icon>
                     </span>
 
@@ -357,7 +341,6 @@ import Post from '@/components/businessOwner/ownerPostComponent';
 export default {
   name: 'postNetwork',
   mixins: [AllPostFeatureMixin],
-  props: ["postStatus"],
   components: {
     Post,
   },
@@ -377,11 +360,10 @@ export default {
       edit_id: null,
       comments: [],
       fullPage: false,
-      pendingPost:"",
 
       createPost: {
         // profile_picture: this.$store.getters.getProfilePicture,
-        postNetworkUpdate: "",
+        postNetworkUpdate: '',
         movies: [],
         hyperlinks: [],
       },
@@ -392,11 +374,11 @@ export default {
 
   computed: {
     ...mapGetters({
-      profile: "auth/profilConnected",
+      profile: 'auth/profilConnected',
     }),
 
     imageProfile() {
-      return "yoo";
+      return 'yoo';
     },
 
     business_logo() {
@@ -406,39 +388,23 @@ export default {
       return this.$store.state.networkProfile.ownerPost;
     },
     profileNamePost() {
-      return "yoo";
+      return 'yoo';
     },
   },
 
   created() {
     this.getAuth();
     this.url = this.$route.params.id;
-    this.AllPendingPost()
   },
 
   beforeCreate() {
-    this.$repository.share.switch(this.$route.params.id, "network");
+    this.$repository.share.switch(this.$route.params.id, 'network');
   },
 
   methods: {
     ...mapMutations({
-      auth: "auth/profilConnected",
+      auth: 'auth/profilConnected',
     }),
-
-    
-    AllPendingPost() {
-      console.log("AllPendingPost");
-      this.axios
-        .get("network/"+this.url+"/post/count-pending-posts")
-        .then(({ data }) => {
-          console.log("AllPendingPost yeahh");
-          console.log(data);
-          this.pendingPost = data;
-        })
-        .catch((err) => {
-          console.log({ err: err });
-        });
-    },
 
     mapmediae(media) {
       let mediaarr = [];
@@ -475,9 +441,7 @@ export default {
     },
 
     async getAuth() {
-      const response = await this.$repository.share.WhoIsConnect({
-        networkId: this.$route.params.id,
-      });
+      const response = await this.$repository.share.WhoIsConnect({ networkId: this.$route.params.id });
 
       if (response.success) this.auth(response.data);
     },
@@ -488,7 +452,7 @@ export default {
       }
 
       this.axios
-        .get("network/show/post/" + this.url + "/" + this.page)
+        .get('network/show/post/' + this.url + '/' + this.page)
         .then(({ data }) => {
           if (data.data.length) {
             this.page += 1;
@@ -551,7 +515,7 @@ export default {
       this.edit_image = postarray.media;
       this.edit_id = postarray.id;
 
-      this.$refs["modal-edit"].show();
+      this.$refs['modal-edit'].show();
     },
 
     updatePost() {
@@ -559,58 +523,55 @@ export default {
       this.fileImageArr = this.createPost.movies;
       let formData2 = new FormData();
       this.delete.forEach((value, index) => {
-        formData2.append("deleteImg[" + index + "]", value.id);
+        formData2.append('deleteImg[' + index + ']', value.id);
       });
       this.fileImageArr.forEach((value, index) => {
-        formData2.append("media[" + index + "]", value.target.files[0]);
+        formData2.append('media[' + index + ']', value.target.files[0]);
       });
-      formData2.append("type", "image");
-      formData2.append("content", this.edit_description);
-      formData2.append("networkId", this.$route.params.id);
+      formData2.append('type', 'image');
+      formData2.append('content', this.edit_description);
+      formData2.append('networkId', this.$route.params.id);
       this.axios
-        .post("network/edit/post/" + this.edit_id, formData2, {
+        .post('network/edit/post/' + this.edit_id, formData2, {
           headers: {
-            "Content-Type": "multipart/form-data",
+            'Content-Type': 'multipart/form-data',
           },
         })
         .then(() => {
-          this.$store.state.networkProfile.ownerPost.splice(
-            0,
-            this.$store.state.networkProfile.ownerPost.length
-          );
+          this.$store.state.networkProfile.ownerPost.splice(0, this.$store.state.networkProfile.ownerPost.length);
           this.ownerPost();
         })
         .then(() => {
           this.page = 1;
           this.infiniteId += 1;
           this.flashMessage.show({
-            status: "success",
-            blockClass: "custom-block-class",
-            message: "Content successfuly uploaded",
+            status: 'success',
+            blockClass: 'custom-block-class',
+            message: 'Content successfuly uploaded',
           });
           this.loading = false;
           // loader.hide();
-          this.$refs["modal-edit"].hide();
+          this.$refs['modal-edit'].hide();
         })
         .catch((err) => {
           console.log(err);
           this.flashMessage.show({
-            status: "error",
-            message: "Unable to Update your post",
-            blockClass: "custom-block-class",
+            status: 'error',
+            message: 'Unable to Update your post',
+            blockClass: 'custom-block-class',
           });
 
           // loader.hide()
-          this.$refs["modal-edit"].hide();
+          this.$refs['modal-edit'].hide();
         });
     },
 
     chooseImage: function () {},
     chooseVideo: function () {
-      document.getElementById("chosefile").click();
+      document.getElementById('chosefile').click();
     },
     chooseDocument() {
-      document.getElementById("chosefile").click();
+      document.getElementById('chosefile').click();
     },
 
     selectMovies(event) {
@@ -680,19 +641,15 @@ export default {
         document: this.service(event.target),
         fileName: event.target.files[0].name,
       });
-      this.$refs["modal-xl"].show();
+      this.$refs['modal-xl'].show();
     },
     createPost_() {
-      this.$refs["modal-xl"].show();
+      this.$refs['modal-xl'].show();
     },
 
     deleteItem(name) {
-      const newHyperlinks = this.createPost.hyperlinks.filter(
-        (item) => item.fileName.trim() !== name.trim()
-      );
-      const movies = this.createPost.movies.filter(
-        (item) => item.fileName.trim() !== name.trim()
-      );
+      const newHyperlinks = this.createPost.hyperlinks.filter((item) => item.fileName.trim() !== name.trim());
+      const movies = this.createPost.movies.filter((item) => item.fileName.trim() !== name.trim());
       this.createPost.hyperlinks = [...newHyperlinks];
       this.createPost.movies = [...movies];
     },
@@ -705,14 +662,14 @@ export default {
     },
 
     onCancel() {
-      console.log("User cancelled the loader.");
+      console.log('User cancelled the loader.');
     },
 
     ownerPost() {
       this.$store
-        .dispatch("networkProfile/ownerPost", this.url)
+        .dispatch('networkProfile/ownerPost', this.url)
         .then(() => {
-          console.log("hey yeah");
+          console.log('hey yeah');
         })
         .catch((err) => {
           console.log({ err: err });
@@ -728,19 +685,19 @@ export default {
       //console.log(this.fileImageArr)
 
       this.fileImageArr.forEach((value, index) => {
-        formData2.append("media[" + index + "]", value.target.files[0]);
+        formData2.append('media[' + index + ']', value.target.files[0]);
         console.log(value);
         console.log(value.target.files[0]);
-        console.log("testingggg");
+        console.log('testingggg');
       });
 
-      formData2.append("type", "image");
+      formData2.append('type', 'image');
       //formData2.append("media", this.createPost.hyperlinks);
-      formData2.append("content", this.createPost.postNetworkUpdate);
+      formData2.append('content', this.createPost.postNetworkUpdate);
       await this.axios
-        .post("network/post/create/" + this.url, formData2, {
+        .post('network/post/create/' + this.url, formData2, {
           headers: {
-            "Content-Type": "multipart/form-data",
+            'Content-Type': 'multipart/form-data',
           },
 
           onUploadProgress: function (progressEvent) {
@@ -750,9 +707,9 @@ export default {
         // .then(() => this.ownerPost())
         .then((res) => {
           this.flashMessage.show({
-            status: "success",
-            blockClass: "custom-block-class",
-            message: "Content successfuly uploaded",
+            status: 'success',
+            blockClass: 'custom-block-class',
+            message: 'Content successfuly uploaded',
           });
           // loader.hide()
           this.$refs['modal-xl'].hide();
@@ -767,16 +724,16 @@ export default {
             console.log({ err: err });
             console.log(err.response.data.message);
             this.flashMessage.show({
-              status: "error",
+              status: 'error',
               message: err.response.data.message,
-              blockClass: "custom-block-class",
+              blockClass: 'custom-block-class',
             });
             // loader.hide()
           } else {
             this.flashMessage.show({
-              status: "error",
-              message: "Unable to Create Your Post",
-              blockClass: "custom-block-class",
+              status: 'error',
+              message: 'Unable to Create Your Post',
+              blockClass: 'custom-block-class',
             });
             console.log({ err: err });
           }
@@ -785,16 +742,16 @@ export default {
     },
 
     showModal() {
-      this.$refs["modal-3"].show();
+      this.$refs['modal-3'].show();
     },
     hideModal() {
-      this.$refs["modal-3"].hide();
+      this.$refs['modal-3'].hide();
     },
     resetPostData() {
       if (!this.isSubmitted) {
         this.createPost.hyperlinks = [];
         this.createPost.movies = [];
-        this.createPost.postNetworkUpdate = "";
+        this.createPost.postNetworkUpdate = '';
       }
     },
   },

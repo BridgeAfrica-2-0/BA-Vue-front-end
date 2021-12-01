@@ -159,7 +159,7 @@ export default {
       listTag = listTag.substring(1);
 
       let data = {
-        networkId: this.$route.params.id,
+        network_id: 1,
         keywork: listTag,
       };
       //this.$store.commit("keywordOperationOnNetwork/setListKeyWord", data);

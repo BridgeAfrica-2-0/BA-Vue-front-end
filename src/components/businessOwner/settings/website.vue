@@ -69,6 +69,7 @@
                 <b-col><b-button variant="primary" @click="confirmPayment" :disabled="bntStatus">Free</b-button></b-col>
               </b-row>
             </b-col>
+            <FlashMessage />
           </b-row>
         </b-modal>
 
@@ -228,6 +229,7 @@
           <div v-else class="text-center">
             <h3><b>🥳❗Transaction Completed❗🥳</b></h3>
           </div>
+          <FlashMessage />
         </b-modal>
 
         <!-- Delete Account -->

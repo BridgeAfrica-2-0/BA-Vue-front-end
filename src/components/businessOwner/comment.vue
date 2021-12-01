@@ -9,12 +9,8 @@
         } avat-comment b-r`"
       ></b-avatar>
 
-      <div class="msg text" v-if="!proccesEdit">
-        <span
-          class="float-right"
-          style="margin-right: -10px"
-          v-if="isYourComment"
-        >
+      <div class="msg text" v-if="!isEditMode">
+        <span class="float-right" style="margin-right: -10px">
           <b-dropdown size="sm" variant="outline primary " class="primary">
             <template class="more" #button-content> </template>
             <b-dropdown-item @click="toggle">Edit</b-dropdown-item>
@@ -22,13 +18,14 @@
           </b-dropdown>
         </span>
 
-        <p class="username mb-0">
+        <p class="username mb-0" v-if="!isEditMode">
           <router-link :to="{ name: 'Follower', params: { id: comment.id } }">
             {{ comment.name }} <i>{{ comment.created_at | date }}</i>
           </router-link>
         </p>
 
         <read-more
+          v-if="!isEditMode"
           more-str="read more"
           :text="comment.comment"
           link="#"
@@ -39,13 +36,14 @@
         </read-more>
       </div>
 
-      <div class="p-0 m-0 pr-3 inline-comment" v-else>
+      <!-- Edit message -->
+      <p class="p-0 m-0 pr-3 inline-comment msg text" v-if="isEditMode">
         <input
           placeholder="Edit a Comment"
           class="comment"
           type="text"
           v-model="text"
-          @keypress.enter="onUpdate"
+          @keypress.enter="onProcess"
           v-on:blur="toggle"
         />
         <b-spinner
@@ -55,20 +53,27 @@
         <fas-icon
           class="primary send-cmt"
           :icon="['fas', 'paper-plane']"
-          @click="onUpdate"
+          @click="onProcess"
           v-if="text.trim().length >= 1 && !loading"
         />
-      </div>
+      </p>
+      <!-- End Edit message -->
 
-      <b-icon
-        :icon="icon"
-        variant="primary"
-        aria-hidden="true"
-        @click="onLike"
-        class="cursor"
-      ></b-icon>
-      {{ comment.comment_likes | nFormatter }}
-      <span @click="showReply" class="primary ml-2 reply"><b>Reply</b></span>
+      <span v-if="!isEditMode">
+        <b-icon
+          :icon="icon"
+          variant="primary"
+          aria-hidden="true"
+          @click="onLike"
+          class="cursor"
+        ></b-icon>
+        {{ comment.comment_likes | nFormatter }}
+      </span>
+
+      <span v-if="!isEditMode" @click="showReply" class="primary ml-2 reply"
+        ><b>Reply</b></span
+      >
+
       <div v-if="reply">
         <b-row class="mt-2">
           <b-col cols="1">
@@ -131,20 +136,21 @@
 
 <script>
 import Reply from "./commentReply.vue";
-import { commentMixinsBuisness, NoMoreDataForComment } from "@/mixins";
-
-import { date } from "@/helpers";
-
 import Loader from "@/components/Loader";
+
+import { commentMixinsBuisness, NoMoreDataForComment } from "@/mixins";
+import { date, formatNumber } from "@/helpers";
 
 export default {
   mixins: [commentMixinsBuisness, NoMoreDataForComment],
+
   components: {
     Reply,
     Loader,
   },
 
   props: ["item", "uuid", "profileID", "onDelete"],
+
   data() {
     return {
       reply: false,
@@ -157,6 +163,12 @@ export default {
 
   filters: {
     date,
+    nFormatter: function (value) {
+      // return (this.proccesEdit ? (this.isYourComment ? true : false) : false)
+      //   ? ""
+      //   : formatNumber(value);
+      return formatNumber(value);
+    },
   },
 
   computed: {
@@ -166,8 +178,16 @@ export default {
         this.profile.user_type == this.comment.user_type
       );
     },
+
+    isEditMode() {
+      return this.proccesEdit ? (this.isYourComment ? true : false) : false;
+    },
   },
   methods: {
+    onProcess() {
+      this.$emit("update-comment", this.text);
+    },
+
     toggle() {
       if (!this.proccesEdit) this.text = "";
       else this.text = this.comment.comment;

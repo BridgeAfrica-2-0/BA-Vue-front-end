@@ -1,5 +1,6 @@
 <template>
   <b-container>
+    <FlashMessage />
     <h5 class="a-text">{{ $t('network.Assign_Role') }}</h5>
 
     <b-container class="b-bottom">

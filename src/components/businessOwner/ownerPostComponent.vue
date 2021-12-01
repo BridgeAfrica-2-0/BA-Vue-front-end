@@ -16,7 +16,6 @@
           <h5 class="m-0 usernamee">
             {{ item.user_name }}
           </h5>
-
           <p class="durationn">{{ item.created_at | now }}</p>
         </div>
 
@@ -131,13 +130,13 @@
             ><b-icon :icon="icon" variant="primary" aria-hidden="true"></b-icon>
             {{ item.likes_count | nFormatter }}
           </span>
-          <span class="cursor" @click="toggle"
+          <span class="cursor"
             ><b-icon
               icon="chat-fill"
               variant="primary"
               aria-hidden="true"
             ></b-icon>
-            {{ item.comment_count | nFormatter }}
+            {{ item.comment_count | nFormatter }} 
           </span>
           <ShareButton :post="item" :type="'profile'" v-if="canBeDelete" />
         </b-col>
@@ -188,7 +187,7 @@
       :key="comment.comment_id"
       :item="comment"
       :uuid="post.post_id"
-      onDelete="onDelete(comment.comment_id)"
+      :onDelete="() => onDelete(comment.comment_id)"
       @update-comment="(text) => onUpdate({ uuid: comment.comment_id, text })"
     />
     <Loader v-if="loadComment" />
@@ -262,6 +261,7 @@ export default {
 
   created() {
     this.item = this.post;
+    this.comments = this.post.comments
   },
 
   filters: {
@@ -294,18 +294,40 @@ export default {
 
       if (request.success) {
         this.comments = this.comments.filter((e) => e.comment_id == uuid);
+        this.item.comment_count -= 1;
+
+        this.flashMessage.show({
+          status: "success",
+          blockClass: "custom-block-class",
+          message: "Comment Deleted",
+        });
       } else {
-        console.log("error");
+        this.flashMessage.show({
+          status: "success",
+          blockClass: "custom-block-class",
+          message: "Something wrong happen. Try again",
+        });
       }
     },
 
     onUpdate: async function ({ uuid, text }) {
-      const request = await this.$repository.post.delete({ uuid, text });
+      const request = await this.$repository.post.update({ uuid, text });
 
       if (request.success) {
-        this.comments = this.comments.filter((e) => e.comment_id == uuid);
+        this.comments = this.comments.map((e) =>
+          e.comment_id == uuid ? response.data : e
+        );
+        this.flashMessage.show({
+          status: "success",
+          blockClass: "custom-block-class",
+          message: "Comment Deleted",
+        });
       } else {
-        console.log("error");
+        this.flashMessage.show({
+          status: "success",
+          blockClass: "custom-block-class",
+          message: "Something wrong happen. Try again",
+        });
       }
     },
 
@@ -353,7 +375,7 @@ export default {
       });
 
       if (request.success) {
-        this.onShowComment();
+        this.comments = [request.data,...this.comments]
         this.comment = "";
         this.addNewComment({ action: "add:comment:count", uuid: this.post.id });
         this.post = {

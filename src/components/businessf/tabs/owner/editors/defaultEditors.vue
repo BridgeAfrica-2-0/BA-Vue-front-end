@@ -46,7 +46,7 @@ import MemberNetwork from '@/components/businessf/tabs/owner/editors/memberEdito
 
 import Members from '@/components/businessf/tabs/owner/editors/member';
 
-import PostNetwork from '@/components/businessf/tabs/owner/networks/postNetwork';
+import PostNetwork from '@/components/businessf/tabs/owner/editors/postEditor';
 
 export default {
   name: 'default',

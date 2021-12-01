@@ -1,6 +1,6 @@
 .<template>
   <div id="app" class="" ref="formContainer">
-    <div id="flashmessage"><FlashMessage /></div>
+
     <transition
       name="fade"
       mode="out-in"
@@ -8,9 +8,9 @@
       @enter="enter"
       @afterEnter="afterEnter"
     >
-      <router-view />
+     <router-view />
     </transition>
-   
+
   </div>
 </template>
 <script>

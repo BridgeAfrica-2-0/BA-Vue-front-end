@@ -36,9 +36,7 @@ export default {
     UpdateInfomation({ commit }, businessData) {
       return axios
         .patch(businessData.path, businessData.data, {
-          headers: {
-            'Content-Type': 'multipart/form-data'
-          }
+          headers: { "Content-Type": "multipart/form-data" },
         })
         .then(({ data }) => {
           return data;

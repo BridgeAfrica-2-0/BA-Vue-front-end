@@ -120,6 +120,7 @@
             "no-console": "off",
             "no-unused-vars": "off"
         }
+
     },
     "browserslist": [
         "> 1%",

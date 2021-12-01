@@ -8,7 +8,7 @@
       @enter="enter"
       @afterEnter="afterEnter"
     >
-      <router-view />
+     
     </transition>
    
   </div>

@@ -20,10 +20,10 @@
         >
           <div class="col">
             <span class="mr-auto">
-              <b>{{ $t('profileowner.School_Name') }} : {{ education.school_name }}</b>
+              <b> {{ education.school_name }}</b>
             </span>
             <span>
-           <br>   <b>   {{ $t('profileowner.Major') }}  {{ education.major_subjects }}  </b>
+           <br>      {{ $t('profileowner.Major') }} : {{ education.major_subjects }} 
             </span>
 
             <p>
@@ -141,7 +141,7 @@
         class="mb-2"
       ></b-form-datepicker>
 
-      <label>To</label>
+      <label>{{ $t('profileowner.To') }}</label>
       <b-form-datepicker
         id="example-datepicker"
         v-model="educationInput.durationTo"
@@ -165,9 +165,9 @@ export default {
     return {
       editData:[],
       options: [
-        { value: null, text: "Select" },
-        { value: "private", text: "Private" },
-        { value: "public", text: "Public" }
+        { value: null, text: this.$t('profileowner.Select') },
+        { value: "private", text: this.$t('profileowner.Private') },
+        { value: "public", text: this.$t('profileowner.Public') }
       ],
       // educations: [],
       educationInput: {

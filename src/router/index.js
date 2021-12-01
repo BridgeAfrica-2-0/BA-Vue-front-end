@@ -2,7 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 //import Home from "../views/home.vue";
 import Login from "../views/login.vue";
-
+import home1 from "@/views/home1.vue";
 import signup from "../views/signup.vue";
 
 import RecoverPass1 from "../views/recoverPassword1.vue";
@@ -31,7 +31,7 @@ import businessVisitor from "@/views/businessVisitor";
 import search from "@/views/search";
 import forgotPassword from "@/views/forgotPassword";
 import navMessage from "@/views/navMessaging";
-import Blec from "@/views/blec";
+
 import memberNetworkFollower from "@/views/memberNetworkFollower";
 import memberNetwork from "@/views/memberNetwork";
 
@@ -48,14 +48,14 @@ import dashboard from "@/views/dashboard";
 import myorders from "@/views/myOders"
 import notFound from "@/components/404"
 
-
-
 import welcome from "@/views/welcome";
 
 import ordersdetail from "@/views/odersDetail";
 import businessordersdetail from "@/views/businessordersdetail"
 import businessOwnerOrders from "@/views/businessOwnerOrders"
 import payment from "@/views/payment";
+import about from "@/views/about";
+import contact from "@/views/contact";
 import cart from "@/views/card";
 
 
@@ -67,6 +67,12 @@ const routes = [
     name: "notFound",
     component: notFound,
   },
+  {
+    path: "/cart",
+    name: "cart",
+    component: cart,
+  },
+
 
   {
     path: "/myorders/detail",
@@ -77,12 +83,51 @@ const routes = [
     // },
   },
 
-  
+  {
+    path: "/",
+    name: "home1",
+    component: home1,
+
+  },
+  {
+    path: "/cart",
+    name: "cart",
+    component: cart,
+
+  },
+  {
+    path: '/about',
+    name: 'about',
+    component: about,
+    // meta: {
+    //   auth: true,
+    // },
+  },
+  {
+    path: '/contact',
+    name: 'contact',
+    component: contact,
+    // meta: {
+    //   auth: true,
+    // },
+  },
+
+  {
+    path: "/market",
+    name: "market",
+    component: market,
+  },
+  {
+    path: "/checkout",
+    name: "payment",
+    component: payment
+  },
+
   {
     path: "/businessOwnerOrders",
     name: "businessOwnerOrders",
     component: businessOwnerOrders,
-  
+
   },
 
   {
@@ -101,12 +146,9 @@ const routes = [
     //   auth: true,
     // },
   },
-  
-
-  
   {
-    path: "/",
-    name: "home",
+    path: "/dashboard",
+    name: "dashboard",
     component: dashboard,
     meta: {
       auth: true,
@@ -125,11 +167,6 @@ const routes = [
   },
 
 
-  // {
-  //   path: "/govx",
-  //   name: "govx",
-  //   component: govx,
-  // },
 
   {
     path: "/welcome",
@@ -144,12 +181,6 @@ const routes = [
     path: "/settings",
     name: "settings",
     component: settings,
-  },
-
-  {
-    path: "/dashboard",
-    name: "dashboard",
-    component: dashboard,
   },
 
   {
@@ -260,47 +291,22 @@ const routes = [
     name: "BusinessFollower",
     component: businessFollower,
   },
+
+  {
+    path: "/business/:id?",
+    name: "BusinessFollower",
+    component: businessFollower,
+  },
+
+
   {
     path: "/businessvisitor",
     name: "BusinessVisitor",
     component: businessVisitor,
   },
-  {
-    path: "/services/create",
-    name: "Create",
-    component: createService,
-    beforeEnter: (to, from, next) => {
-      if (store.state.login) {
-        next();
-      } else {
-        next({ name: "Login" });
-      }
-    },
-  },
-  {
-    path: "/services/:id",
-    name: "Service",
-    component: service,
-  },
-  {
-    path: "/services/modify/:id",
-    name: "Modify",
-    component: Modifier,
-    beforeEnter: (to, from, next) => {
-      console.log("dedans");
-      if (store.state.login && store.state.isToi) {
-        next();
-      } else {
-        next({ name: "Login" });
-      }
-    },
-  },
+  
+  
 
-  {
-    path: "/profile/:id?",
-    name: "Follower",
-    component: Follower,
-  },
   {
     path: "/profilevisitor",
     name: "visitor",
@@ -308,6 +314,27 @@ const routes = [
   },
   {
     path: "/search/:id",
+    name: "Search",
+    component: search,
+  },
+
+  {
+    path: "/services/:id",
+    name: "Service",
+    component: service,
+  },
+
+  {
+    path: "/profile/:id?",
+    name: "Follower",
+    component: Follower,
+    meta: {
+      auth: true,
+    },
+  },
+
+  {
+    path: "/search",
     name: "Search",
     component: search,
   },
@@ -321,95 +348,59 @@ const routes = [
     name: "Nav Meassage",
     component: navMessage,
   },
-//},
 {
   path: "/services/:id",
   name: "Service",
   component: service,
 },
-{
-  path: "/services/modify/:id",
-  name: "Modify",
-  component: Modifier,
-  beforeEnter: (to, from, next) => {
-    console.log("dedans");
-    if (store.state.login && store.state.isToi) {
-      next();
-    } else {
-      next({ name: "Login" });
-    }
+
+    
+  {
+    path: "/memberNetwork/:id?",
+    name: "memberNetwork",
+    component: memberNetwork,
   },
-},
 
-{
-  path: "/profile/:id?",
-  name: "Follower",
-  component: Follower,
-  meta: {
-    auth: true,
+  {
+    path: "/memberNetworkFollower/:id?",
+    name: "Membar Network Follower",
+    component: memberNetworkFollower,
+
   },
-},
-{
-  path: "/profilevisitor",
-  name: "visitor",
-  component: Visitor,
-},
-{
-  path: "/search",
-  name: "Search",
-  component: search,
-},
-{
-  path: "/forgotpass",
-  name: "ForgotPassword",
-  component: forgotPassword,
-},
-{
-  path: "/messaging",
-  name: "Nav Meassage",
-  component: navMessage,
-},
 
-{
-  path: "/memberNetwork/:id?",
-  name: "memberNetwork",
-  component: memberNetwork,
-},
-
-{
-  path: "/memberNetworkFollower/:id?",
-  name: "Membar Network Follower",
-  component: memberNetworkFollower,
-},
-
+  {
+    path: "*",
+    name: "notFound",
+    component: notFound,
+  },
 
 ];
 
 const router = new VueRouter({
-  mode: "history",
-  base: process.env.BASE_URL,
-  routes,
+    mode: "history",
+    base: process.env.BASE_URL,
+    routes,
 });
 
 router.beforeEach((to, from, next) => {
-  const loggedIn = localStorage.getItem("user");
+    const loggedIn = localStorage.getItem("user");
 
-  if (to.matched.some((record) => record.meta.auth) && !loggedIn) {
-    next("/login");
+    if (to.matched.some((record) => record.meta.auth) && !loggedIn) {
+        next("/login");
 
-    return;
-  }
-
-  if (to.matched.some((record) => record.meta.auth)) {
-    const dat = localStorage.getItem("user");
-    const userdata = JSON.parse(dat);
-
-    if (userdata.user.verified_at == null) {
-      //  next("/verify");
+        return;
     }
-  }
 
-  next();
+    if (to.matched.some((record) => record.meta.auth)) {
+        const dat = localStorage.getItem("user");
+        const userdata = JSON.parse(dat);
+
+        if (userdata.user.verified_at == null) {
+            //  next("/verify");
+        }
+    }
+
+    next();
 });
 
 export default router;

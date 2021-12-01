@@ -13,7 +13,7 @@
           label-class="font-weight-bold pt-0 username"
           class="mb-0"
         >
-          <country-select v-model="country" :country="country" topCountry="US" class="form-control text" />
+          <country-select v-model="PaymentForm.country" :country="country" topCountry="US" class="form-control text" />
         </b-form-group>
       </b-container>
     </div>
@@ -21,8 +21,8 @@
     <br />
 
     <b-container class="payment-type">
-
       <b-card>
+        <!-- {{defaultPayment}} -->
         <div class="">
 
           <div class="my-4 operator">
@@ -33,20 +33,17 @@
               />
             </div>
             <div class="operator-name">
-              <p class="mb-0 mx-4 title-font-size font-weight-bold">
-                MTN Mobile Money
-              </p>
+              <p class="mb-0 mx-4 title-font-size font-weight-bold">MTN Mobile Money</p>
             </div>
             <div class="operator-select-box">
               <b-form-radio
-                v-model="operator"
+                v-model="PaymentForm.operator"
                 name="operator"
                 value="MTN"
                 class="operator-select"
               ></b-form-radio>
             </div>
           </div>
-
           <div class="my-4 operator">
             <div class="">
               <img
@@ -59,7 +56,7 @@
             </div>
             <div class="operator-select-box">
               <b-form-radio
-                v-model="operator"
+                v-model="PaymentForm.operator"
                 name="operator"
                 value="ORANGE"
                 class="operator-select"
@@ -74,9 +71,7 @@
               />
             </div>
             <div class="operator-name">
-              <p class="mb-0 mx-4 title-font-size font-weight-bold">
-                Express Union
-              </p>
+              <p class="mb-0 mx-4 title-font-size font-weight-bold">Express Union</p>
             </div>
             <div class="operator-select-box ml-md-2">
               <b-form-radio
@@ -87,52 +82,39 @@
               ></b-form-radio>
             </div>
           </div>
-
           <div class="row p-2">
             <div class="col">
               <button
-                @click="requestPayment"
+                @click="AcRequestPayment = true"
                 class="float-right btn-custom p-2 btn btn-primary mt-2"
               > Confirm Payment</button>
             </div>
           </div>
         </div>
       </b-card>
-
-
-
       <div class="mb-0">
         <p class="text">Your payment information is secure</p>
       </div>
     </b-container>
-    <b-modal v-model="RequestPayment" title="Enter your MTN Mobile Money number" size="md" hide-footer>
-      <div v-if="congratulation" class="px-0">
+
+    <!-- Request Payment -->
+    <b-modal v-model="AcRequestPayment" title="Enter your Number" size="md" hide-footer>
         <b-overlay :show="show" rounded="sm">
           <div class="row">
             <div class="col-10 col-sm-9 col-md-8">
               <b-form-input
                 placeholder="237 6XX XXX XXX"
                 id="number"
-                v-model="number"
+                v-model="PaymentForm.phone"
                 type="tel"
               ></b-form-input>
             </div>
             <div class="col-2 col-sm-3 col-md-4 px-0 btn-custom-box">
               <b-button
                 variant="primary"
-                class="font-weight-light btn-custom text-14 shadow-sm"
-                >CHANGE</b-button
-              >
-            </div>
-          </div>
-          <div class="row my-3">
-            <div class="col btn-custom-box">
-              <b-button
-                variant="primary"
                 class="font-weight-light shadow-sm btn-custom text-14"
-                @click="confirmPayment"
-                >PAY {{formatMoney(2000)}}</b-button
-              >
+                @click="confirmDefaltPayment"
+              >Confirm</b-button>
             </div>
           </div>
           <div class="row my-3">
@@ -144,15 +126,9 @@
               <p>
                 Reference NO: XXXXXXXXXXXX
               </p>
-
-
             </div>
           </div>
         </b-overlay>
-      </div>
-      <div v-else class="text-center">
-        <h3><b>🥳❗Transaction Completed❗🥳</b></h3>
-      </div>
     </b-modal>
 
   </b-container>
@@ -164,22 +140,31 @@ export default {
   data() {
     return {
       url:null,
-      RequestPayment: false,
-      operator: '',
+      AcRequestPayment: false,
       formatObject: new Intl.NumberFormat('fr-FR', {
         style: 'currency',
         currency: 'XAF',
         minimumFractionDigits: 2,
       }),
-      number: '',
+      PaymentForm: {
+        country: '',
+        phone: '',
+        operator: '',
+      },
 
       show: false,
-      congratulation: false
     };
+  },
+
+  computed: {
+    defaultPayment() {
+      return this.$store.state.businessAccountType.defaultPayment;
+    }
   },
 
   mounted(){
     this.url = this.$route.params.id;
+    this.DefaultPayment();
   },
 
   methods: {
@@ -194,28 +179,53 @@ export default {
       if (this.operator !== '') 
         this.$emit('requestpayment', this.operator);
     },
-    confirmPayment() {
-      this.show = true;
-      console.log("confirmPayment");
-      console.log("this.PaymentForm.type", "this.PaymentForm.type")
-      console.log("this.PaymentForm.price", "price")
-      let formData = new FormData();
-      formData.append("type", "this.PaymentForm.type")
-      formData.append("time", "this.PaymentForm.type")
+    
+    DefaultPayment() {
+      console.log("defaultPayment");
       this.$store
+      .dispatch("businessAccountType/getDefaultPayment", {
+        path: `${this.url}/settings/get-payement-method`
+        })
+      .then(() => {
+        this.PaymentForm.operator = this.defaultPayment.payement_method;
+        console.log('ohh yeah');
+      })
+      .catch(err => {
+        console.log({ err: err });
+      });
+    },
+
+    confirmDefaltPayment() {
+      this.show = true;
+      console.log("confirmDefaltPayment:", this.PaymentForm);
+      let formData = new FormData();
+      // formData.append("country", this.PaymentForm.country)
+      // formData.append("phone", this.PaymentForm.phone)
+      formData.append("payement_method", this.PaymentForm.operator)
+       this.$store
       .dispatch("businessAccountType/confirmPayment", {
-        path: `community/people/${this.url}`,
-        data: formData
+        path: `${this.url}/settings/get-payement-method`,
+        formData: formData
         })
       .then(({data}) => {
-        console.log('ohh yeah');
         console.log(data);
-        this.show = false
+        console.log('ohh yeah');
+        this.show = false;
+        this.AcRequestPayment = false;
+        this.DefaultPayment();
+        this.flashMessage.show({
+          status: "success",
+          message: "Payment Complete"
+        });
       })
       .catch(err => {
         this.show = false
-        this.congratulation = true
+        this.AcRequestPayment = false
         console.log({ err: err });
+        this.flashMessage.show({
+          status: "error",
+          message: "Unable Complete Payment"
+        });
       });
     },
 
@@ -226,6 +236,17 @@ export default {
 };
 </script>
 
+
+<style scoped>
+.descrip{
+  font-size: 14px;
+}
+.btn-custom {
+  height: 38px;
+  min-width: 123px;
+  font-size: 14px;
+}
+</style>
 <style scoped>
 .payment-type {
   background-color: #f7f7f7;

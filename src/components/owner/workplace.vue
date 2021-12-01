@@ -10,14 +10,16 @@
     <b-list-group-item
       class="d-flex align-items-center mb-4"
       style="border: none"
-    >
+    >   
       <div class="datails t-left">
         <div class="row">
-          <div
+          <div 
             class="media border-botmediatom mt-3 mb-4"
             v-for="workPlace in work"
             :key="workPlace.id"
           > 
+
+
             <div class="media-body">
               <h6 class="mb-0">
                 <b>{{ workPlace.company_name }} ({{workPlace.position}})</b>

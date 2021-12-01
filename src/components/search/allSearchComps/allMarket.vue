@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-spinner v-if="prodLoader" variant="primary" :label="Spinning"></b-spinner>
+    <b-spinner v-if="prodLoader" variant="primary" label="Spinning"></b-spinner>
 
     <b-alert v-if="products.total == 0" show variant="warning"><a href="#" class="alert-link">
       {{$t("search.No_product_available_for_that_search")}}!
@@ -9,7 +9,7 @@
     <div
       class="people-style shadow"
       v-for="(prod, index) in products.data"
-      :key="index"
+      :key="index"  
     >
       <b-row>
         <b-col cols="5" lg="4" sm="4" md="5">
@@ -71,7 +71,7 @@
 
             <b-form-group
               id="input-group-1"
-              :label="$t('search_Description')"
+              :label="$t('search.Description')"
               label-for="input-1"
               label-size="sm"
             >

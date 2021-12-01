@@ -2,9 +2,9 @@
   <div v-if="hasLoadPicture">
     <b-spinner class="custom-loader" :label="$t('profileowner.Large_Spinner')"></b-spinner>
   </div>
-  <div class="row" v-else>
+  <div class="row" v-else> 
     <div class="container-fluid">
-      <p v-if="!allImages.length && !canUpload" style="font-size: 3rem">
+      <p v-if="!allImages.length" style="font-size: 3rem">
         {{ $t('profileowner.No_items_found') }}
       </p>
 
@@ -15,8 +15,6 @@
         hide-footer
         :title="'image' == media ? 'Upload image' : 'Upload video'"
       >
-        <br />
-
         <div id="preview" ref="preview" v-if="img_url">
           <img :src="img_url" v-if="'image' == media" />
 
@@ -24,27 +22,15 @@
             <source :src="img_url" />
           </video>
         </div>
-        <!-- <b-form-textarea
-          id="textarea-small"
-          class="mb-2 border-none"
-          v-model="text"
-          placeholder="Enter a description"
-        >
-        </b-form-textarea> -->
 
         <br />
 
-        <b-button
-          @click="submitPosts"
-          variant="primary"
-          block
-          :disabled="loading"
-          ><b-icon icon="cursor-fill" variant="primary"></b-icon>
-          {{ $t('profileowner.Publish') }}</b-button
+        <b-button @click="submitPosts" variant="primary" block :disabled="loading"
+          ><b-icon icon="cursor-fill" variant="primary"></b-icon> {{ $t('profileowner.Publish') }}</b-button
         >
       </b-modal>
 
-      <div class="createp img-gall image-wrapp" v-if="canUpload">
+      <div class="createp img-gall image-wrapp img-size" v-if="canUpload && showCreateForm" @click="$refs.movie.click()">
         <div class="">
           <input
             type="file"
@@ -54,7 +40,6 @@
             hidden
             ref="movie"
           />
-
           <a @click="$refs.movie.click()">
             <div class="drag-textt">
               <fas-icon :icon="['fas', 'plus']" />
@@ -63,7 +48,6 @@
           </a>
         </div>
       </div>
-
       <div v-for="(image, cmp) in allImages" :key="cmp">
         <div class="img-gall" v-for="(im, index) in image.media" :key="index">
           <Picture
@@ -78,9 +62,9 @@
             :deleteImage="() => deleteImage(im.id, cmp)"
             :content="image.content"
             :imageProps="imageProps"
+            :isEditor="isEditor"
+            :type="type"
           />
-
-        <br />
         </div>
       </div>
 
@@ -106,7 +90,8 @@ export default {
   },
   props: {
     album: {},
-    canUpload: {
+    isEditor: {},
+    addItem: {
       type: Boolean,
       default: function () {
         return false;
@@ -127,6 +112,10 @@ export default {
       default: function () {
         return false;
       },
+    },
+    showCreateForm: {
+      type: Boolean,
+      required: true,
     },
     images: {
       type: Array,
@@ -187,6 +176,15 @@ export default {
         getAlbumImages: this.getAlbumImagesBusiness,
         updateItem: this.updateItemBusiness,
       }),
+      network: () => ({
+        submitPost: this.submitPostNetwork,
+        setProfilePicture: this.setProfilePictureNetwork,
+        setCoverPicture: this.setCoverPictureNetwork,
+        deleteImagePicture: this.deleteImagePictureNetwork,
+        onDownloadPic: this.onDownloadPicNetwork,
+        getAlbumImages: this.getAlbumImagesNetwork,
+        updateItem: this.updateItemNetwork,
+      }),
     };
 
     this.strategy = {
@@ -225,11 +223,19 @@ export default {
       deleteImagePictureBusiness: 'businessOwner/deleteImage',
       onDownloadPicBusiness: 'businessOwner/downloadPic',
       getAlbumImagesBusiness: 'businessOwner/getAlbumImages',
+
+      submitPostNetwork: 'networkProfileMedia/submitPost',
+      setProfilePictureNetwork: 'networkProfileMedia/setProfilePic',
+      setCoverPictureNetwork: 'networkProfileMedia/setCoverPic',
+      deleteImagePictureNetwork: 'networkProfileMedia/deleteImage',
+      onDownloadPicNetwork: 'networkProfileMedia/downloadPic',
+      getAlbumImagesNetwork: 'networkProfileMedia/getAlbumImages',
     }),
 
     ...mapMutations({
       updateItem: 'UserProfileOwner/updateAlbumItem',
       updateItemBusiness: 'businessOwner/updateAlbumItem',
+      updateItemNetwork: 'networkProfileMedia/updateAlbumItem',
     }),
 
     getFullMediaLink: fullMediaLink,
@@ -269,6 +275,7 @@ export default {
     },
 
     getFileExtension(file) {
+      console.log(file);
       if (file.startsWith('https://www.youtube.com')) return 'youtube';
 
       const fileArray = file.split('.');
@@ -358,7 +365,8 @@ export default {
 
     setCoverPic(id) {
       this.loading = true;
-      const data = 'business' == this.type ? { businessID: this.$route.params.id, albumID: id } : id;
+      const data =
+        'business' == this.type || 'network' == this.type ? { businessID: this.$route.params.id, albumID: id } : id;
 
       this.pattern[this.type]()
         .setCoverPicture(data)
@@ -384,7 +392,8 @@ export default {
 
     setProfilePic(id) {
       this.loading = true;
-      const data = 'business' == this.type ? { businessID: this.$route.params.id, albumID: id } : id;
+      const data =
+        'business' == this.type || 'network' == this.type ? { businessID: this.$route.params.id, albumID: id } : id;
       this.pattern[this.type]()
         .setProfilePicture(data)
         .then(() => {
@@ -415,11 +424,12 @@ export default {
       formData.append('dob', this.text);
       let payload = {
         albumID: albumId,
-        businessID: 'business' == this.type ? this.$route.params.id : null,
+        businessID: 'business' == this.type || 'network' == this.type ? this.$route.params.id : null,
         data: formData,
       };
 
-      const data = 'business' == this.type ? { businessId: this.$route.params.id, albumId } : albumId;
+      const data =
+        'business' == this.type || 'network' == this.type ? { businessId: this.$route.params.id, albumId } : albumId;
 
       this.pattern[this.type]()
         .submitPost(payload)
@@ -464,6 +474,10 @@ export default {
 </script>
 
 <style scoped>
+.img-size {
+  width: 266px !important;
+  height: 266px !important;
+}
 .botmediadess-position {
   text-align: center;
   bottom: -45%;
@@ -653,5 +667,10 @@ export default {
   font-weight: 100;
   text-transform: uppercase;
   color: #000;
+  width: 120px;
+  height: 120px;
+  position: absolute;
+  top: 25%;
+  left: 25%;
 }
 </style>

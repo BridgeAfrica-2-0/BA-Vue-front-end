@@ -1,6 +1,6 @@
 <template>
   <div>
-    <form novalidate class="md-layout" @submit.prevent="validateUser">
+    <form novalidate autocomplete="off" class="md-layout" @submit.prevent="validateUser">
       <md-card class="md-layout-item md-size-50 md-small-size-100 p-card">
         <md-card-header>
           <div class="md-title center f-22">
@@ -46,7 +46,7 @@
               type="email"
               name="email"
               id="email"
-              autocomplete="email"
+              autocomplete="off"
               v-model="form.email"
               :disabled="sending"
             />
@@ -63,6 +63,7 @@
             <md-input
               type="password"
               name="password"
+               autocomplete="off"
               id="password"
               v-model="form.password"
               :disabled="sending"

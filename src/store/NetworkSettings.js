@@ -148,8 +148,8 @@ export default {
         console.log(data);
       });
     },
-    getEditNetworkInfo({ commit }, networkId) {
-      return axios.get(`/network/edit/${networkId}`).then(({ data }) => {
+    getEditNetworkInfo({ commit }, netData) {
+      return axios.get(`/network/${netData}`).then(({ data }) => {
         commit("seteditnetworkinfo", data.data);
         console.log(data);
       });
@@ -190,6 +190,14 @@ export default {
     updateNetworkInfo({ commit }, data) {
       console.log("updateNetworkInfo", data)
       return axios.post(`/network/${data.path}`, data.formData)
+      .then(({ data }) => {
+        return data;
+      });
+    },
+ 
+    loadMore({ commit }, PenData) {
+      console.log("loadMore", PenData)
+      return axios.get(`/network/${PenData}`)
       .then(({ data }) => {
         return data;
       });

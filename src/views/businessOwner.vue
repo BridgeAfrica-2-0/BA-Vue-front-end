@@ -1,80 +1,80 @@
 <template>
-  <div class="" style="overflow-y: hidden; padding:0px">
+  <div class="" style="overflow-y: hidden; padding: 0px">
+    <span v-if="isloaded">
+      <navbar />
+      <div class="container-fluid">
+        <ly-tab
+          v-model="selectedId"
+          :items="items"
+          :options="options"
+          class="center-ly"
+        >
+        </ly-tab>
+        <hr width="100%" class="d-none" d-md-block />
+      </div>
 
-     <span v-if="isloaded">
+      <div class="" v-if="selectedId == '0'">
+        <Business />
+      </div>
 
-    <navbar />
+      <div class="mt-3" v-if="selectedId == '1'">
+        <Inbox />
+      </div>
 
-    
-       
-    <div class="container-fluid">
-      <ly-tab
-        v-model="selectedId"
-        :items="items"
-        :options="options"
-        class="center-ly"
-      >
-      </ly-tab>
+      <!-- <div class="container-fluid">
+        <ly-tab
+          v-model="selectedId"
+          :items="items"
+          :options="options"
+          class="center-ly"
+        >
+        </ly-tab> -->
 
-      <hr width="100%" class="d-none" d-md-block />
-    </div>
+      <div class="mt-3" v-if="selectedId == '2'">
+        <Settings v-bind:currenttab="selectedId" />
+      </div>
 
-    <div class=" " v-if="selectedId == '0'">
-      <Business />
-    </div>
+      <div class="mt-3" v-if="selectedId == '3'">
+        <Settings v-bind:currenttab="selectedId" />
+      </div>
 
-    <div class="mt-3" v-if="selectedId == '1'">
-      <Inbox />
-    </div>
+      <div class="mt-3" v-if="selectedId == '4'">
+        <Settings v-bind:currenttab="selectedId" />
+      </div>
 
-    <div class="mt-3" v-if="selectedId == '2'">
-      <Settings v-bind:currenttab="selectedId" />
-    </div>
-
-    <div class="mt-3" v-if="selectedId == '3'">
-      <Settings v-bind:currenttab="selectedId" />
-    </div>
-
-    <div class="mt-3" v-if="selectedId == '4'">
-      <Settings v-bind:currenttab="selectedId" />
-    </div>
-
-    <div class="mt-3" v-if="selectedId == '5'">
-      <Settings v-bind:currenttab="selectedId" />
-    </div>
-
-    <Footer />
-
-     </span>
+      <div class="mt-3" v-if="selectedId == '5'">
+        <Settings v-bind:currenttab="selectedId" />
+      </div>
+      <!-- </div> -->
+      <Footer />
+    </span>
   </div>
 </template>
 
 <script>
 import navbar from "@/components/navbar";
 import Business from "../components/businessOwner/business";
-//import Pending from "../components/businessOwner/pending";
-//import Insight from "../components/businessOwner/insight";
-//import Notification from "../components/businessOwner/notification";
+
 import Settings from "../components/businessOwner/settings";
 
 import Inbox from "../components/businessOwner/inbox";
 
 import LyTab from "@/tab/src/index.vue";
 
-import axios from "axios";
-
 import Footer from "../components/footer";
+import { WhoIsIt } from "@/mixins";
 export default {
   name: "Home",
+  mixins: [WhoIsIt],
   components: {
     navbar,
     Business,
-    //Pending,
+
     LyTab,
     Settings,
-    //  Insight,
+
     Inbox,
-    // Notification,
+
     Footer,
   },
   data() {
@@ -84,7 +84,6 @@ export default {
       foll_id: null,
       isloaded: false,
       url_data: null,
-    
 
       items: [
         { label: "Home ", icon: "" },
@@ -101,10 +100,6 @@ export default {
       },
     };
   },
-
-
- 
-
 
   methods: {
     businessInfo() {
@@ -163,12 +158,16 @@ export default {
     },
   },
 
+  watch: {
+    "$route.query.tabId": function () {
+      this.selectedId = this.$route.query.tabId;
+    },
+  },
 
   created() {
     this.selectedId = this.$route.query.tabId ? this.$route.query.tabId : "0";
 
     this.foll_id = this.$route.params.id;
-
 
     this.$store
       .dispatch("businessOwner/roleCheck", this.foll_id)
@@ -204,9 +203,8 @@ export default {
   },
 
   mounted() {
-
-     if(this.$store.state.profileSettingsEdit.etat == 1){
-          this.selectedId = this.$store.state.profileSettingsEdit.selectedId ;
+    if (this.$store.state.profileSettingsEdit.etat == 1) {
+      this.selectedId = this.$store.state.profileSettingsEdit.selectedId;
     }
 
     this.url_data = this.$route.params.id;

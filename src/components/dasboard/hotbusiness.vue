@@ -1,7 +1,7 @@
 <template>
   <div>
 
-   
+    
 
         <div class="people-style shadow"   v-for="item in business" :key="item.id" >
           <b-row>
@@ -16,7 +16,7 @@
                 </splide>
               </div>   <div class="pl-3 flx100"> 
               <p class="textt">
-                <strong class="title"> {{ item.name }} </strong> <br />
+                <strong class="title"> <router-link    :to="'business/'+item.id">  {{ item.name }} </router-link> </strong> <br />
                
             <span v-for="cat in item.category" :key="cat.name">   {{cat.name}}  </span>
                 <br />
@@ -24,9 +24,8 @@
                 {{ $t('dashboard.Community') }} <br />
 
                 <span class="location">
-                  <b-icon-geo-alt class="ico"></b-icon-geo-alt
-                  >{{ item.country }}
-                </span>
+              <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{item.city}}  <span class="ml-2" v-for="nie in item.neigborhood"  :key="nie.id" >  {{nie.name}} </span>   
+            </span>
                 <br />
        <read-more
               more-str="read more"
@@ -194,7 +193,7 @@ export default {
         })
         .catch(err =>{  
           
-          console.log(err)  ;
+          console.log({err:err})  ;
            document.getElementById("followbtn"+user.id).disabled =  false;
           
         });

@@ -90,11 +90,26 @@
                   </h1>
                 </b-col>
                 <b-col>
-                  <b-icon
-                    @click="newMessage(true)"
-                    class="new-message primary icon-size float-right"
-                    icon="pencil-square"
-                  ></b-icon>
+                  <b-dropdown
+                    variant="white"
+                    toggle-class="text-decoration-none"
+                    no-caret
+                    class="new-message"
+                  >
+                    <template #button-content>
+                      <b-icon
+                        class="primary icon-size float-right"
+                        icon="pencil-square"
+                        @click="this.newMsg = !this.newMsg"
+                      ></b-icon>
+                    </template>
+                    <b-dropdown-item @click="newMessage(true)">
+                      New Chat</b-dropdown-item
+                    >
+                    <b-dropdown-item @click="newMessage(true)">
+                      New Group Chat
+                    </b-dropdown-item>
+                  </b-dropdown>
                 </b-col>
               </b-row>
 
@@ -355,6 +370,91 @@
 
                       <!-- End Chats -->
                     </b-tab>
+                    <b-tab
+                      title="Groups"
+                      @click="getChatList({ type: 'group' })"
+                    >
+                      <!-- Business Chats Available  -->
+                      <b-row class="pa-6">
+                        <b-col class="mb-6 pb-6">
+                          <input
+                            v-model="searchQuery"
+                            class="form-control input-background"
+                            :placeholder="`Search chat list ${tabIndex}`"
+                            @keypress.enter="
+                              getChatList({
+                                type: 'business',
+                                keyword: searchQuery,
+                              })
+                            "
+                          />
+                        </b-col>
+                      </b-row>
+
+                      <div class="messages">
+                        <div v-if="loader" class="text-center">
+                          <b-spinner
+                            variant="primary"
+                            label="Spinning"
+                            class="centralizer"
+                          ></b-spinner>
+                        </div>
+                        <div v-if="chatList.length > 0">
+                          <b-row
+                            v-for="(chat, index) in chatList"
+                            :key="index"
+                            :class="[
+                              'p-2 message ',
+                              {
+                                messageSelected:
+                                  chat.receiver_business_id ==
+                                  (chatSelected.clickedId != null
+                                    ? chatSelected.clickedId
+                                    : false)
+                                    ? chatSelected.active
+                                    : false,
+                              },
+                            ]"
+                            @click="
+                              selectedChat({
+                                type: 'business',
+                                chat: chat,
+                                id: chat.receiver_business_id,
+                              })
+                            "
+                          >
+                            <b-col class="col-9">
+                              <span style="display: inline-flex">
+                                <b-avatar
+                                  class="d-inline-block profile-pic"
+                                  variant="primary"
+                                  src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
+                                ></b-avatar>
+
+                                <h6 class="mt-2 d-inline-block ml-2">
+                                  <b class="bold"> {{ chat.name }}</b>
+                                  <p class="duration">{{ chat.message }}</p>
+                                </h6>
+                              </span>
+                            </b-col>
+
+                            <b-col class="col-3 text-center">
+                              <small class="text-center">
+                                {{ getCreatedAt(chat.created_at) }}
+                              </small>
+                              <!-- <p class="text-center">
+                              <b-badge variant="info">
+                                {{ chat.receiver_business_id }}
+                              </b-badge>
+                            </p> -->
+                            </b-col>
+                          </b-row>
+                        </div>
+                        <h2 v-else>No chat</h2>
+                      </div>
+
+                      <!-- End Chats -->
+                    </b-tab>
                   </b-tabs>
                 </b-col>
               </b-row>
@@ -530,16 +630,18 @@
                   <div v-if="currentBiz.id != chat.sender_business_id">
                     <b-row class="p-4">
                       <b-col>
-                        <p v-if="chat.attachment" class="msg-text mt-0 text">
-                          {{ chat.attachment.name }}...
-                          <b class="">
-                            {{ chat.attachment.size }}
-                          </b>
-                          <small class="float-right mt-2 text-white pr-1 pt-1">
-                            {{ chat.created_at }}
-                          </small>
-                        </p>
+                        <p
+                          v-if="chat.attachment"
+                          class="msg-text mt-0 text"
+                        ></p>
+                        <br />
                         <p v-if="chat.message" class="msg-text mt-0 text">
+                          <span v-if="chat.attachment">
+                            <img :src="chat.attachment" />
+                            <!-- <br />
+                            <b>{{ chat.attachment }}</b> -->
+                            <br />
+                          </span>
                           {{ chat.message }}
                           <small class="float-right mt-2 text-white pr-1 pt-1">
                             {{ getCreatedAt(chat.created_at) }}
@@ -552,23 +654,16 @@
                     <b-row class="p-4">
                       <b-col>
                         <p
-                          v-if="chat.attachment"
-                          id="sent"
-                          class="msg-text-sent text"
-                        >
-                          {{ chat.attachment.name }}...
-                          <b class="">
-                            {{ chat.attachment.size }}
-                          </b>
-                          <small class="float-right mt-2 text-white pr-1 pt-1">
-                            {{ chat.created_at }}
-                          </small>
-                        </p>
-                        <p
                           v-if="chat.message"
                           id="sent"
                           class="msg-text-sent text"
                         >
+                          <span v-if="chat.attachment">
+                            <img :src="chat.attachment" />
+                            <!-- <br />
+                            <b>{{ chat.attachment }}</b> -->
+                            <br />
+                          </span>
                           {{ chat.message }}
                           <small class="float-right mt-2 text-white pr-1 pt-1">
                             {{ getCreatedAt(chat.created_at) }}
@@ -629,10 +724,16 @@
                     dismissible
                     @dismissed="dismissed"
                   >
-                    {{ this.file.name
-                    }}<b class="pl-2 text-bold">{{
-                      convert(this.file.size)
-                    }}</b>
+                    <span
+                      style="cursor: pointer !important"
+                      href=""
+                      @click="$bvModal.show('preview-file')"
+                    >
+                      {{ this.file.name
+                      }}<b class="pl-2 text-bold">{{
+                        convert(this.file.size)
+                      }}</b>
+                    </span>
                   </b-alert>
                 </b-row>
                 <b-row v-if="!checked">
@@ -962,16 +1063,12 @@
                       </table>
                     </div>
                     <b-button
-                      class="float-left"
+                      block
                       variant="primary"
                       @click="$bvModal.show('group-name')"
                       :disabled="selectedMulty.length ? false : true"
-                      ><b-icon
-                        icon="arrow-left"
-                        class="text-bold"
-                        variant="white"
-                      ></b-icon
-                    ></b-button>
+                      >Next</b-button
+                    >
                     <!-- <b-button
                       class="float-left"
                       variant="primary"
@@ -994,23 +1091,36 @@
       <!-- Modals -->
       <!-- create group -->
       <b-modal id="group-name" hide-footer>
-    
-    <div class="d-block text-center">
-      <h3>The Group Name:</h3>
-      <b-form-input v-model='groupName' id="input-large" size="lg" autofocus placeholder="Enter your name"></b-form-input>
-    </div>
-    
-    <b-button class="mt-3" block @click="selectedMultyChat()">Create</b-button>
-  </b-modal>
-    </b-container>
+        <div class="d-block text-center">
+          <h3>The Group Name:</h3>
+          <b-form-input
+            v-model="groupName"
+            @keypress.enter="selectedMultyChat()"
+            id="input-large"
+            size="lg"
+            autofocus
+            placeholder="Enter your name"
+          ></b-form-input>
+        </div>
 
+        <b-button class="mt-3" block @click="selectedMultyChat()"
+          >Create</b-button
+        >
+      </b-modal>
+      <!-- preview -->
+      <b-modal id="preview-file" hide-footer>
+        <div class="d-block text-center">
+          <h3>Preview file:</h3>
+          <b-img thumbnail fluid :src="previewSrc" id="filePreview"></b-img>
+        </div>
+      </b-modal>
+    </b-container>
   </div>
 </template>
 
 <script>
 import EmojiPicker from "vue-emoji-picker";
 import io from "socket.io-client";
-import convertSize from "convert-size";
 import moment from "moment";
 
 export default {
@@ -1019,7 +1129,8 @@ export default {
   },
   data() {
     return {
-      groupName:'',
+      formData: new FormData(),
+      groupName: "",
       allSelection: true,
       allSelectedMulty: false,
       peopleMulty: false,
@@ -1032,6 +1143,7 @@ export default {
       networkSelectedAllMulty: [],
 
       filePreview: false,
+      previewSrc: "",
       file: "",
       room: "",
       online: [],
@@ -1040,12 +1152,12 @@ export default {
       chatSearchKeyword: "",
       tabIndex: 2,
       type: "",
-      // socket: io("https://ba-chat-server.herokuapp.com", {
-      //   transports: ["websocket", "polling", "flashsocket"],
-      // }),
-      socket: io("localhost:7000", {
+      socket: io("https://ba-chat-server.herokuapp.com", {
         transports: ["websocket", "polling", "flashsocket"],
       }),
+      // socket: io("localhost:7000", {
+      //   transports: ["websocket", "polling", "flashsocket"],
+      // }),
       chatSelected: [],
       showsearch: true,
       selecteduser: false,
@@ -1244,6 +1356,14 @@ export default {
     },
   },
   methods: {
+    convert(bytes, decimals = 2) {
+      if (bytes === 0) return "0 Bytes";
+      const k = 1024;
+      const dm = decimals < 0 ? 0 : decimals;
+      const sizes = ["Bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
+      const i = Math.floor(Math.log(bytes) / Math.log(k));
+      return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + " " + sizes[i];
+    },
     selectedAllMulty() {
       this.allSelection = true;
       this.selectedMulty = [];
@@ -1299,10 +1419,6 @@ export default {
         this.selectedMulty = [];
       }
     },
-    convert(data) {
-      return data;
-      // return convertSize(data);
-    },
     dismissed() {
       this.file = "";
       this.filePreview = false;
@@ -1314,17 +1430,10 @@ export default {
       //   console.log(data);
       //   this.messages.push(data);
       // });
-      this.socket.on("privateMessage", (data) => {
-        console.log("Received");
+      this.socket.on("groupMessage", (data) => {
+        console.log("group message Received");
         console.log(data);
         this.chats.push(data);
-        console.log(this.chats);
-
-        let formData = new FormData();
-        formData.append("attachment", data.attachment);
-        formData.append("sender_business_id", data.sender_business_id);
-        formData.append("message", data.message);
-        formData.append("receiver_business_id", data.receiver_business_id);
         let elmts = {
           type: this.type,
           message: data.message,
@@ -1334,7 +1443,22 @@ export default {
           receiver_id: this.chatId,
         };
 
-        this.saveMessage(elmts);
+        // this.saveMessage(elmts);
+      });
+      this.socket.on("privateMessage", (data) => {
+        console.log("Received");
+        console.log(data);
+        this.chats.push(data);
+        console.log(this.chats);
+
+        this.formData.append("sender_business_id", data.sender_business_id);
+        this.formData.append("message", data.message);
+        this.formData.append("receiver_business_id", data.receiver_business_id);
+        this.formData.append("receiver_network_id", data.receiver_business_id);
+        this.formData.append("receiver_id", data.receiver_business_id);
+        this.formData.append("type", data.type);
+
+        this.saveMessage(this.formData);
       });
     },
     createGroup(receiver_business_id) {
@@ -1411,24 +1535,22 @@ export default {
         .catch(() => console.log("error"));
     },
     saveMessage(data) {
-      console.log("[DEBUG SAVE]", data);
-      this.$store
-        .dispatch("businessChat/SAVE_BUSINESS_CHAT", data)
-        .then(() => {
-          console.log("Chat saved");
-        })
-        .catch(() => console.log("error"));
+      console.log("[DEBUG SAVE]", { data: data, type: this.type });
+      this.$store.dispatch("businessChat/SAVE_BUSINESS_CHAT", {
+        data: data,
+        type: this.type,
+      });
     },
     selectedMultyChat() {
-      this.$bvModal.hide('group-name')
+      this.$bvModal.hide("group-name");
       console.log("type tabs:", this.tabIndex);
       // console.log("selected Chat:", data);
       this.createGroup();
-      let dumId = 7
+      let dumId = 7;
       // this.chatId = data.id;
       this.$store.commit("businessChat/setSelectedChatId", dumId);
       let receiver = { receiverID: dumId, keyword: null };
-       this.histBizToUser(receiver);
+      this.histBizToUser(receiver);
 
       this.newMsg = false;
       // this.chatSelected = { active: true, clickedId: data.id, ...data.chat };
@@ -1439,6 +1561,7 @@ export default {
       };
 
       console.log("[DEBUG] Chat selected:", this.chatSelected);
+      this.groupName = "";
     },
     selectedChat(data) {
       console.log("type tabs:", this.tabIndex);
@@ -1458,6 +1581,7 @@ export default {
       this.newMsg = false;
       // this.chatSelected = { active: true, clickedId: data.id, ...data.chat };
       this.chatSelected = {
+        id: data.id,
         active: true,
         clickedId: data.id,
         name: data.chat.name,
@@ -1474,22 +1598,18 @@ export default {
         })
         .catch(() => console.log("error"));
     },
-
     send() {
-      let formData = new FormData();
-      let attachment = this.file
-        ? {
-            name: this.file.name,
-            size: convertSize(this.file.size),
-            file: attachment,
-          }
-        : undefined;
+      if (this.input != "") {
+        if (this.type == "group") {
+          this.sendGroup();
+        } else {
+          this.sendPrivate();
+        }
+      } else console.log("Enter a message");
+    },
+    sendPrivate() {
+      this.formData.append("attachment", this.file);
 
-      // console.log("attachment:", attachment);
-      // if (this.file) {
-      //   let formData = new FormData();
-      //   attachment = formData.append("file", this.file);
-      // } else attachment = null;
       this.socket.emit("privateMessage", {
         type: this.type,
         message: this.input,
@@ -1499,20 +1619,48 @@ export default {
         receiver_id: this.chatId,
         attachment: this.file,
       });
-
-      // this.socket.emit("generalMessage", {
-      //   message: this.input,
-      //   sender: this.currentUser.user.name,
-      //   date: new Date(),
-      // });
-
-      console.log("SENT...");
-
-      // this.message.message = this.input;
-      // this.chats.push(this.message);
+      console.log("SENT...", {
+        type: this.type,
+        message: this.input,
+        sender_business_id: this.currentBiz.id,
+        room: this.room,
+        receiver_business_id: this.chatSelected.id,
+        receiver_id: this.chatId,
+        // attachment: this.file,
+      });
       this.input = "";
       this.dismissed();
       this.scrollToBottom();
+    },
+    sendGroup() {
+      this.socket.emit("groupMessage", {
+        type: this.type,
+        message: this.input,
+        sender_business_id: this.currentBiz.id,
+        room: this.room,
+        receiver_business_id: this.chatSelected.id,
+        receiver_id: this.chatId,
+      });
+
+      console.log("SENT...");
+      this.input = "";
+      this.dismissed();
+      this.scrollToBottom();
+    },
+
+    handleFileUpload() {
+      this.file = this.$refs.file.files[0];
+      this.filePreview = true;
+      this.previewSrc = URL.createObjectURL(this.file);
+
+      const fileType = this.file["type"];
+      const validImageTypes = ["image/gif", "image/jpeg", "image/png"];
+      if (validImageTypes.includes(fileType)) {
+        this.$bvModal.show("preview-file");
+      }
+
+      console.log("file:", this.preview);
+      console.log("preview:", this.filePreview);
     },
 
     //---------------
@@ -1539,14 +1687,10 @@ export default {
     },
     newMessage(arg) {
       console.log("hey");
-      this.newMsg = arg;
+      this.newMsg = !this.newMsg;
       this.show = false;
     },
-    handleFileUpload() {
-      this.file = this.$refs.file.files[0];
-      this.filePreview = true;
-      console.log("preview:", this.filePreview);
-    },
+
     scrollToBottom() {
       this.$refs.feed.scrollTo({
         top: this.$refs.feed.scrollHeight + 2000,
@@ -1560,6 +1704,9 @@ export default {
 </script>
 
 <style scoped>
+.filePreview {
+  width: 100px;
+}
 .new-msg-filter-list {
   padding: 15px !important;
   /* border: 1px solid black; */
@@ -1605,7 +1752,7 @@ export default {
 }
 
 .chats {
-  border: 2px solid green;
+  /* border: 2px solid green; */
   height: 740px;
   overflow-y: scroll;
   overflow-x: hidden;
@@ -1623,6 +1770,7 @@ h1 {
   margin-top: 20px;
 }
 .new-message {
+  margin-right: -94px;
   margin-top: 20px;
   cursor: pointer;
 }

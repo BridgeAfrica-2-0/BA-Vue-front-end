@@ -1,26 +1,8 @@
 <template>
   <div class="container">
-    <!--
-    <b-row>
-      <b-col class="f-left">
-        <h5 class=" d-inline-block">
-          Pending Posts
-        </h5>
-      </b-col>
-      <b-col class="f-right"> <span class="">35 Pending</span> </b-col>
-    </b-row>
-
-
--->
-
     <b-row>
       <b-col cols="12" class="f-left">
-        <div
-          v-for="post in allPendingPost"
-          :key="post.id"
-          :loading="load"
-          class="mb-4"
-        >
+        <div v-for="post in allPendingPost" :key="post.id" :loading="load" class="mb-4">
           <div class="mb-2">
             <div class="f-left">
               <b-row class="px-md-3">
@@ -36,26 +18,15 @@
                   <h6 class="m-0 font-weight-bolder">
                     {{ post.name }}
                     <span class="float-right">
-                      <b-dropdown
-                        size="lg"
-                        variant="link"
-                        toggle-class="text-decoration-none"
-                        no-caret
-                      >
+                      <b-dropdown size="lg" variant="link" toggle-class="text-decoration-none" no-caret>
                         <template #button-content>
                           <b-icon-three-dots-vertical></b-icon-three-dots-vertical
                           ><span class="sr-only">{{ $t('network.Settings') }} </span>
                         </template>
-                        <b-dropdown-item
-                          @click="approved(post.id)"
-                          :loading="load"
-                        >
+                        <b-dropdown-item @click="approved(post.id)" :loading="load">
                           {{ $t('network.Approved') }}
                         </b-dropdown-item>
-                        <b-dropdown-item
-                          @click="unapproved(post.id)"
-                          :loading="load"
-                        >
+                        <b-dropdown-item @click="unapproved(post.id)" :loading="load">
                           {{ $t('network.Unapproved') }}
                         </b-dropdown-item>
                       </b-dropdown>
@@ -102,9 +73,13 @@
 
             <light css=" " :cells="item.media.length" :items="mapmediae(item.media)"></light>
           </div>
-          
-
         </div>
+      </b-col>
+      <b-col cols="12">
+        <infinite-loading ref="infiniteLoading" @infinite="infiniteHandler">
+            <!-- <div class="text-red" slot="no-more">{{ $t('network.No_More_Request') }}</div>
+            <div class="text-red" slot="no-results">{{ $t('network.No_More_Request') }}</div> -->
+        </infinite-loading>
       </b-col>
     </b-row>
     <b-row>
@@ -114,21 +89,30 @@
         </p>
       </b-col>
     </b-row>
+    <!-- <b-row> -->
+          <!-- <b-col cols="12"> -->
+        <!-- <infinite-loading @infinite="infiniteHandler"> -->
+            <!-- <div class="text-red" slot="no-more">{{ $t('network.No_More_Request') }}</div>
+            <div class="text-red" slot="no-results">{{ $t('network.No_More_Request') }}</div> -->
+        <!-- </infinite-loading> -->
+             <!-- <infinite-loading
+        ref="infiniteLoading"
+        @infinite="infiniteHandler"
+      ></infinite-loading> -->
+      <!-- </b-col></b-row> -->
   </div>
 </template>
 
 <script>
-
 import light from '@/components/lightbox';
 
-import moment from 'moment'; 
+import moment from 'moment';
 import axios from 'axios';
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   name: 'postNetwork',
   components: {
- 
     light,
   },
   data() {
@@ -139,7 +123,7 @@ export default {
       moment: moment,
       page: 1,
       infiniteId: +new Date(),
-      post: this.$store.state.businessOwner.ownerPost,   
+      post: this.$store.state.businessOwner.ownerPost,
       url: null,
       delete: [],
       edit_description: null,
@@ -166,18 +150,26 @@ export default {
     };
   },
 
-  methods: {
+  computed: {
+    ...mapGetters({
+      info: "networkSetting/getNetwork",
+      owner_post: "networkSetting/allPendingPost",
+    }),
+  },
+  mounted() {
+    this.url = this.$route.params.id;
+  },
 
-     ...mapActions({
-    
-      approvedPost: "networkSetting/approvedPost",
-      unapprovedPost: "networkSetting/unapprovedPost",
+  methods: {
+    ...mapActions({
+      approvedPost: 'networkSetting/approvedPost',
+      unapprovedPost: 'networkSetting/unapprovedPost',
     }),
 
     mapmediae(media) {
       let mediaarr = [];
 
-      media.forEach(item => {
+      media.forEach((item) => {
         let type = this.checkMediaType(item.media_type);
         if (type != 'video') {
           mediaarr.push(item.media_url);
@@ -190,7 +182,7 @@ export default {
     mapvideo(media) {
       let mediaarr = [];
 
-      media.forEach(item => {
+      media.forEach((item) => {
         let type = this.checkMediaType(item.media_type);
         if (type == 'video') {
           mediaarr.push(item.media_url);
@@ -225,20 +217,17 @@ export default {
       console.log('reoading');
     },
 
-
-
-   
-
     infiniteHandler($state) {
-      let url='network/show/posts/pending/'+this.url+'?page='+this.page; 
-
+      console.log("infiniteHandler fired")
+      let url='show/posts/pending/'+this.url+'?page='+this.page; 
+      console.log(url)
        if (this.page == 1) {
         this.owner_post.splice(0);
+        console.log("this.owner_post.splice(0);")
       }
-       this.$store
-        .dispatch("networkSetting/loadMore", url)
+      this.$store
+        .dispatch('networkSetting/loadMore', url)
         .then(({ data }) => {
-          
           if (data.data.length) {
             this.page += 1;
 
@@ -253,18 +242,14 @@ export default {
         });
     },
 
-
-      approved(id) {
-
-
-         let loader = this.$loading.show({
+    approved(id) {
+      let loader = this.$loading.show({
         container: this.fullPage ? null : this.$refs.creatform,
         canCancel: true,
         onCancel: this.onCancel,
         color: '#e75c18',
       });
 
-      
       this.networkId = this.getNetwork.id;
       let payload = {
         network_id: this.networkId,
@@ -277,8 +262,6 @@ export default {
           loader.hide();
         })
         .catch((err) => {
-          
-
           if (err.response.status == 422) {
             console.log({ err: err });
 
@@ -299,22 +282,17 @@ export default {
 
             loader.hide();
           }
-
         });
     },
 
-
-
-
-
     unapproved(id) {
-       let loader = this.$loading.show({
+      let loader = this.$loading.show({
         container: this.fullPage ? null : this.$refs.creatform,
         canCancel: true,
         onCancel: this.onCancel,
         color: '#e75c18',
       });
-     
+
       this.networkId = this.getNetwork.id;
       let payload = {
         network_id: this.networkId,
@@ -322,14 +300,11 @@ export default {
       };
       this.unapprovedPost(payload)
         .then(() => {
-         this.page = 1;
+          this.page = 1;
           this.infiniteId += 1;
           loader.hide();
         })
         .catch((err) => {
-          
-
-
           if (err.response.status == 422) {
             console.log({ err: err });
 
@@ -350,21 +325,8 @@ export default {
 
             loader.hide();
           }
-
         });
     },
-
-
-
-
-
-
-
-
-
- 
-   
-
 
     ownerPost() {
       this.$store
@@ -372,14 +334,10 @@ export default {
         .then(() => {
           console.log('hey yeah');
         })
-        .catch(err => {
+        .catch((err) => {
           console.log({ err: err });
         });
     },
-
-
-
-
 
     showModal() {
       this.$refs['modal-3'].show();
@@ -396,19 +354,6 @@ export default {
         this.createPost.postBusinessUpdate = '';
       }
     },
-  },
-  computed: {
-
-    ...mapGetters({
-      info: "networkSetting/getNetwork",
-      owner_post: "networkSetting/allPendingPost",
-    }),
-
-   
-   
-  },
-  mounted() {
-    this.url = this.$route.params.id;
   },
 };
 </script>

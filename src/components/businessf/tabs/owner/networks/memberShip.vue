@@ -1,9 +1,6 @@
 <template>
   <b-container>
     <div class="s-card">
-
-
-
       <div v-for="request in requests" :key="request.id" class="people-style border shadow">
         <b-skeleton-wrapper :loading="loading">
           <template #loading>
@@ -107,14 +104,12 @@
       </div>
       <b-row>
         <b-col cols="12">
-          <infinite-loading @infinite="infiniteHandler" ref="infiniteHandler" :identifier="infiniteId">
+        <infinite-loading ref="infiniteLoading" @infinite="infiniteHandler">
             <div class="text-red" slot="no-more">{{ $t('network.No_More_Request') }}</div>
             <div class="text-red" slot="no-results">{{ $t('network.No_More_Request') }}</div>
-          </infinite-loading>
+        </infinite-loading>
         </b-col>
       </b-row>
-
-      <FlashMessage />
     </div>
   </b-container>
 </template>

@@ -1,5 +1,6 @@
 export const state = {
   buissness: [],
   networks: [],
-  profile: []
+  profile: [],
+  messages:[]
 }

@@ -12,6 +12,7 @@ export default {
      searchState:{},
      isLoading:false,
      geo:{},
+     
 
     
 
@@ -31,6 +32,11 @@ export default {
     setGeo(state, data){
       state.geo = data;
     },
+
+    setKeyword(state, data){
+      state.keyword = data;
+    },
+     
      
     setBusinesses(state, data) {
       state.businesses = data;
@@ -73,19 +79,21 @@ export default {
 
      async  FIND_BUSINESS({ commit,state }, payload) {
         console.log("business search start");
-      return await axios.get(`search`,  {
-        keyword : payload.keyword,
-        location : payload.location,
-        lat:state.geo.lat,
-        lng:state.geo.lng,
 
-        categoryId: payload.category,
-        subCategoryId: payload.subcategory,
-        filterId: payload.filter,
-        distance: payload.distance,
-        neighbourhoodId: payload.neighbourhood,
+        console.log(payload);
+      return await axios.get(`search`,{ params:{
+        keyword : state.keyword,
+         location : payload.location,
+         lat:state.geo.lat,
+          lng:state.geo.lng,
+
+          categoryId: payload.cat_id,
+          subCategoryId: payload.sub_cat,
+          filterId: payload.filter_id,
+          distance: payload.distance,
+          neighbourhoodId: payload.neighbourhood,
         
-      }).then(({ data }) => {
+     } }).then(({ data }) => {
         console.log(data);
         commit("setBusinesses", data);
         commit("setSponsoredBusinesses", data.data.sponsord);
@@ -100,7 +108,7 @@ export default {
 
 
 
-   
+      
    
 
     NEXT_PAGE({ commit, state }, pagge ) {

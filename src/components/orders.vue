@@ -3,7 +3,7 @@
     <navbar />
     <hr />
     <!-- Desktop Top Bar -->
-    <div class="row parent desktop">
+    <div class="row m-0 parent desktop">
       <b-avatar
         id="a1"
         class="avatar"
@@ -106,7 +106,7 @@
     </div>
     <!-- Mobile Top Bar -->
     <div class="mobile-view">
-      <div class="justify-content-between d-flex row cd B">
+      <div class="justify-content-between d-flex row cd B m-0">
         <div
           id="m1"
           class="mobile bg-success t col transition pl-4"
@@ -143,20 +143,152 @@
         </div>
       </div>
     </div>
+
+    <!-- Top Bar Ended -->
+
+    <div class="d-flex justify-content-between my-4">
+      <h2 class="font-20 align-self-center">{{ $t("myOrders.My_orders") }}</h2>
+      <b-button variant="link" class="align-self-center text-capitalize">{{
+        $t("myOrders.clear_history")
+      }}</b-button>
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-lg-4 d-flex justify-content-between mb-4">
+        <p class="align-self-center">{{ $t("myOrders.Show") }}:</p>
+        <b-form-select
+          v-model="selectedShow"
+          :options="showOptions"
+          class="mx-3 align-self-center"
+        ></b-form-select>
+      </div>
+    </div>
+    <div class="row my-4" v-if="loading">
+      <div class="col-12 d-flex justify-content-center align-items-center">
+        <b-spinner
+          style="width: 3rem; height: 3rem;"
+          label="Loading"
+        ></b-spinner>
+      </div>
+    </div>
+    <div v-for="order in orders" :key="order.order_id">
+      <div class="row d-flex justify-content-between px-3">
+        <p class="order-text align-self-center pb-0 mb-0">
+          <span class="font-weight-bold">
+            {{ $t("myOrders.Order") }}
+          </span>
+          <span class="text-success">#{{ order.order_id }}</span>
+        </p>
+        <b-dropdown
+          variant="ligth"
+          id="dropdown-1"
+          text="Manage"
+          class="align-self-center"
+        >
+          <b-dropdown-item>{{ $t("myOrders.Archive") }}</b-dropdown-item>
+          <b-dropdown-item>{{ $t("myOrders.Delete") }}</b-dropdown-item>
+        </b-dropdown>
+      </div>
+      <div class="row d-flex justify-content-between px-3 mb-3">
+        <span class="flou align-self-center ">
+          {{ order.user_name }}
+          {{ moment(order.created_at).format("MM/DD/YYYY") }}
+          12H00
+        </span>
+        <div class="d-block d-lg-none align-self-center text-small">
+          <span
+            >Status: <span class="text-success">{{ order.status }}</span></span
+          >
+        </div>
+      </div>
+      <hr />
+      <div class="row px-3 my-4">
+        <div class="col-lg-3 col-4">
+          <splide :options="{ rewind: true }" class="r-img">
+            <splide-slide cl v-for="(im, index) in img" :key="index">
+              <img :src="img[index]" class="r-img" />
+            </splide-slide>
+          </splide>
+        </div>
+        <div class="col-lg-3 col-4 font-weight-bold text-left">
+          <h3 class="text-small text-capitalize">
+            {{ $t("myOrders.Product_Qty") }} :
+          </h3>
+          <h3 class="text-small text-capitalize">
+            {{ $t("myOrders.Price") }} :
+          </h3>
+          <h3 class="text-small text-capitalize">
+            {{ $t("myOrders.shipping_cost") }}:
+          </h3>
+          <h3 class="text-small text-capitalize">
+            {{ $t("myOrders.Total") }} :
+          </h3>
+        </div>
+        <div class="col-lg-3 col-4 text-left">
+          <h3 class="text-small">
+            {{ order.order_items_count }}
+          </h3>
+          <h3 class="text-small">{{ order.total_amount }} Fcfa</h3>
+          <h3 class="text-small">{{ order.shipping_amount }} Fcfa</h3>
+          <h3 class="text-small">
+            {{
+              parseFloat(order.shipping_amount) + parseFloat(order.total_amount)
+            }}
+            XAF
+          </h3>
+        </div>
+        <div class="col-lg-3 d-none d-lg-block">
+          <h3 class="font-weight-bold text-small text-capitalize">
+            {{ $t("myOrders.status") }}
+          </h3>
+          <h3
+            class="text-success font-weight-normal text-small text-capitalize"
+          >
+            {{ order.status }}
+          </h3>
+        </div>
+      </div>
+    </div>
+    <div class="row my-4" v-if="loading">
+      <div class="col-12 d-flex justify-content-center align-items-center">
+        <b-spinner
+          style="width: 3rem; height: 3rem;"
+          label="Loading"
+        ></b-spinner>
+      </div>
+    </div>
+    <div class="row d-flex justify-content-center">
+      <b-pagination
+        v-model="currentPage"
+        pills
+        :total-rows="totalOrders"
+        :per-page="orderPerPage"
+        @change="handlePageChange"
+      ></b-pagination>
+    </div>
   </div>
 </template>
 <script>
 import axios from "axios";
 import navbar from "./navbar.vue";
+import moment from "moment";
 export default {
   components: { navbar },
   data() {
     return {
       isTabActive: 1,
       orders: [],
+      moment: moment,
       totalOrders: 0,
       orderPerPage: 5,
       currentPage: 1,
+      selectedShow: null,
+      loading: false,
+      img: ["http://urlr.me/YMQXD", "https://placekitten.com/400/300"],
+      showOptions: [
+        { value: null, text: "Please select an option" },
+        { value: "a", text: "last 5 days" },
+        { value: "b", text: "last 10 days" },
+      ],
     };
   },
 
@@ -177,29 +309,51 @@ export default {
       }
     },
     async getAllOrders() {
+      let page = this.currentPage;
+      this.loading = true;
       await axios
-        .get(`orders/all`)
+        .get(`orders/all?page=${page}`)
         .then((res) => {
           this.orders = res.data.data;
           this.totalOrders = res.data.total;
-          this.totalOrders = res.data.total;
           this.orderPerPage = res.data.per_page;
+          this.loading = false;
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          console.log(err);
+          this.loading = false;
+        });
     },
     async getOrderByStatus(status) {
-      console.log(status);
+      let page = this.currentPage;
+      this.loading = true;
       await axios
-        .get(`shipping-checkout/orders/${status}`)
+        .get(`shipping-checkout/orders/${status}?page=${page}`)
         .then((res) => {
           this.orders = res.data.data;
           this.totalOrders = res.data.total;
-          this.totalOrders = res.data.total;
           this.orderPerPage = res.data.per_page;
+          this.loading = false;
 
           console.log(res.data);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          console.log(err);
+          this.loading = false;
+        });
+    },
+    handlePageChange(value) {
+      this.currentPage = value;
+      let index = this.isTabActive;
+      if (index == 2) {
+        this.getOrderByStatus("pending");
+      } else if (index == 3) {
+        this.getOrderByStatus("complete");
+      } else if (index == 4) {
+        this.getOrderByStatus("cancel");
+      } else {
+        this.getAllOrders();
+      }
     },
   },
 };
@@ -207,8 +361,6 @@ export default {
 <style scoped>
 .progress {
   width: 160px;
-
-  /* border-radius: 8%; */
   line-height: 50px;
   margin-right: 50px;
   margin-left: -30px;
@@ -302,8 +454,32 @@ export default {
   font-size: 14px;
   margin-left: 5px;
 }
-.mobile-view{
-    max-width: 100%;
+.mobile-view {
+  max-width: 100%;
+}
+.font-20 {
+  font-size: 20px;
+}
+.flou {
+  color: #b6b2b2;
+}
+.text-small {
+  font-size: 16px;
+}
+.r-img {
+  border-radius: 5px;
+  width: 100%;
+}
+@media only screen and (max-width: 768px) {
+  .order-text {
+    font-size: 12px;
+  }
+  .flou {
+    font-size: 12px !important;
+  }
+  .text-small {
+    font-size: 12px;
+  }
 }
 @media only screen and (max-width: 1200px) {
   .desktop.parent {

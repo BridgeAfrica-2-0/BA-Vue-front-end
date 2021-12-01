@@ -47,14 +47,13 @@ import profileSettingsEdit from "./profileSettingsEdit"
 
 
 import { social } from './social';
-  
+
 Vue.use(Vuex);
 
+//axios.defaults.baseURL = process.env.VUE_APP_API_URL_DEV;
+axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 
-// axios.defaults.baseURL = "https://test.maxinemoffett.com/api/v1/";
 
-
- axios.defaults.baseURL = process.env.VUE_APP_API_URL_EDS;
 
 export default new Vuex.Store({
     modules: {
@@ -102,5 +101,3 @@ export default new Vuex.Store({
 
     }
 });
-
-

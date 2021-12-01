@@ -22,13 +22,15 @@ export const defaultLocale = 'fr'
 
 export const fr = {
 
-    auth: auth,
-    businessf: businessf,
-    search: search,
-    Order: Order,
-    myOrders: myOrders,
+ 
+  auth: auth,
+  // businessf:businessf,
+  search: search,
+  Order:Order,
+  myOrders:myOrders,
+  
+   passrecover: passrecover,
 
-    passrecover: passrecover,
     welcome: welcome,
     dashboard: dashboard,
     profileowner: profileowner,

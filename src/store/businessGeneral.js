@@ -1,4 +1,4 @@
-  
+
 import axios from "axios";
 
 export default {
@@ -9,26 +9,26 @@ export default {
 
   getters: {
     getbusiness(state) {
-        return state.business;
-      }
+      return state.business;
+    }
   },
 
   mutations: {
     setbusiness(state, business) {
-        state.business = business;
+      state.business = business;
     }
   },
 
-actions: {
+  actions: {
 
-    getbusiness( {commit}, businessId ){
+    getbusiness({ commit }, businessId) {
       return axios
-      .get("business/general/update/"+businessId )
-      .then(({ data }) => {
+        .get("business/general/update/" + businessId)
+        .then(({ data }) => {
           commit("setbusiness", data.data);
-        console.log(data);
+          console.log(data);
 
-      })
+        })
     }
 
 

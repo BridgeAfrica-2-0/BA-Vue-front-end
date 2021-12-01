@@ -142,7 +142,7 @@ const routes = [
   {
     path: "/myorders",
     name: "orders",
-    component: myorders,
+    component: orders,
     // meta: {
     //   auth: true,
     // },

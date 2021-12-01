@@ -176,8 +176,9 @@
           text="Manage"
           class="align-self-center"
         >
-          <b-dropdown-item>{{ $t("myOrders.Archive") }}</b-dropdown-item>
-          <b-dropdown-item>{{ $t("myOrders.Delete") }}</b-dropdown-item>
+          <b-dropdown-item>Complete</b-dropdown-item>
+          <b-dropdown-item>Archive</b-dropdown-item>
+          <b-dropdown-item>Delete</b-dropdown-item>
         </b-dropdown>
       </div>
       <div class="row d-flex justify-content-between px-3 mb-3">
@@ -238,6 +239,11 @@
             {{ order.status }}
           </h3>
         </div>
+      </div>
+      <div
+        class="d-flex justify-content-lg-end justify-content-center my-lg-5 my-3"
+      >
+        <b-button variant="primary" class="px-5">Reorder</b-button>
       </div>
     </div>
     <div class="row my-4" v-if="loading">

@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="row d-flex align-items-center justify-content-between">
-      <div class="col-2 col-md-8">
+    <div class="row ">
+      <div class="col-5 col-md-8">
         <p>
           <b-icon
             font-scale="1.8"
@@ -12,19 +12,24 @@
           <span class="font-weight-bold">Market</span>
         </p>
       </div>
-      <div class="col col-md text-center">
-        <b-button
-          class="pos"
-          variant="outline-primary"
-          @click="displayOrders"
-          >{{ my_orders }}</b-button
-        >
+       <div class="col-7 col-md ">
+         <div class="row marg">
+
+         
+          <b-button
+            class=" mx-1"
+            variant="outline-primary"
+            @click="displayOrders"
+            >{{ my_orders }}</b-button
+          >
+       
+              <!-- <div class="col col-md"> -->
+          <b-button variant="outline-primary" @click="createProduct"
+            >Add Product</b-button
+          >
+         </div>
       </div>
-      <div class="col col-md">
-        <b-button variant="outline-primary" @click="createProduct"
-          >Add Product</b-button
-        >
-      </div>
+        <!-- </div> -->
     </div>
     <div class="col-12">
       <hr class="h-divider" />
@@ -299,10 +304,10 @@ export default {
   data() {
     return {
       options: ["list", "of", "options"],
-      orders: true,
+      orders: false,
       archive: false,
-      market: false,
-      my_orders: "market",
+      market: true,
+      my_orders: "orders",
       showModal: false,
       load: false,
       loader: false,
@@ -586,7 +591,11 @@ export default {
   height: 190px;
   cursor: pointer;
 }
-
+@media only screen and (min-width: 768px) {
+  .marg{
+   margin-left: 50px;
+  }
+}
 @media only screen and (max-width: 768px) {
   .products {
     position: relative;

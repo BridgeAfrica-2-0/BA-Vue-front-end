@@ -11,11 +11,14 @@
             />
           </div>
         </b-col>
-        <b-col cols="7" sm="8" md="7">
+        <b-col cols="6" sm="8" md="7">
           <p class="text">
             <strong class="title cursor-pointer" @click="productDetails">
-              {{ product.name }}
-            </strong>
+              {{ product.name }} 
+            </strong> 
+            
+                  
+
             <br />
             <strong> Description </strong> <br />
             {{ product.description.substring(0, 30) }}
@@ -28,6 +31,18 @@
             <br />
           </p>
         </b-col>
+        <b-col cols="1" sm="1" md="1" class="">
+          <div>
+                      <b-dropdown size="md"  variant="link" toggle-class="text-decoration-none mx-4" no-caret>
+                        <template #button-content><b-icon  @click="showEdit" icon="three-dots-vertical"></b-icon>
+
+                        </template>
+                        <b-dropdown-item-button  v-b-modal.modal-1000>Edit</b-dropdown-item-button>
+                        <b-dropdown-item-button >Delete</b-dropdown-item-button>
+                       
+                      </b-dropdown>
+                    </div>
+        </b-col>
       </b-row>
 
       <div>
@@ -35,8 +50,13 @@
       </div>
     </div>
     <!-- EDIT PRODUCT MODAL -->
-
-    <b-modal hide-footer title="Edit product">
+    <!-- <b-modal :id="'modal-1000'+product.id" hide-footer title="Edit product"> -->
+       <editProduct
+        :showModal="Edit"
+       :product="product"
+        />
+   <!-- </b-modal> -->
+    <!-- <b-modal id="modal-1000" hide-footer title="Edit product">
       <b-form>
         <b-row>
           <b-col cols="12" md="6">
@@ -137,7 +157,7 @@
 
         <b-button class="mt-2 btn-block" variant="primary"> Add</b-button>
       </b-form>
-    </b-modal>
+    </b-modal> -->
     <!-- PRODUCT DETAILS MODAL -->
     <ProductDetails
       @closemodal="closeDetailsProduct"
@@ -149,15 +169,20 @@
 
 <script>
 import ProductDetails from "./ProductDetails.vue";
+import editProduct from "./editProduct.vue";
 export default {
+
+  
   props: ["product"],
   data() {
     return {
       viewProduct: false,
+      Edit : false
     };
   },
   components: {
     ProductDetails,
+    editProduct
   },
   methods: {
     /**
@@ -167,6 +192,9 @@ export default {
      */
     productDetails() {
       this.viewProduct = true;
+    },
+    showEdit(){
+        this.Edit = true;
     },
     closeDetailsProduct() {
       this.viewProduct = false;

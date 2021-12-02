@@ -5,7 +5,7 @@
         variant="info"
         :src="comment.picture"
         :class="`${
-          'user' == comment.user_type ? 'rounded-circle' : ''
+          'user' == comment.user_type ? 'rounded-circle' : 'square'
         } avat-comment b-r`"
       ></b-avatar>
 
@@ -54,13 +54,13 @@
         />
         <b-spinner
           style="color: rgb(231, 92, 24); position: absolute; right: 17px"
-          v-if="loading"
+          v-if="replyLoading"
         ></b-spinner>
         <fas-icon
           class="primary send-cmt"
           :icon="['fas', 'paper-plane']"
           @click="onProcess"
-          v-if="updateCommentText.trim().length >= 1 && !loading"
+          v-if="updateCommentText.trim().length >= 1 && !replyLoading"
         />
       </p>
 
@@ -168,7 +168,7 @@ export default {
       reply: false,
       processEdit: false,
       text: "",
-      loading: false,
+      replyLoading: false,
       proccesEdit: false,
     };
   },
@@ -186,24 +186,22 @@ export default {
   computed: {
     isYourComment() {
       return (
-        this.profile.id == this.comment.id &&
+        this.profile.id == this.comment.user_id &&
         this.profile.user_type == this.comment.user_type
       );
     },
 
     isEditMode() {
-      // return this.isYourComment ? true : false;
-      return true;
+      return this.isYourComment ? true : false;
     },
   },
   methods: {
     onProcess() {
-      this.loading = true;
+      this.replyLoading = true;
       this.$emit("update-comment", this.updateCommentText);
 
-      this.updateCommentText = "";
-      this.processEdit = false;
-      this.loading = true;
+      this.toggle()
+      this.replyLoading = false;
     },
 
     onEscape() {
@@ -213,7 +211,6 @@ export default {
     },
 
     toggle() {
-      console.log(this.comment);
       if (!this.proccesEdit) this.updateCommentText = "";
       else this.updateCommentText = this.comment.comment;
 
@@ -231,6 +228,10 @@ export default {
 <style scoped>
 .cursor {
   cursor: pointer;
+}
+
+.square {
+  border-radius: none !important;
 }
 
 .fs-12 {

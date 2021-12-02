@@ -186,7 +186,7 @@
       v-for="comment in comments"
       :key="comment.id"
       :item="comment"
-      :uuid="post.post_id"
+      :uuid="post.post_id ? post.post_id : post.id"
       :onDelete="() => onDelete(comment.id)"
       @update-comment="(text) => onUpdate({ uuid: comment.id, text })"
     />
@@ -257,6 +257,7 @@ export default {
     processLike: false,
     createCommentRequestIsActive: false,
     loadComment: false,
+    commentHasLoad: false,
   }),
 
   created() {
@@ -312,7 +313,7 @@ export default {
 
     onUpdate: async function ({ uuid, text }) {
       const request = await this.$repository.post.update({ uuid, text });
-    
+
       if (request.success) {
         this.comments = this.comments.map((e) =>
           e.id == uuid ? request.data : e
@@ -322,15 +323,12 @@ export default {
           blockClass: "custom-block-class",
           message: "Comment Updated",
         });
-
-        return true
       } else {
         this.flashMessage.show({
           status: "success",
           blockClass: "custom-block-class",
           message: request.data,
         });
-        return false
       }
     },
 
@@ -347,7 +345,7 @@ export default {
         });
 
         if (request.success)
-          this.post = Object.assign(this.post, {
+          this.item = Object.assign(this.post, {
             is_liked: this.post.is_liked ? 0 : 1,
             likes_count: !this.post.is_liked
               ? this.post.likes_count + 1
@@ -380,11 +378,7 @@ export default {
       if (request.success) {
         this.comments = [request.data, ...this.comments];
         this.comment = "";
-        this.addNewComment({ action: "add:comment:count", uuid: this.post.id });
-        this.post = {
-          ...this.post,
-          comment_count: this.post.comment_count + 1,
-        };
+        this.item.comment_count += 1;
         this.flashMessage.success({
           message: "Comment created",
         });
@@ -405,7 +399,12 @@ export default {
       });
 
       if (request.success) {
-        this.comments = [...this.comments, ...request.data];
+        if (this.commentHasLoad)
+          this.comments = [...this.comments, ...request.data];
+        else {
+          this.commentHasLoad = true;
+          this.comments = request.data;
+        }
         this.hasData = request.data.length ? true : false;
         this.page = request.data.length ? this.page + 1 : this.page;
       }

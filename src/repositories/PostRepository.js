@@ -27,7 +27,6 @@ class Repository {
       }
 
     } catch (error) {
-      console.log(error.message.data)
       return {
         success: false,
         data: error.response.message

@@ -47,8 +47,8 @@
             </div>
           </div>
 
-          <div class="card border-bottom-0 my-3">
-            <div v-for="order in details.orderItems" :key="order.order_id">
+          <div class="card my-3">
+            <div v-for="order in details.orderItems" :key="order.id">
               <div class="row d-flex justify-content-between px-3 mb-3">
                 <span class="flou align-self-center ">
                   {{ order.user_name }}
@@ -111,6 +111,15 @@
               </div>
               <hr />
             </div>
+            <div class="d-flex justify-content-center">
+              <b-pagination
+                v-model="currentPage"
+                pills
+                :per-page="perPage"
+                :total-rows="totalItems"
+                @change="handlePage"
+              ></b-pagination>
+            </div>
           </div>
 
           <div class="row justify-content-end mx-1">
@@ -164,6 +173,9 @@ export default {
       moment: moment,
       orderID: null,
       details: [],
+      totalItems: 0,
+      currentPage: 1,
+      perPage: 5,
       loading: false,
     };
   },
@@ -175,8 +187,9 @@ export default {
   methods: {
     async getOrderDetails() {
       this.loading = true;
+      let page = this.currentPage;
       await axios
-        .get(`user-order/${this.orderID}/items`)
+        .get(`user-order/${this.orderID}/items?page=${page}`)
         .then((res) => {
           this.loading = false;
           this.details = res.data.data;
@@ -186,6 +199,10 @@ export default {
           this.loading = false;
           console.dir(err);
         });
+    },
+    handlePage(value) {
+      this.currentPage = value;
+      this.getOrderDetails();
     },
   },
 };

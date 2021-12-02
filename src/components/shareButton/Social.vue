@@ -5,7 +5,7 @@
     title="Say hi to Vite! A brand new, extremely fast development setup for Vue."
     :description="post.content"
   >
-    {{ title }}++
+    {{ title }}
   </ShareNetwork>
 </template>
 

@@ -1015,10 +1015,6 @@ export default {
       return this.$store.state.businessOwner.businessInfo;
     },
 
-    imageProfile() {
-      return "yoo";
-    },
-
     business_logo() {
       //  return this.$store.state.businessOwner.businessInfo.logo_path;
       return this.$store.state.businessOwner.businessInfo;
@@ -1029,9 +1025,6 @@ export default {
       return this.$store.state.businessOwner.ownerPost;
     },
 
-    profileNamePost() {
-      return "yoo";
-    },
   },
   mounted() {
     this.url = this.$route.params.id;

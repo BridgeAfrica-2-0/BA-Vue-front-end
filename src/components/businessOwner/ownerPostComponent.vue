@@ -184,11 +184,11 @@
 
     <Comment
       v-for="comment in comments"
-      :key="comment.comment_id"
+      :key="comment.id"
       :item="comment"
       :uuid="post.post_id"
-      :onDelete="() => onDelete(comment.comment_id)"
-      @update-comment="(text) => onUpdate({ uuid: comment.comment_id, text })"
+      :onDelete="() => onDelete(comment.id)"
+      @update-comment="(text) => onUpdate({ uuid: comment.id, text })"
     />
     <Loader v-if="loadComment" />
     <NoMoreData
@@ -204,7 +204,7 @@
 <script>
 import { formatNumber, fromNow } from "@/helpers";
 import Loader from "@/components/Loader";
-import { mapMutations, mapGetters } from "vuex";
+import { mapMutations } from "vuex";
 import { NoMoreDataForComment } from "@/mixins";
 
 import Comment from "./comment";
@@ -261,7 +261,7 @@ export default {
 
   created() {
     this.item = this.post;
-    this.comments = this.post.comments
+    this.comments = this.post.comments;
   },
 
   filters: {
@@ -291,9 +291,9 @@ export default {
 
     onDelete: async function (uuid) {
       const request = await this.$repository.post.delete(uuid);
-console.log(request)
+
       if (request.success) {
-        this.comments = this.comments.filter((e) => e.comment_id == uuid);
+        this.comments = this.comments.filter((e) => e.id != uuid);
         this.item.comment_count -= 1;
 
         this.flashMessage.show({
@@ -312,22 +312,25 @@ console.log(request)
 
     onUpdate: async function ({ uuid, text }) {
       const request = await this.$repository.post.update({ uuid, text });
-      
+    
       if (request.success) {
         this.comments = this.comments.map((e) =>
-          e.comment_id == uuid ? request.data : e
+          e.id == uuid ? request.data : e
         );
         this.flashMessage.show({
           status: "success",
           blockClass: "custom-block-class",
-          message: "Comment Deleted",
+          message: "Comment Updated",
         });
+
+        return true
       } else {
         this.flashMessage.show({
           status: "success",
           blockClass: "custom-block-class",
-          message: request.data
+          message: request.data,
         });
+        return false
       }
     },
 
@@ -364,18 +367,18 @@ console.log(request)
       this.createCommentRequestIsActive = true;
       this.loadComment = true;
 
+      let data = { comment: this.comment };
+
+      if (["networks", "NetworkEditors"].includes(this.$route.name))
+        data = Object.assign(data, { networkId: this.$route.params.id });
+
       const request = await this.$repository.share.createComment({
         post: this.post.post_id ? this.post.post_id : this.post.id,
-        data: {
-          networkId: this.$route.params.id
-            ? this.$route.params.id
-            : this.profile.id,
-          comment: this.comment,
-        },
+        data,
       });
 
       if (request.success) {
-        this.comments = [request.data,...this.comments]
+        this.comments = [request.data, ...this.comments];
         this.comment = "";
         this.addNewComment({ action: "add:comment:count", uuid: this.post.id });
         this.post = {
@@ -383,7 +386,7 @@ console.log(request)
           comment_count: this.post.comment_count + 1,
         };
         this.flashMessage.success({
-          message: "Post created",
+          message: "Comment created",
         });
       }
 

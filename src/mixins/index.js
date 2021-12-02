@@ -153,7 +153,7 @@ export const commentMixinsBuisness = {
 
     onLike: async function () {
       const request = await this.$repository.share.commentLike({
-        comment: this.comment.comment_id,
+        comment: this.comment.id,
         network: this.profile.id,
       });
 
@@ -172,7 +172,7 @@ export const commentMixinsBuisness = {
       this.loadComment = true;
       const request = await this.$repository.share.fetchReplyComment({
         post: this.uuid,
-        comment: this.comment.comment_id,
+        comment: this.comment.id,
         page: this.page,
       });
 
@@ -194,7 +194,7 @@ export const commentMixinsBuisness = {
 
       const request = await this.$repository.share.createReplyComment({
         post: this.uuid,
-        comment: this.comment.comment_id,
+        comment: this.comment.id,
         data: {
           comment: this.text,
           networkId: this.profile.id,
@@ -255,11 +255,11 @@ export const commentMixins = {
     nFormatter: formatNumber,
     now: fromNow,
   },
-
+  
   methods: {
     onLike: async function () {
       const request = await this.$repository.share.commentLike({
-        comment: this.comment.comment_id,
+        comment: this.comment.id,
         network: this.profile.id,
       });
 
@@ -277,7 +277,7 @@ export const commentMixins = {
     onShowReply: async function () {
       const request = await this.$repository.share.fetchReplyComment({
         post: this.uuid,
-        comment: this.comment.comment_id,
+        comment: this.comment.id,
         page: 1,
       });
 
@@ -293,7 +293,7 @@ export const commentMixins = {
 
       const request = await this.$repository.share.createReplyComment({
         post: this.uuid,
-        comment: this.comment.comment_id,
+        comment: this.comment.id,
         data: {
           comment: this.text,
           networkId: this.profile.id,

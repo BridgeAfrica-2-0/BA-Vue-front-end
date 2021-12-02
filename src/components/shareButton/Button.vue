@@ -1,6 +1,5 @@
 <template>
   <div style="display: inline-block">
-
     <Box
       :modal="`modal-1-${uuid}`"
       :id="modal"
@@ -102,7 +101,6 @@
     />
     <!-- modal-4 -->
 
-
     <b-dropdown
       size="lg"
       variant="link"
@@ -166,7 +164,7 @@
       <b-dropdown-item
         class="d-flex py-2 cursor-pointer"
         @click="open(`modal-3-${uuid}`)"
-        v-if="isYourOwnPost"
+        v-if="'business' == this.profile.user_type ? false : true"
       >
         <span class="text-ored">
           <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>

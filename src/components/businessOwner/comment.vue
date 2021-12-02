@@ -1,6 +1,6 @@
 <template>
-  <b-row class="mt-2 ml-4">
-    <b-col>
+  <b-row class="my-4 ml-4" @keydown="onEscape">
+    <b-col :class="`${proccesEdit ? 'd-flex' : ''}`">
       <b-avatar
         variant="info"
         :src="comment.picture"
@@ -9,8 +9,8 @@
         } avat-comment b-r`"
       ></b-avatar>
 
-      <div class="msg text" v-if="!isEditMode">
-        <span class="float-right" style="margin-right: -10px">
+      <div class="msg text" v-if="!proccesEdit">
+        <span class="float-right" style="margin-right: -10px" v-if="isEditMode">
           <b-dropdown size="sm" variant="outline primary " class="primary">
             <template class="more" #button-content> </template>
             <b-dropdown-item @click="toggle">Edit</b-dropdown-item>
@@ -18,14 +18,16 @@
           </b-dropdown>
         </span>
 
-        <p class="username mb-0" v-if="!isEditMode">
-          <router-link :to="{ name: 'Follower', params: { id: comment.id } }">
-            {{ comment.name }} <i class="fs-12">{{ comment.created_at | date }}</i>
+        <p class="username mb-0" v-if="!proccesEdit">
+          <router-link
+            :to="{ name: 'Follower', params: { id: comment.user_id } }"
+          >
+            {{ comment.name }}
           </router-link>
         </p>
 
         <read-more
-          v-if="!isEditMode"
+          v-if="!proccesEdit"
           more-str="read more"
           :text="comment.comment"
           link="#"
@@ -37,14 +39,18 @@
       </div>
 
       <!-- Edit message -->
-      <p class="p-0 m-0 pr-3 inline-comment msg text" v-if="isEditMode">
+      <p
+        class="p-0 m-0 pl-3 msg text inline-comment"
+        style="background: transparent; border: 1px solid transparent"
+        v-if="proccesEdit"
+      >
         <input
           placeholder="Edit a Comment"
           class="comment"
           type="text"
-          v-model="text"
+          style="background: transparent"
+          v-model="updateCommentText"
           @keypress.enter="onProcess"
-          v-on:blur="toggle"
         />
         <b-spinner
           style="color: rgb(231, 92, 24); position: absolute; right: 17px"
@@ -54,12 +60,17 @@
           class="primary send-cmt"
           :icon="['fas', 'paper-plane']"
           @click="onProcess"
-          v-if="text.trim().length >= 1 && !loading"
+          v-if="updateCommentText.trim().length >= 1 && !loading"
         />
       </p>
+
+      <p class="fs-12" v-if="proccesEdit">
+        Press [Escape] to <a href="#" @click.prevent="toggle">cancel</a>
+      </p>
+
       <!-- End Edit message -->
 
-      <span v-if="!isEditMode">
+      <span v-if="!proccesEdit">
         <b-icon
           :icon="icon"
           variant="primary"
@@ -70,9 +81,10 @@
         {{ comment.comment_likes | nFormatter }}
       </span>
 
-      <span v-if="!isEditMode" @click="showReply" class="primary ml-2 reply"
-        ><b>Reply</b></span
-      >
+      <span v-if="!proccesEdit" @click="showReply" class="ml-2 reply">
+        <b class="primary mr-3">Reply</b>
+        <i class="fs-12">{{ comment.updated_at | date }}</i>
+      </span>
 
       <div v-if="reply">
         <b-row class="mt-2">
@@ -180,17 +192,30 @@ export default {
     },
 
     isEditMode() {
-      return this.proccesEdit ? (this.isYourComment ? true : false) : false;
+      // return this.isYourComment ? true : false;
+      return true;
     },
   },
   methods: {
     onProcess() {
-      this.$emit("update-comment", this.text);
+      this.loading = true;
+      this.$emit("update-comment", this.updateCommentText);
+
+      this.updateCommentText = "";
+      this.processEdit = false;
+      this.loading = true;
+    },
+
+    onEscape() {
+      if (this.processEdit) return this.toggle();
+
+      return false;
     },
 
     toggle() {
-      if (!this.proccesEdit) this.text = "";
-      else this.text = this.comment.comment;
+      console.log(this.comment);
+      if (!this.proccesEdit) this.updateCommentText = "";
+      else this.updateCommentText = this.comment.comment;
 
       this.proccesEdit = !this.proccesEdit;
     },
@@ -206,6 +231,10 @@ export default {
 <style scoped>
 .cursor {
   cursor: pointer;
+}
+
+.fs-12 {
+  font-size: 12px;
 }
 .msg {
   background-color: #ddd;
@@ -267,7 +296,7 @@ export default {
 .b-r {
   border-radius: 0% !important;
 }
-.fs-12{
+.fs-12 {
   font-size: 12px;
 }
 </style>

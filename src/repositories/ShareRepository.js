@@ -2,11 +2,11 @@
 import axios from "axios"
 
 class Repository {
-  async userPost(credentials,type) {
+  async userPost(credentials, type) {
     try {
       const response = await axios.post(`share/user?poster_type=${type}`, credentials)
       return {
-        success:true
+        success: true
       }
 
     } catch (error) {
@@ -67,10 +67,10 @@ class Repository {
 
   async switch(uuid, type = "network") {
     try {
-      const response = ("network" == type) 
-      ? await axios.post(`switch`, { networkId: uuid }) 
-      : (uuid) ? await axios.post(`switch?id=${uuid}`) : await axios.post(`switch`)
-      
+      const response = ("network" == type)
+        ? await axios.post(`switch`, { networkId: uuid })
+        : (uuid) ? await axios.post(`switch?id=${uuid}`) : await axios.post(`switch`)
+
       return {
         success: true,
         data: response.data.message
@@ -84,9 +84,9 @@ class Repository {
     }
   }
 
-  async WhoIsConnect({ networkId }) {
+  async WhoIsConnect(networkId, type = null) {
     try {
-      const response = await axios.get(`interface?networkId=${networkId}`)
+      const response = await axios.get(type ? `interface?networkId=${networkId}` : `interface`)
       return {
         success: true,
         data: response.data.data
@@ -153,7 +153,7 @@ class Repository {
       const response = await axios.post(`post/comment/${post}`, data)
       return {
         success: true,
-        data: response.data.message
+        data: response.data.data
       }
 
     } catch (error) {

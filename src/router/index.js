@@ -79,7 +79,7 @@ const routes = [
   {
     path: "/myorders/detail/:id",
     name: "ordersdetail",
-    component: ordersdetail,
+    component: OrderDetails,
     // meta: {
     //   auth: true,
     // },

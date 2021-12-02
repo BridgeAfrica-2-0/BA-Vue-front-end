@@ -1,5 +1,6 @@
-<template>
+.<template>
   <div id="app" class="" ref="formContainer">
+
     <transition
       name="fade"
       mode="out-in"
@@ -7,12 +8,9 @@
       @enter="enter"
       @afterEnter="afterEnter"
     >
-      <router-view />
+     <router-view />
     </transition>
 
-    <!-- <notifications group="foo" /> -->
-    <FlashMessage />
-    <router-view />
   </div>
 </template>
 <script>
@@ -75,6 +73,9 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
   margin-left: 5px;
+}
+#flashmessage{
+  z-index: 9999 !important;
 }
 .primary {
   color: #e75c18;

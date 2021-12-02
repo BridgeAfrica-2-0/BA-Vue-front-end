@@ -650,6 +650,9 @@ export default {
           params: { id: this.user.id },
           query: { tabId: 2 },
         }),
+        user: () => null,
+        network: () => null,
+
       },
     };
 

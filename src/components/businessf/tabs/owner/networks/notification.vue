@@ -36,16 +36,18 @@
       <br />
 
       <b-row>
-        <div>
+        <!-- {{notifications}} -->
+        <!-- <div>
           Selected: <strong>{{ selected }}</strong
           ><br />
           All Selected: <strong>{{ selectAll }}</strong>
-        </div>
+        </div> -->
         <b-col cols="12"
           :class="{ active: index == currentPage }"
           v-for="(notification, index) in notifications"
           :key="index"
         >
+        {{notification.notification_text}}
           <div :class="notification.mark_as_read ? 'text-secondary' : 'font-weight-bold'">
             <p class="">
               <span style="display:inline-flex">
@@ -88,8 +90,6 @@
       <!-- {{notifications}}
       {{newNotifications}} -->
     </div>
-
-    <FlashMessage />
 
   </div>
 </template>

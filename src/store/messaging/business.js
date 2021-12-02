@@ -318,7 +318,7 @@ export default {
                         console.log(err);
                     })
             } else {
-                axios.get(`group/list/businesses/${state.currentBizId + keyword }`)
+                axios.get(`group/list/admin/business/${state.currentBizId + keyword }`)
                     .then((res) => {
                         commit("setLoader", false);
                         console.log("Business GROUPS: ", res.data.data);

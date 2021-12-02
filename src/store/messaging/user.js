@@ -106,6 +106,7 @@ export default {
         // [NO BUG]
         GET_USERS_CHAT_LIST({ commit, state }, data) {
             commit("setUsers", []);
+            console.log("currentuser:", state.currentUser.user);
 
             commit("setLoader", true);
             let keyword = data.keyword ? '/' + data.keyword : ''
@@ -136,11 +137,24 @@ export default {
                         commit("setLoader", false);
                         console.log(err);
                     })
-            } else {
+            } else if (data.type == "network") {
                 axios.get(`/messages/userNetwork${keyword}`)
                     .then((res) => {
                         commit("setLoader", false);
                         console.log("Network chat list: ", res.data.data);
+                        commit("setChatList", res.data.data ? res.data.data : {
+                            data: []
+                        });
+                    })
+                    .catch((err) => {
+                        commit("setLoader", false);
+                        console.log(err);
+                    })
+            } else {
+                axios.get(`group/list/users/${state.currentUser.user.id + keyword }`)
+                    .then((res) => {
+                        commit("setLoader", false);
+                        console.log("Business GROUPS: ", res.data.data);
                         commit("setChatList", res.data.data ? res.data.data : {
                             data: []
                         });
@@ -281,6 +295,22 @@ export default {
                 .then((res) => {
                     commit("setLoader", false);
                     console.log("User to network: ", res.data.data);
+                    commit("setUserToUser", res.data.data);
+                })
+                .catch((err) => {
+                    commit("setLoader", false);
+                    console.log(err);
+                })
+        },
+        async GET_USER_TO_GROUP({ commit, state }, data) {
+            commit("setLoader", true);
+            console.log("[DEBUG] user to group", data);
+            let keyword = data.keyword ? '/' + data.keyword : ''
+
+            await axios.get(`/group/${data.receiverID + keyword}`)
+                .then((res) => {
+                    commit("setLoader", false);
+                    console.log("Group: ", res.data.data);
                     commit("setUserToUser", res.data.data);
                 })
                 .catch((err) => {

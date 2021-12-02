@@ -635,6 +635,9 @@
                   >
                     <b-row class="p-4">
                       <b-col>
+                        <b v-if="(type = 'group')">
+                          {{ getName(chat) }}
+                        </b>
                         <p
                           v-if="chat.attachment"
                           class="msg-text mt-0 text"
@@ -769,12 +772,17 @@
                     <!-- <button v-on:click="submitFile()">Submit</button> -->
                   </b-col>
                   <b-col cols="8" class="p-0">
+                    <small v-if="nameSpace.status" class="pr-8 text-danger">
+                      {{ nameSpace.text }}
+                    </small>
                     <b-form-input
                       id="textarea"
                       v-model="input"
                       @keypress.enter="send"
                       class="input-background"
                       placeholder="Enter a message..."
+                      rows="0"
+                      max-rows="3"
                     ></b-form-input>
 
                     <div class="wrapper">
@@ -1171,6 +1179,10 @@ export default {
       socket: io("localhost:7000", {
         transports: ["websocket", "polling", "flashsocket"],
       }),
+      nameSpace: {
+        status: false,
+        text: "",
+      },
       chatSelected: [],
       showsearch: true,
       selecteduser: false,
@@ -1292,6 +1304,19 @@ export default {
     },
   },
   methods: {
+    getName(chat) {
+      return chat.business_i_d
+        ? chat.business_i_d.name
+        : chat.network_i_d
+        ? chat.network_i_d.name
+        : chat.user_i_d
+        ? chat.user_i_d.name
+        : chat.network_editor_i_d
+        ? chat.network_editor_i_d.name
+        : chat.business_editor_i_d
+        ? chat.business_editor_i_d.name
+        : "Anonymous";
+    },
     convert(bytes, decimals = 2) {
       if (bytes === 0) return "0 Bytes";
       const k = 1024;
@@ -1452,7 +1477,10 @@ export default {
       this.socket.emit("create-biz", this.room);
     },
     getCreatedAt(data) {
-      if (moment(data).isBefore(moment())) {
+      let date = moment(data).isBefore(today);
+      let today = moment().format("MM/DD/YYYY");
+      console.log("days:", date);
+      if (date) {
         return moment(data).format("lll");
       } else {
         // return moment(data).format('LT');
@@ -1494,6 +1522,8 @@ export default {
         await this.$store.dispatch("businessChat/GET_BIZ_TO_USER", data);
       } else if (data.type == "network") {
         await this.$store.dispatch("businessChat/GET_BIZ_TO_NETWORK", data);
+      } else if (data.type == "group") {
+        await this.$store.dispatch("businessChat/GET_BIZ_TO_GROUP", data);
       } else {
         await this.$store.dispatch("businessChat/GET_BIZ_TO_BIZ", data);
       }
@@ -1591,13 +1621,20 @@ export default {
         .catch(() => console.log("error"));
     },
     send() {
-      if (this.input != "") {
+      if (this.input.length > 0 && this.input.length < 500) {
         if (this.type == "group") {
           this.sendGroup();
         } else {
           this.sendPrivate();
         }
-      } else console.log("Enter a message");
+      } else {
+        this.nameSpace.status = true;
+
+        this.nameSpace.text =
+          this.input.length == 0
+            ? "Enter at least one character"
+            : "Enter at most 500 characters";
+      }
     },
     sendPrivate() {
       this.formData.append("attachment", this.file);

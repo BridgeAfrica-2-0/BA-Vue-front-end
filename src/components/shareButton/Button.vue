@@ -102,6 +102,7 @@
     />
     <!-- modal-4 -->
 
+
     <b-dropdown
       size="lg"
       variant="link"
@@ -110,7 +111,7 @@
       position="bottom"
     >
       <template #button-content>
-        <b-icon class="primary ml-3" icon="share" />
+        <b-icon class="primary" icon="share" />
       </template>
 
       <b-dropdown-text class="box-title">

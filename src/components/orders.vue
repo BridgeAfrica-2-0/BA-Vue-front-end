@@ -168,7 +168,11 @@
           <span class="font-weight-bold">
             {{ $t("myOrders.Order") }}
           </span>
-          <span class="text-success">#{{ order.order_id }}</span>
+          <span
+            class="text-success cursor"
+            @click="gotoOrderDetails(order.order_id)"
+            >#{{ order.order_id }}</span
+          >
         </p>
         <b-dropdown
           variant="ligth"
@@ -201,7 +205,10 @@
         </div>
       </div>
       <hr />
-      <div class="row px-3 my-4">
+      <div
+        class="row px-3 my-4 cursor"
+        @click="gotoOrderDetails(order.order_id)"
+      >
         <div class="col-lg-3 col-4">
           <splide :options="{ rewind: true }" class="r-img">
             <splide-slide cl v-for="(im, index) in img" :key="index">
@@ -396,6 +403,9 @@ export default {
       } else {
         this.getAllOrders();
       }
+    },
+    gotoOrderDetails(id) {
+      this.$router.push(`/myorders/detail/${id}`);
     },
   },
 };

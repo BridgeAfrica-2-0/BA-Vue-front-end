@@ -176,9 +176,16 @@
           text="Manage"
           class="align-self-center"
         >
-          <b-dropdown-item>Complete</b-dropdown-item>
-          <b-dropdown-item>Archive</b-dropdown-item>
-          <b-dropdown-item>Delete</b-dropdown-item>
+          <b-dropdown-item
+            @click="updateOrderStatus('complete', order.order_id)"
+            >Complete</b-dropdown-item
+          >
+          <b-dropdown-item @click="updateOrderStatus('archive', order.order_id)"
+            >Archive</b-dropdown-item
+          >
+          <b-dropdown-item @click="updateOrderStatus('delete', order.order_id)"
+            >Delete</b-dropdown-item
+          >
         </b-dropdown>
       </div>
       <div class="row d-flex justify-content-between px-3 mb-3">
@@ -243,7 +250,12 @@
       <div
         class="d-flex justify-content-lg-end justify-content-center my-lg-5 my-3"
       >
-        <b-button variant="primary" class="px-5">Reorder</b-button>
+        <b-button
+          variant="primary"
+          class="px-5"
+          @click="updateOrderStatus('complete', order.order_id)"
+          >Reorder</b-button
+        >
       </div>
     </div>
     <div class="row my-4" v-if="loading">
@@ -292,6 +304,7 @@ export default {
 
   created() {
     this.getAllOrders();
+    // this.updateOrderStatus("complete", 10);
   },
   methods: {
     changeTab(index) {
@@ -340,8 +353,39 @@ export default {
           this.loading = false;
         });
     },
+    async updateOrderStatus(status, id) {
+      this.loading = true;
+      let data = {
+        OrderId: id,
+        status: status,
+      };
+      axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
+      await axios
+        .post(`order/actionUserOrder`, data)
+        .then((res) => {
+          if (res.status == 200) {
+            this.flashMessage.show({
+              status: "success",
+              message: `Order status is updated to ${status}`,
+              blockClass: "custom-block-class",
+            });
+            this.getOrders();
+          }
+        })
+        .catch((err) => {
+          console.dir(err);
+          this.flashMessage.show({
+            status: "error",
+            message: err.response.data.message,
+            blockClass: "custom-block-class",
+          });
+        });
+    },
     handlePageChange(value) {
       this.currentPage = value;
+      this.getOrders();
+    },
+    getOrders() {
       let index = this.isTabActive;
       if (index == 2) {
         this.getOrderByStatus("pending");

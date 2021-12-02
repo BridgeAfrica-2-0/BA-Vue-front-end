@@ -46,6 +46,108 @@
               </span> -->
             </div>
           </div>
+
+          <div class="card border-bottom-0 my-3">
+            <div v-for="order in details.orderItems" :key="order.order_id">
+              <div class="row d-flex justify-content-between px-3 mb-3">
+                <span class="flou align-self-center ">
+                  {{ order.user_name }}
+                  {{ moment(order.created_at).format("MM/DD/YYYY h:m:s") }}
+                </span>
+                <div class="d-block d-lg-none align-self-center text-small">
+                  <span
+                    >Status:
+                    <span class="text-success">{{ order.status }}</span></span
+                  >
+                </div>
+              </div>
+              <div class="row px-3 my-4 cursor">
+                <div class="col-lg-3 col-4">
+                  <splide :options="{ rewind: true }" class="r-img">
+                    <splide-slide cl>
+                      <img :src="order.product_picture" class="r-img" />
+                    </splide-slide>
+                  </splide>
+                </div>
+                <div class="col-lg-3 col-4 font-weight-bold text-left">
+                  <h3 class="text-small text-capitalize">
+                    {{ $t("myOrders.Product_Qty") }} :
+                  </h3>
+                  <h3 class="text-small text-capitalize">
+                    {{ $t("myOrders.Price") }} :
+                  </h3>
+                  <h3 class="text-small text-capitalize">
+                    {{ $t("myOrders.shipping_cost") }}:
+                  </h3>
+                  <h3 class="text-small text-capitalize">
+                    {{ $t("myOrders.Total") }} :
+                  </h3>
+                </div>
+                <div class="col-lg-3 col-4 text-left">
+                  <h3 class="text-small">
+                    {{ order.quantity }}
+                  </h3>
+                  <h3 class="text-small">{{ order.price }} Fcfa</h3>
+                  <h3 class="text-small">{{ order.shipping_amount }} Fcfa</h3>
+                  <h3 class="text-small">
+                    {{
+                      parseFloat(order.sub_total) *
+                        parseFloat(order.tax_amount) +
+                        parseFloat(order.shipping_amount)
+                    }}
+                    XAF
+                  </h3>
+                </div>
+                <div class="col-lg-3 d-none d-lg-block">
+                  <h3 class="font-weight-bold text-small text-capitalize">
+                    {{ $t("myOrders.status") }}
+                  </h3>
+                  <h3
+                    class="text-success font-weight-normal text-small text-capitalize"
+                  >
+                    {{ order.status }}
+                  </h3>
+                </div>
+              </div>
+              <hr />
+            </div>
+          </div>
+
+          <div class="row justify-content-end mx-1">
+            <div class="card col-md-6 p-md-4 py-4">
+              <div class="p-md-4">
+                <div class="d-flex justify-content-between">
+                  <p class="text-small font-weight-bold mb-0">
+                    Total Summary :
+                  </p>
+                  <p class="text-small font-weight-bold mb-0">
+                    {{ details.Total }} FCFA
+                  </p>
+                </div>
+                <div class="d-flex justify-content-between">
+                  <p class="text-small font-weight-bold mb-0">Total Price :</p>
+                  <p class="text-small font-weight-bold mb-0">
+                    {{ details.TotalPrice }} XAF
+                  </p>
+                </div>
+                <div class="d-flex justify-content-between">
+                  <p class="text-small font-weight-bold mb-0">
+                    Total Shipping Fee :
+                  </p>
+                  <p class="text-small font-weight-bold mb-0">
+                    {{ details.TotalShippingFee }} XAF
+                  </p>
+                </div>
+              </div>
+              <hr />
+              <div class="d-flex justify-content-between">
+                <p class="text-small font-weight-bold mb-0">Total :</p>
+                <p class="text-small font-weight-bold mb-0">
+                  {{ details.Total }} XAF
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

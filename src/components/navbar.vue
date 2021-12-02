@@ -204,14 +204,7 @@
                     <div v-for="message in messages" :key="message.id">
                       <hr class="h-divider" />
                       <div
-                        class="
-                          d-inline-flex
-                          flex-row
-                          justify-content-between
-                          align-items-center
-                          suggest-item
-                          cursor-pointer
-                        "
+                        class="d-inline-flex flex-row justify-content-between align-items-center suggest-item cursor-pointer"
                       >
                         <div class="d-inline-flex flex-row align-items-center">
                           <div>
@@ -270,17 +263,8 @@
                     >
                       <hr class="h-divider" />
                       <div
-                        class="
-                          d-inline-flex
-                          flex-row
-                          align-items-center
-                          suggest-item
-                          cursor-pointer
-                        "
+                        class="d-inline-flex flex-row align-items-center suggest-item cursor-pointer"
                       >
-                        <!-- <div>
-                          <img src="@/assets/img/profile-pic.jpg" class="rounded-circle" alt="" width="30" height="30" />
-                        </div> -->
                         <div class="d-flex flex-column ml-3">
                           <div>{{ notification.notification_text }}</div>
                           <div class="small text-muted">
@@ -298,11 +282,7 @@
                     <router-link :to="newRedirection('notification')"
                       ><u>See all Notifications</u></router-link
                     >
-                    <!-- <a
-                      href="https://bridgeafrica.info/nav/notifications-view-all.html"
-                      class="text-ored"
-                      ><u>See all Notifications</u></a
-                    > -->
+                    
                   </div>
                 </b-popover>
               </div>
@@ -342,13 +322,7 @@
                 <b-popover target="other-menu" triggers="hover" placement="top">
                   <div class="popover-body">
                     <div
-                      class="
-                        d-inline-flex
-                        flex-row
-                        align-items-center
-                        mb-1
-                        w-full
-                      "
+                      class="d-inline-flex flex-row align-items-center mb-1 w-full"
                     >
                       <Activity />
                     </div>
@@ -357,12 +331,7 @@
 
                     <router-link
                       :to="{ name: 'orders' }"
-                      class="
-                        other-menu
-                        suggest-item
-                        cursor-pointer
-                        text-decoration-none text-dark
-                      "
+                      class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
                     >
                       <span class="mr-2"
                         ><fas-icon
@@ -375,12 +344,7 @@
 
                     <router-link
                       :to="{ name: 'settings' }"
-                      class="
-                        other-menu
-                        suggest-item
-                        cursor-pointer
-                        text-decoration-none text-dark
-                      "
+                      class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
                     >
                       <span class="mr-2"
                         ><fas-icon
@@ -423,12 +387,7 @@
                     <a
                       @click="logout"
                       href="#"
-                      class="
-                        other-menu
-                        suggest-item
-                        cursor-pointer
-                        text-decoration-none text-dark
-                      "
+                      class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
                     >
                       <span class="mr-2"
                         ><fas-icon
@@ -485,12 +444,7 @@
 
             <router-link
               :to="{ name: 'orders' }"
-              class="
-                other-menu
-                suggest-item
-                cursor-pointer
-                text-decoration-none text-dark
-              "
+              class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
             >
               <span class="mr-2"
                 ><fas-icon
@@ -503,12 +457,7 @@
 
             <router-link
               :to="{ name: 'settings' }"
-              class="
-                other-menu
-                suggest-item
-                cursor-pointer
-                text-decoration-none text-dark
-              "
+              class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
             >
               <span class="mr-2"
                 ><fas-icon class="violet search" :icon="['fas', 'cogs']"
@@ -548,12 +497,7 @@
             <a
               href="#"
               @click="logout"
-              class="
-                other-menu
-                suggest-item
-                cursor-pointer
-                text-decoration-none text-dark
-              "
+              class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
             >
               <span class="mr-2"
                 ><fas-icon
@@ -596,6 +540,7 @@ export default {
       },
     },
   },
+
   data() {
     return {
       isActive: false,
@@ -607,6 +552,7 @@ export default {
       redirectionPatterns: null,
     };
   },
+
   computed: {
     ...mapGetters({
       hasLauchNetworkRequest: "social/INIT",
@@ -615,17 +561,14 @@ export default {
       auth: "auth/user",
     }),
   },
-  beforeMount() {
-    console.log("beforeMount");
-  },
+
   created() {
-    console.log("created");
     this.init();
 
     this.notificationPatterns = {
       user: () => "/notification/latest/user",
       business: () => `/notification/business/${this.user.id}`,
-      network: () => "/notification/latest/user"
+      network: () => null,
     };
 
     this.messagePatterns = {
@@ -636,13 +579,13 @@ export default {
 
     this.redirectionPatterns = {
       message: {
+        user: () => null,
         business: () => ({
           name: "BusinessOwner",
           params: { id: this.user.id },
           query: { tabId: 1 },
         }),
         network: () => null,
-        user: () => null,
       },
       notification: {
         business: () => ({
@@ -650,8 +593,8 @@ export default {
           params: { id: this.user.id },
           query: { tabId: 2 },
         }),
-        network: () => null,
         user: () => null,
+        network: () => null,
       },
     };
 
@@ -678,15 +621,13 @@ export default {
 
     updateNotificationEvent() {
       try {
-        const newRouteNotificationApi =
-          this.notificationPatterns[
-            this.$store.state.auth.profilConnected.user_type
-          ]();
+        const newRouteNotificationApi = this.notificationPatterns[
+          this.$store.state.auth.profilConnected.user_type
+        ]();
 
-        const newRouteMessageApi =
-          this.messagePatterns[
-            this.$store.state.auth.profilConnected.user_type
-          ]();
+        const newRouteMessageApi = this.messagePatterns[
+          this.$store.state.auth.profilConnected.user_type
+        ]();
 
         this.newNotification(newRouteNotificationApi);
         this.newMessage(newRouteMessageApi);
@@ -696,11 +637,6 @@ export default {
     },
 
     newRedirection(type) {
-      console.log(type, '-----------------------------------------')
-      console.log(this.redirectionPatterns[type]);
-      // console.log(this.redirectionPatterns[type][this.user.user_type]());
-
-
       const newPath = this.redirectionPatterns[type][this.user.user_type]();
 
       if (newPath) {
@@ -735,7 +671,7 @@ export default {
     navLink(type) {
       const link = {
         home: () => {
-          return this.profile ? "dashbord" : "home1";
+          return this.profile ? "dashboard" : "home1";
         },
       };
       try {

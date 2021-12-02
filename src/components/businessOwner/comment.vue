@@ -20,7 +20,7 @@
 
         <p class="username mb-0" v-if="!isEditMode">
           <router-link :to="{ name: 'Follower', params: { id: comment.id } }">
-            {{ comment.name }} <i>{{ comment.created_at | date }}</i>
+            {{ comment.name }} <i class="fs-12">{{ comment.created_at | date }}</i>
           </router-link>
         </p>
 
@@ -266,5 +266,8 @@ export default {
 
 .b-r {
   border-radius: 0% !important;
+}
+.fs-12{
+  font-size: 12px;
 }
 </style>

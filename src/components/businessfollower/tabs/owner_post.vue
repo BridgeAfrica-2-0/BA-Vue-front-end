@@ -69,7 +69,7 @@
     </b-card> -->
 
     <!-- User Posts Listing Section-->
-    <b-card class="px-md-3">
+   
       <div class="">
         <div class="col-md-12 col-lg-12 d-flex align-items-stretch mb-lg-0" style="padding-left: 0; padding-top: 3px">
           <!-- <b-button v-b-modal.modal-xl variant="primary">xl modal</b-button> -->
@@ -302,7 +302,7 @@
       />
 
       <infinite-loading :identifier="infiniteId" ref="infiniteLoading" @infinite="infiniteHandler"></infinite-loading>
-    </b-card>
+    
   </div>
 </template>
 

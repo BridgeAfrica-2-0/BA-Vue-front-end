@@ -136,7 +136,7 @@
               variant="primary"
               aria-hidden="true"
             ></b-icon>
-            {{ item.comment_count | nFormatter }} 
+            {{ item.comment_count | nFormatter }}
           </span>
           <ShareButton :post="item" :type="'profile'" v-if="canBeDelete" />
         </b-col>
@@ -291,7 +291,7 @@ export default {
 
     onDelete: async function (uuid) {
       const request = await this.$repository.post.delete(uuid);
-
+console.log(request)
       if (request.success) {
         this.comments = this.comments.filter((e) => e.comment_id == uuid);
         this.item.comment_count -= 1;
@@ -312,10 +312,10 @@ export default {
 
     onUpdate: async function ({ uuid, text }) {
       const request = await this.$repository.post.update({ uuid, text });
-
+      
       if (request.success) {
         this.comments = this.comments.map((e) =>
-          e.comment_id == uuid ? response.data : e
+          e.comment_id == uuid ? request.data : e
         );
         this.flashMessage.show({
           status: "success",
@@ -326,7 +326,7 @@ export default {
         this.flashMessage.show({
           status: "success",
           blockClass: "custom-block-class",
-          message: "Something wrong happen. Try again",
+          message: request.data
         });
       }
     },

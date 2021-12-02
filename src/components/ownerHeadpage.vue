@@ -227,9 +227,9 @@
 </template>
 
 <script>
+
 import VueCropper from "vue-cropperjs";
 import "cropperjs/dist/cropper.css";
-import { h } from "vue";
 
 export default {
   name: "headPageOwner",

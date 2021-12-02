@@ -88,7 +88,7 @@ export default {
         this.loading = false;
         this.flashMessage.show({
           status: "success",
-          message: "User Unblocked"
+          message: this.$t('businessowner.User_Unblocked')
         });
 			})
       .catch(err => {
@@ -96,7 +96,7 @@ export default {
         this.loading = false;
         this.flashMessage.show({
           status: "error",
-          message: "Unable to Unblocked User"
+          message: this.$t('businessowner.Unable_to_Unblocked_User')
         });
       });
     }

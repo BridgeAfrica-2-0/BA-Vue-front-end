@@ -165,12 +165,12 @@ export default {
         limit: 20,
         busiess_id: "",
         businessVisibility: [
-          { label: "Published", value: "publish" },
-          { label: "Unpublish", value: "unpublish" },
+          { label: this.$t('businessowner.Published'), value: "publish" },
+          { label: this.$t('businessowner.Unpublish'), value: "unpublish" },
         ],
         postingPermissions: [ 
-          { label: 'Admin only', value: 'Admin only' }, 
-          { label: 'Allow editor to post', value: 'Allow editor to post'}
+          { label: this.$t('businessowner.Admin_only'), value: 'Admin only' }, 
+          { label: this.$t('businessowner.Allow_editor_to_post'), value: 'Allow editor to post'}
         ],
         permission: null,
         business_form: null
@@ -241,7 +241,7 @@ export default {
         this.SPupdateGeneralInfo = !this.SPupdateGeneralInfo;
         this.flashMessage.show({
           status: "success",
-          message: "Changes Made Successfuly"
+          message: this.$t('businessowner.Changes_Made_Successfuly')
         });  
       })
       .catch(err => {
@@ -249,7 +249,7 @@ export default {
         this.SPupdateGeneralInfo = !this.SPupdateGeneralInfo;
         this.flashMessage.show({
           status: "error",
-          message: "Unable To Make Changes"
+          message: this.$t('businessowner.Unable_To_Make_Changes')
         });
       });
     },
@@ -262,7 +262,7 @@ export default {
         console.log(`business/general/delete/${busiess_id}`);
         this.flashMessage.show({
           status: "success",
-          message: "Business Deleted"
+          message: this.$t('businessowner.Business_Deleted')
         });
           
       })
@@ -270,7 +270,7 @@ export default {
         console.log({ err: err });
         this.flashMessage.show({
           status: "error",
-          message: "Unable To Delete Business"
+          message: this.$t('businessowner.Unable_To_Delete_Business')
         });
       });
 		},

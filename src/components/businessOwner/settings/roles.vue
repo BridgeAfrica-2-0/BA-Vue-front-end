@@ -233,14 +233,14 @@ export default {
           this.displayEditor();
           this.flashMessage.show({
             status: "success",
-            message: "New Role Updated",
+            message: this.$t('businessowner.New_Role_Updated'),
           });
         })
         .catch((err) => {
           console.log({ err: err });
           this.flashMessage.show({
             status: "error",
-            message: "Unable to Update New Role",
+            message: this.$t('businessowner.Unable_to_Update_New_Role'),
           });
         });
     },
@@ -265,7 +265,7 @@ export default {
           this.SPassign = false;
           this.flashMessage.show({
             status: "success",
-            message: "New Role Assigned",
+            message: this.$t('businessowner.New_Role_Assigned'),
           });
         })
         .catch((err) => {
@@ -273,7 +273,7 @@ export default {
           this.SPassign = false;
           this.flashMessage.show({
             status: "error",
-            message: "Unable to Assigned New Role",
+            message: this.$t('businessowner.Unable_to_Assigned_New_Role'),
           });
         });
     },
@@ -288,14 +288,14 @@ export default {
           this.displayEditor();
           this.flashMessage.show({
             status: "success",
-            message: "Editor Deleted",
+            message: this.$t('businessowner.Editor_Deleted'),
           });
         })
         .catch((err) => {
           console.log({ err: err });
           this.flashMessage.show({
             status: "error",
-            message: "Unable To Delete Editor",
+            message: this.$t('businessowner.Unable_To_Delete_Editor'),
           });
         });
     },

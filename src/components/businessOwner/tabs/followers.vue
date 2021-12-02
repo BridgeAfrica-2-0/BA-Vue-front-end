@@ -2,9 +2,9 @@
   <div>
     <b-card>
       <b-tabs content-class="mt-3">
-        <b-tab title="People" active>
+        <b-tab :title="$t('businessowner.People')" active>
           <b-tabs content-class="mt-3" fill pills>
-            <b-tab title="Followers (2)" active>
+            <b-tab :title="$t('businessowner.Followers2')" active>
               <div class="media border-botmediatom mb-4">
                 <img
                   src="@/assets/img/alima.jpg"

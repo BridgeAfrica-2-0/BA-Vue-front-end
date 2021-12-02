@@ -4,7 +4,7 @@
       <p class="t-center">
         <b>{{ $t('businessowner.Invite_your_followers_to_follow_this_business') }}</b>
       </p>
-      <input class="form-control mb-2" placeholder="Search ..." type="text" />
+      <input class="form-control mb-2" :placeholder="$t('businessowner.Search')" type="text" />
       
       <b-card-text>
 

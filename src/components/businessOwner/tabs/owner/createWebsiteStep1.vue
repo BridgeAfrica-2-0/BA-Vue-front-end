@@ -5,7 +5,7 @@
         <div class="h-100 w-100">
           <div class="mx-auto text-center my-5">
             <h2 class="my-3 font-weight-bolder">
-              {{ $t('businessowner.Create_personalised_website_for_your_business') }}Create personalised website for your business
+              {{ $t('businessowner.Create_personalised_website_for_your_business') }}
             </h2>
             <p class="my-2">
               {{ $t('businessowner.Start_with_a_template_and_male_it_your_own') }}, 
@@ -47,12 +47,12 @@
           <b-nav-item v-on:click="filter('all')">{{ $t('businessowner.All') }}</b-nav-item>
           <b-nav-item v-on:click="shuffle">{{ $t('businessowner.Shuffle') }}</b-nav-item>
           <b-nav-item v-on:click="filter('agriculture')"
-            >Agriculture</b-nav-item
+            >{{ $t('businessowner.Agriculture') }}</b-nav-item
           >
           <b-nav-item v-on:click="filter('business')">{{ $t('businessowner.Business') }}</b-nav-item>
           <b-nav-item v-on:click="filter('event')">{{ $t('businessowner.Event') }}</b-nav-item>
           <b-nav-item v-on:click="filter('personalcare')"
-            >Personal Care</b-nav-item
+            >{{ $t('businessowner.Personal_Care') }}</b-nav-item
           >
           <b-nav-item v-on:click="filter('pharmacy')">{{ $t('businessowner.Pharmacy') }}</b-nav-item>
           <b-nav-item v-on:click="filter('food')">{{ $t('businessowner.Food') }}</b-nav-item>
@@ -106,9 +106,9 @@ export default {
     return {
       selected: "f",
       options: [
-        { value: "a", text: "Any" },
-        { value: "f", text: "Free Only" },
-        { value: "p", text: "Premium Only" }
+        { value: "a", text: this.$t('businessowner.Any') },
+        { value: "f", text: this.$t('businessowner.Free_Only') },
+        { value: "p", text: this.$t('businessowner.Premium_Only') }
       ],
       items: [
         {

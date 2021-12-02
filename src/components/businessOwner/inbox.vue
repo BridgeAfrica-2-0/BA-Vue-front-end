@@ -104,10 +104,10 @@
                       ></b-icon>
                     </template>
                     <b-dropdown-item @click="newMessage(true)">
-                      New Chat</b-dropdown-item
+                      {{ $t('businessowner.New_Chat') }}</b-dropdown-item
                     >
                     <b-dropdown-item @click="newMessage(true)">
-                      New Group Chat
+                      {{ $t('businessowner.New_Group_Chat') }}
                     </b-dropdown-item>
                   </b-dropdown>
                 </b-col>
@@ -371,7 +371,7 @@
                       <!-- End Chats -->
                     </b-tab>
                     <b-tab
-                      title="Groups"
+                      :title="$t('businessowner.Groups')"
                       @click="getChatList({ type: 'group' })"
                     >
                       <!-- Business Chats Available  -->
@@ -450,7 +450,7 @@
                             </b-col>
                           </b-row>
                         </div>
-                        <h2 v-else>No chat</h2>
+                        <h2 v-else>{{ $t('businessowner.No_chat') }}</h2>
                       </div>
 
                       <!-- End Chats -->
@@ -1070,7 +1070,7 @@
                       variant="primary"
                       @click="$bvModal.show('group-name')"
                       :disabled="selectedMulty.length ? false : true"
-                      >Next</b-button
+                      >{{ $t('businessowner.Next') }}</b-button
                     >
                     <!-- <b-button
                       class="float-left"

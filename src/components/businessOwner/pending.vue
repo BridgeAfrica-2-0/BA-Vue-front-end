@@ -55,10 +55,10 @@
               <!--     :text="item.content.details"   -->
               <read-more
                 v-if="item.content"
-                more-str="read more"
+                :more-str="$t('businessowner.read_more')"
                 :text="item.content"
                 link="#"
-                less-str="read less"
+                :less-str="$t('businessowner.read_less')"
                 :max-chars="200"
               ></read-more>
             </p>
@@ -241,7 +241,7 @@ export default {
           this.flashMessage.show({
             status: 'success',
             blockClass: 'custom-block-class',
-            message: 'Post Approved',
+            message: this.$t('businessowner.Post_Approved'),
           });
           this.reloads();
           this.page = 1;
@@ -265,7 +265,7 @@ export default {
             this.flashMessage.show({
               status: 'error',
               blockClass: 'custom-block-class',
-              message: 'Unable to Approved  Post',
+              message: this.$t('businessowner.Unable_to_Approved_Post'),
             });
             console.log({ err: err });
 
@@ -299,7 +299,7 @@ export default {
           this.flashMessage.show({
             status: 'success',
             blockClass: 'custom-block-class',
-            message: 'Post Deleted',
+            message: this.$t('businessowner.Post_Deleted'),
           });
           this.reloads();
           this.page = 1;
@@ -323,7 +323,7 @@ export default {
             this.flashMessage.show({
               status: 'error',
               blockClass: 'custom-block-class',
-              message: 'Unable to Delete your Post',
+              message: this.$t('businessowner.Unable_to_Delete_your_Post'),
             });
             console.log({ err: err });
 

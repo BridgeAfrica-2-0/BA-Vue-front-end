@@ -217,7 +217,7 @@
                     <b-dropdown-group :header="$t('businessowner.Choose_options')" class="small">
                       <b-dropdown-item-button>
                         <b-icon icon="blank" aria-hidden="true"></b-icon>
-                        Option A <span class="sr-only">({{ $t('businessowner.Not_selected') }})</span>
+                        {{ $t('businessowner.Option')}} A <span class="sr-only">({{ $t('businessowner.Not_selected') }})</span>
                       </b-dropdown-item-button>
                       <b-dropdown-item-button>
                         <b-icon icon="check" aria-hidden="true"></b-icon>
@@ -332,7 +332,7 @@
                     <b-dropdown-group :header="$t('businessowner.Choose_options')" class="small">
                       <b-dropdown-item-button>
                         <b-icon icon="blank" aria-hidden="true"></b-icon>
-                        Option A <span class="sr-only">({{ $t('businessowner.Not_selected') }})</span>
+                        {{ $t('businessowner.Option')}} A <span class="sr-only">({{ $t('businessowner.Not_selected') }})</span>
                       </b-dropdown-item-button>
                       <b-dropdown-item-button>
                         <b-icon icon="check" aria-hidden="true"></b-icon>
@@ -449,7 +449,7 @@
                     <b-dropdown-group :header="$t('businessowner.Choose_options')" class="small">
                       <b-dropdown-item-button>
                         <b-icon icon="blank" aria-hidden="true"></b-icon>
-                        Option A <span class="sr-only">({{ $t('businessowner.Not_selected') }})</span>
+                        {{ $t('businessowner.Option')}} A <span class="sr-only">({{ $t('businessowner.Not_selected') }})</span>
                       </b-dropdown-item-button>
                       <b-dropdown-item-button>
                         <b-icon icon="check" aria-hidden="true"></b-icon>

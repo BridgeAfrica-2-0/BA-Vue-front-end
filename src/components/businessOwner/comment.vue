@@ -23,7 +23,7 @@
         </span>
 
           <p class="username mb-0 "> <router-link :to="'profile/'+comment.id" > {{comment.name}}   </router-link> </p>
-          <read-more more-str="read more" :text="comment.comment" link="#" less-str="read less" :max-chars="15000" class="mb-1 text-left">
+          <read-more :more-str="$t('businessowner.read_more')" :text="comment.comment" link="#" :less-str="$t('businessowner.read_less')" :max-chars="15000" class="mb-1 text-left">
           </read-more>
         </div>
         <b-icon :icon="icon" variant="primary" aria-hidden="true" @click="onLike" class="cursor"></b-icon>
@@ -36,7 +36,7 @@
             </b-col>
             <b-col cols="11"
               ><input
-                placeholder="Post a Comment"
+                :placeholder="$t('businessowner.Post_a_Comment')"
                 class="comment"
                 type="text"
                 @keypress.enter="onReply"
@@ -61,8 +61,8 @@
                 v-if="comments.length && !loadComment"
                 :hasData="hasData"
                 @click.native="onShowReply"
-                :moreDataTitle="'Show more comments'"
-                :noDataTitle="'No comment'"
+                :moreDataTitle="$t('businessowner.Show_more_comments')"
+                :noDataTitle="$t('businessowner.No_comment')"
               />
             </b-col>
           </b-row>

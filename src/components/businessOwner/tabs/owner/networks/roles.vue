@@ -1,6 +1,6 @@
 <template>
   <b-container>
-    <h5 class="a-text">Assign Roles</h5>
+    <h5 class="a-text">{{ $t('businessowner.Assign_Roles') }}</h5>
 
     <hr width="100%" />
 

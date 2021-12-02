@@ -387,7 +387,7 @@
 						this.flashMessage.show({
 							status: "success",
 							blockClass: "custom-block-class",
-							message: "Business Profile updated",
+							message: this.$t('businessowner.Business_Profile_updated'),
 						});
 					})
 					.catch((err) => {
@@ -409,7 +409,7 @@
 							this.flashMessage.show({
 								status: "error",
 
-								message: "Unable to update Your Business",
+								message: this.$t('businessowner.Unable_to_update_Your_Business'),
 								blockClass: "custom-block-class",
 							});
 							console.log({ err: err });

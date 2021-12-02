@@ -1196,7 +1196,7 @@ export default {
           this.Lspinner = false;
           this.flashMessage.show({
             status: "success",
-            message: "Changes Made Successfuly",
+            message: this.$t('businessowner.Changes_Made_Successfuly'),
           });
           this.loading = false
         })
@@ -1206,7 +1206,7 @@ export default {
           this.loading = false
           this.flashMessage.show({
             status: "error",
-            message: "Unable To Make Changes",
+            message: this.$t('businessowner.Unable_To_Make_Changes'),
           });
           this.loading = false
         });

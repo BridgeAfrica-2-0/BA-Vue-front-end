@@ -54,7 +54,7 @@
               fluid-grow
               src="https://picsum.photos/300/150/?image=41"
             ></b-img>
-            <h3>Picture Title</h3>
+            <h3>{{ $t('businessowner.Picture_Title') }}</h3>
           </b-modal>
         </div>
         <b-col md="6" class="mt-2">

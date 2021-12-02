@@ -14,7 +14,7 @@
               <b-row>
                 <b-col cols="12">
                   <p class="detail">
-                    Cameroon,
+                    {{ $t('businessowner.Cameroon') }},
                     <span class="desktop"
                       ><b-icon icon="house" class="primary"></b-icon> 2,
                       <b-icon icon="globe" class="primary"></b-icon> 3,

@@ -215,7 +215,7 @@ export default {
         this.DefaultPayment();
         this.flashMessage.show({
           status: "success",
-          message: "Payment Complete"
+          message: this.$t('businessowner.Payment_Complete')
         });
       })
       .catch(err => {
@@ -224,7 +224,7 @@ export default {
         console.log({ err: err });
         this.flashMessage.show({
           status: "error",
-          message: "Unable Complete Payment"
+          message: this.$t('businessowner.Unable_Complete_Payment')
         });
       });
     },

@@ -234,7 +234,7 @@ export default {
           this.flashMessage.show({
             status: "success",
 
-            message: "Image Downloaded",
+            message: this.$t('businessowner.Image_Downloaded'),
           });
 
           loader.hide();
@@ -255,7 +255,7 @@ export default {
           this.flashMessage.show({
             status: "error",
 
-            message: "Unable to download ",
+            message: this.$t('businessowner.Unable_to_download'),
           });
           console.log({ err: err });
 
@@ -294,7 +294,7 @@ export default {
           this.flashMessage.show({
             status: "success",
 
-            message: "Album Deleted",
+            message: this.$t('businessowner.Album_Deleted'),
           });
 
           loader.hide();
@@ -315,7 +315,7 @@ export default {
           this.flashMessage.show({
             status: "error",
 
-            message: "Unable to Delete your Image",
+            message: this.$t('businessowner.Unable_to_Delete_your_Image'),
           });
           console.log({ err: err });
 
@@ -357,7 +357,7 @@ export default {
           this.flashMessage.show({
             status: "success",
 
-            message: "cover Picture succesfully set",
+            message: this.$t('businessowner.cover_picture_succesfully_set'),
           });
 
           loader.hide();
@@ -378,7 +378,7 @@ export default {
           this.flashMessage.show({
             status: "error",
 
-            message: "Unable to set your cover picture",
+            message: this.$t('businessowner.Unable_to_set_your_cover_picture'),
           });
           console.log({ err: err });
 
@@ -423,7 +423,7 @@ export default {
           this.flashMessage.show({
             status: "success",
 
-            message: "Profile Picture set",
+            message: this.$t('businessowner.Profile_Picture_set'),
           });
 
           loader.hide();
@@ -444,7 +444,7 @@ export default {
           this.flashMessage.show({
             status: "error",
 
-            message: "Unable to set your profile pic",
+            message: this.$t('businessowner.Unable_to_set_your_profile_pic'),
           });
           console.log({ err: err });
 
@@ -494,7 +494,7 @@ export default {
             this.flashMessage.show({
               status: "success",
 
-              message: "Profile Updated",
+              message: this.$t('businessowner.Profile_Updated'),
 
               blockClass: "custom-block-class",
             });
@@ -529,7 +529,7 @@ export default {
               this.flashMessage.show({
                 status: "error",
                 
-                message: "Unable to upload your image",
+                message: this.$t('businessowner.Unable_to_upload_your_image'),
                 blockClass: "custom-block-class",
               });
               console.log({ err: err });

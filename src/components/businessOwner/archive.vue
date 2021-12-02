@@ -189,9 +189,9 @@ export default {
       etat: "All",
       img: ["http://urlr.me/YMQXD", "https://placekitten.com/400/300"],
       options: [
-        { value: null, text: "Please select an option" },
-        { value: "a", text: "last 5 days" },
-        { value: "b", text: "last 10 days" },
+        { value: null, text: this.$t('businessowner.Please_select_an_option') },
+        { value: "a", text: this.$t('businessowner.last_5_days') },
+        { value: "b", text: this.$t('businessowner.last_10_days') },
       ],
       etat1: ["in process", "complete", "cancel"],
     };
@@ -261,14 +261,14 @@ export default {
           console.log(data);
           this.flashMessage.show({
             status: "success",
-            message: "Status Changed To "+status
+            message: this.$t('businessowner.Status_Changed_To')+status
           });
         })
         .catch(err => {
           console.log({ err: err });
           this.flashMessage.show({
             status: "error",
-            message: "Unable to Change Status"
+            message: this.$t('businessowner.Unable_to_Change_Status')
           });
         });
     },

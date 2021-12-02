@@ -26,7 +26,7 @@
       </div>
       <!-- <router-link to="#media?type=cover"> -->
         <b-button @click="gotoCoverImages" class="float-right see-all">
-          See All
+          {{ $t('businessowner.See_All') }}
         </b-button>
       <!-- </router-link> -->
 
@@ -59,7 +59,7 @@
                     </b>
                     <br />
                     <span class="community">
-                      {{ business_info.community }} Community
+                      {{ business_info.community }} {{ $t('businessowner.Community') }}
                     </span>
                   </h6>
                 </span>
@@ -316,7 +316,7 @@ export default {
           this.flashMessage.show({
             status: "success",
 
-            message: "Logo Updated",
+            message: this.$t('businessowner.Logo_Updated'),
 
             blockClass: "custom-block-class",
           });
@@ -331,7 +331,7 @@ export default {
           this.flashMessage.show({
             status: "error",
 
-            message: "Unable to set your Logo",
+            message: this.$t('businessowner.Unable_to_set_your_Logo'),
             blockClass: "custom-block-class",
           });
           console.log({ err: err });
@@ -365,7 +365,7 @@ export default {
           this.flashMessage.show({
             status: "success",
 
-            message: "Profile Updated",
+            message: this.$t('businessowner.Profile_Updated'),
 
             blockClass: "custom-block-class",
           });
@@ -392,7 +392,7 @@ export default {
             this.flashMessage.show({
               status: "error",
 
-              message: "Unable to upload your image",
+              message: this.$t('businessowner.Unable_to_upload_your_image'),
               blockClass: "custom-block-class",
             });
             console.log({ err: err });

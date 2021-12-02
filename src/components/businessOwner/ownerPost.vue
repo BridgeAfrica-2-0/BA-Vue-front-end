@@ -212,7 +212,7 @@
           <span>
             <b-button @click="updatePost" variant="primary" block
               ><b-icon icon="cursor-fill" variant="primary"></b-icon>
-              Publish</b-button
+              {{ $t('businessowner.Publish') }}</b-button
             >
           </span>
 
@@ -224,7 +224,7 @@
           ref="modal-xl"
           centered
           hide-footer
-          title="Create Post"
+          :title="$t('businessowner.Create_Post')"
           @hidden="resetPostData"
         >
           <b-row ref="loader">
@@ -279,7 +279,7 @@
                     />
 
                     <b-button
-                      title="Add Movie"
+                      :title="$t('businessowner.Add_Movie')"
                       size="sm"
                       variant="outline-primary"
                       @click="$refs.movies.click()"
@@ -291,7 +291,7 @@
                       />
                     </b-button>
                     <b-button
-                      title="Add Hyperlink"
+                      :title="$t('businessowner.Add_Hyperlink')"
                       size="sm"
                       variant="outline-primary"
                       @click="$refs.document.click()"
@@ -659,7 +659,7 @@ export default {
           this.flashMessage.show({
             status: "success",
             blockClass: "custom-block-class",
-            message: "Post Deleted",
+            message: this.$t('businessowner.Post_Deleted'),
           });
 
           loader.hide();
@@ -681,7 +681,7 @@ export default {
             this.flashMessage.show({
               status: "error",
               blockClass: "custom-block-class",
-              message: "Unable to Delete your Post",
+              message: this.$t('businessowner.Unable_to_Delete_your_Post'),
             });
             console.log({ err: err });
 
@@ -744,7 +744,7 @@ export default {
           this.flashMessage.show({
             status: "success",
             blockClass: "custom-block-class",
-            message: "Content successfuly uploaded",
+            message: this.$t('businessowner.Content_successfuly_uploaded'),
           });
           loader.hide();
 
@@ -768,7 +768,7 @@ export default {
             this.flashMessage.show({
               status: "error",
 
-              message: "Unable to Update your post",
+              message: this.$t('businessowner.Unable_to_Update_your_post'),
               blockClass: "custom-block-class",
             });
             console.log({ err: err });
@@ -949,7 +949,7 @@ export default {
           this.flashMessage.show({
             status: "success",
             blockClass: "custom-block-class",
-            message: "Post has been created.",
+            message: this.$t('businessowner.Post_has_been_created.'),
           });
           this.isUploading = false;
           loader.hide();

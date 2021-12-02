@@ -116,9 +116,9 @@ export default {
       selected: 1,
       text: "",
       options: [
-        { value: "1", text: "suggestion for improvement" },
-        { value: "2", text: "Progress to your program" },
-        { value: "3", text: "New Idea for PEA-JEUNES" }
+        { value: "1", text: this.$t('businessowner.suggestion_for_improvement') },
+        { value: "2", text: this.$t('businessowner.Progress_to_your_program') },
+        { value: "3", text: this.$t('businessowner.New_Idea_for_PEA_JEUNES') }
       ]
     };
   }

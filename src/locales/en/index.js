@@ -15,6 +15,7 @@ import myOrders from './myOrders.json'
 import memnetwork from './memnetwork.json'
 
 import profilefollower from './profilefollower.json'
+import about from './about.json'
 
 
 
@@ -24,18 +25,19 @@ export const en = {
 
 
     auth: auth,
+    about: about,
     businessf: businessf,
     businessowner: businessowner,
     search: search,
     network: network,
     passrecover: passrecover,
-    // welcome: welcome,
+    welcome: welcome,
     dashboard: dashboard,
     memnetwork: memnetwork,
     profilefollower: profilefollower,
     verification: verification,
     profileowner: profileowner,
-
     Order: Order,
     myOrders: myOrders,
+
 }

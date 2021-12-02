@@ -48,54 +48,56 @@ import profileSettingsEdit from "./profileSettingsEdit"
 
 import { social } from './social';
 
-
-
 Vue.use(Vuex);
 
-//axios.defaults.baseURL = process.env.VUE_APP_API_URL;
-
+//axios.defaults.baseURL = "https://team4.maxinemoffett.com/api/v1/";
+axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 
 axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 
-axios.defaults.baseURL = "https://test.maxinemoffett.com/api/v1/"
+export default new Vuex.Store({
+    modules: {
+        auth,
+        networkDetails,
+        dashboardcommunity,
+        ProfileAndBusinessDetails,
+        businessOwner,
+        businessBlocking,
+        dashboard,
+        hotbusiness,
+        networkProfileMembers,
+        marketSearch,
+        market,
+        networkSearch,
+        allSearch,
+        profile,
+        follower,
+        search,
+        UserProfileOwner,
+        userChat,
+        businessChat,
+        businessGeneral,
+        businessRole,
+        businessAccountType,
+        business,
+        networkProfileFeedback,
+        NetworkSettings,
+        keywordOperationOnNetwork,
+        businessSettingInfo,
+        checkout,
+        social,
+        businessFollowers,
+        networkProfileCommunitySidebar,
+        networkProfileCommunity,
+        networkProfileMedia,
+        networkProfileMemberRequest,
+        networkNotification,
+        networkProfile,
+        orderBusiness,
+        notification,
+        homeRedirection,
+        profileOrderDetail,
+        profileSettingsEdit
 
-auth,
-dashboardcommunity,
-ProfileAndBusinessDetails,
-businessOwner,
-businessBlocking,
-dashboard,
-hotbusiness,
-networkProfileMembers,
-marketSearch,
-market,
-networkSearch,
-allSearch,
-profile,
-follower,
-search,
-UserProfileOwner,
-userChat,
-businessChat,
-businessGeneral,
-businessRole,
-businessAccountType,
-business,
-networkProfileFeedback,
-NetworkSettings,
-keywordOperationOnNetwork,
-businessSettingInfo,
-checkout,
-social,
-businessFollowers,
-networkProfileCommunitySidebar,
-networkProfileCommunity,
-networkProfileMedia,
-networkProfileMemberRequest,
-networkNotification,
-networkProfile,
-orderBusiness,
-notification,
-homeRedirection,
-profileOrderDetail,
-profileSettingsEdit
+    }
+});

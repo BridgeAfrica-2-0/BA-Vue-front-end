@@ -1006,6 +1006,9 @@
                             :key="index"
                             class="p-2 message"
                           >
+                            <!-- {{
+                              elmt
+                            }}<br/> -->
                             <td>
                               <b-form-group>
                                 <b-form-checkbox-group
@@ -1115,6 +1118,7 @@ export default {
   data() {
     return {
       formData: new FormData(),
+      groupMembers: [],
       groupName: "",
       allSelection: true,
       allSelectedMulty: false,
@@ -1147,83 +1151,6 @@ export default {
       showsearch: true,
       selecteduser: false,
       searchQuery: "",
-      resources1: [
-        { title: "ABE Attendance", uri: "aaaa.com", category: "a", icon: null },
-        {
-          title: "Accounting Services",
-          uri: "aaaa.com",
-          category: "a",
-          icon: null,
-        },
-        { title: "Administration", uri: "aaaa.com", category: "a", icon: null },
-        {
-          title: "Advanced Student Lookup",
-          uri: "bbbb.com",
-          category: "b",
-          icon: null,
-        },
-        { title: "Art & Sciences", uri: "bbbb.com", category: "b", icon: null },
-        {
-          title: "Auxiliares Services",
-          uri: "bbbb.com",
-          category: "b",
-          icon: null,
-        },
-        { title: "Basic Skills", uri: "cccc.com", category: "c", icon: null },
-        {
-          title: "Board of Trustees",
-          uri: "dddd.com",
-          category: "d",
-          icon: null,
-        },
-      ],
-      resources: [
-        {
-          name: "blezour blec",
-          profile:
-            "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
-          type: "person",
-          id: "1",
-        },
-        {
-          name: "itz blec blec",
-          profile:
-            "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
-          type: "person",
-          id: "2",
-        },
-
-        {
-          name: "Maxine Moffet",
-          profile:
-            "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
-          type: "person",
-          id: "3",
-        },
-
-        {
-          name: "Alicia kays",
-          profile:
-            "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
-          type: "person",
-          id: "4",
-        },
-
-        {
-          name: "Lorem Ipsum",
-          profile:
-            "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
-          type: "person",
-          id: "5",
-        },
-        {
-          name: "blezour blec",
-          profile:
-            "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
-          type: "person",
-          id: "6",
-        },
-      ],
       message: {},
       newMsg: false,
       show: false,
@@ -1355,6 +1282,7 @@ export default {
       if (this.allSelectedMulty) {
         this.all.map((biz) => {
           this.selectedMulty.push(biz.id);
+          this.groupMembers.push({ type: biz.accountType, id: biz.id });
         });
       } else {
         this.selectedMulty = [];
@@ -1369,6 +1297,7 @@ export default {
       if (this.peopleMulty) {
         this.bizs.map((biz) => {
           this.selectedMulty.push(biz.id);
+          this.groupMembers.push({ type: biz.accountType, id: biz.id });
         });
       } else {
         this.selectedMulty = [];
@@ -1384,9 +1313,11 @@ export default {
       if (this.businessMulty) {
         this.bizs.map((biz) => {
           this.selectedMulty.push(biz.id);
+          this.groupMembers.push({ type: biz.accountType, id: biz.id });
         });
       } else {
         this.selectedMulty = [];
+        this.groupMembers = [];
       }
     },
     networkAllMulty() {
@@ -1399,9 +1330,11 @@ export default {
       if (this.networkMulty) {
         this.bizs.map((biz) => {
           this.selectedMulty.push(biz.id);
+          this.groupMembers.push({ type: biz.accountType, id: biz.id });
         });
       } else {
         this.selectedMulty = [];
+        this.groupMembers = [];
       }
     },
     dismissed() {
@@ -1448,10 +1381,34 @@ export default {
     },
     createGroup(receiver_business_id) {
       // let sender_business_id = this.currentUser.user.id;
+      let membersPeople = this.groupMembers.filter((member) => {
+        return member.type == "people";
+      });
+      let membersBuiness = this.groupMembers.filter((member) => {
+        return member.type == "business";
+      });
+      let membersPeopleIds = [];
+      let membersBusinessIds = [];
+
+      membersPeople.map((biz) => {
+        membersPeopleIds.push(biz.id);
+      });
+      membersBuiness.map((biz) => {
+        membersBusinessIds.push(biz.id);
+      });
+      console.log("members: ", this.groupMembers);
+      console.log("Business: ", membersBuiness);
+      console.log("People: ", membersPeople);
+
       let sender_business_id = this.currentBizId;
       this.room = [sender_business_id, ...this.selectedMulty];
       console.log("ROOMS: ", this.room);
       this.socket.emit("create-group", sender_business_id);
+      this.$store.dispatch("businessChat/CREATE_GROUP", {
+        groupName: this.groupName,
+        userID: membersPeopleIds,
+        businessID: membersBusinessIds,
+      });
     },
     createRoom(receiver_business_id) {
       // let sender_business_id = this.currentUser.user.id;
@@ -1521,10 +1478,17 @@ export default {
     },
     saveMessage(data) {
       console.log("[DEBUG SAVE]", { data: data, type: this.type });
-      this.$store.dispatch("businessChat/SAVE_BUSINESS_CHAT", {
+      if (this.type == "group") {
+        this.$store.dispatch("businessChat/SAVE_GROUP_CHAT", {
         data: data,
         type: this.type,
       });
+      } else {
+        this.$store.dispatch("businessChat/SAVE_BUSINESS_CHAT", {
+        data: data,
+        type: this.type,
+      });
+      }
     },
     selectedMultyChat() {
       this.$bvModal.hide("group-name");

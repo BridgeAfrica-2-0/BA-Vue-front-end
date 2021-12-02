@@ -270,7 +270,6 @@
     " Add_Movie": "Add_Movie",
     "delete": "delete",
     "Update_post": "Update post",
-
     "Your_3_Posts_are_pending_for_approval": "Your 3 Posts are pending for approval",
 
     "Ticket_Support": "Ticket Support",
@@ -287,8 +286,9 @@
     "Premium_Support": "Premium Support",
     "email_phone": "email, phone",
     "Create_Post": "Create Post",
-    "Do_you_want_to_join_this_network": "Do you want to join this network"
-
+    "Do_you_want_to_join_this_network": "Do you want to join this network",
+    "Your": "Your",
+    "Posts_are_pending_for_approval": "Posts are pending for approval"
 
 
 

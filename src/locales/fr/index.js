@@ -5,6 +5,7 @@ import search from './search.json'
 import Order from './Order.json'
 import myOrders from './myOrders.json'
 import network from './network.json'
+import about from './about.json'
 
 import verification from './verification.json'
 import passrecover from './passrecover.json'
@@ -41,5 +42,6 @@ export const fr = {
 
 
     network: network,
+    about:about,
 
 }

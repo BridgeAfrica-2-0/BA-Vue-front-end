@@ -12,7 +12,11 @@
         v-bind="imageProps"
       ></b-img>
     </a>
-    <video controls v-else-if="typeOfMedia() == 'video' && !loading" class="card-img btn p-0 album-img">
+    <video
+      controls
+      v-else-if="typeOfMedia() == 'video' && !loading"
+      class="card-img btn p-0 album-img"
+    >
       <source :src="getFullMediaLink()" />
     </video>
     <youtube
@@ -29,31 +33,53 @@
       ></b-spinner>
     </div>
     <b-modal hide-footer :id="`modal-${im.id}`" title="Details" size="md">
-      <img class="card-img" :src="getFullMediaLink()" @click="() => showImg()" alt="media_img" />
+      <img
+        class="card-img"
+        :src="getFullMediaLink()"
+        @click="() => showImg()"
+        alt="media_img"
+      />
       <p class="my-4">{{ content }}</p>
     </b-modal>
     <div class="mediadesc" v-if="!['youtube'].includes(typeOfMedia())">
       <ul class="navbar-nav pull-right options">
         <li class="nav-item dropdown m-0 p-0">
-          <b-dropdown size="sm" class="float-right" variant="link" toggle-class="text-decoration-none" no-caret>
+          <b-dropdown
+            size="sm"
+            class="float-right"
+            variant="link"
+            toggle-class="text-decoration-none"
+            no-caret
+          >
             <template #button-content>
-              <b-icon icon="three-dots-vertical" color="white" variant="light"> </b-icon>
+              <b-icon icon="three-dots-vertical" color="white" variant="light">
+              </b-icon>
             </template>
 
-            <b-dropdown-item @click="onDownloadPic()"> {{ $t('profileowner.Download') }}</b-dropdown-item>
+            <b-dropdown-item @click="onDownloadPic()">
+              {{ $t("profileowner.Download") }}</b-dropdown-item
+            >
 
-            <b-dropdown-item href="#" @click="onSetProfilePic()" v-if="isEditor && !['video'].includes(typeOfMedia())">
-              {{ $t('profileowner.Make_Profile_Picture') }}
+            <b-dropdown-item
+              href="#"
+              @click="onSetProfilePic()"
+              v-if="isEditor && !['video'].includes(typeOfMedia())"
+            >
+              {{ $t("profileowner.Make_Profile_Picture") }}
             </b-dropdown-item>
 
             <b-dropdown-item
               @click="onSetCoverPic()"
-              v-if="isEditor && !['video'].includes(typeOfMedia()) && type != 'network'"
+              v-if="
+                isEditor &&
+                !['video'].includes(typeOfMedia()) &&
+                type != 'network'
+              "
             >
-              {{ $t('profileowner.Make_Cover_Photo') }}
+              {{ $t("profileowner.Make_Cover_Photo") }}
             </b-dropdown-item>
             <b-dropdown-item href="#" @click="onDeleteImage()" v-if="isEditor">
-              {{ $t('profileowner.Delete') }}
+              {{ $t("profileowner.Delete") }}
             </b-dropdown-item>
           </b-dropdown>
         </li>
@@ -67,20 +93,20 @@
 <script>
 export default {
   props: [
-    'im',
-    'imageProps',
-    'content',
-    'canUpload',
-    'isEditor',
-    'type',
-    'typeOfMedia',
-    'getFullMediaLink',
-    'getYoutubeKey',
-    'showImg',
-    'downloadPic',
-    'setProfilePic',
-    'setCoverPic',
-    'deleteImage',
+    "im",
+    "imageProps",
+    "content",
+    "canUpload",
+    "isEditor",
+    "type",
+    "typeOfMedia",
+    "getFullMediaLink",
+    "getYoutubeKey",
+    "showImg",
+    "downloadPic",
+    "setProfilePic",
+    "setCoverPic",
+    "deleteImage",
   ],
 
   data() {
@@ -95,7 +121,7 @@ export default {
         container: this.$refs[`sHowMedia-${this.im.id}`],
         canCancel: true,
         onCancel: this.onCancel,
-        color: '#e75c18',
+        color: "#e75c18",
       });
 
       this.loading = true;
@@ -109,7 +135,7 @@ export default {
         container: this.$refs[`sHowMedia-${this.im.id}`],
         canCancel: true,
         onCancel: this.onCancel,
-        color: '#e75c18',
+        color: "#e75c18",
       });
 
       this.loading = true;
@@ -124,7 +150,7 @@ export default {
         container: this.$refs[`sHowMedia-${this.im.id}`],
         canCancel: true,
         onCancel: this.onCancel,
-        color: '#e75c18',
+        color: "#e75c18",
       });
 
       this.loading = true;
@@ -139,7 +165,7 @@ export default {
         container: this.$refs[`sHowMedia-${this.im.id}`],
         canCancel: true,
         onCancel: this.onCancel,
-        color: '#e75c18',
+        color: "#e75c18",
       });
       this.loading = true;
       this.loading = await this.setProfilePic();
@@ -161,6 +187,8 @@ export default {
   width: 100%;
   font-size: 20px;
   position: relative;
+  width: 340.73px;
+  height: 340.73px;
 }
 .custom-loader {
   width: 4rem !important;

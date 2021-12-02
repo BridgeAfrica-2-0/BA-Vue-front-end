@@ -1,13 +1,20 @@
 <template>
-  <div>
-   
-    <b-row class="mt-2">
-      <b-col> 
-        <b-avatar variant="info" :src="comment.picture" class="avat-comment"></b-avatar>
-        
-        <div class="msg text">
+  <b-row class="mt-2 ml-4">
+    <b-col>
+      <b-avatar
+        variant="info"
+        :src="comment.picture"
+        :class="`${
+          'user' == comment.user_type ? 'rounded-circle' : ''
+        } avat-comment b-r`"
+      ></b-avatar>
 
-          <span class="float-right" style="    margin-right: -10px;">
+      <div class="msg text" v-if="!proccesEdit">
+        <span
+          class="float-right"
+          style="margin-right: -10px"
+          v-if="isYourComment"
+        >
           <b-dropdown size="sm" variant="outline primary " class="primary">
             <template class="more" #button-content> </template>
             <b-dropdown-item> {{ $t('businessowner.Edit') }} </b-dropdown-item>
@@ -62,14 +69,15 @@
         </div>
       </b-col>
     </b-row>
-  </div>
 </template>
 
 <script>
-import Reply from './commentReply.vue';
-import { commentMixinsBuisness, NoMoreDataForComment } from '@/mixins';
+import Reply from "./commentReply.vue";
+import { commentMixinsBuisness, NoMoreDataForComment } from "@/mixins";
 
-import Loader from '@/components/Loader';
+import { date } from "@/helpers";
+
+import Loader from "@/components/Loader";
 
 export default {
   mixins: [commentMixinsBuisness, NoMoreDataForComment],
@@ -78,14 +86,36 @@ export default {
     Loader,
   },
 
-  props: ['item', 'uuid', 'profileID'],
+  props: ["item", "uuid", "profileID", "onDelete"],
   data() {
     return {
       reply: false,
-      text: '',
+      processEdit: false,
+      text: "",
+      loading: false,
+      proccesEdit: false,
     };
   },
+
+  filters: {
+    date,
+  },
+
+  computed: {
+    isYourComment() {
+      return (
+        this.profile.id == this.comment.id &&
+        this.profile.user_type == this.comment.user_type
+      );
+    },
+  },
   methods: {
+    toggle() {
+      if (!this.proccesEdit) this.text = "";
+      else this.text = this.comment.comment;
+
+      this.proccesEdit = !this.proccesEdit;
+    },
     showReply() {
       this.reply = !this.reply;
 
@@ -106,7 +136,7 @@ export default {
   border: solid 1px #ccc;
   margin-left: 40px;
   margin-top: -40px;
-  width: fit-content;
+  width: 93%;
 }
 .reply {
   cursor: pointer;
@@ -154,5 +184,9 @@ export default {
 <style>
 #readmore {
   color: #e75c18;
+}
+
+.b-r {
+  border-radius: 0% !important;
 }
 </style>

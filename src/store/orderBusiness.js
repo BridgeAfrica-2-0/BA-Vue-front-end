@@ -35,6 +35,10 @@ import axios from "axios"
         state.all.push(data) 
       },
       
+      resetAll(state){
+        state.all = [] 
+      },
+
 
       setfollowers(state, followers) {
         state.followers = followers;
@@ -44,11 +48,12 @@ import axios from "axios"
 
   actions : {
   
-    getOrder({ commit,state },data) {
+    getOrder({ commit,state },data) { 
         let pages = 1;
         let continu = true
+        commit("resetAll")
      while (continu) {
-        return axios.get(`/order/getOrderBusiness/${data}/${pages}` ).then( response  => {
+        return axios.get(data+''+pages ).then( response  => {
           continu = response.data.data.length ;
           pages++
         

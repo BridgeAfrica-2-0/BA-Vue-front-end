@@ -24,7 +24,8 @@
 </template>
 
 <script>
-import CommunityBusiness from "../../communitybusiness";
+
+import CommunityBusiness from "@/components/owner/tabs/communitynetwork";
 export default {
   data() {
     return {

@@ -4,7 +4,7 @@
 
     <div class="b-bottomn">
       <b-button variant="primary" class="a-button-l" @click="updateGeneralInfo()">
-        <b-spinner v-if="SPupdateGeneralInfo" small type="grow"></b-spinner> Save Changes
+        <b-spinner v-if="SPupdateGeneralInfo" small type="grow"></b-spinner> {{ $t('businessowner.Save_Changes') }}
       </b-button>
       <br />
     </div>
@@ -12,7 +12,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="Business Visibility"
+          :label="$t('businessowner.Business_Visibility')"
           label-size="md"
           label-class="font-weight-bold pt-0 username"
           class="mb-0 text"
@@ -38,7 +38,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="Posting Permissions"
+          :label="$t('businessowner.Posting_Permissions')"
           label-size="md"
           label-class="font-weight-bold pt-0 username"
           class="mb-0 text"
@@ -65,7 +65,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="Post Approval"
+          :label="$t('businessowner.Post_Approval')"
           label-size="md"
           label-class="font-weight-bold pt-0 username"
           class="mb-0"
@@ -76,7 +76,7 @@
             value="1"
             unchecked-value="0"
           >
-            All business posts must be approved by an admin
+            {{ $t('businessowner.All_business_posts_must_be_approved_by_an_admin') }}
           </b-form-checkbox>
         </b-form-group>
       </b-container>
@@ -87,7 +87,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="Keyword Alerts"
+          :label="$t('businessowner.Keyword_Alerts')"
           label-size="md"
           label-class="font-weight-bold pt-0 username"
           class="mb-0 text"
@@ -99,7 +99,7 @@
             separator=" ,;"
             :limit="limit"
             :tag-validator="validator"
-            placeholder="Enter new keywords_alert separated by space, comma or semicolon"
+            :placeholder="$t('businessowner.Enter_new_keywords_alert_separated_by_space_comma_or_semicolon')"
             no-add-on-enter
             required
           ></b-form-tags>
@@ -112,7 +112,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="Marketplace"
+          :label="$t('businessowner.Marketplace')"
           label-size="md"
           label-class="font-weight-bold pt-0 username"
           class="mb-0"
@@ -132,17 +132,17 @@
     </div>
 
     <b-container>
-      <b-link href="#" class="f-left" @click="$bvModal.show('delete-business'); selectObject(business[0])">Delete Business Identity</b-link>
+      <b-link href="#" class="f-left" @click="$bvModal.show('delete-business'); selectObject(business[0])">{{ $t('businessowner.Delete_Business_Identity') }}</b-link>
       <div>
         <b-modal id="delete-business" hide-footer>
           <template #modal-title>
-            !!! <code>DELETE BUSINESS</code> !!! 
+            !!! <code>{{ $t('businessowner.DELETE_BUSINESS') }}</code> !!! 
           </template>
           <div class="d-block text-center">
-            <h3>Delete Business: {{clickedObject.business_id}}!</h3>
+            <h3>{{ $t('businessowner.Delete_Business') }}: {{clickedObject.business_id}}!</h3>
           </div>
-          <b-button class="mt-2" style="float:right" variant="primary" @click="$bvModal.hide('delete-business'); deleteBusiness(clickedObject.business_id)">Delete Business</b-button>
-          <b-button class="mt-2 " style="float:right" @click="$bvModal.hide('delete-business')">Cancel</b-button>
+          <b-button class="mt-2" style="float:right" variant="primary" @click="$bvModal.hide('delete-business'); deleteBusiness(clickedObject.business_id)">{{ $t('businessowner.Delete_Business') }}</b-button>
+          <b-button class="mt-2 " style="float:right" @click="$bvModal.hide('delete-business')">{{ $t('businessowner.Cancel') }}</b-button>
         </b-modal>
       </div>
     </b-container>
@@ -165,12 +165,12 @@ export default {
         limit: 20,
         busiess_id: "",
         businessVisibility: [
-          { label: "Published", value: "publish" },
-          { label: "Unpublish", value: "unpublish" },
+          { label: this.$t('businessowner.Published'), value: "publish" },
+          { label: this.$t('businessowner.Unpublish'), value: "unpublish" },
         ],
         postingPermissions: [ 
-          { label: 'Admin only', value: 'Admin only' }, 
-          { label: 'Allow editor to post', value: 'Allow editor to post'}
+          { label: this.$t('businessowner.Admin_only'), value: 'Admin only' }, 
+          { label: this.$t('businessowner.Allow_editor_to_post'), value: 'Allow editor to post'}
         ],
         permission: null,
         business_form: null
@@ -241,7 +241,7 @@ export default {
         this.SPupdateGeneralInfo = !this.SPupdateGeneralInfo;
         this.flashMessage.show({
           status: "success",
-          message: "Changes Made Successfuly"
+          message: this.$t('businessowner.Changes_Made_Successfuly')
         });  
       })
       .catch(err => {
@@ -249,7 +249,7 @@ export default {
         this.SPupdateGeneralInfo = !this.SPupdateGeneralInfo;
         this.flashMessage.show({
           status: "error",
-          message: "Unable To Make Changes"
+          message: this.$t('businessowner.Unable_To_Make_Changes')
         });
       });
     },
@@ -262,7 +262,7 @@ export default {
         console.log(`business/general/delete/${busiess_id}`);
         this.flashMessage.show({
           status: "success",
-          message: "Business Deleted"
+          message: this.$t('businessowner.Business_Deleted')
         });
           
       })
@@ -270,7 +270,7 @@ export default {
         console.log({ err: err });
         this.flashMessage.show({
           status: "error",
-          message: "Unable To Delete Business"
+          message: this.$t('businessowner.Unable_To_Delete_Business')
         });
       });
 		},

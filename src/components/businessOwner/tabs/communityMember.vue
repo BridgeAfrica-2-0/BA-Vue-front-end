@@ -52,14 +52,14 @@
                          <b-button
                           block
                           size="sm"
-                           :id="'followbtn'+item.id"
-                         class="b-background flexx pobtn shadow"
+                          :id="'followbtn'+item.id"
+                          class="b-background flexx pobtn shadow"
                           :class="item.is_follow !== 0 && 'u-btn'"
                           variant="primary"
                           @click="handleFollow(item)"
                         >
 
-                           <i
+                          <i
                             class="fas fa-lg btn-icon"
                             :class="item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"
                           ></i>

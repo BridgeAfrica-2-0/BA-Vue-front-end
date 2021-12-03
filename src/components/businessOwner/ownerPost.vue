@@ -574,7 +574,12 @@ export default {
 
   methods: {
     async getAuth() {
-      const type = ["NetworkEditors", "networks"].includes(this.$route.name)
+      const type = [
+        "NetworkEditors",
+        "networks",
+        "memberNetwork",
+        "Membar Network Follower",
+      ].includes(this.$route.name)
         ? this.$route.params.id
         : null;
       const response = await this.$repository.share.WhoIsConnect({

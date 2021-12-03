@@ -34,9 +34,9 @@ class Repository {
     }
   }
 
-  async update({ uuid, text }) {
+  async update(data) {
     try {
-      const response = await axios.post(`update/comment/${uuid}`, { comment: text })
+      const response = await axios.post(`update/comment/${data.uuid}`, data.data)
       return {
         success: true,
         data: response.data.data

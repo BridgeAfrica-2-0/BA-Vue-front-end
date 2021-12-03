@@ -94,7 +94,12 @@ export default {
     }),
 
     async getAuth() {
-      const type = ["NetworkEditors", "networks"].includes(this.$route.name)
+      const type = [
+        "NetworkEditors",
+        "networks",
+        "Membar Network Follower",
+        "memberNetwork",
+      ].includes(this.$route.name)
         ? this.$route.params.id
         : null;
 

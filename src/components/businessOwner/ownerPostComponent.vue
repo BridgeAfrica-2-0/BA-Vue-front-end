@@ -311,7 +311,19 @@ export default {
     },
 
     onUpdate: async function ({ uuid, text }) {
-      const request = await this.$repository.post.update({ uuid, text });
+      let data = { comment: text };
+
+      if (
+        [
+          "NetworkEditors",
+          "networks",
+          "Membar Network Follower",
+          "memberNetwork",
+        ].includes(this.$route.name)
+      )
+        data = Object.assign(data, { networkId: this.profile.id });
+
+      const request = await this.$repository.post.update({ uuid, data });
 
       if (request.success) {
         this.comments = this.comments.map((e) =>

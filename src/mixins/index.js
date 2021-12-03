@@ -124,7 +124,8 @@ export const commentMixinsBuisness = {
       comments: [],
       text: "",
       createPostRequestIsActive: false,
-      loadComment: false
+      loadComment: false,
+      loading:false
     };
   },
 
@@ -152,10 +153,16 @@ export const commentMixinsBuisness = {
     }),
 
     onLike: async function () {
-      const request = await this.$repository.share.commentLike({
-        comment: this.comment.id,
-        network: this.profile.id,
-      });
+      let data = { comment: this.comment.id }
+
+      if ([
+        'NetworkEditors',
+        'networks',
+        "Membar Network Follower",
+        "memberNetwork",].includes(this.$route.name))
+        data = Object.assign(data, { network: this.profile.id })
+
+      const request = await this.$repository.share.commentLike(data);
 
       if (request.success)
         this.comment = Object.assign(this.comment, {
@@ -192,13 +199,18 @@ export const commentMixinsBuisness = {
       this.createPostRequestIsActive = true
       this.loadComment = true
 
+      let data = { comment: this.text }
+      if ([
+        'NetworkEditors',
+        'networks',
+        "Membar Network Follower",
+        "memberNetwork",].includes(this.$route.name))
+        data = Object.assign(data, { networkId: this.profile.id })
+
       const request = await this.$repository.share.createReplyComment({
         post: this.uuid,
         comment: this.comment.id,
-        data: {
-          comment: this.text,
-          networkId: this.profile.id,
-        },
+        data
       });
 
       if (request.success) {
@@ -255,7 +267,7 @@ export const commentMixins = {
     nFormatter: formatNumber,
     now: fromNow,
   },
-  
+
   methods: {
     onLike: async function () {
       const request = await this.$repository.share.commentLike({
@@ -291,13 +303,19 @@ export const commentMixins = {
 
       this.createPostRequestIsActive = true
 
+      let data = { comment: this.text }
+
+      if ([
+        'NetworkEditors',
+        'networks',
+        "Membar Network Follower",
+        "memberNetwork",].includes(this.$route.name))
+        data = Object.assign(data, { networkId: this.$route.params.id });
+
       const request = await this.$repository.share.createReplyComment({
         post: this.uuid,
         comment: this.comment.id,
-        data: {
-          comment: this.text,
-          networkId: this.profile.id,
-        },
+        data
       });
 
       if (request.success) {
@@ -307,8 +325,6 @@ export const commentMixins = {
         this.comment = Object.assign(this.comment, {
           reply_comment_count: this.comment.reply_comment_count + 1,
         });
-
-
       }
 
       this.createPostRequestIsActive = false
@@ -361,7 +377,11 @@ export const WhoIsIt = {
     }),
     async getAuth() {
 
-      const type = (['NetworkEditors', 'networks'].includes(this.$route.name)) ? this.$route.params.id : null
+      const type = ([
+        'NetworkEditors',
+        'networks',
+        "Membar Network Follower",
+        "memberNetwork",].includes(this.$route.name)) ? this.$route.params.id : null
 
       const response = await this.$repository.share.WhoIsConnect({ networkId: type, type });
       if (response.success) this.auth(response.data);
@@ -381,7 +401,11 @@ export const knowWhoIsConnected = {
       auth: 'auth/profilConnected',
     }),
     async getAuth() {
-      const type = (['NetworkEditors', 'networks'].includes(this.$route.name)) ? this.$route.params.id : null
+      const type = ([
+        'NetworkEditors',
+        'networks',
+        "Membar Network Follower",
+        "memberNetwork"].includes(this.$route.name)) ? this.$route.params.id : null
 
       const response = await this.$repository.share.WhoIsConnect({ networkId: type, type });
 
@@ -422,7 +446,11 @@ export const Redis = {
     }),
 
     async getAuth() {
-      const type = (['NetworkEditors', 'networks'].includes(this.$route.name)) ? this.$route.params.id : null
+      const type = ([
+        'NetworkEditors',
+        'networks',
+        "Membar Network Follower",
+        "memberNetwork",].includes(this.$route.name)) ? this.$route.params.id : null
       const response = await this.$repository.share.WhoIsConnect({ networkId: type, type });
 
       if (response.access) this.auth(response.data);
@@ -524,7 +552,6 @@ export const FirebaseNotification = {
   }
 }
 
-
 export const isYourOwnPostMixins = {
 
   computed: {
@@ -573,5 +600,4 @@ export const PostComponentMixin = {
 
 export const AllPostFeatureMixin = {
   mixins: [PostComponentMixin],
-
 }

@@ -41,7 +41,11 @@
       <!-- Edit message -->
       <p
         class="p-0 m-0 pl-3 msg text inline-comment"
-        style="background: transparent; border: 1px solid transparent"
+        style="
+          background: transparent;
+          border: 1px solid transparent;
+          width: 100%;
+        "
         v-if="proccesEdit"
       >
         <input
@@ -105,7 +109,7 @@
           </b-col>
           <b-col cols="11"
             ><input
-              placeholder="Post a Comment"
+              placeholder="Reply a Comment"
               class="comment"
               type="text"
               @keypress.enter="onReply"
@@ -123,12 +127,12 @@
             />
           </b-col>
           <b-col cols="12" class="mt-4 ml-3 mr-3">
-            <Loader v-if="loadComment" />
             <Reply
               v-for="(obj, index) in comments"
               :key="index"
               :item="obj"
               :uuid="uuid"
+              :onDelete="onDelete"
               type="reply"
             />
 
@@ -136,9 +140,11 @@
               v-if="comments.length && !loadComment"
               :hasData="hasData"
               @click.native="onShowReply"
-              :moreDataTitle="'Show more comments'"
-              :noDataTitle="'No comment'"
+              :moreDataTitle="'Show more reply comments'"
+              :noDataTitle="'No reply comment'"
             />
+
+            <Loader v-if="loadComment" />
           </b-col>
         </b-row>
       </div>

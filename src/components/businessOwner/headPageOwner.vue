@@ -26,7 +26,7 @@
       </div>
       <!-- <router-link to="#media?type=cover"> -->
         <b-button @click="gotoCoverImages" class="float-right see-all">
-          See All
+          {{ $t('businessowner.See_All') }}
         </b-button>
       <!-- </router-link> -->
 
@@ -59,7 +59,7 @@
                     </b>
                     <br />
                     <span class="community">
-                      {{ business_info.community }} Community
+                      {{ business_info.community }} {{ $t('businessowner.Community') }}
                     </span>
                   </h6>
                 </span>
@@ -166,31 +166,21 @@
           <b-col cols="4" md="6" class="">
             <div class="my-auto ">
               <span class="float-right">
-                <b-button
-                  variant="primary"
-                  class="edit-btn  d-none d-md-inline"
-                  @click="selectCover"
-                >
-                  <fas-icon
-                    class="mr-2"
-                    :icon="['fas', 'pencil-alt']"
-                    size="lg"
-                  />
-                  Add Cover
-                </b-button>
 
-                <b-dropdown
-                  id="dropdown-1"
-                  class="float-right  mt-2 mt-sm-2 mt-md-0  dot-btn"
-                  no-caret
-                  variant="outline-primary"
-                >
+                <b-button variant="primary" class="edit-btn  d-none d-md-inline"     @click="selectCover"  > <fas-icon class="mr-2" :icon="['fas', 'pencil-alt']" size="lg" />   {{ $t('businessowner.Add_Cover') }} </b-button>
+                
+                
+                <b-dropdown id="dropdown-1" class="float-right  mt-2 mt-sm-2 mt-md-0  dot-btn" no-caret variant="outline-primary">
                   <template #button-content>
                     <b-icon-three-dots></b-icon-three-dots>
                   </template>
 
-                  <b-dropdown-item @click="selectCover">
-                    Change Cover</b-dropdown-item
+
+
+    
+
+                  <b-dropdown-item  @click="selectCover" 
+                    > {{ $t('businessowner.Change_Cover') }}</b-dropdown-item
                   >
 
                   <!--
@@ -200,7 +190,7 @@
 
  -->
 
-                  <b-dropdown-item @click="viewAs">View As</b-dropdown-item>
+            <b-dropdown-item  @click="viewAs"  >{{ $t('businessowner.View_As') }}</b-dropdown-item> 
                 </b-dropdown>
               </span>
             </div>
@@ -326,7 +316,7 @@ export default {
           this.flashMessage.show({
             status: "success",
 
-            message: "Logo Updated",
+            message: this.$t('businessowner.Logo_Updated'),
 
             blockClass: "custom-block-class",
           });
@@ -341,7 +331,7 @@ export default {
           this.flashMessage.show({
             status: "error",
 
-            message: "Unable to set your Logo",
+            message: this.$t('businessowner.Unable_to_set_your_Logo'),
             blockClass: "custom-block-class",
           });
           console.log({ err: err });
@@ -375,7 +365,7 @@ export default {
           this.flashMessage.show({
             status: "success",
 
-            message: "Profile Updated",
+            message: this.$t('businessowner.Profile_Updated'),
 
             blockClass: "custom-block-class",
           });
@@ -402,7 +392,7 @@ export default {
             this.flashMessage.show({
               status: "error",
 
-              message: "Unable to upload your image",
+              message: this.$t('businessowner.Unable_to_upload_your_image'),
               blockClass: "custom-block-class",
             });
             console.log({ err: err });

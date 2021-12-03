@@ -181,6 +181,9 @@ export default {
       nextLoad: false,
     };
   },
+  created() {
+    console.log("Mini Networks => ".this.network());
+  },
   computed: {
     networks() {
       return this.$store.getters["allSearch/getNetworks"];

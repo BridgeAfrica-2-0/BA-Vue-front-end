@@ -14,7 +14,7 @@ import axios from "axios"
 
     getters: {
       process: state => {
-        return state.all.filter(val => val.status == "process")
+        return state.all.filter(val => val.status == "pending")
       },
 
       shipped: state => {

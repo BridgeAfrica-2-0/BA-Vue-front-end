@@ -168,6 +168,7 @@
       </b-container>
     </b-modal>
 
+    <!-- Edit Profile Picture -->
     <b-modal hide-footer id="" :title="$t('network.Upload_Profile_Picture')">
       <div class="w3-container">
         <div class="row pb-3">
@@ -195,10 +196,7 @@
       <b-button style="float: right" class="mt-2" variant="primary" @click="submitFile">
         <b-spinner v-if="SPupdateN" small type="grow"></b-spinner>{{ $t('network.Upload') }}
       </b-button>
-
-    </b-modal> 
- 
-
+    </b-modal>
 
 
     <b-modal id="modal-4" ref="modal-4" centered hide-footer :title="$t('network.Upload_a_New_picture')" >

@@ -1,11 +1,14 @@
 <template>
   <div v-if="hasLoadPicture">
-    <b-spinner class="custom-loader" :label="$t('profileowner.Large_Spinner')"></b-spinner>
+    <b-spinner
+      class="custom-loader"
+      :label="$t('profileowner.Large_Spinner')"
+    ></b-spinner>
   </div>
-  <div class="row" v-else> 
+  <div class="row" v-else>
     <div class="container-fluid">
       <p v-if="!allImages.length" style="font-size: 3rem">
-        {{ $t('profileowner.No_items_found') }}
+        {{ $t("profileowner.No_items_found") }}
       </p>
 
       <b-modal
@@ -25,12 +28,21 @@
 
         <br />
 
-        <b-button @click="submitPosts" variant="primary" block :disabled="loading"
-          ><b-icon icon="cursor-fill" variant="primary"></b-icon> {{ $t('profileowner.Publish') }}</b-button
+        <b-button
+          @click="submitPosts"
+          variant="primary"
+          block
+          :disabled="loading"
+          ><b-icon icon="cursor-fill" variant="primary"></b-icon>
+          {{ $t("profileowner.Publish") }}</b-button
         >
       </b-modal>
 
-      <div class="createp img-gall image-wrapp img-size" v-if="canUpload && showCreateForm" @click="$refs.movie.click()">
+      <div
+        class="createp img-gall image-wrapp img-size"
+        v-if="isEditor ? (!canUpload ? true : false) : false"
+        @click="$refs.movie.click()"
+      >
         <div class="">
           <input
             type="file"
@@ -40,11 +52,10 @@
             hidden
             ref="movie"
           />
-
-          <a>
+          <a @click="$refs.movie.click()">
             <div class="drag-textt">
               <fas-icon :icon="['fas', 'plus']" />
-              <h3>{{ $t('profileowner.Add_Item') }}</h3>
+              <h3>{{ $t("profileowner.Add_Item") }}</h3>
             </div>
           </a>
         </div>
@@ -80,10 +91,10 @@
 </template>
 
 <script>
-import Picture from './imagesItems.vue';
-import { mapActions, mapMutations } from 'vuex';
-import { fullMediaLink } from '@/helpers';
-import { v4 } from 'uuid';
+import Picture from "./imagesItems.vue";
+import { mapActions, mapMutations } from "vuex";
+import { fullMediaLink } from "@/helpers";
+import { v4 } from "uuid";
 
 export default {
   components: {
@@ -92,6 +103,7 @@ export default {
   props: {
     album: {},
     isEditor: {},
+    canUpload: {},
     addItem: {
       type: Boolean,
       default: function () {
@@ -146,7 +158,7 @@ export default {
       playerVars: {
         autoplay: 1,
       },
-      text: '',
+      text: "",
       pattern: null,
     };
   },
@@ -189,61 +201,61 @@ export default {
     };
 
     this.strategy = {
-      jpeg: () => 'image',
-      jpg: () => 'image',
-      png: () => 'image',
-      mpeg: () => 'video',
-      mp4: () => 'video',
-      youtube: () => 'youtube',
-      'image/jpeg': () => 'image',
-      'image/jpg': () => 'image',
-      'image/png': () => 'image',
-      'video/mpeg': () => 'video',
-      'video/mp4': () => 'video',
+      jpeg: () => "image",
+      jpg: () => "image",
+      png: () => "image",
+      mpeg: () => "video",
+      mp4: () => "video",
+      youtube: () => "youtube",
+      "image/jpeg": () => "image",
+      "image/jpg": () => "image",
+      "image/png": () => "image",
+      "video/mpeg": () => "video",
+      "video/mp4": () => "video",
     };
     this.loadImages();
     this.url = this.$route.params.id;
   },
 
   destroyed() {
-    this.$emit('reste');
+    this.$emit("reste");
   },
 
   methods: {
     ...mapActions({
-      submitPost: 'UserProfileOwner/submitPost',
-      setProfilePicture: 'UserProfileOwner/setProfilePic',
-      setCoverPicture: 'UserProfileOwner/setCoverPic',
-      deleteImagePicture: 'UserProfileOwner/deleteImage',
-      onDownloadPic: 'UserProfileOwner/downloadPic',
-      getAlbumImages: 'UserProfileOwner/getAlbumImages',
+      submitPost: "UserProfileOwner/submitPost",
+      setProfilePicture: "UserProfileOwner/setProfilePic",
+      setCoverPicture: "UserProfileOwner/setCoverPic",
+      deleteImagePicture: "UserProfileOwner/deleteImage",
+      onDownloadPic: "UserProfileOwner/downloadPic",
+      getAlbumImages: "UserProfileOwner/getAlbumImages",
 
-      submitPostBusiness: 'businessOwner/submitPost',
-      setProfilePictureBusiness: 'businessOwner/setProfilePic',
-      setCoverPictureBusiness: 'businessOwner/setCoverPic',
-      deleteImagePictureBusiness: 'businessOwner/deleteImage',
-      onDownloadPicBusiness: 'businessOwner/downloadPic',
-      getAlbumImagesBusiness: 'businessOwner/getAlbumImages',
+      submitPostBusiness: "businessOwner/submitPost",
+      setProfilePictureBusiness: "businessOwner/setProfilePic",
+      setCoverPictureBusiness: "businessOwner/setCoverPic",
+      deleteImagePictureBusiness: "businessOwner/deleteImage",
+      onDownloadPicBusiness: "businessOwner/downloadPic",
+      getAlbumImagesBusiness: "businessOwner/getAlbumImages",
 
-      submitPostNetwork: 'networkProfileMedia/submitPost',
-      setProfilePictureNetwork: 'networkProfileMedia/setProfilePic',
-      setCoverPictureNetwork: 'networkProfileMedia/setCoverPic',
-      deleteImagePictureNetwork: 'networkProfileMedia/deleteImage',
-      onDownloadPicNetwork: 'networkProfileMedia/downloadPic',
-      getAlbumImagesNetwork: 'networkProfileMedia/getAlbumImages',
+      submitPostNetwork: "networkProfileMedia/submitPost",
+      setProfilePictureNetwork: "networkProfileMedia/setProfilePic",
+      setCoverPictureNetwork: "networkProfileMedia/setCoverPic",
+      deleteImagePictureNetwork: "networkProfileMedia/deleteImage",
+      onDownloadPicNetwork: "networkProfileMedia/downloadPic",
+      getAlbumImagesNetwork: "networkProfileMedia/getAlbumImages",
     }),
 
     ...mapMutations({
-      updateItem: 'UserProfileOwner/updateAlbumItem',
-      updateItemBusiness: 'businessOwner/updateAlbumItem',
-      updateItemNetwork: 'networkProfileMedia/updateAlbumItem',
+      updateItem: "UserProfileOwner/updateAlbumItem",
+      updateItemBusiness: "businessOwner/updateAlbumItem",
+      updateItemNetwork: "networkProfileMedia/updateAlbumItem",
     }),
 
     getFullMediaLink: fullMediaLink,
 
     getYoutubeKey(path) {
-      let videoID = path.split('v=')[1];
-      const ampersandPosition = videoID.indexOf('&');
+      let videoID = path.split("v=")[1];
+      const ampersandPosition = videoID.indexOf("&");
 
       if (ampersandPosition != -1) {
         videoID = videoID.substring(0, ampersandPosition);
@@ -262,7 +274,7 @@ export default {
 
     showPic(image) {
       this.image_details = image;
-      this.$refs['Details'].show();
+      this.$refs["Details"].show();
     },
 
     loadImages() {
@@ -277,19 +289,21 @@ export default {
 
     getFileExtension(file) {
       console.log(file);
-      if (file.startsWith('https://www.youtube.com')) return 'youtube';
+      if (file.startsWith("https://www.youtube.com")) return "youtube";
 
-      const fileArray = file.split('.');
+      const fileArray = file.split(".");
       return fileArray[fileArray.length - 1];
     },
 
     typeOfMedia(file) {
       try {
         const extension = this.getFileExtension(this.getFullMediaLink(file));
-        return 'youtube' == extension ? extension : this.strategy[this.getFileExtension(file)]();
+        return "youtube" == extension
+          ? extension
+          : this.strategy[this.getFileExtension(file)]();
       } catch (error) {
         console.log(error);
-        return 'image';
+        return "image";
       }
     },
 
@@ -311,14 +325,17 @@ export default {
         .onDownloadPic(media.id)
         .then((response) => {
           var fileURL = window.URL.createObjectURL(new Blob([response.data]));
-          var fileLink = document.createElement('a');
+          var fileLink = document.createElement("a");
           fileLink.href = fileURL;
-          fileLink.setAttribute('download', `${v4()}.${this.getFileExtension(media.path)}`);
+          fileLink.setAttribute(
+            "download",
+            `${v4()}.${this.getFileExtension(media.path)}`
+          );
           document.body.appendChild(fileLink);
           fileLink.click();
           this.flashMessage.show({
-            status: 'success',
-            message: 'Image Downloaded',
+            status: "success",
+            message: "Image Downloaded",
           });
           this.loading = false;
           return false;
@@ -327,7 +344,7 @@ export default {
           this.sending = false;
           this.loading = false;
           this.flashMessage.show({
-            status: 'error',
+            status: "error",
             message: error.response.data.message,
           });
           return false;
@@ -343,12 +360,12 @@ export default {
 
           this.pattern[this.type]().updateItem({
             id: this.album,
-            action: 'remove',
+            action: "remove",
           });
           this.loading = false;
           this.flashMessage.show({
-            status: 'success',
-            message: 'Media Deleted',
+            status: "success",
+            message: "Media Deleted",
           });
           return false;
         })
@@ -356,7 +373,7 @@ export default {
           this.sending = false;
           this.loading = false;
           this.flashMessage.show({
-            status: 'error',
+            status: "error",
             message: error.response.data.message,
           });
           return false;
@@ -367,15 +384,17 @@ export default {
     setCoverPic(id) {
       this.loading = true;
       const data =
-        'business' == this.type || 'network' == this.type ? { businessID: this.$route.params.id, albumID: id } : id;
+        "business" == this.type || "network" == this.type
+          ? { businessID: this.$route.params.id, albumID: id }
+          : id;
 
       this.pattern[this.type]()
         .setCoverPicture(data)
         .then(() => {
           this.loading = false;
           this.flashMessage.show({
-            status: 'success',
-            message: 'Cover Picture succesfully set',
+            status: "success",
+            message: "Cover Picture succesfully set",
           });
           return false;
         })
@@ -383,7 +402,7 @@ export default {
           this.sending = false;
           this.loading = false;
           this.flashMessage.show({
-            status: 'error',
+            status: "error",
             message: error.response.data.message,
           });
           return false;
@@ -394,14 +413,16 @@ export default {
     setProfilePic(id) {
       this.loading = true;
       const data =
-        'business' == this.type || 'network' == this.type ? { businessID: this.$route.params.id, albumID: id } : id;
+        "business" == this.type || "network" == this.type
+          ? { businessID: this.$route.params.id, albumID: id }
+          : id;
       this.pattern[this.type]()
         .setProfilePicture(data)
         .then(() => {
           this.loading = false;
           this.flashMessage.show({
-            status: 'success',
-            message: 'Profile Picture set',
+            status: "success",
+            message: "Profile Picture set",
           });
           return false;
         })
@@ -409,7 +430,7 @@ export default {
           this.sending = false;
           this.loading = false;
           this.flashMessage.show({
-            status: 'error',
+            status: "error",
             message: error.response.data.message,
           });
           return false;
@@ -421,38 +442,43 @@ export default {
       let albumId = this.album;
 
       let formData = new FormData();
-      formData.append('media', this.profile_pic);
-      formData.append('dob', this.text);
+      formData.append("media", this.profile_pic);
+      formData.append("dob", this.text);
       let payload = {
         albumID: albumId,
-        businessID: 'business' == this.type || 'network' == this.type ? this.$route.params.id : null,
+        businessID:
+          "business" == this.type || "network" == this.type
+            ? this.$route.params.id
+            : null,
         data: formData,
       };
 
       const data =
-        'business' == this.type || 'network' == this.type ? { businessId: this.$route.params.id, albumId } : albumId;
+        "business" == this.type || "network" == this.type
+          ? { businessId: this.$route.params.id, albumId }
+          : albumId;
 
       this.pattern[this.type]()
         .submitPost(payload)
         .then(() => {
-          this.pattern[this.type]().updateItem({ id: albumId, action: 'add' });
+          this.pattern[this.type]().updateItem({ id: albumId, action: "add" });
           this.pattern[this.type]().getAlbumImages(data);
           this.loading = false;
-          this.text = '';
+          this.text = "";
           this.flashMessage.show({
-            status: 'success',
-            message: 'Media Updated',
-            blockClass: 'custom-block-class',
+            status: "success",
+            message: "Media Updated",
+            blockClass: "custom-block-class",
           });
-          this.$refs['modalxl'].hide();
+          this.$refs["modalxl"].hide();
         })
         .then(() => {
-          this.$emit('reste');
+          this.$emit("reste");
         })
         .catch((error) => {
           this.loading = false;
           this.flashMessage.show({
-            status: 'error',
+            status: "error",
             message: error.response.data.message,
           });
         });
@@ -462,7 +488,7 @@ export default {
       this.profile_pic = e.target.files[0];
       const file = e.target.files[0];
       this.img_url = URL.createObjectURL(file);
-      this.$refs['modalxl'].show();
+      this.$refs["modalxl"].show();
 
       try {
         this.media = this.strategy[this.profile_pic.type]();

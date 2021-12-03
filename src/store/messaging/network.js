@@ -3,8 +3,12 @@ import axios from "axios";
 export default {
     namespaced: true,
     state: {
+        all: [],
+        users: [],
+        networks: [],
+        businesses: [],
         currentBizId: null,
-        currentBiz: null,
+        currentBiz: [],
         bizs: [],
         chats: [],
         chatList: [],
@@ -99,12 +103,54 @@ export default {
     },
 
     actions: {
+        async GET_ALL({ commit, state }, data) {
+            let keyword = data ? '/' + data : ''
+            var users = []
+            var businesses = []
+            commit("setLoader", true);
+
+            axios.get(`/user/all-user${keyword}`)
+                .then((res) => {
+                    commit("setLoader", false);
+                    users = res.data.data
+                    axios.get(`/business/all${keyword}`)
+                        .then((biz) => {
+                            commit("setLoader", false);
+                            businesses = biz.data.data
+                            console.log("Bizs:", businesses);
+                            // return axios.get(`/networks${keyword}`)
+                            //     .then((res) => {
+                            //         commit("setLoader", false);
+                            //         state.networks = res.data.data
+                            //     })
+                            //     .catch((err) => {
+                            //         commit("setLoader", false);
+                            //         console.log(err);
+                            //     })
+                            state.all = [...users, ...businesses]
+                            state.users = users
+                            state.businesses = businesses
+
+                            console.log(" businesses:", businesses);
+                            console.log(" users:", state.users);
+
+                            console.log(" All:", state.all);
+                        })
+                        .catch((err) => {
+                            commit("setLoader", false);
+                            console.log(err);
+                        })
+
+                })
+
+
+        },
         GET_BIZS({ commit, state }, data) {
             commit("setBizs", []);
 
             commit("setLoader", true);
             let keyword = data ? '/' + data : ''
-            axios.get(`/business/all${keyword}`)
+            axios.get(`/networks${keyword}`)
                 .then((res) => {
                     commit("setLoader", false);
                     let bizs = res.data.data
@@ -168,21 +214,68 @@ export default {
         },
         // ----------------------------------------
 
+        SHARE_POST_NETWORK({ commit }, data) {
+            commit("setLoader", true)
+            var payload = data.data
+
+            return axios.post(`/share/post/network`, payload)
+                .then((res) => {
+                    commit("setLoader", false)
+                    console.log("Post shared...", res.data.data);
+                })
+                .catch((err) => {
+                    commit("setLoader", false)
+                    console.log(err);
+                })
+
+        },
+
+        SHARE_POST_USER({ commit }, data) {
+            commit("setLoader", true)
+            var payload = data.data
+
+            return axios.post(`/share/post/network/user`, payload)
+                .then((res) => {
+                    commit("setLoader", false)
+                    console.log("Post shared...", res.data.data);
+                })
+                .catch((err) => {
+                    commit("setLoader", false)
+                    console.log(err);
+                })
+
+        },
+        SHARE_POST_BUSINESS({ commit }, data) {
+            commit("setLoader", true)
+            var payload = data.data
+
+            return axios.post(`/share/post/network/business`, payload)
+                .then((res) => {
+                    commit("setLoader", false)
+                    console.log("Post shared...", res.data.data);
+                })
+                .catch((err) => {
+                    commit("setLoader", false)
+                    console.log(err);
+                })
+
+        }, // --------------------------------
 
         SAVE_BUSINESS_CHAT({ commit }, data) {
-            commit("setUsers", []);
             console.log("[DEBUG]", data);
+            var payload = data.data
+            var type = data.type
 
-            if (data.type == 'network') {
-                axios.post(`/messages/NetworktoNetwork`, data)
+            if (type == 'network') {
+                axios.post(`/messages/NetworktoNetwork`, payload)
                     .then((res) => {
                         console.log("Message saved...", res.data.data);
                     })
                     .catch((err) => {
                         console.log(err);
                     })
-            } else if (data.type == 'user') {
-                axios.post(`/messages/NetworktoUser`, data)
+            } else if (type == 'user') {
+                axios.post(`/messages/NetworktoUser`, payload)
                     .then((res) => {
                         console.log("Message saved...", res.data.data);
                     })
@@ -190,7 +283,7 @@ export default {
                         console.log(err);
                     })
             } else {
-                axios.post(`/messages/NetworktoBusiness`, data)
+                axios.post(`/messages/NetworktoBusiness`, payload)
                     .then((res) => {
                         console.log("Message saved...", res.data.data);
                     })

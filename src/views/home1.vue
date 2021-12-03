@@ -24,9 +24,9 @@
     <header id="header" class="fixed-topp">
       <div class="container d-flex align-items-center">
         <!--  <h1 class="logo mr-auto"><a href="index.html">Arsha</a></h1>
-      Uncomment below if you prefer to use an image logo -->
+        Uncomment below if you prefer to use an image logo -->
         <a href="index.html" class="logo mr-auto"
-          ><img src="../assets/img/logobr.png" alt="" class="img-fluid b-logo"
+          ><img src="../assets/img/BAC-clear-dotted-logo.png" alt="" class="img-fluid b-logo"
         /></a>
 
         <!-- <nav class="nav-menu d-none d-lg-block">
@@ -60,14 +60,16 @@
       
 
       <!-- Right aligned nav items -->
-      <b-navbar-nav class="ml-auto bold" >
+      <b-navbar-nav class="ml-auto bold size_nav" >
        
-      <b-nav-item > <router-link to="/">Home</router-link></b-nav-item>
-       <b-nav-item href="#">About Us</b-nav-item>
-        <b-nav-item href="#">Contact Us</b-nav-item>
-         <b-nav-item href="#">About Us</b-nav-item>
-         <b-nav-item href="#"><router-link to="/login">Login </router-link></b-nav-item>
-        <b-nav-item ><router-link to="/signup">Signup </router-link></b-nav-item>
+      <b-nav-item > <router-link to="/" class="mx-2">{{ $t('home.Home') }}</router-link></b-nav-item>
+        
+         <b-nav-item ><router-link :to="{ name: 'about' }" class="mx-2">{{ $t('home.About_Us') }} </router-link></b-nav-item>
+        
+        <b-nav-item > <router-link :to="{ name: 'contact' }" class="mx-2">  {{ $t('home.Contact_Us') }}  </router-link></b-nav-item>
+         <!-- <b-nav-item href="#">About Us</b-nav-item> -->
+         <b-nav-item ><router-link to="/login" class="mx-2">  {{ $t('home.Login') }}  </router-link></b-nav-item>
+        <b-nav-item ><router-link to="/signup" class="mx-2"> {{ $t('home.Signup') }} </router-link></b-nav-item>
 
 
       </b-navbar-nav>
@@ -92,7 +94,7 @@
           href="#about"
           class="get-started-btn d-lg-none"
           style="font-size: 18px"
-          >Sign Up</a
+          >{{ $t('home.Sign_Up')}}</a
         > -->
       </div>
     </header>
@@ -105,11 +107,14 @@
             <span
               class="input-group-text border-left-0 color-mobile"
               style="width: 40px; border-right: none; background-color: white"
-            >
+            > 
+            <!-- <Button @click.native="getKeyword" style="width: 5px; height:20px " /> -->
               <i
                 class="bx bx-search"
                 style="color: #e75c18"
                 font-scale="1.5"
+                @click="getKeyword"
+              
               ></i>
             </span>
           </div>
@@ -120,11 +125,11 @@
             data-toggle="popover"
             class="form-control search-mobile"
             style="border-left: none"
-            placeholder="Find Pharmacy"
+            :placeholder="$t('home.Find_Pharmacy')"
             aria-label=""
             data-original-title=""
             title=""
-            v-model="word1"
+            v-model="credentials.keyword"
           />
         </div>
 
@@ -133,7 +138,7 @@
             <span
               class="input-group-text border-left-0 color-mobile"
               style="width: 40px; border-right: none; background-color: white"
-            >
+            > 
               <i class="bx bx-map" style="color: #e75c18" font-scale="1.5"> </i>
             </span>
           </div>
@@ -144,7 +149,7 @@
             data-toggle="popover"
             class="form-control search-mobile"
             style="border-left: none"
-            placeholder="Find Pharmacy"
+            :placeholder="$t('home.Find_Pharmacy')"
             aria-label=""
             data-original-title=""
             title=""
@@ -161,8 +166,7 @@
         <div class="search">
           <div class="topp-div d-none d-md-none d-lg-block">
             <p>
-              Empowering Businesses And Consumers With Digital Presence To Buy
-              And Sell Online
+              {{ $t('home.Empowering_Businesses_And_Consumers_With_Digital_Presence_To_Buy_And_Sell_Online') }}
             </p>
           </div>
         </div>
@@ -176,7 +180,7 @@
               aria-label=""
               data-original-title=""
               title=""
-              placeholder="All"
+              :placeholder="$t('home.All')"
               v-model="credentials.keyword"
             />
 
@@ -187,15 +191,15 @@
               list="browsers"
               data-toggle="popover"
               class="form-control search-h"
-              placeholder="Where "
+              :placeholder="$t('home.Where') "
               aria-label="search bridge africa"
               data-original-title=""
               title=""
             />
 
             <datalist id="browsers">
-              <option value=" Current Location "></option>
-              <option value="Yaounde " />
+              <option :value="$t('home.Current_Location') "></option>
+              <option :value="$t('home.Yaounde') " />
             </datalist>
              <slot name="button">
                 <Button @click.native="getKeyword" />
@@ -231,8 +235,7 @@
     >
       <div class="mobile-top-div d-lg-none p-3">
         <h3 style="font-size: 20px">
-          Empowering Businesses And Consumers With Digital Presence To Buy And
-          Sell Online
+          {{ $t('home.Empowering_Businesses_And_Consumers_With_Digital_Presence_To_Buy_And_Sell_Online') }}
         </h3>
       </div>
     </div>
@@ -242,7 +245,7 @@
       <div class="container aos-init aos-animate" data-aos="fade-up">
         <div class="section-title">
           <h3 class="head-text bridge-header">
-            Find Businesses & Institutions
+            {{ $t('home.Find_Businesses_Institutions') }}
           </h3>
         </div>
 
@@ -275,7 +278,7 @@
                       font-size: 0.99em;
                     "
                   >
-                    Agriculture
+                    {{ $t('home.Agriculture') }}
                   </h3>
                   <p
                     class="card-text"
@@ -314,7 +317,7 @@
                       font-size: 0.99em;
                     "
                   >
-                    Mayor Councils
+                    {{ $t('home.Mayor_Councils') }}
                   </h3>
                   <p
                     class="card-text"
@@ -353,7 +356,7 @@
                       font-size: 0.99em;
                     "
                   >
-                    Restaurants
+                    {{ $t('home.Restaurants') }}
                   </h3>
                   <p
                     class="card-text"
@@ -392,7 +395,7 @@
                       font-size: 0.99em;
                     "
                   >
-                    Pharmacies
+                    {{ $t('home.Pharmacies') }}
                   </h3>
                   <p
                     class="card-text"
@@ -408,9 +411,9 @@
         </div>
       </div>
     </section>
-
+    <div class="w-100 text-light" @mouseover="animation">  .</div>
     <section id="why-us" class="why-us">
-      <div class="container-fluid">
+      <div class="container-fluid" id="anim">
         <div class="row">
           <div
             class="
@@ -425,11 +428,11 @@
           >
             <div class="content">
               <h3 class="bridge-header f-30px">
-                Business Identities and Online Marketplace
+                {{ $t('home.Business_Identities_and_Online_Marketplace') }}
               </h3>
               <p>
-                We help businesses to easily create their websites, buy and sell
-                online through our online marketplace
+                {{ $t('home.We_help_businesses_to_easily_create_their_websites') }}, 
+                {{ $t('home.buy_and_sell_online_through_our_online_marketplace') }}
                 <br />
               </p>
 
@@ -440,7 +443,7 @@
                   class="btn btn-primary mt-5 bridge-btn float-left bridge-btn"
                  
                 >
-                  Sign up
+                  {{ $t('home.Sign_up')}}
                 </button>
                 </router-link>
                
@@ -459,26 +462,27 @@
           >
             &nbsp;
 
-            <div class="scroll-container">
-              <div class="scroll-element js-scroll slide-left">
+            <div class="scroll-container"  >
+              <!-- <div class="  slide-"> -->
                 <video
-                  class="business-vid1"
+                  class="business-vid1 size_video1"
                   playsinline
                   autoplay
                   muted
                   loop
                   poster="assets/img/Home scroll copy.png"
                   id="Test_Video"
+                 
                 >
                   <source src="../assets/video/identity.mp4" type="video/mp4" />
                 </video>
-              </div>
-              <div class="scroll-caption hidde" id="hidde">
+              <!-- </div> -->
+              <div class=" hidde" id="hidde">
                 <img
                   src="../assets/img/african-farmer.jpg"
                   height="700px"
                   class="d-none d-xl-block taillev1"
-                  style="margin-left: -70px"
+                  
                   alt=""
                 />
               </div>
@@ -504,11 +508,10 @@
             "
           >
             <div class="content">
-              <h3 class="bridge-header">Online Business Databases</h3>
+              <h3 class="bridge-header">{{ $t('home.Online_Business_Databases') }}</h3>
               <p>
-                Our online business directory helps to make businesses visible
-                and locatable, and enables consumers to search for and compare
-                product prices
+                {{ $t('home.Our_online_business_directory_helps_to_make_businesses_visible_and_locatable') }} , 
+                {{ $t('home.and_enables_consumers_to_search_for_and_compare_product_prices') }}
               </p>
 
               <div class="text-center w-100">
@@ -518,7 +521,7 @@
                   class="btn btn-primary mt-5 bridge-btn float-left bridge-btn"
                 
                 >
-                  Sign up
+                  {{ $t('home.Sign_up') }}
                 </button>
                </router-link>
                
@@ -569,10 +572,10 @@
             "
           >
             <div class="content">
-              <h3 class="bridge-header">Community Engagement</h3>
+              <h3 class="bridge-header">{{$t('home.Community_Engagement')}}</h3>
               <p>
-                We allow businesses and consumers to follow one another, receive
-                notifications and send direct messages
+                {{ $t('home.We_allow_businesses_and_consumers_to_follow_one_another') }} , 
+                {{ $t('home.receive_notifications_and_send_direct_messages') }}
               </p>
 
               <div class="text-center w-100">
@@ -582,7 +585,7 @@
                   class="btn btn-primary mt-5 bridge-btn float-left bridge-btn"
                  
                 >
-                  Sign up
+                  {{ $t('home.Sign_up') }}
                 </button>
                 </router-link>
               </div>
@@ -631,10 +634,10 @@
             "
           >
             <div class="content">
-              <h3 class="bridge-header">Online and Offline</h3>
+              <h3 class="bridge-header">{{ $t('home.Online_and_Offline') }}</h3>
               <p>
-                For businesses and consumers in zones of low or no internet
-                penetration, our platform works offline via SMS and USSD
+                {{ $t('home.For_businesses_and_consumers_in_zones_of_low_or_no_internet_penetration') }}, 
+                {{ $t('home.our_platform_works_offline_via_SMS_and_USSD') }}
               </p>
 
               <div class="text-center w-100">
@@ -644,7 +647,7 @@
                   class="btn btn-primary mt-5 bridge-btn float-left bridge-btn"
                  
                 >
-                  Sign up
+                  {{ $t('home.Sign_up') }}
                 </button>
                 </router-link>
               </div>
@@ -718,14 +721,14 @@
                   role="button"
                   data-slide="prev"
                   ><span class="carousel-control-prev-icon"></span
-                  ><span class="sr-only">Previous</span></a
+                  ><span class="sr-only">{{ $t('home.Previous') }}</span></a
                 ><a
                   class="carousel-control-next"
                   href="#carousel-1"
                   role="button"
                   data-slide="next"
                   ><span class="carousel-control-next-icon"></span
-                  ><span class="sr-only">Next</span></a
+                  ><span class="sr-only">{{ $t('home.Next') }}</span></a
                 >
               </div>
               <ol class="carousel-indicators">
@@ -754,16 +757,15 @@
             &nbsp;
 
             <div class="content">
-              <h3 class="bridge-header">Digital literacy</h3>
+              <h3 class="bridge-header">{{ $t('home.Digital_literacy') }}</h3>
               <p>
-                We provide face-to-face digital literacy trainings for
-                businesses who lack digital know-how through our army of digital
-                coaches
+                {{ $t('home.We_provide_face_to_face_digital_literacy_trainings') }} 
+                {{ $t('home.for_businesses_who_lack_digital_know_how_through_our_army_of_digital_coaches') }}
               </p>
                 <router-link to="login">
 
               <button class="btn btn-primary mt-5 bridge-btn bridge-btn mb-3">
-                See Videos
+                {{ $t('home.See_Videos') }}
               </button>
               </router-link>
             </div>
@@ -810,29 +812,29 @@
             </div>
 
             <div class="col-lg-3 col-md-6 footer-links">
-              <h4 class="bridge-header text-left white">OUR ADRESS</h4>
+              <h4 class="bridge-header text-left white">{{ $t('home.OUR_ADRESSE') }}</h4>
               <ul class="text-left white">
-                <li>International Handicraft Center, Rond-point Intendance</li>
+                <li>{{ $t('home.International_Handicraft_Center') }}, {{ $t('home.Rond_point_Intendance') }}</li>
 
-                <li>Yaoundé</li>
+                <li>{{ $t('home.Yaounde') }}</li>
 
-                <li>Cameroon</li>
+                <li>{{ $t('home.Cameroon') }}</li>
               </ul>
             </div>
 
             <div class="col-lg-3 col-md-6 footer-links white">
-              <h4 class="bridge-header text-left white">USEFULL LINKS</h4>
+              <h4 class="bridge-header text-left white">{{ $t('home.USEFULL_LINKS') }}</h4>
               <ul class="white">
                 <li class="white"><a href="#">Bridgeafricaventures.com</a></li>
 
-                <li class="white"><a href="#">Home</a></li>
+                <li class="white"><a href="#">{{ $t('home.Home') }}</a></li>
 
                 <li class="white">
-                  <a href="http://info.bridgeafrica.com">About Us</a>
+                  <a href="http://info.bridgeafrica.com">{{ $t('home.About_Us') }}</a>
                 </li>
 
                 <li class="white">
-                  <a href="http://info.bridgeafrica.com/contact/">Contact Us</a>
+                  <a href="http://info.bridgeafrica.com/contact/">{{ $t('home.Contact_Us') }}</a>
                 </li>
 
                 <!--   
@@ -843,11 +845,11 @@
             </div>
 
             <div class="col-lg-3 col-md-6 footer-links">
-              <h4 class="bridge-header text-left white">WORKING HOURS</h4>
+              <h4 class="bridge-header text-left white">{{ $t('home.WORKING_HOURS') }}</h4>
               <ul class="white">
-                <li>Monday-Friday: 09AM – 05PM</li>
+                <li>{{ $t('home.Monday') }}-{{ $t('home.Friday') }}: {{ $t('home.09AM_05PM') }}</li>
 
-                <li>Saturday: 09AM – 01PM</li>
+                <li>{{ $t('home.Saturday') }}: {{ $t('home.09AM_01PM') }}</li>
               </ul>
             </div>
           </div>
@@ -878,6 +880,7 @@
 import "../assets/js/main.js";
 // import "../assets/js/js.js";
 import Button from '@/components/ButtonNavBarFind.vue';
+//import SiteHeader from '../components/site/siteHeader';
 export default {
   components: {Button},
   data(){
@@ -889,9 +892,6 @@ export default {
   },
 
 
-  mounted(){
-    
-  },
 
   props: {
     credentials: {
@@ -899,7 +899,7 @@ export default {
       default: function () {
         return {
           keyword: '',
-          placeholder: 'All',
+          placeholder: this.$t('home.All'),
         };
       },
     },
@@ -938,7 +938,8 @@ export default {
       this.$refs.mobileinput.style.display = "block";
     },
 
-    getKeyword() { console.log(this.credentials.keyword)
+    getKeyword(e) { console.log(this.credentials.keyword)
+      if (e.keyCode === 13) {console.log("touche entrez")}
       if (!this.credentials.keyword) return false;
 
       if (this.$route.name != 'Search') {
@@ -953,6 +954,38 @@ export default {
         this.$router.push({ name: 'Search' });
       }
     },
+
+    animation(){
+      
+  var id = null;
+  var elem = document.getElementById("Test_Video");
+  var pos = 0;
+  clearInterval(id);
+  id = setInterval(frame, 5);
+  function frame() {
+    if (pos == 50) {
+      clearInterval(id);
+    } else {
+      pos++;
+      // elem.style.top = pos + 'px';
+      
+
+      elem.style.zIndex = "1";
+      elem.style.left = pos + 'px';
+    if(pos == 50){
+       elem.style.left = 0 + 'px';
+    }
+  } 
+} 
+
+
+  }
+  },
+  mounted(){
+    document.getElementById("why-us").onscroll = function() {
+
+      this.animation();
+    };
 
   }
 };
@@ -985,7 +1018,9 @@ export default {
   font-size: 16px;
 }
 .taillev1{
-  height: 504px !important;
+  height: 680px !important;
+  width: 300px;
+  
 }
 .blec-container {
   position: absolute;
@@ -1037,6 +1072,7 @@ export default {
   color: #fff;
   transition: 0.4s;
   border-radius: 10px;
+ 
 }
 
 .bridge-btn:hover {
@@ -1074,9 +1110,29 @@ export default {
 }
 
 @media only screen and (min-width: 768px) {
+  
+  .bridge-btn{
+    width: 124px;
+    height: 48px;
+  }
+  .b-logo{
+    width: 100px !important;
+    height: 70px !important;
+  }
+  .size_nav{
+    font-size: 14px !important;
+    color: #343a40 !important;
+  }
+  .text_box{
+    font-size: 25px !important;
+    /* height: 166px !important;
+    width: 500px !important; */
+  }
   .input-block {
-    padding-left: 200px !important;
-    padding-right: 200px;
+    padding-left: 50px !important;
+    padding-right: 50px;
+    font-size: 14px !important ;
+  
   }
 
   .topp-div {
@@ -1098,7 +1154,9 @@ export default {
   }
 
   .search-h {
-    height: 50px;
+    height: 50px !important;
+    font-size: 24px !important;
+    /* width: 30px !important; */
   }
 
   .ca-img {
@@ -1130,6 +1188,11 @@ export default {
 
 .z-index {
   z-index: 1;
+}
+
+.why-us .content p {
+  font-size: 25px !important;
+  color: #454343;
 }
 
 .f-30 {
@@ -1238,10 +1301,7 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Merriweather&family=Merriweather+Sans:wght@300&display=swap");
 
 /*General styling for structure*/
-body {
-  margin: 0;
-  font-family: "Merriweather Sans", sans-serif;
-}
+
 
 .container {
   max-width: 1280px;
@@ -1255,7 +1315,7 @@ header h2 {
 
 .scroll-container {
   min-height: 450px;
-  padding: 2rem 1rem;
+  
   display: flex;
   align-items: center;
   box-sizing: border-box;

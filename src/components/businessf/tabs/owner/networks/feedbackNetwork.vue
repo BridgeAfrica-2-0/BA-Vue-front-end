@@ -16,7 +16,7 @@
               <b-icon-filter></b-icon-filter><span class="sr-only">{{ $t('network.Search') }}</span>
             </template>
             <p class="font-weight-bolder px-3 m-0">{{ $t('network.Feedbacks_Type') }}</p>
-            <b-dropdown-item @click="applyFilter('0')">{{ $t('network.Any') }}</b-dropdown-item>
+            <b-dropdown-item @click="applyFilter('')">{{ $t('network.Any') }}</b-dropdown-item>
             <b-dropdown-item @click="applyFilter('Improvement')">{{ $t('network.Suggestion_For_Improvement') }}</b-dropdown-item>
             <b-dropdown-item @click="applyFilter('Complain')">{{ $t('network.Complain') }}</b-dropdown-item>
           </b-dropdown>
@@ -82,8 +82,6 @@
         </infinite-loading>
       </b-col>
     </b-row>
-
-    <!-- <FlashMessage /> -->
     
   </div>
 </template>
@@ -144,7 +142,7 @@ export default {
       console.log("searching...");
       console.log(this.filterData);
       this.$nextTick(() => {
-        this.page = 0;
+        this.currentPage = 0;
         this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
       });
     },
@@ -153,6 +151,7 @@ export default {
       console.log("loop");
       const data = this.getRequestDatas(this.filterData);
       console.log('keyword: '+data);
+      console.log('URL: '+"network/"+this.url+"/feedbacks/"+this.currentPage);
       let formData = new FormData();
       formData.append('keyword', data);
       // this.$store

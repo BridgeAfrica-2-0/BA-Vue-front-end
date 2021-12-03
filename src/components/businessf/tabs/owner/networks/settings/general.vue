@@ -1,7 +1,5 @@
 <template>
   <b-container v-if="networkinfo != 0">
-    
-    <FlashMessage />
 
     <div class="">
       <b-container>
@@ -85,6 +83,7 @@
         variant="primary"
         class="a-button-l text"
         @click="save"
+        :disabled="load"
       ><b-spinner v-if="load" small type="grow"></b-spinner> {{ $t('network.Save_Changes') }}</b-button>
       <br />
     </div>
@@ -100,39 +99,41 @@
 import { mapActions, mapGetters } from "vuex";
 export default {
   name: "general",
-  data: () => ({
-    load: false,
-    permissions: "",
-    approval: "",
-    privacy: "",
-    networkId: "",
-    options: [
-      {
-        text: "Admin Only",
-        value: "admin",
-      },
-      {
-        text: "Editor",
-        value: "editor",
-      },
-      {
-        text: "Member",
-        value: "member",
-      },
-    ],
-    lists: [
-      {
-        text: "Approval by admin",
-        value: "admin approval",
-        disabled: false,
-      },
-      {
-        text: "Approval by editor and admin",
-        value: "editor and admin approval",
-        disabled: false,
-      },
-    ],
-  }),
+  data() {
+    return {
+      load: false,
+      permissions: "",
+      approval: "",
+      privacy: "",
+      networkId: "",
+      options: [
+        {
+          text: "Admin Only",
+          value: "Admin only",
+        },
+        {
+          text: "Editor",
+          value: "Allow editor to post",
+        },
+        {
+          text: "Member",
+          value: "Allow member to post",
+        },
+      ],
+      lists: [
+        {
+          text: "Approval by admin",
+          value: "Admin",
+          disabled: false,
+        },
+        {
+          text: "Approval by editor and admin",
+          value: "Admin and editor",
+          disabled: false,
+        },
+      ],
+    }
+  },
 
   computed: {
     ...mapGetters({
@@ -161,7 +162,7 @@ export default {
       } else if (this.networkinfo[1].setting_value == "editor") {
         this.lists[0].disabled = false;
         this.lists[1].disabled = true;
-      } else if (this.networkinfo[1].setting_value == "member") {
+      } else if (this.networkinfo[1].setting_value == "Allow member to post") {
         this.lists[0].disabled = false;
         this.lists[1].disabled = false;
       }
@@ -180,8 +181,11 @@ export default {
     },
 
     save() {
-      this.laod = true;
+      this.load = true;
       let formData = new FormData()
+      console.log("privacy: "+ this.networkinfo[0].setting_value)
+      console.log("post_permission: "+ this.networkinfo[1].setting_value)
+      console.log("post_approval: "+ this.networkinfo[2].setting_value)
       formData.append("privacy", this.networkinfo[0].setting_value)
       formData.append("post_permission", this.networkinfo[1].setting_value)
       formData.append("post_approval", this.networkinfo[2].setting_value)

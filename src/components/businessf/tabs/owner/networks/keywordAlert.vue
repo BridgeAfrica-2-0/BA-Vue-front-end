@@ -5,66 +5,45 @@
         <div class="">
           <b-container>
             <b-form-group
-              label-cols-lg="3"
+              label-cols-lg="2"
               :label="$t('network.Keyword_Alerts')"
               label-size="md"
               label-class="font-weight-bold pt-0 username"
               class="mb-0 text"
             >
-              <b-form-input
-                id="textarea"
-                :placeholder="$t('network.Enter_keyword_alert')"
-                rows="3"
-                max-rows="6"
-              ></b-form-input>
+              <div class="row align-items-start">
+                <div class="col-9">
+                  <b-form-tags
+                    input-id="tags-separators"
+                    separator=" ,"
+                    :placeholder="
+                      $t('network.Enter_keyword_alert_separate_by_space_or')
+                    "
+                    rows="3"
+                    w-100
+                    max-rows="6"
+                    :tag-validator="tagValidator"
+                    remove-on-delete
+                    no-add-on-enter
+                    size="lg"
+                    required
+                    v-model="value"
+                    :limit="limit"
+                  ></b-form-tags>
+                </div>
+                <div class="col-1 m-1 text-end">
+                  <b-button
+                    type="button"
+                    @click="addKeyword"
+                    variant="primary"
+                    >{{ $t("network.Add") }}</b-button
+                  >
+                </div>
+              </div>
             </b-form-group>
           </b-container>
           <hr />
         </div>
-
-         <div class="">
-      <b-container>
-        <b-form-group
-          label-cols-lg="2"
-          :label="$t('network.Keyword_Alerts')"
-          label-size="md"
-          label-class="font-weight-bold pt-0 username"
-          class="mb-0 text"
-        >
-        <div class="row align-items-start ">
-          <div class="col-9">
-
-          <b-form-tags
-            
-            input-id="tags-separators"
-            separator=" ,"
-            :placeholder="$t('network.Enter_keyword_alert_separate_by_space_or')"
-            rows="3"
-            w-100
-            max-rows="6"
-            :tag-validator="tagValidator"
-            remove-on-delete
-            no-add-on-enter
-             size="lg"
-            required
-            v-model="value"
-            :limit="limit"
-          ></b-form-tags>
-          </div>
-          <div class="col-1 m-1 text-end">
-            
-            <b-button type="button" @click="addKeyword" variant="primary">{{ $t('network.Add') }}</b-button>
-          </div>
-        </div>
-        </b-form-group>
-      </b-container>
-      <hr />
-    </div>
-
-
-
-
-
 
         <div v-for="post in posts" :key="post.id" class="mb-4">
           <div class="mb-2">
@@ -80,7 +59,7 @@
                 </b-col>
                 <b-col cols="10" md="11" class="pt-2">
                   <h5 class="m-0 font-weight-bolder">
-                    {{post.network_name}}
+                    {{ post.network_name }}
                     <span class="float-right">
                       <b-dropdown
                         size="lg"
@@ -90,44 +69,48 @@
                       >
                         <template #button-content>
                           <b-icon-three-dots-vertical></b-icon-three-dots-vertical
-                          ><span class="sr-only">{{ $t('network.Settings') }}</span>
+                          ><span class="sr-only">{{
+                            $t("network.Settings")
+                          }}</span>
                         </template>
 
-                        <b-dropdown-item  href="#" @click="approvePost(post.id)">
-                          {{ $t('network.Approved') }}
+                        <b-dropdown-item href="#" @click="approvePost(post.id)">
+                          {{ $t("network.Approved") }}
                         </b-dropdown-item>
-                        <b-dropdown-item href="#" @click="unApprovePost(post.id)">
-                          {{ $t('network.Decline') }}
+                        <b-dropdown-item
+                          href="#"
+                          @click="unApprovePost(post.id)"
+                        >
+                          {{ $t("network.Decline") }}
                         </b-dropdown-item>
                       </b-dropdown>
                     </span>
                   </h5>
                   <p>
-                  {{  moment(post.created_at).fromNow() }}
-                    <span class="text-primary">{{ $t('network.Commented_on_a_Post') }}</span>
+                    {{ moment(post.created_at).fromNow() }}
+                    <span class="text-primary">{{
+                      $t("network.Commented_on_a_Post")
+                    }}</span>
                   </p>
                 </b-col>
               </b-row>
               <b-row>
                 <b-col cols="12" class="mt-2">
-                  <p class="text-justify text"> 
-                    {{post.content}}
+                  <p class="text-justify text">
+                    {{ post.content }}
                   </p>
-                
-                   <div class="" v-if="post.media.length">
-                <lightbox
-                  :cells="post.media.length"
-                  :items="
-                    post.media.map(function (url) {
-                      return url;
-                    })
-                  "
-                ></lightbox>
-              </div>
-                 
-                  
+
+                  <div class="" v-if="post.media.length">
+                    <lightbox
+                      :cells="post.media.length"
+                      :items="
+                        post.media.map(function (url) {
+                          return url;
+                        })
+                      "
+                    ></lightbox>
+                  </div>
                 </b-col>
-                
               </b-row>
             </div>
           </div>
@@ -138,7 +121,7 @@
         <b-row>
           <b-col>
             <p class="text-center" v-if="allAlerts < 1">
-              {{ $t('network.No_Keyword_Alerts_To_Show') }}
+              {{ $t("network.No_Keyword_Alerts_To_Show") }}
             </p>
           </b-col>
         </b-row>
@@ -148,50 +131,41 @@
 </template>
 
 <script>
-import axios from "axios"
-import moment from "moment"
-
-
+import axios from "axios";
+import moment from "moment";
 
 export default {
   name: "keywordAlert",
 
-  data(){
+  data() {
     return {
-       moment: moment,
+      moment: moment,
       value: [],
       limit: 8,
       posts: [],
-
-      
-    }
+    };
   },
 
-  methods:{
+  methods: {
+    tagValidator(tag) {
+      return tag === tag.toLowerCase() && tag.length > 2 && tag.length < 9;
+    },
 
-     tagValidator(tag) {
-      
-        return tag === tag.toLowerCase() && tag.length > 2 && tag.length < 9
-      },
-
-     addKeyword(){
-    
+    addKeyword() {
       let listTag = "";
-      for (let i=0 ; i<this.value.length; i++){
-       listTag= listTag+","+this.value[i] ;
+      for (let i = 0; i < this.value.length; i++) {
+        listTag = listTag + "," + this.value[i];
       }
-      listTag = listTag.substring(1)
-      
+      listTag = listTag.substring(1);
 
       let data = {
-        network_id: 1,
-        keywork: listTag
-      } 
-        //this.$store.commit("keywordOperationOnNetwork/setListKeyWord", data);
+        networkId: this.$route.params.id,
+        keywork: listTag,
+      };
+      //this.$store.commit("keywordOperationOnNetwork/setListKeyWord", data);
 
-
-         this.$store
-        .dispatch("keywordOperationOnNetwork/newKeyWord", data )
+      this.$store
+        .dispatch("keywordOperationOnNetwork/newKeyWord", data)
         .then(() => {
           console.log("hey yeah");
         })
@@ -200,14 +174,13 @@ export default {
         });
     },
 
-    approvePost(idpost){
-     
-        let data = {
-          id: idpost,
-          dat:{network_id: 1}
-        };
-       
-       this.$store
+    approvePost(idpost) {
+      let data = {
+        id: idpost,
+        dat: { network_id: 1 },
+      };
+
+      this.$store
         .dispatch("keywordOperationOnNetwork/approvePost", data)
         .then(() => {
           console.log("hey yeah");
@@ -217,15 +190,13 @@ export default {
         });
     },
 
-    unApprovePost(idpost){
+    unApprovePost(idpost) {
+      let data = {
+        network_id: 1,
+        id: idpost,
+      };
 
-        let data = {
-          network_id: 1,
-          id: idpost,
-          
-        };
-
-        this.$store
+      this.$store
         .dispatch("keywordOperationOnNetwork/unApprovePost", data)
         .then(() => {
           console.log("hey yeah");
@@ -233,54 +204,48 @@ export default {
         .catch((err) => {
           console.log({ err: err });
         });
-    }
-  } ,
-
-  mounted(){
-    
-    this.$store
-    .dispatch("keywordOperationOnNetwork/DbListKeyWord", 1)
-    .then(()=>{
-      console.log("cool ");
-
-      let data = null;
-      data = this.$store.state.keywordOperationOnNetwork.dbListKeyWord;
-      data.map(dat => {
-       this.value.push(dat);
-
-      })
-    })
-    .catch((err) =>{
-      console.log({err: err});
-    })
-
-    this.$store
-    .dispatch("keywordOperationOnNetwork/listPost","1/1")
-    .then(() =>{
-      console.log("good");
-
-     let data = null;
-      data = this.$store.state.keywordOperationOnNetwork.listPost;
-      data.map(dat => {
-       
-       this.posts.push({
-         network_name: dat.network_name,
-         content: dat.content,
-         logo_path: dat.logo_path,
-         media: dat.media,
-         created_at: dat.created_at
-       });
-
-      })
-
-    })
-    .catch((err) =>{console.log({err:err });})
-      
+    },
   },
 
-  computed: {
-   
-  }
+  mounted() {
+    this.$store
+      .dispatch("keywordOperationOnNetwork/DbListKeyWord", 1)
+      .then(() => {
+        console.log("cool ");
+
+        let data = null;
+        data = this.$store.state.keywordOperationOnNetwork.dbListKeyWord;
+        data.map((dat) => {
+          this.value.push(dat);
+        });
+      })
+      .catch((err) => {
+        console.log({ err: err });
+      });
+
+    this.$store
+      .dispatch("keywordOperationOnNetwork/listPost", "1/1")
+      .then(() => {
+        console.log("good");
+
+        let data = null;
+        data = this.$store.state.keywordOperationOnNetwork.listPost;
+        data.map((dat) => {
+          this.posts.push({
+            network_name: dat.network_name,
+            content: dat.content,
+            logo_path: dat.logo_path,
+            media: dat.media,
+            created_at: dat.created_at,
+          });
+        });
+      })
+      .catch((err) => {
+        console.log({ err: err });
+      });
+  },
+
+  computed: {},
 };
 </script>
 

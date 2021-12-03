@@ -27,7 +27,7 @@ export default {
       return axios
       .get(`network/${dataInfo.id}/${dataInfo.path}`)
       .then(({ data }) => {
-          commit("setNotifications", data);
+          commit("setNotifications", data.data);
         console.log(data);
         console.log(`network/${dataInfo.id}/${dataInfo.path}`);
       })
@@ -35,6 +35,18 @@ export default {
 
     MarkAsRead( {commit}, dataInfo ){
       console.log("Store File MarkAsRead");
+      console.log(dataInfo.path);
+      console.log(dataInfo.formData); 
+      return axios
+      .post(`/network/${dataInfo.path}`, dataInfo.formData)
+      .then(({ data }) => {
+        console.log(data);
+        return data;
+      })
+    },
+
+    Delete( {commit}, dataInfo ){
+      console.log("Store File Delete");
       console.log(dataInfo.path);
       console.log(dataInfo.formData); 
       return axios

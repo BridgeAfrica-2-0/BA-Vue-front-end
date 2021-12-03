@@ -630,20 +630,18 @@
                   <div v-if="currentBiz.id != chat.sender_business_id">
                     <b-row class="p-4">
                       <b-col>
-                        <p v-if="chat.attachment" class="msg-text mt-0 text">
-                          <!-- {{ chat.attachment.name }}
-                          <b class="">
-                            {{ chat.attachment.size }}
-                          </b> -->
-                          <!-- {{ this.file.name
-                          }}<b class="pl-2 text-bold">{{
-                            convert(this.file.size)
-                          }}</b>
-                          <small class="float-right mt-2 text-white pr-1 pt-1">
-                            {{ chat.created_at }}
-                          </small> -->
-                        </p>
+                        <p
+                          v-if="chat.attachment"
+                          class="msg-text mt-0 text"
+                        ></p>
+                        <br />
                         <p v-if="chat.message" class="msg-text mt-0 text">
+                          <span v-if="chat.attachment">
+                            <img :src="chat.attachment" />
+                            <!-- <br />
+                            <b>{{ chat.attachment }}</b> -->
+                            <br />
+                          </span>
                           {{ chat.message }}
                           <small class="float-right mt-2 text-white pr-1 pt-1">
                             {{ getCreatedAt(chat.created_at) }}
@@ -656,31 +654,16 @@
                     <b-row class="p-4">
                       <b-col>
                         <p
-                          v-if="chat.attachment"
-                          id="sent"
-                          class="msg-text-sent text"
-                        >
-                          <!-- {{ chat.attachment.name }}...
-                          <b class="">
-                            {{ chat.attachment.size }}
-                          </b>
-                          <small class="float-right mt-2 text-white pr-1 pt-1">
-                            {{ chat.created_at }}
-                          </small> -->
-
-                          <!-- {{ this.file.name
-                          }}<b class="pl-2 text-bold">{{
-                            convert(this.file.size)
-                          }}</b>
-                          <small class="float-right mt-2 text-white pr-1 pt-1">
-                            {{ chat.created_at }}
-                          </small> -->
-                        </p>
-                        <p
                           v-if="chat.message"
                           id="sent"
                           class="msg-text-sent text"
                         >
+                          <span v-if="chat.attachment">
+                            <img :src="chat.attachment" />
+                            <!-- <br />
+                            <b>{{ chat.attachment }}</b> -->
+                            <br />
+                          </span>
                           {{ chat.message }}
                           <small class="float-right mt-2 text-white pr-1 pt-1">
                             {{ getCreatedAt(chat.created_at) }}
@@ -741,10 +724,16 @@
                     dismissible
                     @dismissed="dismissed"
                   >
-                    {{ this.file.name
-                    }}<b class="pl-2 text-bold">{{
-                      convert(this.file.size)
-                    }}</b>
+                    <span
+                      style="cursor: pointer !important"
+                      href=""
+                      @click="$bvModal.show('preview-file')"
+                    >
+                      {{ this.file.name
+                      }}<b class="pl-2 text-bold">{{
+                        convert(this.file.size)
+                      }}</b>
+                    </span>
                   </b-alert>
                 </b-row>
                 <b-row v-if="!checked">
@@ -1017,6 +1006,9 @@
                             :key="index"
                             class="p-2 message"
                           >
+                            <!-- {{
+                              elmt
+                            }}<br/> -->
                             <td>
                               <b-form-group>
                                 <b-form-checkbox-group
@@ -1113,10 +1105,21 @@
             placeholder="Enter your name"
           ></b-form-input>
         </div>
-
-        <b-button class="mt-3" block @click="selectedMultyChat()"
-          >Create</b-button
-        >
+        <div v-if="loader" class="text-center mt-6 pt-6">
+          <b-spinner variant="primary" label="Spinning"></b-spinner>
+        </div>
+        <div v-else>
+          <b-button class="mt-3" block @click="selectedMultyChat()"
+            >Create</b-button
+          >
+        </div>
+      </b-modal>
+      <!-- preview -->
+      <b-modal id="preview-file" hide-footer>
+        <div class="d-block text-center">
+          <h3>Preview file:</h3>
+          <b-img thumbnail fluid :src="previewSrc" id="filePreview"></b-img>
+        </div>
       </b-modal>
     </b-container>
   </div>
@@ -1125,7 +1128,6 @@
 <script>
 import EmojiPicker from "vue-emoji-picker";
 import io from "socket.io-client";
-import convertSize from "convert-size";
 import moment from "moment";
 
 export default {
@@ -1135,6 +1137,7 @@ export default {
   data() {
     return {
       formData: new FormData(),
+      groupMembers: [],
       groupName: "",
       allSelection: true,
       allSelectedMulty: false,
@@ -1148,6 +1151,7 @@ export default {
       networkSelectedAllMulty: [],
 
       filePreview: false,
+      previewSrc: "",
       file: "",
       room: "",
       online: [],
@@ -1156,93 +1160,16 @@ export default {
       chatSearchKeyword: "",
       tabIndex: 2,
       type: "",
-      // socket: io("https://ba-chat-server.herokuapp.com", {
-      //   transports: ["websocket", "polling", "flashsocket"],
-      // }),
-      socket: io("localhost:7000", {
+      socket: io("https://ba-chat-server.herokuapp.com", {
         transports: ["websocket", "polling", "flashsocket"],
       }),
+      // socket: io("localhost:7000", {
+      //   transports: ["websocket", "polling", "flashsocket"],
+      // }),
       chatSelected: [],
       showsearch: true,
       selecteduser: false,
       searchQuery: "",
-      resources1: [
-        { title: "ABE Attendance", uri: "aaaa.com", category: "a", icon: null },
-        {
-          title: "Accounting Services",
-          uri: "aaaa.com",
-          category: "a",
-          icon: null,
-        },
-        { title: "Administration", uri: "aaaa.com", category: "a", icon: null },
-        {
-          title: "Advanced Student Lookup",
-          uri: "bbbb.com",
-          category: "b",
-          icon: null,
-        },
-        { title: "Art & Sciences", uri: "bbbb.com", category: "b", icon: null },
-        {
-          title: "Auxiliares Services",
-          uri: "bbbb.com",
-          category: "b",
-          icon: null,
-        },
-        { title: "Basic Skills", uri: "cccc.com", category: "c", icon: null },
-        {
-          title: "Board of Trustees",
-          uri: "dddd.com",
-          category: "d",
-          icon: null,
-        },
-      ],
-      resources: [
-        {
-          name: "blezour blec",
-          profile:
-            "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
-          type: "person",
-          id: "1",
-        },
-        {
-          name: "itz blec blec",
-          profile:
-            "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
-          type: "person",
-          id: "2",
-        },
-
-        {
-          name: "Maxine Moffet",
-          profile:
-            "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
-          type: "person",
-          id: "3",
-        },
-
-        {
-          name: "Alicia kays",
-          profile:
-            "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
-          type: "person",
-          id: "4",
-        },
-
-        {
-          name: "Lorem Ipsum",
-          profile:
-            "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
-          type: "person",
-          id: "5",
-        },
-        {
-          name: "blezour blec",
-          profile:
-            "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
-          type: "person",
-          id: "6",
-        },
-      ],
       message: {},
       newMsg: false,
       show: false,
@@ -1360,12 +1287,21 @@ export default {
     },
   },
   methods: {
+    convert(bytes, decimals = 2) {
+      if (bytes === 0) return "0 Bytes";
+      const k = 1024;
+      const dm = decimals < 0 ? 0 : decimals;
+      const sizes = ["Bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
+      const i = Math.floor(Math.log(bytes) / Math.log(k));
+      return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + " " + sizes[i];
+    },
     selectedAllMulty() {
       this.allSelection = true;
       this.selectedMulty = [];
       if (this.allSelectedMulty) {
         this.all.map((biz) => {
           this.selectedMulty.push(biz.id);
+          this.groupMembers.push({ type: biz.accountType, id: biz.id });
         });
       } else {
         this.selectedMulty = [];
@@ -1380,6 +1316,7 @@ export default {
       if (this.peopleMulty) {
         this.bizs.map((biz) => {
           this.selectedMulty.push(biz.id);
+          this.groupMembers.push({ type: biz.accountType, id: biz.id });
         });
       } else {
         this.selectedMulty = [];
@@ -1395,9 +1332,11 @@ export default {
       if (this.businessMulty) {
         this.bizs.map((biz) => {
           this.selectedMulty.push(biz.id);
+          this.groupMembers.push({ type: biz.accountType, id: biz.id });
         });
       } else {
         this.selectedMulty = [];
+        this.groupMembers = [];
       }
     },
     networkAllMulty() {
@@ -1410,14 +1349,12 @@ export default {
       if (this.networkMulty) {
         this.bizs.map((biz) => {
           this.selectedMulty.push(biz.id);
+          this.groupMembers.push({ type: biz.accountType, id: biz.id });
         });
       } else {
         this.selectedMulty = [];
+        this.groupMembers = [];
       }
-    },
-    convert(data) {
-      return data;
-      // return convertSize(data);
     },
     dismissed() {
       this.file = "";
@@ -1451,31 +1388,46 @@ export default {
         this.chats.push(data);
         console.log(this.chats);
 
-        // this.formData.append("attachment", data.attachment);
         this.formData.append("sender_business_id", data.sender_business_id);
         this.formData.append("message", data.message);
         this.formData.append("receiver_business_id", data.receiver_business_id);
         this.formData.append("receiver_network_id", data.receiver_business_id);
         this.formData.append("receiver_id", data.receiver_business_id);
-
-        // let elmts = {
-        //   type: this.type,
-        //   message: data.message,
-        //   sender_business_id: this.currentBiz.id,
-        //   receiver_business_id: this.chatSelected.id,
-        //   receiver_network_id: this.chatSelected.id,
-        //   receiver_id: this.chatId,
-        // };
+        this.formData.append("type", data.type);
 
         this.saveMessage(this.formData);
       });
     },
     createGroup(receiver_business_id) {
       // let sender_business_id = this.currentUser.user.id;
+      let membersPeople = this.groupMembers.filter((member) => {
+        return member.type == "people";
+      });
+      let membersBuiness = this.groupMembers.filter((member) => {
+        return member.type == "business";
+      });
+      let membersPeopleIds = [];
+      let membersBusinessIds = [];
+
+      membersPeople.map((biz) => {
+        membersPeopleIds.push(biz.id);
+      });
+      membersBuiness.map((biz) => {
+        membersBusinessIds.push(biz.id);
+      });
+      console.log("members: ", this.groupMembers);
+      console.log("Business: ", membersBuiness);
+      console.log("People: ", membersPeople);
+
       let sender_business_id = this.currentBizId;
       this.room = [sender_business_id, ...this.selectedMulty];
       console.log("ROOMS: ", this.room);
       this.socket.emit("create-group", sender_business_id);
+      this.$store.dispatch("businessChat/CREATE_GROUP", {
+        groupName: this.groupName,
+        userID: membersPeopleIds,
+        businessID: membersBusinessIds,
+      });
     },
     createRoom(receiver_business_id) {
       // let sender_business_id = this.currentUser.user.id;
@@ -1544,8 +1496,18 @@ export default {
         .catch(() => console.log("error"));
     },
     saveMessage(data) {
-      console.log("[DEBUG SAVE]", data);
-      this.$store.dispatch("businessChat/SAVE_BUSINESS_CHAT", data);
+      console.log("[DEBUG SAVE]", { data: data, type: this.type });
+      if (this.type == "group") {
+        this.$store.dispatch("businessChat/SAVE_GROUP_CHAT", {
+        data: data,
+        type: this.type,
+      });
+      } else {
+        this.$store.dispatch("businessChat/SAVE_BUSINESS_CHAT", {
+        data: data,
+        type: this.type,
+      });
+      }
     },
     selectedMultyChat() {
       this.$bvModal.hide("group-name");
@@ -1614,27 +1576,8 @@ export default {
       } else console.log("Enter a message");
     },
     sendPrivate() {
-      let attachment = this.file
-        ? {
-            name: this.file.name,
-            size: convertSize(this.file.size),
-            file: attachment,
-          }
-        : undefined;
       this.formData.append("attachment", this.file);
-      // formData.append("sender_business_id", this.currentBiz.id);
-      // formData.append("message", this.input);
-      // formData.append("receiver_business_id", this.chatSelected.clickedId);
-      // formData.append("receiver_network_id", this.chatSelected.clickedId);
 
-      // console.log("-> Form data:", formData);
-
-      // this.saveMessage(formData);
-      // console.log("attachment:", attachment);
-      // if (this.file) {
-      //   let formData = new FormData();
-      //   attachment = formData.append("file", this.file);
-      // } else attachment = null;
       this.socket.emit("privateMessage", {
         type: this.type,
         message: this.input,
@@ -1676,7 +1619,15 @@ export default {
     handleFileUpload() {
       this.file = this.$refs.file.files[0];
       this.filePreview = true;
-      console.log("file:", this.file);
+      this.previewSrc = URL.createObjectURL(this.file);
+
+      const fileType = this.file["type"];
+      const validImageTypes = ["image/gif", "image/jpeg", "image/png"];
+      if (validImageTypes.includes(fileType)) {
+        this.$bvModal.show("preview-file");
+      }
+
+      console.log("file:", this.preview);
       console.log("preview:", this.filePreview);
     },
 
@@ -1721,6 +1672,9 @@ export default {
 </script>
 
 <style scoped>
+.filePreview {
+  width: 100px;
+}
 .new-msg-filter-list {
   padding: 15px !important;
   /* border: 1px solid black; */
@@ -1766,7 +1720,7 @@ export default {
 }
 
 .chats {
-  border: 2px solid green;
+  /* border: 2px solid green; */
   height: 740px;
   overflow-y: scroll;
   overflow-x: hidden;

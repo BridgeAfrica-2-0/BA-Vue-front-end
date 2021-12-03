@@ -10,6 +10,7 @@ import businessRole from './businessRole';
 import businessAccountType from './businessAccountType';
 import businessOwner from './businessOwner';
 import marketSearch from './marketSearch';
+import market from './market';
 import networkSearch from './networkSearch';
 import allSearch from './allSearch';
 import ProfileAndBusinessDetails from './ProfileAndBusinessDetails';
@@ -36,6 +37,7 @@ import networkProfileCommunitySidebar from './networkProfileCommunitySidebar';
 import networkProfileFeedback from './networkProfileFeedback';
 import networkProfileMedia from './networkProfileMedia';
 import networkProfileMemberRequest from './networkProfileMemberRequest';
+import networkNotification from './networkNotification';
 import profileOrders from './profileOrders';
 import keywordOperationOnNetwork from './keywordOperationOnNetwork';
 
@@ -45,14 +47,13 @@ import profileSettingsEdit from "./profileSettingsEdit"
 
 
 import { social } from './social';
-  
+
+
 Vue.use(Vuex);
 
-axios.defaults.baseURL = "https://alert.maxinemoffett.com/api/v1/";
 
 
-//  axios.defaults.baseURL = process.env.VUE_APP_API_URL;
-
+ axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 
 
 export default new Vuex.Store({
@@ -67,6 +68,7 @@ export default new Vuex.Store({
         hotbusiness,
         networkProfileMembers,
         marketSearch,
+        market,
         networkSearch,
         allSearch,
         profile,
@@ -90,6 +92,7 @@ export default new Vuex.Store({
         networkProfileCommunity,
         networkProfileMedia,
         networkProfileMemberRequest,
+        networkNotification,
         networkProfile,
         orderBusiness,
         notification,
@@ -99,5 +102,3 @@ export default new Vuex.Store({
 
     }
 });
-
-

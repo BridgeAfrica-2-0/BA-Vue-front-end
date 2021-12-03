@@ -89,7 +89,7 @@
       </b-row>
       <div v-if="postStatus != 'member'" class="pending-post-view pt-2 mt-3">
         <p>
-          {{$t("network.Your_3_Post_s_are_pending_for_approval")}}.&nbsp;&nbsp;&nbsp;&nbsp;
+          {{$t("network.Your")}} {{pendingPost.data}} {{$t("network.Posts_are_pending_for_approval")}}.&nbsp;&nbsp;&nbsp;&nbsp;
           <a
             @click="this.selectedIdd = '4', this.tabIndex = '5'"
             style="color: #e75c18; text-decoration: underline; cursor:pointer"
@@ -377,6 +377,7 @@ export default {
       edit_id: null,
       comments: [],
       fullPage: false,
+      pendingPost:"",
 
       createPost: {
         // profile_picture: this.$store.getters.getProfilePicture,
@@ -412,6 +413,7 @@ export default {
   created() {
     this.getAuth();
     this.url = this.$route.params.id;
+    this.AllPendingPost()
   },
 
   beforeCreate() {
@@ -422,6 +424,21 @@ export default {
     ...mapMutations({
       auth: "auth/profilConnected",
     }),
+
+    
+    AllPendingPost() {
+      console.log("AllPendingPost");
+      this.axios
+        .get("network/"+this.url+"/post/count-pending-posts")
+        .then(({ data }) => {
+          console.log("AllPendingPost yeahh");
+          console.log(data);
+          this.pendingPost = data;
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
 
     mapmediae(media) {
       let mediaarr = [];

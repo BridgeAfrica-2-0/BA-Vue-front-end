@@ -1,27 +1,34 @@
 <template>
-  <div>
-   
-    <b-row class="mt-2">
-      <b-col> 
-        <b-avatar variant="info" :src="comment.picture" class="avat-comment"></b-avatar>
-        
-        <div class="msg text">
+  <b-row class="mt-2 ml-4">
+    <b-col>
+      <b-avatar
+        variant="info"
+        :src="comment.picture"
+        :class="`${
+          'user' == comment.user_type ? 'rounded-circle' : ''
+        } avat-comment b-r`"
+      ></b-avatar>
 
-          <span class="float-right" style="    margin-right: -10px;">
+      <div class="msg text" v-if="!proccesEdit">
+        <span
+          class="float-right"
+          style="margin-right: -10px"
+          v-if="isYourComment"
+        >
           <b-dropdown size="sm" variant="outline primary " class="primary">
             <template class="more" #button-content> </template>
-            <b-dropdown-item> Edit </b-dropdown-item>
-            <b-dropdown-item>Delete</b-dropdown-item>
-          </b-dropdown>  
+            <b-dropdown-item> {{ $t('businessowner.Edit') }} </b-dropdown-item>
+            <b-dropdown-item>{{ $t('businessowner.Delete') }}</b-dropdown-item>
+          </b-dropdown>
         </span>
 
           <p class="username mb-0 "> <router-link :to="'profile/'+comment.id" > {{comment.name}}   </router-link> </p>
-          <read-more more-str="read more" :text="comment.comment" link="#" less-str="read less" :max-chars="15000" class="mb-1 text-left">
+          <read-more :more-str="$t('businessowner.read_more')" :text="comment.comment" link="#" :less-str="$t('businessowner.read_less')" :max-chars="15000" class="mb-1 text-left">
           </read-more>
         </div>
         <b-icon :icon="icon" variant="primary" aria-hidden="true" @click="onLike" class="cursor"></b-icon>
         {{ comment.comment_likes | nFormatter }}
-        <span @click="showReply" class="primary ml-2 reply"><b>Reply</b></span>
+        <span @click="showReply" class="primary ml-2 reply"><b>{{ $t('businessowner.Reply') }}</b></span>
         <div v-if="reply">
           <b-row class="mt-2">
             <b-col cols="1">
@@ -29,7 +36,7 @@
             </b-col>
             <b-col cols="11"
               ><input
-                placeholder="Post a Comment"
+                :placeholder="$t('businessowner.Post_a_Comment')"
                 class="comment"
                 type="text"
                 @keypress.enter="onReply"
@@ -54,22 +61,23 @@
                 v-if="comments.length && !loadComment"
                 :hasData="hasData"
                 @click.native="onShowReply"
-                :moreDataTitle="'Show more comments'"
-                :noDataTitle="'No comment'"
+                :moreDataTitle="$t('businessowner.Show_more_comments')"
+                :noDataTitle="$t('businessowner.No_comment')"
               />
             </b-col>
           </b-row>
         </div>
       </b-col>
     </b-row>
-  </div>
 </template>
 
 <script>
-import Reply from './commentReply.vue';
-import { commentMixinsBuisness, NoMoreDataForComment } from '@/mixins';
+import Reply from "./commentReply.vue";
+import { commentMixinsBuisness, NoMoreDataForComment } from "@/mixins";
 
-import Loader from '@/components/Loader';
+import { date } from "@/helpers";
+
+import Loader from "@/components/Loader";
 
 export default {
   mixins: [commentMixinsBuisness, NoMoreDataForComment],
@@ -78,14 +86,36 @@ export default {
     Loader,
   },
 
-  props: ['item', 'uuid', 'profileID'],
+  props: ["item", "uuid", "profileID", "onDelete"],
   data() {
     return {
       reply: false,
-      text: '',
+      processEdit: false,
+      text: "",
+      loading: false,
+      proccesEdit: false,
     };
   },
+
+  filters: {
+    date,
+  },
+
+  computed: {
+    isYourComment() {
+      return (
+        this.profile.id == this.comment.id &&
+        this.profile.user_type == this.comment.user_type
+      );
+    },
+  },
   methods: {
+    toggle() {
+      if (!this.proccesEdit) this.text = "";
+      else this.text = this.comment.comment;
+
+      this.proccesEdit = !this.proccesEdit;
+    },
     showReply() {
       this.reply = !this.reply;
 
@@ -106,7 +136,7 @@ export default {
   border: solid 1px #ccc;
   margin-left: 40px;
   margin-top: -40px;
-  width: fit-content;
+  width: 93%;
 }
 .reply {
   cursor: pointer;
@@ -154,5 +184,9 @@ export default {
 <style>
 #readmore {
   color: #e75c18;
+}
+
+.b-r {
+  border-radius: 0% !important;
 }
 </style>

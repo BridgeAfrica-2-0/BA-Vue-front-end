@@ -2,8 +2,8 @@
   <div>
     <b-card show variant="primary">
       <b-tabs content-class="mt-3">
-        <b-tab title="Posts" active><network-posts /></b-tab>
-        <b-tab title="Albums"><albums-posts /></b-tab>
+        <b-tab :title="$t('businessowner.Posts')" active><network-posts /></b-tab>
+        <b-tab :title="$t('businessowner.Albums')"><albums-posts /></b-tab>
       </b-tabs>
     </b-card>
   </div>

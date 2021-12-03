@@ -1,11 +1,12 @@
 <template>
   <div class="p-3 card-border my-3" style="position: relative">
-
     <div class="mt-2">
       <div class="d-inline-flex">
         <span md="1" class="m-0 p-0">
           <b-avatar
-            class="avat"
+            :class="`${
+              'user' == item.poster_type ? 'rounded-circle' : ''
+            } logo-sizee avat`"
             square
             variant="primary"
             :src="item.logo_path"
@@ -15,6 +16,7 @@
           <h5 class="m-0 usernamee">
             {{ item.user_name }}
           </h5>
+
           <p class="durationn">{{ item.created_at | now }}</p>
         </div>
 
@@ -30,12 +32,12 @@
 
             <b-dropdown-item-button variant="info" @click="editPost">
               <b-icon icon="pencil" aria-hidden="true"></b-icon>
-              Edit
+              {{ $t('businessowner.Edit') }}
             </b-dropdown-item-button>
 
             <b-dropdown-item-button variant="danger" @click="deletePost">
               <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
-              Delete
+              {{ $t('businessowner.Delete') }}
             </b-dropdown-item-button>
           </b-dropdown>
         </div>
@@ -45,10 +47,10 @@
           <!--     :text="item.content.details"   -->
           <read-more
             v-if="item.content"
-            more-str="read more"
+            :more-str="$t('businessowner.read_more')"
             :text="item.content"
             link="#"
-            less-str="read less"
+            :less-str="$t('businessowner.read_less')"
             :max-chars="200"
           ></read-more>
         </p>
@@ -80,10 +82,10 @@
           <p class="post-text">
             <read-more
               v-if="item.source.content"
-              more-str="read more"
+              :more-str="$t('businessowner.read_more')"
               :text="item.source.content"
               link="#"
-              less-str="read less"
+              :less-str="$t('businessowner.read_less')"
               :max-chars="200"
             ></read-more>
           </p>
@@ -150,16 +152,19 @@
     >
       <div class="m-md-0 p-md-0">
         <b-avatar
+          b-avatar
+          :class="`${
+            'user' == profile.user_type ? 'rounded-circle' : ''
+          } logo-sizee-18 avat img-fluid avat-comment avatar-border`"
           variant="primary"
           square
           :src="businessLogo"
-          class="img-fluid avat-comment avatar-border"
         ></b-avatar>
       </div>
 
       <div class="p-0 m-0 pr-3 inline-comment">
         <input
-          placeholder="Post a Comment"
+          :placeholder="$t('businessowner.Post_a_Comment')"
           class="comment"
           type="text"
           v-model="comment"
@@ -180,14 +185,18 @@
 
     <Comment
       v-for="comment in comments"
-      :key="comment.id"
+      :key="comment.comment_id"
       :item="comment"
       :uuid="post.post_id"
+      onDelete="onDelete(comment.comment_id)"
+      @update-comment="(text) => onUpdate({ uuid: comment.comment_id, text })"
     />
     <Loader v-if="loadComment" />
     <NoMoreData
       v-if="comments.length && !loadComment"
       :hasData="hasData"
+      :moreDataTitle="'Show more comments'"
+      :noDataTitle="'No comment'"
       @click.native="onShowComment"
     />
   </div>
@@ -218,8 +227,7 @@ export default {
 
   props: {
     post: {},
-    usertype:{
-      
+    usertype: {
       default: () => null,
     },
     mapvideo: {},
@@ -281,6 +289,26 @@ export default {
       this.showComment = !this.showComment;
     },
 
+    onDelete: async function (uuid) {
+      const request = await this.$repository.post.delete(uuid);
+
+      if (request.success) {
+        this.comments = this.comments.filter((e) => e.comment_id == uuid);
+      } else {
+        console.log("error");
+      }
+    },
+
+    onUpdate: async function ({ uuid, text }) {
+      const request = await this.$repository.post.delete({ uuid, text });
+
+      if (request.success) {
+        this.comments = this.comments.filter((e) => e.comment_id == uuid);
+      } else {
+        console.log("error");
+      }
+    },
+
     onLike: async function () {
       if (!this.canBeDelete) return false;
       if (!this.processLike) {
@@ -333,7 +361,7 @@ export default {
           comment_count: this.post.comment_count + 1,
         };
         this.flashMessage.success({
-          message: "Post created",
+          message: this.$t('businessowner.Post_created'),
         });
       }
 
@@ -394,6 +422,18 @@ export default {
 .custom-block-class {
   position: absolute;
   z-index: 1;
+}
+
+.logo-sizee {
+  width: 70px !important;
+  height: 70px !important;
+  object-fit: cover;
+}
+
+.logo-sizee-18 {
+  width: 50px !important;
+  height: 50px !important;
+  object-fit: cover;
 }
 
 #preview {

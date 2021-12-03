@@ -47,7 +47,6 @@
       </div>
     </div>
     <Footer />
-
      </span>
   </div>
 </template>

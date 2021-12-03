@@ -1,5 +1,6 @@
 //import en from './en.json'
 import auth from './auth.json'
+import home from './home.json'
 import businessf from './businessf.json'
 import search from './search.json'
 import network from './network.json'
@@ -25,7 +26,7 @@ export const en = {
 
 
     auth: auth,
-    about: about,
+    home: home,
     businessf: businessf,
     businessowner: businessowner,
     search: search,
@@ -37,7 +38,9 @@ export const en = {
     profilefollower: profilefollower,
     verification: verification,
     profileowner: profileowner,
-    Order: Order,
-    myOrders: myOrders,
+
+    Order:Order,
+    myOrders:myOrders,
+    about:about,
 
 }

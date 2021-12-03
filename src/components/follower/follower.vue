@@ -46,8 +46,8 @@
         <b-col cols="12">
           <div class="btns">
             <b-button class="community size">
-              <i class="fas fa-user-plus  fa-lg btn-icon m-fa "></i>
-              <span class="txt-btn">{{ $t('profilefollower.Community') }}</span></b-button
+              <i class="fas fa-user-plus  fa-lg btn-icon m-fa mr-0 "></i>
+              <span class="txt-btn ">{{ $t('profilefollower.Community') }}</span></b-button
             >
             <b-button class="message size ml-1">
               <i class="fas fa-envelope fa-lg btn-icon "></i>
@@ -89,7 +89,7 @@
           <div class="d-inline-block mt-4 ml-4 float-left texts">
             <h6 class="font-weight-bolder name ">  {{info.user.name}}  </h6>
             <p class="details">
-              0{{info.user.community}} {{ $t('profilefollower.Community') }}
+              {{info.user.community}} {{ $t('profilefollower.Community') }}
             </p>
           </div>
         </b-col>
@@ -175,42 +175,47 @@ export default {
   },
 
 
+// created(){
+
+// //   this.$store
+// //       .dispatch("follower/loadUserPostIntro", this.foll_id)
+// //       .then((response) => {
+       
+// //       })
+// //       .catch((error) => {
+// //         console.log({error:error});
+// //       });
+
+// // },
+
   mounted(){
      this.foll_id = this.$route.params.id;
 
 
 
-      this.$store
-      .dispatch("follower/loadUserPostIntro", this.foll_id)
-      .then((response) => {
-       
-      })
-      .catch((error) => {
-        console.log({error:error});
-      });
-
+      
 
  
-      this.$store
-      .dispatch("follower/UcommunityFollower", this.foll_id)
-      .then((response) => {
+      // this.$store
+      // .dispatch("follower/UcommunityFollower", this.foll_id)
+      // .then((response) => {
        
-      })
-      .catch((error) => {
-        console.log({error:error});
-      });
+      // })
+      // .catch((error) => {
+      //   console.log({error:error});
+      // });
 
 
 
       
-      this.$store
-      .dispatch("follower/UcommunityFollowing", this.foll_id)
-      .then((response) => {
+      // this.$store
+      // .dispatch("follower/UcommunityFollowing", this.foll_id)
+      // .then((response) => {
        
-      })
-      .catch((error) => {
-        console.log({error:error});
-      });
+      // })
+      // .catch((error) => {
+      //   console.log({error:error});
+      // });
 
      
       this.$store
@@ -223,46 +228,46 @@ export default {
       });
   
    
-      this.$store
-      .dispatch("follower/BcommunityFollower", this.foll_id)
-      .then((response) => {
+      // this.$store
+      // .dispatch("follower/BcommunityFollower", this.foll_id)
+      // .then((response) => {
        
-      })
-      .catch((error) => {
-        console.log({error:error});
-      });
+      // })
+      // .catch((error) => {
+      //   console.log({error:error});
+      // });
 
      
-      this.$store
-      .dispatch("follower/BcommunityFollowing", this.foll_id)
-      .then((response) => {
+      // this.$store
+      // .dispatch("follower/BcommunityFollowing", this.foll_id)
+      // .then((response) => {
        
-      })
-      .catch((error) => {
-        console.log({error:error});
-      });
+      // })
+      // .catch((error) => {
+      //   console.log({error:error});
+      // });
 
 
 
       
-      this.$store
-      .dispatch("follower/NcommunityFollower", this.foll_id)
-      .then((response) => {
+      // this.$store
+      // .dispatch("follower/NcommunityFollower", this.foll_id)
+      // .then((response) => {
        
-      })
-      .catch((error) => {
-        console.log({error:error});
-      });
+      // })
+      // .catch((error) => {
+      //   console.log({error:error});
+      // });
 
       
-      this.$store
-      .dispatch("follower/NcommunityFollowing", this.foll_id)
-      .then((response) => {
+      // this.$store
+      // .dispatch("follower/NcommunityFollowing", this.foll_id)
+      // .then((response) => {
        
-      })
-      .catch((error) => {
-        console.log({error:error});
-      });
+      // })
+      // .catch((error) => {
+      //   console.log({error:error});
+      // });
 
 
 
@@ -281,14 +286,6 @@ export default {
 },
 
 computed: {
-
-  
-
-      profile_info() {
-      return  this.$store.state.businessOwner.businessInfo;  
-
-    
-    },
 
 
      info :function(){
@@ -434,7 +431,7 @@ p {
 }
 
 .size {
-  width: 133px;
+  width: 142px;
   height: 38px;
 }
 .message {

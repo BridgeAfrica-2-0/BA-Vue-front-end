@@ -3,13 +3,13 @@
     <b-card title="" header-tag="header" footer-tag="footer">
       <h6 class="mb-2">
         <b>
-          <b-icon
+          <!-- <b-icon
             icon="exclamation-circle"
             variant="primary"
             class="icon-size"
-          ></b-icon>
+          ></b-icon> -->
           </b
-        >
+        > 
       </h6>
 
       <b-card-text>
@@ -45,7 +45,7 @@
             class="icon-size"
             variant="primary"
           ></b-icon>
-          Home Town Name {{ info.user.town }}
+          Home Town Name {{ info.user.home_town }}
         </p>
         <p>
           <b-icon
@@ -53,7 +53,7 @@
             class="icon-size"
             variant="primary"
           ></b-icon>
-          Current City Name: {{ info.user.city }}
+          Current City Name: {{ info.user.city_town }}
         </p>
         <p>
           <b-icon
@@ -72,7 +72,8 @@
 export default {
   computed:{
      info :function(){
-        return this.$store.getters['follower/getUserPost'];
+       
+         return this.$store.getters['follower/getUserPostIntro'];
       }
   }
 };

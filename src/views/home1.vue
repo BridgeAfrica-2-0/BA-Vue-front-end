@@ -62,14 +62,14 @@
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto bold size_nav" >
        
-      <b-nav-item > <router-link to="/" class="mx-2">Home</router-link></b-nav-item>
+      <b-nav-item > <router-link to="/" class="mx-2">{{ $t('home.Home') }}</router-link></b-nav-item>
         
-         <b-nav-item ><router-link :to="{ name: 'about' }" class="mx-2">About Us </router-link></b-nav-item>
+         <b-nav-item ><router-link :to="{ name: 'about' }" class="mx-2">{{ $t('home.About_Us') }} </router-link></b-nav-item>
         
-        <b-nav-item > <router-link :to="{ name: 'contact' }" class="mx-2">Contact Us</router-link></b-nav-item>
+        <b-nav-item > <router-link :to="{ name: 'contact' }" class="mx-2">  {{ $t('home.Contact_Us') }}  </router-link></b-nav-item>
          <!-- <b-nav-item href="#">About Us</b-nav-item> -->
-         <b-nav-item ><router-link to="/login" class="mx-2">Login </router-link></b-nav-item>
-        <b-nav-item ><router-link to="/signup" class="mx-2">Signup </router-link></b-nav-item>
+         <b-nav-item ><router-link to="/login" class="mx-2">  {{ $t('home.Login') }}  </router-link></b-nav-item>
+        <b-nav-item ><router-link to="/signup" class="mx-2"> {{ $t('home.Signup') }} </router-link></b-nav-item>
 
 
       </b-navbar-nav>
@@ -94,7 +94,7 @@
           href="#about"
           class="get-started-btn d-lg-none"
           style="font-size: 18px"
-          >Sign Up</a
+          >{{ $t('home.Sign_Up')}}</a
         > -->
       </div>
     </header>
@@ -125,7 +125,7 @@
             data-toggle="popover"
             class="form-control search-mobile"
             style="border-left: none"
-            placeholder="Find Pharmacy"
+            :placeholder="$t('home.Find_Pharmacy')"
             aria-label=""
             data-original-title=""
             title=""
@@ -149,7 +149,7 @@
             data-toggle="popover"
             class="form-control search-mobile"
             style="border-left: none"
-            placeholder="Find Pharmacy"
+            :placeholder="$t('home.Find_Pharmacy')"
             aria-label=""
             data-original-title=""
             title=""
@@ -165,9 +165,8 @@
       <div class="container">
         <div class="search">
           <div class="topp-div d-none d-md-none d-lg-block">
-            <p class="text_box">
-              Empowering Businesses And Consumers With Digital Presence To Buy
-              And Sell Online
+            <p>
+              {{ $t('home.Empowering_Businesses_And_Consumers_With_Digital_Presence_To_Buy_And_Sell_Online') }}
             </p>
           </div>
         </div>
@@ -181,7 +180,7 @@
               aria-label=""
               data-original-title=""
               title=""
-              placeholder="All"
+              :placeholder="$t('home.All')"
               v-model="credentials.keyword"
             />
 
@@ -192,15 +191,15 @@
               list="browsers"
               data-toggle="popover"
               class="form-control search-h"
-              placeholder="Where "
+              :placeholder="$t('home.Where') "
               aria-label="search bridge africa"
               data-original-title=""
               title=""
             />
 
             <datalist id="browsers">
-              <option value=" Current Location "></option>
-              <option value="Yaounde " />
+              <option :value="$t('home.Current_Location') "></option>
+              <option :value="$t('home.Yaounde') " />
             </datalist>
              <slot name="button">
                 <Button @click.native="getKeyword" />
@@ -236,8 +235,7 @@
     >
       <div class="mobile-top-div d-lg-none p-3">
         <h3 style="font-size: 20px">
-          Empowering Businesses And Consumers With Digital Presence To Buy And
-          Sell Online
+          {{ $t('home.Empowering_Businesses_And_Consumers_With_Digital_Presence_To_Buy_And_Sell_Online') }}
         </h3>
       </div>
     </div>
@@ -247,7 +245,7 @@
       <div class="container aos-init aos-animate" data-aos="fade-up">
         <div class="section-title">
           <h3 class="head-text bridge-header">
-            Find Businesses & Institutions
+            {{ $t('home.Find_Businesses_Institutions') }}
           </h3>
         </div>
 
@@ -280,7 +278,7 @@
                       font-size: 0.99em;
                     "
                   >
-                    Agriculture
+                    {{ $t('home.Agriculture') }}
                   </h3>
                   <p
                     class="card-text"
@@ -319,7 +317,7 @@
                       font-size: 0.99em;
                     "
                   >
-                    Mayor Councils
+                    {{ $t('home.Mayor_Councils') }}
                   </h3>
                   <p
                     class="card-text"
@@ -358,7 +356,7 @@
                       font-size: 0.99em;
                     "
                   >
-                    Restaurants
+                    {{ $t('home.Restaurants') }}
                   </h3>
                   <p
                     class="card-text"
@@ -397,7 +395,7 @@
                       font-size: 0.99em;
                     "
                   >
-                    Pharmacies
+                    {{ $t('home.Pharmacies') }}
                   </h3>
                   <p
                     class="card-text"
@@ -430,11 +428,11 @@
           >
             <div class="content">
               <h3 class="bridge-header f-30px">
-                Business Identities and Online Marketplace
+                {{ $t('home.Business_Identities_and_Online_Marketplace') }}
               </h3>
               <p>
-                We help businesses to easily create their websites, buy and sell
-                online through our online marketplace
+                {{ $t('home.We_help_businesses_to_easily_create_their_websites') }}, 
+                {{ $t('home.buy_and_sell_online_through_our_online_marketplace') }}
                 <br />
               </p>
 
@@ -445,7 +443,7 @@
                   class="btn btn-primary mt-5 bridge-btn float-left bridge-btn"
                  
                 >
-                  Sign up
+                  {{ $t('home.Sign_up')}}
                 </button>
                 </router-link>
                
@@ -510,11 +508,10 @@
             "
           >
             <div class="content">
-              <h3 class="bridge-header">Online Business Databases</h3>
+              <h3 class="bridge-header">{{ $t('home.Online_Business_Databases') }}</h3>
               <p>
-                Our online business directory helps to make businesses visible
-                and locatable, and enables consumers to search for and compare
-                product prices
+                {{ $t('home.Our_online_business_directory_helps_to_make_businesses_visible_and_locatable') }} , 
+                {{ $t('home.and_enables_consumers_to_search_for_and_compare_product_prices') }}
               </p>
 
               <div class="text-center w-100">
@@ -524,7 +521,7 @@
                   class="btn btn-primary mt-5 bridge-btn float-left bridge-btn"
                 
                 >
-                  Sign up
+                  {{ $t('home.Sign_up') }}
                 </button>
                </router-link>
                
@@ -575,10 +572,10 @@
             "
           >
             <div class="content">
-              <h3 class="bridge-header">Community Engagement</h3>
+              <h3 class="bridge-header">{{$t('home.Community_Engagement')}}</h3>
               <p>
-                We allow businesses and consumers to follow one another, receive
-                notifications and send direct messages
+                {{ $t('home.We_allow_businesses_and_consumers_to_follow_one_another') }} , 
+                {{ $t('home.receive_notifications_and_send_direct_messages') }}
               </p>
 
               <div class="text-center w-100">
@@ -588,7 +585,7 @@
                   class="btn btn-primary mt-5 bridge-btn float-left bridge-btn"
                  
                 >
-                  Sign up
+                  {{ $t('home.Sign_up') }}
                 </button>
                 </router-link>
               </div>
@@ -637,10 +634,10 @@
             "
           >
             <div class="content">
-              <h3 class="bridge-header">Online and Offline</h3>
+              <h3 class="bridge-header">{{ $t('home.Online_and_Offline') }}</h3>
               <p>
-                For businesses and consumers in zones of low or no internet
-                penetration, our platform works offline via SMS and USSD
+                {{ $t('home.For_businesses_and_consumers_in_zones_of_low_or_no_internet_penetration') }}, 
+                {{ $t('home.our_platform_works_offline_via_SMS_and_USSD') }}
               </p>
 
               <div class="text-center w-100">
@@ -650,7 +647,7 @@
                   class="btn btn-primary mt-5 bridge-btn float-left bridge-btn"
                  
                 >
-                  Sign up
+                  {{ $t('home.Sign_up') }}
                 </button>
                 </router-link>
               </div>
@@ -724,14 +721,14 @@
                   role="button"
                   data-slide="prev"
                   ><span class="carousel-control-prev-icon"></span
-                  ><span class="sr-only">Previous</span></a
+                  ><span class="sr-only">{{ $t('home.Previous') }}</span></a
                 ><a
                   class="carousel-control-next"
                   href="#carousel-1"
                   role="button"
                   data-slide="next"
                   ><span class="carousel-control-next-icon"></span
-                  ><span class="sr-only">Next</span></a
+                  ><span class="sr-only">{{ $t('home.Next') }}</span></a
                 >
               </div>
               <ol class="carousel-indicators">
@@ -760,16 +757,15 @@
             &nbsp;
 
             <div class="content">
-              <h3 class="bridge-header">Digital literacy</h3>
+              <h3 class="bridge-header">{{ $t('home.Digital_literacy') }}</h3>
               <p>
-                We provide face-to-face digital literacy trainings for
-                businesses who lack digital know-how through our army of digital
-                coaches
+                {{ $t('home.We_provide_face_to_face_digital_literacy_trainings') }} 
+                {{ $t('home.for_businesses_who_lack_digital_know_how_through_our_army_of_digital_coaches') }}
               </p>
                 <router-link to="login">
 
               <button class="btn btn-primary mt-5 bridge-btn bridge-btn mb-3">
-                See Videos
+                {{ $t('home.See_Videos') }}
               </button>
               </router-link>
             </div>
@@ -816,29 +812,29 @@
             </div>
 
             <div class="col-lg-3 col-md-6 footer-links">
-              <h4 class="bridge-header text-left white">OUR ADRESS</h4>
+              <h4 class="bridge-header text-left white">{{ $t('home.OUR_ADRESSE') }}</h4>
               <ul class="text-left white">
-                <li>International Handicraft Center, Rond-point Intendance</li>
+                <li>{{ $t('home.International_Handicraft_Center') }}, {{ $t('home.Rond_point_Intendance') }}</li>
 
-                <li>Yaoundé</li>
+                <li>{{ $t('home.Yaounde') }}</li>
 
-                <li>Cameroon</li>
+                <li>{{ $t('home.Cameroon') }}</li>
               </ul>
             </div>
 
             <div class="col-lg-3 col-md-6 footer-links white">
-              <h4 class="bridge-header text-left white">USEFULL LINKS</h4>
+              <h4 class="bridge-header text-left white">{{ $t('home.USEFULL_LINKS') }}</h4>
               <ul class="white">
                 <li class="white"><a href="#">Bridgeafricaventures.com</a></li>
 
-                <li class="white"><a href="#">Home</a></li>
+                <li class="white"><a href="#">{{ $t('home.Home') }}</a></li>
 
                 <li class="white">
-                  <a href="http://info.bridgeafrica.com">About Us</a>
+                  <a href="http://info.bridgeafrica.com">{{ $t('home.About_Us') }}</a>
                 </li>
 
                 <li class="white">
-                  <a href="http://info.bridgeafrica.com/contact/">Contact Us</a>
+                  <a href="http://info.bridgeafrica.com/contact/">{{ $t('home.Contact_Us') }}</a>
                 </li>
 
                 <!--   
@@ -849,11 +845,11 @@
             </div>
 
             <div class="col-lg-3 col-md-6 footer-links">
-              <h4 class="bridge-header text-left white">WORKING HOURS</h4>
+              <h4 class="bridge-header text-left white">{{ $t('home.WORKING_HOURS') }}</h4>
               <ul class="white">
-                <li>Monday-Friday: 09AM – 05PM</li>
+                <li>{{ $t('home.Monday') }}-{{ $t('home.Friday') }}: {{ $t('home.09AM_05PM') }}</li>
 
-                <li>Saturday: 09AM – 01PM</li>
+                <li>{{ $t('home.Saturday') }}: {{ $t('home.09AM_01PM') }}</li>
               </ul>
             </div>
           </div>
@@ -903,7 +899,7 @@ export default {
       default: function () {
         return {
           keyword: '',
-          placeholder: 'All',
+          placeholder: this.$t('home.All'),
         };
       },
     },
@@ -1114,10 +1110,7 @@ export default {
 }
 
 @media only screen and (min-width: 768px) {
-  .size_video1{
-    /* width: 400px !important;
-    height: 700px !important; */
-  }
+  
   .bridge-btn{
     width: 124px;
     height: 48px;

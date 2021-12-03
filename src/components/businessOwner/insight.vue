@@ -2,21 +2,21 @@
   <div class="container-fluid mt-3">
     <b-row class="mr-35">
       <b-col xl="4" md="6" lg="6" sm="12">
-        <label>Start Date</label>
+        <label>{{ $t('businessowner.Start_Date') }}</label>
         <b-form-datepicker
           id="example-datepicker"
           v-model="startDate"
           class="mb-2"
-          placeholder="Start Date"
+          :placeholder="$t('businessowner.Start_Date')"
         ></b-form-datepicker>
       </b-col>
       <b-col xl="4" md="6" lg="6" sm="12">
-        <label>End Date</label>
+        <label>{{ $t('businessowner.End_Date') }}</label>
         <b-form-datepicker
           id="example-datepicker-1"
           v-model="endDate"
           class="mb-2"
-          placeholder="End Date"
+          :placeholder="$t('businessowner.End_Date')"
         ></b-form-datepicker>
       </b-col>
     </b-row>
@@ -29,9 +29,9 @@
           <b-row>
             <b-col cols="10">
               <h6 class="card-title mb-0">
-                New Notifications
+                {{ $t('businessowner.New_Notifications') }}
                 <p class="s-text">
-                  From (
+                  {{ $t('businessowner.From') }} (
                   {{  formatDate(startDate)  }} -
                   {{ formatDate( endDate) }} )
                 </p>
@@ -41,7 +41,7 @@
               <b-card-text class="f-right">
                 <b-icon
                   v-b-tooltip.hover
-                  title="Tooltip content goes in here"
+                  :title="t('businessowner.Tooltip_content_goes_in_here')"
                   icon="exclamation-circle-fill"
                   variant="dark"
                 ></b-icon>
@@ -54,7 +54,7 @@
               <h3 class="mb-2 m-up">
                 {{ business_insights.number_likes }}
                 <p class="s-text">
-                  Total {{ "likes" }}: {{ business_insights.total_likes }}
+                  {{ $t('businessowner.Total') }} {{ "likes" }}: {{ business_insights.total_likes }}
                 </p>
               </h3>
             </b-col>
@@ -68,9 +68,9 @@
           <b-row>
             <b-col cols="10">
               <h6 class="card-title mb-0">
-                New Notifications
+                {{ $t('businessowner.New_Notifications') }}
                 <p class="s-text">
-                  From (
+                  {{ $t('businessowner.From') }} (
                   {{ formatDate(startDate)   }} -
                   {{  formatDate(endDate)  }})
                 </p>
@@ -80,7 +80,7 @@
               <b-card-text class="f-right">
                 <b-icon
                         v-b-tooltip.hover
-                        title="Tooltip content goes in here"
+                        :title="t('businessowner.Tooltip_content_goes_in_here')"
                         icon="exclamation-circle-fill"
                         variant="dark"
                 ></b-icon>
@@ -93,7 +93,7 @@
               <h3 class="mb-2 m-up">
                 {{ business_insights.number_shares }}  
                 <p class="s-text">
-                  Total {{ "shares" }}: {{ business_insights.total_shares }}
+                  {{ $t('businessowner.Total') }} {{ "shares" }}: {{ business_insights.total_shares }}
                 </p>
               </h3>
             </b-col>
@@ -106,9 +106,9 @@
           <b-row>
             <b-col cols="10">
               <h6 class="card-title mb-0">
-                New Notifications
+                {{ $t('businessowner.New_Notifications') }}
                 <p class="s-text">
-                  From (
+                  {{ $t('businessowner.From') }} (
                   {{   formatDate(startDate) }} -
                   {{  formatDate(endDate) }} )
                 </p>
@@ -131,7 +131,7 @@
               <h3 class="mb-2 m-up">
                 {{ business_insights.number_posts }}
                 <p class="s-text">
-                  Total {{ "posts" }}: {{ business_insights.total_posts }}
+                  {{ $t('businessowner.Total') }} {{ "posts" }}: {{ business_insights.total_posts }}
                 </p>
               </h3>
             </b-col>
@@ -142,8 +142,9 @@
       </b-col>
     </b-row>
     <b-row class="mr-35" v-else>
-      No Business Insights !!! Enter Start Date and End Date to find Business
-      Insights
+      {{ $t('businessowner.No_Business_Insights') }} !!! 
+      {{ $t('businessowner.Enter_Start_Date_and_End_Date_to_find_Business_Insights') }}
+      
     </b-row>
 
     <br />

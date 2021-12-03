@@ -2,7 +2,7 @@
   <div class="hot mt-2 p-2">
     <b-row>
       <b-col>
-        <p><b>Hot Businesses</b></p>
+        <p><b>{{ $t('businessowner.Hot_Businesses') }}</b></p>
       </b-col>
       <b-col class="col-2">
         <fas-icon :icon="['fas', 'angle-left']" />
@@ -25,13 +25,13 @@
         <b-col>
           <p class="text">
             <strong> Super Car ltd </strong> <br />
-            <strong> Category : </strong> Car marketing <br />
-            <strong> Community : </strong> 20k <br />
-            <strong> Location :</strong> cameroon <br />
-            <strong> Keyword :</strong> car,swag <br />
+            <strong> {{ $t('businessowner.Category') }} : </strong> {{ $t('businessowner.Car_marketing') }} <br />
+            <strong> {{ $t('businessowner.Community') }} : </strong> 20k <br />
+            <strong> {{ $t('businessowner.Location') }} :</strong> {{ $t('businessowner.Cameroon') }} <br />
+            <strong> {{ $t('businessowner.Keyword') }} :</strong> {{ $t('businessowner.car') }},swag <br />
 
-            <strong>About:</strong> super best car seller in the world
-            adipisicing elit. <b-link>Read More</b-link>
+            <strong>{{ $t('businessowner.About') }}:</strong> super best car seller in the world
+            adipisicing elit. <b-link>{{ $t('businessowner.Read_More') }}</b-link>
           </p>
         </b-col>
       </b-row>
@@ -39,19 +39,19 @@
       <b-row>
         <b-col cols="4">
           <b-button block size="sm" class="b-background" variant="primary">
-            <b-icon class="ico" icon="plus-circle"> </b-icon> Community
+            <b-icon class="ico" icon="plus-circle"> </b-icon> {{ $t('businessowner.Community') }}
           </b-button>
         </b-col>
 
         <b-col cols="4">
           <b-button block size="sm" class="b-background" variant="primary">
-            <b-icon class="ico" icon="chat"> </b-icon> Message
+            <b-icon class="ico" icon="chat"> </b-icon> {{ $t('businessowner.Message') }}
           </b-button>
         </b-col>
 
         <b-col cols="4">
           <b-button block size="sm" class="b-background" variant="primary">
-            <b-icon icon="direction" class="ico"> </b-icon> Direction
+            <b-icon icon="direction" class="ico"> </b-icon> {{ $t('businessowner.Direction') }}
           </b-button>
         </b-col>
       </b-row>

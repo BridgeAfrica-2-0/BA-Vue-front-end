@@ -593,13 +593,13 @@ export default {
 
       categories_filters: [],
       items: [
-        { label: 'All ' },
+        { label: this.$t('search.All') },
 
-        { label: 'Business' },
-        { label: 'People' },
-        { label: 'Network' },
-        { label: 'Market' },
-        { label: 'Post' },
+        { label: this.$t('search.Business') },
+        { label: this.$t('search.People') },
+        { label: this.$t('search.Network') },
+        { label: this.$t('search.Market') },
+        { label: this.$t('search.Post') },
       ],
 
       Finished_Branded_Products_filters: [

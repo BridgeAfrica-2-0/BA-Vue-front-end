@@ -24,9 +24,9 @@
     <header id="header" class="fixed-topp">
       <div class="container d-flex align-items-center">
         <!--  <h1 class="logo mr-auto"><a href="index.html">Arsha</a></h1>
-      Uncomment below if you prefer to use an image logo -->
+        Uncomment below if you prefer to use an image logo -->
         <a href="index.html" class="logo mr-auto"
-          ><img src="../assets/img/logobr.png" alt="" class="img-fluid b-logo"
+          ><img src="../assets/img/BAC-clear-dotted-logo.png" alt="" class="img-fluid b-logo"
         /></a>
 
         <!-- <nav class="nav-menu d-none d-lg-block">
@@ -60,14 +60,16 @@
       
 
       <!-- Right aligned nav items -->
-      <b-navbar-nav class="ml-auto bold" >
+      <b-navbar-nav class="ml-auto bold size_nav" >
        
-      <b-nav-item > <router-link to="/">{{ $t('home.Home') }}</router-link></b-nav-item>
-       <b-nav-item href="#">{{ $t('home.About_Us') }}</b-nav-item>
-        <b-nav-item href="#">{{ $t('home.Contact_Us') }}</b-nav-item>
-         <b-nav-item href="#">{{ $t('home.About_Us') }}</b-nav-item>
-         <b-nav-item href="#"><router-link to="/login">{{ $t('home.Login') }} </router-link></b-nav-item>
-        <b-nav-item ><router-link to="/signup">{{ $t('home.Signup') }} </router-link></b-nav-item>
+      <b-nav-item > <router-link to="/" class="mx-2">{{ $t('home.Home') }}</router-link></b-nav-item>
+        
+         <b-nav-item ><router-link :to="{ name: 'about' }" class="mx-2">{{ $t('home.About_Us') }} </router-link></b-nav-item>
+        
+        <b-nav-item > <router-link :to="{ name: 'contact' }" class="mx-2">  {{ $t('home.Contact_Us') }}  </router-link></b-nav-item>
+         <!-- <b-nav-item href="#">About Us</b-nav-item> -->
+         <b-nav-item ><router-link to="/login" class="mx-2">  {{ $t('home.Login') }}  </router-link></b-nav-item>
+        <b-nav-item ><router-link to="/signup" class="mx-2"> {{ $t('home.Signup') }} </router-link></b-nav-item>
 
 
       </b-navbar-nav>
@@ -105,11 +107,14 @@
             <span
               class="input-group-text border-left-0 color-mobile"
               style="width: 40px; border-right: none; background-color: white"
-            >
+            > 
+            <!-- <Button @click.native="getKeyword" style="width: 5px; height:20px " /> -->
               <i
                 class="bx bx-search"
                 style="color: #e75c18"
                 font-scale="1.5"
+                @click="getKeyword"
+              
               ></i>
             </span>
           </div>
@@ -124,7 +129,7 @@
             aria-label=""
             data-original-title=""
             title=""
-            v-model="word1"
+            v-model="credentials.keyword"
           />
         </div>
 
@@ -133,7 +138,7 @@
             <span
               class="input-group-text border-left-0 color-mobile"
               style="width: 40px; border-right: none; background-color: white"
-            >
+            > 
               <i class="bx bx-map" style="color: #e75c18" font-scale="1.5"> </i>
             </span>
           </div>
@@ -406,9 +411,9 @@
         </div>
       </div>
     </section>
-
+    <div class="w-100 text-light" @mouseover="animation">  .</div>
     <section id="why-us" class="why-us">
-      <div class="container-fluid">
+      <div class="container-fluid" id="anim">
         <div class="row">
           <div
             class="
@@ -457,26 +462,27 @@
           >
             &nbsp;
 
-            <div class="scroll-container">
-              <div class="scroll-element js-scroll slide-left">
+            <div class="scroll-container"  >
+              <!-- <div class="  slide-"> -->
                 <video
-                  class="business-vid1"
+                  class="business-vid1 size_video1"
                   playsinline
                   autoplay
                   muted
                   loop
                   poster="assets/img/Home scroll copy.png"
                   id="Test_Video"
+                 
                 >
                   <source src="../assets/video/identity.mp4" type="video/mp4" />
                 </video>
-              </div>
-              <div class="scroll-caption hidde" id="hidde">
+              <!-- </div> -->
+              <div class=" hidde" id="hidde">
                 <img
                   src="../assets/img/african-farmer.jpg"
                   height="700px"
                   class="d-none d-xl-block taillev1"
-                  style="margin-left: -70px"
+                  
                   alt=""
                 />
               </div>
@@ -874,6 +880,7 @@
 import "../assets/js/main.js";
 // import "../assets/js/js.js";
 import Button from '@/components/ButtonNavBarFind.vue';
+//import SiteHeader from '../components/site/siteHeader';
 export default {
   components: {Button},
   data(){
@@ -885,9 +892,6 @@ export default {
   },
 
 
-  mounted(){
-    
-  },
 
   props: {
     credentials: {
@@ -934,7 +938,8 @@ export default {
       this.$refs.mobileinput.style.display = "block";
     },
 
-    getKeyword() { console.log(this.credentials.keyword)
+    getKeyword(e) { console.log(this.credentials.keyword)
+      if (e.keyCode === 13) {console.log("touche entrez")}
       if (!this.credentials.keyword) return false;
 
       if (this.$route.name != 'Search') {
@@ -949,6 +954,38 @@ export default {
         this.$router.push({ name: 'Search' });
       }
     },
+
+    animation(){
+      
+  var id = null;
+  var elem = document.getElementById("Test_Video");
+  var pos = 0;
+  clearInterval(id);
+  id = setInterval(frame, 5);
+  function frame() {
+    if (pos == 50) {
+      clearInterval(id);
+    } else {
+      pos++;
+      // elem.style.top = pos + 'px';
+      
+
+      elem.style.zIndex = "1";
+      elem.style.left = pos + 'px';
+    if(pos == 50){
+       elem.style.left = 0 + 'px';
+    }
+  } 
+} 
+
+
+  }
+  },
+  mounted(){
+    document.getElementById("why-us").onscroll = function() {
+
+      this.animation();
+    };
 
   }
 };
@@ -981,7 +1018,9 @@ export default {
   font-size: 16px;
 }
 .taillev1{
-  height: 504px !important;
+  height: 680px !important;
+  width: 300px;
+  
 }
 .blec-container {
   position: absolute;
@@ -1033,6 +1072,7 @@ export default {
   color: #fff;
   transition: 0.4s;
   border-radius: 10px;
+ 
 }
 
 .bridge-btn:hover {
@@ -1070,9 +1110,29 @@ export default {
 }
 
 @media only screen and (min-width: 768px) {
+  
+  .bridge-btn{
+    width: 124px;
+    height: 48px;
+  }
+  .b-logo{
+    width: 100px !important;
+    height: 70px !important;
+  }
+  .size_nav{
+    font-size: 14px !important;
+    color: #343a40 !important;
+  }
+  .text_box{
+    font-size: 25px !important;
+    /* height: 166px !important;
+    width: 500px !important; */
+  }
   .input-block {
-    padding-left: 200px !important;
-    padding-right: 200px;
+    padding-left: 50px !important;
+    padding-right: 50px;
+    font-size: 14px !important ;
+  
   }
 
   .topp-div {
@@ -1094,7 +1154,9 @@ export default {
   }
 
   .search-h {
-    height: 50px;
+    height: 50px !important;
+    font-size: 24px !important;
+    /* width: 30px !important; */
   }
 
   .ca-img {
@@ -1126,6 +1188,11 @@ export default {
 
 .z-index {
   z-index: 1;
+}
+
+.why-us .content p {
+  font-size: 25px !important;
+  color: #454343;
 }
 
 .f-30 {
@@ -1234,10 +1301,7 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Merriweather&family=Merriweather+Sans:wght@300&display=swap");
 
 /*General styling for structure*/
-body {
-  margin: 0;
-  font-family: "Merriweather Sans", sans-serif;
-}
+
 
 .container {
   max-width: 1280px;
@@ -1251,7 +1315,7 @@ header h2 {
 
 .scroll-container {
   min-height: 450px;
-  padding: 2rem 1rem;
+  
   display: flex;
   align-items: center;
   box-sizing: border-box;

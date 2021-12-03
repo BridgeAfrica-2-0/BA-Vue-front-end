@@ -100,23 +100,21 @@
                 title=""
               />
 
-              <input
-                id="search-location"
-                ref="foo"
-                type="search"
-                list="browsers"
-                data-toggle="popover"
-                class="form-control search-h"
-                placeholder="Where "
-                aria-label="search bridge africa"
-                data-original-title=""
-                title=""
-              />
 
-              <datalist id="browsers">
-                <option value=" Current Location "></option>
-                <option value="Yaounde " />
-              </datalist>
+
+           <vue-bootstrap-typeahead
+    
+    v-model="query"
+    :data="users"
+    :serializer="item => item.login"
+    @hit="selectedUser = $event"
+    placeholder="Where"
+    class="search-hh"
+  />
+
+    
+
+             
               <slot name="button">
                 <Button @click.native="getKeyword" />
               </slot>
@@ -147,11 +145,11 @@
             <b-collapse id="nav-collapse" is-nav>
               <div class="nav-item">
                 <router-link
-                  :to="{ name: navLink('home') }"
+                  :to="navLink('home')"
                   class="nav-link text-dark hov"
                   href=""
                 >
-                  Home {{navLink('home')}}
+                  {{ "home1" == navLink("home") ? "Home" : "Dashboard" }}
                 </router-link>
               </div>
 
@@ -242,11 +240,9 @@
                       </div>
                     </div>
                     <hr class="h-divider" />
-                    <a
-                      href="https://bridgeafrica.info/nav/inbox.html"
-                      class="text-ored"
-                      ><u>See Inbox</u></a
-                    >
+                    <router-link :to="newRedirection('message')">
+                      <u>See Inbox</u>
+                    </router-link>
                   </div>
                 </b-popover>
               </div>
@@ -297,30 +293,34 @@
                     </div>
                     <hr class="h-divider" />
 
-                    <a
+                    <router-link :to="newRedirection('notification')"
+                      ><u>See all Notifications</u></router-link
+                    >
+                    <!-- <a
                       href="https://bridgeafrica.info/nav/notifications-view-all.html"
                       class="text-ored"
                       ><u>See all Notifications</u></a
-                    >
+                    > -->
                   </div>
                 </b-popover>
               </div>
               <!-- Notifications Ended -->
+
               <div
                 class="nav-item"
                 id="profilepic"
                 @click.prevent="switchToProfile"
               >
-                <a class="nav-link text-dark" href="">
-                  <span
-                    ><img
-                      :src="user.profile_picture"
-                      class="rounded-circle"
-                      alt=""
-                      width="50"
-                      height="50"
-                  /></span>
-                </a>
+                <span
+                  ><img
+                    :src="user.profile_picture"
+                    :class="`${
+                      'user' == user.user_type ? 'rounded-circle' : ''
+                    } logo-sizee`"
+                    alt=""
+                    width="50"
+                    height="50"
+                /></span>
               </div>
 
               <b-tooltip target="profilepic" variant="light" triggers="hover">
@@ -398,11 +398,23 @@
                     </div>
                     <hr class="h-divider" />
                     <div class="other-menu suggest-item cursor-pointer">
-                      <b-link v-b-toggle="'collapse-2'" class="m-1"><fas-icon class="violet search" :icon="['fas', 'globe-americas']" />  Language</b-link>
+                      <b-link v-b-toggle="'collapse-2'" class="m-1"
+                        ><fas-icon
+                          class="violet search"
+                          :icon="['fas', 'globe-americas']"
+                        />
+                        Language</b-link
+                      >
 
                       <b-collapse id="collapse-2" class="mt-1">
-                        <b-card-text @click="$i18n.locale = 'en'" class="cursor-pointer mb-1">{{$t('auth.english')}}</b-card-text>
-                        <b-card-text @click="$i18n.locale = 'fr'">{{$t('auth.french')}}</b-card-text>
+                        <b-card-text
+                          @click="$i18n.locale = 'en'"
+                          class="cursor-pointer mb-1"
+                          >{{ $t("auth.english") }}</b-card-text
+                        >
+                        <b-card-text @click="$i18n.locale = 'fr'">{{
+                          $t("auth.french")
+                        }}</b-card-text>
                       </b-collapse>
                     </div>
                     <hr class="h-divider" />
@@ -511,12 +523,24 @@
             </div>
             <hr class="h-divider" />
             <div class="other-menu suggest-item cursor-pointer">
-              <b-link v-b-toggle="'collapse-2'" class="m-1"><fas-icon class="violet search" :icon="['fas', 'globe-americas']" />  Language</b-link>
+              <b-link v-b-toggle="'collapse-2'" class="m-1"
+                ><fas-icon
+                  class="violet search"
+                  :icon="['fas', 'globe-americas']"
+                />
+                Language</b-link
+              >
 
-                      <b-collapse id="collapse-2" class="mt-1">
-                        <b-card-text @click="$i18n.locale = 'en'" class="cursor-pointer mb-1">{{$t('auth.english')}}</b-card-text>
-                        <b-card-text @click="$i18n.locale = 'fr'">{{$t('auth.french')}}</b-card-text>
-                      </b-collapse>
+              <b-collapse id="collapse-2" class="mt-1">
+                <b-card-text
+                  @click="$i18n.locale = 'en'"
+                  class="cursor-pointer mb-1"
+                  >{{ $t("auth.english") }}</b-card-text
+                >
+                <b-card-text @click="$i18n.locale = 'fr'">{{
+                  $t("auth.french")
+                }}</b-card-text>
+              </b-collapse>
             </div>
             <hr class="h-divider" />
             <a
@@ -541,7 +565,34 @@
       </div>
     </nav>
 
-    <div></div>
+    <div>    
+
+
+
+
+<!-- 
+
+           <div>
+  <vue-bootstrap-typeahead
+    class="mb-4"
+    v-model="query"
+    :data="users"
+    :serializer="item => item.login"
+    @hit="selectedUser = $event"
+    placeholder="Search GitHub Users"
+  />
+
+ <h3>Selected User JSON</h3>
+ <pre>{{ selectedUser | stringify }}</pre>
+</div> -->
+
+
+
+
+
+
+
+    </div>
   </header>
 </template>
 
@@ -551,12 +602,14 @@ import Activity from "@/components/ShowActivity.vue";
 // import NavBarNotifications from '@/components/NavBarNotifications.vue';
 import { mapGetters, mapActions, mapMutations } from "vuex";
 import axios from "axios";
+import VueBootstrapTypeahead from 'vue-bootstrap-typeahead'
 
 export default {
   name: "navbar",
   components: {
     Button,
     Activity,
+    VueBootstrapTypeahead
     // NavBarNotifications
   },
   props: {
@@ -576,6 +629,14 @@ export default {
       shownav: false,
       notifications: [],
       messages: [],
+      notificationPatterns: null,
+      messagePatterns: null,
+      redirectionPatterns: null,
+
+       query: '',
+      selectedUser: null,
+      users: []
+
     };
   },
   computed: {
@@ -586,11 +647,72 @@ export default {
       auth: "auth/user",
     }),
   },
-  created() {
-    this.init();
-    this.getNotifications();
-    this.getMessages();
+  beforeMount() {
+    console.log("beforeMount");
   },
+  created() {
+    console.log("created");
+    this.init();
+
+    this.notificationPatterns = {
+      user: () => "/notification/latest/user",
+      business: () => `/notification/business/${this.user.id}`,
+      network: () => null,
+    };
+
+    this.messagePatterns = {
+      user: () => "/messages/latest/user",
+      business: () => "/messages/latest/user",
+      network: () => "/messages/latest/user",
+    };
+
+    this.redirectionPatterns = {
+      message: {
+        user: () => null,
+        business: () => ({
+          name: "BusinessOwner",
+          params: { id: this.user.id },
+          query: { tabId: 1 },
+        }),
+        network: () => null,
+      },
+      notification: {
+        business: () => ({
+          name: "BusinessOwner",
+          params: { id: this.user.id },
+          query: { tabId: 2 },
+        }),
+        user: () => null,
+        network: () => null,
+
+      },
+    };
+
+    this.updateNotificationEvent();
+  },
+
+  watch: {
+    "$store.state.auth.profilConnected": function () {
+      this.updateNotificationEvent();
+    },
+
+     query(newQuery) {
+      axios.get(`https://api.github.com/search/users?q=${newQuery}`)
+        .then((res) => {
+          this.users = res.data.items
+        })
+    }
+
+  },
+
+
+    filters: {
+    stringify(value) {
+      return JSON.stringify(value, null, 2)
+    }
+  },
+
+
   methods: {
     ...mapActions({
       setNetworks: "social/FIND_USER_NETWORK",
@@ -602,6 +724,45 @@ export default {
     ...mapMutations({
       profile: "auth/profilConnected",
     }),
+
+    
+
+
+    updateNotificationEvent() {
+      try {
+        const newRouteNotificationApi =
+          this.notificationPatterns[
+            this.$store.state.auth.profilConnected.user_type
+          ]();
+
+        const newRouteMessageApi =
+          this.messagePatterns[
+            this.$store.state.auth.profilConnected.user_type
+          ]();
+
+        this.newNotification(newRouteNotificationApi);
+        this.newMessage(newRouteMessageApi);
+      } catch (error) {
+        return new Error(error);
+      }
+    },
+
+    newRedirection(type) {
+      const newPath = this.redirectionPatterns[type][this.user.user_type]();
+
+      if (newPath) {
+        let path = { name: newPath.name };
+
+        if (newPath.params)
+          path = Object.assign(path, { params: newPath.params });
+
+        if (newPath.query) path = Object.assign(path, { query: newPath.query });
+
+        return path;
+      }
+
+      return { name: this.$route.name };
+    },
 
     getKeyword() {
       if (!this.credentials.keyword) return false;
@@ -645,7 +806,11 @@ export default {
 
     logout: async function () {
       const response = await this.$repository.notification.logOut();
-      if (response.success) this.Logout();
+      if (response.success) {
+        this.Logout();
+      } else {
+        this.Logout();
+      }
     },
 
     switchToProfile: async function () {
@@ -671,10 +836,12 @@ export default {
       let request = await this.$repository.share.getNetworks();
       if (request.success) this.setNetworks(request.data);
     },
+
     getBusiness: async function () {
       let request = await this.$repository.share.getBusiness();
       if (request.success) this.setBusiness(request.data);
     },
+
     init() {
       try {
         if (!this.hasLauchNetworkRequest) {
@@ -686,6 +853,7 @@ export default {
         console.log(error);
       }
     },
+
     togglenav() {
       if (this.shownav == false) {
         this.shownav = true;
@@ -695,28 +863,52 @@ export default {
         console.log(this.shownav);
       }
     },
-    async getNotifications() {
+
+    async newNotification(url) {
       await axios
-        .get(`notification/latest/user`)
+        .get(url)
         .then((response) => {
-          console.warn(response.data.data);
           this.notifications = response.data.data;
         })
-        .catch((error) => console.log("Error In Notification  => " + error));
+        .catch((error) => console.log("Error In newNotification  => " + error));
     },
-    async getMessages() {
+
+    async newMessage(url) {
       await axios
-        .get(`messages/latest/user`)
+        .get(url)
         .then((response) => {
           this.messages = response.data.data;
         })
         .catch((error) => console.log(error));
     },
+
+    // async getNotifications() {
+    //   await axios
+    //     .get(`notification/latest/user`)
+    //     .then((response) => {
+    //       console.warn(response.data.data);
+    //       this.notifications = response.data.data;
+    //     })
+    //     .catch((error) => console.log("Error In newMessage  => " + error));
+    // },
+    // async getMessages() {
+    //   await axios
+    //     .get(`messages/latest/user`)
+    //     .then((response) => {
+    //       this.messages = response.data.data;
+    //     })
+    //     .catch((error) => console.log(error));
+    // },
   },
 };
 </script>
 
 <style scoped>
+.logo-sizee {
+  width: 50px !important;
+  height: 50px !important;
+  object-fit: cover;
+}
 .hov:hover {
   background-color: #eeeeef;
   border-color: #eeeeef;
@@ -914,4 +1106,24 @@ export default {
   right: 9 px;
   font-weight: bold;
 }
+</style>
+
+<style >
+  
+
+  
+
+     @media only screen and (min-width: 768px) {
+   .search-hh .form-control{
+    height: 48px !important;
+
+        margin-bottom: 0;
+    border-radius: 0px;
+
+    border-bottom: hidden;
+    
+}
+     }
+
+  
 </style>

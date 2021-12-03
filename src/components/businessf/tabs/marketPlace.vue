@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="products ">
+    <div class="products">
       <!-- MARKET HEADER BAR -->
       <div class="col-12 d-flex align-items-center justify-content-between">
         <p>
@@ -12,7 +12,10 @@
           ></b-icon>
           <span class="font-weight-bold">Market</span>
         </p>
-        <b-button variant="outline-primary">
+        <b-button
+          variant="outline-primary"
+          @click="() => $router.push({ name: 'cart' })"
+        >
           <b-icon icon="cart" class="mr-2"></b-icon>Cart</b-button
         >
       </div>
@@ -26,7 +29,7 @@
       </div>
       <b-col v-if="loader" class="load">
         <b-spinner
-          style="width: 7rem; height: 7rem;"
+          style="width: 7rem; height: 7rem"
           variant="primary"
         ></b-spinner>
       </b-col>
@@ -67,7 +70,7 @@ export default {
   },
 
   methods: {
-    getProducts: async function() {
+    getProducts: async function () {
       await axios
         .get("/market")
         .then((res) => {

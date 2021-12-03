@@ -2,118 +2,30 @@
   <div>
     <FlashMessage />
 
-    <!-- User Posts Listing Section-->
-    <b-card class="px-md-3">
-      <div class="">
-        <div
-          class="col-md-12 col-lg-12 d-flex align-items-stretch mb-lg-0"
-          style="padding-left: 0; padding-top: 3px"
-        ></div>
-      </div>
-
-      <div v-for="item in owner_post" :key="item.post_id">
-        <div class="mt-2">
-          <div class="d-inline-flex">
-            <span md="1" class="m-0 p-0">
-              <b-avatar class="d-inline-block avat" square variant="primary" :src="item.logo_path"></b-avatar>
-            </span>
-            <div class="pl-2 pl-md-3 pt-md-2">
-              <h5 class="m-0 usernamee">
-                {{ item.bussines_name }}
-              </h5>
-              <p class="durationn">{{ moment(item.created_at).fromNow() }}</p>
-            </div>
-
-            <div class="toright pt-2"></div>
-          </div>
-          <div class="m-0 p-0">
-            <p class="post-text">
-              <!--     :text="item.content.details"   -->
-              <read-more
-                v-if="item.content"
-                more-str="read more"
-                :text="item.content"
-                link="#"
-                less-str="read less"
-                :max-chars="200"
-              ></read-more>
-            </p>
-          </div>
-
-          <div v-if="item.media.length > 0" class="">
-            <span v-for="video in mapvideo(item.media)" :key="video">
-              <youtube
-                class="w-100 videoh"
-                :video-id="getId(video)"
-                :player-vars="playerVars"
-                @playing="playing"
-              ></youtube>
-            </span>
-
-            <light css=" " :cells="item.media.length" :items="mapmediae(item.media)"></light>
-          </div>
-          <b-row>
-            <!--   v-if="item.content.movies.length <= 0"  -->
-            <b-col cols="12" class="mt-2">
-              <!--  :src="$store.getters.getProfilePicture"  -->
-            </b-col>
-            <b-col class="mt-1">
-              <span class="mr-3"
-                ><b-icon icon="suit-heart" variant="primary" aria-hidden="true"></b-icon>
-                {{ nFormatter(item.likes_count) }}
-              </span>
-              <span
-                ><b-icon icon="chat-fill" variant="primary" aria-hidden="true"></b-icon>
-                {{ nFormatter(item.comment_count) }}
-              </span>
-              <ShareButton :post="item" />
-            </b-col>
-          </b-row>
-
-          <!--  :src="$store.getters.getProfilePicture"  -->
-        </div>
-
-        <div class="mt-2 d-inline-flex w-100">
-          <div class="m-md-0 p-md-0">
-            <b-avatar
-              variant="primary"
-              square
-              :src="business_intro.logo_path"
-              class="img-fluid avat-comment"
-            ></b-avatar>
-          </div>
-
-          <div class="p-0 m-0 pr-3 inline-comment">
-            <input :placeholder="$t('businessf.Post_a_Comment')" class="comment" type="text" />
-
-            <fas-icon class="primary send-cmt" :icon="['fas', 'paper-plane']" />
-          </div>
-        </div>
-
-        <Comment v-for="comment in item.comments" :key="comment.id" :comment="comment" />
-        <hr />
-      </div>
-
-      <infinite-loading :identifier="infiniteId" ref="infiniteLoading" @infinite="infiniteHandler"></infinite-loading>
-    </b-card>
+    <Post
+      v-for="(item, index) in owner_post"
+      :key="index"
+      :post="item"
+      :mapvideo="() => mapvideo(item.media)"
+      :mapmediae="() => mapmediae(item.media)"
+      :businessLogo="business_intro.logo_path"
+      :editPost="() => editPost(item)"
+      :deletePost="() => deletePost(item)"
+      :canBeDelete="false"
+    />
+    <infinite-loading @infinite="infiniteHandler"></infinite-loading>
   </div>
 </template>
 
 <script>
-import Comment from '../comment';
-import moment from 'moment';
-import light from '../lightbox';
+import Post from "@/components/businessOwner/ownerPostComponent";
 
-import { ShareButton } from '@/components/shareButton';
-
-import { WhoIsIt } from '@/mixins';
+import { WhoIsIt, PostComponentMixin } from "@/mixins";
 export default {
-  name: 'postNetwork',
-  mixins: [WhoIsIt],
+  name: "postNetwork",
+  mixins: [WhoIsIt, PostComponentMixin],
   components: {
-    Comment,
-    light,
-    ShareButton,
+    Post,
   },
   data() {
     return {
@@ -122,7 +34,6 @@ export default {
       infiniteId: +new Date(),
       isUploading: false,
       uploadPercentage: 0,
-      moment: moment,
       page: 1,
       post: this.$store.state.businessOwner.ownerPost,
       url: null,
@@ -133,36 +44,39 @@ export default {
 
       fullPage: false,
       images: [
-        'https://i.wifegeek.com/200426/f9459c52.jpg',
-        'https://i.wifegeek.com/200426/5ce1e1c7.jpg',
-        'https://i.wifegeek.com/200426/5fa51df3.jpg',
-        'https://i.wifegeek.com/200426/663181fe.jpg',
-        'https://i.wifegeek.com/200426/2d110780.jpg',
-        'https://i.wifegeek.com/200426/e73cd3fa.jpg',
-        'https://i.wifegeek.com/200426/15160d6e.jpg',
-        'https://i.wifegeek.com/200426/d0c881ae.jpg',
-        'https://i.wifegeek.com/200426/a154fc3d.jpg',
-        'https://i.wifegeek.com/200426/71d3aa60.jpg',
-        'https://i.wifegeek.com/200426/d17ce9a0.jpg',
-        'https://i.wifegeek.com/200426/7c4deca9.jpg',
-        'https://i.wifegeek.com/200426/64672676.jpg',
-        'https://i.wifegeek.com/200426/de6ab9c6.jpg',
-        'https://i.wifegeek.com/200426/d8bcb6a7.jpg',
-        'https://i.wifegeek.com/200426/4085d03b.jpg',
-        'https://i.wifegeek.com/200426/177ef44c.jpg',
-        'https://i.wifegeek.com/200426/d74d9040.jpg',
-        'https://i.wifegeek.com/200426/81e24a47.jpg',
-        'https://i.wifegeek.com/200426/43e2e8bb.jpg',
+        "https://i.wifegeek.com/200426/f9459c52.jpg",
+        "https://i.wifegeek.com/200426/5ce1e1c7.jpg",
+        "https://i.wifegeek.com/200426/5fa51df3.jpg",
+        "https://i.wifegeek.com/200426/663181fe.jpg",
+        "https://i.wifegeek.com/200426/2d110780.jpg",
+        "https://i.wifegeek.com/200426/e73cd3fa.jpg",
+        "https://i.wifegeek.com/200426/15160d6e.jpg",
+        "https://i.wifegeek.com/200426/d0c881ae.jpg",
+        "https://i.wifegeek.com/200426/a154fc3d.jpg",
+        "https://i.wifegeek.com/200426/71d3aa60.jpg",
+        "https://i.wifegeek.com/200426/d17ce9a0.jpg",
+        "https://i.wifegeek.com/200426/7c4deca9.jpg",
+        "https://i.wifegeek.com/200426/64672676.jpg",
+        "https://i.wifegeek.com/200426/de6ab9c6.jpg",
+        "https://i.wifegeek.com/200426/d8bcb6a7.jpg",
+        "https://i.wifegeek.com/200426/4085d03b.jpg",
+        "https://i.wifegeek.com/200426/177ef44c.jpg",
+        "https://i.wifegeek.com/200426/d74d9040.jpg",
+        "https://i.wifegeek.com/200426/81e24a47.jpg",
+        "https://i.wifegeek.com/200426/43e2e8bb.jpg",
       ],
-      imagees: ['https://i.wifegeek.com/200426/f9459c52.jpg', 'https://i.wifegeek.com/200426/5ce1e1c7.jpg'],
+      imagees: [
+        "https://i.wifegeek.com/200426/f9459c52.jpg",
+        "https://i.wifegeek.com/200426/5ce1e1c7.jpg",
+      ],
       ima: [
-        'https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg',
-        'https://pbs.twimg.com/media/DKO62sVXUAA0_AL.jpg',
-        'https://i.wifegeek.com/200426/5ce1e1c7.jpg',
+        "https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg",
+        "https://pbs.twimg.com/media/DKO62sVXUAA0_AL.jpg",
+        "https://i.wifegeek.com/200426/5ce1e1c7.jpg",
       ],
       createPost: {
         // profile_picture: this.$store.getters.getProfilePicture,
-        postBusinessUpdate: '',
+        postBusinessUpdate: "",
         movies: [],
         hyperlinks: [],
       },
@@ -177,7 +91,7 @@ export default {
 
       media.forEach((item) => {
         let type = this.checkMediaType(item.media_type);
-        if (type != 'video') {
+        if (type != "video") {
           mediaarr.push(item.media_url);
         }
       });
@@ -190,7 +104,7 @@ export default {
 
       media.forEach((item) => {
         let type = this.checkMediaType(item.media_type);
-        if (type == 'video') {
+        if (type == "video") {
           mediaarr.push(item.media_url);
         }
       });
@@ -199,7 +113,7 @@ export default {
     },
 
     checkMediaType(media) {
-      return media.split('/')[0];
+      return media.split("/")[0];
     },
 
     getId(video_url) {
@@ -208,24 +122,24 @@ export default {
 
     nFormatter(num) {
       if (num >= 1000000000) {
-        return (num / 1000000000).toFixed(1).replace(/\.0$/, '') + 'G';
+        return (num / 1000000000).toFixed(1).replace(/\.0$/, "") + "G";
       }
       if (num >= 1000000) {
-        return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+        return (num / 1000000).toFixed(1).replace(/\.0$/, "") + "M";
       }
       if (num >= 1000) {
-        return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+        return (num / 1000).toFixed(1).replace(/\.0$/, "") + "K";
       }
       return num;
     },
 
     infiniteHandler($state) {
-      let url = 'business/show/post/' + this.url + '/' + this.page;
+      let url = "business/show/post/" + this.url + "/" + this.page;
       if (this.page == 1) {
         this.owner_post.splice(0);
       }
       this.$store
-        .dispatch('businessOwner/loadMore', url)
+        .dispatch("businessOwner/loadMore", url)
         .then(({ data }) => {
           if (data.data.length) {
             this.page += 1;
@@ -242,23 +156,23 @@ export default {
     },
 
     reloads() {
-      console.log('reoading');
-      this.$store.commit('profile/ownerPost', []);
+      console.log("reoading");
+      this.$store.commit("profile/ownerPost", []);
     },
 
     showModal() {
-      this.$refs['modal-3'].show();
+      this.$refs["modal-3"].show();
     },
     hideModal() {
-      this.$refs['modal-3'].hide();
+      this.$refs["modal-3"].hide();
     },
     resetPostData() {
-      console.log('Test');
-      console.log('Reinitialisation des donnees du POST');
+      console.log("Test");
+      console.log("Reinitialisation des donnees du POST");
       if (!this.isSubmitted) {
         this.createPost.hyperlinks = [];
         this.createPost.movies = [];
-        this.createPost.postBusinessUpdate = '';
+        this.createPost.postBusinessUpdate = "";
       }
     },
   },
@@ -268,7 +182,7 @@ export default {
     },
 
     imageProfile() {
-      return 'yoo';
+      return "yoo";
     },
 
     business_logo() {
@@ -281,7 +195,7 @@ export default {
     },
 
     profileNamePost() {
-      return 'yoo';
+      return "yoo";
     },
   },
   mounted() {

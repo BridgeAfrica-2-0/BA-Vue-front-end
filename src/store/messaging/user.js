@@ -152,22 +152,93 @@ export default {
             }
         },
         // ----------------------------------------
+        // SHARE <---------
+        SHARE_POST_NETWORK({ commit }, data) {
+            commit("setLoader", true)
+            var payload = data.data
 
-
-        SAVE_USERS_CHAT({ commit, dispatch }, data) {
-            commit("setUsers", []);
-
-            axios.post(`/messages/UserToUser`, data, {
-                    headers: {
-                        'Content-Type': 'multipart/form-data'
-                    }
-                })
+            return axios.post(`/share/post/user/network`, payload)
                 .then((res) => {
-                    console.log("Message saved...", res.data.data);
+                    commit("setLoader", false)
+                    console.log("Post shared...", res.data.data);
                 })
                 .catch((err) => {
+                    commit("setLoader", false)
                     console.log(err);
                 })
+
+        },
+        SHARE_POST_USER({ commit }, data) {
+            commit("setLoader", true)
+            var payload = data.data
+
+            return axios.post(`/share/post/user`, payload)
+                .then((res) => {
+                    commit("setLoader", false)
+                    console.log("Post shared...", res.data.data);
+                })
+                .catch((err) => {
+                    commit("setLoader", false)
+                    console.log(err);
+                })
+
+        },
+        SHARE_POST_BUSINESS({ commit }, data) {
+            commit("setLoader", true)
+            var payload = data.data
+
+            return axios.post(`/share/post/user/business`, payload)
+                .then((res) => {
+                    commit("setLoader", false)
+                    console.log("Post shared...", res.data.data);
+                })
+                .catch((err) => {
+                    commit("setLoader", false)
+                    console.log(err);
+                })
+
+        },
+        // ------------------
+        SAVE_USERS_CHAT({ commit, dispatch }, data) {
+            commit("setUsers", []);
+            console.log("[DEBUG]", data);
+            var payload = data.data
+            var type = data.type
+
+            if (type == 'business') {
+                axios.post(`/messages/UserToBusiness`, payload, {
+                        headers: {
+                            'Content-Type': 'multipart/form-data'
+                        }
+                    })
+                    .then((res) => {
+                        console.log("Message saved...", res.data.data);
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    })
+            } else if (type == 'user') {
+                axios.post(`/messages/UserToUser`, payload, {
+                        headers: {
+                            'Content-Type': 'multipart/form-data'
+                        }
+                    })
+                    .then((res) => {
+                        console.log("Message saved...", res.data.data);
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    })
+            } else {
+                axios.post(`/messages/UserToNetwork`, payload)
+                    .then((res) => {
+                        console.log("Message saved...", res.data.data);
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    })
+            }
+
         },
 
         async GET_USER_TO_USER({ commit }, data) {

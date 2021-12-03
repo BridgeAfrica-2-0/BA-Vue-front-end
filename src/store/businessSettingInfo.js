@@ -1,4 +1,4 @@
-  
+
 import axios from "axios";
 
 export default {
@@ -25,32 +25,26 @@ export default {
 
   actions: {
 
-    getBusinessInfo( {commit}, businessId ){
+    getBusinessInfo({ commit }, businessId) {
       return axios
-      .get(`business/info/${businessId}`)
-      .then(({ data }) => {
+        .get(`business/info/${businessId}`)
+        .then(({ data }) => {
           commit("setBusinessInfo", data.data);
-        console.log("Store Data Available");
-        console.log(data);
-
-      })
+        })
     },
 
-    UpdateInfomation( {commit}, businessData ){
-      console.log("businessData.path",businessData.path);
-      console.log("businessData.formData",businessData.formData);
+    UpdateInfomation({ commit }, businessData) {
       return axios
-      .post(businessData.path, businessData.formData)
-      .then(({ data }) => {
-        console.log(data);
-        return data;
-      })
+        .patch(businessData.path, businessData.data, {
+          headers: { "Content-Type": "multipart/form-data" },
+        })
+        .then(({ data }) => {
+          return data;
+        })
     },
 
-    
     subcategories({ commit }, data) {
       return axios.post("catergory/subcategory", data).then(({ data }) => {
-        console.log(data);
         commit("setSubcategories", data.data);
       });
     },

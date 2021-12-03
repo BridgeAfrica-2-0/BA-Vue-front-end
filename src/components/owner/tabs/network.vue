@@ -14,7 +14,7 @@
 
         <b-col md="5" cols="7" lg="7" xl="7" sm="5">
           <p class="textt">
-            <strong class="title"> {{ item.name }} </strong> <br />
+            <strong class="title">  <router-link    :to="'network/'+item.id">  {{ item.name }}  </router-link> </strong> <br />
             {{ item.category }}
             <br />
            {{ item.followers }} {{ $t('profileowner.Community') }}<br />
@@ -85,6 +85,7 @@ export default {
   data() {
     return {
       page: 1,
+      foll_id:null,
       network: [],
       options: {
         rewind: true,
@@ -102,6 +103,14 @@ export default {
   
   },
 
+   mounted(){
+  
+  this.foll_id = this.$route.params.id ? this.$route.params.id :""  ;
+
+ },
+
+
+
   methods: {
     infiniteHandler($state) {
       console.log('loading network 1 1');
@@ -112,7 +121,7 @@ export default {
           : `profile/network/following/`;
 
       axios
-        .get(url + this.page)
+        .get(url + this.page+"?id="+this.foll_id)
         .then(({ data }) => {
           console.log('lading network after response');
           console.log(data);

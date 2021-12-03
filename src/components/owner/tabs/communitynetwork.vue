@@ -19,7 +19,7 @@
          
 
           <p class="textt">
-            <strong class="net-title"> {{ item.name }} </strong> <br />
+            <strong class="net-title">  <router-link    :to="'network/'+item.id">   {{ item.name }}  </router-link> </strong> <br />
             {{ item.category }}
             <br />
             {{ item.followers }} {{ $t('profileowner.Community') }} <br />
@@ -96,6 +96,7 @@ export default {
    data() {
     return {
       page: 1,
+      foll_id:null,
       infiniteId: +new Date(),
       options: {
         rewind: true,
@@ -125,6 +126,13 @@ export default {
   },
 
 
+   mounted(){
+  
+   this.foll_id = this.$route.params.id ? this.$route.params.id :""  ;
+
+ },
+
+
   methods:{
    
 
@@ -152,20 +160,8 @@ export default {
 
 
         search(){
-     
-       console.log('search started');
-       console.log(this.type);
-        
-         if(this.type=="Follower"){ 
-         console.log("follower");
-        this.$store.commit("profile/setNcommunityFollower",{ "network_followers": [ ], "total_network_follower": 0 }); 
-
-       }else{
-       
-        
-        this.$store.commit("profile/setNcommunityFollowing",{ "network_following": [ ], "total_network_following": 0 }); 
-       }
-
+    
+      this.network=[];
       this.page = 1;
       this.infiniteId += 1;
 
@@ -187,9 +183,9 @@ export default {
           url="profile/network/following/";
          }
          
-      console.log(url + this.page+"?keyword="+this.searchh);
+     
       axios
-        .get(url + this.page+"?keyword="+this.searchh)   
+       .get(url + this.page+"?keyword="+this.searchh+"&id="+this.foll_id )   
         .then(({ data }) => {
           console.log("lading network after response")
           console.log(data);

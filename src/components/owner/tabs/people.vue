@@ -15,7 +15,7 @@
                     <b-row>
                       <b-col md="6" lg="6" cols="6" sm="6" class="mt-lg-2">
                         <div class="mt-2 mt-lg-0 mt-xl-0 username">
-                          <b> {{ item.name }} </b>
+                         <router-link    :to="'profile/'+item.id">   <b> {{ item.name }} </b> </router-link>
                         </div>
                       </b-col>
 
@@ -98,6 +98,7 @@ export default {
   data() {
     return {
       page: 1,
+      foll_id:null,
       users: [],
       options: {
         rewind: true,
@@ -110,6 +111,13 @@ export default {
       },
     };
   },
+
+ mounted(){
+  
+  this.foll_id = this.$route.params.id ? this.$route.params.id :""  ;
+
+ },
+
 
   computed: {
     activeAccount() {
@@ -148,9 +156,10 @@ export default {
     },
 
     infiniteHandler($state) {
+      console.log(this.foll_id);
       const url = this.type == 'Follower' ? 'profile/user/follower/' : 'profile/user/following/';
       axios
-        .get(url + this.page)
+         .get(url + this.page+"?id="+this.foll_id)
         .then(({ data }) => {
           if (this.type == 'Follower') {
             if (data.data.user_followers.length) {

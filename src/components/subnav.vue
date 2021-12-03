@@ -8,9 +8,9 @@
             v-for="(category, index) in categories"
             :key="index"
             @mouseover="showSubCat(category.category.id, category.sub_cat)"
-            @click="showSubCat(category.category.id)"
+            @click="clickshowSubCat(category.category.id,  category.sub_cat)"
             @mouseleave="hideSubCat(category.category.id)"
-          >
+          > 
             <b-nav-item-dropdown
               id="dropdown-1"
               :text="category.category.name"
@@ -32,7 +32,7 @@
                     <b-dropdown-item
                       v-for="(subCat, subIndex) in category.sub_cat"
                       :key="subIndex"
-                      @click="category(subCat)"
+                      @click="bcategory(subCat)"
                       href="#"
                       ><img
                         class="img-fluid picture logo-img"
@@ -71,10 +71,10 @@ export default {
   },
   computed: {
     categories() {
-      return this.$store.state.market.categories;
+      return this.$store.state.marketSearch.categories;
     },
     subCategories() {
-      return this.$store.state.market.subCat;
+      return this.$store.state.marketSearch.subCategories;
     },
   },
   created() {
@@ -82,10 +82,18 @@ export default {
   },
 
   methods: {
+
+
+      bcategory(category) {
+      this.$emit("category", category);
+      console.log(category);
+    },
+
+    
     getCategories() {
-      let bussiness_id = this.$route.params;
+     
       this.$store
-        .dispatch("market/getCategories", bussiness_id)
+        .dispatch("marketSearch/getCategories")
         .then((res) => {
           // console.log("categories loaded!");
         })
@@ -94,18 +102,35 @@ export default {
         });
     },
 
-    category(category) {
-      this.$emit("category", category);
-      console.log(category);
-    },
+  
+
+
+
+
+
+
+
     showSubCat(catId, subCat) {
-      this.$refs[catId][0].visible = true;
+      this.$refs[catId][0].visible = true;     
       this.$emit("parentcategory", catId);
       // this.subCategories.push(subCat);
-      this.$store.commit('market/setSubCat', subCat)
+      this.$store.commit('marketSearch/setSubCat', subCat)
+
       if (!subCat.length) this.hideSubCat(catId)
       console.log("Subcat:", this.subCategories);
     },
+
+clickshowSubCat(catId, subCat) {
+      this.$refs[catId][0].visible = true;     
+      this.$emit("parentcategory", catId);
+      this.$emit("category", {cat_id:catId});
+     
+      this.$store.commit('marketSearch/setSubCat', subCat)
+
+      if (!subCat.length) this.hideSubCat(catId)
+      console.log("Subcat:", this.subCategories);
+    },
+
     hideSubCat(catId) {
       this.$refs[catId][0].visible = false;
       this.subCategories = [];

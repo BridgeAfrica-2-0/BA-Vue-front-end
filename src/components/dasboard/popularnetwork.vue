@@ -5,6 +5,7 @@
 		</b-modal>
 
 		<div class="people-style shadow" v-for="item in network" :key="item.id">
+
 			<b-row>
 				<b-col md="3" xl="3" lg="3" cols="5" sm="3">
 					<div class="center-img">
@@ -14,8 +15,10 @@
 				<b-col md="5" cols="7" lg="7" xl="5" sm="5">
 					<p class="textt">
 						<strong class="net-title"> {{ item.name }} </strong> <br />
-						{{ item.category }}
+					 
 						<br />
+
+
 						{{ item.followers }}  {{ $t('dashboard.Community') }} <br />
 
 						<span class="location">

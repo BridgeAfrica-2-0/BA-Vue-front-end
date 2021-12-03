@@ -22,6 +22,9 @@ import VueSocialauth from 'vue-social-auth';
 import ShareNetwork from 'vue-social-sharing';
 Vue.use(ShareNetwork);
 
+import VueBootstrapTypeahead from 'vue-bootstrap-typeahead'
+Vue.use('vue-bootstrap-typeahead', VueBootstrapTypeahead)
+
 // don't comment that 2 line URGENT
 import plugin from './http';
 Vue.use(plugin);
@@ -137,11 +140,11 @@ import '@/assets/css/bootstrap.css';
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 
-//import InfiniteLoading from "vue-infinite-loading";
+// import InfiniteLoading from "vue-infinite-loading";
 
-Vue.use(InfiniteLoading, {
-    /* options */
-});
+// Vue.use(InfiniteLoading, {
+//     options 
+// });
 
 Vue.use(VueGoogleMaps, {
     load: {

@@ -7,6 +7,7 @@ import search from './search.json'
 import Order from './Order.json'
 import myOrders from './myOrders.json'
 import network from './network.json'
+import about from './about.json'
 
 import verification from './verification.json'
 import passrecover from './passrecover.json'
@@ -24,6 +25,7 @@ export const defaultLocale = 'fr'
 
 export const fr = {
 
+
     auth: auth,
     home: home,
     businessf: businessf,
@@ -31,7 +33,7 @@ export const fr = {
     Order: Order,
     myOrders: myOrders,
 
-    passrecover: passrecover,
+
     welcome: welcome,
     dashboard: dashboard,
     profileowner: profileowner,
@@ -42,5 +44,6 @@ export const fr = {
 
 
     network: network,
+    about:about,
 
 }

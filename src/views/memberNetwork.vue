@@ -11,7 +11,7 @@
 
         <b-col class="col mt-sm-3">
           <b-tabs content-class="mt-3" lazy fill pills>
-            <b-tab :title="$t('memnetwork.Posts')"><Posts /></b-tab>
+            <b-tab :title="$t('memnetwork.Posts')"><Posts :postStatus="'member'" /></b-tab>
             <b-tab :title="$t('memnetwork.Media')"><Media /></b-tab>
             <b-tab :title="$t('memnetwork.Members')"><Members /></b-tab>
             <b-tab :title="$t('memnetwork.Feedback')"><Feedback /></b-tab>
@@ -95,7 +95,7 @@ created(){
         console.log(error.response.status);
 
         if (error.response.status == 404) {
-          this.$router.push({ name: "notFound" });
+        //  this.$router.push({ name: "notFound" });
         }
       });
 

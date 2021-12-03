@@ -36,7 +36,7 @@
           >
             <b-form-input
               class="mt-2 mb-2"
-              v-model="info.user.phone"
+              v-model="newcontact"
               :placeholder="$t('profileowner.phone')"
               type="text"
               required
@@ -183,9 +183,9 @@
             </div>
           </form>
         </div>
-      </b-modal>
+      </b-modal>      
 
-      <b-modal
+      <b-modal     
         id="dobbb"
         ref="dobbb"
         :title="$t('profileowner.Edit_Date_of_Birth')"
@@ -199,12 +199,19 @@
               <label class="col-md-3 pl-0 pr-0 control-label">{{ $t('profileowner.Birth_Year') }}</label>
               <div class="col-md-9 pr-0 pl-0">
                 <div class="form-group">
-                  <b-form-datepicker id="example-datepicker" v-model="birthDate.date" :max="max" class="mb-2"></b-form-datepicker>
+
+                    <b-form-datepicker  name="dob" :max="min" id="dob"
+
+                         v-model="birthDate.date" class=" text"  :locale=" this.$i18n.locale"  :placeholder="$t('welcome.DOB')"></b-form-datepicker>
+
+                
+
+
                 </div>
               </div>
             </div>
             <div class="fosrm-group text-right w-100">
-              <button type="button" class="btn btn-dark pr-1" @click="$bvModal.hide('modal-6')">
+              <button type="button" class="btn btn-dark pr-1 mr-3" @click="$bvModal.hide('modal-6')">
                 {{ $t('profileowner.Cancel') }}
               </button>
               <button
@@ -228,6 +235,7 @@
           class="btn btn-outline-primary float-md-right"
           data-toggle="modal"
           data-target="#genderModal"
+          @click="getgender()"
           v-b-modal.modal-7
         >
           {{ $t('profileowner.Edit') }}
@@ -249,10 +257,12 @@
                   >{{ $t('profileowner.Gender') }}
                 </label>
                 <div class="col-md-8 pl-0 pr-0">
+
+                
                   <select
                     id="gender"
                     class="form-control w-100"
-                    v-model="basicInfo.gender"
+                    v-model="usergen"
                   >
                     <option value="M">{{ $t('profileowner.Male') }}</option>
                     <option value="F">{{ $t('profileowner.Female') }}</option>
@@ -280,10 +290,12 @@
     </div>
     <hr />
     <div class="row mb-1 mt-3">
-      <div class="col-md-4">{{ $t('profileowner.Phone') }}</div>
-      <div class="col-md-4">{{ info.user.phone }}</div>
+      <div class="col-md-4">   {{ $t('profileowner.default') }}    {{ $t('profileowner.Phone') }}</div>
+      <div class="col-md-4">  {{ info.user.phone }}</div>
+
+      
       <div class="col-md-4">
-        <button
+        <!-- <button
           type="button"
           class="btn btn-outline-primary float-md-right"
           data-toggle="modal"
@@ -291,8 +303,47 @@
           v-b-modal.phonemodal
         >
           {{ $t('profileowner.Edit') }}
-        </button>
+        </button> -->
       </div>
+
+<div class="media-body">   
+      
+      <a  data-toggle="modal"
+          data-target="#phonemodal"
+          v-b-modal.phonemodal >
+              <fas-icon
+                class="primary float-left mr-1 mt-1"
+                :icon="['fas', 'plus-circle']"
+              />
+              Add Contacts </a
+            ><br />
+
+
+
+  <div v-for="con in info.user_contact" :key="con.id">
+                 
+             <span>  {{con.phone_number}}   </span>
+              <ul class="website navbar-nav pull-right">
+                <li class="nav-item dropdown">
+                  <b-dropdown
+                    id="dropdown-dropup"
+                    dropdown
+                    variant="primary-outline"
+                  >
+                    
+                    <b-dropdown-item @click="deleteContact(con.id)"
+                      >{{ $t('profileowner.Delete') }}</b-dropdown-item
+                    >
+                  </b-dropdown>
+                </li>
+              </ul>
+            </div>
+
+
+ </div>
+
+
+
     </div>
 
     <div class="row">
@@ -425,8 +476,12 @@ export default {
     const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
      const maxDate = new Date(today)
     return {
+      newcontact:null,
+       min: moment().subtract(18, 'years').format('YYYY-MM-DD'),
+        moment: moment,
       max: maxDate,
       websiteId: null,
+      usergen:null,
       basicInfo: {
         dateOfBirth: { day: "12", month: "1", year: "2000" },
         gender: "M",
@@ -466,6 +521,8 @@ export default {
       });
   },
   computed: {
+
+
     birthDate() {
       let dob = this.info.user.dob;
       let check = moment(dob, "YYYY/MM/DD");
@@ -480,6 +537,20 @@ export default {
     },
   },
   methods: {
+
+    
+    getgender(){
+   
+     if(this.info.user.gender =="female")  {  
+        this.usergen="F"
+     }else{
+      
+        this.usergen="M"
+     }
+
+    },
+
+
     cancel() {
       console.log("Cancel edit birth date user  ++++++");
       this.basicInfo = JSON.parse(
@@ -495,8 +566,7 @@ export default {
           dateOfBirth: this.birthDate,
         })
         .then((response) => {
-          console.log("save new birth date user response (3) +++++", response);
-          console.log("save new birth date user end +++++");
+         
           this.$store
             .dispatch("profile/loadUserPostIntro", null)
             .then((response) => {
@@ -507,21 +577,19 @@ export default {
             });
         })
         .catch((error) => {
-          console.log(
-            "not save new birth date user end error (2) +++++",
-            error
-          );
+         
         })
         .finally(() => {
-          this.$refs["model-6"].hide();
+          this.$refs["dobbb"].hide();
         });
     },
-    saveGender() {
+    
+    saveGender() {  
       console.log("save new gender user start +++++");
       console.log(this.basicInfo.gender);
       this.$store
         .dispatch("profile/updateUserBasicInfosGender", {
-          gender: this.basicInfo.gender,
+          gender: this.usergen,
         })
         .then((response) => {
           this.$store
@@ -548,7 +616,7 @@ export default {
     savePhoneNumber() {
       this.$store
         .dispatch("profile/updateUserBasicInfosMobilePhones", {
-          mobilePhones: this.info.user.phone,
+          mobilePhones: this.newcontact,
         })
         .then((response) => {
           console.log("update phone user response (3) ++++", response);
@@ -560,10 +628,57 @@ export default {
           );
         })
         .finally(() => {
-          console.log("finally save new mobilePhones user ++++++ ");
+           this.$store
+            .dispatch("profile/loadUserPostIntro", null)
+            .then((response) => {
+              console.log(response);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
           this.$refs["phonemodal"].hide();
         });
     },
+
+    deleteContact(num){
+
+           
+           this.$store
+        .dispatch("profile/deleteContact", {
+          id: num,
+        })
+        .then((response) => {
+         this.flashMessage.show({
+                status: "success",
+                message: "Contact Deleted",
+                blockClass: "custom-block-class",
+              });
+
+        })
+        .catch((error) => {
+          console.log(
+            error,
+            "not save new mobilePhones user end error(2) +++++"
+          );
+        })
+        .finally(() => {
+         
+
+          this.$store
+            .dispatch("profile/loadUserPostIntro", null)
+            .then((response) => {
+              console.log(response);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+         
+
+
+        });
+
+    },
+
     saveCurrentCity() {
       console.log("save new current City user start +++++");
       console.log(this.basicInfo.currentCity);

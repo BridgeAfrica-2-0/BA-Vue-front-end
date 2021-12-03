@@ -7,7 +7,7 @@
             {{ $t("auth.Sign_Up_On_Bridge_Africa") }}
           </div>
         </md-card-header>
-        <FlashMessage />
+      
         <md-card-content>
           <div class="center">
             <b-row>

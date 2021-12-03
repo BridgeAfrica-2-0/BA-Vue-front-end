@@ -10,7 +10,11 @@
           <b-row>
             <b-col md="6" sm="12" class="">
               <h6 class="font-weight-bolder text-design text-center t-center">
-                {{ $t('dashboard.Use_Bridge_Africa_as_Yourself_or_as_one_of_your_businesses') }}
+                {{
+                  $t(
+                    "dashboard.Use_Bridge_Africa_as_Yourself_or_as_one_of_your_businesses"
+                  )
+                }}
               </h6>
             </b-col>
             <b-col sm="12" md="6" class="mb-3">
@@ -42,9 +46,17 @@
             <div>
               <b-card class="border shadow pr-3" style="height: 350px">
                 <h6 class="font-weight-bolder text-design">
-                  {{ $t('dashboard.Use_Bridge_Africa_as_Yourself_or_as_one_of_your_businesses') }}
+                  {{
+                    $t(
+                      "dashboard.Use_Bridge_Africa_as_Yourself_or_as_one_of_your_businesses"
+                    )
+                  }}
                 </h6>
-                <b-form-select v-model="selectedb" @input="switchBusiness" :options="boptions"></b-form-select>
+                <b-form-select
+                  v-model="selectedb"
+                  @input="switchBusiness"
+                  :options="boptions"
+                ></b-form-select>
               </b-card>
             </div>
           </b-col>
@@ -66,25 +78,38 @@
       </div>
 
       <div class="com-dash">
-        <comuniti-dashboard v-if="selectedb == 'owner'" class="m-component m-3"></comuniti-dashboard>
+        <comuniti-dashboard
+          v-if="selectedb == 'owner'"
+          class="m-component m-3"
+        ></comuniti-dashboard>
 
-        <comuniti-Bdashboard v-if="selectedb != 'owner'" class="m-component m-3"></comuniti-Bdashboard>
+        <comuniti-Bdashboard
+          v-if="selectedb != 'owner'"
+          class="m-component m-3"
+        ></comuniti-Bdashboard>
       </div>
 
       <div>
         <b-row>
-          <b-col sm="12" lg="7" class="" > <CommunityActivity  v-if="selectedb == 'owner'" />      <CommunityBactivity    v-if="selectedb != 'owner'" />    </b-col>
-          <b-col sm="12" lg="5" class="" > <Tutorial /> </b-col>
+          <b-col sm="12" lg="7" class="">
+            <CommunityActivity v-if="selectedb == 'owner'" />
+            <CommunityBactivity v-if="selectedb != 'owner'" />
+          </b-col>
+          <b-col sm="12" lg="5" class=""> <Tutorial /> </b-col>
         </b-row>
       </div>
 
-      <div>
+      <div class="mt-3">
         <b-row>
           <b-col sm="12" lg="6" class="">
             <b-card class="border shadow card card-hight">
               <h6 class="titlle">
-                <fas-icon class="icons" :icon="['fas', 'hands-helping']" size="lg" />
-                <b> {{ $t('dashboard.HOT_BUSINESSES').toUpperCase() }}</b>
+                <fas-icon
+                  class="icons"
+                  :icon="['fas', 'hands-helping']"
+                  size="lg"
+                />
+                <b> {{ $t("dashboard.HOT_BUSINESSES").toUpperCase() }}</b>
               </h6>
 
               <div class="p-tab">
@@ -95,8 +120,12 @@
           <b-col sm="12" lg="6" class="">
             <b-card class="border shadow card card-hight">
               <h6 class="titlle">
-                <fas-icon class="icons" :icon="['fas', 'project-diagram']" size="lg" />
-                <b> {{ $t('dashboard.POPULAR_NETWORKS').toUpperCase() }}</b>
+                <fas-icon
+                  class="icons"
+                  :icon="['fas', 'project-diagram']"
+                  size="lg"
+                />
+                <b> {{ $t("dashboard.POPULAR_NETWORKS").toUpperCase() }}</b>
               </h6>
 
               <div class=""><Popularnetwork /></div>
@@ -109,38 +138,38 @@
 </template>
 
 <script>
-import Navbar from '@/components/navbar';
-import CarousselDashboard from '@/components/dasboard/carousselDashboard';
-import BusinessDashboard from '@/components/dasboard/businessDashboard';
-import ComunitiDashboard from '@/components/dasboard/comunitiDashboard';
+import Navbar from "@/components/navbar";
+import CarousselDashboard from "@/components/dasboard/carousselDashboard";
+import BusinessDashboard from "@/components/dasboard/businessDashboard";
+import ComunitiDashboard from "@/components/dasboard/comunitiDashboard";
 
-import ComunitiBdashboard from '@/components/dasboard/comunitiBdashboard';
+import ComunitiBdashboard from "@/components/dasboard/comunitiBdashboard";
 
-import Insights from '@/components/dasboard/insights';
-import CommunityActivity from '@/components/dasboard/communityActivity';
+import Insights from "@/components/dasboard/insights";
+import CommunityActivity from "@/components/dasboard/communityActivity";
 
-import CommunityBactivity from '@/components/dasboard/communityBactivity';
+import CommunityBactivity from "@/components/dasboard/communityBactivity";
 
-import Tutorial from '@/components/dasboard/tutorial';
-import Profile from '@/components/dasboard/profile';
+import Tutorial from "@/components/dasboard/tutorial";
+import Profile from "@/components/dasboard/profile";
 
-import Business from '@/components/dasboard/hotbusiness';
+import Business from "@/components/dasboard/hotbusiness";
 
-import Map from '@/components/dasboard/map';
-import EmptyBusiness from '@/components/dasboard/emptybusiness';
-import Popularnetwork from '@/components/dasboard/popularnetwork';
+import Map from "@/components/dasboard/map";
+import EmptyBusiness from "@/components/dasboard/emptybusiness";
+import Popularnetwork from "@/components/dasboard/popularnetwork";
 
 export default {
-  name: 'dashboard',
+  name: "dashboard",
 
   data() {
     return {
       slide: 0,
       sliding: null,
       url_data: null,
-      selectedb: 'owner',
+      selectedb: "owner",
       map: false,
-      category: '',
+      category: "",
       boptions: [],
       detail: null,
     };
@@ -165,25 +194,25 @@ export default {
 
   methods: {
     async switchBusiness(value) {
-      console.log('business switch' + value);
+      console.log("business switch" + value);
 
-      if (value != 'Owner') {
+      if (value != "Owner") {
         let loader = this.$loading.show({
           container: this.fullPage ? null : this.$refs.loader,
           canCancel: true,
           onCancel: this.onCancel,
-          color: '#e75c18',
+          color: "#e75c18",
         });
 
         console.log(value);
         this.url_data = value;
 
-        this.$store.commit('dashboard/setdBusinessId', value);
+        this.$store.commit("dashboard/setdBusinessId", value);
 
         await this.$store
-          .dispatch('dashboard/dashboardBusiness', value)
+          .dispatch("dashboard/dashboardBusiness", value)
           .then(() => {
-            console.log('business switch');
+            console.log("business switch");
           })
           .catch((err) => {
             console.log({ err: err });
@@ -199,9 +228,9 @@ export default {
 
     dashboardPpost() {
       this.$store
-        .dispatch('dashboard/dashboardPpost')
+        .dispatch("dashboard/dashboardPpost")
         .then(() => {
-          console.log('hey yeah');
+          console.log("hey yeah");
         })
         .catch((err) => {
           console.log({ err: err });
@@ -210,9 +239,9 @@ export default {
 
     dashboardBpost() {
       this.$store
-        .dispatch('dashboard/dashboardBpost', this.url_data)
+        .dispatch("dashboard/dashboardBpost", this.url_data)
         .then(() => {
-          console.log('hey yeah');
+          console.log("hey yeah");
         })
         .catch((err) => {
           console.log({ err: err });
@@ -221,9 +250,9 @@ export default {
 
     CommunityBusiness() {
       this.$store
-        .dispatch('businessOwner/CommunityBusiness', this.url_data)
+        .dispatch("businessOwner/CommunityBusiness", this.url_data)
         .then(() => {
-          console.log('hey yeah');
+          console.log("hey yeah");
         })
         .catch((err) => {
           console.log({ err: err });
@@ -232,9 +261,9 @@ export default {
 
     CommunityPeople() {
       this.$store
-        .dispatch('businessOwner/CommunityPeople', this.url_data)
+        .dispatch("businessOwner/CommunityPeople", this.url_data)
         .then(() => {
-          console.log('hey yeah');
+          console.log("hey yeah");
         })
         .catch((err) => {
           console.log({ err: err });
@@ -243,26 +272,46 @@ export default {
 
     businessCommunityTotal() {
       this.$store
-        .dispatch('businessOwner/businessCommunityTotal', this.url_data)
+        .dispatch("businessOwner/businessCommunityTotal", this.url_data)
         .then(() => {
-          console.log('hey yeah');
+          console.log("hey yeah");
         })
         .catch((err) => {
           console.log({ err: err });
         });
     },
     getbusiness() {
-      console.log(JSON.parse(JSON.stringify(this.$store.getters['ProfileAndBusinessDetails/getdetails'])).owner);
+      console.log(
+        JSON.parse(
+          JSON.stringify(
+            this.$store.getters["ProfileAndBusinessDetails/getdetails"]
+          )
+        ).owner
+      );
 
-      let owner = JSON.parse(JSON.stringify(this.$store.getters['ProfileAndBusinessDetails/getdetails'])).owner;
+      let owner = JSON.parse(
+        JSON.stringify(
+          this.$store.getters["ProfileAndBusinessDetails/getdetails"]
+        )
+      ).owner;
 
       owner = owner.map((value) => {
-        this.boptions.push({ text: value.name, value: 'owner' });
+        this.boptions.push({ text: value.name, value: "owner" });
         return value;
       });
 
-      console.log(JSON.parse(JSON.stringify(this.$store.getters['ProfileAndBusinessDetails/getdetails'])).business);
-      let businesses = JSON.parse(JSON.stringify(this.$store.getters['ProfileAndBusinessDetails/getdetails'])).business;
+      console.log(
+        JSON.parse(
+          JSON.stringify(
+            this.$store.getters["ProfileAndBusinessDetails/getdetails"]
+          )
+        ).business
+      );
+      let businesses = JSON.parse(
+        JSON.stringify(
+          this.$store.getters["ProfileAndBusinessDetails/getdetails"]
+        )
+      ).business;
       businesses = businesses.map((value) => {
         this.boptions.push({ text: value.name, value: value.id });
         return value;
@@ -272,9 +321,11 @@ export default {
   },
 
   mounted() {
-    this.$store.dispatch('ProfileAndBusinessDetails/getdetails').then((response) => {
-      this.getbusiness();
-    });
+    this.$store
+      .dispatch("ProfileAndBusinessDetails/getdetails")
+      .then((response) => {
+        this.getbusiness();
+      });
 
     this.dashboardPpost();
   },
@@ -283,7 +334,7 @@ export default {
 
   computed: {
     details() {
-      return this.$store.getters['ProfileAndBusinessDetails/getdetails'];
+      return this.$store.getters["ProfileAndBusinessDetails/getdetails"];
     },
   },
   watch: {
@@ -420,7 +471,7 @@ select {
   -webkit-appearance: none;
   -moz-appearance: none;
   text-indent: 1px;
-  text-overflow: '';
+  text-overflow: "";
 }
 
 .a-center {

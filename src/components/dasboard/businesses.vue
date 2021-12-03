@@ -2,10 +2,6 @@
   <div>
    
 
-
-
-        
-
             
               <div    v-for="business in business" :key="business.id" class="people-style shadow h-100 ">
                
@@ -14,7 +10,7 @@
                     <div class="center-img">
                       <splide :options="options" class="r-image">
                         <splide-slide cl>
-                          <img :src="business.logo_path" class="r-image" />
+                          <img :src="business.picture" class="r-image" />
                         </splide-slide>
                       </splide>
                     </div>
@@ -22,30 +18,30 @@
 
                   <div class="flex80">
                     <p class="textt text">
-                      <strong class="title">
-                        {{ business.name }}
-                      </strong>
+                     <strong class="title"><router-link :to="'business_owner/'+business.id"> 
+                        {{ business.name }} </router-link>
+                      </strong> 
                       <br />
                       <span v-if="Array.isArray(business.category)">
                         <span
-                          class=""
+                          class="mr-1"
                           v-for="cat in business.category"
                           :key="cat.name"
                         >
-                          {{ cat.name }}
+                          {{ cat.name }},
                         </span>
                       </span>
                       <br />
-                      {{ business.community }} {{ $t('profileowner.Community') }} <br />
+                      {{  count(business.followers) }} {{ $t('profileowner.Community') }} <br />
 
-                      <span class="location">
+                      <!-- <span class="location">
                         <b-icon-geo-alt class="ico"></b-icon-geo-alt>
                         {{ business.city }}
                         <span v-for="nei in business.neigborhood" :key="nei.id">
                           {{ nei.name }}
                         </span>
-                      </span>
-                      <br />
+                      </span> 
+                      <br />  -->
 
                       <read-more
                         more-str="read more"

@@ -2,30 +2,31 @@
   <div class="p-2">   
     <b-row>
       <b-col lg="6" sm="12" class="p-2  " v-for="item in businesses" :key="item.id">
-        <div class="people-style shadow  h-100">
+        
+
+        <div class="people-style shadow h-100">
           <b-row>
-            <b-col md="3" xl="3" lg="3" cols="5" sm="3">
-              <div class="center-img">
+
+            <b-col md="8" xl="8" lg="12" cols="12" sm="8">
+              <div class="d-inline-flex">   
+              <div class="center-img ">
                 <splide :options="options" class="r-image">
                   <splide-slide cl>
-                    <img :src="item.picture" class="r-image" />   
+                    <img :src="item.picture" class="r-image" />
                   </splide-slide>
                 </splide>
-              </div>
-            </b-col>
-            <b-col md="5" cols="7" lg="7" xl="5" sm="5">
+              </div>   <div class="flx100"> 
               <p class="textt">
-                <strong class="title"> {{ item.name }} </strong> <br />
+                <strong class="title">   <router-link    :to="'business/'+item.id">    {{ item.name }}  </router-link> </strong> <br />
                
             <span v-for="cat in item.category" :key="cat.name">   {{cat.name}}  </span>
                 <br />
                 {{ count(item.followers) }}
-                {{ $t('profileowner.Community') }} <br />
+                {{ $t('dashboard.Community') }} <br />
 
                 <span class="location">
-                  <b-icon-geo-alt class="ico"></b-icon-geo-alt
-                  >{{ item.country }}
-                </span>
+              <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{item.city}}  <span class="ml-2" v-for="nie in item.neigborhood"  :key="nie.id" >  {{nie.name}} </span>   
+            </span>
                 <br />
        <read-more
               more-str="read more"
@@ -37,7 +38,9 @@
             >
             </read-more>
               </p>
-            </b-col>
+               </div>
+               </div>
+            </b-col>     
 
             <b-col lg="12" xl="4" md="4" cols="12" sm="4">
               <div class="s-button">
@@ -50,20 +53,32 @@
                     cols="4"
                     class="mt-2 text-center"
                   >
-                   
-                   <b-button
+                 
+
+
+                    
+
+
+
+                  <b-button
                   block
-                  size="sm"
+                  size="sm"  
                   :disabled="disable"
-                  :class="item.is_follow !== 0 && 'u-btn'"  
+                    :id="'followbtn'+item.id"
+                  :class="item.is_follow !== 0 && 'u-btn'"
                   variant="primary"
-                  :id="'followbtn'+item.id"
                   @click="handleFollow(item)"
                 >
                  
                   <i class="fas fa-lg btn-icon" :class="item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"></i>
-                  <span class="btn-com"> {{ $t('dashboard.Community') }}</span>
+                  <span class="btn-com ml-1"> {{ $t('dashboard.Community') }}</span>
                 </b-button>
+
+
+
+
+
+
 
 
                   </b-col>
@@ -76,14 +91,11 @@
                     cols="4"
                     class="mt-2 text-center"
                   >
-                    <b-button
-                      block
-                      size="sm"
-                      class="b-background shadow "
-                      variant="primary"
-                    >
-                      <i class="fas fa-envelope   fa-lg btn-icon "></i>
-                      <span class="btn-text">{{ $t('profileowner.Message') }}</span>
+                    
+
+                    <b-button block size="sm" class="b-background shadow" variant="primary" @click="cta(item)">
+                      <i class="fas fa-envelope fa-lg btn-icon"></i>
+                      <span class="btn-text">Message</span>
                     </b-button>
                   </b-col>
 
@@ -102,14 +114,16 @@
                       variant="primary"
                     >
                       <i class="fas fa-map-marked-alt  fa-lg btn-icon "></i>
-                      <span class="btn-text">{{ $t('profileowner.Direction') }}</span>
+                      <span class="btn-text">{{ $t('dashboard.Direction') }}</span>
                     </b-button>
                   </b-col>
                 </b-row>
-              </div>  
+              </div>
             </b-col>
           </b-row>
         </div>
+
+        
       </b-col>
     </b-row>
      
@@ -128,18 +142,26 @@ export default {
     return {
       page: 1,
       businesses:[],
+    
       infiniteId: +new Date(),
       options: {
         rewind: true,
         autoplay: true,
         perPage: 1,
         pagination: false,
-
+         foll_id:null,
         type: "loop",
         perMove: 1
       }
     };
   },
+
+    mounted(){
+  
+   this.foll_id = this.$route.params.id ? this.$route.params.id :""  ;
+
+ },
+
 
   computed:{
    
@@ -205,18 +227,8 @@ export default {
 
        search(){
      
-       console.log('search started');
-       
-         if(this.type=="Follower"){ 
-         
-        this.$store.commit("profile/setBcommunityFollower",{ "business_followers": [ ], "total_business_follower": 0 }); 
-
-       }else{
-       
-        
-        this.$store.commit("profile/setBcommunityFollowing",{ "business_following": [ ], "total_business_following": 0 }); 
-       }
-
+      
+   this.businesses=[];
       this.page = 1;
       this.infiniteId += 1;
 
@@ -234,15 +246,13 @@ export default {
           infiniteHandler($state) { 
            
 
-      let url = null;
-
-         if(this.type=="Follower"){  
-          url="profile/business/follower/"
-         }else{
-          url="profile/business/following/";
-         }
+         let url =
+        this.type === 'Follower'
+          ? `profile/business/follower/`
+          : `profile/business/following/`;
+          
       axios
-        .get(url + this.page+"?keyword="+this.searchh )
+        .get(url + this.page+"?keyword="+this.searchh+"&id="+this.foll_id )
         .then(({ data }) => {
           console.log(data);
         
@@ -380,7 +390,7 @@ export default {
     padding: 1px;
     text-align: left;
 
-    margin-left: -30px;
+    margin-left: 10px;
 
     margin-right: -5px;
 
@@ -433,7 +443,7 @@ export default {
     padding: 1px;
     text-align: left;
 
-    margin-left: 30px;
+    margin-left: 70px;
 
     margin-right: -5px;
 

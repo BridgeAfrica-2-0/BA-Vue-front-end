@@ -312,14 +312,14 @@
             <!--filter for all takes just two fields at a time  -->
 
             <div id="all" v-if="selectedId == '0'">
-              <h6>
+              <!-- <h6>
                 {{$t("search.Sponsored_Result")}}
                 <fas-icon class="icons" :icon="['fas', 'exclamation-circle']" size="lg" />
               </h6>
 
               <div>
                 <Sponsor />
-              </div>
+              </div> -->
 
               <h6>
                 <fas-icon class="icons" :icon="['fas', 'hands-helping']" size="lg" />
@@ -411,7 +411,7 @@
               </h6>
 
               <div>
-                <Sponsor />
+                <!-- <Sponsor /> -->
               </div>
               <h6>
                 <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
@@ -435,13 +435,13 @@
             <!-- Filter out just the market -->
 
             <div v-if="selectedId == '4'">
-              <h6>
+              <!-- <h6>
                 <fas-icon class="icons" :icon="['fas', 'store']" size="lg" />
                 {{$t("search.Market")}}
-              </h6>
+              </h6> -->
 
               <div>
-                <Sponsor />
+                <!-- <Sponsor /> -->
               </div>
 
               <h6 class="mb-3">
@@ -947,12 +947,12 @@ export default {
       ],
 
       Bars: [
-        { value: 'wineries ', text: 'wineries' },
+        { value: 'wineries ', text: 'wineries' },  
         { value: 'nightclub', text: 'nightclub ' },
         { value: 'snack', text: 'snack' },
         { value: 'drinks', text: 'drinks' },
         { value: 'natural', text: 'natural' },
-      ],
+      ],  
 
       Travelling: [
         { value: 'bus_park ', text: 'bus park ' },
@@ -1519,7 +1519,29 @@ export default {
       this.changePlaceHolder();
       this.changeNotFoundTitle();
     },
+
+
+
+
+      searchParams: {
+      immediate: true,
+      deep: true,
+      handler(newValue, oldValue) {
+           console.log('Prop changed: ', newValue, ' | was: ', oldValue)
+
+        this.$store.commit("business/setKeyword", newValue.keyword);
+
+      },
+    }
+
+
+
+   
   },
+
+
+
+
 
   methods: {
     // [ED]----------
@@ -1542,7 +1564,8 @@ export default {
 
        if (this.searchParams.keyword.trim())
         console.log("init search");
-      await  this.findBusiness({ keyword: this.searchParams.keyword, location: this.searchParams.location });
+      await  this.findBusiness({ keyword: this.searchParams.keyword});
+     //  await  this.findBusiness({ keyword: this.searchParams.keyword, location: this.searchParams.location });
        this.$store.commit('business/setLoading', false);
     },
 
@@ -1871,7 +1894,38 @@ export default {
 
     getCategory(value) {
       this.Selectedcategory = value;
+
+      if(this.selectedId==4){ 
+
+        this.searchProducts({ cat_id: value.cat_id, sub_cat: value.id });  
+        
+        }else if (this.selectedId==1)  {
+
+        
+           this.searchBusiness({ cat_id: value.cat_id, sub_cat: value.id }); 
+
+    }
+ 
     },
+
+
+   
+     searchBusiness(data) {
+
+       this.$store.commit("business/setLoading", true);
+      this.$store
+        .dispatch('business/FIND_BUSINESS', data)
+        .then((res) => {
+          // console.log("categories loaded!");
+          this.$store.commit("business/setLoading", false);
+        })
+        .catch((err) => {
+          console.log('Error erro!');
+          this.$store.commit("business/setLoading", false);
+        });
+    },
+
+
     getparentCategory(value) {
       this.Selectedparentcategory = value;
     },

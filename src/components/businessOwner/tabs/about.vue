@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div ref="about">
     <b-icon icon="person-fill" class="icon-size" variant="primary"></b-icon>
-    <b> About </b>
+    <b> {{ $t('businessowner.About') }} </b>
 
     <hr />
 
@@ -18,28 +18,7 @@
         ></iframe>
       </div>
 
-      <b-row>
-        <b-col>
-          <b-card class="mb-2">
-            <div
-              class="edit"
-              v-b-modal.biographyModal
-              @click="
-                business_about_input = JSON.parse(
-                  JSON.stringify(business_about)
-                )
-              "
-            >
-              <b-icon icon="pencil-fill" variant="primary"></b-icon>
-            </div>
-            <h4 class="mb-4 text-center username">
-              {{ business_about.name }}
-            </h4>
-            <p class="text-justify text">
-              {{ business_about.location_description }}
-            </p>
-          </b-card>
-        </b-col>
+      <b-row v-if="loading">
         <b-col>
           <b-card>
             <b-card-text>
@@ -74,7 +53,7 @@
               <p>
                 <b-icon icon="people-fill" class="primary icon-size"></b-icon>
                 {{ business_about.community }}
-                {{ business_about.community > 1000 ? "K" : "" }} Community
+                {{ business_about.community > 1000 ? "K" : "" }} {{ $t('businessowner.Community') }}
               </p>
               <p>
                 <b-icon
@@ -89,7 +68,7 @@
               </p>
               <p>
                 <b-icon icon="clock" class="primary icon-size"></b-icon>
-                <b-link> Open now </b-link>
+                <b-link> {{ $t('businessowner.Open_now') }} </b-link>
                 <br />
                 <b-dropdown size="sm" variant="transperent">
                   <template #button-content>
@@ -108,13 +87,34 @@
             </b-card-text>
           </b-card>
         </b-col>
+        <b-col>
+          <b-card class="mb-2">
+            <div
+              class="edit"
+              v-b-modal.biographyModal
+              @click="
+                business_about_input = JSON.parse(
+                  JSON.stringify(business_about)
+                )
+              "
+            >
+              <b-icon icon="pencil-fill" variant="primary"></b-icon>
+            </div>
+            <h4 class="mb-4 text-center username">
+              {{ business_about.name }}
+            </h4>
+            <p class="text-justify text">
+              {{ business_about.location_description }}
+            </p>
+          </b-card>
+        </b-col>
       </b-row>
     </b-card>
 
     <b-modal
       id="biographyModal"
       hide-footer
-      title="Business Biography"
+      :title="$t('businessowner.Business_Biography')"
       size="md"
       ref="biographyModal"
       @close="cancel"
@@ -123,12 +123,12 @@
     >
       <b-form @submit.prevent="validate('modifyBiography')">
         <div class="form-group">
-          <label for="title">Bussiness Name:</label><br />
+          <label for="title">{{ $t('businessowner.Bussiness_Name') }}:</label><br />
           <input
             type="text"
             name="title"
             id="title"
-            placeholder="Title"
+            :placeholder="$t('businessowner.Title')"
             class="form-control"
             v-model="business_about_input.name"
             required
@@ -136,20 +136,20 @@
         </div>
 
         <div class="form-group">
-          <label for="description">Description:</label><br />
+          <label for="description">{{ $t('businessowner.Description') }}:</label><br />
           <textarea
             type="text"
             id="description"
             name="description"
             v-model="business_about_input.location_description"
             class="mb-3 form-control"
-            placeholder="description"
+            :placeholder="$t('businessowner.description')"
             required
           ></textarea>
         </div>
 
         <b-button class="mt-3 btn-block" variant="primary" type="submit">
-          Modify
+          {{ $t('businessowner.Modify') }}
         </b-button>
       </b-form>
     </b-modal>
@@ -157,19 +157,19 @@
       id="addressBusinessModal"
       ref="addressBusinessModal"
       hide-footer
-      title="Edit Address"
+      :title="$t('businessowner.Edit_Address')"
       size="lg"
       @close="cancel"
       @keyup="validate('editAddress')"
     >
       <b-form @submit.prevent="validate('editAddress')">
         <div class="form-group">
-          <label for="username">Business Name:</label><br />
+          <label for="username">{{ $t('businessowner.Business_Name') }}:</label><br />
           <input
             type="text"
             name="username"
             id="username"
-            placeholder="Business Name"
+            :placeholder="$t('businessowner.Business_Name')"
             v-model="business_about_input.name"
             class="form-control"
             required
@@ -177,13 +177,13 @@
         </div>
 
         <div class="form-group">
-          <label for="alias">Category:</label><br />
+          <label for="alias">{{ $t('businessowner.Category') }}:</label><br />
           <multiselect
             v-model="multiselecvalue"
             @input="subcategories"
-            tag-placeholder="Add this as new tag"
-            placeholder="Search or add a tag"
-            label="name"
+            :tag-placeholder="$t('businessowner.Add_this_as_new_tag')"
+            :placeholder="$t('businessowner.Search_or_add_a_tag')"
+            :label="$t('businessowner.name')"
             track-by="id"
             :options="pcategories"
             :multiple="true"
@@ -193,12 +193,12 @@
         </div>
 
         <div class="form-group">
-          <label for="alias">Sub-Category:</label><br />
+          <label for="alias">{{ $t('businessowner.Sub_Category') }}:</label><br />
           <multiselect
             v-model="filterselectvalue"
-            tag-placeholder="Add this as new tag"
-            placeholder="Search or add a tag"
-            label="name"
+            :tag-placeholder="$t('businessowner.Add_this_as_new_tag')"
+            :placeholder="$t('businessowner.Search_or_add_a_tag')"
+            :label="$t('businessowner.name')"
             track-by="subcategory_id"
             :options="scategories"
             :multiple="true"
@@ -207,7 +207,7 @@
           ></multiselect>
         </div>
 
-        <label class="typo__label">Fiters</label>
+        <label class="typo__label">{{ $t('businessowner.Filters') }}</label>
         <div>
           <b-card no-body>
             <b-tabs pills card vertical>
@@ -217,7 +217,7 @@
                 :key="filters.id"
                 active
                 ><b-card-text>
-                  <b-form-group label="Filters" class="colorblack">
+                  <b-form-group :label="$t('businessowner.Filters')" class="colorblack">
                     <b-form-checkbox-group
                       id=""
                       class="colorblack"
@@ -241,15 +241,15 @@
         </div>
 
         <div class="form-group">
-          <label for="username">Keywords</label><br />
+          <label for="username">{{ $t('businessowner.Keywords') }}</label><br />
           <div class="col-md-12 pl-0 pr-0">
-            No Choices
+            {{ $t('businessowner.No_Choices') }}
 
             <input
               type="text"
               name="alias"
               id="alias"
-              placeholder="Enter your Keywords"
+              :placeholder="$t('businessowner.Enter_your_Keywords')"
               v-model="business_about_input.keywords"
               class="form-control"
               required
@@ -258,7 +258,7 @@
         </div>
         <b-form-group
           id="input-group-1"
-          label="Country"
+          :label="$t('businessowner.Country')"
           label-for="input-1"
           label-size="sm"
         >
@@ -272,7 +272,7 @@
         </b-form-group>
         <b-form-group
           id="input-group-2"
-          label="City"
+          :label="$t('businessowner.City')"
           label-for="input-2"
           label-size="sm"
         >
@@ -286,7 +286,7 @@
         </b-form-group>
         <b-form-group
           id="input-group-2"
-          label="Neigbourhood"
+          :label="$t('businessowner.Neigbourhood')"
           label-for="input-2"
           label-size="sm"
         >
@@ -301,7 +301,7 @@
 
         <b-form-group
           id="input-group-2"
-          label="Website"
+          :label="$t('businessowner.Website')"
           label-for="input-2"
           label-size="sm"
         >
@@ -316,7 +316,7 @@
 
         <b-form-group
           id="input-group-2"
-          label="Phone Contact"
+          :label="$t('businessowner.Phone_Contact')"
           label-for="input-2"
           label-size="sm"
         >
@@ -331,7 +331,7 @@
 
         <b-form-group
           id="input-group-2"
-          label="Business Email"
+          :label="$t('businessowner.Business_Email')"
           label-for="input-2"
           label-size="sm"
         >
@@ -340,7 +340,7 @@
             class="mt-1"
             v-model="business_about_input.email"
             type="email"
-            placeholder="Enter your email"
+            :placeholder="$t('businessowner.Enter_your_email')"
             required
           ></b-form-input>
         </b-form-group>
@@ -349,7 +349,7 @@
           <b-container>
             <b-form-group
               label-cols-lg="12"
-              label="Business Hours"
+              :label="$t('businessowner.Busines_Hours')"
               label-size="md"
               label-class=" pt-0 "
               class="mb-0"
@@ -404,7 +404,7 @@
         </div>
 
         <b-button class="mt-3 btn-block" variant="primary" type="submit">
-          Modify
+          {{ $t('businessowner.Modify') }}
         </b-button>
       </b-form>
     </b-modal>
@@ -416,6 +416,7 @@
 export default {
   data() {
     return {
+      loading:false,
       business_id: null,
       categories: [
         { item: "Professional_and_home_service", name: "Professionals" },
@@ -554,19 +555,20 @@ export default {
     },
   },
   created() {
-    console.log("Load Business About start +++++");
+    
+      let loader = this.$loading.show({
+        container: this.$refs.about,
+        canCancel: true,
+        onCancel: this.onCancel,
+        color: "#e75c18",
+      });
     this.$store
       .dispatch("businessOwner/loadUserBusinessAbout", {
         business_abobusiness_id: this.business_about_input,
-        business_id: this.business_id,
+        business_id: this.$route.params.id,
       })
       .then((response) => {
-        console.log(
-          response,
-          "load business about response end response (3) ++++"
-        );
         this.dayOfWorks = this.initialize(this.dayOfWorks);
-        console.log(this.business_about);
       })
       .catch((error) => {
         console.log("error from the server or browser error(2) ++++", error);
@@ -576,6 +578,8 @@ export default {
           JSON.stringify(this.$store.getters["businessOwner/getBusinessAbout"])
         );
         console.log(this.business_about);
+        this.loading = true
+        loader.hide()
       });
   },
   mounted() {
@@ -638,20 +642,18 @@ export default {
             "vuex store +++++ " +
               this.$store.getters["businessOwner/getBusinessAbout"]
           );
-          console.log(this.$store.getters["businessOwner/getBusinessAbout"]);
-          console.log("Modify Business Biography start++++");
-          console.log("-------",this.business_about_input.about_business);
-          console.log("-----"+this.business_id);
+      
           this.test();
-          var data = {  business_id: this.business_id,
-          data : {
+          var data = {
+            business_id: this.business_id,
+            data: {
               about_business: this.business_about_input.about_business,
-             
-              name: this.business_about_input.name
-              }
-            } ;
+
+              name: this.business_about_input.name,
+            },
+          };
           this.$store
-            .dispatch("businessOwner/updateBusinessBiographie",data )
+            .dispatch("businessOwner/updateBusinessBiographie", data)
             .then((response) => {
               console.log(
                 "fetch finished on the database response (3) ",

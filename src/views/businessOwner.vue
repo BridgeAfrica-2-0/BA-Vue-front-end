@@ -54,13 +54,9 @@
 <script>
 import navbar from "@/components/navbar";
 import Business from "../components/businessOwner/business";
-
 import Settings from "../components/businessOwner/settings";
-
 import Inbox from "../components/businessOwner/inbox";
-
 import LyTab from "@/tab/src/index.vue";
-
 import Footer from "../components/footer";
 import { WhoIsIt } from "@/mixins";
 export default {
@@ -69,12 +65,9 @@ export default {
   components: {
     navbar,
     Business,
-
     LyTab,
     Settings,
-
     Inbox,
-
     Footer,
   },
   data() {
@@ -84,15 +77,12 @@ export default {
       foll_id: null,
       isloaded: false,
       url_data: null,
-
       items: [
         { label: "Home ", icon: "" },
-
         { label: "Inbox", icon: "" },
         { label: "Notification", icon: "" },
         { label: "Pending Post", icon: "" },
         { label: "Insight", icon: "" },
-
         { label: "Settings", icon: "" },
       ],
       options: {
@@ -100,7 +90,6 @@ export default {
       },
     };
   },
-
   methods: {
     businessInfo() {
       this.$store
@@ -112,7 +101,6 @@ export default {
           console.log({ err: err });
         });
     },
-
     CommunityBusiness() {
       this.$store
         .dispatch("businessOwner/CommunityBusiness", this.url_data)
@@ -123,7 +111,6 @@ export default {
           console.log({ err: err });
         });
     },
-
     CommunityPeople() {
       this.$store
         .dispatch("businessOwner/CommunityPeople", this.url_data)
@@ -134,7 +121,6 @@ export default {
           console.log({ err: err });
         });
     },
-
     businessCommunityTotal() {
       this.$store
         .dispatch("businessOwner/businessCommunityTotal", this.url_data)
@@ -145,7 +131,6 @@ export default {
           console.log({ err: err });
         });
     },
-
     ownerPost() {
       this.$store
         .dispatch("businessOwner/ownerPost", this.url_data)
@@ -157,18 +142,14 @@ export default {
         });
     },
   },
-
   watch: {
     "$route.query.tabId": function () {
       this.selectedId = this.$route.query.tabId;
     },
   },
-
   created() {
     this.selectedId = this.$route.query.tabId ? this.$route.query.tabId : "0";
-
     this.foll_id = this.$route.params.id;
-
     this.$store
       .dispatch("businessOwner/roleCheck", this.foll_id)
       .then((data) => {
@@ -180,7 +161,6 @@ export default {
               params: { id: this.foll_id },
             });
             break;
-
           case "visitor":
             this.$router.push({
               name: "BusinessFollower",
@@ -188,35 +168,25 @@ export default {
             });
             break;
         }
-
         this.isloaded = true;
       })
       .catch((error) => {
         console.log({ error: error });
-
         console.log(error.response.status);
-
         if (error.response.status == 404) {
           this.$router.push({ name: "notFound" });
         }
       });
   },
-
   mounted() {
     if (this.$store.state.profileSettingsEdit.etat == 1) {
       this.selectedId = this.$store.state.profileSettingsEdit.selectedId;
     }
-
     this.url_data = this.$route.params.id;
-
     console.log(this.url_data);
-
     this.businessInfo();
-
     this.CommunityBusiness();
-
     this.CommunityPeople();
-
     this.businessCommunityTotal();
     this.ownerPost();
   },
@@ -235,19 +205,15 @@ export default {
   position: relative;
   top: 40px;
 }
-
 .a-left {
   align-content: left;
 }
-
 .nav-text {
   cursor: pointer;
 }
-
 .tab-title-class {
   color: #ffffff !important;
 }
-
 @media only screen and (max-width: 768px) {
   .settings {
     top: -5px;
@@ -261,7 +227,6 @@ export default {
   display: block;
   padding: 0.5rem 1rem;
   padding-top: 1px;
-
   padding-bottom: 1px;
   padding: 1px;
   padding-right: 1px;
@@ -271,7 +236,6 @@ export default {
   padding-right: 20px;
   border: 1px solid gray;
 }
-
 @media only screen and (max-width: 768px) {
   .business-owner-tab .nav-pills .nav-link {
     border-radius: 0.25rem;
@@ -281,16 +245,13 @@ export default {
     padding-right: 0px;
   }
 }
-
 .nav-pills .nav-link.active,
 .nav-pills .show > .nav-link {
   background-color: #e6e6e6;
 }
-
 .center-ly {
   margin-top: -25px;
 }
-
 .hrr {
   margin-top: 0px;
 }

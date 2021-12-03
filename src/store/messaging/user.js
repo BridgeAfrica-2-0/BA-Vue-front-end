@@ -152,8 +152,53 @@ export default {
             }
         },
         // ----------------------------------------
+        // SHARE <---------
+        SHARE_POST_NETWORK({ commit }, data) {
+            commit("setLoader", true)
+            var payload = data.data
 
+            return axios.post(`/share/post/user/network`, payload)
+                .then((res) => {
+                    commit("setLoader", false)
+                    console.log("Post shared...", res.data.data);
+                })
+                .catch((err) => {
+                    commit("setLoader", false)
+                    console.log(err);
+                })
 
+        },
+        SHARE_POST_USER({ commit }, data) {
+            commit("setLoader", true)
+            var payload = data.data
+
+            return axios.post(`/share/post/user`, payload)
+                .then((res) => {
+                    commit("setLoader", false)
+                    console.log("Post shared...", res.data.data);
+                })
+                .catch((err) => {
+                    commit("setLoader", false)
+                    console.log(err);
+                })
+
+        },
+        SHARE_POST_BUSINESS({ commit }, data) {
+            commit("setLoader", true)
+            var payload = data.data
+
+            return axios.post(`/share/post/user/business`, payload)
+                .then((res) => {
+                    commit("setLoader", false)
+                    console.log("Post shared...", res.data.data);
+                })
+                .catch((err) => {
+                    commit("setLoader", false)
+                    console.log(err);
+                })
+
+        },
+        // ------------------
         SAVE_USERS_CHAT({ commit, dispatch }, data) {
             commit("setUsers", []);
             console.log("[DEBUG]", data);

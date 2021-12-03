@@ -85,6 +85,7 @@ export default {
   data() {
     return {
       page: 1,
+      foll_id:null,
       network: [],
       options: {
         rewind: true,
@@ -102,6 +103,14 @@ export default {
   
   },
 
+   mounted(){
+  
+  this.foll_id = this.$route.params.id ? this.$route.params.id :""  ;
+
+ },
+
+
+
   methods: {
     infiniteHandler($state) {
       console.log('loading network 1 1');
@@ -112,7 +121,7 @@ export default {
           : `profile/network/following/`;
 
       axios
-        .get(url + this.page)
+        .get(url + this.page+"?id="+this.foll_id)
         .then(({ data }) => {
           console.log('lading network after response');
           console.log(data);

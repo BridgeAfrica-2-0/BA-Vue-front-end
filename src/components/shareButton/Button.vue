@@ -145,13 +145,7 @@
       <b-dropdown-item
         class="d-flex py-2 cursor-pointer"
         @click="open(`modal-2-${uuid}`)"
-        v-if="
-          $route.name != 'networks'
-            ? 'network' != profile.user_type
-              ? true
-              : false
-            : false
-        "
+        v-if="isYourOwnPost"
       >
         <span class="text-ored">
           <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
@@ -422,7 +416,9 @@ export default {
     isYourOwnPost() {
       const isItOwnerPage =
         this.$route.name == "BusinessOwner" ||
-        this.$route.name == "profile_owner"
+        this.$route.name == "profile_owner" ||
+        this.$route.name == "NetworkEditors" ||
+        this.$route.name == "networks"
           ? false
           : true;
 

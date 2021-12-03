@@ -574,8 +574,12 @@ export default {
 
   methods: {
     async getAuth() {
+      const type = ["NetworkEditors", "networks"].includes(this.$route.name)
+        ? this.$route.params.id
+        : null;
       const response = await this.$repository.share.WhoIsConnect({
-        networkId: this.$route.params.id,
+        networkId: type,
+        type,
       });
 
       if (response.success) this.auth(response.data);
@@ -1024,7 +1028,6 @@ export default {
       console.log(this.$store.state.businessOwner.ownerPost);
       return this.$store.state.businessOwner.ownerPost;
     },
-
   },
   mounted() {
     this.url = this.$route.params.id;

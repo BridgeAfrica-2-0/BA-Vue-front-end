@@ -1,7 +1,7 @@
 <template>
   <div>
     <h6>
-      {{ $t('search.Sponsored_Result') }}
+      {{ $t("search.Sponsored_Result") }}
       <fas-icon class="icons" :icon="['fas', 'exclamation-circle']" size="lg" />
     </h6>
 
@@ -10,7 +10,7 @@
     </div>
     <h6>
       <fas-icon class="icons" :icon="['fab', 'readme']" size="lg" />
-      {{ $t('search.Posting') }}
+      {{ $t("search.Posting") }}
     </h6>
     <Loader v-if="!pageHasLoad || loaderState" />
     <NotFound v-if="!posts.length && !loaderState" :title="title" />
@@ -18,19 +18,23 @@
       <Post v-for="(post, index) in posts" :item="post" :key="index" />
     </div>
 
-    <p class="text-center" v-if="haveNotData">{{ $t('search.Not_Data') }}</p>
-    <ScrollLoader :loading="loadingIsActive" color="#ced4da" v-if="this.getKeywork" />
+    <p class="text-center" v-if="haveNotData">{{ $t("search.Not_Data") }}</p>
+    <ScrollLoader
+      :loading="loadingIsActive"
+      color="#ced4da"
+      v-if="this.getKeywork"
+    />
   </div>
 </template>
 
 <script>
-import { mapGetters, mapActions, mapMutations } from 'vuex';
+import { mapGetters, mapActions, mapMutations } from "vuex";
 
-import Sponsor from '@/components/search/sponsoredBusiness';
-import { loader, search } from '@/mixins';
+import Sponsor from "@/components/search/sponsoredBusiness";
+import { loader, search } from "@/mixins";
 
-import Post from '@/components/search/posts';
-import Loader from '@/components/Loader';
+import Post from "@/components/search/posts";
+import Loader from "@/components/Loader";
 
 export default {
   mixins: [loader, search],
@@ -46,10 +50,10 @@ export default {
 
   computed: {
     ...mapGetters({
-      posts: 'search/GET_RESULT_POST',
-      getPage: 'search/GET_CURRENT_PAGINATION_PAGE',
-      getStack: 'search/STACK_VALUE',
-      getKeywork: 'search/POST_KEYWORD',
+      posts: "search/GET_RESULT_POST",
+      getPage: "search/GET_CURRENT_PAGINATION_PAGE",
+      getStack: "search/STACK_VALUE",
+      getKeywork: "search/POST_KEYWORD",
     }),
 
     loadingIsActive: function () {
@@ -58,7 +62,7 @@ export default {
   },
 
   mounted() {
-    window.addEventListener('scroll', this.onscroll);
+    window.addEventListener("scroll", this.onscroll);
   },
 
   created() {
@@ -68,25 +72,32 @@ export default {
 
   methods: {
     ...mapActions({
-      postStore: 'search/FIND_POST',
-      page: 'search/SET_CURRENT_PAGINATION_PAGE',
-      setCallback: 'search/SET_CURRENT_PAGINATE_CALLBACK',
-      stack: 'search/STACK_VALUE',
+      postStore: "search/FIND_POST",
+      page: "search/SET_CURRENT_PAGINATION_PAGE",
+      setCallback: "search/SET_CURRENT_PAGINATE_CALLBACK",
+      stack: "search/STACK_VALUE",
     }),
 
     ...mapMutations({
-      auth: 'auth/profilConnected',
+      auth: "auth/profilConnected",
     }),
 
     async getAuth() {
-      const response = await this.$repository.share.WhoIsConnect({ networkId: null });
+      const type = ["NetworkEditors", "networks"].includes(this.$route.name)
+        ? this.$route.params.id
+        : null;
+
+      const response = await this.$repository.share.WhoIsConnect({
+        networkId: type,
+        type,
+      });
       if (response.success) this.auth(response.data);
     },
 
     init: async function () {
       this.stack({
         data: {
-          keyword: '',
+          keyword: "",
         },
         page: 1,
       });
@@ -96,7 +107,7 @@ export default {
 
       const request = await this.$repository.search.findPostByKeyword({
         data: {
-          keyword: '',
+          keyword: "",
         },
         page: 1,
       });
@@ -118,7 +129,12 @@ export default {
       const pageHeight = document.documentElement.scrollHeight;
       const bottomOfPage = visible + scrollY >= pageHeight;
 
-      if (this.callback && (bottomOfPage || pageHeight < visible) && !this.loaderState && !this.haveNotData) {
+      if (
+        this.callback &&
+        (bottomOfPage || pageHeight < visible) &&
+        !this.loaderState &&
+        !this.haveNotData
+      ) {
         this.setLoaderState(true);
 
         const request = await this.callback({

@@ -360,7 +360,10 @@ export const WhoIsIt = {
       auth: 'auth/profilConnected',
     }),
     async getAuth() {
-      const response = await this.$repository.share.WhoIsConnect({ networkId: null });
+
+      const type = (['NetworkEditors', 'networks'].includes(this.$route.name)) ? this.$route.params.id : null
+
+      const response = await this.$repository.share.WhoIsConnect({ networkId: type, type });
       if (response.success) this.auth(response.data);
       console.log(this.profile)
     },
@@ -378,7 +381,9 @@ export const knowWhoIsConnected = {
       auth: 'auth/profilConnected',
     }),
     async getAuth() {
-      const response = await this.$repository.share.WhoIsConnect({ networkId: this.$route.params.id });
+      const type = (['NetworkEditors', 'networks'].includes(this.$route.name)) ? this.$route.params.id : null
+
+      const response = await this.$repository.share.WhoIsConnect({ networkId: type, type });
 
       if (response.success) this.auth(response.data);
     },
@@ -417,12 +422,8 @@ export const Redis = {
     }),
 
     async getAuth() {
-      let response = null
-      try {
-        response = await this.$repository.share.WhoIsConnect({ businessId: this.route.params.id });
-      } catch (error) {
-        response = await this.$repository.share.WhoIsConnect({ businessId: null });
-      }
+      const type = (['NetworkEditors', 'networks'].includes(this.$route.name)) ? this.$route.params.id : null
+      const response = await this.$repository.share.WhoIsConnect({ networkId: type, type });
 
       if (response.access) this.auth(response.data);
     },

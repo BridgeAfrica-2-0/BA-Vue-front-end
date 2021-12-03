@@ -84,8 +84,9 @@ class Repository {
     }
   }
 
-  async WhoIsConnect(networkId, type = null) {
+  async WhoIsConnect({ networkId, type }) {
     try {
+      console.log('type==', type)
       const response = await axios.get(type ? `interface?networkId=${networkId}` : `interface`)
       return {
         success: true,

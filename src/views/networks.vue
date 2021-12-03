@@ -85,8 +85,11 @@ import LyTab from "@/tab/src/index.vue";
 
 import Parent from "@/components/businessf/tabs/owner/networks/parent";
 
+import { WhoIsIt } from "@/mixins";
+
 export default {
   name: "networks",
+  mixins: [WhoIsIt],
   components: {
     General,
     LyTab,

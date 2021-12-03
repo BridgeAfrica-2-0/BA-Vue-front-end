@@ -10,7 +10,7 @@
         </div>
 
         <Images
-          :isEditor="isEditor"
+          :isEditor="false"
           :showCreateForm="false"
           :hasLoadPicture="!hasLoadPicture"
           :images="all()"

@@ -150,6 +150,7 @@
         <b-form-select
           v-model="selectedShow"
           :options="showOptions"
+          @change="filterOrderByTime"
           class="mx-3 align-self-center"
         ></b-form-select>
       </div>
@@ -403,6 +404,20 @@ export default {
       } else {
         this.getAllOrders();
       }
+    },
+    async filterOrderByTime() {
+      this.loading = true;
+      let type = this.selectedShow;
+      await axios
+        .get(`order/filtreOrderUser/${type}`)
+        .then((res) => {
+          this.loading = false;
+          this.orders = res.data.data;
+        })
+        .catch((err) => {
+          this.loading = false;
+          console.log(err);
+        });
     },
     gotoOrderDetails(id) {
       this.$router.push(`/myorders/detail/${id}`);

@@ -150,6 +150,7 @@
         <b-form-select
           v-model="selectedShow"
           :options="showOptions"
+          @change="filterOrderByTime"
           class="mx-3 align-self-center"
         ></b-form-select>
       </div>
@@ -168,7 +169,11 @@
           <span class="font-weight-bold">
             {{ $t("myOrders.Order") }}
           </span>
-          <span class="text-success">#{{ order.order_id }}</span>
+          <span
+            class="text-success cursor"
+            @click="gotoOrderDetails(order.order_id)"
+            >#{{ order.order_id }}</span
+          >
         </p>
         <b-dropdown
           variant="ligth"
@@ -176,9 +181,16 @@
           text="Manage"
           class="align-self-center"
         >
-          <b-dropdown-item>Complete</b-dropdown-item>
-          <b-dropdown-item>Archive</b-dropdown-item>
-          <b-dropdown-item>Delete</b-dropdown-item>
+          <b-dropdown-item
+            @click="updateOrderStatus('complete', order.order_id)"
+            >Complete</b-dropdown-item
+          >
+          <b-dropdown-item @click="updateOrderStatus('archive', order.order_id)"
+            >Archive</b-dropdown-item
+          >
+          <b-dropdown-item @click="updateOrderStatus('delete', order.order_id)"
+            >Delete</b-dropdown-item
+          >
         </b-dropdown>
       </div>
       <div class="row d-flex justify-content-between px-3 mb-3">
@@ -194,7 +206,10 @@
         </div>
       </div>
       <hr />
-      <div class="row px-3 my-4">
+      <div
+        class="row px-3 my-4 cursor"
+        @click="gotoOrderDetails(order.order_id)"
+      >
         <div class="col-lg-3 col-4">
           <splide :options="{ rewind: true }" class="r-img">
             <splide-slide cl v-for="(im, index) in img" :key="index">
@@ -243,7 +258,12 @@
       <div
         class="d-flex justify-content-lg-end justify-content-center my-lg-5 my-3"
       >
-        <b-button variant="primary" class="px-5">Reorder</b-button>
+        <b-button
+          variant="primary"
+          class="px-5"
+          @click="updateOrderStatus('complete', order.order_id)"
+          >Reorder</b-button
+        >
       </div>
     </div>
     <div class="row my-4" v-if="loading">
@@ -292,6 +312,7 @@ export default {
 
   created() {
     this.getAllOrders();
+    // this.updateOrderStatus("complete", 10);
   },
   methods: {
     changeTab(index) {
@@ -340,8 +361,39 @@ export default {
           this.loading = false;
         });
     },
+    async updateOrderStatus(status, id) {
+      this.loading = true;
+      let data = {
+        OrderId: id,
+        status: status,
+      };
+      axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
+      await axios
+        .post(`order/actionUserOrder`, data)
+        .then((res) => {
+          if (res.status == 200) {
+            this.flashMessage.show({
+              status: "success",
+              message: `Order status is updated to ${status}`,
+              blockClass: "custom-block-class",
+            });
+            this.getOrders();
+          }
+        })
+        .catch((err) => {
+          console.dir(err);
+          this.flashMessage.show({
+            status: "error",
+            message: err.response.data.message,
+            blockClass: "custom-block-class",
+          });
+        });
+    },
     handlePageChange(value) {
       this.currentPage = value;
+      this.getOrders();
+    },
+    getOrders() {
       let index = this.isTabActive;
       if (index == 2) {
         this.getOrderByStatus("pending");
@@ -352,6 +404,23 @@ export default {
       } else {
         this.getAllOrders();
       }
+    },
+    async filterOrderByTime() {
+      this.loading = true;
+      let type = this.selectedShow;
+      await axios
+        .get(`order/filtreOrderUser/${type}`)
+        .then((res) => {
+          this.loading = false;
+          this.orders = res.data.data;
+        })
+        .catch((err) => {
+          this.loading = false;
+          console.log(err);
+        });
+    },
+    gotoOrderDetails(id) {
+      this.$router.push(`/myorders/detail/${id}`);
     },
   },
 };

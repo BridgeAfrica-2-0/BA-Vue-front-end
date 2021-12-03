@@ -52,6 +52,7 @@ import notFound from "@/components/404"
 import welcome from "@/views/welcome";
 
 import ordersdetail from "@/views/odersDetail";
+import OrderDetails from "@/views/OrderDetails";
 import businessordersdetail from "@/views/businessordersdetail"
 import businessOwnerOrders from "@/views/businessOwnerOrders"
 import payment from "@/views/payment";
@@ -76,13 +77,23 @@ const routes = [
 
 
   {
-    path: "/myorders/detail",
+    path: "/myorders/detail/:id",
     name: "ordersdetail",
-    component: ordersdetail,
+    component: OrderDetails,
     // meta: {
     //   auth: true,
     // },
   },
+
+  {
+    path: "/orders/detail/:id",
+    name: "OrderDetail",
+    component: OrderDetails,
+    // meta: {
+    //   auth: true,
+    // },
+  },
+  
 
   {
     path: "/",

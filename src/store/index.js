@@ -51,7 +51,7 @@ import { social } from './social';
 Vue.use(Vuex);
 
 //axios.defaults.baseURL = process.env.VUE_APP_API_URL_DEV;
-axios.defaults.baseURL = process.env.VUE_APP_API_URL_EDS;
+axios.defaults.baseURL = process.env.VUE_APP_API_URL_ROI;
 
 
 

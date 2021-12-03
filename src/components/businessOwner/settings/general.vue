@@ -1,5 +1,5 @@
 <template>
-<div>{{business}}</div>
+<div>{{business }}{{ business_form}}</div>
   <!-- <b-container v-if="business_form">
 
     <div class="b-bottomn">
@@ -178,7 +178,6 @@ export default {
   },
   
   computed: {
-
     business() {
       return this.$store.state.businessGeneral.business;
     }

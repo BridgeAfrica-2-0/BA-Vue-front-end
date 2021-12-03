@@ -4,28 +4,46 @@
       <b-row>
         <b-col>
           <div class="b-bottom f-left">
-            <input @click="selectall" type="checkbox" />
-            Select All
+            <!-- <input @click="selectall" type="checkbox" /> -->
+            <b-form-checkbox
+              v-model="selectAll"
+              :indeterminate="indeterminate"
+              name="checkbox-1"
+              @change="select"
+              class="m-left-top username"
+            >selectAll</b-form-checkbox>
+            <!-- Select All -->
           </div>
         </b-col>
         <b-col>
           <div class="b-bottomn f-right">
-            <b-button @click="readAll(selected)" variant="primary" class="a-button-l duration"> Mark as Read</b-button>
+            <!-- <b-button @click="readAll(selected)" variant="primary" class="a-button-l duration"> Mark as Read</b-button>
             <b-button
               @click="deleteAll(selected)"
               v-if="selected.length > 0"
               variant="primary"
               class="a-button-l duration ml-1"
-            >
-              Delete</b-button
-            >
+            >Delete</b-button> -->
+            <b-button 
+              variant="primary" 
+              @click="MarkAsRead" 
+              :disabled="indeterminate ? false : true"
+              class="a-button-l duration"
+            >{{ $t('network.Mark_as_Read') }}</b-button>
+            &nbsp;
+            <b-button 
+              variant="outline-primary"
+              @click="Delete" 
+              :disabled="indeterminate ? false : true"
+              class="a-button-l duration"
+            >Delete</b-button>
           </div>
         </b-col>
       </b-row>
       <br />
 
       <b-row>
-        <b-col cols="12" class="mr-3" v-for="post in getNotificationsStore" :key="post.id">
+        <!-- <b-col cols="12" class="mr-3" v-for="post in getNotificationsStore" :key="post.id">
           <p class="">
             <span style="display:inline-flex">
               <input
@@ -48,6 +66,36 @@
           <p class="text">
             {{ post.notification_text }}
           </p>
+        </b-col> -->
+        <b-col cols="12" v-for="(notification, index) in getNotificationsStore" :key="index">
+        {{notification.notification_text}}
+          <div :class="notification.mark_as_read ? 'text-secondary' : 'font-weight-bold'">
+            <p class="">
+              <span style="display:inline-flex">
+                <b-form-checkbox
+                  name="checkbox-1"
+                  v-model="selected"
+                  :value="notification.notification_id"
+                  @change="updateCheckall"
+                  :disabled="notification.mark_as_read ? true : false"
+                  class="m-left-top"
+                ></b-form-checkbox>
+                <b-avatar
+                  class="d-inline-block profile-pic"
+                  variant="primary"
+                  :text="notification.reference_type.charAt(0,1)"
+                  :src="notification.image"
+                ></b-avatar>
+                <span class="m-0  d-inline-block ml-2 username">
+                  {{ notification.reference_type}}
+                  <div class="duration">{{ notification.created_at | fromNow }}</div>
+                </span>
+              </span>
+              <span v-if="!notification.mark_as_read" class="float-right mt-1"> <b-badge pill variant="primary" class="text-primary">.</b-badge></span>
+            </p>
+            <p class="text">{{ notification.notification_text }}</p>                  
+          </div>
+          <hr width="100%" />
         </b-col>
 
         <b-col v-if="loader" class="load">
@@ -72,6 +120,8 @@ export default {
   data: () => ({
     all: 24,
     selected: [],
+    selectAll: false,
+    indeterminate: false
   }),
 
   beforeMount() {
@@ -80,6 +130,22 @@ export default {
 
   filters: {
     fromNow,
+  },
+
+  watch: {
+    selected(newValue, oldValue) {
+      // Handle changes in individual notifications checkboxes
+      if (newValue.length === 0) {
+        this.indeterminate = false;
+        this.selectAll = false;
+      } else if (newValue.length === this.getNotificationsStore.length) {
+        this.indeterminate = false;
+        this.selectAll = true;
+      } else {
+        this.indeterminate = true;
+        this.selectAll = false;
+      }
+    }
   },
 
   computed: {
@@ -131,17 +197,36 @@ export default {
     },
     
     // select all the notifications
-    selectall() {
-      this.getNotificationsStore.forEach((element) => {
-        this.selected.push(element);
-      });
-    },
-    select(notification, index) {
-      if (this.selected[index]) {
-        this.selected.splice(index, 1);
-        return;
+    // selectall() {
+    //   this.getNotificationsStore.forEach((element) => {
+    //     this.selected.push(element);
+    //   });
+    // },
+    // select(notification, index) {
+    //   if (this.selected[index]) {
+    //     this.selected.splice(index, 1);
+    //     return;
+    //   }
+    //   this.selected.push(notification);
+    // },
+    
+    select(checked) {
+      console.log("this.selectAll: "+this.selectAll);
+      console.log("checked: "+checked);
+      this.selected = [];
+      if (checked) {
+        for (let notification in this.notifications) {
+            this.selected.push(this.notifications[notification].notification_id.toString());
+            console.log("this.notifications[notification].id: "+this.notifications[notification].notification_id);
+        }
       }
-      this.selected.push(notification);
+    },
+    updateCheckall: function() {
+      if (this.notifications.length === this.selected.length) {
+        this.selectAll = true;
+      } else {
+        this.selectAll = false;
+      }
     },
   },
 };

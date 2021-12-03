@@ -1,9 +1,10 @@
 //import en from './en.json'
 import auth from './auth.json'
+import home from './home.json'
 import businessf from './businessf.json'
 import search from './search.json'
 import network from './network.json'
-
+import businessowner from './businessowner.json'
 import verification from './verification.json'
 import passrecover from './passrecover.json'
 import welcome from './welcome.json'
@@ -25,11 +26,13 @@ export const en = {
 
 
     auth: auth,
+    home: home,
     businessf: businessf,
+    businessowner: businessowner,
     search: search,
     network: network,
     passrecover: passrecover,
-    elcome: welcome,
+    welcome: welcome,
     dashboard: dashboard,
     memnetwork: memnetwork,
     profilefollower: profilefollower,
@@ -39,4 +42,5 @@ export const en = {
     Order: Order,
     myOrders: myOrders,
     about: about,
+
 }

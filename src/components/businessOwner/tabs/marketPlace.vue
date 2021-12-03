@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="row d-flex align-items-center justify-content-between">
-      <div class="col-2 col-md-8">
+    <div class="row ">
+      <div class="col-5 col-md-8">
         <p>
           <b-icon
             font-scale="1.8"
@@ -9,22 +9,29 @@
             variant="primary"
             class="mr-2"
           ></b-icon>
-          <span class="font-weight-bold">Market</span>
+          <span class="font-weight-bold">{{ $t('businessowner.Market') }}</span>
         </p>
       </div>
-      <div class="col col-md text-center">
-        <b-button
-          class="pos"
-          variant="outline-primary"
-          @click="displayOrders"
-          >{{ my_orders }}</b-button
-        >
+
+       <div class="col-7 col-md ">
+         <div class="row marg">
+
+         
+          <b-button
+            class=" mx-1"
+            variant="outline-primary"
+            @click="displayOrders"
+            >{{ my_orders }}</b-button
+          >
+       
+              <!-- <div class="col col-md"> -->
+          <b-button variant="outline-primary" @click="createProduct"
+            >{{ $t('businessowner.Add_Product') }}</b-button
+          >
+         </div>
+
       </div>
-      <div class="col col-md">
-        <b-button variant="outline-primary" @click="createProduct"
-          >Add Product</b-button
-        >
-      </div>
+        <!-- </div> -->
     </div>
     <div class="col-12">
       <hr class="h-divider" />
@@ -33,9 +40,12 @@
       <!-- MARKET HEADER BAR -->
 
       <!-- MARKET PRODUCT LIST -->
-      <div class="col-md-6" v-for="(product, index) in products" :key="index">
-        <Product v-show="!orders" :product="product" />
-      </div>
+          
+        <div class="col-md-6" v-for="(product, index) in products" :key="index">
+          <Product v-show="!orders && market" :product="product" />
+        </div>
+      
+
       <b-col v-if="loader" class="load">
         <b-spinner
           style="width: 7rem; height: 7rem"
@@ -43,7 +53,7 @@
         ></b-spinner>
       </b-col>
       <b-col class="my-4 load" v-if="products.length < 1 && !loader">
-        <p>No Products in Market !!</p>
+        <p>{{ $t('businessowner.No_Products_in_Market') }} !!</p>
       </b-col>
       <div v-if="isShowOrders" class="col-12 orders">
         <Orders />
@@ -56,17 +66,19 @@
     <div class="archive">
       <Archive v-show="archive" ref="archive" />
     </div>
-    <div class="text-center">
-      <b-link @click="swap">Archive</b-link>
+
+    <div class="text-center" v-show="orders">
+      <b-link @click="swap">{{ $t('businessowner.Archive') }}</b-link>
+
     </div>
     <!-- ADDPRODUCT FORM -->
-    <b-modal hide-footer title="Add product" v-model="showModal">
+    <b-modal hide-footer :title="$t('businessowner.Add_product')" v-model="showModal">
       <b-form>
         <b-row>
           <b-col cols="12" md="6">
             <b-form-group
               id="input-group-1"
-              label="Product Name"
+              :label="$t('businessowner.Product_Name')"
               label-for="input-1"
               label-size="sm"
             >
@@ -81,7 +93,7 @@
 
             <b-form-group
               id="input-group-1"
-              label="Product Description"
+              :label="$t('businessowner.Product_Description')"
               label-for="input-1"
               label-size="sm"
             >
@@ -108,7 +120,7 @@
               <a href="#" data-toggle="modal" data-target="#createalbumModal">
                 <div class="drag-text">
                   <i class="fa fa-plus"></i>
-                  <h6>Product Image</h6>
+                  <h6>{{ $t('businessowner.Product_Image') }}</h6>
                 </div>
               </a>
               <div></div>
@@ -118,7 +130,7 @@
 
         <b-form-group
           id="input-group-1"
-          label="Product Price"
+          :label="$t('businessowner.Product_Price')"
           label-for="input-1"
           label-size="sm"
         >
@@ -137,12 +149,12 @@
           value="1"
           unchecked-value="0"
         >
-          This Product Is On Discount
+          {{ $t('businessowner.This_Product_Is_On_Discount') }}
         </b-form-checkbox>
 
         <b-form-group
           id="conditions"
-          label="Conditions"
+          :label="$t('businessowner.Conditions')"
           label-for="input-1"
           label-size="sm"
         >
@@ -161,7 +173,7 @@
             v-model="newProduct.is_service"
             unchecked-value="0"
           >
-            This Item Is A Service ?
+            {{ $t('businessowner.This_Item_Is_A_Service') }} ?
           </b-form-checkbox>
 
           <b-form-checkbox
@@ -169,22 +181,22 @@
             v-model="newProduct.in_stock"
             unchecked-value="0"
           >
-            In stock
+            {{ $t('businessowner.In_stock') }}
           </b-form-checkbox>
 
           <b-form-checkbox value="1" unchecked-value="0">
-            Published
+            {{ $t('businessowner.Published') }}
           </b-form-checkbox>
         </div>
         <!-- TAX and KG -->
         <b-form-group
           id="tax"
-          label="Tax"
+          :label="$t('businessowner.Tax')"
           label-for="input-tax"
           label-size="sm"
         >
           <b-form-input
-            v-model="newProduct.tax"
+            v-model="newProduct.tax_amount"
             class="mt-1"
             id="tax"
             type="number"
@@ -193,7 +205,7 @@
         </b-form-group>
         <b-form-group
           id="kg"
-          label="Kilogramme"
+          :label="$t('businessowner.Kilogramme')"
           label-for="input-kg"
           label-size="sm"
         >
@@ -207,13 +219,13 @@
         </b-form-group>
         <!-- CATEGORIES -->
         <div class="mt-2">
-          <label class="typo__label"> Category </label>
+          <label class="typo__label"> {{ $t('businessowner.Category') }} </label>
           <multi-select
             v-model="multiselecvalue"
             @input="subcategories"
-            tag-placeholder="Add this as new tag"
-            placeholder="Search or add a tag"
-            label="name"
+            :tag-placeholder="$t('businessowner.Add_this_as_new_tag')"
+            :placeholder="$t('businessowner.Search_or_add_a_tag')"
+            :label="$t('businessowner.name')"
             track-by="id"
             :options="BuCategories"
             :taggable="true"
@@ -222,12 +234,12 @@
         </div>
         <!-- SUB-CATEGORIES -->
         <div class="mt-2">
-          <label class="typo__label"> Sub Category</label>
+          <label class="typo__label"> {{ $t('businessowner.Sub_Category') }}</label>
           <multi-select
             v-model="filterselectvalue"
-            tag-placeholder="Add this as new tag"
-            placeholder="Search or add a tag"
-            label="name"
+            :tag-placeholder="$t('businessowner.Add_this_as_new_tag')"
+            :placeholder="$t('businessowner.Search_or_add_a_tag')"
+            :label="$t('businessowner.name')"
             track-by="subcategoryId"
             :options="scategories"
             :multiple="true"
@@ -235,17 +247,17 @@
             @tag="addFilter"
           ></multi-select>
         </div>
-        <label class="typo__label">Fiters </label>
+        <label class="typo__label">{{ $t('businessowner.Filters') }} </label>
         <div>
           <b-card no-body>
             <b-tabs pills card vertical>
               <b-tab
-                :title="filters.name"
+                :title="$t('businessowner.filters').name"
                 v-for="filters in filterselectvalue"
                 :key="filters.id"
                 active
                 ><b-card-text>
-                  <b-form-group label="Filters" class="colorblack">
+                  <b-form-group :label="$t('businessowner.Filters')" class="colorblack">
                     <b-form-checkbox-group
                       id=""
                       class="colorblack"
@@ -272,7 +284,7 @@
         <b-button @click="addProduct" class="mt-2 btn-block" variant="primary">
           <b-spinner small v-if="load" variant="white"></b-spinner>
 
-          Add</b-button
+          {{ $t('businessowner.Add') }}</b-button
         >
       </b-form>
     </b-modal>
@@ -296,9 +308,12 @@ export default {
   data() {
     return {
       options: ["list", "of", "options"],
-      orders: true,
+      orders: false,
       archive: false,
-      my_orders: "market",
+
+      market: true,
+      my_orders: "orders",
+
       showModal: false,
       load: false,
       loader: false,
@@ -317,7 +332,7 @@ export default {
         categoryId: "",
         subCategoryId: "",
         filterId: "",
-        tax: "",
+        tax_amount: "",
         kg: "",
       },
       products: [],
@@ -357,15 +372,21 @@ export default {
     swap() {
       console.log("orders: ", this.orders);
       console.log("archive: ", this.archive);
+      console.log("market: ", this.market);
       this.orders = !this.orders;
       this.archive = !this.archive;
+      this.market = false;
+      this.my_orders= "orders";
       console.log("-------------------");
       console.log("orders: ", this.orders);
       console.log("archive: ", this.archive);
+      console.log("archive: ", this.market);
     },
     displayOrders() {
       this.status = !this.status;
       this.orders = !this.orders;
+      this.market = !this.orders;
+      this.archive = false;
       if (this.orders == true) {
         this.my_orders = "market";
       } else {
@@ -433,6 +454,10 @@ export default {
     createProduct() {
       this.showModal = !this.showModal;
     },
+
+    categories(){
+        this.$store.dispatch("auth/categories");
+    },
     subcategories() {
       //get subcategories
       let formData2 = new FormData();
@@ -464,6 +489,9 @@ export default {
     //get categories for current business
     const businessId = this.$route.params.id;
     // this.$store.dispatch('market/getBuCategories', businessId);
+
+    this.categories();
+    this.subcategories();
   },
 };
 </script>
@@ -569,7 +597,11 @@ export default {
   height: 190px;
   cursor: pointer;
 }
-
+@media only screen and (min-width: 768px) {
+  .marg{
+   margin-left: 50px;
+  }
+}
 @media only screen and (max-width: 768px) {
   .products {
     position: relative;

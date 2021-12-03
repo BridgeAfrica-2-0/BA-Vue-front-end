@@ -17,116 +17,58 @@
         >
           <b-dropdown size="sm" variant="outline primary " class="primary">
             <template class="more" #button-content> </template>
-            <b-dropdown-item @click="toggle">Edit</b-dropdown-item>
-            <b-dropdown-item @click="onDelete">Delete</b-dropdown-item>
+            <b-dropdown-item> {{ $t('businessowner.Edit') }} </b-dropdown-item>
+            <b-dropdown-item>{{ $t('businessowner.Delete') }}</b-dropdown-item>
           </b-dropdown>
         </span>
 
-        <p class="username mb-0">
-          <router-link :to="{ name: 'Follower', params: { id: comment.id } }">
-            {{ comment.name }} <i>{{ comment.created_at | date }}</i>
-          </router-link>
-        </p>
+          <p class="username mb-0 "> <router-link :to="'profile/'+comment.id" > {{comment.name}}   </router-link> </p>
+          <read-more :more-str="$t('businessowner.read_more')" :text="comment.comment" link="#" :less-str="$t('businessowner.read_less')" :max-chars="15000" class="mb-1 text-left">
+          </read-more>
+        </div>
+        <b-icon :icon="icon" variant="primary" aria-hidden="true" @click="onLike" class="cursor"></b-icon>
+        {{ comment.comment_likes | nFormatter }}
+        <span @click="showReply" class="primary ml-2 reply"><b>{{ $t('businessowner.Reply') }}</b></span>
+        <div v-if="reply">
+          <b-row class="mt-2">
+            <b-col cols="1">
+              <b-avatar v-if="comment.user_type='user'" variant="info" :src="comment.picture" class="avat-comment"></b-avatar>     <b-avatar  v-else variant="info" square :src="comment.picture" class="avat-comment"></b-avatar>    
+            </b-col>
+            <b-col cols="11"
+              ><input
+                :placeholder="$t('businessowner.Post_a_Comment')"
+                class="comment"
+                type="text"
+                @keypress.enter="onReply"
+                v-model="text"
+              />
+              <b-spinner
+                style="color: rgb(231, 92, 24); position: absolute; right: 17px"
+                v-if="createPostRequestIsActive"
+              ></b-spinner>
+              <fas-icon
+                class="primary send-cmt"
+                :icon="['fas', 'paper-plane']"
+                @click="onReply"
+                v-if="text.trim().length > 2 && !createPostRequestIsActive"
+              />
+            </b-col>
+            <b-col cols="12" class="mt-4 ml-3 mr-3">
+              <Loader v-if="loadComment" />
+              <Reply v-for="(obj, index) in comments" :key="index" :item="obj" :uuid="uuid" type="reply" />
 
-        <read-more
-          more-str="read more"
-          :text="comment.comment"
-          link="#"
-          less-str="read less"
-          :max-chars="15000"
-          class="mb-1 text-left"
-        >
-        </read-more>
-      </div>
-
-      <div class="p-0 m-0 pr-3 inline-comment" v-else>
-        <input
-          placeholder="Edit a Comment"
-          class="comment"
-          type="text"
-          v-model="text"
-          @keypress.enter="onUpdate"
-          v-on:blur="toggle"
-        />
-        <b-spinner
-          style="color: rgb(231, 92, 24); position: absolute; right: 17px"
-          v-if="loading"
-        ></b-spinner>
-        <fas-icon
-          class="primary send-cmt"
-          :icon="['fas', 'paper-plane']"
-          @click="onUpdate"
-          v-if="text.trim().length >= 1 && !loading"
-        />
-      </div>
-
-      <b-icon
-        :icon="icon"
-        variant="primary"
-        aria-hidden="true"
-        @click="onLike"
-        class="cursor"
-      ></b-icon>
-      {{ comment.comment_likes | nFormatter }}
-      <span @click="showReply" class="primary ml-2 reply"><b>Reply</b></span>
-      <div v-if="reply">
-        <b-row class="mt-2">
-          <b-col cols="1">
-            <b-avatar
-              v-if="(comment.user_type = 'user')"
-              variant="info"
-              :src="comment.picture"
-              class="avat-comment"
-            ></b-avatar>
-            <b-avatar
-              v-else
-              variant="info"
-              square
-              :src="comment.picture"
-              class="avat-comment"
-            ></b-avatar>
-          </b-col>
-          <b-col cols="11"
-            ><input
-              placeholder="Post a Comment"
-              class="comment"
-              type="text"
-              @keypress.enter="onReply"
-              v-model="text"
-            />
-            <b-spinner
-              style="color: rgb(231, 92, 24); position: absolute; right: 17px"
-              v-if="loading"
-            ></b-spinner>
-            <fas-icon
-              class="primary send-cmt"
-              :icon="['fas', 'paper-plane']"
-              @click="onReply"
-              v-if="text.trim().length > 2 && !loading"
-            />
-          </b-col>
-          <b-col cols="12" class="mt-4 ml-3 mr-3">
-            <Loader v-if="loadComment" />
-            <Reply
-              v-for="(obj, index) in comments"
-              :key="index"
-              :item="obj"
-              :uuid="uuid"
-              type="reply"
-            />
-
-            <NoMoreData
-              v-if="comments.length && !loadComment"
-              :hasData="hasData"
-              @click.native="onShowReply"
-              :moreDataTitle="'Show more comments'"
-              :noDataTitle="'No comment'"
-            />
-          </b-col>
-        </b-row>
-      </div>
-    </b-col>
-  </b-row>
+              <NoMoreData
+                v-if="comments.length && !loadComment"
+                :hasData="hasData"
+                @click.native="onShowReply"
+                :moreDataTitle="$t('businessowner.Show_more_comments')"
+                :noDataTitle="$t('businessowner.No_comment')"
+              />
+            </b-col>
+          </b-row>
+        </div>
+      </b-col>
+    </b-row>
 </template>
 
 <script>

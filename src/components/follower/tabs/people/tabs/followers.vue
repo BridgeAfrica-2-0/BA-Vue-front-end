@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import CommunityMembers from "../../communityMember";
+	import CommunityMembers from "@/components/owner/tabs/communityMember";
 export default {
    data() {
     return {

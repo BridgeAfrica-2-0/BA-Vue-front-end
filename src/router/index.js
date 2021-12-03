@@ -46,6 +46,7 @@ import networks from "@/views/networks";
 import dashboard from "@/views/dashboard";
 
 import myorders from "@/views/myOders"
+import orders from "@/views/orders"
 import notFound from "@/components/404"
 
 import welcome from "@/views/welcome";
@@ -141,7 +142,15 @@ const routes = [
   {
     path: "/myorders",
     name: "orders",
-    component: myorders,
+    component: orders,
+    // meta: {
+    //   auth: true,
+    // },
+  },
+  {
+    path: "/orders",
+    name: "norders",
+    component: orders,
     // meta: {
     //   auth: true,
     // },

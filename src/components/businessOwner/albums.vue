@@ -6,7 +6,7 @@
           <div class="create" @click="createAlbum">
             <div class="text">
               <b-icon icon="plus"></b-icon>
-              <p>Create Album</p>
+              <p>{{ $t('businessowner.Create_Album') }}</p>
             </div>
           </div>
         </b-col>
@@ -32,11 +32,11 @@
             </template>
             <b-dropdown-item-button @click="openAlbum">
               <b-icon icon="pencil-fill" aria-hidden="true"></b-icon>
-              Edit
+              {{ $t('businessowner.Edit') }}
             </b-dropdown-item-button>
             <b-dropdown-item-button>
               <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
-              Delete
+              {{ $t('businessowner.Delete') }}
             </b-dropdown-item-button>
           </b-dropdown>
         </b-col>
@@ -44,9 +44,9 @@
     </b-row>
 
     <div v-if="pictureShow">
-      <b-button @click="back" variant="primary">Back</b-button>
+      <b-button @click="back" variant="primary">{{ $t('businessowner.Back') }}</b-button>
 
-      <div class="album-name">Album Name</div>
+      <div class="album-name">{{ $t('businessowner.Album_Name') }}</div>
       <b-row>
         <div class="albums">
           <b-modal hide-footer v-model="modalShow">
@@ -54,7 +54,7 @@
               fluid-grow
               src="https://picsum.photos/300/150/?image=41"
             ></b-img>
-            <h3>Picture Title</h3>
+            <h3>{{ $t('businessowner.Picture_Title') }}</h3>
           </b-modal>
         </div>
         <b-col md="4" class="mt-2">
@@ -62,7 +62,7 @@
             <input id="default-btn" type="file" @change="onFileChange" />
             <div class="text">
               <b-icon icon="plus"></b-icon>
-              <p>Add Photo</p>
+              <p>{{ $t('businessowner.Add_Photo') }}</p>
             </div>
           </div>
         </b-col>
@@ -80,10 +80,10 @@
       </b-row>
     </div>
 
-    <b-modal hide-footer title="Create album" v-model="showModal">
+    <b-modal hide-footer :title="$t('businessowner.Create_album')" v-model="showModal">
       <b-form>
-        <b-form-input v-model="text" placeholder="Album name"></b-form-input>
-        <b-button class="mt-2" variant="primary"> Create</b-button>
+        <b-form-input v-model="text" :placeholder="$t('businessowner.Album_name')"></b-form-input>
+        <b-button class="mt-2" variant="primary"> {{ $t('businessowner.Create') }}</b-button>
       </b-form>
     </b-modal>
   </div>

@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="row d-flex align-items-center justify-content-between">
-      <div class="col-2 col-md-8">
+    <div class="row ">
+      <div class="col-5 col-md-8">
         <p>
           <b-icon
             font-scale="1.8"
@@ -12,19 +12,26 @@
           <span class="font-weight-bold">{{ $t('businessowner.Market') }}</span>
         </p>
       </div>
-      <div class="col col-md text-center">
-        <b-button
-          class="pos"
-          variant="outline-primary"
-          @click="displayOrders"
-          >{{ my_orders }}</b-button
-        >
+
+       <div class="col-7 col-md ">
+         <div class="row marg">
+
+         
+          <b-button
+            class=" mx-1"
+            variant="outline-primary"
+            @click="displayOrders"
+            >{{ my_orders }}</b-button
+          >
+       
+              <!-- <div class="col col-md"> -->
+          <b-button variant="outline-primary" @click="createProduct"
+            >{{ $t('businessowner.Add_Product') }}</b-button
+          >
+         </div>
+
       </div>
-      <div class="col col-md">
-        <b-button variant="outline-primary" @click="createProduct"
-          >{{ $t('businessowner.Add_Product') }}</b-button
-        >
-      </div>
+        <!-- </div> -->
     </div>
     <div class="col-12">
       <hr class="h-divider" />
@@ -33,9 +40,12 @@
       <!-- MARKET HEADER BAR -->
 
       <!-- MARKET PRODUCT LIST -->
-      <div class="col-md-6" v-for="(product, index) in products" :key="index">
-        <Product v-show="!orders" :product="product" />
-      </div>
+          
+        <div class="col-md-6" v-for="(product, index) in products" :key="index">
+          <Product v-show="!orders && market" :product="product" />
+        </div>
+      
+
       <b-col v-if="loader" class="load">
         <b-spinner
           style="width: 7rem; height: 7rem"
@@ -56,8 +66,10 @@
     <div class="archive">
       <Archive v-show="archive" ref="archive" />
     </div>
-    <div class="text-center">
+
+    <div class="text-center" v-show="orders">
       <b-link @click="swap">{{ $t('businessowner.Archive') }}</b-link>
+
     </div>
     <!-- ADDPRODUCT FORM -->
     <b-modal hide-footer :title="$t('businessowner.Add_product')" v-model="showModal">
@@ -184,7 +196,7 @@
           label-size="sm"
         >
           <b-form-input
-            v-model="newProduct.tax"
+            v-model="newProduct.tax_amount"
             class="mt-1"
             id="tax"
             type="number"
@@ -296,9 +308,12 @@ export default {
   data() {
     return {
       options: ["list", "of", "options"],
-      orders: true,
+      orders: false,
       archive: false,
-      my_orders: this.$t('businessowner.market'),
+
+      market: true,
+      my_orders: "orders",
+
       showModal: false,
       load: false,
       loader: false,
@@ -317,7 +332,7 @@ export default {
         categoryId: "",
         subCategoryId: "",
         filterId: "",
-        tax: "",
+        tax_amount: "",
         kg: "",
       },
       products: [],
@@ -357,15 +372,21 @@ export default {
     swap() {
       console.log("orders: ", this.orders);
       console.log("archive: ", this.archive);
+      console.log("market: ", this.market);
       this.orders = !this.orders;
       this.archive = !this.archive;
+      this.market = false;
+      this.my_orders= "orders";
       console.log("-------------------");
       console.log("orders: ", this.orders);
       console.log("archive: ", this.archive);
+      console.log("archive: ", this.market);
     },
     displayOrders() {
       this.status = !this.status;
       this.orders = !this.orders;
+      this.market = !this.orders;
+      this.archive = false;
       if (this.orders == true) {
         this.my_orders = "market";
       } else {
@@ -433,6 +454,10 @@ export default {
     createProduct() {
       this.showModal = !this.showModal;
     },
+
+    categories(){
+        this.$store.dispatch("auth/categories");
+    },
     subcategories() {
       //get subcategories
       let formData2 = new FormData();
@@ -464,6 +489,9 @@ export default {
     //get categories for current business
     const businessId = this.$route.params.id;
     // this.$store.dispatch('market/getBuCategories', businessId);
+
+    this.categories();
+    this.subcategories();
   },
 };
 </script>
@@ -569,7 +597,11 @@ export default {
   height: 190px;
   cursor: pointer;
 }
-
+@media only screen and (min-width: 768px) {
+  .marg{
+   margin-left: 50px;
+  }
+}
 @media only screen and (max-width: 768px) {
   .products {
     position: relative;

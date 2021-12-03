@@ -142,18 +142,26 @@ export default {
     return {
       page: 1,
       businesses:[],
+    
       infiniteId: +new Date(),
       options: {
         rewind: true,
         autoplay: true,
         perPage: 1,
         pagination: false,
-
+         foll_id:null,
         type: "loop",
         perMove: 1
       }
     };
   },
+
+    mounted(){
+  
+   this.foll_id = this.$route.params.id ? this.$route.params.id :""  ;
+
+ },
+
 
   computed:{
    
@@ -219,18 +227,8 @@ export default {
 
        search(){
      
-       console.log('search started');
-       
-         if(this.type=="Follower"){ 
-         
-        this.$store.commit("profile/setBcommunityFollower",{ "business_followers": [ ], "total_business_follower": 0 }); 
-
-       }else{
-       
-        
-        this.$store.commit("profile/setBcommunityFollowing",{ "business_following": [ ], "total_business_following": 0 }); 
-       }
-
+      
+   this.businesses=[];
       this.page = 1;
       this.infiniteId += 1;
 
@@ -248,15 +246,13 @@ export default {
           infiniteHandler($state) { 
            
 
-      let url = null;
-
-         if(this.type=="Follower"){  
-          url="profile/business/follower/"
-         }else{
-          url="profile/business/following/";
-         }
+         let url =
+        this.type === 'Follower'
+          ? `profile/business/follower/`
+          : `profile/business/following/`;
+          
       axios
-        .get(url + this.page+"?keyword="+this.searchh )
+        .get(url + this.page+"?keyword="+this.searchh+"&id="+this.foll_id )
         .then(({ data }) => {
           console.log(data);
         

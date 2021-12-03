@@ -11,7 +11,7 @@
             />
           </div>
         </b-col>
-        <b-col cols="6" sm="8" md="7">
+        <b-col cols="6" sm="6" md="7">
           <p class="text">
             <strong class="title cursor-pointer" @click="productDetails">
               {{ product.name }} 
@@ -31,13 +31,13 @@
             <br />
           </p>
         </b-col>
-        <b-col cols="1" sm="1" md="1" class="">
+        <b-col cols="1" sm="2" md="1" class="marge">
           <div>
-                      <b-dropdown size="md"  variant="link" toggle-class="text-decoration-none mx-4" no-caret>
-                        <template #button-content><b-icon  @click="showEdit" icon="three-dots-vertical"></b-icon>
+                      <b-dropdown size="md"  variant="link" toggle-class="text-decoration-none " no-caret>
+                        <template #button-content><b-icon  icon="three-dots-vertical"></b-icon>
 
                         </template>
-                        <b-dropdown-item-button  v-b-modal.modal-1000>Edit</b-dropdown-item-button>
+                        <b-dropdown-item-button  @click="$bvModal.show(product.id)"  >Edit</b-dropdown-item-button>
                         <b-dropdown-item-button >Delete</b-dropdown-item-button>
                        
                       </b-dropdown>
@@ -177,7 +177,7 @@ export default {
   data() {
     return {
       viewProduct: false,
-      Edit : false
+      // Edit : false
     };
   },
   components: {
@@ -193,9 +193,7 @@ export default {
     productDetails() {
       this.viewProduct = true;
     },
-    showEdit(){
-        this.Edit = true;
-    },
+    
     closeDetailsProduct() {
       this.viewProduct = false;
     },
@@ -207,6 +205,7 @@ export default {
 </script>
 
 <style scoped>
+
 .discount {
   color: orange;
   margin-left: 60px;
@@ -266,6 +265,10 @@ h6 {
   .center-img {
     margin-right: -60px;
   }
+  .marge{
+  margin-right: 0px;
+      padding-right: 8px
+}
 }
 
 .buybtn {
@@ -302,6 +305,10 @@ h6 {
 }
 
 @media only screen and (max-width: 540px) {
+  .marge{
+      margin-left: -25px;
+      
+}
   .text {
     color: #000;
 

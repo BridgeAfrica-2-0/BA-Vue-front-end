@@ -33,7 +33,7 @@
                     icon="trash-fill"
                     aria-hidden="true"
                   ></b-icon>
-                  <span class="text-purple">Delete</span>
+                  <span class="text-purple">{{ $t('businessowner.Delete') }}</span>
                 </b-dropdown-item-button>
               </b-dropdown>
             </div>
@@ -52,7 +52,7 @@
             <b-icon variant="primary" icon="heart" class="mr-2"></b-icon
             ><span>{{ comment.likes }}</span>
           </div>
-          <b-button variant="link">Reply</b-button>
+          <b-button variant="link">{{ $t('businessowner.Reply') }}</b-button>
         </div>
       </div>
     </div>

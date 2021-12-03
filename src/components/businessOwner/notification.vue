@@ -103,7 +103,7 @@
         </b-col>
         <b-col v-if="!getNotificationsStore && !loader" class="load text-center">
           <b-row class="text-center">
-            <p>No notifications to show !!</p>
+            <p>{{ $t('businessowner.No_notifications_to_show') }} !!</p>
           </b-row>
         </b-col>
         <hr width="100%" />

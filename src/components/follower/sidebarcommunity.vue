@@ -23,7 +23,7 @@
                       {{ $t('profilefollower.Followers') }} <span class="spa-color">  {{ nFormatter(total.total_user_follower)}} </span>
                     </template>
 
-                    <div class="s-comcard"><People   type="Follower" /></div>
+                    <div class="s-comcard"><People from="Follower"  type="Follower" /></div>
                   </b-tab>
 
                   <b-tab>
@@ -31,7 +31,7 @@
                       {{ $t('profilefollower.Following') }} <span class="spa-color">  {{ nFormatter(total.total_user_following)}}  </span>
                     </template>
 
-                    <div class="s-comcard"><People  type="Following" /></div>
+                    <div class="s-comcard"><People  from="Follower"  type="Following" /></div>
                   </b-tab>
                 </b-tabs>
               </b-col>
@@ -51,7 +51,7 @@
                   {{ $t('profilefollower.Followers') }} <span class="spa-color">  {{ nFormatter(total.total_business_follower)}} </span>
                 </template>
 
-                <div class="s-comcard"><Business type="Follower" /></div>
+                <div class="s-comcard"><Business  from="Follower"  type="Follower" /></div>
               </b-tab>
 
               <b-tab>
@@ -59,7 +59,7 @@
                   {{ $t('profilefollower.Following') }} <span class="spa-color"> {{ nFormatter(total.total_business_following)}}</span>
                 </template>
 
-                <div class="s-comcard"><Business type="following" /></div>
+                <div class="s-comcard"><Business from="Follower"  type="following" /></div>
               </b-tab>
             </b-tabs>
           </div>
@@ -80,7 +80,7 @@
                   {{ $t('profilefollower.Followers') }} <span class="spa-color">  {{ nFormatter(total.total_network_follower)}} </span>
                 </template>
 
-                <div class="s-comcard"><Network type="Follower" /></div>
+                <div class="s-comcard"><Network from="Follower"  type="Follower" /></div>
               </b-tab>
 
               <b-tab>
@@ -88,7 +88,7 @@
                   {{ $t('profilefollower.Following') }} <span class="spa-color">  {{ nFormatter(total.total_network_following)}} </span>
                 </template>
 
-                <div class="s-comcard"><Network type="Following" /></div>
+                <div class="s-comcard"><Network  from="Follower"  type="Following" /></div>
               </b-tab>
             </b-tabs>
           </div>
@@ -103,9 +103,9 @@
 </template>
 
 <script>
-import Business from "@/components/follower/tabs/business";
-import People from "@/components/follower/tabs/people";
-import Network from "@/components/follower/tabs/network";
+import Business from "@/components/owner/tabs/business";
+import People from "@/components/owner/tabs/people";
+import Network from "@/components/owner/tabs/network";
 export default {
   name: "comunitiDashboard",
 

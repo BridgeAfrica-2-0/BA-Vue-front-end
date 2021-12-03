@@ -15,15 +15,15 @@
         <b-col cols="12" sm="12" md="8">
           <div>
             <h4 class="font-weight-bold">{{ product.name }}</h4>
-            <span class="text-success" v-if="product.in_stock">In Stock</span>
-            <span class="text-danger" v-else>Out of stock</span>
+            <span class="text-success" v-if="product.in_stock">{{ $t('businessowner.In_Stock') }}</span>
+            <span class="text-danger" v-else>{{ $t('businessowner.Out_of_stock') }}</span>
             <h4 class="font-weight-bold">
               {{ formatMoney(Number(product.price)) }}
             </h4>
           </div>
           <hr class="h-divider" />
           <div>
-            <h4>Product Desciption</h4>
+            <h4>{{ $t('businessowner.Product_Desciption') }}</h4>
             <p class="text-justify">
               {{ product.description }}
             </p>
@@ -34,14 +34,14 @@
             class="buttons my-3 d-flex justify-content-between align-items-center"
           >
             <b-button variant="primary" class="font-weight-light shadow-sm">
-              <span v-if="packageProduct === 'basic'"> Messages </span>
-              <span v-else-if="packageProduct === 'premium'">Buy Now</span>
+              <span v-if="packageProduct === 'basic'"> {{ $t('businessowner.Messages') }} </span>
+              <span v-else-if="packageProduct === 'premium'">{{ $t('businessowner.Buy_Now') }}</span>
             </b-button>
             <b-button
               variant="success"
               class="font-weight-light shadow-sm"
               @click="closeModal"
-              >Check On Website</b-button
+              >{{ $t('businessowner.Check_On_Website') }}</b-button
             >
           </div>
           <hr class="h-divider" />

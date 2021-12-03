@@ -11,15 +11,18 @@
             />
           </div>
         </b-col>
-        <b-col cols="7" sm="8" md="7">
+        <b-col cols="6" sm="8" md="7">
           <p class="text">
             <strong class="title cursor-pointer" @click="productDetails">
-              {{ product.name }}
-            </strong>
+              {{ product.name }} 
+            </strong> 
+            
+                  
+
             <br />
-            <strong> Description </strong> <br />
+            <strong> {{ $t('businessowner.Description') }}  </strong> <br />
             {{ product.description.substring(0, 30) }}
-            <b-link v-if="product.description.length >= 30"> see more </b-link>
+            <b-link v-if="product.description.length >= 30"> {{ $t('businessowner.see_more') }} </b-link>
             <br />
 
             <span class="price">
@@ -28,6 +31,18 @@
             <br />
           </p>
         </b-col>
+        <b-col cols="1" sm="1" md="1" class="">
+          <div>
+                      <b-dropdown size="md"  variant="link" toggle-class="text-decoration-none mx-4" no-caret>
+                        <template #button-content><b-icon  @click="showEdit" icon="three-dots-vertical"></b-icon>
+
+                        </template>
+                        <b-dropdown-item-button  v-b-modal.modal-1000>Edit</b-dropdown-item-button>
+                        <b-dropdown-item-button >Delete</b-dropdown-item-button>
+                       
+                      </b-dropdown>
+                    </div>
+        </b-col>
       </b-row>
 
       <div>
@@ -35,14 +50,19 @@
       </div>
     </div>
     <!-- EDIT PRODUCT MODAL -->
-
-    <b-modal hide-footer title="Edit product">
+    <!-- <b-modal :id="'modal-1000'+product.id" hide-footer title="Edit product"> -->
+       <editProduct
+        :showModal="Edit"
+       :product="product"
+        />
+   <!-- </b-modal> -->
+    <!-- <b-modal id="modal-1000" hide-footer title="Edit product">
       <b-form>
         <b-row>
           <b-col cols="12" md="6">
             <b-form-group
               id="input-group-1"
-              label="Product Name"
+              :label="$t('businessowner.Product_Name')"
               label-for="input-1"
               label-size="sm"
             >
@@ -56,7 +76,7 @@
 
             <b-form-group
               id="input-group-1"
-              label="Product Description"
+              :label="$t('businessowner.Product_Description')"
               label-for="input-1"
               label-size="sm"
             >
@@ -73,7 +93,7 @@
               <a href="#" data-toggle="modal" data-target="#createalbumModal">
                 <div class="drag-text">
                   <i class="fa fa-plus"></i>
-                  <h6>Product Image</h6>
+                  <h6>{{ $t('businessowner.Product_Image') }}</h6>
                 </div>
               </a>
               <div></div>
@@ -83,7 +103,7 @@
 
         <b-form-group
           id="input-group-1"
-          label="product Price"
+          :label="$t('businessowner.Product_Price')"
           label-for="input-1"
           label-size="sm"
         >
@@ -96,12 +116,12 @@
           value="accepted"
           unchecked-value="not_accepted"
         >
-          This Product Is On Discount
+          {{ $t('businessowner.This_Product_Is_On_Discount') }}
         </b-form-checkbox>
 
         <b-form-group
           id="conditions"
-          label="Conditions"
+          :label="$t('businessowner.Conditions')"
           label-for="input-1"
           label-size="sm"
         >
@@ -114,7 +134,7 @@
           value="accepted"
           unchecked-value="not_accepted"
         >
-          This Item Is A Service ?
+          {{ $t('businessowner.This_Item_Is_A_Service') }} ?
         </b-form-checkbox>
 
         <b-form-checkbox
@@ -123,7 +143,7 @@
           value="accepted"
           unchecked-value="not_accepted"
         >
-          In stock
+          {{ $t('businessowner.In_stock') }}
         </b-form-checkbox>
 
         <b-form-checkbox
@@ -132,12 +152,12 @@
           value="accepted"
           unchecked-value="not_accepted"
         >
-          Published
+          {{ $t('businessowner.Published') }}
         </b-form-checkbox>
 
-        <b-button class="mt-2 btn-block" variant="primary"> Add</b-button>
+        <b-button class="mt-2 btn-block" variant="primary"> {{ $t('businessowner.Add') }}</b-button>
       </b-form>
-    </b-modal>
+    </b-modal> -->
     <!-- PRODUCT DETAILS MODAL -->
     <ProductDetails
       @closemodal="closeDetailsProduct"
@@ -149,15 +169,20 @@
 
 <script>
 import ProductDetails from "./ProductDetails.vue";
+import editProduct from "./editProduct.vue";
 export default {
+
+  
   props: ["product"],
   data() {
     return {
       viewProduct: false,
+      Edit : false
     };
   },
   components: {
     ProductDetails,
+    editProduct
   },
   methods: {
     /**
@@ -167,6 +192,9 @@ export default {
      */
     productDetails() {
       this.viewProduct = true;
+    },
+    showEdit(){
+        this.Edit = true;
     },
     closeDetailsProduct() {
       this.viewProduct = false;

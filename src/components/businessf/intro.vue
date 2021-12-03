@@ -26,6 +26,9 @@
         <p>
           <b-icon icon="link" class="primary h_icon"></b-icon>www.business.com
         </p>
+
+        <p><b-icon icon="link" class="primary"></b-icon> {{ $t('businessf.www_business_com') }}</p>
+
         <p>
           <b-icon icon="people-fill" class="primary h_icon"></b-icon>
           {{ business_intro.community }}

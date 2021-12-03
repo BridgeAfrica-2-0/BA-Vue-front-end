@@ -6,9 +6,10 @@
     "Items": "Items",
     "Edit": "Edit",
     "Delete": "Delete",
-    "Add_Bussiness": "Add Business",
     "delete": "Delete",
     "Update": "Update",
+    "Upload_image": "Upload Image",
+    "Add_Bussiness": "Add Business",
     "Custom_Album_1": "Custom Album 1",
     "Edit_Name": "Edit Name",
     "Delete_Album": "Delete Album",
@@ -216,6 +217,8 @@
     "Add_Edit_Gender": "Add/Edit Gender",
     "Post_a_business_update": "Post a business update",
     "Change_Cover": "Change Cover",
+    "Remove_Cover": "Remove Cover",
+    "Remove_Profile": "Remove Profile",
     "View_As": "View As",
     "Upload_Cover_photo": "Upload Cover photo",
     "https_www_yourwebsite_com": "https://www.yourwebsite.com",
@@ -248,5 +251,7 @@
     "Unable_to_remove_your_cover": "Unable to remove your cover",
     "Cover_Updated": "Cover Updated",
     "Operation_successful": "Operation Successful",
-    "Can_not_delete_your_cover": "Can not delete your cover"
+    "Can_not_delete_your_cover": "Can not delete your cover",
+    "Add_Contacts": "Add Contacts",
+    "default_Phone": "Default Phone"
 }

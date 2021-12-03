@@ -6,7 +6,7 @@
           <b-container>
             <b-form-group
               label-cols-lg="3"
-              label="Business Name"
+              :label="$t('businessowner.Business_Name')"
               label-size="md"
               label-class="font-weight-bold pt-0 username"
               class="mb-0"
@@ -28,7 +28,7 @@
             <!-- {{ multiselecvalue }} -->
             <b-form-group
               label-cols-lg="3"
-              label="Category"
+              :label="$t('businessowner.Category')"
               label-size="md"
               label-class="font-weight-bold pt-0 username"
               class="mb-0"
@@ -36,9 +36,9 @@
               <multiselect
                 v-model="multiselecvalue"
                 @input="subcategories"
-                tag-placeholder="Add this as new tag"
-                placeholder="Search or add a tag"
-                label="name"
+                :tag-placeholder="$t('businessowner.Add_this_as_new_tag')"
+                :placeholder="$t('businessowner.Search_or_add_a_tag')"
+                :label="$t('businessowner.name')"
                 track-by="id"
                 :options="pcategories"
                 :multiple="true"
@@ -57,16 +57,16 @@
 
             <b-form-group
               label-cols-lg="3"
-              label="Sub Category"
+              :label="$t('businessowner.Sub_Category')"
               label-size="md"
               label-class="font-weight-bold pt-0 username"
               class="mb-0"
             >
               <multiselect
                 v-model="filterselectvalue"
-                tag-placeholder="Add this as new tag"
-                placeholder="Search or add a tag"
-                label="name"
+                :tag-placeholder="$t('businessowner.Add_this_as_new_tag')"
+                :placeholder="$t('businessowner.Search_or_add_a_tag')"
+                :label="$t('businessowner.name')"
                 track-by="subcategory_id"
                 :options="scategories"
                 :multiple="true"
@@ -77,7 +77,7 @@
           </b-container>
         </div>
 
-        <label class="typo__label">Fiters</label>
+        <label class="typo__label">{{ $t('businessowner.Filters') }}</label>
         <div>
           <b-card no-body>
             <b-tabs pills card vertical>
@@ -90,7 +90,7 @@
                   <!-- {{ filters.filters }}
                   <br /><br />
                   {{ select_filterss }} -->
-                  <b-form-group label="Filters" class="colorblack">
+                  <b-form-group :label="$t('businessowner.Filters')" class="colorblack">
                     <b-form-checkbox-group
                       id=""
                       class="colorblack"
@@ -118,7 +118,7 @@
             <!-- {{ businessInfo.keywords }} -->
             <b-form-group
               label-cols-lg="3"
-              label="Search Keywords"
+              :label="$t('businessowner.Search_Keywords')"
               label-size="md"
               label-class="font-weight-bold pt-0 username"
               class="mb-0"
@@ -130,7 +130,7 @@
                 tag-variant="primary"
                 :limit="limit"
                 :tag-validator="validator"
-                placeholder="Enter new keywords separated by space, comma or semicolon"
+                :placeholder="$t('businessowner.Enter_new_keywords_separated_by_space_comma_or_semicolon')"
                 no-add-on-enter
               ></b-form-tags>
             </b-form-group>
@@ -141,7 +141,7 @@
           <b-container>
             <b-form-group
               label-cols-lg="3"
-              label="Phone 1"
+              :label="$t('businessowner.Phone1')"
               label-size="md"
               label-class="font-weight-bold pt-0 username"
               class="mb-0"
@@ -154,7 +154,7 @@
           <b-container>
             <b-form-group
               label-cols-lg="3"
-              label="Phone 2"
+              :label="$t('businessowner.Phone2')"
               label-size="md"
               label-class="font-weight-bold pt-0 username"
               class="mb-0"
@@ -185,7 +185,7 @@
           <b-container>
             <b-form-group
               label-cols-lg="3"
-              label="Time zone"
+              :label="$t('businessowner.Time_zone')"
               label-size="md"
               label-class="font-weight-bold pt-0 username"
               class="mb-0"
@@ -207,7 +207,7 @@
           <b-container>
             <b-form-group
               label-cols-lg="3"
-              label="About"
+              :label="$t('businessowner.About')"
               label-size="md"
               label-class="font-weight-bold pt-0 username"
               class="mb-0"
@@ -215,7 +215,7 @@
               <b-form-textarea
                 id="about"
                 v-model="businessInfo.about_business"
-                placeholder="Enter something..."
+                :placeholder="$t('businessowner.Enter_something')"
                 rows="3"
                 max-rows="6"
               ></b-form-textarea>
@@ -227,7 +227,7 @@
           <b-container>
             <b-form-group
               label-cols-lg="3"
-              label="Website"
+              :label="$t('businessowner.Website')"
               label-size="md"
               label-class="font-weight-bold pt-0 username"
               class="mb-0"
@@ -248,7 +248,7 @@
                 unchecked-value="website A/V"
                 v-model="businessForm_website"
               >
-                This Business does not have a Website
+                {{ $t('businessowner.This_Business_does_not_have_a_Website') }}
               </b-form-checkbox>
             </b-form-group>
           </b-container>
@@ -258,7 +258,7 @@
           <b-container>
             <b-form-group
               label-cols-lg="3"
-              label="Email"
+              :label="$t('businessowner.Email')"
               label-size="md"
               label-class="font-weight-bold pt-0 username"
               class="mb-0"
@@ -278,7 +278,7 @@
                 unchecked-value="email A/V"
                 v-model="businessForm_email"
               >
-                This Business does not have a Email
+                {{ $t('businessowner.This_Business_does_not_have_a_Email') }}
               </b-form-checkbox>
             </b-form-group>
           </b-container>
@@ -291,7 +291,7 @@
           <b-container>
             <b-form-group
               label-cols-lg="3"
-              label="Country"
+              :label="$t('businessowner.Country')"
               label-size="md"
               label-class="font-weight-bold pt-0 username"
               class="mb-0"
@@ -299,8 +299,8 @@
               <multiselect
                 v-model="country"
                 @input="Region"
-                placeholder="Search "
-                label="name"
+                :placeholder="$t('businessowner.Search')"
+                :label="$t('businessowner.name')"
                 track-by="id"
                 :options="countries"
                 :multiple="true"
@@ -317,7 +317,7 @@
           <b-container>
             <b-form-group
               label-cols-lg="3"
-              label="Region"
+              :label="$t('businessowner.Region')"
               label-size="md"
               label-class="font-weight-bold pt-0 username"
               class="mb-0"
@@ -325,8 +325,8 @@
               <multiselect
                 v-model="region"
                 @input="Division"
-                placeholder="Search"
-                label="name"
+                :placeholder="$t('businessowner.Search')"
+                :label="$t('businessowner.name')"
                 track-by="id"
                 :options="regions"
                 :multiple="true"
@@ -342,7 +342,7 @@
           <b-container>
             <b-form-group
               label-cols-lg="3"
-              label="Division"
+              :label="$t('businessowner.Division')"
               label-size="md"
               label-class="font-weight-bold pt-0 username"
               class="mb-0"
@@ -350,8 +350,8 @@
               <multiselect
                 v-model="division"
                 @input="Municipality"
-                placeholder="Search"
-                label="name"
+                :placeholder="$t('businessowner.Search')"
+                :label="$t('businessowner.name')"
                 track-by="id"
                 :options="divisions"
                 :multiple="true"
@@ -367,7 +367,7 @@
           <b-container>
             <b-form-group
               label-cols-lg="3"
-              label="Municipality"
+              :label="$t('businessowner.Municipality')"
               label-size="md"
               label-class="font-weight-bold pt-0 username"
               class="mb-0"
@@ -375,8 +375,8 @@
               <multiselect
                 v-model="municipality"
                 @input="Locality"
-                placeholder="Search"
-                label="name"
+                :placeholder="$t('businessowner.Search')"
+                :label="$t('businessowner.name')"
                 track-by="id"
                 :options="municipalities"
                 :multiple="true"
@@ -392,15 +392,15 @@
           <b-container>
             <b-form-group
               label-cols-lg="3"
-              label="Neighbourhood"
+              :label="$t('businessowner.Neighbourhood')"
               label-size="md"
               label-class="font-weight-bold pt-0 username"
               class="mb-0"
             >
               <multiselect
                 v-model="locality"
-                placeholder="Search"
-                label="name"
+                :placeholder="$t('businessowner.Search')"
+                :label="$t('businessowner.name')"
                 track-by="id"
                 :options="localities"
                 :multiple="true"
@@ -413,7 +413,7 @@
           <b-container>
             <b-form-group
               label-cols-lg="3"
-              label="Three Location Description"
+              :label="$t('businessowner.Three_Location_Description')"
               label-size="md"
               label-class="font-weight-bold pt-0 username"
               class="mb-0"
@@ -422,7 +422,7 @@
                 id="bname"
                 name="locationdesc"
                 v-model="businessInfo.location_description"
-                placeholder="Enter something..."
+                :placeholder="$t('businessowner.Enter_something')"
                 rows="3"
                 max-rows="6"
               ></b-form-textarea>
@@ -434,7 +434,7 @@
           <b-container>
             <b-form-group
               label-cols-lg="3"
-              label="Address"
+              :label="$t('businessowner.Address')"
               label-size="md"
               label-class="font-weight-bold pt-0 username"
               class="mb-0"
@@ -446,27 +446,27 @@
                 v-model="Aaddress"
                 value="address A/V"
               >
-                This Business has an address</b-form-checkbox
+                {{ $t('businessowner.This_Business_has_an_address') }}</b-form-checkbox
               >
 
               <b-container v-if="Aaddress">
                 <b-row class="text">
                   <b-col>
-                    <p>Street Address</p>
+                    <p>{{ $t('businessowner.Street_Address') }}</p>
                     <b-form-input
                       name=""
                       v-model="businessInfo.Street"
                     ></b-form-input>
                   </b-col>
                   <b-col>
-                    <p>City</p>
+                    <p>{{ $t('businessowner.City') }}</p>
                     <b-form-input
                       name=""
                       v-model="businessInfo.city"
                     ></b-form-input
                   ></b-col>
                   <b-col>
-                    <p>Postal Code</p>
+                    <p>{{ $t('businessowner.Postal_Code') }}</p>
                     <b-form-input
                       name=""
                       v-model="businessInfo.PostalCode"
@@ -491,7 +491,7 @@
           <b-container>
             <b-form-group
               label-cols-lg="3"
-              label="Business Hours"
+              :label="$t('businessowner.Business_Hours')"
               label-size="md"
               label-class="font-weight-bold pt-0 username"
               class="mb-0"
@@ -504,7 +504,7 @@
                   value="1"
                   @change="setOpenHours('null', 'null', 'null')"
                 >
-                  {{ openHour ? "Always Open" : "Open for selected hours" }}
+                  {{ openHour ? "Always Open" : $t('businessowner.Open_for_selected_hours') }}
                 </b-form-checkbox>
                 <br />
 
@@ -570,8 +570,9 @@
             variant="primary"
             class="a-button-l"
             @click="updateInfo(businessInfo)"
-            ><b-spinner v-if="Lspinner" small type="grow"></b-spinner>Save
-            Changes</b-button
+            ><b-spinner v-if="Lspinner" small type="grow"></b-spinner>
+            {{ $t('businessowner.Save_Changes') }}
+            </b-button
           >
           <br />
           <br />
@@ -1195,7 +1196,7 @@ export default {
           this.Lspinner = false;
           this.flashMessage.show({
             status: "success",
-            message: "Changes Made Successfuly",
+            message: this.$t('businessowner.Changes_Made_Successfuly'),
           });
           this.loading = false
         })
@@ -1205,7 +1206,7 @@ export default {
           this.loading = false
           this.flashMessage.show({
             status: "error",
-            message: "Unable To Make Changes",
+            message: this.$t('businessowner.Unable_To_Make_Changes'),
           });
           this.loading = false
         });

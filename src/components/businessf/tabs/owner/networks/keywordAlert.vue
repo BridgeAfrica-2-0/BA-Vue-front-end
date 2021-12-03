@@ -209,7 +209,7 @@ export default {
 
   mounted() {
     this.$store
-      .dispatch("keywordOperationOnNetwork/DbListKeyWord", 1)
+      .dispatch("keywordOperationOnNetwork/DbListKeyWord", this.$route.params.id)
       .then(() => {
         console.log("cool ");
 
@@ -224,7 +224,7 @@ export default {
       });
 
     this.$store
-      .dispatch("keywordOperationOnNetwork/listPost", "1/1")
+      .dispatch("keywordOperationOnNetwork/listPost", this.$route.params.id)
       .then(() => {
         console.log("good");
 

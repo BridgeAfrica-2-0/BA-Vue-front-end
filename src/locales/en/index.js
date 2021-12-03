@@ -4,7 +4,7 @@ import home from './home.json'
 import businessf from './businessf.json'
 import search from './search.json'
 import network from './network.json'
-
+import businessowner from './businessowner.json'
 import verification from './verification.json'
 import passrecover from './passrecover.json'
 import welcome from './welcome.json'
@@ -15,7 +15,7 @@ import myOrders from './myOrders.json'
 
 import memnetwork from './memnetwork.json'
 
-import profilefollower from './network.json'
+import profilefollower from './profilefollower.json'
 import about from './about.json'
 
 
@@ -28,10 +28,11 @@ export const en = {
     auth: auth,
     home: home,
     businessf: businessf,
+    businessowner: businessowner,
     search: search,
     network: network,
     passrecover: passrecover,
-     welcome: welcome,
+    welcome: welcome,
     dashboard: dashboard,
     memnetwork: memnetwork,
     profilefollower: profilefollower,

@@ -6,12 +6,12 @@
         <span class="float-right">
           <b-dropdown size="sm" variant="outline " class="primary">
             <template class="more" #button-content> </template>
-            <b-dropdown-item> Edit </b-dropdown-item>
-            <b-dropdown-item>Delete</b-dropdown-item>
+            <b-dropdown-item> {{ $t('businessowner.Edit') }} </b-dropdown-item>
+            <b-dropdown-item>{{ $t('businessowner.Delete') }}</b-dropdown-item>
           </b-dropdown>
         </span>
         <p class="msg text">
-          <read-more more-str="read more" :text="item.comment" link="#" less-str="read less" :max-chars="15000">
+          <read-more :more-str="$t('businessowner.read_more')" :text="item.comment" link="#" :less-str="$t('businessowner.read_less')" :max-chars="15000">
           </read-more>
         </p>
       </b-col>

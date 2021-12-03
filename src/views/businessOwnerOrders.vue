@@ -1,7 +1,7 @@
 <template>
 
   <div class="container">
-    <FlashMessage />
+    <!-- <FlashMessage /> -->
     <hr />    
     <!-- partie mobile--------------------------------------------------------------------- 
     
@@ -494,7 +494,7 @@
           <div class="show row">
             <div class="col-3">{{ $t('businessowner.Show')}}:</div>
             <div class="col">
-              <b-form-select v-model="selected" :options="options"></b-form-select>
+              <b-form-select v-model="selected" :options="options" @change="getOrder(selected)"></b-form-select>
             </div>
           </div>
           <div v-for="item in getAll" :key="item.oderId">
@@ -518,7 +518,9 @@
               <span class="gras" >{{ $t('businessowner.Order') }}</span>
               <span class="text-success">#{{ item.oderId }}</span> <br />
 
-              <span class="flou">{{  }}{{ moment(item.dateCreated).format('DD/MM/YYYY HH:mm') }}</span>
+
+              <span class="flou">{{ moment(item.dateCreated).format('DD/MM/YYYY HH:mm') }}</span>
+
               <hr />
             </div>
 
@@ -611,7 +613,9 @@
               </div>
               <span class="gras">{{ $t('businessowner.Order')}}</span>
               <span class="text-success"># {{ item.oderId }}</span> <br />
-              <span class="flou">{{  }} {{ moment(item.dateCreated).format('DD/MM/YYYY HH:mm') }}</span>
+
+              <span class="flou"> {{ moment(item.dateCreated).format('DD/MM/YYYY HH:mm') }}</span>
+
               <hr />
             </div>
 
@@ -701,7 +705,9 @@
               </div>
               <span class="gras">{{ $t('businessowner.Order')}}</span>
               <span class="text-success">#{{ item.oderId }}</span> <br />
-              <span class="flou">{{  }}, {{ moment(item.dateCreated).format('DD/MM/YYYY HH:mm') }}</span>
+
+              <span class="flou">, {{ moment(item.dateCreated).format('DD/MM/YYYY HH:mm') }}</span>
+
               <hr />
             </div>
 
@@ -792,7 +798,9 @@
               </div>
               <span class="gras">{{ $t('businessowner.Order')}}</span>
               <span class="text-success"># {{ item.oderId }}</span> <br />
-              <span class="flou">{{  }}, {{ moment(item.dateCreated).format('DD/MM/YYYY HH:mm') }}</span>
+
+              <span class="flou">, {{ moment(item.dateCreated).format('DD/MM/YYYY HH:mm') }}</span>
+
               <hr />
             </div>
 
@@ -878,8 +886,8 @@ export default {
       
       options: [
         { value: null, text: 'Please select an option' },
-        { value: 'a', text: 'last 5 days' },
-        { value: 'b', text: 'last 10 days' },
+        { value: '5', text: 'last 5 days' },
+        { value: '10', text: 'last 10 days' },
       ],
       etat1: ['in process', 'complete', 'cancel']
       
@@ -892,19 +900,11 @@ export default {
 
   mounted() {
     this.url = this.$route.params.id;
-   let url =  window.location.href.split("/");
-   let data = url[window.location.href.split("/").length - 1];
-   console.log(data);
-   this.$store
-     .dispatch('orderBusiness/getOrder', data)
-     .then(() => {
-       console.log('hey yeah orders');
-     
-       this.rows = this.limitall
-     })
-     .catch((err) => {
-       console.log({ err: err });
-     });
+  //  let url =  window.location.href.split("/");
+  //  let data = url[window.location.href.split("/").length - 1];
+  //  console.log(data);
+
+   this.getOrder();
 
    
  },
@@ -965,7 +965,27 @@ export default {
     },
 
 
+  getOrder(param){ console.log(param)
+    let data = this.$route.params.id;
+    let url = '';
+    if(!param){
+      url =`/order/getOrderBusiness/${data}/` ;
 
+    }else {
+      url = "order/filtreOrderBusiness/1/"+param+"/"
+    } console.log("---",url);
+     this.$store
+     .dispatch('orderBusiness/getOrder', url)
+     .then(() => {
+       console.log('hey yeah orders');
+     
+       this.rows = this.limitall
+     })
+     .catch((err) => {
+       console.log({ err: err });
+     });
+
+  },
 
     updateStatus(order_id, status) {
       console.log("updateStatus")

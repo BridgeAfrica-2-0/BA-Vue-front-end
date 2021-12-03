@@ -65,7 +65,7 @@
       </p>
 
       <p class="fs-12" v-if="proccesEdit">
-        Press [Escape] to <a href="#" @click.prevent="toggle">cancel</a>
+        <a href="#" @click.prevent="toggle">Cancel</a>
       </p>
 
       <!-- End Edit message -->
@@ -175,12 +175,7 @@ export default {
 
   filters: {
     date,
-    nFormatter: function (value) {
-      // return (this.proccesEdit ? (this.isYourComment ? true : false) : false)
-      //   ? ""
-      //   : formatNumber(value);
-      return formatNumber(value);
-    },
+    nFormatter: formatNumber,
   },
 
   computed: {
@@ -197,10 +192,18 @@ export default {
   },
   methods: {
     onProcess() {
+      if (!this.updateCommentText.trim().length) {
+        this.flashMessage.show({
+          status: "error",
+          blockClass: "custom-block-class",
+          message: "Try to write something",
+        });
+        return false;
+      }
       this.replyLoading = true;
       this.$emit("update-comment", this.updateCommentText);
 
-      this.toggle()
+      this.toggle();
       this.replyLoading = false;
     },
 
@@ -211,11 +214,14 @@ export default {
     },
 
     toggle() {
-      if (!this.proccesEdit) this.updateCommentText = "";
+      const status = !this.proccesEdit;
+
+      if (!status) this.updateCommentText = "";
       else this.updateCommentText = this.comment.comment;
 
-      this.proccesEdit = !this.proccesEdit;
+      this.proccesEdit = status;
     },
+
     showReply() {
       this.reply = !this.reply;
 

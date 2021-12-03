@@ -184,7 +184,7 @@
 
     <Comment
       v-for="comment in comments"
-      :key="comment.id"
+      :key="comment.updated_at"
       :item="comment"
       :uuid="post.post_id ? post.post_id : post.id"
       :onDelete="() => onDelete(comment.id)"
@@ -211,7 +211,6 @@ import Comment from "./comment";
 import light from "../lightbox";
 
 import { ShareButton } from "@/components/shareButton";
-
 import { isYourOwnPostMixins } from "@/mixins";
 
 export default {
@@ -304,7 +303,7 @@ export default {
         });
       } else {
         this.flashMessage.show({
-          status: "success",
+          status: "error",
           blockClass: "custom-block-class",
           message: "Something wrong happen. Try again",
         });
@@ -316,8 +315,9 @@ export default {
 
       if (request.success) {
         this.comments = this.comments.map((e) =>
-          e.id == uuid ? request.data : e
+          e.id == uuid ? { ...request.data } : { ...e }
         );
+
         this.flashMessage.show({
           status: "success",
           blockClass: "custom-block-class",
@@ -325,7 +325,7 @@ export default {
         });
       } else {
         this.flashMessage.show({
-          status: "success",
+          status: "error",
           blockClass: "custom-block-class",
           message: request.data,
         });

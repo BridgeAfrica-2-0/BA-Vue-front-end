@@ -90,6 +90,12 @@ const routes = [
 
   },
   {
+    path: "/cart",
+    name: "cart",
+    component: cart,
+
+  },
+  {
     path: '/about',
     name: 'about',
     component: about,
@@ -160,12 +166,6 @@ const routes = [
     component: payment
   },
 
-
-  // {
-  //   path: "/govx",
-  //   name: "govx",
-  //   component: govx,
-  // },
 
 
   {
@@ -304,31 +304,8 @@ const routes = [
     name: "BusinessVisitor",
     component: businessVisitor,
   },
-  {
-    path: "/services/create",
-    name: "Create",
-    component: createService,
-    beforeEnter: (to, from, next) => {
-      if (store.state.login) {
-        next();
-      } else {
-        next({ name: "Login" });
-      }
-    },
-  },
-  {
-    path: "/services/modify/:id",
-    name: "Modify",
-    component: Modifier,
-    beforeEnter: (to, from, next) => {
-      console.log("dedans");
-      if (store.state.login && store.state.isToi) {
-        next();
-      } else {
-        next({ name: "Login" });
-      }
-    },
-  },
+  
+  
 
   {
     path: "/profilevisitor",
@@ -388,7 +365,10 @@ const routes = [
     } else {
       next({ name: "Login" });
     }
+  }
+},
 
+    
   {
     path: "/memberNetwork/:id?",
     name: "memberNetwork",

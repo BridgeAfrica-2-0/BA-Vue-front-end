@@ -126,7 +126,10 @@
           <!--  :src="$store.getters.getProfilePicture"  -->
         </b-col>
         <b-col class="mt-1">
-          <span class="mr-3 cursor" @click="onLike"
+          <span
+            class="mr-3 cursor"
+            @click="onLike"
+            v-if="!isMemberNetworkFollower"
             ><b-icon :icon="icon" variant="primary" aria-hidden="true"></b-icon>
             {{ item.likes_count | nFormatter }}
           </span>
@@ -138,7 +141,11 @@
             ></b-icon>
             {{ item.comment_count | nFormatter }}
           </span>
-          <ShareButton :post="item" :type="'profile'" v-if="canBeDelete" />
+          <ShareButton
+            :post="item"
+            :type="'profile'"
+            v-if="!isMemberNetworkFollower || canBeDelete"
+          />
         </b-col>
       </b-row>
     </div>
@@ -146,7 +153,9 @@
     <div
       class="mt-2 d-inline-flex w-100"
       v-if="
-        (profile.id == item.post_id ? item.post_id : item.id) && canBeDelete
+        !isMemberNetworkFollower
+          ? (profile.id == item.post_id ? item.post_id : item.id) && canBeDelete
+          : false
       "
     >
       <div class="m-md-0 p-md-0">
@@ -272,6 +281,9 @@ export default {
   computed: {
     icon() {
       return this.post.is_liked ? "suit-heart-fill" : "suit-heart";
+    },
+    isMemberNetworkFollower() {
+      return "memberNetworkFollower" == this.$route.name ? true : false;
     },
   },
 

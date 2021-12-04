@@ -23,7 +23,7 @@
             </b-dropdown>
           </span>
 
-          <p class="username mb-0" v-if="!proccesEdit">
+          <p class="username mb-0 b" v-if="!proccesEdit">
             <router-link
               :to="{ name: 'Follower', params: { id: comment.user_id } }"
             >
@@ -70,18 +70,6 @@
           <a href="#" @click.prevent="toggle">Cancel</a>
         </p>
 
-        <!-- End Edit message -->
-
-        <span v-if="!proccesEdit">
-          <b-icon
-            :icon="icon"
-            variant="primary"
-            aria-hidden="true"
-            @click="onLike"
-            class="cursor"
-          ></b-icon>
-          {{ item.comment_likes | nFormatter }}
-        </span>
 
         <span v-if="!proccesEdit" @click="showReply" class="ml-2 reply">
           <i class="fs-12">{{ item.updated_at | date }}</i>

@@ -173,6 +173,8 @@ export const commentMixinsBuisness = {
               ? this.comment.comment_likes - 1
               : 0,
         });
+
+        console.log(this.comment)
     },
 
     onShowReply: async function () {

@@ -1,5 +1,6 @@
 .<template>
   <div id="app" class="" ref="formContainer">
+    <FlashMessage />
     <transition
       name="fade"
       mode="out-in"

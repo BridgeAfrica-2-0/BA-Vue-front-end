@@ -4,9 +4,9 @@
       <b-col :class="`${proccesEdit ? 'd-flex' : ''}`">
         <b-avatar
           variant="info"
-          :src="item.picture"
+          :src="comment.picture"
           :class="`${
-            'user' == item.user_type ? 'rounded-circle' : 'square'
+            'user' == comment.user_type ? 'rounded-circle' : 'square'
           } avat-comment b-r`"
         ></b-avatar>
 
@@ -32,7 +32,7 @@
           </p>
           <read-more
             more-str="read more"
-            :text="item.comment"
+            :text="comment.comment"
             link="#"
             less-str="read less"
             :max-chars="15000"
@@ -43,11 +43,11 @@
         <!-- Edit message -->
         <p
           class="p-0 m-0 pl-3 msg text inline-comment"
-          style="background: transparent; border: 1px solid transparent"
+          style="background: transparent; border: 1px solid transparent; width:100%"
           v-if="proccesEdit"
         >
           <input
-            placeholder="Edit a Comment"
+            placeholder="Edit a Reply Comment"
             class="comment"
             type="text"
             style="background: transparent"
@@ -69,10 +69,8 @@
         <p class="fs-12" v-if="proccesEdit">
           <a href="#" @click.prevent="toggle">Cancel</a>
         </p>
-
-
-        <span v-if="!proccesEdit" @click="showReply" class="ml-2 reply">
-          <i class="fs-12">{{ item.updated_at | date }}</i>
+        <span v-if="!proccesEdit" class="ml-2 reply">
+          <i class="fs-12">{{ comment.updated_at | date }}</i>
         </span>
       </b-col>
     </b-row>
@@ -80,11 +78,11 @@
 </template>
 
 <script>
-import { commentMixinsBuisness, NoMoreDataForComment } from "@/mixins";
+import { commentMixinsBuisness } from "@/mixins";
 import { date, formatNumber } from "@/helpers";
 
 export default {
-  mixins: [commentMixinsBuisness, NoMoreDataForComment],
+  mixins: [commentMixinsBuisness],
   data() {
     return {
       proccesEdit: false,
@@ -117,7 +115,7 @@ export default {
         return false;
       }
       this.replyLoading = true;
-      this.$emit("update-comment", this.updateCommentText);
+      this.$emit("update-reply-comment", this.updateCommentText);
 
       this.toggle();
       this.replyLoading = false;
@@ -143,6 +141,10 @@ export default {
   },
 
   props: {
+    onDelete:{
+      type:Function,
+      required:true
+    },
     item: {
       type: Object,
       required: true,

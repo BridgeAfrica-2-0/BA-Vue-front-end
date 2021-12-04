@@ -128,12 +128,12 @@
           </b-col>
           <b-col cols="12" class="mt-4 ml-3 mr-3">
             <Reply
-              v-for="(obj, index) in comments"
-              :key="index"
+              v-for="obj in comments"
+              :key="obj.updated_at"
               :item="obj"
               :uuid="uuid"
-              :onDelete="onDeleteReply"
-              @update-comment="(text) => onUpdateReply({ uuid: comment.id, text })"
+              :onDelete="() => onDeleteReply(obj.id)"
+              @update-reply-comment="(text) => onUpdate({ uuid: obj.id, text })"
               type="reply"
             />
 
@@ -197,7 +197,7 @@ export default {
       return this.isYourComment ? true : false;
     },
   },
-  
+
   methods: {
     onDeleteReply: async function (uuid) {
       const request = await this.$repository.post.delete(uuid);
@@ -289,6 +289,40 @@ export default {
       this.reply = !this.reply;
 
       if (this.reply) this.onShowReply();
+    },
+
+    onUpdate: async function ({ uuid, text }) {
+      let data = { comment: text };
+
+      if (
+        [
+          "NetworkEditors",
+          "networks",
+          "Membar Network Follower",
+          "memberNetwork",
+        ].includes(this.$route.name)
+      )
+        data = Object.assign(data, { networkId: this.profile.id });
+
+      const request = await this.$repository.post.update({ uuid, data });
+      console.log(request);
+      if (request.success) {
+        this.comments = this.comments.map((e) =>
+          e.id == uuid ? { ...request.data } : { ...e }
+        );
+
+        this.flashMessage.show({
+          status: "success",
+          blockClass: "custom-block-class",
+          message: "Comment Updated",
+        });
+      } else {
+        this.flashMessage.show({
+          status: "error",
+          blockClass: "custom-block-class",
+          message: request.data,
+        });
+      }
     },
   },
 };

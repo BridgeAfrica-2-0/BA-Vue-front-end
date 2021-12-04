@@ -257,6 +257,7 @@
       <b-dropdown-item
         class="d-flex py-2 cursor-pointer"
         :id="`sharing-via-${uuid}`"
+        
         role="button"
         data-original-title=""
         ref="button"
@@ -285,6 +286,7 @@
               cursor-pointer
             "
           >
+           
             <div class="d-flex flex-column ml-3">
               <Social
                 :network="'Email'"
@@ -305,6 +307,7 @@
               cursor-pointer
             "
           >
+           
             <div class="d-flex flex-column ml-3">
               <Social
                 :network="'facebook'"
@@ -325,6 +328,7 @@
               cursor-pointer
             "
           >
+           
             <div class="d-flex flex-column ml-3">
               <Social
                 :network="'Twitter'"
@@ -345,6 +349,7 @@
               cursor-pointer
             "
           >
+           
             <div class="d-flex flex-column ml-3">
               <Social
                 @mousedown="open"

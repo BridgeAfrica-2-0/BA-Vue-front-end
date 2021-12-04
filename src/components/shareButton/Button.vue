@@ -257,7 +257,6 @@
       <b-dropdown-item
         class="d-flex py-2 cursor-pointer"
         :id="`sharing-via-${uuid}`"
-        data-toggle="popover"
         role="button"
         data-original-title=""
         ref="button"
@@ -272,9 +271,8 @@
 
       <b-popover
         :target="`sharing-via-${uuid}`"
-        :triggers="['hover', 'click']"
+        triggers="hover focus"
         placement="left"
-        focus
       >
         <div class="popover-body">
           <div
@@ -287,9 +285,6 @@
               cursor-pointer
             "
           >
-            <span class="text-ored">
-              <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
-            </span>
             <div class="d-flex flex-column ml-3">
               <Social
                 :network="'Email'"
@@ -310,9 +305,6 @@
               cursor-pointer
             "
           >
-            <span class="text-ored">
-              <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
-            </span>
             <div class="d-flex flex-column ml-3">
               <Social
                 :network="'facebook'"
@@ -333,9 +325,6 @@
               cursor-pointer
             "
           >
-            <span class="text-ored">
-              <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
-            </span>
             <div class="d-flex flex-column ml-3">
               <Social
                 :network="'Twitter'"
@@ -356,9 +345,6 @@
               cursor-pointer
             "
           >
-            <span class="text-ored">
-              <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
-            </span>
             <div class="d-flex flex-column ml-3">
               <Social
                 @mousedown="open"

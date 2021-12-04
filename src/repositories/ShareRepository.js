@@ -202,7 +202,7 @@ class Repository {
       const response = await axios.post(`reply/post/${post}/comment/${comment}`, data)
       return {
         success: true,
-        data: response.data.message
+        data: response.data.data
       }
 
     } catch (error) {

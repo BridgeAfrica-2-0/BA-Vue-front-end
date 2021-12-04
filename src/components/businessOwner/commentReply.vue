@@ -43,7 +43,7 @@
         <!-- Edit message -->
         <p
           class="p-0 m-0 pl-3 msg text inline-comment"
-          style="background: transparent; border: 1px solid transparent"
+          style="background: transparent; border: 1px solid transparent; width:100%"
           v-if="proccesEdit"
         >
           <input

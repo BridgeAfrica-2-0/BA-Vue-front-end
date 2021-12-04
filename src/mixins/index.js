@@ -125,6 +125,7 @@ export const commentMixinsBuisness = {
       text: "",
       createPostRequestIsActive: false,
       loadComment: false,
+      replyCommentHasBeload:false,
       loading:false
     };
   },
@@ -214,21 +215,27 @@ export const commentMixinsBuisness = {
       });
 
       if (request.success) {
-        this.page = 1
-        this.onShowReply();
+        this.comments = [request.data , ...this.comments]
+        
         this.text = "";
 
         this.comment = Object.assign(this.comment, {
           reply_comment_count: this.comment.reply_comment_count + 1,
         });
       }
+
       this.createPostRequestIsActive = false
       this.loadComment = false
     },
 
     showReply() {
-      this.reply = !this.reply;
-      if (this.reply) this.onShowReply();
+      const state = !this.reply;
+      this.reply = state
+
+      if(!this.replyCommentHasBeload)
+        this.replyCommentHasBeload = true
+      
+      if (state) this.onShowReply();
     },
   },
 }

@@ -128,11 +128,11 @@
           </b-col>
           <b-col cols="12" class="mt-4 ml-3 mr-3">
             <Reply
-              v-for="(obj, index) in comments"
-              :key="index"
+              v-for="obj in comments"
+              :key="obj.updated_at"
               :item="obj"
               :uuid="uuid"
-              :onDelete="onDeleteReply"
+              :onDelete="() => onDeleteReply(obj.id)"
               @update-reply-comment="(text) => onUpdate({ uuid: obj.id, text })"
               type="reply"
             />
@@ -259,18 +259,17 @@ export default {
     onUpdate: async function ({ uuid, text }) {
       let data = { comment: text };
 
-      if (
-        [
+      if ([
           "NetworkEditors",
           "networks",
           "Membar Network Follower",
           "memberNetwork",
-        ].includes(this.$route.name)
-      )
+        ].includes(this.$route.name))
+        
         data = Object.assign(data, { networkId: this.profile.id });
 
       const request = await this.$repository.post.update({ uuid, data });
-
+console.log(request)
       if (request.success) {
         this.comments = this.comments.map((e) =>
           e.id == uuid ? { ...request.data } : { ...e }

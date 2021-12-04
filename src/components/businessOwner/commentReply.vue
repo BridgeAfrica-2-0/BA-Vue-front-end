@@ -4,9 +4,9 @@
       <b-col :class="`${proccesEdit ? 'd-flex' : ''}`">
         <b-avatar
           variant="info"
-          :src="item.picture"
+          :src="comment.picture"
           :class="`${
-            'user' == item.user_type ? 'rounded-circle' : 'square'
+            'user' == comment.user_type ? 'rounded-circle' : 'square'
           } avat-comment b-r`"
         ></b-avatar>
 
@@ -32,7 +32,7 @@
           </p>
           <read-more
             more-str="read more"
-            :text="item.comment"
+            :text="comment.comment"
             link="#"
             less-str="read less"
             :max-chars="15000"
@@ -47,7 +47,7 @@
           v-if="proccesEdit"
         >
           <input
-            placeholder="Edit a Comment"
+            placeholder="Edit a Reply Comment"
             class="comment"
             type="text"
             style="background: transparent"
@@ -80,11 +80,11 @@
             @click="onLike"
             class="cursor"
           ></b-icon>
-          {{ item.comment_likes | nFormatter }}
+          {{ comment.comment_likes | nFormatter }}
         </span>
 
-        <span v-if="!proccesEdit" @click="showReply" class="ml-2 reply">
-          <i class="fs-12">{{ item.updated_at | date }}</i>
+        <span v-if="!proccesEdit" class="ml-2 reply">
+          <i class="fs-12">{{ comment.updated_at | date }}</i>
         </span>
       </b-col>
     </b-row>
@@ -92,11 +92,11 @@
 </template>
 
 <script>
-import { commentMixinsBuisness, NoMoreDataForComment } from "@/mixins";
+import { commentMixinsBuisness } from "@/mixins";
 import { date, formatNumber } from "@/helpers";
 
 export default {
-  mixins: [commentMixinsBuisness, NoMoreDataForComment],
+  mixins: [commentMixinsBuisness],
   data() {
     return {
       proccesEdit: false,
@@ -129,7 +129,7 @@ export default {
         return false;
       }
       this.replyLoading = true;
-      this.$emit("update-comment", this.updateCommentText);
+      this.$emit("update-reply-comment", this.updateCommentText);
 
       this.toggle();
       this.replyLoading = false;
@@ -155,6 +155,10 @@ export default {
   },
 
   props: {
+    onDelete:{
+      type:Function,
+      required:true
+    },
     item: {
       type: Object,
       required: true,

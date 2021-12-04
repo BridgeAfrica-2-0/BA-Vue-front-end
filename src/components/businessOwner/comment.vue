@@ -132,7 +132,8 @@
               :key="index"
               :item="obj"
               :uuid="uuid"
-              :onDelete="onDelete"
+              :onDelete="onDeleteReply"
+              @update-reply-comment="(text) => onUpdate({ uuid: obj.id, text })"
               type="reply"
             />
 
@@ -232,6 +233,61 @@ export default {
       this.reply = !this.reply;
 
       if (this.reply) this.onShowReply();
+    },
+
+    onDeleteReply: async function (uuid) {
+      const request = await this.$repository.post.delete(uuid);
+
+      if (request.success) {
+        this.comments = this.comments.filter((e) => e.id != uuid);
+        this.item.comment_count -= 1;
+
+        this.flashMessage.show({
+          status: "success",
+          blockClass: "custom-block-class",
+          message: "Comment Deleted",
+        });
+      } else {
+        this.flashMessage.show({
+          status: "error",
+          blockClass: "custom-block-class",
+          message: "Something wrong happen. Try again",
+        });
+      }
+    },
+
+    onUpdate: async function ({ uuid, text }) {
+      let data = { comment: text };
+
+      if (
+        [
+          "NetworkEditors",
+          "networks",
+          "Membar Network Follower",
+          "memberNetwork",
+        ].includes(this.$route.name)
+      )
+        data = Object.assign(data, { networkId: this.profile.id });
+
+      const request = await this.$repository.post.update({ uuid, data });
+
+      if (request.success) {
+        this.comments = this.comments.map((e) =>
+          e.id == uuid ? { ...request.data } : { ...e }
+        );
+
+        this.flashMessage.show({
+          status: "success",
+          blockClass: "custom-block-class",
+          message: "Comment Updated",
+        });
+      } else {
+        this.flashMessage.show({
+          status: "error",
+          blockClass: "custom-block-class",
+          message: request.data,
+        });
+      }
     },
   },
 };

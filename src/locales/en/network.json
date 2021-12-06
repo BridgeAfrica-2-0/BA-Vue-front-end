@@ -288,7 +288,19 @@
     "Create_Post": "Create Post",
     "Do_you_want_to_join_this_network": "Do you want to join this network",
     "Your": "Your",
-    "Posts_are_pending_for_approval": "Posts are pending for approval"
+    "Posts_are_pending_for_approval": "Posts are pending for approval",
+    "COMMUNITY":"COMMUNITY",
+    "Unfollow":"Unfollow",
+    "Click_To_Follow_Unfollow":"Click To Follow/Unfollow",
+    "Networks":"Networks",
+    "Follow":"Follow",
+    "You_Are_Not_more_Following":"You Are Not more Following",
+    "You_Are_Now_Following":"You Are Now Following",
+    "Unable_To_follow":"Unable To follow"
+
+    
+    
+
 
 
 

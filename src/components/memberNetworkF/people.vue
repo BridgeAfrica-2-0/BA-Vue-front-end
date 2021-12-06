@@ -31,7 +31,7 @@
                         sm="6"
                         class="mt-3 mt-lg-2 mt-xl-2"
                       >
-                        <h6 class="follower">{{people.followers}} Community</h6>
+                        <h6 class="follower">{{people.followers}} {{ $t('network.Community') }}</h6>
                       </b-col>
                     </b-row>
                   </div>
@@ -80,7 +80,7 @@
                           variant="primary"
                         >
                           <i :class="people.is_follow ? 'fas fa-user-minus fa-lg btn-icon':'fas fa-user-plus fa-lg btn-icon'"></i>
-                          <span class="btn-com">Community</span>
+                          <span class="btn-com">{{ $t('network.Community') }}</span>
                         </b-button>
                       </b-col>
                     </b-row>

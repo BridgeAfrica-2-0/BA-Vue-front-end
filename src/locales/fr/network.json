@@ -104,7 +104,6 @@
     "Keyword_Alerts": "Alerts Mot Clé",
     "Enter_keyword_alert": "Entrez une alerte mot clé",
     "Add": "Ajouter",
-    "Settings": "Paramètres",
     "Approved": "Approuvé",
     "Decline": "Rejéter",
     "Commented_on_a_Post": "A commenté sur une publication",
@@ -114,7 +113,6 @@
     "Select_All": "Sélectionner Tout",
     "Mark_as_Read": "Marquer comme lu",
     "No_Notifications_To_Show": "Aucune notification a montrer",
-    "Approve": "Approuver",
     "Request_Approved": "Demande Approuvé",
     "Unable_to_Approve_Request": "Impossible d'approuver la demande",
     "Request_Deleted": "Demande Supprimé",
@@ -249,7 +247,7 @@
     "Approve":"Approuver",
     "Reject":"Rejeter",
     "Feedback_Type":"type de commentaire",
-    "Private":"Privé",
+
     "community":"communauté",
     "lire_la_Suite":"lire la Suite",
     "Edit_network":"Modifier le réseau",
@@ -269,11 +267,10 @@
     "Image_Uploaded_Successfuly":"Image téléchargée avec succès",
     "Membership_Requests":"Demandes d'adhésion",
     "Pending":"En attente",
-    "Search_Something":"Rechercher quelque chose",
     "Send_Request":"Envoyer la demande",
     "K_Follower":" 5K abonné",
     "Your_3_Posts_are_pending_for_approval":"Vos 3 publication sont en attente d'approbation",
-    "View_All":"voir tout",
+ 
 
     "Ticket_Support":"Support technique",
     "Intergration":"Intégration",
@@ -290,7 +287,16 @@
     "email_phone":"courriel, téléphone",
     "Create_Post":"Créer un poste",
     "Do_you_want_to_join_this_network":"Voulez-vous rejoindre ce réseau",
-   "Read_More":"lire la Suite",
-   "Direction":"Direction"
+    "COMMUNITY":"COMMUNAUTÉ", 
+
+    "Unfollow":"se désabonner",
+    "Click_To_Follow_Unfollow":"Cliquez pour abonner/désabonner",
+    "Networks":"Réseaux",
+    "Follow":"Abonner",
+
+    "You_Are_Not_more_Following":"Vous n'êtes plus abonné",
+    "You_Are_Now_Following":"Vous êtes maintenant abonné",
+    "Unable_To_follow":"Impossible de s'abonner"
+   
 
 }

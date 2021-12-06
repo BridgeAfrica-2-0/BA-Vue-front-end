@@ -40,11 +40,11 @@
                 "
               ></i>
 
-              <span class="ml-1" v-if="networkInfo.is_follow"> Unfollow</span>
-              <span v-else> Follow</span>
+              <span class="ml-1" v-if="networkInfo.is_follow"> {{ $t('network.Unfollow') }}</span>
+              <span v-else> {{ $t('network.Follow') }}</span>
             </b-button>
             <b-tooltip target="Follow-Unfollow" variant="secondary"
-              >Click To Follow/Unfollow</b-tooltip
+              >{{ $t('network.Click_To_Follow_Unfollow') }}</b-tooltip
             >
           </b-col>
         </b-row>
@@ -66,13 +66,13 @@
                 <b-icon icon="people-fill" variant="primary"></b-icon>
                 <span class="pivate text">
                   {{ nFormatter(networkInfo.community) }}
-                  community
+                  {{ $t('network.community') }}
                 </span>
               </p>
             </b-col>
           </b-row>
         </b-container>
-        <h6 class="mt-2 font-weight-bolder title">About</h6>
+        <h6 class="mt-2 font-weight-bolder title">{{ $t('network.About') }}</h6>
         <p class="text-justify text">
           <read-more
             more-str="read more"
@@ -146,13 +146,13 @@ export default {
             this.buttonStatus = false;
             this.flashMessage.show({
               status: "success",
-              message: "You Are Not more Following",
+              message: "$t('network.You_Are_Not_more_Following') ",
             });
           } else {
             this.buttonStatus = false;
             this.flashMessage.show({
               status: "success",
-              message: "You Are Now Following",
+              message: "$t('network.You_Are_Now_Following') ",
             });
           }
         })
@@ -161,7 +161,7 @@ export default {
           this.buttonStatus = false;
           this.flashMessage.show({
             status: "error",
-            message: "Unable To follow",
+            message: "$t('network.Unable_To_follow') ",
           });
         });
     },

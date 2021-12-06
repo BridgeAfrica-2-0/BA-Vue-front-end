@@ -65,5 +65,5 @@ export const mutations = {
   [TYPES.FIND_NETWORK_POST](state, payload) {
     state.posts = payload
   },
-
+  
 }

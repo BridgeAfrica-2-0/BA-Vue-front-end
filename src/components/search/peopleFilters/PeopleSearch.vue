@@ -149,9 +149,9 @@ export default {
         !this.haveNotData
       ) {
         this.setLoaderState(true);
-        console.log("on scrool");
+        
         const request = await this.callback({
-          ...this.getStack,
+          data:{...this.getStack},
           page: this.getPage,
         });
 

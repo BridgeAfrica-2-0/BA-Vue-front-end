@@ -93,8 +93,8 @@
                 data-toggle="popover"
                 class="form-control search-h"
                 style=""
-                :placeholder="credentials.placeholder"
-                v-model="credentials.keyword"
+                :placeholder="searchOptions.placeholder"
+                v-model="searchOptions.keyword"
                 aria-label=""
                 data-original-title=""
                 title=""
@@ -610,6 +610,10 @@ export default {
       notificationPatterns: null,
       messagePatterns: null,
       redirectionPatterns: null,
+      searchOptions: {
+        keyword: "",
+        placeholder: "",
+      },
     };
   },
 
@@ -660,12 +664,20 @@ export default {
 
     this.updateNotificationEvent();
 
-    console.log("create nav bar+++++++++++++++++++++++++++++")
+    if (this.$route.query.keyword)
+      this.searchOptions.keyword = this.$route.query.keyword;
   },
 
   watch: {
     "$store.state.auth.profilConnected": function () {
       this.updateNotificationEvent();
+    },
+    credentials: {
+      deep: true,
+
+      handler() {
+        this.searchOptions = this.credentials;
+      },
     },
   },
 
@@ -674,7 +686,6 @@ export default {
       setNetworks: "social/FIND_USER_NETWORK",
       setBusiness: "social/FIND_USER_BUSNESS",
       lauchNetworkRequest: "social/INIT",
-      Logout: "auth/logout",
     }),
 
     ...mapMutations({
@@ -729,10 +740,12 @@ export default {
             console.log("Error erro!", err);
           });
 
-        this.$router.push({ name: "Search", query: { keywork: this.credentials.keyword } });
+        this.$router.push({
+          name: "Search",
+          query: { keyword: this.credentials.keyword },
+        });
       }
     },
-
 
     navLink(type) {
       const link = {
@@ -746,10 +759,12 @@ export default {
         throw new Error(error);
       }
     },
+
     toggleinfput() {
       this.$refs.mobileinput.style.display = "block";
       this.isActive = true;
     },
+
     getUsers() {
       this.$store
         .dispatch("userChat/GET_USERS", "")
@@ -760,12 +775,22 @@ export default {
     },
 
     logout: async function () {
-      const response = await this.$repository.notification.logOut();
+      let loader = this.$loading.show({
+        container: this.$refs.formContainer,
+        canCancel: true,
+        onCancel: this.onCancel,
+        color: "#e75c18",
+      });
+
+      let response = await this.$repository.share.switch(null, "reset");
       if (response.success) {
-        this.Logout();
-      } else {
-        this.Logout();
+        response = await this.$repository.notification.logOut();
+        if (response.success) {
+          this.$router.push({ name: "Login" });
+        }
       }
+
+      loader.hide();
     },
 
     switchToProfile: async function () {

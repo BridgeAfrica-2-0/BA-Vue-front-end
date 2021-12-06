@@ -145,7 +145,7 @@
 
 <script>
 import _ from "lodash";
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 const options = [
   { text: "Follower", value: "Follower" },
   { text: "Following", value: "Following" },
@@ -169,6 +169,7 @@ export default {
     optionsBuisness: options,
     optionsNetwork: [...options, { text: "Member", value: "Member" }],
   }),
+
   watch: {
     selectedPeople: function () {
       this.onProcess();
@@ -180,6 +181,7 @@ export default {
       this.onProcess();
     },
   },
+
   methods: {
     ...mapActions({
       userStore: "search/FIND_USER",
@@ -192,6 +194,7 @@ export default {
     map(data, type) {
       return data.map((e) => `${type}_${e.toLowerCase()}`);
     },
+
     onProcess: _.debounce(function (e) {
       this.page(1);
       const user = this.map(this.selectedPeople, `user`);
@@ -204,13 +207,14 @@ export default {
       this.stack({ payload: { ...data }, page: 1 });
       this.setCallback(this.$repository.search.findUserByParam);
       this._onFindUser({ payload: { ...data }, page: 1 });
-    },2000),
+    }, 2000),
+
     async _onFindUser(payload) {
       try {
         this.lauchLoader(true);
         this.reset();
         const request = await this.$repository.search.findUserByParam({
-          payload,
+          data:payload,
           page: 1,
         });
         if (request.success) {
@@ -223,16 +227,18 @@ export default {
       this.lauchLoader(false);
     },
     debounceInput: _.debounce(function (e) {
-      if (e) {
+      if (e && this.postKeyword) {
         this.page(1);
-        this.stack({ profession: e });
+        this.stack({ profession: e, keyword: this.postKeyword });
         this.setCallback(this.$repository.search.findUserByParam);
         this._onFindUser({
           profession: e,
+          keyword: this.postKeyword,
           page: 1,
         });
       }
     }, 1000),
+
     toogleRootSection() {
       this.rootSectionIsVisible = !this.rootSectionIsVisible;
       if (!this.rootSectionIsVisible) this.closeAllSections();
@@ -242,6 +248,12 @@ export default {
       this.buisnessSectionIsVisible = false;
       this.networkSectionIsVisible = false;
     },
+  },
+
+  computed: {
+    ...mapGetters({
+      postKeyword: "search/POST_KEYWORD",
+    }),
   },
 };
 </script>

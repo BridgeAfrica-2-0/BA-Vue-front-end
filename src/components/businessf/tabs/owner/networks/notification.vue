@@ -89,7 +89,7 @@
       {{newNotifications}} -->
     </div>
 
-    <FlashMessage />
+    
 
   </div>
 </template>

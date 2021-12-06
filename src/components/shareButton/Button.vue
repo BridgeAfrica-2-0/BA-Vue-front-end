@@ -145,7 +145,7 @@
       <b-dropdown-item
         class="d-flex py-2 cursor-pointer"
         @click="open(`modal-2-${uuid}`)"
-        v-if="isYourOwnPost"
+        v-if="isNetwork"
       >
         <span class="text-ored">
           <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
@@ -158,7 +158,7 @@
       <b-dropdown-item
         class="d-flex py-2 cursor-pointer"
         @click="open(`modal-3-${uuid}`)"
-        v-if="'business' == this.profile.user_type ? false : true"
+        v-if="isBusiness"
       >
         <span class="text-ored">
           <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
@@ -418,12 +418,38 @@ export default {
         this.$route.name == "networks"
           ? false
           : true;
+      return isItOwnerPage;
+    },
+
+    isBusiness() {
+      const isItOwnerPage =
+        this.$route.name == "BusinessOwner" ||
+        this.$route.name == "profile_owner"
+          ? true
+          : false;
 
       const isYourOwn =
         this.profile.id == this.post.user_id &&
         this.profile.user_type == this.post.poster_type;
 
-      return isItOwnerPage
+      return !isItOwnerPage
+        ? isYourOwn && this.$route.name == "dashboard"
+          ? false
+          : true
+        : false;
+    },
+
+    isNetwork() {
+      const isItOwnerPage =
+        this.$route.name == "NetworkEditors" || this.$route.name == "networks"
+          ? true
+          : false;
+
+      const isYourOwn =
+        this.profile.id == this.post.user_id &&
+        this.profile.user_type == this.post.poster_type;
+
+      return !isItOwnerPage
         ? isYourOwn && this.$route.name == "dashboard"
           ? false
           : true

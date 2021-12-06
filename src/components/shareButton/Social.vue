@@ -12,8 +12,5 @@
 <script>
 export default {
   props: ["post", "network", "title"],
-  created(){
-    console.log(this.network)
-  }
 };
 </script>

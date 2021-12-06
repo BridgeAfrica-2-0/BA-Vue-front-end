@@ -127,7 +127,7 @@
       size="lg"
       v-model="showModal"
       ref="netmodal"
-    >   <FlashMessage />
+    >   
       <b-container>
         <b-form>
           <div

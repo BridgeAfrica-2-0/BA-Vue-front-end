@@ -1,6 +1,6 @@
 <template>
   <div>
-    <FlashMessage />
+    
 
     <!-- DOM to Create Post By A UserOwner-->
     <b-card class="px-md-3 mb-3">

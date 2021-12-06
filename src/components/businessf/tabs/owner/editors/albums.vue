@@ -25,7 +25,7 @@
               ></b-form-input>
               <b-button class="mt-2" modal-cancel variant="primary" @click="createAlbum()"> Create</b-button>
             </b-form>
-            <FlashMessage />
+            
           </b-modal>
 
           <div v-for="album in albums" :key="album.id">
@@ -86,7 +86,7 @@
               ></b-form-input>
               <b-button class="mt-2" modal-cancel variant="primary" @click="updateAlbum()"> Update</b-button>
             </b-form>
-            <FlashMessage />
+            
           </b-modal>
 
           

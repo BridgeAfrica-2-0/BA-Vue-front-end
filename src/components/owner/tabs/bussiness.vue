@@ -27,7 +27,7 @@
         @close="cancel"
       >
         <div>
-          <FlashMessage />
+          
           <form-wizard @on-complete="createBusiness">
             <tab-content :title="$t('profileowner.Business_Indentity')">
               <div class="form-card">
@@ -400,7 +400,7 @@
         @hidden="cancel"
       >
         <div>
-          <FlashMessage />
+          
           <form-wizard @on-complete="updateBusiness">
             <tab-content :title="$t('profileowner.Business_Indentity')">
               <div class="form-card">

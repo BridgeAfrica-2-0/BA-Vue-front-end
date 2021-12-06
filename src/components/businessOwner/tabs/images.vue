@@ -1,6 +1,6 @@
 <template>
   <div>
-    <FlashMessage />
+    
 
     {{picturess}}
     <div class="row">

@@ -244,7 +244,7 @@
     </b-container>
 
     <br />
-    <FlashMessage />
+    
   </b-container>
   <b-container v-else>
     <div class="text-center">

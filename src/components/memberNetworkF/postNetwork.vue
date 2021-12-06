@@ -1,6 +1,6 @@
 <template>
   <div>
-    <FlashMessage />
+    
     <Post
       v-for="(item, index) in owner_post"
       :key="index"

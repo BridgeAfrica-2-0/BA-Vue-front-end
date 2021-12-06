@@ -1,7 +1,7 @@
 <template>
 
   <div class="container">
-    <FlashMessage />
+    
     <hr />    
     <!-- partie mobile--------------------------------------------------------------------- 
     

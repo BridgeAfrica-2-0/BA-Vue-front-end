@@ -156,7 +156,7 @@
           <div v-else class="text-center">
             <h3><b>🥳❗Transaction Completed❗🥳</b></h3>
           </div>
-          <FlashMessage />
+          
         </b-modal>
 
   </b-container>

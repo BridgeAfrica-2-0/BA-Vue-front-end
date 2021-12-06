@@ -1,6 +1,6 @@
 <template>
   <div>
-    <FlashMessage />
+    
     <!-- DOM to Create Post By A UserOwner-->
     <!-- <b-card class="px-md-3 mb-3">
       <b-row class="mt-2">
@@ -78,7 +78,7 @@
           <!--   edit array   -->
 
           <b-modal id="modal-edit" ref="modal-edit" centered hide-footer title="Update Post" @hidden="resetPostData">
-            <FlashMessage />
+            
             <b-row ref="loader">
               <b-col cols="1" class="m-0 p-0"></b-col>
               <b-col cols="2" class="m-0 p-0">
@@ -181,7 +181,7 @@
           </b-modal>
           <!-- create post -->
           <b-modal id="modal-xl" ref="modal-xl" centered hide-footer title="Create Post" @hidden="resetPostData">
-            <FlashMessage />
+            
             <b-row ref="loader">
               <b-col cols="1" class="m-0 p-0"></b-col>
               <b-col cols="2" class="m-0 p-0">

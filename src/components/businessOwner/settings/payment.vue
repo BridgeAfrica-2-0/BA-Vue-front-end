@@ -1,14 +1,14 @@
 <template>
   <b-container>
     <b-container>
-      <p class="text">Select a payment method for your bridget africa account</p>
+      <p class="text">{{ $t('businessowner.Select_a_payment_method_for_your_bridget_africa_account') }}</p>
     </b-container>
 
     <div class="b-bottom">
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="Country"
+          :label="$t('businessowner.Country')"
           label-size="md"
           label-class="font-weight-bold pt-0 username"
           class="mb-0"
@@ -87,13 +87,13 @@
               <button
                 @click="AcRequestPayment = true"
                 class="float-right btn-custom p-2 btn btn-primary mt-2"
-              > Confirm Payment</button>
+              > {{ $t('businessowner.Confirm_Payment') }}</button>
             </div>
           </div>
         </div>
       </b-card>
       <div class="mb-0">
-        <p class="text">Your payment information is secure</p>
+        <p class="text">{{ $t('businessowner.Your_payment_information_is_secure') }}</p>
       </div>
     </b-container>
 
@@ -114,7 +114,7 @@
                 variant="primary"
                 class="font-weight-light shadow-sm btn-custom text-14"
                 @click="confirmDefaltPayment"
-              >Confirm</b-button>
+              >{{ $t('businessowner.Confirm') }}</b-button>
             </div>
           </div>
           <div class="row my-3">
@@ -215,7 +215,7 @@ export default {
         this.DefaultPayment();
         this.flashMessage.show({
           status: "success",
-          message: "Payment Complete"
+          message: this.$t('businessowner.Payment_Complete')
         });
       })
       .catch(err => {
@@ -224,7 +224,7 @@ export default {
         console.log({ err: err });
         this.flashMessage.show({
           status: "error",
-          message: "Unable Complete Payment"
+          message: this.$t('businessowner.Unable_Complete_Payment')
         });
       });
     },

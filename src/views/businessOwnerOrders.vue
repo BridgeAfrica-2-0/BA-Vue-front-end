@@ -1,7 +1,7 @@
 <template>
 
   <div class="container">
-    <FlashMessage />
+    <!-- <FlashMessage /> -->
     <hr />    
     <!-- partie mobile--------------------------------------------------------------------- 
     
@@ -11,30 +11,30 @@
       <div class="justify-content-between d-flex row cd B" style="margin-left: 7px">
         <div id="m1" class="mobile green t col transition pl-4" @click="changeElementType(1)">
           <div class="cercle1">1</div>
-          <h2 class="h2 text-position">All</h2>
+          <h2 class="h2 text-position">{{ $t('businessowner.All') }}</h2>
         </div>
 
         <div id="m2" class="mobile1 col t start-50" @click="changeElementType(2)">
           <div class="cercle2">2</div>
 
-          <h2 class="h2 text-position text-center">In process</h2>
+          <h2 class="h2 text-position text-center">{{ $t('businessowner.In_Process') }}</h2>
         </div>
 
         <div id="m3" class="mobile3 col t start-50" @click="changeElementType(3)">
           <div class="cercle2">3</div>
 
-          <h2 class="h2 text-position text-center">re-shedule</h2>
+          <h2 class="h2 text-position text-center">{{ $t('businessowner.re_shedule')}}</h2>
         </div>
         <div id="m4" class="mobile2 col t" @click="changeElementType(4)">
           <div class="cercle2">4</div>
-          <h2 class="h2 text-position text-center">Shipped</h2>
+          <h2 class="h2 text-position text-center">{{ $t('businessowner.Shipped')}}</h2>
         </div>
       </div>
 
       <div class="justify-content-between container row my-4">
-        <div class="col order"><h3 class="margclear1 bold1">My orders</h3></div>
+        <div class="col order"><h3 class="margclear1 bold1">{{ $t('businessowner.My_orders') }}</h3></div>
         <div class="col">
-          <h3 class="text-danger text-center margclear">clear history</h3>
+          <h3 class="text-danger text-center margclear">{{ $t('businessowner.clear_history') }}</h3>
         </div>
       </div>
       <hr />
@@ -42,7 +42,7 @@
       <div>
         <div v-if="status == 1" class="inprogress">
           <div class="show row">
-            <div class="col-3">Show:</div>
+            <div class="col-3">{{ $t('businessowner.Show')}}:</div>
             <div class="col">
               <b-form-select v-model="selected" :options="options"></b-form-select>
             </div>
@@ -58,20 +58,20 @@
                       text="Manage"
                       class="m-md-2"
                     >
-                      <b-dropdown-item @click="updateStatus(9,'archive')">Archive</b-dropdown-item>
-                      <b-dropdown-item @click="updateStatus(9,'cancel')">Delete</b-dropdown-item>
-                      <b-dropdown-item>shipped</b-dropdown-item>
-                      <b-dropdown-item @click="updateStatus(9,'re-shedule')">reshedule</b-dropdown-item>
+                      <b-dropdown-item @click="updateStatus(9,'archive')">{{ $t('businessowner.Archive')}}</b-dropdown-item>
+                      <b-dropdown-item @click="updateStatus(9,'cancel')">{{ $t('businessowner.Delete')}}</b-dropdown-item>
+                      <b-dropdown-item>{{ $t('businessowner.shipped')}}</b-dropdown-item>
+                      <b-dropdown-item @click="updateStatus(9,'re-shedule')">{{ $t('businessowner.Reshedule')}}</b-dropdown-item>
                     </b-dropdown>
                   </div>
                 </div>
-                <span class="gras">Order</span>
+                <span class="gras">{{ $t('businessowner.Order')}}</span>
                 <span class="text-success order">#{{item.oderId}}</span> <br />
                 <span class="flou"> {{moment(item.dateCreated).format('DD/MM/YYYY HH:mm')}} </span>
               </div>
 
               <span class="row posstatus">
-                <p class="h3 statusp">status:</p>
+                <p class="h3 statusp">{{ $t('businessowner.Status')}}:</p>
                 <h3 class="text-success h3 margstatus">{{ item.status }}</h3>
               </span>
             </div>
@@ -87,11 +87,11 @@
               </div>
 
               <div class="col-4 text-end">
-                <h3 class="h3 margm2">Product Qte :</h3>
-                <h3 class="h3 margm2">Price:</h3>
+                <h3 class="h3 margm2">{{ $t('businessowner.Product_Qte')}} :</h3>
+                <h3 class="h3 margm2">{{ $t('businessowner.Price')}}:</h3>
 
-                <h3 class="h3 margm2">shipping cost:</h3>
-                <h3 class="h3 margm2">Total :</h3>
+                <h3 class="h3 margm2">{{ $t('businessowner.Shipping Cost')}}:</h3>
+                <h3 class="h3 margm2">{{ $t('businessowner.Total')}} :</h3>
               </div>
 
               <div class="col-4">
@@ -110,7 +110,7 @@
             <div class="justify-content-center container row">
               <div class="">
                 <button  @click="updateStatus(9,'shipped')" class="buttonm btn shadow text-center">
-                  <h3 class="h3 button-text">shipped</h3>
+                  <h3 class="h3 button-text">{{ $t('businessowner.shipped')}}</h3>
                 </button>
               </div>
             </div>
@@ -122,7 +122,7 @@
           </div>
             <div class="overflow-auto">
             <div>
-              <h6 class="text-center">Pages {{ currentPage }}</h6>
+              <h6 class="text-center">{{ $t('businessowner.Pages')}} {{ currentPage }}</h6>
               <b-pagination
                 @input="getpage"
                 v-model="currentPage"
@@ -139,7 +139,7 @@
 
         <div v-if="status == 2" class="inprogress">
           <div class="show row">
-            <div class="col-3">Show:</div>
+            <div class="col-3">{{ $t('businessowner.Show')}}:</div>
             <div class="col">
               <b-form-select v-model="selected" :options="options"></b-form-select>
             </div>
@@ -155,21 +155,21 @@
                       text="Manage"
                       class="m-md-2"
                     >
-                    <b-dropdown-item>Archive</b-dropdown-item>
+                    <b-dropdown-item>{{ $t('businessowner.Archive')}}</b-dropdown-item>
                     
-                      <b-dropdown-item>shipped</b-dropdown-item>
-                      <b-dropdown-item @click="updateStatus(9,'cancel')">Delete</b-dropdown-item>
-                    <b-dropdown-item  @click="updateStatus(9,'re-shedule')">reshedule</b-dropdown-item>
+                      <b-dropdown-item>{{ $t('businessowner.shipped')}}</b-dropdown-item>
+                      <b-dropdown-item @click="updateStatus(9,'cancel')">{{ $t('businessowner.Delete')}}</b-dropdown-item>
+                    <b-dropdown-item  @click="updateStatus(9,'re-shedule')">{{ $t('businessowner.Reshedule')}}</b-dropdown-item>
                     </b-dropdown>
                   </div>
                 </div>
-                <span class="gras">Order</span>
+                <span class="gras">{{ $t('businessowner.Order')}}</span>
                  <span class="text-success order">#{{item.oderId}}</span> <br />
                 <span class="flou"> {{moment(item.dateCreated).format('DD/MM/YYYY HH:mm')}} </span>
               </div>
 
               <span class="row posstatus">
-                <p class="h3 statusp">status:</p>
+                <p class="h3 statusp">{{ $t('businessowner.Status')}}:</p>
                 <h3 class="text-success h3 margstatus">{{ item.status  }}</h3>
               </span>
             </div>
@@ -185,11 +185,11 @@
               </div>
 
               <div class="col-4 text-end">
-                <h3 class="h3 margm2">Product Qte :</h3>
-                <h3 class="h3 margm2">Price:</h3>
+                <h3 class="h3 margm2">{{ $t('businessowner.Product_Qte')}} :</h3>
+                <h3 class="h3 margm2">{{ $t('businessowner.Price')}}:</h3>
 
-                <h3 class="h3 margm2">shipping cost:</h3>
-                <h3 class="h3 margm2">Total :</h3>
+                <h3 class="h3 margm2">{{ $t('businessowner.Shipping Cost')}}:</h3>
+                <h3 class="h3 margm2">{{ $t('businessowner.Total')}} :</h3>
               </div>
 
               <div class="col-4">
@@ -208,7 +208,7 @@
             <div class="justify-content-center container row">
               <div class="">
                 <button @click="updateStatus(9,'shipped')" class="buttonm btn shadow text-center">
-                  <h3 class="h3 button-text">Shipped</h3>
+                  <h3 class="h3 button-text">{{ $t('businessowner.Shipped')}}</h3>
                 </button>
               </div>
             </div>
@@ -220,7 +220,7 @@
           </div>
             <div class="overflow-auto">
             <div>
-              <h6 class="text-center">Pages {{ currentPage }}</h6>
+              <h6 class="text-center">{{ $t('businessowner.Pages')}} {{ currentPage }}</h6>
               <b-pagination
                 @input="getpage"
                 v-model="currentPage"
@@ -236,7 +236,7 @@
 
         <div v-if="status == 3" class="complete">
           <div class="show row">
-            <div class="col-3">Show:</div>
+            <div class="col-3">{{ $t('businessowner.Show')}}:</div>
             <div class="col">
               <b-form-select v-model="selected" :options="options"></b-form-select>
             </div>
@@ -254,21 +254,21 @@
                       
                     >
 
-                    <b-dropdown-item>Delete</b-dropdown-item>
-                    <b-dropdown-item>shipped</b-dropdown-item>
-                    <b-dropdown-item>reshedule</b-dropdown-item>
-                      <b-dropdown-item @click="updateStatus(9,'cancel')">Delete</b-dropdown-item>
-                    <b-dropdown-item  @click="updateStatus(9,'re-shedule')">reshedule</b-dropdown-item>
+                    <b-dropdown-item>{{ $t('businessowner.Delete')}}</b-dropdown-item>
+                    <b-dropdown-item>{{ $t('businessowner.shipped')}}</b-dropdown-item>
+                    <b-dropdown-item>{{ $t('businessowner.Reshedule')}}</b-dropdown-item>
+                      <b-dropdown-item @click="updateStatus(9,'cancel')">{{ $t('businessowner.Delete')}}</b-dropdown-item>
+                    <b-dropdown-item  @click="updateStatus(9,'re-shedule')">{{ $t('businessowner.Reshedule')}}</b-dropdown-item>
                     </b-dropdown>
                   </div>
                 </div>
-                <span class="gras">Order</span>
+                <span class="gras">{{ $t('businessowner.Order')}}</span>
                  <span class="text-success order">#{{item.oderId}}</span> <br />
                 <span class="flou"> {{moment(item.dateCreated).format('DD/MM/YYYY HH:mm')}} </span>
               </div>
 
               <span class="row posstatus">
-                <p class="h3 statusp">status:</p>
+                <p class="h3 statusp">{{ $t('businessowner.Status')}}:</p>
                 <h3 class="text-success h3 margstatus">{{ item.status  }}</h3>
               </span>
             </div>
@@ -284,11 +284,11 @@
               </div>
 
               <div class="col-4 text-end">
-                <h3 class="h3 margm2">Product Qte :</h3>
-                <h3 class="h3 margm2">Price:</h3>
+                <h3 class="h3 margm2">{{ $t('businessowner.Product_Qte')}} :</h3>
+                <h3 class="h3 margm2">{{ $t('businessowner.Price')}}:</h3>
 
-                <h3 class="h3 margm2">shipping cost:</h3>
-                <h3 class="h3 margm2">Total :</h3>
+                <h3 class="h3 margm2">{{ $t('businessowner.Shipping Cost')}}:</h3>
+                <h3 class="h3 margm2">{{ $t('businessowner.Total')}} :</h3>
               </div>
 
               <div class="col-4">
@@ -307,7 +307,7 @@
             <div class="justify-content-center container row">
               <div class="">
                 <button @click="updateStatus(9,'shipped')" class="buttonm btn shadow text-center">
-                  <h3 class="h3 button-text">Shipped</h3>
+                  <h3 class="h3 button-text">{{ $t('businessowner.Shipped')}}</h3>
                 </button>
               </div>
             </div>
@@ -320,7 +320,7 @@
 
           <div class="overflow-auto">
             <div>
-              <h6 class="text-center">Pages {{ currentPage }}</h6>
+              <h6 class="text-center">{{ $t('businessowner.Pages')}} {{ currentPage }}</h6>
               <b-pagination
                 @input="getpage"
                 v-model="currentPage"
@@ -337,7 +337,7 @@
 
         <div v-if="status == 4" class="cancel">
           <div class="show row">
-            <div class="col-3">Show:</div>
+            <div class="col-3">{{ $t('businessowner.Show')}}:</div>
             <div class="col">
               <b-form-select v-model="selected" :options="options"></b-form-select>
             </div>
@@ -353,20 +353,20 @@
                       text="Manage"
                       class="m-md-2"
                     >
-                      <b-dropdown-item @click="updateStatus(9,'archive')">Archive</b-dropdown-item>
-                      <b-dropdown-item @click="updateStatus(9,'cancel')">Delete</b-dropdown-item>   
-                      <b-dropdown-item>shipped</b-dropdown-item>
-                      <b-dropdown-item>reshedule</b-dropdown-item>    
+                      <b-dropdown-item @click="updateStatus(9,'archive')">{{ $t('businessowner.Archive')}}</b-dropdown-item>
+                      <b-dropdown-item @click="updateStatus(9,'cancel')">{{ $t('businessowner.Delete')}}</b-dropdown-item>   
+                      <b-dropdown-item>{{ $t('businessowner.shipped')}}</b-dropdown-item>
+                      <b-dropdown-item>{{ $t('businessowner.Reshedule')}}</b-dropdown-item>    
                     </b-dropdown>
                   </div>
                 </div>
-                <span class="gras">Order</span>
+                <span class="gras">{{ $t('businessowner.Order')}}</span>
                 <span class="text-success order">#{{item.oderId}}</span> <br />
                 <span class="flou"> {{moment(item.dateCreated).format('DD/MM/YYYY HH:mm')}} </span>
               </div>
 
               <span class="row posstatus">
-                <p class="h3 statusp">status:</p>
+                <p class="h3 statusp">{{ $t('businessowner.Status')}}:</p>
                 <h3 class="text-success h3 margstatus">{{ item.status }}</h3>
               </span>
             </div>
@@ -382,11 +382,11 @@
               </div>
 
               <div class="col-4 text-end">
-                <h3 class="h3 margm2">Product Qte :</h3>
-                <h3 class="h3 margm2">Price:</h3>
+                <h3 class="h3 margm2">{{ $t('businessowner.Product_Qte')}} :</h3>
+                <h3 class="h3 margm2">{{ $t('businessowner.Price')}}:</h3>
 
-                <h3 class="h3 margm2">shipping cost:</h3>
-                <h3 class="h3 margm2">Total :</h3>
+                <h3 class="h3 margm2">{{ $t('businessowner.Shipping Cost')}}:</h3>
+                <h3 class="h3 margm2">{{ $t('businessowner.Total')}} :</h3>
               </div>
 
               <div class="col-4">
@@ -411,7 +411,7 @@
 
           <div class="overflow-auto">
             <div>
-              <h6 class="text-center">Pages {{ currentPage }}</h6>
+              <h6 class="text-center">{{ $t('businessowner.Pages')}} {{ currentPage }}</h6>
               <b-pagination
                 @input="getpage"
                 v-model="currentPage"
@@ -436,7 +436,7 @@
       <!-- navigation--------------- -->
       <div class="row parent">
         <b-avatar id="a1" class="avatar bg-success" text="1"></b-avatar>
-        <h2 class="text cursor" @click="changeElementType(1)">All</h2>
+        <h2 class="text cursor" @click="changeElementType(1)">{{ $t('businessowner.All') }}</h2>
         <div id="p1" class="progress prog cursor gris bg-success" @click="changeElementType(1)">
           <div
             class="progress-bar bg-success"
@@ -448,7 +448,7 @@
         </div>
 
         <b-avatar id="a2" class="avatar" text="2"></b-avatar>
-        <h2 class="text cursor" @click="changeElementType(2)">In Process</h2>
+        <h2 class="text cursor" @click="changeElementType(2)">{{ $t('businessowner.In_Process') }}</h2>
         <div id="p2" class="progress prog cursor gris" @click="changeElementType(2)">
           <div
             class="progress-bar bg-success"
@@ -460,7 +460,7 @@
         </div>
 
         <b-avatar id="a3" class="avatar" text="3"></b-avatar>
-        <h2 class="text cursor" @click="changeElementType(3)">Re-shedule</h2>
+        <h2 class="text cursor" @click="changeElementType(3)">{{ $t('businessowner.Re_shedule')}}</h2>
         <div id="p3" class="progress prog cursor gris" @click="changeElementType(3)">
           <div
             class="progress-bar bg-success"
@@ -472,7 +472,7 @@
         </div>
 
         <b-avatar id="a4" class="avatar" text="4"></b-avatar>
-        <h2 class="text cursor" @click="changeElementType(4)">Shipped</h2>
+        <h2 class="text cursor" @click="changeElementType(4)">{{ $t('businessowner.Shipped')}}</h2>
         <div id="p4" class="progress prog cursor gris" @click="changeElementType(4)">
           <div
             class="progress-bar bg-success"
@@ -485,16 +485,16 @@
       </div>
 
       <div class="justify-content-between container row my-4">
-        <div class="col order"><h3 class="bold1" >My orders</h3></div>
-        <div class="status"><h3 class="text-danger">clear history</h3></div>
+        <div class="col order"><h3 class="bold1" >{{ $t('businessowner.My_orders') }}</h3></div>
+        <div class="status"><h3 class="text-danger">{{ $t('businessowner.clear_history') }}</h3></div>
       </div>
 
       <div>
         <div v-if="status == 1" class="inprogress">
           <div class="show row">
-            <div class="col-3">Show:</div>
+            <div class="col-3">{{ $t('businessowner.Show')}}:</div>
             <div class="col">
-              <b-form-select v-model="selected" :options="options"></b-form-select>
+              <b-form-select v-model="selected" :options="options" @change="getOrder(selected)"></b-form-select>
             </div>
           </div>
           <div v-for="item in getAll" :key="item.oderId">
@@ -507,18 +507,20 @@
                     text="Manage"
                     class="m-md-2"
                   >
-                    <b-dropdown-item @click="updateStatus(9,'archive')">Archive</b-dropdown-item>
-                    <b-dropdown-item @click="updateStatus(9,'cancel')">Delete</b-dropdown-item>
-                    <b-dropdown-item>shipped</b-dropdown-item>
-                    <b-dropdown-item @click="updateStatus(9,'re-shedule')">reshedule</b-dropdown-item>
+                    <b-dropdown-item @click="updateStatus(9,'archive')">{{ $t('businessowner.Archive')}}</b-dropdown-item>
+                    <b-dropdown-item @click="updateStatus(9,'cancel')">{{ $t('businessowner.Delete')}}</b-dropdown-item>
+                    <b-dropdown-item>{{ $t('businessowner.shipped')}}</b-dropdown-item>
+                    <b-dropdown-item @click="updateStatus(9,'re-shedule')">{{ $t('businessowner.Reshedule')}}</b-dropdown-item>
                   </b-dropdown>
                 </div>
               </div>
 
-              <span class="gras" >Order</span>
+              <span class="gras" >{{ $t('businessowner.Order') }}</span>
               <span class="text-success">#{{ item.oderId }}</span> <br />
 
-              <span class="flou">{{  }}{{ moment(item.dateCreated).format('DD/MM/YYYY HH:mm') }}</span>
+
+              <span class="flou">{{ moment(item.dateCreated).format('DD/MM/YYYY HH:mm') }}</span>
+
               <hr />
             </div>
 
@@ -532,11 +534,11 @@
               </div>
 
               <div class="col-2 text-end text-start bold">
-                <h3>Product Qte :</h3>
-                <h3>Price :</h3>
+                <h3>{{ $t('businessowner.Product_Qte')}} :</h3>
+                <h3>{{ $t('businessowner.Price')}} :</h3>
 
-                <h3>shipping cost:</h3>
-                <h3>Total :</h3>
+                <h3>{{ $t('businessowner.Shipping Cost')}}:</h3>
+                <h3>{{ $t('businessowner.Total')}} :</h3>
               </div>
 
               <div class="col-3 text-start">
@@ -547,13 +549,13 @@
               </div>
 
               <div class="col" id="hidedesktop1">
-                <h3 class="bold1">status</h3>
+                <h3 class="bold1">{{ $t('businessowner.status')}}</h3>
                 <h3 class="text-success">{{ item.status }}</h3>
               </div>
 
               <div class="container d-flex justify-content-end btn-marg">
                 <button @click="updateStatus(9,'shipped')" class="button btn shadow">
-                  <h3 class="h3 button-text">Shipped</h3>
+                  <h3 class="h3 button-text">{{ $t('businessowner.Shipped')}}</h3>
                 </button>
               </div>
 
@@ -568,8 +570,8 @@
           </div>
 
           <div class="overflow-auto">
-            <div v-if="getAll.length >1">
-              <h6 class="text-center">Pages {{ currentPage }}</h6>
+            <div>
+              <h6 class="text-center">{{ $t('businessowner.Pages')}} {{ currentPage }}</h6>
               <b-pagination
                 @input="getpage"
                 v-model="currentPage"
@@ -585,7 +587,7 @@
 
         <div v-if="status == 2" class="inprogress">
           <div class="show row">
-            <div class="col-3">Show:</div>
+            <div class="col-3">{{ $t('businessowner.Show')}}:</div>
             <div class="col">
               <b-form-select v-model="selected" :options="options"></b-form-select>
             </div>
@@ -601,17 +603,19 @@
                     text="Manage"
                     class="m-md-2"
                   >
-                    <b-dropdown-item @click="updateStatus(9,'cancel')">Delete</b-dropdown-item>
-                    <b-dropdown-item  @click="updateStatus(9,'re-shedule')">reshedule</b-dropdown-item>
+                    <b-dropdown-item @click="updateStatus(9,'cancel')">{{ $t('businessowner.Delete')}}</b-dropdown-item>
+                    <b-dropdown-item  @click="updateStatus(9,'re-shedule')">{{ $t('businessowner.Reshedule')}}</b-dropdown-item>
 
-                    <b-dropdown-item>shipped</b-dropdown-item>
-                    <b-dropdown-item>reshedule</b-dropdown-item>
+                    <b-dropdown-item>{{ $t('businessowner.shipped')}}</b-dropdown-item>
+                    <b-dropdown-item>{{ $t('businessowner.Reshedule')}}</b-dropdown-item>
                   </b-dropdown>
                 </div>
               </div>
-              <span class="gras">Order</span>
+              <span class="gras">{{ $t('businessowner.Order')}}</span>
               <span class="text-success"># {{ item.oderId }}</span> <br />
-              <span class="flou">{{  }} {{ moment(item.dateCreated).format('DD/MM/YYYY HH:mm') }}</span>
+
+              <span class="flou"> {{ moment(item.dateCreated).format('DD/MM/YYYY HH:mm') }}</span>
+
               <hr />
             </div>
 
@@ -625,11 +629,11 @@
               </div>
 
               <div class="col-2 text-end text-start bold">
-                <h3>Product Qte :</h3>
-                <h3>Price :</h3>
+                <h3>{{ $t('businessowner.Product_Qte')}} :</h3>
+                <h3>{{ $t('businessowner.Price')}} :</h3>
 
-                <h3>shipping cost:</h3>
-                <h3>Total :</h3>
+                <h3>{{ $t('businessowner.Shipping Cost')}}:</h3>
+                <h3>{{ $t('businessowner.Total')}} :</h3>
               </div>
 
               <div class="col-3 text-start">
@@ -640,13 +644,13 @@
               </div>
 
               <div class="col" id="hidedesktop1">
-                <h3 class="bold1">status</h3>
+                <h3 class="bold1">{{ $t('businessowner.status')}}</h3>
                 <h3 class="text-success">{{ item.status }}</h3>
               </div>
 
               <div class="container d-flex justify-content-end btn-marg">
                 <button @click="updateStatus(9,'shipped')" class="button btn shadow">
-                  <h3 class="h3 button-text">Shipped</h3>
+                  <h3 class="h3 button-text">{{ $t('businessowner.Shipped')}}</h3>
                 </button>
               </div>
 
@@ -660,8 +664,8 @@
             </div>
           </div>
           <div class="overflow-auto">
-            <div v-if="getProcess.length >1">
-              <h6 class="text-center">Pages {{ currentPage }}</h6>
+            <div>
+              <h6 class="text-center">{{ $t('businessowner.Pages')}} {{ currentPage }}</h6>
               <b-pagination
                 @input="getpage"
                 v-model="currentPage"
@@ -678,7 +682,7 @@
 
         <div v-if="status == 3" class="complete">
           <div class="show row">
-            <div class="col-3">Show:</div>
+            <div class="col-3">{{ $t('businessowner.Show')}}:</div>
             <div class="col">
               <b-form-select v-model="selected" :options="options"></b-form-select>
             </div>
@@ -694,14 +698,16 @@
                     text="Manage"
                     class="m-md-2"
                   >
-                    <b-dropdown-item @click="updateStatus(9,'delete')">Delete</b-dropdown-item>
-                    <b-dropdown-item  @click="updateStatus(9,'re-shedule')">reshedule</b-dropdown-item>
+                    <b-dropdown-item @click="updateStatus(9,'delete')">{{ $t('businessowner.Delete')}}</b-dropdown-item>
+                    <b-dropdown-item  @click="updateStatus(9,'re-shedule')">{{ $t('businessowner.Reshedule')}}</b-dropdown-item>
                   </b-dropdown>
                 </div>
               </div>
-              <span class="gras">Order</span>
+              <span class="gras">{{ $t('businessowner.Order')}}</span>
               <span class="text-success">#{{ item.oderId }}</span> <br />
-              <span class="flou">{{  }}, {{ moment(item.dateCreated).format('DD/MM/YYYY HH:mm') }}</span>
+
+              <span class="flou">, {{ moment(item.dateCreated).format('DD/MM/YYYY HH:mm') }}</span>
+
               <hr />
             </div>
 
@@ -715,11 +721,11 @@
               </div>
 
               <div class="col-2 text-end text-start bold">
-                <h3>Product Qte :</h3>
-                <h3>Price :</h3>
+                <h3>{{ $t('businessowner.Product_Qte')}} :</h3>
+                <h3>{{ $t('businessowner.Price')}} :</h3>
 
-                <h3>shipping cost:</h3>
-                <h3>Total :</h3>
+                <h3>{{ $t('businessowner.Shipping Cost')}}:</h3>
+                <h3>{{ $t('businessowner.Total')}} :</h3>
               </div>
 
               <div class="col-3 text-start">
@@ -730,13 +736,13 @@
               </div>
 
               <div class="col" id="hidedesktop1">
-                <h3 class="bold1">status</h3>
+                <h3 class="bold1">{{ $t('businessowner.status')}}</h3>
                 <h3 class="text-success">{{ item.status }}</h3>
               </div>
 
               <div class="container d-flex justify-content-end btn-marg">
                 <button @click="updateStatus(9,'shipped')" class="button btn shadow">
-                  <h3 class="h3 button-text">Shipped</h3>
+                  <h3 class="h3 button-text">{{ $t('businessowner.Shipped')}}</h3>
                 </button>
               </div>
 
@@ -751,8 +757,8 @@
           </div>
 
           <div class="overflow-auto">
-            <div  v-if="getReshedule.length>1" >
-              <h6 class="text-center">Pages {{ currentPage }}</h6>
+            <div>
+              <h6 class="text-center">{{ $t('businessowner.Pages')}} {{ currentPage }}</h6>
               <b-pagination
                 @input="getpage"
                 v-model="currentPage"
@@ -769,7 +775,7 @@
 
         <div v-if="status == 4" class="canel">
           <div class="show row">
-            <div class="col-3">Show:</div>
+            <div class="col-3">{{ $t('businessowner.Show')}}:</div>
             <div class="col">
               <b-form-select v-model="selected" :options="options"></b-form-select>
             </div>
@@ -785,14 +791,16 @@
                     text="Manage"
                     class="m-md-2"
                   >
-                    <b-dropdown-item @click="updateStatus(9,'archive')">Archive</b-dropdown-item>
-                    <b-dropdown-item @click="updateStatus(9,'cancel')">Delete</b-dropdown-item>
+                    <b-dropdown-item @click="updateStatus(9,'archive')">{{ $t('businessowner.Archive')}}</b-dropdown-item>
+                    <b-dropdown-item @click="updateStatus(9,'cancel')">{{ $t('businessowner.Delete')}}</b-dropdown-item>
                   </b-dropdown>
                 </div>
               </div>
-              <span class="gras">Order</span>
+              <span class="gras">{{ $t('businessowner.Order')}}</span>
               <span class="text-success"># {{ item.oderId }}</span> <br />
-              <span class="flou">{{  }}, {{ moment(item.dateCreated).format('DD/MM/YYYY HH:mm') }}</span>
+
+              <span class="flou">, {{ moment(item.dateCreated).format('DD/MM/YYYY HH:mm') }}</span>
+
               <hr />
             </div>
 
@@ -806,11 +814,11 @@
               </div>
 
               <div class="col-2 text-end text-start bold">
-                <h3>Product Qte :</h3>
-                <h3>Price :</h3>
+                <h3>{{ $t('businessowner.Product_Qte')}} :</h3>
+                <h3>{{ $t('businessowner.Price')}} :</h3>
 
-                <h3>shipping cost:</h3>
-                <h3>Total :</h3>
+                <h3>{{ $t('businessowner.Shipping Cost')}}:</h3>
+                <h3>{{ $t('businessowner.Total')}} :</h3>
               </div>
 
               <div class="col-3 text-start">
@@ -821,7 +829,7 @@
               </div>
 
               <div class="col" id="hidedesktop1">
-                <h3 class="bold1">status</h3>
+                <h3 class="bold1">{{ $t('businessowner.status')}}</h3>
                 <h3 class="text-success">{{ item.status }}</h3>
               </div>
 
@@ -836,8 +844,8 @@
           </div>
 
           <div class="overflow-auto">
-            <div v-if="getShipped.length>1 ">
-              <h6 class="text-center">Pages {{ currentPage }}</h6>
+            <div>
+              <h6 class="text-center">{{ $t('businessowner.Pages')}} {{ currentPage }}</h6>
               <b-pagination
                 @input="getpage"
                 v-model="currentPage"
@@ -878,8 +886,8 @@ export default {
       
       options: [
         { value: null, text: 'Please select an option' },
-        { value: 'a', text: 'last 5 days' },
-        { value: 'b', text: 'last 10 days' },
+        { value: '5', text: 'last 5 days' },
+        { value: '10', text: 'last 10 days' },
       ],
       etat1: ['in process', 'complete', 'cancel']
       
@@ -892,19 +900,11 @@ export default {
 
   mounted() {
     this.url = this.$route.params.id;
-   let url =  window.location.href.split("/");
-   let data = url[window.location.href.split("/").length - 1];
-   console.log(data);
-   this.$store
-     .dispatch('orderBusiness/getOrder', data)
-     .then(() => {
-       console.log('hey yeah orders');
-     
-       this.rows = this.limitall
-     })
-     .catch((err) => {
-       console.log({ err: err });
-     });
+  //  let url =  window.location.href.split("/");
+  //  let data = url[window.location.href.split("/").length - 1];
+  //  console.log(data);
+
+   this.getOrder();
 
    
  },
@@ -965,7 +965,27 @@ export default {
     },
 
 
+  getOrder(param){ console.log(param)
+    let data = this.$route.params.id;
+    let url = '';
+    if(!param){
+      url =`/order/getOrderBusiness/${data}/` ;
 
+    }else {
+      url = "order/filtreOrderBusiness/1/"+param+"/"
+    } console.log("---",url);
+     this.$store
+     .dispatch('orderBusiness/getOrder', url)
+     .then(() => {
+       console.log('hey yeah orders');
+     
+       this.rows = this.limitall
+     })
+     .catch((err) => {
+       console.log({ err: err });
+     });
+
+  },
 
     updateStatus(order_id, status) {
       console.log("updateStatus")

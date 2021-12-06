@@ -18,8 +18,8 @@ import profileowner from './profileowner.json'
 
 import memnetwork from './memnetwork.json'
 
-import profilefollower from './network.json'
-
+import profilefollower from './profilefollower.json'
+import businessowner from './businessowner.json'
 
 export const defaultLocale = 'fr'
 
@@ -33,17 +33,18 @@ export const fr = {
     Order: Order,
     myOrders: myOrders,
 
+    passrecover: passrecover,
 
     welcome: welcome,
     dashboard: dashboard,
     profileowner: profileowner,
     memnetwork: memnetwork,
     verification: verification,
-
+    businessowner: businessowner,
     profilefollower: profilefollower,
 
 
     network: network,
-    about:about,
+    about: about,
 
 }

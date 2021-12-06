@@ -7,7 +7,7 @@
           <span class="m-1">
             <h2 class="title intro-head">
               <fas-icon class="icons" :icon="['fas', 'exclamation-circle']" size="lg" />
-              Intro
+              {{ $t('profilefollower.Intro') }}
             </h2>
             <span class="float-right btn m-0 p-0 action-intro" @click="editPage"
               ><b-icon icon="pencil-fill" class="icon-size" variant="primary"></b-icon>
@@ -17,7 +17,7 @@
           <b-card-text class="text-left username intro-head">
             <p>
               <b-icon icon="briefcase-fill" class="icon-size" variant="primary"></b-icon>
-              Work at:
+             {{ $t('profilefollower.Work_at') }} :
               <span v-if="info.user_experience">
                 <span class="text" v-for="exp in info.user_experience.slice(0, 1)" :key="exp.id">
                   {{ exp.company_name }}
@@ -26,7 +26,7 @@
             </p>
             <p>
               <b-icon icon="book-fill" class="icon-size" variant="primary"></b-icon>
-              Studied at:
+              {{ $t('profilefollower.Studied_at') }}:
               <span v-if="info.user_education != null">
                 <span v-for="edu in info.user_education.slice(0, 1)" :key="edu.id" class="text">
                   {{ edu.school_name }}</span
@@ -35,20 +35,20 @@
             </p>
             <p>
               <b-icon icon="house-fill" class="icon-size" variant="primary"></b-icon>
-              Home Town :
+              {{ $t('profilefollower.Home_Town') }} :
               <span class="text">
                 {{ info.user.neighbor }}
               </span>
             </p>
             <p>
-              <b-icon icon="geo-alt-fill" class="icon-size" variant="primary"></b-icon> Current City :
+              <b-icon icon="geo-alt-fill" class="icon-size" variant="primary"></b-icon> {{ $t('profilefollower.Current_City') }} :
               <span class="text">
                 {{ info.user.city }}
               </span>
             </p>
             <p>
               <b-icon icon="people-fill" class="icon-size" variant="primary"></b-icon>
-              Community:
+              {{ $t('profilefollower.Community') }}:
               <span class="text">
                 {{ nFormatter(total.total_community) }}
               </span>
@@ -59,7 +59,7 @@
         <b-modal id="modal-5" title="Edit Intro" ref="modal" @ok="handleOk">
           <div class="">
             <p>
-              <b> Work at:</b>
+              <b> {{ $t('profilefollower.Work_at') }}:</b>
               <span v-if="info.user_experience">
                 <span class="text" v-for="exp in info.user_experience.slice(0, 1)" :key="exp.id">
                   {{ exp.company_name }}
@@ -67,7 +67,7 @@
               </span>
             </p>
             <p>
-              <b> Studied at: </b>
+              <b> {{ $t('profilefollower.Studied_at') }}: </b>
 
               <span v-if="info.user_education != null">
                 <span v-for="edu in info.user_education.slice(0, 1)" :key="edu.id" class="text">
@@ -76,13 +76,13 @@
               </span>
             </p>
             <p>
-              <b> Home Town : </b>
+              <b> {{ $t('profilefollower.Home_Town') }} : </b>
               <span class="text">
                 {{ info.user.neighbor }}
               </span>
             </p>
             <p>
-              <b> Current City : </b>
+              <b> {{ $t('profilefollower.Current_City') }} : </b>
               <span class="text">
                 {{ info.user.city }}
               </span>

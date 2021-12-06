@@ -204,7 +204,14 @@
                     <div v-for="message in messages" :key="message.id">
                       <hr class="h-divider" />
                       <div
-                        class="d-inline-flex flex-row justify-content-between align-items-center suggest-item cursor-pointer"
+                        class="
+                          d-inline-flex
+                          flex-row
+                          justify-content-between
+                          align-items-center
+                          suggest-item
+                          cursor-pointer
+                        "
                       >
                         <div class="d-inline-flex flex-row align-items-center">
                           <div>
@@ -263,7 +270,13 @@
                     >
                       <hr class="h-divider" />
                       <div
-                        class="d-inline-flex flex-row align-items-center suggest-item cursor-pointer"
+                        class="
+                          d-inline-flex
+                          flex-row
+                          align-items-center
+                          suggest-item
+                          cursor-pointer
+                        "
                       >
                         <div class="d-flex flex-column ml-3">
                           <div>{{ notification.notification_text }}</div>
@@ -282,17 +295,12 @@
                     <router-link :to="newRedirection('notification')"
                       ><u>See all Notifications</u></router-link
                     >
-                    
                   </div>
                 </b-popover>
               </div>
               <!-- Notifications Ended -->
 
-              <div
-                class="nav-item"
-                id="profilepic"
-                @click.prevent="switchToProfile"
-              >
+              <div class="nav-item" id="profilepic">
                 <span
                   ><img
                     :src="user.profile_picture"
@@ -322,16 +330,44 @@
                 <b-popover target="other-menu" triggers="hover" placement="top">
                   <div class="popover-body">
                     <div
-                      class="d-inline-flex flex-row align-items-center mb-1 w-full"
+                      class="
+                        d-inline-flex
+                        flex-row
+                        align-items-center
+                        mb-1
+                        w-full
+                      "
                     >
                       <Activity />
                     </div>
+                    <hr class="h-divider" v-if="'user' != profile.user_type" />
 
-                    <hr />
+                    <a
+                      v-if="'user' != profile.user_type"
+                      @click.prevent="switchToProfile"
+                      href="#"
+                      class="
+                        other-menu
+                        suggest-item
+                        cursor-pointer
+                        text-decoration-none text-dark
+                      "
+                    >
+                      <span class="mr-2"
+                        ><fas-icon class="violet search"
+                      /></span>
+                      Profile
+                    </a>
+                    <hr class="h-divider" />
 
                     <router-link
                       :to="{ name: 'orders' }"
-                      class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+                      class="
+                        other-menu
+                        suggest-item
+                        cursor-pointer
+                        text-decoration-none text-dark
+                      "
                     >
                       <span class="mr-2"
                         ><fas-icon
@@ -344,7 +380,12 @@
 
                     <router-link
                       :to="{ name: 'settings' }"
-                      class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+                      class="
+                        other-menu
+                        suggest-item
+                        cursor-pointer
+                        text-decoration-none text-dark
+                      "
                     >
                       <span class="mr-2"
                         ><fas-icon
@@ -387,7 +428,12 @@
                     <a
                       @click="logout"
                       href="#"
-                      class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+                      class="
+                        other-menu
+                        suggest-item
+                        cursor-pointer
+                        text-decoration-none text-dark
+                      "
                     >
                       <span class="mr-2"
                         ><fas-icon
@@ -444,7 +490,12 @@
 
             <router-link
               :to="{ name: 'orders' }"
-              class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+              class="
+                other-menu
+                suggest-item
+                cursor-pointer
+                text-decoration-none text-dark
+              "
             >
               <span class="mr-2"
                 ><fas-icon
@@ -457,7 +508,12 @@
 
             <router-link
               :to="{ name: 'settings' }"
-              class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+              class="
+                other-menu
+                suggest-item
+                cursor-pointer
+                text-decoration-none text-dark
+              "
             >
               <span class="mr-2"
                 ><fas-icon class="violet search" :icon="['fas', 'cogs']"
@@ -497,7 +553,12 @@
             <a
               href="#"
               @click="logout"
-              class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+              class="
+                other-menu
+                suggest-item
+                cursor-pointer
+                text-decoration-none text-dark
+              "
             >
               <span class="mr-2"
                 ><fas-icon
@@ -621,13 +682,15 @@ export default {
 
     updateNotificationEvent() {
       try {
-        const newRouteNotificationApi = this.notificationPatterns[
-          this.$store.state.auth.profilConnected.user_type
-        ]();
+        const newRouteNotificationApi =
+          this.notificationPatterns[
+            this.$store.state.auth.profilConnected.user_type
+          ]();
 
-        const newRouteMessageApi = this.messagePatterns[
-          this.$store.state.auth.profilConnected.user_type
-        ]();
+        const newRouteMessageApi =
+          this.messagePatterns[
+            this.$store.state.auth.profilConnected.user_type
+          ]();
 
         this.newNotification(newRouteNotificationApi);
         this.newMessage(newRouteMessageApi);
@@ -715,6 +778,8 @@ export default {
         this.profile({ ...this.auth.user, user_type: "user" });
       }
       loader.hide();
+
+      this.$router.push({name: 'BusinessOwner', params:{id:this.auth.id}})
     },
 
     toggleinput() {

@@ -1,6 +1,6 @@
 <template>
   <div class="accordion" role="tablist">
-    <b-card no-body class="mb-1" style="width: 100%">
+    <b-card class="mb-1" style="width: 100%" v-if="'business' != profile.user_type">
       <b-card-header header-tag="header" class="p-1" role="tab">
         <p block v-b-toggle.accordion-1 variant="info">
           <b-icon :icon="openBusiness ? 'arrow-down' : 'arrow-up'"></b-icon>
@@ -41,7 +41,7 @@
       </b-collapse>
     </b-card>
 
-    <b-card no-body class="mb-1">
+    <b-card class="mb-1" v-if="'network' != profile.user_type">
       <b-card-header header-tag="header" class="p-1" role="tab">
         <p block v-b-toggle.accordion-2 variant="info">
           <b-icon :icon="openNetwork ? 'arrow-down' : 'arrow-up'"></b-icon>
@@ -92,6 +92,7 @@ export default {
       networks: "social/FIND_USER_NETWORK",
       business: "social/FIND_USER_BUSNESS",
       hasLauchNetworkRequest: "social/INIT",
+      profile: "auth/profilConnected",
     }),
   },
 

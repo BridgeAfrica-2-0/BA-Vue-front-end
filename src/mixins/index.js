@@ -1,5 +1,4 @@
 
-
 import { mapGetters, mapActions, mapMutations } from "vuex";
 import { formatNumber, fromNow } from "@/helpers";
 
@@ -7,11 +6,8 @@ import NotFound from "@/components/NotFoundComponent"
 import NoMoreData from "@/components/businessOwner/PaginationMessage"
 import ClipLoader from 'vue-spinner/src/ClipLoader.vue'
 
-
-
 import './notifications.mixins'
 import './post.mixins'
-
 
 export const loader = {
   methods: {

@@ -711,6 +711,7 @@ export default {
       categories_filters: [],
       items: [
 
+
         { label: this.$t('search.All') },
 
         { label: this.$t('search.Business') },

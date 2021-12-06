@@ -1,6 +1,11 @@
 <template>
   <div class="map-container">
-    <MglMap :accessToken="accessToken" :mapStyle="mapStyle" />
+    <MglMap
+      :accessToken="accessToken"
+      :zoom="zoom"
+      :center="center"
+      :mapStyle="mapStyle"
+    />
   </div>
 </template>
 <script>
@@ -13,11 +18,10 @@ export default {
   data() {
     return {
       loading: false,
-      location: "",
       accessToken: process.env.VUE_APP_MAPBOX_TOKEN,
       mapStyle: "mapbox://styles/mapbox/streets-v11",
-      center: [0, 0],
-      map: {},
+      center: [3.8755099880783974, 11.556446782307379],
+      zoom: 8,
     };
   },
   created() {

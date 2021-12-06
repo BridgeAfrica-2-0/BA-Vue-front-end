@@ -332,11 +332,11 @@ const routes = [
     name: "visitor",
     component: Visitor,
   },
-  {
-    path: "/search/:id",
-    name: "Search",
-    component: search,
-  },
+  // {
+  //   path: "/search/:id",
+  //   name: "Search",
+  //   component: search,
+  // },
 
   {
     path: "/services/:id",

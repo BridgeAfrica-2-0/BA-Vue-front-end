@@ -583,7 +583,7 @@
           </div>
         </b-col>
         <b-col cols="12" md="4" lg="4" xl="3" class="showmap" ref="mapblock">
-          <div id="map" style="margin-top: 20px" class=""><Map /></div>
+          <div style="margin-top: 20px" class=""><map-box /></div>
         </b-col>
       </b-row>
     </div>
@@ -594,7 +594,7 @@
 import _ from "lodash";
 
 import LyTab from "@/tab/src/index.vue";
-import Map from "@/components/search/map";
+import MapBox from "@/components/search/MapBox";
 //import Business from '@/components/search/business';
 import People from "@/components/search/people";
 import Network from "@/components/search/network";
@@ -630,7 +630,7 @@ export default {
     Nav,
     SubNav,
     Filters,
-    Map,
+    MapBox,
     Sponsor,
     BusinessComponent,
     //Business,

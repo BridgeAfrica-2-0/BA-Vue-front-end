@@ -776,8 +776,8 @@ export default {
             console.log("Error erro!");
           });
 
-        this.$router.push({ name: "Search" });
       }
+      this.$router.push({ name: "Search" });
     },
     navLink(type) {
       const link = {

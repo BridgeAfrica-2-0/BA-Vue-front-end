@@ -230,7 +230,8 @@ new Vue({
 
 
 
-            config.headers.common['Language'] = i18n.locale;
+            // config.headers.common['Language'] = i18n.locale;
+            config.headers.common['Language'] = "en";
 
             return config;
         });

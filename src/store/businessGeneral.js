@@ -21,9 +21,9 @@ export default {
 
   actions: {
 
-    getbusiness({ commit }, businessId) {
+    getbusiness({ commit }, path) {
       return axios
-        .get("business/general/update/" + businessId)
+        .get(`business/${path}`)
         .then(({ data }) => {
           commit("setbusiness", data.data);
           console.log(data);

@@ -348,8 +348,8 @@ export default {
   color: white;
 }
 .p-card {
-  padding-left: 90px;
-  padding-right: 90px;
+  padding-left: 60px;
+  padding-right: 60px;
   padding-top: 80px;
   padding-bottom: 80px;
 }

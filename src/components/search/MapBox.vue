@@ -6,9 +6,16 @@
       :center="center"
       :mapStyle="mapStyle"
     >
-      <MglMarker :coordinates="center" color="#3ad3ad">
-        <MglPopup :coordinates="center" anchor="top">
-          <div>Hello, I'm popup!</div>
+      <MglMarker
+        v-for="(center, key) in points"
+        :key="key"
+        :coordinates="center.coordinates"
+        color="#3ad3ad"
+      >
+        <MglPopup :coordinates="center.coordinates" anchor="top">
+          <div>
+            {{ center.title }}
+          </div>
         </MglPopup>
       </MglMarker>
     </MglMap>
@@ -28,8 +35,30 @@ export default {
       loading: false,
       accessToken: process.env.VUE_APP_MAPBOX_TOKEN,
       mapStyle: "mapbox://styles/mapbox/streets-v11",
-      center: [3.8755099880783974, 11.556446782307379],
-      zoom: 8,
+      center: [3.8465173382452815, 11.504929555178624],
+      points: [
+        {
+          id: 1,
+          title: "Jardin zoologique de Mvog-Betsi",
+          coordinates: [3.8665862087672718, 11.48759323642662],
+        },
+        {
+          id: 2,
+          title: "Carrefour Mvog Mbi",
+          coordinates: [3.8533876466294736, 11.533914657070195],
+        },
+        {
+          id: 3,
+          title: "Complexe Beac",
+          coordinates: [3.8471496894112707, 11.540570084848191],
+        },
+        {
+          id: 4,
+          title: "immocam (immobilier du Cameroun)",
+          coordinates: [3.833256267559204, 11.558184378580254],
+        },
+      ],
+      zoom: 11,
     };
   },
   created() {

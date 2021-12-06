@@ -290,7 +290,7 @@
     </div>
     <hr />
     <div class="row mb-1 mt-3">
-      <div class="col-md-4">   {{ $t('profileowner.default') }}    {{ $t('profileowner.Phone') }}</div>
+      <div class="col-md-4">   {{ $t('profileowner.default_Phone') }}</div>
       <div class="col-md-4">  {{ info.user.phone }}</div>
 
       
@@ -315,7 +315,7 @@
                 class="primary float-left mr-1 mt-1"
                 :icon="['fas', 'plus-circle']"
               />
-              Add Contacts </a
+              {{ $t('profileowner.Add_Contacts') }} </a
             ><br />
 
 

@@ -21,7 +21,7 @@
             <span v-for="cat in item.category" :key="cat.name">   {{cat.name}}  </span>
                 <br />
                 {{ count(item.followers) }}
-                {{ $t('dashboard.Community') }} <br />
+                {{ $t('businessowner.Community') }} <br />
 
                 <span class="location"> <b-icon-geo-alt class="ico"></b-icon-geo-alt>{{ item.country }} </span>
                 <br />
@@ -68,7 +68,7 @@
                 >
                  
                   <i class="fas fa-lg btn-icon" :class="item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"></i>
-                  <span class="btn-com ml-1"> {{ $t('dashboard.Community') }}</span>
+                  <span class="btn-com ml-1"> {{ $t('businessowner.Community') }}</span>
                 </b-button>
 
 
@@ -92,7 +92,7 @@
 
                     <b-button block size="sm" class="b-background shadow" variant="primary" @click="cta(item)">
                       <i class="fas fa-envelope fa-lg btn-icon"></i>
-                      <span class="btn-text">Message</span>
+                      <span class="btn-text">{{ $t('businessowner.Message') }}</span>
                     </b-button>
                   </b-col>
 
@@ -111,7 +111,7 @@
                       variant="primary"
                     >
                       <i class="fas fa-map-marked-alt  fa-lg btn-icon "></i>
-                      <span class="btn-text">{{ $t('dashboard.Direction') }}</span>
+                      <span class="btn-text">{{ $t('businessowner.Direction') }}</span>
                     </b-button>
                   </b-col>
                 </b-row>

@@ -94,10 +94,11 @@ import moment from 'moment';
 import axios from 'axios';
 
 export default {
-  props: ['type'],
+  props: ['type', 'from'],
   data() {
     return {
       page: 1,
+      foll_id:null,
       biz_id: null,
       businesses: [],
       options: {
@@ -124,6 +125,13 @@ export default {
     },
   },
 
+  mounted(){
+  
+   this.foll_id = this.$route.params.id ? this.$route.params.id :""  ;
+
+ },
+
+
   methods: {
     count(number) {
       if (number >= 1000000) {
@@ -134,14 +142,16 @@ export default {
       } else return number;
     },
 
-    infiniteHandler($state) {
-      const url =
+    infiniteHandler($state) {  
+      let url =
         this.type === 'Follower'
           ? `profile/business/follower/`
           : `profile/business/following/`;
 
+       console.log(this.foll_id);
+
       axios
-        .get(url + this.page)
+        .get(url + this.page+"?id="+this.foll_id)
         .then(({ data }) => {
           if (this.type == 'Follower') {
             if (data.data.business_followers.length) {

@@ -116,6 +116,7 @@ export default {
   data() {
     return {
       page: 1,
+      foll_id:null,
       users:[],
        infiniteId: +new Date(),
       options: {
@@ -129,6 +130,12 @@ export default {
       },
     };    
   },
+
+   mounted(){
+  
+   this.foll_id = this.$route.params.id ? this.$route.params.id :""  ;
+
+ },
  
   computed: {
 
@@ -185,18 +192,8 @@ export default {
 
     search(){
      
-       console.log('search started');
-       
-         if(this.type=="Follower"){ 
-         
-        this.$store.commit("profile/setUcommunityFollower",{ "user_followers": [ ], "total_user_follower": 0 }); 
-
-       }else{
-       
-        
-        this.$store.commit("profile/setUcommunityFollowing",{ "user_following": [ ], "total_user_following": 0 }); 
-       }
-
+      
+   this.users=[];
       this.page = 1;
       this.infiniteId += 1;
 
@@ -234,7 +231,7 @@ export default {
       }
 
       axios
-        .get(url + this.page+"?keyword="+this.searchh)
+       .get(url + this.page+"?keyword="+this.searchh+"&id="+this.foll_id )
         .then(({ data }) => {
 
             console.log(data);

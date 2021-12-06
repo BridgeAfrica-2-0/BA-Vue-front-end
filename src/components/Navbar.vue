@@ -100,23 +100,21 @@
                 title=""
               />
 
-              <input
-                id="search-location"
-                ref="foo"
-                type="search"
-                list="browsers"
-                data-toggle="popover"
-                class="form-control search-h"
-                placeholder="Where "
-                aria-label="search bridge africa"
-                data-original-title=""
-                title=""
-              />
 
-              <datalist id="browsers">
-                <option value=" Current Location "></option>
-                <option value="Yaounde " />
-              </datalist>
+
+           <vue-bootstrap-typeahead
+    
+    v-model="query"
+    :data="users"
+    :serializer="item => item.login"
+    @hit="selectedUser = $event"
+    placeholder="Where"
+    class="search-hh"
+  />
+
+    
+
+             
               <slot name="button">
                 <Button @click.native="getKeyword" />
               </slot>
@@ -567,7 +565,34 @@
       </div>
     </nav>
 
-    <div></div>
+    <div>    
+
+
+
+
+<!-- 
+
+           <div>
+  <vue-bootstrap-typeahead
+    class="mb-4"
+    v-model="query"
+    :data="users"
+    :serializer="item => item.login"
+    @hit="selectedUser = $event"
+    placeholder="Search GitHub Users"
+  />
+
+ <h3>Selected User JSON</h3>
+ <pre>{{ selectedUser | stringify }}</pre>
+</div> -->
+
+
+
+
+
+
+
+    </div>
   </header>
 </template>
 
@@ -577,12 +602,14 @@ import Activity from "@/components/ShowActivity.vue";
 // import NavBarNotifications from '@/components/NavBarNotifications.vue';
 import { mapGetters, mapActions, mapMutations } from "vuex";
 import axios from "axios";
+import VueBootstrapTypeahead from 'vue-bootstrap-typeahead'
 
 export default {
   name: "navbar",
   components: {
     Button,
     Activity,
+    VueBootstrapTypeahead
     // NavBarNotifications
   },
   props: {
@@ -605,6 +632,11 @@ export default {
       notificationPatterns: null,
       messagePatterns: null,
       redirectionPatterns: null,
+
+       query: '',
+      selectedUser: null,
+      users: []
+
     };
   },
   computed: {
@@ -663,6 +695,21 @@ export default {
     "$store.state.auth.profilConnected": function () {
       this.updateNotificationEvent();
     },
+
+     query(newQuery) {
+      axios.get(`https://api.github.com/search/users?q=${newQuery}`)
+        .then((res) => {
+          this.users = res.data.items
+        })
+    }
+
+  },
+
+
+    filters: {
+    stringify(value) {
+      return JSON.stringify(value, null, 2)
+    }
   },
   
   methods: {
@@ -676,6 +723,9 @@ export default {
     ...mapMutations({
       profile: "auth/profilConnected",
     }),
+
+    
+
 
     updateNotificationEvent() {
       try {
@@ -1055,4 +1105,24 @@ export default {
   right: 9 px;
   font-weight: bold;
 }
+</style>
+
+<style >
+  
+
+  
+
+     @media only screen and (min-width: 768px) {
+   .search-hh .form-control{
+    height: 48px !important;
+
+        margin-bottom: 0;
+    border-radius: 0px;
+
+    border-bottom: hidden;
+    
+}
+     }
+
+  
 </style>

@@ -22,6 +22,9 @@ import VueSocialauth from 'vue-social-auth';
 import ShareNetwork from 'vue-social-sharing';
 Vue.use(ShareNetwork);
 
+import VueBootstrapTypeahead from 'vue-bootstrap-typeahead'
+Vue.use('vue-bootstrap-typeahead', VueBootstrapTypeahead)
+
 // don't comment that 2 line URGENT
 import plugin from './http';
 Vue.use(plugin);

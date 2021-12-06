@@ -1,5 +1,6 @@
 .<template>
   <div id="app" class="" ref="formContainer">
+    <div id="flashmessage"> <FlashMessage/> </div>
 
     <transition
       name="fade"

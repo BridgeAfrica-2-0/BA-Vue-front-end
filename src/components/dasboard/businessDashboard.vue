@@ -12,18 +12,18 @@
             <b> {{business.name}} </b>    
           </h6>
 
-          <h6 class="float-right text-success font-weight-bolder">
-            <b-button variant="outline-primary" class="upgrade-btn" size="sm"
+          <h6 class="float-right text-success font-weight-bolder mb-3">
+            <!-- <b-button variant="outline-primary" class="upgrade-btn" size="sm"
               ><b-icon-star></b-icon-star> &nbsp;&nbsp; {{ $t('dashboard.Upgrade_Plan') }}</b-button
-            >
+            > -->
           </h6>
         </h4>
       </span>
 
       <div class="d-flex col-md-12 mt-2">
-        <img class="img-fluid picture" :src="business.picture" />
+        <img class="img-fluid picture" :src="business.picture" /> 
         <div class="text-lost">
-          <b>  {{business.name}}  </b>
+          <b> <router-link :to="'business/'+business.id"> {{business.name}}  </router-link>  </b>
           <p class="mb-1">
               {{business.followers}} {{ $t('dashboard.Community') }} <br />
             <span class=""

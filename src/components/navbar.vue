@@ -697,7 +697,7 @@ export default {
     },
 
      query(newQuery) {
-      axios.get(`https://api.github.com/search/users?q=${newQuery}`)
+      axios.get(`neighborhood/${newQuery}`)
         .then((res) => {
           this.users = res.data.items
         })

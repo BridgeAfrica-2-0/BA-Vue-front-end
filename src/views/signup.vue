@@ -426,8 +426,8 @@ export default {
 }
 
 .p-card {
-  padding-left: 90px;
-  padding-right: 90px;
+  padding-left: 60px;
+  padding-right: 60px;
   padding-top: 30px;
   padding-bottom: 30px;
 }

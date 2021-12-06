@@ -12,7 +12,6 @@
       <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
       {{ $t("search.People") }}
     </h6>
-    <ShareButton :post="{ post_id: 1, user_id: 1 }" type="profile" />
 
     <Loader v-if="!pageHasLoad || loaderState" />
     <NotFound v-if="!peoples.length && !loaderState" :title="title" />
@@ -42,8 +41,6 @@ import { loader, search } from "@/mixins";
 import Sponsor from "@/components/search/sponsoredBusiness";
 import People from "@/components/search/people";
 
-import { ShareButton } from "@/components/shareButton";
-
 import Loader from "@/components/Loader";
 
 export default {
@@ -51,7 +48,6 @@ export default {
   components: {
     Sponsor,
     People,
-    ShareButton,
     Loader,
   },
 

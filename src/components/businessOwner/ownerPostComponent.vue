@@ -19,7 +19,10 @@
           <p class="durationn">{{ item.created_at | now }}</p>
         </div>
 
-        <div class="toright" v-if="isYourOwnPost && canBeDelete">
+        <div
+          class="toright"
+          v-if="!isDisplayInSearch ? isYourOwnPost && canBeDelete : false"
+        >
           <b-dropdown variant="link" size="sm" no-caret>
             <template #button-content>
               <b-icon
@@ -144,7 +147,11 @@
           <ShareButton
             :post="item"
             :type="'profile'"
-            v-if="!isMemberNetworkFollower || canBeDelete"
+            v-if="
+              !isDisplayInSearch
+                ? !isMemberNetworkFollower || canBeDelete
+                : false
+            "
           />
         </b-col>
       </b-row>
@@ -153,8 +160,11 @@
     <div
       class="mt-2 d-inline-flex w-100"
       v-if="
-        !isMemberNetworkFollower
-          ? (profile.id == item.post_id ? item.post_id : item.id) && canBeDelete
+        !isDisplayInSearch
+          ? !isMemberNetworkFollower
+            ? (profile.id == item.post_id ? item.post_id : item.id) &&
+              canBeDelete
+            : false
           : false
       "
     >
@@ -237,6 +247,10 @@ export default {
     usertype: {
       default: () => null,
     },
+    isDisplayInSearch: {
+      type: Boolean,
+      default: () => false,
+    },
     mapvideo: {},
     mapmediae: {},
     businessLogo: {},
@@ -270,7 +284,8 @@ export default {
 
   created() {
     this.item = this.post;
-    this.comments = this.post.comments;
+
+    if (!this.isDisplayInSearch) this.comments = this.post.comments;
   },
 
   filters: {
@@ -357,8 +372,12 @@ export default {
     },
 
     onLike: async function () {
+      
+      if (this.isDisplayInSearch) return false
+
       if (!this.canBeDelete) return false;
-      if (!this.processLike) {
+     
+     if (!this.processLike) {
         this.processLike = true;
 
         const request = await this.$repository.share.postLike({

@@ -15,7 +15,18 @@
     <Loader v-if="!pageHasLoad || loaderState" />
     <NotFound v-if="!posts.length && !loaderState" :title="title" />
     <div v-else>
-      <Post v-for="(post, index) in posts" :item="post" :key="index" />
+      <Post
+        v-for="(item, index) in posts"
+        :key="index"
+        :post="item"
+        :mapvideo="() => mapvideo(item.media)"
+        :mapmediae="() => mapmediae(item.media)"
+        :businessLogo="item.logo_path"
+        :editPost="(f) => f"
+        :deletePost="(f) => f"
+
+        :isDisplayInSearch="true"
+      />
     </div>
 
     <p class="text-center" v-if="haveNotData">{{ $t("search.Not_Data") }}</p>
@@ -31,13 +42,13 @@
 import { mapGetters, mapActions, mapMutations } from "vuex";
 
 import Sponsor from "@/components/search/sponsoredBusiness";
-import { loader, search } from "@/mixins";
+import { loader, search, PostComponentMixin } from "@/mixins";
 
-import Post from "@/components/search/posts";
+import Post from "@/components/businessOwner/ownerPostComponent";
 import Loader from "@/components/Loader";
 
 export default {
-  mixins: [loader, search],
+  mixins: [loader, search, PostComponentMixin],
   components: {
     Sponsor,
     Post,
@@ -64,6 +75,7 @@ export default {
   mounted() {
     window.addEventListener("scroll", this.onscroll);
   },
+
 
   created() {
     this.getAuth();

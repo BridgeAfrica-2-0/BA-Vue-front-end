@@ -1,7 +1,7 @@
 <template>
-  <div class="mx-4">
+  <div>
     <b-form class="mb-4">
-      <label for="feedback-user">{{$t("search.Profession")}}</label>
+      <label for="feedback-user">Profession</label>
       <b-form-input
         @input="debounceInput"
         id="feedback-user"
@@ -16,7 +16,7 @@
       @click.prevent="toogleRootSection"
     >
       <b-row class="fl px-3">
-        <span>{{$t("search.People_from")}}</span>
+        <span>People from</span>
         <b-icon
           :icon="rootSectionIsVisible ? 'arrow-down' : 'arrow-up'"
         ></b-icon>
@@ -36,7 +36,7 @@
           @click.prevent="peopleSectionIsVisible = !peopleSectionIsVisible"
         >
           <b-row class="fl px-3">
-            <span>{{$t("search.People")}} </span>
+            <span>People </span>
             <b-icon
               :icon="peopleSectionIsVisible ? 'arrow-down' : 'arrow-up'"
             ></b-icon>
@@ -72,7 +72,7 @@
           @click.prevent="buisnessSectionIsVisible = !buisnessSectionIsVisible"
         >
           <b-row class="fl px-3">
-            <span>{{$t("search.Buisness")}} </span>
+            <span>Buisness </span>
             <b-icon
               :icon="buisnessSectionIsVisible ? 'arrow-down' : 'arrow-up'"
             ></b-icon>
@@ -108,7 +108,7 @@
           @click.prevent="networkSectionIsVisible = !networkSectionIsVisible"
         >
           <b-row class="fl px-3">
-            <span>{{$t("search.Network")}}</span>
+            <span>Network</span>
             <b-icon
               :icon="networkSectionIsVisible ? 'arrow-down' : 'arrow-up'"
             ></b-icon>
@@ -132,12 +132,12 @@
           </b-card>
         </b-collapse>
         <!--end network section-->
-        <Button
+        <!---<Button
           @click.native="onProcess"
-          :title="$t('search.Search')"
+          title="Search"
           class="mt-4"
           fas="fas fa-search  fa-lg btn-icon "
-        />
+        /> -->
       </b-card>
     </b-collapse>
   </div>
@@ -145,21 +145,17 @@
 
 <script>
 import _ from "lodash";
-
 import { mapActions } from "vuex";
-
 const options = [
   { text: "Follower", value: "Follower" },
   { text: "Following", value: "Following" },
   { text: "Community", value: "Community" },
 ];
-
-import Button from "@/components/Button";
-
+//import Button from "@/components/Button";
 export default {
-  components: {
+  /*components: {
     Button,
-  },
+  },*/
   data: () => ({
     profession: null,
     rootSectionIsVisible: false,
@@ -173,42 +169,72 @@ export default {
     optionsBuisness: options,
     optionsNetwork: [...options, { text: "Member", value: "Member" }],
   }),
-
+  watch: {
+    selectedPeople: function () {
+      this.onProcess();
+    },
+    selectedBuisness: function () {
+      this.onProcess();
+    },
+    selectedNetwork: function () {
+      this.onProcess();
+    },
+  },
   methods: {
     ...mapActions({
-      findProfession: "search/FIND_PROFESSION",
-      findCommunity: "search/FIND_COMMUNITY",
+      userStore: "search/FIND_USER",
+      lauchLoader: "search/LOADING",
+      setCallback: "search/SET_CURRENT_PAGINATE_CALLBACK",
+      stack: "search/STACK_VALUE",
+      page: "search/SET_CURRENT_PAGINATION_PAGE",
+      reset: "search/RESET_RESULT",
     }),
-
     map(data, type) {
       return data.map((e) => `${type}_${e.toLowerCase()}`);
     },
-
-    onProcess() {
+    onProcess: _.debounce(function (e) {
+      this.page(1);
       const user = this.map(this.selectedPeople, `user`);
       const buisness = this.map(this.selectedBuisness, `buisness`);
       const network = this.map(this.selectedNetwork, `network`);
-
       const data = [...user, ...buisness, ...network].reduce((hash, value) => {
         hash[value] = "";
         return hash;
       }, {});
-
-      const loader = this.$loading.show({
-        container: this.$refs.formContainer,
-        canCancel: true,
-      });
-
-      this.findCommunity(data);
+      this.stack({ payload: { ...data }, page: 1 });
+      this.setCallback(this.$repository.search.findUserByParam);
+      this._onFindUser({ payload: { ...data }, page: 1 });
+    },2000),
+    async _onFindUser(payload) {
+      try {
+        this.lauchLoader(true);
+        this.reset();
+        const request = await this.$repository.search.findUserByParam({
+          payload,
+          page: 1,
+        });
+        if (request.success) {
+          this.userStore(request.data);
+          this.page(2);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+      this.lauchLoader(false);
     },
-
     debounceInput: _.debounce(function (e) {
-      this.findProfession(e);
+      if (e) {
+        this.page(1);
+        this.stack({ profession: e });
+        this.setCallback(this.$repository.search.findUserByParam);
+        this._onFindUser({
+          profession: e,
+          page: 1,
+        });
+      }
     }, 1000),
-
     toogleRootSection() {
       this.rootSectionIsVisible = !this.rootSectionIsVisible;
-
       if (!this.rootSectionIsVisible) this.closeAllSections();
     },
     closeAllSections() {

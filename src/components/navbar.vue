@@ -147,9 +147,8 @@
             <b-collapse id="nav-collapse" is-nav>
               <div class="nav-item">
                 <router-link
-                  :to="navLink('home')"
+                  :to="{ name: navLink('home') }"
                   class="nav-link text-dark hov"
-                  href=""
                 >
                   {{ "home1" == navLink("home") ? "Home" : "Dashboard" }}
                 </router-link>
@@ -340,10 +339,10 @@
                     >
                       <Activity />
                     </div>
-                    <hr class="h-divider" v-if="'user' != profile.user_type" />
+                    <hr class="h-divider" v-if="'user' != user.user_type" />
 
                     <a
-                      v-if="'user' != profile.user_type"
+                      v-if="'user' != user.user_type"
                       @click.prevent="switchToProfile"
                       href="#"
                       class="
@@ -660,6 +659,8 @@ export default {
     };
 
     this.updateNotificationEvent();
+
+    console.log("create nav bar+++++++++++++++++++++++++++++")
   },
 
   watch: {
@@ -725,16 +726,18 @@ export default {
             keyword: this.credentials.keyword,
           })
           .catch((err) => {
-            console.log("Error erro!");
+            console.log("Error erro!", err);
           });
 
-        this.$router.push({ name: "Search" });
+        this.$router.push({ name: "Search", query: { keywork: this.credentials.keyword } });
       }
     },
+
+
     navLink(type) {
       const link = {
         home: () => {
-          return this.profile ? "dashboard" : "home1";
+          return this.auth.accessToken ? "dashboard" : "home1";
         },
       };
       try {
@@ -778,8 +781,10 @@ export default {
         this.profile({ ...this.auth.user, user_type: "user" });
       }
       loader.hide();
-
-      this.$router.push({name: 'BusinessOwner', params:{id:this.auth.id}})
+      this.$router.push({
+        name: "BusinessOwner",
+        params: { id: this.auth.user.id },
+      });
     },
 
     toggleinput() {

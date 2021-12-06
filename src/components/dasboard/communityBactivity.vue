@@ -8,7 +8,7 @@
 						:icon="['fab', 'readme']"
 						size="lg"
 					/>
-					<b> {{ $t('dashboard.Post') }} </b>
+					<b class="ml-2"> {{ $t('dashboard.Post') }} </b>
 				</h6>
 			</span>
 

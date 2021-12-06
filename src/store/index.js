@@ -43,8 +43,8 @@ import keywordOperationOnNetwork from './keywordOperationOnNetwork';
 
 import homeRedirection from './homeRedirection';
 
-import profileSettingsEdit from "./profileSettingsEdit"
-
+import profileSettingsEdit from "./profileSettingsEdit";
+import cart from "./cart"
 
 import { social } from './social';
 
@@ -52,12 +52,12 @@ import { social } from './social';
 Vue.use(Vuex);
 
 
-//axios.defaults.baseURL = process.env.VUE_APP_API_URL_DEV;
-//axios.defaults.baseURL = process.env.VUE_APP_API_URL_EDS;
+axios.defaults.baseURL ="https://test.maxinemoffett.com/api/v1/";
+// //axios.defaults.baseURL = process.env.VUE_APP_API_URL_EDS;
 
 
 
- axios.defaults.baseURL = process.env.VUE_APP_API_URL_EDS;
+//  axios.defaults.baseURL = process.env.VUE_APP_API_URL_EDS;
 
 
 
@@ -105,7 +105,8 @@ export default new Vuex.Store({
         notification,
         homeRedirection,
         profileOrderDetail,
-        profileSettingsEdit
+        profileSettingsEdit,
+        cart
 
     }
 });

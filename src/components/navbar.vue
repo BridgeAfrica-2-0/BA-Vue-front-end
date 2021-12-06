@@ -805,11 +805,14 @@ export default {
       if (response.success) {
         this.profile({ ...this.auth.user, user_type: "user" });
       }
+
       loader.hide();
+      
       this.$router.push({
         name: "BusinessOwner",
         params: { id: this.auth.user.id },
       });
+      
     },
 
     toggleinput() {

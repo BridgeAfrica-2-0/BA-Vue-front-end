@@ -1702,8 +1702,7 @@ export default {
           console.log("Error erro!");
         });
     },
-    // ------------
-
+    
     ...mapActions({
       userStore: "search/FIND_USER",
       postStore: "search/FIND_POST",

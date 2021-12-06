@@ -373,6 +373,7 @@ export const PostComponentMixin = {
     checkMediaType(media) {
       return media.split('/')[0];
     },
+    
     mapmediae(media) {
       let mediaarr = [];
 

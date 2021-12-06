@@ -112,6 +112,7 @@
       </div>
       <!-- end source post -->
       <div v-if="item.media.length > 0" class="">
+        
         <span v-for="video in mapvideo()" :key="video">
           <youtube
             class="w-100 videoh"

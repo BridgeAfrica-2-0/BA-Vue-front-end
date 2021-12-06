@@ -257,7 +257,6 @@
       <b-dropdown-item
         class="d-flex py-2 cursor-pointer"
         :id="`sharing-via-${uuid}`"
-        
         role="button"
         data-original-title=""
         ref="button"
@@ -277,6 +276,7 @@
       >
         <div class="popover-body">
           <div
+            @mousedown="onShareVia('email')"
             class="
               d-inline-flex
               flex-row
@@ -286,18 +286,11 @@
               cursor-pointer
             "
           >
-           
-            <div class="d-flex flex-column ml-3">
-              <Social
-                :network="'Email'"
-                :post="post"
-                :title="'Share via Email'"
-              >
-              </Social>
-            </div>
+            <span>Share via Email</span>
           </div>
 
           <div
+            @mousedown="onShareVia('facebook')"
             class="
               d-inline-flex
               flex-row
@@ -307,18 +300,11 @@
               cursor-pointer
             "
           >
-           
-            <div class="d-flex flex-column ml-3">
-              <Social
-                :network="'facebook'"
-                :post="post"
-                :title="'Share via Facebook'"
-              >
-              </Social>
-            </div>
+            <span>Share via Facebook</span>
           </div>
 
           <div
+            @mousedown="onShareVia('twitter')"
             class="
               d-inline-flex
               flex-row
@@ -328,18 +314,11 @@
               cursor-pointer
             "
           >
-           
-            <div class="d-flex flex-column ml-3">
-              <Social
-                :network="'Twitter'"
-                :post="post"
-                :title="'Share via Twitter'"
-              >
-              </Social>
-            </div>
+            <span>Share via Twitter</span>
           </div>
 
           <div
+            @mousedown="onShareVia('whatsapp')"
             class="
               d-inline-flex
               flex-row
@@ -349,20 +328,47 @@
               cursor-pointer
             "
           >
-           
-            <div class="d-flex flex-column ml-3">
-              <Social
-                @mousedown="open"
-                :network="'WhatsApp'"
-                :post="post"
-                :title="'Share via Whatsapp'"
-              >
-              </Social>
-            </div>
+            <span>Share via Whatsapp </span>
           </div>
         </div>
       </b-popover>
     </b-dropdown>
+    <Social
+      :id="`email-${uuid}`"
+      class="none"
+      :network="'Email'"
+      :post="post"
+      :title="'Share via Email'"
+      ref="email"
+    >
+    </Social>
+    <Social
+      :id="`facebook-${uuid}`"
+      class="none"
+      :network="'facebook'"
+      :post="post"
+      :title="'Share via Facebook'"
+      ref="facebook"
+    >
+    </Social>
+    <Social
+      :id="`twitter-${uuid}`"
+      class="none"
+      :network="'Twitter'"
+      :post="post"
+      :title="'Share via Twitter'"
+      ref="twitter"
+    >
+    </Social>
+    <Social
+      :id="`whatsapp-${uuid}`"
+      class="none"
+      :network="'WhatsApp'"
+      :post="post"
+      :title="'Share via Whatsapp'"
+      ref="whatsapp"
+    >
+    </Social>
   </div>
 </template>
 
@@ -440,6 +446,11 @@ export default {
   },
 
   methods: {
+    onShareVia(type) {
+      const elm = document.querySelector(`#${type}-${this.uuid}`);
+      elm.click();
+    },
+
     open(id) {
       this.modal = id;
       this.$bvModal.show(id);
@@ -473,6 +484,10 @@ export default {
 </script>
 
 <style scoped>
+.none {
+  display: none;
+}
+
 .bold {
   font-weight: bold;
 }

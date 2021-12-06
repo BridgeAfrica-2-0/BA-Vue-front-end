@@ -4,7 +4,7 @@
       <span>
         <h6 class="title mt-3">
           <fas-icon class="icons icon-color" :icon="['fab', 'readme']" size="lg" />
-          <b>{{ $t('dashboard.Posts') }} </b>
+          <b class="ml-2">{{ $t('dashboard.Posts') }} </b>
         </h6>
       </span>
 

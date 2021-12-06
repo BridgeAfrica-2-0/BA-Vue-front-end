@@ -42,6 +42,11 @@ import InfiniteLoading from 'vue-infinite-loading';
 
 Vue.use(InfiniteLoading, {
     /* options */
+    slots: {
+        noMore: '',
+        error: "",
+        noResults:"",
+      },
 });
 Vue.use(LoadScript);
 

@@ -231,7 +231,7 @@
                   />
                 </a>
                 <input
-                  placeholder="$t('search.Post_a_Comment')"
+                  :placeholder="$t('search.Post_a_Comment')"
                   class="form-control adco comment"
                   type="text"
                 />
@@ -351,7 +351,7 @@
                         />
                       </a>
                       <input
-                        placeholder="$t('search.Post_a_Comment')"
+                        :placeholder="$t('search.Post_a_Comment')"
                         class="form-control adco comment"
                         type="text"
                       />

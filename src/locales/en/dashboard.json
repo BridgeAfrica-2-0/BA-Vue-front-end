@@ -9,6 +9,7 @@
     "Add_Business": "Add Business",
     "People": "People",
     "title": "Title",
+    "profile": "Profile",
     "see_all": "see all",
     "Upgrade_Plan": "Upgrade Plan",
     "Community": "Community",
@@ -111,5 +112,9 @@
     "With_Your_webcam": "With Your webcam",
     "Get_to_know_your_setting": "Get to know your setting",
     "Control_how_you_share_information": "Control how you share information",
-    "with_people_or_business": "with people or business"
+    "with_people_or_business": "with people or business",
+    "Douala": "Douala",
+    "Cameroon": "Cameroun",
+    "read_more": "read more",
+    "read_less": "read less"
 }

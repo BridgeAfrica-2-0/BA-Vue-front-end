@@ -5,15 +5,23 @@
       :zoom="zoom"
       :center="center"
       :mapStyle="mapStyle"
-    />
+    >
+      <MglMarker :coordinates="center" color="#3ad3ad">
+        <MglPopup :coordinates="center" anchor="top">
+          <div>Hello, I'm popup!</div>
+        </MglPopup>
+      </MglMarker>
+    </MglMap>
   </div>
 </template>
 <script>
 import Mapbox from "mapbox-gl";
-import { MglMap } from "vue-mapbox";
+import { MglMap, MglMarker, MglPopup } from "vue-mapbox";
 export default {
   components: {
     MglMap,
+    MglMarker,
+    MglPopup,
   },
   data() {
     return {

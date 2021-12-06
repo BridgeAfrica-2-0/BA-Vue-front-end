@@ -38,9 +38,22 @@
           </p>
 
           <span class="float-right">
-            <b-button variant="primary" class="">
-              {{ $t("search.Buy_now") }}
-            </b-button>
+            <!-- <b-button variant="primary" class=""> {{$t("search.Buy_now")}} </b-button> -->
+            <div class="row">
+              <div class="col marge" >
+                  <b-button variant="primary"
+                  @click="AddToCard(prod.id, true)" 
+                  ><span> {{ $t("search.Buy_now") }}  </span>
+                 </b-button>
+              </div>
+              <div class="w-100 my-1"></div>
+              <div class="col marge">
+                <b-button variant="primary" @click="AddToCard(prod.id)"
+                ><span>Add to Cart</span>
+              </b-button>
+              </div>
+            </div>
+
           </span>
         </b-col>
       </b-row>
@@ -427,6 +440,7 @@
         </b-col>
       </b-row>
     </b-modal>
+   
   </div>
 </template>
 
@@ -450,10 +464,15 @@ export default {
     prodLoader() {
       return this.$store.getters["marketSearch/getLoader"];
     },
+
+    getStatus(){
+    return this.$store.state.cart.status ;
+  }
   },
   created() {
     if (!this.products.length) this.getProducts();
   },
+  
 
   methods: {
     changePage(value) {
@@ -496,6 +515,35 @@ export default {
           console.error(err);
         });
     },
+
+    buyNow(){
+      this.AddToCard();
+      this.$router.push({name: 'payment'})
+    
+    },
+
+    AddToCard(id, val) {
+      console.log("add to card ", id);
+      this.$store
+        .dispatch("cart/addToCart",id)
+        .then((response) => {
+          console.log("----", this.getStatus);
+
+          this.flashMessage.show({
+            status: "success",
+            message: this.getStatus,
+          }); 
+          if(val)   this.$router.push({name: 'payment'}) ;
+        })
+        .catch((error) => {
+          console.log(error);
+          this.flashMessage.show({
+            status: "error",
+            message: "error occur",
+          });
+        });
+    },
+
   },
 };
 </script>
@@ -562,6 +610,13 @@ h6 {
 @media only screen and (min-width: 768px) {
   .center-img {
     margin-right: -60px;
+  }
+
+  .marge{
+    margin-left: 200px
+  }
+  .pos {
+    margin-left: 200px;
   }
 }
 

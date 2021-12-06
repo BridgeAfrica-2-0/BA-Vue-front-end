@@ -4,7 +4,7 @@
       <div class="container">
         <div class="col-md-12 col-lg-2 col-xl-2 text-center">
           <a class="d-inline-block align-top mt-1" href="#">
-            <img src="@/assets/logo.png" alt="" class="balogo" loading="lazy" />
+            <img src="@/assets/img/BAC-clear-dotted-logo.png" alt="" class="balogo" loading="lazy" />
           </a>
         </div>
 
@@ -74,5 +74,21 @@ export default {
 }
 .nav-item:hover .nav-link span {
   color: #e75c18 !important;
+}
+
+
+@media only screen and (max-width: 768px) {
+  .balogo{
+    width: 80px ;
+    height: 50px ;
+  }
+}
+
+
+@media only screen and (min-width: 768px) {
+  .balogo{
+    width: 100px ;
+    height: 100px ;
+  }
 }
 </style>

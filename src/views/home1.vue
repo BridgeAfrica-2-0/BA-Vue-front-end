@@ -21,32 +21,21 @@
     </head>
 
     <!-- ======= Header ======= -->
+    
+
+     <site-header class="topbar" />   
     <header id="header" class="fixed-topp">
       <div class="container d-flex align-items-center">
-        <!--  <h1 class="logo mr-auto"><a href="index.html">Arsha</a></h1>
-        Uncomment below if you prefer to use an image logo -->
+<!--       
         <a href="index.html" class="logo mr-auto"
           ><img src="../assets/img/BAC-clear-dotted-logo.png" alt="" class="img-fluid b-logo"
-        /></a>
+        /></a> -->
 
-        <!-- <nav class="nav-menu d-none d-lg-block">
-          <ul>
-            <li class="active"><a href="index.html">Home</a></li>
-            <li><a href="http://info.bridgeafrica.com/">About Us</a></li>
-
-            <li>
-              <a href="http://info.bridgeafrica.com/contact">Contact Us</a>
-            </li>
-
-            <li><a href="#">Login</a></li>
-
-            <li><a href="#">Signup</a></li>
-          </ul>
-        </nav> -->
+        
 
 
       <div>
-  <b-navbar toggleable="sm" type="ligth" variant="ligth">
+  <!-- <b-navbar toggleable="sm" type="ligth" variant="ligth">
    
 
     <b-navbar-toggle target="nav-collapse ">
@@ -56,25 +45,25 @@
       </template>
     </b-navbar-toggle>
 
-    <b-collapse id="nav-collapse" is-nav>
+    <b-collapse id="nav-collapse" is-nav> -->
       
 
       <!-- Right aligned nav items -->
-      <b-navbar-nav class="ml-auto bold size_nav" >
+      <!-- <b-navbar-nav class="ml-auto bold size_nav" >
        
       <b-nav-item > <router-link to="/" class="mx-2">{{ $t('home.Home') }}</router-link></b-nav-item>
         
          <b-nav-item ><router-link :to="{ name: 'about' }" class="mx-2">{{ $t('home.About_Us') }} </router-link></b-nav-item>
         
         <b-nav-item > <router-link :to="{ name: 'contact' }" class="mx-2">  {{ $t('home.Contact_Us') }}  </router-link></b-nav-item>
-         <!-- <b-nav-item href="#">About Us</b-nav-item> -->
+      
          <b-nav-item ><router-link to="/login" class="mx-2">  {{ $t('home.Login') }}  </router-link></b-nav-item>
         <b-nav-item ><router-link to="/signup" class="mx-2"> {{ $t('home.Signup') }} </router-link></b-nav-item>
 
 
       </b-navbar-nav>
     </b-collapse>
-  </b-navbar>
+  </b-navbar> -->
 </div>
 
 
@@ -259,6 +248,7 @@
                 padding-right: 15px;
                 padding-left: 15px;
               "
+
             >
               <div
                 class="bg-light border rounded shadow card"
@@ -411,7 +401,7 @@
         </div>
       </div>
     </section>
-    <div class="w-100 text-light" @mouseover="animation">  .</div>
+    <div class="w-100 text-light"  id="animation" @scroll="animation" v-animate-onscroll="{ down: 'zoomInUp' }" >  .</div>
     <section id="why-us" class="why-us">
       <div class="container-fluid" id="anim">
         <div class="row">
@@ -437,7 +427,7 @@
               </p>
 
               <div class="text-center w-100">
-                <router-link to="login">
+                <router-link :to="{name: 'signup'}">
 
                 <button
                   class="btn btn-primary mt-5 bridge-btn float-left bridge-btn"
@@ -515,7 +505,7 @@
               </p>
 
               <div class="text-center w-100">
-               <router-link to="login">
+               <router-link :to="{name: 'signup'}">
 
                 <button
                   class="btn btn-primary mt-5 bridge-btn float-left bridge-btn"
@@ -579,7 +569,7 @@
               </p>
 
               <div class="text-center w-100">
-                <router-link to="login">
+                <router-link :to="{name: 'signup'}">
 
                 <button
                   class="btn btn-primary mt-5 bridge-btn float-left bridge-btn"
@@ -641,7 +631,7 @@
               </p>
 
               <div class="text-center w-100">
-                <router-link to="login">
+                <router-link :to="{name: 'signup'}">
 
                 <button
                   class="btn btn-primary mt-5 bridge-btn float-left bridge-btn"
@@ -695,7 +685,7 @@
               p-0
             "
           >
-            <div class="carousel slide" data-ride="carousel" id="carousel-1">
+            <!-- <div class="carousel slide" data-ride="carousel" id="carousel-1">
               <div class="carousel-inner" role="listbox">
                 <div class="carousel-item active">
                   <img
@@ -739,7 +729,37 @@
                 ></li>
                 <li data-target="#carousel-1" data-slide-to="1"></li>
               </ol>
-            </div>
+            </div> -->
+         
+          <div>
+  <b-carousel
+    id="carousel-no-animation"
+    style="text-shadow: 0px 0px 2px #000"
+    no-animation
+    indicators
+    img-width="1024"
+    img-height="480"
+  >
+    <b-carousel-slide
+      caption="First slide"
+      img-src="../assets/img/coach.png"
+    ></b-carousel-slide>
+    <b-carousel-slide
+      caption="Second Slide"
+      img-src="../assets/img/coach2.png"
+    ></b-carousel-slide>
+    <!-- <b-carousel-slide
+      caption="Third Slide"
+      img-src="https://picsum.photos/1024/480/?image=22"
+    ></b-carousel-slide>
+    <b-carousel-slide
+      caption="Fourth Slide"
+      img-src="https://picsum.photos/1024/480/?image=23"
+    ></b-carousel-slide> -->
+  </b-carousel>
+</div>
+
+
           </div>
 
           <div
@@ -762,7 +782,7 @@
                 {{ $t('home.We_provide_face_to_face_digital_literacy_trainings') }} 
                 {{ $t('home.for_businesses_who_lack_digital_know_how_through_our_army_of_digital_coaches') }}
               </p>
-                <router-link to="login">
+                <router-link :to="{name: 'signup'}">
 
               <button class="btn btn-primary mt-5 bridge-btn bridge-btn mb-3">
                 {{ $t('home.See_Videos') }}
@@ -880,9 +900,9 @@
 import "../assets/js/main.js";
 // import "../assets/js/js.js";
 import Button from '@/components/ButtonNavBarFind.vue';
-//import SiteHeader from '../components/site/siteHeader';
+import SiteHeader from '../components/site/siteHeader';
 export default {
-  components: {Button},
+  components: {Button, SiteHeader},
   data(){
     return {
       expanded:true,
@@ -956,7 +976,7 @@ export default {
     },
 
     animation(){
-      
+      console.log("annimation----")
   var id = null;
   var elem = document.getElementById("Test_Video");
   var pos = 0;
@@ -973,6 +993,7 @@ export default {
       elem.style.zIndex = "1";
       elem.style.left = pos + 'px';
     if(pos == 50){
+      // document.getElementById("animation").removeEventListener("scroll")
        elem.style.left = 0 + 'px';
     }
   } 
@@ -982,10 +1003,17 @@ export default {
   }
   },
   mounted(){
-    document.getElementById("why-us").onscroll = function() {
+      
 
-      this.animation();
-    };
+    
+
+    document.getElementById("animation").addEventListener("scroll", () => {
+    this.animation();
+});
+
+//     window.addEventListener("scroll", () => {
+//     this.animation();
+// });
 
   }
 };
@@ -1009,6 +1037,9 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Merriweather&family=Merriweather+Sans:wght@300&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Jost:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i");
 
+.zoomInUp{
+  background-color: #cc4d0d;
+}
 .couleur{
   color: #e75c18 ;
   
@@ -1112,6 +1143,9 @@ export default {
 
 @media only screen and (min-width: 768px) {
 
+.topbar{
+    position: fixed;
+}
 
   .sizeimg{
     border: solid;

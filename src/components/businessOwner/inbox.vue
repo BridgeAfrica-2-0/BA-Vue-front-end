@@ -407,7 +407,7 @@
                               'p-2 message ',
                               {
                                 messageSelected:
-                                  chat.groupID ==
+                                  chat.id ==
                                   (chatSelected.clickedId != null
                                     ? chatSelected.clickedId
                                     : false)
@@ -419,7 +419,7 @@
                               selectedChat({
                                 type: 'group',
                                 chat: chat,
-                                id: chat.groupID,
+                                id: chat.id,
                               })
                             "
                           >
@@ -635,7 +635,7 @@
                   >
                     <b-row class="p-4">
                       <b-col>
-                        <b v-if="(type = 'group')">
+                        <b v-if="type == 'group'">
                           {{ getName(chat) }}
                         </b>
                         <p
@@ -936,46 +936,83 @@
                       <table v-else class="table">
                         <b-row style="overflow-x: hidden !important">
                           <b-col>
-                            <b-form-checkbox
+                            <b-button
+                              v-b-toggle.followerFollowing
+                              variant="light"
+                              >All</b-button
+                            >
+                            <!-- <b-form-checkbox
                               id="all"
                               v-model="allSelectedMulty"
                               name="all"
                               value="accepted"
                               @change="selectedAllMulty"
+                              v-b-toggle.followerFollowing
                             >
                               All
-                            </b-form-checkbox>
+                             
+                            </b-form-checkbox> -->
                           </b-col>
                           <b-col>
-                            <b-form-checkbox
+                            <!-- <b-form-checkbox
                               id="people"
                               v-model="peopleMulty"
                               name="people"
                               @change="peopleAllMulty"
                             >
                               People
-                            </b-form-checkbox>
+                            </b-form-checkbox> -->
+                            <b-button
+                              v-b-toggle.followerFollowing
+                              variant="light"
+                              >People</b-button
+                            >
                           </b-col>
 
                           <b-col>
-                            <b-form-checkbox
+                            <!-- <b-form-checkbox
                               id="business"
                               v-model="businessMulty"
                               name="business"
                               @change="businessAllMulty"
                             >
                               Business
-                            </b-form-checkbox>
+                            </b-form-checkbox> -->
+                            <b-button
+                              v-b-toggle.followerFollowing
+                              variant="light"
+                              >Business</b-button
+                            >
                           </b-col>
                           <b-col>
-                            <b-form-checkbox
+                            <!-- <b-form-checkbox
                               id="networks"
                               name="networks"
                               v-model="networkMulty"
                               @change="networkAllMulty"
                             >
                               Network
-                            </b-form-checkbox>
+                            </b-form-checkbox> -->
+                            <b-button
+                              v-b-toggle.followerFollowing
+                              variant="light"
+                              >Network</b-button
+                            >
+                          </b-col>
+                          <b-col>
+                            <!-- <b-form-checkbox
+                              id="networks"
+                              name="networks"
+                              v-model="networkMulty"
+                              @change="networkAllMulty"
+                            >
+                              Editors
+                            </b-form-checkbox> -->
+                            <b-button
+                              v-b-toggle.followerFollowing
+                              variant="light"
+                              >Editor</b-button
+                            >
                           </b-col>
                           <!--
 
@@ -1001,6 +1038,38 @@
                               Members
                             </b-form-checkbox>
                           </b-col> -->
+                        </b-row>
+                        <b-row>
+                          <b-col>
+                            <b-collapse id="followerFollowing" class="mt-2">
+                              <b-card>
+                                <b-row class="text-center">
+                                  <b-col>
+                                    <b-form-checkbox
+                                      id="following"
+                                      v-model="status"
+                                      name="following"
+                                      value="accepted"
+                                      unchecked-value="not_accepted"
+                                    >
+                                      Following
+                                    </b-form-checkbox>
+                                  </b-col>
+                                  <b-col>
+                                    <b-form-checkbox
+                                      id="follower"
+                                      v-model="status"
+                                      name="follower"
+                                      value="accepted"
+                                      unchecked-value="not_accepted"
+                                    >
+                                      Follower
+                                    </b-form-checkbox>
+                                  </b-col>
+                                </b-row>
+                              </b-card>
+                            </b-collapse>
+                          </b-col>
                         </b-row>
                         {{
                           selectedMulty
@@ -1173,12 +1242,12 @@ export default {
       chatSearchKeyword: "",
       tabIndex: 2,
       type: "",
-      // socket: io("https://ba-chat-server.herokuapp.com", {
-      //   transports: ["websocket", "polling", "flashsocket"],
-      // }),
-      socket: io("localhost:7000", {
+      socket: io("https://ba-chat-server.herokuapp.com", {
         transports: ["websocket", "polling", "flashsocket"],
       }),
+      // socket: io("localhost:7000", {
+      //   transports: ["websocket", "polling", "flashsocket"],
+      // }),
       nameSpace: {
         status: false,
         text: "",
@@ -1262,6 +1331,9 @@ export default {
     },
   },
   mounted() {
+    console.log("language: ----");
+
+    console.log("language: ", this.$i18n.locale);
     if (this.chatList.length < 0) {
       this.getChatList({ type: "business" });
     }
@@ -1479,7 +1551,7 @@ export default {
     getCreatedAt(data) {
       let date = moment(data).isBefore(today);
       let today = moment().format("MM/DD/YYYY");
-      console.log("days:", date);
+      // console.log("days:", date);
       if (date) {
         return moment(data).format("lll");
       } else {

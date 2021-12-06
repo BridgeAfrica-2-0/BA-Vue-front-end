@@ -156,6 +156,9 @@ export default {
             let keyword = data ? '/' + data : ''
             var users = []
             var businesses = []
+            var networks = []
+            var editors = []
+
             commit("setLoader", true);
 
             axios.get(`/user/all-user${keyword}`)
@@ -175,23 +178,28 @@ export default {
                                 businesses.push({ accountType: 'business', ...user })
                             })
                             console.log("Bizs:", businesses);
-                            // return axios.get(`/networks${keyword}`)
-                            //     .then((res) => {
-                            //         commit("setLoader", false);
-                            //         state.networks = res.data.data
-                            //     })
-                            //     .catch((err) => {
-                            //         commit("setLoader", false);
-                            //         console.log(err);
-                            //     })
-                            state.all = [...users, ...businesses]
-                            state.users = users
-                            state.businesses = businesses
+                            return axios.get(`/networks${keyword}`)
+                                .then((net) => {
+                                    commit("setLoader", false);
+                                    let result = net.data.data
+                                    result.map((network) => {
+                                        networks.push({ accountType: 'network', ...network })
+                                    })
 
-                            console.log(" businesses:", businesses);
-                            console.log(" users:", state.users);
+                                    state.all = [...users, ...businesses, ...networks]
+                                    state.users = users
+                                    state.businesses = businesses
+                                    state.networks = networks
 
-                            console.log(" All:", state.all);
+                                    console.log(" businesses:", businesses);
+                                    console.log(" users:", state.users);
+                                    console.log(" All:", state.all);
+                                })
+                                .catch((err) => {
+                                    commit("setLoader", false);
+                                    console.log(err);
+                                })
+
                         })
                         .catch((err) => {
                             commit("setLoader", false);
@@ -199,9 +207,18 @@ export default {
                         })
 
                 })
-
+            axios.get(`/business/role/editor/${state.currentBizId}${keyword}`)
+                .then((res) => {
+                    let result = res.data.data
+                    result.map((editor) => {
+                        editors.push({ accountType: 'editor', ...editor })
+                    })
+                    console.log("editors", editors);
+                })
 
         },
+
+
         GET_USERS({ commit, state }, data) {
             commit("setBizs", []);
             state.users = []
@@ -269,8 +286,6 @@ export default {
                 })
                 // commit("setCurrentBiz", rootGetters['auth/profilConnected']);
                 // console.log("current biz:", curBiz);
-
-
         },
         // [NO BUG]
         GET_BIZS_CHAT_LIST({ commit, state }, data) {
@@ -318,7 +333,7 @@ export default {
                         console.log(err);
                     })
             } else {
-                axios.get(`group/list/admin/business/${state.currentBizId + keyword }`)
+                axios.get(`group/list/business/${state.currentBizId + keyword }`)
                     .then((res) => {
                         commit("setLoader", false);
                         console.log("Business GROUPS: ", res.data.data);

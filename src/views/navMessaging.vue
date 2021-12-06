@@ -905,7 +905,13 @@
                             v-for="(user, index) in users"
                             :key="index"
                             class="p-2 message"
-                            @click="selectedChat({ chat: user, id: user.id })"
+                            @click="
+                              selectedChat({
+                                type: 'user',
+                                chat: user,
+                                id: user.id,
+                              })
+                            "
                           >
                             <td>
                               <b-avatar
@@ -956,6 +962,7 @@ export default {
   },
   data() {
     return {
+      shippingAddress: [2, 4],
       formData: new FormData(),
       filePreview: false,
       previewSrc: "",
@@ -967,12 +974,12 @@ export default {
       chatSearchKeyword: "",
       chatId: "",
       type: "",
-      socket: io("https://ba-chat-server.herokuapp.com", {
-        transports: ["websocket", "polling", "flashsocket"],
-      }),
-      // socket: io("localhost:7000", {
+      // socket: io("https://ba-chat-server.herokuapp.com", {
       //   transports: ["websocket", "polling", "flashsocket"],
       // }),
+      socket: io("localhost:7000", {
+        transports: ["websocket", "polling", "flashsocket"],
+      }),
       chatSelected: [],
       showsearch: true,
       selecteduser: false,
@@ -1008,6 +1015,9 @@ export default {
     },
     currentUser() {
       return this.$store.getters["userChat/getUser"];
+    },
+    bizs() {
+      return this.$store.getters["businessChat/getBizs"];
     },
     users() {
       return this.$store.getters["userChat/getUsers"];
@@ -1143,7 +1153,9 @@ export default {
       }
     },
     getUsers() {
+      console.log("Bizs:", this.bizs);
       this.$store.dispatch("userChat/GET_USERS");
+      this.$store.dispatch("businessChat/GET_BIZS");
     },
     getChatList(data) {
       this.chatSelected.active = false;

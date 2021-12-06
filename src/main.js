@@ -215,14 +215,13 @@ new Vue({
             },
         );
 
-        axios.interceptors.request.use(function (config) {
+        axios.interceptors.request.use(function(config) {
             if (user != null) {
-                config.headers.Authorization = `Bearer  ${user.accessToken}`;
+                config.headers.Authorization = `Bearer ${user.accessToken}`;
             }
 
-
-
-            config.headers.common['Language'] = i18n.locale;
+            // config.headers.common['Language'] = i18n.locale;
+            config.headers.common['Language'] = "en";
 
             return config;
         });

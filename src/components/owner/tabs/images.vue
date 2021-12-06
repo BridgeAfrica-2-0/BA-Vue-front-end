@@ -16,7 +16,7 @@
         ref="modalxl"
         centered
         hide-footer
-        :title="'image' == media ? 'Upload image' : 'Upload video'"
+        :title="'image' == media ? $t('profileowner.Upload_image') : 'Upload video'"
       >
         <div id="preview" ref="preview" v-if="img_url">
           <img :src="img_url" v-if="'image' == media" />

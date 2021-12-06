@@ -43,8 +43,8 @@ import keywordOperationOnNetwork from './keywordOperationOnNetwork';
 
 import homeRedirection from './homeRedirection';
 
-import profileSettingsEdit from "./profileSettingsEdit"
-
+import profileSettingsEdit from "./profileSettingsEdit";
+import cart from "./cart"
 
 import { social } from './social';
 
@@ -105,7 +105,8 @@ export default new Vuex.Store({
         notification,
         homeRedirection,
         profileOrderDetail,
-        profileSettingsEdit
+        profileSettingsEdit,
+        cart
 
     }
 });

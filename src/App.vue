@@ -11,7 +11,7 @@
     >
      <router-view />
     </transition>
-  
+   <FlashMessage/>
   </div>
 </template>
 <script>

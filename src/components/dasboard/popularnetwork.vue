@@ -28,11 +28,11 @@
 						<br />
 
 						<read-more
-							more-str="read more"
+							:more-str="$t('dashboard.read_more')"
 							class="readmore"
 							:text="item.about_network"
 							link="#"
-							less-str="read less"
+							:less-str="$t('dashboard.read_less')"
 							:max-chars="50"
 						>
 						</read-more>

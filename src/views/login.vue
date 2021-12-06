@@ -37,7 +37,7 @@
 
           <br />
 
-          <p class="t-center">-{{ $t("auth.OR") }} -</p>
+          <p class="t-center">- {{ $t("auth.OR") }} -</p>
 
           <md-field :class="getValidationClass('email')">
             <label for="email"> {{ $t("auth.email") }} </label>

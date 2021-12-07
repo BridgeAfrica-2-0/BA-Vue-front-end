@@ -10,7 +10,7 @@ export default {
     isVerified: null,
     passwordToken: null,
     registerData: null,
-
+    neigbourhoods:[],
     businessAround: [],
     peopleAround: [],
     categories: [],
@@ -49,6 +49,12 @@ export default {
 
       localStorage.setItem("user.user", JSON.stringify(userData.user));
 
+
+    },
+
+    setneigbourhoods(state, data){
+    
+      state.neigbourhoods=data;
 
     },
 
@@ -124,6 +130,21 @@ export default {
         console.log(data);
         commit("setUserData", data.data);
       });
+    },
+
+
+    neigbourhoods({ commit }, payload){
+
+      console.log(payload);
+      
+      return axios.get("user/neighborhood?lat="+payload.lat+"&lng="+payload.lng).then(({ data }) => {
+
+        console.log("logging data for neigbourhood");
+        console.log(data);
+        commit("setneigbourhoods", data.data);
+
+      });
+
     },
 
     country({ commit }) {
@@ -242,6 +263,9 @@ export default {
     },
 
     profilConnected: state => state.profilConnected,
+
+    neigbourhoods: state => state.neigbourhoods,
+
 
     
       getAppLanguage: (state) => state.appLanguage

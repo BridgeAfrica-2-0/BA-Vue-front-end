@@ -105,7 +105,7 @@
 
                     <b-button block size="sm" class="b-background shadow" variant="primary" @click="cta(item)">
                       <i class="fas fa-envelope fa-lg btn-icon"></i>
-                      <span class="btn-text">{{ ("search.Message") }}</span>
+                      <span class="btn-text">{{ $t("search.Message") }}</span>
                     </b-button>
                   </b-col>
 

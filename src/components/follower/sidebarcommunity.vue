@@ -142,6 +142,19 @@ export default {
 </script>
 
 <style>
+
+
+
+    @media only screen and (max-width: 768px) {
+
+      .nav-pills .nav-link {
+         
+         padding-left: 12px !important;
+    padding-right: 12px !important;
+      }
+    }
+
+
 .lala .nav-fill {
   margin-top: -19px;
   border: 1px solid rgba(0, 0, 0, 0.125);

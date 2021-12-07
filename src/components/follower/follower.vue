@@ -24,7 +24,7 @@
 
 
              <b-avatar v-if="info.user.profile_picture ==null "
-               src="https://placekitten.com/400/300"
+                :src="info.user.profile_picture"
               class=" float-left avatar"
               badge-variant="primary"
               badge-offset="10px"
@@ -40,18 +40,18 @@
             </b-link>
             <br />
 
-            <span class="k15 duration"> 0{{info.user.community}} {{ $t('profilefollower.Community') }} </span>
+            <span class="k15 duration"> {{info.user.community}} {{ $t('profilefollower.Community') }} </span>
           </div>
         </b-col>
         <b-col cols="12">
           <div class="btns">
-            <b-button class="community size">
-              <i class="fas fa-user-plus  fa-lg btn-icon m-fa mr-0 "></i>
+            <b-button class="community size mr-2 ml-1">
+              <i class="fas fa-user-plus  fa-lg btn-icon m-fa mr-2 "></i>
               <span class="txt-btn ">{{ $t('profilefollower.Community') }}</span></b-button
             >
-            <b-button class="message size ml-1">
+            <b-button class="message size mr-2 ml-1">
               <i class="fas fa-envelope fa-lg btn-icon "></i>
-              <span class="txt-btn">{{ $t('profilefollower.Message') }}</span></b-button
+              <span class="txt-btn ">{{ $t('profilefollower.Message') }}</span></b-button
             >
 
             <b-dropdown
@@ -79,7 +79,7 @@
         <b-col>
           <div>
             <b-avatar
-              src="https://placekitten.com/400/300"
+               :src="info.user.profile_picture"
               class=" float-left avatar"
               badge-variant="primary"
               badge-offset="10px"
@@ -121,9 +121,12 @@
         <span class="txt-btn">{{ $t('profilefollower.Message') }}</span>
       </b-button>
 
+     
+
+
       <b-button class="direction ml-1 size" size="sm">
         <i class="fas fa-user-plus  fa-lg btn-icon "></i>
-        <span class="txt-btn">{{ $t('profilefollower.Community') }}</span></b-button
+        <span class="txt-btn">{{ $t('dashboard.Community') }} </span></b-button
       >
 
   
@@ -474,8 +477,8 @@ p,
     margin: 5px;
   }
   .size {
-    width: 100px;
-    height: 28px;
+    width: 120px;
+    height: 30px;
   }
   .banner {
     height: 168px;

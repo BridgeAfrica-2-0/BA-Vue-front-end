@@ -201,7 +201,7 @@ export default {
 
     changePage(value) {
       console.log("next page loading ");
-
+      this.$parent.changeBusinessPage(value);
       this.$store.commit("business/setLoading", true);
       this.currentPage = value;
 

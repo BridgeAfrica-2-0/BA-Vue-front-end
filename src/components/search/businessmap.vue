@@ -32,6 +32,7 @@ import { MglMap, MglMarker, MglPopup } from "vue-mapbox";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
+  props: ["businessPage"],
   components: {
     MglMap,
     MglMarker,
@@ -102,6 +103,7 @@ export default {
           this.$store.commit("business/setLoading", false);
 
           this.total = this.business.total;
+          this.changePage();
         })
         .catch((err) => {
           this.$store.commit("business/setLoading", false);
@@ -110,11 +112,11 @@ export default {
         });
     },
 
-    changePage(value) {
+    changePage() {
       console.log("next page loading ");
 
       this.$store.commit("business/setLoading", true);
-      this.currentPage = value;
+      this.currentPage = this.businessPage;
 
       this.nextPage(this.currentPage)
         .then((res) => {

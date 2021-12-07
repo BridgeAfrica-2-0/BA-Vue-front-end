@@ -585,7 +585,7 @@
         <b-col cols="12" md="4" lg="4" xl="3" class="showmap" ref="mapblock">
           <div id="map" style="margin-top: 20px" class="">
             <div v-if="selectedId == '1'">
-              <businessmap />
+              <businessmap :businessPage="businessPage" />
             </div>
             <div v-else>
               <mapbox :businesses="businesses.data" />
@@ -720,6 +720,7 @@ export default {
       selectedfilter: "",
       showform: false,
 
+      businessPage: 2,
       //selectcategories:[],
 
       categories_filters: [],
@@ -1805,7 +1806,9 @@ export default {
         this.notFoundComponentTitle = "";
       }
     },
-
+    changeBusinessPage(id) {
+      this.businessPage = id;
+    },
     changeComponent() {
       try {
         this.isComponent = this.strategyForComponent[this.selectedId]();

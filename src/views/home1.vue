@@ -401,7 +401,7 @@
         </div>
       </div>
     </section>
-    <div class="w-100 text-light"  id="animation" @scroll="animation" v-animate-onscroll="{ down: 'zoomInUp' }" >  .</div>
+    <div class="w-100 text-light"  id="animation"   >  .</div>
     <section id="why-us" class="why-us">
       <div class="container-fluid" id="anim">
         <div class="row">
@@ -452,8 +452,9 @@
           >
             &nbsp;
 
-            <div class="scroll-container"  >
-              <!-- <div class="  slide-"> -->
+            <!-- <div class="scroll-container "  >
+             
+                 <div class="taille scroll-element js-scroll slide-left">
                 <video
                   class="business-vid1 size_video1"
                   playsinline
@@ -466,8 +467,8 @@
                 >
                   <source src="../assets/video/identity.mp4" type="video/mp4" />
                 </video>
-              <!-- </div> -->
-              <div class="sizeimg hidde" id="hidde">
+              </div>
+              <div class="scroll-caption  hidde" id="hidde">
                 <img
                   src="../assets/img/african-farmer.jpg"
                   height="700px"
@@ -475,6 +476,24 @@
                   
                   alt=""
                 />
+              </div>
+            </div> -->
+            
+             <div class="scroll-container">
+              <div class="scroll-element js-scroll slide-left">
+
+                <video class="business-vid1" playsinline autoplay muted loop poster="assets/img/Home scroll copy.png"
+                  id="Test_Video">
+
+                  <source src="../assets/video/identity.mp4" type="video/mp4">
+                </video>
+
+              </div>
+              <div class="scroll-caption hidde " id="hidde">
+
+
+                <img src="../assets/img/african-farmer.jpg" height="700px" class="d-none d-xl-block"
+                  style="margin-left: -70px;" alt="">
               </div>
             </div>
           </div>
@@ -741,12 +760,12 @@
     img-height="480"
   >
     <b-carousel-slide
-      caption="First slide"
-      img-src="../assets/img/coach.png"
+      caption=""
+      :img-src="img1"
     ></b-carousel-slide>
     <b-carousel-slide
-      caption="Second Slide"
-      img-src="../assets/img/coach2.png"
+      caption=""
+      :img-src="require('../assets/img/coach2.png')"
     ></b-carousel-slide>
     <!-- <b-carousel-slide
       caption="Third Slide"
@@ -850,11 +869,11 @@
                 <li class="white"><a href="#">{{ $t('home.Home') }}</a></li>
 
                 <li class="white">
-                  <a href="http://info.bridgeafrica.com">{{ $t('home.About_Us') }}</a>
+                  <router-link :to="{name: 'about'}">{{ $t('home.About_Us') }}</router-link>
                 </li>
 
                 <li class="white">
-                  <a href="http://info.bridgeafrica.com/contact/">{{ $t('home.Contact_Us') }}</a>
+                  <router-link :to="{name: 'contact'}">{{ $t('home.Contact_Us') }}</router-link>
                 </li>
 
                 <!--   
@@ -907,7 +926,8 @@ export default {
     return {
       expanded:true,
       word1:'',
-      word2:''
+      word2:'',
+      img1:require('../assets/img/coach.png')
     }
   },
 
@@ -1007,13 +1027,131 @@ export default {
 
     
 
-    document.getElementById("animation").addEventListener("scroll", () => {
-    this.animation();
-});
-
-//     window.addEventListener("scroll", () => {
+//     document.getElementById("animation").addEventListener("scroll", () => {
 //     this.animation();
 // });
+
+    // document.getElementById("animation").addEventListener("scroll", () => {
+    // this.animation();
+    // window.removeEventListener("scroll")
+// });
+
+
+
+    var v = document.getElementById("Test_Video");
+
+
+    var v2 = document.getElementById("Test_Video2");
+
+    var v3 = document.getElementById("Test_Video3");
+
+
+    v.playbackRate = 0.8;
+    v2.playbackRate = 0.8;
+    v3.playbackRate = 0.8;
+
+
+
+    const scrollElements = document.querySelectorAll(".js-scroll");
+
+
+    const scrollElements2 = document.querySelectorAll(".hidde");
+
+
+
+
+    const elementInView = (el, dividend = 1) => {
+      const elementTop = el.getBoundingClientRect().top;
+      console.log(document.documentElement.clientHeight);
+
+      return (
+        elementTop <=
+        (30) / dividend
+        //( 100) / dividen
+      );
+    };
+
+    const elementOutofView = (el) => {
+      const elementTop = el.getBoundingClientRect().top;
+
+      return (
+        elementTop > (window.innerHeight || document.documentElement.clientHeight)
+      );
+    };
+
+    const displayScrollElement = (element) => {
+      element.classList.add("scrolled");
+
+
+
+
+
+    };
+
+    const displayScrollElement2 = (element) => {
+      element.classList.add("js-scrolll");
+
+
+
+
+
+    };
+
+    const hideScrollElement2 = (element) => {
+      element.classList.remove("js-scrolll");
+
+    };
+
+
+    const hideScrollElement = (element) => {
+      element.classList.remove("scrolled");
+
+    };
+
+
+    const handleScrollAnimation = () => {
+
+      scrollElements.forEach((el) => {
+        if (elementInView(el, 1.25)) {
+          displayScrollElement(el);
+
+
+
+        } else if (elementOutofView(el)) {
+          hideScrollElement(el);
+
+
+
+        }
+      });
+
+
+      scrollElements2.forEach((el) => {
+        if (elementInView(el, 1.25)) {
+          displayScrollElement2(el);
+
+
+
+
+        } else if (elementOutofView(el)) {
+          hideScrollElement2(el);
+
+
+
+
+        }
+      })
+
+    }
+
+    window.addEventListener("scroll", () => {
+      handleScrollAnimation();
+    });
+
+
+
+
+ 
 
   }
 };
@@ -1143,6 +1281,16 @@ export default {
 
 @media only screen and (min-width: 768px) {
 
+  .d-xl-block {
+    display: block !important;
+    /* margin-left: 100px !important; */
+    
+        height: 530px !important;
+    width: 390px
+}
+.taille{
+  height: 704px;
+}
 .topbar{
     position: fixed;
 }
@@ -1211,14 +1359,14 @@ export default {
 
   .business-vid {
     width: 1000px;
-    margin-left: -50%;
+    /* margin-left: -50%; */
     z-index: 1;
     position: relative;
   }
 
   .business-vid1 {
     height: 704px;
-    width: 396px;
+    width: 311px;
     z-index: 1;
     position: relative;
   }

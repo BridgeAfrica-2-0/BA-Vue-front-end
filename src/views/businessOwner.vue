@@ -92,11 +92,6 @@ export default {
     };
   },
   methods: {
-    
-    init: async function () {
-      await this.$repository.share.switch(this.$route.params.id, "business");
-    },
-
     businessInfo() {
       this.$store
         .dispatch("businessOwner/businessInfo", this.url_data)
@@ -153,8 +148,12 @@ export default {
       this.selectedId = this.$route.query.tabId;
     },
   },
+
+  beforeCreate: async function () {
+    await this.$repository.share.switch(this.$route.params.id, "business");
+  },
+
   created() {
-    this.init()
     this.selectedId = this.$route.query.tabId ? this.$route.query.tabId : "0";
     this.foll_id = this.$route.params.id;
     this.$store

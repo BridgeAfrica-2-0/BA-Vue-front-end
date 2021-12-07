@@ -73,7 +73,7 @@ export default {
   },
 
   created() {
-    this.getAuth();
+    //this.getAuth();
     this.init();
   },
 
@@ -118,7 +118,7 @@ export default {
 
       const request = await this.$repository.search.findUserByParam({
         data: {
-          keyword: "",
+          keyword: this.$route.query.keyword ? this.$route.query.keyword : "",
         },
         page: 1,
       });
@@ -149,9 +149,9 @@ export default {
         !this.haveNotData
       ) {
         this.setLoaderState(true);
-        
+
         const request = await this.callback({
-          data:{...this.getStack},
+          data: { ...this.getStack },
           page: this.getPage,
         });
 

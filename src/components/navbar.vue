@@ -12,9 +12,12 @@
             ></b-icon>
           </span>
 
-          <a class="d-inline-block align-top mt-1" href="#">
+          <router-link
+            class="d-inline-block align-top mt-1"
+            :to="{ name: 'home1' }"
+          >
             <img src="@/assets/logo.png" alt="" class="balogo" loading="lazy" />
-          </a>
+          </router-link>
         </div>
 
         <div class="col-lg-9 col-xl-6">
@@ -150,7 +153,7 @@
                   :to="{ name: navLink('home') }"
                   class="nav-link text-dark hov"
                 >
-                 Home
+                  Home
                 </router-link>
               </div>
 
@@ -747,9 +750,6 @@ export default {
 
     newRedirection(type) {
       const newPath = this.redirectionPatterns[type][this.user.user_type]();
-
-      console.log(newPath)
-
       if (newPath) {
         let path = { name: newPath.name };
 

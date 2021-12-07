@@ -241,7 +241,7 @@
         <div class="container">
           <div class="row">
             <div
-              class="col-auto col-sm-12 col-md-6 col-lg-3 col-xl-3"
+              class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3"
               style="
                 padding-top: 15px;
                 padding-bottom: 15px;
@@ -281,7 +281,7 @@
               </div>
             </div>
             <div
-              class="col-auto col-sm-12 col-md-6 col-lg-3 col-xl-3"
+              class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3"
               style="
                 padding-top: 15px;
                 padding-bottom: 15px;
@@ -320,7 +320,7 @@
               </div>
             </div>
             <div
-              class="col-auto col-sm-12 col-md-6 col-lg-3 col-xl-3"
+              class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3"
               style="
                 padding-top: 15px;
                 padding-bottom: 15px;
@@ -359,7 +359,7 @@
               </div>
             </div>
             <div
-              class="col-auto col-sm-12 col-md-6 col-lg-3 col-xl-3"
+              class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3"
               style="
                 padding-top: 15px;
                 padding-bottom: 15px;
@@ -493,7 +493,7 @@
 
 
                 <img src="../assets/img/african-farmer.jpg" height="700px" class="d-none d-xl-block"
-                  style="margin-left: -70px;" alt="">
+                  style="height: 700px; margin-left: -300px;" alt="">
               </div>
             </div>
           </div>
@@ -1281,12 +1281,16 @@ export default {
 
 @media only screen and (min-width: 768px) {
 
+.scroll-container {
+   
+    width: 1000px !important;
+}
   .d-xl-block {
     display: block !important;
     /* margin-left: 100px !important; */
     
-        height: 530px !important;
-    width: 390px
+        /* height: 530px !important;
+    width: 390px */
 }
 .taille{
   height: 704px;
@@ -1301,8 +1305,8 @@ export default {
     margin-right: -20px;
   }
   .size_video1{
-    /* width: 400px !important;
-    height: 700px !important; */
+    width: 400px !important;
+    height: 700px !important;
   }
 
   .bridge-btn{
@@ -1365,8 +1369,8 @@ export default {
   }
 
   .business-vid1 {
-    height: 704px;
-    width: 311px;
+    height: 704px !important;
+    width: 396px ;
     z-index: 1;
     position: relative;
   }
@@ -1527,7 +1531,9 @@ header h2 {
 }
 
 .scroll-caption {
-  margin: 1rem;
+  
+      margin-left: 200px;
+    height: 700px !important;
 }
 
 footer {

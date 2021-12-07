@@ -163,7 +163,6 @@ export default {
 
             axios.get(`/user/all-user${keyword}`)
                 .then((res) => {
-                    commit("setLoader", false);
                     let result = res.data.data
                     result.map((user) => {
                         users.push({ accountType: 'people', ...user })
@@ -171,8 +170,6 @@ export default {
 
                     axios.get(`/business/all${keyword}`)
                         .then((biz) => {
-                            commit("setLoader", false);
-
                             let result = biz.data.data
                             result.map((user) => {
                                 businesses.push({ accountType: 'business', ...user })
@@ -206,56 +203,110 @@ export default {
                             console.log(err);
                         })
 
+                }).catch((err) => {
+                    commit("setLoader", false);
+                    console.log(err);
                 })
-            axios.get(`/business/role/editor/${state.currentBizId}${keyword}`)
-                .then((res) => {
-                    let result = res.data.data
-                    result.map((editor) => {
-                        editors.push({ accountType: 'editor', ...editor })
-                    })
-                    console.log("editors", editors);
-                })
+                // axios.get(`/business/role/editor/${state.currentBizId}${keyword}`)
+                //     .then((res) => {
+                //         let result = res.data.data
+                //         result.map((editor) => {
+                //             editors.push({ accountType: 'editor', ...editor })
+                //         })
+                //         console.log("editors", editors);
+                //     })
 
         },
-
 
         GET_USERS({ commit, state }, data) {
             commit("setBizs", []);
             state.users = []
 
             commit("setLoader", true);
-            let keyword = data ? '/' + data : ''
-
-            return axios.get(`/user/all-user${keyword}`)
+            let keyword = data.keyword ? '/' + data.keyword : ''
+            return axios.get(`/business-community/people-follower/${state.currentBizId+keyword}`)
                 .then((res) => {
                     commit("setLoader", false);
-                    let users = res.data.data
-                    state.users = users
-                    commit("setBizs", users);
+                    let users = res.data.data.data
+                    if (users) {
+                        users.map((elm) => {
+                            state.users.push({ statusType: "follower", ...elm })
+                        })
+                    }
+
+                    axios.get(`/business-community/people-following/${state.currentBizId+keyword}`)
+                        .then((res1) => {
+                            commit("setLoader", false);
+
+                            if (res1.data.data.data.length > 0) {
+                                res1.data.data.data.map((elm) => {
+                                        state.users.push({ statusType: "following", ...elm })
+                                    })
+                                    // state.businesses.push({ statusType: "following", ...res1.data.data.data })
+                            }
+                            // state.users.push({ statusType: "following", ...res1.data.data })
+                            commit("setBizs", users);
+                        })
+                        .catch((err) => {
+                            commit("setLoader", false);
+                            console.log(err);
+                        })
                 })
                 .catch((err) => {
                     commit("setLoader", false);
                     console.log(err);
                 })
+                // return axios.get(`/user/all-user${keyword}`)
+                //     .then((res) => {
+                //         commit("setLoader", false);
+                //         let users = res.data.data
+                //         state.users = users
+                //         commit("setBizs", users);
+                //     })
+                //     .catch((err) => {
+                //         commit("setLoader", false);
+                //         console.log(err);
+                //     })
         },
         GET_NETWORKS({ commit, state }, data) {
             commit("setBizs", []);
             state.networks = []
 
             commit("setLoader", true);
-            let keyword = data ? '/' + data : ''
-            let usersFinal = []
-            return axios.get(`/networks${keyword}`)
+            let keyword = data.keyword ? '/' + data.keyword : ''
+            return axios.get(`/business/community/network-follower/${state.currentBizId+keyword}`)
                 .then((res) => {
                     commit("setLoader", false);
-                    let networks = res.data.data
-                    state.networks = networks
-                    commit("setBizs", networks);
+
+                    let networks = res.data.data.data
+                    if (networks) {
+                        networks.map((elm) => {
+                            state.networks.push({ statusType: "follower", ...elm })
+                        })
+                    }
+
+                    axios.get(`/business/community/network-following/${state.currentBizId+keyword}`)
+                        .then((res1) => {
+                            commit("setLoader", false);
+                            if (res1.data.data.data.length > 0) {
+                                res1.data.data.data.map((elm) => {
+                                        state.networks.push({ statusType: "following", ...elm })
+                                    })
+                                    // state.businesses.push({ statusType: "following", ...res1.data.data.data })
+                            }
+                            // state.networks.push({ statusType: "following", ...res1.data.data })
+                            commit("setBizs", state.networks);
+                        })
+                        .catch((err) => {
+                            commit("setLoader", false);
+                            console.log(err);
+                        })
                 })
                 .catch((err) => {
                     commit("setLoader", false);
                     console.log(err);
                 })
+
         },
         async GET_BIZS({ commit, state, getters, rootGetters, rootState }, data) {
             state.all = []
@@ -264,28 +315,57 @@ export default {
 
             commit("setLoader", true);
 
-            let keyword = data ? '/' + data : ''
-            await axios.get(`/business/all${keyword}`)
+            let keyword = data.keyword ? '/' + data.keyword : ''
+
+            await axios.get(`/business-community/business-follower/${state.currentBizId+keyword}`)
                 .then((res) => {
-                    commit("setLoader", false);
-                    let bizs = res.data.data
-
-                    console.log('businesses:', bizs)
-                    commit("setBizs", bizs);
-                    state.businesses = bizs
-                    let curBiz = bizs.filter((biz) => {
-                        return state.currentBizId == biz.id
-                    })
-                    commit("setCurrentBiz", curBiz);
-                    console.log("current new: ", curBiz);
-
+                    let business = res.data.data.data
+                    if (business) {
+                        business.map((elm) => {
+                            state.businesses.push({ statusType: "follower", ...elm })
+                        })
+                    }
+                    axios.get(`/business-community/business-following/${state.currentBizId+keyword}`)
+                        .then((res1) => {
+                            commit("setLoader", false);
+                            if (res1.data.data.data.length > 0) {
+                                res1.data.data.data.map((elm) => {
+                                        state.businesses.push({ statusType: "following", ...elm })
+                                    })
+                                    // state.businesses.push({ statusType: "following", ...res1.data.data.data })
+                            }
+                            commit("setBizs", state.businesses);
+                        })
+                        .catch((err) => {
+                            commit("setLoader", false);
+                            console.log(err);
+                        })
                 })
                 .catch((err) => {
                     commit("setLoader", false);
                     console.log(err);
                 })
-                // commit("setCurrentBiz", rootGetters['auth/profilConnected']);
-                // console.log("current biz:", curBiz);
+                // await axios.get(`/business/all${keyword}`)
+                //     .then((res) => {
+                //         commit("setLoader", false);
+                //         let bizs = res.data.data
+
+            //         console.log('businesses:', bizs)
+            //         commit("setBizs", bizs);
+            //         state.businesses = bizs
+            //         let curBiz = bizs.filter((biz) => {
+            //             return state.currentBizId == biz.id
+            //         })
+            //         commit("setCurrentBiz", curBiz);
+            //         console.log("current new: ", curBiz);
+
+            //     })
+            //     .catch((err) => {
+            //         commit("setLoader", false);
+            //         console.log(err);
+            //     })
+            // commit("setCurrentBiz", rootGetters['auth/profilConnected']);
+            // console.log("current biz:", curBiz);
         },
         // [NO BUG]
         GET_BIZS_CHAT_LIST({ commit, state }, data) {

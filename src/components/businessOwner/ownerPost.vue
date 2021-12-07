@@ -530,7 +530,7 @@
 import moment from "moment";
 import axios from "axios";
 
-import { mapGetters } from "vuex";
+import { mapActions, mapGetters, mapMutations } from "vuex";
 
 import Post from "./ownerPostComponent.vue";
 
@@ -573,6 +573,9 @@ export default {
   },
 
   methods: {
+    ...mapMutations({
+      auth: "auth/profilConnected",
+    }),
     async getAuth() {
       const type = [
         "NetworkEditors",

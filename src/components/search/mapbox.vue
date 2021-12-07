@@ -23,6 +23,24 @@
           </div>
         </MglPopup>
       </MglMarker>
+
+      <!-- <MglMarker
+        v-for="network in networks"
+        :key="network.id"
+        :coordinates="[business.lng, business.lat]"
+        color="#3ad3ad"
+      >
+        <MglPopup :coordinates="[business.lng, business.lat]" anchor="top">
+          <div class="py-4">
+            <div class="d-flex justify-content-center flex-column">
+              <img :src="business.logo_path" alt="..." class="img-map" />
+              <span class="text-center">
+                {{ business.name }}
+              </span>
+            </div>
+          </div>
+        </MglPopup>
+      </MglMarker> -->
       <!-- <MglMarker
         v-for="(center, key) in points"
         :key="key"
@@ -52,7 +70,7 @@ export default {
     MglMarker,
     MglPopup,
   },
-  props: ["businesses"],
+  props: ["businesses", "networks"],
   data() {
     return {
       loading: false,
@@ -64,6 +82,7 @@ export default {
   },
   created() {
     this.mapbox = Mapbox;
+    console.log(this.mapbox);
   },
 };
 </script>

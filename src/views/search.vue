@@ -583,7 +583,7 @@
           </div>
         </b-col>
         <b-col cols="12" md="4" lg="4" xl="3" class="showmap" ref="mapblock">
-          <div id="map" style="margin-top: 20px" class=""><Map /></div>
+          <div id="map" style="margin-top: 20px" class=""><mapbox /></div>
         </b-col>
       </b-row>
     </div>
@@ -595,6 +595,7 @@ import _ from "lodash";
 
 import LyTab from "@/tab/src/index.vue";
 import Map from "@/components/search/map";
+import mapbox from "@/components/search/mapbox";
 //import Business from '@/components/search/business';
 import People from "@/components/search/people";
 import Network from "@/components/search/network";
@@ -638,6 +639,7 @@ export default {
     Network,
     Post,
     Market,
+    mapbox,
     MiniBusiness,
     MiniPeople,
     MiniNetwork,
@@ -710,16 +712,13 @@ export default {
 
       categories_filters: [],
       items: [
+        { label: this.$t("search.All") },
 
-
-        { label: this.$t('search.All') },
-
-        { label: this.$t('search.Business') },
-        { label: this.$t('search.People') },
-        { label: this.$t('search.Network') },
-        { label: this.$t('search.Market') },
-        { label: this.$t('search.Post') },
-
+        { label: this.$t("search.Business") },
+        { label: this.$t("search.People") },
+        { label: this.$t("search.Network") },
+        { label: this.$t("search.Market") },
+        { label: this.$t("search.Post") },
       ],
 
       Finished_Branded_Products_filters: [

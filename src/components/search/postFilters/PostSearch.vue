@@ -46,14 +46,12 @@ import { loader, search, PostComponentMixin } from "@/mixins";
 import Post from "@/components/businessOwner/ownerPostComponent";
 import Loader from "@/components/Loader";
 
-
 export default {
   mixins: [loader, search, PostComponentMixin],
   components: {
     Sponsor,
     Post,
     Loader,
-    
   },
 
   data: () => ({
@@ -76,7 +74,6 @@ export default {
   mounted() {
     window.addEventListener("scroll", this.onscroll);
   },
-
 
   created() {
     this.getAuth();
@@ -125,7 +122,7 @@ export default {
 
       const request = await this.$repository.search.findPostByKeyword({
         data: {
-          keyword: "",
+          keyword: this.$route.query.keyword ? this.$route.query.keyword : "",
         },
         page: 1,
       });

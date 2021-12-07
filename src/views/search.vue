@@ -643,6 +643,12 @@ export default {
   },
 
   created() {
+    if (this.$route.query.keyword)
+      this.searchParams.keyword = this.$route.query.keyword;
+
+    if (this.$route.query.market)
+      this.selectedId = 4;
+
     this.getLocation();
     this.strategY = {
       users: () => this.onFindUser(),
@@ -1702,7 +1708,7 @@ export default {
           console.log("Error erro!");
         });
     },
-    
+
     ...mapActions({
       userStore: "search/FIND_USER",
       postStore: "search/FIND_POST",

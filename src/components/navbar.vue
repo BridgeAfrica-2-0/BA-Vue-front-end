@@ -156,9 +156,12 @@
 
               <div class="nav-item">
                 <router-link
-                  :to="{ name: 'market' }"
+                  :to="{
+                    name: 'Search',
+                    params: { id: 4 },
+                    query: { market: 4 },
+                  }"
                   class="nav-link text-dark hov"
-                  href=""
                 >
                   Market
                 </router-link>
@@ -299,8 +302,8 @@
               </div>
               <!-- Notifications Ended -->
 
-              <div class="nav-item" id="profilepic">
-                <span
+              <div class="nav-item cursor" id="profilepic">
+                <router-link :to="userOwnPage"
                   ><img
                     :src="user.profile_picture"
                     :class="`${
@@ -309,7 +312,7 @@
                     alt=""
                     width="50"
                     height="50"
-                /></span>
+                /></router-link>
               </div>
 
               <b-tooltip target="profilepic" variant="light" triggers="hover">
@@ -603,6 +606,7 @@ export default {
 
   data() {
     return {
+      userOwnPage: null,
       isActive: false,
       shownav: false,
       notifications: [],
@@ -612,7 +616,7 @@ export default {
       redirectionPatterns: null,
       searchOptions: {
         keyword: "",
-        placeholder: "",
+        placeholder: "All",
       },
     };
   },
@@ -628,6 +632,7 @@ export default {
 
   created() {
     this.init();
+    this.userOwnPage = this.onRedirect();
 
     this.notificationPatterns = {
       user: () => "/notification/latest/user",
@@ -671,10 +676,10 @@ export default {
   watch: {
     "$store.state.auth.profilConnected": function () {
       this.updateNotificationEvent();
+      this.userOwnPage = this.onRedirect();
     },
     credentials: {
       deep: true,
-
       handler() {
         this.searchOptions = this.credentials;
       },
@@ -711,6 +716,19 @@ export default {
       }
     },
 
+    onRedirect() {
+      const link = {
+        network: () => ({ name: "networks", params: { id: this.user.id } }),
+        business: () => ({
+          name: "BusinessOwner",
+          params: { id: this.user.id },
+        }),
+        user: () => ({ name: "profile_owner" }),
+      };
+
+      return link[this.user.user_type]();
+    },
+
     newRedirection(type) {
       const newPath = this.redirectionPatterns[type][this.user.user_type]();
 
@@ -729,12 +747,12 @@ export default {
     },
 
     getKeyword() {
-      if (!this.credentials.keyword) return false;
+      if (!this.searchOptions.keyword) return false;
 
       if (this.$route.name != "Search") {
         this.$store
           .dispatch("allSearch/SEARCH", {
-            keyword: this.credentials.keyword,
+            keyword: this.searchOptions.keyword,
           })
           .catch((err) => {
             console.log("Error erro!", err);
@@ -742,7 +760,7 @@ export default {
 
         this.$router.push({
           name: "Search",
-          query: { keyword: this.credentials.keyword },
+          query: { keyword: this.searchOptions.keyword },
         });
       }
     },
@@ -807,12 +825,11 @@ export default {
       }
 
       loader.hide();
-      
+
       this.$router.push({
         name: "BusinessOwner",
         params: { id: this.auth.user.id },
       });
-      
     },
 
     toggleinput() {
@@ -1020,6 +1037,10 @@ export default {
   .show {
     display: block;
   }
+}
+
+.cursor {
+  cursor: pointer;
 }
 
 .website-logo-name {

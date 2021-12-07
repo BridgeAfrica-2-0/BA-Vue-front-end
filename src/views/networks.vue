@@ -125,7 +125,9 @@ export default {
       },
     };
   },
+
   created() {
+    this.init();
     this.selectedId = this.$route.query.tabId ? this.$route.query.tabId : 0;
 
     this.foll_id = this.$route.params.id;
@@ -171,6 +173,9 @@ export default {
   methods: {
     handleChange(item, index) {
       console.log(item, index);
+    },
+    init: async function () {
+      await this.$repository.share.switch(this.$route.params.id);
     },
   },
 };

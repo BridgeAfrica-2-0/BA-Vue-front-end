@@ -421,7 +421,7 @@
                 {{ $t("search.Businesses") }}
               </h6>
 
-              <MiniBusiness />
+              <MiniBusiness :businesses="businesses" />
 
               <span class="float-right mb-3" @click="selectedId = 1">
                 <b-link href="#top"> {{ $t("search.see_more") }} </b-link>
@@ -583,7 +583,9 @@
           </div>
         </b-col>
         <b-col cols="12" md="4" lg="4" xl="3" class="showmap" ref="mapblock">
-          <div id="map" style="margin-top: 20px" class=""><mapbox /></div>
+          <div id="map" style="margin-top: 20px" class="">
+            <mapbox :businesses="businesses.data" />
+          </div>
         </b-col>
       </b-row>
     </div>
@@ -657,6 +659,9 @@ export default {
     ...mapGetters({
       prodLoaderr: "business/getloadingState",
     }),
+    businesses() {
+      return this.$store.getters["allSearch/getBusinesses"];
+    },
 
     products() {
       return this.$store.state.market.products;

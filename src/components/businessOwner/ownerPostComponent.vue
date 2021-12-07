@@ -112,7 +112,6 @@
       </div>
       <!-- end source post -->
       <div v-if="item.media.length > 0" class="">
-        
         <span v-for="video in mapvideo()" :key="video">
           <youtube
             class="w-100 videoh"
@@ -148,11 +147,7 @@
           <ShareButton
             :post="item"
             :type="'profile'"
-            v-if="
-              !isDisplayInSearch
-                ? !isMemberNetworkFollower || canBeDelete
-                : false
-            "
+            v-if="!isMemberNetworkFollower || canBeDelete"
           />
         </b-col>
       </b-row>
@@ -373,12 +368,11 @@ export default {
     },
 
     onLike: async function () {
-      
-      if (this.isDisplayInSearch) return false
+      if (this.isDisplayInSearch) return false;
 
       if (!this.canBeDelete) return false;
-     
-     if (!this.processLike) {
+
+      if (!this.processLike) {
         this.processLike = true;
 
         const request = await this.$repository.share.postLike({

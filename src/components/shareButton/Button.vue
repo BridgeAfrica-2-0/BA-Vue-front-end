@@ -418,7 +418,13 @@ export default {
         this.$route.name == "networks"
           ? false
           : true;
-      return isItOwnerPage;
+
+      const isYourOwn =
+        this.profile.id == this.post.user_id &&
+        this.profile.user_type == this.post.poster_type;
+
+      return isItOwnerPage ? (isYourOwn ? false : true) : false;
+      
     },
 
     isBusiness() {

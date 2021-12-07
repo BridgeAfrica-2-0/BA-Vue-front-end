@@ -24,7 +24,6 @@
         :businessLogo="item.logo_path"
         :editPost="(f) => f"
         :deletePost="(f) => f"
-
         :isDisplayInSearch="true"
       />
     </div>
@@ -47,12 +46,14 @@ import { loader, search, PostComponentMixin } from "@/mixins";
 import Post from "@/components/businessOwner/ownerPostComponent";
 import Loader from "@/components/Loader";
 
+
 export default {
   mixins: [loader, search, PostComponentMixin],
   components: {
     Sponsor,
     Post,
     Loader,
+    
   },
 
   data: () => ({

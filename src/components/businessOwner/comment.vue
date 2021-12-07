@@ -4,9 +4,8 @@
       <b-avatar
         variant="info"
         :src="comment.picture"
-        :class="`${
-          'user' == comment.user_type ? 'rounded-circle' : 'square'
-        } avat-comment b-r`"
+        :square="'user' == comment.user_type ? false : true"
+        class="avat-comment b-r"
       ></b-avatar>
 
       <div class="msg text" v-if="!proccesEdit">
@@ -19,9 +18,7 @@
         </span>
 
         <p class="username mb-0" v-if="!proccesEdit">
-          <router-link
-            :to="{ name: 'Follower', params: { id: comment.user_id } }"
-          >
+          <router-link :to="{ name: 'Follower', params: { id: comment.user_id } }">
             {{ comment.name }}
           </router-link>
         </p>
@@ -142,7 +139,7 @@
               :hasData="hasData"
               @click.native="onShowReply"
               :moreDataTitle="'Show more reply comments'"
-              :noDataTitle="'No reply comment'"
+              :noDataTitle="''"
             />
 
             <Loader v-if="loadComment" />

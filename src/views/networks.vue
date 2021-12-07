@@ -127,7 +127,6 @@ export default {
   },
 
   created() {
-    
     this.selectedId = this.$route.query.tabId ? this.$route.query.tabId : 0;
 
     this.foll_id = this.$route.params.id;
@@ -169,16 +168,20 @@ export default {
       });
   },
 
-  beforeCreate(){
+  beforeCreate() {
     this.$repository.share.switch(this.$route.params.id, "network");
+  },
+
+  watch: {
+    "$route.query.tabId": function () {
+      this.selectedId = this.$route.query.tabId;
+    },
   },
 
   methods: {
     handleChange(item, index) {
       console.log(item, index);
     },
-
-
   },
 };
 </script>

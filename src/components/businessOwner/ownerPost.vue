@@ -530,7 +530,7 @@
 import moment from "moment";
 import axios from "axios";
 
-import { mapActions, mapGetters, mapMutations } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 
 import Post from "./ownerPostComponent.vue";
 

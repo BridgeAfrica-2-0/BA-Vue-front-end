@@ -5,9 +5,8 @@
         <b-avatar
           variant="info"
           :src="comment.picture"
-          :class="`${
-            'user' == comment.user_type ? 'rounded-circle' : 'square'
-          } avat-comment b-r`"
+          :square="'user' == comment.user_type ? false : true"
+          class="avat-comment b-r"
         ></b-avatar>
 
         <div class="msg text" v-if="!proccesEdit">
@@ -43,7 +42,11 @@
         <!-- Edit message -->
         <p
           class="p-0 m-0 pl-3 msg text inline-comment"
-          style="background: transparent; border: 1px solid transparent; width:100%"
+          style="
+            background: transparent;
+            border: 1px solid transparent;
+            width: 100%;
+          "
           v-if="proccesEdit"
         >
           <input
@@ -141,9 +144,9 @@ export default {
   },
 
   props: {
-    onDelete:{
-      type:Function,
-      required:true
+    onDelete: {
+      type: Function,
+      required: true,
     },
     item: {
       type: Object,

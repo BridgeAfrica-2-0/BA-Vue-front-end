@@ -890,7 +890,7 @@ export default {
       await axios
         .get(url)
         .then((response) => {
-          this.notifications = response.data.data;
+          this.notifications = response.data.data.slice(0, 5);
         })
         .catch((error) => console.log("Error => " + error));
     },
@@ -899,7 +899,7 @@ export default {
       await axios
         .get(url)
         .then((response) => {
-          this.messages = response.data.data;
+          this.messages = response.data.data.slice(0, 5);
         })
         .catch((error) => console.log(error));
     },

@@ -14,7 +14,7 @@
         </span>
         <div class="pl-2 pl-md-3 pt-md-2">
           <h5 class="m-0 usernamee">
-            {{ item.user_name }} {{item.poster_type}}
+            {{ item.user_name }} {{ item.logo_path }}
           </h5>
           <p class="durationn">{{ item.created_at | now }}</p>
         </div>
@@ -167,11 +167,9 @@
       <div class="m-md-0 p-md-0">
         <b-avatar
           b-avatar
-          :class="`${
-            'user' == profile.user_type ? 'rounded-circle' : ''
-          } logo-sizee-18 avat img-fluid avat-comment avatar-border`"
+          class="logo-sizee-18 avat img-fluid avat-comment avatar-border"
           variant="primary"
-          square
+          :square="'user' == profile.user_type ? false : true"
           :src="businessLogo"
         ></b-avatar>
       </div>
@@ -210,7 +208,7 @@
       v-if="comments.length && !loadComment"
       :hasData="hasData"
       :moreDataTitle="'Show more comments'"
-      :noDataTitle="'No comment'"
+      :noDataTitle="''"
       @click.native="onShowComment"
     />
   </div>

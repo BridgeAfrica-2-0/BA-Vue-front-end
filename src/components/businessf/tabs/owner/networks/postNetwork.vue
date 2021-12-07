@@ -515,10 +515,6 @@ export default {
     this.url = this.$route.params.id;
   },
 
-  beforeCreate() {
-    this.$repository.share.switch(this.$route.params.id, "network");
-  },
-
   methods: {
     ...mapMutations({
       auth: "auth/profilConnected",

@@ -569,7 +569,7 @@ export default {
   },
 
   created() {
-    this.init();
+    this.getAuth();
   },
 
   methods: {
@@ -588,9 +588,6 @@ export default {
       });
 
       if (response.success) this.auth(response.data);
-    },
-    init: async function () {
-      await this.$repository.share.switch(this.$route.params.id, "business");
     },
 
     mapmediae(media) {

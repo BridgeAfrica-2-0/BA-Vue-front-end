@@ -237,20 +237,30 @@ const routes = [
     component: confirmPayment,
   },
   {
-    path: "/business_owner/network/:id?",
-    name: "networks",
-    component: networks,
-  },
-  {
     path: "/network/:id?",
     name: "networks",
     component: networks,
   },
+  
   {
     path: "/network_editors/:id?",
     name: "NetworkEditors",
     component: networkEditors,
   },
+
+  {
+    path: "/network_member/:id?",
+    name: "memberNetwork",
+    component: memberNetwork,
+  },
+
+  {
+    path: "/network_follower/:id?",
+    name: "Membar Network Follower",
+    component: memberNetworkFollower,
+
+  },
+  
   {
     path: "/login",
     name: "Login",
@@ -367,19 +377,7 @@ const routes = [
   },
 
 
-  {
-    path: "/memberNetwork/:id?",
-    name: "memberNetwork",
-    component: memberNetwork,
-  },
-
-  {
-    path: "/memberNetworkFollower/:id?",
-    name: "Membar Network Follower",
-    component: memberNetworkFollower,
-
-  },
-
+ 
   {
     path: "*",
     name: "notFound",

@@ -1,6 +1,10 @@
 <template>
   <div class="accordion" role="tablist">
-    <b-card class="mb-1" style="width: 100%" v-if="'business' != profile.user_type">
+    <b-card
+      class="mb-1"
+      style="width: 100%"
+      v-if="'business' != profile.user_type"
+    >
       <b-card-header header-tag="header" class="p-1" role="tab">
         <p block v-b-toggle.accordion-1 variant="info">
           <b-icon :icon="openBusiness ? 'arrow-down' : 'arrow-up'"></b-icon>
@@ -173,22 +177,43 @@ export default {
     },
 
     process: async function (item, type) {
+      let loader = this.$loading.show({
+        container: this.$refs.formContainer,
+        canCancel: true,
+        onCancel: this.onCancel,
+        color: "#e75c18",
+      });
+
       try {
-        this.flashMessage.success({
-          time: 5000,
-          message:
-            "business" == type
-              ? `You are now connected as ${item.business_name}`
-              : `You are connected as ${item.network_name}`,
-        });
-
-        this.auth(this.strategy[type].newType(item));
-
         const data = {
           routeName: "network" == type ? "networks" : "BusinessOwner",
           routeId: "network" == type ? item.network_id : item.business_id,
         };
 
+        const request =
+          "network" == type
+            ? await this.$repository.share.switch(
+                this.$route.params.id,
+                "network"
+              )
+            : await this.$repository.share.switch(
+                this.$route.params.id,
+                "business"
+              );
+
+        if (request.success) {
+          this.flashMessage.success({
+            time: 5000,
+            message:
+              "business" == type
+                ? `You are now connected as ${item.business_name}`
+                : `You are connected as ${item.network_name}`,
+          });
+
+          this.auth(this.strategy[type].newType(item));
+        }
+
+        loader.hide();
         this.strategy[type].redirect(data);
       } catch (error) {
         console.log(error);

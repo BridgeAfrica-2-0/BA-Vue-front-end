@@ -150,7 +150,7 @@
                   :to="{ name: navLink('home') }"
                   class="nav-link text-dark hov"
                 >
-                  {{ "home1" == navLink("home") ? "Home" : "Dashboard" }}
+                 Home
                 </router-link>
               </div>
 
@@ -637,7 +637,7 @@ export default {
     this.notificationPatterns = {
       user: () => "/notification/latest/user",
       business: () => `/notification/business/${this.user.id}`,
-      network: () => null,
+      network: () => `/network/${this.user.id}/notifications`,
     };
 
     this.messagePatterns = {
@@ -648,13 +648,21 @@ export default {
 
     this.redirectionPatterns = {
       message: {
-        user: () => null,
+        user: () => () => ({
+          name: "profile_owner",
+          params: { id: this.user.id },
+          query: { tabId: 1 },
+        }),
         business: () => ({
           name: "BusinessOwner",
           params: { id: this.user.id },
           query: { tabId: 1 },
         }),
-        network: () => null,
+        network: () => ({
+          name: "networks",
+          params: { id: this.user.id },
+          query: { tabId: 1 },
+        }),
       },
       notification: {
         business: () => ({
@@ -662,8 +670,16 @@ export default {
           params: { id: this.user.id },
           query: { tabId: 2 },
         }),
-        user: () => null,
-        network: () => null,
+        user: () => ({
+          name: "profile_owner",
+          params: { id: this.user.id },
+          query: { tabId: 2 },
+        }),
+        network: () => ({
+          name: "networks",
+          params: { id: this.user.id },
+          query: { tabId: 2 },
+        }),
       },
     };
 
@@ -731,6 +747,8 @@ export default {
 
     newRedirection(type) {
       const newPath = this.redirectionPatterns[type][this.user.user_type]();
+
+      console.log(newPath)
 
       if (newPath) {
         let path = { name: newPath.name };
@@ -827,7 +845,7 @@ export default {
       loader.hide();
 
       this.$router.push({
-        name: "BusinessOwner",
+        name: "profile_owner",
         params: { id: this.auth.user.id },
       });
     },
@@ -874,7 +892,7 @@ export default {
         .then((response) => {
           this.notifications = response.data.data;
         })
-        .catch((error) => console.log("Error In newNotification  => " + error));
+        .catch((error) => console.log("Error => " + error));
     },
 
     async newMessage(url) {

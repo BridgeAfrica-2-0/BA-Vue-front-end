@@ -269,38 +269,38 @@
 
         <div class="form-group">
           <label for="alias">{{ $t('businessowner.Category') }}:</label><br />
-         <!-- <multiselect
+          <multiselect
             v-model="multiselecvalue"
             @input="subcategories"
             :tag-placeholder="$t('businessowner.Add_this_as_new_tag')"
             :placeholder="$t('businessowner.Search_or_add_a_tag')"
-            :label="$t('businessowner.name')"
+            label="name"
             track-by="id"
             :options="pcategories"
             :multiple="true"
             :taggable="true"
             @tag="addTag"
-          ></multiselect> -->
+          ></multiselect> 
         </div>
 
         <div class="form-group">
           <label for="alias">{{ $t('businessowner.Sub_Category') }}:</label><br />
-          <!-- <multiselect
+           <multiselect
             v-model="filterselectvalue"
             :tag-placeholder="$t('businessowner.Add_this_as_new_tag')"
             :placeholder="$t('businessowner.Search_or_add_a_tag')"
-            :label="$t('businessowner.name')"
+            label="name"
             track-by="subcategory_id"
             :options="scategories"
             :multiple="true"
             :taggable="true"
             @tag="addFilter"
-          ></multiselect> -->
+          ></multiselect> 
         </div>
 
         <label class="typo__label">{{ $t('businessowner.Filters') }}</label>
          <div>
-          <!--<b-card no-body>
+          <b-card no-body>
             <b-tabs pills card vertical>
               <b-tab
                 :title="filters.name"
@@ -328,7 +328,7 @@
                 </b-card-text>
               </b-tab>
             </b-tabs>
-          </b-card> -->
+          </b-card> 
         </div>
 
         <div class="form-group">
@@ -350,7 +350,7 @@
           :label="$t('businessowner.Country')"
           label-for="input-1"
           label-size="sm"
-        >{{country}}--------{{countries}}
+        >
           <multiselect
             v-model="country"
             @input="Region"

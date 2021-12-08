@@ -91,7 +91,7 @@
         <p>
           {{$t("network.Your")}} {{pendingPost.data}} {{$t("network.Posts_are_pending_for_approval")}}.&nbsp;&nbsp;&nbsp;&nbsp;
           <a
-            @click="this.selectedIdd = '4', this.tabIndex = '5'"
+            @click="editPage"
             style="color: #e75c18; text-decoration: underline; cursor:pointer"
           >{{ $t("network.View_All") }}</a>
         </p>
@@ -425,6 +425,13 @@ export default {
       auth: "auth/profilConnected",
     }),
 
+    editPage(){
+       this.$router.push("/network/"+this.url+"?selectedId=4");
+      //  this.$router.push("/network/"+this.url+"?this.selectedIdd=4 && this.tabIndex=5");
+       console.log("editPage");
+          //        this.selectedIdd = '4';
+          // this.tabIndex = '5';
+    },
     
     AllPendingPost() {
       console.log("AllPendingPost");

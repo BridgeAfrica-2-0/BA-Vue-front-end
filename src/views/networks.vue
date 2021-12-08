@@ -96,6 +96,13 @@ export default {
     Footer,
     Parent,
   },
+  watch: {
+    "$route.query.selectedId": function(){
+      console.log('test')
+      this.selectedId = this.$route.params.selectedId != 0 ? this.$route.params.selectedId : 0
+      console.log(this.selectedId)
+    }
+  },
 
   data() {
     return {

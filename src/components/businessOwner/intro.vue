@@ -1,9 +1,9 @@
 <template>
 	<div>
 		<b-card title="" header-tag="header" footer-tag="footer">
-			<!-- <div style="float:right" class="edit cursor-pointer" @click="editContact">
+			<div style="float:right" class="edit cursor-pointer" @click="editContact">
 				<b-icon icon="pencil-fill" variant="primary"></b-icon>
-			</div> -->
+			</div>
 			<h6 class="mb-2"><b>{{$t("businessf.Intro")}}
 				</b></h6>
 
@@ -432,9 +432,10 @@
 			 * @return void
 			 */
 			editContact() {
-				this.$router.push({path:`/business_owner/${this.url}`, query: {currentTab: 1}})
+				this.$router.push("business_owner#about");
+				// this.$router.push({path:`/business_owner/${this.url}`, query: {currentTab: 1}})
 				// (this.form = this.business_intro), (this.edit2 = !this.edit2);
-				console.log("editContact");
+				console.log("business_owner#about");
 				// localStorage.setItem("ba-business-active-tab", 0);
 			},
 

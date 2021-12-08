@@ -43,17 +43,16 @@ import keywordOperationOnNetwork from './keywordOperationOnNetwork';
 
 import homeRedirection from './homeRedirection';
 
-import profileSettingsEdit from "./profileSettingsEdit"
-
+import profileSettingsEdit from "./profileSettingsEdit";
+import cart from "./cart"
 
 import { social } from './social';
 
 
 Vue.use(Vuex);
 
-
 axios.defaults.baseURL = process.env.VUE_APP_API_URL;
-// axios.defaults.baseURL = "https://d157-154-72-150-119.ngrok.io/api/v1";
+
 
 
 
@@ -99,7 +98,8 @@ export default new Vuex.Store({
         notification,
         homeRedirection,
         profileOrderDetail,
-        profileSettingsEdit
+        profileSettingsEdit,
+        cart
 
     }
 });

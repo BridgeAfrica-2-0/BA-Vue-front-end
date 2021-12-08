@@ -9,7 +9,7 @@
         <span>
           <h6 class="title">
             <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
-            <b>  {{ $t('dashboard.Community') }} </b> <span class="h4-color"> {{totalcommunity.total}} </span>
+            <b class="ml-2">  {{ $t('dashboard.Community') }} </b> <span class="h4-color"> {{totalcommunity.total}} </span>
           </h6>
         </span>
 

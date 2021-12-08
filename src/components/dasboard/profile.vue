@@ -2,21 +2,13 @@
 	<div>
 		<b-card class="border shadow card pr-3 " style="height:300px">
 			<span>
-				<h3 class="name">
+				<h3 class="name mb-3"  >
 					<h6 class="name">
 						<fas-icon class="icons" :icon="['fas', 'user']" size="lg" />
-						<b> {{ $t('dashboard.Title') }} </b>
+						<b> {{ $t('dashboard.profile') }} </b>
 					</h6>
 
-					<h6 class="float-right text-success font-weight-bolder">
-						<b-button
-							variant="outline-primary upgrade-btn mt-top-60"
-							class="text-capitalize"
-							size="sm"
-							><b-icon-star class="left"></b-icon-star> &nbsp;&nbsp;
-							{{ $t('dashboard.Upgrade_Plan') }}
-						</b-button>
-					</h6>
+				
 				</h3>
 			</span>
 

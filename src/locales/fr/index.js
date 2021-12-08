@@ -33,6 +33,7 @@ export const fr = {
     Order: Order,
     myOrders: myOrders,
 
+    passrecover: passrecover,
 
     welcome: welcome,
     dashboard: dashboard,
@@ -44,6 +45,6 @@ export const fr = {
 
 
     network: network,
-    about:about,
+    about: about,
 
 }

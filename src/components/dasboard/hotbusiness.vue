@@ -24,7 +24,7 @@
                 {{ $t('dashboard.Community') }} <br />
 
                 <span class="location">
-              <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{item.city}}  <span class="ml-2" v-for="nie in item.neigborhood"  :key="nie.id" >  {{nie.name}} </span>   
+              <b-icon-geo-alt class="ico"></b-icon-geo-alt>  <span class="ml-2" v-for="nie in item.neigborhood"  :key="nie.id" >  {{nie.name}} </span>   
             </span>
                 <br />
        <read-more

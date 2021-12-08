@@ -267,6 +267,18 @@ const routes = [
     name: "NetworkEditors",
     component: networkEditors,
   },
+  {
+    path: "/network_member/:id?",
+    name: "memberNetwork",
+    component: memberNetwork,
+  },
+
+  {
+    path: "/network_follower/:id?",
+    name: "Membar Network Follower",
+    component: memberNetworkFollower,
+
+  },
 
   {
     path: "/network_member/:id?",
@@ -395,8 +407,6 @@ const routes = [
       }
     }
   },
-
-
 
   {
     path: "*",

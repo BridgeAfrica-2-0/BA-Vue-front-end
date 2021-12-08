@@ -252,7 +252,7 @@
       size="lg"
       @close="cancel"
       @keyup="validate('editAddress')"
-    >
+    >{{business_about_input}}
       <b-form @submit.prevent="validate('editAddress')">
         <div class="form-group">
           <label for="username">{{ $t('businessowner.Business_Name') }}:</label><br />
@@ -269,7 +269,7 @@
 
         <div class="form-group">
           <label for="alias">{{ $t('businessowner.Category') }}:</label><br />
-          <multiselect
+         <!-- <multiselect
             v-model="multiselecvalue"
             @input="subcategories"
             :tag-placeholder="$t('businessowner.Add_this_as_new_tag')"
@@ -280,12 +280,12 @@
             :multiple="true"
             :taggable="true"
             @tag="addTag"
-          ></multiselect>
+          ></multiselect> -->
         </div>
 
         <div class="form-group">
           <label for="alias">{{ $t('businessowner.Sub_Category') }}:</label><br />
-          <multiselect
+          <!-- <multiselect
             v-model="filterselectvalue"
             :tag-placeholder="$t('businessowner.Add_this_as_new_tag')"
             :placeholder="$t('businessowner.Search_or_add_a_tag')"
@@ -295,12 +295,12 @@
             :multiple="true"
             :taggable="true"
             @tag="addFilter"
-          ></multiselect>
+          ></multiselect> -->
         </div>
 
         <label class="typo__label">{{ $t('businessowner.Filters') }}</label>
-        <div>
-          <b-card no-body>
+         <div>
+          <!--<b-card no-body>
             <b-tabs pills card vertical>
               <b-tab
                 :title="filters.name"
@@ -328,38 +328,37 @@
                 </b-card-text>
               </b-tab>
             </b-tabs>
-          </b-card>
+          </b-card> -->
         </div>
 
         <div class="form-group">
           <label for="username">{{ $t('businessowner.Keywords') }}</label><br />
-          <div class="col-md-12 pl-0 pr-0">
-            {{ $t('businessowner.No_Choices') }}
-
-            <input
-              type="text"
-              name="alias"
-              id="alias"
-              :placeholder="$t('businessowner.Enter_your_Keywords')"
-              v-model="business_about_input.keywords"
-              class="form-control"
-              required
-            />
-          </div>
+            <b-form-tags
+            input-id="tags-separators"
+            v-model="business_about_input.keywords"
+            tag-variant="primary"
+            separator=" ,;"
+            :limit="limit"
+            :tag-validator="validator"
+            :placeholder="$t('businessowner.Enter_your_Keywords')"
+            no-add-on-enter
+            required
+          ></b-form-tags>
         </div>
         <b-form-group
           id="input-group-1"
           :label="$t('businessowner.Country')"
           label-for="input-1"
           label-size="sm"
-        >
-          <b-form-input
-            id="input-1"
-            class="mt-1"
-            type="text"
-            v-model="business_about_input.country[0].name"
-            required
-          ></b-form-input>
+        >{{country}}--------{{countries}}
+          <multiselect
+            v-model="country"
+            @input="Region"
+            track-by="id"
+            label="name"
+            :options="countries"
+            :multiple="true"
+          ></multiselect>
         </b-form-group>
         <b-form-group
           id="input-group-2"
@@ -415,6 +414,21 @@
             id="input-1"
             class="mt-1"
             v-model="business_about_input.phone"
+            type="tel"
+            required
+          ></b-form-input>
+        </b-form-group>
+
+        <b-form-group
+          id="input-group-2"
+          :label="$t('businessowner.Phone_Contact')"
+          label-for="input-2"
+          label-size="sm"
+        >
+          <b-form-input
+            id="input-1"
+            class="mt-1"
+            v-model="business_about_input.secondary_phone"
             type="tel"
             required
           ></b-form-input>
@@ -517,29 +531,49 @@
 
 <script>
 //import moment from "moment";
+import { validationMixin } from "vuelidate";
+import { required, email, minLength } from "vuelidate/lib/validators";
+// import VuePhoneNumberInput from "vue-phone-number-input";
+// import "vue-phone-number-input/dist/vue-phone-number-input.css";
+import Multiselect from "vue-multiselect";
 export default {
+  components: {
+    Multiselect,
+    // VuePhoneNumberInput,
+  },
   data() {
     return {
       loading:false,
       business_id: null,
-      categories: [
-        { item: "Professional_and_home_service", name: "Professionals" },
-        { item: "Agriculture ", name: "Agriculture " },
-        { item: "Restaurant ", name: " Restaurant " },
-        { item: "Electronics ", name: "Electronics " },
-        { item: "Handicrafts", name: "Handicrafts" },
-        { item: "clothing", name: "clothing" },
-        { item: "Mechanics", name: "Mechanics" },
-        { item: "Health_unit ", name: "Health unit " },
-        { item: "Bars", name: "Bars" },
-        { item: "Hair_and_beauty ", name: "Hair and beauty " },
-        { item: "Real_estate ", name: "Real_estate " },
-        { item: "Travelling ", name: "Travelling " },
-        { item: "Hotels", name: "Hotels" },
-        { item: "station", name: " station  " },
-        { item: "Mayor_concils", name: "Mayor_concils" },
-        { item: "Taxis service", name: "Taxis service" },
-      ],
+      limit: 20,
+
+      multiselecvalue: [],
+      filterselectvalue: [],
+      select_filterss: [],
+      country: [],
+      region: [],
+      division: [],
+      municipality: [],
+      locality: [],
+
+      // categories: [
+      //   { item: "Professional_and_home_service", name: "Professionals" },
+      //   { item: "Agriculture ", name: "Agriculture " },
+      //   { item: "Restaurant ", name: " Restaurant " },
+      //   { item: "Electronics ", name: "Electronics " },
+      //   { item: "Handicrafts", name: "Handicrafts" },
+      //   { item: "clothing", name: "clothing" },
+      //   { item: "Mechanics", name: "Mechanics" },
+      //   { item: "Health_unit ", name: "Health unit " },
+      //   { item: "Bars", name: "Bars" },
+      //   { item: "Hair_and_beauty ", name: "Hair and beauty " },
+      //   { item: "Real_estate ", name: "Real_estate " },
+      //   { item: "Travelling ", name: "Travelling " },
+      //   { item: "Hotels", name: "Hotels" },
+      //   { item: "station", name: " station  " },
+      //   { item: "Mayor_concils", name: "Mayor_concils" },
+      //   { item: "Taxis service", name: "Taxis service" },
+      // ],
       dayOfWorks: [
         { day: "Monday", opening_time: null, closing_time: null, check: false },
         {
@@ -688,6 +722,9 @@ export default {
   },
   mounted() {
     this.business_id = this.$route.params.id;
+    this.categories();
+    this.Country();
+    this.editBusiness();
   },
   computed: {
     hoursOpen() {
@@ -706,8 +743,99 @@ export default {
     //   );
     //   return this.business_about_input;
     // }
+    scategories() {
+      return this.$store.state.auth.subcategories;
+    },
+    pcategories() {
+      return this.$store.state.auth.categories;
+    },
+    countries() {
+      return this.$store.state.auth.country;
+    },
+    regions() {
+      return this.$store.state.auth.region;
+    },
+    divisions() {
+      return this.$store.state.auth.division;
+    },
+    municipalities() {
+      return this.$store.state.auth.municipality;
+    },
+    localities() {
+      return this.$store.state.auth.locality;
+    },
+    selectedcategories: function () {
+      let selectedUsers = [];
+      this.multiselecvalue.forEach((item) => {
+        selectedUsers.push(item.category_id);
+      });
+      return selectedUsers;
+    },
+    selectedsubcategories: function () {
+      let sub_cat = [];
+      this.filterselectvalue.forEach((item) => {
+        sub_cat.push(item.subcategory_id);
+      });
+      return sub_cat;
+    },
+    selectedcountry: function () {
+      let sub_cat = [];
+      this.country.forEach((item) => {
+        sub_cat.push(item.country_id);
+      });
+      return sub_cat;
+    },
+    selectedregion: function () {
+      let sub_cat = [];
+      this.region.forEach((item) => {
+        sub_cat.push(item.region_id);
+      });
+      return sub_cat;
+    },
+    selecteddivision: function () {
+      let sub_cat = [];
+      this.division.forEach((item) => {
+        sub_cat.push(item.division_id);
+      });
+      return sub_cat;
+    },
+    selectedmunicipality: function () {
+      let sub_cat = [];
+      this.municipality.forEach((item) => {
+        sub_cat.push(item.council_id);
+      });
+      return sub_cat;
+    },
+    selectedlocality: function () {
+      let sub_cat = [];
+      this.locality.forEach((item) => {
+        sub_cat.push(item.neighborhood_id);
+      });
+      return sub_cat;
+    },
+
   },
+
   methods: {
+    validator(tag) {
+      return tag.length > 2 && tag.length < 20
+    },
+    addTag(newTag) {
+      const tag = {
+        name: newTag,
+        id: newTag.substring(0, 2) + Math.floor(Math.random() * 10000000),
+      };
+      this.multiselec.push(tag);
+      this.multiselecvalue.push(tag);
+    },
+    addFilter(newTag) {
+      const tag = {
+        name: newTag,
+        id: newTag.substring(0, 2) + Math.floor(Math.random() * 10000000),
+      };
+      this.multiselec.push(tag);
+      this.filterselectvalue.push(tag);
+    },
     selectHour(day) {
       this.openNow = day;
     },
@@ -735,10 +863,7 @@ export default {
         JSON.stringify(this.business_about)
       );
     },
-    /**
-     *
-     * @param idForm
-     */
+ 
     validate(type) {
       switch (type) {
         case "modifyBiography":
@@ -838,6 +963,145 @@ export default {
       this.business_about_input = JSON.parse(
         JSON.stringify(this.business_about)
       );
+    },
+
+    categories() {
+      this.$store
+        .dispatch("auth/categories")
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+    subcategories() {
+      console.log("subcategories here");
+      let formData2 = new FormData();
+      formData2.append("categoryId", this.selectedcategories);
+      this.$store
+        .dispatch("auth/subcategories", formData2)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+    filters() {
+      this.$store
+        .dispatch("auth/filters")
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+    Setcategoryfiters() {
+      this.$store
+        .dispatch("auth/Setcategoryfiters")
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+    Country() {
+      this.$store
+        .dispatch("auth/country")
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+    Region() {
+      let formData2 = new FormData();
+      formData2.append("countryId", this.selectedcountry);
+      this.$store
+        .dispatch("auth/region", formData2)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+    Division() {
+      let formData2 = new FormData();
+      formData2.append("regionId", this.selectedregion);
+      this.$store
+        .dispatch("auth/division", formData2)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+    Municipality() {
+      let formData2 = new FormData();
+      formData2.append("divisionId", this.selecteddivision);
+      this.$store
+        .dispatch("auth/municipality", formData2)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+    Locality() {
+      console.log("Locality");
+      let formData2 = new FormData();
+      formData2.append("councilId", this.selectedmunicipality);
+      this.$store
+        .dispatch("auth/locality", formData2)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+    editBusiness() {
+      console.log("editBusiness");
+      this.axios
+        .get("business/edit/" + this.business_id)
+        .then(({ data }) => {
+          console.log("testing: ", data);
+          this.setEditData(data.data);
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+    setEditData(business) {
+      console.log("setting editBusiness data");
+      console.log(business);
+      this.multiselecvalue = business.category;
+      this.filterselectvalue = business.subCatFilter;
+      let Bcountry = business.country;
+      Bcountry.map((c) => {
+        this.country.push({ id: c.country_id, name: c.name });
+      });
+      this.region = business.region;
+      this.division = business.division;
+      this.municipality = business.council;
+      this.locality = business.neigborhood;
+      let select_filterss = business.filter;
+      select_filterss.map((item) => {
+        this.select_filterss.push(item.filter_id);
+      });
+      this.subcategories();
+      this.Region();
+      this.Division();
+      this.Municipality();
+      this.Locality();
     },
   },
 };

@@ -1,5 +1,4 @@
 <template>
-<!-- <div>{{business }}{{ business_form}}</div> -->
   <b-container v-if="business_form">
     <div class="b-bottomn">
       <b-button variant="primary" class="a-button-l" @click="updateGeneralInfo()">

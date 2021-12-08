@@ -42,6 +42,11 @@ import InfiniteLoading from 'vue-infinite-loading';
 
 Vue.use(InfiniteLoading, {
     /* options */
+    slots: {
+        noMore: '',
+        error: "",
+        noResults:"",
+      },
 });
 Vue.use(LoadScript);
 
@@ -225,7 +230,8 @@ new Vue({
 
 
 
-            config.headers.common['Language'] = i18n.locale;
+            // config.headers.common['Language'] = i18n.locale;
+            config.headers.common['Language'] = "en";
 
             return config;
         });

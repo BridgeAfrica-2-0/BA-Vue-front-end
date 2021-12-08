@@ -80,6 +80,23 @@
 
             
 
+            
+               <b-button
+                  block
+                  size="sm"
+                  class="b-background shadow"
+                  :class="item.is_member !== 0 && 'u-btn'"
+                  variant="primary"
+                  :id="'joinbtn'+item.id"
+                  @click="handlejoin(item)"
+                >
+                  <i class="fas fa-user-plus  fa-lg btn-icon "></i>
+                  <span class="btn-com">{{ $t('profileowner.join') }}</span>
+                </b-button>
+
+
+
+
             </b-col>  
    </b-row>
 
@@ -133,6 +150,28 @@ export default {
    
   },
   methods:{
+
+
+    async handleJoin(user) {
+       document.getElementById("joinbtn"+user.id).disabled = true;
+      const uri = user.is_member === 0 ? `/network/users/request` : `/network/users/request/cancel`;
+      const nextFollowState = user.is_member === 0 ? 1 : 0;
+      const data = {
+        id: user.id,
+        type: 'network',
+      };
+
+      await axios
+        .post(uri, data)
+        .then(response => {
+          user.is_member = nextFollowState;
+           document.getElementById("joinbtn"+user.id).disabled =  false;
+        })
+        .catch(err =>{   console.log(err)
+         document.getElementById("joinbtn"+user.id).disabled =  false;
+        });
+    },
+
 
 
 
@@ -212,6 +251,20 @@ export default {
           console.log({ err: err });
         });
     },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   }
  

@@ -39,8 +39,8 @@ export const en = {
     verification: verification,
     profileowner: profileowner,
 
-    Order:Order,
-    myOrders:myOrders,
-    about:about,
+    Order: Order,
+    myOrders: myOrders,
+    about: about,
 
 }

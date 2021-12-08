@@ -977,7 +977,10 @@ export default {
       // socket: io("https://ba-chat-server.herokuapp.com", {
       //   transports: ["websocket", "polling", "flashsocket"],
       // }),
-      socket: io("localhost:7000", {
+      // socket: io("localhost:7000", {
+      //   transports: ["websocket", "polling", "flashsocket"],
+      // }),
+      socket: io("http://192.168.43.51:7000", {
         transports: ["websocket", "polling", "flashsocket"],
       }),
       chatSelected: [],

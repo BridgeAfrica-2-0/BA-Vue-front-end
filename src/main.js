@@ -45,8 +45,8 @@ Vue.use(InfiniteLoading, {
     slots: {
         noMore: '',
         error: "",
-        noResults:"",
-      },
+        noResults: "",
+    },
 });
 Vue.use(LoadScript);
 
@@ -172,6 +172,10 @@ import VueAgile from 'vue-agile';
 
 
 Vue.use(VueAgile);
+
+
+import TextareaAutosize from 'vue-textarea-autosize'
+Vue.use(TextareaAutosize)
 
 
 import CoolLightBox from 'vue-cool-lightbox';

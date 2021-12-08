@@ -46,7 +46,7 @@
         "
         v-if="proccesEdit"
       >
-        <input
+        <textarea-autosize
           placeholder="Edit a Comment"
           class="comment"
           type="text"
@@ -54,6 +54,7 @@
           v-model="updateCommentText"
           @keypress.enter="onProcess"
         />
+        
         <b-spinner
           style="color: rgb(231, 92, 24); position: absolute; right: 17px"
           v-if="replyLoading"
@@ -105,8 +106,8 @@
               class="avat-comment"
             ></b-avatar>
           </b-col>
-          <b-col cols="11"
-            ><input
+          <b-col cols="11">
+            <textarea-autosize
               :placeholder="$t('businessowner.Post_a_Comment')"
               class="comment"
               type="text"

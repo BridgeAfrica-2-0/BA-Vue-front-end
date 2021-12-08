@@ -4,17 +4,15 @@
       <div class="d-inline-flex">
         <span md="1" class="m-0 p-0">
           <b-avatar
-            :class="`${
-              'user' == item.poster_type ? 'rounded-circle' : ''
-            } logo-sizee avat`"
-            square
+            class="logo-sizee avat"
+            :square="'user' == item.poster_type ? false : true"
             variant="primary"
             :src="item.logo_path"
           ></b-avatar>
         </span>
         <div class="pl-2 pl-md-3 pt-md-2">
           <h5 class="m-0 usernamee">
-            {{ item.user_name }} {{ item.logo_path }}
+            {{ item.user_name }}
           </h5>
           <p class="durationn">{{ item.created_at | now }}</p>
         </div>
@@ -63,11 +61,12 @@
         <div class="d-inline-flex">
           <span md="1" class="m-0 p-0">
             <b-avatar
-              class="d-inline-block avat avatar-border"
-              square
+              class="logo-sizee avat"
+              :square="'user' == item.source.poster_type ? false : true"
               variant="primary"
-              :src="item.logo_path"
-            ></b-avatar>
+              :src="item.source.logo_path"
+            >
+            </b-avatar>
           </span>
           <div class="pl-2 pl-md-3 pt-md-2">
             <h5 class="m-0 usernamee">
@@ -175,11 +174,12 @@
       </div>
 
       <div class="p-0 m-0 pr-3 inline-comment">
-        <input
+        <textarea-autosize
           :placeholder="$t('businessowner.Post_a_Comment')"
-          class="comment"
-          type="text"
           v-model="comment"
+          class="comment"
+          :min-height="30"
+          :max-height="350"
           @keypress.enter="onCreateComment"
         />
         <b-spinner
@@ -215,15 +215,17 @@
 </template>
 
 <script>
-import { formatNumber, fromNow } from "@/helpers";
-import Loader from "@/components/Loader";
 import { mapMutations } from "vuex";
+
+import { formatNumber, fromNow } from "@/helpers";
+
+import Loader from "@/components/Loader";
+import { ShareButton } from "@/components/shareButton";
+
 import { NoMoreDataForComment, isYourOwnPostMixins } from "@/mixins";
 
 import Comment from "./comment";
 import light from "../lightbox";
-
-import { ShareButton } from "@/components/shareButton";
 
 export default {
   name: "ownerPostComponent",
@@ -397,8 +399,8 @@ export default {
         !(this.comment.trim().length > 2 && !this.createCommentRequestIsActive)
       )
         return false;
+
       this.createCommentRequestIsActive = true;
-      this.loadComment = true;
 
       let data = { comment: this.comment };
 
@@ -420,7 +422,6 @@ export default {
       }
 
       this.createCommentRequestIsActive = false;
-      this.loadComment = false;
     },
 
     onShowComment: async function () {
@@ -476,6 +477,11 @@ export default {
 <style scoped>
 .m13 {
   margin-bottom: -13px;
+}
+
+.textarea {
+  padding: 5px;
+  box-sizing: border-box;
 }
 
 .custom-block-class {

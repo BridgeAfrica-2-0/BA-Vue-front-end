@@ -74,6 +74,7 @@
         "vue-social-auth": "^1.4.9",
         "vue-social-sharing": "^3.0.8",
         "vue-spinner": "^1.0.4",
+        "vue-textarea-autosize": "^1.1.1",
         "vue-youtube": "^1.4.0",
         "vue2-google-maps": "^0.10.7",
         "vue2-loading-bar": "^0.0.1",

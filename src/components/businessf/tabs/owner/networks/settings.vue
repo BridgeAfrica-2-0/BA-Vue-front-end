@@ -350,7 +350,7 @@ export default {
     },
   },
   beforeMount() {
-    this.url = this.$route.params.id;
+    this.url = this.$route.params.id !== undefined ? this.$route.params.id : this.$router.push('notFound');
     this.getEditNetworkInfo();
   },
   mounted(){

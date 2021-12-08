@@ -79,12 +79,12 @@ export default {
       isloaded: false,
       url_data: null,
       items: [
-        { label: "Home ", icon: "" },
-        { label: "Inbox", icon: "" },
-        { label: "Notification", icon: "" },
-        { label: "Pending Post", icon: "" },
-        { label: "Insight", icon: "" },
-        { label: "Settings", icon: "" },
+        { label: this.$t('search.Home'), icon: "" },
+        { label: this.$t('search.Inbox'), icon: "" },
+        { label: this.$t('search.Notification'), icon: "" },
+        { label: this.$t('search.Pending_Post'), icon: "" },
+        { label: this.$t('search.Insight'), icon: "" },
+        { label: this.$t('search.Settings'), icon: "" },
       ],
       options: {
         activeColor: "#1d98bd",

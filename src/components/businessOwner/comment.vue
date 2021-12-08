@@ -12,23 +12,24 @@
         <span class="float-right" style="margin-right: -10px" v-if="isEditMode">
           <b-dropdown size="sm" variant="outline primary " class="primary">
             <template class="more" #button-content> </template>
-            <b-dropdown-item @click="toggle">Edit</b-dropdown-item>
-            <b-dropdown-item @click="onDelete">Delete</b-dropdown-item>
+            <b-dropdown-item> {{ $t("businessowner.Edit") }} </b-dropdown-item>
+            <b-dropdown-item>{{ $t("businessowner.Delete") }}</b-dropdown-item>
           </b-dropdown>
         </span>
 
         <p class="username mb-0" v-if="!proccesEdit">
-          <router-link :to="{ name: 'Follower', params: { id: comment.user_id } }">
+          <router-link
+            :to="{ name: 'Follower', params: { id: comment.user_id } }"
+          >
             {{ comment.name }}
           </router-link>
         </p>
 
         <read-more
-          v-if="!proccesEdit"
-          more-str="read more"
+          :more-str="$t('businessowner.read_more')"
           :text="comment.comment"
           link="#"
-          less-str="read less"
+          :less-str="$t('businessowner.read_less')"
           :max-chars="15000"
           class="mb-1 text-left"
         >
@@ -83,7 +84,7 @@
       </span>
 
       <span v-if="!proccesEdit" @click="showReply" class="ml-2 reply">
-        <b class="primary mr-3">Reply</b>
+        <b class="primary mr-3">{{ $t("businessowner.Reply") }}</b>
         <i class="fs-12">{{ comment.updated_at | date }}</i>
       </span>
 
@@ -106,7 +107,7 @@
           </b-col>
           <b-col cols="11"
             ><input
-              placeholder="Reply a Comment"
+              :placeholder="$t('businessowner.Post_a_Comment')"
               class="comment"
               type="text"
               @keypress.enter="onReply"
@@ -138,8 +139,8 @@
               v-if="comments.length && !loadComment"
               :hasData="hasData"
               @click.native="onShowReply"
-              :moreDataTitle="'Show more reply comments'"
-              :noDataTitle="''"
+              :moreDataTitle="$t('businessowner.Show_more_comments')"
+              :noDataTitle="$t('businessowner.No_comment')"
             />
 
             <Loader v-if="loadComment" />

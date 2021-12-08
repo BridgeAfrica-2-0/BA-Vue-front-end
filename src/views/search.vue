@@ -646,8 +646,7 @@ export default {
     if (this.$route.query.keyword)
       this.searchParams.keyword = this.$route.query.keyword;
 
-    if (this.$route.query.market)
-      this.selectedId = 4;
+    if (this.$route.query.market) this.selectedId = 4;
 
     this.getLocation();
     this.strategY = {
@@ -697,13 +696,13 @@ export default {
 
       categories_filters: [],
       items: [
-        { label: "All " },
+        { label: this.$t("search.All") },
 
-        { label: "Business" },
-        { label: "People" },
-        { label: "Network" },
-        { label: "Market" },
-        { label: "Post" },
+        { label: this.$t("search.Business") },
+        { label: this.$t("search.People") },
+        { label: this.$t("search.Network") },
+        { label: this.$t("search.Market") },
+        { label: this.$t("search.Post") },
       ],
 
       Finished_Branded_Products_filters: [
@@ -1769,8 +1768,9 @@ export default {
 
     changeNotFoundTitle() {
       try {
-        this.notFoundComponentTitle =
-          this.strategyForNotFoundComponentTitle[this.selectedId]();
+        this.notFoundComponentTitle = this.strategyForNotFoundComponentTitle[
+          this.selectedId
+        ]();
       } catch (error) {
         this.notFoundComponentTitle = "";
       }
@@ -1908,8 +1908,7 @@ export default {
           break;
 
         case "MC":
-          this.selectcategories =
-            this.Mayor_councils_filters_and_public_institution;
+          this.selectcategories = this.Mayor_councils_filters_and_public_institution;
 
           break;
 

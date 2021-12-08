@@ -34,12 +34,12 @@
 
             <b-dropdown-item-button variant="info" @click="editPost">
               <b-icon icon="pencil" aria-hidden="true"></b-icon>
-              Edit
+              {{ $t("businessowner.Edit") }}
             </b-dropdown-item-button>
 
             <b-dropdown-item-button variant="danger" @click="deletePost">
               <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
-              Delete
+              {{ $t("businessowner.Delete") }}
             </b-dropdown-item-button>
           </b-dropdown>
         </div>
@@ -49,10 +49,10 @@
           <!--     :text="item.content.details"   -->
           <read-more
             v-if="item.content"
-            more-str="read more"
+            :more-str="$t('businessowner.read_more')"
             :text="item.content"
             link="#"
-            less-str="read less"
+            :less-str="$t('businessowner.read_less')"
             :max-chars="200"
           ></read-more>
         </p>
@@ -84,10 +84,10 @@
           <p class="post-text">
             <read-more
               v-if="item.source.content"
-              more-str="read more"
+              :more-str="$t('businessowner.read_more')"
               :text="item.source.content"
               link="#"
-              less-str="read less"
+              :less-str="$t('businessowner.read_less')"
               :max-chars="200"
             ></read-more>
           </p>
@@ -176,7 +176,7 @@
 
       <div class="p-0 m-0 pr-3 inline-comment">
         <input
-          placeholder="Post a Comment"
+          :placeholder="$t('businessowner.Post_a_Comment')"
           class="comment"
           type="text"
           v-model="comment"
@@ -218,13 +218,12 @@
 import { formatNumber, fromNow } from "@/helpers";
 import Loader from "@/components/Loader";
 import { mapMutations } from "vuex";
-import { NoMoreDataForComment } from "@/mixins";
+import { NoMoreDataForComment, isYourOwnPostMixins } from "@/mixins";
 
 import Comment from "./comment";
 import light from "../lightbox";
 
 import { ShareButton } from "@/components/shareButton";
-import { isYourOwnPostMixins } from "@/mixins";
 
 export default {
   name: "ownerPostComponent",
@@ -416,7 +415,7 @@ export default {
         this.comment = "";
         this.item.comment_count += 1;
         this.flashMessage.success({
-          message: "Comment created",
+          message: this.$t("businessowner.Post_created"),
         });
       }
 

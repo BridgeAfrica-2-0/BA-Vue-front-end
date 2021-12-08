@@ -22,6 +22,9 @@ import VueSocialauth from 'vue-social-auth';
 import ShareNetwork from 'vue-social-sharing';
 Vue.use(ShareNetwork);
 
+import VueBootstrapTypeahead from 'vue-bootstrap-typeahead'
+Vue.use('vue-bootstrap-typeahead', VueBootstrapTypeahead)
+
 // don't comment that 2 line URGENT
 import plugin from './http';
 Vue.use(plugin);
@@ -39,6 +42,11 @@ import InfiniteLoading from 'vue-infinite-loading';
 
 Vue.use(InfiniteLoading, {
     /* options */
+    slots: {
+        noMore: '',
+        error: "",
+        noResults:"",
+      },
 });
 Vue.use(LoadScript);
 
@@ -222,7 +230,8 @@ new Vue({
 
 
 
-            config.headers.common['Language'] = i18n.locale;
+            // config.headers.common['Language'] = i18n.locale;
+            config.headers.common['Language'] = "en";
 
             return config;
         });

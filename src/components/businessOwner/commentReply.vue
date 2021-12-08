@@ -17,8 +17,12 @@
           >
             <b-dropdown size="sm" variant="outline primary " class="primary">
               <template class="more" #button-content> </template>
-              <b-dropdown-item @click="toggle">Edit</b-dropdown-item>
-              <b-dropdown-item @click="onDelete">Delete</b-dropdown-item>
+              <b-dropdown-item @click="toggle">{{
+                $t("businessowner.Edit")
+              }}</b-dropdown-item>
+              <b-dropdown-item @click="onDelete">{{
+                $t("businessowner.Delete")
+              }}</b-dropdown-item>
             </b-dropdown>
           </span>
 
@@ -30,10 +34,10 @@
             </router-link>
           </p>
           <read-more
-            more-str="read more"
-            :text="comment.comment"
+            :more-str="$t('businessowner.read_more')"
+            :text="item.comment"
             link="#"
-            less-str="read less"
+            :less-str="$t('businessowner.read_less')"
             :max-chars="15000"
           >
           </read-more>

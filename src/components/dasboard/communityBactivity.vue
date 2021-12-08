@@ -13,103 +13,6 @@
       </span>
 
       <div class="s-card">
-        <!-- <b-row class="mt-4" v-for="item in owner_post" :key="item.post_id">
-          <b-col cols="12" class="mt-4">
-            <b-row>
-              <b-col cols="2" md="1" class="m-0 p-0">
-                <b-avatar
-                  class="d-inline-block avat"
-                  variant="primary"
-                  :src="item.logo_path"
-                ></b-avatar>
-              </b-col>
-              <b-col cols="10" md="11" class="pt-2">
-                <h5 class="m-0 font-weight-bolder">
-                  {{ item.bussines_name }}
-                </h5>
-                <p class="duration">{{ moment(item.created_at).fromNow() }}</p>
-              </b-col>
-            </b-row>
-            <b-row>
-              <b-col cols="12" class="mt-2">
-                <p class="post-text">
-                  <read-more
-                    more-str="read more"
-                    :text="item.content"
-                    link="#"
-                    less-str="read less"
-                    :max-chars="200"
-                  ></read-more>
-                </p>
-              </b-col>
-            </b-row>
-            <b-row>
-              <b-col v-if="item.media.length > 0" cols="12" class="mt-2">
-                <div class="">
-                  <lightbox
-                    :cells="item.media.length"
-                    :items="
-                      item.media.map(function (a) {
-                        return a.media_url;
-                      })
-                    "
-                  ></lightbox>
-                </div>
-              </b-col>
-
-              <b-col cols="12" class="mt-2">
-              </b-col>
-              <b-col class="mt-1">
-                <span class="mr-3"
-                  ><b-icon
-                    icon="suit-heart"
-                    variant="primary"
-                    aria-hidden="true"
-                  ></b-icon>
-                  {{ nFormatter(item.likes_count) }}
-                </span>
-                <span
-                  ><b-icon
-                    icon="chat-fill"
-                    variant="primary"
-                    aria-hidden="true"
-                  ></b-icon>
-                  {{ nFormatter(item.comment_count) }}
-                </span>
-
-                <span>
-                  <fas-icon class="primary ml-3" :icon="['fas', 'share']" />
-                </span>
-              </b-col>
-            </b-row>
-            <b-row class="mt-2">
-              <b-col cols="3" md="1" class="m-md-0 p-md-0">
-                <b-avatar
-                  variant="primary"
-                  class="img-fluid avat-comment"
-                ></b-avatar>
-              </b-col>
-              <b-col cols="9" md="11" class="p-0 m-0 pr-3">
-                <input
-                  :placeholder="`${$t('dashboard.Post_Comment')}`"
-                  class="comment"
-                  type="text"
-                />
-
-                <fas-icon
-                  class="primary send-cmt"
-                  :icon="['fas', 'paper-plane']"
-                />
-              </b-col>
-            </b-row>
-          </b-col>
-          <Comment
-            v-for="comment in item.comments"
-            :key="comment.id"
-            :comment="comment"
-          />
-        </b-row> -->
-
         <Post
           v-for="(item, index) in owner_post"
           :key="index"
@@ -149,54 +52,10 @@ export default {
       edit_id: null,
 
       fullPage: false,
-      images: [
-        "https://i.wifegeek.com/200426/f9459c52.jpg",
-        "https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg",
-        "https://pbs.twimg.com/media/DKO62sVXUAA0_AL.jpg",
-        "https://i.wifegeek.com/200426/2d110780.jpg",
-        "https://i.wifegeek.com/200426/e73cd3fa.jpg",
-        "https://i.wifegeek.com/200426/15160d6e.jpg",
-        "https://i.wifegeek.com/200426/d0c881ae.jpg",
-        "https://i.wifegeek.com/200426/a154fc3d.jpg",
-        "https://i.wifegeek.com/200426/71d3aa60.jpg",
-        "https://i.wifegeek.com/200426/d17ce9a0.jpg",
-        "https://i.wifegeek.com/200426/7c4deca9.jpg",
-        "https://i.wifegeek.com/200426/64672676.jpg",
-        "https://i.wifegeek.com/200426/de6ab9c6.jpg",
-        "https://i.wifegeek.com/200426/d8bcb6a7.jpg",
-        "https://i.wifegeek.com/200426/4085d03b.jpg",
-        "https://i.wifegeek.com/200426/177ef44c.jpg",
-        "https://i.wifegeek.com/200426/d74d9040.jpg",
-        "https://i.wifegeek.com/200426/81e24a47.jpg",
-        "https://i.wifegeek.com/200426/43e2e8bb.jpg",
-      ],
-      imagees: [
-        "https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg",
-        "https://pbs.twimg.com/media/DKO62sVXUAA0_AL.jpg",
-      ],
-
-      imagees3: [
-        "https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg",
-        "https://pbs.twimg.com/media/DoNa_wKUUAASSCF.jpg",
-        "https://pbs.twimg.com/media/DKO62sVXUAA0_AL.jpg",
-      ],
     };
   },
 
   methods: {
-    nFormatter(num) {
-      if (num >= 1000000000) {
-        return (num / 1000000000).toFixed(1).replace(/\.0$/, "") + "G";
-      }
-      if (num >= 1000000) {
-        return (num / 1000000).toFixed(1).replace(/\.0$/, "") + "M";
-      }
-      if (num >= 1000) {
-        return (num / 1000).toFixed(1).replace(/\.0$/, "") + "K";
-      }
-      return num;
-    },
-
     infiniteHandler($state) {
       axios
         .get(

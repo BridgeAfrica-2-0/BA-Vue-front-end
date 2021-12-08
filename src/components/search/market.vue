@@ -1,10 +1,14 @@
 <template>
   <div>
-    <b-spinner v-if="prodLoader" variant="primary" :label="$t('search.Spinning')"></b-spinner>
+    <b-spinner
+      v-if="prodLoader"
+      variant="primary"
+      :label="$t('search.Spinning')"
+    ></b-spinner>
 
     <b-alert v-if="products.data.length === 0" show variant="warning"
       ><a href="#" class="alert-link">
-        {{$t("search.No_product_available_for_that_search")}}!
+        {{ $t("search.No_product_available_for_that_search") }}!
       </a></b-alert
     >
 
@@ -22,11 +26,11 @@
         <b-col cols="7" sm="8" md="7">
           <p class="text">
             <strong class="title"> {{ prod.name }} </strong> <br />
-            <strong> {{$t("search.Description")}} </strong> <br />
+            <strong> {{ $t("search.Description") }} </strong> <br />
             <span class="text">
               {{ prod.description }}
             </span>
-            <b-link class="text"> {{$t("search.see_more")}} </b-link> <br />
+            <b-link class="text"> {{ $t("search.see_more") }} </b-link> <br />
 
             <span class="price">
               <strong> {{ prod.price }} Fcfa </strong>
@@ -34,7 +38,22 @@
           </p>
 
           <span class="float-right">
-            <b-button variant="primary" class=""> {{$t("search.Buy_now")}} </b-button>
+            <!-- <b-button variant="primary" class=""> {{$t("search.Buy_now")}} </b-button> -->
+            <div class="row">
+              <div class="col marge" >
+                  <b-button variant="primary"
+                  @click="AddToCard(prod.id, true)" 
+                  ><span> {{ $t("search.Buy_now") }}  </span>
+                 </b-button>
+              </div>
+              <div class="w-100 my-1"></div>
+              <div class="col marge">
+                <b-button variant="primary" @click="AddToCard(prod.id)"
+                ><span>Add to Cart</span>
+              </b-button>
+              </div>
+            </div>
+
           </span>
         </b-col>
       </b-row>
@@ -52,7 +71,7 @@
       :disabled="products.data.length > 0 ? false : true"
     ></b-pagination>
     <!-- End pagination -->
-    
+
     <b-modal hide-footer :title="$t('search.Edit_product')">
       <b-form>
         <b-row>
@@ -90,7 +109,7 @@
               <a href="#" data-toggle="modal" data-target="#createalbumModal">
                 <div class="drag-text">
                   <i class="fa fa-plus"></i>
-                  <h6>{{$t("search.Product_Image")}}</h6>
+                  <h6>{{ $t("search.Product_Image") }}</h6>
                 </div>
               </a>
               <div></div>
@@ -113,7 +132,7 @@
           value="accepted"
           unchecked-value="not_accepted"
         >
-          {{$t("search.This_Product_Is_On_Discount")}}
+          {{ $t("search.This_Product_Is_On_Discount") }}
         </b-form-checkbox>
 
         <b-form-group
@@ -131,7 +150,7 @@
           value="accepted"
           unchecked-value="not_accepted"
         >
-          {{$t("search.This_Item_Is_A_Service")}} ?
+          {{ $t("search.This_Item_Is_A_Service") }} ?
         </b-form-checkbox>
 
         <b-form-checkbox
@@ -140,7 +159,7 @@
           value="accepted"
           unchecked-value="not_accepted"
         >
-          {{$t("search.In_stock")}}
+          {{ $t("search.In_stock") }}
         </b-form-checkbox>
 
         <b-form-checkbox
@@ -149,10 +168,12 @@
           value="accepted"
           unchecked-value="not_accepted"
         >
-          {{$t("search.Published")}}
+          {{ $t("search.Published") }}
         </b-form-checkbox>
 
-        <b-button class="mt-2 btn-block" variant="primary"> {{$t("search.Add")}}</b-button>
+        <b-button class="mt-2 btn-block" variant="primary">
+          {{ $t("search.Add") }}</b-button
+        >
       </b-form>
     </b-modal>
 
@@ -170,22 +191,24 @@
           ></b-img>
         </b-col>
         <b-col>
-          <h2 class="mb-4 text-center">{{$t("search.Product_Name")}}</h2>
-          <p><span class="stock">{{$t("search.In_Stock")}}</span></p>
+          <h2 class="mb-4 text-center">{{ $t("search.Product_Name") }}</h2>
+          <p>
+            <span class="stock">{{ $t("search.In_Stock") }}</span>
+          </p>
           <p>0.00 XAF</p>
           <hr />
           <b-row>
             <b-col>
-              <b-button variant="primary">{{$t("search.Message")}}</b-button>
+              <b-button variant="primary">{{ $t("search.Message") }}</b-button>
             </b-col>
             <b-col>
-              <b-button variant="outline-dark" class="float-right"
-                >{{$t("search.Checkout_on_website")}}</b-button
-              >
+              <b-button variant="outline-dark" class="float-right">{{
+                $t("search.Checkout_on_website")
+              }}</b-button>
             </b-col>
           </b-row>
           <hr />
-          <h5>{{$t("search.Product_Detail")}}</h5>
+          <h5>{{ $t("search.Product_Detail") }}</h5>
           <p>
             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corporis
             quod, reprehenderit neque atque recusandae laborum quia vel,
@@ -257,7 +280,7 @@
                       <div class="comment-heading">
                         <div class="pull-left">
                           <h5 class="user">Gavino Free</h5>
-                          <h5 class="time">{{$t("search.5_minutes_ago")}}</h5>
+                          <h5 class="time">{{ $t("search.5_minutes_ago") }}</h5>
                         </div>
                       </div>
                       <p>
@@ -276,7 +299,8 @@
                         variant="primary"
                         aria-hidden="true"
                       ></b-icon>
-                      23 &nbsp; &nbsp; &nbsp; <a href="#">{{$t("search.Reply")}}</a>
+                      23 &nbsp; &nbsp; &nbsp;
+                      <a href="#">{{ $t("search.Reply") }}</a>
                     </div>
                   </div>
                   <ul class="comments-list">
@@ -293,7 +317,9 @@
                           <div class="comment-heading">
                             <div class="pull-left">
                               <h5 class="user">Gavino Free</h5>
-                              <h5 class="time">{{$t("search.5_minutes_ago")}}</h5>
+                              <h5 class="time">
+                                {{ $t("search.5_minutes_ago") }}
+                              </h5>
                             </div>
                           </div>
                           <p>
@@ -310,7 +336,8 @@
                             variant="primary"
                             aria-hidden="true"
                           ></b-icon>
-                          23 &nbsp; &nbsp; &nbsp; <a href="#">{{$t("search.Reply")}}</a>
+                          23 &nbsp; &nbsp; &nbsp;
+                          <a href="#">{{ $t("search.Reply") }}</a>
                         </div>
                       </div>
                     </li>
@@ -327,7 +354,9 @@
                           <div class="comment-heading">
                             <div class="pull-left">
                               <h5 class="user">Gavino Free</h5>
-                              <h5 class="time">{{$t("search.5_minutes_ago")}}</h5>
+                              <h5 class="time">
+                                {{ $t("search.5_minutes_ago") }}
+                              </h5>
                             </div>
                           </div>
                           <p>
@@ -340,7 +369,8 @@
                         </div>
                         <div class="col-md-12 pt-2 pl-0 mb-3">
                           <i class="fa heart fa-heart-o" aria-hidden="true"></i>
-                          23 &nbsp; &nbsp; &nbsp; <a href="#">{{$t("search.Reply")}}</a>
+                          23 &nbsp; &nbsp; &nbsp;
+                          <a href="#">{{ $t("search.Reply") }}</a>
                         </div>
                       </div>
                     </li>
@@ -380,7 +410,7 @@
                       <div class="comment-heading">
                         <div class="pull-left">
                           <h5 class="user">Gavino Free</h5>
-                          <h5 class="time">{{$t("search.5_minutes_ago")}}</h5>
+                          <h5 class="time">{{ $t("search.5_minutes_ago") }}</h5>
                         </div>
                       </div>
                       <p>
@@ -399,7 +429,8 @@
                         variant="primary"
                         aria-hidden="true"
                       ></b-icon>
-                      23 &nbsp; &nbsp; &nbsp; <a href="#">{{$t("search.Reply")}}</a>
+                      23 &nbsp; &nbsp; &nbsp;
+                      <a href="#">{{ $t("search.Reply") }}</a>
                     </div>
                   </div>
                 </li>
@@ -409,6 +440,7 @@
         </b-col>
       </b-row>
     </b-modal>
+   
   </div>
 </template>
 
@@ -426,15 +458,21 @@ export default {
   },
   computed: {
     products() {
+      console.log("PRoducts ". this.$store.getters["marketSearch/getProducts"]);
       return this.$store.getters["marketSearch/getProducts"];
     },
     prodLoader() {
       return this.$store.getters["marketSearch/getLoader"];
     },
+
+    getStatus(){
+    return this.$store.state.cart.status ;
+  }
   },
   created() {
     if (!this.products.length) this.getProducts();
   },
+  
 
   methods: {
     changePage(value) {
@@ -477,6 +515,35 @@ export default {
           console.error(err);
         });
     },
+
+    buyNow(){
+      this.AddToCard();
+      this.$router.push({name: 'payment'})
+    
+    },
+
+    AddToCard(id, val) {
+      console.log("add to card ", id);
+      this.$store
+        .dispatch("cart/addToCart",id)
+        .then((response) => {
+          console.log("----", this.getStatus);
+
+          this.flashMessage.show({
+            status: "success",
+            message: this.getStatus,
+          }); 
+          if(val)   this.$router.push({name: 'payment'}) ;
+        })
+        .catch((error) => {
+          console.log(error);
+          this.flashMessage.show({
+            status: "error",
+            message: "error occur",
+          });
+        });
+    },
+
   },
 };
 </script>
@@ -543,6 +610,13 @@ h6 {
 @media only screen and (min-width: 768px) {
   .center-img {
     margin-right: -60px;
+  }
+
+  .marge{
+    margin-left: 200px
+  }
+  .pos {
+    margin-left: 200px;
   }
 }
 

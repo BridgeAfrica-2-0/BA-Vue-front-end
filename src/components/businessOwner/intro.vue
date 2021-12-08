@@ -30,7 +30,7 @@
 				</p>
 				<p class="d-flex justify-content-start align-items-start">
 					<b-icon icon="people-fill" class="primary icon-size"></b-icon>
-					{{ business_intro.community }} {{$t("businessf.Community")}}
+					{{ business_intro.community }} {{$t("businessowner.Community")}}
 				</p>
 				<p class="d-flex justify-content-start align-items-start">
 					<b-icon icon="telephone-fill" class="primary icon-size"></b-icon>
@@ -42,7 +42,7 @@
 				</p>
 				<p class="d-flex justify-content-start align-items-start">
 					<b-icon icon="clock" class="primary icon-size"></b-icon>
-					<b-link class="mr-2"> {{$t("businessf.Open_now")}}</b-link>
+					<b-link class="mr-2"> {{$t("businessowner.Open_now")}}</b-link>
 					<b-dropdown size="sm" variant="transperent">
 						<template #button-content>
 							{{ business_intro.business_open_hours[0].day }}
@@ -116,7 +116,7 @@
 		<b-modal
 			id="bv-edit-about"
 			hide-footer
-			:title="$t('businessf.Edit_Address')"
+			:title="$t('businessowner.Edit_Address')"
 			v-model="edit2"
 			size="lg"
 		>
@@ -124,19 +124,19 @@
 				{{ blec }}
 				<b-row>
 					<div class="form-group col-md-6">
-						<label for="username">{{$t("businessf.Busness_Name")}}:</label><br />
+						<label for="username">{{$t("businessowner.Busness_Name")}}:</label><br />
 						<input
 							type="text"
 							name="name"
 							id="name"
-							:placeholder="$t('businessf.Busness_Name')"
+							:placeholder="$t('businessowner.Busness_Name')"
 							class="form-control"
 							v-model="form.name"
 						/>
 					</div>
 
 					<div class="form-group col-md-6">
-						<label for="alias">{{$t("businessf.Category")}}:</label><br />
+						<label for="alias">{{$t("businessowner.Category")}}:</label><br />
 
 						<b-form-select
 							:options="categories"
@@ -151,7 +151,7 @@
 				<b-row>
 					<b-form-group
 						id="input-group-2"
-						:label="$t('businessf.Phone_Contact')"
+						:label="$t('businessowner.Phone_Contact')"
 						label-for="input-2"
 						label-size="sm"
 						class="col-md-6"
@@ -168,7 +168,7 @@
 					<b-form-group
 						class="col-md-6"
 						id="input-group-2"
-						:label="$t('businessf.Business_Email')"
+						:label="$t('businessowner.Business_Email')"
 						label-for="input-2"
 						label-size="sm"
 					>
@@ -184,7 +184,7 @@
 
 				<b-row>
 					<div class="form-group col-md-6">
-						<label for="keywords">{{$t("businessf.Keywords")}}</label><br />
+						<label for="keywords">{{$t("businessowner.Keywords")}}</label><br />
 						<div class="col-md-12 pl-0 pr-0">
 							<b-form-tags
 								input-id="alias"
@@ -194,7 +194,7 @@
 					</div>
 
 					<div class="form-group col-md-6">
-						<label for="country" class="username"> {{$t("businessf.Country")}} :</label><br />
+						<label for="country" class="username"> {{$t("businessowner.Country")}} :</label><br />
 
 						<country-select
 							v-model="form.country"
@@ -207,7 +207,7 @@
 
 				<b-row>
 					<div class="form-group col-md-6">
-						<label for="country" class="username"> {{$t("businessf.Region")}} :</label><br />
+						<label for="country" class="username"> {{$t("businessowner.Region")}} :</label><br />
 						<region-select
 							v-model="form.region"
 							:country="country"
@@ -217,7 +217,7 @@
 					</div>
 					<b-form-group
 						id="input-group-2"
-						:label="$t('businessf.City')"
+						:label="$t('businessowner.City')"
 						label-for="input-2"
 						label-size="sm"
 						class="col-md-6"
@@ -233,7 +233,7 @@
 				</b-row>
 
 				<b-button class="mt-3 btn-block" variant="primary" @click="validate">
-					{{$t("businessf.Modify")}}
+					{{$t("businessowner.Modify")}}
 				</b-button>
 			</b-form>
 		</b-modal>
@@ -387,7 +387,7 @@
 						this.flashMessage.show({
 							status: "success",
 							blockClass: "custom-block-class",
-							message: "Business Profile updated",
+							message: this.$t('businessowner.Business_Profile_updated'),
 						});
 					})
 					.catch((err) => {
@@ -409,7 +409,7 @@
 							this.flashMessage.show({
 								status: "error",
 
-								message: "Unable to update Your Business",
+								message: this.$t('businessowner.Unable_to_update_Your_Business'),
 								blockClass: "custom-block-class",
 							});
 							console.log({ err: err });

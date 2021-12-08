@@ -39,11 +39,11 @@
             </span>
                 <br />
        <read-more
-              more-str="read more"
+              :more-str="$t('search.read_more')"
               class="readmore"
               :text="item.about_business"
               link="#"
-              less-str="read less"
+              :less-str="$t('search.read_less')"
               :max-chars="100"
             >
             </read-more>
@@ -105,7 +105,7 @@
 
                     <b-button block size="sm" class="b-background shadow" variant="primary" @click="cta(item)">
                       <i class="fas fa-envelope fa-lg btn-icon"></i>
-                      <span class="btn-text">Message</span>
+                      <span class="btn-text">{{ ("search.Message") }}</span>
                     </b-button>
                   </b-col>
 

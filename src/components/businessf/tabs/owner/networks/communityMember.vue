@@ -73,11 +73,10 @@
                         <b-button
                           block
                           size="sm"
-                          class="b-background flexx pobtn shadow"
+                          :class="member.is_follow ? 'b-background flexx pobtn shadow communityBntStatus' : 'b-background flexx pobtn shadow'"
                           variant="primary"
                           @click="$emit('handleFollow', member)"
-                        >
-                          <i :class="member.is_follow ? 'fas fa-user-minus fa-lg btn-icon':'fas fa-user-plus fa-lg btn-icon'"></i>
+                        ><i :class="member.is_follow ? 'fas fa-user-minus fa-lg btn-icon':'fas fa-user-plus fa-lg btn-icon'"></i>
                           <span class="btn-com">{{ $t('network.Community') }}</span>
                         </b-button>
                       </b-col>
@@ -100,6 +99,9 @@ export default {
 </script>
 
 <style scoped>
+.communityBntStatus{
+  background-color: #420942;
+}
 @media only screen and (min-width: 768px) {
   .s-cardd {
     padding-left: 20px;

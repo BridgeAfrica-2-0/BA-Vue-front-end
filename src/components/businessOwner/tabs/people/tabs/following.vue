@@ -5,7 +5,7 @@
         <b-input-group class="mb-2 px-md-3 float-right">
           <b-form-input
             aria-label="Text input with checkbox"
-            placeholder="Search Something"
+            :placeholder="$t('businessowner.Search_Something')"
           ></b-form-input>
 
           <b-input-group-prepend  @click="$refs.search.search()" is-text>

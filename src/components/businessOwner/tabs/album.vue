@@ -9,7 +9,7 @@
               <a v-b-modal.createalbumModal>
                 <div class="drag-textt">
                   <fas-icon :icon="['fas', 'plus']" />
-                  <h3>Create Album</h3>
+                  <h3>{{ $t('businessowner.Create_Album') }}</h3>
                 </div>
               </a>
             </div>
@@ -23,7 +23,7 @@
                   v-model="name"
                 ></b-form-input>
                 <b-button class="mt-2" variant="primary" @click="createAlbum">
-                  Create</b-button
+                  {{ $t('businessowner.Create') }}</b-button
                 >
               </b-form>
             </div>
@@ -42,7 +42,7 @@
               <div class="botmediadess">
                 <p>
                   {{ albums.album_name }} <br />
-                  {{ albums.item_number }} Items
+                  {{ albums.item_number }} {{ $t('businessowner.Items') }}
                 </p>
               </div>
             </a>
@@ -68,11 +68,11 @@
 
                     <b-dropdown-item
                       @click="editAlbum(albums.id, albums.album_name)"
-                      >Edit</b-dropdown-item
+                      >{{ $t('businessowner.Edit') }}</b-dropdown-item
                     >
 
                     <b-dropdown-item @click="deleteAlbum(albums.id)"
-                      >Delete</b-dropdown-item
+                      >{{ $t('businessowner.Delete') }}</b-dropdown-item
                     >
                   </b-dropdown>
                 </li>
@@ -98,7 +98,7 @@
                 variant="primary"
                 @click="updateAlbum(edit_id)"
               >
-                Update</b-button
+                {{ $t('businessowner.Update') }}</b-button
               >
             </b-form>
           </div>
@@ -120,7 +120,7 @@
                           data-toggle="dropdown"
                           aria-haspopup="true"
                           aria-expanded="false"
-                          >Custom Album 1
+                          >{{ $t('businessowner.Custom_Album') }} 1
                           <i class="fa fa-caret-down" aria-hidden="true"></i
                         ></a>
                         <div
@@ -131,21 +131,21 @@
                             class="dropdown-item"
                             data-toggle="modal"
                             data-target="#namealbumModal"
-                            >Edit Name</a
+                            >{{ $t('businessowner.Edit_Name') }}</a
                           >
-                          <a class="dropdown-item">Delete Album</a>
+                          <a class="dropdown-item">{{ $t('businessowner.Delete_Album') }}</a>
                         </div>
                       </li>
                     </ul>
                   </div>
                   <div class="input-group col-md-12 text-center mb-4 selec">
                     <label class="col-md-4 control-label pr-0 text-design"
-                      >14 Items -
+                      >14 {{ $t('businessowner.Items') }} -
                     </label>
                     <div class="col-md-5 pl-0 pr-0">
                       <select id="gender" class="form-control w-100">
-                        <option>Public</option>
-                        <option>Private</option>
+                        <option>{{ $t('businessowner.Public') }}</option>
+                        <option>{{ $t('businessowner.Private') }}</option>
                       </select>
                     </div>
                   </div>
@@ -161,7 +161,7 @@
 
     <div class="container-flex" v-if="showalbum == true">
       <b-button variant="outline-primary" size="sm" @click="hidealbum">
-        Back
+        {{ $t('businessowner.Back') }}
       </b-button>
       <span class="text-center ml-2 f-20"> {{ album_name }} </span>
 

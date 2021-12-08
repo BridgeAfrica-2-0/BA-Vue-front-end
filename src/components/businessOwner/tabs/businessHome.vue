@@ -11,16 +11,24 @@
         <b-card>
           <div class="text-center">
             <span class="username text-center mb-3">
-              <b> Upgrade Your Business Account </b>
+              <b> {{ $t("businessowner.Upgrade_Your_Business_Account") }} </b>
             </span>
           </div>
 
           <div class="container">
             <span class="text text-left">
               <br />
-              Make more money by unlocking your marketplace features where you
-              can sell products and services directly to customer and recieve
-              instant payments
+              {{
+                $t(
+                  "businessowner.Make_more_money_by_unlocking_your_marketplace_features"
+                )
+              }}
+              {{
+                $t(
+                  "businessowner.where_you_can_sell_products_and_services_directly_to_customer"
+                )
+              }}
+              {{ $t("businessowner.and_recieve_instant_payments") }}
             </span>
           </div>
           <img src="@/assets/img/buynow.png" class="buynow" alt="buy now" />
@@ -32,7 +40,7 @@
             />
 
             <b-button variant="primary" class="text-center mt-3">
-              Upgrade Now
+              {{ $t("businessowner.Upgrade_Now") }}
             </b-button>
           </div>
         </b-card>

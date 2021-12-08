@@ -29,11 +29,11 @@
             </span>
             <br />
   <read-more
-              more-str="read more"
+              :more-str="$t('search.read_more')"
               class="readmore"
               :text="biz.about_business"
               link="#"
-              less-str="read less"
+              :less-str="$t('search.read_less')"
               :max-chars="15"
             >
             </read-more>
@@ -140,7 +140,7 @@ export default {
       list: [],
       currentPage: 1,
       nextLoad: false,
-      title:"No Business Found",  
+      title: this.$t("search.No_Business_Found"),  
       
       options: {
         rewind: true,

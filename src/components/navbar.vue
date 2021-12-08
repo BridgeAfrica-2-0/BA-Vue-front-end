@@ -103,23 +103,15 @@
                 title=""
               />
 
-              <input
-                id="search-location"
-                ref="foo"
-                type="search"
-                list="browsers"
-                data-toggle="popover"
-                class="form-control search-h"
-                placeholder="Where "
-                aria-label="search bridge africa"
-                data-original-title=""
-                title=""
+              <vue-bootstrap-typeahead
+                v-model="query"
+                :data="users"
+                :serializer="(item) => item.login"
+                @hit="selectedUser = $event"
+                placeholder="Where"
+                class="search-hh"
               />
 
-              <datalist id="browsers">
-                <option value=" Current Location "></option>
-                <option value="Yaounde " />
-              </datalist>
               <slot name="button">
                 <Button @click.native="getKeyword" />
               </slot>
@@ -209,14 +201,7 @@
                     <div v-for="message in messages" :key="message.id">
                       <hr class="h-divider" />
                       <div
-                        class="
-                          d-inline-flex
-                          flex-row
-                          justify-content-between
-                          align-items-center
-                          suggest-item
-                          cursor-pointer
-                        "
+                        class="d-inline-flex flex-row justify-content-between align-items-center suggest-item cursor-pointer"
                       >
                         <div class="d-inline-flex flex-row align-items-center">
                           <div>
@@ -275,13 +260,7 @@
                     >
                       <hr class="h-divider" />
                       <div
-                        class="
-                          d-inline-flex
-                          flex-row
-                          align-items-center
-                          suggest-item
-                          cursor-pointer
-                        "
+                        class="d-inline-flex flex-row align-items-center suggest-item cursor-pointer"
                       >
                         <div class="d-flex flex-column ml-3">
                           <div>{{ notification.notification_text }}</div>
@@ -335,13 +314,7 @@
                 <b-popover target="other-menu" triggers="hover" placement="top">
                   <div class="popover-body">
                     <div
-                      class="
-                        d-inline-flex
-                        flex-row
-                        align-items-center
-                        mb-1
-                        w-full
-                      "
+                      class="d-inline-flex flex-row align-items-center mb-1 w-full"
                     >
                       <Activity />
                     </div>
@@ -351,12 +324,7 @@
                       v-if="'user' != user.user_type"
                       @click.prevent="switchToProfile"
                       href="#"
-                      class="
-                        other-menu
-                        suggest-item
-                        cursor-pointer
-                        text-decoration-none text-dark
-                      "
+                      class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
                     >
                       <span class="mr-2"
                         ><fas-icon class="violet search"
@@ -367,12 +335,7 @@
 
                     <router-link
                       :to="{ name: 'orders' }"
-                      class="
-                        other-menu
-                        suggest-item
-                        cursor-pointer
-                        text-decoration-none text-dark
-                      "
+                      class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
                     >
                       <span class="mr-2"
                         ><fas-icon
@@ -385,12 +348,7 @@
 
                     <router-link
                       :to="{ name: 'settings' }"
-                      class="
-                        other-menu
-                        suggest-item
-                        cursor-pointer
-                        text-decoration-none text-dark
-                      "
+                      class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
                     >
                       <span class="mr-2"
                         ><fas-icon
@@ -433,12 +391,7 @@
                     <a
                       @click="logout"
                       href="#"
-                      class="
-                        other-menu
-                        suggest-item
-                        cursor-pointer
-                        text-decoration-none text-dark
-                      "
+                      class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
                     >
                       <span class="mr-2"
                         ><fas-icon
@@ -495,12 +448,7 @@
 
             <router-link
               :to="{ name: 'orders' }"
-              class="
-                other-menu
-                suggest-item
-                cursor-pointer
-                text-decoration-none text-dark
-              "
+              class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
             >
               <span class="mr-2"
                 ><fas-icon
@@ -513,12 +461,7 @@
 
             <router-link
               :to="{ name: 'settings' }"
-              class="
-                other-menu
-                suggest-item
-                cursor-pointer
-                text-decoration-none text-dark
-              "
+              class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
             >
               <span class="mr-2"
                 ><fas-icon class="violet search" :icon="['fas', 'cogs']"
@@ -558,12 +501,7 @@
             <a
               href="#"
               @click="logout"
-              class="
-                other-menu
-                suggest-item
-                cursor-pointer
-                text-decoration-none text-dark
-              "
+              class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
             >
               <span class="mr-2"
                 ><fas-icon
@@ -577,7 +515,23 @@
       </div>
     </nav>
 
-    <div></div>
+    <div>
+      <!-- 
+
+           <div>
+  <vue-bootstrap-typeahead
+    class="mb-4"
+    v-model="query"
+    :data="users"
+    :serializer="item => item.login"
+    @hit="selectedUser = $event"
+    placeholder="Search GitHub Users"
+  />
+
+ <h3>Selected User JSON</h3>
+ <pre>{{ selectedUser | stringify }}</pre>
+</div> -->
+    </div>
   </header>
 </template>
 
@@ -587,12 +541,14 @@ import Activity from "@/components/ShowActivity.vue";
 // import NavBarNotifications from '@/components/NavBarNotifications.vue';
 import { mapGetters, mapActions, mapMutations } from "vuex";
 import axios from "axios";
+import VueBootstrapTypeahead from "vue-bootstrap-typeahead";
 
 export default {
   name: "navbar",
   components: {
     Button,
     Activity,
+    VueBootstrapTypeahead,
     // NavBarNotifications
   },
   props: {
@@ -621,6 +577,10 @@ export default {
         keyword: "",
         placeholder: "All",
       },
+
+      query: "",
+      selectedUser: null,
+      users: [],
     };
   },
 
@@ -703,6 +663,18 @@ export default {
         this.searchOptions = this.credentials;
       },
     },
+
+    query(newQuery) {
+      axios.get(`neighborhood/${newQuery}`).then((res) => {
+        this.users = res.data.items;
+      });
+    },
+  },
+
+  filters: {
+    stringify(value) {
+      return JSON.stringify(value, null, 2);
+    },
   },
 
   methods: {
@@ -718,15 +690,13 @@ export default {
 
     updateNotificationEvent() {
       try {
-        const newRouteNotificationApi =
-          this.notificationPatterns[
-            this.$store.state.auth.profilConnected.user_type
-          ]();
+        const newRouteNotificationApi = this.notificationPatterns[
+          this.$store.state.auth.profilConnected.user_type
+        ]();
 
-        const newRouteMessageApi =
-          this.messagePatterns[
-            this.$store.state.auth.profilConnected.user_type
-          ]();
+        const newRouteMessageApi = this.messagePatterns[
+          this.$store.state.auth.profilConnected.user_type
+        ]();
 
         this.newNotification(newRouteNotificationApi);
         this.newMessage(newRouteMessageApi);
@@ -1131,5 +1101,18 @@ export default {
   top: -9 px;
   right: 9 px;
   font-weight: bold;
+}
+</style>
+
+<style >
+@media only screen and (min-width: 768px) {
+  .search-hh .form-control {
+    height: 48px !important;
+
+    margin-bottom: 0;
+    border-radius: 0px;
+
+    border-bottom: hidden;
+  }
 }
 </style>

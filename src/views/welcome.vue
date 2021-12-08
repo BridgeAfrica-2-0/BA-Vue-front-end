@@ -1,6 +1,6 @@
 <template>
   <div class="welcome" style="overflow-x: hidden">
-   
+ 
 
     <md-progress-bar md-mode="indeterminate" v-if="sendingP" />
 
@@ -15,13 +15,13 @@
     >
       <div>
         <h4 class="text-center username f-30">
-          {{ $t('welcome.Hello') }} <b> {{ username }} </b>{{ $t('welcome.letsget_started') }}
+          {{ $t('welcome.Hello') }} <b> {{ username }}</b>{{ $t('welcome.letsget_started') }}
         </h4>
         <br />
         <br />
 
         <p class="text f-16">
-          {{ $t("welcome.Welcome") }} {{ $t("welcome.and") }} {{ $t("welcome.thank_you") }} {{ $t("welcome.for_joining") }} BidgeAfrica.com !
+          {{ $t("welcome.Welcome") }} {{ $t("welcome.and") }} {{ $t("welcome.thank_you") }} {{ $t("welcome.for_joining") }} bridgeafrica.com !
           {{ $t("welcome.On_Bridge_Africa") }} {{ $t("welcome.you_can_quickly") }} {{ $t("welcome.create") }} {{ $t("welcome.your") }} {{ $t("welcome.website") }} {{ $t("welcome.less_than") }} 5 {{ $t("welcome.minutes") }};              
           {{$t("welcome.access_an_online_marketplace")}} {{$t("welcome.for")}} {{$t("welcome.buying")}} {{$t("welcome.and")}} {{$t("welcome.selling")}} ; 
           {{$t("welcome.search_for_and_compare")}} {{$t("welcome.product_prices")}} {{$t("welcome.through")}} {{$t("welcome.our")}} {{$t("welcome.localised_business_directly")}}, 
@@ -155,7 +155,7 @@
                         @input="PRegion"
                        :multiple="false"
                         :placeholder="$t('welcome.Search') "
-                        label="name"
+                        :label="$t('welcome.name')"
                         track-by="id"
                         :options="countries"
                       
@@ -180,7 +180,7 @@
                         @input="Division"
                         
                         :placeholder="$t('welcome.Search') "
-                        label="name"
+                        :label="$t('welcome.name')"
                         track-by="id"
                         :options="regions"
                         :multiple="false"
@@ -371,7 +371,7 @@
                         @input="PRegion"
                        :multiple="false"
                         :placeholder="$t('welcome.Search') "
-                        label="name"
+                        :label="$t('welcome.name')"
                         track-by="id"
                         :options="countries"
                       
@@ -396,7 +396,7 @@
                         @input="Division"
                         
                         :placeholder="$t('welcome.Search') "
-                        label="name"
+                        :label="$t('welcome.name')"
                         track-by="id"
                         :options="regions"
                         :multiple="false"
@@ -548,9 +548,9 @@
                   <multiselect
                     v-model="multiselecvalue"
                     @input="subcategories"
-                    tag-:placeholder= "$t('welcome.Add_this_as_new_tag')"
+                    :tag-placeholder= "$t('welcome.Add_this_as_new_tag')"
                     :placeholder="$t('welcome.Search_or_add_a_tag')"
-                    label="name"
+                    :label="$t('welcome.name')"
                     track-by="id"
                     :options="pcategories"
                     :multiple="true"
@@ -563,9 +563,9 @@
                   <label class="typo__label"> {{ $t('welcome.Sub_Category') }}</label>
                   <multiselect
                     v-model="filterselectvalue"
-                    tag-:placeholder="$t('welcome.Add_this_as_new_tag')"
+                    :tag-placeholder="$t('welcome.Add_this_as_new_tag')"
                     :placeholder="$t('welcome.Search_or_add_a_tag')"
-                    label="name"
+                    :label="$t('welcome.name')"
                     track-by="subcategory_id"
                     :options="scategories"
                     :multiple="true"
@@ -617,7 +617,7 @@
                         @input="Region"
                      
                         :placeholder="$t('welcome.Search') "
-                        label="name"
+                        :label="$t('welcome.name')"
                         track-by="id"
                         :options="countries"
                         :multiple="true"
@@ -635,7 +635,7 @@
                         @input="Division"
                         
                         :placeholder="$t('welcome.Search') "
-                        label="name"
+                        :label="$t('welcome.name')"
                         track-by="id"
                         :options="regions"
                         :multiple="true"
@@ -654,7 +654,7 @@
                         @input="Municipality"
                        
                         :placeholder="$t('welcome.Search') "
-                        label="name"
+                        :label="$t('welcome.name')"
                         track-by="id"
                         :options="divisions"
                         :multiple="true"
@@ -675,7 +675,7 @@
                         @input="Locality"
                       
                         :placeholder="$t('welcome.Search') "
-                        label="name"
+                        :label="$t('welcome.name')"
                         track-by="id"
                         :options="municipalities"
                         :multiple="true"
@@ -695,7 +695,7 @@
                         v-model="locality"
                        
                         :placeholder="$t('welcome.Search') "
-                        label="name"
+                        :label="$t('welcome.name')"
                         track-by="id"
                         :options="localities"
                         :multiple="true"
@@ -728,9 +728,9 @@
 
                       <multiselect
                         v-model="business_keyword"
-                        tag-:placeholder="$t('welcome.Add_this_as_new_tag')"
+                        :tag-placeholder="$t('welcome.Add_this_as_new_tag')"
                         :placeholder="$t('welcome.Add_New_Keyword')"
-                        label="name"
+                        :label="$t('welcome.name')"
                         track-by="id"
                         :options="keywordds"
                         :multiple="true"

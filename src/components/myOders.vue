@@ -2,10 +2,7 @@
   <div class="container">
     <navbar />
     <hr />
-    <!-- partie mobile--------------------------------------------------------------------- 
     
-    ----------------------DEBUT -----------------------------------------------------
-    -->
     <div id="hidemobile">
       <div
         class="justify-content-between d-flex row cd B"
@@ -1230,12 +1227,12 @@ h3 {
 .green {
   background-color: #28a745;
 }
-.text-position {
+/* .text-position {
   /* line-height: 25px;
   margin-top: -22px;
   font-size: 14px;
-  margin-left: 5px; */
-}
+  margin-left: 5px; 
+} */
 /* .button-text{
     color:white;
 }

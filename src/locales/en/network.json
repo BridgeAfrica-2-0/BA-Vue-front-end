@@ -246,7 +246,7 @@
     "Mapoure_Agrobusiness": "Mapoure Agrobusiness",
     "Reject": "Reject,",
     "Feedback_Type": "Feedback Type",
-    "community": "community",
+    "community": "Community",
     "lire_la_Suite": "Read More",
     "Edit_network": "Edit network",
     "Brief_Description": "Brief Description",
@@ -288,8 +288,9 @@
     "Create_Post": "Create Post",
     "Do_you_want_to_join_this_network": "Do you want to join this network",
     "Your": "Your",
-    "Posts_are_pending_for_approval": "Posts are pending for approval"
-
-
+    "Posts_are_pending_for_approval": "Posts are pending for approval",
+    "Networks":"Networks",
+    "COMMUNITY":"COMMUNITY",
+    "Upload_a_New_picture":"Upload a New picture"
 
 }

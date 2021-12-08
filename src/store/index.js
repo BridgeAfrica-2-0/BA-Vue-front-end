@@ -52,9 +52,8 @@ import { social } from './social';
 Vue.use(Vuex);
 
 
-axios.defaults.baseURL = pricess.VUE_APP_URL;
-
-
+//axios.defaults.baseURL = process.VUE_APP_URL;
+axios.defaults.baseURL ='https://edson.maxinemoffett.com/api/v1';
 
 
 export default new Vuex.Store({

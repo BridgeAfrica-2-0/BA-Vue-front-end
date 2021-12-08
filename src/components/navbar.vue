@@ -39,7 +39,7 @@
                 data-toggle="popover"
                 class="form-control search-mobile"
                 style="border-left: none"
-                placeholder="Find Pharmacies"
+                :placeholder="$t('general.Find_Pharmacies')"
                 aria-label=""
                 data-original-title=""
                 title=""
@@ -72,7 +72,7 @@
                   data-toggle="popover"
                   class="form-control search-mobile"
                   style="border-left: none"
-                  placeholder="Find Pharmacy"
+                  :placeholder="$t('general.Find_Pharmacy')"
                   aria-label=""
                   data-original-title=""
                   title=""
@@ -108,7 +108,7 @@
     :data="users"
     :serializer="item => item.login"
     @hit="selectedUser = $event"
-    placeholder="Where"
+    :placeholder="$t('general.Where')"
     class="search-hh"
   />
 
@@ -159,7 +159,7 @@
                   class="nav-link text-dark hov"
                   href=""
                 >
-                  Market
+                  {{ $t("general.Market") }}
                 </router-link>
               </div>
 
@@ -241,7 +241,7 @@
                     </div>
                     <hr class="h-divider" />
                     <router-link :to="newRedirection('message')">
-                      <u>See Inbox</u>
+                      <u>{{ $t("general.See_Inbox") }}</u>
                     </router-link>
                   </div>
                 </b-popover>
@@ -261,7 +261,7 @@
                 ></a>
                 <b-popover target="notif" triggers="hover" placement="top">
                   <div class="popover-body">
-                    <p class="font-weight-bold">Notifications</p>
+                    <p class="font-weight-bold">{{ $t("general.Notifications") }}</p>
                     <div
                       v-for="notification in notifications"
                       :key="notification.id"
@@ -294,7 +294,7 @@
                     <hr class="h-divider" />
 
                     <router-link :to="newRedirection('notification')"
-                      ><u>See all Notifications</u></router-link
+                      ><u>{{ $t("general.See_all_Notifications") }}</u></router-link
                     >
                     <!-- <a
                       href="https://bridgeafrica.info/nav/notifications-view-all.html"
@@ -367,7 +367,7 @@
                           class="violet search"
                           :icon="['fas', 'cart-arrow-down']"
                       /></span>
-                      My orders
+                      {{ $t("general.My_orders") }}
                     </router-link>
                     <hr class="h-divider" />
 
@@ -385,7 +385,7 @@
                           class="violet search"
                           :icon="['fas', 'cogs']"
                       /></span>
-                      Account Settings
+                      {{ $t("general.Account_Settings") }}
                     </router-link>
                     <hr class="h-divider" />
                     <div class="other-menu suggest-item cursor-pointer">
@@ -394,7 +394,7 @@
                           class="violet search"
                           :icon="['fas', 'question']"
                       /></span>
-                      Help and Support
+                      {{ $t("general.Help_and_Support") }}
                     </div>
                     <hr class="h-divider" />
                     <div class="other-menu suggest-item cursor-pointer">
@@ -403,7 +403,7 @@
                           class="violet search"
                           :icon="['fas', 'globe-americas']"
                         />
-                        Language</b-link
+                        {{ $t("general.Language") }}</b-link
                       >
 
                       <b-collapse id="collapse-2" class="mt-1">
@@ -433,7 +433,7 @@
                           class="violet search"
                           :icon="['fas', 'sign-out-alt']"
                       /></span>
-                      Logout
+                      {{ $t("general.Logout") }}
                     </a>
                   </div>
                 </b-popover>
@@ -457,7 +457,7 @@
                 </div>
                 <div class="d-flex flex-column ml-1 line-size">
                   <div class="font-weight-bold">{{ user.name }}</div>
-                  <div class="small text-muted">Active</div>
+                  <div class="small text-muted">{{ $t("general.Active") }}</div>
                 </div>
               </div>
 
@@ -474,7 +474,7 @@
                   />
                 </div>
                 <div class="ml-3 mt-2">
-                  <p class="font-weight-bold">Your Businesses</p>
+                  <p class="font-weight-bold">{{ $t("general.Your_Businesses") }}</p>
                 </div>
               </div>
             </div>
@@ -495,7 +495,7 @@
                   class="violet search"
                   :icon="['fas', 'cart-arrow-down']"
               /></span>
-              My orders
+              {{ $t("general.My_orders") }}
             </router-link>
             <hr class="h-divider" />
 
@@ -512,14 +512,14 @@
                 ><fas-icon class="violet search" :icon="['fas', 'cogs']"
               /></span>
 
-              Account Settings
+              {{ $t("general.Account_Settings") }}
             </router-link>
             <hr class="h-divider" />
             <div class="other-menu suggest-item cursor-pointer">
               <span class="mr-1"
                 ><fas-icon class="violet search" :icon="['fas', 'question']"
               /></span>
-              Help and Support
+              {{ $t("general.Help_and_Support") }}
             </div>
             <hr class="h-divider" />
             <div class="other-menu suggest-item cursor-pointer">
@@ -528,7 +528,7 @@
                   class="violet search"
                   :icon="['fas', 'globe-americas']"
                 />
-                Language</b-link
+                {{ $t("general.Language") }}</b-link
               >
 
               <b-collapse id="collapse-2" class="mt-1">
@@ -558,7 +558,7 @@
                   class="violet search"
                   :icon="['fas', 'sign-out-alt']"
               /></span>
-              Logout
+              {{ $t("general.Logout") }}
             </a>
           </div>
         </b-modal>

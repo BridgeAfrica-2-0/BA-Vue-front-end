@@ -185,7 +185,7 @@
     "Automatically_renew_subscription_until_i_turn_it_off": "Renouvellement automatique de l'abonnement jusqu'à ce qu'il soit désactivé",
     "Total_Payble": "Total à payer",
     "By_confirming_you_agree_to_Terms_and_conditions": "By confirming you agree to Terms & conditions",
-    "Read_more":"lire la Suite",
+    "Read_more":"Lire la suite",
     "Confirm":"Confirmer",
     "Subscription_Plan": "Plan d'abonnement",
     "Basic": "Basique",
@@ -251,7 +251,7 @@
     "Feedback_Type":"type de commentaire",
     "Private":"Privé",
     "community":"communauté",
-    "lire_la_Suite":"lire la Suite",
+    "lire_la_Suite":"Lire la suite",
     "Edit_network":"Modifier le réseau",
     "Brief_Description":"Brève description",
     "Tel_1":"Tel 1",
@@ -290,7 +290,8 @@
     "email_phone":"courriel, téléphone",
     "Create_Post":"Créer un poste",
     "Do_you_want_to_join_this_network":"Voulez-vous rejoindre ce réseau",
-   "Read_More":"lire la Suite",
-   "Direction":"Direction"
+   "Networks":"Réseau",
+   "COMMUNITY":"COMMUNAUTÉ",
+   "Upload_a_New_picture":"Télécharger une nouvelle photo"
 
 }

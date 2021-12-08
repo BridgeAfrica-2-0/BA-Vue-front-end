@@ -81,6 +81,7 @@ export default {
       let keyword = data.keyword ? "keyword=" + data.keyword : "";
 
       TYPES.map((type) => {
+        console.log(`type => ${type} keyword = ${keyword}`);
         axios
           .get(`/search/${type}?${catId}&${keyword}`)
           .then((res) => {

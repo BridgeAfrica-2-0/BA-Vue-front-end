@@ -123,7 +123,7 @@ export default {
 .marker:hover div {
   background-color: #ffffff;
   border-color: #3ad3ad;
-  color: #000000;
+  color: #3ad3ad;
 }
 .marker div {
   display: flex;
@@ -136,6 +136,8 @@ export default {
   margin: auto;
   margin-top: 3px;
   transition: all 0.5s;
+  font-weight: bold;
+  font-size: 14px;
 }
 .pointer {
   cursor: pointer;

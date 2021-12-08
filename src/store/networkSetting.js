@@ -257,6 +257,13 @@ export default {
 
       commit("setPendingPost", res.data);
     },
+    //load more pending post
+
+     loadMore({ commit }, url) {
+    return   axios.get(`network/${url}`);
+
+      
+    },
 
     //approve pending post
     async approvedPost({ commit }, payload) {

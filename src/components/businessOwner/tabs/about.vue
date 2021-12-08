@@ -18,7 +18,98 @@
         ></iframe>
       </div>
 
-      <b-row v-if="loading">
+      <b-card>
+        <b-row v-if="loading">
+          <b-col>
+            <b-card-text>
+              <div class="edit" v-b-modal.addressBusinessModal>
+                <b-icon
+                  icon="pencil-fill"
+                  variant="primary"
+                  @click="load"
+                ></b-icon>
+              </div>
+
+              <p>
+                <b-icon
+                  icon="briefcase-fill"
+                  class="primary icon-size"
+                ></b-icon>
+                <span v-for="category in business_about.category" :key="category.id">{{category.name}}, </span>
+              </p>
+              <p>
+                <b-icon icon="search" class="primary icon-size"></b-icon>
+                {{ business_about.name }}
+              </p>
+              <p>
+                <b-icon icon="geo-alt-fill" class="primary icon-size"></b-icon>
+                {{ business_about.address }}, {{ business_about.city }},
+                {{ business_about.country[0].name }}
+              </p>
+              <p>
+                <b-icon icon="link" class="primary icon-size"></b-icon>
+                {{ business_about.website }}
+              </p>
+              <p>
+                <b-icon icon="people-fill" class="primary icon-size"></b-icon>
+                {{ business_about.community }}
+                {{ business_about.community > 1000 ? "K" : "" }} Community
+              </p>
+              <p>
+                <b-icon
+                  icon="telephone-fill"
+                  class="primary icon-size"
+                ></b-icon>
+                {{ business_about.phone }}
+              </p>
+              <p>
+                <b-icon icon="envelope-fill" class="primary icon-size"></b-icon>
+                {{ business_about.email }}
+              </p>
+              <p>
+                <b-icon icon="clock" class="primary icon-size"></b-icon>
+                <b-link> Open now </b-link>
+                <br />
+                <b-dropdown size="sm" variant="transperent">
+                  <template #button-content>
+                    {{ hoursOpen }}
+                  </template>
+                  <b-dropdown-item
+                    v-for="day in business_about.business_open_hours"
+                    :key="day.day"
+                    @click="selectHour(day)"
+                  >
+                    {{ day.opening_time }}AM -
+                    {{ day.closing_time }}PM</b-dropdown-item
+                  >
+                </b-dropdown>
+              </p>
+            </b-card-text>
+          </b-col>
+          <b-col>
+              <!-- <div
+                class="edit"
+                v-b-modal.biographyModal
+                @click="
+                  business_about_input = JSON.parse(
+                    JSON.stringify(business_about)
+                  )
+                "
+              >
+                <b-icon icon="pencil-fill" variant="primary"></b-icon>
+              </div> -->
+              <h4 class="mb-4 text-center username">
+                {{ business_about.name }}
+              </h4>
+              <p class="text-justify text">
+                {{ business_about.location_description }}
+              </p>
+          </b-col>
+        </b-row>
+      </b-card>
+      
+      <!-- original card -->
+      <!-- <b-row v-if="loading">
         <b-col>
           <b-card>
             <b-card-text>
@@ -108,10 +199,10 @@
             </p>
           </b-card>
         </b-col>
-      </b-row>
+      </b-row> -->
     </b-card>
 
-    <b-modal
+    <!-- <b-modal
       id="biographyModal"
       hide-footer
       :title="$t('businessowner.Business_Biography')"
@@ -152,7 +243,7 @@
           {{ $t('businessowner.Modify') }}
         </b-button>
       </b-form>
-    </b-modal>
+    </b-modal> -->
     <b-modal
       id="addressBusinessModal"
       ref="addressBusinessModal"
@@ -266,7 +357,7 @@
             id="input-1"
             class="mt-1"
             type="text"
-            v-model="business_about_input.country"
+            v-model="business_about_input.country[0].name"
             required
           ></b-form-input>
         </b-form-group>
@@ -344,6 +435,19 @@
             required
           ></b-form-input>
         </b-form-group>
+
+        <div class="form-group">
+          <label for="description">Description</label><br />
+          <textarea
+            type="text"
+            id="description"
+            name="description"
+            v-model="business_about_input.location_description"
+            class="mb-3 form-control"
+            placeholder="description"
+            required
+          ></textarea>
+        </div>
 
         <div class="b-bottom">
           <b-container>

@@ -319,8 +319,7 @@
                       'user' == user.user_type ? 'rounded-circle' : ''
                     } logo-sizee`"
                     alt=""
-                    width="50"
-                    height="50"
+                  
                 /></span>
               </div>
 
@@ -586,7 +585,6 @@
  <h3>Selected User JSON</h3>
  <pre>{{ selectedUser | stringify }}</pre>
 </div> -->
-
 
 
 
@@ -947,7 +945,8 @@ export default {
 }
 
 .logo-sizee {
-  width: 50px !important;
+  width: 40px !important;
+  height: 40px !important;
   object-fit: cover;
 }
 .hov:hover {

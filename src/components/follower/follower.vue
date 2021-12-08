@@ -138,11 +138,14 @@
           <b-tabs lazy content-class="mt-3" fill pills>
             <b-tab :title="$t('profilefollower.Posts')" active>
               <Post />
-            </b-tab>
+            </b-tab>   
+
+
+            
             <b-tab :title="$t('profilefollower.About')"><About /></b-tab>
             <b-tab :title="$t('profilefollower.Business')"><Businesses /></b-tab>
             <b-tab :title="$t('profilefollower.Network')"><Network /></b-tab>
-            <b-tab :title="$t('profilefollower.Media')"><Media /></b-tab>
+            <b-tab :title="$t('profilefollower.Media')"><Media type="profile" /></b-tab>
             <b-tab :title="$t('profilefollower.Community')"><Community /></b-tab>
           </b-tabs>
         </b-col>
@@ -152,14 +155,19 @@
 </template>
 
 <script>
-import Post from "@/components/follower/tabs/posts";
+import Post from '@/components/businessfollower/tabs/posts';
 import About from "@/components/follower/tabs/about";
-import Media from "@/components/follower/tabs/media";
+import Media from '@/components/businessfollower/tabs/media';
 import Community from "@/components/follower/tabs/community";
 import Businesses from "@/components/follower/tabs/businesses";
 import Network from "@/components/follower/tabs/networkk";
 
+import {knowWhoIsConnected} from "@/mixins"
+
+
+
 export default {
+   mixins:[knowWhoIsConnected],
   name: "Home",
   data() {
     return {

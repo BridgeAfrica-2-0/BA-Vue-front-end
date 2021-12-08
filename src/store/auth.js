@@ -27,6 +27,7 @@ export default {
 
   mutations: {
     setUserData(state, userData) {
+      localStorage.removeItem('user');
       state.user = userData;
       state.profilConnected = { ...userData.user, user_type: 'user' };
 
@@ -202,6 +203,7 @@ export default {
 
 
     completeWelcome({ commit }) {
+      localStorage.removeItem('user');
       return axios.get('user/completewelcome').then(({ data }) => {
         console.log(data);
         commit("setUserDataa", data.data);

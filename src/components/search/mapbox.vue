@@ -4,21 +4,26 @@
       :accessToken="accessToken"
       :zoom="zoom"
       :center="center"
-      :mapStyle="mapStyle"
+      :mapStyle.sync="mapStyle"
     >
       <MglMarker
-        v-for="business in businesses"
+        v-for="(business, key) in businesses"
         :key="business.id"
         :coordinates="[business.lng, business.lat]"
-        color="#3ad3ad"
       >
+        <div class="marker" slot="marker">
+          <div>{{ key + 1 }}</div>
+        </div>
         <MglPopup :coordinates="[business.lng, business.lat]" anchor="top">
           <div class="py-4">
-            <div class="d-flex justify-content-center flex-column">
+            <div
+              class="d-flex justify-content-center flex-column pointer"
+              @click="gotoBusiness(business.id)"
+            >
               <img :src="business.logo_path" alt="..." class="img-map" />
-              <span class="text-center">
+              <h6 class="text-center my-3">
                 {{ business.name }}
-              </span>
+              </h6>
             </div>
           </div>
         </MglPopup>
@@ -84,6 +89,11 @@ export default {
     this.mapbox = Mapbox;
     console.log(this.mapbox);
   },
+  methods: {
+    gotoBusiness(id) {
+      this.$router.push(`/business/${id}`);
+    },
+  },
 };
 </script>
 <style scoped>
@@ -100,5 +110,34 @@ export default {
 }
 .mapboxgl-popup-content {
   border-radius: 20px !important;
+}
+.marker {
+  border-radius: 100% 100% 100% 0;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  background-color: #3ad3ad;
+  border: 2px solid #ffffff;
+  transition: all 0.5s;
+}
+.marker:hover div {
+  background-color: #ffffff;
+  border-color: #3ad3ad;
+  color: #000000;
+}
+.marker div {
+  display: flex;
+  justify-content: center;
+  background-color: #3ad3ad;
+  color: #ffffff;
+  height: 20px;
+  width: 20px;
+  border-radius: 100% 100% 100% 0;
+  margin: auto;
+  margin-top: 3px;
+  transition: all 0.5s;
+}
+.pointer {
+  cursor: pointer;
 }
 </style>

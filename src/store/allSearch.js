@@ -102,7 +102,7 @@ export default {
 
           .catch((err) => {
             commit("setLoader", false);
-            console.log(err);
+            console.dir(err);
           });
       });
 

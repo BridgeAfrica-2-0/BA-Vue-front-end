@@ -110,7 +110,7 @@
                   @click="cta(item)"
                 >
                   <i class="fas fa-envelope fa-lg btn-icon"></i>
-                  <span class="btn-text">{{ ("search.Message") }}</span>
+                  <span class="btn-text">{{ "search.Message" }}</span>
                 </b-button>
               </b-col>
 
@@ -135,7 +135,7 @@
                     "
                   ></i>
 
-                  <span class="btn-text"> {{ ("search.Join") }} </span>
+                  <span class="btn-text"> {{ "search.Join" }} </span>
                 </b-button>
               </b-col>
             </b-row>

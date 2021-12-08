@@ -605,16 +605,14 @@ export default {
 
     this.messagePatterns = {
       user: () => "/messages/latest/user",
-      business: () => "/messages/latest/user",
-      network: () => "/messages/latest/user",
+      business: () => "`/messages/latest/${this.user.id}/business`",
+      network: () => "`/messages/latest/${this.user.id}/network`",
     };
 
     this.redirectionPatterns = {
       message: {
         user: () => () => ({
-          name: "profile_owner",
-          params: { id: this.user.id },
-          query: { tabId: 1 },
+          name: "messaging"
         }),
         business: () => ({
           name: "BusinessOwner",
@@ -634,9 +632,7 @@ export default {
           query: { tabId: 2 },
         }),
         user: () => ({
-          name: "profile_owner",
-          params: { id: this.user.id },
-          query: { tabId: 2 },
+          name: "settings"
         }),
         network: () => ({
           name: "networks",

@@ -1,10 +1,10 @@
 <template>
-  <b-modal :id="id" hide-footer title="Write post">
+  <b-modal :id="modal" hide-footer title="Write post">
     <div class="d-flex align-items-center py-1 px-2">
       <b-avatar
         class="mr-3"
         v-if="auth.profile_picture"
-        :src="auth.profile_picture"
+        :square="'user' == auth.user_type ? false : true"
       ></b-avatar>
       <b-avatar class="mr-3" v-else></b-avatar>
       <p>
@@ -47,7 +47,7 @@
 import Button from "@/components/Button";
 import { fromNow } from "@/helpers";
 export default {
-  props: ["id", "auth", "post", "hidden"],
+  props: ["modal", "auth", "post", "hidden"],
   components: {
     Button,
   },

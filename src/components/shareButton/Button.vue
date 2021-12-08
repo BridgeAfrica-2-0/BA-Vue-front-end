@@ -2,8 +2,6 @@
   <div style="display: inline-block">
     <Box
       :modal="`modal-1-${uuid}`"
-      :id="modal"
-      :isActivated="strategy"
       :title="$t('search.Share_to_people')"
       :placeholder="$t('search.Search_for_people')"
       subtitle="All peoples"
@@ -14,13 +12,13 @@
 
     <Box
       :modal="`modal-2-${uuid}`"
-      :id="modal"
-      :isActivated="strategy"
       :title="$t('search.Share_to_network')"
       :placeholder="$t('search.Search_for_network')"
       subtitle="All networks"
-      :type="'business'"
+      :type="'network'"
       :post="post"
+      :update="update"
+
     >
       <template v-slot:owner>
         <div class="d-flex align-items-center py-3 px-2 mb-2 border">
@@ -37,7 +35,6 @@
 
     <Box
       :modal="`modal-5-${uuid}`"
-      :isActivated="strategy"
       :title="$t('search.Send_Inbox')"
       :placeholder="$t('search.Search_for_network')"
       subtitle="All networks"
@@ -70,13 +67,13 @@
 
     <Box
       :modal="`modal-3-${uuid}`"
-      :id="modal"
       :title="$t('search.Share_business')"
       :placeholder="$t('search.Search_for_business')"
       subtitle="All business"
       :type="'business'"
       :post="post"
-      :isActivated="strategy"
+      :update="update"
+      
     >
       <template v-slot:owner>
         <div class="d-flex align-items-center py-3 px-2 mb-2 border">
@@ -92,8 +89,6 @@
     <!-- modal-3 -->
 
     <Post
-      :id="modal"
-      :isActivated="strategy"
       :modal="`modal-10-${uuid}`"
       :post="post"
       :auth="profile"
@@ -398,6 +393,7 @@ export default {
     type: null,
     strategy: false,
     uuid: null,
+    update:null
   }),
 
   created() {
@@ -485,7 +481,11 @@ export default {
 
     open(id) {
       this.modal = id;
+
+      if([`modal-3-${this.uuid}`,`modal-2-${this.uuid}`].includes(id))
+        this.update = id
       this.$bvModal.show(id);
+
     },
 
     shareToYourProfile: async function () {

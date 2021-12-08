@@ -93,7 +93,7 @@ const routes = [
     //   auth: true,
     // },
   },
-  
+
 
   {
     path: "/",
@@ -261,7 +261,7 @@ const routes = [
     name: "networks",
     component: networks,
   },
-  
+
   {
     path: "/network_editors/:id?",
     name: "NetworkEditors",
@@ -280,7 +280,7 @@ const routes = [
     component: memberNetworkFollower,
 
   },
-  
+
   {
     path: "/login",
     name: "Login",
@@ -341,7 +341,7 @@ const routes = [
     component: Visitor,
   },
   {
-    path: "/search/:id",
+    path: "/search",
     name: "Search",
     component: search,
   },
@@ -362,7 +362,7 @@ const routes = [
   },
 
   {
-    path: "/search",
+    path: "/search/:id",
     name: "Search",
     component: search,
   },
@@ -397,7 +397,7 @@ const routes = [
   },
 
 
- 
+
   {
     path: "*",
     name: "notFound",

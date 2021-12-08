@@ -31,13 +31,6 @@ import Loader from "@/components/Loader";
 export default {
   name: "Box",
 
-  watch: {
-    id: function (value, oldValue) {
-      if (this.modal.startsWith("modal-2") || this.modal.startsWith("modal-3"))
-        this.getContacts();
-    },
-  },
-
   components: {
     Contact,
     Loader,
@@ -49,13 +42,10 @@ export default {
     contacts: [],
     actionType: null,
     hasbeLoad: false,
+    uuid:null
   }),
 
   props: {
-    isActivated: {
-      type: Boolean,
-      required: true,
-    },
     id: {},
     modal: {
       type: String,
@@ -81,23 +71,52 @@ export default {
       type: String,
       required: true,
     },
+    update:{
+
+    }
   },
+
+  created(){
+    this.uuid = this.post.post_id ? this.post.post_id : this.post.id
+  },
+
+  watch:{
+    update:function(value){
+      console.log(value, this.type)
+      if([`modal-3-${this.uuid}`,`modal-2-${this.uuid}`].includes(value))
+        this.getContacts()
+    }
+  },
+
 
   methods: {
     getContacts: async function () {
       this.loading = true;
-      const response = await this.$repository.share.getNetworkorBusiness();
 
-      if ("network" != this.type) {
-        this.contacts = response.data.network;
-        this.actionType = "network";
-      } else {
-        this.contacts = response.data.business;
-        this.actionType = "business";
+      if ("network" == this.type) {
+
+        const response = await this.$repository.share.getNetworks();
+
+        if(response.success) {
+          this.contacts = response.data;
+          this.actionType = "network";
+        }
+
+        return true
+
+      }
+
+      if ("business" == this.type){
+
+        const response = await this.$repository.share.getBusiness();
+
+        if(response.success) {
+          this.contacts = response.data;
+          this.actionType = "business";
+        }
       }
 
       this.loading = false;
-      this.hasbeLoad = true;
     },
   },
 };

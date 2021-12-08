@@ -58,6 +58,14 @@ export default {
     pageHasLoad: false,
   }),
 
+  destroyed() {
+    if (this.$route.query.uuid) {
+      let query = Object.assign({}, this.$route.query);
+      delete query.uuid;
+      this.$router.replace({ query });
+    }
+  },
+
   computed: {
     ...mapGetters({
       posts: "search/GET_RESULT_POST",
@@ -76,6 +84,11 @@ export default {
   },
 
   created() {
+    if (this.$route.query.uuid) {
+      this.singlePost();
+      return true;
+    }
+
     this.getAuth();
     this.init();
   },
@@ -91,6 +104,14 @@ export default {
     ...mapMutations({
       auth: "auth/profilConnected",
     }),
+
+    async singlePost() {
+      const response = await this.$repository.post.single({
+        uuid: this.$route.query.uuid,
+      });
+
+      if (response.success) this.postStore(response.data);
+    },
 
     async getAuth() {
       const type = [

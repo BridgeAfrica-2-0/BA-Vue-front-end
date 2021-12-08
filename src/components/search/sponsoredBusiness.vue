@@ -14,7 +14,7 @@
                 {{ item.name }}
               </strong>
               <br />
-              {{ item.category.joint(", ") }}
+              {{ item.category.join(", ") }}
               <br />
               {{ item.followers | formatNumber }} Community<br />
 
@@ -24,7 +24,7 @@
               </span>
               <br />
 
-              {{ item.about_business }}
+              {{ item.about_business | format }}
               <b-link>{{ $t("search.Read_More") }}</b-link>
             </p>
           </b-col>
@@ -105,6 +105,12 @@ export default {
 
   filters: {
     formatNumber,
+    format: (value) =>
+      value
+        ? value.length > 25
+          ? `${value.substring(0, 25)} ...`
+          : value
+        : "",
   },
 
   data() {

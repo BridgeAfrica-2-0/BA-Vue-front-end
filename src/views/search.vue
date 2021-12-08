@@ -646,9 +646,10 @@ export default {
     if (this.$route.query.keyword)
       this.searchParams.keyword = this.$route.query.keyword;
 
-    if (this.$route.query.market) this.selectedId = 4;
+    this.onProcessQuery();
 
     this.getLocation();
+
     this.strategY = {
       users: () => this.onFindUser(),
       all: () => this.getKeyword(),
@@ -656,7 +657,9 @@ export default {
       network: () => this.searchNetworks(),
       business: () => this.onFindBusiness(),
     };
+
     this.getKeyword();
+
     this.initialize();
   },
 
@@ -1635,6 +1638,14 @@ export default {
   },
 
   methods: {
+    onProcessQuery() {
+      if (this.$route.query.market) {
+        this.selectedId = 4;
+        return true;
+      }
+
+      if (this.$route.query.uuid) this.selectedId = 5;
+    },
     // [ED]----------
     getKeyword() {
       console.log("the keyword is: ", this.searchParams.keyword);

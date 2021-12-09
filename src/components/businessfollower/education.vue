@@ -91,7 +91,7 @@
       <b-form-input class="mt-2" v-model="educationInput.major" placeholder="Major"></b-form-input>
     </b-modal>
 
-    <FlashMessage />
+    
   </div>
 </template>
 

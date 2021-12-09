@@ -121,7 +121,7 @@
             <b-col cols="1" class="m-0 p-0"></b-col>
             <b-col cols="2" class="m-0 p-0">
               <b-avatar
-                class="d-inline-block avat"
+                class="d-inline-block avat" 
                 variant="primary"
                 :src="imageProfile"
               ></b-avatar>

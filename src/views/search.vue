@@ -507,25 +507,6 @@
 
             <!-- filter out only people -->
 
-            <div v-if="selectedId == '2'">
-              <h6>
-                {{ $t("search.Sponsored_Result") }}
-                <fas-icon
-                  class="icons"
-                  :icon="['fas', 'exclamation-circle']"
-                  size="lg"
-                />
-              </h6>
-
-              <div>
-                <!-- <Sponsor /> -->
-              </div>
-              <h6>
-                <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
-                {{ $t("search.People") }}
-              </h6>
-            </div>
-
             <component :is="isComponent" :title="notFoundComponentTitle" />
 
             <!-- filter out just the network  -->
@@ -676,7 +657,13 @@ export default {
   },
 
   created() {
+    if (this.$route.query.keyword)
+      this.searchParams.keyword = this.$route.query.keyword;
+
+    this.onProcessQuery();
+
     this.getLocation();
+
     this.strategY = {
       users: () => this.onFindUser(),
       all: () => this.getKeyword(),
@@ -684,7 +671,9 @@ export default {
       network: () => this.searchNetworks(),
       business: () => this.onFindBusiness(),
     };
+
     this.getKeyword();
+
     this.initialize();
   },
 
@@ -1646,7 +1635,7 @@ export default {
   },
 
   watch: {
-    selectedId: function() {
+    selectedId: function () {
       this.changeComponent();
       this.changePlaceHolder();
       this.changeNotFoundTitle();
@@ -1664,6 +1653,14 @@ export default {
   },
 
   methods: {
+    onProcessQuery() {
+      if (this.$route.query.market) {
+        this.selectedId = 4;
+        return true;
+      }
+
+      if (this.$route.query.uuid) this.selectedId = 5;
+    },
     // [ED]----------
     getKeyword() {
       console.log("the keyword is: ", this.searchParams.keyword);
@@ -1736,9 +1733,7 @@ export default {
           console.log("Error erro!");
         });
     },
-    // ------------
 
-    // Eteme
     ...mapActions({
       userStore: "search/FIND_USER",
       postStore: "search/FIND_POST",

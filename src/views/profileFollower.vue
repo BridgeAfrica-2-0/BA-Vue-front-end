@@ -14,7 +14,7 @@
               <bussiness />
             </b-tab>
             <b-tab :title="$t('profilefollower.Media')" href="#media">
-              <Media type="profile" />
+              <Media type="profile" :isEditor="false"/>
             </b-tab>
             <b-tab :title="$t('profilefollower.Networks')">
               <Networks />
@@ -34,7 +34,7 @@ import navbar from '@/components/navbar';
 import headPage from '@/components/ownerHeadpage';
 import Post from '@/components/businessfollower/tabs/posts';
 import About from '@/components/businessfollower/tabs/about';
-import Media from '@/components/businessfollower/tabs/media';
+import Media from '@/components/owner/tabs/media';
 import Networks from '@/components/businessfollower/tabs/networks';
 import Following from '@/components/owner/tabs/memberNetwork';
 import Bussiness from '@/components/owner/tabs/bussiness';

@@ -6,7 +6,7 @@
       <b-row>
         <b-col lg="5" xl="4" class=" ">
           <Parent />
-        </b-col>
+        </b-col> 
 
         <b-col class="col mt-sm-3">
           <b-tabs content-class="mt-3" fill pills>
@@ -40,7 +40,10 @@ import Parent from "../components/memberNetworkF/parent";
 import Media from "@/components/owner/tabs/media";
 import Members from "../components/memberNetworkF/members";
 import Feedback from "../components/memberNetworkF/feedback";
+
+import { WhoIsIt } from "@/mixins";
 export default {
+  mixins:[WhoIsIt],
   components: {
     Navbar,
     Footer,

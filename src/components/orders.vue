@@ -246,7 +246,7 @@
         </div>
         <div class="col-lg-3 d-none d-lg-block">
           <h3 class="font-weight-bold text-small text-capitalize">
-            {{ $t("myOrders.status") }}
+            {{ $t("myOrders.status")}}
           </h3>
           <h3
             class="text-success font-weight-normal text-small text-capitalize"
@@ -262,7 +262,7 @@
           variant="primary"
           class="px-5"
           @click="updateOrderStatus('complete', order.order_id)"
-          >Reorder</b-button
+          >{{ $t("myOrders.Reorder")}}</b-button
         >
       </div>
     </div>
@@ -318,11 +318,11 @@ export default {
     changeTab(index) {
       this.isTabActive = index;
       if (index == 2) {
-        this.getOrderByStatus("pending");
+        this.getOrderByStatus($t("myOrders.pending"));
       } else if (index == 3) {
-        this.getOrderByStatus("complete");
+        this.getOrderByStatus($t("myOrders.complete"));
       } else if (index == 4) {
-        this.getOrderByStatus("cancel");
+        this.getOrderByStatus($t("myOrders.cancel"));
       } else {
         this.getAllOrders();
       }
@@ -396,11 +396,11 @@ export default {
     getOrders() {
       let index = this.isTabActive;
       if (index == 2) {
-        this.getOrderByStatus("pending");
+        this.getOrderByStatus($t("myOrders.pending"));
       } else if (index == 3) {
-        this.getOrderByStatus("complete");
+        this.getOrderByStatus($t("myOrders.complete"));
       } else if (index == 4) {
-        this.getOrderByStatus("cancel");
+        this.getOrderByStatus($t("myOrders.cancel"));
       } else {
         this.getAllOrders();
       }

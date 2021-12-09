@@ -48,7 +48,7 @@
           @click="changeElementType(4)"
         >
           <div class="cercle2 align-self-center">4</div>
-          <h2 class="h2 align-self-center ml-1 mb-0">Cancel</h2>
+          <h2 class="h2 align-self-center ml-1 mb-0">{{ $t("myOrders.Cancel") }}</h2>
         </div>
       </div>
 
@@ -209,7 +209,9 @@
                     <b-dropdown-item>{{
                       $t("myOrders.delete")
                     }}</b-dropdown-item>
-                    <b-dropdown-item>Completed</b-dropdown-item>
+                    <b-dropdown-item>{{
+                      $t("myOrders.Completed")
+                    }}</b-dropdown-item>
                   </b-dropdown>
                 </div>
 
@@ -583,7 +585,9 @@
                     <b-dropdown-item>{{
                       $t("myOrders.Delete")
                     }}</b-dropdown-item>
-                    <b-dropdown-item>Completed</b-dropdown-item>
+                    <b-dropdown-item>{{
+                      $t("myOrders.Completed")
+                    }}</b-dropdown-item>
                   </b-dropdown>
                 </div>
               </div>
@@ -636,7 +640,7 @@
 
               <div class="container d-flex justify-content-end btn-marg">
                 <button class="button btn shadow" @click="handleReOrder(9)">
-                  <h3 class="h3 button-text">{{ $t("myOrders.Re_order") }}</h3>
+                  <h3 class="h3 button-text">{{ $t("myOrders.Reorder") }}</h3>
                 </button>
               </div>
 

@@ -291,6 +291,22 @@
     "Posts_are_pending_for_approval": "Posts are pending for approval",
     "Networks":"Networks",
     "COMMUNITY":"COMMUNITY",
-    "Upload_a_New_picture":"Upload a New picture"
+    "Upload_a_New_picture":"Upload a New picture",
+    "Editor":"Editor",
+    "Admin_Only":"Admin Only",
+    "Member":"Member",
+    "Approval_by_admin":"Approval by admin",
+    "Approval_by_editor_and_admin":"Approval by editor and admin",
+    
+    
+    "All_business_posts_must_be_approved_by_an_admin":"All business posts must be approved by an admin",
+
+    "Marketplace":"Marketplace",
+    "Delete_Business_Identity":"Delete Business Identity",
+    "Municipality":"Municipality",
+    "Selected":"Selected",
+    "All_Selected":"All Selected",
+    "No_notifications_to_show":"No notifications to show"
+
 
 }

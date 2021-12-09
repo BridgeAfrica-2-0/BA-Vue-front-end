@@ -508,5 +508,21 @@
     "Post_Deleted": "Publication Supprimée",
     "Post_created": "Publication créée",
     "Unable_to_Approved_Post": "Impossible d’approuver la publication",
-    "Post_Approved": "Publication Approuvé"
+    "Post_Approved": "Publication Approuvé",
+
+    
+    "BASIC_ACCOUNT":"COMPTE BASIQUE",
+    "These_are_the_features_with_the_normal_account":"Voici les fonctionnalité du compte normal",
+    "phone_number":"numéro de téléphone",
+    "GPS_location":"Localisation GPS",
+    "UPGRADE_TO_PREMIUM":"METTRE à NOUVEAU À LA VERSION PREMIUM",
+    "Best_Value":"Meilleure valeur",
+    "Ability_to_directy_exchange_money_between_the_customer_and_the_business_owner":"Possibilité d'échanger directement de l'argent entre le client et le propriétaire de l'entreprise.",
+    "By_upgrading_your_account_you_can_get_all_feature_to_improve_your_business":"En mettant votre compte à niveau, vous pouvez bénéficier de toutes les fonctionnalités pour améliorer votre activité",
+    "Billed_Monthly":"Facturé Mensuellement",
+    "Billed_Anually":"Facturé Annuellement",
+    "Select":"Sélectionnez",
+    "All_the_functionalities_as_in_the_normal_account":"Toutes les fonctionnalités du compte normal",
+    "Advanced_business_verification":"Vérification avancée des entreprises",
+    "Shipping_calculation":"Calcul des frais d'expédition"
 }

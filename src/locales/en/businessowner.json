@@ -507,5 +507,21 @@
     "Post_Deleted": "Post Deleted",
     "Post_created": "Post created",
     "Unable_to_Approved_Post": "Unable to Approved Post",
-    "Post_Approved": "Post Approved"
+    "Post_Approved": "Post Approved",
+
+    "BASIC_ACCOUNT":"BASIC ACCOUNT",
+    "These_are_the_features_with_the_normal_account":"These are the features with the normal account",
+    "phone_number":"phone number",
+    "GPS_location":"GPS location",
+    "UPGRADE_TO_PREMIUM":"UPGRADE TO PREMIUM",
+    "Best_Value":"Best Value",
+    "Ability_to_directy_exchange_money_between_the_customer_and_the_business_owner":"Ability to directy exchange money between the customer and the business owner",
+    "By_upgrading_your_account_you_can_get_all_feature_to_improve_your_business":"By upgrading your account you can get all feature to improve your business",
+    "Billed_Monthly":"Billed Monthly",
+    "Billed_Anually":"Billed Anually",
+    "Select":"Select",
+    "All_the_functionalities_as_in_the_normal_account":"All the functionalities as in the normal account",
+    "Advanced_business_verification":"Advanced business verification",
+    "Shipping_calculation":"Shipping calculation"
+    
 }

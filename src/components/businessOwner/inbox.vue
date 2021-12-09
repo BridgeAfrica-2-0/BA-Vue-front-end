@@ -16,7 +16,7 @@
                   ></b-avatar>
                 </b-col>
                 <b-col>
-                  <h4 class="title m-10">{{ $t('businessowner.Messages') }}</h4>
+                  <h4 class="title m-10">{{ $t("businessowner.Messages") }}</h4>
                 </b-col>
                 <b-col>
                   <b-icon
@@ -104,10 +104,10 @@
                       ></b-icon>
                     </template>
                     <b-dropdown-item @click="newMessage(true)">
-                      {{ $t('businessowner.New_Chat') }}</b-dropdown-item
+                      {{ $t("businessowner.New_Chat") }}</b-dropdown-item
                     >
                     <b-dropdown-item @click="newMessage(true)">
-                      {{ $t('businessowner.New_Group_Chat') }}
+                      {{ $t("businessowner.New_Group_Chat") }}
                     </b-dropdown-item>
                   </b-dropdown>
                 </b-col>
@@ -120,7 +120,10 @@
                     content-class="mt-12 ma-4 pt-6"
                     fill
                   >
-                    <b-tab :title="$t('businessowner.Users')" @click="getChatList({ type: 'user' })">
+                    <b-tab
+                      :title="$t('businessowner.Users')"
+                      @click="getChatList({ type: 'user' })"
+                    >
                       <!-- Users Chats Available  -->
                       <b-row class="pa-6">
                         <b-col class="mb-6 pb-6">
@@ -197,7 +200,7 @@
                             </b-col>
                           </b-row>
                         </div>
-                        <h2 v-else>{{ $t('businessowner.No_chat') }}</h2>
+                        <h2 v-else>{{ $t("businessowner.No_chat") }}</h2>
                       </div>
 
                       <!-- End Chats -->
@@ -282,7 +285,7 @@
                             </b-col>
                           </b-row>
                         </div>
-                        <h2 v-else>{{ $t('businessowner.No_chat') }}</h2>
+                        <h2 v-else>{{ $t("businessowner.No_chat") }}</h2>
                       </div>
 
                       <!-- End Chats -->
@@ -450,7 +453,7 @@
                             </b-col>
                           </b-row>
                         </div>
-                        <h2 v-else>{{ $t('businessowner.No_chat') }}</h2>
+                        <h2 v-else>{{ $t("businessowner.No_chat") }}</h2>
                       </div>
 
                       <!-- End Chats -->
@@ -568,19 +571,19 @@
                           </template>
 
                           <b-dropdown-item-button @click="showInfo(true)">
-                            {{ $t('businessowner.View_Profile') }}
+                            {{ $t("businessowner.View_Profile") }}
                           </b-dropdown-item-button>
 
                           <b-dropdown-item-button>
-                            {{ $t('businessowner.Disable_Notification') }}
+                            {{ $t("businessowner.Disable_Notification") }}
                           </b-dropdown-item-button>
 
                           <b-dropdown-item-button>
-                            {{ $t('businessowner.Delete_Contact') }}
+                            {{ $t("businessowner.Delete_Contact") }}
                           </b-dropdown-item-button>
 
                           <b-dropdown-item-button>
-                            {{ $t('businessowner.Delete_Chat') }}
+                            {{ $t("businessowner.Delete_Chat") }}
                           </b-dropdown-item-button>
                         </b-dropdown>
                       </b-col>
@@ -708,7 +711,9 @@
 
               <section v-else class="chats" style="margin-left: 1px" ref="feed">
                 <div class="mt-12 pt-12">
-                  <h1 class="text-center">{{ $t('businessowner.Select_a_chat') }}</h1>
+                  <h1 class="text-center">
+                    {{ $t("businessowner.Select_a_chat") }}
+                  </h1>
                 </div>
               </section>
 
@@ -741,13 +746,7 @@
                     <label for="file">
                       <b-icon
                         for="file"
-                        class="
-                          msg-icon
-                          primary
-                          icon-size icon-top
-                          float-right
-                          text-right
-                        "
+                        class="msg-icon primary icon-size icon-top float-right text-right"
                         icon="paperclip"
                       >
                       </b-icon>
@@ -853,7 +852,9 @@
               <b-button class="primary-bg" @click="showInfo(false)">
                 <fas-icon :icon="['fas', 'arrow-left']" />
               </b-button>
-              <span class="cnt-info">{{ $t('businessowner.Contact_Info') }} </span>
+              <span class="cnt-info"
+                >{{ $t("businessowner.Contact_Info") }}
+              </span>
             </div>
             <div class="info-bottom">
               <b-avatar
@@ -864,15 +865,17 @@
               ></b-avatar>
               <div class="info-detail">
                 <h1 class="info-name">{{ receiver.name }}</h1>
-                <b-link class="primary">{{ $t('businessowner.View_Profile') }}</b-link>
+                <b-link class="primary">{{
+                  $t("businessowner.View_Profile")
+                }}</b-link>
               </div>
             </div>
             <div>
               <ul>
-                <li>{{ $t('businessowner.Options') }}</li>
+                <li>{{ $t("businessowner.Options") }}</li>
                 <li>
                   <b-row
-                    ><b-col> {{ $t('businessowner.Block_Messages') }} </b-col>
+                    ><b-col> {{ $t("businessowner.Block_Messages") }} </b-col>
                     <b-col>
                       <b-form-checkbox
                         v-model="checked"
@@ -884,7 +887,7 @@
                     </b-col>
                   </b-row>
                 </li>
-                <li>{{ $t('businessowner.Report_User') }}</li>
+                <li>{{ $t("businessowner.Report_User") }}</li>
               </ul>
             </div>
           </b-col>
@@ -904,7 +907,9 @@
                       v-model="searchQuery"
                       class="input-background"
                       style="width: 100%"
-                      :placeholder="$t('businessowner.Type_the_name_of_person_or_Business')"
+                      :placeholder="
+                        $t('businessowner.Type_the_name_of_person_or_Business')
+                      "
                       @keydown.enter="getAll(searchQuery)"
                     ></b-form-input>
 
@@ -930,7 +935,7 @@
                               value="accepted"
                               @change="selectedAllMulty"
                             >
-                              {{ $t('businessowner.All') }}
+                              {{ $t("businessowner.All") }}
                             </b-form-checkbox>
                           </b-col>
                           <b-col>
@@ -940,7 +945,7 @@
                               name="people"
                               @change="peopleAllMulty"
                             >
-                              {{ $t('businessowner.People') }}
+                              {{ $t("businessowner.People") }}
                             </b-form-checkbox>
                           </b-col>
 
@@ -951,7 +956,7 @@
                               name="business"
                               @change="businessAllMulty"
                             >
-                              {{ $t('businessowner.Business') }}
+                              {{ $t("businessowner.Business") }}
                             </b-form-checkbox>
                           </b-col>
                           <b-col>
@@ -961,7 +966,7 @@
                               v-model="networkMulty"
                               @change="networkAllMulty"
                             >
-                              {{ $t('businessowner.Network') }}
+                              {{ $t("businessowner.Network") }}
                             </b-form-checkbox>
                           </b-col>
                           <!--
@@ -1000,15 +1005,12 @@
                               class="p-2 message"
                               @click="selectedChat({ chat: biz, id: biz.id })"
                             > -->
-                          <h2> {{ $t('businessowner.All') }}</h2>
+                          <h2>{{ $t("businessowner.All") }}</h2>
                           <tr
                             v-for="(elmt, index) in all"
                             :key="index"
                             class="p-2 message"
                           >
-                            <!-- {{
-                              elmt
-                            }}<br/> -->
                             <td>
                               <b-form-group>
                                 <b-form-checkbox-group
@@ -1070,7 +1072,7 @@
                       variant="primary"
                       @click="$bvModal.show('group-name')"
                       :disabled="selectedMulty.length ? false : true"
-                      >{{ $t('businessowner.Next') }}</b-button
+                      >{{ $t("businessowner.Next") }}</b-button
                     >
                     <!-- <b-button
                       class="float-left"
@@ -1094,14 +1096,21 @@
       <!-- Modals -->
       <!-- create group -->
       <b-modal id="group-name" hide-footer>
-    
-    <div class="d-block text-center">
-      <h3>{{ $t('businessowner.The_Group_Name') }}:</h3>
-      <b-form-input v-model='groupName' id="input-large" size="lg" autofocus :placeholder="$t('businessowner.Enter_your_name')"></b-form-input>
-    </div>
-    
-    <b-button class="mt-3" block @click="selectedMultyChat()">{{ $t('businessowner.Create') }}</b-button>
-  </b-modal>
+        <div class="d-block text-center">
+          <h3>{{ $t("businessowner.The_Group_Name") }}:</h3>
+          <b-form-input
+            v-model="groupName"
+            id="input-large"
+            size="lg"
+            autofocus
+            :placeholder="$t('businessowner.Enter_your_name')"
+          ></b-form-input>
+        </div>
+
+        <b-button class="mt-3" block @click="selectedMultyChat()">{{
+          $t("businessowner.Create")
+        }}</b-button>
+      </b-modal>
     </b-container>
   </div>
 </template>
@@ -1118,7 +1127,6 @@ export default {
   data() {
     return {
       formData: new FormData(),
-      groupMembers: [],
       groupName: "",
       allSelection: true,
       allSelectedMulty: false,
@@ -1151,6 +1159,83 @@ export default {
       showsearch: true,
       selecteduser: false,
       searchQuery: "",
+      resources1: [
+        { title: "ABE Attendance", uri: "aaaa.com", category: "a", icon: null },
+        {
+          title: "Accounting Services",
+          uri: "aaaa.com",
+          category: "a",
+          icon: null,
+        },
+        { title: "Administration", uri: "aaaa.com", category: "a", icon: null },
+        {
+          title: "Advanced Student Lookup",
+          uri: "bbbb.com",
+          category: "b",
+          icon: null,
+        },
+        { title: "Art & Sciences", uri: "bbbb.com", category: "b", icon: null },
+        {
+          title: "Auxiliares Services",
+          uri: "bbbb.com",
+          category: "b",
+          icon: null,
+        },
+        { title: "Basic Skills", uri: "cccc.com", category: "c", icon: null },
+        {
+          title: "Board of Trustees",
+          uri: "dddd.com",
+          category: "d",
+          icon: null,
+        },
+      ],
+      resources: [
+        {
+          name: "blezour blec",
+          profile:
+            "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
+          type: "person",
+          id: "1",
+        },
+        {
+          name: "itz blec blec",
+          profile:
+            "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
+          type: "person",
+          id: "2",
+        },
+
+        {
+          name: "Maxine Moffet",
+          profile:
+            "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
+          type: "person",
+          id: "3",
+        },
+
+        {
+          name: "Alicia kays",
+          profile:
+            "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
+          type: "person",
+          id: "4",
+        },
+
+        {
+          name: "Lorem Ipsum",
+          profile:
+            "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
+          type: "person",
+          id: "5",
+        },
+        {
+          name: "blezour blec",
+          profile:
+            "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
+          type: "person",
+          id: "6",
+        },
+      ],
       message: {},
       newMsg: false,
       show: false,
@@ -1282,7 +1367,6 @@ export default {
       if (this.allSelectedMulty) {
         this.all.map((biz) => {
           this.selectedMulty.push(biz.id);
-          this.groupMembers.push({ type: biz.accountType, id: biz.id });
         });
       } else {
         this.selectedMulty = [];
@@ -1297,7 +1381,6 @@ export default {
       if (this.peopleMulty) {
         this.bizs.map((biz) => {
           this.selectedMulty.push(biz.id);
-          this.groupMembers.push({ type: biz.accountType, id: biz.id });
         });
       } else {
         this.selectedMulty = [];
@@ -1313,11 +1396,9 @@ export default {
       if (this.businessMulty) {
         this.bizs.map((biz) => {
           this.selectedMulty.push(biz.id);
-          this.groupMembers.push({ type: biz.accountType, id: biz.id });
         });
       } else {
         this.selectedMulty = [];
-        this.groupMembers = [];
       }
     },
     networkAllMulty() {
@@ -1330,11 +1411,9 @@ export default {
       if (this.networkMulty) {
         this.bizs.map((biz) => {
           this.selectedMulty.push(biz.id);
-          this.groupMembers.push({ type: biz.accountType, id: biz.id });
         });
       } else {
         this.selectedMulty = [];
-        this.groupMembers = [];
       }
     },
     dismissed() {
@@ -1381,34 +1460,10 @@ export default {
     },
     createGroup(receiver_business_id) {
       // let sender_business_id = this.currentUser.user.id;
-      let membersPeople = this.groupMembers.filter((member) => {
-        return member.type == "people";
-      });
-      let membersBuiness = this.groupMembers.filter((member) => {
-        return member.type == "business";
-      });
-      let membersPeopleIds = [];
-      let membersBusinessIds = [];
-
-      membersPeople.map((biz) => {
-        membersPeopleIds.push(biz.id);
-      });
-      membersBuiness.map((biz) => {
-        membersBusinessIds.push(biz.id);
-      });
-      console.log("members: ", this.groupMembers);
-      console.log("Business: ", membersBuiness);
-      console.log("People: ", membersPeople);
-
       let sender_business_id = this.currentBizId;
       this.room = [sender_business_id, ...this.selectedMulty];
       console.log("ROOMS: ", this.room);
       this.socket.emit("create-group", sender_business_id);
-      this.$store.dispatch("businessChat/CREATE_GROUP", {
-        groupName: this.groupName,
-        userID: membersPeopleIds,
-        businessID: membersBusinessIds,
-      });
     },
     createRoom(receiver_business_id) {
       // let sender_business_id = this.currentUser.user.id;
@@ -1478,17 +1533,10 @@ export default {
     },
     saveMessage(data) {
       console.log("[DEBUG SAVE]", { data: data, type: this.type });
-      if (this.type == "group") {
-        this.$store.dispatch("businessChat/SAVE_GROUP_CHAT", {
+      this.$store.dispatch("businessChat/SAVE_BUSINESS_CHAT", {
         data: data,
         type: this.type,
       });
-      } else {
-        this.$store.dispatch("businessChat/SAVE_BUSINESS_CHAT", {
-        data: data,
-        type: this.type,
-      });
-      }
     },
     selectedMultyChat() {
       this.$bvModal.hide("group-name");

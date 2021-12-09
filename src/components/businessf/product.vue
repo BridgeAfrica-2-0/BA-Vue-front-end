@@ -1,6 +1,6 @@
 <template>
   <div>
-    <FlashMessage />
+    
     <div class="people-style p-3 shadow">
       <b-row>
         <b-col cols="5" lg="4" sm="4" md="5">

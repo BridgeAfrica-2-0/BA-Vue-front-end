@@ -1,6 +1,6 @@
 <template>
   <section class="footer">
-    <div class="container">
+     <!-- <div class="container">
       <div class="row">
         <div class="col-md-3 py-4">
           <div class="d-flex position-relative">
@@ -75,7 +75,86 @@
           </p>
         </div>
       </div>
-    </div>
+    </div>  -->
+ 
+    <footer id="footer">
+      <div class="footer-top black-back">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-3 col-md-6 footer-contact">
+              <div class="row">
+                <div class="col-6">
+                  <img src="../..//assets/img/logobr.png" width="200px" alt="" />
+                </div>
+
+                <div class="col-6 bblogo">Bridge Africa</div>
+              </div>
+
+              <div class="social-links mt-3 text-left">
+                <a href="#" class="twitter bridge-icon"
+                  ><i class="bx bxl-twitter"></i
+                ></a>
+                <a href="#" class="facebook bridge-icon"
+                  ><i class="bx bxl-facebook"></i
+                ></a>
+                <a href="#" class="instagram bridge-icon"
+                  ><i class="bx bxl-instagram"></i
+                ></a>
+
+                <a href="#" class="youtube bridge-icon"
+                  ><i class="bx bxl-youtube"></i
+                ></a>
+              </div>
+
+              <br />
+
+              <span style="float: left">
+                <span style="color: #e75c18">©2021</span> Bridge Africa
+              </span>
+            </div>
+
+            <div class="col-lg-3 col-md-6 footer-links">
+              <h4 class="bridge-header text-left white">{{ $t('home.OUR_ADRESSE') }}</h4>
+              <ul class="text-left white">
+                <li>{{ $t('home.International_Handicraft_Center') }}, {{ $t('home.Rond_point_Intendance') }}</li>
+
+                <li>{{ $t('home.Yaounde') }}</li>
+
+                <li>{{ $t('home.Cameroon') }}</li>
+              </ul>
+            </div>
+
+            <div class="col-lg-3 col-md-6 footer-links white">
+              <h4 class="bridge-header text-left white">{{ $t('home.USEFULL_LINKS') }}</h4>
+              <ul class="white">
+                <li class="white"><a href="#">Bridgeafricaventures.com</a></li>
+
+                <li class="white"><a href="#">{{ $t('home.Home') }}</a></li>
+
+                <li class="white">
+                  <router-link :to="{name: 'about'}">{{ $t('home.About_Us') }}</router-link>
+                </li>
+
+                <li class="white">
+                  <router-link :to="{name: 'contact'}">{{ $t('home.Contact_Us') }}</router-link>
+                </li>
+
+              
+              </ul>
+            </div>
+
+            <div class="col-lg-3 col-md-6 footer-links">
+              <h4 class="bridge-header text-left white">{{ $t('home.WORKING_HOURS') }}</h4>
+              <ul class="white">
+                <li>{{ $t('home.Monday') }}-{{ $t('home.Friday') }}: {{ $t('home.09AM_05PM') }}</li>
+
+                <li>{{ $t('home.Saturday') }}: {{ $t('home.09AM_01PM') }}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
   </section>
 </template>
 

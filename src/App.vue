@@ -1,6 +1,8 @@
 .<template>
   <div id="app" class="" ref="formContainer">
-    <div id="flashmessage"> <FlashMessage/> </div>
+    <div id="flashmessage">
+      <FlashMessage/> 
+    </div>
 
     <transition
       name="fade"
@@ -9,15 +11,14 @@
       @enter="enter"
       @afterEnter="afterEnter"
     >
-     <router-view />
+      <router-view />
     </transition>
-   <FlashMessage/>
   </div>
 </template>
 <script>
-import { Redis } from "@/mixins";
+// import { Redis } from "@/mixins";
 export default {
-  mixins: [Redis],
+  // mixins: [Redis],
 
   data() {
     return {
@@ -75,7 +76,7 @@ export default {
   color: #2c3e50;
   margin-left: 5px;
 }
-#flashmessage{
+#flashmessage {
   z-index: 9999 !important;
 }
 .primary {

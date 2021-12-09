@@ -1,6 +1,6 @@
 <template>
   <div>
-    <FlashMessage />
+    
    
 
     <!-- User Posts Listing Section-->

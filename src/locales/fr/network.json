@@ -244,12 +244,9 @@
     "Unable to Assigned New Role":"Impossible d'assigner un nouveau rôle",
     "Editor_Deleted":"Éditeur supprimé",
     "Unable_To_Delete_Editor":"Impossible de supprimer l'éditeur",
-    "Settings":"Paramètres",
     "Mapoure_Agrobusiness":"Mapoure Agrobusiness",
-    "Approve":"Approuver",
     "Reject":"Rejeter",
     "Feedback_Type":"type de commentaire",
-    "Private":"Privé",
     "community":"communauté",
     "lire_la_Suite":"lire la Suite",
     "Edit_network":"Modifier le réseau",
@@ -269,11 +266,10 @@
     "Image_Uploaded_Successfuly":"Image téléchargée avec succès",
     "Membership_Requests":"Demandes d'adhésion",
     "Pending":"En attente",
-    "Search_Something":"Rechercher quelque chose",
     "Send_Request":"Envoyer la demande",
     "K_Follower":" 5K abonné",
     "Your_3_Posts_are_pending_for_approval":"Vos 3 publication sont en attente d'approbation",
-    "View_All":"voir tout",
+    
 
     "Ticket_Support":"Support technique",
     "Intergration":"Intégration",
@@ -289,8 +285,6 @@
     "Premium_Support":"Support Premium",
     "email_phone":"courriel, téléphone",
     "Create_Post":"Créer un poste",
-    "Do_you_want_to_join_this_network":"Voulez-vous rejoindre ce réseau",
-   "Read_More":"lire la Suite",
-   "Direction":"Direction"
+    "Do_you_want_to_join_this_network":"Voulez-vous rejoindre ce réseau"
 
 }

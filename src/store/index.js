@@ -51,8 +51,14 @@ import { social } from './social';
 
 Vue.use(Vuex);
 
+<<<<<<< HEAD
 
 axios.defaults.baseURL = pricess.VUE_APP_URL;
+=======
+// axios.defaults.baseURL = "https://team4.maxinemoffett.com/api/v1/";
+//axios.defaults.baseURL = process.env.VUE_APP_API_URL;
+axios.defaults.baseURL = process.env.VUE_APP_API_URL;
+>>>>>>> 11768755b6a6b08baa1f37e3c3bf8bf18f377f29
 
 
 
@@ -103,4 +109,4 @@ export default new Vuex.Store({
         cart
 
     }
-});
+})

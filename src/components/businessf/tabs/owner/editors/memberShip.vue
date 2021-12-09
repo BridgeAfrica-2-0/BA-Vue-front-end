@@ -114,7 +114,7 @@
         </b-col>
       </b-row>
 
-      <FlashMessage />
+      
     </div>
   </b-container>
 </template>

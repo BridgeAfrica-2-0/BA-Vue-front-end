@@ -1,6 +1,5 @@
 <template>
   <div>
-    <FlashMessage style="z-index: 99999" :position="'right top'" />
     <div class="fl mb-3">
       <label for="datepicker-dateformat1">{{$t("search.Posted_Date")}}</label>
       <b-form-datepicker
@@ -155,13 +154,6 @@
           </b-card>
         </b-collapse>
         <!--end network section-->
-        <!--<Button
-          @click.native="onProcess"
-          :title="$t('search.Search')"
-          class="mt-4"
-          fas="fas fa-search  fa-lg btn-icon"
-          style="align-items: center"
-        /> -->
       </b-card>
     </b-collapse>
   </div>
@@ -172,8 +164,6 @@ import _ from "lodash";
 
 import { mapActions, mapGetters } from "vuex";
 
-//import Button from "@/components/Button";
-
 const options = [
   { text: "Follower", value: "Follower" },
   { text: "Following", value: "Following" },
@@ -181,9 +171,7 @@ const options = [
 ];
 
 export default {
-  /* components: {
-    Button,
-  },*/
+ 
   data: () => ({
     created_at: null,
     isRecentPost: false,

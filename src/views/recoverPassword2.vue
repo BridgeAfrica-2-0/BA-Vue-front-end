@@ -35,11 +35,7 @@
         </div>
       </b-card>
     </div>
-<<<<<<< HEAD
   
-=======
-    
->>>>>>> 11768755b6a6b08baa1f37e3c3bf8bf18f377f29
   </b-container>
 </template>
 

@@ -486,7 +486,7 @@ f-right {
     text-overflow: ellipsis;
     overflow: hidden;
     width: 100%;
-    height: 1.2em;
+    height: 1.7em;
     white-space: nowrap;
   }
 

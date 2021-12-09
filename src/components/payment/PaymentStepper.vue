@@ -119,19 +119,19 @@ export default {
     };
   },
   computed: {
-    progress: function() {
+    progress: function () {
       return Math.round(100 / this.max_step) * this.current_step;
     },
   },
   methods: {
-    onClickNext: function() {
+    onClickNext: function () {
       this.changeStatusProgress(this.current_step, this.current_step + 1);
       this.current_step++;
     },
-    onClickBack: function() {
+    onClickBack: function () {
       this.current_step--;
     },
-    onClickFirst: function() {
+    onClickFirst: function () {
       this.current_step = 1;
     },
     handleSwitchStep(step) {

@@ -505,6 +505,7 @@ export default {
   width: 266px !important;
   height: 266px !important;
 }
+
 .botmediadess-position {
   text-align: center;
   bottom: -45%;

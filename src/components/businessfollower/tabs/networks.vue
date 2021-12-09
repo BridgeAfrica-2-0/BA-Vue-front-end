@@ -87,7 +87,7 @@
     </div>
 
     <b-modal hide-footer :title="editNet ? 'Edit network' : 'Add Network'" size="lg" v-model="showModal" ref="netmodal">
-      <FlashMessage />
+      
       <b-container>
         <b-form>
           <div v-if="!editNet" class="row sub-sidebar-2 pending-post-view mt-4 pb-0">

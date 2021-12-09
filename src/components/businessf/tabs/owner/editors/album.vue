@@ -72,7 +72,7 @@
               </ul>
             </div>
           </div>
-         <FlashMessage />
+         
       </div>
     </div>
   </div>

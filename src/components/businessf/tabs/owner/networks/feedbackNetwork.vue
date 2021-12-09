@@ -165,6 +165,7 @@ export default {
         console.log(data);
         console.log(this.currentPage);
         if (data.data.length) {
+          console.log("push new data");
           this.currentPage += 1;
           console.log(this.currentPage);
           console.log(...data.data);
@@ -172,6 +173,7 @@ export default {
           this.loading = false;
           $state.loaded();
         } else {
+          console.log("no more data");
           this.loading = false;
           $state.complete();
         }

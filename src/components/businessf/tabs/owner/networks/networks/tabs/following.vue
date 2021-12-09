@@ -33,7 +33,8 @@
             </b-card>
           </template>
         <div style="display:none;">{{member['communityNum'] = nFormatter(member.followers)}}</div>
-        <CommunityNetworks :member="member" @BlockUser="BlockUser" />
+        <div style="display:none;">{{member['type'] = "network"}}</div>
+        <CommunityNetworks :member="member" @BlockUser="BlockUser" @handleFollow="handleFollow" />
         </b-skeleton-wrapper>
       </b-col>
     </b-row>
@@ -159,7 +160,25 @@ export default {
           message: "Unable to blocked User"
         });
       });
-    }
+    },
+    async handleFollow(Comdata) {
+      console.log("handleFollow", Comdata)
+      const url = Comdata.is_follow === 0 ? `/follow-community` : `/unfollow`;
+      console.log("uri", url)
+      const nextFollowState = Comdata.is_follow === 0 ? 1 : 0;
+      const data = {
+        id: Comdata.id,
+        type: Comdata.type,
+      };
+
+      await this.axios
+        .post(url, data)
+        .then(response => {
+          console.log("response", response);
+          Comdata.is_follow = nextFollowState;
+        })
+        .catch(err => console.log(err));
+    },
 
   }
 };

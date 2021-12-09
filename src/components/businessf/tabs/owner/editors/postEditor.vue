@@ -276,6 +276,7 @@
       :businessLogo="item.profile_picture"
       :editPost="() => editPost(item)"
       :deletePost="() => deletePost(item)"
+      
     />
 
     <infinite-loading @infinite="infiniteHandler"></infinite-loading>

@@ -1,33 +1,39 @@
 <template>
   <div>
-
-    <div v-for="business in businesses" :key="business.id"  class="people-style shadow">
+    <div
+      v-for="business in businesses"
+      :key="business.id"
+      class="people-style shadow"
+    >
       <b-row>
         <b-col md="3" xl="5" lg="5" cols="5" sm="3">
           <div class="center-img">
             <splide :options="options" class="r-image">
               <splide-slide cl>
-                <img
-                  :src="business.logo_path"
-                  class="r-image"
-                />
+                <img :src="business.logo_path" class="r-image" />
               </splide-slide>
             </splide>
           </div>
         </b-col>
         <b-col md="5" cols="7" lg="7" xl="7" sm="5">
           <p class="textt">
-            <strong class="title"> {{business.name}} </strong> <br />
-            {{business.category}}
+            <strong class="title"> {{ business.name }} </strong> <br />
+            {{ business.category }}
             <br />
-            {{business.followers}} {{ $t('memnetwork.Community') }} <br />
+            {{ business.followers }} {{ $t("memnetwork.Community") }} <br />
 
             <span class="location">
-              <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{business.location_description}}
+              <b-icon-geo-alt class="ico"></b-icon-geo-alt>
+              {{ business.location_description }}
             </span>
             <br />
-            <span v-if="business.about_business.length<65">{{ business.about_business}}</span>
-            <span v-else >{{ business.about_business.substring(0,65)+"..." }} <b-link>{{ $t('memnetwork.Read_More') }}</b-link></span>
+            <span v-if="business.about_business.length < 65">{{
+              business.about_business
+            }}</span>
+            <span v-else
+              >{{ business.about_business.substring(0, 65) + "..." }}
+              <b-link>{{ $t("memnetwork.Read_More") }}</b-link></span
+            >
           </p>
         </b-col>
 
@@ -49,7 +55,7 @@
                   variant="primary"
                 >
                   <i class="fas fa-user-plus fa-lg btn-icon"></i>
-                  <span class="btn-com">{{ $t('memnetwork.Community') }}</span>
+                  <span class="btn-com">{{ $t("memnetwork.Community") }}</span>
                 </b-button>
               </b-col>
 
@@ -61,15 +67,7 @@
                 cols="4"
                 class="mt-2 text-center"
               >
-                <b-button
-                  block
-                  size="sm"
-                  class="b-background shadow"
-                  variant="primary"
-                >
-                  <i class="fas fa-envelope fa-lg btn-icon"></i>
-                  <span class="btn-text">{{ $t('memnetwork.Message') }}</span>
-                </b-button>
+                <BtnCtaMessage :element="business" type="business" />
               </b-col>
 
               <b-col
@@ -87,7 +85,7 @@
                   variant="primary"
                 >
                   <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
-                  <span class="btn-text">{{ $t('memnetwork.Direction') }}</span>
+                  <span class="btn-text">{{ $t("memnetwork.Direction") }}</span>
                 </b-button>
               </b-col>
             </b-row>
@@ -95,8 +93,6 @@
         </b-col>
       </b-row>
     </div>
-
-    
   </div>
 </template>
 
@@ -117,8 +113,6 @@ export default {
       },
     };
   },
-
-
 };
 </script>
 

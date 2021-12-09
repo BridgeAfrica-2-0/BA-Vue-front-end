@@ -1,31 +1,26 @@
 <template>
   <div>
     <b-modal id="modal-sm" size="sm" hide-header>
-      {{ $t('profilefollower.Do_you_want_to_join_this_network') }}
+      {{ $t("profilefollower.Do_you_want_to_join_this_network") }}
     </b-modal>
 
-
-      
-
-          <div class="people-style shadow"  v-for="item in network" :key="item.id">
+    <div class="people-style shadow" v-for="item in network" :key="item.id">
       <b-row>
         <b-col md="3" xl="5" lg="5" cols="5" sm="3">
-         
-            <div class="center-img">
+          <div class="center-img">
             <img :src="item.picture" class="r-image" />
-          </div>   
-        
+          </div>
         </b-col>
 
-        
         <b-col md="5" cols="7" lg="7" xl="7" sm="5">
           <p class="textt">
             <strong class="title"> {{ item.name }} </strong> <br />
             {{ item.category }}
             <br />
-           {{ item.followers }} {{ $t('profilefollower.Community') }}<br />
+            {{ item.followers }} {{ $t("profilefollower.Community") }}<br />
 
-           {{ item.about_network }} <b-link>{{ $t('profilefollower.Read_More') }}</b-link>
+            {{ item.about_network }}
+            <b-link>{{ $t("profilefollower.Read_More") }}</b-link>
           </p>
         </b-col>
 
@@ -39,22 +34,35 @@
                 sm="12"
                 cols="4"
                 class="mt-2 text-center"
-              >  
-
-                
-               <b-button
+              >
+                <b-button
                   block
                   size="sm"
                   :disabled="disable"
-                   :id="'followbtn'+item.id"
+                  :id="'followbtn' + item.id"
                   :class="item.is_follow !== 0 && 'u-btn'"
                   variant="primary"
                   @click="handleFollow(item)"
                 >
-                 
-                  <i class="fas fa-lg btn-icon" :class="item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"></i>
-                  <span class="btn-com"> {{ $t('dashboard.Community') }}</span>
+                  <i
+                    class="fas fa-lg btn-icon"
+                    :class="
+                      item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'
+                    "
+                  ></i>
+                  <span class="btn-com"> {{ $t("dashboard.Community") }}</span>
                 </b-button>
+              </b-col>
+
+              <b-col
+                md="12"
+                lg="4"
+                xl="4"
+                sm="12"
+                cols="4"
+                class="mt-2 text-center"
+              >
+                <BtnCtaMessage :element="item" type="network" />
               </b-col>
 
               <b-col
@@ -68,30 +76,13 @@
                 <b-button
                   block
                   size="sm"
-                  class="b-background shadow "
+                  class="b-background shadow"
                   variant="primary"
                 >
-                  <i class="fas fa-envelope   fa-lg btn-icon "></i>
-                  <span class="btn-text">{{ $t('profilefollower.Message') }}</span>
-                </b-button>
-              </b-col>
-
-              <b-col
-                md="12"
-                lg="4"
-                xl="4"
-                sm="12"
-                cols="4"
-                class="mt-2 text-center"
-              >
-                <b-button
-                  block
-                  size="sm"
-                  class="b-background shadow "
-                  variant="primary"
-                >
-                  <i class="fas fa-map-marked-alt  fa-lg btn-icon "></i>
-                  <span class="btn-text">{{ $t('profilefollower.Direction') }}</span>
+                  <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
+                  <span class="btn-text">{{
+                    $t("profilefollower.Direction")
+                  }}</span>
                 </b-button>
               </b-col>
             </b-row>
@@ -100,20 +91,18 @@
       </b-row>
     </div>
 
-   
-  <infinite-loading @infinite="infiniteHandler"></infinite-loading>  
+    <infinite-loading @infinite="infiniteHandler"></infinite-loading>
   </div>
 </template>
 
 <script>
-
 import axios from "axios";
- 
+
 export default {
   props: ["type"],
   data() {
     return {
-      foll_id: '',
+      foll_id: "",
       page: 1,
       options: {
         rewind: true,
@@ -122,117 +111,87 @@ export default {
         pagination: false,
 
         type: "loop",
-        perMove: 1
-      }
+        perMove: 1,
+      },
     };
   },
 
-mounted(){
-  
-  this.foll_id = this.$route.params.id;
-
- },
+  mounted() {
+    this.foll_id = this.$route.params.id;
+  },
   computed: {
-   
-        network(){
-
-      if(this.type=="Follower"){ 
-
-      return  this.$store.state.profile.NcommunityFollower.network_followers;  
-
-       }else{
-
-         return  this.$store.state.profile.NcommunityFollowing.network_following; 
-       }
-   }
-   
+    network() {
+      if (this.type == "Follower") {
+        return this.$store.state.profile.NcommunityFollower.network_followers;
+      } else {
+        return this.$store.state.profile.NcommunityFollowing.network_following;
+      }
+    },
   },
 
-
-
-
-   methods:{
-      
- async handleFollow(user) {
-       document.getElementById("followbtn"+user.id).disabled = true;
+  methods: {
+    async handleFollow(user) {
+      document.getElementById("followbtn" + user.id).disabled = true;
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
         id: user.id,
-        type: 'network',
+        type: "network",
       };
 
       await axios
         .post(uri, data)
-        .then(response => {
+        .then((response) => {
           user.is_follow = nextFollowState;
-           document.getElementById("followbtn"+user.id).disabled =  false;
+          document.getElementById("followbtn" + user.id).disabled = false;
         })
-        .catch(err =>{   console.log(err)
-         document.getElementById("followbtn"+user.id).disabled =  false;
+        .catch((err) => {
+          console.log(err);
+          document.getElementById("followbtn" + user.id).disabled = false;
         });
     },
 
-
-
-     
-      infiniteHandler($state) {
-
-        console.log("loading network 1 1")
+    infiniteHandler($state) {
+      console.log("loading network 1 1");
 
       let url = null;
 
-         if(this.type=="Follower"){  
-          url="profile/network/follower/"
-         }else{
-          url="profile/network/following/";
-         }
+      if (this.type == "Follower") {
+        url = "profile/network/follower/";
+      } else {
+        url = "profile/network/following/";
+      }
       axios
-        .get(url + this.page+"?id="+this.foll_id)   
+        .get(url + this.page + "?id=" + this.foll_id)
         .then(({ data }) => {
-          console.log("lading network after response")
+          console.log("lading network after response");
           console.log(data);
-        if(this.type=="Follower"){
-         
+          if (this.type == "Follower") {
+            if (data.data.network_followers.length) {
+              this.page += 1;
+              this.network.push(...data.data.network_followers);
 
-          if (data.data.network_followers.length) {
-            this.page += 1;
-            this.network.push(...data.data.network_followers);
-            
-            
-            $state.loaded();
-           }else{
+              $state.loaded();
+            } else {
               $state.complete();
-           }
-
-
+            }
           } else {
-            
+            if (data.data.network_following.length) {
+              this.page += 1;
 
+              this.network.push(...data.data.network_following);
 
-             if (data.data.network_following.length) {
-            this.page += 1;
-      
-            this.network.push(...data.data.network_following);
-            
-            
-            $state.loaded();
-           }else{
+              $state.loaded();
+            } else {
               $state.complete();
-           }
-
-
-
+            }
           }
-        }) 
+        })
         .catch((err) => {
           console.log({ err: err });
         });
     },
-
-  } ,
-
- 
+  },
 };
 </script>
 

@@ -109,15 +109,11 @@
 </template>
 
 <script>
-import BtnCtaMessage from "@/components/messagesCTA/Btn-cta-message";
-
 import axios from "axios";
 
 export default {
   props: ["type"],
-  components: {
-    BtnCtaMessage,
-  },
+
 
   data() {
     return {

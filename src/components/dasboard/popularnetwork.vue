@@ -91,13 +91,10 @@
 </template>
 
 <script>
-import BtnCtaMessage from "@/components/messagesCTA/Btn-cta-message";
 import axios from "axios";
 export default {
   props: ["title", "image"],
-  components: {
-    BtnCtaMessage,
-  },
+
   data() {
     return {
       page: 1,

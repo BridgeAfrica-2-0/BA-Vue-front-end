@@ -31,12 +31,26 @@
                         class="mt-2 mt-lg-1 mt-xl-2"
                       >
                         <h6 class="follower m-15">
-                          {{  member.communityNum }}
-                          {{ $t('network.Community') }}
+                          {{ member.communityNum }}
+                          {{ $t("network.Community") }}
                         </h6>
                       </b-col>
-                      <b-col @click="$emit('BlockUser', member.id)" md="6" lg="12" cols="6" xl="12" class="mt-1 mt-lg-1 mt-xl-2" style="cursor:pointer;">
-                        <b-icon font-scale="1" icon="exclamation-octagon" v-b-tooltip.hover title="Block This User" variant="danger"></b-icon>
+                      <b-col
+                        @click="$emit('BlockUser', member.id)"
+                        md="6"
+                        lg="12"
+                        cols="6"
+                        xl="12"
+                        class="mt-1 mt-lg-1 mt-xl-2"
+                        style="cursor: pointer"
+                      >
+                        <b-icon
+                          font-scale="1"
+                          icon="exclamation-octagon"
+                          v-b-tooltip.hover
+                          title="Block This User"
+                          variant="danger"
+                        ></b-icon>
                       </b-col>
                     </b-row>
                   </div>
@@ -52,15 +66,7 @@
                         xl="12"
                         class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
                       >
-                        <b-button
-                          block
-                          variant="primary"
-                          size="sm"
-                          class="b-background flexx pobtn shadow"
-                        >
-                          <i class="fas fa-envelope fa-lg btn-icon"></i>
-                          <span class="btn-text">{{ $t('network.Message') }}</span>
-                        </b-button>
+                        <BtnCtaMessage :element="member" type="people" />
                       </b-col>
 
                       <b-col
@@ -73,11 +79,23 @@
                         <b-button
                           block
                           size="sm"
-                          :class="member.is_follow ? 'b-background flexx pobtn shadow communityBntStatus' : 'b-background flexx pobtn shadow'"
+                          :class="
+                            member.is_follow
+                              ? 'b-background flexx pobtn shadow communityBntStatus'
+                              : 'b-background flexx pobtn shadow'
+                          "
                           variant="primary"
                           @click="$emit('handleFollow', member)"
-                        ><i :class="member.is_follow ? 'fas fa-user-minus fa-lg btn-icon':'fas fa-user-plus fa-lg btn-icon'"></i>
-                          <span class="btn-com">{{ $t('network.Community') }}</span>
+                          ><i
+                            :class="
+                              member.is_follow
+                                ? 'fas fa-user-minus fa-lg btn-icon'
+                                : 'fas fa-user-plus fa-lg btn-icon'
+                            "
+                          ></i>
+                          <span class="btn-com">{{
+                            $t("network.Community")
+                          }}</span>
                         </b-button>
                       </b-col>
                     </b-row>
@@ -99,7 +117,7 @@ export default {
 </script>
 
 <style scoped>
-.communityBntStatus{
+.communityBntStatus {
   background-color: #420942;
 }
 @media only screen and (min-width: 768px) {

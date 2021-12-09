@@ -9,16 +9,21 @@
           <b-row>
             <b-col sm="12" md="4" v-for="i in 12" :key="i" class="mb-2">
               <b-list-group-item class="d-flex align-items-center">
-                <b-avatar variant="info" src="https://placekitten.com/300/300" class="mr-3"></b-avatar>
+                <b-avatar
+                  variant="info"
+                  src="https://placekitten.com/300/300"
+                  class="mr-3"
+                ></b-avatar>
                 <span class="mr-auto">Super Kitty</span>
-                <b-button variant="outline-primary" class="mb-2 ml-2" size="sm">
-                  <b-icon icon="chat-dots-fill" aria-hidden="true"></b-icon>
-                  <span class="show">Message</span>
-                </b-button>
+                <BtnCtaMessage :element="item" type="business" />
               </b-list-group-item>
 
               <b-list-group-item class="d-flex align-items-center">
-                <b-avatar variant="info" src="https://placekitten.com/300/300" class="mr-3"></b-avatar>
+                <b-avatar
+                  variant="info"
+                  src="https://placekitten.com/300/300"
+                  class="mr-3"
+                ></b-avatar>
                 <span class="mr-auto">Super Kitty</span>
                 <b-button variant="outline-primary" class="mb-2 ml-2" size="sm">
                   <b-icon icon="person-plus-fill" aria-hidden="true"></b-icon>
@@ -32,16 +37,21 @@
           <b-row>
             <b-col sm="12" md="4" v-for="i in 12" :key="i" class="mb-2">
               <b-list-group-item class="d-flex align-items-center">
-                <b-avatar variant="info" src="https://placekitten.com/300/300" class="mr-3"></b-avatar>
+                <b-avatar
+                  variant="info"
+                  src="https://placekitten.com/300/300"
+                  class="mr-3"
+                ></b-avatar>
                 <span class="mr-auto">Super Kitty</span>
-                <b-button variant="outline-primary" class="mb-2 ml-2" size="sm">
-                  <b-icon icon="chat-dots-fill" aria-hidden="true"></b-icon>
-                  <span class="show">Message</span>
-                </b-button>
+                <BtnCtaMessage :element="item" type="business" />
               </b-list-group-item>
 
               <b-list-group-item class="d-flex align-items-center">
-                <b-avatar variant="info" src="https://placekitten.com/300/300" class="mr-3"></b-avatar>
+                <b-avatar
+                  variant="info"
+                  src="https://placekitten.com/300/300"
+                  class="mr-3"
+                ></b-avatar>
                 <span class="mr-auto">Super Kitty</span>
                 <b-button variant="outline-primary" class="mb-2 ml-2" size="sm">
                   <b-icon icon="person-plus-fill" aria-hidden="true"></b-icon>
@@ -58,7 +68,7 @@
 
 <script>
 export default {
-  name: 'following',
+  name: "following",
 };
 </script>
 

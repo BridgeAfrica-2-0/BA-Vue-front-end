@@ -10,9 +10,12 @@
         alt="media_img"
         v-b-modal="`modal-${im.id}`"
         v-bind="imageProps"
+        style="width: 269px;height: 269px;"
+
       ></b-img>
     </a>
     <video
+      style="width: 269px;height: 269px;"
       controls
       v-else-if="typeOfMedia() == 'video' && !loading"
       class="card-img btn p-0 album-img"
@@ -20,6 +23,7 @@
       <source :src="getFullMediaLink()" />
     </video>
     <youtube
+      style="width: 269px;height: 269px;"
       class="card-img btn p-0 album-img"
       v-if="typeOfMedia == 'youtube' && !loading"
       :video-id="getYoutubeKey()"

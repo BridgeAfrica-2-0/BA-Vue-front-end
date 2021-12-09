@@ -24,7 +24,7 @@
 
 
              <b-avatar v-if="info.user.profile_picture ==null "
-               src="https://placekitten.com/400/300"
+                :src="info.user.profile_picture"
               class=" float-left avatar"
               badge-variant="primary"
               badge-offset="10px"
@@ -40,18 +40,18 @@
             </b-link>
             <br />
 
-            <span class="k15 duration"> 0{{info.user.community}} {{ $t('profilefollower.Community') }} </span>
+            <span class="k15 duration"> {{info.user.community}} {{ $t('profilefollower.Community') }} </span>
           </div>
         </b-col>
         <b-col cols="12">
           <div class="btns">
-            <b-button class="community size">
-              <i class="fas fa-user-plus  fa-lg btn-icon m-fa mr-0 "></i>
+            <b-button class="community size mr-2 ml-1">
+              <i class="fas fa-user-plus  fa-lg btn-icon m-fa mr-2 "></i>
               <span class="txt-btn ">{{ $t('profilefollower.Community') }}</span></b-button
             >
-            <b-button class="message size ml-1">
+            <b-button class="message size mr-2 ml-1">
               <i class="fas fa-envelope fa-lg btn-icon "></i>
-              <span class="txt-btn">{{ $t('profilefollower.Message') }}</span></b-button
+              <span class="txt-btn ">{{ $t('profilefollower.Message') }}</span></b-button
             >
 
             <b-dropdown
@@ -79,7 +79,7 @@
         <b-col>
           <div>
             <b-avatar
-              src="https://placekitten.com/400/300"
+               :src="info.user.profile_picture"
               class=" float-left avatar"
               badge-variant="primary"
               badge-offset="10px"
@@ -121,9 +121,12 @@
         <span class="txt-btn">{{ $t('profilefollower.Message') }}</span>
       </b-button>
 
+     
+
+
       <b-button class="direction ml-1 size" size="sm">
         <i class="fas fa-user-plus  fa-lg btn-icon "></i>
-        <span class="txt-btn">{{ $t('profilefollower.Community') }}</span></b-button
+        <span class="txt-btn">{{ $t('dashboard.Community') }} </span></b-button
       >
 
   
@@ -135,11 +138,14 @@
           <b-tabs lazy content-class="mt-3" fill pills>
             <b-tab :title="$t('profilefollower.Posts')" active>
               <Post />
-            </b-tab>
+            </b-tab>   
+
+
+            
             <b-tab :title="$t('profilefollower.About')"><About /></b-tab>
             <b-tab :title="$t('profilefollower.Business')"><Businesses /></b-tab>
             <b-tab :title="$t('profilefollower.Network')"><Network /></b-tab>
-            <b-tab :title="$t('profilefollower.Media')"><Media /></b-tab>
+            <b-tab :title="$t('profilefollower.Media')"><Media type="profile" /></b-tab>
             <b-tab :title="$t('profilefollower.Community')"><Community /></b-tab>
           </b-tabs>
         </b-col>
@@ -149,14 +155,19 @@
 </template>
 
 <script>
-import Post from "@/components/follower/tabs/posts";
+import Post from '@/components/businessfollower/tabs/posts';
 import About from "@/components/follower/tabs/about";
-import Media from "@/components/follower/tabs/media";
+import Media from '@/components/businessfollower/tabs/media';
 import Community from "@/components/follower/tabs/community";
 import Businesses from "@/components/follower/tabs/businesses";
 import Network from "@/components/follower/tabs/networkk";
 
+import {knowWhoIsConnected} from "@/mixins"
+
+
+
 export default {
+   mixins:[knowWhoIsConnected],
   name: "Home",
   data() {
     return {
@@ -474,8 +485,8 @@ p,
     margin: 5px;
   }
   .size {
-    width: 100px;
-    height: 28px;
+    width: 120px;
+    height: 30px;
   }
   .banner {
     height: 168px;

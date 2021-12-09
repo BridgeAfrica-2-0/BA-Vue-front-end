@@ -154,7 +154,7 @@
       ></b-form-input>
     </b-modal>
 
-    <FlashMessage />
+    
     
   </div>
 </template>

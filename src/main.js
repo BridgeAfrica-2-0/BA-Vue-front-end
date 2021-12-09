@@ -1,9 +1,12 @@
+
 import Vue from 'vue';
 import App from './App.vue';
 import './registerServiceWorker';
 import router from './router';
 import store from './store';
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue';
+
+
 import axios from 'axios';
 import VueAxios from 'vue-axios';
 import VueGallerySlideshow from 'vue-gallery-slideshow';
@@ -39,14 +42,15 @@ Vue.use(VueAxios, axios);
 
 import LoadScript from 'vue-plugin-load-script';
 import InfiniteLoading from 'vue-infinite-loading';
-
+import VueAnimateOnScroll from 'vue-animate-onscroll'
+Vue.use(VueAnimateOnScroll)
 Vue.use(InfiniteLoading, {
     /* options */
     slots: {
         noMore: '',
         error: "",
-        noResults:"",
-      },
+        noResults: "",
+    },
 });
 Vue.use(LoadScript);
 
@@ -174,6 +178,10 @@ import VueAgile from 'vue-agile';
 Vue.use(VueAgile);
 
 
+import TextareaAutosize from 'vue-textarea-autosize'
+Vue.use(TextareaAutosize)
+
+
 import CoolLightBox from 'vue-cool-lightbox';
 import 'vue-cool-lightbox/dist/vue-cool-lightbox.min.css';
 
@@ -230,7 +238,8 @@ new Vue({
 
 
 
-            config.headers.common['Language'] = i18n.locale;
+            // config.headers.common['Language'] = i18n.locale;
+            config.headers.common['Language'] = "en";
 
             return config;
         });

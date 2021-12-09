@@ -1,7 +1,5 @@
 <template>
-<div>{{business}}</div>
-  <!-- <b-container v-if="business_form">
-
+  <b-container v-if="business_form">
     <div class="b-bottomn">
       <b-button variant="primary" class="a-button-l" @click="updateGeneralInfo()">
         <b-spinner v-if="SPupdateGeneralInfo" small type="grow"></b-spinner> {{ $t('businessowner.Save_Changes') }}
@@ -151,7 +149,7 @@
     <div class="text-center">
       <b-spinner variant="primary" style="width: 3rem; height: 3rem;" label="Large Spinner Text Centered"></b-spinner>
     </div>
-  </b-container> -->
+  </b-container>
 </template>
 
 <script>
@@ -178,7 +176,6 @@ export default {
   },
   
   computed: {
-
     business() {
       return this.$store.state.businessGeneral.business;
     }
@@ -205,17 +202,18 @@ export default {
     },
 
     getBusiness() {
+      console.log("getBusiness")
     this.$store
-      .dispatch("businessGeneral/getbusiness", this.url)
+      .dispatch("businessGeneral/getbusiness", "general/infoSettings/" + this.url)
       .then(() => {
         console.log("this.business", this.business);
-        this.permission = this.business[0].permissions;
+        this.permission = this.business.permissions;
         this.business_form = {
-          visibility: this.business[0].visibility,
-          permissions: this.business[0].permissions,
-          post_approval: this.business[0].post_approval,
-          keywords_alert: this.business[0].keywords_alert,
-          marketplace: this.business[0].marketplace[0].marketplace,
+          visibility: this.business.visibility,
+          permissions: this.business.permissions,
+          post_approval: this.business.post_approval,
+          keywords_alert: this.business.keywords_alert,
+          marketplace: this.business.marketplace,
         };
         console.log('business data available');
       })

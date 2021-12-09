@@ -1,44 +1,24 @@
 <template>
   <div style="display: inline-block">
-    <FlashMessage style="z-index: 99999" :position="'right top'" />
-
     <Box
       :modal="`modal-1-${uuid}`"
-      :id="modal"
-      :isActivated="strategy"
       :title="$t('search.Share_to_people')"
-      :placeholder="`${$t('search.Search_for_people')}... press enter`"
+      :placeholder="$t('search.Search_for_people')"
       subtitle="All peoples"
-      :type="'people'"
+      :type="'network'"
       :post="post"
-      :listElmts="users"
-    >
-      <template v-slot:owner>
-        <div class="d-flex align-items-center py-3 px-2 mb-2 border">
-          <b-avatar class="mr-3" :src="profile.profile_picture"></b-avatar>
-          <div>
-            <span class="mr-auto">{{ $t("search.Share_Post_As") }}</span
-            ><br />
-            <span class="mr-auto bold">{{ profile.name }}</span>
-            <p>
-              {{ post.content }}
-            </p>
-          </div>
-        </div>
-      </template>
-    </Box>
+    />
     <!-- Share to people -->
 
     <Box
       :modal="`modal-2-${uuid}`"
-      :id="modal"
-      :isActivated="strategy"
       :title="$t('search.Share_to_network')"
       :placeholder="$t('search.Search_for_network')"
       subtitle="All networks"
       :type="'network'"
       :post="post"
-      :listElmts="networks"
+      :update="update"
+
     >
       <template v-slot:owner>
         <div class="d-flex align-items-center py-3 px-2 mb-2 border">
@@ -55,13 +35,11 @@
 
     <Box
       :modal="`modal-5-${uuid}`"
-      :isActivated="strategy"
       :title="$t('search.Send_Inbox')"
-      :placeholder="$t('search.Share_business')"
-      subtitle="All Businesses"
-      :type="'business'"
+      :placeholder="$t('search.Search_for_network')"
+      subtitle="All networks"
+      :type="'network'"
       :post="post"
-      :listElmts="bizs"
     >
       <template v-slot:owner>
         <div class="d-flex flex-direction py-3 px-2 mb-2 border">
@@ -75,7 +53,11 @@
           </div>
           <div class="d-flex align-items-center py-3 px-2 mb-2">
             <p>
-              {{ post.content }}
+              Le lorem ipsum est, en imprimerie, une provisoire pour calibrer
+              une mise en page, le texte définitif venant remplacer le
+              faux-texte dès qu'il est prêt ou que la mise en page est achevée.
+              Généralement, on utilise un texte en faux latin, le Lorem ipsum ou
+              Lipsum.
             </p>
           </div>
         </div>
@@ -85,13 +67,13 @@
 
     <Box
       :modal="`modal-3-${uuid}`"
-      :id="modal"
       :title="$t('search.Share_business')"
       :placeholder="$t('search.Search_for_business')"
       subtitle="All business"
       :type="'business'"
       :post="post"
-      :isActivated="strategy"
+      :update="update"
+      
     >
       <template v-slot:owner>
         <div class="d-flex align-items-center py-3 px-2 mb-2 border">
@@ -107,8 +89,6 @@
     <!-- modal-3 -->
 
     <Post
-      :id="modal"
-      :isActivated="strategy"
       :modal="`modal-10-${uuid}`"
       :post="post"
       :auth="profile"
@@ -124,7 +104,7 @@
       position="bottom"
     >
       <template #button-content>
-        <b-icon class="primary ml-3" icon="share" />
+        <b-icon class="primary" icon="share" />
       </template>
 
       <b-dropdown-text class="box-title">
@@ -160,13 +140,7 @@
       <b-dropdown-item
         class="d-flex py-2 cursor-pointer"
         @click="open(`modal-2-${uuid}`)"
-        v-if="
-          $route.name != 'networks'
-            ? 'network' != profile.user_type
-              ? true
-              : false
-            : false
-        "
+        v-if="isNetwork"
       >
         <span class="text-ored">
           <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
@@ -179,7 +153,7 @@
       <b-dropdown-item
         class="d-flex py-2 cursor-pointer"
         @click="open(`modal-3-${uuid}`)"
-        v-if="isYourOwnPost"
+        v-if="isBusiness"
       >
         <span class="text-ored">
           <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
@@ -191,7 +165,7 @@
 
       <b-dropdown-item
         class="d-flex py-2 cursor-pointer"
-        :id="`sharing-community-${uuid}`"
+        id="sharing-community"
         data-toggle="popover"
         role="button"
         data-original-title=""
@@ -204,10 +178,10 @@
         </div>
       </b-dropdown-item>
 
-      <b-popover :target="`sharing-community-${uuid}`" triggers="hover">
+      <b-popover target="sharing-community" triggers="hover">
         <div class="popover-body">
           <div
-            @mousedown="open(`modal-1-${uuid}`)"
+            @mousedown="open('modal-1')"
             class="
               d-inline-flex
               flex-row
@@ -226,7 +200,6 @@
           </div>
 
           <div
-            @mousedown="open(`modal-2-${uuid}`)"
             v-if="'network' !== type"
             class="
               d-inline-flex
@@ -279,7 +252,6 @@
       <b-dropdown-item
         class="d-flex py-2 cursor-pointer"
         :id="`sharing-via-${uuid}`"
-        data-toggle="popover"
         role="button"
         data-original-title=""
         ref="button"
@@ -294,12 +266,12 @@
 
       <b-popover
         :target="`sharing-via-${uuid}`"
-        :triggers="['hover', 'click']"
+        triggers="hover focus"
         placement="left"
-        focus
       >
         <div class="popover-body">
           <div
+            @mousedown="onShareVia('email')"
             class="
               d-inline-flex
               flex-row
@@ -309,21 +281,89 @@
               cursor-pointer
             "
           >
-            <span class="text-ored">
-              <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
-            </span>
-            <div class="d-flex flex-column ml-3">
-              <Social
-                :network="'facebook'"
-                :post="post"
-                :title="'Share via Facebook'"
-              >
-              </Social>
-            </div>
+            <span>Share via Email</span>
+          </div>
+
+          <div
+            @mousedown="onShareVia('facebook')"
+            class="
+              d-inline-flex
+              flex-row
+              align-items-center
+              suggest-item
+              py-2
+              cursor-pointer
+            "
+          >
+            <span>Share via Facebook</span>
+          </div>
+
+          <div
+            @mousedown="onShareVia('twitter')"
+            class="
+              d-inline-flex
+              flex-row
+              align-items-center
+              suggest-item
+              py-2
+              cursor-pointer
+            "
+          >
+            <span>Share via Twitter</span>
+          </div>
+
+          <div
+            @mousedown="onShareVia('whatsapp')"
+            class="
+              d-inline-flex
+              flex-row
+              align-items-center
+              suggest-item
+              py-2
+              cursor-pointer
+            "
+          >
+            <span>Share via Whatsapp </span>
           </div>
         </div>
       </b-popover>
     </b-dropdown>
+    <Social
+      :id="`email-${uuid}`"
+      class="none"
+      :network="'Email'"
+      :post="post"
+      :title="'Share via Email'"
+      ref="email"
+    >
+    </Social>
+    <Social
+      :id="`facebook-${uuid}`"
+      class="none"
+      :network="'facebook'"
+      :post="post"
+      :title="'Share via Facebook'"
+      ref="facebook"
+    >
+    </Social>
+    <Social
+      :id="`twitter-${uuid}`"
+      class="none"
+      :network="'Twitter'"
+      :post="post"
+      :title="'Share via Twitter'"
+      ref="twitter"
+    >
+    </Social>
+    <Social
+      :id="`whatsapp-${uuid}`"
+      class="none"
+      :network="'WhatsApp'"
+      :post="post"
+      :title="'Share via Whatsapp'"
+      ref="whatsapp"
+    >
+    </Social>
   </div>
 </template>
 
@@ -353,36 +393,25 @@ export default {
     type: null,
     strategy: false,
     uuid: null,
+    update:null
   }),
 
   created() {
     this.uuid = this.post.post_id ? this.post.post_id : this.post.id;
     this.type = this.profile.user_type;
   },
-  mounted() {
-    this.getUsers();
-    this.getBizs();
-    this.getNetworks();
-  },
 
   computed: {
     ...mapGetters({
       profile: "auth/profilConnected",
     }),
-    users() {
-      return this.$store.getters["userChat/getUsers"];
-    },
-    bizs() {
-      return this.$store.getters["businessChat/getAllBusinesses"];
-    },
-    networks() {
-      return this.$store.getters["networkChat/getBizs"];
-    },
 
     isYourOwnPost() {
       const isItOwnerPage =
         this.$route.name == "BusinessOwner" ||
-        this.$route.name == "profile_owner"
+        this.$route.name == "profile_owner" ||
+        this.$route.name == "NetworkEditors" ||
+        this.$route.name == "networks"
           ? false
           : true;
 
@@ -390,7 +419,39 @@ export default {
         this.profile.id == this.post.user_id &&
         this.profile.user_type == this.post.poster_type;
 
-      return isItOwnerPage
+      return isItOwnerPage ? (isYourOwn ? false : true) : false;
+      
+    },
+
+    isBusiness() {
+      const isItOwnerPage =
+        this.$route.name == "BusinessOwner" ||
+        this.$route.name == "profile_owner"
+          ? true
+          : false;
+
+      const isYourOwn =
+        this.profile.id == this.post.user_id &&
+        this.profile.user_type == this.post.poster_type;
+
+      return !isItOwnerPage
+        ? isYourOwn && this.$route.name == "dashboard"
+          ? false
+          : true
+        : false;
+    },
+
+    isNetwork() {
+      const isItOwnerPage =
+        this.$route.name == "NetworkEditors" || this.$route.name == "networks"
+          ? true
+          : false;
+
+      const isYourOwn =
+        this.profile.id == this.post.user_id &&
+        this.profile.user_type == this.post.poster_type;
+
+      return !isItOwnerPage
         ? isYourOwn && this.$route.name == "dashboard"
           ? false
           : true
@@ -413,19 +474,18 @@ export default {
   },
 
   methods: {
-    getUsers(keyword) {
-      this.$store.dispatch("userChat/GET_USERS", keyword);
+    onShareVia(type) {
+      const elm = document.querySelector(`#${type}-${this.uuid}`);
+      elm.click();
     },
-    getBizs(keyword) {
-      this.$store.dispatch("businessChat/GET_BIZS", keyword);
-    },
-    getNetworks(keyword) {
-      this.$store.dispatch("networkChat/GET_BIZS", keyword);
-    },
+
     open(id) {
       this.modal = id;
+
+      if([`modal-3-${this.uuid}`,`modal-2-${this.uuid}`].includes(id))
+        this.update = id
       this.$bvModal.show(id);
-      this.getUsers("");
+
     },
 
     shareToYourProfile: async function () {
@@ -456,6 +516,10 @@ export default {
 </script>
 
 <style scoped>
+.none {
+  display: none;
+}
+
 .bold {
   font-weight: bold;
 }

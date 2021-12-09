@@ -4,56 +4,70 @@
       <b-row>
         <b-col>
           <div class="b-bottom f-left">
-            <input @click="selectall" type="checkbox" />
-            {{ $t('businessowner.Select_All') }}
+            <b-form-checkbox
+              v-model="selectAll"
+              :indeterminate="indeterminate"
+              name="checkbox-1"
+              @change="select"
+              class="m-left-top username"
+            >selectAll</b-form-checkbox>
           </div>
         </b-col>
         <b-col>
           <div class="b-bottomn f-right">
-            <b-button
-              @click="readAll(selected)"
-              variant="primary"
+            <b-button 
+              variant="primary" 
+              @click="readAll(selected)" 
+              :disabled="indeterminate ? false : true"
               class="a-button-l duration"
-            >
-              {{ $t('businessowner.Mark_as_Read') }}</b-button
-            >
-            <b-button
-              @click="deleteAll(selected)"
-              v-if="selected.length > 0"
-              variant="primary"
-              class="a-button-l duration ml-1"
-            >
-              {{ $t('businessowner.Delete') }}</b-button
-            >
+            >{{ $t('network.Mark_as_Read') }}</b-button>
+            &nbsp;
+            <b-button 
+              variant="outline-primary"
+              @click="deleteAll(selected)" 
+              :disabled="indeterminate ? false : true"
+              class="a-button-l duration"
+            >Delete</b-button>
           </div>
         </b-col>
       </b-row>
       <br />
 
       <b-row>
-        <b-col cols="12" class="mr-3" v-for="post in getNotificationsStore" :key="post.id">
-          <p class="">
-            <span style="display:inline-flex">
-              <input
-                @click="select(post.id)"
-                type="checkbox"
-                v-model="status"
-                value="accepted"
-                class="m-left-top"
-                unchecked-value="not_accepted"
-              />
-              <b-avatar class="d-inline-block profile-pic" variant="primary" :src="post.image"></b-avatar>
-              <h6 class="m-0 d-inline-block ml-2 username">
-                {{ post.reference_type }}
-                <p class="duration">{{ post.created_at | fromNow }}</p>
-              </h6>
-            </span>
-            <span class="float-right mt-1"> </span>
-          </p>
-
-          <p class="text">
-            {{ post.notification_text }}
-          </p>
+        <!-- {{getNotificationsStore}} -->
+        <div>
+          Selected: <strong>{{ selected }}</strong
+          ><br />
+          All Selected: <strong>{{ selectAll }}</strong>
+        </div>
+        <b-col cols="12" v-for="(notification, index) in getNotificationsStore" :key="index">
+          <div :class="notification.mark_as_read ? 'text-secondary' : 'font-weight-bold'">
+            <p class="">
+              <span style="display:inline-flex">
+                <b-form-checkbox
+                  name="checkbox-1"
+                  v-model="selected"
+                  :value="notification.id"
+                  @change="updateCheckall"
+                  :disabled="notification.mark_as_read ? true : false"
+                  class="m-left-top"
+                ></b-form-checkbox>
+                <b-avatar
+                  class="d-inline-block profile-pic"
+                  variant="primary"
+                  :text="notification.reference_type.charAt(0,1)"
+                  :src="notification.image"
+                ></b-avatar>
+                <span class="m-0  d-inline-block ml-2 username">
+                  {{ notification.reference_type}}
+                  <div class="duration">{{ notification.created_at | fromNow }}</div>
+                </span>
+              </span>
+              <span v-if="!notification.mark_as_read" class="float-right mt-1"> <b-badge pill variant="primary" class="text-primary">.</b-badge></span>
+            </p>
+            <p class="text">{{ notification.notification_text }}</p>                  
+          </div>
+          <hr width="100%" />
         </b-col>
 
         <b-col v-if="loader" class="load">
@@ -78,6 +92,8 @@ export default {
   data: () => ({
     all: 24,
     selected: [],
+    selectAll: false,
+    indeterminate: false
   }),
 
   beforeMount() {
@@ -86,6 +102,22 @@ export default {
 
   filters: {
     fromNow,
+  },
+
+  watch: {
+    selected(newValue, oldValue) {
+      // Handle changes in individual notifications checkboxes
+      if (newValue.length === 0) {
+        this.indeterminate = false;
+        this.selectAll = false;
+      } else if (newValue.length === this.getNotificationsStore.length) {
+        this.indeterminate = true;
+        this.selectAll = true;
+      } else {
+        this.indeterminate = true;
+        this.selectAll = false;
+      }
+    }
   },
 
   computed: {
@@ -136,18 +168,23 @@ export default {
       this.delete(id);
     },
     
-    // select all the notifications
-    selectall() {
-      this.getNotificationsStore.forEach((element) => {
-        this.selected.push(element);
-      });
-    },
-    select(notification, index) {
-      if (this.selected[index]) {
-        this.selected.splice(index, 1);
-        return;
+    select(checked) {
+      console.log("this.selectAll: "+this.selectAll);
+      console.log("checked: "+checked);
+      this.selected = [];
+      if (checked) {
+        for (let notification in this.getNotificationsStore) {
+            this.selected.push(this.getNotificationsStore[notification].id.toString());
+            console.log("this.notifications[notification].id: "+this.getNotificationsStore[notification].id);
+        }
       }
-      this.selected.push(notification);
+    },
+    updateCheckall: function() {
+      if (this.notifications.length === this.selected.length) {
+        this.selectAll = true;
+      } else {
+        this.selectAll = false;
+      }
     },
   },
 };

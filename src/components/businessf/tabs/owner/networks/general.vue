@@ -45,8 +45,7 @@
     <b-row class="center-content d-none d-md-block">
       <b-col cols="10">
         <div class="bv-example-row">
-          <div>
-            <b-tabs pills v-model="tabIndex" vertical class="itzlala" lazy nav-wrapper-class="w-15">
+            <b-tabs pills v-model="tabIndex" vertical class="itzlala" nav-wrapper-class="w-15">
               <b-tab :title="$t('network.Notifications')">
                 <b-card-text> <Notification /> </b-card-text
               ></b-tab>
@@ -79,12 +78,7 @@
                 <b-card-text> <Blocking /> </b-card-text
               ></b-tab>
             </b-tabs>
-          </div>
         </div>
-
-        <br />
-
-        <br />
       </b-col>
       <b-col cols="2"> </b-col>
     </b-row>
@@ -130,7 +124,7 @@ export default {
 
         if (newVal == 4) {
           this.selectedIdd = '4';
-          this.tabIndex = '5';
+          this.tabIndex = '2';
         }
 
         if (newVal == 5) {

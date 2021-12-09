@@ -155,7 +155,7 @@
                         @input="PRegion"
                        :multiple="false"
                         :placeholder="$t('welcome.Search') "
-                        :label="$t('welcome.name')"
+                        label="name"
                         track-by="id"
                         :options="countries"
                       
@@ -371,7 +371,7 @@
                         @input="PRegion"
                        :multiple="false"
                         :placeholder="$t('welcome.Search') "
-                        :label="$t('welcome.name')"
+                        label="name"
                         track-by="id"
                         :options="countries"
                       
@@ -396,7 +396,7 @@
                         @input="Division"
                         
                         :placeholder="$t('welcome.Search') "
-                        :label="$t('welcome.name')"
+                        label="name"
                         track-by="id"
                         :options="regions"
                         :multiple="false"
@@ -550,7 +550,7 @@
                     @input="subcategories"
                     :tag-placeholder= "$t('welcome.Add_this_as_new_tag')"
                     :placeholder="$t('welcome.Search_or_add_a_tag')"
-                    :label="$t('welcome.name')"
+                    label="name"
                     track-by="id"
                     :options="pcategories"
                     :multiple="true"
@@ -565,7 +565,7 @@
                     v-model="filterselectvalue"
                     :tag-placeholder="$t('welcome.Add_this_as_new_tag')"
                     :placeholder="$t('welcome.Search_or_add_a_tag')"
-                    :label="$t('welcome.name')"
+                    label="name"
                     track-by="subcategory_id"
                     :options="scategories"
                     :multiple="true"
@@ -617,7 +617,7 @@
                         @input="Region"
                      
                         :placeholder="$t('welcome.Search') "
-                        :label="$t('welcome.name')"
+                        label="name"
                         track-by="id"
                         :options="countries"
                         :multiple="true"
@@ -635,7 +635,7 @@
                         @input="Division"
                         
                         :placeholder="$t('welcome.Search') "
-                        :label="$t('welcome.name')"
+                        label="name"
                         track-by="id"
                         :options="regions"
                         :multiple="true"
@@ -654,7 +654,7 @@
                         @input="Municipality"
                        
                         :placeholder="$t('welcome.Search') "
-                        :label="$t('welcome.name')"
+                        label="name"
                         track-by="id"
                         :options="divisions"
                         :multiple="true"
@@ -675,7 +675,7 @@
                         @input="Locality"
                       
                         :placeholder="$t('welcome.Search') "
-                        :label="$t('welcome.name')"
+                        label="name"
                         track-by="id"
                         :options="municipalities"
                         :multiple="true"
@@ -695,7 +695,7 @@
                         v-model="locality"
                        
                         :placeholder="$t('welcome.Search') "
-                        :label="$t('welcome.name')"
+                        label="name"
                         track-by="id"
                         :options="localities"
                         :multiple="true"
@@ -730,7 +730,7 @@
                         v-model="business_keyword"
                         :tag-placeholder="$t('welcome.Add_this_as_new_tag')"
                         :placeholder="$t('welcome.Add_New_Keyword')"
-                        :label="$t('welcome.name')"
+                        label="name"
                         track-by="id"
                         :options="keywordds"
                         :multiple="true"

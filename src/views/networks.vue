@@ -26,7 +26,7 @@
               xl="8"
               class="order-sm-0 mt-sm-10 mt-md-10 mt-xl-0 marg-tap"
             >
-              <Default />
+              <Default @changeSelected="change" />
             </b-col>
           </b-row>
         </div>
@@ -99,7 +99,7 @@ export default {
 
   data() {
     return {
-      selectedId: 4,
+      selectedId: 0,
       bottomSelectedId: 0,
       foll_id: null,
       isloaded: false,
@@ -166,19 +166,17 @@ export default {
         }
       });
   },
-  mounted(){
-    window.onhashchange = function() { 
-      this.selectedId = 4
-     console.log("url change",this.selectedId);
-    //  this.setSelected()
 
-}
-  },
 
   methods: {
+
+    change(){
+        this.selectedId = 4
+        console.log("evenement arrive au parent network",  this.selectedId )
+    },
     handleChange(item, index) {
       console.log(item, index);
-      this.selectedId = this.$store.state.networkProfile.selected
+      // this.selectedId = this.$store.state.networkProfile.selected
     },
     // setSelected(){
     //     this.selectedId = 4

@@ -110,61 +110,40 @@ export default {
   name: 'settings',
 
   props: ['currenttab'],
-  mounted(){ 
     
-    window.onhashchange = function() { 
-     console.log("url change");
-     this.selectedIdd = '4';
-     this.tabIndex = '5';
-    }
-
-
-  },
-computed: {
-  select(){
-    //this.currenttab = this.$store.state.networkProfile.selected; 
-    return this.$store.state.networkProfile.selected;
-  }
-},
-  watch: {
+watch: {
    
     currenttab: {
       immediate: true,
       handler(newVal) {
-        console.log(newVal,"--",this.$store.state.networkProfile.selected);
-// if(this.select == 4) { this.selectedIdd = '4'; this.tabIndex = '5';  }else {
-        let val =0;
-        if(this.select == 4) {
-          val = 4
-        }else { val = newVal}
+    
   
-  
-        if (val == 2) {
+        if (newVal == 2) {
           this.selectedIdd = '2';
           this.tabIndex = '0';
         }
 
-        if (val == 3) {
+        if (newVal == 3) {
           this.selectedIdd = '3';
           this.tabIndex = '4';
         }
 
-        if (val == 4) {
+        if (newVal == 4) {
           this.selectedIdd = '4';
           this.tabIndex = '5';
         }
 
-        if (val == 5) {
+        if (newVal == 5) {
           this.selectedIdd = '5';
           this.tabIndex = '3';
         }
 
-        if (val == 6) {
+        if (newVal == 6) {
           this.selectedIdd = '6';
           this.tabIndex = '1';
         }
 
-        if (val == 7) {
+        if (newVal == 7) {
           this.selectedIdd = '7';
           this.tabIndex = '5';
         }

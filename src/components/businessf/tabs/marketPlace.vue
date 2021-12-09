@@ -19,7 +19,7 @@
           <b-icon icon="cart" class="mr-2"></b-icon>Cart</b-button
         >
       </div>
-      <div class="col-12">
+      <div class="col-12">cleanUp
         <hr class="h-divider" />
       </div>
 

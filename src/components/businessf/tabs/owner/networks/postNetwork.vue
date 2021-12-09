@@ -423,15 +423,7 @@ export default {
   methods: {
 
     RedirectPending(){ this.$emit('changement')
-    // this.$router.push("/network/1?current=4#test")
-    this.$router.push("/network/1?current=4#test1"+Math.random())
-      console.log("Redirection pending")
-      this.$store.dispatch("networkProfile/Selected")
-      .then(res => {
-        console.log("----",this.$store.state.networkProfile.selected)
-      }).catch(err =>{
-        console.log(err)
-      })
+   
       console.log("---- end")
     },
 

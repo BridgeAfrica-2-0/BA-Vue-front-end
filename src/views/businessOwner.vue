@@ -59,6 +59,7 @@ import Inbox from "../components/businessOwner/inbox";
 import LyTab from "@/tab/src/index.vue";
 import Footer from "../components/footer";
 import { WhoIsIt } from "@/mixins";
+
 export default {
   name: "Home",
   mixins: [WhoIsIt],
@@ -147,6 +148,11 @@ export default {
       this.selectedId = this.$route.query.tabId;
     },
   },
+
+  beforeCreate: async function () {
+    await this.$repository.share.switch(this.$route.params.id, "business");
+  },
+
   created() {
     this.selectedId = this.$route.query.tabId ? this.$route.query.tabId : "0";
     this.foll_id = this.$route.params.id;

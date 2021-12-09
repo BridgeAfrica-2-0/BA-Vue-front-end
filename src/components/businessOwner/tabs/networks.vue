@@ -8,9 +8,10 @@
         class="float-right"
         @click="showmodal(true, 'add')"
         variant="primary"
-        > {{ $t('businessowner.') }} {{ $t('businessowner.Add_Network') }}</b-button
+        >{{ $t('businessowner.Add_Network') }}</b-button
       >
-      <hr />    
+      <hr />  
+      <!-- {{ $t('businessowner.') }} {{ $t('businessowner.Add_Network') }}   -->
       <b-row>
         <b-col
           cols="12"

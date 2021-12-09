@@ -24,7 +24,7 @@
         @close="cancel"
       >
         <div>
-          <FlashMessage />
+          
           <form-wizard @on-complete="createBusiness">
             <tab-content title="Business Indentity">
               <div class="form-card">
@@ -336,7 +336,7 @@
         @hidden="cancel"
       >
         <div>
-          <FlashMessage />
+          
           <form-wizard @on-complete="updateBusiness">
             <tab-content title="Business Indentity">
               <div class="form-card">

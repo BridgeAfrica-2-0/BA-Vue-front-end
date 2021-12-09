@@ -21,7 +21,7 @@
       <b-row>
         <b-col md="8" xl="8" lg="12" cols="12" sm="8">
           <div class="d-inline-flex">
-            <div class="center-img ">
+            <div class="center-img">
               <splide :options="options" class="r-image">
                 <splide-slide cl>
                   <img :src="item.logo_path" class="r-image" />
@@ -132,10 +132,10 @@
                 <b-button
                   block
                   size="sm"
-                  class="b-background shadow "
+                  class="b-background shadow"
                   variant="primary"
                 >
-                  <i class="fas fa-map-marked-alt  fa-lg btn-icon "></i>
+                  <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
                   <span class="btn-text">{{ $t("dashboard.Direction") }}</span>
                 </b-button>
               </b-col>

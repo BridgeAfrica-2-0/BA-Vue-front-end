@@ -54,7 +54,7 @@
           @hide="handleHide"
         ></vue-easy-lightbox>
 
-         <FlashMessage />
+         
         <!-- {{images}} -->
         <!-- {{images[0].type}} -->
       </div>

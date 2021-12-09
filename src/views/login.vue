@@ -9,8 +9,7 @@
         </md-card-header>
 
         <md-card-content>
-          <!-- lol -->
-          <FlashMessage />
+        
           <div class="center">
             <b-row>
               <b-col cols="12" md="6" lg="12" xl="6">
@@ -38,7 +37,7 @@
 
           <br />
 
-          <p class="t-center">-{{ $t("auth.OR") }} -</p>
+          <p class="t-center">- {{ $t("auth.OR") }} -</p>
 
           <md-field :class="getValidationClass('email')">
             <label for="email"> {{ $t("auth.email") }} </label>
@@ -349,8 +348,8 @@ export default {
   color: white;
 }
 .p-card {
-  padding-left: 90px;
-  padding-right: 90px;
+  padding-left: 60px;
+  padding-right: 60px;
   padding-top: 80px;
   padding-bottom: 80px;
 }

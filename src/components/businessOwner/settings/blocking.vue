@@ -2,9 +2,9 @@
   <b-container>
     <b-container class="bv-example-row">
       <p class="t-left text">
-        Blocked users can no longer see things you post on your business, invite
-        your business to networks, strat a conversation, or follow your
-        business.
+        {{ $t('businessowner.Blocked_users_can_no_longer_see_things_you_post_on_your_business') }}, 
+        {{ $t('businessowner.invite_your_business_to_networks') }}, {{ $t('businessowner.start_a_conversation') }}, 
+        {{ $t('businessowner.or_follow_your_business') }}.
       </p>
     </b-container>
 
@@ -27,16 +27,18 @@
               size="4em"
             ></b-avatar>
             <span class="mr-auto">{{blockuser.name}}</span>
-            <span class="mr-auto" @click="UnblockBlockUser(blockuser)"><b-link href="#">Unblock</b-link></span>
+            <span class="mr-auto" @click="UnblockBlockUser(blockuser)"><b-link href="#">{{ $t('businessowner.Unblock') }}</b-link></span>
           </b-list>
         </b-skeleton-wrapper>
       </b-list-group>
     </b-container>
     <b-container v-else>
       <b-card bg-variant="white" text-variant="black" class="text-center">
-        <b-card-text>No Blocked User Available.</b-card-text>
+        <b-card-text>{{ $t('businessowner.No_Blocked_User_Available') }}.</b-card-text>
       </b-card>
     </b-container>
+
+    
 
   </b-container>
 </template>
@@ -88,7 +90,7 @@ export default {
         this.loading = false;
         this.flashMessage.show({
           status: "success",
-          message: "User Unblocked"
+          message: this.$t('businessowner.User_Unblocked')
         });
 			})
       .catch(err => {
@@ -96,7 +98,7 @@ export default {
         this.loading = false;
         this.flashMessage.show({
           status: "error",
-          message: "Unable to Unblocked User"
+          message: this.$t('businessowner.Unable_to_Unblocked_User')
         });
       });
     }

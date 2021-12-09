@@ -75,12 +75,6 @@
           </div>
         </div>
       </b-col>
-      <b-col cols="12">
-        <infinite-loading ref="infiniteLoading" @infinite="infiniteHandler">
-            <!-- <div class="text-red" slot="no-more">{{ $t('network.No_More_Request') }}</div>
-            <div class="text-red" slot="no-results">{{ $t('network.No_More_Request') }}</div> -->
-        </infinite-loading>
-      </b-col>
     </b-row>
     <b-row>
       <b-col>
@@ -89,17 +83,6 @@
         </p>
       </b-col>
     </b-row>
-    <!-- <b-row> -->
-          <!-- <b-col cols="12"> -->
-        <!-- <infinite-loading @infinite="infiniteHandler"> -->
-            <!-- <div class="text-red" slot="no-more">{{ $t('network.No_More_Request') }}</div>
-            <div class="text-red" slot="no-results">{{ $t('network.No_More_Request') }}</div> -->
-        <!-- </infinite-loading> -->
-             <!-- <infinite-loading
-        ref="infiniteLoading"
-        @infinite="infiniteHandler"
-      ></infinite-loading> -->
-      <!-- </b-col></b-row> -->
   </div>
 </template>
 
@@ -148,16 +131,6 @@ export default {
       isSubmitted: false,
       fileImageArr: [],
     };
-  },
-
-  computed: {
-    ...mapGetters({
-      info: "networkSetting/getNetwork",
-      owner_post: "networkSetting/allPendingPost",
-    }),
-  },
-  mounted() {
-    this.url = this.$route.params.id;
   },
 
   methods: {
@@ -218,12 +191,10 @@ export default {
     },
 
     infiniteHandler($state) {
-      console.log("infiniteHandler fired")
-      let url='show/posts/pending/'+this.url+'?page='+this.page; 
-      console.log(url)
-       if (this.page == 1) {
+      let url = 'network/show/posts/pending/' + this.url + '?page=' + this.page;
+
+      if (this.page == 1) {
         this.owner_post.splice(0);
-        console.log("this.owner_post.splice(0);")
       }
       this.$store
         .dispatch('networkSetting/loadMore', url)
@@ -354,6 +325,15 @@ export default {
         this.createPost.postBusinessUpdate = '';
       }
     },
+  },
+  computed: {
+    ...mapGetters({
+      info: 'networkSetting/getNetwork',
+      owner_post: 'networkSetting/allPendingPost',
+    }),
+  },
+  mounted() {
+    this.url = this.$route.params.id;
   },
 };
 </script>

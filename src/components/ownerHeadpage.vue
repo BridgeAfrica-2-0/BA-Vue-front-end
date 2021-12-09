@@ -1,17 +1,5 @@
 <template>
   <div class="p-0">
-
-
-     <vue-cropper
-                    :src="info.user.cover_picture"
-                    ref="cropper"
-                    :aspect-ratio="6.5 / 3"
-                    drag-mode="move"
-                    :view-mode="1"
-                  />
-
-
-                  
     <b-container fluid class="p-0 gradient">
       <div class="container-flex">
         <img
@@ -161,7 +149,7 @@
               <div class="w3-container">
                 <div id="preview">
                   <vue-cropper
-                    :src="info.user.cover_picture"
+                    :src="selectedFile"
                     ref="cropper"
                     :aspect-ratio="6.5 / 3"
                     drag-mode="move"
@@ -239,9 +227,9 @@
 </template>
 
 <script>
+
 import VueCropper from "vue-cropperjs";
 import "cropperjs/dist/cropper.css";
-import { h } from "vue";
 
 export default {
   name: "headPageOwner",
@@ -347,8 +335,6 @@ export default {
       }
     },
 
-    
-
     chooseProfile2: function () {
       document.getElementById("cover-imag").click();
     },
@@ -427,7 +413,7 @@ export default {
       });
 
       this.axios
-        .delete("profile-picture")
+        .get("user/remove-cover")
         .then((response) => {
           console.log(response);
           this.$store
@@ -467,7 +453,7 @@ export default {
       });
 
       this.axios
-        .delete("user/cover")
+        .get("user/upload-cover")
         .then((response) => {
           console.log(response);
           this.$store

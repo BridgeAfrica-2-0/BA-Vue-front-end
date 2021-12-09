@@ -16,7 +16,7 @@
                   ></b-avatar>
                 </b-col>
                 <b-col>
-                  <h4 class="title m-10">Messages</h4>
+                  <h4 class="title m-10">{{ $t("businessowner.Messages") }}</h4>
                 </b-col>
                 <b-col>
                   <b-icon
@@ -30,7 +30,7 @@
                 <input
                   type="text"
                   class="form-control input-background"
-                  placeholder="Search inbox"
+                  :placeholder="$t('businessowner.Search_inbox')"
                 />
               </b-container>
             </div>
@@ -109,10 +109,10 @@
                       ></b-icon>
                     </template>
                     <b-dropdown-item @click="newMessage(true)">
-                      New Chat</b-dropdown-item
+                      {{ $t("businessowner.New_Chat") }}</b-dropdown-item
                     >
                     <b-dropdown-item @click="newMessage(true)">
-                      New Group Chat
+                      {{ $t("businessowner.New_Group_Chat") }}
                     </b-dropdown-item>
                   </b-dropdown> -->
                 </b-col>
@@ -125,7 +125,10 @@
                     content-class="mt-12 ma-4 pt-6"
                     fill
                   >
-                    <b-tab title="Users" @click="getChatList({ type: 'user' })">
+                    <b-tab
+                      :title="$t('businessowner.Users')"
+                      @click="getChatList({ type: 'user' })"
+                    >
                       <!-- Users Chats Available  -->
                       <b-row class="pa-6">
                         <b-col class="mb-6 pb-6">
@@ -202,13 +205,13 @@
                             </b-col>
                           </b-row>
                         </div>
-                        <h2 v-else>No chat</h2>
+                        <h2 v-else>{{ $t("businessowner.No_chat") }}</h2>
                       </div>
 
                       <!-- End Chats -->
                     </b-tab>
                     <b-tab
-                      title="Business"
+                      :title="$t('businessowner.Business')"
                       @click="getChatList({ type: 'business' })"
                     >
                       <!-- Business Chats Available  -->
@@ -287,13 +290,13 @@
                             </b-col>
                           </b-row>
                         </div>
-                        <h2 v-else>No chat</h2>
+                        <h2 v-else>{{ $t("businessowner.No_chat") }}</h2>
                       </div>
 
                       <!-- End Chats -->
                     </b-tab>
                     <b-tab
-                      title="Network"
+                      :title="$t('businessowner.Network')"
                       @click="getChatList({ type: 'network' })"
                     >
                       <!-- network Chats Available  -->
@@ -376,7 +379,7 @@
                       <!-- End Chats -->
                     </b-tab>
                     <b-tab
-                      title="Groups"
+                      :title="$t('businessowner.Groups')"
                       @click="getChatList({ type: 'group' })"
                     >
                       <!-- Group Chats Available  -->
@@ -455,7 +458,7 @@
                             </b-col>
                           </b-row>
                         </div>
-                        <h2 v-else>No chat</h2>
+                        <h2 v-else>{{ $t("businessowner.No_chat") }}</h2>
                       </div>
 
                       <!-- End Chats -->
@@ -538,7 +541,7 @@
                       "
                       type="text"
                       class="form-control input-background mb-6 pb-6"
-                      placeholder="Search message"
+                      :placeholder="$t('businessowner.Search_message')"
                     />
                   </b-col>
                   <b-col class="col-3">
@@ -573,19 +576,19 @@
                           </template>
 
                           <b-dropdown-item-button @click="showInfo(true)">
-                            View Profile
+                            {{ $t("businessowner.View_Profile") }}
                           </b-dropdown-item-button>
 
                           <b-dropdown-item-button>
-                            Disable Notification
+                            {{ $t("businessowner.Disable_Notification") }}
                           </b-dropdown-item-button>
 
                           <b-dropdown-item-button>
-                            Delete Contact
+                            {{ $t("businessowner.Delete_Contact") }}
                           </b-dropdown-item-button>
 
                           <b-dropdown-item-button>
-                            Delete Chat
+                            {{ $t("businessowner.Delete_Chat") }}
                           </b-dropdown-item-button>
                         </b-dropdown>
                       </b-col>
@@ -721,7 +724,9 @@
 
               <section v-else class="chats" style="margin-left: 1px" ref="feed">
                 <div class="mt-12 pt-12">
-                  <h1 class="text-center">Select a chat</h1>
+                  <h1 class="text-center">
+                    {{ $t("businessowner.Select_a_chat") }}
+                  </h1>
                 </div>
               </section>
 
@@ -754,13 +759,7 @@
                     <label for="file">
                       <b-icon
                         for="file"
-                        class="
-                          msg-icon
-                          primary
-                          icon-size icon-top
-                          float-right
-                          text-right
-                        "
+                        class="msg-icon primary icon-size icon-top float-right text-right"
                         icon="paperclip"
                       >
                       </b-icon>
@@ -785,7 +784,7 @@
                       v-model="input"
                       @keypress.enter="send"
                       class="input-background"
-                      placeholder="Enter a message..."
+                      :placeholder="$t('businessowner.Enter_a_message')"
                       rows="0"
                       max-rows="3"
                     ></b-form-input>
@@ -871,7 +870,9 @@
               <b-button class="primary-bg" @click="showInfo(false)">
                 <fas-icon :icon="['fas', 'arrow-left']" />
               </b-button>
-              <span class="cnt-info"> Contact Info</span>
+              <span class="cnt-info"
+                >{{ $t("businessowner.Contact_Info") }}
+              </span>
             </div>
             <div class="info-bottom">
               <b-avatar
@@ -882,15 +883,17 @@
               ></b-avatar>
               <div class="info-detail">
                 <h1 class="info-name">{{ receiver.name }}</h1>
-                <b-link class="primary">View Profile</b-link>
+                <b-link class="primary">{{
+                  $t("businessowner.View_Profile")
+                }}</b-link>
               </div>
             </div>
             <div>
               <ul>
-                <li>Options</li>
+                <li>{{ $t("businessowner.Options") }}</li>
                 <li>
                   <b-row
-                    ><b-col> Block Messages </b-col>
+                    ><b-col> {{ $t("businessowner.Block_Messages") }} </b-col>
                     <b-col>
                       <b-form-checkbox
                         v-model="checked"
@@ -902,7 +905,7 @@
                     </b-col>
                   </b-row>
                 </li>
-                <li>Report User</li>
+                <li>{{ $t("businessowner.Report_User") }}</li>
               </ul>
             </div>
           </b-col>
@@ -923,7 +926,9 @@
                       v-model="searchQuery"
                       class="input-background"
                       style="width: 100%"
-                      placeholder="Type the name of person or Business..."
+                      :placeholder="
+                        $t('businessowner.Type_the_name_of_person_or_Business')
+                      "
                       @keydown.enter="getAll(searchQuery)"
                     ></b-form-input>
 
@@ -935,6 +940,7 @@
                     <div class="new-msg-filter-list">
                       <table class="table">
                         <b-row style="overflow-x: hidden !important">
+
                           <b-tabs content-class=" ma-4 pt-6" fill pills card>
                             <b-tab title="All" @click="getAll()">
                               <div v-if="loader" class="text-center">
@@ -950,6 +956,7 @@
                                   v-for="(biz, index) in allUsers"
                                   :key="index"
                                   class="p-2 message"
+
                                 >
                                   <td>
                                     <b-form-group>
@@ -1395,7 +1402,7 @@
                       variant="primary"
                       @click="$bvModal.show('group-name')"
                       :disabled="selectedMulty.length ? false : true"
-                      >Next</b-button
+                      >{{ $t("businessowner.Next") }}</b-button
                     >
                     <!-- <b-button
                       class="float-left"
@@ -1420,31 +1427,19 @@
       <!-- create group -->
       <b-modal id="group-name" hide-footer>
         <div class="d-block text-center">
-          <h3>The Group Name:</h3>
+          <h3>{{ $t("businessowner.The_Group_Name") }}:</h3>
           <b-form-input
             v-model="groupName"
-            @keypress.enter="selectedMultyChat()"
             id="input-large"
             size="lg"
             autofocus
-            placeholder="Enter your name"
+            :placeholder="$t('businessowner.Enter_your_name')"
           ></b-form-input>
         </div>
-        <div v-if="loader" class="text-center mt-6 pt-6">
-          <b-spinner variant="primary" label="Spinning"></b-spinner>
-        </div>
-        <div v-else>
-          <b-button class="mt-3" block @click="selectedMultyChat()"
-            >Create</b-button
-          >
-        </div>
-      </b-modal>
-      <!-- preview -->
-      <b-modal id="preview-file" hide-footer>
-        <div class="d-block text-center">
-          <h3>Preview file:</h3>
-          <b-img thumbnail fluid :src="previewSrc" id="filePreview"></b-img>
-        </div>
+
+        <b-button class="mt-3" block @click="selectedMultyChat()">{{
+          $t("businessowner.Create")
+        }}</b-button>
       </b-modal>
     </b-container>
   </div>
@@ -1462,7 +1457,6 @@ export default {
   data() {
     return {
       formData: new FormData(),
-      groupMembers: [],
       groupName: "",
       allSelection: true,
       allSelectedMulty: false,
@@ -1508,6 +1502,83 @@ export default {
       showsearch: true,
       selecteduser: false,
       searchQuery: "",
+      resources1: [
+        { title: "ABE Attendance", uri: "aaaa.com", category: "a", icon: null },
+        {
+          title: "Accounting Services",
+          uri: "aaaa.com",
+          category: "a",
+          icon: null,
+        },
+        { title: "Administration", uri: "aaaa.com", category: "a", icon: null },
+        {
+          title: "Advanced Student Lookup",
+          uri: "bbbb.com",
+          category: "b",
+          icon: null,
+        },
+        { title: "Art & Sciences", uri: "bbbb.com", category: "b", icon: null },
+        {
+          title: "Auxiliares Services",
+          uri: "bbbb.com",
+          category: "b",
+          icon: null,
+        },
+        { title: "Basic Skills", uri: "cccc.com", category: "c", icon: null },
+        {
+          title: "Board of Trustees",
+          uri: "dddd.com",
+          category: "d",
+          icon: null,
+        },
+      ],
+      resources: [
+        {
+          name: "blezour blec",
+          profile:
+            "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
+          type: "person",
+          id: "1",
+        },
+        {
+          name: "itz blec blec",
+          profile:
+            "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
+          type: "person",
+          id: "2",
+        },
+
+        {
+          name: "Maxine Moffet",
+          profile:
+            "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
+          type: "person",
+          id: "3",
+        },
+
+        {
+          name: "Alicia kays",
+          profile:
+            "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
+          type: "person",
+          id: "4",
+        },
+
+        {
+          name: "Lorem Ipsum",
+          profile:
+            "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
+          type: "person",
+          id: "5",
+        },
+        {
+          name: "blezour blec",
+          profile:
+            "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
+          type: "person",
+          id: "6",
+        },
+      ],
       message: {},
       newMsg: false,
       show: false,
@@ -1661,7 +1732,6 @@ export default {
       if (this.allSelectedMulty) {
         this.bizs.map((biz) => {
           this.selectedMulty.push(biz.id);
-          this.groupMembers.push({ type: biz.accountType, id: biz.id });
         });
       } else {
         this.selectedMulty = [];
@@ -1733,7 +1803,6 @@ export default {
       if (this.peopleMulty) {
         this.bizs.map((biz) => {
           this.selectedMulty.push(biz.id);
-          this.groupMembers.push({ type: biz.accountType, id: biz.id });
         });
       } else {
         this.selectedMulty = [];
@@ -1755,11 +1824,9 @@ export default {
       if (this.businessMulty) {
         this.bizs.map((biz) => {
           this.selectedMulty.push(biz.id);
-          this.groupMembers.push({ type: biz.accountType, id: biz.id });
         });
       } else {
         this.selectedMulty = [];
-        this.groupMembers = [];
       }
     },
     networkAllMulty() {
@@ -1776,11 +1843,9 @@ export default {
       if (this.networkMulty) {
         this.bizs.map((biz) => {
           this.selectedMulty.push(biz.id);
-          this.groupMembers.push({ type: biz.accountType, id: biz.id });
         });
       } else {
         this.selectedMulty = [];
-        this.groupMembers = [];
       }
     },
     getAll() {
@@ -1894,6 +1959,7 @@ export default {
 
         businessEditorsID: `${membersEditorIds}`,
       });
+
     },
     createRoom(receiver_business_id) {
       // let sender_business_id = this.currentUser.user.id;

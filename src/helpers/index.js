@@ -3,6 +3,8 @@ import axios from "axios"
 
 export const getRootSchemeForRedis = () => axios.defaults.baseURL.substring(0, axios.defaults.baseURL.length - 8)
 
+export const date = (value) => moment(value).format("dddd, MMMM Do YYYY, h:mm:ss a");
+
 export const fullMediaLink = (media) => {
 
   if (media) {

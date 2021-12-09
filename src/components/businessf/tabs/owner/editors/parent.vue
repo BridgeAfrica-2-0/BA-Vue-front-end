@@ -75,7 +75,7 @@
       </b-card-text>
     </b-card>
     
-    <FlashMessage />
+    
 
     <SidebarCommunity />
 

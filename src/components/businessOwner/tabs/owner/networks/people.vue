@@ -33,7 +33,7 @@
                     size="sm"
                     class="b-background"
                   >
-                    <b-icon icon="chat" class="ico"> </b-icon> Message
+                    <b-icon icon="chat" class="ico"> </b-icon> {{ $t('businessowner.Message') }}
                   </b-button>
                 </b-col>
                 <b-col cols="6">
@@ -43,7 +43,7 @@
                     class="b-background btn2"
                     variant="primary"
                   >
-                    <b-icon icon="plus-circle" class="ico"> </b-icon> community
+                    <b-icon icon="plus-circle" class="ico"> </b-icon> {{ $t('businessowner.Community') }}
                   </b-button>
                 </b-col>
               </b-row>
@@ -93,7 +93,7 @@
                     size="sm"
                     class="b-background"
                   >
-                    <b-icon icon="chat" class="ico"> </b-icon> Message
+                    <b-icon icon="chat" class="ico"> </b-icon> {{ $t('businessowner.Message') }}
                   </b-button>
                 </b-col>
                 <b-col cols="6">
@@ -103,7 +103,7 @@
                     class="b-background btn2"
                     variant="primary"
                   >
-                    <b-icon icon="plus-circle" class="ico"> </b-icon> community
+                    <b-icon icon="plus-circle" class="ico"> </b-icon> {{ $t('businessowner.Community') }}
                   </b-button>
                 </b-col>
               </b-row>
@@ -156,7 +156,7 @@
                     size="sm"
                     class="b-background"
                   >
-                    <b-icon icon="chat" class="ico"> </b-icon> Message
+                    <b-icon icon="chat" class="ico"> </b-icon> {{ $t('businessowner.Message') }}
                   </b-button>
                 </b-col>
                 <b-col cols="6">
@@ -166,7 +166,7 @@
                     class="b-background btn2"
                     variant="primary"
                   >
-                    <b-icon icon="plus-circle" class="ico"> </b-icon> community
+                    <b-icon icon="plus-circle" class="ico"> </b-icon> {{ $t('businessowner.Community') }}
                   </b-button>
                 </b-col>
               </b-row>
@@ -216,7 +216,7 @@
                     size="sm"
                     class="b-background"
                   >
-                    <b-icon icon="chat" class="ico"> </b-icon> Message
+                    <b-icon icon="chat" class="ico"> </b-icon> {{ $t('businessowner.Message') }}
                   </b-button>
                 </b-col>
                 <b-col cols="6">
@@ -226,7 +226,7 @@
                     class="b-background btn2"
                     variant="primary"
                   >
-                    <b-icon icon="plus-circle" class="ico"> </b-icon> community
+                    <b-icon icon="plus-circle" class="ico"> </b-icon> {{ $t('businessowner.Community') }}
                   </b-button>
                 </b-col>
               </b-row>

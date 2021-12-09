@@ -14,7 +14,7 @@
         >{{ $t("search.No_Network_available") }}!
       </a>
     </b-alert>
-
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
     <div
       v-for="item in networks.data"
       :key="item.id"
@@ -49,11 +49,11 @@
                 </span>
                 <br />
                 <read-more
-                  more-str="read more"
+                  :more-str="$t('search.read_more')"
                   class="readmore"
                   :text="item.description"
                   link="#"
-                  less-str="read less"
+                  :less-str="$t('search.read_less')"
                   :max-chars="100"
                 >
                 </read-more>
@@ -110,7 +110,7 @@
                   @click="cta(item)"
                 >
                   <i class="fas fa-envelope fa-lg btn-icon"></i>
-                  <span class="btn-text">Message</span>
+                  <span class="btn-text">{{ "search.Message" }}</span>
                 </b-button>
               </b-col>
 
@@ -135,7 +135,7 @@
                     "
                   ></i>
 
-                  <span class="btn-text"> Join </span>
+                  <span class="btn-text"> {{ "search.Join" }} </span>
                 </b-button>
               </b-col>
             </b-row>
@@ -166,6 +166,7 @@
 </template>
 
 <script>
+import moment from "moment";
 import axios from "axios";
 
 export default {
@@ -180,6 +181,9 @@ export default {
       currentPage: 1,
       nextLoad: false,
     };
+  },
+  created() {
+    console.log("Mini Networks => ".this.network());
   },
   computed: {
     networks() {

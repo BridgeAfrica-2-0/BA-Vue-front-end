@@ -1,12 +1,11 @@
 <template>
   <div class="p-3 card-border my-3" style="position: relative">
-
     <div class="mt-2">
       <div class="d-inline-flex">
         <span md="1" class="m-0 p-0">
           <b-avatar
-            class="avat"
-            square
+            class="logo-sizee avat"
+            :square="'user' == item.poster_type ? false : true"
             variant="primary"
             :src="item.logo_path"
           ></b-avatar>
@@ -18,7 +17,10 @@
           <p class="durationn">{{ item.created_at | now }}</p>
         </div>
 
-        <div class="toright" v-if="isYourOwnPost && canBeDelete">
+        <div
+          class="toright"
+          v-if="!isDisplayInSearch ? isYourOwnPost && canBeDelete : false"
+        >
           <b-dropdown variant="link" size="sm" no-caret>
             <template #button-content>
               <b-icon
@@ -30,12 +32,12 @@
 
             <b-dropdown-item-button variant="info" @click="editPost">
               <b-icon icon="pencil" aria-hidden="true"></b-icon>
-              Edit
+              {{ $t("businessowner.Edit") }}
             </b-dropdown-item-button>
 
             <b-dropdown-item-button variant="danger" @click="deletePost">
               <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
-              Delete
+              {{ $t("businessowner.Delete") }}
             </b-dropdown-item-button>
           </b-dropdown>
         </div>
@@ -45,10 +47,10 @@
           <!--     :text="item.content.details"   -->
           <read-more
             v-if="item.content"
-            more-str="read more"
+            :more-str="$t('businessowner.read_more')"
             :text="item.content"
             link="#"
-            less-str="read less"
+            :less-str="$t('businessowner.read_less')"
             :max-chars="200"
           ></read-more>
         </p>
@@ -59,11 +61,12 @@
         <div class="d-inline-flex">
           <span md="1" class="m-0 p-0">
             <b-avatar
-              class="d-inline-block avat avatar-border"
-              square
+              class="logo-sizee avat"
+              :square="'user' == item.source.poster_type ? false : true"
               variant="primary"
-              :src="item.logo_path"
-            ></b-avatar>
+              :src="item.source.logo_path"
+            >
+            </b-avatar>
           </span>
           <div class="pl-2 pl-md-3 pt-md-2">
             <h5 class="m-0 usernamee">
@@ -80,10 +83,10 @@
           <p class="post-text">
             <read-more
               v-if="item.source.content"
-              more-str="read more"
+              :more-str="$t('businessowner.read_more')"
               :text="item.source.content"
               link="#"
-              less-str="read less"
+              :less-str="$t('businessowner.read_less')"
               :max-chars="200"
             ></read-more>
           </p>
@@ -125,11 +128,14 @@
           <!--  :src="$store.getters.getProfilePicture"  -->
         </b-col>
         <b-col class="mt-1">
-          <span class="mr-3 cursor" @click="onLike"
+          <span
+            class="mr-3 cursor"
+            @click="onLike"
+            v-if="!isMemberNetworkFollower"
             ><b-icon :icon="icon" variant="primary" aria-hidden="true"></b-icon>
             {{ item.likes_count | nFormatter }}
           </span>
-          <span class="cursor" @click="toggle"
+          <span class="cursor"
             ><b-icon
               icon="chat-fill"
               variant="primary"
@@ -137,7 +143,11 @@
             ></b-icon>
             {{ item.comment_count | nFormatter }}
           </span>
-          <ShareButton :post="item" :type="'profile'" v-if="canBeDelete" />
+          <ShareButton
+            :post="item"
+            :type="'profile'"
+            v-if="!isMemberNetworkFollower || canBeDelete"
+          />
         </b-col>
       </b-row>
     </div>
@@ -145,24 +155,31 @@
     <div
       class="mt-2 d-inline-flex w-100"
       v-if="
-        (profile.id == item.post_id ? item.post_id : item.id) && canBeDelete
+        !isDisplayInSearch
+          ? !isMemberNetworkFollower
+            ? (profile.id == item.post_id ? item.post_id : item.id) &&
+              canBeDelete
+            : false
+          : false
       "
     >
       <div class="m-md-0 p-md-0">
         <b-avatar
+          b-avatar
+          class="logo-sizee-18 avat img-fluid avat-comment avatar-border"
           variant="primary"
-          square
+          :square="'user' == profile.user_type ? false : true"
           :src="businessLogo"
-          class="img-fluid avat-comment avatar-border"
         ></b-avatar>
       </div>
 
       <div class="p-0 m-0 pr-3 inline-comment">
-        <input
-          placeholder="Post a Comment"
-          class="comment"
-          type="text"
+        <textarea-autosize
+          :placeholder="$t('businessowner.Post_a_Comment')"
           v-model="comment"
+          class="comment"
+          :min-height="30"
+          :max-height="350"
           @keypress.enter="onCreateComment"
         />
         <b-spinner
@@ -180,31 +197,35 @@
 
     <Comment
       v-for="comment in comments"
-      :key="comment.id"
+      :key="comment.updated_at"
       :item="comment"
-      :uuid="post.post_id"
+      :uuid="post.post_id ? post.post_id : post.id"
+      :onDelete="() => onDelete(comment.id)"
+      @update-comment="(text) => onUpdate({ uuid: comment.id, text })"
     />
     <Loader v-if="loadComment" />
     <NoMoreData
       v-if="comments.length && !loadComment"
       :hasData="hasData"
+      :moreDataTitle="'Show more comments'"
+      :noDataTitle="''"
       @click.native="onShowComment"
     />
   </div>
 </template>
 
 <script>
+import { mapMutations } from "vuex";
+
 import { formatNumber, fromNow } from "@/helpers";
+
 import Loader from "@/components/Loader";
-import { mapMutations, mapGetters } from "vuex";
-import { NoMoreDataForComment } from "@/mixins";
+import { ShareButton } from "@/components/shareButton";
+
+import { NoMoreDataForComment, isYourOwnPostMixins } from "@/mixins";
 
 import Comment from "./comment";
 import light from "../lightbox";
-
-import { ShareButton } from "@/components/shareButton";
-
-import { isYourOwnPostMixins } from "@/mixins";
 
 export default {
   name: "ownerPostComponent",
@@ -218,9 +239,12 @@ export default {
 
   props: {
     post: {},
-    usertype:{
-      
+    usertype: {
       default: () => null,
+    },
+    isDisplayInSearch: {
+      type: Boolean,
+      default: () => false,
     },
     mapvideo: {},
     mapmediae: {},
@@ -250,10 +274,13 @@ export default {
     processLike: false,
     createCommentRequestIsActive: false,
     loadComment: false,
+    commentHasLoad: false,
   }),
 
   created() {
     this.item = this.post;
+
+    if (!this.isDisplayInSearch) this.comments = this.post.comments;
   },
 
   filters: {
@@ -264,6 +291,9 @@ export default {
   computed: {
     icon() {
       return this.post.is_liked ? "suit-heart-fill" : "suit-heart";
+    },
+    isMemberNetworkFollower() {
+      return "memberNetworkFollower" == this.$route.name ? true : false;
     },
   },
 
@@ -281,8 +311,66 @@ export default {
       this.showComment = !this.showComment;
     },
 
+    onDelete: async function (uuid) {
+      const request = await this.$repository.post.delete(uuid);
+
+      if (request.success) {
+        this.comments = this.comments.filter((e) => e.id != uuid);
+        this.item.comment_count -= 1;
+
+        this.flashMessage.show({
+          status: "success",
+          blockClass: "custom-block-class",
+          message: "Comment Deleted",
+        });
+      } else {
+        this.flashMessage.show({
+          status: "error",
+          blockClass: "custom-block-class",
+          message: "Something wrong happen. Try again",
+        });
+      }
+    },
+
+    onUpdate: async function ({ uuid, text }) {
+      let data = { comment: text };
+
+      if (
+        [
+          "NetworkEditors",
+          "networks",
+          "Membar Network Follower",
+          "memberNetwork",
+        ].includes(this.$route.name)
+      )
+        data = Object.assign(data, { networkId: this.profile.id });
+
+      const request = await this.$repository.post.update({ uuid, data });
+
+      if (request.success) {
+        this.comments = this.comments.map((e) =>
+          e.id == uuid ? { ...request.data } : { ...e }
+        );
+
+        this.flashMessage.show({
+          status: "success",
+          blockClass: "custom-block-class",
+          message: "Comment Updated",
+        });
+      } else {
+        this.flashMessage.show({
+          status: "error",
+          blockClass: "custom-block-class",
+          message: request.data,
+        });
+      }
+    },
+
     onLike: async function () {
+      if (this.isDisplayInSearch) return false;
+
       if (!this.canBeDelete) return false;
+
       if (!this.processLike) {
         this.processLike = true;
 
@@ -294,7 +382,7 @@ export default {
         });
 
         if (request.success)
-          this.post = Object.assign(this.post, {
+          this.item = Object.assign(this.post, {
             is_liked: this.post.is_liked ? 0 : 1,
             likes_count: !this.post.is_liked
               ? this.post.likes_count + 1
@@ -311,34 +399,29 @@ export default {
         !(this.comment.trim().length > 2 && !this.createCommentRequestIsActive)
       )
         return false;
+
       this.createCommentRequestIsActive = true;
-      this.loadComment = true;
+
+      let data = { comment: this.comment };
+
+      if (["networks", "NetworkEditors"].includes(this.$route.name))
+        data = Object.assign(data, { networkId: this.$route.params.id });
 
       const request = await this.$repository.share.createComment({
         post: this.post.post_id ? this.post.post_id : this.post.id,
-        data: {
-          networkId: this.$route.params.id
-            ? this.$route.params.id
-            : this.profile.id,
-          comment: this.comment,
-        },
+        data,
       });
 
       if (request.success) {
-        this.onShowComment();
+        this.comments = [request.data, ...this.comments];
         this.comment = "";
-        this.addNewComment({ action: "add:comment:count", uuid: this.post.id });
-        this.post = {
-          ...this.post,
-          comment_count: this.post.comment_count + 1,
-        };
+        this.item.comment_count += 1;
         this.flashMessage.success({
-          message: "Post created",
+          message: this.$t("businessowner.Post_created"),
         });
       }
 
       this.createCommentRequestIsActive = false;
-      this.loadComment = false;
     },
 
     onShowComment: async function () {
@@ -352,7 +435,12 @@ export default {
       });
 
       if (request.success) {
-        this.comments = [...this.comments, ...request.data];
+        if (this.commentHasLoad)
+          this.comments = [...this.comments, ...request.data];
+        else {
+          this.commentHasLoad = true;
+          this.comments = request.data;
+        }
         this.hasData = request.data.length ? true : false;
         this.page = request.data.length ? this.page + 1 : this.page;
       }
@@ -391,9 +479,26 @@ export default {
   margin-bottom: -13px;
 }
 
+.textarea {
+  padding: 5px;
+  box-sizing: border-box;
+}
+
 .custom-block-class {
   position: absolute;
   z-index: 1;
+}
+
+.logo-sizee {
+  width: 70px !important;
+  height: 70px !important;
+  object-fit: cover;
+}
+
+.logo-sizee-18 {
+  width: 50px !important;
+  height: 50px !important;
+  object-fit: cover;
 }
 
 #preview {

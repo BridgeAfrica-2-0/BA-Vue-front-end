@@ -54,45 +54,45 @@
         <div class="bv-example-row">
           <div>
             <b-tabs
-              lazy
+            lazy
               pills
               v-model="tabIndex"
               vertical
               class="itzlala"
               nav-wrapper-class="w-15"
             >
-              <b-tab title="General">
+              <b-tab :title="$t('businessowner.General')">
                 <b-card-text> <General /> </b-card-text
               ></b-tab>
 
-              <b-tab title="Notification">
+              <b-tab :title="$t('businessowner.Notification')">
                 <b-card-text> <Notification /> </b-card-text
               ></b-tab>
 
-              <b-tab title="Business Info">
+              <b-tab :title="$t('businessowner.Business_Info')">
                 <b-card-text> <Info /> </b-card-text
               ></b-tab>
 
-              <b-tab title="Business Roles">
+              <b-tab :title="$t('businessowner.Business_Roles')">
                 <b-card-text> <Roles /> </b-card-text
               ></b-tab>
 
-              <b-tab title="Insight">
+              <b-tab :title="$t('businessowner.Insight')">
                 <b-card-text> <Insight /> </b-card-text
               ></b-tab>
 
-              <b-tab title="Pending Post">
+              <b-tab :title="$t('businessowner.Pending_Post')">
                 <b-card-text> <Pending /> </b-card-text
               ></b-tab>
 
-              <b-tab title="Payment">
+              <b-tab :title="$t('businessowner.Payment')">
                 <b-card-text> <Payment /> </b-card-text
               ></b-tab>
 
-              <b-tab title="Account Type">
+              <b-tab :title="$t('businessowner.Account_Type')">
                 <b-card-text> <Website /> </b-card-text
               ></b-tab>
-              <b-tab title="Blocking">
+              <b-tab :title="$t('businessowner.Blocking')">
                 <b-card-text> <Blocking /> </b-card-text
               ></b-tab>
             </b-tabs>

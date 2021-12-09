@@ -5,6 +5,7 @@
 		</b-modal>
 
 		<div class="people-style shadow" v-for="item in network" :key="item.id">
+
 			<b-row>
 				<b-col md="3" xl="3" lg="3" cols="5" sm="3">
 					<div class="center-img">
@@ -14,8 +15,10 @@
 				<b-col md="5" cols="7" lg="7" xl="5" sm="5">
 					<p class="textt">
 						<strong class="net-title"> {{ item.name }} </strong> <br />
-						{{ item.category }}
-						<br />
+					 
+						
+
+
 						{{ item.followers }}  {{ $t('dashboard.Community') }} <br />
 
 						<span class="location">
@@ -25,11 +28,11 @@
 						<br />
 
 						<read-more
-							more-str="read more"
+							:more-str="$t('dashboard.read_more')"
 							class="readmore"
 							:text="item.about_network"
 							link="#"
-							less-str="read less"
+							:less-str="$t('dashboard.read_less')"
 							:max-chars="50"
 						>
 						</read-more>
@@ -40,19 +43,23 @@
 					<div class="s-button">
 						<b-row>
 							<b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2">
-								
-								 <b-button
+							
+
+
+				 <b-button
                   block
-                  size="sm"
-                  class="b-background shadow"
+                  size="sm"  
+                  :disabled="disable"
+                    :id="'followbtn'+item.id"
                   :class="item.is_follow !== 0 && 'u-btn'"
                   variant="primary"
-                  :id="'followbtn'+item.id"
                   @click="handleFollow(item)"
                 >
-                  <i class="fas fa-user-plus  fa-lg btn-icon "></i>
-                  <span class="btn-com">{{ $t('profileowner.Community') }}</span>
+                 
+                  <i class="fas fa-lg btn-icon" :class="item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"></i>
+                  <span class="btn-com"> {{ $t('dashboard.Community') }}</span>
                 </b-button>
+
 
 
 							</b-col>

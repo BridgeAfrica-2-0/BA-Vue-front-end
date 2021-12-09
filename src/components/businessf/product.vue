@@ -1,6 +1,6 @@
 <template>
   <div>
-    <FlashMessage />
+    
     <div class="people-style p-3 shadow">
       <b-row>
         <b-col cols="5" lg="4" sm="4" md="5">
@@ -27,11 +27,23 @@
             </span>
             <br />
           </p>
-          <p>
-            <b-button variant="primary" @click="handleAddToCard"
+          
+            <div class="row">
+              <div class="col marge" >
+                  <b-button variant="primary"
+                  @click="buyNow" 
+                  ><span>Buy Now</span>
+                 </b-button>
+              </div>
+              <div class="w-100 my-1"></div>
+            <div class="col marge">
+              <b-button variant="primary" @click="handleAddToCard"
               ><span>Add to Cart</span>
-            </b-button>
-          </p>
+             </b-button>
+            </div>
+
+            </div>
+         
         </b-col>
       </b-row>
 
@@ -278,6 +290,11 @@ export default {
     getStatus() {
       return this.$store.state.cart.status;
     },
+
+    shippingAddress() {
+				console.log(this.$store.state.checkout.allShipping);
+				return this.$store.state.checkout.allShipping;
+    }
   },
   methods: {
     /**
@@ -291,6 +308,35 @@ export default {
     closeDetailsProduct() {
       this.viewProduct = false;
     },
+
+    buyNow(){
+      this.handleAddToCard();
+      this.$router.push({name: 'payment'})
+    //   var dataf = [];
+    //  var data =   {
+    //       produits:{
+    //         data: {
+    //           product_id: this.product.id,
+    //             quantity:1,
+    //             price: this.product.price,
+    //             product_kg: this.product.kg,
+    //             business_id:this.product.business_id,
+    //             sub_total: 20000
+    //         },
+    //     },
+    //     total_amount: this.product.price+this.product.tax_amount,
+    //     tax_amount: this.product.tax_amount,
+        
+    // }
+    //   console.log("buy now", data, this.shippingAddress)
+
+    //   this.shippingAddress.map(item =>{
+    //      dataf.push({ ...data, shipping_address: item.id });
+      
+    //   })
+    //   console.log("buy now", dataf)
+    },
+
     handleAddToCard() {
       console.log("add to card ", this.product.id);
       this.$store
@@ -312,6 +358,17 @@ export default {
         });
     },
   },
+
+  mounted(){
+    this.$store
+				.dispatch("checkout/getAllShippingAdd")
+				.then(() => {
+				console.log(this.shippingAddress)
+				})
+				.catch(() => {
+					
+				});
+  }
 };
 </script>
 
@@ -368,6 +425,10 @@ h6 {
   cursor: pointer;
 }
 @media only screen and (min-width: 768px) {
+
+  .marge{
+    margin-left: 200px
+  }
   .pos {
     margin-left: 200px;
   }

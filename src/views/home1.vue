@@ -21,32 +21,21 @@
     </head>
 
     <!-- ======= Header ======= -->
+    
+
+     <site-header class="topbar" />   
     <header id="header" class="fixed-topp">
       <div class="container d-flex align-items-center">
-        <!--  <h1 class="logo mr-auto"><a href="index.html">Arsha</a></h1>
-        Uncomment below if you prefer to use an image logo -->
+<!--       
         <a href="index.html" class="logo mr-auto"
           ><img src="../assets/img/BAC-clear-dotted-logo.png" alt="" class="img-fluid b-logo"
-        /></a>
+        /></a> -->
 
-        <!-- <nav class="nav-menu d-none d-lg-block">
-          <ul>
-            <li class="active"><a href="index.html">Home</a></li>
-            <li><a href="http://info.bridgeafrica.com/">About Us</a></li>
-
-            <li>
-              <a href="http://info.bridgeafrica.com/contact">Contact Us</a>
-            </li>
-
-            <li><a href="#">Login</a></li>
-
-            <li><a href="#">Signup</a></li>
-          </ul>
-        </nav> -->
+        
 
 
       <div>
-  <b-navbar toggleable="sm" type="ligth" variant="ligth">
+  <!-- <b-navbar toggleable="sm" type="ligth" variant="ligth">
    
 
     <b-navbar-toggle target="nav-collapse ">
@@ -56,25 +45,25 @@
       </template>
     </b-navbar-toggle>
 
-    <b-collapse id="nav-collapse" is-nav>
+    <b-collapse id="nav-collapse" is-nav> -->
       
 
       <!-- Right aligned nav items -->
-      <b-navbar-nav class="ml-auto bold size_nav" >
+      <!-- <b-navbar-nav class="ml-auto bold size_nav" >
        
-      <b-nav-item > <router-link to="/" class="mx-2">Home</router-link></b-nav-item>
+      <b-nav-item > <router-link to="/" class="mx-2">{{ $t('home.Home') }}</router-link></b-nav-item>
         
-         <b-nav-item ><router-link :to="{ name: 'about' }" class="mx-2">About Us </router-link></b-nav-item>
+         <b-nav-item ><router-link :to="{ name: 'about' }" class="mx-2">{{ $t('home.About_Us') }} </router-link></b-nav-item>
         
-        <b-nav-item > <router-link :to="{ name: 'contact' }" class="mx-2">Contact Us</router-link></b-nav-item>
-         <!-- <b-nav-item href="#">About Us</b-nav-item> -->
-         <b-nav-item ><router-link to="/login" class="mx-2">Login </router-link></b-nav-item>
-        <b-nav-item ><router-link to="/signup" class="mx-2">Signup </router-link></b-nav-item>
+        <b-nav-item > <router-link :to="{ name: 'contact' }" class="mx-2">  {{ $t('home.Contact_Us') }}  </router-link></b-nav-item>
+      
+         <b-nav-item ><router-link to="/login" class="mx-2">  {{ $t('home.Login') }}  </router-link></b-nav-item>
+        <b-nav-item ><router-link to="/signup" class="mx-2"> {{ $t('home.Signup') }} </router-link></b-nav-item>
 
 
       </b-navbar-nav>
     </b-collapse>
-  </b-navbar>
+  </b-navbar> -->
 </div>
 
 
@@ -94,7 +83,7 @@
           href="#about"
           class="get-started-btn d-lg-none"
           style="font-size: 18px"
-          >Sign Up</a
+          >{{ $t('home.Sign_Up')}}</a
         > -->
       </div>
     </header>
@@ -125,7 +114,7 @@
             data-toggle="popover"
             class="form-control search-mobile"
             style="border-left: none"
-            placeholder="Find Pharmacy"
+            :placeholder="$t('home.Find_Pharmacy')"
             aria-label=""
             data-original-title=""
             title=""
@@ -149,7 +138,7 @@
             data-toggle="popover"
             class="form-control search-mobile"
             style="border-left: none"
-            placeholder="Find Pharmacy"
+            :placeholder="$t('home.Find_Pharmacy')"
             aria-label=""
             data-original-title=""
             title=""
@@ -165,9 +154,8 @@
       <div class="container">
         <div class="search">
           <div class="topp-div d-none d-md-none d-lg-block">
-            <p class="text_box">
-              Empowering Businesses And Consumers With Digital Presence To Buy
-              And Sell Online
+            <p>
+              {{ $t('home.Empowering_Businesses_And_Consumers_With_Digital_Presence_To_Buy_And_Sell_Online') }}
             </p>
           </div>
         </div>
@@ -181,7 +169,7 @@
               aria-label=""
               data-original-title=""
               title=""
-              placeholder="All"
+              :placeholder="$t('home.All')"
               v-model="credentials.keyword"
             />
 
@@ -192,15 +180,15 @@
               list="browsers"
               data-toggle="popover"
               class="form-control search-h"
-              placeholder="Where "
+              :placeholder="$t('home.Where') "
               aria-label="search bridge africa"
               data-original-title=""
               title=""
             />
 
             <datalist id="browsers">
-              <option value=" Current Location "></option>
-              <option value="Yaounde " />
+              <option :value="$t('home.Current_Location') "></option>
+              <option :value="$t('home.Yaounde') " />
             </datalist>
              <slot name="button">
                 <Button @click.native="getKeyword" />
@@ -236,8 +224,7 @@
     >
       <div class="mobile-top-div d-lg-none p-3">
         <h3 style="font-size: 20px">
-          Empowering Businesses And Consumers With Digital Presence To Buy And
-          Sell Online
+          {{ $t('home.Empowering_Businesses_And_Consumers_With_Digital_Presence_To_Buy_And_Sell_Online') }}
         </h3>
       </div>
     </div>
@@ -247,20 +234,21 @@
       <div class="container aos-init aos-animate" data-aos="fade-up">
         <div class="section-title">
           <h3 class="head-text bridge-header">
-            Find Businesses & Institutions
+            {{ $t('home.Find_Businesses_Institutions') }}
           </h3>
         </div>
 
         <div class="container">
           <div class="row">
             <div
-              class="col-auto col-sm-12 col-md-6 col-lg-3 col-xl-3"
+              class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3"
               style="
                 padding-top: 15px;
                 padding-bottom: 15px;
                 padding-right: 15px;
                 padding-left: 15px;
               "
+
             >
               <div
                 class="bg-light border rounded shadow card"
@@ -280,7 +268,7 @@
                       font-size: 0.99em;
                     "
                   >
-                    Agriculture
+                    {{ $t('home.Agriculture') }}
                   </h3>
                   <p
                     class="card-text"
@@ -293,7 +281,7 @@
               </div>
             </div>
             <div
-              class="col-auto col-sm-12 col-md-6 col-lg-3 col-xl-3"
+              class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3"
               style="
                 padding-top: 15px;
                 padding-bottom: 15px;
@@ -319,7 +307,7 @@
                       font-size: 0.99em;
                     "
                   >
-                    Mayor Councils
+                    {{ $t('home.Mayor_Councils') }}
                   </h3>
                   <p
                     class="card-text"
@@ -332,7 +320,7 @@
               </div>
             </div>
             <div
-              class="col-auto col-sm-12 col-md-6 col-lg-3 col-xl-3"
+              class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3"
               style="
                 padding-top: 15px;
                 padding-bottom: 15px;
@@ -358,7 +346,7 @@
                       font-size: 0.99em;
                     "
                   >
-                    Restaurants
+                    {{ $t('home.Restaurants') }}
                   </h3>
                   <p
                     class="card-text"
@@ -371,7 +359,7 @@
               </div>
             </div>
             <div
-              class="col-auto col-sm-12 col-md-6 col-lg-3 col-xl-3"
+              class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3"
               style="
                 padding-top: 15px;
                 padding-bottom: 15px;
@@ -397,7 +385,7 @@
                       font-size: 0.99em;
                     "
                   >
-                    Pharmacies
+                    {{ $t('home.Pharmacies') }}
                   </h3>
                   <p
                     class="card-text"
@@ -413,7 +401,7 @@
         </div>
       </div>
     </section>
-    <div class="w-100 text-light" @mouseover="animation">  .</div>
+    <div class="w-100 text-light"  id="animation"   >  .</div>
     <section id="why-us" class="why-us">
       <div class="container-fluid" id="anim">
         <div class="row">
@@ -430,22 +418,22 @@
           >
             <div class="content">
               <h3 class="bridge-header f-30px">
-                Business Identities and Online Marketplace
+                {{ $t('home.Business_Identities_and_Online_Marketplace') }}
               </h3>
               <p>
-                We help businesses to easily create their websites, buy and sell
-                online through our online marketplace
+                {{ $t('home.We_help_businesses_to_easily_create_their_websites') }}, 
+                {{ $t('home.buy_and_sell_online_through_our_online_marketplace') }}
                 <br />
               </p>
 
               <div class="text-center w-100">
-                <router-link to="login">
+                <router-link :to="{name: 'signup'}">
 
                 <button
                   class="btn btn-primary mt-5 bridge-btn float-left bridge-btn"
                  
                 >
-                  Sign up
+                  {{ $t('home.Sign_up')}}
                 </button>
                 </router-link>
                
@@ -464,8 +452,9 @@
           >
             &nbsp;
 
-            <div class="scroll-container"  >
-              <!-- <div class="  slide-"> -->
+            <!-- <div class="scroll-container "  >
+             
+                 <div class="taille scroll-element js-scroll slide-left">
                 <video
                   class="business-vid1 size_video1"
                   playsinline
@@ -478,8 +467,8 @@
                 >
                   <source src="../assets/video/identity.mp4" type="video/mp4" />
                 </video>
-              <!-- </div> -->
-              <div class=" hidde" id="hidde">
+              </div>
+              <div class="scroll-caption  hidde" id="hidde">
                 <img
                   src="../assets/img/african-farmer.jpg"
                   height="700px"
@@ -487,6 +476,24 @@
                   
                   alt=""
                 />
+              </div>
+            </div> -->
+            
+             <div class="scroll-container">
+              <div class="scroll-element js-scroll slide-left">
+
+                <video class="business-vid1" playsinline autoplay muted loop poster="assets/img/Home scroll copy.png"
+                  id="Test_Video">
+
+                  <source src="../assets/video/identity.mp4" type="video/mp4">
+                </video>
+
+              </div>
+              <div class="scroll-caption hidde " id="hidde">
+
+
+                <img src="../assets/img/african-farmer.jpg" height="700px" class="d-none d-xl-block"
+                  style="height: 700px; margin-left: -300px;" alt="">
               </div>
             </div>
           </div>
@@ -510,21 +517,20 @@
             "
           >
             <div class="content">
-              <h3 class="bridge-header">Online Business Databases</h3>
+              <h3 class="bridge-header">{{ $t('home.Online_Business_Databases') }}</h3>
               <p>
-                Our online business directory helps to make businesses visible
-                and locatable, and enables consumers to search for and compare
-                product prices
+                {{ $t('home.Our_online_business_directory_helps_to_make_businesses_visible_and_locatable') }} , 
+                {{ $t('home.and_enables_consumers_to_search_for_and_compare_product_prices') }}
               </p>
 
               <div class="text-center w-100">
-               <router-link to="login">
+               <router-link :to="{name: 'signup'}">
 
                 <button
                   class="btn btn-primary mt-5 bridge-btn float-left bridge-btn"
                 
                 >
-                  Sign up
+                  {{ $t('home.Sign_up') }}
                 </button>
                </router-link>
                
@@ -575,20 +581,20 @@
             "
           >
             <div class="content">
-              <h3 class="bridge-header">Community Engagement</h3>
+              <h3 class="bridge-header">{{$t('home.Community_Engagement')}}</h3>
               <p>
-                We allow businesses and consumers to follow one another, receive
-                notifications and send direct messages
+                {{ $t('home.We_allow_businesses_and_consumers_to_follow_one_another') }} , 
+                {{ $t('home.receive_notifications_and_send_direct_messages') }}
               </p>
 
               <div class="text-center w-100">
-                <router-link to="login">
+                <router-link :to="{name: 'signup'}">
 
                 <button
                   class="btn btn-primary mt-5 bridge-btn float-left bridge-btn"
                  
                 >
-                  Sign up
+                  {{ $t('home.Sign_up') }}
                 </button>
                 </router-link>
               </div>
@@ -637,20 +643,20 @@
             "
           >
             <div class="content">
-              <h3 class="bridge-header">Online and Offline</h3>
+              <h3 class="bridge-header">{{ $t('home.Online_and_Offline') }}</h3>
               <p>
-                For businesses and consumers in zones of low or no internet
-                penetration, our platform works offline via SMS and USSD
+                {{ $t('home.For_businesses_and_consumers_in_zones_of_low_or_no_internet_penetration') }}, 
+                {{ $t('home.our_platform_works_offline_via_SMS_and_USSD') }}
               </p>
 
               <div class="text-center w-100">
-                <router-link to="login">
+                <router-link :to="{name: 'signup'}">
 
                 <button
                   class="btn btn-primary mt-5 bridge-btn float-left bridge-btn"
                  
                 >
-                  Sign up
+                  {{ $t('home.Sign_up') }}
                 </button>
                 </router-link>
               </div>
@@ -698,7 +704,7 @@
               p-0
             "
           >
-            <div class="carousel slide" data-ride="carousel" id="carousel-1">
+            <!-- <div class="carousel slide" data-ride="carousel" id="carousel-1">
               <div class="carousel-inner" role="listbox">
                 <div class="carousel-item active">
                   <img
@@ -724,14 +730,14 @@
                   role="button"
                   data-slide="prev"
                   ><span class="carousel-control-prev-icon"></span
-                  ><span class="sr-only">Previous</span></a
+                  ><span class="sr-only">{{ $t('home.Previous') }}</span></a
                 ><a
                   class="carousel-control-next"
                   href="#carousel-1"
                   role="button"
                   data-slide="next"
                   ><span class="carousel-control-next-icon"></span
-                  ><span class="sr-only">Next</span></a
+                  ><span class="sr-only">{{ $t('home.Next') }}</span></a
                 >
               </div>
               <ol class="carousel-indicators">
@@ -742,7 +748,37 @@
                 ></li>
                 <li data-target="#carousel-1" data-slide-to="1"></li>
               </ol>
-            </div>
+            </div> -->
+         
+          <div>
+  <b-carousel
+    id="carousel-no-animation"
+    style="text-shadow: 0px 0px 2px #000"
+    no-animation
+    indicators
+    img-width="1024"
+    img-height="480"
+  >
+    <b-carousel-slide
+      caption=""
+      :img-src="img1"
+    ></b-carousel-slide>
+    <b-carousel-slide
+      caption=""
+      :img-src="require('../assets/img/coach2.png')"
+    ></b-carousel-slide>
+    <!-- <b-carousel-slide
+      caption="Third Slide"
+      img-src="https://picsum.photos/1024/480/?image=22"
+    ></b-carousel-slide>
+    <b-carousel-slide
+      caption="Fourth Slide"
+      img-src="https://picsum.photos/1024/480/?image=23"
+    ></b-carousel-slide> -->
+  </b-carousel>
+</div>
+
+
           </div>
 
           <div
@@ -760,16 +796,15 @@
             &nbsp;
 
             <div class="content">
-              <h3 class="bridge-header">Digital literacy</h3>
+              <h3 class="bridge-header">{{ $t('home.Digital_literacy') }}</h3>
               <p>
-                We provide face-to-face digital literacy trainings for
-                businesses who lack digital know-how through our army of digital
-                coaches
+                {{ $t('home.We_provide_face_to_face_digital_literacy_trainings') }} 
+                {{ $t('home.for_businesses_who_lack_digital_know_how_through_our_army_of_digital_coaches') }}
               </p>
-                <router-link to="login">
+                <router-link :to="{name: 'signup'}">
 
               <button class="btn btn-primary mt-5 bridge-btn bridge-btn mb-3">
-                See Videos
+                {{ $t('home.See_Videos') }}
               </button>
               </router-link>
             </div>
@@ -816,29 +851,29 @@
             </div>
 
             <div class="col-lg-3 col-md-6 footer-links">
-              <h4 class="bridge-header text-left white">OUR ADRESS</h4>
+              <h4 class="bridge-header text-left white">{{ $t('home.OUR_ADRESSE') }}</h4>
               <ul class="text-left white">
-                <li>International Handicraft Center, Rond-point Intendance</li>
+                <li>{{ $t('home.International_Handicraft_Center') }}, {{ $t('home.Rond_point_Intendance') }}</li>
 
-                <li>Yaoundé</li>
+                <li>{{ $t('home.Yaounde') }}</li>
 
-                <li>Cameroon</li>
+                <li>{{ $t('home.Cameroon') }}</li>
               </ul>
             </div>
 
             <div class="col-lg-3 col-md-6 footer-links white">
-              <h4 class="bridge-header text-left white">USEFULL LINKS</h4>
+              <h4 class="bridge-header text-left white">{{ $t('home.USEFULL_LINKS') }}</h4>
               <ul class="white">
                 <li class="white"><a href="#">Bridgeafricaventures.com</a></li>
 
-                <li class="white"><a href="#">Home</a></li>
+                <li class="white"><a href="#">{{ $t('home.Home') }}</a></li>
 
                 <li class="white">
-                  <a href="http://info.bridgeafrica.com">About Us</a>
+                  <router-link :to="{name: 'about'}">{{ $t('home.About_Us') }}</router-link>
                 </li>
 
                 <li class="white">
-                  <a href="http://info.bridgeafrica.com/contact/">Contact Us</a>
+                  <router-link :to="{name: 'contact'}">{{ $t('home.Contact_Us') }}</router-link>
                 </li>
 
                 <!--   
@@ -849,11 +884,11 @@
             </div>
 
             <div class="col-lg-3 col-md-6 footer-links">
-              <h4 class="bridge-header text-left white">WORKING HOURS</h4>
+              <h4 class="bridge-header text-left white">{{ $t('home.WORKING_HOURS') }}</h4>
               <ul class="white">
-                <li>Monday-Friday: 09AM – 05PM</li>
+                <li>{{ $t('home.Monday') }}-{{ $t('home.Friday') }}: {{ $t('home.09AM_05PM') }}</li>
 
-                <li>Saturday: 09AM – 01PM</li>
+                <li>{{ $t('home.Saturday') }}: {{ $t('home.09AM_01PM') }}</li>
               </ul>
             </div>
           </div>
@@ -884,14 +919,15 @@
 import "../assets/js/main.js";
 // import "../assets/js/js.js";
 import Button from '@/components/ButtonNavBarFind.vue';
-//import SiteHeader from '../components/site/siteHeader';
+import SiteHeader from '../components/site/siteHeader';
 export default {
-  components: {Button},
+  components: {Button, SiteHeader},
   data(){
     return {
       expanded:true,
       word1:'',
-      word2:''
+      word2:'',
+      img1:require('../assets/img/coach.png')
     }
   },
 
@@ -903,7 +939,7 @@ export default {
       default: function () {
         return {
           keyword: '',
-          placeholder: 'All',
+          placeholder: this.$t('home.All'),
         };
       },
     },
@@ -960,7 +996,7 @@ export default {
     },
 
     animation(){
-      
+      console.log("annimation----")
   var id = null;
   var elem = document.getElementById("Test_Video");
   var pos = 0;
@@ -977,6 +1013,7 @@ export default {
       elem.style.zIndex = "1";
       elem.style.left = pos + 'px';
     if(pos == 50){
+      // document.getElementById("animation").removeEventListener("scroll")
        elem.style.left = 0 + 'px';
     }
   } 
@@ -986,10 +1023,135 @@ export default {
   }
   },
   mounted(){
-    document.getElementById("why-us").onscroll = function() {
+      
 
-      this.animation();
+    
+
+//     document.getElementById("animation").addEventListener("scroll", () => {
+//     this.animation();
+// });
+
+    // document.getElementById("animation").addEventListener("scroll", () => {
+    // this.animation();
+    // window.removeEventListener("scroll")
+// });
+
+
+
+    var v = document.getElementById("Test_Video");
+
+
+    var v2 = document.getElementById("Test_Video2");
+
+    var v3 = document.getElementById("Test_Video3");
+
+
+    v.playbackRate = 0.8;
+    v2.playbackRate = 0.8;
+    v3.playbackRate = 0.8;
+
+
+
+    const scrollElements = document.querySelectorAll(".js-scroll");
+
+
+    const scrollElements2 = document.querySelectorAll(".hidde");
+
+
+
+
+    const elementInView = (el, dividend = 1) => {
+      const elementTop = el.getBoundingClientRect().top;
+      console.log(document.documentElement.clientHeight);
+
+      return (
+        elementTop <=
+        (30) / dividend
+        //( 100) / dividen
+      );
     };
+
+    const elementOutofView = (el) => {
+      const elementTop = el.getBoundingClientRect().top;
+
+      return (
+        elementTop > (window.innerHeight || document.documentElement.clientHeight)
+      );
+    };
+
+    const displayScrollElement = (element) => {
+      element.classList.add("scrolled");
+
+
+
+
+
+    };
+
+    const displayScrollElement2 = (element) => {
+      element.classList.add("js-scrolll");
+
+
+
+
+
+    };
+
+    const hideScrollElement2 = (element) => {
+      element.classList.remove("js-scrolll");
+
+    };
+
+
+    const hideScrollElement = (element) => {
+      element.classList.remove("scrolled");
+
+    };
+
+
+    const handleScrollAnimation = () => {
+
+      scrollElements.forEach((el) => {
+        if (elementInView(el, 1.25)) {
+          displayScrollElement(el);
+
+
+
+        } else if (elementOutofView(el)) {
+          hideScrollElement(el);
+
+
+
+        }
+      });
+
+
+      scrollElements2.forEach((el) => {
+        if (elementInView(el, 1.25)) {
+          displayScrollElement2(el);
+
+
+
+
+        } else if (elementOutofView(el)) {
+          hideScrollElement2(el);
+
+
+
+
+        }
+      })
+
+    }
+
+    window.addEventListener("scroll", () => {
+      handleScrollAnimation();
+    });
+
+
+
+
+ 
 
   }
 };
@@ -1013,6 +1175,9 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Merriweather&family=Merriweather+Sans:wght@300&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Jost:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i");
 
+.zoomInUp{
+  background-color: #cc4d0d;
+}
 .couleur{
   color: #e75c18 ;
   
@@ -1022,9 +1187,10 @@ export default {
   font-size: 16px;
 }
 .taillev1{
-  height: 680px !important;
-  width: 300px;
-  
+    height: 670px !important;
+    width: 400px;
+    margin-left: 130px;
+    margin-right: 190px;
 }
 .blec-container {
   position: absolute;
@@ -1114,10 +1280,35 @@ export default {
 }
 
 @media only screen and (min-width: 768px) {
-  .size_video1{
-    /* width: 400px !important;
-    height: 700px !important; */
+
+.scroll-container {
+   
+    width: 1000px !important;
+}
+  .d-xl-block {
+    display: block !important;
+    /* margin-left: 100px !important; */
+    
+        /* height: 530px !important;
+    width: 390px */
+}
+.taille{
+  height: 704px;
+}
+.topbar{
+    position: fixed;
+}
+
+  .sizeimg{
+    border: solid;
+    margin-left: -190px;
+    margin-right: -20px;
   }
+  .size_video1{
+    width: 400px !important;
+    height: 700px !important;
+  }
+
   .bridge-btn{
     width: 124px;
     height: 48px;
@@ -1172,14 +1363,14 @@ export default {
 
   .business-vid {
     width: 1000px;
-    margin-left: -50%;
+    /* margin-left: -50%; */
     z-index: 1;
     position: relative;
   }
 
   .business-vid1 {
-    height: 704px;
-    width: 396px;
+    height: 704px !important;
+    width: 396px ;
     z-index: 1;
     position: relative;
   }
@@ -1340,7 +1531,9 @@ header h2 {
 }
 
 .scroll-caption {
-  margin: 1rem;
+  
+      margin-left: 200px;
+    height: 700px !important;
 }
 
 footer {

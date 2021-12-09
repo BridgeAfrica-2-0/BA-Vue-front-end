@@ -2,15 +2,16 @@
   <div class="t-color">
     <div>
       <fas-icon class="icons" :icon="['fas', 'project-diagram']" size="lg" />
-      <span class="t-color"> Network </span>
+      <span class="t-color">  {{ $t('businessowner.Network') }} </span>
 
       <b-button
         class="float-right"
         @click="showmodal(true, 'add')"
         variant="primary"
-        >Add Network</b-button
+        >{{ $t('businessowner.Add_Network') }}</b-button
       >
-      <hr />    
+      <hr />  
+      <!-- {{ $t('businessowner.') }} {{ $t('businessowner.Add_Network') }}   -->
       <b-row>
         <b-col
           cols="12"
@@ -32,7 +33,7 @@
                   <strong class="net-title"> {{ network.name }} </strong> <br />
               <span v-for="cat in network.categories" :key="cat" >  {{cat}} </span>
                   <br />
-                  {{ network.followers }} Community <br />
+                  {{ network.followers }}  {{ $t('businessowner.Community') }} <br />
 
                   <span class="location">
                     <b-icon-geo-alt class="ico"></b-icon-geo-alt>
@@ -63,7 +64,7 @@
                       >
                         <i class="fas fa-user-plus fa-lg btn-icon"></i>
                         <span class="btn-com" v-b-modal.modal-sm
-                          >Community</span
+                          > {{ $t('businessowner.Community') }}</span
                         >
                       </b-button>
                     </b-col>
@@ -75,7 +76,7 @@
                         class="b-background shadow"
                         variant="primary"
                         ><i class="fas fa-envelope fa-lg btn-icon"></i>
-                        <span class="btn-text">Message</span>
+                        <span class="btn-text"> {{ $t('businessowner.Message') }}</span>
                       </b-button>
                     </b-col>
 

@@ -1,8 +1,7 @@
 <template>
   <div>
-    <FlashMessage class="glash" />
     <div class="row">
-      <div class="container-fluid" v-if="showalbum == false">
+      <div class="container-fluid" v-if="!showalbum">
         <div class="one2">
           <div class="createp img-gall image-wrapp img-size" v-if="isEditor" v-b-modal.createalbumModal>
             <div class="">

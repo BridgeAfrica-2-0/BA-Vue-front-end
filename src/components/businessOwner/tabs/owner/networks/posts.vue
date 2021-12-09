@@ -30,7 +30,7 @@
           </template>
           <b-dropdown-item-button v-on:click="deletePost(post.id)">
             <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
-            Delete
+           {{ $t('businessowner.Delete') }} 
           </b-dropdown-item-button>
         </b-dropdown>
       </b-col>

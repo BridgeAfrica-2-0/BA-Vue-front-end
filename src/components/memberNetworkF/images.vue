@@ -29,7 +29,7 @@
           :index="index"
           @hide="handleHide"
         ></vue-easy-lightbox>
-         <FlashMessage />
+         
       </div>
     </div>
   </div>

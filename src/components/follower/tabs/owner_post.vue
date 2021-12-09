@@ -1,172 +1,56 @@
 <template>
   <div>
     
+  
 
-    <b-card class="px-md-3 mt-3">
-      
-     
-      <div v-for="item in owner_post" :key="item.post_id">
-       
-        <div  class="mt-2">
-          <div class="d-inline-flex"> 
-            <span  md="1" class="m-0 p-0">
-              <b-avatar
-                class="d-inline-block avat"
-                variant="primary"
-                :src="item.profile_picture"
-              ></b-avatar>
-            </span>
-            <div  class="pl-2 pl-md-3  pt-md-2">
-              <h5 class="m-0  usernamee">
-                {{ item.name }}
-               
-              </h5>
-              <p class="durationn">{{ moment(item.created_at).fromNow() }}</p>
-            </div>
+    <Post
+      v-for="(item, index) in owner_post"
+      usertype="user"
+      :key="index"
+      :post="item"
+      :mapvideo="() => mapvideo(item.media)"
+      :mapmediae="() => mapmediae(item.media)"
+      :businessLogo="item.profile_picture"
+       :editPost="() => editPost(item)"
+      :deletePost="() => deletePost(item)"
+    
+    />
 
-
-             <div class="toright pt-2"> </div>
-
-          </div>
-          <div class="m-0 p-0">
-            
-              <p  class="post-text">
-                <!--     :text="item.content.details"   -->
-                <read-more v-if="item.content"
-                  more-str="read more"
-                  :text="item.content"
-                  link="#"
-                  less-str="read less"
-                  :max-chars="200"
-                ></read-more>
-              </p>
-           
-          </div>
-
-           <div   v-if="item.media.length > 0" class="">
-
-
-             <span v-for="video in mapvideo(item.media)" :key='video' > 
-
-
-            <youtube  class="w-100 videoh" :video-id="getId(video)" :player-vars="playerVars" @playing="playing"></youtube>
-
-           </span>
- 
-            <light
-              css=" "
-              :cells="item.media.length"
-              :items="mapmediae(item.media)"
-            ></light>
-
-
-                <light
-                css=" "
-                  :cells="item.media.length"
-                  :items="
-                    item.media.map(function (a) {
-                      return a.media_url;
-                    })
-                  "
-                ></light> 
-              </div>
-          <b-row>
-
-           
-
-            <!--   v-if="item.content.movies.length <= 0"  -->
-            <b-col cols="12" class="mt-2">
-              <!--  :src="$store.getters.getProfilePicture"  -->
-            </b-col>
-            <b-col class="mt-1">
-              <span class="mr-3"
-                ><b-icon
-                  icon="suit-heart"
-                  variant="primary"
-                  aria-hidden="true"
-                ></b-icon>
-                {{ nFormatter(item.likes_count) }}
-              </span>
-              <span
-                ><b-icon
-                  icon="chat-fill"
-                  variant="primary"
-                  aria-hidden="true"
-                ></b-icon>
-                {{ nFormatter(item.comment_count) }}
-              </span>
-
-              <span>
-                <fas-icon class="primary ml-3" :icon="['fas', 'share']" />
-              </span>
-            </b-col>
-          </b-row>
-
-          <!--  :src="$store.getters.getProfilePicture"  -->
-         
-        </div>
-
-         <div class="mt-2 d-inline-flex w-100">
-            <div  class="m-md-0 p-md-0">
-              <b-avatar
-                variant="primary"
-                :src="info.user.profile_picture"
-                class="img-fluid avat-comment"
-              ></b-avatar>
-            </div>
-
-            <div  class="p-0 m-0 pr-3 inline-comment">
-              <input placeholder="Post a Comment" class="comment" type="text" />
-
-              <fas-icon
-                class="primary send-cmt"
-                :icon="['fas', 'paper-plane']"
-              />
-            </div>
-
-          </div>
-
-        <Comment
-          v-for="comment in item.comments"
-          :key="comment.id"
-          :comment="comment"
-        />
-        <hr>
-      </div>
-
-      <infinite-loading :identifier="infiniteId"   ref="infiniteLoading"   @infinite="infiniteHandler"></infinite-loading>
-    </b-card>
+    <infinite-loading
+      :identifier="infiniteId"
+      ref="infiniteLoading"
+      @infinite="infiniteHandler"
+    >
+  <div slot="no-more">No more message</div>
+  <div slot="no-results" class="card">No more Post </div>     </infinite-loading>
   </div>
 </template>
 
 <script>
-import Comment from "../comment";
-import light from "../../lightbox";
-import moment from "moment";
+import Post from "@/components/businessOwner/ownerPostComponent";
+
 import axios from "axios";
 
 export default {
   name: "postNetwork",
   components: {
-    Comment,
-    light,
-   
+    Post,
   },
   data() {
     return {
       playerVars: {
         autoplay: 0,
       },
-      moment: moment,
+      owner_post:[],
       page: 1,
       infiniteId: +new Date(),
-      
+      post: this.$store.state.businessOwner.ownerPost,
       url: null,
       delete: [],
       edit_description: null,
       edit_image: null,
       edit_id: null,
-
+      uploadPercentage: 0,
       fullPage: false,
       images: ["https://i.wifegeek.com/200426/f9459c52.jpg"],
       imagees: [
@@ -178,6 +62,8 @@ export default {
         "https://pbs.twimg.com/media/DKO62sVXUAA0_AL.jpg",
         "https://i.wifegeek.com/200426/5ce1e1c7.jpg",
       ],
+      animate: true,
+      isUploading: false,
       createPost: {
         postBusinessUpdate: "",
         movies: [],
@@ -189,55 +75,39 @@ export default {
   },
 
   methods: {
+    mapmediae(media) {
+      let mediaarr = [];
 
-
-     mapmediae(media){
-
-       let mediaarr=[];
-
-       media.forEach((item) => {
-
+      media.forEach((item) => {
         let type = this.checkMediaType(item.media_type);
-       if(type != "video") {  
-        mediaarr.push(item.media_url);
-         }
-
-       });
+        if (type != "video") {
+          mediaarr.push(item.media_url);
+        }
+      });
 
       return mediaarr;
-
     },
 
+    mapvideo(media) {
+      let mediaarr = [];
 
-
-  getId (video_url) {
-      return this.$youtube.getIdFromUrl(video_url)
-    },
-    
-      mapvideo(media){
-
-       let mediaarr=[];
-
-       media.forEach((item) => {
-
+      media.forEach((item) => {
         let type = this.checkMediaType(item.media_type);
-       if(type == "video") {  
-        mediaarr.push(item.media_url);
-         }
-
-       });
+        if (type == "video") {
+          mediaarr.push(item.media_url);
+        }
+      });
 
       return mediaarr;
-
     },
 
-
-    checkMediaType(media){
-
-     return media.split("/")[0] ;  
-
+    checkMediaType(media) {
+      return media.split("/")[0];
     },
 
+    getId(video_url) {
+      return this.$youtube.getIdFromUrl(video_url);
+    },
 
     nFormatter(num) {
       if (num >= 1000000000) {
@@ -252,7 +122,15 @@ export default {
       return num;
     },
 
-   
+    reloads() {
+      console.log("reoading");
+      this.$store.commit("profile/ownerPost", []);
+    },
+
+    
+
+
+    
     infiniteHandler($state) {
      
       let url= "user/post/" + this.page+"?id="+this.url;
@@ -275,24 +153,383 @@ export default {
         });
     },
 
-   
-   
+
+
+
+
+    deletePost(post) {
+      let loader = this.$loading.show({
+        container: this.fullPage ? null : this.$refs.creatform,
+        canCancel: true,
+        onCancel: this.onCancel,
+        color: "#e75c18",
+      });
+
+      const path = `user/post/delete/${post.post_id ? post.post_id : post.id}`;
+      axios
+        .delete(path)
+        .then((response) => {
+          this.flashMessage.show({
+            status: "success",
+            blockClass: "custom-block-class",
+            message: this.$t("profileowner.Post_Deleted"),
+          });
+          this.reloads();
+          this.page = 1;
+          this.infiniteId += 1;
+          loader.hide();
+        })
+        .catch((err) => {
+          this.sending = false;
+
+          if (err.response.status == 422) {
+            console.log({ err: err });
+
+            this.flashMessage.show({
+              status: "error",
+              blockClass: "custom-block-class",
+              message: err.response.data.message,
+            });
+
+            loader.hide();
+          } else {
+            this.flashMessage.show({
+              status: "error",
+              blockClass: "custom-block-class",
+              message: this.$t("profileowner.Unable_to_Delete_your_Post"),
+            });
+            console.log({ err: err });
+
+            loader.hide();
+          }
+        });
+    },
+
+    editPost(postarray) {
+      this.edit_description = postarray.content;
+      this.edit_image = postarray.media;
+      this.edit_id = postarray.post_id ? postarray.post_id : postarray.id;
+
+      console.log(this.edit_image);
+
+      this.$refs["modal-edit"].show();
+    },
+
+    updatePost() {
+      let loader = this.$loading.show({
+        container: this.fullPage ? null : this.$refs.loader,
+        canCancel: true,
+        onCancel: this.onCancel,
+        color: "#e75c18",
+      });
+
+      this.fileImageArr = this.createPost.movies;
+
+      let formData2 = new FormData();
+
+      this.delete.forEach((value, index) => {
+        formData2.append("deleteImg[" + index + "]", value.id);
+
+        console.log(value);
+      });
+
+      this.fileImageArr.forEach((value, index) => {
+        formData2.append("media[" + index + "]", value.target.files[0]);
+
+        console.log(value);
+      });
+
+      formData2.append("type", "image");
+
+      formData2.append("content", this.edit_description);
+
+      this.axios
+        .post("user/post/update/" + this.edit_id, formData2, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
+        .then((response) => {
+          console.log(response);
+
+          this.flashMessage.show({
+            status: "success",
+            blockClass: "custom-block-class",
+            message: this.$t("profileowner.Content_successfuly_uploaded"),
+          });
+
+          this.reloads();
+          this.page = 1;
+          this.infiniteId += 1;
+
+          loader.hide();
+
+          this.$refs["modal-edit"].hide();
+        })
+        .catch((err) => {
+          if (err.response.status == 422) {
+            console.log({ err: err });
+            console.log(err.response.data.message);
+
+            this.flashMessage.show({
+              status: "error",
+
+              message: err.response.data.message,
+              blockClass: "custom-block-class",
+            });
+
+            loader.hide();
+            this.$refs["modal-edit"].hide();
+          } else {
+            this.flashMessage.show({
+              status: "error",
+
+              message: this.$t("profileowner.Unable_to_Update_your_post"),
+              blockClass: "custom-block-class",
+            });
+            console.log({ err: err });
+            loader.hide();
+            this.$refs["modal-edit"].hide();
+          }
+        });
+    },
+
+    chooseImage: function () {},
+    chooseVideo: function () {
+      document.getElementById("chosefile").click();
+    },
+    chooseDocument() {
+      document.getElementById("chosefile").click();
+    },
+
+    selectMovies(event) {
+      const file = event.target;
+
+      if (file.files) {
+        console.log("logging start");
+        let reader = new FileReader();
+        reader.onload = (e) => {
+          this.createPost.movies.push({
+            target: event.target,
+            movie: e.target.result,
+            fileName: event.target.files[0].name,
+            link: URL.createObjectURL(event.target.files[0]),
+            fileType: e.target.result.match(/^data:([^/]+)\/([^;]+);/)[1] || [],
+          });
+          console.log();
+        };
+        reader.readAsDataURL(file.files[0]);
+      }
+    },
+    service(file) {
+      let result = null;
+      if (file.files) {
+        let reader = new FileReader();
+        reader.onload = (e) => {
+          result = e.target.result;
+
+          return result;
+        };
+        reader.readAsDataURL(file.files[0]);
+      }
+    },
+
+    selectMoviesOutsidePost(event) {
+      const file = event.target;
+
+      if (file.files) {
+        let reader = new FileReader();
+        reader.onload = (e) => {
+          this.createPost.movies.push({
+            target: event.target,
+            movie: e.target.result,
+            fileName: event.target.files[0].name,
+            link: URL.createObjectURL(event.target.files[0]),
+            fileType: e.target.result.match(/^data:([^/]+)\/([^;]+);/)[1] || [],
+          });
+        };
+        reader.readAsDataURL(file.files[0]);
+      }
+
+      this.$refs["modal-xl"].show();
+    },
+    selectDocument(event) {
+      console.log(event);
+      this.createPost.hyperlinks.push({
+        target: event.target,
+        document: this.service(event.target),
+        fileName: event.target.files[0].name,
+      });
+    },
+    selectDocumentOutsidePost(event) {
+      console.log(event);
+      this.createPost.hyperlinks.push({
+        target: event.target,
+        document: this.service(event.target),
+        fileName: event.target.files[0].name,
+      });
+      this.$refs["modal-xl"].show();
+    },
+    createPost_() {
+      this.$refs["modal-xl"].show();
+    },
+
+    deleteItem(name) {
+      const newHyperlinks = this.createPost.hyperlinks.filter(
+        (item) => item.fileName.trim() !== name.trim()
+      );
+      const movies = this.createPost.movies.filter(
+        (item) => item.fileName.trim() !== name.trim()
+      );
+      this.createPost.hyperlinks = [...newHyperlinks];
+      this.createPost.movies = [...movies];
+    },
+
+    deleteImage(id, eve) {
+      this.edit_image.splice(id, 1);
+
+      this.delete.push({
+        id: eve.id,
+      });
+
+      console.log(this.delete);
+    },
+
+    onCancel() {
+      console.log("User cancelled the loader.");
+    },
+
+    ownerPost() {
+      this.$store
+        .dispatch("profile/ownerPost")
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+    submitPost() {
+      this.isUploading = true;
+      let loader = this.$loading.show({
+        container: this.$refs.loader,
+        canCancel: true,
+        onCancel: this.onCancel,
+        color: "#e75c18",
+      });
+
+      let fileImage = null;
+
+      let formData2 = new FormData();
+      console.log(this.createPost.movies);
+      if (this.createPost.movies[0]) {
+        fileImage = this.createPost.movies[0].target.files[0];
+
+        this.fileImageArr = this.createPost.movies;
+        console.log(this.fileImageArr);
+
+        this.fileImageArr.forEach((value, index) => {
+          formData2.append("media[" + index + "]", value.target.files[0]);
+        });
+      }
+
+      formData2.append("type", "image");
+
+      formData2.append("content", this.createPost.postBusinessUpdate);
+
+      console.log(formData2);
+
+      this.axios
+        .post("user/post", formData2, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+
+          onUploadProgress: function (progressEvent) {
+            this.uploadPercentage = parseInt(
+              Math.round((progressEvent.loaded / progressEvent.total) * 100)
+            );
+          }.bind(this),
+        })
+        .then((response) => {
+          console.log(response);
+
+          this.flashMessage.show({
+            status: "success",
+            blockClass: "custom-block-class",
+            message: this.$t("profileowner.Content_successfuly_uploaded"),
+          });
+          this.isUploading = false;
+          loader.hide();
+          this.$refs["modal-xl"].hide();
+
+          this.$store.commit("businessOwner/ownerPost", []);
+          this.reloads();
+          this.page = 1;
+          this.infiniteId += 1;
+          console.log("post create complete");
+        })
+        .catch((err) => {
+          if (err.response.status == 422) {
+            console.log({ err: err });
+            console.log(err.response.data.message);
+
+            this.flashMessage.show({
+              status: "error",
+
+              message: err.response.data.message,
+              blockClass: "custom-block-class",
+            });
+
+            loader.hide();
+            this.isUploading = false;
+          } else {
+            this.flashMessage.show({
+              status: "error",
+
+              message: this.$t("profileowner.Unable_to_Create_Your_Post"),
+              blockClass: "custom-block-class",
+            });
+            console.log({ err: err });
+            loader.hide();
+            this.isUploading = false;
+          }
+        });
+    },
+
+    showModal() {
+      this.$refs["modal-3"].show();
+    },
+    hideModal() {
+      this.$refs["modal-3"].hide();
+    },
+    resetPostData() {
+      console.log("Resetting the post data");
+
+      if (!this.isSubmitted) {
+        this.createPost.hyperlinks = [];
+        this.createPost.movies = [];
+        this.createPost.postBusinessUpdate = "";
+      }
+    },
   },
   computed: {
     imageProfile() {
       return "yoo";
     },
 
-     info: function () {
-      return this.$store.getters["follower/getUserPostIntro"];
+    info: function () {
+      return this.$store.getters["profile/getUserPostIntro"];
     },
 
-   
-    owner_post() {
-      return this.$store.state.follower.ownerPost;
+    old_owner_post() {
+      return this.$store.state.profile.ownerPost;
     },
 
-  
+    profileNamePost() {
+      return "yoo";
+    },
   },
   mounted() {
     this.url = this.$route.params.id;
@@ -301,19 +538,19 @@ export default {
 </script>
 
 <style >
-  
-  .h-lg-250{
+.h-lg-250 {
+  height: 350px !important;
+}
 
-   height: 350px !important;   
-  }
-
-  .lb-item{
-    background-size: auto;
-  }
- 
+.lb-item {
+  background-size: auto;
+}
 </style>
 
 <style scoped>
+.m13 {
+  margin-bottom: -13px;
+}
 
 .custom-block-class {
   position: absolute;
@@ -327,13 +564,12 @@ export default {
 }
 
 .upload-cancel {
-   
-   z-index: 1;
-    margin-top: -40%;
-    float: right;
-    margin-left: -10px;
-    right: -97%;
-    position: relative;
+  z-index: 1;
+  margin-top: -40%;
+  float: right;
+  margin-left: -10px;
+  right: -97%;
+  position: relative;
 }
 
 .upload-cancel:hover {
@@ -342,17 +578,15 @@ export default {
 }
 
 .oorange {
-  
   color: red;
-    font-size: 20px;
-    background: white;
-    border-radius: 50%;
-
+  font-size: 20px;
+  background: white;
+  border-radius: 50%;
 }
 
-.h300px{
+.h300px {
   height: 300px;
-  overflow-x:hidden;
+  overflow-x: hidden;
 }
 
 #preview img {
@@ -379,26 +613,30 @@ export default {
   color: #e75c18;
 }
 @media (max-width: 762px) {
-.usernamee{
-  font-weight: 600;
-  font-size: 15px;
-  color:black;
+  .usernamee {
+    font-weight: 600;
+    font-size: 15px;
+    color: black;
+  }
+
+  .videoh {
+    height: 200px !important;
+  }
 }
-
-
-
-}
-.inline-comment{
+.inline-comment {
   width: 95%;
 }
 
 @media (min-width: 762px) {
+  .videoh {
+    height: 400px !important;
+  }
 
-  .usernamee{
-  font-weight: 600;
-  font-size: 20px;
-  color:black;
-}
+  .usernamee {
+    font-weight: 600;
+    font-size: 20px;
+    color: black;
+  }
 
   .avat {
     width: 64px;
@@ -429,6 +667,16 @@ export default {
   }
 }
 @media (max-width: 762px) {
+  .commentt[data-v-41fcb621] {
+    width: 99%;
+    border: solid 1 px #ccc;
+    border-radius: 25 px;
+    background-color: #ddd;
+    height: 34 px;
+    padding-left: 10 px;
+    margin-left: 2%;
+  }
+
   .post-btn {
     border: none !important;
     margin-right: 0px;
@@ -511,12 +759,10 @@ export default {
   }
 }
 .bordder {
- 
-
   border: 1px solid gray;
-    height: 50px;
-    padding: 6px;
-    border-radius: 10px;
+  height: 50px;
+  padding: 6px;
+  border-radius: 10px;
 }
 .username {
   color: black;
@@ -546,25 +792,40 @@ export default {
   border-color: red;
 }
 
-.durationn{
-  font-weight:400;
+.durationn {
+  font-weight: 400;
   font-size: 15px;
-  color:black
-
-
+  color: black;
 }
-
 </style>
 <style>
+@media (max-width: 762px) {
+  .usernamee {
+    font-weight: 600;
+    font-size: 15px;
+    color: black;
+  }
+
+  .videoh {
+    height: 200px !important;
+  }
+}
+
+@media (min-width: 762px) {
+  .videoh {
+    height: 400px !important;
+  }
+}
+
 .custom-block-class {
   position: absolute;
   z-index: 1;
 }
-.post-text p{
+.post-text p {
   margin: 0px;
 }
-.toright{
+.toright {
   position: absolute;
-    right: 1%;
+  right: 1%;
 }
 </style>

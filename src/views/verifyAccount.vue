@@ -47,7 +47,7 @@
       
     </div>
 
-    <FlashMessage />
+    
   </b-container>
 </template>
 

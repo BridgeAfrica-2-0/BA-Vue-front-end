@@ -100,23 +100,21 @@
                 title=""
               />
 
-              <input
-                id="search-location"
-                ref="foo"
-                type="search"
-                list="browsers"
-                data-toggle="popover"
-                class="form-control search-h"
-                placeholder="Where "
-                aria-label="search bridge africa"
-                data-original-title=""
-                title=""
-              />
 
-              <datalist id="browsers">
-                <option value=" Current Location "></option>
-                <option value="Yaounde " />
-              </datalist>
+
+           <vue-bootstrap-typeahead
+    
+    v-model="query"
+    :data="users"
+    :serializer="item => item.login"
+    @hit="selectedUser = $event"
+    placeholder="Where"
+    class="search-hh"
+  />
+
+    
+
+             
               <slot name="button">
                 <Button @click.native="getKeyword" />
               </slot>
@@ -192,11 +190,12 @@
                   data-original-title=""
                   title=""
                   v-else
-                >
-                  <span class="text-ored"
-                    ><fas-icon class="primary" :icon="['fas', 'comment']" />
-                  </span>
-                </a>
+                  ><span class="text-ored"
+                    ><fas-icon
+                      class="primary"
+                      :icon="['fas', 'comment']"
+                    /> </span
+                ></a>
                 <b-popover target="messages" triggers="hover" placement="top">
                   <div class="popover-body">
                     <p class="font-weight-bold">Messages</p>
@@ -399,13 +398,13 @@
                     </div>
                     <hr class="h-divider" />
                     <div class="other-menu suggest-item cursor-pointer">
-                      <b-link v-b-toggle="'collapse-2'" class="m-1">
-                        <fas-icon
+                      <b-link v-b-toggle="'collapse-2'" class="m-1"
+                        ><fas-icon
                           class="violet search"
                           :icon="['fas', 'globe-americas']"
                         />
-                        Language
-                      </b-link>
+                        Language</b-link
+                      >
 
                       <b-collapse id="collapse-2" class="mt-1">
                         <b-card-text
@@ -566,7 +565,34 @@
       </div>
     </nav>
 
-    <div></div>
+    <div>    
+
+
+
+
+<!-- 
+
+           <div>
+  <vue-bootstrap-typeahead
+    class="mb-4"
+    v-model="query"
+    :data="users"
+    :serializer="item => item.login"
+    @hit="selectedUser = $event"
+    placeholder="Search GitHub Users"
+  />
+
+ <h3>Selected User JSON</h3>
+ <pre>{{ selectedUser | stringify }}</pre>
+</div> -->
+
+
+
+
+
+
+
+    </div>
   </header>
 </template>
 
@@ -576,12 +602,14 @@ import Activity from "@/components/ShowActivity.vue";
 // import NavBarNotifications from '@/components/NavBarNotifications.vue';
 import { mapGetters, mapActions, mapMutations } from "vuex";
 import axios from "axios";
+import VueBootstrapTypeahead from 'vue-bootstrap-typeahead'
 
 export default {
   name: "navbar",
   components: {
     Button,
     Activity,
+    VueBootstrapTypeahead
     // NavBarNotifications
   },
   props: {
@@ -604,6 +632,11 @@ export default {
       notificationPatterns: null,
       messagePatterns: null,
       redirectionPatterns: null,
+
+       query: '',
+      selectedUser: null,
+      users: []
+
     };
   },
   computed: {
@@ -620,9 +653,6 @@ export default {
   created() {
     console.log("created");
     this.init();
-    this.getUsers();
-    this.getNotifications();
-    this.getMessages();
 
     this.notificationPatterns = {
       user: () => "/notification/latest/user",
@@ -652,6 +682,9 @@ export default {
           params: { id: this.user.id },
           query: { tabId: 2 },
         }),
+        user: () => null,
+        network: () => null,
+
       },
     };
 
@@ -662,7 +695,23 @@ export default {
     "$store.state.auth.profilConnected": function () {
       this.updateNotificationEvent();
     },
+
+     query(newQuery) {
+      axios.get(`neighborhood/${newQuery}`)
+        .then((res) => {
+          this.users = res.data.items
+        })
+    }
+
   },
+
+
+    filters: {
+    stringify(value) {
+      return JSON.stringify(value, null, 2)
+    }
+  },
+
 
   methods: {
     ...mapActions({
@@ -675,6 +724,9 @@ export default {
     ...mapMutations({
       profile: "auth/profilConnected",
     }),
+
+    
+
 
     updateNotificationEvent() {
       try {
@@ -730,9 +782,7 @@ export default {
     navLink(type) {
       const link = {
         home: () => {
-          // return this.profile ? "dashbord" : "dashboard";
-
-          return "dashbord";
+          return this.profile ? "dashbord" : "home1";
         },
       };
       try {
@@ -746,13 +796,21 @@ export default {
       this.isActive = true;
     },
     getUsers() {
-      this.$store.dispatch("userChat/GET_USERS", "");
+      this.$store
+        .dispatch("userChat/GET_USERS", "")
+        .then(() => {
+          console.log("->[Data logged]<-");
+        })
+        .catch(() => console.log("error"));
     },
 
     logout: async function () {
       const response = await this.$repository.notification.logOut();
-
-      this.Logout();
+      if (response.success) {
+        this.Logout();
+      } else {
+        this.Logout();
+      }
     },
 
     switchToProfile: async function () {
@@ -1048,4 +1106,24 @@ export default {
   right: 9 px;
   font-weight: bold;
 }
+</style>
+
+<style >
+  
+
+  
+
+     @media only screen and (min-width: 768px) {
+   .search-hh .form-control{
+    height: 48px !important;
+
+        margin-bottom: 0;
+    border-radius: 0px;
+
+    border-bottom: hidden;
+    
+}
+     }
+
+  
 </style>

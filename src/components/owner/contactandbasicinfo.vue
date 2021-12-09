@@ -1,23 +1,23 @@
 <template>
   <div>
     <div class="row">
-      <h6 class="col-md-12"><b>{{ $t('profileowner.Basic_Information') }}</b></h6>
+      <h6 class="col-md-12">
+        <b>{{ $t("profileowner.Basic_Information") }}</b>
+      </h6>
 
       <hr />
     </div>
     <div class="row mb-1">
-      <div class="col-md-4">{{ $t('profileowner.Date_Of_Birth') }}</div>
+      <div class="col-md-4">{{ $t("profileowner.Date_Of_Birth") }}</div>
       <div class="col-md-4">{{ info.user.dob }}</div>
       <div class="col-md-4">
         <button
           type="button"
           class="btn btn-outline-primary float-md-right"
-       
-        
           v-b-modal.dobbb
         >
-          {{ $t('profileowner.Edit') }}
-        </button>   
+          {{ $t("profileowner.Edit") }}
+        </button>
       </div>
 
       <b-modal
@@ -43,7 +43,9 @@
             ></b-form-input>
 
             <div class="fosrm-group text-right w-100">
-              <button type="submit" class="btn btn-primary orange">{{ $t('profileowner.Save') }} </button>
+              <button type="submit" class="btn btn-primary orange">
+                {{ $t("profileowner.Save") }}
+              </button>
             </div>
           </form>
         </div>
@@ -71,7 +73,9 @@
             ></b-form-input>
 
             <div class="fosrm-group text-right w-100">
-              <button type="submit" class="btn btn-primary orange">{{ $t('profileowner.Save') }} </button>
+              <button type="submit" class="btn btn-primary orange">
+                {{ $t("profileowner.Save") }}
+              </button>
             </div>
           </form>
         </div>
@@ -98,7 +102,9 @@
             ></b-form-input>
 
             <div class="fosrm-group text-right w-100">
-              <button type="submit" class="btn btn-primary orange">{{ $t('profileowner.Save') }} </button>
+              <button type="submit" class="btn btn-primary orange">
+                {{ $t("profileowner.Save") }}
+              </button>
             </div>
           </form>
         </div>
@@ -125,7 +131,9 @@
             ></b-form-input>
 
             <div class="fosrm-group text-right w-100">
-              <button type="submit" class="btn btn-primary orange">{{ $t('profileowner.Save') }} </button>
+              <button type="submit" class="btn btn-primary orange">
+                {{ $t("profileowner.Save") }}
+              </button>
             </div>
           </form>
         </div>
@@ -152,7 +160,9 @@
             ></b-form-input>
 
             <div class="fosrm-group text-right w-100">
-              <button type="submit" class="btn btn-primary orange">{{ $t('profileowner.Save') }} </button>
+              <button type="submit" class="btn btn-primary orange">
+                {{ $t("profileowner.Save") }}
+              </button>
             </div>
           </form>
         </div>
@@ -179,47 +189,54 @@
             ></b-form-input>
 
             <div class="fosrm-group text-right w-100">
-              <button type="submit" class="btn btn-primary orange">{{ $t('profileowner.Save') }}</button>
+              <button type="submit" class="btn btn-primary orange">
+                {{ $t("profileowner.Save") }}
+              </button>
             </div>
           </form>
         </div>
-      </b-modal>      
+      </b-modal>
 
-      <b-modal     
+      <b-modal
         id="dobbb"
         ref="dobbb"
         :title="$t('profileowner.Edit_Date_of_Birth')"
         hide-footer
-       
       >
         <div class="modal-body">
           <form class="form-inline" action="" method="post">
-
             <div class="input-group col-md-12 pl-0 pr-0 mb-4 selec">
-              <label class="col-md-3 pl-0 pr-0 control-label">{{ $t('profileowner.Birth_Year') }}</label>
+              <label class="col-md-3 pl-0 pr-0 control-label">{{
+                $t("profileowner.Birth_Year")
+              }}</label>
               <div class="col-md-9 pr-0 pl-0">
                 <div class="form-group">
-
-                    <b-form-datepicker  name="dob" :max="min" id="dob"
-
-                         v-model="birthDate.date" class=" text"  :locale=" this.$i18n.locale"  :placeholder="$t('welcome.DOB')"></b-form-datepicker>
-
-                
-
-
+                  <b-form-datepicker
+                    name="dob"
+                    :max="min"
+                    id="dob"
+                    v-model="birthDate.date"
+                    class="text"
+                    :locale="this.$i18n.locale"
+                    :placeholder="$t('welcome.DOB')"
+                  ></b-form-datepicker>
                 </div>
               </div>
             </div>
             <div class="fosrm-group text-right w-100">
-              <button type="button" class="btn btn-dark pr-1 mr-3" @click="$bvModal.hide('modal-6')">
-                {{ $t('profileowner.Cancel') }}
+              <button
+                type="button"
+                class="btn btn-dark pr-1 mr-3"
+                @click="$bvModal.hide('modal-6')"
+              >
+                {{ $t("profileowner.Cancel") }}
               </button>
               <button
                 type="button"
                 class="btn btn-primary orange"
                 @click="saveBirthDate"
               >
-                {{ $t('profileowner.Save') }}
+                {{ $t("profileowner.Save") }}
               </button>
             </div>
           </form>
@@ -227,7 +244,7 @@
       </b-modal>
     </div>
     <div class="row">
-      <div class="col-md-4">{{ $t('profileowner.Gender') }}</div>
+      <div class="col-md-4">{{ $t("profileowner.Gender") }}</div>
       <div class="col-md-4">{{ info.user.gender }}</div>
       <div class="col-md-4">
         <button
@@ -238,7 +255,7 @@
           @click="getgender()"
           v-b-modal.modal-7
         >
-          {{ $t('profileowner.Edit') }}
+          {{ $t("profileowner.Edit") }}
         </button>
         <b-modal
           id="modal-7"
@@ -254,18 +271,16 @@
                   class="col-md-4 control-label"
                   style="align-items: first baseline"
                   for="gender"
-                  >{{ $t('profileowner.Gender') }}
+                  >{{ $t("profileowner.Gender") }}
                 </label>
                 <div class="col-md-8 pl-0 pr-0">
-
-                
                   <select
                     id="gender"
                     class="form-control w-100"
                     v-model="usergen"
                   >
-                    <option value="M">{{ $t('profileowner.Male') }}</option>
-                    <option value="F">{{ $t('profileowner.Female') }}</option>
+                    <option value="M">{{ $t("profileowner.Male") }}</option>
+                    <option value="F">{{ $t("profileowner.Female") }}</option>
                   </select>
                 </div>
               </div>
@@ -276,7 +291,7 @@
                   class="btn btn-primary orange"
                   @click="saveGender"
                 >
-                  {{ $t('profileowner.Save') }}
+                  {{ $t("profileowner.Save") }}
                 </button>
               </div>
             </form>
@@ -286,12 +301,15 @@
     </div>
 
     <div class="row">
-      <h6 class="col-md-12"><b>{{ $t('profileowner.Contact_Information') }}</b></h6>
+      <h6 class="col-md-12">
+        <b>{{ $t("profileowner.Contact_Information") }}</b>
+      </h6>
     </div>
     <hr />
     <div class="row mb-1 mt-3">
-      <div class="col-md-4">{{ $t('profileowner.Phone') }}</div>
+      <div class="col-md-4">{{ $t("profileowner.default_Phone") }}</div>
       <div class="col-md-4">{{ info.user.phone }}</div>
+
       <div class="col-md-4">
         <button
           type="button"
@@ -300,17 +318,46 @@
           data-target="#phonemodal"
           v-b-modal.phonemodal
         >
-          {{ $t('profileowner.Edit') }}
+          {{ $t("profileowner.Edit") }}
         </button>
+      </div>
+
+      <div class="media-body">
+        <a data-toggle="modal" data-target="#phonemodal" v-b-modal.phonemodal>
+          <fas-icon
+            class="primary float-left mr-1 mt-1"
+            :icon="['fas', 'plus-circle']"
+          />
+          {{ $t("profileowner.Add_Contacts") }} </a
+        ><br />
+
+        <div v-for="con in info.user_contact" :key="con.id">
+          <span> {{ con.phone_number }} </span>
+          <ul class="website navbar-nav pull-right">
+            <li class="nav-item dropdown">
+              <b-dropdown
+                id="dropdown-dropup"
+                dropdown
+                variant="primary-outline"
+              >
+                <b-dropdown-item @click="deleteContact(con.id)">{{
+                  $t("profileowner.Delete")
+                }}</b-dropdown-item>
+              </b-dropdown>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
 
     <div class="row">
-      <div class="col-md-12"><b>{{ $t('profileowner.Places_you_lived') }}</b></div>
+      <div class="col-md-12">
+        <b>{{ $t("profileowner.Places_you_lived") }}</b>
+      </div>
     </div>
-    <hr>
+    <hr />
     <div class="row mb-4">
-      <div class="col-md-4">{{ $t('profileowner.City') }} :</div>
+      <div class="col-md-4">{{ $t("profileowner.City") }} :</div>
       <div class="col-md-4">{{ info.user.city }}</div>
       <div class="col-md-4">
         <button
@@ -320,12 +367,12 @@
           data-target="#currentcityModal"
           v-b-modal.currentcityModal
         >
-          {{ $t('profileowner.Edit') }}
+          {{ $t("profileowner.Edit") }}
         </button>
       </div>
     </div>
     <div class="row mb-4">
-      <div class="col-md-4">{{ $t('profileowner.Home_Town') }} :</div>
+      <div class="col-md-4">{{ $t("profileowner.Home_Town") }} :</div>
       <div class="col-md-4">{{ info.user.home_town }}</div>
       <div class="col-md-4">
         <button
@@ -335,13 +382,18 @@
           data-target="#hometownModal"
           v-b-modal.hometownModal
         >
-          {{ $t('profileowner.Edit') }}
+          {{ $t("profileowner.Edit") }}
         </button>
       </div>
     </div>
     <div class="row mb-4">
       <div class="col">
-        <h6 class="mb-0"><b>{{ $t('profileowner.Web') }} &amp; {{ $t('profileowner.Social_Links') }}</b></h6>
+        <h6 class="mb-0">
+          <b
+            >{{ $t("profileowner.Web") }} &amp;
+            {{ $t("profileowner.Social_Links") }}</b
+          >
+        </h6>
         <hr />
         <div class="media">
           <div class="media-body">
@@ -350,7 +402,7 @@
                 class="primary float-left mr-1 mt-1"
                 :icon="['fas', 'plus-circle']"
               />
-              {{ $t('profileowner.Add_a_Website') }}</a
+              {{ $t("profileowner.Add_a_Website") }}</a
             ><br />
 
             <div v-for="website in info.user_websites" :key="website.id">
@@ -371,12 +423,12 @@
                     dropdown
                     variant="primary-outline"
                   >
-                    <b-dropdown-item @click="edit('website', website)"
-                      >{{ $t('profileowner.Edit') }}</b-dropdown-item
-                    >
-                    <b-dropdown-item @click="deleteWebsite(website)"
-                      >{{ $t('profileowner.Delete') }}</b-dropdown-item
-                    >
+                    <b-dropdown-item @click="edit('website', website)">{{
+                      $t("profileowner.Edit")
+                    }}</b-dropdown-item>
+                    <b-dropdown-item @click="deleteWebsite(website)">{{
+                      $t("profileowner.Delete")
+                    }}</b-dropdown-item>
                   </b-dropdown>
                 </li>
               </ul>
@@ -433,13 +485,13 @@ export default {
   data() {
     const now = new Date();
     const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-     const maxDate = new Date(today)
+    const maxDate = new Date(today);
     return {
-       min: moment().subtract(18, 'years').format('YYYY-MM-DD'),
-        moment: moment,
+      min: moment().subtract(18, "years").format("YYYY-MM-DD"),
+      moment: moment,
       max: maxDate,
       websiteId: null,
-      usergen:null,
+      usergen: null,
       basicInfo: {
         dateOfBirth: { day: "12", month: "1", year: "2000" },
         gender: "M",
@@ -479,15 +531,13 @@ export default {
       });
   },
   computed: {
-
-
     birthDate() {
       let dob = this.info.user.dob;
       let check = moment(dob, "YYYY/MM/DD");
       var month = check.format("M");
       var day = check.format("D");
       var year = check.format("YYYY");
-      var date = year +'-'+ month +'-'+ day;
+      var date = year + "-" + month + "-" + day;
       return { date: date };
     },
     info() {
@@ -495,19 +545,13 @@ export default {
     },
   },
   methods: {
-
-    
-    getgender(){
-   
-     if(this.info.user.gender =="female")  {  
-        this.usergen="F"
-     }else{
-      
-        this.usergen="M"
-     }
-
+    getgender() {
+      if (this.info.user.gender == "female") {
+        this.usergen = "F";
+      } else {
+        this.usergen = "M";
+      }
     },
-
 
     cancel() {
       console.log("Cancel edit birth date user  ++++++");
@@ -524,7 +568,6 @@ export default {
           dateOfBirth: this.birthDate,
         })
         .then((response) => {
-         
           this.$store
             .dispatch("profile/loadUserPostIntro", null)
             .then((response) => {
@@ -534,15 +577,13 @@ export default {
               console.log(error);
             });
         })
-        .catch((error) => {
-         
-        })
+        .catch((error) => {})
         .finally(() => {
           this.$refs["dobbb"].hide();
         });
     },
-    
-    saveGender() {  
+
+    saveGender() {
       console.log("save new gender user start +++++");
       console.log(this.basicInfo.gender);
       this.$store
@@ -680,7 +721,7 @@ export default {
         })
         .finally(() => {
           console.log("finally save new website user ");
-          this.$store.dispatch("profile/loadUserPostIntro", null)
+          this.$store.dispatch("profile/loadUserPostIntro", null);
           this.$refs["websiteEModal"].hide();
         });
     },
@@ -700,7 +741,7 @@ export default {
         })
         .finally(() => {
           console.log("finally save new website user ");
-          this.$store.dispatch("profile/loadUserPostIntro", null)
+          this.$store.dispatch("profile/loadUserPostIntro", null);
           this.$refs["websiteEModal"].hide();
         });
     },

@@ -25,7 +25,7 @@
                           <b-col md="6" lg="12" cols="6" xl="12" class="mt-3 mt-lg-1 mt-xl-3">
                             <h6 class="follower m-15">
                               {{ count(item.followers) }}
-                              Community
+                              {{ $t('businessowner.Community') }}
                             </h6>
                           </b-col>
                         </b-row>
@@ -40,7 +40,7 @@
 
                             <b-button block variant="primary" size="sm" class="b-background flexx pobtn shadow" @click="cta(item)">
                                 <i class="fas fa-envelope fa-lg btn-icon"></i>
-                                <span class="btn-text">Message</span>
+                                <span class="btn-text">{{ $t('businessowner.Message') }}</span>
                               </b-button>
                           </b-col>
 
@@ -52,14 +52,14 @@
                          <b-button
                           block
                           size="sm"
-                           :id="'followbtn'+item.id"
-                         class="b-background flexx pobtn shadow"
+                          :id="'followbtn'+item.id"
+                          class="b-background flexx pobtn shadow"
                           :class="item.is_follow !== 0 && 'u-btn'"
                           variant="primary"
                           @click="handleFollow(item)"
                         >
 
-                           <i
+                          <i
                             class="fas fa-lg btn-icon"
                             :class="item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"
                           ></i>

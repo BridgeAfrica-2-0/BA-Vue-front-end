@@ -10,7 +10,7 @@
 
                   
     <b-container fluid class="p-0 gradient">
-      <div class="container-flex">
+      <div class="container-flex banner">
         <img
           v-if="info.user.cover_picture == ''"
           src="@/assets/img/banner.jpg"

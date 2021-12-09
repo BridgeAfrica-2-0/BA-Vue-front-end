@@ -136,7 +136,6 @@
       @change="changePage"
       align="center"
     ></b-pagination>
-
   </div>
 </template>
 
@@ -147,22 +146,20 @@ import axios from "axios";
 
 import NotFoundComponent from "@/components/NotFoundComponent";
 export default {
-  props: [ "image"],
+  props: ["image"],
   components: {
     NotFoundComponent,
-   
   },
 
   data() {
     return {
-
-       total:0,
-      per_page:10,
+      total: 0,
+      per_page: 10,
       list: [],
       currentPage: 1,
       nextLoad: false,
-      title: this.$t("search.No_Business_Found"),  
-      
+      title: this.$t("search.No_Business_Found"),
+
       options: {
         rewind: true,
         autoplay: true,
@@ -170,29 +167,26 @@ export default {
         pagination: false,
 
         type: "loop",
-        perMove: 1
-      }
+        perMove: 1,
+      },
     };
   },
 
-
- computed: {
+  computed: {
     ...mapGetters({
       searchstate: "business/getSearchState",
       business: "business/getBusiness",
       sponsorbusiness: "business/getSponsorBusinesses",
-      prodLoader: "business/getloadingState"
-
+      prodLoader: "business/getloadingState",
     }),
   },
 
-  mounted(){
+  mounted() {
     this.getBusiness();
   },
 
-   methods: {
-
-     count(number) {
+  methods: {
+    count(number) {
       if (number >= 1000000) {
         return number / 1000000 + "M";
       }
@@ -238,45 +232,35 @@ export default {
       ...mapActions({
       
       findBusiness: "business/FIND_BUSINESS",
-       nextPage: "business/NEXT_PAGE",
+      nextPage: "business/NEXT_PAGE",
     }),
 
-    getBusiness(){
+    getBusiness() {
+      console.log("business search mounted");
+      this.$store.commit("business/setLoading", true);
 
-
-       console.log("business search mounted");
-          this.$store.commit("business/setLoading", true);
-      
-      
-      
-         
-         this.findBusiness({})
+      this.findBusiness({})
         .then((res) => {
           console.log("business list: ");
           console.log(this.business);
           this.$store.commit("business/setLoading", false);
-         
-           
-          this.total = this.business.total
+
+          this.total = this.business.total;
         })
         .catch((err) => {
-           this.$store.commit("business/setLoading", false);
-         
+          this.$store.commit("business/setLoading", false);
+
           console.error(err);
         });
-
     },
 
     changePage(value) {
-
       console.log("next page loading ");
-      
-    
+      this.$parent.changeBusinessPage(value);
       this.$store.commit("business/setLoading", true);
       this.currentPage = value;
-     
-         
-         this.nextPage( this.currentPage )
+
+      this.nextPage(this.currentPage)
         .then((res) => {
           console.log("business list: ");
           console.log(this.business);
@@ -284,11 +268,11 @@ export default {
         })
         .catch((err) => {
           this.prodLoader = false;
-          this.total = this.business.total
+          this.total = this.business.total;
           console.error(err);
         });
     },
-   }
+  },
 };
 </script>
 

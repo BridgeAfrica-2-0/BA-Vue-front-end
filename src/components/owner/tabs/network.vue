@@ -62,9 +62,17 @@
               </b-col>
 
               <b-col md="12" lg="4" xl="4" sm="12" cols="4" class="mt-2 text-center">
-                <b-button block size="sm" class="b-background shadow " variant="primary">
-                  <i class="fas fa-map-marked-alt  fa-lg btn-icon "></i>
-                  <span class="btn-text">{{ $t('profileowner.Direction') }}</span>
+                   <b-button
+                  block
+                  size="sm"
+                  class="b-background shadow"
+                  :class="item.is_member !== 0 && 'u-btn'"
+                  variant="primary"
+                  :id="'joinbtn'+item.id"
+                  @click="handleJoin(item)"
+                >
+                  <i class="fas fa-lg btn-icon" :class="item.is_member !== 0 ? 'fa-user-minus' : 'fa-user-plus'"></i>
+                  <span class="btn-com"> Join </span>
                 </b-button>
               </b-col>
             </b-row>
@@ -112,6 +120,33 @@ export default {
 
 
   methods: {
+
+
+    			
+    async handleJoin(user) {
+       document.getElementById("joinbtn"+user.id).disabled = true;
+      const uri = user.is_member === 0 ? `/add-member` : `/remove-member`;
+      const nextFollowState = user.is_member === 0 ? 1 : 0;
+      const data = {
+        id: user.id,
+        type: 'network',
+      };
+
+      await axios
+        .post(uri, data)
+        .then(response => {
+			console.log(response);
+          user.is_member = nextFollowState;
+          document.getElementById("joinbtn"+user.id).disabled =  false;
+        })
+        .catch(err =>{   console.log(err)
+         document.getElementById("joinbtn"+user.id).disabled =  false;
+        });
+    },
+
+
+
+
     infiniteHandler($state) {
       console.log('loading network 1 1');
 

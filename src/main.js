@@ -1,9 +1,12 @@
+
 import Vue from 'vue';
 import App from './App.vue';
 import './registerServiceWorker';
 import router from './router';
 import store from './store';
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue';
+
+
 import axios from 'axios';
 import VueAxios from 'vue-axios';
 import VueGallerySlideshow from 'vue-gallery-slideshow';
@@ -39,7 +42,8 @@ Vue.use(VueAxios, axios);
 
 import LoadScript from 'vue-plugin-load-script';
 import InfiniteLoading from 'vue-infinite-loading';
-
+import VueAnimateOnScroll from 'vue-animate-onscroll'
+Vue.use(VueAnimateOnScroll)
 Vue.use(InfiniteLoading, {
     /* options */
     slots: {

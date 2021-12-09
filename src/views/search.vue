@@ -421,7 +421,7 @@
                 {{ $t("search.Businesses") }}
               </h6>
 
-              <MiniBusiness />
+              <MiniBusiness :businesses="businesses" />
 
               <span class="float-right mb-3" @click="selectedId = 1">
                 <b-link href="#top"> {{ $t("search.see_more") }} </b-link>
@@ -583,7 +583,14 @@
           </div>
         </b-col>
         <b-col cols="12" md="4" lg="4" xl="3" class="showmap" ref="mapblock">
-          <div id="map" style="margin-top: 20px" class=""><Map /></div>
+          <div id="map" style="margin-top: 20px" class="">
+            <div v-if="selectedId == '1'">
+              <businessmap :businessPage="businessPage" />
+            </div>
+            <div v-else>
+              <mapbox :businesses="businesses.data" />
+            </div>
+          </div>
         </b-col>
       </b-row>
     </div>
@@ -595,6 +602,8 @@ import _ from "lodash";
 
 import LyTab from "@/tab/src/index.vue";
 import Map from "@/components/search/map";
+import mapbox from "@/components/search/mapbox";
+import businessmap from "@/components/search/businessmap";
 //import Business from '@/components/search/business';
 import People from "@/components/search/people";
 import Network from "@/components/search/network";
@@ -638,6 +647,8 @@ export default {
     Network,
     Post,
     Market,
+    mapbox,
+    businessmap,
     MiniBusiness,
     MiniPeople,
     MiniNetwork,
@@ -655,6 +666,9 @@ export default {
     ...mapGetters({
       prodLoaderr: "business/getloadingState",
     }),
+    businesses() {
+      return this.$store.getters["allSearch/getBusinesses"];
+    },
 
     products() {
       return this.$store.state.market.products;
@@ -706,20 +720,18 @@ export default {
       selectedfilter: "",
       showform: false,
 
+      businessPage: 2,
       //selectcategories:[],
 
       categories_filters: [],
       items: [
+        { label: this.$t("search.All") },
 
-
-        { label: this.$t('search.All') },
-
-        { label: this.$t('search.Business') },
-        { label: this.$t('search.People') },
-        { label: this.$t('search.Network') },
-        { label: this.$t('search.Market') },
-        { label: this.$t('search.Post') },
-
+        { label: this.$t("search.Business") },
+        { label: this.$t("search.People") },
+        { label: this.$t("search.Network") },
+        { label: this.$t("search.Market") },
+        { label: this.$t("search.Post") },
       ],
 
       Finished_Branded_Products_filters: [
@@ -1794,7 +1806,9 @@ export default {
         this.notFoundComponentTitle = "";
       }
     },
-
+    changeBusinessPage(id) {
+      this.businessPage = id;
+    },
     changeComponent() {
       try {
         this.isComponent = this.strategyForComponent[this.selectedId]();

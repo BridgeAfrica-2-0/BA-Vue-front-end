@@ -12,7 +12,7 @@
         :coordinates="[business.lng, business.lat]"
       >
         <div class="marker" slot="marker">
-          <div>{{ key + 1 }}</div>
+          <div>B{{ key + 1 }}</div>
         </div>
         <MglPopup :coordinates="[business.lng, business.lat]" anchor="top">
           <div class="py-4">
@@ -28,41 +28,25 @@
           </div>
         </MglPopup>
       </MglMarker>
-
-      <!-- <MglMarker
-        v-for="network in networks"
-        :key="network.id"
-        :coordinates="[business.lng, business.lat]"
-        color="#3ad3ad"
+      <MglMarker
+        v-for="(product, key) in products"
+        :key="product.id"
+        :coordinates="[product.lng, product.lat]"
       >
-        <MglPopup :coordinates="[business.lng, business.lat]" anchor="top">
+        <div class="marker" slot="marker">
+          <div>B{{ key + 1 }}</div>
+        </div>
+        <MglPopup :coordinates="[product.lng, product.lat]" anchor="top">
           <div class="py-4">
-            <div class="d-flex justify-content-center flex-column">
-              <img :src="business.logo_path" alt="..." class="img-map" />
-              <span class="text-center">
-                {{ business.name }}
-              </span>
+            <div class="d-flex justify-content-center flex-column pointer">
+              <img :src="product.logo_path" alt="..." class="img-map" />
+              <h6 class="text-center my-3">
+                {{ product.name }}
+              </h6>
             </div>
           </div>
         </MglPopup>
-      </MglMarker> -->
-      <!-- <MglMarker
-        v-for="(center, key) in points"
-        :key="key"
-        :coordinates="center.coordinates"
-        color="#3ad3ad"
-      >
-        <MglPopup :coordinates="center.coordinates" anchor="top">
-          <div class="py-4">
-            <div class="d-flex justify-content-center flex-column">
-              <img :src="center.img" alt="..." class="img-map" />
-              <span class="text-center">
-                {{ center.title }}
-              </span>
-            </div>
-          </div>
-        </MglPopup>
-      </MglMarker> -->
+      </MglMarker>
     </MglMap>
   </div>
 </template>
@@ -75,7 +59,7 @@ export default {
     MglMarker,
     MglPopup,
   },
-  props: ["businesses", "networks"],
+  props: ["businesses", "products"],
   data() {
     return {
       loading: false,

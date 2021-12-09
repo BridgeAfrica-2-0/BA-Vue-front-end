@@ -91,7 +91,7 @@
         <p>
           {{$t("network.Your")}} {{pendingPost.data}} {{$t("network.Posts_are_pending_for_approval")}}.&nbsp;&nbsp;&nbsp;&nbsp;
           <a
-            @click="this.selectedIdd = '4', this.tabIndex = '5'"
+            @click="RedirectPending"
             style="color: #e75c18; text-decoration: underline; cursor:pointer"
           >{{ $t("network.View_All") }}</a>
         </p>
@@ -421,6 +421,20 @@ export default {
   },
 
   methods: {
+
+    RedirectPending(){ this.$emit('changement')
+    // this.$router.push("/network/1?current=4#test")
+    this.$router.push("/network/1?current=4#test1"+Math.random())
+      console.log("Redirection pending")
+      this.$store.dispatch("networkProfile/Selected")
+      .then(res => {
+        console.log("----",this.$store.state.networkProfile.selected)
+      }).catch(err =>{
+        console.log(err)
+      })
+      console.log("---- end")
+    },
+
     ...mapMutations({
       auth: "auth/profilConnected",
     }),

@@ -99,7 +99,7 @@ export default {
 
   data() {
     return {
-      selectedId: 0,
+      selectedId: 4,
       bottomSelectedId: 0,
       foll_id: null,
       isloaded: false,
@@ -166,11 +166,24 @@ export default {
         }
       });
   },
+  mounted(){
+    window.onhashchange = function() { 
+      this.selectedId = 4
+     console.log("url change",this.selectedId);
+    //  this.setSelected()
+
+}
+  },
 
   methods: {
     handleChange(item, index) {
       console.log(item, index);
+      this.selectedId = this.$store.state.networkProfile.selected
     },
+    // setSelected(){
+    //     this.selectedId = 4
+    //  console.log("url change",this.selectedId);
+    // }
   },
 };
 </script>

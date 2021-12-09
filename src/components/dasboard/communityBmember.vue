@@ -65,7 +65,7 @@
                               class="b-background flexx pobtn shadow"
                             >
                               <i class="fas fa-envelope   fa-lg btn-icon "></i>
-                              <span class="btn-text"> {{ $t('dashboard.Messages') }}</span>
+                              <span class="btn-text"> {{ $t('dashboard.Messages') }}sdasd</span>
                             </b-button>
                           </b-col>
 

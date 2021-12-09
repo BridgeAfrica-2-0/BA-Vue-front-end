@@ -379,7 +379,7 @@
                       <!-- End Chats -->
                     </b-tab>
                     <b-tab
-                      :title="$t('businessowner.Groups')"
+                      title="Groups"
                       @click="getChatList({ type: 'group' })"
                     >
                       <!-- Group Chats Available  -->
@@ -759,7 +759,13 @@
                     <label for="file">
                       <b-icon
                         for="file"
-                        class="msg-icon primary icon-size icon-top float-right text-right"
+                        class="
+                          msg-icon
+                          primary
+                          icon-size icon-top
+                          float-right
+                          text-right
+                        "
                         icon="paperclip"
                       >
                       </b-icon>
@@ -940,7 +946,6 @@
                     <div class="new-msg-filter-list">
                       <table class="table">
                         <b-row style="overflow-x: hidden !important">
-
                           <b-tabs content-class=" ma-4 pt-6" fill pills card>
                             <b-tab title="All" @click="getAll()">
                               <div v-if="loader" class="text-center">
@@ -956,7 +961,6 @@
                                   v-for="(biz, index) in allUsers"
                                   :key="index"
                                   class="p-2 message"
-
                                 >
                                   <td>
                                     <b-form-group>
@@ -1488,12 +1492,12 @@ export default {
       chatSearchKeyword: "",
       tabIndex: 2,
       type: "",
-      socket: io("https://ba-chat-server.herokuapp.com", {
-        transports: ["websocket", "polling", "flashsocket"],
-      }),
-      // socket: io("http://192.168.43.51:7000", {
+      // socket: io("https://ba-chat-server.herokuapp.com", {
       //   transports: ["websocket", "polling", "flashsocket"],
       // }),
+      socket: io("http://localhost:7000", {
+        transports: ["websocket", "polling", "flashsocket"],
+      }),
       nameSpace: {
         status: false,
         text: "",
@@ -1502,83 +1506,6 @@ export default {
       showsearch: true,
       selecteduser: false,
       searchQuery: "",
-      resources1: [
-        { title: "ABE Attendance", uri: "aaaa.com", category: "a", icon: null },
-        {
-          title: "Accounting Services",
-          uri: "aaaa.com",
-          category: "a",
-          icon: null,
-        },
-        { title: "Administration", uri: "aaaa.com", category: "a", icon: null },
-        {
-          title: "Advanced Student Lookup",
-          uri: "bbbb.com",
-          category: "b",
-          icon: null,
-        },
-        { title: "Art & Sciences", uri: "bbbb.com", category: "b", icon: null },
-        {
-          title: "Auxiliares Services",
-          uri: "bbbb.com",
-          category: "b",
-          icon: null,
-        },
-        { title: "Basic Skills", uri: "cccc.com", category: "c", icon: null },
-        {
-          title: "Board of Trustees",
-          uri: "dddd.com",
-          category: "d",
-          icon: null,
-        },
-      ],
-      resources: [
-        {
-          name: "blezour blec",
-          profile:
-            "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
-          type: "person",
-          id: "1",
-        },
-        {
-          name: "itz blec blec",
-          profile:
-            "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
-          type: "person",
-          id: "2",
-        },
-
-        {
-          name: "Maxine Moffet",
-          profile:
-            "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
-          type: "person",
-          id: "3",
-        },
-
-        {
-          name: "Alicia kays",
-          profile:
-            "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
-          type: "person",
-          id: "4",
-        },
-
-        {
-          name: "Lorem Ipsum",
-          profile:
-            "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
-          type: "person",
-          id: "5",
-        },
-        {
-          name: "blezour blec",
-          profile:
-            "https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg",
-          type: "person",
-          id: "6",
-        },
-      ],
       message: {},
       newMsg: false,
       show: false,
@@ -1657,7 +1584,6 @@ export default {
     },
   },
   mounted() {
-    console.log("language: ", this.$i18n.locale);
     if (this.chatList.length < 0) {
       this.getChatList({ type: "business" });
     }
@@ -1673,22 +1599,29 @@ export default {
       Number(this.$route.params.id)
     );
     console.log("router params:", this.currentBizId);
-    this.tabIndex = this.$route.query.msgTabId
-      ? this.$route.query.msgTabId
-      : false;
-    if (this.tabIndex != false) {
+    this.tabIndex = this.$route.query.msgTabId;
+
+    console.log("this.tabIndex:", this.tabIndex);
+    // console.log("call to action checked:", this.ctaSelected);
+
+    if (this.tabIndex) {
+      console.log("here am i!");
       if (this.tabIndex == 1) {
         this.getChatList({ type: "business" });
       } else if (this.tabIndex == 2) {
         this.getChatList({ type: "network" });
       } else {
         this.tabIndex = 0;
-        this.getChatList({ type: "user" });
-      }
+      console.log("111 call ");
 
+        this.getChatList({ type: "user" });
+      console.log("222 call ");
+
+      }
+      console.log("call to action checked:", this.ctaSelected);
       this.selectedChat({ chat: this.ctaSelected, id: this.ctaSelected.id });
     } else {
-      // alert("hey")
+      console.log("Am here again!");
       this.tabIndex = 1;
       this.getChatList({ type: "business" });
     }
@@ -1959,7 +1892,6 @@ export default {
 
         businessEditorsID: `${membersEditorIds}`,
       });
-
     },
     createRoom(receiver_business_id) {
       // let sender_business_id = this.currentUser.user.id;
@@ -2015,12 +1947,12 @@ export default {
     getChatList(data) {
       // alert("Clicked!")
       this.type = data.type;
-      this.chatSelected.active = false;
+      // this.chatSelected.active = false;
       this.newMsg = false;
       console.log("tab type:", this.tabIndex);
 
       this.$store.dispatch("businessChat/GET_BIZS_CHAT_LIST", data);
-      this.scrollToBottom();
+      // this.scrollToBottom();
     },
 
     async histBizToBiz(data) {
@@ -2089,14 +2021,14 @@ export default {
       this.groupName = "";
     },
     selectedChat(data) {
-      console.log("type tabs:", this.tabIndex);
+      console.log("[type tabs]", this.tabIndex);
       // this.scrollToBottom();
-      console.log("selected Chat:", data);
+      console.log("[selected Chat]", data);
       this.createRoom(data.id);
       if (this.type == "group") {
         this.createGroup();
       }
-      // this.chatId = data.id;
+      this.chatId = data.id;
       this.$store.commit("businessChat/setSelectedChatId", data.id);
       let receiver = { receiverID: data.id, keyword: null };
       if (data.type == "user") {

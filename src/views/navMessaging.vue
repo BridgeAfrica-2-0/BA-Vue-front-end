@@ -104,12 +104,12 @@
 
               <b-row class="mt-12">
                 <b-col>
-                  <b-tabs content-class="mt-12 ma-4 pt-6" fill lazy>
-                    <b-tab
-                      title="User"
-                      active
-                      @click="getChatList({ type: 'user' })"
-                    >
+                  <b-tabs
+                    v-model="tabIndex"
+                    content-class="mt-12 ma-4 pt-6"
+                    fill
+                  >
+                    <b-tab title="User" @click="getChatList({ type: 'user' })">
                       <!-- Users Chats Available  -->
                       <b-row class="pa-6">
                         <b-col class="mb-6 pb-6">
@@ -962,6 +962,7 @@ export default {
   },
   data() {
     return {
+      tabIndex: 0,
       shippingAddress: [2, 4],
       formData: new FormData(),
       filePreview: false,
@@ -1013,6 +1014,9 @@ export default {
     },
   },
   computed: {
+    ctaSelected() {
+      return this.$store.getters["businessChat/getSelectedChat"];
+    },
     chatList() {
       return this.$store.getters["userChat/getChatList"];
     },
@@ -1055,21 +1059,33 @@ export default {
   },
   mounted() {
     this.getUsers();
-    this.getChatList({ type: "user" });
+    if (this.chatList.length < 0) {
+      this.getChatList({ type: "user" });
+    }
+    // this.getChatList({ type: "user" });
   },
   created() {
     this.$store.commit("businessChat/setCurrentBizId", this.$route.params.id);
 
-    this.tabIndex = this.$route.query.msgTabId;
+    this.tabIndex = Number(this.$route.query.msgTabId);
+    console.log("this.tabIndex:", typeof this.tabIndex);
+
     if (this.tabIndex) {
-      this.selectedChat({ chat: this.ctaSelected, id: this.ctaSelected.id });
       if (this.tabIndex == 1) {
         this.getChatList({ type: "business" });
       } else if (this.tabIndex == 2) {
         this.getChatList({ type: "network" });
-      } else this.getChatList({ type: "user" });
+      } else {
+        this.tabIndex = 0;
+        this.getChatList({ type: "user" });
+      }
+
+      console.log("There");
+
+      this.selectedChat({ chat: this.ctaSelected, id: this.ctaSelected.id });
     } else {
       this.tabIndex = 0;
+      this.getChatList({ type: "user" });
     }
 
     this.socketListenners();
@@ -1158,18 +1174,20 @@ export default {
     getUsers() {
       console.log("Bizs:", this.bizs);
       this.$store.dispatch("userChat/GET_USERS");
-      this.$store.dispatch("businessChat/GET_BIZS");
+      // this.$store.dispatch("businessChat/GET_BIZS");
     },
     getChatList(data) {
+      console.log("List");
       this.chatSelected.active = false;
       this.newMsg = false;
-      this.scrollToBottom();
       this.$store
         .dispatch("userChat/GET_USERS_CHAT_LIST", data)
         .then(() => {
           console.log("->[Data logged]<-");
         })
         .catch(() => console.log("error"));
+
+      // this.scrollToBottom();
     },
 
     async histUserToUser(data) {
@@ -1222,12 +1240,14 @@ export default {
     },
     selectedChat(data) {
       // this.scrollToBottom();
+      console.log("free up:", this.ctaSelected);
       this.type = data.type;
       if (this.type == "group") {
         this.createGroup();
       } else this.createRoom(data.id);
-
+      console.log("ZZZZZ");
       this.chatId = data.id;
+      this.$store.commit("businessChat/setSelectedChatId", data.id);
       let receiver = { receiverID: data.id, keyword: null };
       if (data.type == "business") {
         this.histUserToBiz(receiver);
@@ -1238,6 +1258,9 @@ export default {
       } else {
         this.histUserToUser(receiver);
       }
+
+      console.log("YYYYY");
+
       this.newMsg = false;
       this.chatSelected = {
         active: true,

@@ -1,5 +1,5 @@
 <template>
-  <b-container class="container  p-2 p-md-5 h-100 w-100 mx-auto my-auto" fluid>
+  <b-container class="container p-2 p-md-5 h-100 w-100 mx-auto my-auto" fluid>
     <div class="w-100 h-100 my-auto mx-auto">
       <b-card tag="article" class="my-auto mx-auto text-center mw-30">
         <img src="../assets/logo.png" class="image" alt="" />
@@ -9,7 +9,7 @@
           <b-form class="w-75 mx-auto">
             <b-form-group id="input-group-4">
               <md-field>
-                <label for="otp"> {{ $t('passrecover.OTP') }}</label>
+                <label for="otp"> {{ $t("passrecover.OTP") }}</label>
                 <md-input
                   type="text"
                   name="otp"
@@ -27,7 +27,7 @@
                   class="btn btn-primary button float-right"
                   @click.prevent="next"
                 >
-                  {{ $t('passrecover.Next') }}
+                  {{ $t("passrecover.Next") }}
                 </b-button>
               </b-col>
             </b-row>
@@ -35,11 +35,6 @@
         </div>
       </b-card>
     </div>
-<<<<<<< HEAD
-  
-=======
-    
->>>>>>> 11768755b6a6b08baa1f37e3c3bf8bf18f377f29
   </b-container>
 </template>
 
@@ -66,7 +61,7 @@ export default {
           OTP: this.code,
           phone: this.$store.state.auth.passwordToken.user.phone,
         })
-        .then(response => {
+        .then((response) => {
           if (response.status === 200) {
             console.log(response);
             this.$router.push({ name: "RecoverPass3" });
@@ -74,7 +69,7 @@ export default {
             console.log(response.data);
           }
         })
-        .catch(err => {
+        .catch((err) => {
           if (err.response.status === 422) {
             console.log({ err: err });
             console.log(err.response.data.message);

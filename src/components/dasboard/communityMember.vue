@@ -2,7 +2,6 @@
   <div>
     <div class="s-ccard">
       <b-row>
- 
         <b-col lg="6" sm="12" class="p-2" v-for="item in users" :key="item.id">
           <div class="people-style border shadow">
             <b-row class="mb-1">
@@ -28,7 +27,9 @@
                             class="mt-lg-2"
                           >
                             <div class="mt-3 mt-lg-0 mt-xl-0 username">
-                          <router-link    :to="'profile/'+item.id">      <b> {{ item.name }} </b>  </router-link>
+                              <router-link :to="'profile/' + item.id">
+                                <b> {{ item.name }} </b>
+                              </router-link>
                             </div>
                           </b-col>
 
@@ -41,7 +42,7 @@
                           >
                             <h6 class="follower m-15">
                               {{ count(item.followers) }}
-                             {{ $t('dashboard.Community') }}
+                              {{ $t("dashboard.Community") }}
                             </h6>
                           </b-col>
                         </b-row>
@@ -58,15 +59,7 @@
                             xl="12"
                             class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
                           >
-                            <b-button
-                              block
-                              variant="primary"
-                              size="sm"
-                              class="b-background flexx pobtn shadow"
-                            >
-                              <i class="fas fa-envelope   fa-lg btn-icon "></i>
-                              <span class="btn-text"> {{ $t('dashboard.Messages') }}</span>
-                            </b-button>
+                            <BtnCtaMessage :element="item" type="people" />
                           </b-col>
 
                           <b-col
@@ -76,31 +69,28 @@
                             xl="12"
                             class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
                           >
-                           
-
-
-
                             <b-button
-                          block
-                          size="sm"
-                          class="b-background flexx pobtn shadow"
-                          :class="item.is_follow !== 0 && 'u-btn'"
-                           :id="'followbtn'+item.id"
-                          variant="primary"
-                          @click="handleFollow(item)"
-                        >
+                              block
+                              size="sm"
+                              class="b-background flexx pobtn shadow"
+                              :class="item.is_follow !== 0 && 'u-btn'"
+                              :id="'followbtn' + item.id"
+                              variant="primary"
+                              @click="handleFollow(item)"
+                            >
+                              <i
+                                class="fas fa-lg btn-icon"
+                                :class="
+                                  item.is_follow !== 0
+                                    ? 'fa-user-minus'
+                                    : 'fa-user-plus'
+                                "
+                              ></i>
 
-                           <i
-                            class="fas fa-lg btn-icon"
-                            :class="item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"
-                          ></i>
-
-                          <span class="btn-com">{{ $t('dashboard.Community') }}</span>
-                        </b-button>
-
-
-
-
+                              <span class="btn-com">{{
+                                $t("dashboard.Community")
+                              }}</span>
+                            </b-button>
                           </b-col>
                         </b-row>
                       </div>
@@ -113,16 +103,21 @@
         </b-col>
       </b-row>
 
-       <infinite-loading @infinite="infiniteHandler"></infinite-loading>
-
+      <infinite-loading @infinite="infiniteHandler"></infinite-loading>
     </div>
   </div>
 </template>
 
 <script>
-import axios from "axios";  
+import BtnCtaMessage from "@/components/messagesCTA/Btn-cta-message";
+
+import axios from "axios";
+
 export default {
-  props: ['type'],
+  props: ["type"],
+  components: {
+    BtnCtaMessage,
+  },
 
   data() {
     return {
@@ -139,9 +134,7 @@ export default {
     };
   },
 
-
-
-    computed: {
+  computed: {
     users() {
       if (this.type == "Follower") {
         return this.$store.state.profile.UcommunityFollower.user_followers;
@@ -161,16 +154,14 @@ export default {
       } else return number;
     },
 
-
-     async handleFollow(user) {
-      
+    async handleFollow(user) {
       console.log("yoo ma gee");
-       document.getElementById("followbtn"+user.id).disabled = true;
+      document.getElementById("followbtn" + user.id).disabled = true;
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
         id: user.id,
-        type: 'user',
+        type: "user",
       };
 
       await axios
@@ -178,79 +169,55 @@ export default {
         .then(({ data }) => {
           console.log(data);
           user.is_follow = nextFollowState;
-           document.getElementById("followbtn"+user.id).disabled = false;
+          document.getElementById("followbtn" + user.id).disabled = false;
         })
-         
-          .catch((err) =>{  
-          
-          console.log({err:err})  ;
-           document.getElementById("followbtn"+user.id).disabled =  false;
-          
+
+        .catch((err) => {
+          console.log({ err: err });
+          document.getElementById("followbtn" + user.id).disabled = false;
         });
     },
 
-
-
-    
     infiniteHandler($state) {
       console.log("hahahahahahahah");
 
-      
       let url = null;
 
-       
-
       if (this.type == "Follower") {
-      url = "profile/user/follower/";
-
-
-
-        
+        url = "profile/user/follower/";
       } else {
         url = "profile/user/following/";
       }
       axios
         .get(url + this.page)
         .then(({ data }) => {
+          if (this.type == "Follower") {
+            if (data.data.user_followers.length) {
+              this.page += 1;
 
-           
-            if (this.type == "Follower") {
-             
-     
-               if (data.data.user_followers.length) {
-           this.page += 1;
-           
               this.users.push(...data.data.user_followers);
-            $state.loaded();
-          } else {
-            $state.complete();
-          }
-
+              $state.loaded();
             } else {
-         
-
-             if (data.data.user_following.length) {
-           this.page += 1;
-           
-              this.users.push(...data.data.user_following);
-            $state.loaded();
+              $state.complete();
+            }
           } else {
-            $state.complete();
+            if (data.data.user_following.length) {
+              this.page += 1;
+
+              this.users.push(...data.data.user_following);
+              $state.loaded();
+            } else {
+              $state.complete();
+            }
           }
 
-
-            }
-
-            
           console.log(data);
-         
         })
         .catch((err) => {
           console.log({ err: err });
         });
     },
-
-  }
+  },
 };
 </script>
     

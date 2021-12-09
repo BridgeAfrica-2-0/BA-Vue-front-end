@@ -462,7 +462,7 @@
                 {{ $t("search.Market") }}
               </h6>
 
-              <MiniMarket :products="miniproducts"/>
+              <MiniMarket :products="miniproducts" />
 
               <span class="float-right mb-3" @click="selectedId = 4">
                 <b-link href="#top"> {{ $t("search.see_more") }} </b-link>
@@ -588,7 +588,10 @@
               <businessmap :businessPage="businessPage" />
             </div>
             <div v-else>
-              <mapbox :businesses="businesses.data" :products="miniproducts" />
+              <mapbox
+                :businesses="businesses.data"
+                :products="miniproducts.data"
+              />
             </div>
           </div>
         </b-col>

@@ -31,12 +31,15 @@
       <MglMarker
         v-for="(product, key) in products"
         :key="product.id"
-        :coordinates="[product.lng, product.lat]"
+        :coordinates="[product.business_lng, product.business_lat]"
       >
         <div class="marker" slot="marker">
-          <div>B{{ key + 1 }}</div>
+          <div>M{{ key + 1 }}</div>
         </div>
-        <MglPopup :coordinates="[product.lng, product.lat]" anchor="top">
+        <MglPopup
+          :coordinates="[product.business_lng, product.business_lat]"
+          anchor="top"
+        >
           <div class="py-4">
             <div class="d-flex justify-content-center flex-column pointer">
               <img :src="product.logo_path" alt="..." class="img-map" />
@@ -71,7 +74,12 @@ export default {
   },
   created() {
     this.mapbox = Mapbox;
-    console.log(this.mapbox);
+  },
+  mounted() {
+    setTimeout(() => {
+      console.log("Business => ".this.businesses);
+      console.log("Products => ".this.products);
+    }, 5000);
   },
   methods: {
     gotoBusiness(id) {
@@ -121,7 +129,7 @@ export default {
   margin-top: 3px;
   transition: all 0.5s;
   font-weight: bold;
-  font-size: 14px;
+  font-size: 13px;
 }
 .pointer {
   cursor: pointer;

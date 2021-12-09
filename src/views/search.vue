@@ -587,7 +587,10 @@
             <div v-if="selectedId == '1'">
               <businessmap :businessPage="businessPage" />
             </div>
-            <div v-else>
+            <div v-if="selectedId == '4'">
+              <mapbox :products="allproducts.data" />
+            </div>
+            <div v-if="selectedId == '0'">
               <mapbox
                 :businesses="businesses.data"
                 :products="miniproducts.data"
@@ -674,6 +677,9 @@ export default {
     },
     miniproducts() {
       return this.$store.getters["allSearch/getProducts"];
+    },
+    allproducts() {
+      return this.$store.getters["marketSearch/getProducts"];
     },
 
     products() {

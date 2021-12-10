@@ -106,6 +106,7 @@ export default {
         // [NO BUG]
         GET_USERS_CHAT_LIST({ commit, state }, data) {
             commit("setUsers", []);
+            console.log("currentuser:", state.currentUser.user);
 
             commit("setLoader", true);
             let keyword = data.keyword ? '/' + data.keyword : ''
@@ -136,11 +137,24 @@ export default {
                         commit("setLoader", false);
                         console.log(err);
                     })
-            } else {
+            } else if (data.type == "network") {
                 axios.get(`/messages/userNetwork${keyword}`)
                     .then((res) => {
                         commit("setLoader", false);
                         console.log("Network chat list: ", res.data.data);
+                        commit("setChatList", res.data.data ? res.data.data : {
+                            data: []
+                        });
+                    })
+                    .catch((err) => {
+                        commit("setLoader", false);
+                        console.log(err);
+                    })
+            } else {
+                axios.get(`group/list/users/${state.currentUser.user.id + keyword }`)
+                    .then((res) => {
+                        commit("setLoader", false);
+                        console.log("Business GROUPS: ", res.data.data);
                         commit("setChatList", res.data.data ? res.data.data : {
                             data: []
                         });
@@ -155,9 +169,8 @@ export default {
         // SHARE <---------
         SHARE_POST_NETWORK({ commit }, data) {
             commit("setLoader", true)
-            var payload = data.data
 
-            return axios.post(`/share/post/user/network`, payload)
+            return axios.post(`/share/post/user/network`, data)
                 .then((res) => {
                     commit("setLoader", false)
                     console.log("Post shared...", res.data.data);
@@ -170,9 +183,8 @@ export default {
         },
         SHARE_POST_USER({ commit }, data) {
             commit("setLoader", true)
-            var payload = data.data
 
-            return axios.post(`/share/post/user`, payload)
+            return axios.post(`/share/post/user`, data)
                 .then((res) => {
                     commit("setLoader", false)
                     console.log("Post shared...", res.data.data);
@@ -185,9 +197,9 @@ export default {
         },
         SHARE_POST_BUSINESS({ commit }, data) {
             commit("setLoader", true)
-            var payload = data.data
+            console.log("data:", data);
 
-            return axios.post(`/share/post/user/business`, payload)
+            return axios.post(`/share/post/user/business`, data)
                 .then((res) => {
                     commit("setLoader", false)
                     console.log("Post shared...", res.data.data);
@@ -283,6 +295,22 @@ export default {
                 .then((res) => {
                     commit("setLoader", false);
                     console.log("User to network: ", res.data.data);
+                    commit("setUserToUser", res.data.data);
+                })
+                .catch((err) => {
+                    commit("setLoader", false);
+                    console.log(err);
+                })
+        },
+        async GET_USER_TO_GROUP({ commit, state }, data) {
+            commit("setLoader", true);
+            console.log("[DEBUG] user to group", data);
+            let keyword = data.keyword ? '/' + data.keyword : ''
+
+            await axios.get(`/group/${data.receiverID + keyword}`)
+                .then((res) => {
+                    commit("setLoader", false);
+                    console.log("Group: ", res.data.data);
                     commit("setUserToUser", res.data.data);
                 })
                 .catch((err) => {

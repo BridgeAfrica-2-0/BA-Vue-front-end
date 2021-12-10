@@ -95,7 +95,7 @@
                 type="search"
                 data-toggle="popover"
                 class="form-control search-h"
-                style="font-size:17px !important"
+                style="font-size: 17px !important"
                 :placeholder="searchOptions.placeholder"
                 v-model="searchOptions.keyword"
                 aria-label=""
@@ -103,22 +103,16 @@
                 title=""
               />
 
-             
+              <vue-bootstrap-typeahead
+                v-model="query"
+                :data="neigbourhoods"
+                minMatchingChars="0"
+                maxMatches="10"
+                :serializer="(item) => item.name"
+                placeholder="Where"
+                class="search-hh w-44"
+              />
 
-           <vue-bootstrap-typeahead
-    
-    v-model="query"
-    :data="neigbourhoods"
-    minMatchingChars="0"
-    maxMatches="10"
-    :serializer="item => item.name"
- 
-    placeholder="Where"
-    class="search-hh w-44"
-  />
- 
-
-             
               <slot name="button">
                 <Button @click.native="getKeyword" />
               </slot>
@@ -208,7 +202,14 @@
                     <div v-for="message in messages" :key="message.id">
                       <hr class="h-divider" />
                       <div
-                        class="d-inline-flex flex-row justify-content-between align-items-center suggest-item cursor-pointer"
+                        class="
+                          d-inline-flex
+                          flex-row
+                          justify-content-between
+                          align-items-center
+                          suggest-item
+                          cursor-pointer
+                        "
                       >
                         <div class="d-inline-flex flex-row align-items-center">
                           <div>
@@ -267,7 +268,13 @@
                     >
                       <hr class="h-divider" />
                       <div
-                        class="d-inline-flex flex-row align-items-center suggest-item cursor-pointer"
+                        class="
+                          d-inline-flex
+                          flex-row
+                          align-items-center
+                          suggest-item
+                          cursor-pointer
+                        "
                       >
                         <div class="d-flex flex-column ml-3">
                           <div>{{ notification.notification_text }}</div>
@@ -299,7 +306,6 @@
                       'user' == user.user_type ? 'rounded-circle' : ''
                     } logo-sizee`"
                     alt=""
-                    
                 /></router-link>
               </div>
 
@@ -320,7 +326,13 @@
                 <b-popover target="other-menu" triggers="hover" placement="top">
                   <div class="popover-body">
                     <div
-                      class="d-inline-flex flex-row align-items-center mb-1 w-full"
+                      class="
+                        d-inline-flex
+                        flex-row
+                        align-items-center
+                        mb-1
+                        w-full
+                      "
                     >
                       <Activity />
                     </div>
@@ -330,7 +342,12 @@
                       v-if="'user' != user.user_type"
                       @click.prevent="switchToProfile"
                       href="#"
-                      class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+                      class="
+                        other-menu
+                        suggest-item
+                        cursor-pointer
+                        text-decoration-none text-dark
+                      "
                     >
                       <span class="mr-2"
                         ><fas-icon class="violet search"
@@ -341,7 +358,12 @@
 
                     <router-link
                       :to="{ name: 'orders' }"
-                      class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+                      class="
+                        other-menu
+                        suggest-item
+                        cursor-pointer
+                        text-decoration-none text-dark
+                      "
                     >
                       <span class="mr-2"
                         ><fas-icon
@@ -354,7 +376,12 @@
 
                     <router-link
                       :to="{ name: 'settings' }"
-                      class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+                      class="
+                        other-menu
+                        suggest-item
+                        cursor-pointer
+                        text-decoration-none text-dark
+                      "
                     >
                       <span class="mr-2"
                         ><fas-icon
@@ -397,7 +424,12 @@
                     <a
                       @click="logout"
                       href="#"
-                      class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+                      class="
+                        other-menu
+                        suggest-item
+                        cursor-pointer
+                        text-decoration-none text-dark
+                      "
                     >
                       <span class="mr-2"
                         ><fas-icon
@@ -454,7 +486,12 @@
 
             <router-link
               :to="{ name: 'orders' }"
-              class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+              class="
+                other-menu
+                suggest-item
+                cursor-pointer
+                text-decoration-none text-dark
+              "
             >
               <span class="mr-2"
                 ><fas-icon
@@ -467,7 +504,12 @@
 
             <router-link
               :to="{ name: 'settings' }"
-              class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+              class="
+                other-menu
+                suggest-item
+                cursor-pointer
+                text-decoration-none text-dark
+              "
             >
               <span class="mr-2"
                 ><fas-icon class="violet search" :icon="['fas', 'cogs']"
@@ -507,7 +549,12 @@
             <a
               href="#"
               @click="logout"
-              class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+              class="
+                other-menu
+                suggest-item
+                cursor-pointer
+                text-decoration-none text-dark
+              "
             >
               <span class="mr-2"
                 ><fas-icon
@@ -595,13 +642,13 @@ export default {
       hasLauchNetworkRequest: "social/INIT",
       hasNewMessage: "notification/HAS_MESSAGE",
       user: "auth/profilConnected",
-      auth: "auth/user",  
-      neigbourhoods:"auth/neigbourhoods", 
+      auth: "auth/user",
+      neigbourhoods: "auth/neigbourhoods",
     }),
   },
   beforeMount() {
     console.log("beforeMount");
-    this.getLocation()
+    this.getLocation();
   },
   created() {
     this.init();
@@ -622,7 +669,7 @@ export default {
     this.redirectionPatterns = {
       message: {
         user: () => () => ({
-          name: "messaging"
+          name: "messaging",
         }),
         business: () => ({
           name: "BusinessOwner",
@@ -642,7 +689,7 @@ export default {
           query: { tabId: 2 },
         }),
         user: () => ({
-          name: "settings"
+          name: "settings",
         }),
         network: () => ({
           name: "networks",
@@ -670,16 +717,11 @@ export default {
       },
     },
 
-     query(newQuery) {     
-      axios.get(`neighborhood/${newQuery}`)
-        .then(({ data }) => {
-         
-           this.$store.commit("auth/setneigbourhoods", data.data);
-     
-
-        })
-    }
-
+    query(newQuery) {
+      axios.get(`neighborhood/${newQuery}`).then(({ data }) => {
+        this.$store.commit("auth/setneigbourhoods", data.data);
+      });
+    },
   },
 
   filters: {
@@ -693,9 +735,9 @@ export default {
       setNetworks: "social/FIND_USER_NETWORK",
       setBusiness: "social/FIND_USER_BUSNESS",
       lauchNetworkRequest: "social/INIT",
-       getGeo: "business/getGeo",
+      getGeo: "business/getGeo",
 
-        getNeigbourhoods: "auth/neigbourhoods",
+      getNeigbourhoods: "auth/neigbourhoods",
 
       Logout: "auth/logout",
     }),
@@ -704,42 +746,36 @@ export default {
       profile: "auth/profilConnected",
     }),
 
-    
     getLocation() {
       const success = (position) => {
         const latitude = position.coords.latitude;
         const longitude = position.coords.longitude;
 
         this.getGeo({ lat: latitude, lng: longitude });
-        
+
         //time to get some neighbourhood mother fuckers ?lat=3.87374300&lng=11.49966000
-         this.getNeigbourhoods({ lat: "", lng: "" });
-    
+        this.getNeigbourhoods({ lat: "", lng: "" });
       };
 
       const error = (err) => {
         console.log(error);
       };
 
-
-      
-
       // This will open permission popup
       navigator.geolocation.getCurrentPosition(success, error);
     },
 
-
-
-
     updateNotificationEvent() {
       try {
-        const newRouteNotificationApi = this.notificationPatterns[
-          this.$store.state.auth.profilConnected.user_type
-        ]();
+        const newRouteNotificationApi =
+          this.notificationPatterns[
+            this.$store.state.auth.profilConnected.user_type
+          ]();
 
-        const newRouteMessageApi = this.messagePatterns[
-          this.$store.state.auth.profilConnected.user_type
-        ]();
+        const newRouteMessageApi =
+          this.messagePatterns[
+            this.$store.state.auth.profilConnected.user_type
+          ]();
 
         this.newNotification(newRouteNotificationApi);
         this.newMessage(newRouteMessageApi);
@@ -937,13 +973,14 @@ export default {
   },
 };
 </script>
-<style>  .vbst-item:hover{
-       color:white !important
-}  </style>
+<style>
+.vbst-item:hover {
+  color: white !important;
+}
+</style>
 
 <style scoped>
-
-.w-44{
+.w-44 {
   width: 44%;
 }
 

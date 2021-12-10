@@ -1,4 +1,3 @@
-
 import Vue from 'vue';
 import App from './App.vue';
 import './registerServiceWorker';
@@ -23,6 +22,9 @@ import VueSocialauth from 'vue-social-auth';
 
 
 import ShareNetwork from 'vue-social-sharing';
+import BtnCtaMessage from "@/components/messagesCTA/Btn-cta-message";
+Vue.component('BtnCtaMessage', BtnCtaMessage);
+
 Vue.use(ShareNetwork);
 
 import VueBootstrapTypeahead from 'vue-bootstrap-typeahead'
@@ -131,6 +133,7 @@ library.add(fas);
 Vue.component('fas-icon', FontAwesomeIcon);
 Vue.component('fab-icon', FontAwesomeIcon);
 
+
 import vueCountryRegionSelect from 'vue-country-region-select';
 Vue.use(vueCountryRegionSelect);
 
@@ -231,12 +234,10 @@ new Vue({
             },
         );
 
-        axios.interceptors.request.use(function (config) {
+        axios.interceptors.request.use(function(config) {
             if (user != null) {
-                config.headers.Authorization = `Bearer  ${user.accessToken}`;
+                config.headers.Authorization = `Bearer ${user.accessToken}`;
             }
-
-
 
             // config.headers.common['Language'] = i18n.locale;
             config.headers.common['Language'] = "en";

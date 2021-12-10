@@ -44,9 +44,8 @@
         </b-col>
 
         <b-col cols="4">
-          <b-button block size="sm" class="b-background" variant="primary">
-            <b-icon class="ico" icon="chat"> </b-icon> {{ $t('businessowner.Message') }}
-          </b-button>
+          <BtnCtaMessage :element="item" type="business" /><b-button block size="sm" class="b-background" variant="primary">
+            
         </b-col>
 
         <b-col cols="4">

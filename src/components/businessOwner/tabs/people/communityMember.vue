@@ -14,7 +14,7 @@
               <b-row>
                 <b-col cols="12">
                   <p class="detail">
-                    {{ $t('businessowner.Cameroon') }},
+                    {{ $t("businessowner.Cameroon") }},
                     <span class="desktop"
                       ><b-icon icon="house" class="primary"></b-icon> 2,
                       <b-icon icon="globe" class="primary"></b-icon> 3,
@@ -31,14 +31,11 @@
         <b-row>
           <b-col>
             <b-button variant="primary" size="sm" class="">
-              +{{ $t('businessowner.Community') }}</b-button
+              +{{ $t("businessowner.Community") }}</b-button
             >
           </b-col>
           <b-col>
-            <b-button variant="outline-primary" size="sm">
-              <b-icon icon="chat-fill"></b-icon>
-              {{ $t('businessowner.Message') }}</b-button
-            >
+            <BtnCtaMessage :element="item" type="people" />
           </b-col>
         </b-row>
       </b-col>

@@ -52,10 +52,10 @@
                 <b-button
                   block
                   size="sm"
-                  class="b-background shadow "
+                  class="b-background shadow"
                   variant="primary"
                 >
-                  <i class="fas fa-user-plus  fa-lg btn-icon "></i>
+                  <i class="fas fa-user-plus fa-lg btn-icon"></i>
                   <span class="btn-com">Community</span>
                 </b-button>
               </b-col>
@@ -68,15 +68,7 @@
                 cols="4"
                 class="mt-2 text-center"
               >
-                <b-button
-                  block
-                  size="sm"
-                  class="b-background shadow "
-                  variant="primary"
-                >
-                  <i class="fas fa-envelope   fa-lg btn-icon "></i>
-                  <span class="btn-text">Message</span>
-                </b-button>
+                <BtnCtaMessage :element="business" type="business" />
               </b-col>
 
               <b-col
@@ -90,10 +82,10 @@
                 <b-button
                   block
                   size="sm"
-                  class="b-background shadow "
+                  class="b-background shadow"
                   variant="primary"
                 >
-                  <i class="fas fa-map-marked-alt  fa-lg btn-icon "></i>
+                  <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
                   <span class="btn-text">Direction</span>
                 </b-button>
               </b-col>
@@ -106,7 +98,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "axios";
 export default {
   props: ["business"],
 
@@ -124,31 +116,24 @@ export default {
     };
   },
 
-  mounted(){
-
+  mounted() {
     this.biz_id = this.$route.params.id;
   },
 
-  computed:{
- 
-   businesses(){
-
-      if(this.type=="Follower"){ 
-
-      return  this.$store.state.businessOwner.BcommunityFollower.business_followers;  
-
-       }else{
-
-         return  this.$store.state.businessOwner.BcommunityFollowing.business_following; 
-       }
-   }
-    
-    
+  computed: {
+    businesses() {
+      if (this.type == "Follower") {
+        return this.$store.state.businessOwner.BcommunityFollower
+          .business_followers;
+      } else {
+        return this.$store.state.businessOwner.BcommunityFollowing
+          .business_following;
+      }
+    },
   },
 
-  methods:{
-
-     count(number) {
+  methods: {
+    count(number) {
       if (number >= 1000000) {
         return number / 1000000 + "M";
       }
@@ -157,66 +142,44 @@ export default {
       } else return number;
     },
 
-          infiniteHandler($state) { 
-
+    infiniteHandler($state) {
       let url = null;
 
-         if(this.type=="Follower"){  
-         
-          url = "business/community/visitor/business-follower/"+this.biz_id+"/";
-         }else{
-         
-          url = "business/community/visitor/business-following/"+this.biz_id+"/";
-         }
+      if (this.type == "Follower") {
+        url =
+          "business/community/visitor/business-follower/" + this.biz_id + "/";
+      } else {
+        url =
+          "business/community/visitor/business-following/" + this.biz_id + "/";
+      }
       axios
         .get(url + this.page)
         .then(({ data }) => {
-        
-          if(this.type=="Follower"){  
+          if (this.type == "Follower") {
+            if (data.data.business_followers.length) {
+              this.businesses.push(...data.data.business_followers);
+              this.page += 1;
 
-
-          if (data.data.business_followers.length) {
-            
-         
-            this.businesses.push(...data.data.business_followers); 
-            this.page += 1;
-            
-            $state.loaded();
-
-           }else{
+              $state.loaded();
+            } else {
               $state.complete();
-             
-           }
-        
-          }else{
+            }
+          } else {
+            if (data.data.business_following.length) {
+              this.businesses.push(...data.data.business_following);
+              this.page += 1;
 
-
-
-
-             if (data.data.business_following.length) {
-            
-         
-            this.businesses.push(...data.data.business_following); 
-            this.page += 1;
-            
-            $state.loaded();
-
-           }else{
+              $state.loaded();
+            } else {
               $state.complete();
-             
-           }
-
+            }
           }
-           
         })
         .catch((err) => {
           console.log({ err: err });
         });
     },
-
-  }  
-
-
+  },
 };
 </script>
 

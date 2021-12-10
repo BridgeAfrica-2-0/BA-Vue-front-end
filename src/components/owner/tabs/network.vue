@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-modal id="modal-sm" size="sm" hide-header>
-      {{ $t('profileowner.Do_you_want_to_join_this_network') }}
+      {{ $t("profileowner.Do_you_want_to_join_this_network") }}
     </b-modal>
 
     <div class="people-style shadow" v-for="item in network" :key="item.id">
@@ -17,9 +17,7 @@
             <strong class="title"> {{ item.name }} </strong> <br />
             {{ item.category }}
             <br />
-           {{ item.followers }} {{ $t('profileowner.Community') }}<br />
-
-        
+            {{ item.followers }} {{ $t("profileowner.Community") }}<br />
 
             <read-more
               more-str="read more"
@@ -36,42 +34,69 @@
         <b-col lg="12" xl="12" md="4" cols="12" sm="4">
           <div class="s-button">
             <b-row>
-              <b-col md="12" lg="4" xl="4" sm="12" cols="4" class="mt-2 text-center">
+              <b-col
+                md="12"
+                lg="4"
+                xl="4"
+                sm="12"
+                cols="4"
+                class="mt-2 text-center"
+              >
                 <b-button
                   block
                   size="sm"
                   class="b-background shadow"
                   :class="item.is_follow !== 0 && 'u-btn'"
-                   :id="'followbtn'+item.id"
+                  :id="'followbtn' + item.id"
                   variant="primary"
                   @click="handleFollow(item)"
                 >
-                 <i
-                            class="fas fa-lg btn-icon"
-                            :class="item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"
-                          ></i>
-                  <span class="btn-com">{{ $t('profileowner.Community') }}</span>
+                  <i
+                    class="fas fa-lg btn-icon"
+                    :class="
+                      item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'
+                    "
+                  ></i>
+                  <span class="btn-com">{{
+                    $t("profileowner.Community")
+                  }}</span>
                 </b-button>
               </b-col>
 
-              <b-col md="12" lg="4" xl="4" sm="12" cols="4" class="mt-2 text-center">
-                <b-button block size="sm" class="b-background shadow " variant="primary">
-                  <i class="fas fa-envelope   fa-lg btn-icon "></i>
-                  <span class="btn-text">{{ $t('profileowner.Message') }}</span>
-                </b-button>
+              <b-col
+                md="12"
+                lg="4"
+                xl="4"
+                sm="12"
+                cols="4"
+                class="mt-2 text-center"
+              >
+                <BtnCtaMessage :element="item" type="network" />
               </b-col>
 
-              <b-col md="12" lg="4" xl="4" sm="12" cols="4" class="mt-2 text-center">
-                   <b-button
+              <b-col
+                md="12"
+                lg="4"
+                xl="4"
+                sm="12"
+                cols="4"
+                class="mt-2 text-center"
+              >
+                <b-button
                   block
                   size="sm"
                   class="b-background shadow"
                   :class="item.is_member !== 0 && 'u-btn'"
                   variant="primary"
-                  :id="'joinbtn'+item.id"
+                  :id="'joinbtn' + item.id"
                   @click="handleJoin(item)"
                 >
-                  <i class="fas fa-lg btn-icon" :class="item.is_member !== 0 ? 'fa-user-minus' : 'fa-user-plus'"></i>
+                  <i
+                    class="fas fa-lg btn-icon"
+                    :class="
+                      item.is_member !== 0 ? 'fa-user-minus' : 'fa-user-plus'
+                    "
+                  ></i>
                   <span class="btn-com"> Join </span>
                 </b-button>
               </b-col>
@@ -86,14 +111,15 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 
 export default {
-  props: ['type'],
+  props: ["type"],
+
   data() {
     return {
       page: 1,
-      foll_id:null,
+      foll_id: null,
       network: [],
       options: {
         rewind: true,
@@ -101,66 +127,55 @@ export default {
         perPage: 1,
         pagination: false,
 
-        type: 'loop',
+        type: "loop",
         perMove: 1,
       },
     };
   },
 
-  computed: {
-  
+  computed: {},
+
+  mounted() {
+    this.foll_id = this.$route.params.id ? this.$route.params.id : "";
   },
 
-   mounted(){
-  
-  this.foll_id = this.$route.params.id ? this.$route.params.id :""  ;
-
- },
-
-
-
   methods: {
-
-
-    			
     async handleJoin(user) {
-       document.getElementById("joinbtn"+user.id).disabled = true;
+      document.getElementById("joinbtn" + user.id).disabled = true;
       const uri = user.is_member === 0 ? `/add-member` : `/remove-member`;
       const nextFollowState = user.is_member === 0 ? 1 : 0;
       const data = {
         id: user.id,
-        type: 'network',
+        type: "network",
       };
 
       await axios
         .post(uri, data)
-        .then(response => {
-			console.log(response);
+        .then((response) => {
+          console.log(response);
           user.is_member = nextFollowState;
-          document.getElementById("joinbtn"+user.id).disabled =  false;
+          document.getElementById("joinbtn" + user.id).disabled = false;
         })
-        .catch(err =>{   console.log(err)
-         document.getElementById("joinbtn"+user.id).disabled =  false;
+        .catch((err) => {
+          console.log(err);
+          document.getElementById("joinbtn" + user.id).disabled = false;
         });
     },
 
-
-
-
     infiniteHandler($state) {
-      console.log('loading network 1 1');
+      console.log("loading network 1 1");
 
       const url =
-        this.type === 'Follower'
+        this.type === "Follower"
           ? `profile/network/follower/`
           : `profile/network/following/`;
 
       axios
-        .get(url + this.page+"?id="+this.foll_id)
+        .get(url + this.page + "?id=" + this.foll_id)
         .then(({ data }) => {
-          console.log('lading network after response');
+          console.log("lading network after response");
           console.log(data);
-          if (this.type == 'Follower') {
+          if (this.type == "Follower") {
             if (data.data.network_followers.length) {
               this.page += 1;
               this.network.push(...data.data.network_followers);
@@ -181,28 +196,29 @@ export default {
             }
           }
         })
-        .catch(err => {
+        .catch((err) => {
           console.log({ err: err });
         });
     },
 
     async handleFollow(user) {
-       document.getElementById("followbtn"+user.id).disabled = true;
+      document.getElementById("followbtn" + user.id).disabled = true;
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
         id: user.id,
-        type: 'network',
+        type: "network",
       };
 
       await axios
         .post(uri, data)
-        .then(response => {
+        .then((response) => {
           user.is_follow = nextFollowState;
-           document.getElementById("followbtn"+user.id).disabled =  false;
+          document.getElementById("followbtn" + user.id).disabled = false;
         })
-        .catch(err =>{   console.log(err)
-         document.getElementById("followbtn"+user.id).disabled =  false;
+        .catch((err) => {
+          console.log(err);
+          document.getElementById("followbtn" + user.id).disabled = false;
         });
     },
   },
@@ -279,13 +295,13 @@ export default {
     color: black;
 
     line-height: 35px;
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 
   .textt {
     color: #000;
 
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
@@ -332,13 +348,13 @@ export default {
     color: black;
 
     line-height: 35px;
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 
   .textt {
     color: #000;
 
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;

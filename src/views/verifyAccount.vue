@@ -1,4 +1,5 @@
 <template>
+
   <div>
     <form novalidate autocomplete="off" class="md-layout" @submit.prevent="validateUser">
       <md-card class="md-layout-item md-size-50 md-small-size-100 p-card">
@@ -69,6 +70,7 @@
      <div v-if="verify_method">   
           <md-field>
               <label for="otp"> {{ $t('verification.OTP') }}</label>
+
               <md-input
                 type="text"
                 name="otp"
@@ -109,8 +111,9 @@
               variant="primary"
               type="submit"
             >
-              {{ $t('verification.Verify') }}
+              {{ $t("verification.Verify") }}
             </b-button>
+
 
 
           
@@ -124,9 +127,11 @@
            <p class="mt-5 mt-md-2">
             {{ $t('verification.Didnt_recieved_the_verification_OTP') }}
             <b-link @click.prevent="resendOtp()"> {{ $t('verification.Resend_OTP') }} </b-link>
+
           </p>
 
         </div>
+
 
         <div></div>
 
@@ -147,6 +152,7 @@
 
    
   </div>
+
 </template>
 
 <script>
@@ -157,6 +163,7 @@ import axios from "axios";
 import "@/assets/default.css";
 import { required, email } from "vuelidate/lib/validators";
 export default {
+
   name: "FormValidation",
   boolean: true,
   mixins: [validationMixin],
@@ -207,6 +214,7 @@ verifyMethod(metho){
        }
        this.sending = true;
       console.log(this.$store.state.auth.user.user.phone);
+
       this.$store
         .dispatch(url, {
          
@@ -253,11 +261,13 @@ verifyMethod(metho){
         })
         .then(response => {
           if (response.status === 200) {
-            console.log("response: ",response);
+            console.log("response: ", response);
             this.flashMessage.show({
               status: "success",
-              title: this.$t('verification.Successfully_Send'),
-              message: this.$t('verification.SMS_successfully_send_check_your_inbox')
+              title: this.$t("verification.Successfully_Send"),
+              message: this.$t(
+                "verification.SMS_successfully_send_check_your_inbox"
+              ),
             });
 
              this.sending = false;
@@ -265,8 +275,9 @@ verifyMethod(metho){
             console.log(response.data);
           }
         })
-        .catch(err => {
+        .catch((err) => {
           console.log({ err: err });
+
 
          
           if (err.response.status == 422) {
@@ -303,15 +314,18 @@ verifyMethod(metho){
       this.$store
         .dispatch("auth/verify", {
           OTP: this.token,
+
           email: this.$store.state.auth.user.user.email,
           phone: this.$store.state.auth.user.user.phone
         })
         .then(response => {
            this.sending = false;
+
           this.$router.push({ name: "welcome" });
         })
-        .catch(err => {
+        .catch((err) => {
           console.log({ err: err });
+
 
          
 
@@ -389,6 +403,7 @@ verifyMethod(metho){
   
 
   }
+
 };
 </script>
 

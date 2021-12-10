@@ -162,7 +162,6 @@ import Popularnetwork from "@/components/dasboard/popularnetwork";
 import { WhoIsIt } from "@/mixins";
 
 export default {
-  
   name: "dashboard",
   mixins: [WhoIsIt],
 

@@ -35,10 +35,8 @@
             >
           </b-col>
           <b-col>
-            <b-button variant="outline-primary" size="sm">
-              <b-icon icon="chat-fill"></b-icon>
-              Message</b-button
-            >
+                              <BtnCtaMessage :element="item" type="people" />
+
           </b-col>
         </b-row>
       </b-col>

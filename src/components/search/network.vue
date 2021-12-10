@@ -1,9 +1,15 @@
 <template>
   <div>
-    <b-spinner v-if="loader" variant="primary" :label="$t('search.Spinning')"></b-spinner>
+    <b-spinner
+      v-if="loader"
+      variant="primary"
+      :label="$t('search.Spinning')"
+    ></b-spinner>
 
     <b-alert v-if="networks.data.length === 0" show variant="warning"
-      ><a href="#" class="alert-link"> {{$t("search.No_Network_available")}}! </a>
+      ><a href="#" class="alert-link">
+        {{ $t("search.No_Network_available") }}!
+      </a>
     </b-alert>
 
     <div
@@ -26,7 +32,8 @@
             <br />
             {{ network.purpose }}
             <br />
-            {{ network.member_count }} {{$t("search.Community_member")}} <br />
+            {{ network.member_count }} {{ $t("search.Community_member") }}
+            <br />
 
             <span class="location">
               <b-icon-geo-alt class="ico"></b-icon-geo-alt>
@@ -35,7 +42,7 @@
             <br />
             {{ network.description }}
             <br />
-            <b-link>{{$t("search.Read_More")}}</b-link>
+            <b-link>{{ $t("search.Read_More") }}</b-link>
           </p>
         </b-col>
 
@@ -58,20 +65,14 @@
                   variant="primary"
                 >
                   <i class="fas fa-user-plus fa-lg btn-icon"></i>
-                  <span class="btn-com" v-b-modal.modal-sm>{{$t("search.Community")}}</span>
+                  <span class="btn-com" v-b-modal.modal-sm>{{
+                    $t("search.Community")
+                  }}</span>
                 </b-button>
               </b-col>
 
               <b-col md="4" lg="12" xl="12" sm="12" cols="4" class="mt-2">
-                <b-button
-                  block
-                  size="sm"
-                  class="b-background shadow"
-                  variant="primary"
-                >
-                  <i class="fas fa-envelope fa-lg btn-icon"></i>
-                  <span class="btn-text">{{$t("search.Message")}}</span>
-                </b-button>
+                <BtnCtaMessage :element="network" type="network" />
               </b-col>
 
               <b-col md="4" lg="12" xl="12" sm="12" cols="4" class="mt-2">
@@ -97,7 +98,7 @@
     <!-- End pagination -->
 
     <b-modal id="modal-sm" size="sm" hide-header>
-      {{$t("search.Do_you_want_to_join_this_network")}}?
+      {{ $t("search.Do_you_want_to_join_this_network") }}?
     </b-modal>
   </div>
 </template>

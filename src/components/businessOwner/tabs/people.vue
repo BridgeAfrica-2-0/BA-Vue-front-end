@@ -30,16 +30,7 @@
                   <div class="e-name">
                     <b-row class="mt-lg-0">
                       <b-col md="6" lg="6" cols="6" sm="6" xl="6" class="mt-2 mt-lg-2 mt-xl-2 btn-2 center">
-                        <b-button
-                          block
-                          variant="primary"
-                          size="sm"
-                          class="b-background flexx pobtn shadow mr-lg-3 mr-xl-3"
-                          @click="cta(item)"
-                        >
-                          <i class="fas fa-envelope fa-lg btn-icon"></i>
-                          <span class="btn-text"> {{ $t('businessowner.Message') }}</span>
-                        </b-button>
+                        <BtnCtaMessage :element="item" type="people" />
                       </b-col>
 
                       <b-col md="6" lg="6" cols="6" sm="6" xl="6" class="mt-2 mt-lg-2 mt-xl-2 btn-2 center">

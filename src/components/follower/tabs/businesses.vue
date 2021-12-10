@@ -23,8 +23,8 @@
                     <img :src="item.picture" class="r-image" />
                   </splide-slide>
                 </splide>
-              </div>   <div class="flx100"> 
-              <p class="textt">
+              </div>   <div class="flx100 text-left"> 
+              <p class=" ml-3 textt text-left">
                 <strong class="title"> {{ item.name }} </strong> <br />
                
             <span v-for="cat in item.category" :key="cat.name">   {{cat.name}}  </span>
@@ -34,7 +34,8 @@
 
                 <span class="location">
                   <b-icon-geo-alt class="ico"></b-icon-geo-alt
-                  >{{ item.country }}
+                  > 
+				   <span v-for="cat in item.country" :key="cat.name">   {{cat.name}}  </span>
                 </span>
                 <br />
        <read-more
@@ -157,6 +158,7 @@
 				noBusiness: false,
 				foll_id: "",
 				page: 1,
+				busineses:[]
 			};
 		},
 
@@ -206,7 +208,7 @@
 				if (this.page == 1) {
 					this.busineses.splice(0);
 				}
-				let url = "business/user?id=" + this.foll_id+"&page="+this.page;
+				let url = "business/user?page=" + this.page+"&id="+this.foll_id;
 
 				this.$store
 					.dispatch("follower/loadMoreUserBusiness", url)
@@ -231,18 +233,18 @@
 
 		},
 		computed: {
-			busineses() {
+			old_busineses() {
 				return this.$store.state.follower.profileBusiness;
 			},
 		},
 		mounted() {
 			this.foll_id = this.$route.params.id;
-			this.$store
-				.dispatch("follower/profileBusiness", this.foll_id)
-				.then((response) => {})
-				.catch((error) => {
-					console.log({ error: error });
-				});
+			// this.$store
+			// 	.dispatch("follower/profileBusiness", this.foll_id) 
+			// 	.then((response) => {})
+			// 	.catch((error) => {
+			// 		console.log({ error: error });
+			// 	});
 		},
 	};
 </script>
@@ -321,7 +323,7 @@
 				font-size: 10px;
 
 				height: 28px;
-				width: 85px;
+				width: 92px;
 			}
 
 			.r-image {
@@ -349,7 +351,7 @@
 				line-height: 30px;
 				color: rgba(117, 114, 128, 1);
 				text-align: left;
-
+                text-align: left !important;
 				font-weight: normal;
 				line-height: 20px;
 				font-style: normal;
@@ -371,7 +373,7 @@
 			.btn {
 				padding-top: 6px;
 				height: 38px;
-				width: 123px;
+				width: 130px;
 				font-size: 14px;
 			}
 
@@ -474,10 +476,10 @@
 				font-size: 14px;
 				line-height: 30px;
 				color: rgba(117, 114, 128, 1);
-				text-align: left;
+				text-align: left !important;
 				font-weight: normal;
 				line-height: 20px;
-				font-style: normal;
+				font-style: normal ;
 				padding: 1px;
 				text-align: left;
 				margin-left: 55px;

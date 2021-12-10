@@ -839,7 +839,7 @@
               md="12"
               lg="6"
               class="p-0 mb-2"
-              v-for="business in profileBusinesss"
+              v-for="business in profilebusiness"
               :key="business.business_id"
             >
               <div class="people-style shadow h-100 ">
@@ -1047,13 +1047,17 @@ export default {
 
       let url = "business/user?page=" + this.page;
 
+      if (this.page == 1) {
+        this.profilebusiness.splice(0);
+      }
+      let url = "business/user?page="+this.page;
+      
       this.$store
         .dispatch("profile/loadMore", url)
         .then(({ data }) => {
           console.log(data);
           if (data.data.length) {
             this.page += 1;
-
             this.profileBusinesss.push(...data.data);
             $state.loaded();
           } else {
@@ -1109,7 +1113,6 @@ export default {
           this.infiniteId += 1;
           this.profileBusinesss = [];
           this.$refs.infiniteLoading.attemptLoad();
-
           this.flashMessage.show({
             status: "success",
 
@@ -1303,7 +1306,7 @@ export default {
         });
     },
 
-    profileBusiness() {
+    old_profileBusiness() {
       this.$store
         .dispatch("profile/profileBusiness")
         .then(() => {
@@ -1488,7 +1491,7 @@ export default {
             console.log(response);
 
             this.sendingB = false;
-            // this.profileBusiness();
+            this.profileBusiness();
 
             this.$refs["createBusinessModal"].hide();
             this.flashMessage.show({
@@ -1503,7 +1506,6 @@ export default {
             this.infiniteId += 1;
             this.profileBusinesss = [];
             this.$refs.infiniteLoading.attemptLoad();
-
             resolve(true);
           })
           .catch((err) => {

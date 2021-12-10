@@ -10,7 +10,7 @@ export default {
     isVerified: null,
     passwordToken: null,
     registerData: null,
-
+    neigbourhoods:[],
     businessAround: [],
     peopleAround: [],
     categories: [],
@@ -27,6 +27,7 @@ export default {
 
   mutations: {
     setUserData(state, userData) {
+      localStorage.removeItem('user');
       state.user = userData;
       state.profilConnected = { ...userData.user, user_type: 'user' };
 
@@ -49,6 +50,12 @@ export default {
 
       localStorage.setItem("user.user", JSON.stringify(userData.user));
 
+
+    },
+
+    setneigbourhoods(state, data){
+    
+      state.neigbourhoods=data;
 
     },
 
@@ -126,6 +133,21 @@ export default {
       });
     },
 
+
+    neigbourhoods({ commit }, payload){
+
+      console.log(payload);
+      
+      return axios.get("user/neighborhood?lat="+payload.lat+"&lng="+payload.lng).then(({ data }) => {
+
+        console.log("logging data for neigbourhood");
+        console.log(data);
+        commit("setneigbourhoods", data.data);
+
+      });
+
+    },
+
     country({ commit }) {
 
       return axios.get("countries").then(({ data }) => {
@@ -181,6 +203,7 @@ export default {
 
 
     completeWelcome({ commit }) {
+      localStorage.removeItem('user');
       return axios.get('user/completewelcome').then(({ data }) => {
         console.log(data);
         commit("setUserDataa", data.data);
@@ -242,6 +265,9 @@ export default {
     },
 
     profilConnected: state => state.profilConnected,
+
+    neigbourhoods: state => state.neigbourhoods,
+
 
     
       getAppLanguage: (state) => state.appLanguage

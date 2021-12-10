@@ -356,7 +356,6 @@ export default {
   .avat {
     width: 64px;
     height: 64px;
-    padding-top: 2vh;
   }
   .send-cmt {
     position: relative;

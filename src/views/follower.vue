@@ -7,7 +7,7 @@
 
       <notFound v-else />
 
-      <Footer />
+      <Footer />   
     </span>
   </div>
 </template>

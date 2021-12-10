@@ -110,6 +110,8 @@
         </infinite-loading>
         </b-col>
       </b-row>
+
+      
     </div>
   </b-container>
 </template>

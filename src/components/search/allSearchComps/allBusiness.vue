@@ -18,10 +18,11 @@
       :key="item.id"
       class="people-style shadow h-100"
     >
+  
       <b-row>
         <b-col md="8" xl="8" lg="12" cols="12" sm="8">
           <div class="d-inline-flex">
-            <div class="center-img ">
+            <div class="center-img">
               <splide :options="options" class="r-image">
                 <splide-slide cl>
                   <img :src="item.logo_path" class="r-image" />
@@ -40,7 +41,7 @@
                 <span v-for="cat in item.category" :key="cat.name">
                   {{ cat.name }}
                 </span>
-                <br />
+               
                 {{ count(item.followers) }}
                 {{ $t("dashboard.Community") }} <br />
 
@@ -117,7 +118,7 @@
                   @click="cta(item)"
                 >
                   <i class="fas fa-envelope fa-lg btn-icon"></i>
-                  <span class="btn-text">{{ "search.Message" }}</span>
+                  <span class="btn-text">{{   $t("search.Message")  }}</span>
                 </b-button>
               </b-col>
 
@@ -132,10 +133,10 @@
                 <b-button
                   block
                   size="sm"
-                  class="b-background shadow "
+                  class="b-background shadow"
                   variant="primary"
                 >
-                  <i class="fas fa-map-marked-alt  fa-lg btn-icon "></i>
+                  <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
                   <span class="btn-text">{{ $t("dashboard.Direction") }}</span>
                 </b-button>
               </b-col>

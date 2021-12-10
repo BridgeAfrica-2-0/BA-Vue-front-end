@@ -107,7 +107,7 @@
       ></b-form-datepicker>
     </b-modal>
 
-    <FlashMessage />
+    
   </div>
 </template>
 

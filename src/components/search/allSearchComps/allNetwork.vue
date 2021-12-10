@@ -14,12 +14,14 @@
         >{{ $t("search.No_Network_available") }}!
       </a>
     </b-alert>
-
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
     <div
       v-for="item in networks.data"
       :key="item.id"
       class="people-style shadow h-100"
     >
+
+   
       <b-row>
         <b-col md="8" xl="8" lg="12" cols="12" sm="8">
           <div class="d-inline-flex">
@@ -35,10 +37,10 @@
                 </strong>
                 <br />
 
-                <span v-for="cat in item.category" :key="cat.name">
+                <span v-for="cat in item.assign_categories" :key="cat.name">
                   {{ cat.name }}
                 </span>
-                <br />
+                
                 {{ count(item.community) }}
                 {{ $t("dashboard.Community") }} <br />
 
@@ -110,7 +112,7 @@
                   @click="cta(item)"
                 >
                   <i class="fas fa-envelope fa-lg btn-icon"></i>
-                  <span class="btn-text">{{ "search.Message" }}</span>
+                  <span class="btn-text">{{  $t("search.Message") }}</span>
                 </b-button>
               </b-col>
 
@@ -135,7 +137,7 @@
                     "
                   ></i>
 
-                  <span class="btn-text"> {{ "search.Join" }} </span>
+                  <span class="btn-text"> {{  $t("search.Join") }} </span>
                 </b-button>
               </b-col>
             </b-row>
@@ -166,6 +168,7 @@
 </template>
 
 <script>
+import moment from "moment";
 import axios from "axios";
 
 export default {

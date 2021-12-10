@@ -35,7 +35,7 @@
         </div>
       </b-card>
     </div>
-    <FlashMessage />
+  
   </b-container>
 </template>
 

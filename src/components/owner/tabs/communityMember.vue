@@ -1,5 +1,7 @@
 <template>
   <div class="p-2">
+
+  
     <div class="s-ccard">
       <b-row>
         <b-col lg="6" sm="12" class="p-2" v-for="item in users" :key="item.id">
@@ -27,7 +29,7 @@
                             class="mt-lg-2"
                           >
                             <div class="mt-3 mt-lg-0 mt-xl-0 username">
-                            <router-link    :to="'profile/'+item.id">    <b> {{ item.name }} </b> </router-link>
+                              <b> {{ item.name }} </b>
                             </div>
                           </b-col>
 

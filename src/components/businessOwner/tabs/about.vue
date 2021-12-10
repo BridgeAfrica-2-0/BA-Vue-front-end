@@ -7,18 +7,7 @@
 
     <b-card>
       <div class="mb-3">
-        <MglMap
-          :accessToken="accessToken"
-          :mapStyle.sync="mapStyle"
-          :center="[business_about.lng, business_about.lat]"
-          :zoom="zoom"
-          style="width: 100%; height: 250px"
-        >
-          <MglMarker
-            :coordinates="[business_about.lng, business_about.lat]"
-            color="red"
-          />
-        </MglMap>
+        <mapbox :coordinates="[business_about.lng, business_about.lat]" />
       </div>
 
       <b-card>
@@ -543,15 +532,17 @@
 //import moment from "moment";
 import { validationMixin } from "vuelidate";
 import { required, email, minLength } from "vuelidate/lib/validators";
-import { MglMap, MglMarker } from "vue-mapbox";
+import mapbox from "@/components/mapbox";
+// import { MglMap, MglMarker } from "vue-mapbox";
 // import VuePhoneNumberInput from "vue-phone-number-input";
 // import "vue-phone-number-input/dist/vue-phone-number-input.css";
 import Multiselect from "vue-multiselect";
 export default {
   components: {
     Multiselect,
-    MglMap,
-    MglMarker,
+    // MglMap,
+    mapbox,
+    // MglMarker,
     // VuePhoneNumberInput,
   },
   data() {
@@ -1123,7 +1114,6 @@ export default {
 </script>
 
 <style scoped>
-@import url("https://api.tiles.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css");
 .map {
   border: 0;
   width: 100%;

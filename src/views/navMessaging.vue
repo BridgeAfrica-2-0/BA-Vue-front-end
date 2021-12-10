@@ -621,6 +621,16 @@
                             <b>{{ chat.attachment }}</b> -->
                             <br />
                           </span>
+                          <span v-if="chat.post_details">
+                            <small class="text-dark font-italic text-right"
+                              ><i class="fas fa-share fa-xs pl-1"></i>Shared
+                              post</small
+                            ><br />
+                            <span class="font-italic">{{
+                              chat.post_details.content
+                            }}</span>
+                            <hr />
+                          </span>
                           {{ chat.message }}
                           <small class="float-right mt-2 text-white pr-1 pt-1">
                             {{ getCreatedAt(chat.created_at) }}
@@ -642,6 +652,17 @@
                             <!-- <br />
                             <b>{{ chat.attachment }}</b> -->
                             <br />
+                          </span>
+                          <span v-if="chat.post_details">
+                            <small class="text-dark font-italic text-right"
+                              ><i class="fas fa-share fa-xs pl-1"></i>Shared
+                              post</small
+                            ><br />
+                            <span class="font-italic">{{
+                              chat.post_details.content
+                            }}</span>
+
+                            <hr />
                           </span>
                           {{ chat.message }}
                           <small class="float-right mt-2 text-white pr-1 pt-1">

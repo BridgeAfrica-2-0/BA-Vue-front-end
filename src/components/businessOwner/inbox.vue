@@ -658,6 +658,17 @@
                             <b>{{ chat.attachment }}</b> -->
                             <br />
                           </span>
+                          <span v-if="chat.post_details">
+                            <small class="text-dark font-italic text-right"
+                              ><i class="fas fa-share fa-xs pl-1"></i>Shared
+                              post</small
+                            ><br />
+                            <span class="font-italic">{{
+                              chat.post_details.content
+                            }}</span>
+
+                            <hr />
+                          </span>
                           {{ chat.message }}
                           <small class="float-right mt-2 text-white pr-1 pt-1">
                             {{ getCreatedAt(chat.created_at) }}
@@ -679,6 +690,17 @@
                             <!-- <br />
                             <b>{{ chat.attachment }}</b> -->
                             <br />
+                          </span>
+                          <span v-if="chat.post_details">
+                            <small class="text-dark font-italic"
+                              ><i class="fas fa-share fa-xs pl-1"></i>Shared
+                              post</small
+                            >
+                            <br />
+                            <span class="font-italic">{{
+                              chat.post_details.content
+                            }}</span>
+                            <hr />
                           </span>
                           {{ chat.message }}
                           <small class="float-right mt-2 text-white pr-1 pt-1">
@@ -988,6 +1010,7 @@
                                   </td>
                                 </tr>
                               </div>
+                              <hr />
                               <h5>Business</h5>
                               <div v-if="allBusiness">
                                 <tr
@@ -1021,6 +1044,7 @@
                                   </td>
                                 </tr>
                               </div>
+                              <hr />
                               <h5>Network</h5>
                               <div v-if="allNetworks">
                                 <tr
@@ -1054,6 +1078,7 @@
                                   </td>
                                 </tr>
                               </div>
+                              <hr />
                               <h5>Editors</h5>
                               <div v-if="allEditors">
                                 <tr
@@ -1087,6 +1112,7 @@
                                   </td>
                                 </tr>
                               </div>
+                              <hr />
                             </b-tab>
                             <b-tab title="People" @click="getUsers()">
                               <b-row>
@@ -1139,7 +1165,7 @@
                                   class="centralizer"
                                 ></b-spinner>
                               </div>
-                              <div v-if="bizs">
+                              <div v-if="bizs.length">
                                 <tr
                                   v-for="(biz, index) in bizs"
                                   :key="index"
@@ -1229,7 +1255,7 @@
                                   class="centralizer"
                                 ></b-spinner>
                               </div>
-                              <div v-if="bizs">
+                              <div v-if="bizs.length">
                                 <tr
                                   v-for="(biz, index) in bizs"
                                   :key="index"
@@ -1309,6 +1335,7 @@
                                   </b-card>
                                 </b-col>
                               </b-row>
+
                               <div v-if="loader" class="text-center">
                                 <b-spinner
                                   variant="primary"
@@ -1316,7 +1343,7 @@
                                   class="centralizer"
                                 ></b-spinner>
                               </div>
-                              <div v-if="bizs">
+                              <div v-if="bizs.length">
                                 <tr
                                   v-for="(biz, index) in bizs"
                                   :key="index"
@@ -1361,7 +1388,7 @@
                                   class="centralizer"
                                 ></b-spinner>
                               </div>
-                              <div v-if="bizs">
+                              <div v-if="bizs.length">
                                 <tr
                                   v-for="(biz, index) in bizs"
                                   :key="index"
@@ -1438,6 +1465,7 @@
             size="lg"
             autofocus
             :placeholder="$t('businessowner.Enter_your_name')"
+            @keypress.enter="selectedMultyChat()"
           ></b-form-input>
         </div>
 
@@ -1584,6 +1612,15 @@ export default {
     },
   },
   mounted() {
+    let obj = [
+      {
+        id: { first: "edouard", second: "lele" },
+        names: { first: "edouard", second: "lele" },
+      },
+    ];
+    let tableau = Object.keys(obj).map((key) => [Number(key), obj[key]]);
+
+    console.log("finale+++", tableau);
     if (this.chatList.length < 0) {
       this.getChatList({ type: "business" });
     }
@@ -1612,11 +1649,10 @@ export default {
         this.getChatList({ type: "network" });
       } else {
         this.tabIndex = 0;
-      console.log("111 call ");
+        console.log("111 call ");
 
         this.getChatList({ type: "user" });
-      console.log("222 call ");
-
+        console.log("222 call ");
       }
       console.log("call to action checked:", this.ctaSelected);
       this.selectedChat({ chat: this.ctaSelected, id: this.ctaSelected.id });
@@ -1842,18 +1878,24 @@ export default {
       this.socket.emit("create-group", this.chatId);
 
       // let sender_business_id = this.currentUser.user.id;
-      let membersPeople = this.groupMembers.filter((member) => {
-        return member.type == "people";
-      });
-      let membersBuiness = this.groupMembers.filter((member) => {
-        return member.type == "business";
-      });
-      let membersNetwork = this.groupMembers.filter((member) => {
-        return member.type == "network";
-      });
-      let membersEditor = this.groupMembers.filter((member) => {
-        return member.type == "editor";
-      });
+      var membersPeople = [];
+      var membersBuiness = [];
+      var membersNetwork = [];
+      var membersEditor = [];
+      if (this.groupMembers) {
+        membersPeople = this.groupMembers.filter((member) => {
+          return member.type == "people";
+        });
+        membersBuiness = this.groupMembers.filter((member) => {
+          return member.type == "business";
+        });
+        membersNetwork = this.groupMembers.filter((member) => {
+          return member.type == "network";
+        });
+        membersEditor = this.groupMembers.filter((member) => {
+          return member.type == "editor";
+        });
+      }
       let membersPeopleIds = [];
       let membersBusinessIds = [];
       let membersNetworkIds = [];

@@ -384,7 +384,11 @@ export default {
             await axios.get(`/business/role/editor/${state.currentBizId}`)
                 .then((res) => {
                     commit("setLoader", false);
-                    state.editors = { accountType: "business", ...res.data.data }
+                    let editor = res.data.data
+                    if (editor.length > 0) {
+                        state.editors = { accountType: "business", ...res.data.data }
+                    }
+                    console.log("editor:", state.editors);
                     commit("setBizs", state.editors);
                 })
                 .catch((err) => {

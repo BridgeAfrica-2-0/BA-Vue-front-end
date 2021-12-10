@@ -7,7 +7,7 @@
 			<b-form-group
 				class="body-font-size"
 				id="input-group-name"
-				label="Name :"
+				:label=" $t('general.Name')"
 				label-for="name-input"
 			>
 				<b-form-input
@@ -22,7 +22,7 @@
 			<b-form-group
 				class="body-font-size"
 				id="input-group-phone"
-				label="Phone :"
+				:label="$t('general.Phone')"
 				label-for="phone-input"
 			>
 				<b-form-input
@@ -35,7 +35,7 @@
 			<b-form-group
 				class="body-font-size"
 				id="input-group-email"
-				label="email :"
+				:label="$t('general.email')"
 				label-for="email-input"
 			>
 				<b-form-input
@@ -50,7 +50,7 @@
 					<b-form-group
 						class="body-font-size"
 						id="input-group-country"
-						label="Country :"
+						:label="$t('general.Country')"
 						label-for="country-input"
 					>
 						<b-form-select
@@ -68,7 +68,7 @@
 					<b-form-group
 						class="body-font-size"
 						id="input-group-region"
-						label="Region :"
+						:label="$t('general.Region')"
 						label-for="region-input"
 					>
 						<b-form-select
@@ -137,7 +137,7 @@
 			<b-form-group
 				class="body-font-size"
 				id="input-group-region"
-				label="Destination :"
+				:label="$t('general.Destination')"
 				label-for="destination-input"
 			>
 				<b-form-select
@@ -169,10 +169,10 @@
 			<div class="d-flex justify-content-between align-items-center">
 				<b-button class="btn-custom mr-3" type="submit" variant="primary">
 					<b-spinner v-if="loading" small variant="light"></b-spinner>
-					Save</b-button
+					{{$t("general.Save")}}</b-button
 				>
 				<b-button class="btn-custom" type="reset" variant="success"
-					>Cancel</b-button
+					>{{$t("general.Cancel")}}</b-button
 				>
 			</div>
 		</b-form>

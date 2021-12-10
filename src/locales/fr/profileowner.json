@@ -251,5 +251,6 @@
     "Operation_successful": "Opération réussie",
     "Can_not_delete_your_cover": "Impossible de supprimer votre couverture",
     "Add_Contacts": "Ajouter des Contacts",
-    "default_Phone": "Téléphone par défaut"
+    "default_Phone": "Téléphone par défaut",
+    "Show":"Afficher"
 }

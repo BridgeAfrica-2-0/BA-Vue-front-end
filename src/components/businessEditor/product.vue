@@ -13,9 +13,9 @@
         <b-col cols="7" sm="8" md="7">
           <p class="text">
             <strong class="title"> {{ product.name }} </strong> <br />
-            <strong> Description </strong> <br />
+            <strong> {{$t("general.Description")}} </strong> <br />
             {{ product.description.substring(0, 30) }}
-            <b-link v-if="product.description.length >= 30"> see more </b-link>
+            <b-link v-if="product.description.length >= 30">{{$t("general.see_more")}} </b-link>
             <br />
 
             <span class="price">
@@ -37,7 +37,7 @@
           <b-col cols="12" md="6">
             <b-form-group
               id="input-group-1"
-              label="Product Name"
+              :label="$t('general.Product_Name')"
               label-for="input-1"
               label-size="sm"
             >
@@ -51,7 +51,7 @@
 
             <b-form-group
               id="input-group-1"
-              label="Product Description"
+              :label="$t('general.Product_Description')"
               label-for="input-1"
               label-size="sm"
             >
@@ -68,7 +68,7 @@
               <a href="#" data-toggle="modal" data-target="#createalbumModal">
                 <div class="drag-text">
                   <i class="fa fa-plus"></i>
-                  <h6>Product Image</h6>
+                  <h6>{{$t("general.Product_Image")}}</h6>
                 </div>
               </a>
               <div></div>
@@ -78,7 +78,7 @@
 
         <b-form-group
           id="input-group-1"
-          label="product Price"
+          :label="$t('general.product_Price')"
           label-for="input-1"
           label-size="sm"
         >
@@ -91,12 +91,12 @@
           value="accepted"
           unchecked-value="not_accepted"
         >
-          This Product Is On Discount
+          {{$t("general.This_Product_Is_On_Discount")}}
         </b-form-checkbox>
 
         <b-form-group
           id="conditions"
-          label="Conditions"
+          :label="$t('general.Conditions')"
           label-for="input-1"
           label-size="sm"
         >
@@ -127,10 +127,10 @@
           value="accepted"
           unchecked-value="not_accepted"
         >
-          Published
+          {{$t("general.Published")}}
         </b-form-checkbox>
 
-        <b-button class="mt-2 btn-block" variant="primary"> Add</b-button>
+        <b-button class="mt-2 btn-block" variant="primary">{{$t("general.Add")}} </b-button>
       </b-form>
     </b-modal>
 
@@ -160,12 +160,12 @@
             </b-col>
             <b-col>
               <b-button variant="outline-dark" class="float-right"
-                >Checkout on website</b-button
+                >{{$t("general.Checkout_on_website")}}</b-button
               >
             </b-col>
           </b-row>
           <hr />
-          <h5>Product Detail</h5>
+          <h5>{{$t("general.Product_Detail")}}</h5>
           <p>
             {{ product.description }}
           </p>
@@ -253,7 +253,7 @@
                         variant="primary"
                         aria-hidden="true"
                       ></b-icon>
-                      23 &nbsp; &nbsp; &nbsp; <a href="#">Reply</a>
+                      23 &nbsp; &nbsp; &nbsp; <a href="#">{{$t("general.Reply")}}</a>
                     </div>
                   </div>
                   <ul class="comments-list">
@@ -320,7 +320,7 @@
                             class="fa heart  fa-heart-o"
                             aria-hidden="true"
                           ></i>
-                          23 &nbsp; &nbsp; &nbsp; <a href="#">Reply</a>
+                          23 &nbsp; &nbsp; &nbsp; <a href="#">{{$t("general.Reply")}}</a>
                         </div>
                       </div>
                     </li>
@@ -333,7 +333,7 @@
                         />
                       </a>
                       <input
-                        placeholder="Post a Comment"
+                        placeholder="$t('general.Post_a_Comment')"
                         class="form-control adco comment"
                         type="text"
                       />
@@ -379,7 +379,7 @@
                         variant="primary"
                         aria-hidden="true"
                       ></b-icon>
-                      23 &nbsp; &nbsp; &nbsp; <a href="#">Reply</a>
+                      23 &nbsp; &nbsp; &nbsp; <a href="#">{{$t("general.Reply")}}</a>
                     </div>
                   </div>
                 </li>

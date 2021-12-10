@@ -32,13 +32,13 @@
               <div class="col marge" >
                   <b-button variant="primary"
                   @click="buyNow" 
-                  ><span>Buy Now</span>
+                  ><span>{{$t("general.Buy_Now")}}</span>
                  </b-button>
               </div>
               <div class="w-100 my-1"></div>
             <div class="col marge">
               <b-button variant="primary" @click="handleAddToCard"
-              ><span>Add to Cart</span>
+              ><span>{{$t("general.Add_to_Cart")}}</span>
              </b-button>
             </div>
 
@@ -59,7 +59,7 @@
           <b-col cols="12" md="6">
             <b-form-group
               id="input-group-1"
-              label="Product Name"
+              :label="$t('general.Product_Name')"
               label-for="input-1"
               label-size="sm"
             >
@@ -73,7 +73,7 @@
 
             <b-form-group
               id="input-group-1"
-              label="Product Description"
+              label="$t('general.Product_Description')"
               label-for="input-1"
               label-size="sm"
             >
@@ -90,7 +90,7 @@
               <a href="#" data-toggle="modal" data-target="#createalbumModal">
                 <div class="drag-text">
                   <i class="fa fa-plus"></i>
-                  <h6>Product Image</h6>
+                  <h6>{{$t("general.Product_Image")}}</h6>
                 </div>
               </a>
               <div></div>
@@ -100,7 +100,7 @@
 
         <b-form-group
           id="input-group-1"
-          label="product Price"
+          :label="$t('general.product_Price')"
           label-for="input-1"
           label-size="sm"
         >
@@ -113,12 +113,12 @@
           value="accepted"
           unchecked-value="not_accepted"
         >
-          This Product Is On Discount
+          {{$t("general.This_Product_Is_On_Discount")}}
         </b-form-checkbox>
 
         <b-form-group
           id="conditions"
-          label="Conditions"
+          :label="$t('general.Conditions')"
           label-for="input-1"
           label-size="sm"
         >
@@ -131,7 +131,7 @@
           value="accepted"
           unchecked-value="not_accepted"
         >
-          This Item Is A Service ?
+          {{$t("general.This_Item_Is_A_Service")}} ?
         </b-form-checkbox>
 
         <b-form-checkbox
@@ -149,26 +149,26 @@
           value="accepted"
           unchecked-value="not_accepted"
         >
-          Published
+          {{$t("general.Published")}}
         </b-form-checkbox>
 
-        <b-button class="mt-2 btn-block" variant="primary"> Add</b-button>
+        <b-button class="mt-2 btn-block" variant="primary"> {{$t("general.Add")}}</b-button>
       </b-form>
     </b-modal>
-    <!-- PRODUCT DETAILS MODAL -->
+    <!-- MODAL -->
     <!-- <div>
         <br />
       </div> -->
     <!-- </div> -->
     <!-- EDIT PRODUCT MODAL -->
 
-    <b-modal hide-footer title="Edit product">
+    <b-modal hide-footer :title="$t('general.Edit_product')">
       <b-form>
         <b-row>
           <b-col cols="12" md="6">
             <b-form-group
               id="input-group-1"
-              label="Product Name"
+              :label="$t('general.Product_Name')"
               label-for="input-1"
               label-size="sm"
             >
@@ -182,7 +182,7 @@
 
             <b-form-group
               id="input-group-1"
-              label="Product Description"
+              :label="$t('general.Product_Description')"
               label-for="input-1"
               label-size="sm"
             >
@@ -199,7 +199,7 @@
               <a href="#" data-toggle="modal" data-target="#createalbumModal">
                 <div class="drag-text">
                   <i class="fa fa-plus"></i>
-                  <h6>Product Image</h6>
+                  <h6>{{$t("general.Product_Image")}}</h6>
                 </div>
               </a>
               <div></div>
@@ -209,7 +209,7 @@
 
         <b-form-group
           id="input-group-1"
-          label="product Price"
+          :label="$t('general.product_Price')"
           label-for="input-1"
           label-size="sm"
         >
@@ -222,12 +222,12 @@
           value="accepted"
           unchecked-value="not_accepted"
         >
-          This Product Is On Discount
+          {{$t("general.This_Product_Is_On_Discount")}}
         </b-form-checkbox>
 
         <b-form-group
           id="conditions"
-          label="Conditions"
+          :label="$t('general.Conditions')"
           label-for="input-1"
           label-size="sm"
         >
@@ -240,7 +240,7 @@
           value="accepted"
           unchecked-value="not_accepted"
         >
-          This Item Is A Service ?
+          {{$t("general.This_Item_Is_A_Service")}} ?
         </b-form-checkbox>
 
         <b-form-checkbox
@@ -249,7 +249,7 @@
           value="accepted"
           unchecked-value="not_accepted"
         >
-          In stock
+          {{$t("general.In_stock")}}
         </b-form-checkbox>
 
         <b-form-checkbox
@@ -258,10 +258,10 @@
           value="accepted"
           unchecked-value="not_accepted"
         >
-          Published
+         {{$t("general.Published")}} 
         </b-form-checkbox>
 
-        <b-button class="mt-2 btn-block" variant="primary"> Add</b-button>
+        <b-button class="mt-2 btn-block" variant="primary">{{$t("general.Add")}} </b-button>
       </b-form>
     </b-modal>
     <!-- PRODUCT DETAILS MODAL -->

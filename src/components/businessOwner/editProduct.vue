@@ -1,13 +1,13 @@
 <template>
-    <div>
-        <b-modal
-    v-model="canShowModal"
-    hide-footer
-    id="product-details"
-    size="xl"
-    title="Product Details"
-    @close="closeModal"
-  >
+  <div>
+    <b-modal
+      v-model="canShowModal"
+      hide-footer
+      id="product-details"
+      size="xl"
+      title="Product Details"
+      @close="closeModal"
+    >
       <b-form>
         <b-row>
           <b-col cols="12" md="6">
@@ -109,18 +109,19 @@
 
         <b-button class="mt-2 btn-block" variant="primary"> Add</b-button>
       </b-form>
-     </b-modal>
-    </div>
+    </b-modal>
+  </div>
 </template>
 
 <script>
 export default {
-    data() {
+  data() {
     return {
       viewProduct: false,
+      canShowModal: false
     };
   },
-    props: {
+  props: {
     showModal: {
       type: Boolean,
       default: false,
@@ -134,6 +135,6 @@ export default {
     showModal(newValue) {
       this.canShowModal = newValue;
     },
-  }
-}
+  },
+};
 </script>

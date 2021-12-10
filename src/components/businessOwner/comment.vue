@@ -337,7 +337,7 @@ export default {
 }
 
 .fs-12 {
-  font-size: 12px;
+  font-size: 15px;
 }
 .msg {
   background-color: #ddd;

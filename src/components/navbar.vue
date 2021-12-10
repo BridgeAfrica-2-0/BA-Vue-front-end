@@ -263,7 +263,7 @@
                         class="d-inline-flex flex-row align-items-center suggest-item cursor-pointer"
                       >
                         <div class="d-flex flex-column ml-3">
-                          <div>{{ notification.notification_text }}</div>
+                          <div>notification.notification_text</div>
                           <div class="small text-muted">
                             <span class="text-capitalize">
                               {{
@@ -702,6 +702,7 @@ export default {
     },
 
     onRedirect() {
+      console.log(this.user)
       const link = {
         network: () => ({ name: "networks", params: { id: this.user.id } }),
         business: () => ({

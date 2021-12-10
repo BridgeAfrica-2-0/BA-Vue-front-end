@@ -14,7 +14,7 @@
           <h5 class="m-0 usernamee">
             {{ item.user_name }}
           </h5>
-          <p class="durationn">{{ item.created_at | now }}</p>
+          <p class="duration">{{ item.created_at | now }}</p>
         </div>
 
         <div
@@ -76,7 +76,7 @@
                   : item.source.business_name
               }}
             </h5>
-            <p class="durationn">{{ item.source.created_at | now }}</p>
+            <p class="duration">{{ item.source.created_at | now }}</p>
           </div>
         </div>
         <div class="m-0 p-0">
@@ -736,7 +736,7 @@ export default {
   border-color: red;
 }
 
-.durationn {
+.duration {
   font-weight: 400;
   font-size: 15px;
   color: black;

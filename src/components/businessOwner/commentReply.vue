@@ -72,7 +72,6 @@
             v-if="updateCommentText.trim().length >= 1 && !replyLoading"
           />
         </p>
-
         <p class="fs-12" v-if="proccesEdit">
           <a href="#" @click.prevent="toggle">Cancel</a>
         </p>

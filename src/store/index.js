@@ -52,7 +52,7 @@ import { social } from './social';
 Vue.use(Vuex);
 
 
-axios.defaults.baseURL ="https://test.maxinemoffett.com/api/v1/";
+axios.defaults.baseURL ="https://edson.maxinemoffett.com/api/v1/";
 
 
 

@@ -1,5 +1,6 @@
 <template>
   <div>
+    
     <Post
       v-for="(item, index) in owner_post"
       :key="index"
@@ -10,7 +11,6 @@
       :editPost="() => editPost(item)"
       :deletePost="() => deletePost(item)"
       :canBeDelete="false"
-      :isDisplayInSearch="true"
       class="p-3"
     />
     <infinite-loading @infinite="infiniteHandler"></infinite-loading>

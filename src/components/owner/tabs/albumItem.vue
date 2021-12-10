@@ -3,7 +3,6 @@
     class="createp img-gall predit2"
     @mouseover="upHere = true"
     @mouseleave="upHere = false"
-    style="width: 269px;height: 269px;position: absolute;"
   >
     <a>
       <span>

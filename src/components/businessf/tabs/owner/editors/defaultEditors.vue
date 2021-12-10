@@ -12,7 +12,7 @@
         <template slot="title" class="tt-color">
           <h6 class="h6">Media</h6>
         </template>
-        <media-network :type="'network'" ></media-network>
+        <media-network :type="'network'"></media-network>
       </b-tab>
       <b-tab>
         <template slot="title" class="tt-color">

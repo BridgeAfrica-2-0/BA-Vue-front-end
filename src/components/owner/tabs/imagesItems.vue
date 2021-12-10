@@ -1,5 +1,5 @@
 <template>
-  <div class="img-gall-item img-size" :ref="`sHowMedia-${im.id}`" style="width: 269px;height: 269px;" >
+  <div class="img-gall-item img-size" :ref="`sHowMedia-${im.id}`">
     <a v-if="typeOfMedia() == 'image' && !loading"
       ><b-img
         class="card-img btn p-0 album-img"

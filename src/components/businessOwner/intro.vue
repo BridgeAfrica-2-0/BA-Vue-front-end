@@ -116,7 +116,7 @@
       >
         <MglMarker
           :coordinates="[business_intro.lng, business_intro.lat]"
-          color="blue"
+          color="red"
         />
       </MglMap>
       <!-- <GmapMap

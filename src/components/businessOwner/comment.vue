@@ -12,8 +12,8 @@
         <span class="float-right" style="margin-right: -10px" v-if="isEditMode">
           <b-dropdown size="sm" variant="outline primary " class="primary">
             <template class="more" #button-content> </template>
-            <b-dropdown-item> {{ $t("businessowner.Edit") }} </b-dropdown-item>
-            <b-dropdown-item>{{ $t("businessowner.Delete") }}</b-dropdown-item>
+            <b-dropdown-item @click.prevent="toggle"> {{ $t("businessowner.Edit") }} </b-dropdown-item>
+            <b-dropdown-item @click.prevent="onDelete">{{ $t("businessowner.Delete") }}</b-dropdown-item>
           </b-dropdown>
         </span>
 
@@ -108,7 +108,7 @@
           </b-col>
           <b-col cols="11">
             <textarea-autosize
-              :placeholder="$t('businessowner.Post_a_Comment')"
+              placeholder="Reply comment"
               class="comment"
               type="text"
               @keypress.enter="onReply"
@@ -176,6 +176,7 @@ export default {
       text: "",
       replyLoading: false,
       proccesEdit: false,
+      updateCommentText: ""
     };
   },
 

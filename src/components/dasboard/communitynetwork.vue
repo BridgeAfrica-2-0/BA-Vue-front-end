@@ -80,18 +80,17 @@
 
             
 
-            
-               <b-button
+            	   <b-button
                   block
                   size="sm"
                   class="b-background shadow"
                   :class="item.is_member !== 0 && 'u-btn'"
                   variant="primary"
                   :id="'joinbtn'+item.id"
-                  @click="handlejoin(item)"
+                  @click="handleJoin(item)"
                 >
-                  <i class="fas fa-user-plus  fa-lg btn-icon "></i>
-                  <span class="btn-com">{{ $t('profileowner.join') }}</span>
+                  <i class="fas fa-lg btn-icon" :class="item.is_member !== 0 ? 'fa-user-minus' : 'fa-user-plus'"></i>
+                  <span class="btn-com"> Join </span>
                 </b-button>
 
 
@@ -152,9 +151,10 @@ export default {
   methods:{
 
 
+   			
     async handleJoin(user) {
        document.getElementById("joinbtn"+user.id).disabled = true;
-      const uri = user.is_member === 0 ? `/network/users/request` : `/network/users/request/cancel`;
+      const uri = user.is_member === 0 ? `/add-member` : `/remove-member`;
       const nextFollowState = user.is_member === 0 ? 1 : 0;
       const data = {
         id: user.id,
@@ -164,13 +164,15 @@ export default {
       await axios
         .post(uri, data)
         .then(response => {
+			console.log(response);
           user.is_member = nextFollowState;
-           document.getElementById("joinbtn"+user.id).disabled =  false;
+          document.getElementById("joinbtn"+user.id).disabled =  false;
         })
         .catch(err =>{   console.log(err)
          document.getElementById("joinbtn"+user.id).disabled =  false;
         });
     },
+
 
 
 

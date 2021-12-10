@@ -256,8 +256,7 @@
                   data-original-title=""
                   title=""
                   ><span class="text-ored"
-                    ><b-icon-bell-fill class="col-bg">
-                    </b-icon-bell-fill></span
+                    ><b-icon-bell-fill class="col-bg"></b-icon-bell-fill></span
                 ></a>
                 <b-popover target="notif" triggers="hover" placement="top">
                   <div class="popover-body">
@@ -271,7 +270,7 @@
                         class="d-inline-flex flex-row align-items-center suggest-item cursor-pointer"
                       >
                         <div class="d-flex flex-column ml-3">
-                          <div>{{notification.notification_text}}</div>
+                          <div>{{ notification.notification_text }}</div>
                           <div class="small text-muted">
                             <span class="text-capitalize">
                               {{
@@ -622,8 +621,8 @@ export default {
 
     this.redirectionPatterns = {
       message: {
-        user: () => ({
-          name: "Nav Meassage"
+        user: () => () => ({
+          name: "messaging"
         }),
         business: () => ({
           name: "BusinessOwner",
@@ -772,8 +771,6 @@ export default {
 
         if (newPath.query) path = Object.assign(path, { query: newPath.query });
 
-        console.log(type, path)
-
         return path;
       }
 
@@ -906,7 +903,6 @@ export default {
       await axios
         .get(url)
         .then((response) => {
-
           this.notifications = response.data.data.slice(0, 5);
         })
         .catch((error) => console.log("Error => " + error));

@@ -92,8 +92,8 @@
           </p>
         </div>
 
-        <div v-if="item.source.media.length > 0" class="">
-          <span v-for="video in mapvideo()" :key="video">
+        <div v-if="item.source.media.length" class="">
+          <span v-for="video in mapVideo(item.source.media)" :key="video">
             <youtube
               class="w-100 videoh"
               :video-id="getId(video)"
@@ -105,7 +105,7 @@
           <light
             css=" "
             :cells="item.source.media.length"
-            :items="mapmediae()"
+            :items="mapMedia(item.source.media)"
           ></light>
         </div>
       </div>
@@ -298,6 +298,37 @@ export default {
   },
 
   methods: {
+
+    mapMedia(media) {
+      let mediaarr = [];
+
+      media.forEach((item) => {
+        let type = this.checkMediaType(item.media_type);
+        if (type != "video") {
+          mediaarr.push(item.media_url);
+        }
+      });
+
+      return mediaarr;
+    },
+
+    mapVideo(media) {
+      let mediaarr = [];
+
+      media.forEach((item) => {
+        let type = this.checkMediaType(item.media_type);
+        if (type == "video") {
+          mediaarr.push(item.media_url);
+        }
+      });
+
+      return mediaarr;
+    },
+
+    checkMediaType(media) {
+      return media.split("/")[0];
+    },
+
     ...mapMutations({
       addNewComment: "networkProfile/updatePost",
     }),

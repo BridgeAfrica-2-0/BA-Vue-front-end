@@ -1,5 +1,7 @@
 <template>
   <div class="p-2">
+
+  
     <div class="s-ccard">
       <b-row>
         <b-col lg="6" sm="12" class="p-2" v-for="item in users" :key="item.id">

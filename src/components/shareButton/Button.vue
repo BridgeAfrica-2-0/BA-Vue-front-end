@@ -281,6 +281,7 @@
               cursor-pointer
             "
           >
+          <b-icon-envelope font-scale="2" class="d-t mx-2"></b-icon-envelope>
             <span>Share via Email</span>
           </div>
 
@@ -295,6 +296,7 @@
               cursor-pointer
             "
           >
+          <b-icon-facebook font-scale="2" class="d-t mx-2"></b-icon-facebook>
             <span>Share via Facebook</span>
           </div>
 
@@ -308,7 +310,7 @@
               py-2
               cursor-pointer
             "
-          >
+          > <b-icon-twitter font-scale="2" class="d-t mx-2"></b-icon-twitter>
             <span>Share via Twitter</span>
           </div>
 
@@ -323,6 +325,7 @@
               cursor-pointer
             "
           >
+          <b-icon-whatsapp font-scale="2" class="d-t mx-2"></b-icon-whatsapp>
             <span>Share via Whatsapp </span>
           </div>
         </div>
@@ -516,6 +519,10 @@ export default {
 </script>
 
 <style scoped>
+
+.d-t{
+  color: #e75c18
+}
 .none {
   display: none;
 }

@@ -13,6 +13,7 @@
     >
       <router-view />
     </transition>
+  
   </div>
 </template>
 <script>

@@ -86,7 +86,11 @@
                 </b-col>
                 <b-col>
                   <h1 class="mt-4 title text-bold">
-                    {{ currentUser?currentUser.user.name.split(" ")[0]:"loading..." }}
+                    {{
+                      currentUser
+                        ? currentUser.user.name.split(" ")[0]
+                        : "loading..."
+                    }}
                   </h1>
                 </b-col>
                 <b-col>
@@ -100,12 +104,12 @@
 
               <b-row class="mt-12">
                 <b-col>
-                  <b-tabs content-class="mt-12 ma-4 pt-6" fill lazy>
-                    <b-tab
-                      title="User"
-                      active
-                      @click="getChatList({ type: 'user' })"
-                    >
+                  <b-tabs
+                    v-model="tabIndex"
+                    content-class="mt-12 ma-4 pt-6"
+                    fill
+                  >
+                    <b-tab title="User" @click="getChatList({ type: 'user' })">
                       <!-- Users Chats Available  -->
                       <b-row class="pa-6">
                         <b-col class="mb-6 pb-6">
@@ -352,6 +356,92 @@
 
                       <!-- End Chats -->
                     </b-tab>
+
+                    <b-tab
+                      title="Groups"
+                      @click="getChatList({ type: 'group' })"
+                    >
+                      <!-- Group Chats Available  -->
+                      <b-row class="pa-6">
+                        <b-col class="mb-6 pb-6">
+                          <input
+                            v-model="searchQuery"
+                            class="form-control input-background"
+                            :placeholder="`Search chat list ${tabIndex}`"
+                            @keypress.enter="
+                              getChatList({
+                                type: 'group',
+                                keyword: searchQuery,
+                              })
+                            "
+                          />
+                        </b-col>
+                      </b-row>
+
+                      <div class="messages">
+                        <div v-if="loader" class="text-center">
+                          <b-spinner
+                            variant="primary"
+                            label="Spinning"
+                            class="centralizer"
+                          ></b-spinner>
+                        </div>
+                        <div v-if="chatList.length > 0">
+                          <b-row
+                            v-for="(chat, index) in chatList"
+                            :key="index"
+                            :class="[
+                              'p-2 message ',
+                              {
+                                messageSelected:
+                                  chat.groupID ==
+                                  (chatSelected.clickedId != null
+                                    ? chatSelected.clickedId
+                                    : false)
+                                    ? chatSelected.active
+                                    : false,
+                              },
+                            ]"
+                            @click="
+                              selectedChat({
+                                type: 'group',
+                                chat: chat,
+                                id: chat.groupID,
+                              })
+                            "
+                          >
+                            <b-col class="col-9">
+                              <span style="display: inline-flex">
+                                <b-avatar
+                                  class="d-inline-block profile-pic"
+                                  variant="primary"
+                                  src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
+                                ></b-avatar>
+
+                                <h6 class="mt-2 d-inline-block ml-2">
+                                  <b class="bold"> {{ chat.groupName }}</b>
+                                  <p class="duration">{{ chat.message }}</p>
+                                </h6>
+                              </span>
+                            </b-col>
+
+                            <b-col class="col-3 text-center">
+                              <small class="text-center">
+                                {{ getCreatedAt(chat.created_at) }}
+                              </small>
+                              <!-- <p class="text-center">
+                              <b-badge variant="info">
+                                {{ chat.receiver_business_id }}
+                              </b-badge>
+                            </p> -->
+                            </b-col>
+                          </b-row>
+                        </div>
+                        <h2 v-else>No chat</h2>
+                      </div>
+
+                      <!-- End Chats -->
+                    </b-tab>
                   </b-tabs>
                 </b-col>
               </b-row>
@@ -416,7 +506,7 @@
 
                   <b-col class="detail" @click="info = true">
                     <h5>{{ chatSelected.name }}</h5>
-                    <p>Online</p>
+                    <!-- <p>Online</p> -->
                   </b-col>
                   <b-col class="col-4">
                     <input
@@ -815,7 +905,13 @@
                             v-for="(user, index) in users"
                             :key="index"
                             class="p-2 message"
-                            @click="selectedChat({ chat: user, id: user.id })"
+                            @click="
+                              selectedChat({
+                                type: 'user',
+                                chat: user,
+                                id: user.id,
+                              })
+                            "
                           >
                             <td>
                               <b-avatar
@@ -866,6 +962,8 @@ export default {
   },
   data() {
     return {
+      tabIndex: 0,
+      shippingAddress: [2, 4],
       formData: new FormData(),
       filePreview: false,
       previewSrc: "",
@@ -881,6 +979,9 @@ export default {
         transports: ["websocket", "polling", "flashsocket"],
       }),
       // socket: io("localhost:7000", {
+      //   transports: ["websocket", "polling", "flashsocket"],
+      // }),
+      // socket: io("http://192.168.43.51:7000", {
       //   transports: ["websocket", "polling", "flashsocket"],
       // }),
       chatSelected: [],
@@ -913,11 +1014,17 @@ export default {
     },
   },
   computed: {
+    ctaSelected() {
+      return this.$store.getters["businessChat/getSelectedChat"];
+    },
     chatList() {
       return this.$store.getters["userChat/getChatList"];
     },
     currentUser() {
       return this.$store.getters["userChat/getUser"];
+    },
+    bizs() {
+      return this.$store.getters["businessChat/getBizs"];
     },
     users() {
       return this.$store.getters["userChat/getUsers"];
@@ -952,26 +1059,51 @@ export default {
   },
   mounted() {
     this.getUsers();
-    this.getChatList({ type: "user" });
+    if (this.chatList.length < 0) {
+      this.getChatList({ type: "user" });
+    }
+    // this.getChatList({ type: "user" });
   },
   created() {
     this.$store.commit("businessChat/setCurrentBizId", this.$route.params.id);
 
-    this.tabIndex = this.$route.query.msgTabId;
+    this.tabIndex = Number(this.$route.query.msgTabId);
+    console.log("this.tabIndex:", typeof this.tabIndex);
+
     if (this.tabIndex) {
-      this.selectedChat({ chat: this.ctaSelected, id: this.ctaSelected.id });
       if (this.tabIndex == 1) {
         this.getChatList({ type: "business" });
       } else if (this.tabIndex == 2) {
         this.getChatList({ type: "network" });
-      } else this.getChatList({ type: "user" });
+      } else {
+        this.tabIndex = 0;
+        this.getChatList({ type: "user" });
+      }
+
+      console.log("There");
+
+      this.selectedChat({ chat: this.ctaSelected, id: this.ctaSelected.id });
     } else {
       this.tabIndex = 0;
+      this.getChatList({ type: "user" });
     }
 
     this.socketListenners();
   },
   methods: {
+    getName(chat) {
+      return chat.business_i_d
+        ? chat.business_i_d.name
+        : chat.network_i_d
+        ? chat.network_i_d.name
+        : chat.user_i_d
+        ? chat.user_i_d.name
+        : chat.network_editor_i_d
+        ? chat.network_editor_i_d.name
+        : chat.business_editor_i_d
+        ? chat.business_editor_i_d.name
+        : "Anonymous";
+    },
     convert(bytes) {
       var sizes = ["Bytes", "KB", "MB", "GB", "TB"];
       if (bytes == 0) return "0 Byte";
@@ -988,7 +1120,28 @@ export default {
       console.log("ROOMS: ", this.room);
       this.socket.emit("create", this.room);
     },
+    createGroup(receiver_id) {
+      let sender_id = this.currentUser.user.id;
+      this.room = [receiver_id, sender_id];
+      console.log("ROOMS: ", this.room);
+      this.socket.emit("create-group", this.chatId);
+    },
     socketListenners() {
+      this.socket.on("groupMessage", (data) => {
+        console.log("group message Received");
+        console.log(data);
+        this.chats.push(data);
+
+        this.formData.append("sender_business_id", data.sender_business_id);
+        this.formData.append("message", data.message);
+        this.formData.append("receiver_business_id", data.receiver_business_id);
+        this.formData.append("receiver_network_id", data.receiver_business_id);
+        this.formData.append("receiver_id", data.receiver_business_id);
+        this.formData.append("group_id", data.group_id);
+        this.formData.append("type", data.type);
+
+        this.saveMessage(this.formData);
+      });
       this.socket.on("privateMessage", (data) => {
         console.log("Received");
         console.log(data);
@@ -1019,18 +1172,22 @@ export default {
       }
     },
     getUsers() {
+      console.log("Bizs:", this.bizs);
       this.$store.dispatch("userChat/GET_USERS");
+      // this.$store.dispatch("businessChat/GET_BIZS");
     },
     getChatList(data) {
+      console.log("List");
       this.chatSelected.active = false;
       this.newMsg = false;
-      this.scrollToBottom();
       this.$store
         .dispatch("userChat/GET_USERS_CHAT_LIST", data)
         .then(() => {
           console.log("->[Data logged]<-");
         })
         .catch(() => console.log("error"));
+
+      // this.scrollToBottom();
     },
 
     async histUserToUser(data) {
@@ -1069,21 +1226,48 @@ export default {
         })
         .catch(() => console.log("error"));
     },
+    async histUserToGroup(receiverId) {
+      await this.$store
+        .dispatch("userChat/GET_USER_TO_GROUP", receiverId)
+        .then(() => {
+          console.log("->[User selected]<-");
+          this.socket.emit("addUser", {
+            socketID: this.socket.id,
+            ...this.receiver,
+          });
+        })
+        .catch(() => console.log("error"));
+    },
     selectedChat(data) {
       // this.scrollToBottom();
+      console.log("free up:", this.ctaSelected);
       this.type = data.type;
-      this.createRoom(data.id);
+      if (this.type == "group") {
+        this.createGroup();
+      } else this.createRoom(data.id);
+      console.log("ZZZZZ");
       this.chatId = data.id;
+      this.$store.commit("businessChat/setSelectedChatId", data.id);
       let receiver = { receiverID: data.id, keyword: null };
       if (data.type == "business") {
         this.histUserToBiz(receiver);
       } else if (data.type == "network") {
         this.histUserToNetwork(receiver);
+      } else if (data.type == "group") {
+        this.histUserToGroup(receiver);
       } else {
         this.histUserToUser(receiver);
       }
+
+      console.log("YYYYY");
+
       this.newMsg = false;
-      this.chatSelected = { active: true, clickedId: data.id, ...data.chat };
+      this.chatSelected = {
+        active: true,
+        clickedId: data.id,
+        name: data.chat.name ? data.chat.name : data.chat.groupName,
+        ...data.chat,
+      };
       console.log("[DEBUG] Chat selected:", this.chatSelected);
     },
     searchUser(keyword) {
@@ -1172,6 +1356,18 @@ export default {
           this.sendPrivate();
         }
       } else alert("Enter a message");
+    },
+    sendGroup() {
+      this.socket.emit("groupMessage", {
+        type: this.type,
+        message: this.input,
+        sender_id: this.currentUser.user.id,
+
+        room: this.room,
+        receiver_business_id: this.chatSelected.id,
+        receiver_id: this.chatId,
+        group_id: this.chatId,
+      });
     },
     sendPrivate() {
       this.formData.append("attachment", this.file);

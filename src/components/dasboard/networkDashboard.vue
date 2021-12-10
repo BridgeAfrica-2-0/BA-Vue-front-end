@@ -1,14 +1,16 @@
 <template>
   <div>
-    <b-card class="border shadow ">
+    <b-card class="border shadow">
       <span>
         <h4>
           <img
             class="img-fluid picture logo-img"
             src="@/assets/icons/network.png"
           />
-          {{ $t('dashboard.NETWORKS') }}
-          <h6 style="float:right" class="see-all-link">{{ $t('dashboard.666_result_found') }}</h6>
+          {{ $t("dashboard.NETWORKS") }}
+          <h6 style="float: right" class="see-all-link">
+            {{ $t("dashboard.666_result_found") }}
+          </h6>
         </h4>
       </span>
 
@@ -18,7 +20,7 @@
             <div class="people-style shadow">
               <b-row>
                 <b-col md="3" cols="5" sm="5">
-                  <div style="height: 100%;">
+                  <div style="height: 100%">
                     <img
                       src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
                       width="100%"
@@ -29,11 +31,12 @@
                 </b-col>
                 <b-col md="6" cols="7" sm="7">
                   <p class="text">
-                    <strong> {{ $t('dashboard.Shipping_Network') }} </strong> <br />
+                    <strong> {{ $t("dashboard.Shipping_Network") }} </strong>
                     <br />
-                    {{ $t('dashboard.Public') }} <br />
-                    {{ $t('dashboard.20k_Members') }} <br />
-                    {{ $t('dashboard.Business_Name') }} <br />
+                    <br />
+                    {{ $t("dashboard.Public") }} <br />
+                    {{ $t("dashboard.20k_Members") }} <br />
+                    {{ $t("dashboard.Business_Name") }} <br />
                   </p>
                 </b-col>
 
@@ -48,19 +51,12 @@
                           variant="primary"
                         >
                           <b-icon class="ico" icon="plus-circle"> </b-icon>
-                          {{ $t('dashboard.Community') }}
+                          {{ $t("dashboard.Community") }}
                         </b-button>
                       </b-col>
 
                       <b-col md="12" sm="4" cols="4" class="mt-md-2">
-                        <b-button
-                          block
-                          size="sm"
-                          class="b-background"
-                          variant="primary"
-                        >
-                          <b-icon class="ico" icon="chat"> </b-icon> {{ $t('dashboard.Message') }}
-                        </b-button>
+                        <BtnCtaMessage :element="item" type="network" />
                       </b-col>
 
                       <b-col md="12" sm="4" cols="4" class="mt-md-2"> </b-col>
@@ -79,7 +75,7 @@
 
 <script>
 export default {
-  props: ["title", "image"]
+  props: ["title", "image"],
 };
 </script>
 

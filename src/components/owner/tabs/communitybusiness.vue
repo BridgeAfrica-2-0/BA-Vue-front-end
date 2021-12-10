@@ -1,46 +1,65 @@
 <template>
-  <div class="p-2">   
+  <div class="p-2">
     <b-row>
-      <b-col lg="6" sm="12" class="p-2  " v-for="item in businesses" :key="item.id">
-        
-
+      <b-col
+        lg="6"
+        sm="12"
+        class="p-2"
+        v-for="item in businesses"
+        :key="item.id"
+      >
         <div class="people-style shadow h-100">
           <b-row>
-
             <b-col md="8" xl="8" lg="12" cols="12" sm="8">
-              <div class="d-inline-flex">   
-              <div class="center-img ">
-                <splide :options="options" class="r-image">
-                  <splide-slide cl>
-                    <img :src="item.picture" class="r-image" />
-                  </splide-slide>
-                </splide>
-              </div>   <div class="flx100"> 
-              <p class="textt">
-                <strong class="title">   <router-link    :to="'business/'+item.id">    {{ item.name }}  </router-link> </strong> <br />
-               
-            <span v-for="cat in item.category" :key="cat.name">   {{cat.name}}  </span>
-                <br />
-                {{ count(item.followers) }}
-                {{ $t('dashboard.Community') }} <br />
+              <div class="d-inline-flex">
+                <div class="center-img">
+                  <splide :options="options" class="r-image">
+                    <splide-slide cl>
+                      <img :src="item.picture" class="r-image" />
+                    </splide-slide>
+                  </splide>
+                </div>
+                <div class="flx100">
+                  <p class="textt">
+                    <strong class="title">
+                      <router-link :to="'business/' + item.id">
+                        {{ item.name }}
+                      </router-link>
+                    </strong>
+                    <br />
 
-                <span class="location">
-              <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{item.city}}  <span class="ml-2" v-for="nie in item.neigborhood"  :key="nie.id" >  {{nie.name}} </span>   
-            </span>
-                <br />
-       <read-more
-              more-str="read more"
-              class="readmore"
-              :text="item.about_business"
-              link="#"
-              less-str="read less"
-              :max-chars="100"
-            >
-            </read-more>
-              </p>
-               </div>
-               </div>
-            </b-col>     
+                    <span v-for="cat in item.category" :key="cat.name">
+                      {{ cat.name }}
+                    </span>
+                    <br />
+                    {{ count(item.followers) }}
+                    {{ $t("dashboard.Community") }} <br />
+
+                    <span class="location">
+                      <b-icon-geo-alt class="ico"></b-icon-geo-alt>
+                      {{ item.city }}
+                      <span
+                        class="ml-2"
+                        v-for="nie in item.neigborhood"
+                        :key="nie.id"
+                      >
+                        {{ nie.name }}
+                      </span>
+                    </span>
+                    <br />
+                    <read-more
+                      more-str="read more"
+                      class="readmore"
+                      :text="item.about_business"
+                      link="#"
+                      less-str="read less"
+                      :max-chars="100"
+                    >
+                    </read-more>
+                  </p>
+                </div>
+              </div>
+            </b-col>
 
             <b-col lg="12" xl="4" md="4" cols="12" sm="4">
               <div class="s-button">
@@ -53,34 +72,27 @@
                     cols="4"
                     class="mt-2 text-center"
                   >
-                 
-
-
-                    
-
-
-
-                  <b-button
-                  block
-                  size="sm"  
-                  :disabled="disable"
-                    :id="'followbtn'+item.id"
-                  :class="item.is_follow !== 0 && 'u-btn'"
-                  variant="primary"
-                  @click="handleFollow(item)"
-                >
-                 
-                  <i class="fas fa-lg btn-icon" :class="item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"></i>
-                  <span class="btn-com ml-1"> {{ $t('dashboard.Community') }}</span>
-                </b-button>
-
-
-
-
-
-
-
-
+                    <b-button
+                      block
+                      size="sm"
+                      :disabled="disable"
+                      :id="'followbtn' + item.id"
+                      :class="item.is_follow !== 0 && 'u-btn'"
+                      variant="primary"
+                      @click="handleFollow(item)"
+                    >
+                      <i
+                        class="fas fa-lg btn-icon"
+                        :class="
+                          item.is_follow !== 0
+                            ? 'fa-user-minus'
+                            : 'fa-user-plus'
+                        "
+                      ></i>
+                      <span class="btn-com ml-1">
+                        {{ $t("dashboard.Community") }}</span
+                      >
+                    </b-button>
                   </b-col>
 
                   <b-col
@@ -91,12 +103,7 @@
                     cols="4"
                     class="mt-2 text-center"
                   >
-                    
-
-                    <b-button block size="sm" class="b-background shadow" variant="primary" @click="cta(item)">
-                      <i class="fas fa-envelope fa-lg btn-icon"></i>
-                      <span class="btn-text">Message</span>
-                    </b-button>
+                    <BtnCtaMessage :element="item" type="business" />
                   </b-col>
 
                   <b-col
@@ -110,11 +117,13 @@
                     <b-button
                       block
                       size="sm"
-                      class="b-background shadow "
+                      class="b-background shadow"
                       variant="primary"
                     >
-                      <i class="fas fa-map-marked-alt  fa-lg btn-icon "></i>
-                      <span class="btn-text">{{ $t('dashboard.Direction') }}</span>
+                      <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
+                      <span class="btn-text">{{
+                        $t("dashboard.Direction")
+                      }}</span>
                     </b-button>
                   </b-col>
                 </b-row>
@@ -122,63 +131,58 @@
             </b-col>
           </b-row>
         </div>
-
-        
       </b-col>
     </b-row>
-     
-      <infinite-loading :identifier="infiniteId"  @infinite="infiniteHandler"  ref="infiniteLoading" ></infinite-loading>
+
+    <infinite-loading
+      :identifier="infiniteId"
+      @infinite="infiniteHandler"
+      ref="infiniteLoading"
+    ></infinite-loading>
   </div>
 </template>
 
 <script>
-import moment from "moment";
+import BtnCtaMessage from "@/components/messagesCTA/Btn-cta-message";
 import axios from "axios";
 
 export default {
   props: ["type", "searchh"],
-  
-   data() {
+  components: {
+    BtnCtaMessage,
+  },
+  data() {
     return {
       page: 1,
-      businesses:[],
-    
+      businesses: [],
+
       infiniteId: +new Date(),
       options: {
         rewind: true,
         autoplay: true,
         perPage: 1,
         pagination: false,
-         foll_id:null,
+        foll_id: null,
         type: "loop",
-        perMove: 1
-      }
+        perMove: 1,
+      },
     };
   },
 
-    mounted(){
-  
-   this.foll_id = this.$route.params.id ? this.$route.params.id :""  ;
-
- },
-
-
-  computed:{
-   
-    oldbusinesses(){
-
-      if(this.type=="Follower"){ 
-
-      return  this.$store.state.profile.BcommunityFollower.business_followers;  
-
-       }else{
-
-         return  this.$store.state.profile.BcommunityFollowing.business_following; 
-       }
-   }
-
+  mounted() {
+    this.foll_id = this.$route.params.id ? this.$route.params.id : "";
   },
-   
+
+  computed: {
+    oldbusinesses() {
+      if (this.type == "Follower") {
+        return this.$store.state.profile.BcommunityFollower.business_followers;
+      } else {
+        return this.$store.state.profile.BcommunityFollowing.business_following;
+      }
+    },
+  },
+
   methods: {
     count(number) {
       if (number >= 1000000) {
@@ -189,117 +193,75 @@ export default {
       } else return number;
     },
 
+    async handleFollow(user) {
+      document.getElementById("followbtn" + user.id).disabled = true;
 
-    
-
-     async handleFollow(user) {
-
-      document.getElementById("followbtn"+user.id).disabled = true;
-       
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
         id: user.id,
-        type: 'business',
+        type: "business",
       };
 
       await axios
         .post(uri, data)
-        .then(response => {
-
+        .then((response) => {
           console.log(response);
           user.is_follow = nextFollowState;
-         document.getElementById("followbtn"+user.id).disabled = false;
-            
+          document.getElementById("followbtn" + user.id).disabled = false;
         })
-        .catch(err =>{  
-          
-          console.log(err)  ;
-           document.getElementById("followbtn"+user.id).disabled =  false;
-          
+        .catch((err) => {
+          console.log(err);
+          document.getElementById("followbtn" + user.id).disabled = false;
         });
-         
     },
 
-
-    
-
-
-       search(){
-     
-      
-   this.businesses=[];
+    search() {
+      this.businesses = [];
       this.page = 1;
       this.infiniteId += 1;
 
-     
-     this.$refs.infiniteLoading.attemptLoad();
-    
-
+      this.$refs.infiniteLoading.attemptLoad();
     },
 
-
-     
-
-
-     
-          infiniteHandler($state) { 
-           
-
-         let url =
-        this.type === 'Follower'
+    infiniteHandler($state) {
+      let url =
+        this.type === "Follower"
           ? `profile/business/follower/`
           : `profile/business/following/`;
-          
+
       axios
-        .get(url + this.page+"?keyword="+this.searchh+"&id="+this.foll_id )
+        .get(
+          url + this.page + "?keyword=" + this.searchh + "&id=" + this.foll_id
+        )
         .then(({ data }) => {
           console.log(data);
-        
-          if(this.type=="Follower"){  
 
+          if (this.type == "Follower") {
+            if (data.data.business_followers.length) {
+              this.businesses.push(...data.data.business_followers);
+              this.page += 1;
 
-          if (data.data.business_followers.length) {
-            
-         
-            this.businesses.push(...data.data.business_followers); 
-            this.page += 1;
-            
-            $state.loaded();
-
-           }else{
+              $state.loaded();
+            } else {
               $state.complete();
-             
-           }
-        
-          }else{
+            }
+          } else {
+            if (data.data.business_following.length) {
+              this.businesses.push(...data.data.business_following);
+              this.page += 1;
 
-
-
-
-             if (data.data.business_following.length) {
-            
-         
-            this.businesses.push(...data.data.business_following); 
-            this.page += 1;
-            
-            $state.loaded();
-
-           }else{
+              $state.loaded();
+            } else {
               $state.complete();
-             
-           }
-
+            }
           }
-           
         })
         .catch((err) => {
           console.log({ err: err });
         });
     },
-
-
-  }
+  },
 };
 </script>
 

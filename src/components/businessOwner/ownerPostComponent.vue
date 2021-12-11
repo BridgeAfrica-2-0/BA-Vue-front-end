@@ -7,7 +7,7 @@
             class="logo-sizee avat"
             :square="'user' == item.poster_type ? false : true"
             variant="primary"
-            :src="item.logo_path"
+            :src="item.user_picture"
           ></b-avatar>
         </span>
         <div class="pl-2 pl-md-3 pt-md-2">
@@ -19,7 +19,7 @@
 
         <div
           class="toright"
-          v-if="!isDisplayInSearch ? isYourOwnPost && canBeDelete : false"
+          v-if="'dashboard' !== $route.name ? !isDisplayInSearch ? isYourOwnPost && canBeDelete : false : false"
         >
           <b-dropdown variant="link" size="sm" no-caret>
             <template #button-content>
@@ -42,7 +42,8 @@
           </b-dropdown>
         </div>
       </div>
-      <div class="m-0 p-0">
+
+      <div class="mt-2 ml-3 p-0">
         <p class="post-text">
           <!--     :text="item.content.details"   -->
           <read-more
@@ -79,7 +80,7 @@
             <p class="duration">{{ item.source.created_at | now }}</p>
           </div>
         </div>
-        <div class="m-0 p-0">
+        <div class="mt-2 ml-3 p-0">
           <p class="post-text">
             <read-more
               v-if="item.source.content"
@@ -162,14 +163,14 @@
             : false
           : false
       "
-    >
+    >                                                                                                               
       <div class="m-md-0 p-md-0">
         <b-avatar
           b-avatar
           class="logo-sizee-18 avat img-fluid avat-comment avatar-border"
           variant="primary"
           :square="'user' == profile.user_type ? false : true"
-          :src="businessLogo"
+          :src="profile.profile_picture"
         ></b-avatar>
       </div>
 
@@ -643,7 +644,7 @@ export default {
 }
 @media (max-width: 762px) {
   .commentt[data-v-41fcb621] {
-    width: 99%;
+    width: 98%;
     border: solid 1 px #ccc;
     border-radius: 25 px;
     background-color: #ddd;
@@ -687,13 +688,13 @@ export default {
   width: 315px;
 }
 .comment {
-  width: 90%;
+  width: 100%;
   border: solid 1px #ccc;
   border-radius: 25px;
   background-color: #ddd;
   height: 34px;
   padding-left: 10px;
-  margin-left: 8%;
+  margin-left: 2%;
 }
 .comment:focus {
   outline: none;

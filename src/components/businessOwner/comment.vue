@@ -9,7 +9,7 @@
       ></b-avatar>
 
       <div class="msg text" v-if="!proccesEdit">
-        <span class="float-right" style="margin-right: -10px" v-if="isEditMode">
+        <span class="float-right" style="margin-right: -10px" v-if="'dashboard' !== $route.name ? isEditMode :false">
           <b-dropdown size="sm" variant="outline primary " class="primary">
             <template class="more" #button-content> </template>
             <b-dropdown-item @click.prevent="toggle"> {{ $t("businessowner.Edit") }} </b-dropdown-item>

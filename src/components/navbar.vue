@@ -301,20 +301,21 @@
 
               <div class="nav-item cursor" id="profilepic">
                 <router-link :to="userOwnPage"
-                  ><img
+                  >
+                  <b-avatar
+                    variant="light"
                     :src="user.profile_picture"
-                    :class="`${
-                      'user' == user.user_type ? 'rounded-circle' : ''
-                    } logo-sizee`"
-                    alt=""
-                /></router-link>
+                    :square="'user' == user.user_type ? false : true"
+                    class="logo-sizee"
+                  ></b-avatar>
+                </router-link>
               </div>
 
               <b-tooltip target="profilepic" variant="light" triggers="hover">
                 {{ user.name }}
               </b-tooltip>
 
-              <div class="nav-item">
+              <div class="nav-item ">
                 <a
                   id="other-menu"
                   class="nav-link text-dark arrow-down"
@@ -351,7 +352,9 @@
                       "
                     >
                       <span class="mr-2"
-                        ><fas-icon class="violet search"
+                        ><fas-icon
+                          class="violet search"
+                          :icon="['fas', 'user']"
                       /></span>
                       Profile
                     </a>
@@ -381,15 +384,14 @@
                         other-menu
                         suggest-item
                         cursor-pointer
-                        text-decoration-none text-dark
+                        text-decoration-none text-dark w-full
                       "
                     >
-                      <span class="mr-2"
+                      <span class="mr-2 w-full"
                         ><fas-icon
                           class="violet search"
                           :icon="['fas', 'cogs']"
-                      /></span>
-                      Account Settings
+                      /></span>Account Settings
                     </router-link>
                     <hr class="h-divider" />
                     <div class="other-menu suggest-item cursor-pointer">
@@ -401,13 +403,13 @@
                       Help and Support
                     </div>
                     <hr class="h-divider" />
+
                     <div class="other-menu suggest-item cursor-pointer">
-                      <b-link v-b-toggle="'collapse-2'" class="m-1"
+                      <b-link v-b-toggle="'collapse-2'"
                         ><fas-icon
-                          class="violet search"
+                          class="violet search mr-1"
                           :icon="['fas', 'globe-americas']"
-                        />
-                        Language</b-link
+                        /> Language</b-link
                       >
 
                       <b-collapse id="collapse-2" class="mt-1">

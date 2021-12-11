@@ -1,7 +1,13 @@
 <template>
   <div class="p-2">
     <b-row>
-      <b-col lg="6" sm="12" class="p-2" v-for="item in businesses" :key="item.id">
+      <b-col
+        lg="6"
+        sm="12"
+        class="p-2"
+        v-for="item in businesses"
+        :key="item.id"
+      >
         <div class="people-style shadow">
           <b-row>
             <b-col md="3" xl="3" lg="3" cols="5" sm="3">
@@ -21,7 +27,10 @@
                 {{ count(item.followers) }}
                 Community <br />
 
-                <span class="location"> <b-icon-geo-alt class="ico"></b-icon-geo-alt>{{ item.country }} </span>
+                <span class="location">
+                  <b-icon-geo-alt class="ico"></b-icon-geo-alt
+                  >{{ item.country }}
+                </span>
                 <br />
                 <read-more
                   more-str="read more"
@@ -38,23 +47,51 @@
             <b-col lg="12" xl="4" md="4" cols="12" sm="4">
               <div class="s-button">
                 <b-row>
-                  <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2 text-center">
-                    <b-button block size="sm" class="b-background shadow " variant="primary">
-                      <i class="fas fa-user-plus  fa-lg btn-icon "></i>
+                  <b-col
+                    md="12"
+                    lg="4"
+                    xl="12"
+                    sm="12"
+                    cols="4"
+                    class="mt-2 text-center"
+                  >
+                    <b-button
+                      block
+                      size="sm"
+                      class="b-background shadow"
+                      variant="primary"
+                    >
+                      <i class="fas fa-user-plus fa-lg btn-icon"></i>
                       <span class="btn-com">Community</span>
                     </b-button>
                   </b-col>
 
-                  <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2 text-center">
-                    <b-button block size="sm" class="b-background shadow " variant="primary">
-                      <i class="fas fa-envelope   fa-lg btn-icon "></i>
-                      <span class="btn-text">Message</span>
-                    </b-button>
+                  <b-col
+                    md="12"
+                    lg="4"
+                    xl="12"
+                    sm="12"
+                    cols="4"
+                    class="mt-2 text-center"
+                  >
+                    <BtnCtaMessage :element="item" type="business" />
                   </b-col>
 
-                  <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2 text-center">
-                    <b-button block size="sm" class="b-background shadow " variant="primary">
-                      <i class="fas fa-map-marked-alt  fa-lg btn-icon "></i>
+                  <b-col
+                    md="12"
+                    lg="4"
+                    xl="12"
+                    sm="12"
+                    cols="4"
+                    class="mt-2 text-center"
+                  >
+                    <b-button
+                      block
+                      size="sm"
+                      class="b-background shadow"
+                      variant="primary"
+                    >
+                      <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
                       <span class="btn-text">Direction</span>
                     </b-button>
                   </b-col>
@@ -66,16 +103,20 @@
       </b-col>
     </b-row>
 
-    <infinite-loading :identifier="infiniteId" @infinite="infiniteHandler" ref="infiniteLoading"></infinite-loading>
+    <infinite-loading
+      :identifier="infiniteId"
+      @infinite="infiniteHandler"
+      ref="infiniteLoading"
+    ></infinite-loading>
   </div>
 </template>
 
 <script>
-import moment from 'moment';
-import axios from 'axios';
+import moment from "moment";
+import axios from "axios";
 
 export default {
-  props: ['type', 'searchh'],
+  props: ["type", "searchh"],
 
   data() {
     return {
@@ -87,7 +128,7 @@ export default {
         perPage: 1,
         pagination: false,
 
-        type: 'loop',
+        type: "loop",
         perMove: 1,
       },
     };
@@ -95,7 +136,7 @@ export default {
 
   computed: {
     businesses() {
-      if (this.type == 'Follower') {
+      if (this.type == "Follower") {
         return this.$store.state.profile.BcommunityFollower.business_followers;
       } else {
         return this.$store.state.profile.BcommunityFollowing.business_following;
@@ -106,20 +147,26 @@ export default {
   methods: {
     count(number) {
       if (number >= 1000000) {
-        return number / 1000000 + 'M';
+        return number / 1000000 + "M";
       }
       if (number >= 1000) {
-        return number / 1000 + 'K';
+        return number / 1000 + "K";
       } else return number;
     },
 
     search() {
-      console.log('search started');
+      console.log("search started");
 
-      if (this.type == 'Follower') {
-        this.$store.commit('profile/setBcommunityFollower', { business_followers: [], total_business_follower: 0 });
+      if (this.type == "Follower") {
+        this.$store.commit("profile/setBcommunityFollower", {
+          business_followers: [],
+          total_business_follower: 0,
+        });
       } else {
-        this.$store.commit('profile/setBcommunityFollowing', { business_following: [], total_business_following: 0 });
+        this.$store.commit("profile/setBcommunityFollowing", {
+          business_following: [],
+          total_business_following: 0,
+        });
       }
 
       this.page = 1;
@@ -131,17 +178,17 @@ export default {
     infiniteHandler($state) {
       let url = null;
 
-      if (this.type == 'Follower') {
-        url = 'profile/business/follower/';
+      if (this.type == "Follower") {
+        url = "profile/business/follower/";
       } else {
-        url = 'profile/business/following/';
+        url = "profile/business/following/";
       }
       axios
-        .get(url + this.page + '?keyword=' + this.searchh)
+        .get(url + this.page + "?keyword=" + this.searchh)
         .then(({ data }) => {
           console.log(data);
 
-          if (this.type == 'Follower') {
+          if (this.type == "Follower") {
             if (data.data.business_followers.length) {
               this.businesses.push(...data.data.business_followers);
               this.page += 1;
@@ -161,7 +208,7 @@ export default {
             }
           }
         })
-        .catch(err => {
+        .catch((err) => {
           console.log({ err: err });
         });
     },
@@ -236,13 +283,13 @@ export default {
     color: black;
 
     line-height: 35px;
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 
   .textt {
     color: #000;
 
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 12px;
     line-height: 30px;
@@ -289,13 +336,13 @@ export default {
     color: black;
 
     line-height: 35px;
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 
   .textt {
     color: #000;
 
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;

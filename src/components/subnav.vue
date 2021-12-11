@@ -8,9 +8,9 @@
             v-for="(category, index) in categories"
             :key="index"
             @mouseover="showSubCat(category.category.id, category.sub_cat)"
-            @click="clickshowSubCat(category.category.id,  category.sub_cat)"
+            @click="showSubCat(category.category.id, category.sub_cat)"
             @mouseleave="hideSubCat(category.category.id)"
-          > 
+          >
             <b-nav-item-dropdown
               id="dropdown-1"
               :text="category.category.name"
@@ -82,16 +82,12 @@ export default {
   },
 
   methods: {
-
-
-      bcategory(category) {
+    bcategory(category) {
       this.$emit("category", category);
       console.log(category);
     },
 
-    
     getCategories() {
-     
       this.$store
         .dispatch("marketSearch/getCategories")
         .then((res) => {
@@ -102,35 +98,15 @@ export default {
         });
     },
 
-  
-
-
-
-
-
-
-
     showSubCat(catId, subCat) {
-      this.$refs[catId][0].visible = true;     
+      this.$refs[catId][0].visible = true;
       this.$emit("parentcategory", catId);
       // this.subCategories.push(subCat);
-      this.$store.commit('marketSearch/setSubCat', subCat)
+      this.$store.commit("marketSearch/setSubCat", subCat);
 
-      if (!subCat.length) this.hideSubCat(catId)
+      if (!subCat.length) this.hideSubCat(catId);
       console.log("Subcat:", this.subCategories);
     },
-
-clickshowSubCat(catId, subCat) {
-      this.$refs[catId][0].visible = true;     
-      this.$emit("parentcategory", catId);
-      this.$emit("category", {cat_id:catId});
-     
-      this.$store.commit('marketSearch/setSubCat', subCat)
-
-      if (!subCat.length) this.hideSubCat(catId)
-      console.log("Subcat:", this.subCategories);
-    },
-
     hideSubCat(catId) {
       this.$refs[catId][0].visible = false;
       this.subCategories = [];

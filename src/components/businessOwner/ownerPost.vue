@@ -520,7 +520,7 @@
 import moment from "moment";
 import axios from "axios";
 
-import { mapGetters } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 
 import Post from "./ownerPostComponent.vue";
 
@@ -559,19 +559,28 @@ export default {
   },
 
   created() {
-    this.init();
+    this.getAuth();
   },
 
   methods: {
+    ...mapMutations({
+      auth: "auth/profilConnected",
+    }),
     async getAuth() {
+      const type = [
+        "NetworkEditors",
+        "networks",
+        "memberNetwork",
+        "Membar Network Follower",
+      ].includes(this.$route.name)
+        ? this.$route.params.id
+        : null;
       const response = await this.$repository.share.WhoIsConnect({
-        networkId: this.$route.params.id,
+        networkId: type,
+        type,
       });
 
       if (response.success) this.auth(response.data);
-    },
-    init: async function () {
-      await this.$repository.share.switch(this.$route.params.id, "business");
     },
 
     mapmediae(media) {
@@ -693,7 +702,7 @@ export default {
     editPost(postarray) {
       this.edit_description = postarray.content;
       this.edit_image = postarray.media;
-      this.edit_id = postarray.post_id;
+      this.edit_id = postarray.post_id ? postarray.post_id : postarray.id;
 
       console.log(this.edit_image);
 
@@ -957,7 +966,6 @@ export default {
           this.reloads();
           this.page = 1;
           this.infiniteId += 1;
-          
         })
         .catch((err) => {
           if (err.response.status == 422) {
@@ -973,7 +981,7 @@ export default {
               blockClass: "custom-block-class",
             });
           }
-           loader.hide();
+          loader.hide();
         });
     },
 
@@ -1006,10 +1014,6 @@ export default {
       return this.$store.state.businessOwner.businessInfo;
     },
 
-    imageProfile() {
-      return "yoo";
-    },
-
     business_logo() {
       //  return this.$store.state.businessOwner.businessInfo.logo_path;
       return this.$store.state.businessOwner.businessInfo;
@@ -1018,10 +1022,6 @@ export default {
     owner_post() {
       console.log(this.$store.state.businessOwner.ownerPost);
       return this.$store.state.businessOwner.ownerPost;
-    },
-
-    profileNamePost() {
-      return "yoo";
     },
   },
   mounted() {

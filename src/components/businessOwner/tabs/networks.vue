@@ -2,15 +2,16 @@
   <div class="t-color">
     <div>
       <fas-icon class="icons" :icon="['fas', 'project-diagram']" size="lg" />
-      <span class="t-color">  {{ $t('businessowner.Network') }} </span>
+      <span class="t-color"> {{ $t("businessowner.Network") }} </span>
 
       <b-button
         class="float-right"
         @click="showmodal(true, 'add')"
         variant="primary"
-        > {{ $t('businessowner.') }} {{ $t('businessowner.Add_Network') }}</b-button
+        >{{ $t("businessowner.Add_Network") }}</b-button
       >
-      <hr />    
+      <hr />
+      <!-- {{ $t('businessowner.') }} {{ $t('businessowner.Add_Network') }}   -->
       <b-row>
         <b-col
           cols="12"
@@ -19,7 +20,7 @@
           class="p-0 mb-2"
           v-for="network in network"
           :key="network.id"
-        >   
+        >
           <div class="people-style shadow h-100">
             <b-row>
               <b-col md="3" xl="3" lg="3" cols="5" sm="3">
@@ -30,9 +31,12 @@
               <b-col md="5" cols="7" lg="7" xl="5" sm="5">
                 <p class="textt">
                   <strong class="net-title"> {{ network.name }} </strong> <br />
-              <span v-for="cat in network.categories" :key="cat" >  {{cat}} </span>
+                  <span v-for="cat in network.categories" :key="cat">
+                    {{ cat }}
+                  </span>
                   <br />
-                  {{ network.followers }}  {{ $t('businessowner.Community') }} <br />
+                  {{ network.followers }} {{ $t("businessowner.Community") }}
+                  <br />
 
                   <span class="location">
                     <b-icon-geo-alt class="ico"></b-icon-geo-alt>
@@ -40,14 +44,14 @@
                   </span>
                   <br />
 
-              <read-more
-                v-if="network.description"
-                more-str="read more"
-                :text="network.description"
-                link="#"
-                less-str="read less"
-                :max-chars="200"
-              ></read-more>  
+                  <read-more
+                    v-if="network.description"
+                    more-str="read more"
+                    :text="network.description"
+                    link="#"
+                    less-str="read less"
+                    :max-chars="200"
+                  ></read-more>
                 </p>
               </b-col>
 
@@ -62,21 +66,14 @@
                         variant="primary"
                       >
                         <i class="fas fa-user-plus fa-lg btn-icon"></i>
-                        <span class="btn-com" v-b-modal.modal-sm
-                          > {{ $t('businessowner.Community') }}</span
+                        <span class="btn-com" v-b-modal.modal-sm>
+                          {{ $t("businessowner.Community") }}</span
                         >
                       </b-button>
                     </b-col>
 
                     <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2">
-                      <b-button
-                        block
-                        size="sm"
-                        class="b-background shadow"
-                        variant="primary"
-                        ><i class="fas fa-envelope fa-lg btn-icon"></i>
-                        <span class="btn-text"> {{ $t('businessowner.Message') }}</span>
-                      </b-button>
+                      <BtnCtaMessage :element="network" type="network" />
                     </b-col>
 
                     <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2">
@@ -87,11 +84,9 @@
             </b-row>
           </div>
         </b-col>
-
       </b-row>
 
-      
-        <infinite-loading @infinite="infiniteHandler"></infinite-loading>
+      <infinite-loading @infinite="infiniteHandler"></infinite-loading>
     </div>
   </div>
 </template>
@@ -103,7 +98,7 @@ export default {
     return {
       page: 1,
       biz_id: null,
-     
+
       BaseURL: process.env.VUE_APP_API_URL,
       showModal: false,
       selectedFile: "",
@@ -139,7 +134,6 @@ export default {
   },
 
   computed: {
-
     network() {
       return this.$store.state.businessOwner.networks;
     },
@@ -155,8 +149,6 @@ export default {
     },
   },
   methods: {
-    
-
     ...mapActions({
       addNetwork: "businessOwner/addNetwork",
       getNetworks: "businessOwner/getNetworks",
@@ -169,14 +161,13 @@ export default {
       if (this.page == 1) {
         this.network.splice(0);
       }
-   this.$store
+      this.$store
         .dispatch("businessOwner/loadMore", url)
         .then(({ data }) => {
           console.log(data.data);
           if (data.data.length) {
-            
-              this.network.push(...data.data);
-           
+            this.network.push(...data.data);
+
             this.page += 1;
 
             $state.loaded();

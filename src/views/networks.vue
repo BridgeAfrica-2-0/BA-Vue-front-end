@@ -85,8 +85,11 @@ import LyTab from "@/tab/src/index.vue";
 
 import Parent from "@/components/businessf/tabs/owner/networks/parent";
 
+import { WhoIsIt } from "@/mixins";
+
 export default {
   name: "networks",
+  mixins: [WhoIsIt],
   components: {
     General,
     LyTab,
@@ -122,12 +125,12 @@ export default {
       },
     };
   },
+
   created() {
     this.selectedId = this.$route.query.tabId ? this.$route.query.tabId : 0;
 
     this.foll_id = this.$route.params.id;
 
-    console.log("babyoobba");
     this.$store
       .dispatch("networkDetails/roleCheck", this.foll_id)
       .then((data) => {
@@ -159,12 +162,21 @@ export default {
         this.isloaded = true;
       })
       .catch((error) => {
-        console.log({ error: error });
-        console.log(error.response.status);
         if (error.response.status == 404) {
-          //  this.$router.push({ name: "notFound" });
+          this.$router.push({ name: "notFound" });
         }
       });
+  },
+
+
+  beforeCreate() {
+    this.$repository.share.switch(this.$route.params.id, "network");
+  },
+
+  watch: {
+    "$route.query.tabId": function () {
+      this.selectedId = this.$route.query.tabId;
+    },
   },
 
 

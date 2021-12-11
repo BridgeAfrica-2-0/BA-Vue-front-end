@@ -40,20 +40,18 @@
           <span class="float-right">
             <!-- <b-button variant="primary" class=""> {{$t("search.Buy_now")}} </b-button> -->
             <div class="row">
-              <div class="col marge" >
-                  <b-button variant="primary"
-                  @click="AddToCard(prod.id, true)" 
-                  ><span> {{ $t("search.Buy_now") }}  </span>
-                 </b-button>
+              <div class="col marge">
+                <b-button variant="primary" @click="AddToCard(prod.id, true)"
+                  ><span> {{ $t("search.Buy_now") }} </span>
+                </b-button>
               </div>
               <div class="w-100 my-1"></div>
               <div class="col marge">
                 <b-button variant="primary" @click="AddToCard(prod.id)"
-                ><span>Add to Cart</span>
-              </b-button>
+                  ><span>Add to Cart</span>
+                </b-button>
               </div>
             </div>
-
           </span>
         </b-col>
       </b-row>
@@ -199,7 +197,7 @@
           <hr />
           <b-row>
             <b-col>
-              <b-button variant="primary">{{ $t("search.Message") }}</b-button>
+              <BtnCtaMessage :element="item" type="business" />
             </b-col>
             <b-col>
               <b-button variant="outline-dark" class="float-right">{{
@@ -440,7 +438,6 @@
         </b-col>
       </b-row>
     </b-modal>
-   
   </div>
 </template>
 
@@ -458,21 +455,20 @@ export default {
   },
   computed: {
     products() {
-      console.log("PRoducts ". this.$store.getters["marketSearch/getProducts"]);
+      console.log("PRoducts ".this.$store.getters["marketSearch/getProducts"]);
       return this.$store.getters["marketSearch/getProducts"];
     },
     prodLoader() {
       return this.$store.getters["marketSearch/getLoader"];
     },
 
-    getStatus(){
-    return this.$store.state.cart.status ;
-  }
+    getStatus() {
+      return this.$store.state.cart.status;
+    },
   },
   created() {
     if (!this.products.length) this.getProducts();
   },
-  
 
   methods: {
     changePage(value) {
@@ -516,24 +512,23 @@ export default {
         });
     },
 
-    buyNow(){
+    buyNow() {
       this.AddToCard();
-      this.$router.push({name: 'payment'})
-    
+      this.$router.push({ name: "payment" });
     },
 
     AddToCard(id, val) {
       console.log("add to card ", id);
       this.$store
-        .dispatch("cart/addToCart",id)
+        .dispatch("cart/addToCart", id)
         .then((response) => {
           console.log("----", this.getStatus);
 
           this.flashMessage.show({
             status: "success",
             message: this.getStatus,
-          }); 
-          if(val)   this.$router.push({name: 'payment'}) ;
+          });
+          if (val) this.$router.push({ name: "payment" });
         })
         .catch((error) => {
           console.log(error);
@@ -543,7 +538,6 @@ export default {
           });
         });
     },
-
   },
 };
 </script>
@@ -612,8 +606,8 @@ h6 {
     margin-right: -60px;
   }
 
-  .marge{
-    margin-left: 200px
+  .marge {
+    margin-left: 200px;
   }
   .pos {
     margin-left: 200px;

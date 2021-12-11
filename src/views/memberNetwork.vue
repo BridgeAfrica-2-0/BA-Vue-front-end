@@ -6,13 +6,13 @@
     <b-container fluid class="content">
       <b-row>
         <b-col lg="5" xl="4" class=" ">  
-          <Parent />
+          <Parent /> 
         </b-col>
 
         <b-col class="col mt-sm-3">
           <b-tabs content-class="mt-3" lazy fill pills>
             <b-tab :title="$t('memnetwork.Posts')"><Posts :postStatus="'member'" /></b-tab>
-            <b-tab :title="$t('memnetwork.Media')"><Media /></b-tab>
+            <b-tab :title="$t('memnetwork.Media')"><Media :type="'network'" :isEditor="false" /></b-tab>
             <b-tab :title="$t('memnetwork.Members')"><Members /></b-tab>
             <b-tab :title="$t('memnetwork.Feedback')"><Feedback /></b-tab>
           </b-tabs>
@@ -41,10 +41,14 @@ import Footer from "../components/footer";
 //import Posts from "../components/memberNetworkF/postNetwork";
 import Posts from "@/components/businessf/tabs/owner/networks/postNetwork";
 import Parent from "../components/memberNetworkF/parent";
-import Media from "../components/memberNetworkF/mediaNetwork";
+import Media from "@/components/owner/tabs/media";
 import Members from "../components/memberNetworkF/members";
 import Feedback from "../components/memberNetworkF/feedback";
+
+import { WhoIsIt } from "@/mixins";
 export default {
+
+  mixins:[WhoIsIt],
   components: {
     Navbar,
     Footer,

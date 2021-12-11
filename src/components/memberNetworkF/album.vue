@@ -22,7 +22,7 @@
             </b-modal>
   
           </div>
-         <FlashMessage />
+         
       </div>
     </div>
   </div>

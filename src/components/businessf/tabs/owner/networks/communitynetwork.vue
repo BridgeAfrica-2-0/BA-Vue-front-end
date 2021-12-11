@@ -17,14 +17,19 @@
             {{ member.category[0].name }}
             <br />
             {{ member.communityNum }}
-            {{ $t('network.Community') }} <br />
+            {{ $t("network.Community") }} <br />
 
             <span class="location">
               <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{ member.city }}
             </span>
             <br />
-            <span v-if="member.description.length<55">{{ member.description}}</span>
-            <span v-else >{{ member.description.substring(0,55)+"..." }} <b-link>{{ $t('network.Read_More') }}</b-link></span>
+            <span v-if="member.description.length < 55">{{
+              member.description
+            }}</span>
+            <span v-else
+              >{{ member.description.substring(0, 55) + "..." }}
+              <b-link>{{ $t("network.Read_More") }}</b-link></span
+            >
           </p>
         </b-col>
 
@@ -46,8 +51,14 @@
                   variant="primary"
                   @click="$emit('handleFollow', member)"
                 >
-                  <i :class="member.is_follow ? 'fas fa-user-minus fa-lg btn-icon':'fas fa-user-plus fa-lg btn-icon'"></i>
-                  <span class="btn-com">{{ $t('network.Community') }}</span>
+                  <i
+                    :class="
+                      member.is_follow
+                        ? 'fas fa-user-minus fa-lg btn-icon'
+                        : 'fas fa-user-plus fa-lg btn-icon'
+                    "
+                  ></i>
+                  <span class="btn-com">{{ $t("network.Community") }}</span>
                 </b-button>
               </b-col>
 
@@ -59,15 +70,7 @@
                 cols="4"
                 class="mt-2 text-center"
               >
-                <b-button
-                  block
-                  size="sm"
-                  class="b-background shadow"
-                  variant="primary"
-                >
-                  <i class="fas fa-envelope fa-lg btn-icon"></i>
-                  <span class="btn-text">{{ $t('network.Message') }}</span>
-                </b-button>
+                <BtnCtaMessage :element="member" type="network" />
               </b-col>
 
               <b-col
@@ -85,7 +88,7 @@
                   variant="primary"
                 >
                   <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
-                  <span class="btn-text">{{ $t('network.Join') }}</span>
+                  <span class="btn-text">{{ $t("network.Join") }}</span>
                 </b-button>
               </b-col>
             </b-row>
@@ -111,7 +114,6 @@ export default {
       },
     };
   },
-
 };
 </script>
 

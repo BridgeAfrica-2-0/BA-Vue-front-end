@@ -1,123 +1,121 @@
 <template>
-  <div  >
- 
+  <div>
+    <div
+      v-for="value in people_around"
+      v-bind:key="value.name"
+      class="people-style border shadow"
+    >
+      <b-row class="mb-1">
+        <b-col md="3" cols="4" sm="4" class="my-auto">
+          <b-avatar
+            class="p-avater"
+            variant="primary"
+            :src="value.profile_picutre"
+          ></b-avatar>
+        </b-col>
 
-      <div
-        v-for="value in people_around"
-        v-bind:key="value.name"
-        class="people-style border shadow"
-      >
-        <b-row class="mb-1">
-          <b-col md="3" cols="4" sm="4" class="my-auto">
-            <b-avatar
-              class="p-avater"
-              variant="primary"
-              :src="value.profile_picutre"
-            ></b-avatar>
-          </b-col>
-
-          <b-col md="8" cols="8" sm="8">
-            <div>
-              <b-row class="shift">
-                <b-col md="12" lg="6" xl="6">
-                  <div class="e-name">
-                    <b-row>
-                      <b-col md="6" lg="12" cols="6" xl="12" class="mt-lg-2">
-                        <div class="mt-3 mt-lg-0 mt-xl-0 username">
-                    <router-link    :to="'profile/'+value.id">      <b> {{ value.name }} </b></router-link>
-                        </div>
-                      </b-col>
-
-                      <b-col
-                        md="6"
-                        lg="12"
-                        cols="6"
-                        xl="12"
-                        class="mt-3 mt-lg-1 mt-xl-3"
-                      >
-                        <h6 class="follower m-15">
-                          {{ value.followers }} {{ $t('dashboard.Community') }}
-                        </h6>
-                      </b-col>
-                    </b-row>
-                  </div>
-                </b-col>
-
-                <b-col lg="6" xl="6" cols="12" md="12">
-                  <div>
-                    <b-row class="mt-lg-0">
-                      <b-col
-                        md="6"
-                        lg="12"
-                        cols="6"
-                        xl="12"
-                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
-                      >
-                        <b-button
-                          block
-                          variant="primary"
-                          size="sm"
-                          class="b-background flexx pobtn shadow"
-                          @click="cta_business(value)"
+        <b-col md="8" cols="8" sm="8">
+          <div>
+            <b-row class="shift">
+              <b-col md="12" lg="6" xl="6">
+                <div class="e-name">
+                  <b-row>
+                    <b-col md="6" lg="12" cols="6" xl="12" class="mt-lg-2">
+                      <div class="mt-3 mt-lg-0 mt-xl-0 username">
+                        <router-link :to="'profile/' + value.id">
+                          <b> {{ value.name }} </b></router-link
                         >
-                          <i class="fas fa-envelope fa-lg btn-icon"></i>
-                          <span class="btn-text">{{ $t('dashboard.Message') }}</span>
-                        </b-button>
-                      </b-col>
+                      </div>
+                    </b-col>
 
-                      <b-col
-                        md="6"
-                        lg="12"
-                        cols="6"
-                        xl="12"
-                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
+                    <b-col
+                      md="6"
+                      lg="12"
+                      cols="6"
+                      xl="12"
+                      class="mt-3 mt-lg-1 mt-xl-3"
+                    >
+                      <h6 class="follower m-15">
+                        {{ value.followers }} {{ $t("dashboard.Community") }}
+                      </h6>
+                    </b-col>
+                  </b-row>
+                </div>
+              </b-col>
+
+              <b-col lg="6" xl="6" cols="12" md="12">
+                <div>
+                  <b-row class="mt-lg-0">
+                    <b-col
+                      md="6"
+                      lg="12"
+                      cols="6"
+                      xl="12"
+                      class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
+                    >
+                      <b-button
+                        block
+                        size="sm"
+                        class="b-background flexx pobtn shadow"
+                        :class="value.is_follow !== 0 && 'u-btn'"
+                        variant="primary"
+                        :id="'followbtn' + value.id"
+                        @click="handleFollow(value)"
                       >
-                        <b-button
-                          block
-                          size="sm"
-                          class="b-background flexx pobtn shadow"
-                          :class="value.is_follow !== 0 && 'u-btn'"
-                          variant="primary"
-                           :id="'followbtn'+value.id"
-                          @click="handleFollow(value)"
-                        >
+                        <i
+                          class="fas fa-lg btn-icon"
+                          :class="
+                            value.is_follow !== 0
+                              ? 'fa-user-minus'
+                              : 'fa-user-plus'
+                          "
+                        ></i>
 
-                           <i
-                            class="fas fa-lg btn-icon"
-                            :class="value.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"
-                          ></i>
+                        <span class="btn-com">{{
+                          $t("dashboard.Community")
+                        }}</span>
+                      </b-button>
+                    </b-col>
 
-                          <span class="btn-com">{{ $t('dashboard.Community') }}</span>
-                        </b-button>
-                      </b-col>
-                    </b-row>
-                  </div>
-                </b-col>
-              </b-row>
-            </div>
-          </b-col>
-        </b-row>
+                    <b-col
+                      md="6"
+                      lg="12"
+                      cols="6"
+                      xl="12"
+                      class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
+                    >
+                      <BtnCtaMessage :element="value" type="people" />
+                    </b-col>
+                  </b-row>
+                </div>
+              </b-col>
+            </b-row>
+          </div>
+        </b-col>
+      </b-row>
+    </div>
 
-      </div>
-  
-    
- <infinite-loading @infinite="infiniteHandler"></infinite-loading>
-         
+    <infinite-loading @infinite="infiniteHandler"></infinite-loading>
   </div>
 </template>
 
 <script>
+import BtnCtaMessage from "@/components/messagesCTA/Btn-cta-message";
+
 import axios from "axios";
 export default {
-   data() {
+  components: {
+    BtnCtaMessage,
+  },
+  data() {
     return {
       page: 1,
-     // people_around:[],
+      // people_around:[],
       options: {
         rewind: true,
         autoplay: true,
         perPage: 1,
-       
+
         pagination: false,
 
         type: "loop",
@@ -130,30 +128,31 @@ export default {
     people_around() {
       return this.$store.state.auth.peopleAround;
     },
-     activeAccount() {
-      return this.$store.getters['auth/profilConnected'];
-    }, 
+    activeAccount() {
+      return this.$store.getters["auth/profilConnected"];
+    },
   },
-  methods:{
-   cta_business(data) {
+  methods: {
+    cta_business(data) {
       console.log(data);
-      console.log("active accounts: ",this.activeAccount);
-      this.$store.commit('businessChat/setSelectedChat', data);
-      
-      let path = '';
-      if (this.activeAccount.user_type == 'business') {
-        path = '/business_owner/' + this.activeAccount.id;
-      } else if (this.activeAccount.user_type == 'network') {
-        path = '/';
-      } else path = '/messaging';
+      console.log("active accounts: ", this.activeAccount);
+      this.$store.commit("businessChat/setSelectedChat", data);
+
+      let path = "";
+      if (this.activeAccount.user_type == "business") {
+        path = "/business_owner/" + this.activeAccount.id;
+      } else if (this.activeAccount.user_type == "network") {
+        path = "/";
+      } else path = "/messaging";
 
       // this.$router.push({ path: `${path}`, query: { tabId: 1, msgTabId: 1 } });
-      this.$router.push({ path: `/business_owner/${this.activeAccount.id}`, query: { tabId: 1, msgTabId: 0 } });
-
+      this.$router.push({
+        path: `/business_owner/${this.activeAccount.id}`,
+        query: { tabId: 1, msgTabId: 0 },
+      });
     },
 
-
-       count(number) {
+    count(number) {
       if (number >= 1000000) {
         return number / 1000000 + "M";
       }
@@ -162,17 +161,14 @@ export default {
       } else return number;
     },
 
-
-
     async handleFollow(user) {
-      
       console.log("yoo ma gee");
-       document.getElementById("followbtn"+user.id).disabled = true;
+      document.getElementById("followbtn" + user.id).disabled = true;
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
         id: user.id,
-        type: 'user',
+        type: "user",
       };
 
       await axios
@@ -180,54 +176,39 @@ export default {
         .then(({ data }) => {
           console.log(data);
           user.is_follow = nextFollowState;
-           document.getElementById("followbtn"+user.id).disabled = false;
+          document.getElementById("followbtn" + user.id).disabled = false;
         })
-         
-          .catch((err) =>{  
-          
-          console.log({err:err})  ;
-           document.getElementById("followbtn"+user.id).disabled =  false;
-          
+
+        .catch((err) => {
+          console.log({ err: err });
+          document.getElementById("followbtn" + user.id).disabled = false;
         });
     },
 
-
-
-    
-  async  infiniteHandler($state) {
-   
-      let url = "people/around?page="+this.page;
+    async infiniteHandler($state) {
+      let url = "people/around?page=" + this.page;
 
       console.log(url);
 
-    await  axios.get(url)
+      await axios
+        .get(url)
         .then(({ data }) => {
+          console.log(data.data);
 
-               console.log(data.data);
-
-           if (data.data.length) {
-          
-           
+          if (data.data.length) {
             this.people_around.push(...data.data);
-               this.page += 1;
+            this.page += 1;
 
             $state.loaded();
           } else {
             $state.complete();
           }
-
-         
         })
         .catch((err) => {
           console.log({ err: err });
         });
     },
-
-
-
-
-
-  }
+  },
 };
 </script>
 
@@ -378,8 +359,8 @@ f-right {
   border-bottom-right-radius: 45px;
 
   background: white;
-padding-right: 2px;
-    padding-left: 6px;
+  padding-right: 2px;
+  padding-left: 6px;
   background-color: #fff;
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);

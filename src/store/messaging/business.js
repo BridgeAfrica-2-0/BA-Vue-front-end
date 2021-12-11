@@ -14,6 +14,7 @@ export default {
         bizs: [],
         chats: [],
         chatList: [],
+        groupMembers: [],
 
         type: 2,
         selectedChat: null,
@@ -75,6 +76,9 @@ export default {
         getProducts(state) {
             return state.products;
         },
+        getGroupMembers(state) {
+            return state.groupMembers;
+        },
 
         // sending loader value
         getLoader(state) {
@@ -114,6 +118,9 @@ export default {
         },
         setChatType(state, data) {
             state.type = data
+        },
+        setGroupMembers(state, data) {
+            state.groupMembers = data
         },
 
 
@@ -159,6 +166,25 @@ export default {
                     console.log(err);
                 })
         },
+        async GET_GROUP_MEMBERS({ commit, state }, data) {
+            commit("setLoader", true);
+            console.log("[DEBUG] user to user", data);
+
+            // await axios.get(`group/list/businesses/${state.currentBizId + keyword }`)
+            await axios.get(`group/list/members/${data}`)
+                .then((res) => {
+                    commit("setLoader", false);
+                    console.log("MEMBERS GROUPS: ", res.data.data);
+                    commit("setGroupMembers", res.data.data ? res.data.data : {
+                        data: []
+                    });
+                })
+                .catch((err) => {
+                    commit("setLoader", false);
+                    console.log(err);
+                })
+        },
+
 
         async GET_ALL({ commit, state }, data) {
             let keyword = data ? '/' + data : ''
@@ -618,7 +644,7 @@ export default {
                     console.log(err);
                 })
         },
-        async GET_BIZ_TO_GROUP({ commit, state }, data) {
+        async GET_BIZ_TO_GROUP({ commit, state, dispatch }, data) {
             commit("setLoader", true);
             console.log("[DEBUG]: ", data);
             let keyword = data.keyword ? '/' + data.keyword : ''
@@ -629,6 +655,8 @@ export default {
                     commit("setLoader", false);
                     console.log("Group: ", res.data.data);
                     commit("setChats", res.data.data);
+
+                    dispatch("GET_GROUP_MEMBERS", data.receiverID)
                 })
                 .catch((err) => {
                     commit("setLoader", false);

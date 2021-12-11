@@ -874,6 +874,7 @@ export default {
     this.editBusiness();
     this.categories();
     this.Country();
+    console.log("-----",this.businessInfo);
   },
 
   methods: {

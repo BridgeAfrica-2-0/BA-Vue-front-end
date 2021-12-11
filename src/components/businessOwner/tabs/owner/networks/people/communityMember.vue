@@ -31,14 +31,11 @@
         <b-row>
           <b-col>
             <b-button variant="primary" size="sm" class="">
-              +{{ $t('businessowner.Community') }}</b-button
+              +{{ $t("businessowner.Community") }}</b-button
             >
           </b-col>
           <b-col>
-            <b-button variant="outline-primary" size="sm">
-              <b-icon icon="chat-fill"></b-icon>
-              {{ $t('businessowner.Message') }}</b-button
-            >
+            <BtnCtaMessage :element="item" type="business" />
           </b-col>
         </b-row>
       </b-col>

@@ -1,147 +1,139 @@
 <template>
   <div>
-
-    
-
-        <div class="people-style shadow"   v-for="item in business" :key="item.id" >
-          <b-row>
-
-            <b-col md="8" xl="8" lg="12" cols="12" sm="8">
-              <div class="d-inline-flex">   
-              <div class="center-img ">
-                <splide :options="options" class="r-image">
-                  <splide-slide cl>
-                    <img :src="item.picture" class="r-image" />
-                  </splide-slide>
-                </splide>
-              </div>   <div class="pl-3 flx100"> 
+    <div class="people-style shadow" v-for="item in business" :key="item.id">
+      <b-row>
+        <b-col md="8" xl="8" lg="12" cols="12" sm="8">
+          <div class="d-inline-flex">
+            <div class="center-img">
+              <splide :options="options" class="r-image">
+                <splide-slide cl>
+                  <img :src="item.picture" class="r-image" />
+                </splide-slide>
+              </splide>
+            </div>
+            <div class="pl-3 flx100">
               <p class="textt">
-                <strong class="title"> <router-link    :to="'business/'+item.id">  {{ item.name }} </router-link> </strong> <br />
-               
-            <span v-for="cat in item.category" :key="cat.name">   {{cat.name}}  </span>
+                <strong class="title">
+                  <router-link :to="'business/' + item.id">
+                    {{ item.name }}
+                  </router-link>
+                </strong>
+                <br />
+
+                <span v-for="cat in item.category" :key="cat.name">
+                  {{ cat.name }}
+                </span>
                 <br />
                 {{ count(item.followers) }}
-                {{ $t('dashboard.Community') }} <br />
+                {{ $t("dashboard.Community") }} <br />
 
                 <span class="location">
-              <b-icon-geo-alt class="ico"></b-icon-geo-alt>  <span class="ml-2" v-for="nie in item.neigborhood"  :key="nie.id" >  {{nie.name}} </span>   
-            </span>
-                <br />
-       <read-more
-              more-str="read more"
-              class="readmore"
-              :text="item.about_business"
-              link="#"
-              less-str="read less"
-              :max-chars="100"
-            >
-            </read-more>
-              </p>
-               </div>
-               </div>
-            </b-col>     
-
-            <b-col lg="12" xl="4" md="4" cols="12" sm="4">
-              <div class="s-button">
-                <b-row>
-                  <b-col
-                    md="12"
-                    lg="4"
-                    xl="12"
-                    sm="12"
-                    cols="4"
-                    class="mt-2 text-center"
+                  <b-icon-geo-alt class="ico"></b-icon-geo-alt>
+                  <span
+                    class="ml-2"
+                    v-for="nie in item.neigborhood"
+                    :key="nie.id"
                   >
-                 
+                    {{ nie.name }}
+                  </span>
+                </span>
+                <br />
+                <read-more
+                  more-str="read more"
+                  class="readmore"
+                  :text="item.about_business"
+                  link="#"
+                  less-str="read less"
+                  :max-chars="100"
+                >
+                </read-more>
+              </p>
+            </div>
+          </div>
+        </b-col>
 
-
-                    
-
-
-                 
-                     
-                  <b-button
+        <b-col lg="12" xl="4" md="4" cols="12" sm="4">
+          <div class="s-button">
+            <b-row>
+              <b-col
+                md="12"
+                lg="4"
+                xl="12"
+                sm="12"
+                cols="4"
+                class="mt-2 text-center"
+              >
+                <b-button
                   block
                   size="sm"
                   :disabled="disable"
                   :class="item.is_follow !== 0 && 'u-btn'"
-                  :id="'followbtn'+item.id"
-                 
+                  :id="'followbtn' + item.id"
                   variant="primary"
                   @click="handleFollow(item)"
                 >
-                 
-                  <i class="fas fa-lg btn-icon"  :class="item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"></i>
-                  <span class="btn-com">  {{ $t('dashboard.Community') }}</span>
+                  <i
+                    class="fas fa-lg btn-icon"
+                    :class="
+                      item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'
+                    "
+                  ></i>
+                  <span class="btn-com"> {{ $t("dashboard.Community") }}</span>
                 </b-button>
+              </b-col>
 
+              <b-col
+                md="12"
+                lg="4"
+                xl="12"
+                sm="12"
+                cols="4"
+                class="mt-2 text-center"
+              >
+                <BtnCtaMessage :element="item" type="business" />
+              </b-col>
 
-
-
-
-
-
-
-
-
-                  </b-col>
-
-                  <b-col
-                    md="12"
-                    lg="4"
-                    xl="12"
-                    sm="12"
-                    cols="4"
-                    class="mt-2 text-center"
-                  >
-                    <b-button
-                      block
-                      size="sm"
-                      class="b-background shadow "
-                      variant="primary"
-                    >
-                      <i class="fas fa-envelope   fa-lg btn-icon "></i>
-                      <span class="btn-text">{{ $t('dashboard.Messages') }}</span>
-                    </b-button>
-                  </b-col>
-
-                  <b-col
-                    md="12"
-                    lg="4"
-                    xl="12"
-                    sm="12"
-                    cols="4"
-                    class="mt-2 text-center"
-                  >
-                    <b-button
-                      block
-                      size="sm"
-                      class="b-background shadow "
-                      variant="primary"
-                    >
-                      <i class="fas fa-map-marked-alt  fa-lg btn-icon "></i>
-                      <span class="btn-text">{{ $t('dashboard.Direction') }}</span>
-                    </b-button>
-                  </b-col>
-                </b-row>
-              </div>
-            </b-col>
-          </b-row>
-        </div>
-     <infinite-loading @infinite="infiniteHandler"></infinite-loading>
+              <b-col
+                md="12"
+                lg="4"
+                xl="12"
+                sm="12"
+                cols="4"
+                class="mt-2 text-center"
+              >
+                <b-button
+                  block
+                  size="sm"
+                  class="b-background shadow"
+                  variant="primary"
+                >
+                  <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
+                  <span class="btn-text">{{ $t("dashboard.Direction") }}</span>
+                </b-button>
+              </b-col>
+            </b-row>
+          </div>
+        </b-col>
+      </b-row>
+    </div>
+    <infinite-loading @infinite="infiniteHandler"></infinite-loading>
   </div>
 </template>
 
 <script>
-import axios from "axios";  
+import BtnCtaMessage from "@/components/messagesCTA/Btn-cta-message";
+
+import axios from "axios";
 export default {
   props: ["title", "image"],
-
+  components: {
+    BtnCtaMessage,
+  },
   data() {
     return {
-       page: 1,
-       isloading:false,
-       business:[],
+      page: 1,
+      isloading: false,
+      business: [],
       options: {
         rewind: true,
         autoplay: true,
@@ -149,17 +141,12 @@ export default {
         pagination: false,
 
         type: "loop",
-        perMove: 1
-      }
+        perMove: 1,
+      },
     };
   },
-  
-  
 
-  methods:{
-
-   
-
+  methods: {
     count(number) {
       if (number >= 1000000) {
         return number / 1000000 + "M";
@@ -169,72 +156,55 @@ export default {
       } else return number;
     },
 
+    async handleFollow(user) {
+      document.getElementById("followbtn" + user.id).disabled = true;
 
-    
-     async handleFollow(user) {
-
-      document.getElementById("followbtn"+user.id).disabled = true;
-       
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
         id: user.id,
-        type: 'business',
+        type: "business",
       };
 
       await axios
         .post(uri, data)
-        .then(response => {
-
+        .then((response) => {
           console.log(response);
           user.is_follow = nextFollowState;
-         document.getElementById("followbtn"+user.id).disabled = false;
-            
+          document.getElementById("followbtn" + user.id).disabled = false;
         })
-        .catch(err =>{  
-          
-          console.log({err:err})  ;
-           document.getElementById("followbtn"+user.id).disabled =  false;
-          
+        .catch((err) => {
+          console.log({ err: err });
+          document.getElementById("followbtn" + user.id).disabled = false;
         });
-         
     },
 
-    
     infiniteHandler($state) {
-     
       let url = "profile/hot/business/";
-  
-   
+
       axios
         .get(url + this.page)
         .then(({ data }) => {
+          if (data.data.length) {
+            this.page += 1;
 
-      if (data.data.length) {
-           this.page += 1;
-           
-              this.business.push(...data.data);
+            this.business.push(...data.data);
             $state.loaded();
           } else {
             $state.complete();
           }
-
-         
         })
         .catch((err) => {
           console.log({ err: err });
         });
     },
-  }
+  },
 };
 </script>
 
 <style scoped>
-
-
-
-.flx100{
-    flex-basis:80% !important;
+.flx100 {
+  flex-basis: 80% !important;
 }
 @media only screen and (min-width: 768px) {
   .btn-text {
@@ -321,8 +291,6 @@ export default {
 
     padding: 1px;
     text-align: left;
-
-    
 
     margin-right: -5px;
 
@@ -434,7 +402,7 @@ export default {
 
     border-bottom-right-radius: 5px;
 
-    background: white; 
+    background: white;
     height: 100%;
     background-color: #fff;
     background-clip: border-box;
@@ -458,7 +426,7 @@ export default {
     border-bottom-right-radius: 5px;
 
     background: white;
-   height: 100%;
+    height: 100%;
     background-color: #fff;
     background-clip: border-box;
     border: 1px solid rgba(0, 0, 0, 0.125);
@@ -488,8 +456,7 @@ export default {
 </style>
 
 <style >
-  .u-btn {
+.u-btn {
   filter: grayscale(0.6);
-  
 }
 </style>

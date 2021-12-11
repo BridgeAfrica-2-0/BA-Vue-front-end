@@ -156,7 +156,7 @@
           <hr />
           <b-row>
             <b-col>
-              <b-button variant="primary">Message</b-button>
+              <BtnCtaMessage :element="item" type="business" />
             </b-col>
             <b-col>
               <b-button variant="outline-dark" class="float-right"
@@ -316,10 +316,7 @@
                           </p>
                         </div>
                         <div class="col-md-12 pt-2 pl-0 mb-3">
-                          <i
-                            class="fa heart  fa-heart-o"
-                            aria-hidden="true"
-                          ></i>
+                          <i class="fa heart fa-heart-o" aria-hidden="true"></i>
                           23 &nbsp; &nbsp; &nbsp; <a href="#">Reply</a>
                         </div>
                       </div>

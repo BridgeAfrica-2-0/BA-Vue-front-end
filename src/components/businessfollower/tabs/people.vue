@@ -1,10 +1,18 @@
 <template>
   <div>
     <div class="s-cardd">
-      <div class="people-style border shadow" v-for="item in users" :key="item.id">
+      <div
+        class="people-style border shadow"
+        v-for="item in users"
+        :key="item.id"
+      >
         <b-row class="mb-1">
           <b-col md="3" cols="4" lg="3" class="my-auto">
-            <b-avatar class="p-avater" variant="primary" :src="item.profile_picture"></b-avatar>
+            <b-avatar
+              class="p-avater"
+              variant="primary"
+              :src="item.profile_picture"
+            ></b-avatar>
           </b-col>
 
           <b-col md="8" cols="8" lg="8">
@@ -19,8 +27,16 @@
                         </div>
                       </b-col>
 
-                      <b-col md="6" lg="6" cols="6" sm="6" class="mt-3 mt-lg-2 mt-xl-2">
-                        <h6 class="follower">{{ count(item.followers) }} Community</h6>
+                      <b-col
+                        md="6"
+                        lg="6"
+                        cols="6"
+                        sm="6"
+                        class="mt-3 mt-lg-2 mt-xl-2"
+                      >
+                        <h6 class="follower">
+                          {{ count(item.followers) }} Community
+                        </h6>
                       </b-col>
                     </b-row>
                   </div>
@@ -29,26 +45,38 @@
                 <b-col lg="12" xl="12" cols="12" sm="12" md="12">
                   <div class="e-name">
                     <b-row class="mt-lg-0">
-                      <b-col md="6" lg="6" cols="6" sm="6" xl="6" class="mt-2 mt-lg-2 mt-xl-2 btn-2 center">
-                        <b-button
-                          block
-                          variant="primary"
-                          size="sm"
-                          class="b-background flexx pobtn shadow mr-lg-3 mr-xl-3"
-                        >
-                          <i class="fas fa-envelope   fa-lg btn-icon "></i>
-                          <span class="btn-text">Message</span>
-                        </b-button>
+                      <b-col
+                        md="6"
+                        lg="6"
+                        cols="6"
+                        sm="6"
+                        xl="6"
+                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
+                      >
+                        <BtnCtaMessage :element="item" type="people" />
                       </b-col>
 
-                      <b-col md="6" lg="6" cols="6" sm="6" xl="6" class="mt-2 mt-lg-2 mt-xl-2 btn-2 center">
+                      <b-col
+                        md="6"
+                        lg="6"
+                        cols="6"
+                        sm="6"
+                        xl="6"
+                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
+                      >
                         <b-button
                           block
                           size="sm"
-                          class="b-background flexx pobtn shadow mr-lg-3 mr-xl-3"
+                          class="
+                            b-background
+                            flexx
+                            pobtn
+                            shadow
+                            mr-lg-3 mr-xl-3
+                          "
                           variant="primary"
                         >
-                          <i class="fas fa-user-plus  fa-lg btn-icon "></i>
+                          <i class="fas fa-user-plus fa-lg btn-icon"></i>
                           <span class="btn-com">Community</span>
                         </b-button>
                       </b-col>
@@ -67,10 +95,10 @@
 </template>
 
 <script>
-import moment from 'moment';
-import axios from 'axios';
+import moment from "moment";
+import axios from "axios";
 export default {
-  props: ['type'],
+  props: ["type"],
   data() {
     return {
       page: 1,
@@ -80,7 +108,7 @@ export default {
         perPage: 1,
         pagination: false,
 
-        type: 'loop',
+        type: "loop",
         perMove: 1,
       },
     };
@@ -88,7 +116,7 @@ export default {
 
   computed: {
     users() {
-      if (this.type == 'Follower') {
+      if (this.type == "Follower") {
         return this.$store.state.profile.UcommunityFollower.user_followers;
       } else {
         return this.$store.state.profile.UcommunityFollowing.user_following;
@@ -99,26 +127,26 @@ export default {
   methods: {
     count(number) {
       if (number >= 1000000) {
-        return number / 1000000 + 'M';
+        return number / 1000000 + "M";
       }
       if (number >= 1000) {
-        return number / 1000 + 'K';
+        return number / 1000 + "K";
       } else return number;
     },
 
     infiniteHandler($state) {
-      console.log('hahahahahahahah');
+      console.log("hahahahahahahah");
       let url = null;
 
-      if (this.type == 'Follower') {
-        url = 'profile/user/follower/';
+      if (this.type == "Follower") {
+        url = "profile/user/follower/";
       } else {
-        url = 'profile/user/following/';
+        url = "profile/user/following/";
       }
       axios
         .get(url + this.page)
         .then(({ data }) => {
-          if (this.type == 'Follower') {
+          if (this.type == "Follower") {
             if (data.data.user_followers.length) {
               this.page += 1;
 
@@ -140,7 +168,7 @@ export default {
 
           console.log(data);
         })
-        .catch(err => {
+        .catch((err) => {
           console.log({ err: err });
         });
     },

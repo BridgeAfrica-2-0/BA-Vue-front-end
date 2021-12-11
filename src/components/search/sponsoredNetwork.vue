@@ -3,7 +3,7 @@
     <div class="people-style border shadow">
       <b-row>
         <b-col cols="6">
-          <div style="height: 100%;">
+          <div style="height: 100%">
             <img
               src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
               width="100%"
@@ -14,11 +14,11 @@
         </b-col>
         <b-col>
           <p class="text">
-            <strong> {{$t("search.Shipping_Network")}} </strong> <br />
+            <strong> {{ $t("search.Shipping_Network") }} </strong> <br />
             <br />
-            {{$t("search.Public")}} <br />
-            {{$t("search.20k_Members")}} <br />
-            {{$t("search.Business_Name")}} <br />
+            {{ $t("search.Public") }} <br />
+            {{ $t("search.20k_Members") }} <br />
+            {{ $t("search.Business_Name") }} <br />
           </p>
         </b-col>
       </b-row>
@@ -26,14 +26,13 @@
       <b-row>
         <b-col cols="4">
           <b-button block size="sm" class="b-background" variant="primary">
-            <b-icon class="ico" icon="plus-circle"> </b-icon> {{$t("search.Community")}}
+            <b-icon class="ico" icon="plus-circle"> </b-icon>
+            {{ $t("search.Community") }}
           </b-button>
         </b-col>
 
         <b-col cols="4">
-          <b-button block size="sm" class="b-background" variant="primary">
-            <b-icon class="ico" icon="chat"> </b-icon> {{$t("search.Message")}}
-          </b-button>
+          <BtnCtaMessage :element="item" type="network" />
         </b-col>
 
         <b-col cols="4"> </b-col>
@@ -44,7 +43,7 @@
 
 <script>
 export default {
-  props: ["title", "image"]
+  props: ["title", "image"],
 };
 </script>
 

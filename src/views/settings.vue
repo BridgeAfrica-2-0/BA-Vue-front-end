@@ -273,7 +273,7 @@
 
               <b-tab :title="`${$t('settings.payment')}`">
                 <b-card-text class="mt-3 text cent">
-                  <h3 class="username">{{ $t('settings.chose_payment_method') }}</h3>
+                  <h1 class="username">{{ $t('settings.chose_payment_method') }}</h1>
 
                   <!-- <b-form-group class="mb-0" v-slot="{ ariaDescribedby }">
                     <b-form-radio-group
@@ -291,9 +291,9 @@
                     ></b-form-radio-group>
                   </b-form-group> -->
                   <b-form-group label="select one" v-slot="{ ariaDescribedby }"> 
-                    <b-form-radio v-model="selected" :aria-describedby="ariaDescribedby" name="some-radios" value="MTN">MTN Mobile Money</b-form-radio>
+                    <b-form-radio v-model="selected" :aria-describedby="ariaDescribedby" name="some-radios" value="MTN" class="my-2">MTN Mobile Money</b-form-radio>
                     <b-form-radio v-model="selected" :aria-describedby="ariaDescribedby" name="some-radios" value="ORANGE">Orange Money</b-form-radio>
-                   <button class=" btn btn-primary" @click="changePayment">update</button>
+                   <button class=" btn btn-primary my-4" @click="changePayment">Update</button>
                   
                   </b-form-group>
                 </b-card-text>

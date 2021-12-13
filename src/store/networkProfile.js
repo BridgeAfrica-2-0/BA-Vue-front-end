@@ -16,7 +16,8 @@ export default {
     albumImages: [],
 
     ownerPost: [],
-    ownerPostImages: []
+    ownerPostImages: [],
+    selected:0
   },
 
 
@@ -50,6 +51,9 @@ export default {
     }
   },
   mutations: {
+    setSelected(state, val){
+      state.selected = val;
+    },
     setnetworkInfo(state, networkInfo) {
       state.networkInfo = networkInfo;
     },
@@ -123,6 +127,9 @@ export default {
 
   actions: {
 
+    Selected({commit}){
+        commit('setSelected', 4)
+    },
 
     updateNetwork( {commit}, networkData ){
       console.log("networkData.path",networkData.path);

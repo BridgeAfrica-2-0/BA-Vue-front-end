@@ -12,7 +12,7 @@
         <span class="float-right" style="margin-right: -10px" v-if="'dashboard' !== $route.name ? isEditMode :false">
           <b-dropdown size="sm" variant="outline primary " class="primary">
             <template class="more" #button-content> </template>
-            <b-dropdown-item @click.prevent="toggle"> {{ $t("businessowner.Edit") }} </b-dropdown-item>
+            <b-dropdown-item @click.prevent="() => {reply = false; toggle()}"> {{ $t("businessowner.Edit") }} </b-dropdown-item>
             <b-dropdown-item @click.prevent="onDelete">{{ $t("businessowner.Delete") }}</b-dropdown-item>
           </b-dropdown>
         </span>
@@ -37,18 +37,19 @@
       </div>
 
       <!-- Edit message -->
-      <p
+      <div
         class="p-0 m-0 pl-3 msg text inline-comment"
         style="
           background: transparent;
           border: 1px solid transparent;
           width: 100%;
+          position:relative
         "
         v-if="proccesEdit"
       >
         <textarea-autosize
           placeholder="Edit a Comment"
-          class="comment"
+          class="comment py-2 pr-5 pl-3"
           type="text"
           style="background: transparent"
           v-model="updateCommentText"
@@ -56,7 +57,8 @@
         />
         
         <b-spinner
-          style="color: rgb(231, 92, 24); position: absolute; right: 17px"
+          style="color: rgb(231, 92, 24);"
+          class="send-cmt"
           v-if="replyLoading"
         ></b-spinner>
         <fas-icon
@@ -65,7 +67,7 @@
           @click="onProcess"
           v-if="updateCommentText.trim().length >= 1 && !replyLoading"
         />
-      </p>
+      </div>
 
       <p class="fs-12" v-if="proccesEdit">
         <a href="#" @click.prevent="toggle">Cancel</a>
@@ -109,12 +111,13 @@
           <b-col cols="11">
             <textarea-autosize
               placeholder="Reply comment"
-              class="comment"
+              class="comment py-2 pr-5 pl-3"
               type="text"
               @keypress.enter="onReply"
               v-model="text"
             />
             <b-spinner
+              class="send-cmt"
               style="color: rgb(231, 92, 24); position: absolute; right: 17px"
               v-if="loading"
             ></b-spinner>
@@ -125,7 +128,7 @@
               v-if="text.trim().length > 2 && !loading"
             />
           </b-col>
-          <b-col cols="12" class="mt-4 ml-3 mr-3">
+          <b-col cols="12" class="mt-1 ml-3 mr-3">
             <Reply
               v-for="obj in comments"
               :key="obj.updated_at"
@@ -366,17 +369,16 @@ export default {
 .comment:focus {
   outline: none;
 }
+
 .send-cmt {
-  position: relative;
-  margin-left: 95%;
-  top: -28px;
+  position: absolute;
+  top: 14px;
+  right: 19px;
   cursor: pointer;
 }
-@media only screen and (max-width: 768px) {
-  .send-cmt {
-    margin-left: 88%;
-  }
 
+@media only screen and (max-width: 768px) {
+  
   .avat-comment {
     width: 40px;
     height: 40px;

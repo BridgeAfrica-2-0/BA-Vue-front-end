@@ -174,17 +174,18 @@
         ></b-avatar>
       </div>
 
-      <div class="p-0 m-0 pr-3 inline-comment">
+      <div class="p-0 m-0 pr-3 inline-comment" style="position: relative;">
         <textarea-autosize
           :placeholder="$t('businessowner.Post_a_Comment')"
           v-model="comment"
-          class="comment"
+          class="comment py-2 pr-5 pl-3"
           :min-height="30"
           :max-height="350"
           @keypress.enter="onCreateComment"
         />
         <b-spinner
-          style="color: rgb(231, 92, 24); position: absolute; right: 17px"
+          style="color: rgb(231, 92, 24);"
+          class="send-cmt"
           v-if="createCommentRequestIsActive"
         ></b-spinner>
         <fas-icon
@@ -618,12 +619,7 @@ export default {
     width: 64px;
     height: 64px;
   }
-  .send-cmt {
-    position: relative;
-    margin-left: 95%;
-    top: -28px;
-    cursor: pointer;
-  }
+  
   .post-btn {
     border: none !important;
     margin-right: 50px;
@@ -642,6 +638,14 @@ export default {
     height: 40px;
   }
 }
+
+.send-cmt {
+  position: absolute;
+  top: 14px;
+  right: 19px;
+  cursor: pointer;
+}
+
 @media (max-width: 762px) {
   .commentt[data-v-41fcb621] {
     width: 98%;
@@ -657,12 +661,7 @@ export default {
     border: none !important;
     margin-right: 0px;
   }
-  .send-cmt {
-    position: relative;
-    margin-left: 90%;
-    top: -28px;
-    cursor: pointer;
-  }
+  
   .avat {
     width: 40px;
     height: 40px;

@@ -47,6 +47,7 @@ import profileSettingsEdit from "./profileSettingsEdit";
 import cart from "./cart"
 
 import { social } from './social';
+import networkSetting from './networkSetting';
 
 
 Vue.use(Vuex);
@@ -97,7 +98,8 @@ export default new Vuex.Store({
         homeRedirection,
         profileOrderDetail,
         profileSettingsEdit,
-        cart
+        cart,
+        networkSetting
 
     }
 })

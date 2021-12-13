@@ -1,6 +1,6 @@
 <template>
   <header class="">
-    <nav class="navbar navbar-expand-xl p-3 mb-3 rounded">
+    <nav class="navbar navbar-expand-xl p-3 mb-3 rounded" v-if="user">
       <div class="container-fluid">
         <div class="col-md-12 col-lg-2 col-xl-2 text-center">
           <span class="d-block d-lg-none">
@@ -325,7 +325,7 @@
                   title=""
                 >
                 </a>
-                <b-popover target="other-menu" triggers="click" placement="top">
+                <b-popover target="other-menu" triggers="hover" placement="top">
                   <div class="popover-body">
                     <div
                       style="width:100%"
@@ -921,7 +921,7 @@ export default {
     },
 
     init() {
-      try {
+      try { 
         if (!this.hasLauchNetworkRequest) {
           this.getNetworks();
           this.getBusiness();

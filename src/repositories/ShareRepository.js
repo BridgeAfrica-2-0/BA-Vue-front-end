@@ -33,6 +33,23 @@ class Repository {
     }
   }
 
+  async showNetworkAndBussiness() {
+    try {
+      const response = await axios.get(`share/destination`)
+      return {
+        success: true,
+        data: response.data.data
+      }
+
+    } catch (error) {
+      return {
+        success: false,
+        data: error
+      }
+    }
+  }
+
+
   async getNetworks() {
     try {
       const response = await axios.get(`profile/networks/user`)

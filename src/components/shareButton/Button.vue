@@ -441,7 +441,7 @@ export default {
         ? isYourOwn && this.$route.name == "dashboard"
           ? false
           : true
-        : false;
+        : true;
     },
 
     isNetwork() {

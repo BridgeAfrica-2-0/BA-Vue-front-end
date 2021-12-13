@@ -6,9 +6,9 @@
         <b-col cols="3" md="1" class="m-md-0 p-md-0">
           <b-avatar
             variant="primary"
-            square
+            :square =" 'user' === profile.user_type ? false : true"
             class="img-fluid avat-comment"
-            :src="auth.profile_picture"
+            :src="profile.profile_picture"
           ></b-avatar>
         </b-col>
         <b-col cols="9" md="11" class="p-0 m-0 pr-3">
@@ -39,7 +39,7 @@
                 class="post-btn"
               >
                 <fas-icon class="icons" :icon="['fas', 'photo-video']" size="lg" />
-                <span class="username"> {{ $t('businessowner.Photo_Video') }}</span>
+                <span class="username">{{ $t('businessowner.Photo_Video') }}</span>
               </b-button>
             </b-col>
             <!-- Attach File-->

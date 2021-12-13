@@ -27,7 +27,6 @@
 
             <span class="price">
               <strong> {{ product.price }} </strong>
-              <strong> {{ Math.random() }} </strong>
             </span>
             <br />
           </p>
@@ -43,7 +42,7 @@
             <b-icon @click="showEdit" icon="three-dots-vertical"></b-icon>
             </template>
             <b-dropdown-item-button v-b-modal="`modal-${product.id}`">Edit</b-dropdown-item-button>
-            <b-dropdown-item-button>Delete</b-dropdown-item-button>
+            <b-dropdown-item-button v-b-modal="`modal-D${product.id}`">Delete</b-dropdown-item-button>
           </b-dropdown>
         </b-col>
       </b-row>
@@ -94,10 +93,9 @@
             <div class="image-upload-wrap" @click="picImage" style="display: flex; justify-content: center; align-items: center; overflow: hidden">
               <input
                 type="file"
-                name=""
                 @change="getImage"
                 accept="image/*"
-                id="image"
+                id="Mimage"
                 v-show="false"
                 required
               />
@@ -267,12 +265,29 @@
         </div>
 
         <b-alert v-if="success" :variant="val" show> {{ msg }} </b-alert>
-        <b-button @click="addProduct" class="mt-2 btn-block" variant="primary">
+        <b-button @click="editProduct(product)" class="mt-2 btn-block" variant="primary">
           <b-spinner small v-if="load" variant="white"></b-spinner>
           {{ $t('businessowner.Add') }}
         </b-button>
       </b-form>
     </b-modal>
+
+    <!-- modal delete -->
+    <b-modal :id="`modal-D${product.id}`" centered hide-footer title="Edit product">
+      <template #modal-title>
+        <span>WARNING!!!</span>
+      </template>
+      <div class="d-block text-center">
+        <h3>Sure To Delete: {{product.name}}!!</h3>
+      </div>
+      <b-row>
+        <b-col>
+          <b-button class="mt-3" block variant="primary" @click="deleteProduct(product)">Delete</b-button>
+        </b-col>
+      </b-row>
+      <!-- <b-button class="mt-3" block @click="$bvModal.hide('bv-modal-example')">Delete</b-button> -->
+    </b-modal>
+
     <!-- PRODUCT DETAILS MODAL -->
     <ProductDetails  @closemodal="closeDetailsProduct" :showModal="viewProduct" :product="product"/>
   </div>
@@ -344,6 +359,65 @@ export default {
       let file = e.target.files[0] || e.dataTransfer.files;
       this.selectedImagePrv = URL.createObjectURL(file);
       console.log("this.selectedImagePrv", this.selectedImagePrv);
+    },
+    editProduct(Product) {
+      console.log("editProduct");
+      console.log(Product);
+      formData = new FormData();
+      formData.append("name", Product.name);
+      formData.append("description", Product.description);
+      formData.append("price", Product.price);
+      formData.append("on_discount", Product.on_discount);
+      formData.append("condition", Product.condition);
+      formData.append("is_service", Product.is_service);
+      formData.append("in_stock", Product.in_stock);
+      formData.append("tax_amount", Product.tax_amount);
+      formData.append("kg", Product.kg);
+      formData.append("categories", Product.categories);
+      formData.append("subcategories", Product.subcategories);
+      formData.append("filters", Product.filters);
+      formData.append("picture", Product.picture);
+      this.$store
+        .dispatch("market/UpdateProduct", {
+          path: "update/"+this.url,
+          formData: formData,
+        })
+        .then(({ data }) => {
+          console.log(data);
+          this.flashMessage.show({
+            status: "success",
+            message: "Changes Made Successfuly"
+          });  
+        })
+        .catch(err => {
+          console.log({ err: err });
+          this.flashMessage.show({
+            status: "error",
+            message: "Unable To Make Changes"
+          });
+        });
+    },
+    deleteProduct(Product) {
+      console.log("deleteProduct");
+      console.log(Product);
+      this.$store
+        .dispatch("market/DeleteProduct", {
+          path: "market/"+this.url,
+        })
+        .then(({ data }) => {
+          console.log(data);
+          this.flashMessage.show({
+            status: "success",
+            message: "Product Deleted Successfuly"
+          });  
+        })
+        .catch(err => {
+          console.log({ err: err });
+          this.flashMessage.show({
+            status: "error",
+            message: "Unable To Delete Product"
+          });
+        });
     },
     
     categories(){

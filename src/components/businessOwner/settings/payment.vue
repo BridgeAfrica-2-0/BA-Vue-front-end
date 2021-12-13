@@ -163,7 +163,7 @@ export default {
   },
 
   mounted(){
-    this.url = this.$route.params.id;
+    this.url = this.$route.params.id !== undefined ? this.$route.params.id : this.$router.push('notFound');
     this.DefaultPayment();
   },
 
@@ -184,7 +184,7 @@ export default {
       console.log("defaultPayment");
       this.$store
       .dispatch("businessAccountType/getDefaultPayment", {
-        path: `${this.url}/settings/get-payement-method`
+        path: `get-payement-method/${this.url}`
         })
       .then(() => {
         this.PaymentForm.operator = this.defaultPayment.payement_method;

@@ -174,9 +174,7 @@
 					<b-spinner v-if="loading" small variant="light"></b-spinner>
 					{{$t("general.Save")}}</b-button
 				>
-				<b-button class="btn-custom" type="reset" variant="success"
-					>{{$t("general.Cancel")}}</b-button
-				>
+
 			</div>
 		</b-form>
 	</div>

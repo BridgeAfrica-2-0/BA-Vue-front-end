@@ -92,14 +92,26 @@
                 type="search"
                 data-toggle="popover"
                 class="form-control search-h"
-                style=""
-                :placeholder="credentials.placeholder"
-                v-model="credentials.keyword"
+
+                style="font-size: 17px !important"
+                :placeholder="searchOptions.placeholder"
+                v-model="searchOptions.keyword"
+
                 aria-label=""
                 data-original-title=""
                 title=""
               />
 
+
+              <vue-bootstrap-typeahead
+                v-model="query"
+                :data="neigbourhoods"
+                minMatchingChars="0"
+                maxMatches="10"
+                :serializer="(item) => item.name"
+                placeholder="Where"
+                class="search-hh w-44"
+              />
 
 
            <vue-bootstrap-typeahead
@@ -318,9 +330,8 @@
                       'user' == user.user_type ? 'rounded-circle' : ''
                     } logo-sizee`"
                     alt=""
-                    width="50"
-                    height="50"
-                /></span>
+
+                /></router-link>
               </div>
 
               <b-tooltip target="profilepic" variant="light" triggers="hover">
@@ -351,7 +362,24 @@
                       <Activity />
                     </div>
 
-                    <hr />
+
+                    <a
+                      v-if="'user' != user.user_type"
+                      @click.prevent="switchToProfile"
+                      href="#"
+                      class="
+                        other-menu
+                        suggest-item
+                        cursor-pointer
+                        text-decoration-none text-dark
+                      "
+                    >
+                      <span class="mr-2"
+                        ><fas-icon class="violet search"
+                      /></span>
+                      Profile
+                    </a>
+                    <hr class="h-divider" />
 
                     <router-link
                       :to="{ name: 'orders' }"
@@ -645,10 +673,13 @@ export default {
       hasNewMessage: "notification/HAS_MESSAGE",
       user: "auth/profilConnected",
       auth: "auth/user",
+      neigbourhoods: "auth/neigbourhoods",
     }),
   },
   beforeMount() {
     console.log("beforeMount");
+
+    this.getLocation();
   },
   created() {
     console.log("created");
@@ -668,7 +699,10 @@ export default {
 
     this.redirectionPatterns = {
       message: {
-        user: () => null,
+
+        user: () => () => ({
+          name: "messaging",
+        }),
         business: () => ({
           name: "BusinessOwner",
           params: { id: this.user.id },
@@ -682,9 +716,15 @@ export default {
           params: { id: this.user.id },
           query: { tabId: 2 },
         }),
-        user: () => null,
-        network: () => null,
 
+        user: () => ({
+          name: "settings",
+        }),
+        network: () => ({
+          name: "networks",
+          params: { id: this.user.id },
+          query: { tabId: 2 },
+        }),
       },
     };
 
@@ -696,12 +736,12 @@ export default {
       this.updateNotificationEvent();
     },
 
-     query(newQuery) {
-      axios.get(`neighborhood/${newQuery}`)
-        .then((res) => {
-          this.users = res.data.items
-        })
-    }
+
+    query(newQuery) {
+      axios.get(`neighborhood/${newQuery}`).then(({ data }) => {
+        this.$store.commit("auth/setneigbourhoods", data.data);
+      });
+    },
 
   },
 
@@ -718,6 +758,11 @@ export default {
       setNetworks: "social/FIND_USER_NETWORK",
       setBusiness: "social/FIND_USER_BUSNESS",
       lauchNetworkRequest: "social/INIT",
+
+      getGeo: "business/getGeo",
+
+      getNeigbourhoods: "auth/neigbourhoods",
+
       Logout: "auth/logout",
     }),
 
@@ -725,7 +770,25 @@ export default {
       profile: "auth/profilConnected",
     }),
 
-    
+
+    getLocation() {
+      const success = (position) => {
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
+
+        this.getGeo({ lat: latitude, lng: longitude });
+
+        //time to get some neighbourhood mother fuckers ?lat=3.87374300&lng=11.49966000
+        this.getNeigbourhoods({ lat: "", lng: "" });
+      };
+
+      const error = (err) => {
+        console.log(error);
+      };
+
+      // This will open permission popup
+      navigator.geolocation.getCurrentPosition(success, error);
+    },
 
 
     updateNotificationEvent() {
@@ -902,11 +965,20 @@ export default {
   },
 };
 </script>
+<style>
+.vbst-item:hover {
+  color: white !important;
+}
+</style>
 
 <style scoped>
+.w-44 {
+  width: 44%;
+}
+
 .logo-sizee {
-  width: 50px !important;
-  height: 50px !important;
+  width: 40px !important;
+  height: 40px !important;
   object-fit: cover;
 }
 .hov:hover {

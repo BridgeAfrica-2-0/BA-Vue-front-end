@@ -316,11 +316,13 @@
                           </p>
                         </div>
                         <div class="col-md-12 pt-2 pl-0 mb-3">
+
                           <i
                             class="fa heart  fa-heart-o"
                             aria-hidden="true"
                           ></i>
                           23 &nbsp; &nbsp; &nbsp; <a href="#">{{$t("general.Reply")}}</a>
+
                         </div>
                       </div>
                     </li>

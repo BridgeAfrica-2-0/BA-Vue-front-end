@@ -49,9 +49,16 @@
 							<b-td>
 								Shipping:
 							</b-td>
-							<b-th>
+							<b-th >
 								<!-- {{ formatMoney(Number(cart.shipping_amount)) }} -->
-								{{ formatMoney(Number(1000)) }}
+								<div class="row">
+									<h5 v-for="i in cart_item.shipping_cost" :key="i"
+									class=" cursor"
+									v-b-tooltip.hover.top="shippingCost(i).adress"
+									>
+									{{  shippingCost(i).price }}XAF ,
+									</h5>
+								</div>
 							</b-th>
 						</b-tr>
 						<b-tr>
@@ -59,11 +66,21 @@
 								Total:
 							</b-td>
 							<b-th>
-								{{
+								<div class="row">
+									<h5 v-for="i in cart_item.shipping_cost" :key="i"
+									class=" cursor"
+									
+									>
+									{{
+										Number(cart_item.product_price) * cart_item.quantity 
+									+ parseInt(shippingCost(i).price) }}XAF ,
+									</h5>
+								</div>
+								<!-- {{
 									formatMoney(
 										Number(cart_item.product_price) * cart_item.quantity + 1000
 									)
-								}}
+								}} -->
 								<!-- {{
 									formatMoney(
 										Number(cart_item.amount) * cart_item.quantity +
@@ -128,6 +145,22 @@
 				});
 		},
 		methods: {
+
+			shippingCost(item){
+				let data ={};
+				
+					for (let val in item) {
+					// console.log(key + " -- " + value);
+					data = {
+						adress: val,
+						price: item[val]
+					
+					}
+				};
+			
+				 return data 
+			},
+
 			changeQuantity(event, index) {
 				let quantity = event.target.value;
 				if (quantity < 1) {
@@ -175,6 +208,8 @@
 			};
 		},
 		computed: {
+
+			
 			rowsOrder() {
 				let rows = 1;
 				if (this.cart["data"]) {

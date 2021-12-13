@@ -1,5 +1,5 @@
 <template>
-  <div class="accordion" role="tablist">
+  <div class="accordion" role="tablist" >
     <b-card
       class="mb-1"
       style="width: 100%"

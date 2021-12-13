@@ -325,18 +325,18 @@
                   title=""
                 >
                 </a>
-                <b-popover target="other-menu" triggers="hover" placement="top">
+                <b-popover target="other-menu" triggers="click" placement="top">
                   <div class="popover-body">
                     <div
+                      style="width:100%"
                       class="
                         d-inline-flex
                         flex-row
                         align-items-center
                         mb-1
-                        w-full
                       "
                     >
-                      <Activity />
+                      <Activity class="w-full" />
                     </div>
                     <hr class="h-divider" v-if="'user' != user.user_type" />
 
@@ -504,27 +504,29 @@
               My orders
             </router-link>
             <hr class="h-divider" />
-
-            <router-link
-              :to="{ name: 'settings' }"
-              class="
-                other-menu
-                suggest-item
-                cursor-pointer
-                text-decoration-none text-dark
-              "
-            >
-              <span class="mr-2"
-                ><fas-icon class="violet search" :icon="['fas', 'cogs']"
-              /></span>
-
-              Account Settings
-            </router-link>
+            <div class="other-menu suggest-item cursor-pointer">
+              <router-link
+                :to="{ name: 'settings' }"
+                class="
+                  other-menu
+                  suggest-item
+                  cursor-pointer
+                  text-decoration-none text-dark
+                "
+              >
+                <span class="mr-2"
+                  ><fas-icon class="violet search" :icon="['fas', 'cogs']"
+                /></span>
+                <span>Account Settings</span>
+                
+              </router-link>
+            </div>
             <hr class="h-divider" />
             <div class="other-menu suggest-item cursor-pointer">
               <span class="mr-1"
                 ><fas-icon class="violet search" :icon="['fas', 'question']"
               /></span>
+
               Help and Support
             </div>
             <hr class="h-divider" />

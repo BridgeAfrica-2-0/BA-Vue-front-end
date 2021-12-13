@@ -8,7 +8,7 @@
             variant="primary"
             square
             class="img-fluid avat-comment"
-            :src="business_intro.logo_path"
+            :src="auth.profile_picture"
           ></b-avatar>
         </b-col>
         <b-col cols="9" md="11" class="p-0 m-0 pr-3">

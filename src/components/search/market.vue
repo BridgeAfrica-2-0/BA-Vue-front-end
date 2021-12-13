@@ -455,7 +455,6 @@ export default {
   },
   computed: {
     products() {
-      console.log("PRoducts ".this.$store.getters["marketSearch/getProducts"]);
       return this.$store.getters["marketSearch/getProducts"];
     },
     prodLoader() {
@@ -495,6 +494,7 @@ export default {
     async getProducts() {
       // this.prodLoader = true;
       console.log("loader: ", this.prodLoader);
+      console.log("PRoducts ".this.$store.getters["marketSearch/getProducts"]);
 
       await this.$store
         .dispatch("marketSearch/getProducts")

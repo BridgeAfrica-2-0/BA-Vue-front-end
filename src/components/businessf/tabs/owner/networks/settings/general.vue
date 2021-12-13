@@ -109,26 +109,26 @@ export default {
       networkId: "",
       options: [
         {
-          text: "Admin Only",
+          text: $t("network.Admin_Only"),
           value: "Admin only",
         },
         {
-          text: "Editor",
+          text: $t("network.Editor"),
           value: "Allow editor to post",
         },
         {
-          text: "Member",
+          text: $t("network.Member"),
           value: "Allow member to post",
         },
       ],
       lists: [
         {
-          text: "Approval by admin",
+          text: $t("network.Approval_by_admin"),
           value: "Admin",
           disabled: false,
         },
         {
-          text: "Approval by editor and admin",
+          text: $t("network.Approval_by_editor_and_admin"),
           value: "Admin and editor",
           disabled: false,
         },

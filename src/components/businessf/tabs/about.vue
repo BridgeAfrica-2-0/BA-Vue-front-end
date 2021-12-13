@@ -1,15 +1,19 @@
 <template>
   <div>
-    <div>
-      <iframe
-        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d48389.732999183005!2d-74.006227!3d40.710128!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown%20Conference%20Center!5e0!3m2!1sen!2sbg!4v1612237569797!5m2!1sen!2sbg"
-        height="450"
-        frameborder="0"
-        class="map mt-1"
-        allowfullscreen=""
-        aria-hidden="false"
-        tabindex="0"
-      ></iframe>
+    <div class="mb-3" v-if="hasLoad">
+      <mapbox :coordinates="[business_about.lng, business_about.lat]" />
+      <!-- <MglMap
+        :accessToken="accessToken"
+        :mapStyle.sync="mapStyle"
+        :center="[business_about.lng, business_about.lat]"
+        :zoom="zoom"
+        style="width: 100%; height: 450px"
+      >
+        <MglMarker
+          :coordinates="[business_about.lng, business_about.lat]"
+          color="red"
+        />
+      </MglMap> -->
     </div>
     <b-row ref="about" v-if="hasLoad">
       <b-col>
@@ -83,11 +87,19 @@
     </b-row>
   </div>
 </template>
-
 <script>
+import { MglMap, MglMarker } from "vue-mapbox";
+import mapbox from "@/components/mapbox";
 export default {
+  components: {
+    mapbox,
+  },
   data() {
     return {
+      accessToken: process.env.VUE_APP_MAPBOX_TOKEN,
+      mapStyle: "mapbox://styles/mapbox/streets-v11",
+      coordinates: [11.504929555178624, 3.8465173382452815], // Lng,Lat
+      zoom: 12,
       business_id: null,
       business_about: [],
       hasLoad: false,
@@ -208,7 +220,7 @@ export default {
       this.openNow = day;
     },
 
-    nFormatter: function (num) {
+    nFormatter: function(num) {
       if (num >= 1000000000) {
         return (num / 1000000000).toFixed(1).replace(/\.0$/, "") + "G";
       }
@@ -225,6 +237,7 @@ export default {
 </script>
 
 <style scoped>
+@import url("https://api.tiles.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css");
 .map {
   border: 0;
   width: 100%;

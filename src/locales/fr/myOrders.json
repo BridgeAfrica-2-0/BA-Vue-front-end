@@ -15,5 +15,10 @@
     "Total":"Total",
     "Re_order":"Commander à nouveau",
     "In_Progress":"En cours",
-    "Cancel":"Annuler"
+    "Cancel":"Annuler",
+    "Completed":"Complété",
+    "Reorder":"Commande à nouveau",
+    "pending":"En cours",
+    "complete":"Compléter",
+    "cancel":"Annuler"
 }

@@ -14,7 +14,7 @@
         <div class="marker" slot="marker">
           <div>B{{ key + 1 }}</div>
         </div>
-        <MglPopup :coordinates="[business.lng, business.lat]" anchor="top">
+        <MglPopup :coordinates="[business.lng, business.lat]">
           <div class="py-4">
             <div
               class="d-flex justify-content-center flex-column pointer"

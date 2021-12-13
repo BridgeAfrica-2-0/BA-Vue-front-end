@@ -391,6 +391,7 @@
         <div class="b-bottom">
           <b-container>
             <b-form-group
+        
               label-cols-lg="3"
               :label="$t('businessowner.Neighbourhood')"
               label-size="md"

@@ -4,12 +4,13 @@
       <b-container class="bv-example-row">
         <b-form>
         
-
+{{ $t('businessowner.') }}
+ $t('businessowner.')
           <div class="b-bottom">
             <b-container>
               <b-form-group
                 label-cols-lg="3"
-                label="Business Name"
+                :label="$t('businessowner.Business_Name')"
                 label-size="md"
                 label-class="font-weight-bold pt-0 username"
                 class="mb-0"
@@ -23,7 +24,7 @@
             <b-container>
               <b-form-group
                 label-cols-lg="3"
-                label="Category"
+                :label="$t('businessowner.Category')"
                 label-size="md"
                 label-class="font-weight-bold pt-0 username"
                 class="mb-0"
@@ -44,7 +45,7 @@
             <b-container>
               <b-form-group
                 label-cols-lg="3"
-                label="Search Keywords"
+                :label="$t('businessowner.Search_Keywords')"
                 label-size="md"
                 label-class="font-weight-bold pt-0 username"
                 class="mb-0"
@@ -52,7 +53,7 @@
                 <b-form-textarea
                   id="textarea"
                   v-model="text"
-                  placeholder="Enter something..."
+                  :placeholder="$t('businessowner.Enter_something')"
                   rows="3"
                   max-rows="6"
                 ></b-form-textarea>
@@ -64,7 +65,7 @@
             <b-container>
               <b-form-group
                 label-cols-lg="3"
-                label="Language"
+                :label="$t('businessowner.Language')"
                 label-size="md"
                 label-class="font-weight-bold pt-0 username"
                 class="mb-0"
@@ -82,7 +83,7 @@
             <b-container>
               <b-form-group
                 label-cols-lg="3"
-                label="Time zone"
+                :label="$t('businessowner.Time_zone')"
                 label-size="md"
                 label-class="font-weight-bold pt-0 username"
                 class="mb-0"
@@ -100,7 +101,7 @@
             <b-container>
               <b-form-group
                 label-cols-lg="3"
-                label="About"
+                :label="$t('businessowner.About')"
                 label-size="md"
                 label-class="font-weight-bold pt-0 username"
                 class="mb-0"
@@ -120,7 +121,7 @@
             <b-container>
               <b-form-group
                 label-cols-lg="3"
-                label="Phone 1"
+                :label="$t('businessowner.Phone1')"
                 label-size="md"
                 label-class="font-weight-bold pt-0 username"
                 class="mb-0"
@@ -147,7 +148,7 @@
             <b-container>
               <b-form-group
                 label-cols-lg="3"
-                label="Phone 2"
+                :label="$t('businessowner.Phone2')"
                 label-size="md"
                 label-class="font-weight-bold pt-0 username"
                 class="mb-0"
@@ -173,7 +174,7 @@
             <b-container>
               <b-form-group
                 label-cols-lg="3"
-                label="Website"
+                :label="$t('businessowner.Website')"
                 label-size="md"
                 label-class="font-weight-bold pt-0 username"
                 class="mb-0"
@@ -190,14 +191,14 @@
             <b-container>
               <b-form-group
                 label-cols-lg="3"
-                label="Email"
+                :label="$t('businessowner.Email')"
                 label-size="md"
                 label-class="font-weight-bold pt-0 username"
                 class="mb-0"
               >
                 <b-form-input id="bname" placeholder="" required></b-form-input>
                 <b-form-checkbox class="a-text text" id="" name="" value="">
-                  This Business does not have a Email
+                  {{$t("businessowner.This_Business_does_not_have_a_Email")}}
                 </b-form-checkbox>
               </b-form-group>
             </b-container>
@@ -212,7 +213,7 @@
             <b-container>
               <b-form-group
                 label-cols-lg="3"
-                label="Country"
+                :label="$t('businessowner.Country')"
                 label-size="md"
                 label-class="font-weight-bold pt-0 username"
                 class="mb-0"
@@ -230,7 +231,7 @@
             <b-container>
               <b-form-group
                 label-cols-lg="3"
-                label="City"
+                :label="$t('businessowner.City')"
                 label-size="md"
                 label-class="font-weight-bold pt-0 username"
                 class="mb-0"
@@ -244,7 +245,7 @@
             <b-container>
               <b-form-group
                 label-cols-lg="3"
-                label="Neighbourhood"
+                :label="$t('businessowner.Neighbourhood')"
                 label-size="md"
                 label-class="font-weight-bold pt-0 username"
                 class="mb-0"
@@ -258,7 +259,7 @@
             <b-container>
               <b-form-group
                 label-cols-lg="3"
-                label="Three Location Description"
+                :label="$t('businessowner.Three_Location_Description')"
                 label-size="md"
                 label-class="font-weight-bold pt-0 username"
                 class="mb-0"
@@ -272,7 +273,7 @@
             <b-container>
               <b-form-group
                 label-cols-lg="3"
-                label="Address"
+                :label="$t('businessowner.Address')"
                 label-size="md"
                 label-class="font-weight-bold pt-0 username"
                 class="mb-0"
@@ -284,7 +285,7 @@
                 <b-container>
                   <b-row class="text">
                     <b-col>
-                      <p>Street Address</p>
+                      <p>{{$t('businessowner.Street_Address')}}</p>
                       <b-form-input name=""></b-form-input>
                     </b-col>
                     <b-col>
@@ -292,7 +293,7 @@
                       <b-form-input name=""></b-form-input
                     ></b-col>
                     <b-col>
-                      <p>Postal Code</p>
+                      <p>{{$t('businessowner.Postal_Code')}}</p>
                       <b-form-input name=""></b-form-input
                     ></b-col>
                   </b-row>
@@ -316,7 +317,7 @@
             <b-container>
               <b-form-group
                 label-cols-lg="3"
-                label="Business Hours"
+                :label="$t('businessowner.Business_Hours')"
                 label-size="md"
                 label-class="font-weight-bold pt-0 username"
                 class="mb-0"
@@ -332,7 +333,7 @@
                     <b-row>
                       <b-col cols="6"
                         ><b-form-checkbox id="" class="a-text text" name="" value="">
-                          Monday</b-form-checkbox
+                          {{$t("businessowner.Monday")}}</b-form-checkbox
                         ></b-col
                       >
 
@@ -345,7 +346,7 @@
                     <b-row>
                       <b-col cols="6"
                         ><b-form-checkbox id="" class="a-text text" name="" value="">
-                          Tuesday</b-form-checkbox
+                          {{$t("businessowner.Tuesday")}}</b-form-checkbox
                         ></b-col
                       >
                       <b-col><b-form-input name=""></b-form-input></b-col>- -
@@ -356,7 +357,7 @@
                     <b-row>
                       <b-col  cols="6"
                         ><b-form-checkbox id="" class="a-text text" name="" value="">
-                          Wednesday</b-form-checkbox
+                         {{$t('businessowner.Wednesday')}} </b-form-checkbox
                         ></b-col
                       >
                       <b-col><b-form-input name=""></b-form-input></b-col>- -
@@ -367,7 +368,7 @@
                     <b-row>
                       <b-col cols="6"
                         ><b-form-checkbox id="" class="a-text a-text text" name="" value="">
-                          Thursday</b-form-checkbox
+                          {{$t("businessowner.Thursday")}}</b-form-checkbox
                         ></b-col
                       >
                       <b-col><b-form-input name=""></b-form-input></b-col>- -
@@ -378,7 +379,7 @@
                     <b-row>
                       <b-col cols="6"
                         ><b-form-checkbox id="" class="a-text text" name="" value="">
-                          Friday
+                          {{$t('businessowner.Friday')}}
                         </b-form-checkbox></b-col
                       >
                       <b-col><b-form-input name=""></b-form-input></b-col>- -
@@ -389,7 +390,7 @@
                     <b-row>
                       <b-col cols="6"
                         ><b-form-checkbox id="" class="a-text text" name="" value="">
-                          Saterday
+                          {{$t("businessowner.Saturday")}}
                         </b-form-checkbox></b-col
                       >
                       <b-col><b-form-input name=""></b-form-input></b-col>- -
@@ -400,7 +401,7 @@
                     <b-row>
                       <b-col cols="6"
                         ><b-form-checkbox id="" name="" class="a-text text" value="">
-                          Sunday</b-form-checkbox
+                          {{$t("businessowner.Sunday")}}</b-form-checkbox
                         ></b-col
                       >
                       <b-col><b-form-input name=""></b-form-input></b-col>- -
@@ -417,7 +418,7 @@
             <b-container>
               <b-form-group
                 label-cols-lg="3"
-                label="Post Approval"
+                :label="$t('businessowner.Post_Approval')"
                 label-size="md"
                 label-class="font-weight-bold pt-0 username"
                 class="mb-0 text"
@@ -430,7 +431,7 @@
                   unchecked-value="not_accepted"
                   class="text"
                 >
-                  All business posts must be approved by an admin
+                  {{$t('businessowner.All_business_posts_must_be_approved_by_an_admin')}}
                 </b-form-checkbox>
               </b-form-group>
             </b-container>
@@ -440,7 +441,7 @@
             <b-container>
               <b-form-group
                 label-cols-lg="3"
-                label="Keyword Alerts"
+                :label="$t('businessowner.Keyword_Alerts')"
                 label-size="md"
                 label-class="font-weight-bold pt-0 username"
                 class="mb-0"
@@ -448,7 +449,7 @@
                 <b-form-textarea
                   id="textarea"
                
-                  placeholder="Enter something..."
+                  :placeholder="$t('businessowner.Enter_something')"
                   rows="3"
                   max-rows="6"
                 ></b-form-textarea>
@@ -460,7 +461,7 @@
             <b-container>
               <b-form-group
                 label-cols-lg="3"
-                label="Marketplace"
+                :label="$t('businessowner.Marketplace')"
                 label-size="md"
                 label-class="font-weight-bold pt-0 username"
                 class="mb-0"
@@ -472,14 +473,14 @@
           </div>
 
           <b-container>
-            <b-link href="#foo" class="f-left text">Delete Business Identity</b-link>
+            <b-link href="#foo" class="f-left text">{{$t("businessowner.Delete_Business_Identity")}}</b-link>
           </b-container>
 
 
 
             <div class="b-bottomm">
             <b-button variant="primary" class="a-button-l"
-              >Save Changes</b-button
+              >{{$t("businessowner.Save_Changes")}}</b-button
             >
             <br />
             <br />

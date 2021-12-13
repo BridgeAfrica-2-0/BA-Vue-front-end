@@ -7,20 +7,20 @@
 				icon="trash-fill"
 				aria-hidden="true"
 			></b-icon>
-			<span class="">Delete</span>
+			<span class="">{{$t("general.Delete")}}</span>
 		</b-dropdown-item-button>
 
-		<b-modal title="Delete Shipping Address" ref="confirm-modal" hide-footer>
+		<b-modal :title="$t('general.Delete_Shipping_Address')" ref="confirm-modal" hide-footer>
 			<p class="my-4 headline-font-size text-center">{{ message }}</p>
 			<div class="d-flex align-items-center justify-content-end">
 				<b-button class="mt-2 btn-custom" variant="primary" @click="sendId"
-					>Continue</b-button
+					>{{$t("general.Continue")}}</b-button
 				>
 				<b-button
 					class="mt-2 ml-4 btn-custom"
 					variant="success"
 					@click="hideModal"
-					>Cancel</b-button
+					>{{$t("general.Cancel")}}</b-button
 				>
 			</div>
 		</b-modal>

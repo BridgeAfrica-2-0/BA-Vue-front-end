@@ -28,7 +28,7 @@
           </p>
 
           <span class="float-right">
-            <b-button variant="primary" class=""> Buy now </b-button>
+            <b-button variant="primary" class=""> {{$t("general.Buy_now")}} </b-button>
           </span>
         </b-col>
       </b-row>
@@ -52,8 +52,8 @@
           ></b-img>
         </b-col>
         <b-col>
-          <h2 class="mb-4 text-center">Product Name</h2>
-          <p><span class="stock">In Stock</span></p>
+          <h2 class="mb-4 text-center">{{$t("general.Product_Name")}}</h2>
+          <p><span class="stock">{{$t("general.In_Stock")}}</span></p>
           <p>0.00 XAF</p>
           <hr />
           <b-row>
@@ -62,12 +62,12 @@
             </b-col>
             <b-col>
               <b-button variant="outline-dark" class="float-right"
-                >Checkout on website</b-button
+                >{{$t("general.Checkout_on_website")}}</b-button
               >
             </b-col>
           </b-row>
           <hr />
-          <h5>Product Description</h5>
+          <h5>{{$t("general.Product_Description")}}</h5>
           <p>
             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corporis
             quod, reprehenderit neque atque recusandae laborum quia vel,
@@ -112,7 +112,7 @@
                 src="https://placekitten.com/300/300"
                 size="2rem"
               ></b-avatar>
-              <input placeholder="Post a Comment" class="comment" type="text" />
+              <input :placeholder="$t('general.Post_a_Comment')" class="comment" type="text" />
 
               <fas-icon
                 class="primary send-cmt"

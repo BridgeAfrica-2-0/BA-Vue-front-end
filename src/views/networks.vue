@@ -57,7 +57,7 @@
       </div>
 
       <Footer />
-      <p class="text-center">
+      <!-- <p class="text-center">
         <span class="display-inline">
           <b-link @click="$i18n.locale = 'en'">
             {{ $t("auth.english") }}</b-link
@@ -68,7 +68,7 @@
           </b-link>
         </span>
         Bridge Africa © 2021
-      </p>
+      </p> -->
     </span>
   </div>
 </template>

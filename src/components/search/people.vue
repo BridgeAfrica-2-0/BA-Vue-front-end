@@ -37,7 +37,7 @@
                     class="mt-3 mt-lg-1 mt-xl-0"
                   >
                     <h6 class="follower text">
-                      {{ people.followers }} {{$t("search.Community")}}
+                      {{ people.followers }} {{ $t("search.Community") }}
                     </h6>
                   </b-col>
                 </b-row>
@@ -55,15 +55,7 @@
                     xl="12"
                     class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
                   >
-                    <b-button
-                      block
-                      variant="primary"
-                      size="sm"
-                      class="b-background flexx pobtn shadow"
-                    >
-                      <i class="fas fa-envelope fa-lg btn-icon"></i>
-                      <span class="btn-text">{{$t("search.Message")}}</span>
-                    </b-button>
+                    <BtnCtaMessage :element="people" type="people" />
                   </b-col>
 
                   <b-col
@@ -81,7 +73,7 @@
                       variant="primary"
                     >
                       <i class="fas fa-user-plus fa-lg btn-icon"></i>
-                      <span class="btn-com">{{$t("search.Community")}}</span>
+                      <span class="btn-com">{{ $t("search.Community") }}</span>
                     </b-button>
                   </b-col>
                 </b-row>

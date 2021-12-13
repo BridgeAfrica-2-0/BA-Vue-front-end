@@ -5,14 +5,19 @@
         <img src="../assets/logo.png" class="image" alt="" />
         <div class="step-2">
           <b-card-text class="w-75 mx-auto mt-5 text-left">
-            <span class="verif-text mb-5"> {{ $t('passrecover.Recover_Password') }} </span> <br />
+            <span class="verif-text mb-5">
+              {{ $t("passrecover.Recover_Password") }}
+            </span>
+            <br />
             <br />
 
-            <div class="text-left">{{ $t('passrecover.Enter_Your_Phone_Number') }}</div>
+            <div class="text-left">
+              {{ $t("passrecover.Enter_Your_Phone_Number") }}
+            </div>
           </b-card-text>
           <b-form class="w-75 mx-auto">
             <md-field>
-              <label for="phone"> {{ $t('passrecover.Phone') }}</label>
+              <label for="phone"> {{ $t("passrecover.Phone") }}</label>
               <md-input
                 type="text"
                 name="phone"
@@ -27,18 +32,13 @@
               class="btn btn-primary button float-right"
               @click.prevent="verify"
             >
-              {{ $t('passrecover.Next') }}
+              {{ $t("passrecover.Next") }}
             </b-button>
           </b-form>
         </div>
       </b-card>
     </div>
 
-<<<<<<< HEAD
- 
-=======
-    
->>>>>>> 11768755b6a6b08baa1f37e3c3bf8bf18f377f29
   </b-container>
 </template>
 
@@ -61,7 +61,7 @@ export default {
         .then(() => {
           this.$router.push({ name: "RecoverPass2" });
         })
-        .catch(err => {
+        .catch((err) => {
           if (err.response.status === 422) {
             console.log({ err: err });
             console.log(err.response.data.message);

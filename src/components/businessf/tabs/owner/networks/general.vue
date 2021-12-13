@@ -104,14 +104,14 @@ export default {
   name: 'settings',
 
   props: ['currenttab'],
-
-  watch: {
+    
+watch: {
+   
     currenttab: {
       immediate: true,
       handler(newVal) {
-        console.log(newVal);
-
-
+    
+  
         if (newVal == 2) {
           this.selectedIdd = '2';
           this.tabIndex = '0';
@@ -141,6 +141,8 @@ export default {
           this.selectedIdd = '7';
           this.tabIndex = '5';
         }
+
+        // }
       },
     },
   },
@@ -168,11 +170,12 @@ export default {
       options: {
         activeColor: '#1d98bd',
       },
-    };
+    }
   },
 
   methods: {},
-};
+}
+
 </script>
 
 <style scoped>

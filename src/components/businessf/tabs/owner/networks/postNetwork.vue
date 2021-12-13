@@ -93,13 +93,13 @@
       </b-row>
       <div class="pending-post-view pt-2 mt-3">
         <p>
-          {{
-            $t("network.Your_3_Post_s_are_pending_for_approval")
-          }}.&nbsp;&nbsp;&nbsp;&nbsp;<a
-            @click="this.$router.push({ name: '/pendingPost' })"
-            style="color: #e75c18; text-decoration: underline"
-            >{{ $t("network.View_All") }}</a
-          >
+
+          {{$t("network.Your")}} {{pendingPost.data}} {{$t("network.Posts_are_pending_for_approval")}}.&nbsp;&nbsp;&nbsp;&nbsp;
+          <a
+            @click="RedirectPending"
+            style="color: #e75c18; text-decoration: underline; cursor:pointer"
+          >{{ $t("network.View_All") }}</a>
+
         </p>
       </div>
     </b-card>
@@ -516,6 +516,12 @@ export default {
   },
 
   methods: {
+
+    RedirectPending(){ this.$emit('changement')
+   
+      console.log("---- end")
+    },
+
     ...mapMutations({
       auth: "auth/profilConnected",
     }),

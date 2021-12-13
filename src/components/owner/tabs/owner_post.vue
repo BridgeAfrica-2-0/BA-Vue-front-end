@@ -1,6 +1,6 @@
 <template>
   <div>
-    <FlashMessage />
+  
     <!-- DOM to Create Post By A UserOwner-->
     <b-card class="px-md-3 mb-3">
       <b-row class="mt-2">
@@ -116,12 +116,12 @@
           :title="$t('profileowner.Update_Post')"
           @hidden="resetPostData"
         >
-          <FlashMessage />
+        
           <b-row ref="loader">
             <b-col cols="1" class="m-0 p-0"></b-col>
             <b-col cols="2" class="m-0 p-0">
               <b-avatar
-                class="d-inline-block avat"
+                class="d-inline-block avat" 
                 variant="primary"
                 :src="imageProfile"
               ></b-avatar>
@@ -268,7 +268,7 @@
           :title="$t('profileowner.Create_Post')"
           @hidden="resetPostData"
         >
-          <FlashMessage />
+          
           <b-row ref="loader">
             <b-col cols="1" class="m-0 p-0"></b-col>
             <b-col cols="2" class="m-0 p-0">

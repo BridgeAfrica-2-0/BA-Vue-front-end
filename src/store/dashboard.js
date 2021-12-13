@@ -6,13 +6,10 @@ export default {
   state: {
 
     dashboard_business: [],
-    bdasboard_post:[],
-    pdashboard_post:[],
-    dBusinessId:null,
+    bdasboard_post: [],
+    pdashboard_post: [],
+    dBusinessId: null,
 
-    
-
-    
   },
 
   mutations: {
@@ -22,52 +19,33 @@ export default {
 
     },
 
-
-
     setBdashboardPost(state, userData) {
       state.bdasboard_post = userData;
-
     },
-
-
 
     setPdashboardPost(state, userData) {
       state.pdashboard_post = userData;
 
     },
-  
-    setdBusinessId(state, data){
 
-      state.dBusinessId=data
-      console.log('yoo mother fucker passing business id to the dsostrore file');
+    setdBusinessId(state, data) {
+      state.dBusinessId = data
     }
-
-    
-
-
   },
 
   actions: {
-    
-
-
-
     dashboardBusiness({ commit }, id) {
-      return axios.get("profile/businessInfo/"+id).then(({ data }) => {
+      return axios.get("profile/businessInfo/" + id).then(({ data }) => {
         console.log(data);
         commit("setDashboardBusiness", data.data);
       });
     },
-    
 
     dashboardBpost({ commit }, id) {
-      return axios.get("profile/dashboard/post/business/"+id).then(({ data }) => {
-        console.log("thi sisidjdnd dhdkfhdfd djdvnmddjd jdkdhd");
-        console.log(data);
+      return axios.get("profile/dashboard/post/business/" + id).then(({ data }) => {
         commit("setBdashboardPost", data.data);
       });
     },
-    
 
     dashboardPpost({ commit }) {
       return axios.get("profile/dashboard/post/user").then(({ data }) => {
@@ -80,11 +58,11 @@ export default {
 
 
 
-  
+
   },
 
   getters: {
     dashboard_business: state => !!state.dashboard_business,
-    
+
   }
 };

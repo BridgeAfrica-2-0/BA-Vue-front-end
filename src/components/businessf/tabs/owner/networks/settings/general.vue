@@ -1,5 +1,6 @@
 <template>
   <b-container v-if="networkinfo != 0">
+    
 
     <div class="">
       <b-container>

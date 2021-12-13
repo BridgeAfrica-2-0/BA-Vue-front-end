@@ -2,7 +2,7 @@
   <div class="container">
     <navbar />
     <div class="row">
-      <FlashMessage />
+      
       <div class="col-12 col-md-9">
         <hr />
         <div class="row">

@@ -421,7 +421,7 @@
                 {{ $t("search.Businesses") }}
               </h6>
 
-              <MiniBusiness />
+              <MiniBusiness :businesses="businesses" />
 
               <span class="float-right mb-3" @click="selectedId = 1">
                 <b-link href="#top"> {{ $t("search.see_more") }} </b-link>
@@ -462,7 +462,7 @@
                 {{ $t("search.Market") }}
               </h6>
 
-              <MiniMarket />
+              <MiniMarket :products="miniproducts" />
 
               <span class="float-right mb-3" @click="selectedId = 4">
                 <b-link href="#top"> {{ $t("search.see_more") }} </b-link>
@@ -506,25 +506,6 @@
             </div>
 
             <!-- filter out only people -->
-
-            <div v-if="selectedId == '2'">
-              <h6>
-                {{ $t("search.Sponsored_Result") }}
-                <fas-icon
-                  class="icons"
-                  :icon="['fas', 'exclamation-circle']"
-                  size="lg"
-                />
-              </h6>
-
-              <div>
-                <!-- <Sponsor /> -->
-              </div>
-              <h6>
-                <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
-                {{ $t("search.People") }}
-              </h6>
-            </div>
 
             <component :is="isComponent" :title="notFoundComponentTitle" />
 
@@ -583,7 +564,20 @@
           </div>
         </b-col>
         <b-col cols="12" md="4" lg="4" xl="3" class="showmap" ref="mapblock">
-          <div id="map" style="margin-top: 20px" class=""><Map /></div>
+          <div id="map" style="margin-top: 20px" class="">
+            <div v-if="selectedId == '1'">
+              <businessmap :businessPage="businessPage" />
+            </div>
+            <div v-if="selectedId == '4'">
+              <mapbox :products="allproducts.data" />
+            </div>
+            <div v-if="selectedId == '0'">
+              <mapbox
+                :businesses="businesses.data"
+                :products="miniproducts.data"
+              />
+            </div>
+          </div>
         </b-col>
       </b-row>
     </div>
@@ -595,6 +589,8 @@ import _ from "lodash";
 
 import LyTab from "@/tab/src/index.vue";
 import Map from "@/components/search/map";
+import mapbox from "@/components/search/mapbox";
+import businessmap from "@/components/search/businessmap";
 //import Business from '@/components/search/business';
 import People from "@/components/search/people";
 import Network from "@/components/search/network";
@@ -638,6 +634,8 @@ export default {
     Network,
     Post,
     Market,
+    mapbox,
+    businessmap,
     MiniBusiness,
     MiniPeople,
     MiniNetwork,
@@ -655,6 +653,15 @@ export default {
     ...mapGetters({
       prodLoaderr: "business/getloadingState",
     }),
+    businesses() {
+      return this.$store.getters["allSearch/getBusinesses"];
+    },
+    miniproducts() {
+      return this.$store.getters["allSearch/getProducts"];
+    },
+    allproducts() {
+      return this.$store.getters["marketSearch/getProducts"];
+    },
 
     products() {
       return this.$store.state.market.products;
@@ -662,7 +669,13 @@ export default {
   },
 
   created() {
+    if (this.$route.query.keyword)
+      this.searchParams.keyword = this.$route.query.keyword;
+
+    this.onProcessQuery();
+
     this.getLocation();
+
     this.strategY = {
       users: () => this.onFindUser(),
       all: () => this.getKeyword(),
@@ -670,7 +683,9 @@ export default {
       network: () => this.searchNetworks(),
       business: () => this.onFindBusiness(),
     };
+
     this.getKeyword();
+
     this.initialize();
   },
 
@@ -706,20 +721,18 @@ export default {
       selectedfilter: "",
       showform: false,
 
+      businessPage: 1,
       //selectcategories:[],
 
       categories_filters: [],
       items: [
+        { label: this.$t("search.All") },
 
-
-        { label: this.$t('search.All') },
-
-        { label: this.$t('search.Business') },
-        { label: this.$t('search.People') },
-        { label: this.$t('search.Network') },
-        { label: this.$t('search.Market') },
-        { label: this.$t('search.Post') },
-
+        { label: this.$t("search.Business") },
+        { label: this.$t("search.People") },
+        { label: this.$t("search.Network") },
+        { label: this.$t("search.Market") },
+        { label: this.$t("search.Post") },
       ],
 
       Finished_Branded_Products_filters: [
@@ -1634,7 +1647,7 @@ export default {
   },
 
   watch: {
-    selectedId: function() {
+    selectedId: function () {
       this.changeComponent();
       this.changePlaceHolder();
       this.changeNotFoundTitle();
@@ -1652,6 +1665,14 @@ export default {
   },
 
   methods: {
+    onProcessQuery() {
+      if (this.$route.query.market) {
+        this.selectedId = 4;
+        return true;
+      }
+
+      if (this.$route.query.uuid) this.selectedId = 5;
+    },
     // [ED]----------
     getKeyword() {
       console.log("the keyword is: ", this.searchParams.keyword);
@@ -1724,9 +1745,7 @@ export default {
           console.log("Error erro!");
         });
     },
-    // ------------
 
-    // Eteme
     ...mapActions({
       userStore: "search/FIND_USER",
       postStore: "search/FIND_POST",
@@ -1794,7 +1813,9 @@ export default {
         this.notFoundComponentTitle = "";
       }
     },
-
+    changeBusinessPage(id) {
+      this.businessPage = id;
+    },
     changeComponent() {
       try {
         this.isComponent = this.strategyForComponent[this.selectedId]();

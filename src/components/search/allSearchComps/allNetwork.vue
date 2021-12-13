@@ -35,10 +35,10 @@
                 </strong>
                 <br />
 
-                <span v-for="cat in item.category" :key="cat.name">
+                <span v-for="cat in item.assign_categories" :key="cat.name">
                   {{ cat.name }}
                 </span>
-                <br />
+
                 {{ count(item.community) }}
                 {{ $t("dashboard.Community") }} <br />
 
@@ -102,16 +102,7 @@
                 cols="4"
                 class="mt-2 text-center"
               >
-                <b-button
-                  block
-                  size="sm"
-                  class="b-background shadow"
-                  variant="primary"
-                  @click="cta(item)"
-                >
-                  <i class="fas fa-envelope fa-lg btn-icon"></i>
-                  <span class="btn-text">{{ ("search.Message") }}</span>
-                </b-button>
+                <BtnCtaMessage :element="item" type="network" />
               </b-col>
 
               <b-col
@@ -135,7 +126,7 @@
                     "
                   ></i>
 
-                  <span class="btn-text"> {{ ("search.Join") }} </span>
+                  <span class="btn-text"> {{ $t("search.Join") }} </span>
                 </b-button>
               </b-col>
             </b-row>
@@ -166,6 +157,7 @@
 </template>
 
 <script>
+import moment from "moment";
 import axios from "axios";
 
 export default {

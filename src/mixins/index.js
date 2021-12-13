@@ -1,5 +1,3 @@
-// import * as firebase from 'firebase/app';
-// import 'firebase/messaging';
 
 import { mapGetters, mapActions, mapMutations } from "vuex";
 import { formatNumber, fromNow } from "@/helpers";
@@ -8,53 +6,8 @@ import NotFound from "@/components/NotFoundComponent"
 import NoMoreData from "@/components/businessOwner/PaginationMessage"
 import ClipLoader from 'vue-spinner/src/ClipLoader.vue'
 
-
-
-// import './pusher-notification';
-import { initRedis } from '@/redis-notification'
-
-export const FireBase = {
-  data() {
-    return {
-      title: '',
-      from: '',
-      subject: '',
-      userimg: '',
-      currentMessage: '',
-    };
-  },
-
-  methods: {
-    receiveMessage() {
-      console.log("call echo firebase")
-      // try {
-      //   firebase.messaging().onMessage((payload) => {
-      //     // debugger
-      //     this.currentMessage = payload;
-      //     console.log(this.currentMessage);
-      //     let message;
-      //     message = payload.data.username + ':\n\n' + payload.data.message;
-      //     this.setNotificationBoxForm(payload.data.shipmentWallNumber, payload.data.username, payload.data.message);
-      //     console.log(message);
-      //   });
-      // } catch (e) {
-      //   console.log(e);
-      // }
-    },
-
-    setNotificationBoxForm(title, from, subject) {
-      this.title = title;
-      this.from = from;
-      this.subject = subject;
-
-      const message = `<span><b>${this.from}</b></span><br>${this.subject}`;
-    },
-  },
-
-  created() {
-    console.info('create notification info');
-  },
-}
+import './notifications.mixins'
+import './post.mixins'
 
 export const loader = {
   methods: {
@@ -124,7 +77,9 @@ export const commentMixinsBuisness = {
       comments: [],
       text: "",
       createPostRequestIsActive: false,
-      loadComment: false
+      loadComment: false,
+      replyCommentHasBeload: false,
+      loading: false
     };
   },
 
@@ -152,10 +107,16 @@ export const commentMixinsBuisness = {
     }),
 
     onLike: async function () {
-      const request = await this.$repository.share.commentLike({
-        comment: this.comment.comment_id,
-        network: this.profile.id,
-      });
+      let data = { comment: this.comment.id }
+
+      if ([
+        'NetworkEditors',
+        'networks',
+        "Membar Network Follower",
+        "memberNetwork",].includes(this.$route.name))
+        data = Object.assign(data, { network: this.profile.id })
+
+      const request = await this.$repository.share.commentLike(data);
 
       if (request.success)
         this.comment = Object.assign(this.comment, {
@@ -166,13 +127,15 @@ export const commentMixinsBuisness = {
               ? this.comment.comment_likes - 1
               : 0,
         });
+
+      console.log(this.comment)
     },
 
     onShowReply: async function () {
       this.loadComment = true;
       const request = await this.$repository.share.fetchReplyComment({
         post: this.uuid,
-        comment: this.comment.comment_id,
+        comment: this.comment.id,
         page: this.page,
       });
 
@@ -192,31 +155,42 @@ export const commentMixinsBuisness = {
       this.createPostRequestIsActive = true
       this.loadComment = true
 
+      let data = { comment: this.text }
+      if ([
+        'NetworkEditors',
+        'networks',
+        "Membar Network Follower",
+        "memberNetwork",].includes(this.$route.name))
+        data = Object.assign(data, { networkId: this.profile.id })
+
       const request = await this.$repository.share.createReplyComment({
         post: this.uuid,
-        comment: this.comment.comment_id,
-        data: {
-          comment: this.text,
-          networkId: this.profile.id,
-        },
+        comment: this.comment.id,
+        data
       });
 
       if (request.success) {
-        this.page = 1
-        this.onShowReply();
+        this.comments = [request.data, ...this.comments]
+
         this.text = "";
 
         this.comment = Object.assign(this.comment, {
           reply_comment_count: this.comment.reply_comment_count + 1,
         });
       }
+
       this.createPostRequestIsActive = false
       this.loadComment = false
     },
 
     showReply() {
-      this.reply = !this.reply;
-      if (this.reply) this.onShowReply();
+      const state = !this.reply;
+      this.reply = state
+
+      if (!this.replyCommentHasBeload)
+        this.replyCommentHasBeload = true
+
+      if (state) this.onShowReply();
     },
   },
 }
@@ -259,7 +233,7 @@ export const commentMixins = {
   methods: {
     onLike: async function () {
       const request = await this.$repository.share.commentLike({
-        comment: this.comment.comment_id,
+        comment: this.comment.id,
         network: this.profile.id,
       });
 
@@ -277,7 +251,7 @@ export const commentMixins = {
     onShowReply: async function () {
       const request = await this.$repository.share.fetchReplyComment({
         post: this.uuid,
-        comment: this.comment.comment_id,
+        comment: this.comment.id,
         page: 1,
       });
 
@@ -291,13 +265,19 @@ export const commentMixins = {
 
       this.createPostRequestIsActive = true
 
+      let data = { comment: this.text }
+
+      if ([
+        'NetworkEditors',
+        'networks',
+        "Membar Network Follower",
+        "memberNetwork",].includes(this.$route.name))
+        data = Object.assign(data, { networkId: this.$route.params.id });
+
       const request = await this.$repository.share.createReplyComment({
         post: this.uuid,
-        comment: this.comment.comment_id,
-        data: {
-          comment: this.text,
-          networkId: this.profile.id,
-        },
+        comment: this.comment.id,
+        data
       });
 
       if (request.success) {
@@ -307,8 +287,6 @@ export const commentMixins = {
         this.comment = Object.assign(this.comment, {
           reply_comment_count: this.comment.reply_comment_count + 1,
         });
-
-
       }
 
       this.createPostRequestIsActive = false
@@ -319,32 +297,6 @@ export const commentMixins = {
       if (this.reply) this.onShowReply();
     },
   },
-}
-
-export const Pusher = {
-
-  methods: {
-    ...mapMutations({
-      newNotificationBusiness: "notification/NEW_BUSINESS_NOTIFICATION",
-      newNotificationProfile: "notification/NEW_PROFILE_NOTIFICATION",
-      newNotificationNetwork: "notification/NEW_NETWORK_NOTIFICATION",
-    }),
-
-    pusher() {
-      // Network notification
-      window.Echo.channel('network-11-5')
-        .listen("NetworkNotificationEvent", payload => console.log(payload))
-
-      // Business notification
-      window.Echo.channel('network-11-5')
-        .listen("NetworkNotificationEvent", payload => this.newNotificationBusiness(payload))
-    }
-  },
-
-  created() {
-    console.log("call echo pusher")
-    this.pusher()
-  }
 }
 
 export const WhoIsIt = {
@@ -360,7 +312,14 @@ export const WhoIsIt = {
       auth: 'auth/profilConnected',
     }),
     async getAuth() {
-      const response = await this.$repository.share.WhoIsConnect({ networkId: null });
+
+      const type = ([
+        'NetworkEditors',
+        'networks',
+        "Membar Network Follower",
+        "memberNetwork",].includes(this.$route.name)) ? this.$route.params.id : null
+
+      const response = await this.$repository.share.WhoIsConnect({ networkId: type, type });
       if (response.success) this.auth(response.data);
       console.log(this.profile)
     },
@@ -378,7 +337,13 @@ export const knowWhoIsConnected = {
       auth: 'auth/profilConnected',
     }),
     async getAuth() {
-      const response = await this.$repository.share.WhoIsConnect({ networkId: this.$route.params.id });
+      const type = ([
+        'NetworkEditors',
+        'networks',
+        "Membar Network Follower",
+        "memberNetwork"].includes(this.$route.name)) ? this.$route.params.id : null
+
+      const response = await this.$repository.share.WhoIsConnect({ networkId: type, type });
 
       if (response.success) this.auth(response.data);
     },
@@ -388,141 +353,6 @@ export const knowWhoIsConnected = {
     this.getAuth()
   }
 }
-
-export const Redis = {
-
-  data: () => ({
-    strategy: null,
-  }),
-
-  computed: {
-    ...mapGetters({
-      profile: 'auth/profilConnected',
-      token: 'auth/getAuthToken'
-    })
-  },
-
-  watch: {
-    '$store.state.auth.profilConnected': function () {
-      this.updateEventListener(this.$store.state.auth.profilConnected.user_type)
-    }
-  },
-
-  methods: {
-    ...mapMutations({
-      newNotificationBusiness: "notification/NEW_BUSINESS_NOTIFICATION",
-      newNotificationProfile: "notification/NEW_PROFILE_NOTIFICATION",
-      newNotificationNetwork: "notification/NEW_NETWORK_NOTIFICATION",
-      auth: "auth/profilConnected"
-    }),
-
-    async getAuth() {
-      let response = null
-      try {
-        response = await this.$repository.share.WhoIsConnect({ businessId: this.route.params.id });
-      } catch (error) {
-        response = await this.$repository.share.WhoIsConnect({ businessId: null });
-      }
-
-      if (response.access) this.auth(response.data);
-    },
-
-    initBusinessNotification: async function () {
-      const response = this.$repository.notification.business()
-      if (response.status)
-        this.newNotificationBusiness({ init: true, data: response.data })
-    },
-
-    listenBusinessEvent() {
-      initRedis(this.token)
-      const $event = `business-channel${this.profile.id}`
-      window.Redis.private($event)
-        .listen(".BusinessNotificationEvent", payload => {
-          console.log(payload)
-          this.newNotificationBusiness({ init: false, data: payload.data })
-        })
-    },
-
-    listenProfileEvent() {
-      initRedis(this.token)
-      const $event = `user.${this.profile.id}`;
-
-      window.Redis.private($event)
-        .listen(".UserNotification", payload => {
-          this.newNotificationProfile({ init: false, data: payload.notification })
-        })
-    },
-
-    listenNetworkeEvent() {
-      initRedis(this.token)
-      const $event = `user.${this.profile.id}`;
-
-      window.Redis.private($event)
-        .listen(".NetworkNotification", payload => {
-          this.newNotificationNetwork({ init: false, data: payload.notification })
-        })
-    },
-
-    updateEventListener(type) {
-      try {
-        this.strategy[type]()
-      } catch (error) {
-        console.error(new Error(error))
-      }
-    },
-
-    init: async function () {
-      if (this.profile) {
-        await this.getAuth()
-        this.updateEventListener(this.profile.user_type)
-      }
-    }
-  },
-
-
-  created() {
-    this.strategy = {
-      user: () => this.listenProfileEvent(),
-      business: () => this.listenBusinessEvent(),
-      network: () => this.listenNetworkeEvent(),
-    }
-    // this.init()
-  }
-}
-
-export const FirebaseNotification = {
-  methods: {
-    notified() {
-      // try {
-      //   firebase
-      //     .messaging()
-      //     .requestPermission()
-      //     .then(() => {
-      //       console.log('Notification permission granted');
-      //       return firebase
-      //         .messaging()
-      //         .getToken()
-      //         .then((token) => {
-      //           console.info(token);
-      //           // this.$repository.post.SendToken(token)
-      //           return true;
-      //         })
-      //         .then(() => this.receiveMessage())
-      //         .catch((error) => console.error(error));
-      //     })
-      //     .catch((error) => console.error(error));
-      // } catch (error) {
-      //   console.log(error);
-      // }
-    }
-  },
-
-  created() {
-    console.log("call laravel firebase")
-    this.notified()
-  }
-}
-
 
 export const isYourOwnPostMixins = {
 
@@ -543,6 +373,7 @@ export const PostComponentMixin = {
     checkMediaType(media) {
       return media.split('/')[0];
     },
+    
     mapmediae(media) {
       let mediaarr = [];
 
@@ -572,5 +403,4 @@ export const PostComponentMixin = {
 
 export const AllPostFeatureMixin = {
   mixins: [PostComponentMixin],
-
 }

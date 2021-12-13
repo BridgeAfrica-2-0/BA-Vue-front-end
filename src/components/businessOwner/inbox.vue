@@ -78,14 +78,16 @@
                   <b-avatar
                     class="d-inline-block profile-pic"
                     variant="primary"
-                    src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
+                    :src="currentBiz.profile_picture"
                     square
                   ></b-avatar>
                 </b-col>
                 <b-col>
                   <h1 class="mt-4 title text-bold">
                     {{
-                      currentBiz ? currentBiz.name.split(" ")[0] : "loading..."
+                      currentBiz.name
+                        ? currentBiz.name.split(" ")[0]
+                        : "loading..."
                     }}
                   </h1>
                 </b-col>
@@ -353,7 +355,7 @@
                               <b-avatar
                                 class="d-inline-block profile-pic"
                                 variant="primary"
-                                src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
+                                :src="chat.image"
                               ></b-avatar>
 
                               <h6 class="mt-2 d-inline-block ml-2">
@@ -491,8 +493,14 @@
                   <b-col class="col-3">
                     <b-avatar
                       variant="primary"
-                      src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
-                      size="40"
+                      :src="
+                        chatSelected.chat
+                          ? chatSelected.chat.picture
+                            ? chatSelected.chat.picture
+                            : chatSelected.chat.image
+                          : ''
+                      "
+                      size="50"
                     ></b-avatar>
                   </b-col>
 
@@ -520,13 +528,32 @@
                   <b-col class="col-2" @click="info = true">
                     <b-avatar
                       variant="primary"
-                      src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
-                      size="60"
+                      :src="
+                        chatSelected.chat
+                          ? chatSelected.chat.picture
+                            ? chatSelected.chat.picture
+                            : chatSelected.chat.image
+                          : ''
+                      "
+                      size="50"
                     ></b-avatar>
                   </b-col>
 
                   <b-col class="detail" @click="info = true">
                     <h5>{{ chatSelected.name }}</h5>
+                    <!-- <p>{{ chatSelected }}</p> -->
+                    <p
+                      v-if="groupMembers"
+                      class="d-inline-block text-truncate"
+                      style="max-width: 200px"
+                    >
+                      <span
+                        v-for="(member, index) in groupMembers"
+                        :key="index"
+                      >
+                        <small> {{ getName(member) }}, </small>
+                      </span>
+                    </p>
                     <!-- <p>Online</p> -->
                   </b-col>
                   <b-col class="col-4">
@@ -1576,7 +1603,7 @@ export default {
       return this.$store.getters["businessChat/getCurrentBizId"];
     },
     currentBiz() {
-      return this.$store.getters["businessChat/getCurrentBiz"][0];
+      return this.$store.getters["auth/profilConnected"];
     },
 
     bizs() {
@@ -2104,6 +2131,7 @@ export default {
         active: true,
         clickedId: data.id,
         name: data.chat.name ? data.chat.name : data.chat.groupName,
+        chat: data.chat,
       };
       console.log("[DEBUG] Chat selected:", this.chatSelected);
     },

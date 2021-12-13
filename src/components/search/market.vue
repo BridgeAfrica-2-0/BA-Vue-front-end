@@ -455,7 +455,6 @@ export default {
   },
   computed: {
     products() {
-      console.log("PRoducts ".this.$store.getters["marketSearch/getProducts"]);
       return this.$store.getters["marketSearch/getProducts"];
     },
     prodLoader() {

@@ -81,9 +81,14 @@ export default {
       let keyword = data.keyword ? "keyword=" + data.keyword : "";
 
       TYPES.map((type) => {
-        console.log(`type => ${type} keyword = ${keyword}`);
+        // console.log(`type => ${type} keyword = ${keyword}`);
+        let url = `/search/${type}?${catId}&${keyword}`;
+        if (type == "market") {
+          url = `/market/search?${keyword}&distanceInKM=50000`;
+        }
+        console.log(url);
         axios
-          .get(`/search/${type}?${catId}&${keyword}`)
+          .get(url)
           .then((res) => {
             if (type == "business") {
               commit("setBusinesses", res.data);

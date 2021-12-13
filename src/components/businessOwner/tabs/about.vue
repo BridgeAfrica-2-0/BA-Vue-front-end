@@ -249,6 +249,7 @@
       @close="cancel"
       @keyup="validate('editAddress')"
       >{{ business_about_input }}
+    >
       <b-form @submit.prevent="validate('editAddress')">
         <div class="form-group">
           <label for="username">{{ $t("businessowner.Business_Name") }}:</label
@@ -265,8 +266,8 @@
         </div>
 
         <div class="form-group">
-          <label for="alias">{{ $t("businessowner.Category") }}:</label><br />
-          <!-- <multiselect
+          <label for="alias">{{ $t('businessowner.Category') }}:</label><br />
+         <multiselect
             v-model="multiselecvalue"
             @input="subcategories"
             :tag-placeholder="$t('businessowner.Add_this_as_new_tag')"
@@ -277,13 +278,13 @@
             :multiple="true"
             :taggable="true"
             @tag="addTag"
-          ></multiselect> -->
+          ></multiselect>
         </div>
 
         <div class="form-group">
-          <label for="alias">{{ $t("businessowner.Sub_Category") }}:</label
-          ><br />
-          <!-- <multiselect
+
+          <label for="alias">{{ $t('businessowner.Sub_Category') }}:</label><br />
+          <multiselect
             v-model="filterselectvalue"
             :tag-placeholder="$t('businessowner.Add_this_as_new_tag')"
             :placeholder="$t('businessowner.Search_or_add_a_tag')"
@@ -293,7 +294,7 @@
             :multiple="true"
             :taggable="true"
             @tag="addFilter"
-          ></multiselect> -->
+          ></multiselect>
         </div>
 
         <label class="typo__label">{{ $t("businessowner.Filters") }}</label>
@@ -349,7 +350,8 @@
           :label="$t('businessowner.Country')"
           label-for="input-1"
           label-size="sm"
-          >{{ country }}--------{{ countries }}
+        >
+        <!-- {{country}}--------{{countries}} -->
           <multiselect
             v-model="country"
             @input="Region"

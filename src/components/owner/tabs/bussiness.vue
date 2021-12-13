@@ -4,7 +4,7 @@
       <fas-icon
         class="violet float-left mr-1 icon-size primary"
         :icon="['fas', 'building']"
-      />{{ $t('profileowner.Business') }}
+      />{{ $t("profileowner.Business") }}
       <button
         type="button"
         data-toggle="modal"
@@ -13,7 +13,7 @@
         style="margin-top: -6px"
         v-b-modal.createBusinessModal
       >
-        {{ $t('profileowner.Add_Business') }}
+        {{ $t("profileowner.Add_Business") }}
       </button>
 
       <hr />
@@ -27,7 +27,6 @@
         @close="cancel"
       >
         <div>
-          
           <form-wizard @on-complete="createBusiness">
             <tab-content :title="$t('profileowner.Business_Indentity')">
               <div class="form-card">
@@ -51,7 +50,7 @@
                         variant="primary"
                         class="mt-3 text-center"
                       >
-                        {{ $t('profileowner.change_Image') }}
+                        {{ $t("profileowner.change_Image") }}
                       </b-button>
                     </div>
 
@@ -67,7 +66,9 @@
                       >
                         <div class="drag-text">
                           <i class="fa fa-plus"> </i>
-                          <h3 class="username">{{ $t('profileowner.Business_Logo') }}</h3>
+                          <h3 class="username">
+                            {{ $t("profileowner.Business_Logo") }}
+                          </h3>
                         </div>
                       </a>
                       <div></div>
@@ -88,12 +89,15 @@
                       ></b-form-input>
 
                       <b-form-invalid-feedback id="business_name-feedback"
-                        >{{ $t('profileowner.Business_Name_Is_Required') }}.</b-form-invalid-feedback
+                        >{{
+                          $t("profileowner.Business_Name_Is_Required")
+                        }}.</b-form-invalid-feedback
                       >
                     </b-form-group>
 
                     <div class="form-group">
-                      <label for="country" class="username"> {{ $t('profileowner.Keywords') }} :</label
+                      <label for="country" class="username">
+                        {{ $t("profileowner.Keywords") }} :</label
                       ><br />
 
                       <multiselect
@@ -110,13 +114,20 @@
                     </div>
 
                     <div class="form-group">
-                      <label for="username" class="username">{{ $t('profileowner.About') }}</label><br />
+                      <label for="username" class="username">{{
+                        $t("profileowner.About")
+                      }}</label
+                      ><br />
                       <textarea
                         type="textarea"
                         name="business_about"
                         v-model="about"
                         id="description"
-                        :placeholder="$t('profileowner.Brief_description_about_your_Busness')"
+                        :placeholder="
+                          $t(
+                            'profileowner.Brief_description_about_your_Busness'
+                          )
+                        "
                         class="form-control text"
                       ></textarea>
                     </div>
@@ -124,7 +135,9 @@
                 </div>
 
                 <div>
-                  <label class="typo__label"> {{ $t('profileowner.Category') }} </label>
+                  <label class="typo__label">
+                    {{ $t("profileowner.Category") }}
+                  </label>
                   <multiselect
                     v-model="multiselecvalue"
                     @input="subcategories"
@@ -139,13 +152,15 @@
                   ></multiselect>
                 </div>
 
-                <div  v-if="scategories.length" >
-                  <label class="typo__label"> {{ $t('profileowner.Sub_Category') }}</label>
+                <div v-if="scategories.length">
+                  <label class="typo__label">
+                    {{ $t("profileowner.Sub_Category") }}</label
+                  >
                   <multiselect
                     v-model="filterselectvalue"
                     tag-:placeholder="$t('profileowner.Add_this_as_new_tag')"
                     :placeholder="$t('profileowner.Search_or_add_a_tag')"
-                    :label="$t('profileowner.name')" 
+                    :label="$t('profileowner.name')"
                     track-by="subcategory_id"
                     :options="scategories"
                     :multiple="true"
@@ -154,9 +169,10 @@
                   ></multiselect>
                 </div>
 
-               
-                <div  v-if="filterselectvalue.length">
-                   <label class="typo__label">{{$t('profileowner.Fiters')}} </label>
+                <div v-if="filterselectvalue.length">
+                  <label class="typo__label"
+                    >{{ $t("profileowner.Fiters") }}
+                  </label>
                   <b-card no-body>
                     <b-tabs pills card vertical>
                       <b-tab
@@ -165,7 +181,10 @@
                         :key="filters.id"
                         active
                         ><b-card-text>
-                          <b-form-group :label="$t('profileowner.Filters')" class="colorblack">
+                          <b-form-group
+                            :label="$t('profileowner.Filters')"
+                            class="colorblack"
+                          >
                             <b-form-checkbox-group
                               id=""
                               class="colorblack"
@@ -195,7 +214,8 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="country" class="username"> {{$t('profileowner.Country')}} :</label
+                      <label for="country" class="username">
+                        {{ $t("profileowner.Country") }} :</label
                       ><br />
                       <multiselect
                         v-model="country"
@@ -209,9 +229,10 @@
                     </div>
                   </div>
 
-                  <div v-if="regions.length"   class="col-md-6">
+                  <div v-if="regions.length" class="col-md-6">
                     <div class="form-group">
-                      <label for="country" class="username"> {{ $t('profileowner.Region') }} :</label
+                      <label for="country" class="username">
+                        {{ $t("profileowner.Region") }} :</label
                       ><br />
                       <multiselect
                         v-model="region"
@@ -225,9 +246,10 @@
                     </div>
                   </div>
 
-                  <div   v-if="divisions.length"   class="col-md-6">
+                  <div v-if="divisions.length" class="col-md-6">
                     <div class="form-group">
-                      <label for="country" class="username"> {{ $t('profileowner.Division') }} :</label
+                      <label for="country" class="username">
+                        {{ $t("profileowner.Division") }} :</label
                       ><br />
                       <multiselect
                         v-model="division"
@@ -241,10 +263,10 @@
                     </div>
                   </div>
 
-                  <div   v-if="municipalities.length"  class="col-md-6">
+                  <div v-if="municipalities.length" class="col-md-6">
                     <div class="form-group">
                       <label for="country" class="username">
-                        {{ $t('profileowner.Municipality') }} :</label
+                        {{ $t("profileowner.Municipality") }} :</label
                       ><br />
 
                       <multiselect
@@ -258,12 +280,11 @@
                       ></multiselect>
                     </div>
                   </div>
-                
 
-
-                 <div   v-if="localities.length" class="col-md-6">
+                  <div v-if="localities.length" class="col-md-6">
                     <div class="form-group">
-                      <label for="Neighbor" class="username"> {{ $t('profileowner.Neighbor') }} :</label
+                      <label for="Neighbor" class="username">
+                        {{ $t("profileowner.Neighbor") }} :</label
                       ><br />
                       <multiselect
                         v-model="locality"
@@ -275,13 +296,11 @@
                       ></multiselect>
                     </div>
                   </div>
-                  
 
-   
-
-    <div class="col-md-6">
+                  <div class="col-md-6">
                     <div class="form-group">
-                      <label for="website" class="username"> {{ $t('profileowner.City') }} :</label
+                      <label for="website" class="username">
+                        {{ $t("profileowner.City") }} :</label
                       ><br />
                       <input
                         type="text"
@@ -292,26 +311,40 @@
                         class="form-control text"
                       />
                     </div>
-    </div>
-
-
-
-                 
+                  </div>
 
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="Neighbor" class="username"> {{ $t('profileowner.Adress') }} :</label>
+                      <label for="Neighbor" class="username">
+                        {{ $t("profileowner.Adress") }} :</label
+                      >
 
-                      <gmap-autocomplete
+                      <div id="geocoder"></div>
+                      <!-- <gmap-autocomplete
                         @place_changed="initMarker"
                         class="form-control"
                       >
-                      </gmap-autocomplete>
+                      </gmap-autocomplete> -->
                     </div>
                   </div>
                 </div>
+                <div style="width: 100%; height: 200px">
+                  <MglMap
+                    :accessToken="accessToken"
+                    :center="coordinates"
+                    :mapStyle="mapStyle"
+                    :zoom="zoom"
+                  >
+                    <MglGeocoderControl
+                      :accessToken="accessToken"
+                      @result="getGeoCoderResult"
+                      color="blue"
+                    />
+                    <MglMarker :coordinates="coordinates" />
+                  </MglMap>
+                </div>
 
-                <gmap-map
+                <!-- <gmap-map
                   :zoom="14"
                   :center="center"
                   style="width: 100%; height: 200px"
@@ -322,7 +355,7 @@
                     :position="m.position"
                     @click="center = m.position"
                   ></gmap-marker>
-                </gmap-map>
+                </gmap-map> -->
               </div>
             </tab-content>
 
@@ -330,11 +363,15 @@
               <b-card>
                 <b-row>
                   <b-col md="6">
-                    <label class="username"> {{ $t('profileowner.Phone1') }} </label>
+                    <label class="username">
+                      {{ $t("profileowner.Phone1") }}
+                    </label>
                     <VuePhoneNumberInput v-model="phone1" />
                   </b-col>
                   <b-col md="6">
-                    <label class="username"> {{ $t('profileowner.Phone2') }} </label>
+                    <label class="username">
+                      {{ $t("profileowner.Phone2") }}
+                    </label>
                     <VuePhoneNumberInput v-model="phone2" />
                   </b-col>
                 </b-row>
@@ -342,7 +379,8 @@
                 <b-row>
                   <b-col md="6">
                     <div class="form-group">
-                      <label for="website" class="username"> {{ $t('profileowner.Website') }} :</label
+                      <label for="website" class="username">
+                        {{ $t("profileowner.Website") }} :</label
                       ><br />
                       <input
                         type="text"
@@ -357,7 +395,9 @@
 
                   <b-col md="6">
                     <div class="form-group">
-                      <label for="email" class="username"> {{ $t('profileowner.Email') }} :</label><br />
+                      <label for="email" class="username">
+                        {{ $t("profileowner.Email") }} :</label
+                      ><br />
                       <input
                         type="email"
                         name="alias"
@@ -371,7 +411,8 @@
 
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="username" class="username">{{ $t('profileowner.TimeZone') }}:</label
+                      <label for="username" class="username"
+                        >{{ $t("profileowner.TimeZone") }}:</label
                       ><br />
 
                       <b-form-select
@@ -400,7 +441,6 @@
         @hidden="cancel"
       >
         <div>
-          
           <form-wizard @on-complete="updateBusiness">
             <tab-content :title="$t('profileowner.Business_Indentity')">
               <div class="form-card">
@@ -424,7 +464,7 @@
                         variant="primary"
                         class="mt-3 text-center"
                       >
-                        {{ $t('profileowner.change_Image') }}
+                        {{ $t("profileowner.change_Image") }}
                       </b-button>
                     </div>
 
@@ -440,7 +480,9 @@
                       >
                         <div class="drag-text">
                           <i class="fa fa-plus"> </i>
-                          <h3 class="username">{{ $t('profileowner.Business_Logo') }}</h3>
+                          <h3 class="username">
+                            {{ $t("profileowner.Business_Logo") }}
+                          </h3>
                         </div>
                       </a>
                       <div></div>
@@ -461,14 +503,17 @@
                       ></b-form-input>
 
                       <b-form-invalid-feedback id="business_name-feedback"
-                        >{{ $t('profileowner.Business_Name_Is_Required') }}.</b-form-invalid-feedback
+                        >{{
+                          $t("profileowner.Business_Name_Is_Required")
+                        }}.</b-form-invalid-feedback
                       >
                     </b-form-group>
 
                     <div class="form-group">
-                      <label for="country" class="username"> {{ $t('profileowner.Keywords') }} :</label
+                      <label for="country" class="username">
+                        {{ $t("profileowner.Keywords") }} :</label
                       ><br />
-                    
+
                       <multiselect
                         v-model="business_keyword"
                         tag-:placeholder="$t('profileowner.Add_this_as_new_Keyword')"
@@ -483,13 +528,20 @@
                     </div>
 
                     <div class="form-group">
-                      <label for="username" class="username">{{ $t('profileowner.About') }}</label><br />
+                      <label for="username" class="username">{{
+                        $t("profileowner.About")
+                      }}</label
+                      ><br />
                       <textarea
                         type="textarea"
                         name="business_about"
                         v-model="about"
                         id="description"
-                        :placeholder="$t('profileowner.Brief_description_about_your_Business')"
+                        :placeholder="
+                          $t(
+                            'profileowner.Brief_description_about_your_Business'
+                          )
+                        "
                         class="form-control text"
                       ></textarea>
                     </div>
@@ -497,7 +549,9 @@
                 </div>
 
                 <div>
-                  <label class="typo__label"> {{ $t('profileowner.Category') }} </label>
+                  <label class="typo__label">
+                    {{ $t("profileowner.Category") }}
+                  </label>
                   <multiselect
                     v-model="multiselecvalue"
                     @input="subcategories"
@@ -513,7 +567,9 @@
                 </div>
 
                 <div>
-                  <label class="typo__label"> {{ $t('profileowner.Sub_Category') }}</label> 
+                  <label class="typo__label">
+                    {{ $t("profileowner.Sub_Category") }}</label
+                  >
                   <multiselect
                     v-model="filterselectvalue"
                     tag-:placeholder="$t('profileowner.Add_this_as_new_tag')"
@@ -527,7 +583,9 @@
                   ></multiselect>
                 </div>
 
-                <label class="typo__label">{{$t('profileowner.Fiters')}} </label>
+                <label class="typo__label"
+                  >{{ $t("profileowner.Fiters") }}
+                </label>
                 <div>
                   <b-card no-body>
                     <b-tabs pills card vertical>
@@ -537,7 +595,10 @@
                         :key="filters.id"
                         active
                         ><b-card-text>
-                          <b-form-group :label="$t('profileowner.Filters')" class="colorblack">
+                          <b-form-group
+                            :label="$t('profileowner.Filters')"
+                            class="colorblack"
+                          >
                             <b-form-checkbox-group
                               id=""
                               class="colorblack"
@@ -562,12 +623,13 @@
               </div>
             </tab-content>
 
-            <tab-content :title="$t('profileowner.Location') ">
+            <tab-content :title="$t('profileowner.Location')">
               <div class="form-card">
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="country" class="username"> {{ $t('profileowner.Country') }} :</label
+                      <label for="country" class="username">
+                        {{ $t("profileowner.Country") }} :</label
                       ><br />
                       <multiselect
                         v-model="country"
@@ -583,7 +645,8 @@
 
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="country" class="username"> {{ $t('profileowner.Region') }} :</label
+                      <label for="country" class="username">
+                        {{ $t("profileowner.Region") }} :</label
                       ><br />
                       <multiselect
                         v-model="region"
@@ -599,7 +662,8 @@
 
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="country" class="username"> {{ $t('profileowner.Division') }} :</label
+                      <label for="country" class="username">
+                        {{ $t("profileowner.Division") }} :</label
                       ><br />
                       <multiselect
                         v-model="division"
@@ -616,7 +680,7 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="country" class="username">
-                        {{ $t('profileowner.Municipality') }} :</label
+                        {{ $t("profileowner.Municipality") }} :</label
                       ><br />
 
                       <multiselect
@@ -635,7 +699,8 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="Neighbor" class="username"> {{ $t('profileowner.Neighbor') }} :</label
+                      <label for="Neighbor" class="username">
+                        {{ $t("profileowner.Neighbor") }} :</label
                       ><br />
                       <multiselect
                         v-model="locality"
@@ -650,7 +715,8 @@
 
                   <b-col md="6">
                     <div class="form-group">
-                      <label for="website" class="username"> {{ $t('profileowner.City') }} :</label
+                      <label for="website" class="username">
+                        {{ $t("profileowner.City") }} :</label
                       ><br />
                       <input
                         type="text"
@@ -665,7 +731,9 @@
 
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="Neighbor" class="username"> {{ $t('profileowner.Adress') }} :</label>
+                      <label for="Neighbor" class="username">
+                        {{ $t("profileowner.Adress") }} :</label
+                      >
 
                       <gmap-autocomplete
                         @place_changed="initMarker"
@@ -695,11 +763,15 @@
               <b-card>
                 <b-row>
                   <b-col md="6">
-                    <label class="username"> {{ $t('profileowner.Phone1') }} </label>
+                    <label class="username">
+                      {{ $t("profileowner.Phone1") }}
+                    </label>
                     <VuePhoneNumberInput v-model="phone1" />
                   </b-col>
                   <b-col md="6">
-                    <label class="username"> {{ $t('profileowner.Phone2') }} </label>
+                    <label class="username">
+                      {{ $t("profileowner.Phone2") }}
+                    </label>
                     <VuePhoneNumberInput v-model="phone2" />
                   </b-col>
                 </b-row>
@@ -707,7 +779,8 @@
                 <b-row>
                   <b-col md="6">
                     <div class="form-group">
-                      <label for="website" class="username"> {{ $t('profileowner.Website') }} :</label
+                      <label for="website" class="username">
+                        {{ $t("profileowner.Website") }} :</label
                       ><br />
                       <input
                         type="text"
@@ -722,7 +795,9 @@
 
                   <b-col md="6">
                     <div class="form-group">
-                      <label for="email" class="username"> {{ $t('profileowner.Email') }} :</label><br />
+                      <label for="email" class="username">
+                        {{ $t("profileowner.Email") }} :</label
+                      ><br />
                       <input
                         type="text"
                         name="alias"
@@ -736,7 +811,8 @@
 
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="username" class="username">{{ $t('profileowner.TimeZone') }}:</label
+                      <label for="username" class="username"
+                        >{{ $t("profileowner.TimeZone") }}:</label
                       ><br />
 
                       <b-form-select
@@ -786,10 +862,10 @@
                         @click="editBusiness(business.id)"
                         v-b-modal.updateBusinessModal
                         variant=""
-                        >{{ $t('profileowner.Edit') }}</b-dropdown-item
+                        >{{ $t("profileowner.Edit") }}</b-dropdown-item
                       >
                       <b-dropdown-item @click="deleteBusiness(business.id)">
-                        {{ $t('profileowner.Delete')}}</b-dropdown-item
+                        {{ $t("profileowner.Delete") }}</b-dropdown-item
                       >
                     </b-dropdown>
                   </div>
@@ -808,19 +884,22 @@
                   <div>
                     <p class="textt text">
                       <strong class="title">
-                      <router-link :to="'/business_owner/'+business.id">    {{ business.name }}   </router-link>
+                        <router-link :to="'/business_owner/' + business.id">
+                          {{ business.name }}
+                        </router-link>
                       </strong>
-                      <br />  
-                        <span
-                          class=""
-                          v-for="cat in business.category"
-                          :key="cat.name"
-                        >
-                          {{ cat.name }}
-                        </span>
-                      
                       <br />
-                      {{ business.community }} {{ $t('profileowner.Community') }} <br />
+                      <span
+                        class=""
+                        v-for="cat in business.category"
+                        :key="cat.name"
+                      >
+                        {{ cat.name }}
+                      </span>
+
+                      <br />
+                      {{ business.community }}
+                      {{ $t("profileowner.Community") }} <br />
 
                       <span class="location">
                         <b-icon-geo-alt class="ico"></b-icon-geo-alt>
@@ -845,7 +924,6 @@
                 </div>
               </div>
             </b-col>
-            
           </b-row>
 
           <infinite-loading
@@ -861,7 +939,9 @@
 
 <script>
 import axios from "axios";
-
+import Mapbox from "mapbox-gl";
+import { MglMap, MglMarker } from "vue-mapbox";
+import MglGeocoderControl from "vue-mapbox-geocoder";
 import Multiselect from "vue-multiselect";
 import { validationMixin } from "vuelidate";
 
@@ -876,9 +956,9 @@ export default {
       useas: "",
       page: 1,
       bizId: "",
-       profileBusiness:[],
-      infiniteId: 2,
-      profilebusiness:[],
+      profileBusinesss: [],
+      infiniteId: +new Date(),
+      profilebusiness: [],
       editbiz: "",
       selectedusecase: "",
       keywordds: [],
@@ -886,7 +966,7 @@ export default {
       phone2: null,
       emaill: null,
       email: null,
-      business_name:null,
+      business_name: null,
       business: null,
       website: null,
       first_page: "true",
@@ -923,6 +1003,12 @@ export default {
         lat: 39.7837304,
         lng: -100.4458825,
       },
+      accessToken: process.env.VUE_APP_MAPBOX_TOKEN,
+      mapStyle: "mapbox://styles/mapbox/streets-v11",
+      coordinates: [11.504929555178624, 3.8465173382452815], // Lng,Lat
+      zoom: 12,
+      address: "",
+      defaultInput: "Bodhgaya",
       locationMarkers: [],
       locPlaces: [],
       existingPlace: null,
@@ -959,19 +1045,20 @@ export default {
     infiniteHandler($state) {
       console.log("loading started");
 
+      let url = "business/user?page=" + this.page;
+
       if (this.page == 1) {
         this.profilebusiness.splice(0);
       }
       let url = "business/user?page="+this.page;
       
       this.$store
-        .dispatch("profile/loadMore",url)  
+        .dispatch("profile/loadMore", url)
         .then(({ data }) => {
           console.log(data);
           if (data.data.length) {
             this.page += 1;
-
-            this.profilebusiness.push(...data.data);
+            this.profileBusinesss.push(...data.data);
             $state.loaded();
           } else {
             $state.complete();
@@ -980,6 +1067,15 @@ export default {
         .catch((err) => {
           // console.log({ err: err });
         });
+    },
+
+    handleSearch(event) {
+      console.log(event);
+    },
+    getGeoCoderResult(response) {
+      this.coordinates = response.result.center;
+      this.address = response.result.place_name;
+      console.log(response);
     },
 
     editBusiness(id) {
@@ -1015,7 +1111,8 @@ export default {
 
           this.page = 1;
           this.infiniteId += 1;
-
+          this.profileBusinesss = [];
+          this.$refs.infiniteLoading.attemptLoad();
           this.flashMessage.show({
             status: "success",
 
@@ -1041,7 +1138,7 @@ export default {
       this.logo_url = "";
       this.business_name = "";
       this.about = "";
-     
+
       this.multiselecvalue = [];
       this.filterselectvalue = [];
 
@@ -1106,7 +1203,7 @@ export default {
       this.Municipality();
       this.Locality();
     },
-    getpFilters: function () {
+    getpFilters: function() {
       let sub_cat = [];
       this.filterselectvalue.forEach((item) => {
         sub_cat.push(item.subcategory_id);
@@ -1278,7 +1375,7 @@ export default {
           console.log({ err: err });
         });
     },
-    setLoading: function (value) {
+    setLoading: function(value) {
       this.loadingWizard = value;
     },
 
@@ -1337,7 +1434,7 @@ export default {
       }
     },
 
-    locateGeoLocation: function () {
+    locateGeoLocation: function() {
       navigator.geolocation.getCurrentPosition((res) => {
         this.center = {
           lat: res.coords.latitude,
@@ -1346,7 +1443,7 @@ export default {
       });
     },
 
-    createBusiness: function () {
+    createBusiness: function() {
       return new Promise((resolve, reject) => {
         this.sendingB = true;
         let loader = this.$loading.show({
@@ -1363,13 +1460,13 @@ export default {
         formData2.append("city", this.city);
         formData2.append("country", this.selectedcountry);
 
-        formData2.append("address", this.adress);
+        formData2.append("address", this.address);
         formData2.append("division", this.selecteddivision);
         formData2.append("council", this.selectedmunicipality);
 
         formData2.append("neigborhood", this.selectedlocality);
-        formData2.append("lat", this.center.lat);
-        formData2.append("lng", this.center.lng);
+        formData2.append("lat", this.coordinates[1]);
+        formData2.append("lng", this.coordinates[0]);
         formData2.append("phone", this.phone1);
         formData2.append("phone2", this.phone2);
         formData2.append("email", this.email);
@@ -1404,9 +1501,11 @@ export default {
             });
 
             loader.hide();
+
             this.page = 1;
             this.infiniteId += 1;
-
+            this.profileBusinesss = [];
+            this.$refs.infiniteLoading.attemptLoad();
             resolve(true);
           })
           .catch((err) => {
@@ -1439,7 +1538,7 @@ export default {
       });
     },
 
-    updateBusiness: function () {
+    updateBusiness: function() {
       return new Promise((resolve, reject) => {
         this.sendingB = true;
         let loader = this.$loading.show({
@@ -1487,7 +1586,7 @@ export default {
             console.log(response);
 
             this.sendingB = false;
-            this.profileBusiness();
+            // this.profileBusiness();
 
             this.$refs["updateBusinessModal"].hide();
             this.flashMessage.show({
@@ -1499,6 +1598,8 @@ export default {
             loader.hide();
             this.page = 1;
             this.infiniteId += 1;
+            this.profileBusinesss = [];
+            this.$refs.infiniteLoading.attemptLoad();
 
             resolve(true);
           })
@@ -1540,11 +1641,11 @@ export default {
       return err;
     },
 
-    chooseProfile1: function () {
+    chooseProfile1: function() {
       document.getElementById("profile1").click();
     },
 
-    chooseProfile2: function () {
+    chooseProfile2: function() {
       document.getElementById("profile2").click();
     },
 
@@ -1560,7 +1661,7 @@ export default {
       this.logoimg_url = URL.createObjectURL(logofile);
     },
 
-    chooselogo: function () {
+    chooselogo: function() {
       document.getElementById("logo").click();
     },
 
@@ -1583,6 +1684,9 @@ export default {
     },
   },
 
+  created() {
+    this.mapbox = Mapbox;
+  },
   mounted() {
     this.locateGeoLocation();
 
@@ -1590,17 +1694,19 @@ export default {
 
     this.Country();
 
-   // this.profileBusiness();
-
+    // this.profileBusiness();
   },
 
   components: {
     Multiselect,
     VuePhoneNumberInput,
+    MglMap,
+    MglGeocoderControl,
+    MglMarker,
   },
 
   computed: {
-    selectedKeywords: function () {
+    selectedKeywords: function() {
       let selectedUsers = [];
       this.business_keyword.forEach((item) => {
         selectedUsers.push(item.id);
@@ -1608,11 +1714,11 @@ export default {
       return selectedUsers;
     },
 
-    Old_profilebusiness: function () {
+    Old_profilebusiness: function() {
       return this.$store.state.profile.profileBusiness;
     },
 
-    selectedcategories: function () {
+    selectedcategories: function() {
       let selectedUsers = [];
 
       this.multiselecvalue.forEach((item) => {
@@ -1624,23 +1730,20 @@ export default {
       });
       return selectedUsers;
     },
-    selectedsubcategories: function () {
+    selectedsubcategories: function() {
       let sub_cat = [];
-     
+
       this.filterselectvalue.forEach((item) => {
-      
-         if (item.subcategory_id) {
-         sub_cat.push(item.subcategory_id);
+        if (item.subcategory_id) {
+          sub_cat.push(item.subcategory_id);
         } else {
           sub_cat.push(item.subcategoryId);
         }
-
-
       });
       return sub_cat;
     },
 
-    selectedfilters: function () {
+    selectedfilters: function() {
       let sub_cat = [];
 
       this.select_filterss.forEach((item) => {
@@ -1653,7 +1756,7 @@ export default {
       return sub_cat;
     },
 
-    selectedcountry: function () {
+    selectedcountry: function() {
       let sub_cat = [];
       this.country.forEach((item) => {
         if (item.country_id) {
@@ -1664,7 +1767,7 @@ export default {
       });
       return sub_cat;
     },
-    selectedregion: function () {
+    selectedregion: function() {
       let sub_cat = [];
       this.region.forEach((item) => {
         if (item.region_id) {
@@ -1675,7 +1778,7 @@ export default {
       });
       return sub_cat;
     },
-    selecteddivision: function () {
+    selecteddivision: function() {
       let sub_cat = [];
       this.division.forEach((item) => {
         if (item.division_id) {
@@ -1686,7 +1789,7 @@ export default {
       });
       return sub_cat;
     },
-    selectedmunicipality: function () {
+    selectedmunicipality: function() {
       let sub_cat = [];
       this.municipality.forEach((item) => {
         if (item.council_id) {
@@ -1697,7 +1800,7 @@ export default {
       });
       return sub_cat;
     },
-    selectedlocality: function () {
+    selectedlocality: function() {
       let sub_cat = [];
       console.log("loging localities");
       console.log(this.locality);
@@ -1743,6 +1846,10 @@ import "vue-form-wizard/dist/vue-form-wizard.min.css";
 </script>
 
 <style scoped>
+@import url("https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css");
+@import url("https://api.tiles.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css");
+@import url("https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css");
+@import url("https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.css");
 .others {
   position: absolute;
   right: 0px;
@@ -1750,6 +1857,10 @@ import "vue-form-wizard/dist/vue-form-wizard.min.css";
 
 .inline-flex {
   display: inline-flex;
+}
+#geocoder {
+  z-index: 1;
+  margin: 20px;
 }
 
 .username {
@@ -1962,7 +2073,7 @@ import "vue-form-wizard/dist/vue-form-wizard.min.css";
 }
 </style>
 
-<style >
+<style>
 .r-image {
   object-fit: cover;
 }

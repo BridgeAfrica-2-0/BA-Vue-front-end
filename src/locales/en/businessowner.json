@@ -523,7 +523,11 @@
     "All_the_functionalities_as_in_the_normal_account":"All the functionalities as in the normal account",
     "Advanced_business_verification":"Advanced business verification",
     "Shipping_calculation":"Shipping calculation",
-    "Search_or_add_a_tag":"Search or add a tag"
+    "Search_or_add_a_tag":"Search or add a tag",
 
-    
+    "orders":"orders",
+    "my_orders":"my orders",
+    "Operation_was_successful":"Operation was successful!!!",
+    "Something_went_wrong":"Something went wrong!!!"
+  
 }

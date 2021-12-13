@@ -27,7 +27,10 @@
           <b-icon icon="link" class="primary h_icon"></b-icon>www.business.com
         </p>
 
-        <p><b-icon icon="link" class="primary"></b-icon> {{ $t('businessf.www_business_com') }}</p>
+        <p>
+          <b-icon icon="link" class="primary"></b-icon>
+          {{ $t("businessf.www_business_com") }}
+        </p>
 
         <p>
           <b-icon icon="people-fill" class="primary h_icon"></b-icon>
@@ -52,20 +55,38 @@
           </b-dropdown>
         </p>
       </b-card-text>
-
-      <GmapMap
-        :center="business_intro.position"
-        :zoom="12"
+      <MglMap
+        :accessToken="accessToken"
+        :mapStyle.sync="mapStyle"
+        :center="[business_intro.lng, business_intro.lat]"
+        :zoom="zoom"
         style="width: 100%; height: 250px"
       >
-        <GmapMarker :position="business_intro.position" />
-      </GmapMap>
+        <MglMarker
+          :coordinates="[business_intro.lng, business_intro.lat]"
+          color="red"
+        />
+      </MglMap>
     </b-card>
   </div>
 </template>
 
 <script>
+import { MglMap, MglMarker } from "vue-mapbox";
 export default {
+  data() {
+    return {
+      accessToken: process.env.VUE_APP_MAPBOX_TOKEN,
+      mapStyle: "mapbox://styles/mapbox/streets-v11",
+      coordinates: [11.504929555178624, 3.8465173382452815], // Lng,Lat
+      zoom: 12,
+    };
+  },
+
+  components: {
+    MglMap,
+    MglMarker,
+  },
   computed: {
     business_intro() {
       return this.$store.state.businessOwner.businessInfo;
@@ -75,6 +96,7 @@ export default {
 </script>
 
 <style scoped>
+@import url("https://api.tiles.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css");
 .h_icon {
   font-size: 28px;
   margin-right: 10px;

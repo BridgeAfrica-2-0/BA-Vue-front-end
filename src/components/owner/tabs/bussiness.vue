@@ -1044,9 +1044,7 @@ export default {
   methods: {
     infiniteHandler($state) {
       console.log("loading started");
-
-      let url = "business/user?page=" + this.page;
-
+      
       if (this.page == 1) {
         this.profilebusiness.splice(0);
       }

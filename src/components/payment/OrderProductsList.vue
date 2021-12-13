@@ -11,12 +11,12 @@
 
 			<div class="col-auto flex-fill order-info body-font-size col-sm-8 col-md-8">
 				<div class="row">
-					<div class="col-4">Name of item:</div>
+					<div class="col-4"> {{$t("general.Name_of_item")}}:</div>
 					<div class="col">{{ cart_item.product_name }}</div>
 				</div>
 
 				<div class="row">
-					<div class="col-4">Amount :</div>
+					<div class="col-4"> {{$t("general.Amount")}} :</div>
 					<div class="col">{{ formatMoney(Number(cart_item.product_price)) }}</div>
 				</div>
 

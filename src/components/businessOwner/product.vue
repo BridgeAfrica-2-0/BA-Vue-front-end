@@ -37,8 +37,8 @@
                         <template #button-content><b-icon  icon="three-dots-vertical"></b-icon>
 
                         </template>
-                        <b-dropdown-item-button  @click="$bvModal.show(product.id)"  >Edit</b-dropdown-item-button>
-                        <b-dropdown-item-button >Delete</b-dropdown-item-button>
+                        <b-dropdown-item-button  @click="$bvModal.show(product.id)"  >{{ $t('businessowner.Edit') }}</b-dropdown-item-button>
+                        <b-dropdown-item-button >{{ $t('businessowner.Delete') }}</b-dropdown-item-button>
                        
                       </b-dropdown>
                     </div>

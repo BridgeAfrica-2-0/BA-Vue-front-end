@@ -57,6 +57,7 @@ Vue.use(Vuex);
 axios.defaults.baseURL = "http://edson.maxinemoffett.com/api/v1/";
 
 
+
 export default new Vuex.Store({
     modules: {
         auth,

@@ -186,7 +186,9 @@
           <hr />
           <b-row>
             <b-col>
-              <b-button variant="primary">{{ $t("search.Message") }}</b-button>
+
+              <BtnCtaMessage :element="item" type="business" />
+
             </b-col>
             <b-col>
               <b-button variant="outline-dark" class="float-right">{{

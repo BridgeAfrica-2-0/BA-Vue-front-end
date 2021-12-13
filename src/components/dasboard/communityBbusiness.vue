@@ -1,47 +1,58 @@
 <template>
   <div>
-    <b-row> 
-      <b-col lg="6" sm="12" class="p-2" v-for="item in businesses" :key="item.id">
+    <b-row>
+      <b-col
+        lg="6"
+        sm="12"
+        class="p-2"
+        v-for="item in businesses"
+        :key="item.id"
+      >
         <div class="people-style shadow">
           <b-row>
-
             <b-col md="8" xl="8" lg="12" cols="12" sm="8">
-              <div class="d-inline-flex">   
-              <div class="center-img ">
-                <splide :options="options" class="r-image">
-                  <splide-slide cl>
-                    <img :src="item.picture" class="r-image" />
-                  </splide-slide>
-                </splide>
-              </div>   <div class="pl-3 flx100"> 
+              <div class="d-inline-flex">
+                <div class="center-img">
+                  <splide :options="options" class="r-image">
+                    <splide-slide cl>
+                      <img :src="item.picture" class="r-image" />
+                    </splide-slide>
+                  </splide>
+                </div>
+                <div class="pl-3 flx100">
+                  <p class="textt">
+                    <strong class="title">
+                      <router-link :to="'business/' + item.id">
+                        {{ item.name }}
+                      </router-link>
+                    </strong>
+                    <br />
 
-              
-              <p class="textt">
-                <strong class="title"> <router-link    :to="'business/'+item.id">    {{ item.name }}  </router-link> </strong> <br />
-               
-            <span v-for="cat in item.category" :key="cat.name">   {{cat.name}}  </span>
-                <br />
-                {{ count(item.followers) }}
-                {{ $t('dashboard.Community') }} <br />
+                    <span v-for="cat in item.category" :key="cat.name">
+                      {{ cat.name }}
+                    </span>
+                    <br />
+                    {{ count(item.followers) }}
+                    {{ $t("dashboard.Community") }} <br />
 
-                <span class="location">
-                  <b-icon-geo-alt class="ico"></b-icon-geo-alt
-                  >{{ item.country }}
-                </span>
-                <br />
-       <read-more
-              more-str="read more"
-              class="readmore"
-              :text="item.about_business"
-              link="#"
-              less-str="read less"
-              :max-chars="100"
-            >
-            </read-more>
-              </p>
-               </div>
-               </div>
-            </b-col>     
+                    <span class="location">
+                      <b-icon-geo-alt class="ico"></b-icon-geo-alt
+                      >{{ item.country }}
+                    </span>
+                    <br />
+                    <read-more
+                      more-str="read more"
+                      class="readmore"
+                      :text="item.about_business"
+                      link="#"
+                      less-str="read less"
+                      :max-chars="100"
+                    >
+                    </read-more>
+                  </p>
+                </div>
+              </div>
+            </b-col>
 
             <b-col lg="12" xl="4" md="4" cols="12" sm="4">
               <div class="s-button">
@@ -54,52 +65,26 @@
                     cols="4"
                     class="mt-2 text-center"
                   >
-                 
-
-
-                    
-
-
-  
-                  <b-button
-                  block
-                  size="sm"
-                  :disabled="disable"
-                  :class="item.is_follow !== 0 && 'u-btn'"
-                  variant="primary"
-                    :id="'followbtn'+item.id"
-                  @click="handleFollow(item)"
-                >
-                 
-                  <i class="fas fa-lg btn-icon" :class="item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"></i>
-                  <span class="btn-com"> {{ $t('dashboard.Community') }}</span>
-                </b-button>
-
-
-
-
-
-
-
-
-                  </b-col>
-
-                  <b-col
-                    md="12"
-                    lg="4"
-                    xl="12"
-                    sm="12"
-                    cols="4"
-                    class="mt-2 text-center"
-                  >
                     <b-button
                       block
                       size="sm"
-                      class="b-background shadow "
+                      :disabled="disable"
+                      :class="item.is_follow !== 0 && 'u-btn'"
                       variant="primary"
+                      :id="'followbtn' + item.id"
+                      @click="handleFollow(item)"
                     >
-                      <i class="fas fa-envelope   fa-lg btn-icon "></i>
-                      <span class="btn-text">{{ $t('dashboard.Messages') }}</span>
+                      <i
+                        class="fas fa-lg btn-icon"
+                        :class="
+                          item.is_follow !== 0
+                            ? 'fa-user-minus'
+                            : 'fa-user-plus'
+                        "
+                      ></i>
+                      <span class="btn-com">
+                        {{ $t("dashboard.Community") }}</span
+                      >
                     </b-button>
                   </b-col>
 
@@ -111,14 +96,27 @@
                     cols="4"
                     class="mt-2 text-center"
                   >
+                    <BtnCtaMessage :element="item" type="business" />
+                  </b-col>
+
+                  <b-col
+                    md="12"
+                    lg="4"
+                    xl="12"
+                    sm="12"
+                    cols="4"
+                    class="mt-2 text-center"
+                  >
                     <b-button
                       block
                       size="sm"
-                      class="b-background shadow "
+                      class="b-background shadow"
                       variant="primary"
                     >
-                      <i class="fas fa-map-marked-alt  fa-lg btn-icon "></i>
-                      <span class="btn-text">{{ $t('dashboard.Direction') }}</span>
+                      <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
+                      <span class="btn-text">{{
+                        $t("dashboard.Direction")
+                      }}</span>
                     </b-button>
                   </b-col>
                 </b-row>
@@ -128,7 +126,7 @@
         </div>
       </b-col>
     </b-row>
-     <infinite-loading @infinite="infiniteHandler"></infinite-loading>
+    <infinite-loading @infinite="infiniteHandler"></infinite-loading>
   </div>
 </template>
 
@@ -138,9 +136,9 @@ export default {
   props: ["type"],
   data() {
     return {
-      businesses:[],
+      businesses: [],
       page: 1,
-      disable:false,
+      disable: false,
       options: {
         rewind: true,
         autoplay: true,
@@ -148,54 +146,40 @@ export default {
         pagination: false,
 
         type: "loop",
-        perMove: 1
-      }
+        perMove: 1,
+      },
     };
   },
-      
-      computed:{  
 
-        biz_id(){
-          return  this.$store.state.dashboard.dBusinessId;
-        }
-        
-      },
+  computed: {
+    biz_id() {
+      return this.$store.state.dashboard.dBusinessId;
+    },
+  },
 
   methods: {
+    async handleFollow(user) {
+      document.getElementById("followbtn" + user.id).disabled = true;
 
-
-
-   
-     async handleFollow(user) {
-
-      document.getElementById("followbtn"+user.id).disabled = true;
-       
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
         id: user.id,
-        type: 'business',
+        type: "business",
       };
 
       await axios
         .post(uri, data)
-        .then(response => {
-
+        .then((response) => {
           console.log(response);
           user.is_follow = nextFollowState;
-         document.getElementById("followbtn"+user.id).disabled = false;
-            
+          document.getElementById("followbtn" + user.id).disabled = false;
         })
-        .catch(err =>{  
-          
-          console.log(err)  ;
-           document.getElementById("followbtn"+user.id).disabled =  false;
-          
+        .catch((err) => {
+          console.log(err);
+          document.getElementById("followbtn" + user.id).disabled = false;
         });
-         
     },
-
-
 
     count(number) {
       if (number >= 1000000) {
@@ -206,20 +190,16 @@ export default {
       } else return number;
     },
 
-
-    
-
-
-   infiniteHandler($state) {
+    infiniteHandler($state) {
       const url =
-        this.type === 'Follower'
+        this.type === "Follower"
           ? `business/community/business-follower/${this.biz_id}/`
           : `business/community/business-following/${this.biz_id}/`;
 
       axios
         .get(url + this.page)
         .then(({ data }) => {
-          if (this.type == 'Follower') {
+          if (this.type == "Follower") {
             if (data.data.business_followers.length) {
               this.businesses.push(...data.data.business_followers);
               this.page += 1;
@@ -239,23 +219,17 @@ export default {
             }
           }
         })
-        .catch(err => {
+        .catch((err) => {
           console.log({ err: err });
         });
     },
-
-
-    
-
-
-
-  }
+  },
 };
 </script>
 
 <style scoped>
-.flx100{
-    flex-basis:80% !important;
+.flx100 {
+  flex-basis: 80% !important;
 }
 @media only screen and (min-width: 768px) {
   .btn-text {
@@ -342,8 +316,6 @@ export default {
 
     padding: 1px;
     text-align: left;
-
-    
 
     margin-right: -5px;
 
@@ -455,7 +427,7 @@ export default {
 
     border-bottom-right-radius: 5px;
 
-    background: white; 
+    background: white;
     height: 100%;
     background-color: #fff;
     background-clip: border-box;
@@ -479,7 +451,7 @@ export default {
     border-bottom-right-radius: 5px;
 
     background: white;
-   height: 100%;
+    height: 100%;
     background-color: #fff;
     background-clip: border-box;
     border: 1px solid rgba(0, 0, 0, 0.125);

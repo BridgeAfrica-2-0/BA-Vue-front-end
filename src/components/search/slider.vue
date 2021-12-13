@@ -9,7 +9,7 @@
       class="mb-5 prod"
     >
       <b-card-text>
-        <h6>{{$t("search.Product_Name")}}</h6>
+        <h6>{{ $t("search.Product_Name") }}</h6>
         <p class="short">
           <small>Lorem ipsum dolor sit amet consectetur.</small>
         </p>
@@ -18,7 +18,9 @@
         <p class="price">1400XAF</p>
       </b-card-text>
       <div>
-        <b-button variant="primary" class="buy">{{$t("search.Buy_Now")}}</b-button>
+        <b-button variant="primary" class="buy">{{
+          $t("search.Buy_Now")
+        }}</b-button>
       </div>
     </b-card>
 
@@ -36,22 +38,24 @@
           ></b-img>
         </b-col>
         <b-col>
-          <h2 class="mb-4 text-center">{{$t("search.Product_Name")}}</h2>
-          <p><span class="stock">{{$t("search.In_Stock")}}</span></p>
+          <h2 class="mb-4 text-center">{{ $t("search.Product_Name") }}</h2>
+          <p>
+            <span class="stock">{{ $t("search.In_Stock") }}</span>
+          </p>
           <p>0.00 XAF</p>
           <hr />
           <b-row>
             <b-col>
-              <b-button variant="primary">{{$t("search.Message")}}</b-button>
+              <BtnCtaMessage :element="item" type="business" />
             </b-col>
             <b-col>
-              <b-button variant="outline-dark" class="float-right"
-                >{{$t("search.Checkout_on_website")}}</b-button
-              >
+              <b-button variant="outline-dark" class="float-right">{{
+                $t("search.Checkout_on_website")
+              }}</b-button>
             </b-col>
           </b-row>
           <hr />
-          <h5>{{$t("search.Product_Detail")}}</h5>
+          <h5>{{ $t("search.Product_Detail") }}</h5>
           <p>
             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corporis
             quod, reprehenderit neque atque recusandae laborum quia vel,
@@ -95,9 +99,14 @@
                 src="https://placekitten.com/300/300"
                 size="2rem"
               ></b-avatar>
-              <input :placeholder="$t('search.Post_a_Comment')" class="comment" type="text" />
+              <input
+                :placeholder="$t('search.Post_a_Comment')"
+                class="comment"
+                type="text"
+              />
 
-             ` <fas-icon
+              `
+              <fas-icon
                 class="primary send-cmt"
                 :icon="['fas', 'paper-plane']"
               />
@@ -121,11 +130,11 @@ import Comment from "../comment";
 export default {
   data() {
     return {
-      viewProduct: false
+      viewProduct: false,
     };
   },
   components: {
-    Comment
+    Comment,
   },
   methods: {
     /**
@@ -135,8 +144,8 @@ export default {
      */
     productDetails() {
       this.viewProduct = true;
-    }
-  }
+    },
+  },
 };
 </script>
 

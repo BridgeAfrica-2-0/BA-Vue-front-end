@@ -135,6 +135,8 @@
         <hr />
       </span>
 
+
+
       <b-form-group
         label-cols-lg="12"
         :label="$t('search.Neighbourhood')"
@@ -142,13 +144,18 @@
         label-class="font-weight-bold pt-0"
         class="mb-0 text-left"
       >
-        <b-form-checkbox id="" class="a-text" name="" value=""> Buea</b-form-checkbox>
 
-        <b-form-checkbox id="" class="a-text" name="" value=""> Tiko</b-form-checkbox>
+       <b-form-radio
+            v-for="(nei, i) in lneighbourhoods.slice(0, 4)"
+            :key="i.value"
+            v-model="selectedneigbourhood"
+            :value="nei.id"
+            @change="searchByNeigbourhood(nei)"
+            name="sub-filters"
+          >
+            {{ nei.name }}
+          </b-form-radio>
 
-        <b-form-checkbox id="" class="a-text" name="" value=""> Limbe</b-form-checkbox>
-
-        <b-form-checkbox id="" class="a-text" name="" value=""> Mutengene</b-form-checkbox>
       </b-form-group>
 
       <b-link v-b-modal="'Neighbourhood'"> {{ $t('search.See_all') }} </b-link>
@@ -429,13 +436,22 @@
         label-class="font-weight-bold pt-0"
         class="mb-0 text-left"
       >
-        <b-form-checkbox id="" class="a-text" name="" value=""> Buea</b-form-checkbox>
+     
+     
 
-        <b-form-checkbox id="" class="a-text" name="" value=""> Tiko</b-form-checkbox>
+     
+       <b-form-radio
+            v-for="(nei, i) in lneighbourhoods"
+            :key="i.value"
+            v-model="selectedneigbourhood"
+            :value="nei.id"
+            @change="searchByNeigbourhood(nei)"
+            name="sub-filters"
+          >
+            {{ nei.name }}
+          </b-form-radio>
 
-        <b-form-checkbox id="" class="a-text" name="" value=""> Limbe</b-form-checkbox>
 
-        <b-form-checkbox id="" class="a-text" name="" value=""> Mutengene</b-form-checkbox>
       </b-form-group>
     </b-modal>
 
@@ -768,7 +784,7 @@ export default {
       selectedFilter: [],
       filterLoader: false,
       noFilter: '',
-
+     selectedneigbourhood:null,
       networkFilter: {
         category: false,
         region: false,
@@ -1813,6 +1829,11 @@ export default {
   },
 
   computed: {
+
+    lneighbourhoods() {
+      return this.$store.getters['auth/neigbourhoods'];
+    },
+
     categories() {
       return this.$store.getters['marketSearch/getCategories'];
     },
@@ -1962,6 +1983,26 @@ export default {
         filter_id: filter.id
       });
     },
+
+
+searchByNeigbourhood(nei){
+   
+     
+      let data = {
+        location: nei,
+        
+      };
+
+       if(this.filterType==4){   
+      this.searchProducts(data);
+
+       } else if( this.filterType==1){  
+
+           this.searchBusiness(data);
+
+
+      }
+},
 
     searchByDistance(value) {
       console.log('[DEBUG] PRICE: ', value);

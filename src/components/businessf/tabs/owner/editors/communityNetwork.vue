@@ -24,10 +24,16 @@
               <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{ member.city }}
             </span>
             <br />
-            <span v-if="member.description.length<65">{{ member.description}}</span>
-            <span v-else >
-              {{ member.description.substring(0,65)+"..." }} 
-              <b-link  @click="$bvToast.show('example-toast')" style="cursor:pointer;">Read More</b-link>
+            <span v-if="member.description.length < 65">{{
+              member.description
+            }}</span>
+            <span v-else>
+              {{ member.description.substring(0, 65) + "..." }}
+              <b-link
+                @click="$bvToast.show('example-toast')"
+                style="cursor: pointer"
+                >Read More</b-link
+              >
             </span>
             <b-toast id="example-toast" static no-auto-hide>
               {{ member.description }}
@@ -65,15 +71,8 @@
                 cols="4"
                 class="mt-2 text-center"
               >
-                <b-button
-                  block
-                  size="sm"
-                  class="b-background shadow"
-                  variant="primary"
-                >
-                  <i class="fas fa-envelope fa-lg btn-icon"></i>
-                  <span class="btn-text">Message</span>
-                </b-button>
+                               <BtnCtaMessage :element="member" type="network" />
+
               </b-col>
 
               <b-col

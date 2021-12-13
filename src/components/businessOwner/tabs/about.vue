@@ -1,21 +1,13 @@
 <template>
   <div ref="about">
     <b-icon icon="person-fill" class="icon-size" variant="primary"></b-icon>
-    <b> {{ $t('businessowner.About') }} </b>
+    <b> {{ $t("businessowner.About") }} </b>
 
     <hr />
 
     <b-card>
       <div class="mb-3">
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d48389.732999183005!2d-74.006227!3d40.710128!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown%20Conference%20Center!5e0!3m2!1sen!2sbg!4v1612237569797!5m2!1sen!2sbg"
-          height="450"
-          frameborder="0"
-          class="map mt-1"
-          allowfullscreen=""
-          aria-hidden="false"
-          tabindex="0"
-        ></iframe>
+        <mapbox :coordinates="[business_about.lng, business_about.lat]" />
       </div>
 
       <b-card>
@@ -35,7 +27,11 @@
                   icon="briefcase-fill"
                   class="primary icon-size"
                 ></b-icon>
-                <span v-for="category in business_about.category" :key="category.id">{{category.name}}, </span>
+                <span
+                  v-for="category in business_about.category"
+                  :key="category.id"
+                  >{{ category.name }},
+                </span>
               </p>
               <p>
                 <b-icon icon="search" class="primary icon-size"></b-icon>
@@ -87,7 +83,7 @@
             </b-card-text>
           </b-col>
           <b-col>
-              <!-- <div
+            <!-- <div
                 class="edit"
                 v-b-modal.biographyModal
                 @click="
@@ -98,16 +94,16 @@
               >
                 <b-icon icon="pencil-fill" variant="primary"></b-icon>
               </div> -->
-              <h4 class="mb-4 text-center username">
-                {{ business_about.name }}
-              </h4>
-              <p class="text-justify text">
-                {{ business_about.location_description }}
-              </p>
+            <h4 class="mb-4 text-center username">
+              {{ business_about.name }}
+            </h4>
+            <p class="text-justify text">
+              {{ business_about.location_description }}
+            </p>
           </b-col>
         </b-row>
       </b-card>
-      
+
       <!-- original card -->
       <!-- <b-row v-if="loading">
         <b-col>
@@ -252,10 +248,12 @@
       size="lg"
       @close="cancel"
       @keyup="validate('editAddress')"
-    >{{business_about_input}}
+      >{{ business_about_input }}
+    >
       <b-form @submit.prevent="validate('editAddress')">
         <div class="form-group">
-          <label for="username">{{ $t('businessowner.Business_Name') }}:</label><br />
+          <label for="username">{{ $t("businessowner.Business_Name") }}:</label
+          ><br />
           <input
             type="text"
             name="username"
@@ -269,7 +267,7 @@
 
         <div class="form-group">
           <label for="alias">{{ $t('businessowner.Category') }}:</label><br />
-         <!-- <multiselect
+         <multiselect
             v-model="multiselecvalue"
             @input="subcategories"
             :tag-placeholder="$t('businessowner.Add_this_as_new_tag')"
@@ -280,12 +278,13 @@
             :multiple="true"
             :taggable="true"
             @tag="addTag"
-          ></multiselect> -->
+          ></multiselect>
         </div>
 
         <div class="form-group">
+
           <label for="alias">{{ $t('businessowner.Sub_Category') }}:</label><br />
-          <!-- <multiselect
+          <multiselect
             v-model="filterselectvalue"
             :tag-placeholder="$t('businessowner.Add_this_as_new_tag')"
             :placeholder="$t('businessowner.Search_or_add_a_tag')"
@@ -295,11 +294,11 @@
             :multiple="true"
             :taggable="true"
             @tag="addFilter"
-          ></multiselect> -->
+          ></multiselect>
         </div>
 
-        <label class="typo__label">{{ $t('businessowner.Filters') }}</label>
-         <div>
+        <label class="typo__label">{{ $t("businessowner.Filters") }}</label>
+        <div>
           <!--<b-card no-body>
             <b-tabs pills card vertical>
               <b-tab
@@ -332,8 +331,9 @@
         </div>
 
         <div class="form-group">
-          <label for="username">{{ $t('businessowner.Keywords') }}</label><br />
-            <b-form-tags
+          <label for="username">{{ $t("businessowner.Keywords") }}</label
+          ><br />
+          <b-form-tags
             input-id="tags-separators"
             v-model="business_about_input.keywords"
             tag-variant="primary"
@@ -350,7 +350,8 @@
           :label="$t('businessowner.Country')"
           label-for="input-1"
           label-size="sm"
-        >{{country}}--------{{countries}}
+        >
+        <!-- {{country}}--------{{countries}} -->
           <multiselect
             v-model="country"
             @input="Region"
@@ -522,7 +523,7 @@
         </div>
 
         <b-button class="mt-3 btn-block" variant="primary" type="submit">
-          {{ $t('businessowner.Modify') }}
+          {{ $t("businessowner.Modify") }}
         </b-button>
       </b-form>
     </b-modal>
@@ -533,20 +534,28 @@
 //import moment from "moment";
 import { validationMixin } from "vuelidate";
 import { required, email, minLength } from "vuelidate/lib/validators";
+import mapbox from "@/components/mapbox";
+// import { MglMap, MglMarker } from "vue-mapbox";
 // import VuePhoneNumberInput from "vue-phone-number-input";
 // import "vue-phone-number-input/dist/vue-phone-number-input.css";
 import Multiselect from "vue-multiselect";
 export default {
   components: {
     Multiselect,
+    // MglMap,
+    mapbox,
+    // MglMarker,
     // VuePhoneNumberInput,
   },
   data() {
     return {
-      loading:false,
+      loading: false,
       business_id: null,
       limit: 20,
-
+      accessToken: process.env.VUE_APP_MAPBOX_TOKEN,
+      mapStyle: "mapbox://styles/mapbox/streets-v11",
+      coordinates: [11.504929555178624, 3.8465173382452815], // Lng,Lat
+      zoom: 12,
       multiselecvalue: [],
       filterselectvalue: [],
       select_filterss: [],
@@ -693,13 +702,12 @@ export default {
     },
   },
   created() {
-    
-      let loader = this.$loading.show({
-        container: this.$refs.about,
-        canCancel: true,
-        onCancel: this.onCancel,
-        color: "#e75c18",
-      });
+    let loader = this.$loading.show({
+      container: this.$refs.about,
+      canCancel: true,
+      onCancel: this.onCancel,
+      color: "#e75c18",
+    });
     this.$store
       .dispatch("businessOwner/loadUserBusinessAbout", {
         business_abobusiness_id: this.business_about_input,
@@ -716,8 +724,8 @@ export default {
           JSON.stringify(this.$store.getters["businessOwner/getBusinessAbout"])
         );
         console.log(this.business_about);
-        this.loading = true
-        loader.hide()
+        this.loading = true;
+        loader.hide();
       });
   },
   mounted() {
@@ -764,61 +772,60 @@ export default {
     localities() {
       return this.$store.state.auth.locality;
     },
-    selectedcategories: function () {
+    selectedcategories: function() {
       let selectedUsers = [];
       this.multiselecvalue.forEach((item) => {
         selectedUsers.push(item.category_id);
       });
       return selectedUsers;
     },
-    selectedsubcategories: function () {
+    selectedsubcategories: function() {
       let sub_cat = [];
       this.filterselectvalue.forEach((item) => {
         sub_cat.push(item.subcategory_id);
       });
       return sub_cat;
     },
-    selectedcountry: function () {
+    selectedcountry: function() {
       let sub_cat = [];
       this.country.forEach((item) => {
         sub_cat.push(item.country_id);
       });
       return sub_cat;
     },
-    selectedregion: function () {
+    selectedregion: function() {
       let sub_cat = [];
       this.region.forEach((item) => {
         sub_cat.push(item.region_id);
       });
       return sub_cat;
     },
-    selecteddivision: function () {
+    selecteddivision: function() {
       let sub_cat = [];
       this.division.forEach((item) => {
         sub_cat.push(item.division_id);
       });
       return sub_cat;
     },
-    selectedmunicipality: function () {
+    selectedmunicipality: function() {
       let sub_cat = [];
       this.municipality.forEach((item) => {
         sub_cat.push(item.council_id);
       });
       return sub_cat;
     },
-    selectedlocality: function () {
+    selectedlocality: function() {
       let sub_cat = [];
       this.locality.forEach((item) => {
         sub_cat.push(item.neighborhood_id);
       });
       return sub_cat;
     },
-
   },
 
   methods: {
     validator(tag) {
-      return tag.length > 2 && tag.length < 20
+      return tag.length > 2 && tag.length < 20;
     },
     addTag(newTag) {
       const tag = {
@@ -863,7 +870,7 @@ export default {
         JSON.stringify(this.business_about)
       );
     },
- 
+
     validate(type) {
       switch (type) {
         case "modifyBiography":
@@ -871,7 +878,7 @@ export default {
             "vuex store +++++ " +
               this.$store.getters["businessOwner/getBusinessAbout"]
           );
-      
+
           this.test();
           var data = {
             business_id: this.business_id,
@@ -921,8 +928,9 @@ export default {
                 "update user business about response ++++++",
                 response
               );
-              this.business_about =
-                this.$store.getters["businessOwner/getBusinessAbout"];
+              this.business_about = this.$store.getters[
+                "businessOwner/getBusinessAbout"
+              ];
               console.log("update user business about end");
             })
             .catch((error) => {

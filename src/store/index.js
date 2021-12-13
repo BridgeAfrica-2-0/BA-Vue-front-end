@@ -47,16 +47,17 @@ import profileSettingsEdit from "./profileSettingsEdit";
 import cart from "./cart"
 
 import { social } from './social';
+import networkSetting from './networkSetting';
 
 
 Vue.use(Vuex);
 
-// axios.defaults.baseURL = "https://team4.maxinemoffett.com/api/v1/";
-//axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 axios.defaults.baseURL = process.env.VUE_APP_API_URL;
+// axios.defaults.baseURL = "http://edson.maxinemoffett.com/api/v1/";
 
+// axios.defaults.baseURL = process.env.VUE_APP_API_URL_DEV;
 
-
+axios.defaults.baseURL = "http://edson.maxinemoffett.com/api/v1/";
 
 export default new Vuex.Store({
     modules: {
@@ -101,7 +102,8 @@ export default new Vuex.Store({
         homeRedirection,
         profileOrderDetail,
         profileSettingsEdit,
-        cart
+        cart,
+        networkSetting
 
     }
 })

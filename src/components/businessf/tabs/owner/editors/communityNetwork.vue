@@ -18,7 +18,7 @@
             {{ member.category[0].name }}
             <br />
             {{ member.communityNum }}
-            Community <br />
+            {{ $t('general.Community') }} <br />
 
             <span class="location">
               <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{ member.city }}
@@ -32,7 +32,7 @@
               <b-link
                 @click="$bvToast.show('example-toast')"
                 style="cursor: pointer"
-                >Read More</b-link
+                >{{ $t('general.Read_More') }} </b-link
               >
             </span>
             <b-toast id="example-toast" static no-auto-hide>
@@ -59,7 +59,7 @@
                   variant="primary"
                 >
                   <i class="fas fa-user-plus fa-lg btn-icon"></i>
-                  <span class="btn-com">Community</span>
+                  <span class="btn-com">{{ $t('general.Community') }} </span>
                 </b-button>
               </b-col>
 
@@ -90,7 +90,7 @@
                   variant="primary"
                 >
                   <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
-                  <span class="btn-text">Join</span>
+                  <span class="btn-text">{{ $t('general.Join') }} </span>
                 </b-button>
               </b-col>
             </b-row>

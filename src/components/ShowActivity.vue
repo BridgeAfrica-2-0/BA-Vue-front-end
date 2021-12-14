@@ -8,7 +8,7 @@
       <b-card-header header-tag="header" class="p-1" role="tab">
         <p block v-b-toggle.accordion-1 variant="info">
           <b-icon :icon="openBusiness ? 'arrow-down' : 'arrow-up'"></b-icon>
-          Business
+          {{$t("general.Business")}}
         </p>
       </b-card-header>
       <b-collapse id="accordion-1" accordion="my-accordion" role="tabpanel">
@@ -49,7 +49,7 @@
       <b-card-header header-tag="header" class="p-1" role="tab">
         <p block v-b-toggle.accordion-2 variant="info">
           <b-icon :icon="openNetwork ? 'arrow-down' : 'arrow-up'"></b-icon>
-          Network
+          {{$t("general.Network")}}
         </p>
       </b-card-header>
       <b-collapse id="accordion-2" accordion="my-accordion" role="tabpanel">

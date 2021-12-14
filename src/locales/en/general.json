@@ -94,6 +94,27 @@
     "Checkout":"Checkout",
     "Confirm_Payment":"Confirm Payment",
     "Reply":"Reply",
-    "All":"All"
+    "All":"All",
+    "Read_More":"Read More",
+    "Community":"Community",
+    "Join":"Join",
+
+    "Members":"Members",
+    "Joined":"Joined",
+    "Builds_networks_around_your_Business":"Builds networks around your Business",
+    "Create_network_to_stay_in_touch_with_just_the_people":"Create network to stay in touch with just the people",
+    "you_want_Engage":"You want engage",
+    "share":"Share",
+    "Make_Plans_and_much_more":"Make Plans and much more",
+    "Add_Network":"Add Network",
+    "Home":"Home",
+    "COMMUNITY":"COMMUNITY",
+    "Followers":"Followers",
+    "Following":"Following",
+    "Businesses":"Businesses",
+    "Network":"Network",
+    "People":"People"
+
+
 
 }

@@ -134,7 +134,7 @@ export default {
     },
   },
   methods: {
-    async handleJoin(user) {
+    async handle (user) {
       document.getElementById("joinbtn" + user.id).disabled = true;
       const uri = user.is_member === 0 ? `/add-member` : `/remove-member`;
       const nextFollowState = user.is_member === 0 ? 1 : 0;

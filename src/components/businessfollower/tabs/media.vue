@@ -138,7 +138,7 @@ export default {
 
   created() {
     this.urlData = this.$route.params.id;
-
+ 
     this.strategy = {
       business: () => ({
         album: 'businessOwner/getAlbums',

@@ -318,11 +318,11 @@ export default {
     changeTab(index) {
       this.isTabActive = index;
       if (index == 2) {
-        this.getOrderByStatus($t("myOrders.pending"));
+        this.getOrderByStatus(this.$t("myOrders.pending"));
       } else if (index == 3) {
-        this.getOrderByStatus($t("myOrders.complete"));
+        this.getOrderByStatus(this.$t("myOrders.complete"));
       } else if (index == 4) {
-        this.getOrderByStatus($t("myOrders.cancel"));
+        this.getOrderByStatus(this.$t("myOrders.cancel"));
       } else {
         this.getAllOrders();
       }
@@ -396,11 +396,11 @@ export default {
     getOrders() {
       let index = this.isTabActive;
       if (index == 2) {
-        this.getOrderByStatus($t("myOrders.pending"));
+        this.getOrderByStatus(this.$t("myOrders.pending"));
       } else if (index == 3) {
-        this.getOrderByStatus($t("myOrders.complete"));
+        this.getOrderByStatus(this.$t("myOrders.complete"));
       } else if (index == 4) {
-        this.getOrderByStatus($t("myOrders.cancel"));
+        this.getOrderByStatus(this.$t("myOrders.cancel"));
       } else {
         this.getAllOrders();
       }

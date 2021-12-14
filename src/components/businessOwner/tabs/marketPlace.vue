@@ -376,7 +376,7 @@ export default {
       this.orders = !this.orders;
       this.archive = !this.archive;
       this.market = false;
-      this.my_orders= "orders";
+      this.my_orders= this.$t('businessowner.orders');
       console.log("-------------------");
       console.log("orders: ", this.orders);
       console.log("archive: ", this.archive);
@@ -388,9 +388,9 @@ export default {
       this.market = !this.orders;
       this.archive = false;
       if (this.orders == true) {
-        this.my_orders = "market";
+        this.my_orders = this.$t('businessowner.market');
       } else {
-        this.my_orders = "my orders";
+        this.my_orders = this.$t('businessowner.my_orders');
       }
       console.log("----" + this.status);
     },
@@ -431,13 +431,13 @@ export default {
         .then((res) => {
           this.load = false;
           (this.success = true), (this.val = "success");
-          this.msg = "Operation was successful !!";
+          this.msg = this.$t('businessowner.Operation_was_successful');
           this.getProducts();
         })
         .catch((err) => {
           this.load = false;
           (this.success = true), (this.val = "danger");
-          this.msg = "Something wen't wrong !!";
+          this.msg = this.$t('businessowner.Something_went_wrong');
 
           setTimeout(() => {
             this.success = false;

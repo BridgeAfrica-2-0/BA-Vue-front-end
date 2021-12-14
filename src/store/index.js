@@ -47,12 +47,16 @@ import profileSettingsEdit from "./profileSettingsEdit";
 import cart from "./cart"
 
 import { social } from './social';
+import networkSetting from './networkSetting';
 
 
 Vue.use(Vuex);
 
-// axios.defaults.baseURL = process.env.VUE_APP_API_URL_DEV;
-axios.defaults.baseURL = process.env.VUE_APP_API_URL_EDS;
+
+axios.defaults.baseURL = process.env.VUE_APP_API_URL;
+
+
+
 
 export default new Vuex.Store({
     modules: {
@@ -97,7 +101,8 @@ export default new Vuex.Store({
         homeRedirection,
         profileOrderDetail,
         profileSettingsEdit,
-        cart
+        cart,
+        networkSetting
 
     }
 })

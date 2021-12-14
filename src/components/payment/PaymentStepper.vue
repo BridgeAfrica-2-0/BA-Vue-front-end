@@ -98,15 +98,16 @@ export default {
       max_step: 5,
       steps: [
         {
-          text: "Shipping Address",
+          
+          text: this.$t("general.Shipping_Address"),
           status: true,
         },
         {
-          text: "Checkout",
+          text: this.$t("general.Checkout"),
           status: false,
         },
         {
-          text: "Confirm Payment",
+          text: this.$t("general.Confirm_Payment"),
           status: false,
         },
       ],

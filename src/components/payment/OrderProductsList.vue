@@ -8,32 +8,68 @@
 			<div class="col-12 order-item-caroussel col-sm-4 mb-3 col-md-4">
 				<ProductCaroussel :productImages="productImages" />
 			</div>
-			<div
+
+			<div class="col-auto flex-fill order-info body-font-size col-sm-8 col-md-8">
+				<div class="row">
+					<div class="col-4">Name of item:</div>
+					<div class="col">{{ cart_item.product_name }}</div>
+				</div>
+
+				<div class="row">
+					<div class="col-4">Amount :</div>
+					<div class="col">{{ formatMoney(Number(cart_item.product_price)) }}</div>
+				</div>
+
+				<div class="row">
+					<div class="col-4">Quantity :</div>
+					<div class="col"> 
+						<input
+									class="quantity-input"
+									type="number"
+									min="1"
+									@change="changeQuantity($event, i)"
+									v-model="cart_item.quantity"
+								/>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-4">Total :</div>
+					<div class="col">
+						{{
+									formatMoney(
+										Number(cart_item.product_price) * cart_item.quantity
+									)
+								}}
+					</div>
+				</div>
+			</div>
+			<!-- <div
 				class="col-auto flex-fill order-info body-font-size col-sm-8 col-md-8"
 			>
 				<b-table-simple borderless>
 					<b-tbody>
 						<b-tr>
 							<b-td>
-								Name of item:
+								{{$t("general.Name_of_item")}}:
 							</b-td>
 							<b-th>
 								{{ cart_item.product_name }}
-								<!-- {{ cart_item.name }} -->
+								
 							</b-th>
 						</b-tr>
 						<b-tr>
 							<b-td>
-								Amount :
+								{{$t("general.Amount")}} :
 							</b-td>
 							<b-th>
 								{{ formatMoney(Number(cart_item.product_price)) }}
-								<!-- {{ formatMoney(Number(cart_item.amount)) }} -->
+								
 							</b-th>
 						</b-tr>
 						<b-tr>
 							<b-td>
-								Quantity :
+								{{$t("general.Quantity")}} :
 							</b-td>
 							<b-th>
 								<input
@@ -45,6 +81,7 @@
 								/>
 							</b-th>
 						</b-tr>
+
 						<b-tr>
 							<b-td>
 								Shipping:
@@ -61,6 +98,7 @@
 								</div>
 							</b-th>
 						</b-tr>
+
 						<b-tr>
 							<b-td>
 								Total:
@@ -78,8 +116,9 @@
 								</div>
 								<!-- {{
 									formatMoney(
-										Number(cart_item.product_price) * cart_item.quantity + 1000
+										Number(cart_item.product_price) * cart_item.quantity
 									)
+
 								}} -->
 								<!-- {{
 									formatMoney(
@@ -87,11 +126,12 @@
 											cart_item.shipping
 									)
 								}} -->
+
 							</b-th>
 						</b-tr>
 					</b-tbody>
 				</b-table-simple>
-			</div>
+			</div> -->
 		</div>
 		<div class="row my-4" v-if="loading">
 			<div class="col-12 d-flex justify-content-center align-items-center">
@@ -103,7 +143,7 @@
 		</div>
 		<div class="row" v-if="error">
 			<div class="col-12">
-				<b-alert dismissible show variant="secondary">Your cart is empty!</b-alert>
+				<b-alert dismissible show variant="secondary">{{$t("general.Your_cart_is_empty")}}!</b-alert>
 			</div>
 		</div>
 		<div class="row my-4">

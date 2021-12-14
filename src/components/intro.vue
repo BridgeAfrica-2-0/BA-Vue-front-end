@@ -19,7 +19,7 @@
             class="icon-size"
             variant="primary"
           ></b-icon>
-          Work at: bb
+          Work at: 
               <span
                 class="text"
                 v-for="exp in info.user_experience.slice(0, 1)"

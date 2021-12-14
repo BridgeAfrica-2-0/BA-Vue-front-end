@@ -36,7 +36,7 @@
           </div>
           <div class="d-inline-block ml-4 float-left mt-4">
             <b-link>
-              <h5 class="font-weight-bolder name"> {{info.user.name}} t</h5>
+              <h5 class="font-weight-bolder name"> {{info.user.name}} </h5>
             </b-link>
             <br />
 

@@ -54,8 +54,8 @@ Vue.use(Vuex);
 
 
 // axios.defaults.baseURL = process.env.VUE_APP_API_URL_DEV;
-axios.defaults.baseURL = "http://edson.maxinemoffett.com/api/v1/";
-
+//axios.defaults.baseURL = "http://edson.maxinemoffett.com/api/v1/";
+axios.defaults.baseURL = "http://courage4.maxinemoffett.com/api/v1/";
 
 
 export default new Vuex.Store({
@@ -102,7 +102,8 @@ export default new Vuex.Store({
         profileOrderDetail,
         profileSettingsEdit,
         cart,
-        networkSetting
+        networkSetting,
+        profileOrders
 
     }
 })

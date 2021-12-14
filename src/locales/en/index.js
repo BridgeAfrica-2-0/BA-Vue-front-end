@@ -17,6 +17,9 @@ import memnetwork from './memnetwork.json'
 
 import profilefollower from './profilefollower.json'
 import about from './about.json'
+import settings from './settings.json'
+
+
 
 
 
@@ -42,5 +45,6 @@ export const en = {
     Order: Order,
     myOrders: myOrders,
     about: about,
+    settings: settings,
 
 }

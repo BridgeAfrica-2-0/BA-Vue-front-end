@@ -1,7 +1,5 @@
 <template>
   <b-container v-if="networkinfo != 0">
-    
-
     <div class="">
       <b-container>
         <b-form-group
@@ -11,7 +9,7 @@
           label-class="font-weight-bold pt-0 username"
           class="mb-0 text"
         >
-          <b-form-group class="mb-0" >
+          <b-form-group class="mb-0">
             <b-form-radio-group
               class="pt-2 text"
               v-model="networkinfo[0].setting_value"
@@ -33,7 +31,7 @@
           label-class="font-weight-bold pt-0 username"
           class="mb-0 text"
         >
-          <b-form-group class="mb-0" >
+          <b-form-group class="mb-0">
             <b-form-radio-group
               :options="options"
               v-model="networkinfo[1].setting_value"
@@ -72,11 +70,12 @@
     </div>
 
     <b-container>
-      <b-link 
-       class="f-left text" 
-       v-b-modal="'my-modal'"
-      >{{ $t('network.Delete_Network') }}</b-link>
-      <b-modal id="my-modal" @ok="deleteNetwork">{{ $t('network.Delete_Network') }}!</b-modal>
+      <b-link class="f-left text" v-b-modal="'my-modal'">{{
+        $t("network.Delete_Network")
+      }}</b-link>
+      <b-modal id="my-modal" @ok="deleteNetwork"
+        >{{ $t("network.Delete_Network") }}!</b-modal
+      >
     </b-container>
 
     <div class="b-bottomn">
@@ -85,13 +84,19 @@
         class="a-button-l text"
         @click="save"
         :disabled="load"
-      ><b-spinner v-if="load" small type="grow"></b-spinner> {{ $t('network.Save_Changes') }}</b-button>
+        ><b-spinner v-if="load" small type="grow"></b-spinner>
+        {{ $t("network.Save_Changes") }}</b-button
+      >
       <br />
     </div>
   </b-container>
   <b-container v-else>
     <div class="text-center">
-      <b-spinner style="width: 6rem; height: 6rem;" label="Text Centered Large Spinner" variant="primary"></b-spinner>
+      <b-spinner
+        style="width: 6rem; height: 6rem"
+        label="Text Centered Large Spinner"
+        variant="primary"
+      ></b-spinner>
     </div>
   </b-container>
 </template>
@@ -109,31 +114,31 @@ export default {
       networkId: "",
       options: [
         {
-          text: "Admin Only",
+          text: this.$t("network.Admin_Only"),
           value: "Admin only",
         },
         {
-          text: "Editor",
+          text: this.$t("network.Editor"),
           value: "Allow editor to post",
         },
         {
-          text: "Member",
+          text: this.$t("network.Member"),
           value: "Allow member to post",
         },
       ],
       lists: [
         {
-          text: "Approval by admin",
+          text: this.$t("network.Approval_by_admin"),
           value: "Admin",
           disabled: false,
         },
         {
-          text: "Approval by editor and admin",
+          text: this.$t("network.Approval_by_editor_and_admin"),
           value: "Admin and editor",
           disabled: false,
         },
       ],
-    }
+    };
   },
 
   computed: {
@@ -153,7 +158,7 @@ export default {
   methods: {
     ...mapActions({
       generalSave: "networkSettings/generalSave",
-      networkDelete: "networkSettings/networkDelete"
+      networkDelete: "networkSettings/networkDelete",
     }),
 
     check() {
@@ -172,37 +177,39 @@ export default {
     getNetworkInfo() {
       console.log("getNetworkInfo");
       this.$store
-        .dispatch("NetworkSettings/getnetworkinfo", "settings/general/"+this.url)
+        .dispatch(
+          "NetworkSettings/getnetworkinfo",
+          "settings/general/" + this.url
+        )
         .then(() => {
-          console.log('getNetworkInfo');
+          console.log("getNetworkInfo");
         })
-        .catch(err => {
+        .catch((err) => {
           console.log({ err: err });
         });
     },
 
     save() {
       this.load = true;
-      let formData = new FormData()
-      console.log("privacy: "+ this.networkinfo[0].setting_value)
-      console.log("post_permission: "+ this.networkinfo[1].setting_value)
-      console.log("post_approval: "+ this.networkinfo[2].setting_value)
-      formData.append("privacy", this.networkinfo[0].setting_value)
-      formData.append("post_permission", this.networkinfo[1].setting_value)
-      formData.append("post_approval", this.networkinfo[2].setting_value)
+      let formData = new FormData();
+      console.log("privacy: " + this.networkinfo[0].setting_value);
+      console.log("post_permission: " + this.networkinfo[1].setting_value);
+      console.log("post_approval: " + this.networkinfo[2].setting_value);
+      formData.append("privacy", this.networkinfo[0].setting_value);
+      formData.append("post_permission", this.networkinfo[1].setting_value);
+      formData.append("post_approval", this.networkinfo[2].setting_value);
       this.$store
-        .dispatch("NetworkSettings/generalSave", 
-        {
-          path: "general-settings/"+this.url,
-          formData: formData
+        .dispatch("NetworkSettings/generalSave", {
+          path: "general-settings/" + this.url,
+          formData: formData,
         })
-        .then(({data}) => {
+        .then(({ data }) => {
           console.log(data);
           this.getNetworkInfo();
           this.load = false;
           this.flashMessage.show({
             status: "success",
-            message: "Changes Made Successfully"
+            message: "Changes Made Successfully",
           });
         })
         .catch((err) => {
@@ -210,36 +217,33 @@ export default {
           this.load = false;
           this.flashMessage.show({
             status: "error",
-            message: "Unable To Make Changes"
+            message: "Unable To Make Changes",
           });
         });
     },
 
-    deleteNetwork: function(){
-      console.log("deleteNetwork: "+this.url);
+    deleteNetwork: function () {
+      console.log("deleteNetwork: " + this.url);
       this.$store
-      .dispatch("NetworkSettings/networkDelete", 
-      {
-        path: "settings/delete-network/"+this.url,
-      })
-      .then(({data}) => {
-        console.log(data);
-        console.log('ohh yeah');
-        this.flashMessage.show({
-          status: "success",
-          message: "Network Deleted"
+        .dispatch("NetworkSettings/networkDelete", {
+          path: "settings/delete-network/" + this.url,
+        })
+        .then(({ data }) => {
+          console.log(data);
+          console.log("ohh yeah");
+          this.flashMessage.show({
+            status: "success",
+            message: "Network Deleted",
+          });
+        })
+        .catch((err) => {
+          console.log({ err: err });
+          this.flashMessage.show({
+            status: "error",
+            message: "Unable To Delete Network",
+          });
         });
-          
-      })
-      .catch(err => {
-        console.log({ err: err });
-        this.flashMessage.show({
-          status: "error",
-          message: "Unable To Delete Network"
-        });
-      });
-		},
-
+    },
   },
 };
 </script>

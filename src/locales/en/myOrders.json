@@ -15,5 +15,11 @@
     "Total":"Total",
     "Re_order":"Re-order",
     "In_Progress":"In Progress",
-    "Cancel":"Cancel"
+    "Cancel":"Cancel",
+
+    "Completed":"Completed",
+    "Reorder":"Reorder",
+    "pending":"Pending",
+    "complete":"Complete",
+    "cancel":"Cancel"
 }

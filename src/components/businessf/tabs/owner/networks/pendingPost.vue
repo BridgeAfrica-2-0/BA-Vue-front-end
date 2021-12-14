@@ -2,7 +2,7 @@
   <div class="container">
     <b-row>
       <b-col cols="12" class="f-left">
-        <div v-for="post in allPendingPost" :key="post.id" :loading="load" class="mb-4">
+post<div v-for="post in owner_post" :key="post.id" :loading="load" class="mb-4">
           <div class="mb-2">
             <div class="f-left">
               <b-row class="px-md-3">
@@ -33,27 +33,27 @@
                     </span>
                   </h6>
                   <p>
-                    {{ post.created_at }} -
+                    {{ moment(post.created_at).fromNow() }} - 
                     <span class="text-primary">{{ post.comment }}</span>
                   </p>
                 </b-col>
               </b-row>
-              <b-row>
+              <!-- <b-row>
                 <b-col cols="12" class="mt-2">
                   <p class="text-justify text">
                     {{ post.content }}
                   </p>
                 </b-col>
-              </b-row>
+              </b-row> -->
             </div>
           </div>
           <div class="m-0 p-0">
             <p class="post-text">
               <!--     :text="item.content.details"   -->
               <read-more
-                v-if="item.content"
+                v-if="post.content"
                 more-str="read more"
-                :text="item.content"
+                :text="post.content"
                 link="#"
                 less-str="read less"
                 :max-chars="200"
@@ -61,8 +61,8 @@
             </p>
           </div>
 
-          <div v-if="item.media.length > 0" class="">
-            <span v-for="video in mapvideo(item.media)" :key="video">
+          <div v-if="post.media.length > 0" class="">
+            <span v-for="video in mapvideo(post.media)" :key="video">
               <youtube
                 class="w-100 videoh"
                 :video-id="getId(video)"
@@ -71,14 +71,14 @@
               ></youtube>
             </span>
 
-            <light css=" " :cells="item.media.length" :items="mapmediae(item.media)"></light>
+            <light css=" " :cells="post.media.length" :items="mapmediae(post.media)"></light>
           </div>
         </div>
       </b-col>
     </b-row>
     <b-row>
       <b-col>
-        <p class="text-center" v-if="allPendingPost < 1">
+        <p class="text-center" v-if="owner_post < 1">
           {{ $t('network.No_Pending_Posts_To_Show') }}
         </p>
       </b-col>
@@ -198,7 +198,7 @@ export default {
       }
       this.$store
         .dispatch('networkSetting/loadMore', url)
-        .then(({ data }) => {
+        .then(({ data }) => { console.log("------",data)
           if (data.data.length) {
             this.page += 1;
 

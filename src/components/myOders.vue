@@ -2,10 +2,7 @@
   <div class="container">
     <navbar />
     <hr />
-    <!-- partie mobile--------------------------------------------------------------------- 
     
-    ----------------------DEBUT -----------------------------------------------------
-    -->
     <div id="hidemobile">
       <div
         class="justify-content-between d-flex row cd B"
@@ -39,9 +36,13 @@
 
           <h2 class="h2 text-position text-center">{{$t("myOrders.Complete")}}</h2>
         </div>
-        <div id="m4" class="mobile2 col t" @click="changeElementType(4)">
-          <div class="cercle2">4</div>
-          <h2 class="h2 text-position text-center">Cancel</h2>
+        <div
+          id="m4"
+          class="mobile2 col t px-4 d-flex justify-content-center"
+          @click="changeElementType(4)"
+        >
+          <div class="cercle2 align-self-center">4</div>
+          <h2 class="h2 align-self-center ml-1 mb-0">{{ $t("myOrders.Cancel") }}</h2>
         </div>
       </div>
 
@@ -184,9 +185,15 @@
                     text="Manage"
                     class="m-md-2"
                   >
-                    <b-dropdown-item>{{$t("myOrders.archive")}}</b-dropdown-item>
-                    <b-dropdown-item>{{$t("myOrders.delete")}}</b-dropdown-item>
-                    <b-dropdown-item>Completed</b-dropdown-item>
+                    <b-dropdown-item>{{
+                      $t("myOrders.archive")
+                    }}</b-dropdown-item>
+                    <b-dropdown-item>{{
+                      $t("myOrders.delete")
+                    }}</b-dropdown-item>
+                    <b-dropdown-item>{{
+                      $t("myOrders.Completed")
+                    }}</b-dropdown-item>
                   </b-dropdown>
                 </div>
 
@@ -523,9 +530,15 @@
                     text="Manage"
                     class="m-md-2"
                   >
-                    <b-dropdown-item>{{$t("myOrders.Archive")}}</b-dropdown-item>
-                    <b-dropdown-item>{{$t("myOrders.Delete")}}</b-dropdown-item>
-                    <b-dropdown-item>Completed</b-dropdown-item>
+                    <b-dropdown-item>{{
+                      $t("myOrders.Archive")
+                    }}</b-dropdown-item>
+                    <b-dropdown-item>{{
+                      $t("myOrders.Delete")
+                    }}</b-dropdown-item>
+                    <b-dropdown-item>{{
+                      $t("myOrders.Completed")
+                    }}</b-dropdown-item>
                   </b-dropdown>
                 </div>
               </div>
@@ -568,7 +581,7 @@
 
               <div class="container d-flex justify-content-end btn-marg">
                 <button class="button btn shadow" @click="handleReOrder(9)">
-                  <h3 class="h3 button-text">{{$t("myOrders.Re_order")}}</h3>
+                  <h3 class="h3 button-text">{{ $t("myOrders.Reorder") }}</h3>
                 </button>
               </div>
 

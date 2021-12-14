@@ -462,7 +462,7 @@
                 {{ $t("search.Market") }}
               </h6>
 
-              <MiniMarket />
+              <MiniMarket :products="miniproducts" />
 
               <span class="float-right mb-3" @click="selectedId = 4">
                 <b-link href="#top"> {{ $t("search.see_more") }} </b-link>
@@ -568,8 +568,14 @@
             <div v-if="selectedId == '1'">
               <businessmap :businessPage="businessPage" />
             </div>
-            <div v-else>
-              <mapbox :businesses="businesses.data" />
+            <div v-if="selectedId == '4'">
+              <mapbox :products="allproducts.data" />
+            </div>
+            <div v-if="selectedId == '0'">
+              <mapbox
+                :businesses="businesses.data"
+                :products="miniproducts.data"
+              />
             </div>
           </div>
         </b-col>
@@ -650,6 +656,12 @@ export default {
     businesses() {
       return this.$store.getters["allSearch/getBusinesses"];
     },
+    miniproducts() {
+      return this.$store.getters["allSearch/getProducts"];
+    },
+    allproducts() {
+      return this.$store.getters["marketSearch/getProducts"];
+    },
 
     products() {
       return this.$store.state.market.products;
@@ -709,7 +721,7 @@ export default {
       selectedfilter: "",
       showform: false,
 
-      businessPage: 2,
+      businessPage: 1,
       //selectcategories:[],
 
       categories_filters: [],

@@ -4,7 +4,8 @@
       <div class="container">
         <div class="col-md-12 col-lg-2 col-xl-2 text-center">
           <a class="d-inline-block align-top mt-1" href="#">
-            <img src="@/assets/img/BAC-clear-dotted-logo.png" alt="" class="balogo" loading="lazy" />
+            <img src="@/assets/logo.png" alt="" class="balogo desktop" loading="lazy" />
+            <img src="@/assets/img/BAC-clear-dotted-logo.png" alt="" class="balogo mobile" loading="lazy" />
           </a>
         </div>
 
@@ -12,20 +13,20 @@
 
         <b-collapse id="nav-collapse" is-nav>
           <b-navbar-nav class="ml-auto text-center">
-            <b-nav-item href="#">
-              <span class="text-dark font-arvo nav-span">Home</span>
+            <b-nav-item >
+              <span class="text-dark font-arvo nav-span"><router-link :to="{name: 'home1'}">Home</router-link></span>
             </b-nav-item>
-            <b-nav-item href="/about" class="ml-md-3" :class="currentRouteName == 'about' ? 'active' : ''">
-              <span class="text-dark font-arvo nav-span">About Us</span>
+            <b-nav-item  class="ml-md-3" :class="currentRouteName == 'about' ? 'active' : ''">
+              <span class="text-dark font-arvo nav-span"> <router-link :to="{name: 'about'}">About Us</router-link></span>
             </b-nav-item>
-            <b-nav-item href="/contact" class="ml-md-3" :class="currentRouteName == 'contact' ? 'active' : ''">
-              <span class="text-dark font-arvo nav-span">Contact Us</span>
+            <b-nav-item  class="ml-md-3" :class="currentRouteName == 'contact' ? 'active' : ''">
+              <span class="text-dark font-arvo nav-span"> <router-link :to="{name: 'contact'}">Contact Us</router-link> </span>
             </b-nav-item>
-            <b-nav-item href="#" class="ml-md-3">
-              <span class="text-dark font-arvo nav-span">Login</span>
+            <b-nav-item class="ml-md-3">
+              <span class="text-dark font-arvo nav-span"> <router-link :to="{name: 'Login'}">Login </router-link> </span>
             </b-nav-item>
-            <b-nav-item href="#" class="ml-md-3">
-              <span class="text-dark font-arvo nav-span">Sign Up</span>
+            <b-nav-item  class="ml-md-3">
+              <span class="text-dark font-arvo nav-span"> <router-link :to="{name: 'signup'}">Sign Up</router-link> </span>
             </b-nav-item>
           </b-navbar-nav>
         </b-collapse>
@@ -79,16 +80,22 @@ export default {
 
 @media only screen and (max-width: 768px) {
   .balogo{
-    width: 80px ;
-    height: 50px ;
+    width: 90px ;
+    height: 40px ;
+  }
+  .desktop{
+    display: none;
   }
 }
 
 
 @media only screen and (min-width: 768px) {
   .balogo{
-    width: 100px ;
-    height: 80px ;
+    width: 200px ;
+    height: 70px ;
+  }
+  .mobile{
+    display: none;
   }
 }
 </style>

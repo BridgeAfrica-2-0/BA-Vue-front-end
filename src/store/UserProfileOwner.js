@@ -120,8 +120,8 @@ export default {
     },
 
     // for albums
-    async getAlbums({ commit }) {
-      const res = await axios.get("profile/album/show");
+    async getAlbums({ commit }, id) {
+      const res = await axios.get("profile/album/show?id="+id);
       commit("setAlbums", res.data.data.album);
     },
 
@@ -139,8 +139,8 @@ export default {
     },
 
     // for images
-    async getImages({ commit }) {
-      const res = await axios.get("profile/post/media");
+    async getImages({ commit }, id) {
+      const res = await axios.get("profile/post/media?id="+id);
       commit("setImages", res.data.data);
     },
 

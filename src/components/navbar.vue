@@ -92,16 +92,13 @@
                 type="search"
                 data-toggle="popover"
                 class="form-control search-h"
-
                 style="font-size: 17px !important"
                 :placeholder="searchOptions.placeholder"
                 v-model="searchOptions.keyword"
-
                 aria-label=""
                 data-original-title=""
                 title=""
               />
-
 
               <vue-bootstrap-typeahead
                 v-model="query"
@@ -113,20 +110,15 @@
                 class="search-hh w-44"
               />
 
+              <vue-bootstrap-typeahead
+                v-model="query"
+                :data="users"
+                :serializer="(item) => item.login"
+                @hit="selectedUser = $event"
+                :placeholder="$t('general.Where')"
+                class="search-hh"
+              />
 
-           <vue-bootstrap-typeahead
-    
-    v-model="query"
-    :data="users"
-    :serializer="item => item.login"
-    @hit="selectedUser = $event"
-    :placeholder="$t('general.Where')"
-    class="search-hh"
-  />
-
-    
-
-             
               <slot name="button">
                 <Button @click.native="getKeyword" />
               </slot>
@@ -273,7 +265,9 @@
                 ></a>
                 <b-popover target="notif" triggers="hover" placement="top">
                   <div class="popover-body">
-                    <p class="font-weight-bold">{{ $t("general.Notifications") }}</p>
+                    <p class="font-weight-bold">
+                      {{ $t("general.Notifications") }}
+                    </p>
                     <div
                       v-for="notification in notifications"
                       :key="notification.id"
@@ -306,7 +300,9 @@
                     <hr class="h-divider" />
 
                     <router-link :to="newRedirection('notification')"
-                      ><u>{{ $t("general.See_all_Notifications") }}</u></router-link
+                      ><u>{{
+                        $t("general.See_all_Notifications")
+                      }}</u></router-link
                     >
                     <!-- <a
                       href="https://bridgeafrica.info/nav/notifications-view-all.html"
@@ -330,8 +326,8 @@
                       'user' == user.user_type ? 'rounded-circle' : ''
                     } logo-sizee`"
                     alt=""
-
-                /></router-link>
+                /></span>
+                <!-- </router-link> -->
               </div>
 
               <b-tooltip target="profilepic" variant="light" triggers="hover">
@@ -361,7 +357,6 @@
                     >
                       <Activity />
                     </div>
-
 
                     <a
                       v-if="'user' != user.user_type"
@@ -502,7 +497,9 @@
                   />
                 </div>
                 <div class="ml-3 mt-2">
-                  <p class="font-weight-bold">{{ $t("general.Your_Businesses") }}</p>
+                  <p class="font-weight-bold">
+                    {{ $t("general.Your_Businesses") }}
+                  </p>
                 </div>
               </div>
             </div>
@@ -593,12 +590,8 @@
       </div>
     </nav>
 
-    <div>    
-
-
-
-
-<!-- 
+    <div>
+      <!-- 
 
            <div>
   <vue-bootstrap-typeahead
@@ -613,13 +606,6 @@
  <h3>Selected User JSON</h3>
  <pre>{{ selectedUser | stringify }}</pre>
 </div> -->
-
-
-
-
-
-
-
     </div>
   </header>
 </template>
@@ -630,14 +616,14 @@ import Activity from "@/components/ShowActivity.vue";
 // import NavBarNotifications from '@/components/NavBarNotifications.vue';
 import { mapGetters, mapActions, mapMutations } from "vuex";
 import axios from "axios";
-import VueBootstrapTypeahead from 'vue-bootstrap-typeahead'
+import VueBootstrapTypeahead from "vue-bootstrap-typeahead";
 
 export default {
   name: "navbar",
   components: {
     Button,
     Activity,
-    VueBootstrapTypeahead
+    VueBootstrapTypeahead,
     // NavBarNotifications
   },
   props: {
@@ -661,10 +647,9 @@ export default {
       messagePatterns: null,
       redirectionPatterns: null,
 
-       query: '',
+      query: "",
       selectedUser: null,
-      users: []
-
+      users: [],
     };
   },
   computed: {
@@ -699,7 +684,6 @@ export default {
 
     this.redirectionPatterns = {
       message: {
-
         user: () => () => ({
           name: "messaging",
         }),
@@ -736,22 +720,18 @@ export default {
       this.updateNotificationEvent();
     },
 
-
     query(newQuery) {
       axios.get(`neighborhood/${newQuery}`).then(({ data }) => {
         this.$store.commit("auth/setneigbourhoods", data.data);
       });
     },
-
   },
 
-
-    filters: {
+  filters: {
     stringify(value) {
-      return JSON.stringify(value, null, 2)
-    }
+      return JSON.stringify(value, null, 2);
+    },
   },
-
 
   methods: {
     ...mapActions({
@@ -769,7 +749,6 @@ export default {
     ...mapMutations({
       profile: "auth/profilConnected",
     }),
-
 
     getLocation() {
       const success = (position) => {
@@ -789,7 +768,6 @@ export default {
       // This will open permission popup
       navigator.geolocation.getCurrentPosition(success, error);
     },
-
 
     updateNotificationEvent() {
       try {
@@ -1181,21 +1159,14 @@ export default {
 </style>
 
 <style >
-  
-
-  
-
-     @media only screen and (min-width: 768px) {
-   .search-hh .form-control{
+@media only screen and (min-width: 768px) {
+  .search-hh .form-control {
     height: 48px !important;
 
-        margin-bottom: 0;
+    margin-bottom: 0;
     border-radius: 0px;
 
     border-bottom: hidden;
-    
+  }
 }
-     }
-
-  
 </style>

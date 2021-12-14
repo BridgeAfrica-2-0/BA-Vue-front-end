@@ -174,7 +174,7 @@
                 </p>
                 <div class="pl-4">
                   <h6 class="font-weight-bold font-mont functionality-div-headings">
-                    {{$t("about.COMMUNIT_ENGAGEMENT")}}
+                    {{$t("about.COMMUNITY_ENGAGEMENT")}}
                   </h6>
                   <p class="text-left font-14">
                     {{$t("about.Our_platform_provides_community_engagement_functionalities_enabling_businesses_and_consumers_to_follow_one_another")}}, 
@@ -385,7 +385,7 @@
               pill
               :variant="selectedResource == 'cameroon' ? 'primary' : 'outline-primary'"
               @click="changeResource('cameroon')"
-              >{{$t("about.Cameroon_Gallery")}}</b-button
+              >Cameroon Gallery</b-button
             >
             <b-button
               pill

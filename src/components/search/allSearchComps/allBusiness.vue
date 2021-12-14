@@ -11,6 +11,7 @@
         {{ $t("search.No_data_available_for_that_search") }}!
       </a></b-alert
     >
+    <div></div>
 
     <div
       v-for="item in businesses.data"
@@ -60,7 +61,7 @@
                   :text="item.about_business"
                   link="#"
                   :less-str="$t('search.read_less')"
-                  :max-chars="70"
+                  :max-chars="100"
                 >
                 </read-more>
               </p>
@@ -138,6 +139,7 @@
 </template>
 
 <script>
+import moment from "moment";
 import axios from "axios";
 
 export default {

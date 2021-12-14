@@ -1,8 +1,7 @@
 <template>
-  <div style="overflow-y: hidden">
-    <span v-if="isloaded">
-      <navbar />
-
+  <div style="overflow-y: hidden" ref="wrapper">
+    <navbar />
+    <div v-if="isloaded">
       <div class="container-fluid lynetowrk" style="margin-top: -30px">
         <ly-tab
           v-model="selectedId"
@@ -55,21 +54,8 @@
           <General v-bind:currenttab="selectedId" />
         </div>
       </div>
-
-      <Footer />
-      <!-- <p class="text-center">
-        <span class="display-inline">
-          <b-link @click="$i18n.locale = 'en'">
-            {{ $t("auth.english") }}</b-link
-          >
-          <span class="vl"></span>
-          <b-link class="ml-2" @click="$i18n.locale = 'fr'">
-            {{ $t("auth.french") }}
-          </b-link>
-        </span>
-        Bridge Africa © 2021
-      </p> -->
-    </span>
+    </div>
+    <Footer />
   </div>
 </template>
 
@@ -109,14 +95,11 @@ export default {
 
       items: [
         { label: this.$t("network.Home"), icon: " " },
-
         { label: this.$t("network.Inbox"), icon: " " },
         { label: this.$t("network.Notification"), icon: "" },
         { label: this.$t("network.Member_Request"), icon: "" },
         { label: this.$t("network.Pending_Post"), icon: "" },
-
         { label: this.$t("network.Keyword_Alert"), icon: "" },
-
         { label: this.$t("network.Settings"), icon: "" },
       ],
 
@@ -127,6 +110,12 @@ export default {
   },
 
   created() {
+    let loader = this.$loading.show({
+      container: this.$refs.wrapper,
+      canCancel: true,
+      onCancel: this.onCancel,
+      color: "#e75c18",
+    });
     this.selectedId = this.$route.query.tabId ? this.$route.query.tabId : 0;
 
     this.foll_id = this.$route.params.id;
@@ -160,11 +149,14 @@ export default {
         }
 
         this.isloaded = true;
+        loader.hide()
       })
       .catch((error) => {
+        console.log(error.response.data.message)
         if (error.response.status == 404) {
           this.$router.push({ name: "notFound" });
         }
+        loader.hide()
       });
   },
 
@@ -181,7 +173,6 @@ export default {
 
 
   methods: {
-
     change(){
         this.selectedId = 4
         console.log("evenement arrive au parent network",  this.selectedId )

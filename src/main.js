@@ -5,7 +5,6 @@ import router from './router';
 import store from './store';
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue';
 
-
 import axios from 'axios';
 import VueAxios from 'vue-axios';
 import VueGallerySlideshow from 'vue-gallery-slideshow';
@@ -20,7 +19,6 @@ import homeIconData from '@iconify-icons/mdi-light/home';
 import ReadMore from 'vue-read-more';
 import VueSocialauth from 'vue-social-auth';
 
-
 import ShareNetwork from 'vue-social-sharing';
 import BtnCtaMessage from "@/components/messagesCTA/Btn-cta-message";
 Vue.component('BtnCtaMessage', BtnCtaMessage);
@@ -33,7 +31,6 @@ Vue.use('vue-bootstrap-typeahead', VueBootstrapTypeahead)
 // don't comment that 2 line URGENT
 import plugin from './http';
 Vue.use(plugin);
-
 
 Vue.use(require('vue-moment'));
 

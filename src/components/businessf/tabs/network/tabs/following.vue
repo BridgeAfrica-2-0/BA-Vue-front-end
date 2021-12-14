@@ -5,19 +5,20 @@
         <b-input-group class="mb-2 px-md-3 float-right">
           <b-form-input
             aria-label="Text input with checkbox"
-            :placeholder="$t('profileowner.Search_Something')"
-             v-model="search"
+            placeholder="Search Something"
+            v-model="keywords"
           ></b-form-input>
 
-          <b-input-group-prepend is-text>
-            <b-icon-search  @click="$refs.search.search()" class="text-primary border-none"></b-icon-search>
+          <b-input-group-prepend is-text  @click="$refs.search.search()">
+            <b-icon-search class="text-primary border-none"></b-icon-search>
           </b-input-group-prepend>
         </b-input-group>
       </b-col>
     </b-row>
 
     <br />
-          <CommunityBusiness  :searchh="search" ref="search"  type="Following"  />
+
+          <CommunityBusiness  :searchh="keywords" ref="search" type="Following" />
      
   </div>
 </template>
@@ -25,19 +26,19 @@
 <script>
 import CommunityBusiness from "../../communitybusiness";
 export default {
-
-   data() {
+  data() {
     return {
-        search:"",
+        keywords:"",
     }
     },
-    
   components: {
     CommunityBusiness
   },
 
    computed: {
-   
+    folowing() {
+      return this.$store.state.profile.CommunityBusiness.business_following;
+    }
   },
 
 };

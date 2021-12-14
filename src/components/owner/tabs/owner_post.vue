@@ -6,9 +6,10 @@
       <b-row class="mt-2">
         <b-col cols="2" md="1" class="m-md-0 p-0">
           <b-avatar
-            variant="primary"
+            variant="light"
+            :square="'user' == profile.user_type ? false : true"
             class="img-fluid avat-comment"
-            :src="info.user.profile_picture"
+            :src="profile.profile_picture"
           ></b-avatar>
         </b-col>
         <b-col cols="9" md="11" class="p-0 m-0 pr-3">
@@ -430,6 +431,9 @@
 </template>
 
 <script>
+
+import {mapGetters} from 'vuex'
+
 import Post from "@/components/businessOwner/ownerPostComponent";
 
 import axios from "axios";
@@ -925,9 +929,9 @@ export default {
       return this.$store.state.profile.ownerPost;
     },
 
-    profileNamePost() {
-      return "yoo";
-    },
+    ...mapGetters({
+      profile: 'auth/profilConnected'
+    })
   },
   mounted() {
     this.url = this.$route.params.id;

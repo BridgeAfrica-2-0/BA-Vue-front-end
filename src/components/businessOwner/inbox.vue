@@ -78,14 +78,16 @@
                   <b-avatar
                     class="d-inline-block profile-pic"
                     variant="primary"
-                    src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
+                    :src="currentBiz.profile_picture"
                     square
                   ></b-avatar>
                 </b-col>
                 <b-col>
                   <h1 class="mt-4 title text-bold">
                     {{
-                      currentBiz ? currentBiz.name.split(" ")[0] : "loading..."
+                      currentBiz.name
+                        ? currentBiz.name.split(" ")[0]
+                        : "loading..."
                     }}
                   </h1>
                 </b-col>
@@ -353,7 +355,7 @@
                               <b-avatar
                                 class="d-inline-block profile-pic"
                                 variant="primary"
-                                src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
+                                :src="chat.image"
                               ></b-avatar>
 
                               <h6 class="mt-2 d-inline-block ml-2">
@@ -491,8 +493,14 @@
                   <b-col class="col-3">
                     <b-avatar
                       variant="primary"
-                      src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
-                      size="40"
+                      :src="
+                        chatSelected.chat
+                          ? chatSelected.chat.picture
+                            ? chatSelected.chat.picture
+                            : chatSelected.chat.image
+                          : ''
+                      "
+                      size="50"
                     ></b-avatar>
                   </b-col>
 
@@ -520,13 +528,32 @@
                   <b-col class="col-2" @click="info = true">
                     <b-avatar
                       variant="primary"
-                      src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
-                      size="60"
+                      :src="
+                        chatSelected.chat
+                          ? chatSelected.chat.picture
+                            ? chatSelected.chat.picture
+                            : chatSelected.chat.image
+                          : ''
+                      "
+                      size="50"
                     ></b-avatar>
                   </b-col>
 
                   <b-col class="detail" @click="info = true">
                     <h5>{{ chatSelected.name }}</h5>
+                    <!-- <p>{{ chatSelected }}</p> -->
+                    <p
+                      v-if="groupMembers"
+                      class="d-inline-block text-truncate"
+                      style="max-width: 200px"
+                    >
+                      <span
+                        v-for="(member, index) in groupMembers"
+                        :key="index"
+                      >
+                        <small> {{ getName(member) }}, </small>
+                      </span>
+                    </p>
                     <!-- <p>Online</p> -->
                   </b-col>
                   <b-col class="col-4">
@@ -658,6 +685,17 @@
                             <b>{{ chat.attachment }}</b> -->
                             <br />
                           </span>
+                          <span v-if="chat.post_details">
+                            <small class="text-dark font-italic text-right"
+                              ><i class="fas fa-share fa-xs pl-1"></i>Shared
+                              post</small
+                            ><br />
+                            <span class="font-italic">{{
+                              chat.post_details.content
+                            }}</span>
+
+                            <hr />
+                          </span>
                           {{ chat.message }}
                           <small class="float-right mt-2 text-white pr-1 pt-1">
                             {{ getCreatedAt(chat.created_at) }}
@@ -679,6 +717,17 @@
                             <!-- <br />
                             <b>{{ chat.attachment }}</b> -->
                             <br />
+                          </span>
+                          <span v-if="chat.post_details">
+                            <small class="text-dark font-italic"
+                              ><i class="fas fa-share fa-xs pl-1"></i>Shared
+                              post</small
+                            >
+                            <br />
+                            <span class="font-italic">{{
+                              chat.post_details.content
+                            }}</span>
+                            <hr />
                           </span>
                           {{ chat.message }}
                           <small class="float-right mt-2 text-white pr-1 pt-1">
@@ -988,6 +1037,7 @@
                                   </td>
                                 </tr>
                               </div>
+                              <hr />
                               <h5>Business</h5>
                               <div v-if="allBusiness">
                                 <tr
@@ -1021,6 +1071,7 @@
                                   </td>
                                 </tr>
                               </div>
+                              <hr />
                               <h5>Network</h5>
                               <div v-if="allNetworks">
                                 <tr
@@ -1054,6 +1105,7 @@
                                   </td>
                                 </tr>
                               </div>
+                              <hr />
                               <h5>Editors</h5>
                               <div v-if="allEditors">
                                 <tr
@@ -1087,6 +1139,7 @@
                                   </td>
                                 </tr>
                               </div>
+                              <hr />
                             </b-tab>
                             <b-tab title="People" @click="getUsers()">
                               <b-row>
@@ -1139,7 +1192,7 @@
                                   class="centralizer"
                                 ></b-spinner>
                               </div>
-                              <div v-if="bizs">
+                              <div v-if="bizs.length">
                                 <tr
                                   v-for="(biz, index) in bizs"
                                   :key="index"
@@ -1229,35 +1282,37 @@
                                   class="centralizer"
                                 ></b-spinner>
                               </div>
-                              <div v-if="bizs">
+                              <div v-if="bizs.length">
+                                {{ selectedMulty }}
+
                                 <tr
                                   v-for="(biz, index) in bizs"
                                   :key="index"
                                   class="p-2 message"
                                 >
                                   <td>
-                                    <b-form-group>
-                                      <b-form-checkbox-group
-                                        id="checkbox-group-2"
-                                        v-model="selectedMulty"
-                                        name="flavour-2"
+                                    <b-form-checkbox-group
+                                      id="checkbox-group-3"
+                                      v-model="selectedMulty"
+                                      name="flavour-2"
+                                    >
+                                      <b-form-checkbox
+                                        :id="index + '_id'"
+                                        :name="biz.name"
+                                        :value="biz.id"
+                                        :unchecked-value="false"
+                                        @input="selectedMember(biz)"
                                       >
-                                        <b-form-checkbox
-                                          :id="index + '_id'"
-                                          :name="biz.name"
-                                          :value="biz.id"
-                                        >
-                                          <b-avatar
-                                            class="d-inline-block"
-                                            variant="primary"
-                                            size="30"
-                                          ></b-avatar>
-                                          <span class="bold">
-                                            {{ biz.name }}
-                                          </span>
-                                        </b-form-checkbox>
-                                      </b-form-checkbox-group>
-                                    </b-form-group>
+                                        <b-avatar
+                                          class="d-inline-block"
+                                          variant="primary"
+                                          size="30"
+                                        ></b-avatar>
+                                        <span class="bold">
+                                          {{ biz.name }}
+                                        </span>
+                                      </b-form-checkbox>
+                                    </b-form-checkbox-group>
                                   </td>
                                 </tr>
                               </div>
@@ -1309,6 +1364,7 @@
                                   </b-card>
                                 </b-col>
                               </b-row>
+
                               <div v-if="loader" class="text-center">
                                 <b-spinner
                                   variant="primary"
@@ -1316,7 +1372,7 @@
                                   class="centralizer"
                                 ></b-spinner>
                               </div>
-                              <div v-if="bizs">
+                              <div v-if="bizs.length">
                                 <tr
                                   v-for="(biz, index) in bizs"
                                   :key="index"
@@ -1361,7 +1417,7 @@
                                   class="centralizer"
                                 ></b-spinner>
                               </div>
-                              <div v-if="bizs">
+                              <div v-if="bizs.length">
                                 <tr
                                   v-for="(biz, index) in bizs"
                                   :key="index"
@@ -1437,7 +1493,8 @@
             id="input-large"
             size="lg"
             autofocus
-            :placeholder="$t('businessowner.Enter_your_name')"
+            placeholder="Enter the group name"
+            @keypress.enter="selectedMultyChat()"
           ></b-form-input>
         </div>
 
@@ -1532,6 +1589,9 @@ export default {
     allEditors() {
       return this.$store.getters["businessChat/getAllEditors"];
     },
+    groupMembers() {
+      return this.$store.getters["businessChat/getGroupMembers"];
+    },
 
     ctaSelected() {
       return this.$store.getters["businessChat/getSelectedChat"];
@@ -1543,7 +1603,7 @@ export default {
       return this.$store.getters["businessChat/getCurrentBizId"];
     },
     currentBiz() {
-      return this.$store.getters["businessChat/getCurrentBiz"][0];
+      return this.$store.getters["auth/profilConnected"];
     },
 
     bizs() {
@@ -1584,6 +1644,15 @@ export default {
     },
   },
   mounted() {
+    let obj = [
+      {
+        id: { first: "edouard", second: "lele" },
+        names: { first: "edouard", second: "lele" },
+      },
+    ];
+    let tableau = Object.keys(obj).map((key) => [Number(key), obj[key]]);
+
+    console.log("finale+++", tableau);
     if (this.chatList.length < 0) {
       this.getChatList({ type: "business" });
     }
@@ -1612,11 +1681,10 @@ export default {
         this.getChatList({ type: "network" });
       } else {
         this.tabIndex = 0;
-      console.log("111 call ");
+        console.log("111 call ");
 
         this.getChatList({ type: "user" });
-      console.log("222 call ");
-
+        console.log("222 call ");
       }
       console.log("call to action checked:", this.ctaSelected);
       this.selectedChat({ chat: this.ctaSelected, id: this.ctaSelected.id });
@@ -1657,6 +1725,15 @@ export default {
       const sizes = ["Bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
       const i = Math.floor(Math.log(bytes) / Math.log(k));
       return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + " " + sizes[i];
+    },
+    selectedMember(elm) {
+      console.log("selectedMulty:", this.selectedMulty.length);
+      let length = this.selectedMulty.length;
+      if (this.selectedMulty[length - 1] == elm.id) {
+        this.groupMembers.push({ type: elm.accountType, id: elm.id });
+      } else this.groupMembers.pop();
+
+      console.log("selected:", this.groupMembers);
     },
     selectedAllMulty() {
       // this.visibleCollaps = false;
@@ -1802,23 +1879,24 @@ export default {
         console.log("group message Received");
         console.log(data);
         this.chats.push(data);
+        // userID:1,2,3,4,5
+        // businessID:2
+        // networkID:1,2,3,4
+        // businessEditorID:2
+        // message:Life has no meaning the moment you lose the illusion of being eternal.
 
-        this.formData.append("sender_business_id", data.sender_business_id);
+        // this.formData.append("sender_business_id", data.sender_business_id);
         this.formData.append("message", data.message);
-        this.formData.append("receiver_business_id", data.receiver_business_id);
-        this.formData.append("receiver_network_id", data.receiver_business_id);
-        this.formData.append("receiver_id", data.receiver_business_id);
-        this.formData.append("group_id", data.group_id);
-        this.formData.append("type", data.type);
 
-        // let elmts = {
-        //   type: this.type,
-        //   message: data.message,
-        //   sender_business_id: this.currentBiz.id,
-        //   receiver_business_id: this.chatSelected.id,
-        //   receiver_network_id: this.chatSelected.id,
-        //   receiver_id: this.chatId,
-        // };
+        this.formData.append("userID", data.userID);
+        this.formData.append("businessID", data.businessID);
+        this.formData.append("networkID", data.networkID);
+        this.formData.append("businessEditorID", data.businessEditorID);
+
+        // this.formData.append("receiver_network_id", data.receiver_business_id);
+        // this.formData.append("receiver_id", data.receiver_business_id);
+        // this.formData.append("group_id", data.group_id);
+        // this.formData.append("type", data.type);
 
         this.saveMessage(this.formData);
       });
@@ -1840,20 +1918,25 @@ export default {
     },
     createGroup(receiver_business_id) {
       this.socket.emit("create-group", this.chatId);
-
       // let sender_business_id = this.currentUser.user.id;
-      let membersPeople = this.groupMembers.filter((member) => {
-        return member.type == "people";
-      });
-      let membersBuiness = this.groupMembers.filter((member) => {
-        return member.type == "business";
-      });
-      let membersNetwork = this.groupMembers.filter((member) => {
-        return member.type == "network";
-      });
-      let membersEditor = this.groupMembers.filter((member) => {
-        return member.type == "editor";
-      });
+      var membersPeople = [];
+      var membersBuiness = [];
+      var membersNetwork = [];
+      var membersEditor = [];
+      if (this.groupMembers) {
+        membersPeople = this.groupMembers.filter((member) => {
+          return member.type == "people";
+        });
+        membersBuiness = this.groupMembers.filter((member) => {
+          return member.type == "business";
+        });
+        membersNetwork = this.groupMembers.filter((member) => {
+          return member.type == "network";
+        });
+        membersEditor = this.groupMembers.filter((member) => {
+          return member.type == "editor";
+        });
+      }
       let membersPeopleIds = [];
       let membersBusinessIds = [];
       let membersNetworkIds = [];
@@ -1981,6 +2064,7 @@ export default {
     },
     async histBizToGroup(receiverId) {
       await this.$store.dispatch("businessChat/GET_BIZ_TO_GROUP", receiverId);
+      console.log("group members: ++++>", this.groupMembers);
     },
     saveMessage(data) {
       console.log("[DEBUG SAVE]", { data: data, type: this.type });
@@ -2047,6 +2131,7 @@ export default {
         active: true,
         clickedId: data.id,
         name: data.chat.name ? data.chat.name : data.chat.groupName,
+        chat: data.chat,
       };
       console.log("[DEBUG] Chat selected:", this.chatSelected);
     },
@@ -2101,15 +2186,66 @@ export default {
       this.scrollToBottom();
     },
     sendGroup() {
-      this.socket.emit("groupMessage", {
-        type: this.type,
-        message: this.input,
-        sender_business_id: this.currentBiz.id,
-        room: this.room,
-        receiver_business_id: this.chatSelected.id,
-        receiver_id: this.chatId,
-        group_id: this.chatId,
-      });
+      var membersPeople = [];
+      var membersBuiness = [];
+      var membersNetwork = [];
+      var membersEditor = [];
+      console.log("Group members:", this.groupMembers);
+      let data = {};
+      if (this.groupMembers.length) {
+        // this.groupMembers.map((member)=>{
+        //   if()
+        // })
+        membersPeople = this.groupMembers.filter((member) => {
+          return member.userID != null;
+        });
+        membersBuiness = this.groupMembers.filter((member) => {
+          return member.businessID != null;
+        });
+        membersNetwork = this.groupMembers.filter((member) => {
+          return member.networkID != null;
+        });
+        membersEditor = this.groupMembers.filter((member) => {
+          return member.businessEditorsID != null;
+        });
+
+        let membersPeopleIds = [];
+        let membersBusinessIds = [];
+        let membersNetworkIds = [];
+        let membersEditorIds = [];
+
+        membersPeople.map((biz) => {
+          membersPeopleIds.push(biz.userID);
+        });
+        membersBuiness.map((biz) => {
+          membersBusinessIds.push(biz.businessID);
+        });
+        membersNetwork.map((biz) => {
+          membersNetworkIds.push(biz.networkID);
+        });
+        membersEditor.map((biz) => {
+          membersEditorIds.push(biz.businessEditorsID);
+        });
+        data = {
+          userID: membersPeopleIds,
+          businessID: membersBusinessIds,
+          networkID: membersNetworkIds,
+          businessEditorID: membersEditorIds,
+          message: this.input,
+        };
+      }
+
+      this.socket.emit("groupMessage", data);
+
+      // this.socket.emit("groupMessage", {
+      //   type: this.type,
+      //   message: this.input,
+      //   sender_business_id: this.currentBiz.id,
+      //   room: this.room,
+      //   receiver_business_id: this.chatSelected.id,
+      //   receiver_id: this.chatId,
+      //   group_id: this.chatId,
+      // });
 
       console.log("SENT...");
       this.input = "";

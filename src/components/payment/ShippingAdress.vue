@@ -1,7 +1,7 @@
 <template>
 	<b-card class="">
 		<b-card-title class="headline-font-size font-weight-bold">
-			Shipping Address
+			{{$t("general.Shipping_Address")}}
 		</b-card-title>
 		<div class="row">
 			<div class="col-12">
@@ -9,7 +9,7 @@
 			</div>
 			<div class="col-12">
 				<CreateShippingModal
-					title="Edit Shipping Address"
+					:title="$t('general.Edit_Shipping_Address')"
 					mode="edit"
 					:editForm="shippingsTab[0]"
 				/>
@@ -47,7 +47,7 @@
 								href="#"
 								v-b-modal.edit-shipping-modal
 								class="text-primary text-14 font-weight-bold text-uppercase mr-1 mr-sm-2"
-								>Edit</a
+								>{{$t("general.Edit")}}</a
 							>
 							<div class="d-inline-block">
 								<b-dropdown
@@ -67,7 +67,7 @@
 											icon="plus"
 											aria-hidden="true"
 										></b-icon>
-										<span class="">Add</span>
+										<span class="">{{$t("general.Add")}}</span>
 									</b-dropdown-item-button>
 									<b-dropdown-item-button v-b-modal.change-shipping-modal>
 										<b-icon
@@ -76,7 +76,7 @@
 											icon="arrow-down-up"
 											aria-hidden="true"
 										></b-icon>
-										<span class="">Change</span>
+										<span class="">{{$t("general.Change")}}</span>
 									</b-dropdown-item-button>
 									<ConfirmOperation
 										message="Do you want to delete this shipping address?"

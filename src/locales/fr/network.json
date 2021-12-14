@@ -69,7 +69,7 @@
     "Feedbacks_Type": "Type de commentaire",
     "Search": "Rechercher",
     "Blocking": "Bloquer",
-    "Keyword_Alert": "Alert Mot Clé",
+    "Keyword_Alert": "Alerte Mot Clé",
     "Pending_Post": "Publications en attente",
     "Member_Request": "Demande d'admission",
     "Network_Info": "Information de réseau",
@@ -185,7 +185,7 @@
     "Automatically_renew_subscription_until_i_turn_it_off": "Renouvellement automatique de l'abonnement jusqu'à ce qu'il soit désactivé",
     "Total_Payble": "Total à payer",
     "By_confirming_you_agree_to_Terms_and_conditions": "By confirming you agree to Terms & conditions",
-    "Read_more":"lire la Suite",
+    "Read_more":"Lire la suite",
     "Confirm":"Confirmer",
     "Subscription_Plan": "Plan d'abonnement",
     "Basic": "Basique",
@@ -244,14 +244,11 @@
     "Unable to Assigned New Role":"Impossible d'assigner un nouveau rôle",
     "Editor_Deleted":"Éditeur supprimé",
     "Unable_To_Delete_Editor":"Impossible de supprimer l'éditeur",
-    "Settings":"Paramètres",
     "Mapoure_Agrobusiness":"Mapoure Agrobusiness",
-    "Approve":"Approuver",
     "Reject":"Rejeter",
     "Feedback_Type":"type de commentaire",
-    "Private":"Privé",
-    "community":"communauté",
-    "lire_la_Suite":"lire la Suite",
+    "community":"Communauté",
+    "lire_la_Suite":"Lire la suite",
     "Edit_network":"Modifier le réseau",
     "Brief_Description":"Brève description",
     "Tel_1":"Tel 1",
@@ -269,11 +266,9 @@
     "Image_Uploaded_Successfuly":"Image téléchargée avec succès",
     "Membership_Requests":"Demandes d'adhésion",
     "Pending":"En attente",
-    "Search_Something":"Rechercher quelque chose",
     "Send_Request":"Envoyer la demande",
     "K_Follower":" 5K abonné",
     "Your_3_Posts_are_pending_for_approval":"Vos 3 publication sont en attente d'approbation",
-    "View_All":"voir tout",
 
     "Ticket_Support":"Support technique",
     "Intergration":"Intégration",
@@ -290,7 +285,25 @@
     "email_phone":"courriel, téléphone",
     "Create_Post":"Créer un poste",
     "Do_you_want_to_join_this_network":"Voulez-vous rejoindre ce réseau",
-   "Read_More":"lire la Suite",
-   "Direction":"Direction"
+   "Networks":"Réseau",
+   "COMMUNITY":"COMMUNAUTÉ",
+   "Upload_a_New_picture":"Télécharger une nouvelle photo",
+
+   "Editor":"Éditeur",
+   "Admin_Only":"Admin uniquement",
+   "Member":"Membre",
+   "Approval_by_admin":"Approbation par l'administrateur",
+   "Approval_by_editor_and_admin":"Approbation par le éditeur et l'administrateur",
+
+    "All_business_posts_must_be_approved_by_an_admin":"Tous les messages professionnels doivent être approuvés par un administrateur",
+    "Marketplace":"Marché",
+    "Delete_Business_Identity":"Supprimer l'identité de l'entreprise",
+
+    "Municipality":"Municipalité",
+
+    "Selected":"Sélectionné",
+    "All_Selected":"Tous sélectionnés",
+    "No_notifications_to_show":"Aucune notification à afficher"
+
 
 }

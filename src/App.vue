@@ -26,7 +26,7 @@ export default {
       prevHeight: 0,
     };
   },
-
+  
   methods: {
     beforeLeave(element) {
       this.prevHeight = getComputedStyle(element).height;

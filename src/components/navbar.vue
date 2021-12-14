@@ -12,9 +12,9 @@
             ></b-icon>
           </span>
 
-          <a class="d-inline-block align-top mt-1" href="#">
+          <router-link class="d-inline-block align-top mt-1" :to="{name: 'home1'}">
             <img src="@/assets/logo.png" alt="" class="balogo" loading="lazy" />
-          </a>
+          </router-link>
         </div>
 
         <div class="col-lg-9 col-xl-6">
@@ -153,15 +153,14 @@
                   class="nav-link text-dark hov"
                   href=""
                 >
-                  {{ "home1" == navLink("home") ? "Home" : "Dashboard" }}
+                  Home
                 </router-link>
               </div>
 
               <div class="nav-item">
                 <router-link
-                  :to="{ name: 'market' }"
+                  :to="{ name: 'Search' }"
                   class="nav-link text-dark hov"
-                  href=""
                 >
                   {{ $t("general.Market") }}
                 </router-link>
@@ -170,30 +169,11 @@
               <!-- Messages Started -->
               <div class="nav-item">
                 <a
-                  v-if="hasNewMessage"
-                  id="messages"
-                  class="nav-link"
-                  data-toggle="popover"
-                  role="button"
-                  data-original-title=""
-                  title=""
-                  ><span class="text-ored"
-                    ><fas-icon
-                      class="primary"
-                      :icon="['fas', 'comment']"
-                    /><b-badge class="msg-number">{{
-                      hasNewMessage
-                    }}</b-badge></span
-                  ></a
-                >
-
-                <a
                   id="messages"
                   class="nav-link"
                   role="button"
                   data-original-title=""
                   title=""
-                  v-else
                   ><span class="text-ored"
                     ><fas-icon
                       class="primary"
@@ -556,6 +536,9 @@
 </template>
 
 <script>
+
+import _ from "lodash";
+
 import Button from "@/components/ButtonNavBarFind.vue";
 import Activity from "@/components/ShowActivity.vue";
 // import NavBarNotifications from '@/components/NavBarNotifications.vue';
@@ -603,7 +586,6 @@ export default {
   computed: {
     ...mapGetters({
       hasLauchNetworkRequest: "social/INIT",
-      hasNewMessage: "notification/HAS_MESSAGE",
       user: "auth/profilConnected",
       auth: "auth/user",
       neigbourhoods: "auth/neigbourhoods",
@@ -669,16 +651,12 @@ export default {
       this.userOwnPage = this.onRedirect();
     },
 
-    credentials: {
-      deep: true,
-      handler() {
-        console.log(this.credentials, "----------------");
-        this.searchOptions = this.credentials;
-      },
+    credentials: function(newVal){
+      this.searchOptions = newVal;
     },
 
     query(newQuery) {
-      axios.get(`neighborhood/${newQuery}`).then(({ data }) => {
+      axios.get(`business-community/neighborhood/${newQuery}`).then(({ data }) => {
         this.$store.commit("auth/setneigbourhoods", data.data);
       });
     },
@@ -763,8 +741,6 @@ export default {
 
         if (newPath.query) path = Object.assign(path, { query: newPath.query });
 
-        console.log(type, path);
-
         return path;
       }
 
@@ -831,6 +807,9 @@ export default {
       const response = await this.$repository.share.switch(null, "reset");
       if (response.success) {
         this.profile({ ...this.auth.user, user_type: "user" });
+        this.$router.push({ 
+          "name": "profile_owner",
+        });
       }
       loader.hide();
     },

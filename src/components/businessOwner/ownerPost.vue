@@ -76,8 +76,8 @@
     </b-card>
 
     <!-- User Posts Listing Section-->
-    <b-card class="px-md-3">
-      <div class="">
+    
+      <div class="px-md-3">
         <div class="col-md-12 col-lg-12 d-flex align-items-stretch mb-lg-0" style="padding-left: 0; padding-top: 3px">
           <b-modal id="modal-edit" ref="modal-edit" centered hide-footer :title="$t('businessowner.Update_Post')" @hidden="resetPostData">
             <b-row ref="loader">
@@ -512,7 +512,7 @@
       />
 
       <infinite-loading :identifier="infiniteId" ref="infiniteLoading" @infinite="infiniteHandler"></infinite-loading>
-    </b-card>
+    
   </div>
 </template>
 
@@ -933,8 +933,6 @@ export default {
           formData2.append("media[" + index + "]", value.target.files[0]);
         });
       }
-
-      formData2.append("type", "image");
 
       formData2.append("content", this.createPost.postBusinessUpdate);
 

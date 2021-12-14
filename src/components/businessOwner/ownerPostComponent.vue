@@ -12,7 +12,7 @@
         </span>
         <div class="pl-2 pl-md-3 pt-md-2">
           <h5 class="m-0 usernamee">
-            {{ item.user_name }} tesy
+            {{ item.user_name }}
           </h5>
           <p class="durationn">{{ item.created_at | now }}</p>
         </div>

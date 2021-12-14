@@ -32,12 +32,7 @@
               <div class="form-card">
                 <div class="row">
                   <div class="col-md-6">
-                    <input
-                      id="logo"
-                      type="file"
-                      @change="onLogoChange"
-                      hidden
-                    />
+                    <input id="logo" type="file" @change="onLogoChange" hidden />
 
                     <div id="preview">
                       <img v-if="logoimg_url" :src="logoimg_url" />
@@ -54,16 +49,8 @@
                       </b-button>
                     </div>
 
-                    <div
-                      class="image-upload-wrap"
-                      v-if="!logoimg_url"
-                      @click="chooselogo()"
-                    >
-                      <a
-                        href="#"
-                        data-toggle="modal"
-                        data-target="#createalbumModal"
-                      >
+                    <div class="image-upload-wrap" v-if="!logoimg_url" @click="chooselogo()">
+                      <a href="#" data-toggle="modal" data-target="#createalbumModal">
                         <div class="drag-text">
                           <i class="fa fa-plus"> </i>
                           <h3 class="username">
@@ -114,9 +101,7 @@
                     </div>
 
                     <div class="form-group">
-                      <label for="username" class="username">{{
-                        $t("profileowner.About")
-                      }}</label
+                      <label for="username" class="username">{{ $t('profileowner.About') }}</label
                       ><br />
                       <textarea
                         type="textarea"
@@ -153,9 +138,7 @@
                 </div>
 
                 <div v-if="scategories.length">
-                  <label class="typo__label">
-                    {{ $t("profileowner.Sub_Category") }}</label
-                  >
+                  <label class="typo__label"> {{ $t('profileowner.Sub_Category') }}</label>
                   <multiselect
                     v-model="filterselectvalue"
                     tag-:placeholder="$t('profileowner.Add_this_as_new_tag')"
@@ -170,16 +153,10 @@
                 </div>
 
                 <div v-if="filterselectvalue.length">
-                  <label class="typo__label"
-                    >{{ $t("profileowner.Fiters") }}
-                  </label>
+                  <label class="typo__label">{{ $t('profileowner.Fiters') }} </label>
                   <b-card no-body>
                     <b-tabs pills card vertical>
-                      <b-tab
-                        :title="filters.name"
-                        v-for="filters in filterselectvalue"
-                        :key="filters.id"
-                        active
+                      <b-tab :title="filters.name" v-for="filters in filterselectvalue" :key="filters.id" active
                         ><b-card-text>
                           <b-form-group
                             :label="$t('profileowner.Filters')"
@@ -214,9 +191,7 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="country" class="username">
-                        {{ $t("profileowner.Country") }} :</label
-                      ><br />
+                      <label for="country" class="username"> {{ $t('profileowner.Country') }} :</label><br />
                       <multiselect
                         v-model="country"
                         @input="Region"
@@ -231,9 +206,7 @@
 
                   <div v-if="regions.length" class="col-md-6">
                     <div class="form-group">
-                      <label for="country" class="username">
-                        {{ $t("profileowner.Region") }} :</label
-                      ><br />
+                      <label for="country" class="username"> {{ $t('profileowner.Region') }} :</label><br />
                       <multiselect
                         v-model="region"
                         @input="Division"
@@ -248,9 +221,7 @@
 
                   <div v-if="divisions.length" class="col-md-6">
                     <div class="form-group">
-                      <label for="country" class="username">
-                        {{ $t("profileowner.Division") }} :</label
-                      ><br />
+                      <label for="country" class="username"> {{ $t('profileowner.Division') }} :</label><br />
                       <multiselect
                         v-model="division"
                         @input="Municipality"
@@ -265,9 +236,7 @@
 
                   <div v-if="municipalities.length" class="col-md-6">
                     <div class="form-group">
-                      <label for="country" class="username">
-                        {{ $t("profileowner.Municipality") }} :</label
-                      ><br />
+                      <label for="country" class="username"> {{ $t('profileowner.Municipality') }} :</label><br />
 
                       <multiselect
                         v-model="municipality"
@@ -283,9 +252,7 @@
 
                   <div v-if="localities.length" class="col-md-6">
                     <div class="form-group">
-                      <label for="Neighbor" class="username">
-                        {{ $t("profileowner.Neighbor") }} :</label
-                      ><br />
+                      <label for="Neighbor" class="username"> {{ $t('profileowner.Neighbor') }} :</label><br />
                       <multiselect
                         v-model="locality"
                         :placeholder="$t('profileowner.Search')"
@@ -299,9 +266,7 @@
 
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="website" class="username">
-                        {{ $t("profileowner.City") }} :</label
-                      ><br />
+                      <label for="website" class="username"> {{ $t('profileowner.City') }} :</label><br />
                       <input
                         type="text"
                         name="alias"
@@ -379,9 +344,7 @@
                 <b-row>
                   <b-col md="6">
                     <div class="form-group">
-                      <label for="website" class="username">
-                        {{ $t("profileowner.Website") }} :</label
-                      ><br />
+                      <label for="website" class="username"> {{ $t('profileowner.Website') }} :</label><br />
                       <input
                         type="text"
                         name="alias"
@@ -411,15 +374,9 @@
 
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="username" class="username"
-                        >{{ $t("profileowner.TimeZone") }}:</label
-                      ><br />
+                      <label for="username" class="username">{{ $t('profileowner.TimeZone') }}:</label><br />
 
-                      <b-form-select
-                        id="timezone"
-                        v-model="time_zone"
-                        :options="timezone"
-                      ></b-form-select>
+                      <b-form-select id="timezone" v-model="time_zone" :options="timezone"></b-form-select>
                     </div>
                   </div>
                 </b-row>
@@ -446,12 +403,7 @@
               <div class="form-card">
                 <div class="row">
                   <div class="col-md-6">
-                    <input
-                      id="logo"
-                      type="file"
-                      @change="onLogoChange"
-                      hidden
-                    />
+                    <input id="logo" type="file" @change="onLogoChange" hidden />
 
                     <div id="preview">
                       <img v-if="logoimg_url" :src="logoimg_url" />
@@ -468,16 +420,8 @@
                       </b-button>
                     </div>
 
-                    <div
-                      class="image-upload-wrap"
-                      v-if="!logoimg_url"
-                      @click="chooselogo()"
-                    >
-                      <a
-                        href="#"
-                        data-toggle="modal"
-                        data-target="#createalbumModal"
-                      >
+                    <div class="image-upload-wrap" v-if="!logoimg_url" @click="chooselogo()">
+                      <a href="#" data-toggle="modal" data-target="#createalbumModal">
                         <div class="drag-text">
                           <i class="fa fa-plus"> </i>
                           <h3 class="username">
@@ -510,9 +454,7 @@
                     </b-form-group>
 
                     <div class="form-group">
-                      <label for="country" class="username">
-                        {{ $t("profileowner.Keywords") }} :</label
-                      ><br />
+                      <label for="country" class="username"> {{ $t('profileowner.Keywords') }} :</label><br />
 
                       <multiselect
                         v-model="business_keyword"
@@ -528,9 +470,7 @@
                     </div>
 
                     <div class="form-group">
-                      <label for="username" class="username">{{
-                        $t("profileowner.About")
-                      }}</label
+                      <label for="username" class="username">{{ $t('profileowner.About') }}</label
                       ><br />
                       <textarea
                         type="textarea"
@@ -567,9 +507,7 @@
                 </div>
 
                 <div>
-                  <label class="typo__label">
-                    {{ $t("profileowner.Sub_Category") }}</label
-                  >
+                  <label class="typo__label"> {{ $t('profileowner.Sub_Category') }}</label>
                   <multiselect
                     v-model="filterselectvalue"
                     tag-:placeholder="$t('profileowner.Add_this_as_new_tag')"
@@ -583,17 +521,11 @@
                   ></multiselect>
                 </div>
 
-                <label class="typo__label"
-                  >{{ $t("profileowner.Fiters") }}
-                </label>
+                <label class="typo__label">{{ $t('profileowner.Fiters') }} </label>
                 <div>
                   <b-card no-body>
                     <b-tabs pills card vertical>
-                      <b-tab
-                        :title="filters.name"
-                        v-for="filters in filterselectvalue"
-                        :key="filters.id"
-                        active
+                      <b-tab :title="filters.name" v-for="filters in filterselectvalue" :key="filters.id" active
                         ><b-card-text>
                           <b-form-group
                             :label="$t('profileowner.Filters')"
@@ -628,9 +560,7 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="country" class="username">
-                        {{ $t("profileowner.Country") }} :</label
-                      ><br />
+                      <label for="country" class="username"> {{ $t('profileowner.Country') }} :</label><br />
                       <multiselect
                         v-model="country"
                         @input="Region"
@@ -645,9 +575,7 @@
 
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="country" class="username">
-                        {{ $t("profileowner.Region") }} :</label
-                      ><br />
+                      <label for="country" class="username"> {{ $t('profileowner.Region') }} :</label><br />
                       <multiselect
                         v-model="region"
                         @input="Division"
@@ -662,9 +590,7 @@
 
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="country" class="username">
-                        {{ $t("profileowner.Division") }} :</label
-                      ><br />
+                      <label for="country" class="username"> {{ $t('profileowner.Division') }} :</label><br />
                       <multiselect
                         v-model="division"
                         @input="Municipality"
@@ -679,9 +605,7 @@
 
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="country" class="username">
-                        {{ $t("profileowner.Municipality") }} :</label
-                      ><br />
+                      <label for="country" class="username"> {{ $t('profileowner.Municipality') }} :</label><br />
 
                       <multiselect
                         v-model="municipality"
@@ -699,9 +623,7 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="Neighbor" class="username">
-                        {{ $t("profileowner.Neighbor") }} :</label
-                      ><br />
+                      <label for="Neighbor" class="username"> {{ $t('profileowner.Neighbor') }} :</label><br />
                       <multiselect
                         v-model="locality"
                         :placeholder="$t('profileowner.Search')"
@@ -715,9 +637,7 @@
 
                   <b-col md="6">
                     <div class="form-group">
-                      <label for="website" class="username">
-                        {{ $t("profileowner.City") }} :</label
-                      ><br />
+                      <label for="website" class="username"> {{ $t('profileowner.City') }} :</label><br />
                       <input
                         type="text"
                         name="alias"
@@ -735,20 +655,12 @@
                         {{ $t("profileowner.Adress") }} :</label
                       >
 
-                      <gmap-autocomplete
-                        @place_changed="initMarker"
-                        class="form-control"
-                      >
-                      </gmap-autocomplete>
+                      <gmap-autocomplete @place_changed="initMarker" class="form-control"> </gmap-autocomplete>
                     </div>
                   </div>
                 </div>
 
-                <gmap-map
-                  :zoom="14"
-                  :center="center"
-                  style="width: 100%; height: 200px"
-                >
+                <gmap-map :zoom="14" :center="center" style="width: 100%; height: 200px">
                   <gmap-marker
                     :key="index"
                     v-for="(m, index) in locationMarkers"
@@ -779,9 +691,7 @@
                 <b-row>
                   <b-col md="6">
                     <div class="form-group">
-                      <label for="website" class="username">
-                        {{ $t("profileowner.Website") }} :</label
-                      ><br />
+                      <label for="website" class="username"> {{ $t('profileowner.Website') }} :</label><br />
                       <input
                         type="text"
                         name="alias"
@@ -811,15 +721,9 @@
 
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="username" class="username"
-                        >{{ $t("profileowner.TimeZone") }}:</label
-                      ><br />
+                      <label for="username" class="username">{{ $t('profileowner.TimeZone') }}:</label><br />
 
-                      <b-form-select
-                        id="timezone"
-                        v-model="time_zone"
-                        :options="timezone"
-                      ></b-form-select>
+                      <b-form-select id="timezone" v-model="time_zone" :options="timezone"></b-form-select>
                     </div>
                   </div>
                 </b-row>
@@ -831,32 +735,17 @@
 
       <!-- end of update modal -->
 
-      <div class="row ">
+      <div class="row">
         <div class="col">
           <h6 class="mb-0"><b></b></h6>
           <b-row>
-            <b-col
-              md="12"
-              lg="6"
-              class="p-0 mb-2"
-              v-for="business in profilebusiness"
-              :key="business.business_id"
-            >
-              <div class="people-style shadow h-100 ">
+            <b-col md="12" lg="6" class="p-0 mb-2" v-for="business in profilebusiness" :key="business.business_id">
+              <div class="people-style shadow h-100">
                 <b-link>
                   <div class="float-right others">
-                    <b-dropdown
-                      size="lg"
-                      variant="link"
-                      toggle-class="text-decoration-none"
-                      no-caret
-                    >
+                    <b-dropdown size="lg" variant="link" toggle-class="text-decoration-none" no-caret>
                       <template #button-content>
-                        <b-icon
-                          icon="three-dots-vertical"
-                          variant="primary"
-                          class="icon-size"
-                        ></b-icon>
+                        <b-icon icon="three-dots-vertical" variant="primary" class="icon-size"></b-icon>
                       </template>
                       <b-dropdown-item
                         @click="editBusiness(business.id)"
@@ -945,15 +834,15 @@ import MglGeocoderControl from "vue-mapbox-geocoder";
 import Multiselect from "vue-multiselect";
 import { validationMixin } from "vuelidate";
 
-import { required, email, minLength } from "vuelidate/lib/validators";
-import VuePhoneNumberInput from "vue-phone-number-input";
-import "vue-phone-number-input/dist/vue-phone-number-input.css";
+import { required, email, minLength } from 'vuelidate/lib/validators';
+import VuePhoneNumberInput from 'vue-phone-number-input';
+import 'vue-phone-number-input/dist/vue-phone-number-input.css';
 
 export default {
   mixins: [validationMixin],
   data() {
     return {
-      useas: "",
+      useas: '',
       page: 1,
       bizId: "",
       profileBusinesss: [],
@@ -969,7 +858,7 @@ export default {
       business_name: null,
       business: null,
       website: null,
-      first_page: "true",
+      first_page: 'true',
       country: [],
       region: [],
       division: [],
@@ -980,19 +869,19 @@ export default {
       select_filterss: [],
       sendingP: false,
       sendingB: false,
-      profile_pic: "",
+      profile_pic: '',
       dob: null,
       gender: null,
       city: null,
       Neighbor: null,
       step1: false,
       step2: false,
-      logo_pic: "",
+      logo_pic: '',
       logoimg_url: null,
       form: {
         business_name: null,
       },
-      business_category: "Testing",
+      business_category: 'Testing',
       business_keyword: [],
       time_zone: null,
       language: null,
@@ -1016,20 +905,20 @@ export default {
       multiselecvalue: [],
       filterselectvalue: [],
       multiselec: [
-        { name: "Vue.js", code: "vu" },
-        { name: "Javascript", code: "js" },
-        { name: "Open Source", code: "os" },
+        { name: 'Vue.js', code: 'vu' },
+        { name: 'Javascript', code: 'js' },
+        { name: 'Open Source', code: 'os' },
       ],
       timezone: [
-        { text: "(GMT+1) West African ", value: "+1" },
-        { text: "(GMT-11:00) Midway Island, Samoa", value: "-11" },
+        { text: '(GMT+1) West African ', value: '+1' },
+        { text: '(GMT-11:00) Midway Island, Samoa', value: '-11' },
       ],
       options: [
-        { text: " Person", value: "person" },
-        { text: " Business ", value: "business" },
+        { text: ' Person', value: 'person' },
+        { text: ' Business ', value: 'business' },
       ],
 
-      category: "",
+      category: '',
     };
   },
 
@@ -1048,8 +937,8 @@ export default {
       if (this.page == 1) {
         this.profilebusiness.splice(0);
       }
-      let url = "business/user?page="+this.page;
-      
+      let url = 'business/user?page=' + this.page;
+
       this.$store
         .dispatch("profile/loadMore", url)
         .then(({ data }) => {
@@ -1080,7 +969,7 @@ export default {
       this.bizId = id;
 
       axios
-        .get("business/edit/" + id)
+        .get('business/edit/' + id)
         .then(({ data }) => {
           console.log(data);
           this.editbiz = data.data;
@@ -1096,12 +985,12 @@ export default {
         container: this.fullPage ? null : this.$refs.preview,
         canCancel: true,
         onCancel: this.onCancel,
-        color: "#e75c18",
+        color: '#e75c18',
       });
 
-      let url = "business/delete/" + id;
+      let url = 'business/delete/' + id;
       this.$store
-        .dispatch("profile/deleteBusiness", url)
+        .dispatch('profile/deleteBusiness', url)
         .then(() => {
           console.log("wow biz {{ $t('profileowner.delete')}}d");
 
@@ -1112,22 +1001,22 @@ export default {
           this.profileBusinesss = [];
           this.$refs.infiniteLoading.attemptLoad();
           this.flashMessage.show({
-            status: "success",
+            status: 'success',
 
             message: "Business {{ $t('profileowner.Delete')}}d",
 
-            blockClass: "custom-block-class",
+            blockClass: 'custom-block-class',
           });
         })
         .catch((err) => {
           console.log({ err: err });
           loader.hide();
           this.flashMessage.show({
-            status: "error",
+            status: 'error',
 
             message: "Unable to {{ $t('profileowner.Delete')}} this Business",
 
-            blockClass: "custom-block-class",
+            blockClass: 'custom-block-class',
           });
         });
     },
@@ -1140,22 +1029,22 @@ export default {
       this.multiselecvalue = [];
       this.filterselectvalue = [];
 
-      this.city = "";
+      this.city = '';
       this.select_filterss = [];
-      this.business_name = "";
+      this.business_name = '';
       this.country = [];
       this.region = [];
       this.division = [];
       this.municipality = [];
-      this.phone1 = "";
-      this.phone2 = "";
-      this.website = "";
+      this.phone1 = '';
+      this.phone2 = '';
+      this.website = '';
       this.locality = [];
-      this.email = "";
-      this.time_zone = "";
-      this.address = "";
+      this.email = '';
+      this.time_zone = '';
+      this.address = '';
       this.business_keyword = [];
-      this.address = "";
+      this.address = '';
     },
 
     editfilters(filter) {
@@ -1247,9 +1136,9 @@ export default {
 
     categories() {
       this.$store
-        .dispatch("auth/categories")
+        .dispatch('auth/categories')
         .then(() => {
-          console.log("hey yeah");
+          console.log('hey yeah');
         })
         .catch((err) => {
           console.log({ err: err });
@@ -1259,12 +1148,12 @@ export default {
     subcategories() {
       let formData2 = new FormData();
 
-      formData2.append("categoryId", this.selectedcategories);
+      formData2.append('categoryId', this.selectedcategories);
 
       this.$store
-        .dispatch("auth/subcategories", formData2)
+        .dispatch('auth/subcategories', formData2)
         .then(() => {
-          console.log("hey yeah");
+          console.log('hey yeah');
         })
         .catch((err) => {
           console.log({ err: err });
@@ -1273,9 +1162,9 @@ export default {
 
     filters() {
       this.$store
-        .dispatch("auth/filters")
+        .dispatch('auth/filters')
         .then(() => {
-          console.log("hey yeah");
+          console.log('hey yeah');
         })
         .catch((err) => {
           console.log({ err: err });
@@ -1284,9 +1173,9 @@ export default {
 
     Setcategoryfiters() {
       this.$store
-        .dispatch("auth/Setcategoryfiters")
+        .dispatch('auth/Setcategoryfiters')
         .then(() => {
-          console.log("hey yeah");
+          console.log('hey yeah');
         })
         .catch((err) => {
           console.log({ err: err });
@@ -1295,9 +1184,9 @@ export default {
 
     Country() {
       this.$store
-        .dispatch("auth/country")
+        .dispatch('auth/country')
         .then(() => {
-          console.log("hey yeah");
+          console.log('hey yeah');
         })
         .catch((err) => {
           console.log({ err: err });
@@ -1306,9 +1195,9 @@ export default {
 
     old_profileBusiness() {
       this.$store
-        .dispatch("profile/profileBusiness")
+        .dispatch('profile/profileBusiness')
         .then(() => {
-          console.log("hey yeah");
+          console.log('hey yeah');
         })
         .catch((err) => {
           console.log({ err: err });
@@ -1317,14 +1206,14 @@ export default {
 
     Region() {
       let formData2 = new FormData();
-      console.log("region regions");
+      console.log('region regions');
 
-      formData2.append("countryId", this.selectedcountry);
+      formData2.append('countryId', this.selectedcountry);
 
       this.$store
-        .dispatch("auth/region", formData2)
+        .dispatch('auth/region', formData2)
         .then(() => {
-          console.log("hey yeah");
+          console.log('hey yeah');
         })
         .catch((err) => {
           console.log({ err: err });
@@ -1333,12 +1222,12 @@ export default {
 
     Division() {
       let formData2 = new FormData();
-      formData2.append("regionId", this.selectedregion);
+      formData2.append('regionId', this.selectedregion);
 
       this.$store
-        .dispatch("auth/division", formData2)
+        .dispatch('auth/division', formData2)
         .then(() => {
-          console.log("hey yeah");
+          console.log('hey yeah');
         })
         .catch((err) => {
           console.log({ err: err });
@@ -1347,12 +1236,12 @@ export default {
 
     Municipality() {
       let formData2 = new FormData();
-      formData2.append("divisionId", this.selecteddivision);
+      formData2.append('divisionId', this.selecteddivision);
 
       this.$store
-        .dispatch("auth/municipality", formData2)
+        .dispatch('auth/municipality', formData2)
         .then(() => {
-          console.log("hey yeah");
+          console.log('hey yeah');
         })
         .catch((err) => {
           console.log({ err: err });
@@ -1361,13 +1250,13 @@ export default {
 
     Locality() {
       let formData2 = new FormData();
-      formData2.append("councilId", this.selectedmunicipality);
-      console.log("loding locallity");
+      formData2.append('councilId', this.selectedmunicipality);
+      console.log('loding locallity');
       console.log(this.selectedmunicipality);
       this.$store
-        .dispatch("auth/locality", formData2)
+        .dispatch('auth/locality', formData2)
         .then(() => {
-          console.log("hey yeah");
+          console.log('hey yeah');
         })
         .catch((err) => {
           console.log({ err: err });
@@ -1393,9 +1282,9 @@ export default {
 
     businessAround() {
       this.$store
-        .dispatch("auth/businessAround")
+        .dispatch('auth/businessAround')
         .then(() => {
-          console.log("hey yeah");
+          console.log('hey yeah');
         })
         .catch((err) => {
           console.log({ err: err });
@@ -1404,9 +1293,9 @@ export default {
 
     peopleAround() {
       this.$store
-        .dispatch("auth/peopleAround")
+        .dispatch('auth/peopleAround')
         .then(() => {
-          console.log("hey yeah");
+          console.log('hey yeah');
         })
         .catch((err) => {
           console.log({ err: err });
@@ -1448,7 +1337,7 @@ export default {
           container: this.fullPage ? null : this.$refs.loader,
           canCancel: true,
           onCancel: this.onCancel,
-          color: "#e75c18",
+          color: '#e75c18',
         });
 
         let formData2 = new FormData();
@@ -1480,9 +1369,9 @@ export default {
         formData2.append("about_business", this.about);
 
         this.axios
-          .post("business/add", formData2, {
+          .post('business/add', formData2, {
             headers: {
-              "Content-Type": "multipart/form-data",
+              'Content-Type': 'multipart/form-data',
             },
           })
           .then((response) => {
@@ -1491,11 +1380,11 @@ export default {
             this.sendingB = false;
             this.profileBusiness();
 
-            this.$refs["createBusinessModal"].hide();
+            this.$refs['createBusinessModal'].hide();
             this.flashMessage.show({
-              status: "success",
-              blockClass: "custom-block-class",
-              message: "Business Profile Created",
+              status: 'success',
+              blockClass: 'custom-block-class',
+              message: 'Business Profile Created',
             });
 
             loader.hide();
@@ -1516,17 +1405,17 @@ export default {
               console.log(err.response.data.message);
 
               this.flashMessage.show({
-                status: "error",
+                status: 'error',
 
                 message: this.flashErrors(err.response.data.errors),
-                blockClass: "custom-block-class",
+                blockClass: 'custom-block-class',
               });
             } else {
               this.flashMessage.show({
-                status: "error",
+                status: 'error',
 
-                message: "Unable to Create Your Business",
-                blockClass: "custom-block-class",
+                message: 'Unable to Create Your Business',
+                blockClass: 'custom-block-class',
               });
               console.log({ err: err });
             }
@@ -1543,41 +1432,45 @@ export default {
           container: this.fullPage ? null : this.$refs.loader,
           canCancel: true,
           onCancel: this.onCancel,
-          color: "#e75c18",
+          color: '#e75c18',
         });
 
         let formData2 = new FormData();
-        formData2.append("logo_path", this.logo_pic);
+        formData2.append('logo_path', this.logo_pic);
 
-        formData2.append("region", this.selectedregion);
-        formData2.append("city", this.city);
-        formData2.append("country", this.selectedcountry);
+        formData2.append('region', this.selectedregion);
+        formData2.append('city', this.city);
+        formData2.append('country', this.selectedcountry);
 
-        formData2.append("address", this.adress);
-        formData2.append("division", this.selecteddivision);
-        formData2.append("council", this.selectedmunicipality);
+        formData2.append('address', this.adress);
+        formData2.append('division', this.selecteddivision);
+        formData2.append('council', this.selectedmunicipality);
 
-        formData2.append("neigborhood", this.selectedlocality);
-        formData2.append("lat", this.center.lat);
-        formData2.append("lng", this.center.lng);
-        formData2.append("phone", this.phone1);
-        formData2.append("phone2", this.phone2);
-        formData2.append("email", this.email);
-        formData2.append("website", this.website);
+        formData2.append('neigborhood', this.selectedlocality);
+        formData2.append('lat', this.center.lat);
+        formData2.append('lng', this.center.lng);
+        formData2.append('phone', this.phone1);
+        formData2.append('phone2', this.phone2);
+        
+        if (this.email)
+          formData2.append('email', this.email);
+        
+        if (this.website)
+          formData2.append('website', this.website);
 
-        formData2.append("name", this.business_name);
-        formData2.append("categoryId", this.selectedcategories);
-        formData2.append("subCategoryId", this.selectedsubcategories);
-        formData2.append("filterId", this.selectedfilters);
-        formData2.append("keywords", this.business_keyword);
-        formData2.append("timezone", this.time_zone);
-        formData2.append("language", this.language);
-        formData2.append("about_business", this.about);
+        formData2.append('name', this.business_name);
+        formData2.append('categoryId', this.selectedcategories);
+        formData2.append('subCategoryId', this.selectedsubcategories);
+        formData2.append('filterId', this.selectedfilters);
+        formData2.append('keywords', this.business_keyword);
+        formData2.append('timezone', this.time_zone);
+        formData2.append('language', this.language);
+        formData2.append('about_business', this.about);
 
         this.axios
-          .post("business/edit/" + this.bizId, formData2, {
+          .post('business/edit/' + this.bizId, formData2, {
             headers: {
-              "Content-Type": "multipart/form-data",
+              'Content-Type': 'multipart/form-data',
             },
           })
           .then((response) => {
@@ -1586,11 +1479,11 @@ export default {
             this.sendingB = false;
             // this.profileBusiness();
 
-            this.$refs["updateBusinessModal"].hide();
+            this.$refs['updateBusinessModal'].hide();
             this.flashMessage.show({
-              status: "success",
-              blockClass: "custom-block-class",
-              message: "Business Updated",
+              status: 'success',
+              blockClass: 'custom-block-class',
+              message: 'Business Updated',
             });
 
             loader.hide();
@@ -1610,17 +1503,17 @@ export default {
               console.log({ err: err });
 
               this.flashMessage.show({
-                status: "error",
+                status: 'error',
 
                 message: this.flashErrors(err.response.data.errors),
-                blockClass: "custom-block-class",
+                blockClass: 'custom-block-class',
               });
             } else {
               this.flashMessage.show({
-                status: "error",
+                status: 'error',
 
-                message: "Unable to Update Your Business",
-                blockClass: "custom-block-class",
+                message: 'Unable to Update Your Business',
+                blockClass: 'custom-block-class',
               });
               console.log({ err: err });
             }
@@ -1631,7 +1524,7 @@ export default {
     },
 
     flashErrors(errors) {
-      let err = "";
+      let err = '';
       Object.values(errors).forEach((element) => {
         err = element[0];
       });
@@ -1664,15 +1557,15 @@ export default {
     },
 
     showModal() {
-      this.$refs["modal-3"].show();
+      this.$refs['modal-3'].show();
     },
     hideModal() {
-      this.$refs["modal-3"].hide();
+      this.$refs['modal-3'].hide();
     },
 
     choseModal() {
-      if (this.useas == "") {
-        this.useas = "person";
+      if (this.useas == '') {
+        this.useas = 'person';
         this.selectedusecase = this.useas;
       } else {
         this.selectedusecase = this.useas;
@@ -1800,7 +1693,7 @@ export default {
     },
     selectedlocality: function() {
       let sub_cat = [];
-      console.log("loging localities");
+      console.log('loging localities');
       console.log(this.locality);
       this.locality.forEach((item) => {
         if (item.neighborhood_id) {
@@ -1840,7 +1733,7 @@ export default {
     },
   },
 };
-import "vue-form-wizard/dist/vue-form-wizard.min.css";
+import 'vue-form-wizard/dist/vue-form-wizard.min.css';
 </script>
 
 <style scoped>
@@ -1972,11 +1865,11 @@ import "vue-form-wizard/dist/vue-form-wizard.min.css";
     font-size: 16px;
     color: black;
     line-height: 35px;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
   .textt {
     color: #000;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 12px;
     line-height: 30px;
@@ -2005,11 +1898,11 @@ import "vue-form-wizard/dist/vue-form-wizard.min.css";
     font-size: 20px;
     color: black;
     line-height: 35px;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
   .textt {
     color: #000;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 12px;
     line-height: 30px;

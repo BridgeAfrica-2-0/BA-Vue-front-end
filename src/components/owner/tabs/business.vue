@@ -15,7 +15,7 @@
               <p class="textt">
                 <strong class="title">
                   <router-link :to="'business/' + item.id">
-                    {{ item.name }}
+                    {{ item.name }} ++
                   </router-link>
                 </strong>
                 <br />

@@ -56,8 +56,8 @@ Vue.use(Vuex);
 // axios.defaults.baseURL = "http://edson.maxinemoffett.com/api/v1/";
 
 
-//axios.defaults.baseURL = process.VUE_APP_URL;
-axios.defaults.baseURL ='https://courage4.maxinemoffett.com/api/v1';
+axios.defaults.baseURL = process.VUE_APP_URL;
+
 
 
 export default new Vuex.Store({

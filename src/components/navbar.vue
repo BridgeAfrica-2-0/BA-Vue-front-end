@@ -12,7 +12,10 @@
             ></b-icon>
           </span>
 
-          <router-link class="d-inline-block align-top mt-1" :to="{name: 'home1'}">
+          <router-link
+            class="d-inline-block align-top mt-1"
+            :to="{ name: 'home1' }"
+          >
             <img src="@/assets/logo.png" alt="" class="balogo" loading="lazy" />
           </router-link>
         </div>
@@ -536,7 +539,6 @@
 </template>
 
 <script>
-
 import _ from "lodash";
 
 import Button from "@/components/ButtonNavBarFind.vue";
@@ -603,13 +605,13 @@ export default {
     this.notificationPatterns = {
       user: () => "/notification/latest/user",
       business: () => `/notification/business/${this.user.id}`,
-      network: () => null,
+      network: () => `/network/${this.user.id}/notifications`,
     };
 
     this.messagePatterns = {
       user: () => "/messages/latest/user",
-      business: () => "/messages/latest/user",
-      network: () => "/messages/latest/user",
+      business: () => `/messages/latest/${this.user.id}/business`,
+      network: () => `/messages/latest/${this.user.id}/network`,
     };
 
     this.redirectionPatterns = {
@@ -651,14 +653,16 @@ export default {
       this.userOwnPage = this.onRedirect();
     },
 
-    credentials: function(newVal){
+    credentials: function (newVal) {
       this.searchOptions = newVal;
     },
 
     query(newQuery) {
-      axios.get(`business-community/neighborhood/${newQuery}`).then(({ data }) => {
-        this.$store.commit("auth/setneigbourhoods", data.data);
-      });
+      axios
+        .get(`business-community/neighborhood/${newQuery}`)
+        .then(({ data }) => {
+          this.$store.commit("auth/setneigbourhoods", data.data);
+        });
     },
   },
 
@@ -807,8 +811,8 @@ export default {
       const response = await this.$repository.share.switch(null, "reset");
       if (response.success) {
         this.profile({ ...this.auth.user, user_type: "user" });
-        this.$router.push({ 
-          "name": "profile_owner",
+        this.$router.push({
+          name: "profile_owner",
         });
       }
       loader.hide();

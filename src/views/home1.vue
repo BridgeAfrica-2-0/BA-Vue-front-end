@@ -401,7 +401,7 @@
         </div>
       </div>
     </section>
-    <div class="w-100 text-light"  id="animation"   >  .</div>
+    <!-- <div class="w-100 text-light"  id="animation"   >  .</div> -->
     <section id="why-us" class="why-us">
       <div class="container-fluid" id="anim">
         <div class="row">
@@ -479,8 +479,8 @@
               </div>
             </div> -->
             
-             <div class="scroll-container">
-              <div class="scroll-element js-scroll slide-left">
+             <div class="scroll-container ">
+              <div class="scroll-element js-scroll slide-left text-center">
 
                 <video class="business-vid1" playsinline autoplay muted loop poster="assets/img/Home scroll copy.png"
                   id="Test_Video">
@@ -1277,6 +1277,10 @@ export default {
   .mt-md-30 {
     margin-top: 20px;
   }
+
+  .hidde{
+    display: none;
+  }
 }
 
 @media only screen and (min-width: 768px) {
@@ -1296,7 +1300,7 @@ export default {
   height: 704px;
 }
 .topbar{
-    position: fixed;
+    /* position: fixed; */
 }
 
   .sizeimg{
@@ -1442,7 +1446,7 @@ export default {
   .business-vid1 {
     height: 700px;
 
-    margin-left: -10%;
+    /* margin-left: -10%; */
 
     z-index: 1;
     position: relative;

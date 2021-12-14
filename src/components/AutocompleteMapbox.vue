@@ -1,6 +1,8 @@
 <template>
   <div class="map-container">
-    <MglMap
+    <div id="map"></div>
+    <div id="geocoder" class="geocoder"></div>
+    <!-- <MglMap
       :accessToken="accessToken"
       :zoom="zoom"
       :center="center"
@@ -8,18 +10,19 @@
     >
       <MglMarker :coordinates="center" color="blue" />
       <MglGeocoderControl :accessToken="accessToken" @result="handleResult" />
-    </MglMap>
+    </MglMap> -->
   </div>
 </template>
 <script>
 import Mapbox from "mapbox-gl";
 import { MglMap, MglMarker } from "vue-mapbox";
 import MglGeocoderControl from "vue-mapbox-geocoder";
+import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 export default {
   components: {
-    MglMap,
-    MglGeocoderControl,
-    MglMarker,
+    // MglMap,
+    // MglGeocoderControl,
+    // MglMarker,
   },
   data() {
     return {
@@ -27,29 +30,61 @@ export default {
       accessToken: process.env.VUE_APP_MAPBOX_TOKEN,
       mapStyle: "mapbox://styles/mapbox/streets-v11",
       center: [11.504929555178624, 3.8465173382452815], // Lng,Lat
-      zoom: 3,
+      zoom: 5,
     };
   },
   created() {
     this.mapbox = Mapbox;
   },
+  mounted() {
+    this.initmap();
+  },
   methods: {
     handleResult(response) {
       console.log(response.result);
-      this.center = response.result.center;
+      // this.center = response.result.center;
       let details = {
         coordinates: response.result.center,
         address: response.result.text,
       };
       this.$emit("get-address-details", details);
     },
+    initmap() {
+      let mapboxgl = this.mapbox;
+      mapboxgl.accessToken = this.accessToken;
+      var map = new mapboxgl.Map({
+        container: "map",
+        style: this.mapStyle,
+        zoom: this.zoom,
+        center: this.center,
+      });
+
+      const geocoder = new MapboxGeocoder({
+        accessToken: mapboxgl.accessToken,
+        mapboxgl: mapboxgl,
+        country: "cameroon",
+        placeholder: "Neighbour",
+      });
+
+      document.getElementById("geocoder").appendChild(geocoder.onAdd(map));
+
+      geocoder.on("result", (e) => {
+        // console.log(e.result);
+        let response = e.result;
+        let details = {
+          coordinates: response.center,
+          address: response.place_name,
+        };
+        this.$emit("get-address-details", details);
+        // this.handleResult(e.result);
+        // results.innerText = JSON.stringify(e.result, null, 2);
+      });
+    },
   },
 };
 </script>
 <style scoped>
-@import url("https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css");
 @import url("https://api.tiles.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css");
-
 @import url("https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.css");
 .map-container {
   width: 100%;
@@ -58,12 +93,19 @@ export default {
 .geocoder {
   position: absolute;
   z-index: 1;
-  width: 50%;
+  width: 72vw;
   left: 50%;
-  margin-left: -25%;
+  margin-left: -49.5%;
   top: 10px;
 }
 .mapboxgl-ctrl-geocoder {
   min-width: 100%;
+}
+#map {
+  margin-top: 75px;
+}
+#map {
+  height: 100%;
+  width: 100%;
 }
 </style>

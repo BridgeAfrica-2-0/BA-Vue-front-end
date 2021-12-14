@@ -186,7 +186,9 @@
           <hr />
           <b-row>
             <b-col>
+
               <BtnCtaMessage :element="item" type="business" />
+
             </b-col>
             <b-col>
               <b-button variant="outline-dark" class="float-right">{{
@@ -432,6 +434,7 @@
 
 <script>
 export default {
+  props: ["products"],
   data() {
     return {
       viewProduct: false,
@@ -443,9 +446,6 @@ export default {
     };
   },
   computed: {
-    products() {
-      return this.$store.getters["allSearch/getProducts"];
-    },
     prodLoader() {
       return this.$store.getters["allSearch/getLoader"];
     },

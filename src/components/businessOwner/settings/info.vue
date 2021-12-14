@@ -391,6 +391,7 @@
         <div class="b-bottom">
           <b-container>
             <b-form-group
+        
               label-cols-lg="3"
               :label="$t('businessowner.Neighbourhood')"
               label-size="md"
@@ -874,6 +875,7 @@ export default {
     this.editBusiness();
     this.categories();
     this.Country();
+    console.log("-----",this.businessInfo);
   },
 
   methods: {

@@ -27,7 +27,7 @@
               @click="deleteAll(selected)" 
               :disabled="indeterminate ? false : true"
               class="a-button-l duration"
-            >Delete</b-button>
+            >{{ $t('network.Delete') }}</b-button>
           </div>
         </b-col>
       </b-row>
@@ -36,9 +36,9 @@
       <b-row>
         <!-- {{getNotificationsStore}} -->
         <div>
-          Selected: <strong>{{ selected }}</strong
+          {{ $t('network.Selected') }}: <strong>{{ selected }}</strong
           ><br />
-          All Selected: <strong>{{ selectAll }}</strong>
+          {{ $t('network.All_Selected') }}: <strong>{{ selectAll }}</strong>
         </div>
         <b-col cols="12" v-for="(notification, index) in getNotificationsStore" :key="index">
           <div :class="notification.mark_as_read ? 'text-secondary' : 'font-weight-bold'">

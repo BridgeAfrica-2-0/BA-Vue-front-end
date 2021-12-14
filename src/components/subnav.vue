@@ -5,7 +5,7 @@
       <b-col cols="8" lg="10" style="text-align: left">
         <span style="display: inline-flex">
           <span
-            v-for="(category, index) in categories.slice(0, 6)"
+            v-for="(category, index) in categories"
             :key="index"
             @mouseover="showSubCat(category.category.id, category.sub_cat)"
             @click="showSubCat(category.category.id, category.sub_cat)"
@@ -30,7 +30,7 @@
                 <b-row>
                   <b-col cols="6">
                     <b-dropdown-item
-                      v-for="(subCat, subIndex) in category.sub_cat.slice(0, 6)"
+                      v-for="(subCat, subIndex) in category.sub_cat"
                       :key="subIndex"
                       @click="bcategory(subCat)"
                       href="#"
@@ -41,60 +41,18 @@
                       {{ subCat.name }}
                     </b-dropdown-item>
 
-                    <b-dropdown-item @click="category('More')" href="#"
-                      ><img
-                        class="img-fluid picture logo-img"
-                        src="@/assets/icons/more.png"
-                      />
-                      More</b-dropdown-item
-                    >
-                  </b-col>
-                </b-row>
-              </div>
-            </b-nav-item-dropdown>
-          </span>
-        </span>
-        <span @mouseover="onOverMore()" @mouseleave="onLeaveMore()">
-          <b-nav-item-dropdown id="dropdown-1" text="More" ref="more">
-            <hr
-              style="
-                margin-top: -10px;
-                background-color: red;
-                height: 3px;
-                width: 40%;
-                float: left;
-              "
-            />
-            <br />
-
-            <div>
-              <b-row>
-                <b-col
-                  cols="6"
-                  v-for="(category, index) in categories.slice(6)"
-                  :key="index"
-                >
-                  <b-dropdown-item class="ml-1" href="#">
-                    <img
-                      v-if="category.category.cat_image"
-                      class="img-fluid picture logo-img"
-                      :src="require(`@/assets${category.category.cat_image}`)"
-                    />
-                    <span v-else>!@</span>
-                    {{ category.category.name }}
-                  </b-dropdown-item>
-
-                  <!-- <b-dropdown-item @click="category('More')" href="#"
+                    <!-- <b-dropdown-item @click="category('More')" href="#"
                       ><img
                         class="img-fluid picture logo-img"
                         src="@/assets/icons/more.png"
                       />
                       More</b-dropdown-item
                     > -->
-                </b-col>
-              </b-row>
-            </div>
-          </b-nav-item-dropdown>
+                  </b-col>
+                </b-row>
+              </div>
+            </b-nav-item-dropdown>
+          </span>
         </span>
 
         <div></div>

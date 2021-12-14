@@ -158,7 +158,7 @@
     <div class="row my-4" v-if="loading">
       <div class="col-12 d-flex justify-content-center align-items-center">
         <b-spinner
-          style="width: 3rem; height: 3rem;"
+          style="width: 3rem; height: 3rem"
           label="Loading"
         ></b-spinner>
       </div>
@@ -194,7 +194,7 @@
         </b-dropdown>
       </div>
       <div class="row d-flex justify-content-between px-3 mb-3">
-        <span class="flou align-self-center ">
+        <span class="flou align-self-center">
           {{ order.user_name }}
           {{ moment(order.created_at).format("MM/DD/YYYY") }}
           12H00
@@ -246,7 +246,7 @@
         </div>
         <div class="col-lg-3 d-none d-lg-block">
           <h3 class="font-weight-bold text-small text-capitalize">
-            {{ $t("myOrders.status")}}
+            {{ $t("myOrders.status") }}
           </h3>
           <h3
             class="text-success font-weight-normal text-small text-capitalize"
@@ -256,20 +256,24 @@
         </div>
       </div>
       <div
-        class="d-flex justify-content-lg-end justify-content-center my-lg-5 my-3"
+        class="
+          d-flex
+          justify-content-lg-end justify-content-center
+          my-lg-5 my-3
+        "
       >
         <b-button
           variant="primary"
           class="px-5"
           @click="updateOrderStatus('complete', order.order_id)"
-          >{{ $t("myOrders.Reorder")}}</b-button
+          >{{ $t("myOrders.Reorder") }}</b-button
         >
       </div>
     </div>
     <div class="row my-4" v-if="loading">
       <div class="col-12 d-flex justify-content-center align-items-center">
         <b-spinner
-          style="width: 3rem; height: 3rem;"
+          style="width: 3rem; height: 3rem"
           label="Loading"
         ></b-spinner>
       </div>

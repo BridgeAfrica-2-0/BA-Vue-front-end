@@ -591,7 +591,10 @@ export default {
       notificationPatterns: null,
       messagePatterns: null,
       redirectionPatterns: null,
-
+      searchOptions: {
+        keyword: "",
+        placeholder: "All",
+      },
       query: "",
       selectedUser: null,
       users: [],
@@ -612,8 +615,8 @@ export default {
     this.getLocation();
   },
   created() {
-    console.log("created");
     this.init();
+    this.userOwnPage = this.onRedirect();
 
     this.notificationPatterns = {
       user: () => "/notification/latest/user",
@@ -663,6 +666,15 @@ export default {
   watch: {
     "$store.state.auth.profilConnected": function () {
       this.updateNotificationEvent();
+      this.userOwnPage = this.onRedirect();
+    },
+
+    credentials: {
+      deep: true,
+      handler() {
+        console.log(this.credentials, "----------------");
+        this.searchOptions = this.credentials;
+      },
     },
 
     query(newQuery) {
@@ -683,17 +695,26 @@ export default {
       setNetworks: "social/FIND_USER_NETWORK",
       setBusiness: "social/FIND_USER_BUSNESS",
       lauchNetworkRequest: "social/INIT",
-
       getGeo: "business/getGeo",
-
       getNeigbourhoods: "auth/neigbourhoods",
-
       Logout: "auth/logout",
     }),
 
     ...mapMutations({
       profile: "auth/profilConnected",
     }),
+
+    onRedirect() {
+      const link = {
+        network: () => ({ name: "networks", params: { id: this.user.id } }),
+        business: () => ({
+          name: "BusinessOwner",
+          params: { id: this.user.id },
+        }),
+        user: () => ({ name: "profile_owner" }),
+      };
+      return link[this.user.user_type]();
+    },
 
     getLocation() {
       const success = (position) => {

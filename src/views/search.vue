@@ -539,11 +539,20 @@
               <h6 class="mb-3">
                 <fas-icon class="icons" :icon="['fas', 'store']" size="lg" />
                 {{ $t("search.Market") }}
+                <b-button
+                  to="/checkout"
+                  size="sm"
+                  variant="primary"
+                  class="float-right"
+                >
+                  <b-icon icon="cart4"></b-icon> Cart
+                </b-button>
                 <div class="float-right">
                   <b-button
                     size="sm"
                     variant="outline-primary"
                     @click="getProducts"
+                    class="mx-3"
                   >
                     <b-spinner small v-if="prodLoader"></b-spinner>
                     <span v-else>{{
@@ -1806,9 +1815,8 @@ export default {
 
     changeNotFoundTitle() {
       try {
-        this.notFoundComponentTitle = this.strategyForNotFoundComponentTitle[
-          this.selectedId
-        ]();
+        this.notFoundComponentTitle =
+          this.strategyForNotFoundComponentTitle[this.selectedId]();
       } catch (error) {
         this.notFoundComponentTitle = "";
       }
@@ -1948,7 +1956,8 @@ export default {
           break;
 
         case "MC":
-          this.selectcategories = this.Mayor_councils_filters_and_public_institution;
+          this.selectcategories =
+            this.Mayor_councils_filters_and_public_institution;
 
           break;
 

@@ -96,7 +96,7 @@
 
           {{$t("network.Your")}} {{pendingPost.data}} {{$t("network.Posts_are_pending_for_approval")}}.&nbsp;&nbsp;&nbsp;&nbsp;
           <a
-            @click="RedirectPending"
+            @click="editPage"
             style="color: #e75c18; text-decoration: underline; cursor:pointer"
           >{{ $t("network.View_All") }}</a>
 
@@ -525,6 +525,28 @@ export default {
     ...mapMutations({
       auth: "auth/profilConnected",
     }),
+
+    editPage(){
+       this.$router.push("/network/"+this.url+"?selectedId=4");
+      //  this.$router.push("/network/"+this.url+"?this.selectedIdd=4 && this.tabIndex=5");
+       console.log("editPage");
+          //        this.selectedIdd = '4';
+          // this.tabIndex = '5';
+    },
+    
+    AllPendingPost() {
+      console.log("AllPendingPost");
+      this.axios
+        .get("network/"+this.url+"/post/count-pending-posts")
+        .then(({ data }) => {
+          console.log("AllPendingPost yeahh");
+          console.log(data);
+          this.pendingPost = data;
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
 
     mapmediae(media) {
       let mediaarr = [];

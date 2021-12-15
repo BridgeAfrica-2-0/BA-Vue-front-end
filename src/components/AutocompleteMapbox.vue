@@ -2,27 +2,13 @@
   <div class="map-container">
     <div id="map"></div>
     <div id="geocoder" class="geocoder"></div>
-    <!-- <MglMap
-      :accessToken="accessToken"
-      :zoom="zoom"
-      :center="center"
-      :mapStyle.sync="mapStyle"
-    >
-      <MglMarker :coordinates="center" color="blue" />
-      <MglGeocoderControl :accessToken="accessToken" @result="handleResult" />
-    </MglMap> -->
   </div>
 </template>
 <script>
 import Mapbox from "mapbox-gl";
-import { MglMap, MglMarker } from "vue-mapbox";
-import MglGeocoderControl from "vue-mapbox-geocoder";
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 export default {
   components: {
-    // MglMap,
-    // MglGeocoderControl,
-    // MglMarker,
   },
   data() {
     return {
@@ -42,7 +28,6 @@ export default {
   methods: {
     handleResult(response) {
       console.log(response.result);
-      // this.center = response.result.center;
       let details = {
         coordinates: response.result.center,
         address: response.result.text,
@@ -69,15 +54,12 @@ export default {
       document.getElementById("geocoder").appendChild(geocoder.onAdd(map));
 
       geocoder.on("result", (e) => {
-        // console.log(e.result);
         let response = e.result;
         let details = {
           coordinates: response.center,
           address: response.place_name,
         };
         this.$emit("get-address-details", details);
-        // this.handleResult(e.result);
-        // results.innerText = JSON.stringify(e.result, null, 2);
       });
     },
   },

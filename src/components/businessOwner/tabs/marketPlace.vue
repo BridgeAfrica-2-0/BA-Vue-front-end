@@ -312,7 +312,7 @@ export default {
       options: ["list", "of", "options"],
       orders: false,
       archive: false,
-
+     businessId:null,
       market: true,
       my_orders: "orders",
       selectedImagePrv: "",
@@ -325,11 +325,11 @@ export default {
         description: "",
         picture: null,
         price: "",
-        in_stock: "",
+        in_stock: 1,
         on_discount: false,
         discount_price: 0,
         condition: "",
-        is_service: null,
+        is_service: 0,
         status: 1,
         business_id: "",
         categoryId: "",
@@ -394,7 +394,7 @@ export default {
     },
     getProducts: async function () {
       await axios
-        .get("/market")
+        .get("/market?business_id=1")
         .then((res) => {
           console.log(res.data);
           this.products = res.data.data;
@@ -425,7 +425,7 @@ export default {
       }
       console.log("NEW PRODUCT", this.newProduct);
       axios
-        .post("market", fd)
+        .post("market?business_id="+this.businessId, fd)
         .then((res) => {
           this.load = false;
           (this.success = true), (this.val = "success");
@@ -433,6 +433,7 @@ export default {
           this.getProducts();
         })
         .catch((err) => {
+          console.log({err:err});
           this.load = false;
           (this.success = true), (this.val = "danger");
           this.msg = this.$t('businessowner.Something_went_wrong');
@@ -489,7 +490,7 @@ export default {
     this.getProducts();
     console.log("--test ----");
     //get categories for current business
-    const businessId = this.$route.params.id;
+     this.businessId = this.$route.params.id;
     // this.$store.dispatch('market/getBuCategories', businessId);
 
     this.categories();

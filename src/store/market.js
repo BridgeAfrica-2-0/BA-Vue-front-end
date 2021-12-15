@@ -176,7 +176,7 @@ export default {
       console.log("UpdateProduct")
       console.log(businessData)
       return axios
-        .post(businessData.path, businessData.data, {
+        .post(businessData.path, businessData.formData, {
           headers: { "Content-Type": "multipart/form-data" },
         })
         .then(({ data }) => {

@@ -264,6 +264,8 @@
           </b-card>
         </div>
 
+
+{{product}}
         <b-alert v-if="success" :variant="val" show> {{ msg }} </b-alert>
         <b-button @click="editProduct(product)" class="mt-2 btn-block" variant="primary">
           <b-spinner small v-if="load" variant="white"></b-spinner>
@@ -302,6 +304,7 @@ export default {
   data() {
     return {
       viewProduct: false,
+      pro_img:null,
       Edit: false,
       selectedProduct: "",
       selectedImagePrv: this.product.picture,
@@ -356,6 +359,7 @@ export default {
       console.log("getImage");
       console.log(e.target.files[0]);
       this.product.picture = e.target.files[0];
+      this.pro_img=e.target.files[0];
       let file = e.target.files[0] || e.dataTransfer.files;
       this.selectedImagePrv = URL.createObjectURL(file);
       console.log("this.selectedImagePrv", this.selectedImagePrv);
@@ -371,15 +375,15 @@ export default {
       formData.append("condition", Product.condition);
       formData.append("is_service", Product.is_service);
       formData.append("in_stock", Product.in_stock);
-      formData.append("tax_amount", Product.tax_amount);
-      formData.append("kg", Product.kg);
+      formData.append("tax_amount", 200);  
+      formData.append("kg", 7);
       formData.append("categories", Product.categories);
       formData.append("subcategories", Product.subcategories);
       formData.append("filters", Product.filters);
-      formData.append("picture", Product.picture);
+      formData.append("picture", this.pro_img);
       this.$store
         .dispatch("market/UpdateProduct", {
-          path: "update/"+this.url,
+          path: "market/"+Product.id,
           formData: formData,
         })
         .then(({ data }) => {
@@ -402,7 +406,7 @@ export default {
       console.log(Product);
       this.$store
         .dispatch("market/DeleteProduct", {
-          path: "market/"+this.url,
+          path: "market/"+Product.id,
         })
         .then(({ data }) => {
           console.log(data);

@@ -13,20 +13,39 @@
         <b-collapse id="nav-collapse" is-nav>
           <b-navbar-nav class="ml-auto text-center">
             <b-nav-item href="#">
-              <span class="text-dark font-arvo nav-span">Home</span>
+              <span class="text-dark font-arvo nav-span">{{ $t("general.Home") }}</span>
             </b-nav-item>
             <b-nav-item href="/about" class="ml-md-3" :class="currentRouteName == 'about' ? 'active' : ''">
-              <span class="text-dark font-arvo nav-span">About Us</span>
+              <span class="text-dark font-arvo nav-span">{{ $t("general.About_Us") }}</span>
             </b-nav-item>
             <b-nav-item href="/contact" class="ml-md-3" :class="currentRouteName == 'contact' ? 'active' : ''">
-              <span class="text-dark font-arvo nav-span">Contact Us</span>
+              <span class="text-dark font-arvo nav-span">{{ $t("general.Contact_Us") }}</span>
             </b-nav-item>
             <b-nav-item href="#" class="ml-md-3">
-              <span class="text-dark font-arvo nav-span">Login</span>
+              <span class="text-dark font-arvo nav-span">{{ $t("general.Login") }}</span>
             </b-nav-item>
             <b-nav-item href="#" class="ml-md-3">
-              <span class="text-dark font-arvo nav-span">Sign Up</span>
+              <span class="text-dark font-arvo nav-span">{{ $t("general.Sign_Up") }}</span>
             </b-nav-item>
+
+            
+              <b-nav-item href="#" class="ml-md-3 font-weight-bold">
+                  <b-card-text
+                    @click="$i18n.locale = 'en'"
+                    class="text-dark font-arvo cursor-pointer mb-1 fw-bold"
+                    >{{ $t("auth.english") }}
+                    </b-card-text
+                  >
+              </b-nav-item>
+
+              <b-nav-item href="#" class="ml-md-3 font-weight-bold">
+                  <b-card-text @click="$i18n.locale = 'fr'" class="text-dark font-arvo cursor-pointer mb-1 ">{{
+                    $t("auth.french")
+                  }}
+              </b-card-text>
+
+          </b-nav-item>
+
           </b-navbar-nav>
         </b-collapse>
       </div>

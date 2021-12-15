@@ -662,34 +662,34 @@ export default {
       resources: [
         {
           id: '1',
-          title: 'HOW TO USE BRIDGEAFRICA.COM',
+          title: this.$t('general.HOW_TO_USE_BRIDGEAFRICA'),
           img_url:
             'http://info.bridgeafrica.com/wp-content/uploads/2021/07/WSIS-thumbnail-1024x592-1-thegem-portfolio-masonry.png',
           tag: ['bridgeafrica', 'cameroon', 'cunsulting', 'media'],
         },
         {
           id: '2',
-          title: 'BETA LAUNCH OF BRIDGEAFRICA',
+          title: this.$t("general.BETA_LAUNCH_OF_BRIDGEAFRICA"),
           img_url:
             'http://info.bridgeafrica.com/wp-content/uploads/2021/07/THINDFDF-1024x743-1-thegem-portfolio-masonry.png',
           tag: ['bridgeafrica', 'cameroon'],
         },
         {
           id: '3',
-          title: 'BridgeAfrica.com Partners with Pea Jeunes (Demo)',
+          title: this.$t('general.Partners_with_Pea'),
           img_url:
             'http://info.bridgeafrica.com/wp-content/uploads/2021/07/mapoure-1024x576-1-thegem-portfolio-masonry.png',
           tag: ['bridgeafrica', 'media'],
         },
         {
           id: '4',
-          title: 'BridgeAfrica.com Gives Digital Literacy Training (Demo)',
+          title: this.$t('general.Gives_Digital_Literacy_Training'),
           img_url: 'http://info.bridgeafrica.com/wp-content/uploads/2021/07/000000.png',
           tag: ['cunsulting', 'media'],
         },
         {
           id: '5',
-          title: 'Cameroon Gallery Commercial (Demo)',
+          title: this.$t('general.Cameroon_Gallery_Commercial'),
           img_url:
             'http://info.bridgeafrica.com/wp-content/uploads/2021/07/caeroon-gallery-thegem-portfolio-masonry.jpg',
           tag: ['cameroon', 'media'],

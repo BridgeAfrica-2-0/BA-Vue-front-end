@@ -132,6 +132,19 @@
     "Report_User":"Rapport de l'utilisateur",
     "To":"À",
     "Type_the_name_of_person_or_Business":"Tapez le nom de la personne ou de l'entreprise",
-    "Preview_file":"Preview file"
+    "Preview_file":"Preview file",
+    "You_are_now_connected_as":"Vous êtes maintenant connecté en tant que",
+    "You_are_connected_as":"Vous êtes connecté en tant que",
+
+    "HOW_TO_USE_BRIDGEAFRICA":"COMMENT UTILISER BRIDGEAFRICA.COM",
+    "Partners_with_Pea":"BridgeAfrica.com Partenaires de avec Pea Jeunes (Demo)",
+    "Gives_Digital_Literacy_Training":"BridgeAfrica.com Formation à la culture numérique (Demo)",
+    "Cameroon_Gallery_Commercial":"Galerie commerciale du Cameroun (Demo)",
+    "About_Us":"A propos de nous",
+    "Contact_Us":"Nous contacter",
+    "Login":"Connexion",
+    "Sign_Up":"Enregistrez-vous",
+    "Groups":"Groupes"
+    
 
 }

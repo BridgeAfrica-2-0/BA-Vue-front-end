@@ -206,8 +206,8 @@ export default {
             time: 5000,
             message:
               "business" == type
-                ? `You are now connected as ${item.business_name}`
-                : `You are connected as ${item.network_name}`,
+                ? `{{$t("general.You_are_now_connected_as")}} ${item.business_name}`
+                : `{{$t("general.You_are_connected_as")}} ${item.network_name}`,
           });
 
           this.auth(this.strategy[type].newType(item));

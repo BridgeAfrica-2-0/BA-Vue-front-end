@@ -610,7 +610,7 @@ export default {
       default: function () {
         return {
           keyword: "",
-          placeholder: "$t('general.All')",
+          placeholder: this.$t('general.All'),
         };
       },
     },
@@ -628,7 +628,7 @@ export default {
       redirectionPatterns: null,
       searchOptions: {
         keyword: "",
-        placeholder: "All",
+        placeholder: this.$t('general.All'),
       },
 
       query: "",

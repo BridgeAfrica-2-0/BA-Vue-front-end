@@ -9,7 +9,7 @@
               <fas-icon class="icons" :icon="['fas', 'exclamation-circle']" size="lg" />
               {{ $t('profilefollower.Intro') }}
             </h2>
-            <span class="float-right btn m-0 p-0 action-intro" @click="editPage"
+            <span class="float-right btn m-0 p-0 action-intro" @click="editPage" v-if="showEdit != 'Follower' "
               ><b-icon icon="pencil-fill" class="icon-size" variant="primary"></b-icon>
             </span>
           </span>
@@ -147,6 +147,10 @@ export default {
       });
   },
   computed: {
+
+    showEdit(){
+      return this.$route.name
+    },
     info: function() {
       return this.$store.getters['profile/getUserPostIntro'];
     },

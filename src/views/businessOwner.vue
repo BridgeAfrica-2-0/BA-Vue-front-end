@@ -1,7 +1,7 @@
 <template>
-  <div class="" style="overflow-y: hidden; padding: 0px">
-    <span v-if="isloaded">
-      <navbar />
+  <div class="" style="overflow-y: hidden; padding: 0px" ref="wrapper">
+    <navbar />
+    <div v-if="isloaded">
       <div class="container-fluid">
         <ly-tab
           v-model="selectedId"
@@ -45,9 +45,8 @@
       <div class="mt-3" v-if="selectedId == '5'">
         <Settings v-bind:currenttab="selectedId" />
       </div>
-      <!-- </div> -->
-      <Footer />
-    </span>
+    </div>
+    <Footer />
   </div>
 </template>
 
@@ -154,6 +153,14 @@ export default {
   },
 
   created() {
+
+    let loader = this.$loading.show({
+      container: this.$refs.wrapper,
+      canCancel: true,
+      onCancel: this.onCancel,
+      color: "#e75c18",
+    });
+
     this.selectedId = this.$route.query.tabId ? this.$route.query.tabId : "0";
     this.foll_id = this.$route.params.id;
     this.$store
@@ -175,10 +182,12 @@ export default {
             break;
         }
         this.isloaded = true;
+        loader.hide()
       })
       .catch((error) => {
         console.log({ error: error });
         console.log(error.response.status);
+        loader.hide()
         if (error.response.status == 404) {
           this.$router.push({ name: "notFound" });
         }

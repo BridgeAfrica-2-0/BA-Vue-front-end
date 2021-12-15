@@ -63,7 +63,6 @@ import cart from "@/views/card";
 
 Vue.use(VueRouter);
 
-
 const routes = [
   {
     path: "/notFound",
@@ -186,9 +185,6 @@ const routes = [
     name: "payment",
     component: payment
   },
-
-
-
   {
     path: "/welcome",
     name: "welcome",
@@ -396,17 +392,9 @@ const routes = [
     component: service,
   },
   {
-    path: "/services/modify/:id",
-    name: "Modify",
-    component: Modifier,
-    beforeEnter: (to, from, next) => {
-      console.log("dedans");
-      if (store.state.login && store.state.isToi) {
-        next();
-      } else {
-        next({ name: "Login" });
-      }
-    }
+    path: "/memberNetworkFollower/:id?",
+    name: "Membar Network Follower",
+    component: memberNetworkFollower,
   },
 
   {

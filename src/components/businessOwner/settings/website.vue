@@ -29,9 +29,8 @@
                     <b-td class="a-text">
                       <b-link>{{Package.id === Packages.user_actived_plan[0].package_id ? 'Current':'Upgrade'}}</b-link>
                       <span class="text-success">
-                        {{
-                          Package.id === Packages.user_actived_plan[0].package_id ? 'Expires '+moment(Packages.user_actived_plan[0].expired_at).fromNow():' '}}
-                         <!-- Expires in {{moment(Packages.user_actived_plan[0].expired_at).fromNow()}} -->
+                        {{Package.id === Packages.user_actived_plan[0].package_id  && Package.name === "premium" ? 
+                        'Expires '+moment(Packages.user_actived_plan[0].expired_at).fromNow() : ' '}}
                         </span>
                     </b-td>
                   </b-tr>
@@ -180,8 +179,8 @@
         </b-modal>
 
         <!-- Request Payment -->
-        <b-modal id="AcRequestPayment" centered  :title="$t('businessowner.Enter_your_MTN_Mobile_Money_number')" size="md" hide-footer>
-          <div v-if="!congratulation" class="px-0">
+        <b-modal id="AcRequestPayment" ref="AcRequestPayment" centered  :title="$t('businessowner.Enter_your_MTN_Mobile_Money_number')" size="md" hide-footer>
+          <div class="px-0">
             <b-overlay :show="show" rounded="sm">
               <div class="row">
                 <div class="col-10 col-sm-9 col-md-8">
@@ -226,10 +225,6 @@
               </div>
             </b-overlay>
           </div>
-          <div v-else class="text-center">
-            <h3><b>🥳❗{{ $t('businessowner.Transaction_Completed') }}❗🥳</b></h3>
-          </div>
-          
         </b-modal>
 
         <!-- Delete Account -->
@@ -293,7 +288,6 @@ export default {
       modalShowPremium: false,
       bntStatus: false,
       show: false,
-      congratulation: false,
 
       PaymentForm: {
         subscribe: '',
@@ -353,7 +347,6 @@ export default {
 
     ToggleModal(AccType, Package_id) {
       console.log("AccType: ", AccType);
-      this.congratulation = false;
       this.PaymentForm.type = AccType;
       if(AccType === "basic"){
         this.PaymentForm.package_id = Package_id;
@@ -396,18 +389,18 @@ export default {
       .then(({data}) => {
         console.log(data);
         console.log('ohh yeah');
+        this.$refs['AcRequestPayment'].hide()
         this.show = false;
-        this.congratulation = true;
         this.getAccounts();
         this.flashMessage.show({
           status: "success",
-          message: this.$t('businessowner.Payment_Complete')
+          message: this.$t('businessowner.Transaction_Completed')
         });
       })
       .catch(err => {
-        this.show = false
-        this.congratulation = false
         console.log({ err: err });
+        this.$refs['AcRequestPayment'].hide()
+        this.show = false
         this.flashMessage.show({
           status: "error",
           message: this.$t('businessowner.Unable_Complete_Payment')

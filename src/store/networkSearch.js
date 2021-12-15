@@ -17,6 +17,67 @@ export default {
   getters: {
     getNetworks(state) {
       return state.networks;
+        prodLoader: false,
+        success: false
+    },
+    getters: {
+        getNetworks(state) {
+            return state.networks;
+        },
+
+        getCountries(state) {
+            return state.countries;
+        },
+        getRegions(state) {
+            return state.regions;
+        },
+        getDivisions(state) {
+            return state.divisions;
+        },
+        getCouncils(state) {
+            return state.councils;
+        },
+        getNeighbourhoods(state) {
+            return state.neighbourhoods;
+        },
+
+
+        // sending loader value
+        getLoader(state) {
+            return state.prodLoader;
+        },
+        // sending success value
+        getSuccess(state) {
+            return state.success;
+        }
+    },
+    mutations: {
+        //set Network data
+        setNetworks(state, data) {
+            state.networks = data;
+        },
+        setCountries(state, data) {
+            state.countries = data;
+        },
+        setRegions(state, data) {
+            state.regions = data;
+        },
+        setDivisions(state, data) {
+            state.divisions = data;
+        },
+        setCouncils(state, data) {
+            state.councils = data;
+        },
+        setNeighbourhoods(state, data) {
+            state.neighbourhoods = data;
+        },
+
+        setLoader(state, payload) {
+            state.prodLoader = payload;
+        },
+        setSuccess(state, payload) {
+            state.success = payload;
+        }
     },
 
     getCountries(state) {
@@ -76,6 +137,23 @@ export default {
   actions: {
     COUNTRIES({ commit, state }) {
       console.log("[DEBUG] Getting countries");
+
+        async SEARCH({ commit, state }, data) {
+            commit("setNetworks", { data: [] });
+            commit("setLoader", true);
+            console.log("[DEBUG] HELLO NETWORK SEARCH", data);
+
+            let page = data.page ? data.page : 1
+            console.log("[debug] page:", page);
+            try {
+                const res = await axios.get(`network/search?page=${page}`, data);
+                commit("setLoader", false);
+                console.log("Network Search results: ", res.data);
+                commit("setNetworks", res.data);
+            } catch (err) {
+                commit("setLoader", false);
+                console.log(err);
+            }
 
       return axios
         .get("countries")

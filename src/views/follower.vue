@@ -1,14 +1,11 @@
 <template>
-  <div class="body">
-    <span v-if="isloaded">
-      <navbar />
-
+  <div class="body" ref="wrapper">
+    <navbar />
+    <div v-if="isloaded">
       <Profile v-if="info" />
-
       <notFound v-else />
-
       <Footer />   
-    </span>
+    </div>
   </div>
 </template>
 
@@ -50,14 +47,24 @@ export default {
   },
 
   created() {
+
+    let loader = this.$loading.show({
+      container: this.$refs.wrapper,
+      canCancel: true,
+      onCancel: this.onCancel,
+      color: "#e75c18",
+    });
+
     this.foll_id = this.$route.params.id;
 
     this.$store
       .dispatch("follower/loadUserPostIntro", this.foll_id)
       .then((response) => {
         this.isloaded = true;
+        loader.hide()
       })
       .catch((error) => {
+        loader.hide()
         console.log({ error: error });
       });
   },

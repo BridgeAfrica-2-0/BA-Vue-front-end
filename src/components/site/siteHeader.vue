@@ -1,13 +1,13 @@
 <template>
   <header class="position-relative">
     <b-navbar toggleable="lg" variant="faded" type="light">
-      <div class="container">
         <div class="col-md-12 col-lg-2 col-xl-2 text-center">
           <a class="d-inline-block align-top mt-1" href="#">
             <img src="@/assets/logo.png" alt="" class="balogo desktop" loading="lazy" />
             <img src="@/assets/img/BAC-clear-dotted-logo.png" alt="" class="balogo mobile" loading="lazy" />
           </a>
         </div>
+      <div class="container p-0">
 
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
@@ -49,6 +49,16 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+@media (min-width: 992px)
+{
+
+
+.navbar-expand-lg {
+    
+    padding-right: 0px;
+}
+}
 .font-arvo {
   font-family: 'Arvo', serif;
 }
@@ -76,7 +86,10 @@ export default {
 .nav-item:hover .nav-link span {
   color: #e75c18 !important;
 }
-
+.container{
+  margin-left: 10px !important;
+  margin-right: 50px !important;
+}
 
 @media only screen and (max-width: 768px) {
   .balogo{

@@ -58,6 +58,7 @@
                   class="b-background shadow"
                   variant="primary"
                   @click="$emit('handleFollow', business)"
+                  :style="business.is_follow !== 0 ? 'background-color: rgb(162,107,80);' : ''"
                 >
                   <i
                     :class="

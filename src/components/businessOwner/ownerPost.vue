@@ -6,9 +6,9 @@
         <b-col cols="3" md="1" class="m-md-0 p-md-0">
           <b-avatar
             variant="primary"
-            square
+            :square =" 'user' === profile.user_type ? false : true"
             class="img-fluid avat-comment"
-            :src="business_intro.logo_path"
+            :src="profile.profile_picture"
           ></b-avatar>
         </b-col>
         <b-col cols="9" md="11" class="p-0 m-0 pr-3">
@@ -39,7 +39,7 @@
                 class="post-btn"
               >
                 <fas-icon class="icons" :icon="['fas', 'photo-video']" size="lg" />
-                <span class="username"> {{ $t('businessowner.Photo_Video') }}</span>
+                <span class="username">{{ $t('businessowner.Photo_Video') }}</span>
               </b-button>
             </b-col>
             <!-- Attach File-->
@@ -76,8 +76,8 @@
     </b-card>
 
     <!-- User Posts Listing Section-->
-    <b-card class="px-md-3">
-      <div class="">
+    
+      <div class="px-md-3">
         <div class="col-md-12 col-lg-12 d-flex align-items-stretch mb-lg-0" style="padding-left: 0; padding-top: 3px">
           <b-modal id="modal-edit" ref="modal-edit" centered hide-footer :title="$t('businessowner.Update_Post')" @hidden="resetPostData">
             <b-row ref="loader">
@@ -512,7 +512,7 @@
       />
 
       <infinite-loading :identifier="infiniteId" ref="infiniteLoading" @infinite="infiniteHandler"></infinite-loading>
-    </b-card>
+    
   </div>
 </template>
 
@@ -933,8 +933,6 @@ export default {
           formData2.append("media[" + index + "]", value.target.files[0]);
         });
       }
-
-      formData2.append("type", "image");
 
       formData2.append("content", this.createPost.postBusinessUpdate);
 

@@ -125,7 +125,20 @@ export default {
     },
   },
 
+
   actions: {
+
+    
+
+  sendOtp({ commit }, payload){
+    return axios.post(payload.url, payload).then(({ data }) => {
+      console.log(data);
+     // commit("setUserData", data.data);
+    });
+  },
+
+
+  
     login({ commit }, credentials) {
       return axios.post("user/login", credentials).then(({ data }) => {
         console.log(data);

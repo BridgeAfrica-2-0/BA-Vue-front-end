@@ -493,9 +493,6 @@ export default {
 
     async getProducts() {
       // this.prodLoader = true;
-      console.log("loader: ", this.prodLoader);
-      console.log("PRoducts ".this.$store.getters["marketSearch/getProducts"]);
-
       await this.$store
         .dispatch("marketSearch/getProducts")
         .then((res) => {

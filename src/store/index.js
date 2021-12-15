@@ -55,7 +55,7 @@ Vue.use(Vuex);
 
 
 
-axios.defaults.baseURL = process.VUE_APP_URL;
+axios.defaults.baseURL = process.VUE_APP_API_URL;
 
 
 

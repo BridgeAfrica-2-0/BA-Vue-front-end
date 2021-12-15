@@ -1,5 +1,5 @@
 <template>
-  <div class="accordion" role="tablist">
+  <div class="accordion" role="tablist" >
     <b-card
       class="mb-1"
       style="width: 100%"
@@ -23,17 +23,18 @@
               suggest-item
               cursor-pointer
               w-full
+              my-2
             "
             @click="activedBusiness(item)"
           >
             <div>
-              <img
+              <b-avatar
+                variant="light"
                 :src="item.logo_path"
+                :square="true"
                 class="logo-sizee"
-                alt=""
-                width="30"
-                height="30"
-              />
+              ></b-avatar>
+
             </div>
             <div class="d-flex flex-column ml-3">
               <div>
@@ -65,16 +66,16 @@
               suggest-item
               cursor-pointer
               w-full
+              my-2
             "
           >
             <div>
-              <img
+              <b-avatar
+                variant="light"
                 :src="item.network_image"
+                :square="true"
                 class="logo-sizee"
-                alt=""
-                width="30"
-                height="30"
-              />
+              ></b-avatar>
             </div>
             <div class="d-flex flex-column ml-3">
               <div>

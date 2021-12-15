@@ -59,6 +59,7 @@ axios.defaults.baseURL = process.VUE_APP_API_URL;
 
 
 
+
 export default new Vuex.Store({
     modules: {
         auth,

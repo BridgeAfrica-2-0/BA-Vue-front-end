@@ -94,7 +94,8 @@
       <div class="pending-post-view pt-2 mt-3">
         <p>
 
-          {{$t("network.Your")}} {{pendingPost.data}} {{$t("network.Posts_are_pending_for_approval")}}.&nbsp;&nbsp;&nbsp;&nbsp;
+          {{$t("network.Your")}}
+          {{$t("network.Posts_are_pending_for_approval")}}.&nbsp;&nbsp;&nbsp;&nbsp;
           <a
             @click="RedirectPending"
             style="color: #e75c18; text-decoration: underline; cursor:pointer"
@@ -343,26 +344,12 @@
                 </span>
               </div>
               <br />
-              <!-- <div v-for="hyperlink in createPost.hyperlinks" :key="hyperlink.fileName" class="bordder">
-                  <span class="float-left"> {{ hyperlink.fileName }} </span>
-                  <span class="float-right" @click="deleteItem(hyperlink.fileName)"> {{ $t('network.Delete') }}  </span>
-                </div>
-
-                <div v-for="movie in createPost.movies" :key="movie.fileName" class="">
-                  <div id="preview">
-                    <span class="upload-cancel" @click="deleteItem(movie.fileName)">
-                      <b-icon icon="x-circle" class="oorange"> </b-icon>
-                    </span>
-
-                    <img :src="movie.link" />
-                  </div>
-                </div> -->
-
-              <div class="h300px">
+      
+              <div class="">
                 <div
                   v-for="hyperlink in createPost.hyperlinks"
                   :key="hyperlink.fileName"
-                  class="bordder"
+                  class="bordder h300px"
                 >
                   <span class="float-left"> {{ hyperlink.fileName }} </span>
                   <span
@@ -376,7 +363,7 @@
                 <div
                   v-for="movie in createPost.movies"
                   :key="movie.fileName"
-                  class=""
+                  class="h300px"
                 >
                   <div id="preview">
                     <span
@@ -402,7 +389,6 @@
                 variant="primary"
                 class="m13"
                 show-progress
-                :animated="animate"
               ></b-progress>
               <hr />
 
@@ -493,6 +479,7 @@ export default {
   computed: {
     ...mapGetters({
       profile: "auth/profilConnected",
+      owner_post:"networkProfile/getOwnerPost"
     }),
 
     imageProfile() {
@@ -502,9 +489,7 @@ export default {
     business_logo() {
       return this.$store.state.networkProfile.networkInfo.logo_path;
     },
-    owner_post() {
-      return this.$store.state.networkProfile.ownerPost;
-    },
+    
     profileNamePost() {
       return "yoo";
     },
@@ -517,14 +502,16 @@ export default {
 
   methods: {
 
-    RedirectPending(){ this.$emit('changement')
-   
-      console.log("---- end")
-    },
-
     ...mapMutations({
       auth: "auth/profilConnected",
+      postRemove: "businessOwner/removePost",
+      postUpdate: "businessOwner/UpdatePost",
+      postCreate: "businessOwner/createPost",
     }),
+
+    RedirectPending(){ 
+      this.$emit('changement')
+    },
 
     mapmediae(media) {
       let mediaarr = [];
@@ -600,12 +587,12 @@ export default {
     },
 
     deletePost(post) {
+      const uuid = post.post_id ? post.post_id : post.id 
       return (
         this.axios
-          .delete("network/" + this.$route.params.id + "/post/" + post.id)
-
-          // .then(() => this.ownerPost())
+          .delete("network/" + this.$route.params.id + "/post/" + uuid)
           .then(() => {
+            this.postRemove(uuid)
             this.page = 1;
             this.infiniteId += 1;
             this.flashMessage.show({
@@ -669,12 +656,8 @@ export default {
             "Content-Type": "multipart/form-data",
           },
         })
-        .then(() => {
-          this.$store.state.networkProfile.ownerPost.splice(
-            0,
-            this.$store.state.networkProfile.ownerPost.length
-          );
-          this.ownerPost();
+        .then((response) => {
+          this.postUpdate(response.data.data);
         })
         .then(() => {
           this.page = 1;
@@ -690,6 +673,7 @@ export default {
         })
         .catch((err) => {
           console.log(err);
+          this.loading = true;
           this.flashMessage.show({
             status: "error",
             message: "Unable to Update your post",
@@ -825,9 +809,7 @@ export default {
 
       this.fileImageArr.forEach((value, index) => {
         formData2.append("media[" + index + "]", value.target.files[0]);
-        console.log(value);
-        console.log(value.target.files[0]);
-        console.log("testingggg");
+
       });
 
       formData2.append("type", "image");
@@ -847,6 +829,7 @@ export default {
         })
         // .then(() => this.ownerPost())
         .then((res) => {
+          this.postCreate(res.data.data)
           this.flashMessage.show({
             status: "success",
             blockClass: "custom-block-class",
@@ -860,6 +843,8 @@ export default {
           this.infiniteId += 1;
         })
         .catch((err) => {
+          this.loading = false;
+          this.isUploading = false;
           this.loading = false;
           if (err.response.status == 422) {
             console.log({ err: err });

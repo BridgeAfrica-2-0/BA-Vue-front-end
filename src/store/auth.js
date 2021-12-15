@@ -10,7 +10,7 @@ export default {
     isVerified: null,
     passwordToken: null,
     registerData: null,
-    neigbourhoods:[],
+    neigbourhoods: [],
     businessAround: [],
     peopleAround: [],
     categories: [],
@@ -53,9 +53,9 @@ export default {
 
     },
 
-    setneigbourhoods(state, data){
-    
-      state.neigbourhoods=data;
+    setneigbourhoods(state, data) {
+
+      state.neigbourhoods = data;
 
     },
 
@@ -134,11 +134,11 @@ export default {
     },
 
 
-    neigbourhoods({ commit }, payload){
+    neigbourhoods({ commit }, payload) {
 
       console.log(payload);
-      
-      return axios.get("user/neighborhood?lat="+payload.lat+"&lng="+payload.lng).then(({ data }) => {
+
+      return axios.get("user/neighborhood?lat=" + payload.lat + "&lng=" + payload.lng).then(({ data }) => {
 
         console.log("logging data for neigbourhood");
         console.log(data);
@@ -199,9 +199,6 @@ export default {
       });
     },
 
-
-
-
     completeWelcome({ commit }) {
       localStorage.removeItem('user');
       return axios.get('user/completewelcome').then(({ data }) => {
@@ -209,7 +206,6 @@ export default {
         commit("setUserDataa", data.data);
       });
     },
-
 
     businessAround({ commit }) {
       return axios.get('business/around').then(({ data }) => {
@@ -251,7 +247,7 @@ export default {
       });
     },
 
-  
+
 
   },
 
@@ -269,9 +265,9 @@ export default {
     neigbourhoods: state => state.neigbourhoods,
 
 
-    
-      getAppLanguage: (state) => state.appLanguage
-    
+
+    getAppLanguage: (state) => state.appLanguage
+
 
   },
 };

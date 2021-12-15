@@ -739,7 +739,7 @@
         <div class="col">
           <h6 class="mb-0"><b></b></h6>
           <b-row>
-            <b-col md="12" lg="6" class="p-0 mb-2" v-for="business in profilebusiness" :key="business.business_id">
+            <b-col md="12" lg="6" class="p-0 mb-2" v-for="business in profileBusinesss" :key="business.business_id">
               <div class="people-style shadow h-100">
                 <b-link>
                   <div class="float-right others">
@@ -931,21 +931,30 @@ export default {
   },
 
   methods: {
+    profileBusiness: async function(){
+      this.$store
+        .dispatch("profile/loadMore", 'business/user')
+        .then(({ data }) => {
+          this.profileBusinesss = data.data;
+          this.page= 1;
+        })
+        .catch((err) => {
+          // console.log({ err: err });
+        });
+    },
+
     infiniteHandler($state) {
-      console.log("loading started");
       
-      if (this.page == 1) {
-        this.profilebusiness.splice(0);
-      }
       let url = 'business/user?page=' + this.page;
 
       this.$store
         .dispatch("profile/loadMore", url)
         .then(({ data }) => {
-          console.log(data);
+          console.log(data.data)
           if (data.data.length) {
+            
+            this.profileBusinesss = [...this.profileBusinesss, ...data.data];
             this.page += 1;
-            this.profileBusinesss.push(...data.data);
             $state.loaded();
           } else {
             $state.complete();
@@ -1002,9 +1011,7 @@ export default {
           this.$refs.infiniteLoading.attemptLoad();
           this.flashMessage.show({
             status: 'success',
-
             message: "Business {{ $t('profileowner.Delete')}}d",
-
             blockClass: 'custom-block-class',
           });
         })
@@ -1013,9 +1020,7 @@ export default {
           loader.hide();
           this.flashMessage.show({
             status: 'error',
-
             message: "Unable to {{ $t('profileowner.Delete')}} this Business",
-
             blockClass: 'custom-block-class',
           });
         });
@@ -1585,7 +1590,7 @@ export default {
 
     this.Country();
 
-    // this.profileBusiness();
+    //this.profileBusiness();
   },
 
   components: {

@@ -131,7 +131,7 @@
         </div>
         <div id="m4" class="mobile2 col t" @click="changeTab(4)">
           <div class="cercle2">4</div>
-          <h2 class="h2 text-position text-center">Cancel</h2>
+          <h2 class="h2 text-position text-center">{{ $t("myOrders.Cancel") }}</h2>
         </div>
       </div>
     </div>
@@ -318,11 +318,11 @@ export default {
     changeTab(index) {
       this.isTabActive = index;
       if (index == 2) {
-        this.getOrderByStatus($t("myOrders.pending"));
+        this.getOrderByStatus(this.$t('myOrders.pending'));
       } else if (index == 3) {
-        this.getOrderByStatus($t("myOrders.complete"));
+        this.getOrderByStatus(this.$t('myOrders.complete'));
       } else if (index == 4) {
-        this.getOrderByStatus($t("myOrders.cancel"));
+        this.getOrderByStatus(this.$t('myOrders.cancel'));
       } else {
         this.getAllOrders();
       }
@@ -396,11 +396,11 @@ export default {
     getOrders() {
       let index = this.isTabActive;
       if (index == 2) {
-        this.getOrderByStatus($t("myOrders.pending"));
+        this.getOrderByStatus(this.$t('myOrders.pending'));
       } else if (index == 3) {
-        this.getOrderByStatus($t("myOrders.complete"));
+        this.getOrderByStatus(this.$t('myOrders.complete'));
       } else if (index == 4) {
-        this.getOrderByStatus($t("myOrders.cancel"));
+        this.getOrderByStatus(this.$t('myOrders.cancel'));
       } else {
         this.getAllOrders();
       }

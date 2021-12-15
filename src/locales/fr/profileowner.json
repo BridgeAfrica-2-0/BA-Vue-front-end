@@ -254,5 +254,7 @@
     "Add_Contacts": "Ajouter des contacts",
     "default_Phone": "Téléphone par défaut",
     "Show":"Afficher",
-    "Unable_to_Create_Post":"Impossible de créer un Publication"
+    "Unable_to_Create_Post":"Impossible de créer un Publication",
+    "Upload_a_New_picture":"Télécharger une nouvelle photo"
+
 }

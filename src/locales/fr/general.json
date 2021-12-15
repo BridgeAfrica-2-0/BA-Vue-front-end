@@ -113,5 +113,25 @@
     "Following":"Abonnement",
     "Businesses":"Entreprises",
     "Network":"Réseau",
-    "People":"Personnes"
+    "People":"Personnes",
+
+    "Messages":"Messages",
+    "Search_inbox":"Recherche dans la boîte de réception",
+    "New_Chat":"Nouveau chat",
+    "New_Group_Chat":"Nouveau groupe de discussion",
+    "Search_chat_list":"Recherche dans la liste de discussion",
+    "No_chat":"Pas de chat",
+    "Search_message":"Message de recherche",
+    "View_Profile":"Voir le profil",
+    "Disable_Notification":"Désactiver la notification",
+    "Delete_Contact":"Supprimer le contact",
+    "Delete_Chat":"Supprimer le chat",
+    "Select_a_chat":"Sélectionner un chat",
+    "Options":"Options",
+    "Block_Messages":"Bloquer les messages",
+    "Report_User":"Rapport de l'utilisateur",
+    "To":"À",
+    "Type_the_name_of_person_or_Business":"Tapez le nom de la personne ou de l'entreprise",
+    "Preview_file":"Preview file"
+
 }

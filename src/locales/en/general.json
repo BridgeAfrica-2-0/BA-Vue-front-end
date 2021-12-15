@@ -113,8 +113,26 @@
     "Following":"Following",
     "Businesses":"Businesses",
     "Network":"Network",
-    "People":"People"
+    "People":"People",
 
+    "Messages":"Messages",
+    "Search_inbox":"Search inbox",
+    "New_Chat":"New Chat",
+    "New_Group_Chat":"New Group Chat",
+    "Search_chat_list":"Search chatlist",
+    "No_chat":"No chat",
+    "Search_message":"Search message",
+    "View_Profile":"View Profile",
+    "Disable_Notification":"Disable Notification",
+    "Delete_Contact":"Delete Contact",
+    "Delete_Chat":"Delete Chat",
+    "Select_a_chat":"Select a chat",
+    "Options":"Options",
+    "Block_Messages":"Block Messages",
+    "Report_User":"Report User",
+    "To":"To",
+    "Type_the_name_of_person_or_Business":"Type the name of person or Business",
+    "Preview_file":"Preview file"
 
 
 }

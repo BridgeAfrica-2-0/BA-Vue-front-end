@@ -139,6 +139,10 @@ export default {
       return state.albums;
     },
 
+    getOwnerPost(state) {
+      return state.ownerPost
+    },
+
     getalbumImages(state) {
       return state.albumImages
     },
@@ -246,6 +250,21 @@ export default {
         throw new Error(error)
       }
 
+    },
+
+    removePost(state, uuid) {
+      const newPosts = state.ownerPost.filter(post => post.id != uuid)
+      state.ownerPost = newPosts
+    },
+
+    UpdatePost(state, payload) {
+            
+      const newPosts = state.ownerPost.map(post => post.id == payload.id ? payload : post)
+      state.ownerPost = newPosts
+    },
+
+    createPost(state, payload) {
+      state.ownerPost = [payload, ...state.ownerPost]
     },
 
     removeAlbum(state, uuid) {
@@ -387,18 +406,11 @@ export default {
       return num;
     },
 
-
-
-
     roleCheck({ commit }, id) {
-
-
       return axios.get("business/role-check?id=" + id)
         .then((data) => {
           return data;
         });
-
-
     },
 
     loadMore({ commit }, url) {
@@ -407,11 +419,9 @@ export default {
         .then((data) => {
           return data;
         });
-
     },
 
     updateBusinessBiographie({ commit }, data) {
-
       return axios.post(`business/update-biography/${data.business_id}`, data.data)
         .then((data) => {
           console.log(data);

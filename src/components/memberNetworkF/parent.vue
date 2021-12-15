@@ -26,19 +26,16 @@
               variant="primary"
               size="sm"
               @click="addFollower"
-              :disabled="buttonStatus" 
-              style="width: 120px;"
+              :disabled="buttonStatus"
+              :style="networkInfo.is_follow !== 0 ? 'width: 120px;  background-color: rgb(162,107,80);' : 'width: 120px;'"
               class="a-center"
-            >
-              <b-spinner v-if="SPcommunity" small></b-spinner>
-              
-
-                <i
-                            class="fas fa-lg btn-icon"
-                            :class="networkInfo.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"
-                          ></i>
-
-              <span class="ml-1" v-if="networkInfo.is_follow"> Unfollow</span> <span v-else> Follow</span>
+            ><b-spinner v-if="SPcommunity" small></b-spinner>
+              <i
+                class="fas fa-lg btn-icon"
+                :class="networkInfo.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"
+              ></i>
+              <span class="ml-1" v-if="networkInfo.is_follow"> Unfollow</span>
+              <span v-else> Follow</span>
             </b-button>
             <b-tooltip target="Follow-Unfollow" variant="secondary">Click To Follow/Unfollow</b-tooltip>
           </b-col>
@@ -190,6 +187,7 @@ export default {
   justify-content: center;
   display: flex;
 }
+
 .b-none {
   border-style: none;
 }

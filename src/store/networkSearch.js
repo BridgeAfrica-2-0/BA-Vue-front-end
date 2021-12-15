@@ -132,9 +132,11 @@ export default {
             console.log("[DEBUG] HELLO NETWORK SEARCH", data);
 
             let page = data.page ? data.page : 1
+            let keyword = data.keyword ? data.keyword : ''
+
             console.log("[debug] page:", page);
             try {
-                const res = await axios.get(`network/search?page=${page}`, data);
+                const res = await axios.get(`network/search?keyword=${keyword}&page=${page}`, data);
                 commit("setLoader", false);
                 console.log("Network Search results: ", res.data);
                 commit("setNetworks", res.data);

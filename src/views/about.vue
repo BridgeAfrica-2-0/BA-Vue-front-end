@@ -71,9 +71,9 @@
               <b-collapse id="accordion-2" visible accordion="my-accordion" role="tabpanel">
                 <b-card-body>
                   <b-card-text class="color-black">
-                    {{$t("about.With_87.5%_of_businesses_lacking_websites_and_99%_having_never_sold_online")}}, 
+                    {{$t("about.With_875_of_businesses_lacking_websites_and_99_having_never_sold_online")}}, 
                     {{$t("about.the_digital_divide_is_limiting_the_economic_growth_and_productivity_of_businesses_in_Cameroon_and_Africa")}}. 
-                    {{$t("about.That_is_why_we_are_on_a_mission_to_see_every_SME_in_Africa_have_a digital_identity_so_they_can_expand_their_market_space_and_sell_more_online")}}.
+                    {{$t("about.That_is_why_we_are_on_a_mission_to_see_every_SME_in_Africa_have_a_digital_identity_so_they_can_expand_their_market_space_and_sell_more_online")}}.
                   </b-card-text>
                 </b-card-body>
               </b-collapse>
@@ -88,9 +88,9 @@
               <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel">
                 <b-card-body>
                   <b-card-text class="color-black">
-                    {{$t("about.With_87.5%_of_businesses_lacking_websites_and_99%_having_never_sold_online")}}, 
+                    {{$t("about.With_875_of_businesses_lacking_websites_and_99_having_never_sold_online")}}, 
                     {{$t("about.the_digital_divide_is_limiting_the_economic_growth_and_productivity_of_businesses_in_Cameroon_and_Africa")}}. 
-                    {{$t("about.That is why we_are_on_a_mission_to_see_every_SME_in_Africa_have_a_digital_identity_so_they_can_expand_their_market_space and sell more online")}}.
+                    {{$t("about.That_is_why_we_are_on_a_mission_to_see_every_SME_in_Africa_have_a_digital_identity_so_they_can_expand_their_market_space_and_sell_more_online")}}.
                   </b-card-text>
                 </b-card-body>
               </b-collapse>
@@ -174,7 +174,7 @@
                 </p>
                 <div class="pl-4">
                   <h6 class="font-weight-bold font-mont functionality-div-headings">
-                    {{$t("about.COMMUNIT_ENGAGEMENT")}}
+                    {{$t("about.COMMUNITY_ENGAGEMENT")}}
                   </h6>
                   <p class="text-left font-14">
                     {{$t("about.Our_platform_provides_community_engagement_functionalities_enabling_businesses_and_consumers_to_follow_one_another")}}, 
@@ -385,7 +385,7 @@
               pill
               :variant="selectedResource == 'cameroon' ? 'primary' : 'outline-primary'"
               @click="changeResource('cameroon')"
-              >{{$t("about.Cameroon_Gallery")}}</b-button
+              >Cameroon Gallery</b-button
             >
             <b-button
               pill
@@ -624,20 +624,6 @@
       </div>
     </section>
     <div>
-
-        <p class="text-center">
-     
-      <span class="display-inline">
-        <b-link @click=" setLang('en')  "> {{ $t("auth.english") }} </b-link>
-        <span class="vl"></span> 
-        <b-link class="ml-2"  @click="setLang('fr')">
-          {{ $t("auth.french") }}
-        </b-link>
-      </span>
-
-
-      Bridge Africa © 2021
-    </p>
         </div>
 
     <!-- Footer -->

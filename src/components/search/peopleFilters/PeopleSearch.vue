@@ -113,6 +113,7 @@ export default {
         },
         page: 1,
       });
+      
       this.setLoaderState(true);
       this.setCallback(this.$repository.search.findUserByParam);
 

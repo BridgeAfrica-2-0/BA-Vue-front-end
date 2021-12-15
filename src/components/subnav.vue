@@ -5,7 +5,7 @@
       <b-col cols="8" lg="10" style="text-align: left">
         <span style="display: inline-flex">
           <span
-            v-for="(category, index) in categories"
+            v-for="(category, index) in categories.slice(0, 6)"
             :key="index"
             @mouseover="showSubCat(category.category.id, category.sub_cat)"
             @click="showSubCat(category.category.id, category.sub_cat)"
@@ -34,7 +34,8 @@
                       :key="subIndex"
                       @click="bcategory(subCat)"
                       href="#"
-                      ><img
+                    >
+                      <img
                         class="img-fluid picture logo-img"
                         :src="subCat.cat_image"
                       />
@@ -53,6 +54,36 @@
               </div>
             </b-nav-item-dropdown>
           </span>
+        </span>
+        <span @mouseover="onOverMore()" @mouseleave="onLeaveMore()">
+          <b-nav-item-dropdown id="dropdown-1" text="More" ref="more">
+            <hr
+              style="
+                margin-top: -10px;
+                background-color: red;
+                height: 3px;
+                width: 40%;
+                float: left;
+              "
+            />
+            <br />
+
+            <div>
+              <b-row>
+                <b-col
+                  cols="6"
+                  v-for="(category, index) in categories.slice(6)"
+                  :key="index"
+                >
+                  <b-dropdown-item class="ml-1" @click="getProducts()">
+                    {{ category.category.name }}
+                  </b-dropdown-item>
+
+                  
+                </b-col>
+              </b-row>
+            </div>
+          </b-nav-item-dropdown>
         </span>
 
         <div></div>
@@ -96,6 +127,11 @@ export default {
         .catch((err) => {
           console.log("Error erro!");
         });
+    },
+    async getProducts() {
+      console.log("PRoducts ", this.$store.getters["marketSearch/getProducts"]);
+
+      await this.$store.dispatch("marketSearch/getProducts");
     },
 
     showSubCat(catId, subCat) {

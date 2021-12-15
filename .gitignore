@@ -2,6 +2,9 @@
 node_modules
 /dist
 
+# lock files
+yarn.lock
+npm.lock
 
 # local env files
 .env.local
@@ -26,3 +29,5 @@ pnpm-debug.log*
 yarn.lock
 package-lock.json
 src/components/Navbar.vue
+
+*fuse_hidden*

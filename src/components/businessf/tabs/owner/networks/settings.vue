@@ -32,7 +32,7 @@
           <multiselect
             v-model="multiselecvalue"
             tag-placeholder="Add this as new tag"
-            placeholder="Search or add a tag"
+            :placeholder="$t('network.Search_or_add_a_tag')"
             label="name"
             track-by="id"
             :options="pcategories"
@@ -105,7 +105,7 @@
           <multiselect
             v-model="country"
             @input="Region"
-            placeholder="Search "
+            :placeholder="$t('network.Search')"
             label="name"
             track-by="id"
             :options="countries"
@@ -128,7 +128,7 @@
           <multiselect
             v-model="region"
             @input="Division"
-            placeholder="Search"
+            :placeholder="$t('network.Search')"
             label="name"
             track-by="id"
             :options="regions"
@@ -143,7 +143,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          :label=" $t('network.Division')"
+          label="Division"
           label-size="md"
           label-class="font-weight-bold pt-0"
           class="mb-0"
@@ -151,7 +151,7 @@
           <multiselect
             v-model="division"
             @input="Municipality"
-            placeholder="Search"
+            :placeholder="$t('network.Search')"
             label="name"
             track-by="id"
             :options="divisions"
@@ -174,7 +174,7 @@
           <multiselect
             v-model="municipality"
             @input="Locality"
-            placeholder="Search"
+            :placeholder="$t('network.Search')"
             label="name"
             track-by="id"
             :options="municipalities"
@@ -189,14 +189,14 @@
         {{localities}} -->
         <b-form-group
           label-cols-lg="3"
-          label="Neighborhood"
+          :label="$t('network.Neighborhood')"
           label-size="md"
           label-class="font-weight-bold pt-0"
           class="mb-0"
         >
           <multiselect
             v-model="locality"
-            placeholder="Search"
+            :placeholder="$t('network.Search')"
             label="name"
             track-by="neighborhood_id"
             :options="localities"
@@ -244,6 +244,7 @@
     </b-container>
 
     <br />
+    
   </b-container>
   <b-container v-else>
     <div class="text-center">

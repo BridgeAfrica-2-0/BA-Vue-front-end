@@ -82,6 +82,8 @@
         </infinite-loading>
       </b-col>
     </b-row>
+
+    <!--  -->
     
   </div>
 </template>
@@ -162,14 +164,20 @@ export default {
       this.axios
         .post("network/"+this.url+"/feedbacks/"+this.currentPage, formData)
         .then(({ data }) => {
-        console.log(data);
+        console.log(data.data);
+         for (let i in data.data) {
+            this.feedbacks.push(data.data[i])
+            console.log(i,"----")
+         }
+         console.log(this.feedbacks)
         console.log(this.currentPage);
+        //  this.feedbacks.push(data.data);
         if (data.data.length) {
           console.log("push new data");
           this.currentPage += 1;
           console.log(this.currentPage);
           console.log(...data.data);
-          this.feedbacks.push(...data.data);
+          // this.feedbacks.push(...data.data);
           this.loading = false;
           $state.loaded();
         } else {

@@ -23,7 +23,7 @@
           </div>
           <hr class="h-divider" />
           <div>
-            <h4>Product Desciption</h4>
+            <h4>{{$t("general.Product_Desciption")}}</h4>
             <p class="text-justify">
               {{ product.description }}
             </p>
@@ -35,13 +35,13 @@
           >
             <b-button variant="primary" class="font-weight-light shadow-sm">
               <span v-if="packageProduct === 'basic'"> Messages </span>
-              <span v-else-if="packageProduct === 'premium'">Buy Now</span>
+              <span v-else-if="packageProduct === 'premium'">{{$t("general.Buy_Now")}}</span>
             </b-button>
             <b-button
               variant="success"
               class="font-weight-light shadow-sm"
               @click="closeModal"
-              >Check On Website</b-button
+              >{{$t("general.Check_On_Website")}}</b-button
             >
           </div>
           <hr class="h-divider" />

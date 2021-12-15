@@ -301,6 +301,7 @@ export default {
 
     loadMoreUserBusiness({ commit }, url) {
 
+      console.log(url);
       return axios.get(url)
         .then(({ data }) => {
 

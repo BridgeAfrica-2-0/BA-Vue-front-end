@@ -1,7 +1,7 @@
 <template>
-  <div class="" style="overflow-y: hidden; padding: 0px">
-    <span v-if="isloaded">
-      <navbar />
+  <div class="" style="overflow-y: hidden; padding: 0px" ref="wrapper">
+    <navbar />
+    <div v-if="isloaded">
       <div class="container-fluid">
         <ly-tab
           v-model="selectedId"
@@ -45,9 +45,8 @@
       <div class="mt-3" v-if="selectedId == '5'">
         <Settings v-bind:currenttab="selectedId" />
       </div>
-      <!-- </div> -->
-      <Footer />
-    </span>
+    </div>
+    <Footer />
   </div>
 </template>
 
@@ -59,6 +58,7 @@ import Inbox from "../components/businessOwner/inbox";
 import LyTab from "@/tab/src/index.vue";
 import Footer from "../components/footer";
 import { WhoIsIt } from "@/mixins";
+
 export default {
   name: "Home",
   mixins: [WhoIsIt],
@@ -78,12 +78,12 @@ export default {
       isloaded: false,
       url_data: null,
       items: [
-        { label: "Home ", icon: "" },
-        { label: "Inbox", icon: "" },
-        { label: "Notification", icon: "" },
-        { label: "Pending Post", icon: "" },
-        { label: "Insight", icon: "" },
-        { label: "Settings", icon: "" },
+        { label: this.$t('search.Home'), icon: "" },
+        { label: this.$t('search.Inbox'), icon: "" },
+        { label: this.$t('search.Notification'), icon: "" },
+        { label: this.$t('search.Pending_Post'), icon: "" },
+        { label: this.$t('search.Insight'), icon: "" },
+        { label: this.$t('search.Settings'), icon: "" },
       ],
       options: {
         activeColor: "#1d98bd",
@@ -147,7 +147,20 @@ export default {
       this.selectedId = this.$route.query.tabId;
     },
   },
+
+  beforeCreate: async function () {
+    await this.$repository.share.switch(this.$route.params.id, "business");
+  },
+
   created() {
+
+    let loader = this.$loading.show({
+      container: this.$refs.wrapper,
+      canCancel: true,
+      onCancel: this.onCancel,
+      color: "#e75c18",
+    });
+
     this.selectedId = this.$route.query.tabId ? this.$route.query.tabId : "0";
     this.foll_id = this.$route.params.id;
     this.$store
@@ -169,10 +182,12 @@ export default {
             break;
         }
         this.isloaded = true;
+        loader.hide()
       })
       .catch((error) => {
         console.log({ error: error });
         console.log(error.response.status);
+        loader.hide()
         if (error.response.status == 404) {
           this.$router.push({ name: "notFound" });
         }

@@ -43,15 +43,19 @@ import keywordOperationOnNetwork from './keywordOperationOnNetwork';
 
 import homeRedirection from './homeRedirection';
 
-import profileSettingsEdit from "./profileSettingsEdit"
-
+import profileSettingsEdit from "./profileSettingsEdit";
+import cart from "./cart"
 
 import { social } from './social';
+import networkSetting from './networkSetting';
 
 
 Vue.use(Vuex);
 
 
+
+
+// axios.defaults.baseURL = "https://courage4.maxinemoffett.com/api/v1/";
 axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 
 
@@ -98,7 +102,10 @@ export default new Vuex.Store({
         notification,
         homeRedirection,
         profileOrderDetail,
-        profileSettingsEdit
+        profileSettingsEdit,
+        cart,
+        networkSetting,
+        profileOrders
 
     }
-});
+})

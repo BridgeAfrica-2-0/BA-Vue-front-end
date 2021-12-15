@@ -159,8 +159,12 @@ import Map from "@/components/dasboard/map";
 import EmptyBusiness from "@/components/dasboard/emptybusiness";
 import Popularnetwork from "@/components/dasboard/popularnetwork";
 
+import { WhoIsIt } from "@/mixins";
+
 export default {
   name: "dashboard",
+  
+  mixins: [WhoIsIt],
 
   data() {
     return {
@@ -320,7 +324,7 @@ export default {
     },
   },
 
-  mounted() {
+  created() {
     this.$store
       .dispatch("ProfileAndBusinessDetails/getdetails")
       .then((response) => {
@@ -330,13 +334,12 @@ export default {
     this.dashboardPpost();
   },
 
-  created() {},
-
   computed: {
     details() {
       return this.$store.getters["ProfileAndBusinessDetails/getdetails"];
     },
   },
+
   watch: {
     selectedb(newvalue) {},
   },

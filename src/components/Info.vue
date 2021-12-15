@@ -2,12 +2,12 @@
 <div class="container">
 <div class="card mt-5 mx-auto" style="width:50rem;">
   <div class="card-body">
-    <h5 class="card-title">Shipping Address</h5>
+    <h5 class="card-title">{{$t("general.Shipping_Address")}}</h5>
     
     <p class="card-text">Jack Doe.sdf</p>
     <br/>
     <p>   the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="card-link">Change</a>
+    <a href="#" class="card-link">{{$t("general.Change")}}</a>
 
   </div>
 </div>

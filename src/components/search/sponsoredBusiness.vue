@@ -1,109 +1,113 @@
 <template>
-  <div>
-    <splide :options="options">
-      <splide-slide>
-        <div class="people-style shadow">
-          <b-row>
-            <b-col md="3" xl="3" lg="3" cols="5" sm="3">
-              <div class="center-img">
-                <img
-                  src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
-                  class="r-image"
-                />
-              </div>
-            </b-col>
-            <b-col md="7" cols="7" lg="5" sm="5">
-              <p class="textt">
-                <strong class="title"> {{$t("search.Super_Car_ltd")}} </strong> <br />
-                {{$t("search.Car_marketing")}}
-                <br />
-                {{$t("search.20k_Community")}} <br />
+  <splide :options="options" v-if="items.length">
+    <splide-slide v-for="(item, index) in items" :key="index">
+      <div class="people-style shadow">
+        <b-row>
+          <b-col md="3" xl="3" lg="3" cols="5" sm="3">
+            <div class="center-img">
+              <img :src="item.logo_path" class="r-image" />
+            </div>
+          </b-col>
+          <b-col md="7" cols="7" lg="5" sm="5">
+            <p class="textt">
+              <strong class="title">
+                {{ item.name }}
+              </strong>
+              <br />
+              {{ item.category.map(category => category.name).join(", ") }} 
+              <br />
+              {{ item.followers | formatNumber }} Community<br />
 
-                <span class="location">
-                  <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{$t("search.Douala_cameroon")}}
-                </span>
-                <br />
+              <span class="location">
+                <b-icon-geo-alt class="ico"></b-icon-geo-alt>
+                {{ item.location_description }}
+              </span>
+              <br />
 
-                super best car seller in the world adipisicing elit. lorem epsep
-                this is <b-link>{{$t("search.Read_More")}}</b-link>
-              </p>
-            </b-col>
+              {{ item.about_business | format }}
+              <b-link>{{ $t("search.Read_More") }}</b-link>
+            </p>
+          </b-col>
 
-            <b-col lg="4" md="12" xl="4" cols="12" sm="4">
-              <div class="s-button">
-                <b-row>
-                  <b-col
-                    md="4"
-                    lg="12"
-                    xl="12"
-                    sm="12"
-                    cols="4"
-                    class="mt-2 text-center"
+          <b-col lg="4" md="12" xl="4" cols="12" sm="4">
+            <div class="s-button">
+              <b-row>
+                <b-col
+                  md="4"
+                  lg="12"
+                  xl="12"
+                  sm="12"
+                  cols="4"
+                  class="mt-2 text-center"
+                >
+                  <b-button
+                    block
+                    size="sm"
+                    class="b-background shadow"
+                    variant="primary"
                   >
-                    <b-button
-                      block
-                      size="sm"
-                      class="b-background shadow "
-                      variant="primary"
-                    >
-                      <i class="fas fa-user-plus  fa-lg btn-icon "></i>
-                      <span class="btn-com">{{$t("search.Community")}}</span>
-                    </b-button>
-                  </b-col>
+                    <i class="fas fa-user-plus fa-lg btn-icon"></i>
+                    <span class="btn-com">{{ $t("search.Community") }}</span>
+                  </b-button>
+                </b-col>
 
-                  <b-col
-                    md="4"
-                    lg="12"
-                    xl="12"
-                    sm="12"
-                    cols="4"
-                    class="mt-2 text-center"
-                  >
-                    <b-button
-                      block
-                      size="sm"
-                      class="b-background shadow "
-                      variant="primary"
-                    >
-                      <i class="fas fa-envelope   fa-lg btn-icon "></i>
-                      <span class="btn-text">{{$t("search.Message")}}</span>
-                    </b-button>
-                  </b-col>
+                <b-col
+                  md="4"
+                  lg="12"
+                  xl="12"
+                  sm="12"
+                  cols="4"
+                  class="mt-2 text-center"
+                >
+                  <BtnCtaMessage :element="item" type="business" />
+                </b-col>
 
-                  <b-col
-                    md="4"
-                    lg="12"
-                    xl="12"
-                    sm="12"
-                    cols="4"
-                    class="mt-2 text-center"
+                <b-col
+                  md="4"
+                  lg="12"
+                  xl="12"
+                  sm="12"
+                  cols="4"
+                  class="mt-2 text-center"
+                >
+                  <b-button
+                    block
+                    size="sm"
+                    class="b-background shadow"
+                    variant="primary"
                   >
-                    <b-button
-                      block
-                      size="sm"
-                      class="b-background shadow "
-                      variant="primary"
-                    >
-                      <i class="fas fa-map-marked-alt  fa-lg btn-icon "></i>
-                      <span class="btn-text">{{$t("search.Direction")}}</span>
-                    </b-button>
-                  </b-col>
-                </b-row>
-              </div>
-            </b-col>
-          </b-row>
-        </div>
-      </splide-slide>
-    </splide>
-  </div>
+                    <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
+                    <span class="btn-text">{{ $t("search.Direction") }}</span>
+                  </b-button>
+                </b-col>
+              </b-row>
+            </div>
+          </b-col>
+        </b-row>
+      </div>
+    </splide-slide>
+  </splide>
+  <div v-else></div>
 </template>
 
 <script>
+import { formatNumber } from "@/helpers";
 export default {
   props: ["title", "image"],
 
+  filters: {
+    formatNumber,
+    format: (value) =>
+      value
+        ? value.length > 25
+          ? `${value.substring(0, 25)} ...`
+          : value
+        : "",
+  },
+
   data() {
     return {
+      items: [],
       options: {
         rewind: true,
         autoplay: true,
@@ -117,22 +121,34 @@ export default {
 
         margin: {
           right: "5rem",
-          left: "5rem"
+          left: "5rem",
         },
 
         breakpoints: {
-          "760": {
+          760: {
             perPage: 1,
-            gap: "1rem"
+            gap: "1rem",
           },
-          "1500": {
+          1500: {
             perPage: 1,
-            gap: "1rem"
-          }
-        }
-      }
+            gap: "1rem",
+          },
+        },
+      },
     };
-  }
+  },
+
+  created() {
+    this.init();
+  },
+
+  methods: {
+    init: async function () {
+      const request = await this.$repository.search.sponsors();
+
+      if (request.success) this.items = request.data;
+    },
+  },
 };
 </script>
 

@@ -8,7 +8,6 @@
     "Create_album": "Créer un album",
     "Create": "Créer",
     "Profile_Picture": "Photo de Profil",
-    "Networks": "Réseaux",
     "Items": "Elements",
     "Cover_Photos": "Photo de couverture",
     "Edit_Name": "Modifier le nom",
@@ -114,7 +113,7 @@
     "Save": "Enregistrer",
     "Show": "Afficher",
     "All": "Tout",
-    "Shuffle": "Shuffle",
+    "Shuffle": "Mélanger",
     "Agriculture": "Agriculture",
     "Business": "Entreprise",
     "Event": "Événement",
@@ -276,7 +275,7 @@
     "Education": "Éducation",
     "Duration_From": "Durée à partir de",
     "To": "À",
-    "Username": "Nom d’utilisateur",
+    "Username": "Nom d'utilisateur",
     "Follow": "Suivre",
     "Report": "Signalez",
     "Places_you_lived": "Lieux où vous avez vécu",
@@ -288,5 +287,6 @@
     "Work_at": "Travaille à",
     "Studied_at": "A étudié à",
     "Home_Town_Name": "Nom de la Ville Natale",
-    "Current_City_Name": "Nom de la Ville Actuelle"
+    "Current_City_Name": "Nom de la Ville Actuelle",
+    "Networks": "Réseaux"
 }

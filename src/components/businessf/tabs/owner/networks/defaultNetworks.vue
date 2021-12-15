@@ -7,7 +7,7 @@
           </h6>
         </template>
  
-        <post-network></post-network>
+        <post-network @changement="changer"></post-network>
       </b-tab>
       <b-tab>
         <template slot="title" class="tt-color">
@@ -60,6 +60,13 @@ export default {
     Members,
     FeedbackNetwork,
   },
+
+  methods: {
+    changer(){
+      this.$emit('changeSelected')
+      console.log("evenement reçu ----")
+    }
+  }
 };
 </script>
 

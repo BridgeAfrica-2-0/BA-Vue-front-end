@@ -98,15 +98,16 @@ export default {
       max_step: 5,
       steps: [
         {
-          text: "Shipping Address",
+          
+          text: this.$t("general.Shipping_Address"),
           status: true,
         },
         {
-          text: "Checkout",
+          text: this.$t("general.Checkout"),
           status: false,
         },
         {
-          text: "Confirm Payment",
+          text: this.$t("general.Confirm_Payment"),
           status: false,
         },
       ],
@@ -119,19 +120,19 @@ export default {
     };
   },
   computed: {
-    progress: function() {
+    progress: function () {
       return Math.round(100 / this.max_step) * this.current_step;
     },
   },
   methods: {
-    onClickNext: function() {
+    onClickNext: function () {
       this.changeStatusProgress(this.current_step, this.current_step + 1);
       this.current_step++;
     },
-    onClickBack: function() {
+    onClickBack: function () {
       this.current_step--;
     },
-    onClickFirst: function() {
+    onClickFirst: function () {
       this.current_step = 1;
     },
     handleSwitchStep(step) {

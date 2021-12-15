@@ -31,12 +31,26 @@
                         class="mt-2 mt-lg-1 mt-xl-2"
                       >
                         <h6 class="follower m-15">
-                          {{  member.communityNum }}
-                          {{ $t('network.Community') }}
+                          {{ member.communityNum }}
+                          {{ $t("network.Community") }}
                         </h6>
                       </b-col>
-                      <b-col @click="$emit('BlockUser', member.id)" md="6" lg="12" cols="6" xl="12" class="mt-1 mt-lg-1 mt-xl-2" style="cursor:pointer;">
-                        <b-icon font-scale="1" icon="exclamation-octagon" v-b-tooltip.hover title="Block This User" variant="danger"></b-icon>
+                      <b-col
+                        @click="$emit('BlockUser', member.id)"
+                        md="6"
+                        lg="12"
+                        cols="6"
+                        xl="12"
+                        class="mt-1 mt-lg-1 mt-xl-2"
+                        style="cursor: pointer"
+                      >
+                        <b-icon
+                          font-scale="1"
+                          icon="exclamation-octagon"
+                          v-b-tooltip.hover
+                          title="Block This User"
+                          variant="danger"
+                        ></b-icon>
                       </b-col>
                     </b-row>
                   </div>
@@ -52,15 +66,7 @@
                         xl="12"
                         class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
                       >
-                        <b-button
-                          block
-                          variant="primary"
-                          size="sm"
-                          class="b-background flexx pobtn shadow"
-                        >
-                          <i class="fas fa-envelope fa-lg btn-icon"></i>
-                          <span class="btn-text">{{ $t('network.Message') }}</span>
-                        </b-button>
+                        <BtnCtaMessage :element="member" type="people" />
                       </b-col>
 
                       <b-col

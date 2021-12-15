@@ -450,6 +450,7 @@ export default {
 </script>
 
 <style scoped>
+
 .discount {
   color: orange;
   margin-left: 60px;
@@ -509,6 +510,10 @@ h6 {
   .center-img {
     margin-right: -40px;
   }
+  .marge{
+  margin-right: 0px;
+      padding-right: 8px
+}
 }
 
 .buybtn {
@@ -545,6 +550,10 @@ h6 {
 }
 
 @media only screen and (max-width: 540px) {
+  .marge{
+      margin-left: -25px;
+      
+}
   .text {
     color: #000;
 

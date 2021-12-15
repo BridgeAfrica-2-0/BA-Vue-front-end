@@ -12,8 +12,7 @@
         <template slot="title" class="tt-color">
           <h6 class="h6">Media</h6>
         </template>
-
-        <media-network :type="'network'"></media-network>
+        <media-network :type="'network'" :isEditor="false"></media-network>
       </b-tab>
       <b-tab>
         <template slot="title" class="tt-color">
@@ -46,7 +45,7 @@ import MemberNetwork from '@/components/businessf/tabs/owner/editors/memberEdito
 
 import Members from '@/components/businessf/tabs/owner/editors/member';
 
-import PostNetwork from '@/components/businessf/tabs/owner/networks/postNetwork';
+import PostNetwork from '@/components/businessf/tabs/owner/editors/postEditor';
 
 export default {
   name: 'default',

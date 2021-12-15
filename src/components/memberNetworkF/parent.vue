@@ -1,8 +1,8 @@
 <template>
-  <div class="">
+  <div class=" ">
     <b-card title="" class="">
       <b-container class="a-center">
-        <!-- :src="require('@/assets/img/mayor.jpg')" -->
+          <!-- :src="require('@/assets/img/mayor.jpg')" -->
         <b-avatar
           :src="networkInfo.image"
           variant="primary"
@@ -11,6 +11,7 @@
           class="network-logo"
         >
         </b-avatar>
+
       </b-container>
 
       <br />
@@ -18,9 +19,7 @@
       <b-container>
         <b-row>
           <b-col cols="6">
-            <h6 class="m-0 p-0 a-center network-name">
-              <b> {{ networkInfo.name }}</b>
-            </h6>
+            <h6 class="  m-0 p-0 a-center network-name "><b> {{ networkInfo.name }}</b></h6>
           </b-col>
           <b-col cols="6">
             <b-button
@@ -38,20 +37,18 @@
               <span class="ml-1" v-if="networkInfo.is_follow"> Unfollow</span>
               <span v-else> Follow</span>
             </b-button>
-            <b-tooltip target="Follow-Unfollow" variant="secondary"
-              >Click To Follow/Unfollow</b-tooltip
-            >
+            <b-tooltip target="Follow-Unfollow" variant="secondary">Click To Follow/Unfollow</b-tooltip>
           </b-col>
         </b-row>
       </b-container>
 
-      <br />
+      <br /> 
 
       <b-card-text class="text-left">
         <b-container>
           <b-row>
             <b-col>
-              <p class="a-center">
+              <p class="a-center ">
                 <b-icon icon="globe" variant="primary"></b-icon>
                 <span class="pivate text"> Private </span>
               </p>
@@ -61,37 +58,45 @@
                 <b-icon icon="people-fill" variant="primary"></b-icon>
                 <span class="pivate text">
                   {{ nFormatter(networkInfo.community) }}
-                  community
+                  community 
                 </span>
               </p>
             </b-col>
           </b-row>
         </b-container>
-        <h6 class="mt-2 font-weight-bolder title">About</h6>
+        <h6 class="mt-2 font-weight-bolder title ">About</h6>
         <p class="text-justify text">
-          <read-more
-            more-str="read more"
-            class="readmore"
-            :text="networkInfo.description"
-            link="#"
-            less-str="read less"
-            :max-chars="100"
-          >
-          </read-more>
+
+
+           <read-more
+              more-str="read more"
+              class="readmore"
+              :text="networkInfo.description"
+              link="#"
+              less-str="read less"
+              :max-chars="100"
+            >
+            </read-more>
+
+
+         
         </p>
       </b-card-text>
     </b-card>
+    
+    
 
     <SidebarCommunity />
+
   </div>
 </template>
 
 <script>
-import SidebarCommunity from "@/components/businessf/tabs/owner/networks/sidebarcommunity";
+import SidebarCommunity from '@/components/businessf/tabs/owner/networks/sidebarcommunity';
 export default {
   name: "parent",
   components: {
-    SidebarCommunity,
+    SidebarCommunity
   },
   data() {
     return {
@@ -101,7 +106,8 @@ export default {
       Pcommunity: false,
       buttonStatus: false,
       text: "",
-      file: "",
+      file: '',
+
     };
   },
   computed: {
@@ -109,12 +115,12 @@ export default {
       return this.$store.state.networkProfile.networkInfo;
     },
   },
-  mounted() {
+  mounted(){
     this.url = this.$route.params.id;
-    this.getNetworkInfo();
+    this.getNetworkInfo() 
   },
   methods: {
-    nFormatter: function (num) {
+    nFormatter: function(num) {
       if (num >= 1000000000) {
         return (num / 1000000000).toFixed(1).replace(/\.0$/, "") + "G";
       }
@@ -129,48 +135,48 @@ export default {
     openNetwork() {
       this.networkShow = false;
     },
-    addFollower: function () {
+    addFollower: function() {
       this.buttonStatus = true;
       this.SPcommunity = !this.SPcommunity;
-      this.axios
-        .post("network/" + this.url + "/about/follow")
-        .then(() => {
-          this.getNetworkInfo();
-          this.SPcommunity = !this.SPcommunity;
-          if (this.networkInfo.is_follow) {
-            this.buttonStatus = false;
-            this.flashMessage.show({
-              status: "success",
-              message: "You Are Not more Following",
-            });
-          } else {
-            this.buttonStatus = false;
-            this.flashMessage.show({
-              status: "success",
-              message: "You Are Now Following",
-            });
-          }
-        })
-        .catch((err) => {
-          console.log({ err: err });
+      this.axios.post("network/"+this.url+"/about/follow")
+      .then(() => {
+        this.getNetworkInfo();
+        this.SPcommunity = !this.SPcommunity;
+        if (this.networkInfo.is_follow) {
           this.buttonStatus = false;
           this.flashMessage.show({
-            status: "error",
-            message: "Unable To follow",
+            status: "success",
+            message: "You Are Not more Following"
           });
+        } else {
+          this.buttonStatus = false;
+          this.flashMessage.show({
+            status: "success",
+            message: "You Are Now Following"
+          });
+        }
+      })
+      .catch(err => {
+        console.log({ err: err });
+        this.buttonStatus = false;
+        this.flashMessage.show({
+          status: "error",
+          message: "Unable To follow"
         });
+      });
     },
     getNetworkInfo() {
       this.$store
-        .dispatch("networkProfile/getnetworkInfo", this.url)
-        .then(() => {
-          console.log("ohh yeah");
-        })
-        .catch((err) => {
-          console.log({ err: err });
-        });
-    },
-  },
+      .dispatch("networkProfile/getnetworkInfo", this.url)
+      .then(() => {
+        console.log('ohh yeah');
+      })
+      .catch(err => {
+        console.log({ err: err });
+      });
+    }
+
+  }
 };
 </script>
 

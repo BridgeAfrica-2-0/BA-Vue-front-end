@@ -35,10 +35,10 @@
                 </strong>
                 <br />
 
-                <span v-for="cat in item.category" :key="cat.name">
-                  {{ cat.name }}
+                <span v-for="cat in item.assign_categories.slice(0,7)" :key="cat.name">
+                  {{ cat.name }},
                 </span>
-                <br />
+
                 {{ count(item.community) }}
                 {{ $t("dashboard.Community") }} <br />
 
@@ -49,12 +49,12 @@
                 </span>
                 <br />
                 <read-more
-                  more-str="read more"
+                  :more-str="$t('search.read_more')"
                   class="readmore"
                   :text="item.description"
                   link="#"
-                  less-str="read less"
-                  :max-chars="100"
+                  :less-str="$t('search.read_less')"
+                  :max-chars="70"
                 >
                 </read-more>
               </p>
@@ -102,16 +102,7 @@
                 cols="4"
                 class="mt-2 text-center"
               >
-                <b-button
-                  block
-                  size="sm"
-                  class="b-background shadow"
-                  variant="primary"
-                  @click="cta(item)"
-                >
-                  <i class="fas fa-envelope fa-lg btn-icon"></i>
-                  <span class="btn-text">Message</span>
-                </b-button>
+                <BtnCtaMessage :element="item" type="network" />
               </b-col>
 
               <b-col
@@ -135,7 +126,7 @@
                     "
                   ></i>
 
-                  <span class="btn-text"> Join </span>
+                  <span class="btn-text"> {{ $t("search.Join") }} </span>
                 </b-button>
               </b-col>
             </b-row>
@@ -166,6 +157,7 @@
 </template>
 
 <script>
+import moment from "moment";
 import axios from "axios";
 
 export default {
@@ -180,6 +172,9 @@ export default {
       currentPage: 1,
       nextLoad: false,
     };
+  },
+  created() {
+    console.log("Mini Networks => ".this.network());
   },
   computed: {
     networks() {

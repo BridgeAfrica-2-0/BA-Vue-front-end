@@ -1,43 +1,53 @@
 <template>
   <div class="p-2">
     <b-row>
-      <b-col lg="6" sm="12" class="p-2" v-for="item in businesses" :key="item.id">
-         
-          <div class="people-style shadow h-100">
+      <b-col
+        lg="6"
+        sm="12"
+        class="p-2"
+        v-for="item in businesses"
+        :key="item.id"
+      >
+        <div class="people-style shadow h-100">
           <b-row>
-
             <b-col md="8" xl="8" lg="12" cols="12" sm="8">
-              <div class="d-inline-flex">   
-              <div class="center-img ">
-                <splide :options="options" class="r-image">
-                  <splide-slide cl>
-                    <img :src="item.picture" class="r-image" />
-                  </splide-slide>
-                </splide>
-              </div>   <div class="flx100"> 
-              <p class="textt">
-                <strong class="title"> {{ item.name }} </strong> <br />
-               
-            <span v-for="cat in item.category" :key="cat.name">   {{cat.name}}  </span>
-                <br />
-                {{ count(item.followers) }}
-                {{ $t('businessowner.Community') }} <br />
+              <div class="d-inline-flex">
+                <div class="center-img">
+                  <splide :options="options" class="r-image">
+                    <splide-slide cl>
+                      <img :src="item.picture" class="r-image" />
+                    </splide-slide>
+                  </splide>
+                </div>
+                <div class="flx100">
+                  <p class="textt">
+                    <strong class="title"> {{ item.name }} </strong> <br />
 
-                <span class="location"> <b-icon-geo-alt class="ico"></b-icon-geo-alt>{{ item.country }} </span>
-                <br />
-       <read-more
-              more-str="read more"
-              class="readmore"
-              :text="item.about_business"
-              link="#"
-              less-str="read less"
-              :max-chars="100"
-            >
-            </read-more>
-              </p>
-               </div>
-               </div>
-            </b-col>     
+                    <span v-for="cat in item.category" :key="cat.name">
+                      {{ cat.name }}
+                    </span>
+                    <br />
+                    {{ count(item.followers) }}
+                    {{ $t("businessowner.Community") }} <br />
+
+                    <span class="location">
+                      <b-icon-geo-alt class="ico"></b-icon-geo-alt
+                      >{{ item.country }}
+                    </span>
+                    <br />
+                    <read-more
+                      more-str="read more"
+                      class="readmore"
+                      :text="item.about_business"
+                      link="#"
+                      less-str="read less"
+                      :max-chars="100"
+                    >
+                    </read-more>
+                  </p>
+                </div>
+              </div>
+            </b-col>
 
             <b-col lg="12" xl="4" md="4" cols="12" sm="4">
               <div class="s-button">
@@ -50,34 +60,27 @@
                     cols="4"
                     class="mt-2 text-center"
                   >
-                 
-
-
-                    
-
-
-
-                  <b-button
-                  block
-                  size="sm"  
-                  :disabled="disable"
-                    :id="'followbtn'+item.id"
-                  :class="item.is_follow !== 0 && 'u-btn'"
-                  variant="primary"
-                  @click="handleFollow(item)"
-                >
-                 
-                  <i class="fas fa-lg btn-icon" :class="item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"></i>
-                  <span class="btn-com ml-1"> {{ $t('businessowner.Community') }}</span>
-                </b-button>
-
-
-
-
-
-
-
-
+                    <b-button
+                      block
+                      size="sm"
+                      :disabled="disable"
+                      :id="'followbtn' + item.id"
+                      :class="item.is_follow !== 0 && 'u-btn'"
+                      variant="primary"
+                      @click="handleFollow(item)"
+                    >
+                      <i
+                        class="fas fa-lg btn-icon"
+                        :class="
+                          item.is_follow !== 0
+                            ? 'fa-user-minus'
+                            : 'fa-user-plus'
+                        "
+                      ></i>
+                      <span class="btn-com ml-1">
+                        {{ $t("businessowner.Community") }}</span
+                      >
+                    </b-button>
                   </b-col>
 
                   <b-col
@@ -88,12 +91,7 @@
                     cols="4"
                     class="mt-2 text-center"
                   >
-                    
-
-                    <b-button block size="sm" class="b-background shadow" variant="primary" @click="cta(item)">
-                      <i class="fas fa-envelope fa-lg btn-icon"></i>
-                      <span class="btn-text">{{ $t('businessowner.Message') }}</span>
-                    </b-button>
+                    <BtnCtaMessage :element="item" type="business" />
                   </b-col>
 
                   <b-col
@@ -107,11 +105,13 @@
                     <b-button
                       block
                       size="sm"
-                      class="b-background shadow "
+                      class="b-background shadow"
                       variant="primary"
                     >
-                      <i class="fas fa-map-marked-alt  fa-lg btn-icon "></i>
-                      <span class="btn-text">{{ $t('businessowner.Direction') }}</span>
+                      <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
+                      <span class="btn-text">{{
+                        $t("businessowner.Direction")
+                      }}</span>
                     </b-button>
                   </b-col>
                 </b-row>
@@ -122,21 +122,25 @@
       </b-col>
     </b-row>
 
-    <infinite-loading :identifier="infiniteId" @infinite="infiniteHandler" ref="infiniteLoading"></infinite-loading>
+    <infinite-loading
+      :identifier="infiniteId"
+      @infinite="infiniteHandler"
+      ref="infiniteLoading"
+    ></infinite-loading>
   </div>
 </template>
 
 <script>
 // import moment from 'moment';
-import axios from 'axios';
+import axios from "axios";
 
 export default {
-  props: ['type', 'searchh'],
+  props: ["type", "searchh"],
 
   data() {
     return {
-      businesses:[],
-      biz_id:null,
+      businesses: [],
+      biz_id: null,
       page: 1,
       infiniteId: +new Date(),
       options: {
@@ -145,30 +149,26 @@ export default {
         perPage: 1,
         pagination: false,
 
-        type: 'loop',
+        type: "loop",
         perMove: 1,
       },
     };
   },
 
-  computed:{
-   
-    old_businesses(){
-
-      if(this.type=="Follower"){ 
-
-     return  this.$store.state.businessOwner.BcommunityFollower.business_followers; 
-
-       }else{
-
-          return  this.$store.state.businessOwner.BcommunityFollowing.business_following; 
-       }
-   },
-
-    activeAccount() {
-      return this.$store.getters['auth/profilConnected'];
+  computed: {
+    old_businesses() {
+      if (this.type == "Follower") {
+        return this.$store.state.businessOwner.BcommunityFollower
+          .business_followers;
+      } else {
+        return this.$store.state.businessOwner.BcommunityFollowing
+          .business_following;
+      }
     },
 
+    activeAccount() {
+      return this.$store.getters["auth/profilConnected"];
+    },
   },
 
   mounted() {
@@ -176,39 +176,39 @@ export default {
   },
 
   methods: {
-    
     cta(data) {
       console.log(data);
-      this.$store.commit('businessChat/setSelectedChat', data);
-      let path = '';
-      if (this.activeAccount.user_type == 'business') {
-        path = '/business_owner/' + this.activeAccount.id;
-      } else if (this.activeAccount.user_type == 'network') {
-        path = '/';
-      } else path = '/messaging';
+      this.$store.commit("businessChat/setSelectedChat", data);
+      let path = "";
+      if (this.activeAccount.user_type == "business") {
+        path = "/business_owner/" + this.activeAccount.id;
+      } else if (this.activeAccount.user_type == "network") {
+        path = "/";
+      } else path = "/messaging";
 
       // this.$router.push({ path: `${path}`, query: { tabId: 1, msgTabId: 1 } });
-      this.$router.push({ path: `/business_owner/${this.activeAccount.id}`, query: { tabId: 1, msgTabId: 1 } });
+      this.$router.push({
+        path: `/business_owner/${this.activeAccount.id}`,
+        query: { tabId: 1, msgTabId: 1 },
+      });
     },
     count(number) {
       if (number >= 1000000) {
-        return number / 1000000 + 'M';
+        return number / 1000000 + "M";
       }
       if (number >= 1000) {
-        return number / 1000 + 'K';
+        return number / 1000 + "K";
       } else return number;
     },
 
-
- async handleFollow(user) {
-      
+    async handleFollow(user) {
       console.log("yoo ma gee");
-       document.getElementById("followbtn"+user.id).disabled = true;
+      document.getElementById("followbtn" + user.id).disabled = true;
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
         id: user.id,
-        type: 'user',
+        type: "user",
       };
 
       await axios
@@ -216,32 +216,29 @@ export default {
         .then(({ data }) => {
           console.log(data);
           user.is_follow = nextFollowState;
-           document.getElementById("followbtn"+user.id).disabled = false;
+          document.getElementById("followbtn" + user.id).disabled = false;
         })
-         
-          .catch((err) =>{  
-          
-          console.log({err:err})  ;
-           document.getElementById("followbtn"+user.id).disabled =  false;
-          
+
+        .catch((err) => {
+          console.log({ err: err });
+          document.getElementById("followbtn" + user.id).disabled = false;
         });
     },
 
-    
+    search() {
+      console.log("search started");
 
-       search(){
-     
-       console.log('search started');
-       
-         if(this.type=="Follower"){ 
-         
-        this.$store.commit("businessOwner/setBcommunityFollower",{ "business_followers": [ ], "total_business_follower": 0 }); 
-
-       }else{
-       
-        
-        this.$store.commit("businessOwner/setBcommunityFollowing",{ "business_following": [ ], "total_business_following": 0 }); 
-       }
+      if (this.type == "Follower") {
+        this.$store.commit("businessOwner/setBcommunityFollower", {
+          business_followers: [],
+          total_business_follower: 0,
+        });
+      } else {
+        this.$store.commit("businessOwner/setBcommunityFollowing", {
+          business_following: [],
+          total_business_following: 0,
+        });
+      }
 
       this.page = 1;
       this.infiniteId += 1;
@@ -252,17 +249,17 @@ export default {
     infiniteHandler($state) {
       let url = null;
 
-      if (this.type == 'Follower') {
-        url = 'business/community/business-follower/' + this.biz_id + '/';
+      if (this.type == "Follower") {
+        url = "business/community/business-follower/" + this.biz_id + "/";
       } else {
-        url = 'business/community/business-following/' + this.biz_id + '/';
+        url = "business/community/business-following/" + this.biz_id + "/";
       }
       axios
-        .get(url + this.page + '?keyword=' + this.searchh)
+        .get(url + this.page + "?keyword=" + this.searchh)
         .then(({ data }) => {
           console.log(data);
 
-          if (this.type == 'Follower') {
+          if (this.type == "Follower") {
             if (data.data.business_followers.length) {
               this.businesses.push(...data.data.business_followers);
               this.page += 1;
@@ -357,13 +354,13 @@ export default {
     color: black;
 
     line-height: 35px;
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 
   .textt {
     color: #000;
 
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
@@ -410,13 +407,13 @@ export default {
     color: black;
 
     line-height: 35px;
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 
   .textt {
     color: #000;
 
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;

@@ -588,6 +588,7 @@ export default {
   },
   data() {
     return {
+
       isActive: false,
       shownav: false,
       notifications: [],
@@ -667,6 +668,7 @@ export default {
   },
 
   watch: {
+
     "$store.state.auth.profilConnected": function () {
       this.updateNotificationEvent();
       this.userOwnPage = this.onRedirect();

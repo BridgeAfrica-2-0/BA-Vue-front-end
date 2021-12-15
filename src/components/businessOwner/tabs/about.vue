@@ -9,7 +9,7 @@
       <div class="mb-3">
         <mapbox :coordinates="[business_about.lng, business_about.lat]" />
       </div>
-
+    test
       <b-card>
         <b-row v-if="loading">
           <b-col>

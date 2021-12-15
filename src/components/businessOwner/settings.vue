@@ -153,7 +153,7 @@ export default {
 
         if (newVal == 5) {
           this.selectedIdd = "0";
-          this.tabIndex = "7";
+          this.tabIndex = "0";
         }
       },
     },

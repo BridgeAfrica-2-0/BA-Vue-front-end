@@ -363,7 +363,7 @@ export default {
     editProduct(Product) {
       console.log("editProduct");
       console.log(Product);
-      formData = new FormData();
+      let formData = new FormData();
       formData.append("name", Product.name);
       formData.append("description", Product.description);
       formData.append("price", Product.price);
@@ -379,7 +379,7 @@ export default {
       formData.append("picture", Product.picture);
       this.$store
         .dispatch("market/UpdateProduct", {
-          path: "update/"+this.url,
+          path: "market/"+this.url,
           formData: formData,
         })
         .then(({ data }) => {
@@ -402,7 +402,7 @@ export default {
       console.log(Product);
       this.$store
         .dispatch("market/DeleteProduct", {
-          path: "market/"+this.url,
+          path: "market/"+Product.id,
         })
         .then(({ data }) => {
           console.log(data);

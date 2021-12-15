@@ -8,43 +8,7 @@
 			<div class="col-12 order-item-caroussel col-sm-4 mb-3 col-md-4">
 				<ProductCaroussel :productImages="productImages" />
 			</div>
-
-			<div class="col-auto flex-fill order-info body-font-size col-sm-8 col-md-8">
-				<div class="row">
-					<div class="col-4">Name of item:</div>
-					<div class="col">{{ cart_item.product_name }}</div>
-				</div>
-
-				<div class="row">
-					<div class="col-4">Amount :</div>
-					<div class="col">{{ formatMoney(Number(cart_item.product_price)) }}</div>
-				</div>
-
-				<div class="row">
-					<div class="col-4">Quantity :</div>
-					<div class="col"> 
-						<input
-									class="quantity-input"
-									type="number"
-									min="1"
-									@change="changeQuantity($event, i)"
-									v-model="cart_item.quantity"
-								/>
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="col-4">Total :</div>
-					<div class="col">
-						{{
-									formatMoney(
-										Number(cart_item.product_price) * cart_item.quantity
-									)
-								}}
-					</div>
-				</div>
-			</div>
-			<!-- <div
+			<div
 				class="col-auto flex-fill order-info body-font-size col-sm-8 col-md-8"
 			>
 				<b-table-simple borderless>
@@ -55,7 +19,7 @@
 							</b-td>
 							<b-th>
 								{{ cart_item.product_name }}
-								
+								<!-- {{ cart_item.name }} -->
 							</b-th>
 						</b-tr>
 						<b-tr>
@@ -64,7 +28,7 @@
 							</b-td>
 							<b-th>
 								{{ formatMoney(Number(cart_item.product_price)) }}
-								
+								<!-- {{ formatMoney(Number(cart_item.amount)) }} -->
 							</b-th>
 						</b-tr>
 						<b-tr>
@@ -81,23 +45,53 @@
 								/>
 							</b-th>
 						</b-tr>
-						
+						<b-tr>
+							<b-td>
+								Shipping:
+							</b-td>
+							<b-th >
+								<!-- {{ formatMoney(Number(cart.shipping_amount)) }} -->
+								<div class="row">
+									<h5 v-for="i in cart_item.shipping_cost" :key="i"
+									class=" cursor"
+									v-b-tooltip.hover.top="shippingCost(i).adress"
+									>
+									{{  shippingCost(i).price }}XAF ,
+									</h5>
+								</div>
+							</b-th>
+						</b-tr>
 						<b-tr>
 							<b-td>
 								Total:
 							</b-td>
 							<b-th>
-								{{
+								<div class="row">
+									<h5 v-for="i in cart_item.shipping_cost" :key="i"
+									class=" cursor"
+									
+									>
+									{{
+										Number(cart_item.product_price) * cart_item.quantity 
+									+ parseInt(shippingCost(i).price) }}XAF ,
+									</h5>
+								</div>
+								<!-- {{
 									formatMoney(
-										Number(cart_item.product_price) * cart_item.quantity
+										Number(cart_item.product_price) * cart_item.quantity + 1000
 									)
-								}}
-								
+								}} -->
+								<!-- {{
+									formatMoney(
+										Number(cart_item.amount) * cart_item.quantity +
+											cart_item.shipping
+									)
+								}} -->
 							</b-th>
 						</b-tr>
 					</b-tbody>
 				</b-table-simple>
-			</div> -->
+			</div>
 		</div>
 		<div class="row my-4" v-if="loading">
 			<div class="col-12 d-flex justify-content-center align-items-center">
@@ -151,6 +145,22 @@
 				});
 		},
 		methods: {
+
+			shippingCost(item){
+				let data ={};
+				
+					for (let val in item) {
+					// console.log(key + " -- " + value);
+					data = {
+						adress: val,
+						price: item[val]
+					
+					}
+				};
+			
+				 return data 
+			},
+
 			changeQuantity(event, index) {
 				let quantity = event.target.value;
 				if (quantity < 1) {
@@ -198,6 +208,8 @@
 			};
 		},
 		computed: {
+
+			
 			rowsOrder() {
 				let rows = 1;
 				if (this.cart["data"]) {

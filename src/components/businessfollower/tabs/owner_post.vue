@@ -409,7 +409,7 @@ export default {
 
     infiniteHandler($state) {
       console.log('user/post/' + this.page);
-      let url = 'user/post/' + this.page;
+      let url = 'user/post/' + this.page+'?id='+this.$route.params.id;
 
       if (this.page == 1) {
         this.owner_post.splice(0);

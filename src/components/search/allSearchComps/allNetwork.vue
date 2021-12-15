@@ -14,14 +14,12 @@
         >{{ $t("search.No_Network_available") }}!
       </a>
     </b-alert>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+
     <div
       v-for="item in networks.data"
       :key="item.id"
       class="people-style shadow h-100"
     >
-
-   
       <b-row>
         <b-col md="8" xl="8" lg="12" cols="12" sm="8">
           <div class="d-inline-flex">
@@ -37,10 +35,10 @@
                 </strong>
                 <br />
 
-                <span v-for="cat in item.assign_categories" :key="cat.name">
-                  {{ cat.name }}
+                <span v-for="cat in item.assign_categories.slice(0,7)" :key="cat.name">
+                  {{ cat.name }},
                 </span>
-                
+
                 {{ count(item.community) }}
                 {{ $t("dashboard.Community") }} <br />
 
@@ -56,7 +54,7 @@
                   :text="item.description"
                   link="#"
                   :less-str="$t('search.read_less')"
-                  :max-chars="100"
+                  :max-chars="70"
                 >
                 </read-more>
               </p>
@@ -104,16 +102,7 @@
                 cols="4"
                 class="mt-2 text-center"
               >
-                <b-button
-                  block
-                  size="sm"
-                  class="b-background shadow"
-                  variant="primary"
-                  @click="cta(item)"
-                >
-                  <i class="fas fa-envelope fa-lg btn-icon"></i>
-                  <span class="btn-text">{{  $t("search.Message") }}</span>
-                </b-button>
+                <BtnCtaMessage :element="item" type="network" />
               </b-col>
 
               <b-col
@@ -137,7 +126,7 @@
                     "
                   ></i>
 
-                  <span class="btn-text"> {{  $t("search.Join") }} </span>
+                  <span class="btn-text"> {{ $t("search.Join") }} </span>
                 </b-button>
               </b-col>
             </b-row>

@@ -43,7 +43,7 @@ export default {
 
   methods: {
     share: async function () {
-      console.log(this.post);
+      
       this.loading = true;
       let data = {
         [`${this.post.poster_type}_${this.actionType}`]: '',

@@ -2,9 +2,9 @@
 <div class="container">
 <div class="card mt-5 mx-auto" style="width:50rem;">
      <div class="card-header bg-white h-50">
-    Review and confirm your Order
+    {{$t("general.Review_and_confirm_your_Order")}}
     <br/>
-    Business:Largo
+    {{$t("general.Business")}}:Largo
   </div>
   <div class="card-body">
    
@@ -26,20 +26,20 @@
   </div>
   <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
+    <span class="sr-only">{{$t("general.Previous")}}</span>
   </a>
   <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
+    <span class="sr-only">{{$t("general.Next")}}</span>
   </a>
 </div>
 
 
     </div>
     <div class="col-2">
-     Name of item:
+     {{$t("general.Name_of_item")}}:
      <br/><br/>
-     Shipping:
+     {{$t("general.Shipping")}}:
      <br/><br/>
      Total:
     </div>
@@ -51,7 +51,7 @@
      1000
     </div>
     <div class="col">
-    <button type="button" class="btn btn-warning px-5 mt-5">Order</button>
+    <button type="button" class="btn btn-warning px-5 mt-5">{{$t("general.Order")}}</button>
     </div>
   </div>
   

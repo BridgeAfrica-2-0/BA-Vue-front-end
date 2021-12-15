@@ -462,7 +462,7 @@
                 {{ $t("search.Market") }}
               </h6>
 
-              <MiniMarket />
+              <MiniMarket :products="miniproducts" />
 
               <span class="float-right mb-3" @click="selectedId = 4">
                 <b-link href="#top"> {{ $t("search.see_more") }} </b-link>
@@ -539,11 +539,20 @@
               <h6 class="mb-3">
                 <fas-icon class="icons" :icon="['fas', 'store']" size="lg" />
                 {{ $t("search.Market") }}
+                <b-button
+                  to="/checkout"
+                  size="sm"
+                  variant="primary"
+                  class="float-right"
+                >
+                  <b-icon icon="cart4"></b-icon> Cart
+                </b-button>
                 <div class="float-right">
                   <b-button
                     size="sm"
                     variant="outline-primary"
                     @click="getProducts"
+                    class="mx-3"
                   >
                     <b-spinner small v-if="prodLoader"></b-spinner>
                     <span v-else>{{
@@ -568,8 +577,14 @@
             <div v-if="selectedId == '1'">
               <businessmap :businessPage="businessPage" />
             </div>
-            <div v-else>
-              <mapbox :businesses="businesses.data" />
+            <div v-if="selectedId == '4'">
+              <mapbox :products="allproducts.data" />
+            </div>
+            <div v-if="selectedId == '0'">
+              <mapbox
+                :businesses="businesses.data"
+                :products="miniproducts.data"
+              />
             </div>
           </div>
         </b-col>
@@ -650,6 +665,12 @@ export default {
     businesses() {
       return this.$store.getters["allSearch/getBusinesses"];
     },
+    miniproducts() {
+      return this.$store.getters["allSearch/getProducts"];
+    },
+    allproducts() {
+      return this.$store.getters["marketSearch/getProducts"];
+    },
 
     products() {
       return this.$store.state.market.products;
@@ -709,7 +730,7 @@ export default {
       selectedfilter: "",
       showform: false,
 
-      businessPage: 2,
+      businessPage: 1,
       //selectcategories:[],
 
       categories_filters: [],
@@ -1794,9 +1815,8 @@ export default {
 
     changeNotFoundTitle() {
       try {
-        this.notFoundComponentTitle = this.strategyForNotFoundComponentTitle[
-          this.selectedId
-        ]();
+        this.notFoundComponentTitle =
+          this.strategyForNotFoundComponentTitle[this.selectedId]();
       } catch (error) {
         this.notFoundComponentTitle = "";
       }
@@ -1936,7 +1956,8 @@ export default {
           break;
 
         case "MC":
-          this.selectcategories = this.Mayor_councils_filters_and_public_institution;
+          this.selectcategories =
+            this.Mayor_councils_filters_and_public_institution;
 
           break;
 

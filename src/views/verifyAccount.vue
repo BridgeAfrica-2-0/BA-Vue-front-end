@@ -33,7 +33,7 @@
 
  </b-col>
              <div class=" col-3"> 
-            <span class="ml-4  float-right mt-3 ">  <b-button  @click="verifyMethod(email)">    <b-icon icon="chevron-right" variant=""  class="mt-1 " font-scale="2"  ></b-icon>    </b-button>  </span>  
+            <span class="ml-4  float-right mt-3 ">  <b-button  @click="verifyMethod('email')">    <b-icon icon="chevron-right" variant=""  class="mt-1 " font-scale="2"  ></b-icon>    </b-button>  </span>  
            </div>
  </div>
 
@@ -53,7 +53,7 @@
 
  </b-col>
              <div class=" col-3"> 
-            <span class="ml-4  float-right mt-3 ">   <b-button @click="verifyMethod(tel)" >    <b-icon icon="chevron-right" variant=""  class="mt-1 " font-scale="2"  ></b-icon>    </b-button>        </span>  
+            <span class="ml-4  float-right mt-3 ">   <b-button @click="verifyMethod('tel')" >    <b-icon icon="chevron-right" variant=""  class="mt-1 " font-scale="2"  ></b-icon>    </b-button>        </span>  
            </div>
  </div>
 
@@ -216,8 +216,8 @@ verifyMethod(metho){
       console.log(this.$store.state.auth.user.user.phone);
 
       this.$store
-        .dispatch(url, {
-         
+        .dispatch("auth/sendOtp", {
+          url:url,
           email: this.$store.state.auth.user.user.email,
           phone: this.$store.state.auth.user.user.phone
         })
@@ -230,6 +230,7 @@ verifyMethod(metho){
 
          
          this.sending = false;
+         this.verify_method=true;
 
         });
     

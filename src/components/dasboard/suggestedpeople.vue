@@ -9,9 +9,9 @@
         <b-col md="3" cols="4" sm="4" class="my-auto">
           <b-avatar
             class="p-avater"
-            variant="primary"
+          
             :src="value.profile_picutre"
-          ></b-avatar>
+          ></b-avatar>  
         </b-col>
 
         <b-col md="8" cols="8" sm="8">

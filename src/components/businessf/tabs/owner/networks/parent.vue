@@ -4,7 +4,17 @@
       <b-container class="a-center">
         <!-- :src="require('@/assets/img/mayor.jpg')" -->
         <b-avatar
-          :src="networkInfo.image ? networkInfo.image : 'link'"
+          v-if="networkInfo.image"
+          :src="networkInfo.image"
+          variant="primary"
+          square
+          rounded
+          class="network-logo"
+        >
+        </b-avatar>
+        <b-avatar
+          v-else
+          :src="require('@/assets/default_network.png')"
           variant="primary"
           square
           rounded
@@ -356,6 +366,7 @@ export default {
   name: "parent",
   data() {
     return {
+      default_profile_image: "require(`@/assets/default_network.png`)",
       url: null,
       networkShow: true,
       showModal: false,

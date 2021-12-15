@@ -79,13 +79,7 @@
                     {{ category.category.name }}
                   </b-dropdown-item>
 
-                  <!-- <b-dropdown-item @click="category('More')" href="#"
-                      ><img
-                        class="img-fluid picture logo-img"
-                        src="@/assets/icons/more.png"
-                      />
-                      More</b-dropdown-item
-                    > -->
+                  
                 </b-col>
               </b-row>
             </div>

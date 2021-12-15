@@ -17,13 +17,10 @@
       v-for="(network, index) in networks.data"
       :key="index"
     >
-      <b-row @mouseover="showAction = index" @mouseleave="showAction = null">
+      <b-row>
         <b-col md="3" xl="3" lg="3" cols="5" sm="3">
           <div class="center-img">
-            <img
-              src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
-              class="r-image"
-            />
+            <img :src="network.image" class="r-image" />
           </div>
         </b-col>
         <b-col md="7" cols="7" lg="5" sm="5">
@@ -46,15 +43,7 @@
           </p>
         </b-col>
 
-        <b-col
-          lg="4"
-          md="12"
-          xl="4"
-          cols="12"
-          sm="4"
-          v-if="index == showAction"
-        >
-          <b>{{ index }}</b>
+        <b-col lg="4" md="12" xl="4" cols="12" sm="4">
           <div class="s-button">
             <b-row>
               <b-col md="4" lg="12" xl="12" sm="12" cols="4" class="mt-2">

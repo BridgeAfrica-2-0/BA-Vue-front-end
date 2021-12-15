@@ -221,9 +221,13 @@
                       />
                     </div> -->
 
-                    <autocomplete-mapbox
-                      @get-address-details="getAddressDetails"
-                    />
+                    <div class="form-group">
+                      <label for="Neighbour" class="username"> Neighbour:</label
+                      ><br />
+                      <autocomplete-mapbox
+                        @get-address-details="getAddressDetails"
+                      />
+                    </div>
                     <!-- <gmap-autocomplete
                       @place_changed="initMarker"
                       class="form-control mb-2"
@@ -429,9 +433,13 @@
                         class="form-control text"
                       />
                     </div> -->
-                    <autocomplete-mapbox
-                      @get-address-details="getAddressDetails"
-                    />
+                    <div class="form-group">
+                      <label for="Neighbour" class="username"> Neighbour:</label
+                      ><br />
+                      <autocomplete-mapbox
+                        @get-address-details="getAddressDetails"
+                      />
+                    </div>
                     <!-- <div class="form-group">
                       <label for="Neighbor" class="username">
                         {{ $t("welcome.Adress") }} :</label
@@ -1396,8 +1404,8 @@ export default {
         formData.append("region", this.selectedpregion);
         formData.append("city", this.city);
         formData.append("neighbor", this.Neighbor);
-        formData.append("lat", this.coordinates[0]);
-        formData.append("lng", this.coordinates[1]);
+        formData.append("lat", this.coordinates[1]);
+        formData.append("lng", this.coordinates[0]);
         formData.append("address", this.address);
 
         axios

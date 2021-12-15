@@ -35,8 +35,8 @@
                 </strong>
                 <br />
 
-                <span v-for="cat in item.assign_categories" :key="cat.name">
-                  {{ cat.name }}
+                <span v-for="cat in item.assign_categories.slice(0,7)" :key="cat.name">
+                  {{ cat.name }},
                 </span>
 
                 {{ count(item.community) }}
@@ -54,7 +54,7 @@
                   :text="item.description"
                   link="#"
                   :less-str="$t('search.read_less')"
-                  :max-chars="100"
+                  :max-chars="70"
                 >
                 </read-more>
               </p>

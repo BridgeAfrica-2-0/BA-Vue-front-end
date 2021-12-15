@@ -11,8 +11,7 @@ export default {
         neighbourhoods: [],
 
         prodLoader: false,
-        success: false,
-        token: "51|HZT2jfu5klFDkJhpvEI6dBhAQBDEdBQ2fABwhhaf"
+        success: false
     },
     getters: {
         getNetworks(state) {
@@ -131,12 +130,11 @@ export default {
             commit("setNetworks", { data: [] });
             commit("setLoader", true);
             console.log("[DEBUG] HELLO NETWORK SEARCH", data);
-            let page = 1
-            if (data.page) page = data.page
-            else console.log("Page not set!");
+
+            let page = data.page ? data.page : 1
             console.log("[debug] page:", page);
             try {
-                const res = await axios.post(`network/search?page=${page}`, data);
+                const res = await axios.get(`network/search?page=${page}`, data);
                 commit("setLoader", false);
                 console.log("Network Search results: ", res.data);
                 commit("setNetworks", res.data);

@@ -363,7 +363,7 @@ export default {
     editProduct(Product) {
       console.log("editProduct");
       console.log(Product);
-      formData = new FormData();
+      let formData = new FormData();
       formData.append("name", Product.name);
       formData.append("description", Product.description);
       formData.append("price", Product.price);

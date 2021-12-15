@@ -1,55 +1,32 @@
 <template>
   <div>
-    <div class="people-style shadow" v-for="item in businesses" :key="item.id">
+    <b-modal id="modal-sm" size="sm" hide-header>
+      Do you want to join this network?
+    </b-modal>
+
+
+      
+
+          <div class="people-style shadow"  v-for="item in network" :key="item.id">
       <b-row>
-        <b-col md="8" xl="12" lg="12" cols="12" sm="8">
-          <div class="d-inline-flex">
+        <b-col md="3" xl="5" lg="5" cols="5" sm="3">
+         
             <div class="center-img">
-              <splide :options="options" class="r-image">
-                <splide-slide cl>
-                  <img :src="item.picture" class="r-image" />
-                </splide-slide>
-              </splide>
-            </div>
-            <div class="flx100">
-              <p class="textt">
-                <strong class="title">
-                  <router-link :to="'business/' + item.id">
-                    {{ item.name }} ++
-                  </router-link>
-                </strong>
-                <br />
+            <img :src="item.picture" class="r-image" />
+          </div>   
+        
+        </b-col>
 
-                <span v-for="cat in item.category" :key="cat.name">
-                  {{ cat.name }}
-                </span>
-                <br />
-                {{ count(item.followers) }}
-                {{ $t("dashboard.Community") }} <br />
+        
+        <b-col md="5" cols="7" lg="7" xl="7" sm="5">
+          <p class="textt">
+            <strong class="title"> {{ item.name }} </strong> <br />
+            {{ item.category }}
+            <br />
+           {{ item.followers }} Community<br />
 
-                <span class="location">
-                  <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{ item.city }}
-                  <span
-                    class="ml-2"
-                    v-for="nie in item.neigborhood"
-                    :key="nie.id"
-                  >
-                    {{ nie.name }}
-                  </span>
-                </span>
-                <br />
-                <read-more
-                  more-str="read more"
-                  class="readmore"
-                  :text="item.about_business"
-                  link="#"
-                  less-str="read less"
-                  :max-chars="75"
-                >
-                </read-more>
-              </p>
-            </div>
-          </div>
+           {{ item.about_network }} <b-link>Read More</b-link>
+          </p>
         </b-col>
 
         <b-col lg="12" xl="12" md="4" cols="12" sm="4">
@@ -66,31 +43,12 @@
                 <b-button
                   block
                   size="sm"
-                  class="b-background shadow"
-                  :id="'followbtn' + item.id"
-                  :class="item.is_follow !== 0 && 'u-btn'"
+                  class="b-background shadow "
                   variant="primary"
-                  @click="handleFollow(item)"
                 >
-                  <i
-                    class="fas fa-lg btn-icon"
-                    :class="
-                      item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'
-                    "
-                  ></i>
+                  <i class="fas fa-user-plus  fa-lg btn-icon "></i>
                   <span class="btn-com">Community</span>
                 </b-button>
-              </b-col>
-
-              <b-col
-                md="12"
-                lg="4"
-                xl="4"
-                sm="12"
-                cols="4"
-                class="mt-2 text-center"
-              >
-                <BtnCtaMessage :element="item" type="business" />
               </b-col>
 
               <b-col
@@ -104,10 +62,29 @@
                 <b-button
                   block
                   size="sm"
-                  class="b-background shadow"
+                  class="b-background shadow "
                   variant="primary"
                 >
-                  <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
+                  <i class="fas fa-envelope   fa-lg btn-icon "></i>
+                  <span class="btn-text">Message</span>
+                </b-button>
+              </b-col>
+
+              <b-col
+                md="12"
+                lg="4"
+                xl="4"
+                sm="12"
+                cols="4"
+                class="mt-2 text-center"
+              >
+                <b-button
+                  block
+                  size="sm"
+                  class="b-background shadow "
+                  variant="primary"
+                >
+                  <i class="fas fa-map-marked-alt  fa-lg btn-icon "></i>
                   <span class="btn-text">Direction</span>
                 </b-button>
               </b-col>
@@ -117,26 +94,21 @@
       </b-row>
     </div>
 
-    <infinite-loading @infinite="infiniteHandler"></infinite-loading>
+   
+  <infinite-loading @infinite="infiniteHandler"></infinite-loading>  
   </div>
 </template>
 
 <script>
-import BtnCtaMessage from "@/components/messagesCTA/Btn-cta-message";
+
 import axios from "axios";
-
+ 
 export default {
-  props: ["type", "from"],
-  components: {
-    BtnCtaMessage,
-  },
-
+  props: ["type"],
   data() {
     return {
       page: 1,
-      foll_id: null,
-      biz_id: null,
-      businesses: [],
+       biz_id:null,
       options: {
         rewind: true,
         autoplay: true,
@@ -144,99 +116,102 @@ export default {
         pagination: false,
 
         type: "loop",
-        perMove: 1,
-      },
+        perMove: 1
+      }
     };
   },
 
   computed: {
-    old_businesses() {
-      if (this.type == "Follower") {
-        return this.$store.state.businessOwner.BcommunityFollower
-          .business_followers;
-      } else {
-        return this.$store.state.businessOwner.BcommunityFollowing
-          .business_following;
-      }
-    },
+   
+        network(){
+
+      if(this.type=="Follower"){ 
+
+      return  this.$store.state.businessOwner.NcommunityFollower.network_followers;  
+
+       }else{
+
+         return  this.$store.state.profile.NcommunityFollowing.network_following; 
+       }
+   }
+   
   },
+  
 
-  mounted() {
-    this.foll_id = this.$route.params.id ? this.$route.params.id : "";
-  },
+   mounted(){
+    this.biz_id = this.$route.params.id;
+ },
 
-  methods: {
-    count(number) {
-      if (number >= 1000000) {
-        return number / 1000000 + "M";
-      }
-      if (number >= 1000) {
-        return number / 1000 + "K";
-      } else return number;
-    },
 
-    infiniteHandler($state) {
-      let url =
-        this.type === "Follower"
-          ? `profile/business/follower/`
-          : `profile/business/following/`;
 
-      console.log(this.foll_id);
 
+   methods:{
+      
+     
+      infiniteHandler($state) {       
+
+        console.log("loading network 1 1")
+
+      let url = null;
+
+    
+
+         if(this.type=="Follower"){  
+         
+           url = "business/community/visitor/network-follower/"+this.biz_id+"/";
+         }else{
+         
+           url = "business/community/visitor/network-following/"+this.biz_id+"/";
+         }
       axios
-        .get(url + this.page + "?id=" + this.foll_id)
+        .get(url + this.page)   
         .then(({ data }) => {
-          if (this.type == "Follower") {
-            if (data.data.business_followers.length) {
-              console.info(...data.data.business_followers);
-              this.businesses.push(...data.data.business_followers);
-              this.page += 1;
+          console.log("lading network after response")
+          console.log(data);
+        if(this.type=="Follower"){
+         
 
-              $state.loaded();
-            } else {
+          if (data.data.network_followers.length) {
+            this.page += 1;
+            this.network.push(...data.data.network_followers);
+            
+            
+            $state.loaded();
+           }else{
               $state.complete();
-            }
+           }
+
+
           } else {
-            if (data.data.business_following.length) {
-              this.businesses.push(...data.data.business_following);
-              this.page += 1;
+            
 
-              $state.loaded();
-            } else {
+
+             if (data.data.network_following.length) {
+            this.page += 1;
+      
+            this.network.push(...data.data.network_following);
+            
+            
+            $state.loaded();
+           }else{
               $state.complete();
-            }
+           }
+
+
+
           }
-        })
+        }) 
         .catch((err) => {
           console.log({ err: err });
         });
     },
 
-    async handleFollow(user) {
-      document.getElementById("followbtn" + user.id).disabled = true;
+  } ,
 
-      const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
-      const nextFollowState = user.is_follow === 0 ? 1 : 0;
-      const data = {
-        id: user.id,
-        type: "business",
-      };
-
-      await axios
-        .post(uri, data)
-        .then((response) => {
-          console.log(response);
-          user.is_follow = nextFollowState;
-          document.getElementById("followbtn" + user.id).disabled = false;
-        })
-        .catch((err) => {
-          console.log(err);
-          document.getElementById("followbtn" + user.id).disabled = false;
-        });
-    },
-  },
+ 
 };
 </script>
+
 
 <style scoped>
 @media only screen and (min-width: 768px) {
@@ -270,9 +245,6 @@ export default {
   }
 }
 
-.u-btn {
-  filter: grayscale(0.6);
-}
 .btnpngs {
   width: 20px;
   margin-right: 5px;
@@ -328,7 +300,7 @@ export default {
     padding: 1px;
     text-align: left;
 
-    margin-left: 10px;
+    margin-left: -30px;
 
     margin-right: -5px;
 
@@ -381,7 +353,7 @@ export default {
     padding: 1px;
     text-align: left;
 
-    margin-left: 70px;
+    margin-left: 30px;
 
     margin-right: -5px;
 

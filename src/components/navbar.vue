@@ -569,6 +569,10 @@ export default {
   },
   data() {
     return {
+      searchOptions: {
+        keyword: "",
+        placeholder: "All",
+      },
       isActive: false,
       shownav: false,
       notifications: [],
@@ -648,6 +652,9 @@ export default {
   },
 
   watch: {
+    credentials(newval) {
+      this.searchOptions = newval;
+    },
     "$store.state.auth.profilConnected": function () {
       this.updateNotificationEvent();
       this.userOwnPage = this.onRedirect();

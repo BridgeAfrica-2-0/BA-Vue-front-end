@@ -11,48 +11,77 @@
         {{ $t("search.No_product_available_for_that_search") }}!
       </a></b-alert
     >
-
     <div
-      class="people-style shadow"
       v-for="(prod, index) in products.data"
       :key="index"
+      class="people-style shadow h-100"
     >
       <b-row>
-        <b-col cols="5" lg="4" sm="4" md="5">
+        <b-col lg="12" xl="4" md="4" cols="12" sm="4">
           <div class="center-img">
             <img :src="prod.picture" class="r-image" />
           </div>
         </b-col>
-        <b-col cols="7" sm="8" md="7">
-          <p class="text">
-            <strong class="title"> {{ prod.name }} </strong> <br />
-            <strong> {{ $t("search.Description") }} </strong> <br />
-            <span class="text">
-              {{ prod.description }}
-            </span>
-            <b-link class="text"> {{ $t("search.see_more") }} </b-link> <br />
+        <b-col lg="12" xl="4" md="4" cols="12" sm="4">
+          <div class="flx100">
+            <p class="textt">
+              <strong class="title">
+                <router-link to="'business/' + item.id">
+                  {{ prod.name }}
+                </router-link>
+              </strong>
+              <br />
 
-            <span class="price">
-              <strong> {{ prod.price }} Fcfa </strong>
-            </span>
-          </p>
+              <span class="price">
+                <strong> {{ prod.price }} Fcfa </strong>
+              </span>
+              <br />
+              <strong> {{ $t("search.Description") }} </strong>
+              <br />
 
-          <span class="float-right">
-            <!-- <b-button variant="primary" class=""> {{$t("search.Buy_now")}} </b-button> -->
-            <div class="row">
-              <div class="col marge">
+              <read-more
+                :more-str="$t('search.read_more')"
+                class="readmore"
+                :text="prod.description"
+                link="#"
+                :less-str="$t('search.read_less')"
+                :max-chars="100"
+              >
+              </read-more>
+            </p>
+          </div>
+        </b-col>
+
+        <b-col lg="12" xl="4" md="4" cols="12" sm="4">
+          <div class="s-button">
+            <b-row>
+              <b-col
+                md="12"
+                lg="4"
+                xl="12"
+                sm="12"
+                cols="4"
+                class="mt-2 text-center"
+              >
                 <b-button variant="primary" @click="AddToCard(prod.id, true)"
                   ><span> {{ $t("search.Buy_now") }} </span>
                 </b-button>
-              </div>
-              <div class="w-100 my-1"></div>
-              <div class="col marge">
+              </b-col>
+
+              <b-col
+                md="12"
+                lg="4"
+                xl="12"
+                sm="12"
+                cols="4"
+                class="mt-2 text-center"
+              >
                 <b-button variant="primary" @click="AddToCard(prod.id)"
                   ><span>Add to Cart</span>
                 </b-button>
-              </div>
-            </div>
-          </span>
+              </b-col>
+            </b-row>
+          </div>
         </b-col>
       </b-row>
     </div>
@@ -466,7 +495,7 @@ export default {
     },
   },
   created() {
-    if (!this.products.length) this.getProducts();
+    this.getProducts();
   },
 
   methods: {
@@ -494,7 +523,7 @@ export default {
     async getProducts() {
       // this.prodLoader = true;
       console.log("loader: ", this.prodLoader);
-      console.log("PRoducts ".this.$store.getters["marketSearch/getProducts"]);
+      console.log("PRoducts ", this.$store.getters["marketSearch/getProducts"]);
 
       await this.$store
         .dispatch("marketSearch/getProducts")

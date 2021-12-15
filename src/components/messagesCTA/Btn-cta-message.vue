@@ -3,7 +3,7 @@
     block
     variant="primary"
     size="sm"
-    class="b-background flexx  shadow"
+    class="b-background flexx shadow"
     @click="cta()"
   >
     <i class="fas fa-envelope fa-lg btn-icon pt-1 pr-1"></i>
@@ -50,7 +50,7 @@ export default {
       if (this.activeAccount.user_type == "business") {
         path = "/business_owner/" + this.activeAccount.id;
       } else if (this.activeAccount.user_type == "network") {
-        path = "/";
+        path = "/network/" + this.activeAccount.id;
       } else path = "/messaging";
 
       let msgTabId = 0;
@@ -62,7 +62,10 @@ export default {
         msgTabId = 2;
       }
       console.log("path:", path);
-      this.$router.push({ path: `${path}`, query: { tabId: 1, msgTabId: msgTabId } });
+      this.$router.push({
+        path: `${path}`,
+        query: { tabId: 1, msgTabId: msgTabId },
+      });
       // this.$router.push({ path: `/business_owner/${this.activeAccount.id}`, query: { tabId: 1, msgTabId: 0 } });
     },
   },

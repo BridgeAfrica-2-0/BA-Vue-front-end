@@ -116,7 +116,6 @@ export default {
         getProducts({ commit, state }) {
             commit("setLoader", true);
 
-
             return axios.get("market")
                 .then((res) => {
                     commit("setLoader", false);

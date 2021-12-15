@@ -28,7 +28,8 @@
             </b-col>
             <b-col md="5" cols="7" lg="7" xl="5" sm="5">
               <p class="textt">
-                <strong class="net-title"> {{ item.name }} </strong> <br />
+                <router-link :to="({name:'Membar Network Follower', params:{id: item.id}})">
+                <strong class="net-title over"> {{ item.name }} </strong> </router-link><br />
                 <span class="m-1" v-for="cat in item.categories" :key="cat">
                   {{ cat }}
                 </span>
@@ -181,6 +182,12 @@ export default {
 </script>
 
 <style scoped>
+.over{
+    cursor: pointer;
+      }
+      .over:hover{
+     color: #e75c18;
+      }
 @media only screen and (min-width: 768px) {
   .btn-text {
     margin-left: 8px;

@@ -104,30 +104,7 @@
 		"do_you_want_join_network": "Do you want to join this network?",
 		"community": "Community",
 		"messages": "Messages"
-	},
-	"settings": {
-		"title": "Setting",
-		"general": "General",
-		"account_type": "Account Type",
-		"password": "Password",
-		"payment": "Payment",
-		"name": "Name",
-		"public_url": "Public URL",
-		"email": "Email",
-		"phone": "Phone",
-		"dob": "DOB",
-		"gender": "Gender",
-		"country": "Country",
-		"city": "City",
-		"neighbourhood": "Neighbourhood",
-		"upgrade_your_business_account": "Upgrade Your Business Account",
-		"make_more_money": "Make more money by unlocking your marketplace features where you can sell products and services directly to customer and recieve instant payments",
-    "upgrade_now":"Upgrade Now",
-    "chose_payment_method":"Chose default payment method",
-    "change_current_password":"Change your current password",
-    "current_password":"Current password",
-    "new_password":"New Password",
-    "confirm_password":"Confirm Password"
+	
 	},
   "footer": {
     "home":"Home",

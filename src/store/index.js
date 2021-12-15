@@ -56,6 +56,8 @@ Vue.use(Vuex);
 axios.defaults.baseURL = "https://courage4.maxinemoffett.com/api/v1/";
 // axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 
+
+
 export default new Vuex.Store({
     modules: {
         auth,
@@ -100,7 +102,8 @@ export default new Vuex.Store({
         profileOrderDetail,
         profileSettingsEdit,
         cart,
-        networkSetting
+        networkSetting,
+        profileOrders
 
     }
 })

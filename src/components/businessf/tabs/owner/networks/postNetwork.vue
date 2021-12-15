@@ -93,14 +93,15 @@
       </b-row>
       <div class="pending-post-view pt-2 mt-3">
         <p>
-
-          {{$t("network.Your")}}
-          {{$t("network.Posts_are_pending_for_approval")}}.&nbsp;&nbsp;&nbsp;&nbsp;
+          {{ $t("network.Your") }}
+          {{
+            $t("network.Posts_are_pending_for_approval")
+          }}.&nbsp;&nbsp;&nbsp;&nbsp;
           <a
-            @click="RedirectPending"
-            style="color: #e75c18; text-decoration: underline; cursor:pointer"
-          >{{ $t("network.View_All") }}</a>
-
+            @click="editPage"
+            style="color: #e75c18; text-decoration: underline; cursor: pointer"
+            >{{ $t("network.View_All") }}</a
+          >
         </p>
       </div>
     </b-card>
@@ -344,7 +345,7 @@
                 </span>
               </div>
               <br />
-      
+
               <div class="">
                 <div
                   v-for="hyperlink in createPost.hyperlinks"
@@ -479,7 +480,7 @@ export default {
   computed: {
     ...mapGetters({
       profile: "auth/profilConnected",
-      owner_post:"networkProfile/getOwnerPost"
+      owner_post: "networkProfile/getOwnerPost",
     }),
 
     imageProfile() {
@@ -489,7 +490,7 @@ export default {
     business_logo() {
       return this.$store.state.networkProfile.networkInfo.logo_path;
     },
-    
+
     profileNamePost() {
       return "yoo";
     },
@@ -501,7 +502,6 @@ export default {
   },
 
   methods: {
-
     ...mapMutations({
       auth: "auth/profilConnected",
       postRemove: "businessOwner/removePost",
@@ -509,8 +509,26 @@ export default {
       postCreate: "businessOwner/createPost",
     }),
 
-    RedirectPending(){ 
-      this.$emit('changement')
+    editPage() {
+      this.$router.push("/network/" + this.url + "?selectedId=4");
+      //  this.$router.push("/network/"+this.url+"?this.selectedIdd=4 && this.tabIndex=5");
+      console.log("editPage");
+      //        this.selectedIdd = '4';
+      // this.tabIndex = '5';
+    },
+
+    AllPendingPost() {
+      console.log("AllPendingPost");
+      this.axios
+        .get("network/" + this.url + "/post/count-pending-posts")
+        .then(({ data }) => {
+          console.log("AllPendingPost yeahh");
+          console.log(data);
+          this.pendingPost = data;
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
     },
 
     mapmediae(media) {
@@ -587,46 +605,44 @@ export default {
     },
 
     deletePost(post) {
-      const uuid = post.post_id ? post.post_id : post.id 
-      return (
-        this.axios
-          .delete("network/" + this.$route.params.id + "/post/" + uuid)
-          .then(() => {
-            this.postRemove(uuid)
-            this.page = 1;
-            this.infiniteId += 1;
+      const uuid = post.post_id ? post.post_id : post.id;
+      return this.axios
+        .delete("network/" + this.$route.params.id + "/post/" + uuid)
+        .then(() => {
+          this.postRemove(uuid);
+          this.page = 1;
+          this.infiniteId += 1;
+          this.flashMessage.show({
+            status: "success",
+            blockClass: "custom-block-class",
+            message: "Post Deleted",
+          });
+          return true;
+        })
+        .catch((err) => {
+          this.sending = false;
+
+          if (err.response.status == 422) {
+            console.log({ err: err });
+
             this.flashMessage.show({
-              status: "success",
+              status: "error",
               blockClass: "custom-block-class",
-              message: "Post Deleted",
+              message: err.response.data.message,
             });
-            return true;
-          })
-          .catch((err) => {
-            this.sending = false;
+            // loader.hide();
+          } else {
+            this.flashMessage.show({
+              status: "error",
+              blockClass: "custom-block-class",
+              message: this.$t("network.Unable_to_Delete_your_Post"),
+            });
+            console.log({ err: err });
 
-            if (err.response.status == 422) {
-              console.log({ err: err });
-
-              this.flashMessage.show({
-                status: "error",
-                blockClass: "custom-block-class",
-                message: err.response.data.message,
-              });
-              // loader.hide();
-            } else {
-              this.flashMessage.show({
-                status: "error",
-                blockClass: "custom-block-class",
-                message: this.$t("network.Unable_to_Delete_your_Post"),
-              });
-              console.log({ err: err });
-
-              // loader.hide();
-            }
-            return false;
-          })
-      );
+            // loader.hide();
+          }
+          return false;
+        });
     },
 
     editPost(postarray) {
@@ -809,7 +825,6 @@ export default {
 
       this.fileImageArr.forEach((value, index) => {
         formData2.append("media[" + index + "]", value.target.files[0]);
-
       });
 
       formData2.append("type", "image");
@@ -829,7 +844,7 @@ export default {
         })
         // .then(() => this.ownerPost())
         .then((res) => {
-          this.postCreate(res.data.data)
+          this.postCreate(res.data.data);
           this.flashMessage.show({
             status: "success",
             blockClass: "custom-block-class",

@@ -107,7 +107,7 @@
             </b-form-group>
           </b-col>
           <b-col cols="12" md="6">
-            <div class="image-upload-wrap" @click="picImage">
+            <div class="image-upload-wrap" @click="picImage" style="display: flex; justify-content: center; align-items: center; overflow: hidden">
               <input
                 type="file"
                 name=""
@@ -118,12 +118,14 @@
                 required
               />
               <a href="#" data-toggle="modal" data-target="#createalbumModal">
-                <div class="drag-text">
+                <div v-if="selectedImagePrv">
+                  <img :src="selectedImagePrv" :srcset="selectedImagePrv" style="min-width: 100%; min-height: 100%">
+                </div>
+                <div v-else class="drag-text">
                   <i class="fa fa-plus"></i>
                   <h6>{{ $t('businessowner.Product_Image') }}</h6>
                 </div>
               </a>
-              <div></div>
             </div>
           </b-col>
         </b-row>
@@ -292,9 +294,9 @@
 </template>
 
 <script>
-import Product from "../product";
 import axios from "axios";
 import MultiSelect from "vue-multiselect";
+import Product from "../product";
 import Orders from "@/views/businessOwnerOrders";
 import Archive from "../archive";
 export default {
@@ -313,6 +315,7 @@ export default {
 
       market: true,
       my_orders: "orders",
+      selectedImagePrv: "",
 
       showModal: false,
       load: false,
@@ -342,11 +345,6 @@ export default {
       multiselecvalue: [],
       filterselectvalue: [],
       select_filterss: [],
-      multiselec: [
-        { name: "Vue.js", code: "vu" },
-        { name: "Javascript", code: "js" },
-        { name: "Open Source", code: "os" },
-      ],
       isShowOrders: false,
     };
   },
@@ -448,8 +446,12 @@ export default {
       document.querySelector("#image").click();
     },
     getImage(e) {
+      console.log("getImage");
       console.log(e.target.files[0]);
       this.newProduct.picture = e.target.files[0];
+      let file = e.target.files[0] || e.dataTransfer.files;
+      this.selectedImagePrv = URL.createObjectURL(file);
+      console.log("this.selectedImagePrv", this.selectedImagePrv);
     },
     createProduct() {
       this.showModal = !this.showModal;

@@ -104,30 +104,7 @@
         "community": "Community",
         "messages": "Messages"
       },
-      "settings": {
-        "title": "Paramètres",
-        "general": "Général",
-        "account_type": "Type de compte",
-        "password": "Mot de passe",
-        "payment": "Paiement",
-        "name": "Nom",
-        "public_url": "URL publique",
-        "email": "E-mail",
-        "phone": "Téléphone",
-        "dob": "Date de naissance",
-        "gender": "Genre",
-        "country": "Pays",
-        "city": "Ville",
-        "neighbourhood": "Quartier",
-        "upgrade_your_business_account": "Mettez à niveau votre compte d'entreprise",
-        "make_more_money": "Gagnez plus d'argent en déverrouillant les fonctionnalités de votre boutique où vous pouvez vendre des produits et services directement aux clients et recevoir des paiements instantanés.",
-        "upgrade_now":"Mettre à niveau maintenant",
-        "chose_payment_method":"Choisissez le mode de paiement par défaut",
-        "change_current_password":"Changer votre mot de passe actuel",
-        "current_password":"Mot de passe actuel",
-        "new_password":"Nouveau mot de passe",
-        "confirm_password":"Confirmez le mot de passe"
-      },
+        
       "footer": {
         "home":"Accueil",
         "contact_us":"Contactez-nous",

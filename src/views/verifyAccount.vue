@@ -21,9 +21,8 @@
  <div v-if="!verify_method">   
 
 
-
-       <div class="row  w-90 border "> 
-<b-col col="9" >  
+       <b-row class="row  border "> 
+<b-col cols="10" >  
         <div class="d-inline-flex   mt-3 mb-3" > 
           <span class="mr-4">   <b-icon icon="envelope" variant="primary"  font-scale="3"  ></b-icon>   </span>  
           
@@ -32,18 +31,18 @@
         </div>
 
  </b-col>
-             <div class=" col-3"> 
-            <span class="ml-4  float-right mt-3 ">  <b-button  @click="verifyMethod('email')">    <b-icon icon="chevron-right" variant=""  class="mt-1 " font-scale="2"  ></b-icon>    </b-button>  </span>  
-           </div>
- </div>
+             <b-col  class="d-" cols="1"> 
+            <span class=" float-right mt-3 ">  <b-button  @click="verifyMethod('email')">    <b-icon icon="chevron-right" variant=""  class="mt-1 " font-scale="2"  ></b-icon>    </b-button>  </span>  
+             </b-col>
+       </b-row>
 
 
 
 
 
 
-  <div class="row  w-90 border mt-3 "> 
-<b-col col="9" >  
+  <div class="row   border mt-3 "> 
+<b-col cols="10" >  
         <div class="d-inline-flex   mt-3 mb-3" > 
           <span class="mr-4">   <b-icon icon="telephone" variant="primary"  font-scale="3"  ></b-icon>   </span>  
           
@@ -52,7 +51,7 @@
         </div>
 
  </b-col>
-             <div class=" col-3"> 
+             <div class=" col-1"> 
             <span class="ml-4  float-right mt-3 ">   <b-button @click="verifyMethod('tel')" >    <b-icon icon="chevron-right" variant=""  class="mt-1 " font-scale="2"  ></b-icon>    </b-button>        </span>  
            </div>
  </div>

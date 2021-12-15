@@ -9,6 +9,8 @@ export default {
         subFilter: [],
         prodLoader: false,
         success: false,
+        neighbourhoods: [],
+
     },
     getters: {
         getProducts(state) {
@@ -25,6 +27,9 @@ export default {
         getSubFilters(state) {
             return state.subFilter;
         },
+        getUserNeighbourhoods(state) {
+            return state.neighbourhoods;
+        },
 
 
         // sending loader value
@@ -38,6 +43,9 @@ export default {
     },
     mutations: {
         //set media data
+        setUserNeighbourhoods(state, payload) {
+            state.neighbourhoods = payload;
+        },
         setProducts(state, data) {
             state.products = data;
         },
@@ -119,7 +127,6 @@ export default {
             return axios.get("market")
                 .then((res) => {
                     commit("setLoader", false);
-
                     console.log("products list: ", res.data);
                     commit("setProducts", res.data);
                 })
@@ -146,6 +153,18 @@ export default {
                     console.error(err);
                 });
         },
+        getUserNeigbourhoods({ commit }, data) {
+            console.log("[...neigbourb...]");
+            return axios.get("user/neighborhood")
+                .then((res) => {
+                    console.log("[...neigbourb...]", res.data.data);
+
+                    commit("setUserNeighbourhoods", res.data.data);
+                })
+                .catch((err) => {
+                    console.error(err);
+                });
+        },
         searchProducts({ commit, state }, data) {
             commit("setProducts", { data: [] });
             commit("setLoader", true);
@@ -155,8 +174,10 @@ export default {
             let sub_cat = data.sub_cat ? data.sub_cat : ''
             let filter_id = data.filter_id ? data.filter_id : ''
             let page = data.page ? data.page : ''
+            let distance = data.distanceInKM ? data.distanceInKM : ''
 
-            return axios.get(`search/market?keyword=${keyword}&catId=${cat_id}&subCatId=${sub_cat}&filterId=${filter_id}&page=${page}`)
+
+            return axios.get(`market/search?keyword=${keyword}&cat_id=${cat_id}&sub_cat_id=${sub_cat}&filter_id=${filter_id}&distanceInKM=${distance}&page=${page}`)
                 .then((res) => {
                     commit("setLoader", false);
                     console.log("Search results: ", res.data);

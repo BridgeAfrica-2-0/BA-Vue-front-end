@@ -55,7 +55,7 @@
             @change="searchByFilter(filter)"
             name="sub-filters"
           >
-            {{ filter.name }}//{{ selectedFilter }}
+            {{ filter.name }}
           </b-form-radio>
         </div>
 
@@ -152,7 +152,7 @@
         <hr />
       </span>
 
-      <b-form-group
+      <!-- <b-form-group
         label-cols-lg="12"
         :label="$t('search.Neighbourhood')"
         label-size="md"
@@ -173,49 +173,49 @@
 
       <b-link v-b-modal="'Neighbourhood'"> {{ $t("search.See_all") }} </b-link>
 
-      <br />
+      <br /> -->
 
-      <hr />
-
-      <b-form-group
-        label-cols-lg="12"
-        :label="$t('search.Distance')"
-        label-size="md"
-        label-class="font-weight-bold pt-0 text-left"
-        class="mb-0 text-left"
-      >
-        <b-form-checkbox id="" class="a-text" name="" value="">
-          3km</b-form-checkbox
-        >
-
-        <b-form-checkbox id="" class="a-text" name="" value="">
-          9km</b-form-checkbox
-        >
-
-        <b-form-checkbox id="" class="a-text" name="" value="">
-          15km</b-form-checkbox
-        >
-
-        <b-form-checkbox id="" class="a-text" name="" value="">
-          25km</b-form-checkbox
-        >
-      </b-form-group>
-
-      <b-link v-b-modal="'distance'"> {{ $t("search.See_all") }} </b-link>
+      <!-- <b-link v-b-modal="'distance'"> {{ $t("search.See_all") }} </b-link> -->
 
       <div>
         <span v-if="filterType == '4'">
-          <label>{{ $t("search.Price_Range") }}</label>
+          <b-form-group
+            label-cols-lg="12"
+            :label="$t('search.Neighbourhood')"
+            label-size="md"
+            label-class="font-weight-bold pt-0"
+            class="mb-0 text-left"
+          >
+            <b-form-radio
+              v-for="(nei, i) in userNeighbourhoods.slice(0, 4)"
+              :key="i.value"
+              v-model="selectedneigbourhood"
+              :value="nei.id"
+              @change="searchByNeigbourhood(nei)"
+              name="sub-filters"
+            >
+              {{ nei.name }}
+            </b-form-radio>
+          </b-form-group>
+
+          <b-link v-b-modal="'userNeighbourhood'">
+            {{ $t("search.See_all") }}
+          </b-link>
+
+          <br />
+          <label
+            ><b>{{ $t("search.Price_Range") }}</b></label
+          >
           <b-form-input
             id="range-2"
             v-model="priceRange"
             type="range"
-            min="1000"
-            max="200000000"
+            min="100"
+            max="2000000"
             step="0.5"
-            @change="searchByDistance"
+            @change="searchByPrice"
           ></b-form-input>
-          <div class="mt-2 text-left">min: 1000 Max: {{ priceRange }}</div>
+          <div class="mt-2 text-left">min: 100 Max: {{ priceRange }}</div>
         </span>
       </div>
     </div>
@@ -309,6 +309,34 @@
       <b-link v-b-modal="'distance'"> See all </b-link>
        -->
     </div>
+
+    <!-- Network -->
+    <div v-if="filterType == '4'">
+      <hr />
+      <b-form-group
+        label-cols-lg="12"
+        :label="$t('search.Distance')"
+        label-size="md"
+        label-class="font-weight-bold pt-0 text-left"
+        class="mb-0 text-left"
+      >
+        <b-row>
+          <b-col>
+            <b-form-input
+              v-model="distance"
+              placeholder="distance in KM"
+            ></b-form-input>
+          </b-col>
+          <b-col>
+            <b-button variant="primary" @click="searchByDistance">
+              <b-spinner v-if="prodLoader" small type="grow"></b-spinner>
+              search</b-button
+            >
+          </b-col>
+        </b-row>
+      </b-form-group>
+    </div>
+    <!-- End Network -->
 
     <!-- Network -->
     <div v-if="filterType == '3'">
@@ -451,6 +479,27 @@
 
     <component :is="currentFilter" />
 
+    <b-modal ref="myfilters" id="userNeighbourhood" hide-footer title=" ">
+      <b-form-group
+        label-cols-lg="12"
+        :label="$t('search.Neighbourhood')"
+        label-size="md"
+        label-class="font-weight-bold pt-0"
+        class="mb-0 text-left"
+      >
+        <b-form-radio
+          v-for="(nei, i) in userNeighbourhoods"
+          :key="i.value"
+          v-model="selectedneigbourhood"
+          :value="nei.id"
+          @change="searchByNeigbourhood(nei)"
+          name="sub-filters"
+        >
+          {{ nei.name }}
+        </b-form-radio>
+      </b-form-group>
+    </b-modal>
+
     <b-modal ref="myfilters" id="Neighbourhood" hide-footer title=" ">
       <b-form-group
         label-cols-lg="12"
@@ -510,7 +559,7 @@
           name="subCategories-list-modal"
           class=""
         >
-          {{ sub.name }}//{{ selected_sub_cat }}
+          {{ sub.name }}
         </b-form-radio>
       </div>
 
@@ -811,6 +860,7 @@ export default {
   data() {
     return {
       // [Edouard] data
+      distance: "",
       selected_sub_cat: [],
       newCategories: [],
       selectedFilter: [],
@@ -1885,13 +1935,20 @@ export default {
     councils() {
       return this.$store.getters["networkSearch/getCouncils"];
     },
+    userNeighbourhoods() {
+      return this.$store.getters["marketSearch/getUserNeighbourhoods"];
+    },
     neighbourhoods() {
       return this.$store.getters["networkSearch/getNeighbourhoods"];
+    },
+    prodLoader() {
+      return this.$store.getters["marketSearch/getLoader"];
     },
   },
 
   created() {
     this.getCountries();
+    this.getUserNeibourhoods();
     this.strategies = {
       2: () => PeopleFilter,
       5: () => PostFilter,
@@ -1901,6 +1958,8 @@ export default {
   methods: {
     getFilter(subCat) {
       // this.filterLoader = true;
+      console.log("[SUbcat]:", subCat);
+
       this.noFilter = "";
       this.$store.commit("marketSearch/setSubFilters", []);
 
@@ -2008,6 +2067,19 @@ export default {
       });
       this.$bvModal.hide("myModalllo");
     },
+    getUserNeibourhoods() {
+      console.log("[debug] neigbourhood: ", this.userNeighbourhoods);
+      this.$store
+        .dispatch("marketSearch/getUserNeigbourhoods")
+        .then((res) => {
+          console.log("[debug] neigbourhood: ", this.userNeighbourhoods);
+        })
+        .catch((err) => {
+          console.log("Error erro!");
+        });
+
+      console.log("[debug]neigbourhood: ", this.userNeighbourhoods);
+    },
 
     searchByNeigbourhood(nei) {
       let data = {
@@ -2022,6 +2094,15 @@ export default {
     },
 
     searchByDistance(value) {
+      console.log("[DEBUG] PRICE: ", value);
+      console.log("[DEBUG] subcat: ", this.subCategories[0].cat_id);
+
+      let data = {
+        distanceInKM: this.distance,
+      };
+      this.searchProducts(data);
+    },
+    searchByPrice(value) {
       console.log("[DEBUG] PRICE: ", value);
       console.log("[DEBUG] subcat: ", this.subCategories[0].cat_id);
       let catId = this.subCategories[0].cat_id;

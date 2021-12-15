@@ -702,8 +702,11 @@ export default {
       this.userOwnPage = this.onRedirect();
     },
 
-    credentials: function (newVal) {
-      this.searchOptions = newVal;
+    credentials: {
+      deep: true,
+      handler() {
+        this.searchOptions = this.credentials;
+      },
     },
 
     query(newQuery) {
@@ -720,7 +723,7 @@ export default {
       return JSON.stringify(value, null, 2);
     },
   },
-  
+
   methods: {
     ...mapActions({
       setNetworks: "social/FIND_USER_NETWORK",

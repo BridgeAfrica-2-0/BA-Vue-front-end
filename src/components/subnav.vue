@@ -15,6 +15,7 @@
               id="dropdown-1"
               :text="category.category.name"
               :ref="category.category.id"
+              @click="searchProduct({ cat_id: category.category.id })"
             >
               <hr
                 style="
@@ -28,28 +29,30 @@
               <br />
               <div>
                 <b-row>
-                  <b-col cols="6">
-                    <b-dropdown-item
-                      v-for="(subCat, subIndex) in category.sub_cat"
-                      :key="subIndex"
-                      @click="bcategory(subCat)"
-                      href="#"
-                    >
+                  <b-dropdown-item
+                    v-for="(subCat, subIndex) in category.sub_cat.slice(0, 6)"
+                    :key="subIndex"
+                    @click="bcategory(subCat)"
+                    href="#"
+                    class="ml-2"
+                  >
+                    <b-col cols="6">
                       <img
                         class="img-fluid picture logo-img"
                         :src="subCat.cat_image"
                       />
-                      {{ subCat.name }}
-                    </b-dropdown-item>
 
-                    <!-- <b-dropdown-item @click="category('More')" href="#"
+                      {{ subCat.name }}
+                    </b-col>
+                  </b-dropdown-item>
+
+                  <!-- <b-dropdown-item @click="category('More')" href="#"
                       ><img
                         class="img-fluid picture logo-img"
                         src="@/assets/icons/more.png"
                       />
                       More</b-dropdown-item
                     > -->
-                  </b-col>
                 </b-row>
               </div>
             </b-nav-item-dropdown>
@@ -74,12 +77,11 @@
                   cols="6"
                   v-for="(category, index) in categories.slice(6)"
                   :key="index"
+                  class="padding:50px"
                 >
                   <b-dropdown-item class="ml-1" @click="getProducts()">
                     {{ category.category.name }}
                   </b-dropdown-item>
-
-                  
                 </b-col>
               </b-row>
             </div>
@@ -102,10 +104,10 @@ export default {
   },
   computed: {
     categories() {
-      return this.$store.state.marketSearch.categories;
+      return this.$store.getters["marketSearch/getCategories"];
     },
     subCategories() {
-      return this.$store.state.marketSearch.subCategories;
+      return this.$store.getters["marketSearch/getSubCat"];
     },
   },
   created() {
@@ -130,16 +132,21 @@ export default {
     },
     async getProducts() {
       console.log("PRoducts ", this.$store.getters["marketSearch/getProducts"]);
-
       await this.$store.dispatch("marketSearch/getProducts");
+    },
+    async searchProduct(data) {
+      console.log("clicked...");
+      await this.$store.dispatch("marketSearch/searchProducts", data);
+      // console.log("PRoducts ", this.$store.getters["marketSearch/getProducts"]);
     },
 
     showSubCat(catId, subCat) {
       this.$refs[catId][0].visible = true;
       this.$emit("parentcategory", catId);
       // this.subCategories.push(subCat);
-      this.$store.commit("marketSearch/setSubCat", subCat);
 
+      // this.searchProduct({ catId: catId, cat_id: catId });
+      this.$store.commit("marketSearch/setSubCat", subCat);
       if (!subCat.length) this.hideSubCat(catId);
       console.log("Subcat:", this.subCategories);
     },

@@ -55,9 +55,7 @@ export default {
 
 
 .navbar-expand-lg {
-    /* flex-flow: row nowrap;
-    justify-content: flex-start;
-    margin-right: 0px !important; */
+    
     padding-right: 0px;
 }
 }

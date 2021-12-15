@@ -27,7 +27,7 @@
               @click="deleteAll(selected)" 
               :disabled="indeterminate ? false : true"
               class="a-button-l duration"
-            >Delete</b-button>
+            >{{ $t('network.Delete') }}</b-button>
           </div>
         </b-col>
       </b-row>

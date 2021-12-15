@@ -68,6 +68,7 @@
                 <b-col><b-button variant="primary" @click="confirmPayment" :disabled="bntStatus">{{ $t('businessowner.Free') }}</b-button></b-col>
               </b-row>
             </b-col>
+            
           </b-row>
         </b-modal>
 

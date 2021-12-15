@@ -1,6 +1,6 @@
 <template>
   <div>
-    <FlashMessage />
+    
     <div class="row">
       <div class="container-fluid" v-if="showalbum == false">
         <div class="one2">

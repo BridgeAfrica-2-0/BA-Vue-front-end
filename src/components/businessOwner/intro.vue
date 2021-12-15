@@ -462,33 +462,33 @@
 </script>
 
 <style scoped>
-	@media (max-width: 768px) {
-		.primary {
-			margin-right: 6px;
-			font-size: 12px !important;
-		}
+@import url("https://api.tiles.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css");
+@media (max-width: 768px) {
+  .primary {
+    margin-right: 6px;
+    font-size: 12px !important;
+  }
 
-		.card-text {
-			font-size: 14px !important;
-		}
-	}
+  .card-text {
+    font-size: 14px !important;
+  }
+}
 
-	@media (min-width: 768px) {
-		.primary {
-			margin-right: 8px;
-			font-size: 14px !important;
-		}
+@media (min-width: 768px) {
+  .primary {
+    margin-right: 8px;
+    font-size: 14px !important;
+  }
 
-		.card-text {
-			font-size: 14px !important;
-		}
-	}
+  .card-text {
+    font-size: 14px !important;
+  }
+}
 </style>
 
 <style>
-	.icon-size {
-		width: 24px;
-		height: 24px;
-	}
-	
+.icon-size {
+  width: 24px;
+  height: 24px;
+}
 </style>

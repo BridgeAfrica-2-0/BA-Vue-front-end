@@ -4,6 +4,7 @@ import './registerServiceWorker';
 import router from './router';
 import store from './store';
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue';
+
 import axios from 'axios';
 import VueAxios from 'vue-axios';
 import VueGallerySlideshow from 'vue-gallery-slideshow';
@@ -18,8 +19,10 @@ import homeIconData from '@iconify-icons/mdi-light/home';
 import ReadMore from 'vue-read-more';
 import VueSocialauth from 'vue-social-auth';
 
-
 import ShareNetwork from 'vue-social-sharing';
+import BtnCtaMessage from "@/components/messagesCTA/Btn-cta-message";
+Vue.component('BtnCtaMessage', BtnCtaMessage);
+
 Vue.use(ShareNetwork);
 
 import VueBootstrapTypeahead from 'vue-bootstrap-typeahead'
@@ -28,7 +31,6 @@ Vue.use('vue-bootstrap-typeahead', VueBootstrapTypeahead)
 // don't comment that 2 line URGENT
 import plugin from './http';
 Vue.use(plugin);
-
 
 Vue.use(require('vue-moment'));
 
@@ -39,9 +41,15 @@ Vue.use(VueAxios, axios);
 
 import LoadScript from 'vue-plugin-load-script';
 import InfiniteLoading from 'vue-infinite-loading';
-
+import VueAnimateOnScroll from 'vue-animate-onscroll'
+Vue.use(VueAnimateOnScroll)
 Vue.use(InfiniteLoading, {
     /* options */
+    slots: {
+        noMore: '',
+        error: "",
+        noResults: "",
+    },
 });
 Vue.use(LoadScript);
 
@@ -122,6 +130,7 @@ library.add(fas);
 Vue.component('fas-icon', FontAwesomeIcon);
 Vue.component('fab-icon', FontAwesomeIcon);
 
+
 import vueCountryRegionSelect from 'vue-country-region-select';
 Vue.use(vueCountryRegionSelect);
 
@@ -167,6 +176,10 @@ import VueAgile from 'vue-agile';
 
 
 Vue.use(VueAgile);
+
+
+import TextareaAutosize from 'vue-textarea-autosize'
+Vue.use(TextareaAutosize)
 
 
 import CoolLightBox from 'vue-cool-lightbox';
@@ -218,12 +231,10 @@ new Vue({
             },
         );
 
-        axios.interceptors.request.use(function (config) {
+        axios.interceptors.request.use(function(config) {
             if (user != null) {
-                config.headers.Authorization = `Bearer  ${user.accessToken}`;
+                config.headers.Authorization = `Bearer ${user.accessToken}`;
             }
-
-
 
             // config.headers.common['Language'] = i18n.locale;
             config.headers.common['Language'] = "en";

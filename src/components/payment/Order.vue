@@ -1,5 +1,5 @@
-<template
-	><b-card class="">
+<template>
+<b-card class="">
 		<div class="card-header title-font-size font-weight-bold bg-white h-50">
 			{{$t("Order.Review_and_confirm_your_Order")}} ( {{ cartLenght }} {{$t("Order.item")}})
 			<br />

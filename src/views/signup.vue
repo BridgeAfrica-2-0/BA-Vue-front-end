@@ -351,8 +351,7 @@ export default {
           this.flashMessage.show({
             status: "success",
             title: this.$t('auth.Successfully_Register'),
-            message:
-              this.$t('auth.Thanks_for_registering_You_will_get_your_otp_code_in_a_second'),
+        
           });
 
           this.$router.push({ name: "verifyAccount" });
@@ -426,8 +425,8 @@ export default {
 }
 
 .p-card {
-  padding-left: 90px;
-  padding-right: 90px;
+  padding-left: 60px;
+  padding-right: 60px;
   padding-top: 30px;
   padding-bottom: 30px;
 }

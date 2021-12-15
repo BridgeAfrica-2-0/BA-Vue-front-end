@@ -4,97 +4,12 @@
       <span>
         <h6 class="title mt-3">
           <fas-icon class="icons icon-color" :icon="['fab', 'readme']" size="lg" />
-          <b>{{ $t('dashboard.Posts') }} </b>
+          <b class="ml-2">{{ $t('dashboard.Posts') }} </b>
         </h6>
       </span>
 
       <div class="s-card">
-        <!-- <div v-for="item in owner_post" :key="item.post_id">
-          <div class="mt-2">
-            <div class="d-inline-flex">
-              <span md="1" class="m-0 p-0">
-                <b-avatar class="d-inline-block avat" variant="primary" :src="item.profile_picture"></b-avatar>
-              </span>
-              <div class="pl-2 pl-md-3 pt-md-2">
-                <h5 class="m-0 usernamee">
-                  {{ item.name }}
-                </h5>
-                <p class="durationn">{{ moment(item.created_at).fromNow() }}</p>
-              </div>
-
-              <div class="toright pt-2"></div>
-            </div>
-            <div class="m-0 p-0">
-              <p class="post-text">
-                <read-more
-                  v-if="item.content"
-                  more-str="read more"
-                  :text="item.content"
-                  link="#"
-                  less-str="read less"
-                  :max-chars="200"
-                ></read-more>
-              </p>
-            </div>
-
-            <div v-if="item.media.length > 0" class="">
-              <span v-for="video in mapvideo(item.media)" :key="video">
-                <youtube
-                  class="w-100 videoh"
-                  :video-id="getId(video)"
-                  :player-vars="playerVars"
-                  @playing="playing"
-                ></youtube>
-              </span>
-
-              <light css=" " :cells="item.media.length" :items="mapmediae(item.media)"></light>
-
-              <light
-                css=" "
-                :cells="item.media.length"
-                :items="
-                  item.media.map(function (a) {
-                    return a.media_url;
-                  })
-                "
-              ></light>
-            </div>
-            <b-row>
-              <b-col cols="12" class="mt-2">
-              </b-col>
-              <b-col class="mt-1">
-                <span class="mr-3"
-                  ><b-icon icon="suit-heart" variant="primary" aria-hidden="true"></b-icon>
-                  {{ nFormatter(item.likes_count) }}
-                </span>
-                <span
-                  ><b-icon icon="chat-fill" variant="primary" aria-hidden="true"></b-icon>
-                  {{ nFormatter(item.comment_count) }}
-                </span>
-
-                <span>
-                  <fas-icon class="primary ml-3" :icon="['fas', 'share']" />
-                </span>
-              </b-col>
-            </b-row>
-          </div>
-
-          <div class="mt-2 d-inline-flex w-100">
-            <div class="m-md-0 p-md-0">
-              <b-avatar variant="primary" :src="info.user.profile_picture" class="img-fluid avat-comment"></b-avatar>
-            </div>
-
-            <div  class="p-0 m-0 pr-3 inline-comment">
-              <input :placeholder="$t('dashboard.Post_a_Comment')" class="comment" type="text" />
-
-              <fas-icon class="primary send-cmt" :icon="['fas', 'paper-plane']" />
-            </div>
-          </div>
-
-          <Comment v-for="comment in item.comments" :key="comment.id" :comment="comment" />
-          <hr />
-        </div> -->
-
+      
          <Post
           v-for="(item, index) in owner_post"
           :key="index"

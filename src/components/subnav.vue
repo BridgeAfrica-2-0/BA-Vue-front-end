@@ -5,12 +5,12 @@
       <b-col cols="8" lg="10" style="text-align: left">
         <span style="display: inline-flex">
           <span
-            v-for="(category, index) in categories"
+            v-for="(category, index) in categories.slice(0, 6)"
             :key="index"
             @mouseover="showSubCat(category.category.id, category.sub_cat)"
-            @click="clickshowSubCat(category.category.id,  category.sub_cat)"
+            @click="showSubCat(category.category.id, category.sub_cat)"
             @mouseleave="hideSubCat(category.category.id)"
-          > 
+          >
             <b-nav-item-dropdown
               id="dropdown-1"
               :text="category.category.name"
@@ -34,7 +34,8 @@
                       :key="subIndex"
                       @click="bcategory(subCat)"
                       href="#"
-                      ><img
+                    >
+                      <img
                         class="img-fluid picture logo-img"
                         :src="subCat.cat_image"
                       />
@@ -53,6 +54,36 @@
               </div>
             </b-nav-item-dropdown>
           </span>
+        </span>
+        <span @mouseover="onOverMore()" @mouseleave="onLeaveMore()">
+          <b-nav-item-dropdown id="dropdown-1" text="More" ref="more">
+            <hr
+              style="
+                margin-top: -10px;
+                background-color: red;
+                height: 3px;
+                width: 40%;
+                float: left;
+              "
+            />
+            <br />
+
+            <div>
+              <b-row>
+                <b-col
+                  cols="6"
+                  v-for="(category, index) in categories.slice(6)"
+                  :key="index"
+                >
+                  <b-dropdown-item class="ml-1" @click="getProducts()">
+                    {{ category.category.name }}
+                  </b-dropdown-item>
+
+                  
+                </b-col>
+              </b-row>
+            </div>
+          </b-nav-item-dropdown>
         </span>
 
         <div></div>
@@ -82,16 +113,12 @@ export default {
   },
 
   methods: {
-
-
-      bcategory(category) {
+    bcategory(category) {
       this.$emit("category", category);
       console.log(category);
     },
 
-    
     getCategories() {
-     
       this.$store
         .dispatch("marketSearch/getCategories")
         .then((res) => {
@@ -101,36 +128,21 @@ export default {
           console.log("Error erro!");
         });
     },
+    async getProducts() {
+      console.log("PRoducts ", this.$store.getters["marketSearch/getProducts"]);
 
-  
-
-
-
-
-
-
+      await this.$store.dispatch("marketSearch/getProducts");
+    },
 
     showSubCat(catId, subCat) {
-      this.$refs[catId][0].visible = true;     
+      this.$refs[catId][0].visible = true;
       this.$emit("parentcategory", catId);
       // this.subCategories.push(subCat);
-      this.$store.commit('marketSearch/setSubCat', subCat)
+      this.$store.commit("marketSearch/setSubCat", subCat);
 
-      if (!subCat.length) this.hideSubCat(catId)
+      if (!subCat.length) this.hideSubCat(catId);
       console.log("Subcat:", this.subCategories);
     },
-
-clickshowSubCat(catId, subCat) {
-      this.$refs[catId][0].visible = true;     
-      this.$emit("parentcategory", catId);
-      this.$emit("category", {cat_id:catId});
-     
-      this.$store.commit('marketSearch/setSubCat', subCat)
-
-      if (!subCat.length) this.hideSubCat(catId)
-      console.log("Subcat:", this.subCategories);
-    },
-
     hideSubCat(catId) {
       this.$refs[catId][0].visible = false;
       this.subCategories = [];

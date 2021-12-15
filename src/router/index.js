@@ -93,7 +93,7 @@ const routes = [
     //   auth: true,
     // },
   },
-  
+
 
   {
     path: "/",
@@ -185,9 +185,6 @@ const routes = [
     name: "payment",
     component: payment
   },
-
-
-
   {
     path: "/welcome",
     name: "welcome",
@@ -223,7 +220,6 @@ const routes = [
     name: "BusinessOwner",
     component: businessOwner,
   },
-
 
   {
     path: "/business_editor/:id?",
@@ -262,11 +258,12 @@ const routes = [
     name: "networks",
     component: networks,
   },
+
   {
     path: "/network_editors/:id?",
     name: "NetworkEditors",
     component: networkEditors,
-  },  
+  },
   {
     path: "/network_member/:id?",
     name: "memberNetwork",
@@ -279,12 +276,25 @@ const routes = [
     component: memberNetworkFollower,
 
   },
+
+  {
+    path: "/network_member/:id?",
+    name: "memberNetwork",
+    component: memberNetwork,
+  },
+
+  {
+    path: "/network_follower/:id?",
+    name: "Membar Network Follower",
+    component: memberNetworkFollower,
+
+  },
+
   {
     path: "/login",
     name: "Login",
     component: Login,
   },
-
   {
     path: "/signup",
     name: "signup",
@@ -331,8 +341,8 @@ const routes = [
     name: "BusinessVisitor",
     component: businessVisitor,
   },
-  
-  
+
+
 
   {
     path: "/profilevisitor",
@@ -340,7 +350,7 @@ const routes = [
     component: Visitor,
   },
   {
-    path: "/search/:id",
+    path: "/search",
     name: "Search",
     component: search,
   },
@@ -361,7 +371,7 @@ const routes = [
   },
 
   {
-    path: "/search",
+    path: "/search/:id",
     name: "Search",
     component: search,
   },
@@ -376,24 +386,16 @@ const routes = [
     component: navMessage,
   },
 
-{
-  path: "/services/:id",
-  name: "Service",
-  component: service,
-},
-{
-  path: "/services/modify/:id",
-  name: "Modify",
-  component: Modifier,
-  beforeEnter: (to, from, next) => {
-    console.log("dedans");
-    if (store.state.login && store.state.isToi) {
-      next();
-    } else {
-      next({ name: "Login" });
-    }
-  }
-},
+  {
+    path: "/services/:id",
+    name: "Service",
+    component: service,
+  },
+  {
+    path: "/memberNetworkFollower/:id?",
+    name: "Membar Network Follower",
+    component: memberNetworkFollower,
+  },
 
   {
     path: "*",
@@ -404,30 +406,30 @@ const routes = [
 ];
 
 const router = new VueRouter({
-    mode: "history",
-    base: process.env.BASE_URL,
-    routes,
+  mode: "history",
+  base: process.env.BASE_URL,
+  routes,
 });
 
 router.beforeEach((to, from, next) => {
-    const loggedIn = localStorage.getItem("user");
+  const loggedIn = localStorage.getItem("user");
 
-    if (to.matched.some((record) => record.meta.auth) && !loggedIn) {
-        next("/login");
+  if (to.matched.some((record) => record.meta.auth) && !loggedIn) {
+    next("/login");
 
-        return;
+    return;
+  }
+
+  if (to.matched.some((record) => record.meta.auth)) {
+    const dat = localStorage.getItem("user");
+    const userdata = JSON.parse(dat);
+
+    if (userdata.user.verified_at == null) {
+      //  next("/verify");
     }
+  }
 
-    if (to.matched.some((record) => record.meta.auth)) {
-        const dat = localStorage.getItem("user");
-        const userdata = JSON.parse(dat);
-
-        if (userdata.user.verified_at == null) {
-            //  next("/verify");
-        }
-    }
-
-    next();
+  next();
 });
 
 export default router;

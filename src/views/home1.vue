@@ -1,52 +1,22 @@
 
 <template>
   <div>
-    <head>
-      <meta charset="utf-8" />
-      <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-
-      <title>Bridge Africa</title>
-      <meta content="" name="description" />
-      <meta content="" name="keywords" />
-
-      <!-- Favicons -->
-      <link href="assets/img/favicon.png" rel="icon" />
-      <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
-
-      <!-- Google Fonts -->
-      <!-- <link
-        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Jost:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-        rel="stylesheet"
-      /> -->
-    </head>
+  
 
     <!-- ======= Header ======= -->
+    
+
+     <site-header class="topbar" />   
     <header id="header" class="fixed-topp">
-      <div class="container d-flex align-items-center">
-        <!--  <h1 class="logo mr-auto"><a href="index.html">Arsha</a></h1>
-        Uncomment below if you prefer to use an image logo -->
-        <a href="index.html" class="logo mr-auto"
-          ><img src="../assets/img/BAC-clear-dotted-logo.png" alt="" class="img-fluid b-logo"
-        /></a>
+      <div class=" d-flex align-items-center">
+      
+      
 
-        <!-- <nav class="nav-menu d-none d-lg-block">
-          <ul>
-            <li class="active"><a href="index.html">Home</a></li>
-            <li><a href="http://info.bridgeafrica.com/">About Us</a></li>
-
-            <li>
-              <a href="http://info.bridgeafrica.com/contact">Contact Us</a>
-            </li>
-
-            <li><a href="#">Login</a></li>
-
-            <li><a href="#">Signup</a></li>
-          </ul>
-        </nav> -->
+        
 
 
       <div>
-  <b-navbar toggleable="sm" type="ligth" variant="ligth">
+  <!-- <b-navbar toggleable="sm" type="ligth" variant="ligth">
    
 
     <b-navbar-toggle target="nav-collapse ">
@@ -56,25 +26,25 @@
       </template>
     </b-navbar-toggle>
 
-    <b-collapse id="nav-collapse" is-nav>
+    <b-collapse id="nav-collapse" is-nav> -->
       
 
       <!-- Right aligned nav items -->
-      <b-navbar-nav class="ml-auto bold size_nav" >
+      <!-- <b-navbar-nav class="ml-auto bold size_nav" >
        
       <b-nav-item > <router-link to="/" class="mx-2">{{ $t('home.Home') }}</router-link></b-nav-item>
         
          <b-nav-item ><router-link :to="{ name: 'about' }" class="mx-2">{{ $t('home.About_Us') }} </router-link></b-nav-item>
         
         <b-nav-item > <router-link :to="{ name: 'contact' }" class="mx-2">  {{ $t('home.Contact_Us') }}  </router-link></b-nav-item>
-         <!-- <b-nav-item href="#">About Us</b-nav-item> -->
+      
          <b-nav-item ><router-link to="/login" class="mx-2">  {{ $t('home.Login') }}  </router-link></b-nav-item>
         <b-nav-item ><router-link to="/signup" class="mx-2"> {{ $t('home.Signup') }} </router-link></b-nav-item>
 
 
       </b-navbar-nav>
     </b-collapse>
-  </b-navbar>
+  </b-navbar> -->
 </div>
 
 
@@ -252,13 +222,14 @@
         <div class="container">
           <div class="row">
             <div
-              class="col-auto col-sm-12 col-md-6 col-lg-3 col-xl-3"
+              class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3"
               style="
                 padding-top: 15px;
                 padding-bottom: 15px;
                 padding-right: 15px;
                 padding-left: 15px;
               "
+
             >
               <div
                 class="bg-light border rounded shadow card"
@@ -291,7 +262,7 @@
               </div>
             </div>
             <div
-              class="col-auto col-sm-12 col-md-6 col-lg-3 col-xl-3"
+              class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3"
               style="
                 padding-top: 15px;
                 padding-bottom: 15px;
@@ -330,7 +301,7 @@
               </div>
             </div>
             <div
-              class="col-auto col-sm-12 col-md-6 col-lg-3 col-xl-3"
+              class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3"
               style="
                 padding-top: 15px;
                 padding-bottom: 15px;
@@ -369,7 +340,7 @@
               </div>
             </div>
             <div
-              class="col-auto col-sm-12 col-md-6 col-lg-3 col-xl-3"
+              class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3"
               style="
                 padding-top: 15px;
                 padding-bottom: 15px;
@@ -411,7 +382,7 @@
         </div>
       </div>
     </section>
-    <div class="w-100 text-light" @mouseover="animation">  .</div>
+    <!-- <div class="w-100 text-light"  id="animation"   >  .</div> -->
     <section id="why-us" class="why-us">
       <div class="container-fluid" id="anim">
         <div class="row">
@@ -437,7 +408,7 @@
               </p>
 
               <div class="text-center w-100">
-                <router-link to="login">
+                <router-link :to="{name: 'signup'}">
 
                 <button
                   class="btn btn-primary mt-5 bridge-btn float-left bridge-btn"
@@ -462,8 +433,9 @@
           >
             &nbsp;
 
-            <div class="scroll-container"  >
-              <!-- <div class="  slide-"> -->
+            <!-- <div class="scroll-container "  >
+             
+                 <div class="taille scroll-element js-scroll slide-left">
                 <video
                   class="business-vid1 size_video1"
                   playsinline
@@ -476,8 +448,8 @@
                 >
                   <source src="../assets/video/identity.mp4" type="video/mp4" />
                 </video>
-              <!-- </div> -->
-              <div class="sizeimg hidde" id="hidde">
+              </div>
+              <div class="scroll-caption  hidde" id="hidde">
                 <img
                   src="../assets/img/african-farmer.jpg"
                   height="700px"
@@ -485,6 +457,24 @@
                   
                   alt=""
                 />
+              </div>
+            </div> -->
+            
+             <div class="scroll-container ">
+              <div class="scroll-element js-scroll slide-left text-center">
+
+                <video class="business-vid1" playsinline autoplay muted loop poster="assets/img/Home scroll copy.png"
+                  id="Test_Video">
+
+                  <source src="../assets/video/identity.mp4" type="video/mp4">
+                </video>
+
+              </div>
+              <div class="scroll-caption hidde " id="hidde">
+
+
+                <img src="../assets/img/african-farmer.jpg" height="700px" class="d-none d-xl-block"
+                  style="height: 700px; margin-left: -300px;" alt="">
               </div>
             </div>
           </div>
@@ -515,7 +505,7 @@
               </p>
 
               <div class="text-center w-100">
-               <router-link to="login">
+               <router-link :to="{name: 'signup'}">
 
                 <button
                   class="btn btn-primary mt-5 bridge-btn float-left bridge-btn"
@@ -579,7 +569,7 @@
               </p>
 
               <div class="text-center w-100">
-                <router-link to="login">
+                <router-link :to="{name: 'signup'}">
 
                 <button
                   class="btn btn-primary mt-5 bridge-btn float-left bridge-btn"
@@ -641,7 +631,7 @@
               </p>
 
               <div class="text-center w-100">
-                <router-link to="login">
+                <router-link :to="{name: 'signup'}">
 
                 <button
                   class="btn btn-primary mt-5 bridge-btn float-left bridge-btn"
@@ -695,7 +685,7 @@
               p-0
             "
           >
-            <div class="carousel slide" data-ride="carousel" id="carousel-1">
+            <!-- <div class="carousel slide" data-ride="carousel" id="carousel-1">
               <div class="carousel-inner" role="listbox">
                 <div class="carousel-item active">
                   <img
@@ -739,7 +729,37 @@
                 ></li>
                 <li data-target="#carousel-1" data-slide-to="1"></li>
               </ol>
-            </div>
+            </div> -->
+         
+          <div>
+  <b-carousel
+    id="carousel-no-animation"
+    style="text-shadow: 0px 0px 2px #000"
+    no-animation
+    indicators
+    img-width="1024"
+    img-height="480"
+  >
+    <b-carousel-slide
+      caption=""
+      :img-src="img1"
+    ></b-carousel-slide>
+    <b-carousel-slide
+      caption=""
+      :img-src="require('../assets/img/coach2.png')"
+    ></b-carousel-slide>
+    <!-- <b-carousel-slide
+      caption="Third Slide"
+      img-src="https://picsum.photos/1024/480/?image=22"
+    ></b-carousel-slide>
+    <b-carousel-slide
+      caption="Fourth Slide"
+      img-src="https://picsum.photos/1024/480/?image=23"
+    ></b-carousel-slide> -->
+  </b-carousel>
+</div>
+
+
           </div>
 
           <div
@@ -762,7 +782,7 @@
                 {{ $t('home.We_provide_face_to_face_digital_literacy_trainings') }} 
                 {{ $t('home.for_businesses_who_lack_digital_know_how_through_our_army_of_digital_coaches') }}
               </p>
-                <router-link to="login">
+                <router-link :to="{name: 'signup'}">
 
               <button class="btn btn-primary mt-5 bridge-btn bridge-btn mb-3">
                 {{ $t('home.See_Videos') }}
@@ -830,11 +850,11 @@
                 <li class="white"><a href="#">{{ $t('home.Home') }}</a></li>
 
                 <li class="white">
-                  <a href="http://info.bridgeafrica.com">{{ $t('home.About_Us') }}</a>
+                  <router-link :to="{name: 'about'}">{{ $t('home.About_Us') }}</router-link>
                 </li>
 
                 <li class="white">
-                  <a href="http://info.bridgeafrica.com/contact/">{{ $t('home.Contact_Us') }}</a>
+                  <router-link :to="{name: 'contact'}">{{ $t('home.Contact_Us') }}</router-link>
                 </li>
 
                 <!--   
@@ -880,14 +900,15 @@
 import "../assets/js/main.js";
 // import "../assets/js/js.js";
 import Button from '@/components/ButtonNavBarFind.vue';
-//import SiteHeader from '../components/site/siteHeader';
+import SiteHeader from '../components/site/siteHeader';
 export default {
-  components: {Button},
+  components: {Button, SiteHeader},
   data(){
     return {
       expanded:true,
       word1:'',
-      word2:''
+      word2:'',
+      img1:require('../assets/img/coach.png')
     }
   },
 
@@ -956,7 +977,7 @@ export default {
     },
 
     animation(){
-      
+      console.log("annimation----")
   var id = null;
   var elem = document.getElementById("Test_Video");
   var pos = 0;
@@ -973,6 +994,7 @@ export default {
       elem.style.zIndex = "1";
       elem.style.left = pos + 'px';
     if(pos == 50){
+      // document.getElementById("animation").removeEventListener("scroll")
        elem.style.left = 0 + 'px';
     }
   } 
@@ -982,10 +1004,135 @@ export default {
   }
   },
   mounted(){
-    document.getElementById("why-us").onscroll = function() {
+      
 
-      this.animation();
+    
+
+//     document.getElementById("animation").addEventListener("scroll", () => {
+//     this.animation();
+// });
+
+    // document.getElementById("animation").addEventListener("scroll", () => {
+    // this.animation();
+    // window.removeEventListener("scroll")
+// });
+
+
+
+    var v = document.getElementById("Test_Video");
+
+
+    var v2 = document.getElementById("Test_Video2");
+
+    var v3 = document.getElementById("Test_Video3");
+
+
+    v.playbackRate = 0.8;
+    v2.playbackRate = 0.8;
+    v3.playbackRate = 0.8;
+
+
+
+    const scrollElements = document.querySelectorAll(".js-scroll");
+
+
+    const scrollElements2 = document.querySelectorAll(".hidde");
+
+
+
+
+    const elementInView = (el, dividend = 1) => {
+      const elementTop = el.getBoundingClientRect().top;
+      console.log(document.documentElement.clientHeight);
+
+      return (
+        elementTop <=
+        (30) / dividend
+        //( 100) / dividen
+      );
     };
+
+    const elementOutofView = (el) => {
+      const elementTop = el.getBoundingClientRect().top;
+
+      return (
+        elementTop > (window.innerHeight || document.documentElement.clientHeight)
+      );
+    };
+
+    const displayScrollElement = (element) => {
+      element.classList.add("scrolled");
+
+
+
+
+
+    };
+
+    const displayScrollElement2 = (element) => {
+      element.classList.add("js-scrolll");
+
+
+
+
+
+    };
+
+    const hideScrollElement2 = (element) => {
+      element.classList.remove("js-scrolll");
+
+    };
+
+
+    const hideScrollElement = (element) => {
+      element.classList.remove("scrolled");
+
+    };
+
+
+    const handleScrollAnimation = () => {
+
+      scrollElements.forEach((el) => {
+        if (elementInView(el, 1.25)) {
+          displayScrollElement(el);
+
+
+
+        } else if (elementOutofView(el)) {
+          hideScrollElement(el);
+
+
+
+        }
+      });
+
+
+      scrollElements2.forEach((el) => {
+        if (elementInView(el, 1.25)) {
+          displayScrollElement2(el);
+
+
+
+
+        } else if (elementOutofView(el)) {
+          hideScrollElement2(el);
+
+
+
+
+        }
+      })
+
+    }
+
+    window.addEventListener("scroll", () => {
+      handleScrollAnimation();
+    });
+
+
+
+
+ 
 
   }
 };
@@ -1009,6 +1156,9 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Merriweather&family=Merriweather+Sans:wght@300&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Jost:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i");
 
+.zoomInUp{
+  background-color: #cc4d0d;
+}
 .couleur{
   color: #e75c18 ;
   
@@ -1108,10 +1258,31 @@ export default {
   .mt-md-30 {
     margin-top: 20px;
   }
+
+  .hidde{
+    display: none;
+  }
 }
 
 @media only screen and (min-width: 768px) {
 
+.scroll-container {
+   
+    width: 1000px !important;
+}
+  .d-xl-block {
+    display: block !important;
+    /* margin-left: 100px !important; */
+    
+        /* height: 530px !important;
+    width: 390px */
+}
+.taille{
+  height: 704px;
+}
+.topbar{
+    /* position: fixed; */
+}
 
   .sizeimg{
     border: solid;
@@ -1119,8 +1290,8 @@ export default {
     margin-right: -20px;
   }
   .size_video1{
-    /* width: 400px !important;
-    height: 700px !important; */
+    width: 400px !important;
+    height: 700px !important;
   }
 
   .bridge-btn{
@@ -1177,14 +1348,14 @@ export default {
 
   .business-vid {
     width: 1000px;
-    margin-left: -50%;
+    /* margin-left: -50%; */
     z-index: 1;
     position: relative;
   }
 
   .business-vid1 {
-    height: 704px;
-    width: 396px;
+    height: 704px !important;
+    width: 396px ;
     z-index: 1;
     position: relative;
   }
@@ -1256,7 +1427,7 @@ export default {
   .business-vid1 {
     height: 700px;
 
-    margin-left: -10%;
+    /* margin-left: -10%; */
 
     z-index: 1;
     position: relative;
@@ -1345,7 +1516,9 @@ header h2 {
 }
 
 .scroll-caption {
-  margin: 1rem;
+  
+      margin-left: 200px;
+    height: 700px !important;
 }
 
 footer {

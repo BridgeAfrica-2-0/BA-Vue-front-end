@@ -1,34 +1,43 @@
 <template>
   <div>
-
-    <div v-for="business in businesses" :key="business.id"  class="people-style shadow">
+    <div
+      v-for="business in businesses"
+      :key="business.id"
+      class="people-style shadow"
+    >
       <b-row>
-        <div style="display:none;">{{business['type']= 'business'}}</div>
+        <div style="display: none">{{ (business["type"] = "business") }}</div>
         <b-col md="3" xl="5" lg="5" cols="5" sm="3">
           <div class="center-img">
             <splide :options="options" class="r-image">
               <splide-slide cl>
-                <img
-                  :src="business.logo_path"
-                  class="r-image"
-                />
+                <img :src="business.logo_path" class="r-image" />
               </splide-slide>
             </splide>
           </div>
         </b-col>
         <b-col md="5" cols="7" lg="7" xl="7" sm="5">
           <p class="textt">
-            <strong class="title"> {{business.name.substring(0,10)+"..."}} </strong> <br />
-            {{business.category}}
+            <strong class="title">
+              {{ business.name.substring(0, 10) + "..." }}
+            </strong>
             <br />
-            {{business.followers}} {{ $t('network.Community')}} <br />
+            {{ business.category }}
+            <br />
+            {{ business.followers }} {{ $t("network.Community") }} <br />
 
             <span class="location">
-              <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{business.location_description}}
+              <b-icon-geo-alt class="ico"></b-icon-geo-alt>
+              {{ business.location_description }}
             </span>
             <br />
-            <span v-if="business.about_business.length<15">{{ business.about_business}}</span>
-            <span v-else >{{ business.about_business.substring(0,15)+"..." }} <b-link>{{ $t('network.Read_More') }}</b-link></span>
+            <span v-if="business.about_business.length < 15">{{
+              business.about_business
+            }}</span>
+            <span v-else
+              >{{ business.about_business.substring(0, 15) + "..." }}
+              <b-link>{{ $t("network.Read_More") }}</b-link></span
+            >
           </p>
         </b-col>
 
@@ -51,8 +60,14 @@
                   @click="$emit('handleFollow', business)"
                   :style="business.is_follow !== 0 ? 'background-color: rgb(162,107,80);' : ''"
                 >
-                  <i :class="business.is_follow ? 'fas fa-user-minus fa-lg btn-icon':'fas fa-user-plus fa-lg btn-icon'"></i>
-                  <span class="btn-com">{{ $t('network.Community')}}</span>
+                  <i
+                    :class="
+                      business.is_follow
+                        ? 'fas fa-user-minus fa-lg btn-icon'
+                        : 'fas fa-user-plus fa-lg btn-icon'
+                    "
+                  ></i>
+                  <span class="btn-com">{{ $t("network.Community") }}</span>
                 </b-button>
               </b-col>
 
@@ -64,15 +79,7 @@
                 cols="4"
                 class="mt-2 text-center"
               >
-                <b-button
-                  block
-                  size="sm"
-                  class="b-background shadow"
-                  variant="primary"
-                >
-                  <i class="fas fa-envelope fa-lg btn-icon"></i>
-                  <span class="btn-text">{{ $t('network.Message') }}</span>
-                </b-button>
+                <BtnCtaMessage :element="business" type="business" />
               </b-col>
 
               <b-col
@@ -90,7 +97,7 @@
                   variant="primary"
                 >
                   <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
-                  <span class="btn-text">{{ $t('network.Direction') }}</span>
+                  <span class="btn-text">{{ $t("network.Direction") }}</span>
                 </b-button>
               </b-col>
             </b-row>
@@ -98,8 +105,6 @@
         </b-col>
       </b-row>
     </div>
-
-    
   </div>
 </template>
 
@@ -120,8 +125,6 @@ export default {
       },
     };
   },
-
-
 };
 </script>
 

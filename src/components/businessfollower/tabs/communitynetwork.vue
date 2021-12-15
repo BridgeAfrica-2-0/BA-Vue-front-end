@@ -34,20 +34,23 @@
               <div class="s-button">
                 <b-row>
                   <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2">
-                    <b-button block size="sm" class="b-background shadow" variant="primary">
-                      <i class="fas fa-user-plus  fa-lg btn-icon "></i>
+                    <b-button
+                      block
+                      size="sm"
+                      class="b-background shadow"
+                      variant="primary"
+                    >
+                      <i class="fas fa-user-plus fa-lg btn-icon"></i>
                       <span class="btn-com" v-b-modal.modal-sm>Community</span>
                     </b-button>
                   </b-col>
 
                   <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2">
-                    <b-button block size="sm" class="b-background shadow" variant="primary"
-                      ><i class="fas fa-envelope   fa-lg btn-icon "></i>
-                      <span class="btn-text">Message</span>
-                    </b-button>
+                    <BtnCtaMessage :element="item" type="network" />
                   </b-col>
 
-                  <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2"> </b-col>
+                  <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2">
+                  </b-col>
                 </b-row>
               </div>
             </b-col>
@@ -56,14 +59,18 @@
       </b-col>
     </b-row>
 
-    <infinite-loading :identifier="infiniteId" @infinite="infiniteHandler" ref="infiniteLoading"></infinite-loading>
+    <infinite-loading
+      :identifier="infiniteId"
+      @infinite="infiniteHandler"
+      ref="infiniteLoading"
+    ></infinite-loading>
   </div>
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 export default {
-  props: ['type', 'searchh'],
+  props: ["type", "searchh"],
   data() {
     return {
       page: 1,
@@ -74,14 +81,14 @@ export default {
         perPage: 1,
         pagination: false,
 
-        type: 'loop',
+        type: "loop",
         perMove: 1,
       },
     };
   },
   computed: {
     network() {
-      if (this.type == 'Follower') {
+      if (this.type == "Follower") {
         return this.$store.state.profile.NcommunityFollower.network_followers;
       } else {
         return this.$store.state.profile.NcommunityFollowing.network_following;
@@ -91,14 +98,20 @@ export default {
 
   methods: {
     search() {
-      console.log('search started');
+      console.log("search started");
       console.log(this.type);
 
-      if (this.type == 'Follower') {
-        console.log('follower');
-        this.$store.commit('profile/setNcommunityFollower', { network_followers: [], total_network_follower: 0 });
+      if (this.type == "Follower") {
+        console.log("follower");
+        this.$store.commit("profile/setNcommunityFollower", {
+          network_followers: [],
+          total_network_follower: 0,
+        });
       } else {
-        this.$store.commit('profile/setNcommunityFollowing', { network_following: [], total_network_following: 0 });
+        this.$store.commit("profile/setNcommunityFollowing", {
+          network_following: [],
+          total_network_following: 0,
+        });
       }
 
       this.page = 1;
@@ -110,19 +123,19 @@ export default {
     infiniteHandler($state) {
       let url = null;
 
-      if (this.type == 'Follower') {
-        url = 'profile/network/follower/';
+      if (this.type == "Follower") {
+        url = "profile/network/follower/";
       } else {
-        url = 'profile/network/following/';
+        url = "profile/network/following/";
       }
 
-      console.log(url + this.page + '?keyword=' + this.searchh);
+      console.log(url + this.page + "?keyword=" + this.searchh);
       axios
-        .get(url + this.page + '?keyword=' + this.searchh)
+        .get(url + this.page + "?keyword=" + this.searchh)
         .then(({ data }) => {
-          console.log('lading network after response');
+          console.log("lading network after response");
           console.log(data);
-          if (this.type == 'Follower') {
+          if (this.type == "Follower") {
             if (data.data.network_followers.length) {
               this.page += 1;
               this.network.push(...data.data.network_followers);
@@ -143,7 +156,7 @@ export default {
             }
           }
         })
-        .catch(err => {
+        .catch((err) => {
           console.log({ err: err });
         });
     },
@@ -218,13 +231,13 @@ export default {
     color: black;
 
     line-height: 35px;
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 
   .textt {
     color: #000;
 
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
@@ -271,13 +284,13 @@ export default {
     color: black;
 
     line-height: 35px;
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 
   .textt {
     color: #000;
 
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;

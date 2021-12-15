@@ -6,9 +6,9 @@
         <b-col cols="3" md="1" class="m-md-0 p-md-0">
           <b-avatar
             variant="primary"
-            square
+            :square =" 'user' === profile.user_type ? false : true"
             class="img-fluid avat-comment"
-            :src="business_intro.logo_path"
+            :src="profile.profile_picture"
           ></b-avatar>
         </b-col>
         <b-col cols="9" md="11" class="p-0 m-0 pr-3">
@@ -39,7 +39,7 @@
                 class="post-btn"
               >
                 <fas-icon class="icons" :icon="['fas', 'photo-video']" size="lg" />
-                <span class="username"> {{ $t('businessowner.Photo_Video') }}</span>
+                <span class="username">{{ $t('businessowner.Photo_Video') }}</span>
               </b-button>
             </b-col>
             <!-- Attach File-->
@@ -76,8 +76,8 @@
     </b-card>
 
     <!-- User Posts Listing Section-->
-    <b-card class="px-md-3">
-      <div class="">
+    
+      <div class="px-md-3">
         <div class="col-md-12 col-lg-12 d-flex align-items-stretch mb-lg-0" style="padding-left: 0; padding-top: 3px">
           <b-modal id="modal-edit" ref="modal-edit" centered hide-footer :title="$t('businessowner.Update_Post')" @hidden="resetPostData">
             <b-row ref="loader">
@@ -512,7 +512,7 @@
       />
 
       <infinite-loading :identifier="infiniteId" ref="infiniteLoading" @infinite="infiniteHandler"></infinite-loading>
-    </b-card>
+    
   </div>
 </template>
 
@@ -520,7 +520,7 @@
 import moment from "moment";
 import axios from "axios";
 
-import { mapGetters } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 
 import Post from "./ownerPostComponent.vue";
 
@@ -559,19 +559,28 @@ export default {
   },
 
   created() {
-    this.init();
+    this.getAuth();
   },
 
   methods: {
+    ...mapMutations({
+      auth: "auth/profilConnected",
+    }),
     async getAuth() {
+      const type = [
+        "NetworkEditors",
+        "networks",
+        "memberNetwork",
+        "Membar Network Follower",
+      ].includes(this.$route.name)
+        ? this.$route.params.id
+        : null;
       const response = await this.$repository.share.WhoIsConnect({
-        networkId: this.$route.params.id,
+        networkId: type,
+        type,
       });
 
       if (response.success) this.auth(response.data);
-    },
-    init: async function () {
-      await this.$repository.share.switch(this.$route.params.id, "business");
     },
 
     mapmediae(media) {
@@ -693,7 +702,7 @@ export default {
     editPost(postarray) {
       this.edit_description = postarray.content;
       this.edit_image = postarray.media;
-      this.edit_id = postarray.post_id;
+      this.edit_id = postarray.post_id ? postarray.post_id : postarray.id;
 
       console.log(this.edit_image);
 
@@ -925,8 +934,6 @@ export default {
         });
       }
 
-      formData2.append("type", "image");
-
       formData2.append("content", this.createPost.postBusinessUpdate);
 
       console.log(formData2);
@@ -957,7 +964,6 @@ export default {
           this.reloads();
           this.page = 1;
           this.infiniteId += 1;
-          
         })
         .catch((err) => {
           if (err.response.status == 422) {
@@ -973,7 +979,7 @@ export default {
               blockClass: "custom-block-class",
             });
           }
-           loader.hide();
+          loader.hide();
         });
     },
 
@@ -1006,10 +1012,6 @@ export default {
       return this.$store.state.businessOwner.businessInfo;
     },
 
-    imageProfile() {
-      return "yoo";
-    },
-
     business_logo() {
       //  return this.$store.state.businessOwner.businessInfo.logo_path;
       return this.$store.state.businessOwner.businessInfo;
@@ -1018,10 +1020,6 @@ export default {
     owner_post() {
       console.log(this.$store.state.businessOwner.ownerPost);
       return this.$store.state.businessOwner.ownerPost;
-    },
-
-    profileNamePost() {
-      return "yoo";
     },
   },
   mounted() {

@@ -21,6 +21,13 @@ import memnetwork from './memnetwork.json'
 import profilefollower from './profilefollower.json'
 import businessowner from './businessowner.json'
 
+import settings from './settings.json'
+
+
+
+import general from './general.json'
+
+
 export const defaultLocale = 'fr'
 
 export const fr = {
@@ -32,7 +39,9 @@ export const fr = {
     search: search,
     Order: Order,
     myOrders: myOrders,
+    general: general,
 
+    passrecover: passrecover,
 
     welcome: welcome,
     dashboard: dashboard,
@@ -44,6 +53,8 @@ export const fr = {
 
 
     network: network,
-    about:about,
+    about: about,
+    settings: settings
+    
 
 }

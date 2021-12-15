@@ -8,7 +8,7 @@
           <div>
             <b-tabs pills :vertical="vertical" class="itzlala" nav-wrapper-class="w-15">
               <!-- NOTIFICATIONS TAB -->
-              <b-tab title="Notifications">
+              <b-tab :title="$t('settings.Notifications')">
                 <b-card-text class="mt-3">
                   <b-row>
                     <b-col cols="12" md="12">
@@ -17,7 +17,7 @@
                   </b-row>
                 </b-card-text>
               </b-tab>
-              <b-tab :title="`${$t('settings.general')}`">
+              <b-tab :title="$t('settings.General')">
                 <b-card-text class="mt-3">
                   <b-row>
                     <b-col cols="12" md="12">
@@ -25,7 +25,7 @@
                         <b-table-simple hover small caption-top responsive>
                           <b-tbody v-if="getUserInfos.id">
                             <b-tr>
-                              <b-td class="a-text text"> {{ $t('settings.name') }} </b-td>
+                              <b-td class="a-text text"> {{ $t("settings.Name") }} </b-td>
 
                               <b-td class="a-text text">
                                 <b-link href="#" >{{getUserInfos.name}}</b-link>
@@ -35,7 +35,7 @@
 
                             <b-tr>
 
-                              <b-td class="a-text text" > {{ $t("settings.public_url") }} </b-td>
+                              <b-td class="a-text text" > {{ $t("settings.Public_url") }} </b-td>
 
 
                               <b-td class="text"
@@ -48,7 +48,7 @@
                             <br />
 
                             <b-tr>
-                              <b-td class="a-text text"> {{ $t('settings.email') }} </b-td>
+                              <b-td class="a-text text"> {{ $t('settings.Email') }} </b-td>
 
                               <b-td class="a-text text">
                                 <b-link href="#">{{getUserInfos.email}}</b-link>
@@ -57,7 +57,7 @@
                             <br />
 
                             <b-tr>
-                              <b-td class="a-text text">{{ $t('settings.phone') }} </b-td>
+                              <b-td class="a-text text">{{ $t('settings.Phone') }} </b-td>
 
                               <b-td class="a-text text">
                                 <b-link href="#">{{getUserInfos.phone}}</b-link>
@@ -66,7 +66,7 @@
                             <br />
 
                             <b-tr>
-                              <b-td class="a-text text"> {{ $t('settings.dob') }} </b-td>
+                              <b-td class="a-text text"> {{ $t('settings.DOB') }} </b-td>
 
                               <b-td class="a-text text">
                                 <b-link href="#">{{getUserInfos.dob}}</b-link>
@@ -75,7 +75,7 @@
                             <br />
 
                             <b-tr>
-                              <b-td class="a-text text"> {{ $t('settings.gender') }} </b-td>
+                              <b-td class="a-text text"> {{ $t("settings.Gender") }} </b-td>
 
                               <b-td class="a-text text">
                                 <b-link href="#">{{getUserInfos.gender}}</b-link>
@@ -84,7 +84,7 @@
                             <br />
 
                             <b-tr>
-                              <b-td class="a-text text"> proffession </b-td>
+                              <b-td class="a-text text"> {{$t("settings.Proffession")}} </b-td>
 
                               <b-td class="a-text text">
                                 <b-link href="#">{{getUserInfos.profession}}</b-link>
@@ -93,7 +93,7 @@
                             <br />
 
                             <b-tr>
-                              <b-td class="a-text text"> {{ $t('settings.country') }} </b-td>
+                              <b-td class="a-text text"> {{ $t("settings.Country") }} </b-td>
 
                               <b-td class="a-text text">
                                 <b-link href="#">{{getUserInfos.country.name}}</b-link>
@@ -101,7 +101,7 @@
                             </b-tr>
                             <br />
                             <b-tr>
-                              <b-td class="a-text text"> region </b-td>
+                              <b-td class="a-text text"> {{$t("settings.Region")}} </b-td>
 
                               <b-td class="a-text text">
                                 <b-link href="#">{{getUserInfos.region.name}}</b-link>
@@ -111,7 +111,7 @@
                             <br />
 
                             <b-tr>
-                              <b-td class="a-text text"> Division </b-td>
+                              <b-td class="a-text text"> {{$t("settings.Division")}} </b-td>
 
                               <b-td class="a-text text">
                                 <b-link href="#">{{getUserInfos.division.name}}</b-link>
@@ -121,7 +121,7 @@
                             <br />
 
                             <b-tr>
-                              <b-td class="a-text text"> municipality </b-td>
+                              <b-td class="a-text text"> {{$t("settings.Municipality")}} </b-td>
 
                               <b-td class="a-text text">
                                 <b-link href="#">{{getUserInfos.council.name}}</b-link>
@@ -131,7 +131,7 @@
                             <br />
 
                             <b-tr>
-                              <b-td class="a-text tetx"> {{ $t('settings.city') }} </b-td>
+                              <b-td class="a-text tetx"> {{ $t("settings.City") }} </b-td>
 
                               <b-td class="a-text text">
                                 <b-link href="#">{{getUserInfos.city}}</b-link>
@@ -140,7 +140,7 @@
                             <br />
 
                             <b-tr>
-                              <b-td class="a-text text"> {{ $t('settings.neighbourhood') }}</b-td>
+                              <b-td class="a-text text"> {{ $t('settings.Neighbourhood') }}</b-td>
 
                               <b-td class="a-text text">
                                 <b-link href="#">{{getUserInfos.neigborhood.name}}</b-link>
@@ -148,33 +148,33 @@
                             </b-tr>
                             <br />
                                <div>
-                              <b-button variant="ligth" class="btn btn-primary button" v-b-modal.modal-10>Edit </b-button>
+                              <b-button variant="ligth" class="btn btn-primary button" v-b-modal.modal-10>{{$t("settings.Edit")}} </b-button>
                               <!-- <button class="btn " v-b-modal.modal-10>Edit</button> -->
-                              <b-modal id="modal-10" title="Edit your information here"  hide-footer>
+                              <b-modal id="modal-10" title="$t('settings.Edit_your_information_here')"  hide-footer>
                                
                                   <form>
                                       <div class="mb-3">
-                                        <label class="form-label">name</label>
+                                        <label class="form-label">{{$t("settings.Name")}}</label>
                                         <input type="text" class="form-control"  v-model="getUserInfos.name">
                                        
                                       </div>
                                       <div class="mb-3">
-                                        <label class="form-label">email</label>
+                                        <label class="form-label">{{$t("settings.Email")}}</label>
                                         <input type="email" class="form-control"  v-model="getUserInfos.email">
                                        </div>
                                       
                                        <div class="mb-3">
-                                        <label class="form-label">phone</label>
+                                        <label class="form-label">{{$t("settings.Phone")}}</label>
                                         <input type="number" class="form-control"  v-model="getUserInfos.phone">
                                        
                                       </div>
                                        <div class="mb-3">
-                                        <label class="form-label">DOB</label>
+                                        <label class="form-label">{{$t("settings.DOB")}}</label>
                                         <input type="date" class="form-control"  v-model="getUserInfos.dob">
                                        
                                       </div>
                                        <div class="mb-3">
-                                        gender
+                                        {{$t("settings.Gender")}}
                                         
                                         <b-form-select v-model="selectedGender" :options="genderOptions" ></b-form-select>
                                      
@@ -183,14 +183,14 @@
                                        <div class="mb-3">
                                         <!-- <label class="form-label">country</label>
                                         <input type="text" class="form-control"  v-model="getUserInfos.country.name"> -->
-                                        country 
+                                        {{$t("settings.Country")}} 
                                          <b-form-select v-model="selectedCounty" :options="country" @change="getRegion"></b-form-select>
                                        
                                       </div>
                                        <div class="mb-3">
                                         <!-- <label class="form-label">country</label>
                                         <input type="text" class="form-control"  v-model="getUserInfos.country.name"> -->
-                                        Region 
+                                        {{$t("settings.Region ")}}
                                          <b-form-select v-model="selectedRegion" :options="region" @change="getDivision" required></b-form-select>
                                        
                                       </div>
@@ -198,7 +198,7 @@
                                        <div class="mb-3">
                                         <!-- <label class="form-label">country</label>
                                         <input type="text" class="form-control"  v-model="getUserInfos.country.name"> -->
-                                        Division 
+                                        {{$t("settings.Division")}} 
                                          <b-form-select v-model="selectedDivision" :options="division" @change="getMunicipality" required></b-form-select>
                                        
                                       </div>
@@ -206,7 +206,7 @@
                                       <div class="mb-3">
                                         <!-- <label class="form-label">country</label>
                                         <input type="text" class="form-control"  v-model="getUserInfos.country.name"> -->
-                                        municipality 
+                                        {{$t("settings.Municipality")}} 
                                          <b-form-select v-model="selectedMunicipality" :options="municipality" @change="getNeighbor" required></b-form-select>
                                        
                                       </div>
@@ -214,13 +214,13 @@
                                       <div class="mb-3">
                                         <!-- <label class="form-label">country</label>
                                         <input type="text" class="form-control"  v-model="getUserInfos.country.name"> -->
-                                        Neighbourhood 
+                                        {{$t("settings.Neighbourhood")}} 
                                          <b-form-select v-model="selectedNeighbor" :options="neighbor" required ></b-form-select>
                                        
                                       </div>
 
                                        <div class="mb-3">
-                                        <label class="form-label">city</label>
+                                        <label class="form-label">{{$t("settings.City")}}</label>
                                         <input type="text" class="form-control"  v-model="getUserInfos.city">
                                        
                                       </div>
@@ -228,7 +228,7 @@
                                         <label class="form-label">{{message1}}</label> 
                                        
                                       </div>
-                                      <button  class="btn btn-primary" @click="update">save changes</button>
+                                      <button  class="btn btn-primary" @click="update">{{$t("settings.Save_Changes")}}</button>
                                     </form>
 
                               </b-modal>
@@ -244,18 +244,18 @@
                 </b-card-text>
               </b-tab>
 
-              <b-tab :title="`${$t('settings.account_type')}`" >
+              <b-tab :title="$t('settings.Account_Type') ">
                 <b-card class="mt-15 cent">
                   <div class="text-center">
                     <span class="username text-center mb-3">
-                      <b> {{ $t('settings.upgrade_your_business_account') }} </b>
+                      <b> {{ $t("settings.Upgrade_Your_Business_Account") }} </b>
                     </span>
                   </div>
 
                   <div class="container">
                     <span class="text text-left">
                       <br />
-                      {{ $t('settings.make_more_money') }}
+                      {{ $t("settings.Make_More_Money") }}
                     </span>
                   </div>
                   <img src="@/assets/img/buynow.png" class="buynow" alt="buy now" />
@@ -264,16 +264,16 @@
 
 
                     <b-button variant="primary" class="text-center mt-3" @click="redirection">
-                      {{ $t("settings.upgrade_now") }}
+                      {{ $t("settings.Upgrade_Now") }}
 
                     </b-button>
                   </div>
                 </b-card>
               </b-tab>
 
-              <b-tab :title="`${$t('settings.payment')}`">
+              <b-tab :title="$t('settings.Payment')">
                 <b-card-text class="mt-3 text cent">
-                  <h3 class="username">{{ $t('settings.chose_payment_method') }}</h3>
+                  <h1 class="username">{{ $t("settings.Chose_Default_Payment_Method") }}</h1>
 
                   <!-- <b-form-group class="mb-0" v-slot="{ ariaDescribedby }">
                     <b-form-radio-group
@@ -291,24 +291,24 @@
                     ></b-form-radio-group>
                   </b-form-group> -->
                   <b-form-group label="select one" v-slot="{ ariaDescribedby }"> 
-                    <b-form-radio v-model="selected" :aria-describedby="ariaDescribedby" name="some-radios" value="MTN">MTN Mobile Money</b-form-radio>
+                    <b-form-radio v-model="selected" :aria-describedby="ariaDescribedby" name="some-radios" value="MTN" class="my-2">MTN Mobile Money</b-form-radio>
                     <b-form-radio v-model="selected" :aria-describedby="ariaDescribedby" name="some-radios" value="ORANGE">Orange Money</b-form-radio>
-                   <button class=" btn btn-primary" @click="changePayment">update</button>
+                   <button class=" btn btn-primary my-4" @click="changePayment">{{$t("settings.Update")}}</button>
                   
                   </b-form-group>
                 </b-card-text>
               </b-tab>
                  
-              <b-tab :title="`${$t('settings.password')}`">
+              <b-tab :title="`${$t('settings.Password')}`">
                 <b-card-text class="mt-3 text">
-                  <h3 class="username">{{ $t('settings.change_current_password') }}</h3>
+                  <h3 class="username">{{ $t('settings.Change_current_password') }}</h3>
                   <br />
 
                   <div class="b-bottom">
                     <b-container>
                       <b-form-group
                         label-cols-lg="3"
-                        :label="`${$t('settings.current_password')}`"
+                        :label="`${$t('settings.Current_password')}`"
                         label-size="md"
                         label-class=" text"
                         class="mb-0"
@@ -331,7 +331,7 @@
                     <b-container>
                       <b-form-group
                         label-cols-lg="3"
-                        :label="`${$t('settings.new_password')}`"
+                        :label="`${$t('settings.New_password')}`"
                         label-size="md"
                         label-class=" text"
                         class="mb-0"
@@ -354,7 +354,7 @@
                     <b-container>
                       <b-form-group
                         label-cols-lg="3"
-                        :label="`${$t('settings.confirm_password')}`"
+                        :label="`${$t('settings.Confirm_password')}`"
                         label-size="md"
                         label-class="text"
                         class="mb-0"
@@ -369,7 +369,7 @@
                         
                         </b-form-input> <br>
                         <p>{{message}}</p>
-                         <br> <button class=" btn btn-primary" @click="changePassword">change</button>
+                         <br> <button class=" btn btn-primary" @click="changePassword">{{$t("settings.change")}}</button>
 
                       </b-form-group>
                     </b-container>

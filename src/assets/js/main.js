@@ -1,11 +1,10 @@
-var v = document.getElementById("Test_Video");
+ var v = document.getElementById("Test_Video");
 
 
 var v2 = document.getElementById("Test_Video2");
 
 var v3 = document.getElementById("Test_Video3");
-
-
+ 
 // v.playbackRate = 0.8;
 // v2.playbackRate = 0.8;
 // v3.playbackRate = 0.8;

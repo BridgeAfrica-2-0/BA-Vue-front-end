@@ -20,13 +20,20 @@
             Community <br />
 
             <span class="location">
-              <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{ member.location_description }}
+              <b-icon-geo-alt class="ico"></b-icon-geo-alt>
+              {{ member.location_description }}
             </span>
             <br />
-            <span v-if="member.about_business.length<65">{{ member.about_business}}</span>
-            <span v-else >
-              {{ member.about_business.substring(0,65)+"..." }} 
-              <b-link  @click="$bvToast.show('example-toast')" style="cursor:pointer;">Read More</b-link>
+            <span v-if="member.about_business.length < 65">{{
+              member.about_business
+            }}</span>
+            <span v-else>
+              {{ member.about_business.substring(0, 65) + "..." }}
+              <b-link
+                @click="$bvToast.show('example-toast')"
+                style="cursor: pointer"
+                >Read More</b-link
+              >
             </span>
             <b-toast id="example-toast" static no-auto-hide>
               {{ member.about_business }}
@@ -65,15 +72,7 @@
                 cols="4"
                 class="mt-2 text-center"
               >
-                <b-button
-                  block
-                  size="sm"
-                  class="b-background shadow"
-                  variant="primary"
-                >
-                  <i class="fas fa-envelope fa-lg btn-icon"></i>
-                  <span class="btn-text">Message</span>
-                </b-button>
+                <BtnCtaMessage :element="member" type="people" />
               </b-col>
 
               <b-col
@@ -116,7 +115,7 @@ export default {
         perMove: 1,
       },
     };
-  }
+  },
 };
 </script>
 

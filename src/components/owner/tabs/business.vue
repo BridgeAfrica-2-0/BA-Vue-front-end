@@ -1,78 +1,113 @@
 <template>
   <div>
-       
-
-        <div class="people-style shadow" v-for="item in businesses" :key="item.id">
+    <div class="people-style shadow" v-for="item in businesses" :key="item.id">
       <b-row>
         <b-col md="8" xl="12" lg="12" cols="12" sm="8">
-          
-  
-
-
-
-          <div class="d-inline-flex">   
-              <div class="center-img ">
-                <splide :options="options" class="r-image">
-                  <splide-slide cl>
-                    <img :src="item.picture" class="r-image" />
-                  </splide-slide>
-                </splide>
-              </div>   <div class="flx100"> 
+          <div class="d-inline-flex">
+            <div class="center-img">
+              <splide :options="options" class="r-image">
+                <splide-slide cl>
+                  <img :src="item.picture" class="r-image" />
+                </splide-slide>
+              </splide>
+            </div>
+            <div class="flx100">
               <p class="textt">
-                <strong class="title">   <router-link    :to="'business/'+item.id"> {{ item.name }}  </router-link> </strong> <br />
-               
-            <span v-for="cat in item.category" :key="cat.name">   {{cat.name}}  </span>
+                <strong class="title">
+                  <router-link :to="'business/' + item.id">
+                    {{ item.name }} ++
+                  </router-link>
+                </strong>
+                <br />
+
+                <span v-for="cat in item.category" :key="cat.name">
+                  {{ cat.name }}
+                </span>
                 <br />
                 {{ count(item.followers) }}
-                {{ $t('dashboard.Community') }} <br />
+                {{ $t("dashboard.Community") }} <br />
 
-                 <span class="location">
-              <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{item.city}}  <span class="ml-2" v-for="nie in item.neigborhood"  :key="nie.id" >  {{nie.name}} </span>   
-            </span>
+                <span class="location">
+                  <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{ item.city }}
+                  <span
+                    class="ml-2"
+                    v-for="nie in item.neigborhood"
+                    :key="nie.id"
+                  >
+                    {{ nie.name }}
+                  </span>
+                </span>
                 <br />
-       <read-more
-              more-str="read more"
-              class="readmore"
-              :text="item.about_business"
-              link="#"
-              less-str="read less"
-              :max-chars="75"
-            >
-            </read-more>
+                <read-more
+                  more-str="read more"
+                  class="readmore"
+                  :text="item.about_business"
+                  link="#"
+                  less-str="read less"
+                  :max-chars="75"
+                >
+                </read-more>
               </p>
-               </div>
-               </div>
-        
+            </div>
+          </div>
         </b-col>
 
         <b-col lg="12" xl="12" md="4" cols="12" sm="4">
           <div class="s-button">
             <b-row>
-              <b-col md="12" lg="4" xl="4" sm="12" cols="4" class="mt-2 text-center">
+              <b-col
+                md="12"
+                lg="4"
+                xl="4"
+                sm="12"
+                cols="4"
+                class="mt-2 text-center"
+              >
                 <b-button
                   block
                   size="sm"
                   class="b-background shadow"
-                  :id="'followbtn'+item.id"
+                  :id="'followbtn' + item.id"
                   :class="item.is_follow !== 0 && 'u-btn'"
                   variant="primary"
                   @click="handleFollow(item)"
                 >
-                  <i class="fas fa-lg btn-icon" :class="item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"></i>
+                  <i
+                    class="fas fa-lg btn-icon"
+                    :class="
+                      item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'
+                    "
+                  ></i>
                   <span class="btn-com">Community</span>
                 </b-button>
               </b-col>
 
-              <b-col md="12" lg="4" xl="4" sm="12" cols="4" class="mt-2 text-center">
-                <b-button block size="sm" class="b-background shadow " variant="primary">
-                  <i class="fas fa-envelope   fa-lg btn-icon "></i>
-                  <span class="btn-text">Message</span>
-                </b-button>
+              <b-col
+                md="12"
+                lg="4"
+                xl="4"
+                sm="12"
+                cols="4"
+                class="mt-2 text-center"
+              >
+                <BtnCtaMessage :element="item" type="business" />
               </b-col>
 
-              <b-col md="12" lg="4" xl="4" sm="12" cols="4" class="mt-2 text-center">
-                <b-button block size="sm" class="b-background shadow " variant="primary">
-                  <i class="fas fa-map-marked-alt  fa-lg btn-icon"></i>
+              <b-col
+                md="12"
+                lg="4"
+                xl="4"
+                sm="12"
+                cols="4"
+                class="mt-2 text-center"
+              >
+                <b-button
+                  block
+                  size="sm"
+                  class="b-background shadow"
+                  variant="primary"
+                >
+                  <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
                   <span class="btn-text">Direction</span>
                 </b-button>
               </b-col>
@@ -82,23 +117,24 @@
       </b-row>
     </div>
 
-
-
-
     <infinite-loading @infinite="infiniteHandler"></infinite-loading>
   </div>
 </template>
 
 <script>
-import moment from 'moment';
-import axios from 'axios';
+import BtnCtaMessage from "@/components/messagesCTA/Btn-cta-message";
+import axios from "axios";
 
 export default {
-  props: ['type', 'from'],
+  props: ["type", "from"],
+  components: {
+    BtnCtaMessage,
+  },
+
   data() {
     return {
       page: 1,
-      foll_id:null,
+      foll_id: null,
       biz_id: null,
       businesses: [],
       options: {
@@ -107,53 +143,50 @@ export default {
         perPage: 1,
         pagination: false,
 
-        type: 'loop',
+        type: "loop",
         perMove: 1,
       },
     };
   },
 
- 
-
   computed: {
     old_businesses() {
-      if (this.type == 'Follower') {
-        return this.$store.state.businessOwner.BcommunityFollower.business_followers;
+      if (this.type == "Follower") {
+        return this.$store.state.businessOwner.BcommunityFollower
+          .business_followers;
       } else {
-        return this.$store.state.businessOwner.BcommunityFollowing.business_following;
+        return this.$store.state.businessOwner.BcommunityFollowing
+          .business_following;
       }
     },
   },
 
-  mounted(){
-  
-   this.foll_id = this.$route.params.id ? this.$route.params.id :""  ;
-
- },
-
+  mounted() {
+    this.foll_id = this.$route.params.id ? this.$route.params.id : "";
+  },
 
   methods: {
     count(number) {
       if (number >= 1000000) {
-        return number / 1000000 + 'M';
+        return number / 1000000 + "M";
       }
       if (number >= 1000) {
-        return number / 1000 + 'K';
+        return number / 1000 + "K";
       } else return number;
     },
 
-    infiniteHandler($state) {  
+    infiniteHandler($state) {
       let url =
-        this.type === 'Follower'
+        this.type === "Follower"
           ? `profile/business/follower/`
           : `profile/business/following/`;
 
-       console.log(this.foll_id);
+      console.log(this.foll_id);
 
       axios
-        .get(url + this.page+"?id="+this.foll_id)
+        .get(url + this.page + "?id=" + this.foll_id)
         .then(({ data }) => {
-          if (this.type == 'Follower') {
+          if (this.type == "Follower") {
             if (data.data.business_followers.length) {
               console.info(...data.data.business_followers);
               this.businesses.push(...data.data.business_followers);
@@ -174,42 +207,33 @@ export default {
             }
           }
         })
-        .catch(err => {
+        .catch((err) => {
           console.log({ err: err });
         });
-    },       
+    },
 
-   
-     async handleFollow(user) {
+    async handleFollow(user) {
+      document.getElementById("followbtn" + user.id).disabled = true;
 
-      document.getElementById("followbtn"+user.id).disabled = true;
-       
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
         id: user.id,
-        type: 'business',
+        type: "business",
       };
 
       await axios
         .post(uri, data)
-        .then(response => {
-
+        .then((response) => {
           console.log(response);
           user.is_follow = nextFollowState;
-         document.getElementById("followbtn"+user.id).disabled = false;
-            
+          document.getElementById("followbtn" + user.id).disabled = false;
         })
-        .catch(err =>{  
-          
-          console.log(err)  ;
-           document.getElementById("followbtn"+user.id).disabled =  false;
-          
+        .catch((err) => {
+          console.log(err);
+          document.getElementById("followbtn" + user.id).disabled = false;
         });
-         
     },
-
-
   },
 };
 </script>
@@ -284,13 +308,13 @@ export default {
     color: black;
 
     line-height: 35px;
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 
   .textt {
     color: #000;
 
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
@@ -301,183 +325,183 @@ export default {
     line-height: 20px;
     font-style: normal;
 
-			padding: 1px;
-			text-align: left;
+    padding: 1px;
+    text-align: left;
 
-			margin-left: 10px;
+    margin-left: 10px;
 
-			margin-right: -5px;
+    margin-right: -5px;
 
-			line-height: 25px;
-		}
-
-		.location {
-			margin-bottom: 30px;
-		}
-
-		.btn {
-			padding-top: 6px;
-			font-size: 10px;
-
-			height: 28px;
-			width: 85px;
-		}
-
-		.r-image {
-			border-radius: 8px;
-
-			height: 100px;
-			width: 100px;
-		}
-	}
-
-	@media only screen and (min-width: 768px) {
-		.title {
-			font-size: 20px;
-			color: black;
-
-    line-height: 35px;
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    line-height: 25px;
   }
 
-		.textt {
-			color: #000;
+  .location {
+    margin-bottom: 30px;
+  }
 
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  .btn {
+    padding-top: 6px;
+    font-size: 10px;
+
+    height: 28px;
+    width: 85px;
+  }
+
+  .r-image {
+    border-radius: 8px;
+
+    height: 100px;
+    width: 100px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .title {
+    font-size: 20px;
+    color: black;
+
+    line-height: 35px;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+
+  .textt {
+    color: #000;
+
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
     color: rgba(117, 114, 128, 1);
     text-align: left;
 
-			font-weight: normal;
-			line-height: 20px;
-			font-style: normal;
+    font-weight: normal;
+    line-height: 20px;
+    font-style: normal;
 
-			padding: 1px;
-			text-align: left;
+    padding: 1px;
+    text-align: left;
 
-			margin-left: 70px;
+    margin-left: 70px;
 
-			margin-right: -5px;
+    margin-right: -5px;
 
-			line-height: 25px;
-		}
+    line-height: 25px;
+  }
 
-		.location {
-			margin-bottom: 30px;
-		}
+  .location {
+    margin-bottom: 30px;
+  }
 
-		.btn {
-			padding-top: 6px;
-			height: 38px;
-			width: 110px;
-			font-size: 12px;
-			margin-left: -10px;
+  .btn {
+    padding-top: 6px;
+    height: 38px;
+    width: 110px;
+    font-size: 12px;
+    margin-left: -10px;
 
-			padding-top: 8px;
-		}
+    padding-top: 8px;
+  }
 
-		.r-image {
-			border-radius: 8px;
+  .r-image {
+    border-radius: 8px;
 
-			height: 160px;
-			width: 160px;
-		}
-	}
+    height: 160px;
+    width: 160px;
+  }
+}
 
-	.stock {
-		color: green;
-	}
+.stock {
+  color: green;
+}
 
-	.b1 {
-		width: 100px;
-		margin-left: -20px;
-	}
+.b1 {
+  width: 100px;
+  margin-left: -20px;
+}
 
-	.b2 {
-		width: 120px;
+.b2 {
+  width: 120px;
 
-		margin-left: -15px;
-	}
+  margin-left: -15px;
+}
 
-	.btn {
-		display: flex;
-	}
+.btn {
+  display: flex;
+}
 
-	.ico {
-		margin-right: 5px;
-	}
+.ico {
+  margin-right: 5px;
+}
 
-	@media only screen and (min-width: 768px) {
-		.people-style {
-			border-top-left-radius: 5px;
+@media only screen and (min-width: 768px) {
+  .people-style {
+    border-top-left-radius: 5px;
 
-			border-bottom-left-radius: 5px;
+    border-bottom-left-radius: 5px;
 
-			border-top-right-radius: 5px;
+    border-top-right-radius: 5px;
 
-			border-bottom-right-radius: 5px;
+    border-bottom-right-radius: 5px;
 
-			background: white;
+    background: white;
 
-			background-color: #fff;
-			background-clip: border-box;
-			border: 1px solid rgba(0, 0, 0, 0.125);
-			margin-bottom: 10px;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    margin-bottom: 10px;
 
-			margin-right: 8px;
+    margin-right: 8px;
 
-			padding: 7px;
-		}
-	}
+    padding: 7px;
+  }
+}
 
-	@media only screen and (max-width: 768px) {
-		.people-style {
-			border-top-left-radius: 5px;
+@media only screen and (max-width: 768px) {
+  .people-style {
+    border-top-left-radius: 5px;
 
-			border-bottom-left-radius: 5px;
+    border-bottom-left-radius: 5px;
 
-			border-top-right-radius: 5px;
+    border-top-right-radius: 5px;
 
-			border-bottom-right-radius: 5px;
+    border-bottom-right-radius: 5px;
 
-			background: white;
+    background: white;
 
-			background-color: #fff;
-			background-clip: border-box;
-			border: 1px solid rgba(0, 0, 0, 0.125);
-			margin-bottom: 10px;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    margin-bottom: 10px;
 
-			margin-right: 8px;
+    margin-right: 8px;
 
-			padding: 7px;
-		}
+    padding: 7px;
+  }
 
-		.btn {
-			display: flex;
+  .btn {
+    display: flex;
 
-			padding-right: 60px;
-		}
+    padding-right: 60px;
+  }
 
-		h4 {
-			font-size: 15px;
-		}
-	}
+  h4 {
+    font-size: 15px;
+  }
+}
 
-	@media only screen and (max-width: 520px) {
-		.btn {
-			display: flex;
-		}
-	}
+@media only screen and (max-width: 520px) {
+  .btn {
+    display: flex;
+  }
+}
 
-	@media only screen and (min-width: 992px) and (max-width: 1331px) {
-		.btn {
-			width: 98px;
-			height: 33px;
-			font-size: 12px;
-			margin-left: -10px;
-			padding-top: 8px;
-		}
-	}
+@media only screen and (min-width: 992px) and (max-width: 1331px) {
+  .btn {
+    width: 98px;
+    height: 33px;
+    font-size: 12px;
+    margin-left: -10px;
+    padding-top: 8px;
+  }
+}
 </style>

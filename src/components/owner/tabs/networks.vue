@@ -24,8 +24,8 @@
           class="p-0 pr-1 mb-2"
           v-for="(network, index) in profileNetworks"
           :key="index"
-        >   
-  
+        >
+   
 
          <div class="people-style shadow h-100">
              
@@ -67,9 +67,9 @@
                         </router-link>
                       </strong>
                       <br />   
-                 
+<!--                    
                       
-                      <span class="m-1" v-for=" cat in network.assign_categories" :key="cat.id "> {{cat.name}},  </span> 
+                      <span class="m-1" v-for=" cat in network.assign_categories" :key="cat.id "> {{cat.name}}  </span> -->
                       <br />
                       
                     {{ network.member_count }}  Community  <br />
@@ -126,9 +126,8 @@
       :title="editNet ? $t('profileowner.Edit_network') : $t('profileowner.Add_Network')"
       size="lg"
       v-model="showModal"
-       @hidden="resetPostData"
       ref="netmodal"
-    >   <FlashMessage />
+    >   
       <b-container>
         <b-form>
           <div
@@ -779,6 +778,18 @@ return cat;
         });
     },
 
+    // getNetworks() {
+    //   this.loader = true;
+    //   axios
+    //     .get("profile/user/networks")
+    //     .then((res) => {
+    //       this.loader = false;
+    //       this.networks = res.data.data;
+    //     })
+    //     .catch((err) => {
+    //       this.loader = false;
+    //     });
+    // },
 
     getNetworks() {
       console.log("network loading !!!!!");
@@ -795,7 +806,12 @@ return cat;
     infiniteHandler($state) {
       console.log("network?page=" + this.page);
       let url = "network?page=" + this.page;
-     
+      if(this.page==1){
+        
+         this.profileNetworks.splice(0);
+        
+      }
+      
        this.$store.dispatch("profile/loadMore",url)
     
         .then(({ data }) => {
@@ -868,15 +884,13 @@ return cat;
 
           setTimeout(() => {
             this.success.state = false;
-          }, 5);
+          }, 5000);
 
 
-        //  this.getNetworks();
+          this.getNetworks();
 
           this.page = 1;
           this.infiniteId += 1;
-          this.profileNetworks=[];
-           this.$refs.infiniteLoading.attemptLoad();
         })
         .catch((err) => {
           console.log({ err: err });
@@ -913,18 +927,9 @@ return cat;
           this.success.msg = "Operation was successful !!";
           setTimeout(() => {
             this.success.state = false;
-          }, 50);
+          }, 5000);
           this.getNetworks();   
           loader.hide();
-
-          this.getNetworks();
-
-          this.page = 1;
-          this.infiniteId += 1;
-          this.profileNetworks=[];
-           this.$refs.infiniteLoading.attemptLoad();
-
-          this.$refs["netmodal"].hide();
         })
         .catch((err) => {
           console.log({err:err});
@@ -964,18 +969,12 @@ return cat;
       axios
         .delete(`network/${network.id}`)
         .then((res) => {
-
-          this.page = 1;
-          this.infiniteId += 1;
-          this.profileNetworks=[];
-           this.$refs.infiniteLoading.attemptLoad();
-
           this.success.state = true;
           this.success.msg = "Operation was successful !!";
           setTimeout(() => {
             this.success.state = false;
           }, 5000);
-         // this.getNetworks();
+          this.getNetworks();
         })
         .catch((err) => {
           this.success.state = true;
@@ -986,33 +985,7 @@ return cat;
           this.loader = false;
         });
     },
-
-
-    resetPostData(){
-        
-
-  this.createdNetwork.name ="";
- this.createdNetwork.address ="";
-   this.createdNetwork.neighbourhood="";
-   this.createdNetwork.city="";
-    this.createdNetwork.primary_phone="";
- this.createdNetwork.secondary_phone="";
-    this.selectedcategories =[];
-
-     this.createdNetwork.description="";
-
-     this.createdNetwork.purpose="";
-      this.createdNetwork.special_needs="";
-   this.selectedregion=[];
-   this.selectedcountry=[];
-    this.selecteddivision=[];
-    this.selectedmunicipality=[];
-    this.logo='';
-     this.logoimg_url="";
-
-
-    },
-  
+    // Action handler
     action() {
       const fd = new FormData();
       fd.append("business_id", "1");

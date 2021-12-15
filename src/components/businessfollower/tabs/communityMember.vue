@@ -6,7 +6,11 @@
           <div class="people-style border shadow">
             <b-row class="mb-1">
               <b-col md="3" cols="4" sm="4" class="my-auto">
-                <b-avatar class="p-avater" variant="primary" :src="item.profile_picture"></b-avatar>
+                <b-avatar
+                  class="p-avater"
+                  variant="primary"
+                  :src="item.profile_picture"
+                ></b-avatar>
               </b-col>
 
               <b-col md="8" cols="8" sm="8">
@@ -15,13 +19,25 @@
                     <b-col md="12" lg="6" xl="6">
                       <div class="e-name">
                         <b-row>
-                          <b-col md="6" lg="12" cols="6" xl="12" class="mt-lg-2">
+                          <b-col
+                            md="6"
+                            lg="12"
+                            cols="6"
+                            xl="12"
+                            class="mt-lg-2"
+                          >
                             <div class="mt-3 mt-lg-0 mt-xl-0 username">
                               <b> {{ item.name }} </b>
                             </div>
                           </b-col>
 
-                          <b-col md="6" lg="12" cols="6" xl="12" class="mt-3 mt-lg-1 mt-xl-3">
+                          <b-col
+                            md="6"
+                            lg="12"
+                            cols="6"
+                            xl="12"
+                            class="mt-3 mt-lg-1 mt-xl-3"
+                          >
                             <h6 class="follower m-15">
                               {{ count(item.followers) }}
                               Community
@@ -34,16 +50,30 @@
                     <b-col lg="6" xl="6" cols="12" md="12">
                       <div>
                         <b-row class="mt-lg-0">
-                          <b-col md="6" lg="12" cols="6" xl="12" class="mt-2 mt-lg-2 mt-xl-2 btn-2 center">
-                            <b-button block variant="primary" size="sm" class="b-background flexx pobtn shadow">
-                              <i class="fas fa-envelope   fa-lg btn-icon "></i>
-                              <span class="btn-text">Message</span>
-                            </b-button>
+                          <b-col
+                            md="6"
+                            lg="12"
+                            cols="6"
+                            xl="12"
+                            class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
+                          >
+                            <BtnCtaMessage :element="item" type="people" />
                           </b-col>
 
-                          <b-col md="6" lg="12" cols="6" xl="12" class="mt-2 mt-lg-2 mt-xl-2 btn-2 center">
-                            <b-button block size="sm" class="b-background flexx pobtn shadow" variant="primary">
-                              <i class="fas fa-user-plus  fa-lg btn-icon "></i>
+                          <b-col
+                            md="6"
+                            lg="12"
+                            cols="6"
+                            xl="12"
+                            class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
+                          >
+                            <b-button
+                              block
+                              size="sm"
+                              class="b-background flexx pobtn shadow"
+                              variant="primary"
+                            >
+                              <i class="fas fa-user-plus fa-lg btn-icon"></i>
                               <span class="btn-com">Community</span>
                             </b-button>
                           </b-col>
@@ -57,15 +87,19 @@
           </div>
         </b-col>
       </b-row>
-      <infinite-loading :identifier="infiniteId" @infinite="infiniteHandler" ref="infiniteLoading"></infinite-loading>
+      <infinite-loading
+        :identifier="infiniteId"
+        @infinite="infiniteHandler"
+        ref="infiniteLoading"
+      ></infinite-loading>
     </div>
   </div>
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 export default {
-  props: ['type', 'searchh'],
+  props: ["type", "searchh"],
   data() {
     return {
       page: 1,
@@ -76,7 +110,7 @@ export default {
         perPage: 2,
         pagination: false,
 
-        type: 'loop',
+        type: "loop",
         perMove: 1,
       },
     };
@@ -84,7 +118,7 @@ export default {
 
   computed: {
     users() {
-      if (this.type == 'Follower') {
+      if (this.type == "Follower") {
         return this.$store.state.profile.UcommunityFollower.user_followers;
         // return this.$store.state.profile.UcommunityFollower.user_followers;
       } else {
@@ -96,12 +130,18 @@ export default {
 
   methods: {
     search() {
-      console.log('search started');
+      console.log("search started");
 
-      if (this.type == 'Follower') {
-        this.$store.commit('profile/setUcommunityFollower', { user_followers: [], total_user_follower: 0 });
+      if (this.type == "Follower") {
+        this.$store.commit("profile/setUcommunityFollower", {
+          user_followers: [],
+          total_user_follower: 0,
+        });
       } else {
-        this.$store.commit('profile/setUcommunityFollowing', { user_following: [], total_user_following: 0 });
+        this.$store.commit("profile/setUcommunityFollowing", {
+          user_following: [],
+          total_user_following: 0,
+        });
       }
 
       this.page = 1;
@@ -112,27 +152,27 @@ export default {
 
     count(number) {
       if (number >= 1000000) {
-        return number / 1000000 + 'M';
+        return number / 1000000 + "M";
       }
       if (number >= 1000) {
-        return number / 1000 + 'K';
+        return number / 1000 + "K";
       } else return number;
     },
 
     infiniteHandler($state) {
       let url = null;
 
-      if (this.type == 'Follower') {
-        url = 'profile/user/follower/';
+      if (this.type == "Follower") {
+        url = "profile/user/follower/";
       } else {
-        url = 'profile/user/following/';
+        url = "profile/user/following/";
       }
 
       axios
-        .get(url + this.page + '?keyword=' + this.searchh)
+        .get(url + this.page + "?keyword=" + this.searchh)
         .then(({ data }) => {
           console.log(data);
-          if (this.type == 'Follower') {
+          if (this.type == "Follower") {
             if (data.data.user_followers.length) {
               this.page += 1;
 
@@ -155,7 +195,7 @@ export default {
 
           console.log(data);
         })
-        .catch(err => {
+        .catch((err) => {
           console.log({ err: err });
         });
     },

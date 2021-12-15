@@ -3,7 +3,7 @@
 		<div class="row">
 			<div class="col-12 col-sm-12 col-md-5 col-lg-5 mb-4">
 				<b-card-title class="headline-font-size mb-3">
-					Create Shipping Address
+					{{$t("general.Create_Shipping_Address")}}
 				</b-card-title>
 				<FormCreateShippingAddress
 					:form="shippingAddress"
@@ -14,10 +14,10 @@
 				<div class="row mb-3">
 					<div class="col-12 d-flex justify-content-between align-items-end">
 						<b-card-title class="title-font-size d-inline-block mb-0">
-							Order Summary
+							{{$t("general.Order_Summary")}}
 						</b-card-title>
 						<b-button @click="gotoCart" class="btn-my-cart" variant="primary"
-							><b-icon icon="cart" class="mr-2"></b-icon>My Cart</b-button
+							><b-icon icon="cart" class="mr-2"></b-icon>{{$t("general.My_Cart")}}</b-button
 						>
 					</div>
 				</div>
@@ -30,7 +30,7 @@
 						class="col-12 mt-3 text-center text-success font-weight-bold title-font-size"
 					>
 						<p class="link" @click="gotoMarket">
-							<b-icon icon="arrow-left-circle-fill"></b-icon> Back to Shopping
+							<b-icon icon="arrow-left-circle-fill"></b-icon> {{$t("general.Back_to_Shopping")}}
 						</p>
 					</div>
 				</div>

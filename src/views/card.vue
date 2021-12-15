@@ -2,16 +2,16 @@
   <div class="container">
     <navbar />
     <div class="row">
-      <FlashMessage />
+      
       <div class="col-12 col-md-9">
         <hr />
         <div class="row">
-          <div class="col"><h3 class="mx-5">PRODUCT DETAILS</h3></div>
+          <div class="col"><h3 class="mx-5">{{$t("general.PRODUCT_DETAILS")}}</h3></div>
           <div class="col">
             <div class="row desktop">
-              <h3 class="mx-5">Quantity</h3>
-              <h3 class="mx-5">price</h3>
-              <h3 class="mx-5">Total</h3>
+              <h3 class="mx-5">{{$t("general.Quantity")}}</h3>
+              <h3 class="mx-5">{{$t("general.price")}}</h3>
+              <h3 class="mx-5">{{$t("general.Total")}}</h3>
             </div>
           </div>
         </div>
@@ -43,7 +43,7 @@
 
               <div class="col-8 col-md-4 text-end text-start bold ">
                 <div class="row">
-                  <div class="col-5 p-0"><h3>Name of item :</h3></div>
+                  <div class="col-5 p-0"><h3>{{$t("general.Name_of_item")}} :</h3></div>
                   <div class="col">
                     <h3
                       class="h3 cursor"
@@ -55,7 +55,7 @@
                 </div>
 
                 <div class="row">
-                  <div class="col-5 p-0"><h3>product ID :</h3></div>
+                  <div class="col-5 p-0"><h3>{{$t("general.product_ID")}} :</h3></div>
                   <div class="col">
                     <h3 class="h3">{{ cart_item.product_id }}</h3>
                   </div>
@@ -63,7 +63,7 @@
 
                 <div class="row">
                   <div class="col-5 p-0">
-                    <h3 class="">description:</h3>
+                    <h3 class="">{{$t("general.description")}}:</h3>
                   </div>
                   <div class="col">
                     <h3
@@ -124,11 +124,11 @@
       </div>
       <div class=" line"></div>
       <div class="col-12 col-md-3 color">
-        <h3 class="my-2">ORDER SUMMARY</h3>
+        <h3 class="my-2">{{$t("general.ORDER_SUMMARY")}}</h3>
         <hr />
         <div class="row">
           <div class="col">
-            <h3>ITEMS {{ rowsOrder }}</h3>
+            <h3>{{$t("general.ITEMS")}} {{ rowsOrder }}</h3>
           </div>
           <div class="col">
             <h3>{{ getTotalPrice }} XAF</h3>
@@ -136,22 +136,22 @@
         </div>
         <br />
         <form action="">
-          SHIPPING
+          {{$t("general.SHIPPING")}}
           <input type="text" class="form-control" />
-          PROMO CODE
+          {{$t("general.PROMO_CODE")}}
           <input type="text" class="form-control" />
-          <button class="btn btncolor shadow"><h3>Apply</h3></button>
+          <button class="btn btncolor shadow"><h3>{{$t("general.Apply")}}</h3></button>
         </form>
         <br />
         <hr />
         <br />
 
         <div class="row">
-          <div class="col"><h3>TOTAL COST</h3></div>
+          <div class="col"><h3>{{$t("general.TOTAL_COST")}}</h3></div>
           <div class="col"><h3>22000 XAF</h3></div>
         </div>
         <button class="btn btn1 form-control shadow" @click="gotoCheckout">
-          <h3>CHECKOUT</h3>
+          <h3>{{$t("general.CHECKOUT")}}</h3>
         </button>
         <br />
         <br />

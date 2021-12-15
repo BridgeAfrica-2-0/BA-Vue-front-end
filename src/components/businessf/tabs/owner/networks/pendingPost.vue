@@ -2,7 +2,7 @@
   <div class="container">
     <b-row>
       <b-col cols="12" class="f-left">
-        <div v-for="post in allPendingPost" :key="post.id" :loading="load" class="mb-4">
+post<div v-for="post in owner_post" :key="post.id" :loading="load" class="mb-4">
           <div class="mb-2">
             <div class="f-left">
               <b-row class="px-md-3">
@@ -33,27 +33,27 @@
                     </span>
                   </h6>
                   <p>
-                    {{ post.created_at }} -
+                    {{ moment(post.created_at).fromNow() }} - 
                     <span class="text-primary">{{ post.comment }}</span>
                   </p>
                 </b-col>
               </b-row>
-              <b-row>
+              <!-- <b-row>
                 <b-col cols="12" class="mt-2">
                   <p class="text-justify text">
                     {{ post.content }}
                   </p>
                 </b-col>
-              </b-row>
+              </b-row> -->
             </div>
           </div>
           <div class="m-0 p-0">
             <p class="post-text">
               <!--     :text="item.content.details"   -->
               <read-more
-                v-if="item.content"
+                v-if="post.content"
                 more-str="read more"
-                :text="item.content"
+                :text="post.content"
                 link="#"
                 less-str="read less"
                 :max-chars="200"
@@ -61,8 +61,8 @@
             </p>
           </div>
 
-          <div v-if="item.media.length > 0" class="">
-            <span v-for="video in mapvideo(item.media)" :key="video">
+          <div v-if="post.media.length > 0" class="">
+            <span v-for="video in mapvideo(post.media)" :key="video">
               <youtube
                 class="w-100 videoh"
                 :video-id="getId(video)"
@@ -71,35 +71,18 @@
               ></youtube>
             </span>
 
-            <light css=" " :cells="item.media.length" :items="mapmediae(item.media)"></light>
+            <light css=" " :cells="post.media.length" :items="mapmediae(post.media)"></light>
           </div>
         </div>
-      </b-col>
-      <b-col cols="12">
-        <infinite-loading ref="infiniteLoading" @infinite="infiniteHandler">
-            <!-- <div class="text-red" slot="no-more">{{ $t('network.No_More_Request') }}</div>
-            <div class="text-red" slot="no-results">{{ $t('network.No_More_Request') }}</div> -->
-        </infinite-loading>
       </b-col>
     </b-row>
     <b-row>
       <b-col>
-        <p class="text-center" v-if="allPendingPost < 1">
+        <p class="text-center" v-if="owner_post < 1">
           {{ $t('network.No_Pending_Posts_To_Show') }}
         </p>
       </b-col>
     </b-row>
-    <!-- <b-row> -->
-          <!-- <b-col cols="12"> -->
-        <!-- <infinite-loading @infinite="infiniteHandler"> -->
-            <!-- <div class="text-red" slot="no-more">{{ $t('network.No_More_Request') }}</div>
-            <div class="text-red" slot="no-results">{{ $t('network.No_More_Request') }}</div> -->
-        <!-- </infinite-loading> -->
-             <!-- <infinite-loading
-        ref="infiniteLoading"
-        @infinite="infiniteHandler"
-      ></infinite-loading> -->
-      <!-- </b-col></b-row> -->
   </div>
 </template>
 
@@ -148,16 +131,6 @@ export default {
       isSubmitted: false,
       fileImageArr: [],
     };
-  },
-
-  computed: {
-    ...mapGetters({
-      info: "networkSetting/getNetwork",
-      owner_post: "networkSetting/allPendingPost",
-    }),
-  },
-  mounted() {
-    this.url = this.$route.params.id;
   },
 
   methods: {
@@ -218,16 +191,14 @@ export default {
     },
 
     infiniteHandler($state) {
-      console.log("infiniteHandler fired")
-      let url='show/posts/pending/'+this.url+'?page='+this.page; 
-      console.log(url)
-       if (this.page == 1) {
+      let url = 'network/show/posts/pending/' + this.url + '?page=' + this.page;
+
+      if (this.page == 1) {
         this.owner_post.splice(0);
-        console.log("this.owner_post.splice(0);")
       }
       this.$store
         .dispatch('networkSetting/loadMore', url)
-        .then(({ data }) => {
+        .then(({ data }) => { console.log("------",data)
           if (data.data.length) {
             this.page += 1;
 
@@ -354,6 +325,15 @@ export default {
         this.createPost.postBusinessUpdate = '';
       }
     },
+  },
+  computed: {
+    ...mapGetters({
+      info: 'networkSetting/getNetwork',
+      owner_post: 'networkSetting/allPendingPost',
+    }),
+  },
+  mounted() {
+    this.url = this.$route.params.id;
   },
 };
 </script>

@@ -3,10 +3,11 @@
     class="createp img-gall predit2"
     @mouseover="upHere = true"
     @mouseleave="upHere = false"
+    style="width: 266px;height: 266px;"
   >
     <a>
       <span>
-        <img class="card-img album-img" :src="cover(album.cover)" alt="" />
+        <img class="card-img album-img" :src="cover(album.cover)" alt="" style="width: 266px;height: 266px;"/>
       </span>
       <div class="createdesc botmedia">
         <div class="botmediadess-position" v-if="loading">
@@ -123,7 +124,6 @@ export default {
   width: 100%;
   font-size: 20px;
   position: relative;
-  width: 340.73px;
   height: 340.73px;
 }
 </style>

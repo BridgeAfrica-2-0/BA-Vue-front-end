@@ -135,7 +135,7 @@ export default {
       commit("setSponsoredBusinesses", data.data.sponsord);
        commit("setSearchState", payload);
     }).catch(error => {
-      console.log(
+      console.dir(
         {erroe:error}
       );
       throw error;

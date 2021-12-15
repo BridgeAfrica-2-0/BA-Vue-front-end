@@ -318,44 +318,14 @@
                       <label for="Neighbor" class="username">
                         {{ $t("profileowner.Adress") }} :</label
                       >
-
-                      <div id="geocoder"></div>
-                      <!-- <gmap-autocomplete
-                        @place_changed="initMarker"
-                        class="form-control"
-                      >
-                      </gmap-autocomplete> -->
                     </div>
                   </div>
                 </div>
                 <div style="width: 100%; height: 200px">
-                  <MglMap
-                    :accessToken="accessToken"
-                    :center="coordinates"
-                    :mapStyle="mapStyle"
-                    :zoom="zoom"
-                  >
-                    <MglGeocoderControl
-                      :accessToken="accessToken"
-                      @result="getGeoCoderResult"
-                      color="blue"
-                    />
-                    <MglMarker :coordinates="coordinates" />
-                  </MglMap>
+                  <AutocompleteLocation
+                    @get-address-details="getGeoCoderResult"
+                  />
                 </div>
-
-                <!-- <gmap-map
-                  :zoom="14"
-                  :center="center"
-                  style="width: 100%; height: 200px"
-                >
-                  <gmap-marker
-                    :key="index"
-                    v-for="(m, index) in locationMarkers"
-                    :position="m.position"
-                    @click="center = m.position"
-                  ></gmap-marker>
-                </gmap-map> -->
               </div>
             </tab-content>
 
@@ -942,6 +912,7 @@ import axios from "axios";
 import Mapbox from "mapbox-gl";
 import { MglMap, MglMarker } from "vue-mapbox";
 import MglGeocoderControl from "vue-mapbox-geocoder";
+import AutocompleteLocation from "@/components/AutocompleteLocation";
 import Multiselect from "vue-multiselect";
 import { validationMixin } from "vuelidate";
 
@@ -1044,12 +1015,12 @@ export default {
   methods: {
     infiniteHandler($state) {
       console.log("loading started");
-      
+
       if (this.page == 1) {
         this.profilebusiness.splice(0);
       }
-      let url = "business/user?page="+this.page;
-      
+      let url = "business/user?page=" + this.page;
+
       this.$store
         .dispatch("profile/loadMore", url)
         .then(({ data }) => {
@@ -1071,8 +1042,8 @@ export default {
       console.log(event);
     },
     getGeoCoderResult(response) {
-      this.coordinates = response.result.center;
-      this.address = response.result.place_name;
+      this.coordinates = response.center;
+      this.address = response.place_name;
       console.log(response);
     },
 
@@ -1698,9 +1669,7 @@ export default {
   components: {
     Multiselect,
     VuePhoneNumberInput,
-    MglMap,
-    MglGeocoderControl,
-    MglMarker,
+    AutocompleteLocation,
   },
 
   computed: {

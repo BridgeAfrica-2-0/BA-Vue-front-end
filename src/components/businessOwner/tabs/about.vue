@@ -2,14 +2,14 @@
   <div ref="about">
     <b-icon icon="person-fill" class="icon-size" variant="primary"></b-icon>
     <b> {{ $t("businessowner.About") }} </b>
-
-    <hr />
+    
+    <hr /> 
 
     <b-card>
       <div class="mb-3">
         <mapbox :coordinates="[business_about.lng, business_about.lat]" />
       </div>
-    test
+    
       <b-card>
         <b-row v-if="loading">
           <b-col>
@@ -27,11 +27,12 @@
                   icon="briefcase-fill"
                   class="primary icon-size"
                 ></b-icon>
-                <span
+                <!-- <span
                   v-for="category in business_about.category"
                   :key="category.id"
                   >{{ category.name }},
-                </span>
+                </span> -->
+                <span>{{business_about.category}}</span>
               </p>
               <p>
                 <b-icon icon="search" class="primary icon-size"></b-icon>
@@ -39,12 +40,16 @@
               </p>
               <p>
                 <b-icon icon="geo-alt-fill" class="primary icon-size"></b-icon>
-                {{ business_about.address }}, {{ business_about.city }},
+                <span v-if="business_about.country">
+                  {{ business_about.address }}, {{ business_about.city }},
                 {{ business_about.country[0].name }}
+                </span>
               </p>
               <p>
                 <b-icon icon="link" class="primary icon-size"></b-icon>
-                {{ business_about.website }}
+                <span v-if="business_about.website ">
+                  {{ business_about.website }}
+                </span>
               </p>
               <p>
                 <b-icon icon="people-fill" class="primary icon-size"></b-icon>
@@ -103,7 +108,7 @@
           </b-col>
         </b-row>
       </b-card>
-
+  
       <!-- original card -->
       <!-- <b-row v-if="loading">
         <b-col>
@@ -712,7 +717,9 @@ export default {
         business_abobusiness_id: this.business_about_input,
         business_id: this.$route.params.id,
       })
-      .then((response) => {
+      .then((response) => { 
+
+        
         this.dayOfWorks = this.initialize(this.dayOfWorks);
       })
       .catch((error) => {

@@ -4,7 +4,7 @@
     <b> {{ $t("businessowner.About") }} </b>
     
     <hr /> 
-    {{business_about}}
+    <!-- {{business_about}} -->
     <b-card>
       <div class="mb-3">
         <mapbox :coordinates="[business_about.lng, business_about.lat]" />
@@ -32,18 +32,19 @@
                   :key="category.id"
                   >{{ category.name }},
                 </span> -->
-                <span>{{business_about.category}}</span>
+                <span>{{ business_about.name }}</span>
               </p>
               <p>
                 <b-icon icon="search" class="primary icon-size"></b-icon>
-                {{ business_about.name }}
+                {{business_about.keywords[0]}}
               </p>
               <p>
                 <b-icon icon="geo-alt-fill" class="primary icon-size"></b-icon>
-                <span v-if="business_about.country">
+                {{ business_about.city }}
+                <!-- <span v-if="business_about.country">
                   {{ business_about.address }}, {{ business_about.city }},
                 {{ business_about.country[0].name }}
-                </span>
+                </span> -->
               </p>
               <p>
                 <b-icon icon="link" class="primary icon-size"></b-icon>

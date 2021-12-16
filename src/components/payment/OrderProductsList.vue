@@ -1,12 +1,13 @@
 <template>
-	<div id="orderList">
+	<div id="orderList"> 
 		<div
 			class="row order-item mb-4"
 			v-for="(cart_item, i) in orderForCurrentPage"
 			:key="i"
 		>
 			<div class="col-12 order-item-caroussel col-sm-4 mb-3 col-md-4">
-				<ProductCaroussel :productImages="productImages" />
+				<!-- <ProductCaroussel :productImages="images(cart_item.product_picture)" /> -->
+				<img :src="cart_item.product_picture" alt="">
 			</div>
 			<div
 				class="col-auto flex-fill order-info body-font-size col-sm-8 col-md-8"
@@ -121,11 +122,11 @@
 </template>
 
 <script>
-	import ProductCaroussel from "./ProductCaroussel.vue";
+	// import ProductCaroussel from "./ProductCaroussel.vue";
 	export default {
 		name: "OrderProductsList",
 		components: {
-			ProductCaroussel,
+			// ProductCaroussel,
 		},
 		async created() {
 			this.loading = true;
@@ -145,6 +146,18 @@
 				});
 		},
 		methods: {
+
+			images(img1){
+				let image = [];
+				if(img1.length){
+					image=  img1;
+				}else{
+					image.push({
+						img: img1
+					})
+				}
+				return image
+			},
 
 			shippingCost(item){
 				let data ={};

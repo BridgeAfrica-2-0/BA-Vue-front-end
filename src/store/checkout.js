@@ -57,10 +57,10 @@ const actions = {
   },
   async getCart({ commit }) {
     await axios.get('ckeckout-cart').then((response) => {
-      console.log(response.data)
+      console.log(response)
       commit('setCart', response.data)
     }).catch((error) => {
-      console.log(error)
+      console.log({error:error})
     })
   },
   async getBussiness({ commit }, id) {

@@ -12,11 +12,15 @@
       >
         <!-- Text slides with image -->
         <b-carousel-slide
-          :img-src="require('@/assets/img/dashboard.png')"
+          :img-src="require('@/assets/img/dash1.png')"
         ></b-carousel-slide>
 
        <b-carousel-slide
-          :img-src="require('@/assets/img/dashbanner2.png')"
+          :img-src="require('@/assets/img/dash2.png')"
+        ></b-carousel-slide>
+
+          <b-carousel-slide
+          :img-src="require('@/assets/img/dash3.png')"
         ></b-carousel-slide>
 
 

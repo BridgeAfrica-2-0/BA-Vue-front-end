@@ -49,7 +49,6 @@ import cart from "./cart"
 import { social } from './social';
 import networkSetting from './networkSetting';
 
-
 Vue.use(Vuex);
 
 

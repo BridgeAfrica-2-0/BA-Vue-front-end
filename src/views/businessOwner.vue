@@ -21,14 +21,6 @@
         <Inbox />
       </div>
 
-      <!-- <div class="container-fluid">
-        <ly-tab
-          v-model="selectedId"
-          :items="items"
-          :options="options"
-          class="center-ly"
-        >
-        </ly-tab> -->
 
       <div class="mt-3" v-if="selectedId == '2'">
         <Settings v-bind:currenttab="selectedId" />

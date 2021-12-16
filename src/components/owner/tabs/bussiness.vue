@@ -1,5 +1,8 @@
 <template>
   <div class="p-0 m-0">
+
+    
+                  
     <div class="col-md-12 p-0">
       <fas-icon
         class="violet float-left mr-1 icon-size primary"
@@ -283,44 +286,14 @@
                       <label for="Neighbor" class="username">
                         {{ $t("profileowner.Adress") }} :</label
                       >
-
-                      <div id="geocoder"></div>
-                      <!-- <gmap-autocomplete
-                        @place_changed="initMarker"
-                        class="form-control"
-                      >
-                      </gmap-autocomplete> -->
                     </div>
                   </div>
                 </div>
-                <div style="width: 100%; height: 200px">
-                  <MglMap
-                    :accessToken="accessToken"
-                    :center="coordinates"
-                    :mapStyle="mapStyle"
-                    :zoom="zoom"
-                  >
-                    <MglGeocoderControl
-                      :accessToken="accessToken"
-                      @result="getGeoCoderResult"
-                      color="blue"
-                    />
-                    <MglMarker :coordinates="coordinates" />
-                  </MglMap>
+                <div style="width: 100%; height: 200px; overflow:hidden">
+                  <AutocompleteLocation
+                    @get-address-details="getGeoCoderResult"
+                  />
                 </div>
-
-                <!-- <gmap-map
-                  :zoom="14"
-                  :center="center"
-                  style="width: 100%; height: 200px"
-                >
-                  <gmap-marker
-                    :key="index"
-                    v-for="(m, index) in locationMarkers"
-                    :position="m.position"
-                    @click="center = m.position"
-                  ></gmap-marker>
-                </gmap-map> -->
               </div>
             </tab-content>
 
@@ -655,19 +628,21 @@
                         {{ $t("profileowner.Adress") }} :</label
                       >
 
-                      <gmap-autocomplete @place_changed="initMarker" class="form-control"> </gmap-autocomplete>
+                     
                     </div>
                   </div>
+
+
+                   <div style="width: 100%; height: 200px; overflow:hidden">
+                  <AutocompleteLocation
+                    @get-address-details="getGeoCoderResult"
+                  />
                 </div>
 
-                <gmap-map :zoom="14" :center="center" style="width: 100%; height: 200px">
-                  <gmap-marker
-                    :key="index"
-                    v-for="(m, index) in locationMarkers"
-                    :position="m.position"
-                    @click="center = m.position"
-                  ></gmap-marker>
-                </gmap-map>
+
+                </div>
+
+                
               </div>
             </tab-content>
 
@@ -831,6 +806,9 @@ import axios from "axios";
 import Mapbox from "mapbox-gl";
 import { MglMap, MglMarker } from "vue-mapbox";
 import MglGeocoderControl from "vue-mapbox-geocoder";
+//import AutocompleteLocation from "@/components/AutocompleteLocation";
+
+import AutocompleteLocation from "@/components/AutocompleteMapbox"; 
 import Multiselect from "vue-multiselect";
 import { validationMixin } from "vuelidate";
 
@@ -847,7 +825,7 @@ export default {
       bizId: "",
       profileBusinesss: [],
       infiniteId: +new Date(),
-      profilebusiness: [],
+     // profilebusiness: [],
       editbiz: "",
       selectedusecase: "",
       keywordds: [],
@@ -944,12 +922,16 @@ export default {
     },
 
     infiniteHandler($state) {
+
       
       let url = 'business/user?page=' + this.page;
+
 
       this.$store
         .dispatch("profile/loadMore", url)
         .then(({ data }) => {
+          console.log(data);
+
           console.log(data.data)
           if (data.data.length) {
             
@@ -969,8 +951,9 @@ export default {
       console.log(event);
     },
     getGeoCoderResult(response) {
-      this.coordinates = response.result.center;
-      this.address = response.result.place_name;
+      this.coordinates = response.coordinates;
+      this.address = response.address;
+      console.log("yoo mother fuckers");
       console.log(response);
     },
 
@@ -1355,7 +1338,6 @@ export default {
         formData2.append("address", this.address);
         formData2.append("division", this.selecteddivision);
         formData2.append("council", this.selectedmunicipality);
-
         formData2.append("neigborhood", this.selectedlocality);
         formData2.append("lat", this.coordinates[1]);
         formData2.append("lng", this.coordinates[0]);
@@ -1383,7 +1365,7 @@ export default {
             console.log(response);
 
             this.sendingB = false;
-            this.profileBusiness();
+           // this.profileBusiness();
 
             this.$refs['createBusinessModal'].hide();
             this.flashMessage.show({
@@ -1450,8 +1432,7 @@ export default {
         formData2.append('address', this.adress);
         formData2.append('division', this.selecteddivision);
         formData2.append('council', this.selectedmunicipality);
-
-        formData2.append('neigborhood', this.selectedlocality);
+         formData2.append('neigborhood', this.selectedlocality);
         formData2.append('lat', this.center.lat);
         formData2.append('lng', this.center.lng);
         formData2.append('phone', this.phone1);
@@ -1596,9 +1577,7 @@ export default {
   components: {
     Multiselect,
     VuePhoneNumberInput,
-    MglMap,
-    MglGeocoderControl,
-    MglMarker,
+    AutocompleteLocation,
   },
 
   computed: {

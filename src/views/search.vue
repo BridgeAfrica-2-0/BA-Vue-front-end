@@ -584,6 +584,7 @@
               <mapbox
                 :businesses="businesses.data"
                 :products="miniproducts.data"
+                :networks="mininetworks.data"
               />
             </div>
           </div>
@@ -670,6 +671,9 @@ export default {
     },
     allproducts() {
       return this.$store.getters["marketSearch/getProducts"];
+    },
+    mininetworks() {
+      return this.$store.getters["allSearch/getNetworks"];
     },
 
     products() {
@@ -1656,7 +1660,7 @@ export default {
   },
 
   watch: {
-    selectedId: function () {
+    selectedId: function() {
       this.changeComponent();
       this.changePlaceHolder();
       this.changeNotFoundTitle();

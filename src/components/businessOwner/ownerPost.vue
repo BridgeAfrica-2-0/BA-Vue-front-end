@@ -6,13 +6,13 @@
         <b-col cols="3" md="1" class="m-md-0 p-md-0">
           <b-avatar
             variant="primary"
-            square
+            :square =" 'user' === profile.user_type ? false : true"
             class="img-fluid avat-comment"
-            :src="business_intro.logo_path"
+            :src="profile.profile_picture"
           ></b-avatar>
         </b-col>
         <b-col cols="9" md="11" class="p-0 m-0 pr-3">
-          <input :placeholder="$t('businessowner.Post_a_business_update')" v-b-modal.modal-xl class="comment" type="text" />
+          <input :placeholder="$t('businessowner.Post_a_business_update')" v-b-modal.modal-xl_ class="comment" type="text" />
           <fas-icon class="primary send-cmt" :icon="['fas', 'paper-plane']" />
         </b-col>
       </b-row>
@@ -39,7 +39,7 @@
                 class="post-btn"
               >
                 <fas-icon class="icons" :icon="['fas', 'photo-video']" size="lg" />
-                <span class="username"> {{ $t('businessowner.Photo_Video') }}</span>
+                <span class="username">{{ $t('businessowner.Photo_Video') }}</span>
               </b-button>
             </b-col>
             <!-- Attach File-->
@@ -76,8 +76,8 @@
     </b-card>
 
     <!-- User Posts Listing Section-->
-    <b-card class="px-md-3">
-      <div class="">
+    
+      <div class="px-md-3">
         <div class="col-md-12 col-lg-12 d-flex align-items-stretch mb-lg-0" style="padding-left: 0; padding-top: 3px">
           <b-modal id="modal-edit" ref="modal-edit" centered hide-footer :title="$t('businessowner.Update_Post')" @hidden="resetPostData">
             <b-row ref="loader">
@@ -356,8 +356,8 @@
         </b-modal>
 
         <b-modal
-          id="modal-xl"
-          ref="modal-xl"
+          id="modal-xl_"
+          ref="modal-xl_"
           centered
           hide-footer
           :title="$t('businessowner.Create_Post')"
@@ -444,11 +444,11 @@
               </div>
               <br />
 
-              <div class="h300px">
+              
                 <div
                   v-for="hyperlink in createPost.hyperlinks"
                   :key="hyperlink.fileName"
-                  class="bordder"
+                  class="bordder h300px"
                 >
                   <span class="float-left"> {{ hyperlink.fileName }} </span>
                   <span
@@ -458,13 +458,8 @@
                     {{ $t("businessowner.delete") }}
                   </span>
                 </div>
-              </div>
-                <div class="h300px">
-                  <div v-for="hyperlink in createPost.hyperlinks" :key="hyperlink.fileName" class="bordder">
-                    <span class="float-left"> {{ hyperlink.fileName }} </span>
-                    <span class="float-right" @click="deleteItem(hyperlink.fileName)"> {{ $t('businessowner.delete') }} </span>
-                  </div>
-                </div>
+              
+                
                   <div v-for="movie in createPost.movies" :key="movie.fileName" class="">
                     <div id="preview">
                       <span class="upload-cancel" @click="deleteItem(movie.fileName)">
@@ -501,8 +496,8 @@
       </div>  
 
       <Post
-        v-for="(item, index) in owner_post"
-        :key="index"
+        v-for="item in owner_post"
+        :key="item.updated_at"
         :post="item"
         :mapvideo="() => mapvideo(item.media)"
         :mapmediae="() => mapmediae(item.media)"
@@ -512,7 +507,7 @@
       />
 
       <infinite-loading :identifier="infiniteId" ref="infiniteLoading" @infinite="infiniteHandler"></infinite-loading>
-    </b-card>
+    
   </div>
 </template>
 
@@ -565,7 +560,11 @@ export default {
   methods: {
     ...mapMutations({
       auth: "auth/profilConnected",
+      postRemove: "businessOwner/removePost",
+      postUpdate: "businessOwner/UpdatePost",
+      postCreate: "businessOwner/createPost",
     }),
+
     async getAuth() {
       const type = [
         "NetworkEditors",
@@ -649,7 +648,6 @@ export default {
     },
 
     deletePost(post) {
-      console.log(post);
 
       let loader = this.$loading.show({
         container: this.fullPage ? null : this.$refs.creatform,
@@ -658,12 +656,15 @@ export default {
         color: "#e75c18",
       });
 
+      const uuid = post.post_id ? post.post_id : post.id
+
       axios
-        .post("business/delete/post/" + post.post_id, {
+        .post("business/delete/post/"+ uuid , {
           name: this.name,
         })
         .then((response) => {
-          console.log(response.data);
+
+          this.postRemove(uuid)
 
           this.flashMessage.show({
             status: "success",
@@ -750,6 +751,7 @@ export default {
         .then((response) => {
           console.log(response);
 
+          this.postUpdate(response.data.data)
           this.flashMessage.show({
             status: "success",
             blockClass: "custom-block-class",
@@ -861,7 +863,7 @@ export default {
     },
 
     selectDocumentOutsidePost(event) {
-      console.log(event);
+      
       this.createPost.hyperlinks.push({
         target: event.target,
         document: this.service(event.target),
@@ -934,8 +936,6 @@ export default {
         });
       }
 
-      formData2.append("type", "image");
-
       formData2.append("content", this.createPost.postBusinessUpdate);
 
       console.log(formData2);
@@ -955,6 +955,8 @@ export default {
         .then((response) => {
           console.log(response);
 
+          this.postCreate(response.data.data)
+
           this.flashMessage.show({
             status: "success",
             blockClass: "custom-block-class",
@@ -962,10 +964,12 @@ export default {
           });
           this.isUploading = false;
           loader.hide();
-          this.$refs["modal-xl"].hide();
+          this.$refs["modal-xl_"].hide();
           this.reloads();
           this.page = 1;
           this.infiniteId += 1;
+
+          
         })
         .catch((err) => {
           if (err.response.status == 422) {
@@ -1008,6 +1012,7 @@ export default {
   computed: {
     ...mapGetters({
       profile: "auth/profilConnected",
+      owner_post: "businessOwner/getOwnerPost"
     }),
 
     business_intro() {
@@ -1019,10 +1024,6 @@ export default {
       return this.$store.state.businessOwner.businessInfo;
     },
 
-    owner_post() {
-      console.log(this.$store.state.businessOwner.ownerPost);
-      return this.$store.state.businessOwner.ownerPost;
-    },
   },
   mounted() {
     this.url = this.$route.params.id;

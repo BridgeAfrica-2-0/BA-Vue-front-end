@@ -64,7 +64,6 @@ export default {
   methods: {
     changer(){
       this.$emit('changeSelected')
-      console.log("evenement reçu ----")
     }
   }
 };

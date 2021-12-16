@@ -1,31 +1,32 @@
 <template>
   <header class="position-relative">
     <b-navbar toggleable="lg" variant="faded" type="light">
-      <div class="container">
         <div class="col-md-12 col-lg-2 col-xl-2 text-center">
           <a class="d-inline-block align-top mt-1" href="#">
-            <img src="@/assets/img/BAC-clear-dotted-logo.png" alt="" class="balogo" loading="lazy" />
+            <img src="@/assets/logo.png" alt="" class="balogo desktop" loading="lazy" />
+            <img src="@/assets/img/BAC-clear-dotted-logo.png" alt="" class="balogo mobile" loading="lazy" />
           </a>
         </div>
+      <div class="container p-0">
 
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
         <b-collapse id="nav-collapse" is-nav>
           <b-navbar-nav class="ml-auto text-center">
-            <b-nav-item href="#">
-              <span class="text-dark font-arvo nav-span">{{ $t("general.Home") }}</span>
+            <b-nav-item >
+              <span class="text-dark font-arvo nav-span"><router-link :to="{name: 'home1'}">{{ $t("general.Home") }}</router-link></span>
             </b-nav-item>
-            <b-nav-item href="/about" class="ml-md-3" :class="currentRouteName == 'about' ? 'active' : ''">
-              <span class="text-dark font-arvo nav-span">{{ $t("general.About_Us") }}</span>
+            <b-nav-item  class="ml-md-3" :class="currentRouteName == 'about' ? 'active' : ''">
+              <span class="text-dark font-arvo nav-span"> <router-link :to="{name: 'about'}">{{ $t("general.About_Us") }}</router-link></span>
             </b-nav-item>
-            <b-nav-item href="/contact" class="ml-md-3" :class="currentRouteName == 'contact' ? 'active' : ''">
-              <span class="text-dark font-arvo nav-span">{{ $t("general.Contact_Us") }}</span>
+            <b-nav-item  class="ml-md-3" :class="currentRouteName == 'contact' ? 'active' : ''">
+              <span class="text-dark font-arvo nav-span"> <router-link :to="{name: 'contact'}">{{ $t("general.Contact_Us") }}</router-link> </span>
             </b-nav-item>
-            <b-nav-item href="#" class="ml-md-3">
-              <span class="text-dark font-arvo nav-span">{{ $t("general.Login") }}</span>
+            <b-nav-item class="ml-md-3">
+              <span class="text-dark font-arvo nav-span"> <router-link :to="{name: 'Login'}">{{ $t("general.Login") }} </router-link> </span>
             </b-nav-item>
-            <b-nav-item href="#" class="ml-md-3">
-              <span class="text-dark font-arvo nav-span">{{ $t("general.Sign_Up") }}</span>
+            <b-nav-item  class="ml-md-3">
+              <span class="text-dark font-arvo nav-span"> <router-link :to="{name: 'signup'}">{{ $t("general.Sign_Up") }}</router-link> </span>
             </b-nav-item>
 
             
@@ -67,6 +68,16 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+@media (min-width: 992px)
+{
+
+
+.navbar-expand-lg {
+    
+    padding-right: 0px;
+}
+}
 .font-arvo {
   font-family: 'Arvo', serif;
 }
@@ -94,20 +105,29 @@ export default {
 .nav-item:hover .nav-link span {
   color: #e75c18 !important;
 }
-
+.container{
+  margin-left: 10px !important;
+  margin-right: 50px !important;
+}
 
 @media only screen and (max-width: 768px) {
   .balogo{
-    width: 80px ;
-    height: 50px ;
+    width: 90px ;
+    height: 40px ;
+  }
+  .desktop{
+    display: none;
   }
 }
 
 
 @media only screen and (min-width: 768px) {
   .balogo{
-    width: 100px ;
-    height: 80px ;
+    width: 200px ;
+    height: 70px ;
+  }
+  .mobile{
+    display: none;
   }
 }
 </style>

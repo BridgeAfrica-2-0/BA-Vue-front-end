@@ -349,8 +349,8 @@ export default {
             message: this.getStatus,
           });
         })
-        .catch((error) => {
-          console.log(error);
+        .catch((err) => {
+          console.log({err:err});
           this.flashMessage.show({
             status: "error",
             message: "error occur",

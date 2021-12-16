@@ -2,14 +2,14 @@
   <div ref="about">
     <b-icon icon="person-fill" class="icon-size" variant="primary"></b-icon>
     <b> {{ $t("businessowner.About") }} </b>
-
-    <hr />
+    
+    <hr /> 
 
     <b-card>
       <div class="mb-3">
         <mapbox :coordinates="[business_about.lng, business_about.lat]" />
       </div>
-
+    
       <b-card>
         <b-row v-if="loading">
           <b-col>
@@ -27,11 +27,12 @@
                   icon="briefcase-fill"
                   class="primary icon-size"
                 ></b-icon>
-                <span
+                <!-- <span
                   v-for="category in business_about.category"
                   :key="category.id"
                   >{{ category.name }},
-                </span>
+                </span> -->
+                <span>{{business_about.category}}</span>
               </p>
               <p>
                 <b-icon icon="search" class="primary icon-size"></b-icon>
@@ -39,12 +40,16 @@
               </p>
               <p>
                 <b-icon icon="geo-alt-fill" class="primary icon-size"></b-icon>
-                {{ business_about.address }}, {{ business_about.city }},
+                <span v-if="business_about.country">
+                  {{ business_about.address }}, {{ business_about.city }},
                 {{ business_about.country[0].name }}
+                </span>
               </p>
               <p>
                 <b-icon icon="link" class="primary icon-size"></b-icon>
-                {{ business_about.website }}
+                <span v-if="business_about.website ">
+                  {{ business_about.website }}
+                </span>
               </p>
               <p>
                 <b-icon icon="people-fill" class="primary icon-size"></b-icon>
@@ -103,7 +108,7 @@
           </b-col>
         </b-row>
       </b-card>
-
+  
       <!-- original card -->
       <!-- <b-row v-if="loading">
         <b-col>
@@ -267,39 +272,39 @@
 
         <div class="form-group">
           <label for="alias">{{ $t('businessowner.Category') }}:</label><br />
-         <multiselect
+          <multiselect
             v-model="multiselecvalue"
             @input="subcategories"
             :tag-placeholder="$t('businessowner.Add_this_as_new_tag')"
             :placeholder="$t('businessowner.Search_or_add_a_tag')"
-            :label="$t('businessowner.name')"
+            label="name"
             track-by="id"
             :options="pcategories"
             :multiple="true"
             :taggable="true"
             @tag="addTag"
-          ></multiselect>
+          ></multiselect> 
         </div>
 
         <div class="form-group">
 
           <label for="alias">{{ $t('businessowner.Sub_Category') }}:</label><br />
-          <multiselect
+           <multiselect
             v-model="filterselectvalue"
             :tag-placeholder="$t('businessowner.Add_this_as_new_tag')"
             :placeholder="$t('businessowner.Search_or_add_a_tag')"
-            :label="$t('businessowner.name')"
+            label="name"
             track-by="subcategory_id"
             :options="scategories"
             :multiple="true"
             :taggable="true"
             @tag="addFilter"
-          ></multiselect>
+          ></multiselect> 
         </div>
 
-        <label class="typo__label">{{ $t("businessowner.Filters") }}</label>
-        <div>
-          <!--<b-card no-body>
+        <label class="typo__label">{{ $t('businessowner.Filters') }}</label>
+         <div>
+          <b-card no-body>
             <b-tabs pills card vertical>
               <b-tab
                 :title="filters.name"
@@ -327,7 +332,7 @@
                 </b-card-text>
               </b-tab>
             </b-tabs>
-          </b-card> -->
+          </b-card> 
         </div>
 
         <div class="form-group">
@@ -351,7 +356,6 @@
           label-for="input-1"
           label-size="sm"
         >
-        <!-- {{country}}--------{{countries}} -->
           <multiselect
             v-model="country"
             @input="Region"
@@ -713,7 +717,9 @@ export default {
         business_abobusiness_id: this.business_about_input,
         business_id: this.$route.params.id,
       })
-      .then((response) => {
+      .then((response) => { 
+
+        
         this.dayOfWorks = this.initialize(this.dayOfWorks);
       })
       .catch((error) => {

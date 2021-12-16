@@ -7,19 +7,19 @@
             class="logo-sizee avat"
             :square="'user' == item.poster_type ? false : true"
             variant="primary"
-            :src="item.logo_path"
+            :src="item.user_picture"
           ></b-avatar>
         </span>
         <div class="pl-2 pl-md-3 pt-md-2">
           <h5 class="m-0 usernamee">
             {{ item.user_name }}
           </h5>
-          <p class="durationn">{{ item.created_at | now }}</p>
+          <p class="duration">{{ item.created_at | now }}</p>
         </div>
 
         <div
           class="toright"
-          v-if="!isDisplayInSearch ? isYourOwnPost && canBeDelete : false"
+          v-if="'dashboard' !== $route.name ? !isDisplayInSearch ? isYourOwnPost && canBeDelete : false : false"
         >
           <b-dropdown variant="link" size="sm" no-caret>
             <template #button-content>
@@ -42,7 +42,8 @@
           </b-dropdown>
         </div>
       </div>
-      <div class="m-0 p-0">
+
+      <div class="mt-2 ml-3 p-0">
         <p class="post-text">
           <!--     :text="item.content.details"   -->
           <read-more
@@ -76,10 +77,10 @@
                   : item.source.business_name
               }}
             </h5>
-            <p class="durationn">{{ item.source.created_at | now }}</p>
+            <p class="duration">{{ item.source.created_at | now }}</p>
           </div>
         </div>
-        <div class="m-0 p-0">
+        <div class="mt-2 ml-3 p-0">
           <p class="post-text">
             <read-more
               v-if="item.source.content"
@@ -92,8 +93,8 @@
           </p>
         </div>
 
-        <div v-if="item.source.media.length > 0" class="">
-          <span v-for="video in mapvideo()" :key="video">
+        <div v-if="item.source.media.length" class="">
+          <span v-for="video in mapVideo(item.source.media)" :key="video">
             <youtube
               class="w-100 videoh"
               :video-id="getId(video)"
@@ -105,7 +106,7 @@
           <light
             css=" "
             :cells="item.source.media.length"
-            :items="mapmediae()"
+            :items="mapMedia(item.source.media)"
           ></light>
         </div>
       </div>
@@ -162,28 +163,29 @@
             : false
           : false
       "
-    >
+    >                                                                                                               
       <div class="m-md-0 p-md-0">
         <b-avatar
           b-avatar
           class="logo-sizee-18 avat img-fluid avat-comment avatar-border"
           variant="primary"
           :square="'user' == profile.user_type ? false : true"
-          :src="businessLogo"
+          :src="profile.profile_picture"
         ></b-avatar>
       </div>
 
-      <div class="p-0 m-0 pr-3 inline-comment">
+      <div class="p-0 m-0 pr-3 inline-comment" style="position: relative;">
         <textarea-autosize
           :placeholder="$t('businessowner.Post_a_Comment')"
           v-model="comment"
-          class="comment"
+          class="comment py-2 pr-5 pl-3"
           :min-height="30"
           :max-height="350"
           @keypress.enter="onCreateComment"
         />
         <b-spinner
-          style="color: rgb(231, 92, 24); position: absolute; right: 17px"
+          style="color: rgb(231, 92, 24);"
+          class="send-cmt"
           v-if="createCommentRequestIsActive"
         ></b-spinner>
         <fas-icon
@@ -298,6 +300,37 @@ export default {
   },
 
   methods: {
+
+    mapMedia(media) {
+      let mediaarr = [];
+
+      media.forEach((item) => {
+        let type = this.checkMediaType(item.media_type);
+        if (type != "video") {
+          mediaarr.push(item.media_url);
+        }
+      });
+
+      return mediaarr;
+    },
+
+    mapVideo(media) {
+      let mediaarr = [];
+
+      media.forEach((item) => {
+        let type = this.checkMediaType(item.media_type);
+        if (type == "video") {
+          mediaarr.push(item.media_url);
+        }
+      });
+
+      return mediaarr;
+    },
+
+    checkMediaType(media) {
+      return media.split("/")[0];
+    },
+
     ...mapMutations({
       addNewComment: "networkProfile/updatePost",
     }),
@@ -586,12 +619,7 @@ export default {
     width: 64px;
     height: 64px;
   }
-  .send-cmt {
-    position: relative;
-    margin-left: 95%;
-    top: -28px;
-    cursor: pointer;
-  }
+  
   .post-btn {
     border: none !important;
     margin-right: 50px;
@@ -610,9 +638,17 @@ export default {
     height: 40px;
   }
 }
+
+.send-cmt {
+  position: absolute;
+  top: 14px;
+  right: 19px;
+  cursor: pointer;
+}
+
 @media (max-width: 762px) {
   .commentt[data-v-41fcb621] {
-    width: 99%;
+    width: 98%;
     border: solid 1 px #ccc;
     border-radius: 25 px;
     background-color: #ddd;
@@ -625,12 +661,7 @@ export default {
     border: none !important;
     margin-right: 0px;
   }
-  .send-cmt {
-    position: relative;
-    margin-left: 90%;
-    top: -28px;
-    cursor: pointer;
-  }
+  
   .avat {
     width: 40px;
     height: 40px;
@@ -656,13 +687,13 @@ export default {
   width: 315px;
 }
 .comment {
-  width: 90%;
+  width: 100%;
   border: solid 1px #ccc;
   border-radius: 25px;
   background-color: #ddd;
   height: 34px;
   padding-left: 10px;
-  margin-left: 8%;
+  margin-left: 2%;
 }
 .comment:focus {
   outline: none;
@@ -736,7 +767,7 @@ export default {
   border-color: red;
 }
 
-.durationn {
+.duration {
   font-weight: 400;
   font-size: 15px;
   color: black;

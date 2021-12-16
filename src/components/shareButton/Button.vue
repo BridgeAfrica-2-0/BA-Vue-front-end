@@ -18,7 +18,6 @@
       :type="'network'"
       :post="post"
       :update="update"
-
     >
       <template v-slot:owner>
         <div class="d-flex align-items-center py-3 px-2 mb-2 border">
@@ -73,7 +72,6 @@
       :type="'business'"
       :post="post"
       :update="update"
-      
     >
       <template v-slot:owner>
         <div class="d-flex align-items-center py-3 px-2 mb-2 border">
@@ -117,7 +115,11 @@
         v-if="isYourOwnPost"
       >
         <span class="text-ored">
-          <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
+          <b-avatar
+            variant="light"
+            src="/icons/profile.png"
+            square="true"
+          ></b-avatar>
         </span>
         <div class="d-flex flex-column ml-1">
           <span>{{ $t("search.Share_to_your_Profile") }} </span>
@@ -130,7 +132,11 @@
         v-if="isYourOwnPost"
       >
         <span class="text-ored">
-          <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
+          <b-avatar
+            variant="light"
+            src="/icons/newsfeed.png"
+            square="true"
+          ></b-avatar>
         </span>
         <div class="d-flex flex-column ml-1">
           <span>{{ $t("search.Share_to_News_Feed") }}</span>
@@ -143,7 +149,11 @@
         v-if="isNetwork"
       >
         <span class="text-ored">
-          <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
+          <b-avatar
+            variant="light"
+            src="/icons/network.png"
+            square="true"
+          ></b-avatar>
         </span>
         <div class="d-flex flex-column ml-1">
           <span>{{ $t("search.Share_to_Network") }}</span>
@@ -156,7 +166,11 @@
         v-if="isBusiness"
       >
         <span class="text-ored">
-          <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
+          <b-avatar
+            variant="light"
+            src="/icons/business.png"
+            square="true"
+          ></b-avatar>
         </span>
         <div class="d-flex flex-column ml-1">
           <span>{{ $t("search.Share_to_Business") }}</span>
@@ -171,7 +185,11 @@
         data-original-title=""
       >
         <span class="text-ored">
-          <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
+          <b-avatar
+            variant="light"
+            src="/icons/community.png"
+            square="true"
+          ></b-avatar>
         </span>
         <div class="d-flex flex-column ml-1">
           <span>{{ $t("search.Share_to_commnunity") }}</span>
@@ -182,14 +200,7 @@
         <div class="popover-body">
           <div
             @mousedown="open('modal-1')"
-            class="
-              d-inline-flex
-              flex-row
-              align-items-center
-              suggest-item
-              py-2
-              cursor-pointer
-            "
+            class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer"
           >
             <span class="text-ored">
               <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
@@ -201,17 +212,14 @@
 
           <div
             v-if="'network' !== type"
-            class="
-              d-inline-flex
-              flex-row
-              align-items-center
-              suggest-item
-              py-2
-              cursor-pointer
-            "
+            class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer"
           >
             <span class="text-ored">
-              <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
+              <b-avatar
+                variant="light"
+                src="/icons/network.png"
+                square="true"
+              ></b-avatar>
             </span>
             <div class="d-flex flex-column ml-3">
               <span>{{ $t("search.Share_to_Network") }}</span>
@@ -221,17 +229,14 @@
           <div
             v-if="'business' !== type"
             @mousedown="open(`modal-5-${uuid}`)"
-            class="
-              d-inline-flex
-              flex-row
-              align-items-center
-              suggest-item
-              py-2
-              cursor-pointer
-            "
+            class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer"
           >
             <span class="text-ored">
-              <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
+              <b-avatar
+                variant="light"
+                src="/icons/business.png"
+                square="true"
+              ></b-avatar>
             </span>
             <div class="d-flex flex-column ml-3">
               <span>{{ $t("search.Share_to_Business") }}</span>
@@ -242,7 +247,11 @@
 
       <b-dropdown-item class="d-flex py-2 cursor-pointer">
         <span class="text-ored">
-          <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
+          <b-avatar
+            variant="light"
+            src="/icons/copy.png"
+            square="true"
+          ></b-avatar>
         </span>
         <div class="d-flex flex-column ml-1">
           <span>{{ $t("search.Copy_link") }}</span>
@@ -257,7 +266,11 @@
         ref="button"
       >
         <span class="text-ored">
-          <b-icon-share-fill class="col-bg"></b-icon-share-fill>
+          <b-avatar
+            variant="light"
+            src="/icons/share_via.png"
+            square="true"
+          ></b-avatar>
         </span>
         <div class="d-flex flex-column ml-1">
           <span>{{ $t("search.Share_via") }}</span>
@@ -272,57 +285,49 @@
         <div class="popover-body">
           <div
             @mousedown="onShareVia('email')"
-            class="
-              d-inline-flex
-              flex-row
-              align-items-center
-              suggest-item
-              py-2
-              cursor-pointer
-            "
+            class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer"
           >
+            <b-avatar
+              variant="light"
+              src="/icons/email.png"
+              square="true"
+            ></b-avatar>
             <span>Share via Email</span>
           </div>
 
           <div
             @mousedown="onShareVia('facebook')"
-            class="
-              d-inline-flex
-              flex-row
-              align-items-center
-              suggest-item
-              py-2
-              cursor-pointer
-            "
+            class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer"
           >
+            <b-avatar
+              variant="light"
+              src="/icons/facebook.png"
+              square="true"
+            ></b-avatar>
             <span>Share via Facebook</span>
           </div>
 
           <div
             @mousedown="onShareVia('twitter')"
-            class="
-              d-inline-flex
-              flex-row
-              align-items-center
-              suggest-item
-              py-2
-              cursor-pointer
-            "
+            class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer"
           >
+            <b-avatar
+              variant="light"
+              src="/icons/twitter.png"
+              square="true"
+            ></b-avatar>
             <span>Share via Twitter</span>
           </div>
 
           <div
             @mousedown="onShareVia('whatsapp')"
-            class="
-              d-inline-flex
-              flex-row
-              align-items-center
-              suggest-item
-              py-2
-              cursor-pointer
-            "
+            class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer"
           >
+            <b-avatar
+              variant="light"
+              src="/icons/whatsapp.png"
+              square="true"
+            ></b-avatar>
             <span>Share via Whatsapp </span>
           </div>
         </div>
@@ -393,7 +398,7 @@ export default {
     type: null,
     strategy: false,
     uuid: null,
-    update:null
+    update: null,
   }),
 
   created() {
@@ -420,7 +425,6 @@ export default {
         this.profile.user_type == this.post.poster_type;
 
       return isItOwnerPage ? (isYourOwn ? false : true) : false;
-      
     },
 
     isBusiness() {
@@ -438,7 +442,7 @@ export default {
         ? isYourOwn && this.$route.name == "dashboard"
           ? false
           : true
-        : false;
+        : true;
     },
 
     isNetwork() {
@@ -482,10 +486,9 @@ export default {
     open(id) {
       this.modal = id;
 
-      if([`modal-3-${this.uuid}`,`modal-2-${this.uuid}`].includes(id))
-        this.update = id
+      if ([`modal-3-${this.uuid}`, `modal-2-${this.uuid}`].includes(id))
+        this.update = id;
       this.$bvModal.show(id);
-
     },
 
     shareToYourProfile: async function () {
@@ -516,6 +519,9 @@ export default {
 </script>
 
 <style scoped>
+.d-t {
+  color: #e75c18;
+}
 .none {
   display: none;
 }
@@ -541,8 +547,14 @@ export default {
   border-radius: 12px;
 }
 
-li:hover {
-  background: transparent;
+li:hover,
+a[class="dropdown-item"]:hover {
+  background: transparent !important;
+}
+
+.li::active,
+a[class="dropdown-item"]:active {
+  background: transparent !important;
 }
 
 .box-title {

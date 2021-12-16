@@ -93,30 +93,23 @@ export default {
     getContacts: async function () {
       this.loading = true;
 
-      if ("network" == this.type) {
+      const response = await this.$repository.share.showNetworkAndBussiness()
 
-        const response = await this.$repository.share.getNetworks();
+      if (response.success){
 
-        if(response.success) {
-          this.contacts = response.data;
+        if ("network" == this.type) {
+          this.contacts = response.data.network;
           this.actionType = "network";
+          this.loading = false;
+          return true
         }
 
-        return true
-
-      }
-
-      if ("business" == this.type){
-
-        const response = await this.$repository.share.getBusiness();
-
-        if(response.success) {
-          this.contacts = response.data;
+        if ("business" == this.type) {
+          this.contacts = response.data.business;
           this.actionType = "business";
+          this.loading = false;
         }
       }
-
-      this.loading = false;
     },
   },
 };

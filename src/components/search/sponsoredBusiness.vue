@@ -14,7 +14,7 @@
                 {{ item.name }}
               </strong>
               <br />
-              {{ item.category.join(", ") }}
+              {{ item.category.map(category => category.name).join(", ") }} 
               <br />
               {{ item.followers | formatNumber }} Community<br />
 

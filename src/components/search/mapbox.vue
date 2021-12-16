@@ -14,7 +14,7 @@
         <div class="marker" slot="marker">
           <div>B{{ key + 1 }}</div>
         </div>
-        <MglPopup :coordinates="[business.lng, business.lat]" anchor="top">
+        <MglPopup :coordinates="[business.lng, business.lat]">
           <div class="py-4">
             <div
               class="d-flex justify-content-center flex-column pointer"
@@ -24,6 +24,29 @@
               <h6 class="text-center my-3">
                 {{ business.name }}
               </h6>
+              <span v-for="cat in business.category" :key="cat.name">
+                {{ cat.name }}
+              </span>
+              <span>
+                <b-icon-geo-alt class="ico"></b-icon-geo-alt>
+                {{ business.city }}
+                <span
+                  class="ml-2"
+                  v-for="nie in business.neigborhood"
+                  :key="nie.id"
+                >
+                  {{ nie.name }}
+                </span>
+              </span>
+              <read-more
+                :more-str="$t('search.read_more')"
+                class="readmore"
+                :text="business.about_business"
+                link="#"
+                :less-str="$t('search.read_less')"
+                :max-chars="100"
+              >
+              </read-more>
             </div>
           </div>
         </MglPopup>
@@ -62,14 +85,14 @@ export default {
     MglMarker,
     MglPopup,
   },
-  props: ["businesses", "products"],
+  props: ["businesses", "products", "networks"],
   data() {
     return {
       loading: false,
       accessToken: process.env.VUE_APP_MAPBOX_TOKEN,
       mapStyle: "mapbox://styles/mapbox/streets-v11",
       center: [11.504929555178624, 3.8465173382452815], // Lng,Lat
-      zoom: 3,
+      zoom: 12,
     };
   },
   created() {
@@ -79,6 +102,7 @@ export default {
     setTimeout(() => {
       console.log("Business => ".this.businesses);
       console.log("Products => ".this.products);
+      console.log("networks => ".this.networks);
     }, 5000);
   },
   methods: {
@@ -89,7 +113,6 @@ export default {
 };
 </script>
 <style scoped>
-@import url("https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css");
 @import url("https://api.tiles.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css");
 .map-container {
   width: 100%;
@@ -133,5 +156,9 @@ export default {
 }
 .pointer {
   cursor: pointer;
+}
+
+.ico {
+  margin-right: 5px;
 }
 </style>

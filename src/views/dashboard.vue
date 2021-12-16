@@ -163,6 +163,7 @@ import { WhoIsIt } from "@/mixins";
 
 export default {
   name: "dashboard",
+  
   mixins: [WhoIsIt],
 
   data() {
@@ -323,7 +324,7 @@ export default {
     },
   },
 
-  mounted() {
+  created() {
     this.$store
       .dispatch("ProfileAndBusinessDetails/getdetails")
       .then((response) => {
@@ -333,13 +334,12 @@ export default {
     this.dashboardPpost();
   },
 
-  created() {},
-
   computed: {
     details() {
       return this.$store.getters["ProfileAndBusinessDetails/getdetails"];
     },
   },
+
   watch: {
     selectedb(newvalue) {},
   },

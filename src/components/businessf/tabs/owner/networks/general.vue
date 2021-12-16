@@ -162,6 +162,7 @@ watch: {
   data() {
     return {
       size: 0,
+      tab: this.$route.params.currenttab != 0 ? this.$route.params.currenttab : 0,
       tabIndex: 1,
       selectedIdd: 0,
       seetings_id: 0,

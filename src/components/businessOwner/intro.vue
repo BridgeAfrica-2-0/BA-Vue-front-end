@@ -15,9 +15,10 @@
       <b-card-text>
         <p class="d-flex justify-content-start align-items-start">
           <b-icon icon="briefcase-fill" class="primary icon-size"></b-icon>
-          <span v-for="cat in business_intro.category" :key="cat.id">
+          <!-- <span v-for="cat in business_intro.category" :key="cat.id">
             {{ cat.name }}
-          </span>
+          </span> -->
+        {{business_intro.name}}
         </p>
         <p class="d-flex justify-content-start align-items-start">
           <b-icon icon="search" class="primary icon-size"></b-icon>
@@ -134,7 +135,7 @@
       id="bv-edit-about"
       hide-footer
       :title="$t('businessowner.Edit_Address')"
-      v-model="edit2"
+      
       size="lg"
     >
       <b-form>
@@ -159,6 +160,7 @@
             <b-form-select
               :options="categories"
               class="mb-3"
+             
               value-field="item"
               v-model="form.category"
               text-field="name"
@@ -217,12 +219,20 @@
               {{ $t("businessowner.Country") }} :</label
             ><br />
 
-            <country-select
+            <!-- <country-select
               v-model="form.country"
               :country="country"
               topCountry="CM"
               class="form-control text"
-            />
+            /> -->
+             <b-form-select
+              :options="country"
+              class="mb-3"
+              @change="change"
+              value-field="item"
+              v-model="form.country"
+              text-field="name"
+            ></b-form-select>
           </div>
         </b-row>
 
@@ -231,12 +241,21 @@
             <label for="country" class="username">
               {{ $t("businessowner.Region") }} :</label
             ><br />
-            <region-select
+            <!-- <region-select
               v-model="form.region"
               :country="country"
               :region="region"
               class="form-control text"
-            />
+            /> -->
+
+            <b-form-select
+              :options="region"
+              class="mb-3"
+              
+              value-field="item"
+              v-model="form.region"
+              text-field="name"
+            ></b-form-select>
           </div>
           <b-form-group
             id="input-group-2"
@@ -252,7 +271,23 @@
               type="text"
               required
             ></b-form-input>
+
           </b-form-group>
+          <b-form-group
+            id="input-group-2"
+            label="website"
+            label-for="input-2"
+            label-size="sm"
+            class="col-md-6"
+          >
+             <b-form-input
+              id="input-1"
+              class="mt-1"
+              v-model="form.website"
+              type="text"
+              
+            ></b-form-input>
+            </b-form-group>
         </b-row>
 
         <b-button class="mt-3 btn-block" variant="primary" @click="validate">
@@ -275,11 +310,11 @@ export default {
   mixins: [validationMixin],
   data() {
     return {
-      form: this.$store.state.businessOwner.businessInfo,
+      form: null,
       blec: this.business_intro,
 
-      country: null,
-      region: null,
+      country: [],
+      // region: [],
       url: null,
 
       markers: [],
@@ -298,22 +333,22 @@ export default {
 
       category: "",
       categories: [
-        { item: "Professional_and_home_service", name: "Professionals" },
-        { item: "Agriculture ", name: "Agriculture " },
-        { item: "Restaurant ", name: " Restaurant " },
-        { item: "Electronics ", name: "Electronics " },
-        { item: "Handicrafts", name: "Handicrafts" },
-        { item: "clothing", name: "clothing" },
-        { item: "Mechanics", name: "Mechanics" },
-        { item: "Health_unit ", name: "Health unit " },
-        { item: "Bars", name: "Bars" },
-        { item: "Hair_and_beauty ", name: "Hair and beauty " },
-        { item: "Real_estate ", name: "Real_estate " },
-        { item: "Travelling ", name: "Travelling " },
-        { item: "Hotels", name: "Hotels" },
-        { item: "station", name: " station  " },
-        { item: "Mayor_concils", name: "Mayor_concils" },
-        { item: "Taxis service", name: "Taxis service" },
+        // { item: "Professional_and_home_service", name: "Professionals" },
+        // { item: "Agriculture ", name: "Agriculture " },
+        // { item: "Restaurant ", name: " Restaurant " },
+        // { item: "Electronics ", name: "Electronics " },
+        // { item: "Handicrafts", name: "Handicrafts" },
+        // { item: "clothing", name: "clothing" },
+        // { item: "Mechanics", name: "Mechanics" },
+        // { item: "Health_unit ", name: "Health unit " },
+        // { item: "Bars", name: "Bars" },
+        // { item: "Hair_and_beauty ", name: "Hair and beauty " },
+        // { item: "Real_estate ", name: "Real_estate " },
+        // { item: "Travelling ", name: "Travelling " },
+        // { item: "Hotels", name: "Hotels" },
+        // { item: "station", name: " station  " },
+        // { item: "Mayor_concils", name: "Mayor_concils" },
+        // { item: "Taxis service", name: "Taxis service" },
       ],
 
       edit1: false,
@@ -356,8 +391,70 @@ export default {
     /**
      * Used to edit biography
      * @return void
-     */
+     */ 
 
+    businessInfos(){
+      this.$store.dispatch("businessOwner/businessInfo", this.url)
+    },
+
+    change(val){
+      
+      console.log(val)
+
+       this.$store.dispatch("auth/region",{countryId: val})
+        .then( res =>{
+          console.log("---", this.$store.state.auth.region)
+          
+        this.region = [];
+      // this.$store.state.auth.region.map(dat =>{
+        
+      //       this.region.push( 
+      //         {
+      //           item: dat.id,
+      //           name: dat.name
+      //         }
+      //       )
+      //     })
+
+        } )
+    },
+
+    getCountry(){
+        this.$store.dispatch("auth/country")
+        .then( res =>{
+          console.log("------------------------", this.$store.state.auth.country)
+          
+        
+      this.$store.state.auth.country.map(dat =>{
+        
+            this.country.push( 
+              {
+                item: dat.id,
+                name: dat.name
+              }
+            )
+          })
+
+        } )
+    },
+    getCathegorie(){
+        this.$store.dispatch("auth/categories")
+        .then( res =>{
+          console.log("---", this.$store.state.auth.categories)
+          
+        
+      this.$store.state.auth.categories.map(dat =>{
+        console.log("----",dat)
+            this.categories.push( 
+              {
+                item: dat.id,
+                name: dat.name
+              }
+            )
+          })
+
+        } )
+    },
     getValidationClass(fieldName) {
       const field = this.$v.form[fieldName];
       if (field) {
@@ -395,12 +492,13 @@ export default {
       formData2.append("neighbor", this.form.neighbor);
 
       formData2.append("name", this.form.name);
-      formData2.append("category", this.form.category);
+      formData2.append("categoryId", this.form.category);
       formData2.append("keywords", this.form.keywords);
-      formData2.append("phone", this.form.phone);
+      formData2.append("primary_phone", this.form.phone);
       formData2.append("email", this.form.email);
+       formData2.append("website", this.form.website);
       formData2.append("about_business", this.about);
-
+      console.log("---",formData2)
       this.axios
         .post("business/update/" + this.url, formData2, {
           headers: {
@@ -415,6 +513,8 @@ export default {
             blockClass: "custom-block-class",
             message: this.$t("businessowner.Business_Profile_updated"),
           });
+          this.businessInfos();
+          this.$bvModal.hide("bv-edit-about")
         })
         .catch((err) => {
           console.log({ err: err });
@@ -481,13 +581,49 @@ export default {
   },
 
   computed: {
+
+    region(){
+        let region = [];
+      this.$store.state.auth.region.map(dat =>{
+        
+            region.push( 
+              {
+                item: dat.id,
+                name: dat.name
+              }
+            )
+          })
+          return region;
+    },
+
+    getCat(){
+      let categories = [];
+      this.$store.state.auth.categories.map(dat =>{
+            categories.push(
+              {
+                value: dat.id,
+                text: dat.name
+              }
+            )
+          })
+          return categories;
+    },
     business_intro() {
       return this.$store.state.businessOwner.businessInfo;
     },
   },
 
+  beforeMount(){
+
+    this.businessInfos();
+  },
   mounted() {
+    this.form = this.$store.state.businessOwner.businessInfo;
+    
+    this.getCountry();
+    this.getCathegorie();
     this.setcoordintes();
+   
     this.url = this.$route.params.id;
   },
 };

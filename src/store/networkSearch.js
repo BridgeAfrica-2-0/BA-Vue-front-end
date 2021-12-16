@@ -11,8 +11,7 @@ export default {
     neighbourhoods: [],
 
     prodLoader: false,
-    success: false,
-    token: "51|HZT2jfu5klFDkJhpvEI6dBhAQBDEdBQ2fABwhhaf",
+    success: false
   },
 
   getters: {

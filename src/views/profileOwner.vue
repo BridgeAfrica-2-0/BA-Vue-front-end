@@ -9,14 +9,8 @@
             <b-tab :title="$t('profileowner.Posts')" href="#post">
               <Post />
             </b-tab>
-            <b-tab :title="$t('profileowner.About')" href="#about"
-              ><About
-            /></b-tab>
-            <b-tab
-              :title="$t('profileowner.Business')"
-              href="#business"
-              class="m-0 p-0"
-            >
+            <b-tab :title="$t('profileowner.About')" href="#about"><About /></b-tab>
+            <b-tab :title="$t('profileowner.Business')" href="#business" class="m-0 p-0">
               <bussiness />
             </b-tab>
             <b-tab :title="$t('profileowner.Media')" href="#media">
@@ -26,11 +20,7 @@
               <Networks />
             </b-tab>
 
-            <b-tab
-              :title="$t('profileowner.Community')"
-              href="#community"
-              class="m-0 p-0"
-            >
+            <b-tab :title="$t('profileowner.Community')" href="#community" class="m-0 p-0">
               <following />
             </b-tab>
           </b-tabs>
@@ -41,20 +31,20 @@
 </template>
 
 <script>
-import navbar from "@/components/navbar";
-import headPage from "@/components/ownerHeadpage";
-import Post from "@/components/owner/tabs/posts";
-import About from "@/components/owner/tabs/about";
-import Media from "@/components/owner/tabs/media";
-import Networks from "@/components/owner/tabs/networks";
-import Following from "@/components/owner/tabs/memberNetwork";
-import Bussiness from "@/components/owner/tabs/bussiness";
-import { mapGetters, mapMutations } from "vuex";
+import navbar from '@/components/navbar';
+import headPage from '@/components/ownerHeadpage';
+import Post from '@/components/owner/tabs/posts';
+import About from '@/components/owner/tabs/about';
+import Media from '@/components/owner/tabs/media';
+import Networks from '@/components/owner/tabs/networks';
+import Following from '@/components/owner/tabs/memberNetwork';
+import Bussiness from '@/components/owner/tabs/bussiness';
+import { mapGetters, mapMutations } from 'vuex';
 
-import { WhoIsIt } from "@/mixins";
+import { WhoIsIt } from '@/mixins';
 
 export default {
-  name: "profileOwner",
+  name: 'profileOwner',
   mixins: [WhoIsIt],
   components: {
     Bussiness,
@@ -69,7 +59,7 @@ export default {
   data() {
     return {
       tabIndex: null,
-      tabs: ["#post", "#about", "#business", "#media", "#community"],
+      tabs: ['#post', '#about', '#business', '#media', '#community'],
     };
   },
 
@@ -77,27 +67,25 @@ export default {
     $route(to, from) {
       console.log(to.hash);
       this.tabIndex = this.tabs.findIndex((tab) => tab === to.hash);
-
-      console.log(from);
     },
   },
 
   methods: {
     ...mapMutations({
-      auth: "auth/profilConnected",
+      auth: 'auth/profilConnected',
     }),
 
     async getAuth() {
-      const response = await this.$repository.share.switch(null, "reset");
+      const response = await this.$repository.share.switch(null, 'reset');
 
-      if (response.success) this.auth({ ...this.user.user, user_type: "user" });
+      if (response.success) this.auth({ ...this.user.user, user_type: 'user' });
     },
 
     ownerPost() {
       this.$store
-        .dispatch("UserProfileOwner/ownerPost", this.url_data)
+        .dispatch('UserProfileOwner/ownerPost', this.url_data)
         .then(() => {
-          console.log("hey yeah");
+          console.log('hey yeah');
         })
         .catch((err) => {
           console.log({ err: err });
@@ -106,68 +94,76 @@ export default {
   },
   computed: {
     ...mapGetters({
-      user: "auth/user",
+      user: 'auth/user',
     }),
   },
 
   created() {
+    let loader = this.$loading.show({
+      container: this.$refs.formContainer,
+      canCancel: true,
+      onCancel: this.onCancel,
+      color: '#e75c18',
+    });
     this.getAuth();
     this.tabIndex = this.tabs.findIndex((tab) => tab === this.$route.hash);
 
     this.$store
-      .dispatch("profile/loadUserPostIntro", null)
+      .dispatch('profile/loadUserPostIntro', null)
       .then((response) => {
+        loader.hide();
         console.log(response);
       })
       .catch((error) => {
         console.log(error);
+        loader.hide();
       });
   },
   mounted() {
     this.$store
-      .dispatch("profile/Tcommunity", null)
+      .dispatch('profile/Tcommunity', null)
       .then((response) => {})
       .catch((error) => {
         console.log({ error: error });
       });
 
     this.$store
-      .dispatch("follower/UcommunityFollower", null)
+      .dispatch('follower/UcommunityFollower', null)
       .then((response) => {})
       .catch((error) => {
         console.log({ error: error });
       });
 
     this.$store
-      .dispatch("profile/UcommunityFollowing", null)
+      .dispatch('profile/UcommunityFollowing', null)
       .then((response) => {})
       .catch((error) => {
         console.log({ error: error });
       });
 
     this.$store
-      .dispatch("profile/BcommunityFollower", null)
+      .dispatch('profile/BcommunityFollower', null)
       .then((response) => {})
       .catch((error) => {
         console.log({ error: error });
       });
 
     this.$store
-      .dispatch("profile/BcommunityFollowing", null)
+      .dispatch('profile/BcommunityFollowing', null)
       .then((response) => {})
       .catch((error) => {
         console.log({ error: error });
       });
 
     this.$store
-      .dispatch("profile/NcommunityFollower", null)
+      .dispatch('profile/NcommunityFollower', null)
       .then((response) => {})
       .catch((error) => {
         console.log({ error: error });
       });
 
     this.$store
-      .dispatch("profile/NcommunityFollowing", null)
+      .dispatch('profile/NcommunityFollowing', null)
       .then((response) => {})
       .catch((error) => {
         console.log({ error: error });

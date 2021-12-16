@@ -127,7 +127,8 @@
               <b-avatar
                 class="d-inline-block avat"
                 variant="primary"
-                :src="imageProfile"
+                :square="'user' == profile.user_type ? false : true"
+                :src="profile.profile_picture"
               ></b-avatar>
             </b-col>
             <b-col cols="9" class="pt-2" style="margin-left: -5px">
@@ -418,8 +419,8 @@
     </div>
 
     <Post
-      v-for="(item, index) in owner_post"
-      :key="index"
+      v-for="item in owner_post"
+      :key="item.updated_at"
       :post="item"
       :mapvideo="() => mapvideo(item.media)"
       :mapmediae="() => mapmediae(item.media)"
@@ -483,10 +484,6 @@ export default {
       owner_post: "networkProfile/getOwnerPost",
     }),
 
-    imageProfile() {
-      return "yoo";
-    },
-
     business_logo() {
       return this.$store.state.networkProfile.networkInfo.logo_path;
     },
@@ -504,9 +501,9 @@ export default {
   methods: {
     ...mapMutations({
       auth: "auth/profilConnected",
-      postRemove: "businessOwner/removePost",
-      postUpdate: "businessOwner/UpdatePost",
-      postCreate: "businessOwner/createPost",
+      postRemove: "networkProfile/removePost",
+      postUpdate: "networkProfile/UpdatePost",
+      postCreate: "networkProfile/createPost",
     }),
 
     editPage() {

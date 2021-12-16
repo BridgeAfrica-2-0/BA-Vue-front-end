@@ -1,74 +1,95 @@
 <template>
-
   <div>
-    <form novalidate autocomplete="off" class="md-layout" @submit.prevent="validateUser">
+    <form
+      novalidate
+      autocomplete="off"
+      class="md-layout"
+      @submit.prevent="validateUser"
+    >
       <md-card class="md-layout-item md-size-50 md-small-size-100 p-card">
         <md-card-header>
           <div class="md-title center f-22">
-           {{ $t('verification.Verification') }}
+            {{ $t("verification.Verification") }}
           </div>
         </md-card-header>
 
         <md-card-content>
-        
-          <div class="center">
-           
-          </div>
+          <div class="center"></div>
 
           <br />
 
-       
- <div v-if="!verify_method">   
+          <div v-if="!verify_method">
+            <b-row class="row border">
+              <b-col cols="10">
+                <div class="d-inline-flex mt-3 mb-3">
+                  <span class="mr-4">
+                    <b-icon
+                      icon="envelope"
+                      variant="primary"
+                      font-scale="3"
+                    ></b-icon>
+                  </span>
 
+                  <span class="ml-3 md-title l-20">
+                    Via Email To <br />
+                    {{ this.$store.state.auth.user.user.email }}
+                  </span>
+                </div>
+              </b-col>
+              <b-col class="d-" cols="1">
+                <span class="float-right mt-3">
+                  <b-button @click="verifyMethod('email')">
+                    <b-icon
+                      icon="chevron-right"
+                      variant=""
+                      class="mt-1"
+                      font-scale="2"
+                    ></b-icon>
+                  </b-button>
+                </span>
+              </b-col>
+            </b-row>
 
-       <b-row class="row  border "> 
-<b-col cols="10" >  
-        <div class="d-inline-flex   mt-3 mb-3" > 
-          <span class="mr-4">   <b-icon icon="envelope" variant="primary"  font-scale="3"  ></b-icon>   </span>  
-          
-         <span class=" ml-3 md-title   l-20 "> Via Email To <br>   {{this.$store.state.auth.user.user.email}}  </span>  
+            <div class="row border mt-3">
+              <b-col cols="10">
+                <div class="d-inline-flex mt-3 mb-3">
+                  <span class="mr-4">
+                    <b-icon
+                      icon="telephone"
+                      variant="primary"
+                      font-scale="3"
+                    ></b-icon>
+                  </span>
 
-        </div>
+                  <span class="ml-3 md-title l-20">
+                    Via SMS To <br />
+                    {{ this.$store.state.auth.user.user.phone }}
+                  </span>
+                </div>
+              </b-col>
+              <div class="col-1">
+                <span class="ml-4 float-right mt-3">
+                  <b-button @click="verifyMethod('tel')">
+                    <b-icon
+                      icon="chevron-right"
+                      variant=""
+                      class="mt-1"
+                      font-scale="2"
+                    ></b-icon>
+                  </b-button>
+                </span>
+              </div>
+            </div>
 
- </b-col>
-             <b-col  class="d-" cols="1"> 
-            <span class=" float-right mt-3 ">  <b-button  @click="verifyMethod('email')">    <b-icon icon="chevron-right" variant=""  class="mt-1 " font-scale="2"  ></b-icon>    </b-button>  </span>  
-             </b-col>
-       </b-row>
+            <br />
+            <br />
+            <br />
+            <br />
+          </div>
 
-
-
-
-
-
-  <div class="row   border mt-3 "> 
-<b-col cols="10" >  
-        <div class="d-inline-flex   mt-3 mb-3" > 
-          <span class="mr-4">   <b-icon icon="telephone" variant="primary"  font-scale="3"  ></b-icon>   </span>  
-          
-           <span class=" ml-3 md-title   l-20 "> Via SMS To <br>    {{this.$store.state.auth.user.user.phone}}  </span>  
-
-        </div>
-
- </b-col>
-             <div class=" col-1"> 
-            <span class="ml-4  float-right mt-3 ">   <b-button @click="verifyMethod('tel')" >    <b-icon icon="chevron-right" variant=""  class="mt-1 " font-scale="2"  ></b-icon>    </b-button>        </span>  
-           </div>
- </div>
-
-
-
- <br /> <br /> 
-  <br /> <br /> 
-         
-  </div>
-
-
-   
-
-     <div v-if="verify_method">   
-          <md-field>
-              <label for="otp"> {{ $t('verification.OTP') }}</label>
+          <div v-if="verify_method">
+            <md-field>
+              <label for="otp"> {{ $t("verification.OTP") }}</label>
 
               <md-input
                 type="text"
@@ -81,29 +102,17 @@
 
             <br />
 
-
-         
-
-          <div class="md-layout md-gutter">
-         
-
-           
+            <div class="md-layout md-gutter">
               <br />
-
-          </div>
-          
+            </div>
           </div>
         </md-card-content>
 
         <md-progress-bar md-mode="indeterminate" v-if="sending" />
 
-        <div v-if="verify_method">  
+        <div v-if="verify_method">
           <div class="center">
-            
-             
-
-
-                <b-button
+            <b-button
               class="buttonn"
               @click.prevent="Verify"
               :disabled="sending"
@@ -112,25 +121,18 @@
             >
               {{ $t("verification.Verify") }}
             </b-button>
-
-
-
-          
-            
           </div>
 
-          <br>
-           <br>
-          
+          <br />
+          <br />
 
-           <p class="mt-5 mt-md-2">
-            {{ $t('verification.Didnt_recieved_the_verification_OTP') }}
-            <b-link @click.prevent="resendOtp()"> {{ $t('verification.Resend_OTP') }} </b-link>
-
+          <p class="mt-5 mt-md-2">
+            {{ $t("verification.Didnt_recieved_the_verification_OTP") }}
+            <b-link @click.prevent="resendOtp()">
+              {{ $t("verification.Resend_OTP") }}
+            </b-link>
           </p>
-
         </div>
-
 
         <div></div>
 
@@ -138,20 +140,16 @@
           <br />
           <br />
 
-          <br /> <br /> 
-
+          <br />
+          <br />
         </div>
       </md-card>
 
       <div class="md-layout-item md-size-50 md-small-size-100 b-div"></div>
-
     </form>
 
     <hr class="localfoter" />
-
-   
   </div>
-
 </template>
 
 <script>
@@ -162,115 +160,90 @@ import axios from "axios";
 import "@/assets/default.css";
 import { required, email } from "vuelidate/lib/validators";
 export default {
-
   name: "FormValidation",
   boolean: true,
   mixins: [validationMixin],
   data: () => ({
     form: {
       password: null,
-      email: null
+      email: null,
     },
 
     langs: ["en", "fr"],
-      token: "",
-      verify_method:false,
-      chosemethod:"",
+    token: "",
+    verify_method: false,
+    chosemethod: "",
     userSaved: false,
     sending: false,
-    lastUser: null
+    lastUser: null,
   }),
   validations: {
     form: {
       password: {
-        required
+        required,
       },
       email: {
         required,
-        email
-      }
-    }
+        email,
+      },
+    },
   },
   methods: {
+    verifyMethod(metho) {
+      this.chosemethod = metho;
 
-
-
-
-
-
-
-verifyMethod(metho){
-
-
-
-      this.chosemethod=metho;
-
-       let url="";
-       if( this.chosemethod=='tel'){  
-          url="user/phone/sendOtp";
-       }else{
-         url="user/email/sendOtp";
-       }
-       this.sending = true;
+      let url = "";
+      if (this.chosemethod == "tel") {
+        url = "user/phone/sendOtp";
+      } else {
+        url = "user/email/sendOtp";
+      }
+      this.sending = true;
       console.log(this.$store.state.auth.user.user.phone);
 
       this.$store
         .dispatch("auth/sendOtp", {
-          url:url,
+          url: url,
           email: this.$store.state.auth.user.user.email,
-          phone: this.$store.state.auth.user.user.phone
+          phone: this.$store.state.auth.user.user.phone,
         })
-        .then(response => {
-           this.sending = false;
-         this.verify_method=true;
+        .then((response) => {
+          this.sending = false;
+          this.verify_method = true;
         })
-        .catch(err => {
+        .catch((err) => {
           console.log({ err: err });
 
-         
-         this.sending = false;
-         this.verify_method=true;
-
+          this.sending = false;
+          this.verify_method = true;
         });
-    
+    },
 
-      
+    resendOtp() {
+      let url = "";
+      if (this.chosemethod == "tel") {
+        url = "user/phone/sendOtp";
+      } else {
+        url = "user/email/sendOtp";
+      }
 
-},
+      this.sending = true;
 
-
-
-
-      resendOtp() {
-
-        let url="";
-       if( this.chosemethod=='tel'){  
-          url="user/phone/sendOtp";
-       }else{
-         url="user/email/sendOtp";
-       }
-
-
-
-         this.sending = true;
-   
       axios
         .post(url, {
           phone: this.$store.state.auth.user.user.phone,
-           email: this.$store.state.auth.user.user.email
+          email: this.$store.state.auth.user.user.email,
         })
-        .then(response => {
+        .then((response) => {
           if (response.status === 200) {
             console.log("response: ", response);
             this.flashMessage.show({
               status: "success",
-           
-              message: this.$t(
-                "verification.Successfully_Send"
-              ),
+
+              message: this.$t("verification.Successfully_Send"),
             });
 
-             this.sending = false;
+            this.sending = false;
           } else {
             console.log(response.data);
           }
@@ -278,8 +251,6 @@ verifyMethod(metho){
         .catch((err) => {
           console.log({ err: err });
 
-
-         
           if (err.response.status == 422) {
             console.log({ err: err });
             console.log(err.response.data.message);
@@ -288,115 +259,93 @@ verifyMethod(metho){
               status: "error",
 
               message: this.flashErrors(err.response.data.errors),
-               blockClass: "custom-block-class",
+              blockClass: "custom-block-class",
             });
-          }
-
-          else {
+          } else {
             this.flashMessage.show({
               status: "error",
-              
-              message: this.$t('auth.resend_otp_failed'),
+
+              message: this.$t("auth.resend_otp_failed"),
             });
             console.log({ err: err });
           }
 
-       this.sending = false;
-
-
+          this.sending = false;
         });
     },
 
-
-
     Verify() {
-  
-       this.sending = true;
+      this.sending = true;
       console.log(this.$store.state.auth.user.user.phone);
       this.$store
         .dispatch("auth/verify", {
           OTP: this.token,
-           id:this.$store.state.auth.user.user.id,
+          id: this.$store.state.auth.user.user.id,
           email: this.$store.state.auth.user.user.email,
           phone: this.$store.state.auth.user.user.email,
         })
-        .then(response => {
-           this.sending = false;
+        .then((response) => {
+          this.sending = false;
 
-           this.flashMessage.show({
-              status: "success",
-           
-              message: this.$t(
-                "account verification success"
-              ),
-            });
+          this.flashMessage.show({
+            status: "success",
+
+            message: this.$t("account verification success"),
+          });
 
           this.$router.push({ name: "welcome" });
         })
         .catch((err) => {
           console.log({ err: err });
 
-
-         
-
-           if (err.response.status == 422) {
+          if (err.response.status == 422) {
             console.log({ err: err });
             console.log(err.response.data.message);
 
             this.flashMessage.show({
               status: "error",
 
-             message: this.$t('verification.Unable_to_verify_your_account'),
-               blockClass: "custom-block-class",
+              message: this.$t("verification.Unable_to_verify_your_account"),
+              blockClass: "custom-block-class",
             });
-          }
-
-          else {
+          } else {
             this.flashMessage.show({
               status: "error",
-              
-              message: this.$t('auth.resend_otp_failed'),
+
+              message: this.$t("auth.resend_otp_failed"),
             });
             console.log({ err: err });
           }
 
-    this.sending = false;
-
-
-
+          this.sending = false;
         });
-    }
+    },
 
-    ,
-    getValidationClass(fieldName) { 
+    getValidationClass(fieldName) {
       const field = this.$v.form[fieldName];
       if (field) {
         return {
-          "md-invalid": field.$invalid && field.$dirty
+          "md-invalid": field.$invalid && field.$dirty,
         };
       }
     },
 
-    setLang(data){
-        
-         console.log(data);
-          this.$i18n.locale = data;
-         this.$store.commit("auth/setAppLanguage", data);
+    setLang(data) {
+      console.log(data);
+      this.$i18n.locale = data;
+      this.$store.commit("auth/setAppLanguage", data);
     },
 
     flashErrors(errors) {
       let err = "";
-      if(errors){   
-      Object.values(errors).forEach((element) => {
-        err = element[0];
-      });
-
+      if (errors) {
+        Object.values(errors).forEach((element) => {
+          err = element[0];
+        });
       }
 
       return err;
     },
-
-   
 
     clearForm() {
       this.$v.$reset();
@@ -409,21 +358,16 @@ verifyMethod(metho){
 
       this.login();
     },
-
-  
-
-  }
-
+  },
 };
 </script>
 
 <style scoped>
-
-.w-90{
+.w-90 {
   width: 90%;
 }
 
-.l-20{
+.l-20 {
   line-height: 20px;
   font-size: 18px;
 }

@@ -21,9 +21,10 @@ export const fullMediaLink = (media) => {
 }
 
 export const fromNow = (dateTime) => {
+  console.log(moment(dateTime).fromNow())
   const data = (new Date(dateTime)).toISOString()
   const newDate = moment(data, "YYYYMMDD")
-  return newDate.fromNow()
+  return moment(dateTime).fromNow()
 }
 
 export const formatNumber = (num) => {

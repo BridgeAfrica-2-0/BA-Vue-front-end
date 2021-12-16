@@ -180,14 +180,7 @@
                     <div v-for="message in messages" :key="message.id">
                       <hr class="h-divider" />
                       <div
-                        class="
-                          d-inline-flex
-                          flex-row
-                          justify-content-between
-                          align-items-center
-                          suggest-item
-                          cursor-pointer
-                        "
+                        class="d-inline-flex flex-row justify-content-between align-items-center suggest-item cursor-pointer"
                       >
                         <div class="d-inline-flex flex-row align-items-center">
                           <div>
@@ -248,13 +241,7 @@
                     >
                       <hr class="h-divider" />
                       <div
-                        class="
-                          d-inline-flex
-                          flex-row
-                          align-items-center
-                          suggest-item
-                          cursor-pointer
-                        "
+                        class="d-inline-flex flex-row align-items-center suggest-item cursor-pointer"
                       >
                         <!-- <div>
                           <img src="@/assets/img/profile-pic.jpg" class="rounded-circle" alt="" width="30" height="30" />
@@ -278,11 +265,6 @@
                         $t("general.See_all_Notifications")
                       }}</u></router-link
                     >
-                    <!-- <a
-                      href="https://bridgeafrica.info/nav/notifications-view-all.html"
-                      class="text-ored"
-                      ><u>See all Notifications</u></a
-                    > -->
                   </div>
                 </b-popover>
               </div>
@@ -326,12 +308,7 @@
                       v-if="'user' != user.user_type"
                       @click.prevent="switchToProfile"
                       href="#"
-                      class="
-                        other-menu
-                        suggest-item
-                        cursor-pointer
-                        text-decoration-none text-dark
-                      "
+                      class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
                     >
                       <span class="mr-2"
                         ><fas-icon
@@ -344,12 +321,7 @@
 
                     <router-link
                       :to="{ name: 'orders' }"
-                      class="
-                        other-menu
-                        suggest-item
-                        cursor-pointer
-                        text-decoration-none text-dark
-                      "
+                      class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
                     >
                       <span class="mr-2"
                         ><fas-icon
@@ -362,13 +334,7 @@
 
                     <router-link
                       :to="{ name: 'settings' }"
-                      class="
-                        other-menu
-                        suggest-item
-                        cursor-pointer
-                        text-decoration-none text-dark
-                        w-full
-                      "
+                      class="other-menu suggest-item cursor-pointer text-decoration-none text-dark w-full"
                     >
                       <span class="mr-2 w-full"
                         ><fas-icon
@@ -412,12 +378,7 @@
                     <a
                       @click="logout"
                       href="#"
-                      class="
-                        other-menu
-                        suggest-item
-                        cursor-pointer
-                        text-decoration-none text-dark
-                      "
+                      class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
                     >
                       <span class="mr-2"
                         ><fas-icon
@@ -476,12 +437,7 @@
 
             <router-link
               :to="{ name: 'orders' }"
-              class="
-                other-menu
-                suggest-item
-                cursor-pointer
-                text-decoration-none text-dark
-              "
+              class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
             >
               <span class="mr-2"
                 ><fas-icon
@@ -494,12 +450,7 @@
 
             <router-link
               :to="{ name: 'settings' }"
-              class="
-                other-menu
-                suggest-item
-                cursor-pointer
-                text-decoration-none text-dark
-              "
+              class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
             >
               <span class="mr-2"
                 ><fas-icon class="violet search" :icon="['fas', 'cogs']"
@@ -588,7 +539,6 @@ export default {
   },
   data() {
     return {
-
       isActive: false,
       shownav: false,
       notifications: [],
@@ -668,7 +618,6 @@ export default {
   },
 
   watch: {
-
     "$store.state.auth.profilConnected": function () {
       this.updateNotificationEvent();
       this.userOwnPage = this.onRedirect();
@@ -743,15 +692,13 @@ export default {
 
     updateNotificationEvent() {
       try {
-        const newRouteNotificationApi =
-          this.notificationPatterns[
-            this.$store.state.auth.profilConnected.user_type
-          ]();
+        const newRouteNotificationApi = this.notificationPatterns[
+          this.$store.state.auth.profilConnected.user_type
+        ]();
 
-        const newRouteMessageApi =
-          this.messagePatterns[
-            this.$store.state.auth.profilConnected.user_type
-          ]();
+        const newRouteMessageApi = this.messagePatterns[
+          this.$store.state.auth.profilConnected.user_type
+        ]();
 
         this.newNotification(newRouteNotificationApi);
         this.newMessage(newRouteMessageApi);

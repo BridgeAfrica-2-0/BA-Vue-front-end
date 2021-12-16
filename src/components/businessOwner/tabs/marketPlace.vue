@@ -41,13 +41,12 @@
 
       <!-- MARKET PRODUCT LIST -->
 
-      <div class="row">   
+        
           
         <div class="col-md-6" v-for="(product, index) in products" :key="index">
           <Product v-show="!orders && market"  :product="product" />
         </div>
-      
- </div>
+  
       <b-col v-if="loader" class="load">
         <b-spinner
           style="width: 7rem; height: 7rem"

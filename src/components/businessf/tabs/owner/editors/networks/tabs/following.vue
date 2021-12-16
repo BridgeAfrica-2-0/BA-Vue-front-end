@@ -56,6 +56,7 @@
         </infinite-loading>
       </b-col>
     </b-row>
+
   </div>
 </template>
 

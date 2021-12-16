@@ -207,20 +207,6 @@
                         class="form-control text"
                       />
                     </div>
-                    <!-- 
-                    <div class="form-group">
-                      <label for="Neighbor" class="username"> {{ $t('welcome.Neighbor') }} :</label
-                      ><br />
-                      <input
-                        type="text"
-                        name="alias"
-                        v-model="Neighbor"
-                        id="Neighbor"
-                        :placeholder="$t('welcome.Neighbor')"
-                        class="form-control text"
-                      />
-                    </div> -->
-
                     <div class="form-group">
                       <label for="Neighbour" class="username"> Neighbour:</label
                       ><br />
@@ -228,24 +214,6 @@
                         @get-address-details="getAddressDetails"
                       />
                     </div>
-                    <!-- <gmap-autocomplete
-                      @place_changed="initMarker"
-                      class="form-control mb-2"
-                    >
-                    </gmap-autocomplete>
-
-                    <gmap-map
-                      :zoom="14"
-                      :center="center"
-                      style="width: 100%; height: 200px"
-                    >
-                      <gmap-marker
-                        :key="index"
-                        v-for="(m, index) in locationMarkers"
-                        :position="m.position"
-                        @click="center = m.position"
-                      ></gmap-marker>
-                    </gmap-map> -->
                   </div>
 
                   <div>
@@ -420,19 +388,6 @@
                         class="form-control text"
                       />
                     </div>
-
-                    <!-- <div class="form-group">
-                      <label for="Neighbor" class="username"> {{ $t('welcome.Neighbor') }} :</label
-                      ><br />
-                      <input
-                        type="text"
-                        name="alias"
-                        v-model="Neighbor"
-                        id="Neighbor"
-                        :placeholder="$t('welcome.Neighbor')"
-                        class="form-control text"
-                      />
-                    </div> -->
                     <div class="form-group">
                       <label for="Neighbour" class="username"> Neighbour:</label
                       ><br />
@@ -440,30 +395,6 @@
                         @get-address-details="getAddressDetails"
                       />
                     </div>
-                    <!-- <div class="form-group">
-                      <label for="Neighbor" class="username">
-                        {{ $t("welcome.Adress") }} :</label
-                      >
-
-                      <gmap-autocomplete
-                        @place_changed="initMarker"
-                        class="form-control"
-                      >
-                      </gmap-autocomplete>
-                    </div>
-
-                    <gmap-map
-                      :zoom="14"
-                      :center="center"
-                      style="width: 100%; height: 200px"
-                    >
-                      <gmap-marker
-                        :key="index"
-                        v-for="(m, index) in locationMarkers"
-                        :position="m.position"
-                        @click="center = m.position"
-                      ></gmap-marker>
-                    </gmap-map> -->
                   </div>
                 </div>
               </div>
@@ -851,7 +782,9 @@
 
 <script>
 import People from "@/components/dasboard/suggestedpeople";
+
 import AutocompleteMapbox from "@/components/AutocompleteMapbox";
+
 import Business from "@/components/dasboard/welcomebusinesses";
 
 import Tutorial from "@/components/dasboard/tutorial";
@@ -1012,7 +945,7 @@ export default {
       this.multiselec.push(tag);
       this.filterselectvalue.push(tag);
     },
-
+   
     categories() {
       this.$store
         .dispatch("auth/categories")

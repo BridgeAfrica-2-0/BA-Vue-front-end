@@ -180,8 +180,15 @@ export default {
     };
   },
 
-  mounted() {
-    this.url = this.$route.params.id;
+  computed: {
+    defaultPayment() {
+      return this.$store.state.businessAccountType.defaultPayment;
+    }
+  },
+
+  mounted(){
+    this.url = this.$route.params.id !== undefined ? this.$route.params.id : this.$router.push('notFound');
+    this.DefaultPayment();
   },
 
   methods: {
@@ -195,7 +202,23 @@ export default {
       this.RequestPayment = !this.RequestPayment;
       if (this.operator !== "") this.$emit("requestpayment", this.operator);
     },
-    confirmPayment() {
+    
+    DefaultPayment() {
+      console.log("defaultPayment");
+      this.$store
+      .dispatch("businessAccountType/getDefaultPayment", {
+        path: `get-payement-method/${this.url}`
+        })
+      .then(() => {
+        this.PaymentForm.operator = this.defaultPayment.payement_method;
+        console.log('ohh yeah');
+      })
+      .catch(err => {
+        console.log({ err: err });
+      });
+    },
+
+    confirmDefaltPayment() {
       this.show = true;
       console.log("PaymentForm:", this.PaymentForm);
       let formData = new FormData();

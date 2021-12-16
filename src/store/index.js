@@ -55,8 +55,10 @@ Vue.use(Vuex);
 
 
 
-// axios.defaults.baseURL = "https://courage4.maxinemoffett.com/api/v1/";
+ //axios.defaults.baseURL = "https://courage4.maxinemoffett.com/api/v1/";
+//axios.defaults.baseURL = process.env.VUE_APP_API_URL_EDS;
 axios.defaults.baseURL = process.env.VUE_APP_API_URL;
+
 
 
 

@@ -54,6 +54,7 @@ export default {
       showModal: false,
       load: false,
       loader: false,
+      businessId:null,
       products: [],
       val: "",
       msg: "",
@@ -72,7 +73,7 @@ export default {
   methods: {
     getProducts: async function () {
       await axios
-        .get("/market")
+        .get("/market?business_id="+this.businessId)
         .then((res) => {
           console.log(res.data);
           this.products = res.data.data;
@@ -87,6 +88,7 @@ export default {
     },
   },
   beforeMount() {
+    this.businessId = this.$route.params.id;
     this.loader = true;
     //get market place products
     this.getProducts();

@@ -498,11 +498,11 @@
 
                 {{ $t("search.Businesses") }}
               </h6>
-              <b-spinner
+              <!-- <b-spinner
                 v-if="prodLoaderr"
                 variant="primary"
                 :label="$t('search.Spinning')"
-              ></b-spinner>
+              ></b-spinner> -->
             </div>
 
             <!-- filter out only people -->
@@ -584,6 +584,7 @@
               <mapbox
                 :businesses="businesses.data"
                 :products="miniproducts.data"
+                :networks="mininetworks.data"
               />
             </div>
           </div>
@@ -670,6 +671,9 @@ export default {
     },
     allproducts() {
       return this.$store.getters["marketSearch/getProducts"];
+    },
+    mininetworks() {
+      return this.$store.getters["allSearch/getNetworks"];
     },
 
     products() {
@@ -1656,7 +1660,7 @@ export default {
   },
 
   watch: {
-    selectedId: function () {
+    selectedId: function() {
       this.changeComponent();
       this.changePlaceHolder();
       this.changeNotFoundTitle();
@@ -1789,6 +1793,8 @@ export default {
         2: () => this.onFindUser(),
         5: () => this.onFindPost(),
         1: () => this.onFindBusiness(),
+        3: () => this.searchNetworks(),
+        4: () => this.searchProducts(),
       };
 
       this.strategyForPlaceHolder = {

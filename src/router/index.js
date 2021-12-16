@@ -63,7 +63,6 @@ import cart from "@/views/card";
 
 Vue.use(VueRouter);
 
-
 const routes = [
   {
     path: "/notFound",

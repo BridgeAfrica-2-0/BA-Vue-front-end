@@ -40,12 +40,13 @@
       <!-- MARKET HEADER BAR -->
 
       <!-- MARKET PRODUCT LIST -->
+
+        
           
         <div class="col-md-6" v-for="(product, index) in products" :key="index">
-          <Product v-show="!orders && market" :product="product" />
+          <Product v-show="!orders && market"  :product="product" />
         </div>
-      
-
+  
       <b-col v-if="loader" class="load">
         <b-spinner
           style="width: 7rem; height: 7rem"
@@ -107,7 +108,7 @@
             </b-form-group>
           </b-col>
           <b-col cols="12" md="6">
-            <div class="image-upload-wrap" @click="picImage">
+            <div class="image-upload-wrap" @click="picImage" style="display: flex; justify-content: center; align-items: center; overflow: hidden">
               <input
                 type="file"
                 name=""
@@ -118,12 +119,14 @@
                 required
               />
               <a href="#" data-toggle="modal" data-target="#createalbumModal">
-                <div class="drag-text">
+                <div v-if="selectedImagePrv">
+                  <img :src="selectedImagePrv" :srcset="selectedImagePrv" style="min-width: 100%; min-height: 100%">
+                </div>
+                <div v-else class="drag-text">
                   <i class="fa fa-plus"></i>
                   <h6>{{ $t('businessowner.Product_Image') }}</h6>
                 </div>
               </a>
-              <div></div>
             </div>
           </b-col>
         </b-row>
@@ -252,7 +255,7 @@
           <b-card no-body>
             <b-tabs pills card vertical>
               <b-tab
-                :title="$t('businessowner.filters').name"
+                :title="filters.name"
                 v-for="filters in filterselectvalue"
                 :key="filters.id"
                 active
@@ -292,9 +295,9 @@
 </template>
 
 <script>
-import Product from "../product";
 import axios from "axios";
 import MultiSelect from "vue-multiselect";
+import Product from "../product";
 import Orders from "@/views/businessOwnerOrders";
 import Archive from "../archive";
 export default {
@@ -310,9 +313,10 @@ export default {
       options: ["list", "of", "options"],
       orders: false,
       archive: false,
-
+     businessId:null,
       market: true,
       my_orders: "orders",
+      selectedImagePrv: "",
 
       showModal: false,
       load: false,
@@ -322,11 +326,11 @@ export default {
         description: "",
         picture: null,
         price: "",
-        in_stock: "",
-        on_discount: false,
+        in_stock: 1,
+        on_discount: 0,
         discount_price: 0,
         condition: "",
-        is_service: null,
+        is_service: 0,
         status: 1,
         business_id: "",
         categoryId: "",
@@ -342,11 +346,6 @@ export default {
       multiselecvalue: [],
       filterselectvalue: [],
       select_filterss: [],
-      multiselec: [
-        { name: "Vue.js", code: "vu" },
-        { name: "Javascript", code: "js" },
-        { name: "Open Source", code: "os" },
-      ],
       isShowOrders: false,
     };
   },
@@ -396,9 +395,9 @@ export default {
     },
     getProducts: async function () {
       await axios
-        .get("/market")
+        .get("/market?business_id="+this.businessId)
         .then((res) => {
-          console.log(res.data);
+          console.log(res);
           this.products = res.data.data;
           console.log(this.products);
         })
@@ -427,14 +426,24 @@ export default {
       }
       console.log("NEW PRODUCT", this.newProduct);
       axios
-        .post("market", fd)
+        .post("market?business_id="+this.businessId, fd)
         .then((res) => {
           this.load = false;
           (this.success = true), (this.val = "success");
           this.msg = this.$t('businessowner.Operation_was_successful');
+
+           this.flashMessage.show({
+            status: 'success',
+            message: this.msg,
+            blockClass: 'custom-block-class',
+          });
+
+       this.showModal = false;
+
           this.getProducts();
         })
         .catch((err) => {
+          console.log({err:err});
           this.load = false;
           (this.success = true), (this.val = "danger");
           this.msg = this.$t('businessowner.Something_went_wrong');
@@ -448,8 +457,12 @@ export default {
       document.querySelector("#image").click();
     },
     getImage(e) {
+      console.log("getImage");
       console.log(e.target.files[0]);
       this.newProduct.picture = e.target.files[0];
+      let file = e.target.files[0] || e.dataTransfer.files;
+      this.selectedImagePrv = URL.createObjectURL(file);
+      console.log("this.selectedImagePrv", this.selectedImagePrv);
     },
     createProduct() {
       this.showModal = !this.showModal;
@@ -483,11 +496,14 @@ export default {
   },
   beforeMount() {
     this.loader = true;
+    this.businessId = this.$route.params.id;
     //get market place products
     this.getProducts();
     console.log("--test ----");
     //get categories for current business
-    const businessId = this.$route.params.id;
+     
+     console.log("hey yah djkddkdkd");
+     console.log(this.businessId);
     // this.$store.dispatch('market/getBuCategories', businessId);
 
     this.categories();
@@ -497,6 +513,13 @@ export default {
 </script>
 
 <style scoped>
+
+.h-100{
+
+  height: 100%;
+}
+
+
 .pos {
   /* margin-left: 900px; */
   margin-bottom: 22px;

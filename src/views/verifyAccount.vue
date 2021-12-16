@@ -21,9 +21,8 @@
  <div v-if="!verify_method">   
 
 
-
-       <div class="row  w-90 border "> 
-<b-col col="9" >  
+       <b-row class="row  border "> 
+<b-col cols="10" >  
         <div class="d-inline-flex   mt-3 mb-3" > 
           <span class="mr-4">   <b-icon icon="envelope" variant="primary"  font-scale="3"  ></b-icon>   </span>  
           
@@ -32,18 +31,18 @@
         </div>
 
  </b-col>
-             <div class=" col-3"> 
-            <span class="ml-4  float-right mt-3 ">  <b-button  @click="verifyMethod(email)">    <b-icon icon="chevron-right" variant=""  class="mt-1 " font-scale="2"  ></b-icon>    </b-button>  </span>  
-           </div>
- </div>
+             <b-col  class="d-" cols="1"> 
+            <span class=" float-right mt-3 ">  <b-button  @click="verifyMethod('email')">    <b-icon icon="chevron-right" variant=""  class="mt-1 " font-scale="2"  ></b-icon>    </b-button>  </span>  
+             </b-col>
+       </b-row>
 
 
 
 
 
 
-  <div class="row  w-90 border mt-3 "> 
-<b-col col="9" >  
+  <div class="row   border mt-3 "> 
+<b-col cols="10" >  
         <div class="d-inline-flex   mt-3 mb-3" > 
           <span class="mr-4">   <b-icon icon="telephone" variant="primary"  font-scale="3"  ></b-icon>   </span>  
           
@@ -52,8 +51,8 @@
         </div>
 
  </b-col>
-             <div class=" col-3"> 
-            <span class="ml-4  float-right mt-3 ">   <b-button @click="verifyMethod(tel)" >    <b-icon icon="chevron-right" variant=""  class="mt-1 " font-scale="2"  ></b-icon>    </b-button>        </span>  
+             <div class=" col-1"> 
+            <span class="ml-4  float-right mt-3 ">   <b-button @click="verifyMethod('tel')" >    <b-icon icon="chevron-right" variant=""  class="mt-1 " font-scale="2"  ></b-icon>    </b-button>        </span>  
            </div>
  </div>
 
@@ -216,8 +215,8 @@ verifyMethod(metho){
       console.log(this.$store.state.auth.user.user.phone);
 
       this.$store
-        .dispatch(url, {
-         
+        .dispatch("auth/sendOtp", {
+          url:url,
           email: this.$store.state.auth.user.user.email,
           phone: this.$store.state.auth.user.user.phone
         })
@@ -230,6 +229,7 @@ verifyMethod(metho){
 
          
          this.sending = false;
+         this.verify_method=true;
 
         });
     
@@ -264,9 +264,9 @@ verifyMethod(metho){
             console.log("response: ", response);
             this.flashMessage.show({
               status: "success",
-              title: this.$t("verification.Successfully_Send"),
+           
               message: this.$t(
-                "verification.SMS_successfully_send_check_your_inbox"
+                "verification.Successfully_Send"
               ),
             });
 
@@ -307,6 +307,8 @@ verifyMethod(metho){
         });
     },
 
+
+
     Verify() {
   
        this.sending = true;
@@ -314,12 +316,20 @@ verifyMethod(metho){
       this.$store
         .dispatch("auth/verify", {
           OTP: this.token,
-
+           id:this.$store.state.auth.user.user.id,
           email: this.$store.state.auth.user.user.email,
-          phone: this.$store.state.auth.user.user.phone
+          phone: this.$store.state.auth.user.user.email,
         })
         .then(response => {
            this.sending = false;
+
+           this.flashMessage.show({
+              status: "success",
+           
+              message: this.$t(
+                "account verification success"
+              ),
+            });
 
           this.$router.push({ name: "welcome" });
         })

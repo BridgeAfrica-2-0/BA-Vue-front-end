@@ -739,7 +739,7 @@
         <div class="col">
           <h6 class="mb-0"><b></b></h6>
           <b-row>
-            <b-col md="12" lg="6" class="p-0 mb-2" v-for="business in profilebusiness" :key="business.business_id">
+            <b-col md="12" lg="6" class="p-0 mb-2" v-for="business in profileBusinesss" :key="business.business_id">
               <div class="people-style shadow h-100">
                 <b-link>
                   <div class="float-right others">
@@ -847,7 +847,7 @@ export default {
       bizId: "",
       profileBusinesss: [],
       infiniteId: +new Date(),
-      profilebusiness: [],
+     // profilebusiness: [],
       editbiz: "",
       selectedusecase: "",
       keywordds: [],
@@ -933,16 +933,18 @@ export default {
   methods: {
     infiniteHandler($state) {
       console.log("loading started");
+     
       
-      if (this.page == 1) {
-        this.profilebusiness.splice(0);
-      }
+     
       let url = 'business/user?page=' + this.page;
+
+       console.log(url);
 
       this.$store
         .dispatch("profile/loadMore", url)
         .then(({ data }) => {
           console.log(data);
+
           if (data.data.length) {
             this.page += 1;
             this.profileBusinesss.push(...data.data);

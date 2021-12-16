@@ -264,9 +264,9 @@ verifyMethod(metho){
             console.log("response: ", response);
             this.flashMessage.show({
               status: "success",
-              title: this.$t("verification.Successfully_Send"),
+           
               message: this.$t(
-                "verification.SMS_successfully_send_check_your_inbox"
+                "verification.Successfully_Send"
               ),
             });
 
@@ -307,6 +307,8 @@ verifyMethod(metho){
         });
     },
 
+
+
     Verify() {
   
        this.sending = true;
@@ -314,7 +316,7 @@ verifyMethod(metho){
       this.$store
         .dispatch("auth/verify", {
           OTP: this.token,
-
+           id:this.$store.state.auth.user.user.id,
           email: this.$store.state.auth.user.user.email,
           phone: this.$store.state.auth.user.user.phone
         })

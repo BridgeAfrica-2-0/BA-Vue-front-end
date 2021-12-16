@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-card v-if="networkInfo != 0" title="" class="">
+    <b-card v-if="networkInfo != 0" title="" class="" style="position: relative">
       <b-container class="a-center">
         <!-- :src="require('@/assets/img/mayor.jpg')" -->
         <b-avatar
@@ -531,7 +531,6 @@ export default {
     width: 2rem;
     height: 2rem;
     top: 404px;
-    margin-left: 320px;
     padding: 0px 0px;
     color: #ffff;
     background: #e75c18;

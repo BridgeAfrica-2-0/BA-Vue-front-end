@@ -265,11 +265,6 @@
                         $t("general.See_all_Notifications")
                       }}</u></router-link
                     >
-                    <!-- <a
-                      href="https://bridgeafrica.info/nav/notifications-view-all.html"
-                      class="text-ored"
-                      ><u>See all Notifications</u></a
-                    > -->
                   </div>
                 </b-popover>
               </div>

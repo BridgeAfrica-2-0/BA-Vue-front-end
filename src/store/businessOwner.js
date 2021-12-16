@@ -258,7 +258,7 @@ export default {
     },
 
     UpdatePost(state, payload) {
-            
+      console.log('in there')
       const newPosts = state.ownerPost.map(post => post.id == payload.id ? payload : post)
       state.ownerPost = newPosts
     },

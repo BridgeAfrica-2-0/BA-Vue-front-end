@@ -4,7 +4,7 @@
     <b> {{ $t("businessowner.About") }} </b>
     
     <hr /> 
-
+    {{business_about}}
     <b-card>
       <div class="mb-3">
         <mapbox :coordinates="[business_about.lng, business_about.lat]" />

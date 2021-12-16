@@ -910,9 +910,12 @@ export default {
       chatSearchKeyword: "",
       chatId: "",
       type: "",
-      socket: io("https://ba-chat-server.herokuapp.com", {
+      socket: io("http://maxinemoffett.com:3000/", {
         transports: ["websocket", "polling", "flashsocket"],
       }),
+      // socket: io("https://ba-chat-server.herokuapp.com", {
+      //   transports: ["websocket", "polling", "flashsocket"],
+      // }),
       // socket: io("localhost:7000", {
       //   transports: ["websocket", "polling", "flashsocket"],
       // }),

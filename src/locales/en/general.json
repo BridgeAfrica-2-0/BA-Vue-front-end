@@ -158,7 +158,24 @@
     "Find_Businesses":"Find Businesses",
     "Not_Find_users":"Not Find users",
     "Not_Find_posts":"Not Find posts",
-    "Not_Find_Business":"Not Find Business"
+    "Not_Find_Business":"Not Find Business",
+
+    "Attach_File":"Attach File",
+    "Post":"Post",
+    "Your":"Your",
+    "Post_are_pending_for_approval":"Post are pending for approval",
+    "View_All":"View All",
+    "Update_Post":"Update Post",
+    "Post_a_network_update":"Post a network update",
+    "People_from":"People from",
+    "Buisness":"Buisness",
+
+    "Select_All":"Select All",
+    "No_More_Notifications":"No More Notifications",
+    "No_Notifications":"No Notifications",
+    "No_Business":"No Business",
+    "No_Editor":"No Editor"
+    
 
 
 }

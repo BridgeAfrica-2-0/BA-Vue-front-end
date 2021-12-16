@@ -21,7 +21,7 @@
         <b-spinner
           v-if="filterLoader"
           variant="primary"
-          :label="$t('search.Spinning')"
+          label="Spinning"
         ></b-spinner>
         <span v-if="subFilter.length">
           <h6>{{ $t("search.Filters") }}</h6>

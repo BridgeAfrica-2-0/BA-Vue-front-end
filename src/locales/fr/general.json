@@ -156,7 +156,24 @@
     "Find_Businesses":"Rechecher des entreprises",
     "Not_Find_users":"Ne pas trouver les utilisateurs",
     "Not_Find_posts":"Ne pas trouver de postes",
-    "Not_Find_Business":"Ne pas trouver l'entreprise"
+    "Not_Find_Business":"Ne pas trouver l'entreprise",
+
+    "Attach_File":"Joindre le fichier",
+    "Post":"Poste",
+    "Your":"Votre",
+    "Post_are_pending_for_approval":"Vos publication(3) sont en attente d'approbation",
+    "View_All":"Voir tous",
+    "Update_Post":"Mise à jour du publication",
+    "Post_a_network_update":"Poster une mise à jour du réseau",
+    "People_from":"Les personnes de",
+    "Buisness":"Entreprise",
+    "Select_All":"Sélectionner tout",
+    "No_More_Notifications":"Plus de notifications",
+    "No_Notifications":"Pas de notifications",
+
+    
+    "No_Business":"Aucun entreprise",
+    "No_Editor":"Aucun éditeur"
     
 
 }

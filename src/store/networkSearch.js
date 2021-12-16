@@ -14,71 +14,66 @@ export default {
     success: false,
     token: "51|HZT2jfu5klFDkJhpvEI6dBhAQBDEdBQ2fABwhhaf",
   },
-  
-    getters: {
-        getNetworks(state) {
-            return state.networks;
-        },
 
-        getCountries(state) {
-            return state.countries;
-        },
-        getRegions(state) {
-            return state.regions;
-        },
-        getDivisions(state) {
-            return state.divisions;
-        },
-        getCouncils(state) {
-            return state.councils;
-        },
-        getNeighbourhoods(state) {
-            return state.neighbourhoods;
-        },
-
-
-        // sending loader value
-        getLoader(state) {
-            return state.prodLoader;
-        },
-        // sending success value
-        getSuccess(state) {
-            return state.success;
-        }
-    },
-    mutations: {
-        //set Network data
-        setNetworks(state, data) {
-            state.networks = data;
-        },
-        setCountries(state, data) {
-            state.countries = data;
-        },
-        setRegions(state, data) {
-            state.regions = data;
-        },
-        setDivisions(state, data) {
-            state.divisions = data;
-        },
-        setCouncils(state, data) {
-            state.councils = data;
-        },
-        setNeighbourhoods(state, data) {
-            state.neighbourhoods = data;
-        },
-
-        setLoader(state, payload) {
-            state.prodLoader = payload;
-        },
-        setSuccess(state, payload) {
-            state.success = payload;
-        }
+  getters: {
+    getNetworks(state) {
+      return state.networks;
     },
 
-   
-   
-  
-  
+    getCountries(state) {
+      return state.countries;
+    },
+    getRegions(state) {
+      return state.regions;
+    },
+    getDivisions(state) {
+      return state.divisions;
+    },
+    getCouncils(state) {
+      return state.councils;
+    },
+    getNeighbourhoods(state) {
+      return state.neighbourhoods;
+    },
+
+
+    // sending loader value
+    getLoader(state) {
+      return state.prodLoader;
+    },
+    // sending success value
+    getSuccess(state) {
+      return state.success;
+    }
+  },
+  mutations: {
+    //set Network data
+    setNetworks(state, data) {
+      state.networks = data;
+    },
+    setCountries(state, data) {
+      state.countries = data;
+    },
+    setRegions(state, data) {
+      state.regions = data;
+    },
+    setDivisions(state, data) {
+      state.divisions = data;
+    },
+    setCouncils(state, data) {
+      state.councils = data;
+    },
+    setNeighbourhoods(state, data) {
+      state.neighbourhoods = data;
+    },
+
+    setLoader(state, payload) {
+      state.prodLoader = payload;
+    },
+    setSuccess(state, payload) {
+      state.success = payload;
+    }
+  },
 
   actions: {
     COUNTRIES({ commit, state }) {

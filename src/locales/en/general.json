@@ -146,7 +146,19 @@
     "Login":"Login",
     "Sign_Up":"Sign Up",
     "Groups":"Groups",
-    "Editors":"Editors"
+    "Editors":"Editors",
+    "distance_in_KM":"distance in KM",
+    "search":"Search",
+    "Edit_Profession":"Edit Profession",
+    "Profession":"Profession",
+    "My":"My",
+
+    "Find_User":"Find User",
+    "Find_Post":"Find Post",
+    "Find_Businesses":"Find Businesses",
+    "Not_Find_users":"Not Find users",
+    "Not_Find_posts":"Not Find posts",
+    "Not_Find_Business":"Not Find Business"
 
 
 }

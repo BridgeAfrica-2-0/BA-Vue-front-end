@@ -11,74 +11,68 @@ export default {
     neighbourhoods: [],
 
     prodLoader: false,
-    success: false,
-    token: "51|HZT2jfu5klFDkJhpvEI6dBhAQBDEdBQ2fABwhhaf",
+    success: false
   },
-  
-    getters: {
-        getNetworks(state) {
-            return state.networks;
-        },
 
-        getCountries(state) {
-            return state.countries;
-        },
-        getRegions(state) {
-            return state.regions;
-        },
-        getDivisions(state) {
-            return state.divisions;
-        },
-        getCouncils(state) {
-            return state.councils;
-        },
-        getNeighbourhoods(state) {
-            return state.neighbourhoods;
-        },
-
-
-        // sending loader value
-        getLoader(state) {
-            return state.prodLoader;
-        },
-        // sending success value
-        getSuccess(state) {
-            return state.success;
-        }
-    },
-    mutations: {
-        //set Network data
-        setNetworks(state, data) {
-            state.networks = data;
-        },
-        setCountries(state, data) {
-            state.countries = data;
-        },
-        setRegions(state, data) {
-            state.regions = data;
-        },
-        setDivisions(state, data) {
-            state.divisions = data;
-        },
-        setCouncils(state, data) {
-            state.councils = data;
-        },
-        setNeighbourhoods(state, data) {
-            state.neighbourhoods = data;
-        },
-
-        setLoader(state, payload) {
-            state.prodLoader = payload;
-        },
-        setSuccess(state, payload) {
-            state.success = payload;
-        }
+  getters: {
+    getNetworks(state) {
+      return state.networks;
     },
 
-   
-   
-  
-  
+    getCountries(state) {
+      return state.countries;
+    },
+    getRegions(state) {
+      return state.regions;
+    },
+    getDivisions(state) {
+      return state.divisions;
+    },
+    getCouncils(state) {
+      return state.councils;
+    },
+    getNeighbourhoods(state) {
+      return state.neighbourhoods;
+    },
+
+
+    // sending loader value
+    getLoader(state) {
+      return state.prodLoader;
+    },
+    // sending success value
+    getSuccess(state) {
+      return state.success;
+    }
+  },
+  mutations: {
+    //set Network data
+    setNetworks(state, data) {
+      state.networks = data;
+    },
+    setCountries(state, data) {
+      state.countries = data;
+    },
+    setRegions(state, data) {
+      state.regions = data;
+    },
+    setDivisions(state, data) {
+      state.divisions = data;
+    },
+    setCouncils(state, data) {
+      state.councils = data;
+    },
+    setNeighbourhoods(state, data) {
+      state.neighbourhoods = data;
+    },
+
+    setLoader(state, payload) {
+      state.prodLoader = payload;
+    },
+    setSuccess(state, payload) {
+      state.success = payload;
+    }
+  },
 
   actions: {
     COUNTRIES({ commit, state }) {
@@ -136,24 +130,27 @@ export default {
           console.error(err);
         });
     },
-
     async SEARCH({ commit, state }, data) {
-      commit("setNetworks", { data: [] });
-      commit("setLoader", true);
-      console.log("[DEBUG] HELLO NETWORK SEARCH", data);
-      let page = 1;
-      if (data.page) page = data.page;
-      else console.log("Page not set!");
-      console.log("[debug] page:", page);
-      try {
-        const res = await axios.get(`network/search?page=${page}`, data);
-        commit("setLoader", false);
-        console.log("Network Search results: ", res.data);
-        commit("setNetworks", res.data);
-      } catch (err) {
-        commit("setLoader", false);
-        console.log(err);
-      }
-    },
+            commit("setNetworks", { data: [] });
+            commit("setLoader", true);
+            console.log("[DEBUG] HELLO NETWORK SEARCH", data);
+
+            let page = data.page ? data.page : 1
+            let keyword = data.keyword ? data.keyword : ''
+
+            console.log("[debug] page:", page);
+            try {
+                const res = await axios.get(`network/search?keyword=${keyword}&page=${page}`, data);
+                commit("setLoader", false);
+                console.log("Network Search results: ", res.data);
+                commit("setNetworks", res.data);
+            } catch (err) {
+                commit("setLoader", false);
+                console.log(err);
+            }
+
+        }
+
+    
   },
 };

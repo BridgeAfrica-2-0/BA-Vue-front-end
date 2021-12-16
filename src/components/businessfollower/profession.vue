@@ -1,11 +1,11 @@
 <template>
   <div>
-    <b>Profession</b>
+    <b>{{$("general.Profession")}}</b>
     <hr />
 
     <b-link class="mt-4 doc" v-b-modal.modal-11>
       <b-icon icon="plus" variant="primary"></b-icon>
-      Edit Profession</b-link
+      {{$("general.Edit_Profession")}}</b-link
     >
     <br />
 
@@ -40,11 +40,11 @@
     </b-list-group-item>
        -->
 
-    <b-modal ref="professionModal" id="modal-11" title="Add Profession" @close="cancel" @ok="save">
+    <b-modal ref="professionModal" id="modal-11" :title="$('general.Add_Profession')" @close="cancel" @ok="save">
       <div class="width">
         <b-form-select class="mb-2" size="sm" v-model="professionInput.access" :options="options"></b-form-select>
       </div>
-      <b-form-input class="mt-2 mb-2" v-model="professionInput.profession" placeholder="Profession"></b-form-input>
+      <b-form-input class="mt-2 mb-2" v-model="professionInput.profession" placeholder="$('general.Profession')"></b-form-input>
     </b-modal>
   </div>
 </template>

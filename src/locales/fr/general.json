@@ -144,7 +144,19 @@
     "Contact_Us":"Contactez-nous",
     "Login":"Connexion",
     "Sign_Up":"Inscription",
-    "Groups":"Groupes"
+    "Groups":"Groupes",
+    "distance_in_KM":"Distance en KM",
+    "search":"Rechercher",
+    "Edit_Profession":"Modifier la profession",
+    "Profession":"Profession",
+    "My":"Mon",
+
+    "Find_User":"Trouver un utilisateur",
+    "Find_Post":"Trouver un poste",
+    "Find_Businesses":"Rechecher des entreprises",
+    "Not_Find_users":"Ne pas trouver les utilisateurs",
+    "Not_Find_posts":"Ne pas trouver de postes",
+    "Not_Find_Business":"Ne pas trouver l'entreprise"
     
 
 }

@@ -168,7 +168,7 @@
 
 			<div class="d-flex justify-content-between align-items-center">
 				<b-button class="btn-custom bg-secondary text-light" type="reset"  variant="secondary"
-					>Cancel</b-button>
+					>{{$t("general.Cancel")}}</b-button>
 
 				<b-button class="btn-custom mr-3" type="submit" variant="primary">
 					<b-spinner v-if="loading" small variant="light"></b-spinner>

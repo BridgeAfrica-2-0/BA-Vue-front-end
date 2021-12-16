@@ -139,6 +139,10 @@ export default {
       return state.albums;
     },
 
+    getOwnerPost(state) {
+      return state.ownerPost
+    },
+
     getalbumImages(state) {
       return state.albumImages
     },
@@ -246,6 +250,21 @@ export default {
         throw new Error(error)
       }
 
+    },
+
+    removePost(state, uuid) {
+      const newPosts = state.ownerPost.filter(post => post.id != uuid)
+      state.ownerPost = newPosts
+    },
+
+    UpdatePost(state, payload) {
+            
+      const newPosts = state.ownerPost.map(post => post.id == payload.id ? payload : post)
+      state.ownerPost = newPosts
+    },
+
+    createPost(state, payload) {
+      state.ownerPost = [payload, ...state.ownerPost]
     },
 
     removeAlbum(state, uuid) {
@@ -387,18 +406,11 @@ export default {
       return num;
     },
 
-
-
-
     roleCheck({ commit }, id) {
-
-
       return axios.get("business/role-check?id=" + id)
         .then((data) => {
           return data;
         });
-
-
     },
 
     loadMore({ commit }, url) {
@@ -407,11 +419,9 @@ export default {
         .then((data) => {
           return data;
         });
-
     },
 
     updateBusinessBiographie({ commit }, data) {
-
       return axios.post(`business/update-biography/${data.business_id}`, data.data)
         .then((data) => {
           console.log(data);
@@ -421,16 +431,11 @@ export default {
     async loadUserBusinessAbout(context, payload) {
       let response_ = null;
       const id_Business = 2;
-      await axios("business/info" +
+      return await axios.get("business/info" +
         "/" +
-        payload.business_id,
-        {
-          method: "GET",
-          headers: {
-            Accept: "application/json",
-
-          }
-        }
+        payload.business_id
+        
+        
       )
         .then(response => {
           if (response.status !== 200 && response.status !== 201) {
@@ -448,7 +453,7 @@ export default {
           response_ = response;
         })
         .catch(error => { });
-      return response_;
+     
     },
 
 

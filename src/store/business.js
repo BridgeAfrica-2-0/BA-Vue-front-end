@@ -1,170 +1,141 @@
 import axios from "axios";
 
 export default {
-  namespaced: true,
+    namespaced: true,
 
-  state: {
+    state: {
 
-     keyword:null,
-     location:null,
-     businesses:[],
-     sponsoredBusinesses:[],
-     searchState:{},
-     isLoading:false,
-     geo:{},
-     
+        keyword: null,
+        location: null,
+        businesses: [],
+        sponsoredBusinesses: [],
+        searchState: {},
+        isLoading: false,
+        geo: {},
+    },
 
-    
+    mutations: {
+        setLoading(state, data) {
+            console.log("setting search data");
+            console.log(data);
+            state.isLoading = data;
+        },
+        setGeo(state, data) {
+            state.geo = data;
+        },
 
-    
-  },
+        setKeyword(state, data) {
+            state.keyword = data;
+        },
+        setBusinesses(state, data) {
+            state.businesses = data;
 
-  mutations: {
-    setLoading(state, data) {
-      console.log("setting search data");
-      console.log(data);
-      state.isLoading = data;
-     
+        },
+        setSearchState(state, data) {
+            state.searchState = data;
+
+        },
+
+        setSponsoredBusinesses(state, data) {
+            state.sponsoredBusinesses = data;
+
+        },
 
     },
 
-    
-    setGeo(state, data){
-      state.geo = data;
+    actions: {
+
+        getGeo({ commit }, payload) {
+            console.log("setting geo location");
+            console.log(payload);
+            commit("setGeo", payload);
+        },
+
+        async FIND_BUSINESS({ commit, state }, payload) {
+            console.log("business search start");
+
+            console.log(payload);
+            commit("setLoading", true);
+
+            return await axios.get(`search`, {
+                params: {
+                    keyword: state.keyword,
+                    location: payload.location,
+                    lat: state.geo.lat,
+                    lng: state.geo.lng,
+
+                    categoryId: payload.cat_id,
+                    subCategoryId: payload.sub_cat,
+                    filterId: payload.filter_id,
+                    distance: payload.distance,
+                    neighbourhoodId: payload.neighbourhood,
+
+                }
+            }).then(({ data }) => {
+                commit("setLoading", false);
+
+                console.log("set businesses: ", data);
+                commit("setBusinesses", data);
+                commit("setSponsoredBusinesses", data.data.sponsord);
+                commit("setSearchState", payload);
+            }).catch(error => {
+                commit("setLoading", false);
+
+                console.log({ erroe: error });
+                throw error;
+            });
+        },
+
+        NEXT_PAGE({ commit, state }, pagge) {
+
+            let payload = state.searchState;
+            console.log("business page number ");
+
+            console.log(pagge);
+            console.log(payload.keyword);
+            return axios.get(`search?page=`+pagge, {
+                keyword: payload.keyword,
+                location: payload.location,
+                categoryId: payload.category,
+                subCategoryId: payload.subcategory,
+                filterId: payload.filter,
+                distance: payload.distance,
+                lat: state.geo.lat,
+                lng: state.geo.lng,
+                neighbourhoodId: payload.neighbourhood,
+
+            }).then(({ data }) => {
+                console.log(data);
+                commit("setBusinesses", data);
+                commit("setSponsoredBusinesses", data.data.sponsord);
+                commit("setSearchState", payload);
+                commit("setLoading", false);
+
+            }).catch(error => {
+                commit("setLoading", false);
+
+                console.log({ erroe: error });
+                throw error;
+            });
+        },
     },
 
-    setKeyword(state, data){
-      state.keyword = data;
-    },
-     
-     
-    setBusinesses(state, data) {
-      state.businesses = data;
+    getters: {
 
-    },
+        getSearchState(state) {
+            return state.searchState;
+        },
 
-  
-   setSearchState(state, data) {
-      state.searchState = data;
+        getBusiness(state) {
+            return state.businesses;
+        },
+        getSponsorBusinesses(state) {
+            return state.sponsoredBusinesses;
+        },
 
-    },
+        getloadingState(state) {
+            return state.isLoading;
+        }
 
-
-
-
-    setSponsoredBusinesses(state, data) {
-        state.sponsoredBusinesses = data;
-  
-      },
-  
-
-    
-
-
-  },
-
-  actions: {
-    
-
-
-     getGeo({ commit }, payload){
-       console.log("setting geo location");
-       console.log(payload);
-      commit("setGeo", payload);
-
-     },
-
-
-
-
-     async  FIND_BUSINESS({ commit,state }, payload) {
-        console.log("business search start");
-
-        console.log(payload);
-      return await axios.get(`search`,{ params:{
-        keyword : state.keyword,
-         location : payload.location,
-         lat:state.geo.lat,
-          lng:state.geo.lng,
-
-          categoryId: payload.cat_id,
-          subCategoryId: payload.sub_cat,
-          filterId: payload.filter_id,
-          distance: payload.distance,
-          neighbourhoodId: payload.neighbourhood,
-        
-     } }).then(({ data }) => {
-        console.log(data);
-        commit("setBusinesses", data);
-        commit("setSponsoredBusinesses", data.data.sponsord);
-         commit("setSearchState", payload);
-      }).catch(error => {
-        console.log(
-          {erroe:error}
-        );
-        throw error;
-      });
-    },
-
-
-
-      
-   
-
-    NEXT_PAGE({ commit, state }, pagge ) {
-     
-      let payload=state.searchState;
-      console.log("business page number ");
-
-      console.log(pagge);
-      console.log(payload.keyword);
-    return axios.get(`search?page=blec`,  {
-      keyword : payload.keyword,
-      location : payload.location, 
-      categoryId: payload.category,
-      subCategoryId: payload.subcategory,
-      filterId: payload.filter,
-      distance: payload.distance,
-      lat:state.geo.lat,
-      lng:state.geo.lng,
-      neighbourhoodId: payload.neighbourhood,
-      
-    }).then(({ data }) => {
-      console.log(data);
-      commit("setBusinesses", data);
-      commit("setSponsoredBusinesses", data.data.sponsord);
-       commit("setSearchState", payload);
-    }).catch(error => {
-      console.log(
-        {erroe:error}
-      );
-      throw error;
-    });
-  },
-
-    
-
-   
-
-  
-  },
-
-  getters: {
-   
-    getSearchState(state) {
-      return state.searchState;
-    },
-
-    getBusiness(state) {
-      return state.businesses;
-    },
-    getSponsorBusinesses(state) {
-      return state.sponsoredBusinesses;
-    },
-
-    getloadingState(state){
-      return state.isLoading;
     }
-    
-  }
 };

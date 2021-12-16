@@ -782,7 +782,9 @@
 
 <script>
 import People from "@/components/dasboard/suggestedpeople";
+
 import AutocompleteMapbox from "@/components/AutocompleteMapbox";
+
 import Business from "@/components/dasboard/welcomebusinesses";
 
 import Tutorial from "@/components/dasboard/tutorial";
@@ -943,7 +945,7 @@ export default {
       this.multiselec.push(tag);
       this.filterselectvalue.push(tag);
     },
-
+   
     categories() {
       this.$store
         .dispatch("auth/categories")

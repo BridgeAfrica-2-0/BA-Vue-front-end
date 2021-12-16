@@ -318,10 +318,18 @@ verifyMethod(metho){
           OTP: this.token,
            id:this.$store.state.auth.user.user.id,
           email: this.$store.state.auth.user.user.email,
-          phone: this.$store.state.auth.user.user.phone
+          phone: this.$store.state.auth.user.user.email,
         })
         .then(response => {
            this.sending = false;
+
+           this.flashMessage.show({
+              status: "success",
+           
+              message: this.$t(
+                "account verification success"
+              ),
+            });
 
           this.$router.push({ name: "welcome" });
         })

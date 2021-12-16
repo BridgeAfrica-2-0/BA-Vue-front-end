@@ -1,9 +1,14 @@
 <template>
   <div>
     <NotFoundComponent
-      v-if="!business.data.length && !prodLoader"
+      v-if="business.data.length < 1 && prodLoader == false"
       :title="title"
     />
+    <b-spinner
+      v-if="prodLoader"
+      variant="primary"
+      :label="$t('search.Spinning')"
+    ></b-spinner>
 
     <div
       v-for="item in business.data"
@@ -142,7 +147,6 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import moment from "moment";
 import axios from "axios";
 
 import NotFoundComponent from "@/components/NotFoundComponent";
@@ -230,15 +234,13 @@ export default {
 
       this.findBusiness({})
         .then((res) => {
-          console.log("business list: ");
+          console.log("business list: ", res);
           console.log(this.business);
           this.$store.commit("business/setLoading", false);
-
           this.total = this.business.total;
         })
         .catch((err) => {
           this.$store.commit("business/setLoading", false);
-
           console.error(err);
         });
     },
@@ -253,10 +255,10 @@ export default {
         .then((res) => {
           console.log("business list: ");
           console.log(this.business);
-          this.prodLoader = false;
+          this.$store.commit("business/setLoading", true);
         })
         .catch((err) => {
-          this.prodLoader = false;
+          this.$store.commit("business/setLoading", true);
           this.total = this.business.total;
           console.error(err);
         });

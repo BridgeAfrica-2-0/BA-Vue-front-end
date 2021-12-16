@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div class="people-style shadow">
+    <div class="people-style shadow  ">
       <b-row class="pr-3">
-        <b-col cols="3" lg="4" md="4" sm="4">
+        <b-col cols="3" lg="4" md="4"  sm="4">
           <div class="center-img">
             <img
               :src="product.picture"
@@ -18,15 +18,22 @@
             </strong>
 
             <br />
-            <strong> {{ $t("businessowner.Description") }} </strong> <br />
-            {{ product.description.substring(0, 30) }}
-            <b-link v-if="product.description.length >= 30">
-              {{ $t("businessowner.see_more") }}
-            </b-link>
+
+             <read-more
+                        more-str="read more"
+                        class="readmore"
+                        :text="product.description"
+                        link="#"
+                        less-str="read less"
+                        :max-chars="100"
+                      >
+                      </read-more>
+
+
             <br />
 
-            <span class="price">
-              <strong> {{ product.price }} </strong>
+            <span class="price username">
+             {{ product.price }} FCFA
             </span>
             <br />
           </p>
@@ -55,7 +62,7 @@
     <!-- <b-modal :id="`modal-${product.id}`" hide-footer title="Edit product">
       <EditProduct :showModal="Edit" :product="product" />
     </b-modal> -->
-    <b-modal :id="`modal-${product.id}`" hide-footer title="Edit product">
+    <b-modal :id="`modal-${product.id}`" hide-footer title="Edit product" v-model="showModal"  >
       <b-form>
         <b-row>
           <b-col cols="12" md="6">
@@ -236,7 +243,7 @@
           <b-card no-body>
             <b-tabs pills card vertical>
               <b-tab
-                :title="$t('businessowner.filters').name"
+                :title="filters.name"
                 v-for="filters in product.subcategories"
                 :key="filters.id"
                 active
@@ -265,7 +272,6 @@
         </div>
 
 
-{{product}}
         <b-alert v-if="success" :variant="val" show> {{ msg }} </b-alert>
         <b-button @click="editProduct(product)" class="mt-2 btn-block" variant="primary">
           <b-spinner small v-if="load" variant="white"></b-spinner>
@@ -304,7 +310,8 @@ export default {
   data() {
     return {
       viewProduct: false,
-      pro_img:null,
+      pro_img:'',
+      showModal: false,
       Edit: false,
       selectedProduct: "",
       selectedImagePrv: this.product.picture,
@@ -380,7 +387,9 @@ export default {
       formData.append("categories", Product.categories);
       formData.append("subcategories", Product.subcategories);
       formData.append("filters", Product.filters);
-      formData.append("picture", this.pro_img);
+      //formData.append("picture", this.pro_img);
+
+      console.log(this.pro_img);
       this.$store
         .dispatch("market/UpdateProduct", {
           path: "market/"+Product.id,
@@ -390,13 +399,17 @@ export default {
           console.log(data);
           this.flashMessage.show({
             status: "success",
+            blockClass: 'custom-block-class',
             message: "Changes Made Successfuly"
           });  
+
+          this.showModal=false;
         })
         .catch(err => {
           console.log({ err: err });
           this.flashMessage.show({
             status: "error",
+            blockClass: 'custom-block-class',
             message: "Unable To Make Changes"
           });
         });
@@ -412,6 +425,7 @@ export default {
           console.log(data);
           this.flashMessage.show({
             status: "success",
+            blockClass: 'custom-block-class',
             message: "Product Deleted Successfuly"
           });  
         })
@@ -454,6 +468,11 @@ export default {
 </script>
 
 <style scoped>
+
+.h-100{
+
+  height: 100%;
+}
 
 .discount {
   color: orange;

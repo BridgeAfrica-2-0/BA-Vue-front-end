@@ -40,12 +40,14 @@
       <!-- MARKET HEADER BAR -->
 
       <!-- MARKET PRODUCT LIST -->
+
+      <div class="row">   
           
         <div class="col-md-6" v-for="(product, index) in products" :key="index">
-          <Product v-show="!orders && market" :product="product" />
+          <Product v-show="!orders && market"  :product="product" />
         </div>
       
-
+ </div>
       <b-col v-if="loader" class="load">
         <b-spinner
           style="width: 7rem; height: 7rem"
@@ -254,7 +256,7 @@
           <b-card no-body>
             <b-tabs pills card vertical>
               <b-tab
-                :title="$t('businessowner.filters').name"
+                :title="filters.name"
                 v-for="filters in filterselectvalue"
                 :key="filters.id"
                 active
@@ -326,7 +328,7 @@ export default {
         picture: null,
         price: "",
         in_stock: 1,
-        on_discount: false,
+        on_discount: 0,
         discount_price: 0,
         condition: "",
         is_service: 0,
@@ -394,9 +396,9 @@ export default {
     },
     getProducts: async function () {
       await axios
-        .get("/market?business_id=1")
+        .get("/market?business_id="+this.businessId)
         .then((res) => {
-          console.log(res.data);
+          console.log(res);
           this.products = res.data.data;
           console.log(this.products);
         })
@@ -430,6 +432,15 @@ export default {
           this.load = false;
           (this.success = true), (this.val = "success");
           this.msg = this.$t('businessowner.Operation_was_successful');
+
+           this.flashMessage.show({
+            status: 'success',
+            message: this.msg,
+            blockClass: 'custom-block-class',
+          });
+
+       this.showModal = false;
+
           this.getProducts();
         })
         .catch((err) => {
@@ -486,11 +497,14 @@ export default {
   },
   beforeMount() {
     this.loader = true;
+    this.businessId = this.$route.params.id;
     //get market place products
     this.getProducts();
     console.log("--test ----");
     //get categories for current business
-     this.businessId = this.$route.params.id;
+     
+     console.log("hey yah djkddkdkd");
+     console.log(this.businessId);
     // this.$store.dispatch('market/getBuCategories', businessId);
 
     this.categories();
@@ -500,6 +514,13 @@ export default {
 </script>
 
 <style scoped>
+
+.h-100{
+
+  height: 100%;
+}
+
+
 .pos {
   /* margin-left: 900px; */
   margin-bottom: 22px;

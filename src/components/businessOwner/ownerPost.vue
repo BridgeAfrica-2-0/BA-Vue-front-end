@@ -850,7 +850,7 @@ export default {
         reader.readAsDataURL(file.files[0]);
       }
 
-      this.$refs["modal-xl"].show();
+      this.$refs["modal-xl_"].show();
     },
 
     selectDocument(event) {
@@ -869,7 +869,7 @@ export default {
         document: this.service(event.target),
         fileName: event.target.files[0].name,
       });
-      this.$refs["modal-xl"].show();
+      this.$refs["modal-xl_"].show();
     },
 
     createPost_() {

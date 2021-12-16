@@ -1,6 +1,8 @@
 <template>
   <div>
-    <div id="geocoder"></div>
+     <div id="map"></div>
+    <div id="geocoder" class="geocoder"></div>
+    
   </div>
 </template>
 <script>
@@ -24,8 +26,17 @@ export default {
   },
   methods: {
     initmap() {
-      let mapboxgl = this.mapbox;
+      let mapboxgl = this.mapbox; 
       mapboxgl.accessToken = this.accessToken;
+
+      var map = new mapboxgl.Map({
+        container: "map",
+        style: this.mapStyle,
+        zoom: this.zoom,
+        center: this.center,
+      });
+
+
       const geocoder = new MapboxGeocoder({
         accessToken: mapboxgl.accessToken,
         types: "country,region,place,postcode,locality,neighborhood",
@@ -35,6 +46,10 @@ export default {
         console.log(e.result);
       });
     },
+
+
+
+
   },
 };
 </script>

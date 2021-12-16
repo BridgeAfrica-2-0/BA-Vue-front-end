@@ -46,7 +46,7 @@ export default {
         accessToken: mapboxgl.accessToken,
         mapboxgl: mapboxgl,
         country: "cameroon",
-        placeholder: "Neighbour",
+        placeholder: "Address",
       });
 
       document.getElementById("geocoder").appendChild(geocoder.onAdd(map));
@@ -82,7 +82,7 @@ export default {
   min-width: 100%;
 }
 #map {
-  margin-top: 75px;
+  /* margin-top: 75px; */
 }
 #map {
   height: 100%;

@@ -75,11 +75,6 @@ export default {
     }
   },
 
-
-
-
-
-
   actions: {
     COUNTRIES({ commit, state }) {
       console.log("[DEBUG] Getting countries");

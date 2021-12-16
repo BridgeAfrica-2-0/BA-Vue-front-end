@@ -421,13 +421,13 @@ export default {
     async loadUserBusinessAbout(context, payload) {
       let response_ = null;
       const id_Business = 2;
-      return await axios.get("business/info" +
+       await axios.get("business/info" +
         "/" +
         payload.business_id
         
         
       )
-        .then(response => {
+        .then(response => { console.log("----",response)
           if (response.status !== 200 && response.status !== 201) {
             throw 'Error from the server';
           }

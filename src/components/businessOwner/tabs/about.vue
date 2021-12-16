@@ -9,7 +9,7 @@
       <div class="mb-3">
         <mapbox :coordinates="[business_about.lng, business_about.lat]" />
       </div>
-    test
+    
       <b-card>
         <b-row v-if="loading">
           <b-col>
@@ -103,7 +103,7 @@
           </b-col>
         </b-row>
       </b-card>
-
+  
       <!-- original card -->
       <!-- <b-row v-if="loading">
         <b-col>
@@ -713,7 +713,9 @@ export default {
         business_abobusiness_id: this.business_about_input,
         business_id: this.$route.params.id,
       })
-      .then((response) => {
+      .then((response) => { 
+
+        
         this.dayOfWorks = this.initialize(this.dayOfWorks);
       })
       .catch((error) => {

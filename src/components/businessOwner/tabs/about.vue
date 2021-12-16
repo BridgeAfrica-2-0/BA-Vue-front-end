@@ -2,7 +2,7 @@
   <div ref="about">
     <b-icon icon="person-fill" class="icon-size" variant="primary"></b-icon>
     <b> {{ $t("businessowner.About") }} </b>
-    rr
+    
     <hr /> 
 
     <b-card>

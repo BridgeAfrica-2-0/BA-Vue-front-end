@@ -873,7 +873,7 @@ export default {
     },
 
     createPost_() {
-      this.$refs["modal-xl"].show();
+      this.$refs["modal-xl_"].show();
     },
 
     deleteItem(name) {

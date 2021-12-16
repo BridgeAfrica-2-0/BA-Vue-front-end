@@ -28,6 +28,10 @@ export default {
       return state.albums;
     },
 
+    getOwnerPost(state) {
+      return state.ownerPost
+    },
+
     getImages(state) {
       return state.images;
     },
@@ -79,6 +83,21 @@ export default {
 
     setCommunityPeople(state, data) {
       state.communityPeople = data;
+    },
+
+    removePost(state, uuid) {
+      const newPosts = state.ownerPost.filter(post => post.id != uuid)
+      state.ownerPost = newPosts
+    },
+
+    UpdatePost(state, payload) {
+            
+      const newPosts = state.ownerPost.map(post => post.id == payload.id ? payload : post)
+      state.ownerPost = newPosts
+    },
+
+    createPost(state, payload) {
+      state.ownerPost = [payload, ...state.ownerPost]
     },
 
     setNetworkInfo(state, data) {

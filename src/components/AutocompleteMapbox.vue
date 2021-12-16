@@ -8,8 +8,6 @@
 import Mapbox from "mapbox-gl";
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 export default {
-  components: {
-  },
   data() {
     return {
       loading: false,

@@ -93,7 +93,7 @@ export default {
 
             console.log(pagge);
             console.log(payload.keyword);
-            return axios.get(`search?page=blec`, {
+            return axios.get(`search?page=`+pagge, {
                 keyword: payload.keyword,
                 location: payload.location,
                 categoryId: payload.category,

@@ -19,7 +19,7 @@
             <div ref="creatform">
               <b-form>
                 <b-form-input
-                  placeholder="Album name"
+                  placeholder="$t('general.Album_name')"
                   v-model="name"
                 ></b-form-input>
                 <b-button class="mt-2" variant="primary" @click="createAlbum">
@@ -64,7 +64,7 @@
           <div ref="creatform">
             <b-form>
               <b-form-input
-                placeholder="Album name"
+                :placeholder="$t('general.Album_name')"
                 v-model="edit_name"
               ></b-form-input>
               <b-button
@@ -316,7 +316,7 @@ export default {
           this.flashMessage.show({
             status: "success",
 
-            message: "Album Created",
+            message: this.$t('general.Album_Created'),
           });
 
           loader.hide();

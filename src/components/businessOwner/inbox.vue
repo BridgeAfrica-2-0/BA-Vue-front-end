@@ -1241,7 +1241,7 @@
                                           value="accepted"
                                           @change="selectedAllMulty"
                                         >
-                                          All
+                                          {{ $t("general.All") }}
                                         </b-form-checkbox>
                                       </b-col>
                                       <b-col>
@@ -1333,7 +1333,7 @@
                                           value="accepted"
                                           @change="selectedAllMulty"
                                         >
-                                          All
+                                          {{ $t("general.All") }}
                                         </b-form-checkbox>
                                       </b-col>
                                       <b-col>
@@ -1345,7 +1345,7 @@
                                           :unchecked-value="false"
                                           @change="selectedFollowings"
                                         >
-                                          Following
+                                          {{ $t("general.Following") }}
                                         </b-form-checkbox>
                                       </b-col>
                                       <b-col>

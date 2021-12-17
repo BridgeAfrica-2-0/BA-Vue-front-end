@@ -215,7 +215,7 @@
     "Add_A_social_link": "Add A social link",
     "Edit_Date_of_Birth": "Edit date of birth",
     "Add_Edit_Gender": "Add/Edit gender",
-    "Post_a_business_update": "Post a business update",
+    "Post_a_business_update": "Post an update",
     "Change_Cover": "Change cover",
     "Remove_Cover": "Remove cover",
     "Remove_Profile": "Remove profile",
@@ -257,6 +257,12 @@
     "default_Phone": "Default phone",
     "Show":"Show",
     "Unable_to_Create_Post":"Unable to create post",
-    "Upload_a_New_picture":"Upload a New picture"
+    "Upload_a_New_picture":"Upload a New picture",
+    "Unable_to_Create_Your_Post":"Unable to Create Your Post",
+    "Post_Deleted":"Post Deleted",
+    "Content_successfuly_uploaded":"Content successfully uploaded",
+    "Update_Bussiness":"Update Bussiness",
+    "Fiters":"Fiters",
+    "Business_Delete":"Business Delete"
     
 }

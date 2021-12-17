@@ -156,7 +156,7 @@ export default {
         // loader.hide();
         this.flashMessage.show({
           status: "success",
-          message: "Album Created"
+          message: this.$t('general.Album_Created'),
         });
       })
       .catch(err => {

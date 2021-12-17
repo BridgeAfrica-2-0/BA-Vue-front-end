@@ -173,7 +173,32 @@
 
     
     "No_Business":"Aucun entreprise",
-    "No_Editor":"Aucun éditeur"
+    "No_Editor":"Aucun éditeur",
+    "Reply_comment":"Repondre à un commentaire",
+
+    "Post_a_business_update":"Publier une mise à jour de l'activité",
+    "Pending_Post":"Publication en attente",
+    "Posts":"Publications",
+    "Media":"Média",
+    "Feedback":"Commentaires",
+
+    "Basic_Information":"Informations de base",
+    "Date_Of_Birth":"Date de naissance",
+    "Add_Phone_Number":"Ajouter un numéro de téléphone",
+    "Add_home_town":"Ajouter la ville d'origine",
+    "Edit_Date_of_Birth":"Modifier la date de naissance",
+    "Birth_Year":"Année de naissance",
+    "Gender":"Genre",
+    "Male":"Homme",
+    "Female":"Femme",
+    "Contact_Information":"Informations de contact",
+    "Places_you_lived":"Lieux où vous avez vécu",
+    "City":"Ville",
+    "Home_Town":"Ville d'origine",
+    "Social_Links":"Liens sociaux",
+    "Add_a_Website":"Ajouter un site web",
+    "Album_Created":"Album créé",
+    "Album_name":"Nom de l'album"
     
 
 }

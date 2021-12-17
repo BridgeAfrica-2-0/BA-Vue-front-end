@@ -178,6 +178,7 @@ export default {
         id: Comdata.id,
         type: Comdata.type,
       };
+      console.log("data", data)
 
       await this.axios
         .post(url, data)

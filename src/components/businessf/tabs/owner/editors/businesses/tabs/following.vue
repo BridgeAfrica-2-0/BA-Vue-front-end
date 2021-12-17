@@ -47,10 +47,6 @@
       </b-col>
     </b-row>
     
-<<<<<<< HEAD
-=======
-    
->>>>>>> main
   </div>
 </template>
 

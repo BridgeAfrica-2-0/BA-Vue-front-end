@@ -58,7 +58,11 @@
                   class="b-background shadow"
                   variant="primary"
                   @click="$emit('handleFollow', business)"
-                  :style="business.is_follow !== 0 ? 'background-color: rgb(162,107,80);' : ''"
+                  :style="
+                    business.is_follow !== 0
+                      ? 'background-color: rgb(162,107,80);'
+                      : ''
+                  "
                 >
                   <i
                     :class="
@@ -95,6 +99,7 @@
                   size="sm"
                   class="b-background shadow"
                   variant="primary"
+                  @click="gotoBusinessAbout(business.id)"
                 >
                   <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
                   <span class="btn-text">{{ $t("network.Direction") }}</span>
@@ -124,6 +129,11 @@ export default {
         perMove: 1,
       },
     };
+  },
+  methods: {
+    gotoBusinessAbout(id) {
+      this.$router.push(`business/${id}#about`);
+    },
   },
 };
 </script>

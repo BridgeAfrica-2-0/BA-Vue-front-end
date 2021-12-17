@@ -11,12 +11,9 @@
           class="network-logo"
         >
         </b-avatar>
-
       </b-container>
-
       <br />
-
-      <b-container>
+<!--       <b-container>
         <b-row>
           <b-col cols="6">
             <h6 class="  m-0 p-0 a-center network-name "><b> {{ networkInfo.name }}</b></h6>
@@ -31,10 +28,32 @@
               class="a-center"
             >
               <b-spinner v-if="SPcommunity" small></b-spinner>
-              <b-icon v-if="!SPcommunity" icon="pencil"></b-icon> 
-              <span v-if="networkInfo.is_follow"> Unfollow</span> <span v-else> Follow</span>
+              <b-icon v-if="!SPcommunity" :icon="networkInfo.is_follow ? 'dash' : 'plus'"></b-icon> 
+              <span v-if="networkInfo.is_follow">Unfollow</span>
+              <span v-else>Follow</span>
             </b-button>
             <b-tooltip target="Follow-Unfollow" variant="secondary">Click To Follow/Unfollow</b-tooltip>
+          </b-col>
+        </b-row>
+      </b-container> -->
+
+      <b-container>
+        <b-row>
+          <b-col cols="6">
+            <h6 class="m-0 p-0 a-center network-name">
+              <b> {{ networkInfo.name }}</b>
+            </h6>
+          </b-col>
+          <b-col cols="6">
+            <b-button
+              variant="primary"
+              size="sm"
+              @click="addNetwork"
+              style="width: 120px"
+              class="a-center"
+            >
+              <b-icon icon="pencil"></b-icon> {{ $t("network.Edit") }}
+            </b-button>
           </b-col>
         </b-row>
       </b-container>
@@ -68,6 +87,7 @@
           <span class="d-inline-block float-right">
             <a @click="$bvToast.show('example-toast')" style="cursor:pointer;">lire la Suite</a>
           </span>
+          <b-icon  icon="pencil"></b-icon>
         </p>
         <b-toast id="example-toast" static no-auto-hide>
           {{ networkInfo.description }}
@@ -75,9 +95,147 @@
       </b-card-text>
     </b-card>
     
-    
-
     <SidebarCommunity />
+
+    <b-modal
+      hide-footer
+      :title="$t('network.Edit_network')"
+      size="md"
+      v-model="showModal"
+    >
+      <b-container>
+        <b-form v-if="updateNetwork_form">
+          <b-form-group
+            label-cols-lg="12"
+            :label="$t('network.Network_Name')"
+            label-size="md"
+            label-class="font-weight-bold pt-0"
+            class="mb-0"
+          >
+            <b-form-input
+              id="network_name"
+              v-model="updateNetwork_form.name"
+              name="name"
+              type="text"
+              required
+            >
+            </b-form-input>
+          </b-form-group>
+
+          <b-form-group
+            label-cols-lg="12"
+            :label="$t('network.Brief_Description')"
+            label-size="md"
+            label-class="font-weight-bold pt-0"
+            class="mb-0"
+          >
+            <b-form-textarea
+              id="description"
+              v-model="updateNetwork_form.description"
+              name="description"
+              type="text"
+              rows="3"
+              max-rows="6"
+            ></b-form-textarea>
+          </b-form-group>
+
+          <b-form-group
+            label-cols-lg="12"
+            :label="$t('network.Email')"
+            label-size="md"
+            label-class="font-weight-bold pt-0"
+            class="mb-0"
+          >
+            <b-form-input
+              id="email"
+              v-model="updateNetwork_form.email"
+              name="email"
+              type="email"
+              required
+            >
+            </b-form-input>
+          </b-form-group>
+
+          <b-form-group
+            label-cols-lg="12"
+            :label="$t('network.Tel_1')"
+            label-size="md"
+            label-class="font-weight-bold pt-0"
+            class="mb-0"
+          >
+            <b-form-input
+              id="tel-1"
+              v-model="updateNetwork_form.primary_phone"
+              name="primary_phone"
+              type="tel"
+              required
+            >
+            </b-form-input>
+          </b-form-group>
+
+          <b-form-group
+            label-cols-lg="12"
+            :label="$t('network.Tel_2')"
+            label-size="md"
+            label-class="font-weight-bold pt-0"
+            class="mb-0"
+          >
+            <b-form-input
+              id="tel-2"
+              v-model="updateNetwork_form.secondary_phone"
+              name="secondary_phone"
+              type="tel"
+              required
+            >
+            </b-form-input>
+          </b-form-group>
+
+          <b-form-group
+            label-cols-lg="12"
+            :label="$t('network.Location')"
+            label-size="md"
+            label-class="font-weight-bold pt-0"
+            class="mb-0"
+          >
+            <b-form-input
+              id="network_name"
+              v-model="updateNetwork_form.address"
+              name="address"
+              type="text"
+              required
+            >
+            </b-form-input>
+          </b-form-group>
+
+          <b-form-group
+            label-cols-md="6"
+            :label="$t('network.Allow_Business_to_join_network')"
+            label-size="md"
+            label-class="font-weight-bold pt-0"
+            class="mb-0"
+          >
+            <b-form-checkbox
+              v-model="updateNetwork_form.allow_business"
+              switch
+              value="1"
+              unchecked-value="0"
+            >
+            </b-form-checkbox>
+          </b-form-group>
+
+          <b-button
+            :disabled="SPupdateN"
+            class="mt-2"
+            style="float: right"
+            variant="primary"
+            @click="updateNetwork()"
+          >
+            <b-spinner v-if="SPupdateN" small type="grow"></b-spinner>
+            {{ $t("network.Update_Network") }}
+          </b-button>
+        </b-form>
+      </b-container>
+    </b-modal>
 
   </div>
 </template>
@@ -96,8 +254,10 @@ export default {
       showModal: false,
       Pcommunity: false,
       buttonStatus: false,
+      updateNetwork_form: null,
       text: "",
       file: '',
+      SPupdateN: false
 
     };
   },
@@ -111,6 +271,51 @@ export default {
     this.getNetworkInfo() 
   },
   methods: {
+  
+    addNetwork() {
+      this.updateNetwork_form = {
+        name: this.networkInfo.name,
+        description: this.networkInfo.description,
+        email: this.networkInfo.email,
+        primary_phone: this.networkInfo.primary_phone,
+        secondary_phone: this.networkInfo.secondary_phone,
+        address: this.networkInfo.address,
+        allow_business: this.networkInfo.allow_business,
+      };
+      console.log(this.networkInfo[0]);
+      console.log("hello");
+      this.showModal = !this.showModal;
+    },
+
+    updateNetwork: function () {
+      this.SPupdateN = true;
+      console.log("this.updateNetwork_form", this.updateNetwork_form);
+      this.$store
+        .dispatch("networkProfile/updateNetwork", {
+          path: "network/" + this.url + "/about/update",
+          formData: this.updateNetwork_form,
+        })
+        .then(({ data }) => {
+          console.log(data);
+          this.SPupdateN = false;
+          this.getNetworkInfo();
+          this.flashMessage.show({
+            status: "success",
+            message: this.$t("network.Changes_Made_Successfuly"),
+          });
+          this.showModal = !this.showModal;
+        })
+        .catch((err) => {
+          console.log({ err: err });
+          this.SPupdateN = false;
+          this.flashMessage.show({
+            status: "error",
+            message: this.$t("network.Unable_To_Make_Changes"),
+          });
+        });
+    },
+
+
     nFormatter: function(num) {
       if (num >= 1000000000) {
         return (num / 1000000000).toFixed(1).replace(/\.0$/, "") + "G";

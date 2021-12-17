@@ -544,6 +544,7 @@
                     <!-- <p>{{ chatSelected }}</p> -->
                     <p
                       v-if="groupMembers && type == 'group'"
+
                       class="d-inline-block text-truncate"
                       style="max-width: 200px"
                     >
@@ -1549,6 +1550,7 @@ export default {
       chatSearchKeyword: "",
       tabIndex: 2,
       type: "",
+
       // socket: io("https://ba-chat-server.herokuapp.com", {
       //   transports: ["websocket", "polling", "flashsocket"],
       // }),
@@ -1558,6 +1560,7 @@ export default {
       // socket: io("http://localhost:7000", {
       //   transports: ["websocket", "polling", "flashsocket"],
       // }),
+
       nameSpace: {
         status: false,
         text: "",

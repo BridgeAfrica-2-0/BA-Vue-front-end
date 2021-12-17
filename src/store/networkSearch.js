@@ -11,8 +11,7 @@ export default {
     neighbourhoods: [],
 
     prodLoader: false,
-    success: false,
-    token: "51|HZT2jfu5klFDkJhpvEI6dBhAQBDEdBQ2fABwhhaf",
+    success: false
   },
 
   getters: {
@@ -131,24 +130,27 @@ export default {
           console.error(err);
         });
     },
-
     async SEARCH({ commit, state }, data) {
-      commit("setNetworks", { data: [] });
-      commit("setLoader", true);
-      console.log("[DEBUG] HELLO NETWORK SEARCH", data);
-      let page = 1;
-      if (data.page) page = data.page;
-      else console.log("Page not set!");
-      console.log("[debug] page:", page);
-      try {
-        const res = await axios.get(`network/search?page=${page}`, data);
-        commit("setLoader", false);
-        console.log("Network Search results: ", res.data);
-        commit("setNetworks", res.data);
-      } catch (err) {
-        commit("setLoader", false);
-        console.log(err);
-      }
-    },
+            commit("setNetworks", { data: [] });
+            commit("setLoader", true);
+            console.log("[DEBUG] HELLO NETWORK SEARCH", data);
+
+            let page = data.page ? data.page : 1
+            let keyword = data.keyword ? data.keyword : ''
+
+            console.log("[debug] page:", page);
+            try {
+                const res = await axios.get(`network/search?keyword=${keyword}&page=${page}`, data);
+                commit("setLoader", false);
+                console.log("Network Search results: ", res.data);
+                commit("setNetworks", res.data);
+            } catch (err) {
+                commit("setLoader", false);
+                console.log(err);
+            }
+
+        }
+
+    
   },
 };

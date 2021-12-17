@@ -129,7 +129,7 @@ export default {
   },
   methods: {
     gotoBusinessAbout(id) {
-      this.$router.push(`business/${id}#about`);
+      this.$router.push(`/business/${id}#about`);
     },
   },
 };

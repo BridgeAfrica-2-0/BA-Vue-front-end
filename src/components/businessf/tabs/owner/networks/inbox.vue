@@ -164,7 +164,7 @@
                               'p-2 message ',
                               {
                                 messageSelected:
-                                  chat.receiver_id ==
+                                  chat.id ==
                                   (chatSelected.clickedId != null
                                     ? chatSelected.clickedId
                                     : false)
@@ -176,7 +176,7 @@
                               selectedChat({
                                 type: 'user',
                                 chat: chat,
-                                id: chat.receiver_id,
+                                id: chat.id,
                               })
                             "
                           >
@@ -261,7 +261,7 @@
                               selectedChat({
                                 type: 'business',
                                 chat: chat,
-                                id: chat.receiver_business_id,
+                                id: chat.id,
                               })
                             "
                           >
@@ -543,7 +543,7 @@
                     <h5>{{ chatSelected.name }}</h5>
                     <!-- <p>{{ chatSelected }}</p> -->
                     <p
-                      v-if="groupMembers && type=='group'"
+                      v-if="groupMembers && type == 'group'"
                       class="d-inline-block text-truncate"
                       style="max-width: 200px"
                     >
@@ -1579,42 +1579,42 @@ export default {
   },
   computed: {
     all() {
-      return this.$store.getters["businessChat/getAll"];
+      return this.$store.getters["networkChat/getAll"];
     },
     allNetworks() {
-      return this.$store.getters["businessChat/getAllNetworks"];
+      return this.$store.getters["networkChat/getAllNetworks"];
     },
     allUsers() {
-      return this.$store.getters["businessChat/getAllUsers"];
+      return this.$store.getters["networkChat/getAllUsers"];
     },
     allBusiness() {
-      return this.$store.getters["businessChat/getAllBusinesses"];
+      return this.$store.getters["networkChat/getAllBusinesses"];
     },
     allEditors() {
-      return this.$store.getters["businessChat/getAllEditors"];
+      return this.$store.getters["networkChat/getAllEditors"];
     },
     groupMembers() {
-      return this.$store.getters["businessChat/getGroupMembers"];
+      return this.$store.getters["networkChat/getGroupMembers"];
     },
 
     ctaSelected() {
-      return this.$store.getters["businessChat/getSelectedChat"];
+      return this.$store.getters["networkChat/getSelectedChat"];
     },
     chatId() {
-      return this.$store.getters["businessChat/getSelectedChatId"];
+      return this.$store.getters["networkChat/getSelectedChatId"];
     },
     currentBizId() {
-      return this.$store.getters["businessChat/getCurrentBizId"];
+      return this.$store.getters["networkChat/getCurrentBizId"];
     },
     currentBiz() {
       return this.$store.getters["auth/profilConnected"];
     },
 
     bizs() {
-      return this.$store.getters["businessChat/getBizs"];
+      return this.$store.getters["networkChat/getBizs"];
     },
     chatList() {
-      return this.$store.getters["businessChat/getChatList"];
+      return this.$store.getters["networkChat/getChatList"];
     },
 
     currentUser() {
@@ -1625,11 +1625,11 @@ export default {
       return this.$store.getters["userChat/getUsers"];
     },
     chats() {
-      return this.$store.getters["businessChat/getChats"];
+      return this.$store.getters["networkChat/getChats"];
     },
 
     loader() {
-      return this.$store.getters["businessChat/getLoader"];
+      return this.$store.getters["networkChat/getLoader"];
     },
     receiver() {
       return this.chats[0] ? this.chats[0].receiver : "";
@@ -1648,15 +1648,6 @@ export default {
     },
   },
   mounted() {
-    let obj = [
-      {
-        id: { first: "edouard", second: "lele" },
-        names: { first: "edouard", second: "lele" },
-      },
-    ];
-    let tableau = Object.keys(obj).map((key) => [Number(key), obj[key]]);
-
-    console.log("finale+++", tableau);
     if (this.chatList.length < 0) {
       this.getChatList({ type: "business" });
     }
@@ -1668,7 +1659,7 @@ export default {
     this.getCurBiz();
 
     this.$store.commit(
-      "businessChat/setCurrentBizId",
+      "networkChat/setCurrentBizId",
       Number(this.$route.params.id)
     );
     console.log("router params:", this.currentBizId);
@@ -1707,7 +1698,7 @@ export default {
   },
   methods: {
     getCurBiz() {
-      this.$store.dispatch("businessChat/GET_CUR_BIZ");
+      this.$store.dispatch("networkChat/GET_CUR_BIZ");
     },
     getName(chat) {
       return chat.business_i_d
@@ -1811,7 +1802,7 @@ export default {
       this.allSelection = false;
 
       this.getUsers();
-      this.$store.commit("businessChat/setBizs", this.allUsers);
+      this.$store.commit("networkChat/setBizs", this.allUsers);
 
       this.selectedMulty = [];
       if (this.peopleMulty) {
@@ -1830,7 +1821,7 @@ export default {
       this.clickedFilterType = "business";
       this.getBizs();
 
-      this.$store.commit("businessChat/setBizs", this.allBusiness);
+      this.$store.commit("networkChat/setBizs", this.allBusiness);
 
       this.allSelection = false;
 
@@ -1849,7 +1840,7 @@ export default {
 
       this.clickedFilterType = "network";
 
-      this.$store.commit("businessChat/setBizs", this.allNetworks);
+      this.$store.commit("networkChat/setBizs", this.allNetworks);
       this.getNetworks();
       this.allSelection = false;
 
@@ -1970,7 +1961,7 @@ export default {
       console.log("ROOMS: ", this.room);
       this.tabIndex = 3;
       // this.getChatList({ type: "group" });
-      this.$store.dispatch("businessChat/CREATE_GROUP", {
+      this.$store.dispatch("networkChat/CREATE_GROUP", {
         groupName: this.groupName,
         userID: `${membersPeopleIds}`,
 
@@ -2003,27 +1994,27 @@ export default {
     //   await this.$store.dispatch("businessChat/GET_ALL", keyword);
     // },
     getEditors(keyword) {
-      this.$store.dispatch("businessChat/GET_EDITORS", {
+      this.$store.dispatch("networkChat/GET_EDITORS", {
         keyword: keyword,
       });
     },
     getNetworks(keyword) {
       this.visibleCollaps = true;
-      this.$store.dispatch("businessChat/GET_NETWORKS", {
+      this.$store.dispatch("networkChat/GET_NETWORKS", {
         keyword: keyword,
       });
     },
     getUsers(keyword) {
       this.visibleCollaps = true;
 
-      this.$store.dispatch("businessChat/GET_USERS", {
+      this.$store.dispatch("networkChat/GET_USERS", {
         keyword: keyword,
       });
     },
     getBizs(keyword) {
       this.visibleCollaps = true;
       this.$store
-        .dispatch("businessChat/GET_BIZS", {
+        .dispatch("networkChat/GET_BIZS", {
           keyword: keyword,
         })
         .then(() => {
@@ -2034,53 +2025,54 @@ export default {
     getChatList(data) {
       // alert("Clicked!")
       this.type = data.type;
-      // this.chatSelected.active = false;
+      this.chatSelected.active = false;
       this.newMsg = false;
       console.log("tab type:", this.tabIndex);
 
-      this.$store.dispatch("businessChat/GET_BIZS_CHAT_LIST", data);
+      this.$store.dispatch("networkChat/GET_BIZS_CHAT_LIST", data);
       // this.scrollToBottom();
     },
 
     async histBizToBiz(data) {
       console.log("search data:", data);
       if (data.type == "user") {
-        await this.$store.dispatch("businessChat/GET_BIZ_TO_USER", data);
+        await this.$store.dispatch("networkChat/GET_BIZ_TO_USER", data);
       } else if (data.type == "network") {
-        await this.$store.dispatch("businessChat/GET_BIZ_TO_NETWORK", data);
+        await this.$store.dispatch("networkChat/GET_BIZ_TO_NETWORK", data);
       } else if (data.type == "group") {
-        await this.$store.dispatch("businessChat/GET_BIZ_TO_GROUP", data);
+        console.log("Here...");
+        await this.$store.dispatch("networkChat/GET_BIZ_TO_GROUP", data);
       } else {
-        await this.$store.dispatch("businessChat/GET_BIZ_TO_BIZ", data);
+        await this.$store.dispatch("networkChat/GET_BIZ_TO_BIZ", data);
       }
     },
     async histBizToUser(receiverId) {
       await this.$store
-        .dispatch("businessChat/GET_BIZ_TO_USER", receiverId)
+        .dispatch("networkChat/GET_BIZ_TO_USER", receiverId)
         .then(() => {})
         .catch(() => console.log("error"));
     },
     async histBizToNetwork(receiverId) {
       await this.$store
-        .dispatch("businessChat/GET_BIZ_TO_NETWORK", receiverId)
+        .dispatch("networkChat/GET_BIZ_TO_NETWORK", receiverId)
         .then(() => {})
         .catch(() => console.log("error"));
     },
     async histBizToGroup(receiverId) {
-      await this.$store.dispatch("businessChat/GET_BIZ_TO_GROUP", receiverId);
+      await this.$store.dispatch("networkChat/GET_BIZ_TO_GROUP", receiverId);
       console.log("group members: ++++>", this.groupMembers);
     },
     saveMessage(data) {
       console.log("[DEBUG SAVE]", { data: data, type: this.type });
       if (this.type == "group") {
-        this.$store.dispatch("businessChat/SAVE_GROUP_CHAT", {
+        this.$store.dispatch("networkChat/SAVE_GROUP_CHAT", {
           data: data,
           group_id: this.chatId,
           sender_id: this.currentBizId,
           type: this.type,
         });
       } else {
-        this.$store.dispatch("businessChat/SAVE_BUSINESS_CHAT", {
+        this.$store.dispatch("networkChat/SAVE_BUSINESS_CHAT", {
           data: data,
           type: this.type,
         });
@@ -2093,7 +2085,7 @@ export default {
       this.createGroup();
       let dumId = 7;
       // this.chatId = data.id;
-      this.$store.commit("businessChat/setSelectedChatId", dumId);
+      this.$store.commit("networkChat/setSelectedChatId", dumId);
       let receiver = { receiverID: dumId, keyword: null };
       this.histBizToUser(receiver);
 
@@ -2117,7 +2109,7 @@ export default {
         this.createGroup();
       }
       this.chatId = data.id;
-      this.$store.commit("businessChat/setSelectedChatId", data.id);
+      this.$store.commit("networkChat/setSelectedChatId", data.id);
       let receiver = { receiverID: data.id, keyword: null };
       if (data.type == "user") {
         this.histBizToUser(receiver);

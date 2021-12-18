@@ -1,10 +1,13 @@
 <template>
   <div>
-
     <b-row>
       <b-col cols="12" class="mx-auto">
         <b-input-group class="mb-2 px-md-3 mx-auto">
-          <b-input-group-prepend @click="search" is-text style="cursor:pointer;">
+          <b-input-group-prepend
+            @click="search"
+            is-text
+            style="cursor: pointer"
+          >
             <b-icon-search class="text-primary border-none"></b-icon-search>
           </b-input-group-prepend>
           <b-form-input
@@ -17,14 +20,15 @@
         </b-input-group>
       </b-col>
     </b-row>
-    <br/>
+    <br />
 
     <b-row cols="1">
-      <b-col class="ml-0 mr-0"
+      <b-col
+        class="ml-0 mr-0"
         v-for="member in displayfollowing"
         :key="member.id"
       >
-        <b-skeleton-wrapper :loading="loading" >
+        <b-skeleton-wrapper :loading="loading">
           <template #loading>
             <b-card>
               <b-skeleton width="85%"></b-skeleton>
@@ -32,13 +36,19 @@
               <b-skeleton width="70%"></b-skeleton>
             </b-card>
           </template>
-        <div style="display:none;">{{member['communityNum'] = nFormatter(member.followers)}}</div>
-        <div style="display:none;">{{member['type'] = "network"}}</div>
-        <CommunityNetwork :member="member" @BlockUser="BlockUser" @handleFollow="handleFollow" />
+          <div style="display: none">
+            {{ (member["communityNum"] = nFormatter(member.followers)) }}
+          </div>
+          <div style="display: none">{{ (member["type"] = "network") }}</div>
+          <CommunityNetwork
+            :member="member"
+            @BlockUser="BlockUser"
+            @handleFollow="handleFollow"
+          />
         </b-skeleton-wrapper>
       </b-col>
     </b-row>
-    <b-row >
+    <b-row>
       <b-col col="12">
         <infinite-loading @infinite="infiniteHandler">
           <div class="text-red" slot="no-more">No More Request</div>
@@ -46,32 +56,30 @@
         </infinite-loading>
       </b-col>
     </b-row>
-    
-    
   </div>
 </template>
 
 <script>
-import CommunityNetwork from "../../communityNetwork"
+import CommunityNetwork from "../../communityNetwork";
 export default {
   components: {
-    CommunityNetwork
+    CommunityNetwork,
   },
   data() {
     return {
-      url:null,
+      url: null,
       searchTitle: "",
       page: 0,
       loading: false,
       networkfollowing: [],
-      displayfollowing: []
+      displayfollowing: [],
     };
   },
-  mounted(){
+  mounted() {
     this.url = this.$route.params.id;
   },
-  methods:{
-    nFormatter: function(num) {
+  methods: {
+    nFormatter: function (num) {
       if (num >= 1000000000) {
         return (num / 1000000000).toFixed(1).replace(/\.0$/, "") + "G";
       }
@@ -92,77 +100,82 @@ export default {
       return data;
     },
     search() {
-      if(this.searchTitle){
+      if (this.searchTitle) {
         this.loading = true;
         this.page -= 1;
         console.log("searching...");
         console.log(this.searchTitle);
         this.infiniteHandler();
-      }else{
-        console.log("Empty search title: "+this.searchTitle);
+      } else {
+        console.log("Empty search title: " + this.searchTitle);
         this.infiniteHandler();
       }
     },
-    
+
     infiniteHandler($state) {
       console.log("loop");
       const keyword = this.getRequestDatas(this.searchTitle);
-      console.log('keyword: '+keyword);
+      console.log("keyword: " + keyword);
       let formData = new FormData();
-      formData.append('keyword', keyword);
-      console.log("network/"+this.url+"/network/following/"+this.page);
+      formData.append("keyword", keyword);
+      console.log("network/" + this.url + "/network/following/" + this.page);
       this.axios
-      .post("network/"+this.url+"/network/following/"+this.page, formData)
-      .then(({ data }) => {
-       console.log(data);
-       console.log(this.page);
-        if(keyword){
-          this.displayfollowing = data.data;
-          this.searchTitle = "";
-          $state.complete();
-        }else{
-          if (data.data.length) {
-            this.page += 1;
-            console.log(this.page);
-            console.log(...data.data);
-            this.networkfollowing.push(...data.data);
-            this.displayfollowing = this.networkfollowing;
-            $state.loaded();
-          } else {
+        .post(
+          "network/" + this.url + "/network/following/" + this.page,
+          formData
+        )
+        .then(({ data }) => {
+          console.log(data);
+          console.log(this.page);
+          if (keyword) {
+            this.displayfollowing = data.data;
+            this.searchTitle = "";
             $state.complete();
+          } else {
+            if (data.data.length) {
+              this.page += 1;
+              console.log(this.page);
+              console.log(...data.data);
+              this.networkfollowing.push(...data.data);
+              this.displayfollowing = this.networkfollowing;
+              $state.loaded();
+            } else {
+              $state.complete();
+            }
           }
-        }
-      }) .catch((err) => {
+        })
+        .catch((err) => {
           console.log({ err: err });
-      })
+        });
       this.loading = false;
     },
     BlockUser(user_id) {
       this.loading = true;
-      console.log("network/"+this.url+"/lock/network/"+user_id);
-      this.axios.delete("network/"+this.url+"/lock/network/"+user_id)
-      .then(response => {
-        console.log(response);
-        this.blockUsers();
-        this.loading = false;
-        this.flashMessage.show({
-          status: "success",
-          message: "User blocked"
+      console.log("network/" + this.url + "/lock/network/" + user_id);
+      this.axios
+        .delete("network/" + this.url + "/lock/network/" + user_id)
+        .then((response) => {
+          console.log(response);
+          this.blockUsers();
+          this.loading = false;
+          this.flashMessage.show({
+            status: "success",
+            message: "User blocked",
+          });
+        })
+        .catch((err) => {
+          console.log({ err: err });
+          this.loading = false;
+          this.flashMessage.show({
+            status: "error",
+            message: "Unable to blocked User",
+          });
         });
-      })
-      .catch(err => {
-        console.log({ err: err });
-        this.loading = false;
-        this.flashMessage.show({
-          status: "error",
-          message: "Unable to blocked User"
-        });
-      });
     },
     async handleFollow(Comdata) {
-      console.log("handleFollow", Comdata)
+      console.log("handleFollow", Comdata);
       const url = Comdata.is_follow === 0 ? `/follow-community` : `/unfollow`;
-      console.log("uri", url)
+      console.log("uri", url);
       const nextFollowState = Comdata.is_follow === 0 ? 1 : 0;
       const data = {
         id: Comdata.id,
@@ -171,13 +184,13 @@ export default {
 
       await this.axios
         .post(url, data)
-        .then(response => {
+        .then((response) => {
           console.log("response", response);
           Comdata.is_follow = nextFollowState;
         })
-        .catch(err => console.log(err));
+        .catch((err) => console.log(err));
     },
-  }
+  },
 };
 </script>
 

@@ -1,13 +1,19 @@
 <template>
-  <div class="map-container">
+  <div>
     <div id="map"></div>
-    <div id="geocoder" class="geocoder"></div>
+    <div id="geolocation" class="geolocation"></div>
   </div>
 </template>
 <script>
 import Mapbox from "mapbox-gl";
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 export default {
+  created() {
+    this.mapbox = Mapbox;
+  },
+  mounted() {
+    this.initmap();
+  },
   data() {
     return {
       loading: false,
@@ -17,24 +23,11 @@ export default {
       zoom: 5,
     };
   },
-  created() {
-    this.mapbox = Mapbox;
-  },
-  mounted() {
-    this.initmap();
-  },
   methods: {
-    handleResult(response) {
-      console.log(response.result);
-      let details = {
-        coordinates: response.result.center,
-        address: response.result.text,
-      };
-      this.$emit("get-address-details", details);
-    },
     initmap() {
       let mapboxgl = this.mapbox;
       mapboxgl.accessToken = this.accessToken;
+
       var map = new mapboxgl.Map({
         container: "map",
         style: this.mapStyle,
@@ -44,48 +37,35 @@ export default {
 
       const geocoder = new MapboxGeocoder({
         accessToken: mapboxgl.accessToken,
-        mapboxgl: mapboxgl,
-        country: "cameroon",
-        placeholder: "Address",
+        types: "country,region,place,postcode,locality,neighborhood",
       });
-
-      document.getElementById("geocoder").appendChild(geocoder.onAdd(map));
-
+      geocoder.addTo("#geolocation");
       geocoder.on("result", (e) => {
-        let response = e.result;
-        let details = {
-          coordinates: response.center,
-          address: response.place_name,
-        };
-        this.$emit("get-address-details", details);
+        this.$emit("business-instance-location", e.result);
       });
     },
   },
 };
 </script>
+
 <style scoped>
-@import url("https://api.tiles.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css");
+@import url("https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css");
 @import url("https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.css");
-.map-container {
-  width: 100%;
-  min-height: 400px;
-}
-.geocoder {
-  position: absolute;
+#geolocation {
   z-index: 1;
-  width: 74vw;
-  left: 50%;
-  margin-left: -49.5%;
-  top: 10px;
+  /* margin: 20px; */
 }
 .mapboxgl-ctrl-geocoder {
   min-width: 100%;
 }
-#map {
-  margin-top: 65px;
+body {
+  margin: 0;
+  padding: 0;
 }
 #map {
-  height: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
   width: 100%;
 }
 </style>

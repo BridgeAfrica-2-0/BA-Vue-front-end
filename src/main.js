@@ -174,13 +174,10 @@ Vue.use(VueYoutube)
 
 import VueAgile from 'vue-agile';
 
-
 Vue.use(VueAgile);
-
 
 import TextareaAutosize from 'vue-textarea-autosize'
 Vue.use(TextareaAutosize)
-
 
 import CoolLightBox from 'vue-cool-lightbox';
 import 'vue-cool-lightbox/dist/vue-cool-lightbox.min.css';
@@ -231,7 +228,7 @@ new Vue({
             },
         );
 
-        axios.interceptors.request.use(function(config) {
+        axios.interceptors.request.use(function (config) {
             if (user != null) {
                 config.headers.Authorization = `Bearer ${user.accessToken}`;
             }

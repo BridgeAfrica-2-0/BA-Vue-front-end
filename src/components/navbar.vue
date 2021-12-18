@@ -106,14 +106,13 @@
               <vue-bootstrap-typeahead
                 v-model="query"
                 :data="neigbourhoods"
-                minMatchingChars="0"
-                maxMatches="10"
+                :minMatchingChars=0
+                :maxMatches=10
                 :serializer="(item) => item.name"
                 placeholder="Where"
                 class="search-hh w-44"
               />
 
-           
               <slot name="button">
                 <Button @click.native="getKeyword" />
               </slot>
@@ -266,11 +265,6 @@
                         $t("general.See_all_Notifications")
                       }}</u></router-link
                     >
-                    <!-- <a
-                      href="https://bridgeafrica.info/nav/notifications-view-all.html"
-                      class="text-ored"
-                      ><u>See all Notifications</u></a
-                    > -->
                   </div>
                 </b-popover>
               </div>
@@ -287,7 +281,7 @@
                 </router-link>
               </div>
 
-              <b-tooltip target="profilepic" variant="light" triggers="hover">
+              <b-tooltip target="profilepic" variant="light" triggers="click">
                 {{ user.name }}
               </b-tooltip>
 
@@ -495,7 +489,7 @@
             <hr class="h-divider" />
             <a
               href="#"
-              @click="logout"
+              @click.prevent="logout"
               class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
             >
               <span class="mr-2"
@@ -510,23 +504,7 @@
       </div>
     </nav>
 
-    <div>
-      <!-- 
-
-           <div>
-  <vue-bootstrap-typeahead
-    class="mb-4"
-    v-model="query"
-    :data="users"
-    :serializer="item => item.login"
-    @hit="selectedUser = $event"
-    placeholder="Search GitHub Users"
-  />
-
- <h3>Selected User JSON</h3>
- <pre>{{ selectedUser | stringify }}</pre>
-</div> -->
-    </div>
+    <div></div>
   </header>
 </template>
 
@@ -561,7 +539,6 @@ export default {
   },
   data() {
     return {
-    
       isActive: false,
       shownav: false,
       notifications: [],
@@ -641,14 +618,16 @@ export default {
   },
 
   watch: {
-   
     "$store.state.auth.profilConnected": function () {
       this.updateNotificationEvent();
       this.userOwnPage = this.onRedirect();
     },
 
-    credentials: function (newVal) {
-      this.searchOptions = newVal;
+    credentials: {
+      deep: true,
+      handler() {
+        this.searchOptions = this.credentials;
+      },
     },
 
     query(newQuery) {
@@ -665,7 +644,7 @@ export default {
       return JSON.stringify(value, null, 2);
     },
   },
-  
+
   methods: {
     ...mapActions({
       setNetworks: "social/FIND_USER_NETWORK",
@@ -746,18 +725,13 @@ export default {
     },
 
     getKeyword() {
-      if (!this.credentials.keyword) return false;
+      if (!this.searchOptions.keyword) return false;
 
       if (this.$route.name != "Search") {
-        this.$store
-          .dispatch("allSearch/SEARCH", {
-            keyword: this.credentials.keyword,
-          })
-          .catch((err) => {
-            console.log("Error erro!");
-          });
-
-        this.$router.push({ name: "Search" });
+        this.$router.push({
+          name: "Search",
+          query: { keyword: this.searchOptions.keyword },
+        });
       }
     },
     navLink(type) {
@@ -786,12 +760,20 @@ export default {
     },
 
     logout: async function () {
+      let loader = this.$loading.show({
+        container: this.$refs.formContainer,
+        canCancel: true,
+        onCancel: this.onCancel,
+        color: "#e75c18",
+      });
+
       const response = await this.$repository.notification.logOut();
       if (response.success) {
-        this.Logout();
-      } else {
+        loader.hide();
+        this.$router.push({ name: "home1" });
         this.Logout();
       }
+      loader.hide();
     },
 
     switchToProfile: async function () {

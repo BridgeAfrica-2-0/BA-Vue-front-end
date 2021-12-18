@@ -19,7 +19,7 @@
             <b-col lg="5" xl="4" class="">
               <Parent />
             </b-col>
-
+            
             <b-col
               lg="7"
               xl="8"

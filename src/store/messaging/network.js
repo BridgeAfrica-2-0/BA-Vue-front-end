@@ -23,6 +23,9 @@ export default {
     },
     getters: {
         // get data
+        getGroupMembers(state) {
+            return state.groupMembers;
+        },
         getCurrentBizId(state) {
             return state.currentBizId;
         },
@@ -102,6 +105,9 @@ export default {
         },
         setGroupMembers(state, data) {
             state.groupMembers = data
+        },
+        setSelectedChatId(state, data) {
+            state.selectedChatId = data
         },
 
         setSelectedChat(state, data) {
@@ -400,6 +406,26 @@ export default {
                 // commit("setCurrentBiz", rootGetters['auth/profilConnected']);
 
         },
+        async GET_NETWORK_MEMBERS({ commit, state }) {
+            commit("setBizs", []);
+
+            await axios.post(`network/${state.currentBizId}/members/list`)
+                .then((res) => {
+                    commit("setLoader", false);
+                    let editor = res.data.data
+                    if (editor.length > 0) {
+                        state.editors = { accountType: "member", ...res.data.data }
+                    }
+                    console.log("member:", state.editors);
+                    commit("setBizs", state.editors);
+                })
+                .catch((err) => {
+                    commit("setLoader", false);
+                    console.log(err);
+                })
+                // commit("setCurrentBiz", rootGetters['auth/profilConnected']);
+
+        },
 
         // [NO BUG]
         GET_BIZS_CHAT_LIST({ commit, state }, data) {
@@ -547,8 +573,7 @@ export default {
             commit("setLoader", true);
             console.log("[DEBUG] user to user", data);
             let keyword = data.keyword ? '/' + data.keyword : ''
-
-            await axios.get(`/messages/${state.currentBizId}/network/${data.receiverID + keyword}`)
+            await axios.get(`/messages/network/${state.currentBizId}/business/${data.receiverID + keyword}`)
                 .then((res) => {
                     commit("setLoader", false);
                     console.log("Business to business: ", res.data.data);
@@ -580,8 +605,7 @@ export default {
             console.log("[DEBUG] user to network", data);
             let keyword = data.keyword ? '/' + data.keyword : ''
 
-
-            await axios.get(`/messages/network/${state.currentBizId}/business/${data.receiverID + keyword}`)
+            await axios.get(`/messages/${state.currentBizId}/network/${data.receiverID + keyword}`)
                 .then((res) => {
                     commit("setLoader", false);
                     console.log("User to network: ", res.data.data);

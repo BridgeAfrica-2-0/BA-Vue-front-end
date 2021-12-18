@@ -166,6 +166,26 @@ export default {
                     console.log(err);
                 })
         },
+        async GET_BUSINESS_MEMBERS({ commit, state }) {
+            commit("setBizs", []);
+
+            await axios.post(`network/${state.currentBizId}/business/members`)
+                .then((res) => {
+                    commit("setLoader", false);
+                    let editor = res.data.data
+                    if (editor.length > 0) {
+                        state.editors = { accountType: "member", ...res.data.data }
+                    }
+                    console.log("member:", state.editors);
+                    commit("setBizs", state.editors);
+                })
+                .catch((err) => {
+                    commit("setLoader", false);
+                    console.log(err);
+                })
+                // commit("setCurrentBiz", rootGetters['auth/profilConnected']);
+
+        },
         async GET_GROUP_MEMBERS({ commit, state }, data) {
             commit("setLoader", true);
             console.log("[DEBUG] user to user", data);

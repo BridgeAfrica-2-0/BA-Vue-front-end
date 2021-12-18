@@ -844,7 +844,7 @@
                               selectedChat({
                                 type: 'user',
                                 chat: user,
-                                id: user.id,
+                                id: user.id
                               })
                             "
                           >
@@ -910,7 +910,7 @@ export default {
       chatSearchKeyword: "",
       chatId: "",
       type: "",
-      socket: io("http://maxinemoffett.com:3000/", {
+      socket: io(process.env.VUE_APP_CHAT_SERVER_URL, {
         transports: ["websocket", "polling", "flashsocket"],
       }),
       // socket: io("https://ba-chat-server.herokuapp.com", {

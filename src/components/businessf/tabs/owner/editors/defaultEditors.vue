@@ -40,7 +40,6 @@
 <script>
 import FeedbackNetwork from '@/components/businessf/tabs/owner/editors/feedbackEditor';
 import MediaNetwork from '@/components/owner/tabs/media';
-// import MemberNetwork from '@/components/businessf/tabs/owner/editors/memberEditor';
 import MemberNetwork from '@/components/businessf/tabs/owner/networks/memberNetwork';
 
 import Members from '@/components/businessf/tabs/owner/editors/member';

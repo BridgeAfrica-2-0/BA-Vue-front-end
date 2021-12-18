@@ -124,12 +124,12 @@ watch: {
 
         if (newVal == 4) {
           this.selectedIdd = '4';
-          this.tabIndex = '2';
+          this.tabIndex = '5';
         }
 
         if (newVal == 5) {
           this.selectedIdd = '5';
-          this.tabIndex = '3';
+          this.tabIndex = '6';
         }
 
         if (newVal == 6) {

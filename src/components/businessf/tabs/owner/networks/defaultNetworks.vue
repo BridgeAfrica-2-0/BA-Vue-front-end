@@ -7,7 +7,7 @@
           </h6>
         </template>
  
-        <post-network @changement="changer"></post-network>
+        <post-network @changeSelected="changeSelected"></post-network>
       </b-tab>
       <b-tab>
         <template slot="title" class="tt-color">
@@ -62,7 +62,8 @@ export default {
   },
 
   methods: {
-    changer(){
+    changeSelected(){
+      console.log("defaultNetwork")
       this.$emit('changeSelected')
     }
   }

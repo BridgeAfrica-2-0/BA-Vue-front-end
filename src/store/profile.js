@@ -20,8 +20,6 @@ export default {
     professions: [],
     networks: [],
 
-
-
     profile_about: { "user": {}, "user_address": [], "user_education": [], "user_experience": [], "user_websites": [] },
     profileIntro: { "user": {}, "user_address": [], "user_education": [], "user_experience": [], "user_websites": [] },
     NcommunityFollower: { "network_followers": [], "total_network_follower": 0 },
@@ -141,12 +139,12 @@ export default {
       return state.albums;
     },
 
+    getOwnerPost(state) {
+      return state.ownerPost
+    },
+
     getUserPostIntro(state) {
-
-
       return state.profileIntro;
-
-
     },
 
     getImages(state) {
@@ -195,28 +193,36 @@ export default {
       return state.bdetails;
     }
   },
+
   mutations: {
 
+    removePost(state, uuid) {
+      const newPosts = state.ownerPost.filter(post => post.id != uuid)
+      state.ownerPost = newPosts
+    },
+
+    UpdatePost(state, payload) {
+
+      const newPosts = state.ownerPost.map(post => post.id == payload.id ? payload : post)
+      state.ownerPost = newPosts
+    },
+
+    createPost(state, payload) {
+      state.ownerPost = [payload, ...state.ownerPost]
+    },
+
     //set community data  
-
     setTcommunity(state, data) {
-
       state.Tcommunity = data;
-
     },
 
 
     setNcommunityFollower(state, data) {
-
       state.NcommunityFollower = data;
-
     },
 
     setUcommunityFollowing(state, data) {
-
-
       state.UcommunityFollowing = data;
-
     },
 
 

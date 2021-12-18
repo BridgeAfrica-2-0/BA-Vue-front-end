@@ -49,7 +49,7 @@
                       class="h3 cursor"
                       v-b-tooltip.hover.top="cart_item.product_name"
                     >
-                      {{ cart_item.product_name.substring(0, 12) + "..." }}
+                      <!-- {{ cart_item.product_name.substring(0, 12) + "..." }} -->
                     </h3>
                   </div>
                 </div>
@@ -70,9 +70,9 @@
                       class="h3 cursor"
                       v-b-tooltip.hover.top="cart_item.product_description"
                     >
-                      {{
+                      <!-- {{
                         cart_item.product_description.substring(0, 118) + ".."
-                      }}
+                      }} -->
                     </h3>
                   </div>
                 </div>
@@ -221,7 +221,8 @@ export default {
             this.currentPage
           );
         })
-        .catch(() => {
+        .catch((err) => {
+          console.log({err:err});
           this.loading = false;
           this.error = true;
         });
@@ -238,10 +239,10 @@ export default {
       return this.formatObject.format(money);
     },
     makeOrderforCurrentPage(cart, currentPage) {
-      return cart["data"].slice(
+       return cart["data"].slice(
         (currentPage - 1) * this.per_page,
-        currentPage * this.per_page
-      );
+         currentPage * this.per_page
+       );
     },
     gotoCheckout() {
       this.$router.push("/checkout");

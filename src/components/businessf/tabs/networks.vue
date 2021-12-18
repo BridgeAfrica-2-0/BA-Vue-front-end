@@ -4,11 +4,12 @@
       <fas-icon class="icons" :icon="['fas', 'project-diagram']" size="lg" />
       <span class="t-color"> Network </span>
 
-      <b-button
+      <b-button 
+      v-if="display != 'BusinessFollower' "
         class="float-right w-auto"
         @click="showmodal(true, 'add')"
         variant="primary"
-        >Add Network</b-button
+        >Add Network b</b-button
       >
       <hr />
       <b-row>
@@ -132,6 +133,9 @@ export default {
   },
 
   computed: {
+    display(){
+      return this.$route.name;
+    },
     network() {
       return this.$store.state.businessOwner.networks;
     },

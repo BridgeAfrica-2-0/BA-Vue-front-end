@@ -85,7 +85,7 @@ export default {
     MglMarker,
     MglPopup,
   },
-  props: ["businesses", "products"],
+  props: ["businesses", "products", "networks"],
   data() {
     return {
       loading: false,
@@ -102,6 +102,7 @@ export default {
     setTimeout(() => {
       console.log("Business => ".this.businesses);
       console.log("Products => ".this.products);
+      console.log("networks => ".this.networks);
     }, 5000);
   },
   methods: {
@@ -160,5 +161,4 @@ export default {
 .ico {
   margin-right: 5px;
 }
-
 </style>

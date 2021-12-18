@@ -40,7 +40,7 @@
     </b-row>
     <b-row >
       <b-col col="12">
-        <infinite-loading @infinite="infiniteHandler">
+        <infinite-loading @infinite="infiniteHandler" ref="infiniteLoading">
           <div class="text-red" slot="no-more">{{ $t('network.No_More_Request') }}</div>
           <div class="text-red" slot="no-results">{{ $t('network.No_More_Request') }}</div>
         </infinite-loading>
@@ -96,7 +96,7 @@ export default {
     search() {
       if(this.searchTitle){
         this.loading = true;
-        this.page -= 1;
+        this.page = 1;
         console.log("searching...");
         console.log(this.searchTitle);
         this.infiniteHandler();
@@ -122,22 +122,22 @@ export default {
       .then( ({data})  => {
        console.log(data);
        console.log(this.page);
-        if(keyword){
-          this.displayfollowers = data.data;
-          this.searchTitle = "";
-          $state.complete();
-        }else{
+        // if(keyword){
+        //   this.displayfollowers = data.data;
+        //   this.searchTitle = "";
+        //   $state.complete();
+        // }else{
           if (data.data.length) {
             this.page += 1;
             console.log(this.page);
             console.log(...data.data);
-            this.peoplefollowers.push(...data.data);
-            this.displayfollowers = this.peoplefollowers;
+            this.displayfollowers.push(...data.data);
+            // this.displayfollowers = this.peoplefollowers;
             $state.loaded();
           } else {
             $state.complete();
           }
-        }
+        // }
       }) .catch((err) => {
           console.log({ err: err });
       })

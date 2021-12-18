@@ -1,6 +1,6 @@
 <template>
   <div class="t-left yolo">
-    <b-tabs content-class="" fill pills>
+    <b-tabs content-class="" lazy fill pills>
       <b-tab active>
         <template slot="title" class="tt-color">
           <h6 class="h6">Posts</h6>
@@ -41,7 +41,8 @@
 <script>
 import FeedbackNetwork from '@/components/businessf/tabs/owner/editors/feedbackEditor';
 import MediaNetwork from '@/components/owner/tabs/media';
-import MemberNetwork from '@/components/businessf/tabs/owner/editors/memberEditor';
+// import MemberNetwork from '@/components/businessf/tabs/owner/editors/memberEditor';
+import MemberNetwork from '@/components/businessf/tabs/owner/networks/memberNetwork';
 
 import Members from '@/components/businessf/tabs/owner/editors/member';
 

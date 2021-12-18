@@ -82,6 +82,19 @@
                         <span class="btn-com">Join</span>
                     </b-button>
                   </b-col>
+
+
+                  <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2"
+                  
+                  >
+                    <b-icon
+                      font-scale="1"
+                      icon="exclamation-octagon"
+                      v-b-tooltip.hover
+                      title="Block This Network"
+                      variant="danger"
+                    ></b-icon>
+                  </b-col>
                 </b-row>
               </div>
             </b-col>
@@ -138,11 +151,14 @@ export default {
     networkJoin: async function(item){
       const status = item.is_follow
 
-      const request = status ? await this.$repository.share.jointNetwork({id: item.id , type: "network"}) : await this.$repository.share.removeNetwork({id: item.id , type: "network"})
+      const request = !status ? await this.$repository.share.jointNetwork({id: item.id , type: "network"}) : await this.$repository.share.removeNetwork({id: item.id , type: "network"})
       
       if (request.success){
         item = Object.assign(item, {is_follow: status ? 0 : 1})
-        
+        this.flashMessage.show({
+          status: "success",
+          title: request.data,
+        });
       }
     },
 

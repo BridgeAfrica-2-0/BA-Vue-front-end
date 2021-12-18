@@ -19,9 +19,11 @@
                     </splide-slide>
                   </splide>
                 </div>
-                <div class="flx100">
+                <div class="flx100"> 
                   <p class="textt">
-                    <strong class="title"> {{ item.name }} </strong> <br />
+                    <router-link :to="{name: 'BusinessFollower', params: {id:item.id}}">
+                      <strong class="title"> {{ item.name }}</strong>
+                    </router-link><br />
 
                     <span v-for="cat in item.category" :key="cat.name">
                       {{ cat.name }}
@@ -113,6 +115,17 @@
                         $t("businessowner.Direction")
                       }}</span>
                     </b-button>
+                  </b-col>
+                  <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2"
+                  
+                  >
+                    <b-icon
+                      font-scale="1"
+                      icon="exclamation-octagon"
+                      v-b-tooltip.hover
+                      title="Block This Network"
+                      variant="danger"
+                    ></b-icon>
                   </b-col>
                 </b-row>
               </div>

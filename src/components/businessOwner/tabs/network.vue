@@ -145,8 +145,9 @@ export default {
     networkJoin: async function(item){
       const status = item.is_follow
 
-      const request = status ? await this.$repository.share.jointNetwork({id: item.id , type: "network"}) : await this.$repository.share.removeNetwork({id: item.id , type: "network"})
-      
+      const request = !status ? await this.$repository.share.jointNetwork({id: item.id , type: "network"}) : await this.$repository.share.removeNetwork({id: item.id , type: "network"})
+        
+
       if (request.success){
         item = Object.assign(item, {is_follow: status ? 0 : 1})
 

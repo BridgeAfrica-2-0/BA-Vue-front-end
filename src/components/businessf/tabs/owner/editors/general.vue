@@ -99,7 +99,7 @@ import KeywordAlert from '@/components/businessf/tabs/owner/editors/keywordAlert
 
 import PendingPost from '@/components/businessf/tabs/owner/editors/pendingPost';
 
-import Notification from '@/components/businessf/tabs/owner/editors/notification';
+import Notification from '@/components/businessf/tabs/owner/networks/notification';
 
 import Settings from '@/components/businessf/tabs/owner/editors/settings';
 import General from '@/components/businessf/tabs/owner/editors/settings/general';

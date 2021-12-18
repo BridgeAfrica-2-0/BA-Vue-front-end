@@ -13,7 +13,7 @@
         </b-avatar>
       </b-container>
       <br />
-<!--       <b-container>
+      <b-container>
         <b-row>
           <b-col cols="6">
             <h6 class="  m-0 p-0 a-center network-name "><b> {{ networkInfo.name }}</b></h6>
@@ -29,27 +29,6 @@
             >
               <i :class="networkInfo.is_follow ? 'fas fa-user-minus fa-lg btn-icon':'fas fa-user-plus fa-lg btn-icon'"></i>
               <span> Community</span>
-            </b-button>
-          </b-col>
-        </b-row>
-      </b-container> -->
-
-      <b-container>
-        <b-row>
-          <b-col cols="6">
-            <h6 class="m-0 p-0 a-center network-name">
-              <b> {{ networkInfo.name }}</b>
-            </h6>
-          </b-col>
-          <b-col cols="6">
-            <b-button
-              variant="primary"
-              size="sm"
-              @click="addNetwork"
-              style="width: 120px"
-              class="a-center"
-            >
-              <b-icon icon="pencil"></b-icon> {{ $t("network.Edit") }}
             </b-button>
           </b-col>
         </b-row>

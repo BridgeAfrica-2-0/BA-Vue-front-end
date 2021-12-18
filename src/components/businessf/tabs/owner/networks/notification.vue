@@ -35,7 +35,11 @@
       </b-row>
      
       <b-row>
-       
+        <!-- <div>
+          Selected: <strong>{{ selected }}</strong
+          ><br />
+          All Selected: <strong>{{ selectAll }}</strong>
+        </div> -->
         <b-col cols="12"
           :class="{ active: index == currentPage }"
           v-for="(notification, index) in notifications"

@@ -4,17 +4,7 @@
       <b-container class="a-center">
         <!-- :src="require('@/assets/img/mayor.jpg')" -->
         <b-avatar
-          v-if="networkInfo.image"
-          :src="networkInfo.image"
-          variant="primary"
-          square
-          rounded
-          class="network-logo"
-        >
-        </b-avatar>
-        <b-avatar
-          v-else
-          :src="require('@/assets/default_network.png')"
+          :src="networkInfo.image ? networkInfo.image : require('@/assets/default_network.png')"
           variant="primary"
           square
           rounded

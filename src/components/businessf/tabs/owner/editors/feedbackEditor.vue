@@ -1,6 +1,5 @@
 <template>
   <div class="mt-3 container">
-    <b-row> </b-row>
     <b-row>
       <b-col cols="12">
         <span class="float-right">
@@ -100,7 +99,7 @@ export default {
       filter: "0",
       filterData: false,
       loading: false,
-      currentPage: 0,
+      currentPage: 1,
       currentIndex: -1,
       feedbacks: [],
       options: [
@@ -144,7 +143,7 @@ export default {
       console.log("searching...");
       console.log(this.filterData);
       this.$nextTick(() => {
-        this.page = 0;
+        this.currentPage = 1;
         this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
       });
     },
@@ -160,16 +159,24 @@ export default {
       //     path: this.url+"/members/list/"+this.page,
       //     formData: formData
       //   })
+      console.log("network/"+this.url+"/feedbacks/"+this.currentPage)
       this.axios
         .post("network/"+this.url+"/feedbacks/"+this.currentPage, formData)
         .then(({ data }) => {
-        console.log(data);
+        console.log(data.data);
         console.log(this.currentPage);
-        if (data.data.length) {
+        console.log(Object.values(data.data));
+        let object = Object.values(data.data);
+        if (object.length) {
+          console.log("Pushing data");
+          object.map((item) => {
+            this.feedbacks.push(item);
+            console.log(item);
+          })
+          console.log(...data.data);
+          // this.feedbacks.push(...data.data);
           this.currentPage += 1;
           console.log(this.currentPage);
-          console.log(...data.data);
-          this.feedbacks.push(...data.data);
           this.loading = false;
           $state.loaded();
         } else {

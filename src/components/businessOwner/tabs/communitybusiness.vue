@@ -46,6 +46,15 @@
                       :max-chars="100"
                     >
                     </read-more>
+
+                    <b-icon
+                      font-scale="1"
+                      icon="exclamation-octagon"
+                      v-b-tooltip.hover
+                      title="Block This Business"
+                      variant="danger"
+                    ></b-icon>
+                  
                   </p>
                 </div>
               </div>
@@ -116,17 +125,7 @@
                       }}</span>
                     </b-button>
                   </b-col>
-                  <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2"
                   
-                  >
-                    <b-icon
-                      font-scale="1"
-                      icon="exclamation-octagon"
-                      v-b-tooltip.hover
-                      title="Block This Network"
-                      variant="danger"
-                    ></b-icon>
-                  </b-col>
                 </b-row>
               </div>
             </b-col>

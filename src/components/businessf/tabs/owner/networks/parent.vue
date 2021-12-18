@@ -516,6 +516,7 @@ export default {
     width: 2rem;
     height: 2rem;
     top: 404px;
+    margin-left: 296px;
     padding: 0px 0px;
     color: #ffff;
     background: #e75c18;

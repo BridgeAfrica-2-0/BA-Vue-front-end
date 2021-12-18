@@ -93,10 +93,8 @@
       </b-row>
       <div class="pending-post-view pt-2 mt-3">
         <p>
-          {{ $t("network.Your") }}
-          {{
-            $t("network.Posts_are_pending_for_approval")
-          }}.&nbsp;&nbsp;&nbsp;&nbsp;
+<!-- {{pendingPost.data}} -->
+          {{$t("network.Your")}}  {{$t("network.Posts_are_pending_for_approval")}}.&nbsp;&nbsp;&nbsp;&nbsp;
           <a
             @click="editPage"
             style="color: #e75c18; text-decoration: underline; cursor: pointer"

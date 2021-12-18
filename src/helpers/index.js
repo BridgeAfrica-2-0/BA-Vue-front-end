@@ -20,11 +20,7 @@ export const fullMediaLink = (media) => {
   return ""
 }
 
-export const fromNow = (dateTime) => {
-  const data = (new Date(dateTime)).toISOString()
-  const newDate = moment(data, "YYYYMMDD")
-  return newDate.fromNow()
-}
+export const fromNow = (dateTime) => moment(dateTime).fromNow()
 
 export const formatNumber = (num) => {
   if (num >= 1000000000) {

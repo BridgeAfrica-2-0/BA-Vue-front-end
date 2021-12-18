@@ -11,7 +11,7 @@
               @click="select"
               class="m-left-top username"
             >
-              {{ selectAll ? "Un-select All" : "Select All" }}
+              {{ selectAll ? "Unselect All" : "Select All" }}
             </b-form-checkbox>
           </div>
         </b-col>

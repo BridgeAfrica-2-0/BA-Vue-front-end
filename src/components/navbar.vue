@@ -143,7 +143,7 @@
             <b-collapse id="nav-collapse" is-nav>
               <div class="nav-item">
                 <router-link
-                  :to="navLink('home')"
+                  :to="{name:navLink('home')}"
                   class="nav-link text-dark hov"
                   href=""
                 >
@@ -734,7 +734,7 @@ export default {
         });
       }
     },
-    
+
     navLink(type) {
       const link = {
         home: () => {

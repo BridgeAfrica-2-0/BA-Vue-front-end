@@ -3,33 +3,35 @@ import axios from "axios";
 export default {
   namespaced: true,
   state: {
-    notifications: []
+    notifications: [],
+    all:[]
+
   },
 
   getters: {
-    getNotifications(state) {
-      return state.notifications;
+    getAllNotifications(state) {
+      console.log(state.all)
+      return state.all;
     }
   },
 
   mutations: {
     setNotifications(state, notifications) {
         state.notifications = notifications;
+        state.all =  notifications
     },
+
+    addNotification(state, notification) {
+      state.all = [notification , ...state.all]
+    }
   },
 
   actions: {
-
-    getNotifications( {commit}, dataInfo ){
-      console.log("Store File");
-      console.log(dataInfo.id); 
-      console.log(dataInfo.path);
+    getNotifications({commit}, dataInfo ){
       return axios
-      .get(`network/${dataInfo.id}/${dataInfo.path}`)
+      .get(`${dataInfo.id}${dataInfo.path}`)
       .then(({ data }) => {
           commit("setNotifications", data.data);
-        console.log(data);
-        console.log(`network/${dataInfo.id}/${dataInfo.path}`);
       })
     },
 

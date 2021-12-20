@@ -5,7 +5,7 @@
         <template slot="title" class="tt-color">
           <h6 class="h6">Posts</h6>
         </template>
-        <post-network></post-network>
+        <post-network @changeSelected="changeSelected"></post-network>
       </b-tab>
       <b-tab>
         <template slot="title" class="tt-color">
@@ -55,6 +55,12 @@ export default {
     Members,
     FeedbackNetwork,
   },
+  methods: {
+    changeSelected(){
+      console.log("defaultNetwork")
+      this.$emit('changeSelected')
+    }
+  }
 };
 </script>
 

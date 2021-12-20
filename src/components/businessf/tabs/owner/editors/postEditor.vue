@@ -71,17 +71,10 @@
       </b-row>
       <div class="pending-post-view pt-2 mt-3">
         <p>
-<<<<<<< HEAD
           {{$t('general.Your')}} 3 {{$t('general.Post_are_pending_for_approval')}}.&nbsp;&nbsp;&nbsp;&nbsp;<a
             @click="this.$router.push({ name: '/pendingPost' })"
             style="color: #e75c18; text-decoration: underline"
             >{{$t('general.View_All')}}</a
-=======
-          Your 3 Post(s) are pending for approval.&nbsp;&nbsp;&nbsp;&nbsp;<a
-            @click="editPage"
-            style="color: #e75c18; text-decoration: underline; cursor: pointer"
-            >View All</a
->>>>>>> main
           >
         </p>
       </div>

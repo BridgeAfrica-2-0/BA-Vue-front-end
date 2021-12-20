@@ -65,22 +65,17 @@
           </b-row>
         </b-container>
         <h6 class="mt-2 font-weight-bolder title">
-          {{ $t("network.community") }}
+          {{ $t("network.about") }}
         </h6>
         <p class="text-justify text">
-          <span v-if="networkInfo.description.length < 130">{{
-            networkInfo.description
-          }}</span>
-          <span v-else>{{
-            networkInfo.description.substring(0, 130) + moreText
-          }}</span>
-          <span v-if="moreText === '...'" class="d-inline-block float-right">
-            <a
-              @click="moreText = networkInfo.description"
-              style="cursor: pointer"
-              >{{ $t("network.lire_la_Suite") }}</a
-            >
-          </span>
+          <read-more
+            more-str="read more"
+            class="readmore"
+            :text="networkInfo.description"
+            link="#"
+            less-str="read less"
+            :max-chars="100"
+          ></read-more>
         </p>
       </b-card-text>
     </b-card>
@@ -521,6 +516,7 @@ export default {
     width: 2rem;
     height: 2rem;
     top: 404px;
+    margin-left: 296px;
     padding: 0px 0px;
     color: #ffff;
     background: #e75c18;

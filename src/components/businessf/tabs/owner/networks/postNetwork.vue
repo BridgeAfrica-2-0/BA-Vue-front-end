@@ -505,11 +505,8 @@ export default {
     }),
 
     editPage() {
-      this.$router.push("/network/" + this.url + "?selectedId=4");
-      //  this.$router.push("/network/"+this.url+"?this.selectedIdd=4 && this.tabIndex=5");
       console.log("editPage");
-      //        this.selectedIdd = '4';
-      // this.tabIndex = '5';
+      this.$emit('changeSelected');
     },
 
     AllPendingPost() {

@@ -72,8 +72,8 @@
       <div class="pending-post-view pt-2 mt-3">
         <p>
           Your 3 Post(s) are pending for approval.&nbsp;&nbsp;&nbsp;&nbsp;<a
-            @click="this.$router.push({ name: '/pendingPost' })"
-            style="color: #e75c18; text-decoration: underline"
+            @click="editPage"
+            style="color: #e75c18; text-decoration: underline; cursor: pointer"
             >View All</a
           >
         </p>
@@ -360,6 +360,10 @@ export default {
         return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
       }
       return num;
+    },
+    editPage() {
+      console.log("editPage");
+      this.$emit('changeSelected');
     },
     infiniteHandler($state) {
       this.axios

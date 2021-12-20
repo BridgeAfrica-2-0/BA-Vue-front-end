@@ -937,14 +937,29 @@
               <b-avatar
                 class="info-avatar"
                 variant="primary"
-                src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
+                :src="chatSelected.logo_path"
                 size="200"
               ></b-avatar>
               <div class="info-detail">
-                <h1 class="info-name">{{ receiver.name }}</h1>
-                <b-link class="primary">{{
+                <h1 class="info-name">{{ chatSelected.name }}</h1>
+                <!-- <b-link class="primary">{{
                   $t("businessowner.View_Profile")
-                }}</b-link>
+                }}</b-link> -->
+                <b-row v-if="type == 'group'" class="justify-content-md-center">
+                  <b-col cols="12" md="auto">
+                    <table class="info-name">
+                      <tr class="text-center">
+                        <th>
+                          <u> Members </u>
+                        </th>
+                      </tr>
+
+                      <tr v-for="(member, index) in groupMembers" :key="index">
+                        <td>{{ getName(member) }}</td>
+                      </tr>
+                    </table>
+                  </b-col>
+                </b-row>
               </div>
             </div>
             <div>
@@ -998,10 +1013,8 @@
                   <b-col>
                     <div class="new-msg-filter-list">
                       <table class="table">
-                        <b-row
-                          v-if="bulk"
-                          style="overflow-x: hidden !important"
-                        >
+                        <b-row v-if="bulk" style="overflow-x: hidden !important"
+                          >{{ selectedMulty }}
                           <b-tabs content-class=" ma-4 pt-6" fill pills card>
                             <b-tab title="All" @click="getAll()">
                               <div v-if="loader" class="text-center">
@@ -2121,6 +2134,7 @@ export default {
     },
     createGroup(receiver_business_id) {
       this.socket.emit("create-group", this.chatId);
+      // this.type = "group";
       // let sender_business_id = this.currentUser.user.id;
       var membersPeople = [];
       var membersBuiness = [];
@@ -2170,7 +2184,7 @@ export default {
       this.room = [sender_business_id, ...this.selectedMulty];
       console.log("ROOMS: ", this.room);
       this.tabIndex = 3;
-      // this.getChatList({ type: "group" });
+      this.getChatList({ type: "group" });
       this.$store.dispatch("networkChat/CREATE_GROUP", {
         groupName: this.groupName,
         userID: `${membersPeopleIds}`,
@@ -2320,10 +2334,11 @@ export default {
       // this.scrollToBottom();
       console.log("[selected Chat]", data);
       this.createRoom(data.id);
-      if (this.type == "group") {
+      if (this.type == "group" && this.groupName) {
         this.createGroup();
       }
-      this.chatId = data.id;
+      // this.chatId = data.id;
+
       this.$store.commit("networkChat/setSelectedChatId", data.id);
       let receiver = { receiverID: data.id, keyword: null };
       if (data.type == "user") {
@@ -2466,7 +2481,7 @@ export default {
       //   group_id: this.chatId,
       // });
 
-      console.log("SENT...");
+      console.log("group SENT...");
       this.input = "";
       this.dismissed();
       this.scrollToBottom();

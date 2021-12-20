@@ -1,13 +1,11 @@
 <template>
   <div>
-
     <b-container>
       <div class="chat-box">
         <b-row>
           <!-- Mobile -->
           <b-col class="pr-0" cols="12" xl="4" v-if="show">
             <div class="right-mobile">
-
               <b-row>
                 <b-col>
                   <b-avatar
@@ -18,9 +16,7 @@
                   ></b-avatar>
                 </b-col>
                 <b-col>
-
                   <h3 class="">{{ $t("businessf.Messages") }}</h3>
-
                 </b-col>
                 <b-col>
                   <b-icon
@@ -92,7 +88,6 @@
                       currentBiz ? currentBiz.name.split(" ")[0] : "loading..."
                     }}
                   </h1>
-
                 </b-col>
                 <b-col>
                   <b-dropdown
@@ -461,7 +456,6 @@
                       <!-- End Chats -->
                     </b-tab>
                   </b-tabs>
-
                 </b-col>
               </b-row>
             </div>
@@ -714,7 +708,9 @@
 
               <section v-else class="chats" style="margin-left: 1px" ref="feed">
                 <div class="mt-12 pt-12">
-                  <h1 class="text-center">Select a chat</h1>
+                  <h1 class="text-center">
+                    Select a chat
+                  </h1>
                 </div>
               </section>
 
@@ -730,7 +726,11 @@
                     dismissible
                     @dismissed="dismissed"
                   >
-                    <span style="cursor:pointer !important" href="" @click="$bvModal.show('preview-file')">
+                    <span
+                      style="cursor: pointer !important"
+                      href=""
+                      @click="$bvModal.show('preview-file')"
+                    >
                       {{ this.file.name
                       }}<b class="pl-2 text-bold">{{
                         convert(this.file.size)
@@ -751,7 +751,6 @@
                           text-right
                         "
                         icon="paperclip"
-
                       >
                       </b-icon>
                       <i class="ion-images"></i>
@@ -847,7 +846,6 @@
                   <b-link @click="showInfo(true)">Unblock Now</b-link>
                 </p> -->
               </div>
-
             </div>
           </b-col>
           <!-- End selected Chat -->
@@ -870,7 +868,6 @@
               <div class="info-detail">
                 <h1 class="info-name">{{ receiver.name }}</h1>
                 <b-link class="primary">View Profile</b-link>
-
               </div>
             </div>
             <div>
@@ -894,7 +891,6 @@
                 <li>Report User</li>
               </ul>
             </div>
-
           </b-col>
 
           <!-- New message -->
@@ -1096,7 +1092,6 @@
         </b-row>
       </div>
 
-
       <!-- Modals -->
       <!-- create group -->
       <b-modal id="group-name" hide-footer>
@@ -1124,12 +1119,10 @@
         </div>
       </b-modal>
     </b-container>
-
   </div>
 </template>
 
 <script>
-
 import EmojiPicker from "vue-emoji-picker";
 import io from "socket.io-client";
 import moment from "moment";

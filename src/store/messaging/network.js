@@ -63,6 +63,9 @@ export default {
         getSelectedChat(state) {
             return state.selectedChat;
         },
+        getSelectedChatId(state) {
+            return state.selectedChatId;
+        },
         getChatType(state) {
             return state.type;
         },
@@ -131,7 +134,9 @@ export default {
             commit("setLoader", true);
             return axios.post(`/group/create/network/${state.currentBizId}`, data)
                 .then((res) => {
+                    console.log("group created:", res.data.data);
                     commit("setLoader", false);
+                    commit("setSelectedChatId", res.data.data.groupID)
                 })
                 .catch((err) => {
                     commit("setLoader", false);
@@ -567,6 +572,28 @@ export default {
                         console.log(err);
                     })
             }
+        },
+
+        SAVE_GROUP_CHAT({ commit, state }, data) {
+            // commit("setUsers", []);
+            console.log("[DEBUG]", data);
+            let payload = data.data
+                // let group_id = data.group_id
+            let sender_id = data.sender_id
+
+
+            return axios.post(`/group/${state.selectedChatId}/network/${sender_id}`, payload, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                })
+                .then((res) => {
+                    console.log("Message saved...", res.data.data);
+                })
+                .catch((err) => {
+                    console.log(err);
+                })
+
         },
 
         async GET_BIZ_TO_BIZ({ commit, state }, data) {

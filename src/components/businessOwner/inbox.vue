@@ -937,14 +937,28 @@
               <b-avatar
                 class="info-avatar"
                 variant="primary"
-                src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
+                :src="chatSelected.logo_path"
                 size="200"
               ></b-avatar>
               <div class="info-detail">
-                <h1 class="info-name">{{ receiver.name }}</h1>
-                <b-link class="primary">{{
+                <h1 class="info-name">{{ chatSelected.name }}</h1>
+                <!-- <b-link class="primary">{{
                   $t("businessowner.View_Profile")
-                }}</b-link>
+                }}</b-link> -->
+                <b-row v-if="type == 'group'" class="justify-content-md-center">
+                  <b-col cols="12" md="auto">
+                    <table class="info-name">
+                      <tr class="text-center">
+                        <th>
+                          <u> Members </u>
+                        </th>
+                      </tr>
+                      <tr v-for="(member, index) in groupMembers" :key="index">
+                        <td>{{ getName(member) }}</td>
+                      </tr>
+                    </table>
+                  </b-col>
+                </b-row>
               </div>
             </div>
             <div>
@@ -1644,6 +1658,12 @@
         <b-button class="mt-3" block @click="selectedMultyChat()">{{
           $t("businessowner.Create")
         }}</b-button>
+      </b-modal>
+      <b-modal id="preview-file" hide-footer>
+        <div class="d-block text-center">
+          <h3>Preview file:</h3>
+          <b-img thumbnail fluid :src="previewSrc" id="filePreview"></b-img>
+        </div>
       </b-modal>
     </b-container>
   </div>

@@ -71,10 +71,17 @@
       </b-row>
       <div class="pending-post-view pt-2 mt-3">
         <p>
+<<<<<<< HEAD
           {{$t('general.Your')}} 3 {{$t('general.Post_are_pending_for_approval')}}.&nbsp;&nbsp;&nbsp;&nbsp;<a
             @click="this.$router.push({ name: '/pendingPost' })"
             style="color: #e75c18; text-decoration: underline"
             >{{$t('general.View_All')}}</a
+=======
+          Your 3 Post(s) are pending for approval.&nbsp;&nbsp;&nbsp;&nbsp;<a
+            @click="editPage"
+            style="color: #e75c18; text-decoration: underline; cursor: pointer"
+            >View All</a
+>>>>>>> main
           >
         </p>
       </div>
@@ -91,7 +98,13 @@
           <b-row ref="loader">
             <b-col cols="1" class="m-0 p-0"></b-col>
             <b-col cols="2" class="m-0 p-0">
-              <b-avatar class="d-inline-block avat" variant="primary" :src="imageProfile"></b-avatar>
+              <b-avatar 
+                class="d-inline-block avat" 
+                variant="primary" 
+                :square="'user' == profile.user_type ? false : true"
+                :src="profile.profile_picture">
+                
+              </b-avatar>
             </b-col>
             <b-col cols="9" class="pt-2" style="margin-left: -5px">
               <h5 class="m-0 font-weight-bolder">{{ profileNamePost }}</h5>
@@ -184,10 +197,16 @@
           <b-row ref="loader">
             <b-col cols="1" class="m-0 p-0"></b-col>
             <b-col cols="2" class="m-0 p-0">
-              <b-avatar class="d-inline-block avat" variant="primary" :src="imageProfile"></b-avatar>
+              <b-avatar 
+                class="d-inline-block avat" 
+                variant="primary" 
+                :square="'user' == profile.user_type ? false : true"
+                :src="profile.profile_picture">
+                
+              </b-avatar>
             </b-col>
             <b-col cols="9" class="pt-2" style="margin-left: -5px">
-              <h5 class="m-0 font-weight-bolder">{{ profileNamePost }} profileNamePost</h5>
+              <h5 class="m-0 font-weight-bolder">{{ profileNamePost }}</h5>
             </b-col>
           </b-row>
           <b-row>
@@ -267,7 +286,6 @@
       </div>
     </div>
     <Post
-      
       v-for="(item, index) in owner_post"
       :key="index"
       :post="item"
@@ -283,6 +301,7 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
 import { AllPostFeatureMixin } from '@/mixins';
 import Post from '@/components/businessOwner/ownerPostComponent';
 export default {
@@ -316,9 +335,10 @@ export default {
     };
   },
   computed: {
-    imageProfile() {
-      return 'yoo';
-    },
+    
+    ...mapGetters({
+      profile: "auth/profilConnected"
+    }),
 
     business_logo() {
       return this.$store.state.networkProfile.networkInfo.logo_path;
@@ -327,10 +347,11 @@ export default {
       return this.$store.state.networkProfile.ownerPost;
     },
     profileNamePost() {
-      return 'yoo';
+      return this.profile.name;
     },
   },
-  mounted() {
+  
+  created() {
     this.url = this.$route.params.id;
   },
 
@@ -346,6 +367,10 @@ export default {
         return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
       }
       return num;
+    },
+    editPage() {
+      console.log("editPage");
+      this.$emit('changeSelected');
     },
     infiniteHandler($state) {
       this.axios
@@ -571,7 +596,7 @@ export default {
       //formData2.append("media", this.createPost.hyperlinks);
       formData2.append('content', this.createPost.postNetworkUpdate);
       this.axios
-        .post('network/post/create/' + this.url, formData2, {
+        .post('network/editor-post/create/' + this.url, formData2, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
@@ -616,8 +641,6 @@ export default {
       this.$refs['modal-3'].hide();
     },
     resetPostData() {
-      console.log('Test');
-      console.log('Reinitialisation des donnees du POST');
       if (!this.isSubmitted) {
         this.createPost.hyperlinks = [];
         this.createPost.movies = [];

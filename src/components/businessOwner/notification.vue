@@ -35,11 +35,11 @@
 
       <b-row>
         <!-- {{getNotificationsStore}} -->
-        <div>
-          {{ $t('network.Selected') }}: <strong>{{ selected }}</strong
+        <!-- <div>
+          Selected: <strong>{{ selected }}</strong
           ><br />
-          {{ $t('network.All_Selected') }}: <strong>{{ selectAll }}</strong>
-        </div>
+          All Selected: <strong>{{ selectAll }}</strong>
+        </div> -->
         <b-col cols="12" v-for="(notification, index) in getNotificationsStore" :key="index">
           <div :class="notification.mark_as_read ? 'text-secondary' : 'font-weight-bold'">
             <p class="">
@@ -75,7 +75,7 @@
         </b-col>
         <b-col v-if="!getNotificationsStore && !loader" class="load text-center">
           <b-row class="text-center">
-            <p>{{ $t('businessowner.No_notifications_to_show') }} !!</p>
+            <p>{{ $t('businessowner.No_notifications_to_show') }} </p>
           </b-row>
         </b-col>
         <hr width="100%" />

@@ -33,18 +33,17 @@
           </div>
         </b-col>
       </b-row>
-      <br />
-
+     
       <b-row>
-        <div>
+        <!-- <div>
           Selected: <strong>{{ selected }}</strong
           ><br />
           All Selected: <strong>{{ selectAll }}</strong>
-        </div>
+        </div> -->
         <b-col cols="12"
           :class="{ active: index == currentPage }"
           v-for="(notification, index) in notifications"
-          :key="index"
+          :key="notification.updated_at"
         >
           <div :class="notification.mark_as_read ? 'text-secondary' : 'font-weight-bold'">
             <p class="">
@@ -60,11 +59,11 @@
                 <b-avatar
                   class="d-inline-block profile-pic"
                   variant="primary"
-                  :text="notification.data[0].fullname.charAt(0,1)"
-                  :src="notification.data[0].profile_picture"
+                  :text="notification.full_name.charAt(0,1)"
+                  :src="notification.profile_picture"
                 ></b-avatar>
                 <span class="m-0  d-inline-block ml-2 username">
-                  {{ notification.data[0].fullname }}
+                  {{ notification.full_name }}
                   <div class="duration">{{ moment(notification.created_at).fromNow() }}</div>
                 </span>
               </span>
@@ -96,7 +95,7 @@
 
 <script>
 import moment from 'moment';
-import {mapGetters} from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   name: "notification",
@@ -105,58 +104,7 @@ export default {
       url: null,
       moment: moment,
       loader:false,
-      currentPage: 0,
-
-      // notifications: [ 
-      //   {
-      //     "data": [
-      //         {
-      //             "fullname": "wifi",
-      //             "profile_picture": "https://picsum.photos/250/250/?image=27"
-      //         }
-      //     ],
-      //     "notification_id": 4,
-      //     "reference_id": 1,
-      //     "notification_text": "You’ve unblock Ramona Braun",
-      //     "created_at": "2021-10-12T15:28:23.000000Z",
-      //     "updated_at": "2021-10-12T15:28:23.000000Z",
-      //     "is_read": 0,
-      //     "user_id": 1,
-      //     "mark_as_read": 1
-      //   },
-      //   {
-      //     "data": [
-      //         {
-      //             "fullname": "Cyclone wifi",
-      //             "profile_picture": "https://picsum.photos/250/250/?image=22"
-      //         }
-      //     ],
-      //     "notification_id": 9,
-      //     "reference_id": 1,
-      //     "notification_text": "You’ve unblock Ramona Braun",
-      //     "created_at": "2021-10-12T15:28:23.000000Z",
-      //     "updated_at": "2021-10-12T15:28:23.000000Z",
-      //     "is_read": 0,
-      //     "user_id": 1,
-      //     "mark_as_read": 1
-      //   },
-      //   {
-      //     "data": [
-      //         {
-      //             "fullname": "Cyclone ",
-      //             "profile_picture": "https://picsum.photos/250/250/?image=22"
-      //         }
-      //     ],
-      //     "notification_id": 6,
-      //     "reference_id": 1,
-      //     "notification_text": "Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.",
-      //     "created_at": "2021-12-12T15:28:23.000000Z",
-      //     "updated_at": "2021-10-12T15:28:23.000000Z",
-      //     "is_read": 1,
-      //     "user_id": 1,
-      //     "mark_as_read": 1
-      //   },
-      // ],
+      currentPage: 1,
       selected: [],
       selectAll: false,
       indeterminate: false
@@ -164,12 +112,9 @@ export default {
   },
   
   computed: {
-    notifications() {
-      return this.$store.state.networkNotification.notifications;
-    },
-
     ...mapGetters({
-      newNotifications: 'notification/NEW_NETWORK_NOTIFICATION'
+      newNotifications: 'notification/NEW_NETWORK_NOTIFICATION',
+      notifications: 'networkNotification/getAllNotifications'
     })
   },
 
@@ -188,10 +133,8 @@ export default {
       }
     },
     newNotifications: function (val) {
-      console.log("newNotifications");
-      console.log(val);
       this.newNotifications.forEach(e => {
-        this.notifications.push(e)
+        this.add(e)
       });
     },
   },
@@ -200,6 +143,11 @@ export default {
     this.getNotifications() 
   },
   methods: {
+
+    ...mapMutations({
+      add: 'networkNotification/addNotification'
+    }),
+
     select(checked) {
       console.log("this.selectAll: "+this.selectAll);
       console.log("checked: "+checked);
@@ -218,17 +166,14 @@ export default {
         this.selectAll = false;
       }
     },
+
     getNotifications() {
-      console.log('getNotifications Mounted');
     this.$store
       .dispatch("networkNotification/getNotifications", 
       {
-        "id":this.url,
-        "path":"notifications?page="+this.currentPage
+        "id":`notification/network/${this.$route.params.id}`,
+        "path":"?page="+this.currentPage
         })
-      .then(() => {
-        console.log('ohh yeah');
-      })
       .catch(err => {
         console.log({ err: err });
       });

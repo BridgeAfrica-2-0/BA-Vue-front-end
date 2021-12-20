@@ -78,6 +78,7 @@ export default {
   margin-left: 5px;
 }
 #flashmessage {
+  position: absolute;
   z-index: 9999 !important;
 }
 .primary {

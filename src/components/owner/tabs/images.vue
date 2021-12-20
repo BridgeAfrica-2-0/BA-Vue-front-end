@@ -60,8 +60,8 @@
           </a>
         </div>
       </div>
-      <div v-for="(image, cmp) in allImages" :key="cmp">
-        <div class="img-gall" v-for="(im, index) in image.media" :key="index">
+      <div v-for="(image, cmp) in allImages" :key="cmp" >
+        <div class="img-gall" v-for="(im, index) in image.media" :key="index" style="width: 266px; height: 266px;">
           <Picture
             :im="im"
             :typeOfMedia="() => typeOfMedia(im.path)"
@@ -170,6 +170,8 @@ export default {
   created() {
     this.allImages = this.images;
 
+    this.url = this.$route.params.id;
+
     this.pattern = {
       profile: () => ({
         submitPost: this.submitPost,
@@ -214,7 +216,6 @@ export default {
       "video/mp4": () => "video",
     };
     this.loadImages();
-    this.url = this.$route.params.id;
   },
 
   destroyed() {
@@ -264,6 +265,7 @@ export default {
     },
 
     showImg(index) {
+      console.log(index)
       this.currentPicture = this.Slideimges.indexOf(index);
       this.visible = true;
     },
@@ -278,17 +280,15 @@ export default {
     },
 
     loadImages() {
-      const pictures = this.allImages
+      const pictures = this.images
         .filter((e) => e.media.length)
         .map((e) => {
           return this.getFullMediaLink(e.media[0].path);
         });
-
       this.Slideimges = pictures;
     },
 
     getFileExtension(file) {
-      console.log(file);
       if (file.startsWith("https://www.youtube.com")) return "youtube";
 
       const fileArray = file.split(".");

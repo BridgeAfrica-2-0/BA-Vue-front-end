@@ -19,11 +19,18 @@
                     </splide-slide>
                   </splide>
                 </div>
-                <div class="flx100"> 
+                <div class="flx100">
                   <p class="textt">
-                    <router-link :to="{name: 'BusinessFollower', params: {id:item.id}}">
-                      <strong class="title"> {{ item.name }}</strong>
-                    </router-link><br />
+                    <router-link
+                      :to="{
+                        name: 'BusinessFollower',
+                        params: { id: item.id },
+                      }"
+                    >
+                      <strong class="title">
+                        {{ item.name }}</strong
+                      > </router-link
+                    ><br />
 
                     <span v-for="cat in item.category" :key="cat.name">
                       {{ cat.name }}
@@ -54,7 +61,6 @@
                       title="Block This Business"
                       variant="danger"
                     ></b-icon>
-                  
                   </p>
                 </div>
               </div>
@@ -125,7 +131,6 @@
                       }}</span>
                     </b-button>
                   </b-col>
-                  
                 </b-row>
               </div>
             </b-col>

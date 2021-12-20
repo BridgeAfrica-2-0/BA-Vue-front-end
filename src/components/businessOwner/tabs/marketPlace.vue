@@ -36,26 +36,26 @@
     <div class="col-12">
       <hr class="h-divider" />
     </div>
-    <div class="products">
+    <div class="">
       <!-- MARKET HEADER BAR -->
 
       <!-- MARKET PRODUCT LIST -->
 
         
           
-        <div class="col-md-6" v-for="(product, index) in products" :key="index">
-          <Product v-show="!orders && market"  :product="product" />
-        </div>
+        <!-- <div class="col-md-6" v-for="(product, index) in products" :key="index">
+          <Product v-show="!orders && market"  :product="products" />
+        </div> -->
+  <Product v-show="!orders && market"  />
+       
   
       <b-col v-if="loader" class="load">
-        <b-spinner
+        <!-- <b-spinner
           style="width: 7rem; height: 7rem"
           variant="primary"
-        ></b-spinner>
+        ></b-spinner> -->
       </b-col>
-      <b-col class="my-4 load" v-if="products.length < 1 && !loader">
-        <p>{{ $t('businessowner.No_Products_in_Market') }} !!</p>
-      </b-col>
+      
       <div v-if="isShowOrders" class="col-12 orders">
         <Orders />
       </div>
@@ -222,7 +222,7 @@
         </b-form-group>
         <!-- CATEGORIES -->
         <div class="mt-2">
-          <label class="typo__label"> {{ $t('businessowner.Category') }} </label>
+          <label class="typo__label"> {{ $t('businessowner.Category') }} </label> 
           <multi-select
             v-model="multiselecvalue"
             @input="subcategories"
@@ -231,23 +231,21 @@
             :label="$t('businessowner.name')"
             track-by="id"
             :options="BuCategories"
-            :taggable="true"
-            @tag="addTag"
+           
           ></multi-select>
         </div>
         <!-- SUB-CATEGORIES -->
         <div class="mt-2">
-          <label class="typo__label"> {{ $t('businessowner.Sub_Category') }}</label>
+          <label class="typo__label"> {{ $t('businessowner.Sub_Category') }}</label> 
           <multi-select
             v-model="filterselectvalue"
-            :tag-placeholder="$t('businessowner.Add_this_as_new_tag')"
+         
             :placeholder="$t('businessowner.Search_or_add_a_tag')"
             :label="$t('businessowner.name')"
-            track-by="subcategoryId"
+            track-by="subcategory_id"
             :options="scategories"
             :multiple="true"
-            :taggable="true"
-            @tag="addFilter"
+         
           ></multi-select>
         </div>
         <label class="typo__label">{{ $t('businessowner.Filters') }} </label>
@@ -285,6 +283,7 @@
 
         <b-alert v-if="success" :variant="val" show> {{ msg }} </b-alert>
         <b-button @click="addProduct" class="mt-2 btn-block" variant="primary">
+
           <b-spinner small v-if="load" variant="white"></b-spinner>
 
           {{ $t('businessowner.Add') }}</b-button
@@ -393,13 +392,16 @@ export default {
       }
       console.log("----" + this.status);
     },
-    getProducts: async function () {
-      await axios
-        .get("/market?business_id="+this.businessId)
-        .then((res) => {
+  
+
+     getProducts: async function () {
+        let url="/market?business_id="+this.businessId;
+       await this.$store
+        .dispatch("market/getBproducts", url).then((res) => {
           console.log(res);
-          this.products = res.data.data;
-          console.log(this.products);
+             
+             
+          
         })
         .catch((error) => {
           console.log(error);
@@ -408,6 +410,21 @@ export default {
           this.loader = false;
         });
     },
+
+
+
+      flashErrors(errors) {
+      let err = '';
+      Object.values(errors).forEach((element) => {
+        err = element[0];
+      });
+
+      return err;
+    },
+
+
+
+
     addProduct() {
       this.load = true;
       let fd = new FormData();
@@ -420,7 +437,10 @@ export default {
         .join();
       this.newProduct.filterId = this.select_filterss.join();
 
-      //transform product data in form data
+      console.log("starting to display the map data");
+     
+
+     // transform product data in form data
       for (const key in this.newProduct) {
         fd.append(key, this.newProduct[key]);
       }
@@ -441,21 +461,41 @@ export default {
        this.showModal = false;
 
           this.getProducts();
-        })
-        .catch((err) => {
-          console.log({err:err});
-          this.load = false;
-          (this.success = true), (this.val = "danger");
-          this.msg = this.$t('businessowner.Something_went_wrong');
+        }) .catch((err) => {
+            console.log({ err: err });
 
-          setTimeout(() => {
-            this.success = false;
-          }, 5000);
-        });
+             this.load = false;
+
+            if (err.response.status == 422) {
+              console.log({ err: err });
+
+              this.flashMessage.show({
+                status: 'error',
+
+                message: this.flashErrors(err.response.data.errors),
+                blockClass: 'custom-block-class',
+              });
+            } else {
+              this.flashMessage.show({
+                status: 'error',
+
+                message:  this.$t('businessowner.Something_went_wrong'),
+                blockClass: 'custom-block-class',
+              });
+              console.log({ err: err });
+            }
+            
+            
+          });
+
+
+
     },
     picImage() {
       document.querySelector("#image").click();
     },
+
+    
     getImage(e) {
       console.log("getImage");
       console.log(e.target.files[0]);
@@ -495,16 +535,9 @@ export default {
     },
   },
   beforeMount() {
-    this.loader = true;
+    //this.loader = true;
     this.businessId = this.$route.params.id;
-    //get market place products
-    this.getProducts();
-    console.log("--test ----");
-    //get categories for current business
-     
-     console.log("hey yah djkddkdkd");
-     console.log(this.businessId);
-    // this.$store.dispatch('market/getBuCategories', businessId);
+    
 
     this.categories();
     this.subcategories();

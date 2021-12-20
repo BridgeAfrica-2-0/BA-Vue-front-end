@@ -1000,7 +1000,7 @@ export default {
   width: 100%;
 }
 .social-icons {
-  background-image: url('http://info.bridgeafrica.com/wp-content/uploads/2021/07/shiny-dust-on-black-background-overlay-layer-7YKB5W3-scaled-1.jpg');
+  background-image: url('../assets/img/about/shiny.jpg');
   width: 100%;
   min-height: 50vh;
 }

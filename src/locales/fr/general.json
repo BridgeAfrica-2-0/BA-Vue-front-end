@@ -198,7 +198,33 @@
     "Social_Links":"Liens sociaux",
     "Add_a_Website":"Ajouter un site web",
     "Album_Created":"Album créé",
-    "Album_name":"Nom de l'album"
+    "Album_name":"Nom de l'album",
+
+    "Add_Profile_Image":"Ajouter une photo de profil",
+
+    "Create":"Créer",
+    "Update":"Mise à jour",
+    "Edit_Name":"Modifier le nom",
+    "Delete_Album":"Supprimer l'album",
+    "Public":"Public",
+    "Private":"Privé",
+    "Create_album":"Créer un album",
+    "Album_Name":"Nom de l'album",
+
+    "Get_Direction":"Obtenir la direction",
+    "community":"communauté",
+    "About":"À propos",
+
+    "Search_Something":"Rechercher quelque chose",
+    "Network_Admins":"Administrateurs du réseau",
+    "No_Result_On_Admins":"Aucun résultat sur les administrateurs",
+    "Bussiness":"Entreprise",
+    "No_Result_On_Networks":"Aucun résultat sur les réseaux",
+    "All_Members":"Tous les membres",
+    "No_More_Request":"Plus aucune requête",
+    "Complaints": "Plaintes",
+    "Suggestion_for_Improvement": "Suggestion d'amélioration"
+
     
 
 }

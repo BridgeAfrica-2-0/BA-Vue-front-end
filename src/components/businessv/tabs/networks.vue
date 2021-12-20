@@ -10,7 +10,7 @@
               <h1>{{ post.title }}</h1>
               <b-row>
                 <b-col>
-                  <p><small>Public - 397  {{ $t("general.Members") }}</small></p>
+                  <p><small>{{ $t("general.Public") }} - 397  {{ $t("general.Members") }}</small></p>
                 </b-col>
                 <b-col class="col-1">
                   <b-button

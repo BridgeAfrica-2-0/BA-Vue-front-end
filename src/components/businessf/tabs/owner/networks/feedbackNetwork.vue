@@ -103,13 +103,13 @@ export default {
       currentIndex: -1,
       feedbacks: [],
       options: [
-        { value: "Improvement", text: "Suggestion for Improvement" },
-        { value: "Complaints", text: "Complaints" }
+        { value: "Improvement", text: this.$t('_for_Improvement') },
+        { value: "Complaints", text: this.$t('Complaints') }
       ],
       filters: [
         { value: "0", text: "Any" },
-        { value: "Improvement", text: "Suggestion for Improvement" },
-        { value: "Complaints", text: "Complaints" }
+        { value: "Improvement", text: this.$t('general.Suggestion_for_Improvement')},
+        { value: "Complaints", text: this.$t('general.Complaints') }
       ],
       feedbackForm: {
         title: "Improvement",

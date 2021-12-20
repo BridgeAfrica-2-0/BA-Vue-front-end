@@ -23,7 +23,7 @@
                   v-model="name"
                 ></b-form-input>
                 <b-button class="mt-2" variant="primary" @click="createAlbum">
-                  Create</b-button
+                  {{$t("general.Create")}}</b-button
                 >
               </b-form>
             </div>
@@ -57,7 +57,7 @@
 
         <b-modal
           hide-footer
-          title="Create album"
+          :title="$t('general.Create_album')"
           ref="editalbum"
           id="editalbum"
         >
@@ -72,7 +72,7 @@
                 variant="primary"
                 @click="updateAlbum(edit_id)"
               >
-                Update</b-button
+                {{$t("general.Update")}}</b-button
               >
             </b-form>
           </div>
@@ -105,9 +105,9 @@
                             class="dropdown-item"
                             data-toggle="modal"
                             data-target="#namealbumModal"
-                            >Edit Name</a
+                            >{{$t("general.Edit_Name")}}</a
                           >
-                          <a class="dropdown-item">Delete Album</a>
+                          <a class="dropdown-item">{{$t("general.Delete_Album")}}</a>
                         </div>
                       </li>
                     </ul>
@@ -120,8 +120,8 @@
                     </label>
                     <div class="col-md-5 pl-0 pr-0">
                       <select id="gender" class="form-control w-100">
-                        <option>Public</option>
-                        <option>Private</option>
+                        <option>{{$t("general.Public")}}</option>
+                        <option>{{$t("general.Private")}}</option>
                       </select>
                     </div>
                   </div>

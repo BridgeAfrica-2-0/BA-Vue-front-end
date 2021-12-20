@@ -27,7 +27,7 @@
     "language":"language",
     "English":"English",
     "French":"French",
-    "country":"Aountry",
+    "country":"Country",
     "all_rights_reserved":"All rights reserved",
     "Where":"Where",
     
@@ -199,8 +199,32 @@
     "Social_Links":"Social Links",
     "Add_a_Website":"Add a Website",
     "Album_Created":"Album Created",
-    "Album_name":"Album name"
+    "Album_name":"Album name",
 
+    "Add_Profile_Image":"Add profile image",
+    "Create":"Create",
+    "Update":"Update",
+    "Edit_Name":"Edit name",
+    "Delete_Album":"Delete album",
+    "Public":"Public",
+    "Private":"Private",
+    "Create_album":"Create album",
+    "Album_Name":"Album name",
+
+    "Get_Direction":"Get Direction",
+    "community":"community",
+    "About":"About",
+
+    "Search_Something":"Search something",
+    "Network_Admins":"Network Admins",
+    "No_Result_On_Admins":"No result on admins",
+    "Bussiness":"Bussiness",
+    "No_Result_On_Networks":"No result on networks",
+    "All_Members":"All members",
+    "No_More_Request":"No more request",
+
+    "Suggestion_for_Improvement": "Suggestion For Improvement",
+    "Complaints":"Complaints"
     
 
 

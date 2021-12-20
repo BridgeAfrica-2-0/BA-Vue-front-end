@@ -169,9 +169,11 @@ export default {
       console.log("uri", url)
       const nextFollowState = Comdata.is_follow === 0 ? 1 : 0;
       const data = {
+        networkId: this.url,
         id: Comdata.id,
         type: Comdata.type,
       };
+      console.log("data", data)
 
       await this.axios
         .post(url, data)

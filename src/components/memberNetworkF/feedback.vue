@@ -102,7 +102,7 @@ export default {
       filterData: false,
       spinner: false,
 
-      currentPage: 0,
+      currentPage: 1,
       currentIndex: -1,
       feedbacks: [],
 
@@ -150,7 +150,7 @@ export default {
       console.log("searching...");
       console.log(this.filterData);
       this.$nextTick(() => {
-        this.page = 0;
+        this.currentPage = 1;
         this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
       });
     },
@@ -165,12 +165,19 @@ export default {
         .then(({ data }) => {
         console.log(data);
         console.log(this.currentPage);
-        if (data.data.length) {
+        console.log("converting to object");
+        console.log(Object.values(data.data));
+        let object = Object.values(data.data);
+        if (object.length) {
           console.log("load more");
+          object.map((item) => {
+            this.feedbacks.push(item);
+            console.log(item);
+          })
           this.currentPage += 1;
           console.log(this.currentPage);
           console.log(...data.data);
-          this.feedbacks.push(...data.data);
+          // this.feedbacks.push(...data.data);
           this.loading = false;
           $state.loaded();
         } else {

@@ -2,16 +2,42 @@
   <div ref="about">
     <b-icon icon="person-fill" class="icon-size" variant="primary"></b-icon>
     <b> {{ $t("businessowner.About") }} </b>
-
-    <hr />
-
+    
+    <hr /> 
+    <!-- {{business_about}} -->
     <b-card>
       <div class="mb-3">
         <mapbox :coordinates="[business_about.lng, business_about.lat]" />
       </div>
-
+      
       <b-card>
         <b-row v-if="loading">
+          <b-col>
+            <!-- <div class="edit">
+                <b-icon
+                  icon="pencil-fill"
+                  variant="primary"
+                  
+                ></b-icon>
+              </div> -->
+            <div
+                class="edit"
+                v-b-modal.biographyModal
+                @click="
+                  business_about_input = JSON.parse(
+                    JSON.stringify(business_about)
+                  )
+                "
+              >
+                <b-icon icon="pencil-fill" variant="primary"></b-icon>
+              </div>
+            <h4 class="mb-4 text-center username">
+              {{ business_about.name }}
+            </h4>
+            <p class="text-justify text">
+              {{ business_about.location_description }}
+            </p>
+          </b-col>
           <b-col>
             <b-card-text>
               <div class="edit" v-b-modal.addressBusinessModal>
@@ -27,24 +53,30 @@
                   icon="briefcase-fill"
                   class="primary icon-size"
                 ></b-icon>
-                <span
+                <!-- <span
                   v-for="category in business_about.category"
                   :key="category.id"
                   >{{ category.name }},
-                </span>
+                </span> -->
+                <span>{{ business_about.name }}</span>
               </p>
               <p>
                 <b-icon icon="search" class="primary icon-size"></b-icon>
-                {{ business_about.name }}
+                {{business_about.keywords[0]}}
               </p>
               <p>
                 <b-icon icon="geo-alt-fill" class="primary icon-size"></b-icon>
-                {{ business_about.address }}, {{ business_about.city }},
+                {{ business_about.city }}
+                <!-- <span v-if="business_about.country">
+                  {{ business_about.address }}, {{ business_about.city }},
                 {{ business_about.country[0].name }}
+                </span> -->
               </p>
               <p>
                 <b-icon icon="link" class="primary icon-size"></b-icon>
-                {{ business_about.website }}
+                <span v-if="business_about.website ">
+                  {{ business_about.website }}
+                </span>
               </p>
               <p>
                 <b-icon icon="people-fill" class="primary icon-size"></b-icon>
@@ -82,28 +114,10 @@
               </p>
             </b-card-text>
           </b-col>
-          <b-col>
-            <!-- <div
-                class="edit"
-                v-b-modal.biographyModal
-                @click="
-                  business_about_input = JSON.parse(
-                    JSON.stringify(business_about)
-                  )
-                "
-              >
-                <b-icon icon="pencil-fill" variant="primary"></b-icon>
-              </div> -->
-            <h4 class="mb-4 text-center username">
-              {{ business_about.name }}
-            </h4>
-            <p class="text-justify text">
-              {{ business_about.location_description }}
-            </p>
-          </b-col>
+          
         </b-row>
       </b-card>
-
+  
       <!-- original card -->
       <!-- <b-row v-if="loading">
         <b-col>
@@ -198,7 +212,7 @@
       </b-row> -->
     </b-card>
 
-    <!-- <b-modal
+    <b-modal
       id="biographyModal"
       hide-footer
       :title="$t('businessowner.Business_Biography')"
@@ -239,7 +253,7 @@
           {{ $t('businessowner.Modify') }}
         </b-button>
       </b-form>
-    </b-modal> -->
+    </b-modal>
     <b-modal
       id="addressBusinessModal"
       ref="addressBusinessModal"
@@ -248,7 +262,7 @@
       size="lg"
       @close="cancel"
       @keyup="validate('editAddress')"
-      >{{ business_about_input }}
+      
     >
       <b-form @submit.prevent="validate('editAddress')">
         <div class="form-group">
@@ -421,7 +435,7 @@
 
         <b-form-group
           id="input-group-2"
-          :label="$t('businessowner.Phone_Contact')"
+          label="secondary phone"
           label-for="input-2"
           label-size="sm"
         >
@@ -712,7 +726,9 @@ export default {
         business_abobusiness_id: this.business_about_input,
         business_id: this.$route.params.id,
       })
-      .then((response) => {
+      .then((response) => { 
+
+        
         this.dayOfWorks = this.initialize(this.dayOfWorks);
       })
       .catch((error) => {

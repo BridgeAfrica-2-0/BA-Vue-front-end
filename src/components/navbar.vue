@@ -798,6 +798,7 @@ export default {
     toggleinput() {
       this.$refs.mobileinput.style.display = "block";
     },
+    
 
     getNetworks: async function () {
       let request = await this.$repository.share.getNetworks();
@@ -809,11 +810,22 @@ export default {
       if (request.success) this.setBusiness(request.data);
     },
 
+    getNetworkAndBusiness: async function() {
+      let request = await this.$repository.share.getNetworkAndBusiness();
+      if (request.success){ 
+        this.setBusiness(request.data.business);
+        this.setNetworks(request.data.network);
+      }
+    },
+
+
+
     init() {
       try {
         if (!this.hasLauchNetworkRequest) {
-          this.getNetworks();
-          this.getBusiness();
+          // this.getNetworks();
+          // this.getBusiness();
+          this.getNetworkAndBusiness();
           this.lauchNetworkRequest();
         }
       } catch (error) {

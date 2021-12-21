@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="container-fluid " style="padding:0px">
+    <div class="container-fluid" style="padding: 0px">
       <div class="splide" v-if="business_info.cover.length">
         <splide :options="options" class="banner r-image">
           <splide-slide v-for="cover in business_info.cover" :key="cover.id">
@@ -25,9 +25,9 @@
         </splide>
       </div>
       <!-- <router-link to="#media?type=cover"> -->
-        <b-button @click="gotoCoverImages" class="float-right see-all">
-          {{ $t('businessowner.See_All') }}
-        </b-button>
+      <b-button @click="gotoCoverImages" class="float-right see-all">
+        {{ $t("businessowner.See_All") }}
+      </b-button>
       <!-- </router-link> -->
 
       <div class="container-fluid logo-container">
@@ -35,7 +35,7 @@
           <b-col cols="8" md="6" class="m-0 p-0">
             <b-avatar
               :src="business_info.logo_path"
-              class=" float-left   mt-2 mr-2 mr-xl-5 mr-lg-5 round-coner  logo_avat"
+              class="float-left mt-2 mr-2 mr-xl-5 mr-lg-5 round-coner logo_avat"
               badge-variant="primary"
               badge-offset="10px"
               square
@@ -53,13 +53,14 @@
             <div class="">
               <div class="text-box">
                 <span>
-                  <h6 class=" m-0 p-0 ml-3   profile-name">
+                  <h6 class="m-0 p-0 ml-3 profile-name">
                     <b>
                       <b-link> {{ business_info.name }} </b-link>
                     </b>
                     <br />
                     <span class="community">
-                      {{ business_info.community }} {{ $t('businessowner.Community') }}
+                      {{ business_info.community }}
+                      {{ $t("businessowner.Community") }}
                     </span>
                   </h6>
                 </span>
@@ -117,8 +118,7 @@
                     <h4>Edit Your New picture</h4>
                   </div>
                 </div>
-
---->
+              --->
               </div>
             </b-modal>
 
@@ -164,17 +164,32 @@
           </b-col>
 
           <b-col cols="4" md="6" class="">
-            <div class="my-auto ">
+            <div class="my-auto">
               <span class="float-right">
+                <b-button
+                  variant="primary"
+                  class="edit-btn d-none d-md-inline"
+                  @click="selectCover"
+                >
+                  <fas-icon
+                    class="mr-2"
+                    :icon="['fas', 'pencil-alt']"
+                    size="lg"
+                  />
+                  {{ $t("businessowner.Add_Cover") }}
+                </b-button>
 
-                <b-button variant="primary" class="edit-btn  d-none d-md-inline"     @click="selectCover"  > <fas-icon class="mr-2" :icon="['fas', 'pencil-alt']" size="lg" />   {{ $t('businessowner.Add_Cover') }} </b-button>
-                
-                
-                <b-dropdown id="dropdown-1" class="float-right  mt-2 mt-sm-2 mt-md-0  dot-btn" no-caret variant="outline-primary">
+                <b-dropdown
+                  id="dropdown-1"
+                  class="float-right mt-2 mt-sm-2 mt-md-0 dot-btn"
+                  no-caret
+                  variant="outline-primary"
+                >
                   <template #button-content>
                     <b-icon-three-dots></b-icon-three-dots>
                   </template>
 
+<<<<<<< HEAD
                   <b-dropdown-item  @click="selectCover" 
                     > {{ $t('businessowner.Change_Cover') }}</b-dropdown-item
                   >
@@ -186,6 +201,15 @@
                 -->
 
             <b-dropdown-item  @click="viewAs"  >{{ $t('businessowner.View_As') }}</b-dropdown-item> 
+=======
+                  <b-dropdown-item @click="selectCover">
+                    {{ $t("businessowner.Change_Cover") }}</b-dropdown-item
+                  >
+
+                  <b-dropdown-item @click="viewAs">{{
+                    $t("businessowner.View_As")
+                  }}</b-dropdown-item>
+>>>>>>> e2e9a9a1bf432f46b381758599c65bf8678815ab
                 </b-dropdown>
               </span>
             </div>
@@ -199,6 +223,7 @@
 </template>
 
 <script>
+import { mapMutations } from "vuex";
 export default {
   name: "headPageOwner",
 
@@ -219,11 +244,11 @@ export default {
         perMove: 1,
 
         breakpoints: {
-          "760": {
+          760: {
             perPage: 1,
             gap: "0rem",
           },
-          "992": {
+          992: {
             perPage: 2,
             gap: "1rem",
           },
@@ -233,6 +258,10 @@ export default {
   },
 
   methods: {
+    ...mapMutations({
+      updatePictureState: "auth/updateProfilePicture",
+    }),
+
     businessInfo() {
       this.$store
         .dispatch("businessOwner/businessInfo", this.url)
@@ -243,7 +272,7 @@ export default {
           console.log({ err: err });
         });
     },
-    gotoCoverImages(){
+    gotoCoverImages() {
       this.$parent.gotoCoverImages();
     },
 
@@ -278,11 +307,11 @@ export default {
       this.$refs["coverphoto"].show();
     },
 
-    chooseProfile2: function() {
+    chooseProfile2: function () {
       document.getElementById("cover-imag").click();
     },
 
-    chooseProfile1: function() {
+    chooseProfile1: function () {
       document.getElementById("profile-imag").click();
     },
 
@@ -310,27 +339,22 @@ export default {
 
           this.flashMessage.show({
             status: "success",
-
-            message: this.$t('businessowner.Logo_Updated'),
-
+            message: this.$t("businessowner.Logo_Updated"),
             blockClass: "custom-block-class",
           });
 
           loader.hide();
-          this.$refs["modalxl"].hide();
+          this.$refs["logomodal"].hide();
         })
-
         .catch((err) => {
           console.log({ err: err });
 
           this.flashMessage.show({
             status: "error",
-
-            message: this.$t('businessowner.Unable_to_set_your_Logo'),
+            message: this.$t("businessowner.Unable_to_set_your_Logo"),
             blockClass: "custom-block-class",
           });
           console.log({ err: err });
-
           loader.hide();
         });
     },
@@ -353,15 +377,10 @@ export default {
           },
         })
         .then((response) => {
-          console.log(response);
-
           this.businessInfo();
-
           this.flashMessage.show({
             status: "success",
-
-            message: this.$t('businessowner.Profile_Updated'),
-
+            message: this.$t("businessowner.Profile_Updated"),
             blockClass: "custom-block-class",
           });
 
@@ -377,7 +396,6 @@ export default {
 
             this.flashMessage.show({
               status: "error",
-
               message: err.response.data.message,
               blockClass: "custom-block-class",
             });
@@ -386,12 +404,10 @@ export default {
           } else {
             this.flashMessage.show({
               status: "error",
-
-              message: this.$t('businessowner.Unable_to_upload_your_image'),
+              message: this.$t("businessowner.Unable_to_upload_your_image"),
               blockClass: "custom-block-class",
             });
             console.log({ err: err });
-
             loader.hide();
           }
         });
@@ -405,6 +421,12 @@ export default {
   computed: {
     business_info() {
       return this.$store.state.businessOwner.businessInfo;
+    },
+  },
+
+  watch: {
+    "$store.state.businessOwner.businessInfo": function ({ logo_path }) {
+      this.updatePictureState(logo_path);
     },
   },
 };

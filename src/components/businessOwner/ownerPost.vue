@@ -346,7 +346,7 @@
                 <span>
                   <b-button @click="updatePost" variant="primary" block
                     ><b-icon icon="cursor-fill" variant="primary"></b-icon>
-                    {{ $t("businessowner.Publish") }}</b-button
+                    {{ $t("businessowner.Publish") }}+++++</b-button
                   >
                 </span>
               </div>
@@ -953,8 +953,6 @@ export default {
           }.bind(this),
         })
         .then((response) => {
-          console.log(response);
-
           this.postCreate(response.data.data)
 
           this.flashMessage.show({
@@ -968,10 +966,11 @@ export default {
           this.reloads();
           this.page = 1;
           this.infiniteId += 1;
-
+          this.uploadPercentage = 0
           
         })
         .catch((err) => {
+          this.uploadPercentage = 0
           if (err.response.status == 422) {
             this.flashMessage.show({
               status: "error",
@@ -1002,6 +1001,7 @@ export default {
     },
     resetPostData() {
       if (!this.isSubmitted) {
+        this.uploadPercentage = 0
         this.createPost.hyperlinks = [];
         this.createPost.movies = [];
         this.createPost.postBusinessUpdate = "";

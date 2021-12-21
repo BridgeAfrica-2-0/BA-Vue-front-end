@@ -26,6 +26,12 @@ export default {
   },
 
   mutations: {
+
+    updateProfilePicture(state, picture) {
+      if (picture !== state.profilConnected.profile_picture)
+        state.profilConnected = { ...state.profilConnected, profile_picture: picture }
+    },
+
     setUserData(state, userData) {
       localStorage.removeItem('user');
       state.user = userData;
@@ -47,16 +53,11 @@ export default {
 
     setUserDataa(state, userData) {
       state.user.user = userData.user;
-
-      localStorage.setItem("user.user", JSON.stringify(userData.user));
-
-
+      localStorage.setItem("user.user", JSON.stringify(userData.user))
     },
 
     setneigbourhoods(state, data) {
-
       state.neigbourhoods = data;
-
     },
 
     setCountry(state, data) {
@@ -121,24 +122,19 @@ export default {
     },
 
     profilConnected(state, payload) {
-      state.profilConnected = payload;
+      state.profilConnected = payload
     },
   },
 
 
   actions: {
+    sendOtp({ commit }, payload) {
+      return axios.post(payload.url, payload).then(({ data }) => {
+        console.log(data);
+        // commit("setUserData", data.data);
+      });
+    },
 
-    
-
-  sendOtp({ commit }, payload){
-    return axios.post(payload.url, payload).then(({ data }) => {
-      console.log(data);
-     // commit("setUserData", data.data);
-    });
-  },
-
-
-  
     login({ commit }, credentials) {
       return axios.post("user/login", credentials).then(({ data }) => {
         console.log(data);
@@ -278,10 +274,7 @@ export default {
 
     neigbourhoods: state => state.neigbourhoods,
 
-
-
     getAppLanguage: (state) => state.appLanguage
-
 
   },
 };

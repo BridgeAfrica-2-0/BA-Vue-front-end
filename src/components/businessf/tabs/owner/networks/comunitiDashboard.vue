@@ -11,14 +11,14 @@
 
      <div class=" border shadow   p-tab" style="padding:20px">
 
-        <span> <h4>    <img class="img-fluid picture" src="@/assets/icons/people.png" style="width: 60px;" />  COMMUNITY   <span class="h4-color"> 7K </span> </h4>   </span>
+        <span> <h4>    <img class="img-fluid picture" src="@/assets/icons/people.png" style="width: 60px;" />  {{$t("general.COMMUNITY")}}   <span class="h4-color"> 7K </span> </h4>   </span>
 
 
       <b-tabs  pills content-class="mt-3  f-left ">
         <b-tab  active>
 
          <template slot="title"  >
-             {{ $t('network.People') }}  <span class="spa-color">  7K   </span>
+           {{$t("general.People")}}  <span class="spa-color">  7K   </span>
             </template>
 
 
@@ -32,7 +32,7 @@
         <b-tab  active>
           
             <template slot="title"  >
-             {{ $t('network.Followers') }}  <span class="spa-color">  7K   </span>
+             {{$t("general.Followers")}} <span class="spa-color">  7K   </span>
             </template>
 
          
@@ -45,7 +45,7 @@
         <b-tab > 
 
             <template slot="title"  >
-             F{{ $t('network.ollowing') }}  <span class="spa-color">  7K   </span>
+             {{$t("general.Following")}} <span class="spa-color">  7K   </span>
             </template>
 
       <div class="s-comcard">    <b-row>  <b-col md="6" sm="12">   <div >  <People />    </div >  </b-col> <b-col md="6" sm="12">   <div > <People />    </div >  </b-col>    </b-row>   </div>
@@ -64,7 +64,7 @@
         <b-tab >
 
             <template slot="title"  >
-             {{ $t('network.Businesses') }}  <span class="spa-color">  7K   </span>
+            {{$t("general.Businesses")}}  <span class="spa-color">  7K   </span>
             </template>
         
         
@@ -73,7 +73,7 @@
         <b-tab  active>
 
          <template slot="title"  >
-             {{ $t('network.Followers') }}  <span class="spa-color">  7K   </span>
+            {{$t("general.Followers")}} <span class="spa-color">  7K   </span>
             </template>
         
          
@@ -89,7 +89,7 @@
         
 
             <template slot="title"  >
-             {{ $t('network.Following') }}  <span class="spa-color">  7K   </span>
+             {{$t("general.Following")}} <span class="spa-color">  7K   </span>
             </template>
         
         <div class="s-comcard">    <b-row>  <b-col md="6" sm="12">   <div >  <Business />    </div >  </b-col> <b-col md="6" sm="12">   <div > <Business />    </div >  </b-col>    </b-row>   </div>

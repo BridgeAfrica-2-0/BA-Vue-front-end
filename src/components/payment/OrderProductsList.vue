@@ -16,7 +16,7 @@
 					<b-tbody>
 						<b-tr>
 							<b-td>
-								Name of item:
+								{{$t('general.Name_of_item')}}:
 							</b-td>
 							<b-th>
 								{{ cart_item.product_name }}
@@ -25,7 +25,7 @@
 						</b-tr>
 						<b-tr>
 							<b-td>
-								Amount :
+								{{$t('general.Amount')}} :
 							</b-td>
 							<b-th>
 								{{ formatMoney(Number(cart_item.product_price)) }}
@@ -34,7 +34,7 @@
 						</b-tr>
 						<b-tr>
 							<b-td>
-								Quantity :
+								{{$t('general.Quantity')}} :
 							</b-td>
 							<b-th>
 								<input
@@ -48,7 +48,7 @@
 						</b-tr>
 						<b-tr>
 							<b-td>
-								Shipping:
+								{{$t('general.Shipping')}}:
 							</b-td>
 							<b-th >
 								<!-- {{ formatMoney(Number(cart.shipping_amount)) }} -->
@@ -64,7 +64,7 @@
 						</b-tr>
 						<b-tr>
 							<b-td>
-								Total:
+								{{$t('general.Total')}}:
 							</b-td>
 							<b-th>
 								<div class="row">
@@ -104,7 +104,7 @@
 		</div>
 		<div class="row" v-if="error">
 			<div class="col-12">
-				<b-alert dismissible show variant="secondary">Your cart is empty!</b-alert>
+				<b-alert dismissible show variant="secondary">{{$t('general.Your_cart_is_empty')}}!</b-alert>
 			</div>
 		</div>
 		<div class="row my-4">

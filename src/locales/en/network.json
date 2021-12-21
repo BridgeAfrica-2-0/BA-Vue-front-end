@@ -254,7 +254,7 @@
     "Tel_2": "Tel 2",
     "Location": "Location",
     "Allow_Business_to_join_network": "Allow Business to join network",
-    "Update_Network": "Update_Network",
+    "Update_Network": "Update Network",
     "Upload_Profile_Picture": "Upload Profile Picture",
     "Edit_Your_New_picture": "Edit Your New picture",
     "Upload": "Upload",
@@ -306,7 +306,8 @@
     "Municipality":"Municipality",
     "Selected":"Selected",
     "All_Selected":"All Selected",
-    "No_notifications_to_show":"No notifications to show"
+    "No_notifications_to_show":"No notifications to show",
+    "about":"About"
 
 
 }

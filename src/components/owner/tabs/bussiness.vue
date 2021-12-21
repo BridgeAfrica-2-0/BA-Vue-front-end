@@ -994,7 +994,7 @@ export default {
           this.$refs.infiniteLoading.attemptLoad();
           this.flashMessage.show({
             status: 'success',
-            message: "Business {{ $t('profileowner.Delete')}}d",
+            message: "{{ $t('profileowner.Business_Delete')}}d",
             blockClass: 'custom-block-class',
           });
         })

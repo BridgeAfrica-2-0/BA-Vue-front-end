@@ -50,13 +50,13 @@
                 <b-icon icon="people-fill" variant="primary"></b-icon>
                 <span class="pivate text">
                   {{ nFormatter(networkInfo.commuity) }}
-                  community 
+                  {{ $t('general.community') }} 
                 </span>
               </p>
             </b-col>
           </b-row>
         </b-container>
-        <h6 class="mt-2 font-weight-bolder title ">About</h6>
+        <h6 class="mt-2 font-weight-bolder title ">{{ $t('general.About') }}</h6>
         <p class="text-justify text">
           <read-more
             more-str="read more"

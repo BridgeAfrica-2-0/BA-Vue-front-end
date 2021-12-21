@@ -106,10 +106,10 @@
               <vue-bootstrap-typeahead
                 v-model="query"
                 :data="neigbourhoods"
-                :minMatchingChars=0
-                :maxMatches=10
+                minMatchingChars="0"
+                maxMatches="10"
                 :serializer="(item) => item.name"
-                placeholder="Where"
+                :placeholder="$t('general.Where')"
                 class="search-hh w-44"
               />
 
@@ -143,11 +143,10 @@
             <b-collapse id="nav-collapse" is-nav>
               <div class="nav-item">
                 <router-link
-                  :to="navLink('home')"
+                  :to="{ name: navLink('home') }"
                   class="nav-link text-dark hov"
-                  href=""
                 >
-                  Home
+                  {{$t("general.Home")}}
                 </router-link>
               </div>
 
@@ -315,7 +314,7 @@
                           class="violet search"
                           :icon="['fas', 'user']"
                       /></span>
-                      Profile
+                      {{$t("general.Profile")}}
                     </a>
                     <hr class="h-divider" />
 
@@ -532,7 +531,7 @@ export default {
       default: function () {
         return {
           keyword: "",
-          placeholder: "All",
+          placeholder: this.$t('general.All'),
         };
       },
     },
@@ -548,8 +547,9 @@ export default {
       redirectionPatterns: null,
       searchOptions: {
         keyword: "",
-        placeholder: "All",
+        placeholder: this.$t('general.All'),
       },
+
       query: "",
       selectedUser: null,
       users: [],
@@ -565,7 +565,6 @@ export default {
   },
   beforeMount() {
     console.log("beforeMount");
-
     this.getLocation();
   },
   created() {
@@ -602,7 +601,6 @@ export default {
           params: { id: this.user.id },
           query: { tabId: 2 },
         }),
-
         user: () => ({
           name: "settings",
         }),
@@ -622,7 +620,6 @@ export default {
       this.updateNotificationEvent();
       this.userOwnPage = this.onRedirect();
     },
-
     credentials: {
       deep: true,
       handler() {
@@ -737,7 +734,7 @@ export default {
     navLink(type) {
       const link = {
         home: () => {
-          return this.profile ? "dashboard" : "home1";
+          return this.profile ? "dashbord" : "home1";
         },
       };
       try {

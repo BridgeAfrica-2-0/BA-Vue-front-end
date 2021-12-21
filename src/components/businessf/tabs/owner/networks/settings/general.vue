@@ -1,5 +1,6 @@
 <template>
   <b-container v-if="networkinfo != 0">
+    <!-- {{networkinfo}} -->
     <div class="">
       <b-container>
         <b-form-group
@@ -46,7 +47,7 @@
       <hr />
     </div>
 
-    <div>
+    <div v-if="networkinfo[1].setting_value !== 'Admin only'">
       <b-container>
         <b-form-group
           label-cols-lg="3"

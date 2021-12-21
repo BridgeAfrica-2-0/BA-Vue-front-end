@@ -1,6 +1,6 @@
 <template>
   <div class=" ">
-    <b-card title="" class="">
+    <b-card v-if="networkInfo" title="" class="">
       <b-container class="a-center">
           <!-- :src="require('@/assets/img/mayor.jpg')" -->
         <b-avatar
@@ -13,7 +13,7 @@
         </b-avatar>
       </b-container>
       <br />
-<!--       <b-container>
+      <b-container>
         <b-row>
           <b-col cols="6">
             <h6 class="  m-0 p-0 a-center network-name "><b> {{ networkInfo.name }}</b></h6>
@@ -23,36 +23,12 @@
               variant="primary"
               size="sm"
               @click="addFollower"
-              :disabled="buttonStatus" 
-              style="width: 120px;"
+              :disabled="buttonStatus"
+               :style="networkInfo.is_follow !== 0 ? 'background-color: rgb(162,107,80);' : ''"
               class="a-center"
             >
-              <b-spinner v-if="SPcommunity" small></b-spinner>
-              <b-icon v-if="!SPcommunity" :icon="networkInfo.is_follow ? 'dash' : 'plus'"></b-icon> 
-              <span v-if="networkInfo.is_follow">Unfollow</span>
-              <span v-else>Follow</span>
-            </b-button>
-            <b-tooltip target="Follow-Unfollow" variant="secondary">Click To Follow/Unfollow</b-tooltip>
-          </b-col>
-        </b-row>
-      </b-container> -->
-
-      <b-container>
-        <b-row>
-          <b-col cols="6">
-            <h6 class="m-0 p-0 a-center network-name">
-              <b> {{ networkInfo.name }}</b>
-            </h6>
-          </b-col>
-          <b-col cols="6">
-            <b-button
-              variant="primary"
-              size="sm"
-              @click="addNetwork"
-              style="width: 120px"
-              class="a-center"
-            >
-              <b-icon icon="pencil"></b-icon> {{ $t("network.Edit") }}
+              <i :class="networkInfo.is_follow ? 'fas fa-user-minus fa-lg btn-icon':'fas fa-user-plus fa-lg btn-icon'"></i>
+              <span> Community</span>
             </b-button>
           </b-col>
         </b-row>
@@ -81,18 +57,20 @@
           </b-row>
         </b-container>
         <h6 class="mt-2 font-weight-bolder title ">About</h6>
-        <p v-if="networkInfo.description.length<130" class="text-justify text">{{ networkInfo.description }}</p>
-        <p v-else class="text-justify text">
-          {{ networkInfo.description.substring(0,130)+"..." }}
-          <span class="d-inline-block float-right">
-            <a @click="$bvToast.show('example-toast')" style="cursor:pointer;">lire la Suite</a>
-          </span>
-          <b-icon  icon="pencil"></b-icon>
+        <p class="text-justify text">
+          <read-more
+            more-str="read more"
+            class="readmore"
+            :text="networkInfo.description"
+            link="#"
+            less-str="read less"
+            :max-chars="100"
+          ></read-more>
         </p>
-        <b-toast id="example-toast" static no-auto-hide>
-          {{ networkInfo.description }}
-        </b-toast>
       </b-card-text>
+    </b-card>
+    <b-card v-else class="text-center">
+      <b-spinner variant="primary" label="Text Centered" style="width: 3rem; height: 3rem"></b-spinner>
     </b-card>
     
     <SidebarCommunity />
@@ -241,11 +219,13 @@
 </template>
 
 <script>
+// import ReadMore from 'vue-read-more';
 import SidebarCommunity from "@/components/businessf/tabs/owner/editors/sidebarcommunity";
 export default {
   name: "parent",
   components: {
-    SidebarCommunity
+    SidebarCommunity,
+    // ReadMore
   },
   data() {
     return {
@@ -267,7 +247,7 @@ export default {
     },
   },
   mounted(){
-    this.url = this.$route.params.id;
+    this.url = this.$route.params.id !== undefined ? this.$route.params.id : this.$router.push('notFound');
     this.getNetworkInfo() 
   },
   methods: {

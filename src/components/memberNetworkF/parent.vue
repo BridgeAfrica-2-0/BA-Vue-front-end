@@ -27,17 +27,15 @@
               size="sm"
               @click="addFollower"
               :disabled="buttonStatus"
-              :style="networkInfo.is_follow !== 0 ? 'width: 120px;  background-color: rgb(162,107,80);' : 'width: 120px;'"
+              :style="networkInfo.is_follow !== 0 ? 'background-color: rgb(162,107,80);' : ''"
               class="a-center"
             ><b-spinner v-if="SPcommunity" small></b-spinner>
               <i
                 class="fas fa-lg btn-icon"
                 :class="networkInfo.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"
               ></i>
-              <span class="ml-1" v-if="networkInfo.is_follow"> Unfollow</span>
-              <span v-else> Follow</span>
+              <span class="ml-1"> Community</span>
             </b-button>
-            <b-tooltip target="Follow-Unfollow" variant="secondary">Click To Follow/Unfollow</b-tooltip>
           </b-col>
         </b-row>
       </b-container>
@@ -66,8 +64,6 @@
         </b-container>
         <h6 class="mt-2 font-weight-bolder title ">About</h6>
         <p class="text-justify text">
-
-
            <read-more
               more-str="read more"
               class="readmore"
@@ -75,11 +71,7 @@
               link="#"
               less-str="read less"
               :max-chars="100"
-            >
-            </read-more>
-
-
-         
+            ></read-more>
         </p>
       </b-card-text>
     </b-card>

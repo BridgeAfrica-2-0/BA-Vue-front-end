@@ -93,10 +93,8 @@
       </b-row>
       <div class="pending-post-view pt-2 mt-3">
         <p>
-          {{ $t("network.Your") }}
-          {{
-            $t("network.Posts_are_pending_for_approval")
-          }}.&nbsp;&nbsp;&nbsp;&nbsp;
+<!-- {{pendingPost.data}} -->
+          {{$t("network.Your")}}  {{$t("network.Posts_are_pending_for_approval")}}.&nbsp;&nbsp;&nbsp;&nbsp;
           <a
             @click="editPage"
             style="color: #e75c18; text-decoration: underline; cursor: pointer"
@@ -507,11 +505,8 @@ export default {
     }),
 
     editPage() {
-      this.$router.push("/network/" + this.url + "?selectedId=4");
-      //  this.$router.push("/network/"+this.url+"?this.selectedIdd=4 && this.tabIndex=5");
       console.log("editPage");
-      //        this.selectedIdd = '4';
-      // this.tabIndex = '5';
+      this.$emit('changeSelected');
     },
 
     AllPendingPost() {

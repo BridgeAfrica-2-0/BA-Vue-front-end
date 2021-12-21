@@ -5,7 +5,7 @@
         <b>{{ $t("businessf.Intro") }}</b>
       </h6>
 
-      <b-card-text>
+      <b-card-text> 
         <p>
           <b-icon icon="briefcase-fill" class="primary h_icon"></b-icon>
           <span v-for="cat in business_intro.category" :key="cat.id">
@@ -14,23 +14,25 @@
         </p>
         <p>
           <b-icon icon="search" class="primary h_icon"></b-icon>
-          <span v-for="(keyword, index) in business_intro.keywords" :key="index"
+          <!-- <span v-for="(keyword, index) in business_intro.keywords" :key="index"
             >{{ keyword }},
-          </span>
+          </span> -->
+          <span> {{business_intro.name}} </span>
         </p>
         <p>
-          <b-icon icon="geo-alt-fill" class="primary h_icon"></b-icon>Mokolo,
-          {{ $t("businessf.Yaounde") }},
-          {{ $t("businessf.Cameroon") }}
+          <b-icon icon="geo-alt-fill" class="primary h_icon"></b-icon> {{business_intro.city}},
+          {{ business_intro.country[0].name }}
+          
         </p>
         <p>
-          <b-icon icon="link" class="primary h_icon"></b-icon>www.business.com
+          <b-icon icon="link" class="primary h_icon"></b-icon>
+          {{business_intro.website}}
         </p>
 
-        <p>
+        <!-- <p>
           <b-icon icon="link" class="primary"></b-icon>
           {{ $t("businessf.www_business_com") }}
-        </p>
+        </p> -->
 
         <p>
           <b-icon icon="people-fill" class="primary h_icon"></b-icon>

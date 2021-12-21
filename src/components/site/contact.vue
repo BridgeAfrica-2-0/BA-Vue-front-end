@@ -3,7 +3,7 @@
   <section class="contact-us-form mt-3">
     <div class="d-flex justify-content-center">
       <img
-        src="http://info.bridgeafrica.com/wp-content/uploads/2021/07/BAV-horizontal-white-2048x733.png"
+        src="../../assets/img/about/logo-21.png"
         alt="Logo"
         class="contact-img"
       />
@@ -111,7 +111,7 @@ export default {
 .contact-us-form {
   width: 100%;
   min-height: 100vh;
-  background-image: url(http://info.bridgeafrica.com/wp-content/uploads/2021/07/blocks-image-05.jpg);
+  background-image: url('../../assets/img/about/blocks-image-05-img20.jpg');
 }
 .contact-img {
   margin-top: 5.5rem;

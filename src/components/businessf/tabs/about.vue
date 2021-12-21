@@ -41,7 +41,7 @@
           </p>
           <p>
             <b-icon icon="people-fill" class="primary icon"></b-icon>
-            <span>{{ nFormatter(business_about.community) }} Community</span>
+            <span>{{ nFormatter(business_about.community) }}{{$t("general.Community")}} </span>
           </p>
           <p>
             <b-icon icon="telephone-fill" class="primary icon"></b-icon>
@@ -54,7 +54,7 @@
           <p>
             <b-icon icon="clock" class="primary icon"></b-icon>
             <span
-              ><b-link> Open now</b-link>
+              ><b-link> {{$t("general.Open_now")}}</b-link>
 
               <b-dropdown size="sm" variant="transperent">
                 <template #button-content>
@@ -108,33 +108,33 @@ export default {
       edit2: false,
       openNow: null,
       dayOfWorks: [
-        { day: "Monday", opening_time: null, closing_time: null, check: false },
+        { day: this.$t('home.Monday'), opening_time: null, closing_time: null, check: false },
         {
-          day: "Tuesday",
+          day: this.$t('home.Tuesday'),
           opening_time: null,
           closing_time: null,
           check: false,
         },
         {
-          day: "Wednesday",
+          day: this.$t('home.Wednesday'),
           opening_time: null,
           closing_time: null,
           check: false,
         },
         {
-          day: "Thursday",
+          day: this.$t('home.Thursday'),
           opening_time: null,
           closing_time: null,
           check: false,
         },
-        { day: "Friday", opening_time: null, closing_time: null, check: false },
+        { day: this.$t('home.Friday'), opening_time: null, closing_time: null, check: false },
         {
-          day: "Saturday",
+          day: this.$t('home.Saturday'),
           opening_time: null,
           closing_time: null,
           check: false,
         },
-        { day: "Sunday", opening_time: null, closing_time: null, check: false },
+        { day: this.$t('home.Sunday'), opening_time: null, closing_time: null, check: false },
       ],
 
       textToo:
@@ -192,7 +192,7 @@ export default {
     hoursOpen() {
       console.log();
       return this.openNow === null
-        ? "Nothing"
+        ? this.$t('general.Nothing')
         : this.openNow.opening_time +
             " AM - " +
             this.openNow.closing_time +

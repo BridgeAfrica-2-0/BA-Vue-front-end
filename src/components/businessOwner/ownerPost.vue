@@ -960,7 +960,7 @@ export default {
           this.flashMessage.show({
             status: "success",
             blockClass: "custom-block-class",
-            message: this.$t('businessowner.Post_has_been_created.'),
+            message: this.$t('businessowner.Post_has_been_created'),
           });
           this.isUploading = false;
           loader.hide();

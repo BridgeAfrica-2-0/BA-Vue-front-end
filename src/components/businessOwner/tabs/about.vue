@@ -9,13 +9,86 @@
       <div class="mb-3">
         <mapbox :coordinates="[business_about.lng, business_about.lat]" />
       </div>
-    
+      
       <b-card>
         <b-row v-if="loading">
+
+          <b-col>
+            <div
+                class="edit"
+                v-b-modal.biographyModal
+                @click="
+                  business_about_input = JSON.parse(
+                    JSON.stringify(business_about)
+                  )
+                "
+              >
+                <b-icon icon="pencil-fill" variant="primary" v-if="showPen != 'BusinessEditor'"></b-icon>
+              </div>
+            <h4 class="mb-4 text-center username">
+              {{ business_about.name }}
+            </h4>
+            <p class="text-justify text">
+              {{ business_about.location_description }}
+            </p>
+          </b-col>
+          <b-col>
+            <!-- <div class="edit">
+                <b-icon
+                  icon="pencil-fill"
+                  variant="primary"
+                  
+                ></b-icon>
+              </div> -->
+            <div
+                class="edit"
+                v-b-modal.biographyModal
+                @click="
+                  business_about_input = JSON.parse(
+                    JSON.stringify(business_about)
+                  )
+                "
+              >
+                <b-icon icon="pencil-fill" variant="primary"></b-icon>
+              </div>
+            <h4 class="mb-4 text-center username">
+              {{ business_about.name }}
+            </h4>
+            <p class="text-justify text">
+              {{ business_about.location_description }}
+            </p>
+          </b-col>
+          <b-col>
+            <!-- <div class="edit">
+                <b-icon
+                  icon="pencil-fill"
+                  variant="primary"
+                  
+                ></b-icon>
+              </div> -->
+            <div
+                class="edit"
+                v-b-modal.biographyModal
+                @click="
+                  business_about_input = JSON.parse(
+                    JSON.stringify(business_about)
+                  )
+                "
+              >
+                <b-icon icon="pencil-fill" variant="primary"></b-icon>
+              </div>
+            <h4 class="mb-4 text-center username">
+              {{ business_about.name }}
+            </h4>
+            <p class="text-justify text">
+              {{ business_about.location_description }}
+            </p>
+          </b-col>
           <b-col>
             <b-card-text>
               <div class="edit" v-b-modal.addressBusinessModal>
-                <b-icon
+                <b-icon 
+                v-if="showPen != 'BusinessEditor'"
                   icon="pencil-fill"
                   variant="primary"
                   @click="load"
@@ -27,20 +100,20 @@
                   icon="briefcase-fill"
                   class="primary icon-size"
                 ></b-icon>
-                <!-- <span
+                <span
                   v-for="category in business_about.category"
                   :key="category.id"
                   >{{ category.name }},
-                </span> -->
-                <span>{{ business_about.name }}</span>
+                </span>
+                <!-- <span>{{ business_about.name }}</span> -->
               </p>
               <p>
                 <b-icon icon="search" class="primary icon-size"></b-icon>
-                {{business_about.keywords[0]}}
+                {{business_about.name}}
               </p>
               <p>
                 <b-icon icon="geo-alt-fill" class="primary icon-size"></b-icon>
-                {{ business_about.city }}
+                {{ business_about.city }}, {{business_about.country[0].name}}
                 <!-- <span v-if="business_about.country">
                   {{ business_about.address }}, {{ business_about.city }},
                 {{ business_about.country[0].name }}
@@ -70,7 +143,11 @@
               </p>
               <p>
                 <b-icon icon="clock" class="primary icon-size"></b-icon>
+<<<<<<< HEAD
                 <b-link> {{$t("general.Open_now")}} </b-link>
+=======
+                <b-link> Open now  </b-link>
+>>>>>>> 9993637854310b1927170b193136e1881798fe15
                 <br />
                 <b-dropdown size="sm" variant="transperent">
                   <template #button-content>
@@ -88,25 +165,7 @@
               </p>
             </b-card-text>
           </b-col>
-          <b-col>
-            <!-- <div
-                class="edit"
-                v-b-modal.biographyModal
-                @click="
-                  business_about_input = JSON.parse(
-                    JSON.stringify(business_about)
-                  )
-                "
-              >
-                <b-icon icon="pencil-fill" variant="primary"></b-icon>
-              </div> -->
-            <h4 class="mb-4 text-center username">
-              {{ business_about.name }}
-            </h4>
-            <p class="text-justify text">
-              {{ business_about.location_description }}
-            </p>
-          </b-col>
+          
         </b-row>
       </b-card>
   
@@ -204,7 +263,7 @@
       </b-row> -->
     </b-card>
 
-    <!-- <b-modal
+    <b-modal
       id="biographyModal"
       hide-footer
       :title="$t('businessowner.Business_Biography')"
@@ -245,7 +304,7 @@
           {{ $t('businessowner.Modify') }}
         </b-button>
       </b-form>
-    </b-modal> -->
+    </b-modal>
     <b-modal
       id="addressBusinessModal"
       ref="addressBusinessModal"
@@ -254,7 +313,7 @@
       size="lg"
       @close="cancel"
       @keyup="validate('editAddress')"
-      >{{ business_about_input }}
+      
     >
       <b-form @submit.prevent="validate('editAddress')">
         <div class="form-group">
@@ -427,7 +486,7 @@
 
         <b-form-group
           id="input-group-2"
-          :label="$t('businessowner.Phone_Contact')"
+          label="secondary phone"
           label-for="input-2"
           label-size="sm"
         >
@@ -742,6 +801,9 @@ export default {
     this.editBusiness();
   },
   computed: {
+    showPen(){
+      return this.$route.name;
+    },
     hoursOpen() {
       console.log();
       return this.openNow === null

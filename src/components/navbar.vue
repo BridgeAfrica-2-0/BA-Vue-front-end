@@ -771,7 +771,7 @@ export default {
       const response = await this.$repository.notification.logOut();
       if (response.success) {
         loader.hide();
-        this.$router.push({ name: "home1" });
+        this.$router.push({ name: "login" });
         this.Logout();
       }
       loader.hide();

@@ -188,6 +188,7 @@ export default {
       return axios.post('neighborhoods', data).then(({ data }) => {
         console.log(data);
         commit('setLocality', data.data);
+        return true
       });
     },
 

@@ -4,7 +4,7 @@
       <span>
         <h6 class="title m-3">
           <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
-          <b> {{ $t('businessowner.COMMUNITY') }} </b> <span class="h4-color"> {{ nFormatter(total.total_community) }} </span>
+          <b> {{ $t('businessowner.COMMUNITY') }}</b> <span class="h4-color"> {{ nFormatter(total.total_community) }} </span>
         </h6>
       </span>
 

@@ -175,10 +175,6 @@
                     <b-icon-three-dots></b-icon-three-dots>
                   </template>
 
-
-
-    
-
                   <b-dropdown-item  @click="selectCover" 
                     > {{ $t('businessowner.Change_Cover') }}</b-dropdown-item
                   >
@@ -187,8 +183,7 @@
                   <b-dropdown-item
                     >Invite Friends On Bridge Africa</b-dropdown-item
                   >
-
- -->
+                -->
 
             <b-dropdown-item  @click="viewAs"  >{{ $t('businessowner.View_As') }}</b-dropdown-item> 
                 </b-dropdown>

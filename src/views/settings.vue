@@ -4,9 +4,9 @@
 
     <div class="container wahala">
       <b-row>
-        <b-col cols="12" md="12" lg="9" xl="9">
+        <b-col cols="12" md="12" lg="12" xl="12">
           <div>
-            <b-tabs pills :vertical="vertical" class="itzlala" nav-wrapper-class="w-15">
+            <b-tabs lazy pills :vertical="vertical" class="itzlala" nav-wrapper-class="w-15">
               <!-- NOTIFICATIONS TAB -->
               <b-tab :title="$t('settings.Notifications')">
                 <b-card-text class="mt-3">
@@ -245,7 +245,8 @@
               </b-tab>
 
               <b-tab :title="$t('settings.Account_Type') ">
-                <b-card class="mt-15 cent">
+                  <Website :profileId="getUserInfos.id"/>
+                <!-- <b-card class="mt-15 cent">
                   <div class="text-center">
                     <span class="username text-center mb-3">
                       <b> {{ $t("settings.Upgrade_Your_Business_Account") }} </b>
@@ -268,14 +269,14 @@
 
                     </b-button>
                   </div>
-                </b-card>
+                </b-card> -->
               </b-tab>
 
               <b-tab :title="$t('settings.Payment')">
                 <b-card-text class="mt-3 text cent">
-                  <h1 class="username">{{ $t("settings.Chose_Default_Payment_Method") }}</h1>
+                  <!-- <h1 class="username">{{ $t("settings.Chose_Default_Payment_Method") }}</h1>
 
-                  <!-- <b-form-group class="mb-0" v-slot="{ ariaDescribedby }">
+                   <b-form-group class="mb-0" v-slot="{ ariaDescribedby }">
                     <b-form-radio-group
                       class="pt-2 text"
                       :options="['MTN Mobile Money']"
@@ -289,14 +290,17 @@
                       :options="['Orange Money']"
                       :aria-describedby="ariaDescribedby"
                     ></b-form-radio-group>
-                  </b-form-group> -->
+                  </b-form-group> 
+
                   <b-form-group label="select one" v-slot="{ ariaDescribedby }"> 
                     <b-form-radio v-model="selected" :aria-describedby="ariaDescribedby" name="some-radios" value="MTN" class="my-2">MTN Mobile Money</b-form-radio>
                     <b-form-radio v-model="selected" :aria-describedby="ariaDescribedby" name="some-radios" value="ORANGE">Orange Money</b-form-radio>
                    <button class=" btn btn-primary my-4" @click="changePayment">{{$t("settings.Update")}}</button>
                   
-                  </b-form-group>
+                  </b-form-group> -->
                 </b-card-text>
+                  <Payment :profileId="getUserInfos.id"/>
+                
               </b-tab>
                  
               <b-tab :title="`${$t('settings.Password')}`">
@@ -394,13 +398,17 @@
 <script>
 import Navbar from '@/components/navbar';
 import Footer from '@/components/footer';
-import SettingsNotifications from '@/components/SettingsNotifications.vue'
+import SettingsNotifications from '@/components/SettingsNotifications.vue';
+import Website from "@/components/businessOwner/settings/website";
+import Payment from "@/components/businessOwner/settings/payment";
 
 export default {
   components: {
     Navbar,
     Footer,
-    SettingsNotifications
+    SettingsNotifications,
+    Website,
+    Payment
   },
   
 
@@ -409,7 +417,6 @@ export default {
       if (this.size > 992) return true;
       return false;
     },
-
     getUserInfos(){
       return this.$store.state.profileSettingsEdit.userInfos;
     },
@@ -424,7 +431,6 @@ export default {
       })
        return country ;
     },
-
     region(){
 
       let region =[];

@@ -325,7 +325,8 @@ export default {
     },
 
     Tcommunity({ commit }, id) {
-
+      console.log("Tcommunity")
+      console.log("TcommunityId: ", id)
       return axios
         .get('profile/total/community?id=' + id)
         .then(({ data }) => {

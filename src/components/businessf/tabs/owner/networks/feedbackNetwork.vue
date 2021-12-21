@@ -1,6 +1,5 @@
 <template>
   <div class="mt-3 container">
-    <b-row> </b-row>
     <b-row>
       <b-col cols="12">
         <span class="float-right">
@@ -16,7 +15,7 @@
               <b-icon-filter></b-icon-filter><span class="sr-only">{{ $t('network.Search') }}</span>
             </template>
             <p class="font-weight-bolder px-3 m-0">{{ $t('network.Feedbacks_Type') }}</p>
-            <b-dropdown-item @click="applyFilter('')">{{ $t('network.Any') }}</b-dropdown-item>
+            <b-dropdown-item @click="applyFilter('0')">{{ $t('network.Any') }}</b-dropdown-item>
             <b-dropdown-item @click="applyFilter('Improvement')">{{ $t('network.Suggestion_For_Improvement') }}</b-dropdown-item>
             <b-dropdown-item @click="applyFilter('Complain')">{{ $t('network.Complain') }}</b-dropdown-item>
           </b-dropdown>
@@ -83,7 +82,7 @@
       </b-col>
     </b-row>
 
-    <!--  -->
+    
     
   </div>
 </template>
@@ -100,17 +99,17 @@ export default {
       filter: "0",
       filterData: false,
       loading: false,
-      currentPage: 0,
+      currentPage: 1,
       currentIndex: -1,
       feedbacks: [],
       options: [
-        { value: "Improvement", text: "Suggestion for Improvement" },
-        { value: "Complaints", text: "Complaints" }
+        { value: "Improvement", text: this.$t('_for_Improvement') },
+        { value: "Complaints", text: this.$t('Complaints') }
       ],
       filters: [
         { value: "0", text: "Any" },
-        { value: "Improvement", text: "Suggestion for Improvement" },
-        { value: "Complaints", text: "Complaints" }
+        { value: "Improvement", text: this.$t('general.Suggestion_for_Improvement')},
+        { value: "Complaints", text: this.$t('general.Complaints') }
       ],
       feedbackForm: {
         title: "Improvement",
@@ -144,7 +143,7 @@ export default {
       console.log("searching...");
       console.log(this.filterData);
       this.$nextTick(() => {
-        this.currentPage = 0;
+        this.currentPage = 1;
         this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
       });
     },
@@ -153,7 +152,6 @@ export default {
       console.log("loop");
       const data = this.getRequestDatas(this.filterData);
       console.log('keyword: '+data);
-      console.log('URL: '+"network/"+this.url+"/feedbacks/"+this.currentPage);
       let formData = new FormData();
       formData.append('keyword', data);
       // this.$store
@@ -161,27 +159,27 @@ export default {
       //     path: this.url+"/members/list/"+this.page,
       //     formData: formData
       //   })
+      console.log("network/"+this.url+"/feedbacks/"+this.currentPage)
       this.axios
         .post("network/"+this.url+"/feedbacks/"+this.currentPage, formData)
         .then(({ data }) => {
         console.log(data.data);
-         for (let i in data.data) {
-            this.feedbacks.push(data.data[i])
-            console.log(i,"----")
-         }
-         console.log(this.feedbacks)
         console.log(this.currentPage);
-        //  this.feedbacks.push(data.data);
-        if (data.data.length) {
-          console.log("push new data");
-          this.currentPage += 1;
-          console.log(this.currentPage);
+        console.log(Object.values(data.data));
+        let object = Object.values(data.data);
+        if (object.length) {
+          console.log("Pushing data");
+          object.map((item) => {
+            this.feedbacks.push(item);
+            console.log(item);
+          })
           console.log(...data.data);
           // this.feedbacks.push(...data.data);
+          this.currentPage += 1;
+          console.log(this.currentPage);
           this.loading = false;
           $state.loaded();
         } else {
-          console.log("no more data");
           this.loading = false;
           $state.complete();
         }

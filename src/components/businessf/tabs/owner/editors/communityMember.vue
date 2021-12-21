@@ -32,7 +32,7 @@
                       >
                         <h6 class="follower m-15">
                           {{ member.communityNum }}
-                          Communit
+                          Community
                         </h6>
                       </b-col>
                       <b-col

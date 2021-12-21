@@ -54,7 +54,7 @@
           v-if="proccesEdit"
         >
           <textarea-autosize
-              placeholder="Reply comment"
+              :placeholder="$t('general.Reply_comment')"
               class="comment py-2 pr-5 pl-3"
               type="text"
               style="background: transparent"

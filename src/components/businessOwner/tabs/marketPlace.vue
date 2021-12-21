@@ -314,7 +314,7 @@ export default {
       archive: false,
      businessId:null,
       market: true,
-      my_orders: "orders",
+      my_orders: this.$t('businessowner.orders'),
       selectedImagePrv: "",
 
       showModal: false,

@@ -73,7 +73,7 @@ export default {
 .geocoder {
   position: absolute;
   z-index: 1;
-  width: 72vw;
+  width: 74vw;
   left: 50%;
   margin-left: -49.5%;
   top: 10px;
@@ -82,7 +82,7 @@ export default {
   min-width: 100%;
 }
 #map {
-  /* margin-top: 75px; */
+  margin-top: 65px;
 }
 #map {
   height: 100%;

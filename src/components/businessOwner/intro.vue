@@ -13,18 +13,19 @@
       </h6>
 
       <b-card-text>
-        <p class="d-flex justify-content-start align-items-start">
+        <p>
           <b-icon icon="briefcase-fill" class="primary icon-size"></b-icon>
-          <!-- <span v-for="cat in business_intro.category" :key="cat.id">
-            {{ cat.name }}
-          </span> -->
-        {{business_intro.name}}
+          <span v-for="cat in business_intro.category" :key="cat.id">
+            {{ cat.name }},
+          </span>
+        <!-- {{business_intro.name}} -->
         </p>
         <p class="d-flex justify-content-start align-items-start">
           <b-icon icon="search" class="primary icon-size"></b-icon>
-          <span v-for="(keyword, index) in business_intro.keywords" :key="index"
+          <!-- <span v-for="(keyword, index) in business_intro.keywords" :key="index"
             >{{ keyword }},
-          </span>
+          </span> -->
+          <span> {{business_intro.name}} </span>
         </p>
         <p class="d-flex justify-content-start align-items-start">
           <b-icon icon="geo-alt-fill" class="primary icon-size"></b-icon>

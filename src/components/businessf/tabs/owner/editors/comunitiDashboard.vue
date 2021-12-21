@@ -18,7 +18,7 @@
         <b-tab  active>
 
          <template slot="title"  >
-             People  <span class="spa-color">  7K   </span>
+              {{$t("general.People")}}  <span class="spa-color">  7K   </span>
             </template>
 
 
@@ -32,7 +32,7 @@
         <b-tab  active>
           
             <template slot="title"  >
-             Followers  <span class="spa-color">  7K   </span>
+            {{$t("general.Followers")}}   <span class="spa-color">  7K   </span>
             </template>
 
          
@@ -45,7 +45,7 @@
         <b-tab > 
 
             <template slot="title"  >
-             Following  <span class="spa-color">  7K   </span>
+             {{$t("general.Following")}}  <span class="spa-color">  7K   </span>
             </template>
 
       <div class="s-comcard">    <b-row>  <b-col md="6" sm="12">   <div >  <People />    </div >  </b-col> <b-col md="6" sm="12">   <div > <People />    </div >  </b-col>    </b-row>   </div>
@@ -64,7 +64,7 @@
         <b-tab >
 
             <template slot="title"  >
-             Businesses  <span class="spa-color">  7K   </span>
+             {{$t("general.Businesses")}}  <span class="spa-color">  7K   </span>
             </template>
         
         
@@ -73,7 +73,7 @@
         <b-tab  active>
 
          <template slot="title"  >
-             Followers  <span class="spa-color">  7K   </span>
+             {{$t("general.Followers")}}  <span class="spa-color">  7K   </span>
             </template>
         
          
@@ -89,7 +89,7 @@
         
 
             <template slot="title"  >
-             Following  <span class="spa-color">  7K   </span>
+             {{$t("general.Following")}}  <span class="spa-color">  7K   </span>
             </template>
         
         <div class="s-comcard">    <b-row>  <b-col md="6" sm="12">   <div >  <Business />    </div >  </b-col> <b-col md="6" sm="12">   <div > <Business />    </div >  </b-col>    </b-row>   </div>

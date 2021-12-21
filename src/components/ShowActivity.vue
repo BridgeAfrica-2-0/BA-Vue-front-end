@@ -8,7 +8,7 @@
       <b-card-header header-tag="header" class="p-1" role="tab">
         <p block v-b-toggle.accordion-1 variant="info">
           <b-icon :icon="openBusiness ? 'arrow-down' : 'arrow-up'"></b-icon>
-          Business
+          {{$t("general.Business")}}
         </p>
       </b-card-header>
       <b-collapse id="accordion-1" accordion="my-accordion" role="tabpanel">
@@ -50,7 +50,7 @@
       <b-card-header header-tag="header" class="p-1" role="tab">
         <p block v-b-toggle.accordion-2 variant="info">
           <b-icon :icon="openNetwork ? 'arrow-down' : 'arrow-up'"></b-icon>
-          Network
+          {{$t("general.Network")}}
         </p>
       </b-card-header>
       <b-collapse id="accordion-2" accordion="my-accordion" role="tabpanel">
@@ -207,8 +207,8 @@ export default {
             time: 5000,
             message:
               "business" == type
-                ? `You are now connected as ${item.business_name}`
-                : `You are connected as ${item.network_name}`,
+                ? `{{$t("general.You_are_now_connected_as")}} ${item.business_name}`
+                : `{{$t("general.You_are_connected_as")}} ${item.network_name}`,
           });
 
           this.auth(this.strategy[type].newType(item));

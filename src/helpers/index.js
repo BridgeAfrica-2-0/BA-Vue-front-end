@@ -26,6 +26,7 @@ export const fromNow = (dateTime) => {
   const newDate = moment(data, "YYYYMMDD")
   return moment(dateTime).fromNow()
 }
+//export const fromNow = (dateTime) => moment(dateTime).fromNow()
 
 export const formatNumber = (num) => {
   if (num >= 1000000000) {

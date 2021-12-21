@@ -48,8 +48,8 @@
           ><template #button-content>
             <b-icon @click="showEdit" icon="three-dots-vertical"></b-icon>
             </template>
-            <b-dropdown-item-button v-b-modal="`modal-${product.id}`">Edit</b-dropdown-item-button>
-            <b-dropdown-item-button v-b-modal="`modal-D${product.id}`">Delete</b-dropdown-item-button>
+            <b-dropdown-item-button v-b-modal="`modal-${product.id}`">{{ $t('businessowner.Edit') }}</b-dropdown-item-button>
+            <b-dropdown-item-button v-b-modal="`modal-D${product.id}`">{{ $t('businessowner.Delete') }}</b-dropdown-item-button>
           </b-dropdown>
         </b-col>
       </b-row>

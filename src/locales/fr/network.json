@@ -63,7 +63,7 @@
     "Members": "Membres",
     "Media": "Média",
     "Posts": "Publications",
-    "Complain": "Se plaindre",
+    "Complain": "Plaintes",
     "Suggestion_For_Improvement": "Suggestion d'amélioration",
     "Any": "Tout",
     "Feedbacks_Type": "Type de commentaire",
@@ -123,7 +123,7 @@
     "Network": "Réseau",
     "Network_Admins": "Administrateurs de réseau",
     "Remove_as_Admin": "Retirer comme administrateur",
-    "Remove_From_Networks": "Retirer des réseaux",
+    "Remove_From_Networks": "Retirer du réseaux",
     "No_Result_On_Admins": "Aucun résultats sur administrateurs",
     "Bussiness": "Entreprises",
     "All_Members": "Tout les membres",
@@ -303,7 +303,8 @@
 
     "Selected":"Sélectionné",
     "All_Selected":"Tous sélectionnés",
-    "No_notifications_to_show":"Aucune notification à afficher"
+    "No_notifications_to_show":"Aucune notification à afficher",
+    "about":"À propos de"
 
 
 }

@@ -315,7 +315,7 @@ export default {
       archive: false,
      businessId:null,
       market: true,
-      my_orders: "orders",
+      my_orders: this.$t('businessowner.orders'),
       selectedImagePrv: "",
 
       showModal: false,
@@ -446,7 +446,7 @@ export default {
           console.log({err:err});
           this.load = false;
           (this.success = true), (this.val = "danger");
-          this.msg = this.$t('businessowner.Something_went_wrong');
+          this.msg = "Something went wrong";
 
           setTimeout(() => {
             this.success = false;

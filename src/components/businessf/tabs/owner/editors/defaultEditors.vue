@@ -1,36 +1,35 @@
 <template>
   <div class="t-left yolo">
-    <b-tabs content-class="" fill pills>
+    <b-tabs content-class="" lazy fill pills>
       <b-tab active>
         <template slot="title" class="tt-color">
-          <h6 class="h6">Posts</h6>
+          <h6 class="h6">{{$t("general.Posts")}}</h6>
         </template>
-
-        <post-network></post-network>
+        <post-network @changeSelected="changeSelected"></post-network>
       </b-tab>
       <b-tab>
         <template slot="title" class="tt-color">
-          <h6 class="h6">Media</h6>
+          <h6 class="h6">{{$t("general.Media")}}</h6>
         </template>
-        <media-network :type="'network'" :isEditor="false"></media-network>
+        <media-network :type="'network'" ></media-network>
       </b-tab>
       <b-tab>
         <template slot="title" class="tt-color">
-          <h6 class="h6">Community</h6>
+          <h6 class="h6">{{$t("general.Community")}}</h6>
         </template>
         <member-network></member-network>
       </b-tab>
 
       <b-tab>
         <template slot="title" class="tt-color">
-          <h6 class="h6">Members</h6>
+          <h6 class="h6">{{$t("general.Members")}}</h6>
         </template>
         <Members> </Members>
       </b-tab>
 
       <b-tab>
         <template slot="title">
-          <h6 class="h6">Feedback</h6>
+          <h6 class="h6">{{$t("general.Feedback")}}</h6>
         </template>
         <feedback-network></feedback-network>
       </b-tab>
@@ -41,7 +40,7 @@
 <script>
 import FeedbackNetwork from '@/components/businessf/tabs/owner/editors/feedbackEditor';
 import MediaNetwork from '@/components/owner/tabs/media';
-import MemberNetwork from '@/components/businessf/tabs/owner/editors/memberEditor';
+import MemberNetwork from '@/components/businessf/tabs/owner/networks/memberNetwork';
 
 import Members from '@/components/businessf/tabs/owner/editors/member';
 
@@ -56,6 +55,12 @@ export default {
     Members,
     FeedbackNetwork,
   },
+  methods: {
+    changeSelected(){
+      console.log("defaultNetwork")
+      this.$emit('changeSelected')
+    }
+  }
 };
 </script>
 

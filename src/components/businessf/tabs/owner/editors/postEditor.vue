@@ -56,14 +56,14 @@
                 class="post-btn"
               >
                 <fas-icon class="icons" :icon="['fas', 'file']" size="lg" />
-                <span class="username"> Attach File </span>
+                <span class="username"> {{$t('general.Attach_File')}} </span>
               </b-button>
             </b-col>
             <!-- Post-->
             <b-col cols="3" class="text-right p-0 m-0">
-              <b-button title="Add Hyperlink" size="sm" variant="outline-primary" @click="createPost_" class="post-btn">
+              <b-button :title="$t('general.Add_Hyperlink')" size="sm" variant="outline-primary" @click="createPost_" class="post-btn">
                 <fas-icon class="icons" :icon="['fas', 'paper-plane']" size="lg" />
-                <span class="username"> Post </span>
+                <span class="username"> {{$t('general.Post')}} </span>
               </b-button>
             </b-col>
           </b-row>
@@ -71,10 +71,10 @@
       </b-row>
       <div class="pending-post-view pt-2 mt-3">
         <p>
-          Your 3 Post(s) are pending for approval.&nbsp;&nbsp;&nbsp;&nbsp;<a
+          {{$t('general.Your')}} 3 {{$t('general.Post_are_pending_for_approval')}}.&nbsp;&nbsp;&nbsp;&nbsp;<a
             @click="this.$router.push({ name: '/pendingPost' })"
             style="color: #e75c18; text-decoration: underline"
-            >View All</a
+            >{{$t('general.View_All')}}</a
           >
         </p>
       </div>
@@ -87,11 +87,17 @@
         <!-- <b-button v-b-modal.modal-xl variant="primary">xl modal</b-button> -->
         <!-- Modal For Create Post User-->
         <!--   edit array   -->
-        <b-modal id="modal-edit" ref="modal-edit" centered hide-footer title="Update Post" @hidden="resetPostData">
+        <b-modal id="modal-edit" ref="modal-edit" centered hide-footer :title="$t('general.Update_Post')" @hidden="resetPostData">
           <b-row ref="loader">
             <b-col cols="1" class="m-0 p-0"></b-col>
             <b-col cols="2" class="m-0 p-0">
-              <b-avatar class="d-inline-block avat" variant="primary" :src="imageProfile"></b-avatar>
+              <b-avatar 
+                class="d-inline-block avat" 
+                variant="primary" 
+                :square="'user' == profile.user_type ? false : true"
+                :src="profile.profile_picture">
+                
+              </b-avatar>
             </b-col>
             <b-col cols="9" class="pt-2" style="margin-left: -5px">
               <h5 class="m-0 font-weight-bolder">{{ profileNamePost }}</h5>
@@ -105,7 +111,7 @@
                 <b-form-textarea
                   id="textarea-small"
                   class="mb-2 border-none"
-                  placeholder="Post a network update"
+                  :placeholder="$t('general.Post_a_network_update')"
                   v-model="edit_description"
                   :class="{
                     'is-valid': createPost.postNetworkUpdate !== '',
@@ -116,7 +122,7 @@
                 <i></i>
               </div>
               <div class="bordder">
-                <span class="float-left"> Add to Your Post </span>
+                <span class="float-left"> {{$t('general.Add_to_Your_Post')}} </span>
                 <span class="float-right">
                   <b-button-group size="sm" class="">
                     <input id="video" type="file" hidden />
@@ -149,7 +155,7 @@
               <br />
               <div v-for="hyperlink in createPost.hyperlinks" :key="hyperlink.fileName" class="bordder">
                 <span class="float-left"> {{ hyperlink.fileName }} </span>
-                <span class="float-right" @click="deleteItem(hyperlink.fileName)">delete </span>
+                <span class="float-right" @click="deleteItem(hyperlink.fileName)">{{$t('general.delete')}} </span>
               </div>
               <div v-for="(movie, index) in edit_image" :key="movie.id" class="">
                 <div id="preview">
@@ -172,7 +178,7 @@
 
               <span>
                 <b-button @click="updatePost" variant="primary" block :disabled="loading"
-                  ><b-icon icon="cursor-fill" variant="primary"></b-icon>Publish</b-button
+                  ><b-icon icon="cursor-fill" variant="primary"></b-icon>{{$t('general.Publish')}}</b-button
                 >
               </span>
             </b-col>
@@ -184,10 +190,16 @@
           <b-row ref="loader">
             <b-col cols="1" class="m-0 p-0"></b-col>
             <b-col cols="2" class="m-0 p-0">
-              <b-avatar class="d-inline-block avat" variant="primary" :src="imageProfile"></b-avatar>
+              <b-avatar 
+                class="d-inline-block avat" 
+                variant="primary" 
+                :square="'user' == profile.user_type ? false : true"
+                :src="profile.profile_picture">
+                
+              </b-avatar>
             </b-col>
             <b-col cols="9" class="pt-2" style="margin-left: -5px">
-              <h5 class="m-0 font-weight-bolder">{{ profileNamePost }} profileNamePost</h5>
+              <h5 class="m-0 font-weight-bolder">{{ profileNamePost }}</h5>
             </b-col>
           </b-row>
           <b-row>
@@ -209,7 +221,7 @@
                 <i></i>
               </div>
               <div class="bordder">
-                <span class="float-left"> Add to Your Post </span>
+                <span class="float-left"> {{$t('general.Add_to_Your_Post')}} </span>
                 <span class="float-right">
                   <b-button-group size="sm" class="">
                     <input id="video" type="file" hidden />
@@ -257,7 +269,7 @@
               <br />
               <span>
                 <b-button @click="submitPost" variant="primary" block :disabled="loading"
-                  ><b-icon icon="cursor-fill" variant="primary"></b-icon> Publish</b-button
+                  ><b-icon icon="cursor-fill" variant="primary"></b-icon> {{$t('general.Publish')}}</b-button
                 >
               </span>
             </b-col>
@@ -267,7 +279,6 @@
       </div>
     </div>
     <Post
-      
       v-for="(item, index) in owner_post"
       :key="index"
       :post="item"
@@ -283,6 +294,7 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
 import { AllPostFeatureMixin } from '@/mixins';
 import Post from '@/components/businessOwner/ownerPostComponent';
 export default {
@@ -316,9 +328,10 @@ export default {
     };
   },
   computed: {
-    imageProfile() {
-      return 'yoo';
-    },
+    
+    ...mapGetters({
+      profile: "auth/profilConnected"
+    }),
 
     business_logo() {
       return this.$store.state.networkProfile.networkInfo.logo_path;
@@ -327,10 +340,11 @@ export default {
       return this.$store.state.networkProfile.ownerPost;
     },
     profileNamePost() {
-      return 'yoo';
+      return this.profile.name;
     },
   },
-  mounted() {
+  
+  created() {
     this.url = this.$route.params.id;
   },
 
@@ -346,6 +360,10 @@ export default {
         return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
       }
       return num;
+    },
+    editPage() {
+      console.log("editPage");
+      this.$emit('changeSelected');
     },
     infiniteHandler($state) {
       this.axios
@@ -571,7 +589,7 @@ export default {
       //formData2.append("media", this.createPost.hyperlinks);
       formData2.append('content', this.createPost.postNetworkUpdate);
       this.axios
-        .post('network/post/create/' + this.url, formData2, {
+        .post('network/editor-post/create/' + this.url, formData2, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
@@ -616,8 +634,6 @@ export default {
       this.$refs['modal-3'].hide();
     },
     resetPostData() {
-      console.log('Test');
-      console.log('Reinitialisation des donnees du POST');
       if (!this.isSubmitted) {
         this.createPost.hyperlinks = [];
         this.createPost.movies = [];

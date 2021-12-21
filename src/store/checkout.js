@@ -63,6 +63,16 @@ const actions = {
       console.log({error:error})
     })
   },
+
+    async next({ commit }, url) {
+    await axios.get(url).then((response) => {
+      console.log(response)
+      commit('setCart', response.data)
+    }).catch((error) => {
+      console.log({error:error})
+    })
+  },
+
   async getBussiness({ commit }, id) {
     await axios.get(`profile/businessInfo/${id}`).then((response) => {
       commit("setBuisiness", response.data)

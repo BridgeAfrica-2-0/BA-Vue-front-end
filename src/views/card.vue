@@ -25,16 +25,14 @@
           </div>
         </div>
         <div v-if="!loading">
-          <div v-for="(cart_item, i) in orderForCurrentPage" :key="i">
+          <div v-for="(cart_item, i) in cart.data" :key="i"> 
+           
             <div class="row ">
               <div class="col-4 col-md-3">
                 <splide :options="{ rewind: true }" class="r-img">
                   <splide-slide>
                     <img
-                      :src="
-                        'https://edson.maxinemoffett.com' +
-                          cart_item.product_picture
-                      "
+                      :src="cart_item.product_picture"
                       class="r-img"
                     />
                   </splide-slide>
@@ -50,6 +48,7 @@
                       v-b-tooltip.hover.top="cart_item.product_name"
                     >
                       <!-- {{ cart_item.product_name.substring(0, 12) + "..." }} -->
+                       {{cart_item.product_name}} 
                     </h3>
                   </div>
                 </div>
@@ -70,9 +69,17 @@
                       class="h3 cursor"
                       v-b-tooltip.hover.top="cart_item.product_description"
                     >
-                      <!-- {{
-                        cart_item.product_description.substring(0, 118) + ".."
-                      }} -->
+                   
+
+                         <read-more
+                        more-str="read more"
+                        class="readmore"
+                        :text="cart_item.product_description"
+                        link="#"
+                        less-str="read less"
+                        :max-chars="100"
+                      >
+                      </read-more>
                     </h3>
                   </div>
                 </div>
@@ -94,7 +101,7 @@
                   </div>
                   <div class="col p-0 text-success  text-center">
                     <h3 class="marg3">
-                      {{ cart_item.product_price * cart_item.quantity + 1000 }}
+                      {{ cart_item.product_price * cart_item.quantity }}
                       XAF
                     </h3>
                   </div>
@@ -112,26 +119,36 @@
           </div>
 
           <div class="d-flex justify-content-center">
-            <b-pagination
-              v-model="currentPage"
-              pills
-              aria-controls="orderList"
-              :per-page="per_page"
-              :total-rows="rowsOrder"
-            ></b-pagination>
+      
+
+        <button class="btn btncolor shadow"><h3>{{$t("general.update_cart")}}</h3></button>
+
+           
+              <b-pagination
+      v-if="cart.next || cart.previous"
+      v-model="currentPage"
+      pills
+      :total-rows="cart.total"
+      :per-page="cart.per_page"
+      aria-controls="my-table"
+      @change="changePage"
+      align="center"
+    ></b-pagination>
+
+
           </div>
         </div>
       </div>
       <div class=" line"></div>
       <div class="col-12 col-md-3 color">
-        <h3 class="my-2">{{$t("general.ORDER_SUMMARY")}}</h3>
+        <h3 class="my-2">{{$t("general.cart_totals")}}</h3>
         <hr />
         <div class="row">
           <div class="col">
-            <h3>{{$t("general.ITEMS")}} {{ rowsOrder }}</h3>
+            <h3>{{$t("general.ITEMS")}} {{ cart.total }}</h3>
           </div>
           <div class="col">
-            <h3>{{ getTotalPrice }} XAF</h3>
+            <h3> {{$t("general.sub_totals")}}   {{ getTotalPrice }} XAF</h3>
           </div>
         </div>
         <br />
@@ -182,14 +199,14 @@ export default {
   created() {
     this.getCartItems();
   },
-  watch: {
-    currentPage: function(val) {
-      this.orderForCurrentPage = this.cart["data"].slice(
-        (val - 1) * this.per_page,
-        val * this.per_page
-      );
-    },
-  },
+  // watch: {
+  //   currentPage: function(val) {
+  //     this.orderForCurrentPage = this.cart["data"].slice(
+  //       (val - 1) * this.per_page,
+  //       val * this.per_page
+  //     );
+  //   },
+  // },
   computed: {
     rowsOrder() {
       let rows = 1;
@@ -209,10 +226,33 @@ export default {
     },
   },
   methods: {
+
+    
+        changePage(value) {
+      console.log("next page loading ");
+      
+      this.currentPage = value;
+     let url="ckeckout-cart&page="+value;    
+
+      this.$store
+        .dispatch("checkout/next", url).then((res) => {
+          console.log(res);
+          this.loader=false;
+          
+        })
+       
+        .catch((err) => {
+        
+          console.error(err);
+        });
+    },
+
+
+
     async getCartItems() {
       this.loading = true;
       await this.$store
-        .dispatch("checkout/getCart")
+        .dispatch("checkout/getCart") 
         .then(() => {
           this.loading = false;
           this.error = false;

@@ -143,11 +143,7 @@
               </p>
               <p>
                 <b-icon icon="clock" class="primary icon-size"></b-icon>
-<<<<<<< HEAD
                 <b-link> {{$t("general.Open_now")}} </b-link>
-=======
-                <b-link> Open now  </b-link>
->>>>>>> 9993637854310b1927170b193136e1881798fe15
                 <br />
                 <b-dropdown size="sm" variant="transperent">
                   <template #button-content>

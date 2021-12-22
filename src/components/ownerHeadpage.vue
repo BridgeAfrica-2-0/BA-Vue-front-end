@@ -380,7 +380,7 @@ export default {
       });
 
       this.axios
-        .get("user/remove-cover")
+        .delete("user/profile-picture")
         .then((response) => {
           console.log(response);
           this.$store
@@ -420,7 +420,7 @@ export default {
       });
 
       this.axios
-        .get("user/upload-cover")
+        .delete("user/cover")
         .then((response) => {
           console.log(response);
           this.$store

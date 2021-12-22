@@ -2,7 +2,7 @@
   <div class="lalala">
     <div class=" border mt-2 ">
       <span>
-        <h6 class="title m-3"> {{total}}
+        <h6 class="title m-3">
           <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
           <b> COMMUNITY</b> <span class="h4-color"> {{ nFormatter(total.total_community) }} </span>
         </h6>
@@ -124,8 +124,11 @@ export default {
   },
 
   computed: {
-    total() {
-      return this.$store.state.profile.Tcommunity;
+    // total() {
+    //   return this.$store.state.profile.Tcommunity;
+    // },
+      total() {
+      return this.$store.state.follower.Tcommunity;
     },
 
     business() {

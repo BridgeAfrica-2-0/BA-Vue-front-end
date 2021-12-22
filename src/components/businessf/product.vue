@@ -74,13 +74,13 @@
             <div class="d-inline-flex float-right  mt-2">
               <div class=" " >
                   <b-button variant="primary"
-                  @click="buyNow" 
+                  @click="buyNow(product)" 
                   ><span>{{$t("general.Buy_Now")}}</span>
                  </b-button>
               </div>
              
             <div class=" ml-2 ">
-              <b-button variant="primary" @click="handleAddToCard"
+              <b-button variant="primary" @click="handleAddToCard(product)"
               ><span>{{$t("general.Add_to_Cart")}}</span>
              </b-button>
             </div>
@@ -403,6 +403,8 @@ export default {
      */
 
 
+    
+
 
     
         changePage(value) {
@@ -420,8 +422,7 @@ export default {
         })
        
         .catch((err) => {
-          this.$store.commit("business/setLoading", true);
-          this.total = this.business.total;
+         
           console.error(err);
         });
     },
@@ -455,8 +456,8 @@ export default {
       this.viewProduct = false;
     },
 
-    buyNow(){
-      this.handleAddToCard();
+    buyNow(product){
+      this.handleAddToCard(product);
       this.$router.push({name: 'payment'})
     //   var dataf = [];
     //  var data =   {
@@ -483,12 +484,14 @@ export default {
     //   console.log("buy now", dataf)
     },
 
-    handleAddToCard() {
+    handleAddToCard(product) {
+
+       this.product=product;
       console.log("add to card ", this.product.id);
       this.$store
         .dispatch("cart/addToCart", this.product.id)
         .then((response) => {
-          console.log("----", this.getStatus);
+          
 
           this.flashMessage.show({
             status: "success",

@@ -67,7 +67,7 @@
         </b-col>
       </b-row>
     </b-container>
-    <FlashMessage />
+
   </div>
 </template>
 <script>

@@ -141,7 +141,7 @@
                           <input
                             v-model="searchQuery"
                             class="form-control input-background"
-                            :placeholder="`Search chat list ${tabIndex}`"
+                            :placeholder="this.$t('general.Search_chat_list')"
                             @keypress.enter="
                               getChatList({
                                 type: 'user',
@@ -226,7 +226,7 @@
                           <input
                             v-model="searchQuery"
                             class="form-control input-background"
-                            :placeholder="`Search chat list ${tabIndex}`"
+                            :placeholder="$t('general.Search_chat_list')" 
                             @keypress.enter="
                               getChatList({
                                 type: 'business',
@@ -311,7 +311,7 @@
                           <input
                             v-model="searchQuery"
                             class="form-control input-background"
-                            :placeholder="`Search chat list ${tabIndex}`"
+                            :placeholder="$t('general.Search_chat_list')"
                             @keypress.enter="
                               getChatList({
                                 type: 'network',
@@ -385,7 +385,7 @@
                       <!-- End Chats -->
                     </b-tab>
                     <b-tab
-                      title="Groups"
+                      :title="$t('general.Groups')"
                       @click="getChatList({ type: 'group' })"
                     >
                       <!-- Group Chats Available  -->
@@ -394,7 +394,7 @@
                           <input
                             v-model="searchQuery"
                             class="form-control input-background"
-                            :placeholder="`Search chat list ${tabIndex}`"
+                            :placeholder="$t('general.Search_chat_list')" 
                             @keypress.enter="
                               getChatList({
                                 type: 'group',
@@ -1059,7 +1059,7 @@
                                 </tr>
                               </div>
                               <hr />
-                              <h5>Business</h5>
+                              <h5>{{ $t("general.Business") }}</h5>
                               <div v-if="allBusiness">
                                 <tr
                                   v-for="(biz, index) in allBusiness"
@@ -1093,7 +1093,7 @@
                                 </tr>
                               </div>
                               <hr />
-                              <h5>Network</h5>
+                              <h5>{{ $t("general.Network") }}</h5>
                               <div v-if="allNetworks">
                                 <tr
                                   v-for="(biz, index) in allNetworks"
@@ -1127,7 +1127,7 @@
                                 </tr>
                               </div>
                               <hr />
-                              <h5>Editors</h5>
+                              <h5>{{ $t("general.Editors") }}</h5>
                               <div v-if="allEditors">
                                 <tr
                                   v-for="(biz, index) in allEditors"
@@ -1162,7 +1162,7 @@
                               </div>
                               <hr />
                             </b-tab>
-                            <b-tab title="People" @click="getUsers()">
+                            <b-tab :title="$t('general.People')" @click="getUsers()">
                               <b-row>
                                 <b-col>
                                   <b-card>
@@ -1175,7 +1175,7 @@
                                           value="accepted"
                                           @change="selectedAllMulty"
                                         >
-                                          All
+                                          {{ $t("general.All") }}
                                         </b-form-checkbox>
                                       </b-col>
                                       <b-col>
@@ -1187,7 +1187,7 @@
                                           :unchecked-value="false"
                                           @change="selectedFollowings"
                                         >
-                                          Following
+                                          {{ $t("general.Following") }}
                                         </b-form-checkbox>
                                       </b-col>
                                       <b-col>
@@ -1199,7 +1199,7 @@
                                           :unchecked-value="false"
                                           @change="selectedFollowers"
                                         >
-                                          Follower
+                                          {{ $t("general.Follower") }}
                                         </b-form-checkbox>
                                       </b-col>
                                     </b-row>
@@ -1245,11 +1245,11 @@
                                   </td>
                                 </tr>
                               </div>
-                              <h2 v-else>No data</h2>
+                              <h2 v-else>{{ $t("general.No_data") }}</h2>
 
                               <!-- End Chats -->
                             </b-tab>
-                            <b-tab title="Business" @click="getBizs()">
+                            <b-tab :title=" $t('general.Business')" @click="getBizs()">
                               <b-row>
                                 <b-col>
                                   <b-card>
@@ -1262,7 +1262,7 @@
                                           value="accepted"
                                           @change="selectedAllMulty"
                                         >
-                                          All
+                                          {{ $t("general.All") }}
                                         </b-form-checkbox>
                                       </b-col>
                                       <b-col>
@@ -1274,7 +1274,7 @@
                                           :unchecked-value="false"
                                           @change="selectedFollowings"
                                         >
-                                          Following
+                                          {{ $t("general.Following") }}
                                         </b-form-checkbox>
                                       </b-col>
                                       <b-col>
@@ -1286,7 +1286,7 @@
                                           :unchecked-value="false"
                                           @change="selectedFollowers"
                                         >
-                                          Follower
+                                          {{ $t("general.Follower") }}
                                         </b-form-checkbox>
                                       </b-col>
                                     </b-row>
@@ -1337,7 +1337,7 @@
                                   </td>
                                 </tr>
                               </div>
-                              <h2 v-else>No Business</h2>
+                              <h2 v-else>{{ $t("general.No_Business") }}</h2>
 
                               <!-- End Chats -->
                             </b-tab>
@@ -1354,7 +1354,7 @@
                                           value="accepted"
                                           @change="selectedAllMulty"
                                         >
-                                          All
+                                          {{ $t("general.All") }}
                                         </b-form-checkbox>
                                       </b-col>
                                       <b-col>
@@ -1366,7 +1366,7 @@
                                           :unchecked-value="false"
                                           @change="selectedFollowings"
                                         >
-                                          Following
+                                          {{ $t("general.Following") }}
                                         </b-form-checkbox>
                                       </b-col>
                                       <b-col>
@@ -1378,7 +1378,7 @@
                                           :unchecked-value="false"
                                           @change="selectedFollowers"
                                         >
-                                          Follower
+                                          {{ $t("general.Follower") }}
                                         </b-form-checkbox>
                                       </b-col>
                                     </b-row>
@@ -1425,7 +1425,7 @@
                                   </td>
                                 </tr>
                               </div>
-                              <h2 v-else>No Network</h2>
+                              <h2 v-else>{{ $t("general.No_Network") }}</h2>
 
                               <!-- End Chats -->
                             </b-tab>
@@ -1469,7 +1469,7 @@
                                   </td>
                                 </tr>
                               </div>
-                              <h2 v-else>No Editor</h2>
+                              <h2 v-else>{{ $t("general.No_Editor") }}</h2>
 
                               <!-- End Chats -->
                             </b-tab>

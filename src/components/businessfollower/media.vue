@@ -7,7 +7,7 @@
       </h6>
 
       <span class="float-right">
-        <b-link><b-icon icon="eye-fill" variant="primary"> </b-icon> View All </b-link></span
+        <b-link><b-icon icon="eye-fill" variant="primary"> </b-icon> {{ $t("general.View_All") }} </b-link></span
       >
 
       <CoolLightBox :items="imgaray" :index="index" @close="index = null"> </CoolLightBox>

@@ -1,7 +1,6 @@
 <template>
   <b-container>
     <h5 class="a-text">{{ $t('businessowner.Assign_Role') }}</h5>
-
     <b-container class="b-bottom">
       <b-row>
         <b-col cols="5">
@@ -33,7 +32,7 @@
             label-class="font-weight-bold pt-0"
             class="mb-0"
           >
-            <b-form-select v-model="selected" class="mb-3">
+            <b-form-select v-model="form.role" class="mb-3">
               <b-form-select-option
                 v-for="role in roles"
                 :value="role.id"
@@ -123,6 +122,13 @@
                   label-class="font-weight-bold pt-0"
                   class="mb-0"
                 >
+                  <b-form-select v-model="form.role" class="mb-3">
+                    <b-form-select-option
+                      v-for="role in roles"
+                      :value="role.id"
+                      :key="role.id"
+                    >{{ role.name | format }}</b-form-select-option>
+                  </b-form-select>
               </b-form-group>
             </div>
             <b-button class="mt-3" block variant="primary" @click="$bvModal.hide('edit-editor'); editEditor(clickedObject)">{{ $t('businessowner.EDIT') }}</b-button>

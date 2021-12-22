@@ -85,7 +85,7 @@
                             : 'fa-user-plus'
                         "
                       ></i>
-                      <span class="btn-com"> Join </span>
+                      <span class="btn-com"> {{ $t("general.Join") }} </span>
                     </b-button>
                   </b-col>
                 </b-row>
@@ -134,7 +134,7 @@ export default {
     },
   },
   methods: {
-    async handleJoin(user) {
+    async handle (user) {
       document.getElementById("joinbtn" + user.id).disabled = true;
       const uri = user.is_member === 0 ? `/add-member` : `/remove-member`;
       const nextFollowState = user.is_member === 0 ? 1 : 0;

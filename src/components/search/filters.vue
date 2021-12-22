@@ -21,7 +21,7 @@
         <b-spinner
           v-if="filterLoader"
           variant="primary"
-          :label="$t('search.Spinning')"
+          label="Spinning"
         ></b-spinner>
         <span v-if="subFilter.length">
           <h6>{{ $t("search.Filters") }}</h6>
@@ -324,13 +324,13 @@
           <b-col>
             <b-form-input
               v-model="distance"
-              placeholder="distance in KM"
+              :placeholder="$t('general.distance_in_KM') "
             ></b-form-input>
           </b-col>
           <b-col>
             <b-button variant="primary" @click="searchByDistance">
               <b-spinner v-if="prodLoader" small type="grow"></b-spinner>
-              search</b-button
+              {{$t("general.search") }}</b-button
             >
           </b-col>
         </b-row>

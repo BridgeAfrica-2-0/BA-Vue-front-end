@@ -30,7 +30,7 @@
                 <input
                   type="text"
                   class="form-control input-background"
-                  placeholder="Search inbox"
+                  :placeholder=" $t('general.Search_inbox') "
                 />
               </b-container>
             </div>
@@ -104,10 +104,10 @@
                       ></b-icon>
                     </template>
                     <b-dropdown-item @click="newMessage(true)">
-                      New Chat</b-dropdown-item
+                      {{ $t("general.New_Chat") }}</b-dropdown-item
                     >
                     <b-dropdown-item @click="newMessage(true)">
-                      New Group Chat
+                      {{ $t("general.New_Group_Chat") }}
                     </b-dropdown-item>
                   </b-dropdown>
                 </b-col>
@@ -127,7 +127,7 @@
                           <input
                             v-model="searchQuery"
                             class="form-control input-background"
-                            :placeholder="`Search chat list ${tabIndex}`"
+                            :placeholder="`$t('general.Search_chat_list')  ${tabIndex}`"
                             @keypress.enter="
                               getChatList({
                                 type: 'user',
@@ -197,7 +197,7 @@
                             </b-col>
                           </b-row>
                         </div>
-                        <h2 v-else>No chat</h2>
+                        <h2 v-else>{{ $t("general.No_chat") }}</h2>
                       </div>
 
                       <!-- End Chats -->
@@ -212,7 +212,7 @@
                           <input
                             v-model="searchQuery"
                             class="form-control input-background"
-                            :placeholder="`Search chat list ${tabIndex}`"
+                            :placeholder="`$t('general.Search_chat_list') ${tabIndex}`"
                             @keypress.enter="
                               getChatList({
                                 type: 'business',
@@ -282,7 +282,7 @@
                             </b-col>
                           </b-row>
                         </div>
-                        <h2 v-else>No chat</h2>
+                        <h2 v-else>{{ $t("general.No_chat") }}</h2>
                       </div>
 
                       <!-- End Chats -->
@@ -297,7 +297,7 @@
                           <input
                             v-model="searchQuery"
                             class="form-control input-background"
-                            :placeholder="`Search chat list ${tabIndex}`"
+                            :placeholder="` $t('general.'Search_chat_list)  ${tabIndex}`"
                             @keypress.enter="
                               getChatList({
                                 type: 'network',
@@ -371,7 +371,7 @@
                       <!-- End Chats -->
                     </b-tab>
                     <b-tab
-                      title="Groups"
+                      :title="$t('general.Groups')"
                       @click="getChatList({ type: 'group' })"
                     >
                       <!-- Business Chats Available  -->
@@ -380,7 +380,7 @@
                           <input
                             v-model="searchQuery"
                             class="form-control input-background"
-                            :placeholder="`Search chat list ${tabIndex}`"
+                            :placeholder="`$t('general.Search_chat_list') ${tabIndex}`"
                             @keypress.enter="
                               getChatList({
                                 type: 'business',
@@ -450,7 +450,7 @@
                             </b-col>
                           </b-row>
                         </div>
-                        <h2 v-else>No chat</h2>
+                        <h2 v-else>{{ $t("general.No_chat") }}</h2>
                       </div>
 
                       <!-- End Chats -->
@@ -533,7 +533,7 @@
                       "
                       type="text"
                       class="form-control input-background mb-6 pb-6"
-                      placeholder="Search message"
+                      :placeholder="$t('general.Search_message') "
                     />
                   </b-col>
                   <b-col class="col-3">
@@ -568,19 +568,19 @@
                           </template>
 
                           <b-dropdown-item-button @click="showInfo(true)">
-                            View Profile
+                            {{ $t("general.View_Profile") }}
                           </b-dropdown-item-button>
 
                           <b-dropdown-item-button>
-                            Disable Notification
+                            {{ $t("general.Disable_Notification") }}
                           </b-dropdown-item-button>
 
                           <b-dropdown-item-button>
-                            Delete Contact
+                            {{ $t("general.Delete_Contact") }}
                           </b-dropdown-item-button>
 
                           <b-dropdown-item-button>
-                            Delete Chat
+                            {{ $t("general.Delete_Chat") }}
                           </b-dropdown-item-button>
                         </b-dropdown>
                       </b-col>
@@ -708,7 +708,7 @@
 
               <section v-else class="chats" style="margin-left: 1px" ref="feed">
                 <div class="mt-12 pt-12">
-                  <h1 class="text-center">Select a chat</h1>
+                  <h1 class="text-center">{{ $t("general.Select_a_chat") }}</h1>
                 </div>
               </section>
 
@@ -870,10 +870,10 @@
             </div>
             <div>
               <ul>
-                <li>Options</li>
+                <li>{{ $t("general.Options") }}</li>
                 <li>
                   <b-row
-                    ><b-col> Block Messages </b-col>
+                    ><b-col> {{ $t("general.Block_Messages") }} </b-col>
                     <b-col>
                       <b-form-checkbox
                         v-model="checked"
@@ -886,7 +886,7 @@
                   </b-row>
                 </li>
 
-                <li>Report User</li>
+                <li> {{ $t("general.Report_User") }}</li>
               </ul>
             </div>
           </b-col>
@@ -899,14 +899,14 @@
             <div class="new-msg back-image" style="margin-right: 17px">
               <div class="info-nav">
                 <b-row>
-                  <b-col class="col-1 mt-3"> To </b-col>
+                  <b-col class="col-1 mt-3"> {{ $t("general.To") }} </b-col>
                   <b-col>
                     <b-form-input
                       id="textarea"
                       v-model="searchQuery"
                       class="input-background"
                       style="width: 100%"
-                      placeholder="Type the name of person or Business..."
+                      :placeholder="$t('general.Type_the_name_of_person_or_Business')"
                       @keydown.enter="getAll(searchQuery)"
                     ></b-form-input>
 
@@ -932,7 +932,7 @@
                               value="accepted"
                               @change="selectedAllMulty"
                             >
-                              All
+                              {{ $t("general.All") }}
                             </b-form-checkbox>
                           </b-col>
                           <b-col>
@@ -940,9 +940,9 @@
                               id="people"
                               v-model="peopleMulty"
                               name="people"
-                              @change="peopleAllMulty"
+                              @change="peopleMulty"
                             >
-                              People
+                              {{ $t("general.People") }}
                             </b-form-checkbox>
                           </b-col>
 
@@ -953,7 +953,7 @@
                               name="business"
                               @change="businessAllMulty"
                             >
-                              Business
+                              {{ $t("general.Business") }}
                             </b-form-checkbox>
                           </b-col>
                           <b-col>
@@ -963,7 +963,7 @@
                               v-model="networkMulty"
                               @change="networkAllMulty"
                             >
-                              Network
+                             {{ $t("general.Network") }} 
                             </b-form-checkbox>
                           </b-col>
                           <!--
@@ -1002,7 +1002,7 @@
                               class="p-2 message"
                               @click="selectedChat({ chat: biz, id: biz.id })"
                             > -->
-                          <h2>All</h2>
+                          <h2>{{ $t("general.All") }}</h2>
                           <tr
                             v-for="(elmt, index) in all"
                             :key="index"
@@ -1069,7 +1069,7 @@
                       variant="primary"
                       @click="$bvModal.show('group-name')"
                       :disabled="selectedMulty.length ? false : true"
-                      >Next</b-button
+                      >{{ $t("general.Next") }}</b-button
                     >
                     <!-- <b-button
                       class="float-left"
@@ -1101,7 +1101,7 @@
             id="input-large"
             size="lg"
             autofocus
-            placeholder="Enter your name"
+            :placeholder="$t('general.Enter_your_name')"
           ></b-form-input>
         </div>
 
@@ -1112,7 +1112,7 @@
       <!-- preview -->
       <b-modal id="preview-file" hide-footer>
         <div class="d-block text-center">
-          <h3>Preview file:</h3>
+          <h3>{{ $t("general.Preview_file") }}:</h3>
           <b-img thumbnail fluid :src="previewSrc" id="filePreview"></b-img>
         </div>
       </b-modal>

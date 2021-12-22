@@ -599,7 +599,7 @@
           <p class="text-center font-mont text-light font-weight-bold">
             {{$t("about.We_hope_you_enjoy_our_products_and_services_as_much_as_we_enjoy_offering_them_to_you")}}. 
             {{$t("about.If_you_have_any_questions_or_comments")}}, 
-            {{$t("about.please_don’t_hesitate_to_contact_us")}}. 
+            {{$t("about.please_don't_hesitate_to_contact_us")}}. 
             {{$t("about.via_the_media_below")}}.
           </p>
         </div>
@@ -648,34 +648,36 @@ export default {
       resources: [
         {
           id: '1',
-          title: 'HOW TO USE BRIDGEAFRICA.COM',
+          title: this.$t('general.HOW_TO_USE_BRIDGEAFRICA'),
           img_url:
             require('../assets/img/about/WSIS-thumbnail-1024x592-1-thegem-portfolio-masonry-img11.png'),
           tag: ['bridgeafrica', 'cameroon', 'cunsulting', 'media'],
         },
         {
           id: '2',
-          title: 'BETA LAUNCH OF BRIDGEAFRICA',
+          title: this.$t("general.BETA_LAUNCH_OF_BRIDGEAFRICA"),
           img_url:
             require('../assets/img/about/THINDFDF-1024x743-1-thegem-portfolio-masonry-img12.png'),
           tag: ['bridgeafrica', 'cameroon'],
         },
         {
           id: '3',
-          title: 'BridgeAfrica.com Partners with Pea Jeunes (Demo)',
+          title: this.$t('general.Partners_with_Pea'),
           img_url:
             require('../assets/img/about/mapoure-1024x576-1-thegem-portfolio-masonry-14.png'),
           tag: ['bridgeafrica', 'media'],
         },
         {
           id: '4',
+
           title: 'BridgeAfrica.com Gives Digital Literacy Training (Demo)',
           img_url: require('../assets/img/about/000000-img15.png'),
+
           tag: ['cunsulting', 'media'],
         },
         {
           id: '5',
-          title: 'Cameroon Gallery Commercial (Demo)',
+          title: this.$t('general.Cameroon_Gallery_Commercial'),
           img_url:
             require('../assets/img/about/caeroon-gallery-thegem-portfolio-masonry-16.jpg'),
           tag: ['cameroon', 'media'],

@@ -4,7 +4,7 @@
 
       <b-icon icon="person-fill"  class="icon-size" variant="primary"></b-icon>
       <b>
-        About
+        {{ $t('general.About') }}
       </b>
 
       <hr />

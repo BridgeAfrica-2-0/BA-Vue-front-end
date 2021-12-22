@@ -122,6 +122,7 @@
                   size="sm"
                   class="b-background shadow"
                   variant="primary"
+                  @click="gotoBusiness(item.id)"
                 >
                   <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
                   <span class="btn-text">{{ $t("dashboard.Direction") }}</span>
@@ -198,6 +199,9 @@ export default {
       if (number >= 1000) {
         return number / 1000 + "K";
       } else return number;
+    },
+    gotoBusiness(id) {
+      this.$router.push(`/business/${id}#about`);
     },
 
     async handleFollow(user) {

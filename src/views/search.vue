@@ -1798,10 +1798,10 @@ export default {
       };
 
       this.strategyForPlaceHolder = {
-        2: () => "Find User",
-        5: () => "Find Post",
-        0: () => "All",
-        1: () => "Find Businesses",
+        2: () => this.$t('general.Find_User'),
+        5: () => this.$t('general.Find_Post'),
+        0: () => this.$t('general.All'),
+        1: () => this.$t('general.Find_Businesses'),
       };
 
       this.strategyForComponent = {
@@ -1811,9 +1811,9 @@ export default {
       };
 
       this.strategyForNotFoundComponentTitle = {
-        2: () => "Not Find users",
-        5: () => "Not Find posts",
-        1: () => "Not Find Business",
+        2: () => this.$t('general.Not_Find_users'),
+        5: () => this.$t('general.Not_Find_posts'),
+        1: () => this.$t('general.Not_Find_Business'),
       };
 
       this.changePlaceHolder();

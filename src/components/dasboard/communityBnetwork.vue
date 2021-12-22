@@ -80,7 +80,7 @@
                             : 'fa-user-plus'
                         "
                       ></i>
-                      <span class="btn-com"> Join </span>
+                      <span class="btn-com"> {{ $t("general.Join") }} </span>
                     </b-button>
                   </b-col>
                 </b-row>

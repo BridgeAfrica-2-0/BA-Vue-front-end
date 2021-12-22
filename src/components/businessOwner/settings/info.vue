@@ -1145,18 +1145,16 @@ export default {
       formData.append("council", this.selectedmunicipality);
       formData.append("neigborhood", this.selectedlocality);
 
+      // console.log(String(this.businessInfo.keywords));
       formData.append("keywords", String(businessInfo.keywords));
-      console.log(String(this.businessInfo.keywords));
       formData.append("primary_phone", businessInfo.phone);
       formData.append("secondary_phone", businessInfo.secondary_phone);
       formData.append("timezone", businessInfo.timezone);
       formData.append("about_business", businessInfo.about_business);
       formData.append("website", businessInfo.website);
       formData.append("email", businessInfo.email);
-      formData.append(
-        "location_description",
-        businessInfo.location_description
-      );
+      formData.append("location_description", businessInfo.location_description);
+      formData.append("address", businessInfo.city);
       formData.append("Street", businessInfo.Street);
       formData.append("city", businessInfo.city);
       formData.append("PostalCode", businessInfo.PostalCode);

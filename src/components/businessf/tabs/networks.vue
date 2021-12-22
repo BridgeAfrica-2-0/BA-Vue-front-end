@@ -9,7 +9,7 @@
         class="float-right w-auto"
         @click="showmodal(true, 'add')"
         variant="primary"
-        >Add Network b</b-button
+        >Add Network </b-button
       >
       <hr />
       <b-row>

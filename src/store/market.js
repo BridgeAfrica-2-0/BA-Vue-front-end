@@ -131,6 +131,32 @@ export default {
     },
 
 
+    getBproducts({ commit }, url) {
+      return axios.get(url)
+        .then((res) => {
+          commit("setProducts", res.data);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    },   
+
+
+    bPnextPage({ commit }, url) {
+      commit("setProducts", []);
+
+      return axios.get(url)
+        .then((res) => {
+          console.log("products list: ", res.data);
+          commit("setProducts", res.data);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    },
+
+
+
 
 
      

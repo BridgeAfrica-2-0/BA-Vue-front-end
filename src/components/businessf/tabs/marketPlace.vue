@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="products">
+    <div class="">
       <!-- MARKET HEADER BAR -->
       <div class="col-12 d-flex align-items-center justify-content-between">
         <p>
@@ -19,23 +19,15 @@
           <b-icon icon="cart" class="mr-2"></b-icon>Cart</b-button
         >
       </div>
-      <div class="col-12">cleanUp
+      <div class="col-12">
         <hr class="h-divider" />
       </div>
 
       <!-- MARKET PRODUCT LIST -->
-      <div class="col-md-6" v-for="(product, index) in products" :key="index">
-        <Product :product="product" />
-      </div>
-      <b-col v-if="loader" class="load">
-        <b-spinner
-          style="width: 7rem; height: 7rem"
-          variant="primary"
-        ></b-spinner>
-      </b-col>
-      <b-col class="my-4 load" v-if="products.length < 1 && !loader">
-        <p>No Products in Market !!</p>
-      </b-col>
+
+       <Product  />
+
+     
     </div>
     <!-- ADDPRODUCT FORM -->
   </div>
@@ -71,13 +63,17 @@ export default {
   },
 
   methods: {
-    getProducts: async function () {
-      await axios
-        .get("/market?business_id="+this.businessId)
-        .then((res) => {
-          console.log(res.data);
-          this.products = res.data.data;
-          console.log(this.products);
+   
+
+   
+     getProducts: async function () {
+        let url="/market?business_id="+this.businessId;
+       await this.$store
+        .dispatch("market/getBproducts", url).then((res) => {
+          console.log(res);
+             
+             
+          
         })
         .catch((error) => {
           console.log(error);
@@ -86,12 +82,14 @@ export default {
           this.loader = false;
         });
     },
+
+
   },
   beforeMount() {
     this.businessId = this.$route.params.id;
     this.loader = true;
     //get market place products
-    this.getProducts();
+   // this.getProducts();
   },
 };
 </script>

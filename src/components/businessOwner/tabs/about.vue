@@ -9,7 +9,7 @@
       <div class="mb-3">
         <mapbox :coordinates="[business_about.lng, business_about.lat]" />
       </div>
-    
+      
       <b-card>
         <b-row v-if="loading">
 
@@ -24,6 +24,58 @@
                 "
               >
                 <b-icon icon="pencil-fill" variant="primary" v-if="showPen != 'BusinessEditor'"></b-icon>
+              </div>
+            <h4 class="mb-4 text-center username">
+              {{ business_about.name }}
+            </h4>
+            <p class="text-justify text">
+              {{ business_about.location_description }}
+            </p>
+          </b-col>
+          <b-col>
+            <!-- <div class="edit">
+                <b-icon
+                  icon="pencil-fill"
+                  variant="primary"
+                  
+                ></b-icon>
+              </div> -->
+            <div
+                class="edit"
+                v-b-modal.biographyModal
+                @click="
+                  business_about_input = JSON.parse(
+                    JSON.stringify(business_about)
+                  )
+                "
+              >
+                <b-icon icon="pencil-fill" variant="primary"></b-icon>
+              </div>
+            <h4 class="mb-4 text-center username">
+              {{ business_about.name }}
+            </h4>
+            <p class="text-justify text">
+              {{ business_about.location_description }}
+            </p>
+          </b-col>
+          <b-col>
+            <!-- <div class="edit">
+                <b-icon
+                  icon="pencil-fill"
+                  variant="primary"
+                  
+                ></b-icon>
+              </div> -->
+            <div
+                class="edit"
+                v-b-modal.biographyModal
+                @click="
+                  business_about_input = JSON.parse(
+                    JSON.stringify(business_about)
+                  )
+                "
+              >
+                <b-icon icon="pencil-fill" variant="primary"></b-icon>
               </div>
             <h4 class="mb-4 text-center username">
               {{ business_about.name }}
@@ -430,7 +482,7 @@
 
         <b-form-group
           id="input-group-2"
-          :label="$t('businessowner.Phone_Contact')"
+          label="secondary phone"
           label-for="input-2"
           label-size="sm"
         >

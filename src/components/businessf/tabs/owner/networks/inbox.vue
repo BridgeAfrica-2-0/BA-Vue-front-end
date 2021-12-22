@@ -381,7 +381,7 @@
                       <!-- End Chats -->
                     </b-tab>
                     <b-tab
-                      title="Groups"
+                      :title="$t('general.Groups')"
                       @click="getChatList({ type: 'group' })"
                     >
                       <!-- Group Chats Available  -->
@@ -688,7 +688,7 @@
                           <span v-if="chat.post_details">
                             <small class="text-dark font-italic text-right"
                               ><i class="fas fa-share fa-xs pl-1"></i>Shared
-                              post</small
+                              {{ $t("general.post") }}</small
                             ><br />
                             <span class="font-italic">{{
                               chat.post_details.content
@@ -720,8 +720,7 @@
                           </span>
                           <span v-if="chat.post_details">
                             <small class="text-dark font-italic"
-                              ><i class="fas fa-share fa-xs pl-1"></i>Shared
-                              post</small
+                              ><i class="fas fa-share fa-xs pl-1"></i>{{ $t("general.Shared_post") }}</small
                             >
                             <br />
                             <span class="font-italic">{{
@@ -1072,7 +1071,7 @@
                                 </tr>
                               </div>
                               <hr />
-                              <h5>Network</h5>
+                              <h5>{{$t('general.Network')}}</h5>
                               <div v-if="allNetworks">
                                 <tr
                                   v-for="(biz, index) in allNetworks"
@@ -1106,7 +1105,7 @@
                                 </tr>
                               </div>
                               <hr />
-                              <h5>Editors</h5>
+                              <h5>{{$t('general.Editors')}}</h5>
                               <div v-if="allEditors">
                                 <tr
                                   v-for="(biz, index) in allEditors"
@@ -1228,7 +1227,7 @@
 
                               <!-- End Chats -->
                             </b-tab>
-                            <b-tab title="Business" @click="getBizs()">
+                            <b-tab :title="$t('general.Business')" @click="getBizs()">
                               <b-row>
                                 <b-col>
                                   <b-card>
@@ -1320,7 +1319,7 @@
 
                               <!-- End Chats -->
                             </b-tab>
-                            <b-tab title="Network" @click="getNetworks()">
+                            <b-tab :title="$t('general.Network')" @click="getNetworks()">
                               <b-row>
                                 <b-col>
                                   <b-card>
@@ -1357,7 +1356,7 @@
                                           :unchecked-value="false"
                                           @change="selectedFollowers"
                                         >
-                                          Follower
+                                          {{$t("general.Follower")}}
                                         </b-form-checkbox>
                                       </b-col>
                                     </b-row>

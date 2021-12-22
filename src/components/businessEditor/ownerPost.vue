@@ -584,7 +584,7 @@ export default {
           this.flashMessage.show({
             status: "success",
             blockClass: "custom-block-class",
-            message: "Post Deleted",
+            message:  this.$t('general.Post_Deleted'),
           });
 
           loader.hide();
@@ -606,7 +606,7 @@ export default {
             this.flashMessage.show({
               status: "error",
               blockClass: "custom-block-class",
-              message: "Unable to Delete your Post",
+              message: this.$t('general.Unable_to_Delete_your_Post'),
             });
             console.log({ err: err });
 

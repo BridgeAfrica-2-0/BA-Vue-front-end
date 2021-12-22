@@ -304,7 +304,9 @@
     "Selected":"Sélectionné",
     "All_Selected":"Tous sélectionnés",
     "No_notifications_to_show":"Aucune notification à afficher",
-    "about":"À propos de"
+    "about":"À propos",
+    "No_Result_On_Networks":"Aucun résultat sur les réseaux",
+    "Anyone":"Toute personne"
 
 
 }

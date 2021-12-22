@@ -528,5 +528,6 @@
     "orders":"orders",
     "my_orders":"my orders",
     "Operation_was_successful":"Operation was successful!!!",
-    "Something_went_wrong":"Something went wrong!!!"
+    "Something_went_wrong":"Something went wrong!!!",
+    "Enter_new_keyword":"Enter new keyword"
 }

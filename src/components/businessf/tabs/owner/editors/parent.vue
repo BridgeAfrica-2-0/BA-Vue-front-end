@@ -59,13 +59,14 @@
         <h6 class="mt-2 font-weight-bolder title ">{{ $t('general.About') }}</h6>
         <p class="text-justify text">
           <read-more
-            more-str="read more"
+            :more-str="$t('search.read_more')"
             class="readmore"
             :text="networkInfo.description"
             link="#"
-            less-str="read less"
+            :less-str="$t('search.read_less')"
             :max-chars="100"
           ></read-more>
+         
         </p>
       </b-card-text>
     </b-card>

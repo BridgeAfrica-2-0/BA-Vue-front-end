@@ -110,6 +110,7 @@
     "Home":"Accueil",
     "COMMUNITY":"COMMUNAUTÉ",
     "Followers":"Abonnés",
+    "Follower":"Abonnés",
     "Following":"Abonnement",
     "Businesses":"Entreprises",
     "Network":"Réseau",
@@ -227,7 +228,31 @@
 
     "Open_now":"Ouvrir maintenant",
     "Monday":"Lundi",
-    "Nothing":"Rien"
+    "Nothing":"Rien",
+
+    "Online":"En ligne",
+    "Enter_something":"Entrez quelque chose",
+    "No_data":"Aucune donnée",
+    "No_Network":"Aucun réseau",
+    "Editor":"Éditeur",
+    "Post_Deleted":"Poste supprimé",
+    "Unable_to_Delete_your_Post":"Impossible de supprimer votre message",
+    "Album_Deleted":"Album supprimé",
+    "Editors":"Éditeurs",
+
+    "Business_Name":"Nom de l'entreprise",
+    "Business_Category":"Catégorie d'entreprise",
+    "Neighbourhood":"Quartier",
+    "city":"Ville",
+    "post":"Publication",
+    "Shared_post":"Publication partagé",
+    "Purpose":"Objectif",
+    "Special_Needs":"Besoins particuliers",
+    "Allow_Business":"Autoriser les entreprise",
+    "Networks":"Réseaux",
+    "Enter_new_keywords_alert_separated_by_space_comma_or_semicolon":"Saisissez de nouveaux mots-clés d'alerte séparés par un espace, une virgule ou un point-virgule"
+   
+
 
     
 

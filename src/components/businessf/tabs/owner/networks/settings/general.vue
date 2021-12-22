@@ -14,7 +14,7 @@
             <b-form-radio-group
               class="pt-2 text"
               v-model="networkinfo[0].setting_value"
-              :options="['Public', 'Private']"
+              :options="[this.$t('network.Public'), this.$t('network.Private')]"
             ></b-form-radio-group>
           </b-form-group>
           <!-- <div class="mt-3">{{ privacy }}</div> -->

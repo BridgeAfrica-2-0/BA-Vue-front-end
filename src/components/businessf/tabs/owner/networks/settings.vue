@@ -76,7 +76,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="Purpose"
+          :label="$t('general.Purpose')"
           label-size=" md"
           label-class="font-weight-bold pt-0"
           class="mb-0"
@@ -95,7 +95,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="Special Needs"
+          :label="$t('general.Special_Needs')"
           label-size=" md"
           label-class="font-weight-bold pt-0"
           class="mb-0"
@@ -287,7 +287,7 @@
       <b-container>
         <b-form-group
           label-cols-lg="3"
-          label="Allow Business"
+          :label="$t('network.Allow_Business')"
           label-size=" md"
           label-class="font-weight-bold pt-0"
           class="mb-0"

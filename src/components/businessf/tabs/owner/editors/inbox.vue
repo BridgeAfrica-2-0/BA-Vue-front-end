@@ -42,7 +42,7 @@
                   <input
                     type="text"
                     class="form-control input-background"
-                    placeholder="Search inbox"
+                    :placeholder="$t('general.Search_inbox')"
                   />
 
 
@@ -149,7 +149,7 @@
               <input
                 type="text"
                 class="form-control input-background"
-                placeholder="Search inbox"
+                :placeholder="$t('general.Search_inbox')"
               />
             </div>
             <div>
@@ -261,7 +261,7 @@
                 </b-col>
                 <b-col class="detail">
                   <h5>Louis Litt</h5>
-                  <p>Online</p>
+                  <p>{{$t('general.Online')}}</p>
                 </b-col>
                 <b-col class="col-4">
                   <b-row class="mt-3 ml-5">
@@ -300,26 +300,26 @@
 
                         <b-dropdown-item-button  @click="showInfo(true)" >
                          
-                         View Profile
+                         {{$t('general.View_Profile')}}
                         </b-dropdown-item-button>
 
 
 
                         <b-dropdown-item-button  >
-                         Disable Notification
+                         {{$t('general.Disable_Notification')}}
                         </b-dropdown-item-button>
 
 
 
                          <b-dropdown-item-button  >
-                         Delete Contact
+                         {{$t('general.Delete_Contact')}}
                         </b-dropdown-item-button>
 
 
 
 
                          <b-dropdown-item-button  >
-                         Delete Chat
+                         {{$t('general.Delete_Chat')}}
                         </b-dropdown-item-button>
 
 
@@ -400,7 +400,7 @@
                     v-model="input"
                     class="input-background"
                   
-                    placeholder="Enter something..."
+                    :placeholder="$t('general.Enter_something')"
                   ></b-form-input>         
 
 
@@ -468,8 +468,8 @@
 
               </b-row>
               <p v-if="checked" class="ml-5">
-                You have blocked messages and calls from this user.
-                <b-link @click="showInfo(true)">Unblock Now</b-link>
+                {{ $t("general.You_have_blocked_messages_and_calls_from_this_user") }}.
+                <b-link @click="showInfo(true)">{{ $t("general.Unblock_Now") }}</b-link>
               </p>
          </div>
 
@@ -488,7 +488,7 @@
               <b-button class="primary-bg" @click="showInfo(false)">
                <fas-icon :icon="['fas', 'arrow-left']" />
               </b-button>
-              <span class="cnt-info"> Contact Info</span>
+              <span class="cnt-info"> {{ $t("general.Contact_Info") }}</span>
             </div>
             <div class="info-bottom">
               <b-avatar
@@ -499,16 +499,16 @@
               ></b-avatar>
               <div class="info-detail">
                 <h1 class="info-name">Louis Litt</h1>
-                <b-link class="primary">View Profile</b-link>
+                <b-link class="primary">{{ $t("general.View_Profile") }}</b-link>
               </div>
             </div>
             <div>
               <ul>
-                <li>Options</li>
+                <li>{{ $t("general.Options") }}</li>
                 <li>
                   <b-row
                     ><b-col>
-                      Block Messages
+                      {{ $t("general.Block_Messages") }}
                     </b-col>
                     <b-col>
                       <b-form-checkbox
@@ -521,7 +521,7 @@
                     </b-col>
                   </b-row>
                 </li>
-                <li>Report User</li>
+                <li>{{ $t("general.Report_User") }}</li>
               </ul>
             </div>
 
@@ -533,17 +533,16 @@
               <div class="info-nav">
                 <b-row>
                   <b-col class="col-1 mt-3">
-                    To
+                    {{ $t("general.To") }}
                   </b-col>
                   <b-col>
                    
-
                     <b-form-input
                     id="textarea"
                     v-model="searchQuery"
                     class="input-background"
                     style="width: 100%"
-                    placeholder="Type the name of person or Business..."
+                    :placeholder="$t('general.Type_the_name_of_person_or_Business')"
                      @click="showsearchh()"
                   ></b-form-input>  
 
@@ -561,7 +560,7 @@
                 <thead>
                     <tr>
                         
-                        <td>      <b-row>    <b-col cols="6">      <span class="bold " >  Send to all   </span>   </b-col>    <b-col >  <span > 
+                        <td>      <b-row>    <b-col cols="6">      <span class="bold " >  {{ $t("general.Send_to_all") }}   </span>   </b-col>    <b-col >  <span > 
                           
                            <input type="checkbox" @click="selectAll" v-model="allSelected" /> 
 
@@ -600,7 +599,7 @@
 
                 
             </table>
-            <b-button variant="primary" size="sm" class="pl-3 pr-3" >  Send   </b-button>
+            <b-button variant="primary" size="sm" class="pl-3 pr-3" >  {{ $t("general.Send") }}   </b-button>
         </div>
       
       

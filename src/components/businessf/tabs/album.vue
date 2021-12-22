@@ -218,7 +218,7 @@ export default {
           this.flashMessage.show({
             status: "success",
 
-            message: "Album Deleted",
+            message: this.$t('general.Album_Deleted'),
           });
 
           loader.hide();

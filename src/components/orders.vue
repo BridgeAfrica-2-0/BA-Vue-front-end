@@ -189,7 +189,7 @@
             >Archive</b-dropdown-item
           >
           <b-dropdown-item @click="updateOrderStatus('delete', order.order_id)"
-            >Delete</b-dropdown-item
+            >{{ $t("general.Delete") }}</b-dropdown-item
           >
         </b-dropdown>
       </div>

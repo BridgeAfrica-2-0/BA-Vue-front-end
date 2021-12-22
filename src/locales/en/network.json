@@ -307,7 +307,10 @@
     "Selected":"Selected",
     "All_Selected":"All Selected",
     "No_notifications_to_show":"No notifications to show",
-    "about":"About"
+    "about":"About",
+    "No_Result_On_Networks":"No Result On Networks",
+    "Anyone":"Anyone",
+    "Allow_Business":"Autoriser les entreprise"
 
 
 }

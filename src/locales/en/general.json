@@ -227,8 +227,33 @@
     "Complaints":"Complaints",
     "Open_now":"Open now",
     "Monday":"Monday",
-    "Nothing":"Nothing"
-    
+    "Nothing":"Nothing",
+
+    "Online":"Online",
+    "Enter_something":"Enter something",
+    "No_data":"No data",
+    "Follower":"Follower",
+    "No_Network":"No Network",
+    "Editor":"Editor",
+    "Post_Deleted":"Post Deleted",
+    "Unable_to_Delete_your_Post":"Unable to Delete your Post",
+    "Album_Deleted":"Album Deleted",
+
+
+    "Business_Name":"Business Name",
+    "Business_Category":"Business Category",
+    "Neighbourhood":"Neighbourhood",
+    "city":"city",
+    "post":"post",
+    "Shared_post":"Shared post",
+    "Purpose":"Purpose",
+    "Special_Needs":"Special Needs",
+    "Allow_Business":"Allow Business",
+    "Networks":"Networks",
+    "Enter_new_keywords_alert_separated_by_space_comma_or_semicolon":"Enter new keywords alert separated by space comma or semicolon",
+    "Albums":"Albums",
+    "Show":"Afficher"
+   
 
 
 }

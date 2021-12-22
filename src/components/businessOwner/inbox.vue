@@ -996,7 +996,7 @@
                       <table class="table">
                         <b-row style="overflow-x: hidden !important">
                           <b-tabs content-class=" ma-4 pt-6" fill pills card>
-                            <b-tab title="All" @click="getAll()">
+                            <b-tab :title="$t('general.All')" @click="getAll()">
                               <div v-if="loader" class="text-center">
                                 <b-spinner
                                   variant="primary"
@@ -1409,7 +1409,7 @@
                               <!-- End Chats -->
                             </b-tab>
 
-                            <b-tab title="Editors" @click="getEditors()">
+                            <b-tab :title="$t('general.Editor')" @click="getEditors()">
                               <div v-if="loader" class="text-center">
                                 <b-spinner
                                   variant="primary"

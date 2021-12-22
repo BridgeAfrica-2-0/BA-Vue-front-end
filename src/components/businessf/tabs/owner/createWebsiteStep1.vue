@@ -29,7 +29,7 @@
     <b-row class="my-2">
       <b-col md="10" offset-md="1">
         <p class="float-right">
-          <span>Show: &nbsp;</span>
+          <span>{{ $t('general.Show') }}: &nbsp;</span>
           <span class="d-inline-block">
             <b-form-select
               class="d-inline-block"

@@ -46,12 +46,13 @@
 
                   <read-more
                     v-if="network.description"
-                    more-str="read more"
+                    :more-str="$t('search.read_more')"
                     :text="network.description"
                     link="#"
-                    less-str="read less"
+                    :less-str="$t('search.read_less')"
                     :max-chars="200"
                   ></read-more>
+             
                 </p>
               </b-col>
 

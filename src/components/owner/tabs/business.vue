@@ -64,6 +64,27 @@
                 class="mt-2 text-center"
               >
                 <b-button
+                  v-if="show == 'Follower'"
+                  disabled
+                  block
+                  size="sm"
+                  class="b-background shadow"
+                  :id="'followbtn' + item.id"
+                  :class="item.is_follow !== 0 && 'u-btn'"
+                  variant="primary"
+                 
+                >
+                  <i
+                    class="fas fa-lg btn-icon"
+                    :class="
+                      item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'
+                    "
+                  ></i>
+                  <span class="btn-com">Community</span>
+                </b-button>
+
+                <b-button
+                  v-else
                   block
                   size="sm"
                   class="b-background shadow"
@@ -151,6 +172,9 @@ export default {
   },
 
   computed: {
+    show(){
+      return this.$route.name;
+    },
     old_businesses() {
       if (this.type == "Follower") {
         return this.$store.state.businessOwner.BcommunityFollower

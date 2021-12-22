@@ -65,7 +65,34 @@
                         xl="6"
                         class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
                       >
+
+                       <b-button
+                         v-if="show =='Follower'"
+                        disabled
+                          block
+                          size="sm"
+                          :id="'followbtn' + item.id"
+                          class="b-background flexx pobtn shadow"
+                          :class="item.is_follow !== 0 && 'u-btn'"
+                          variant="primary"
+                          
+                        >
+                          <i
+                            class="fas fa-lg btn-icon"
+                            :class="
+                              item.is_follow !== 0
+                                ? 'fa-user-minus'
+                                : 'fa-user-plus'
+                            "
+                          ></i>
+
+                          <span class="btn-com">{{
+                            $t("dashboard.Community")
+                          }}</span>
+                        </b-button>
+
                         <b-button
+                         v-else
                           block
                           size="sm"
                           :id="'followbtn' + item.id"
@@ -87,6 +114,10 @@
                             $t("dashboard.Community")
                           }}</span>
                         </b-button>
+
+
+                        
+
                       </b-col>
                     </b-row>
                   </div>
@@ -129,6 +160,9 @@ export default {
   },
 
   computed: {
+    show(){
+      return this.$route.name;
+    },
     old_users() {
       if (this.type == "Follower") {
         return this.$store.state.profile.UcommunityFollower.user_followers;

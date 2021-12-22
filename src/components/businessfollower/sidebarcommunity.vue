@@ -2,7 +2,7 @@
   <div class="lalala">
     <div class=" border mt-2 ">
       <span>
-        <h6 class="title m-3">
+        <h6 class="title m-3"> {{total}}
           <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
           <b> COMMUNITY</b> <span class="h4-color"> {{ nFormatter(total.total_community) }} </span>
         </h6>

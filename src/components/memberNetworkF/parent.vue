@@ -64,8 +64,6 @@
         </b-container>
         <h6 class="mt-2 font-weight-bolder title ">About</h6>
         <p class="text-justify text">
-
-
            <read-more
               more-str="read more"
               class="readmore"
@@ -73,11 +71,7 @@
               link="#"
               less-str="read less"
               :max-chars="100"
-            >
-            </read-more>
-
-
-         
+            ></read-more>
         </p>
       </b-card-text>
     </b-card>

@@ -57,7 +57,7 @@
           </b-row>
         </b-container>
         <h6 class="mt-2 font-weight-bolder title ">About</h6>
-        <!-- <p class="text-justify text">
+        <p class="text-justify text">
           <read-more
             more-str="read more"
             class="readmore"
@@ -66,18 +66,7 @@
             less-str="read less"
             :max-chars="100"
           ></read-more>
-        </p> -->
-        <p v-if="networkInfo.description.length<130" class="text-justify text">{{ networkInfo.description }}</p> 
-        <p v-else class="text-justify text">
-          {{ networkInfo.description.substring(0,130)+"..." }}
-          <span class="d-inline-block float-right">
-            <a @click="$bvToast.show('example-toast')" style="cursor:pointer;">lire la Suite</a>
-          </span>
-          <b-icon  icon="pencil"></b-icon>
         </p>
-        <b-toast id="example-toast" static no-auto-hide>
-          {{ networkInfo.description }}
-        </b-toast>
       </b-card-text>
     </b-card>
     <b-card v-else class="text-center">

@@ -7,6 +7,7 @@ export default {
         groupMembers: [],
         all: [],
         users: [],
+        members: [],
         networks: [],
         businesses: [],
         currentBizId: null,
@@ -43,6 +44,9 @@ export default {
         },
         getAllEditors(state) {
             return state.editors;
+        },
+        getAllMembers(state) {
+            return state.members;
         },
 
         getCurrentBiz(state) {
@@ -393,6 +397,8 @@ export default {
 
         async GET_EDITORS({ commit, state }) {
             commit("setBizs", []);
+            state.editors = []
+
 
             await axios.get(`/business/role/editor/${state.currentBizId}`)
                 .then((res) => {
@@ -413,16 +419,17 @@ export default {
         },
         async GET_NETWORK_MEMBERS({ commit, state }) {
             commit("setBizs", []);
+            state.members = []
 
             await axios.post(`network/${state.currentBizId}/members/list`)
                 .then((res) => {
                     commit("setLoader", false);
                     let editor = res.data.data
                     if (editor.length > 0) {
-                        state.editors = { accountType: "member", ...res.data.data }
+                        state.members = { accountType: "member", ...res.data.data }
                     }
-                    console.log("member:", state.editors);
-                    commit("setBizs", state.editors);
+                    console.log("member:", state.members);
+                    commit("setBizs", state.members);
                 })
                 .catch((err) => {
                     commit("setLoader", false);

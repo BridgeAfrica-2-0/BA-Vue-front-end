@@ -2622,6 +2622,7 @@ h1 {
 }
 .detail {
   margin-left: -40px;
+  cursor: pointer;
 }
 
 .mobile {

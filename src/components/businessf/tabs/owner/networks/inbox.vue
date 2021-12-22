@@ -1013,8 +1013,14 @@
                   <b-col>
                     <div class="new-msg-filter-list">
                       <table class="table">
-                        <b-row v-if="bulk" style="overflow-x: hidden !important"
-                          >{{ selectedMulty }}
+                        <b-row
+                          v-if="bulk"
+                          style="overflow-x: hidden !important"
+                        >
+                          business: {{ selectedBusiness }} Member:{{
+                            selectedPeople
+                          }}
+                          Network: {{ selectedNetwork }}
                           <b-tabs content-class=" ma-4 pt-6" fill pills card>
                             <b-tab title="All" @click="getAll()">
                               <div v-if="loader" class="text-center">
@@ -1035,7 +1041,7 @@
                                     <b-form-group>
                                       <b-form-checkbox-group
                                         id="checkbox-group-2"
-                                        v-model="selectedMulty"
+                                        v-model="selectedPeople"
                                         name="flavour-2"
                                       >
                                         <b-form-checkbox
@@ -1069,11 +1075,11 @@
                                     <b-form-group>
                                       <b-form-checkbox-group
                                         id="checkbox-group-2"
-                                        v-model="selectedMulty"
+                                        v-model="selectedBusiness"
                                         name="flavour-2"
                                       >
                                         <b-form-checkbox
-                                          :id="index + '_id'"
+                                          :id="index + '_id_biz'"
                                           :name="biz.name"
                                           :value="biz.id"
                                         >
@@ -1103,11 +1109,11 @@
                                     <b-form-group>
                                       <b-form-checkbox-group
                                         id="checkbox-group-2"
-                                        v-model="selectedMulty"
+                                        v-model="selectedNetwork"
                                         name="flavour-2"
                                       >
                                         <b-form-checkbox
-                                          :id="index + '_id'"
+                                          :id="index + '_id_net'"
                                           :name="biz.name"
                                           :value="biz.id"
                                         >
@@ -1137,11 +1143,45 @@
                                     <b-form-group>
                                       <b-form-checkbox-group
                                         id="checkbox-group-2"
-                                        v-model="selectedMulty"
+                                        v-model="selectedEditor"
                                         name="flavour-2"
                                       >
                                         <b-form-checkbox
-                                          :id="index + '_id'"
+                                          :id="index + '_id_edit'"
+                                          :name="biz.name"
+                                          :value="biz.id"
+                                        >
+                                          <b-avatar
+                                            class="d-inline-block"
+                                            variant="primary"
+                                            size="30"
+                                          ></b-avatar>
+                                          <span class="bold">
+                                            {{ biz.name }}
+                                          </span>
+                                        </b-form-checkbox>
+                                      </b-form-checkbox-group>
+                                    </b-form-group>
+                                  </td>
+                                </tr>
+                              </div>
+                              <hr />
+                              <h5>Members</h5>
+                              <div v-if="allMembers">
+                                <tr
+                                  v-for="(biz, index) in allMembers"
+                                  :key="index"
+                                  class="p-2 message"
+                                >
+                                  <td>
+                                    <b-form-group>
+                                      <b-form-checkbox-group
+                                        id="checkbox-group-2"
+                                        v-model="selectedMember"
+                                        name="flavour-2"
+                                      >
+                                        <b-form-checkbox
+                                          :id="index + '_id_mem'"
                                           :name="biz.name"
                                           :value="biz.id"
                                         >
@@ -1212,6 +1252,7 @@
                                   class="centralizer"
                                 ></b-spinner>
                               </div>
+                              {{ selectedMulty }}
                               <div v-if="bizs.length">
                                 <tr
                                   v-for="(biz, index) in bizs"
@@ -1226,7 +1267,7 @@
                                         name="flavour-2"
                                       >
                                         <b-form-checkbox
-                                          :id="index + '_id'"
+                                          :id="index + '_id-user'"
                                           :name="biz.name"
                                           :value="biz.id"
                                         >
@@ -1302,6 +1343,7 @@
                                   class="centralizer"
                                 ></b-spinner>
                               </div>
+                              {{ selectedMulty }}
                               <div v-if="bizs.length">
                                 {{ selectedMulty }}
 
@@ -1317,7 +1359,7 @@
                                       name="flavour-2"
                                     >
                                       <b-form-checkbox
-                                        :id="index + '_id'"
+                                        :id="index + '_id-busid'"
                                         :name="elm.name"
                                         :value="elm.id"
                                         :unchecked-value="false"
@@ -1406,7 +1448,7 @@
                                         name="flavour-2"
                                       >
                                         <b-form-checkbox
-                                          :id="index + '_id'"
+                                          :id="index + '_id-netw'"
                                           :name="biz.name"
                                           :value="biz.id"
                                         >
@@ -1450,7 +1492,7 @@
                                         name="flavour-2"
                                       >
                                         <b-form-checkbox
-                                          :id="index + '_id'"
+                                          :id="index + '_id-edit'"
                                           :name="biz.name"
                                           :value="biz.id"
                                         >
@@ -1494,7 +1536,7 @@
                                         name="flavour-2"
                                       >
                                         <b-form-checkbox
-                                          :id="index + '_id'"
+                                          :id="index + '_id-member'"
                                           :name="biz.name"
                                           :value="biz.id"
                                         >
@@ -1518,6 +1560,7 @@
                             </b-tab>
                           </b-tabs>
                         </b-row>
+                        <!-- single selection -->
                         <div
                           v-else
                           style="
@@ -1661,7 +1704,6 @@
                       block
                       variant="primary"
                       @click="$bvModal.show('group-name')"
-                      :disabled="selectedMulty.length ? false : true"
                       >{{ $t("businessowner.Next") }}</b-button
                     >
                     <!-- <b-button
@@ -1734,7 +1776,14 @@ export default {
 
       visibleCollaps: false,
 
+      selectedBusiness: [],
+      selectedPeople: [],
+      selectedNetwork: [],
+      selectedMember: [],
+      selectedEditor: [],
+
       selectedMulty: [],
+
       peopleSelectedAllMulty: [],
       businessSelectedAllMulty: [],
       networkSelectedAllMulty: [],
@@ -1792,6 +1841,9 @@ export default {
     },
     allEditors() {
       return this.$store.getters["networkChat/getAllEditors"];
+    },
+    allMembers() {
+      return this.$store.getters["networkChat/getAllMembers"];
     },
     groupMembers() {
       return this.$store.getters["networkChat/getGroupMembers"];
@@ -1921,24 +1973,24 @@ export default {
       const i = Math.floor(Math.log(bytes) / Math.log(k));
       return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + " " + sizes[i];
     },
-    selectedMember(elm) {
-      console.log("elm:", elm);
+    // selectedMember(elm) {
+    //   console.log("elm:", elm);
 
-      console.log("selectedMulty:", this.selectedMulty);
-      let last = this.selectedMulty.pop();
-      console.log("last:", last);
-      let my_array = [];
+    //   console.log("selectedMulty:", this.selectedMulty);
+    //   let last = this.selectedMulty.pop();
+    //   console.log("last:", last);
+    //   let my_array = [];
 
-      if (last == elm.id) {
-        this.groupMembers.push({ type: elm.accountType, id: elm.id });
-        my_array.push({ type: elm.accountType, id: elm.id });
-      } else {
-        this.groupMembers.pop();
-      }
-      console.log("my array:", my_array);
+    //   if (last == elm.id) {
+    //     this.groupMembers.push({ type: elm.accountType, id: elm.id });
+    //     my_array.push({ type: elm.accountType, id: elm.id });
+    //   } else {
+    //     this.groupMembers.pop();
+    //   }
+    //   console.log("my array:", my_array);
 
-      console.log("selected:", this.groupMembers);
-    },
+    //   console.log("selected:", this.groupMembers);
+    // },
     startNewChat() {
       if (this.selectedMulty.length > 1) {
         this.$bvModal.show("group-name");
@@ -2079,6 +2131,7 @@ export default {
       this.getNetworks();
       this.getBizs();
       this.getEditors();
+      this.getNetworkMembers();
     },
     dismissed() {
       this.file = "";
@@ -2095,24 +2148,14 @@ export default {
         console.log("group message Received");
         console.log(data);
         this.chats.push(data);
-        // userID:1,2,3,4,5
-        // businessID:2
-        // networkID:1,2,3,4
-        // businessEditorID:2
-        // message:Life has no meaning the moment you lose the illusion of being eternal.
 
-        // this.formData.append("sender_business_id", data.sender_business_id);
         this.formData.append("message", data.message);
 
         this.formData.append("userID", data.userID);
         this.formData.append("businessID", data.businessID);
         this.formData.append("networkID", data.networkID);
-        this.formData.append("businessEditorID", data.businessEditorID);
-
-        // this.formData.append("receiver_network_id", data.receiver_business_id);
-        // this.formData.append("receiver_id", data.receiver_business_id);
-        // this.formData.append("group_id", data.group_id);
-        // this.formData.append("type", data.type);
+        this.formData.append("networkEditorID", data.networkEditorID);
+        this.formData.append("memberID", data.memberID);
 
         this.saveMessage(this.formData);
       });
@@ -2187,12 +2230,12 @@ export default {
       this.getChatList({ type: "group" });
       this.$store.dispatch("networkChat/CREATE_GROUP", {
         groupName: this.groupName,
-        userID: `${membersPeopleIds}`,
 
-        businessID: `${membersBusinessIds}`,
-        networkID: `${membersNetworkIds}`,
-
-        businessEditorsID: `${membersEditorIds}`,
+        userID: this.selectedPeople.toString(),
+        businessID: this.selectedBusiness.toString(),
+        networkID: this.selectedNetwork.toString(),
+        memberID: this.selectedMember.toString(),
+        networkEditorsID: this.selectedEditor.toString(),
       });
     },
     createRoom(receiver_business_id) {
@@ -2334,7 +2377,7 @@ export default {
       // this.scrollToBottom();
       console.log("[selected Chat]", data);
       this.createRoom(data.id);
-      if (this.type == "group" && this.groupName) {
+      if (this.type == "group") {
         this.createGroup();
       }
       // this.chatId = data.id;
@@ -2424,6 +2467,8 @@ export default {
       var membersBuiness = [];
       var membersNetwork = [];
       var membersEditor = [];
+      var membersMember = [];
+
       console.log("Group members:", this.groupMembers);
       let data = {};
       if (this.groupMembers.length) {
@@ -2440,13 +2485,17 @@ export default {
           return member.networkID != null;
         });
         membersEditor = this.groupMembers.filter((member) => {
-          return member.businessEditorsID != null;
+          return member.networkEditorID != null;
+        });
+        membersMember = this.groupMembers.filter((member) => {
+          return member.memberID != null;
         });
 
         let membersPeopleIds = [];
         let membersBusinessIds = [];
         let membersNetworkIds = [];
         let membersEditorIds = [];
+        let membersMemberIds = [];
 
         membersPeople.map((biz) => {
           membersPeopleIds.push(biz.userID);
@@ -2458,18 +2507,22 @@ export default {
           membersNetworkIds.push(biz.networkID);
         });
         membersEditor.map((biz) => {
-          membersEditorIds.push(biz.businessEditorsID);
+          membersEditorIds.push(biz.networkEditorID);
         });
+        membersMember.map((biz) => {
+          membersMemberIds.push(biz.memberID);
+        });
+
         data = {
           userID: membersPeopleIds,
           businessID: membersBusinessIds,
           networkID: membersNetworkIds,
-          businessEditorID: membersEditorIds,
+          networkEditorID: membersEditorIds,
+          memberID: membersMemberIds,
           message: this.input,
         };
+        this.socket.emit("groupMessage", data);
       }
-
-      this.socket.emit("groupMessage", data);
 
       // this.socket.emit("groupMessage", {
       //   type: this.type,
@@ -2682,6 +2735,7 @@ h1 {
   background-color: white;
 }
 .detail {
+  cursor: pointer;
   margin-left: -40px;
 }
 

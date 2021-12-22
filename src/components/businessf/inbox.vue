@@ -708,9 +708,7 @@
 
               <section v-else class="chats" style="margin-left: 1px" ref="feed">
                 <div class="mt-12 pt-12">
-                  <h1 class="text-center">
-                    Select a chat
-                  </h1>
+                  <h1 class="text-center">Select a chat</h1>
                 </div>
               </section>
 

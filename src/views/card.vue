@@ -2,6 +2,10 @@
   <div class="container">
     <navbar />
     <div class="row">
+
+
+     
+      
       
       <div class="col-12 col-md-9">
         <hr />
@@ -19,11 +23,12 @@
         <div class="row my-4" v-if="loading">
           <div class="col-12 d-flex justify-content-center align-items-center">
             <b-spinner
+            variant="primary"
               style="width: 3rem; height: 3rem;"
               label="Loading"
             ></b-spinner>
           </div>
-        </div>
+        </div>  
         <div v-if="!loading">
           <div v-for="(cart_item, i) in cart.data" :key="i"> 
            
@@ -40,49 +45,29 @@
               </div>
 
               <div class="col-8 col-md-4 text-end text-start bold ">
-                <div class="row">
-                  <div class="col-5 p-0"><h3>{{$t("general.Name_of_item")}} :</h3></div>
-                  <div class="col">
-                    <h3
-                      class="h3 cursor"
-                      v-b-tooltip.hover.top="cart_item.product_name"
-                    >
-                      <!-- {{ cart_item.product_name.substring(0, 12) + "..." }} -->
-                       {{cart_item.product_name}} 
-                    </h3>
-                  </div>
+                <div >
+                  
+
+                  <h3 class="username">   {{cart_item.product_name}}  </h3>
                 </div>
 
-                <div class="row">
-                  <div class="col-5 p-0"><h3>{{$t("general.product_ID")}} :</h3></div>
-                  <div class="col">
-                    <h3 class="h3">{{ cart_item.product_id }}</h3>
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="col-5 p-0">
-                    <h3 class="">{{$t("general.description")}}:</h3>
-                  </div>
-                  <div class="col">
-                    <h3
-                      class="h3 cursor"
-                      v-b-tooltip.hover.top="cart_item.product_description"
-                    >
-                   
-
-                         <read-more
+                <div class="text">
+  <p> 
+                  <read-more
                         more-str="read more"
                         class="readmore"
                         :text="cart_item.product_description"
                         link="#"
                         less-str="read less"
-                        :max-chars="100"
+                        :max-chars="50"
                       >
                       </read-more>
-                    </h3>
-                  </div>
+
+                       </p>
+                 
                 </div>
+
+                
               </div>
               <div class="row line"></div>
               <div class="col marg5">
@@ -90,11 +75,16 @@
                   <div class="col-4 p-0 bg-y ">
                     <input
                       type="number"
-                      value="2"
-                      @change="changeQuantity($event, i)"
+                    
+                      @change="changeQuantity($event,cart_item.item_id)"
                       v-model="cart_item.quantity"
                       class="numbersize marg1"
                     />
+
+
+             
+
+
                   </div>
                   <div class="col text-success p-0 ">
                     <h3 class="marg2">{{ cart_item.product_price }} XAF</h3>
@@ -121,7 +111,6 @@
           <div class="d-flex justify-content-center">
       
 
-        <button class="btn btncolor shadow"><h3>{{$t("general.update_cart")}}</h3></button>
 
            
               <b-pagination
@@ -145,10 +134,10 @@
         <hr />
         <div class="row">
           <div class="col">
-            <h3>{{$t("general.ITEMS")}} {{ cart.total }}</h3>
+            <h3>{{$t("general.ITEMS")}} {{ cart_total.total_items }}</h3>
           </div>
           <div class="col">
-            <h3> {{$t("general.sub_totals")}}   {{ getTotalPrice }} XAF</h3>
+            <h3> {{$t("general.sub_totals")}}   {{ cart_total.sub_total }} </h3>
           </div>
         </div>
         <br />
@@ -165,7 +154,7 @@
 
         <div class="row">
           <div class="col"><h3>{{$t("general.TOTAL_COST")}}</h3></div>
-          <div class="col"><h3>22000 XAF</h3></div>
+          <div class="col"><h3>  {{formatMoney(cart_total.total_cost)}} </h3></div>
         </div>
         <button class="btn btn1 form-control shadow" @click="gotoCheckout">
           <h3>{{$t("general.CHECKOUT")}}</h3>
@@ -198,15 +187,24 @@ export default {
   },
   created() {
     this.getCartItems();
+    this.getCartSummary();
+    console.log("loading cart items");
   },
-  // watch: {
-  //   currentPage: function(val) {
-  //     this.orderForCurrentPage = this.cart["data"].slice(
-  //       (val - 1) * this.per_page,
-  //       val * this.per_page
-  //     );
-  //   },
-  // },
+  watch: {
+
+
+    currentPage: function(val) {
+      this.orderForCurrentPage = this.cart["data"].slice(
+        (val - 1) * this.per_page,
+        val * this.per_page
+      );
+    },
+
+
+
+  },
+
+
   computed: {
     rowsOrder() {
       let rows = 1;
@@ -220,6 +218,11 @@ export default {
     cart() {
       return this.$store.state.checkout.cart;
     },
+
+    cart_total() {
+      return this.$store.state.checkout.cart_summary;
+    },
+
     getTotalPrice() {
       let totalItems = this.cart.total;
       return 0;
@@ -228,11 +231,12 @@ export default {
   methods: {
 
     
+    
         changePage(value) {
       console.log("next page loading ");
       
       this.currentPage = value;
-     let url="ckeckout-cart&page="+value;    
+     let url="cart&page="+value;    
 
       this.$store
         .dispatch("checkout/next", url).then((res) => {
@@ -247,7 +251,19 @@ export default {
         });
     },
 
+    async getCartSummary(){
 
+      await this.$store
+        .dispatch("checkout/getCartSummary") 
+        .then(() => {
+         
+        })
+        .catch((err) => {
+          console.log({err:err});
+          
+        });
+
+    },
 
     async getCartItems() {
       this.loading = true;
@@ -268,13 +284,21 @@ export default {
         });
     },
     changeQuantity(event, index) {
+
       let quantity = event.target.value;
-      if (quantity < 1) {
-        quantity = 1;
-      }
-      this.cart.data[index].quantity = quantity;
-      // this.order_items[index].quantity = quantity;
+      if(quantity > 1 ){  
+      this.$store
+        .dispatch("checkout/updateCart", {quantity:quantity, index:index }) 
+        .then(() => {
+          this.getCartSummary();
+        })
+        .catch((err) => {
+          console.log({err:err});
+          
+        }); }
+     
     },
+
     formatMoney(money) {
       return this.formatObject.format(money);
     },
@@ -292,6 +316,8 @@ export default {
       await axios
         .delete(`cart/item/${id}/delete`)
         .then((result) => {
+
+          this.getCartSummary();
           console.log(result);
           this.getCartItems();
           this.flashMessage.show({
@@ -423,4 +449,10 @@ export default {
     height: 20px;
   }
 }
+
+.text{
+  font-weight: 400;
+}
+
+
 </style>

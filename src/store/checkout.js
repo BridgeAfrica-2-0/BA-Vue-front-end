@@ -10,11 +10,13 @@ const state = {
 
   },
   cart: [],
+  cart_summary:{},
   buisinessOrdered: []
 
 }
 const getters = {
-  getAllShipping: (state) => state.allShipping
+  getAllShipping: (state) => state.allShipping,
+  getCartSummary: (state) => state.cart_summary
 }
 const actions = {
   async createShipping({ commit }, newShippingAdd) {
@@ -28,6 +30,37 @@ const actions = {
         console.log(error)
       })
   },
+
+
+  async getCartSummary({ commit }) {
+    await axios.get('cart-total')
+      .then((response) => {
+        console.log(response.data)
+       
+        commit('setCartSummary', response.data.data)
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  },
+
+  
+
+  async updateCart({ commit },payload) {
+    await axios.post('cart/update-quantity/'+payload.index, {
+      quantity:payload.quantity
+    })
+      .then((response) => {
+        console.log(response)
+        console.log("yooo the mother fucker");
+      //  commit('setCartSummary', response.data.data)
+      })
+      .catch((error) => {
+        console.log({error:error});
+      })
+  },
+
+
 
   async getAllShippingAdd({ commit }) {
     await axios.get('shipping/checkout/shippingAddresses')
@@ -56,7 +89,7 @@ const actions = {
     })
   },
   async getCart({ commit }) {
-    await axios.get('ckeckout-cart').then((response) => {
+    await axios.get('cart').then((response) => {
       console.log(response)
       commit('setCart', response.data)
     }).catch((error) => {
@@ -95,6 +128,9 @@ const actions = {
 }
 const mutations = {
   setAllShipping: (state, newShippingTab) => state.allShipping = newShippingTab,
+
+  setCartSummary: (state, cartSummary) => state.cart_summary = cartSummary,
+
   addShipping: (state, newShippingAdd) => state.allShipping.unshift(newShippingAdd),
   deleteShippingAdd: (state, idShipping) => state.allShipping = state.allShipping.filter(el => el.id !== idShipping),
   setOrder: (state, newOrder) => state.order = newOrder,

@@ -119,6 +119,7 @@
                       size="sm"
                       class="b-background shadow"
                       variant="primary"
+                      @click="gotobusiness(item.id)"
                     >
                       <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
                       <span class="btn-text">{{
@@ -193,6 +194,9 @@ export default {
       } else return number;
     },
 
+    gotobusiness(id) {
+      this.$router.push(`business/${id}#about`);
+    },
     async handleFollow(user) {
       document.getElementById("followbtn" + user.id).disabled = true;
 

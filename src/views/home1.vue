@@ -7,67 +7,7 @@
     
 
      <site-header class="topbar" />   
-    <header id="header" class="fixed-topp">
-      <div class=" d-flex align-items-center">
-      
-      
-
-        
-
-
-      <div>
-  <!-- <b-navbar toggleable="sm" type="ligth" variant="ligth">
-   
-
-    <b-navbar-toggle target="nav-collapse ">
-      <template :default=" expanded ">
-        <b-icon v-if="expanded" icon="justify" class="couleur" @click="Expanded(1)"></b-icon>
-        <b-icon v-else icon="X" class="couleur" @click="Expanded(2)"></b-icon>
-      </template>
-    </b-navbar-toggle>
-
-    <b-collapse id="nav-collapse" is-nav> -->
-      
-
-      <!-- Right aligned nav items -->
-      <!-- <b-navbar-nav class="ml-auto bold size_nav" >
-       
-      <b-nav-item > <router-link to="/" class="mx-2">{{ $t('home.Home') }}</router-link></b-nav-item>
-        
-         <b-nav-item ><router-link :to="{ name: 'about' }" class="mx-2">{{ $t('home.About_Us') }} </router-link></b-nav-item>
-        
-        <b-nav-item > <router-link :to="{ name: 'contact' }" class="mx-2">  {{ $t('home.Contact_Us') }}  </router-link></b-nav-item>
-      
-         <b-nav-item ><router-link to="/login" class="mx-2">  {{ $t('home.Login') }}  </router-link></b-nav-item>
-        <b-nav-item ><router-link to="/signup" class="mx-2"> {{ $t('home.Signup') }} </router-link></b-nav-item>
-
-
-      </b-navbar-nav>
-    </b-collapse>
-  </b-navbar> -->
-</div>
-
-
-
-
-
-        <!-- .nav-menu -->
-
-        <!-- <a
-          href="#about"
-          class="black d-lg-none"
-          style="color: black; font-weight: bold; font-size: 18px"
-          >Login</a
-        >
-
-        <a
-          href="#about"
-          class="get-started-btn d-lg-none"
-          style="font-size: 18px"
-          >{{ $t('home.Sign_Up')}}</a
-        > -->
-      </div>
-    </header>
+  
     <!-- End Header -->
 
     <div class="container p-0">
@@ -244,7 +184,7 @@
                   <h3
                     class="card-title"
                     style="
-                      font-family: Antic, sans-serif;
+                     ;
                       color: rgb(81, 87, 94);
                       font-size: 0.99em;
                     "
@@ -254,7 +194,7 @@
                   <p
                     class="card-text"
                     style="
-                      font-family: Antic, sans-serif;
+                     ;
                       color: rgb(81, 87, 94);
                     "
                   ></p>
@@ -283,7 +223,7 @@
                   <h3
                     class="card-title"
                     style="
-                      font-family: Antic, sans-serif;
+                     ;
                       color: rgb(81, 87, 94);
                       font-size: 0.99em;
                     "
@@ -293,7 +233,7 @@
                   <p
                     class="card-text"
                     style="
-                      font-family: Antic, sans-serif;
+                     ;
                       color: rgb(81, 87, 94);
                     "
                   ></p>
@@ -322,7 +262,7 @@
                   <h3
                     class="card-title"
                     style="
-                      font-family: Antic, sans-serif;
+                     ;
                       color: rgb(81, 87, 94);
                       font-size: 0.99em;
                     "
@@ -332,7 +272,7 @@
                   <p
                     class="card-text"
                     style="
-                      font-family: Antic, sans-serif;
+                     ;
                       color: rgb(81, 87, 94);
                     "
                   ></p>
@@ -361,7 +301,7 @@
                   <h3
                     class="card-title"
                     style="
-                      font-family: Antic, sans-serif;
+                     ;
                       color: rgb(81, 87, 94);
                       font-size: 0.99em;
                     "
@@ -371,7 +311,7 @@
                   <p
                     class="card-text"
                     style="
-                      font-family: Antic, sans-serif;
+                     ;
                       color: rgb(81, 87, 94);
                     "
                   ></p>
@@ -1246,7 +1186,7 @@ export default {
 }
 
 .mobile-top-div {
-  font-family: poppins, Helvetica Neue, Helvetica, Arial, sans-serif;
+  /* font-family: poppins, Helvetica Neue, Helvetica, Arial, sans-serif; */
   font-weight: 700;
   font-size: 20px;
   line-height: 40px;
@@ -1326,7 +1266,7 @@ export default {
 
     margin-bottom: 100px;
 
-    font-family: poppins, Helvetica Neue, Helvetica, Arial, sans-serif;
+    /* font-family: poppins, Helvetica Neue, Helvetica, Arial, sans-serif; */
     font-weight: 700;
     font-size: 25px;
     line-height: 40px;
@@ -1391,7 +1331,7 @@ export default {
 
     margin-bottom: 100px;
 
-    font-family: poppins, Helvetica Neue, Helvetica, Arial, sans-serif;
+    /* font-family: poppins, Helvetica Neue, Helvetica, Arial, sans-serif; */
     font-weight: 700;
     font-size: 32px;
     line-height: 40px;

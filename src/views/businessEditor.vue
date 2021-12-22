@@ -41,19 +41,19 @@
 </template>
 
 <script>
-import navbar from '@/components/navbar';
-import Business from '../components/businessEditor/business';
+import navbar from "@/components/navbar";
+import Business from "../components/businessEditor/business";
 
-import Settings from '../components/businessEditor/settings';
+import Settings from "../components/businessEditor/settings";
 
-import Inbox from '../components/businessOwner/inbox';
+import Inbox from "@/components/businessOwner/inbox";
 
-import LyTab from '@/tab/src/index.vue';
+import LyTab from "@/tab/src/index.vue";
 
-import Footer from '../components/footer';
+import Footer from "../components/footer";
 
 export default {
-  name: 'Home',
+  name: "Home",
   components: {
     navbar,
     Business,
@@ -73,15 +73,15 @@ export default {
       bottomSelectedId: 0,
       url_data: null,
       items: [
-        { label: 'Home ', icon: '' },
+        { label: "Home ", icon: "" },
 
-        { label: 'Inbox', icon: '' },
-        { label: 'Notification', icon: '' },
+        { label: "Inbox", icon: "" },
+        { label: "Notification", icon: "" },
 
-        { label: "Settings", icon: "" }
+        { label: "Settings", icon: "" },
       ],
       options: {
-        activeColor: '#1d98bd',
+        activeColor: "#1d98bd",
       },
     };
   },
@@ -90,14 +90,17 @@ export default {
     this.foll_id = this.$route.params.id;
 
     this.$store
-      .dispatch('businessOwner/roleCheck', this.foll_id)
+      .dispatch("businessOwner/roleCheck", this.foll_id)
       .then((data) => {
         console.log(data);
 
         let role = data.data.data.role;
         switch (role) {
-          case 'visitor':
-            this.$router.push({ name: 'BusinessFollower', params: { id: this.foll_id } });
+          case "visitor":
+            this.$router.push({
+              name: "BusinessFollower",
+              params: { id: this.foll_id },
+            });
             break;
         }
 
@@ -109,7 +112,7 @@ export default {
         console.log(error.response.status);
 
         if (error.response.status == 404) {
-          this.$router.push({ name: 'notFound' });
+          this.$router.push({ name: "notFound" });
         }
       });
   },
@@ -117,9 +120,9 @@ export default {
   methods: {
     businessInfo() {
       this.$store
-        .dispatch('businessOwner/businessInfo', this.url_data)
+        .dispatch("businessOwner/businessInfo", this.url_data)
         .then(() => {
-          console.log('hey yeah');
+          console.log("hey yeah");
         })
         .catch((err) => {
           console.log({ err: err });
@@ -128,9 +131,9 @@ export default {
 
     CommunityBusiness() {
       this.$store
-        .dispatch('businessOwner/CommunityBusiness', this.url_data)
+        .dispatch("businessOwner/CommunityBusiness", this.url_data)
         .then(() => {
-          console.log('hey yeah');
+          console.log("hey yeah");
         })
         .catch((err) => {
           console.log({ err: err });
@@ -139,9 +142,9 @@ export default {
 
     CommunityPeople() {
       this.$store
-        .dispatch('businessOwner/CommunityPeople', this.url_data)
+        .dispatch("businessOwner/CommunityPeople", this.url_data)
         .then(() => {
-          console.log('hey yeah');
+          console.log("hey yeah");
         })
         .catch((err) => {
           console.log({ err: err });
@@ -150,9 +153,9 @@ export default {
 
     businessCommunityTotal() {
       this.$store
-        .dispatch('businessOwner/businessCommunityTotal', this.url_data)
+        .dispatch("businessOwner/businessCommunityTotal", this.url_data)
         .then(() => {
-          console.log('hey yeah');
+          console.log("hey yeah");
         })
         .catch((err) => {
           console.log({ err: err });
@@ -161,9 +164,9 @@ export default {
 
     ownerPost() {
       this.$store
-        .dispatch('businessOwner/ownerPost', this.url_data)
+        .dispatch("businessOwner/ownerPost", this.url_data)
         .then(() => {
-          console.log('hey yeah');
+          console.log("hey yeah");
         })
         .catch((err) => {
           console.log({ err: err });

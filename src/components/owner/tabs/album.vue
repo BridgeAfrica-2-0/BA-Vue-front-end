@@ -178,7 +178,7 @@ export default {
   },
 
   created() {
-    this.url = this.$route.params.id;
+    this.url = this.$route.params.id ? this.$route.params.id : this.profile.id;
 
     this.strategy = {
       business: () => ({
@@ -238,6 +238,8 @@ export default {
       getAlbumsNetwork: 'networkProfileMedia/getAlbums',
       getAlbumImageNetwork: 'networkProfileMedia/getAlbumImage',
       albumImagesNetwork: 'networkProfileMedia/getAlbumImages',
+
+      profile: 'auth/profilConnected'
     }),
 
     canCreateAlbum() {
@@ -329,8 +331,8 @@ export default {
       this.strategy[this.type]()
         .createAlbum(data)
         .then(() => {
-          this.strategy[this.type]().fetchAlbums(this.$route.params.id);
-          this.getAlbums();
+          this.strategy[this.type]().fetchAlbums(this.$route.params.id ? this.$route.params.id: this.profile.id);
+          
         })
         .then(() => {
           this.$bvModal.hide('createalbumModal');

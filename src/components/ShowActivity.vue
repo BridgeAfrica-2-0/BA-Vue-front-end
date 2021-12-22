@@ -193,11 +193,11 @@ export default {
         const request =
           "network" == type
             ? await this.$repository.share.switch(
-                this.$route.params.id,
+                item.id,
                 "network"
               )
             : await this.$repository.share.switch(
-                this.$route.params.id,
+                item.id,
                 "business"
               );
 

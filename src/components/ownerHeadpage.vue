@@ -3,26 +3,24 @@
     <b-container fluid class="p-0 gradient">
       <div class="container-flex banner">
         <img
-          v-if="info.user.cover_picture == ''"
+          v-if="!info.user.cover_picture"
           src="@/assets/img/banner.jpg"
           class="img-fluid banner"
           alt="Cover Image"
         />
-
-        <img
-          v-if="info.user.cover_picture"
+        <img v-else
           :src="info.user.cover_picture"
           class="img-fluid banner"
           alt="Cover Image"
         />
       </div>
+      
 
       <div class="container-fluid p-63">
         <b-row class="mt-md-2 text-left">
           <b-col cols="12" md="12" class="m-0 p-0 text-left put-top">
             <b-avatar
-              v-if="info.user.profile_picture == ''"
-              src=""
+              v-if="!info.user.profile_picture"
               class="avat text-center"
               badge-variant="primary"
               badge-offset="10px"
@@ -30,7 +28,7 @@
             </b-avatar>
 
             <b-avatar
-              v-if="info.user.profile_picture != ''"
+              v-else
               :src="info.user.profile_picture"
               class="avat text-center"
               badge-variant="primary"
@@ -111,14 +109,14 @@
                       <b-dropdown-item @click="RemoveCover"> {{ $t('profileowner.Remove_Cover') }} </b-dropdown-item>
                        <b-dropdown-item @click="RemoveProfile"> {{ $t('profileowner.Remove_Profile') }} </b-dropdown-item>
 
-
+<!-- 
                       <b-dropdown-item @click="RemoveCover">
                         Remove cover
                       </b-dropdown-item>
                       <b-dropdown-item @click="RemoveProfile">
                         Remove Profile
                       </b-dropdown-item>
-
+ -->
                       <!--
                       <b-dropdown-item
                         >Invite Friends On Bridge Africa</b-dropdown-item
@@ -413,7 +411,7 @@ export default {
       });
 
       this.axios
-        .get("user/remove-cover")
+        .delete("user/profile")
         .then((response) => {
           console.log(response);
           this.$store
@@ -453,7 +451,7 @@ export default {
       });
 
       this.axios
-        .get("user/upload-cover")
+        .delete("user/cover")
         .then((response) => {
           console.log(response);
           this.$store

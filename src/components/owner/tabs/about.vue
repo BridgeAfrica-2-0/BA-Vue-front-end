@@ -1,12 +1,8 @@
 <template>
   <div>   
-
-
-
     <b-icon class="icon" variant="primary" icon="person-fill"></b-icon>{{ $t('profileowner.About') }} 
 
     <hr /> 
-
 
     <b-card v-if="window.width<768"  no-body class="mobile p-2">
       <b-tabs pills card justified>
@@ -16,7 +12,6 @@
       </b-tabs>
     </b-card>
 
-
     <b-card v-else no-body class="desktop">
       <b-tabs pills card vertical>
         <b-tab :title="$t('profileowner.BIOGRAPHY')" active><Biography /></b-tab>  
@@ -24,8 +19,6 @@
         <b-tab :title="$t('profileowner.WORK_EDUCATION')"><WorkAndEducation /></b-tab>  
       </b-tabs>
     </b-card>
-
-    
 
   </div>
 </template>

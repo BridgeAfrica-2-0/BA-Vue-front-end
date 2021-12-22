@@ -34,7 +34,8 @@ export default {
 
   watch: {
     "$store.state.auth.profilConnected": function (newProfile) {
-      console.log("network" === newProfile.user_type ? newProfile.id : null)
+      const uuid = "network" === newProfile.user_type ? newProfile.id : null
+      
       this.getNetworkAndBusiness(
         "network" === newProfile.user_type ? newProfile.id : null
       );
@@ -47,8 +48,8 @@ export default {
       setBusiness: "social/FIND_USER_BUSNESS",
     }),
 
-    getNetworkAndBusiness: async function () {
-      let request = await this.$repository.share.getNetworkAndBusiness();
+    getNetworkAndBusiness: async function (uuid) {
+      let request = await this.$repository.share.getNetworkAndBusiness(uuid);
       if (request.success) {
         this.setBusiness(request.data.business);
         this.setNetworks(request.data.network);

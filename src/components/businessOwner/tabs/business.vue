@@ -13,7 +13,10 @@
             </div>
             <div class="flx100">
               <p class="textt">
-                <strong class="title"> {{ item.name }} </strong> <br />
+                <router-link :to="{name: 'BusinessFollower', params: {id:item.id}}">
+                  <strong class="title"> {{ item.name }} </strong>
+                </router-link>
+                 <br />
 
                 <span v-for="cat in item.category" :key="cat.name">
                   {{ cat.name }}

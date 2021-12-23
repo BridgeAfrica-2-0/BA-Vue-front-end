@@ -50,7 +50,7 @@
                     :text="network.description"
                     link="#"
                     less-str="read less"
-                    :max-chars="200"
+                    :max-chars="20"
                   ></read-more>
                 </p>
               </b-col>

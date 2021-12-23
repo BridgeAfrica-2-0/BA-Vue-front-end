@@ -141,7 +141,7 @@
                           <input
                             v-model="searchQuery"
                             class="form-control input-background"
-                            :placeholder="$t('general.Search_chat_list')" 
+                            :placeholder="$t('general.Search_chat_list')"
                             @keypress.enter="
                               getChatList({
                                 type: 'user',
@@ -226,7 +226,7 @@
                           <input
                             v-model="searchQuery"
                             class="form-control input-background"
-                            :placeholder="$t('general.Search_chat_list')" 
+                            :placeholder="$t('general.Search_chat_list')"
                             @keypress.enter="
                               getChatList({
                                 type: 'business',
@@ -394,7 +394,7 @@
                           <input
                             v-model="searchQuery"
                             class="form-control input-background"
-                            :placeholder="$t('general.Search_chat_list')" 
+                            :placeholder="$t('general.Search_chat_list')"
                             @keypress.enter="
                               getChatList({
                                 type: 'group',
@@ -674,9 +674,7 @@
                   >
                     <b-row class="p-4">
                       <b-col>
-                        <b v-if="type == 'group'">
-                          {{ getName(chat) }}
-                        </b>
+                        <b v-if="type == 'group'"> {{ getName(chat) }} </b>
                         <p
                           v-if="chat.attachment"
                           class="msg-text mt-0 text"
@@ -1022,7 +1020,7 @@
                           }}
                           Network: {{ selectedNetwork }}
                           <b-tabs content-class=" ma-4 pt-6" fill pills card>
-                            <b-tab :title=" $t('general.All')" @click="getAll()">
+                            <b-tab :title="$t('general.All')" @click="getAll()">
                               <div v-if="loader" class="text-center">
                                 <b-spinner
                                   variant="primary"
@@ -1030,7 +1028,7 @@
                                   class="centralizer"
                                 ></b-spinner>
                               </div>
-                              <h5>{{$t('businessowner.People')}}</h5>
+                              <h5>{{ $t("businessowner.People") }}</h5>
                               <div v-if="allUsers">
                                 <tr
                                   v-for="(biz, index) in allUsers"
@@ -1064,7 +1062,7 @@
                                 </tr>
                               </div>
                               <hr />
-                              <h5>{{$t('general.Business')}}</h5>
+                              <h5>{{ $t("general.Business") }}</h5>
                               <div v-if="allBusiness">
                                 <tr
                                   v-for="(biz, index) in allBusiness"
@@ -1201,7 +1199,10 @@
                               </div>
                               <hr />
                             </b-tab>
-                            <b-tab :title="$t('general.People')" @click="getUsers()">
+                            <b-tab
+                              :title="$t('general.People')"
+                              @click="getUsers()"
+                            >
                               <b-row>
                                 <b-col>
                                   <b-card>
@@ -1214,7 +1215,7 @@
                                           value="accepted"
                                           @change="selectedAllMulty"
                                         >
-                                          {{$t('general.All')}}
+                                          {{ $t("general.All") }}
                                         </b-form-checkbox>
                                       </b-col>
                                       <b-col>
@@ -1226,7 +1227,7 @@
                                           :unchecked-value="false"
                                           @change="selectedFollowings"
                                         >
-                                          {{$t('general.Following')}}
+                                          {{ $t("general.Following") }}
                                         </b-form-checkbox>
                                       </b-col>
                                       <b-col>
@@ -1238,7 +1239,7 @@
                                           :unchecked-value="false"
                                           @change="selectedFollowers"
                                         >
-                                          {{$t('general.Follower')}}
+                                          {{ $t("general.Follower") }}
                                         </b-form-checkbox>
                                       </b-col>
                                     </b-row>
@@ -1285,7 +1286,7 @@
                                   </td>
                                 </tr>
                               </div>
-                              <h2 v-else>{{$t('general.No_data')}}</h2>
+                              <h2 v-else>{{ $t("general.No_data") }}</h2>
 
                               <!-- End Chats -->
                             </b-tab>
@@ -1302,7 +1303,7 @@
                                           value="accepted"
                                           @change="selectedAllMulty"
                                         >
-                                          {{$t('general.All')}}
+                                          {{ $t("general.All") }}
                                         </b-form-checkbox>
                                       </b-col>
                                       <b-col>
@@ -1314,7 +1315,7 @@
                                           :unchecked-value="false"
                                           @change="selectedFollowings"
                                         >
-                                          {{$t("general.Following")}}
+                                          {{ $t("general.Following") }}
                                         </b-form-checkbox>
                                       </b-col>
                                       <b-col>
@@ -1326,7 +1327,7 @@
                                           :unchecked-value="false"
                                           @change="selectedFollowers"
                                         >
-                                          {{$t('general.Follower')}}
+                                          {{ $t("general.Follower") }}
                                         </b-form-checkbox>
                                       </b-col>
                                     </b-row>
@@ -1378,7 +1379,7 @@
                                   </td>
                                 </tr>
                               </div>
-                              <h2 v-else>{{$t("general.No_Business")}}</h2>
+                              <h2 v-else>{{ $t("general.No_Business") }}</h2>
 
                               <!-- End Chats -->
                             </b-tab>
@@ -1395,7 +1396,7 @@
                                           value="accepted"
                                           @change="selectedAllMulty"
                                         >
-                                          {{$t("general.All")}}
+                                          {{ $t("general.All") }}
                                         </b-form-checkbox>
                                       </b-col>
                                       <b-col>
@@ -1407,7 +1408,7 @@
                                           :unchecked-value="false"
                                           @change="selectedFollowings"
                                         >
-                                          {{$t("general.Following")}}
+                                          {{ $t("general.Following") }}
                                         </b-form-checkbox>
                                       </b-col>
                                       <b-col>
@@ -1466,12 +1467,15 @@
                                   </td>
                                 </tr>
                               </div>
-                              <h2 v-else>{{$t("general.No_Network")}}</h2>
+                              <h2 v-else>{{ $t("general.No_Network") }}</h2>
 
                               <!-- End Chats -->
                             </b-tab>
 
-                            <b-tab :title="$t('general.Editors')" @click="getEditors()">
+                            <b-tab
+                              :title="$t('general.Editors')"
+                              @click="getEditors()"
+                            >
                               <div v-if="loader" class="text-center">
                                 <b-spinner
                                   variant="primary"
@@ -1511,7 +1515,7 @@
                                   </td>
                                 </tr>
                               </div>
-                              <h2 v-else>{{$t("general.No_Editor")}}</h2>
+                              <h2 v-else>{{ $t("general.No_Editor") }}</h2>
 
                               <!-- End Chats -->
                             </b-tab>
@@ -1760,6 +1764,8 @@ export default {
   },
   data() {
     return {
+      audio: new Audio("@/assets/sound/message.mp3"),
+
       formData: new FormData(),
       groupName: "",
       allSelection: true,
@@ -1862,6 +1868,9 @@ export default {
     currentBiz() {
       return this.$store.getters["auth/profilConnected"];
     },
+    userInfo() {
+      return this.$store.getters["networkChat/getUserInfo"];
+    },
 
     bizs() {
       return this.$store.getters["networkChat/getBizs"];
@@ -1910,6 +1919,7 @@ export default {
   created() {
     this.socketListenners();
     this.getCurBiz();
+    this.getUserInfo();
 
     this.$store.commit(
       "networkChat/setCurrentBizId",
@@ -2147,6 +2157,7 @@ export default {
       // });
       this.socket.on("groupMessage", (data) => {
         console.log("group message Received");
+        this.audio.play();
         console.log(data);
         this.chats.push(data);
 
@@ -2162,6 +2173,8 @@ export default {
       });
       this.socket.on("privateMessage", (data) => {
         console.log("Received");
+        this.audio.play();
+
         console.log(data);
         this.chats.push(data);
         console.log(this.chats);
@@ -2261,6 +2274,11 @@ export default {
     //   this.allSelection = true;
     //   await this.$store.dispatch("businessChat/GET_ALL", keyword);
     // },
+    getUserInfo() {
+      this.$store.dispatch("networkChat/GET_USER_INFO").then(() => {
+        console.log("user info: ", this.userInfo);
+      });
+    },
     getNetworkMembers(keyword) {
       this.$store.dispatch("networkChat/GET_NETWORK_MEMBERS", {
         keyword: keyword,

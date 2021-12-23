@@ -3,7 +3,7 @@ import axios from "axios"
   export default {
     namespaced: true,
     state: {
-       userInfos: {},
+       userInfos: null,
        etat: 0,
        selectedId:5
     },

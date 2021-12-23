@@ -12,6 +12,7 @@ export default {
         businesses: [],
         currentBizId: null,
         currentBiz: [],
+        userInfo: [],
         bizs: [],
         chats: [],
         chatList: [],
@@ -49,6 +50,9 @@ export default {
             return state.members;
         },
 
+        getUserInfo(state) {
+            return state.userInfo;
+        },
         getCurrentBiz(state) {
             return state.currentBiz;
         },
@@ -117,6 +121,9 @@ export default {
             state.selectedChatId = data
         },
 
+        setUserInfo(state, data) {
+            state.userInfo = data
+        },
         setSelectedChat(state, data) {
             state.selectedChat = data
         },
@@ -580,26 +587,56 @@ export default {
                     })
             }
         },
+        GET_USER_INFO({ commit, state }, data) {
 
+            return axios.get(`/userIntro`)
+                .then((res) => {
+                    console.log("USER INFO", res.data.data.user);
+                    commit("setUserInfo", res.data.data.user);
+
+                })
+                .catch((err) => {
+                    console.log(err);
+                })
+        },
         SAVE_GROUP_CHAT({ commit, state }, data) {
             // commit("setUsers", []);
             console.log("[DEBUG]", data);
             let payload = data.data
                 // let group_id = data.group_id
             let sender_id = data.sender_id
+            let editor = state.userInfo.editorNetworksID.some((res) => {
+                return res.network_id == sender_id
+            })
+            console.log("editor is", editor);
+
+            if (editor) {
+                return axios.post(`/group/${state.selectedChatId}/network/${sender_id}/editor`, payload, {
+                        headers: {
+                            'Content-Type': 'multipart/form-data'
+                        }
+                    })
+                    .then((res) => {
+                        console.log("Message saved...", res.data.data);
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    })
+            } else {
+                return axios.post(`/group/${state.selectedChatId}/network/${sender_id}`, payload, {
+                        headers: {
+                            'Content-Type': 'multipart/form-data'
+                        }
+                    })
+                    .then((res) => {
+                        console.log("Message saved...", res.data.data);
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    })
+            }
 
 
-            return axios.post(`/group/${state.selectedChatId}/network/${sender_id}`, payload, {
-                    headers: {
-                        'Content-Type': 'multipart/form-data'
-                    }
-                })
-                .then((res) => {
-                    console.log("Message saved...", res.data.data);
-                })
-                .catch((err) => {
-                    console.log(err);
-                })
 
         },
 

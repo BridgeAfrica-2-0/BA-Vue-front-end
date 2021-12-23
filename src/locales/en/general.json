@@ -5,6 +5,13 @@
     "PHONE":"PHONE",
     "Mobile":"Mobile",
     "EMAIL":"E-MAIL",
+
+    "cart_totals":"Cart Totals",
+    "sub_totals":"Sub Totals",
+    "update_cart":"Update Cart",
+    
+
+    
     "Cameroon":"Cameroon",
     "Find_Pharmacies":"Find pharmacies",
     "Find_Pharmacy":"Find pharmacy",

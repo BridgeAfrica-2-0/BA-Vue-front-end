@@ -40,3 +40,10 @@ export const formatNumber = (num) => {
   }
   return num;
 }
+
+
+export const diffBetweenTwoDate = (end, start) => {
+  const startDate = moment(start)
+  const endDate = moment(end)
+  return endDate.diff(startDate)
+}

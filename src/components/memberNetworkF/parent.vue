@@ -48,7 +48,7 @@
             <b-col>
               <p class="a-center ">
                 <b-icon icon="globe" variant="primary"></b-icon>
-                <span class="pivate text"> Private </span>
+                <span class="pivate text"> {{ $t('general.Private') }} </span>
               </p>
             </b-col>
             <b-col>
@@ -56,7 +56,7 @@
                 <b-icon icon="people-fill" variant="primary"></b-icon>
                 <span class="pivate text">
                   {{ nFormatter(networkInfo.community) }}
-                  community 
+                 {{ $t('general.community') }} 
                 </span>
               </p>
             </b-col>

@@ -77,6 +77,7 @@ export default {
       getProfilePictures: 'UserProfileOwner/getImages',
       getBusinessPictures: 'businessOwner/getAllImages',
       getNetworkPictures: 'networkProfileMedia/getImages',
+      profile: 'auth/profilConnected'
     }),
   },
 
@@ -146,7 +147,7 @@ export default {
   },
 
   created() {
-    this.urlData = this.$route.params.id;
+    this.urlData = this.$route.params.id ? this.$route.params.id : this.profile.id;
     if (this.isablum) {
       this.tabIndex = 1;
     }

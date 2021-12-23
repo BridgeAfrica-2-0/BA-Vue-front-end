@@ -65,7 +65,7 @@
                 class="post-btn"
               >
                 <fas-icon class="icons" :icon="['fas', 'file']" size="lg" />
-                <span class="username"> {{ $t('profileowner.Attach_File') }} </span>
+                <span class="username">  {{$t('profileowner.Attach_File') }} </span>
               </b-button>
             </b-col>
             <!-- Post-->
@@ -946,7 +946,7 @@ export default {
   }
   .send-cmt {
     position: relative;
-    margin-left: 95%;
+    margin-left: 93%;
     top: -28px;
     cursor: pointer;
   }

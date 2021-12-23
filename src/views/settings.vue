@@ -1,12 +1,12 @@
 <template>
-  <div>
+  <div ref="wrapper">
     <Navbar />
 
-    <div class="container wahala">
+    <div class="container wahala" v-if="hasLoad">
       <b-row>
         <b-col cols="12" md="12" lg="12" xl="12">
           <div>
-            <b-tabs lazy pills :vertical="vertical" class="itzlala" nav-wrapper-class="w-15">
+            <b-tabs pills :vertical="vertical" class="itzlala" nav-wrapper-class="w-15" v-model="activeTab" lazy>
               <!-- NOTIFICATIONS TAB -->
               <b-tab :title="$t('settings.Notifications')">
                 <b-card-text class="mt-3">
@@ -497,6 +497,8 @@ export default {
 
   data() {
     return {
+      activeTab:0,
+      hasLoad:false,
       size: 0,
        selected: '',
        options:'',
@@ -518,11 +520,11 @@ export default {
 
   methods: {
     userInfos(){ 
+      
       this.$store
       .dispatch("profileSettingsEdit/userInfos")
       .then(response =>{
-        console.log(response);
-        console.log(this.getUserInfos);
+        
         this.selected =this.$store.state.profileSettingsEdit.userInfos.payement_method ;
         console.log("-----------------------"+this.selected);
         // if(this.$store.state.profileSettingsEdit.userInfos.gender == "male"){
@@ -531,10 +533,10 @@ export default {
           this.selectedGender = this.$store.state.profileSettingsEdit.userInfos.gender;
           // this.selectedCounty = this.getUserInfos.country.id;
           // console.log("-----------------"+this.selectedCounty);
-         
+        
       })
       .catch((err) => {
-         
+          
           console.log('--------- error: ');
           console.error(err);
         });
@@ -588,18 +590,24 @@ export default {
     },
 
     getCountry(){
-        this.$store
+      let loader = this.$loading.show({
+        container: this.$refs.wrapper,
+        canCancel: true,
+        onCancel: this.onCancel,
+        color: "#e75c18",
+      });
+      this.$store
       .dispatch("auth/country")
       .then(response =>{
-        console.log("------------------------");
         console.log(this.country);
+        this.hasLoad = true
         
       })
       .catch((err) => {
-         
           console.log('--------- error: ');
           console.error(err);
-        });
+        })
+      .finally(() => loader.hide());
     },
 
     changePassword(){
@@ -630,7 +638,7 @@ export default {
     },
 
     getRegion(){
-          let data = { countryId: this.selectedCounty }
+        let data = { countryId: this.selectedCounty }
         this.$store
       .dispatch("auth/region",data)
       .then(response =>{
@@ -687,10 +695,9 @@ export default {
       .dispatch("auth/locality",data)
       .then(response =>{
         console.log("------------------------");
-        
+       
       })
       .catch((err) => {
-         
           console.log('--------- error: ');
           console.error(err);
         });
@@ -728,16 +735,18 @@ export default {
     var that = this;
     window.onresize = function() {
       that.size = window.innerWidth;
-      console.log(that);
-
-      console.log('lolo');
     };
 
     if (that.size == '') {
       that.size = window.innerWidth;
-      console.log('lolo');
     }
   },
+
+  created(){
+    if ("account" === this.$route.query.tab){
+      this.activeTab = 2
+    }
+  }
 }
 </script>
 

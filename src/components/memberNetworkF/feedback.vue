@@ -78,8 +78,8 @@
     <b-row>
       <b-col col="12">
         <infinite-loading @infinite="infiniteHandler" ref="infiniteLoading">
-          <div class="text-red" slot="no-more">No More Request</div>
-          <div class="text-red" slot="no-results">No More Request</div>
+          <div class="text-red" slot="no-more">{{ $t('general.No_More_Request') }}</div>
+          <div class="text-red" slot="no-results">{{ $t('general.No_More_Request') }}</div>
         </infinite-loading>
       </b-col>
     </b-row>
@@ -107,13 +107,13 @@ export default {
       feedbacks: [],
 
       options: [
-        { value: "Improvement", text: "Suggestion for Improvement" },
-        { value: "Complain", text: "Complains" }
+        { value: "Improvement", text: this.$t('general.Suggestion_for_Improvement') },
+        { value: "Complaints", text: this.$t('general.Complaints')}
       ],
       filters: [
         { value: "0", text: "Any" },
-        { value: "Improvement", text: "Suggestion for Improvement" },
-        { value: "Complain", text: "Complains" }
+         { value: "Improvement", text: this.$t('general.Suggestion_for_Improvement') },
+        { value: "Complaints", text: this.$t('general.Complaints')}
       ],
       feedbackForm: {
         title: "Improvement",

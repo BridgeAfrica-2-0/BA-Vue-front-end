@@ -21,7 +21,16 @@
                 </div>
                 <div class="flx100">
                   <p class="textt">
-                    <strong class="title"> {{ item.name }} </strong> <br />
+                    <router-link
+                      :to="{
+                        name: 'BusinessFollower',
+                        params: { id: item.id },
+                      }"
+                    >
+                      <strong class="title">
+                        {{ item.name }}</strong
+                      > </router-link
+                    ><br />
 
                     <span v-for="cat in item.category" :key="cat.name">
                       {{ cat.name }}
@@ -44,6 +53,14 @@
                       :max-chars="100"
                     >
                     </read-more>
+
+                    <b-icon
+                      font-scale="1"
+                      icon="exclamation-octagon"
+                      v-b-tooltip.hover
+                      title="Block This Business"
+                      variant="danger"
+                    ></b-icon>
                   </p>
                 </div>
               </div>
@@ -107,6 +124,7 @@
                       size="sm"
                       class="b-background shadow"
                       variant="primary"
+                      @click="gotoBusiness(item.id)"
                     >
                       <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
                       <span class="btn-text">{{
@@ -176,6 +194,9 @@ export default {
   },
 
   methods: {
+    gotoBusiness(id) {
+      this.$router.push(`/business/${id}#about`);
+    },
     cta(data) {
       console.log(data);
       this.$store.commit("businessChat/setSelectedChat", data);

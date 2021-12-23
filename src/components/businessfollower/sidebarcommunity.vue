@@ -124,8 +124,11 @@ export default {
   },
 
   computed: {
-    total() {
-      return this.$store.state.profile.Tcommunity;
+    // total() {
+    //   return this.$store.state.profile.Tcommunity;
+    // },
+      total() {
+      return this.$store.state.follower.Tcommunity;
     },
 
     business() {

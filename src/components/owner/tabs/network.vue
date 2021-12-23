@@ -42,7 +42,32 @@
                 cols="4"
                 class="mt-2 text-center"
               >
+
+
+              <b-button
+              v-if="show == 'Follower'"
+              disabled
+                  block
+                  size="sm"
+                  class="b-background shadow"
+                  :class="item.is_follow !== 0 && 'u-btn'"
+                  :id="'followbtn' + item.id"
+                  variant="primary"
+                  
+                >
+                  <i
+                    class="fas fa-lg btn-icon"
+                    :class="
+                      item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'
+                    "
+                  ></i>
+                  <span class="btn-com">{{
+                    $t("profileowner.Community")
+                  }}</span>
+                </b-button>
+
                 <b-button
+                v-else
                   block
                   size="sm"
                   class="b-background shadow"
@@ -133,7 +158,11 @@ export default {
     };
   },
 
-  computed: {},
+  computed: {
+    show(){
+      return this.$route.name
+    }
+  },
 
   mounted() {
     this.foll_id = this.$route.params.id ? this.$route.params.id : "";

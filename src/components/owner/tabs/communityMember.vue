@@ -27,7 +27,11 @@
                             class="mt-lg-2"
                           >
                             <div class="mt-3 mt-lg-0 mt-xl-0 username">
-                              <b> {{ item.name }} </b>
+                              <b>
+                                <router-link :to="'/profilefollower/' + item.id">
+                                  {{ item.name }}
+                                </router-link>   
+                              </b>
                             </div>
                           </b-col>
 

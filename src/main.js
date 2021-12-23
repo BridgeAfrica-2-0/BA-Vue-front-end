@@ -201,9 +201,7 @@ new Vue({
     created() {
         const userInfo = localStorage.getItem('user');
         i18n.locale = localStorage.getItem('lang');
-
-
-        console.log(i18n.locale);
+        let lang = localStorage.getItem('lang') ? localStorage.getItem('lang') : "en";
 
         if (userInfo) {
             const userData = JSON.parse(userInfo);
@@ -217,21 +215,20 @@ new Vue({
                     if (error.response.status === 401) {
                         this.$store.dispatch('auth/logout');
                         console.log('error has ocurred', error);
-
-
                     }
                 }
                 return Promise.reject(error);
             },
         );
 
-        axios.interceptors.request.use(function (config) {
+        axios.interceptors.request.use(function(config) {
             if (user != null) {
                 config.headers.Authorization = `Bearer ${user.accessToken}`;
             }
+            console.log("locale lang:", i18n.fallbackLocale);
 
-            // config.headers.common['Language'] = i18n.locale;
-            config.headers.common['Language'] = "en";
+            config.headers.common['Language'] = lang;
+            // config.headers.common['Language'] = i18n.fallbackLocale;
 
             return config;
         });

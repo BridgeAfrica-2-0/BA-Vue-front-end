@@ -734,8 +734,8 @@
       </div>
     </section>
     <!-- End Why Us Section -->
-
-    <footer id="footer">
+     <SiteFooter />
+    <!-- <footer id="footer">
       <div class="footer-top black-back">
         <div class="container">
           <div class="row">
@@ -797,10 +797,7 @@
                   <router-link :to="{name: 'contact'}">{{ $t('home.Contact_Us') }}</router-link>
                 </li>
 
-                <!--   
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
-                          -->
+              
               </ul>
             </div>
 
@@ -815,7 +812,7 @@
           </div>
         </div>
       </div>
-    </footer>
+    </footer> -->
     <!-- End Footer -->
 
     <!-- <div id="preloader"></div> -->
@@ -836,13 +833,13 @@
 // import "../assets/vendor/venobox/venobox.min.js";
 // import "../assets/vendor/owl.carousel/owl.carousel.min.js";
 // import "../assets/vendor/aos/aos.js";
-
+import SiteFooter from '../components/site/siteFooter';
 import "../assets/js/main.js";
 // import "../assets/js/js.js";
 import Button from '@/components/ButtonNavBarFind.vue';
 import SiteHeader from '../components/site/siteHeader';
 export default {
-  components: {Button, SiteHeader},
+  components: {Button, SiteHeader,SiteFooter},
   data(){
     return {
       expanded:true,

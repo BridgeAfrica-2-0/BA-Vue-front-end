@@ -556,7 +556,7 @@ export default {
   },
   data() {
     return {
-    
+      
       isActive: false,
       shownav: false,
       notifications: [],
@@ -782,6 +782,12 @@ export default {
     },
 
     logout: async function () {
+       let loader = this.$loading.show({
+        container: this.$refs.formContainer,
+        canCancel: true,
+        onCancel: this.onCancel,
+        color: "#e75c18",
+      });
       const response = await this.$repository.notification.logOut();
       if (response.success) {
         loader.hide();

@@ -92,12 +92,12 @@
                   </h1>
                 </b-col>
                 <b-col>
-                  <b-icon
+                  <!-- <b-icon
                     @click="newMessage(true)"
                     class="new-message primary icon-size float-right"
                     icon="pencil-square"
-                  ></b-icon>
-                  <!-- <b-dropdown
+                  ></b-icon> -->
+                  <b-dropdown
                     variant="white"
                     toggle-class="text-decoration-none"
                     no-caret
@@ -110,13 +110,17 @@
                         @click="this.newMsg = !this.newMsg"
                       ></b-icon>
                     </template>
-                    <b-dropdown-item @click="newMessage(true)">
+                    <b-dropdown-item
+                      @click="newMessage({ newmsg: true, bulk: false })"
+                    >
                       {{ $t("businessowner.New_Chat") }}</b-dropdown-item
                     >
-                    <b-dropdown-item @click="newMessage(true)">
+                    <b-dropdown-item
+                      @click="newMessage({ newmsg: true, bulk: true })"
+                    >
                       {{ $t("businessowner.New_Group_Chat") }}
                     </b-dropdown-item>
-                  </b-dropdown> -->
+                  </b-dropdown>
                 </b-col>
               </b-row>
 
@@ -137,7 +141,7 @@
                           <input
                             v-model="searchQuery"
                             class="form-control input-background"
-                            :placeholder="`Search chat list ${tabIndex}`"
+                            :placeholder="$t('general.Search_chat_list')"
                             @keypress.enter="
                               getChatList({
                                 type: 'user',
@@ -164,7 +168,7 @@
                               'p-2 message ',
                               {
                                 messageSelected:
-                                  chat.receiver_id ==
+                                  chat.id ==
                                   (chatSelected.clickedId != null
                                     ? chatSelected.clickedId
                                     : false)
@@ -176,7 +180,7 @@
                               selectedChat({
                                 type: 'user',
                                 chat: chat,
-                                id: chat.receiver_id,
+                                id: chat.id,
                               })
                             "
                           >
@@ -222,7 +226,7 @@
                           <input
                             v-model="searchQuery"
                             class="form-control input-background"
-                            :placeholder="`Search chat list ${tabIndex}`"
+                            :placeholder="$t('general.Search_chat_list')"
                             @keypress.enter="
                               getChatList({
                                 type: 'business',
@@ -249,7 +253,7 @@
                               'p-2 message ',
                               {
                                 messageSelected:
-                                  chat.receiver_business_id ==
+                                  chat.id ==
                                   (chatSelected.clickedId != null
                                     ? chatSelected.clickedId
                                     : false)
@@ -261,7 +265,7 @@
                               selectedChat({
                                 type: 'business',
                                 chat: chat,
-                                id: chat.receiver_business_id,
+                                id: chat.id,
                               })
                             "
                           >
@@ -307,7 +311,7 @@
                           <input
                             v-model="searchQuery"
                             class="form-control input-background"
-                            :placeholder="`Search chat list ${tabIndex}`"
+                            :placeholder="$t('general.Search_chat_list')"
                             @keypress.enter="
                               getChatList({
                                 type: 'network',
@@ -390,7 +394,7 @@
                           <input
                             v-model="searchQuery"
                             class="form-control input-background"
-                            :placeholder="`Search chat list ${tabIndex}`"
+                            :placeholder="$t('general.Search_chat_list')"
                             @keypress.enter="
                               getChatList({
                                 type: 'group',
@@ -543,7 +547,7 @@
                     <h5>{{ chatSelected.name }}</h5>
                     <!-- <p>{{ chatSelected }}</p> -->
                     <p
-                      v-if="groupMembers && type=='group'"
+                      v-if="groupMembers && type == 'group'"
                       class="d-inline-block text-truncate"
                       style="max-width: 200px"
                     >
@@ -670,9 +674,7 @@
                   >
                     <b-row class="p-4">
                       <b-col>
-                        <b v-if="type == 'group'">
-                          {{ getName(chat) }}
-                        </b>
+                        <b v-if="type == 'group'"> {{ getName(chat) }} </b>
                         <p
                           v-if="chat.attachment"
                           class="msg-text mt-0 text"
@@ -933,14 +935,29 @@
               <b-avatar
                 class="info-avatar"
                 variant="primary"
-                src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
+                :src="chatSelected.logo_path"
                 size="200"
               ></b-avatar>
               <div class="info-detail">
-                <h1 class="info-name">{{ receiver.name }}</h1>
-                <b-link class="primary">{{
+                <h1 class="info-name">{{ chatSelected.name }}</h1>
+                <!-- <b-link class="primary">{{
                   $t("businessowner.View_Profile")
-                }}</b-link>
+                }}</b-link> -->
+                <b-row v-if="type == 'group'" class="justify-content-md-center">
+                  <b-col cols="12" md="auto">
+                    <table class="info-name">
+                      <tr class="text-center">
+                        <th>
+                          <u> Members </u>
+                        </th>
+                      </tr>
+
+                      <tr v-for="(member, index) in groupMembers" :key="index">
+                        <td>{{ getName(member) }}</td>
+                      </tr>
+                    </table>
+                  </b-col>
+                </b-row>
               </div>
             </div>
             <div>
@@ -994,9 +1011,16 @@
                   <b-col>
                     <div class="new-msg-filter-list">
                       <table class="table">
-                        <b-row style="overflow-x: hidden !important">
+                        <b-row
+                          v-if="bulk"
+                          style="overflow-x: hidden !important"
+                        >
+                          business: {{ selectedBusiness }} Member:{{
+                            selectedPeople
+                          }}
+                          Network: {{ selectedNetwork }}
                           <b-tabs content-class=" ma-4 pt-6" fill pills card>
-                            <b-tab title="All" @click="getAll()">
+                            <b-tab :title="$t('general.All')" @click="getAll()">
                               <div v-if="loader" class="text-center">
                                 <b-spinner
                                   variant="primary"
@@ -1004,7 +1028,7 @@
                                   class="centralizer"
                                 ></b-spinner>
                               </div>
-                              <h5>People</h5>
+                              <h5>{{ $t("businessowner.People") }}</h5>
                               <div v-if="allUsers">
                                 <tr
                                   v-for="(biz, index) in allUsers"
@@ -1015,7 +1039,7 @@
                                     <b-form-group>
                                       <b-form-checkbox-group
                                         id="checkbox-group-2"
-                                        v-model="selectedMulty"
+                                        v-model="selectedPeople"
                                         name="flavour-2"
                                       >
                                         <b-form-checkbox
@@ -1038,7 +1062,7 @@
                                 </tr>
                               </div>
                               <hr />
-                              <h5>Business</h5>
+                              <h5>{{ $t("general.Business") }}</h5>
                               <div v-if="allBusiness">
                                 <tr
                                   v-for="(biz, index) in allBusiness"
@@ -1049,11 +1073,11 @@
                                     <b-form-group>
                                       <b-form-checkbox-group
                                         id="checkbox-group-2"
-                                        v-model="selectedMulty"
+                                        v-model="selectedBusiness"
                                         name="flavour-2"
                                       >
                                         <b-form-checkbox
-                                          :id="index + '_id'"
+                                          :id="index + '_id_biz'"
                                           :name="biz.name"
                                           :value="biz.id"
                                         >
@@ -1083,11 +1107,11 @@
                                     <b-form-group>
                                       <b-form-checkbox-group
                                         id="checkbox-group-2"
-                                        v-model="selectedMulty"
+                                        v-model="selectedNetwork"
                                         name="flavour-2"
                                       >
                                         <b-form-checkbox
-                                          :id="index + '_id'"
+                                          :id="index + '_id_net'"
                                           :name="biz.name"
                                           :value="biz.id"
                                         >
@@ -1117,11 +1141,45 @@
                                     <b-form-group>
                                       <b-form-checkbox-group
                                         id="checkbox-group-2"
-                                        v-model="selectedMulty"
+                                        v-model="selectedEditor"
                                         name="flavour-2"
                                       >
                                         <b-form-checkbox
-                                          :id="index + '_id'"
+                                          :id="index + '_id_edit'"
+                                          :name="biz.name"
+                                          :value="biz.id"
+                                        >
+                                          <b-avatar
+                                            class="d-inline-block"
+                                            variant="primary"
+                                            size="30"
+                                          ></b-avatar>
+                                          <span class="bold">
+                                            {{ biz.name }}
+                                          </span>
+                                        </b-form-checkbox>
+                                      </b-form-checkbox-group>
+                                    </b-form-group>
+                                  </td>
+                                </tr>
+                              </div>
+                              <hr />
+                              <h5>Members</h5>
+                              <div v-if="allMembers">
+                                <tr
+                                  v-for="(biz, index) in allMembers"
+                                  :key="index"
+                                  class="p-2 message"
+                                >
+                                  <td>
+                                    <b-form-group>
+                                      <b-form-checkbox-group
+                                        id="checkbox-group-2"
+                                        v-model="selectedMember"
+                                        name="flavour-2"
+                                      >
+                                        <b-form-checkbox
+                                          :id="index + '_id_mem'"
                                           :name="biz.name"
                                           :value="biz.id"
                                         >
@@ -1141,7 +1199,10 @@
                               </div>
                               <hr />
                             </b-tab>
-                            <b-tab title="People" @click="getUsers()">
+                            <b-tab
+                              :title="$t('general.People')"
+                              @click="getUsers()"
+                            >
                               <b-row>
                                 <b-col>
                                   <b-card>
@@ -1154,7 +1215,7 @@
                                           value="accepted"
                                           @change="selectedAllMulty"
                                         >
-                                          All
+                                          {{ $t("general.All") }}
                                         </b-form-checkbox>
                                       </b-col>
                                       <b-col>
@@ -1166,7 +1227,7 @@
                                           :unchecked-value="false"
                                           @change="selectedFollowings"
                                         >
-                                          Following
+                                          {{ $t("general.Following") }}
                                         </b-form-checkbox>
                                       </b-col>
                                       <b-col>
@@ -1178,7 +1239,7 @@
                                           :unchecked-value="false"
                                           @change="selectedFollowers"
                                         >
-                                          Follower
+                                          {{ $t("general.Follower") }}
                                         </b-form-checkbox>
                                       </b-col>
                                     </b-row>
@@ -1192,6 +1253,7 @@
                                   class="centralizer"
                                 ></b-spinner>
                               </div>
+                              {{ selectedMulty }}
                               <div v-if="bizs.length">
                                 <tr
                                   v-for="(biz, index) in bizs"
@@ -1206,7 +1268,7 @@
                                         name="flavour-2"
                                       >
                                         <b-form-checkbox
-                                          :id="index + '_id'"
+                                          :id="index + '_id-user'"
                                           :name="biz.name"
                                           :value="biz.id"
                                         >
@@ -1224,7 +1286,7 @@
                                   </td>
                                 </tr>
                               </div>
-                              <h2 v-else>No data</h2>
+                              <h2 v-else>{{ $t("general.No_data") }}</h2>
 
                               <!-- End Chats -->
                             </b-tab>
@@ -1241,7 +1303,7 @@
                                           value="accepted"
                                           @change="selectedAllMulty"
                                         >
-                                          All
+                                          {{ $t("general.All") }}
                                         </b-form-checkbox>
                                       </b-col>
                                       <b-col>
@@ -1253,7 +1315,7 @@
                                           :unchecked-value="false"
                                           @change="selectedFollowings"
                                         >
-                                          Following
+                                          {{ $t("general.Following") }}
                                         </b-form-checkbox>
                                       </b-col>
                                       <b-col>
@@ -1265,7 +1327,7 @@
                                           :unchecked-value="false"
                                           @change="selectedFollowers"
                                         >
-                                          Follower
+                                          {{ $t("general.Follower") }}
                                         </b-form-checkbox>
                                       </b-col>
                                     </b-row>
@@ -1282,11 +1344,12 @@
                                   class="centralizer"
                                 ></b-spinner>
                               </div>
+                              {{ selectedMulty }}
                               <div v-if="bizs.length">
                                 {{ selectedMulty }}
 
                                 <tr
-                                  v-for="(biz, index) in bizs"
+                                  v-for="(elm, index) in bizs"
                                   :key="index"
                                   class="p-2 message"
                                 >
@@ -1297,26 +1360,26 @@
                                       name="flavour-2"
                                     >
                                       <b-form-checkbox
-                                        :id="index + '_id'"
-                                        :name="biz.name"
-                                        :value="biz.id"
+                                        :id="index + '_id-busid'"
+                                        :name="elm.name"
+                                        :value="elm.id"
                                         :unchecked-value="false"
-                                        @input="selectedMember(biz)"
                                       >
+                                        <!-- @input="selectedMember(elm)" -->
                                         <b-avatar
                                           class="d-inline-block"
                                           variant="primary"
                                           size="30"
                                         ></b-avatar>
                                         <span class="bold">
-                                          {{ biz.name }}
+                                          {{ elm.name }}
                                         </span>
                                       </b-form-checkbox>
                                     </b-form-checkbox-group>
                                   </td>
                                 </tr>
                               </div>
-                              <h2 v-else>No Business</h2>
+                              <h2 v-else>{{ $t("general.No_Business") }}</h2>
 
                               <!-- End Chats -->
                             </b-tab>
@@ -1333,7 +1396,7 @@
                                           value="accepted"
                                           @change="selectedAllMulty"
                                         >
-                                          All
+                                          {{ $t("general.All") }}
                                         </b-form-checkbox>
                                       </b-col>
                                       <b-col>
@@ -1345,7 +1408,7 @@
                                           :unchecked-value="false"
                                           @change="selectedFollowings"
                                         >
-                                          Following
+                                          {{ $t("general.Following") }}
                                         </b-form-checkbox>
                                       </b-col>
                                       <b-col>
@@ -1386,7 +1449,7 @@
                                         name="flavour-2"
                                       >
                                         <b-form-checkbox
-                                          :id="index + '_id'"
+                                          :id="index + '_id-netw'"
                                           :name="biz.name"
                                           :value="biz.id"
                                         >
@@ -1404,12 +1467,15 @@
                                   </td>
                                 </tr>
                               </div>
-                              <h2 v-else>No Network</h2>
+                              <h2 v-else>{{ $t("general.No_Network") }}</h2>
 
                               <!-- End Chats -->
                             </b-tab>
 
-                            <b-tab title="Editors" @click="getEditors()">
+                            <b-tab
+                              :title="$t('general.Editors')"
+                              @click="getEditors()"
+                            >
                               <div v-if="loader" class="text-center">
                                 <b-spinner
                                   variant="primary"
@@ -1431,7 +1497,7 @@
                                         name="flavour-2"
                                       >
                                         <b-form-checkbox
-                                          :id="index + '_id'"
+                                          :id="index + '_id-edit'"
                                           :name="biz.name"
                                           :value="biz.id"
                                         >
@@ -1449,19 +1515,200 @@
                                   </td>
                                 </tr>
                               </div>
-                              <h2 v-else>No Editor</h2>
+                              <h2 v-else>{{ $t("general.No_Editor") }}</h2>
+
+                              <!-- End Chats -->
+                            </b-tab>
+                            <b-tab title="Members" @click="getNetworkMembers()">
+                              <div v-if="loader" class="text-center">
+                                <b-spinner
+                                  variant="primary"
+                                  label="Spinning"
+                                  class="centralizer"
+                                ></b-spinner>
+                              </div>
+                              <div v-if="bizs.length">
+                                <tr
+                                  v-for="(biz, index) in bizs"
+                                  :key="index"
+                                  class="p-2 message"
+                                >
+                                  <td>
+                                    <b-form-group>
+                                      <b-form-checkbox-group
+                                        id="checkbox-group-2"
+                                        v-model="selectedMulty"
+                                        name="flavour-2"
+                                      >
+                                        <b-form-checkbox
+                                          :id="index + '_id-member'"
+                                          :name="biz.name"
+                                          :value="biz.id"
+                                        >
+                                          <b-avatar
+                                            class="d-inline-block"
+                                            variant="primary"
+                                            size="30"
+                                          ></b-avatar>
+                                          <span class="bold">
+                                            {{ biz.name }}
+                                          </span>
+                                        </b-form-checkbox>
+                                      </b-form-checkbox-group>
+                                    </b-form-group>
+                                  </td>
+                                </tr>
+                              </div>
+                              <h2 v-else>No Member</h2>
 
                               <!-- End Chats -->
                             </b-tab>
                           </b-tabs>
                         </b-row>
+                        <!-- single selection -->
+                        <div
+                          v-else
+                          style="
+                            padding-left: 10px !important;
+                            overflow-x: hidden !important;
+                          "
+                        >
+                          <h2>All</h2>
+                          <br />
+                          <div v-if="loader" class="text-center">
+                            <b-spinner
+                              variant="primary"
+                              label="Spinning"
+                              class="centralizer"
+                            ></b-spinner>
+                          </div>
+                          <h5>People</h5>
+
+                          <b-row>
+                            <div v-if="allUsers">
+                              <tr
+                                v-for="(biz, index) in allUsers"
+                                :key="index"
+                                class="p-2 message"
+                                @click="
+                                  selectedChat({
+                                    type: 'user',
+                                    chat: biz,
+                                    id: biz.id,
+                                  })
+                                "
+                              >
+                                <td>
+                                  <b-avatar
+                                    class="d-inline-block"
+                                    variant="primary"
+                                    size="30"
+                                  ></b-avatar>
+                                  <span class="bold">
+                                    {{ biz.name }}
+                                  </span>
+                                </td>
+                              </tr>
+                            </div>
+                          </b-row>
+                          <hr />
+                          <h5>Business</h5>
+
+                          <b-row>
+                            <div v-if="allBusiness">
+                              <tr
+                                v-for="(biz, index) in allBusiness"
+                                :key="index"
+                                class="p-2 message"
+                                @click="
+                                  selectedChat({
+                                    type: 'business',
+                                    chat: biz,
+                                    id: biz.id,
+                                  })
+                                "
+                              >
+                                <td>
+                                  <b-avatar
+                                    class="d-inline-block"
+                                    variant="primary"
+                                    size="30"
+                                  ></b-avatar>
+                                  <span class="bold">
+                                    {{ biz.name }}
+                                  </span>
+                                </td>
+                              </tr>
+                            </div>
+                          </b-row>
+                          <hr />
+                          <h5>Network</h5>
+
+                          <b-row>
+                            <div v-if="allNetworks">
+                              <tr
+                                v-for="(biz, index) in allNetworks"
+                                :key="index"
+                                class="p-2 message"
+                                @click="
+                                  selectedChat({
+                                    type: 'network',
+                                    chat: biz,
+                                    id: biz.id,
+                                  })
+                                "
+                              >
+                                <td>
+                                  <b-avatar
+                                    class="d-inline-block"
+                                    variant="primary"
+                                    size="30"
+                                  ></b-avatar>
+                                  <span class="bold">
+                                    {{ biz.name }}
+                                  </span>
+                                </td>
+                              </tr>
+                            </div>
+                          </b-row>
+                          <hr />
+                          <h5>Editors</h5>
+                          <b-row>
+                            <div v-if="allEditors">
+                              <tr
+                                v-for="(biz, index) in allEditors"
+                                :key="index"
+                                class="p-2 message"
+                                @click="
+                                  selectedChat({
+                                    type: 'user',
+                                    chat: biz,
+                                    id: biz.id,
+                                  })
+                                "
+                              >
+                                <td>
+                                  <b-avatar
+                                    class="d-inline-block"
+                                    variant="primary"
+                                    size="30"
+                                  ></b-avatar>
+                                  <span class="bold">
+                                    {{ biz.name }}
+                                  </span>
+                                </td>
+                              </tr>
+                            </div>
+                          </b-row>
+                          <hr />
+                        </div>
                       </table>
                     </div>
                     <b-button
+                      v-if="bulk"
                       block
                       variant="primary"
                       @click="$bvModal.show('group-name')"
-                      :disabled="selectedMulty.length ? false : true"
                       >{{ $t("businessowner.Next") }}</b-button
                     >
                     <!-- <b-button
@@ -1517,6 +1764,8 @@ export default {
   },
   data() {
     return {
+      audio: new Audio("@/assets/sound/message.mp3"),
+
       formData: new FormData(),
       groupName: "",
       allSelection: true,
@@ -1534,7 +1783,14 @@ export default {
 
       visibleCollaps: false,
 
+      selectedBusiness: [],
+      selectedPeople: [],
+      selectedNetwork: [],
+      selectedMember: [],
+      selectedEditor: [],
+
       selectedMulty: [],
+
       peopleSelectedAllMulty: [],
       businessSelectedAllMulty: [],
       networkSelectedAllMulty: [],
@@ -1549,12 +1805,16 @@ export default {
       chatSearchKeyword: "",
       tabIndex: 2,
       type: "",
-       socket: io("https://ba-chat-server.herokuapp.com", {
-         transports: ["websocket", "polling", "flashsocket"],
-       }),
-      //socket: io("http://localhost:7000", {
-      //  transports: ["websocket", "polling", "flashsocket"],
-      //}),
+      // socket: io(process.env.NODE_SERVER_URL_DEV, {
+      //   transports: ["websocket", "polling", "flashsocket"],
+      // }),
+      socket: io(process.env.VUE_APP_CHAT_SERVER_URL, {
+        transports: ["websocket", "polling", "flashsocket"],
+      }),
+      // socket: io("http://localhost:7000", {
+      //   transports: ["websocket", "polling", "flashsocket"],
+      // }),
+
       nameSpace: {
         status: false,
         text: "",
@@ -1575,42 +1835,48 @@ export default {
   },
   computed: {
     all() {
-      return this.$store.getters["businessChat/getAll"];
+      return this.$store.getters["networkChat/getAll"];
     },
     allNetworks() {
-      return this.$store.getters["businessChat/getAllNetworks"];
+      return this.$store.getters["networkChat/getAllNetworks"];
     },
     allUsers() {
-      return this.$store.getters["businessChat/getAllUsers"];
+      return this.$store.getters["networkChat/getAllUsers"];
     },
     allBusiness() {
-      return this.$store.getters["businessChat/getAllBusinesses"];
+      return this.$store.getters["networkChat/getAllBusinesses"];
     },
     allEditors() {
-      return this.$store.getters["businessChat/getAllEditors"];
+      return this.$store.getters["networkChat/getAllEditors"];
+    },
+    allMembers() {
+      return this.$store.getters["networkChat/getAllMembers"];
     },
     groupMembers() {
-      return this.$store.getters["businessChat/getGroupMembers"];
+      return this.$store.getters["networkChat/getGroupMembers"];
     },
 
     ctaSelected() {
-      return this.$store.getters["businessChat/getSelectedChat"];
+      return this.$store.getters["networkChat/getSelectedChat"];
     },
     chatId() {
-      return this.$store.getters["businessChat/getSelectedChatId"];
+      return this.$store.getters["networkChat/getSelectedChatId"];
     },
     currentBizId() {
-      return this.$store.getters["businessChat/getCurrentBizId"];
+      return this.$store.getters["networkChat/getCurrentBizId"];
     },
     currentBiz() {
       return this.$store.getters["auth/profilConnected"];
     },
+    userInfo() {
+      return this.$store.getters["networkChat/getUserInfo"];
+    },
 
     bizs() {
-      return this.$store.getters["businessChat/getBizs"];
+      return this.$store.getters["networkChat/getBizs"];
     },
     chatList() {
-      return this.$store.getters["businessChat/getChatList"];
+      return this.$store.getters["networkChat/getChatList"];
     },
 
     currentUser() {
@@ -1621,11 +1887,11 @@ export default {
       return this.$store.getters["userChat/getUsers"];
     },
     chats() {
-      return this.$store.getters["businessChat/getChats"];
+      return this.$store.getters["networkChat/getChats"];
     },
 
     loader() {
-      return this.$store.getters["businessChat/getLoader"];
+      return this.$store.getters["networkChat/getLoader"];
     },
     receiver() {
       return this.chats[0] ? this.chats[0].receiver : "";
@@ -1644,15 +1910,6 @@ export default {
     },
   },
   mounted() {
-    let obj = [
-      {
-        id: { first: "edouard", second: "lele" },
-        names: { first: "edouard", second: "lele" },
-      },
-    ];
-    let tableau = Object.keys(obj).map((key) => [Number(key), obj[key]]);
-
-    console.log("finale+++", tableau);
     if (this.chatList.length < 0) {
       this.getChatList({ type: "business" });
     }
@@ -1662,9 +1919,10 @@ export default {
   created() {
     this.socketListenners();
     this.getCurBiz();
+    this.getUserInfo();
 
     this.$store.commit(
-      "businessChat/setCurrentBizId",
+      "networkChat/setCurrentBizId",
       Number(this.$route.params.id)
     );
     console.log("router params:", this.currentBizId);
@@ -1703,7 +1961,7 @@ export default {
   },
   methods: {
     getCurBiz() {
-      this.$store.dispatch("businessChat/GET_CUR_BIZ");
+      this.$store.dispatch("networkChat/GET_CUR_BIZ");
     },
     getName(chat) {
       return chat.business_i_d
@@ -1726,14 +1984,35 @@ export default {
       const i = Math.floor(Math.log(bytes) / Math.log(k));
       return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + " " + sizes[i];
     },
-    selectedMember(elm) {
-      console.log("selectedMulty:", this.selectedMulty.length);
-      let length = this.selectedMulty.length;
-      if (this.selectedMulty[length - 1] == elm.id) {
-        this.groupMembers.push({ type: elm.accountType, id: elm.id });
-      } else this.groupMembers.pop();
+    // selectedMember(elm) {
+    //   console.log("elm:", elm);
 
-      console.log("selected:", this.groupMembers);
+    //   console.log("selectedMulty:", this.selectedMulty);
+    //   let last = this.selectedMulty.pop();
+    //   console.log("last:", last);
+    //   let my_array = [];
+
+    //   if (last == elm.id) {
+    //     this.groupMembers.push({ type: elm.accountType, id: elm.id });
+    //     my_array.push({ type: elm.accountType, id: elm.id });
+    //   } else {
+    //     this.groupMembers.pop();
+    //   }
+    //   console.log("my array:", my_array);
+
+    //   console.log("selected:", this.groupMembers);
+    // },
+    startNewChat() {
+      if (this.selectedMulty.length > 1) {
+        this.$bvModal.show("group-name");
+      }
+      // else {
+      //   this.selectedChat({
+      //     type: "user",
+      //     chat: user,
+      //     id: user.id,
+      //   });
+      // }
     },
     selectedAllMulty() {
       // this.visibleCollaps = false;
@@ -1807,7 +2086,7 @@ export default {
       this.allSelection = false;
 
       this.getUsers();
-      this.$store.commit("businessChat/setBizs", this.allUsers);
+      this.$store.commit("networkChat/setBizs", this.allUsers);
 
       this.selectedMulty = [];
       if (this.peopleMulty) {
@@ -1826,7 +2105,7 @@ export default {
       this.clickedFilterType = "business";
       this.getBizs();
 
-      this.$store.commit("businessChat/setBizs", this.allBusiness);
+      this.$store.commit("networkChat/setBizs", this.allBusiness);
 
       this.allSelection = false;
 
@@ -1845,7 +2124,7 @@ export default {
 
       this.clickedFilterType = "network";
 
-      this.$store.commit("businessChat/setBizs", this.allNetworks);
+      this.$store.commit("networkChat/setBizs", this.allNetworks);
       this.getNetworks();
       this.allSelection = false;
 
@@ -1863,6 +2142,7 @@ export default {
       this.getNetworks();
       this.getBizs();
       this.getEditors();
+      this.getNetworkMembers();
     },
     dismissed() {
       this.file = "";
@@ -1877,36 +2157,29 @@ export default {
       // });
       this.socket.on("groupMessage", (data) => {
         console.log("group message Received");
+        this.audio.play();
         console.log(data);
         this.chats.push(data);
-        // userID:1,2,3,4,5
-        // businessID:2
-        // networkID:1,2,3,4
-        // businessEditorID:2
-        // message:Life has no meaning the moment you lose the illusion of being eternal.
 
-        // this.formData.append("sender_business_id", data.sender_business_id);
         this.formData.append("message", data.message);
 
         this.formData.append("userID", data.userID);
         this.formData.append("businessID", data.businessID);
         this.formData.append("networkID", data.networkID);
-        this.formData.append("businessEditorID", data.businessEditorID);
-
-        // this.formData.append("receiver_network_id", data.receiver_business_id);
-        // this.formData.append("receiver_id", data.receiver_business_id);
-        // this.formData.append("group_id", data.group_id);
-        // this.formData.append("type", data.type);
+        this.formData.append("networkEditorID", data.networkEditorID);
+        this.formData.append("memberID", data.memberID);
 
         this.saveMessage(this.formData);
       });
       this.socket.on("privateMessage", (data) => {
         console.log("Received");
+        this.audio.play();
+
         console.log(data);
         this.chats.push(data);
         console.log(this.chats);
 
-        this.formData.append("sender_business_id", data.sender_business_id);
+        this.formData.append("sender_network_id", data.sender_business_id);
         this.formData.append("message", data.message);
         this.formData.append("receiver_business_id", data.receiver_business_id);
         this.formData.append("receiver_network_id", data.receiver_business_id);
@@ -1918,6 +2191,7 @@ export default {
     },
     createGroup(receiver_business_id) {
       this.socket.emit("create-group", this.chatId);
+      // this.type = "group";
       // let sender_business_id = this.currentUser.user.id;
       var membersPeople = [];
       var membersBuiness = [];
@@ -1936,6 +2210,8 @@ export default {
         membersEditor = this.groupMembers.filter((member) => {
           return member.type == "editor";
         });
+      } else {
+        alert("No group members!");
       }
       let membersPeopleIds = [];
       let membersBusinessIds = [];
@@ -1965,15 +2241,15 @@ export default {
       this.room = [sender_business_id, ...this.selectedMulty];
       console.log("ROOMS: ", this.room);
       this.tabIndex = 3;
-      // this.getChatList({ type: "group" });
-      this.$store.dispatch("businessChat/CREATE_GROUP", {
+      this.getChatList({ type: "group" });
+      this.$store.dispatch("networkChat/CREATE_GROUP", {
         groupName: this.groupName,
-        userID: `${membersPeopleIds}`,
 
-        businessID: `${membersBusinessIds}`,
-        networkID: `${membersNetworkIds}`,
-
-        businessEditorsID: `${membersEditorIds}`,
+        userID: this.selectedPeople.toString(),
+        businessID: this.selectedBusiness.toString(),
+        networkID: this.selectedNetwork.toString(),
+        memberID: this.selectedMember.toString(),
+        networkEditorsID: this.selectedEditor.toString(),
       });
     },
     createRoom(receiver_business_id) {
@@ -1998,28 +2274,38 @@ export default {
     //   this.allSelection = true;
     //   await this.$store.dispatch("businessChat/GET_ALL", keyword);
     // },
+    getUserInfo() {
+      this.$store.dispatch("networkChat/GET_USER_INFO").then(() => {
+        console.log("user info: ", this.userInfo);
+      });
+    },
+    getNetworkMembers(keyword) {
+      this.$store.dispatch("networkChat/GET_NETWORK_MEMBERS", {
+        keyword: keyword,
+      });
+    },
     getEditors(keyword) {
-      this.$store.dispatch("businessChat/GET_EDITORS", {
+      this.$store.dispatch("networkChat/GET_EDITORS", {
         keyword: keyword,
       });
     },
     getNetworks(keyword) {
       this.visibleCollaps = true;
-      this.$store.dispatch("businessChat/GET_NETWORKS", {
+      this.$store.dispatch("networkChat/GET_NETWORKS", {
         keyword: keyword,
       });
     },
     getUsers(keyword) {
       this.visibleCollaps = true;
 
-      this.$store.dispatch("businessChat/GET_USERS", {
+      this.$store.dispatch("networkChat/GET_USERS", {
         keyword: keyword,
       });
     },
     getBizs(keyword) {
       this.visibleCollaps = true;
       this.$store
-        .dispatch("businessChat/GET_BIZS", {
+        .dispatch("networkChat/GET_BIZS", {
           keyword: keyword,
         })
         .then(() => {
@@ -2030,53 +2316,54 @@ export default {
     getChatList(data) {
       // alert("Clicked!")
       this.type = data.type;
-      // this.chatSelected.active = false;
-      this.newMsg = false;
+      this.chatSelected.active = false;
+      // this.newMsg = false;
       console.log("tab type:", this.tabIndex);
 
-      this.$store.dispatch("businessChat/GET_BIZS_CHAT_LIST", data);
+      this.$store.dispatch("networkChat/GET_BIZS_CHAT_LIST", data);
       // this.scrollToBottom();
     },
 
     async histBizToBiz(data) {
       console.log("search data:", data);
       if (data.type == "user") {
-        await this.$store.dispatch("businessChat/GET_BIZ_TO_USER", data);
+        await this.$store.dispatch("networkChat/GET_BIZ_TO_USER", data);
       } else if (data.type == "network") {
-        await this.$store.dispatch("businessChat/GET_BIZ_TO_NETWORK", data);
+        await this.$store.dispatch("networkChat/GET_BIZ_TO_NETWORK", data);
       } else if (data.type == "group") {
-        await this.$store.dispatch("businessChat/GET_BIZ_TO_GROUP", data);
+        console.log("Here...");
+        await this.$store.dispatch("networkChat/GET_BIZ_TO_GROUP", data);
       } else {
-        await this.$store.dispatch("businessChat/GET_BIZ_TO_BIZ", data);
+        await this.$store.dispatch("networkChat/GET_BIZ_TO_BIZ", data);
       }
     },
     async histBizToUser(receiverId) {
       await this.$store
-        .dispatch("businessChat/GET_BIZ_TO_USER", receiverId)
+        .dispatch("networkChat/GET_BIZ_TO_USER", receiverId)
         .then(() => {})
         .catch(() => console.log("error"));
     },
     async histBizToNetwork(receiverId) {
       await this.$store
-        .dispatch("businessChat/GET_BIZ_TO_NETWORK", receiverId)
+        .dispatch("networkChat/GET_BIZ_TO_NETWORK", receiverId)
         .then(() => {})
         .catch(() => console.log("error"));
     },
     async histBizToGroup(receiverId) {
-      await this.$store.dispatch("businessChat/GET_BIZ_TO_GROUP", receiverId);
+      await this.$store.dispatch("networkChat/GET_BIZ_TO_GROUP", receiverId);
       console.log("group members: ++++>", this.groupMembers);
     },
     saveMessage(data) {
       console.log("[DEBUG SAVE]", { data: data, type: this.type });
       if (this.type == "group") {
-        this.$store.dispatch("businessChat/SAVE_GROUP_CHAT", {
+        this.$store.dispatch("networkChat/SAVE_GROUP_CHAT", {
           data: data,
           group_id: this.chatId,
           sender_id: this.currentBizId,
           type: this.type,
         });
       } else {
-        this.$store.dispatch("businessChat/SAVE_BUSINESS_CHAT", {
+        this.$store.dispatch("networkChat/SAVE_BUSINESS_CHAT", {
           data: data,
           type: this.type,
         });
@@ -2089,7 +2376,7 @@ export default {
       this.createGroup();
       let dumId = 7;
       // this.chatId = data.id;
-      this.$store.commit("businessChat/setSelectedChatId", dumId);
+      this.$store.commit("networkChat/setSelectedChatId", dumId);
       let receiver = { receiverID: dumId, keyword: null };
       this.histBizToUser(receiver);
 
@@ -2100,28 +2387,37 @@ export default {
         clickedId: dumId,
         name: this.groupName,
       };
-
       console.log("[DEBUG] Chat selected:", this.chatSelected);
       this.groupName = "";
     },
     selectedChat(data) {
       console.log("[type tabs]", this.tabIndex);
+      this.type = data.type;
       // this.scrollToBottom();
       console.log("[selected Chat]", data);
       this.createRoom(data.id);
       if (this.type == "group") {
         this.createGroup();
       }
-      this.chatId = data.id;
-      this.$store.commit("businessChat/setSelectedChatId", data.id);
+      // this.chatId = data.id;
+
+      this.$store.commit("networkChat/setSelectedChatId", data.id);
       let receiver = { receiverID: data.id, keyword: null };
       if (data.type == "user") {
+        this.tabIndex = 0;
+        this.getChatList({ type: data.type });
         this.histBizToUser(receiver);
       } else if (data.type == "network") {
+        this.tabIndex = 2;
+        this.getChatList({ type: data.type });
         this.histBizToNetwork(receiver);
       } else if (data.type == "business") {
+        this.tabIndex = 1;
+        this.getChatList({ type: data.type });
         this.histBizToBiz(receiver);
       } else {
+        this.tabIndex = 3;
+        this.getChatList({ type: data.type });
         this.histBizToGroup(receiver);
       }
       this.newMsg = false;
@@ -2190,6 +2486,8 @@ export default {
       var membersBuiness = [];
       var membersNetwork = [];
       var membersEditor = [];
+      var membersMember = [];
+
       console.log("Group members:", this.groupMembers);
       let data = {};
       if (this.groupMembers.length) {
@@ -2206,13 +2504,17 @@ export default {
           return member.networkID != null;
         });
         membersEditor = this.groupMembers.filter((member) => {
-          return member.businessEditorsID != null;
+          return member.networkEditorID != null;
+        });
+        membersMember = this.groupMembers.filter((member) => {
+          return member.memberID != null;
         });
 
         let membersPeopleIds = [];
         let membersBusinessIds = [];
         let membersNetworkIds = [];
         let membersEditorIds = [];
+        let membersMemberIds = [];
 
         membersPeople.map((biz) => {
           membersPeopleIds.push(biz.userID);
@@ -2224,18 +2526,22 @@ export default {
           membersNetworkIds.push(biz.networkID);
         });
         membersEditor.map((biz) => {
-          membersEditorIds.push(biz.businessEditorsID);
+          membersEditorIds.push(biz.networkEditorID);
         });
+        membersMember.map((biz) => {
+          membersMemberIds.push(biz.memberID);
+        });
+
         data = {
           userID: membersPeopleIds,
           businessID: membersBusinessIds,
           networkID: membersNetworkIds,
-          businessEditorID: membersEditorIds,
+          networkEditorID: membersEditorIds,
+          memberID: membersMemberIds,
           message: this.input,
         };
+        this.socket.emit("groupMessage", data);
       }
-
-      this.socket.emit("groupMessage", data);
 
       // this.socket.emit("groupMessage", {
       //   type: this.type,
@@ -2247,7 +2553,7 @@ export default {
       //   group_id: this.chatId,
       // });
 
-      console.log("SENT...");
+      console.log("group SENT...");
       this.input = "";
       this.dismissed();
       this.scrollToBottom();
@@ -2294,6 +2600,10 @@ export default {
       console.log("hey");
       this.newMsg = !this.newMsg;
       this.show = false;
+      this.bulk = arg.bulk;
+      if (arg.bulk) {
+        this.getAll();
+      }
     },
 
     scrollToBottom() {
@@ -2444,6 +2754,7 @@ h1 {
   background-color: white;
 }
 .detail {
+  cursor: pointer;
   margin-left: -40px;
 }
 

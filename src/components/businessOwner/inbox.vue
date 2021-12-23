@@ -92,12 +92,12 @@
                   </h1>
                 </b-col>
                 <b-col>
-                  <b-icon
+                  <!-- <b-icon
                     @click="newMessage(true)"
                     class="new-message primary icon-size float-right"
                     icon="pencil-square"
-                  ></b-icon>
-                  <!-- <b-dropdown
+                  ></b-icon> -->
+                  <b-dropdown
                     variant="white"
                     toggle-class="text-decoration-none"
                     no-caret
@@ -110,13 +110,17 @@
                         @click="this.newMsg = !this.newMsg"
                       ></b-icon>
                     </template>
-                    <b-dropdown-item @click="newMessage(true)">
+                    <b-dropdown-item
+                      @click="newMessage({ newmsg: true, bulk: false })"
+                    >
                       {{ $t("businessowner.New_Chat") }}</b-dropdown-item
                     >
-                    <b-dropdown-item @click="newMessage(true)">
+                    <b-dropdown-item
+                      @click="newMessage({ newmsg: true, bulk: true })"
+                    >
                       {{ $t("businessowner.New_Group_Chat") }}
                     </b-dropdown-item>
-                  </b-dropdown> -->
+                  </b-dropdown>
                 </b-col>
               </b-row>
 
@@ -137,7 +141,7 @@
                           <input
                             v-model="searchQuery"
                             class="form-control input-background"
-                            :placeholder="`Search chat list ${tabIndex}`"
+                            :placeholder="this.$t('general.Search_chat_list')"
                             @keypress.enter="
                               getChatList({
                                 type: 'user',
@@ -222,7 +226,7 @@
                           <input
                             v-model="searchQuery"
                             class="form-control input-background"
-                            :placeholder="`Search chat list ${tabIndex}`"
+                            :placeholder="$t('general.Search_chat_list')" 
                             @keypress.enter="
                               getChatList({
                                 type: 'business',
@@ -307,7 +311,7 @@
                           <input
                             v-model="searchQuery"
                             class="form-control input-background"
-                            :placeholder="`Search chat list ${tabIndex}`"
+                            :placeholder="$t('general.Search_chat_list')"
                             @keypress.enter="
                               getChatList({
                                 type: 'network',
@@ -381,7 +385,7 @@
                       <!-- End Chats -->
                     </b-tab>
                     <b-tab
-                      title="Groups"
+                      :title="$t('general.Groups')"
                       @click="getChatList({ type: 'group' })"
                     >
                       <!-- Group Chats Available  -->
@@ -390,7 +394,7 @@
                           <input
                             v-model="searchQuery"
                             class="form-control input-background"
-                            :placeholder="`Search chat list ${tabIndex}`"
+                            :placeholder="$t('general.Search_chat_list')" 
                             @keypress.enter="
                               getChatList({
                                 type: 'group',
@@ -543,7 +547,7 @@
                     <h5>{{ chatSelected.name }}</h5>
                     <!-- <p>{{ chatSelected }}</p> -->
                     <p
-                      v-if="groupMembers && type=='group'"
+                      v-if="groupMembers && type == 'group'"
                       class="d-inline-block text-truncate"
                       style="max-width: 200px"
                     >
@@ -933,14 +937,28 @@
               <b-avatar
                 class="info-avatar"
                 variant="primary"
-                src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
+                :src="chatSelected.logo_path"
                 size="200"
               ></b-avatar>
               <div class="info-detail">
-                <h1 class="info-name">{{ receiver.name }}</h1>
-                <b-link class="primary">{{
+                <h1 class="info-name">{{ chatSelected.name }}</h1>
+                <!-- <b-link class="primary">{{
                   $t("businessowner.View_Profile")
-                }}</b-link>
+                }}</b-link> -->
+                <b-row v-if="type == 'group'" class="justify-content-md-center">
+                  <b-col cols="12" md="auto">
+                    <table class="info-name">
+                      <tr class="text-center">
+                        <th>
+                          <u> Members </u>
+                        </th>
+                      </tr>
+                      <tr v-for="(member, index) in groupMembers" :key="index">
+                        <td>{{ getName(member) }}</td>
+                      </tr>
+                    </table>
+                  </b-col>
+                </b-row>
               </div>
             </div>
             <div>
@@ -994,7 +1012,10 @@
                   <b-col>
                     <div class="new-msg-filter-list">
                       <table class="table">
-                        <b-row style="overflow-x: hidden !important">
+                        <b-row
+                          v-if="bulk"
+                          style="overflow-x: hidden !important"
+                        >
                           <b-tabs content-class=" ma-4 pt-6" fill pills card>
                             <b-tab title="All" @click="getAll()">
                               <div v-if="loader" class="text-center">
@@ -1038,7 +1059,7 @@
                                 </tr>
                               </div>
                               <hr />
-                              <h5>Business</h5>
+                              <h5>{{ $t("general.Business") }}</h5>
                               <div v-if="allBusiness">
                                 <tr
                                   v-for="(biz, index) in allBusiness"
@@ -1072,7 +1093,7 @@
                                 </tr>
                               </div>
                               <hr />
-                              <h5>Network</h5>
+                              <h5>{{ $t("general.Network") }}</h5>
                               <div v-if="allNetworks">
                                 <tr
                                   v-for="(biz, index) in allNetworks"
@@ -1106,7 +1127,7 @@
                                 </tr>
                               </div>
                               <hr />
-                              <h5>Editors</h5>
+                              <h5>{{ $t("general.Editors") }}</h5>
                               <div v-if="allEditors">
                                 <tr
                                   v-for="(biz, index) in allEditors"
@@ -1141,7 +1162,7 @@
                               </div>
                               <hr />
                             </b-tab>
-                            <b-tab title="People" @click="getUsers()">
+                            <b-tab :title="$t('general.People')" @click="getUsers()">
                               <b-row>
                                 <b-col>
                                   <b-card>
@@ -1154,7 +1175,7 @@
                                           value="accepted"
                                           @change="selectedAllMulty"
                                         >
-                                          All
+                                          {{ $t("general.All") }}
                                         </b-form-checkbox>
                                       </b-col>
                                       <b-col>
@@ -1166,7 +1187,7 @@
                                           :unchecked-value="false"
                                           @change="selectedFollowings"
                                         >
-                                          Following
+                                          {{ $t("general.Following") }}
                                         </b-form-checkbox>
                                       </b-col>
                                       <b-col>
@@ -1178,7 +1199,7 @@
                                           :unchecked-value="false"
                                           @change="selectedFollowers"
                                         >
-                                          Follower
+                                          {{ $t("general.Follower") }}
                                         </b-form-checkbox>
                                       </b-col>
                                     </b-row>
@@ -1224,11 +1245,11 @@
                                   </td>
                                 </tr>
                               </div>
-                              <h2 v-else>No data</h2>
+                              <h2 v-else>{{ $t("general.No_data") }}</h2>
 
                               <!-- End Chats -->
                             </b-tab>
-                            <b-tab title="Business" @click="getBizs()">
+                            <b-tab :title=" $t('general.Business')" @click="getBizs()">
                               <b-row>
                                 <b-col>
                                   <b-card>
@@ -1241,7 +1262,7 @@
                                           value="accepted"
                                           @change="selectedAllMulty"
                                         >
-                                          All
+                                          {{ $t("general.All") }}
                                         </b-form-checkbox>
                                       </b-col>
                                       <b-col>
@@ -1253,7 +1274,7 @@
                                           :unchecked-value="false"
                                           @change="selectedFollowings"
                                         >
-                                          Following
+                                          {{ $t("general.Following") }}
                                         </b-form-checkbox>
                                       </b-col>
                                       <b-col>
@@ -1265,7 +1286,7 @@
                                           :unchecked-value="false"
                                           @change="selectedFollowers"
                                         >
-                                          Follower
+                                          {{ $t("general.Follower") }}
                                         </b-form-checkbox>
                                       </b-col>
                                     </b-row>
@@ -1286,7 +1307,7 @@
                                 {{ selectedMulty }}
 
                                 <tr
-                                  v-for="(biz, index) in bizs"
+                                  v-for="(elm, index) in bizs"
                                   :key="index"
                                   class="p-2 message"
                                 >
@@ -1298,25 +1319,25 @@
                                     >
                                       <b-form-checkbox
                                         :id="index + '_id'"
-                                        :name="biz.name"
-                                        :value="biz.id"
+                                        :name="elm.name"
+                                        :value="elm.id"
                                         :unchecked-value="false"
-                                        @input="selectedMember(biz)"
                                       >
+                                        <!-- @input="selectedMember(elm)" -->
                                         <b-avatar
                                           class="d-inline-block"
                                           variant="primary"
                                           size="30"
                                         ></b-avatar>
                                         <span class="bold">
-                                          {{ biz.name }}
+                                          {{ elm.name }}
                                         </span>
                                       </b-form-checkbox>
                                     </b-form-checkbox-group>
                                   </td>
                                 </tr>
                               </div>
-                              <h2 v-else>No Business</h2>
+                              <h2 v-else>{{ $t("general.No_Business") }}</h2>
 
                               <!-- End Chats -->
                             </b-tab>
@@ -1333,7 +1354,7 @@
                                           value="accepted"
                                           @change="selectedAllMulty"
                                         >
-                                          All
+                                          {{ $t("general.All") }}
                                         </b-form-checkbox>
                                       </b-col>
                                       <b-col>
@@ -1345,7 +1366,7 @@
                                           :unchecked-value="false"
                                           @change="selectedFollowings"
                                         >
-                                          Following
+                                          {{ $t("general.Following") }}
                                         </b-form-checkbox>
                                       </b-col>
                                       <b-col>
@@ -1357,7 +1378,7 @@
                                           :unchecked-value="false"
                                           @change="selectedFollowers"
                                         >
-                                          Follower
+                                          {{ $t("general.Follower") }}
                                         </b-form-checkbox>
                                       </b-col>
                                     </b-row>
@@ -1404,11 +1425,10 @@
                                   </td>
                                 </tr>
                               </div>
-                              <h2 v-else>No Network</h2>
+                              <h2 v-else>{{ $t("general.No_Network") }}</h2>
 
                               <!-- End Chats -->
                             </b-tab>
-
                             <b-tab title="Editors" @click="getEditors()">
                               <div v-if="loader" class="text-center">
                                 <b-spinner
@@ -1449,15 +1469,152 @@
                                   </td>
                                 </tr>
                               </div>
-                              <h2 v-else>No Editor</h2>
+                              <h2 v-else>{{ $t("general.No_Editor") }}</h2>
 
                               <!-- End Chats -->
                             </b-tab>
                           </b-tabs>
                         </b-row>
+                        <div
+                          v-else
+                          style="
+                            padding-left: 10px !important;
+                            overflow-x: hidden !important;
+                          "
+                        >
+                          <h2>All</h2>
+                          <br />
+                          <div v-if="loader" class="text-center">
+                            <b-spinner
+                              variant="primary"
+                              label="Spinning"
+                              class="centralizer"
+                            ></b-spinner>
+                          </div>
+                          <h5>People</h5>
+
+                          <b-row>
+                            <div v-if="allUsers">
+                              <tr
+                                v-for="(biz, index) in allUsers"
+                                :key="index"
+                                class="p-2 message"
+                                @click="
+                                  selectedChat({
+                                    type: 'user',
+                                    chat: biz,
+                                    id: biz.id,
+                                  })
+                                "
+                              >
+                                <td>
+                                  <b-avatar
+                                    class="d-inline-block"
+                                    variant="primary"
+                                    size="30"
+                                  ></b-avatar>
+                                  <span class="bold">
+                                    {{ biz.name }}
+                                  </span>
+                                </td>
+                              </tr>
+                            </div>
+                          </b-row>
+                          <hr />
+                          <h5>Business</h5>
+
+                          <b-row>
+                            <div v-if="allBusiness">
+                              <tr
+                                v-for="(biz, index) in allBusiness"
+                                :key="index"
+                                class="p-2 message"
+                                @click="
+                                  selectedChat({
+                                    type: 'business',
+                                    chat: biz,
+                                    id: biz.id,
+                                  })
+                                "
+                              >
+                                <td>
+                                  <b-avatar
+                                    class="d-inline-block"
+                                    variant="primary"
+                                    size="30"
+                                  ></b-avatar>
+                                  <span class="bold">
+                                    {{ biz.name }}
+                                  </span>
+                                </td>
+                              </tr>
+                            </div>
+                          </b-row>
+                          <hr />
+                          <h5>Network</h5>
+
+                          <b-row>
+                            <div v-if="allNetworks">
+                              <tr
+                                v-for="(biz, index) in allNetworks"
+                                :key="index"
+                                class="p-2 message"
+                                @click="
+                                  selectedChat({
+                                    type: 'network',
+                                    chat: biz,
+                                    id: biz.id,
+                                  })
+                                "
+                              >
+                                <td>
+                                  <b-avatar
+                                    class="d-inline-block"
+                                    variant="primary"
+                                    size="30"
+                                  ></b-avatar>
+                                  <span class="bold">
+                                    {{ biz.name }}
+                                  </span>
+                                </td>
+                              </tr>
+                            </div>
+                          </b-row>
+                          <hr />
+                          <h5>Editors</h5>
+                          <b-row>
+                            <div v-if="allEditors">
+                              <tr
+                                v-for="(biz, index) in allEditors"
+                                :key="index"
+                                class="p-2 message"
+                                @click="
+                                  selectedChat({
+                                    type: 'user',
+                                    chat: biz,
+                                    id: biz.id,
+                                  })
+                                "
+                              >
+                                <td>
+                                  <b-avatar
+                                    class="d-inline-block"
+                                    variant="primary"
+                                    size="30"
+                                  ></b-avatar>
+                                  <span class="bold">
+                                    {{ biz.name }}
+                                  </span>
+                                </td>
+                              </tr>
+                            </div>
+                          </b-row>
+                          <hr />
+                        </div>
                       </table>
                     </div>
                     <b-button
+                      v-if="bulk"
                       block
                       variant="primary"
                       @click="$bvModal.show('group-name')"
@@ -1502,6 +1659,12 @@
           $t("businessowner.Create")
         }}</b-button>
       </b-modal>
+      <b-modal id="preview-file" hide-footer>
+        <div class="d-block text-center">
+          <h3>Preview file:</h3>
+          <b-img thumbnail fluid :src="previewSrc" id="filePreview"></b-img>
+        </div>
+      </b-modal>
     </b-container>
   </div>
 </template>
@@ -1524,7 +1687,7 @@ export default {
       peopleMulty: false,
       businessMulty: false,
       networkMulty: false,
-
+      bulk: false,
       followers: false,
       followings: false,
       follower: false,
@@ -1549,12 +1712,17 @@ export default {
       chatSearchKeyword: "",
       tabIndex: 2,
       type: "",
-       socket: io("https://ba-chat-server.herokuapp.com", {
-         transports: ["websocket", "polling", "flashsocket"],
-       }),
-      //socket: io("http://localhost:7000", {
-      //  transports: ["websocket", "polling", "flashsocket"],
-      //}),
+
+      // socket: io("https://ba-chat-server.herokuapp.com", {
+      //   transports: ["websocket", "polling", "flashsocket"],
+      // }),
+      socket: io(process.env.VUE_APP_CHAT_SERVER_URL, {
+        transports: ["websocket", "polling", "flashsocket"],
+      }),
+      // socket: io("http://localhost:7000", {
+      //   transports: ["websocket", "polling", "flashsocket"],
+      // }),
+
       nameSpace: {
         status: false,
         text: "",
@@ -1704,6 +1872,11 @@ export default {
   methods: {
     getCurBiz() {
       this.$store.dispatch("businessChat/GET_CUR_BIZ");
+    },
+    getNetworkMembers(keyword) {
+      this.$store.dispatch("businessChat/GET_BUSINESS_MEMBERS", {
+        keyword: keyword,
+      });
     },
     getName(chat) {
       return chat.business_i_d
@@ -2294,6 +2467,10 @@ export default {
       console.log("hey");
       this.newMsg = !this.newMsg;
       this.show = false;
+      this.bulk = arg.bulk;
+      if (arg.bulk) {
+        this.getAll();
+      }
     },
 
     scrollToBottom() {
@@ -2445,6 +2622,7 @@ h1 {
 }
 .detail {
   margin-left: -40px;
+  cursor: pointer;
 }
 
 .mobile {

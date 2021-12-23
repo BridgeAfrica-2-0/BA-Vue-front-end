@@ -72,48 +72,7 @@
 					neighbourhood_id: "",
 				},
 				order_items: [
-					{
-						name: "Headset",
-						amount: 12000,
-						quantity: 3,
-						shipping: 1000,
-						total: 13000,
-					},
-					{
-						name: "Smartphone",
-						amount: 120000,
-						quantity: 2,
-						shipping: 2000,
-						total: 13000,
-					},
-					{
-						name: "HP computer",
-						amount: 602000,
-						quantity: 1,
-						shipping: 5000,
-						total: 13000,
-					},
-					{
-						name: "Smart Watch",
-						amount: 12000,
-						quantity: 3,
-						shipping: 1000,
-						total: 13000,
-					},
-					{
-						name: "USB Key",
-						amount: 120000,
-						quantity: 2,
-						shipping: 2000,
-						total: 13000,
-					},
-					{
-						name: "Computer Keyboard",
-						amount: 602000,
-						quantity: 1,
-						shipping: 5000,
-						total: 13000,
-					},
+					
 				],
 			};
 		},

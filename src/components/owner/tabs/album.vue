@@ -342,7 +342,7 @@ export default {
           };
           this.flashMessage.show({
             status: 'success',
-            message: 'Album Created',
+            message: this.$t('general.Album_Created')
           });
 
           this.loading = false;

@@ -210,7 +210,7 @@
                   />
                 </a>
                 <input
-                  placeholder="Post a Comment"
+                  :placeholder="$t('general.Post_a_Comment')"
                   class="form-control adco comment"
                   type="text"
                 />

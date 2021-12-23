@@ -11689,13 +11689,6 @@ ws@~8.2.3:
   resolved "https://registry.yarnpkg.com/ws/-/ws-8.2.3.tgz#63a56456db1b04367d0b721a0b80cae6d8becbba"
   integrity sha512-wBuoj1BDpC6ZQ1B7DWQBYVLphPWkm8i9Y0/3YdHjHKHiohOJ1ws+3OccDWtH+PoC9DZD5WOTrJvNbWvjS6JWaA==
 
-x5-gmaps@^0.5.7:
-  version "0.5.9"
-  resolved "https://registry.yarnpkg.com/x5-gmaps/-/x5-gmaps-0.5.9.tgz#89ad992370f25cbe7d64204618084c471cccdb43"
-  integrity sha512-mI0qEeniwtWjscbo0KSu0nRStr2iExalZbxn5B2VaSIgvChPneU4ipVdobrs4jDufRMPhO8rx/HwSg1B8UHUtA==
-  dependencies:
-    vue-property-decorator "^9.1.2"
-
 xmlhttprequest-ssl@~1.6.2:
   version "1.6.3"
   resolved "https://registry.yarnpkg.com/xmlhttprequest-ssl/-/xmlhttprequest-ssl-1.6.3.tgz#03b713873b01659dfa2c1c5d056065b27ddc2de6"

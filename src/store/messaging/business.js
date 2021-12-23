@@ -53,6 +53,9 @@ export default {
         getChats(state) {
             return state.chats;
         },
+        getUserInfo(state) {
+            return state.userInfo;
+        },
         getUser(state) {
             return state.currentUser;
         },
@@ -109,7 +112,9 @@ export default {
         setChatList(state, data) {
             state.chatList = data
         },
-
+        setUserInfo(state, data) {
+            state.userInfo = data
+        },
         setSelectedChatId(state, data) {
             state.selectedChatId = data
         },
@@ -278,7 +283,7 @@ export default {
 
             commit("setLoader", true);
             let keyword = data.keyword ? '/' + data.keyword : ''
-            return axios.get(`/business-community/user-follower/${state.currentBizId+keyword}`)
+            return axios.get(`/business-community/people-follower/${state.currentBizId+keyword}`)
                 .then((res) => {
                     commit("setLoader", false);
                     let users = res.data.data.data
@@ -288,17 +293,15 @@ export default {
                         })
                     }
 
-                    axios.get(`/business-community/user-following/${state.currentBizId+keyword}`)
+                    axios.get(`/business-community/people-following/${state.currentBizId+keyword}`)
                         .then((res1) => {
                             commit("setLoader", false);
 
                             if (res1.data.data.data.length > 0) {
                                 res1.data.data.data.map((elm) => {
-                                        state.users.push({ accountType: "people", statusType: "following", ...elm })
-                                    })
-                                    // state.businesses.push({ statusType: "following", ...res1.data.data.data })
+                                    state.users.push({ accountType: "people", statusType: "following", ...elm })
+                                })
                             }
-                            // state.users.push({ statusType: "following", ...res1.data.data })
                             commit("setBizs", state.users);
                         })
                         .catch((err) => {
@@ -310,17 +313,6 @@ export default {
                     commit("setLoader", false);
                     console.log(err);
                 })
-                // return axios.get(`/user/all-user${keyword}`)
-                //     .then((res) => {
-                //         commit("setLoader", false);
-                //         let users = res.data.data
-                //         state.users = users
-                //         commit("setBizs", users);
-                //     })
-                //     .catch((err) => {
-                //         commit("setLoader", false);
-                //         console.log(err);
-                //     })
         },
         GET_NETWORKS({ commit, state }, data) {
             commit("setBizs", []);
@@ -593,6 +585,18 @@ export default {
                         console.log(err);
                     })
             }
+        },
+        GET_USER_INFO({ commit, state }, data) {
+
+            return axios.get(`/userIntro`)
+                .then((res) => {
+                    console.log("USER INFO", res.data.data.user);
+                    commit("setUserInfo", res.data.data.user);
+
+                })
+                .catch((err) => {
+                    console.log(err);
+                })
         },
         SAVE_GROUP_CHAT({ commit }, data) {
             // commit("setUsers", []);

@@ -106,14 +106,13 @@
               <vue-bootstrap-typeahead
                 v-model="query"
                 :data="neigbourhoods"
-                :minMatchingChars=0
-                :maxMatches=10
+                :minMatchingChars="0"
+                :maxMatches="10"
                 :serializer="(item) => item.name"
                 placeholder="Where"
                 class="search-hh w-44"
               />
 
-           
               <slot name="button">
                 <Button @click.native="getKeyword" />
               </slot>
@@ -144,7 +143,7 @@
             <b-collapse id="nav-collapse" is-nav>
               <div class="nav-item">
                 <router-link
-                  :to="{name:navLink('home')}"
+                  :to="{ name: navLink('home') }"
                   class="nav-link text-dark hov"
                   href=""
                 >
@@ -556,7 +555,6 @@ export default {
   },
   data() {
     return {
-    
       isActive: false,
       shownav: false,
       notifications: [],
@@ -636,7 +634,6 @@ export default {
   },
 
   watch: {
-   
     "$store.state.auth.profilConnected": function () {
       this.updateNotificationEvent();
       this.userOwnPage = this.onRedirect();
@@ -660,7 +657,7 @@ export default {
       return JSON.stringify(value, null, 2);
     },
   },
-  
+
   methods: {
     ...mapActions({
       setNetworks: "social/FIND_USER_NETWORK",
@@ -789,11 +786,14 @@ export default {
         color: "#e75c18",
       });
 
-      const requestForReset = await this.$repository.share.switch(null, "reset");
+      const requestForReset = await this.$repository.share.switch(
+        null,
+        "reset"
+      );
 
       if (requestForReset.success) {
         const response = await this.$repository.notification.logOut();
-        
+
         if (response.success) {
           loader.hide();
           this.Logout();
@@ -801,10 +801,8 @@ export default {
         }
         loader.hide();
       }
-      
     },
 
-    
     switchToProfile: async function () {
       let loader = this.$loading.show({
         container: this.$refs.formContainer,
@@ -826,7 +824,6 @@ export default {
     toggleinput() {
       this.$refs.mobileinput.style.display = "block";
     },
-    
 
     getNetworks: async function () {
       let request = await this.$repository.share.getNetworks();
@@ -838,15 +835,13 @@ export default {
       if (request.success) this.setBusiness(request.data);
     },
 
-    getNetworkAndBusiness: async function() {
+    getNetworkAndBusiness: async function () {
       let request = await this.$repository.share.getNetworkAndBusiness();
-      if (request.success){ 
+      if (request.success) {
         this.setBusiness(request.data.business);
         this.setNetworks(request.data.network);
       }
     },
-
-
 
     init() {
       try {

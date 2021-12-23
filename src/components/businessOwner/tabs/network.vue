@@ -14,9 +14,11 @@
 
         <b-col md="5" cols="7" lg="7" xl="7" sm="5">
           <p class="textt">
-            <router-link :to="{name: 'Membar Network Follower', params: {id:item.id}}">
-              <strong class="title">{{ item.name }}</strong>
-            </router-link><br />
+            <strong class="title"> 
+              <router-link :to="'/network_follower/' + item.id">
+                {{ item.name }} 
+              </router-link>
+            </strong> <br />
             {{ item.category }}
             <br />
             {{ item.followers }} {{ $t("businessowner.Community") }}<br />

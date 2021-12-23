@@ -1015,11 +1015,17 @@
                           v-if="bulk"
                           style="overflow-x: hidden !important"
                         >
-                          business: {{ selectedBusiness }} Member:{{
+                          <!-- business: {{ selectedBusiness }} Member:{{
                             selectedPeople
                           }}
-                          Network: {{ selectedNetwork }}
-                          <b-tabs content-class=" ma-4 pt-6" fill pills card>
+                          Network: {{ selectedNetwork }} -->
+                          <b-tabs
+                            v-model="tabMemberType"
+                            content-class=" ma-4 pt-6"
+                            fill
+                            pills
+                            card
+                          >
                             <b-tab :title="$t('general.All')" @click="getAll()">
                               <div v-if="loader" class="text-center">
                                 <b-spinner
@@ -1208,39 +1214,15 @@
                                   <b-card>
                                     <b-row class="text-center">
                                       <b-col>
-                                        <b-form-checkbox
-                                          id="all"
-                                          v-model="allSelectedMulty"
-                                          name="all"
-                                          value="accepted"
-                                          @change="selectedAllMulty"
-                                        >
-                                          {{ $t("general.All") }}
-                                        </b-form-checkbox>
-                                      </b-col>
-                                      <b-col>
-                                        <b-form-checkbox
-                                          id="following"
-                                          v-model="following"
-                                          name="members"
-                                          :value="true"
-                                          :unchecked-value="false"
-                                          @change="selectedFollowings"
-                                        >
-                                          {{ $t("general.Following") }}
-                                        </b-form-checkbox>
-                                      </b-col>
-                                      <b-col>
-                                        <b-form-checkbox
-                                          id="follower"
-                                          v-model="follower"
-                                          name="members"
-                                          :value="true"
-                                          :unchecked-value="false"
-                                          @change="selectedFollowers"
-                                        >
-                                          {{ $t("general.Follower") }}
-                                        </b-form-checkbox>
+                                        <b-form-group>
+                                          <b-form-radio-group
+                                            id="radio-group-people"
+                                            v-model="selectedselectOption"
+                                            :options="selectOptions"
+                                            name="radio-options-people"
+                                            @change="selectedAllMulty"
+                                          ></b-form-radio-group>
+                                        </b-form-group>
                                       </b-col>
                                     </b-row>
                                   </b-card>
@@ -1253,7 +1235,7 @@
                                   class="centralizer"
                                 ></b-spinner>
                               </div>
-                              {{ selectedMulty }}
+
                               <div v-if="bizs.length">
                                 <tr
                                   v-for="(biz, index) in bizs"
@@ -1264,7 +1246,7 @@
                                     <b-form-group>
                                       <b-form-checkbox-group
                                         id="checkbox-group-2"
-                                        v-model="selectedMulty"
+                                        v-model="selectedPeople"
                                         name="flavour-2"
                                       >
                                         <b-form-checkbox
@@ -1296,39 +1278,15 @@
                                   <b-card>
                                     <b-row class="text-center">
                                       <b-col>
-                                        <b-form-checkbox
-                                          id="all"
-                                          v-model="allSelectedMulty"
-                                          name="all"
-                                          value="accepted"
-                                          @change="selectedAllMulty"
-                                        >
-                                          {{ $t("general.All") }}
-                                        </b-form-checkbox>
-                                      </b-col>
-                                      <b-col>
-                                        <b-form-checkbox
-                                          id="following"
-                                          v-model="following"
-                                          name="members"
-                                          :value="true"
-                                          :unchecked-value="false"
-                                          @change="selectedFollowings"
-                                        >
-                                          {{ $t("general.Following") }}
-                                        </b-form-checkbox>
-                                      </b-col>
-                                      <b-col>
-                                        <b-form-checkbox
-                                          id="follower"
-                                          v-model="follower"
-                                          name="members"
-                                          :value="true"
-                                          :unchecked-value="false"
-                                          @change="selectedFollowers"
-                                        >
-                                          {{ $t("general.Follower") }}
-                                        </b-form-checkbox>
+                                        <b-form-group>
+                                          <b-form-radio-group
+                                            id="radio-group-business"
+                                            v-model="selectedselectOption"
+                                            :options="selectOptions"
+                                            name="radio-options-business"
+                                            @change="selectedAllMulty"
+                                          ></b-form-radio-group>
+                                        </b-form-group>
                                       </b-col>
                                     </b-row>
                                   </b-card>
@@ -1344,10 +1302,7 @@
                                   class="centralizer"
                                 ></b-spinner>
                               </div>
-                              {{ selectedMulty }}
                               <div v-if="bizs.length">
-                                {{ selectedMulty }}
-
                                 <tr
                                   v-for="(elm, index) in bizs"
                                   :key="index"
@@ -1356,7 +1311,7 @@
                                   <td>
                                     <b-form-checkbox-group
                                       id="checkbox-group-3"
-                                      v-model="selectedMulty"
+                                      v-model="selectedBusiness"
                                       name="flavour-2"
                                     >
                                       <b-form-checkbox
@@ -1389,39 +1344,15 @@
                                   <b-card>
                                     <b-row class="text-center">
                                       <b-col>
-                                        <b-form-checkbox
-                                          id="all"
-                                          v-model="allSelectedMulty"
-                                          name="all"
-                                          value="accepted"
-                                          @change="selectedAllMulty"
-                                        >
-                                          {{ $t("general.All") }}
-                                        </b-form-checkbox>
-                                      </b-col>
-                                      <b-col>
-                                        <b-form-checkbox
-                                          id="following"
-                                          v-model="following"
-                                          name="members"
-                                          :value="true"
-                                          :unchecked-value="false"
-                                          @change="selectedFollowings"
-                                        >
-                                          {{ $t("general.Following") }}
-                                        </b-form-checkbox>
-                                      </b-col>
-                                      <b-col>
-                                        <b-form-checkbox
-                                          id="follower"
-                                          v-model="follower"
-                                          name="members"
-                                          :value="true"
-                                          :unchecked-value="false"
-                                          @change="selectedFollowers"
-                                        >
-                                          Follower
-                                        </b-form-checkbox>
+                                        <b-form-group>
+                                          <b-form-radio-group
+                                            id="radio-group-1"
+                                            v-model="selectedselectOption"
+                                            :options="selectOptions"
+                                            name="radio-options"
+                                            @change="selectedAllMulty"
+                                          ></b-form-radio-group>
+                                        </b-form-group>
                                       </b-col>
                                     </b-row>
                                   </b-card>
@@ -1445,7 +1376,7 @@
                                     <b-form-group>
                                       <b-form-checkbox-group
                                         id="checkbox-group-2"
-                                        v-model="selectedMulty"
+                                        v-model="selectedNetwork"
                                         name="flavour-2"
                                       >
                                         <b-form-checkbox
@@ -1493,7 +1424,7 @@
                                     <b-form-group>
                                       <b-form-checkbox-group
                                         id="checkbox-group-2"
-                                        v-model="selectedMulty"
+                                        v-model="selectedEditor"
                                         name="flavour-2"
                                       >
                                         <b-form-checkbox
@@ -1537,7 +1468,7 @@
                                     <b-form-group>
                                       <b-form-checkbox-group
                                         id="checkbox-group-2"
-                                        v-model="selectedMulty"
+                                        v-model="selectedMember"
                                         name="flavour-2"
                                       >
                                         <b-form-checkbox
@@ -1768,20 +1699,13 @@ export default {
 
       formData: new FormData(),
       groupName: "",
-      allSelection: true,
-      allSelectedMulty: false,
-      peopleMulty: false,
-      businessMulty: false,
-      networkMulty: false,
-
-      followers: false,
-      followings: false,
-      follower: false,
-      following: false,
-
-      clickedFilterType: "",
-
-      visibleCollaps: false,
+      tabMemberType: 0,
+      selectOptions: [
+        { text: "All", value: "all" },
+        { text: "Followers", value: "follower" },
+        { text: "Following", value: "following" },
+      ],
+      selectedselectOption: "",
 
       selectedBusiness: [],
       selectedPeople: [],
@@ -1790,10 +1714,6 @@ export default {
       selectedEditor: [],
 
       selectedMulty: [],
-
-      peopleSelectedAllMulty: [],
-      businessSelectedAllMulty: [],
-      networkSelectedAllMulty: [],
 
       filePreview: false,
       previewSrc: "",
@@ -1984,24 +1904,7 @@ export default {
       const i = Math.floor(Math.log(bytes) / Math.log(k));
       return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + " " + sizes[i];
     },
-    // selectedMember(elm) {
-    //   console.log("elm:", elm);
 
-    //   console.log("selectedMulty:", this.selectedMulty);
-    //   let last = this.selectedMulty.pop();
-    //   console.log("last:", last);
-    //   let my_array = [];
-
-    //   if (last == elm.id) {
-    //     this.groupMembers.push({ type: elm.accountType, id: elm.id });
-    //     my_array.push({ type: elm.accountType, id: elm.id });
-    //   } else {
-    //     this.groupMembers.pop();
-    //   }
-    //   console.log("my array:", my_array);
-
-    //   console.log("selected:", this.groupMembers);
-    // },
     startNewChat() {
       if (this.selectedMulty.length > 1) {
         this.$bvModal.show("group-name");
@@ -2014,127 +1917,87 @@ export default {
       //   });
       // }
     },
-    selectedAllMulty() {
-      // this.visibleCollaps = false;
-      this.allSelection = true;
-      this.selectedMulty = [];
-      if (this.allSelectedMulty) {
-        this.bizs.map((biz) => {
-          this.selectedMulty.push(biz.id);
-        });
-      } else {
-        this.selectedMulty = [];
-        this.groupMembers = [];
-      }
-    },
-    selectedFollowers() {
-      this.allSelection = true;
-      this.selectedMulty = [];
+
+    selectedAllMulty(val) {
+      console.log("new val:", val);
       let selected = [];
-      if (this.follower) {
-        selected = this.bizs.filter((biz) => {
-          return biz.statusType === "follower";
-        });
-        selected.map((elm) => {
-          this.selectedMulty.push(elm.id);
-          this.groupMembers.push({ type: elm.accountType, id: elm.id });
-        });
-      } else {
-        this.selectedMulty = [];
-        this.groupMembers = [];
-      }
-      console.log("Selected: ", selected);
-    },
-    selectedFollowings() {
-      this.allSelection = true;
-      this.selectedMulty = [];
-      let selected = [];
-      if (this.following) {
-        selected = this.bizs.filter((biz) => {
-          return biz.statusType === "following";
-        });
-        selected.map((elm) => {
-          this.selectedMulty.push(elm.id);
-          this.groupMembers.push({ type: elm.accountType, id: elm.id });
-        });
-      } else {
-        this.selectedMulty = [];
-        this.groupMembers = [];
-      }
-      console.log("Selected: ", selected);
-    },
+      switch (this.tabMemberType) {
+        case 1:
+          this.selectedPeople = [];
+          if (val == "all") {
+            this.bizs.map((biz) => {
+              this.selectedPeople.push(biz.id);
+            });
+          } else if (val == "follower") {
+            selected = this.bizs.filter((biz) => {
+              return biz.statusType === "follower";
+            });
+            selected.map((elm) => {
+              this.selectedPeople.push(elm.id);
+              this.groupMembers.push({ type: elm.accountType, id: elm.id });
+            });
+          } else {
+            selected = this.bizs.filter((biz) => {
+              return biz.statusType === "following";
+            });
+            selected.map((elm) => {
+              this.selectedPeople.push(elm.id);
+              this.groupMembers.push({ type: elm.accountType, id: elm.id });
+            });
+          }
+          break;
 
-    followerFollowing() {
-      if (this.follower) {
-        this.followers = this.bizs.filter((elm) => {
-          console.log("followers: ", elm);
-          return elm.statusType == "follower";
-        });
-        console.log("followers: ", this.followers);
-      } else if (this.following) {
-        this.followings = this.bizs.filter((elm) => {
-          return elm.statusType == "following";
-        });
-        console.log("followings: ", this.followings);
-      }
-      console.log("all: ", this.bizs);
-    },
-    peopleAllMulty() {
-      this.visibleCollaps = !this.visibleCollaps;
-      this.clickedFilterType = "people";
-      // this.bizs = this.allUsers;
-      this.allSelection = false;
+        case 2:
+          this.selectedBusiness = [];
+          if (val == "all") {
+            this.bizs.map((biz) => {
+              this.selectedBusiness.push(biz.id);
+            });
+          } else if (val == "follower") {
+            selected = this.bizs.filter((biz) => {
+              return biz.statusType === "follower";
+            });
+            selected.map((elm) => {
+              this.selectedBusiness.push(elm.id);
+              this.groupMembers.push({ type: elm.accountType, id: elm.id });
+            });
+          } else {
+            selected = this.bizs.filter((biz) => {
+              return biz.statusType === "following";
+            });
+            selected.map((elm) => {
+              this.selectedBusiness.push(elm.id);
+              this.groupMembers.push({ type: elm.accountType, id: elm.id });
+            });
+          }
+          break;
 
-      this.getUsers();
-      this.$store.commit("networkChat/setBizs", this.allUsers);
+        case 3:
+          this.selectedNetwork = [];
+          if (val == "all") {
+            this.bizs.map((biz) => {
+              this.selectedNetwork.push(biz.id);
+            });
+          } else if (val == "follower") {
+            selected = this.bizs.filter((biz) => {
+              return biz.statusType === "follower";
+            });
+            selected.map((elm) => {
+              this.selectedNetwork.push(elm.id);
+              this.groupMembers.push({ type: elm.accountType, id: elm.id });
+            });
+          } else {
+            selected = this.bizs.filter((biz) => {
+              return biz.statusType === "following";
+            });
+            selected.map((elm) => {
+              this.selectedNetwork.push(elm.id);
+              this.groupMembers.push({ type: elm.accountType, id: elm.id });
+            });
+          }
+          break;
 
-      this.selectedMulty = [];
-      if (this.peopleMulty) {
-        this.bizs.map((biz) => {
-          this.selectedMulty.push(biz.id);
-        });
-      } else {
-        this.selectedMulty = [];
-        this.groupMembers = [];
-      }
-    },
-    businessAllMulty() {
-      // this.bizs = this.allBusiness;
-      this.visibleCollaps = !this.visibleCollaps;
-
-      this.clickedFilterType = "business";
-      this.getBizs();
-
-      this.$store.commit("networkChat/setBizs", this.allBusiness);
-
-      this.allSelection = false;
-
-      this.selectedMulty = [];
-      if (this.businessMulty) {
-        this.bizs.map((biz) => {
-          this.selectedMulty.push(biz.id);
-        });
-      } else {
-        this.selectedMulty = [];
-      }
-    },
-    networkAllMulty() {
-      // this.bizs = this.allNetworks;
-      this.visibleCollaps = !this.visibleCollaps;
-
-      this.clickedFilterType = "network";
-
-      this.$store.commit("networkChat/setBizs", this.allNetworks);
-      this.getNetworks();
-      this.allSelection = false;
-
-      this.selectedMulty = [];
-      if (this.networkMulty) {
-        this.bizs.map((biz) => {
-          this.selectedMulty.push(biz.id);
-        });
-      } else {
-        this.selectedMulty = [];
+        default:
       }
     },
     getAll() {
@@ -2191,54 +2054,16 @@ export default {
     },
     createGroup(receiver_business_id) {
       this.socket.emit("create-group", this.chatId);
-      // this.type = "group";
-      // let sender_business_id = this.currentUser.user.id;
-      var membersPeople = [];
-      var membersBuiness = [];
-      var membersNetwork = [];
-      var membersEditor = [];
-      if (this.groupMembers) {
-        membersPeople = this.groupMembers.filter((member) => {
-          return member.type == "people";
-        });
-        membersBuiness = this.groupMembers.filter((member) => {
-          return member.type == "business";
-        });
-        membersNetwork = this.groupMembers.filter((member) => {
-          return member.type == "network";
-        });
-        membersEditor = this.groupMembers.filter((member) => {
-          return member.type == "editor";
-        });
-      } else {
-        alert("No group members!");
-      }
-      let membersPeopleIds = [];
-      let membersBusinessIds = [];
-      let membersNetworkIds = [];
-      let membersEditorIds = [];
-
-      membersPeople.map((biz) => {
-        membersPeopleIds.push(biz.id);
-      });
-      membersBuiness.map((biz) => {
-        membersBusinessIds.push(biz.id);
-      });
-      membersNetwork.map((biz) => {
-        membersNetworkIds.push(biz.id);
-      });
-      membersEditor.map((biz) => {
-        membersEditorIds.push(biz.id);
-      });
-
-      console.log("members: ", this.groupMembers);
-      console.log("Business: ", membersBuiness);
-      console.log("People: ", membersPeople);
-      console.log("Editor: ", membersEditor);
-      console.log("Network: ", membersNetwork);
 
       let sender_business_id = this.chatId;
-      this.room = [sender_business_id, ...this.selectedMulty];
+      this.room = [
+        sender_business_id,
+        ...this.selectedPeople,
+        ...this.selectedBusiness,
+        ...this.selectedNetwork,
+        ...this.selectedMember,
+        ...this.selectedEditor,
+      ];
       console.log("ROOMS: ", this.room);
       this.tabIndex = 3;
       this.getChatList({ type: "group" });
@@ -2266,44 +2091,50 @@ export default {
       if (date) {
         return moment(data).format("lll");
       } else {
-        // return moment(data).format('LT');
-        return moment(data).fromNow();
+        return moment(data).format("LT");
+        // return moment(data).fromNow();
       }
     },
-    // async getAll(keyword) {
-    //   this.allSelection = true;
-    //   await this.$store.dispatch("businessChat/GET_ALL", keyword);
-    // },
+
     getUserInfo() {
       this.$store.dispatch("networkChat/GET_USER_INFO").then(() => {
         console.log("user info: ", this.userInfo);
       });
     },
+    initFilter() {
+      this.selectedselectOption = "";
+      this.selectedPeople = [];
+      this.selectedBusiness = [];
+      this.selectedNetwork = [];
+      this.selectedEditor = [];
+      this.selectedMember = [];
+    },
     getNetworkMembers(keyword) {
+      this.initFilter();
       this.$store.dispatch("networkChat/GET_NETWORK_MEMBERS", {
         keyword: keyword,
       });
     },
     getEditors(keyword) {
+      this.initFilter();
       this.$store.dispatch("networkChat/GET_EDITORS", {
         keyword: keyword,
       });
     },
     getNetworks(keyword) {
-      this.visibleCollaps = true;
+      this.initFilter();
       this.$store.dispatch("networkChat/GET_NETWORKS", {
         keyword: keyword,
       });
     },
     getUsers(keyword) {
-      this.visibleCollaps = true;
-
+      this.initFilter();
       this.$store.dispatch("networkChat/GET_USERS", {
         keyword: keyword,
       });
     },
     getBizs(keyword) {
-      this.visibleCollaps = true;
+      this.initFilter();
       this.$store
         .dispatch("networkChat/GET_BIZS", {
           keyword: keyword,
@@ -2542,16 +2373,6 @@ export default {
         };
         this.socket.emit("groupMessage", data);
       }
-
-      // this.socket.emit("groupMessage", {
-      //   type: this.type,
-      //   message: this.input,
-      //   sender_business_id: this.currentBiz.id,
-      //   room: this.room,
-      //   receiver_business_id: this.chatSelected.id,
-      //   receiver_id: this.chatId,
-      //   group_id: this.chatId,
-      // });
 
       console.log("group SENT...");
       this.input = "";

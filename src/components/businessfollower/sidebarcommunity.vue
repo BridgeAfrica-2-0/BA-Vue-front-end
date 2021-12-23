@@ -11,7 +11,7 @@
       <b-tabs pills lazy content-class="mt-3  f-left ">
         <b-tab active>
           <template slot="title">
-            . . .  people<span class="spa-color">{{ nFormatter(total.total_people) }} </span>
+            <span class="mobile">people </span> <span class="spa-color">{{ nFormatter(total.total_people) }} </span>
           </template>
 
           <div>
@@ -167,11 +167,17 @@ export default {
   .title {
     font-size: 20px;
   }
+
+  
 }
 
 @media only screen and (max-width: 768px) {
   .title {
     font-size: 16px;
+  }
+
+  .mobile{
+    margin-left: 17px;
   }
 }
 </style>

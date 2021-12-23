@@ -782,15 +782,29 @@ export default {
     },
 
     logout: async function () {
-      const response = await this.$repository.notification.logOut();
-      if (response.success) {
-        loader.hide();
-        this.Logout();
-        this.$router.push({ name: "login" });
+      let loader = this.$loading.show({
+        container: this.$refs.formContainer,
+        canCancel: true,
+        onCancel: this.onCancel,
+        color: "#e75c18",
+      });
+
+      const requestForReset = await this.$repository.share.switch(null, "reset");
+
+      if (requestForReset.success) {
+        const response = await this.$repository.notification.logOut();
         
+        if (response.success) {
+          loader.hide();
+          this.Logout();
+          this.$router.push({ name: "login" });
+        }
+        loader.hide();
       }
+      
     },
 
+    
     switchToProfile: async function () {
       let loader = this.$loading.show({
         container: this.$refs.formContainer,

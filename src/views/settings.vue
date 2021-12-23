@@ -2,7 +2,7 @@
   <div ref="wrapper">
     <Navbar />
 
-    <div class="container wahala" v-if="hasLoad">
+    <div class="container wahala" v-if="getUserInfos">
       <b-row>
         <b-col cols="12" md="12" lg="9" xl="9">
           <div>

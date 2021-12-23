@@ -13,8 +13,8 @@
             class="mb-0"
           >
             <b-form-select v-model="selected">
-              <b-form-select-option :value="null">Admin</b-form-select-option>
-              <b-form-select-option value="a">User</b-form-select-option>
+              <b-form-select-option :value="null">{{$t("businessEditor.Admin")}}</b-form-select-option>
+              <b-form-select-option value="a">{{$t("businessEditor.User")}}</b-form-select-option>
             </b-form-select>
           </b-form-group>
         </b-col>

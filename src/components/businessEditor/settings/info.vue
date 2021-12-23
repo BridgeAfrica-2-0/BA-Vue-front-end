@@ -279,7 +279,7 @@
                 class="mb-0"
               >
                 <b-form-checkbox id="" class="a-text text" name="" value="">
-                  {{$t("businessEditor.This Business has an address")}}</b-form-checkbox
+                  {{$t("businessEditor.Thi_Business_has_an_address")}}</b-form-checkbox
                 >
 
                 <b-container>

@@ -83,11 +83,11 @@
           <div class="row">
             <div class="col-lg-3 col-md-6 footer-contact">
               <div class="row">
-                <div class="col-6">
-                  <img src="../..//assets/img/logobr.png" width="200px" alt="" />
+                <div class="col-8">
+                  <img src="../../assets/img/bavlogo.png" width="200px" class="size" alt="" />
                 </div>
 
-                <div class="col-6 bblogo">Bridge Africa</div>
+              
               </div>
 
               <div class="social-links mt-3 text-left">
@@ -209,5 +209,12 @@ export default {};
   .footer-icons-div {
     width: 100%;
   }
+
+
+}
+
+.size{
+  height: 80px;
+  width: 300px;
 }
 </style>

@@ -3,13 +3,7 @@
     <b-container fluid class="p-0 gradient">
       <div class="container-flex banner">
         <img
-          v-if="!info.user.cover_picture"
-          src="@/assets/img/banner.jpg"
-          class="img-fluid banner"
-          alt="Cover Image"
-        />
-        <img v-else
-          :src="info.user.cover_picture"
+          :src="info.user.cover_picture ? info.user.cover_picture :'@/assets/img/banner.jpg'"
           class="img-fluid banner"
           alt="Cover Image"
         />
@@ -20,21 +14,11 @@
         <b-row class="mt-md-2 text-left">
           <b-col cols="12" md="12" class="m-0 p-0 text-left put-top">
             <b-avatar
-              v-if="!info.user.profile_picture"
+              :src="info.user.profile_picture ? info.user.profile_picture :''"
               class="avat text-center"
               badge-variant="primary"
               badge-offset="10px"
-            >
-            </b-avatar>
-
-            <b-avatar
-              v-else
-              :src="info.user.profile_picture"
-              class="avat text-center"
-              badge-variant="primary"
-              badge-offset="10px"
-            >
-            </b-avatar>
+            ></b-avatar>
 
             <b-icon
               icon="camera-fill"
@@ -105,23 +89,9 @@
                       </template>
 
                       <b-dropdown-item @click="selectCover"> {{ $t('profileowner.Change_Cover') }}</b-dropdown-item>
-
                       <b-dropdown-item @click="RemoveCover"> {{ $t('profileowner.Remove_Cover') }} </b-dropdown-item>
-                       <b-dropdown-item @click="RemoveProfile"> {{ $t('profileowner.Remove_Profile') }} </b-dropdown-item>
-
-<!-- 
-                      <b-dropdown-item @click="RemoveCover">
-                        Remove cover
-                      </b-dropdown-item>
-                      <b-dropdown-item @click="RemoveProfile">
-                        Remove Profile
-                      </b-dropdown-item>
- -->
-                      <!--
-                      <b-dropdown-item
-                        >Invite Friends On Bridge Africa</b-dropdown-item
-                      >
--->
+                      <b-dropdown-item @click="RemoveProfile"> {{ $t('profileowner.Remove_Profile') }} </b-dropdown-item>
+                      <!--<b-dropdown-item>Invite Friends On Bridge Africa</b-dropdown-item>-->
                       <b-dropdown-item @click="viewAs" >{{ $t('profileowner.View_As') }}</b-dropdown-item>
                     </b-dropdown>
                   </span>
@@ -411,7 +381,7 @@ export default {
       });
 
       this.axios
-        .delete("user/profile")
+        .delete("user/profile-picture")
         .then((response) => {
           console.log(response);
           this.$store

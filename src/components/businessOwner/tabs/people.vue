@@ -14,9 +14,10 @@
                   <div class="e-name">
                     <b-row>
                       <b-col md="6" lg="6" cols="6" sm="6" class="mt-lg-2">
-                        <div class="mt-2 mt-lg-0 mt-xl-0 username" @click="$emit('on-profile', item.id)">
-                          <router-link :to="{name: 'ProfileFollower', params: {id:item.id}}"><b>{{ item.name }}</b></router-link>
-                          
+                        <div class="mt-2 mt-lg-0 mt-xl-0 username">
+                            <router-link :to="'/profilefollower/' + item.id">
+                              {{ item.name }} 
+                            </router-link>
                         </div>
                       </b-col>
 

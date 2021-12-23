@@ -2,7 +2,7 @@
   <b-container>
     <b-container>
       <p class="text">
-        Select a payment method for your bridget africa account
+        {{$t("businessEditor.Select_a_payment_method_for_your_bridgeafrica_account")}}
       </p>
     </b-container>
 
@@ -12,7 +12,7 @@
             <b-container>
               <b-form-group
                 label-cols-lg="3"
-                label="Country"
+                :label="$t('businessEditor.Country')"
                 label-size="md"
                 label-class="font-weight-bold pt-0 username"
                 class="mb-0"
@@ -37,7 +37,7 @@
           name="mtn"
           class="text"
           value="mtn"
-          >MTN Mobile Payment</b-form-radio
+          >{{$t("businessEditor.MTN_Mobile_Payment")}}</b-form-radio
         >
         <br />
         <b-form-radio
@@ -47,7 +47,7 @@
           value="mobile-money"
            class="text"
         >
-         Orange  Mobile Payment
+         {{$t("businessEditor.Orange_Mobile_Payment")}}
         </b-form-radio>
 
         <br />
@@ -61,7 +61,7 @@
            class="text"
            
           value="credit-card"
-          > Express Union</b-form-radio
+          > {{$t("businessEditor.Express_Union")}}</b-form-radio
         >
 
 
@@ -92,8 +92,7 @@
 
       <div class=" mb-0">
         <p class="text">
-           Your payment
-          information is secure
+           {{$t("businessEditor.Your_payment_information_is_secure")}}
         </p>
       </div>
     </b-container>

@@ -13,9 +13,9 @@
         <b-col cols="7" sm="8" md="7">
           <p class="text">
             <strong class="title"> {{ product.name }} </strong> <br />
-            <strong> Description </strong> <br />
+            <strong> {{$t("businessEditor.Description")}} </strong> <br />
             {{ product.description.substring(0, 30) }}
-            <b-link v-if="product.description.length >= 30"> see more </b-link>
+            <b-link v-if="product.description.length >= 30"> {{$t("businessEditor.see_more")}} </b-link>
             <br />
 
             <span class="price">
@@ -31,7 +31,7 @@
       </div>
     </div>
 
-    <b-modal hide-footer title="Edit product">
+    <b-modal hide-footer :title="$t('businessEditor.Edit_product')">
       <b-form>
         <b-row>
           <b-col cols="12" md="6">
@@ -51,7 +51,7 @@
 
             <b-form-group
               id="input-group-1"
-              label="Product Description"
+              :label="$t('businessEditor.Product_Description')"
               label-for="input-1"
               label-size="sm"
             >
@@ -68,7 +68,7 @@
               <a href="#" data-toggle="modal" data-target="#createalbumModal">
                 <div class="drag-text">
                   <i class="fa fa-plus"></i>
-                  <h6>Product Image</h6>
+                  <h6>{{$t("businessEditor.Product_Image")}}</h6>
                 </div>
               </a>
               <div></div>
@@ -91,12 +91,12 @@
           value="accepted"
           unchecked-value="not_accepted"
         >
-          This Product Is On Discount
+          {{$t("businessEditor.This_Product_Is_On_Discount")}}
         </b-form-checkbox>
 
         <b-form-group
           id="conditions"
-          label="Conditions"
+          :label="$t('businessEditor.Conditions')"
           label-for="input-1"
           label-size="sm"
         >
@@ -109,7 +109,7 @@
           value="accepted"
           unchecked-value="not_accepted"
         >
-          This Item Is A Service ?
+          {{$t("businessEditor.This_Item_Is_A_Service")}} ?
         </b-form-checkbox>
 
         <b-form-checkbox
@@ -118,7 +118,7 @@
           value="accepted"
           unchecked-value="not_accepted"
         >
-          In stock
+          {{$t("businessEditor.In_stock")}}
         </b-form-checkbox>
 
         <b-form-checkbox
@@ -127,17 +127,17 @@
           value="accepted"
           unchecked-value="not_accepted"
         >
-          Published
+          {{$t("businessEditor.Published")}}
         </b-form-checkbox>
 
-        <b-button class="mt-2 btn-block" variant="primary"> Add</b-button>
+        <b-button class="mt-2 btn-block" variant="primary"> {{$t("businessEditor.Add")}}</b-button>
       </b-form>
     </b-modal>
 
     <b-modal
       v-model="viewProduct"
       hide-footer
-      title="Product Details"
+      :title="$t('businessEditor.Product_Details')"
       size="xl"
     >
       <b-row>
@@ -150,7 +150,7 @@
         <b-col>
           <h2 class="mb-4 text-center">{{ product.name }}</h2>
           <p>
-            <span class="stock" v-if="product.in_stock == 1">In Stock</span>
+            <span class="stock" v-if="product.in_stock == 1">{{$t("businessEditor.In_Stock")}}</span>
           </p>
           <p>{{ product.price }} XAF</p>
           <hr />
@@ -160,12 +160,12 @@
             </b-col>
             <b-col>
               <b-button variant="outline-dark" class="float-right"
-                >Checkout on website</b-button
+                >{{$t("businessEditor.Checkout_on_website")}}</b-button
               >
             </b-col>
           </b-row>
           <hr />
-          <h5>Product Detail</h5>
+          <h5>{{$t("businessEditor.Product_Detail")}}</h5>
           <p>
             {{ product.description }}
           </p>
@@ -210,7 +210,7 @@
                   />
                 </a>
                 <input
-                  placeholder="Post a Comment"
+                  :placeholder="$t('businessEditor.Post_a_Comment')"
                   class="form-control adco comment"
                   type="text"
                 />
@@ -234,7 +234,7 @@
                       <div class="comment-heading">
                         <div class="pull-left">
                           <h5 class="user">Gavino Free</h5>
-                          <h5 class="time">5 minutes ago</h5>
+                          <h5 class="time">{{$t("businessEditor.5_minutes_ago")}}</h5>
                         </div>
                       </div>
                       <p>
@@ -253,7 +253,7 @@
                         variant="primary"
                         aria-hidden="true"
                       ></b-icon>
-                      23 &nbsp; &nbsp; &nbsp; <a href="#">Reply</a>
+                      23 &nbsp; &nbsp; &nbsp; <a href="#">{{$t("businessEditor.Reply")}}</a>
                     </div>
                   </div>
                   <ul class="comments-list">
@@ -270,7 +270,7 @@
                           <div class="comment-heading">
                             <div class="pull-left">
                               <h5 class="user">Gavino Free</h5>
-                              <h5 class="time">5 minutes ago</h5>
+                              <h5 class="time">{{$t("businessEditor.")}}</h5>
                             </div>
                           </div>
                           <p>
@@ -287,7 +287,7 @@
                             variant="primary"
                             aria-hidden="true"
                           ></b-icon>
-                          23 &nbsp; &nbsp; &nbsp; <a href="#">Reply</a>
+                          23 &nbsp; &nbsp; &nbsp; <a href="#">{{$t("businessEditor.Reply")}}</a>
                         </div>
                       </div>
                     </li>
@@ -304,7 +304,7 @@
                           <div class="comment-heading">
                             <div class="pull-left">
                               <h5 class="user">Gavino Free</h5>
-                              <h5 class="time">5 minutes ago</h5>
+                              <h5 class="time">{{$t("businessEditor.5_minutes_ago")}}</h5>
                             </div>
                           </div>
                           <p>
@@ -317,7 +317,7 @@
                         </div>
                         <div class="col-md-12 pt-2 pl-0 mb-3">
                           <i class="fa heart fa-heart-o" aria-hidden="true"></i>
-                          23 &nbsp; &nbsp; &nbsp; <a href="#">Reply</a>
+                          23 &nbsp; &nbsp; &nbsp; <a href="#">{{$t("businessEditor.Reply")}}</a>
                         </div>
                       </div>
                     </li>
@@ -357,7 +357,7 @@
                       <div class="comment-heading">
                         <div class="pull-left">
                           <h5 class="user">Gavino Free</h5>
-                          <h5 class="time">5 minutes ago</h5>
+                          <h5 class="time">{{$t("businessEditor.5_minutes_ago")}}</h5>
                         </div>
                       </div>
                       <p>
@@ -376,7 +376,7 @@
                         variant="primary"
                         aria-hidden="true"
                       ></b-icon>
-                      23 &nbsp; &nbsp; &nbsp; <a href="#">Reply</a>
+                      23 &nbsp; &nbsp; &nbsp; <a href="#">{{$t("businessEditor.Reply")}}</a>
                     </div>
                   </div>
                 </li>

@@ -15,7 +15,7 @@
         </b-col>
         <b-col cols="9" md="11" class="p-0 m-0 pr-3">
           <input
-            placeholder="Post a business update"
+            :placeholder="$t('businessEditor.Post_a_business_update')"
             v-b-modal.modal-xl
             class="comment"
             type="text"
@@ -39,7 +39,7 @@
             <!-- Add Movie -->
             <b-col cols="5" class="text-right m-0 p-0">
               <b-button
-                title="Add Movie"
+                :title="$t('businessEditor.Add_Movie')"
                 size="sm"
                 variant="outline-primary"
                 @click="$refs.movie.click()"
@@ -50,7 +50,7 @@
                   :icon="['fas', 'photo-video']"
                   size="lg"
                 />
-                <span class="username"> Photo/ Video </span>
+                <span class="username"> {{$t("businessEditor.Photo_Video")}} </span>
               </b-button>
             </b-col>
             <!-- Attach File-->
@@ -64,20 +64,20 @@
                 ref="document2"
               />
               <b-button
-                title="Add Hyperlink"
+                :title="$t('businessEditor.Add_Hyperlink')"
                 size="sm"
                 variant="outline-primary"
                 @click="$refs.document2.click()"
                 class="post-btn"
               >
                 <fas-icon class="icons" :icon="['fas', 'file']" size="lg" />
-                <span class="username"> Attach File </span>
+                <span class="username"> {{$t("businessEditor.Attach_File")}} </span>
               </b-button>
             </b-col>
             <!-- Post-->
             <b-col cols="3" class="text-right p-0 m-0">
               <b-button
-                title="Add Hyperlink"
+                :title="$t('businessEditor.Add_Hyperlink')"
                 size="sm"
                 variant="outline-primary"
                 @click="createPost_"
@@ -88,7 +88,7 @@
                   :icon="['fas', 'paper-plane']"
                   size="lg"
                 />
-                <span class="username"> Post </span>
+                <span class="username"> {{$t("businessEditor.Post")}} </span>
               </b-button>
             </b-col>
           </b-row>
@@ -108,7 +108,7 @@
           ref="modal-edit"
           centered
           hide-footer
-          title="Update Post"
+          :title="$t('businessEditor.Update_Post')"
           @hidden="resetPostData"
         >
           <b-row ref="loader">
@@ -134,14 +134,14 @@
                 <b-form-textarea
                   id="textarea-small"
                   class="mb-2 border-none"
-                  placeholder="Post a business update"
+                  :placeholder="$t('businessEditor.Post_a_business_update')"
                   v-model="edit_description"
                 ></b-form-textarea>
 
                 <i></i>
               </div>
               <div class="bordder">
-                <span class="float-left"> Add to Your Post </span>
+                <span class="float-left"> {{$t("businessEditor.Add_to_Your_Post")}} </span>
                 <span class="float-right">
                   <b-button-group size="sm" class="">
                     <input id="video" type="file" hidden />
@@ -163,7 +163,7 @@
                     />
 
                     <b-button
-                      title="Add Movie"
+                      :title="$t('businessEditor.Add_Movie')"
                       size="sm"
                       variant="outline-primary"
                       @click="$refs.movies.click()"
@@ -175,7 +175,7 @@
                       />
                     </b-button>
                     <b-button
-                      title="Add Hyperlink"
+                      :title="$t('businessEditor.Add_Hyperlink')"
                       size="sm"
                       variant="outline-primary"
                       @click="$refs.document.click()"
@@ -201,7 +201,7 @@
                   class="float-right"
                   @click="deleteItem(hyperlink.fileName)"
                 >
-                  delete
+                  {{$t("businessEditor.delete")}}
                 </span>
               </div>
 
@@ -252,7 +252,7 @@
               <span>
                 <b-button @click="updatePost" variant="primary" block
                   ><b-icon icon="cursor-fill" variant="primary"></b-icon>
-                  Publish</b-button
+                  {{$t("businessEditor.Publish")}}</b-button
                 >
               </span>
             </b-col>
@@ -298,7 +298,7 @@
                 ></b-form-textarea>
               </div>
               <div class="bordder">
-                <span class="float-left"> Add to Your Post </span>
+                <span class="float-left"> {{$t("businessEditor.Add_to_Your_Post")}} </span>
                 <span class="float-right">
                   <b-button-group size="sm" class="">
                     <input id="video" type="file" hidden />

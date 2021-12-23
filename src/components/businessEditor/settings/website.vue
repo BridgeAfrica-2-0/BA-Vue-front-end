@@ -15,26 +15,26 @@
               <b-table-simple hover small caption-top responsive>
                 <b-thead>
                   <b-tr>
-                    <b-th class="a-text username"> Account Type </b-th>
+                    <b-th class="a-text username"> {{$t("businessEditor.Account_Type")}} </b-th>
                   
-                    <b-th> <b-button  variant="outline" class=" btn-outline-primary"> change  </b-button> </b-th>
+                    <b-th> <b-button  variant="outline" class=" btn-outline-primary"> {{$t("businessEditor.change")}}  </b-button> </b-th>
                   </b-tr>
                 </b-thead>
 
                 <b-tbody>
                   <b-tr>
-                    <b-td class="a-text"> Basics </b-td>
+                    <b-td class="a-text"> {{$t("businessEditor.Basics")}} </b-td>
                    
                     <b-td class="a-text">
-                      <b-link href="#">Upgrade</b-link>
+                      <b-link href="#">{{$t("businessEditor.Upgrade")}}</b-link>
                     </b-td>
                   </b-tr>
                   <br />
 
                   <b-tr>
-                    <b-td class="a-text"> Premium</b-td>
+                    <b-td class="a-text"> {{$t("businessEditor.Premium")}}</b-td>
                    
-                    <b-td><b-link href="#"> Not Available </b-link> </b-td>
+                    <b-td><b-link href="#"> {{$t("businessEditor.Not_Available")}} </b-link> </b-td>
                   </b-tr>
 
                   <br />
@@ -54,7 +54,7 @@
 
             </div>
 
-            <b-button  variant="outline" class=" btn-outline-primary"> Delete Account  </b-button>
+            <b-button  variant="outline" class=" btn-outline-primary"> {{$t("businessEditor.Delete_Account")}}  </b-button>
           </b-col>
 
           <!--

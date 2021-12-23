@@ -38,7 +38,7 @@
 			id: String,
 			title: {
 				type: String,
-				default: "Add Shipping Address",
+				default: "Add Shipping Address"
 			},
 			mode: {
 			type: String,

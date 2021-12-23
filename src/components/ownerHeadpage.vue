@@ -112,12 +112,12 @@
                        <b-dropdown-item @click="RemoveProfile"> {{ $t('profileowner.Remove_Profile') }} </b-dropdown-item>
 
 
-                      <b-dropdown-item @click="RemoveCover">
+                      <!-- <b-dropdown-item @click="RemoveCover">
                         Remove cover
                       </b-dropdown-item>
                       <b-dropdown-item @click="RemoveProfile">
                         Remove Profile
-                      </b-dropdown-item>
+                      </b-dropdown-item> -->
 
                       <!--
                       <b-dropdown-item

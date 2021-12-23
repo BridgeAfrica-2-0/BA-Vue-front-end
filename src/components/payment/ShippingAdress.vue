@@ -79,7 +79,7 @@
 										<span class="">{{$t("general.Change")}}</span>
 									</b-dropdown-item-button>
 									<ConfirmOperation
-										message="Do you want to delete this shipping address?"
+										:message="$t('general.Do_you_want_to_delete_this_shipping_address')"
 										@sendid="handleDeleteShipping"
 										:id_item="shipping_item.id"
 									/>

@@ -2,7 +2,7 @@
   <div class="mt-3">
     <div>
       <b-tabs pills content-class="mt-3 f-left">
-        <b-tab title="People" active> 
+        <b-tab :title="$t('general.People')" active> 
           <People /> 
         </b-tab>
         <b-tab title="Businesses"> 

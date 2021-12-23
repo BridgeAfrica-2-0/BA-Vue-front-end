@@ -869,7 +869,7 @@
               ></b-avatar>
               <div class="info-detail">
                 <h1 class="info-name">{{ receiver.name }}</h1>
-                <b-link class="primary">View Profile</b-link>
+                <b-link class="primary">{{ $t("general.View_Profile") }} </b-link>
 
               </div>
             </div>

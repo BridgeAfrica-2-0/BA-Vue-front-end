@@ -1124,7 +1124,7 @@ export default {
       etat: "All",
 
       options: [
-        { value: null, text: "Please select an option" },
+        { value: null, text: this.$t('general.Please_select_an_option') },
         { value: "5", text: "last 5 days" },
         { value: "10", text: "last 10 days" },
       ],

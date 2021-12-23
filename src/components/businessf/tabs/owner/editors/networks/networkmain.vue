@@ -14,7 +14,7 @@
           <strong>{{$t("general.Community")}}:</strong> 1.1M {{$t("general.Community")}} <br />
           <strong>{{$t("general.Location")}}:</strong> {{$t("general.Neighbourhood")}}, {{$t("general.city")}} {{$t("general.country")}} <br />
           <strong>Keyword:</strong> Keyword 1 Keyword 2 Keyword 3 <br />
-          <strong>About:</strong> Lorem ipsum, dolor sit amet consectetur
+          <strong>{{$t("general.About")}}:</strong> Lorem ipsum, dolor sit amet consectetur
           adipisicing elit. <b-link>{{$t("general.Read_More")}}</b-link>
         </p>
       </div>

@@ -70,7 +70,7 @@
       </div>
 
       <p class="fs-12" v-if="proccesEdit">
-        <a href="#" @click.prevent="toggle">Cancel</a>
+        <a href="#" @click.prevent="toggle">{{ $t('network.Cancel') }}</a>
       </p>
 
       <!-- End Edit message -->

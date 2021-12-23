@@ -1004,7 +1004,7 @@
                                   class="centralizer"
                                 ></b-spinner>
                               </div>
-                              <h5>People</h5>
+                              <h5>{{$t('general.People')}}</h5>
                               <div v-if="allUsers">
                                 <tr
                                   v-for="(biz, index) in allUsers"

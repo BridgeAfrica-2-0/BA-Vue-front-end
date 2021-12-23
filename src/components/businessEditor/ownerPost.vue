@@ -108,7 +108,7 @@
           ref="modal-edit"
           centered
           hide-footer
-          title="Update Post"
+          :title="$t('general.Update_Post')"
           @hidden="resetPostData"
         >
           <b-row ref="loader">

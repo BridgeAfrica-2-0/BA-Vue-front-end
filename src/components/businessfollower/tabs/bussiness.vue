@@ -84,7 +84,7 @@
                     </div>
 
                     <div class="form-group">
-                      <label for="username" class="username">About</label><br />
+                      <label for="username" class="username">{{$t("general.About")}}</label><br />
                       <textarea
                         type="textarea"
                         name="business_about"

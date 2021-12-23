@@ -72,7 +72,7 @@
     "price":"Prix",
     "Total":"Total",
     "SHIPPING":"LIVRAISON",
-    "ORDER_SUMMARY":"RESUME DE L'ORDRE",
+    "ORDER_SUMMARY":"RESUME DE LA COMMANDE",
     "ITEMS":"Produit",
     "description":"description",
     "PROMO_CODE":"CODE PROMO",
@@ -155,9 +155,9 @@
     "Find_User":"Trouver un utilisateur",
     "Find_Post":"Trouver un poste",
     "Find_Businesses":"Rechecher des entreprises",
-    "Not_Find_users":"Ne pas trouver les utilisateurs",
-    "Not_Find_posts":"Ne pas trouver de postes",
-    "Not_Find_Business":"Ne pas trouver l'entreprise",
+    "Not_Find_users":"Aucun utilisateurs trouvée",
+    "Not_Find_posts":"Aucun postes trouvée",
+    "Not_Find_Business":"Aucun entreprise trouvée",
 
     "Attach_File":"Joindre le fichier",
     "Post":"Poste",
@@ -250,10 +250,25 @@
     "Special_Needs":"Besoins particuliers",
     "Allow_Business":"Autoriser les entreprise",
     "Networks":"Réseaux",
-    "Enter_new_keywords_alert_separated_by_space_comma_or_semicolon":"Saisissez de nouveaux mots-clés d'alerte séparés par un espace, une virgule ou un point-virgule"
+    "Enter_new_keywords_alert_separated_by_space_comma_or_semicolon":"Saisissez de nouveaux mots-clés d'alerte séparés par un espace, une virgule ou un point-virgule",
+    "Show":"Afficher",
+
+    "Download":"Télécharger",
+    "Make_Profile_Picture":"Créer une photo de profil",
+    "Edit_Profile":"Modifier le profil",
+    "Add_Shipping_Address":"Ajouter l'adresse d'expédition",
+
+    "Delete_Shipping_Address":"Supprimer l'adresse d'expédition",
+    "Continue":"Continuer",
+    "Do_you_want_to_delete_this_shipping_address":"Voulez-vous supprimer cette adresse de livraison?",
+
+    "Unable_to_Removerd_Member_From_Network":"Impossible de supprimer un membre du réseau",
+    "Member_Successfully_Removerd_From_Network":"Le membre a été retiré du réseau avec succès",
+    "Unable_To_Removed_Member_As_Admin":"Impossible de supprimer un membre en tant qu'administrateur",
+    "Member_Successfully_Removed_As_Admin":"Membre retiré avec succès de la liste des administrateurs",
+    "Unable_To_Set_Member_As_Admin":"Impossible de définir un membre comme administrateur",
+    "The_Member_Is_Now_Admin":"Le membre est maintenant Admin",
+    "Please_select_an_option": "Veuillez sélectionner une option"
    
-
-
-    
 
 }

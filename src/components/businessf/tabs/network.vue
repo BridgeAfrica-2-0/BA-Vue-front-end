@@ -23,7 +23,7 @@
             <strong class="title"> {{ item.name }} </strong> <br />
             {{ item.category }}
             <br />
-           {{ item.followers }} Community<br />
+           {{ item.followers }} {{$t("general.Community")}}<br />
 
            {{ item.about_network }} <b-link>Read More</b-link>
           </p>
@@ -47,7 +47,7 @@
                   variant="primary"
                 >
                   <i class="fas fa-user-plus  fa-lg btn-icon "></i>
-                  <span class="btn-com">Community</span>
+                  <span class="btn-com">{{$t("general.Community")}}</span>
                 </b-button>
               </b-col>
 

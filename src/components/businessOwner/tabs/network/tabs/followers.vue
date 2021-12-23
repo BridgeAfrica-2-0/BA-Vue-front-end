@@ -17,7 +17,6 @@
     </b-row>
     <br />
 
-
         <CommunityBusiness   :searchh="keywords" ref="search"  type="Follower" />
         
      

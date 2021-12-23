@@ -946,7 +946,7 @@ export default {
   }
   .send-cmt {
     position: relative;
-    margin-left: 95%;
+    margin-left: 93%;
     top: -28px;
     cursor: pointer;
   }

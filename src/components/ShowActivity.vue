@@ -1,5 +1,5 @@
 <template>
-  <div class="accordion" role="tablist" >
+  <div class="accordion" role="tablist">
     <b-card
       class="mb-1"
       style="width: 100%"
@@ -34,11 +34,10 @@
                 :square="true"
                 class="logo-sizee"
               ></b-avatar>
-
             </div>
             <div class="d-flex flex-column ml-3">
               <div>
-                <span class="font-weight-bold">{{ item.business_name }}</span>
+                <span class="font-weight-bold">{{ item.name }}</span>
               </div>
             </div>
           </div>
@@ -72,14 +71,14 @@
             <div>
               <b-avatar
                 variant="light"
-                :src="item.network_image"
+                :src="item.image"
                 :square="true"
                 class="logo-sizee"
               ></b-avatar>
             </div>
             <div class="d-flex flex-column ml-3">
               <div>
-                <span class="font-weight-bold">{{ item.network_name }}</span>
+                <span class="font-weight-bold">{{ item.name }}</span>
               </div>
             </div>
           </div>
@@ -136,9 +135,9 @@ export default {
     this.strategy = {
       business: {
         newType: (item) => ({
-          name: item.business_name,
+          name: item.name,
           profile_picture: item.logo_path,
-          id: item.business_id,
+          id: item.id,
           user_type: "business",
         }),
         redirect: (obj) => this.redirection(obj),
@@ -146,9 +145,9 @@ export default {
 
       network: {
         newType: (item) => ({
-          name: item.network_name,
-          profile_picture: item.network_image,
-          id: item.network_id,
+          name: item.name,
+          profile_picture: item.image,
+          id: item.id,
           user_type: "network",
         }),
         redirect: (obj) => this.redirection(obj),
@@ -188,17 +187,17 @@ export default {
       try {
         const data = {
           routeName: "network" == type ? "networks" : "BusinessOwner",
-          routeId: "network" == type ? item.network_id : item.business_id,
+          routeId: item.id,
         };
 
         const request =
           "network" == type
             ? await this.$repository.share.switch(
-                this.$route.params.id,
+                item.id,
                 "network"
               )
             : await this.$repository.share.switch(
-                this.$route.params.id,
+                item.id,
                 "business"
               );
 
@@ -207,8 +206,10 @@ export default {
             time: 5000,
             message:
               "business" == type
-                ? `{{$t("general.You_are_now_connected_as")}} ${item.business_name}`
-                : `{{$t("general.You_are_connected_as")}} ${item.network_name}`,
+
+                ? `You are now connected as ${item.name}`
+                : `You are connected as ${item.name}`,
+
           });
 
           this.auth(this.strategy[type].newType(item));

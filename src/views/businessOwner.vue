@@ -21,7 +21,6 @@
         <Inbox />
       </div>
 
-
       <div class="mt-3" v-if="selectedId == '2'">
         <Settings v-bind:currenttab="selectedId" />
       </div>

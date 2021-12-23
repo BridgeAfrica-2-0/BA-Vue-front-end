@@ -144,7 +144,7 @@
             <b-collapse id="nav-collapse" is-nav>
               <div class="nav-item">
                 <router-link
-                  :to="navLink('home')"
+                  :to="{name:navLink('home')}"
                   class="nav-link text-dark hov"
                   href=""
                 >
@@ -755,6 +755,7 @@ export default {
         this.$router.push({ name: "Search" });
       }
     },
+
     navLink(type) {
       const link = {
         home: () => {
@@ -783,9 +784,10 @@ export default {
     logout: async function () {
       const response = await this.$repository.notification.logOut();
       if (response.success) {
+        loader.hide();
         this.Logout();
-      } else {
-        this.Logout();
+        this.$router.push({ name: "login" });
+        
       }
     },
 
@@ -810,6 +812,7 @@ export default {
     toggleinput() {
       this.$refs.mobileinput.style.display = "block";
     },
+    
 
     getNetworks: async function () {
       let request = await this.$repository.share.getNetworks();
@@ -821,11 +824,22 @@ export default {
       if (request.success) this.setBusiness(request.data);
     },
 
+    getNetworkAndBusiness: async function() {
+      let request = await this.$repository.share.getNetworkAndBusiness();
+      if (request.success){ 
+        this.setBusiness(request.data.business);
+        this.setNetworks(request.data.network);
+      }
+    },
+
+
+
     init() {
       try {
         if (!this.hasLauchNetworkRequest) {
-          this.getNetworks();
-          this.getBusiness();
+          // this.getNetworks();
+          // this.getBusiness();
+          this.getNetworkAndBusiness();
           this.lauchNetworkRequest();
         }
       } catch (error) {

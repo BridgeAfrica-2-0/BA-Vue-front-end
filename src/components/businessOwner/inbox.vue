@@ -974,7 +974,7 @@
             <div class="new-msg back-image" style="margin-right: 17px">
               <div class="info-nav">
                 <b-row>
-                  <b-col class="col-1 mt-3"> To </b-col>
+                  <b-col class="col-1 mt-3"> {{$t('general.To')}} </b-col>
                   <b-col>
                     <b-form-input
                       id="textarea"

@@ -752,7 +752,7 @@ export default {
             console.log("Error erro!");
           });
 
-        this.$router.push({ name: "Search" });
+        this.$router.push("/search");
       }
     },
 
@@ -790,7 +790,7 @@ export default {
       });
       const response = await this.$repository.notification.logOut();
       if (response.success) {
-        loader.hide();
+        // loader.hide();
         this.Logout();
         this.$router.push({ name: "login" });
         

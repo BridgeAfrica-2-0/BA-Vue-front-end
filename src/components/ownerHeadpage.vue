@@ -90,26 +90,8 @@
 
                       <b-dropdown-item @click="selectCover"> {{ $t('profileowner.Change_Cover') }}</b-dropdown-item>
                       <b-dropdown-item @click="RemoveCover"> {{ $t('profileowner.Remove_Cover') }} </b-dropdown-item>
-<<<<<<< HEAD
-                       <b-dropdown-item @click="RemoveProfile"> {{ $t('profileowner.Remove_Profile') }} </b-dropdown-item>
-
-
-                      <!-- <b-dropdown-item @click="RemoveCover">
-                        Remove cover
-                      </b-dropdown-item>
-                      <b-dropdown-item @click="RemoveProfile">
-                        Remove Profile
-                      </b-dropdown-item> -->
-
-                      <!--
-                      <b-dropdown-item
-                        >Invite Friends On Bridge Africa</b-dropdown-item
-                      >
--->
-=======
                       <b-dropdown-item @click="RemoveProfile"> {{ $t('profileowner.Remove_Profile') }} </b-dropdown-item>
                       <!--<b-dropdown-item>Invite Friends On Bridge Africa</b-dropdown-item>-->
->>>>>>> main
                       <b-dropdown-item @click="viewAs" >{{ $t('profileowner.View_As') }}</b-dropdown-item>
                     </b-dropdown>
                   </span>

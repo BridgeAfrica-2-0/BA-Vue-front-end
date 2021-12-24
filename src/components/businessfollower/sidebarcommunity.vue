@@ -11,11 +11,7 @@
       <b-tabs pills lazy content-class="mt-3  f-left ">
         <b-tab active>
           <template slot="title">
-<<<<<<< HEAD
             {{$t('general.People')}} <span class="spa-color"> {{ nFormatter(total.total_people) }} </span>
-=======
-            <span class="mobile">people </span> <span class="spa-color">{{ nFormatter(total.total_people) }} </span>
->>>>>>> main
           </template>
 
           <div>

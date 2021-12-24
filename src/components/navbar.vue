@@ -109,7 +109,7 @@
                 :minMatchingChars=0
                 :maxMatches=10
                 :serializer="(item) => item.name"
-                placeholder="Where"
+                :placeholder="$t('general.Where')"
                 class="search-hh w-44"
               />
 
@@ -148,7 +148,7 @@
                   class="nav-link text-dark hov"
                   href=""
                 >
-                  Home
+                  {{ $t("general.Home") }}
                 </router-link>
               </div>
 
@@ -549,7 +549,7 @@ export default {
       default: function () {
         return {
           keyword: "",
-          placeholder: "All",
+          placeholder: this.$t('general.All'),
         };
       },
     },
@@ -566,7 +566,7 @@ export default {
       redirectionPatterns: null,
       searchOptions: {
         keyword: "",
-        placeholder: "All",
+        placeholder: this.$t('general.All'),
       },
       query: "",
       selectedUser: null,

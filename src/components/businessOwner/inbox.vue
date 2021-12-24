@@ -1457,7 +1457,7 @@
                             overflow-x: hidden !important;
                           "
                         >
-                          <h2>All</h2>
+                          <h2>{{$t("general.All")}}</h2>
                           <br />
                           <div v-if="loader" class="text-center">
                             <b-spinner

@@ -34,7 +34,7 @@
                 class="fas fa-lg btn-icon"
                 :class="networkInfo.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"
               ></i>
-              <span class="ml-1"> Community</span>
+              <span class="ml-1"> {{ $t('general.Community') }} </span>
             </b-button>
           </b-col>
         </b-row>
@@ -62,7 +62,7 @@
             </b-col>
           </b-row>
         </b-container>
-        <h6 class="mt-2 font-weight-bolder title ">About</h6>
+        <h6 class="mt-2 font-weight-bolder title ">{{ $t('general.About') }} </h6>
         <p class="text-justify text">
            <read-more
               :more-str="$t('search.read_more')"
@@ -145,7 +145,7 @@ export default {
           this.buttonStatus = false;
           this.flashMessage.show({
             status: "success",
-            message: "You Are Now Following"
+            message: this.$t('general.You_Are_Now_Following')
           });
         }
       })
@@ -154,7 +154,7 @@ export default {
         this.buttonStatus = false;
         this.flashMessage.show({
           status: "error",
-          message: "Unable To follow"
+          message: this.$t('general.Unable_To_follow')
         });
       });
     },

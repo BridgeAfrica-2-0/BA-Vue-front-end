@@ -199,7 +199,7 @@ export default {
         this.indeterminate = true;
         this.flashMessage.show({
           status: "success",
-          message: "Marked As Read"
+          message: this.$t('general.Marked_As_Read')
         });
       })
       .catch(err => {
@@ -207,7 +207,7 @@ export default {
         this.indeterminate = true;
         this.flashMessage.show({
           status: "error",
-          message: "Unable To Mark As Read"
+          message: this.$t('general.Unable_To_Mark_As_Read')
         });
       });
 		},
@@ -232,7 +232,7 @@ export default {
         this.indeterminate = true;
         this.flashMessage.show({
           status: "success",
-          message: "Notification(s) Deleted"
+          message: this.$t('general.Notification_Deleted')
         });
       })
       .catch(err => {
@@ -240,7 +240,7 @@ export default {
         this.indeterminate = true;
         this.flashMessage.show({
           status: "error",
-          message: "Unable To Deleted Notification(s)"
+          message: this.$t('general.Unable_To_Deleted_Notification')
         });
       });
 		},

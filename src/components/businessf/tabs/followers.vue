@@ -145,7 +145,7 @@
             </b-tab>
           </b-tabs>
         </b-tab>
-        <b-tab title="Bussiness">
+        <b-tab :title="$t('general.Bussiness') ">
           <b-tabs content-class="mt-3" fill pills>
             <b-tab :title="$t('general.Followers') (2)" active>
               <div class="row border shadow pt-3 pb-3 pl-0 mb-4">

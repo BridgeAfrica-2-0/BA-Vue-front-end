@@ -617,7 +617,7 @@ export default {
         this.Lspinner = false;
         this.flashMessage.show({
           status: "success",
-          message: "Changes Made Successfuly"
+          message: this.$t('general.Changes_Made_Successfuly')
         });  
       })
       .catch(err => {
@@ -625,7 +625,7 @@ export default {
         this.Lspinner = false;
         this.flashMessage.show({
           status: "error",
-          message: "Unable To Make Changes"
+          message: this.$t('general.Unable_To_Make_Changes')
         });
       });
     },

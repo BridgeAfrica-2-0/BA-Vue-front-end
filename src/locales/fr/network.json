@@ -307,7 +307,11 @@
     "about":"À propos",
     "No_Result_On_Networks":"Aucun résultat sur les réseaux",
     "Anyone":"Toute personne",
-    "Search_or_add_a_tag":"Rechercher ou ajouter un tag"
+    "Search_or_add_a_tag":"Rechercher ou ajouter un tag",
+
+    "You_Are_Not_more_Following":"Vous n'êtes pas plus abonné",
+    "You_Are_Now_Following":"Vous êtes maintenant abonné",
+    "Unable_To_follow":"Impossible de s'abonner"
 
 
 }

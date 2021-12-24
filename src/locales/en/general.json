@@ -276,7 +276,47 @@
     "Member_Successfully_Removed_As_Admin":"Member successfully removed as admin",
     "Unable_To_Set_Member_As_Admin":"Unable to set member as admin",
     "The_Member_Is_Now_Admin":"The member is now admin",
-    "Please_select_an_option": "Please select an option"
+    "Please_select_an_option": "Please select an option",
+
+    "Business_Updated":"Business Updated",
+    "Comment_Deleted":"Comment Deleted",
+    "Something_wrong_happen_Try_again":"Something wrong happen. Try again",
+    "Comment_Updated":"Comment Updated",
+    "Post_created":"Post created",
+    "Try_to_write_something":"Try to write something",
+    "Show_more_comments":"Show more comments",
+
+    "Assign_Role":"Assign Role",
+    "Assign":"Assign",
+    "Admin_can_manage_all_aspects_of_the_Business_Identity":"Admin can manage all aspects of the Business Identity",
+    "They_can_create_posts_and_send_messages_through_inbox":"They can create posts and send messages through inbox",
+    "They_can_respond_to_the_delete_comments":"They can respond to the delete comments",
+    "Approve_posts":"Approve posts",
+    "view_insights":"view insights",
+    "manage_the_business_settings":"manage the business settings",
+    "update_Business_profile":"update Business profile",
+    "assign_roles_and_payments":"assign roles and payments",
+    "Editor_can_create_posts_and_send_messages_through_inbox":"Editor can create posts and send messages through inbox",
+    "They_can_respond_to_and_delete_comments":"They can respond to and delete comments",
+    "EDIT":"EDIT",
+    "You_Are_About_To_Delete":"You Are About To Delete",
+    "New_Role_Assigned":"New Role Assigned",
+    "Unable_to_Assigned_New_Role":"Unable to Assigned New Role",
+    "Editor_Deleted":"Editor Deleted",
+    "Unable_To_Delete_Editor":"Unable To Delete Editor",
+    "Marked_As_Read":"Marked As Read",
+    "Unable_To_Mark_As_Read":"Unable To Mark As Read",
+    "Notification_Deleted":"Notification(s) Deleted",
+    "Unable_To_Deleted_Notification":"Unable To Deleted Notification(s)",
+    "Changes_Made_Successfuly":"Changes Made Successfuly",
+    "Unable_To_Make_Changes":"Unable To Make Changes",
+    "Changes_Made_Successfully":"Changes Made Successfully",
+    "Network_Deleted":"Network Deleted",
+    "Unable_To_Delete_Network":"Unable To Delete Network",
+    "Product_Deleted_Successfuly":"Product Deleted Successfuly",
+    "Unable_To_Delete_Product":"Unable To Delete Product",
+    "You_Are_Now_Following":"You Are Now Following"
+
    
 
 

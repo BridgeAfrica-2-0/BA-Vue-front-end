@@ -25,7 +25,7 @@
             <br />
            {{ item.followers }} {{$t("general.Community")}}<br />
 
-           {{ item.about_network }} <b-link>Read More</b-link>
+           {{ item.about_network }} <b-link>{{$t("generalRead_More.")}</b-link>
           </p>
         </b-col>
 

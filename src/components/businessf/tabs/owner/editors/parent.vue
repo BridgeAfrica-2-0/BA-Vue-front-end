@@ -28,7 +28,7 @@
               class="a-center"
             >
               <i :class="networkInfo.is_follow ? 'fas fa-user-minus fa-lg btn-icon':'fas fa-user-plus fa-lg btn-icon'"></i>
-              <span> Community</span>
+              <span> {{ $t('general.Community') }}</span>
             </b-button>
           </b-col>
         </b-row>
@@ -323,13 +323,13 @@ export default {
           this.buttonStatus = false;
           this.flashMessage.show({
             status: "success",
-            message: "You Are Not more Following"
+            message: this.$t('network.You_Are_Not_more_Following')
           });
         } else {
           this.buttonStatus = false;
           this.flashMessage.show({
             status: "success",
-            message: "You Are Now Following"
+            message: this.$t('network.You_Are_Now_Following')
           });
         }
       })
@@ -338,7 +338,7 @@ export default {
         this.buttonStatus = false;
         this.flashMessage.show({
           status: "error",
-          message: "Unable To follow"
+          message: this.$t('network.Unable_To_follow'),
         });
       });
     },

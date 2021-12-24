@@ -1350,7 +1350,7 @@ export default {
             this.flashMessage.show({
               status: 'success',
               blockClass: 'custom-block-class',
-              message: 'Business Updated',
+              message: this.$t('general.Business_Updated'),
             });
 
             loader.hide();

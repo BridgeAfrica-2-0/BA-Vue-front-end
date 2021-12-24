@@ -1343,41 +1343,6 @@
                                   <b-card>
                                     <b-row class="text-center">
                                       <b-col>
-<<<<<<< HEAD
-                                        <b-form-checkbox
-                                          id="all"
-                                          v-model="allSelectedMulty"
-                                          name="all"
-                                          value="accepted"
-                                          @change="selectedAllMulty"
-                                        >
-                                          {{$t("general.All")}}
-                                        </b-form-checkbox>
-                                      </b-col>
-                                      <b-col>
-                                        <b-form-checkbox
-                                          id="following"
-                                          v-model="following"
-                                          name="members"
-                                          :value="true"
-                                          :unchecked-value="false"
-                                          @change="selectedFollowings"
-                                        >
-                                          {{$t("general.Following")}}
-                                        </b-form-checkbox>
-                                      </b-col>
-                                      <b-col>
-                                        <b-form-checkbox
-                                          id="follower"
-                                          v-model="follower"
-                                          name="members"
-                                          :value="true"
-                                          :unchecked-value="false"
-                                          @change="selectedFollowers"
-                                        >
-                                          {{$t("general.Follower")}}
-                                        </b-form-checkbox>
-=======
                                         <b-form-group>
                                           <b-form-radio-group
                                             id="radio-group-1"
@@ -1387,7 +1352,6 @@
                                             @change="selectedAllMulty"
                                           ></b-form-radio-group>
                                         </b-form-group>
->>>>>>> main
                                       </b-col>
                                     </b-row>
                                   </b-card>
@@ -1539,7 +1503,7 @@
                             overflow-x: hidden !important;
                           "
                         >
-                          <h2>All</h2>
+                          <h2>{{ $t('general.All') }} </h2>
                           <br />
                           <div v-if="loader" class="text-center">
                             <b-spinner

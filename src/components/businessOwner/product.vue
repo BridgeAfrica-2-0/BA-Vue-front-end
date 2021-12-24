@@ -712,14 +712,14 @@ selectedcategories: function() {
           this.flashMessage.show({
             status: "success",
             blockClass: 'custom-block-class',
-            message: "Product Deleted Successfuly"
+            message: this.$t('general.Product_Deleted_Successfuly'),
           });  
         })
         .catch(err => {
           console.log({ err: err });
           this.flashMessage.show({
             status: "error",
-            message: "Unable To Delete Product"
+            message: this.$t('general.Unable_To_Delete_Product')
           });
         });
     },

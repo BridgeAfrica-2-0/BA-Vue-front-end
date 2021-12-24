@@ -5,10 +5,10 @@
         <b-tab :title="$t('general.People')" active> 
           <People /> 
         </b-tab>
-        <b-tab title="Businesses"> 
+        <b-tab title="$t('general.Businesses')"> 
           <Businesses /> 
         </b-tab>
-        <b-tab title="Network"> 
+        <b-tab :title="$t('general.Network')"> 
           <Networks /> 
         </b-tab>
       </b-tabs>

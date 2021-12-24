@@ -288,7 +288,7 @@
                       <!-- End Chats -->
                     </b-tab>
                     <b-tab
-                      title="Network"
+                      :title="$t('general.Network')"
                       @click="getChatList({ type: 'network' })"
                     >
                       <!-- network Chats Available  -->

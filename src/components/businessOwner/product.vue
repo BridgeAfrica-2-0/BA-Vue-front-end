@@ -1,19 +1,58 @@
 <template>
   <div>
-    <div class="people-style shadow  ">
-      <b-row class="pr-3">
-        <b-col cols="3" lg="4" md="4"  sm="4">
+
+
+
+    <div class="text-center" v-if="loader" >
+
+        <b-spinner
+           class="spin"
+          variant="primary">   </b-spinner> 
+      
+     </div>      
+
+  
+
+    <b-row v-if="!loader">
+            <b-col md="12" lg="6" class=" mb-2" v-for="product in products.data" :key="product.id">
+
+    <div class="people-style shadow h-100 "> 
+
+       <b-link>
+                  <div class="float-right others">
+                    <b-dropdown size="lg" variant="link" toggle-class="text-decoration-none" no-caret>
+                      <template #button-content>
+                        <b-icon icon="three-dots-vertical" variant="primary" class="icon-size"></b-icon>
+                      </template>
+                      <b-dropdown-item
+                     
+                     @click="callactions(product)" v-b-modal="`modal-${product.id}`">   {{ $t("profileowner.Edit") }}</b-dropdown-item
+                      >
+                      <b-dropdown-item @click="callactions(product)"  v-b-modal="`modal-D${product.id}`">
+                        {{ $t("profileowner.Delete") }}</b-dropdown-item
+                      >
+                    </b-dropdown>
+                  </div>
+                </b-link>
+
+
+     <div class="d-inline-flex">
+
+       <div >   
           <div class="center-img">
             <img
               :src="product.picture"
               class="r-image cursor-pointer"
-              @click="productDetails"
+              @click="productDetails(product)"
             />
           </div>
-        </b-col>
-        <b-col cols="6" lg="7" md="7" sm="8">
+
+           </div>
+
+           <div class="flx50" > 
+        
           <p class="text">
-            <strong class="title cursor-pointer" @click="productDetails">
+            <strong class="title cursor-pointer" @click="productDetails(product)">
               {{ product.name }}
             </strong>
 
@@ -31,39 +70,61 @@
                       </read-more>
 
 
-            <br />
+           
 
-            <span class="price username">
+            <span class="price username mt-2">
              {{ product.price }} FCFA
             </span>
-            <br />
+        
           </p>
-        </b-col>
-        <b-col cols="3" lg="1" md="1" sm="1" class="">
-              <!-- <b-icon @click="showEdit" icon="three-dots-vertical"></b-icon> -->
-          <b-dropdown
-            size="md"
-            variant="link"
-            toggle-class="text-decoration-none"
-            no-caret
-          ><template #button-content>
-            <b-icon @click="showEdit" icon="three-dots-vertical"></b-icon>
-            </template>
-            <b-dropdown-item-button v-b-modal="`modal-${product.id}`">{{ $t('businessowner.Edit') }}</b-dropdown-item-button>
-            <b-dropdown-item-button v-b-modal="`modal-D${product.id}`">{{ $t('businessowner.Delete') }}</b-dropdown-item-button>
-          </b-dropdown>
-        </b-col>
-      </b-row>
+       
+        </div>  
+       
+          
+       </div>
 
-      <div>
-        <br />
-      </div>
     </div>
+
+            </b-col>
+    </b-row>
+
+
+
+ <span v-if="!loader"> 
+     <b-pagination
+      v-if="products.next || products.previous"
+      v-model="currentPage"
+      pills
+      :total-rows="products.total"
+      :per-page="per_page"
+      aria-controls="my-table"
+      @change="changePage"
+      align="center"
+    ></b-pagination>
+
+  </span>
+
+
+
     <!-- EDIT PRODUCT MODAL -->
     <!-- <b-modal :id="`modal-${product.id}`" hide-footer title="Edit product">
       <EditProduct :showModal="Edit" :product="product" />
     </b-modal> -->
+
+
+
+
+
+
+
+
+
+    
+
+
+    
     <b-modal :id="`modal-${product.id}`" hide-footer title="Edit product" v-model="showModal"  >
+
       <b-form>
         <b-row>
           <b-col cols="12" md="6">
@@ -75,7 +136,7 @@
             >
               <b-form-input
                 id="input-1"
-                class="mt-1"
+                class="mt-1 mr-1"
                 type="text"
                 v-model="product.name"
                 required
@@ -101,7 +162,7 @@
             <div class="image-upload-wrap" @click="picImage" style="display: flex; justify-content: center; align-items: center; overflow: hidden">
               <input
                 type="file"
-                @change="getImage"
+                @change="getImagee"
                 accept="image/*"
                 id="Mimage"
                 v-show="false"
@@ -211,32 +272,30 @@
         </b-form-group>
         <!-- CATEGORIES -->
         <div class="mt-2">
-          <label class="typo__label"> {{ $t('businessowner.Category') }} </label>
+          <label class="typo__label"> {{ $t('businessowner.Category') }} </label> 
           <multi-select
-            v-model="product.categories"
+            v-model="multiselecvalue"
             @input="subcategories"
-            :tag-placeholder="$t('businessowner.Add_this_as_new_tag')"
+           
             :placeholder="$t('businessowner.Search_or_add_a_tag')"
             :label="$t('businessowner.name')"
             track-by="id"
             :options="BuCategories"
-            :taggable="true"
-            @tag="addTag"
+           
           ></multi-select>
         </div>
         <!-- SUB-CATEGORIES -->
         <div class="mt-2">
-          <label class="typo__label"> {{ $t('businessowner.Sub_Category') }}</label>
+          <label class="typo__label"> {{ $t('businessowner.Sub_Category') }}</label>    
           <multi-select
-            v-model="product.subcategories"
-            :tag-placeholder="$t('businessowner.Add_this_as_new_tag')"
+            v-model="filterselectvalue"
+           
             :placeholder="$t('businessowner.Search_or_add_a_tag')"
             :label="$t('businessowner.name')"
-            track-by="subcategoryId"
+            track-by="subcategory_id"
             :options="scategories"
             :multiple="true"
-            :taggable="true"
-            @tag="addFilter"
+         
           ></multi-select>
         </div>
         <label class="typo__label">{{ $t('businessowner.Filters') }} </label>
@@ -245,11 +304,11 @@
             <b-tabs pills card vertical>
               <b-tab
                 :title="filters.name"
-                v-for="filters in product.subcategories"
+                v-for="filters in filterselectvalue"
                 :key="filters.id"
                 active
                 ><b-card-text>
-                  <b-form-group :label="$t('businessowner.Filters')" class="colorblack">
+                  <b-form-group :label="$t('businessowner.Filters')" class="colorblack"> 
                     <b-form-checkbox-group
                       id=""
                       class="colorblack"
@@ -273,82 +332,277 @@
         </div>
 
 
-        <b-alert v-if="success" :variant="val" show> {{ msg }} </b-alert>
         <b-button @click="editProduct(product)" class="mt-2 btn-block" variant="primary">
-          <b-spinner small v-if="load" variant="white"></b-spinner>
-          {{ $t('businessowner.Add') }}
+          <b-spinner small v-if="sendingp" variant="white"></b-spinner>
+          {{ $t('update') }}
         </b-button>
       </b-form>
     </b-modal>
 
+
+
+
+
+
+
+
+    
+
     <!-- modal delete -->
-    <b-modal :id="`modal-D${product.id}`" centered hide-footer title="Edit product">
-      <template #modal-title>
-        <span>WARNING!!!</span>
-      </template>
-      <div class="d-block text-center">
-        <h3>Sure To Delete: {{product.name}}!!</h3>
-      </div>
-      <b-row>
-        <b-col>
-          <b-button class="mt-3" block variant="primary" @click="deleteProduct(product)">Delete</b-button>
-        </b-col>
-      </b-row>
-      <!-- <b-button class="mt-3" block @click="$bvModal.hide('bv-modal-example')">Delete</b-button> -->
-    </b-modal>
+
+
+
+
+      <b-modal :id="`modal-D${product.id}`" centered hide-footer  v-model="delModal" title="Edit product">
+        <template #modal-title>
+          <span>WARNING!!!</span>
+        </template>
+        <div class="d-block text-center">
+          <h3>Sure To Delete: {{product.name}}!!</h3>
+        </div>
+        <b-row>
+          <b-col>
+            <b-button class="mt-3" block variant="primary" @click="deleteProduct(product)">Delete</b-button>
+          </b-col>
+        </b-row>
+        <!-- <b-button class="mt-3" block @click="$bvModal.hide('bv-modal-example')">Delete</b-button> -->
+      </b-modal>
+
+
+   
 
     <!-- PRODUCT DETAILS MODAL -->
     <ProductDetails  @closemodal="closeDetailsProduct" :showModal="viewProduct" :product="product"/>
+    <!-- <ProductDetails  @closemodal="closeDetailsProduct" :showModal="viewProduct" /> -->
   </div>
 </template>
 
 <script>
+import axios from "axios";
 import ProductDetails from "./ProductDetails.vue";
 import MultiSelect from "vue-multiselect";
 // import EditProduct from "./editProduct.vue";
 export default {
-  props: ["product"],
+  // props: ["product"],
   data() {
     return {
       viewProduct: false,
+      businessId:null,
+     // products:[],
+     sendingp:false,
+      product:[],
+      load: false,
+      loader: false,
       pro_img:'',
       showModal: false,
       Edit: false,
       selectedProduct: "",
-      selectedImagePrv: this.product.picture,
+       total: 0,
+      per_page: 10,
+     delModal:false,
+      currentPage: 1,
+      nextLoad: false,
+      selectedImagePrv:null, 
       multiselecvalue: [],
+      filterselectvalue:[],
       select_filterss: [],
     };
   },
+  
   components: {
     ProductDetails,
-    MultiSelect,
-    // EditProduct
+   MultiSelect,
+   //  EditProduct
   },
   computed: {
+
+    products(){
+      
+       return this.$store.state.market.products;
+
+    },
+
+
     BuCategories() {
       return this.$store.state.auth.categories;
     },
+
+    //  selectedImagePrv(){
+    //    return  this.product.picture;
+
+    //  }, 
+
     scategories() {
       return this.$store.state.auth.subcategories;
     },
-    selectedcategories: function () {
-      let selectedCatUsers = [];
-      if (this.product.categories.id) {
-        // selectedUsers.push(item.id);
-        selectedCatUsers.push(this.product.categories.id);
-      } else {
-        selectedCatUsers.push(this.product.categories.category_id);
-      }
-      return selectedCatUsers;
+
+   
+
+
+
+selectedcategories: function() {
+      let selectedUsers = [];
+
+      this.multiselecvalue.forEach((item) => {
+        if (item.id) {
+          selectedUsers.push(item.id);
+        } else {
+          selectedUsers.push(item.category_id);
+        }
+      });
+      return selectedUsers;
     },
+
+
+
+
+    selectedsubcategories: function() {
+      let sub_cat = [];
+
+      this.filterselectvalue.forEach((item) => {
+        if (item.subcategory_id) {
+          sub_cat.push(item.subcategory_id);
+        } else {
+          sub_cat.push(item.subcategoryId);
+        }
+      });
+      return sub_cat;
+    },
+
+
+
+
+    // selectedcategories: function () {
+    //   let selectedCatUsers = [];
+    //   if (this.product.categories.id) {
+    //     // selectedUsers.push(item.id);
+    //     selectedCatUsers.push(this.product.categories.id);
+    //   } else {
+    //     selectedCatUsers.push(this.product.categories.category_id);
+    //   }
+    //   return selectedCatUsers;
+    // },
+
   },
+
+
   beforeMount() {
+
+     this.loader = true;
+     this.businessId = this.$route.params.id;
+      this.getProducts();
     this.categories();
-    this.subcategories();
+   
+
   },
   methods: {
-    productDetails() {
+
+     callactions(product){
+  this.product=product;
+  this.selectedImagePrv= product.picture;
+
+  
+ this.multiselecvalue = product.categories;
+
+   this.filterselectvalue =this.getfilters(); 
+
+    this.select_filterss = this.editfilters(product.filters);
+    
+
+   this.subcategories();
+
+   this.getfilters();
+
+     },
+
+
+      editfilters(filter) {
+      let fil = [];
+
+      filter.forEach((item) => {
+        fil.push(item.id);
+      });
+
+      return fil;
+    },
+
+
+    getfilters(){
+        let selectedUsers=[];
+         this.scategories.forEach((item) => {
+
+
+            this. product.subcategories.forEach((itemm) => {
+        if (item.subcategory_id == itemm.id) {
+          selectedUsers.push(item);
+        } 
+      });
+
+
+      });
+
+      console.log(selectedUsers);
+
+      return selectedUsers;
+
+    },
+
+
+
+      flashErrors(errors) {
+      let err = '';
+      Object.values(errors).forEach((element) => {
+        err = element[0];
+      });
+
+      return err;
+    },
+
+
+        changePage(value) {
+      console.log("next page loading ");
+      
+      this.loader=true;
+      this.currentPage = value;
+     let url="/market?business_id="+this.businessId+"&page="+value;    
+
+      this.$store
+        .dispatch("market/bPnextPage", url).then((res) => {
+          console.log(res);
+          this.loader=false;
+          
+        })
+       
+        .catch((err) => {
+          this.$store.commit("business/setLoading", true);
+          this.total = this.business.total;
+          console.error(err);
+        });
+    },
+
+
+
+      getProducts: async function () {
+        let url="/market?business_id="+this.businessId;
+       await this.$store
+        .dispatch("market/getBproducts", url).then((res) => {
+        
+             
+             
+          
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+        .finally(() => {
+          this.loader = false;
+        });
+    },
+
+
+
+    productDetails(product){
+      this.product=product;
       this.viewProduct = true;
     },
     showEdit() {
@@ -363,16 +617,17 @@ export default {
     picImage() {
       document.querySelector("#Mimage").click();
     },
-    getImage(e) {
-      console.log("getImage");
-      console.log(e.target.files[0]);
+    getImagee(e) {
+      
       this.product.picture = e.target.files[0];
       this.pro_img=e.target.files[0];
-      let file = e.target.files[0] || e.dataTransfer.files;
-      this.selectedImagePrv = URL.createObjectURL(file);
-      console.log("this.selectedImagePrv", this.selectedImagePrv);
+      let fille = e.target.files[0];
+      this.selectedImagePrv = URL.createObjectURL(fille);
+     // console.log("this.selectedImagePrv", this.selectedImagePrv);
     },
+    
     editProduct(Product) {
+      this.sendingp=true;
       console.log("editProduct");
       console.log(Product);
       let formData = new FormData();
@@ -385,10 +640,15 @@ export default {
       formData.append("in_stock", Product.in_stock);
       formData.append("tax_amount", 200);  
       formData.append("kg", 7);
-      formData.append("categories", Product.categories);
-      formData.append("subcategories", Product.subcategories);
-      formData.append("filters", Product.filters);
-      //formData.append("picture", this.pro_img);
+      formData.append("categories",  this.multiselecvalue.id);
+      formData.append("subcategories",this.filterselectvalue
+        .map((el) => el.subcategory_id)
+        .join());
+
+
+     
+      formData.append("filters",  this.select_filterss.join());
+      formData.append("picture", this.pro_img);
 
       console.log(this.pro_img);
       this.$store
@@ -397,6 +657,7 @@ export default {
           formData: formData,
         })
         .then(({ data }) => {
+          this.sendingp=false;
           console.log(data);
           this.flashMessage.show({
             status: "success",
@@ -405,15 +666,35 @@ export default {
           });  
 
           this.showModal=false;
+
+            this.changePage(this.currentPage );
         })
-        .catch(err => {
-          console.log({ err: err });
-          this.flashMessage.show({
-            status: "error",
-            blockClass: 'custom-block-class',
-            message: "Unable To Make Changes"
+        .catch((err) => {
+            console.log({ err: err });
+
+            this.sendingp = false;
+
+            if (err.response.status == 422) {
+              console.log({ err: err });
+
+              this.flashMessage.show({
+                status: 'error',
+
+                message: this.flashErrors(err.response.data.errors),
+                blockClass: 'custom-block-class',
+              });
+            } else {
+              this.flashMessage.show({
+                status: 'error',
+
+                message: 'Unable to Update Your Product',
+                blockClass: 'custom-block-class',
+              });
+              console.log({ err: err });
+            }
+            
+            
           });
-        });
     },
     deleteProduct(Product) {
       console.log("deleteProduct");
@@ -423,6 +704,10 @@ export default {
           path: "market/"+Product.id,
         })
         .then(({ data }) => {
+
+          this.changePage(this.currentPage );
+           this.delModal=false;
+
           console.log(data);
           this.flashMessage.show({
             status: "success",
@@ -445,6 +730,7 @@ export default {
     subcategories() {
       //get subcategories
       let formData2 = new FormData();
+      console.log(this.selectedcategories);
       formData2.append("categoryId", this.selectedcategories);
       this.$store.dispatch("auth/subcategories", formData2);
     },
@@ -470,6 +756,24 @@ export default {
 
 <style scoped>
 
+.others {
+  position: absolute;
+  right: 0px;
+}
+
+.flx50{
+  flex-basis: 70%;
+}
+
+ .spin{
+          text-align: center;
+    margin-top: 10%;
+      margin-bottom: 10%;
+    width: 4rem;
+     height: 4rem;
+        }
+
+
 .h-100{
 
   height: 100%;
@@ -487,12 +791,12 @@ p {
   text-align: left;
 }
 
-input {
+/* input {
   border-radius: 15px;
   padding: 5px;
   border: solid 1px #ccc;
   width: 250px;
-}
+} */
 input:focus {
   outline-color: none;
   border: none;
@@ -567,10 +871,10 @@ h6 {
   background-color: #fff;
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
-  margin-bottom: 10px;
+  
 
   padding: 3px;
-  padding-bottom: 26px;
+ 
 }
 
 @media only screen and (max-width: 540px) {
@@ -595,7 +899,7 @@ h6 {
     padding: 1px;
     text-align: left;
 
-    margin-left: -30px;
+    /* margin-left: -30px; */
 
     line-height: 25px;
   }
@@ -646,7 +950,7 @@ h6 {
     font-weight: normal;
     line-height: 20px;
     font-style: normal;
-
+      margin-left: 50px;
     padding: 1px;
     text-align: left;
 
@@ -695,12 +999,12 @@ p {
   text-align: left;
 }
 
-input {
+/* input {
   border-radius: 15px;
   padding: 5px;
   border: solid 1px #ccc;
   width: 250px;
-}
+} */
 input:focus {
   outline-color: none;
   border: none;
@@ -767,7 +1071,7 @@ h6 {
     line-height: 30px;
     color: rgba(117, 114, 128, 1);
     text-align: left;
-
+      margin-left: 50px;
     font-weight: normal;
     line-height: 20px;
     font-style: normal;

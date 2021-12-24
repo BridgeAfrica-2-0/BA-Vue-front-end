@@ -1,6 +1,7 @@
 <template>
   <div class="lalala">
     <div class=" border mt-2 ">
+      <!-- {{total}} -->
       <span>  
         <h6 class="title m-3">
           <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
@@ -114,6 +115,23 @@
 			Business,
 			Network,
 		},
+    
+    data() {
+      return {
+        id: null,
+      }
+    },
+
+		computed: {
+			total() {
+				return this.$store.state.follower.Tcommunity;
+			},
+		},
+
+    mounted() {
+      this.id = this.$route.params.id ? this.$route.params.id : "";
+      this.getTcommunity();
+    },
 
 		methods: {
 			nFormatter(num) {
@@ -128,12 +146,16 @@
 				}
 				return num;
 			},
-		},
-
-		computed: {
-			total() {
-				return this.$store.state.follower.Tcommunity;
-			},
-		},
+      getTcommunity() {
+        this.$store
+          .dispatch("follower/Tcommunity", this.id)
+          .then(() => {
+            console.log("ohh yeah");
+          })
+          .catch((err) => {
+            console.log({ err: err });
+          });
+      },
+		}
 	};
 </script>

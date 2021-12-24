@@ -106,13 +106,14 @@
               <vue-bootstrap-typeahead
                 v-model="query"
                 :data="neigbourhoods"
-                minMatchingChars="0"
-                maxMatches="10"
+                :minMatchingChars=0
+                :maxMatches=10
                 :serializer="(item) => item.name"
-                :placeholder="$t('general.Where')"
+                placeholder="Where"
                 class="search-hh w-44"
               />
 
+           
               <slot name="button">
                 <Button @click.native="getKeyword" />
               </slot>
@@ -143,10 +144,11 @@
             <b-collapse id="nav-collapse" is-nav>
               <div class="nav-item">
                 <router-link
-                  :to="{ name: navLink('home') }"
+                  :to="{name:navLink('home')}"
                   class="nav-link text-dark hov"
+                  href=""
                 >
-                  {{$t("general.Home")}}
+                  Home
                 </router-link>
               </div>
 
@@ -280,7 +282,7 @@
                 </router-link>
               </div>
 
-              <b-tooltip target="profilepic" variant="light" triggers="click">
+              <b-tooltip target="profilepic" variant="light" triggers="hover">
                 {{ user.name }}
               </b-tooltip>
 
@@ -314,7 +316,7 @@
                           class="violet search"
                           :icon="['fas', 'user']"
                       /></span>
-                      {{$t("general.Profile")}}
+                      Profile
                     </a>
                     <hr class="h-divider" />
 
@@ -488,7 +490,7 @@
             <hr class="h-divider" />
             <a
               href="#"
-              @click.prevent="logout"
+              @click="logout"
               class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
             >
               <span class="mr-2"
@@ -503,7 +505,23 @@
       </div>
     </nav>
 
-    <div></div>
+    <div>
+      <!-- 
+
+           <div>
+  <vue-bootstrap-typeahead
+    class="mb-4"
+    v-model="query"
+    :data="users"
+    :serializer="item => item.login"
+    @hit="selectedUser = $event"
+    placeholder="Search GitHub Users"
+  />
+
+ <h3>Selected User JSON</h3>
+ <pre>{{ selectedUser | stringify }}</pre>
+</div> -->
+    </div>
   </header>
 </template>
 
@@ -531,13 +549,14 @@ export default {
       default: function () {
         return {
           keyword: "",
-          placeholder: this.$t('general.All'),
+          placeholder: "All",
         };
       },
     },
   },
   data() {
     return {
+      
       isActive: false,
       shownav: false,
       notifications: [],
@@ -547,9 +566,8 @@ export default {
       redirectionPatterns: null,
       searchOptions: {
         keyword: "",
-        placeholder: this.$t('general.All'),
+        placeholder: "All",
       },
-
       query: "",
       selectedUser: null,
       users: [],
@@ -565,6 +583,7 @@ export default {
   },
   beforeMount() {
     console.log("beforeMount");
+
     this.getLocation();
   },
   created() {
@@ -601,6 +620,7 @@ export default {
           params: { id: this.user.id },
           query: { tabId: 2 },
         }),
+
         user: () => ({
           name: "settings",
         }),
@@ -616,15 +636,14 @@ export default {
   },
 
   watch: {
+   
     "$store.state.auth.profilConnected": function () {
       this.updateNotificationEvent();
       this.userOwnPage = this.onRedirect();
     },
-    credentials: {
-      deep: true,
-      handler() {
-        this.searchOptions = this.credentials;
-      },
+
+    credentials: function (newVal) {
+      this.searchOptions = newVal;
     },
 
     query(newQuery) {
@@ -641,7 +660,7 @@ export default {
       return JSON.stringify(value, null, 2);
     },
   },
-
+  
   methods: {
     ...mapActions({
       setNetworks: "social/FIND_USER_NETWORK",
@@ -722,19 +741,25 @@ export default {
     },
 
     getKeyword() {
-      if (!this.searchOptions.keyword) return false;
+      if (!this.credentials.keyword) return false;
 
       if (this.$route.name != "Search") {
-        this.$router.push({
-          name: "Search",
-          query: { keyword: this.searchOptions.keyword },
-        });
+        this.$store
+          .dispatch("allSearch/SEARCH", {
+            keyword: this.credentials.keyword,
+          })
+          .catch((err) => {
+            console.log("Error erro!");
+          });
+
+        this.$router.push({ name: "Search" });
       }
     },
+
     navLink(type) {
       const link = {
         home: () => {
-          return this.profile ? "dashbord" : "home1";
+          return this.profile ? "dashboard" : "home1";
         },
       };
       try {
@@ -757,20 +782,19 @@ export default {
     },
 
     logout: async function () {
-      let loader = this.$loading.show({
+       let loader = this.$loading.show({
         container: this.$refs.formContainer,
         canCancel: true,
         onCancel: this.onCancel,
         color: "#e75c18",
       });
-
       const response = await this.$repository.notification.logOut();
       if (response.success) {
         loader.hide();
-        this.$router.push({ name: "home1" });
         this.Logout();
+        this.$router.push({ name: "login" });
+        
       }
-      loader.hide();
     },
 
     switchToProfile: async function () {
@@ -794,6 +818,7 @@ export default {
     toggleinput() {
       this.$refs.mobileinput.style.display = "block";
     },
+    
 
     getNetworks: async function () {
       let request = await this.$repository.share.getNetworks();
@@ -805,11 +830,22 @@ export default {
       if (request.success) this.setBusiness(request.data);
     },
 
+    getNetworkAndBusiness: async function() {
+      let request = await this.$repository.share.getNetworkAndBusiness();
+      if (request.success){ 
+        this.setBusiness(request.data.business);
+        this.setNetworks(request.data.network);
+      }
+    },
+
+
+
     init() {
       try {
         if (!this.hasLauchNetworkRequest) {
-          this.getNetworks();
-          this.getBusiness();
+          // this.getNetworks();
+          // this.getBusiness();
+          this.getNetworkAndBusiness();
           this.lauchNetworkRequest();
         }
       } catch (error) {

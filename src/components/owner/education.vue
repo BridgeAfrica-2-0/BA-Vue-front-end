@@ -160,6 +160,9 @@
 </template>
 
 <script>
+
+import { diffBetweenTwoDate } from '@/helpers'
+
 export default {
   data() {
     return {
@@ -169,7 +172,6 @@ export default {
         { value: "private", text: this.$t('profileowner.Private') },
         { value: "public", text: this.$t('profileowner.Public') }
       ],
-      // educations: [],
       educationInput: {
         access: "private",
         schoolName: null,
@@ -179,22 +181,38 @@ export default {
         major: null
       },
       index: null
-    };
+    }
   },
+
   created() {
-    console.log("Load User Profile About Education");
     this.educations = JSON.parse(
       JSON.stringify(
         this.$store.getters['profile/getProfileAboutEducationAndWorks']
       )
     );
   },
+
+  watch:{
+    "educationInput.durationTo": function(value){
+
+      if (this.educationInput.durationTo && this.educationInput.durationFrom){
+        const diff = diffBetweenTwoDate(this.educationInput.durationTo, this.educationInput.durationFrom)
+        
+        if (diff <= 0){
+          this.flashMessage.show({
+            status: "error",
+            message: "the end date must not be greater than the start date",
+            blockClass: "custom-block-class",
+          })
+        }
+      }
+    }
+  },
+
   computed:{
     educations(){
-      console.log("this.$store.state.profile.profile_about.user_education");
       return this.$store.state.profile.profile_about.user_education;
     },
-
   },
   methods: {
 
@@ -323,7 +341,7 @@ export default {
        this.$refs["updateEducationModal"].show(); 
     }
   }
-};
+}
 </script>
 
 <style scoped>

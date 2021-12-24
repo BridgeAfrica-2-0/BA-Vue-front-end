@@ -38,7 +38,7 @@
               class="mt-2 mb-2"
               v-model="info.user.phone"
               :placeholder="$t('profileowner.phone')"
-              type="text"
+              type="number"
               required
             ></b-form-input>
 

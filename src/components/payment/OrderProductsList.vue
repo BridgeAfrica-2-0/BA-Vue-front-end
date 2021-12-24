@@ -2,9 +2,10 @@
 	<div id="orderList"> 
 		<div
 			class="row order-item mb-4"
-			v-for="(cart_item, i) in orderForCurrentPage"
+			v-for="(cart_item, i) in cart.data "
 			:key="i"
-		>
+		> 
+
 			<div class="col-12 order-item-caroussel col-sm-4 mb-3 col-md-4">
 				<!-- <ProductCaroussel :productImages="images(cart_item.product_picture)" /> -->
 				<img :src="cart_item.product_picture" alt="">
@@ -37,46 +38,48 @@
 								{{$t('general.Quantity')}} :
 							</b-td>
 							<b-th>
-								<input
+
+								{{cart_item.quantity}}
+								<!-- <input
 									class="quantity-input"
 									type="number"
 									min="1"
 									@change="changeQuantity($event, i)"
 									v-model="cart_item.quantity"
-								/>
+								/> -->
 							</b-th>
 						</b-tr>
-						<b-tr>
+						<!-- <b-tr>
 							<b-td>
 								{{$t('general.Shipping')}}:
 							</b-td>
 							<b-th >
-								<!-- {{ formatMoney(Number(cart.shipping_amount)) }} -->
+							
 								<div class="row">
-									<h5 v-for="i in cart_item.shipping_cost" :key="i"
+									<th v-for="i in cart_item.shipping_cost" :key="i"
 									class=" cursor"
 									v-b-tooltip.hover.top="shippingCost(i).adress"
 									>
-									{{  shippingCost(i).price }}XAF ,
-									</h5>
+									 {{shippingCost(i).adress}}  ( {{ formatMoney(Number( shippingCost(i).price )) }})									</th>
 								</div>
 							</b-th>
-						</b-tr>
+						</b-tr> -->
 						<b-tr>
 							<b-td>
 								{{$t('general.Total')}}:
 							</b-td>
 							<b-th>
-								<div class="row">
-									<h5 v-for="i in cart_item.shipping_cost" :key="i"
+								<!-- <div v-if="cart_item.shipping_cost" class="row">
+									<th v-for="i in cart_item.shipping_cost" :key="i"
 									class=" cursor"
 									
-									>
-									{{
-										Number(cart_item.product_price) * cart_item.quantity 
-									+ parseInt(shippingCost(i).price) }}XAF ,
-									</h5>
-								</div>
+									>  	 {{shippingCost(i).adress}}  ( {{ formatMoney(Number(cart_item.product_price) * cart_item.quantity 
+									+ parseInt(shippingCost(i).price) ) }} ) 
+									
+										 
+									</th>
+								</div> -->
+								<div >    {{ formatMoney(Number(cart_item.product_price) * cart_item.quantity ) }}  </div>
 								<!-- {{
 									formatMoney(
 										Number(cart_item.product_price) * cart_item.quantity + 1000
@@ -109,13 +112,21 @@
 		</div>
 		<div class="row my-4">
 			<div class="col-12 d-flex justify-content-center">
-				<b-pagination
-					v-model="currentPage"
-					pills
-					aria-controls="orderList"
-					:per-page="per_page"
-					:total-rows="rowsOrder"
-				></b-pagination>
+				
+
+				  
+              <b-pagination
+      v-if="cart.next || cart.previous"
+      v-model="currentPage"
+      pills
+      :total-rows="cart.total"
+      :per-page="cart.per_page"
+      aria-controls="my-table"
+      @change="changePage"
+      align="center"
+    ></b-pagination>
+
+
 			</div>
 		</div>
 	</div>
@@ -135,10 +146,7 @@
 				.then(() => {
 					this.loading = false;
 					this.error = false;
-					this.orderForCurrentPage = this.makeOrderforCurrentPage(
-						this.cart,
-						this.currentPage
-					);
+					
 				})
 				.catch(() => {
 					this.loading = false;
@@ -146,6 +154,30 @@
 				});
 		},
 		methods: {
+
+
+			
+        changePage(value) {
+      console.log("next page loading ");
+      this.loading = true;
+      this.currentPage = value;
+     let url="ckeckout-cart&page="+value;    
+
+      this.$store
+        .dispatch("checkout/next", url).then((res) => {
+          console.log(res);
+          this.loading=false;
+          
+        })
+       
+        .catch((err) => {
+        
+          console.error(err);
+        });
+    },
+
+
+
 
 			images(img1){
 				let image = [];
@@ -233,46 +265,7 @@
 			},
 			cart() {
 				return this.$store.state.checkout.cart;
-				// return {
-				// 	data: [
-				// 		{
-				// 			product_name: "Headset1",
-				// 			quantity: 3,
-				// 			product_price: 2000,
-				// 		},
-				// 		{
-				// 			product_name: "Headset2",
-				// 			quantity: 3,
-				// 			product_price: 2000,
-				// 		},
-				// 		{
-				// 			product_name: "Headset3",
-				// 			quantity: 3,
-				// 			product_price: 2000,
-				// 		},
-				// 		{
-				// 			product_name: "Headset4",
-				// 			quantity: 3,
-				// 			product_price: 2000,
-				// 		},
-				// 		{
-				// 			product_name: "Headset5",
-				// 			quantity: 3,
-				// 			product_price: 2000,
-				// 		},
-				// 		{
-				// 			product_name: "Headset6",
-				// 			quantity: 3,
-				// 			product_price: 2000,
-				// 		},
-				// 		{
-				// 			product_name: "Headset6",
-				// 			quantity: 3,
-				// 			product_price: 2000,
-				// 		},
-				// 	],
-				// 	shipping_amount: 1000,
-				// };
+				
 			},
 		},
 		watch: {

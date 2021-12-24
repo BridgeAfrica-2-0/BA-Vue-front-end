@@ -326,6 +326,7 @@
                   id="network_name"
                   placeholder=""
                   required
+                  type="tel"
                 >
                 </b-form-input>
               </b-form-group>
@@ -339,6 +340,7 @@
                 class="mb-0"
               >
                 <b-form-input
+                  type="tel"
                   v-model="createdNetwork.secondary_phone"
                   id="network_name"
                   placeholder=""
@@ -1094,7 +1096,7 @@ return cat;
          this.Region();
          this.Division();
          this.Municipality();
-         this.Locality();
+         this.Locality(); 
       this.showmodal(true, "edit");
     },
     selectImage(e) {
@@ -1105,6 +1107,19 @@ return cat;
 </script>
 
 <style scoped>
+
+.no-arrow {
+  -moz-appearance: textfield;
+}
+.no-arrow::-webkit-inner-spin-button {
+  display: none;
+}
+.no-arrow::-webkit-outer-spin-button,
+.no-arrow::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 .inline-flex{
  display: inline-flex;
 }

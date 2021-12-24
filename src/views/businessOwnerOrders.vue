@@ -176,6 +176,8 @@
                 {{ $t("businessowner.Pages") }} {{ currentPage }}
               </h6>
               <b-pagination
+
+              
                 @input="getpage"
                 v-model="currentPage"
                 pills
@@ -714,7 +716,7 @@
                 <h3>{{ $t("businessowner.Product_Qte") }} :</h3>
                 <h3>{{ $t("businessowner.Price") }} :</h3>
 
-                <h3>{{ $t("businessowner.Shipping Cost") }}:</h3>
+                <h3>{{ $t("businessowner.Shipping Cost") }}:</h3>   
                 <h3>{{ $t("businessowner.Total") }} :</h3>
               </div>
 

@@ -711,19 +711,19 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 .font-arvo {
-  font-family: 'Arvo', serif;
+  /* font-family: 'Arvo', serif; */
 }
 .font-rob {
-  font-family: 'Roboto', Sans-serif;
+  /* font-family: 'Roboto', Sans-serif; */
 }
 .font-poppin {
-  font-family: 'Poppins', sans-serif;
+  /* font-family: 'Poppins', sans-serif; */
 }
 .font-source {
-  font-family: 'Source Sans Pro', sans-serif;
+  /* font-family: 'Source Sans Pro', sans-serif; */
 }
 .font-mont {
-  font-family: 'Montserrat', sans-serif;
+  /* font-family: 'Montserrat', sans-serif; */
 }
 .balogo {
   width: 170px;

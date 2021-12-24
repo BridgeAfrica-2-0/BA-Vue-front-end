@@ -1,13 +1,7 @@
 <template>
-  <b-container>
+  <b-container class="container-fluid">
     <b-container>
-      <p class="text">
-        {{
-          $t(
-            "businessowner.Select_a_payment_method_for_your_bridget_africa_account"
-          )
-        }}
-      </p>
+      <p class="text">{{$t("businessowner.Select_a_payment_method_for_your_bridget_africa_account")}}</p>
     </b-container>
 
     <div class="b-bottom">
@@ -153,6 +147,7 @@
 <script>
 export default {
   name: "payment",
+  props: ['profileId'],
   data() {
     return {
       url: null,
@@ -181,7 +176,8 @@ export default {
   },
 
   mounted(){
-    this.url = this.$route.params.id !== undefined ? this.$route.params.id : this.$router.push('notFound');
+    console.log("profileId", this.profileId)
+    this.url = this.$route.params.id !== undefined ? this.$route.params.id : this.profileId;
     this.DefaultPayment();
   },
 

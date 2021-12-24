@@ -230,6 +230,11 @@ export default {
 
   mutations: {
     //set media data
+
+    addCoverPicture(state, picture) {
+      state.businessInfo.cover.push(picture)
+    },
+    
     updateAlbum(state, payload) {
       const newState = state.albums.map(album => (album.id == payload.id) ? Object.assign(album, { name: payload.name }) : album)
       state.albums = newState

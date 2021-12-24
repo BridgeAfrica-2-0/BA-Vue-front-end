@@ -11,8 +11,6 @@
         <b-col cols="6" class="avata">
           <div>     
             
-
-
             <b-avatar v-if="info.user.profile_picture !=null "
                :src="info.user.profile_picture"
               class=" float-left avatar"
@@ -140,12 +138,10 @@
               <Post />
             </b-tab>   
 
-
-            
             <b-tab :title="$t('profilefollower.About')"><About /></b-tab>
             <b-tab :title="$t('profilefollower.Business')"><Businesses /></b-tab>
             <b-tab :title="$t('profilefollower.Network')"><Network /></b-tab>
-            <b-tab :title="$t('profilefollower.Media')"><Media type="profile" /></b-tab>
+            <b-tab :title="$t('profilefollower.Media')"><Media type="profile" :isEditor="false" /></b-tab>
             <b-tab :title="$t('profilefollower.Community')"><Community /></b-tab>
           </b-tabs>
         </b-col>
@@ -157,7 +153,7 @@
 <script>
 import Post from '@/components/businessfollower/tabs/posts';
 import About from "@/components/follower/tabs/about";
-import Media from '@/components/businessfollower/tabs/media';
+import Media from '@/components/owner/tabs/media';
 import Community from "@/components/follower/tabs/community";
 import Businesses from "@/components/follower/tabs/businesses";
 import Network from "@/components/follower/tabs/networkk";

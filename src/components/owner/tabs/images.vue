@@ -63,6 +63,7 @@
       <div v-for="(image, cmp) in allImages" :key="cmp" >
         <div class="img-gall" v-for="(im, index) in image.media" :key="index" style="width: 266px; height: 266px;">
           <Picture
+            :isAlbum="isAlbum"
             :im="im"
             :typeOfMedia="() => typeOfMedia(im.path)"
             :getFullMediaLink="() => getFullMediaLink(im.path)"
@@ -92,7 +93,7 @@
 
 <script>
 import Picture from "./imagesItems.vue";
-import { mapActions, mapMutations } from "vuex";
+import { mapActions, mapMutations, mapGetters } from "vuex";
 import { fullMediaLink } from "@/helpers";
 import { v4 } from "uuid";
 
@@ -118,6 +119,13 @@ export default {
     type: {
       type: String,
       required: true,
+    },
+
+    isAlbum: {
+      type: Boolean,
+      default: function () {
+        return false;
+      },
     },
 
     hasLoadPicture: {
@@ -221,6 +229,10 @@ export default {
   destroyed() {
     this.$emit("reste");
   },
+
+  computed: mapGetters({
+    auth: 'auth/profilConnected'
+  }),
 
   methods: {
     ...mapActions({

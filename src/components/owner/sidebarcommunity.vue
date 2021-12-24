@@ -5,7 +5,7 @@
       <span>  
         <h6 class="title m-3">
           <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
-          <b> {{ $t('profileowner.COMMUNITY') }} </b> <span class="h4-color"> {{ nFormatter(total.total_community)}} </span>
+          <b> {{ $t('profileowner.COMMUNITY') }}</b> <span class="h4-color"> {{ nFormatter(total.total_community)}} </span>
         </h6>
       </span>
 
@@ -94,16 +94,13 @@
             </b-tabs>
           </div>
         </b-tab>
-
-
-
-
       </b-tabs>
     </div>
   </div>
 </template>
 
 <script>
+
 	import Business from "@/components/owner/tabs/business";
 	import People from "@/components/owner/tabs/people";
 	import Network from "@/components/owner/tabs/network";

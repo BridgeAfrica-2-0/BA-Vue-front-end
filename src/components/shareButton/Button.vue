@@ -118,7 +118,7 @@
           <b-avatar
             variant="light"
             src="/icons/profile.png"
-            square="true"
+            :square="true"
           ></b-avatar>
         </span>
         <div class="d-flex flex-column ml-1">
@@ -135,7 +135,7 @@
           <b-avatar
             variant="light"
             src="/icons/newsfeed.png"
-            square="true"
+            :square="true"
           ></b-avatar>
         </span>
         <div class="d-flex flex-column ml-1">
@@ -152,7 +152,7 @@
           <b-avatar
             variant="light"
             src="/icons/network.png"
-            square="true"
+            :square="true"
           ></b-avatar>
         </span>
         <div class="d-flex flex-column ml-1">
@@ -169,7 +169,7 @@
           <b-avatar
             variant="light"
             src="/icons/business.png"
-            square="true"
+            :square="true"
           ></b-avatar>
         </span>
         <div class="d-flex flex-column ml-1">
@@ -188,7 +188,7 @@
           <b-avatar
             variant="light"
             src="/icons/community.png"
-            square="true"
+            :square="true"
           ></b-avatar>
         </span>
         <div class="d-flex flex-column ml-1">
@@ -218,7 +218,7 @@
               <b-avatar
                 variant="light"
                 src="/icons/network.png"
-                square="true"
+                :square="true"
               ></b-avatar>
             </span>
             <div class="d-flex flex-column ml-3">
@@ -235,7 +235,7 @@
               <b-avatar
                 variant="light"
                 src="/icons/business.png"
-                square="true"
+                :square="true"
               ></b-avatar>
             </span>
             <div class="d-flex flex-column ml-3">
@@ -250,7 +250,7 @@
           <b-avatar
             variant="light"
             src="/icons/copy.png"
-            square="true"
+            :square="true"
           ></b-avatar>
         </span>
         <div class="d-flex flex-column ml-1">
@@ -269,7 +269,7 @@
           <b-avatar
             variant="light"
             src="/icons/share_via.png"
-            square="true"
+            :square="true"
           ></b-avatar>
         </span>
         <div class="d-flex flex-column ml-1">
@@ -290,7 +290,7 @@
             <b-avatar
               variant="light"
               src="/icons/email.png"
-              square="true"
+              :square="true"
             ></b-avatar>
             <span>Share via Email</span>
           </div>
@@ -302,7 +302,7 @@
             <b-avatar
               variant="light"
               src="/icons/facebook.png"
-              square="true"
+              :square="true"
             ></b-avatar>
             <span>Share via Facebook</span>
           </div>
@@ -314,7 +314,7 @@
             <b-avatar
               variant="light"
               src="/icons/twitter.png"
-              square="true"
+              :square="true"
             ></b-avatar>
             <span>Share via Twitter</span>
           </div>
@@ -326,7 +326,7 @@
             <b-avatar
               variant="light"
               src="/icons/whatsapp.png"
-              square="true"
+              :square="true"
             ></b-avatar>
             <span>Share via Whatsapp </span>
           </div>

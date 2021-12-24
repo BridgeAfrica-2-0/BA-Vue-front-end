@@ -5,7 +5,7 @@
       <b-row class="mt-2">
         <b-col cols="3" md="1" class="m-md-0 p-md-0">
           <b-avatar
-            variant="primary"
+            variant="light"
             :square =" 'user' === profile.user_type ? false : true"
             class="img-fluid avat-comment"
             :src="profile.profile_picture"
@@ -83,7 +83,13 @@
             <b-row ref="loader">
               <b-col cols="1" class="m-0 p-0"></b-col>
               <b-col cols="2" class="m-0 p-0">
-                <b-avatar class="d-inline-block avat" variant="primary" :src="business_intro.logo_path"></b-avatar>
+                <b-avatar 
+                  class="d-inline-block avat" 
+                  variant="light" 
+                  :square ="'user' === profile.user_type ? false : true"
+                  :src="profile.profile_picture"
+                >
+                </b-avatar>
               </b-col>
               <b-col cols="9" class="pt-2" style="margin-left: -5px">
                 <h5 class="m-0 font-weight-bolder">
@@ -94,7 +100,6 @@
             <b-row>
               <b-col cols="1" md="1" cl ass="m-0 p-0"></b-col>
               <b-col cols="10" md="10" class="m-0 p-0">
-                <br />
                 <div class="cursor">
                   <b-form-textarea
                     id="textarea-small"
@@ -106,44 +111,6 @@
 
                   <i></i>
                 </div>
-                <div class="bordder">
-                  <span class="float-left"> {{ $t('businessowner.Add_to_Your_Post') }} </span>
-                  <span class="float-right">
-                    <b-button-group size="sm" class="">
-                      <input id="video" type="file" hidden />
-                      <input
-                        id="image"
-                        type="file"
-                        hidden
-                        @change="selectMovies"
-                        accept="video/mpeg,video/mp4,image/*"
-                        ref="movies"
-                      />
-                      <input
-                        id="document"
-                        type="file"
-                        @change="selectDocument"
-                        hidden
-                        accept="application/pdf"
-                        ref="document"
-                      />
-
-                      <b-button :title="$t('businessowner.Add_Movie')" size="sm" variant="outline-primary" @click="$refs.movies.click()">
-                        <fas-icon class="icons" :icon="['fas', 'photo-video']" size="lg" />
-                      </b-button>
-                      <b-button
-                        :title="$t('businessowner.Add_Hyperlink')"
-                        size="sm"
-                        variant="outline-primary"
-                        @click="$refs.document.click()"
-                      >
-                        <fas-icon class="icons" :icon="['fas', 'file']" size="lg" />
-                      </b-button>
-                    </b-button-group>
-                  </span>
-
-                <i></i>
-              </div>
               <div class="bordder">
                 <span class="float-left">
                   {{ $t("businessowner.Add_to_Your_Post") }}
@@ -232,9 +199,9 @@
             <b-col cols="2" class="m-0 p-0">
               <b-avatar
                 class="d-inline-block avat"
-                variant="primary"
-                square
-                :src="business_intro.logo_path"
+                variant="light"
+                :square ="'user' === profile.user_type ? false : true"
+                :src="profile.profile_picture"
               ></b-avatar>
             </b-col>
             <b-col cols="9" class="pt-2" style="margin-left: -5px">
@@ -346,7 +313,7 @@
                 <span>
                   <b-button @click="updatePost" variant="primary" block
                     ><b-icon icon="cursor-fill" variant="primary"></b-icon>
-                    {{ $t("businessowner.Publish") }}+++++</b-button
+                    {{ $t("businessowner.Publish") }}</b-button
                   >
                 </span>
               </div>
@@ -368,8 +335,8 @@
             <b-col cols="2" class="m-0 p-0">
               <b-avatar
                 class="d-inline-block avat"
-                variant="primary"
-                square
+                variant="light"
+                :square =" 'user' === profile.user_type ? false : true"
                 :src="business_intro.logo_path"
               ></b-avatar>
             </b-col>
@@ -704,9 +671,6 @@ export default {
       this.edit_description = postarray.content;
       this.edit_image = postarray.media;
       this.edit_id = postarray.post_id ? postarray.post_id : postarray.id;
-
-      console.log(this.edit_image);
-
       this.$refs["modal-edit"].show();
     },
 
@@ -1137,7 +1101,7 @@ export default {
   }
   .send-cmt {
     position: relative;
-    margin-left: 95%;
+    margin-left: 93%;
     top: -28px;
     cursor: pointer;
   }

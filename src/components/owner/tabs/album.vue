@@ -106,6 +106,7 @@
       <span class="text-center ml-2 f-20"> {{ this.album_name }}</span>
 
       <Images
+        :isAlbum="true"
         @update:item="() => updateItem()"
         :showCreateForm="isEditor"
         :hasLoadPicture="hasLoadPicture"

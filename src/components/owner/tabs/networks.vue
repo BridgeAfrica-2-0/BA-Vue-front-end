@@ -37,7 +37,7 @@
                   <b-icon
                       icon="three-dots-vertical"
                       variant="primary"
-                      class="icon-size"
+                      class="icon-size" 
                                       ></b-icon>
                       </template>
                       <b-dropdown-item 
@@ -1048,8 +1048,6 @@ return cat;
 
     //Show Edit network modal
     showEditNetwork(network) {
-
-
       axios
         .get("network/"+network.id+"/edit-infos")   
         .then(({ data }) => {
@@ -1091,7 +1089,7 @@ return cat;
       this.createdNetwork.division = network.division;
       this.createdNetwork.municipality = network.municipality;
       this.createdNetwork.localities = network.localities;
-      
+  
          this.Region();
          this.Division();
          this.Municipality();

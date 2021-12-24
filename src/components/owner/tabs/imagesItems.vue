@@ -8,7 +8,7 @@
         rounded
         :src="getFullMediaLink()"
         alt="media_img"
-        v-b-modal="`modal-${im.id}`"
+        v-b-modal="uuid"
         v-bind="imageProps"
         style="width: 266px;height: 266px;"
 
@@ -36,7 +36,7 @@
         :label="$t('profileowner.Large_Spinner')"
       ></b-spinner>
     </div>
-    <b-modal hide-footer :id="`modal-${im.id}`" title="Details" size="md">
+    <b-modal hide-footer :id="uuid" :title="`Details ${uuid}`" size="md">
       <img
         class="card-img"
         :src="getFullMediaLink()"
@@ -95,6 +95,9 @@
 </template>
 
 <script>
+
+import { mapMutations } from 'vuex'
+
 export default {
   props: [
     "im",
@@ -111,15 +114,28 @@ export default {
     "setProfilePic",
     "setCoverPic",
     "deleteImage",
+    "isAlbum"
   ],
+
+  created(){
+    this.uuid = this.isAlbum ?  `modal-album-${this.im.id}` : `modal-picture-${this.im.id}`
+
+  },
 
   data() {
     return {
       loading: false,
+      uuid:null
     };
   },
 
   methods: {
+
+    ...mapMutations({
+      updatePictureState: "auth/updateProfilePicture",
+      addCoverPicture: "businessOwner/addCoverPicture"
+    }),
+
     async onDownloadPic() {
       let loader = this.$loading.show({
         container: this.$refs[`sHowMedia-${this.im.id}`],
@@ -149,7 +165,7 @@ export default {
     },
     //set an image as a cover photo
 
-    async onSetCoverPic() {
+     async onSetCoverPic() {
       let loader = this.$loading.show({
         container: this.$refs[`sHowMedia-${this.im.id}`],
         canCancel: true,
@@ -159,6 +175,9 @@ export default {
 
       this.loading = true;
       this.loading = await this.setCoverPic();
+
+      if ("BusinessOwner" === this.$route.name)
+        this.addCoverPicture(this.getFullMediaLink());
 
       loader.hide();
     },
@@ -173,6 +192,9 @@ export default {
       });
       this.loading = true;
       this.loading = await this.setProfilePic();
+
+      if ("BusinessOwner" === this.$route.name)
+        this.updatePictureState(this.getFullMediaLink());
 
       loader.hide();
     },

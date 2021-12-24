@@ -1,6 +1,6 @@
 <template>
   <div>
-    <fas-icon class="violet mr-2 pt-1 icon-size primary" :icon="['fas', 'file-image']" />{{ $t('profileowner.Media') }}
+    <fas-icon class="violet mr-2 pt-1 icon-size primary" :icon="['fas', 'file-image']" />{{ $t('profileowner.Media') }}      
 
     <hr />
     <b-tabs content-class="mt-3" v-model="tabIndex" pills>

@@ -324,12 +324,6 @@ const routes = [
     component: RecoverPass3,
   },
   {
-    path: "/businessfollower/:id?",
-    name: "BusinessFollower",
-    component: businessFollower,
-  },
-
-  {
     path: "/business/:id?",
     name: "BusinessFollower",
     component: businessFollower,

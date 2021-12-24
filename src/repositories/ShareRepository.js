@@ -33,13 +33,12 @@ class Repository {
     }
   }
 
-  async blocking(data) {
+  async blocking(data, uuid) {
     try {
-      const response = await axios.post(`business/community-banned/${data.uuid}`, data)
+      const response = await axios.post(`business/community-banned/${uuid}`, data)
       return {
         success: (response.data.data) ? true : false
       }
-
     } catch (error) {
       return {
         success: false,

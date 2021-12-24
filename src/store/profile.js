@@ -19,6 +19,7 @@ export default {
     educations: [],
     professions: [],
     networks: [],
+    blocking: [],
 
     profile_about: { "user": {}, "user_address": [], "user_education": [], "user_experience": [], "user_websites": [] },
     profileIntro: { "user": {}, "user_address": [], "user_education": [], "user_experience": [], "user_websites": [] },
@@ -135,6 +136,9 @@ export default {
 
   },
   getters: {
+    getblockusers(state){
+      return state.blocking
+    },
     getAlbums(state) {
       return state.albums;
     },
@@ -195,6 +199,9 @@ export default {
   },
 
   mutations: {
+    setblocking(state, blocking){
+      state.blocking = blocking
+    },
 
     removePost(state, uuid) {
       const newPosts = state.ownerPost.filter(post => post.id != uuid)
@@ -1442,7 +1449,16 @@ export default {
         commit("set_details", data.data);
         console.log(data);
       });
-    }
+    },
+    getblockusers( {commit}, path ){
+      return axios
+      .get(`user/${path}`)
+      .then(({ data }) => {
+          commit("setblocking", data.data);
+        console.log(data);
+
+      })
+    },
 
 
 

@@ -303,6 +303,87 @@
                 
               </b-tab>
                  
+              <b-tab title="Blocking">
+                <!-- <b-card-text class="mt-3 text">
+                  <h3 class="username">{{ $t('settings.Change_current_password') }}</h3>
+                  <br />
+
+                  <div class="b-bottom">
+                    <b-container>
+                      <b-form-group
+                        label-cols-lg="3"
+                        :label="`${$t('settings.Current_password')}`"
+                        label-size="md"
+                        label-class=" text"
+                        class="mb-0"
+                      >
+
+                        <b-form-input
+                          id="bname"
+                          placeholder=""
+                          required
+                          v-model="currentPass"
+                        ></b-form-input>
+
+                      </b-form-group>
+                    </b-container>
+                  </div>
+
+                  <br />
+
+                  <div class="b-bottom">
+                    <b-container>
+                      <b-form-group
+                        label-cols-lg="3"
+                        :label="`${$t('settings.New_password')}`"
+                        label-size="md"
+                        label-class=" text"
+                        class="mb-0"
+                      >
+
+                        <b-form-input
+                          id="bname"
+                          placeholder=""
+                          required
+                          v-model="newPass"
+                        ></b-form-input>
+
+                      </b-form-group>
+                    </b-container>
+                  </div>
+
+                  <br />
+
+                  <div class="b-bottom">
+                    <b-container>
+                      <b-form-group
+                        label-cols-lg="3"
+                        :label="`${$t('settings.Confirm_password')}`"
+                        label-size="md"
+                        label-class="text"
+                        class="mb-0"
+                      >
+
+                        <b-form-input
+                          id="bname"
+                          placeholder=""
+                          required
+                          v-model="newPass1"
+                        >
+                        
+                        </b-form-input> <br>
+                        <p>{{message}}</p>
+                         <br> <button class=" btn btn-primary" @click="changePassword">{{$t("settings.change")}}</button>
+
+                      </b-form-group>
+                    </b-container>
+                  </div>
+
+                  <br /> 
+                  </b-card-text>   -->
+                <Blocking :profileId="getUserInfos.id"/>
+              </b-tab> 
+              
               <b-tab :title="`${$t('settings.Password')}`">
                 <b-card-text class="mt-3 text">
                   <h3 class="username">{{ $t('settings.Change_current_password') }}</h3>
@@ -380,8 +461,7 @@
                   </div>
 
                   <br /> 
-                  </b-card-text
-              >  
+                  </b-card-text>  
               </b-tab> 
              
             </b-tabs>  
@@ -401,6 +481,7 @@ import Footer from '@/components/footer';
 import SettingsNotifications from '@/components/SettingsNotifications.vue';
 import Website from "@/components/businessOwner/settings/website";
 import Payment from "@/components/businessOwner/settings/payment";
+import Blocking from "@/components/owner/settings/blocking";
 
 export default {
   components: {
@@ -408,7 +489,8 @@ export default {
     Footer,
     SettingsNotifications,
     Website,
-    Payment
+    Payment,
+    Blocking
   },
   
 

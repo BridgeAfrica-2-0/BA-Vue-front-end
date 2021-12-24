@@ -108,7 +108,6 @@ import VueMaterial from 'vue-material';
 Vue.use(VueMaterial);
 
 import Lightbox from '@morioh/v-lightbox';
-import * as VueGoogleMaps from 'gmap-vue';
 
 
 import VueSplide from "@splidejs/vue-splide";
@@ -151,15 +150,6 @@ Vue.use(IconsPlugin);
 // Vue.use(InfiniteLoading, {
 //     options 
 // });
-
-Vue.use(VueGoogleMaps, {
-    load: {
-        key: 'AIzaSyAGZU6cqra18t1fhN1AbzRsEc_pgt7n2C8',
-        libraries: 'places',
-    },
-    autobindAllEvents: false,
-    installComponents: true,
-});
 
 import VueLoading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';

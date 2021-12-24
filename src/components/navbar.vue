@@ -604,6 +604,7 @@ export default {
   },
   data() {
     return {
+
       isActive: false,
       shownav: false,
       notifications: [],
@@ -803,7 +804,7 @@ export default {
             console.log("Error erro!");
           });
 
-        this.$router.push({ name: "Search" });
+        this.$router.push("/search");
       }
     },
 
@@ -837,7 +838,8 @@ export default {
       location.reload();
     },
     logout: async function () {
-      let loader = this.$loading.show({
+
+       let loader = this.$loading.show({
         container: this.$refs.formContainer,
         canCancel: true,
         onCancel: this.onCancel,
@@ -845,7 +847,7 @@ export default {
       });
       const response = await this.$repository.notification.logOut();
       if (response.success) {
-        loader.hide();
+        // loader.hide();
         this.Logout();
         this.$router.push({ name: "login" });
       }

@@ -59,16 +59,18 @@
         <div class="marker" slot="marker">
           <div>M{{ key + 1 }}</div>
         </div>
-        <MglPopup
-          :coordinates="[product.business_lng, product.business_lat]"
-          anchor="top"
-        >
+        <MglPopup :coordinates="[product.business_lng, product.business_lat]">
           <div class="py-4">
             <div class="d-flex justify-content-center flex-column pointer">
-              <img :src="product.logo_path" alt="..." class="img-map" />
+              <img :src="product.picture" alt="..." class="img-map" />
               <h6 class="text-center my-3">
                 {{ product.name }}
               </h6>
+              <p>{{ product.description }}</p>
+              <div class="d-flex justify-content-around">
+                <p class="font-weight-bold">Price</p>
+                <p>{{ product.price }} Fcfa</p>
+              </div>
             </div>
           </div>
         </MglPopup>
@@ -92,7 +94,7 @@ export default {
       accessToken: process.env.VUE_APP_MAPBOX_TOKEN,
       mapStyle: "mapbox://styles/mapbox/streets-v11",
       center: [11.504929555178624, 3.8465173382452815], // Lng,Lat
-      zoom: 12,
+      zoom: 4,
     };
   },
   created() {

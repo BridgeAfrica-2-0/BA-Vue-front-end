@@ -109,18 +109,11 @@
         </p>
       </b-card-text>
 
-      <MglMap
-        :accessToken="accessToken"
-        :mapStyle.sync="mapStyle"
-        :center="[business_intro.lng, business_intro.lat]"
-        :zoom="zoom"
-        style="width: 100%; height: 250px"
-      >
-        <MglMarker
-          :coordinates="[business_intro.lng, business_intro.lat]"
-          color="red"
-        />
-      </MglMap>
+      <map-with-hover
+        style="height: 250px; width: 100%"
+        :coordinates="[business_intro.lng, business_intro.lat]"
+        :business="business_intro"
+      />
     </b-card>
 
     <b-modal
@@ -287,8 +280,7 @@
 
 <script>
 import axios from "axios";
-
-import { MglMap, MglMarker } from "vue-mapbox";
+import MapWithHover from "@/components/MapWithHover";
 import { validationMixin } from "vuelidate";
 
 import { required, email, minLength } from "vuelidate/lib/validators";
@@ -549,8 +541,7 @@ export default {
     //   },
   },
   components: {
-    MglMap,
-    MglMarker,
+    MapWithHover,
   },
 
   computed: {

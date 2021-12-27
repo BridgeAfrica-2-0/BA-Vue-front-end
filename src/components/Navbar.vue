@@ -737,7 +737,7 @@ export default {
     navLink(type) {
       const link = {
         home: () => {
-          return this.profile ? "dashbord" : "home1";
+          return this.profile ? "dashboard" : "home1";
         },
       };
       try {

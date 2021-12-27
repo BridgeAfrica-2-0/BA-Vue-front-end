@@ -1,6 +1,13 @@
 <template>
-  <header class="position-relative">
-    <b-navbar toggleable="lg" variant="faded" type="light">
+
+
+<!-- <header class="position-relative"> -->
+
+
+      
+
+     <b-navbar toggleable="lg" type="light" variant="light">
+    <!-- <b-navbar toggleable="lg" variant="faded" type="light"> -->
         <div class="col-md-12 col-lg-2 col-xl-2 text-center">
           <a class="d-inline-block align-top mt-1" href="#">
             <img src="@/assets/logo.png" alt="" class="balogo desktop" loading="lazy" />
@@ -15,61 +22,49 @@
           <b-navbar-nav class="ml-auto ">
             <b-nav-item >
 
-              <span class="text-dark font-arvo nav-span"><router-link :to="{name: 'home1'}">{{ $t("general.Home") }}</router-link></span>
+              <span class="text-dark font-arvo nav-span " ><router-link :to="{name: 'home1'}" :class="currentRouteName == 'home1' ? 'active' : ''">{{ $t("general.Home") }}</router-link></span>
               <hr class="mobile navstyle" />
             </b-nav-item>
-            <b-nav-item  class="ml-md-3" :class="currentRouteName == 'about' ? 'active' : ''">
-              <span class="text-dark font-arvo nav-span"> <router-link :to="{name: 'about'}">{{ $t("general.About_Us") }}</router-link></span>
+            <b-nav-item  class="ml-md-3" >
+              <span class="text-dark font-arvo nav-span "> <router-link :to="{name: 'about'}" :class="currentRouteName == 'about' ? 'active' : ''">{{ $t("general.About_Us") }}</router-link></span>
                <hr class="mobile navstyle" />
             </b-nav-item>
-            <b-nav-item  class="ml-md-3" :class="currentRouteName == 'contact' ? 'active' : ''">
-              <span class="text-dark font-arvo nav-span"> <router-link :to="{name: 'contact'}">{{ $t("general.Contact_Us") }}</router-link> </span>
+            <b-nav-item  class="ml-md-3" >
+              <span class="text-dark font-arvo nav-span "> <router-link :to="{name: 'contact'}" :class="currentRouteName == 'contact' ? 'active' : ''" >{{ $t("general.Contact_Us") }}</router-link> </span>
                <hr class="mobile navstyle" />
             </b-nav-item>
             <b-nav-item class="ml-md-3">
-              <span class="text-dark font-arvo nav-span"> <router-link :to="{name: 'Login'}">{{ $t("general.Login") }} </router-link> </span>
+              <span class="text-dark font-arvo nav-span "> <router-link :to="{name: 'Login'}">{{ $t("general.Login") }} </router-link> </span>
                <hr class="mobile navstyle" />
 
             </b-nav-item>
             <b-nav-item  class="ml-md-3">
-              <span class="text-dark font-arvo nav-span"> <router-link :to="{name: 'signup'}">{{ $t("general.Sign_Up") }}</router-link> </span>
+              <span class="text-dark font-arvo nav-span "> <router-link :to="{name: 'signup'}">{{ $t("general.Sign_Up") }}</router-link> </span>
+              <hr class="mobile navstyle" />
             </b-nav-item>
 
-            <span>
+            <b-nav-item  class="ml-md-3 ">
+          
               <b-dropdown variant="ligth">
                   <template #button-content>
-                   <img :src="img" class="size" alt=""> {{lang}}
+                   <img :src="img" class="size poslang" alt=""> <span class="poslang">{{lang}}</span>
                   </template>
                    <b-dropdown-item  @click="change('en')"> <img src="../../assets/img/about/en.png" class="size" alt=""> EN</b-dropdown-item>
-                  <b-dropdown-item @click="change('fr')" ><img src="../../assets/img/la-france.png" class="size" alt="">FR</b-dropdown-item>
+                  <b-dropdown-item @click="change('fr')" ><img src="../../assets/img/la-france.png" class="size" alt=""> FR</b-dropdown-item>
                 </b-dropdown>
-            </span> 
+            
+            </b-nav-item>
 
 
             
 
-              <!-- <b-nav-item href="#" class="ml-md-3 font-weight-bold">
-                  <b-card-text
-                    @click="$i18n.locale = 'en'"
-                    class="text-dark font-arvo cursor-pointer mb-1 fw-bold"
-                    >{{ $t("auth.english") }}
-                    </b-card-text
-                  >
-              </b-nav-item>
-
-              <b-nav-item href="#" class="ml-md-3 font-weight-bold">
-                  <b-card-text @click="$i18n.locale = 'fr'" class="text-dark font-arvo cursor-pointer mb-1 ">{{
-                    $t("auth.french")
-                  }}
-              </b-card-text>
-
-          </b-nav-item> -->
+             
 
           </b-navbar-nav>
         </b-collapse>
       </div>
     </b-navbar>
-  </header>
+  <!-- </header>  -->
 </template>
 <script>
 export default {
@@ -116,27 +111,15 @@ export default {
 @media (min-width: 992px)
 {
 
-
+.poslang{
+  /* margin-bottom: 10px; */
+}
 .navbar-expand-lg {
     
     padding-right: 0px;
 }
 }
-.font-arvo {
-  /* font-family: 'Arvo', serif; */
-}
-.font-rob {
-  /* font-family: 'Roboto', Sans-serif; */
-}
-.font-poppin {
-  /* font-family: 'Poppins', sans-serif; */
-}
-.font-source {
-  /* font-family: 'Source Sans Pro', sans-serif; */
-}
-.font-mont {
-  /* font-family: 'Montserrat', sans-serif; */
-}
+
 
 .nav-span {
   font-size: 14px;
@@ -149,25 +132,51 @@ export default {
 .nav-item:hover .nav-link span {
   color: #e75c18 !important;
 }
+.active{
+  color: #e75c18;
+}
 .container{
   margin-left: 10px !important;
   margin-right: 50px !important;
 }
 
 @media only screen and (max-width: 768px) {
+  .pos{
+     margin-top: -20px;
+  }
+
+  
   .balogo{
-    width: 60px ;
-    height: 40px ;
+    width: 70px ;
+    height: 50px ;
   }
   .desktop{
     display: none;
   }
 
   .navstyle{
-    width:120%;
+    width: 130%;
+    margin-left: -13px;
+    margin-bottom: -10px;
   }
+
+  .navbar-toggler {
+    padding: .25rem .75rem;
+    font-size: 1.25rem;
+    line-height: 1;
+    background-color: transparent;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    position: absolute !important;
+    top: 18px !important;
+    right: 13px !important;
 }
 
+.poslang{
+  
+    margin-left: -10px;
+}
+}
 
 @media only screen and (min-width: 768px) {
   .balogo{

@@ -407,7 +407,7 @@ export default {
             state.editors = []
 
 
-            await axios.get(`/business/role/editor/${state.currentBizId}`)
+            await axios.get(`/network/role/editor/${state.currentBizId}`)
                 .then((res) => {
                     commit("setLoader", false);
                     let editor = res.data.data
@@ -431,9 +431,13 @@ export default {
             await axios.post(`network/${state.currentBizId}/members/list`)
                 .then((res) => {
                     commit("setLoader", false);
-                    let editor = res.data.data
-                    if (editor.length > 0) {
-                        state.members = { accountType: "member", ...res.data.data }
+                    let members = res.data.data
+
+                    if (members.length > 0) {
+                        members.map((elm) => {
+                                state.members.push({ accountType: "member", ...elm, id: elm.user_id })
+                            })
+                            // state.members = { accountType: "member", ...res.data }
                     }
                     console.log("member:", state.members);
                     commit("setBizs", state.members);

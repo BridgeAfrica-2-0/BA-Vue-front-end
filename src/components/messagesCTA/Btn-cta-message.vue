@@ -1,21 +1,25 @@
 <template>
-  <span>
-    <b-button v-if="header" class="message size" @click="cta()">
+  <!-- <b-button v-if="header" class="message size" @click="cta()">
       <i class="fas fa-envelope fa-lg btn-icon"></i>
       <span>{{ $t("businessf.Message") }}</span>
-    </b-button>
-    <b-button
-      v-else
-      block
-      variant="primary"
-      size="sm"
-      class="b-background flexx shadow"
-      @click="cta()"
-    >
+    </b-button> -->
+  <b-button
+    :block="header"
+    variant="primary"
+    size="sm"
+    :class="header ? 'message size' : 'b-background flexx shadow'"
+    @click="cta()"
+  >
+    <p v-if="header">
+      <i class="fas fa-envelope fa-lg btn-icon"></i>
+      <span>{{ $t("businessf.Message") }}</span>
+    </p>
+
+    <p v-else>
       <i class="fas fa-envelope fa-lg btn-icon pt-1 pr-1"></i>
       <span class="btn-text"> {{ $t("dashboard.Messages") }}</span>
-    </b-button>
-  </span>
+    </p>
+  </b-button>
 </template>
 
 <script>

@@ -1,12 +1,12 @@
 <template>
   <div>
     <div class="row">
-      <h6 class="col-md-12"><b>Basic Information</b></h6>
+      <h6 class="col-md-12"><b>{{ $t("general.Basic_Information") }}</b></h6>
 
       <hr />
     </div>
     <div class="row mb-1">
-      <div class="col-md-4">Date Of Birth</div>
+      <div class="col-md-4">{{ $t("general.Date_Of_Birth") }}</div>
       <div class="col-md-4">{{ info.user.dob }}</div>
       <div class="col-md-4">
         <button
@@ -16,11 +16,11 @@
           data-target="#dobModal"
           v-b-modal.modal-6
         >
-          Edit
+          {{ $t("general.Edit") }}
         </button>
       </div>
 
-      <b-modal id="phonemodal" title="Add Phone Number" hide-footer ref="phonemodal" @close="cancel">
+      <b-modal id="phonemodal" :title="$t('general.Add_Phone_Number')" hide-footer ref="phonemodal" @close="cancel">
         <div class="modal-body">
           <form class="form" action="" method="post" @submit.prevent="savePhoneNumber">
             <b-form-input
@@ -32,7 +32,7 @@
             ></b-form-input>
 
             <div class="fosrm-group text-right w-100">
-              <button type="submit" class="btn btn-primary orange">Save</button>
+              <button type="submit" class="btn btn-primary orange">{{ $t("general.Save") }}</button>
             </div>
           </form>
         </div>
@@ -49,19 +49,19 @@
             ></b-form-input>
 
             <div class="fosrm-group text-right w-100">
-              <button type="submit" class="btn btn-primary orange">Save</button>
+              <button type="submit" class="btn btn-primary orange">{{ $t("general.Save") }}</button>
             </div>
           </form>
         </div>
       </b-modal>
 
-      <b-modal id="hometownModal" ref="hometownModal" title="Add home town" hide-footer @close="cancel">
+      <b-modal id="hometownModal" ref="hometownModal" :title="$t('general.Add_home_town')" hide-footer @close="cancel">
         <div class="modal-body">
           <form class="form" action="" method="post" @submit.prevent="saveHomeTown">
             <b-form-input class="mt-2 mb-2" v-model="info.user.home_town" placeholder="home town"></b-form-input>
 
             <div class="fosrm-group text-right w-100">
-              <button type="submit" class="btn btn-primary orange">Save</button>
+              <button type="submit" class="btn btn-primary orange">{{ $t("general.Save") }}</button>
             </div>
           </form>
         </div>
@@ -73,19 +73,19 @@
             <b-form-input class="mt-2 mb-2" placeholder="Website" v-model="websiteInput"></b-form-input>
 
             <div class="fosrm-group text-right w-100">
-              <button type="submit" class="btn btn-primary orange">Save</button>
+              <button type="submit" class="btn btn-primary orange">{{ $t("general.Save") }}</button>
             </div>
           </form>
         </div>
       </b-modal>
 
-      <b-modal id="websiteEModal" ref="websiteEModal" title="Edit website" hide-footer @close="cancel">
+      <b-modal id="websiteEModal" ref="websiteEModal" :title=" $t('general.Edit_website')" hide-footer @close="cancel">
         <div class="modal-body">
           <form class="form" action="" method="post" @submit.prevent="saveEWebsite">
             <b-form-input class="mt-2 mb-2" placeholder="Website" v-model="websiteInput"></b-form-input>
 
             <div class="fosrm-group text-right w-100">
-              <button type="submit" class="btn btn-primary orange">Save</button>
+              <button type="submit" class="btn btn-primary orange">{{ $t("general.Save") }}</button>
             </div>
           </form>
         </div>
@@ -97,17 +97,17 @@
             <b-form-input class="mt-2 mb-2" placeholder="soclial link" v-model="sociallinkInput"></b-form-input>
 
             <div class="fosrm-group text-right w-100">
-              <button type="submit" class="btn btn-primary orange">Save</button>
+              <button type="submit" class="btn btn-primary orange">{{ $t("general.Save") }}</button>
             </div>
           </form>
         </div>
       </b-modal>
 
-      <b-modal id="modal-6" ref="model-6" title="Edit Date of Birth" hide-footer @close="cancel">
+      <b-modal id="modal-6" ref="model-6" :title=" $t('general.Edit_Date_of_Birth')" hide-footer @close="cancel">
         <div class="modal-body">
           <form class="form-inline" action="" method="post">
             <div class="input-group col-md-12 pl-0 pr-0 mb-4 selec">
-              <label class="col-md-3 pl-0 pr-0 control-label">Birth Year</label>
+              <label class="col-md-3 pl-0 pr-0 control-label">{{ $t("general.Birth_Year") }}</label>
               <div class="col-md-9 pr-0 pl-0">
                 <div class="form-group">
                   <b-form-datepicker id="example-datepicker" v-model="birthDate.date" class="mb-2"></b-form-datepicker>
@@ -119,7 +119,7 @@
                 cancel
               </button>
               <button type="button" class="btn btn-primary orange" @click="saveBirthDate">
-                Save
+                {{ $t("general.Save") }}
               </button>
             </div>
           </form>
@@ -137,24 +137,24 @@
           data-target="#genderModal"
           v-b-modal.modal-7
         >
-          Edit
+          {{ $t("general.Edit") }}
         </button>
         <b-modal id="modal-7" title="Add/Edit Gender" hide-footer ref="modal-7" @close="cancel">
           <div class="modal-body">
             <form class="form-inline" action="" method="post">
               <div class="input-group col-md-12 mb-4 selec">
-                <label class="col-md-4 control-label" style="align-items: first baseline" for="gender">Gender </label>
+                <label class="col-md-4 control-label" style="align-items: first baseline" for="gender">{{ $t("general.Gender") }} </label>
                 <div class="col-md-8 pl-0 pr-0">
                   <select id="gender" class="form-control w-100" v-model="basicInfo.gender">
-                    <option value="M">Male</option>
-                    <option value="F">Female</option>
+                    <option value="M">{{ $t("general.Male") }}</option>
+                    <option value="F">{{ $t("general.Female") }}</option>
                   </select>
                 </div>
               </div>
               <!-- End number In input-->
               <div class="fosrm-group text-right w-100">
                 <button type="button" class="btn btn-primary orange" @click="saveGender">
-                  Save
+                  {{ $t("general.Save") }}
                 </button>
               </div>
             </form>
@@ -164,11 +164,11 @@
     </div>
 
     <div class="row">
-      <h6 class="col-md-12"><b>Contact Information</b></h6>
+      <h6 class="col-md-12"><b>{{ $t("general.Contact_Information") }}</b></h6>
     </div>
     <hr />
     <div class="row mb-1 mt-3">
-      <div class="col-md-4">Phone</div>
+      <div class="col-md-4">{{ $t("general.Phone") }}</div>
       <div class="col-md-4">{{ info.user.phone }}</div>
       <div class="col-md-4">
         <button
@@ -178,17 +178,17 @@
           data-target="#phonemodal"
           v-b-modal.phonemodal
         >
-          Edit
+          {{ $t("general.Edit") }}
         </button>
       </div>
     </div>
 
     <div class="row">
-      <div class="col-md-12"><b>Places you lived</b></div>
+      <div class="col-md-12"><b>{{ $t("general.Places_you_lived") }}</b></div>
     </div>
     <hr />
     <div class="row mb-4">
-      <div class="col-md-4">City :</div>
+      <div class="col-md-4">{{ $t("general.City") }} :</div>
       <div class="col-md-4">{{ info.user.city }}</div>
       <div class="col-md-4">
         <button
@@ -198,12 +198,12 @@
           data-target="#currentcityModal"
           v-b-modal.currentcityModal
         >
-          Edit
+          {{ $t("general.Edit") }}
         </button>
       </div>
     </div>
     <div class="row mb-4">
-      <div class="col-md-4">Home Town :</div>
+      <div class="col-md-4">{{ $t("general.Home_Town") }} :</div>
       <div class="col-md-4">{{ info.user.home_town }}</div>
       <div class="col-md-4">
         <button
@@ -213,19 +213,19 @@
           data-target="#hometownModal"
           v-b-modal.hometownModal
         >
-          Edit
+         {{ $t("general.Edit") }} 
         </button>
       </div>
     </div>
     <div class="row mb-4">
       <div class="col">
-        <h6 class="mb-0"><b>Web &amp; Social Links</b></h6>
+        <h6 class="mb-0"><b>Web &amp; {{ $t("general.Social_Links") }}</b></h6>
         <hr />
         <div class="media">
           <div class="media-body">
             <a v-b-modal.websiteModal data-target="#websiteModal">
               <fas-icon class="primary float-left mr-1 mt-1" :icon="['fas', 'plus-circle']" />
-              Add a Website</a
+              {{ $t("general.Add_a_Website") }}</a
             ><br />
 
             <div v-for="website in info.user_websites" :key="website.id">
@@ -234,8 +234,8 @@
               <ul class="website navbar-nav pull-right">
                 <li class="nav-item dropdown">
                   <b-dropdown id="dropdown-dropup" dropdown variant="primary-outline">
-                    <b-dropdown-item @click="edit('website', website)">Edit</b-dropdown-item>
-                    <b-dropdown-item @click="deleteWebsite(website)">Delete</b-dropdown-item>
+                    <b-dropdown-item @click="edit('website', website)">{{ $t("general.Edit") }}</b-dropdown-item>
+                    <b-dropdown-item @click="deleteWebsite(website)">{{ $t("general.Delete") }}</b-dropdown-item>
                   </b-dropdown>
                 </li>
               </ul>

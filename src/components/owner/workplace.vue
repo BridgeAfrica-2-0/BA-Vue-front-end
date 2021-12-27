@@ -53,25 +53,6 @@
       </div>
     </b-list-group-item>
 
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
     <b-modal
       ref="edit-contact"
       id="edit"
@@ -199,7 +180,9 @@
 </template>
 
 <script>
+import { diffBetweenTwoDate } from '@/helpers'
 export default {
+
   data() {
     return {
       editData:[],
@@ -226,25 +209,41 @@ export default {
       educationInput: null,
       professionInput: null,
       index: null,
-    };
+    }
   },
+
   created() {
-    console.log("Load User Profile About Education and Works Places");
     this.educationAndWorks.workPlaces = this.work
   },
 
   computed:{
     work(){
-      console.log("this.$store.state.profile.profile_about.user_experience");
       return this.$store.state.profile.profile_about.user_experience;
     },
 
      workk(){
-       console.log("this.$store.state.profile.profile_about");
       return this.$store.state.profile.profile_about;
     }
-
   },
+
+  watch:{
+    "workPlaceInput.endDate": function(value){
+
+      if (this.workPlaceInput.endDate && 
+          this.workPlaceInput.startDate) {
+        const diff = diffBetweenTwoDate(this.workPlaceInput.endDate, this.workPlaceInput.startDate)
+      
+        if (diff <= 0){
+          this.flashMessage.show({
+            status: "error",
+            message: "the end date must not be greater than the start date",
+            blockClass: "custom-block-class",
+          })
+        }
+      }
+    }
+  },
+
   methods: {
 
     editt(value){

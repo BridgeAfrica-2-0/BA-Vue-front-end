@@ -101,6 +101,7 @@
                   size="sm"
                   class="b-background shadow"
                   variant="primary"
+                  @click="gotoBusiness(item.id)"
                 >
                   <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
                   <span class="btn-text">{{
@@ -162,6 +163,9 @@ export default {
   },
 
   methods: {
+    gotoBusiness(id) {
+      this.$router.push(`/business/${id}#about`);
+    },
     count(number) {
       if (number >= 1000000) {
         return number / 1000000 + "M";

@@ -19,7 +19,7 @@
             <b-form>
               <b-form-input 
                 id="name"
-                placeholder="Album name"
+                :placeholder="$t('general.Album_name')"
                 v-model="form.name"
                 name="name"
               ></b-form-input>
@@ -80,7 +80,7 @@
             <b-form>
               <b-form-input 
                 id="name"
-                placeholder="Album name"
+                :placeholder="$t('general.Album_name')"
                 v-model="form.name"
                 name="name"
               ></b-form-input>
@@ -237,7 +237,7 @@ export default {
         // loader.hide();
         this.flashMessage.show({
           status: "success",
-          message: "Album Created"
+          message: this.$t('general.Album_Created'),
         });
       })
       .catch(err => {

@@ -21,7 +21,7 @@
           class="toright"
           v-if="'dashboard' !== $route.name ? !isDisplayInSearch ? isYourOwnPost && canBeDelete : false : false"
         >
-          <b-dropdown variant="link" size="sm" no-caret>
+          <b-dropdown variant="link" size="sm" no-caret v-if="show !='Follower'">
             <template #button-content>
               <b-icon
                 icon="three-dots"
@@ -209,7 +209,7 @@
     <NoMoreData
       v-if="comments.length && !loadComment"
       :hasData="hasData"
-      :moreDataTitle="'Show more comments'"
+      :moreDataTitle="$t('businessowner.Show_more_comments')"
       :noDataTitle="''"
       @click.native="onShowComment"
     />
@@ -291,6 +291,9 @@ export default {
   },
 
   computed: {
+    show(){
+      return this.$route.name ;
+    },
     icon() {
       return this.post.is_liked ? "suit-heart-fill" : "suit-heart";
     },

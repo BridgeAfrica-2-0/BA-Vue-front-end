@@ -131,7 +131,7 @@
         </div>
         <div id="m4" class="mobile2 col t" @click="changeTab(4)">
           <div class="cercle2">4</div>
-          <h2 class="h2 text-position text-center">Cancel</h2>
+          <h2 class="h2 text-position text-center">{{ $t("myOrders.Cancel") }}</h2>
         </div>
       </div>
     </div>

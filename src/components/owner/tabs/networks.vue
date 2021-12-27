@@ -320,13 +320,12 @@
                 label-class="pt-0"
                 class="mb-0"
               >
-                <b-form-input
-                  v-model="createdNetwork.primary_phone"
-                  id="network_name"
-                  placeholder=""
-                  required
-                >
-                </b-form-input>
+               <VuePhoneNumberInput 
+               default-country-code="CM" 
+               v-model="createdNetwork.primary_phone" 
+               required
+               />
+               
               </b-form-group>
             </b-col>
             <b-col md="6">
@@ -337,13 +336,13 @@
                 label-class=" pt-0"
                 class="mb-0"
               >
-                <b-form-input
-                  v-model="createdNetwork.secondary_phone"
-                  id="network_name"
-                  placeholder=""
-                  required
-                >
-                </b-form-input>
+
+              <VuePhoneNumberInput 
+               default-country-code="CM" 
+               v-model="createdNetwork.secondary_phone" 
+               required
+               />
+                
               </b-form-group>
             </b-col>
             <b-col md="6">
@@ -434,16 +433,12 @@
                   v-if="!logoimg_url"
                   @click="chooseNlogo()"
                 >
-                  <a
-                    href="#"
-                    data-toggle="modal"
-                    data-target="#createalbumModal"
-                  >
+                  
                     <div class="drag-text">
                       <i class="fa fa-plus"> </i>
                       <h3 class="username">{{ $t('profileowner.Business_Logo') }}</h3>
                     </div>
-                  </a>
+                 
                   <div></div>
                 </div>
               </b-form-group>
@@ -516,6 +511,7 @@
 <script>
 import axios from "axios";
 import Multiselect from "vue-multiselect";
+import VuePhoneNumberInput from 'vue-phone-number-input';
 export default {
   data() {
     return {
@@ -582,7 +578,7 @@ export default {
   },
 
   components: {
-    Multiselect,
+    Multiselect,VuePhoneNumberInput
   },
 
   mounted() {
@@ -1093,7 +1089,7 @@ return cat;
          this.Region();
          this.Division();
          this.Municipality();
-         this.Locality();
+         this.Locality(); 
       this.showmodal(true, "edit");
     },
     selectImage(e) {
@@ -1104,6 +1100,19 @@ return cat;
 </script>
 
 <style scoped>
+
+.no-arrow {
+  -moz-appearance: textfield;
+}
+.no-arrow::-webkit-inner-spin-button {
+  display: none;
+}
+.no-arrow::-webkit-outer-spin-button,
+.no-arrow::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 .inline-flex{
  display: inline-flex;
 }

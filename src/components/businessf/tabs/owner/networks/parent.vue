@@ -302,7 +302,7 @@
                   accept="image/*"
                 />
                 <b-button
-                  title="Add Profile Image"
+                  :title="$t('general.Add_Profile_Image') "
                   size="sm"
                   variant="outline-primary"
                   @click="$refs.file.click()"

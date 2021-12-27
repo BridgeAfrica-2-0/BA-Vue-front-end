@@ -21,7 +21,7 @@
               variant="white"
             >
             </b-avatar>
-
+            
 
              <b-avatar v-if="info.user.profile_picture ==null "
                 :src="info.user.profile_picture"

@@ -109,7 +109,7 @@
                               variant="primary"
                             >
                               <b-icon icon="plus-circle" class="mr-1"> </b-icon>
-                              community
+                              {{ $t('general.Community') }}
                             </b-button>
                           </b-col>
                         </b-row>

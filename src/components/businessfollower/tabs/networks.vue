@@ -686,7 +686,7 @@ export default {
           this.flashMessage.show({
             status: 'error',
 
-            message: 'Something went wrong',
+            message: 'Something_went_wrong',
 
             blockClass: 'custom-block-class',
           });

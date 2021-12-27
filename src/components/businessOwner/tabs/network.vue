@@ -22,7 +22,7 @@
             {{ item.category }}
             <br />
             {{ item.followers }} {{ $t("businessowner.Community") }}<br />
-
+            
             {{ item.about_network }}
             <b-link> {{ $t("businessowner.Read_More") }}</b-link>
           </p>
@@ -82,13 +82,17 @@
                 <b-button
                   block
                   size="sm"
-                  class="b-background shadow"
+                  :id="'followbtn'+item.id"
+                  class="b-background flexx pobtn shadow mr-lg-3 mr-xl-3"
+                  :class="item.is_follow !== 0 && 'u-btn'"
                   variant="primary"
+                  @click="networkJoin(item)"
                 >
-                  <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
-                  <span class="btn-text">
-                    {{ $t("businessowner.Direction") }}</span
-                  >
+                  <i
+                    class="fas fa-lg btn-icon"
+                    :class="item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"
+                  ></i>
+                    <span class="btn-com">Join</span>
                 </b-button>
               </b-col>
             </b-row>
@@ -139,6 +143,23 @@ export default {
   },
 
   methods: {
+
+    networkJoin: async function(item){
+      const status = item.is_follow
+
+      const request = !status ? await this.$repository.share.jointNetwork({id: item.id , type: "network"}) : await this.$repository.share.removeNetwork({id: item.id , type: "network"})
+        
+
+      if (request.success){
+        item = Object.assign(item, {is_follow: status ? 0 : 1})
+
+        this.flashMessage.show({
+          status: "success",
+          title: request.data,
+        });
+      }
+    },
+
     infiniteHandler($state) {
       console.log("loading network 1 1");
 

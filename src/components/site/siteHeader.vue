@@ -12,22 +12,59 @@
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
         <b-collapse id="nav-collapse" is-nav>
-          <b-navbar-nav class="ml-auto text-center">
+          <b-navbar-nav class="ml-auto ">
             <b-nav-item >
-              <span class="text-dark font-arvo nav-span"><router-link :to="{name: 'home1'}">Home</router-link></span>
+
+              <span class="text-dark font-arvo nav-span"><router-link :to="{name: 'home1'}">{{ $t("general.Home") }}</router-link></span>
+              <hr class="mobile navstyle" />
             </b-nav-item>
             <b-nav-item  class="ml-md-3" :class="currentRouteName == 'about' ? 'active' : ''">
-              <span class="text-dark font-arvo nav-span"> <router-link :to="{name: 'about'}">About Us</router-link></span>
+              <span class="text-dark font-arvo nav-span"> <router-link :to="{name: 'about'}">{{ $t("general.About_Us") }}</router-link></span>
+               <hr class="mobile navstyle" />
             </b-nav-item>
             <b-nav-item  class="ml-md-3" :class="currentRouteName == 'contact' ? 'active' : ''">
-              <span class="text-dark font-arvo nav-span"> <router-link :to="{name: 'contact'}">Contact Us</router-link> </span>
+              <span class="text-dark font-arvo nav-span"> <router-link :to="{name: 'contact'}">{{ $t("general.Contact_Us") }}</router-link> </span>
+               <hr class="mobile navstyle" />
             </b-nav-item>
             <b-nav-item class="ml-md-3">
-              <span class="text-dark font-arvo nav-span"> <router-link :to="{name: 'Login'}">Login </router-link> </span>
+              <span class="text-dark font-arvo nav-span"> <router-link :to="{name: 'Login'}">{{ $t("general.Login") }} </router-link> </span>
+               <hr class="mobile navstyle" />
+
             </b-nav-item>
             <b-nav-item  class="ml-md-3">
-              <span class="text-dark font-arvo nav-span"> <router-link :to="{name: 'signup'}">Sign Up</router-link> </span>
+              <span class="text-dark font-arvo nav-span"> <router-link :to="{name: 'signup'}">{{ $t("general.Sign_Up") }}</router-link> </span>
             </b-nav-item>
+
+            <span>
+              <b-dropdown variant="ligth">
+                  <template #button-content>
+                   <img :src="img" class="size" alt=""> {{lang}}
+                  </template>
+                   <b-dropdown-item  @click="change('en')"> <img src="../../assets/img/about/en.png" class="size" alt=""> EN</b-dropdown-item>
+                  <b-dropdown-item @click="change('fr')" ><img src="../../assets/img/la-france.png" class="size" alt="">FR</b-dropdown-item>
+                </b-dropdown>
+            </span> 
+
+
+            
+
+              <!-- <b-nav-item href="#" class="ml-md-3 font-weight-bold">
+                  <b-card-text
+                    @click="$i18n.locale = 'en'"
+                    class="text-dark font-arvo cursor-pointer mb-1 fw-bold"
+                    >{{ $t("auth.english") }}
+                    </b-card-text
+                  >
+              </b-nav-item>
+
+              <b-nav-item href="#" class="ml-md-3 font-weight-bold">
+                  <b-card-text @click="$i18n.locale = 'fr'" class="text-dark font-arvo cursor-pointer mb-1 ">{{
+                    $t("auth.french")
+                  }}
+              </b-card-text>
+
+          </b-nav-item> -->
+
           </b-navbar-nav>
         </b-collapse>
       </div>
@@ -36,11 +73,32 @@
 </template>
 <script>
 export default {
+  data(){
+    return {
+      img: require("../../assets/img/about/en.png"),
+      lang: 'EN'
+    }
+  },
   computed: {
     currentRouteName() {
       return this.$route.name;
     },
   },
+
+  methods:{
+
+    change(lang){
+      this.$i18n.locale = lang;
+
+      if(lang == 'en'){
+        this.img = require("../../assets/img/about/en.png");
+        this.lang = 'EN'
+      }else {
+        this.img = require("../../assets/img/la-france.png");
+         this.lang = 'FR'
+      }
+    }
+  }
 };
 </script>
 <style scoped>
@@ -50,6 +108,11 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
+
+.size{
+  height: 15px;
+  width: 15px;
+}
 @media (min-width: 992px)
 {
 
@@ -60,19 +123,19 @@ export default {
 }
 }
 .font-arvo {
-  font-family: 'Arvo', serif;
+  /* font-family: 'Arvo', serif; */
 }
 .font-rob {
-  font-family: 'Roboto', Sans-serif;
+  /* font-family: 'Roboto', Sans-serif; */
 }
 .font-poppin {
-  font-family: 'Poppins', sans-serif;
+  /* font-family: 'Poppins', sans-serif; */
 }
 .font-source {
-  font-family: 'Source Sans Pro', sans-serif;
+  /* font-family: 'Source Sans Pro', sans-serif; */
 }
 .font-mont {
-  font-family: 'Montserrat', sans-serif;
+  /* font-family: 'Montserrat', sans-serif; */
 }
 
 .nav-span {
@@ -93,11 +156,15 @@ export default {
 
 @media only screen and (max-width: 768px) {
   .balogo{
-    width: 90px ;
+    width: 60px ;
     height: 40px ;
   }
   .desktop{
     display: none;
+  }
+
+  .navstyle{
+    width:120%;
   }
 }
 

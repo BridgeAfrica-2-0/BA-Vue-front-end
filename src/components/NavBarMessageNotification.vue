@@ -22,7 +22,7 @@
       </div>
       <hr class="h-divider" />
 
-      <a href="https://bridgeafrica.info/nav/inbox.html" class="text-ored"><u>See Inbox</u></a>
+      <a href="https://bridgeafrica.info/nav/inbox.html" class="text-ored"><u>{{$t('general.See_Inbox')}}</u></a>
     </div>
   </b-popover>
 </template>

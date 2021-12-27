@@ -7,67 +7,7 @@
     
 
      <site-header class="topbar" />   
-    <header id="header" class="fixed-topp">
-      <div class=" d-flex align-items-center">
-      
-      
-
-        
-
-
-      <div>
-  <!-- <b-navbar toggleable="sm" type="ligth" variant="ligth">
-   
-
-    <b-navbar-toggle target="nav-collapse ">
-      <template :default=" expanded ">
-        <b-icon v-if="expanded" icon="justify" class="couleur" @click="Expanded(1)"></b-icon>
-        <b-icon v-else icon="X" class="couleur" @click="Expanded(2)"></b-icon>
-      </template>
-    </b-navbar-toggle>
-
-    <b-collapse id="nav-collapse" is-nav> -->
-      
-
-      <!-- Right aligned nav items -->
-      <!-- <b-navbar-nav class="ml-auto bold size_nav" >
-       
-      <b-nav-item > <router-link to="/" class="mx-2">{{ $t('home.Home') }}</router-link></b-nav-item>
-        
-         <b-nav-item ><router-link :to="{ name: 'about' }" class="mx-2">{{ $t('home.About_Us') }} </router-link></b-nav-item>
-        
-        <b-nav-item > <router-link :to="{ name: 'contact' }" class="mx-2">  {{ $t('home.Contact_Us') }}  </router-link></b-nav-item>
-      
-         <b-nav-item ><router-link to="/login" class="mx-2">  {{ $t('home.Login') }}  </router-link></b-nav-item>
-        <b-nav-item ><router-link to="/signup" class="mx-2"> {{ $t('home.Signup') }} </router-link></b-nav-item>
-
-
-      </b-navbar-nav>
-    </b-collapse>
-  </b-navbar> -->
-</div>
-
-
-
-
-
-        <!-- .nav-menu -->
-
-        <!-- <a
-          href="#about"
-          class="black d-lg-none"
-          style="color: black; font-weight: bold; font-size: 18px"
-          >Login</a
-        >
-
-        <a
-          href="#about"
-          class="get-started-btn d-lg-none"
-          style="font-size: 18px"
-          >{{ $t('home.Sign_Up')}}</a
-        > -->
-      </div>
-    </header>
+  
     <!-- End Header -->
 
     <div class="container p-0">
@@ -244,7 +184,7 @@
                   <h3
                     class="card-title"
                     style="
-                      font-family: Antic, sans-serif;
+                     ;
                       color: rgb(81, 87, 94);
                       font-size: 0.99em;
                     "
@@ -254,7 +194,7 @@
                   <p
                     class="card-text"
                     style="
-                      font-family: Antic, sans-serif;
+                     ;
                       color: rgb(81, 87, 94);
                     "
                   ></p>
@@ -283,7 +223,7 @@
                   <h3
                     class="card-title"
                     style="
-                      font-family: Antic, sans-serif;
+                     ;
                       color: rgb(81, 87, 94);
                       font-size: 0.99em;
                     "
@@ -293,7 +233,7 @@
                   <p
                     class="card-text"
                     style="
-                      font-family: Antic, sans-serif;
+                     ;
                       color: rgb(81, 87, 94);
                     "
                   ></p>
@@ -322,7 +262,7 @@
                   <h3
                     class="card-title"
                     style="
-                      font-family: Antic, sans-serif;
+                     ;
                       color: rgb(81, 87, 94);
                       font-size: 0.99em;
                     "
@@ -332,7 +272,7 @@
                   <p
                     class="card-text"
                     style="
-                      font-family: Antic, sans-serif;
+                     ;
                       color: rgb(81, 87, 94);
                     "
                   ></p>
@@ -361,7 +301,7 @@
                   <h3
                     class="card-title"
                     style="
-                      font-family: Antic, sans-serif;
+                     ;
                       color: rgb(81, 87, 94);
                       font-size: 0.99em;
                     "
@@ -371,7 +311,7 @@
                   <p
                     class="card-text"
                     style="
-                      font-family: Antic, sans-serif;
+                     ;
                       color: rgb(81, 87, 94);
                     "
                   ></p>
@@ -794,89 +734,8 @@
       </div>
     </section>
     <!-- End Why Us Section -->
-
-    <footer id="footer">
-      <div class="footer-top black-back">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-3 col-md-6 footer-contact">
-              <div class="row">
-                <div class="col-6">
-                  <img src="../assets/img/logobr.png" width="200px" alt="" />
-                </div>
-
-                <div class="col-6 bblogo">Bridge Africa</div>
-              </div>
-
-              <div class="social-links mt-3 text-left">
-                <a href="#" class="twitter bridge-icon"
-                  ><i class="bx bxl-twitter"></i
-                ></a>
-                <a href="#" class="facebook bridge-icon"
-                  ><i class="bx bxl-facebook"></i
-                ></a>
-                <a href="#" class="instagram bridge-icon"
-                  ><i class="bx bxl-instagram"></i
-                ></a>
-
-                <a href="#" class="youtube bridge-icon"
-                  ><i class="bx bxl-youtube"></i
-                ></a>
-              </div>
-
-              <br />
-
-              <span style="float: left">
-                <span style="color: #e75c18">©2021</span> Bridge Africa
-              </span>
-            </div>
-
-            <div class="col-lg-3 col-md-6 footer-links">
-              <h4 class="bridge-header text-left white">{{ $t('home.OUR_ADRESSE') }}</h4>
-              <ul class="text-left white">
-                <li>{{ $t('home.International_Handicraft_Center') }}, {{ $t('home.Rond_point_Intendance') }}</li>
-
-                <li>{{ $t('home.Yaounde') }}</li>
-
-                <li>{{ $t('home.Cameroon') }}</li>
-              </ul>
-            </div>
-
-            <div class="col-lg-3 col-md-6 footer-links white">
-              <h4 class="bridge-header text-left white">{{ $t('home.USEFULL_LINKS') }}</h4>
-              <ul class="white">
-                <li class="white"><a href="#">Bridgeafricaventures.com</a></li>
-
-                <li class="white"><a href="#">{{ $t('home.Home') }}</a></li>
-
-                <li class="white">
-                  <router-link :to="{name: 'about'}">{{ $t('home.About_Us') }}</router-link>
-                </li>
-
-                <li class="white">
-                  <router-link :to="{name: 'contact'}">{{ $t('home.Contact_Us') }}</router-link>
-                </li>
-
-                <!--   
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
-                          -->
-              </ul>
-            </div>
-
-            <div class="col-lg-3 col-md-6 footer-links">
-              <h4 class="bridge-header text-left white">{{ $t('home.WORKING_HOURS') }}</h4>
-              <ul class="white">
-                <li>{{ $t('home.Monday') }}-{{ $t('home.Friday') }}: {{ $t('home.09AM_05PM') }}</li>
-
-                <li>{{ $t('home.Saturday') }}: {{ $t('home.09AM_01PM') }}</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
-    <!-- End Footer -->
+     <SiteFooter />
+   
 
     <!-- <div id="preloader"></div> -->
   </div>
@@ -887,22 +746,14 @@
     
 
 <script>
-// import "../assets/vendor/jquery/jquery.min.js";
-// import "../assets/vendor/bootstrap/js/bootstrap.bundle.min.js";
-// import "../assets/vendor/jquery.easing/jquery.easing.min.js";
-// import "../assets/vendor/php-email-form/validate.js";
-// import "../assets/vendor/waypoints/jquery.waypoints.min.js";
-// import "../assets/vendor/isotope-layout/isotope.pkgd.min.js";
-// import "../assets/vendor/venobox/venobox.min.js";
-// import "../assets/vendor/owl.carousel/owl.carousel.min.js";
-// import "../assets/vendor/aos/aos.js";
 
+import SiteFooter from '../components/site/siteFooter';
 import "../assets/js/main.js";
 // import "../assets/js/js.js";
 import Button from '@/components/ButtonNavBarFind.vue';
 import SiteHeader from '../components/site/siteHeader';
 export default {
-  components: {Button, SiteHeader},
+  components: {Button, SiteHeader,SiteFooter},
   data(){
     return {
       expanded:true,
@@ -1246,7 +1097,7 @@ export default {
 }
 
 .mobile-top-div {
-  font-family: poppins, Helvetica Neue, Helvetica, Arial, sans-serif;
+  /* font-family: poppins, Helvetica Neue, Helvetica, Arial, sans-serif; */
   font-weight: 700;
   font-size: 20px;
   line-height: 40px;
@@ -1326,7 +1177,7 @@ export default {
 
     margin-bottom: 100px;
 
-    font-family: poppins, Helvetica Neue, Helvetica, Arial, sans-serif;
+    /* font-family: poppins, Helvetica Neue, Helvetica, Arial, sans-serif; */
     font-weight: 700;
     font-size: 25px;
     line-height: 40px;
@@ -1391,7 +1242,7 @@ export default {
 
     margin-bottom: 100px;
 
-    font-family: poppins, Helvetica Neue, Helvetica, Arial, sans-serif;
+    /* font-family: poppins, Helvetica Neue, Helvetica, Arial, sans-serif; */
     font-weight: 700;
     font-size: 32px;
     line-height: 40px;

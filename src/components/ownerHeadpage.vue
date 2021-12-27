@@ -8,6 +8,7 @@
           alt="Cover Image"
         />
       </div>
+      
 
       <div class="container-fluid p-63">
         <b-row class="mt-md-2 text-left">

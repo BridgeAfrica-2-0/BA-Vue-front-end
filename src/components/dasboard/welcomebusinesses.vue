@@ -101,6 +101,7 @@
                   size="sm"
                   class="b-background shadow"
                   variant="primary"
+                  @click="gotoBusiness(value.id)"
                 >
                   <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
                   <span class="btn-text">{{ $t("dashboard.Direction") }}</span>
@@ -179,6 +180,9 @@ export default {
         });
     },
 
+    gotoBusiness(id){
+      this.$router.push(`/business/${id}#about`);
+    },
     async infiniteHandler($state) {
       let url = "business/around?page=" + this.page;
 

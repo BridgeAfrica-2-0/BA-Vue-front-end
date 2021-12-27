@@ -66,7 +66,7 @@
     "Community": "Communauté",
     "Invite": "Invité",
     "See_More": "Lirela suite",
-    "Intro": "Introduction",
+    "Intro": "Intro",
     "Mokolo": "Mokolo",
     "Yaounde": "Yaoundé",
     "Cameroon": "Cameroun",
@@ -80,7 +80,7 @@
     "Select_Country": "Sélectionnez un Pays",
     "Region": "Région",
     "Modify": "Modifer",
-    "Edit_Address": "Modifier l'Address",
+    "Edit_Address": "Modifier l'entreprise",
     "Enter_your_Keywords": "Entrez vos mots-clés",
     "Start_Date": "Date du début",
     "End_Date": "Date de fin",
@@ -530,5 +530,9 @@
     "orders":"commandes",
     "my_orders":"mes commandes",
     "Operation_was_successful":"L'opération a réussi!!!",
-    "Something_went_wrong":"Quelque chose a mal tourné!!!"
+    "Something_went_wrong":"Quelque chose a mal tourné!!!",
+
+    "New_Chat":"Nouveau Chat",
+    "New_Group_Chat":"Nouveau Groupe de Discussion",
+    "description":"Description"
 }

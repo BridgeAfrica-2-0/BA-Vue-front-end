@@ -22,7 +22,7 @@
     "home":"Accueil",
     "about_us":"A propos",
     "privacy_policy":"Politique de confidentialité",
-    "contact_us":"Contactez-nous",
+    "contact_us":"Contact",
     "blog":"Blog",
     "language":"Langue",
     "English":"Anglais",
@@ -160,7 +160,7 @@
     "Not_Find_Business":"Aucun entreprise trouvée",
 
     "Attach_File":"Joindre le fichier",
-    "Post":"Poste",
+    "Post":"Publication",
     "Your":"Votre",
     "Post_are_pending_for_approval":"Vos publication(3) sont en attente d'approbation",
     "View_All":"Voir tous",
@@ -235,7 +235,7 @@
     "No_data":"Aucune donnée",
     "No_Network":"Aucun réseau",
     "Editor":"Éditeur",
-    "Post_Deleted":"Poste supprimé",
+    "Post_Deleted":"Publication supprimé",
     "Unable_to_Delete_your_Post":"Impossible de supprimer votre message",
     "Album_Deleted":"Album supprimé",
     "Editors":"Éditeurs",
@@ -308,8 +308,19 @@
     "Unable_To_Delete_Network":"Impossible de supprimer le réseau",
     "Product_Deleted_Successfuly":"Le produit a été supprimé avec succès",
     "Unable_To_Delete_Product":"Impossible de supprimer le produit",
-    "You_Are_Now_Following":"Vous êtes maintenant abonné"
+    "You_Are_Now_Following":"Vous êtes maintenant abonné",
+    "No_Member":"Aucun membre",
 
+   
+    "The_Group_Name":"Nom du groupe",
+    "Enter_your_name":"Entrez votre nom",
+
+    "Unable_to_create_your_Album":"Impossible de créer votre album",
+    "Unable_to_Create_Your_Post":"Impossible de créer votre publication",
+    "Unable_to_Create_Your_Business":"Impossible de créer votre entreprise",
+    "Unable_to_Create_Your_Network":"Impossible de créer votre réseau",
+    
+    "Unable_to_Create_Your_Feedback":"Impossible de créer votre commentaire"
    
 
 }

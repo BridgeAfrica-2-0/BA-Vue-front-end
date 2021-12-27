@@ -242,7 +242,7 @@
     "infobusinesscom": "info@business.com",
     "Open_now": "Open now",
     "10_00AM_7_00PM": "10:00AM - 7:00PM",
-    "Edit_Address": "Edit Address",
+    "Edit_Address": "Edit Business",
     "Busness_Name": "Business Name",
     "Select_Category": "Select category",
     "Keywords": "Keywords",
@@ -290,6 +290,6 @@
     "Current_City_Name": "Current city name",
     "Networks": "Networks",
     "Home_Town":"Home town",
-    "Intro":"Introduction"
+    "Intro":"Intro"
 
 }

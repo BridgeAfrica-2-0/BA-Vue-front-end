@@ -268,7 +268,7 @@
     "update_Business_profile": "update Business profile",
     "assign_roles_and_payments": "assign roles and payments",
     "Editor_can_create_posts_and_send_messages_through_inbox": "Editor can create posts and send messages through inbox",
-    "They_can_respond_to_and_delete_comments": "They_can_respond_to_and_delete_comments",
+    "They_can_respond_to_and_delete_comments": "They can respond to and delete comments",
     "Existing_Admins": "Existing Admins",
     "Existing_Editors": "Existing Editors",
     "Save_Changes": "Save Changes",
@@ -529,5 +529,8 @@
     "my_orders":"my orders",
     "Operation_was_successful":"Operation was successful!!!",
     "Something_went_wrong":"Something went wrong!!!",
-    "Enter_new_keyword":"Enter new keyword"
+    "Enter_new_keyword":"Enter new keyword",
+    "New_Chat":"New Chat",
+    "New_Group_Chat":"New Group Chat",
+    "description":"Description"
 }

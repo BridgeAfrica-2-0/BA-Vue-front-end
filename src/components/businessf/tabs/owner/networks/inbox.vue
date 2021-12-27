@@ -1169,7 +1169,7 @@
                                 </tr>
                               </div>
                               <hr />
-                              <h5>Members</h5>
+                              <h5>{{$t("general.Members")}}</h5>
                               <div v-if="allMembers">
                                 <tr
                                   v-for="(biz, index) in allMembers"
@@ -1489,7 +1489,7 @@
                                   </td>
                                 </tr>
                               </div>
-                              <h2 v-else>No Member</h2>
+                              <h2 v-else>{{$t("general.No_Member")}}</h2>
 
                               <!-- End Chats -->
                             </b-tab>
@@ -1512,7 +1512,7 @@
                               class="centralizer"
                             ></b-spinner>
                           </div>
-                          <h5>People</h5>
+                          <h5>{{$t("general.People")}}</h5>
 
                           <b-row>
                             <div v-if="allUsers">
@@ -1542,7 +1542,7 @@
                             </div>
                           </b-row>
                           <hr />
-                          <h5>Business</h5>
+                          <h5>{{$t("general.Business")}}</h5>
 
                           <b-row>
                             <div v-if="allBusiness">
@@ -1572,7 +1572,7 @@
                             </div>
                           </b-row>
                           <hr />
-                          <h5>Network</h5>
+                          <h5>{{$t("general.Network")}}</h5>
 
                           <b-row>
                             <div v-if="allNetworks">
@@ -1602,7 +1602,7 @@
                             </div>
                           </b-row>
                           <hr />
-                          <h5>Editors</h5>
+                          <h5>{{$t("general.Editors")}}</h5>
                           <b-row>
                             <div v-if="allEditors">
                               <tr

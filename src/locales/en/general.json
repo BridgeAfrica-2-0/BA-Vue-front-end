@@ -315,8 +315,17 @@
     "Unable_To_Delete_Network":"Unable To Delete Network",
     "Product_Deleted_Successfuly":"Product Deleted Successfuly",
     "Unable_To_Delete_Product":"Unable To Delete Product",
-    "You_Are_Now_Following":"You Are Now Following"
+    "You_Are_Now_Following":"You Are Now Following",
+    "No_Member":"No Member",
+    "The_Group_Name":"The Group Name",
+    "Enter_your_name":"Enter your name",
 
+    "Unable_to_create_your_Album":"Unable to create your Album",
+    "Unable_to_Create_Your_Post":"Unable to Create Your Post",
+    "Unable_to_Create_Your_Business":"Unable to Create Your Business",
+    "Unable_to_Create_Your_Network":"Unable to Create Your Network",
+    
+    "Unable_to_Create_Your_Feedback":"Unable to Create Your Feedback"
    
 
 

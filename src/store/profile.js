@@ -656,6 +656,16 @@ export default {
         });
     },
 
+    UnBlock({ commit }, blockData) {
+      console.log("UnBlock");
+      return axios
+        .post(`profile/${blockData}`)
+        .then(({ data }) => {
+          console.log(data);
+          return data;
+        });
+    },
+
 
 
 

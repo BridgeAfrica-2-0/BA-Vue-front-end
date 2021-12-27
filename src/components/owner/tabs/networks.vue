@@ -983,6 +983,7 @@ return cat;
     },
     // Action handler
     action() {
+      console.log(this.createdNetwork);
       const fd = new FormData();
       fd.append("business_id", "1");
       fd.append("name", this.createdNetwork.name);

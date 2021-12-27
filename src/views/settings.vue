@@ -149,7 +149,7 @@
                             <br />
                                <div>
                               <b-button variant="ligth" class="btn btn-primary button" v-b-modal.modal-10>{{$t("settings.Edit")}} </b-button>
-                              <!-- <button class="btn " v-b-modal.modal-10>Edit</button> -->
+                             
                               <b-modal id="modal-10" title="$t('settings.Edit_your_information_here')"  hide-footer>
                                
                                   <form>
@@ -181,39 +181,29 @@
                                         
                                       </div>
                                        <div class="mb-3">
-                                        <!-- <label class="form-label">country</label>
-                                        <input type="text" class="form-control"  v-model="getUserInfos.country.name"> -->
                                         {{$t("settings.Country")}} 
                                          <b-form-select v-model="selectedCounty" :options="country" @change="getRegion"></b-form-select>
                                        
                                       </div>
                                        <div class="mb-3">
-                                        <!-- <label class="form-label">country</label>
-                                        <input type="text" class="form-control"  v-model="getUserInfos.country.name"> -->
                                         {{$t("settings.Region ")}}
                                          <b-form-select v-model="selectedRegion" :options="region" @change="getDivision" required></b-form-select>
                                        
                                       </div>
 
                                        <div class="mb-3">
-                                        <!-- <label class="form-label">country</label>
-                                        <input type="text" class="form-control"  v-model="getUserInfos.country.name"> -->
                                         {{$t("settings.Division")}} 
                                          <b-form-select v-model="selectedDivision" :options="division" @change="getMunicipality" required></b-form-select>
                                        
                                       </div>
 
                                       <div class="mb-3">
-                                        <!-- <label class="form-label">country</label>
-                                        <input type="text" class="form-control"  v-model="getUserInfos.country.name"> -->
                                         {{$t("settings.Municipality")}} 
                                          <b-form-select v-model="selectedMunicipality" :options="municipality" @change="getNeighbor" required></b-form-select>
                                        
                                       </div>
 
                                       <div class="mb-3">
-                                        <!-- <label class="form-label">country</label>
-                                        <input type="text" class="form-control"  v-model="getUserInfos.country.name"> -->
                                         {{$t("settings.Neighbourhood")}} 
                                          <b-form-select v-model="selectedNeighbor" :options="neighbor" required ></b-form-select>
                                        
@@ -245,142 +235,14 @@
               </b-tab>
 
               <b-tab :title="$t('settings.Account_Type') ">
-                  <Website :profileId="getUserInfos.id"/>
-                <!-- <b-card class="mt-15 cent">
-                  <div class="text-center">
-                    <span class="username text-center mb-3">
-                      <b> {{ $t("settings.Upgrade_Your_Business_Account") }} </b>
-                    </span>
-                  </div>
-
-                  <div class="container">
-                    <span class="text text-left">
-                      <br />
-                      {{ $t("settings.Make_More_Money") }}
-                    </span>
-                  </div>
-                  <img src="@/assets/img/buynow.png" class="buynow" alt="buy now" />
-                  <div class="container text-center">
-                    <img src="@/assets/img/fruits.jpg" class="img-fluid banner" alt="Kitten" />
-
-
-                    <b-button variant="primary" class="text-center mt-3" @click="redirection">
-                      {{ $t("settings.Upgrade_Now") }}
-
-                    </b-button>
-                  </div>
-                </b-card> -->
+                <Website :profileId="getUserInfos.id"/>
               </b-tab>
 
               <b-tab :title="$t('settings.Payment')">
-                <b-card-text class="mt-3 text cent">
-                  <!-- <h1 class="username">{{ $t("settings.Chose_Default_Payment_Method") }}</h1>
-
-                   <b-form-group class="mb-0" v-slot="{ ariaDescribedby }">
-                    <b-form-radio-group
-                      class="pt-2 text"
-                      :options="['MTN Mobile Money']"
-                      :aria-describedby="ariaDescribedby"
-                    ></b-form-radio-group>
-                  </b-form-group>
-
-                  <b-form-group class="mb-0" v-slot="{ ariaDescribedby }">
-                    <b-form-radio-group
-                      class="pt-2 text"
-                      :options="['Orange Money']"
-                      :aria-describedby="ariaDescribedby"
-                    ></b-form-radio-group>
-                  </b-form-group> 
-
-                  <b-form-group label="select one" v-slot="{ ariaDescribedby }"> 
-                    <b-form-radio v-model="selected" :aria-describedby="ariaDescribedby" name="some-radios" value="MTN" class="my-2">MTN Mobile Money</b-form-radio>
-                    <b-form-radio v-model="selected" :aria-describedby="ariaDescribedby" name="some-radios" value="ORANGE">Orange Money</b-form-radio>
-                   <button class=" btn btn-primary my-4" @click="changePayment">{{$t("settings.Update")}}</button>
-                  
-                  </b-form-group> -->
-                </b-card-text>
-                  <Payment :profileId="getUserInfos.id"/>
-                
+                <Payment :profileId="getUserInfos.id"/>
               </b-tab>
                  
               <b-tab title="Blocking">
-                <!-- <b-card-text class="mt-3 text">
-                  <h3 class="username">{{ $t('settings.Change_current_password') }}</h3>
-                  <br />
-
-                  <div class="b-bottom">
-                    <b-container>
-                      <b-form-group
-                        label-cols-lg="3"
-                        :label="`${$t('settings.Current_password')}`"
-                        label-size="md"
-                        label-class=" text"
-                        class="mb-0"
-                      >
-
-                        <b-form-input
-                          id="bname"
-                          placeholder=""
-                          required
-                          v-model="currentPass"
-                        ></b-form-input>
-
-                      </b-form-group>
-                    </b-container>
-                  </div>
-
-                  <br />
-
-                  <div class="b-bottom">
-                    <b-container>
-                      <b-form-group
-                        label-cols-lg="3"
-                        :label="`${$t('settings.New_password')}`"
-                        label-size="md"
-                        label-class=" text"
-                        class="mb-0"
-                      >
-
-                        <b-form-input
-                          id="bname"
-                          placeholder=""
-                          required
-                          v-model="newPass"
-                        ></b-form-input>
-
-                      </b-form-group>
-                    </b-container>
-                  </div>
-
-                  <br />
-
-                  <div class="b-bottom">
-                    <b-container>
-                      <b-form-group
-                        label-cols-lg="3"
-                        :label="`${$t('settings.Confirm_password')}`"
-                        label-size="md"
-                        label-class="text"
-                        class="mb-0"
-                      >
-
-                        <b-form-input
-                          id="bname"
-                          placeholder=""
-                          required
-                          v-model="newPass1"
-                        >
-                        
-                        </b-form-input> <br>
-                        <p>{{message}}</p>
-                         <br> <button class=" btn btn-primary" @click="changePassword">{{$t("settings.change")}}</button>
-
-                      </b-form-group>
-                    </b-container>
-                  </div>
-
-                  <br /> 
-                  </b-card-text>   -->
                 <Blocking :profileId="getUserInfos.id"/>
               </b-tab> 
               

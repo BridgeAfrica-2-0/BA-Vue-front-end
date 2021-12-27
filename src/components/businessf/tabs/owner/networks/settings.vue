@@ -53,7 +53,7 @@
           label-class="font-weight-bold pt-0"
           class="mb-0"
         >
-          <VuePhoneNumberInput v-model="editnetworkinfo.primary_phone" />
+          <VuePhoneNumberInput v-model="editnetworkinfo.primary_phone" default-country-code="CM"/>
         </b-form-group>
       </b-container>
     </div>
@@ -67,7 +67,7 @@
           label-class="font-weight-bold pt-0"
           class="mb-0"
         >
-          <VuePhoneNumberInput v-model="editnetworkinfo.secondary_phone" />
+          <VuePhoneNumberInput v-model="editnetworkinfo.secondary_phone" default-country-code="CM"/>
         </b-form-group>
       </b-container>
     </div>

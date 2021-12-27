@@ -16,7 +16,7 @@
     </b-row>
     <br />
 
-        <CommunityMembers  :searchh="keywords" ref="search" type="Following"  />
+        <CommunityMembers  @BlockUser="BlockUser" :searchh="keywords" ref="search" type="Following"  />
      
   </div>
 </template>
@@ -36,6 +36,17 @@ export default {
   computed: {
    
   },
+  methods: {
+    BlockUser(id) {
+      console.log(id);
+      let dataInfo = {
+        id: id,
+        refernce: "user",
+        type: "following",
+      };
+      this.$emit('BlockUser', dataInfo);
+    },
+  }
 
 };
 </script>

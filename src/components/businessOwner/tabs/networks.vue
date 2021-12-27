@@ -49,13 +49,8 @@
                     :more-str="$t('search.read_more')"
                     :text="network.description"
                     link="#"
-<<<<<<< HEAD
                     :less-str="$t('search.read_less')"
                     :max-chars="200"
-=======
-                    less-str="read less"
-                    :max-chars="20"
->>>>>>> main
                   ></read-more>
              
                 </p>

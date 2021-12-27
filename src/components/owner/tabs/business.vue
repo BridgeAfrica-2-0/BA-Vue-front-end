@@ -15,7 +15,7 @@
               <p class="textt">
                 <strong class="title">
                   <router-link :to="'business/' + item.id">
-                    {{ item.name }} ++
+                    {{ item.name }} 
                   </router-link>
                 </strong>
                 <br />
@@ -64,6 +64,27 @@
                 class="mt-2 text-center"
               >
                 <b-button
+                  v-if="show == 'Follower'"
+                  disabled
+                  block
+                  size="sm"
+                  class="b-background shadow"
+                  :id="'followbtn' + item.id"
+                  :class="item.is_follow !== 0 && 'u-btn'"
+                  variant="primary"
+                 
+                >
+                  <i
+                    class="fas fa-lg btn-icon"
+                    :class="
+                      item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'
+                    "
+                  ></i>
+                  <span class="btn-com">Community</span>
+                </b-button>
+
+                <b-button
+                  v-else
                   block
                   size="sm"
                   class="b-background shadow"
@@ -106,6 +127,7 @@
                   size="sm"
                   class="b-background shadow"
                   variant="primary"
+                  @click="gotobusiness(item.id)"
                 >
                   <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
                   <span class="btn-text">Direction</span>
@@ -150,6 +172,9 @@ export default {
   },
 
   computed: {
+    show(){
+      return this.$route.name;
+    },
     old_businesses() {
       if (this.type == "Follower") {
         return this.$store.state.businessOwner.BcommunityFollower
@@ -173,6 +198,9 @@ export default {
       if (number >= 1000) {
         return number / 1000 + "K";
       } else return number;
+    },
+    gotobusiness(id) {
+      this.$router.push(`business/${id}#about`);
     },
 
     infiniteHandler($state) {

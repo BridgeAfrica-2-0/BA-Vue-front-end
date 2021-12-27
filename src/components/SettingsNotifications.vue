@@ -10,16 +10,16 @@
         aria-controls="notifs"
         @change="toggleAll"
       >
-        Select All
+        {{ $t("general.Select_All") }}
       </b-form-checkbox>
       <div>
         <b-button class="btn-mark-as cursor-pointer mr-2" @click="handleMarkAsRead" variant="primary">
           <b-spinner v-if="isMarkAsRead" small></b-spinner>
-          Mark as Read</b-button
+          {{ $t("general.Mark_as_Read") }}</b-button
         >
         <b-button class="btn-mark-as cursor-pointer" @click="handleDelete" variant="outline-primary">
           <b-spinner v-if="isDelete" small></b-spinner>
-          Delete</b-button
+          {{ $t("general.Delete") }}</b-button
         >
       </div>
     </div>
@@ -64,9 +64,9 @@
       </div>
     </div>
     <infinite-loading @infinite="infiniteHandler">
-      <div slot="no-more">No More Notifications</div>
+      <div slot="no-more">{{ $t("general.No_More_Notifications") }}</div>
       <div slot="no-results">
-        <b-alert show variant="secondary">No Notifications</b-alert>
+        <b-alert show variant="secondary">{{ $t("general.") }}No_Notifications</b-alert>
       </div>
     </infinite-loading>
   </div>

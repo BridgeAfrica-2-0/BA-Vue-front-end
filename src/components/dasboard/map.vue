@@ -3,7 +3,7 @@
     <b-card class=" border shadow pr-3" style="height:350px">
       <h6 class="title">
         <fas-icon class="icons" :icon="['fas', 'map-marker-alt']" size="lg" />
-        <b>{{$t('dashboard.get_direction').toUpperCase()}} </b>
+        <b>  {{$t('dashboard.get_direction').toUpperCase()}} </b>
       </h6>
 
       <div>

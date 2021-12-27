@@ -575,7 +575,7 @@
         <b-col cols="12" md="4" lg="4" xl="3" class="showmap" ref="mapblock">
           <div id="map" style="margin-top: 20px" class="">
             <div v-if="selectedId == '1'">
-              <businessmap :businessPage="businessPage" />
+              <businessmap :businesses="businesses.data" />
             </div>
             <div v-if="selectedId == '4'">
               <mapbox :products="allproducts.data" />
@@ -1798,10 +1798,10 @@ export default {
       };
 
       this.strategyForPlaceHolder = {
-        2: () => "Find User",
-        5: () => "Find Post",
-        0: () => "All",
-        1: () => "Find Businesses",
+        2: () => this.$t('general.Find_User'),
+        5: () => this.$t('general.Find_Post'),
+        0: () => this.$t('general.All'),
+        1: () => this.$t('general.Find_Businesses'),
       };
 
       this.strategyForComponent = {
@@ -1811,9 +1811,9 @@ export default {
       };
 
       this.strategyForNotFoundComponentTitle = {
-        2: () => "Not Find users",
-        5: () => "Not Find posts",
-        1: () => "Not Find Business",
+        2: () => this.$t('general.Not_Find_users'),
+        5: () => this.$t('general.Not_Find_posts'),
+        1: () => this.$t('general.Not_Find_Business'),
       };
 
       this.changePlaceHolder();

@@ -1,13 +1,7 @@
 <template>
-  <b-container>
+  <b-container class="container-fluid">
     <b-container>
-      <p class="text">
-        {{
-          $t(
-            "businessowner.Select_a_payment_method_for_your_bridget_africa_account"
-          )
-        }}
-      </p>
+      <p class="text">{{$t("businessowner.Select_a_payment_method_for_your_bridget_africa_account")}}</p>
     </b-container>
 
     <div class="b-bottom">
@@ -146,9 +140,6 @@
           </div>
         </div>
       </b-overlay>
-      <!-- <div v-else class="text-center">
-            <h3><b>🥳❗Transaction Completed❗🥳</b></h3>
-          </div> -->
     </b-modal>
   </b-container>
 </template>
@@ -156,6 +147,7 @@
 <script>
 export default {
   name: "payment",
+  props: ['profileId'],
   data() {
     return {
       url: null,
@@ -170,13 +162,10 @@ export default {
       PaymentForm: {
         subscribe: "type",
         phone: "",
-        operator: "",
-        package_id: "null",
-        type: "null",
+        operator: ""
       },
 
       show: false,
-      congratulation: false,
     };
   },
 
@@ -187,7 +176,8 @@ export default {
   },
 
   mounted(){
-    this.url = this.$route.params.id !== undefined ? this.$route.params.id : this.$router.push('notFound');
+    console.log("profileId", this.profileId)
+    this.url = this.$route.params.id !== undefined ? this.$route.params.id : this.profileId;
     this.DefaultPayment();
   },
 
@@ -222,29 +212,27 @@ export default {
       this.show = true;
       console.log("PaymentForm:", this.PaymentForm);
       let formData = new FormData();
-      // formData.append("subscribe", this.PaymentForm.subscribe)
+      formData.append("payement_method", this.PaymentForm.operator);
       formData.append("phone", this.PaymentForm.phone);
-      formData.append("operator", this.PaymentForm.operator);
-      // formData.append("package_id", this.PaymentForm.package_id)
       this.$store
         .dispatch("businessAccountType/confirmPayment", {
-          path: `settings/packages/${this.url}`,
-          data: formData,
+          path: `update-payement-method/${this.url}`,
+          formData: formData,
         })
         .then(({ data }) => {
           console.log(data);
           console.log("ohh yeah");
+          this.AcRequestPayment = false;
           this.show = false;
-          this.congratulation = true;
-          this.getAccounts();
+          this.DefaultPayment();
           this.flashMessage.show({
             status: "success",
             message: this.$t("businessowner.Payment_Complete"),
           });
         })
         .catch((err) => {
+          this.AcRequestPayment = false;
           this.show = false;
-          this.congratulation = false;
           console.log({ err: err });
           this.flashMessage.show({
             status: "error",

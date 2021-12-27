@@ -36,7 +36,7 @@
     "Add_Movie": "Add Movie",
     "PhotoVideo": "Photo/Video",
     "Add_Hyperlink": "Add Hyperlink",
-    "Attach_File": "Attach File",
+    "Attach_File": "  Attach File",
     "Post": "Post",
     "Update_Post": "Update Post",
     "profileNamePost": "profileNamePost",
@@ -529,5 +529,4 @@
     "my_orders":"my orders",
     "Operation_was_successful":"Operation was successful!!!",
     "Something_went_wrong":"Something went wrong!!!"
-  
 }

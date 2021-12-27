@@ -702,14 +702,9 @@ export default {
       await axios.get('userIntro')
 
         .then(response => {
-          console.log("load user Intro Post test1 successsss +++");
-          console.log(response);
           if (!response) {
             throw "Cannot Found User Post Intro";
           }
-          console.log(context);
-          console.log(payload);
-          console.log("Load User Intro Post test3 blec +++");
           response_ = response.data[0];
           context.commit("editPostUserIntro", response.data.data);
         })
@@ -786,19 +781,6 @@ export default {
       return response_;
     },
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     async loadUserProfileAbout({ commit }, payload) {
       console.log(payload, "load user Profile About start +++++");
 
@@ -836,9 +818,6 @@ export default {
         });
       return response_;
     },
-
-
-
 
     async loadUserBasicInfosBirthDate(context, payload) {
       console.log(payload);

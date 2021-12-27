@@ -15,7 +15,10 @@
             </b-col>
             <b-col md="5" cols="7" lg="7" xl="5" sm="5">
               <p class="textt">
-                <strong class="net-title"> {{ item.name }} </strong> <br />
+                <router-link :to="{name: 'Membar Network Follower', params: {id:item.id}}">
+                  <strong class="title">{{ item.name }}</strong>
+                </router-link>
+                <br />
                 {{ item.category }}
                 <br />
                 {{ item.followers }} {{ $t("businessowner.Community") }} <br />
@@ -26,8 +29,23 @@
                 </span>
                 <br />
 
-                {{ item.about_network }}
-                <b-link>{{ $t("businessowner.Read_More") }}</b-link>
+                <read-more
+                  more-str="read more"
+                  class="readmore"
+                  :text="item.about_network"
+                  link="#"
+                  less-str="read less"
+                  :max-chars="50"
+                >
+                </read-more>
+                
+                <b-icon
+                  font-scale="1"
+                  icon="exclamation-octagon"
+                  v-b-tooltip.hover
+                  title="Block This Network"
+                  variant="danger"
+                ></b-icon>
               </p>
             </b-col>
 
@@ -63,7 +81,23 @@
                   </b-col>
 
                   <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2">
+                    <b-button
+                      block
+                      size="sm"
+                      :id="'followbtn'+item.id"
+                      class="b-background flexx pobtn shadow mr-lg-3 mr-xl-3"
+                      :class="item.is_follow !== 0 && 'u-btn'"
+                      variant="primary"
+                      @click="networkJoin(item)"
+                    >
+                      <i
+                        class="fas fa-lg btn-icon"
+                        :class="item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"
+                      ></i>
+                        <span class="btn-com">Join</span>
+                    </b-button>
                   </b-col>
+
                 </b-row>
               </div>
             </b-col>
@@ -116,6 +150,21 @@ export default {
   },
 
   methods: {
+
+    networkJoin: async function(item){
+      const status = item.is_follow
+
+      const request = !status ? await this.$repository.share.jointNetwork({id: item.id , type: "network"}) : await this.$repository.share.removeNetwork({id: item.id , type: "network"})
+      
+      if (request.success){
+        item = Object.assign(item, {is_follow: status ? 0 : 1})
+        this.flashMessage.show({
+          status: "success",
+          title: request.data,
+        });
+      }
+    },
+
     cta(data) {
       console.log(data);
       this.$store.commit("businessChat/setSelectedChat", data);

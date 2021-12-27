@@ -1,7 +1,7 @@
 .<template>
   <div id="app" class="" ref="formContainer">
     <div id="flashmessage">
-      <FlashMessage/> 
+      <FlashMessage />
     </div>
 
     <transition
@@ -13,11 +13,12 @@
     >
       <router-view />
     </transition>
-  
   </div>
 </template>
 <script>
 // import { Redis } from "@/mixins";
+
+import { mapGetters, mapActions } from "vuex";
 export default {
   // mixins: [Redis],
 
@@ -26,8 +27,35 @@ export default {
       prevHeight: 0,
     };
   },
-  
+
+  computed: mapGetters({
+    auth: "auth/profilConnected",
+  }),
+
+  watch: {
+    "$store.state.auth.profilConnected": function (newProfile) {
+      const uuid = "network" === newProfile.user_type ? newProfile.id : null
+      
+      this.getNetworkAndBusiness(
+        "network" === newProfile.user_type ? newProfile.id : null
+      );
+    },
+  },
+
   methods: {
+    ...mapActions({
+      setNetworks: "social/FIND_USER_NETWORK",
+      setBusiness: "social/FIND_USER_BUSNESS",
+    }),
+
+    getNetworkAndBusiness: async function (uuid) {
+      let request = await this.$repository.share.getNetworkAndBusiness(uuid);
+      if (request.success) {
+        this.setBusiness(request.data.business);
+        this.setNetworks(request.data.network);
+      }
+    },
+
     beforeLeave(element) {
       this.prevHeight = getComputedStyle(element).height;
     },

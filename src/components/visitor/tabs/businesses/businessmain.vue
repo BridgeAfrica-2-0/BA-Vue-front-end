@@ -43,7 +43,7 @@
             <b-col>
               <b-button class=" community  mt-2" size="sm">
                 <b-icon icon="plus"></b-icon>
-                Community</b-button
+                {{ $t('general.Community') }}</b-button
               >
             </b-col>
           </b-row>

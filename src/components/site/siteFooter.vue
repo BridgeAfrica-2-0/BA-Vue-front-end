@@ -83,11 +83,11 @@
           <div class="row">
             <div class="col-lg-3 col-md-6 footer-contact">
               <div class="row">
-                <div class="col-6">
-                  <img src="../..//assets/img/logobr.png" width="200px" alt="" />
+                <div class="col-8">
+                  <img src="../../assets/img/bavlogo.png" width="200px" class="size" alt="" />
                 </div>
 
-                <div class="col-6 bblogo">Bridge Africa</div>
+              
               </div>
 
               <div class="social-links mt-3 text-left">
@@ -169,19 +169,19 @@ export default {};
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 .font-arvo {
-  font-family: 'Arvo', serif;
+  /* font-family: 'Arvo', serif; */
 }
 .font-rob {
-  font-family: 'Roboto', Sans-serif;
+  /* font-family: 'Roboto', Sans-serif; */
 }
 .font-poppin {
-  font-family: 'Poppins', sans-serif;
+  /* font-family: 'Poppins', sans-serif; */
 }
 .font-source {
-  font-family: 'Source Sans Pro', sans-serif;
+  /* font-family: 'Source Sans Pro', sans-serif; */
 }
 .font-mont {
-  font-family: 'Montserrat', sans-serif;
+  /* font-family: 'Montserrat', sans-serif; */
 }
 .footer {
   margin-top: 2px;
@@ -209,5 +209,12 @@ export default {};
   .footer-icons-div {
     width: 100%;
   }
+
+
+}
+
+.size{
+  height: 80px;
+  width: 300px;
 }
 </style>

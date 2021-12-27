@@ -13,7 +13,11 @@
             </div>
             <div class="flx100">
               <p class="textt">
-                <strong class="title"> {{ item.name }} </strong> <br />
+                <strong class="title"> 
+                  <router-link :to="'/business/' + item.id">
+                    {{ item.name }} 
+                  </router-link>
+                </strong> <br />
 
                 <span v-for="cat in item.category" :key="cat.name">
                   {{ cat.name }}
@@ -97,6 +101,7 @@
                   size="sm"
                   class="b-background shadow"
                   variant="primary"
+                  @click="gotoBusiness(item.id)"
                 >
                   <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
                   <span class="btn-text">{{
@@ -158,6 +163,9 @@ export default {
   },
 
   methods: {
+    gotoBusiness(id) {
+      this.$router.push(`/business/${id}#about`);
+    },
     count(number) {
       if (number >= 1000000) {
         return number / 1000000 + "M";

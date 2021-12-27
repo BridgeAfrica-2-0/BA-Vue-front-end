@@ -14,6 +14,7 @@
             </span>
           </span>
           <!-- User Post Intro-->
+          <!-- {{info}} -->
           <b-card-text class="text-left username intro-head">
             <p>
               <b-icon icon="briefcase-fill" class="icon-size" variant="primary"></b-icon>
@@ -37,7 +38,7 @@
               <b-icon icon="house-fill" class="icon-size" variant="primary"></b-icon>
               {{ $t('profilefollower.Home_Town') }} :
               <span class="text">
-                {{ info.user.neighbor }}
+                {{ info.user.home_town }}
               </span>
             </p>
             <p>
@@ -50,7 +51,8 @@
               <b-icon icon="people-fill" class="icon-size" variant="primary"></b-icon>
               {{ $t('profilefollower.Community') }}:
               <span class="text">
-                {{ nFormatter(total.total_community) }}
+                
+                {{ nFormatter(info.user.followers) }}
               </span>
             </p>
           </b-card-text>
@@ -148,11 +150,12 @@ export default {
   },
   computed: {
 
+
     showEdit(){
       return this.$route.name
     },
     info: function() {
-      return this.$store.getters['profile/getUserPostIntro'];
+      return this.$store.getters['follower/getUserPostIntro'];
     },
 
     total() {

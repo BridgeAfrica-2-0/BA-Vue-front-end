@@ -2,7 +2,7 @@
 	<div>
 		<b-dropdown-item-button @click="showModal">
 			<b-icon
-				variant=""
+				variant="primary"
 				class="mr-2"
 				icon="trash-fill"
 				aria-hidden="true"

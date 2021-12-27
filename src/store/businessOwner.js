@@ -227,6 +227,7 @@ export default {
       return state.peopleFollowers;
     },
   },
+
   mutations: {
     //set media data
     updateAlbum(state, payload) {
@@ -428,16 +429,17 @@ export default {
         });
     },
 
-    async loadUserBusinessAbout(context, payload) {
+    async loadUserBusinessAbout({ commit }, payload) {
       let response_ = null;
       const id_Business = 2;
-       await axios.get("business/info" +
+      await axios.get("business/info" +
         "/" +
         payload.business_id
-        
-        
+
+
       )
-        .then(response => { console.log("----",response)
+        .then(response => {
+          console.log("----", response)
           if (response.status !== 200 && response.status !== 201) {
             throw 'Error from the server';
           }
@@ -447,13 +449,13 @@ export default {
           if (!response) {
             throw new Error('Error for loading Business About +++++');
           }
-          context.commit('updateUserBusinessAbout', {
+          commit('updateUserBusinessAbout', {
             businessAbout: response.data,
           });
           response_ = response;
         })
         .catch(error => { });
-     
+
     },
 
 

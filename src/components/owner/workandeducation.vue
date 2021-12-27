@@ -14,7 +14,6 @@ export default {
   components: {
     WorkPlace,
     Education,
-   // Profession
   }
 };
 </script>

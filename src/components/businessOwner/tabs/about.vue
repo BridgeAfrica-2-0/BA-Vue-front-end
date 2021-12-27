@@ -4,7 +4,7 @@
     <b> {{ $t("businessowner.About") }} </b>
     
     <hr /> 
-    <!-- {{business_about}} -->
+    
     <b-card>
       <div class="mb-3">
         <mapbox :coordinates="[business_about.lng, business_about.lat]" />
@@ -12,6 +12,9 @@
       
       <b-card>
         <b-row v-if="loading">
+
+        
+         
           <b-col>
             <!-- <div class="edit">
                 <b-icon
@@ -32,6 +35,7 @@
                 <b-icon icon="pencil-fill" variant="primary"></b-icon>
               </div>
             <h4 class="mb-4 text-center username">
+              <b-icon icon="info-circle-fill" class="primary mr-2"></b-icon>
               {{ business_about.name }}
             </h4>
             <p class="text-justify text">
@@ -41,7 +45,8 @@
           <b-col>
             <b-card-text>
               <div class="edit" v-b-modal.addressBusinessModal>
-                <b-icon
+                <b-icon 
+                v-if="showPen != 'BusinessFollower'"
                   icon="pencil-fill"
                   variant="primary"
                   @click="load"
@@ -53,24 +58,23 @@
                   icon="briefcase-fill"
                   class="primary icon-size"
                 ></b-icon>
-                <!-- <span
+                <span
                   v-for="category in business_about.category"
                   :key="category.id"
                   >{{ category.name }},
-                </span> -->
-                <span>{{ business_about.name }}</span>
+                </span>
+                <!-- <span>{{ business_about.name }}</span> -->
               </p>
               <p>
                 <b-icon icon="search" class="primary icon-size"></b-icon>
-                {{business_about.keywords[0]}}
+                {{business_about.name}}
               </p>
               <p>
                 <b-icon icon="geo-alt-fill" class="primary icon-size"></b-icon>
-                {{ business_about.city }}
-                <!-- <span v-if="business_about.country">
-                  {{ business_about.address }}, {{ business_about.city }},
-                {{ business_about.country[0].name }}
-                </span> -->
+               <span
+              >{{ business_about.address }}, {{ business_about.city }},
+              {{ business_about.country }}</span
+            >
               </p>
               <p>
                 <b-icon icon="link" class="primary icon-size"></b-icon>
@@ -96,7 +100,7 @@
               </p>
               <p>
                 <b-icon icon="clock" class="primary icon-size"></b-icon>
-                <b-link> Open now </b-link>
+                <b-link> Open now  </b-link>
                 <br />
                 <b-dropdown size="sm" variant="transperent">
                   <template #button-content>
@@ -626,35 +630,7 @@ export default {
         { day: "Sunday", opening_time: null, closing_time: null, check: false },
       ],
       business_about: {
-        name: "TONTON LA FORCE",
-        logo_path: "http://localhost:8000/storage",
-        category: "Hourse Marketing",
-        keywords: null,
-        language: null,
-        location_description:
-          "Tempore quo soluta voluptates quis. Doloremque autem minus ut nisi molestias maiores cum. Et assumenda velit expedita et et sint sed in.",
-        website: null,
-        community: 6,
-        phone: null,
-        email: null,
-        business_open_hours: [
-          {
-            day: "monday",
-            opening_time: "09:05:12",
-            closing_time: "15:06:18",
-          },
-          {
-            day: "tuesday",
-            opening_time: "07:05:38",
-            closing_time: "14:05:43",
-          },
-        ],
-        region: null,
-        address: null,
-        city: null,
-        country: null,
-        lat: -56.200329,
-        lng: -6.249487,
+     
       },
       business_about_input: {
         name: "TONTON LA FORCE",
@@ -720,14 +696,16 @@ export default {
       canCancel: true,
       onCancel: this.onCancel,
       color: "#e75c18",
-    });
+    }); console.log("èèèè--- context", this.business_about_input)
     this.$store
       .dispatch("businessOwner/loadUserBusinessAbout", {
-        business_abobusiness_id: this.business_about_input,
+        // business_abobusiness_id: this.business_about_input,
         business_id: this.$route.params.id,
       })
       .then((response) => { 
-
+          this.business_about = JSON.parse(
+          JSON.stringify(this.$store.getters["businessOwner/getBusinessAbout"])
+        );
         
         this.dayOfWorks = this.initialize(this.dayOfWorks);
       })
@@ -738,7 +716,7 @@ export default {
         this.business_about = JSON.parse(
           JSON.stringify(this.$store.getters["businessOwner/getBusinessAbout"])
         );
-        console.log(this.business_about);
+        console.log("-------",this.business_about);
         this.loading = true;
         loader.hide();
       });
@@ -750,6 +728,9 @@ export default {
     this.editBusiness();
   },
   computed: {
+    showPen(){
+      return this.$route.name;
+    },
     hoursOpen() {
       console.log();
       return this.openNow === null

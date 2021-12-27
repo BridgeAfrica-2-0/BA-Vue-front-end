@@ -45,10 +45,11 @@
 					<div class="d-flex w-100 justify-content-between align-items-center">
 						<b-button class="btn-custom mr-3" type="submit" variant="primary">
 							<!-- <b-spinner v-if="loading" small variant="light"></b-spinner> -->
-							Save</b-button
+							{{$t('general.Save')}}</b-button
 						>
 						<b-button class="btn-custom" @click="hideModal" variant="success"
-							>Cancel</b-button
+							>{{$t('general.Cancel')}}</b-button
+						
 						>
 					</div>
 				</div>

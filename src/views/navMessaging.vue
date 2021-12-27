@@ -844,7 +844,7 @@
                               selectedChat({
                                 type: 'user',
                                 chat: user,
-                                id: user.id
+                                id: user.id,
                               })
                             "
                           >
@@ -1000,6 +1000,7 @@ export default {
     if (this.chatList.length < 0) {
       this.getChatList({ type: "user" });
     }
+    console.log("call to action:", this.ctaSelected);
     // this.getChatList({ type: "user" });
   },
   created() {
@@ -1014,8 +1015,9 @@ export default {
       } else if (this.tabIndex == 2) {
         this.getChatList({ type: "network" });
       } else {
-        this.tabIndex = 0;
+        // this.tabIndex = 0;
         this.getChatList({ type: "user" });
+        console.log("testing...");
       }
 
       console.log("There");
@@ -1024,6 +1026,7 @@ export default {
     } else {
       this.tabIndex = 0;
       this.getChatList({ type: "user" });
+      console.log("Here testing...");
     }
 
     this.socketListenners();
@@ -1115,7 +1118,6 @@ export default {
       // this.$store.dispatch("businessChat/GET_BIZS");
     },
     getChatList(data) {
-      console.log("List");
       this.chatSelected.active = false;
       this.newMsg = false;
       this.$store
@@ -1124,6 +1126,7 @@ export default {
           console.log("->[Data logged]<-");
         })
         .catch(() => console.log("error"));
+      console.log("testing...");
 
       // this.scrollToBottom();
     },
@@ -1196,8 +1199,6 @@ export default {
       } else {
         this.histUserToUser(receiver);
       }
-
-      console.log("YYYYY");
 
       this.newMsg = false;
       this.chatSelected = {

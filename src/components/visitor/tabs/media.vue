@@ -3,12 +3,12 @@
     <b-alert show class="primary-bg">
       <b-icon icon="image" class="purple"></b-icon>
       <b>
-        Media
+       {{$t('general.Media')}} 
       </b></b-alert
     >
     <b-tabs content-class="mt-3">
-      <b-tab title="Posts" active><MediaPost /></b-tab>
-      <b-tab title="Albums"><Album /></b-tab>
+      <b-tab :title="$t('general.Posts')" active><MediaPost /></b-tab>
+      <b-tab :title="$t('general.Albums')"><Album /></b-tab>
     </b-tabs>
   </div>
 </template>

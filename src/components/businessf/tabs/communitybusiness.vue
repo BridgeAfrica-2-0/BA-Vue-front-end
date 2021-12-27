@@ -135,7 +135,7 @@
                   variant="primary"
                 >
                   <i class="fas fa-user-plus fa-lg btn-icon"></i>
-                  <span class="btn-com">Community</span>
+                  <span class="btn-com">{{$t("general.Community")}}</span>
                 </b-button>
               </b-col>
 

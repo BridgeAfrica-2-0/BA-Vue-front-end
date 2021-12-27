@@ -992,7 +992,7 @@
             <div class="new-msg back-image" style="margin-right: 17px">
               <div class="info-nav">
                 <b-row>
-                  <b-col class="col-1 mt-3"> To </b-col>
+                  <b-col class="col-1 mt-3"> {{$t('general.To')}} </b-col>
                   <b-col>
                     <b-form-input
                       id="textarea"
@@ -1404,10 +1404,7 @@
                               <!-- End Chats -->
                             </b-tab>
 
-                            <b-tab
-                              :title="$t('general.Editors')"
-                              @click="getEditors()"
-                            >
+                            <b-tab :title="$t('general.Editor')" @click="getEditors()">
                               <div v-if="loader" class="text-center">
                                 <b-spinner
                                   variant="primary"
@@ -1460,7 +1457,7 @@
                             overflow-x: hidden !important;
                           "
                         >
-                          <h2>All</h2>
+                          <h2>{{$t("general.All")}}</h2>
                           <br />
                           <div v-if="loader" class="text-center">
                             <b-spinner

@@ -70,7 +70,7 @@
       </div>
 
       <p class="fs-12" v-if="proccesEdit">
-        <a href="#" @click.prevent="toggle">Cancel</a>
+        <a href="#" @click.prevent="toggle">{{ $t('network.Cancel') }}</a>
       </p>
 
       <!-- End Edit message -->
@@ -212,13 +212,13 @@ export default {
         this.flashMessage.show({
           status: "success",
           blockClass: "custom-block-class",
-          message: "Comment Deleted",
+          message: this.$t('general.Comment_Deleted'),
         });
       } else {
         this.flashMessage.show({
           status: "error",
           blockClass: "custom-block-class",
-          message: "Something wrong happen. Try again",
+          message: this.$t('general.Something_wrong_happen_Try_again'),
         });
       }
     },
@@ -246,7 +246,7 @@ export default {
         this.flashMessage.show({
           status: "success",
           blockClass: "custom-block-class",
-          message: "Comment Updated",
+          message: this.$t('general.Comment_Updated'),
         });
       } else {
         this.flashMessage.show({
@@ -262,7 +262,7 @@ export default {
         this.flashMessage.show({
           status: "error",
           blockClass: "custom-block-class",
-          message: "Try to write something",
+          message: this.$t('general.Try_to_write_something'),
         });
         return false;
       }
@@ -317,7 +317,7 @@ export default {
         this.flashMessage.show({
           status: "success",
           blockClass: "custom-block-class",
-          message: "Comment Updated",
+          message: this.$t('general.Comment_Updated'),
         });
       } else {
         this.flashMessage.show({

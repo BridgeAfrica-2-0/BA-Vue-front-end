@@ -7,7 +7,7 @@
     margin-right: -12px;"
       >
         <b-tabs lazy  pills content-class="mt-3 f-left">
-          <b-tab title="People" active> <People /> </b-tab>
+          <b-tab :title="$t('general.People')" active> <People /> </b-tab>
   
           <b-tab title="Businesses" > <Businesses /> </b-tab>
 

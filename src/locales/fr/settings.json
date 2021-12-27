@@ -2,7 +2,7 @@
 
         "Title": "Paramètres",
         "General": "Général",
-        "Account_type": "Type de compte",
+        "Account_Type": "Type de compte",
         "Password": "Mot de passe",
         "Payment": "Paiement",
         "Name": "Nom",
@@ -15,7 +15,7 @@
         "City": "Ville",
         "Neighbourhood": "Quartier",
         "Upgrade_your_business_account": "Mettez à niveau votre compte d'entreprise",
-        "Make_more_money": "Gagnez plus d'argent en déverrouillant les fonctionnalités de votre boutique où vous pouvez vendre des produits et services directement aux clients et recevoir des paiements instantanés.",
+        "Make_more_money": "Faire plus d'argent",
         "Upgrade_Now":"Mettre à niveau maintenant",
         "Chose_Default_Payment_Method":"Choisissez le mode de paiement par défaut",
         "Change_current_password":"Changer votre mot de passe actuel",
@@ -31,5 +31,6 @@
         "Save_changes":"Sauvegarder les changements",
         "Change":"Changement",
         "Notifications":"Notifications",
-        "Update":"Mise à jour"
+        "Update":"Mise à jour",
+        "select_one":"sélectionnez une option"
 }

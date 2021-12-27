@@ -1,10 +1,10 @@
 <template>
   <div>
-    <b>Contact Infomation</b>
+    <b>{{$t("businessfollower.Contact_Infomation")}}</b>
     <hr />
     <div v-for="(contact, index) in contacts" class="row" :key="index">
       <div class="col">
-        Mobile Phone:
+        {{$t("businessfollower.Mobile_Phone")}}:
       </div>
       <div class="col">
         <div class="row">
@@ -16,14 +16,14 @@
           </div>
         </div>
       </div>
-      <b-button class="edit-btn mb-2" variant="outline-primary" v-b-modal.modal-3>Edit </b-button>
+      <b-button class="edit-btn mb-2" variant="outline-primary" v-b-modal.modal-3>{{$t("businessfollower.Edit")}} </b-button>
     </div>
 
     <b-link class="text-decoration-none" v-b-modal.modal-4
-      ><b-icon icon="plus" variant="primary"></b-icon> Add Other Phones</b-link
+      ><b-icon icon="plus" variant="primary"></b-icon> {{$t("businessfollower.Add_Other_Phones")}}</b-link
     >
 
-    <b-modal ref="add-contact" hide-footer id="modal-4" title="Add Other Contact">
+    <b-modal ref="add-contact" hide-footer id="modal-4" :title="$t('businessfollower.Add_Other_Contact')">
       <b-form @submit="add">
         <div class="row">
           <div class="col-4">
@@ -33,7 +33,7 @@
             <b-form-input v-model="addContact.contact" placeholder="Contact" required></b-form-input>
           </div>
         </div>
-        <b-button class="ml-2 mt-2 position-but" type="submit" variant="primary">Add</b-button>
+        <b-button class="ml-2 mt-2 position-but" type="submit" variant="primary">{{$t("businessfollower.Add")}}</b-button>
       </b-form>
     </b-modal>
   </div>

@@ -293,7 +293,7 @@
                   id="textarea-small"
                   autofocus
                   class="mb-2 border-none"
-                  placeholder="Post a business update"
+                  :placeholder="$t('businessEditor.Post_a_business_update')"
                   v-model="createPost.postBusinessUpdate"
                 ></b-form-textarea>
               </div>

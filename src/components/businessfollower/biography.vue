@@ -13,7 +13,7 @@
         variant="primary"
         size="sm"
       >
-        Edit Profile
+        {{$t("businessfollower.Edit_Profile")}}
       </button>
     </span>
 
@@ -30,13 +30,13 @@
           required
           id="textarea"
           v-model="bio.user.biography"
-          placeholder="Enter something..."
+          :placeholder="$t('businessfollower.Enter_something')"
           rows="3"
           max-rows="6"
         ></b-form-textarea>
         <div class="pt-2 action-btn">
-          <b-button variant="success" type="submit">Save</b-button>
-          <b-button class="ml-2" variant="primary" @click="edit(0)">Cancel</b-button>
+          <b-button variant="success" type="submit">{{$t("businessfollower.Save")}}e</b-button>
+          <b-button class="ml-2" variant="primary" @click="edit(0)">{{$t("businessfollower.Cancel")}}</b-button>
         </div>
       </b-form>
     </div>

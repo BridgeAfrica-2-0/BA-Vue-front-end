@@ -19,6 +19,8 @@ import profilefollower from './profilefollower.json'
 import about from './about.json'
 import settings from './settings.json'
 import businessEditor from './businessEditor.json'
+import businessfollower from './businessfollower.json'
+
 
 
 
@@ -48,6 +50,7 @@ export const en = {
     myOrders: myOrders,
     about: about,
     settings: settings,
-    businessEditor: businessEditor
+    businessEditor: businessEditor,
+    businessfollower: businessfollower
 
 }

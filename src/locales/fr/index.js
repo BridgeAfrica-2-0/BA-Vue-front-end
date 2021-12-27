@@ -22,6 +22,7 @@ import profilefollower from './profilefollower.json'
 import businessowner from './businessowner.json'
 import settings from './settings.json'
 import businessEditor from './businessEditor.json'
+import businessfollower from './businessfollower.json'
 
 
 
@@ -51,7 +52,8 @@ export const fr = {
     network: network,
     about: about,
     settings: settings,
-    businessEditor: businessEditor
+    businessEditor: businessEditor,
+    businessfollower: businessfollower
     
 
 }

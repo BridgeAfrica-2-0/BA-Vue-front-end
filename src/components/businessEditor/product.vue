@@ -37,7 +37,7 @@
           <b-col cols="12" md="6">
             <b-form-group
               id="input-group-1"
-              label="Product Name"
+              :label="$t('businessEditor.Product_Name')"
               label-for="input-1"
               label-size="sm"
             >
@@ -78,7 +78,7 @@
 
         <b-form-group
           id="input-group-1"
-          label="product Price"
+          :label="$t('businessEditor.product_Price')"
           label-for="input-1"
           label-size="sm"
         >
@@ -330,7 +330,7 @@
                         />
                       </a>
                       <input
-                        placeholder="Post a Comment"
+                        :placeholder="$t('businessEditor.Post_a_Comment')"
                         class="form-control adco comment"
                         type="text"
                       />

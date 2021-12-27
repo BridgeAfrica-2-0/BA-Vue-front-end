@@ -1,26 +1,26 @@
 <template>
   <div>
-    <b>Education</b>
+    <b>{{$t("businessfollower.Education")}}</b>
 
     <hr />
     <b-link style="text-decoration: none" class="mt-4" v-b-modal.educationModal>
       <b-icon icon="plus" variant="primary"></b-icon>
-      Add University Or High School</b-link
+      {{$t("businessfollower.Add_University_Or_High_School")}}</b-link
     >
     <b-list-group-item class="d-flex align-items-center mb-4 " style="border: none">
       <div class="datails">
         <div class="row" v-for="education in educations" :key="education.school_name">
           <div class="col">
             <span class="mr-auto">
-              <b>School Name : {{ education.school_name }}</b>
+              <b>{{$t("businessfollower.School_Name")}} : {{ education.school_name }}</b>
             </span>
             <span>
               <br />
-              <b> Major {{ education.major_subjects }} </b>
+              <b> {{$t("businessfollower.Major")}} {{ education.major_subjects }} </b>
             </span>
 
             <p>
-              Duration From {{ education.start_year }} To
+              {{$t("businessfollower.Duration_From")}} {{ education.start_year }} To
               {{ education.end_year }}
             </p>
             <p>
@@ -29,8 +29,8 @@
           </div>
           <div class="col-1">
             <b-dropdown id="dropdown-dropup" dropdown variant="primary-outline">
-              <b-dropdown-item @click="edit(education)">Edit</b-dropdown-item>
-              <b-dropdown-item @click="deleteEducation(education.id)">Delete</b-dropdown-item>
+              <b-dropdown-item @click="edit(education)">{{$t("businessfollower.Edit")}}</b-dropdown-item>
+              <b-dropdown-item @click="deleteEducation(education.id)">{{$t("businessfollower.Delete")}}</b-dropdown-item>
             </b-dropdown>
           </div>
         </div>
@@ -55,21 +55,21 @@
         name="checkbox-1"
         :value="editData.is_graduated ? 1 : 0"
       >
-        Graduated
+        {{$t("businessfollower.Graduated")}}
       </b-form-checkbox>
-      <label>Duration - From</label>
+      <label>{{$t("businessfollower.Duration_From")}}</label>
       <b-form-datepicker id="example-datepicker-1" v-model="editData.startDate" class="mb-2"></b-form-datepicker>
 
       <label>To</label>
       <b-form-datepicker id="example-datepicker" v-model="editData.endDate" class="mb-2"></b-form-datepicker>
-      <b-form-input class="mt-2" v-model="editData.major_subjects" placeholder="Major"></b-form-input>
+      <b-form-input class="mt-2" v-model="editData.major_subjects" :placeholder="$t('businessfollower.Major')"></b-form-input>
     </b-modal>
 
-    <b-modal ref="educationModal" id="educationModal" title="Add Education " @close="cancel" @ok="save">
+    <b-modal ref="educationModal" id="educationModal" :title="$t('businessfollower.Add_Education') " @close="cancel" @ok="save">
       <div style="width: 100px">
         <b-form-select class="mb-2" size="sm" v-model="educationInput.access" :options="options"></b-form-select>
       </div>
-      <b-form-input class="mt-2 mb-2" v-model="educationInput.schoolName" placeholder="School"></b-form-input>
+      <b-form-input class="mt-2 mb-2" v-model="educationInput.schoolName" :placeholder="$t('businessfollower.School')"></b-form-input>
 
       <b-form-checkbox
         id="checkbox-1"
@@ -77,9 +77,9 @@
         name="checkbox-1"
         :value="educationInput.graduated ? 1 : 0"
       >
-        Graduated
+        {{$t("businessfollower.Graduated")}}
       </b-form-checkbox>
-      <label>Duration - From</label>
+      <label>{{$t("businessfollower.Duration_From")}}</label>
       <b-form-datepicker
         id="example-datepicker-1"
         v-model="educationInput.durationFrom"
@@ -88,7 +88,7 @@
 
       <label>To</label>
       <b-form-datepicker id="example-datepicker" v-model="educationInput.durationTo" class="mb-2"></b-form-datepicker>
-      <b-form-input class="mt-2" v-model="educationInput.major" placeholder="Major"></b-form-input>
+      <b-form-input class="mt-2" v-model="educationInput.major" :placeholder="$t('businessfollower.Major')"></b-form-input>
     </b-modal>
 
     

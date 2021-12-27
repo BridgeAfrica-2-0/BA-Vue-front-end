@@ -1,10 +1,10 @@
 <template>
   <div>
-    <b>WorkPlace</b>
+    <b>{{$t("businessfollower.WorkPlace")}}</b>
     <hr />
     <b-link class="mt-4 text-decoration-none" v-b-modal.modal-9>
       <b-icon icon="plus" variant="primary"></b-icon>
-      Add Workplace
+      {{$t("businessfollower.Add_Workplace")}}
     </b-link>
 
     <b-list-group-item class="d-flex align-items-center mb-4" style="border: none">
@@ -27,8 +27,8 @@
             <ul class="navbar-nav pull-right">
               <li class="nav-item dropdown">
                 <b-dropdown id="dropdown-dropup" dropdown variant="primary-outline">
-                  <b-dropdown-item @click="editt(workPlace)">Edit</b-dropdown-item>
-                  <b-dropdown-item @click="deleteWorkPlace(workPlace.id)">Delete</b-dropdown-item>
+                  <b-dropdown-item @click="editt(workPlace)">{{$t("businessfollower.Edit")}}</b-dropdown-item>
+                  <b-dropdown-item @click="deleteWorkPlace(workPlace.id)">{{$t("businessfollower.Delete")}}</b-dropdown-item>
                 </b-dropdown>
               </li>
             </ul>
@@ -46,41 +46,41 @@
           :options="options"
         ></b-form-select>  -->
       </div>
-      <b-form-input class="mt-2" v-model="editData.company_name" placeholder="Company"></b-form-input>
-      <b-form-input class="mt-2" v-model="editData.position" placeholder="Position"></b-form-input>
-      <b-form-input class="mt-2" v-model="editData.city_town" placeholder="City"></b-form-input>
-      <b-form-input class="mt-2" v-model="editData.job_responsibilities" placeholder="Responsibilities"></b-form-input>
+      <b-form-input class="mt-2" v-model="editData.company_name" :placeholder="$t('businessfollower.Company')"></b-form-input>
+      <b-form-input class="mt-2" v-model="editData.position" :placeholder="$t('businessfollower.Position')"></b-form-input>
+      <b-form-input class="mt-2" v-model="editData.city_town" :placeholder="$t('businessfollower.City')"></b-form-input>
+      <b-form-input class="mt-2" v-model="editData.job_responsibilities" :placeholder="$t('businessfollower.Responsibilities')"></b-form-input>
       <b-form-checkbox id="checkbox-1" v-model="editData.currently_working" name="checkbox-1" checked="1" unchecked="0">
-        Currently Working
+        {{$t("businessfollower.Currently_Working")}}
       </b-form-checkbox>
-      <label>Start Date</label>
+      <label>{{$t("businessfollower.Start_Date")}}</label>
       <b-form-datepicker
         id="example-datepicker"
         v-model="editData.startDate"
         class="mb-2"
-        placeholder="Start Date"
+        :placeholder="$t('businessfollower.Start_Date')"
       ></b-form-datepicker>
-      <label v-if="!editData.currently_working">End Date</label>
+      <label v-if="!editData.currently_working">{{$t("businessfollower.End_Date")}}</label>
       <b-form-datepicker
         v-if="!editData.currently_working"
         id="example-datepicker"
         v-model="editData.endDate"
         class="mb-2"
-        placeholder="End Date"
+        :placeholder="$t('businessfollower.End_Date')"
       ></b-form-datepicker>
     </b-modal>
 
-    <b-modal ref="add-contact" id="modal-9" title="Add Workplace " @close="cancel" @ok="save">
+    <b-modal ref="add-contact" id="modal-9" :title="$t('businessfollower.Add_Workplace') " @close="cancel" @ok="save">
       <div class="div-design">
         <b-form-select class="mb-2" size="sm" v-model="workPlaceInput.access" :options="options"></b-form-select>
       </div>
-      <b-form-input class="mt-2" v-model="workPlaceInput.companyName" placeholder="Company"></b-form-input>
-      <b-form-input class="mt-2" v-model="workPlaceInput.position" placeholder="Position"></b-form-input>
-      <b-form-input class="mt-2" v-model="workPlaceInput.cityTown" placeholder="City"></b-form-input>
+      <b-form-input class="mt-2" v-model="workPlaceInput.companyName" :placeholder="$t('businessfollower.Company')"></b-form-input>
+      <b-form-input class="mt-2" v-model="workPlaceInput.position" :placeholder="$t('businessfollower.Position')"></b-form-input>
+      <b-form-input class="mt-2" v-model="workPlaceInput.cityTown" :placeholder="$t('businessfollower.City')"></b-form-input>
       <b-form-input
         class="mt-2"
         v-model="workPlaceInput.jobResponsibilities"
-        placeholder="Responsibilities"
+        :placeholder="$t('businessfollower.Responsibilities')"
       ></b-form-input>
       <b-form-checkbox
         id="checkbox-1"
@@ -88,16 +88,16 @@
         name="checkbox-1"
         :checked="workPlaceInput.currentlyWorking === 1 ? true : false"
       >
-        Currently Working
+        {{$t("businessfollower.Currently_Working")}}
       </b-form-checkbox>
-      <label for="startDate">Start Date</label>
+      <label for="startDate">{{$t("businessfollower.Start_Date")}}</label>
       <b-form-datepicker
         id="startDate"
         v-model="workPlaceInput.startDate"
         class="mb-2"
-        placeholder="Start Date"
+        :placeholder="$t('businessfollower.Start_Date')"
       ></b-form-datepicker>
-      <label v-if="!workPlaceInput.currentlyWorking" for="endDate">End Date</label>
+      <label v-if="!workPlaceInput.currentlyWorking" for="endDate">{{$t("businessfollower.End_Date")}</label>
       <b-form-datepicker
         v-if="!workPlaceInput.currentlyWorking"
         id="endDater"

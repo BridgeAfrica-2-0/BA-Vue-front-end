@@ -6,8 +6,8 @@
         <span class="float-right">
           <b-dropdown size="sm" variant="outline " class="primary">
             <template class="more" #button-content> </template>
-            <b-dropdown-item> Edit </b-dropdown-item>
-            <b-dropdown-item>Delete</b-dropdown-item>
+            <b-dropdown-item> {{$t("businessfollower.Edit")}} </b-dropdown-item>
+            <b-dropdown-item>{{$t("businessfollower.Delete")}}</b-dropdown-item>
           </b-dropdown>
         </span>
         <p class="msg text">
@@ -15,14 +15,14 @@
         </p>
         <b-icon icon="suit-heart" variant="primary" aria-hidden="true"></b-icon>
         23
-        <span @click="showReply" class="primary ml-2 reply"><b>Reply</b></span>
+        <span @click="showReply" class="primary ml-2 reply"><b>{{$t("businessfollower.Reply")}}</b></span>
         <div v-if="reply">
           <b-row class="mt-2">
             <b-col cols="1">
               <b-avatar variant="info" src="https://placekitten.com/300/300" class="avat-comment"></b-avatar>
             </b-col>
             <b-col cols="11">
-              <input placeholder="Post a Comment" class="comment" type="text" />
+              <input :placeholder="$t('businessfollower.Post_a_Comment')" class="comment" type="text" />
 
               <fas-icon class="primary send-cmt" :icon="['fas', 'paper-plane']" />
             </b-col>

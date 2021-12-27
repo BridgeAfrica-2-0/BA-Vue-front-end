@@ -1,12 +1,12 @@
 <template>
   <div>
     <div class="row">
-      <h6 class="col-md-12"><b>Basic Information</b></h6>
+      <h6 class="col-md-12"><b>{{$t("businessfollower.Basic_Information")}}</b></h6>
 
       <hr />
     </div>
     <div class="row mb-1">
-      <div class="col-md-4">Date Of Birth</div>
+      <div class="col-md-4">{{$t("businessfollower.Date_Of_Birth")}}</div>
       <div class="col-md-4">{{ info.user.dob }}</div>
       <div class="col-md-4">
         <button
@@ -16,40 +16,40 @@
           data-target="#dobModal"
           v-b-modal.modal-6
         >
-          Edit
+          {{$t("businessfollower.Edit")}}
         </button>
       </div>
 
-      <b-modal id="phonemodal" title="Add Phone Number" hide-footer ref="phonemodal" @close="cancel">
+      <b-modal id="phonemodal" :title="$t('businessfollower.Add_Phone_Number')" hide-footer ref="phonemodal" @close="cancel">
         <div class="modal-body">
           <form class="form" action="" method="post" @submit.prevent="savePhoneNumber">
             <b-form-input
               class="mt-2 mb-2"
               v-model="info.user.phone"
-              placeholder="phone"
+              :placeholder="$t('businessfollower.phone')"
               type="text"
               required
             ></b-form-input>
 
             <div class="fosrm-group text-right w-100">
-              <button type="submit" class="btn btn-primary orange">Save</button>
+              <button type="submit" class="btn btn-primary orange">{{$t("businessfollower.Save")}}</button>
             </div>
           </form>
         </div>
       </b-modal>
 
-      <b-modal id="currentcityModal" title="Add current city" hide-footer ref="currentcityModal" @close="cancel">
+      <b-modal id="currentcityModal" :title="$t('businessfollower.Add_current_city')" hide-footer ref="currentcityModal" @close="cancel">
         <div class="modal-body">
           <form class="form" action="" method="post" @submit.prevent="saveCurrentCity">
             <b-form-input
               class="mt-2 mb-2"
-              placeholder="current city"
+              :placeholder="$t('businessfollower.current_city')"
               type="text"
               v-model="info.user.city"
             ></b-form-input>
 
             <div class="fosrm-group text-right w-100">
-              <button type="submit" class="btn btn-primary orange">Save</button>
+              <button type="submit" class="btn btn-primary orange">{{$t("businessfollower.Save")}}</button>
             </div>
           </form>
         </div>
@@ -67,13 +67,13 @@
         </div>
       </b-modal>
 
-      <b-modal id="websiteModal" ref="websiteModal" title="Add a website" hide-footer @close="cancel">
+      <b-modal id="websiteModal" ref="websiteModal" :title="$t('businessfollower.Add_a_website')" hide-footer @close="cancel">
         <div class="modal-body">
           <form class="form" action="" method="post" @submit.prevent="saveWebsite">
-            <b-form-input class="mt-2 mb-2" placeholder="Website" v-model="websiteInput"></b-form-input>
+            <b-form-input class="mt-2 mb-2" :placeholder="$t('businessfollower.Website')" v-model="websiteInput"></b-form-input>
 
             <div class="fosrm-group text-right w-100">
-              <button type="submit" class="btn btn-primary orange">Save</button>
+              <button type="submit" class="btn btn-primary orange">{{$t("businessfollower.Save")}}</button>
             </div>
           </form>
         </div>
@@ -103,7 +103,7 @@
         </div>
       </b-modal>
 
-      <b-modal id="modal-6" ref="model-6" title="Edit Date of Birth" hide-footer @close="cancel">
+      <b-modal id="modal-6" ref="model-6" :title="$t('businessfollower.Edit_Date_of_Birth')" hide-footer @close="cancel">
         <div class="modal-body">
           <form class="form-inline" action="" method="post">
             <div class="input-group col-md-12 pl-0 pr-0 mb-4 selec">
@@ -116,10 +116,10 @@
             </div>
             <div class="fosrm-group text-right w-100">
               <button type="button" class="btn btn-dark pr-1" @click="cancel">
-                cancel
+                {{$t("businessfollower.cancel")}}
               </button>
               <button type="button" class="btn btn-primary orange" @click="saveBirthDate">
-                Save
+                {{$t("businessfollower.Save")}}
               </button>
             </div>
           </form>
@@ -127,7 +127,7 @@
       </b-modal>
     </div>
     <div class="row">
-      <div class="col-md-4">Gender</div>
+      <div class="col-md-4">{{$t("businessfollower.Gender")}}</div>
       <div class="col-md-4">{{ info.user.gender }}</div>
       <div class="col-md-4">
         <button
@@ -137,7 +137,7 @@
           data-target="#genderModal"
           v-b-modal.modal-7
         >
-          Edit
+          {{$t("businessfollower.Edit")}}
         </button>
         <b-modal id="modal-7" title="Add/Edit Gender" hide-footer ref="modal-7" @close="cancel">
           <div class="modal-body">
@@ -146,15 +146,15 @@
                 <label class="col-md-4 control-label" style="align-items: first baseline" for="gender">Gender </label>
                 <div class="col-md-8 pl-0 pr-0">
                   <select id="gender" class="form-control w-100" v-model="basicInfo.gender">
-                    <option value="M">Male</option>
-                    <option value="F">Female</option>
+                    <option value="M">{{$t("businessfollower.Male")}}</option>
+                    <option value="F">{{$t("businessfollower.Female")}}</option>
                   </select>
                 </div>
               </div>
               <!-- End number In input-->
               <div class="fosrm-group text-right w-100">
                 <button type="button" class="btn btn-primary orange" @click="saveGender">
-                  Save
+                  {{$t("businessfollower.Save")}}
                 </button>
               </div>
             </form>
@@ -164,11 +164,11 @@
     </div>
 
     <div class="row">
-      <h6 class="col-md-12"><b>Contact Information</b></h6>
+      <h6 class="col-md-12"><b>{{$t("businessfollower.Contact_Information")}}</b></h6>
     </div>
     <hr />
     <div class="row mb-1 mt-3">
-      <div class="col-md-4">Phone</div>
+      <div class="col-md-4">{{$t("businessfollower.Phone")}}</div>
       <div class="col-md-4">{{ info.user.phone }}</div>
       <div class="col-md-4">
         <button
@@ -178,17 +178,17 @@
           data-target="#phonemodal"
           v-b-modal.phonemodal
         >
-          Edit
+          {{$t("businessfollower.Edit")}}
         </button>
       </div>
     </div>
 
     <div class="row">
-      <div class="col-md-12"><b>Places you lived</b></div>
+      <div class="col-md-12"><b>{{$t("businessfollower.Places_you_lived")}}</b></div>
     </div>
     <hr />
     <div class="row mb-4">
-      <div class="col-md-4">City :</div>
+      <div class="col-md-4">{{$t("businessfollower.City")}} :</div>
       <div class="col-md-4">{{ info.user.city }}</div>
       <div class="col-md-4">
         <button
@@ -198,12 +198,12 @@
           data-target="#currentcityModal"
           v-b-modal.currentcityModal
         >
-          Edit
+          {{$t("businessfollower.Edit")}}
         </button>
       </div>
     </div>
     <div class="row mb-4">
-      <div class="col-md-4">Home Town :</div>
+      <div class="col-md-4">{{$t("businessfollower.Home_Town")}} :</div>
       <div class="col-md-4">{{ info.user.home_town }}</div>
       <div class="col-md-4">
         <button
@@ -213,19 +213,19 @@
           data-target="#hometownModal"
           v-b-modal.hometownModal
         >
-          Edit
+          {{$t("businessfollower.Edit")}}
         </button>
       </div>
     </div>
     <div class="row mb-4">
       <div class="col">
-        <h6 class="mb-0"><b>Web &amp; Social Links</b></h6>
+        <h6 class="mb-0"><b>{{$t("businessfollower.Web")}} &amp; {{$t("businessfollower.Social Links")}}</b></h6>
         <hr />
         <div class="media">
           <div class="media-body">
             <a v-b-modal.websiteModal data-target="#websiteModal">
               <fas-icon class="primary float-left mr-1 mt-1" :icon="['fas', 'plus-circle']" />
-              Add a Website</a
+              {{$t("businessfollower.Add_a_Website")}}</a
             ><br />
 
             <div v-for="website in info.user_websites" :key="website.id">
@@ -234,8 +234,8 @@
               <ul class="website navbar-nav pull-right">
                 <li class="nav-item dropdown">
                   <b-dropdown id="dropdown-dropup" dropdown variant="primary-outline">
-                    <b-dropdown-item @click="edit('website', website)">Edit</b-dropdown-item>
-                    <b-dropdown-item @click="deleteWebsite(website)">Delete</b-dropdown-item>
+                    <b-dropdown-item @click="edit('website', website)">{{$t("businessfollower.Edit")}}</b-dropdown-item>
+                    <b-dropdown-item @click="deleteWebsite(website)">{{$t("businessfollower.Delete")}}</b-dropdown-item>
                   </b-dropdown>
                 </li>
               </ul>

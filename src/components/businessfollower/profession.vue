@@ -1,11 +1,11 @@
 <template>
   <div>
-    <b>Profession</b>
+    <b>{{$t("businessfollower.Profession")}}</b>
     <hr />
 
     <b-link class="mt-4 doc" v-b-modal.modal-11>
       <b-icon icon="plus" variant="primary"></b-icon>
-      Edit Profession</b-link
+      {{$t("businessfollower.Edit_Profession")}}</b-link
     >
     <br />
 

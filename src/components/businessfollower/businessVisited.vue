@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b>Business Visited</b>
+    <b>{{$t("businessfollower.Business_Visited")}}</b>
     <hr />
     <div class="row">
       <div class="col">
@@ -9,35 +9,35 @@
           <div class="datails">
             <div class="row">
               <div class="col">
-                <span class="mr-auto"> <b>Business Name Here</b> </span>
-                <p>Category Name here - 1.1 M Followers</p>
+                <span class="mr-auto"> <b>{{$t("businessfollower.Business_Name_Here")}}</b> </span>
+                <p>{{$t("businessfollower.Category_Name_here_1_1M_Followers")}}</p>
               </div>
               <div class="col-1">
                 <b-dropdown id="dropdown-dropup" dropdown variant="primary-outline" class="dropdown-style">
-                  <b-dropdown-item href="#">Edit</b-dropdown-item>
-                  <b-dropdown-item href="#">Delete</b-dropdown-item>
+                  <b-dropdown-item href="#">{{$t("businessfollower.Edit")}}</b-dropdown-item>
+                  <b-dropdown-item href="#">{{$t("businessfollower.Delete")}}</b-dropdown-item>
                 </b-dropdown>
               </div>
             </div>
-            <b-link class="text-decoration-none">Get Directions</b-link>
+            <b-link class="text-decoration-none">{{$t("businessfollower.Get_Directions")}}</b-link>
           </div>
         </b-list-group-item>
         <b-link class="mt-4 text-decoration-none" v-b-modal.modal-5>
-          <b-icon icon="plus" variant="primary"></b-icon>Add Other Businesses</b-link
+          <b-icon icon="plus" variant="primary"></b-icon>{{$t("businessfollower.Add_Other_Businesses")}}</b-link
         >
-        <b-modal class="modal w-25" hide-footer id="modal-5" title="Add other Business">
+        <b-modal class="modal w-25" hide-footer id="modal-5" :title="$t('businessfollower.Add_other_Business')">
           <b-form>
             <div>
               <div class="row">
                 <div class="col">
-                  <b-form-input v-model="business" placeholder="Business" required></b-form-input>
+                  <b-form-input v-model="business" :placeholder="$t('businessfollower.Business')" required></b-form-input>
                 </div>
                 <div class="col">
                   <b-form-select class="mb-2" size="sm" v-model="selected" :options="options" required></b-form-select>
                 </div>
               </div>
             </div>
-            <b-button class="ml-2 mt-2 position-relative add-btn" type="submit" variant="primary">Add</b-button>
+            <b-button class="ml-2 mt-2 position-relative add-btn" type="submit" variant="primary">{{$t("businessfollower.Add")}}</b-button>
           </b-form>
         </b-modal>
       </div>

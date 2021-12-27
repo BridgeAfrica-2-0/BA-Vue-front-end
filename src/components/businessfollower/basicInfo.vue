@@ -1,18 +1,18 @@
 <template>
   <div>
-    <b>Basic Infomation</b> {{ info }}
+    <b>{{$t("businessfollower.Basic_Infomation")}}</b> {{ info }}
     <hr />
     <div class="row">
       <div class="col">
-        Date Of Birth:
+        {{$t("businessfollower.Date_Of_Birth")}}:
       </div>
       <div class="col">
         {{ dateOfBirth }}
       </div>
-      <b-button class="edit-btn mb-2" variant="outline-primary" v-b-modal.modal-1>Edit </b-button>
-      <b-modal hide-footer id="modal-1" title="Date Of Birth">
+      <b-button class="edit-btn mb-2" variant="outline-primary" v-b-modal.modal-1>{{$t("businessfollower.Edit")}} </b-button>
+      <b-modal hide-footer id="modal-1" :title="$t('businessfollower.Date_Of_Birth')">
         <div>
-          <label>Choose a date</label>
+          <label>{{$t("businessfollower.Choose_a_date")}}</label>
           <b-form @submit="add">
             <div class="row">
               <div class="col">
@@ -27,20 +27,20 @@
                 <b-form-select class="mb-2" size="sm" v-model="selected" :options="options" required></b-form-select>
               </div>
             </div>
-            <b-button class="ml-2 mt-2 button-design" type="submit" variant="primary">Add</b-button>
+            <b-button class="ml-2 mt-2 button-design" :type="$t('businessfollower.submit')" variant="primary">{{$t("businessfollower.Add")}}</b-button>
           </b-form>
         </div>
       </b-modal>
     </div>
     <div class="row">
       <div class="col">
-        Gender:
+        {{$t("businessfollower.Gender")}}:
       </div>
       <div class="col">
         {{ gender }}
       </div>
-      <b-button class="edit-btn mb-2" variant="outline-primary" v-b-modal.modal-2>Edit </b-button>
-      <b-modal hide-footer id="modal-2" title="Gender">
+      <b-button class="edit-btn mb-2" variant="outline-primary" v-b-modal.modal-2>{{$t("businessfollower.Edit")}} </b-button>
+      <b-modal hide-footer id="modal-2" :title="$t('businessfollower.Gender')">
         <b-form>
           <div>
             <div class="row">
@@ -52,7 +52,7 @@
               </div>
             </div>
           </div>
-          <b-button class="ml-2 mt-2 button-design" type="submit" variant="primary">Add</b-button>
+          <b-button class="ml-2 mt-2 button-design" type="submit" variant="primary">{{$t("businessfollower.Add")}}</b-button>
         </b-form>
       </b-modal>
     </div>

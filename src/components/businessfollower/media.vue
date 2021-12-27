@@ -3,11 +3,11 @@
     <b-card class="mt-4" header-tag="header" footer-tag="footer">
       <h6 class="mb-3 d-inline-block title">
         <fas-icon class=" mr-2 pt-1 icons " :icon="['fas', 'file-image']" size="lg" />
-        <b> Media </b>
+        <b> {{$t("businessfollower.Media")}} </b>
       </h6>
 
       <span class="float-right">
-        <b-link><b-icon icon="eye-fill" variant="primary"> </b-icon> View All </b-link></span
+        <b-link><b-icon icon="eye-fill" variant="primary"> </b-icon> {{$t("businessfollower.View_All")}} </b-link></span
       >
 
       <CoolLightBox :items="imgaray" :index="index" @close="index = null"> </CoolLightBox>

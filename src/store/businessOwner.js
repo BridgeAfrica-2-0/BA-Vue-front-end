@@ -462,35 +462,39 @@ export default {
     async updateUserBusinessAbout(context, payload) {
       let response_ = null;
       const id_Business = 47;
-      await axios("business/update" +
+      console.log("-------testt----", payload)
+      await axios.post("business/update" +
         "/" +
-        payload.business_id,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
+        payload.business_id, payload.data
+        // {
+        //   method: "POST",
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //     Accept: "application/json",
 
-          },
-          body: JSON.stringify({
-            name: payload.business_about.name,
-            category: payload.business_about.category,
-            subCategoryId: payload.business_about.subCategoryId,
-            filterId: payload.business_about.filterId,
-            keywords: payload.business_about.keywords,
-            phone: payload.business_about.phone,
-            email: payload.business_about.email,
-            country: payload.business_about.country,
-            region: payload.business_about.region,
-            division: payload.business_about.division,
-            council: payload.business_about.council,
-            locality: payload.business_about.locality,
-            city: payload.business_about.city,
-            openHours: payload.business_about.business_open_hours
-          })
-        }
+        //   },
+          // body: {
+          //   name: payload.business_about.name,
+          //   category: payload.business_about.category,
+          //   subCategoryId: payload.business_about.subCategoryId,
+          //   filterId: payload.business_about.filterId,
+          //   keywords: payload.business_about.keywords,
+          //   phone: payload.business_about.phone,
+          //   email: payload.business_about.email,
+          //   country: payload.business_about.country[0].id,
+          //   region: payload.business_about.region,
+          //   division: payload.business_about.division,
+          //   council: payload.business_about.council,
+          //   locality: payload.business_about.locality,
+          //   city: payload.business_about.city,
+          //   openHours: payload.business_about.business_open_hours,
+            
+          // }
+        // }
       )
         .then(response => {
+
+          
           console.log('update user Business About response (1) +++++++', response);
           if (response.status !== 200 && response.status !== 201) {
             throw 'Error From The Server';

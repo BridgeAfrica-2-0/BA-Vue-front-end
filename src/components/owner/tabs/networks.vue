@@ -594,7 +594,7 @@ export default {
     
   },
 
-  
+
 
   computed: {
     old_profileNetworks: function () {
@@ -968,22 +968,29 @@ return cat;
 
     // delete a network
     deleteNetwork(network) {
+      this.success.state = true;
       axios
         .delete(`network/${network.id}`)
         .then((res) => {
-          this.success.state = true;
-          this.success.msg = "Operation was successful !!";
-          setTimeout(() => {
-            this.success.state = false;
-          }, 5000);
-          this.getNetworks();
+
+          this.flashMessage.show({
+            status: 'success',
+            blockClass: 'custom-block-class',
+            message: "Operation was successful !!",
+          });
+          
+          const newData = this.profileNetworks.filter(item => item.id != network.id)
+          this.profileNetworks = newData
         })
         .catch((err) => {
           this.success.state = true;
+          this.flashMessage.show({
+            status: 'success',
+            blockClass: 'custom-block-class',
+            message: "Something wen't wrong !!",
+          });
           this.success.msg = "Something wen't wrong !!";
-          setTimeout(() => {
-            this.success.state = false;
-          }, 5000);
+         
           this.loader = false;
         });
     },

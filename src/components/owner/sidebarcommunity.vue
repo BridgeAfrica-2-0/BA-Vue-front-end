@@ -66,9 +66,6 @@
           </div>
         </b-tab>
 
-
-
-
           <b-tab>
           <template slot="title">
             {{ $t('profileowner.Network') }} <span class="spa-color">  {{ nFormatter(total.total_network)}}</span>

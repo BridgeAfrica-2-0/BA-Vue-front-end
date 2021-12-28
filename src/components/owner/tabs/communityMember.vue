@@ -29,7 +29,7 @@
                             <div class="mt-3 mt-lg-0 mt-xl-0 username">
                               <router-link 
                                 :to="{name: 'Follower', params: {id: item.id}}">
-                                <b>----{{ item.name }}</b>
+                                <b>{{ item.name }}</b>
                               </router-link>
                             </div>
                           </b-col>

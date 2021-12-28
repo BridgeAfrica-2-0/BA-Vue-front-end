@@ -157,7 +157,7 @@
               variant=""
             ></b-icon>
 
-            <b> {{ $t("profileowner.home_town") }}: </b>
+            <b> +++{{ $t("profileowner.home_town") }}: </b>
             <span class="text">
               {{ info.user.neighbor }}
             </span>
@@ -171,7 +171,7 @@
             ></b-icon>
             <b> {{ $t("profileowner.current_city") }} : </b>
             <span class="text">
-              {{ info.user.city }}
+              {{ info.user.city }} 
             </span>
           </p>
           <!-- </div> -->

@@ -52,7 +52,7 @@
             hidden
             ref="movie"
           />
-          <a @click="$refs.movie.click()">
+          <a>
             <div class="drag-textt">
               <fas-icon :icon="['fas', 'plus']" />
               <h3>{{ $t("profileowner.Add_Item") }}</h3>
@@ -463,6 +463,7 @@ export default {
             : null,
         data: formData,
       };
+
 
       const data =
         "business" == this.type || "network" == this.type

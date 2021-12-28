@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="s-cardd">
+    <div class="s-cardd"> 
       <div
         class="people-style border shadow"
         v-for="item in users"
@@ -10,7 +10,7 @@
           <b-col md="3" cols="4" lg="3" class="my-auto">
             <b-avatar
               class="p-avater"
-              variant="primary"
+              variant="ligth"
               :src="item.profile_picture"
             ></b-avatar>
           </b-col>
@@ -23,7 +23,8 @@
                     <b-row>
                       <b-col md="6" lg="6" cols="6" sm="6" class="mt-lg-2">
                         <div class="mt-2 mt-lg-0 mt-xl-0 username">
-                          <b> {{ item.name }} </b>
+                          <router-link :to="{name:'Follower', params: {id: item.id}}"><b>{{ item.name }} </b></router-link>
+                          
                         </div>
                       </b-col>
 

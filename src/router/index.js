@@ -284,13 +284,6 @@ const routes = [
   },
 
   {
-    path: "/network_follower/:id?",
-    name: "Membar Network Follower",
-    component: memberNetworkFollower,
-
-  },
-
-  {
     path: "/login",
     name: "Login",
     component: Login,

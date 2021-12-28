@@ -14,7 +14,7 @@
               <div class="d-inline-flex">
                 <div class="center-img">
                   <splide :options="options" class="r-image">
-                    <splide-slide cl>
+                    <splide-slide>
                       <img :src="item.picture" class="r-image" />
                     </splide-slide>
                   </splide>
@@ -23,7 +23,7 @@
                   <p class="textt">
                     <strong class="title">
                       <router-link :to="{name:'BusinessFollower' , params:{id: item.id}}">
-                        {{ item.name }}
+                       {{ item.name }}
                       </router-link>
                     </strong>
                     <br />

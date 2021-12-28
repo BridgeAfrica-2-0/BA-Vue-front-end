@@ -390,7 +390,6 @@
         <b-col> </b-col>
       </b-row>
     </div>
-
     <Footer />
   </div>
 </template>

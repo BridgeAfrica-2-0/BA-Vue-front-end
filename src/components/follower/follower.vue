@@ -50,12 +50,6 @@
                 $t("profilefollower.Community")
               }}</span></b-button
             >
-            <!-- <b-button class="message size mr-2 ml-1">
-              <i class="fas fa-envelope fa-lg btn-icon"></i>
-              <span class="txt-btn">{{
-                $t("profilefollower.Message")
-              }}</span></b-button
-            > -->
 
             <BtnCtaMessage :element="info.user" type="people" :header="true" />
 
@@ -174,39 +168,31 @@ export default {
     Network,
   },
 
-  // created(){
-
-  // //   this.$store
-  // //       .dispatch("follower/loadUserPostIntro", this.foll_id)
-  // //       .then((response) => {
-
-  // //       })
-  // //       .catch((error) => {
-  // //         console.log({error:error});
-  // //       });
-
-  // // },
+  created() {
+    this.$store
+      .dispatch("follower/loadUserPostIntro", this.foll_id)
+      .then((response) => {})
+      .catch((error) => {
+        console.log({ error: error });
+      });
+  },
 
   mounted() {
     this.foll_id = this.$route.params.id;
     console.log("Info: ", this.info.user);
-    // this.$store
-    // .dispatch("follower/UcommunityFollower", this.foll_id)
-    // .then((response) => {
+    this.$store
+      .dispatch("follower/UcommunityFollower", this.foll_id)
+      .then((response) => {})
+      .catch((error) => {
+        console.log({ error: error });
+      });
 
-    // })
-    // .catch((error) => {
-    //   console.log({error:error});
-    // });
-
-    // this.$store
-    // .dispatch("follower/UcommunityFollowing", this.foll_id)
-    // .then((response) => {
-
-    // })
-    // .catch((error) => {
-    //   console.log({error:error});
-    // });
+    this.$store
+      .dispatch("follower/UcommunityFollowing", this.foll_id)
+      .then((response) => {})
+      .catch((error) => {
+        console.log({ error: error });
+      });
 
     this.$store
       .dispatch("follower/Tcommunity", this.foll_id)
@@ -215,41 +201,33 @@ export default {
         console.log({ error: error });
       });
 
-    // this.$store
-    // .dispatch("follower/BcommunityFollower", this.foll_id)
-    // .then((response) => {
+    this.$store
+      .dispatch("follower/BcommunityFollower", this.foll_id)
+      .then((response) => {})
+      .catch((error) => {
+        console.log({ error: error });
+      });
 
-    // })
-    // .catch((error) => {
-    //   console.log({error:error});
-    // });
+    this.$store
+      .dispatch("follower/BcommunityFollowing", this.foll_id)
+      .then((response) => {})
+      .catch((error) => {
+        console.log({ error: error });
+      });
 
-    // this.$store
-    // .dispatch("follower/BcommunityFollowing", this.foll_id)
-    // .then((response) => {
+    this.$store
+      .dispatch("follower/NcommunityFollower", this.foll_id)
+      .then((response) => {})
+      .catch((error) => {
+        console.log({ error: error });
+      });
 
-    // })
-    // .catch((error) => {
-    //   console.log({error:error});
-    // });
-
-    // this.$store
-    // .dispatch("follower/NcommunityFollower", this.foll_id)
-    // .then((response) => {
-
-    // })
-    // .catch((error) => {
-    //   console.log({error:error});
-    // });
-
-    // this.$store
-    // .dispatch("follower/NcommunityFollowing", this.foll_id)
-    // .then((response) => {
-
-    // })
-    // .catch((error) => {
-    //   console.log({error:error});
-    // });
+    this.$store
+      .dispatch("follower/NcommunityFollowing", this.foll_id)
+      .then((response) => {})
+      .catch((error) => {
+        console.log({ error: error });
+      });
   },
 
   computed: {

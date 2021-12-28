@@ -426,9 +426,9 @@ export default {
                     let editor = res.data.data
                     if (editor.length > 0) {
                         editor.map((elm) => {
-                                state.editors.push({ accountType: "editor", ...elm })
-                            })
-                            // state.editors = { accountType: "editor", ...res.data.data }
+                            state.editors.push({ accountType: "editor", ...elm })
+                        })
+
                     }
                     console.log("editor:", state.editors);
                     commit("setBizs", state.editors);

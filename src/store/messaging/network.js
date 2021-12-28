@@ -437,9 +437,9 @@ export default {
 
                     if (members.length > 0) {
                         members.map((elm) => {
-                                state.members.push({ accountType: "member", ...elm, id: elm.user_id })
-                            })
-                            // state.members = { accountType: "member", ...res.data }
+                            state.members.push({ accountType: "member", ...elm, id: elm.user_id })
+                        })
+
                     }
                     console.log("member:", state.members);
                     commit("setBizs", state.members);

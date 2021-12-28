@@ -62,10 +62,6 @@
             ></i>
             <span> {{ $t("businessf.Community") }}</span></b-button
           >
-          <!-- <b-button class="message ml-1 size" size="sm">
-            <i class="fas fa-envelope fa-lg btn-icon"></i>
-            <span>{{ $t("businessf.Message") }}</span></b-button
-          > -->
 
           <BtnCtaMessage
             :element="business_info"

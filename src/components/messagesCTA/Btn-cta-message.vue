@@ -1,8 +1,4 @@
 <template>
-  <!-- <b-button v-if="header" class="message size" @click="cta()">
-      <i class="fas fa-envelope fa-lg btn-icon"></i>
-      <span>{{ $t("businessf.Message") }}</span>
-    </b-button> -->
   <b-button
     :block="header"
     variant="primary"

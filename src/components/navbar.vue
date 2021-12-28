@@ -96,11 +96,12 @@
                 data-toggle="popover"
                 class="form-control search-h"
                 style="font-size: 17px !important"
-                :placeholder="searchOptions.placeholder"
-                v-model="searchOptions.keyword"
+                :placeholder="credentials.placeholder"
+                v-model="credentials.keyword"
                 aria-label=""
                 data-original-title=""
                 title=""
+                @keypress.enter="getKeyword"
               />
 
               <vue-bootstrap-typeahead
@@ -604,7 +605,6 @@ export default {
   },
   data() {
     return {
-
       isActive: false,
       shownav: false,
       notifications: [],
@@ -796,6 +796,7 @@ export default {
       if (!this.credentials.keyword) return false;
 
       if (this.$route.name != "Search") {
+        console.log("the keyword is: ", this.credentials.keyword);
         this.$store
           .dispatch("allSearch/SEARCH", {
             keyword: this.credentials.keyword,
@@ -838,8 +839,7 @@ export default {
       location.reload();
     },
     logout: async function () {
-
-       let loader = this.$loading.show({
+      let loader = this.$loading.show({
         container: this.$refs.formContainer,
         canCancel: true,
         onCancel: this.onCancel,

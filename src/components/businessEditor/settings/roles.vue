@@ -74,8 +74,8 @@
                       font-scale="1"
                     ></b-icon>
                   </template>
-                  <b-dropdown-item href="#">Edit</b-dropdown-item>
-                  <b-dropdown-item href="#"> Delete </b-dropdown-item>
+                  <b-dropdown-item href="#">{{$t('general.Edit')}}</b-dropdown-item>
+                  <b-dropdown-item href="#">{{$t('general.Delete')}}</b-dropdown-item>
                 </b-dropdown>
               </div>
             </span>

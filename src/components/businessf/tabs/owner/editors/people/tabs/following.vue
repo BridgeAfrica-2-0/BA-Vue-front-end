@@ -9,7 +9,7 @@
           </b-input-group-prepend>
           <b-form-input
             aria-label="Text input with checkbox"
-            placeholder="Search Something"
+            :placeholder="$('general.Search_Something')"
             type="text"
             class="form-control"
             v-model="searchTitle"

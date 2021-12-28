@@ -12,7 +12,7 @@
           <b-form-group class="mb-0" v-slot="{ ariaDescribedby }">
             <b-form-radio-group
               class="pt-2 text"
-              :options="['Public', 'Private']"
+              :options="[this.$t('general.Public'), this.$t('general.Private')]"
               :aria-describedby="ariaDescribedby"
             ></b-form-radio-group>
           </b-form-group>

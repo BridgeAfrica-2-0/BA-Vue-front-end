@@ -20,7 +20,7 @@
                 <b-tabs  lazy fill pills content-class="mt-3  f-left m-up">
                   <b-tab active>
                     <template slot="title">
-                      Followers <span class="spa-color">  {{ nFormatter(total.total_user_follower)}} </span>
+                      {{$t("general.Followers")}} <span class="spa-color">  {{ nFormatter(total.total_user_follower)}} </span>
                     </template>
 
                     <div class="s-comcard"><People   type="Follower" /></div>

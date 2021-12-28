@@ -77,7 +77,7 @@
 
           <!--   edit array   -->
 
-          <b-modal id="modal-edit" ref="modal-edit" centered hide-footer title="Update Post" @hidden="resetPostData">
+          <b-modal id="modal-edit" ref="modal-edit" centered hide-footer :title="$t('general.Update_Post')" @hidden="resetPostData">
             
             <b-row ref="loader">
               <b-col cols="1" class="m-0 p-0"></b-col>

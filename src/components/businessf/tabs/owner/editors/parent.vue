@@ -28,7 +28,7 @@
               class="a-center"
             >
               <i :class="networkInfo.is_follow ? 'fas fa-user-minus fa-lg btn-icon':'fas fa-user-plus fa-lg btn-icon'"></i>
-              <span> Community</span>
+              <span> {{ $t('general.Community') }}</span>
             </b-button>
           </b-col>
         </b-row>
@@ -59,13 +59,14 @@
         <h6 class="mt-2 font-weight-bolder title ">{{ $t('general.About') }}</h6>
         <p class="text-justify text">
           <read-more
-            more-str="read more"
+            :more-str="$t('search.read_more')"
             class="readmore"
             :text="networkInfo.description"
             link="#"
-            less-str="read less"
+            :less-str="$t('search.read_less')"
             :max-chars="100"
           ></read-more>
+         
         </p>
       </b-card-text>
     </b-card>
@@ -322,13 +323,13 @@ export default {
           this.buttonStatus = false;
           this.flashMessage.show({
             status: "success",
-            message: "You Are Not more Following"
+            message: this.$t('network.You_Are_Not_more_Following')
           });
         } else {
           this.buttonStatus = false;
           this.flashMessage.show({
             status: "success",
-            message: "You Are Now Following"
+            message: this.$t('network.You_Are_Now_Following')
           });
         }
       })
@@ -337,7 +338,7 @@ export default {
         this.buttonStatus = false;
         this.flashMessage.show({
           status: "error",
-          message: "Unable To follow"
+          message: this.$t('network.Unable_To_follow'),
         });
       });
     },

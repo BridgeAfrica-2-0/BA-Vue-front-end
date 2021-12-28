@@ -13,7 +13,7 @@
         variant="primary"
         size="sm"
       >
-        Edit Profile
+        {{ $t("general.Edit_Profile") }}
       </button>
     </span>
 

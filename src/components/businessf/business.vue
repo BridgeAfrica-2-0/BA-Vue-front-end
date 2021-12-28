@@ -56,9 +56,11 @@
             @click="handleFollow"
           >
             <i
-              :class="`fas ${
-                hasBeFollow ? 'fa-user-minus' : 'fa-user-plus'
-              } fa-lg btn-icon`"
+              :class="
+                `fas ${
+                  hasBeFollow ? 'fa-user-minus' : 'fa-user-plus'
+                } fa-lg btn-icon`
+              "
             ></i>
             <span> {{ $t("businessf.Community") }}</span></b-button
           >
@@ -66,7 +68,12 @@
             <i class="fas fa-envelope fa-lg btn-icon"></i>
             <span>{{ $t("businessf.Message") }}</span></b-button
           >
-          <b-button class="direction ml-1 size" variant="primary" size="sm">
+          <b-button
+            class="direction ml-1 size"
+            variant="primary"
+            size="sm"
+            @click="gotoAbout()"
+          >
             <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
             <span>{{ $t("businessf.Direction") }}</span></b-button
           >
@@ -122,7 +129,11 @@
         <span>{{ $t("businessf.Message") }}</span>
       </b-button>
 
-      <b-button class="direction ml-1 size" variant="primary">
+      <b-button
+        class="direction ml-1 size"
+        variant="primary"
+        @click="gotoAbout()"
+      >
         <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
         <span>{{ $t("businessf.Direction") }}</span></b-button
       >
@@ -145,14 +156,14 @@
       <b-row>
         <b-col cols="12" class="p-0">
           <b-tabs lazy content-class="mt-3 p-0" v-model="currentTab" fill pills>
-            <b-tab :title="$t('businessf.Home')"><HomePage /></b-tab>
-            <b-tab :title="$t('businessf.About')"><About /></b-tab>
-            <b-tab type="business" :title="$t('businessf.Media')"
+            <b-tab :title="$t('general.Home')"><HomePage /></b-tab>
+            <b-tab :title="$t('general.About')"><About /></b-tab>
+            <b-tab type="business" :title="$t('general.Media')"
               ><Media :type="'business'" :isEditor="false"
             /></b-tab>
-            <b-tab :title="$t('businessf.Market')"><MarketPlace /></b-tab>
-            <b-tab :title="$t('businessf.Networks')"><Networks /></b-tab>
-            <b-tab :title="$t('businessf.Community')"><Community /></b-tab>
+            <b-tab :title="$t('general.Market')"><MarketPlace /></b-tab>
+            <b-tab :title="$t('general.Networks')"><Networks /></b-tab>
+            <b-tab :title="$t('general.Community')"><Community /></b-tab>
           </b-tabs>
         </b-col>
       </b-row>
@@ -234,7 +245,7 @@ export default {
   },
 
   watch: {
-    "$store.state.businessOwner.businessInfo": function () {
+    "$store.state.businessOwner.businessInfo": function() {
       this.hasBeFollow = this.$store.state.businessOwner.businessInfo.is_follow;
     },
     currentTab: (newVal, oldVal) => {
@@ -277,6 +288,9 @@ export default {
         });
     },
 
+    gotoAbout() {
+      this.currentTab = 1;
+    },
     businessInfo() {
       this.$store
         .dispatch("businessOwner/businessInfo", this.url_data)

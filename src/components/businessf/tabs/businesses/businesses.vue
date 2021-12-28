@@ -1,8 +1,8 @@
 <template>
   <div class="lalala">
     <b-tabs content-class="mt-3" fill pills >
-      <b-tab title="Followers"><Followers /></b-tab>
-      <b-tab title="Following"><Following /></b-tab>
+      <b-tab :title="$t('general.Followers')"><Followers /></b-tab>
+      <b-tab :title="$t('general.Following')"><Following /></b-tab>
     </b-tabs>
   </div>
 </template>

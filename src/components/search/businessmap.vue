@@ -24,6 +24,29 @@
               <h6 class="text-center my-3">
                 {{ business.name }}
               </h6>
+              <span v-for="cat in business.category" :key="cat.name">
+                {{ cat.name }}
+              </span>
+              <span>
+                <b-icon-geo-alt class="ico"></b-icon-geo-alt>
+                {{ business.city }}
+                <span
+                  class="ml-2"
+                  v-for="nie in business.neigborhood"
+                  :key="nie.id"
+                >
+                  {{ nie.name }}
+                </span>
+              </span>
+              <read-more
+                :more-str="$t('search.read_more')"
+                class="readmore"
+                :text="business.about_business"
+                link="#"
+                :less-str="$t('search.read_less')"
+                :max-chars="100"
+              >
+              </read-more>
             </div>
           </div>
         </MglPopup>
@@ -37,7 +60,7 @@ import { MglMap, MglMarker, MglPopup } from "vue-mapbox";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
-  props: ["businessPage"],
+  props: ["businesses"],
   components: {
     MglMap,
     MglMarker,
@@ -49,7 +72,7 @@ export default {
       accessToken: process.env.VUE_APP_MAPBOX_TOKEN,
       mapStyle: "mapbox://styles/mapbox/streets-v11",
       center: [11.504929555178624, 3.8465173382452815], // Lng,Lat
-      zoom: 12,
+      zoom: 4,
       total: 0,
       per_page: 10,
       list: [],

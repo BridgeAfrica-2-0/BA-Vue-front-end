@@ -109,7 +109,7 @@
                 :minMatchingChars="0"
                 :maxMatches="10"
                 :serializer="(item) => item.name"
-                placeholder="Where"
+                :placeholder="$t('general.Where')"
                 class="search-hh w-44"
               />
 
@@ -147,7 +147,7 @@
                   class="nav-link text-dark hov"
                   href=""
                 >
-                  Home
+                  {{ $t("general.Home") }}
                 </router-link>
               </div>
 
@@ -365,11 +365,11 @@
 
                       <b-collapse id="collapse-2" class="mt-1">
                         <b-card-text
-                          @click="$i18n.locale = 'en'"
+                          @click="language('en')"
                           class="cursor-pointer mb-1"
                           >{{ $t("auth.english") }}</b-card-text
                         >
-                        <b-card-text @click="$i18n.locale = 'fr'">{{
+                        <b-card-text @click="language('fr')">{{
                           $t("auth.french")
                         }}</b-card-text>
                       </b-collapse>
@@ -548,7 +548,7 @@ export default {
       default: function () {
         return {
           keyword: "",
-          placeholder: "All",
+          placeholder: this.$t("general.All"),
         };
       },
     },
@@ -564,7 +564,7 @@ export default {
       redirectionPatterns: null,
       searchOptions: {
         keyword: "",
-        placeholder: "All",
+        placeholder: this.$t("general.All"),
       },
       query: "",
       selectedUser: null,
@@ -581,6 +581,9 @@ export default {
   },
   beforeMount() {
     console.log("beforeMount");
+    this.$i18n.locale = localStorage.getItem("lang")
+      ? localStorage.getItem("lang")
+      : "en";
 
     this.getLocation();
   },
@@ -749,7 +752,7 @@ export default {
             console.log("Error erro!");
           });
 
-        this.$router.push({ name: "Search" });
+        this.$router.push("/search");
       }
     },
 
@@ -777,7 +780,11 @@ export default {
         })
         .catch(() => console.log("error"));
     },
-
+    language(lang) {
+      localStorage.setItem("lang", lang);
+      this.$i18n.locale = lang;
+      location.reload();
+    },
     logout: async function () {
       let loader = this.$loading.show({
         container: this.$refs.formContainer,

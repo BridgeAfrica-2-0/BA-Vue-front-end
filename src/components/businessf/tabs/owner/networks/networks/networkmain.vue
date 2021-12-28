@@ -6,7 +6,7 @@
       </div>
       <div class=" col details">
         <h4>
-          <b-link class="link">Business Name</b-link>
+          <b-link class="link">{{ $t('general.Business_Name') }}</b-link>
         </h4>
         <p>
           <a href="">{{ $t('network.mywebsite_com') }}</a> <br />

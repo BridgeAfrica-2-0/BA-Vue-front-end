@@ -1195,7 +1195,7 @@
                                             size="30"
                                           ></b-avatar>
                                           <span class="bold">
-                                            {{ biz.name }}
+                                            {{ biz.fullname }}
                                           </span>
                                         </b-form-checkbox>
                                       </b-form-checkbox-group>
@@ -1460,7 +1460,7 @@
                                   class="centralizer"
                                 ></b-spinner>
                               </div>
-                              <div v-if="bizs">
+                              <div v-if="bizs.length">
                                 <tr
                                   v-for="(biz, index) in bizs"
                                   :key="index"

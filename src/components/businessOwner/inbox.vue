@@ -1415,6 +1415,7 @@
                                   class="centralizer"
                                 ></b-spinner>
                               </div>
+                              <!-- Length: {{ bizs }} -->
                               <div v-if="bizs.length">
                                 <tr
                                   v-for="(biz, index) in bizs"

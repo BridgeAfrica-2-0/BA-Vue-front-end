@@ -32,6 +32,10 @@ Vue.use('vue-bootstrap-typeahead', VueBootstrapTypeahead)
 import plugin from './http';
 Vue.use(plugin);
 
+import VueClipboard from 'vue-clipboard2'
+
+Vue.use(VueClipboard)
+
 Vue.use(require('vue-moment'));
 
 IconifyIcon.addIcon('home', homeIconData);

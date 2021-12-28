@@ -5,13 +5,13 @@
       <fas-icon class="icons" :icon="['fas', 'exclamation-circle']" size="lg" />
     </h6>
 
-    <div>
-      <Sponsor />
-    </div>
+    <Sponsor @on:init="(val) => showSponsored = val" v-if="showSponsored" />
+    
     <h6>
       <fas-icon class="icons" :icon="['fab', 'readme']" size="lg" />
       {{ $t("search.Posting") }}
     </h6>
+
     <Loader v-if="!pageHasLoad || loaderState" />
     <NotFound v-if="!posts.length && !loaderState" :title="title" />
     <div v-else>
@@ -56,6 +56,7 @@ export default {
 
   data: () => ({
     pageHasLoad: false,
+    showSponsored: false
   }),
 
   destroyed() {

@@ -162,7 +162,6 @@
               </div>
             </b-modal>
           </b-col>
-
           <b-col cols="4" md="6" class="">
             <div class="my-auto">
               <span class="float-right">

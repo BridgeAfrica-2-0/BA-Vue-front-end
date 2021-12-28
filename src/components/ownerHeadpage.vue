@@ -14,11 +14,12 @@
         <b-row class="mt-md-2 text-left">
           <b-col cols="12" md="12" class="m-0 p-0 text-left put-top">
             <b-avatar
-              :src="info.user.profile_picture ? info.user.profile_picture :''"
+              :src="auth.profile_picture"
               class="avat text-center"
               badge-variant="primary"
               badge-offset="10px"
             ></b-avatar>
+            
 
             <b-icon
               icon="camera-fill"
@@ -29,7 +30,7 @@
             <span style="display: inline-block">
               <h6 class="profile-name text-center">
                 <div class="username">
-                  <b> {{ info.user.name }} </b>
+                  <b> {{ info.user.name }}</b>
                 </div>
 
                 <span class="duration float-left"> {{ nFormatter(total.total_community) }} {{ $t('profileowner.Community') }} </span>
@@ -198,6 +199,8 @@
 
 import VueCropper from "vue-cropperjs";
 import "cropperjs/dist/cropper.css";
+
+import { mapGetters } from 'vuex'
 
 export default {
   name: "headPageOwner",
@@ -578,6 +581,11 @@ export default {
   },
 
   computed: {
+
+    ...mapGetters({
+      auth: 'auth/profilConnected'
+    }),
+
     total() {
       return this.$store.state.profile.Tcommunity;
     },

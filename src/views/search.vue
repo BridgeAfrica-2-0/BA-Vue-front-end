@@ -429,8 +429,13 @@
               <br />
 
               <hr />
-              <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
-              <h6>{{ $t("search.People") }}</h6>
+
+              <div class="d-flex">
+                <fas-icon class="icons mr-1" :icon="['fas', 'users']" size="lg" />
+              
+                <h6>{{ $t("search.People") }}</h6>
+              </div>
+              
 
               <MiniPeople />
               <span class="float-right mb-3" @click="selectedId = 2">

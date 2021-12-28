@@ -24,7 +24,10 @@
                     class="mt-lg-2"
                   >
                     <div class="mt-2 mt-lg-0 mt-xl-0 username">
-                      <b>{{ people.name }} </b>
+                      <router-link :to="{name:'Follower', params:{id: people.id}}">
+                        <b>{{ people.name }} </b>
+                      </router-link>
+                      
                     </div>
                   </b-col>
 
@@ -67,12 +70,22 @@
                     class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
                   >
                     <b-button
+                      :disabled="loading"
                       block
                       size="sm"
                       class="b-background flexx pobtn shadow"
+                      :class="people.is_follow !== 0 && 'u-btn'"
                       variant="primary"
+                      :id="'followbtn' + people.id"
+                      @click="handleFollow(people)"
                     >
-                      <i class="fas fa-user-plus fa-lg btn-icon"></i>
+                      <i
+                        class="fas fa-lg btn-icon"
+                        :class="people.is_follow !== 0
+                                    ? 'fa-user-minus'
+                                    : 'fa-user-plus'
+                                "
+                      ></i>
                       <span class="btn-com">{{ $t("search.Community") }}</span>
                     </b-button>
                   </b-col>
@@ -87,6 +100,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: "PeopleComponent",
   props: {
@@ -94,6 +109,36 @@ export default {
       type: Object,
     },
   },
+
+  data: () => ({
+    loading: false
+  }),
+
+  methods:{
+    async handleFollow(user) {
+      this.loading = true
+      document.getElementById("followbtn" + user.id).disabled = true;
+      const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
+      const nextFollowState = user.is_follow === 0 ? 1 : 0;
+      const data = {
+        id: user.id,
+        type: "user",
+      };
+
+      await axios
+        .post(uri, data)
+        .then(({ data }) => {
+          user.is_follow = nextFollowState;
+          document.getElementById("followbtn" + user.id).disabled = false;
+        })
+        .catch((err) => {
+          console.log({ err: err });
+          document.getElementById("followbtn" + user.id).disabled = false;
+        })
+        .finally(() => this.loading = false)
+        ;
+    },
+  }
 };
 </script>
 

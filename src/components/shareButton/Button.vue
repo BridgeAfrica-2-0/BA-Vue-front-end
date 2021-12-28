@@ -118,6 +118,7 @@
           <b-avatar
             variant="light"
             src="/icons/profile.png"
+            class="icon-wh"
             :square="true"
           ></b-avatar>
         </span>
@@ -134,6 +135,7 @@
         <span class="text-ored">
           <b-avatar
             variant="light"
+            class="icon-wh"
             src="/icons/newsfeed.png"
             :square="true"
           ></b-avatar>
@@ -152,6 +154,7 @@
           <b-avatar
             variant="light"
             src="/icons/network.png"
+            class="icon-wh"
             :square="true"
           ></b-avatar>
         </span>
@@ -169,6 +172,7 @@
           <b-avatar
             variant="light"
             src="/icons/business.png"
+            class="icon-wh"
             :square="true"
           ></b-avatar>
         </span>
@@ -187,6 +191,7 @@
         <span class="text-ored">
           <b-avatar
             variant="light"
+            class="icon-wh"
             src="/icons/community.png"
             :square="true"
           ></b-avatar>
@@ -196,7 +201,7 @@
         </div>
       </b-dropdown-item>
 
-      <b-popover target="sharing-community" triggers="hover">
+      <b-popover target="sharing-community" triggers="click">
         <div class="popover-body">
           <div
             @mousedown="open('modal-1')"
@@ -218,6 +223,7 @@
               <b-avatar
                 variant="light"
                 src="/icons/network.png"
+                class="icon-wh"
                 :square="true"
               ></b-avatar>
             </span>
@@ -234,6 +240,7 @@
             <span class="text-ored">
               <b-avatar
                 variant="light"
+                class="icon-wh"
                 src="/icons/business.png"
                 :square="true"
               ></b-avatar>
@@ -245,10 +252,15 @@
         </div>
       </b-popover>
 
-      <b-dropdown-item class="d-flex py-2 cursor-pointer">
+      <b-dropdown-item class="d-flex py-2 cursor-pointer"
+          v-clipboard:copy="link"
+          v-clipboard:success="onCopy"
+          v-clipboard:error="onError"
+      >
         <span class="text-ored">
           <b-avatar
             variant="light"
+            class="icon-wh"
             src="/icons/copy.png"
             :square="true"
           ></b-avatar>
@@ -268,6 +280,7 @@
         <span class="text-ored">
           <b-avatar
             variant="light"
+            class="icon-wh"
             src="/icons/share_via.png"
             :square="true"
           ></b-avatar>
@@ -404,6 +417,7 @@ export default {
   created() {
     this.uuid = this.post.post_id ? this.post.post_id : this.post.id;
     this.type = this.profile.user_type;
+
   },
 
   computed: {
@@ -478,6 +492,25 @@ export default {
   },
 
   methods: {
+
+    onCopy: function (e) {
+      
+      this.flashMessage.show({
+        status: 'success',
+        blockClass: 'custom-block-class',
+        message: 'You just copied the following text to the clipboard: ' + e.text,
+      });
+    },
+    
+    onError: function (e) {
+      this.flashMessage.show({
+        status: 'success',
+        blockClass: 'custom-block-class',
+        message: 'Failed to copy the text to the clipboard',
+      });
+      console.log(e);
+    },
+    
     onShareVia(type) {
       const elm = document.querySelector(`#${type}-${this.uuid}`);
       elm.click();
@@ -507,7 +540,9 @@ export default {
       const request = await this.$repository.share.userPost(data, [
         `${this.post.poster_type}`,
       ]);
+
       loader.hide();
+      
       if (request.success)
         this.flashMessage.success({
           time: 5000,
@@ -519,6 +554,10 @@ export default {
 </script>
 
 <style scoped>
+img[alt="avatar"] {
+  heigth:20px !imporant;
+  width: 20px !imporant;
+}
 .d-t {
   color: #e75c18;
 }

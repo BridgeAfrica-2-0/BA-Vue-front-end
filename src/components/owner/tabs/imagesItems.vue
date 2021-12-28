@@ -130,7 +130,6 @@ export default {
   },
 
   methods: {
-
     ...mapMutations({
       updatePictureState: "auth/updateProfilePicture",
       addCoverPicture: "businessOwner/addCoverPicture"
@@ -177,7 +176,11 @@ export default {
       this.loading = await this.setCoverPic();
 
       if ("BusinessOwner" === this.$route.name)
-        this.addCoverPicture(this.getFullMediaLink());
+        this.addCoverPicture({
+          media_url:this.getFullMediaLink(),
+          id:this.im.id,
+          media_type: "image/png"
+        });
 
       loader.hide();
     },

@@ -12,7 +12,7 @@
               pills
               v-model="currentTab"
             >
-              <b-tab :title="$t('businessowner.Home')"><HomePage /></b-tab>
+              <b-tab :title="$t('businessowner.Home')"><HomePage @pageChange="pageChange" /></b-tab>
               <b-tab :title="$t('businessowner.About')"><About /></b-tab>
               <b-tab :title="$t('businessowner.Media')"
                 ><Media type="business"
@@ -63,6 +63,10 @@ export default {
       this.isCover = true;
       this.currentTab = 2;
     },
+    pageChange(){
+      console.log("business pageChange")
+      this.$emit('pageChange')
+    }
   },
   created() {
     let tab = this.tabs.findIndex((tab) => tab === this.$route.hash);

@@ -5,7 +5,7 @@
         <b>{{ $t("businessf.Intro") }}</b>
       </h6>
 
-      <b-card-text> 
+      <b-card-text>
         <p>
           <b-icon icon="briefcase-fill" class="primary h_icon"></b-icon>
           <span v-for="cat in business_intro.category" :key="cat.id">
@@ -17,16 +17,16 @@
           <!-- <span v-for="(keyword, index) in business_intro.keywords" :key="index"
             >{{ keyword }},
           </span> -->
-          <span> {{business_intro.name}} </span>
+          <span> {{ business_intro.name }} </span>
         </p>
         <p>
-          <b-icon icon="geo-alt-fill" class="primary h_icon"></b-icon> {{business_intro.city}},
+          <b-icon icon="geo-alt-fill" class="primary h_icon"></b-icon>
+          {{ business_intro.city }},
           {{ business_intro.country[0].name }}
-          
         </p>
         <p>
           <b-icon icon="link" class="primary h_icon"></b-icon>
-          {{business_intro.website}}
+          {{ business_intro.website }}
         </p>
 
         <!-- <p>
@@ -60,6 +60,7 @@
       <MglMap
         :accessToken="accessToken"
         :mapStyle.sync="mapStyle"
+        v-if="business_intro.lng && business_intro.lat"
         :center="[business_intro.lng, business_intro.lat]"
         :zoom="zoom"
         style="width: 100%; height: 250px"
@@ -67,27 +68,39 @@
         <MglMarker
           :coordinates="[business_intro.lng, business_intro.lat]"
           color="red"
-        />
+        >
+          <MglPopup>
+            <div class="row">
+              <div class="px-4 py-2">
+                <p class="text-center mb-0">{{ business_intro.name }}</p>
+                <p class="text-center mb-0">
+                  {{ business_intro.address }}
+                </p>
+              </div>
+            </div>
+          </MglPopup>
+        </MglMarker>
       </MglMap>
     </b-card>
   </div>
 </template>
 
 <script>
-import { MglMap, MglMarker } from "vue-mapbox";
+import { MglMap, MglPopup, MglMarker } from "vue-mapbox";
 export default {
   data() {
     return {
       accessToken: process.env.VUE_APP_MAPBOX_TOKEN,
       mapStyle: "mapbox://styles/mapbox/streets-v11",
       coordinates: [11.504929555178624, 3.8465173382452815], // Lng,Lat
-      zoom: 12,
+      zoom: 11,
     };
   },
 
   components: {
     MglMap,
     MglMarker,
+    MglPopup
   },
   computed: {
     business_intro() {

@@ -1194,7 +1194,7 @@
                                             size="30"
                                           ></b-avatar>
                                           <span class="bold">
-                                            {{ biz.name }}
+                                            {{ biz.fullname }}
                                           </span>
                                         </b-form-checkbox>
                                       </b-form-checkbox-group>
@@ -1450,6 +1450,8 @@
                               <!-- End Chats -->
                             </b-tab>
                             <b-tab title="Members" @click="getNetworkMembers()">
+                              <!-- Length :{{ bizs }} -->
+
                               <div v-if="loader" class="text-center">
                                 <b-spinner
                                   variant="primary"
@@ -1481,7 +1483,7 @@
                                             size="30"
                                           ></b-avatar>
                                           <span class="bold">
-                                            {{ biz.name }}
+                                            {{ biz.fullname }}
                                           </span>
                                         </b-form-checkbox>
                                       </b-form-checkbox-group>
@@ -1489,6 +1491,7 @@
                                   </td>
                                 </tr>
                               </div>
+
                               <h2 v-else>No Member</h2>
 
                               <!-- End Chats -->

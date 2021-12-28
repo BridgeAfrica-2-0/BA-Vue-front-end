@@ -71,9 +71,9 @@
         >
           <MglPopup>
             <div class="row">
-              <div class="px-4 py-2">
-                <p class="text-center mb-0">{{ business_intro.name }}</p>
-                <p class="text-center mb-0">
+              <div class="px-4 py-2 dialog-div">
+                <p class="mb-0 dialog-text">{{ business_intro.name }}</p>
+                <p class="mb-0 dialog-text">
                   {{ business_intro.address }}
                 </p>
               </div>
@@ -100,7 +100,7 @@ export default {
   components: {
     MglMap,
     MglMarker,
-    MglPopup
+    MglPopup,
   },
   computed: {
     business_intro() {
@@ -115,5 +115,13 @@ export default {
 .h_icon {
   font-size: 28px;
   margin-right: 10px;
+}
+
+.dialog-div {
+  min-width: 200px;
+}
+.dialog-text {
+  font-size: 15px;
+  font-weight: bold;
 }
 </style>

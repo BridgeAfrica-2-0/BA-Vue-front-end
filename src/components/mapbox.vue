@@ -10,9 +10,9 @@
       <MglMarker :coordinates="[business.lng, business.lat]" color="red">
         <MglPopup>
           <div class="row">
-            <div class="px-4 py-2">
-              <p class="text-center mb-0">{{ business.name }}</p>
-              <p class="text-center mb-0">
+            <div class="px-4 py-2 dialog-div">
+              <p class="mb-0 dialog-text">{{ business.name }}</p>
+              <p class="mb-0 dialog-text">
                 {{ business.address }}
               </p>
             </div>
@@ -42,4 +42,12 @@ export default {
 </script>
 <style scoped>
 @import url("https://api.tiles.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css");
+
+.dialog-div{
+  min-width: 200px;
+}
+.dialog-text{
+  font-size: 15px;
+  font-weight: bold;
+}
 </style>

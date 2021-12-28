@@ -123,9 +123,9 @@
         >
           <MglPopup>
             <div class="row">
-              <div class="px-4 py-2">
-                <p class="text-center mb-0">{{ business_intro.name }}</p>
-                <p class="text-center mb-0">
+              <div class="px-4 py-2 dialog-div">
+                <p class="mb-0 dialog-text">{{ business_intro.name }}</p>
+                <p class="mb-0 dialog-text">
                   {{ business_intro.address }}
                 </p>
               </div>
@@ -631,11 +631,16 @@ export default {
     font-size: 14px !important;
   }
 }
-</style>
-
-<style>
 .icon-size {
   width: 24px;
   height: 24px;
+}
+
+.dialog-div {
+  min-width: 200px;
+}
+.dialog-text {
+  font-size: 15px;
+  font-weight: bold;
 }
 </style>

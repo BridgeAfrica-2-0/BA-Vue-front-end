@@ -112,6 +112,7 @@
       <MglMap
         :accessToken="accessToken"
         :mapStyle.sync="mapStyle"
+        v-if="business_intro.lng && business_intro.lat"
         :center="[business_intro.lng, business_intro.lat]"
         :zoom="zoom"
         style="width: 100%; height: 250px"
@@ -119,7 +120,18 @@
         <MglMarker
           :coordinates="[business_intro.lng, business_intro.lat]"
           color="red"
-        />
+        >
+          <MglPopup>
+            <div class="row">
+              <div class="px-4 py-2">
+                <p class="text-center mb-0">{{ business_intro.name }}</p>
+                <p class="text-center mb-0">
+                  {{ business_intro.address }}
+                </p>
+              </div>
+            </div>
+          </MglPopup>
+        </MglMarker>
       </MglMap>
     </b-card>
 
@@ -288,7 +300,7 @@
 <script>
 import axios from "axios";
 
-import { MglMap, MglMarker } from "vue-mapbox";
+import { MglMap, MglPopup, MglMarker } from "vue-mapbox";
 import { validationMixin } from "vuelidate";
 
 import { required, email, minLength } from "vuelidate/lib/validators";
@@ -308,7 +320,7 @@ export default {
       accessToken: process.env.VUE_APP_MAPBOX_TOKEN,
       mapStyle: "mapbox://styles/mapbox/streets-v11",
       coordinates: [11.504929555178624, 3.8465173382452815], // Lng,Lat
-      zoom: 12,
+      zoom: 11,
       position: {
         lat: 0,
         lng: 0,
@@ -551,6 +563,7 @@ export default {
   components: {
     MglMap,
     MglMarker,
+    MglPopup,
   },
 
   computed: {

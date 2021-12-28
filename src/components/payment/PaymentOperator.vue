@@ -7,7 +7,9 @@
 						Back
 					</button>
 				</div>
-			</div> -->
+			</div> -->    
+
+			
 
 			<div class="my-4 operator">
 				<div class="">
@@ -111,7 +113,7 @@
 			},
 			requestPayment() {
 				if (this.operator !== "" && this.price > 0)
-					this.$emit("requestpayment", this.price);
+					this.$emit("requestpayment", this.price,this.operator);
 			},
 			formatMoney(money) {
 				return this.formatObject.format(money);

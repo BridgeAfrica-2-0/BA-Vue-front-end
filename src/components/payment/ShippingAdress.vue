@@ -28,7 +28,20 @@
 					v-for="shipping_item in shippingsTab"
 					:key="shipping_item.id"
 				>  
-					<div>
+
+			
+    
+
+
+					<div class="d-inline-flex">
+
+					
+                        <div class="col-1">   <input type="radio" :v-model="shipping_item.id"  :checked="shipping_item.active"     name="shipping" value="">   </div>
+	
+
+	      <div>     
+
+	   
 						<p class="body-font-size">
 							{{ shipping_item.name }}, {{ shipping_item.phone }},{{
 								shipping_item.country
@@ -41,7 +54,7 @@
 								shipping_item.division
 							}}.{{ shipping_item.council_name }},
 							{{ shipping_item.neighbourhood_name }} -->
-						</p>
+						</p>   </div>
 					</div>
 					<div class="">
 						<div class="">
@@ -89,12 +102,14 @@
 							</div>
 						</div>
 					</div>
+
+				
 				</div>
 			</div>
 		</b-card-text>
 		<div class="row" v-if="loading">
 			<div class="col-12 d-flex justify-content-center">
-				<b-spinner large label="loading shipping..."></b-spinner>
+				<b-spinner variant="primary" large label="loading shipping..."></b-spinner>
 			</div>
 		</div>
 	</b-card>

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="people-style shadow" v-for="item in business" :key="item.id">
-      <b-row>
+      <b-row>  
         <b-col md="8" xl="8" lg="12" cols="12" sm="8">
           <div class="d-inline-flex">
             <div class="center-img">

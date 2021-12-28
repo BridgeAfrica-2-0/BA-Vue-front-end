@@ -63,7 +63,13 @@ export default {
     },
     BlockUser(dataInfo) {
       console.log(dataInfo);
-      this.$store.dispatch("profile/UnBlock", null)
+      let fd = new FormData();
+      fd.append("id", dataInfo.id);
+      fd.append("type", dataInfo.refernce);
+      this.$store.dispatch("profile/Block", {
+        path: "block/entity",
+        formData: fd
+        })
       .then(response => {
         this.community();
         console.log(response);

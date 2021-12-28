@@ -27,7 +27,7 @@
               size="4em"
             ></b-avatar>
             <span class="mr-auto">{{blockuser.name}}</span>
-            <span class="mr-auto" @click="UnblockBlockUser(blockuser)"><b-link href="#">{{ $t('businessowner.Unblock') }}</b-link></span>
+            <span class="mr-auto" @click="UnblockBlockUser(blockuser, 'user')"><b-link href="#">{{ $t('businessowner.Unblock') }}</b-link></span>
           </b-list>
         </b-skeleton-wrapper>
       </b-list-group>
@@ -35,6 +35,66 @@
     <b-container v-else>
       <b-card bg-variant="white" text-variant="black" class="text-center">
         <b-card-text>{{ $t('businessowner.No_Blocked_User_Available') }}.</b-card-text>
+      </b-card>
+    </b-container>
+
+    <b-container v-if="blockbusinesses != 0" class="bv-example-row">
+      <b-list-group v-for="blockbusines in blockbusinesses" :key="blockbusines.id">
+        <b-skeleton-wrapper :loading="loading">
+          <template #loading>
+            <b-card>
+              <b-skeleton type="avatar"></b-skeleton>
+              <b-skeleton width="55%"></b-skeleton>
+              <b-skeleton width="70%"></b-skeleton>
+            </b-card>
+          </template>
+          <b-list class="d-flex align-items-center m-list">
+            <b-avatar
+              variant="primary"
+              :text="blockbusines.name.charAt(0)"
+              :src="blockbusines.profile_picture"
+              class="mr-3"
+              size="4em"
+            ></b-avatar>
+            <span class="mr-auto">{{blockbusines.name}}</span>
+            <span class="mr-auto" @click="UnblockBlockUser(blockbusines, 'business')"><b-link href="#">{{ $t('businessowner.Unblock') }}</b-link></span>
+          </b-list>
+        </b-skeleton-wrapper>
+      </b-list-group>
+    </b-container>
+    <b-container v-else>
+      <b-card bg-variant="white" text-variant="black" class="text-center">
+        <b-card-text>No Blocked Business Available.</b-card-text>
+      </b-card>
+    </b-container>
+
+    <b-container v-if="blocknetworks != 0" class="bv-example-row">
+      <b-list-group v-for="blocknet in blocknetworks" :key="blocknet.id">
+        <b-skeleton-wrapper :loading="loading">
+          <template #loading>
+            <b-card>
+              <b-skeleton type="avatar"></b-skeleton>
+              <b-skeleton width="55%"></b-skeleton>
+              <b-skeleton width="70%"></b-skeleton>
+            </b-card>
+          </template>
+          <b-list class="d-flex align-items-center m-list">
+            <b-avatar
+              variant="primary"
+              :text="blocknet.name.charAt(0)"
+              :src="blocknet.profile_picture"
+              class="mr-3"
+              size="4em"
+            ></b-avatar>
+            <span class="mr-auto">{{blocknet.name}}</span>
+            <span class="mr-auto" @click="UnblockBlockUser(blocknet, 'network')"><b-link href="#">{{ $t('businessowner.Unblock') }}</b-link></span>
+          </b-list>
+        </b-skeleton-wrapper>
+      </b-list-group>
+    </b-container>
+    <b-container v-else>
+      <b-card bg-variant="white" text-variant="black" class="text-center">
+        <b-card-text>No Blocked Network Available.</b-card-text>
       </b-card>
     </b-container>
 
@@ -55,21 +115,28 @@ export default {
 
   computed: {
     blockusers() {
-      return this.$store.state.businessBlocking.blockusers;
+      return this.$store.state.profile.blockuser;
+    },
+    blockbusinesses() {
+      return this.$store.state.profile.blockbusiness;
+    },
+    blocknetworks() {
+      return this.$store.state.profile.blocknetwork;
     }
   },
 
   mounted(){
-    this.url = this.$route.params.id;
     this.blockUsers();
+    this.blockBusiness();
+    this.blockNetwork();
   },
   
   methods:{
      
     blockUsers() {
       this.loading = true;
-    this.$store
-      .dispatch("profile/getblockusers", this.url)
+      this.$store
+      .dispatch("profile/getblockusers", "blocked/user")
       .then(() => {
         console.log('ohh year');
         this.loading = false;
@@ -80,13 +147,47 @@ export default {
       });
     },
      
-    UnblockBlockUser(blockuser) {
+    blockBusiness() {
       this.loading = true;
-      console.log("user/unblocking/"+this.url+"?banned_id="+blockuser.banned_id+"&banned_type="+blockuser.banned_type);
-        this.axios.delete("user/unblocking/"+this.url+"?banned_id="+blockuser.banned_id+"&banned_type="+blockuser.banned_type)
+      this.$store
+      .dispatch("profile/getblockbusiness", "blocked/business")
+      .then(() => {
+        console.log('ohh year');
+        this.loading = false;
+      })
+      .catch(err => {
+        console.log({ err: err });
+        this.loading = false;
+      });
+    },
+     
+    blockNetwork() {
+      this.loading = true;
+      this.$store
+      .dispatch("profile/getblocknetwork", "blocked/network")
+      .then(() => {
+        console.log('ohh year');
+        this.loading = false;
+      })
+      .catch(err => {
+        console.log({ err: err });
+        this.loading = false;
+      });
+    },
+     
+    UnblockBlockUser(blockuser, type) {
+      this.loading = true;
+      console.log("{{url}}/api/v1/profile/unblock/entity");
+      console.log(blockuser);
+      let fd = new FormData();
+      fd.append("id", blockuser.id);
+      fd.append("type", type);
+      this.axios.post("profile/unblock/entity", fd)
         .then(response => {
 			  console.log(response);
             this.blockUsers();
+            this.blockBusiness();
+            this.blockNetwork();
             this.loading = false;
             this.flashMessage.show({
             status: "success",

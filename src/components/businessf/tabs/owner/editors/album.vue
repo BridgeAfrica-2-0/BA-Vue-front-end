@@ -64,9 +64,9 @@
                         :icon="['fas', 'ellipsis-v']"
                       />
                     </template>
-                    <b-dropdown-item href="#" @click="downloadPic(image.id)">Download</b-dropdown-item>
-                    <b-dropdown-item href="#" @click="setProfilePic(image.id)">Make Profile Picture</b-dropdown-item>
-                    <b-dropdown-item href="#" @click="deleteImage(image.id)">Delete</b-dropdown-item>
+                    <b-dropdown-item href="#" @click="downloadPic(image.id)">{{ $t("general.Download") }}</b-dropdown-item>
+                    <b-dropdown-item href="#" @click="setProfilePic(image.id)">{{ $t("general.Make_Profile_Picture") }}</b-dropdown-item>
+                    <b-dropdown-item href="#" @click="deleteImage(image.id)">{{ $t("general.Delete") }}</b-dropdown-item>
                   </b-dropdown>
                 </li>
               </ul>

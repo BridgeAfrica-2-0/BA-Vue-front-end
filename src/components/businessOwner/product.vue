@@ -59,13 +59,14 @@
             <br />
 
              <read-more
-                        more-str="read more"
+                        :more-str="$t('search.read_more')"
                         class="readmore"
                         :text="product.description"
                         link="#"
-                        less-str="read less"
+                        :less-str="$t('search.read_less')"
                         :max-chars="100"
                       >
+
                       </read-more>
 
 
@@ -711,14 +712,14 @@ selectedcategories: function() {
           this.flashMessage.show({
             status: "success",
             blockClass: 'custom-block-class',
-            message: "Product Deleted Successfuly"
+            message: this.$t('general.Product_Deleted_Successfuly'),
           });  
         })
         .catch(err => {
           console.log({ err: err });
           this.flashMessage.show({
             status: "error",
-            message: "Unable To Delete Product"
+            message: this.$t('general.Unable_To_Delete_Product')
           });
         });
     },

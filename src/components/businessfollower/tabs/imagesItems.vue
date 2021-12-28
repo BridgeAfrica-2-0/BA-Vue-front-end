@@ -37,7 +37,7 @@
             <template #button-content>
               <b-icon icon="three-dots-vertical" color="white" variant="light"> </b-icon>
             </template>
-            <b-dropdown-item @click="onDownloadPic()"> Download</b-dropdown-item>
+            <b-dropdown-item @click="onDownloadPic()"> {{ $t('network.Download') }}</b-dropdown-item>
           </b-dropdown>
         </li>
       </ul>

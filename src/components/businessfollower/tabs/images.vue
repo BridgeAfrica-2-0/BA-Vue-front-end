@@ -5,7 +5,7 @@
   <div class="row" v-else>
     <div class="container-fluid">
       <p v-if="!allImages.length && !canUpload" style="font-size: 3rem">
-        No items found
+       {{$t('profileowner.No_items_found')}} 
       </p>
 
       <b-modal

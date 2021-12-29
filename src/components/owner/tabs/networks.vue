@@ -81,13 +81,14 @@
                       <br />
 
                       <read-more
-                        more-str="read more"
+                        :more-str="$t('search.read_more')"
                         class="readmore"
                         :text="network.description"
                         link="#"
-                        less-str="read less"
+                        :less-str="$t('search.read_less')"
                         :max-chars="100"
                       >
+           
                       </read-more>
                     </p>
                   </div>
@@ -983,6 +984,7 @@ return cat;
     },
     // Action handler
     action() {
+      console.log(this.createdNetwork);
       const fd = new FormData();
       fd.append("business_id", "1");
       fd.append("name", this.createdNetwork.name);

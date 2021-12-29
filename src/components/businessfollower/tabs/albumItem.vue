@@ -17,7 +17,7 @@
           </p>
 
           <b-button v-if="upHere" variant="outline-primary" size="sm" @click="show">
-            Show
+            {{ $t('general.Show') }}
           </b-button>
         </div>
       </div>

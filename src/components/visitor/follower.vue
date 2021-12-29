@@ -110,10 +110,10 @@
             <b-tab title="Posts" active>
               <Post />
             </b-tab>
-            <b-tab title="About"><About /></b-tab>
-            <b-tab title="Business"><Businesses /></b-tab>
-            <b-tab title="Media"><Media /></b-tab>
-            <b-tab title="Community"><Community /></b-tab>
+            <b-tab :title="$t('genezral.About')"><About /></b-tab>
+            <b-tab :title="$t('genezral.Business')"><Businesses /></b-tab>
+            <b-tab :title="$t('genezral.Media')"><Media /></b-tab>
+            <b-tab :title="$t('genezral.Community')"><Community /></b-tab>
           </b-tabs>
         </b-col>
       </b-row>

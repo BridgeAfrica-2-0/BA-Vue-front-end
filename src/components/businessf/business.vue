@@ -158,14 +158,14 @@
       <b-row>
         <b-col cols="12" class="p-0">
           <b-tabs lazy content-class="mt-3 p-0" v-model="currentTab" fill pills>
-            <b-tab :title="$t('businessf.Home')"><HomePage /></b-tab>
-            <b-tab :title="$t('businessf.About')"><About /></b-tab>
-            <b-tab type="business" :title="$t('businessf.Media')"
+            <b-tab :title="$t('general.Home')"><HomePage /></b-tab>
+            <b-tab :title="$t('general.About')"><About /></b-tab>
+            <b-tab type="business" :title="$t('general.Media')"
               ><Media :type="'business'" :isEditor="false"
             /></b-tab>
-            <b-tab :title="$t('businessf.Market')"><MarketPlace /></b-tab>
-            <b-tab :title="$t('businessf.Networks')"><Networks /></b-tab>
-            <b-tab :title="$t('businessf.Community')"><Community /></b-tab>
+            <b-tab :title="$t('general.Market')"><MarketPlace /></b-tab>
+            <b-tab :title="$t('general.Networks')"><Networks /></b-tab>
+            <b-tab :title="$t('general.Community')"><Community /></b-tab>
           </b-tabs>
         </b-col>
       </b-row>

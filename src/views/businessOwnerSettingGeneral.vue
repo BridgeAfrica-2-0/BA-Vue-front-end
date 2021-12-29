@@ -5,45 +5,45 @@
       <b-row>
         <a class="settings" href="#">Settings</a>
         <b-tabs content-class="mt-3">
-          <b-tab title="Business"> </b-tab>
+          <b-tab :title="$t('general.Business')"> </b-tab>
 
-          <b-tab title="Inbox"> </b-tab>
-          <b-tab title="Notification"> </b-tab>
+          <b-tab :title="$t('general.Inbox')"> </b-tab>
+          <b-tab :title="$t('general.Notification')"> </b-tab>
 
-          <b-tab title="Pending Post"> </b-tab>
+          <b-tab :title="$t('general.Pending_Post')"> </b-tab>
 
-          <b-tab title="Insights"> </b-tab>
+          <b-tab :title="$t('general.Insights')"> </b-tab>
         </b-tabs>
       </b-row>
     </b-container>
 
     <b-container class="">
       <b-container class="">
-        <h5 class="a-text"><b-icon-gear></b-icon-gear> Business Settings</h5>
+        <h5 class="a-text"><b-icon-gear></b-icon-gear> {{$t('general.Business_Settings')}}</h5>
       </b-container>
 
       <b-container class="bv-example-row">
         <div>
           <b-tabs pills card vertical>
-            <b-tab title="General" active
+            <b-tab :title="$t('general.General')" active
               ><b-card-text> <General /> </b-card-text
             ></b-tab>
 
-            <b-tab title="Business Info"
+            <b-tab :title="$t('general.Business_Info')"
               ><b-card-text> <Info /> </b-card-text
             ></b-tab>
 
-            <b-tab title="Business Roles"
+            <b-tab :title="$t('general.Business_Roles')"
               ><b-card-text> <Roles /> </b-card-text
             ></b-tab>
 
-            <b-tab title="Payment "
+            <b-tab title="$t('general.Payment') "
               ><b-card-text> <Payment /> </b-card-text
             ></b-tab>
-            <b-tab title="Website "
+            <b-tab title="$t('general.Website') "
               ><b-card-text> <Website /> </b-card-text
             ></b-tab>
-            <b-tab title="Blocking "
+            <b-tab title="$t('general.Blocking') "
               ><b-card-text> <Blocking /> </b-card-text
             ></b-tab>
           </b-tabs>

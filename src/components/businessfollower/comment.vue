@@ -11,7 +11,8 @@
           </b-dropdown>
         </span>
         <p class="msg text">
-          <read-more more-str="read more" :text="msg" link="#" less-str="read less" :max-chars="15000"> </read-more>
+          <read-more :more-str="$t('search.read_more')" :text="msg" link="#" :less-str="$t('search.read_less')" :max-chars="15000"> </read-more>
+      
         </p>
         <b-icon icon="suit-heart" variant="primary" aria-hidden="true"></b-icon>
         23

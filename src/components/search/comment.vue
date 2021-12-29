@@ -18,8 +18,9 @@
           </b-dropdown>
         </span>
         <p class="msg text">
-            <read-more more-str="read more" :text="comment.text" link="#" less-str="read less" :max-chars="15000" > </read-more>
+            <read-more :more-str="$t('search.read_more')" :text="comment.text" link="#" :less-str="$t('search.read_less')" :max-chars="15000" > </read-more>
         </p>
+   
       </b-col>
     </b-row>
   </div>

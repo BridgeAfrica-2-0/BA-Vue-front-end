@@ -11,7 +11,7 @@
       <b-tabs pills content-class="mt-3  f-left ">
         <b-tab active>
           <template slot="title">
-            {{ $t('profilefollower.People') }} <span class="spa-color"> 7K </span>
+            {{ $t('general.People') }} <span class="spa-color"> 7K </span>
           </template>
 
           <div>

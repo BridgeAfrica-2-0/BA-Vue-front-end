@@ -81,7 +81,7 @@
           />
         </div>
         <p class="fs-12" v-if="proccesEdit">
-          <a href="#" @click.prevent="toggle">Cancel</a>
+          <a href="#" @click.prevent="toggle">{{ $t('network.Cancel') }}</a>
         </p>
         <span v-if="!proccesEdit" class="ml-2 reply">
           <i class="fs-12">{{ comment.updated_at | date }}</i>

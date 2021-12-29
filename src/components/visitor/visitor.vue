@@ -107,13 +107,13 @@
       <b-row>
         <b-col cols="12">
           <b-tabs content-class="mt-3" fill pills card>
-            <b-tab title="Posts" active>
+            <b-tab :title="$('general.Posts')" active>
               <Post />
             </b-tab>
-            <b-tab title="About"><About /></b-tab>
-            <b-tab title="Business"><Businesses /></b-tab>
-            <b-tab title="Media"><Media /></b-tab>
-            <b-tab title="Community"><Community /></b-tab>
+            <b-tab :title="$('general.About')"><About /></b-tab>
+            <b-tab :title="$('general.Business')"><Businesses /></b-tab>
+            <b-tab :title="$('general.Media')"><Media /></b-tab>
+            <b-tab :title="$('general.Community')"><Community /></b-tab>
           </b-tabs>
         </b-col>
       </b-row>

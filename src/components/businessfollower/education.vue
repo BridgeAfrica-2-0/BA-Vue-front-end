@@ -60,7 +60,7 @@
       <label>Duration - From</label>
       <b-form-datepicker id="example-datepicker-1" v-model="editData.startDate" class="mb-2"></b-form-datepicker>
 
-      <label>To</label>
+      <label>{{ $t("general.To") }}</label>
       <b-form-datepicker id="example-datepicker" v-model="editData.endDate" class="mb-2"></b-form-datepicker>
       <b-form-input class="mt-2" v-model="editData.major_subjects" placeholder="Major"></b-form-input>
     </b-modal>
@@ -86,7 +86,7 @@
         class="mb-2"
       ></b-form-datepicker>
 
-      <label>To</label>
+      <label>{{ $t("general.To") }}</label>
       <b-form-datepicker id="example-datepicker" v-model="educationInput.durationTo" class="mb-2"></b-form-datepicker>
       <b-form-input class="mt-2" v-model="educationInput.major" placeholder="Major"></b-form-input>
     </b-modal>

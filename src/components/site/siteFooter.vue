@@ -59,7 +59,7 @@
               ABOUT US
             </a>
             <a href="#" class="color-white d-block font-weight-bold text-center text-md-left">
-              CONTACT US
+              {{ $t('home.CONTACT_US') }}
             </a>
           </p>
         </div>

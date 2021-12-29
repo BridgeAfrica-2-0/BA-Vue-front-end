@@ -14,18 +14,23 @@
 
         <b-col md="5" cols="7" lg="7" xl="7" sm="5">
           <p class="textt">
-            <strong class="title"> {{ item.name }} </strong> <br />
+            <strong class="title"> 
+              <router-link :to="'/network_follower/' + item.id">
+                {{ item.name }}
+              </router-link>    
+            </strong> <br />
             {{ item.category }}
             <br />
             {{ item.followers }} {{ $t("profileowner.Community") }}<br />
 
             <read-more
-              more-str="read more"
+              :more-str="$t('search.read_more')"
               class="readmore"
               :text="item.about_network"
               link="#"
-              less-str="read less"
+              :less-str="$t('search.read_less')"
               :max-chars="100"
+
             >
             </read-more>
           </p>

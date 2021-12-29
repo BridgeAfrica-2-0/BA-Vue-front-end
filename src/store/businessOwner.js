@@ -432,7 +432,7 @@ export default {
     async loadUserBusinessAbout({ commit }, payload) {
       let response_ = null;
       const id_Business = 2;
-      await axios.get("business/info" +
+      await axios.get("business/edit" +
         "/" +
         payload.business_id
 
@@ -459,7 +459,7 @@ export default {
     },
 
 
-    async updateUserBusinessAbout(context, payload) {
+    async updateUserBusinessAbout({commit}, payload) {
       let response_ = null;
       const id_Business = 47;
       console.log("-------testt----", payload)
@@ -507,7 +507,7 @@ export default {
             console.log('Error THe Server++++++');
             throw new Error('Error For Updating Business About +++++');
           }
-          context.commit('updateUserBusinessAbout', {
+          commit('updateUserBusinessAbout', {
             businessAbout: payload.business_about,
           });
           response_ = response;

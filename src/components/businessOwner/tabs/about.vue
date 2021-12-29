@@ -6,7 +6,7 @@
     <hr /> 
     
     <b-card>
-      <div class="mb-3">
+      <div class="mb-3" > {{business_about.lng}}
         <mapbox :coordinates="[business_about.lng, business_about.lat]" />
       </div>
       
@@ -94,7 +94,7 @@
                   icon="telephone-fill"
                   class="primary icon-size"
                 ></b-icon>
-                {{ business_about.phone }}
+                {{ business_about.phone1 }}
               </p>
               <p>
                 <b-icon icon="envelope-fill" class="primary icon-size"></b-icon>
@@ -830,7 +830,7 @@ export default {
         business_id: this.$route.params.id,
       }).then(res => {
 
-        this.business_about_input = JSON.parse(
+        this.business_about = JSON.parse(
           JSON.stringify(this.$store.getters["businessOwner/getBusinessAbout"])
         );
       }
@@ -936,17 +936,21 @@ export default {
            var dat = {
              business_id: this.$route.params.id,
              data: {
-            name: this.business_about.name,
-            categoryId: this.business_about.category,
-            // subCategoryId: this.business_about_input_input.subCategoryId,
-            filterId: this.business_about_input.filterId,
-            keywords: this.business_about_input.keywords[0],
-            phone: this.business_about_input.phone,
+            name: this.business_about_input.name,
+            about_business: this.business_about_input.about_business,
+            categoryId: this.business_about_input.category[0].category_id,
+            subCategoryId: this.business_about_input.subCatFilter[0].subcategoryId,
+            filterId: this.business_about_input.filter[0].filter_id,
+            keywords: this.stringKeyword(this.business_about_input.keywords),
+            primary_phone: this.business_about_input.phone,
+            secondary_phone :this.business_about_input.secondary_phone,
+            website: this.business_about_input.website,
             email: this.business_about_input.email,
-            country: this.business_about_input.country[0].id,
-            region: this.business_about_input.region[0].id,
-            division: this.business_about_input.division,
-            council: this.business_about_input.council,
+            country: this.business_about_input.country[0].country_id,
+            region: this.business_about_input.region[0].region_id,
+            division: this.business_about_input .division[0].division_id,
+            council: this.business_about_input.council[0].council_id,
+            neigborhood: this.business_about_input.council[0].neighborhood_id,
             locality: this.business_about_input.locality,
             city: this.business_about_input.city,
             openHours: this.business_about_input.business_open_hours,
@@ -968,9 +972,12 @@ export default {
                 "update user business about response ++++++",
                 response
               );
+               this.loadBusinessAbout();
               this.business_about = this.$store.getters[
                 "businessOwner/getBusinessAbout"
               ];
+              
+               this.$refs["addressBusinessModal"].hide();
               console.log("update user business about end");
             })
             .catch((error) => {
@@ -992,6 +999,15 @@ export default {
           console.log("No Correspondance");
           break;
       }
+    },
+
+    stringKeyword(words){
+        let keyword = '';
+        words.map(item =>{
+          keyword+= item+','
+        })
+
+        return keyword.substring(0, keyword.length-1);
     },
     test() {
       let businessAddress = this.dayOfWorks.filter((day) => {

@@ -31,6 +31,7 @@ import UserProfileOwner from './UserProfileOwner';
 import { search } from './search';
 import userChat from './messaging/user';
 import businessChat from './messaging/business';
+import networkChat from './messaging/network';
 import { notification } from './notifications';
 import businessSettingInfo from './businessSettingInfo';
 import networkProfileCommunitySidebar from './networkProfileCommunitySidebar';
@@ -52,11 +53,11 @@ import networkSetting from './networkSetting';
 Vue.use(Vuex);
 
 
- //axios.defaults.baseURL = process.env.VUE_APP_API_URL;
+//axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 // axios.defaults.baseURL = process.env.VUE_APP_API_URL_EDS;
 
 //axios.defaults.baseURL="https://devone.maxinemoffett.com/api/v1/";
- axios.defaults.baseURL = process.env.VUE_APP_API_URL;
+axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 //  axios.defaults.baseURL = 'https://courage4.maxinemoffett.com/api/v1/';
 
 
@@ -89,6 +90,7 @@ export default new Vuex.Store({
         business,
         networkProfileFeedback,
         NetworkSettings,
+        networkChat,
         keywordOperationOnNetwork,
         businessSettingInfo,
         checkout,

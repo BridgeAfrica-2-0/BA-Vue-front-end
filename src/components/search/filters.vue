@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="filterType == '1' || filterType == '4'">
+    <div v-if="filterType == '1' || filterType == '4' || filterType == '0'">
       <div v-if="subCategories.length">
         <span>
           <b-form-radio
@@ -231,7 +231,7 @@
       >
       <br />
       <!-- Category -->
-      <div v-if="categories.length > 0">
+      <!-- <div v-if="categories.length > 0">
         <b-form-group
           label-cols-lg="3"
           :label="$t('search.Categories')"
@@ -248,9 +248,9 @@
           @change="allSearchByCat({ cat_id: networkSelect.category })"
         >
         </b-form-select>
-      </div>
+      </div> -->
 
-      <hr />
+      <!-- <hr /> -->
       <!-- 
       <b-form-group
         label-cols-lg="12"
@@ -2000,7 +2000,7 @@ export default {
         // method to search for a business lol
 
         this.$store
-          .dispatch("marketSearch/getFilter", subCat.id)
+          .dispatch("business/FIND_BUSINESS", subCat.id)
           .then((res) => {
             this.searchProducts({ cat_id: subCat.cat_id, sub_cat: subCat.id });
             console.log("Filters: ");

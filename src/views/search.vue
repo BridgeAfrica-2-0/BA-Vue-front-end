@@ -575,7 +575,7 @@
         <b-col cols="12" md="4" lg="4" xl="3" class="showmap" ref="mapblock">
           <div id="map" style="margin-top: 20px" class="">
             <div v-if="selectedId == '1'">
-              <businessmap :businessPage="businessPage" />
+              <businessmap :businesses="businesses.data" />
             </div>
             <div v-if="selectedId == '4'">
               <mapbox :products="allproducts.data" />

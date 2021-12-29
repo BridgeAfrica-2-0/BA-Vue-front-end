@@ -56,9 +56,11 @@
             @click="handleFollow"
           >
             <i
-              :class="`fas ${
-                hasBeFollow ? 'fa-user-minus' : 'fa-user-plus'
-              } fa-lg btn-icon`"
+              :class="
+                `fas ${
+                  hasBeFollow ? 'fa-user-minus' : 'fa-user-plus'
+                } fa-lg btn-icon`
+              "
             ></i>
             <span> {{ $t("businessf.Community") }}</span></b-button
           >
@@ -66,7 +68,12 @@
             <i class="fas fa-envelope fa-lg btn-icon"></i>
             <span>{{ $t("businessf.Message") }}</span></b-button
           >
-          <b-button class="direction ml-1 size" variant="primary" size="sm">
+          <b-button
+            class="direction ml-1 size"
+            variant="primary"
+            size="sm"
+            @click="gotoAbout()"
+          >
             <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
             <span>{{ $t("businessf.Direction") }}</span></b-button
           >
@@ -122,7 +129,11 @@
         <span>{{ $t("businessf.Message") }}</span>
       </b-button>
 
-      <b-button class="direction ml-1 size" variant="primary">
+      <b-button
+        class="direction ml-1 size"
+        variant="primary"
+        @click="gotoAbout()"
+      >
         <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
         <span>{{ $t("businessf.Direction") }}</span></b-button
       >
@@ -234,7 +245,7 @@ export default {
   },
 
   watch: {
-    "$store.state.businessOwner.businessInfo": function () {
+    "$store.state.businessOwner.businessInfo": function() {
       this.hasBeFollow = this.$store.state.businessOwner.businessInfo.is_follow;
     },
     currentTab: (newVal, oldVal) => {
@@ -277,6 +288,9 @@ export default {
         });
     },
 
+    gotoAbout() {
+      this.currentTab = 1;
+    },
     businessInfo() {
       this.$store
         .dispatch("businessOwner/businessInfo", this.url_data)

@@ -106,14 +106,13 @@
               <vue-bootstrap-typeahead
                 v-model="query"
                 :data="neigbourhoods"
-                :minMatchingChars=0
-                :maxMatches=10
+                :minMatchingChars="0"
+                :maxMatches="10"
                 :serializer="(item) => item.name"
                 :placeholder="$t('general.Where')"
                 class="search-hh w-44"
               />
 
-           
               <slot name="button">
                 <Button @click.native="getKeyword" />
               </slot>
@@ -144,7 +143,7 @@
             <b-collapse id="nav-collapse" is-nav>
               <div class="nav-item">
                 <router-link
-                  :to="{name:navLink('home')}"
+                  :to="{ name: navLink('home') }"
                   class="nav-link text-dark hov"
                   href=""
                 >
@@ -181,7 +180,14 @@
                     <div v-for="message in messages" :key="message.id">
                       <hr class="h-divider" />
                       <div
-                        class="d-inline-flex flex-row justify-content-between align-items-center suggest-item cursor-pointer"
+                        class="
+                          d-inline-flex
+                          flex-row
+                          justify-content-between
+                          align-items-center
+                          suggest-item
+                          cursor-pointer
+                        "
                       >
                         <div class="d-inline-flex flex-row align-items-center">
                           <div>
@@ -242,7 +248,13 @@
                     >
                       <hr class="h-divider" />
                       <div
-                        class="d-inline-flex flex-row align-items-center suggest-item cursor-pointer"
+                        class="
+                          d-inline-flex
+                          flex-row
+                          align-items-center
+                          suggest-item
+                          cursor-pointer
+                        "
                       >
                         <!-- <div>
                           <img src="@/assets/img/profile-pic.jpg" class="rounded-circle" alt="" width="30" height="30" />
@@ -309,7 +321,12 @@
                       v-if="'user' != user.user_type"
                       @click.prevent="switchToProfile"
                       href="#"
-                      class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+                      class="
+                        other-menu
+                        suggest-item
+                        cursor-pointer
+                        text-decoration-none text-dark
+                      "
                     >
                       <span class="mr-2"
                         ><fas-icon
@@ -322,7 +339,12 @@
 
                     <router-link
                       :to="{ name: 'orders' }"
-                      class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+                      class="
+                        other-menu
+                        suggest-item
+                        cursor-pointer
+                        text-decoration-none text-dark
+                      "
                     >
                       <span class="mr-2"
                         ><fas-icon
@@ -335,7 +357,13 @@
 
                     <router-link
                       :to="{ name: 'settings' }"
-                      class="other-menu suggest-item cursor-pointer text-decoration-none text-dark w-full"
+                      class="
+                        other-menu
+                        suggest-item
+                        cursor-pointer
+                        text-decoration-none text-dark
+                        w-full
+                      "
                     >
                       <span class="mr-2 w-full"
                         ><fas-icon
@@ -366,11 +394,11 @@
 
                       <b-collapse id="collapse-2" class="mt-1">
                         <b-card-text
-                          @click="$i18n.locale = 'en'"
+                          @click="language('en')"
                           class="cursor-pointer mb-1"
                           >{{ $t("auth.english") }}</b-card-text
                         >
-                        <b-card-text @click="$i18n.locale = 'fr'">{{
+                        <b-card-text @click="language('fr')">{{
                           $t("auth.french")
                         }}</b-card-text>
                       </b-collapse>
@@ -379,7 +407,12 @@
                     <a
                       @click="logout"
                       href="#"
-                      class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+                      class="
+                        other-menu
+                        suggest-item
+                        cursor-pointer
+                        text-decoration-none text-dark
+                      "
                     >
                       <span class="mr-2"
                         ><fas-icon
@@ -438,7 +471,12 @@
 
             <router-link
               :to="{ name: 'orders' }"
-              class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+              class="
+                other-menu
+                suggest-item
+                cursor-pointer
+                text-decoration-none text-dark
+              "
             >
               <span class="mr-2"
                 ><fas-icon
@@ -451,7 +489,12 @@
 
             <router-link
               :to="{ name: 'settings' }"
-              class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+              class="
+                other-menu
+                suggest-item
+                cursor-pointer
+                text-decoration-none text-dark
+              "
             >
               <span class="mr-2"
                 ><fas-icon class="violet search" :icon="['fas', 'cogs']"
@@ -491,7 +534,12 @@
             <a
               href="#"
               @click="logout"
-              class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+              class="
+                other-menu
+                suggest-item
+                cursor-pointer
+                text-decoration-none text-dark
+              "
             >
               <span class="mr-2"
                 ><fas-icon
@@ -556,7 +604,7 @@ export default {
   },
   data() {
     return {
-      
+
       isActive: false,
       shownav: false,
       notifications: [],
@@ -583,6 +631,9 @@ export default {
   },
   beforeMount() {
     console.log("beforeMount");
+    this.$i18n.locale = localStorage.getItem("lang")
+      ? localStorage.getItem("lang")
+      : "en";
 
     this.getLocation();
   },
@@ -636,7 +687,6 @@ export default {
   },
 
   watch: {
-   
     "$store.state.auth.profilConnected": function () {
       this.updateNotificationEvent();
       this.userOwnPage = this.onRedirect();
@@ -660,7 +710,7 @@ export default {
       return JSON.stringify(value, null, 2);
     },
   },
-  
+
   methods: {
     ...mapActions({
       setNetworks: "social/FIND_USER_NETWORK",
@@ -708,13 +758,15 @@ export default {
 
     updateNotificationEvent() {
       try {
-        const newRouteNotificationApi = this.notificationPatterns[
-          this.$store.state.auth.profilConnected.user_type
-        ]();
+        const newRouteNotificationApi =
+          this.notificationPatterns[
+            this.$store.state.auth.profilConnected.user_type
+          ]();
 
-        const newRouteMessageApi = this.messagePatterns[
-          this.$store.state.auth.profilConnected.user_type
-        ]();
+        const newRouteMessageApi =
+          this.messagePatterns[
+            this.$store.state.auth.profilConnected.user_type
+          ]();
 
         this.newNotification(newRouteNotificationApi);
         this.newMessage(newRouteMessageApi);
@@ -752,7 +804,7 @@ export default {
             console.log("Error erro!");
           });
 
-        this.$router.push({ name: "Search" });
+        this.$router.push("/search");
       }
     },
 
@@ -780,8 +832,13 @@ export default {
         })
         .catch(() => console.log("error"));
     },
-
+    language(lang) {
+      localStorage.setItem("lang", lang);
+      this.$i18n.locale = lang;
+      location.reload();
+    },
     logout: async function () {
+
        let loader = this.$loading.show({
         container: this.$refs.formContainer,
         canCancel: true,
@@ -790,10 +847,9 @@ export default {
       });
       const response = await this.$repository.notification.logOut();
       if (response.success) {
-        loader.hide();
+        // loader.hide();
         this.Logout();
         this.$router.push({ name: "login" });
-        
       }
     },
 
@@ -818,7 +874,6 @@ export default {
     toggleinput() {
       this.$refs.mobileinput.style.display = "block";
     },
-    
 
     getNetworks: async function () {
       let request = await this.$repository.share.getNetworks();
@@ -830,15 +885,13 @@ export default {
       if (request.success) this.setBusiness(request.data);
     },
 
-    getNetworkAndBusiness: async function() {
+    getNetworkAndBusiness: async function () {
       let request = await this.$repository.share.getNetworkAndBusiness();
-      if (request.success){ 
+      if (request.success) {
         this.setBusiness(request.data.business);
         this.setNetworks(request.data.network);
       }
     },
-
-
 
     init() {
       try {

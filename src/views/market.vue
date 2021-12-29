@@ -9,7 +9,7 @@
         <b-container>
           <b-row>
             <b-col cols="12" md="10">
-              <b-input-group class="my-auto input-size ">
+              <b-input-group class="my-auto input-size d-flex">
                 <select id="category" class="form-control br-0">
                   <option value="" selected="" disabled="">
                     Sort
@@ -24,20 +24,10 @@
                   class="br-0"
                   placeholder="Search "
                 ></b-form-input>
-
-                <gmap-autocomplete class="br">
-                  <template v-slot:input="slotProps">
-                    <b-form-input
-                      prepend-inner-icon="place"
-                      placeholder="Location Of Event"
-                      ref="input"
-                      class="br"
-                      v-on:listeners="slotProps.listeners"
-                      v-on:attrs="slotProps.attrs"
-                    >
-                    </b-form-input>
-                  </template>
-                </gmap-autocomplete>
+                <auto-complete
+                  class="align-self-center"
+                  @get-location-details="getLocationDetails"
+                />
               </b-input-group>
             </b-col>
 
@@ -96,6 +86,7 @@
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import Market from "@/components/market/market";
+import AutoComplete from "@/components/market/autocomplete.vue";
 
 import caroussel from "@/components/market/caroussel";
 export default {
@@ -104,6 +95,7 @@ export default {
     Footer,
     Market,
     caroussel,
+    AutoComplete,
   },
   data() {
     return {
@@ -116,6 +108,11 @@ export default {
         { text: "clothing", value: "clothing" },
       ],
     };
+  },
+  methods: {
+    getLocationDetails(response) {
+      console.log(response);
+    },
   },
 };
 </script>

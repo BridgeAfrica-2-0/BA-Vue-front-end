@@ -26,7 +26,6 @@
         "core-js": "^3.6.5",
         "dotenv": "^10.0.0",
         "emoji-vue": "^0.2.4",
-        "gmap-vue": "^1.5.0",
         "infinite-loading": "^0.2.8",
         "ioredis": "^4.28.0",
         "laravel-echo": "^1.11.3",
@@ -89,7 +88,6 @@
         "vuelidate": "^0.7.6",
         "vuex": "^3.6.2",
         "vuex-persistedstate": "^4.0.0-beta.1",
-        "x5-gmaps": "^0.5.7",
         "yarn": "^1.22.11"
     },
     "devDependencies": {

@@ -1,21 +1,24 @@
 <template>
   <div>
     <div class="mb-3" v-if="hasLoad">
-      <mapbox :coordinates="[business_about.lng, business_about.lat]" />
-      <!-- <MglMap
-        :accessToken="accessToken"
-        :mapStyle.sync="mapStyle"
-        :center="[business_about.lng, business_about.lat]"
-        :zoom="zoom"
-        style="width: 100%; height: 450px"
-      >
-        <MglMarker
-          :coordinates="[business_about.lng, business_about.lat]"
-          color="red"
-        />
-      </MglMap> -->
+      <mapbox
+        v-if="business_about.lat && business_about.lng"
+        :business="business_about"
+      />
     </div>
     <b-row ref="about" v-if="hasLoad">
+      <b-col>
+        <div class="mb-2 p-4">
+          <h4 class="mb-4 text-center">
+            <b-icon icon="info-circle-fill" class="primary mr-2"></b-icon>
+            <b>{{ business_about.name }}</b>
+          </h4>
+          <p class="txt">
+            {{ business_about.location_description }}
+          </p>
+        </div>
+      </b-col>
+
       <b-col>
         <div class="p-4">
           <p>
@@ -32,7 +35,7 @@
             <b-icon icon="geo-alt-fill" class="primary icon"></b-icon>
             <span
               >{{ business_about.address }}, {{ business_about.city }},
-              {{ business_about.country[0].name }}</span
+              {{ business_about.country }}</span
             >
           </p>
           <p>
@@ -41,7 +44,10 @@
           </p>
           <p>
             <b-icon icon="people-fill" class="primary icon"></b-icon>
-            <span>{{ nFormatter(business_about.community) }}{{$t("general.Community")}} </span>
+            <span
+              >{{ nFormatter(business_about.community)
+              }}{{ $t("general.Community") }}
+            </span>
           </p>
           <p>
             <b-icon icon="telephone-fill" class="primary icon"></b-icon>
@@ -54,7 +60,7 @@
           <p>
             <b-icon icon="clock" class="primary icon"></b-icon>
             <span
-              ><b-link> {{$t("general.Open_now")}}</b-link>
+              ><b-link> {{ $t("general.Open_now") }}</b-link>
 
               <b-dropdown size="sm" variant="transperent">
                 <template #button-content>
@@ -70,17 +76,6 @@
                 >
               </b-dropdown></span
             >
-          </p>
-        </div>
-      </b-col>
-      <b-col>
-        <div class="mb-2 p-4">
-          <h4 class="mb-4 text-center">
-            <b-icon icon="info-circle-fill" class="primary mr-2"></b-icon>
-            <b>{{ business_about.name }}</b>
-          </h4>
-          <p class="txt">
-            {{ business_about.about_business }}
           </p>
         </div>
       </b-col>
@@ -101,40 +96,55 @@ export default {
       coordinates: [11.504929555178624, 3.8465173382452815], // Lng,Lat
       zoom: 12,
       business_id: null,
-      business_about: [],
+
       hasLoad: false,
 
       edit1: false,
       edit2: false,
       openNow: null,
       dayOfWorks: [
-        { day: this.$t('home.Monday'), opening_time: null, closing_time: null, check: false },
         {
-          day: this.$t('home.Tuesday'),
+          day: this.$t("home.Monday"),
           opening_time: null,
           closing_time: null,
           check: false,
         },
         {
-          day: this.$t('home.Wednesday'),
+          day: this.$t("home.Tuesday"),
           opening_time: null,
           closing_time: null,
           check: false,
         },
         {
-          day: this.$t('home.Thursday'),
+          day: this.$t("home.Wednesday"),
           opening_time: null,
           closing_time: null,
           check: false,
         },
-        { day: this.$t('home.Friday'), opening_time: null, closing_time: null, check: false },
         {
-          day: this.$t('home.Saturday'),
+          day: this.$t("home.Thursday"),
           opening_time: null,
           closing_time: null,
           check: false,
         },
-        { day: this.$t('home.Sunday'), opening_time: null, closing_time: null, check: false },
+        {
+          day: this.$t("home.Friday"),
+          opening_time: null,
+          closing_time: null,
+          check: false,
+        },
+        {
+          day: this.$t("home.Saturday"),
+          opening_time: null,
+          closing_time: null,
+          check: false,
+        },
+        {
+          day: this.$t("home.Sunday"),
+          opening_time: null,
+          closing_time: null,
+          check: false,
+        },
       ],
 
       textToo:
@@ -173,6 +183,7 @@ export default {
       })
       .then((response) => {
         // this.dayOfWorks = this.initialize(this.dayOfWorks);
+
         loader.hide();
         this.hasLoad = true;
       })
@@ -180,19 +191,21 @@ export default {
         console.log("error from the server or browser error(2) ++++", error);
       })
       .finally(() => {
-        this.business_about = JSON.parse(
-          JSON.stringify(this.$store.getters["businessOwner/getBusinessAbout"])
-        );
         loader.hide();
         this.hasLoad = true;
       });
   },
 
   computed: {
+    business_about() {
+      return JSON.parse(
+        JSON.stringify(this.$store.getters["businessOwner/getBusinessAbout"])
+      );
+    },
     hoursOpen() {
       console.log();
       return this.openNow === null
-        ? this.$t('general.Nothing')
+        ? this.$t("general.Nothing")
         : this.openNow.opening_time +
             " AM - " +
             this.openNow.closing_time +

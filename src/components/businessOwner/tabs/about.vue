@@ -2,36 +2,19 @@
   <div ref="about">
     <b-icon icon="person-fill" class="icon-size" variant="primary"></b-icon>
     <b> {{ $t("businessowner.About") }} </b>
-    
-    <hr /> 
-    <!-- {{business_about}} -->
+
+    <hr />
+
     <b-card>
       <div class="mb-3">
-        <mapbox :coordinates="[business_about.lng, business_about.lat]" />
+        <mapbox
+          v-if="business_about.lng && business_about.lat"
+          :business="business_about"
+        />
       </div>
-      
+
       <b-card>
         <b-row v-if="loading">
-
-          <b-col>
-            <div
-                class="edit"
-                v-b-modal.biographyModal
-                @click="
-                  business_about_input = JSON.parse(
-                    JSON.stringify(business_about)
-                  )
-                "
-              >
-                <b-icon icon="pencil-fill" variant="primary" v-if="showPen != 'BusinessEditor'"></b-icon>
-              </div>
-            <h4 class="mb-4 text-center username">
-              {{ business_about.name }}
-            </h4>
-            <p class="text-justify text">
-              {{ business_about.location_description }}
-            </p>
-          </b-col>
           <b-col>
             <!-- <div class="edit">
                 <b-icon
@@ -41,43 +24,18 @@
                 ></b-icon>
               </div> -->
             <div
-                class="edit"
-                v-b-modal.biographyModal
-                @click="
-                  business_about_input = JSON.parse(
-                    JSON.stringify(business_about)
-                  )
-                "
-              >
-                <b-icon icon="pencil-fill" variant="primary"></b-icon>
-              </div>
+              class="edit"
+              v-b-modal.biographyModal
+              @click="
+                business_about_input = JSON.parse(
+                  JSON.stringify(business_about)
+                )
+              "
+            >
+              <b-icon icon="pencil-fill" variant="primary"></b-icon>
+            </div>
             <h4 class="mb-4 text-center username">
-              {{ business_about.name }}
-            </h4>
-            <p class="text-justify text">
-              {{ business_about.location_description }}
-            </p>
-          </b-col>
-          <b-col>
-            <!-- <div class="edit">
-                <b-icon
-                  icon="pencil-fill"
-                  variant="primary"
-                  
-                ></b-icon>
-              </div> -->
-            <div
-                class="edit"
-                v-b-modal.biographyModal
-                @click="
-                  business_about_input = JSON.parse(
-                    JSON.stringify(business_about)
-                  )
-                "
-              >
-                <b-icon icon="pencil-fill" variant="primary"></b-icon>
-              </div>
-            <h4 class="mb-4 text-center username">
+              <b-icon icon="info-circle-fill" class="primary mr-2"></b-icon>
               {{ business_about.name }}
             </h4>
             <p class="text-justify text">
@@ -87,8 +45,8 @@
           <b-col>
             <b-card-text>
               <div class="edit" v-b-modal.addressBusinessModal>
-                <b-icon 
-                v-if="showPen != 'BusinessEditor'"
+                <b-icon
+                  v-if="showPen != 'BusinessFollower'"
                   icon="pencil-fill"
                   variant="primary"
                   @click="load"
@@ -109,26 +67,26 @@
               </p>
               <p>
                 <b-icon icon="search" class="primary icon-size"></b-icon>
-                {{business_about.name}}
+                {{ business_about.name }}
               </p>
               <p>
                 <b-icon icon="geo-alt-fill" class="primary icon-size"></b-icon>
-                {{ business_about.city }}, {{business_about.country[0].name}}
-                <!-- <span v-if="business_about.country">
-                  {{ business_about.address }}, {{ business_about.city }},
-                {{ business_about.country[0].name }}
-                </span> -->
+                <span
+                  >{{ business_about.address }}, {{ business_about.city }},
+                  {{ business_about.country }}</span
+                >
               </p>
               <p>
                 <b-icon icon="link" class="primary icon-size"></b-icon>
-                <span v-if="business_about.website ">
+                <span v-if="business_about.website">
                   {{ business_about.website }}
                 </span>
               </p>
               <p>
                 <b-icon icon="people-fill" class="primary icon-size"></b-icon>
                 {{ business_about.community }}
-                {{ business_about.community > 1000 ? "K" : "" }} {{$t("general.Community")}}
+                {{ business_about.community > 1000 ? "K" : "" }}
+                {{ $t("general.Community") }}
               </p>
               <p>
                 <b-icon
@@ -143,7 +101,7 @@
               </p>
               <p>
                 <b-icon icon="clock" class="primary icon-size"></b-icon>
-                <b-link> {{$t("general.Open_now")}} </b-link>
+                <b-link> {{ $t("general.Open_now") }} </b-link>
                 <br />
                 <b-dropdown size="sm" variant="transperent">
                   <template #button-content>
@@ -161,10 +119,9 @@
               </p>
             </b-card-text>
           </b-col>
-          
         </b-row>
       </b-card>
-  
+
       <!-- original card -->
       <!-- <b-row v-if="loading">
         <b-col>
@@ -271,7 +228,8 @@
     >
       <b-form @submit.prevent="validate('modifyBiography')">
         <div class="form-group">
-          <label for="title">{{ $t('businessowner.Bussiness_Name') }}:</label><br />
+          <label for="title">{{ $t("businessowner.Bussiness_Name") }}:</label
+          ><br />
           <input
             type="text"
             name="title"
@@ -284,7 +242,8 @@
         </div>
 
         <div class="form-group">
-          <label for="description">{{ $t('businessowner.Description') }}:</label><br />
+          <label for="description">{{ $t("businessowner.Description") }}:</label
+          ><br />
           <textarea
             type="text"
             id="description"
@@ -297,7 +256,7 @@
         </div>
 
         <b-button class="mt-3 btn-block" variant="primary" type="submit">
-          {{ $t('businessowner.Modify') }}
+          {{ $t("businessowner.Modify") }}
         </b-button>
       </b-form>
     </b-modal>
@@ -309,7 +268,6 @@
       size="lg"
       @close="cancel"
       @keyup="validate('editAddress')"
-      
     >
       <b-form @submit.prevent="validate('editAddress')">
         <div class="form-group">
@@ -327,7 +285,7 @@
         </div>
 
         <div class="form-group">
-          <label for="alias">{{ $t('businessowner.Category') }}:</label><br />
+          <label for="alias">{{ $t("businessowner.Category") }}:</label><br />
           <multiselect
             v-model="multiselecvalue"
             @input="subcategories"
@@ -339,13 +297,13 @@
             :multiple="true"
             :taggable="true"
             @tag="addTag"
-          ></multiselect> 
+          ></multiselect>
         </div>
 
         <div class="form-group">
-
-          <label for="alias">{{ $t('businessowner.Sub_Category') }}:</label><br />
-           <multiselect
+          <label for="alias">{{ $t("businessowner.Sub_Category") }}:</label
+          ><br />
+          <multiselect
             v-model="filterselectvalue"
             :tag-placeholder="$t('businessowner.Add_this_as_new_tag')"
             :placeholder="$t('businessowner.Search_or_add_a_tag')"
@@ -355,11 +313,11 @@
             :multiple="true"
             :taggable="true"
             @tag="addFilter"
-          ></multiselect> 
+          ></multiselect>
         </div>
 
-        <label class="typo__label">{{ $t('businessowner.Filters') }}</label>
-         <div>
+        <label class="typo__label">{{ $t("businessowner.Filters") }}</label>
+        <div>
           <b-card no-body>
             <b-tabs pills card vertical>
               <b-tab
@@ -368,7 +326,10 @@
                 :key="filters.id"
                 active
                 ><b-card-text>
-                  <b-form-group :label="$t('businessowner.Filters')" class="colorblack">
+                  <b-form-group
+                    :label="$t('businessowner.Filters')"
+                    class="colorblack"
+                  >
                     <b-form-checkbox-group
                       id=""
                       class="colorblack"
@@ -388,7 +349,7 @@
                 </b-card-text>
               </b-tab>
             </b-tabs>
-          </b-card> 
+          </b-card>
         </div>
 
         <div class="form-group">
@@ -644,65 +605,50 @@ export default {
       //   { item: "Taxis service", name: "Taxis service" },
       // ],
       dayOfWorks: [
-        { day: this.$t('home.Monday'), opening_time: null, closing_time: null, check: false },
         {
-          day: this.$t('home.Tuesday'),
+          day: this.$t("home.Monday"),
           opening_time: null,
           closing_time: null,
           check: false,
         },
         {
-          day: this.$t('home.Wednesday'),
+          day: this.$t("home.Tuesday"),
           opening_time: null,
           closing_time: null,
           check: false,
         },
         {
-          day: this.$t('home.Thursday'),
+          day: this.$t("home.Wednesday"),
           opening_time: null,
           closing_time: null,
           check: false,
         },
-        { day: this.$t('home.Friday'), opening_time: null, closing_time: null, check: false },
         {
-          day: this.$t('home.Saturday'),
+          day: this.$t("home.Thursday"),
           opening_time: null,
           closing_time: null,
           check: false,
         },
-        { day: this.$t('home.Sunday'), opening_time: null, closing_time: null, check: false },
+        {
+          day: this.$t("home.Friday"),
+          opening_time: null,
+          closing_time: null,
+          check: false,
+        },
+        {
+          day: this.$t("home.Saturday"),
+          opening_time: null,
+          closing_time: null,
+          check: false,
+        },
+        {
+          day: this.$t("home.Sunday"),
+          opening_time: null,
+          closing_time: null,
+          check: false,
+        },
       ],
-      business_about: {
-        name: "TONTON LA FORCE",
-        logo_path: "http://localhost:8000/storage",
-        category: "Hourse Marketing",
-        keywords: null,
-        language: null,
-        location_description:
-          "Tempore quo soluta voluptates quis. Doloremque autem minus ut nisi molestias maiores cum. Et assumenda velit expedita et et sint sed in.",
-        website: null,
-        community: 6,
-        phone: null,
-        email: null,
-        business_open_hours: [
-          {
-            day: "monday",
-            opening_time: "09:05:12",
-            closing_time: "15:06:18",
-          },
-          {
-            day: "tuesday",
-            opening_time: "07:05:38",
-            closing_time: "14:05:43",
-          },
-        ],
-        region: null,
-        address: null,
-        city: null,
-        country: null,
-        lat: -56.200329,
-        lng: -6.249487,
-      },
+      business_about: {},
       business_about_input: {
         name: "TONTON LA FORCE",
         logo_path: "http://localhost:8000/storage",
@@ -768,14 +714,17 @@ export default {
       onCancel: this.onCancel,
       color: "#e75c18",
     });
+    console.log("èèèè--- context", this.business_about_input);
     this.$store
       .dispatch("businessOwner/loadUserBusinessAbout", {
-        business_abobusiness_id: this.business_about_input,
+        // business_abobusiness_id: this.business_about_input,
         business_id: this.$route.params.id,
       })
-      .then((response) => { 
+      .then((response) => {
+        this.business_about = JSON.parse(
+          JSON.stringify(this.$store.getters["businessOwner/getBusinessAbout"])
+        );
 
-        
         this.dayOfWorks = this.initialize(this.dayOfWorks);
       })
       .catch((error) => {
@@ -785,7 +734,7 @@ export default {
         this.business_about = JSON.parse(
           JSON.stringify(this.$store.getters["businessOwner/getBusinessAbout"])
         );
-        console.log(this.business_about);
+        console.log("-------", this.business_about);
         this.loading = true;
         loader.hide();
       });
@@ -797,13 +746,13 @@ export default {
     this.editBusiness();
   },
   computed: {
-    showPen(){
+    showPen() {
       return this.$route.name;
     },
     hoursOpen() {
       console.log();
       return this.openNow === null
-        ? this.$t('general.Nothing')
+        ? this.$t("general.Nothing")
         : this.openNow.opening_time +
             " AM - " +
             this.openNow.closing_time +

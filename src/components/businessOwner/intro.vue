@@ -18,14 +18,14 @@
           <span v-for="cat in business_intro.category" :key="cat.id">
             {{ cat.name }},
           </span>
-        <!-- {{business_intro.name}} -->
+          <!-- {{business_intro.name}} -->
         </p>
         <p class="d-flex justify-content-start align-items-start">
           <b-icon icon="search" class="primary icon-size"></b-icon>
           <!-- <span v-for="(keyword, index) in business_intro.keywords" :key="index"
             >{{ keyword }},
           </span> -->
-          <span> {{business_intro.name}} </span>
+          <span> {{ business_intro.name }} </span>
         </p>
         <p class="d-flex justify-content-start align-items-start">
           <b-icon icon="geo-alt-fill" class="primary icon-size"></b-icon>
@@ -112,6 +112,7 @@
       <MglMap
         :accessToken="accessToken"
         :mapStyle.sync="mapStyle"
+        v-if="business_intro.lng && business_intro.lat"
         :center="[business_intro.lng, business_intro.lat]"
         :zoom="zoom"
         style="width: 100%; height: 250px"
@@ -119,24 +120,25 @@
         <MglMarker
           :coordinates="[business_intro.lng, business_intro.lat]"
           color="red"
-        />
+        >
+          <MglPopup>
+            <div class="row">
+              <div class="px-4 py-2 dialog-div">
+                <p class="mb-0 dialog-text">{{ business_intro.name }}</p>
+                <p class="mb-0 dialog-text">
+                  {{ business_intro.address }}
+                </p>
+              </div>
+            </div>
+          </MglPopup>
+        </MglMarker>
       </MglMap>
-      <!-- <GmapMap
-        :center="{ lat: business_intro.lat, lng: business_intro.lng }"
-        :zoom="12"
-        style="width:100%;  height: 250px;"
-      >
-        <GmapMarker
-          :position="{ lat: business_intro.lat, lng: business_intro.lng }"
-        />
-      </GmapMap> -->
     </b-card>
 
     <b-modal
       id="bv-edit-about"
       hide-footer
       :title="$t('businessowner.Edit_Address')"
-      
       size="lg"
     >
       <b-form>
@@ -161,7 +163,6 @@
             <b-form-select
               :options="categories"
               class="mb-3"
-             
               value-field="item"
               v-model="form.category"
               text-field="name"
@@ -226,7 +227,7 @@
               topCountry="CM"
               class="form-control text"
             /> -->
-             <b-form-select
+            <b-form-select
               :options="country"
               class="mb-3"
               @change="change"
@@ -252,7 +253,6 @@
             <b-form-select
               :options="region"
               class="mb-3"
-              
               value-field="item"
               v-model="form.region"
               text-field="name"
@@ -272,7 +272,6 @@
               type="text"
               required
             ></b-form-input>
-
           </b-form-group>
           <b-form-group
             id="input-group-2"
@@ -281,14 +280,13 @@
             label-size="sm"
             class="col-md-6"
           >
-             <b-form-input
+            <b-form-input
               id="input-1"
               class="mt-1"
               v-model="form.website"
               type="text"
-              
             ></b-form-input>
-            </b-form-group>
+          </b-form-group>
         </b-row>
 
         <b-button class="mt-3 btn-block" variant="primary" @click="validate">
@@ -302,7 +300,7 @@
 <script>
 import axios from "axios";
 
-import { MglMap, MglMarker } from "vue-mapbox";
+import { MglMap, MglPopup, MglMarker } from "vue-mapbox";
 import { validationMixin } from "vuelidate";
 
 import { required, email, minLength } from "vuelidate/lib/validators";
@@ -322,7 +320,7 @@ export default {
       accessToken: process.env.VUE_APP_MAPBOX_TOKEN,
       mapStyle: "mapbox://styles/mapbox/streets-v11",
       coordinates: [11.504929555178624, 3.8465173382452815], // Lng,Lat
-      zoom: 12,
+      zoom: 11,
       position: {
         lat: 0,
         lng: 0,
@@ -392,69 +390,55 @@ export default {
     /**
      * Used to edit biography
      * @return void
-     */ 
+     */
 
-    businessInfos(){
-      this.$store.dispatch("businessOwner/businessInfo", this.url)
+    businessInfos() {
+      this.$store.dispatch("businessOwner/businessInfo", this.url);
     },
 
-    change(val){
-      
-      console.log(val)
+    change(val) {
+      console.log(val);
 
-       this.$store.dispatch("auth/region",{countryId: val})
-        .then( res =>{
-          console.log("---", this.$store.state.auth.region)
-          
+      this.$store.dispatch("auth/region", { countryId: val }).then((res) => {
+        console.log("---", this.$store.state.auth.region);
+
         this.region = [];
-      // this.$store.state.auth.region.map(dat =>{
-        
-      //       this.region.push( 
-      //         {
-      //           item: dat.id,
-      //           name: dat.name
-      //         }
-      //       )
-      //     })
+        // this.$store.state.auth.region.map(dat =>{
 
-        } )
+        //       this.region.push(
+        //         {
+        //           item: dat.id,
+        //           name: dat.name
+        //         }
+        //       )
+        //     })
+      });
     },
 
-    getCountry(){
-        this.$store.dispatch("auth/country")
-        .then( res =>{
-          console.log("------------------------", this.$store.state.auth.country)
-          
-        
-      this.$store.state.auth.country.map(dat =>{
-        
-            this.country.push( 
-              {
-                item: dat.id,
-                name: dat.name
-              }
-            )
-          })
+    getCountry() {
+      this.$store.dispatch("auth/country").then((res) => {
+        console.log("------------------------", this.$store.state.auth.country);
 
-        } )
+        this.$store.state.auth.country.map((dat) => {
+          this.country.push({
+            item: dat.id,
+            name: dat.name,
+          });
+        });
+      });
     },
-    getCathegorie(){
-        this.$store.dispatch("auth/categories")
-        .then( res =>{
-          console.log("---", this.$store.state.auth.categories)
-          
-        
-      this.$store.state.auth.categories.map(dat =>{
-        console.log("----",dat)
-            this.categories.push( 
-              {
-                item: dat.id,
-                name: dat.name
-              }
-            )
-          })
+    getCathegorie() {
+      this.$store.dispatch("auth/categories").then((res) => {
+        console.log("---", this.$store.state.auth.categories);
 
-        } )
+        this.$store.state.auth.categories.map((dat) => {
+          console.log("----", dat);
+          this.categories.push({
+            item: dat.id,
+            name: dat.name,
+          });
+        });
+      });
     },
     getValidationClass(fieldName) {
       const field = this.$v.form[fieldName];
@@ -497,9 +481,9 @@ export default {
       formData2.append("keywords", this.form.keywords);
       formData2.append("primary_phone", this.form.phone);
       formData2.append("email", this.form.email);
-       formData2.append("website", this.form.website);
+      formData2.append("website", this.form.website);
       formData2.append("about_business", this.about);
-      console.log("---",formData2)
+      console.log("---", formData2);
       this.axios
         .post("business/update/" + this.url, formData2, {
           headers: {
@@ -515,7 +499,7 @@ export default {
             message: this.$t("businessowner.Business_Profile_updated"),
           });
           this.businessInfos();
-          this.$bvModal.hide("bv-edit-about")
+          this.$bvModal.hide("bv-edit-about");
         })
         .catch((err) => {
           console.log({ err: err });
@@ -579,52 +563,46 @@ export default {
   components: {
     MglMap,
     MglMarker,
+    MglPopup,
   },
 
   computed: {
-
-    region(){
-        let region = [];
-      this.$store.state.auth.region.map(dat =>{
-        
-            region.push( 
-              {
-                item: dat.id,
-                name: dat.name
-              }
-            )
-          })
-          return region;
+    region() {
+      let region = [];
+      this.$store.state.auth.region.map((dat) => {
+        region.push({
+          item: dat.id,
+          name: dat.name,
+        });
+      });
+      return region;
     },
 
-    getCat(){
+    getCat() {
       let categories = [];
-      this.$store.state.auth.categories.map(dat =>{
-            categories.push(
-              {
-                value: dat.id,
-                text: dat.name
-              }
-            )
-          })
-          return categories;
+      this.$store.state.auth.categories.map((dat) => {
+        categories.push({
+          value: dat.id,
+          text: dat.name,
+        });
+      });
+      return categories;
     },
     business_intro() {
       return this.$store.state.businessOwner.businessInfo;
     },
   },
 
-  beforeMount(){
-
+  beforeMount() {
     this.businessInfos();
   },
   mounted() {
     this.form = this.$store.state.businessOwner.businessInfo;
-    
+
     this.getCountry();
     this.getCathegorie();
     this.setcoordintes();
-   
+
     this.url = this.$route.params.id;
   },
 };
@@ -653,11 +631,16 @@ export default {
     font-size: 14px !important;
   }
 }
-</style>
-
-<style>
 .icon-size {
   width: 24px;
   height: 24px;
+}
+
+.dialog-div {
+  min-width: 200px;
+}
+.dialog-text {
+  font-size: 15px;
+  font-weight: bold;
 }
 </style>

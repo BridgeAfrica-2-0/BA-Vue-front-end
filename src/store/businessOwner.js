@@ -429,7 +429,7 @@ export default {
         });
     },
 
-    async loadUserBusinessAbout(context, payload) {
+    async loadUserBusinessAbout({ commit }, payload) {
       let response_ = null;
       const id_Business = 2;
       await axios.get("business/info" +
@@ -449,7 +449,7 @@ export default {
           if (!response) {
             throw new Error('Error for loading Business About +++++');
           }
-          context.commit('updateUserBusinessAbout', {
+          commit('updateUserBusinessAbout', {
             businessAbout: response.data,
           });
           response_ = response;

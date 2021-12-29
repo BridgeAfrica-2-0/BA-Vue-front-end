@@ -15,7 +15,11 @@
             </b-col>
             <b-col md="5" cols="7" lg="7" xl="5" sm="5">
               <p class="textt">
-                <strong class="net-title"> {{ item.name }} </strong> <br />
+                <strong class="net-title">
+                   <router-link :to="'/network_follower/' + item.id">
+                      {{ item.name }}
+                    </router-link> 
+                </strong> <br />
                 {{ item.category }}
                 <br />
                 {{ item.followers }} {{ $t('profileowner.Community') }} <br />
@@ -26,8 +30,14 @@
                 </span>
                 <br />
 
-                {{ item.about_network }}
-                <b-link>{{ $t('profileowner.Read_More') }}</b-link>
+                <read-more
+                  :more-str="$t('profileowner.Read_More')"
+                  class="readmore"
+                  :text="item.about_network"
+                  link="#"
+                  less-str="read less"
+                  :max-chars="50"
+                ></read-more>
               </p>
             </b-col>
 
@@ -71,6 +81,23 @@
                         :class="item.is_member !== 0 ? 'fa-user-minus' : 'fa-user-plus'"
                       ></i>
                       <span class="btn-com"> {{ $t("general.Join") }} </span>
+                    </b-button>
+                  </b-col>
+
+                  <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2">
+                    <b-button
+                      block
+                      size="sm"
+                      class="b-background shadow"
+                      variant="primary"
+                      @click="$emit('BlockUser', item.id)"
+                    >
+                      <b-icon
+                        font-scale="1"
+                        icon="exclamation-octagon-fill"
+                        v-b-tooltip.hover
+                      ></b-icon>
+                      <span class="btn-com"> Block</span>
                     </b-button>
                   </b-col>
                 </b-row>

@@ -28,12 +28,13 @@
 
             <read-more
               class="readmore"
-              more-str="read more"
+              :more-str="$t('search.read_more')"
               :text="business.about_business"
               link="#"
-              less-str="read less"
+              :less-str="$t('search.read_less')"
               :max-chars="25"
             >
+              
             </read-more>
           </p>
         </b-col>

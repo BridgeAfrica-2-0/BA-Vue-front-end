@@ -165,9 +165,9 @@ import _ from "lodash";
 import { mapActions, mapGetters } from "vuex";
 
 const options = [
-  { text: "Follower", value: "Follower" },
+   { text: "Follower", value: "Follower" },
   { text: "Following", value: "Following" },
-  { text: "Community", value: "Community" },
+  { text: "Community", value: "Community" }
 ];
 
 export default {
@@ -186,13 +186,13 @@ export default {
     optionsPeople: options,
     optionsBuisness: [
       ...options,
-      { text: "Editor", value: "Editor" },
-      { text: "Owner", value: "Owner" },
+      { text: this.$t('general.Editor'), value: "Editor" },
+      { text: this.$t('general.Owner'), value: "Owner" },
     ],
     optionsNetwork: [
-      { text: "Editor", value: "Editor" },
-      { text: "Member", value: "Member" },
-      { text: "Owner", value: "Owner" },
+      { text: this.$t('general.Editor'), value: "Editor" },
+      { text: this.$t('general.Member'), value: "Member" },
+      { text: this.$t('general.Owner'), value: "Owner" },
     ],
     strategies: null,
   }),

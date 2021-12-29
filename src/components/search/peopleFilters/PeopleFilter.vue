@@ -149,7 +149,7 @@ import { mapActions, mapGetters } from "vuex";
 const options = [
   { text: "Follower", value: "Follower" },
   { text: "Following", value: "Following" },
-  { text: "Community", value: "Community" },
+  { text: "Community", value: "Community" }
 ];
 //import Button from "@/components/Button";
 export default {

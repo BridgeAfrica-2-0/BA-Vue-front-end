@@ -21,7 +21,7 @@
           class="toright"
           v-if="'dashboard' !== $route.name ? !isDisplayInSearch ? isYourOwnPost && canBeDelete : false : false"
         >
-          <b-dropdown variant="link" size="sm" no-caret>
+          <b-dropdown variant="link" size="sm" no-caret v-if="show !='Follower'">
             <template #button-content>
               <b-icon
                 icon="three-dots"
@@ -291,6 +291,9 @@ export default {
   },
 
   computed: {
+    show(){
+      return this.$route.name ;
+    },
     icon() {
       return this.post.is_liked ? "suit-heart-fill" : "suit-heart";
     },
@@ -354,13 +357,13 @@ export default {
         this.flashMessage.show({
           status: "success",
           blockClass: "custom-block-class",
-          message: "Comment Deleted",
+          message: this.$t('general.Comment_Deleted'),
         });
       } else {
         this.flashMessage.show({
           status: "error",
           blockClass: "custom-block-class",
-          message: "Something wrong happen. Try again",
+          message: this.$t('general.Something_wrong_happen_Try_again'),
         });
       }
     },
@@ -388,7 +391,7 @@ export default {
         this.flashMessage.show({
           status: "success",
           blockClass: "custom-block-class",
-          message: "Comment Updated",
+          message: this.$t('general.Comment_Updated'),
         });
       } else {
         this.flashMessage.show({

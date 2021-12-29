@@ -324,13 +324,13 @@
           <b-col>
             <b-form-input
               v-model="distance"
-              :placeholder="$t('general.distance_in_KM') "
+              :placeholder="$t('general.distance_in_KM')"
             ></b-form-input>
           </b-col>
           <b-col>
             <b-button variant="primary" @click="searchByDistance">
               <b-spinner v-if="prodLoader" small type="grow"></b-spinner>
-              {{$t("general.search") }}</b-button
+              {{ $t("general.search") }}</b-button
             >
           </b-col>
         </b-row>

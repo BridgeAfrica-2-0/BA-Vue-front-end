@@ -3,9 +3,10 @@
     <Nav :credentials.sync="searchParams" id="top">
       <template v-slot:button>
         <Button @click.native="strategY['all']" v-if="selectedId == 0" />
+        <Button @click.native="strategY['business']" v-if="selectedId == 1" />
+        <!-- <Button @click.native="strategY['users']" v-if="selectedId == 2" /> -->
         <Button @click.native="strategY['network']" v-if="selectedId == 3" />
         <Button @click.native="strategY['market']" v-if="selectedId == 4" />
-        <Button @click.native="strategY['business']" v-if="selectedId == 1" />
 
         <Button @click.native="strategies" v-if="[2, 5].includes(selectedId)" />
       </template>
@@ -575,7 +576,7 @@
         <b-col cols="12" md="4" lg="4" xl="3" class="showmap" ref="mapblock">
           <div id="map" style="margin-top: 20px" class="">
             <div v-if="selectedId == '1'">
-              <businessmap :businessPage="businessPage" />
+              <businessmap :businesses="businesses.data" />
             </div>
             <div v-if="selectedId == '4'">
               <mapbox :products="allproducts.data" />

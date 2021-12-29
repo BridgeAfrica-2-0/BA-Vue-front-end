@@ -10,11 +10,11 @@
         </h4>
         <p>
           <a href="">mywebsite.com</a> <br />
-          <strong>Category:</strong> Business Category <br />
-          <strong>Community:</strong> 1.1M Community <br />
-          <strong>Location:</strong> Neighbourhood, city country <br />
+          <strong>{{$t("general.Category")}}:</strong>{{$t("general.Business_Category")}}  <br />
+          <strong>{{$t("general.Community")}}:</strong> 1.1M {{$t("general.Community")}} <br />
+          <strong>{{$t("general.Location")}}:</strong> {{$t("general.Neighbourhood")}}, {{$t("general.city")}} {{$t("general.country")}} <br />
           <strong>Keyword:</strong> Keyword 1 Keyword 2 Keyword 3 <br />
-          <strong>About:</strong> Lorem ipsum, dolor sit amet consectetur adipisicing elit. <b-link>Read More</b-link>
+          <strong>{{$t("general.About")}}:</strong> Lorem ipsum, dolor sit amet consectetur adipisicing elit. <b-link>Read More</b-link>
         </p>
       </div>
       <div>

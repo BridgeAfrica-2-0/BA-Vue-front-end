@@ -292,7 +292,7 @@
               src="/icons/email.png"
               square="true"
             ></b-avatar>
-            <span>Share via Email</span>
+            <span>{{ $t("search.Share_via") }} Email</span>
           </div>
 
           <div
@@ -304,7 +304,7 @@
               src="/icons/facebook.png"
               square="true"
             ></b-avatar>
-            <span>Share via Facebook</span>
+            <span>{{ $t("search.Share_via") }} Facebook</span>
           </div>
 
           <div
@@ -316,7 +316,7 @@
               src="/icons/twitter.png"
               square="true"
             ></b-avatar>
-            <span>Share via Twitter</span>
+            <span>{{ $t("search.Share_via") }} Twitter</span>
           </div>
 
           <div
@@ -328,7 +328,7 @@
               src="/icons/whatsapp.png"
               square="true"
             ></b-avatar>
-            <span>Share via Whatsapp </span>
+            <span>{{ $t("search.Share_via") }} Whatsapp </span>
           </div>
         </div>
       </b-popover>

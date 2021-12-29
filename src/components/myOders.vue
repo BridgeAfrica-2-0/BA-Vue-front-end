@@ -848,7 +848,7 @@ export default {
       etat: "All",
       img: ["http://urlr.me/YMQXD", "https://placekitten.com/400/300"],
       options: [
-        { value: null, text: "Please select an option" },
+        { value: null, text: this.$t('general.Please_select_an_option')},
         { value: "a", text: "last 5 days" },
         { value: "b", text: "last 10 days" },
       ],

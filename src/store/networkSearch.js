@@ -91,7 +91,7 @@ export default {
         },
         REGIONS({ commit }, data) {
             return axios
-                .post("regions", { country_id: data.country_id })
+                .post("regions", { countryId: data.country_id })
                 .then((res) => {
                     commit("setRegions", res.data.data);
                 })
@@ -102,7 +102,7 @@ export default {
 
         DIVISIONS({ commit }, data) {
             return axios
-                .post("divisions", { region_id: data.region_id })
+                .post("divisions", { regionId: data.region_id })
                 .then((res) => {
                     commit("setDivisions", res.data.data);
                 })
@@ -112,7 +112,7 @@ export default {
         },
         COUNCILS({ commit }, data) {
             return axios
-                .post("councils", { division_id: data.division_id })
+                .post("councils", { divisionId: data.division_id })
                 .then((res) => {
                     commit("setCouncils", res.data.data);
                 })
@@ -122,7 +122,7 @@ export default {
         },
         NEIGHBOURHOODS({ commit }, data) {
             return axios
-                .post("neighborhood/show", { council_id: data.council_id })
+                .post("neighborhood/show", { councilId: data.council_id })
                 .then((res) => {
                     commit("setNeighbourhoods", res.data.data);
                 })
@@ -138,15 +138,17 @@ export default {
             let page = data.page ? data.page : 1
             let keyword = data.keyword ? data.keyword : ''
             let catId = data.cat_id ? "&cat_id=" + data.cat_id : ''
-            let regionId = data.regionId ? "&regionId=" + data.regionId : ''
-            let divisionId = data.divisionId ? "&divisionId=" + data.divisionId : ''
-            let councilId = data.councilId ? "&councilId=" + data.councilId : ''
+            let countryId = data.country_id ? "&countryId=" + data.country_id : ''
+
+            let regionId = data.region_id ? "&regionId=" + data.region_id : ''
+            let divisionId = data.division_id ? "&divisionId=" + data.division_id : ''
+            let councilId = data.council_id ? "&councilId=" + data.council_id : ''
             let neighborhood_id = data.neighborhood_id ? "&neighborhood_id=" + data.neighborhood_id : ''
             let distanceInKM = data.distanceInKM ? "&distanceInKM=" + data.distanceInKM : ''
 
             console.log("[debug] page:", page);
             try {
-                const res = await axios.get(`network/search?keyword=${keyword}&page=${page + catId+regionId+divisionId+councilId+neighborhood_id+distanceInKM}`, data);
+                const res = await axios.get(`network/search?keyword=${keyword}&page=${page + catId+countryId+regionId+divisionId+councilId+neighborhood_id+distanceInKM}`);
                 commit("setLoader", false);
                 console.log("Network Search results: ", res.data);
                 commit("setNetworks", res.data);

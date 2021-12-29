@@ -979,8 +979,10 @@ export default {
     // delete a network
     deleteNetwork(network) {
       console.log(this.textReason);
+      let fd = new FormData();
+      fd.append("reason", this.textReason)
       axios
-        .delete(`network/${network.id}`)
+        .post(`network/${network.id}`, fd)
         .then((res) => {
           console.log(res);
           this.getNetworks();

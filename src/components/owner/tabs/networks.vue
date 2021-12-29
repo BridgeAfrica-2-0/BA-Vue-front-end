@@ -1008,8 +1008,8 @@ export default {
       // fd.append("neighbourhood", this.createdNetwork.neighbourhood);
       fd.append("city", this.createdNetwork.city);
       fd.append("country_id", 2);
-      fd.append("primary_phone", parseInt(this.createdNetwork.primary_phone));
-      fd.append("secondary_phone", parseInt(this.createdNetwork.secondary_phone));
+      fd.append("primary_phone", this.createdNetwork.primary_phone.split(" ").join(""));
+      fd.append("secondary_phone", this.createdNetwork.secondary_phone.split(" ").join(""));
       fd.append("email", "dev@bav.com");
       fd.append("network_categories", this.selectedcategories);
 

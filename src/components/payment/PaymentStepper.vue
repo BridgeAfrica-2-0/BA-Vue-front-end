@@ -2,7 +2,9 @@
   <div>
     <!-- <b-button v-b-modal.product-details variant="primary">Product Details</b-button>
 		<ProductDetails/> -->
-    <!-- Stepper header start-->
+    <!-- Stepper header start-->     
+
+   
 
     <b-container class="my-4" fluid="lg">
       <hr class="h-divider" />
@@ -54,6 +56,8 @@
         >
           <RequestPayment
             :price="order_price"
+            :operator="operator"
+            :loading="loading"
             @changepayment="handleChangePayment"
             @confirmpayment="handleConfirmPayment"
           />
@@ -117,12 +121,21 @@ export default {
       showRequestPayment: false,
       showConfirmPayment: false,
       order_price: 0,
+      operator:"",
+      loading:false
     };
   },
   computed: {
     progress: function () {
       return Math.round(100 / this.max_step) * this.current_step;
     },
+
+    
+			order() {
+				return this.$store.state.checkout.order.data;
+				
+			},
+
   },
   methods: {
     onClickNext: function () {
@@ -155,10 +168,11 @@ export default {
       this.showReview = true;
       this.showOperators = false;
     },
-    handleRequestPayment(price) {
+    handleRequestPayment(price, operator) {
       this.showRequestPayment = true;
       this.current_step = 1;
       this.order_price = price;
+      this.operator=operator;
       this.steps = [
         {
           text: "Request Payment",
@@ -188,27 +202,37 @@ export default {
         },
       ];
     },
-    handleConfirmPayment({ number, amount, operator = "MTN", order_id = 23 }) {
+    handleConfirmPayment({ number, amount, operator, order_id }) {
       // this.$emit("nextpaymentstep");
       // this.showRequestPayment = false;
       // this.showConfirmPayment = true;
 
-      if (process.env.NODE_ENV == "development") {
-        number = 46733123451;
-        amount = 100;
-      }
+    
+
       const data = {
         phone: number,
         amount: amount,
         orderId: order_id,
         operator: operator,
       };
-      axios
-        .post("mtn/start-momo-transaction", data)
+      let url=null;
+      if(operator=="ORANGE"){
+
+          this.loading=true;
+
+
+           url="orange/start-orange-money-transaction";
+
+
+            axios.post(url, data)
         .then((response) => {
-          this.showConfirmPayment = true;
-          this.onClickNext();
-          console.log(response);
+         // this.showConfirmPayment = true;
+        //  this.onClickNext();
+          console.log(response.data.data);
+
+          window.location.href = response.data.data.payment_url;
+          this.loading=false;
+          console.log("testing orange")
         })
         .catch((error) => {
           this.flashMessage.show({
@@ -217,7 +241,43 @@ export default {
             message: "Transaction Failed",
           });
           console.dir(error);
+
+            this.loading=false;
+
         });
+
+      }
+
+
+       if(operator=="MTN"){
+
+         this.loading=true;
+
+           url="mtn/start-momo-transaction";
+
+            axios
+        .post(url, data)
+        .then((response) => {
+          this.showConfirmPayment = true;
+          this.onClickNext();
+          console.log(response);
+            this.loading=false;
+        })
+        .catch((error) => {
+          this.flashMessage.show({
+            status: "error",
+
+            message: "Transaction Failed",
+          });
+          console.dir(error);
+            this.loading=false;
+        });
+
+
+      }
+
+
+     
     },
   },
 };

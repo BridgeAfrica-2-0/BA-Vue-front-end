@@ -231,26 +231,7 @@
       >
       <br />
       <!-- Category -->
-      <!-- <div v-if="categories.length > 0">
-        <b-form-group
-          label-cols-lg="3"
-          :label="$t('search.Categories')"
-          label-size="md"
-          label-class="font-weight-bold pt-0"
-          class="mb-0 pt-6 text-left"
-        >
-        </b-form-group>
-        <b-form-select
-          v-model="networkSelect.category"
-          :options="categories"
-          value-field="category.id"
-          text-field="category.name"
-          @change="allSearchByCat({ cat_id: networkSelect.category })"
-        >
-        </b-form-select>
-      </div> -->
 
-      <!-- <hr /> -->
       <!-- 
       <b-form-group
         label-cols-lg="12"

@@ -31,7 +31,7 @@
                 <span>
                   <h6 class=" profile-name text-center ">
                     <b> Blezour Blec </b> <br />
-                    <span class="duration"> 1.5k Community </span>
+                    <span class="duration"> 1.5k </span>
                   </h6>
                 </span>
 

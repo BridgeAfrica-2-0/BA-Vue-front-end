@@ -22,7 +22,7 @@
             <strong class="net-title"> {{ item.name }} </strong> <br />
             {{ item.category }}
             <br />
-            {{ item.followers }} Community <br />
+            {{ item.followers }} {{$t("general.Community")}} <br />
 
             <span class="location">
               <b-icon-geo-alt class="ico"></b-icon-geo-alt>
@@ -45,7 +45,7 @@
                   variant="primary"
                 >
                   <i class="fas fa-user-plus  fa-lg btn-icon "></i>
-                  <span class="btn-com" v-b-modal.modal-sm>Community</span>
+                  <span class="btn-com" v-b-modal.modal-sm>{{$t("general.Community")}}</span>
                 </b-button>
               </b-col>
 

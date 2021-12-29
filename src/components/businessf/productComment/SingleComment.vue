@@ -33,7 +33,7 @@
                     icon="trash-fill"
                     aria-hidden="true"
                   ></b-icon>
-                  <span class="text-purple">Delete</span>
+                  <span class="text-purple">{{$t('general.Delete')}}</span>
                 </b-dropdown-item-button>
               </b-dropdown>
             </div>

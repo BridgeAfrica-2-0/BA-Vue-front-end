@@ -1,5 +1,5 @@
 <template>
-	<div id="orderList"> 
+	<div id="orderList">    
 		<div
 			class="row order-item mb-4"
 			v-for="(cart_item, i) in cart.data "
@@ -8,20 +8,49 @@
 
 			<div class="col-12 order-item-caroussel col-sm-4 mb-3 col-md-4">
 				<!-- <ProductCaroussel :productImages="images(cart_item.product_picture)" /> -->
-				<img :src="cart_item.product_picture" alt="">
+				<img :src="cart_item.product_picture" class="r-image" alt="">
 			</div>
 			<div
-				class="col-auto flex-fill order-info body-font-size col-sm-8 col-md-8"
+				class="col-auto flex-fill order-info body-font-size col-sm-8 col-md-8 "
 			>
-				<b-table-simple borderless>
+
+			<div class="row">
+				<div class="col-3 col-md-2 pr-0">	{{$t('general.Name')}}</div>
+				<div class="col">{{ cart_item.product_name }}</div>
+			</div>
+
+			<div class="row">
+				<div class="col-3 col-md-2 pr-0">	{{$t('general.Amount')}} :</div>
+				<div class="col">{{ formatMoney(Number(cart_item.product_price)) }}}</div>
+			</div>
+
+			<div class="row">
+				<div class="col-3 col-md-2 pr-0">{{$t('general.tax')}} :</div>
+				<div class="col">{{ formatMoney(Number(cart_item.tax_amount)) }}</div>
+			</div>
+
+			<div class="row">
+				<div class="col-3 col-md-2 pr-0">	{{$t('general.Quantity')}} :</div>
+				<div class="col">{{cart_item.quantity}}</div>
+			</div>
+
+			<div class="row">
+				<div class="col-3 col-md-2 pr-0">		{{$t('general.Shipping')}}:</div>
+				<div class="col"><span  
+									class=" cursor"
+									v-b-tooltip.hover.top="cart_item.shipping_address"
+									> 
+									 {{ formatMoney(Number( cart_item.shipping_cost )) }} </span>	</div>
+			</div>
+				<!-- <b-table-simple borderless>
 					<b-tbody>
 						<b-tr>
 							<b-td>
-								{{$t('general.Name_of_item')}}:
+								{{$t('general.Name')}}
 							</b-td>
 							<b-th>
 								{{ cart_item.product_name }}
-								<!-- {{ cart_item.name }} -->
+								 {{ cart_item.name }} 
 							</b-th>
 						</b-tr>
 						<b-tr>
@@ -30,9 +59,21 @@
 							</b-td>
 							<b-th>
 								{{ formatMoney(Number(cart_item.product_price)) }}
-								<!-- {{ formatMoney(Number(cart_item.amount)) }} -->
+							
 							</b-th>
 						</b-tr>
+
+						<b-tr>
+							<b-td>
+								{{$t('general.tax')}} :
+							</b-td>
+							<b-th>
+								{{ formatMoney(Number(cart_item.tax_amount)) }}
+								
+							</b-th>
+						</b-tr>
+
+
 						<b-tr>
 							<b-td>
 								{{$t('general.Quantity')}} :
@@ -40,66 +81,53 @@
 							<b-th>
 
 								{{cart_item.quantity}}
-								<!-- <input
-									class="quantity-input"
-									type="number"
-									min="1"
-									@change="changeQuantity($event, i)"
-									v-model="cart_item.quantity"
-								/> -->
+								
 							</b-th>
 						</b-tr>
-						<!-- <b-tr>
+						<b-tr>
 							<b-td>
 								{{$t('general.Shipping')}}:
 							</b-td>
 							<b-th >
 							
 								<div class="row">
-									<th v-for="i in cart_item.shipping_cost" :key="i"
+									<th  
 									class=" cursor"
-									v-b-tooltip.hover.top="shippingCost(i).adress"
+									v-b-tooltip.hover.top="cart_item.shipping_address"
 									>
-									 {{shippingCost(i).adress}}  ( {{ formatMoney(Number( shippingCost(i).price )) }})									</th>
+									 {{ formatMoney(Number( cart_item.shipping_cost )) }}									</th>
 								</div>
 							</b-th>
-						</b-tr> -->
+						</b-tr>
 						<b-tr>
 							<b-td>
 								{{$t('general.Total')}}:
 							</b-td>
 							<b-th>
-								<!-- <div v-if="cart_item.shipping_cost" class="row">
-									<th v-for="i in cart_item.shipping_cost" :key="i"
+								<div  class="row">
+									<th 
 									class=" cursor"
 									
-									>  	 {{shippingCost(i).adress}}  ( {{ formatMoney(Number(cart_item.product_price) * cart_item.quantity 
-									+ parseInt(shippingCost(i).price) ) }} ) 
+									>  	   {{ formatMoney(Number(cart_item.sub_total) ) }} 
+
+
+									
 									
 										 
 									</th>
-								</div> -->
-								<div >    {{ formatMoney(Number(cart_item.product_price) * cart_item.quantity ) }}  </div>
-								<!-- {{
-									formatMoney(
-										Number(cart_item.product_price) * cart_item.quantity + 1000
-									)
-								}} -->
-								<!-- {{
-									formatMoney(
-										Number(cart_item.amount) * cart_item.quantity +
-											cart_item.shipping
-									)
-								}} -->
+								</div>
+								
+								
+								
 							</b-th>
 						</b-tr>
 					</b-tbody>
-				</b-table-simple>
+				</b-table-simple> -->
 			</div>
 		</div>
 		<div class="row my-4" v-if="loading">
 			<div class="col-12 d-flex justify-content-center align-items-center">
-				<b-spinner
+				<b-spinner  variant="primary"
 					style="width: 3rem; height: 3rem;"
 					label="Loading"
 				></b-spinner>
@@ -142,10 +170,10 @@
 		async created() {
 			this.loading = true;
 			await this.$store
-				.dispatch("checkout/getCart")
+				.dispatch("checkout/getCartt")
 				.then(() => {
 					this.loading = false;
-					this.error = false;
+					this.error = false;  
 					
 				})
 				.catch(() => {
@@ -161,7 +189,7 @@
       console.log("next page loading ");
       this.loading = true;
       this.currentPage = value;
-     let url="ckeckout-cart&page="+value;    
+     let url="ckeckout-cart&page="+value;       
 
       this.$store
         .dispatch("checkout/next", url).then((res) => {
@@ -280,6 +308,129 @@
 </script>
 
 <style scoped>
+
+
+
+@media only screen and (min-width: 768px) {
+  .title {
+    font-size: 20px;
+    color: black;
+
+    line-height: 35px;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+
+  .textt {
+    color: #000;
+
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 30px;
+    color: rgba(117, 114, 128, 1);
+    text-align: left;
+
+    font-weight: normal;
+    line-height: 20px;
+    font-style: normal;
+
+    padding: 1px;
+    text-align: left;
+
+    margin-left: 60px;
+
+    margin-right: -5px;
+
+    line-height: 25px;
+  }
+
+  .location {
+    margin-bottom: 30px;
+  }
+
+
+  .r-image {
+    border-radius: 8px;
+
+    height: 160px;
+    width: 160px;
+  }
+}
+
+
+
+
+
+
+@media only screen and (max-width: 768px) {
+  .a-flex {
+    margin-right: -15px;
+  }
+
+  .s-button {
+    padding: 15px;
+    margin-top: -15px;
+  }
+
+  .title {
+    font-size: 16px;
+    color: black;
+
+    line-height: 35px;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+
+  .textt {
+    color: #000;
+
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 30px;
+    color: rgba(117, 114, 128, 1);
+    text-align: left;
+
+    font-weight: normal;
+    line-height: 20px;
+    font-style: normal;
+
+    padding: 1px;
+    text-align: left;
+
+    margin-right: -5px;
+
+    line-height: 25px;
+  }
+
+  .location {
+    margin-bottom: 30px;
+  }
+
+  .btn {
+    padding-top: 6px;
+    font-size: 10px;
+
+    height: 28px;
+    width: 85px;
+  }
+
+  .r-image {
+    border-radius: 8px;
+
+    height: 100px;
+    width: 100px;
+  }
+}
+
+
+
+.cimage{
+
+	height: 200px;
+    width: 100%;
+    object-fit: cover;
+
+};
 	.quantity-input {
 		width: 2rem !important;
 		border: none !important;
@@ -294,9 +445,7 @@
 		opacity: 1;
 	}
 
-	.order-item {
-		max-height: 350px !important;
-	}
+	
 	.order-item-caroussel {
 		max-width: 200px;
 	}

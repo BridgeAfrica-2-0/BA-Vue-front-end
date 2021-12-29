@@ -25,7 +25,11 @@
         </b-col>
         <b-col md="7" cols="7" lg="5" sm="5">
           <p class="textt">
-            <strong class="net-title"> {{ network.name }} </strong>
+            <strong class="net-title">
+              <router-link :to="'network/' + network.id">
+                {{ network.name }}sda
+              </router-link>
+            </strong>
             <br />
             {{ network.purpose }}
             <br />
@@ -39,7 +43,16 @@
             <br />
             {{ network.description }}
             <br />
-            <b-link>{{ $t("search.Read_More") }}</b-link>
+            <read-more
+              :more-str="$t('search.read_more')"
+              class="readmore"
+              :text="network.description"
+              link="#"
+              :less-str="$t('search.read_less')"
+              :max-chars="30"
+            >
+            </read-more>
+            <!-- <b-link>{{ $t("search.Read_More") }}</b-link> -->
           </p>
         </b-col>
 
@@ -65,6 +78,16 @@
               </b-col>
 
               <b-col md="4" lg="12" xl="12" sm="12" cols="4" class="mt-2">
+                <b-button
+                  block
+                  size="sm"
+                  class="b-background shadow"
+                  variant="primary"
+                >
+                  <i class="fas fa-lg btn-icon fa-user-plus"></i>
+
+                  <span class="btn-text"> {{ $t("search.Join") }} </span>
+                </b-button>
               </b-col>
             </b-row>
           </div>

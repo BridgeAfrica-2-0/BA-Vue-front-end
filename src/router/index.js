@@ -4,7 +4,8 @@ import VueRouter from "vue-router";
 import Login from "../views/login.vue";
 import home1 from "@/views/home1.vue";
 import signup from "../views/signup.vue";
-
+import success from "../views/success.vue";
+import failure from "../views/failure.vue";
 import RecoverPass1 from "../views/recoverPassword1.vue";
 import RecoverPass2 from "../views/recoverPassword2.vue";
 import RecoverPass3 from "../views/recoverPassword3.vue";
@@ -129,6 +130,20 @@ const routes = [
     name: "market",
     component: market,
   },
+
+  {
+    path: "/success",
+    name: "success",
+    component: success,
+  },
+
+
+  {
+    path: "/failure",
+    name: "failure",
+    component: failure,
+  },
+
   {
     path: "/checkout",
     name: "payment",
@@ -353,6 +368,7 @@ const routes = [
     path: "/search",
     name: "Search",
     component: search,
+    
   },
 
   {
@@ -406,30 +422,30 @@ const routes = [
 ];
 
 const router = new VueRouter({
-  mode: "history",
-  base: process.env.BASE_URL,
-  routes,
+    mode: "history",
+    base: process.env.BASE_URL,
+    routes,
 });
 
 router.beforeEach((to, from, next) => {
-  const loggedIn = localStorage.getItem("user");
+    const loggedIn = localStorage.getItem("user");
 
-  if (to.matched.some((record) => record.meta.auth) && !loggedIn) {
-    next("/login");
+    if (to.matched.some((record) => record.meta.auth) && !loggedIn) {
+        next("/login");
 
-    return;
-  }
-
-  if (to.matched.some((record) => record.meta.auth)) {
-    const dat = localStorage.getItem("user");
-    const userdata = JSON.parse(dat);
-
-    if (userdata.user.verified_at == null) {
-      //  next("/verify");
+        return;
     }
-  }
 
-  next();
+    if (to.matched.some((record) => record.meta.auth)) {
+        const dat = localStorage.getItem("user");
+        const userdata = JSON.parse(dat);
+
+        if (userdata.user.verified_at == null) {
+            //  next("/verify");
+        }
+    }
+
+    next();
 });
 
 export default router;

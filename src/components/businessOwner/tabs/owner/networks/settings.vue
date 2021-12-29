@@ -155,7 +155,7 @@
           <b-form-group class="mb-0" v-slot="{ ariaDescribedby }">
             <b-form-radio-group
               class="pt-2"
-              :options="['Admin Only', 'Anyone']"
+              :options="[this.$t('network.Admin Only'), this.$t('network.Anyone')]"
               :aria-describedby="ariaDescribedby"
             ></b-form-radio-group>
           </b-form-group>

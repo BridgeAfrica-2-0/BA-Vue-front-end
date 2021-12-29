@@ -343,7 +343,7 @@ export default {
         this.loading = false;
         this.flashMessage.show({
           status: "success",
-          message: "The Member Is Now Admin"
+          message: this.$t('general.The_Member_Is_Now_Admin')
         });
       })
       .catch(err => {
@@ -351,7 +351,7 @@ export default {
         this.loading = false;
         this.flashMessage.show({
           status: "error",
-          message: "Unable To Set Member As Admin"
+          message: this.$t('general.Unable_To_Set_Member_As_Admin')
         });
       });
     },
@@ -367,7 +367,7 @@ export default {
         this.loading = false;
         this.flashMessage.show({
           status: "success",
-          message: "Member Successfully Removerd As Admin"
+          message: this.$t('general.Member_Successfully_Removed_As_Admin')
         });
       })
       .catch(err => {
@@ -375,7 +375,7 @@ export default {
         this.loading = false;
         this.flashMessage.show({
           status: "error",
-          message: "Unable To Removerd Member As Admin"
+          message: this.$t('general.Unable_To_Removed_Member_As_Admin')
         });
       });
 		},
@@ -391,7 +391,7 @@ export default {
         this.loading = false;
         this.flashMessage.show({
           status: "success",
-          message: "Member Successfully Removerd From Network"
+          message: this.$t('general.Member_Successfully_Removerd_From_Network')
         });
       })
       .catch(err => {
@@ -399,7 +399,7 @@ export default {
         this.loading = false;
         this.flashMessage.show({
           status: "error",
-          message: "Unable to Removerd Member From Network"
+          message: this.$t('general.Unable_to_Removerd_Member_From_Network')
         });
       });
 		},

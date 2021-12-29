@@ -80,11 +80,12 @@
                   <b-avatar
                     class="d-inline-block profile-pic"
                     variant="primary"
-                    src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
+                    :src="currentUser.user.profile_picture"
                     square
                   ></b-avatar>
                 </b-col>
                 <b-col>
+                  <!-- <small>{{ currentUser }}</small> -->
                   <h1 class="mt-4 title text-bold">
                     {{
                       currentUser
@@ -143,7 +144,7 @@
                             'p-2 message ',
                             {
                               messageSelected:
-                                chat.receiver_id ==
+                                chat.id ==
                                 (chatSelected.clickedId != null
                                   ? chatSelected.clickedId
                                   : false)
@@ -155,7 +156,7 @@
                             selectedChat({
                               type: 'user',
                               chat: chat,
-                              id: chat.receiver_id,
+                              id: chat.id,
                             })
                           "
                         >
@@ -164,7 +165,7 @@
                               <b-avatar
                                 class="d-inline-block profile-pic"
                                 variant="primary"
-                                src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
+                                :src="chat.profile_picture"
                               ></b-avatar>
 
                               <h6 class="mt-2 d-inline-block ml-2">
@@ -227,7 +228,7 @@
                             'p-2 message ',
                             {
                               messageSelected:
-                                chat.receiver_id ==
+                                chat.id ==
                                 (chatSelected.clickedId != null
                                   ? chatSelected.clickedId
                                   : false)
@@ -239,7 +240,7 @@
                             selectedChat({
                               type: 'business',
                               chat: chat,
-                              id: chat.receiver_id,
+                              id: chat.id,
                             })
                           "
                         >
@@ -248,7 +249,7 @@
                               <b-avatar
                                 class="d-inline-block profile-pic"
                                 variant="primary"
-                                src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
+                                :src="chat.logo_path"
                               ></b-avatar>
 
                               <h6 class="mt-2 d-inline-block ml-2">
@@ -310,7 +311,7 @@
                             'p-2 message ',
                             {
                               messageSelected:
-                                chat.receiver_id ==
+                                chat.id ==
                                 (chatSelected.clickedId != null
                                   ? chatSelected.clickedId
                                   : false)
@@ -322,7 +323,7 @@
                             selectedChat({
                               type: 'network',
                               chat: chat,
-                              id: chat.receiver_id,
+                              id: chat.id,
                             })
                           "
                         >
@@ -331,7 +332,7 @@
                               <b-avatar
                                 class="d-inline-block profile-pic"
                                 variant="primary"
-                                src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
+                                :src="chat.image"
                               ></b-avatar>
 
                               <h6 class="mt-2 d-inline-block ml-2">
@@ -384,7 +385,13 @@
                   <b-col class="col-3">
                     <b-avatar
                       variant="primary"
-                      src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
+                      :src="
+                        chatSelected.profile_picture
+                          ? chatSelected.profile_picture
+                          : chatSelected.logo_path
+                          ? chatSelected.logo_path
+                          : chatSelected.image
+                      "
                       size="40"
                     ></b-avatar>
                   </b-col>
@@ -413,7 +420,13 @@
                   <b-col class="col-2" @click="info = true">
                     <b-avatar
                       variant="primary"
-                      src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
+                      :src="
+                        chatSelected.profile_picture
+                          ? chatSelected.profile_picture
+                          : chatSelected.logo_path
+                          ? chatSelected.logo_path
+                          : chatSelected.image
+                      "
                       size="60"
                     ></b-avatar>
                   </b-col>
@@ -815,7 +828,7 @@
                       v-model="searchQuery"
                       class="input-background"
                       style="width: 100%"
-                      placeholder="Type the name of person"
+                      :placeholder="`Type the name of the ${type}`"
                       @keydown="searchUser(searchQuery)"
                     ></b-form-input>
 
@@ -835,7 +848,7 @@
                         <thead>
                           <tr></tr>
                         </thead>
-                        <tbody>
+                        <tbody v-if="type == 'user'">
                           <tr
                             v-for="(user, index) in users"
                             :key="index"
@@ -844,7 +857,7 @@
                               selectedChat({
                                 type: 'user',
                                 chat: user,
-                                id: user.id
+                                id: user.id,
                               })
                             "
                           >
@@ -853,9 +866,57 @@
                                 class="d-inline-block"
                                 variant="primary"
                                 size="30"
-                                :src="user.profile"
+                                :src="user.profile_picture"
                               ></b-avatar>
                               <span class="bold"> {{ user.name }} </span>
+                            </td>
+                          </tr>
+                        </tbody>
+                        <tbody v-if="type == 'business'">
+                          <tr
+                            v-for="(biz, index) in bizs"
+                            :key="index"
+                            class="p-2 message"
+                            @click="
+                              selectedChat({
+                                type: 'business',
+                                chat: biz,
+                                id: biz.id,
+                              })
+                            "
+                          >
+                            <td>
+                              <b-avatar
+                                class="d-inline-block"
+                                variant="primary"
+                                size="30"
+                                :src="biz.logo_path"
+                              ></b-avatar>
+                              <span class="bold"> {{ biz.name }} </span>
+                            </td>
+                          </tr>
+                        </tbody>
+                        <tbody v-if="type == 'network'">
+                          <tr
+                            v-for="(network, index) in nets"
+                            :key="index"
+                            class="p-2 message"
+                            @click="
+                              selectedChat({
+                                type: 'network',
+                                chat: network,
+                                id: network.id,
+                              })
+                            "
+                          >
+                            <td>
+                              <b-avatar
+                                class="d-inline-block"
+                                variant="primary"
+                                size="30"
+                                :src="network.image"
+                              ></b-avatar>
+                              <span class="bold"> {{ network.name }} </span>
                             </td>
                           </tr>
                         </tbody>
@@ -962,10 +1023,13 @@ export default {
       return this.$store.getters["userChat/getUser"];
     },
     bizs() {
-      return this.$store.getters["businessChat/getBizs"];
+      return this.$store.getters["userChat/getBizs"];
     },
     users() {
       return this.$store.getters["userChat/getUsers"];
+    },
+    nets() {
+      return this.$store.getters["userChat/getNets"];
     },
     userToUser() {
       return this.$store.getters["userChat/getUserToUser"];
@@ -996,10 +1060,11 @@ export default {
     },
   },
   mounted() {
-    this.getUsers();
+    this.getList();
     if (this.chatList.length < 0) {
       this.getChatList({ type: "user" });
     }
+    console.log("call to action:", this.ctaSelected);
     // this.getChatList({ type: "user" });
   },
   created() {
@@ -1014,8 +1079,9 @@ export default {
       } else if (this.tabIndex == 2) {
         this.getChatList({ type: "network" });
       } else {
-        this.tabIndex = 0;
+        // this.tabIndex = 0;
         this.getChatList({ type: "user" });
+        console.log("testing...");
       }
 
       console.log("There");
@@ -1024,6 +1090,7 @@ export default {
     } else {
       this.tabIndex = 0;
       this.getChatList({ type: "user" });
+      console.log("Here testing...");
     }
 
     this.socketListenners();
@@ -1109,21 +1176,27 @@ export default {
         return moment(data).fromNow();
       }
     },
-    getUsers() {
-      console.log("Bizs:", this.bizs);
-      this.$store.dispatch("userChat/GET_USERS");
-      // this.$store.dispatch("businessChat/GET_BIZS");
+    getList() {
+      if (this.type == "user") {
+        this.$store.dispatch("userChat/GET_USERS");
+      } else if (this.type == "business") {
+        this.$store.dispatch("userChat/GET_BIZS");
+      } else {
+        console.log("network");
+        this.$store.dispatch("userChat/GET_NETS");
+      }
     },
     getChatList(data) {
-      console.log("List");
       this.chatSelected.active = false;
       this.newMsg = false;
+      this.type = data.type;
       this.$store
         .dispatch("userChat/GET_USERS_CHAT_LIST", data)
         .then(() => {
           console.log("->[Data logged]<-");
         })
         .catch(() => console.log("error"));
+      console.log("testing...");
 
       // this.scrollToBottom();
     },
@@ -1178,12 +1251,13 @@ export default {
     },
     selectedChat(data) {
       // this.scrollToBottom();
+      console.log("Data logged:", data);
       console.log("free up:", this.ctaSelected);
       this.type = data.type;
       if (this.type == "group") {
         this.createGroup();
       } else this.createRoom(data.id);
-      console.log("ZZZZZ");
+      console.log("ZZZZZ", data.id);
       this.chatId = data.id;
       this.$store.commit("businessChat/setSelectedChatId", data.id);
       let receiver = { receiverID: data.id, keyword: null };
@@ -1196,8 +1270,6 @@ export default {
       } else {
         this.histUserToUser(receiver);
       }
-
-      console.log("YYYYY");
 
       this.newMsg = false;
       this.chatSelected = {
@@ -1259,7 +1331,7 @@ export default {
       console.log(this.checked);
     },
     newMessage(arg) {
-      this.getUsers();
+      this.getList();
       console.log("hey");
       this.newMsg = arg;
       this.show = false;

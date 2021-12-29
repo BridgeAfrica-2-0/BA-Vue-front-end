@@ -52,12 +52,13 @@ post<div v-for="post in owner_post" :key="post.id" :loading="load" class="mb-4">
               <!--     :text="item.content.details"   -->
               <read-more
                 v-if="post.content"
-                more-str="read more"
+                :more-str="$t('search.read_more')"
                 :text="post.content"
                 link="#"
-                less-str="read less"
+                :less-str="$t('search.read_less')"
                 :max-chars="200"
               ></read-more>
+              
             </p>
           </div>
 

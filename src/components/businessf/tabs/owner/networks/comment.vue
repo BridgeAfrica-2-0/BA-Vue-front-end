@@ -16,13 +16,14 @@
         </span>
         <p class="msg text">
           <read-more
-            more-str="read more"
+            :more-str="$t('search.read_more')"
             :text="comment.comment"
             link="#"
-            less-str="read less"
+            :less-str="$t('search.read_less')"
             :max-chars="15000"
           >
           </read-more>
+         
         </p>
         <b-icon
           :icon="icon"

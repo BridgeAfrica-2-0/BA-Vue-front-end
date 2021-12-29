@@ -134,8 +134,8 @@
                     </label>
                     <div class="col-md-5 pl-0 pr-0">
                       <select id="gender" class="form-control w-100">
-                        <option>Public</option>
-                        <option>Private</option>
+                        <option>{{ $t('network.Public') }}</option>
+                        <option>{{ $t('network.Private') }}</option>
                       </select>
                     </div>
                   </div>

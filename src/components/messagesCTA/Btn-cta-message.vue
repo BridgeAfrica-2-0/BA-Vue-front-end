@@ -1,13 +1,20 @@
 <template>
   <b-button
-    block
+    :block="header"
     variant="primary"
     size="sm"
-    class="b-background flexx shadow"
+    :class="header ? 'message size' : 'b-background flexx shadow'"
     @click="cta()"
   >
-    <i class="fas fa-envelope fa-lg btn-icon pt-1 pr-1"></i>
-    <span class="btn-text"> {{ $t("dashboard.Messages") }}</span>
+    <p v-if="header">
+      <i class="fas fa-envelope fa-lg btn-icon"></i>
+      <span>{{ $t("businessf.Message") }}</span>
+    </p>
+
+    <p v-else>
+      <i class="fas fa-envelope fa-lg btn-icon pt-1 pr-1"></i>
+      <span class="btn-text"> {{ $t("dashboard.Messages") }}</span>
+    </p>
   </b-button>
 </template>
 
@@ -20,6 +27,10 @@ export default {
     },
     type: {
       type: String,
+    },
+    header: {
+      default: false,
+      type: Boolean,
     },
   },
   data() {
@@ -91,4 +102,16 @@ export default {
 .pobtn {
   font-size: 10px;
 }
+
+/* cta comp */
+.message {
+  color: #fff !important;
+  background-color: #32a400;
+  border: none;
+  border-radius: none;
+}
+.message:hover {
+  background-color: #006400;
+}
+/* cta comp */
 </style>

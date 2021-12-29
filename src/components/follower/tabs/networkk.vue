@@ -45,10 +45,10 @@
 
                 <read-more
                   v-if="item.description"
-                  more-str="read more"
+                  :more-str="$t('search.read_more')"
                   :text="item.description"
                   link="#"
-                  less-str="read less"
+                  :less-str="$t('search.read_less')"
                   :max-chars="100"
                 ></read-more>
               </p>

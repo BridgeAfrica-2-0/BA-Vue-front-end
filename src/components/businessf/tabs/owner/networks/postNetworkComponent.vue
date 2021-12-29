@@ -35,12 +35,13 @@
         <b-col cols="12" class="mt-2">
           <p class="post-text">
             <read-more
-              more-str="read more"
+              :more-str="$t('search.read_more')"
               :text="post.content"
               link="#"
-              less-str="read less"
+              :less-str="$t('search.read_less')"
               :max-chars="200"
             ></read-more>
+            
           </p>
         </b-col>
       </b-row>

@@ -104,7 +104,7 @@
                     </div>
 
                     <div class="form-group">
-                      <label for="username" class="username">{{ $t('profileowner.About') }}</label
+                      <label for="username" class="username">{{ $t('general.About') }}</label
                       ><br />
                       <textarea
                         type="textarea"
@@ -443,7 +443,7 @@
                     </div>
 
                     <div class="form-group">
-                      <label for="username" class="username">{{ $t('profileowner.About') }}</label
+                      <label for="username" class="username">{{ $t('general.About') }}</label
                       ><br />
                       <textarea
                         type="textarea"
@@ -775,13 +775,14 @@
                       <br />
 
                       <read-more
-                        more-str="read more"
+                        :more-str="$t('search.read_more')"
                         class="readmore"
                         :text="business.about_business"
                         link="#"
-                        less-str="read less"
+                        :less-str="$t('search.read_less')"
                         :max-chars="100"
                       >
+                     
                       </read-more>
                     </p>
                   </div>
@@ -1469,7 +1470,7 @@ export default {
             this.flashMessage.show({
               status: 'success',
               blockClass: 'custom-block-class',
-              message: 'Business Updated',
+              message: this.$t('general.Business_Updated'),
             });
 
             loader.hide();

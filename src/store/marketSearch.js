@@ -124,7 +124,7 @@ export default {
         getProducts({ commit, state }) {
             commit("setLoader", true);
 
-            return axios.get("market")
+            return axios.get("market/search")
                 .then((res) => {
                     commit("setLoader", false);
                     console.log("products list: ", res.data);
@@ -140,7 +140,7 @@ export default {
             commit("setLoader", true);
             commit("setProducts", { data: [] });
 
-            return axios.get(`market?page=${page}`)
+            return axios.get(`market/search?page=${page}`)
                 .then((res) => {
                     commit("setLoader", false);
 

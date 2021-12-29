@@ -288,7 +288,7 @@
                       <!-- End Chats -->
                     </b-tab>
                     <b-tab
-                      title="Network"
+                      :title="$t('general.Network')"
                       @click="getChatList({ type: 'network' })"
                     >
                       <!-- network Chats Available  -->
@@ -371,7 +371,7 @@
                       <!-- End Chats -->
                     </b-tab>
                     <b-tab
-                      title="Groups"
+                      :title="$t('general.Groups')"
                       @click="getChatList({ type: 'group' })"
                     >
                       <!-- Business Chats Available  -->
@@ -897,7 +897,7 @@
             <div class="new-msg back-image" style="margin-right: 17px">
               <div class="info-nav">
                 <b-row>
-                  <b-col class="col-1 mt-3"> To </b-col>
+                  <b-col class="col-1 mt-3"> {{ $t("general.To") }} </b-col>
                   <b-col>
                     <b-form-input
                       id="textarea"
@@ -940,7 +940,7 @@
                               name="people"
                               @change="peopleAllMulty"
                             >
-                              People
+                              {{ $t("general.People") }}
                             </b-form-checkbox>
                           </b-col>
 
@@ -951,7 +951,7 @@
                               name="business"
                               @change="businessAllMulty"
                             >
-                              Business
+                              {{ $t("general.Business") }}
                             </b-form-checkbox>
                           </b-col>
                           <b-col>
@@ -961,7 +961,7 @@
                               v-model="networkMulty"
                               @change="networkAllMulty"
                             >
-                              Network
+                              {{ $t("general.Network") }}
                             </b-form-checkbox>
                           </b-col>
                           <!--

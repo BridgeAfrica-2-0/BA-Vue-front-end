@@ -2213,7 +2213,7 @@ export default {
     },
 
     networkFilterReset() {
-      this.searchNetworks({});
+      this.searchNetworks();
 
       this.networkFilter = {
         category: false,

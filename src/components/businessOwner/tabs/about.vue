@@ -6,7 +6,7 @@
     <hr /> 
     
     <b-card>
-      <div class="mb-3" > {{business_about.lng}}
+      <div class="mb-3" > 
         <mapbox :coordinates="[business_about.lng, business_about.lat]" />
       </div>
       
@@ -24,6 +24,7 @@
                 ></b-icon>
               </div> -->
             <div
+                v-if="showPen != 'BusinessFollower'"
                 class="edit"
                 v-b-modal.biographyModal
                 @click="
@@ -65,7 +66,7 @@
                 </span>
                 <!-- <span>{{ business_about.name }}</span> -->
               </p>
-              <p>
+              <p> 
                 <b-icon icon="search" class="primary icon-size"></b-icon>
                 {{business_about.name}}
               </p>

@@ -14,7 +14,7 @@
       </div>
 
       <div class="" v-if="selectedId == '0'">
-        <Business />
+        <Business @pageChange="pageChange" />
       </div>
 
       <div class="mt-3" v-if="selectedId == '1'">
@@ -34,6 +34,10 @@
       </div>
 
       <div class="mt-3" v-if="selectedId == '5'">
+        <Settings v-bind:currenttab="selectedId" />
+      </div>
+
+      <div class="mt-3" v-if="selectedId == '6'">
         <Settings v-bind:currenttab="selectedId" />
       </div>
     </div>
@@ -82,6 +86,10 @@ export default {
     };
   },
   methods: {
+    pageChange(){
+      console.log("pageChange")
+      this.selectedId = 6
+    },
     businessInfo() {
       this.$store
         .dispatch("businessOwner/businessInfo", this.url_data)

@@ -45,7 +45,7 @@
     <b-row class="center-content d-none d-md-block">
       <b-col cols="10">
         <div class="bv-example-row">
-            <b-tabs pills v-model="tabIndex" vertical class="itzlala" nav-wrapper-class="w-15">
+            <b-tabs lazy pills v-model="tabIndex" vertical class="itzlala" nav-wrapper-class="w-15">
               <b-tab :title="$t('network.Notifications')">
                 <b-card-text> <Notification /> </b-card-text
               ></b-tab>

@@ -38,12 +38,10 @@
               class="img-fluid banner"
               alt="Kitten"
             />
-            <router-link :to="{name: 'settings' , query:{tab:'account'}}">
-              <b-button variant="primary" class="text-center mt-3">
-                {{ $t("businessowner.Upgrade_Now") }}
-              </b-button>
-            </router-link>
-            
+
+            <b-button @click="$emit('pageChange')" variant="primary" class="text-center mt-3">
+              {{ $t("businessowner.Upgrade_Now") }}
+            </b-button>
           </div>
         </b-card>
       </b-col>

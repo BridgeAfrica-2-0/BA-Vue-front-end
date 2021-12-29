@@ -7,11 +7,11 @@
     margin-right: -12px;"
       >
         <b-tabs pills content-class="mt-3 f-left">
-          <b-tab :title="$t('profileowner.People')" active> <People /> </b-tab>
+          <b-tab :title="$t('profileowner.People')" active> <People  @BlockUser="BlockUser"/> </b-tab>
   
-          <b-tab :title="$t('profileowner.Businesses')" > <Businesses /> </b-tab>
+          <b-tab :title="$t('profileowner.Businesses')" > <Businesses  @BlockUser="BlockUser"/> </b-tab>
 
-           <b-tab :title="$t('profileowner.Network')" > <Network /> </b-tab>
+           <b-tab :title="$t('profileowner.Network')" > <Network  @BlockUser="BlockUser"/> </b-tab>
         </b-tabs>
       </b-card>
     </div>
@@ -60,6 +60,31 @@ export default {
         .catch(err => {
           console.log({ err: err });
         });
+    },
+    BlockUser(dataInfo) {
+      console.log(dataInfo);
+      let fd = new FormData();
+      fd.append("id", dataInfo.id);
+      fd.append("type", dataInfo.refernce);
+      this.$store.dispatch("profile/Block", {
+        path: "block/entity",
+        formData: fd
+        })
+      .then(response => {
+        this.community();
+        console.log(response);
+        this.flashMessage.show({
+          status: "success",
+          message: dataInfo.refernce + " blocked"
+        });
+      })
+      .catch(err => {
+        console.log({ err: err });
+        this.flashMessage.show({
+          status: "error",
+          message: "Unable to blocked " + dataInfo.refernce
+        });
+      });
     },
 
   },

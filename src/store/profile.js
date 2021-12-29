@@ -19,6 +19,9 @@ export default {
     educations: [],
     professions: [],
     networks: [],
+    blockuser: [],
+    blockbusiness: [],
+    blocknetwork: [],
 
     profile_about: { "user": {}, "user_address": [], "user_education": [], "user_experience": [], "user_websites": [] },
     profileIntro: { "user": {}, "user_address": [], "user_education": [], "user_experience": [], "user_websites": [] },
@@ -135,6 +138,15 @@ export default {
 
   },
   getters: {
+    getblockusers(state){
+      return state.blockuser
+    },
+    getblockbusiness(state){
+      return state.blockbusiness
+    },
+    getblocknetwork(state){
+      return state.blocknetwork
+    },
     getAlbums(state) {
       return state.albums;
     },
@@ -195,6 +207,15 @@ export default {
   },
 
   mutations: {
+    setblockusers(state, blockuser){
+      state.blockuser = blockuser
+    },
+    setblockbusiness(state, blockbusiness){
+      state.blockbusiness = blockbusiness
+    },
+    setblocknetwork(state, blocknetwork){
+      state.blocknetwork = blocknetwork
+    },
 
     removePost(state, uuid) {
       const newPosts = state.ownerPost.filter(post => post.id != uuid)
@@ -648,6 +669,16 @@ export default {
           commit("setCommunityPeople", data.data.people[0]);
           commit("setCommunityBusiness", data.data.business[0]);
           console.log(data);
+        });
+    },
+
+    Block({ commit }, blockData) {
+      console.log("Block");
+      return axios
+        .post(`profile/${blockData.path}`, blockData.formData)
+        .then(({ data }) => {
+          console.log(data);
+          return data;
         });
     },
 
@@ -1423,7 +1454,31 @@ export default {
         commit("set_details", data.data);
         console.log(data);
       });
-    }
+    },
+    getblockusers( {commit}, path ){
+      return axios
+      .get(`profile/${path}`)
+      .then(({ data }) => {
+          commit("setblockusers", data.data);
+        console.log(data);
+      })
+    },
+    getblockbusiness( {commit}, path ){
+      return axios
+      .get(`profile/${path}`)
+      .then(({ data }) => {
+          commit("setblockbusiness", data.data);
+        console.log(data);
+      })
+    },
+    getblocknetwork( {commit}, path ){
+      return axios
+      .get(`profile/${path}`)
+      .then(({ data }) => {
+          commit("setblocknetwork", data.data);
+        console.log(data);
+      })
+    },
 
 
 

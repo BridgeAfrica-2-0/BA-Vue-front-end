@@ -107,11 +107,19 @@ export default {
     }),
 
     async singlePost() {
+      this.setLoaderState(true);
+
       const response = await this.$repository.post.single({
         uuid: this.$route.query.uuid,
       });
 
-      if (response.success) this.postStore(response.data);
+      if (response.success){ 
+        this.postStore([response.data])
+        this.setLoaderState(false);
+        this.pageHasLoad=true
+      }else{
+        this.pageHasLoad=true
+      }
     },
 
     async getAuth() {

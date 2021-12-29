@@ -1412,6 +1412,7 @@
                                   class="centralizer"
                                 ></b-spinner>
                               </div>
+                              <!-- Length: {{ bizs }} -->
                               <div v-if="bizs.length">
                                 <tr
                                   v-for="(biz, index) in bizs"
@@ -1803,7 +1804,7 @@ export default {
       Number(this.$route.params.id)
     );
     console.log("router params:", this.currentBizId);
-    this.tabIndex = this.$route.query.msgTabId;
+    this.tabIndex = Number(this.$route.query.msgTabId);
 
     console.log("this.tabIndex:", this.tabIndex);
     // console.log("call to action checked:", this.ctaSelected);

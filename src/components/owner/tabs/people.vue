@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="s-cardd"> 
+    <div class="s-cardd">
       <div
         class="people-style border shadow"
         v-for="item in users"
@@ -23,8 +23,10 @@
                     <b-row>
                       <b-col md="6" lg="6" cols="6" sm="6" class="mt-lg-2">
                         <div class="mt-2 mt-lg-0 mt-xl-0 username">
-                          <router-link :to="{name:'Follower', params: {id: item.id}}"><b>{{ item.name }} </b></router-link>
-                          
+                          <router-link
+                            :to="{ name: 'Follower', params: { id: item.id } }"
+                            ><b>{{ item.name }} </b></router-link
+                          >
                         </div>
                       </b-col>
 
@@ -66,17 +68,15 @@
                         xl="6"
                         class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
                       >
-
-                       <b-button
-                         v-if="show =='Follower'"
-                        disabled
+                        <b-button
+                          v-if="show == 'Follower'"
+                          disabled
                           block
                           size="sm"
                           :id="'followbtn' + item.id"
                           class="b-background flexx pobtn shadow"
                           :class="item.is_follow !== 0 && 'u-btn'"
                           variant="primary"
-                          
                         >
                           <i
                             class="fas fa-lg btn-icon"
@@ -93,7 +93,7 @@
                         </b-button>
 
                         <b-button
-                         v-else
+                          v-else
                           block
                           size="sm"
                           :id="'followbtn' + item.id"
@@ -115,10 +115,6 @@
                             $t("dashboard.Community")
                           }}</span>
                         </b-button>
-
-
-                        
-
                       </b-col>
                     </b-row>
                   </div>
@@ -161,7 +157,7 @@ export default {
   },
 
   computed: {
-    show(){
+    show() {
       return this.$route.name;
     },
     old_users() {

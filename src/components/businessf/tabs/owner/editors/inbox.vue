@@ -26,12 +26,21 @@
                 </b-col>
               </b-row>
               <b-container>
-                <input type="text" class="form-control input-background" :placeholder="$t('general.Search_inbox')" />
+                <input
+                  type="text"
+                  class="form-control input-background"
+                  :placeholder="$t('general.Search_inbox')"
+                />
               </b-container>
             </div>
             <div>
               <div class="messages-mobile">
-                <b-row v-for="message in messages" :key="message.id" class="p-2 message" @click="showMessages(false)">
+                <b-row
+                  v-for="message in messages"
+                  :key="message.id"
+                  class="p-2 message"
+                  @click="showMessages(false)"
+                >
                   <b-col class="col-10">
                     <span style="display: inline-flex mb-2">
                       <b-avatar
@@ -50,7 +59,9 @@
                   <b-col class="col-2 text-center">
                     <small> {{ message.timeStamp }} </small>
                     <p class="">
-                      <b-badge variant="info"> {{ message.messageCount }} </b-badge>
+                      <b-badge variant="info">
+                        {{ message.messageCount }}
+                      </b-badge>
                     </p>
                   </b-col>
                 </b-row>
@@ -80,11 +91,20 @@
                   ></b-icon>
                 </b-col>
               </b-row>
-              <input type="text" class="form-control input-background" :placeholder="$t('general.Search_inbox')" />
+              <input
+                type="text"
+                class="form-control input-background"
+                :placeholder="$t('general.Search_inbox')"
+              />
             </div>
             <div>
               <div class="messages">
-                <b-row v-for="message in messages" :key="message.id" class="p-2 message" @click="showInfo(false)">
+                <b-row
+                  v-for="message in messages"
+                  :key="message.id"
+                  class="p-2 message"
+                  @click="showInfo(false)"
+                >
                   <b-col class="col-9">
                     <span style="display: inline-flex">
                       <b-avatar
@@ -103,7 +123,9 @@
                   <b-col class="col-3 text-center">
                     <small class="text-center"> {{ message.timeStamp }} </small>
                     <p class="text-center">
-                      <b-badge variant="info"> {{ message.messageCount }} </b-badge>
+                      <b-badge variant="info">
+                        {{ message.messageCount }}
+                      </b-badge>
                     </p>
                   </b-col>
                 </b-row>
@@ -121,7 +143,12 @@
               <div class="chat-nav shadow">
                 <b-row class="mobile">
                   <b-col class="col-1">
-                    <b-icon @click="showMessages(true)" icon="arrow-left" aria-hidden="true" class="primary"></b-icon>
+                    <b-icon
+                      @click="showMessages(true)"
+                      icon="arrow-left"
+                      aria-hidden="true"
+                      class="primary"
+                    ></b-icon>
                   </b-col>
                   <b-col class="col-3">
                     <b-avatar
@@ -141,7 +168,12 @@
                         <b-icon icon="search" class="primary"></b-icon>
                       </b-col>
                       <b-col class="col-3">
-                        <b-icon icon="three-dots" @click="showInfo(true)" aria-hidden="true" class="primary"></b-icon>
+                        <b-icon
+                          icon="three-dots"
+                          @click="showInfo(true)"
+                          aria-hidden="true"
+                          class="primary"
+                        ></b-icon>
                       </b-col>
                     </b-row>
                   </b-col>
@@ -156,12 +188,15 @@
                   </b-col>
                   <b-col class="detail">
                     <h5>Louis Litt</h5>
-                    <p>{{ $t('general.Online') }}</p>
+                    <p>{{ $t("general.Online") }}</p>
                   </b-col>
                   <b-col class="col-4">
                     <b-row class="mt-3 ml-5">
                       <b-col class="col-3">
-                        <b-icon class="msg-icon primary icon-size" icon="search"></b-icon>
+                        <b-icon
+                          class="msg-icon primary icon-size"
+                          icon="search"
+                        ></b-icon>
                       </b-col>
 
                       <b-col>
@@ -173,23 +208,25 @@
                           variant="outline-light"
                         >
                           <template #button-content>
-                            <b-icon-three-dots class="primary"></b-icon-three-dots>
+                            <b-icon-three-dots
+                              class="primary"
+                            ></b-icon-three-dots>
                           </template>
 
                           <b-dropdown-item-button @click="showInfo(true)">
-                            {{ $t('general.View_Profile') }}
+                            {{ $t("general.View_Profile") }}
                           </b-dropdown-item-button>
 
                           <b-dropdown-item-button>
-                            {{ $t('general.Disable_Notification') }}
+                            {{ $t("general.Disable_Notification") }}
                           </b-dropdown-item-button>
 
                           <b-dropdown-item-button>
-                            {{ $t('general.Delete_Contact') }}
+                            {{ $t("general.Delete_Contact") }}
                           </b-dropdown-item-button>
 
                           <b-dropdown-item-button>
-                            {{ $t('general.Delete_Chat') }}
+                            {{ $t("general.Delete_Chat") }}
                           </b-dropdown-item-button>
                         </b-dropdown>
                       </b-col>
@@ -212,7 +249,9 @@
                         </p>
                         <p class="msg-text mt-0 text">
                           {{ chat.message }}
-                          <span class="float-right mt-2 white"> {{ chat.timeStamp }} </span>
+                          <span class="float-right mt-2 white">
+                            {{ chat.timeStamp }}
+                          </span>
                         </p>
                       </b-col>
                     </b-row>
@@ -225,7 +264,9 @@
                         </p>
                         <p id="sent" class="msg-text-sent text">
                           {{ chat.message }}
-                          <span class="float-right mt-2 white"> {{ chat.timeStamp }} </span>
+                          <span class="float-right mt-2 white">
+                            {{ chat.timeStamp }}
+                          </span>
                         </p>
                       </b-col>
                       <b-avatar
@@ -273,13 +314,25 @@
                             />
                           </svg>
                         </div>
-                        <div slot="emoji-picker" slot-scope="{ emojis, insert, display }">
-                          <div class="emoji-picker" :style="{ top: display.y + 'px', left: display.x + 'px' }">
+                        <div
+                          slot="emoji-picker"
+                          slot-scope="{ emojis, insert, display }"
+                        >
+                          <div
+                            class="emoji-picker"
+                            :style="{
+                              top: display.y + 'px',
+                              left: display.x + 'px',
+                            }"
+                          >
                             <div class="emoji-picker__search">
                               <input type="text" v-model="search" v-focus />
                             </div>
                             <div>
-                              <div v-for="(emojiGroup, category) in emojis" :key="category">
+                              <div
+                                v-for="(emojiGroup, category) in emojis"
+                                :key="category"
+                              >
                                 <h5>{{ category }}</h5>
                                 <div class="emojis">
                                   <span
@@ -299,12 +352,22 @@
                   </b-col>
 
                   <b-col cols="2" class="p-0">
-                    <b-icon @click="send" class="msg-icon primary icon-size icon-top" icon="cursor-fill"></b-icon>
+                    <b-icon
+                      @click="send"
+                      class="msg-icon primary icon-size icon-top"
+                      icon="cursor-fill"
+                    ></b-icon>
                   </b-col>
                 </b-row>
                 <p v-if="checked" class="ml-5">
-                  {{ $t('general.You_have_blocked_messages_and_calls_from_this_user') }}.
-                  <b-link @click="showInfo(true)">{{ $t('general.Unblock_Now') }}</b-link>
+                  {{
+                    $t(
+                      "general.You_have_blocked_messages_and_calls_from_this_user"
+                    )
+                  }}.
+                  <b-link @click="showInfo(true)">{{
+                    $t("general.Unblock_Now")
+                  }}</b-link>
                 </p>
               </div>
             </div>
@@ -315,7 +378,7 @@
               <b-button class="primary-bg" @click="showInfo(false)">
                 <fas-icon :icon="['fas', 'arrow-left']" />
               </b-button>
-              <span class="cnt-info"> {{ $t('general.Contact_Info') }}</span>
+              <span class="cnt-info"> {{ $t("general.Contact_Info") }}</span>
             </div>
             <div class="info-bottom">
               <b-avatar
@@ -326,32 +389,43 @@
               ></b-avatar>
               <div class="info-detail">
                 <h1 class="info-name">Louis Litt</h1>
-                <b-link class="primary">{{ $t('general.View_Profile') }}</b-link>
+                <b-link class="primary">{{
+                  $t("general.View_Profile")
+                }}</b-link>
               </div>
             </div>
             <div>
               <ul>
-                <li>{{ $t('general.Options') }}</li>
+                <li>{{ $t("general.Options") }}</li>
                 <li>
                   <b-row
                     ><b-col>
-                      {{ $t('general.Block_Messages') }}
+                      {{ $t("general.Block_Messages") }}
                     </b-col>
                     <b-col>
-                      <b-form-checkbox v-model="checked" name="check-button" class="primary" switch> </b-form-checkbox>
+                      <b-form-checkbox
+                        v-model="checked"
+                        name="check-button"
+                        class="primary"
+                        switch
+                      >
+                      </b-form-checkbox>
                     </b-col>
                   </b-row>
                 </li>
-                <li>{{ $t('general.Report_User') }}</li>
+                <li>{{ $t("general.Report_User") }}</li>
               </ul>
             </div>
           </b-col>
-          <b-col v-if="newMsg == true && info == false" class="p-0 col-xl-8 col-12">
+          <b-col
+            v-if="newMsg == true && info == false"
+            class="p-0 col-xl-8 col-12"
+          >
             <div class="new-msg back-image" style="margin-right: 17px">
               <div class="info-nav">
                 <b-row>
                   <b-col class="col-1 mt-3">
-                    {{ $t('general.To') }}
+                    {{ $t("general.To") }}
                   </b-col>
                   <b-col>
                     <b-form-input
@@ -359,24 +433,36 @@
                       v-model="searchQuery"
                       class="input-background"
                       style="width: 100%"
-                      :placeholder="$t('general.Type_the_name_of_person_or_Business')"
+                      :placeholder="
+                        $t('general.Type_the_name_of_person_or_Business')
+                      "
                       @click="showsearchh()"
                     ></b-form-input>
 
                     <br />
 
-                    <div class="table-responsive" v-if="showsearch == true" style="overflow-x: hidden">
+                    <div
+                      class="table-responsive"
+                      v-if="showsearch == true"
+                      style="overflow-x: hidden"
+                    >
                       <table v-if="resources.length" class="table">
                         <thead>
                           <tr>
                             <td>
                               <b-row>
                                 <b-col cols="6">
-                                  <span class="bold"> {{ $t('general.Send_to_all') }} </span>
+                                  <span class="bold">
+                                    {{ $t("general.Send_to_all") }}
+                                  </span>
                                 </b-col>
                                 <b-col>
                                   <span>
-                                    <input type="checkbox" @click="selectAll" v-model="allSelected" />
+                                    <input
+                                      type="checkbox"
+                                      @click="selectAll"
+                                      v-model="allSelected"
+                                    />
                                   </span>
                                 </b-col>
                               </b-row>
@@ -386,7 +472,11 @@
                         <tbody>
                           <tr></tr>
 
-                          <tr v-for="item in resultQuery" :key="item.key" class="p-2 message">
+                          <tr
+                            v-for="item in resultQuery"
+                            :key="item.key"
+                            class="p-2 message"
+                          >
                             <td>
                               <b-row>
                                 <b-col cols="6">
@@ -401,7 +491,13 @@
                                 </b-col>
                                 <b-col>
                                   <span>
-                                    <b-form-checkbox class="" id="" name="" v-model="userIds" :value="item.id">
+                                    <b-form-checkbox
+                                      class=""
+                                      id=""
+                                      name=""
+                                      v-model="userIds"
+                                      :value="item.id"
+                                    >
                                     </b-form-checkbox>
                                   </span>
                                 </b-col>
@@ -410,7 +506,9 @@
                           </tr>
                         </tbody>
                       </table>
-                      <b-button variant="primary" size="sm" class="pl-3 pr-3"> {{ $t('general.Send') }} </b-button>
+                      <b-button variant="primary" size="sm" class="pl-3 pr-3">
+                        {{ $t("general.Send") }}
+                      </b-button>
                     </div>
                   </b-col>
                 </b-row>
@@ -434,7 +532,11 @@
                   </b-col>
 
                   <b-col cols="2" class="p-0">
-                    <b-icon @click="send" class="msg-icon primary icon-size icon-top" icon="cursor-fill"></b-icon>
+                    <b-icon
+                      @click="send"
+                      class="msg-icon primary icon-size icon-top"
+                      icon="cursor-fill"
+                    ></b-icon>
                   </b-col>
                 </b-row>
               </div>
@@ -449,7 +551,7 @@
 </template>
 
 <script>
-import Inbox from '@/components/businessf/tabs/owner/networks/inbox.vue';
+import Inbox from "@/components/businessf/tabs/owner/networks/inbox.vue";
 
 export default {
   components: {
@@ -457,8 +559,8 @@ export default {
   },
   data() {
     return {
-      input: '',
-      search: '',
+      input: "",
+      search: "",
 
       showsearch: true,
       selecteduser: false,
@@ -469,132 +571,132 @@ export default {
       searchQuery: null,
 
       message: {
-        type: '',
-        name: 'Louis Litt',
-        timeStamp: '',
-        message: '',
+        type: "",
+        name: "Louis Litt",
+        timeStamp: "",
+        message: "",
       },
       newMsg: false,
       show: false,
       info: false,
       checked: false,
-      text: '',
+      text: "",
       selected: [],
       chats: [
         {
           id: 0,
-          type: 'received',
-          name: 'Louis Litt',
-          timeStamp: '3:00 PM',
+          type: "received",
+          name: "Louis Litt",
+          timeStamp: "3:00 PM",
 
           message:
-            'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.',
+            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.",
         },
         {
           id: 1,
-          type: 'sent',
-          name: 'Louis Litt',
-          timeStamp: '3:00 PM',
+          type: "sent",
+          name: "Louis Litt",
+          timeStamp: "3:00 PM",
           message:
-            'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.',
+            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.",
         },
         {
           id: 2,
-          type: 'received',
-          name: 'Louis Litt',
-          timeStamp: '3:00 PM',
+          type: "received",
+          name: "Louis Litt",
+          timeStamp: "3:00 PM",
           message:
-            'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.',
+            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.",
         },
         {
           id: 3,
-          type: 'sent',
-          name: 'Louis Litt',
-          timeStamp: '3:00 PM',
+          type: "sent",
+          name: "Louis Litt",
+          timeStamp: "3:00 PM",
           message:
-            'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.',
+            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.",
         },
         {
           id: 4,
-          type: 'received',
-          name: 'Louis Litt',
-          timeStamp: '3:00 PM',
+          type: "received",
+          name: "Louis Litt",
+          timeStamp: "3:00 PM",
           message:
-            'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.',
+            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.",
         },
         {
           id: 5,
-          type: 'sent',
-          name: 'Louis Litt',
-          timeStamp: '3:00 PM',
+          type: "sent",
+          name: "Louis Litt",
+          timeStamp: "3:00 PM",
           message:
-            'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.',
+            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo, quos? Fuga, nam dolores? Tempora, qui.",
         },
       ],
       messages: [
         {
           id: 0,
-          name: 'Blezour blec',
-          startMessage: 'Hello Blec lola blec ',
-          timeStamp: '3:00pm',
-          messageCount: '10',
+          name: "Blezour blec",
+          startMessage: "Hello Blec lola blec ",
+          timeStamp: "3:00pm",
+          messageCount: "10",
         },
         {
           id: 1,
-          name: 'Blec blezour blec',
-          startMessage: 'yoo nigga sup lola blec',
-          timeStamp: '7:00am',
-          messageCount: '60',
+          name: "Blec blezour blec",
+          startMessage: "yoo nigga sup lola blec",
+          timeStamp: "7:00am",
+          messageCount: "60",
         },
 
         {
           id: 3,
-          name: 'baba blecc ',
-          startMessage: 'Lorem ipsum la lola blec vlr ',
-          timeStamp: '9:00am',
-          messageCount: '60',
+          name: "baba blecc ",
+          startMessage: "Lorem ipsum la lola blec vlr ",
+          timeStamp: "9:00am",
+          messageCount: "60",
         },
         {
           id: 4,
-          name: 'Louis Litt',
-          startMessage: 'Lorem  sit amet this is goo.',
-          timeStamp: '6:00am',
-          messageCount: '6',
+          name: "Louis Litt",
+          startMessage: "Lorem  sit amet this is goo.",
+          timeStamp: "6:00am",
+          messageCount: "6",
         },
         {
           id: 5,
-          name: 'Louis Litt',
-          startMessage: 'Lorem this   sit amet.',
-          timeStamp: '7:00am',
-          messageCount: '100',
+          name: "Louis Litt",
+          startMessage: "Lorem this   sit amet.",
+          timeStamp: "7:00am",
+          messageCount: "100",
         },
         {
           id: 6,
-          name: 'Louis Litt',
-          startMessage: 'Lorem ithe amet.',
-          timeStamp: '7:00am',
-          messageCount: '3',
+          name: "Louis Litt",
+          startMessage: "Lorem ithe amet.",
+          timeStamp: "7:00am",
+          messageCount: "3",
         },
         {
           id: 7,
-          name: 'Louis Litt',
-          startMessage: 'Lordol sit amet.',
-          timeStamp: '7:00am',
-          messageCount: '10',
+          name: "Louis Litt",
+          startMessage: "Lordol sit amet.",
+          timeStamp: "7:00am",
+          messageCount: "10",
         },
         {
           id: 8,
-          name: 'Louis Litt',
-          startMessage: 'Lorem vheck ',
-          timeStamp: '7:00am',
-          messageCount: '40',
+          name: "Louis Litt",
+          startMessage: "Lorem vheck ",
+          timeStamp: "7:00am",
+          messageCount: "40",
         },
         {
           id: 9,
-          name: 'Louis Litt',
-          startMessage: 'Lorem papa .',
-          timeStamp: '7:00am',
-          messageCount: '15',
+          name: "Louis Litt",
+          startMessage: "Lorem papa .",
+          timeStamp: "7:00am",
+          messageCount: "15",
         },
       ],
     };
@@ -648,19 +750,19 @@ export default {
       console.log(this.checked);
     },
     newMessage(arg) {
-      console.log('hey');
+      console.log("hey");
       this.newMsg = arg;
       this.show = false;
     },
     send() {
-      this.message.type = 'sent';
+      this.message.type = "sent";
       let today = new Date();
       let h = today.getHours();
       let m = today.getMinutes();
-      this.message.timeStamp = h + ':' + m;
+      this.message.timeStamp = h + ":" + m;
       this.message.message = this.text;
       this.chats.push(this.message);
-      this.text = '';
+      this.text = "";
     },
   },
 
@@ -670,7 +772,7 @@ export default {
         return this.resources.filter((item) => {
           return this.searchQuery
             .toLowerCase()
-            .split(' ')
+            .split(" ")
             .every((v) => item.name.toLowerCase().includes(v));
         });
       } else {

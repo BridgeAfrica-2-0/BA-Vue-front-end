@@ -118,6 +118,7 @@
           <b-avatar
             variant="light"
             src="/icons/profile.png"
+            size="24px"
             class="icon-wh"
             :square="true"
           ></b-avatar>
@@ -137,6 +138,7 @@
             variant="light"
             class="icon-wh"
             src="/icons/newsfeed.png"
+            size="24px"
             :square="true"
           ></b-avatar>
         </span>
@@ -154,6 +156,7 @@
           <b-avatar
             variant="light"
             src="/icons/network.png"
+            size="24px"
             class="icon-wh"
             :square="true"
           ></b-avatar>
@@ -172,6 +175,7 @@
           <b-avatar
             variant="light"
             src="/icons/business.png"
+            size="24px"
             class="icon-wh"
             :square="true"
           ></b-avatar>
@@ -193,6 +197,7 @@
             variant="light"
             class="icon-wh"
             src="/icons/community.png"
+            size="24px"
             :square="true"
           ></b-avatar>
         </span>
@@ -221,6 +226,7 @@
           >
             <span class="text-ored">
               <b-avatar
+                size="24px"
                 variant="light"
                 src="/icons/network.png"
                 class="icon-wh"
@@ -242,6 +248,7 @@
                 variant="light"
                 class="icon-wh"
                 src="/icons/business.png"
+                size="24px"
                 :square="true"
               ></b-avatar>
             </span>
@@ -262,6 +269,7 @@
             variant="light"
             class="icon-wh"
             src="/icons/copy.png"
+            size="24px"
             :square="true"
           ></b-avatar>
         </span>
@@ -280,6 +288,7 @@
         <span class="text-ored">
           <b-avatar
             variant="light"
+            size="24px"
             class="icon-wh"
             src="/icons/share_via.png"
             :square="true"
@@ -301,6 +310,8 @@
             class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer"
           >
             <b-avatar
+              size="24px"
+              class= "mr-2"
               variant="light"
               src="/icons/email.png"
               :square="true"
@@ -313,6 +324,8 @@
             class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer"
           >
             <b-avatar
+              size="24px"
+              class= "mr-2"
               variant="light"
               src="/icons/facebook.png"
               :square="true"
@@ -325,6 +338,8 @@
             class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer"
           >
             <b-avatar
+              size="24px"
+              class= "mr-2"
               variant="light"
               src="/icons/twitter.png"
               :square="true"
@@ -337,6 +352,8 @@
             class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer"
           >
             <b-avatar
+              size="24px"
+              class= "mr-2"
               variant="light"
               src="/icons/whatsapp.png"
               :square="true"
@@ -412,11 +429,13 @@ export default {
     strategy: false,
     uuid: null,
     update: null,
+    link:null
   }),
 
   created() {
     this.uuid = this.post.post_id ? this.post.post_id : this.post.id;
     this.type = this.profile.user_type;
+    this.link = `${window.location.protocol}//${window.location.host}/search?uuid=${this.post.id}`
 
   },
 
@@ -498,7 +517,7 @@ export default {
       this.flashMessage.show({
         status: 'success',
         blockClass: 'custom-block-class',
-        message: 'You just copied the following text to the clipboard: ' + e.text,
+        message: 'You just copied the link to the clipboard: ' + e.text,
       });
     },
     
@@ -508,7 +527,6 @@ export default {
         blockClass: 'custom-block-class',
         message: 'Failed to copy the text to the clipboard',
       });
-      console.log(e);
     },
     
     onShareVia(type) {
@@ -554,10 +572,7 @@ export default {
 </script>
 
 <style scoped>
-img[alt="avatar"] {
-  heigth:20px !imporant;
-  width: 20px !imporant;
-}
+
 .d-t {
   color: #e75c18;
 }

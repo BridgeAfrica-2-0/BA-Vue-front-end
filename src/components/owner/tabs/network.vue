@@ -14,9 +14,12 @@
 
         <b-col md="5" cols="7" lg="7" xl="7" sm="5">
           <p class="textt">
-            <router-link :to="{name:'Membar Network Follower', params: {id: item.id}}">
+            <router-link
+              :to="{ name: 'Membar Network Follower', params: { id: item.id } }"
+            >
               <strong class="title"> {{ item.name }} </strong>
-            </router-link> <br />
+            </router-link>
+            <br />
             {{ item.category }}
             <br />
             {{ item.followers }} {{ $t("profileowner.Community") }}<br />
@@ -28,7 +31,6 @@
               link="#"
               :less-str="$t('search.read_less')"
               :max-chars="100"
-
             >
             </read-more>
           </p>
@@ -45,18 +47,15 @@
                 cols="4"
                 class="mt-2 text-center"
               >
-
-
-              <b-button
-              v-if="show == 'Follower'"
-              disabled
+                <b-button
+                  v-if="show == 'Follower'"
+                  disabled
                   block
                   size="sm"
                   class="b-background shadow"
                   :class="item.is_follow !== 0 && 'u-btn'"
                   :id="'followbtn' + item.id"
                   variant="primary"
-                  
                 >
                   <i
                     class="fas fa-lg btn-icon"
@@ -70,7 +69,7 @@
                 </b-button>
 
                 <b-button
-                v-else
+                  v-else
                   block
                   size="sm"
                   class="b-background shadow"
@@ -162,9 +161,9 @@ export default {
   },
 
   computed: {
-    show(){
-      return this.$route.name
-    }
+    show() {
+      return this.$route.name;
+    },
   },
 
   mounted() {

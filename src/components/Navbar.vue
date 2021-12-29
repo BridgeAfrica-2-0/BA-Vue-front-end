@@ -96,21 +96,20 @@
                 data-toggle="popover"
                 class="form-control search-h"
                 style="font-size: 17px !important"
-                :placeholder="credentials.placeholder"
-                v-model="credentials.keyword"
+                :placeholder="searchOptions.placeholder"
+                v-model="searchOptions.keyword"
                 aria-label=""
                 data-original-title=""
                 title=""
-                @keypress.enter="getKeyword"
               />
 
               <vue-bootstrap-typeahead
                 v-model="query"
                 :data="neigbourhoods"
-                :minMatchingChars="0"
-                :maxMatches="10"
+                :minMatchingChars=0
+                :maxMatches=10
                 :serializer="(item) => item.name"
-                :placeholder="$t('general.Where')"
+                placeholder="Where"
                 class="search-hh w-44"
               />
 
@@ -144,11 +143,11 @@
             <b-collapse id="nav-collapse" is-nav>
               <div class="nav-item">
                 <router-link
-                  :to="{ name: navLink('home') }"
+                  :to="navLink('home')"
                   class="nav-link text-dark hov"
                   href=""
                 >
-                  {{ $t("general.Home") }}
+                  Home
                 </router-link>
               </div>
 
@@ -282,7 +281,7 @@
                 </router-link>
               </div>
 
-              <b-tooltip target="profilepic" variant="light" triggers="hover">
+              <b-tooltip target="profilepic" variant="light" triggers="click">
                 {{ user.name }}
               </b-tooltip>
 
@@ -366,11 +365,11 @@
 
                       <b-collapse id="collapse-2" class="mt-1">
                         <b-card-text
-                          @click="language('en')"
+                          @click="$i18n.locale = 'en'"
                           class="cursor-pointer mb-1"
                           >{{ $t("auth.english") }}</b-card-text
                         >
-                        <b-card-text @click="language('fr')">{{
+                        <b-card-text @click="$i18n.locale = 'fr'">{{
                           $t("auth.french")
                         }}</b-card-text>
                       </b-collapse>
@@ -490,7 +489,7 @@
             <hr class="h-divider" />
             <a
               href="#"
-              @click="logout"
+              @click.prevent="logout"
               class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
             >
               <span class="mr-2"
@@ -505,23 +504,7 @@
       </div>
     </nav>
 
-    <div>
-      <!-- 
-
-           <div>
-  <vue-bootstrap-typeahead
-    class="mb-4"
-    v-model="query"
-    :data="users"
-    :serializer="item => item.login"
-    @hit="selectedUser = $event"
-    placeholder="Search GitHub Users"
-  />
-
- <h3>Selected User JSON</h3>
- <pre>{{ selectedUser | stringify }}</pre>
-</div> -->
-    </div>
+    <div></div>
   </header>
 </template>
 
@@ -549,7 +532,7 @@ export default {
       default: function () {
         return {
           keyword: "",
-          placeholder: this.$t("general.All"),
+          placeholder: "All",
         };
       },
     },
@@ -565,7 +548,7 @@ export default {
       redirectionPatterns: null,
       searchOptions: {
         keyword: "",
-        placeholder: this.$t("general.All"),
+        placeholder: "All",
       },
       query: "",
       selectedUser: null,
@@ -582,9 +565,6 @@ export default {
   },
   beforeMount() {
     console.log("beforeMount");
-    this.$i18n.locale = localStorage.getItem("lang")
-      ? localStorage.getItem("lang")
-      : "en";
 
     this.getLocation();
   },
@@ -643,8 +623,11 @@ export default {
       this.userOwnPage = this.onRedirect();
     },
 
-    credentials: function (newVal) {
-      this.searchOptions = newVal;
+    credentials: {
+      deep: true,
+      handler() {
+        this.searchOptions = this.credentials;
+      },
     },
 
     query(newQuery) {
@@ -742,22 +725,15 @@ export default {
     },
 
     getKeyword() {
-      if (!this.credentials.keyword) return false;
+      if (!this.searchOptions.keyword) return false;
 
       if (this.$route.name != "Search") {
-        console.log("the keyword is: ", this.credentials.keyword);
-        this.$store
-          .dispatch("allSearch/SEARCH", {
-            keyword: this.credentials.keyword,
-          })
-          .catch((err) => {
-            console.log("Error erro!");
-          });
-
-        this.$router.push({name: 'GlobalSearch', query:{keyword: this.credentials.keyword}});
+        this.$router.push({
+          name: "Search",
+          query: { keyword: this.searchOptions.keyword },
+        });
       }
     },
-
     navLink(type) {
       const link = {
         home: () => {
@@ -782,11 +758,7 @@ export default {
         })
         .catch(() => console.log("error"));
     },
-    language(lang) {
-      localStorage.setItem("lang", lang);
-      this.$i18n.locale = lang;
-      location.reload();
-    },
+
     logout: async function () {
       let loader = this.$loading.show({
         container: this.$refs.formContainer,
@@ -795,26 +767,16 @@ export default {
         color: "#e75c18",
       });
 
-      const requestForReset = await this.$repository.share.switch(
-        null,
-        "reset"
-      );
-
-      if (requestForReset.success) {
-        const response = await this.$repository.notification.logOut();
-
-        if (response.success) {
-          loader.hide();
-          this.$router.push({ name: "Login" });
-          this.Logout();
-        }
-
+      const response = await this.$repository.notification.logOut();
+      if (response.success) {
         loader.hide();
+        this.$router.push({ name: "home1" });
+        this.Logout();
       }
+      loader.hide();
     },
 
     switchToProfile: async function () {
-
       let loader = this.$loading.show({
         container: this.$refs.formContainer,
         canCancel: true,
@@ -823,14 +785,12 @@ export default {
       });
 
       const response = await this.$repository.share.switch(null, "reset");
-      
       if (response.success) {
         this.profile({ ...this.auth.user, user_type: "user" });
         this.$router.push({
           name: "profile_owner",
         });
       }
-      
       loader.hide();
     },
 
@@ -848,20 +808,11 @@ export default {
       if (request.success) this.setBusiness(request.data);
     },
 
-    getNetworkAndBusiness: async function () {
-      let request = await this.$repository.share.getNetworkAndBusiness();
-      if (request.success) {
-        this.setBusiness(request.data.business);
-        this.setNetworks(request.data.network);
-      }
-    },
-
     init() {
       try {
         if (!this.hasLauchNetworkRequest) {
-          // this.getNetworks();
-          // this.getBusiness();
-          this.getNetworkAndBusiness();
+          this.getNetworks();
+          this.getBusiness();
           this.lauchNetworkRequest();
         }
       } catch (error) {

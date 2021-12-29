@@ -128,6 +128,30 @@
                       }}</span>
                     </b-button>
                   </b-col>
+                  <b-col
+                    md="12"
+                    lg="4"
+                    xl="12"
+                    sm="12"
+                    cols="4"
+                    class="mt-2 text-center"
+                  >
+                    <b-button
+                      block
+                      size="sm"
+                      class="b-background shadow"
+                      variant="primary"
+                      @click="$emit('BlockUser', item.id)"
+                      title="Block This User"
+                    >
+                      <b-icon
+                        font-scale="1"
+                        icon="exclamation-octagon-fill"
+                        v-b-tooltip.hover
+                      ></b-icon>
+                      <span class="btn-text">Block</span>
+                    </b-button>
+                  </b-col>
                 </b-row>
               </div>
             </b-col>

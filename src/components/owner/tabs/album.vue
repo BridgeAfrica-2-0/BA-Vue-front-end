@@ -35,6 +35,10 @@
             :showAlbumPictures="() => showAlbumPictures(album)"
             :type="type"
             :isEditor="isEditor"
+            :showCoverAlbum="
+              showCoverAlbum ? 
+              'Cover' == album_name ? true : false
+              : false"
           />
         </div>
 
@@ -103,7 +107,7 @@
       <b-button variant="outline-primary" size="sm" @click="hidealbum">
         {{ $t('profileowner.Back') }}
       </b-button>
-      <span class="text-center ml-2 f-20"> {{ this.album_name }}</span>
+      <span class="text-center ml-2 f-20"> {{ album_name }}</span>
 
       <Images
         :isAlbum="true"
@@ -122,6 +126,7 @@
         "
         :images="strategy[type]().showAlbumImages"
         @reste="hidealbum"
+
       />
     </div>
   </div>
@@ -148,10 +153,17 @@ export default {
       type: Boolean,
       required: true,
     },
+
+    showCoverAlbum:{
+      type:Boolean,
+      default: () => false
+    },
+
     type: {
       type: String,
       require: true,
     },
+    
     getImages: {},
     getAlbums: {},
   },

@@ -119,7 +119,8 @@ export default {
 
     clearUserData() {
       localStorage.removeItem('user');
-      location.reload();
+    // location.reload();
+
     },
 
     profilConnected(state, payload) {
@@ -263,7 +264,7 @@ export default {
   },
 
   getters: {
-    isLogged: state => !!state.user,
+    isLogged: state => !!state.user.accessToken,
     isVerified: state => !!state.user,
     user: state => state.user,
 

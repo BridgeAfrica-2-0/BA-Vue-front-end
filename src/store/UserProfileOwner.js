@@ -145,7 +145,8 @@ export default {
     },
 
     async submitPost({ commit }, payload) {
-      return axios.post(`profile/upload/${payload.id}`, payload.data);
+      console.log(payload)
+      return axios.post(`profile/upload/${payload.albumID}`, payload.data);
     },
 
     async setProfilePic({ commit }, id) {

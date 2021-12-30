@@ -34,7 +34,7 @@
         <b-row class="mt-md-2">
           <b-col cols="8" md="6" class="m-0 p-0">
             <b-avatar
-              :src="business_info.logo_path"
+              :src="profile.profile_picture"
               class="float-left mt-2 mr-2 mr-xl-5 mr-lg-5 round-coner logo_avat"
               badge-variant="primary"
               badge-offset="10px"
@@ -162,7 +162,6 @@
               </div>
             </b-modal>
           </b-col>
-
           <b-col cols="4" md="6" class="">
             <div class="my-auto">
               <span class="float-right">
@@ -209,7 +208,7 @@
 </template>
 
 <script>
-import { mapMutations } from "vuex";
+import { mapMutations, mapGetters } from "vuex";
 export default {
   name: "headPageOwner",
 
@@ -242,6 +241,7 @@ export default {
       },
     };
   },
+
 
   methods: {
     ...mapMutations({
@@ -405,9 +405,10 @@ export default {
   },
 
   computed: {
-    business_info() {
-      return this.$store.state.businessOwner.businessInfo;
-    },
+    ...mapGetters({ 
+      profile: 'auth/profilConnected',
+      business_info: 'businessOwner/getBusinessInfo'
+    }),
   },
 
   watch: {

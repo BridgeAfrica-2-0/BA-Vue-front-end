@@ -25,11 +25,23 @@ export default {
     profilConnected: null,
   },
 
+
   mutations: {
 
     updateProfilePicture(state, picture) {
       if (picture !== state.profilConnected.profile_picture)
         state.profilConnected = { ...state.profilConnected, profile_picture: picture }
+    },
+
+    addCoverPicture(state, picture) {
+
+      state.profilConnected = { ...state.profilConnected, cover_picture: picture }
+      let newUser = JSON.parse(localStorage.getItem('user'));
+
+      newUser.user.cover_picture = picture
+
+      localStorage.setItem('user', JSON.stringify(newUser));
+
     },
 
     setUserData(state, userData) {
@@ -118,7 +130,8 @@ export default {
 
     clearUserData() {
       localStorage.removeItem('user');
-      location.reload();
+    // location.reload();
+
     },
 
     profilConnected(state, payload) {
@@ -262,7 +275,7 @@ export default {
   },
 
   getters: {
-    isLogged: state => !!state.user,
+    isLogged: state => !!state.user.accessToken,
     isVerified: state => !!state.user,
     user: state => state.user,
 

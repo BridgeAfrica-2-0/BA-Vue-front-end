@@ -23,7 +23,7 @@
         </splide-slide>
       </splide>
     </div>
-    <router-link to="#media">
+    <router-link to="#media" @click="() => showCoverAlbum=true">
       <b-button class="float-right see-all">
         {{ $t("businessf.See_All") }}
       </b-button>
@@ -60,8 +60,8 @@
                 hasBeFollow ? 'fa-user-minus' : 'fa-user-plus'
               } fa-lg btn-icon`"
             ></i>
-            <span> {{ $t("businessf.Community") }}</span></b-button
-          >
+            <span> {{ $t("businessf.Community") }}</span>
+          </b-button>
 
           <BtnCtaMessage
             :element="business_info"
@@ -70,14 +70,15 @@
           />
 
           <b-button
-            class="direction ml-1 size"
+            class="direction ml-0 size"
             variant="primary"
             size="sm"
             @click="gotoAbout()"
           >
             <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
-            <span>{{ $t("businessf.Direction") }}</span></b-button
-          >
+            <span>{{ $t("businessf.Direction") }}</span>
+          </b-button>
+
           <b-dropdown
             class="ml-2 dot-btn mt-2 mt-sm-2 mt-md-0"
             no-caret
@@ -105,7 +106,6 @@
             <div class="d-inline-block mt-4 ml-4 float-left texts">
               <h6 class="font-weight-bolder name">{{ business_info.name }}</h6>
               <p class="details">
-                <!-- www.bridgeafrica.com <br /> -->
                 {{ business_info.community }} {{ $t("businessf.Community") }}
               </p>
             </div>
@@ -132,7 +132,7 @@
       <BtnCtaMessage :element="business_info" type="business" :header="true" />
 
       <b-button
-        class="direction ml-1 size"
+        class="direction size"
         variant="primary"
         @click="gotoAbout()"
       >
@@ -161,7 +161,7 @@
             <b-tab :title="$t('general.Home')"><HomePage /></b-tab>
             <b-tab :title="$t('general.About')"><About /></b-tab>
             <b-tab type="business" :title="$t('general.Media')"
-              ><Media :type="'business'" :isEditor="false"
+              ><Media :type="'business'" :isEditor="false" :showCoverAlbum="showCoverAlbum"
             /></b-tab>
             <b-tab :title="$t('general.Market')"><MarketPlace /></b-tab>
             <b-tab :title="$t('general.Networks')"><Networks /></b-tab>
@@ -172,6 +172,7 @@
     </div>
   </div>
 </template>
+
 
 <script>
 import HomePage from "../businessf/tabs/businessHome";
@@ -197,6 +198,7 @@ export default {
   data() {
     return {
       hasBeFollow: 0,
+      showCoverAlbum:false,
       url_data: null,
       currentTab: 0,
       tabIndex: null,
@@ -251,11 +253,16 @@ export default {
       this.hasBeFollow = this.$store.state.businessOwner.businessInfo.is_follow;
     },
     currentTab: (newVal, oldVal) => {
+      if (2 != newVal)
+        this.showCoverAlbum = false
+
       localStorage.setItem("ba-business-active-tab", newVal);
     },
 
     $route(to, from) {
-      console.log(to.hash);
+      if ("#media" == to.hash)
+        this.showCoverAlbum = true
+
       this.currentTab = this.tabs.findIndex((tab) => tab === to.hash);
     },
   },
@@ -271,6 +278,7 @@ export default {
   },
   methods: {
     async handleFollow() {
+      console.log(this.business_info)
       // document.getElementById("followbtn").disabled = true;
 
       const uri = !this.hasBeFollow ? `/follow-community` : `/unfollow`;

@@ -214,7 +214,7 @@ export default {};
 }
 
 .size{
-  height: 80px;
-  width: 300px;
+  /* height: 100px;
+  width: 300px; */
 }
 </style>

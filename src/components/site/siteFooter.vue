@@ -127,7 +127,7 @@
             <div class="col-lg-3 col-md-6 footer-links white">
               <h4 class="bridge-header text-left white">{{ $t('home.USEFULL_LINKS') }}</h4>
               <ul class="white">
-                <li class="white"><a href="#">Bridgeafricaventures.com</a></li>
+                <li class="white"><a href="#">bridgeafricaventures.com</a></li>
 
                 <li class="white"><a href="#">{{ $t('home.Home') }}</a></li>
 

@@ -108,8 +108,8 @@
       <b-row>
         <b-col cols="12">
           <infinite-loading @infinite="infiniteHandler" ref="infiniteHandler">
-            <div class="text-red" slot="no-more">No More Request</div>
-            <div class="text-red" slot="no-results">No More Request</div>
+            <div class="text-red" slot="no-more">{{ $t('general.No_More_Request') }}</div>
+            <div class="text-red" slot="no-results">{{ $t('general.No_More_Request') }}</div>
           </infinite-loading>
         </b-col>
       </b-row>

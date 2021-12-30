@@ -997,11 +997,13 @@ export default {
             this.flashMessage.show({
               status: "error",
 
-              message: "Unable to Create Your Network",
-              blockClass: "custom-block-class",
-            });
-            console.log({ err: err });
-          }
+
+                message: this.$t('general.Unable_to_Create_Your_Network'),
+                blockClass: "custom-block-class",
+              });
+              console.log({ err: err });
+            }
+
           loader.hide();
           setTimeout(() => {
             this.success.state = false;

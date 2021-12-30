@@ -545,7 +545,7 @@
           ></b-form-textarea>
         </p>
         <b-row>
-          <b-col><b-button class="mt-3" variant="primary" type="submit" block>Delete</b-button></b-col>
+          <b-col><b-button class="mt-3" variant="primary" type="submit" @click="$bvModal.hide('deleteBusinessModal2')" block>Delete</b-button></b-col>
         </b-row>
       </b-form>
     </b-modal>
@@ -978,6 +978,13 @@ export default {
 
     // delete a network
     deleteNetwork(network) {
+      let loader = this.$loading.show({
+        container: this.fullPage ? null : this.$refs.preview,
+        canCancel: true,
+        onCancel: this.onCancel,
+        color: "#e75c18",
+      });
+
       console.log(this.textReason);
       let fd = new FormData();
       fd.append("reason", this.textReason)
@@ -986,6 +993,7 @@ export default {
         .then((res) => {
           console.log(res);
           this.getNetworks();
+          loader.hide();
           this.flashMessage.show({
             status: "success",
             message: "Operation was successful !!"
@@ -993,6 +1001,7 @@ export default {
         })
         .catch((err) => {
           this.loader = false;
+          loader.hide();
           this.flashMessage.show({
             status: "error",
             message: "Something wen't wrong !!"

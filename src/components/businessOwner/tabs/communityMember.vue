@@ -26,7 +26,7 @@
                             xl="12"
                             class="mt-lg-2"
                           >
-                            <div class="mt-3 mt-lg-0 mt-xl-0 username">
+                            <div class="mt-2 mt-lg-0 mt-xl-0 username">
                              <router-link :to="{name: 'ProfileFollower', params: {id:item.id}}">
                               <strong class="title"> {{ item.name }}</strong>
                             </router-link>
@@ -38,9 +38,9 @@
                             lg="12"
                             cols="6"
                             xl="12"
-                            class="mt-3 mt-lg-1 mt-xl-3"
+                            class="mt-2 mt-lg-1 mt-xl-2"
                           >
-                            <h6 class="follower m-15">
+                            <h6 class="follower">
                               {{ count(item.followers) }}
                               {{ $t("businessowner.Community") }}
                             </h6>
@@ -51,7 +51,9 @@
                             lg="12"
                             cols="6"
                             xl="12"
-                            class="mt-3 mt-lg-1 mt-xl-3"
+                            class="mt-2 mt-lg-1 mt-xl-2"
+                            @click="$emit('BlockUser', item.id)"
+                            style="cursor: pointer"
                           >
                               <b-icon
                                 font-scale="1"
@@ -590,7 +592,7 @@ f-right {
     text-overflow: ellipsis;
     overflow: hidden;
     width: 100%;
-    height: 1.2em;
+    height: 1.5em;
     white-space: nowrap;
   }
 

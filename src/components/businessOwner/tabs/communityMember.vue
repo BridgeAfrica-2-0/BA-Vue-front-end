@@ -56,6 +56,7 @@
                             style="cursor: pointer"
                           >
                               <b-icon
+                                @click="blackListed"
                                 font-scale="1"
                                 icon="exclamation-octagon"
                                 v-b-tooltip.hover
@@ -172,6 +173,22 @@ export default {
   },
 
   methods: {
+
+    blackListed: async function(uuid){
+      const request = await this.$repository.share.blocking({banned_id:uuid, banned_type: 'profile' }, this.$route.params.id)
+
+      if (request.success){
+        const data = this.users.filter(item => item.id != uuid)
+        this.users = data
+
+      }else{
+        this.flashMessage.show({
+          status: "error",
+          message: request.data,
+        });
+      }
+    },
+
     cta(data) {
       console.log(data);
       this.$store.commit("businessChat/setSelectedChat", data);

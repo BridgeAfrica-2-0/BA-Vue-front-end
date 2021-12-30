@@ -18,6 +18,7 @@
   </div>
 </template>
 
+
 <script>
 import Business from "./businesses/businesses";
 import People from "./people/people";

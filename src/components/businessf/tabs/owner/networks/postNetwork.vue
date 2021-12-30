@@ -263,7 +263,7 @@
           ref="modal-xl"
           centered
           hide-footer
-          title="Create Post"
+          :title="$t('network.Create_Post')"
           @hidden="resetPostData"
         >
           <b-row ref="loader">
@@ -865,7 +865,7 @@ export default {
           } else {
             this.flashMessage.show({
               status: "error",
-              message: "Unable to Create Your Post",
+              message: this.$t('general.Unable_to_Create_Your_Post'),
               blockClass: "custom-block-class",
             });
             console.log({ err: err });

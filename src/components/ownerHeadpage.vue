@@ -3,23 +3,21 @@
     <b-container fluid class="p-0 gradient">
       <div class="container-flex banner">
         <img
-          :src="info.user.cover_picture ? info.user.cover_picture :'@/assets/img/banner.jpg'"
+          :src="auth.cover_picture ? auth.cover_picture : getCustomCover[0]"
           class="img-fluid banner"
           alt="Cover Image"
         />
       </div>
-      
-
       <div class="container-fluid p-63">
         <b-row class="mt-md-2 text-left">
           <b-col cols="12" md="12" class="m-0 p-0 text-left put-top">
             <b-avatar
-              :src="info.user.profile_picture ? info.user.profile_picture :''"
+              :src="auth.profile_picture"
               class="avat text-center"
               badge-variant="primary"
               badge-offset="10px"
             ></b-avatar>
-
+            
             <b-icon
               icon="camera-fill"
               class="avatar-header-icon btn cursor-pointer size"
@@ -29,7 +27,7 @@
             <span style="display: inline-block">
               <h6 class="profile-name text-center">
                 <div class="username">
-                  <b> {{ info.user.name }} </b>
+                  <b>{{ info.user.name }}</b>
                 </div>
 
                 <span class="duration float-left"> {{ nFormatter(total.total_community) }} {{ $t('profileowner.Community') }} </span>
@@ -199,11 +197,22 @@
 import VueCropper from "vue-cropperjs";
 import "cropperjs/dist/cropper.css";
 
+
+import {defaultCoverImage} from '@/mixins';
+
+import { mapMutations, mapGetters } from 'vuex'
+
 export default {
   name: "headPageOwner",
+  mixins: [defaultCoverImage],
   components: {
     VueCropper,
   },
+
+  created(){
+    this.currentAuthType = 'profile'
+  },
+
   data() {
     return {
       url: null,
@@ -238,6 +247,10 @@ export default {
   },
 
   methods: {
+    ...mapMutations({
+      addCoverPicture: 'auth/addCoverPicture'
+    }),
+
     nFormatter(num) {
       if (num >= 1000000000) {
         return (num / 1000000000).toFixed(1).replace(/\.0$/, "") + "G";
@@ -426,8 +439,8 @@ export default {
           console.log(response);
           this.$store
             .dispatch("profile/loadUserPostIntro", null)
-            .then((response) => {
-              console.log(response);
+            .then(() => {
+              this.addCoverPicture(null)
               this.flashMessage.show({
                 status: "success",
                 message: this.$t("profileowner.Profile_removed_successfully"),
@@ -578,6 +591,11 @@ export default {
   },
 
   computed: {
+
+    ...mapGetters({
+      auth: 'auth/profilConnected'
+    }),
+
     total() {
       return this.$store.state.profile.Tcommunity;
     },
@@ -586,6 +604,13 @@ export default {
       return this.$store.getters["profile/getUserPostIntro"];
     },
   },
+
+  watch: {
+    "$state.state.profile.profileIntro": function(newInfo){
+      console.log(newInfo.user.cover_picture)
+      this.addCoverPicture(newInfo.user.cover_picture)
+    }
+  }
 };
 </script>
 

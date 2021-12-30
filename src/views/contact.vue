@@ -4,20 +4,33 @@
     <site-header />
 
     <!-- Map -->
-    <iframe
-      src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2038797.7898680535!2d12.058707628323829!3d3.5812872675335714!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x325b81c56b8e2463!2sCentre%20International%20de%20L&#39;artisanat!5e0!3m2!1sen!2sus!4v1637757289765!5m2!1sen!2sus"
-      style="border:0;"
-      allowfullscreen=""
-      loading="lazy"
+    <MglMap
+      :accessToken="accessToken"
+      :mapStyle.sync="mapStyle"
+      :center="coordinates"
+      :zoom="zoom"
       class="map-frame"
-    ></iframe>
+    >
+      <MglMarker :coordinates="coordinates" color="red">
+        <MglPopup :showed="isShowing" :closeButton="false">
+          <div class="row">
+            <div class="px-4 py-2 dialog-div">
+              <p class="mb-0 dialog-text">
+                 {{ $t("general.International_Handricraft_Center") }}, Rond-point
+              Intendance, Yaound<span>é, {{ $t("general.Cameroon") }}</span>
+              </p>
+            </div>
+          </div>
+        </MglPopup>
+      </MglMarker>
+    </MglMap>
 
     <!-- Keep In Touch -->
 
     <section class="keep-in-touch">
       <div class="keep-in-touch-header">
         <h1 class="font-arvo text-light text-center">
-        {{ $t("general.KEEP_IN_TOUCH") }}
+          {{ $t("general.KEEP_IN_TOUCH") }}
         </h1>
       </div>
     </section>
@@ -26,12 +39,17 @@
       <div class="row">
         <div class="col-md-4 p-md-0">
           <div class="address-div">
-            <img src="../assets/maps-and-flags.png" alt="..." class="address-img" />
+            <img
+              src="../assets/maps-and-flags.png"
+              alt="..."
+              class="address-img"
+            />
             <h5 class="text-primary font-arvo text-center">
               ADDRESS
             </h5>
             <p class="text-center address-text">
-              {{ $t("general.International_Handricraft_Center") }}, Rond-point Intendance, Yaound<span>é, {{ $t("general.Cameroon") }}</span>
+              {{ $t("general.International_Handricraft_Center") }}, Rond-point
+              Intendance, Yaound<span>é, {{ $t("general.Cameroon") }}</span>
             </p>
           </div>
         </div>
@@ -50,7 +68,11 @@
 
         <div class="col-md-4 p-md-0">
           <div class="address-div">
-            <img src="../assets/paper-plane.png" alt="..." class="address-img" />
+            <img
+              src="../assets/paper-plane.png"
+              alt="..."
+              class="address-img"
+            />
             <h5 class="text-primary font-arvo text-center">
               {{ $t("general.EMAIL") }}
             </h5>
@@ -72,37 +94,53 @@
   </div>
 </template>
 <script>
-import Contact from '../components/site/contact';
-import SiteFooter from '../components/site/siteFooter';
-import SiteHeader from '../components/site/siteHeader';
+import Contact from "../components/site/contact";
+import SiteFooter from "../components/site/siteFooter";
+import SiteHeader from "../components/site/siteHeader";
+import { MglMap, MglMarker, MglPopup } from "vue-mapbox";
 export default {
   components: {
     Contact,
     SiteFooter,
     SiteHeader,
+    MglMarker,
+    MglMap,
+
+    MglPopup,
+  },
+  data() {
+    return {
+      accessToken: process.env.VUE_APP_MAPBOX_TOKEN,
+      mapStyle: "mapbox://styles/mapbox/outdoors-v11",
+      zoom: 14,
+      coordinates: [11.520389461010724, 3.867377201341806],
+      isShowing: true
+    };
   },
 };
 </script>
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Arvo&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Arvo&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+
+@import url("https://api.tiles.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css");
 .font-arvo {
-  font-family: 'Arvo', serif;
+  font-family: "Arvo", serif;
 }
 .font-rob {
-  font-family: 'Roboto', Sans-serif;
+  font-family: "Roboto", Sans-serif;
 }
 .font-poppin {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 .font-source {
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: "Source Sans Pro", sans-serif;
 }
 .font-mont {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 .balogo {
   width: 170px;
@@ -118,7 +156,7 @@ export default {
 }
 
 .keep-in-touch {
-  background-image: url('../assets/contact-image.jpeg');
+  background-image: url("../assets/contact-image.jpeg");
   width: 96%;
   min-height: 50vh;
   margin: auto;
@@ -163,7 +201,7 @@ export default {
   color: #99a9b5;
   line-height: 25px;
   font-size: 16px;
-  font-family: 'Source Sans Pro';
+  font-family: "Source Sans Pro";
   padding-top: 3rem;
 }
 .address-text span {
@@ -187,5 +225,13 @@ export default {
     border-right: none;
     border-bottom: 1px solid #d3d3d3;
   }
+}
+
+.dialog-div {
+  min-width: 200px;
+}
+.dialog-text {
+  font-size: 15px;
+  font-weight: bold;
 }
 </style>

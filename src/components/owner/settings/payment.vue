@@ -248,7 +248,6 @@ export default {
 };
 </script>
 
-
 <style scoped>
 .descrip {
   font-size: 14px;

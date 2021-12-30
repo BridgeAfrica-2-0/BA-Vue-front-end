@@ -144,7 +144,7 @@
                             'p-2 message ',
                             {
                               messageSelected:
-                                chat.receiver_id ==
+                                chat.id ==
                                 (chatSelected.clickedId != null
                                   ? chatSelected.clickedId
                                   : false)
@@ -156,7 +156,7 @@
                             selectedChat({
                               type: 'user',
                               chat: chat,
-                              id: chat.receiver_id,
+                              id: chat.id,
                             })
                           "
                         >
@@ -228,7 +228,7 @@
                             'p-2 message ',
                             {
                               messageSelected:
-                                chat.receiver_id ==
+                                chat.id ==
                                 (chatSelected.clickedId != null
                                   ? chatSelected.clickedId
                                   : false)
@@ -240,7 +240,7 @@
                             selectedChat({
                               type: 'business',
                               chat: chat,
-                              id: chat.receiver_id,
+                              id: chat.id,
                             })
                           "
                         >
@@ -311,7 +311,7 @@
                             'p-2 message ',
                             {
                               messageSelected:
-                                chat.receiver_id ==
+                                chat.id ==
                                 (chatSelected.clickedId != null
                                   ? chatSelected.clickedId
                                   : false)
@@ -323,7 +323,7 @@
                             selectedChat({
                               type: 'network',
                               chat: chat,
-                              id: chat.receiver_id,
+                              id: chat.id,
                             })
                           "
                         >
@@ -420,7 +420,13 @@
                   <b-col class="col-2" @click="info = true">
                     <b-avatar
                       variant="primary"
-                      :src="chatSelected.profile_picture"
+                      :src="
+                        chatSelected.profile_picture
+                          ? chatSelected.profile_picture
+                          : chatSelected.logo_path
+                          ? chatSelected.logo_path
+                          : chatSelected.image
+                      "
                       size="60"
                     ></b-avatar>
                   </b-col>
@@ -1245,12 +1251,13 @@ export default {
     },
     selectedChat(data) {
       // this.scrollToBottom();
+      console.log("Data logged:", data);
       console.log("free up:", this.ctaSelected);
       this.type = data.type;
       if (this.type == "group") {
         this.createGroup();
       } else this.createRoom(data.id);
-      console.log("ZZZZZ");
+      console.log("ZZZZZ", data.id);
       this.chatId = data.id;
       this.$store.commit("businessChat/setSelectedChatId", data.id);
       let receiver = { receiverID: data.id, keyword: null };

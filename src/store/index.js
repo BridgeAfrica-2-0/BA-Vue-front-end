@@ -31,6 +31,7 @@ import UserProfileOwner from './UserProfileOwner';
 import { search } from './search';
 import userChat from './messaging/user';
 import businessChat from './messaging/business';
+import networkChat from './messaging/network';
 import { notification } from './notifications';
 import businessSettingInfo from './businessSettingInfo';
 import networkProfileCommunitySidebar from './networkProfileCommunitySidebar';
@@ -81,6 +82,7 @@ export default new Vuex.Store({
     business,
     networkProfileFeedback,
     NetworkSettings,
+    networkChat,
     keywordOperationOnNetwork,
     businessSettingInfo,
     checkout,

@@ -2,28 +2,52 @@
   <div class="t-color">
     <div>
       <fas-icon class="icons" :icon="['fas', 'project-diagram']" size="lg" />
-      <span class="t-color"> {{ $t('profileowner.Network') }} </span>
+      <span class="t-color"> {{ $t("profileowner.Network") }} </span>
 
       <b-button
         class="btn btn-outline-primary pull-right float-right mb-2 blec-font"
         style="margin-top: -6px"
         @click="showmodal(true, 'add')"
-        >{{ $t('profileowner.Add_Network') }}</b-button
+        >{{ $t("profileowner.Add_Network") }}</b-button
       >
 
       <hr />
       <b-row>
-        <b-col cols="12" md="12" lg="6" class="p-0 pr-1 mb-2" v-for="(network, index) in profileNetworks" :key="index">
+        <b-col
+          cols="12"
+          md="12"
+          lg="6"
+          class="p-0 pr-1 mb-2"
+          v-for="(network, index) in profileNetworks"
+          :key="index"
+        >
           <div class="people-style shadow h-100">
             <div class="float-right others">
-              <b-dropdown size="lg" variant="link" toggle-class="text-decoration-none" no-caret>
+              <b-dropdown
+                size="lg"
+                variant="link"
+                toggle-class="text-decoration-none"
+                no-caret
+              >
                 <template #button-content>
-                  <b-icon icon="three-dots-vertical" variant="primary" class="icon-size"></b-icon>
+                  <b-icon
+                    icon="three-dots-vertical"
+                    variant="primary"
+                    class="icon-size"
+                  ></b-icon>
                 </template>
-                <b-dropdown-item @click="showEditNetwork(network)" v-b-modal.updateBusinessModal variant=""
+                <b-dropdown-item
+                  @click="showEditNetwork(network)"
+                  v-b-modal.updateBusinessModal
+                  variant=""
                   >Edit</b-dropdown-item
                 >
-                <b-dropdown-item @click="deleteNetwork(network)"> Delete</b-dropdown-item>
+                <b-dropdown-item
+                  @click="selectNetwork(network)"
+                  v-b-modal.deleteBusinessModal
+                  no-stacking
+                  >Delete</b-dropdown-item
+                >
               </b-dropdown>
             </div>
 
@@ -38,7 +62,8 @@
                 <p class="textt text">
                   <strong class="title">
                     <router-link :to="'/network/' + network.id">
-                      {{ network.name }} <span v-if="network.is_approve == 1"> (Approved) </span>
+                      {{ network.name }}
+                      <span v-if="network.is_approve == 1"> (Approved) </span>
                       <span v-else> (UnApproved) </span>
                     </router-link>
                   </strong>
@@ -52,16 +77,17 @@
 
                   <span class="location">
                     <b-icon-geo-alt class="ico"></b-icon-geo-alt>
-                    {{ network.city }} {{ network.country }} {{ network.address }}
+                    {{ network.city }} {{ network.country }}
+                    {{ network.address }}
                   </span>
                   <br />
 
                   <read-more
-                    more-str="read more"
+                    :more-str="$t('search.read_more')"
                     class="readmore"
                     :text="network.description"
                     link="#"
-                    less-str="read less"
+                    :less-str="$t('search.read_less')"
                     :max-chars="100"
                   >
                   </read-more>
@@ -73,30 +99,57 @@
       </b-row>
     </div>
 
-    <infinite-loading :identifier="infiniteId" ref="infiniteLoading" @infinite="infiniteHandler"></infinite-loading>
+    <infinite-loading
+      :identifier="infiniteId"
+      ref="infiniteLoading"
+      @infinite="infiniteHandler"
+    ></infinite-loading>
 
     <div class="h-100 w-100" v-if="networks.length < 1 && !loader">
       <div class="mx-auto text-center my-5">
-        <h2 class="my-3">{{ $t('profileowner.Build_networks_around_your_Business') }}</h2>
-        <p class="my-2">{{ $t('profileowner.Create_network_to_stay_in_touch_with_just_the_people') }}</p>
-        <p class="my-2">{{ $t('profileowner.you_want_Engage_share_Make_Plans_and_much_more') }}</p>
+        <h2 class="my-3">
+          {{ $t("profileowner.Build_networks_around_your_Business") }}
+        </h2>
+        <p class="my-2">
+          {{
+            $t(
+              "profileowner.Create_network_to_stay_in_touch_with_just_the_people"
+            )
+          }}
+        </p>
+        <p class="my-2">
+          {{
+            $t("profileowner.you_want_Engage_share_Make_Plans_and_much_more")
+          }}
+        </p>
         <p class="my-3">
-          <b-button @click="showmodal(true, 'add')" variant="primary">{{ $t('profileowner.Add_Network') }}</b-button>
+          <b-button @click="showmodal(true, 'add')" variant="primary">{{
+            $t("profileowner.Add_Network")
+          }}</b-button>
         </p>
       </div>
     </div>
 
     <b-modal
       hide-footer
-      :title="editNet ? $t('profileowner.Edit_network') : $t('profileowner.Add_Network')"
+      :title="
+        editNet
+          ? $t('profileowner.Edit_network')
+          : $t('profileowner.Add_Network')
+      "
       size="lg"
       v-model="showModal"
       ref="netmodal"
     >
       <b-container>
         <b-form>
-          <div v-if="!editNet" class="row sub-sidebar-2 pending-post-view mt-4 pb-0">
-            <div class="col-md-12 col-lg-12 d-flex align-items-stretch mb-lg-0 styling">
+          <div
+            v-if="!editNet"
+            class="row sub-sidebar-2 pending-post-view mt-4 pb-0"
+          >
+            <div
+              class="col-md-12 col-lg-12 d-flex align-items-stretch mb-lg-0 styling"
+            >
               <a
                 class="nav-link text-dark"
                 href="#"
@@ -109,12 +162,19 @@
               </a>
               <div class="post-pending pt-2">
                 <p>
-                  {{ $t('profileowner.Approval_Required') }} <br />
-                  {{ $t('profileowner.Bridge_Africa_admin_will_review_your_request') }}
-                  {{ $t('profileowner.to_create_a') }} {{ $t('profileowner.network') }} {{ $t('profileowner.and') }}
-                  {{ $t('profileowner.notify_you') }} {{ $t('profileowner.upon_approval_you_can_the_change_the') }}
-                  {{ $t('profileowner.network_settings') }} {{ $t('profileowner.and') }}
-                  {{ $t('profileowner.invite_people_to_join_your_network') }}
+                  {{ $t("profileowner.Approval_Required") }} <br />
+                  {{
+                    $t(
+                      "profileowner.Bridge_Africa_admin_will_review_your_request"
+                    )
+                  }}
+                  {{ $t("profileowner.to_create_a") }}
+                  {{ $t("profileowner.network") }} {{ $t("profileowner.and") }}
+                  {{ $t("profileowner.notify_you") }}
+                  {{ $t("profileowner.upon_approval_you_can_the_change_the") }}
+                  {{ $t("profileowner.network_settings") }}
+                  {{ $t("profileowner.and") }}
+                  {{ $t("profileowner.invite_people_to_join_your_network") }}
                 </p>
               </div>
             </div>
@@ -128,17 +188,24 @@
                 label-class=" pt-0 "
                 class="mb-0"
               >
-                <b-form-input v-model="createdNetwork.name" id="network_name" placeholder="" required> </b-form-input>
+                <b-form-input
+                  v-model="createdNetwork.name"
+                  id="network_name"
+                  placeholder=""
+                  required
+                >
+                </b-form-input>
               </b-form-group>
             </b-col>
             <b-col md="6">
               <div>
-                <label class="typo__label"> {{ $t('profileowner.Category') }} </label>
-
+                <label class="typo__label">
+                  {{ $t("profileowner.Category") }}
+                </label>
                 <multiselect
                   v-model="multiselecvalue"
                   :placeholder="$t('profileowner.Search_or_add_a_tag')"
-                  :label="$t('profileowner.name')"
+                  label="name"
                   track-by="id"
                   :options="pcategories"
                   :multiple="true"
@@ -155,14 +222,21 @@
                 label-class=" pt-0"
                 class="mb-0"
               >
-                <b-form-input v-model="createdNetwork.address" id="network_name" placeholder="" required>
+                <b-form-input
+                  v-model="createdNetwork.address"
+                  id="network_name"
+                  placeholder=""
+                  required
+                >
                 </b-form-input>
               </b-form-group>
             </b-col>
 
             <b-col md="6">
               <div class="form-group">
-                <label for="country" class="username"> {{ $t('profileowner.Country') }} :</label><br />
+                <label for="country" class="username">
+                  {{ $t("profileowner.Country") }} :</label
+                ><br />
                 <multiselect
                   v-model="country"
                   @input="Region"
@@ -176,7 +250,9 @@
             </b-col>
             <b-col md="6">
               <div class="form-group">
-                <label for="country" class="username"> {{ $t('profileowner.Region') }} :</label><br />
+                <label for="country" class="username">
+                  {{ $t("profileowner.Region") }} :</label
+                ><br />
 
                 <multiselect
                   v-model="region"
@@ -191,7 +267,9 @@
             </b-col>
             <b-col md="6">
               <div class="form-group">
-                <label for="country" class="username"> {{ $t('profileowner.Division') }} :</label><br />
+                <label for="country" class="username">
+                  {{ $t("profileowner.Division") }} :</label
+                ><br />
                 <multiselect
                   v-model="division"
                   @input="Municipality"
@@ -205,7 +283,9 @@
             </b-col>
             <b-col md="6">
               <div class="form-group">
-                <label for="country" class="username"> {{ $t('profileowner.Municipality') }} :</label><br />
+                <label for="country" class="username">
+                  {{ $t("profileowner.Municipality") }} :</label
+                ><br />
 
                 <multiselect
                   v-model="municipality"
@@ -220,7 +300,9 @@
             </b-col>
             <b-col md="6">
               <div class="form-group">
-                <label for="Neighbor" class="username"> {{ $t('profileowner.Neighbor') }} :</label><br />
+                <label for="Neighbor" class="username">
+                  {{ $t("profileowner.Neighbor") }} : </label
+                ><br />
                 <multiselect
                   v-model="locality"
                   :placeholder="$t('profileowner.Search')"
@@ -239,7 +321,13 @@
                 label-class=" pt-0"
                 class="mb-0"
               >
-                <b-form-input v-model="createdNetwork.city" id="network_name" placeholder="" required> </b-form-input>
+                <b-form-input
+                  v-model="createdNetwork.city"
+                  id="network_name"
+                  placeholder=""
+                  required
+                >
+                </b-form-input>
               </b-form-group>
             </b-col>
             <b-col md="6">
@@ -250,14 +338,11 @@
                 label-class="pt-0"
                 class="mb-0"
               >
-                <b-form-input
+                <VuePhoneNumberInput
+                  default-country-code="CM"
                   v-model="createdNetwork.primary_phone"
-                  id="network_name"
-                  placeholder=""
                   required
-                  type="tel"
-                >
-                </b-form-input>
+                />
               </b-form-group>
             </b-col>
             <b-col md="6">
@@ -268,14 +353,11 @@
                 label-class=" pt-0"
                 class="mb-0"
               >
-                <b-form-input
-                  type="tel"
+                <VuePhoneNumberInput
+                  default-country-code="CM"
                   v-model="createdNetwork.secondary_phone"
-                  id="network_name"
-                  placeholder=""
                   required
-                >
-                </b-form-input>
+                />
               </b-form-group>
             </b-col>
             <b-col md="6">
@@ -337,25 +419,42 @@
                 label-class="pt-0"
                 class="mb-0"
               >
-                <input @change="onLogoChangge" hidden type="file" id="net_pic" ref="net_pic" accept="image/*" />
+                <input
+                  @change="onLogoChangge"
+                  hidden
+                  type="file"
+                  id="net_pic"
+                  ref="net_pic"
+                  accept="image/*"
+                />
 
                 <div id="preview">
                   <img v-if="logoimg_url" :src="logoimg_url" />
                 </div>
                 <br />
                 <div class="text-center">
-                  <b-button v-if="logoimg_url" @click="chooseNlogo()" variant="primary" class="mt-3 text-center">
-                    {{ $t('profileowner.change_Image') }}
+                  <b-button
+                    v-if="logoimg_url"
+                    @click="chooseNlogo()"
+                    variant="primary"
+                    class="mt-3 text-center"
+                  >
+                    {{ $t("profileowner.change_Image") }}
                   </b-button>
                 </div>
 
-                <div class="image-upload-wrap" v-if="!logoimg_url" @click="chooseNlogo()">
-                  <a href="#" data-toggle="modal" data-target="#createalbumModal">
-                    <div class="drag-text">
-                      <i class="fa fa-plus"> </i>
-                      <h3 class="username">{{ $t('profileowner.Business_Logo') }}</h3>
-                    </div>
-                  </a>
+                <div
+                  class="image-upload-wrap"
+                  v-if="!logoimg_url"
+                  @click="chooseNlogo()"
+                >
+                  <div class="drag-text">
+                    <i class="fa fa-plus"> </i>
+                    <h3 class="username">
+                      {{ $t("profileowner.Business_Logo") }}
+                    </h3>
+                  </div>
+
                   <div></div>
                 </div>
               </b-form-group>
@@ -380,17 +479,32 @@
             </b-col>
           </b-row>
 
-          <b-alert :show="success.state" variant="info"> {{ success.msg }}</b-alert>
+          <b-alert :show="success.state" variant="info">
+            {{ success.msg }}</b-alert
+          >
           <b-spinner v-if="loader" variant="primary"></b-spinner>
           <b-button @click="action" class="mt-2 button-btn" variant="primary">
-            {{ editNet ? $t('profileowner.Edit_Network') : $t('profileowner.Add_Network') }}
+            {{
+              editNet
+                ? $t("profileowner.Edit_Network")
+                : $t("profileowner.Add_Network")
+            }}
           </b-button>
         </b-form>
       </b-container>
     </b-modal>
 
-    <b-modal v-model="viewnetwork" id="modal-1" :title="chosenNetwork.name" hide-footer>
-      <lightbox visible="true" css=" h-10" :items="chosenNetwork.image"></lightbox>
+    <b-modal
+      v-model="viewnetwork"
+      id="modal-1"
+      :title="chosenNetwork.name"
+      hide-footer
+    >
+      <lightbox
+        visible="true"
+        css=" h-10"
+        :items="chosenNetwork.image"
+      ></lightbox>
       <p class="text-pop">
         <strong class="net-title">
           <router-link to="/businessfollower">
@@ -411,12 +525,71 @@
         {{ chosenNetwork.description }}
       </p>
     </b-modal>
+
+    <b-modal
+      id="deleteBusinessModal"
+      title="Do you really want to delete network!!"
+      centered
+      hide-footer
+      no-stacking
+    >
+      <b-row>
+        <b-col
+          ><b-button
+            class="mt-3"
+            variant="success"
+            block
+            @click="$bvModal.hide('deleteBusinessModal')"
+            >Cancel</b-button
+          ></b-col
+        >
+        <b-col
+          ><b-button
+            class="mt-3"
+            variant="primary"
+            block
+            v-b-modal.deleteBusinessModal2
+            >Approve</b-button
+          ></b-col
+        >
+      </b-row>
+    </b-modal>
+
+    <b-modal
+      id="deleteBusinessModal2"
+      title="Any particular reason why you want to delete network?"
+      centered
+      hide-footer
+    >
+      <b-form @submit.prevent="deleteNetwork(selectedNetwork)">
+        <p>
+          <b-form-textarea
+            id="textarea"
+            v-model="textReason"
+            placeholder="Reason for deletion..."
+            rows="3"
+            max-rows="6"
+            :state="textReason.length >= 10"
+            no-resize
+            required
+          ></b-form-textarea>
+        </p>
+        <b-row>
+          <b-col
+            ><b-button class="mt-3" variant="primary" type="submit" block
+              >Delete</b-button
+            ></b-col
+          >
+        </b-row>
+      </b-form>
+    </b-modal>
   </div>
 </template>
 
 <script>
-import axios from 'axios';
-import Multiselect from 'vue-multiselect';
+import axios from "axios";
+import Multiselect from "vue-multiselect";
+import VuePhoneNumberInput from "vue-phone-number-input";
 export default {
   data() {
     return {
@@ -427,7 +600,7 @@ export default {
       profileNetworks: [],
       BaseURL: process.env.VUE_APP_API_URL,
       showModal: false,
-      selectedFile: '',
+      selectedFile: "",
       editNet: false,
       logo: null,
       country: [],
@@ -435,6 +608,8 @@ export default {
       division: [],
       municipality: [],
       locality: [],
+      textReason: "",
+      selectedNetwork: null,
 
       dat: true,
       networks: [],
@@ -442,41 +617,41 @@ export default {
       loader: false,
       success: {
         state: false,
-        variant: '',
-        msg: '',
+        variant: "",
+        msg: "",
       },
       createdNetwork: {
-        name: '',
-        description: '',
-        neighbourhood: '',
-        city: '',
-        network_category: '',
-        purpose: '',
-        primary_phone: '',
-        email: '',
+        name: "",
+        description: "",
+        neighbourhood: "",
+        city: "",
+        network_category: "",
+        purpose: "",
+        primary_phone: "",
+        email: "",
         country_id: 0,
         network_category_id: 0,
-        secondary_phone: '',
-        special_needs: '',
-        address: '',
-        image: '',
+        secondary_phone: "",
+        special_needs: "",
+        address: "",
+        image: "",
         allow_business: 0,
       },
       chosenNetwork: {
-        name: '',
-        description: '',
-        neighbourhood: '',
-        city: '',
-        network_category: '',
-        purpose: '',
-        email: '',
+        name: "",
+        description: "",
+        neighbourhood: "",
+        city: "",
+        network_category: "",
+        purpose: "",
+        email: "",
         country_id: 0,
         network_category_id: 0,
-        primary_phone: '',
-        secondary_phone: '',
-        special_needs: '',
-        address: '',
-        image: '',
+        primary_phone: "",
+        secondary_phone: "",
+        special_needs: "",
+        address: "",
+        image: "",
         allow_business: 0,
       },
     };
@@ -484,6 +659,7 @@ export default {
 
   components: {
     Multiselect,
+    VuePhoneNumberInput,
   },
 
   mounted() {
@@ -557,7 +733,7 @@ export default {
 
   methods: {
     flashErrors(errors) {
-      let err = '';
+      let err = "";
       Object.values(errors).forEach((element) => {
         err = element[0];
       });
@@ -567,9 +743,9 @@ export default {
 
     categories() {
       this.$store
-        .dispatch('auth/categories')
+        .dispatch("auth/categories")
         .then(() => {
-          console.log('hey yeah');
+          console.log("hey yeah");
         })
         .catch((err) => {
           console.log({ err: err });
@@ -577,24 +753,24 @@ export default {
     },
 
     netCategory(category) {
-      let cat = '';
+      let cat = "";
 
       category.forEach((item) => {
-        cat = cat + item + ',';
+        cat = cat + item + ",";
       });
 
       return cat;
     },
 
     chooseNlogo() {
-      document.getElementById('net_pic').click();
+      document.getElementById("net_pic").click();
     },
 
     Country() {
       this.$store
-        .dispatch('auth/country')
+        .dispatch("auth/country")
         .then(() => {
-          console.log('hey yeah');
+          console.log("hey yeah");
         })
         .catch((err) => {
           console.log({ err: err });
@@ -609,12 +785,12 @@ export default {
 
     Region() {
       let formData2 = new FormData();
-      formData2.append('countryId', this.selectedcountry);
+      formData2.append("countryId", this.selectedcountry);
 
       this.$store
-        .dispatch('auth/region', formData2)
+        .dispatch("auth/region", formData2)
         .then(() => {
-          console.log('hey yeah');
+          console.log("hey yeah");
         })
         .catch((err) => {
           console.log({ err: err });
@@ -623,12 +799,12 @@ export default {
 
     Division() {
       let formData2 = new FormData();
-      formData2.append('regionId', this.selectedregion);
+      formData2.append("regionId", this.selectedregion);
 
       this.$store
-        .dispatch('auth/division', formData2)
+        .dispatch("auth/division", formData2)
         .then(() => {
-          console.log('hey yeah');
+          console.log("hey yeah");
         })
         .catch((err) => {
           console.log({ err: err });
@@ -637,12 +813,12 @@ export default {
 
     Municipality() {
       let formData2 = new FormData();
-      formData2.append('divisionId', this.selecteddivision);
+      formData2.append("divisionId", this.selecteddivision);
 
       this.$store
-        .dispatch('auth/municipality', formData2)
+        .dispatch("auth/municipality", formData2)
         .then(() => {
-          console.log('hey yeah');
+          console.log("hey yeah");
         })
         .catch((err) => {
           console.log({ err: err });
@@ -651,12 +827,12 @@ export default {
 
     Locality() {
       let formData2 = new FormData();
-      formData2.append('councilId', this.selectedmunicipality);
+      formData2.append("councilId", this.selectedmunicipality);
 
       this.$store
-        .dispatch('auth/locality', formData2)
+        .dispatch("auth/locality", formData2)
         .then(() => {
-          console.log('hey yeah');
+          console.log("hey yeah");
         })
         .catch((err) => {
           console.log({ err: err });
@@ -677,11 +853,11 @@ export default {
     // },
 
     getNetworks() {
-      console.log('network loading !!!!!');
+      console.log("network loading !!!!!");
       this.$store
-        .dispatch('profile/profileNetwork')
+        .dispatch("profile/profileNetwork")
         .then(() => {
-          console.log('hey yeah');
+          console.log("hey yeah");
         })
         .catch((err) => {
           console.log({ err: err });
@@ -689,18 +865,18 @@ export default {
     },
 
     infiniteHandler($state) {
-      console.log('network?page=' + this.page);
-      let url = 'network?page=' + this.page;
+      console.log("network?page=" + this.page);
+      let url = "network?page=" + this.page;
       if (this.page == 1) {
         this.profileNetworks.splice(0);
       }
 
       this.$store
-        .dispatch('profile/loadMore', url)
+        .dispatch("profile/loadMore", url)
 
         .then(({ data }) => {
           console.log(data.data);
-          console.log('yoyoyooyoy');
+          console.log("yoyoyooyoy");
           if (data.data.length) {
             this.page += 1;
 
@@ -715,17 +891,17 @@ export default {
 
           if (err.response.status == 422) {
             this.flashMessage.show({
-              status: 'error',
+              status: "error",
 
               message: this.flashErrors(err.response.data.errors),
-              blockClass: 'custom-block-class',
+              blockClass: "custom-block-class",
             });
           } else {
             this.flashMessage.show({
-              status: 'error',
+              status: "error",
 
               message: err.response.statusText,
-              blockClass: 'custom-block-class',
+              blockClass: "custom-block-class",
             });
             console.log({ err: err });
           }
@@ -738,25 +914,25 @@ export default {
         container: this.fullPage ? null : this.$refs.preview,
         canCancel: true,
         onCancel: this.onCancel,
-        color: '#e75c18',
+        color: "#e75c18",
       });
 
       axios
-        .post('network', newNetwork)
+        .post("network", newNetwork)
         .then((res) => {
           loader.hide();
           this.success.state = true;
-          this.success.msg = 'Operation was successful !!';
+          this.success.msg = "Operation was successful !!";
 
           this.flashMessage.show({
-            status: 'success',
+            status: "success",
 
-            message: 'Network created',
+            message: "Network created",
 
-            blockClass: 'custom-block-class',
+            blockClass: "custom-block-class",
           });
 
-          this.$refs['netmodal'].hide();
+          this.$refs["netmodal"].hide();
 
           setTimeout(() => {
             this.success.state = false;
@@ -771,11 +947,11 @@ export default {
           console.log({ err: err });
           this.success.state = true;
           this.flashMessage.show({
-            status: 'error',
+            status: "error",
 
-            message: 'Something went wrong',
+            message: "Something went wrong",
 
-            blockClass: 'custom-block-class',
+            blockClass: "custom-block-class",
           });
           this.success.msg = "Something wen't wrong !!";
           setTimeout(() => {
@@ -791,14 +967,14 @@ export default {
         container: this.fullPage ? null : this.$refs.preview,
         canCancel: true,
         onCancel: this.onCancel,
-        color: '#e75c18',
+        color: "#e75c18",
       });
 
       axios
         .post(`network/${editedNetwork.id}`, editedNetwork.data)
         .then((res) => {
           this.success.state = true;
-          this.success.msg = 'Operation was successful !!';
+          this.success.msg = "Operation was successful !!";
           setTimeout(() => {
             this.success.state = false;
           }, 5000);
@@ -812,17 +988,17 @@ export default {
 
           if (err.response.status == 422) {
             this.flashMessage.show({
-              status: 'error',
+              status: "error",
 
               message: this.flashErrors(err.response.data.errors),
-              blockClass: 'custom-block-class',
+              blockClass: "custom-block-class",
             });
           } else {
             this.flashMessage.show({
-              status: 'error',
+              status: "error",
 
-              message: 'Unable to Create Your Network',
-              blockClass: 'custom-block-class',
+              message: "Unable to Create Your Network",
+              blockClass: "custom-block-class",
             });
             console.log({ err: err });
           }
@@ -836,52 +1012,62 @@ export default {
 
     // delete a network
     deleteNetwork(network) {
+      console.log(this.textReason);
+      let fd = new FormData();
+      fd.append("reason", this.textReason);
       axios
-        .delete(`network/${network.id}`)
+        .post(`network/${network.id}`, fd)
         .then((res) => {
-          this.success.state = true;
-          this.success.msg = 'Operation was successful !!';
-          setTimeout(() => {
-            this.success.state = false;
-          }, 5000);
+          console.log(res);
           this.getNetworks();
+          this.flashMessage.show({
+            status: "success",
+            message: "Operation was successful !!",
+          });
         })
         .catch((err) => {
-          this.success.state = true;
-          this.success.msg = "Something wen't wrong !!";
-          setTimeout(() => {
-            this.success.state = false;
-          }, 5000);
           this.loader = false;
+          this.flashMessage.show({
+            status: "error",
+            message: "Something wen't wrong !!",
+          });
         });
     },
+
     // Action handler
     action() {
       console.log(this.createdNetwork);
       const fd = new FormData();
-      fd.append('business_id', '1');
-      fd.append('name', this.createdNetwork.name);
-      fd.append('address', this.createdNetwork.address);
-      fd.append('neighbourhood', this.createdNetwork.neighbourhood);
-      fd.append('city', this.createdNetwork.city);
-      fd.append('country_id', 2);
-      fd.append('primary_phone', this.createdNetwork.primary_phone);
-      fd.append('secondary_phone', this.createdNetwork.secondary_phone);
-      fd.append('email', 'dev@bav.com');
-      fd.append('network_categories', this.selectedcategories);
+      fd.append("business_id", "1");
+      fd.append("name", this.createdNetwork.name);
+      fd.append("address", this.createdNetwork.address);
+      // fd.append("neighbourhood", this.createdNetwork.neighbourhood);
+      fd.append("city", this.createdNetwork.city);
+      fd.append("country_id", 2);
+      fd.append(
+        "primary_phone",
+        this.createdNetwork.primary_phone.split(" ").join("")
+      );
+      fd.append(
+        "secondary_phone",
+        this.createdNetwork.secondary_phone.split(" ").join("")
+      );
+      fd.append("email", "dev@bav.com");
+      fd.append("network_categories", this.selectedcategories);
 
-      fd.append('description', this.createdNetwork.description);
-      fd.append('purpose', this.createdNetwork.purpose);
-      fd.append('special_needs', this.createdNetwork.special_needs);
-      fd.append('region_id', this.selectedregion);
-      fd.append('country_id', this.selectedcountry);
-      fd.append('division_id', this.selecteddivision);
-      fd.append('council_id', this.selectedmunicipality);
-      fd.append('image', this.logo);
+      fd.append("description", this.createdNetwork.description);
+      fd.append("purpose", this.createdNetwork.purpose);
+      fd.append("special_needs", this.createdNetwork.special_needs);
+      fd.append("region_id", this.selectedregion);
+      fd.append("country_id", this.selectedcountry);
+      fd.append("division_id", this.selecteddivision);
+      fd.append("council_id", this.selectedmunicipality);
+      fd.append("neighbourhood", this.selectedlocality);
+      fd.append("image", this.logo);
 
-      fd.append('allow_business', this.createdNetwork.allow_business);
+      fd.append("allow_business", this.createdNetwork.allow_business);
       if (this.editNet) {
-        fd.append('_method', 'POST');
+        fd.append("_method", "POST");
         let data = {
           data: fd,
           id: this.createdNetwork.id,
@@ -899,17 +1085,17 @@ export default {
     },
     showmodal(state, arg) {
       this.showModal = state;
-      if (arg == 'edit') {
+      if (arg == "edit") {
         this.editNet = true;
       } else {
         this.editNet = false;
-        this.createdNetwork.image = '';
-        this.createdNetwork.name = '';
-        this.createdNetwork.address = '';
-        this.createdNetwork.neighbourhood = '';
-        this.createdNetwork.description = '';
-        this.createdNetwork.purpose = '';
-        this.createdNetwork.special_needs = '';
+        this.createdNetwork.image = "";
+        this.createdNetwork.name = "";
+        this.createdNetwork.address = "";
+        this.createdNetwork.neighbourhood = "";
+        this.createdNetwork.description = "";
+        this.createdNetwork.purpose = "";
+        this.createdNetwork.special_needs = "";
         this.createdNetwork.allow_business = 0;
       }
     },
@@ -917,7 +1103,7 @@ export default {
     //Show Edit network modal
     showEditNetwork(network) {
       axios
-        .get('network/' + network.id + '/edit-infos')
+        .get("network/" + network.id + "/edit-infos")
         .then(({ data }) => {
           console.log(data);
 
@@ -943,7 +1129,9 @@ export default {
       this.createdNetwork.business_id = network.business_id;
       this.createdNetwork.address = network.address;
       this.createdNetwork.neighbourhood = network.neighbourhood;
-      this.createdNetwork.network_categories = this.netCategory(network.assign_categories);
+      this.createdNetwork.network_categories = this.netCategory(
+        network.assign_categories
+      );
       this.createdNetwork.description = network.description;
       this.createdNetwork.purpose = network.purpose;
       this.createdNetwork.special_needs = network.special_needs;
@@ -959,10 +1147,14 @@ export default {
       this.Division();
       this.Municipality();
       this.Locality();
-      this.showmodal(true, 'edit');
+      this.showmodal(true, "edit");
     },
     selectImage(e) {
       this.createdNetwork.image = e.target.files[0];
+    },
+    selectNetwork(n) {
+      this.selectedNetwork = n;
+      console.log(this.selectedNetwork);
     },
   },
 };
@@ -1245,12 +1437,12 @@ p {
     color: black;
 
     line-height: 35px;
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
   .text-pop {
     color: #000;
 
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
@@ -1271,7 +1463,7 @@ p {
   .textt {
     color: #000;
 
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
@@ -1294,7 +1486,7 @@ p {
   .text-pop {
     color: #000;
 
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
@@ -1317,7 +1509,7 @@ p {
   .text {
     color: #000;
 
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
@@ -1354,12 +1546,12 @@ p {
     color: black;
 
     line-height: 35px;
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
   .text-pop {
     color: #000;
 
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
@@ -1382,7 +1574,7 @@ p {
   .textt {
     color: #000;
 
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;

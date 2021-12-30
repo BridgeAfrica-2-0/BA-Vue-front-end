@@ -96,20 +96,21 @@
                 data-toggle="popover"
                 class="form-control search-h"
                 style="font-size: 17px !important"
-                :placeholder="searchOptions.placeholder"
-                v-model="searchOptions.keyword"
+                :placeholder="credentials.placeholder"
+                v-model="credentials.keyword"
                 aria-label=""
                 data-original-title=""
                 title=""
+                @keypress.enter="getKeyword"
               />
 
               <vue-bootstrap-typeahead
                 v-model="query"
                 :data="neigbourhoods"
-                :minMatchingChars=0
-                :maxMatches=10
+                :minMatchingChars="0"
+                :maxMatches="10"
                 :serializer="(item) => item.name"
-                placeholder="Where"
+                :placeholder="$t('general.Where')"
                 class="search-hh w-44"
               />
 
@@ -143,11 +144,11 @@
             <b-collapse id="nav-collapse" is-nav>
               <div class="nav-item">
                 <router-link
-                  :to="navLink('home')"
+                  :to="{ name: navLink('home') }"
                   class="nav-link text-dark hov"
                   href=""
                 >
-                  Home
+                  {{ $t("general.Home") }}
                 </router-link>
               </div>
 
@@ -180,7 +181,14 @@
                     <div v-for="message in messages" :key="message.id">
                       <hr class="h-divider" />
                       <div
-                        class="d-inline-flex flex-row justify-content-between align-items-center suggest-item cursor-pointer"
+                        class="
+                          d-inline-flex
+                          flex-row
+                          justify-content-between
+                          align-items-center
+                          suggest-item
+                          cursor-pointer
+                        "
                       >
                         <div class="d-inline-flex flex-row align-items-center">
                           <div>
@@ -241,7 +249,13 @@
                     >
                       <hr class="h-divider" />
                       <div
-                        class="d-inline-flex flex-row align-items-center suggest-item cursor-pointer"
+                        class="
+                          d-inline-flex
+                          flex-row
+                          align-items-center
+                          suggest-item
+                          cursor-pointer
+                        "
                       >
                         <!-- <div>
                           <img src="@/assets/img/profile-pic.jpg" class="rounded-circle" alt="" width="30" height="30" />
@@ -281,7 +295,7 @@
                 </router-link>
               </div>
 
-              <b-tooltip target="profilepic" variant="light" triggers="click">
+              <b-tooltip target="profilepic" variant="light" triggers="hover">
                 {{ user.name }}
               </b-tooltip>
 
@@ -308,7 +322,12 @@
                       v-if="'user' != user.user_type"
                       @click.prevent="switchToProfile"
                       href="#"
-                      class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+                      class="
+                        other-menu
+                        suggest-item
+                        cursor-pointer
+                        text-decoration-none text-dark
+                      "
                     >
                       <span class="mr-2"
                         ><fas-icon
@@ -321,7 +340,12 @@
 
                     <router-link
                       :to="{ name: 'orders' }"
-                      class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+                      class="
+                        other-menu
+                        suggest-item
+                        cursor-pointer
+                        text-decoration-none text-dark
+                      "
                     >
                       <span class="mr-2"
                         ><fas-icon
@@ -334,7 +358,13 @@
 
                     <router-link
                       :to="{ name: 'settings' }"
-                      class="other-menu suggest-item cursor-pointer text-decoration-none text-dark w-full"
+                      class="
+                        other-menu
+                        suggest-item
+                        cursor-pointer
+                        text-decoration-none text-dark
+                        w-full
+                      "
                     >
                       <span class="mr-2 w-full"
                         ><fas-icon
@@ -365,11 +395,11 @@
 
                       <b-collapse id="collapse-2" class="mt-1">
                         <b-card-text
-                          @click="$i18n.locale = 'en'"
+                          @click="language('en')"
                           class="cursor-pointer mb-1"
                           >{{ $t("auth.english") }}</b-card-text
                         >
-                        <b-card-text @click="$i18n.locale = 'fr'">{{
+                        <b-card-text @click="language('fr')">{{
                           $t("auth.french")
                         }}</b-card-text>
                       </b-collapse>
@@ -378,7 +408,12 @@
                     <a
                       @click="logout"
                       href="#"
-                      class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+                      class="
+                        other-menu
+                        suggest-item
+                        cursor-pointer
+                        text-decoration-none text-dark
+                      "
                     >
                       <span class="mr-2"
                         ><fas-icon
@@ -437,7 +472,12 @@
 
             <router-link
               :to="{ name: 'orders' }"
-              class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+              class="
+                other-menu
+                suggest-item
+                cursor-pointer
+                text-decoration-none text-dark
+              "
             >
               <span class="mr-2"
                 ><fas-icon
@@ -450,7 +490,12 @@
 
             <router-link
               :to="{ name: 'settings' }"
-              class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+              class="
+                other-menu
+                suggest-item
+                cursor-pointer
+                text-decoration-none text-dark
+              "
             >
               <span class="mr-2"
                 ><fas-icon class="violet search" :icon="['fas', 'cogs']"
@@ -489,8 +534,13 @@
             <hr class="h-divider" />
             <a
               href="#"
-              @click.prevent="logout"
-              class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+              @click="logout"
+              class="
+                other-menu
+                suggest-item
+                cursor-pointer
+                text-decoration-none text-dark
+              "
             >
               <span class="mr-2"
                 ><fas-icon
@@ -504,7 +554,23 @@
       </div>
     </nav>
 
-    <div></div>
+    <div>
+      <!-- 
+
+           <div>
+  <vue-bootstrap-typeahead
+    class="mb-4"
+    v-model="query"
+    :data="users"
+    :serializer="item => item.login"
+    @hit="selectedUser = $event"
+    placeholder="Search GitHub Users"
+  />
+
+ <h3>Selected User JSON</h3>
+ <pre>{{ selectedUser | stringify }}</pre>
+</div> -->
+    </div>
   </header>
 </template>
 
@@ -532,7 +598,7 @@ export default {
       default: function () {
         return {
           keyword: "",
-          placeholder: "All",
+          placeholder: this.$t('general.All'),
         };
       },
     },
@@ -548,7 +614,7 @@ export default {
       redirectionPatterns: null,
       searchOptions: {
         keyword: "",
-        placeholder: "All",
+        placeholder: this.$t('general.All'),
       },
       query: "",
       selectedUser: null,
@@ -565,6 +631,9 @@ export default {
   },
   beforeMount() {
     console.log("beforeMount");
+    this.$i18n.locale = localStorage.getItem("lang")
+      ? localStorage.getItem("lang")
+      : "en";
 
     this.getLocation();
   },
@@ -623,11 +692,8 @@ export default {
       this.userOwnPage = this.onRedirect();
     },
 
-    credentials: {
-      deep: true,
-      handler() {
-        this.searchOptions = this.credentials;
-      },
+    credentials: function (newVal) {
+      this.searchOptions = newVal;
     },
 
     query(newQuery) {
@@ -692,13 +758,15 @@ export default {
 
     updateNotificationEvent() {
       try {
-        const newRouteNotificationApi = this.notificationPatterns[
-          this.$store.state.auth.profilConnected.user_type
-        ]();
+        const newRouteNotificationApi =
+          this.notificationPatterns[
+            this.$store.state.auth.profilConnected.user_type
+          ]();
 
-        const newRouteMessageApi = this.messagePatterns[
-          this.$store.state.auth.profilConnected.user_type
-        ]();
+        const newRouteMessageApi =
+          this.messagePatterns[
+            this.$store.state.auth.profilConnected.user_type
+          ]();
 
         this.newNotification(newRouteNotificationApi);
         this.newMessage(newRouteMessageApi);
@@ -725,15 +793,22 @@ export default {
     },
 
     getKeyword() {
-      if (!this.searchOptions.keyword) return false;
+      if (!this.credentials.keyword) return false;
 
       if (this.$route.name != "Search") {
-        this.$router.push({
-          name: "Search",
-          query: { keyword: this.searchOptions.keyword },
-        });
+        console.log("the keyword is: ", this.credentials.keyword);
+        this.$store
+          .dispatch("allSearch/SEARCH", {
+            keyword: this.credentials.keyword,
+          })
+          .catch((err) => {
+            console.log("Error erro!");
+          });
+
+        this.$router.push("/search");
       }
     },
+
     navLink(type) {
       const link = {
         home: () => {
@@ -758,7 +833,11 @@ export default {
         })
         .catch(() => console.log("error"));
     },
-
+    language(lang) {
+      localStorage.setItem("lang", lang);
+      this.$i18n.locale = lang;
+      location.reload();
+    },
     logout: async function () {
       let loader = this.$loading.show({
         container: this.$refs.formContainer,
@@ -766,14 +845,12 @@ export default {
         onCancel: this.onCancel,
         color: "#e75c18",
       });
-
       const response = await this.$repository.notification.logOut();
       if (response.success) {
-        loader.hide();
-        this.$router.push({ name: "home1" });
+        // loader.hide();
         this.Logout();
+        this.$router.push({ name: "login" });
       }
-      loader.hide();
     },
 
     switchToProfile: async function () {
@@ -808,11 +885,20 @@ export default {
       if (request.success) this.setBusiness(request.data);
     },
 
+    getNetworkAndBusiness: async function () {
+      let request = await this.$repository.share.getNetworkAndBusiness();
+      if (request.success) {
+        this.setBusiness(request.data.business);
+        this.setNetworks(request.data.network);
+      }
+    },
+
     init() {
       try {
         if (!this.hasLauchNetworkRequest) {
-          this.getNetworks();
-          this.getBusiness();
+          // this.getNetworks();
+          // this.getBusiness();
+          this.getNetworkAndBusiness();
           this.lauchNetworkRequest();
         }
       } catch (error) {

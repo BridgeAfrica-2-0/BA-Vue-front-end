@@ -2,7 +2,7 @@
   <ShareNetwork
     :network="network"
     :url="link"
-    :title="`{auth.name} share post`"
+    :title="`${auth.name} share post`"
     :description="post.content"
   >
     {{ title }}
@@ -29,7 +29,7 @@ export default {
 
   metaInfo() {
     return {
-      title: `${this.auth.name} - Epiloge`,
+      title: `${this.auth.name} - BridgeAfrica`,
       meta: [
         { name: 'description', content: 'Connect and follow ' + '' + ' on Epiloge - ' + this.auth.name},
                 { property: 'og:title', content: this.post.content + ' - BridgeAfrica'},

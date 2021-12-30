@@ -641,24 +641,6 @@ export default {
       municipality: [],
       locality: [],
 
-      // categories: [
-      //   { item: "Professional_and_home_service", name: "Professionals" },
-      //   { item: "Agriculture ", name: "Agriculture " },
-      //   { item: "Restaurant ", name: " Restaurant " },
-      //   { item: "Electronics ", name: "Electronics " },
-      //   { item: "Handicrafts", name: "Handicrafts" },
-      //   { item: "clothing", name: "clothing" },
-      //   { item: "Mechanics", name: "Mechanics" },
-      //   { item: "Health_unit ", name: "Health unit " },
-      //   { item: "Bars", name: "Bars" },
-      //   { item: "Hair_and_beauty ", name: "Hair and beauty " },
-      //   { item: "Real_estate ", name: "Real_estate " },
-      //   { item: "Travelling ", name: "Travelling " },
-      //   { item: "Hotels", name: "Hotels" },
-      //   { item: "station", name: " station  " },
-      //   { item: "Mayor_concils", name: "Mayor_concils" },
-      //   { item: "Taxis service", name: "Taxis service" },
-      // ],
       dayOfWorks: [
         {
           day: this.$t("home.Monday"),

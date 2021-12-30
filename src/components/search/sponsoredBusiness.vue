@@ -106,6 +106,8 @@ export default {
         : "",
   },
 
+
+
   data() {
     return {
       items: [],
@@ -144,6 +146,12 @@ export default {
   },
 
   methods: {
+
+    haveSponsored(){
+      this.$emit('on:init', this.items.length ? true : false)
+    },
+
+
     init: async function () {
       const request = await this.$repository.search.sponsors();
 

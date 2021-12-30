@@ -15,6 +15,55 @@
       <b-card>
         <b-row v-if="loading">
           <b-col>
+            <div
+              class="edit"
+              v-b-modal.biographyModal
+              @click="
+                business_about_input = JSON.parse(
+                  JSON.stringify(business_about)
+                )
+              "
+            >
+              <b-icon
+                icon="pencil-fill"
+                variant="primary"
+                v-if="showPen != 'BusinessEditor'"
+              ></b-icon>
+            </div>
+            <h4 class="mb-4 text-center username">
+              {{ business_about.name }}
+            </h4>
+            <p class="text-justify text">
+              {{ business_about.location_description }}
+            </p>
+          </b-col>
+          <b-col>
+            <!-- <div class="edit">
+                <b-icon
+                  icon="pencil-fill"
+                  variant="primary"
+                  
+                ></b-icon>
+              </div> -->
+            <div
+              class="edit"
+              v-b-modal.biographyModal
+              @click="
+                business_about_input = JSON.parse(
+                  JSON.stringify(business_about)
+                )
+              "
+            >
+              <b-icon icon="pencil-fill" variant="primary"></b-icon>
+            </div>
+            <h4 class="mb-4 text-center username">
+              {{ business_about.name }}
+            </h4>
+            <p class="text-justify text">
+              {{ business_about.location_description }}
+            </p>
+          </b-col>
+          <b-col>
             <!-- <div class="edit">
                 <b-icon
                   icon="pencil-fill"
@@ -792,49 +841,49 @@ export default {
     localities() {
       return this.$store.state.auth.locality;
     },
-    selectedcategories: function() {
+    selectedcategories: function () {
       let selectedUsers = [];
       this.multiselecvalue.forEach((item) => {
         selectedUsers.push(item.category_id);
       });
       return selectedUsers;
     },
-    selectedsubcategories: function() {
+    selectedsubcategories: function () {
       let sub_cat = [];
       this.filterselectvalue.forEach((item) => {
         sub_cat.push(item.subcategory_id);
       });
       return sub_cat;
     },
-    selectedcountry: function() {
+    selectedcountry: function () {
       let sub_cat = [];
       this.country.forEach((item) => {
         sub_cat.push(item.country_id);
       });
       return sub_cat;
     },
-    selectedregion: function() {
+    selectedregion: function () {
       let sub_cat = [];
       this.region.forEach((item) => {
         sub_cat.push(item.region_id);
       });
       return sub_cat;
     },
-    selecteddivision: function() {
+    selecteddivision: function () {
       let sub_cat = [];
       this.division.forEach((item) => {
         sub_cat.push(item.division_id);
       });
       return sub_cat;
     },
-    selectedmunicipality: function() {
+    selectedmunicipality: function () {
       let sub_cat = [];
       this.municipality.forEach((item) => {
         sub_cat.push(item.council_id);
       });
       return sub_cat;
     },
-    selectedlocality: function() {
+    selectedlocality: function () {
       let sub_cat = [];
       this.locality.forEach((item) => {
         sub_cat.push(item.neighborhood_id);

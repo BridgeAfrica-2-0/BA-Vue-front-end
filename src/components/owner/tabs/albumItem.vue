@@ -79,7 +79,6 @@ export default {
     "canBeUpdate",
     "showAlbumPictures",
     "isEditor",
-    "showCoverAlbum"
   ],
 
   data: () => ({
@@ -92,11 +91,6 @@ export default {
     plural: function (val) {
       return val ? `${val} items` : "No item";
     },
-  },
-
-  created(){
-    if (this.showCoverAlbum)
-      this.show()
   },
 
   methods: {

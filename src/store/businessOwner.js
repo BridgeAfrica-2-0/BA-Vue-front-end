@@ -220,7 +220,7 @@ export default {
     // getting business people following
     ppleFollowing(state) {
       return state.peopleFollowing;
-    }, 
+    },
 
     // getting business people followers
     ppleFollowers(state) {
@@ -230,13 +230,6 @@ export default {
 
   mutations: {
     //set media data
-
-    addCoverPicture(state, picture) {
-      const hasCover = state.businessInfo.cover.find(item => item.id == picture.id)
-      if (!hasCover)
-        state.businessInfo.cover.push(picture)
-    },
-    
     updateAlbum(state, payload) {
       const newState = state.albums.map(album => (album.id == payload.id) ? Object.assign(album, { name: payload.name }) : album)
       state.albums = newState

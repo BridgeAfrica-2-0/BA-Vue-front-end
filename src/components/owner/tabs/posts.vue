@@ -75,7 +75,7 @@
                 variant="primary"
               ></b-icon>
               {{ $t("profileowner.Current_City") }} :
-              <span class="text">
+              <span class="text"> 
                 {{ info.user.city }}
               </span>
             </p>

@@ -434,7 +434,7 @@
           <b-form-input
             id="input-1"
             class="mt-1"
-            v-model="business_about_input.phone"
+            v-model="business_about_input.phone1"
             type="tel"
             required
           ></b-form-input>
@@ -449,7 +449,7 @@
           <b-form-input
             id="input-1"
             class="mt-1"
-            v-model="business_about_input.secondary_phone"
+            v-model="business_about_input.phone2"
             type="tel"
             required
           ></b-form-input>
@@ -943,7 +943,7 @@ export default {
             subCategoryId: this.business_about_input.subCatFilter[0].subcategoryId,
             filterId: this.business_about_input.filter[0].filter_id,
             keywords: this.stringKeyword(this.business_about_input.keywords),
-            primary_phone: this.business_about_input.phone,
+            primary_phone: this.business_about_input.phone1,
             secondary_phone :this.business_about_input.secondary_phone,
             website: this.business_about_input.website,
             email: this.business_about_input.email,

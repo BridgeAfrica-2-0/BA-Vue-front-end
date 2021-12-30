@@ -989,7 +989,7 @@ export default {
       let response_ = null;
       await axios(
 
-        "userIntro/addCurrentCity/11" +
+        "userIntro/addCurrentCity" +
         "?city=" +
         payload.currentCity,
         {

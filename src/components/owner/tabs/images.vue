@@ -392,14 +392,14 @@ export default {
     },
     //set an image as a cover photo
 
-    setCoverPic(id) {
+    async setCoverPic(id) {
       this.loading = true;
       const data =
         "business" == this.type || "network" == this.type
           ? { businessID: this.$route.params.id, albumID: id }
           : id;
 
-      this.pattern[this.type]()
+      return await this.pattern[this.type]()
         .setCoverPicture(data)
         .then(() => {
           this.loading = false;
@@ -407,7 +407,7 @@ export default {
             status: "success",
             message: "Cover Picture succesfully set",
           });
-          return false;
+          return true;
         })
         .catch((error) => {
           this.sending = false;
@@ -421,13 +421,13 @@ export default {
     },
     //set image as profile pic
 
-    setProfilePic(id) {
+    async setProfilePic(id) {
       this.loading = true;
       const data =
         "business" == this.type || "network" == this.type
           ? { businessID: this.$route.params.id, albumID: id }
           : id;
-      this.pattern[this.type]()
+      return await this.pattern[this.type]()
         .setProfilePicture(data)
         .then(() => {
           this.loading = false;
@@ -435,7 +435,7 @@ export default {
             status: "success",
             message: "Profile Picture set",
           });
-          return false;
+          return true;
         })
         .catch((error) => {
           this.sending = false;

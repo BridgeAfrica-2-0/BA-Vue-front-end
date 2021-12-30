@@ -3,13 +3,11 @@
     <b-container fluid class="p-0 gradient">
       <div class="container-flex banner">
         <img
-          :src="info.user.cover_picture ? info.user.cover_picture :'@/assets/img/banner.jpg'"
+          :src="auth.cover_picture ? auth.cover_picture : require('@/assets/img/banner.jpg')"
           class="img-fluid banner"
           alt="Cover Image"
         />
       </div>
-      
-
       <div class="container-fluid p-63">
         <b-row class="mt-md-2 text-left">
           <b-col cols="12" md="12" class="m-0 p-0 text-left put-top">
@@ -200,7 +198,8 @@
 import VueCropper from "vue-cropperjs";
 import "cropperjs/dist/cropper.css";
 
-import { mapGetters } from 'vuex'
+
+import { mapMutations, mapGetters } from 'vuex'
 
 export default {
   name: "headPageOwner",
@@ -241,6 +240,10 @@ export default {
   },
 
   methods: {
+    ...mapMutations({
+      addCoverPicture: 'auth/addCoverPicture'
+    }),
+
     nFormatter(num) {
       if (num >= 1000000000) {
         return (num / 1000000000).toFixed(1).replace(/\.0$/, "") + "G";
@@ -429,8 +432,8 @@ export default {
           console.log(response);
           this.$store
             .dispatch("profile/loadUserPostIntro", null)
-            .then((response) => {
-              console.log(response);
+            .then(() => {
+              this.addCoverPicture(null)
               this.flashMessage.show({
                 status: "success",
                 message: this.$t("profileowner.Profile_removed_successfully"),
@@ -594,6 +597,12 @@ export default {
       return this.$store.getters["profile/getUserPostIntro"];
     },
   },
+
+  watch: {
+    "$state.state.profile.profileIntro": function(newInfo){
+      this.addCoverPicture(newInfo.user.cover_picture)
+    }
+  }
 };
 </script>
 

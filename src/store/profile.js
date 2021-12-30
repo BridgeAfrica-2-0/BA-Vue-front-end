@@ -342,7 +342,7 @@ export default {
       ];
     },
     storeCurrentCity(state, payload) {
-      state.userData.profile_about.basicInfo.currentCity = payload.currentCity;
+      state.userData[0].profile_about.basicInfo.currentCity = payload.currentCity;
     },
     storeHomeTown(state, payload) {
       state.userData[0].profile_about.basicInfo.homeTown = payload.homeTown;
@@ -987,18 +987,10 @@ export default {
     async updateUserBasicInfosCurrentCity(context, payload) {
       console.log(payload, "edit user currentcity start +++++");
       let response_ = null;
-      await axios(
+      await axios.patch(
 
-        "userIntro/addCurrentCity/6" +
-        "?city=" +
-        payload.currentCity,
-        {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-
-          }
-        }
+        "userIntro/CurrentCity", payload
+        
       )
         .then(response => {
           console.log("edit user current city response (1) +++++++", response);

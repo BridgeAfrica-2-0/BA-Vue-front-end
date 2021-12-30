@@ -644,10 +644,9 @@ export default {
     saveCurrentCity() {
       console.log("save new current City user start +++++");
       console.log(this.basicInfo.currentCity);
+      let data = {city: this.info.user.city,}
       this.$store
-        .dispatch("profile/updateUserBasicInfosCurrentCity", {
-          currentCity: this.info.user.city,
-        })
+        .dispatch("profile/updateUserBasicInfosCurrentCity", data)
         .then((response) => {
             console.log("----------teststst")
            this.$store.dispatch("profile/loadUserPostIntro", null);

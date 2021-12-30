@@ -3,7 +3,7 @@
     <b-container fluid class="p-0 gradient">
       <div class="container-flex banner">
         <img
-          :src="auth.cover_picture ? auth.cover_picture : require('@/assets/img/banner.jpg')"
+          :src="auth.cover_picture ? auth.cover_picture : getCustomCover[0]"
           class="img-fluid banner"
           alt="Cover Image"
         />
@@ -18,7 +18,6 @@
               badge-offset="10px"
             ></b-avatar>
             
-
             <b-icon
               icon="camera-fill"
               class="avatar-header-icon btn cursor-pointer size"
@@ -28,7 +27,7 @@
             <span style="display: inline-block">
               <h6 class="profile-name text-center">
                 <div class="username">
-                  <b> {{ info.user.name }}</b>
+                  <b>{{ info.user.name }}</b>
                 </div>
 
                 <span class="duration float-left"> {{ nFormatter(total.total_community) }} {{ $t('profileowner.Community') }} </span>
@@ -199,13 +198,21 @@ import VueCropper from "vue-cropperjs";
 import "cropperjs/dist/cropper.css";
 
 
+import {defaultCoverImage} from '@/mixins';
+
 import { mapMutations, mapGetters } from 'vuex'
 
 export default {
   name: "headPageOwner",
+  mixins: [defaultCoverImage],
   components: {
     VueCropper,
   },
+
+  created(){
+    this.currentAuthType = 'profile'
+  },
+
   data() {
     return {
       url: null,
@@ -600,6 +607,7 @@ export default {
 
   watch: {
     "$state.state.profile.profileIntro": function(newInfo){
+      console.log(newInfo.user.cover_picture)
       this.addCoverPicture(newInfo.user.cover_picture)
     }
   }

@@ -21,7 +21,7 @@
               ></b-icon>
             </span>
           </span>
-          <!-- User Post Intro-->
+          <!-- User Post Intro-->  
           <b-card-text class="text-left username intro-head">
             <p>
               <b-icon

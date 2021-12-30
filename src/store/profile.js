@@ -342,7 +342,7 @@ export default {
       ];
     },
     storeCurrentCity(state, payload) {
-      state.userData[0].profile_about.basicInfo.currentCity = payload.currentCity;
+      state.userData.profile_about.basicInfo.currentCity = payload.currentCity;
     },
     storeHomeTown(state, payload) {
       state.userData[0].profile_about.basicInfo.homeTown = payload.homeTown;
@@ -480,10 +480,10 @@ export default {
     },
 
 
-    deleteContact({ commit }, payload) {
+    deleteContact({ commit }, id) {
 
-      console.log(payload)
-      return axios.post("user/contact-delete/" + payload.id, {
+      console.log(id)
+      return axios.post("user/contact-delete/" + id, {
 
       })
         .then((res) => {
@@ -989,7 +989,7 @@ export default {
       let response_ = null;
       await axios(
 
-        "userIntro/addCurrentCity" +
+        "userIntro/addCurrentCity/6" +
         "?city=" +
         payload.currentCity,
         {
@@ -1004,7 +1004,7 @@ export default {
           console.log("edit user current city response (1) +++++++", response);
           if (response.status !== 200 && response.status !== 201) {
             console.log("Error From The Server");
-            throw "Error From The Server";
+            // throw "Error From The Server";
           }
           return response;
         })
@@ -1015,7 +1015,7 @@ export default {
           );
           if (!response) {
             console.log("Error From The Server +++++++");
-            throw new Error("Error From Add New Current City+++++");
+            // throw new Error("Error From Add New Current City+++++");
           }
           context.commit("storeCurrentCity", {
             currentCity: payload.currentCity
@@ -1024,7 +1024,7 @@ export default {
         })
         .catch(error => {
           console.log("Error From The Server or The Browser", error);
-          throw error;
+          // throw error;
         });
       return response_;
     },
@@ -1227,9 +1227,10 @@ export default {
             cityTown: payload.workPlace.cityTown,
             position: payload.workPlace.position,
             jobResponsibilities: payload.workPlace.jobResponsibilities,
-            currentlyWorking: payload.workPlace === true ? 1 : 0,
+            currentlyWorking: payload.workPlace.currently_working === true ? 1 : 0,
             startDate: payload.workPlace.startDate,
-            endDate: payload.workPlace.endDate
+            endDate: payload.workPlace.endDate,
+           
           }
         };
       } else if (payload.method === "PUT") {
@@ -1245,11 +1246,12 @@ export default {
             cityTown: payload.workPlace.city_town,
             position: payload.workPlace.position,
             jobResponsibilities: payload.workPlace.job_responsibilities,
-            currentlyWorking: payload.workPlace === true ? 1 : 0,
+            currentlyWorking: payload.workPlace.currently_working === true ? 1 : 0,
             startDate: payload.workPlace.startDate,
+            privacy: payload.workPlace.access,
             // endDate: null,
             // endDate: payload.workPlace.endDate,
-            endDate: payload.workPlace === true ? null : payload.workPlace.endDate,
+            endDate: payload.workPlace.currently_working === true ? null : payload.workPlace.endDate,
           }
         };
       } else if (payload.method === "DELETE") {

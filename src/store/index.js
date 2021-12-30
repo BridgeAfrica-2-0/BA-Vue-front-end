@@ -51,8 +51,7 @@ import networkSetting from './networkSetting';
 
 Vue.use(Vuex);
 
-// axios.defaults.baseURL = process.env.VUE_APP_API_URL;
-axios.defaults.baseURL = 'https://devone.maxinemoffett.com/api/v1/';
+axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 
 export default new Vuex.Store({
     modules: {

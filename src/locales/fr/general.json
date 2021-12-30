@@ -138,8 +138,8 @@
     "You_are_connected_as":"Vous êtes connecté en tant que",
 
     "HOW_TO_USE_BRIDGEAFRICA":"COMMENT UTILISER BRIDGEAFRICA.COM",
-    "Partners_with_Pea":"BridgeAfrica.com Partenaires de avec Pea Jeunes (Demo)",
-    "Gives_Digital_Literacy_Training":"BridgeAfrica.com Formation à la culture numérique (Demo)",
+    "Partners_with_Pea":"bridgeafrica.com Partenaires avec Pea Jeunes (Demo)",
+    "Gives_Digital_Literacy_Training":"bridgeafrica.com Formation à la culture numérique (Demo)",
     "Cameroon_Gallery_Commercial":"Cameroon Gallery Commercial (Demo)",
     "About_Us":"A propos",
     "Contact_Us":"Contact",
@@ -320,7 +320,8 @@
     "Unable_to_Create_Your_Business":"Impossible de créer votre entreprise",
     "Unable_to_Create_Your_Network":"Impossible de créer votre réseau",
     
-    "Unable_to_Create_Your_Feedback":"Impossible de créer votre commentaire"
+    "Unable_to_Create_Your_Feedback":"Impossible de créer votre commentaire",
+    "BETA_LAUNCH_OF_BRIDGEAFRICA":"LANCEMENT BÊTA DE BRIDGEAFRICA"
    
 
 }

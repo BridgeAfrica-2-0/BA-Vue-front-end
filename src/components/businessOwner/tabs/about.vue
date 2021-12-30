@@ -944,7 +944,7 @@ export default {
             filterId: this.business_about_input.filter[0].filter_id,
             keywords: this.stringKeyword(this.business_about_input.keywords),
             primary_phone: this.business_about_input.phone1,
-            secondary_phone :this.business_about_input.secondary_phone,
+            secondary_phone :this.business_about_input.phone2,
             website: this.business_about_input.website,
             email: this.business_about_input.email,
             country: this.business_about_input.country[0].country_id,

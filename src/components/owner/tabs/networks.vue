@@ -1010,6 +1010,13 @@ export default {
 
     // delete a network
     deleteNetwork(network) {
+      let loader = this.$loading.show({
+        container: this.fullPage ? null : this.$refs.preview,
+        canCancel: true,
+        onCancel: this.onCancel,
+        color: "#e75c18",
+      });
+
       console.log(this.textReason);
       let fd = new FormData();
       fd.append("reason", this.textReason);
@@ -1018,6 +1025,7 @@ export default {
         .then((res) => {
           console.log(res);
           this.getNetworks();
+          loader.hide();
           this.flashMessage.show({
             status: "success",
             message: "Operation was successful !!",
@@ -1025,6 +1033,7 @@ export default {
         })
         .catch((err) => {
           this.loader = false;
+          loader.hide();
           this.flashMessage.show({
             status: "error",
             message: "Something wen't wrong !!",

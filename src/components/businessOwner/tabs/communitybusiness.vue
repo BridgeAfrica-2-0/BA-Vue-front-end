@@ -61,6 +61,8 @@
                       v-b-tooltip.hover
                       title="Block This Business"
                       variant="danger"
+                      @click="$emit('BlockUser', item.id)"
+                      style="cursor: pointer"
                     ></b-icon>
                   </p>
                 </div>

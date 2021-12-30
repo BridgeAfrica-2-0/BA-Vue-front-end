@@ -46,6 +46,8 @@
                   v-b-tooltip.hover
                   title="Block This Network"
                   variant="danger"
+                  @click="$emit('BlockUser', item.id)"
+                  style="cursor: pointer"
                 ></b-icon>
               </p>
             </b-col>

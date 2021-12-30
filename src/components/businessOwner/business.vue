@@ -18,9 +18,7 @@
               <b-tab :title="$t('businessowner.Media')"
                 ><Media type="business" :showCoverAlbum="showCoverAlbum" :key="key"/></b-tab>
               <b-tab :title="$t('businessowner.Market')"><MarketPlace /></b-tab>
-              <b-tab :title="$t('businessowner.Community')"
-                ><Followers
-              /></b-tab>
+              <b-tab :title="$t('businessowner.Community')"><Followers/></b-tab>
             </b-tabs>
           </b-col>
         </b-row>

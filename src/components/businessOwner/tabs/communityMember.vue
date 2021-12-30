@@ -26,8 +26,8 @@
                             xl="12"
                             class="mt-lg-2"
                           >
-                            <div class="mt-2 mt-lg-0 mt-xl-0 username">
-                             <router-link :to="{name: 'ProfileFollower', params: {id:item.id}}">
+                            <div class="mt-3 mt-lg-0 mt-xl-0 username">
+                             <router-link :to="{name: 'Follower', params: {id:item.id}}">
                               <strong class="title"> {{ item.name }}</strong>
                             </router-link>
                             </div>

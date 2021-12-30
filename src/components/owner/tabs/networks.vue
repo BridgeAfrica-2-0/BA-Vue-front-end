@@ -575,11 +575,7 @@
           ></b-form-textarea>
         </p>
         <b-row>
-          <b-col
-            ><b-button class="mt-3" variant="primary" type="submit" block
-              >Delete</b-button
-            ></b-col
-          >
+          <b-col><b-button class="mt-3" variant="primary" type="submit" @click="$bvModal.hide('deleteBusinessModal2')" block>Delete</b-button></b-col>
         </b-row>
       </b-form>
     </b-modal>

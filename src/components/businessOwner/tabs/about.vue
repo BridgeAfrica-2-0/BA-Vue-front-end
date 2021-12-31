@@ -16,6 +16,7 @@
         
          
           <b-col>
+
             
             <div
                 v-if="showPen != 'BusinessFollower'"

@@ -32,13 +32,6 @@ Vue.use('vue-bootstrap-typeahead', VueBootstrapTypeahead)
 import plugin from './http';
 Vue.use(plugin);
 
-import VueMeta from 'vue-meta'
-Vue.use(VueMeta)
-
-import VueClipboard from 'vue-clipboard2'
-
-Vue.use(VueClipboard)
-
 Vue.use(require('vue-moment'));
 
 IconifyIcon.addIcon('home', homeIconData);
@@ -218,10 +211,11 @@ new Vue({
             },
         );
 
-        axios.interceptors.request.use(function (config) {
+        axios.interceptors.request.use(function(config) {
             if (user != null) {
                 config.headers.Authorization = `Bearer ${user.accessToken}`;
             }
+            console.log("locale lang:", i18n.fallbackLocale);
 
             config.headers.common['Language'] = lang;
             // config.headers.common['Language'] = i18n.fallbackLocale;

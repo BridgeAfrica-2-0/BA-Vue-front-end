@@ -471,6 +471,14 @@ export default {
     stringArray(words){
         let keyword = '';
         words.map(item =>{
+          keyword+= item.subcategory_id+','
+        })
+
+        return keyword.substring(0, keyword.length-1);
+    },
+    stringArray1(words){
+        let keyword = '';
+        words.map(item =>{
           keyword+= item.id+','
         })
 
@@ -578,7 +586,7 @@ export default {
 
     UpdateBusiness() {
       let formData2 = new FormData();
-    console.log("----ttt",this.select_filterss)
+    console.log("----ttt",this.select_filterss, "----ggg ", this.filterselectvalue)
       formData2.append("region", this.form.region);
       formData2.append("city", this.form.city);
       formData2.append("country", this.form.country);
@@ -591,7 +599,7 @@ export default {
       formData2.append("neighbor", this.form.neighbor);
 
       formData2.append("name", this.form.name);
-      formData2.append("categoryId",this.stringArray(this.multiselecvalue) );
+      formData2.append("categoryId",this.stringArray1(this.multiselecvalue) );
       formData2.append("subCategoryId",this.stringArray(this.filterselectvalue)) ;
        formData2.append("filterId",this.ArrayString(this.select_filterss)) ;
       formData2.append("keywords", this.form.keywords);

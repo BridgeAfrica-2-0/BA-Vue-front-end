@@ -13,12 +13,13 @@
           label-class="font-weight-bold pt-0 username"
           class="mb-0"
         >
-          <country-select
-            v-model="country"
-            :country="country"
-            topCountry="US"
+          <b-form-select
+            v-model="PaymentForm.country"
+            :options="countries"
+            value-field="id"
+            text-field="name"
             class="form-control text"
-          />
+          ></b-form-select>
         </b-form-group>
       </b-container>
     </div>
@@ -85,7 +86,7 @@
             </div>
             <div class="operator-select-box ml-md-2">
               <b-form-radio
-                v-model="operator"
+                v-model="PaymentForm.operator"
                 name="operator"
                 value="EXPRESS"
                 class="operator-select"
@@ -124,7 +125,7 @@
         <div class="row">
           <div class="col-10 col-sm-9 col-md-8">
             <b-form-input
-              placeholder="237 6XX XXX XXX"
+              :placeholder="PaymentForm.phone ? PaymentForm.phone : '237 6XX XXX XXX'"
               id="number"
               v-model="PaymentForm.phone"
               type="tel"
@@ -162,7 +163,8 @@ export default {
       PaymentForm: {
         subscribe: "type",
         phone: "",
-        operator: ""
+        operator: "",
+        country: ""
       },
 
       show: false,
@@ -172,7 +174,10 @@ export default {
   computed: {
     defaultPayment() {
       return this.$store.state.profileSettingsEdit.defaultPayment;
-    }
+    },
+    countries() {
+      return this.$store.state.auth.country;
+    },
   },
 
   mounted(){
@@ -184,6 +189,18 @@ export default {
   methods: {
     showRewiew() {
       this.$emit("showreview");
+    },
+
+    Country() {
+      this.$store
+        .dispatch("auth/country")
+        .then(() => {
+          console.log(this.countries);
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
     },
 
     requestPayment() {
@@ -200,7 +217,9 @@ export default {
         path: `payment-method`
         })
       .then(() => {
-        this.PaymentForm.operator = this.defaultPayment.payement_method;
+        console.log(this.defaultPayment);
+        this.PaymentForm.operator = this.defaultPayment.payment_method;
+        this.PaymentForm.phone = this.defaultPayment.phone;
         console.log('ohh yeah');
       })
       .catch(err => {

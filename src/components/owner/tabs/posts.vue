@@ -21,7 +21,7 @@
               ></b-icon>
             </span>
           </span>
-          <!-- User Post Intro-->  
+          <!-- User Post Intro-->
           <b-card-text class="text-left username intro-head">
             <p>
               <b-icon
@@ -75,7 +75,7 @@
                 variant="primary"
               ></b-icon>
               {{ $t("profileowner.Current_City") }} :
-              <span class="text"> 
+              <span class="text">
                 {{ info.user.city }}
               </span>
             </p>

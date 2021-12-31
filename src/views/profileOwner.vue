@@ -21,7 +21,7 @@
             </b-tab>
 
             <b-tab :title="$t('profileowner.Community')" href="#community" class="m-0 p-0">
-              <Following />
+              <following />
             </b-tab>
           </b-tabs>
         </b-col>

@@ -8,87 +8,95 @@
       </p>
     </b-container>
 
-    <div v-if="blockusers != 0 || blockbusinesses != 0 || blocknetworks != 0">
-      <b-container v-if="blockusers != 0" class="bv-example-row">
-        <b-list-group v-for="blockuser in blockusers" :key="blockuser.id">
-          <b-skeleton-wrapper :loading="loading">
-            <template #loading>
-              <b-card>
-                <b-skeleton type="avatar"></b-skeleton>
-                <b-skeleton width="55%"></b-skeleton>
-                <b-skeleton width="70%"></b-skeleton>
-              </b-card>
-            </template>
-            <b-list class="d-flex align-items-center m-list">
-              <b-avatar
-                variant="primary"
-                :text="blockuser.name.charAt(0)"
-                :src="blockuser.profile_picture"
-                class="mr-3"
-                size="4em"
-              ></b-avatar>
-              <span class="mr-auto">{{blockuser.name}}</span>
-              <span class="mr-auto" @click="UnblockBlockUser(blockuser, 'user')"><b-link href="#">{{ $t('businessowner.Unblock') }}</b-link></span>
-            </b-list>
-          </b-skeleton-wrapper>
-        </b-list-group>
-      </b-container>
-
-      <b-container v-if="blockbusinesses != 0" class="bv-example-row">
-        <b-list-group v-for="blockbusines in blockbusinesses" :key="blockbusines.id">
-          <b-skeleton-wrapper :loading="loading">
-            <template #loading>
-              <b-card>
-                <b-skeleton type="avatar"></b-skeleton>
-                <b-skeleton width="55%"></b-skeleton>
-                <b-skeleton width="70%"></b-skeleton>
-              </b-card>
-            </template>
-            <b-list class="d-flex align-items-center m-list">
-              <b-avatar
-                variant="primary"
-                :text="blockbusines.name.charAt(0)"
-                :src="blockbusines.profile_picture"
-                class="mr-3"
-                size="4em"
-              ></b-avatar>
-              <span class="mr-auto">{{blockbusines.name}}</span>
-              <span class="mr-auto" @click="UnblockBlockUser(blockbusines, 'business')"><b-link href="#">{{ $t('businessowner.Unblock') }}</b-link></span>
-            </b-list>
-          </b-skeleton-wrapper>
-        </b-list-group>
-      </b-container>
-
-      <b-container v-if="blocknetworks != 0" class="bv-example-row">
-        <b-list-group v-for="blocknet in blocknetworks" :key="blocknet.id">
-          <b-skeleton-wrapper :loading="loading">
-            <template #loading>
-              <b-card>
-                <b-skeleton type="avatar"></b-skeleton>
-                <b-skeleton width="55%"></b-skeleton>
-                <b-skeleton width="70%"></b-skeleton>
-              </b-card>
-            </template>
-            <b-list class="d-flex align-items-center m-list">
-              <b-avatar
-                variant="primary"
-                :text="blocknet.name.charAt(0)"
-                :src="blocknet.profile_picture"
-                class="mr-3"
-                size="4em"
-              ></b-avatar>
-              <span class="mr-auto">{{blocknet.name}}</span>
-              <span class="mr-auto" @click="UnblockBlockUser(blocknet, 'network')"><b-link href="#">{{ $t('businessowner.Unblock') }}</b-link></span>
-            </b-list>
-          </b-skeleton-wrapper>
-        </b-list-group>
-      </b-container>
-    </div>
-    <div v-else>
+    <b-container v-if="blockusers != 0" class="bv-example-row">
+      <b-list-group v-for="blockuser in blockusers" :key="blockuser.id">
+        <b-skeleton-wrapper :loading="loading">
+          <template #loading>
+            <b-card>
+              <b-skeleton type="avatar"></b-skeleton>
+              <b-skeleton width="55%"></b-skeleton>
+              <b-skeleton width="70%"></b-skeleton>
+            </b-card>
+          </template>
+          <b-list class="d-flex align-items-center m-list">
+            <b-avatar
+              variant="primary"
+              :text="blockuser.name.charAt(0)"
+              :src="blockuser.profile_picture"
+              class="mr-3"
+              size="4em"
+            ></b-avatar>
+            <span class="mr-auto">{{blockuser.name}}</span>
+            <span class="mr-auto" @click="UnblockBlockUser(blockuser, 'user')"><b-link href="#">{{ $t('businessowner.Unblock') }}</b-link></span>
+          </b-list>
+        </b-skeleton-wrapper>
+      </b-list-group>
+    </b-container>
+    <b-container v-else>
       <b-card bg-variant="white" text-variant="black" class="text-center">
         <b-card-text>{{ $t('businessowner.No_Blocked_User_Available') }}.</b-card-text>
       </b-card>
-    </div>
+    </b-container>
+
+    <b-container v-if="blockbusinesses != 0" class="bv-example-row">
+      <b-list-group v-for="blockbusines in blockbusinesses" :key="blockbusines.id">
+        <b-skeleton-wrapper :loading="loading">
+          <template #loading>
+            <b-card>
+              <b-skeleton type="avatar"></b-skeleton>
+              <b-skeleton width="55%"></b-skeleton>
+              <b-skeleton width="70%"></b-skeleton>
+            </b-card>
+          </template>
+          <b-list class="d-flex align-items-center m-list">
+            <b-avatar
+              variant="primary"
+              :text="blockbusines.name.charAt(0)"
+              :src="blockbusines.profile_picture"
+              class="mr-3"
+              size="4em"
+            ></b-avatar>
+            <span class="mr-auto">{{blockbusines.name}}</span>
+            <span class="mr-auto" @click="UnblockBlockUser(blockbusines, 'business')"><b-link href="#">{{ $t('businessowner.Unblock') }}</b-link></span>
+          </b-list>
+        </b-skeleton-wrapper>
+      </b-list-group>
+    </b-container>
+    <b-container v-else>
+      <b-card bg-variant="white" text-variant="black" class="text-center">
+        <b-card-text>No Blocked Business Available.</b-card-text>
+      </b-card>
+    </b-container>
+
+    <b-container v-if="blocknetworks != 0" class="bv-example-row">
+      <b-list-group v-for="blocknet in blocknetworks" :key="blocknet.id">
+        <b-skeleton-wrapper :loading="loading">
+          <template #loading>
+            <b-card>
+              <b-skeleton type="avatar"></b-skeleton>
+              <b-skeleton width="55%"></b-skeleton>
+              <b-skeleton width="70%"></b-skeleton>
+            </b-card>
+          </template>
+          <b-list class="d-flex align-items-center m-list">
+            <b-avatar
+              variant="primary"
+              :text="blocknet.name.charAt(0)"
+              :src="blocknet.profile_picture"
+              class="mr-3"
+              size="4em"
+            ></b-avatar>
+            <span class="mr-auto">{{blocknet.name}}</span>
+            <span class="mr-auto" @click="UnblockBlockUser(blocknet, 'network')"><b-link href="#">{{ $t('businessowner.Unblock') }}</b-link></span>
+          </b-list>
+        </b-skeleton-wrapper>
+      </b-list-group>
+    </b-container>
+    <b-container v-else>
+      <b-card bg-variant="white" text-variant="black" class="text-center">
+        <b-card-text>No Blocked Network Available.</b-card-text>
+      </b-card>
+    </b-container>
 
     
 

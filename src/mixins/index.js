@@ -577,83 +577,35 @@ export const Redis = {
   }
 }
 
-
-export const defaultCoverImage = {
-
-  data: () => ({
-    limit: 1117,
-    currentAuthType: null,
-    strategy: null,
-    isMobile: false
-  }),
+export const FirebaseNotification = {
+  methods: {
+    notified() {
+      // try {
+      //   firebase
+      //     .messaging()
+      //     .requestPermission()
+      //     .then(() => {
+      //       console.log('Notification permission granted');
+      //       return firebase
+      //         .messaging()
+      //         .getToken()
+      //         .then((token) => {
+      //           console.info(token);
+      //           // this.$repository.post.SendToken(token)
+      //           return true;
+      //         })
+      //         .then(() => this.receiveMessage())
+      //         .catch((error) => console.error(error));
+      //     })
+      //     .catch((error) => console.error(error));
+      // } catch (error) {
+      //   console.log(error);
+      // }
+    }
+  },
 
   created() {
-    this.strategy = {
-      mobile:{
-        
-        business: () =>  {
-          return "fr" == this.$i18n.locale
-            ? ['/covers/business mobile FR.png']
-            : ['/covers/business mobile.png']
-        },
-        
-        profile: () => {
-          return "fr" == this.$i18n.locale
-          ? ['/covers/profile mobile FR.png']
-          : ['/covers/profile mobile.png']
-        }
-
-      },
-
-      desktop:{
-        
-        business: () =>  {
-          return "fr" == this.$i18n.locale
-            ? ['/covers/business FR.png']
-            : ['/covers/business.png']
-        },
-        
-        profile: () => {
-          return "fr" == this.$i18n.locale
-          ? ['/covers/profile FR.png']
-          : ['/covers/profile.png']
-        }
-      }
-    }
-
-    window.addEventListener("resize", this.onChangeSize);
-  },
-
-  destroyed() {
-    window.removeEventListener("resize", this.onChangeSize);
-  },
-
-  watch: {
-    "$i18n.locale": function(){
-
-    }
-  },
-
-  computed:{
-    getCustomCover(){
-      try{
-        console.log(this.strategy[this.isMobile ? "mobile" : "desktop"][this.currentAuthType]())
-        return this.strategy[this.isMobile ? "mobile" : "desktop"][this.currentAuthType]()
-      }catch(error){
-        console.log(error)
-      }  
-    }
-  },
-  
-  methods: {
-    onChangeSize(e) {
-      const newWidth = document.documentElement.clientWidth;
-      this.updateStatus(newWidth)
-    },
-
-    updateStatus(width){
-      this.isMobile = (width <= this.limit) ? true : false
-    },
-
+    console.log("call laravel firebase")
+    this.notified()
   }
 }

@@ -69,6 +69,9 @@
           </div>
         </b-tab>
 
+
+
+
           <b-tab>
           <template slot="title">
             {{ $t('profileowner.Network') }} <span class="spa-color">  {{ nFormatter(total.total_network)}}</span>
@@ -94,13 +97,16 @@
             </b-tabs>
           </div>
         </b-tab>
+
+
+
+
       </b-tabs>
     </div>
   </div>
 </template>
 
 <script>
-
 	import Business from "@/components/owner/tabs/business";
 	import People from "@/components/owner/tabs/people";
 	import Network from "@/components/owner/tabs/network";

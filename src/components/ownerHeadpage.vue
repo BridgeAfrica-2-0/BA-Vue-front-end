@@ -8,16 +8,17 @@
           alt="Cover Image"
         />
       </div>
+
       <div class="container-fluid p-63">
         <b-row class="mt-md-2 text-left">
           <b-col cols="12" md="12" class="m-0 p-0 text-left put-top">
             <b-avatar
-              :src="auth.profile_picture"
+              :src="info.user.profile_picture ? info.user.profile_picture : ''"
               class="avat text-center"
               badge-variant="primary"
               badge-offset="10px"
             ></b-avatar>
-            
+
             <b-icon
               icon="camera-fill"
               class="avatar-header-icon btn cursor-pointer size"
@@ -30,7 +31,10 @@
                   <b>{{ info.user.name }}</b>
                 </div>
 
-                <span class="duration float-left"> {{ nFormatter(total.total_community) }} {{ $t('profileowner.Community') }} </span>
+                <span class="duration float-left">
+                  {{ nFormatter(total.total_community) }}
+                  {{ $t("profileowner.Community") }}
+                </span>
               </h6>
             </span>
 
@@ -71,8 +75,12 @@
                       class="d-none d-md-inline edit-btn"
                       v-b-modal.modal-upp
                     >
-                      <fas-icon class="mr-2" :icon="['fas', 'pencil-alt']" size="lg" />
-                      {{ $t('profileowner.Edit') }}
+                      <fas-icon
+                        class="mr-2"
+                        :icon="['fas', 'pencil-alt']"
+                        size="lg"
+                      />
+                      {{ $t("profileowner.Edit") }}
                     </b-button>
 
                     <b-dropdown
@@ -86,17 +94,30 @@
                         <b-icon-three-dots></b-icon-three-dots>
                       </template>
 
-                      <b-dropdown-item @click="selectCover"> {{ $t('profileowner.Change_Cover') }}</b-dropdown-item>
-                      <b-dropdown-item @click="RemoveCover"> {{ $t('profileowner.Remove_Cover') }} </b-dropdown-item>
-                      <b-dropdown-item @click="RemoveProfile"> {{ $t('profileowner.Remove_Profile') }} </b-dropdown-item>
+                      <b-dropdown-item @click="selectCover">
+                        {{ $t("profileowner.Change_Cover") }}</b-dropdown-item
+                      >
+                      <b-dropdown-item @click="RemoveCover">
+                        {{ $t("profileowner.Remove_Cover") }}
+                      </b-dropdown-item>
+                      <b-dropdown-item @click="RemoveProfile">
+                        {{ $t("profileowner.Remove_Profile") }}
+                      </b-dropdown-item>
                       <!--<b-dropdown-item>Invite Friends On Bridge Africa</b-dropdown-item>-->
-                      <b-dropdown-item @click="viewAs" >{{ $t('profileowner.View_As') }}</b-dropdown-item>
+                      <b-dropdown-item @click="viewAs">{{
+                        $t("profileowner.View_As")
+                      }}</b-dropdown-item>
                     </b-dropdown>
                   </span>
                 </div>
               </div>
             </div>
-            <b-modal id="logomodal" ref="logomodal" @ok="submitLogo" :title="$t('profileowner.Upload_Your_Logo')">
+            <b-modal
+              id="logomodal"
+              ref="logomodal"
+              @ok="submitLogo"
+              :title="$t('profileowner.Upload_Your_Logo')"
+            >
               <div class="w3-container">
                 <div id="preview">
                   <img :src="img_url" />
@@ -110,7 +131,7 @@
               ref="coverphotoCrop"
               ok-title="Crop and Save"
               @ok="submitCroppedCover"
-              :title="$t('profileowner.Crop_Cover_Photo')" 
+              :title="$t('profileowner.Crop_Cover_Photo')"
             >
               <div class="w3-container">
                 <div id="preview">
@@ -125,7 +146,11 @@
               </div>
             </b-modal>
 
-            <b-modal id="modal-upp" ref="modal" :title="$t('profileowner.Upload_Cover_Picture')">
+            <b-modal
+              id="modal-upp"
+              ref="modal"
+              :title="$t('profileowner.Upload_Cover_Picture')"
+            >
               <div class="w3-container">
                 <div class="row pb3">
                   <div
@@ -149,7 +174,7 @@
                           class=""
                         ></path>
                       </svg>
-                      <h4>{{ $t('profileowner.Upload_a_New_picture') }} </h4>
+                      <h4>{{ $t("profileowner.Upload_a_New_picture") }}</h4>
                     </h1>
                   </div>
                   <div class="col-sm-6 text-center">
@@ -171,14 +196,19 @@
                         ></path>
                       </svg>
                     </h1>
-                    <h4>{{ $t('profileowner.Edit_Your_New_Picture') }} </h4>
+                    <h4>{{ $t("profileowner.Edit_Your_New_Picture") }}</h4>
                   </div>
                 </div>
               </div>
             </b-modal>
 
             <!-- second modal box  to edit the big cover photo -->
-            <b-modal id="coverphoto" ref="coverphoto" @ok="submitCover" :title="$t('profileowner.Upload_Cover_Photo')">
+            <b-modal
+              id="coverphoto"
+              ref="coverphoto"
+              @ok="submitCover"
+              :title="$t('profileowner.Upload_Cover_Photo')"
+            >
               <div class="w3-container">
                 <div id="preview">
                   <img :src="img_url" />
@@ -193,14 +223,12 @@
 </template>
 
 <script>
-
 import VueCropper from "vue-cropperjs";
 import "cropperjs/dist/cropper.css";
 
+import { defaultCoverImage } from "@/mixins";
 
-import {defaultCoverImage} from '@/mixins';
-
-import { mapMutations, mapGetters } from 'vuex'
+import { mapMutations, mapGetters } from "vuex";
 
 export default {
   name: "headPageOwner",
@@ -209,8 +237,8 @@ export default {
     VueCropper,
   },
 
-  created(){
-    this.currentAuthType = 'profile'
+  created() {
+    this.currentAuthType = "profile";
   },
 
   data() {
@@ -247,10 +275,6 @@ export default {
   },
 
   methods: {
-    ...mapMutations({
-      addCoverPicture: 'auth/addCoverPicture'
-    }),
-
     nFormatter(num) {
       if (num >= 1000000000) {
         return (num / 1000000000).toFixed(1).replace(/\.0$/, "") + "G";
@@ -439,8 +463,8 @@ export default {
           console.log(response);
           this.$store
             .dispatch("profile/loadUserPostIntro", null)
-            .then(() => {
-              this.addCoverPicture(null)
+            .then((response) => {
+              console.log(response);
               this.flashMessage.show({
                 status: "success",
                 message: this.$t("profileowner.Profile_removed_successfully"),
@@ -591,11 +615,6 @@ export default {
   },
 
   computed: {
-
-    ...mapGetters({
-      auth: 'auth/profilConnected'
-    }),
-
     total() {
       return this.$store.state.profile.Tcommunity;
     },
@@ -606,11 +625,10 @@ export default {
   },
 
   watch: {
-    "$state.state.profile.profileIntro": function(newInfo){
-      console.log(newInfo.user.cover_picture)
-      this.addCoverPicture(newInfo.user.cover_picture)
-    }
-  }
+    "$state.state.profile.profileIntro": function (newInfo) {
+      this.addCoverPicture(newInfo.user.cover_picture);
+    },
+  },
 };
 </script>
 

@@ -1402,7 +1402,7 @@ export default {
               this.flashMessage.show({
                 status: 'error',
 
-                message: 'Unable to Create Your Business',
+                message: this.$t('general.Unable_to_Create_Your_Business'),
                 blockClass: 'custom-block-class',
               });
               console.log({ err: err });

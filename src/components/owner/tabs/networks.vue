@@ -545,7 +545,7 @@
           ></b-form-textarea>
         </p>
         <b-row>
-          <b-col><b-button class="mt-3" variant="primary" type="submit" block>Delete</b-button></b-col>
+          <b-col><b-button class="mt-3" variant="primary" type="submit" @click="$bvModal.hide('deleteBusinessModal2')" block>Delete</b-button></b-col>
         </b-row>
       </b-form>
     </b-modal>
@@ -963,11 +963,13 @@ export default {
             this.flashMessage.show({
               status: "error",
 
-              message: "Unable to Create Your Network",
-              blockClass: "custom-block-class",
-            });
-            console.log({ err: err });
-          }
+
+                message: this.$t('general.Unable_to_Create_Your_Network'),
+                blockClass: "custom-block-class",
+              });
+              console.log({ err: err });
+            }
+
           loader.hide();
           setTimeout(() => {
             this.success.state = false;

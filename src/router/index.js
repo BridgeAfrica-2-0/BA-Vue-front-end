@@ -283,7 +283,6 @@ const routes = [
     name: "memberNetwork",
     component: memberNetwork,
   },
-
   {
     path: "/network_follower/:id?",
     name: "Membar Network Follower",
@@ -295,13 +294,6 @@ const routes = [
     path: "/network_member/:id?",
     name: "memberNetwork",
     component: memberNetwork,
-  },
-
-  {
-    path: "/network_follower/:id?",
-    name: "Membar Network Follower",
-    component: memberNetworkFollower,
-
   },
 
   {

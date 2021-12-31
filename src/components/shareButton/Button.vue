@@ -187,7 +187,7 @@
 
       <b-dropdown-item
         class="d-flex py-2 cursor-pointer"
-        id="sharing-community"
+        :id="`sharing-community-${uuid}`"
         data-toggle="popover"
         role="button"
         data-original-title=""
@@ -206,10 +206,10 @@
         </div>
       </b-dropdown-item>
 
-      <b-popover target="sharing-community" triggers="click">
+      <b-popover :target="`sharing-community-${uuid}`" triggers="hover focus">
         <div class="popover-body">
           <div
-            @mousedown="open('modal-1')"
+            @mousedown="open('modal-1-'+uuid)"
             class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer"
           >
             <span class="text-ored">
@@ -223,6 +223,7 @@
           <div
             v-if="'network' !== type"
             class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer"
+            @mousedown="open(`modal-2-${uuid}`)"
           >
             <span class="text-ored">
               <b-avatar
@@ -240,7 +241,7 @@
 
           <div
             v-if="'business' !== type"
-            @mousedown="open(`modal-5-${uuid}`)"
+            @mousedown="open(`modal-3-${uuid}`)"
             class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer"
           >
             <span class="text-ored">
@@ -445,54 +446,25 @@ export default {
     }),
 
     isYourOwnPost() {
-      const isItOwnerPage =
-        this.$route.name == "BusinessOwner" ||
-        this.$route.name == "profile_owner" ||
-        this.$route.name == "NetworkEditors" ||
-        this.$route.name == "networks"
-          ? false
-          : true;
-
       const isYourOwn =
         this.profile.id == this.post.user_id &&
         this.profile.user_type == this.post.poster_type;
 
-      return isItOwnerPage ? (isYourOwn ? false : true) : false;
+      return isYourOwn ? false : true 
     },
 
     isBusiness() {
-      const isItOwnerPage =
-        this.$route.name == "BusinessOwner" ||
-        this.$route.name == "profile_owner"
-          ? true
-          : false;
+      const authUserIsBusiness = this.profile.user_type == "business"
 
-      const isYourOwn =
-        this.profile.id == this.post.user_id &&
-        this.profile.user_type == this.post.poster_type;
-
-      return !isItOwnerPage
-        ? isYourOwn && this.$route.name == "dashboard"
-          ? false
-          : true
-        : true;
+      return authUserIsBusiness ? false : true
+  
     },
 
     isNetwork() {
-      const isItOwnerPage =
-        this.$route.name == "NetworkEditors" || this.$route.name == "networks"
-          ? true
-          : false;
+      const authUserIsNetwork = this.profile.user_type == "network"
 
-      const isYourOwn =
-        this.profile.id == this.post.user_id &&
-        this.profile.user_type == this.post.poster_type;
-
-      return !isItOwnerPage
-        ? isYourOwn && this.$route.name == "dashboard"
-          ? false
-          : true
-        : false;
+      return authUserIsNetwork ? false: true
+  
     },
   },
 

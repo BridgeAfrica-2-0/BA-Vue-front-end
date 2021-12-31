@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="container-fluid" style="padding: 0px">
-      <div class="splide" v-if="business_info.cover.length">
+      <div class="splide" v-if="business_info.cover.length" :key="key">
         <splide :options="options" class="banner r-image">
           <splide-slide v-for="cover in business_info.cover" :key="cover.id">
             <img :src="cover.media_url" class="r-image" />
@@ -217,6 +217,7 @@ export default {
 
   data() {
     return {
+      key:0,
       url: null,
       img_url: null,
       cover_photo: null,
@@ -249,6 +250,7 @@ export default {
   methods: {
     ...mapMutations({
       updatePictureState: "auth/updateProfilePicture",
+      addCoverPicture: "businessOwner/addMultiCoverPicture"
     }),
 
     businessInfo() {
@@ -415,11 +417,18 @@ export default {
   },
 
   watch: {
-    "$store.state.businessOwner.businessInfo": function ({ logo_path }) {
-      this.updatePictureState(logo_path);
+    "$store.state.businessOwner.businessInfo": {
+      deep: true,
+      handler () {
+        
+        this.updatePictureState(this.$store.state.businessOwner.businessInfo.logo_path);
+        this.addCoverPicture(this.$store.state.businessOwner.businessInfo.cover)
+        this.key = this.key+1
+      }
     },
   },
 };
+
 </script>
 
 <style scoped>

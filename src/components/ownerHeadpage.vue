@@ -248,7 +248,8 @@ export default {
 
   methods: {
     ...mapMutations({
-      addCoverPicture: 'auth/addCoverPicture'
+      addCoverPicture: 'auth/addCoverPicture',
+      addProfile: 'auth/updateProfilePicture'
     }),
 
     nFormatter(num) {
@@ -605,11 +606,15 @@ export default {
     },
   },
 
+
   watch: {
-    "$state.state.profile.profileIntro": function(newInfo){
-      console.log(newInfo.user.cover_picture)
-      this.addCoverPicture(newInfo.user.cover_picture)
-    }
+    "$store.state.profile.profileIntro": {
+      deep: true,
+      handler(){
+        this.addCoverPicture(this.$store.state.profile.profileIntro.user.cover_picture)
+        this.addProfile(this.$store.state.profile.profileIntro.user.profile_picture)
+        }
+      }
   }
 };
 </script>

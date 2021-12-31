@@ -236,6 +236,10 @@ export default {
       if (!hasCover)
         state.businessInfo.cover.push(picture)
     },
+
+    addMultiCoverPicture(state, pictures) {
+      state.businessInfo.cover =pictures 
+    },
     
     updateAlbum(state, payload) {
       const newState = state.albums.map(album => (album.id == payload.id) ? Object.assign(album, { name: payload.name }) : album)

@@ -11,9 +11,12 @@
           ></b-avatar>
         </span>
         <div class="pl-2 pl-md-3 pt-md-2">
-          <h5 class="m-0 usernamee">
-            {{ item.user_name }}
-          </h5>
+          <router-link :to="onRedirect">
+            <h5 class="m-0 usernamee">
+              {{ item.user_name }}
+            </h5>
+          </router-link>
+          
           <p class="duration">{{ item.created_at | now }}</p>
         </div>
 
@@ -277,10 +280,34 @@ export default {
     createCommentRequestIsActive: false,
     loadComment: false,
     commentHasLoad: false,
+
+    strategy:null
   }),
 
   created() {
     this.item = this.post;
+
+    this.posterID = this.post.poster_id ? this.post.poster_id : this.post.user_id
+
+    this.strategy = {
+      user: () => {
+        return ("user" == this.profile.user_type && "user" == this.post.poster_type ) && ( this.profile.id == this.posterID) 
+        ? { name: "profile_owner"}
+        : { name: "Follower", params: {id: this.posterID}}
+      },
+
+      business: () => {
+        return ("business" == this.profile.user_type && "business" == this.post.poster_type ) && ( this.profile.id == this.posterID) 
+        ? { name: "BusinessOwner", params: {id: this.posterID}}
+        : { name: "BusinessFollower", params: {id: this.posterID}}
+      },
+
+      network: () => {
+        return ("network" == this.profile.user_type && "business" == this.post.poster_type ) && ( this.profile.id == this.posterID) 
+        ? { name: "networks", params: {id: this.posterID}}
+        : { name: "networks", params: {id: this.posterID}}
+      },
+    }
 
     if (!this.isDisplayInSearch) this.comments = this.post.comments;
   },
@@ -291,6 +318,11 @@ export default {
   },
 
   computed: {
+
+    onRedirect(){
+      return this.strategy[this.post.poster_type]()
+    },
+
     show(){
       return this.$route.name ;
     },

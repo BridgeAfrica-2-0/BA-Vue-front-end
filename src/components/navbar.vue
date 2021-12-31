@@ -106,8 +106,8 @@
               <vue-bootstrap-typeahead
                 v-model="query"
                 :data="neigbourhoods"
-                :minMatchingChars="0"
-                :maxMatches="10"
+                :minMatchingChars=0
+                :maxMatches=10
                 :serializer="(item) => item.name"
                 placeholder="Where"
                 class="search-hh w-44"

@@ -40,7 +40,7 @@
                 </read-more>
                 
                 <b-icon
-                  @click="blackListed"
+                  
                   font-scale="1"
                   icon="exclamation-octagon"
                   v-b-tooltip.hover

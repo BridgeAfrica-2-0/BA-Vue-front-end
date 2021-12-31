@@ -6,7 +6,7 @@
           <div class="d-inline-flex">
             <div class="center-img">
               <splide :options="options" class="r-image">
-                <splide-slide cl>
+                <splide-slide>
                   <img :src="item.picture" class="r-image" />
                 </splide-slide>
               </splide>
@@ -15,7 +15,7 @@
               <p class="textt">
                 <strong class="title">
                   <router-link :to="'business/' + item.id">
-                    {{ item.name }} 
+                  {{ item.name }}
                   </router-link>
                 </strong>
                 <br />
@@ -39,13 +39,14 @@
                 </span>
                 <br />
                 <read-more
-                  more-str="read more"
+                  :more-str="$t('search.read_more')"
                   class="readmore"
                   :text="item.about_business"
                   link="#"
-                  less-str="read less"
+                  :less-str="$t('search.read_less')"
                   :max-chars="75"
                 >
+                 
                 </read-more>
               </p>
             </div>
@@ -72,7 +73,6 @@
                   :id="'followbtn' + item.id"
                   :class="item.is_follow !== 0 && 'u-btn'"
                   variant="primary"
-                 
                 >
                   <i
                     class="fas fa-lg btn-icon"
@@ -164,7 +164,6 @@ export default {
         autoplay: true,
         perPage: 1,
         pagination: false,
-
         type: "loop",
         perMove: 1,
       },

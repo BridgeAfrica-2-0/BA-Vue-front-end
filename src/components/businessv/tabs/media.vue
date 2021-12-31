@@ -6,8 +6,8 @@
         Media
       </b>
       <b-tabs content-class="mt-3">
-        <b-tab title="Posts" active><Posts /></b-tab>
-        <b-tab title="Albums"><Album /></b-tab>
+        <b-tab :title="$t('general.Posts')" active><Posts /></b-tab>
+        <b-tab :title="$t('general.Albums')"><Album /></b-tab>
       </b-tabs>
     </b-card>
   </div>

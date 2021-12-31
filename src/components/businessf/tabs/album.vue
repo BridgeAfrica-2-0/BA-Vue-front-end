@@ -116,7 +116,7 @@
                     <label
                       class="col-md-4 control-label pr-0 text-design"
                       for="name"
-                      >14 Items -
+                      >14 {{$t("general.Items")}} -
                     </label>
                     <div class="col-md-5 pl-0 pr-0">
                       <select id="gender" class="form-control w-100">
@@ -218,7 +218,7 @@ export default {
           this.flashMessage.show({
             status: "success",
 
-            message: "Album Deleted",
+            message: this.$t('general.Album_Deleted'),
           });
 
           loader.hide();
@@ -289,7 +289,7 @@ export default {
             this.flashMessage.show({
               status: "error",
 
-              message: "Unable to create your Album",
+              message: this.$t('general.Unable_to_create_your_Album'),
             });
             console.log({ err: err });
 
@@ -338,7 +338,7 @@ export default {
             this.flashMessage.show({
               status: "error",
 
-              message: "Unable to create your Album",
+              message: this.$t('general.Unable_to_create_your_Album'),
             });
             console.log({ err: err });
 

@@ -59,7 +59,7 @@
               ABOUT US
             </a>
             <a href="#" class="color-white d-block font-weight-bold text-center text-md-left">
-              CONTACT US
+              {{ $t('home.CONTACT_US') }}
             </a>
           </p>
         </div>
@@ -127,7 +127,7 @@
             <div class="col-lg-3 col-md-6 footer-links white">
               <h4 class="bridge-header text-left white">{{ $t('home.USEFULL_LINKS') }}</h4>
               <ul class="white">
-                <li class="white"><a href="#">Bridgeafricaventures.com</a></li>
+                <li class="white"><a href="#">bridgeafricaventures.com</a></li>
 
                 <li class="white"><a href="#">{{ $t('home.Home') }}</a></li>
 
@@ -214,7 +214,7 @@ export default {};
 }
 
 .size{
-  height: 80px;
-  width: 300px;
+  /* height: 100px;
+  width: 300px; */
 }
 </style>

@@ -130,7 +130,7 @@
                 tag-variant="primary"
                 :limit="limit"
                 :tag-validator="validator"
-                :placeholder="$t('businessowner.Enter_new_keywords_separated_by_space_comma_or_semicolon')"
+                :placeholder="$t('general.Enter_new_keywords_separated_by_space_comma_or_semicolon')"
                 no-add-on-enter
               ></b-form-tags>
             </b-form-group>
@@ -145,7 +145,7 @@
               label-size="md"
               label-class="font-weight-bold pt-0 username"
               class="mb-0"
-              ><VuePhoneNumberInput v-model="businessInfo.phone" />
+              ><VuePhoneNumberInput default-country-code="CM" v-model="businessInfo.phone"  required/>
             </b-form-group>
           </b-container>
         </div>
@@ -158,7 +158,7 @@
               label-size="md"
               label-class="font-weight-bold pt-0 username"
               class="mb-0"
-              ><VuePhoneNumberInput v-model="businessInfo.secondary_phone" />
+              ><VuePhoneNumberInput default-country-code="CM" v-model="businessInfo.secondary_phone" />
             </b-form-group>
           </b-container>
         </div>

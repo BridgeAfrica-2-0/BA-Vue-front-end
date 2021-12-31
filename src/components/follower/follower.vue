@@ -1,58 +1,57 @@
 <template>
   <div class="main">
-
-    <div class="images imageslg ">
+    <div class="images imageslg">
       <div>
-       
-        
-          <img  :src="info.user.cover_picture" v-if="info.user.cover_picture != null " class="banner" />      
+        <img
+          :src="info.user.cover_picture"
+          v-if="info.user.cover_picture != null"
+          class="banner"
+        />
       </div>
-      <b-row class="mt-2 mb-2  d-none d-lg-block ">
+      <b-row class="mt-2 mb-2 d-none d-lg-block">
         <b-col cols="6" class="avata">
-          <div>     
-            
-
-
-            <b-avatar v-if="info.user.profile_picture !=null "
-               :src="info.user.profile_picture"
-              class=" float-left avatar"
-              badge-variant="primary"
-              badge-offset="10px"
-              variant="white"
-            >
-            </b-avatar>
-            
-
-             <b-avatar v-if="info.user.profile_picture ==null "
-                :src="info.user.profile_picture"
-              class=" float-left avatar"
+          <div>
+            <b-avatar
+              v-if="info.user.profile_picture != null"
+              :src="info.user.profile_picture"
+              class="float-left avatar"
               badge-variant="primary"
               badge-offset="10px"
               variant="white"
             >
             </b-avatar>
 
-
+            <b-avatar
+              v-if="info.user.profile_picture == null"
+              :src="info.user.profile_picture"
+              class="float-left avatar"
+              badge-variant="primary"
+              badge-offset="10px"
+              variant="white"
+            >
+            </b-avatar>
           </div>
           <div class="d-inline-block ml-4 float-left mt-4">
             <b-link>
-              <h5 class="font-weight-bolder name"> {{info.user.name}} </h5>
+              <h5 class="font-weight-bolder name">{{ info.user.name }}</h5>
             </b-link>
             <br />
 
-            <span class="k15 duration"> {{info.user.community}} {{ $t('profilefollower.Community') }} </span>
+            <span class="k15 duration">
+              {{ info.user.community }} {{ $t("profilefollower.Community") }}
+            </span>
           </div>
         </b-col>
         <b-col cols="12">
           <div class="btns">
             <b-button class="community size mr-2 ml-1">
-              <i class="fas fa-user-plus  fa-lg btn-icon m-fa mr-2 "></i>
-              <span class="txt-btn ">{{ $t('profilefollower.Community') }}</span></b-button
+              <i class="fas fa-user-plus fa-lg btn-icon m-fa mr-2"></i>
+              <span class="txt-btn">{{
+                $t("profilefollower.Community")
+              }}</span></b-button
             >
-            <b-button class="message size mr-2 ml-1">
-              <i class="fas fa-envelope fa-lg btn-icon "></i>
-              <span class="txt-btn ">{{ $t('profilefollower.Message') }}</span></b-button
-            >
+
+            <BtnCtaMessage :element="info.user" type="people" :header="true" />
 
             <b-dropdown
               size="sm"
@@ -66,7 +65,7 @@
               </template>
               <b-dropdown-item>
                 <b-icon icon="flag" variant="primary"></b-icon>
-                {{ $t('profilefollower.Report') }}</b-dropdown-item
+                {{ $t("profilefollower.Report") }}</b-dropdown-item
               >
             </b-dropdown>
           </div>
@@ -79,57 +78,40 @@
         <b-col>
           <div>
             <b-avatar
-               :src="info.user.profile_picture"
-              class=" float-left avatar"
+              :src="info.user.profile_picture"
+              class="float-left avatar"
               badge-variant="primary"
               badge-offset="10px"
             >
             </b-avatar>
           </div>
           <div class="d-inline-block mt-4 ml-4 float-left texts">
-            <h6 class="font-weight-bolder name ">  {{info.user.name}}  </h6>
+            <h6 class="font-weight-bolder name">{{ info.user.name }}</h6>
             <p class="details">
-              {{info.user.community}} {{ $t('profilefollower.Community') }}
+              {{ info.user.community }} {{ $t("profilefollower.Community") }}
             </p>
           </div>
         </b-col>
         <b-col cols="2">
-         
-
-           <b-dropdown
-        class="ml-1 dropdown"
-        no-caret
-        variant="link"
-        size="sm"
-      >
-        <template #button-content>
-          <b-icon icon="three-dots" aria-hidden="true"></b-icon>
-        </template>
-        <b-dropdown-item>
-          <b-icon icon="flag" variant="primary"></b-icon>
-          {{ $t('profilefollower.Report') }}</b-dropdown-item
-        >
-      </b-dropdown>
-
-
+          <b-dropdown class="ml-1 dropdown" no-caret variant="link" size="sm">
+            <template #button-content>
+              <b-icon icon="three-dots" aria-hidden="true"></b-icon>
+            </template>
+            <b-dropdown-item>
+              <b-icon icon="flag" variant="primary"></b-icon>
+              {{ $t("profilefollower.Report") }}</b-dropdown-item
+            >
+          </b-dropdown>
         </b-col>
       </b-row>
     </div>
     <div class="m-btn mobile mb-2">
-      <b-button class="m-msg size" size="sm">
-        <i class="fas fa-envelope fa-lg btn-icon "></i>
-        <span class="txt-btn">{{ $t('profilefollower.Message') }}</span>
-      </b-button>
-
-     
-
+      <BtnCtaMessage :element="info.user" type="people" :header="true" />
 
       <b-button class="direction ml-1 size" size="sm">
-        <i class="fas fa-user-plus  fa-lg btn-icon "></i>
-        <span class="txt-btn">{{ $t('dashboard.Community') }} </span></b-button
+        <i class="fas fa-user-plus fa-lg btn-icon"></i>
+        <span class="txt-btn">{{ $t("dashboard.Community") }} </span></b-button
       >
-
-  
     </div>
 
     <div class="body p-2">
@@ -138,15 +120,19 @@
           <b-tabs lazy content-class="mt-3" fill pills>
             <b-tab :title="$t('profilefollower.Posts')" active>
               <Post />
-            </b-tab>   
+            </b-tab>
 
-
-            
             <b-tab :title="$t('profilefollower.About')"><About /></b-tab>
-            <b-tab :title="$t('profilefollower.Business')"><Businesses /></b-tab>
+            <b-tab :title="$t('profilefollower.Business')"
+              ><Businesses
+            /></b-tab>
             <b-tab :title="$t('profilefollower.Network')"><Network /></b-tab>
-            <b-tab :title="$t('profilefollower.Media')"><Media type="profile" /></b-tab>
-            <b-tab :title="$t('profilefollower.Community')"><Community /></b-tab>
+            <b-tab :title="$t('profilefollower.Media')"
+              ><Media type="profile" :isEditor="false"
+            /></b-tab>
+            <b-tab :title="$t('profilefollower.Community')"
+              ><Community
+            /></b-tab>
           </b-tabs>
         </b-col>
       </b-row>
@@ -155,25 +141,22 @@
 </template>
 
 <script>
-import Post from '@/components/businessfollower/tabs/posts';
+import Post from "@/components/businessfollower/tabs/posts";
 import About from "@/components/follower/tabs/about";
-import Media from '@/components/businessfollower/tabs/media';
+import Media from "@/components/owner/tabs/media";
 import Community from "@/components/follower/tabs/community";
 import Businesses from "@/components/follower/tabs/businesses";
 import Network from "@/components/follower/tabs/networkk";
 
-import {knowWhoIsConnected} from "@/mixins"
-
-
+import { knowWhoIsConnected } from "@/mixins";
 
 export default {
-   mixins:[knowWhoIsConnected],
+  mixins: [knowWhoIsConnected],
   name: "Home",
   data() {
     return {
-      foll_id: '',  
-     
-    };    
+      foll_id: "",
+    };
   },
 
   components: {
@@ -182,132 +165,76 @@ export default {
     Media,
     Community,
     Businesses,
-    Network
+    Network,
   },
 
-
-// created(){
-
-// //   this.$store
-// //       .dispatch("follower/loadUserPostIntro", this.foll_id)
-// //       .then((response) => {
-       
-// //       })
-// //       .catch((error) => {
-// //         console.log({error:error});
-// //       });
-
-// // },
-
-  mounted(){
-     this.foll_id = this.$route.params.id;
-
-
-
-      
-
- 
-      // this.$store
-      // .dispatch("follower/UcommunityFollower", this.foll_id)
-      // .then((response) => {
-       
-      // })
-      // .catch((error) => {
-      //   console.log({error:error});
-      // });
-
-
-
-      
-      // this.$store
-      // .dispatch("follower/UcommunityFollowing", this.foll_id)
-      // .then((response) => {
-       
-      // })
-      // .catch((error) => {
-      //   console.log({error:error});
-      // });
-
-     
-      this.$store
-      .dispatch("follower/Tcommunity", this.foll_id)
-      .then((response) => {
-       
-      })
+  created() {
+    this.$store
+      .dispatch("follower/loadUserPostIntro", this.foll_id)
+      .then((response) => {})
       .catch((error) => {
-        console.log({error:error});
+        console.log({ error: error });
       });
-  
-   
-      // this.$store
-      // .dispatch("follower/BcommunityFollower", this.foll_id)
-      // .then((response) => {
-       
-      // })
-      // .catch((error) => {
-      //   console.log({error:error});
-      // });
-
-     
-      // this.$store
-      // .dispatch("follower/BcommunityFollowing", this.foll_id)
-      // .then((response) => {
-       
-      // })
-      // .catch((error) => {
-      //   console.log({error:error});
-      // });
-
-
-
-      
-      // this.$store
-      // .dispatch("follower/NcommunityFollower", this.foll_id)
-      // .then((response) => {
-       
-      // })
-      // .catch((error) => {
-      //   console.log({error:error});
-      // });
-
-      
-      // this.$store
-      // .dispatch("follower/NcommunityFollowing", this.foll_id)
-      // .then((response) => {
-       
-      // })
-      // .catch((error) => {
-      //   console.log({error:error});
-      // });
-
-
-
-
-    
-    
-
-
-      
-
-
-
-   
-
-
-},
-
-computed: {
-
-
-     info :function(){
-        return this.$store.getters['follower/getUserPostIntro'];
-      }
-
-
-
   },
 
+  mounted() {
+    this.foll_id = this.$route.params.id;
+    console.log("Info: ", this.info.user);
+    this.$store
+      .dispatch("follower/UcommunityFollower", this.foll_id)
+      .then((response) => {})
+      .catch((error) => {
+        console.log({ error: error });
+      });
 
+    this.$store
+      .dispatch("follower/UcommunityFollowing", this.foll_id)
+      .then((response) => {})
+      .catch((error) => {
+        console.log({ error: error });
+      });
+
+    this.$store
+      .dispatch("follower/Tcommunity", this.foll_id)
+      .then((response) => {})
+      .catch((error) => {
+        console.log({ error: error });
+      });
+
+    this.$store
+      .dispatch("follower/BcommunityFollower", this.foll_id)
+      .then((response) => {})
+      .catch((error) => {
+        console.log({ error: error });
+      });
+
+    this.$store
+      .dispatch("follower/BcommunityFollowing", this.foll_id)
+      .then((response) => {})
+      .catch((error) => {
+        console.log({ error: error });
+      });
+
+    this.$store
+      .dispatch("follower/NcommunityFollower", this.foll_id)
+      .then((response) => {})
+      .catch((error) => {
+        console.log({ error: error });
+      });
+
+    this.$store
+      .dispatch("follower/NcommunityFollowing", this.foll_id)
+      .then((response) => {})
+      .catch((error) => {
+        console.log({ error: error });
+      });
+  },
+
+  computed: {
+    info: function () {
+      return this.$store.getters["follower/getUserPostIntro"];
+    },
+  },
 };
 </script>
 
@@ -320,7 +247,6 @@ computed: {
 
 .btns {
   margin-left: 670px;
- 
 }
 
 .options {
@@ -342,7 +268,6 @@ computed: {
 .images {
   display: grid;
   width: 100%;
-
 }
 .banner {
   height: 426px;
@@ -467,12 +392,10 @@ p,
 }
 
 @media only screen and (min-width: 768px) {
-.imageslg {
- 
-  padding-left: 30px;
-  padding-right: 30px;
-}
-
+  .imageslg {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
 }
 
 @media only screen and (max-width: 991px) {
@@ -568,6 +491,4 @@ p,
     font-size: 12px;
   }
 }
-
-
 </style>

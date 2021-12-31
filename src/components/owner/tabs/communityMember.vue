@@ -8,7 +8,7 @@
               <b-col md="3" cols="4" sm="4" class="my-auto">
                 <b-avatar
                   class="p-avater"
-                  variant="primary"
+                  variant="ligth"
                   :src="item.profile_picture"
                 ></b-avatar>
               </b-col>
@@ -27,7 +27,14 @@
                             class="mt-lg-2"
                           >
                             <div class="mt-3 mt-lg-0 mt-xl-0 username">
-                              <b> {{ item.name }} </b>
+                              <router-link
+                                :to="{
+                                  name: 'Follower',
+                                  params: { id: item.id },
+                                }"
+                              >
+                                <b>{{ item.name }}</b>
+                              </router-link>
                             </div>
                           </b-col>
 
@@ -42,6 +49,23 @@
                               {{ count(item.followers) }}
                               {{ $t("profileowner.Community") }}
                             </h6>
+                          </b-col>
+                          <b-col
+                            @click="$emit('BlockUser', item.id)"
+                            md="6"
+                            lg="12"
+                            cols="6"
+                            xl="12"
+                            class="mt-1 mt-lg-1 mt-xl-2"
+                            style="cursor: pointer"
+                          >
+                            <b-icon
+                              font-scale="1"
+                              icon="exclamation-octagon"
+                              v-b-tooltip.hover
+                              title="Block This User"
+                              variant="danger"
+                            ></b-icon>
                           </b-col>
                         </b-row>
                       </div>

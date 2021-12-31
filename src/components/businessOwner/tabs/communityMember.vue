@@ -27,7 +27,7 @@
                             class="mt-lg-2"
                           >
                             <div class="mt-3 mt-lg-0 mt-xl-0 username">
-                             <router-link :to="{name: 'ProfileFollower', params: {id:item.id}}">
+                             <router-link :to="{name: 'Follower', params: {id:item.id}}">
                               <strong class="title"> {{ item.name }}</strong>
                             </router-link>
                             </div>
@@ -38,9 +38,9 @@
                             lg="12"
                             cols="6"
                             xl="12"
-                            class="mt-3 mt-lg-1 mt-xl-3"
+                            class="mt-2 mt-lg-1 mt-xl-2"
                           >
-                            <h6 class="follower m-15">
+                            <h6 class="follower">
                               {{ count(item.followers) }}
                               {{ $t("businessowner.Community") }}
                             </h6>
@@ -51,9 +51,12 @@
                             lg="12"
                             cols="6"
                             xl="12"
-                            class="mt-3 mt-lg-1 mt-xl-3"
+                            class="mt-2 mt-lg-1 mt-xl-2"
+                            @click="$emit('BlockUser', item.id)"
+                            style="cursor: pointer"
                           >
                               <b-icon
+                                @click="blackListed"
                                 font-scale="1"
                                 icon="exclamation-octagon"
                                 v-b-tooltip.hover
@@ -170,6 +173,22 @@ export default {
   },
 
   methods: {
+
+    blackListed: async function(uuid){
+      const request = await this.$repository.share.blocking({banned_id:uuid, banned_type: 'profile' }, this.$route.params.id)
+
+      if (request.success){
+        const data = this.users.filter(item => item.id != uuid)
+        this.users = data
+
+      }else{
+        this.flashMessage.show({
+          status: "error",
+          message: request.data,
+        });
+      }
+    },
+
     cta(data) {
       console.log(data);
       this.$store.commit("businessChat/setSelectedChat", data);
@@ -590,7 +609,7 @@ f-right {
     text-overflow: ellipsis;
     overflow: hidden;
     width: 100%;
-    height: 1.2em;
+    height: 1.5em;
     white-space: nowrap;
   }
 

@@ -23,7 +23,7 @@
         </splide-slide>
       </splide>
     </div>
-    <router-link to="#media">
+    <router-link to="#media" @click="() => showCoverAlbum=true">
       <b-button class="float-right see-all">
         {{ $t("businessf.See_All") }}
       </b-button>
@@ -56,27 +56,29 @@
             @click="handleFollow"
           >
             <i
-              :class="
-                `fas ${
-                  hasBeFollow ? 'fa-user-minus' : 'fa-user-plus'
-                } fa-lg btn-icon`
-              "
+              :class="`fas ${
+                hasBeFollow ? 'fa-user-minus' : 'fa-user-plus'
+              } fa-lg btn-icon`"
             ></i>
-            <span> {{ $t("businessf.Community") }}</span></b-button
-          >
-          <b-button class="message ml-1 size" size="sm">
-            <i class="fas fa-envelope fa-lg btn-icon"></i>
-            <span>{{ $t("businessf.Message") }}</span></b-button
-          >
+            <span> {{ $t("businessf.Community") }}</span>
+          </b-button>
+
+          <BtnCtaMessage
+            :element="business_info"
+            type="business"
+            :header="true"
+          />
+
           <b-button
-            class="direction ml-1 size"
+            class="direction ml-0 size"
             variant="primary"
             size="sm"
             @click="gotoAbout()"
           >
             <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
-            <span>{{ $t("businessf.Direction") }}</span></b-button
-          >
+            <span>{{ $t("businessf.Direction") }}</span>
+          </b-button>
+
           <b-dropdown
             class="ml-2 dot-btn mt-2 mt-sm-2 mt-md-0"
             no-caret
@@ -104,7 +106,6 @@
             <div class="d-inline-block mt-4 ml-4 float-left texts">
               <h6 class="font-weight-bolder name">{{ business_info.name }}</h6>
               <p class="details">
-                <!-- www.bridgeafrica.com <br /> -->
                 {{ business_info.community }} {{ $t("businessf.Community") }}
               </p>
             </div>
@@ -124,13 +125,14 @@
       </b-row>
     </div>
     <div class="mb-1 m-btn">
-      <b-button class="message size">
+      <!-- <b-button class="message size">
         <i class="fas fa-envelope fa-lg btn-icon"></i>
         <span>{{ $t("businessf.Message") }}</span>
-      </b-button>
+      </b-button> -->
+      <BtnCtaMessage :element="business_info" type="business" :header="true" />
 
       <b-button
-        class="direction ml-1 size"
+        class="direction size"
         variant="primary"
         @click="gotoAbout()"
       >
@@ -156,20 +158,21 @@
       <b-row>
         <b-col cols="12" class="p-0">
           <b-tabs lazy content-class="mt-3 p-0" v-model="currentTab" fill pills>
-            <b-tab :title="$t('businessf.Home')"><HomePage /></b-tab>
-            <b-tab :title="$t('businessf.About')"><About /></b-tab>
-            <b-tab type="business" :title="$t('businessf.Media')"
-              ><Media :type="'business'" :isEditor="false"
+            <b-tab :title="$t('general.Home')"><HomePage /></b-tab>
+            <b-tab :title="$t('general.About')"><About /></b-tab>
+            <b-tab type="business" :title="$t('general.Media')"
+              ><Media :type="'business'" :isEditor="false" :showCoverAlbum="showCoverAlbum"
             /></b-tab>
-            <b-tab :title="$t('businessf.Market')"><MarketPlace /></b-tab>
-            <b-tab :title="$t('businessf.Networks')"><Networks /></b-tab>
-            <b-tab :title="$t('businessf.Community')"><Community /></b-tab>
+            <b-tab :title="$t('general.Market')"><MarketPlace /></b-tab>
+            <b-tab :title="$t('general.Networks')"><Networks /></b-tab>
+            <b-tab :title="$t('general.Community')"><Community /></b-tab>
           </b-tabs>
         </b-col>
       </b-row>
     </div>
   </div>
 </template>
+
 
 <script>
 import HomePage from "../businessf/tabs/businessHome";
@@ -195,6 +198,7 @@ export default {
   data() {
     return {
       hasBeFollow: 0,
+      showCoverAlbum:false,
       url_data: null,
       currentTab: 0,
       tabIndex: null,
@@ -245,27 +249,36 @@ export default {
   },
 
   watch: {
-    "$store.state.businessOwner.businessInfo": function() {
+    "$store.state.businessOwner.businessInfo": function () {
       this.hasBeFollow = this.$store.state.businessOwner.businessInfo.is_follow;
     },
     currentTab: (newVal, oldVal) => {
+      if (2 != newVal)
+        this.showCoverAlbum = false
+
       localStorage.setItem("ba-business-active-tab", newVal);
     },
 
     $route(to, from) {
-      console.log(to.hash);
+      if ("#media" == to.hash)
+        this.showCoverAlbum = true
+
       this.currentTab = this.tabs.findIndex((tab) => tab === to.hash);
     },
   },
 
   mounted() {
     console.log(this.url_data);
+    console.log("business info");
+
+    console.log(this.business_info);
 
     this.businessCommunityTotal();
     this.ownerPost();
   },
   methods: {
     async handleFollow() {
+      console.log(this.business_info)
       // document.getElementById("followbtn").disabled = true;
 
       const uri = !this.hasBeFollow ? `/follow-community` : `/unfollow`;
@@ -447,6 +460,7 @@ p {
 .community:hover {
   background-color: #b39500;
 }
+/* cta comp */
 .message {
   color: #fff !important;
   background-color: #32a400;
@@ -456,6 +470,7 @@ p {
 .message:hover {
   background-color: #006400;
 }
+/* cta comp */
 .direction {
   color: #fff;
   border: none;

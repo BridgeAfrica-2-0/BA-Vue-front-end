@@ -40,11 +40,14 @@
                 </read-more>
                 
                 <b-icon
+                  @click="blackListed"
                   font-scale="1"
                   icon="exclamation-octagon"
                   v-b-tooltip.hover
                   title="Block This Network"
                   variant="danger"
+                  @click="$emit('BlockUser', item.id)"
+                  style="cursor: pointer"
                 ></b-icon>
               </p>
             </b-col>
@@ -150,6 +153,28 @@ export default {
   },
 
   methods: {
+
+    wrapper: () => (this.type == "Follower")
+        ? this.$store.state.businessOwner.NcommunityFollower.network_followers
+        : this.$store.state.profile.NcommunityFollowing.network_following
+    ,
+
+    blackListed: async function(uuid){
+      const request = await this.$repository.share.blocking({banned_id:uuid, banned_type: 'network' }, this.$route.params.id)
+
+      if (request.success){
+        let newData = this.wrapper()
+        const data = newData.filter(item => item.id != uuid)
+
+        newData = data
+
+      }else{
+        this.flashMessage.show({
+          status: "error",
+          message: request.data,
+        });
+      }
+    },
 
     networkJoin: async function(item){
       const status = item.is_follow

@@ -134,8 +134,8 @@
                     </label>
                     <div class="col-md-5 pl-0 pr-0">
                       <select id="gender" class="form-control w-100">
-                        <option>Public</option>
-                        <option>Private</option>
+                        <option>{{ $t('network.Public') }}</option>
+                        <option>{{ $t('network.Private') }}</option>
                       </select>
                     </div>
                   </div>
@@ -245,7 +245,7 @@ export default {
         // loader.hide();
         this.flashMessage.show({
           status: "error",
-          message: "Unable to Created Album"
+          message: this.$t('general.Unable_to_Create_Your_Album')
         });
       });
 		},

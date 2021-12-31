@@ -106,12 +106,12 @@
         <b-row>
           <b-col cols="12">
             <b-tabs content-class="mt-3" fill pills card>
-              <b-tab title="Home"><HomePage /></b-tab>
-              <b-tab title="About"><About /></b-tab>
-              <b-tab title="Media"><Media /></b-tab>
-              <b-tab title="Market"><MarketPlace /></b-tab>
-              <b-tab title="Networks"><Networks /></b-tab>
-              <b-tab title="Community"><Community /></b-tab>
+              <b-tab :title="$t('general.Home')"><HomePage /></b-tab>
+              <b-tab :title="$t('general.About')"><About /></b-tab>
+              <b-tab :title="$t('general.Media')"><Media /></b-tab>
+              <b-tab :title="$t('general.Market')"><MarketPlace /></b-tab>
+              <b-tab :title="$t('general.Networks')"><Networks /></b-tab>
+              <b-tab :title="$t('general.Community')"><Community /></b-tab>
             </b-tabs>
           </b-col>
         </b-row>

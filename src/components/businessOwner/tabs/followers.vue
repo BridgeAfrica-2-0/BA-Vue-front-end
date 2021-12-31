@@ -96,7 +96,7 @@
                 </span>
               </div>
             </b-tab>
-            <b-tab title="Following (1)">
+            <b-tab :title="$t('general.Following') (1)">
               <div class="media border-botmediatom mb-4">
                 <img
                   src="@/assets/img/alima.jpg"
@@ -235,7 +235,7 @@
                 </div>
               </div>
             </b-tab>
-            <b-tab title="Following (1)">
+            <b-tab :title="$t('general.Following') (1)">
               <div class=" row border shadow pt-3 pb-3 pl-0 mb-4">
                 <div class="d-flex col-md-3">
                   <img class="img-fluid" src="@/assets/img/photo2.jpg" />

@@ -17,8 +17,8 @@
                 <div class="d-inline-flex">
                   <div class="center-img">
                     <splide :options="options" class="r-image">
-                      <splide-slide cl>
-                        <img :src="item.picture" class="r-image" />
+                      <splide-slide>
+                        <img :src="item.logo_path" class="r-image" />
                       </splide-slide>
                     </splide>
                   </div>
@@ -26,7 +26,7 @@
                     <p class="ml-3 textt text-left">
                      
                        <router-link :to="({name:'BusinessFollower', params:{id: item.id}})">
-                      <strong class="title over" > {{ item.name }}  </strong> </router-link>   <br />
+                      <strong class="title over" > {{ item.name }}</strong> </router-link>   <br />
 
                       <span v-for="cat in item.category" :key="cat.name">
                         {{ cat.name }}
@@ -43,13 +43,14 @@
                       </span>
                       <br />
                       <read-more
-                        more-str="read more"
+                        :more-str="$t('search.read_more')"
                         class="readmore"
                         :text="item.about_business"
                         link="#"
-                        less-str="read less"
+                        :less-str="$t('search.read_less')"
                         :max-chars="100"
                       >
+                      
                       </read-more>
                     </p>
                   </div>

@@ -203,7 +203,7 @@
                       <!-- End Chats -->
                     </b-tab>
                     <b-tab
-                      title="Business"
+                      :title="$t('general.Business')"
                       @click="getChatList({ type: 'business' })"
                     >
                       <!-- Business Chats Available  -->
@@ -288,7 +288,7 @@
                       <!-- End Chats -->
                     </b-tab>
                     <b-tab
-                      title="Network"
+                      :title="$t('general.Network')"
                       @click="getChatList({ type: 'network' })"
                     >
                       <!-- network Chats Available  -->
@@ -865,7 +865,8 @@
               ></b-avatar>
               <div class="info-detail">
                 <h1 class="info-name">{{ receiver.name }}</h1>
-                <b-link class="primary">View Profile</b-link>
+                <b-link class="primary">{{ $t("general.View_Profile") }} </b-link>
+
               </div>
             </div>
             <div>

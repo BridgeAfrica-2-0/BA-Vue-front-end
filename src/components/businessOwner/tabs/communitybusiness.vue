@@ -45,13 +45,14 @@
                     </span>
                     <br />
                     <read-more
-                      more-str="read more"
+                      :more-str="$t('search.read_more')"
                       class="readmore"
                       :text="item.about_business"
                       link="#"
-                      less-str="read less"
+                      :less-str="$t('search.read_less')"
                       :max-chars="100"
                     >
+
                     </read-more>
 
                     <b-icon
@@ -60,6 +61,8 @@
                       v-b-tooltip.hover
                       title="Block This Business"
                       variant="danger"
+                      @click="$emit('BlockUser', item.id)"
+                      style="cursor: pointer"
                     ></b-icon>
                   </p>
                 </div>
@@ -194,6 +197,22 @@ export default {
   },
 
   methods: {
+
+    blackListed: async function(uuid){
+      const request = await this.$repository.share.blocking({banned_id:uuid, banned_type: 'profile' }, this.$route.params.id)
+
+      if (request.success){
+        const data = this.businesses.filter(item => item.id != uuid)
+        this.businesses = data
+
+      }else{
+        this.flashMessage.show({
+          status: "error",
+          message: request.data,
+        });
+      }
+    },
+    
     gotoBusiness(id) {
       this.$router.push(`/business/${id}#about`);
     },

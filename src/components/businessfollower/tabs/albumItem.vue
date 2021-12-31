@@ -17,7 +17,7 @@
           </p>
 
           <b-button v-if="upHere" variant="outline-primary" size="sm" @click="show">
-            Show
+            {{ $t('general.Show') }}
           </b-button>
         </div>
       </div>
@@ -41,7 +41,7 @@ export default {
   filters: {
     path: fullMediaLink,
     plural: function(val) {
-      return val ? `${val} items` : 'No item';
+      return val ? `${val} items` : this.$t('general.No_item');
     },
   },
 

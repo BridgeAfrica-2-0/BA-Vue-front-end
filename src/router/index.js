@@ -4,7 +4,8 @@ import VueRouter from "vue-router";
 import Login from "../views/login.vue";
 import home1 from "@/views/home1.vue";
 import signup from "../views/signup.vue";
-
+import success from "../views/success.vue";
+import failure from "../views/failure.vue";
 import RecoverPass1 from "../views/recoverPassword1.vue";
 import RecoverPass2 from "../views/recoverPassword2.vue";
 import RecoverPass3 from "../views/recoverPassword3.vue";
@@ -59,7 +60,6 @@ import payment from "@/views/payment";
 import about from "@/views/about";
 import contact from "@/views/contact";
 import cart from "@/views/card";
-
 
 Vue.use(VueRouter);
 
@@ -129,6 +129,20 @@ const routes = [
     name: "market",
     component: market,
   },
+
+  {
+    path: "/success",
+    name: "success",
+    component: success,
+  },
+
+
+  {
+    path: "/failure",
+    name: "failure",
+    component: failure,
+  },
+
   {
     path: "/checkout",
     name: "payment",
@@ -342,8 +356,6 @@ const routes = [
     component: businessVisitor,
   },
 
-
-
   {
     path: "/profilevisitor",
     name: "visitor",
@@ -351,8 +363,9 @@ const routes = [
   },
   {
     path: "/search",
-    name: "Search",
+    name: "GlobalSearch",
     component: search,
+
   },
 
   {
@@ -416,7 +429,6 @@ router.beforeEach((to, from, next) => {
 
   if (to.matched.some((record) => record.meta.auth) && !loggedIn) {
     next("/login");
-
     return;
   }
 

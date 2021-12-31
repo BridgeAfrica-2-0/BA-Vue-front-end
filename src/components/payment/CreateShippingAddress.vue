@@ -41,7 +41,7 @@
 
 <script>
 	import FormCreateShippingAddress from "./FormCreateShippingAddress.vue";
-	import OrderProductsList from "./OrderProductsList.vue";
+	import OrderProductsList from "./orderProductsList1.vue";
 	export default {
 		name: "CreateShippingAddress",
 		components: {

@@ -992,7 +992,7 @@
             <div class="new-msg back-image" style="margin-right: 17px">
               <div class="info-nav">
                 <b-row>
-                  <b-col class="col-1 mt-3"> To </b-col>
+                  <b-col class="col-1 mt-3"> {{$t('general.To')}} </b-col>
                   <b-col>
                     <b-form-input
                       id="textarea"
@@ -1103,7 +1103,7 @@
                                 </tr>
                               </div>
                               <hr />
-                              <h5>Network</h5>
+                              <h5>{{ $t("general.Network") }}</h5>
                               <div v-if="allNetworks">
                                 <tr
                                   v-for="(biz, index) in allNetworks"
@@ -1137,7 +1137,7 @@
                                 </tr>
                               </div>
                               <hr />
-                              <h5>Editors</h5>
+                              <h5>{{ $t("general.Editors") }}</h5>
                               <div v-if="allEditors">
                                 <tr
                                   v-for="(biz, index) in allEditors"
@@ -1171,7 +1171,7 @@
                                 </tr>
                               </div>
                               <hr />
-                              <h5>Members</h5>
+                              <h5>{{ $t("general.Members") }}</h5>
                               <div v-if="allMembers">
                                 <tr
                                   v-for="(biz, index) in allMembers"
@@ -1404,10 +1404,7 @@
                               <!-- End Chats -->
                             </b-tab>
 
-                            <b-tab
-                              :title="$t('general.Editors')"
-                              @click="getEditors()"
-                            >
+                            <b-tab :title="$t('general.Editor')" @click="getEditors()">
                               <div v-if="loader" class="text-center">
                                 <b-spinner
                                   variant="primary"
@@ -1415,6 +1412,7 @@
                                   class="centralizer"
                                 ></b-spinner>
                               </div>
+                              <!-- Length: {{ bizs }} -->
                               <div v-if="bizs.length">
                                 <tr
                                   v-for="(biz, index) in bizs"
@@ -1460,7 +1458,7 @@
                             overflow-x: hidden !important;
                           "
                         >
-                          <h2>All</h2>
+                          <h2>{{$t("general.All")}}</h2>
                           <br />
                           <div v-if="loader" class="text-center">
                             <b-spinner
@@ -1469,7 +1467,7 @@
                               class="centralizer"
                             ></b-spinner>
                           </div>
-                          <h5>People</h5>
+                          <h5>{{$t("general.People")}}</h5>
 
                           <b-row>
                             <div v-if="allUsers">
@@ -1499,7 +1497,7 @@
                             </div>
                           </b-row>
                           <hr />
-                          <h5>Business</h5>
+                          <h5>{{$t("general.Business")}}</h5>
 
                           <b-row>
                             <div v-if="allBusiness">
@@ -1529,7 +1527,7 @@
                             </div>
                           </b-row>
                           <hr />
-                          <h5>Network</h5>
+                          <h5>{{$t("general.Network")}}</h5>
 
                           <b-row>
                             <div v-if="allNetworks">
@@ -1559,7 +1557,7 @@
                             </div>
                           </b-row>
                           <hr />
-                          <h5>Editors</h5>
+                          <h5>{{$t("general.Editors")}}</h5>
                           <b-row>
                             <div v-if="allEditors">
                               <tr
@@ -1806,7 +1804,7 @@ export default {
       Number(this.$route.params.id)
     );
     console.log("router params:", this.currentBizId);
-    this.tabIndex = this.$route.query.msgTabId;
+    this.tabIndex = Number(this.$route.query.msgTabId);
 
     console.log("this.tabIndex:", this.tabIndex);
     // console.log("call to action checked:", this.ctaSelected);

@@ -84,7 +84,7 @@
                     </div>
 
                     <div class="form-group">
-                      <label for="username" class="username">About</label><br />
+                      <label for="username" class="username">{{$t("general.About")}}</label><br />
                       <textarea
                         type="textarea"
                         name="business_about"
@@ -692,13 +692,14 @@
                       <br />
 
                       <read-more
-                        more-str="read more"
+                        :more-str="$t('search.read_more')"
                         class="readmore"
                         :text="business.about_business"
                         link="#"
-                        less-str="read less"
+                        :less-str="$t('search.read_less')"
                         :max-chars="100"
                       >
+                    
                       </read-more>
                     </p>
                   </div>
@@ -1284,7 +1285,7 @@ export default {
               this.flashMessage.show({
                 status: 'error',
 
-                message: 'Unable to Create Your Business',
+                message: this.$t('general.Unable_to_Create_Your_Business'),
                 blockClass: 'custom-block-class',
               });
               console.log({ err: err });
@@ -1349,7 +1350,7 @@ export default {
             this.flashMessage.show({
               status: 'success',
               blockClass: 'custom-block-class',
-              message: 'Business Updated',
+              message: this.$t('general.Business_Updated'),
             });
 
             loader.hide();

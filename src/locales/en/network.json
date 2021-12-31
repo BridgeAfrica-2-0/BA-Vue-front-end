@@ -25,7 +25,7 @@
     "info_business_com": "info@business.com",
     "Open_now": "Open now",
     "1000AM_700PM": "10:00AM - 7:00PM",
-    "Edit_Address": "Edit Address",
+    "Edit_Address": "Edit Business",
     "Busness_Name": "Busness Name",
     "Select_Category": "Select Category",
     "Category1": "Category1",
@@ -307,7 +307,15 @@
     "Selected":"Selected",
     "All_Selected":"All Selected",
     "No_notifications_to_show":"No notifications to show",
-    "about":"About"
+    "about":"About",
+    "No_Result_On_Networks":"No Result On Networks",
+    "Anyone":"Anyone",
+    "Allow_Business":"Autoriser les entreprise",
+    "Search_or_add_a_tag":"Search or add a tag",
+
+    "You_Are_Not_more_Following":"You Are Not more Following",
+    "You_Are_Now_Following":"You Are Now Following",
+    "Unable_To_follow":"Unable To follow"
 
 
 }

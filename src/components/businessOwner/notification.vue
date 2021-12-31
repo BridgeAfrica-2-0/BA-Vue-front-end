@@ -10,7 +10,7 @@
               name="checkbox-1"
               @change="select"
               class="m-left-top username"
-            >selectAll</b-form-checkbox>
+            >{{ $t("general.Select_All") }}</b-form-checkbox>
           </div>
         </b-col>
         <b-col>

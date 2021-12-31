@@ -385,7 +385,7 @@
                       <!-- End Chats -->
                     </b-tab>
                     <b-tab
-                      title="Groups"
+                      :title="$t('general.Groups')"
                       @click="getChatList({ type: 'group' })"
                     >
                       <!-- Group Chats Available  -->
@@ -690,7 +690,7 @@
                           <span v-if="chat.post_details">
                             <small class="text-dark font-italic text-right"
                               ><i class="fas fa-share fa-xs pl-1"></i>Shared
-                              post</small
+                              {{ $t("general.post") }}</small
                             ><br />
                             <span class="font-italic">{{
                               chat.post_details.content
@@ -722,8 +722,7 @@
                           </span>
                           <span v-if="chat.post_details">
                             <small class="text-dark font-italic"
-                              ><i class="fas fa-share fa-xs pl-1"></i>Shared
-                              post</small
+                              ><i class="fas fa-share fa-xs pl-1"></i>{{ $t("general.Shared_post") }}</small
                             >
                             <br />
                             <span class="font-italic">{{
@@ -991,7 +990,7 @@
             <div class="new-msg back-image" style="margin-right: 17px">
               <div class="info-nav">
                 <b-row>
-                  <b-col class="col-1 mt-3"> To </b-col>
+                  <b-col class="col-1 mt-3"> {{ $t("general.To") }} </b-col>
                   <b-col>
                     <b-form-input
                       id="textarea"
@@ -1102,7 +1101,7 @@
                                 </tr>
                               </div>
                               <hr />
-                              <h5>Network</h5>
+                              <h5>{{$t('general.Network')}}</h5>
                               <div v-if="allNetworks">
                                 <tr
                                   v-for="(biz, index) in allNetworks"
@@ -1136,7 +1135,7 @@
                                 </tr>
                               </div>
                               <hr />
-                              <h5>Editors</h5>
+                              <h5>{{$t('general.Editors')}}</h5>
                               <div v-if="allEditors">
                                 <tr
                                   v-for="(biz, index) in allEditors"
@@ -1170,7 +1169,7 @@
                                 </tr>
                               </div>
                               <hr />
-                              <h5>Members</h5>
+                              <h5>{{$t("general.Members")}}</h5>
                               <div v-if="allMembers">
                                 <tr
                                   v-for="(biz, index) in allMembers"
@@ -1195,7 +1194,7 @@
                                             size="30"
                                           ></b-avatar>
                                           <span class="bold">
-                                            {{ biz.name }}
+                                            {{ biz.fullname }}
                                           </span>
                                         </b-form-checkbox>
                                       </b-form-checkbox-group>
@@ -1272,7 +1271,7 @@
 
                               <!-- End Chats -->
                             </b-tab>
-                            <b-tab title="Business" @click="getBizs()">
+                            <b-tab :title="$t('general.Business')" @click="getBizs()">
                               <b-row>
                                 <b-col>
                                   <b-card>
@@ -1338,7 +1337,7 @@
 
                               <!-- End Chats -->
                             </b-tab>
-                            <b-tab title="Network" @click="getNetworks()">
+                            <b-tab :title="$t('general.Network')" @click="getNetworks()">
                               <b-row>
                                 <b-col>
                                   <b-card>
@@ -1451,6 +1450,8 @@
                               <!-- End Chats -->
                             </b-tab>
                             <b-tab title="Members" @click="getNetworkMembers()">
+                              <!-- Length :{{ bizs }} -->
+
                               <div v-if="loader" class="text-center">
                                 <b-spinner
                                   variant="primary"
@@ -1482,7 +1483,7 @@
                                             size="30"
                                           ></b-avatar>
                                           <span class="bold">
-                                            {{ biz.name }}
+                                            {{ biz.fullname }}
                                           </span>
                                         </b-form-checkbox>
                                       </b-form-checkbox-group>
@@ -1490,7 +1491,9 @@
                                   </td>
                                 </tr>
                               </div>
-                              <h2 v-else>No Member</h2>
+
+                              <h2 v-else>{{$t("general.No_Member")}}</h2>
+
 
                               <!-- End Chats -->
                             </b-tab>
@@ -1504,7 +1507,7 @@
                             overflow-x: hidden !important;
                           "
                         >
-                          <h2>All</h2>
+                          <h2>{{ $t('general.All') }} </h2>
                           <br />
                           <div v-if="loader" class="text-center">
                             <b-spinner
@@ -1513,7 +1516,7 @@
                               class="centralizer"
                             ></b-spinner>
                           </div>
-                          <h5>People</h5>
+                          <h5>{{$t("general.People")}}</h5>
 
                           <b-row>
                             <div v-if="allUsers">
@@ -1543,7 +1546,7 @@
                             </div>
                           </b-row>
                           <hr />
-                          <h5>Business</h5>
+                          <h5>{{$t("general.Business")}}</h5>
 
                           <b-row>
                             <div v-if="allBusiness">
@@ -1573,7 +1576,7 @@
                             </div>
                           </b-row>
                           <hr />
-                          <h5>Network</h5>
+                          <h5>{{$t("general.Network")}}</h5>
 
                           <b-row>
                             <div v-if="allNetworks">
@@ -1603,7 +1606,7 @@
                             </div>
                           </b-row>
                           <hr />
-                          <h5>Editors</h5>
+                          <h5>{{$t("general.Editors")}}</h5>
                           <b-row>
                             <div v-if="allEditors">
                               <tr

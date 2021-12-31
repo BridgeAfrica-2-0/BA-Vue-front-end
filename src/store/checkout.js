@@ -7,10 +7,16 @@ const state = {
 
   ],
   order: {
-
+    data: 
+   { order_id: "",
+    total_cost: 0}
   },
+
+
   cart: [],
   cart_summary:{},
+  total:null,
+ 
   buisinessOrdered: []
 
 }
@@ -33,11 +39,25 @@ const actions = {
 
 
   async getCartSummary({ commit }) {
-    await axios.get('cart-total')
+    await axios.get('cart/summary')
       .then((response) => {
         console.log(response.data)
        
         commit('setCartSummary', response.data.data)
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  },
+
+
+
+  async getTotal({ commit }) {
+    await axios.get('cart/total')
+      .then((response) => {
+        console.log(response.data)
+       
+        commit('setCartTotal', response.data.data)
       })
       .catch((error) => {
         console.log(error);
@@ -80,16 +100,60 @@ const actions = {
         console.log(error);
       })
   },
-  async createOrder({ commit }, newOrder) {
-    await axios.post('cart/create', newOrder).then((response) => {
-      commit('setOrder', newOrder)
-      console.log(response.data);
+
+
+   createOrder({ commit }) {
+
+    return  axios.post('cart/create').then((data) => {
+
+     let orderId=data.data.data;
+    console.log(data.data);
+
+    return   data; 
+
+     
+   
+   
     }).catch((error) => {
       console.log(error)
     })
   },
+
+
+  getorder({ commit },payload ){
+
+    return   axios.get('cart/payement-amount/'+payload.data).then((data) => {   
+
+    
+     
+
+      commit('setOrder', data.data);
+      localStorage.setItem("Order", data.data);
+
+
+      return   data; 
+
+     
+      
+}).catch((error) => {
+  console.log(error)
+})
+
+  } ,
+
   async getCart({ commit }) {
     await axios.get('cart').then((response) => {
+      console.log(response)
+      commit('setCart', response.data)
+    }).catch((error) => {
+      console.log({error:error})
+    })
+  },
+
+
+
+  async getCartt({ commit }) {
+    await axios.get('ckeckout-cart').then((response) => {
       console.log(response)
       commit('setCart', response.data)
     }).catch((error) => {
@@ -130,6 +194,10 @@ const mutations = {
   setAllShipping: (state, newShippingTab) => state.allShipping = newShippingTab,
 
   setCartSummary: (state, cartSummary) => state.cart_summary = cartSummary,
+
+  setCartTotal: (state, cartSummary) => state.total = cartSummary,
+
+  
 
   addShipping: (state, newShippingAdd) => state.allShipping.unshift(newShippingAdd),
   deleteShippingAdd: (state, idShipping) => state.allShipping = state.allShipping.filter(el => el.id !== idShipping),

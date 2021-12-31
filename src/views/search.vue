@@ -3,9 +3,10 @@
     <Nav :credentials.sync="searchParams" id="top">
       <template v-slot:button>
         <Button @click.native="strategY['all']" v-if="selectedId == 0" />
+        <Button @click.native="strategY['business']" v-if="selectedId == 1" />
+        <!-- <Button @click.native="strategY['users']" v-if="selectedId == 2" /> -->
         <Button @click.native="strategY['network']" v-if="selectedId == 3" />
         <Button @click.native="strategY['market']" v-if="selectedId == 4" />
-        <Button @click.native="strategY['business']" v-if="selectedId == 1" />
 
         <Button @click.native="strategies" v-if="[2, 5].includes(selectedId)" />
       </template>
@@ -429,8 +430,13 @@
               <br />
 
               <hr />
-              <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
-              <h6>{{ $t("search.People") }}</h6>
+
+              <div class="d-flex">
+                <fas-icon class="icons mr-1" :icon="['fas', 'users']" size="lg" />
+              
+                <h6>{{ $t("search.People") }}</h6>
+              </div>
+              
 
               <MiniPeople />
               <span class="float-right mb-3" @click="selectedId = 2">

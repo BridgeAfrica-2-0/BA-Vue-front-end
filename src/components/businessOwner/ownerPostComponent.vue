@@ -6,7 +6,7 @@
           <b-avatar
             class="logo-sizee avat"
             :square="'user' == item.poster_type ? false : true"
-            variant="primary"
+            variant="light"
             :src="item.user_picture"
           ></b-avatar>
         </span>
@@ -64,7 +64,7 @@
             <b-avatar
               class="logo-sizee avat"
               :square="'user' == item.source.poster_type ? false : true"
-              variant="primary"
+              variant="light"
               :src="item.source.logo_path"
             >
             </b-avatar>
@@ -168,7 +168,7 @@
         <b-avatar
           b-avatar
           class="logo-sizee-18 avat img-fluid avat-comment avatar-border"
-          variant="primary"
+          variant="light"
           :square="'user' == profile.user_type ? false : true"
           :src="profile.profile_picture"
         ></b-avatar>
@@ -357,13 +357,13 @@ export default {
         this.flashMessage.show({
           status: "success",
           blockClass: "custom-block-class",
-          message: "Comment Deleted",
+          message: this.$t('general.Comment_Deleted'),
         });
       } else {
         this.flashMessage.show({
           status: "error",
           blockClass: "custom-block-class",
-          message: "Something wrong happen. Try again",
+          message: this.$t('general.Something_wrong_happen_Try_again'),
         });
       }
     },
@@ -391,7 +391,7 @@ export default {
         this.flashMessage.show({
           status: "success",
           blockClass: "custom-block-class",
-          message: "Comment Updated",
+          message: this.$t('general.Comment_Updated'),
         });
       } else {
         this.flashMessage.show({

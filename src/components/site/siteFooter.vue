@@ -142,7 +142,7 @@
               
               </ul>
             </div>
-
+  
             <div class="col-lg-3 col-md-6 footer-links">
               <h4 class="bridge-header text-left white">{{ $t('home.WORKING_HOURS') }}</h4>
               <ul class="white">

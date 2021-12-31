@@ -12,6 +12,8 @@
       </template>
     </Nav>
 
+    <br>  <br>  
+
     <SubNav
       @category="getCategory"
       @parentcategory="getparentCategory"

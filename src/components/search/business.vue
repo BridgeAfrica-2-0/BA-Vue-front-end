@@ -1,9 +1,11 @@
 <template>
-  <div>
-    <NotFoundComponent
+  <div>  {{business}}
+
+    <NotFoundComponent />
+    <!-- <NotFoundComponent
       v-if="business.data.length < 1 && prodLoader == false"
       :title="title"
-    />
+    /> -->
     <b-spinner
       v-if="prodLoader"
       variant="primary"

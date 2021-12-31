@@ -80,8 +80,12 @@
                   <b-avatar
                     class="d-inline-block profile-pic"
                     variant="primary"
-                    :src="currentUser.user.profile_picture"
-                    square
+                    :src="
+                      getImage({
+                        type: 'user',
+                        image: currentUser.user.profile_picture,
+                      })
+                    "
                   ></b-avatar>
                 </b-col>
                 <b-col>
@@ -165,7 +169,12 @@
                               <b-avatar
                                 class="d-inline-block profile-pic"
                                 variant="primary"
-                                :src="chat.profile_picture"
+                                :src="
+                                  getImage({
+                                    type: 'user',
+                                    image: chat.profile_picture,
+                                  })
+                                "
                               ></b-avatar>
 
                               <h6 class="mt-2 d-inline-block ml-2">
@@ -249,7 +258,12 @@
                               <b-avatar
                                 class="d-inline-block profile-pic"
                                 variant="primary"
-                                :src="chat.logo_path"
+                                :src="
+                                  getImage({
+                                    type: 'business',
+                                    image: chat.logo_path,
+                                  })
+                                "
                               ></b-avatar>
 
                               <h6 class="mt-2 d-inline-block ml-2">
@@ -332,7 +346,12 @@
                               <b-avatar
                                 class="d-inline-block profile-pic"
                                 variant="primary"
-                                :src="chat.image"
+                                :src="
+                                  getImage({
+                                    type: 'network',
+                                    image: chat.image,
+                                  })
+                                "
                               ></b-avatar>
 
                               <h6 class="mt-2 d-inline-block ml-2">
@@ -783,12 +802,12 @@
               <b-avatar
                 class="info-avatar"
                 variant="primary"
-                src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
+                :src="chatSelected.profile_picture"
                 size="200"
               ></b-avatar>
               <div class="info-detail">
-                <h1 class="info-name">{{ receiver.name }}</h1>
-                <b-link class="primary">View Profile</b-link>
+                <h1 class="info-name">{{ chatSelected.name }}</h1>
+                <!-- <b-link class="primary">View Profile</b-link> -->
               </div>
             </div>
             <div>
@@ -890,7 +909,12 @@
                                 class="d-inline-block"
                                 variant="primary"
                                 size="30"
-                                :src="biz.logo_path"
+                                :src="
+                                  getImage({
+                                    type: 'business',
+                                    image: biz.logo_path,
+                                  })
+                                "
                               ></b-avatar>
                               <span class="bold"> {{ biz.name }} </span>
                             </td>
@@ -914,7 +938,12 @@
                                 class="d-inline-block"
                                 variant="primary"
                                 size="30"
-                                :src="network.image"
+                                :src="
+                                  getImage({
+                                    type: 'network',
+                                    image: network.image,
+                                  })
+                                "
                               ></b-avatar>
                               <span class="bold"> {{ network.name }} </span>
                             </td>
@@ -1096,6 +1125,26 @@ export default {
     this.socketListenners();
   },
   methods: {
+    getImage(data) {
+      console.log("data IN", data);
+      let image = data.image;
+      let finale = "";
+      let user = require("@/assets/profile_default.png");
+      let network = require("@/assets/network_default.png");
+      let business = require("@/assets/business_default.png");
+
+      if (data.type == "user") {
+        finale = image ? image : user;
+      } else if (data.type == "network") {
+        finale = image ? image : network;
+      } else if (data.type == "business") {
+        finale = image ? image : business;
+      }
+
+      console.log("debug ", finale);
+      console.log(this.type);
+      return finale;
+    },
     getName(chat) {
       return chat.business_i_d
         ? chat.business_i_d.name

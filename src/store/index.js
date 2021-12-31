@@ -52,9 +52,13 @@ import networkSetting from './networkSetting';
 
 Vue.use(Vuex);
 
+<<<<<<< HEAD
 
 
 axios.defaults.baseURL = process.env.VUE_APP_API_URL_DEV;
+=======
+axios.defaults.baseURL = process.env.VUE_APP_API_URL;
+>>>>>>> main
 
 export default new Vuex.Store({
     modules: {

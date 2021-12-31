@@ -61,12 +61,12 @@
       @ok="updatesave"
     >
       <div class="div-design">
-     <!--   <b-form-select
+       <b-form-select
           class="mb-2"
           size="sm"
           v-model="editData.access"
           :options="options"
-        ></b-form-select>  -->
+        ></b-form-select> 
       </div>
       <b-form-input
         class="mt-2"
@@ -310,7 +310,7 @@ export default {
         this.educationAndWorks.workPlaces[this.index] = this.workPlaceInput;
         method = "PUT";
       } else {
-        this.educationAndWorks.workPlaces.push(this.workPlaceInput);
+        // this.educationAndWorks.workPlaces.push(this.workPlaceInput);
         method = "POST";
       }
 

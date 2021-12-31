@@ -147,6 +147,7 @@
 <script>
 export default {
   name: "payment",
+  props: ['profileId'],
   data() {
     return {
       url: null,
@@ -170,12 +171,13 @@ export default {
 
   computed: {
     defaultPayment() {
-      return this.$store.state.businessAccountType.defaultPayment;
+      return this.$store.state.profileSettingsEdit.defaultPayment;
     }
   },
 
   mounted(){
-    this.url = this.$route.params.id;
+    console.log("profileId", this.profileId)
+    this.url = this.profileId;
     this.DefaultPayment();
   },
 
@@ -194,8 +196,8 @@ export default {
     DefaultPayment() {
       console.log("defaultPayment");
       this.$store
-      .dispatch("businessAccountType/getDefaultPayment", {
-        path: `get-payement-method/${this.url}`
+      .dispatch("profileSettingsEdit/getDefaultPayment", {
+        path: `payment-method`
         })
       .then(() => {
         this.PaymentForm.operator = this.defaultPayment.payement_method;
@@ -210,11 +212,11 @@ export default {
       this.show = true;
       console.log("PaymentForm:", this.PaymentForm);
       let formData = new FormData();
-      formData.append("payement_method", this.PaymentForm.operator);
+      formData.append("payment_method", this.PaymentForm.operator);
       formData.append("phone", this.PaymentForm.phone);
       this.$store
-        .dispatch("businessAccountType/confirmPayment", {
-          path: `update-payement-method/${this.url}`,
+        .dispatch("profileSettingsEdit/confirmPayment", {
+          path: `update-payement-method`,
           formData: formData,
         })
         .then(({ data }) => {
@@ -245,7 +247,6 @@ export default {
   },
 };
 </script>
-
 
 <style scoped>
 .descrip {

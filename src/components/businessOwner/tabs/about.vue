@@ -441,7 +441,7 @@
           <b-form-input
             id="input-1"
             class="mt-1"
-            v-model="business_about_input.phone"
+            v-model="business_about_input.phone1"
             type="tel"
             required
           ></b-form-input>
@@ -456,7 +456,7 @@
           <b-form-input
             id="input-1"
             class="mt-1"
-            v-model="business_about_input.secondary_phone"
+            v-model="business_about_input.phone2"
             type="tel"
             required
           ></b-form-input>
@@ -592,24 +592,6 @@ export default {
       municipality: [],
       locality: [],
 
-      // categories: [
-      //   { item: "Professional_and_home_service", name: "Professionals" },
-      //   { item: "Agriculture ", name: "Agriculture " },
-      //   { item: "Restaurant ", name: " Restaurant " },
-      //   { item: "Electronics ", name: "Electronics " },
-      //   { item: "Handicrafts", name: "Handicrafts" },
-      //   { item: "clothing", name: "clothing" },
-      //   { item: "Mechanics", name: "Mechanics" },
-      //   { item: "Health_unit ", name: "Health unit " },
-      //   { item: "Bars", name: "Bars" },
-      //   { item: "Hair_and_beauty ", name: "Hair and beauty " },
-      //   { item: "Real_estate ", name: "Real_estate " },
-      //   { item: "Travelling ", name: "Travelling " },
-      //   { item: "Hotels", name: "Hotels" },
-      //   { item: "station", name: " station  " },
-      //   { item: "Mayor_concils", name: "Mayor_concils" },
-      //   { item: "Taxis service", name: "Taxis service" },
-      // ],
       dayOfWorks: [
         {
           day: this.$t("home.Monday"),
@@ -964,8 +946,8 @@ export default {
             subCategoryId: this.business_about_input.subCatFilter[0].subcategoryId,
             filterId: this.business_about_input.filter[0].filter_id,
             keywords: this.stringKeyword(this.business_about_input.keywords),
-            primary_phone: this.business_about_input.phone,
-            secondary_phone :this.business_about_input.secondary_phone,
+            primary_phone: this.business_about_input.phone1,
+            secondary_phone :this.business_about_input.phone2,
             website: this.business_about_input.website,
             email: this.business_about_input.email,
             country: this.business_about_input.country[0].country_id,

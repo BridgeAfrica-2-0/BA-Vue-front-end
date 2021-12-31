@@ -11,16 +11,8 @@
 
       <div v-else class="splide">
         <splide :options="options" class="banner r-image">
-          <splide-slide>
-            <img src="@/assets/img/Business 1.jpg" class="r-image" />
-          </splide-slide>
-
-          <splide-slide>
-            <img src="@/assets/img/business 2.jpg" class="r-image" />
-          </splide-slide>
-
-          <splide-slide>
-            <img src="@/assets/img/business 3.png" class="r-image" />
+          <splide-slide v-for="(cover, index) in getCustomCover" :key="index">
+            <img :src="cover" class="r-image" />
           </splide-slide>
         </splide>
       </div>
@@ -209,9 +201,17 @@
 </template>
 
 <script>
-import { mapMutations } from "vuex";
+import { mapMutations, mapGetters } from "vuex";
+
+import { defaultCoverImage } from "@/mixins";
+
 export default {
   name: "headPageOwner",
+  mixins: [defaultCoverImage],
+
+  created() {
+    this.currentAuthType = "business";
+  },
 
   data() {
     return {

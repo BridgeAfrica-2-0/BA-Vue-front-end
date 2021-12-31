@@ -18,6 +18,7 @@
               badge-variant="primary"
               badge-offset="10px"
             ></b-avatar>
+
             <b-icon
               icon="camera-fill"
               class="avatar-header-icon btn cursor-pointer size"
@@ -27,7 +28,7 @@
             <span style="display: inline-block">
               <h6 class="profile-name text-center">
                 <div class="username">
-                  <b> {{ info.user.name }} </b>
+                  <b>{{ info.user.name }}</b>
                 </div>
 
                 <span class="duration float-left">
@@ -224,6 +225,8 @@
 <script>
 import VueCropper from "vue-cropperjs";
 import "cropperjs/dist/cropper.css";
+
+import { defaultCoverImage } from "@/mixins";
 
 import { defaultCoverImage } from "@/mixins";
 
@@ -625,7 +628,6 @@ export default {
 
   watch: {
     "$state.state.profile.profileIntro": function (newInfo) {
-      console.log(newInfo.user.cover_picture);
       this.addCoverPicture(newInfo.user.cover_picture);
     },
   },

@@ -6,6 +6,6 @@
 <script>
 import about from '@/components/businessOwner/tabs/about.vue'
 export default {
-  components: {about}
+  components: {about} 
 }
 </script>

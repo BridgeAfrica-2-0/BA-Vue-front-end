@@ -217,7 +217,7 @@ export default {
         this.spinner = false;
         this.flashMessage.show({
           status: "error",
-          message: "Unable to Create Feedback"
+          message: this.$t('general.Unable_to_Create_Your_Feedback')
         });
       });
 		},

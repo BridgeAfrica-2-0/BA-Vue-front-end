@@ -13,6 +13,17 @@
       <hr />
       <!-- {{ $t('businessowner.') }} {{ $t('businessowner.Add_Network') }}   -->
       <b-row>
+        <!-- <b-spinner
+          v-if="loader"
+          variant="primary"
+          :label="$t('search.Spinning')"
+        ></b-spinner> -->
+
+        <b-alert v-if="network.length === 0" show variant="warning"
+          ><a href="#" class="alert-link">
+            No network available!
+          </a>
+        </b-alert>
         <b-col
           cols="12"
           md="12"
@@ -52,7 +63,6 @@
                     :less-str="$t('search.read_less')"
                     :max-chars="200"
                   ></read-more>
-             
                 </p>
               </b-col>
 
@@ -93,6 +103,7 @@
 </template>
 
 <script>
+import axios from "axios";
 import { mapActions, mapGetters } from "vuex";
 export default {
   data() {
@@ -127,7 +138,8 @@ export default {
     };
   },
   beforeMount() {
-    this.getNetworks();
+    // this.getNetworks();
+    this.getNetworksBusinessMembers();
   },
 
   mounted() {
@@ -155,9 +167,38 @@ export default {
       getNetworks: "businessOwner/getNetworks",
       editNetwork: "businessOwner/editNetwork",
     }),
-
+    async getNetworksBusinessMembers() {
+      let sucData = [];
+      await axios
+        .get(`business/${this.biz_id}/member/networks`)
+        .then((res) => {
+          this.$store.commit("setLoader", false);
+          this.$store.commit("setSuccess", sucData);
+          this.$store.commit("setNetworks", res.data.data);
+          setTimeout(() => {
+            sucData.state = false;
+            sucData.msg = "";
+            this.$store.commit("setSuccess", sucData);
+          }, 2000);
+        })
+        .catch((err) => {
+          console.log("Unauthorized request !!");
+          let sucData = {
+            state: true,
+            succes: "danger",
+            msg: "Unauthorized request !!",
+          };
+          this.$store.commit("setLoader", false);
+          this.$store.commit("setSuccess", sucData);
+          setTimeout(() => {
+            sucData.state = false;
+            sucData.msg = "";
+            this.$store.commit("setSuccess", sucData);
+          }, 2000);
+        });
+    },
     infiniteHandler($state) {
-      let url = "business/network/" + this.biz_id + "/" + this.page;
+      let url = `business/${this.biz_id}/member/networks`;
 
       if (this.page == 1) {
         this.network.splice(0);
@@ -165,7 +206,7 @@ export default {
       this.$store
         .dispatch("businessOwner/loadMore", url)
         .then(({ data }) => {
-          console.log(data.data);
+          console.log("[DEBUG]", data.data);
           if (data.data.length) {
             this.network.push(...data.data);
 

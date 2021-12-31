@@ -79,7 +79,6 @@ export default {
     "canBeUpdate",
     "showAlbumPictures",
     "isEditor",
-    "showCoverAlbum"
   ],
 
   data: () => ({
@@ -90,13 +89,8 @@ export default {
   filters: {
     path: fullMediaLink,
     plural: function (val) {
-      return val ? `${val} items` : "No item";
+      return val ? `${val} items` : this.$t('general.No_item');
     },
-  },
-
-  created(){
-    if (this.showCoverAlbum)
-      this.show()
   },
 
   methods: {

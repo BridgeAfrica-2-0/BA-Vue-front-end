@@ -6,7 +6,7 @@
           <b-avatar
             class="logo-sizee avat"
             :square="'user' == item.poster_type ? false : true"
-            variant="light"
+            variant="primary"
             :src="item.user_picture"
           ></b-avatar>
         </span>
@@ -67,7 +67,7 @@
             <b-avatar
               class="logo-sizee avat"
               :square="'user' == item.source.poster_type ? false : true"
-              variant="light"
+              variant="primary"
               :src="item.source.logo_path"
             >
             </b-avatar>
@@ -171,7 +171,7 @@
         <b-avatar
           b-avatar
           class="logo-sizee-18 avat img-fluid avat-comment avatar-border"
-          variant="light"
+          variant="primary"
           :square="'user' == profile.user_type ? false : true"
           :src="profile.profile_picture"
         ></b-avatar>

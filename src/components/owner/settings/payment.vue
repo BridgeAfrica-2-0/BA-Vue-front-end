@@ -86,7 +86,7 @@
             </div>
             <div class="operator-select-box ml-md-2">
               <b-form-radio
-                v-model="operator"
+                v-model="PaymentForm.operator"
                 name="operator"
                 value="EXPRESS"
                 class="operator-select"
@@ -125,7 +125,7 @@
         <div class="row">
           <div class="col-10 col-sm-9 col-md-8">
             <b-form-input
-              placeholder="237 6XX XXX XXX"
+              :placeholder="PaymentForm.phone ? PaymentForm.phone : '237 6XX XXX XXX'"
               id="number"
               v-model="PaymentForm.phone"
               type="tel"
@@ -148,6 +148,7 @@
 <script>
 export default {
   name: "payment",
+  props: ['profileId'],
   data() {
     return {
       url: null,
@@ -172,7 +173,7 @@ export default {
 
   computed: {
     defaultPayment() {
-      return this.$store.state.businessAccountType.defaultPayment;
+      return this.$store.state.profileSettingsEdit.defaultPayment;
     },
     countries() {
       return this.$store.state.auth.country;
@@ -180,21 +181,14 @@ export default {
   },
 
   mounted(){
-    this.url = this.$route.params.id;
+    console.log("profileId", this.profileId)
+    this.url = this.profileId;
     this.DefaultPayment();
-    this.Country();
   },
 
   methods: {
     showRewiew() {
       this.$emit("showreview");
-    },
-
-    requestPayment() {
-      console.log("requestPayment");
-      console.log("this.operator", this.operator);
-      this.RequestPayment = !this.RequestPayment;
-      if (this.operator !== "") this.$emit("requestpayment", this.operator);
     },
 
     Country() {
@@ -208,15 +202,24 @@ export default {
           console.log({ err: err });
         });
     },
+
+    requestPayment() {
+      console.log("requestPayment");
+      console.log("this.operator", this.operator);
+      this.RequestPayment = !this.RequestPayment;
+      if (this.operator !== "") this.$emit("requestpayment", this.operator);
+    },
     
     DefaultPayment() {
       console.log("defaultPayment");
       this.$store
-      .dispatch("businessAccountType/getDefaultPayment", {
-        path: `get-payement-method/${this.url}`
+      .dispatch("profileSettingsEdit/getDefaultPayment", {
+        path: `payment-method`
         })
       .then(() => {
-        this.PaymentForm.operator = this.defaultPayment.payement_method;
+        console.log(this.defaultPayment);
+        this.PaymentForm.operator = this.defaultPayment.payment_method;
+        this.PaymentForm.phone = this.defaultPayment.phone;
         console.log('ohh yeah');
       })
       .catch(err => {
@@ -228,11 +231,11 @@ export default {
       this.show = true;
       console.log("PaymentForm:", this.PaymentForm);
       let formData = new FormData();
-      formData.append("payement_method", this.PaymentForm.operator);
+      formData.append("payment_method", this.PaymentForm.operator);
       formData.append("phone", this.PaymentForm.phone);
       this.$store
-        .dispatch("businessAccountType/confirmPayment", {
-          path: `update-payement-method/${this.url}`,
+        .dispatch("profileSettingsEdit/confirmPayment", {
+          path: `update-payement-method`,
           formData: formData,
         })
         .then(({ data }) => {
@@ -263,7 +266,6 @@ export default {
   },
 };
 </script>
-
 
 <style scoped>
 .descrip {

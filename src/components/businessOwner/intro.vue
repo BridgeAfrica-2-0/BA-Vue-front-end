@@ -160,14 +160,79 @@
           <div class="form-group col-md-6">
             <label for="alias">{{ $t("businessowner.Category") }}:</label><br />
 
-            <b-form-select
+            <multiselect
+            v-model="multiselecvalue"
+            @input="subcategories"
+            :tag-placeholder="$t('businessowner.Add_this_as_new_tag')"
+            :placeholder="$t('businessowner.Search_or_add_a_tag')"
+            label="name"
+            track-by="id"
+            :options="pcategories"
+            :multiple="true"
+            
+            @tag="addTag"
+          ></multiselect> 
+
+            <!-- <b-form-select
               :options="categories"
               class="mb-3"
               value-field="item"
               v-model="form.category"
               text-field="name"
-            ></b-form-select>
-          </div>
+            ></b-form-select> -->
+          <!-- </div>
+
+          <div class="form-group col-md-6"> -->
+
+          <label for="alias">{{ $t('businessowner.Sub_Category') }}:</label><br />
+           <multiselect
+            v-model="filterselectvalue"
+            :tag-placeholder="$t('businessowner.Add_this_as_new_tag')"
+            :placeholder="$t('businessowner.Search_or_add_a_tag')"
+            label="name"
+            track-by="subcategory_id"
+            :options="scategories"
+            :multiple="true"
+            :taggable="true"
+            @tag="addFilter"
+          ></multiselect> 
+
+
+          <label class="typo__label">{{ $t('businessowner.Filters') }}</label>
+         <div>
+          <b-card no-body>
+            <b-tabs pills card vertical>
+              <b-tab
+                :title="filters.name"
+                v-for="filters in filterselectvalue"
+                :key="filters.id"
+                active
+                ><b-card-text>
+                  <b-form-group :label="$t('businessowner.Filters')" class="colorblack">
+                    <b-form-checkbox-group
+                      id=""
+                      class="colorblack"
+                      v-model="select_filterss"
+                      name="filters"
+                    >
+                      <b-form-checkbox
+                        class="colorblack"
+                        v-for="fil in filters.filters"
+                        :key="fil.id"
+                        :value="fil.id"
+                      >
+                        {{ fil.name }}
+                      </b-form-checkbox>
+                    </b-form-checkbox-group>
+                  </b-form-group>
+                </b-card-text>
+              </b-tab>
+            </b-tabs>
+          </b-card> 
+        </div>
+        
+        </div>
+
         </b-row>
 
         <b-row>
@@ -299,6 +364,7 @@
 
 <script>
 import axios from "axios";
+import Multiselect from "vue-multiselect";
 
 import { MglMap, MglPopup, MglMarker } from "vue-mapbox";
 import { validationMixin } from "vuelidate";
@@ -311,7 +377,9 @@ export default {
     return {
       form: null,
       blec: this.business_intro,
-
+      multiselecvalue: [],
+      filterselectvalue: [],
+      select_filterss: [],
       country: [],
       // region: [],
       url: null,
@@ -391,7 +459,53 @@ export default {
      * Used to edit biography
      * @return void
      */
+    ArrayString(words){
+       let keyword = '';
+        words.map(item =>{
+          keyword+= item+','
+        })
 
+        return keyword.substring(0, keyword.length-1);
+    },
+
+    stringArray(words){
+        let keyword = '';
+        words.map(item =>{
+          keyword+= item.id+','
+        })
+
+        return keyword.substring(0, keyword.length-1);
+    },
+     addFilter(newTag) {
+      const tag = {
+        name: newTag,
+        id: newTag.substring(0, 2) + Math.floor(Math.random() * 10000000),
+      };
+      this.multiselec.push(tag);
+      this.filterselectvalue.push(tag);
+    },
+    subcategories() {
+      console.log(this.pcategories," subcategories here", this.selectedcategories);
+      let formData2 = new FormData();
+      formData2.append("categoryId", this.selectedcategories);
+      this.$store
+        .dispatch("auth/subcategories", formData2)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+ 
+    addTag(newTag) {
+      const tag = {
+        name: newTag,
+        id: newTag.substring(0, 2) + Math.floor(Math.random() * 10000000),
+      };
+      this.multiselec.push(tag);
+      this.multiselecvalue.push(tag);
+    },
     businessInfos() {
       this.$store.dispatch("businessOwner/businessInfo", this.url);
     },
@@ -464,7 +578,7 @@ export default {
 
     UpdateBusiness() {
       let formData2 = new FormData();
-
+    console.log("----ttt",this.select_filterss)
       formData2.append("region", this.form.region);
       formData2.append("city", this.form.city);
       formData2.append("country", this.form.country);
@@ -477,12 +591,15 @@ export default {
       formData2.append("neighbor", this.form.neighbor);
 
       formData2.append("name", this.form.name);
-      formData2.append("categoryId", this.form.category);
+      formData2.append("categoryId",this.stringArray(this.multiselecvalue) );
+      formData2.append("subCategoryId",this.stringArray(this.filterselectvalue)) ;
+       formData2.append("filterId",this.ArrayString(this.select_filterss)) ;
       formData2.append("keywords", this.form.keywords);
       formData2.append("primary_phone", this.form.phone);
       formData2.append("email", this.form.email);
       formData2.append("website", this.form.website);
       formData2.append("about_business", this.about);
+      
       console.log("---", formData2);
       this.axios
         .post("business/update/" + this.url, formData2, {
@@ -564,9 +681,26 @@ export default {
     MglMap,
     MglMarker,
     MglPopup,
+    Multiselect
   },
 
   computed: {
+
+     scategories() {
+      return this.$store.state.auth.subcategories;
+    },
+
+      pcategories() {
+      return this.$store.state.auth.categories;
+    },
+     selectedcategories: function() {
+      let selectedUsers = [];
+      this.multiselecvalue.forEach((item) => {
+        selectedUsers.push(item.id);
+      });
+      return selectedUsers;
+    },
+
     region() {
       let region = [];
       this.$store.state.auth.region.map((dat) => {

@@ -125,18 +125,18 @@
             </div>
 
             <div class="col-lg-3 col-md-6 footer-links white">
-              <h4 class="bridge-header text-left white">{{ $t('home.USEFULL_LINKS') }}</h4>
+              <h4 class="bridge-header text-left white over">{{ $t('home.USEFULL_LINKS') }}</h4>
               <ul class="white">
-                <li class="white"><a href="#">bridgeafricaventures.com</a></li>
+                <li class="white"><a href="#" class="over">bridgeafricaventures.com</a></li>
 
-                <li class="white"><a href="#">{{ $t('home.Home') }}</a></li>
+                <li class="white"><router-link :to="{name: 'home1'}" class="over">{{ $t('home.Home') }}</router-link></li>
 
-                <li class="white">
-                  <router-link :to="{name: 'about'}">{{ $t('home.About_Us') }}</router-link>
+                <li class="white ">
+                  <router-link :to="{name: 'about'}" class="over">{{ $t('home.About_Us') }}</router-link>
                 </li>
 
                 <li class="white">
-                  <router-link :to="{name: 'contact'}">{{ $t('home.Contact_Us') }}</router-link>
+                  <router-link :to="{name: 'contact'}" class="over">{{ $t('home.Contact_Us') }}</router-link>
                 </li>
 
               
@@ -168,20 +168,10 @@ export default {};
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
-.font-arvo {
-  /* font-family: 'Arvo', serif; */
-}
-.font-rob {
-  /* font-family: 'Roboto', Sans-serif; */
-}
-.font-poppin {
-  /* font-family: 'Poppins', sans-serif; */
-}
-.font-source {
-  /* font-family: 'Source Sans Pro', sans-serif; */
-}
-.font-mont {
-  /* font-family: 'Montserrat', sans-serif; */
+
+
+.over:hover {
+  color: #e75c18 !important;
 }
 .footer {
   margin-top: 2px;

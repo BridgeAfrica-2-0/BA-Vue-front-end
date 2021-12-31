@@ -228,8 +228,6 @@ import "cropperjs/dist/cropper.css";
 
 import { defaultCoverImage } from "@/mixins";
 
-import { defaultCoverImage } from "@/mixins";
-
 import { mapMutations, mapGetters } from "vuex";
 
 export default {

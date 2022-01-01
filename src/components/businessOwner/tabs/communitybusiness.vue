@@ -61,6 +61,8 @@
                       v-b-tooltip.hover
                       title="Block This Business"
                       variant="danger"
+                      @click="$emit('BlockUser', item.id)"
+                      style="cursor: pointer"
                     ></b-icon>
                   </p>
                 </div>
@@ -195,6 +197,22 @@ export default {
   },
 
   methods: {
+
+    blackListed: async function(uuid){
+      const request = await this.$repository.share.blocking({banned_id:uuid, banned_type: 'profile' }, this.$route.params.id)
+
+      if (request.success){
+        const data = this.businesses.filter(item => item.id != uuid)
+        this.businesses = data
+
+      }else{
+        this.flashMessage.show({
+          status: "error",
+          message: request.data,
+        });
+      }
+    },
+    
     gotoBusiness(id) {
       this.$router.push(`/business/${id}#about`);
     },

@@ -607,8 +607,10 @@ export default {
         });
     },
 
-    getImages({ commit }) {
-      return axios.get("profile/user/media").then(({ data }) => {
+    getImages({ commit }, uuid=null) {
+      const path = uuid ? `profile/user/media?id=${uuid}`: 'profile/user/media';
+
+      return axios.get(path).then(({ data }) => {
         commit("setImages", data.data);
         console.log(data);
       });

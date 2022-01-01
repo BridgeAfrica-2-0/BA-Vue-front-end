@@ -2,7 +2,7 @@
   <div ref="wrapper">
     <Navbar />
 
-    <div class="container wahala" v-if="hasLoad">
+    <div class="container wahala" v-if="getUserInfos">
       <b-row>
         <b-col cols="12" md="12" lg="12" xl="12">
           <div>
@@ -23,7 +23,7 @@
                     <b-col cols="12" md="12">
                       <div>
                         <b-table-simple hover small caption-top responsive>
-                          <b-tbody v-if="getUserInfos.id">
+                           <b-tbody v-if="getUserInfos.id">
                             <b-tr>
                               <b-td class="a-text text"> {{ $t("settings.Name") }} </b-td>
 
@@ -96,7 +96,7 @@
                               <b-td class="a-text text"> {{ $t("settings.Country") }} </b-td>
 
                               <b-td class="a-text text">
-                                <b-link href="#">{{getUserInfos.country.name}}</b-link>
+                                <b-link href="#">{{getUserInfos.country.name ? getUserInfos.country.name : null}}</b-link>
                               </b-td>
                             </b-tr>
                             <br />
@@ -104,7 +104,7 @@
                               <b-td class="a-text text"> {{$t("settings.Region")}} </b-td>
 
                               <b-td class="a-text text">
-                                <b-link href="#">{{getUserInfos.region.name}}</b-link>
+                                <b-link href="#">{{getUserInfos.region.name ? getUserInfos.region.name : null}}</b-link>
                               </b-td>
                             </b-tr>
 
@@ -114,7 +114,7 @@
                               <b-td class="a-text text"> {{$t("settings.Division")}} </b-td>
 
                               <b-td class="a-text text">
-                                <b-link href="#">{{getUserInfos.division.name}}</b-link>
+                                <b-link href="#">{{getUserInfos.division.name ? getUserInfos.division.name : null}}</b-link>
                               </b-td>
                             </b-tr>
 
@@ -124,7 +124,7 @@
                               <b-td class="a-text text"> {{$t("settings.Municipality")}} </b-td>
 
                               <b-td class="a-text text">
-                                <b-link href="#">{{getUserInfos.council.name}}</b-link>
+                                <b-link href="#">{{getUserInfos.council.name ? getUserInfos.council.name : null}}</b-link>
                               </b-td>
                             </b-tr>
 
@@ -143,7 +143,7 @@
                               <b-td class="a-text text"> {{ $t('settings.Neighbourhood') }}</b-td>
 
                               <b-td class="a-text text">
-                                <b-link href="#">{{getUserInfos.neigborhood.name}}</b-link>
+                                <b-link href="#">{{getUserInfos.neigborhood.name ? getUserInfos.neigborhood.name : null}}</b-link>
                               </b-td>
                             </b-tr>
                             <br />
@@ -221,21 +221,17 @@
                                       <button  class="btn btn-primary" @click="update">{{$t("settings.Save_Changes")}}</button>
                                     </form>
 
-                              </b-modal>
+                              </b-modal> 
                             </div>
                             <br />
 
                             <br />
-                          </b-tbody>
+                          </b-tbody> 
                         </b-table-simple>
                       </div>
                     </b-col>
                   </b-row>
                 </b-card-text>
-              </b-tab>
-
-              <b-tab :title="$t('settings.Account_Type') ">
-                <Website :profileId="getUserInfos.id"/>
               </b-tab>
 
               <b-tab :title="$t('settings.Payment')">
@@ -332,7 +328,6 @@
         <b-col> </b-col>
       </b-row>
     </div>
-
     <Footer />
   </div>
 </template>
@@ -341,8 +336,7 @@
 import Navbar from '@/components/navbar';
 import Footer from '@/components/footer';
 import SettingsNotifications from '@/components/SettingsNotifications.vue';
-import Website from "@/components/businessOwner/settings/website";
-import Payment from "@/components/businessOwner/settings/payment";
+import Payment from "@/components/owner/settings/payment";
 import Blocking from "@/components/owner/settings/blocking";
 
 export default {
@@ -350,7 +344,6 @@ export default {
     Navbar,
     Footer,
     SettingsNotifications,
-    Website,
     Payment,
     Blocking
   },
@@ -476,7 +469,7 @@ export default {
         //   }else { this.selectedGender = 1 }
           this.selectedGender = this.$store.state.profileSettingsEdit.userInfos.gender;
           // this.selectedCounty = this.getUserInfos.country.id;
-          // console.log("-----------------"+this.selectedCounty);
+          console.log("---------getUserInfos--------",this.getUserInfos);
         
       })
       .catch((err) => {

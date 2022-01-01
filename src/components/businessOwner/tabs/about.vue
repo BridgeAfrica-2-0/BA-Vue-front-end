@@ -6,15 +6,37 @@
     <hr />
 
     <b-card>
-      <div class="mb-3">
-        <mapbox
-          v-if="business_about.lng && business_about.lat"
-          :business="business_about"
-        />
+
+      <div class="mb-3" > 
+        <mapbox :coordinates="[business_about.lng, business_about.lat]" />
+
       </div>
 
       <b-card>
         <b-row v-if="loading">
+          <b-col>
+            <div
+              class="edit"
+              v-b-modal.biographyModal
+              @click="
+                business_about_input = JSON.parse(
+                  JSON.stringify(business_about)
+                )
+              "
+            >
+              <b-icon
+                icon="pencil-fill"
+                variant="primary"
+                v-if="showPen != 'BusinessEditor'"
+              ></b-icon>
+            </div>
+            <h4 class="mb-4 text-center username">
+              {{ business_about.name }}
+            </h4>
+            <p class="text-justify text">
+              {{ business_about.location_description }}
+            </p>
+          </b-col>
           <b-col>
             <!-- <div class="edit">
                 <b-icon
@@ -35,11 +57,40 @@
               <b-icon icon="pencil-fill" variant="primary"></b-icon>
             </div>
             <h4 class="mb-4 text-center username">
-              <b-icon icon="info-circle-fill" class="primary mr-2"></b-icon>
               {{ business_about.name }}
             </h4>
             <p class="text-justify text">
               {{ business_about.location_description }}
+            </p>
+          </b-col>
+          <b-col>
+            <!-- <div class="edit">
+                <b-icon
+                  icon="pencil-fill"
+                  variant="primary"
+                  
+                ></b-icon>
+              </div> -->
+            <div
+
+                v-if="showPen != 'BusinessFollower'"
+                class="edit"
+                v-b-modal.biographyModal
+                @click="
+                  business_about_input = JSON.parse(
+                    JSON.stringify(business_about)
+                  )
+                "
+              >
+                <b-icon icon="pencil-fill" variant="primary"></b-icon>
+              </div>
+
+            <h4 class="mb-4 text-center username">
+              <b-icon icon="info-circle-fill" class="primary mr-2"></b-icon>
+              {{ business_about.name }}
+            </h4>
+            <p class="text-justify text">
+              {{ business_about.about_business }}
             </p>
           </b-col>
           <b-col>
@@ -57,7 +108,7 @@
                 <b-icon
                   icon="briefcase-fill"
                   class="primary icon-size"
-                ></b-icon>
+                ></b-icon> 
                 <span
                   v-for="category in business_about.category"
                   :key="category.id"
@@ -65,16 +116,20 @@
                 </span>
                 <!-- <span>{{ business_about.name }}</span> -->
               </p>
-              <p>
+              <p> 
                 <b-icon icon="search" class="primary icon-size"></b-icon>
                 {{ business_about.name }}
               </p>
               <p>
                 <b-icon icon="geo-alt-fill" class="primary icon-size"></b-icon>
-                <span
-                  >{{ business_about.address }}, {{ business_about.city }},
-                  {{ business_about.country }}</span
-                >
+
+               <span
+              >{{ business_about.address }}
+              <!-- {{ business_about.city }}, 
+             {{ business_about.country[0].name }} -->
+              </span
+            >
+
               </p>
               <p>
                 <b-icon icon="link" class="primary icon-size"></b-icon>
@@ -93,7 +148,7 @@
                   icon="telephone-fill"
                   class="primary icon-size"
                 ></b-icon>
-                {{ business_about.phone }}
+                {{ business_about.phone1 }}
               </p>
               <p>
                 <b-icon icon="envelope-fill" class="primary icon-size"></b-icon>
@@ -248,7 +303,7 @@
             type="text"
             id="description"
             name="description"
-            v-model="business_about_input.location_description"
+            v-model="business_about_input.about_business"
             class="mb-3 form-control"
             :placeholder="$t('businessowner.description')"
             required
@@ -478,7 +533,7 @@
             type="text"
             id="description"
             name="description"
-            v-model="business_about_input.location_description"
+            v-model="business_about_input.about_business"
             class="mb-3 form-control"
             placeholder="description"
             required
@@ -586,24 +641,6 @@ export default {
       municipality: [],
       locality: [],
 
-      // categories: [
-      //   { item: "Professional_and_home_service", name: "Professionals" },
-      //   { item: "Agriculture ", name: "Agriculture " },
-      //   { item: "Restaurant ", name: " Restaurant " },
-      //   { item: "Electronics ", name: "Electronics " },
-      //   { item: "Handicrafts", name: "Handicrafts" },
-      //   { item: "clothing", name: "clothing" },
-      //   { item: "Mechanics", name: "Mechanics" },
-      //   { item: "Health_unit ", name: "Health unit " },
-      //   { item: "Bars", name: "Bars" },
-      //   { item: "Hair_and_beauty ", name: "Hair and beauty " },
-      //   { item: "Real_estate ", name: "Real_estate " },
-      //   { item: "Travelling ", name: "Travelling " },
-      //   { item: "Hotels", name: "Hotels" },
-      //   { item: "station", name: " station  " },
-      //   { item: "Mayor_concils", name: "Mayor_concils" },
-      //   { item: "Taxis service", name: "Taxis service" },
-      // ],
       dayOfWorks: [
         {
           day: this.$t("home.Monday"),
@@ -786,49 +823,49 @@ export default {
     localities() {
       return this.$store.state.auth.locality;
     },
-    selectedcategories: function() {
+    selectedcategories: function () {
       let selectedUsers = [];
       this.multiselecvalue.forEach((item) => {
         selectedUsers.push(item.category_id);
       });
       return selectedUsers;
     },
-    selectedsubcategories: function() {
+    selectedsubcategories: function () {
       let sub_cat = [];
       this.filterselectvalue.forEach((item) => {
         sub_cat.push(item.subcategory_id);
       });
       return sub_cat;
     },
-    selectedcountry: function() {
+    selectedcountry: function () {
       let sub_cat = [];
       this.country.forEach((item) => {
         sub_cat.push(item.country_id);
       });
       return sub_cat;
     },
-    selectedregion: function() {
+    selectedregion: function () {
       let sub_cat = [];
       this.region.forEach((item) => {
         sub_cat.push(item.region_id);
       });
       return sub_cat;
     },
-    selecteddivision: function() {
+    selecteddivision: function () {
       let sub_cat = [];
       this.division.forEach((item) => {
         sub_cat.push(item.division_id);
       });
       return sub_cat;
     },
-    selectedmunicipality: function() {
+    selectedmunicipality: function () {
       let sub_cat = [];
       this.municipality.forEach((item) => {
         sub_cat.push(item.council_id);
       });
       return sub_cat;
     },
-    selectedlocality: function() {
+    selectedlocality: function () {
       let sub_cat = [];
       this.locality.forEach((item) => {
         sub_cat.push(item.neighborhood_id);
@@ -838,6 +875,21 @@ export default {
   },
 
   methods: {
+
+    loadBusinessAbout(){
+        this.$store
+      .dispatch("businessOwner/loadUserBusinessAbout", {
+        // business_abobusiness_id: this.business_about_input,
+        business_id: this.$route.params.id,
+      }).then(res => {
+
+        this.business_about = JSON.parse(
+          JSON.stringify(this.$store.getters["businessOwner/getBusinessAbout"])
+        );
+      }
+
+      )
+    },
     validator(tag) {
       return tag.length > 2 && tag.length < 20;
     },
@@ -909,6 +961,7 @@ export default {
                 "fetch finished on the database response (3) ",
                 response
               );
+              this.loadBusinessAbout();
               console.log("Modify Business Biography end++++");
             })
             .catch((error) => {
@@ -932,19 +985,52 @@ export default {
           console.log("edit address business");
           this.test();
           console.log(this.business_about_input);
+
+           var dat = {
+             business_id: this.$route.params.id,
+             data: {
+            name: this.business_about_input.name,
+            about_business: this.business_about_input.about_business,
+            categoryId: this.business_about_input.category[0].category_id,
+            subCategoryId: this.business_about_input.subCatFilter[0].subcategoryId,
+            filterId: this.business_about_input.filter[0].filter_id,
+            keywords: this.stringKeyword(this.business_about_input.keywords),
+            primary_phone: this.business_about_input.phone,
+            secondary_phone :this.business_about_input.secondary_phone,
+            website: this.business_about_input.website,
+            email: this.business_about_input.email,
+            country: this.business_about_input.country[0].country_id,
+            region: this.business_about_input.region[0].region_id,
+            division: this.business_about_input .division[0].division_id,
+            council: this.business_about_input.council[0].council_id,
+            neigborhood: this.business_about_input.council[0].neighborhood_id,
+            locality: this.business_about_input.locality,
+            city: this.business_about_input.city,
+            openHours: this.business_about_input.business_open_hours,
+            lat: this.business_about_input.lat,
+            lng: this.business_about_input.lng,
+            address: this.business_about_input.address
+            }
+            
+          }
           this.$store
-            .dispatch("businessOwner/updateUserBusinessAbout", {
-              business_about: this.business_about_input,
-              business_id: this.business_id,
-            })
+            .dispatch("businessOwner/updateUserBusinessAbout", dat
+            // {
+            //   business_about: this.business_about_input,
+            //   business_id: this.business_id,
+            // }
+            )
             .then((response) => {
               console.log(
                 "update user business about response ++++++",
                 response
               );
+               this.loadBusinessAbout();
               this.business_about = this.$store.getters[
                 "businessOwner/getBusinessAbout"
               ];
+              
+               this.$refs["addressBusinessModal"].hide();
               console.log("update user business about end");
             })
             .catch((error) => {
@@ -966,6 +1052,15 @@ export default {
           console.log("No Correspondance");
           break;
       }
+    },
+
+    stringKeyword(words){
+        let keyword = '';
+        words.map(item =>{
+          keyword+= item+','
+        })
+
+        return keyword.substring(0, keyword.length-1);
     },
     test() {
       let businessAddress = this.dayOfWorks.filter((day) => {

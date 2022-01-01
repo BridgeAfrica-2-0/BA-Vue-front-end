@@ -1,10 +1,13 @@
 <template>
   <div class="lalala">
-    <div class=" border mt-2 ">{{total}}
+    <div class=" border mt-2 ">
       <span>
         <h6 class="title m-3">
           <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
-          <b> {{ $t('businessowner.COMMUNITY') }}</b> <span class="h4-color"> {{ nFormatter(total.total) }} </span>
+          <b> {{ $t('businessowner.COMMUNITY') }}</b> 
+          <span class="h4-color"> 
+            {{ nFormatter(total.total_user_following + total.total_user_follower+total.total_business_follower + total.total_business_following+total.total_network_follower + total.total_network_following) }} 
+          </span>
         </h6>
       </span>
 
@@ -13,7 +16,7 @@
           <template slot="title">
             {{ $t("businessowner.People") }}
             <span class="spa-color">
-              {{ nFormatter(total.total_people) }}
+              {{ nFormatter(total.total_user_following + total.total_user_follower) }}
             </span>
           </template>
 
@@ -52,7 +55,7 @@
           <template slot="title">
             {{ $t("businessowner.Businesses") }}
             <span class="spa-color">
-              {{ nFormatter(total.total_business) }}
+              {{ nFormatter(total.total_business_follower + total.total_business_following) }}
             </span>
           </template>
 
@@ -92,7 +95,7 @@
           <template slot="title">
             {{ $t("businessowner.Network") }}
             <span class="spa-color">
-              {{ nFormatter(total.total_network) }}</span
+              {{ nFormatter(total.total_network_follower + total.total_network_following) }}</span
             >
           </template>
 

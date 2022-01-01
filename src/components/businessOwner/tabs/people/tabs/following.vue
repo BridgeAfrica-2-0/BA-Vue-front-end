@@ -17,7 +17,7 @@
     <br />
 
       <div md="12" lg="6">
-        <CommunityMembers  :searchh="keywords" ref="search" type="Following"  />
+        <CommunityMembers @BlockUser="BlockUser" :searchh="keywords" ref="search" type="Following"  />
       </div>  
 
       
@@ -36,9 +36,18 @@ export default {
     CommunityMembers
   },
 
-  computed: {
-   
-  },
+  computed: {},
+  methods: {
+    BlockUser(id) {
+      console.log(id);
+      let dataInfo = {
+        id: id,
+        refernce: "user",
+        type: "following",
+      };
+      this.$emit('BlockUser', dataInfo);
+    },
+  }
 
 };
 </script>

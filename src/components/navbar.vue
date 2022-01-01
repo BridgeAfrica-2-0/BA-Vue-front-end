@@ -106,8 +106,8 @@
               <vue-bootstrap-typeahead
                 v-model="query"
                 :data="neigbourhoods"
-                :minMatchingChars=0
-                :maxMatches=10
+                :minMatchingChars="0"
+                :maxMatches="10"
                 :serializer="(item) => item.name"
                 placeholder="Where"
                 class="search-hh w-44"
@@ -554,7 +554,7 @@ export default {
       default: function () {
         return {
           keyword: "",
-          placeholder: "All",
+          placeholder: this.$t("general.All"),
         };
       },
     },
@@ -571,7 +571,7 @@ export default {
       redirectionPatterns: null,
       searchOptions: {
         keyword: "",
-        placeholder: "All",
+        placeholder: this.$t("general.All"),
       },
       query: "",
       selectedUser: null,
@@ -760,9 +760,18 @@ export default {
       if (!this.searchOptions.keyword) return false;
 
       if (this.$route.name != "Search") {
+        console.log("the keyword is: ", this.credentials.keyword);
+        this.$store
+          .dispatch("allSearch/SEARCH", {
+            keyword: this.credentials.keyword,
+          })
+          .catch((err) => {
+            console.log("Error erro!");
+          });
+
         this.$router.push({
-          name: "Search",
-          query: { keyword: this.searchOptions.keyword },
+          name: "GlobalSearch",
+          query: { keyword: this.credentials.keyword },
         });
       }
     },
@@ -799,11 +808,20 @@ export default {
         color: "#e75c18",
       });
 
-      const response = await this.$repository.notification.logOut();
-      if (response.success) {
-        loader.hide();
-        this.$router.push({ name: "home1" });
-        this.Logout();
+      const requestForReset = await this.$repository.share.switch(
+        null,
+        "reset"
+      );
+
+      if (requestForReset.success) {
+        const response = await this.$repository.notification.logOut();
+
+        if (response.success) {
+          loader.hide();
+          this.$router.push({ name: "home1" });
+          this.Logout();
+        }
+        return false;
       }
       loader.hide();
     },
@@ -817,12 +835,14 @@ export default {
       });
 
       const response = await this.$repository.share.switch(null, "reset");
+
       if (response.success) {
         this.profile({ ...this.auth.user, user_type: "user" });
         this.$router.push({
           name: "profile_owner",
         });
       }
+
       loader.hide();
     },
 

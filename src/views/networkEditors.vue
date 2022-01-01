@@ -105,7 +105,6 @@ export default {
 
         { label: this.$t("network.Settings"), icon: "" },
       ],
-
       options: {
         activeColor: "#32a400",
       },

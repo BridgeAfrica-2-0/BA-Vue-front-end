@@ -10,19 +10,14 @@
       </div>
 
       <div v-else class="splide">
+
         <splide :options="options" class="banner r-image">
-          <splide-slide>
-            <img src="@/assets/img/Business 1.jpg" class="r-image" />
-          </splide-slide>
-
-          <splide-slide>
-            <img src="@/assets/img/business 2.jpg" class="r-image" />
-          </splide-slide>
-
-          <splide-slide>
-            <img src="@/assets/img/business 3.png" class="r-image" />
+          <splide-slide v-for="(cover, index) in getCustomCover" :key="index">
+            <img :src="cover" class="r-image" />
           </splide-slide>
         </splide>
+
+      
       </div>
       <!-- <router-link to="#media?type=cover"> -->
       <b-button @click="gotoCoverImages" class="float-right see-all">
@@ -34,7 +29,7 @@
         <b-row class="mt-md-2">
           <b-col cols="8" md="6" class="m-0 p-0">
             <b-avatar
-              :src="business_info.logo_path"
+              :src="profile.profile_picture"
               class="float-left mt-2 mr-2 mr-xl-5 mr-lg-5 round-coner logo_avat"
               badge-variant="primary"
               badge-offset="10px"
@@ -162,7 +157,6 @@
               </div>
             </b-modal>
           </b-col>
-
           <b-col cols="4" md="6" class="">
             <div class="my-auto">
               <span class="float-right">
@@ -209,9 +203,17 @@
 </template>
 
 <script>
-import { mapMutations } from "vuex";
+import { mapMutations, mapGetters } from "vuex";
+
+import {defaultCoverImage} from '@/mixins';
+
 export default {
   name: "headPageOwner",
+  mixins:[defaultCoverImage],
+
+  created(){
+    this.currentAuthType = 'business'
+  },
 
   data() {
     return {
@@ -239,9 +241,10 @@ export default {
             gap: "1rem",
           },
         },
-      },
+      },  
     };
   },
+
 
   methods: {
     ...mapMutations({
@@ -405,9 +408,10 @@ export default {
   },
 
   computed: {
-    business_info() {
-      return this.$store.state.businessOwner.businessInfo;
-    },
+    ...mapGetters({ 
+      profile: 'auth/profilConnected',
+      business_info: 'businessOwner/getBusinessInfo'
+    }),
   },
 
   watch: {

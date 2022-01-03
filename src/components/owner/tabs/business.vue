@@ -241,6 +241,18 @@ export default {
         });
     },
 
+
+
+  getTotalCommunity(){
+         this.$store
+      .dispatch("follower/Tcommunity", this.foll_id)
+      .then((response) => {})
+      .catch((error) => {
+        console.log({ error: error });
+      });
+    },
+
+
     async handleFollow(user) {
       document.getElementById("followbtn" + user.id).disabled = true;
 
@@ -257,6 +269,8 @@ export default {
           console.log(response);
           user.is_follow = nextFollowState;
           document.getElementById("followbtn" + user.id).disabled = false;
+
+             this.getTotalCommunity();
         })
         .catch((err) => {
           console.log(err);

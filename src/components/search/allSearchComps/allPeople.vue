@@ -22,7 +22,7 @@
           <b-col md="3" cols="4" sm="4" class="my-auto">
             <b-avatar
               class="p-avater"
-              variant="primary"
+            
               :src="item.profile_picture"
             ></b-avatar>
           </b-col>

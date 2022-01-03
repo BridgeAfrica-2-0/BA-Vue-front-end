@@ -189,12 +189,12 @@ new Vue({
     store,
     i18n,
     created() {
-        const userInfo = localStorage.getItem('user');
+        let userInfo = localStorage.getItem('user');
         i18n.locale = localStorage.getItem('lang');
         let lang = localStorage.getItem('lang') ? localStorage.getItem('lang') : "en";
 
         if (userInfo) {
-            const userData = JSON.parse(userInfo);
+            let userData = JSON.parse(userInfo);
             user = userData;
             this.$store.commit('auth/setUserData', userData);
         }
@@ -213,7 +213,7 @@ new Vue({
 
         axios.interceptors.request.use(function(config) {
             if (user != null) {
-                config.headers.Authorization = `Bearer ${user.accessToken}`;
+             //   config.headers.Authorization = `Bearer ${user.accessToken}`;
             }
             console.log("locale lang:", i18n.fallbackLocale);
 

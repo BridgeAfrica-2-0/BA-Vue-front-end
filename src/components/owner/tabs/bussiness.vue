@@ -90,11 +90,13 @@
                         {{ $t("profileowner.Keywords") }} :</label
                       ><br />
 
+                     
+
                       <multiselect
                         v-model="business_keyword"
                         tag-:placeholder="$t('profileowner.Add_this_as_new_Keyword')"
                         :placeholder="$t('profileowner.Add_New_Keyword')"
-                        :label="$t('profileowner.name')"
+                        label="name"
                         track-by="id"
                         :options="keywordds"
                         :multiple="true"
@@ -131,7 +133,7 @@
                     @input="subcategories"
                     tag-:placeholder="$t('profileowner.Add_this_as_new_tag')"
                     :placeholder="$t('profileowner.Search_or_add_a_tag')"
-                    :label="$t('profileowner.name')"
+                    label="name"
                     track-by="id"
                     :options="pcategories"
                     :multiple="true"
@@ -146,7 +148,7 @@
                     v-model="filterselectvalue"
                     tag-:placeholder="$t('profileowner.Add_this_as_new_tag')"
                     :placeholder="$t('profileowner.Search_or_add_a_tag')"
-                    :label="$t('profileowner.name')"
+                    label="name"
                     track-by="subcategory_id"
                     :options="scategories"
                     :multiple="true"
@@ -199,7 +201,7 @@
                         v-model="country"
                         @input="Region"
                         :placeholder="$t('profileowner.Search')"
-                        :label="$t('profileowner.name')"
+                        label="name"
                         track-by="id"
                         :options="countries"
                         :multiple="true"
@@ -214,7 +216,7 @@
                         v-model="region"
                         @input="Division"
                         :placeholder="$t('profileowner.Search')"
-                        :label="$t('profileowner.name')"
+                        label="name"
                         track-by="id"
                         :options="regions"
                         :multiple="true"
@@ -229,7 +231,7 @@
                         v-model="division"
                         @input="Municipality"
                         :placeholder="$t('profileowner.Search')"
-                        :label="$t('profileowner.name')"
+                        label="name"
                         track-by="id"
                         :options="divisions"
                         :multiple="true"
@@ -245,7 +247,7 @@
                         v-model="municipality"
                         @input="Locality"
                         :placeholder="$t('profileowner.Search')"
-                        :label="$t('profileowner.name')"
+                        label="name"
                         track-by="id"
                         :options="municipalities"
                         :multiple="true"
@@ -259,7 +261,7 @@
                       <multiselect
                         v-model="locality"
                         :placeholder="$t('profileowner.Search')"
-                        :label="$t('profileowner.name')"
+                        label="name"
                         track-by="id"
                         :options="localities"
                         :multiple="true"
@@ -304,13 +306,13 @@
                     <label class="username">
                       {{ $t("profileowner.Phone1") }}
                     </label>
-                    <VuePhoneNumberInput v-model="phone1" />
+                    <VuePhoneNumberInput fetch-country v-model="phone1" />
                   </b-col>
                   <b-col md="6">
                     <label class="username">
                       {{ $t("profileowner.Phone2") }}
                     </label>
-                    <VuePhoneNumberInput v-model="phone2" />
+                    <VuePhoneNumberInput  fetch-country  v-model="phone2" />
                   </b-col>
                 </b-row>
 
@@ -425,7 +427,8 @@
                         }}.</b-form-invalid-feedback
                       >
                     </b-form-group>
-
+  
+  
                     <div class="form-group">
                       <label for="country" class="username"> {{ $t('profileowner.Keywords') }} :</label><br />
 
@@ -433,7 +436,7 @@
                         v-model="business_keyword"
                         tag-:placeholder="$t('profileowner.Add_this_as_new_Keyword')"
                         :placeholder="$t('profileowner.Add_New_Keyword')"
-                        :label="$t('profileowner.name')"
+                        label="name"
                         track-by="id"
                         :options="keywordds"
                         :multiple="true"
@@ -470,7 +473,7 @@
                     @input="subcategories"
                     tag-:placeholder="$t('profileowner.Add_this_as_new_tag')"
                     :placeholder="$t('profileowner.Search_or_add_a_tag')"
-                    :label="$t('profileowner.name')"
+                    label="name"
                     track-by="id"
                     :options="pcategories"
                     :multiple="true"
@@ -485,7 +488,7 @@
                     v-model="filterselectvalue"
                     tag-:placeholder="$t('profileowner.Add_this_as_new_tag')"
                     :placeholder="$t('profileowner.Search_or_add_a_tag')"
-                    :label="$t('profileowner.name')"
+                    label="name"
                     track-by="subcategoryId"
                     :options="scategories"
                     :multiple="true"
@@ -538,7 +541,7 @@
                         v-model="country"
                         @input="Region"
                         :placeholder="$t('profileowner.Search')"
-                        :label="$t('profileowner.name')"
+                        label="name"
                         track-by="id"
                         :options="countries"
                         :multiple="true"
@@ -553,7 +556,7 @@
                         v-model="region"
                         @input="Division"
                         :placeholder="$t('profileowner.Search')"
-                        :label="$t('profileowner.name')"
+                        label="name"
                         track-by="id"
                         :options="regions"
                         :multiple="true"
@@ -568,7 +571,7 @@
                         v-model="division"
                         @input="Municipality"
                         :placeholder="$t('profileowner.Search')"
-                        :label="$t('profileowner.name')"
+                        label="name"
                         track-by="id"
                         :options="divisions"
                         :multiple="true"
@@ -584,7 +587,7 @@
                         v-model="municipality"
                         @input="Locality"
                         :placeholder="$t('profileowner.Search')"
-                        :label="$t('profileowner.name')"
+                        label="name"
                         track-by="id"
                         :options="municipalities"
                         :multiple="true"
@@ -600,7 +603,7 @@
                       <multiselect
                         v-model="locality"
                         :placeholder="$t('profileowner.Search')"
-                        :label="$t('profileowner.name')"
+                        label="name"
                         track-by="id"
                         :options="localities"
                         :multiple="true"
@@ -653,13 +656,13 @@
                     <label class="username">
                       {{ $t("profileowner.Phone1") }}
                     </label>
-                    <VuePhoneNumberInput v-model="phone1" />
+                    <VuePhoneNumberInput fetch-country v-model="phone1" />
                   </b-col>
                   <b-col md="6">
                     <label class="username">
                       {{ $t("profileowner.Phone2") }}
                     </label>
-                    <VuePhoneNumberInput v-model="phone2" />
+                    <VuePhoneNumberInput fetch-country v-model="phone2" />
                   </b-col>
                 </b-row>
 
@@ -910,6 +913,23 @@ export default {
   },
 
   methods: {
+
+    formkeywords(keyword){
+
+       let selectedUsers = [];
+      keyword.forEach((item) => {
+        selectedUsers.push({"name":item, "id":item});
+        
+
+      });
+
+      
+      return selectedUsers;
+
+      
+
+    },
+
     profileBusiness: async function(){
       this.$store
         .dispatch("profile/loadMore", 'business/user')
@@ -1070,7 +1090,9 @@ export default {
       this.email = business.email;
       this.time_zone = business.timeZone;
       this.address = business.address;
-      this.business_keyword = business.keywords;
+     
+    //  this.keywordds= business.keywords;
+       this.business_keyword = this.formkeywords(business.keywords);
       this.address = business.address;
 
       this.subcategories();
@@ -1351,7 +1373,7 @@ export default {
         formData2.append("categoryId", this.selectedcategories);
         formData2.append("subCategoryId", this.selectedsubcategories);
         formData2.append("filterId", this.select_filterss);
-        formData2.append("keywords", this.business_keyword);
+        formData2.append("keywords", this.selectedKeywords);
         formData2.append("timezone", this.time_zone);
         formData2.append("language", this.language);
         formData2.append("about_business", this.about);
@@ -1436,7 +1458,7 @@ export default {
          formData2.append('neigborhood', this.selectedlocality);
         formData2.append('lat', this.center.lat);
         formData2.append('lng', this.center.lng);
-        formData2.append('phone', this.phone1);
+        formData2.append('phone1', this.phone1);
         formData2.append('phone2', this.phone2);
         
         if (this.email)
@@ -1449,13 +1471,13 @@ export default {
         formData2.append('categoryId', this.selectedcategories);
         formData2.append('subCategoryId', this.selectedsubcategories);
         formData2.append('filterId', this.selectedfilters);
-        formData2.append('keywords', this.business_keyword);
+        formData2.append('keywords', this.selectedKeywords);
         formData2.append('timezone', this.time_zone);
         formData2.append('language', this.language);
         formData2.append('about_business', this.about);
 
         this.axios
-          .post('business/edit/' + this.bizId, formData2, {
+          .post('business/update/' + this.bizId, formData2, {
             headers: {
               'Content-Type': 'multipart/form-data',
             },

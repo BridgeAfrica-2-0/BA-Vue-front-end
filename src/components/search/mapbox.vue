@@ -102,9 +102,9 @@ export default {
   },
   mounted() {
     setTimeout(() => {
-      console.log("Business => ".this.businesses);
-      console.log("Products => ".this.products);
-      console.log("networks => ".this.networks);
+     // console.log("Business => ".this.businesses);
+     // console.log("Products => ".this.products);
+      //console.log("networks => ".this.networks);
     }, 5000);
   },
   methods: {

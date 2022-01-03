@@ -40,6 +40,7 @@
                 </read-more>
                 
                 <b-icon
+                 
                   font-scale="1"
                   icon="exclamation-octagon"
                   v-b-tooltip.hover

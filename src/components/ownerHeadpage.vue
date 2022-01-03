@@ -125,7 +125,7 @@
               </div>
             </b-modal>
 
-            <b-modal id="modal-upp" ref="modal" :title="$t('profileowner.Upload_Cover_Picture')">
+            <b-modal id="modal-upp" ref="modalxl" :title="$t('profileowner.Upload_Cover_Picture')">
               <div class="w3-container">
                 <div class="row pb3">
                   <div
@@ -248,7 +248,8 @@ export default {
 
   methods: {
     ...mapMutations({
-      addCoverPicture: 'auth/addCoverPicture'
+      addCoverPicture: 'auth/addCoverPicture',
+      addProfile: 'auth/updateProfilePicture'
     }),
 
     nFormatter(num) {
@@ -325,12 +326,12 @@ export default {
     },
 
     submitLogo() {
-      // let loader = this.$loading.show({
-      //   container: this.fullPage ? null : this.$refs.preview,
-      //   canCancel: true,
-      //   onCancel: this.onCancel,
-      //   color: '#e75c18',
-      // });
+      let loader = this.$loading.show({
+        container: this.fullPage ? null : this.$refs.preview,
+        canCancel: true,
+        onCancel: this.onCancel,
+        color: '#e75c18',
+      });
 
       let formData = new FormData();
       formData.append("image", this.profile_photo);
@@ -344,13 +345,13 @@ export default {
           this.$store
             .dispatch("profile/loadUserPostIntro", null)
             .then((response) => {
-              console.log(response);
+             
               this.flashMessage.show({
                 status: "success",
                 message: this.$t("profileowner.Logo_Updated"),
                 blockClass: "custom-block-class",
               });
-              // loader.hide();
+               loader.hide();
               this.$refs["modalxl"].hide();
             })
             .catch((error) => {
@@ -366,7 +367,7 @@ export default {
               message: err.response.data.message,
               blockClass: "custom-block-class",
             });
-            // loader.hide();
+             loader.hide();
           } else {
             this.flashMessage.show({
               status: "error",
@@ -374,7 +375,7 @@ export default {
               blockClass: "custom-block-class",
             });
             console.log({ err: err });
-            // loader.hide();
+             loader.hide();
           }
         });
     },
@@ -400,7 +401,7 @@ export default {
           this.$store
             .dispatch("profile/loadUserPostIntro", null)
             .then((response) => {
-              console.log(response);
+             
               this.flashMessage.show({
                 status: "success",
                 message: this.$t("profileowner.profile_removed_successfully"),
@@ -547,7 +548,7 @@ export default {
           this.$store
             .dispatch("profile/loadUserPostIntro", null)
             .then((response) => {
-              console.log(response);
+             
 
               this.flashMessage.success({
                 message: this.$t("profileowner.Operation_successful"),
@@ -606,9 +607,12 @@ export default {
   },
 
   watch: {
-    "$state.state.profile.profileIntro": function(newInfo){
-      console.log(newInfo.user.cover_picture)
-      this.addCoverPicture(newInfo.user.cover_picture)
+    "$store.state.profile.profileIntro": { 
+      deep:true,
+      handler(){
+        this.addCoverPicture(this.$store.state.profile.profileIntro.user.cover_picture)
+        this.addProfile(this.$store.state.profile.profileIntro.user.profile_picture)
+      }
     }
   }
 };

@@ -588,7 +588,7 @@ export default {
     },
 
     businessInfo({ commit }, busineeId) {
-      return axios.get("business/info/" + busineeId).then(({ data }) => {
+      return axios.get("business/edit/" + busineeId).then(({ data }) => {
         commit("setBusinessInfo", data.data);
         console.log(data);
       });

@@ -768,7 +768,12 @@ export default {
     selectedcategories: function() {
       let selectedUsers = [];
       this.multiselecvalue.forEach((item) => {
-        selectedUsers.push(item.category_id);
+        if(item.category_id){
+
+          selectedUsers.push(item.category_id);
+        }else {
+           selectedUsers.push(item.id);
+        }
       });
       return selectedUsers;
     },
@@ -817,6 +822,43 @@ export default {
   },
 
   methods: {
+
+
+      stringArray(words){
+        let keyword = '';
+        words.map(item =>{
+
+          if(item.subcategoryId){ 
+            keyword+= item.subcategoryId+','
+          }else {
+
+            keyword+= item.subcategory_id+','
+          }
+        })
+
+        return keyword.substring(0, keyword.length-1);
+    },
+
+     stringArray1(words){ 
+        let keyword = '';
+        words.map(item =>{
+          if(item.category_id){
+            keyword+= item.category_id+','
+          }else {
+
+            keyword+= item.id+','
+          }
+        })
+        console.log('id ici ---',words,"---", keyword)
+        return keyword.substring(0, keyword.length-1);
+    },
+
+     ArrayString(words){
+       let keyword = '';
+        words.map(item =>{
+          keyword+= item+','
+        })
+     },
 
     loadBusinessAbout(){
         this.$store
@@ -933,9 +975,9 @@ export default {
              data: {
             name: this.business_about_input.name,
             about_business: this.business_about_input.about_business,
-            categoryId: this.business_about_input.category[0].category_id,
-            subCategoryId: this.business_about_input.subCatFilter[0].subcategoryId,
-            filterId: this.business_about_input.filter[0].filter_id,
+            categoryId:  this.stringArray1(this.multiselecvalue), //this.business_about_input.category[0].category_id,
+            subCategoryId: this.stringArray(this.filterselectvalue),//this.business_about_input.subCatFilter[0].subcategoryId,
+            filterId: this.ArrayString(this.select_filterss),
             keywords: this.stringKeyword(this.business_about_input.keywords),
             primary_phone: this.business_about_input.phone1,
             secondary_phone :this.business_about_input.phone2,
@@ -943,9 +985,9 @@ export default {
             email: this.business_about_input.email,
             country: this.business_about_input.country[0].country_id,
             region: this.business_about_input.region[0].region_id,
-            division: this.business_about_input .division[0].division_id,
+            division: this.business_about_input.division[0].division_id, 
             council: this.business_about_input.council[0].council_id,
-            neigborhood: this.business_about_input.council[0].neighborhood_id,
+            neigborhood: this.business_about_input.neigborhood[0].neighborhood_id,
             locality: this.business_about_input.locality,
             city: this.business_about_input.city,
             openHours: this.business_about_input.business_open_hours,
@@ -954,7 +996,8 @@ export default {
             address: this.business_about_input.address
             }
             
-          }
+          } 
+          console.log('data editer --',dat)
           this.$store
             .dispatch("businessOwner/updateUserBusinessAbout", dat
             // {
@@ -1156,11 +1199,11 @@ export default {
       select_filterss.map((item) => {
         this.select_filterss.push(item.filter_id);
       });
-      this.subcategories();
-      this.Region();
-      this.Division();
-      this.Municipality();
-      this.Locality();
+      // this.subcategories();
+      // this.Region();
+      // this.Division();
+      // this.Municipality();
+      // this.Locality();
     },
   },
 };

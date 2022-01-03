@@ -13,7 +13,7 @@
       </h6>
 
       <b-card-text>
-        <p>
+        <p> 
           <b-icon icon="briefcase-fill" class="primary icon-size"></b-icon>
           <span v-for="cat in business_intro.category" :key="cat.id">
             {{ cat.name }},
@@ -41,7 +41,7 @@
         </p>
         <p class="d-flex justify-content-start align-items-start">
           <b-icon icon="telephone-fill" class="primary icon-size"></b-icon>
-          {{ business_intro.phone }}
+          {{ business_intro.phone1 }}
         </p>
         <p class="d-flex justify-content-start align-items-start">
           <b-icon icon="envelope-fill" class="primary icon-size"></b-icon>
@@ -246,7 +246,7 @@
             <b-form-input
               id="input-1"
               class="mt-1"
-              v-model="form.phone"
+              v-model="form.phone1"
               type="tel"
               required
             ></b-form-input>
@@ -292,14 +292,23 @@
               topCountry="CM"
               class="form-control text"
             /> -->
-            <b-form-select
+
+             <multiselect
+            v-model="country"
+            @input="Region"
+            track-by="id"
+            label="name"
+            :options="countries"
+            :multiple="true"
+          ></multiselect>
+            <!-- <b-form-select
               :options="country"
               class="mb-3"
               @change="change"
               value-field="item"
-              v-model="form.country"
+              v-model="country"
               text-field="name"
-            ></b-form-select>
+            ></b-form-select> -->
           </div>
         </b-row>
 
@@ -314,14 +323,21 @@
               :region="region"
               class="form-control text"
             /> -->
-
-            <b-form-select
+             <multiselect
+            v-model="region"
+            
+            track-by="id"
+            label="name"
+            :options="regions"
+            :multiple="true"
+          ></multiselect>
+            <!-- <b-form-select
               :options="region"
               class="mb-3"
               value-field="item"
               v-model="form.region"
               text-field="name"
-            ></b-form-select>
+            ></b-form-select> -->
           </div>
           <b-form-group
             id="input-group-2"
@@ -381,7 +397,7 @@ export default {
       filterselectvalue: [],
       select_filterss: [],
       country: [],
-      // region: [],
+      region: [],
       url: null,
 
       markers: [],
@@ -471,17 +487,28 @@ export default {
     stringArray(words){
         let keyword = '';
         words.map(item =>{
-          keyword+= item.subcategory_id+','
+
+          if(item.subcategoryId){ 
+            keyword+= item.subcategoryId+','
+          }else {
+
+            keyword+= item.subcategory_id+','
+          }
         })
 
         return keyword.substring(0, keyword.length-1);
     },
-    stringArray1(words){
+    stringArray1(words){ 
         let keyword = '';
         words.map(item =>{
-          keyword+= item.id+','
-        })
+          if(item.category_id){
+            keyword+= item.category_id+','
+          }else {
 
+            keyword+= item.id+','
+          }
+        })
+        console.log('id ici ---',words,"---", keyword)
         return keyword.substring(0, keyword.length-1);
     },
      addFilter(newTag) {
@@ -492,10 +519,26 @@ export default {
       this.multiselec.push(tag);
       this.filterselectvalue.push(tag);
     },
+
+     Region() {
+      let formData2 = new FormData();
+      formData2.append("countryId", this.selectedcountry);
+      this.$store
+        .dispatch("auth/region", formData2)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+
     subcategories() {
       console.log(this.pcategories," subcategories here", this.selectedcategories);
       let formData2 = new FormData();
-      formData2.append("categoryId", this.selectedcategories);
+      formData2.append("categoryId", this.ArrayString(this.selectedcategories));
+      console.log("select cat ",this.ArrayString(this.selectedcategories))
       this.$store
         .dispatch("auth/subcategories", formData2)
         .then(() => {
@@ -584,12 +627,46 @@ export default {
       }
     },
 
+    editBusiness() {
+      console.log("editBusiness");
+      this.axios
+        .get("business/edit/" + this.$route.params.id)
+        .then(({ data }) => {
+          console.log("testing: ", data);
+          this.setEditData(data.data);
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+    setEditData(business) {
+      console.log("setting editBusiness data");
+      console.log(business);
+      this.multiselecvalue = business.category;
+     
+      this.filterselectvalue = business.subCatFilter;
+      let Bcountry = business.country;
+      Bcountry.map((c) => {
+        // this.country.push({ id: c.country_id, name: c.name });
+      });
+      this.region = business.region;
+      this.division = business.division;
+      this.municipality = business.council;
+      this.locality = business.neigborhood;
+      let select_filterss = business.filter;
+      select_filterss.map((item) => {
+        this.select_filterss.push(item.filter_id);
+      });
+      console.log("(((marc(((", this.multiselecvalue)
+    },
+
     UpdateBusiness() {
       let formData2 = new FormData();
-    console.log("----ttt",this.select_filterss, "----ggg ", this.filterselectvalue)
-      formData2.append("region", this.form.region);
+    console.log("----ttt",this.multiselecvalue, "----ggg ", this.filterselectvalue)
+      formData2.append("region", this.region[0].region_id);
       formData2.append("city", this.form.city);
-      formData2.append("country", this.form.country);
+      formData2.append("country", this.country[0].item);
+
 
       formData2.append("address", this.form.adress);
 
@@ -597,24 +674,23 @@ export default {
       formData2.append("lng", this.form.lng);
 
       formData2.append("neighbor", this.form.neighbor);
+           formData2.append("council", this.form.council[0].council_id);
+           formData2.append("division", this.form.division[0].division_id); 
+           formData2.append("neigborhood", this.form.neigborhood[0].neighborhood_id);
 
       formData2.append("name", this.form.name);
       formData2.append("categoryId",this.stringArray1(this.multiselecvalue) );
       formData2.append("subCategoryId",this.stringArray(this.filterselectvalue)) ;
        formData2.append("filterId",this.ArrayString(this.select_filterss)) ;
       formData2.append("keywords", this.form.keywords);
-      formData2.append("primary_phone", this.form.phone);
+      formData2.append("primary_phone", this.form.phone1);
       formData2.append("email", this.form.email);
       formData2.append("website", this.form.website);
-      formData2.append("about_business", this.about);
+      formData2.append("about_business", this.form.about_business);
       
-      console.log("---", formData2);
+      console.log("---", formData2,'èè',this.ArrayString(this.select_filterss) );
       this.axios
-        .post("business/update/" + this.url, formData2, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        })
+        .post("business/update/" + this.url, formData2)
         .then((response) => {
           console.log(response);
 
@@ -694,6 +770,13 @@ export default {
 
   computed: {
 
+     countries() {
+      return this.$store.state.auth.country;
+    },
+
+      regions() {
+      return this.$store.state.auth.region;
+    },
      scategories() {
       return this.$store.state.auth.subcategories;
     },
@@ -704,21 +787,26 @@ export default {
      selectedcategories: function() {
       let selectedUsers = [];
       this.multiselecvalue.forEach((item) => {
-        selectedUsers.push(item.id);
+        if(item.category_id){
+           selectedUsers.push(item.category_id);
+        }else {
+
+          selectedUsers.push(item.id);
+        }
       });
       return selectedUsers;
     },
 
-    region() {
-      let region = [];
-      this.$store.state.auth.region.map((dat) => {
-        region.push({
-          item: dat.id,
-          name: dat.name,
-        });
-      });
-      return region;
-    },
+    // Region() {
+    //   let region = [];
+    //   this.$store.state.auth.region.map((dat) => {
+    //     region.push({
+    //       item: dat.id,
+    //       name: dat.name,
+    //     });
+    //   });
+    //   return region;
+    // },
 
     getCat() {
       let categories = [];
@@ -731,7 +819,11 @@ export default {
       return categories;
     },
     business_intro() {
-      return this.$store.state.businessOwner.businessInfo;
+      return  JSON.parse(
+                JSON.stringify(
+                  this.$store.getters["businessOwner/getBusinessAbout"]
+                )
+              );//this.$store.state.businessOwner.businessInfo;
     },
   },
 
@@ -739,8 +831,12 @@ export default {
     this.businessInfos();
   },
   mounted() {
-    this.form = this.$store.state.businessOwner.businessInfo;
-
+    this.form =  JSON.parse(
+                JSON.stringify(
+                  this.$store.getters["businessOwner/getBusinessAbout"]
+                )
+              );//this.$store.state.businessOwner.businessInfo;
+    this.editBusiness();
     this.getCountry();
     this.getCathegorie();
     this.setcoordintes();

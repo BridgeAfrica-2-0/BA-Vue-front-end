@@ -4,7 +4,10 @@
       {{ $t("search.Sponsored_Result") }}
       <fas-icon class="icons" :icon="['fas', 'exclamation-circle']" size="lg" />
     </h6>
-      <Sponsor @on:init="(val) => showSponsored = val" v-if="showSponsored" />
+
+    <div>
+      <Sponsor />
+    </div>
     <h6>
       <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
       {{ $t("search.People") }}
@@ -50,7 +53,6 @@ export default {
 
   data: () => ({
     pageHasLoad: false,
-    showSponsored: false
   }),
 
   computed: {

@@ -6,13 +6,15 @@
 
     <div class="people-style shadow" v-for="item in network" :key="item.id">
       <b-row>
-        <b-col md="3" xl="5" lg="5" cols="5" sm="3">
+        <b-col md="8" xl="12" lg="12" cols="12" sm="8">
+          <div class="d-inline-flex">
+
           <div class="center-img">
             <img :src="item.picture" class="r-image" />
           </div>
-        </b-col>
+        
 
-        <b-col md="5" cols="7" lg="7" xl="7" sm="5">
+        <div class="flx100">
           <p class="textt">
             <strong class="title"> 
               <router-link :to="'/network_follower/' + item.id">
@@ -22,12 +24,21 @@
             {{ item.category }}
             <br />
             {{ item.followers }} {{ $t("businessowner.Community") }}<br />
-            
-            {{ item.about_network }}
-            <b-link> {{ $t("businessowner.Read_More") }}</b-link>
-          </p>
+       
+           
+                      <read-more
+                        :more-str="$t('search.read_more')"
+                        class="readmore"
+                        :text="item.about_network"
+                        link="#"
+                        :less-str="$t('search.read_less')"
+                        :max-chars="100"
+                      >
+                     
+                      </read-more>
+          </p>  </div> </div>
+    
         </b-col>
-
         <b-col lg="12" xl="12" md="4" cols="12" sm="4">
           <div class="s-button">
             <b-row>
@@ -100,6 +111,12 @@
         </b-col>
       </b-row>
     </div>
+
+
+
+
+
+
 
     <infinite-loading @infinite="infiniteHandler"></infinite-loading>
   </div>
@@ -199,6 +216,18 @@ export default {
         });
     },
 
+
+     businessCommunityTotal() {
+      this.$store
+        .dispatch("businessOwner/businessCommunityTotal", this.biz_id)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
     async handleFollow(user) {
       document.getElementById("followbtn" + user.id).disabled = true;
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
@@ -213,6 +242,8 @@ export default {
         .then((response) => {
           user.is_follow = nextFollowState;
           document.getElementById("followbtn" + user.id).disabled = false;
+
+          this.businessCommunityTotal();
         })
         .catch((err) => {
           console.log(err);
@@ -276,6 +307,7 @@ export default {
   text-align: center;
 
   padding: 15px;
+  padding-top: 2px;
 }
 
 @media only screen and (max-width: 768px) {
@@ -313,7 +345,7 @@ export default {
     padding: 1px;
     text-align: left;
 
-    margin-left: -30px;
+    margin-left: 2px;
 
     margin-right: -5px;
 
@@ -366,7 +398,7 @@ export default {
     padding: 1px;
     text-align: left;
 
-    margin-left: 30px;
+    margin-left: 65px;
 
     margin-right: -5px;
 

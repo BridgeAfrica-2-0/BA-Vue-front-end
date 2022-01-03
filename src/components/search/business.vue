@@ -1,11 +1,11 @@
 <template>
-  <div>  {{business}}
+  <div v-if="islogin">  
 
-    <NotFoundComponent />
-    <!-- <NotFoundComponent
+  
+     <NotFoundComponent
       v-if="business.data.length < 1 && prodLoader == false"
       :title="title"
-    /> -->
+    /> 
     <b-spinner
       v-if="prodLoader"
       variant="primary"
@@ -145,23 +145,31 @@
       @change="changePage"
       align="center"
     ></b-pagination>
-  </div>
+  </div>  <div v-else> 
+    
+
+
+       <login />
+    
+     </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
 import axios from "axios";
-
+import login from "@/components/search/login";
 import NotFoundComponent from "@/components/NotFoundComponent";
 export default {
   props: ["image"],
   components: {
     NotFoundComponent,
+    login
   },
 
   data() {
     return {
       total: 0,
+      islogin:true,
       per_page: 10,
       list: [],
       currentPage: 1,
@@ -191,6 +199,12 @@ export default {
 
   mounted() {
     this.getBusiness();
+  },
+  created(){
+   
+      this.islogin=this.$store.getters["auth/isLogged"];
+     
+     console.log(this.islogin);
   },
 
   methods: {

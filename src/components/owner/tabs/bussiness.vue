@@ -90,7 +90,7 @@
                         {{ $t("profileowner.Keywords") }} :</label
                       ><br />
 
-                      {{keywordds}} // {{business_keyword}}
+                     
 
                       <multiselect
                         v-model="business_keyword"
@@ -1458,7 +1458,7 @@ export default {
          formData2.append('neigborhood', this.selectedlocality);
         formData2.append('lat', this.center.lat);
         formData2.append('lng', this.center.lng);
-        formData2.append('phone', this.phone1);
+        formData2.append('phone1', this.phone1);
         formData2.append('phone2', this.phone2);
         
         if (this.email)

@@ -1,6 +1,6 @@
 <template>
-  <header class="">
-    <nav class="navbar navbar-expand-xl p-3 mb-3 rounded" v-if="user">
+  <header class=""> 
+    <nav class="navbar navbar-expand-xl p-3 mb-3 rounded" >
       <div class="container-fluid">
         <div class="col-md-12 col-lg-2 col-xl-2 text-center">
           <span class="d-block d-lg-none">
@@ -106,8 +106,8 @@
               <vue-bootstrap-typeahead
                 v-model="query"
                 :data="neigbourhoods"
-                :minMatchingChars=0
-                :maxMatches=10
+                :minMatchingChars="0"
+                :maxMatches="10"
                 :serializer="(item) => item.name"
                 placeholder="Where"
                 class="search-hh w-44"
@@ -160,8 +160,30 @@
                 </router-link>
               </div>
 
+
+              <div  v-if="!islogin" class="nav-item" >
+                <router-link
+                  :to="{ name: 'signup' }"
+                  class="nav-link text-dark hov"
+                >
+                  {{ $t("auth.signup") }}
+                </router-link>
+              </div>
+
+
+              <div  v-if="!islogin" class="nav-item" >
+                <router-link
+                  :to="{ name: 'Login' }"
+                  class="nav-link text-dark hov"
+                >
+                  {{ $t("auth.login") }}
+                </router-link>
+              </div>
+
+
+
               <!-- Messages Started -->
-              <div class="nav-item">
+              <div v-if="islogin" class="nav-item">
                 <a
                   id="messages"
                   class="nav-link"
@@ -219,7 +241,7 @@
               </div>
               <!-- Messages Ended -->
               <!-- Notifications Started -->
-              <div class="nav-item">
+              <div v-if="islogin" class="nav-item">
                 <a
                   id="notif"
                   class="nav-link"
@@ -270,7 +292,7 @@
               </div>
               <!-- Notifications Ended -->
 
-              <div class="nav-item cursor" id="profilepic">
+              <div  v-if="islogin"  class="nav-item cursor" id="profilepic">
                 <router-link :to="userOwnPage">
                   <b-avatar
                     variant="light"
@@ -281,11 +303,11 @@
                 </router-link>
               </div>
 
-              <b-tooltip target="profilepic" variant="light" triggers="click">
+              <b-tooltip v-if="islogin"  target="profilepic" variant="light" triggers="click">
                 {{ user.name }}
               </b-tooltip>
 
-              <div class="nav-item">
+              <div  v-if="islogin"  class="nav-item">
                 <a
                   id="other-menu"
                   class="nav-link text-dark arrow-down"
@@ -395,7 +417,7 @@
         </div>
 
         <b-modal ref="setcat" id="myModallnav" hide-footer title=" ">
-          <div class="d-block d-lg-block d-xl-none">
+          <div  v-if="islogin"  class="d-block d-lg-block d-xl-none">
             <div class="mt-3">
               <div class="d-inline-flex flex-row align-items-center">
                 <div>
@@ -540,6 +562,7 @@ export default {
   data() {
     return {
       isActive: false,
+      islogin:true,
       shownav: false,
       notifications: [],
       messages: [],
@@ -569,8 +592,16 @@ export default {
     this.getLocation();
   },
   created() {
+    //check for authentication
+
+      this.islogin=this.$store.getters["auth/isLogged"];
+     
+     console.log(this.islogin);
+     console.log("yoo mother fucjjeryt");
+     
+     if(this.islogin){    
     this.init();
-    this.userOwnPage = this.onRedirect();
+    this.userOwnPage = this.onRedirect(); 
 
     this.notificationPatterns = {
       user: () => "/notification/latest/user",
@@ -615,6 +646,7 @@ export default {
     };
 
     this.updateNotificationEvent();
+     }
   },
 
   watch: {

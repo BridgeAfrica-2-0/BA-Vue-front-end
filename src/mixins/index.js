@@ -597,7 +597,7 @@ export const defaultCoverImage = {
             : ['/covers/business mobile.png']
         },
         
-        profile: () => {
+        profile: () => { 
           return "fr" == this.$i18n.locale
           ? ['/covers/profile mobile FR.png']
           : ['/covers/profile mobile.png']
@@ -637,7 +637,6 @@ export const defaultCoverImage = {
   computed:{
     getCustomCover(){
       try{
-        console.log(this.strategy[this.isMobile ? "mobile" : "desktop"][this.currentAuthType]())
         return this.strategy[this.isMobile ? "mobile" : "desktop"][this.currentAuthType]()
       }catch(error){
         console.log(error)

@@ -6,14 +6,17 @@
     <hr /> 
     
     <b-card>
-      <div class="mb-3" > 
-        <mapbox :coordinates="[business_about.lng, business_about.lat]" />
+      <div class="mb-3">
+        <mapbox
+          v-if="business_about.lat && business_about.lng"
+          :business="business_about"
+        />
       </div>
       
       <b-card>
         <b-row v-if="loading">
 
-        
+  
          
           <b-col>
             
@@ -52,7 +55,7 @@
                 <b-icon
                   icon="briefcase-fill"
                   class="primary icon-size"
-                ></b-icon> 
+                ></b-icon>
                 <span
                   v-for="category in business_about.category"
                   :key="category.id"
@@ -60,12 +63,13 @@
                 </span>
               
               </p>
-              <p> 
+              <p>
                 <b-icon icon="search" class="primary icon-size"></b-icon>
                 {{business_about.name}}
               </p>
               <p>
                 <b-icon icon="geo-alt-fill" class="primary icon-size"></b-icon>
+
                <span
               >{{ business_about.address }}
               <!-- {{ business_about.city }}, 
@@ -549,9 +553,6 @@
 import { validationMixin } from "vuelidate";
 import { required, email, minLength } from "vuelidate/lib/validators";
 import mapbox from "@/components/mapbox";
-// import { MglMap, MglMarker } from "vue-mapbox";
-// import VuePhoneNumberInput from "vue-phone-number-input";
-// import "vue-phone-number-input/dist/vue-phone-number-input.css";
 import Multiselect from "vue-multiselect";
 export default {
   components: {
@@ -824,6 +825,7 @@ export default {
   methods: {
 
 
+
       stringArray(words){
         let keyword = '';
         words.map(item =>{
@@ -873,6 +875,7 @@ export default {
       }
 
       )
+
     },
     validator(tag) {
       return tag.length > 2 && tag.length < 20;
@@ -970,6 +973,7 @@ export default {
           this.test();
           console.log(this.business_about_input);
 
+
            var dat = {
              business_id: this.$route.params.id,
              data: {
@@ -998,24 +1002,27 @@ export default {
             
           } 
           console.log('data editer --',dat)
+
           this.$store
-            .dispatch("businessOwner/updateUserBusinessAbout", dat
-            // {
-            //   business_about: this.business_about_input,
-            //   business_id: this.business_id,
-            // }
+            .dispatch(
+              "businessOwner/updateUserBusinessAbout",
+              dat
+              // {
+              //   business_about: this.business_about_input,
+              //   business_id: this.business_id,
+              // }
             )
             .then((response) => {
               console.log(
                 "update user business about response ++++++",
                 response
               );
-               this.loadBusinessAbout();
+              this.loadBusinessAbout();
               this.business_about = this.$store.getters[
                 "businessOwner/getBusinessAbout"
               ];
-              
-               this.$refs["addressBusinessModal"].hide();
+
+              this.$refs["addressBusinessModal"].hide();
               console.log("update user business about end");
             })
             .catch((error) => {
@@ -1039,13 +1046,13 @@ export default {
       }
     },
 
-    stringKeyword(words){
-        let keyword = '';
-        words.map(item =>{
-          keyword+= item+','
-        })
+    stringKeyword(words) {
+      let keyword = "";
+      words.map((item) => {
+        keyword += item + ",";
+      });
 
-        return keyword.substring(0, keyword.length-1);
+      return keyword.substring(0, keyword.length - 1);
     },
     test() {
       let businessAddress = this.dayOfWorks.filter((day) => {

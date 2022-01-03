@@ -6,7 +6,7 @@
           <b-avatar
             class="logo-sizee avat"
             :square="'user' == item.poster_type ? false : true"
-            variant="primary"
+            variant="light"
             :src="item.user_picture"
           ></b-avatar>
         </span>
@@ -67,19 +67,23 @@
             <b-avatar
               class="logo-sizee avat"
               :square="'user' == item.source.poster_type ? false : true"
-              variant="primary"
+              variant="light"
               :src="item.source.logo_path"
             >
             </b-avatar>
           </span>
           <div class="pl-2 pl-md-3 pt-md-2">
-            <h5 class="m-0 usernamee">
-              {{
-                item.source.user_name
-                  ? item.source.user_name
-                  : item.source.business_name
-              }}
-            </h5>
+
+            <router-link :to="onRedirect">
+              <h5 class="m-0 usernamee">
+                {{
+                  item.source.user_name
+                    ? item.source.user_name
+                    : item.source.business_name
+                }}
+              </h5>
+            </router-link>
+            
             <p class="duration">{{ item.source.created_at | now }}</p>
           </div>
         </div>
@@ -171,7 +175,7 @@
         <b-avatar
           b-avatar
           class="logo-sizee-18 avat img-fluid avat-comment avatar-border"
-          variant="primary"
+          variant="light"
           :square="'user' == profile.user_type ? false : true"
           :src="profile.profile_picture"
         ></b-avatar>

@@ -347,7 +347,7 @@
               {{$t("about.Businesses_in_Africa_still_suffer_from_the_digital_divide")}}, 
               {{$t("about.which_limits_their_integration_into_the_digital_economy")}}. 
               {{$t("about.To_break_these_barriers")}}, 
-              {{$t("about.our_bridgeafrica_com_platform_enables_the_of_businesses_that_lack_websites_to_easily_get_one_online_and_offline_via_SMS")}}; 
+              {{$t("about.our_bridgeafrica_com_platform_enables_the_87_5%_of_businesses_that_lack_websites_to_easily_get_one_online_and_offline_via_SMS")}}; 
               {{$t("about.our_localised_business_directory_makes_them_visible")}}. 
               {{$t("about.Our_online_marketplace_will_also_enable_the_99%_of_businesses_that_had_never_sold_online_to_engage_in_e_commerce")}}.
             </p>
@@ -379,7 +379,7 @@
               pill
               :variant="selectedResource == 'bridgeafrica' ? 'primary' : 'outline-primary'"
               @click="changeResource('bridgeafrica')"
-              >bridgeafrica.com</b-button
+              >BridgeAfrica.com</b-button
             >
             <b-button
               pill
@@ -565,7 +565,7 @@
             <h2 class="text-light font-arvo text-center sub-heading">{{$t("about.STAY_IN_TOUCH")}}</h2>
             <b-form-input
               v-model="subEmail"
-              :placeholder="$t('about.Your_Email_Address')"
+              placeholder="Your Email Address"
               class="sub-input d-block mx-auto my-3"
             ></b-form-input>
 
@@ -599,7 +599,7 @@
           <p class="text-center font-mont text-light font-weight-bold">
             {{$t("about.We_hope_you_enjoy_our_products_and_services_as_much_as_we_enjoy_offering_them_to_you")}}. 
             {{$t("about.If_you_have_any_questions_or_comments")}}, 
-            {{$t("about.please_dont_hesitate_to_contact_us")}} 
+            {{$t("about.please_don't_hesitate_to_contact_us")}}. 
             {{$t("about.via_the_media_below")}}.
           </p>
         </div>
@@ -670,7 +670,7 @@ export default {
         {
           id: '4',
 
-          title: 'bridgeafrica.com Gives Digital Literacy Training (Demo)',
+          title: 'BridgeAfrica.com Gives Digital Literacy Training (Demo)',
           img_url: require('../assets/img/about/000000-img15.png'),
 
           tag: ['cunsulting', 'media'],

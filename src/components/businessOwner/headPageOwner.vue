@@ -26,7 +26,7 @@
         <b-row class="mt-md-2">
           <b-col cols="8" md="6" class="m-0 p-0">
             <b-avatar
-              :src="business_info.logo_path"
+              :src="profile.profile_picture"
               class="float-left mt-2 mr-2 mr-xl-5 mr-lg-5 round-coner logo_avat"
               badge-variant="primary"
               badge-offset="10px"
@@ -154,7 +154,6 @@
               </div>
             </b-modal>
           </b-col>
-
           <b-col cols="4" md="6" class="">
             <div class="my-auto">
               <span class="float-right">
@@ -203,14 +202,14 @@
 <script>
 import { mapMutations, mapGetters } from "vuex";
 
-import { defaultCoverImage } from "@/mixins";
+import {defaultCoverImage} from '@/mixins';
 
 export default {
   name: "headPageOwner",
-  mixins: [defaultCoverImage],
+  mixins:[defaultCoverImage],
 
-  created() {
-    this.currentAuthType = "business";
+  created(){
+    this.currentAuthType = 'business'
   },
 
   data() {
@@ -240,9 +239,10 @@ export default {
             gap: "1rem",
           },
         },
-      },
+      },  
     };
   },
+
 
   methods: {
     ...mapMutations({
@@ -407,9 +407,10 @@ export default {
   },
 
   computed: {
-    business_info() {
-      return this.$store.state.businessOwner.businessInfo;
-    },
+    ...mapGetters({ 
+      profile: 'auth/profilConnected',
+      business_info: 'businessOwner/getBusinessInfo'
+    }),
   },
 
   watch: {

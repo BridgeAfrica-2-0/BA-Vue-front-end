@@ -47,7 +47,7 @@
             <form id="msform">
               <fieldset class="position-relative opacity-100" v-if="welcome1">
                 <div class="form-card">
-                  <h4>Welcome To bridgeafrica.com</h4>
+                  <h4>Welcome To BridgeAfrica.com</h4>
                   <br />
 
                   <p>

@@ -1838,6 +1838,26 @@ export default {
     },
   },
   methods: {
+    getImage(data) {
+      console.log("data IN", data);
+      let image = data.image;
+      let finale = "";
+      let user = "...";
+      let network = require("@/assets/network_default.png");
+      let business = require("@/assets/business_default.png");
+
+      if (data.type == "user") {
+        finale = image ? image : user;
+      } else if (data.type == "network") {
+        finale = image ? image : network;
+      } else if (data.type == "business") {
+        finale = image ? image : business;
+      }
+
+      console.log("debug ", finale);
+      console.log(this.type);
+      return finale;
+    },
     getCurBiz() {
       this.$store.dispatch("businessChat/GET_CUR_BIZ");
     },

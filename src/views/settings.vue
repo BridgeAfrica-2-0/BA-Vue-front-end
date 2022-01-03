@@ -2,7 +2,7 @@
   <div ref="wrapper">
     <Navbar />
 
-    <div class="container wahala" v-if="getUserInfos">
+    <div class="container wahala" v-if="hasLoad">
       <b-row>
         <b-col cols="12" md="12" lg="12" xl="12">
           <div>
@@ -40,7 +40,7 @@
 
                               <b-td class="text"
                                 ><b-link href="#">
-                                  http://blec.bridgeafrica.com
+                                  http://www.bridgeafrica.com
                                 </b-link>
                               </b-td>
                             </b-tr>
@@ -244,7 +244,7 @@
               
               <b-tab :title="`${$t('settings.Password')}`">
                 <b-card-text class="mt-3 text">
-                  <h3 class="username">{{ $t('settings.Change_current_password') }}</h3>
+                  <h2 class="username"><b>{{ $t('settings.Change_current_password') }}</b></h2>
                   <br />
 
                   <div class="b-bottom">
@@ -328,6 +328,7 @@
         <b-col> </b-col>
       </b-row>
     </div>
+
     <Footer />
   </div>
 </template>

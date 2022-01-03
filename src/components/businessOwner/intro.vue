@@ -173,16 +173,7 @@
             @tag="addTag"
           ></multiselect> 
 
-            <!-- <b-form-select
-              :options="categories"
-              class="mb-3"
-              value-field="item"
-              v-model="form.category"
-              text-field="name"
-            ></b-form-select> -->
-          <!-- </div>
-
-          <div class="form-group col-md-6"> -->
+            
 
           <label for="alias">{{ $t('businessowner.Sub_Category') }}:</label><br />
            <multiselect
@@ -301,14 +292,7 @@
             :options="countries"
             :multiple="true"
           ></multiselect>
-            <!-- <b-form-select
-              :options="country"
-              class="mb-3"
-              @change="change"
-              value-field="item"
-              v-model="country"
-              text-field="name"
-            ></b-form-select> -->
+            
           </div>
         </b-row>
 
@@ -317,12 +301,7 @@
             <label for="country" class="username">
               {{ $t("businessowner.Region") }} :</label
             ><br />
-            <!-- <region-select
-              v-model="form.region"
-              :country="country"
-              :region="region"
-              class="form-control text"
-            /> -->
+           
              <multiselect
             v-model="region"
             
@@ -331,13 +310,7 @@
             :options="regions"
             :multiple="true"
           ></multiselect>
-            <!-- <b-form-select
-              :options="region"
-              class="mb-3"
-              value-field="item"
-              v-model="form.region"
-              text-field="name"
-            ></b-form-select> -->
+            
           </div>
           <b-form-group
             id="input-group-2"
@@ -646,9 +619,7 @@ export default {
      
       this.filterselectvalue = business.subCatFilter;
       let Bcountry = business.country;
-      Bcountry.map((c) => {
-        // this.country.push({ id: c.country_id, name: c.name });
-      });
+      
       this.region = business.region;
       this.division = business.division;
       this.municipality = business.council;
@@ -797,16 +768,6 @@ export default {
       return selectedUsers;
     },
 
-    // Region() {
-    //   let region = [];
-    //   this.$store.state.auth.region.map((dat) => {
-    //     region.push({
-    //       item: dat.id,
-    //       name: dat.name,
-    //     });
-    //   });
-    //   return region;
-    // },
 
     getCat() {
       let categories = [];

@@ -96,13 +96,18 @@ export default {
     search() {
       if(this.searchTitle){
         this.loading = true;
-        this.page = 1;
         console.log("searching...");
         console.log(this.searchTitle);
-        this.infiniteHandler();
+        this.$nextTick(() => {
+          this.page = 1;
+          this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
+        });
       }else{
         console.log("Empty search title: "+this.searchTitle);
-        this.infiniteHandler();
+        this.$nextTick(() => {
+          this.page = 1;
+          this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
+        });
       }
     },
     
@@ -151,8 +156,13 @@ export default {
       console.log("network/"+this.url+"/lock/user/"+user_id);
       this.axios.post("network/"+this.url+"/lock/user/"+user_id)
       .then(response => {
-        console.log(response);
-        // this.blockUsers();
+        console.log("response", response);
+        console.log("response.message", response.message);
+        this.displayfollowers = [];
+        this.$nextTick(() => {
+          this.page = 1;
+          this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
+        });
         this.loading = false;
         this.flashMessage.show({
           status: "success",

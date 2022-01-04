@@ -3,9 +3,9 @@
     <div class="">
       <b-card class="f-left" style="padding:0px; margin-left: -12px; margin-right: -12px;">
         <b-tabs pills lazy content-class="mt-3 f-left">
-          <b-tab :title="$t('businessowner.People')" active> <People @BlockUser="BlockUser"/> </b-tab>
-          <b-tab :title="$t('businessowner.Businesses')"> <Businesses @BlockUser="BlockUser"/> </b-tab>
-          <b-tab :title="$t('businessowner.Network')"> <Network @BlockUser="BlockUser"/> </b-tab>
+          <b-tab :title="$t('businessowner.People')" active> <People /> </b-tab>
+          <b-tab :title="$t('businessowner.Businesses')"> <Businesses /> </b-tab>
+          <b-tab :title="$t('businessowner.Network')"> <Network /> </b-tab>
         </b-tabs>
       </b-card>
     </div>
@@ -26,7 +26,6 @@ export default {
   },
   data() {
     return {
-      url: null,
       perPage: 3,
       currentPage: 1,
       items: [
@@ -54,34 +53,8 @@ export default {
           console.log({ err: err });
         });
     },
-    BlockUser(dataInfo) {
-      console.log(dataInfo);
-      let fd = new FormData();
-      fd.append("banned_id", dataInfo.id);
-      fd.append("banned_type", dataInfo.refernce);
-      this.$store.dispatch("businessBlocking/block", {
-        path: "community-banned/"+this.url,
-        formData: fd
-        })
-      .then(response => {
-        this.community();
-        console.log(response);
-        this.flashMessage.show({
-          status: "success",
-          message: dataInfo.refernce + " blocked"
-        });
-      })
-      .catch(err => {
-        console.log({ err: err });
-        this.flashMessage.show({
-          status: "error",
-          message: "Unable to blocked " + dataInfo.refernce
-        });
-      });
-    },
   },
   mounted() {
-    this.url = this.$route.params.id
     this.isLoading = true;
 
     console.log('Load User Profile Community start+++++++');

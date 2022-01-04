@@ -25,6 +25,7 @@ export default {
     profilConnected: null,
   },
 
+
   mutations: {
 
     updateProfilePicture(state, picture) {

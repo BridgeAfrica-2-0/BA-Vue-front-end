@@ -22,7 +22,7 @@
           <b-col md="3" cols="4" sm="4" class="my-auto">
             <b-avatar
               class="p-avater"
-            
+              variant="ligth"
               :src="item.profile_picture"
             ></b-avatar>
           </b-col>
@@ -124,6 +124,10 @@ export default {
     },
   },
 
+  data: () => ({
+    loading: false,
+  }),
+
   methods: {
     count(number) {
       if (number >= 1000000) {
@@ -135,7 +139,7 @@ export default {
     },
 
     async handleFollow(user) {
-      console.log("yoo ma gee");
+      this.loading = true;
       document.getElementById("followbtn" + user.id).disabled = true;
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
@@ -147,15 +151,14 @@ export default {
       await axios
         .post(uri, data)
         .then(({ data }) => {
-          console.log(data);
           user.is_follow = nextFollowState;
           document.getElementById("followbtn" + user.id).disabled = false;
         })
-
         .catch((err) => {
           console.log({ err: err });
           document.getElementById("followbtn" + user.id).disabled = false;
-        });
+        })
+        .finally(() => (this.loading = false));
     },
   },
 };

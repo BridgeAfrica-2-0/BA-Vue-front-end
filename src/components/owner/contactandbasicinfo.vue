@@ -545,15 +545,6 @@ export default {
     },
   },
   methods: {
-
-    deleteContact(id){
-      console.log(id)
-      
-      this.$store.dispatch("profile/deleteContact", id)
-      .then(res => {
-        this.$store.dispatch("profile/loadUserPostIntro", null);
-      });
-    },
     getgender() {
       if (this.info.user.gender == "female") {
         this.usergen = "F";
@@ -628,7 +619,6 @@ export default {
         })
         .then((response) => {
           console.log("update phone user response (3) ++++", response);
-           this.$store.dispatch("profile/loadUserPostIntro", null);
         })
         .catch((error) => {
           console.log(
@@ -644,12 +634,11 @@ export default {
     saveCurrentCity() {
       console.log("save new current City user start +++++");
       console.log(this.basicInfo.currentCity);
-      let data = {city: this.info.user.city,}
       this.$store
-        .dispatch("profile/updateUserBasicInfosCurrentCity", data)
+        .dispatch("profile/updateUserBasicInfosCurrentCity", {
+          currentCity: this.info.user.city,
+        })
         .then((response) => {
-            console.log("----------teststst")
-           this.$store.dispatch("profile/loadUserPostIntro", null);
           console.log(
             "save new current city user response (3) ++++++",
             response

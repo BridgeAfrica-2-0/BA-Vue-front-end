@@ -263,7 +263,7 @@
           ref="modal-xl"
           centered
           hide-footer
-          :title="$t('network.Create_Post')"
+          title="Create Post"
           @hidden="resetPostData"
         >
           <b-row ref="loader">
@@ -447,6 +447,12 @@ export default {
   mixins: [AllPostFeatureMixin],
   components: {
     Post,
+  },
+
+  props: {
+    postStatus: {
+      type: String,
+    }
   },
 
   data() {
@@ -694,9 +700,11 @@ export default {
     },
 
     chooseImage: function () {},
+
     chooseVideo: function () {
       document.getElementById("chosefile").click();
     },
+
     chooseDocument() {
       document.getElementById("chosefile").click();
     },
@@ -720,6 +728,7 @@ export default {
         reader.readAsDataURL(file.files[0]);
       }
     },
+
     service(file) {
       let result = null;
       if (file.files) {
@@ -754,15 +763,14 @@ export default {
     },
 
     selectDocument(event) {
-      console.log(event);
       this.createPost.hyperlinks.push({
         target: event.target,
         document: this.service(event.target),
         fileName: event.target.files[0].name,
       });
     },
+
     selectDocumentOutsidePost(event) {
-      console.log(event);
       this.createPost.hyperlinks.push({
         target: event.target,
         document: this.service(event.target),
@@ -770,6 +778,7 @@ export default {
       });
       this.$refs["modal-xl"].show();
     },
+
     createPost_() {
       this.$refs["modal-xl"].show();
     },
@@ -808,6 +817,9 @@ export default {
     },
 
     async submitPost() {
+
+      const path = 'member' == this.postStatus ? "network/member-post/create/"+ this.url : "network/post/create/" + this.url
+
       this.loading = true;
       this.isUploading = true;
       this.fileImageArr = this.createPost.movies;
@@ -823,7 +835,7 @@ export default {
       //formData2.append("media", this.createPost.hyperlinks);
       formData2.append("content", this.createPost.postNetworkUpdate);
       await this.axios
-        .post("network/post/create/" + this.url, formData2, {
+        .post(path, formData2, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
@@ -865,7 +877,7 @@ export default {
           } else {
             this.flashMessage.show({
               status: "error",
-              message: this.$t('general.Unable_to_Create_Your_Post'),
+              message: err.response.data.message,
               blockClass: "custom-block-class",
             });
             console.log({ err: err });

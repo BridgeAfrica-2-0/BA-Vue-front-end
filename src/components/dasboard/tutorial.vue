@@ -113,6 +113,10 @@ export default {
   .text {
     font-size: 14px;
   }
+
+  .embed-responsive-16by9 {
+    height: 200px;
+  }
 }
 
 @media only screen and (max-width: 768px) {
@@ -123,12 +127,12 @@ export default {
   .text {
     font-size: 12px;
   }
+  .embed-responsive-16by9 {
+    width: 100%;
+    height: 125px;
+  }
 }
 
-.embed-responsive-16by9 {
-  width: 100%;
-  height: 125px;
-}
 .s-embed {
   border-radius: 10px;
 }

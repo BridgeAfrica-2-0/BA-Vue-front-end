@@ -15,7 +15,12 @@
             </b-col>
             <b-col md="5" cols="7" lg="7" xl="5" sm="5">
               <p class="textt">
-                <router-link :to="{name: 'Membar Network Follower', params: {id:item.id}}">
+                <router-link
+                  :to="{
+                    name: 'Membar Network Follower',
+                    params: { id: item.id },
+                  }"
+                >
                   <strong class="title">{{ item.name }}</strong>
                 </router-link>
                 <br />
@@ -38,13 +43,8 @@
                   :max-chars="50"
                 >
                 </read-more>
-                
+
                 <b-icon
-<<<<<<< HEAD
-                  @click="blackListed"
-=======
-                 
->>>>>>> main
                   font-scale="1"
                   icon="exclamation-octagon"
                   v-b-tooltip.hover
@@ -89,7 +89,7 @@
                     <b-button
                       block
                       size="sm"
-                      :id="'followbtn'+item.id"
+                      :id="'followbtn' + item.id"
                       class="b-background flexx pobtn shadow mr-lg-3 mr-xl-3"
                       :class="item.is_follow !== 0 && 'u-btn'"
                       variant="primary"
@@ -97,12 +97,15 @@
                     >
                       <i
                         class="fas fa-lg btn-icon"
-                        :class="item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"
+                        :class="
+                          item.is_follow !== 0
+                            ? 'fa-user-minus'
+                            : 'fa-user-plus'
+                        "
                       ></i>
-                        <span class="btn-com">Join</span>
+                      <span class="btn-com">Join</span>
                     </b-button>
                   </b-col>
-
                 </b-row>
               </div>
             </b-col>
@@ -155,22 +158,22 @@ export default {
   },
 
   methods: {
-
-    wrapper: () => (this.type == "Follower")
+    wrapper: () =>
+      this.type == "Follower"
         ? this.$store.state.businessOwner.NcommunityFollower.network_followers
-        : this.$store.state.profile.NcommunityFollowing.network_following
-    ,
+        : this.$store.state.profile.NcommunityFollowing.network_following,
+    blackListed: async function (uuid) {
+      const request = await this.$repository.share.blocking(
+        { banned_id: uuid, banned_type: "network" },
+        this.$route.params.id
+      );
 
-    blackListed: async function(uuid){
-      const request = await this.$repository.share.blocking({banned_id:uuid, banned_type: 'network' }, this.$route.params.id)
+      if (request.success) {
+        let newData = this.wrapper();
+        const data = newData.filter((item) => item.id != uuid);
 
-      if (request.success){
-        let newData = this.wrapper()
-        const data = newData.filter(item => item.id != uuid)
-
-        newData = data
-
-      }else{
+        newData = data;
+      } else {
         this.flashMessage.show({
           status: "error",
           message: request.data,
@@ -178,13 +181,21 @@ export default {
       }
     },
 
-    networkJoin: async function(item){
-      const status = item.is_follow
+    networkJoin: async function (item) {
+      const status = item.is_follow;
 
-      const request = !status ? await this.$repository.share.jointNetwork({id: item.id , type: "network"}) : await this.$repository.share.removeNetwork({id: item.id , type: "network"})
-      
-      if (request.success){
-        item = Object.assign(item, {is_follow: status ? 0 : 1})
+      const request = !status
+        ? await this.$repository.share.jointNetwork({
+            id: item.id,
+            type: "network",
+          })
+        : await this.$repository.share.removeNetwork({
+            id: item.id,
+            type: "network",
+          });
+
+      if (request.success) {
+        item = Object.assign(item, { is_follow: status ? 0 : 1 });
         this.flashMessage.show({
           status: "success",
           title: request.data,

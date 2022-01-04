@@ -826,13 +826,7 @@
                     <label for="file">
                       <b-icon
                         for="file"
-                        class="
-                          msg-icon
-                          primary
-                          icon-size icon-top
-                          float-right
-                          text-right
-                        "
+                        class="msg-icon primary icon-size icon-top float-right text-right"
                         icon="paperclip"
                       >
                       </b-icon>
@@ -1491,15 +1485,8 @@
                               class="centralizer"
                             ></b-spinner>
                           </div>
-<<<<<<< HEAD
-                          <h5>People</h5>
-
-                          <b-row>
-                            <div v-if="allUsers">
-=======
                           <table v-else class="table">
                             <tbody v-if="type == 'user'">
->>>>>>> main
                               <tr
                                 v-for="(user, index) in users"
                                 :key="index"
@@ -1522,18 +1509,8 @@
                                   <span class="bold"> {{ user.name }} </span>
                                 </td>
                               </tr>
-<<<<<<< HEAD
-                            </div>
-                          </b-row>
-                          <hr />
-                          <h5>Business</h5>
-
-                          <b-row>
-                            <div v-if="allBusiness">
-=======
                             </tbody>
                             <tbody v-if="type == 'business'">
->>>>>>> main
                               <tr
                                 v-for="(biz, index) in allBizs"
                                 :key="index"
@@ -1561,18 +1538,8 @@
                                   <span class="bold"> {{ biz.name }} </span>
                                 </td>
                               </tr>
-<<<<<<< HEAD
-                            </div>
-                          </b-row>
-                          <hr />
-                          <h5>Network</h5>
-
-                          <b-row>
-                            <div v-if="allNetworks">
-=======
                             </tbody>
                             <tbody v-if="type == 'network'">
->>>>>>> main
                               <tr
                                 v-for="(network, index) in nets"
                                 :key="index"
@@ -1600,43 +1567,8 @@
                                   <span class="bold"> {{ network.name }} </span>
                                 </td>
                               </tr>
-<<<<<<< HEAD
-                            </div>
-                          </b-row>
-                          <hr />
-                          <h5>Editors</h5>
-                          <b-row>
-                            <div v-if="allEditors">
-                              <tr
-                                v-for="(biz, index) in allEditors"
-                                :key="index"
-                                class="p-2 message"
-                                @click="
-                                  selectedChat({
-                                    type: 'user',
-                                    chat: biz,
-                                    id: biz.id,
-                                  })
-                                "
-                              >
-                                <td>
-                                  <b-avatar
-                                    class="d-inline-block"
-                                    variant="primary"
-                                    size="30"
-                                  ></b-avatar>
-                                  <span class="bold">
-                                    {{ biz.name }}
-                                  </span>
-                                </td>
-                              </tr>
-                            </div>
-                          </b-row>
-                          <hr />
-=======
                             </tbody>
                           </table>
->>>>>>> main
                         </div>
                       </table>
                     </div>

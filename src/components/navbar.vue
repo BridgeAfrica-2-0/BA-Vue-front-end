@@ -42,7 +42,7 @@
                 data-toggle="popover"
                 class="form-control search-mobile"
                 style="border-left: none"
-                :placeholder="$t('general.Find_Pharmacies')"
+                :placeholder="$t('general.All')"
                 aria-label=""
                 data-original-title=""
                 title=""
@@ -75,7 +75,7 @@
                   data-toggle="popover"
                   class="form-control search-mobile"
                   style="border-left: none"
-                  :placeholder="$t('general.Find_Pharmacy')"
+                  :placeholder="$t('general.Where')"
                   aria-label=""
                   data-original-title=""
                   title=""
@@ -1095,7 +1095,7 @@ export default {
 
 @media (max-width: 992px) {
   .navbar-toggler {
-    padding: 0.25rem 0.75rem;
+    padding: 0.25rem 1.5rem;
     font-size: 1.25rem;
     line-height: 1;
     background-color: transparent;

@@ -894,7 +894,7 @@ export default {
 
     const elementInView = (el, dividend = 1) => {
       const elementTop = el.getBoundingClientRect().top;
-      console.log(document.documentElement.clientHeight);
+    
 
       return (
         elementTop <=
@@ -1130,9 +1130,6 @@ export default {
 }
 .taille{
   height: 704px;
-}
-.topbar{
-    /* position: fixed; */
 }
 
   .sizeimg{

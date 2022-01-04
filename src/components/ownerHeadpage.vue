@@ -1,5 +1,5 @@
 <template>
-  <div class="p-0">
+  <div class="p-0">   
     <b-container fluid class="p-0 gradient">
       <div class="container-flex banner">
         <img
@@ -118,7 +118,7 @@
                     :src="selectedFile"
                     ref="cropper"
                     :aspect-ratio="6.5 / 3"
-                    drag-mode="move"
+                    drag-mode="move"  
                     :view-mode="1"
                   />
                 </div>
@@ -381,7 +381,7 @@ export default {
     },
 
     viewAs() {
-      let id = this.info.user.id;
+      let id = this.auth.id;
 
       this.$router.push({ name: "Follower", params: { id: id } });
     },

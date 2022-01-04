@@ -6,7 +6,7 @@
           <b-form-input
             aria-label="Text input with checkbox"
             v-model="search"
-            :placeholder="$('general.Search_Something')"
+            :placeholder="$t('general.Search_Something')"
           ></b-form-input>
 
           <b-input-group-prepend is-text>

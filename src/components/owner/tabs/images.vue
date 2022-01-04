@@ -474,6 +474,7 @@ export default {
         .submitPost(payload)
         .then((response) => {
           console.log(response)
+
           this.pattern[this.type]().updateItem({ id: albumId, action: "add", "cover": response.data.data });
           this.pattern[this.type]().getAlbumImages(data);
           this.loading = false;

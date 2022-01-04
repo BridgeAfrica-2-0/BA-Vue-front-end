@@ -1,5 +1,6 @@
 <template>
-  <div class="img-gall-item img-size" :ref="`sHowMedia-${im.id}`" style="width: 266px;height: 266px; position:relative">
+  <div class="img-gall-item img-size" :ref="`sHowMedia-${im.id}`" 
+  :style="`${getStyle}; position:relative`">
     <a v-if="typeOfMedia() == 'image' && !loading"
       ><b-img
         class="card-img btn p-0 album-img"
@@ -10,12 +11,12 @@
         alt="media_img"
         v-b-modal="uuid"
         v-bind="imageProps"
-        style="width: 266px;height: 266px;"
+        :style="getStyle"
 
       ></b-img>
     </a>
     <video
-      style="width: 266px;height: 266px;"
+      :style="getStyle"
       controls
       v-else-if="typeOfMedia() == 'video' && !loading"
       class="card-img btn p-0 album-img"
@@ -23,7 +24,7 @@
       <source :src="getFullMediaLink()" />
     </video>
     <youtube
-      style="width: 266px;height: 266px;"
+      :style="getStyle"
       class="card-img btn p-0 album-img"
       v-if="typeOfMedia == 'youtube' && !loading"
       :video-id="getYoutubeKey()"
@@ -97,8 +98,10 @@
 <script>
 
 import { mapMutations } from 'vuex'
+import { ResizeMediaImage } from '@/mixins' 
 
 export default {
+  mixins: [ResizeMediaImage],
   props: [
     "im",
     "imageProps",

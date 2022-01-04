@@ -80,7 +80,8 @@ export default {
           status: "error",
           message: "Unable to blocked " + lol.refernce
         });
-    },
+    });
+  },
   },
   mounted() {
     this.isLoading = true;

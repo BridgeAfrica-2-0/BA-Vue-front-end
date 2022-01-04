@@ -70,9 +70,9 @@ export default {
     return {
       loading: false,
       accessToken: process.env.VUE_APP_MAPBOX_TOKEN,
-      mapStyle: "mapbox://styles/mapbox/streets-v11",
+      mapStyle: "mapbox://styles/mapbox/outdoors-v11",
       center: [11.504929555178624, 3.8465173382452815], // Lng,Lat
-      zoom: 4,
+      zoom: 6,
       total: 0,
       per_page: 10,
       list: [],

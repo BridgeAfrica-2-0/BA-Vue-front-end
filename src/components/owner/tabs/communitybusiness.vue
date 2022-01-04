@@ -1,5 +1,5 @@
 <template>
-  <div class="p-2">
+  <div class="p-2">  
     <b-row>
       <b-col
         lg="6"
@@ -13,17 +13,21 @@
             <b-col md="8" xl="8" lg="12" cols="12" sm="8">
               <div class="d-inline-flex">
                 <div class="center-img">
-                  <splide :options="options" class="r-image">
-                    <splide-slide>
-                      <img :src="item.picture" class="r-image" />
-                    </splide-slide>
-                  </splide>
+                  
+
+                  <splide  class="r-image">
+                <splide-slide>
+                  <img :src="item.picture" class="r-image" />
+                </splide-slide>
+              </splide>
+
+
                 </div>
                 <div class="flx100">
                   <p class="textt">
                     <strong class="title">
-                      <router-link :to="{name:'BusinessFollower' , params:{id: item.id}}">
-                       {{ item.name }}
+                      <router-link :to="'business/' + item.id">
+                        {{ item.name }}
                       </router-link>
                     </strong>
                     <br />

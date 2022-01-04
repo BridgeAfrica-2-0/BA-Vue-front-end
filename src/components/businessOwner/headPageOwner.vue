@@ -11,16 +11,8 @@
 
       <div v-else class="splide">
         <splide :options="options" class="banner r-image">
-          <splide-slide>
-            <img src="@/assets/img/Business 1.jpg" class="r-image" />
-          </splide-slide>
-
-          <splide-slide>
-            <img src="@/assets/img/business 2.jpg" class="r-image" />
-          </splide-slide>
-
-          <splide-slide>
-            <img src="@/assets/img/business 3.png" class="r-image" />
+          <splide-slide v-for="(cover, index) in getCustomCover" :key="index">
+            <img :src="cover" class="r-image" />
           </splide-slide>
         </splide>
       </div>
@@ -34,7 +26,7 @@
         <b-row class="mt-md-2">
           <b-col cols="8" md="6" class="m-0 p-0">
             <b-avatar
-              :src="profile.profile_picture"
+              :src="business_info.logo_path"
               class="float-left mt-2 mr-2 mr-xl-5 mr-lg-5 round-coner logo_avat"
               badge-variant="primary"
               badge-offset="10px"
@@ -162,6 +154,7 @@
               </div>
             </b-modal>
           </b-col>
+
           <b-col cols="4" md="6" class="">
             <div class="my-auto">
               <span class="float-right">
@@ -209,8 +202,16 @@
 
 <script>
 import { mapMutations, mapGetters } from "vuex";
+
+import { defaultCoverImage } from "@/mixins";
+
 export default {
   name: "headPageOwner",
+  mixins: [defaultCoverImage],
+
+  created() {
+    this.currentAuthType = "business";
+  },
 
   data() {
     return {
@@ -241,7 +242,6 @@ export default {
       },
     };
   },
-
 
   methods: {
     ...mapMutations({
@@ -405,10 +405,9 @@ export default {
   },
 
   computed: {
-    ...mapGetters({ 
-      profile: 'auth/profilConnected',
-      business_info: 'businessOwner/getBusinessInfo'
-    }),
+    business_info() {
+      return this.$store.state.businessOwner.businessInfo;
+    },
   },
 
   watch: {

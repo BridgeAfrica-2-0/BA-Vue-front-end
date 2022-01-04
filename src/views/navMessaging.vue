@@ -316,7 +316,7 @@
             </div>
           </b-col>
           <b-col
-            v-if="newMsg == false && info == false && !rightSide"
+            v-if="newMsg == false && info == false && rightSide == false"
             class="p-0 back-image"
           >
             <div class="chat-nav shadow">
@@ -653,7 +653,7 @@
           >
             <div class="back-image" style="margin-right: 07px">
               <b-row>
-                <b-col class="col-1 mt-3 ma-4" v-if="screenX < 930">
+                <b-col class="col-1 mt-3 ma-4">
                   <b-icon
                     @click="showMessages(true)"
                     icon="arrow-left-square-fill"
@@ -1429,21 +1429,9 @@
           </b-col>
 
           <!-- New message -->
-          <b-col
-            v-if="newMsg == true && info == false && !rightSide"
-            class="chat-box"
-          >
+          <b-col v-if="newMsg == true && info == false" class="chat-box">
             <div class="back-image" style="margin-right: 07px">
               <b-row>
-                <b-col class="col-1 mt-3 ma-4" v-if="screenX < 930">
-                  <b-icon
-                    @click="showMessages(true)"
-                    icon="arrow-left-square-fill"
-                    font-scale="1"
-                    aria-hidden="true"
-                    class="primary"
-                  ></b-icon>
-                </b-col>
                 <b-col>
                   <b-form-input
                     id="textarea"
@@ -2015,7 +2003,7 @@ export default {
     newMessage(arg) {
       this.getList();
       console.log("hey");
-      // this.rightSide = false;
+      this.rightSide = false;
       this.newMsg = arg;
       this.show = false;
     },

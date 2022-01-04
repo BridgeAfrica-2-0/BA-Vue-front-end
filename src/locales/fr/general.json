@@ -22,7 +22,7 @@
     "home":"Accueil",
     "about_us":"A propos",
     "privacy_policy":"Politique de confidentialité",
-    "contact_us":"Contact",
+    "contact_us":"Contactez-nous",
     "blog":"Blog",
     "language":"Langue",
     "English":"Anglais",
@@ -138,8 +138,8 @@
     "You_are_connected_as":"Vous êtes connecté en tant que",
 
     "HOW_TO_USE_BRIDGEAFRICA":"COMMENT UTILISER BRIDGEAFRICA.COM",
-    "Partners_with_Pea":"bridgeafrica.com Partenaires avec Pea Jeunes (Demo)",
-    "Gives_Digital_Literacy_Training":"bridgeafrica.com Formation à la culture numérique (Demo)",
+    "Partners_with_Pea":"BridgeAfrica.com Partenaires de avec Pea Jeunes (Demo)",
+    "Gives_Digital_Literacy_Training":"BridgeAfrica.com Formation à la culture numérique (Demo)",
     "Cameroon_Gallery_Commercial":"Cameroon Gallery Commercial (Demo)",
     "About_Us":"A propos",
     "Contact_Us":"Contact",
@@ -160,7 +160,7 @@
     "Not_Find_Business":"Aucun entreprise trouvée",
 
     "Attach_File":"Joindre le fichier",
-    "Post":"Publication",
+    "Post":"Poste",
     "Your":"Votre",
     "Post_are_pending_for_approval":"Vos publication(3) sont en attente d'approbation",
     "View_All":"Voir tous",
@@ -235,7 +235,7 @@
     "No_data":"Aucune donnée",
     "No_Network":"Aucun réseau",
     "Editor":"Éditeur",
-    "Post_Deleted":"Publication supprimé",
+    "Post_Deleted":"Poste supprimé",
     "Unable_to_Delete_your_Post":"Impossible de supprimer votre message",
     "Album_Deleted":"Album supprimé",
     "Editors":"Éditeurs",
@@ -308,20 +308,8 @@
     "Unable_To_Delete_Network":"Impossible de supprimer le réseau",
     "Product_Deleted_Successfuly":"Le produit a été supprimé avec succès",
     "Unable_To_Delete_Product":"Impossible de supprimer le produit",
-    "You_Are_Now_Following":"Vous êtes maintenant abonné",
-    "No_Member":"Aucun membre",
+    "You_Are_Now_Following":"Vous êtes maintenant abonné"
 
-   
-    "The_Group_Name":"Nom du groupe",
-    "Enter_your_name":"Entrez votre nom",
-
-    "Unable_to_create_your_Album":"Impossible de créer votre album",
-    "Unable_to_Create_Your_Post":"Impossible de créer votre publication",
-    "Unable_to_Create_Your_Business":"Impossible de créer votre entreprise",
-    "Unable_to_Create_Your_Network":"Impossible de créer votre réseau",
-    
-    "Unable_to_Create_Your_Feedback":"Impossible de créer votre commentaire",
-    "BETA_LAUNCH_OF_BRIDGEAFRICA":"LANCEMENT BÊTA DE BRIDGEAFRICA"
    
 
 }

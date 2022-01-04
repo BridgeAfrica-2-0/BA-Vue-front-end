@@ -153,7 +153,7 @@
 
               <div class="nav-item">
                 <router-link
-                  :to="{ name: 'Search' }"
+                  :to="{ name: 'GlobalSearch' }"
                   class="nav-link text-dark hov"
                 >
                   {{ $t("general.Market") }}
@@ -413,6 +413,7 @@
           </div>
         </div>
 
+        
         <b-modal ref="setcat" id="myModallnav" hide-footer title=" ">
           <div v-if="islogin" class="d-block d-lg-block d-xl-none">
             <div class="mt-3">
@@ -432,26 +433,27 @@
               </div>
 
               <br />
-              <Activity class="w-full" />
-              <!-- <div class="d-inline-flex flex-row align-items-center mb-1">
-                <div>
-                  <img
-                    src="@/assets/img/logo3.png"
-                    class="rounded-circle"
-                    alt=""
-                    width="25"
-                    height="25"
-                  />
-                </div>
-                <div class="ml-3 mt-2">
-                  <p class="font-weight-bold">
-                    {{ $t("general.Your_Businesses") }}
-                  </p>
-                </div>
-              </div> -->
+              <div class="d-inline-flex flex-row align-items-center mb-1">
+                <Activity class="w-full" />
+              </div>
             </div>
 
             <hr class="mup" />
+
+            <a
+              v-if="'user' != user.user_type"
+              @click.prevent="switchToProfile"
+              href="#"
+              class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+            >
+              <span class="mr-2">
+                <fas-icon
+                  class="violet search"
+                  :icon="['fas', 'user']"
+                />
+              </span>Profile
+            </a>
+            <hr class="h-divider" v-if="'user' === user.user_type"/>
 
             <router-link
               :to="{ name: 'orders' }"
@@ -772,7 +774,7 @@ export default {
     navLink(type) {
       const link = {
         home: () => {
-          return this.profile ? "dashboard" : "home1";
+          return this.profile ? { name: "dashboard" } : { name: "home1" };
         },
       };
       try {

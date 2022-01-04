@@ -418,13 +418,12 @@
             <div class="mt-3">
               <div class="d-inline-flex flex-row align-items-center">
                 <div>
-                  <img
-                    src="@/assets/img/profile-pic.jpg"
-                    class="rounded-circle"
-                    alt=""
-                    width="30"
-                    height="30"
-                  />
+                  <b-avatar
+                    variant="light"
+                    :src="user.profile_picture"
+                    :square="'user' == user.user_type ? false : true"
+                    class="logo-sizee"
+                  ></b-avatar>
                 </div>
                 <div class="d-flex flex-column ml-1 line-size">
                   <div class="font-weight-bold">{{ user.name }}</div>
@@ -588,7 +587,7 @@ export default {
   },
   created() {
     //check for authentication
-
+    console.log("Language is  " + this.$i18n.locale);
     this.islogin = this.$store.getters["auth/isLogged"];
 
     console.log(this.islogin);

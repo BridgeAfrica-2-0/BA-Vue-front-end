@@ -949,7 +949,7 @@ export default {
           this.flashMessage.show({
             status: "error",
 
-            message: "Something went wrong",
+            message: this.$t('businessowner.Something_went_wrong'),
 
             blockClass: "custom-block-class",
           });

@@ -51,7 +51,7 @@
         "vue-core-video-player": "^0.2.0",
         "vue-country-region-select": "^2.0.14",
         "vue-country-select": "^0.2.2",
-        "vue-cropperjs": "5.0.0",
+        "vue-cropperjs": "0.5.4",
         "vue-easy-lightbox": "^0.16.2",
         "vue-echo-laravel": "^0.1.0",
         "vue-emoji-picker": "^1.0.3",

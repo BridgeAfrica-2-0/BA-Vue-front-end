@@ -220,7 +220,7 @@ export default {
     // getting business people following
     ppleFollowing(state) {
       return state.peopleFollowing;
-    }, 
+    },
 
     // getting business people followers
     ppleFollowers(state) {
@@ -238,16 +238,16 @@ export default {
     },
 
     addMultiCoverPicture(state, pictures) {
-      state.businessInfo.cover =pictures 
+      state.businessInfo.cover = pictures
     },
-    
+
     updateAlbum(state, payload) {
       const newState = state.albums.map(album => (album.id == payload.id) ? Object.assign(album, { name: payload.name }) : album)
       state.albums = newState
     },
 
     updateAlbumItem(state, payload) {
-      const newState = state.albums.map(album => (album.id == payload.id) ? Object.assign(album, { cover: album.cover.length ? album.cover: payload.cover ? [payload.cover]: album.cover, items: ('remove' == payload.action) ? parseInt(album.items) - 1 : parseInt(album.items) + 1 }) : album)
+      const newState = state.albums.map(album => (album.id == payload.id) ? Object.assign(album, { cover: album.cover.length ? album.cover : payload.cover ? [payload.cover] : album.cover, items: ('remove' == payload.action) ? parseInt(album.items) - 1 : parseInt(album.items) + 1 }) : album)
       state.albums = newState
     },
 
@@ -470,18 +470,18 @@ export default {
     },
 
 
-    async updateUserBusinessAbout({commit}, payload) {
+    async updateUserBusinessAbout({ commit }, payload) {
       let response_ = null;
       const id_Business = 47;
       console.log("-------testt----", payload)
       await axios.post("business/update" +
         "/" +
         payload.business_id, payload.data
-        
+
       )
         .then(response => {
 
-          
+
           console.log('update user Business About response (1) +++++++', response);
           if (response.status !== 200 && response.status !== 201) {
             throw 'Error From The Server';

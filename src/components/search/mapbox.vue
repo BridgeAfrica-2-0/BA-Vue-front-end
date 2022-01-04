@@ -94,7 +94,7 @@ export default {
       accessToken: process.env.VUE_APP_MAPBOX_TOKEN,
       mapStyle: "mapbox://styles/mapbox/streets-v11",
       center: [11.504929555178624, 3.8465173382452815], // Lng,Lat
-      zoom: 4,
+      zoom: 6,
     };
   },
   created() {
@@ -102,9 +102,9 @@ export default {
   },
   mounted() {
     setTimeout(() => {
-      console.log("Business => ".this.businesses);
-      console.log("Products => ".this.products);
-      console.log("networks => ".this.networks);
+      // console.log("Business => ".this.businesses);
+      // console.log("Products => ".this.products);
+      //console.log("networks => ".this.networks);
     }, 5000);
   },
   methods: {

@@ -13,7 +13,7 @@
             <b-col md="8" xl="8" lg="12" cols="12" sm="8">
               <div class="d-inline-flex">
                 <div class="center-img">
-                  <splide :options="options" class="r-image">
+                  <splide class="r-image">
                     <splide-slide>
                       <img :src="item.picture" class="r-image" />
                     </splide-slide>
@@ -22,8 +22,13 @@
                 <div class="flx100">
                   <p class="textt">
                     <strong class="title">
-                      <router-link :to="{name:'BusinessFollower' , params:{id: item.id}}">
-                       {{ item.name }}
+                      <router-link
+                        :to="{
+                          name: 'BusinessFollower',
+                          params: { id: item.id },
+                        }"
+                      >
+                        {{ item.name }}
                       </router-link>
                     </strong>
                     <br />
@@ -55,7 +60,6 @@
                       :less-str="$t('search.read_less')"
                       :max-chars="100"
                     >
-                    
                     </read-more>
                   </p>
                 </div>

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="islogin">
     <b-spinner
       v-if="loader"
       variant="primary"
@@ -113,9 +113,14 @@
       {{ $t("search.Do_you_want_to_join_this_network") }}?
     </b-modal>
   </div>
+  <div v-else>
+    <login />
+  </div>
 </template>
 
 <script>
+import axios from "axios";
+import login from "@/components/search/login";
 export default {
   props: ["title", "image"],
   data() {
@@ -125,10 +130,16 @@ export default {
       total: 0,
       per_page: 10,
       list: [],
+      islogin: true,
       currentPage: 1,
       nextLoad: false,
     };
   },
+
+  components: {
+    login,
+  },
+
   computed: {
     networks() {
       return this.$store.getters["networkSearch/getNetworks"];
@@ -144,6 +155,10 @@ export default {
 
       this.networkSearch();
     }
+
+    this.islogin = this.$store.getters["auth/isLogged"];
+
+    console.log(this.islogin);
   },
 
   methods: {

@@ -1,6 +1,6 @@
 <template>
   <section class="footer">
-     <!-- <div class="container">
+    <!-- <div class="container">
       <div class="row">
         <div class="col-md-3 py-4">
           <div class="d-flex position-relative">
@@ -76,7 +76,7 @@
         </div>
       </div>
     </div>  -->
- 
+
     <footer id="footer">
       <div class="footer-top black-back">
         <div class="container">
@@ -84,10 +84,13 @@
             <div class="col-lg-3 col-md-6 footer-contact">
               <div class="row">
                 <div class="col-8">
-                  <img src="../../assets/img/bavlogo.png" width="200px" class="size" alt="" />
+                  <img
+                    src="../../assets/img/bavlogo.png"
+                    width="200px"
+                    class="size"
+                    alt=""
+                  />
                 </div>
-
-              
               </div>
 
               <div class="social-links mt-3 text-left">
@@ -114,41 +117,61 @@
             </div>
 
             <div class="col-lg-3 col-md-6 footer-links">
-              <h4 class="bridge-header text-left white">{{ $t('home.OUR_ADRESSE') }}</h4>
+              <h4 class="bridge-header text-left white">
+                {{ $t("home.OUR_ADRESSE") }}
+              </h4>
               <ul class="text-left white">
-                <li>{{ $t('home.International_Handicraft_Center') }}, {{ $t('home.Rond_point_Intendance') }}</li>
+                <li>
+                  {{ $t("home.International_Handicraft_Center") }},
+                  {{ $t("home.Rond_point_Intendance") }}
+                </li>
 
-                <li>{{ $t('home.Yaounde') }}</li>
+                <li>{{ $t("home.Yaounde") }}</li>
 
-                <li>{{ $t('home.Cameroon') }}</li>
+                <li>{{ $t("home.Cameroon") }}</li>
               </ul>
             </div>
 
             <div class="col-lg-3 col-md-6 footer-links white">
-              <h4 class="bridge-header text-left white">{{ $t('home.USEFULL_LINKS') }}</h4>
+              <h4 class="bridge-header text-left white over">
+                {{ $t("home.USEFULL_LINKS") }}
+              </h4>
               <ul class="white">
-                <li class="white"><a href="#">Bridgeafricaventures.com</a></li>
-
-                <li class="white"><a href="#">{{ $t('home.Home') }}</a></li>
-
                 <li class="white">
-                  <router-link :to="{name: 'about'}">{{ $t('home.About_Us') }}</router-link>
+                  <a href="#" class="over">bridgeafricaventures.com</a>
                 </li>
 
                 <li class="white">
-                  <router-link :to="{name: 'contact'}">{{ $t('home.Contact_Us') }}</router-link>
+                  <router-link :to="{ name: 'home1' }" class="over">{{
+                    $t("home.Home")
+                  }}</router-link>
                 </li>
 
-              
+                <li class="white">
+                  <router-link :to="{ name: 'about' }" class="over">{{
+                    $t("home.About_Us")
+                  }}</router-link>
+                </li>
+
+                <li class="white">
+                  <router-link :to="{ name: 'contact' }" class="over">{{
+                    $t("home.Contact_Us")
+                  }}</router-link>
+                </li>
               </ul>
             </div>
 
             <div class="col-lg-3 col-md-6 footer-links">
-              <h4 class="bridge-header text-left white">{{ $t('home.WORKING_HOURS') }}</h4>
+              <h4 class="bridge-header text-left white">
+                {{ $t("home.WORKING_HOURS") }}
+              </h4>
               <ul class="white">
-                <li>{{ $t('home.Monday') }}-{{ $t('home.Friday') }}: {{ $t('home.09AM_05PM') }}</li>
+                <li>
+                  {{ $t("home.Monday") }}-{{ $t("home.Friday") }}:
+                  {{ $t("home.09AM_05PM") }}
+                </li>
 
-                <li>{{ $t('home.Saturday') }}: {{ $t('home.09AM_01PM') }}</li>
+                <li>{{ $t("home.Saturday") }}: {{ $t("home.09AM_01PM") }}</li>
               </ul>
             </div>
           </div>
@@ -163,25 +186,14 @@ export default {};
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Arvo&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
-.font-arvo {
-  /* font-family: 'Arvo', serif; */
-}
-.font-rob {
-  /* font-family: 'Roboto', Sans-serif; */
-}
-.font-poppin {
-  /* font-family: 'Poppins', sans-serif; */
-}
-.font-source {
-  /* font-family: 'Source Sans Pro', sans-serif; */
-}
-.font-mont {
-  /* font-family: 'Montserrat', sans-serif; */
+@import url("https://fonts.googleapis.com/css2?family=Arvo&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+
+.over:hover {
+  color: #e75c18 !important;
 }
 .footer {
   margin-top: 2px;
@@ -209,11 +221,9 @@ export default {};
   .footer-icons-div {
     width: 100%;
   }
-
-
 }
 
-.size{
+.size {
   /* height: 100px;
   width: 300px; */
 }

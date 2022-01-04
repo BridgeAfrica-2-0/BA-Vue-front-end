@@ -125,7 +125,7 @@ export default {
   },
 
   data: () => ({
-    loading:false
+    loading: false,
   }),
 
   methods: {
@@ -139,7 +139,7 @@ export default {
     },
 
     async handleFollow(user) {
-      this.loading = true
+      this.loading = true;
       document.getElementById("followbtn" + user.id).disabled = true;
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
@@ -158,8 +158,7 @@ export default {
           console.log({ err: err });
           document.getElementById("followbtn" + user.id).disabled = false;
         })
-        .finally(() => this.loading = false)
-        ;
+        .finally(() => (this.loading = false));
     },
   },
 };

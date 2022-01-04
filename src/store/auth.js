@@ -57,7 +57,7 @@ export default {
 
 
 
-    setAppLanguage(state, language) {
+    setAppLanguage(state, language) { 
       state.appLanguage = language;
       localStorage.setItem("lang", language); // Whenever we change the appLanguage we save it to the localStorage
     },
@@ -223,7 +223,7 @@ export default {
     },
 
     completeWelcome({ commit }) {
-      localStorage.removeItem('user');
+      // localStorage.removeItem('user');
       return axios.get('user/completewelcome').then(({ data }) => {
         console.log(data);
         commit("setUserDataa", data.data);

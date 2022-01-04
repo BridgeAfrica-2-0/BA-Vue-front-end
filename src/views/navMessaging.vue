@@ -603,12 +603,204 @@
                 </p> -->
             </div>
           </b-col>
+          <!-- End selected Chat -->
+
+          <b-col v-if="info" class="chat-box">
+            <div class="info-nav">
+              <b-button class="primary-bg" @click="showInfo(false)">
+                <fas-icon :icon="['fas', 'arrow-left']" />
+              </b-button>
+              <span class="cnt-info"> Contact Info</span>
+            </div>
+            <div class="info-bottom">
+              <b-avatar
+                class="info-avatar"
+                variant="primary"
+                :src="chatSelected.profile_picture"
+                size="200"
+              ></b-avatar>
+              <div class="info-detail">
+                <h1 class="info-name">{{ chatSelected.name }}</h1>
+                <!-- <b-link class="primary">View Profile</b-link> -->
+              </div>
+            </div>
+            <div>
+              <ul>
+                <li>Options</li>
+                <li>
+                  <b-row
+                    ><b-col> Block Messages </b-col>
+                    <b-col>
+                      <b-form-checkbox
+                        v-model="checked"
+                        name="check-button"
+                        class="primary"
+                        switch
+                      >
+                      </b-form-checkbox>
+                    </b-col>
+                  </b-row>
+                </li>
+                <li>Report User</li>
+              </ul>
+            </div>
+          </b-col>
+
+          <!-- New message -->
+          <b-col
+            v-if="newMsg == true && info == false && !rightSide"
+            class="chat-box"
+          >
+            <div class="back-image" style="margin-right: 07px">
+              <b-row>
+                <b-col class="col-1 mt-3 ma-4" v-if="screenX < 930">
+                  <b-icon
+                    @click="showMessages(true)"
+                    icon="arrow-left-square-fill"
+                    font-scale="1"
+                    aria-hidden="true"
+                    class="primary"
+                  ></b-icon>
+                </b-col>
+                <b-col>
+                  <b-form-input
+                    id="textarea"
+                    v-model="searchQuery"
+                    class="input-background"
+                    style="width: 100%"
+                    :placeholder="`Type the name of the ${type}`"
+                    @keydown="getList(searchQuery)"
+                  ></b-form-input>
+                  <br />
+                </b-col>
+              </b-row>
+              <b-row>
+                <b-col>
+                  <div v-if="loader" class="text-center mt-12 pt-12">
+                    <b-spinner variant="primary" label="Spinning"></b-spinner>
+                  </div>
+                  <!-- <div v-else>
+                      <div v-if="type == 'user'">
+                        <b-row
+                          v-for="(user, index) in users"
+                          :key="index"
+                          class="p-2 message"
+                          @click="
+                            selectedChat({
+                              type: 'user',
+                              chat: user,
+                              id: user.id,
+                            })
+                          "
+                        >
+                          <b-col>
+                            <b-avatar
+                              class="d-inline-block"
+                              variant="primary"
+                              size="30"
+                              :src="user.profile_picture"
+                            ></b-avatar>
+                          </b-col>
+                          <b-col>
+                            <span class="bold"> {{ user.name }} </span>
+                          </b-col>
+                        </b-row>
+                      </div>
+                    </div> -->
+                  <table v-else class="table">
+                    <tbody v-if="type == 'user'">
+                      <tr
+                        v-for="(user, index) in users"
+                        :key="index"
+                        class="p-2 message"
+                        @click="
+                          selectedChat({
+                            type: 'user',
+                            chat: user,
+                            id: user.id,
+                          })
+                        "
+                      >
+                        <td>
+                          <b-avatar
+                            class="d-inline-block"
+                            variant="primary"
+                            size="30"
+                            :src="user.profile_picture"
+                          ></b-avatar>
+                          <span class="bold"> {{ user.name }} </span>
+                        </td>
+                      </tr>
+                    </tbody>
+                    <tbody v-if="type == 'business'">
+                      <tr
+                        v-for="(biz, index) in bizs"
+                        :key="index"
+                        class="p-2 message"
+                        @click="
+                          selectedChat({
+                            type: 'business',
+                            chat: biz,
+                            id: biz.id,
+                          })
+                        "
+                      >
+                        <td>
+                          <b-avatar
+                            class="d-inline-block"
+                            variant="primary"
+                            size="30"
+                            :src="
+                              getImage({
+                                type: 'business',
+                                image: biz.logo_path,
+                              })
+                            "
+                          ></b-avatar>
+                          <span class="bold"> {{ biz.name }} </span>
+                        </td>
+                      </tr>
+                    </tbody>
+                    <tbody v-if="type == 'network'">
+                      <tr
+                        v-for="(network, index) in nets"
+                        :key="index"
+                        class="p-2 message"
+                        @click="
+                          selectedChat({
+                            type: 'network',
+                            chat: network,
+                            id: network.id,
+                          })
+                        "
+                      >
+                        <td>
+                          <b-avatar
+                            class="d-inline-block"
+                            variant="primary"
+                            size="30"
+                            :src="
+                              getImage({
+                                type: 'network',
+                                image: network.image,
+                              })
+                            "
+                          ></b-avatar>
+                          <span class="bold"> {{ network.name }} </span>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </b-col>
+              </b-row>
+            </div>
+          </b-col>
         </b-row>
       </div>
 
       <div v-else>
         <b-row class="chat-box">
-          <b-col class="pr-0">
+          <b-col class="col-4 pr-0">
             <div class="right">
               <b-row>
                 <b-col class="p-2">
@@ -919,15 +1111,6 @@
           <b-col v-if="newMsg == false && info == false" class="p-0 back-image">
             <div class="chat-nav shadow">
               <b-row class="desk" v-if="chatSelected.active">
-                <b-col class="col-1 mt-3 ma-4">
-                  <b-icon
-                    @click="showMessages(true)"
-                    icon="arrow-left-square-fill"
-                    font-scale="1"
-                    aria-hidden="true"
-                    class="primary"
-                  ></b-icon>
-                </b-col>
                 <b-col class="col-3" @click="info = true">
                   <b-avatar
                     variant="primary"
@@ -1201,86 +1384,84 @@
                 </p> -->
             </div>
           </b-col>
-        </b-row>
-      </div>
 
-      <!-- End selected Chat -->
+          <!-- End selected Chat -->
 
-      <b-col v-if="info" class="chat-box">
-        <div class="info-nav">
-          <b-button class="primary-bg" @click="showInfo(false)">
-            <fas-icon :icon="['fas', 'arrow-left']" />
-          </b-button>
-          <span class="cnt-info"> Contact Info</span>
-        </div>
-        <div class="info-bottom">
-          <b-avatar
-            class="info-avatar"
-            variant="primary"
-            :src="chatSelected.profile_picture"
-            size="200"
-          ></b-avatar>
-          <div class="info-detail">
-            <h1 class="info-name">{{ chatSelected.name }}</h1>
-            <!-- <b-link class="primary">View Profile</b-link> -->
-          </div>
-        </div>
-        <div>
-          <ul>
-            <li>Options</li>
-            <li>
-              <b-row
-                ><b-col> Block Messages </b-col>
-                <b-col>
-                  <b-form-checkbox
-                    v-model="checked"
-                    name="check-button"
+          <b-col v-if="info" class="chat-box">
+            <div class="info-nav">
+              <b-button class="primary-bg" @click="showInfo(false)">
+                <fas-icon :icon="['fas', 'arrow-left']" />
+              </b-button>
+              <span class="cnt-info"> Contact Info</span>
+            </div>
+            <div class="info-bottom">
+              <b-avatar
+                class="info-avatar"
+                variant="primary"
+                :src="chatSelected.profile_picture"
+                size="200"
+              ></b-avatar>
+              <div class="info-detail">
+                <h1 class="info-name">{{ chatSelected.name }}</h1>
+                <!-- <b-link class="primary">View Profile</b-link> -->
+              </div>
+            </div>
+            <div>
+              <ul>
+                <li>Options</li>
+                <li>
+                  <b-row
+                    ><b-col> Block Messages </b-col>
+                    <b-col>
+                      <b-form-checkbox
+                        v-model="checked"
+                        name="check-button"
+                        class="primary"
+                        switch
+                      >
+                      </b-form-checkbox>
+                    </b-col>
+                  </b-row>
+                </li>
+                <li>Report User</li>
+              </ul>
+            </div>
+          </b-col>
+
+          <!-- New message -->
+          <b-col
+            v-if="newMsg == true && info == false && !rightSide"
+            class="chat-box"
+          >
+            <div class="back-image" style="margin-right: 07px">
+              <b-row>
+                <b-col class="col-1 mt-3 ma-4" v-if="screenX < 930">
+                  <b-icon
+                    @click="showMessages(true)"
+                    icon="arrow-left-square-fill"
+                    font-scale="1"
+                    aria-hidden="true"
                     class="primary"
-                    switch
-                  >
-                  </b-form-checkbox>
+                  ></b-icon>
+                </b-col>
+                <b-col>
+                  <b-form-input
+                    id="textarea"
+                    v-model="searchQuery"
+                    class="input-background"
+                    style="width: 100%"
+                    :placeholder="`Type the name of the ${type}`"
+                    @keydown="getList(searchQuery)"
+                  ></b-form-input>
+                  <br />
                 </b-col>
               </b-row>
-            </li>
-            <li>Report User</li>
-          </ul>
-        </div>
-      </b-col>
-
-      <!-- New message -->
-      <b-col
-        v-if="newMsg == true && info == false && !rightSide"
-        class="chat-box"
-      >
-        <div class="back-image" style="margin-right: 07px">
-          <b-row>
-            <b-col class="col-1 mt-3 ma-4" v-if="screenX < 930">
-              <b-icon
-                @click="showMessages(true)"
-                icon="arrow-left-square-fill"
-                font-scale="1"
-                aria-hidden="true"
-                class="primary"
-              ></b-icon>
-            </b-col>
-            <b-col>
-              <b-form-input
-                id="textarea"
-                v-model="searchQuery"
-                class="input-background"
-                style="width: 100%"
-                :placeholder="`Type the name of the ${type}`"
-                @keydown="getList(searchQuery)"
-              ></b-form-input>
-              <br />
-            </b-col>
-          </b-row>
-          <b-row>
-            <b-col>
-              <div v-if="loader" class="text-center mt-12 pt-12">
-                <b-spinner variant="primary" label="Spinning"></b-spinner>
-              </div>
-              <!-- <div v-else>
+              <b-row>
+                <b-col>
+                  <div v-if="loader" class="text-center mt-12 pt-12">
+                    <b-spinner variant="primary" label="Spinning"></b-spinner>
+                  </div>
+                  <!-- <div v-else>
                       <div v-if="type == 'user'">
                         <b-row
                           v-for="(user, index) in users"
@@ -1308,94 +1489,96 @@
                         </b-row>
                       </div>
                     </div> -->
-              <table v-else class="table">
-                <tbody v-if="type == 'user'">
-                  <tr
-                    v-for="(user, index) in users"
-                    :key="index"
-                    class="p-2 message"
-                    @click="
-                      selectedChat({
-                        type: 'user',
-                        chat: user,
-                        id: user.id,
-                      })
-                    "
-                  >
-                    <td>
-                      <b-avatar
-                        class="d-inline-block"
-                        variant="primary"
-                        size="30"
-                        :src="user.profile_picture"
-                      ></b-avatar>
-                      <span class="bold"> {{ user.name }} </span>
-                    </td>
-                  </tr>
-                </tbody>
-                <tbody v-if="type == 'business'">
-                  <tr
-                    v-for="(biz, index) in bizs"
-                    :key="index"
-                    class="p-2 message"
-                    @click="
-                      selectedChat({
-                        type: 'business',
-                        chat: biz,
-                        id: biz.id,
-                      })
-                    "
-                  >
-                    <td>
-                      <b-avatar
-                        class="d-inline-block"
-                        variant="primary"
-                        size="30"
-                        :src="
-                          getImage({
+                  <table v-else class="table">
+                    <tbody v-if="type == 'user'">
+                      <tr
+                        v-for="(user, index) in users"
+                        :key="index"
+                        class="p-2 message"
+                        @click="
+                          selectedChat({
+                            type: 'user',
+                            chat: user,
+                            id: user.id,
+                          })
+                        "
+                      >
+                        <td>
+                          <b-avatar
+                            class="d-inline-block"
+                            variant="primary"
+                            size="30"
+                            :src="user.profile_picture"
+                          ></b-avatar>
+                          <span class="bold"> {{ user.name }} </span>
+                        </td>
+                      </tr>
+                    </tbody>
+                    <tbody v-if="type == 'business'">
+                      <tr
+                        v-for="(biz, index) in bizs"
+                        :key="index"
+                        class="p-2 message"
+                        @click="
+                          selectedChat({
                             type: 'business',
-                            image: biz.logo_path,
+                            chat: biz,
+                            id: biz.id,
                           })
                         "
-                      ></b-avatar>
-                      <span class="bold"> {{ biz.name }} </span>
-                    </td>
-                  </tr>
-                </tbody>
-                <tbody v-if="type == 'network'">
-                  <tr
-                    v-for="(network, index) in nets"
-                    :key="index"
-                    class="p-2 message"
-                    @click="
-                      selectedChat({
-                        type: 'network',
-                        chat: network,
-                        id: network.id,
-                      })
-                    "
-                  >
-                    <td>
-                      <b-avatar
-                        class="d-inline-block"
-                        variant="primary"
-                        size="30"
-                        :src="
-                          getImage({
+                      >
+                        <td>
+                          <b-avatar
+                            class="d-inline-block"
+                            variant="primary"
+                            size="30"
+                            :src="
+                              getImage({
+                                type: 'business',
+                                image: biz.logo_path,
+                              })
+                            "
+                          ></b-avatar>
+                          <span class="bold"> {{ biz.name }} </span>
+                        </td>
+                      </tr>
+                    </tbody>
+                    <tbody v-if="type == 'network'">
+                      <tr
+                        v-for="(network, index) in nets"
+                        :key="index"
+                        class="p-2 message"
+                        @click="
+                          selectedChat({
                             type: 'network',
-                            image: network.image,
+                            chat: network,
+                            id: network.id,
                           })
                         "
-                      ></b-avatar>
-                      <span class="bold"> {{ network.name }} </span>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </b-col>
-          </b-row>
-        </div>
-      </b-col>
+                      >
+                        <td>
+                          <b-avatar
+                            class="d-inline-block"
+                            variant="primary"
+                            size="30"
+                            :src="
+                              getImage({
+                                type: 'network',
+                                image: network.image,
+                              })
+                            "
+                          ></b-avatar>
+                          <span class="bold"> {{ network.name }} </span>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </b-col>
+              </b-row>
+            </div>
+          </b-col>
+        </b-row>
+      </div>
 
       <!-- MODALS -->
       <!-- preview -->
@@ -1530,6 +1713,8 @@ export default {
     },
   },
   mounted() {
+    this.mobile = this.screenWidth < 930;
+    console.log("mobile:", this.mobile);
     this.getList();
     if (this.chatList.length < 0) {
       this.getChatList({ type: "user" });
@@ -1830,7 +2015,7 @@ export default {
     newMessage(arg) {
       this.getList();
       console.log("hey");
-      this.rightSide = false;
+      // this.rightSide = false;
       this.newMsg = arg;
       this.show = false;
     },

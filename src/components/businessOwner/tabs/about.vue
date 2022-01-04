@@ -4,7 +4,7 @@
     <b> {{ $t("businessowner.About") }} </b>
     
     <hr /> 
-    
+     
     <b-card>
       <div class="mb-3">
         <mapbox
@@ -71,9 +71,10 @@
                 <b-icon icon="geo-alt-fill" class="primary icon-size"></b-icon>
 
                <span
-              >{{ business_about.address }}
-              <!-- {{ business_about.city }}, 
-             {{ business_about.country[0].name }} -->
+              >
+              
+             {{ business_about.address }}
+             
               </span
             >
               </p>
@@ -860,6 +861,7 @@ export default {
         words.map(item =>{
           keyword+= item+','
         })
+        return keyword.substring(0, keyword.length-1);
      },
 
     loadBusinessAbout(){
@@ -992,7 +994,7 @@ export default {
             division: this.business_about_input.division[0].division_id, 
             council: this.business_about_input.council[0].council_id,
             neigborhood: this.business_about_input.neigborhood[0].neighborhood_id,
-            locality: this.business_about_input.locality,
+            // locality: this.business_about_input.locality,
             city: this.business_about_input.city,
             openHours: this.business_about_input.business_open_hours,
             lat: this.business_about_input.lat,
@@ -1001,7 +1003,7 @@ export default {
             }
             
           } 
-          console.log('data editer --',dat)
+          console.log(this.select_filterss, 'data editer --',dat)
 
           this.$store
             .dispatch(
@@ -1017,6 +1019,11 @@ export default {
                 "update user business about response ++++++",
                 response
               );
+              this.flashMessage.show({
+                status: "success",
+                blockClass: "custom-block-class",
+                message: this.$t("businessowner.Business_Profile_updated"),
+              });
               this.loadBusinessAbout();
               this.business_about = this.$store.getters[
                 "businessOwner/getBusinessAbout"

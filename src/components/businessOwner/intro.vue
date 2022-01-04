@@ -6,13 +6,14 @@
         class="edit cursor-pointer"
         v-b-modal.bv-edit-about
       >
-        <b-icon icon="pencil-fill" variant="primary"></b-icon>
+    
+        <b-icon icon="pencil-fill" variant="primary" ></b-icon>
       </div>
       <h6 class="mb-2">
         <b>{{ $t("businessf.Intro") }} </b>
       </h6>
 
-      <b-card-text>
+      <b-card-text> 
         <p> 
           <b-icon icon="briefcase-fill" class="primary icon-size"></b-icon>
           <span v-for="cat in business_intro.category" :key="cat.id">
@@ -29,7 +30,7 @@
         </p>
         <p class="d-flex justify-content-start align-items-start">
           <b-icon icon="geo-alt-fill" class="primary icon-size"></b-icon>
-          {{ business_intro.city }}
+          {{ business_intro.address }}
         </p>
         <p class="d-flex justify-content-start align-items-start">
           <b-icon icon="link" class="primary icon-size"></b-icon>
@@ -557,12 +558,7 @@ export default {
       this.$store.dispatch("auth/country").then((res) => {
         console.log("------------------------", this.$store.state.auth.country);
 
-        this.$store.state.auth.country.map((dat) => {
-          this.country.push({
-            item: dat.id,
-            name: dat.name,
-          });
-        });
+        
       });
     },
     getCathegorie() {
@@ -619,6 +615,9 @@ export default {
      
       this.filterselectvalue = business.subCatFilter;
       let Bcountry = business.country;
+      Bcountry.map((c) => {
+        this.country.push({ id: c.country_id, name: c.name });
+      });
       
       this.region = business.region;
       this.division = business.division;
@@ -628,15 +627,16 @@ export default {
       select_filterss.map((item) => {
         this.select_filterss.push(item.filter_id);
       });
-      console.log("(((marc(((", this.multiselecvalue)
+      this.form.adress =business.address;
+      console.log("(((marc(((", this.form.adress)
     },
 
     UpdateBusiness() {
       let formData2 = new FormData();
-    console.log("----ttt",this.multiselecvalue, "----ggg ", this.filterselectvalue)
+    console.log("----ttt",this.multiselecvalue, "----ggg ", this.countries)
       formData2.append("region", this.region[0].region_id);
       formData2.append("city", this.form.city);
-      formData2.append("country", this.country[0].item);
+      formData2.append("country", this.country[0].id);
 
 
       formData2.append("address", this.form.adress);

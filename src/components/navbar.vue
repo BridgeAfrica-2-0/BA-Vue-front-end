@@ -109,7 +109,7 @@
                 :minMatchingChars="0"
                 :maxMatches="10"
                 :serializer="(item) => item.name"
-                :placeholder="$t('general.Where')"
+                placeholder="Where"
                 class="search-hh w-44"
               />
 

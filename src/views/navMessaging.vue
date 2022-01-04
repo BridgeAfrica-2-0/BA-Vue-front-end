@@ -848,7 +848,7 @@
                       class="input-background"
                       style="width: 100%"
                       :placeholder="`Type the name of the ${type}`"
-                      @keydown="searchUser(searchQuery)"
+                      @keydown="getList(searchQuery)"
                     ></b-form-input>
 
                     <br />
@@ -864,9 +864,6 @@
                         ></b-spinner>
                       </div>
                       <table v-else class="table">
-                        <thead>
-                          <tr></tr>
-                        </thead>
                         <tbody v-if="type == 'user'">
                           <tr
                             v-for="(user, index) in users"
@@ -1225,14 +1222,14 @@ export default {
         // return moment(data).fromNow();
       }
     },
-    getList() {
+    getList(keyword) {
       if (this.type == "user") {
-        this.$store.dispatch("userChat/GET_USERS");
+        this.$store.dispatch("userChat/GET_USERS", keyword);
       } else if (this.type == "business") {
-        this.$store.dispatch("userChat/GET_BIZS");
+        this.$store.dispatch("userChat/GET_BIZS", keyword);
       } else {
         console.log("network");
-        this.$store.dispatch("userChat/GET_NETS");
+        this.$store.dispatch("userChat/GET_NETS", keyword);
       }
     },
     getChatList(data) {

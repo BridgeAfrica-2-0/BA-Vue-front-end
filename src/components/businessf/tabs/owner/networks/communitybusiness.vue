@@ -21,17 +21,18 @@
             {{ member.communityNum }}
             {{ $t("network.Community") }} <br />
 
-            <!-- <span class="location">
+            <span class="location">
               <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{ member.location_description }}
-            </span> -->
-            <!-- <br /> -->
-            <span v-if="member.about_business.length < 55">{{
-              member.about_business
-            }}</span>
-            <span v-else
-              >{{ member.about_business.substring(0, 55) + "..." }}
-              <b-link>Read More</b-link></span
-            >
+            </span>
+            <br />
+            <read-more
+              more-str="read more"
+              class="readmore"
+              :text="member.about_business"
+              link="#"
+              less-str="read less"
+              :max-chars="55"
+            ></read-more>
           </p>
         </b-col>
 
@@ -93,6 +94,30 @@
                 >
                   <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
                   <span class="btn-text">{{ $t("network.Direction") }}</span>
+                </b-button>
+              </b-col>
+
+              <b-col
+                md="12"
+                lg="4"
+                xl="12"
+                sm="12"
+                cols="4"
+                class="mt-2 text-center"
+              >
+                <b-button
+                  block
+                  size="sm"
+                  class="b-background shadow"
+                  variant="primary"
+                  @click="$emit('BlockUser', member.id)"
+                >
+                  <b-icon
+                    font-scale="1"
+                    icon="exclamation-octagon"
+                    title="Block This User"
+                  ></b-icon>
+                  <span class="btn-text"> Block</span>
                 </b-button>
               </b-col>
             </b-row>

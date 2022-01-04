@@ -533,7 +533,7 @@
                       "
                       type="text"
                       class="form-control input-background mb-6 pb-6"
-                      placeholder="Search message"
+                      :placeholder="$t('general.Search_message')"
                     />
                   </b-col>
                   <b-col class="col-3">

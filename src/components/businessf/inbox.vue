@@ -120,7 +120,7 @@
                     content-class="mt-12 ma-4 pt-6"
                     fill
                   >
-                    <b-tab title="Users" @click="getChatList({ type: 'user' })">
+                    <b-tab :title="$t('general.Users')" @click="getChatList({ type: 'user' })">
                       <!-- Users Chats Available  -->
                       <b-row class="pa-6">
                         <b-col class="mb-6 pb-6">

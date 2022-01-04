@@ -1,8 +1,8 @@
 <template>
   <div class="p-2">
-    <div class="s-ccard">
+    <div class="s-ccard">  
       <b-row>
-        <b-col lg="6" sm="12" class="p-2" v-for="item in users" :key="item.id">
+        <b-col lg="6" sm="12" class="p-2" v-for="(item, index) in users" :key="item.id">
           <div class="people-style border shadow">
             <b-row class="mb-1">
               <b-col md="3" cols="4" sm="4" class="my-auto">
@@ -27,7 +27,7 @@
                             class="mt-lg-2"
                           >
                             <div class="mt-3 mt-lg-0 mt-xl-0 username">
-                             <router-link :to="{name: 'Follower', params: {id:item.id}}">
+                             <router-link :to="{name: 'ProfileFollower', params: {id:item.id}}">
                               <strong class="title"> {{ item.name }}</strong>
                             </router-link>
                             </div>
@@ -38,30 +38,20 @@
                             lg="12"
                             cols="6"
                             xl="12"
-                            class="mt-3 mt-lg-1 mt-xl-3"
+                            class="mt-2 mt-lg-1 mt-xl-2"
                           >
-                            <h6 class="follower m-15">
+                            <h6 class="follower">
                               {{ count(item.followers) }}
-                              {{ $t("businessowner.Community") }}
+                              {{ $t("businessowner.Community") }}    <span v-if="!foll_id" class="ml-2"  @click="BlockUser(item.id, index)" style="cursor: pointer">   <b-icon
+                              font-scale="1"
+                              icon="exclamation-octagon"
+                              v-b-tooltip.hover
+                              title="Block This User"
+                              variant="danger"
+                            ></b-icon>  </span>
                             </h6>
                           </b-col>
-                          
-                          <b-col
-                            md="6"
-                            lg="12"
-                            cols="6"
-                            xl="12"
-                            class="mt-3 mt-lg-1 mt-xl-3"
-                          >
-                              <b-icon
-                                @click="blackListed"
-                                font-scale="1"
-                                icon="exclamation-octagon"
-                                v-b-tooltip.hover
-                                title="Block This User"
-                                variant="danger"
-                              ></b-icon>
-                          </b-col>
+                       
                         </b-row>
                       </div>
                     </b-col>
@@ -172,20 +162,43 @@ export default {
 
   methods: {
 
-    blackListed: async function(uuid){
-      const request = await this.$repository.share.blocking({banned_id:uuid, banned_type: 'profile' }, this.$route.params.id)
+     
+  BlockUser(id, index) {
 
-      if (request.success){
-        const data = this.users.filter(item => item.id != uuid)
-        this.users = data
+     let dataInfo = {
+        id: id,
+        refernce: "user",
+        type: this.type,
+      };
 
-      }else{
+    
+      let fd = new FormData();
+      fd.append("id", dataInfo.id);
+      fd.append("type", dataInfo.refernce);
+      this.$store.dispatch("profile/Block", {
+        path: "block/entity",
+        formData: fd
+        })
+      .then(response => {
+        
+      
+        this.$delete(this.users,index);
+        console.log("user deleted");
+
+        console.log(response);
+        this.flashMessage.show({
+          status: "success",
+          message: dataInfo.refernce + " blocked"
+        });
+      })
+      .catch(err => {
+        console.log({ err: err });
         this.flashMessage.show({
           status: "error",
-          message: request.data,
+          message: "Unable to blocked " + dataInfo.refernce
         });
-      }
-    },
+      });
+    },  
 
     cta(data) {
       console.log(data);
@@ -266,6 +279,8 @@ export default {
       } else {
         url = "business/community/people-following/" + this.biz_id + "/";
       }
+
+      console.log(url + this.page + "?keyword=" + this.searchh);
 
       axios
         .get(url + this.page + "?keyword=" + this.searchh)
@@ -607,7 +622,7 @@ f-right {
     text-overflow: ellipsis;
     overflow: hidden;
     width: 100%;
-    height: 1.2em;
+    height: 1.5em;
     white-space: nowrap;
   }
 

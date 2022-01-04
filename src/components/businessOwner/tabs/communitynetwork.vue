@@ -6,7 +6,7 @@
 
     <b-row>
       <b-col lg="6" sm="12" class="p-2" v-for="item in network" :key="item.id">
-        <div class="people-style shadow">
+        <div class="people-style shadow h-100">
           <b-row>
             <b-col md="3" xl="3" lg="3" cols="5" sm="3">
               <div class="center-img">
@@ -15,18 +15,23 @@
             </b-col>
             <b-col md="5" cols="7" lg="7" xl="5" sm="5">
               <p class="textt">
-                <router-link
-                  :to="{
-                    name: 'Membar Network Follower',
-                    params: { id: item.id },
-                  }"
-                >
+                <router-link :to="{name: 'Membar Network Follower', params: {id:item.id}}">
                   <strong class="title">{{ item.name }}</strong>
                 </router-link>
                 <br />
                 {{ item.category }}
                 <br />
-                {{ item.followers }} {{ $t("businessowner.Community") }} <br />
+                {{ count(item.followers) }} {{ $t("businessowner.Community") }}      <span  v-if="!foll_id" @click="BlockUser(item.id, index)"  class="ml-3"  style="cursor: pointer">  
+                      
+                      <b-icon
+                              font-scale="1"
+                              icon="exclamation-octagon"
+                              v-b-tooltip.hover
+                              title="Block This Network"
+                              variant="danger"
+                            ></b-icon>
+                            
+                              </span>  <br />
 
                 <span class="location">
                   <b-icon-geo-alt class="ico"></b-icon-geo-alt>
@@ -43,14 +48,7 @@
                   :max-chars="50"
                 >
                 </read-more>
-
-                <b-icon
-                  font-scale="1"
-                  icon="exclamation-octagon"
-                  v-b-tooltip.hover
-                  title="Block This Network"
-                  variant="danger"
-                ></b-icon>
+                
               </p>
             </b-col>
 
@@ -89,7 +87,7 @@
                     <b-button
                       block
                       size="sm"
-                      :id="'followbtn' + item.id"
+                      :id="'followbtn'+item.id"
                       class="b-background flexx pobtn shadow mr-lg-3 mr-xl-3"
                       :class="item.is_follow !== 0 && 'u-btn'"
                       variant="primary"
@@ -97,15 +95,12 @@
                     >
                       <i
                         class="fas fa-lg btn-icon"
-                        :class="
-                          item.is_follow !== 0
-                            ? 'fa-user-minus'
-                            : 'fa-user-plus'
-                        "
+                        :class="item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"
                       ></i>
-                      <span class="btn-com">Join</span>
+                        <span class="btn-com">Join</span>
                     </b-button>
                   </b-col>
+
                 </b-row>
               </div>
             </b-col>
@@ -158,44 +153,66 @@ export default {
   },
 
   methods: {
-    wrapper: () =>
-      this.type == "Follower"
-        ? this.$store.state.businessOwner.NcommunityFollower.network_followers
-        : this.$store.state.profile.NcommunityFollowing.network_following,
-    blackListed: async function (uuid) {
-      const request = await this.$repository.share.blocking(
-        { banned_id: uuid, banned_type: "network" },
-        this.$route.params.id
-      );
 
-      if (request.success) {
-        let newData = this.wrapper();
-        const data = newData.filter((item) => item.id != uuid);
 
-        newData = data;
-      } else {
+      
+  BlockUser(id, index) {
+
+     let dataInfo = {
+        id: id,
+        refernce: "network",
+        type: this.type,
+      };
+
+    
+      let fd = new FormData();
+      fd.append("id", dataInfo.id);
+      fd.append("type", dataInfo.refernce);
+      this.$store.dispatch("profile/Block", {
+        path: "block/entity",
+        formData: fd
+        })
+      .then(response => {
+        
+      
+        this.$delete(this.network,index);
+        console.log("user deleted");
+
+        console.log(response);
+        this.flashMessage.show({
+          status: "success",
+          message: dataInfo.refernce + " blocked"
+        });
+      })
+      .catch(err => {
+        console.log({ err: err });
         this.flashMessage.show({
           status: "error",
-          message: request.data,
+          message: "Unable to blocked " + dataInfo.refernce
         });
-      }
+      });
     },
 
-    networkJoin: async function (item) {
-      const status = item.is_follow;
 
-      const request = !status
-        ? await this.$repository.share.jointNetwork({
-            id: item.id,
-            type: "network",
-          })
-        : await this.$repository.share.removeNetwork({
-            id: item.id,
-            type: "network",
-          });
 
-      if (request.success) {
-        item = Object.assign(item, { is_follow: status ? 0 : 1 });
+      count(number) {
+      if (number >= 1000000) {
+        return number / 1000000 + "M";
+      }
+      if (number >= 1000) {
+        return number / 1000 + "K";
+      } else return number;
+    },
+
+
+
+    networkJoin: async function(item){
+      const status = item.is_follow
+
+      const request = !status ? await this.$repository.share.jointNetwork({id: item.id , type: "network"}) : await this.$repository.share.removeNetwork({id: item.id , type: "network"})
+      
+      if (request.success){
+        item = Object.assign(item, {is_follow: status ? 0 : 1})
         this.flashMessage.show({
           status: "success",
           title: request.data,

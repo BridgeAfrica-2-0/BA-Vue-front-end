@@ -144,8 +144,8 @@
     >
       <b-form>
         {{ blec }}
-        <b-row>
-          <div class="form-group col-md-6">
+        <!-- <b-row> -->
+          <div class="form-group col-md-">
             <label for="username">{{ $t("businessowner.Busness_Name") }}:</label
             ><br />
             <input
@@ -225,9 +225,9 @@
         
         </div>
 
-        </b-row>
+        <!-- </b-row> -->
 
-        <b-row>
+        <!-- <b-row> -->
           <b-form-group
             id="input-group-2"
             :label="$t('businessowner.Phone_Contact')"
@@ -259,9 +259,9 @@
               required
             ></b-form-input>
           </b-form-group>
-        </b-row>
+        <!-- </b-row> -->
 
-        <b-row>
+        <!-- <b-row> -->
           <div class="form-group col-md-6">
             <label for="keywords">{{ $t("businessowner.Keywords") }}</label
             ><br />
@@ -295,9 +295,9 @@
           ></multiselect>
             
           </div>
-        </b-row>
+        <!-- </b-row> -->
 
-        <b-row>
+        <!-- <b-row> -->
           <div class="form-group col-md-6">
             <label for="country" class="username">
               {{ $t("businessowner.Region") }} :</label
@@ -342,7 +342,7 @@
               type="text"
             ></b-form-input>
           </b-form-group>
-        </b-row>
+        <!-- </b-row> -->
 
         <b-button class="mt-3 btn-block" variant="primary" @click="validate">
           {{ $t("businessowner.Modify") }}

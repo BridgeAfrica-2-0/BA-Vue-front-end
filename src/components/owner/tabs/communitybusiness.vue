@@ -5,7 +5,7 @@
         lg="6"
         sm="12"
         class="p-2"
-        v-for="item in businesses"
+        v-for="(item, index) in businesses"
         :key="item.id"
       >
         <div class="people-style shadow h-100">
@@ -38,7 +38,17 @@
                     </span>
                     <br />
                     {{ count(item.followers) }}
-                    {{ $t("dashboard.Community") }} <br />
+                    {{ $t("dashboard.Community") }}   <span v-if="!foll_id"  @click="BlockUser(item.id, index)" class="ml-3"  style="cursor: pointer">  
+                      
+                      <b-icon
+                              font-scale="1"
+                              icon="exclamation-octagon"
+                              v-b-tooltip.hover
+                              title="Block This Business"
+                              variant="danger"
+                            ></b-icon>
+                            
+                              </span> <br />
 
                     <span class="location">
                       <b-icon-geo-alt class="ico"></b-icon-geo-alt>
@@ -132,30 +142,7 @@
                       }}</span>
                     </b-button>
                   </b-col>
-                  <b-col
-                    md="12"
-                    lg="4"
-                    xl="12"
-                    sm="12"
-                    cols="4"
-                    class="mt-2 text-center"
-                  >
-                    <b-button
-                      block
-                      size="sm"
-                      class="b-background shadow"
-                      variant="primary"
-                      @click="$emit('BlockUser', item.id)"
-                      title="Block This User"
-                    >
-                      <b-icon
-                        font-scale="1"
-                        icon="exclamation-octagon-fill"
-                        v-b-tooltip.hover
-                      ></b-icon>
-                      <span class="btn-text">Block</span>
-                    </b-button>
-                  </b-col>
+                 
                 </b-row>
               </div>
             </b-col>
@@ -214,6 +201,46 @@ export default {
   },
 
   methods: {
+
+    
+  BlockUser(id, index) {
+
+     let dataInfo = {
+        id: id,
+        refernce: "business",
+        type: this.type,
+      };
+
+    
+      let fd = new FormData();
+      fd.append("id", dataInfo.id);
+      fd.append("type", dataInfo.refernce);
+      this.$store.dispatch("profile/Block", {
+        path: "block/entity",
+        formData: fd
+        })
+      .then(response => {
+        
+      
+        this.$delete(this.businesses,index);
+        console.log("user deleted");
+
+        console.log(response);
+        this.flashMessage.show({
+          status: "success",
+          message: dataInfo.refernce + " blocked"
+        });
+      })
+      .catch(err => {
+        console.log({ err: err });
+        this.flashMessage.show({
+          status: "error",
+          message: "Unable to blocked " + dataInfo.refernce
+        });
+      });
+    },
+
+
     count(number) {
       if (number >= 1000000) {
         return number / 1000000 + "M";

@@ -53,30 +53,32 @@ export default {
           console.log({ err: err });
         });
     },
-    BlockUser(dataInfo) {
-      console.log(dataInfo);
+  
+
+
+
+  BlockUser(lol) {
+      console.log(lol);
       let fd = new FormData();
-      fd.append("id", dataInfo.id);
-      fd.append("type", dataInfo.refernce);
-      this.$store
-        .dispatch("profile/Block", {
-          path: "block/entity",
-          formData: fd,
+      fd.append("id", lol.id);
+      fd.append("type", lol.refernce);
+      this.$store.dispatch("profile/Block", {
+        path: "block/entity",
+        formData: fd
         })
-        .then((response) => {
-          this.community();
-          console.log(response);
-          this.flashMessage.show({
-            status: "success",
-            message: dataInfo.refernce + " blocked",
-          });
-        })
-        .catch((err) => {
-          console.log({ err: err });
-          this.flashMessage.show({
-            status: "error",
-            message: "Unable to blocked " + dataInfo.refernce,
-          });
+      .then(response => {
+        this.community();
+        console.log(response);
+        this.flashMessage.show({
+          status: "success",
+          message: lol.refernce + " blocked"
+        });
+      })
+      .catch(err => {
+        console.log({ err: err });
+        this.flashMessage.show({
+          status: "error",
+          message: "Unable to blocked " + lol.refernce
         });
     },
   },

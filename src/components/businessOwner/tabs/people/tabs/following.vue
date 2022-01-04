@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import CommunityMembers from "../../communitynetwork";
+import CommunityMembers from "../../communityMember";
 export default {
   data() {
     return {

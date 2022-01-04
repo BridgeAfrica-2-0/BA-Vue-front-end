@@ -40,7 +40,7 @@
     </b-row>
     <b-row >
       <b-col col="12">
-        <infinite-loading @infinite="infiniteHandler">
+        <infinite-loading @infinite="infiniteHandler" ref="infiniteLoading">
           <div class="text-red" slot="no-more">{{ $t('network.No_More_Request') }}</div>
           <div class="text-red" slot="no-results">{{ $t('network.No_More_Request') }}</div>
         </infinite-loading>
@@ -61,7 +61,7 @@ export default {
     return {
       url:null,
       searchTitle: "",
-      page: 0,
+      page: 1,
       loading: false,
       networkfollowers: [],
       displayfollowers: []
@@ -96,13 +96,18 @@ export default {
     search() {
       if(this.searchTitle){
         this.loading = true;
-        this.page -= 1;
         console.log("searching...");
         console.log(this.searchTitle);
-        this.infiniteHandler();
+        this.$nextTick(() => {
+          this.page = 1;
+          this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
+        });
       }else{
         console.log("Empty search title: "+this.searchTitle);
-        this.infiniteHandler();
+        this.$nextTick(() => {
+          this.page = 1;
+          this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
+        });
       }
     },
     
@@ -142,11 +147,15 @@ export default {
 
     BlockUser(user_id) {
       this.loading = true;
-      console.log("network/"+this.url+"/lock/user/"+user_id);
-      this.axios.delete("network/"+this.url+"/lock/user/"+user_id)
+      console.log("network/"+this.url+"/lock/network/"+user_id);
+      this.axios.post("network/"+this.url+"/lock/network/"+user_id)
       .then(response => {
         console.log(response);
-        this.blockUsers();
+        this.displayfollowers = [];
+        this.$nextTick(() => {
+          this.page = 1;
+          this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
+        });
         this.loading = false;
         this.flashMessage.show({
           status: "success",

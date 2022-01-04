@@ -22,7 +22,9 @@
 
 				<div class="text-lost">
 					<h6>
-						<b class="name"> {{ profile.name }} </b>
+						<router-link :to="{name: 'profile_owner'}">
+							<b class="name"> {{ profile.name }} </b>
+						</router-link>
 					</h6>
 					<p class="mb-1">
 						{{ profile.followers }} {{ community }}

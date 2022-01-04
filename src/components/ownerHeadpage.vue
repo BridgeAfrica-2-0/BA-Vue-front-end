@@ -17,7 +17,7 @@
               badge-variant="primary"
               badge-offset="10px"
             ></b-avatar>
-            
+
             <b-icon
               icon="camera-fill"
               class="avatar-header-icon btn cursor-pointer size"
@@ -30,7 +30,10 @@
                   <b>{{ info.user.name }}</b>
                 </div>
 
-                <span class="duration float-left"> {{ nFormatter(total.total_community) }} {{ $t('profileowner.Community') }} </span>
+                <span class="duration float-left">
+                  {{ nFormatter(total.total_community) }}
+                  {{ $t("profileowner.Community") }}
+                </span>
               </h6>
             </span>
 
@@ -71,8 +74,12 @@
                       class="d-none d-md-inline edit-btn"
                       v-b-modal.modal-upp
                     >
-                      <fas-icon class="mr-2" :icon="['fas', 'pencil-alt']" size="lg" />
-                      {{ $t('profileowner.Edit') }}
+                      <fas-icon
+                        class="mr-2"
+                        :icon="['fas', 'pencil-alt']"
+                        size="lg"
+                      />
+                      {{ $t("profileowner.Edit") }}
                     </b-button>
 
                     <b-dropdown
@@ -86,17 +93,30 @@
                         <b-icon-three-dots></b-icon-three-dots>
                       </template>
 
-                      <b-dropdown-item @click="selectCover"> {{ $t('profileowner.Change_Cover') }}</b-dropdown-item>
-                      <b-dropdown-item @click="RemoveCover"> {{ $t('profileowner.Remove_Cover') }} </b-dropdown-item>
-                      <b-dropdown-item @click="RemoveProfile"> {{ $t('profileowner.Remove_Profile') }} </b-dropdown-item>
+                      <b-dropdown-item @click="selectCover">
+                        {{ $t("profileowner.Change_Cover") }}</b-dropdown-item
+                      >
+                      <b-dropdown-item @click="RemoveCover">
+                        {{ $t("profileowner.Remove_Cover") }}
+                      </b-dropdown-item>
+                      <b-dropdown-item @click="RemoveProfile">
+                        {{ $t("profileowner.Remove_Profile") }}
+                      </b-dropdown-item>
                       <!--<b-dropdown-item>Invite Friends On Bridge Africa</b-dropdown-item>-->
-                      <b-dropdown-item @click="viewAs" >{{ $t('profileowner.View_As') }}</b-dropdown-item>
+                      <b-dropdown-item @click="viewAs">{{
+                        $t("profileowner.View_As")
+                      }}</b-dropdown-item>
                     </b-dropdown>
                   </span>
                 </div>
               </div>
             </div>
-            <b-modal id="logomodal" ref="logomodal" @ok="submitLogo" :title="$t('profileowner.Upload_Your_Logo')">
+            <b-modal
+              id="logomodal"
+              ref="logomodal"
+              @ok="submitLogo"
+              :title="$t('profileowner.Upload_Your_Logo')"
+            >
               <div class="w3-container">
                 <div id="preview">
                   <img :src="img_url" />
@@ -110,7 +130,7 @@
               ref="coverphotoCrop"
               ok-title="Crop and Save"
               @ok="submitCroppedCover"
-              :title="$t('profileowner.Crop_Cover_Photo')" 
+              :title="$t('profileowner.Crop_Cover_Photo')"
             >
               <div class="w3-container">
                 <div id="preview">
@@ -125,7 +145,11 @@
               </div>
             </b-modal>
 
-            <b-modal id="modal-upp" ref="modalxl" :title="$t('profileowner.Upload_Cover_Picture')">
+            <b-modal
+              id="modal-upp"
+              ref="modalxl"
+              :title="$t('profileowner.Upload_Cover_Picture')"
+            >
               <div class="w3-container">
                 <div class="row pb3">
                   <div
@@ -149,7 +173,7 @@
                           class=""
                         ></path>
                       </svg>
-                      <h4>{{ $t('profileowner.Upload_a_New_picture') }} </h4>
+                      <h4>{{ $t("profileowner.Upload_a_New_picture") }}</h4>
                     </h1>
                   </div>
                   <div class="col-sm-6 text-center">
@@ -171,14 +195,19 @@
                         ></path>
                       </svg>
                     </h1>
-                    <h4>{{ $t('profileowner.Edit_Your_New_Picture') }} </h4>
+                    <h4>{{ $t("profileowner.Edit_Your_New_Picture") }}</h4>
                   </div>
                 </div>
               </div>
             </b-modal>
 
             <!-- second modal box  to edit the big cover photo -->
-            <b-modal id="coverphoto" ref="coverphoto" @ok="submitCover" :title="$t('profileowner.Upload_Cover_Photo')">
+            <b-modal
+              id="coverphoto"
+              ref="coverphoto"
+              @ok="submitCover"
+              :title="$t('profileowner.Upload_Cover_Photo')"
+            >
               <div class="w3-container">
                 <div id="preview">
                   <img :src="img_url" />
@@ -193,14 +222,12 @@
 </template>
 
 <script>
-
 import VueCropper from "vue-cropperjs";
 import "cropperjs/dist/cropper.css";
 
+import { defaultCoverImage } from "@/mixins";
 
-import {defaultCoverImage} from '@/mixins';
-
-import { mapMutations, mapGetters } from 'vuex'
+import { mapMutations, mapGetters } from "vuex";
 
 export default {
   name: "headPageOwner",
@@ -209,8 +236,8 @@ export default {
     VueCropper,
   },
 
-  created(){
-    this.currentAuthType = 'profile'
+  created() {
+    this.currentAuthType = "profile";
   },
 
   data() {
@@ -248,8 +275,8 @@ export default {
 
   methods: {
     ...mapMutations({
-      addCoverPicture: 'auth/addCoverPicture',
-      addProfile: 'auth/updateProfilePicture'
+      addCoverPicture: "auth/addCoverPicture",
+      addProfile: "auth/updateProfilePicture",
     }),
 
     nFormatter(num) {
@@ -330,7 +357,7 @@ export default {
         container: this.fullPage ? null : this.$refs.preview,
         canCancel: true,
         onCancel: this.onCancel,
-        color: '#e75c18',
+        color: "#e75c18",
       });
 
       let formData = new FormData();
@@ -345,13 +372,12 @@ export default {
           this.$store
             .dispatch("profile/loadUserPostIntro", null)
             .then((response) => {
-             
               this.flashMessage.show({
                 status: "success",
                 message: this.$t("profileowner.Logo_Updated"),
                 blockClass: "custom-block-class",
               });
-               loader.hide();
+              loader.hide();
               this.$refs["modalxl"].hide();
             })
             .catch((error) => {
@@ -367,7 +393,7 @@ export default {
               message: err.response.data.message,
               blockClass: "custom-block-class",
             });
-             loader.hide();
+            loader.hide();
           } else {
             this.flashMessage.show({
               status: "error",
@@ -375,7 +401,7 @@ export default {
               blockClass: "custom-block-class",
             });
             console.log({ err: err });
-             loader.hide();
+            loader.hide();
           }
         });
     },
@@ -401,7 +427,6 @@ export default {
           this.$store
             .dispatch("profile/loadUserPostIntro", null)
             .then((response) => {
-             
               this.flashMessage.show({
                 status: "success",
                 message: this.$t("profileowner.profile_removed_successfully"),
@@ -441,7 +466,7 @@ export default {
           this.$store
             .dispatch("profile/loadUserPostIntro", null)
             .then(() => {
-              this.addCoverPicture(null)
+              this.addCoverPicture(null);
               this.flashMessage.show({
                 status: "success",
                 message: this.$t("profileowner.Profile_removed_successfully"),
@@ -548,8 +573,6 @@ export default {
           this.$store
             .dispatch("profile/loadUserPostIntro", null)
             .then((response) => {
-             
-
               this.flashMessage.success({
                 message: this.$t("profileowner.Operation_successful"),
                 blockClass: "custom-block-class",
@@ -592,9 +615,8 @@ export default {
   },
 
   computed: {
-
     ...mapGetters({
-      auth: 'auth/profilConnected'
+      auth: "auth/profilConnected",
     }),
 
     total() {
@@ -607,14 +629,18 @@ export default {
   },
 
   watch: {
-    "$store.state.profile.profileIntro": { 
-      deep:true,
-      handler(){
-        this.addCoverPicture(this.$store.state.profile.profileIntro.user.cover_picture)
-        this.addProfile(this.$store.state.profile.profileIntro.user.profile_picture)
-      }
-    }
-  }
+    "$store.state.profile.profileIntro": {
+      deep: true,
+      handler() {
+        this.addCoverPicture(
+          this.$store.state.profile.profileIntro.user.cover_picture
+        );
+        this.addProfile(
+          this.$store.state.profile.profileIntro.user.profile_picture
+        );
+      },
+    },
+  },
 };
 </script>
 

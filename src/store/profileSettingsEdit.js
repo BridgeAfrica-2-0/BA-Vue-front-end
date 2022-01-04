@@ -3,10 +3,9 @@ import axios from "axios"
   export default {
     namespaced: true,
     state: {
-       userInfos: null,
+       userInfos: [],
        etat: 0,
-       selectedId:5,
-       defaultPayment: []
+       selectedId:5
     },
 
     getters: {
@@ -14,9 +13,7 @@ import axios from "axios"
     //         return state.dbListKeyWord;
     // },
 
-    getDefaultPayment(state) {
-      return state.defaultPayment;
-    }
+
   },
 
   mutations: {
@@ -26,10 +23,6 @@ import axios from "axios"
 
     setEtat(state){
       state.etat = 1 ;
-    },
-
-    setDefaultPayment(state, defaultPayment){
-      state.defaultPayment = defaultPayment ;
     }
  
   },
@@ -70,28 +63,7 @@ import axios from "axios"
      redirection({commit}){
       commit("setEtat")
 
-     },
-
-    getDefaultPayment( {commit}, Data ){
-      console.log("DefaultPayment");
-      return axios
-      .get(`profile/${Data.path}`)
-      .then(({ data }) => {
-          commit("setDefaultPayment", data.data);
-        console.log(data);
-
-      })
-    },
-    confirmPayment( {commit}, Data ){
-      console.log("confirmPayment");
-      console.log(Data);
-      return axios
-      .post(`profile/${Data.path}`, Data.formData)
-      .then(({ data }) => {
-        console.log(data);
-        return data
-      })
-    }
+     }
 
     
   }

@@ -849,14 +849,14 @@ export default {
     selecteddivision: function () {
       let sub_cat = [];
       this.division.forEach((item) => {
-        sub_cat.push(item.id);
+        sub_cat.push(item.division_id);
       });
       return sub_cat;
     },
     selectedmunicipality: function () {
       let sub_cat = [];
       this.municipality.forEach((item) => {
-        sub_cat.push(item.id);
+        sub_cat.push(item.council_id);
       });
       return sub_cat;
     },

@@ -204,7 +204,7 @@ export default {
     },
     infiniteHandler($state) {
       axios
-        .get('user/notification', {
+        .get('user/notifications', {
           params: {
             page: this.page,
           },

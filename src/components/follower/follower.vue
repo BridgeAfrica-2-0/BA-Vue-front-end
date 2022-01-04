@@ -169,7 +169,7 @@
             /></b-tab>
             <b-tab :title="$t('profilefollower.Network')"><Network /></b-tab>
             <b-tab :title="$t('profilefollower.Media')"
-              ><Media type="profile"
+              ><Media type="profile" :isEditor="false"
             /></b-tab>
             <b-tab :title="$t('profilefollower.Community')"
               ><Community
@@ -184,7 +184,7 @@
 <script>
 import Post from "@/components/businessfollower/tabs/posts";
 import About from "@/components/follower/tabs/about";
-import Media from "@/components/businessfollower/tabs/media";
+import Media from "@/components/owner/tabs/media";
 import Community from "@/components/follower/tabs/community";
 import Businesses from "@/components/follower/tabs/businesses";
 import Network from "@/components/follower/tabs/networkk";

@@ -2911,6 +2911,12 @@
           $t("businessowner.Create")
         }}</b-button>
       </b-modal>
+      <b-modal id="preview-file" hide-footer>
+        <div class="d-block text-center">
+          <h3>Preview file:</h3>
+          <b-img thumbnail fluid :src="previewSrc" id="filePreview"></b-img>
+        </div>
+      </b-modal>
     </b-container>
   </div>
 </template>

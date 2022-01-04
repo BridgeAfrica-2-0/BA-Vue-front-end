@@ -4,71 +4,7 @@
       <div class="chat-box">
         <b-row>
           <!-- Mobile -->
-          <b-col class="pr-0" cols="12" xl="4" v-if="show">
-            <div class="right-mobile">
-              <b-row>
-                <b-col>
-                  <b-avatar
-                    class="d-inline-block profile-pic"
-                    variant="primary"
-                    src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
-                    square
-                  ></b-avatar>
-                </b-col>
-                <b-col>
-                  <h4 class="title m-10">{{ $t("businessowner.Messages") }}</h4>
-                </b-col>
-                <b-col>
-                  <b-icon
-                    @click="newMessage(true)"
-                    class="new-message primary icon-size m-10 float-right"
-                    icon="pencil-square"
-                  ></b-icon>
-                </b-col>
-              </b-row>
-              <b-container>
-                <input
-                  type="text"
-                  class="form-control input-background"
-                  :placeholder="$t('businessowner.Search_inbox')"
-                />
-              </b-container>
-            </div>
-            <div>
-              <div class="messages-mobile">
-                <b-row
-                  v-for="message in messages"
-                  :key="message.id"
-                  class="p-2 message"
-                  @click="showMessages(false)"
-                >
-                  <b-col class="col-10">
-                    <span style="display: inline-flex mb-2">
-                      <b-avatar
-                        class="d-inline-block profile-pic"
-                        variant="primary"
-                        src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
-                      ></b-avatar>
-
-                      <h6 class="d-inline-block ml-2">
-                        <b class="bold"> {{ message.name }}</b>
-                        <p class="duration">{{ message.startMessage }}</p>
-                      </h6>
-                    </span>
-                  </b-col>
-
-                  <b-col class="col-2 text-center">
-                    <small> {{ message.timeStamp }} </small>
-                    <p class="">
-                      <b-badge variant="info">
-                        {{ message.messageCount }}
-                      </b-badge>
-                    </p>
-                  </b-col>
-                </b-row>
-              </div>
-            </div>
-          </b-col>
+         
           <!-- ---- -->
 
           <b-col class="pr-0">
@@ -495,49 +431,7 @@
           >
             <div>
               <div class="chat-nav shadow">
-                <b-row class="mobile">
-                  <b-col class="col-1">
-                    <b-icon
-                      @click="showMessages(true)"
-                      icon="arrow-left"
-                      aria-hidden="true"
-                      class="primary"
-                    ></b-icon>
-                  </b-col>
-                  <b-col class="col-3">
-                    <b-avatar
-                      variant="primary"
-                      :src="
-                        chatSelected.chat
-                          ? chatSelected.chat.picture
-                            ? chatSelected.chat.picture
-                            : chatSelected.chat.image
-                          : ''
-                      "
-                      size="50"
-                    ></b-avatar>
-                  </b-col>
-
-                  <b-col class="detale">
-                    <h6>{{ chatSelected.name }}</h6>
-                    <!-- <small>Online </small> -->
-                  </b-col>
-                  <b-col cols="3">
-                    <b-row class="mt-3">
-                      <b-col class="col-3">
-                        <b-icon icon="search" class="primary"></b-icon>
-                      </b-col>
-                      <b-col class="col-3">
-                        <b-icon
-                          icon="three-dots"
-                          @click="showInfo(true)"
-                          aria-hidden="true"
-                          class="primary"
-                        ></b-icon>
-                      </b-col>
-                    </b-row>
-                  </b-col>
-                </b-row>
+                
                 <b-row class="desk" v-if="chatSelected.active">
                   <b-col class="col-2" @click="info = true">
                     <b-avatar
@@ -636,29 +530,7 @@
                     </b-row>
                   </b-col>
                 </b-row>
-                <!-- <b-row class="desk" v-else>
-                  <b-col class="col-2" @click="info = true">
-                    <b-avatar
-                      variant="primary"
-                      src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
-                      size="60"
-                    ></b-avatar>
-                  </b-col>
-                  <b-col class="detail" @click="info = true">
-                    <h5>General Chat</h5>
-                     <p>Online({{online.length}})</p> 
-                  </b-col>
-                  <b-col class="col-4">
-                    <b-row class="mt-3 ml-5">
-                      <b-col class="col-3">
-                        <b-icon
-                          class="msg-icon primary icon-size"
-                          icon="search"
-                        ></b-icon>
-                      </b-col>
-                    </b-row>
-                  </b-col>
-                </b-row> -->
+                
               </div>
 
               <section
@@ -758,36 +630,7 @@
                 </div>
               </section>
 
-              <!-- <section v-else class="chats" style="margin-left: 1px" ref="feed">
-                <div v-for="(message, index) in messages" :key="index">
-                  <div v-if="message.sender != currentUser.user.name">
-                    <b-row class="p-4">
-                      <b-col>
-                        <p class="msg-text mt-0 text">
-                          <b>{{ message.sender }}</b
-                          >: {{ message.message }}
-                          <small class="float-right mt-2 text-white pr-1 pt-1">
-                            {{ getCreatedAt(message.date) }}
-                          </small>
-                        </p>
-                      </b-col>
-                    </b-row>
-                  </div>
-
-                  <div v-else>
-                    <b-row class="p-4">
-                      <b-col>
-                        <p id="sent" class="msg-text-sent text">
-                          <b>Me</b>: {{ message.message }}
-                          <small class="float-right mt-2 text-white pr-1 pt-1">
-                            {{ getCreatedAt(message.date) }}
-                          </small>
-                        </p>
-                      </b-col>
-                    </b-row>
-                  </div>
-                </div>
-              </section> -->
+              
 
               <section v-else class="chats" style="margin-left: 1px" ref="feed">
                 <div class="mt-12 pt-12">

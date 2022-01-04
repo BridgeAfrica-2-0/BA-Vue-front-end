@@ -263,7 +263,7 @@
 
         <div>
           <form-wizard @on-complete="onComplete">
-            <tab-content
+            <!-- <tab-content
               :title="$t('welcome.Complete_Profile')"
               :before-change="updateUserProfile"
             >
@@ -740,7 +740,7 @@
 
                 <businessmap :center="businessInstanceCenter" />
               </div>
-            </tab-content>
+            </tab-content> -->
 
             <tab-content :title="$t('welcome.Follow_Businesses')">
               <div class="div-h h-400">
@@ -1461,8 +1461,8 @@ export default {
     Business,
     Tutorial,
     AutocompleteMapbox,
-    businessmap,
-    BusinessAutocomplete,
+    // businessmap,
+    // BusinessAutocomplete,
   },
 
   computed: {

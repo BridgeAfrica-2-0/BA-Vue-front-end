@@ -1,6 +1,6 @@
 <template>
   <div class="lallaa">
-    <b-tabs content-class="mt-3" fill pills>
+    <b-tabs content-class="mt-3" fill pills lazy>
       <b-tab :title="$t('profilefollower.Followers')"><Followers /></b-tab>
       <b-tab :title="$t('profilefollower.Following')"><Following /></b-tab>
     </b-tabs>

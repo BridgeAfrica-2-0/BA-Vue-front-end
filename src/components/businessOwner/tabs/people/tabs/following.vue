@@ -17,7 +17,7 @@
     <br />
 
       <div md="12" lg="6">
-        <CommunityMembers @BlockUser="BlockUser" :searchh="keywords" ref="search" type="Following"  />
+        <CommunityMembers  :searchh="keywords" ref="search" type="Following"  />
       </div>  
 
       
@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import CommunityMembers from "../../communitynetwork";
+import CommunityMembers from "../../communityMember";
 export default {
   data() {
     return {
@@ -36,18 +36,9 @@ export default {
     CommunityMembers
   },
 
-  computed: {},
-  methods: {
-    BlockUser(id) {
-      console.log(id);
-      let dataInfo = {
-        id: id,
-        refernce: "user",
-        type: "following",
-      };
-      this.$emit('BlockUser', dataInfo);
-    },
-  }
+  computed: {
+   
+  },
 
 };
 </script>

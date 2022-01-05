@@ -43,7 +43,7 @@ export default {
       localStorage.setItem('user', JSON.stringify(newUser));
 
     },
-
+    
     setUserData(state, userData) {
       localStorage.removeItem('user');
       state.user = userData;

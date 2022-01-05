@@ -14,17 +14,25 @@
         <b-col md="5" cols="7" lg="9" xl="5" sm="5">
           <p class="textt text">
             <strong class="title"> {{ member.name }} </strong> <br />
-            {{ member.category[0].name }}
+            <span v-if="member.category.length">
+              {{ member.category[0].name }}</span
+            >
             <br />
             {{ member.communityNum }}
-            {{ $t('memnetwork.Community') }} <br />
+            {{ $t("network.Community") }} <br />
 
             <span class="location">
               <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{ member.location_description }}
             </span>
             <br />
-            <span v-if="member.about_business.length<65">{{ member.description}}</span>
-            <span v-else >{{ member.about_business.substring(0,65)+"..." }} <b-link>{{ $t('memnetwork.Read_More') }}</b-link></span>
+            <read-more
+              more-str="read more"
+              class="readmore"
+              :text="member.about_business"
+              link="#"
+              less-str="read less"
+              :max-chars="55"
+            ></read-more>
           </p>
         </b-col>
 
@@ -44,9 +52,17 @@
                   size="sm"
                   class="b-background shadow"
                   variant="primary"
+                  @click="$emit('handleFollow', member)"
+                  :style="member.is_follow !== 0 ? 'background-color: rgb(162,107,80);' : ''"
                 >
-                  <i class="fas fa-user-plus fa-lg btn-icon"></i>
-                  <span class="btn-com">{{ $t('memnetwork.Community') }}</span>
+                  <i
+                    :class="
+                      member.is_follow
+                        ? 'fas fa-user-minus fa-lg btn-icon'
+                        : 'fas fa-user-plus fa-lg btn-icon'
+                    "
+                  ></i>
+                  <span class="btn-com">{{ $t("network.Community") }}</span>
                 </b-button>
               </b-col>
 
@@ -74,11 +90,13 @@
                   size="sm"
                   class="b-background shadow"
                   variant="primary"
+                  @click="goToBusinessAbout(member.id)"
                 >
                   <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
-                  <span class="btn-text">{{ $t('memnetwork.Direction') }}</span>
+                  <span class="btn-text">{{ $t("network.Direction") }}</span>
                 </b-button>
               </b-col>
+
             </b-row>
           </div>
         </b-col>
@@ -103,18 +121,9 @@ export default {
     };
   },
   method: {
-    // nFormatter(num) {
-    //   if (num >= 1000000000) {
-    //     return (num / 1000000000).toFixed(1).replace(/\.0$/, "") + "G";
-    //   }
-    //   if (num >= 1000000) {
-    //     return (num / 1000000).toFixed(1).replace(/\.0$/, "") + "M";
-    //   }
-    //   if (num >= 1000) {
-    //     return (num / 1000).toFixed(1).replace(/\.0$/, "") + "K";
-    //   }
-    //   return num;
-    // },
+    goToBusinessAbout(id){
+      this.$router.push(`/business/${id}#about`);
+    }
   },
 };
 </script>

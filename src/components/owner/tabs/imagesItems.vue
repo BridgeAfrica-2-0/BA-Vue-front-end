@@ -98,9 +98,12 @@
 </template>
 
 <script>
-import { mapMutations } from "vuex";
+
+import { mapMutations } from 'vuex'
+import { ResizeMediaImage } from '@/mixins' 
 
 export default {
+  mixins: [ResizeMediaImage],
   props: [
     "im",
     "imageProps",

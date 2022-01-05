@@ -20,9 +20,9 @@
     <br />
     <br />
     <br />
-
-    <p class="text">{{ bio.user.biography }}</p>
-
+  
+  <p class="text" >  {{ bio.user.biography  }} </p>
+   
     <div v-if="editing">
       <b-form @submit.prevent="save">
         <b-form-select
@@ -73,8 +73,9 @@ export default {
       },
     };
   },
-  computed: {
-    bio() {
+  computed:{
+    
+    bio(){
       return this.$store.state.profile.profile_about;
     },
   },

@@ -17,19 +17,20 @@
             {{ member.category[0].name }}
             <br />
             {{ member.communityNum }}
-            {{ $t("memnetwork.Community") }} <br />
+            {{ $t("network.Community") }} <br />
 
             <span class="location">
               <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{ member.city }}
             </span>
             <br />
-            <span v-if="member.description.length < 65">{{
-              member.description
-            }}</span>
-            <span v-else
-              >{{ member.description.substring(0, 65) + "..." }}
-              <b-link>{{ $t("memnetwork.Read_More") }}</b-link></span
-            >
+            <read-more
+              more-str="read more"
+              class="readmore"
+              :text="member.description"
+              link="#"
+              less-str="read less"
+              :max-chars="60"
+            ></read-more>
           </p>
         </b-col>
 
@@ -49,9 +50,17 @@
                   size="sm"
                   class="b-background shadow"
                   variant="primary"
+                  @click="$emit('handleFollow', member)"
+                  :style="member.is_follow !== 0 ? 'background-color: rgb(162,107,80);' : ''"
                 >
-                  <i class="fas fa-user-plus fa-lg btn-icon"></i>
-                  <span class="btn-com">{{ $t("memnetwork.Community") }}</span>
+                  <i
+                    :class="
+                      member.is_follow
+                        ? 'fas fa-user-minus fa-lg btn-icon'
+                        : 'fas fa-user-plus fa-lg btn-icon'
+                    "
+                  ></i>
+                  <span class="btn-com">{{ $t("network.Community") }}</span>
                 </b-button>
               </b-col>
 
@@ -81,9 +90,10 @@
                   variant="primary"
                 >
                   <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
-                  <span class="btn-text">{{ $t("memnetwork.Join") }}</span>
+                  <span class="btn-text">{{ $t("network.Join") }}</span>
                 </b-button>
               </b-col>
+
             </b-row>
           </div>
         </b-col>

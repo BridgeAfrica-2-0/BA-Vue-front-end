@@ -30,8 +30,8 @@ export default {
     },
 
     updateAlbumItem(state, payload) {
-      const newState = state.albums.map(album => (album.id == payload.id) ? Object.assign(album, { cover: album.cover.length ? album.cover: payload.cover ? [payload.cover]: album.cover, items: ('remove' == payload.action) ? parseInt(album.items) - 1 : parseInt(album.items) + 1 }) : album)
-      state.albums = newState
+      const newState = state.owneralbums.map(album => (album.id == payload.id) ? Object.assign(album, { cover: album.cover.length ? album.cover: payload.cover ? [payload.cover]: album.cover, items: ('remove' == payload.action) ? parseInt(album.items) - 1 : parseInt(album.items) + 1 }) : album)
+      state.owneralbums = newState
     },
 
     removeAlbum(state, uuid) {
@@ -107,7 +107,7 @@ export default {
         { name }
       );
     },
-
+    
     async submitPost({ commit }, payload) {
       return axios.post(`network/store/media/${payload.businessID}/${payload.albumID}`, payload.data);
     },

@@ -4,7 +4,13 @@
       <b-col cols="12" class="mt-4">
         <b-row>
           <b-col cols="2" md="1" class="m-0 p-0">
-            <b-avatar class="d-inline-block avat" variant="primary" :src="post.profile_picture"></b-avatar>
+            <!-- <b-avatar class="d-inline-block avat" variant="primary" :src="post.profile_picture"></b-avatar> -->
+            <b-avatar
+          class="p-avater bg-white"
+          variant="primary"
+          :src="post.profile_picture"
+          size="5em"
+        ></b-avatar>
           </b-col>
           <b-col cols="10" md="11" class="pt-2">
             <h5 class="m-0 font-weight-bolder">{{ post.name }}</h5>
@@ -229,7 +235,9 @@ export default {
 .cursor {
   cursor: pointer;
 }
-
+.bg-white{
+  background-color: #ffffff
+}
 .border {
   border: 1px solid #eaeef1;
   border-radius: 16px;

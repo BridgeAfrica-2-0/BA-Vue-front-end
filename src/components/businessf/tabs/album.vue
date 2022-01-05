@@ -289,7 +289,7 @@ export default {
             this.flashMessage.show({
               status: "error",
 
-              message: "Unable to create your Album",
+              message: this.$t('general.Unable_to_create_your_Album'),
             });
             console.log({ err: err });
 
@@ -338,7 +338,7 @@ export default {
             this.flashMessage.show({
               status: "error",
 
-              message: "Unable to create your Album",
+              message: this.$t('general.Unable_to_create_your_Album'),
             });
             console.log({ err: err });
 

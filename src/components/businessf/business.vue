@@ -10,13 +10,20 @@
 
     <div v-else class="splide">
       <splide :options="options" class="banner r-image">
-        <splide-slide v-for="(cover, index) in getCustomCover" :key="index">
-          <img :src="cover" class="r-image" />
+        <splide-slide>
+          <img src="@/assets/img/Business 1.jpg" class="r-image" />
+        </splide-slide>
+
+        <splide-slide>
+          <img src="@/assets/img/business 2.jpg" class="r-image" />
+        </splide-slide>
+
+        <splide-slide>
+          <img src="@/assets/img/business 3.png" class="r-image" />
         </splide-slide>
       </splide>
     </div>
-    
-    <router-link to="#media" @click="() => {showCoverAlbum=true; key++}">
+    <router-link to="#media">
       <b-button class="float-right see-all">
         {{ $t("businessf.See_All") }}
       </b-button>
@@ -40,7 +47,7 @@
         </b-row>
       </b-col>
       <b-col cols="6">
-        <div class="float-right d-inline-flex">
+        <div class="float-right">
           <b-button
             class="community size"
             size="sm"
@@ -53,10 +60,10 @@
                 hasBeFollow ? 'fa-user-minus' : 'fa-user-plus'
               } fa-lg btn-icon`"
             ></i>
-            <span> {{ $t("businessf.Community") }}</span>
-          </b-button>
+            <span> {{ $t("businessf.Community") }}</span></b-button
+          >
 
-          <BtnCtaMessage class="ml-1"
+          <BtnCtaMessage
             :element="business_info"
             type="business"
             :header="true"
@@ -69,9 +76,8 @@
             @click="gotoAbout()"
           >
             <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
-            <span>{{ $t("businessf.Direction") }}</span>
-          </b-button>
-
+            <span>{{ $t("businessf.Direction") }}</span></b-button
+          >
           <b-dropdown
             class="ml-2 dot-btn mt-2 mt-sm-2 mt-md-0"
             no-caret
@@ -99,6 +105,7 @@
             <div class="d-inline-block mt-4 ml-4 float-left texts">
               <h6 class="font-weight-bolder name">{{ business_info.name }}</h6>
               <p class="details">
+                <!-- www.bridgeafrica.com <br /> -->
                 {{ business_info.community }} {{ $t("businessf.Community") }}
               </p>
             </div>
@@ -117,7 +124,7 @@
         </b-col>
       </b-row>
     </div>
-    <div class="mb-1 m-btn  d-inline-flex  d-md-none">
+    <div class="mb-1 m-btn">
       <!-- <b-button class="message size">
         <i class="fas fa-envelope fa-lg btn-icon"></i>
         <span>{{ $t("businessf.Message") }}</span>
@@ -125,7 +132,7 @@
       <BtnCtaMessage :element="business_info" type="business" :header="true" />
 
       <b-button
-        class="direction size ml-2"
+        class="direction ml-1 size"
         variant="primary"
         @click="gotoAbout()"
       >
@@ -154,7 +161,7 @@
             <b-tab :title="$t('general.Home')"><HomePage /></b-tab>
             <b-tab :title="$t('general.About')"><About /></b-tab>
             <b-tab type="business" :title="$t('general.Media')"
-              ><Media  :key="key" :type="'business'" :isEditor="false" :showCoverAlbum="showCoverAlbum"
+              ><Media :type="'business'" :isEditor="false"
             /></b-tab>
             <b-tab :title="$t('general.Market')"><MarketPlace /></b-tab>
             <b-tab :title="$t('general.Networks')"><Networks /></b-tab>
@@ -166,7 +173,6 @@
   </div>
 </template>
 
-
 <script>
 import HomePage from "../businessf/tabs/businessHome";
 import About from "./tabs/about";
@@ -175,14 +181,10 @@ import MarketPlace from "./tabs/marketPlace";
 import Community from "@/components/businessOwner/tabs/memberNetwork";
 import Networks from "./tabs/networks";
 
-import {defaultCoverImage} from '@/mixins';
-
 import axios from "axios";
 
 export default {
   name: "Home",
-  mixins:[defaultCoverImage],
-
   components: {
     HomePage,
     About,
@@ -194,9 +196,7 @@ export default {
 
   data() {
     return {
-      key:0,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
       hasBeFollow: 0,
-      showCoverAlbum:false,
       url_data: null,
       currentTab: 0,
       tabIndex: null,
@@ -231,7 +231,6 @@ export default {
   },
 
   created() {
-    this.currentAuthType = 'business'
     this.url_data = this.$route.params.id;
     this.businessInfo();
 
@@ -252,16 +251,11 @@ export default {
       this.hasBeFollow = this.$store.state.businessOwner.businessInfo.is_follow;
     },
     currentTab: (newVal, oldVal) => {
-      if (2 != newVal)
-        this.showCoverAlbum = false
-
       localStorage.setItem("ba-business-active-tab", newVal);
     },
 
     $route(to, from) {
-      if ("#media" == to.hash)
-        this.showCoverAlbum = true
-
+      console.log(to.hash);
       this.currentTab = this.tabs.findIndex((tab) => tab === to.hash);
     },
   },
@@ -277,7 +271,6 @@ export default {
   },
   methods: {
     async handleFollow() {
-      console.log(this.business_info)
       // document.getElementById("followbtn").disabled = true;
 
       const uri = !this.hasBeFollow ? `/follow-community` : `/unfollow`;
@@ -340,12 +333,6 @@ export default {
 </script>
 
 <style scoped>
-
-.place_holder{
-  width: 50% !important;
-  height: 50% !important;
-}
-
 .images {
   display: flex;
   width: 100%;

@@ -10,7 +10,7 @@
           <b-col md="3" cols="4" lg="3" class="my-auto">
             <b-avatar
               class="p-avater"
-              variant="ligth"
+              variant="primary"
               :src="item.profile_picture"
             ></b-avatar>
           </b-col>
@@ -23,10 +23,11 @@
                     <b-row>
                       <b-col md="6" lg="6" cols="6" sm="6" class="mt-lg-2">
                         <div class="mt-2 mt-lg-0 mt-xl-0 username">
-                          <router-link
-                            :to="{ name: 'Follower', params: { id: item.id } }"
-                            ><b>{{ item.name }} </b></router-link
-                          >
+                          <b> 
+                            <router-link :to="'/profilefollower/' + item.id">
+                              {{ item.name }}
+                            </router-link>  
+                          </b>
                         </div>
                       </b-col>
 
@@ -68,15 +69,17 @@
                         xl="6"
                         class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
                       >
-                        <b-button
-                          v-if="show == 'Follower'"
-                          disabled
+
+                       <b-button
+                         v-if="show =='Follower'"
+                        disabled
                           block
                           size="sm"
                           :id="'followbtn' + item.id"
                           class="b-background flexx pobtn shadow"
                           :class="item.is_follow !== 0 && 'u-btn'"
                           variant="primary"
+                          
                         >
                           <i
                             class="fas fa-lg btn-icon"
@@ -93,7 +96,7 @@
                         </b-button>
 
                         <b-button
-                          v-else
+                         v-else
                           block
                           size="sm"
                           :id="'followbtn' + item.id"
@@ -115,6 +118,10 @@
                             $t("dashboard.Community")
                           }}</span>
                         </b-button>
+
+
+                        
+
                       </b-col>
                     </b-row>
                   </div>
@@ -157,7 +164,7 @@ export default {
   },
 
   computed: {
-    show() {
+    show(){
       return this.$route.name;
     },
     old_users() {

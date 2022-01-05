@@ -155,15 +155,45 @@ export default {
     // getting getters from the store
 
     readAll(data) {
-      this.readNotifiactions(data);
+      let formData = new FormData();
+      for (let i = 0; i < data.length; i++) {
+          console.log(data[i]);
+          formData.append('ids['+i+']', data[i]);
+      }
+      let res = this.readNotifiactions(formData);
+      if (res) {
+        this.getNotifications(this.$route.params.id)
+        this.flashMessage.show({
+          status: "success",
+          message: "Successful"
+        });
+      } else {
+        this.flashMessage.show({
+          status: "error",
+          message: "Unable to mark as read"
+        });
+      }
     },
     deleteAll(data) {
       this.checked = false;
-      let ids = [];
-      data.forEach((element) => {
-        ids.push(element.id);
-      });
-      this.deleteNotifications(ids);
+      let formData = new FormData();
+      for (let i = 0; i < data.length; i++) {
+          console.log(data[i]);
+          formData.append('ids['+i+']', data[i]);
+      }
+      let res = this.deleteNotifications(formData);
+      if (res) {
+        this.getNotifications(this.$route.params.id)
+        this.flashMessage.show({
+          status: "success",
+          message: "Deleted Successful"
+        });
+      } else {
+        this.flashMessage.show({
+          status: "error",
+          message: "Unable to Delete as Notification"
+        });
+      }
     },
 
     deleteOne(id) {

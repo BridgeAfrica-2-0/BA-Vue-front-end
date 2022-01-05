@@ -875,7 +875,7 @@ export default {
         lng: -100.4458825,
       },
       accessToken: process.env.VUE_APP_MAPBOX_TOKEN,
-      mapStyle: "mapbox://styles/mapbox/outdoors-v11",
+      mapStyle: "mapbox://styles/mapbox/streets-v11",
       coordinates: [11.504929555178624, 3.8465173382452815], // Lng,Lat
       zoom: 12,
       address: "",
@@ -1424,7 +1424,7 @@ export default {
               this.flashMessage.show({
                 status: 'error',
 
-                message: 'Unable to Create Your Business',
+                message: this.$t('general.Unable_to_Create_Your_Business'),
                 blockClass: 'custom-block-class',
               });
               console.log({ err: err });

@@ -5,12 +5,11 @@
         <b-input-group class="mb-2 px-md-3 float-right">
           <b-form-input
             aria-label="Text input with checkbox"
-            v-model="keywords"
             :placeholder="$t('businessowner.Search_Something')"
           ></b-form-input>
 
           <b-input-group-prepend  @click="$refs.search.search()" is-text>
-            <b-icon-search class="text-primary border-none"></b-icon-search>  
+            <b-icon-search class="text-primary border-none"></b-icon-search>
           </b-input-group-prepend>
         </b-input-group>
       </b-col>
@@ -18,7 +17,7 @@
     <br />
 
       <div md="12" lg="6">
-        <CommunityMembers  :searchh="keywords" ref="search" type="Following"  />
+        <CommunityMembers @BlockUser="BlockUser" :searchh="keywords" ref="search" type="Following"  />
       </div>  
 
       
@@ -26,7 +25,7 @@
 </template>
 
 <script>
-import CommunityMembers from "../../communityMember";
+import CommunityMembers from "../../communitynetwork";
 export default {
   data() {
     return {
@@ -37,9 +36,18 @@ export default {
     CommunityMembers
   },
 
-  computed: {
-   
-  },
+  computed: {},
+  methods: {
+    BlockUser(id) {
+      console.log(id);
+      let dataInfo = {
+        id: id,
+        refernce: "user",
+        type: "following",
+      };
+      this.$emit('BlockUser', dataInfo);
+    },
+  }
 
 };
 </script>

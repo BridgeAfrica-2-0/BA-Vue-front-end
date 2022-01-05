@@ -59,7 +59,7 @@
 
                 <b-col lg="6" xl="6" cols="12" md="12">
                   <div>
-                    <b-row class="mt-lg-0">
+                    <b-row class="mt-lg-0 ml-md-0 btns-mobile">
                       <b-col
                         md="6"
                         lg="12"
@@ -75,7 +75,7 @@
                         lg="12"
                         cols="6"
                         xl="12"
-                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
+                        class="mt-2 mt-lg-2 mt-xl-2 ml-n2 ml-md-0 btn-2 center"
                       >
                         <b-button
                           block
@@ -189,6 +189,9 @@ export default {
 
   .btn-com {
     margin-left: 3px;
+  }
+  .btns-mobile{
+    margin-left: -2.2rem;
   }
 }
 

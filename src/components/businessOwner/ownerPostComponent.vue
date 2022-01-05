@@ -3,28 +3,46 @@
     <div class="mt-2">
       <div class="d-inline-flex">
         <span md="1" class="m-0 p-0">
-          <b-avatar
+          <!-- <b-avatar
             class="logo-sizee avat"
             :square="'user' == item.poster_type ? false : true"
             variant="light"
             :src="item.user_picture"
+          ></b-avatar> -->
+          <b-avatar
+            class="p-avater"
+            :square="'user' == item.poster_type ? false : true"
+            variant="primary"
+            :src="item.user_picture"
+            size="5em"
           ></b-avatar>
         </span>
-        <div class="pl-2 pl-md-3 pt-md-2">
+        <div class="pl-2 pl-md-3 pt-md-2 mt-3 mt-md-0">
           <router-link :to="onRedirect">
             <h5 class="m-0 usernamee">
               {{ item.user_name }}
             </h5>
           </router-link>
-          
+
           <p class="duration">{{ item.created_at | now }}</p>
         </div>
 
         <div
           class="toright"
-          v-if="'dashboard' !== $route.name ? !isDisplayInSearch ? isYourOwnPost && canBeDelete : false : false"
+          v-if="
+            'dashboard' !== $route.name
+              ? !isDisplayInSearch
+                ? isYourOwnPost && canBeDelete
+                : false
+              : false
+          "
         >
-          <b-dropdown variant="link" size="sm" no-caret v-if="show !='Follower'">
+          <b-dropdown
+            variant="link"
+            size="sm"
+            no-caret
+            v-if="show != 'Follower'"
+          >
             <template #button-content>
               <b-icon
                 icon="three-dots"
@@ -73,7 +91,6 @@
             </b-avatar>
           </span>
           <div class="pl-2 pl-md-3 pt-md-2">
-
             <router-link :to="onRedirect">
               <h5 class="m-0 usernamee">
                 {{
@@ -83,7 +100,7 @@
                 }}
               </h5>
             </router-link>
-            
+
             <p class="duration">{{ item.source.created_at | now }}</p>
           </div>
         </div>
@@ -170,7 +187,7 @@
             : false
           : false
       "
-    >                                                                                                               
+    >
       <div class="m-md-0 p-md-0">
         <b-avatar
           b-avatar
@@ -187,7 +204,7 @@
           v-model="comment"
           class="comment py-2 pr-5 pl-3"
           :min-height="30"
-          :max-height="350"
+          :max-height="47"
           @keypress.enter="onCreateComment"
         />
         <b-spinner
@@ -267,7 +284,7 @@ export default {
   },
 
   watch: {
-    showComment: function (newValue) {
+    showComment: function(newValue) {
       if (newValue) {
         this.onShowComment();
         this.loadComment = true;
@@ -285,33 +302,41 @@ export default {
     loadComment: false,
     commentHasLoad: false,
 
-    strategy:null
+    strategy: null,
   }),
 
   created() {
     this.item = this.post;
 
-    this.posterID = this.post.poster_id ? this.post.poster_id : this.post.user_id
+    this.posterID = this.post.poster_id
+      ? this.post.poster_id
+      : this.post.user_id;
 
     this.strategy = {
       user: () => {
-        return ("user" == this.profile.user_type && "user" == this.post.poster_type ) && ( this.profile.id == this.posterID) 
-        ? { name: "profile_owner"}
-        : { name: "Follower", params: {id: this.posterID}}
+        return "user" == this.profile.user_type &&
+          "user" == this.post.poster_type &&
+          this.profile.id == this.posterID
+          ? { name: "profile_owner" }
+          : { name: "Follower", params: { id: this.posterID } };
       },
 
       business: () => {
-        return ("business" == this.profile.user_type && "business" == this.post.poster_type ) && ( this.profile.id == this.posterID) 
-        ? { name: "BusinessOwner", params: {id: this.posterID}}
-        : { name: "BusinessFollower", params: {id: this.posterID}}
+        return "business" == this.profile.user_type &&
+          "business" == this.post.poster_type &&
+          this.profile.id == this.posterID
+          ? { name: "BusinessOwner", params: { id: this.posterID } }
+          : { name: "BusinessFollower", params: { id: this.posterID } };
       },
 
       network: () => {
-        return ("network" == this.profile.user_type && "business" == this.post.poster_type ) && ( this.profile.id == this.posterID) 
-        ? { name: "networks", params: {id: this.posterID}}
-        : { name: "networks", params: {id: this.posterID}}
+        return "network" == this.profile.user_type &&
+          "business" == this.post.poster_type &&
+          this.profile.id == this.posterID
+          ? { name: "networks", params: { id: this.posterID } }
+          : { name: "networks", params: { id: this.posterID } };
       },
-    }
+    };
 
     if (!this.isDisplayInSearch) this.comments = this.post.comments;
   },
@@ -322,13 +347,12 @@ export default {
   },
 
   computed: {
-
-    onRedirect(){
-      return this.strategy[this.post.poster_type]()
+    onRedirect() {
+      return this.strategy[this.post.poster_type]();
     },
 
-    show(){
-      return this.$route.name ;
+    show() {
+      return this.$route.name;
     },
     icon() {
       return this.post.is_liked ? "suit-heart-fill" : "suit-heart";
@@ -339,7 +363,6 @@ export default {
   },
 
   methods: {
-
     mapMedia(media) {
       let mediaarr = [];
 
@@ -383,7 +406,7 @@ export default {
       this.showComment = !this.showComment;
     },
 
-    onDelete: async function (uuid) {
+    onDelete: async function(uuid) {
       const request = await this.$repository.post.delete(uuid);
 
       if (request.success) {
@@ -393,18 +416,18 @@ export default {
         this.flashMessage.show({
           status: "success",
           blockClass: "custom-block-class",
-          message: this.$t('general.Comment_Deleted'),
+          message: this.$t("general.Comment_Deleted"),
         });
       } else {
         this.flashMessage.show({
           status: "error",
           blockClass: "custom-block-class",
-          message: this.$t('general.Something_wrong_happen_Try_again'),
+          message: this.$t("general.Something_wrong_happen_Try_again"),
         });
       }
     },
 
-    onUpdate: async function ({ uuid, text }) {
+    onUpdate: async function({ uuid, text }) {
       let data = { comment: text };
 
       if (
@@ -427,7 +450,7 @@ export default {
         this.flashMessage.show({
           status: "success",
           blockClass: "custom-block-class",
-          message: this.$t('general.Comment_Updated'),
+          message: this.$t("general.Comment_Updated"),
         });
       } else {
         this.flashMessage.show({
@@ -438,7 +461,7 @@ export default {
       }
     },
 
-    onLike: async function () {
+    onLike: async function() {
       if (this.isDisplayInSearch) return false;
 
       if (!this.canBeDelete) return false;
@@ -466,7 +489,7 @@ export default {
       }
     },
 
-    onCreateComment: async function () {
+    onCreateComment: async function() {
       if (
         !(this.comment.trim().length > 2 && !this.createCommentRequestIsActive)
       )
@@ -496,7 +519,7 @@ export default {
       this.createCommentRequestIsActive = false;
     },
 
-    onShowComment: async function () {
+    onShowComment: async function() {
       if (!this.hasData) return false;
 
       this.loadComment = true;
@@ -522,7 +545,7 @@ export default {
   },
 };
 </script>
-<style >
+<style>
 .card-border {
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 12px;
@@ -658,7 +681,7 @@ export default {
     width: 64px;
     height: 64px;
   }
-  
+
   .post-btn {
     border: none !important;
     margin-right: 50px;
@@ -695,12 +718,14 @@ export default {
     padding-left: 10 px;
     margin-left: 2%;
   }
+  .comment.py-2.pr-5.pl-3 {
+  }
 
   .post-btn {
     border: none !important;
     margin-right: 0px;
   }
-  
+
   .avat {
     width: 40px;
     height: 40px;

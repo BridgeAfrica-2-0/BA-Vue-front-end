@@ -42,7 +42,7 @@
                           >
                             <h6 class="follower">
                               {{ count(item.followers) }}
-                              {{ $t("businessowner.Community") }}    <span v-if="!foll_id" class="ml-2"  @click="BlockUser(item.id, index)" style="cursor: pointer">   <b-icon
+                              {{ $t("businessowner.Community") }}    <span  class="ml-2"  @click="BlockUser(item.id, index)" style="cursor: pointer">   <b-icon
                               font-scale="1"
                               icon="exclamation-octagon"
                               v-b-tooltip.hover
@@ -220,18 +220,8 @@ export default {
     search() {
       console.log("search started");
 
-      if (this.type == "Follower") {
-        this.$store.commit("businessOwner/setUcommunityFollower", {
-          user_followers: [],
-          total_user_follower: 0,
-        });
-      } else {
-        this.$store.commit("businessOwner/setUcommunityFollowing", {
-          user_following: [],
-          total_user_following: 0,
-        });
-      }
-
+      
+       this.users=[];
       this.page = 1;
       this.infiniteId += 1;
 

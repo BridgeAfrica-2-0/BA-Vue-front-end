@@ -56,7 +56,7 @@ export default {
 
   data: () => ({
     pageHasLoad: false,
-    showSponsored: false
+    showSponsored: true
   }),
 
   destroyed() {

@@ -40,7 +40,7 @@
         </b-row>
       </b-col>
       <b-col cols="6">
-        <div class="float-right">
+        <div class="float-right d-inline-flex">
           <b-button
             class="community size"
             size="sm"
@@ -56,14 +56,14 @@
             <span> {{ $t("businessf.Community") }}</span>
           </b-button>
 
-          <BtnCtaMessage
+          <BtnCtaMessage class="ml-1"
             :element="business_info"
             type="business"
             :header="true"
           />
 
           <b-button
-            class="direction ml-0 size"
+            class="direction ml-1 size"
             variant="primary"
             size="sm"
             @click="gotoAbout()"
@@ -117,7 +117,7 @@
         </b-col>
       </b-row>
     </div>
-    <div class="mb-1 m-btn">
+    <div class="mb-1 m-btn  d-inline-flex  d-md-none">
       <!-- <b-button class="message size">
         <i class="fas fa-envelope fa-lg btn-icon"></i>
         <span>{{ $t("businessf.Message") }}</span>
@@ -125,7 +125,7 @@
       <BtnCtaMessage :element="business_info" type="business" :header="true" />
 
       <b-button
-        class="direction size"
+        class="direction size ml-2"
         variant="primary"
         @click="gotoAbout()"
       >

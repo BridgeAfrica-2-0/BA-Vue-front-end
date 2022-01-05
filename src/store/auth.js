@@ -25,6 +25,7 @@ export default {
     profilConnected: null,
   },
 
+
   mutations: {
 
     updateProfilePicture(state, picture) {
@@ -32,6 +33,17 @@ export default {
         state.profilConnected = { ...state.profilConnected, profile_picture: picture }
     },
 
+    addCoverPicture(state, picture) {
+
+      state.profilConnected = { ...state.profilConnected, cover_picture: picture }
+      let newUser = JSON.parse(localStorage.getItem('user'));
+
+      newUser.user.cover_picture = picture
+
+      localStorage.setItem('user', JSON.stringify(newUser));
+
+    },
+    
     setUserData(state, userData) {
       localStorage.removeItem('user');
       state.user = userData;

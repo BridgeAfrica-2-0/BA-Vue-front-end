@@ -2917,15 +2917,15 @@ export default {
       chatSearchKeyword: "",
       tabIndex: 2,
       type: "",
-      // socket: io(process.env.NODE_SERVER_URL_DEV, {
+      // socket: io(process.env.VUE_APP_CHAT_SERVER_URL_DEV, {
       //   transports: ["websocket", "polling", "flashsocket"],
       // }),
-      // socket: io(process.env.VUE_APP_CHAT_SERVER_URL, {
-      //   transports: ["websocket", "polling", "flashsocket"],
-      // }),
-      socket: io("http://localhost:7000", {
+      socket: io(process.env.VUE_APP_CHAT_SERVER_URL, {
         transports: ["websocket", "polling", "flashsocket"],
       }),
+      // socket: io("http://localhost:7000", {
+      //   transports: ["websocket", "polling", "flashsocket"],
+      // }),
 
       nameSpace: {
         status: false,
@@ -3231,7 +3231,6 @@ export default {
       this.filePreview = false;
     },
     socketListenners() {
-      console.log("listenning...");
       // this.socket.on("generalMessage", (data) => {
       //   console.log("Received");
       //   console.log(data);
@@ -3265,6 +3264,7 @@ export default {
 
         this.saveMessage(this.formData);
       });
+      console.log("listenning...");
     },
     createGroup(receiver_business_id) {
       this.socket.emit("create-group", this.chatId);

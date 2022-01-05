@@ -1628,15 +1628,15 @@ export default {
       chatSearchKeyword: "",
       chatId: "",
       type: "",
-      // socket: io(process.env.VUE_APP_CHAT_SERVER_URL, {
+      // socket: io(process.env.VUE_APP_CHAT_SERVER_URL_DEV, {
       //   transports: ["websocket", "polling", "flashsocket"],
       // }),
-      // socket: io("https://ba-chat-server.herokuapp.com", {
-      //   transports: ["websocket", "polling", "flashsocket"],
-      // }),
-      socket: io("localhost:7000", {
+      socket: io(process.env.VUE_APP_CHAT_SERVER_URL, {
         transports: ["websocket", "polling", "flashsocket"],
       }),
+      // socket: io("localhost:7000", {
+      //   transports: ["websocket", "polling", "flashsocket"],
+      // }),
       chatSelected: [],
       showsearch: true,
       selecteduser: false,
@@ -1727,10 +1727,10 @@ export default {
     });
   },
   created() {
-    this.$store.commit("businessChat/setCurrentBizId", this.$route.params.id);
     console.log("screen width:", window.screen.width);
     this.tabIndex = Number(this.$route.query.msgTabId);
     console.log("this.tabIndex:", typeof this.tabIndex);
+    this.$store.commit("businessChat/setCurrentBizId", this.$route.params.id);
 
     if (this.tabIndex) {
       if (this.tabIndex == 1) {

@@ -10,7 +10,7 @@
             :src="item.user_picture"
           ></b-avatar>
         </span>
-        <div class="pl-2 pl-md-3 pt-md-2">
+        <div class="pl-2 pl-md-3 pt-md-2 mt-3 mt-md-0">
           <router-link :to="onRedirect">
             <h5 class="m-0 usernamee">
               {{ item.user_name }}
@@ -187,7 +187,7 @@
           v-model="comment"
           class="comment py-2 pr-5 pl-3"
           :min-height="30"
-          :max-height="350"
+          :max-height="47"
           @keypress.enter="onCreateComment"
         />
         <b-spinner
@@ -694,6 +694,9 @@ export default {
     height: 34 px;
     padding-left: 10 px;
     margin-left: 2%;
+  }
+  .comment.py-2.pr-5.pl-3{
+    
   }
 
   .post-btn {

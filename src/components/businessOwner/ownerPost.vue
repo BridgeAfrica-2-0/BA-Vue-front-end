@@ -461,7 +461,7 @@
           </b-modal>
         </div>
       </div>  
-
+      
       <Post
         v-for="item in owner_post"
         :key="item.updated_at"

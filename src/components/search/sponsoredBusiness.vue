@@ -20,7 +20,7 @@
 
               <span class="location">
                 <b-icon-geo-alt class="ico"></b-icon-geo-alt>
-                {{ item.location_description }}
+                {{ item.neigborhood.map(value => value.name).join(", ") }}
               </span>
               <br />
 

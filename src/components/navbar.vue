@@ -145,7 +145,6 @@
                 <router-link
                   :to="navLink('home')"
                   class="nav-link text-dark hov"
-                  href=""
                 >
                   Home
                 </router-link>
@@ -288,7 +287,7 @@
               </div>
               <!-- Notifications Ended -->
 
-              <div v-if="islogin" class="nav-item cursor" id="profilepic">
+              <div  v-if="islogin"  class="nav-item cursor" id="profilepic" triggers="hover" data-toggle="popover">
                 <router-link :to="userOwnPage">
                   <b-avatar
                     variant="light"
@@ -651,6 +650,13 @@ export default {
       this.userOwnPage = this.onRedirect();
     },
 
+    "$i18n.locale": async function() {
+      const response = await this.$repository.notification.changeLanguage(this.$i18n.locale);
+      if (response.success) {
+        this.updateNotificationEvent()
+      }
+    },
+
     credentials: {
       deep: true,
       handler() {
@@ -895,24 +901,6 @@ export default {
         })
         .catch((error) => console.log(error));
     },
-
-    // async getNotifications() {
-    //   await axios
-    //     .get(`notification/latest/user`)
-    //     .then((response) => {
-    //       console.warn(response.data.data);
-    //       this.notifications = response.data.data;
-    //     })
-    //     .catch((error) => console.log("Error In newMessage  => " + error));
-    // },
-    // async getMessages() {
-    //   await axios
-    //     .get(`messages/latest/user`)
-    //     .then((response) => {
-    //       this.messages = response.data.data;
-    //     })
-    //     .catch((error) => console.log(error));
-    // },
   },
 };
 </script>

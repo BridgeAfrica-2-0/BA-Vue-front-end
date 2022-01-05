@@ -718,20 +718,20 @@
           <h6 class="mb-0"><b></b></h6>
           <b-row>
             <b-col md="12" lg="6" class="p-0 mb-2" v-for="business in profileBusinesss" :key="business.business_id">
-              <div class="people-style shadow h-100">
+              <div class="people-style shadow h-100"> 
                 <b-link>
                   <div class="float-right others">
                     <b-dropdown size="lg" variant="link" toggle-class="text-decoration-none" no-caret>
                       <template #button-content>
                         <b-icon icon="three-dots-vertical" variant="primary" class="icon-size"></b-icon>
                       </template>
-                      <b-dropdown-item
+                      <b-dropdown-item 
                         @click="editBusiness(business.id)"
                         v-b-modal.updateBusinessModal
                         variant=""
                         >{{ $t("profileowner.Edit") }}</b-dropdown-item
                       >
-                      <b-dropdown-item @click="deleteBusiness(business.id)">
+                      <b-dropdown-item  v-if="!business.is_editor"  @click="deleteBusiness(business.id)">
                         {{ $t("profileowner.Delete") }}</b-dropdown-item
                       >
                     </b-dropdown>

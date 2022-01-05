@@ -9,12 +9,12 @@
 
     <b-card>
       <div class="mb-3">
-        <mapbox :coordinates="[business_about.lng, business_about.lat]" />
+        <mapbox :business="business_about" />
       </div>
 
       <b-card>
         <b-row v-if="loading">
-          <b-col>
+          <!-- <b-col>
             <div
               class="edit"
               v-b-modal.biographyModal
@@ -36,15 +36,9 @@
             <p class="text-justify text">
               {{ business_about.location_description }}
             </p>
-          </b-col>
-          <b-col>
-            <!-- <div class="edit">
-                <b-icon
-                  icon="pencil-fill"
-                  variant="primary"
-                  
-                ></b-icon>
-              </div> -->
+          </b-col> -->
+          <!-- <b-col>
+           
             <div
               class="edit"
               v-b-modal.biographyModal
@@ -62,7 +56,7 @@
             <p class="text-justify text">
               {{ business_about.location_description }}
             </p>
-          </b-col>
+          </b-col> -->
           <b-col>
             <!-- <div class="edit">
                 <b-icon

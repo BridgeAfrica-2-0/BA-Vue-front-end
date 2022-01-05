@@ -1,12 +1,18 @@
 <template>
   <div>
-    <fas-icon class="violet mr-2 pt-1 icon-size primary" :icon="['fas', 'file-image']" />{{ $t('profileowner.Media') }}      
+    <fas-icon
+      class="violet mr-2 pt-1 icon-size primary"
+      :icon="['fas', 'file-image']"
+    />{{ $t("profileowner.Media") }}
 
     <hr />
     <b-tabs content-class="mt-3" v-model="tabIndex" pills>
       <b-tab :title="$t('profileowner.Posts')" @click="getImages">
         <div v-if="!hasLoadPicture">
-          <b-spinner class="load" :label="$t('profileowner.Large_Spinner')"></b-spinner>
+          <b-spinner
+            class="load"
+            :label="$t('profileowner.Large_Spinner')"
+          ></b-spinner>
         </div>
 
         <Images
@@ -26,32 +32,39 @@
           <b-spinner class="load" :label="$t('profileowner.Large_Spinner')">
           </b-spinner>
         </div>
-        <Album :isEditor="isEditor" :type="type" v-else :getAlbums="getAlbums" :getImages="getImages" :showCoverAlbum="showCoverAlbum" />
+        <Album
+          :isEditor="isEditor"
+          :type="type"
+          v-else
+          :getAlbums="getAlbums"
+          :getImages="getImages"
+          :showCoverAlbum="showCoverAlbum"
+        />
       </b-tab>
     </b-tabs>
   </div>
 </template>
 
 <script>
-import Album from './album';
-import Images from './images';
+import Album from "./album";
+import Images from "./images";
 
-import _ from 'lodash';
+import _ from "lodash";
 
-import { mapGetters } from 'vuex';
+import { mapGetters } from "vuex";
 
 export default {
   props: {
     type: {
       type: String,
-      validator: function (value) {
-        return ['profile', 'network', 'business'].indexOf(value) !== -1;
+      validator: function(value) {
+        return ["profile", "network", "business"].indexOf(value) !== -1;
       },
     },
 
     showCoverAlbum: {
-      type:Boolean,
-      default: () => false
+      type: Boolean,
+      default: () => false,
     },
 
     isEditor: {
@@ -59,10 +72,10 @@ export default {
       default: () => true,
     },
     isablum: {
-        type: Boolean,
-      },
+      type: Boolean,
+    },
   },
-  data: function () {
+  data: function() {
     return {
       loading: false,
       hasLoadAlbum: false,
@@ -81,10 +94,10 @@ export default {
 
   computed: {
     ...mapGetters({
-      getProfilePictures: 'UserProfileOwner/getImages',
-      getBusinessPictures: 'businessOwner/getAllImages',
-      getNetworkPictures: 'networkProfileMedia/getImages',
-      profile: 'auth/profilConnected'
+      getProfilePictures: "UserProfileOwner/getImages",
+      getBusinessPictures: "businessOwner/getAllImages",
+      getNetworkPictures: "networkProfileMedia/getImages",
+      profile: "auth/profilConnected",
     }),
   },
 
@@ -98,7 +111,9 @@ export default {
               return {
                 id: img.id,
                 content: img.content,
-                media: [{ path: picture.path, type: picture.type, id: picture.id }],
+                media: [
+                  { path: picture.path, type: picture.type, id: picture.id },
+                ],
               };
             });
 
@@ -112,7 +127,7 @@ export default {
     getAlbums() {
       try {
         const type = this.strategy[this.type]();
-        this.hasLoadAlbum = false
+        this.hasLoadAlbum = false;
         //if (!this.hasLoadAlbum) {
         this.$store
           .dispatch(type.album, this.urlData)
@@ -125,12 +140,11 @@ export default {
             this.hasLoadPicture = true;
             this.hasLoadAlbum = true;
           })
-          .finally(() => console.log('End load album'))
-          ;
+          .finally(() => console.log("End load album"));
         //}
       } catch (error) {
         console.log(error);
-        throw new Error('Invalid type', this.type);
+        throw new Error("Invalid type", this.type);
       }
     },
 
@@ -149,43 +163,42 @@ export default {
             this.hasLoadPicture = true;
             this.hasLoadAlbum = true;
           })
-          .finally(() => console.log('End load images'))
-          ;
+          .finally(() => console.log("End load images"));
         //}
       } catch (error) {
         console.log(error);
-        throw new Error('Invalid type', this.type);
+        throw new Error("Invalid type", this.type);
       }
     },
   },
 
   created() {
+    console.log(this.showCoverAlbum);
 
-    console.log(this.showCoverAlbum)
+    this.urlData = this.$route.params.id
+      ? this.$route.params.id
+      : this.profile.id;
 
-    this.urlData = this.$route.params.id ? this.$route.params.id : this.profile.id;
-    
     if (this.isablum) {
       this.tabIndex = 1;
     }
 
-    if (this.showCoverAlbum)
-      this.tabIndex = 1;
+    if (this.showCoverAlbum) this.tabIndex = 1;
 
     this.strategy = {
       business: () => ({
-        album: 'businessOwner/getAlbums',
-        image: 'businessOwner/getImages',
+        album: "businessOwner/getAlbums",
+        image: "businessOwner/getImages",
         pictures: this.getBusinessPictures,
       }),
       profile: () => ({
-        album: 'UserProfileOwner/getAlbums',
-        image: 'UserProfileOwner/getImages',
+        album: "UserProfileOwner/getAlbums",
+        image: "UserProfileOwner/getImages",
         pictures: this.getProfilePictures,
       }),
       network: () => ({
-        album: 'networkProfileMedia/getAlbums',
-        image: 'networkProfileMedia/getImages',
+        album: "networkProfileMedia/getAlbums",
+        image: "networkProfileMedia/getImages",
         pictures: this.getNetworkPictures,
       }),
     };

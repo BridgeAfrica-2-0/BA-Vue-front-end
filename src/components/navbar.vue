@@ -1,6 +1,6 @@
 <template>
-  <header class=""> 
-    <nav class="navbar navbar-expand-xl p-3 mb-3 rounded" >
+  <header class="">
+    <nav class="navbar navbar-expand-xl p-3 mb-3 rounded">
       <div class="container-fluid">
         <div class="col-md-12 col-lg-2 col-xl-2 text-center">
           <span class="d-block d-lg-none">
@@ -42,7 +42,7 @@
                 data-toggle="popover"
                 class="form-control search-mobile"
                 style="border-left: none"
-                :placeholder="$t('general.Find_Pharmacies')"
+                :placeholder="$t('general.All')"
                 aria-label=""
                 data-original-title=""
                 title=""
@@ -75,7 +75,7 @@
                   data-toggle="popover"
                   class="form-control search-mobile"
                   style="border-left: none"
-                  :placeholder="$t('general.Find_Pharmacy')"
+                  :placeholder="$t('general.Where')"
                   aria-label=""
                   data-original-title=""
                   title=""
@@ -159,8 +159,7 @@
                 </router-link>
               </div>
 
-
-              <div  v-if="!islogin" class="nav-item" >
+              <div v-if="!islogin" class="nav-item">
                 <router-link
                   :to="{ name: 'signup' }"
                   class="nav-link text-dark hov"
@@ -169,8 +168,7 @@
                 </router-link>
               </div>
 
-
-              <div  v-if="!islogin" class="nav-item" >
+              <div v-if="!islogin" class="nav-item">
                 <router-link
                   :to="{ name: 'Login' }"
                   class="nav-link text-dark hov"
@@ -178,8 +176,6 @@
                   {{ $t("auth.login") }}
                 </router-link>
               </div>
-
-
 
               <!-- Messages Started -->
               <div v-if="islogin" class="nav-item">
@@ -291,7 +287,7 @@
               </div>
               <!-- Notifications Ended -->
 
-              <div  v-if="islogin"  class="nav-item cursor" id="profilepic" triggers="hover" data-toggle="popover">
+              <div v-if="islogin" class="nav-item cursor" id="profilepic">
                 <router-link :to="userOwnPage">
                   <b-avatar
                     variant="light"
@@ -302,11 +298,16 @@
                 </router-link>
               </div>
 
-              <b-tooltip v-if="islogin"  target="profilepic" variant="light" triggers="click">
+              <b-tooltip
+                v-if="islogin"
+                target="profilepic"
+                variant="light"
+                triggers="click"
+              >
                 {{ user.name }}
               </b-tooltip>
 
-              <div  v-if="islogin"  class="nav-item">
+              <div v-if="islogin" class="nav-item">
                 <a
                   id="other-menu"
                   class="nav-link text-dark arrow-down"
@@ -415,19 +416,17 @@
           </div>
         </div>
 
-        
         <b-modal ref="setcat" id="myModallnav" hide-footer title=" ">
-          <div  v-if="islogin"  class="d-block d-lg-block d-xl-none">
+          <div v-if="islogin" class="d-block d-lg-block d-xl-none">
             <div class="mt-3">
               <div class="d-inline-flex flex-row align-items-center">
                 <div>
-                  <img
+                  <b-avatar
+                    variant="light"
                     :src="user.profile_picture"
-                    class="rounded-circle"
-                    alt=""
-                    width="30"
-                    height="30"
-                  />
+                    :square="'user' == user.user_type ? false : true"
+                    class="logo-sizee"
+                  ></b-avatar>
                 </div>
                 <div class="d-flex flex-column ml-1 line-size">
                   <div class="font-weight-bold">{{ user.name }}</div>
@@ -436,7 +435,6 @@
               </div>
 
               <br />
-
               <div class="d-inline-flex flex-row align-items-center mb-1">
                 <Activity class="w-full" />
               </div>
@@ -454,16 +452,16 @@
                 <fas-icon
                   class="violet search"
                   :icon="['fas', 'user']"
-                />
-              </span>Profile
+                /> </span
+              >Profile
             </a>
-            <hr class="h-divider" v-if="'user' === user.user_type"/>
+            <hr class="h-divider" v-if="'user' === user.user_type" />
 
             <router-link
               :to="{ name: 'orders' }"
               class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
             >
-              <span class="mr-2"
+              <span class="mr-3"
                 ><fas-icon
                   class="violet search"
                   :icon="['fas', 'cart-arrow-down']"
@@ -476,7 +474,7 @@
               :to="{ name: 'settings' }"
               class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
             >
-              <span class="mr-2"
+              <span class="mr-3"
                 ><fas-icon class="violet search" :icon="['fas', 'cogs']"
               /></span>
 
@@ -484,16 +482,16 @@
             </router-link>
             <hr class="h-divider" />
             <div class="other-menu suggest-item cursor-pointer">
-              <span class="mr-1"
+              <span class="mr-3"
                 ><fas-icon class="violet search" :icon="['fas', 'question']"
               /></span>
               {{ $t("general.Help_and_Support") }}
             </div>
             <hr class="h-divider" />
             <div class="other-menu suggest-item cursor-pointer">
-              <b-link v-b-toggle="'collapse-2'" class="m-1"
+              <b-link v-b-toggle="'collapse-2'"
                 ><fas-icon
-                  class="violet search"
+                  class="violet search mr-1"
                   :icon="['fas', 'globe-americas']"
                 />
                 {{ $t("general.Language") }}</b-link
@@ -516,7 +514,7 @@
               @click.prevent="logout"
               class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
             >
-              <span class="mr-2"
+              <span class="mr-3"
                 ><fas-icon
                   class="violet search"
                   :icon="['fas', 'sign-out-alt']"
@@ -564,7 +562,7 @@ export default {
   data() {
     return {
       isActive: false,
-      islogin:true,
+      islogin: true,
       shownav: false,
       notifications: [],
       messages: [],
@@ -595,60 +593,60 @@ export default {
   },
   created() {
     //check for authentication
+    console.log("Language is  " + this.$i18n.locale);
+    this.islogin = this.$store.getters["auth/isLogged"];
 
-      this.islogin=this.$store.getters["auth/isLogged"];
-     
-     console.log(this.islogin);
-     console.log("yoo mother fucjjeryt");
-     
-     if(this.islogin){    
-    this.init();
-    this.userOwnPage = this.onRedirect(); 
+    console.log(this.islogin);
+    console.log("yoo mother fucjjeryt");
 
-    this.notificationPatterns = {
-      user: () => "/notification/latest/user",
-      business: () => `/notification/business/${this.user.id}`,
-      network: () => `/network/${this.user.id}/notifications`,
-    };
+    if (this.islogin) {
+      this.init();
+      this.userOwnPage = this.onRedirect();
 
-    this.messagePatterns = {
-      user: () => "/messages/latest/user",
-      business: () => `/messages/latest/${this.user.id}/business`,
-      network: () => `/messages/latest/${this.user.id}/network`,
-    };
+      this.notificationPatterns = {
+        user: () => "/notification/latest/user",
+        business: () => `/notification/business/${this.user.id}`,
+        network: () => `/network/${this.user.id}/notifications`,
+      };
 
-    this.redirectionPatterns = {
-      message: {
-        user: () => ({
-          name: "Nav Meassage",
-        }),
-        business: () => ({
-          name: "BusinessOwner",
-          params: { id: this.user.id },
-          query: { tabId: 1 },
-        }),
-        network: () => null,
-      },
-      notification: {
-        business: () => ({
-          name: "BusinessOwner",
-          params: { id: this.user.id },
-          query: { tabId: 2 },
-        }),
+      this.messagePatterns = {
+        user: () => "/messages/latest/user",
+        business: () => `/messages/latest/${this.user.id}/business`,
+        network: () => `/messages/latest/${this.user.id}/network`,
+      };
 
-        user: () => ({
-          name: "settings",
-        }),
-        network: () => ({
-          name: "networks",
-          params: { id: this.user.id },
-          query: { tabId: 2 },
-        }),
-      },
-    };
+      this.redirectionPatterns = {
+        message: {
+          user: () => ({
+            name: "Nav Meassage",
+          }),
+          business: () => ({
+            name: "BusinessOwner",
+            params: { id: this.user.id },
+            query: { tabId: 1 },
+          }),
+          network: () => null,
+        },
+        notification: {
+          business: () => ({
+            name: "BusinessOwner",
+            params: { id: this.user.id },
+            query: { tabId: 2 },
+          }),
 
-    this.updateNotificationEvent();
-     }
+          user: () => ({
+            name: "settings",
+          }),
+          network: () => ({
+            name: "networks",
+            params: { id: this.user.id },
+            query: { tabId: 2 },
+          }),
+        },
+      };
+
+      this.updateNotificationEvent();
+    }
   },
 
   watch: {
@@ -657,10 +655,12 @@ export default {
       this.userOwnPage = this.onRedirect();
     },
 
-    "$i18n.locale": async function() {
-      const response = await this.$repository.notification.changeLanguage(this.$i18n.locale);
+    "$i18n.locale": async function () {
+      const response = await this.$repository.notification.changeLanguage(
+        this.$i18n.locale
+      );
       if (response.success) {
-        this.updateNotificationEvent()
+        this.updateNotificationEvent();
       }
     },
 
@@ -1086,7 +1086,7 @@ export default {
 
 @media (max-width: 992px) {
   .navbar-toggler {
-    padding: 0.25rem 0.75rem;
+    padding: 0.25rem 1.5rem;
     font-size: 1.25rem;
     line-height: 1;
     background-color: transparent;
@@ -1126,7 +1126,7 @@ export default {
 }
 </style>
 
-<style >
+<style>
 @media only screen and (min-width: 768px) {
   .search-hh .form-control {
     height: 48px !important;

@@ -25,11 +25,7 @@
                   </h1>
                 </b-col>
                 <b-col>
-                  <!-- <b-icon
-                    @click="newMessage(true)"
-                    class="new-message primary icon-size float-right"
-                    icon="pencil-square"
-                  ></b-icon> -->
+                  
                   <b-dropdown
                     variant="white"
                     toggle-class="text-decoration-none"
@@ -141,11 +137,7 @@
                               <small class="text-center small">
                                 {{ getCreatedAt(chat.created_at) }}
                               </small>
-                              <!-- <p class="text-center">
-                              <b-badge variant="info">
-                                {{ chat.receiver_id }}
-                              </b-badge>
-                            </p> -->
+                              
                             </b-col>
                           </b-row>
                         </div>
@@ -231,11 +223,6 @@
                               <small class="text-center small">
                                 {{ getCreatedAt(chat.created_at) }}
                               </small>
-                              <!-- <p class="text-center">
-                              <b-badge variant="info">
-                                {{ chat.receiver_business_id }}
-                              </b-badge>
-                            </p> -->
                             </b-col>
                           </b-row>
                         </div>
@@ -316,11 +303,6 @@
                             <small class="text-center small">
                               {{ getCreatedAt(chat.created_at) }}
                             </small>
-                            <!-- <p class="text-center">
-                              <b-badge variant="info">
-                                {{ chat.receiver_network_id }}
-                              </b-badge>
-                            </p> -->
                           </b-col>
                         </b-row>
                       </div>
@@ -399,11 +381,6 @@
                               <small class="text-center small">
                                 {{ getCreatedAt(chat.created_at) }}
                               </small>
-                              <!-- <p class="text-center">
-                              <b-badge variant="info">
-                                {{ chat.receiver_business_id }}
-                              </b-badge>
-                            </p> -->
                             </b-col>
                           </b-row>
                         </div>
@@ -466,21 +443,7 @@
                     </p>
                     <!-- <p>Online</p> -->
                   </b-col>
-                  <!-- <b-col class="col-4">
-                      <input
-                        v-model="chatSearchKeyword"
-                        @keypress.enter="
-                          histBizToBiz({
-                            type: type,
-                            receiverID: chatId,
-                            keyword: chatSearchKeyword,
-                          })
-                        "
-                        type="text"
-                        class="form-control input-background mb-6 pb-6"
-                        :placeholder="$t('businessowner.Search_message')"
-                      />
-                    </b-col> -->
+
                   <b-col class="col-2 col-2 text-center mr-6">
                     <b-icon
                       v-b-toggle.collapse-1
@@ -605,9 +568,6 @@
 
               <div class="bottom">
                 <b-row class="text-center">
-                  <!-- <p class="py-2 text-primary" v-if="this.file">
-                    {{ this.file.name }} <b class="text-bold">{{ convert(this.file.size) }}</b>
-                  </p> -->
                   <b-alert
                     :show="this.filePreview"
                     class="mt-4"
@@ -651,8 +611,6 @@
                         @change="handleFileUpload()"
                       />
                     </label>
-
-                    <!-- <button v-on:click="submitFile()">Submit</button> -->
                   </b-col>
                   <b-col cols="8" class="p-0">
                     <small v-if="nameSpace.status" class="pr-8 text-danger">
@@ -3674,13 +3632,11 @@ export default {
       this.file = this.$refs.file.files[0];
       this.filePreview = true;
       this.previewSrc = URL.createObjectURL(this.file);
-
       const fileType = this.file["type"];
       const validImageTypes = ["image/gif", "image/jpeg", "image/png"];
       if (validImageTypes.includes(fileType)) {
         this.$bvModal.show("preview-file");
       }
-
       console.log("file:", this.preview);
       console.log("preview:", this.filePreview);
     },

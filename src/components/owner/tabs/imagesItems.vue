@@ -1,5 +1,6 @@
 <template>
-  <div class="img-gall-item img-size" :ref="`sHowMedia-${im.id}`" style="width: 266px;height: 266px; position:relative">
+  <div class="img-gall-item img-size" :ref="`sHowMedia-${im.id}`" 
+  :style="`${getStyle}; position:relative`">
     <a v-if="typeOfMedia() == 'image' && !loading"
       ><b-img
         class="card-img btn p-0 album-img"
@@ -8,14 +9,14 @@
         rounded
         :src="getFullMediaLink()"
         alt="media_img"
-        v-b-modal="`modal-${im.id}`"
+        v-b-modal="uuid"
         v-bind="imageProps"
-        style="width: 266px;height: 266px;"
+        :style="getStyle"
 
       ></b-img>
     </a>
     <video
-      style="width: 266px;height: 266px;"
+      :style="getStyle"
       controls
       v-else-if="typeOfMedia() == 'video' && !loading"
       class="card-img btn p-0 album-img"
@@ -23,7 +24,7 @@
       <source :src="getFullMediaLink()" />
     </video>
     <youtube
-      style="width: 266px;height: 266px;"
+      :style="getStyle"
       class="card-img btn p-0 album-img"
       v-if="typeOfMedia == 'youtube' && !loading"
       :video-id="getYoutubeKey()"
@@ -36,7 +37,7 @@
         :label="$t('profileowner.Large_Spinner')"
       ></b-spinner>
     </div>
-    <b-modal hide-footer :id="`modal-${im.id}`" title="Details" size="md">
+    <b-modal hide-footer :id="uuid" :title="`Details ${uuid}`" size="md">
       <img
         class="card-img"
         :src="getFullMediaLink()"
@@ -95,7 +96,12 @@
 </template>
 
 <script>
+
+import { mapMutations } from 'vuex'
+import { ResizeMediaImage } from '@/mixins' 
+
 export default {
+  mixins: [ResizeMediaImage],
   props: [
     "im",
     "imageProps",
@@ -111,15 +117,40 @@ export default {
     "setProfilePic",
     "setCoverPic",
     "deleteImage",
+    "isAlbum"
   ],
+
+  created(){
+    this.uuid = this.isAlbum ?  `modal-album-${this.im.id}` : `modal-picture-${this.im.id}`
+
+    this.strategy = {
+      BusinessOwner: {
+        picture: ({media_url}) => this.updatePictureState(media_url),
+        cover: (data) => this.addCoverPictureBusiness(data)
+      },
+
+      profile_owner: {
+        picture: ({media_url}) => this.updatePictureState(media_url),
+        cover: ({media_url}) => this.addCoverPictureProfile(media_url)
+      }
+    }
+  },
 
   data() {
     return {
       loading: false,
+      uuid:null,
+      strategy: null,
     };
   },
 
   methods: {
+    ...mapMutations({
+      updatePictureState: "auth/updateProfilePicture",
+      addCoverPictureBusiness: "businessOwner/addCoverPicture",
+      addCoverPictureProfile: "auth/addCoverPicture",
+    }),
+
     async onDownloadPic() {
       let loader = this.$loading.show({
         container: this.$refs[`sHowMedia-${this.im.id}`],
@@ -149,7 +180,7 @@ export default {
     },
     //set an image as a cover photo
 
-    async onSetCoverPic() {
+     onSetCoverPic() {
       let loader = this.$loading.show({
         container: this.$refs[`sHowMedia-${this.im.id}`],
         canCancel: true,
@@ -157,24 +188,46 @@ export default {
         color: "#e75c18",
       });
 
-      this.loading = true;
-      this.loading = await this.setCoverPic();
+      this.setCoverPic()
+      .then(() => {
 
-      loader.hide();
+        try {
+          this.strategy[this.$route.name].cover({
+            media_url:this.getFullMediaLink(),
+            id:this.im.id,
+            media_type: "image/png"
+          })
+        } catch (error) {
+          console.error(error);
+        }
+      })
+      .finally(() => loader.hide());
     },
     //set image as profile pic
 
-    async onSetProfilePic() {
+    onSetProfilePic() {
       let loader = this.$loading.show({
         container: this.$refs[`sHowMedia-${this.im.id}`],
         canCancel: true,
         onCancel: this.onCancel,
         color: "#e75c18",
       });
-      this.loading = true;
-      this.loading = await this.setProfilePic();
+      
+      this.setProfilePic()
+      .then(() => {
+        try {
+          this.strategy[this.$route.name].picture({
+            media_url:this.getFullMediaLink(),
+            id:this.im.id,
+            media_type: "image/png"
+          })
+        } catch (error) {
+          console.error(error);
+        }
 
-      loader.hide();
+      })
+      .finally(() => loader.hide());
+      
     },
   },
 };

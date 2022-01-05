@@ -52,11 +52,18 @@ export default {
         target_id: this.contact.id,
       };
       const request = await this.$repository.share.userPost(data, [`${this.post.poster_type}`]);
+
       if (request.success)
         this.flashMessage.success({
           time: 5000,
           message: `Share to ${this.contact.name}`,
         });
+      else
+         this.flashMessage.error({
+          time: 5000,
+          message: "Something wrong happen",
+        });
+
 
       this.loading = false;
     },

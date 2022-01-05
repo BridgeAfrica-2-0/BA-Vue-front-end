@@ -6,7 +6,7 @@
           <div class="d-inline-flex">
             <div class="center-img">
               <splide :options="options" class="r-image">
-                <splide-slide cl>
+                <splide-slide>
                   <img :src="item.picture" class="r-image" />
                 </splide-slide>
               </splide>
@@ -15,7 +15,7 @@
               <p class="textt">
                 <strong class="title">
                   <router-link :to="'business/' + item.id">
-                    {{ item.name }} 
+                  {{ item.name }}
                   </router-link>
                 </strong>
                 <br />
@@ -73,7 +73,6 @@
                   :id="'followbtn' + item.id"
                   :class="item.is_follow !== 0 && 'u-btn'"
                   variant="primary"
-                 
                 >
                   <i
                     class="fas fa-lg btn-icon"
@@ -165,7 +164,6 @@ export default {
         autoplay: true,
         perPage: 1,
         pagination: false,
-
         type: "loop",
         perMove: 1,
       },
@@ -241,6 +239,18 @@ export default {
         });
     },
 
+
+
+  getTotalCommunity(){
+         this.$store
+      .dispatch("follower/Tcommunity", this.foll_id)
+      .then((response) => {})
+      .catch((error) => {
+        console.log({ error: error });
+      });
+    },
+
+
     async handleFollow(user) {
       document.getElementById("followbtn" + user.id).disabled = true;
 
@@ -257,6 +267,8 @@ export default {
           console.log(response);
           user.is_follow = nextFollowState;
           document.getElementById("followbtn" + user.id).disabled = false;
+
+             this.getTotalCommunity();
         })
         .catch((err) => {
           console.log(err);

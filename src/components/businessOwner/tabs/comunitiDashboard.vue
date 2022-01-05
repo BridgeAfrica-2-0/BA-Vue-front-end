@@ -6,7 +6,7 @@
           <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
           <b> {{ $t('businessowner.COMMUNITY') }}</b> 
           <span class="h4-color"> 
-            {{ nFormatter(total.total_user_following + total.total_user_follower+total.total_business_follower + total.total_business_following+total.total_network_follower + total.total_network_following) }} 
+            {{ nFormatter(total.total) }} 
           </span>
         </h6>
       </span>
@@ -16,7 +16,7 @@
           <template slot="title">
             {{ $t("businessowner.People") }}
             <span class="spa-color">
-              {{ nFormatter(total.total_user_following + total.total_user_follower) }}
+              {{ nFormatter( total.total_user_follower) }}
             </span>
           </template>
 
@@ -55,7 +55,7 @@
           <template slot="title">
             {{ $t("businessowner.Businesses") }}
             <span class="spa-color">
-              {{ nFormatter(total.total_business_follower + total.total_business_following) }}
+              {{ nFormatter(total.total_business_follower ) }}
             </span>
           </template>
 
@@ -95,7 +95,7 @@
           <template slot="title">
             {{ $t("businessowner.Network") }}
             <span class="spa-color">
-              {{ nFormatter(total.total_network_follower + total.total_network_following) }}</span
+              {{ nFormatter(total.total_network_follower ) }}</span
             >
           </template>
 
@@ -160,7 +160,7 @@ export default {
         return (num / 1000).toFixed(1).replace(/\.0$/, "") + "K";
       }
       return num;
-    },
+    }, 
   },
 
   computed: {

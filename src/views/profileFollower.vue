@@ -94,6 +94,7 @@ export default {
         console.log(error);
       });
   },
+  
   mounted() {
     this.$store
       .dispatch('profile/Tcommunity', null)

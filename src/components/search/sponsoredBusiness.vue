@@ -20,7 +20,7 @@
 
               <span class="location">
                 <b-icon-geo-alt class="ico"></b-icon-geo-alt>
-                {{ item.location_description }}
+                {{ item.neigborhood.map(value => value.name).join(", ") }}
               </span>
               <br />
 
@@ -106,6 +106,8 @@ export default {
         : "",
   },
 
+
+
   data() {
     return {
       items: [],
@@ -144,6 +146,12 @@ export default {
   },
 
   methods: {
+
+    haveSponsored(){
+      this.$emit('on:init', this.items.length ? true : false)
+    },
+
+
     init: async function () {
       const request = await this.$repository.search.sponsors();
 

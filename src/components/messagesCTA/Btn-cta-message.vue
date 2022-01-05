@@ -6,12 +6,12 @@
     :class="header ? 'message size' : 'b-background flexx shadow'"
     @click="cta()"
   >
-    <p v-if="header">
+    <span v-if="header" style="margin-left:-3px">
       <i class="fas fa-envelope fa-lg btn-icon"></i>
-      <span>{{ $t("businessf.Message") }}</span>
-    </p>
+      <span class="ml-1"> {{ $t("businessf.Message") }}</span>
+    </span>
 
-    <p v-else>
+    <p class="d-flex" v-else>
       <i class="fas fa-envelope fa-lg btn-icon pt-1 pr-1"></i>
       <span class="btn-text"> {{ $t("dashboard.Messages") }}</span>
     </p>

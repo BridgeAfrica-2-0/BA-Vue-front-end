@@ -35,7 +35,7 @@
             data-toggle="popover"
             class="form-control search-mobile"
             style="border-left: none"
-            placeholder="What are you looking for"
+            placeholder="What "
             aria-label=""
             data-original-title=""
             title=""
@@ -59,7 +59,7 @@
             data-toggle="popover"
             class="form-control search-mobile"
             style="border-left: none"
-            placeholder="Location"
+            placeholder="Where"
             aria-label=""
             data-original-title=""
             title=""
@@ -894,7 +894,7 @@ export default {
 
     const elementInView = (el, dividend = 1) => {
       const elementTop = el.getBoundingClientRect().top;
-      console.log(document.documentElement.clientHeight);
+    
 
       return (
         elementTop <=
@@ -1130,9 +1130,6 @@ export default {
 }
 .taille{
   height: 704px;
-}
-.topbar{
-    /* position: fixed; */
 }
 
   .sizeimg{

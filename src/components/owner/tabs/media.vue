@@ -1,6 +1,6 @@
 <template>
   <div>
-    <fas-icon class="violet mr-2 pt-1 icon-size primary" :icon="['fas', 'file-image']" />{{ $t('profileowner.Media') }}
+    <fas-icon class="violet mr-2 pt-1 icon-size primary" :icon="['fas', 'file-image']" />{{ $t('profileowner.Media') }}      
 
     <hr />
     <b-tabs content-class="mt-3" v-model="tabIndex" pills>
@@ -23,9 +23,10 @@
       </b-tab>
       <b-tab :title="$t('profileowner.Albums')" @click="getAlbums">
         <div v-if="!hasLoadAlbum">
-          <b-spinner class="load" :label="$t('profileowner.Large_Spinner')"></b-spinner>
+          <b-spinner class="load" :label="$t('profileowner.Large_Spinner')">
+          </b-spinner>
         </div>
-        <Album :isEditor="isEditor" :type="type" v-else :getAlbums="getAlbums" :getImages="getImages" />
+        <Album :isEditor="isEditor" :type="type" v-else :getAlbums="getAlbums" :getImages="getImages" :showCoverAlbum="showCoverAlbum" />
       </b-tab>
     </b-tabs>
   </div>
@@ -39,6 +40,7 @@ import _ from 'lodash';
 
 import { mapGetters } from 'vuex';
 
+
 export default {
   props: {
     type: {
@@ -47,6 +49,12 @@ export default {
         return ['profile', 'network', 'business'].indexOf(value) !== -1;
       },
     },
+
+    showCoverAlbum: {
+      type:Boolean,
+      default: () => false
+    },
+
     isEditor: {
       type: Boolean,
       default: () => true,
@@ -105,18 +113,21 @@ export default {
     getAlbums() {
       try {
         const type = this.strategy[this.type]();
-
+        this.hasLoadAlbum = false
         //if (!this.hasLoadAlbum) {
         this.$store
           .dispatch(type.album, this.urlData)
           .then(() => {
+            this.hasLoadPicture = true;
             this.hasLoadAlbum = true;
             this.addItem = true;
           })
-          .catch((err) => {
+          .catch(() => {
+            this.hasLoadPicture = true;
             this.hasLoadAlbum = true;
-            console.log(err);
-          });
+          })
+          .finally(() => console.log('End load album'))
+          ;
         //}
       } catch (error) {
         console.log(error);
@@ -132,12 +143,15 @@ export default {
           .dispatch(type.image, this.urlData)
           .then(() => {
             this.hasLoadPicture = true;
+            this.hasLoadAlbum = true;
             this.addItem = true;
           })
-          .catch((err) => {
+          .catch(() => {
             this.hasLoadPicture = true;
-            console.log({ err: err });
-          });
+            this.hasLoadAlbum = true;
+          })
+          .finally(() => console.log('End load images'))
+          ;
         //}
       } catch (error) {
         console.log(error);
@@ -147,10 +161,18 @@ export default {
   },
 
   created() {
+
+    console.log(this.showCoverAlbum)
+
     this.urlData = this.$route.params.id ? this.$route.params.id : this.profile.id;
+    
     if (this.isablum) {
       this.tabIndex = 1;
     }
+
+    if (this.showCoverAlbum)
+      this.tabIndex = 1;
+
     this.strategy = {
       business: () => ({
         album: 'businessOwner/getAlbums',

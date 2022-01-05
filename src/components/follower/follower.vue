@@ -1,10 +1,13 @@
 <template>
   <div class="main">
+
+ 
     <div class="images imageslg">
-      <div>
+      <div>     
         <img
-          :src="info.user.cover_picture"
-          v-if="info.user.cover_picture != null"
+         
+           :src="info.user.cover_picture ? info.user.cover_picture : getCustomCover[0]"
+      
           class="banner"
         />
       </div>
@@ -38,20 +41,37 @@
             <br />
 
             <span class="k15 duration">
-              {{ info.user.community }} {{ $t("profilefollower.Community") }}
+              {{ info.user.followers }} {{ $t("profilefollower.Community") }}
             </span>
           </div>
         </b-col>
         <b-col cols="12">
           <div class="btns">
-            <b-button class="community size mr-2 ml-1">
-              <i class="fas fa-user-plus fa-lg btn-icon m-fa mr-2"></i>
+            <b-button class="community size mr-2 ml-1"
+            
+            :class="info.user.is_follow !== 0 && 'u-btn'"
+                              :id="'followbtn' + info.user.id"
+                              
+                                @click="handleFollow(info.user)"  >
+             
+
+                <i
+                                class="fas fa-lg btn-icon  m-fa "
+                                :class="
+                                  info.user.is_follow !== 0
+                                    ? 'fa-user-minus'
+                                    : 'fa-user-plus'
+                                "
+                              ></i>
+
+
+
               <span class="txt-btn">{{
                 $t("profilefollower.Community")
               }}</span></b-button
             >
 
-            <BtnCtaMessage :element="info.user" type="people" :header="true" />
+            <BtnCtaMessage  :element="info.user" type="people" :header="true" />
 
             <b-dropdown
               size="sm"
@@ -88,7 +108,7 @@
           <div class="d-inline-block mt-4 ml-4 float-left texts">
             <h6 class="font-weight-bolder name">{{ info.user.name }}</h6>
             <p class="details">
-              {{ info.user.community }} {{ $t("profilefollower.Community") }}
+              {{ info.user.followers }} {{ $t("profilefollower.Community") }}
             </p>
           </div>
         </b-col>
@@ -108,10 +128,34 @@
     <div class="m-btn mobile mb-2">
       <BtnCtaMessage :element="info.user" type="people" :header="true" />
 
-      <b-button class="direction ml-1 size" size="sm">
-        <i class="fas fa-user-plus fa-lg btn-icon"></i>
+      <b-button class="direction ml-1 size" size="sm"
+      
+       
+            :class="info.user.is_follow !== 0 && 'u-btn'"
+                              :id="'followbtn' + info.user.id"
+                              
+                                @click="handleFollow(info.user)" 
+                                
+                                >
+       
+
+         <i
+                                class="fas fa-lg btn-icon  m-fa "
+                                :class="
+                                  info.user.is_follow !== 0
+                                    ? 'fa-user-minus'
+                                    : 'fa-user-plus'
+                                "
+                              ></i>
+
+
         <span class="txt-btn">{{ $t("dashboard.Community") }} </span></b-button
       >
+
+
+
+        
+
     </div>
 
     <div class="body p-2">
@@ -128,7 +172,7 @@
             /></b-tab>
             <b-tab :title="$t('profilefollower.Network')"><Network /></b-tab>
             <b-tab :title="$t('profilefollower.Media')"
-              ><Media type="profile"
+              ><Media type="profile" :isEditor="false"
             /></b-tab>
             <b-tab :title="$t('profilefollower.Community')"
               ><Community
@@ -143,15 +187,18 @@
 <script>
 import Post from "@/components/businessfollower/tabs/posts";
 import About from "@/components/follower/tabs/about";
-import Media from "@/components/businessfollower/tabs/media";
+import Media from "@/components/owner/tabs/media";
 import Community from "@/components/follower/tabs/community";
 import Businesses from "@/components/follower/tabs/businesses";
 import Network from "@/components/follower/tabs/networkk";
+import axios from "axios";
 
-import { knowWhoIsConnected } from "@/mixins";
+
+import { mapMutations, mapGetters } from 'vuex'
+import { knowWhoIsConnected, defaultCoverImage } from "@/mixins";
 
 export default {
-  mixins: [knowWhoIsConnected],
+  mixins: [knowWhoIsConnected,defaultCoverImage],
   name: "Home",
   data() {
     return {
@@ -168,32 +215,55 @@ export default {
     Network,
   },
 
+  
+
   created() {
+
+      this.currentAuthType = 'profile'
+
+     this.foll_id = this.$route.params.id;
+
     this.$store
       .dispatch("follower/loadUserPostIntro", this.foll_id)
       .then((response) => {})
-      .catch((error) => {
+      .catch((error) => {   
         console.log({ error: error });
       });
   },
 
+  methods:{
+       async handleFollow(user) {
+     
+      document.getElementById("followbtn" + user.id).disabled = true;
+      const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
+      const nextFollowState = user.is_follow === 0 ? 1 : 0;
+      const data = {
+        id: user.id,
+        type: "user",
+      };
+
+      await axios
+        .post(uri, data)
+        .then(({ data }) => {
+          console.log(data);
+          user.is_follow = nextFollowState;
+          document.getElementById("followbtn" + user.id).disabled = false;
+        })
+
+        .catch((err) => {
+          console.log({ err: err });
+          document.getElementById("followbtn" + user.id).disabled = false;
+        });
+    },
+
+
+
+  },
+
   mounted() {
-    this.foll_id = this.$route.params.id;
+   
     console.log("Info: ", this.info.user);
-    this.$store
-      .dispatch("follower/UcommunityFollower", this.foll_id)
-      .then((response) => {})
-      .catch((error) => {
-        console.log({ error: error });
-      });
-
-    this.$store
-      .dispatch("follower/UcommunityFollowing", this.foll_id)
-      .then((response) => {})
-      .catch((error) => {
-        console.log({ error: error });
-      });
-
+    
     this.$store
       .dispatch("follower/Tcommunity", this.foll_id)
       .then((response) => {})
@@ -201,36 +271,14 @@ export default {
         console.log({ error: error });
       });
 
-    this.$store
-      .dispatch("follower/BcommunityFollower", this.foll_id)
-      .then((response) => {})
-      .catch((error) => {
-        console.log({ error: error });
-      });
-
-    this.$store
-      .dispatch("follower/BcommunityFollowing", this.foll_id)
-      .then((response) => {})
-      .catch((error) => {
-        console.log({ error: error });
-      });
-
-    this.$store
-      .dispatch("follower/NcommunityFollower", this.foll_id)
-      .then((response) => {})
-      .catch((error) => {
-        console.log({ error: error });
-      });
-
-    this.$store
-      .dispatch("follower/NcommunityFollowing", this.foll_id)
-      .then((response) => {})
-      .catch((error) => {
-        console.log({ error: error });
-      });
   },
 
   computed: {
+
+     ...mapGetters({
+      auth: 'auth/profilConnected'
+    }),
+
     info: function () {
       return this.$store.getters["follower/getUserPostIntro"];
     },
@@ -381,7 +429,7 @@ p,
   font-size: 32px;
 }
 .txt-btn {
-  margin-left: 10px;
+  margin-left: 5px;
 
   font-size: 16px;
   color: #fff;

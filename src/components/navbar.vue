@@ -601,7 +601,7 @@ export default {
       this.notificationPatterns = {
         user: () => "/notification/latest/user",
         business: () => `/notification/business/${this.user.id}`,
-        network: () => `/network/${this.user.id}/notifications`,
+        network: () => `/notification/network/${this.user.id}`,
       };
 
       this.messagePatterns = {

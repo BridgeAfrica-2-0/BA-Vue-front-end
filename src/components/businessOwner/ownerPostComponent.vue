@@ -4,10 +4,11 @@
       <div class="d-inline-flex">
         <span md="1" class="m-0 p-0">
           <b-avatar
-            class="logo-sizee avat"
+            class="p-avater"
             :square="'user' == item.poster_type ? false : true"
             variant="primary"
             :src="item.user_picture"
+            size="5em"
           ></b-avatar>
         </span>
         <div class="pl-2 pl-md-3 pt-md-2">

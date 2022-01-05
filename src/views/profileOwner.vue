@@ -10,12 +10,13 @@
               <Post />
             </b-tab>
             <b-tab :title="$t('profileowner.About')" href="#about"><About /></b-tab>
+                <b-tab :title="$t('profileowner.Media')" href="#media">
+              <Media type="profile" />
+            </b-tab>
             <b-tab :title="$t('profileowner.Business')" href="#business" class="m-0 p-0">
               <Bussiness />
             </b-tab>
-            <b-tab :title="$t('profileowner.Media')" href="#media">
-              <Media type="profile" />
-            </b-tab>
+        
             <b-tab :title="$t('profileowner.Networks')">
               <Networks />
             </b-tab>

@@ -302,7 +302,7 @@
                 v-if="islogin"
                 target="profilepic"
                 variant="light"
-                triggers="click"
+                triggers="hover"
               >
                 {{ user.name }}
               </b-tooltip>

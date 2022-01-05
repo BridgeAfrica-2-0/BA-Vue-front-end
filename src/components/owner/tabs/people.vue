@@ -68,32 +68,10 @@
                         xl="6"
                         class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
                       >
-                        <b-button
-                          v-if="show == 'Follower'"
-                          disabled
-                          block
-                          size="sm"
-                          :id="'followbtn' + item.id"
-                          class="b-background flexx pobtn shadow"
-                          :class="item.is_follow !== 0 && 'u-btn'"
-                          variant="primary"
-                        >
-                          <i
-                            class="fas fa-lg btn-icon"
-                            :class="
-                              item.is_follow !== 0
-                                ? 'fa-user-minus'
-                                : 'fa-user-plus'
-                            "
-                          ></i>
-
-                          <span class="btn-com">{{
-                            $t("dashboard.Community")
-                          }}</span>
-                        </b-button>
+                       
 
                         <b-button
-                          v-else
+                         
                           block
                           size="sm"
                           :id="'followbtn' + item.id"
@@ -218,7 +196,7 @@ export default {
       .dispatch("follower/Tcommunity", this.foll_id)
       .then((response) => {})
       .catch((error) => {
-        console.log({ error: error });
+        console.log({ error: error });   
       });
     },
     async handleFollow(user) {

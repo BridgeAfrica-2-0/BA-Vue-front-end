@@ -27,7 +27,7 @@
           <p class="textt">
             <strong class="net-title">
               <router-link :to="'network/' + network.id">
-                {{ network.name }}sda
+                {{ network.name }}
               </router-link>
             </strong>
             <br />

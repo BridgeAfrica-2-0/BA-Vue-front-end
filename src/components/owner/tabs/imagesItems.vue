@@ -12,7 +12,7 @@
         rounded
         :src="getFullMediaLink()"
         alt="media_img"
-        v-b-modal="uuid"
+        v-b-modal="`modal-${im.id}`"
         v-bind="imageProps"
         style="width: 100%;height: 100%;"
       ></b-img>
@@ -39,7 +39,7 @@
         :label="$t('profileowner.Large_Spinner')"
       ></b-spinner>
     </div>
-    <b-modal hide-footer :id="uuid" :title="`Details ${uuid}`" size="md">
+    <b-modal hide-footer :id="`modal-${im.id}`" title="Details" size="md">
       <img
         class="card-img"
         :src="getFullMediaLink()"
@@ -98,12 +98,7 @@
 </template>
 
 <script>
-
-import { mapMutations } from 'vuex'
-import { ResizeMediaImage } from '@/mixins' 
-
 export default {
-  mixins: [ResizeMediaImage],
   props: [
     "im",
     "imageProps",
@@ -149,12 +144,6 @@ export default {
   },
 
   methods: {
-    ...mapMutations({
-      updatePictureState: "auth/updateProfilePicture",
-      addCoverPictureBusiness: "businessOwner/addCoverPicture",
-      addCoverPictureProfile: "auth/addCoverPicture",
-    }),
-
     async onDownloadPic() {
       let loader = this.$loading.show({
         container: this.$refs[`sHowMedia-${this.im.id}`],
@@ -208,14 +197,13 @@ export default {
     },
     //set image as profile pic
 
-    onSetProfilePic() {
+    async onSetProfilePic() {
       let loader = this.$loading.show({
         container: this.$refs[`sHowMedia-${this.im.id}`],
         canCancel: true,
         onCancel: this.onCancel,
         color: "#e75c18",
       });
-
       this.setProfilePic()
         .then(() => {
           try {
@@ -229,6 +217,7 @@ export default {
           }
         })
         .finally(() => loader.hide());
+
     },
   },
 };

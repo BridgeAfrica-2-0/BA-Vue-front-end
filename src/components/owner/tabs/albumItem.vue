@@ -3,11 +3,11 @@
     class="createp img-gall predit2"
     @mouseover="upHere = true"
     @mouseleave="upHere = false"
-    :style="getStyle"
+    style="width: 266px;height: 266px;"
   >
     <a>
       <span>
-        <img class="card-img album-img" :src="cover(album.cover)" alt="" :style="getStyle"/>
+        <img class="card-img album-img" :src="cover(album.cover)" alt="" style="width: 266px;height: 266px;"/>
       </span>
       <div class="createdesc botmedia">
         <div class="botmediadess-position" v-if="loading">
@@ -69,10 +69,8 @@
 import defaultImage from "@/assets/img/nothing.jpg";
 
 import { fullMediaLink } from "@/helpers";
-import { ResizeMediaImage } from '@/mixins' 
 
 export default {
-  mixins: [ResizeMediaImage],
   props: [
     "album",
     "type",
@@ -81,7 +79,6 @@ export default {
     "canBeUpdate",
     "showAlbumPictures",
     "isEditor",
-    "showCoverAlbum"
   ],
 
   data: () => ({
@@ -92,13 +89,8 @@ export default {
   filters: {
     path: fullMediaLink,
     plural: function (val) {
-      return val ? `${val} items` : "No item";
+      return val ? `${val} items` : this.$t('general.No_item');
     },
-  },
-
-  created(){
-    if (this.showCoverAlbum)
-      this.show()
   },
 
   methods: {
@@ -128,10 +120,10 @@ export default {
 
 .botmediadess-position {
   text-align: center;
-  bottom: -30%;
+  bottom: -45%;
   width: 100%;
   font-size: 20px;
   position: relative;
-  height: auto;
+  height: 340.73px;
 }
 </style>

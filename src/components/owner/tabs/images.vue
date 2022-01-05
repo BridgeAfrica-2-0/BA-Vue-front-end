@@ -54,7 +54,7 @@
             hidden
             ref="movie"
           />
-          <a>
+          <a @click="$refs.movie.click()">
             <div class="drag-textt">
               <fas-icon :icon="['fas', 'plus']" />
               <h3>{{ $t("profileowner.Add_Item") }}</h3>
@@ -65,7 +65,6 @@
       <div v-for="(image, cmp) in allImages" :key="cmp">
         <div class="img-gall" v-for="(im, index) in image.media" :key="index">
           <Picture
-            :isAlbum="isAlbum"
             :im="im"
             :typeOfMedia="() => typeOfMedia(im.path)"
             :getFullMediaLink="() => getFullMediaLink(im.path)"
@@ -95,7 +94,7 @@
 
 <script>
 import Picture from "./imagesItems.vue";
-import { mapActions, mapMutations, mapGetters } from "vuex";
+import { mapActions, mapMutations } from "vuex";
 import { fullMediaLink } from "@/helpers";
 import { v4 } from "uuid";
 
@@ -122,7 +121,6 @@ export default {
       type: String,
       required: true,
     },
-
     isAlbum: {
       type: Boolean,
       default: function() {
@@ -231,7 +229,6 @@ export default {
   destroyed() {
     this.$emit("reste");
   },
-
   computed: mapGetters({
     auth: "auth/profilConnected",
   }),
@@ -394,14 +391,14 @@ export default {
     },
     //set an image as a cover photo
 
-    async setCoverPic(id) {
+    setCoverPic(id) {
       this.loading = true;
       const data =
         "business" == this.type || "network" == this.type
           ? { businessID: this.$route.params.id, albumID: id }
           : id;
 
-      return await this.pattern[this.type]()
+      this.pattern[this.type]()
         .setCoverPicture(data)
         .then(() => {
           this.loading = false;
@@ -409,7 +406,7 @@ export default {
             status: "success",
             message: "Cover Picture succesfully set",
           });
-          return true;
+          return false;
         })
         .catch((error) => {
           this.sending = false;
@@ -423,13 +420,13 @@ export default {
     },
     //set image as profile pic
 
-    async setProfilePic(id) {
+    setProfilePic(id) {
       this.loading = true;
       const data =
         "business" == this.type || "network" == this.type
           ? { businessID: this.$route.params.id, albumID: id }
           : id;
-      return await this.pattern[this.type]()
+      this.pattern[this.type]()
         .setProfilePicture(data)
         .then(() => {
           this.loading = false;
@@ -437,7 +434,7 @@ export default {
             status: "success",
             message: "Profile Picture set",
           });
-          return true;
+          return false;
         })
         .catch((error) => {
           this.sending = false;
@@ -473,10 +470,8 @@ export default {
 
       this.pattern[this.type]()
         .submitPost(payload)
-        .then((response) => {
-          console.log(response)
-
-          this.pattern[this.type]().updateItem({ id: albumId, action: "add", "cover": response.data.data });
+        .then(() => {
+          this.pattern[this.type]().updateItem({ id: albumId, action: "add" });
           this.pattern[this.type]().getAlbumImages(data);
           this.loading = false;
           this.text = "";

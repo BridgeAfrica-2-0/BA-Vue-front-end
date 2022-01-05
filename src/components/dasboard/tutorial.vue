@@ -2,19 +2,15 @@
   <div>
     <b-card class=" border shadow ">
       <h6 class="title">
-        <fas-icon class="icons" :icon="['fas', 'video']" />
-        <b> {{ $t("dashboard.Tutorial") }}</b>
+
+        <fas-icon class="icons" :icon="['fas', 'video']" /> <b> {{ $t('dashboard.Tutorial') }}</b>
+
       </h6>
 
       <div class="s-card">
         <b-row>
-          <b-col
-            cols="6"
-            class="m-media px-0 px-md-2"
-            v-for="post in posts"
-            :key="post.id"
-          >
-            <div class="container-fluid px-1 px-md-2" v-if="post.video">
+          <b-col cols="6" class="m-media" v-for="post in posts" :key="post.id">
+            <div class="container-fluid  " v-if="post.video">
               <b-embed
                 type="iframe"
                 aspect="16by9"
@@ -23,8 +19,10 @@
                 class="s-embed"
               ></b-embed>
               <p class="text">
-                {{ $t("dashboard.video_name") }} <br />
-                {{ $t("dashboard.video_description") }}
+
+                {{ $t('dashboard.video_name') }} <br />
+                {{ $t('dashboard.video_description') }}
+
               </p>
             </div>
           </b-col>
@@ -44,7 +42,7 @@ export default {
           video: "https://www.youtube.com/embed/JKJECtmqviQ",
           title: "Title 1",
           text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
+            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
         },
 
         {
@@ -52,7 +50,7 @@ export default {
           video: "https://www.youtube.com/embed/xVISKL18jLs",
           title: "Title 1",
           text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
+            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
         },
 
         {
@@ -60,7 +58,7 @@ export default {
           video: "https://www.youtube.com/embed/nMBQrM1FHZw",
           title: "Title 1",
           text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
+            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
         },
 
         {
@@ -68,16 +66,16 @@ export default {
           video: "https://www.youtube.com/embed/iPhGrDZhaAU",
           title: "Title 1",
           text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
+            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
         },
         {
           id: 7,
           image: "https://picsum.photos/300/150/?image=41",
           title: "Title 2",
           text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
-        },
-      ],
+            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
+        }
+      ]
     };
   },
   methods: {
@@ -99,8 +97,8 @@ export default {
       if (index > -1) {
         this.posts.splice(index, 1);
       }
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -113,10 +111,6 @@ export default {
   .text {
     font-size: 14px;
   }
-
-  .embed-responsive-16by9 {
-    height: 200px;
-  }
 }
 
 @media only screen and (max-width: 768px) {
@@ -127,12 +121,11 @@ export default {
   .text {
     font-size: 12px;
   }
-  .embed-responsive-16by9 {
-    width: 100%;
-    height: 125px;
-  }
 }
 
+.embed-responsive-16by9 {
+  height: 200px;
+}
 .s-embed {
   border-radius: 10px;
 }

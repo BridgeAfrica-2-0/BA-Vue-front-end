@@ -211,13 +211,16 @@ export default {
         })
         .then(({ data }) => {
           console.log(data);
-          if (data.data.length) {
-            this.page += 1;
+          console.log(Object.values(data.data));
+          let object = Object.values(data.data);
+          if (object.length) {
+            console.log("chai blez which kind of code is this  yehumm")
             if (this.page === 1) {
-              this.$store.commit('notification/NEW_PROFILE_NOTIFICATION', { init: true, data: data.data });
+              this.$store.commit('notification/NEW_PROFILE_NOTIFICATION', { init: true, data: object});
             } else {
-              this.$store.commit('notification/NEW_PROFILE_NOTIFICATION', { init: false, data: data.data });
-            }
+              this.$store.commit('notification/NEW_PROFILE_NOTIFICATION', { init: false, data: object });
+            }           
+            this.page += 1;
             $state.loaded();
           } else {
             $state.complete();

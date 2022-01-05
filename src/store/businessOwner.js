@@ -750,6 +750,7 @@ export default {
 
         // Sending a read request
         async readNotifiactions({ dispatch, commit }, payload) {
+            console.log(payload);
             let items = {
                 ids: [],
             };
@@ -762,15 +763,17 @@ export default {
                 items.ids.push(objId);
             });
             await axios
-                .post('notification/mark-read', items)
+                .post('notification/mark-read', payload)
                 .then(() => {
-                    dispatch('getNotifications');
+                    return true;
+                    // dispatch('getNotifications');
                 })
                 .catch(err => [console.log(err)]);
         },
 
         // Delete All Notifications
         async deleteNotifications({ dispatch, commit }, payload) {
+            console.log(payload);
             let items = {
                 ids: [],
             };
@@ -782,8 +785,9 @@ export default {
                 objId.id = element;
                 items.ids.push(objId);
             });
-            await axios.post('notification/deleteAll', items).then(() => {
-                dispatch('getNotifications');
+            await axios.post('notification/deleteAll', payload).then(() => {
+                return true;
+                // dispatch('getNotifications');
             });
         },
         // delete a single notification

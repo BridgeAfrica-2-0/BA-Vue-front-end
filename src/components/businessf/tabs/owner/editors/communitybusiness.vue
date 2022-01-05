@@ -17,7 +17,7 @@
             {{ member.category[0].name }}
             <br />
             {{ member.communityNum }}
-            Community <br />
+            {{$t("general.Community")}} <br />
 
             <span class="location">
               <b-icon-geo-alt class="ico"></b-icon-geo-alt>

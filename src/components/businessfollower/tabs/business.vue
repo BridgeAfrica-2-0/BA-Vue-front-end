@@ -16,7 +16,7 @@
             <strong class="title"> {{ item.name }}</strong> <br />
             {{ item.category }}
             <br />
-            {{ count(item.followers) }} Community <br />
+            {{ count(item.followers) }} {{$t("general.Community")}} <br />
 
             <span class="location">
               <b-icon-geo-alt class="ico"></b-icon-geo-alt>{{ item.country }}
@@ -53,7 +53,7 @@
                   variant="primary"
                 >
                   <i class="fas fa-user-plus fa-lg btn-icon"></i>
-                  <span class="btn-com">Community</span>
+                  <span class="btn-com">{{$t("general.Community")}}</span>
                 </b-button>
               </b-col>
 

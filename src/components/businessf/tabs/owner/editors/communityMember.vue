@@ -32,7 +32,7 @@
                       >
                         <h6 class="follower m-15">
                           {{ member.communityNum }}
-                          Community
+                          {{$t("general.Community")}}
                         </h6>
                       </b-col>
                       <b-col
@@ -84,7 +84,7 @@
                           @click="$emit('handleFollow', member)"
                           :style="member.is_follow !== 0 ? 'background-color: rgb(162,107,80);' : ''"
                         ><i :class="member.is_follow ? 'fas fa-user-minus fa-lg btn-icon':'fas fa-user-plus fa-lg btn-icon'"></i>
-                          <span class="btn-com">Community</span>
+                          <span class="btn-com">{{$t("general.Community")}}</span>
                         </b-button>
                       </b-col>
                     </b-row>

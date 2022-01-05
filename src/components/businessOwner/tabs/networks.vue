@@ -21,7 +21,7 @@
 
         <b-alert v-if="network.length === 0" show variant="warning"
           ><a href="#" class="alert-link">
-            No network available!
+            {{$t("businessowner.No_network_available")}}!
           </a>
         </b-alert>
         <b-col

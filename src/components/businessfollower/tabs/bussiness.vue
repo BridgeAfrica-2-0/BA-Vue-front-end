@@ -680,7 +680,7 @@
                         </span>
                       </span>
                       <br />
-                      {{ business.community }} Community <br />
+                      {{ business.community }} {{$t("general.Community")}} <br />
 
                       <span class="location">
                         <b-icon-geo-alt class="ico"></b-icon-geo-alt>

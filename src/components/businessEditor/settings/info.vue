@@ -4,8 +4,6 @@
       <b-container class="bv-example-row">
         <b-form>
         
-{{ $t('businessowner.') }}
- $t('businessowner.')
           <div class="b-bottom">
             <b-container>
               <b-form-group

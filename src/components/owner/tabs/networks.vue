@@ -72,7 +72,7 @@
                       <span class="m-1" v-for=" cat in network.assign_categories" :key="cat.id "> {{cat.name}}  </span> -->
                   <br />
 
-                  {{ network.member_count }} Community <br />
+                  {{ network.member_count }} {{$t("general.Community")}}<br />
 
                   <span class="location">
                     <b-icon-geo-alt class="ico"></b-icon-geo-alt>

@@ -5,7 +5,7 @@
     </b-modal>
 
     <b-row>
-      <b-col lg="6" sm="12" class="p-2" v-for="item in network" :key="item.id">
+      <b-col lg="6" sm="12" class="p-2" v-for="(item, index) in network" :key="index">
         <div class="people-style shadow h-100">
           <b-row>
             <b-col md="3" xl="3" lg="3" cols="5" sm="3">

@@ -73,7 +73,7 @@
 
     </div>
     <!-- ADDPRODUCT FORM -->
-    <b-modal hide-footer :title="$t('businessowner.Add_product')" v-model="showModal">
+    <b-modal hide-footer :title="$t('businessowner.Add_product')"   @hidden="resetPostData" v-model="showModal">
       <b-form>
         <b-row>
           <b-col cols="12" md="6">
@@ -423,7 +423,16 @@ export default {
     },
 
 
+   resetPostData(){
 
+this.newProduct=[];
+this.selectedImagePrv='';
+this.filterselectvalue=[];
+
+this.multiselecvalue=[];
+
+this.select_filterss=[];
+   },
 
     addProduct() {
       this.load = true;

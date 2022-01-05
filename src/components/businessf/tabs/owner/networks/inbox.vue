@@ -25,7 +25,6 @@
                   </h1>
                 </b-col>
                 <b-col>
-                  
                   <b-dropdown
                     variant="white"
                     toggle-class="text-decoration-none"
@@ -97,7 +96,9 @@
                               'p-2 message ',
                               {
                                 messageSelected:
-                                  chat.id ==
+                                  (chat.sender_id
+                                    ? chat.sender_id
+                                    : chat.receiver_id) ==
                                   (chatSelected.clickedId != null
                                     ? chatSelected.clickedId
                                     : false)
@@ -109,7 +110,11 @@
                               selectedChat({
                                 type: 'user',
                                 chat: chat,
-                                id: chat.id,
+                                id: chat.sender_id
+                                  ? chat.sender_id
+                                  : chat.sender_id
+                                  ? chat.sender_id
+                                  : chat.receiver_id,
                               })
                             "
                           >
@@ -137,7 +142,6 @@
                               <small class="text-center small">
                                 {{ getCreatedAt(chat.created_at) }}
                               </small>
-                              
                             </b-col>
                           </b-row>
                         </div>
@@ -183,7 +187,9 @@
                               'p-2 message ',
                               {
                                 messageSelected:
-                                  chat.id ==
+                                  (chat.sender_business_id
+                                    ? chat.sender_business_id
+                                    : chat.receiver_business_id) ==
                                   (chatSelected.clickedId != null
                                     ? chatSelected.clickedId
                                     : false)
@@ -195,7 +201,9 @@
                               selectedChat({
                                 type: 'business',
                                 chat: chat,
-                                id: chat.id,
+                                id: chat.sender_business_id
+                                  ? chat.sender_business_id
+                                  : chat.receiver_business_id,
                               })
                             "
                           >
@@ -268,7 +276,9 @@
                             'p-2 message ',
                             {
                               messageSelected:
-                                chat.receiver_network_id ==
+                                (chat.sender_network_id == currentBizId
+                                  ? chat.receiver_network_id
+                                  : chat.sender_network_id) ==
                                 (chatSelected.clickedId != null
                                   ? chatSelected.clickedId
                                   : false)
@@ -280,7 +290,10 @@
                             selectedChat({
                               type: 'network',
                               chat: chat,
-                              id: chat.receiver_network_id,
+                              id:
+                                chat.sender_network_id == currentBizId
+                                  ? chat.receiver_network_id
+                                  : chat.sender_network_id,
                             })
                           "
                         >
@@ -1511,7 +1524,9 @@
                               'p-2 message ',
                               {
                                 messageSelected:
-                                  chat.id ==
+                                  (chat.sender_id
+                                    ? chat.sender_id
+                                    : chat.receiver_id) ==
                                   (chatSelected.clickedId != null
                                     ? chatSelected.clickedId
                                     : false)
@@ -1523,10 +1538,13 @@
                               selectedChat({
                                 type: 'user',
                                 chat: chat,
-                                id: chat.id,
+                                id: chat.sender_id
+                                  ? chat.sender_id
+                                  : chat.receiver_id,
                               })
                             "
                           >
+                            <!-- <small class="small">{{ chat }}</small> -->
                             <b-col class="col-9">
                               <span style="display: inline-flex">
                                 <b-avatar
@@ -1601,7 +1619,9 @@
                               'p-2 message ',
                               {
                                 messageSelected:
-                                  chat.id ==
+                                  (chat.sender_business_id
+                                    ? chat.sender_business_id
+                                    : chat.receiver_business_id) ==
                                   (chatSelected.clickedId != null
                                     ? chatSelected.clickedId
                                     : false)
@@ -1613,10 +1633,14 @@
                               selectedChat({
                                 type: 'business',
                                 chat: chat,
-                                id: chat.id,
+                                id: chat.sender_business_id
+                                  ? chat.sender_business_id
+                                  : chat.receiver_business_id,
                               })
                             "
                           >
+                            <!-- <small class="small">{{ chat }}</small> -->
+
                             <b-col class="col-9">
                               <span style="display: inline-flex">
                                 <b-avatar
@@ -1691,7 +1715,9 @@
                             'p-2 message ',
                             {
                               messageSelected:
-                                chat.receiver_network_id ==
+                                (chat.sender_network_id == currentBizId
+                                  ? chat.receiver_network_id
+                                  : chat.sender_network_id) ==
                                 (chatSelected.clickedId != null
                                   ? chatSelected.clickedId
                                   : false)
@@ -1703,7 +1729,10 @@
                             selectedChat({
                               type: 'network',
                               chat: chat,
-                              id: chat.receiver_network_id,
+                              id:
+                                chat.sender_network_id == currentBizId
+                                  ? chat.receiver_network_id
+                                  : chat.sender_network_id,
                             })
                           "
                         >
@@ -2928,12 +2957,12 @@ export default {
       // socket: io(process.env.NODE_SERVER_URL_DEV, {
       //   transports: ["websocket", "polling", "flashsocket"],
       // }),
-      socket: io(process.env.VUE_APP_CHAT_SERVER_URL, {
-        transports: ["websocket", "polling", "flashsocket"],
-      }),
-      // socket: io("http://localhost:7000", {
+      // socket: io(process.env.VUE_APP_CHAT_SERVER_URL, {
       //   transports: ["websocket", "polling", "flashsocket"],
       // }),
+      socket: io("http://localhost:7000", {
+        transports: ["websocket", "polling", "flashsocket"],
+      }),
 
       nameSpace: {
         status: false,
@@ -3051,14 +3080,15 @@ export default {
     }
     this.getAll();
     this.getBizs();
+    window.addEventListener("resize", () => {
+      this.screenWidth = window.screen.width;
+    });
   },
   created() {
     this.socketListenners();
     this.getCurBiz();
     this.getUserInfo();
-    window.addEventListener("resize", () => {
-      this.screenWidth = window.screen.width;
-    });
+
     this.$store.commit(
       "networkChat/setCurrentBizId",
       Number(this.$route.params.id)
@@ -3067,6 +3097,8 @@ export default {
     this.tabIndex = this.$route.query.msgTabId;
 
     console.log("this.tabIndex:", this.tabIndex);
+    console.log("Current biz:", this.currentBiz);
+
     // console.log("call to action checked:", this.ctaSelected);
 
     if (this.tabIndex) {
@@ -3099,7 +3131,7 @@ export default {
   },
   methods: {
     getImage(data) {
-      console.log("data IN", data);
+      // console.log("data IN", data);
       let image = data.image;
       let finale = "";
       let user = "...";
@@ -3114,8 +3146,8 @@ export default {
         finale = image ? image : business;
       }
 
-      console.log("debug ", finale);
-      console.log(this.type);
+      // console.log("debug ", finale);
+      // console.log(this.type);
       return finale;
     },
     getCurBiz() {
@@ -3251,11 +3283,6 @@ export default {
     },
     socketListenners() {
       console.log("listenning...");
-      // this.socket.on("generalMessage", (data) => {
-      //   console.log("Received");
-      //   console.log(data);
-      //   this.messages.push(data);
-      // });
       this.socket.on("groupMessage", (data) => {
         console.log("group message Received");
         this.audio.play();
@@ -3274,13 +3301,11 @@ export default {
       });
       this.socket.on("privateMessage", (data) => {
         console.log("Received");
-        this.audio.play();
-
+        // this.audio.play();
         console.log(data);
         this.chats.push(data);
         console.log(this.chats);
-
-        this.formData.append("sender_network_id", data.sender_business_id);
+        this.formData.append("sender_network_id", data.sender_network_id);
         this.formData.append("message", data.message);
         this.formData.append("receiver_business_id", data.receiver_business_id);
         this.formData.append("receiver_network_id", data.receiver_business_id);
@@ -3320,7 +3345,7 @@ export default {
       let sender_business_id = this.currentBizId;
       this.room = [receiver_business_id, sender_business_id];
       console.log("ROOMS: ", this.room);
-      this.socket.emit("create-biz", this.room);
+      this.socket.emit("create", this.room);
     },
     getCreatedAt(data) {
       if (moment(data).isBefore(moment())) {
@@ -3541,8 +3566,9 @@ export default {
       this.socket.emit("privateMessage", {
         type: this.type,
         message: this.input,
-        sender_business_id: this.currentBiz.id,
+        sender_network_id: Number(this.currentBiz.id),
         room: this.room,
+        receiver_network_id: this.chatSelected.id,
         receiver_business_id: this.chatSelected.id,
         receiver_id: this.chatId,
         attachment: this.file,

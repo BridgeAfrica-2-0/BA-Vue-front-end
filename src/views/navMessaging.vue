@@ -82,7 +82,9 @@
                             'p-2 message ',
                             {
                               messageSelected:
-                                chat.id ==
+                                (chat.sender_id == currentUser.user.id
+                                  ? chat.receiver_id
+                                  : chat.sender_id) ==
                                 (chatSelected.clickedId != null
                                   ? chatSelected.clickedId
                                   : false)
@@ -94,7 +96,10 @@
                             selectedChat({
                               type: 'user',
                               chat: chat,
-                              id: chat.id,
+                              id:
+                                chat.sender_id == currentUser.user.id
+                                  ? chat.receiver_id
+                                  : chat.sender_id,
                             })
                           "
                         >
@@ -171,7 +176,9 @@
                             'p-2 message ',
                             {
                               messageSelected:
-                                chat.id ==
+                                (chat.receiver_business_id
+                                  ? chat.receiver_business_id
+                                  : chat.sender_business_id) ==
                                 (chatSelected.clickedId != null
                                   ? chatSelected.clickedId
                                   : false)
@@ -183,7 +190,9 @@
                             selectedChat({
                               type: 'business',
                               chat: chat,
-                              id: chat.id,
+                              id: chat.receiver_business_id
+                                ? chat.receiver_business_id
+                                : chat.sender_business_id,
                             })
                           "
                         >
@@ -259,7 +268,9 @@
                             'p-2 message ',
                             {
                               messageSelected:
-                                chat.id ==
+                                (chat.receiver_network_id
+                                  ? chat.receiver_network_id
+                                  : chat.sender_network_id) ==
                                 (chatSelected.clickedId != null
                                   ? chatSelected.clickedId
                                   : false)
@@ -348,20 +359,6 @@
                   <h4>{{ chatSelected.name }}</h4>
                   <!-- <p>Online</p> -->
                 </b-col>
-                <!-- <b-col class="col-4" v-show="false">
-                      <input
-                        v-model="chatSearchKeyword"
-                        @keypress.enter="
-                          histUserToUser({
-                            receiverID: chatId,
-                            keyword: chatSearchKeyword,
-                          })
-                        "
-                        type="text"
-                        class="form-control input-background mb-6 pb-6"
-                        placeholder="Search message"
-                      />
-                    </b-col> -->
                 <b-col class="col-2 text-center mr-6">
                   <b-icon
                     v-b-toggle.collapse-1
@@ -875,7 +872,9 @@
                             'p-2 message ',
                             {
                               messageSelected:
-                                chat.id ==
+                                (chat.sender_id == currentUser.user.id
+                                  ? chat.receiver_id
+                                  : chat.sender_id) ==
                                 (chatSelected.clickedId != null
                                   ? chatSelected.clickedId
                                   : false)
@@ -887,10 +886,14 @@
                             selectedChat({
                               type: 'user',
                               chat: chat,
-                              id: chat.id,
+                              id:
+                                chat.sender_id == currentUser
+                                  ? chat.receiver_id
+                                  : chat.sender_id,
                             })
                           "
                         >
+                          <!-- <small class="small">{{ chat }}</small> -->
                           <b-col class="col-8">
                             <span style="display: inline-flex">
                               <b-avatar
@@ -964,7 +967,9 @@
                             'p-2 message ',
                             {
                               messageSelected:
-                                chat.id ==
+                                (chat.receiver_business_id
+                                  ? chat.receiver_business_id
+                                  : chat.sender_business_id) ==
                                 (chatSelected.clickedId != null
                                   ? chatSelected.clickedId
                                   : false)
@@ -976,10 +981,14 @@
                             selectedChat({
                               type: 'business',
                               chat: chat,
-                              id: chat.id,
+                              id: chat.receiver_business_id
+                                ? chat.receiver_business_id
+                                : chat.sender_business_id,
                             })
                           "
                         >
+                          <!-- <small class="small">{{ chat }}</small> -->
+
                           <b-col class="col-8">
                             <span style="display: inline-flex">
                               <b-avatar
@@ -1015,6 +1024,7 @@
 
                       <!-- End Chats -->
                     </b-tab>
+
                     <b-tab
                       title="Network"
                       @click="getChatList({ type: 'network' })"
@@ -1052,7 +1062,9 @@
                             'p-2 message ',
                             {
                               messageSelected:
-                                chat.id ==
+                                (chat.receiver_network_id
+                                  ? chat.receiver_network_id
+                                  : chat.sender_network_id) ==
                                 (chatSelected.clickedId != null
                                   ? chatSelected.clickedId
                                   : false)
@@ -1064,10 +1076,13 @@
                             selectedChat({
                               type: 'network',
                               chat: chat,
-                              id: chat.id,
+                              id: chat.receiver_network_id
+                                ? chat.receiver_network_id
+                                : chat.sender_network_id,
                             })
                           "
                         >
+                          <!-- <small class="small">{{ chat }}</small> -->
                           <b-col class="col-8">
                             <span style="display: inline-flex">
                               <b-avatar
@@ -1613,18 +1628,15 @@ export default {
       chatSearchKeyword: "",
       chatId: "",
       type: "",
-      socket: io(process.env.VUE_APP_CHAT_SERVER_URL, {
-        transports: ["websocket", "polling", "flashsocket"],
-      }),
+      // socket: io(process.env.VUE_APP_CHAT_SERVER_URL, {
+      //   transports: ["websocket", "polling", "flashsocket"],
+      // }),
       // socket: io("https://ba-chat-server.herokuapp.com", {
       //   transports: ["websocket", "polling", "flashsocket"],
       // }),
-      // socket: io("localhost:7000", {
-      //   transports: ["websocket", "polling", "flashsocket"],
-      // }),
-      // socket: io("http://192.168.43.51:7000", {
-      //   transports: ["websocket", "polling", "flashsocket"],
-      // }),
+      socket: io("localhost:7000", {
+        transports: ["websocket", "polling", "flashsocket"],
+      }),
       chatSelected: [],
       showsearch: true,
       selecteduser: false,
@@ -1702,6 +1714,7 @@ export default {
   },
   mounted() {
     this.mobile = this.screenWidth < 930;
+    // log("currentUser",this.currentUser)
     console.log("mobile:", this.mobile);
     this.getList();
     if (this.chatList.length < 0) {
@@ -1811,7 +1824,9 @@ export default {
         this.formData.append("group_id", data.group_id);
         this.formData.append("type", data.type);
 
-        this.saveMessage(this.formData);
+        if (this.currentUser.user.id == data.sender_id) {
+          this.saveMessage(this.formData, data.type);
+        }
       });
       this.socket.on("privateMessage", (data) => {
         console.log("Received");
@@ -1825,8 +1840,12 @@ export default {
         this.formData.append("receiver_business_id", data.receiver_id);
         this.formData.append("receiver_network_id", data.receiver_id);
         this.formData.append("type", data.type);
+        console.log(this.currentUser);
 
-        this.saveMessage(this.formData);
+        console.log(this.currentUser.user.id + "==" + data.sender_id);
+        this.currentUser.user.id == data.sender_id
+          ? this.saveMessage(this.formData, data.type)
+          : "Receiver";
       });
       this.socket.on("generalMessage", (data) => {
         console.log("Received");
@@ -1964,8 +1983,8 @@ export default {
         })
         .catch(() => console.log("error"));
     },
-    saveMessage(data) {
-      console.log("[DEBUG SAVE]", { data: data, type: this.type });
+    saveMessage(data, type) {
+      console.log("[DEBUG SAVE]", { data: data, type: type });
       this.$store.dispatch("userChat/SAVE_USERS_CHAT", {
         data: data,
         type: this.type,
@@ -2056,9 +2075,9 @@ export default {
         message: this.input,
         sender_id: this.currentUser.user.id,
         room: this.room,
-        receiver_business_id: this.chatSelected.id,
-        receiver_network_id: this.chatSelected.id,
-        receiver_id: this.chatSelected.id,
+        receiver_business_id: this.chatSelected.clickedId,
+        receiver_network_id: this.chatSelected.clickedId,
+        receiver_id: this.chatSelected.clickedId,
         attachment: this.file,
         type: this.type,
       });

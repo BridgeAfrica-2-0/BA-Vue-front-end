@@ -2,36 +2,88 @@
   <div ref="about">
     <b-icon icon="person-fill" class="icon-size" variant="primary"></b-icon>
     <b> {{ $t("businessowner.About") }} </b>
-    
-    <hr /> 
-     
+
+
+    <hr />
+
+
     <b-card>
       <div class="mb-3">
-        <mapbox
-          v-if="business_about.lat && business_about.lng"
-          :business="business_about"
-        />
+        <mapbox :coordinates="[business_about.lng, business_about.lat]" />
       </div>
-      
+
       <b-card>
         <b-row v-if="loading">
-
-  
-         
           <b-col>
-            
             <div
-                v-if="showPen != 'BusinessFollower'"
-                class="edit"
-                v-b-modal.biographyModal
-                @click="
-                  business_about_input = JSON.parse(
-                    JSON.stringify(business_about)
-                  )
-                "
-              >
-                <b-icon icon="pencil-fill" variant="primary"></b-icon>
-              </div>
+              class="edit"
+              v-b-modal.biographyModal
+              @click="
+                business_about_input = JSON.parse(
+                  JSON.stringify(business_about)
+                )
+              "
+            >
+              <b-icon
+                icon="pencil-fill"
+                variant="primary"
+                v-if="showPen != 'BusinessEditor'"
+              ></b-icon>
+            </div>
+            <h4 class="mb-4 text-center username">
+              {{ business_about.name }}
+            </h4>
+            <p class="text-justify text">
+              {{ business_about.location_description }}
+            </p>
+          </b-col>
+          <b-col>
+            <!-- <div class="edit">
+                <b-icon
+                  icon="pencil-fill"
+                  variant="primary"
+                  
+                ></b-icon>
+              </div> -->
+            <div
+              class="edit"
+              v-b-modal.biographyModal
+              @click="
+                business_about_input = JSON.parse(
+                  JSON.stringify(business_about)
+                )
+              "
+            >
+              <b-icon icon="pencil-fill" variant="primary"></b-icon>
+            </div>
+            <h4 class="mb-4 text-center username">
+              {{ business_about.name }}
+            </h4>
+            <p class="text-justify text">
+              {{ business_about.location_description }}
+            </p>
+          </b-col>
+          <b-col>
+            <!-- <div class="edit">
+                <b-icon
+                  icon="pencil-fill"
+                  variant="primary"
+                  
+                ></b-icon>
+              </div> -->
+            <div
+              v-if="showPen != 'BusinessFollower'"
+              class="edit"
+              v-b-modal.biographyModal
+              @click="
+                business_about_input = JSON.parse(
+                  JSON.stringify(business_about)
+                )
+              "
+            >
+              <b-icon icon="pencil-fill" variant="primary"></b-icon>
+            </div>
+
             <h4 class="mb-4 text-center username">
               <b-icon icon="info-circle-fill" class="primary mr-2"></b-icon>
               {{ business_about.name }}
@@ -43,8 +95,8 @@
           <b-col>
             <b-card-text>
               <div class="edit" v-b-modal.addressBusinessModal>
-                <b-icon 
-                v-if="showPen != 'BusinessFollower'"
+                <b-icon
+                  v-if="showPen != 'BusinessFollower'"
                   icon="pencil-fill"
                   variant="primary"
                   @click="load"
@@ -61,14 +113,15 @@
                   :key="category.id"
                   >{{ category.name }},
                 </span>
-              
+                <!-- <span>{{ business_about.name }}</span> -->
               </p>
               <p>
                 <b-icon icon="search" class="primary icon-size"></b-icon>
-                {{business_about.name}}
+                {{ business_about.name }}
               </p>
               <p>
                 <b-icon icon="geo-alt-fill" class="primary icon-size"></b-icon>
+
 
                <span
               >
@@ -80,14 +133,15 @@
               </p>
               <p>
                 <b-icon icon="link" class="primary icon-size"></b-icon>
-                <span v-if="business_about.website ">
+                <span v-if="business_about.website">
                   {{ business_about.website }}
                 </span>
               </p>
               <p>
                 <b-icon icon="people-fill" class="primary icon-size"></b-icon>
                 {{ business_about.community }}
-                {{ business_about.community > 1000 ? "K" : "" }} Community
+                {{ business_about.community > 1000 ? "K" : "" }}
+                {{ $t("general.Community") }}
               </p>
               <p>
                 <b-icon
@@ -102,7 +156,7 @@
               </p>
               <p>
                 <b-icon icon="clock" class="primary icon-size"></b-icon>
-                <b-link> Open now  </b-link>
+                <b-link> {{ $t("general.Open_now") }} </b-link>
                 <br />
                 <b-dropdown size="sm" variant="transperent">
                   <template #button-content>
@@ -120,10 +174,9 @@
               </p>
             </b-card-text>
           </b-col>
-          
         </b-row>
       </b-card>
-  
+
       <!-- original card -->
       <!-- <b-row v-if="loading">
         <b-col>
@@ -230,7 +283,8 @@
     >
       <b-form @submit.prevent="validate('modifyBiography')">
         <div class="form-group">
-          <label for="title">{{ $t('businessowner.Bussiness_Name') }}:</label><br />
+          <label for="title">{{ $t("businessowner.Bussiness_Name") }}:</label
+          ><br />
           <input
             type="text"
             name="title"
@@ -243,7 +297,8 @@
         </div>
 
         <div class="form-group">
-          <label for="description">{{ $t('businessowner.Description') }}:</label><br />
+          <label for="description">{{ $t("businessowner.Description") }}:</label
+          ><br />
           <textarea
             type="text"
             id="description"
@@ -256,7 +311,7 @@
         </div>
 
         <b-button class="mt-3 btn-block" variant="primary" type="submit">
-          {{ $t('businessowner.Modify') }}
+          {{ $t("businessowner.Modify") }}
         </b-button>
       </b-form>
     </b-modal>
@@ -268,7 +323,6 @@
       size="lg"
       @close="cancel"
       @keyup="validate('editAddress')"
-      
     >
       <b-form @submit.prevent="validate('editAddress')">
         <div class="form-group">
@@ -286,7 +340,7 @@
         </div>
 
         <div class="form-group">
-          <label for="alias">{{ $t('businessowner.Category') }}:</label><br />
+          <label for="alias">{{ $t("businessowner.Category") }}:</label><br />
           <multiselect
             v-model="multiselecvalue"
             @input="subcategories"
@@ -298,13 +352,13 @@
             :multiple="true"
             :taggable="true"
             @tag="addTag"
-          ></multiselect> 
+          ></multiselect>
         </div>
 
         <div class="form-group">
-
-          <label for="alias">{{ $t('businessowner.Sub_Category') }}:</label><br />
-           <multiselect
+          <label for="alias">{{ $t("businessowner.Sub_Category") }}:</label
+          ><br />
+          <multiselect
             v-model="filterselectvalue"
             :tag-placeholder="$t('businessowner.Add_this_as_new_tag')"
             :placeholder="$t('businessowner.Search_or_add_a_tag')"
@@ -314,11 +368,11 @@
             :multiple="true"
             :taggable="true"
             @tag="addFilter"
-          ></multiselect> 
+          ></multiselect>
         </div>
 
-        <label class="typo__label">{{ $t('businessowner.Filters') }}</label>
-         <div>
+        <label class="typo__label">{{ $t("businessowner.Filters") }}</label>
+        <div>
           <b-card no-body>
             <b-tabs pills card vertical>
               <b-tab
@@ -327,7 +381,10 @@
                 :key="filters.id"
                 active
                 ><b-card-text>
-                  <b-form-group :label="$t('businessowner.Filters')" class="colorblack">
+                  <b-form-group
+                    :label="$t('businessowner.Filters')"
+                    class="colorblack"
+                  >
                     <b-form-checkbox-group
                       id=""
                       class="colorblack"
@@ -347,7 +404,7 @@
                 </b-card-text>
               </b-tab>
             </b-tabs>
-          </b-card> 
+          </b-card>
         </div>
 
         <div class="form-group">
@@ -433,7 +490,7 @@
           <b-form-input
             id="input-1"
             class="mt-1"
-            v-model="business_about_input.phone1"
+            v-model="business_about_input.phone"
             type="tel"
             required
           ></b-form-input>
@@ -448,7 +505,7 @@
           <b-form-input
             id="input-1"
             class="mt-1"
-            v-model="business_about_input.phone2"
+            v-model="business_about_input.secondary_phone"
             type="tel"
             required
           ></b-form-input>
@@ -554,6 +611,9 @@
 import { validationMixin } from "vuelidate";
 import { required, email, minLength } from "vuelidate/lib/validators";
 import mapbox from "@/components/mapbox";
+// import { MglMap, MglMarker } from "vue-mapbox";
+// import VuePhoneNumberInput from "vue-phone-number-input";
+// import "vue-phone-number-input/dist/vue-phone-number-input.css";
 import Multiselect from "vue-multiselect";
 export default {
   components: {
@@ -581,56 +641,51 @@ export default {
       municipality: [],
       locality: [],
 
-      // categories: [
-      //   { item: "Professional_and_home_service", name: "Professionals" },
-      //   { item: "Agriculture ", name: "Agriculture " },
-      //   { item: "Restaurant ", name: " Restaurant " },
-      //   { item: "Electronics ", name: "Electronics " },
-      //   { item: "Handicrafts", name: "Handicrafts" },
-      //   { item: "clothing", name: "clothing" },
-      //   { item: "Mechanics", name: "Mechanics" },
-      //   { item: "Health_unit ", name: "Health unit " },
-      //   { item: "Bars", name: "Bars" },
-      //   { item: "Hair_and_beauty ", name: "Hair and beauty " },
-      //   { item: "Real_estate ", name: "Real_estate " },
-      //   { item: "Travelling ", name: "Travelling " },
-      //   { item: "Hotels", name: "Hotels" },
-      //   { item: "station", name: " station  " },
-      //   { item: "Mayor_concils", name: "Mayor_concils" },
-      //   { item: "Taxis service", name: "Taxis service" },
-      // ],
       dayOfWorks: [
-        { day: "Monday", opening_time: null, closing_time: null, check: false },
         {
-          day: "Tuesday",
+          day: this.$t("home.Monday"),
           opening_time: null,
           closing_time: null,
           check: false,
         },
         {
-          day: "Wednesday",
+          day: this.$t("home.Tuesday"),
           opening_time: null,
           closing_time: null,
           check: false,
         },
         {
-          day: "Thursday",
+          day: this.$t("home.Wednesday"),
           opening_time: null,
           closing_time: null,
           check: false,
         },
-        { day: "Friday", opening_time: null, closing_time: null, check: false },
         {
-          day: "Saturday",
+          day: this.$t("home.Thursday"),
           opening_time: null,
           closing_time: null,
           check: false,
         },
-        { day: "Sunday", opening_time: null, closing_time: null, check: false },
+        {
+          day: this.$t("home.Friday"),
+          opening_time: null,
+          closing_time: null,
+          check: false,
+        },
+        {
+          day: this.$t("home.Saturday"),
+          opening_time: null,
+          closing_time: null,
+          check: false,
+        },
+        {
+          day: this.$t("home.Sunday"),
+          opening_time: null,
+          closing_time: null,
+          check: false,
+        },
       ],
-      business_about: {
-     
-      },
+      business_about: {},
       business_about_input: {
         name: "TONTON LA FORCE",
         logo_path: "http://localhost:8000/storage",
@@ -695,17 +750,18 @@ export default {
       canCancel: true,
       onCancel: this.onCancel,
       color: "#e75c18",
-    }); console.log("èèèè--- context", this.business_about_input)
+    });
+    console.log("èèèè--- context", this.business_about_input);
     this.$store
       .dispatch("businessOwner/loadUserBusinessAbout", {
         // business_abobusiness_id: this.business_about_input,
         business_id: this.$route.params.id,
       })
-      .then((response) => { 
-          this.business_about = JSON.parse(
+      .then((response) => {
+        this.business_about = JSON.parse(
           JSON.stringify(this.$store.getters["businessOwner/getBusinessAbout"])
         );
-        
+
         this.dayOfWorks = this.initialize(this.dayOfWorks);
       })
       .catch((error) => {
@@ -715,7 +771,7 @@ export default {
         this.business_about = JSON.parse(
           JSON.stringify(this.$store.getters["businessOwner/getBusinessAbout"])
         );
-        console.log("-------",this.business_about);
+        console.log("-------", this.business_about);
         this.loading = true;
         loader.hide();
       });
@@ -727,13 +783,13 @@ export default {
     this.editBusiness();
   },
   computed: {
-    showPen(){
+    showPen() {
       return this.$route.name;
     },
     hoursOpen() {
       console.log();
       return this.openNow === null
-        ? "Nothing"
+        ? this.$t("general.Nothing")
         : this.openNow.opening_time +
             " AM - " +
             this.openNow.closing_time +
@@ -767,54 +823,53 @@ export default {
     localities() {
       return this.$store.state.auth.locality;
     },
-    selectedcategories: function() {
+    selectedcategories: function () {
       let selectedUsers = [];
       this.multiselecvalue.forEach((item) => {
-        if(item.category_id){
-
+        if (item.category_id) {
           selectedUsers.push(item.category_id);
-        }else {
-           selectedUsers.push(item.id);
+        } else {
+          selectedUsers.push(item.id);
         }
       });
       return selectedUsers;
     },
-    selectedsubcategories: function() {
+    selectedsubcategories: function () {
       let sub_cat = [];
       this.filterselectvalue.forEach((item) => {
         sub_cat.push(item.subcategory_id);
       });
       return sub_cat;
     },
-    selectedcountry: function() {
+    selectedcountry: function () {
       let sub_cat = [];
       this.country.forEach((item) => {
         sub_cat.push(item.country_id);
       });
       return sub_cat;
     },
-    selectedregion: function() {
+    selectedregion: function () {
       let sub_cat = [];
       this.region.forEach((item) => {
         sub_cat.push(item.region_id);
       });
       return sub_cat;
     },
-    selecteddivision: function() {
+    selecteddivision: function () {
       let sub_cat = [];
       this.division.forEach((item) => {
         sub_cat.push(item.division_id);
       });
       return sub_cat;
     },
-    selectedmunicipality: function() {
+    selectedmunicipality: function () {
       let sub_cat = [];
       this.municipality.forEach((item) => {
         sub_cat.push(item.council_id);
       });
       return sub_cat;
     },
-    selectedlocality: function() {
+    selectedlocality: function () {
       let sub_cat = [];
       this.locality.forEach((item) => {
         sub_cat.push(item.neighborhood_id);
@@ -824,43 +879,46 @@ export default {
   },
 
   methods: {
+    stringArray(words) {
+      let keyword = "";
+      words.map((item) => {
+        if (item.subcategoryId) {
+          keyword += item.subcategoryId + ",";
+        } else {
+          keyword += item.subcategory_id + ",";
+        }
+      });
 
-
-
-      stringArray(words){
-        let keyword = '';
-        words.map(item =>{
-
-          if(item.subcategoryId){ 
-            keyword+= item.subcategoryId+','
-          }else {
-
-            keyword+= item.subcategory_id+','
-          }
-        })
-
-        return keyword.substring(0, keyword.length-1);
+      return keyword.substring(0, keyword.length - 1);
     },
 
-     stringArray1(words){ 
-        let keyword = '';
-        words.map(item =>{
-          if(item.category_id){
-            keyword+= item.category_id+','
-          }else {
-
-            keyword+= item.id+','
-          }
-        })
-        console.log('id ici ---',words,"---", keyword)
-        return keyword.substring(0, keyword.length-1);
+    stringArray1(words) {
+      let keyword = "";
+      words.map((item) => {
+        if (item.category_id) {
+          keyword += item.category_id + ",";
+        } else {
+          keyword += item.id + ",";
+        }
+      });
+      console.log("id ici ---", words, "---", keyword);
+      return keyword.substring(0, keyword.length - 1);
     },
 
-     ArrayString(words){
-       let keyword = '';
-        words.map(item =>{
-          keyword+= item+','
+    ArrayString(words) {
+      let keyword = "";
+      words.map((item) => {
+        keyword += item + ",";
+      });
+    },
+
+    loadBusinessAbout() {
+      this.$store
+        .dispatch("businessOwner/loadUserBusinessAbout", {
+          // business_abobusiness_id: this.business_about_input,
+          business_id: this.$route.params.id,
         })
+
         return keyword.substring(0, keyword.length-1);
      },
 
@@ -877,6 +935,7 @@ export default {
       }
 
       )
+
 
     },
     validator(tag) {
@@ -976,6 +1035,7 @@ export default {
           console.log(this.business_about_input);
 
 
+
            var dat = {
              business_id: this.$route.params.id,
              data: {
@@ -1004,6 +1064,7 @@ export default {
             
           } 
           console.log(this.select_filterss, 'data editer --',dat)
+
 
           this.$store
             .dispatch(

@@ -43,10 +43,11 @@
                   >Edit</b-dropdown-item
                 >
                 <b-dropdown-item
-                 @click="selectNetwork(network)"
-                 v-b-modal.deleteBusinessModal
-                 no-stacking
-                >Delete</b-dropdown-item>
+                  @click="selectNetwork(network)"
+                  v-b-modal.deleteBusinessModal
+                  no-stacking
+                  >Delete</b-dropdown-item
+                >
               </b-dropdown>
             </div>
 
@@ -131,7 +132,11 @@
 
     <b-modal
       hide-footer
-      :title="editNet ? $t('profileowner.Edit_network') : $t('profileowner.Add_Network')"
+      :title="
+        editNet
+          ? $t('profileowner.Edit_network')
+          : $t('profileowner.Add_Network')
+      "
       size="lg"
       v-model="showModal"
       ref="netmodal"
@@ -143,13 +148,7 @@
             class="row sub-sidebar-2 pending-post-view mt-4 pb-0"
           >
             <div
-              class="
-                col-md-12 col-lg-12
-                d-flex
-                align-items-stretch
-                mb-lg-0
-                styling
-              "
+              class="col-md-12 col-lg-12 d-flex align-items-stretch mb-lg-0 styling"
             >
               <a
                 class="nav-link text-dark"
@@ -302,8 +301,8 @@
             <b-col md="6">
               <div class="form-group">
                 <label for="Neighbor" class="username">
-                  {{ $t("profileowner.Neighbor") }} :
-                </label ><br />
+                  {{ $t("profileowner.Neighbor") }} : </label
+                ><br />
                 <multiselect
                   v-model="locality"
                   :placeholder="$t('profileowner.Search')"
@@ -485,7 +484,11 @@
           >
           <b-spinner v-if="loader" variant="primary"></b-spinner>
           <b-button @click="action" class="mt-2 button-btn" variant="primary">
-            {{editNet ? $t("profileowner.Edit_Network") : $t("profileowner.Add_Network")}}
+            {{
+              editNet
+                ? $t("profileowner.Edit_Network")
+                : $t("profileowner.Add_Network")
+            }}
           </b-button>
         </b-form>
       </b-container>
@@ -523,14 +526,41 @@
       </p>
     </b-modal>
 
-    <b-modal id="deleteBusinessModal" title="Do you really want to delete network!!" centered hide-footer no-stacking>
+    <b-modal
+      id="deleteBusinessModal"
+      title="Do you really want to delete network!!"
+      centered
+      hide-footer
+      no-stacking
+    >
       <b-row>
-        <b-col><b-button class="mt-3" variant="success" block @click="$bvModal.hide('deleteBusinessModal')">Cancel</b-button></b-col>
-        <b-col><b-button class="mt-3" variant="primary" block v-b-modal.deleteBusinessModal2>Approve</b-button></b-col>
+        <b-col
+          ><b-button
+            class="mt-3"
+            variant="success"
+            block
+            @click="$bvModal.hide('deleteBusinessModal')"
+            >Cancel</b-button
+          ></b-col
+        >
+        <b-col
+          ><b-button
+            class="mt-3"
+            variant="primary"
+            block
+            v-b-modal.deleteBusinessModal2
+            >Approve</b-button
+          ></b-col
+        >
       </b-row>
     </b-modal>
 
-    <b-modal id="deleteBusinessModal2" title="Any particular reason why you want to delete network?" centered hide-footer>
+    <b-modal
+      id="deleteBusinessModal2"
+      title="Any particular reason why you want to delete network?"
+      centered
+      hide-footer
+    >
       <b-form @submit.prevent="deleteNetwork(selectedNetwork)">
         <p>
           <b-form-textarea
@@ -545,7 +575,11 @@
           ></b-form-textarea>
         </p>
         <b-row>
-          <b-col><b-button class="mt-3" variant="primary" type="submit" @click="$bvModal.hide('deleteBusinessModal2')" block>Delete</b-button></b-col>
+          <b-col
+            ><b-button class="mt-3" variant="primary" type="submit" block
+              >Delete</b-button
+            ></b-col
+          >
         </b-row>
       </b-form>
     </b-modal>
@@ -963,13 +997,11 @@ export default {
             this.flashMessage.show({
               status: "error",
 
-
-                message: this.$t('general.Unable_to_Create_Your_Network'),
-                blockClass: "custom-block-class",
-              });
-              console.log({ err: err });
-            }
-
+              message: "Unable to Create Your Network",
+              blockClass: "custom-block-class",
+            });
+            console.log({ err: err });
+          }
           loader.hide();
           setTimeout(() => {
             this.success.state = false;
@@ -980,33 +1012,24 @@ export default {
 
     // delete a network
     deleteNetwork(network) {
-      let loader = this.$loading.show({
-        container: this.fullPage ? null : this.$refs.preview,
-        canCancel: true,
-        onCancel: this.onCancel,
-        color: "#e75c18",
-      });
-
       console.log(this.textReason);
       let fd = new FormData();
-      fd.append("reason", this.textReason)
+      fd.append("reason", this.textReason);
       axios
         .post(`network/${network.id}`, fd)
         .then((res) => {
           console.log(res);
           this.getNetworks();
-          loader.hide();
           this.flashMessage.show({
             status: "success",
-            message: "Operation was successful !!"
-          });  
+            message: "Operation was successful !!",
+          });
         })
         .catch((err) => {
           this.loader = false;
-          loader.hide();
           this.flashMessage.show({
             status: "error",
-            message: "Something wen't wrong !!"
+            message: "Something wen't wrong !!",
           });
         });
     },
@@ -1021,8 +1044,14 @@ export default {
       // fd.append("neighbourhood", this.createdNetwork.neighbourhood);
       fd.append("city", this.createdNetwork.city);
       fd.append("country_id", 2);
-      fd.append("primary_phone", this.createdNetwork.primary_phone.split(" ").join(""));
-      fd.append("secondary_phone", this.createdNetwork.secondary_phone.split(" ").join(""));
+      fd.append(
+        "primary_phone",
+        this.createdNetwork.primary_phone.split(" ").join("")
+      );
+      fd.append(
+        "secondary_phone",
+        this.createdNetwork.secondary_phone.split(" ").join("")
+      );
       fd.append("email", "dev@bav.com");
       fd.append("network_categories", this.selectedcategories);
 

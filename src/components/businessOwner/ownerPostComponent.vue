@@ -6,14 +6,17 @@
           <b-avatar
             class="logo-sizee avat"
             :square="'user' == item.poster_type ? false : true"
-            variant="primary"
+            variant="light"
             :src="item.user_picture"
           ></b-avatar>
         </span>
         <div class="pl-2 pl-md-3 pt-md-2">
-          <h5 class="m-0 usernamee">
-            {{ item.user_name }}
-          </h5>
+          <router-link :to="onRedirect">
+            <h5 class="m-0 usernamee">
+              {{ item.user_name }}
+            </h5>
+          </router-link>
+          
           <p class="duration">{{ item.created_at | now }}</p>
         </div>
 
@@ -64,19 +67,23 @@
             <b-avatar
               class="logo-sizee avat"
               :square="'user' == item.source.poster_type ? false : true"
-              variant="primary"
+              variant="light"
               :src="item.source.logo_path"
             >
             </b-avatar>
           </span>
           <div class="pl-2 pl-md-3 pt-md-2">
-            <h5 class="m-0 usernamee">
-              {{
-                item.source.user_name
-                  ? item.source.user_name
-                  : item.source.business_name
-              }}
-            </h5>
+
+            <router-link :to="onRedirect">
+              <h5 class="m-0 usernamee">
+                {{
+                  item.source.user_name
+                    ? item.source.user_name
+                    : item.source.business_name
+                }}
+              </h5>
+            </router-link>
+            
             <p class="duration">{{ item.source.created_at | now }}</p>
           </div>
         </div>
@@ -168,7 +175,7 @@
         <b-avatar
           b-avatar
           class="logo-sizee-18 avat img-fluid avat-comment avatar-border"
-          variant="primary"
+          variant="light"
           :square="'user' == profile.user_type ? false : true"
           :src="profile.profile_picture"
         ></b-avatar>
@@ -277,10 +284,34 @@ export default {
     createCommentRequestIsActive: false,
     loadComment: false,
     commentHasLoad: false,
+
+    strategy:null
   }),
 
   created() {
     this.item = this.post;
+
+    this.posterID = this.post.poster_id ? this.post.poster_id : this.post.user_id
+
+    this.strategy = {
+      user: () => {
+        return ("user" == this.profile.user_type && "user" == this.post.poster_type ) && ( this.profile.id == this.posterID) 
+        ? { name: "profile_owner"}
+        : { name: "Follower", params: {id: this.posterID}}
+      },
+
+      business: () => {
+        return ("business" == this.profile.user_type && "business" == this.post.poster_type ) && ( this.profile.id == this.posterID) 
+        ? { name: "BusinessOwner", params: {id: this.posterID}}
+        : { name: "BusinessFollower", params: {id: this.posterID}}
+      },
+
+      network: () => {
+        return ("network" == this.profile.user_type && "business" == this.post.poster_type ) && ( this.profile.id == this.posterID) 
+        ? { name: "networks", params: {id: this.posterID}}
+        : { name: "networks", params: {id: this.posterID}}
+      },
+    }
 
     if (!this.isDisplayInSearch) this.comments = this.post.comments;
   },
@@ -291,6 +322,11 @@ export default {
   },
 
   computed: {
+
+    onRedirect(){
+      return this.strategy[this.post.poster_type]()
+    },
+
     show(){
       return this.$route.name ;
     },

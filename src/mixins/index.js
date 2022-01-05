@@ -584,7 +584,8 @@ export const defaultCoverImage = {
     limit: 1117,
     currentAuthType: null,
     strategy: null,
-    isMobile: false
+    isMobile: false,
+    placeholderImage: null
   }),
 
   created() {
@@ -592,9 +593,10 @@ export const defaultCoverImage = {
       mobile:{
         
         business: () =>  {
+          this.placeholderImage = '/covers/business-msg-en.png'
           return "fr" == this.$i18n.locale
-            ? ['/covers/business mobile FR.png']
-            : ['/covers/business mobile.png']
+            ? ['/covers/business-one.png','/covers/business-two.jpg','/covers/business-tree.jpg']
+            : ['/covers/business-one.png','/covers/business-two.jpg','/covers/business-tree.jpg']
         },
         
         profile: () => { 
@@ -608,9 +610,10 @@ export const defaultCoverImage = {
       desktop:{
         
         business: () =>  {
+          this.placeholderImage = '/covers/business-msg-en.png'
           return "fr" == this.$i18n.locale
-            ? ['/covers/business FR.png']
-            : ['/covers/business.png']
+            ? ['/covers/business-one.png','/covers/business-two.jpg','/covers/business-tree.jpg']
+            : ['/covers/business-one.png','/covers/business-two.jpg','/covers/business-tree.jpg']
         },
         
         profile: () => {
@@ -635,6 +638,11 @@ export const defaultCoverImage = {
   },
 
   computed:{
+    
+    getPlaceHolderImage(){
+      return this.placeholderImage;
+    },
+
     getCustomCover(){
       try{
         return this.strategy[this.isMobile ? "mobile" : "desktop"][this.currentAuthType]()

@@ -33,6 +33,20 @@ class Repository {
     }
   }
 
+  async blocking(data, uuid) {
+    try {
+      const response = await axios.post(`business/community-banned/${uuid}`, data)
+      return {
+        success: (response.data.data) ? true : false
+      }
+    } catch (error) {
+      return {
+        success: false,
+        data: error
+      }
+    }
+  }
+
 
   async jointNetwork(data) {
     try {

@@ -32,15 +32,6 @@ export default {
       })
     },
 
-    block( {commit}, blockInfo ){
-      return axios
-      .post(`business/${blockInfo.path}`, blockInfo.formData)
-      .then(({ data }) => {
-        console.log(data);
-        return data
-      })
-    },
-
 
   },
 };

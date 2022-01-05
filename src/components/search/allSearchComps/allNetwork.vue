@@ -73,6 +73,7 @@
                 cols="4"
                 class="mt-2 text-center"
               >
+
                 <b-button
                   block
                   size="sm"
@@ -112,22 +113,25 @@
                 sm="12"
                 cols="4"
                 class="mt-2 text-center"
+                @click="handleJoin(item)"
               >
-                <b-button
+              <b-button
                   block
                   size="sm"
                   class="b-background shadow"
+                  :class="item.is_member !== 0 && 'u-btn'"
                   variant="primary"
+                  :id="'joinbtn' + item.id"
+                  
                 >
                   <i
                     class="fas fa-lg btn-icon"
                     :class="
-                      item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'
+                      item.is_member !== 0 ? 'fa-user-minus' : 'fa-user-plus'
                     "
                   ></i>
-
-                  <span class="btn-text"> {{ $t("search.Join") }} </span>
-                </b-button>
+                  <span class="btn-com"> {{ $t("general.Join") }}</span>
+              </b-button>
               </b-col>
             </b-row>
           </div>
@@ -186,6 +190,29 @@ export default {
   },
 
   methods: {
+
+    async handleJoin(user) {
+      document.getElementById("joinbtn" + user.id).disabled = true;
+      const uri = user.is_member === 0 ? `/add-member` : `/remove-member`;
+      const nextFollowState = user.is_member === 0 ? 1 : 0;
+      const data = {
+        id: user.id,
+        type: "network",
+      };
+
+      await axios
+        .post(uri, data)
+        .then((response) => {
+          console.log(response);
+          user.is_member = nextFollowState;
+          document.getElementById("joinbtn" + user.id).disabled = false;
+        })
+        .catch((err) => {
+          console.log(err);
+          document.getElementById("joinbtn" + user.id).disabled = false;
+        });
+    },
+
     changePage(value) {
       this.$store.commit("networkSearch/setNetworks", { data: [] });
       this.$store.commit("networkSearch/setLoader", true);
@@ -228,6 +255,7 @@ export default {
   },
 };
 </script>
+
 <style scoped>
 @media only screen and (min-width: 768px) {
   .btn-text {

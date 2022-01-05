@@ -147,7 +147,7 @@
                   class="nav-link text-dark hov"
                   href=""
                 >
-                  Home
+                  {{ $t("general.Home") }}
                 </router-link>
               </div>
 

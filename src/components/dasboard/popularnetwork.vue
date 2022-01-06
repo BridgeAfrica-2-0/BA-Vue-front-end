@@ -13,10 +13,7 @@
         </b-col>
         <b-col md="5" cols="7" lg="7" xl="5" sm="5">
           <p class="textt">
-
-            <router-link :to="{name: 'Membar Network Follower', params: {id: item.id}}">
-                  <strong class="net-title">{{ item.name }}</strong>
-                </router-link><br />
+            <strong class="net-title"> {{ item.name }} </strong> <br />
 
             {{ item.followers }} {{ $t("dashboard.Community") }} <br />
 

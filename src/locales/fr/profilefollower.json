@@ -215,7 +215,7 @@
     "Type_the_name_of_person_or_Business": "Saisisser le nom de la personne ou de l’entreprise...",
     "Blocking": "Bloquer",
     "Keyword_Alert": "Alerte par mot-clé",
-    "Pending_Post": "Poste en attente",
+    "Pending_Post": "Publication en attente",
     "Member_Request": "Demande du membre",
     "Network_Info": "Informations réseau",
     "Network_Roles": "Rôles réseau",
@@ -242,7 +242,7 @@
     "infobusinesscom": "info@entreprise.com",
     "Open_now": "Ouvert Maintenant",
     "10_00AM_7_00PM": "10:00 - 19:00",
-    "Edit_Address": "Modifier l'address",
+    "Edit_Address": "Modifier l'entreprise",
     "Busness_Name": "Nom de  l'entreprise",
     "Select_Category": "Choisissez une categorie",
     "Keywords": "Mots-clés",
@@ -290,5 +290,5 @@
     "Current_City_Name": "Nom de la Ville Actuelle",
     "Networks": "Réseaux",
     "Home_Town":"Ville d'origine",
-    "Intro":"Introduction"
+    "Intro":"Intro"
 }

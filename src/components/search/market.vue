@@ -1,5 +1,5 @@
 <template>
-  <div  v-if="islogin" >
+  <div>
     <b-spinner
       v-if="prodLoader"
       variant="primary"
@@ -468,14 +468,9 @@
       </b-row>
     </b-modal>
   </div>
-   <div v-else> 
-         <login />
-    
-     </div>
 </template>
 
 <script>
-import login from "@/components/search/login";
 export default {
   data() {
     return {
@@ -483,7 +478,6 @@ export default {
       total: 0,
       per_page: 10,
       list: [],
-      islogin:true,
       currentPage: 1,
       nextLoad: false,
     };
@@ -500,18 +494,8 @@ export default {
       return this.$store.state.cart.status;
     },
   },
-
-  components: {
- 
-    login
-  },
-
   created() {
-     this.islogin=this.$store.getters["auth/isLogged"];
-     
-     console.log(this.islogin);
     this.getProducts();
-
   },
 
   methods: {

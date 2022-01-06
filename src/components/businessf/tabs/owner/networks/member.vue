@@ -75,62 +75,6 @@
     </b-row>
 
     <b-row class="mt-4">
-      <b-col cols="12">
-        <h6 class="font-weight-bolder">
-          {{ $t('network.Network_Editors') }} ({{nFormatter(editors.length)}})
-        </h6>
-        <hr width="100%" />
-        <b-skeleton-wrapper :loading="loading">
-          <template #loading>
-            <b-card>
-              <b-skeleton width="85%"></b-skeleton>
-              <b-skeleton width="55%"></b-skeleton>
-              <b-skeleton width="70%"></b-skeleton>
-            </b-card>
-          </template>
-          <div class="scroll" v-if="editors.length != 0">
-            <div v-for="editor in editors" :key="editor.id">
-              <p class="">
-                <span class="">
-                  <b-avatar
-                    class="d-inline-block"
-                    variant="primary"
-                    :src="editor.profile_picture"
-                    :text="editor.fullname.charAt(0)"
-                    size="3.5rem"
-                  ></b-avatar>
-                  <h5 class="m-0 bold username d-inline-block ml-2">
-                    {{editor.fullname}}
-                  </h5>
-                </span>
-                <span class="float-right mt-1">
-                  <b-dropdown
-                    size="lg"
-                    variant="link"
-                    toggle-class="text-decoration-none"
-                    no-caret
-                  >
-                    <template #button-content>
-                      <b-icon-three-dots-vertical></b-icon-three-dots-vertical
-                      ><span class="sr-only">{{ $t('network.Settings') }}</span>
-                    </template>
-                    <b-dropdown-item href="#" @click="removeAsEditor(editor.user_id)">
-                      <b-icon-trash-fill></b-icon-trash-fill> {{ $t('network.Remove_as_Editor') }}
-                    </b-dropdown-item>
-                    <b-dropdown-item href="#" @click="removeFromNetworks(editor.user_id)">
-                      <b-icon-trash-fill></b-icon-trash-fill> {{ $t('network.Remove_From_Networks') }}
-                    </b-dropdown-item>
-                  </b-dropdown>
-                </span>
-              </p>
-            </div>
-          </div>
-          <div v-else>{{ $t('network.No_Result_On_Editor') }}</div>
-        </b-skeleton-wrapper>
-      </b-col>
-    </b-row>
-
-    <b-row class="mt-4">
       <b-col cols="12" >
         <h6 class="font-weight-bolder">
           {{ $t('network.Bussiness') }} ({{nFormatter(business.length)}})
@@ -236,7 +180,7 @@
         </b-skeleton-wrapper>
       </b-col>
       <b-col col="12">
-        <infinite-loading @infinite="infiniteHandler" ref="infiniteLoading">
+        <infinite-loading @infinite="infiniteHandler">
           <div class="text-red" slot="no-more">{{ $t('network.No_More_Request') }}</div>
           <div class="text-red" slot="no-results">{{ $t('network.No_More_Request') }}</div>
         </infinite-loading>
@@ -273,15 +217,11 @@ export default {
     },
     business() {
       return this.$store.state.networkProfileMembers.business;
-    },
-    editors() {
-      return this.$store.state.networkProfileMembers.editors;
     }
   },
   mounted(){
     this.url = this.$route.params.id
     this.getAdmins()
-    this.getEditors()
     this.getBusiness()
   },
   methods:{
@@ -332,18 +272,11 @@ export default {
         .then(({ data }) => {
         console.log(data);
         console.log(this.page);
-        let object = Object.values(data.data);
-        console.log(object);
-        if (object.length) {
+        if (data.data.length) {
           this.page += 1;
           console.log(this.page);
-          // console.log(...data.data);
-          console.log("Pushing data");
-          object.map((item) => {
-            this.members.push(item);
-          })
-          console.log(this.members);
-          // this.members.push(...data.data);
+          console.log(...data.data);
+          this.members.push(...data.data);
           $state.loaded();
         } else {
           $state.complete();
@@ -373,25 +306,6 @@ export default {
           this.loading = false;
         });
     },
-
-    getEditors() {
-      this.loading = true;
-      const data = this.getRequestDatas(this.searchTitle);
-      console.log('keyword: '+data);
-      this.$store
-        .dispatch("networkProfileMembers/geteditors", {
-          'path':this.url+"/members/editor",
-          'keyword':data
-          })
-        .then(() => {
-          console.log('Editors Available');
-          this.loading = false;
-        })
-        .catch(err => {
-          console.log({ err: err });
-          this.loading = false;
-        });
-    },
  
     getBusiness() {
       this.loading = true;
@@ -413,15 +327,11 @@ export default {
     search() {
       // this.loading = true;
       this.loading = true;
+      this.page -= 1;
       console.log("searching...");
       console.log(this.searchTitle);
-      this.members = [];
-      this.$nextTick(() => {
-        this.page = 0;
-        this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
-      });
+      this.infiniteHandler();
       this.getAdmins();
-      this.getEditors();
       this.getBusiness();
     },
 
@@ -470,40 +380,13 @@ export default {
           console.log(data);
         console.log('ohh yeah');
         this.searchTitle = "";
+        // this.getMembers();
         this.getAdmins();
+        this.getBusiness();
         this.loading = false;
         this.flashMessage.show({
           status: "success",
           message: this.$t('network.Member_Successfully_Removed_As_Admin')
-        });
-      })
-      .catch(err => {
-        console.log({ err: err });
-        this.loading = false;
-        this.flashMessage.show({
-          status: "error",
-          message: this.$t('network.Unable_To_Remove_Member_As_Admin')
-        });
-      });
-		},
-    removeAsEditor: function(user_id){
-      this.loading = true;
-      console.log("----",user_id);
-      let path = {
-        url:this.url,
-        id: user_id
-      };
-      this.$store
-        .dispatch("networkProfileMembers/removeAsEditor", path)
-        .then(({ data }) => {
-          console.log(data);
-        console.log('ohh yeah');
-        this.searchTitle = "";
-        this.getEditors();
-        this.loading = false;
-        this.flashMessage.show({
-          status: "success",
-          message: this.$t('network.Member_Successfully_Removed_As_Editor')
         });
       })
       .catch(err => {
@@ -529,7 +412,6 @@ export default {
         this.searchTitle = "";
         // this.getMembers();
         this.getAdmins();
-        this.getEditors();
         this.getBusiness();
         this.loading = false;
         this.flashMessage.show({

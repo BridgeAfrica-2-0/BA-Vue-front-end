@@ -1,5 +1,5 @@
 <template>
-  <div v-if="islogin">
+  <div>
     <b-spinner
       v-if="loader"
       variant="primary"
@@ -41,6 +41,8 @@
               {{ network.address }}
             </span>
             <br />
+            {{ network.description }}
+            <br />
             <read-more
               :more-str="$t('search.read_more')"
               class="readmore"
@@ -61,13 +63,18 @@
                 <b-button
                   block
                   size="sm"
-                  class="b-background shadow"
+                  :id="'followbtn' + network.id"
+                  :class="network.is_follow !== 0 && 'u-btn'"
                   variant="primary"
+                  @click="handleFollow(network)"
                 >
-                  <i class="fas fa-user-plus fa-lg btn-icon"></i>
-                  <span class="btn-com" v-b-modal.modal-sm>{{
-                    $t("search.Community")
-                  }}</span>
+                  <i
+                    class="fas fa-lg btn-icon"
+                    :class="
+                      network.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'
+                    "
+                  ></i>
+                  <span class="btn-com"> {{ $t("dashboard.Community") }}</span>
                 </b-button>
               </b-col>
 
@@ -80,11 +87,18 @@
                   block
                   size="sm"
                   class="b-background shadow"
+                  :class="network.is_member !== 0 && 'u-btn'"
                   variant="primary"
+                  :id="'joinbtn' + network.id"
+                  @click="handleJoin(network)"
                 >
-                  <i class="fas fa-lg btn-icon fa-user-plus"></i>
-
-                  <span class="btn-text"> {{ $t("search.Join") }} </span>
+                  <i
+                    class="fas fa-lg btn-icon"
+                    :class="
+                      network.is_member != 0 ? 'fa-user-minus' : 'fa-user-plus'
+                    "
+                  ></i>
+                  <span class="btn-com"> {{ $t("general.Join") }} </span>
                 </b-button>
               </b-col>
             </b-row>
@@ -111,14 +125,11 @@
       {{ $t("search.Do_you_want_to_join_this_network") }}?
     </b-modal>
   </div>
-  <div v-else>
-    <login />
-  </div>
 </template>
 
 <script>
 import axios from "axios";
-import login from "@/components/search/login";
+
 export default {
   props: ["title", "image"],
   data() {
@@ -128,16 +139,10 @@ export default {
       total: 0,
       per_page: 10,
       list: [],
-      islogin: true,
       currentPage: 1,
       nextLoad: false,
     };
   },
-
-  components: {
-    login,
-  },
-
   computed: {
     networks() {
       return this.$store.getters["networkSearch/getNetworks"];
@@ -153,10 +158,6 @@ export default {
 
       this.networkSearch();
     }
-
-    this.islogin = this.$store.getters["auth/isLogged"];
-
-    console.log(this.islogin);
   },
 
   methods: {
@@ -166,6 +167,51 @@ export default {
       this.currentPage = value;
       console.log("[debug] page before:", value);
       this.networkSearch();
+    },
+    async handleJoin(user) {
+      document.getElementById("joinbtn" + user.id).disabled = true;
+      const uri = user.is_member == 0 ? `/add-member` : `/remove-member`;
+      const nextFollowState = user.is_member == 0 ? 1 : 0;
+      const data = {
+        id: user.id,
+        type: "network",
+      };
+      console.log(user);
+
+      console.log("is member: ", user.is_member);
+      await axios
+        .post(uri, data)
+        .then((response) => {
+          console.log(response);
+          user.is_member = nextFollowState;
+          console.log("join state:", user.is_member);
+          document.getElementById("joinbtn" + user.id).disabled = false;
+        })
+        .catch((err) => {
+          console.log(err);
+          document.getElementById("joinbtn" + user.id).disabled = false;
+        });
+    },
+
+    async handleFollow(user) {
+      document.getElementById("followbtn" + user.id).disabled = true;
+      const uri = user.is_follow == 0 ? `/follow-community` : `/unfollow`;
+      const nextFollowState = user.is_follow === 0 ? 1 : 0;
+      const data = {
+        id: user.id,
+        type: "network",
+      };
+
+      await axios
+        .post(uri, data)
+        .then((response) => {
+          user.is_follow = nextFollowState;
+          document.getElementById("followbtn" + user.id).disabled = false;
+        })
+        .catch((err) => {
+          console.log({ err: err });
+          document.getElementById("followbtn" + user.id).disabled = false;
+        });
     },
 
     networkSearch() {

@@ -453,7 +453,7 @@ export default {
 
     async loadUserPostIntro(context, id) {
       let response_ = null;
-      await axios.get('userIntro?id='+id)
+      await axios.get('userIntro?id=' + id)
 
         .then(response => {
           console.log("load user Intro Post test1 successsss +++");

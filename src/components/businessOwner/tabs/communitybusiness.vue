@@ -5,10 +5,10 @@
         lg="6"
         sm="12"
         class="p-2"
-        v-for="(item, index) in businesses"
-        :key="index"
+        v-for="item in businesses"
+        :key="item.id"
       >
-        <div class="people-style shadow h-100">    
+        <div class="people-style shadow h-100">
           <b-row>
             <b-col md="8" xl="8" lg="12" cols="12" sm="8">
               <div class="d-inline-flex">
@@ -37,17 +37,7 @@
                     </span>
                     <br />
                     {{ count(item.followers) }}
-                    {{ $t("businessowner.Community") }}  <span v-if="!foll_id"  @click="BlockUser(item.id, index)" class="ml-3"  style="cursor: pointer">  
-                      
-                      <b-icon
-                              font-scale="1"
-                              icon="exclamation-octagon"
-                              v-b-tooltip.hover
-                              title="Block This Business"
-                              variant="danger"
-                            ></b-icon>
-                            
-                              </span> <br />
+                    {{ $t("businessowner.Community") }} <br />
 
                     <span class="location">
                       <b-icon-geo-alt class="ico"></b-icon-geo-alt
@@ -65,7 +55,15 @@
 
                     </read-more>
 
-                    
+                    <b-icon
+                      font-scale="1"
+                      icon="exclamation-octagon"
+                      v-b-tooltip.hover
+                      title="Block This Business"
+                      variant="danger"
+                      @click="$emit('BlockUser', item.id)"
+                      style="cursor: pointer"
+                    ></b-icon>
                   </p>
                 </div>
               </div>
@@ -199,45 +197,6 @@ export default {
   },
 
   methods: {
-
-     
-  BlockUser(id, index) {
-
-     let dataInfo = {
-        id: id,
-        refernce: "business",
-        type: this.type,
-      };
-
-    
-      let fd = new FormData();
-      fd.append("id", dataInfo.id);
-      fd.append("type", dataInfo.refernce);
-      this.$store.dispatch("profile/Block", {
-        path: "block/entity",
-        formData: fd
-        })
-      .then(response => {
-        
-      
-        this.$delete(this.businesses,index);
-        console.log("user deleted");
-
-        console.log(response);
-        this.flashMessage.show({
-          status: "success",
-          message: dataInfo.refernce + " blocked"
-        });
-      })
-      .catch(err => {
-        console.log({ err: err });
-        this.flashMessage.show({
-          status: "error",
-          message: "Unable to blocked " + dataInfo.refernce
-        });
-      });
-    },
-
     gotoBusiness(id) {
       this.$router.push(`/business/${id}#about`);
     },
@@ -293,7 +252,17 @@ export default {
     search() {
       console.log("search started");
 
-     this.businesses=[];
+      if (this.type == "Follower") {
+        this.$store.commit("businessOwner/setBcommunityFollower", {
+          business_followers: [],
+          total_business_follower: 0,
+        });
+      } else {
+        this.$store.commit("businessOwner/setBcommunityFollowing", {
+          business_following: [],
+          total_business_following: 0,
+        });
+      }
 
       this.page = 1;
       this.infiniteId += 1;

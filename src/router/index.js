@@ -61,6 +61,7 @@ import about from "@/views/about";
 import contact from "@/views/contact";
 import cart from "@/views/card";
 
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -283,6 +284,7 @@ const routes = [
     name: "memberNetwork",
     component: memberNetwork,
   },
+
   {
     path: "/network_follower/:id?",
     name: "Membar Network Follower",
@@ -294,6 +296,13 @@ const routes = [
     path: "/network_member/:id?",
     name: "memberNetwork",
     component: memberNetwork,
+  },
+
+  {
+    path: "/network_follower/:id?",
+    name: "Membar Network Follower",
+    component: memberNetworkFollower,
+
   },
 
   {
@@ -348,6 +357,8 @@ const routes = [
     component: businessVisitor,
   },
 
+
+
   {
     path: "/profilevisitor",
     name: "visitor",
@@ -355,9 +366,9 @@ const routes = [
   },
   {
     path: "/search",
-    name: "GlobalSearch",
+    name: "Search",
     component: search,
-
+    
   },
 
   {
@@ -411,29 +422,30 @@ const routes = [
 ];
 
 const router = new VueRouter({
-  mode: "history",
-  base: process.env.BASE_URL,
-  routes,
+    mode: "history",
+    base: process.env.BASE_URL,
+    routes,
 });
 
 router.beforeEach((to, from, next) => {
-  const loggedIn = localStorage.getItem("user");
+    const loggedIn = localStorage.getItem("user");
 
-  if (to.matched.some((record) => record.meta.auth) && !loggedIn) {
-    next("/login");
-    return;
-  }
+    if (to.matched.some((record) => record.meta.auth) && !loggedIn) {
+        next("/login");
 
-  if (to.matched.some((record) => record.meta.auth)) {
-    const dat = localStorage.getItem("user");
-    const userdata = JSON.parse(dat);
-
-    if (userdata.user.verified_at == null) {
-      //  next("/verify");
+        return;
     }
-  }
 
-  next();
+    if (to.matched.some((record) => record.meta.auth)) {
+        const dat = localStorage.getItem("user");
+        const userdata = JSON.parse(dat);
+
+        if (userdata.user.verified_at == null) {
+            //  next("/verify");
+        }
+    }
+
+    next();
 });
 
 export default router;

@@ -85,7 +85,7 @@ export default {
 
                         axios
                             .get(
-                                `subcategory/${data.cat_id}`
+                                `subcategory/${data.cat_id}?business_id=${data.bussiness_id}`
                             )
                             .then(res => {
                                 console.log("all loaded!");

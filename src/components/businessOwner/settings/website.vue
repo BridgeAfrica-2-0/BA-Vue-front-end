@@ -279,7 +279,6 @@
 import moment from 'moment';
 export default {
   name: "website",
-  props: ['profileId'],
   data() {
 		return {
       url: null,
@@ -340,8 +339,7 @@ export default {
   },
 
   mounted(){
-    console.log("profileId", this.profileId)
-    this.url = this.$route.params.id !== undefined ? this.$route.params.id : this.profileId;
+    this.url = this.$route.params.id;
     this.getAccounts();
   },
 

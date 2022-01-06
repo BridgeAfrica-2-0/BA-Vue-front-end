@@ -13,12 +13,13 @@
           label-class="font-weight-bold pt-0 username"
           class="mb-0"
         >
-          <country-select
-            v-model="country"
-            :country="country"
-            topCountry="US"
+          <b-form-select
+            v-model="PaymentForm.country"
+            :options="countries"
+            value-field="id"
+            text-field="name"
             class="form-control text"
-          />
+          ></b-form-select>
         </b-form-group>
       </b-container>
     </div>
@@ -147,7 +148,6 @@
 <script>
 export default {
   name: "payment",
-  props: ['profileId'],
   data() {
     return {
       url: null,
@@ -162,7 +162,8 @@ export default {
       PaymentForm: {
         subscribe: "type",
         phone: "",
-        operator: ""
+        operator: "",
+        country: ""
       },
 
       show: false,
@@ -172,13 +173,16 @@ export default {
   computed: {
     defaultPayment() {
       return this.$store.state.businessAccountType.defaultPayment;
-    }
+    },
+    countries() {
+      return this.$store.state.auth.country;
+    },
   },
 
   mounted(){
-    console.log("profileId", this.profileId)
-    this.url = this.$route.params.id !== undefined ? this.$route.params.id : this.profileId;
+    this.url = this.$route.params.id;
     this.DefaultPayment();
+    this.Country();
   },
 
   methods: {
@@ -191,6 +195,18 @@ export default {
       console.log("this.operator", this.operator);
       this.RequestPayment = !this.RequestPayment;
       if (this.operator !== "") this.$emit("requestpayment", this.operator);
+    },
+
+    Country() {
+      this.$store
+        .dispatch("auth/country")
+        .then(() => {
+          console.log(this.countries);
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
     },
     
     DefaultPayment() {

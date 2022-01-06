@@ -87,6 +87,7 @@ export default {
   },
   methods: {
     pageChange(){
+      console.log("pageChange")
       this.selectedId = 6
     },
     businessInfo() {

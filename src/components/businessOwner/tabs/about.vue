@@ -904,14 +904,7 @@ export default {
       words.map((item) => {
         keyword += item + ",";
       });
-    },
-
-    loadBusinessAbout() {
-      this.$store
-        .dispatch("businessOwner/loadUserBusinessAbout", {
-          // business_abobusiness_id: this.business_about_input,
-          business_id: this.$route.params.id,
-        })
+    
 
         return keyword.substring(0, keyword.length-1);
      },

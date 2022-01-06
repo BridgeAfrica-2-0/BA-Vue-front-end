@@ -375,7 +375,7 @@
         <div>
           <form-wizard @on-complete="updateBusiness">
             <tab-content :title="$t('profileowner.Business_Indentity')">
-              <div class="form-card">
+              <div class="form-card mb-2">
                 <div class="row">
                   <div class="col-md-6">
                     <input id="logo" type="file" @change="onLogoChange" hidden />
@@ -532,7 +532,7 @@
             </tab-content>
 
             <tab-content :title="$t('profileowner.Location')">
-              <div class="form-card">
+              <div class="form-card mb-2">
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
@@ -650,7 +650,7 @@
             </tab-content>
 
             <tab-content title=" Contact ">
-              <b-card>
+              <b-card class="mb-2">
                 <b-row>
                   <b-col md="6">
                     <label class="username">

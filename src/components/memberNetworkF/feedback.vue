@@ -108,12 +108,12 @@ export default {
 
       options: [
         { value: "Improvement", text: this.$t('general.Suggestion_for_Improvement') },
-        { value: "Complain", text: this.$t('general.Complaints')}
+        { value: "Complaints", text: this.$t('general.Complaints')}
       ],
       filters: [
         { value: "0", text: "Any" },
          { value: "Improvement", text: this.$t('general.Suggestion_for_Improvement') },
-        { value: "Complain", text: this.$t('general.Complaints')}
+        { value: "Complaints", text: this.$t('general.Complaints')}
       ],
       feedbackForm: {
         title: "Improvement",
@@ -159,7 +159,7 @@ export default {
       const data = this.getRequestDatas(this.filterData);
       console.log('keyword: '+data);
       let formData = new FormData();
-      formData.append('keywords', data);
+      formData.append('keyword', data);
       this.axios
         .post("network/"+this.url+"/feedbacks/"+this.currentPage, formData)
         .then(({ data }) => {

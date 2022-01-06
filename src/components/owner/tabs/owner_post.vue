@@ -970,13 +970,13 @@ export default {
 }
 @media (max-width: 762px) {
   .commentt[data-v-41fcb621] {
-    width: 99%;
+    width: 118%;
     border: solid 1 px #ccc;
     border-radius: 25 px;
     background-color: #ddd;
     height: 34 px;
     padding-left: 10 px;
-    margin-left: 2%;
+    margin-left: -7%;
   }
 
   .post-btn {
@@ -985,7 +985,7 @@ export default {
   }
   .send-cmt {
     position: relative;
-    margin-left: 90%;
+    margin-left: 100%;
     top: -28px;
     cursor: pointer;
   }

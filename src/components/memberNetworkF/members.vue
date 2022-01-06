@@ -60,47 +60,6 @@
     </b-row>
 
     <b-row class="mt-4">
-      <b-col cols="12">
-        <h6 class="font-weight-bolder">
-          {{$t('general.Network_Editors')}} ({{nFormatter(editors.length)}})
-        </h6>
-        <hr width="100%" />
-        <b-skeleton-wrapper :loading="loading">
-          <template #loading>
-            <b-card>
-              <b-skeleton width="85%"></b-skeleton>
-              <b-skeleton width="55%"></b-skeleton>
-              <b-skeleton width="70%"></b-skeleton>
-            </b-card>
-          </template>
-          <div class="scroll" v-if="editors.length != 0">
-            <div v-for="editor in editors" :key="editor.id">
-              <p class="">
-                 <router-link :to="'/profile/'+editor.user_id">
-                <span class="">
-                 
-                  <b-avatar
-                    class="d-inline-block"
-                    variant="primary"
-                    :src="editor.profile_picture"
-                    :text="editor.fullname.charAt(0)"
-                    size="3.5rem"
-                  ></b-avatar>
-                  <h5 class="m-0 bold username d-inline-block ml-2">
-                    {{editor.fullname}}
-                  </h5>
-                </span>
-
-                 </router-link>
-              </p>
-            </div>
-          </div>
-          <div v-else>{{$t('general.No_Result_On_Editors')}}</div>
-        </b-skeleton-wrapper>
-      </b-col>
-    </b-row>
-
-    <b-row class="mt-4">
       <b-col cols="12" >
         <h6 class="font-weight-bolder">
           {{$t('general.Bussiness')}} ({{nFormatter(business.length)}})
@@ -217,15 +176,11 @@ export default {
     },
     business() {
       return this.$store.state.networkProfileMembers.business;
-    },
-    editors() {
-      return this.$store.state.networkProfileMembers.editors;
     }
   },
   mounted(){
     this.url = this.$route.params.id
     this.getAdmins()
-    this.getEditors()
     this.getBusiness()
   },
   methods:{
@@ -306,24 +261,6 @@ export default {
           this.loading = false;
         });
     },
-    getEditors() {
-      this.loading = true;
-      const data = this.getRequestDatas(this.searchTitle);
-      console.log('keyword: '+data);
-      this.$store
-        .dispatch("networkProfileMembers/geteditors", {
-          'path':this.url+"/members/editor",
-          'keyword':data
-          })
-        .then(() => {
-          console.log('Editors Available');
-          this.loading = false;
-        })
-        .catch(err => {
-          console.log({ err: err });
-          this.loading = false;
-        });
-    },
  
     getBusiness() {
       this.loading = true;
@@ -351,7 +288,6 @@ export default {
       console.log(this.searchTitle);
       this.infiniteId += 1;
       this.getAdmins();
-      this.getEditors();
       this.getBusiness();
     },
 

@@ -41,8 +41,6 @@
               {{ network.address }}
             </span>
             <br />
-            {{ network.description }}
-            <br />
             <read-more
               :more-str="$t('search.read_more')"
               class="readmore"

@@ -164,7 +164,7 @@
                             })
                           "
                         >
-                          <b-col class="col-9">
+                          <b-col class="col-8">
                             <span style="display: inline-flex">
                               <b-avatar
                                 class="d-inline-block profile-pic"
@@ -184,8 +184,8 @@
                             </span>
                           </b-col>
 
-                          <b-col class="col-3 text-center">
-                            <small class="text-center">
+                          <b-col class="col-4 text-center">
+                            <small class="text-center small">
                               {{ getCreatedAt(chat.created_at) }}
                             </small>
                             <!-- <p class="text-center">
@@ -253,7 +253,7 @@
                             })
                           "
                         >
-                          <b-col class="col-9">
+                          <b-col class="col-8">
                             <span style="display: inline-flex">
                               <b-avatar
                                 class="d-inline-block profile-pic"
@@ -273,8 +273,8 @@
                             </span>
                           </b-col>
 
-                          <b-col class="col-3 text-center">
-                            <small class="text-center">
+                          <b-col class="col-4 text-center">
+                            <small class="text-center small">
                               {{ getCreatedAt(chat.created_at) }}
                             </small>
                             <!-- <p class="text-center">
@@ -341,7 +341,7 @@
                             })
                           "
                         >
-                          <b-col class="col-9">
+                          <b-col class="col-8">
                             <span style="display: inline-flex">
                               <b-avatar
                                 class="d-inline-block profile-pic"
@@ -361,8 +361,8 @@
                             </span>
                           </b-col>
 
-                          <b-col class="col-3 text-center">
-                            <small class="text-center">
+                          <b-col class="col-4 text-center">
+                            <small class="text-center small">
                               {{ getCreatedAt(chat.created_at) }}
                             </small>
                             <!-- <p class="text-center">
@@ -848,7 +848,7 @@
                       class="input-background"
                       style="width: 100%"
                       :placeholder="`Type the name of the ${type}`"
-                      @keydown="getList(searchQuery)"
+                      @keydown="searchUser(searchQuery)"
                     ></b-form-input>
 
                     <br />
@@ -864,6 +864,9 @@
                         ></b-spinner>
                       </div>
                       <table v-else class="table">
+                        <thead>
+                          <tr></tr>
+                        </thead>
                         <tbody v-if="type == 'user'">
                           <tr
                             v-for="(user, index) in users"
@@ -1216,20 +1219,20 @@ export default {
     },
     getCreatedAt(data) {
       if (moment(data).isBefore(moment())) {
-        return moment(data).format("lll");
+        return moment(data).format("ddd") + " " + moment(data).format("LT");
       } else {
-        // return moment(data).format('LT');
-        return moment(data).fromNow();
+        return moment(data).format("LT");
+        // return moment(data).fromNow();
       }
     },
-    getList(keyword) {
+    getList() {
       if (this.type == "user") {
-        this.$store.dispatch("userChat/GET_USERS", keyword);
+        this.$store.dispatch("userChat/GET_USERS");
       } else if (this.type == "business") {
-        this.$store.dispatch("userChat/GET_BIZS", keyword);
+        this.$store.dispatch("userChat/GET_BIZS");
       } else {
         console.log("network");
-        this.$store.dispatch("userChat/GET_NETS", keyword);
+        this.$store.dispatch("userChat/GET_NETS");
       }
     },
     getChatList(data) {
@@ -1454,6 +1457,9 @@ export default {
   overflow-y: auto;
   overflow-x: hidden;
   /* background-color: lightblue; */
+}
+.small {
+  font-size: 10px !important;
 }
 .spinner {
   font-size: 30px;

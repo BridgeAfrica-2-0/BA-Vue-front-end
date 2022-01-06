@@ -1,10 +1,8 @@
 <template>
   <div class="body" ref="wrapper">
-
-  
     <navbar />
     <div v-if="isloaded">
-      <Profile v-if="info || isBblock==0" />
+      <Profile v-if="info" />
       <notFound v-else />
       <Footer />   
     </div>
@@ -46,11 +44,6 @@ export default {
     profile: function () {
       return this.$store.getters["follower/getUserPostIntro"];
     },
-
-    isBblock: function(){
-
-     return this.profile.viewer_blocked;
-    }
   },
 
   created() {

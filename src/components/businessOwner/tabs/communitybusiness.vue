@@ -293,17 +293,7 @@ export default {
     search() {
       console.log("search started");
 
-      if (this.type == "Follower") {
-        this.$store.commit("businessOwner/setBcommunityFollower", {
-          business_followers: [],
-          total_business_follower: 0,
-        });
-      } else {
-        this.$store.commit("businessOwner/setBcommunityFollowing", {
-          business_following: [],
-          total_business_following: 0,
-        });
-      }
+     this.businesses=[];
 
       this.page = 1;
       this.infiniteId += 1;

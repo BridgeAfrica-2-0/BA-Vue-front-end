@@ -1,6 +1,9 @@
 <template>
-  <div class="img-gall-item img-size" :ref="`sHowMedia-${im.id}`" 
-  :style="`${getStyle}; position:relative`">
+  <div
+    class="img-gall-item img-size"
+    :ref="`sHowMedia-${im.id}`"
+    style="position:relative"
+  >
     <a v-if="typeOfMedia() == 'image' && !loading"
       ><b-img
         class="card-img btn p-0 album-img"
@@ -11,12 +14,11 @@
         alt="media_img"
         v-b-modal="uuid"
         v-bind="imageProps"
-        :style="getStyle"
-
+        style="width: 100%;height: 100%;"
       ></b-img>
     </a>
     <video
-      :style="getStyle"
+      style="width: 100%;height: 100%;"
       controls
       v-else-if="typeOfMedia() == 'video' && !loading"
       class="card-img btn p-0 album-img"
@@ -24,7 +26,7 @@
       <source :src="getFullMediaLink()" />
     </video>
     <youtube
-      :style="getStyle"
+      style="width: 100%;height: 100%;"
       class="card-img btn p-0 album-img"
       v-if="typeOfMedia == 'youtube' && !loading"
       :video-id="getYoutubeKey()"
@@ -77,8 +79,8 @@
               @click="onSetCoverPic()"
               v-if="
                 isEditor &&
-                !['video'].includes(typeOfMedia()) &&
-                type != 'network'
+                  !['video'].includes(typeOfMedia()) &&
+                  type != 'network'
               "
             >
               {{ $t("profileowner.Make_Cover_Photo") }}
@@ -117,29 +119,31 @@ export default {
     "setProfilePic",
     "setCoverPic",
     "deleteImage",
-    "isAlbum"
+    "isAlbum",
   ],
 
-  created(){
-    this.uuid = this.isAlbum ?  `modal-album-${this.im.id}` : `modal-picture-${this.im.id}`
+  created() {
+    this.uuid = this.isAlbum
+      ? `modal-album-${this.im.id}`
+      : `modal-picture-${this.im.id}`;
 
     this.strategy = {
       BusinessOwner: {
-        picture: ({media_url}) => this.updatePictureState(media_url),
-        cover: (data) => this.addCoverPictureBusiness(data)
+        picture: ({ media_url }) => this.updatePictureState(media_url),
+        cover: (data) => this.addCoverPictureBusiness(data),
       },
 
       profile_owner: {
-        picture: ({media_url}) => this.updatePictureState(media_url),
-        cover: ({media_url}) => this.addCoverPictureProfile(media_url)
-      }
-    }
+        picture: ({ media_url }) => this.updatePictureState(media_url),
+        cover: ({ media_url }) => this.addCoverPictureProfile(media_url),
+      },
+    };
   },
 
   data() {
     return {
       loading: false,
-      uuid:null,
+      uuid: null,
       strategy: null,
     };
   },
@@ -180,7 +184,7 @@ export default {
     },
     //set an image as a cover photo
 
-     onSetCoverPic() {
+    onSetCoverPic() {
       let loader = this.$loading.show({
         container: this.$refs[`sHowMedia-${this.im.id}`],
         canCancel: true,
@@ -189,19 +193,18 @@ export default {
       });
 
       this.setCoverPic()
-      .then(() => {
-
-        try {
-          this.strategy[this.$route.name].cover({
-            media_url:this.getFullMediaLink(),
-            id:this.im.id,
-            media_type: "image/png"
-          })
-        } catch (error) {
-          console.error(error);
-        }
-      })
-      .finally(() => loader.hide());
+        .then(() => {
+          try {
+            this.strategy[this.$route.name].cover({
+              media_url: this.getFullMediaLink(),
+              id: this.im.id,
+              media_type: "image/png",
+            });
+          } catch (error) {
+            console.error(error);
+          }
+        })
+        .finally(() => loader.hide());
     },
     //set image as profile pic
 
@@ -212,22 +215,20 @@ export default {
         onCancel: this.onCancel,
         color: "#e75c18",
       });
-      
-      this.setProfilePic()
-      .then(() => {
-        try {
-          this.strategy[this.$route.name].picture({
-            media_url:this.getFullMediaLink(),
-            id:this.im.id,
-            media_type: "image/png"
-          })
-        } catch (error) {
-          console.error(error);
-        }
 
-      })
-      .finally(() => loader.hide());
-      
+      this.setProfilePic()
+        .then(() => {
+          try {
+            this.strategy[this.$route.name].picture({
+              media_url: this.getFullMediaLink(),
+              id: this.im.id,
+              media_type: "image/png",
+            });
+          } catch (error) {
+            console.error(error);
+          }
+        })
+        .finally(() => loader.hide());
     },
   },
 };
@@ -235,8 +236,8 @@ export default {
 
 <style scoped>
 .img-size {
-  width: 266px !important;
-  height: 266px !important;
+  width: 100% !important;
+  height: 100% ;
 }
 .botmediadess-position {
   text-align: center;

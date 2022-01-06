@@ -3,16 +3,18 @@
     <b-icon icon="person-fill" class="icon-size" variant="primary"></b-icon>
     <b> {{ $t("businessowner.About") }} </b>
 
+
     <hr />
+
 
     <b-card>
       <div class="mb-3">
-        <mapbox :coordinates="[business_about.lng, business_about.lat]" />
+        <mapbox :business="business_about" />
       </div>
 
       <b-card>
         <b-row v-if="loading">
-          <b-col>
+          <!-- <b-col>
             <div
               class="edit"
               v-b-modal.biographyModal
@@ -34,15 +36,9 @@
             <p class="text-justify text">
               {{ business_about.location_description }}
             </p>
-          </b-col>
-          <b-col>
-            <!-- <div class="edit">
-                <b-icon
-                  icon="pencil-fill"
-                  variant="primary"
-                  
-                ></b-icon>
-              </div> -->
+          </b-col> -->
+          <!-- <b-col>
+           
             <div
               class="edit"
               v-b-modal.biographyModal
@@ -60,7 +56,7 @@
             <p class="text-justify text">
               {{ business_about.location_description }}
             </p>
-          </b-col>
+          </b-col> -->
           <b-col>
             <!-- <div class="edit">
                 <b-icon
@@ -120,11 +116,14 @@
               <p>
                 <b-icon icon="geo-alt-fill" class="primary icon-size"></b-icon>
 
-                <span
-                  >{{ business_about.address }}
-                  <!-- {{ business_about.city }}, 
-             {{ business_about.country[0].name }} -->
-                </span>
+
+               <span
+              >
+              
+             {{ business_about.address }}
+             
+              </span
+            >
               </p>
               <p>
                 <b-icon icon="link" class="primary icon-size"></b-icon>
@@ -913,13 +912,25 @@ export default {
           // business_abobusiness_id: this.business_about_input,
           business_id: this.$route.params.id,
         })
-        .then((res) => {
-          this.business_about = JSON.parse(
-            JSON.stringify(
-              this.$store.getters["businessOwner/getBusinessAbout"]
-            )
-          );
-        });
+
+        return keyword.substring(0, keyword.length-1);
+     },
+
+    loadBusinessAbout(){
+        this.$store
+      .dispatch("businessOwner/loadUserBusinessAbout", {
+        // business_abobusiness_id: this.business_about_input,
+        business_id: this.$route.params.id,
+      }).then(res => {
+
+        this.business_about = JSON.parse(
+          JSON.stringify(this.$store.getters["businessOwner/getBusinessAbout"])
+        );
+      }
+
+      )
+
+
     },
     validator(tag) {
       return tag.length > 2 && tag.length < 20;
@@ -1017,34 +1028,37 @@ export default {
           this.test();
           console.log(this.business_about_input);
 
-          var dat = {
-            business_id: this.$route.params.id,
-            data: {
-              name: this.business_about_input.name,
-              about_business: this.business_about_input.about_business,
-              categoryId: this.stringArray1(this.multiselecvalue), //this.business_about_input.category[0].category_id,
-              subCategoryId: this.stringArray(this.filterselectvalue), //this.business_about_input.subCatFilter[0].subcategoryId,
-              filterId: this.ArrayString(this.select_filterss),
-              keywords: this.stringKeyword(this.business_about_input.keywords),
-              primary_phone: this.business_about_input.phone1,
-              secondary_phone: this.business_about_input.phone2,
-              website: this.business_about_input.website,
-              email: this.business_about_input.email,
-              country: this.business_about_input.country[0].country_id,
-              region: this.business_about_input.region[0].region_id,
-              division: this.business_about_input.division[0].division_id,
-              council: this.business_about_input.council[0].council_id,
-              neigborhood: this.business_about_input.neigborhood[0]
-                .neighborhood_id,
-              locality: this.business_about_input.locality,
-              city: this.business_about_input.city,
-              openHours: this.business_about_input.business_open_hours,
-              lat: this.business_about_input.lat,
-              lng: this.business_about_input.lng,
-              address: this.business_about_input.address,
-            },
-          };
-          console.log("data editer --", dat);
+
+
+           var dat = {
+             business_id: this.$route.params.id,
+             data: {
+            name: this.business_about_input.name,
+            about_business: this.business_about_input.about_business,
+            categoryId:  this.stringArray1(this.multiselecvalue), //this.business_about_input.category[0].category_id,
+            subCategoryId: this.stringArray(this.filterselectvalue),//this.business_about_input.subCatFilter[0].subcategoryId,
+            filterId: this.ArrayString(this.select_filterss),
+            keywords: this.stringKeyword(this.business_about_input.keywords),
+            primary_phone: this.business_about_input.phone1,
+            secondary_phone :this.business_about_input.phone2,
+            website: this.business_about_input.website,
+            email: this.business_about_input.email,
+            country: this.business_about_input.country[0].country_id,
+            region: this.business_about_input.region[0].region_id,
+            division: this.business_about_input.division[0].division_id, 
+            council: this.business_about_input.council[0].council_id,
+            neigborhood: this.business_about_input.neigborhood[0].neighborhood_id,
+            // locality: this.business_about_input.locality,
+            city: this.business_about_input.city,
+            openHours: this.business_about_input.business_open_hours,
+            lat: this.business_about_input.lat,
+            lng: this.business_about_input.lng,
+            address: this.business_about_input.address
+            }
+            
+          } 
+          console.log(this.select_filterss, 'data editer --',dat)
+
 
           this.$store
             .dispatch(
@@ -1060,6 +1074,11 @@ export default {
                 "update user business about response ++++++",
                 response
               );
+              this.flashMessage.show({
+                status: "success",
+                blockClass: "custom-block-class",
+                message: this.$t("businessowner.Business_Profile_updated"),
+              });
               this.loadBusinessAbout();
               this.business_about = this.$store.getters[
                 "businessOwner/getBusinessAbout"

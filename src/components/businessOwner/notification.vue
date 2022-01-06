@@ -59,7 +59,9 @@
                   :src="notification.image"
                 ></b-avatar>
                 <span class="m-0  d-inline-block ml-2 username">
-                  {{ notification.reference_type}}
+                  <router-link :to="'/'+notification.lien">
+                    <strong class="title"> {{ notification.reference_type }}</strong>
+                  </router-link>
                   <div class="duration">{{ notification.created_at | fromNow }}</div>
                 </span>
               </span>

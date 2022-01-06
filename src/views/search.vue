@@ -12,8 +12,6 @@
       </template>
     </Nav>
 
-    
-
     <SubNav
       @category="getCategory"
       @parentcategory="getparentCategory"
@@ -434,11 +432,14 @@
               <hr />
 
               <div class="d-flex">
-                <fas-icon class="icons mr-1" :icon="['fas', 'users']" size="lg" />
-              
+                <fas-icon
+                  class="icons mr-1"
+                  :icon="['fas', 'users']"
+                  size="lg"
+                />
+
                 <h6>{{ $t("search.People") }}</h6>
               </div>
-              
 
               <MiniPeople />
               <span class="float-right mb-3" @click="selectedId = 2">
@@ -692,9 +693,9 @@ export default {
   },
 
   created() {
-      this.islogin=this.$store.getters["auth/isLogged"];
-     
-     console.log(this.islogin);
+    this.islogin = this.$store.getters["auth/isLogged"];
+
+    console.log(this.islogin);
 
     if (this.$route.query.keyword)
       this.searchParams.keyword = this.$route.query.keyword;
@@ -718,7 +719,7 @@ export default {
 
   data() {
     return {
-       islogin:true,
+      islogin: true,
       searchParams: {
         keyword: "",
         cat_id: "",
@@ -1813,10 +1814,10 @@ export default {
       };
 
       this.strategyForPlaceHolder = {
-        2: () => this.$t('general.Find_User'),
-        5: () => this.$t('general.Find_Post'),
-        0: () => this.$t('general.All'),
-        1: () => this.$t('general.Find_Businesses'),
+        2: () => this.$t("general.Find_User"),
+        5: () => this.$t("general.Find_Post"),
+        0: () => this.$t("general.All"),
+        1: () => this.$t("general.Find_Businesses"),
       };
 
       this.strategyForComponent = {
@@ -1826,9 +1827,9 @@ export default {
       };
 
       this.strategyForNotFoundComponentTitle = {
-        2: () => this.$t('general.Not_Find_users'),
-        5: () => this.$t('general.Not_Find_posts'),
-        1: () => this.$t('general.Not_Find_Business'),
+        2: () => this.$t("general.Not_Find_users"),
+        5: () => this.$t("general.Not_Find_posts"),
+        1: () => this.$t("general.Not_Find_Business"),
       };
 
       this.changePlaceHolder();
@@ -1836,8 +1837,9 @@ export default {
 
     changeNotFoundTitle() {
       try {
-        this.notFoundComponentTitle =
-          this.strategyForNotFoundComponentTitle[this.selectedId]();
+        this.notFoundComponentTitle = this.strategyForNotFoundComponentTitle[
+          this.selectedId
+        ]();
       } catch (error) {
         this.notFoundComponentTitle = "";
       }
@@ -1977,8 +1979,7 @@ export default {
           break;
 
         case "MC":
-          this.selectcategories =
-            this.Mayor_councils_filters_and_public_institution;
+          this.selectcategories = this.Mayor_councils_filters_and_public_institution;
 
           break;
 
@@ -2059,8 +2060,7 @@ export default {
       }
     },
 
-
-     allSearchByCat(data) {
+    allSearchByCat(data) {
       console.log("the category is: ", data);
       this.$store
         .dispatch("allSearch/SEARCH", data)
@@ -2069,10 +2069,8 @@ export default {
         })
         .catch((err) => {
           console.log("Error erro!");
-        });    
+        });
     },
-
-
 
     searchBusiness(data) {
       this.$store.commit("business/setLoading", true);

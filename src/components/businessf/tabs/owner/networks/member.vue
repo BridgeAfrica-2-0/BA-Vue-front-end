@@ -384,7 +384,7 @@ export default {
           'keyword':data
           })
         .then(() => {
-          console.log('Admins Available');
+          console.log('Editors Available');
           this.loading = false;
         })
         .catch(err => {

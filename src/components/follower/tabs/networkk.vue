@@ -29,7 +29,7 @@
             <b-col md="5" cols="7" lg="7" xl="5" sm="5">
               <p class="textt">
                 <router-link :to="({name:'Membar Network Follower', params:{id: item.id}})">
-                <strong class="net-title over"> {{ item.name }} </strong> </router-link><br />
+                <strong class="net-title over"> {{ item.name }} </strong> </router-link>
                 <span class="m-1" v-for="cat in item.categories" :key="cat">
                   {{ cat }}
                 </span>
@@ -86,6 +86,24 @@
                   </b-col>
 
                   <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2">
+
+                     <b-button
+                      block
+                      size="sm"
+                      class="b-background shadow"
+                      :class="item.is_member !== 0 && 'u-btn'"
+                      variant="primary"
+                      :id="'joinbtn' + item.id"
+                      @click="handleJoin(item)"
+                    >
+                      <i
+                        class="fas fa-lg btn-icon"
+                        :class="item.is_member !== 0 ? 'fa-user-minus' : 'fa-user-plus'"
+                      ></i>
+                      <span class="btn-com"> {{ $t("general.Join") }} </span>
+                    </b-button>
+
+
                   </b-col>
                 </b-row>
               </div>
@@ -130,6 +148,31 @@ export default {
   },
 
   methods: {
+
+      async handleJoin(user) {
+      document.getElementById('joinbtn' + user.id).disabled = true;
+      const uri = user.is_member === 0 ? `/add-member` : `/remove-member`;
+      const nextFollowState = user.is_member === 0 ? 1 : 0;
+      const data = {
+        id: user.id,
+        type: 'network',
+      };
+
+      await axios
+        .post(uri, data)
+        .then((response) => {
+          console.log(response);
+          user.is_member = nextFollowState;
+          document.getElementById('joinbtn' + user.id).disabled = false;
+        })
+        .catch((err) => {
+          console.log(err);
+          document.getElementById('joinbtn' + user.id).disabled = false;
+        });
+    },
+
+
+
     async handleFollow(user) {
       document.getElementById("followbtn" + user.id).disabled = true;
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;

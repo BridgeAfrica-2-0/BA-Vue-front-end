@@ -234,10 +234,6 @@
                 </b-card-text>
               </b-tab>
 
-              <b-tab :title="$t('settings.Account_Type') ">
-                <Website :profileId="getUserInfos.id"/>
-              </b-tab>
-
               <b-tab :title="$t('settings.Payment')">
                 <Payment :profileId="getUserInfos.id"/>
               </b-tab>
@@ -340,8 +336,7 @@
 import Navbar from '@/components/navbar';
 import Footer from '@/components/footer';
 import SettingsNotifications from '@/components/SettingsNotifications.vue';
-import Website from "@/components/businessOwner/settings/website";
-import Payment from "@/components/businessOwner/settings/payment";
+import Payment from "@/components/owner/settings/payment";
 import Blocking from "@/components/owner/settings/blocking";
 
 export default {
@@ -349,7 +344,6 @@ export default {
     Navbar,
     Footer,
     SettingsNotifications,
-    Website,
     Payment,
     Blocking
   },

@@ -111,9 +111,6 @@ export default {
                     let users = res.data.data
                     usersFinal = users.filter((user) => { return user.id != state.currentUser.user.id })
                     commit("setUsers", usersFinal);
-                    commit("businessChat/setUsers", usersFinal);
-
-
 
                 })
                 .catch((err) => {
@@ -140,7 +137,7 @@ export default {
         GET_NETS({ commit, state }, data) {
             commit("setNets", []);
             commit("setLoader", true);
-            let keyword = data ? '?keyword=' + data : ''
+            let keyword = data ? '/' + data : ''
             axios.get(`/network/search${keyword}`)
                 .then((res) => {
                     commit("setLoader", false);

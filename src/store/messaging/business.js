@@ -12,8 +12,6 @@ export default {
         currentBizId: null,
         currentBiz: [],
         bizs: [],
-        nets: [],
-
         chats: [],
         chatList: [],
         groupMembers: [],
@@ -51,9 +49,6 @@ export default {
         },
         getBizs(state) {
             return state.bizs;
-        },
-        getNets(state) {
-            return state.nets;
         },
         getChats(state) {
             return state.chats;
@@ -107,12 +102,6 @@ export default {
         },
         setChats(state, data) {
             state.chats = data
-        },
-        setNets(state, data) {
-            state.nets = data
-        },
-        setUsers(state, data) {
-            state.users = data
         },
         setBizs(state, data) {
             state.bizs = data;
@@ -450,57 +439,6 @@ export default {
                 })
                 // commit("setCurrentBiz", rootGetters['auth/profilConnected']);
 
-        },
-
-        GET_ALL_USERS({ commit, state }, data) {
-            commit("setUsers", []);
-
-            commit("setLoader", true);
-            let keyword = data ? '/' + data : ''
-            let usersFinal = []
-            axios.get(`/user/all-user${keyword}`)
-                .then((res) => {
-                    commit("setLoader", false);
-                    let users = res.data.data
-                    usersFinal = users.filter((user) => { return user.id != state.currentUser.user.id })
-                    commit("setUsers", usersFinal);
-                })
-                .catch((err) => {
-                    commit("setLoader", false);
-                    console.log(err);
-                })
-        },
-        GET_ALL_BIZS({ commit, state }, data) {
-            commit("setBizs", []);
-            commit("setLoader", true);
-            let keyword = data ? '/' + data : ''
-            axios.get(`/business/all${keyword}`)
-                .then((res) => {
-                    commit("setLoader", false);
-                    let bizs = res.data.data
-                    commit("setBizs", bizs);
-
-                })
-                .catch((err) => {
-                    commit("setLoader", false);
-                    console.log(err);
-                })
-        },
-        GET_ALL_NETS({ commit, state }, data) {
-            commit("setNets", []);
-            commit("setLoader", true);
-            let keyword = data ? '?keyword=' + data : ''
-            axios.get(`/network/search${keyword}`)
-                .then((res) => {
-                    commit("setLoader", false);
-                    let bizs = res.data.data
-                    commit("setNets", bizs);
-
-                })
-                .catch((err) => {
-                    commit("setLoader", false);
-                    console.log(err);
-                })
         },
 
         // [NO BUG]

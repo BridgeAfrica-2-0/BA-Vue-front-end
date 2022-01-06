@@ -1,7 +1,13 @@
 <template>
   <b-container class="container-fluid">
     <b-container>
-      <p class="text">{{$t("businessowner.Select_a_payment_method_for_your_bridget_africa_account")}}</p>
+      <p class="text">
+        {{
+          $t(
+            "businessowner.Select_a_payment_method_for_your_bridget_africa_account"
+          )
+        }}
+      </p>
     </b-container>
 
     <div class="b-bottom">
@@ -32,6 +38,7 @@
             <div class="">
               <img
                 :src="require('@/assets/img/payment/mtn.png')"
+                class="img-cover"
                 alt="MOBILE MONEY"
               />
             </div>
@@ -54,6 +61,7 @@
             <div class="">
               <img
                 :src="require('@/assets/img/payment/orange_money.png')"
+                class="img-cover"
                 alt="ORANGE MONEY"
               />
             </div>
@@ -71,10 +79,11 @@
               ></b-form-radio>
             </div>
           </div>
-          <div class="my-4 operator">
+          <!-- <div class="my-4 operator">
             <div class="operator-img-box">
               <img
                 :src="require('@/assets/img/payment/expressU.jpg')"
+                class="img-cover"
                 alt="EXPRESS UNION"
               />
             </div>
@@ -91,7 +100,7 @@
                 class="operator-select"
               ></b-form-radio>
             </div>
-          </div>
+          </div> -->
 
           <div class="row p-2">
             <div class="col">
@@ -147,7 +156,7 @@
 <script>
 export default {
   name: "payment",
-  props: ['profileId'],
+  props: ["profileId"],
   data() {
     return {
       url: null,
@@ -162,7 +171,7 @@ export default {
       PaymentForm: {
         subscribe: "type",
         phone: "",
-        operator: ""
+        operator: "",
       },
 
       show: false,
@@ -172,12 +181,15 @@ export default {
   computed: {
     defaultPayment() {
       return this.$store.state.businessAccountType.defaultPayment;
-    }
+    },
   },
 
-  mounted(){
-    console.log("profileId", this.profileId)
-    this.url = this.$route.params.id !== undefined ? this.$route.params.id : this.profileId;
+  mounted() {
+    console.log("profileId", this.profileId);
+    this.url =
+      this.$route.params.id !== undefined
+        ? this.$route.params.id
+        : this.profileId;
     this.DefaultPayment();
   },
 
@@ -192,20 +204,20 @@ export default {
       this.RequestPayment = !this.RequestPayment;
       if (this.operator !== "") this.$emit("requestpayment", this.operator);
     },
-    
+
     DefaultPayment() {
       console.log("defaultPayment");
       this.$store
-      .dispatch("businessAccountType/getDefaultPayment", {
-        path: `get-payement-method/${this.url}`
+        .dispatch("businessAccountType/getDefaultPayment", {
+          path: `get-payement-method/${this.url}`,
         })
-      .then(() => {
-        this.PaymentForm.operator = this.defaultPayment.payement_method;
-        console.log('ohh yeah');
-      })
-      .catch(err => {
-        console.log({ err: err });
-      });
+        .then(() => {
+          this.PaymentForm.operator = this.defaultPayment.payement_method;
+          console.log("ohh yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
     },
 
     confirmDefaltPayment() {
@@ -248,10 +260,13 @@ export default {
 };
 </script>
 
-
 <style scoped>
 .descrip {
   font-size: 14px;
+}
+
+.img-cover {
+  object-fit: cover;
 }
 .btn-custom {
   height: 38px;
@@ -313,6 +328,20 @@ export default {
     top: -5px;
     left: -20px;
   }
+  .operator-img-box {
+    width: 100px !important;
+}
+.operator img {
+    width: 250px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .operator img {
+    display: inline-block;
+    height: 40px;
+    width: 100%;
+  }
 }
 </style>
 <style scoped>
@@ -331,12 +360,7 @@ export default {
   align-items: center;
 }
 .operator-img-box {
-  width: 50px !important;
-}
-.operator img {
-  display: inline-block;
-  height: 40px;
-  width: 100%;
+  width: 50px;
 }
 .operator-name {
   width: 30rem;

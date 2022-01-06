@@ -2,19 +2,6 @@ import axios from 'axios';
 import store from '@/store'
 
 class Repository {
-
-  async changeLanguage(lg) {
-    try {
-      const response = await axios.get(`/profile/language?language=${lg}`);
-      return {
-        success: true,
-      };
-    } catch (error) {
-      return {
-        success: false,
-      };
-    }
-  }
   async business(uuid) {
     try {
       const response = await axios.get(`/notification/business/${uuid}`);

@@ -638,7 +638,7 @@ export default {
             this.flashMessage.show({
               status: 'error',
 
-              message: 'Unable to Create Your Network',
+              message: this.$t('general.Unable_to_Create_Your_Network'),
               blockClass: 'custom-block-class',
             });
             console.log({ err: err });
@@ -735,7 +735,7 @@ export default {
             this.flashMessage.show({
               status: 'error',
 
-              message: 'Unable to Create Your Network',
+              message: this.$t('general.Unable_to_Create_Your_Network'),
               blockClass: 'custom-block-class',
             });
             console.log({ err: err });

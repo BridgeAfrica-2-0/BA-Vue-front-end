@@ -1,5 +1,5 @@
 <template>
-  <div class="p-0">   
+  <div class="p-0">
     <b-container fluid class="p-0 gradient">
       <div class="container-flex banner">
         <img
@@ -8,12 +8,13 @@
           alt="Cover Image"
         />
       </div>
+
       <div class="container-fluid p-63">
         <b-row class="mt-md-2 text-left">
           <b-col cols="12" md="12" class="m-0 p-0 text-left put-top">
             <b-avatar
-              :src="auth.profile_picture"
-              class="avat text-center bg-white"
+              :src="info.user.profile_picture ? info.user.profile_picture : ''"
+              class="avat text-center"
               badge-variant="primary"
               badge-offset="10px"
             ></b-avatar>
@@ -138,7 +139,7 @@
                     :src="selectedFile"
                     ref="cropper"
                     :aspect-ratio="6.5 / 3"
-                    drag-mode="move"  
+                    drag-mode="move"
                     :view-mode="1"
                   />
                 </div>
@@ -147,7 +148,7 @@
 
             <b-modal
               id="modal-upp"
-              ref="modalxl"
+              ref="modal"
               :title="$t('profileowner.Upload_Cover_Picture')"
             >
               <div class="w3-container">
@@ -274,11 +275,6 @@ export default {
   },
 
   methods: {
-    ...mapMutations({
-      addCoverPicture: "auth/addCoverPicture",
-      addProfile: "auth/updateProfilePicture",
-    }),
-
     nFormatter(num) {
       if (num >= 1000000000) {
         return (num / 1000000000).toFixed(1).replace(/\.0$/, "") + "G";
@@ -353,12 +349,12 @@ export default {
     },
 
     submitLogo() {
-      let loader = this.$loading.show({
-        container: this.fullPage ? null : this.$refs.preview,
-        canCancel: true,
-        onCancel: this.onCancel,
-        color: "#e75c18",
-      });
+      // let loader = this.$loading.show({
+      //   container: this.fullPage ? null : this.$refs.preview,
+      //   canCancel: true,
+      //   onCancel: this.onCancel,
+      //   color: '#e75c18',
+      // });
 
       let formData = new FormData();
       formData.append("image", this.profile_photo);
@@ -372,12 +368,13 @@ export default {
           this.$store
             .dispatch("profile/loadUserPostIntro", null)
             .then((response) => {
+              console.log(response);
               this.flashMessage.show({
                 status: "success",
                 message: this.$t("profileowner.Logo_Updated"),
                 blockClass: "custom-block-class",
               });
-              loader.hide();
+              // loader.hide();
               this.$refs["modalxl"].hide();
             })
             .catch((error) => {
@@ -393,7 +390,7 @@ export default {
               message: err.response.data.message,
               blockClass: "custom-block-class",
             });
-            loader.hide();
+            // loader.hide();
           } else {
             this.flashMessage.show({
               status: "error",
@@ -401,13 +398,13 @@ export default {
               blockClass: "custom-block-class",
             });
             console.log({ err: err });
-            loader.hide();
+            // loader.hide();
           }
         });
     },
 
     viewAs() {
-      let id = this.auth.id;
+      let id = this.info.user.id;
 
       this.$router.push({ name: "Follower", params: { id: id } });
     },
@@ -427,6 +424,7 @@ export default {
           this.$store
             .dispatch("profile/loadUserPostIntro", null)
             .then((response) => {
+              console.log(response);
               this.flashMessage.show({
                 status: "success",
                 message: this.$t("profileowner.profile_removed_successfully"),
@@ -465,8 +463,8 @@ export default {
           console.log(response);
           this.$store
             .dispatch("profile/loadUserPostIntro", null)
-            .then(() => {
-              this.addCoverPicture(null);
+            .then((response) => {
+              console.log(response);
               this.flashMessage.show({
                 status: "success",
                 message: this.$t("profileowner.Profile_removed_successfully"),
@@ -573,6 +571,8 @@ export default {
           this.$store
             .dispatch("profile/loadUserPostIntro", null)
             .then((response) => {
+              console.log(response);
+
               this.flashMessage.success({
                 message: this.$t("profileowner.Operation_successful"),
                 blockClass: "custom-block-class",
@@ -615,10 +615,6 @@ export default {
   },
 
   computed: {
-    ...mapGetters({
-      auth: "auth/profilConnected",
-    }),
-
     total() {
       return this.$store.state.profile.Tcommunity;
     },
@@ -629,16 +625,8 @@ export default {
   },
 
   watch: {
-    "$store.state.profile.profileIntro": {
-      deep: true,
-      handler() {
-        this.addCoverPicture(
-          this.$store.state.profile.profileIntro.user.cover_picture
-        );
-        this.addProfile(
-          this.$store.state.profile.profileIntro.user.profile_picture
-        );
-      },
+    "$state.state.profile.profileIntro": function (newInfo) {
+      this.addCoverPicture(newInfo.user.cover_picture);
     },
   },
 };
@@ -879,8 +867,5 @@ export default {
 .btn:active {
   border-color: #e4c229 !important;
   background-color: #b39500 !important ;
-}
-.bg-white{
-  background-color: #ffffff;
 }
 </style>

@@ -2055,7 +2055,13 @@
                     <label for="file">
                       <b-icon
                         for="file"
-                        class="msg-icon primary icon-size icon-top float-right text-right"
+                        class="
+                          msg-icon
+                          primary
+                          icon-size icon-top
+                          float-right
+                          text-right
+                        "
                         icon="paperclip"
                       >
                       </b-icon>

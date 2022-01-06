@@ -1,10 +1,10 @@
 <template>
   <div>
-    <!-- {{bio}} -->
+<!-- {{bio}} -->
 
     <b-alert v-if="edited" show> {{ successmsg }} </b-alert>
 
-    <span class="float-right">
+    <span class="float-right">  
       <button
         type="button"
         class="btn btn-outline-primary edit-btn"
@@ -12,16 +12,16 @@
         @click="edit(1)"
         variant="primary"
         size="sm"
-      >
-        {{ $t("profileowner.Edit_Profile") }}
+      >{{ $t('profileowner.Edit_Profile') }}
       </button>
     </span>
+    
 
     <br />
     <br />
     <br />
   
-  <p class="text" >  {{ bio.user.biography  }} </p>
+  <p class="text">  {{ bio.user.biography  }} </p>
    
     <div v-if="editing">
       <b-form @submit.prevent="save">
@@ -40,12 +40,10 @@
           max-rows="6"
         ></b-form-textarea>
         <div class="pt-2 action-btn">
-          <b-button variant="success" type="submit">{{
-            $t("profileowner.Save")
-          }}</b-button>
-          <b-button class="ml-2" variant="primary" @click="edit(0)">{{
-            $t("profileowner.Cancel")
-          }}</b-button>
+          <b-button variant="success" type="submit">{{ $t('profileowner.Save') }}</b-button>
+          <b-button class="ml-2" variant="primary" @click="edit(0)"
+            >{{ $t('profileowner.Cancel') }}</b-button
+          >
         </div>
       </b-form>
     </div>
@@ -54,7 +52,7 @@
 
 <script>
 export default {
-  data() {
+    data() {
     return {
       editing: false,
 
@@ -63,9 +61,9 @@ export default {
       access: null,
       info_access: null,
       options: [
-        { value: null, text: this.$t("profileowner.Select") },
-        { value: "private", text: this.$t("profileowner.Private") },
-        { value: "public", text: this.$t("profileowner.Public") },
+        { value: null, text: this.$t('profileowner.Select') },
+        { value: "private", text: this.$t('profileowner.Private') },
+        { value: "public", text: this.$t('profileowner.Public') },
       ],
       biography: {
         info_access: null,
@@ -74,10 +72,11 @@ export default {
     };
   },
   computed:{
-    
+
     bio(){
       return this.$store.state.profile.profile_about;
-    },
+    }
+
   },
   created() {
     this.$store
@@ -109,9 +108,7 @@ export default {
         );
         console.log(this.biography, "Update Biography User Cancel ++++++");
         this.edited = true;
-        this.successmsg = this.$t(
-          "profileowner.Profile_was_succesfully_Cancelled"
-        );
+        this.successmsg = this.$t('profileowner.Profile_was_succesfully_Cancelled');
         setInterval(() => {
           this.edited = false;
         }, 2000);
@@ -120,7 +117,7 @@ export default {
     },
     save() {
       this.edited = true;
-      this.successmsg = this.$t("profileowner.Profile_was_succesfully_Edited");
+      this.successmsg = this.$t('profileowner.Profile_was_succesfully_Edited');
       this.editing = false;
       setInterval(() => {
         this.edited = false;
@@ -130,7 +127,7 @@ export default {
       this.$store
         .dispatch("profile/updateUserBiography", {
           info_access: this.info_access,
-          description: this.bio.user.biography,
+          description:  this.bio.user.biography ,  
         })
         .then((response) => {
           console.log(
@@ -154,13 +151,15 @@ export default {
         });
     },
   },
+
 };
 </script>
 
 <style scoped>
-.ebio :hover {
+
+.ebio :hover{
   font-size: 55px;
-  color: #e75c18;
+   color: #e75c18;
 }
 .edit-btn {
   margin-left: 660px;

@@ -439,7 +439,6 @@ export default {
         .then(({ data }) => {
           console.log(data);
           this.SPupdateN = false;
-          this.showModal = false;
           this.getNetworkInfo();
           this.flashMessage.show({
             status: "success",

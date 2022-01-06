@@ -160,18 +160,6 @@ export default {
         });
     },
 
-     businessCommunityTotal() {
-      this.$store
-        .dispatch("businessOwner/businessCommunityTotal", this.biz_id)
-        .then(() => {
-          console.log("hey yeah");
-        })
-        .catch((err) => {
-          console.log({ err: err });
-        });
-    },
-
-
     async handleFollow(user) {
       
       console.log("yoo ma gee");
@@ -189,8 +177,6 @@ export default {
           console.log(data);
           user.is_follow = nextFollowState;
            document.getElementById("followbtn"+user.id).disabled = false;
-
-           this.businessCommunityTotal();
         })
          
           .catch((err) =>{  

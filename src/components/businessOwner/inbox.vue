@@ -2063,13 +2063,7 @@
                     <label for="file">
                       <b-icon
                         for="file"
-                        class="
-                          msg-icon
-                          primary
-                          icon-size icon-top
-                          float-right
-                          text-right
-                        "
+                        class="msg-icon primary icon-size icon-top float-right text-right"
                         icon="paperclip"
                       >
                       </b-icon>
@@ -2360,7 +2354,7 @@
                                 </tr>
                               </div>
                               <hr />
-                              <h5>{{ $t("general.Network") }}</h5>
+                              <h5>Network</h5>
                               <div v-if="allNetworks">
                                 <tr
                                   v-for="(biz, index) in allNetworks"
@@ -2395,7 +2389,7 @@
                                 </tr>
                               </div>
                               <hr />
-                              <h5>{{ $t("general.Editors") }}</h5>
+                              <h5>Editors</h5>
                               <div v-if="allEditors">
                                 <tr
                                   v-for="(biz, index) in allEditors"
@@ -2429,7 +2423,7 @@
                                 </tr>
                               </div>
                               <hr />
-                              <h5>{{ $t("general.Members") }}</h5>
+                              <h5>Members</h5>
                               <div v-if="allMembers">
                                 <tr
                                   v-for="(biz, index) in allMembers"

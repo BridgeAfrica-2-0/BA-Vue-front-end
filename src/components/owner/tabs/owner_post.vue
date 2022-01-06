@@ -102,7 +102,14 @@
           <b-row ref="loader">
             <b-col cols="1" class="m-0 p-0"></b-col>
             <b-col cols="2" class="m-0 p-0">
-              <b-avatar class="d-inline-block avat" variant="primary" :src="profile.profile_picture"></b-avatar>
+              <b-avatar 
+                class="d-inline-block avat" 
+                variant="light" 
+                :square="'user'=== profile.user_type ? false : true" 
+                :src="profile.profile_picture"
+              >
+                   
+              </b-avatar>
             </b-col>
             <b-col cols="9" class="pt-2" style="margin-left: -5px">
               <h5 class="m-0 font-weight-bolder"></h5>
@@ -214,7 +221,12 @@
           <b-row ref="loader">
             <b-col cols="1" class="m-0 p-0"></b-col>
             <b-col cols="2" class="m-0 p-0">
-              <b-avatar class="d-inline-block avat" variant="primary" :src="info.user.profile_picture"></b-avatar>
+              <b-avatar 
+                class="d-inline-block avat" 
+                variant="primary" 
+                :square="'user'=== profile.user_type ? false : true" 
+                :src="profile.profile_picture"
+                ></b-avatar>
             </b-col>
             <b-col cols="9" class="pt-2" style="margin-left: -5px">
               <h5 class="m-0 font-weight-bolder">{{ info.user.name }}</h5>
@@ -278,15 +290,15 @@
               </div>
               <br />
 
-              <div class="h300px">
-                <div v-for="hyperlink in createPost.hyperlinks" :key="hyperlink.fileName" class="bordder">
+              <div class="">
+                <div v-for="hyperlink in createPost.hyperlinks" :key="hyperlink.fileName" class="bordder h300px">
                   <span class="float-left"> {{ hyperlink.fileName }} </span>
                   <span class="float-right" @click="deleteItem(hyperlink.fileName)">
                     {{ $t('profileowner.delete') }}
                   </span>
                 </div>
 
-                <div v-for="movie in createPost.movies" :key="movie.fileName" class="">
+                <div v-for="movie in createPost.movies" :key="movie.fileName" class="h300px">
                   <div id="preview">
                     <span class="upload-cancel" @click="deleteItem(movie.fileName)">
                       <b-icon icon="x-circle" class="oorange"> </b-icon>
@@ -970,13 +982,13 @@ export default {
 }
 @media (max-width: 762px) {
   .commentt[data-v-41fcb621] {
-    width: 99%;
+    width: 118%;
     border: solid 1 px #ccc;
     border-radius: 25 px;
     background-color: #ddd;
     height: 34 px;
     padding-left: 10 px;
-    margin-left: 2%;
+    margin-left: -7%;
   }
 
   .post-btn {
@@ -985,7 +997,7 @@ export default {
   }
   .send-cmt {
     position: relative;
-    margin-left: 90%;
+    margin-left: 100%;
     top: -28px;
     cursor: pointer;
   }

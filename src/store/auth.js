@@ -25,6 +25,7 @@ export default {
     profilConnected: null,
   },
 
+
   mutations: {
 
     updateProfilePicture(state, picture) {
@@ -32,6 +33,17 @@ export default {
         state.profilConnected = { ...state.profilConnected, profile_picture: picture }
     },
 
+    addCoverPicture(state, picture) {
+
+      state.profilConnected = { ...state.profilConnected, cover_picture: picture }
+      let newUser = JSON.parse(localStorage.getItem('user'));
+
+      newUser.user.cover_picture = picture
+
+      localStorage.setItem('user', JSON.stringify(newUser));
+
+    },
+    
     setUserData(state, userData) {
       localStorage.removeItem('user');
       state.user = userData;
@@ -45,7 +57,7 @@ export default {
 
 
 
-    setAppLanguage(state, language) {
+    setAppLanguage(state, language) { 
       state.appLanguage = language;
       localStorage.setItem("lang", language); // Whenever we change the appLanguage we save it to the localStorage
     },
@@ -211,7 +223,7 @@ export default {
     },
 
     completeWelcome({ commit }) {
-      localStorage.removeItem('user');
+      // localStorage.removeItem('user');
       return axios.get('user/completewelcome').then(({ data }) => {
         console.log(data);
         commit("setUserDataa", data.data);

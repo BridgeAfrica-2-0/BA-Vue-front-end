@@ -19,6 +19,7 @@
 // import { Redis } from "@/mixins";
 
 import { mapGetters, mapActions } from "vuex";
+
 export default {
   // mixins: [Redis],
 

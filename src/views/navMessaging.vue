@@ -893,8 +893,9 @@
                             })
                           "
                         >
-                          <!-- <small class="small">{{ chat }}</small> -->
-                          <b-col class="col-8">
+
+                          <b-col class="col-9">
+
                             <span style="display: inline-flex">
                               <b-avatar
                                 class="d-inline-block profile-pic"
@@ -914,8 +915,8 @@
                             </span>
                           </b-col>
 
-                          <b-col class="col-4 text-center">
-                            <small class="text-center small">
+                          <b-col class="col-3 text-center">
+                            <small class="text-center">
                               {{ getCreatedAt(chat.created_at) }}
                             </small>
                             <!-- <p class="text-center">
@@ -987,9 +988,8 @@
                             })
                           "
                         >
-                          <!-- <small class="small">{{ chat }}</small> -->
 
-                          <b-col class="col-8">
+                          <b-col class="col-9">
                             <span style="display: inline-flex">
                               <b-avatar
                                 class="d-inline-block profile-pic"
@@ -1009,8 +1009,8 @@
                             </span>
                           </b-col>
 
-                          <b-col class="col-4 text-center">
-                            <small class="text-center small">
+                          <b-col class="col-3 text-center">
+                            <small class="text-center">
                               {{ getCreatedAt(chat.created_at) }}
                             </small>
                             <!-- <p class="text-center">
@@ -1082,8 +1082,9 @@
                             })
                           "
                         >
-                          <!-- <small class="small">{{ chat }}</small> -->
-                          <b-col class="col-8">
+
+                          <b-col class="col-9">
+
                             <span style="display: inline-flex">
                               <b-avatar
                                 class="d-inline-block profile-pic"
@@ -1103,8 +1104,8 @@
                             </span>
                           </b-col>
 
-                          <b-col class="col-4 text-center">
-                            <small class="text-center small">
+                          <b-col class="col-3 text-center">
+                            <small class="text-center">
                               {{ getCreatedAt(chat.created_at) }}
                             </small>
                             <!-- <p class="text-center">
@@ -1855,10 +1856,10 @@ export default {
     },
     getCreatedAt(data) {
       if (moment(data).isBefore(moment())) {
-        return moment(data).format("ddd") + " " + moment(data).format("LT");
+        return moment(data).format("lll");
       } else {
-        return moment(data).format("LT");
-        // return moment(data).fromNow();
+        // return moment(data).format('LT');
+        return moment(data).fromNow();
       }
     },
     getList(keyword) {
@@ -2103,9 +2104,6 @@ export default {
   overflow-y: auto;
   overflow-x: hidden;
   /* background-color: lightblue; */
-}
-.small {
-  font-size: 10px !important;
 }
 .spinner {
   font-size: 30px;

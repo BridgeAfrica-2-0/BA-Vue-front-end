@@ -48,6 +48,7 @@ export default {
     Followers,
     //  Networks
   },
+
   data() {
     return {
       currentTab: 0,
@@ -58,12 +59,12 @@ export default {
       tabs: ["#post", "#about", "#media", "#market", "#community"],
     };
   },
-  computed: {},
+
   methods: {
     gotoCoverImages() {
       this.showCoverAlbum = true
       this.isCover = true;
-      this.key = this.key+1
+      this.key = this.key + 1
       this.currentTab = 2;
     },
 
@@ -71,29 +72,16 @@ export default {
       this.$emit('pageChange')
     }
   },
-  created() {
-    let tab = this.tabs.findIndex((tab) => tab === this.$route.hash);
-
-    if (tab == -1) {
-      this.currentTab =
-        localStorage.getItem("ba-business-active-tab") !== null
-          ? localStorage.getItem("ba-business-active-tab")
-          : 0;
-    } else {
-      this.currentTab = tab;
-    }
-  },
-
+  
   watch: {
     currentTab: (newVal, oldVal) => {
-      if (2 != newVal)
+      if (2 != newVal){
         this.showCoverAlbum = false
-
-      localStorage.setItem("ba-business-active-tab", newVal);
+        this.key = this.key - 1
+      }
     },
 
     $route(to, from) {
-      console.log(to.hash);
       this.currentTab = this.tabs.findIndex((tab) => tab === to.hash);
     },
   },

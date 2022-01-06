@@ -37,7 +37,7 @@
             :isEditor="isEditor"
             :showCoverAlbum="
               showCoverAlbum ? 
-              'Cover' == album_name ? true : false
+              'Cover' == album.name ? true : false
               : false"
           />
         </div>

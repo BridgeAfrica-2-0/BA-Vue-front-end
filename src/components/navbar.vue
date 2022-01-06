@@ -90,14 +90,15 @@
           </form>
           <span class="d-none d-lg-block">
             <form class="form-inline input-group b-shadow b-radius">
+
               <input
                 id="search-ba"
                 type="search"
                 data-toggle="popover"
                 class="form-control search-h"
                 style="font-size: 17px !important"
-                :placeholder="searchOptions.placeholder"
-                v-model="searchOptions.keyword"
+                :placeholder="credentials.placeholder"
+                v-model="credentials.keyword"
                 aria-label=""
                 data-original-title=""
                 title=""
@@ -575,11 +576,7 @@ export default {
       notificationPatterns: null,
       messagePatterns: null,
       redirectionPatterns: null,
-      searchOptions: {
-        keyword: "",
-        placeholder: this.$t("general.All"),
-      },
-      query: "",
+      query: '',
       selectedUser: null,
       users: [],
     };
@@ -593,17 +590,12 @@ export default {
     }),
   },
   beforeMount() {
-    console.log("beforeMount");
-
     this.getLocation();
   },
   created() {
     //check for authentication
-    console.log("Language is  " + this.$i18n.locale);
+    
     this.islogin = this.$store.getters["auth/isLogged"];
-
-    console.log(this.islogin);
-    console.log("yoo mother fucjjeryt");
 
     if (this.islogin) {
       this.init();
@@ -668,13 +660,6 @@ export default {
       if (response.success) {
         this.updateNotificationEvent();
       }
-    },
-
-    credentials: {
-      deep: true,
-      handler() {
-        this.searchOptions = this.credentials;
-      },
     },
 
     query(newQuery) {
@@ -1137,7 +1122,7 @@ export default {
   .search-hh .form-control {
     height: 48px !important;
     margin-bottom: 0;
-    border-radius: 0px
+    border-radius: 0px;
     border-bottom: hidden;
   }
 }

@@ -16,11 +16,11 @@
       </splide>
     </div>
     
-    <router-link to="#media" @click="() => {showCoverAlbum=true; key++}">
-      <b-button class="float-right see-all">
-        {{ $t("businessf.See_All") }}
-      </b-button>
-    </router-link>
+    
+    <b-button class="float-right see-all" @click="gotoCoverImages">
+      {{ $t("businessf.See_All") }}
+    </b-button>
+    
 
     <b-row class="mt-4 desktop container-fluid">
       <b-col>
@@ -194,7 +194,7 @@ export default {
 
   data() {
     return {
-      key:0,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+      key:0,     
       hasBeFollow: 0,
       showCoverAlbum:false,
       url_data: null,
@@ -234,28 +234,18 @@ export default {
     this.currentAuthType = 'business'
     this.url_data = this.$route.params.id;
     this.businessInfo();
-
-    let tab = this.tabs.findIndex((tab) => tab === this.$route.hash);
-
-    if (tab == -1) {
-      this.currentTab =
-        localStorage.getItem("ba-business-active-tab") !== null
-          ? localStorage.getItem("ba-business-active-tab")
-          : 0;
-    } else {
-      this.currentTab = tab;
-    }
   },
 
   watch: {
     "$store.state.businessOwner.businessInfo": function () {
       this.hasBeFollow = this.$store.state.businessOwner.businessInfo.is_follow;
     },
+    
     currentTab: (newVal, oldVal) => {
-      if (2 != newVal)
+      if (2 != newVal){
         this.showCoverAlbum = false
-
-      localStorage.setItem("ba-business-active-tab", newVal);
+        this.key = this.key - 1
+      }
     },
 
     $route(to, from) {
@@ -267,15 +257,17 @@ export default {
   },
 
   mounted() {
-    console.log(this.url_data);
-    console.log("business info");
-
-    console.log(this.business_info);
-
     this.businessCommunityTotal();
     this.ownerPost();
   },
   methods: {
+
+    gotoCoverImages() {
+      this.showCoverAlbum = true
+      this.key = this.key + 1
+      this.currentTab = 2;
+    },
+
     async handleFollow() {
       console.log(this.business_info)
       // document.getElementById("followbtn").disabled = true;
@@ -303,6 +295,7 @@ export default {
     gotoAbout() {
       this.currentTab = 1;
     },
+
     businessInfo() {
       this.$store
         .dispatch("businessOwner/businessInfo", this.url_data)

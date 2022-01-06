@@ -83,7 +83,7 @@
                 <b-button
                   block
                   size="sm"
-                  :disabled="disable"
+               
                   :id="'followbtn' + item.id"
                   :class="item.is_follow !== 0 && 'u-btn'"
                   variant="primary"

@@ -6,7 +6,7 @@
 
         <b-spinner
            class="spin"
-          variant="primary">   </b-spinner> 
+          variant="primary">   </b-spinner>      
       
      </div>      
 
@@ -27,7 +27,7 @@
             <img
               :src="product.picture"
               class="r-image cursor-pointer"
-              @click="productDetails"
+             @click="productDetails(product)"
             />
           </div>
 
@@ -37,7 +37,7 @@
            <div class="flx50">  
        
           <p class="text">
-            <strong class="title cursor-pointer" @click="productDetails">
+            <strong class="title cursor-pointer" @click="productDetails(product)" >
               {{ product.name }}
             </strong>
             <br />
@@ -448,10 +448,12 @@ export default {
 
 
 
-
-    productDetails() {
+    productDetails(product) {
+      console.log(product);
+      this.product=product;
       this.viewProduct = true;
     },
+
     closeDetailsProduct() {
       this.viewProduct = false;
     },
@@ -677,7 +679,7 @@ h6 {
     text-align: left;
     margin-right: -5px;
     line-height: 25px;
-     margin-left: 65px;
+     margin-left: 75px;
   }
   .r-image {
     border-top-left-radius: 10px;
@@ -782,7 +784,7 @@ h6 {
     text-align: left;
     margin-right: -5px;
     line-height: 25px;
-     margin-left: 65px;
+     margin-left: 75px;
   }
   .r-image {
     border-top-left-radius: 10px;

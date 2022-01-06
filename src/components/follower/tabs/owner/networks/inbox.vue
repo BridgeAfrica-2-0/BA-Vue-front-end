@@ -1092,25 +1092,25 @@
       <!-- create group -->
       <b-modal id="group-name" hide-footer>
         <div class="d-block text-center">
-          <h3>{{ $t("general.The_Group_Name") }}:</h3>
+          <h3>The Group Name:</h3>
           <b-form-input
             v-model="groupName"
             @keypress.enter="selectedMultyChat()"
             id="input-large"
             size="lg"
             autofocus
-            :placeholder="$t('general.Enter_your_name') "
+            placeholder="Enter your name"
           ></b-form-input>
         </div>
 
         <b-button class="mt-3" block @click="selectedMultyChat()"
-          >{{ $t("general.Create") }}</b-button
+          >Create</b-button
         >
       </b-modal>
       <!-- preview -->
       <b-modal id="preview-file" hide-footer>
         <div class="d-block text-center">
-          <h3>{{ $t("general.Preview_file") }}:</h3>
+          <h3>Preview file:</h3>
           <b-img thumbnail fluid :src="previewSrc" id="filePreview"></b-img>
         </div>
       </b-modal>

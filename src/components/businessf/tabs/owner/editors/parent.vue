@@ -30,6 +30,9 @@
               <i :class="networkInfo.is_follow ? 'fas fa-user-minus fa-lg btn-icon':'fas fa-user-plus fa-lg btn-icon'"></i>
               <span> {{ $t('general.Community') }}</span>
             </b-button>
+
+            
+
           </b-col>
         </b-row>
       </b-container>
@@ -56,7 +59,11 @@
             </b-col>
           </b-row>
         </b-container>
-        <h6 class="mt-2 font-weight-bolder title ">{{ $t('general.About') }}</h6>
+        <h6 class="mt-2 font-weight-bolder title ">{{ $t('general.About') }}
+
+           <b-icon icon="pencil" class="i-color over" @click="addNetwork"></b-icon> 
+        </h6>
+        
         <p class="text-justify text">
           <read-more
             :more-str="$t('search.read_more')"
@@ -358,6 +365,9 @@ export default {
 </script>
 
 <style>
+.over{
+  cursor: pointer;
+}
 .a-center {
   text-align: center;
   align-content: center;

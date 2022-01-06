@@ -9,7 +9,7 @@
           </b-input-group-prepend>
           <b-form-input
             aria-label="Text input with checkbox"
-            :placeholder="$t('memnetwork.Search_Something')"
+            :placeholder="$t('network.Search_Something')"
             type="text"
             class="form-control"
             v-model="searchTitle"
@@ -33,15 +33,16 @@
             </b-card>
           </template>
         <div style="display:none;">{{member['communityNum'] = nFormatter(member.followers)}}</div>
-        <CommunityNetworks :member="member" @BlockUser="BlockUser" />
+        <div style="display:none;">{{member['type'] = "netwrok"}}</div>
+        <CommunityNetworks :member="member" @handleFollow="handleFollow" />
         </b-skeleton-wrapper>
       </b-col>
     </b-row>
     <b-row >
       <b-col col="12">
-        <infinite-loading @infinite="infiniteHandler">
-          <div class="text-red" slot="no-more">{{ $t('memnetwork.No_More_Request') }}</div>
-          <div class="text-red" slot="no-results">{{ $t('memnetwork.No_More_Request') }}</div>
+        <infinite-loading @infinite="infiniteHandler" ref="infiniteLoading">
+          <div class="text-red" slot="no-more">{{ $t('network.No_More_Request') }}</div>
+          <div class="text-red" slot="no-results">{{ $t('network.No_More_Request') }}</div>
         </infinite-loading>
       </b-col>
     </b-row>
@@ -60,7 +61,7 @@ export default {
     return {
       url:null,
       searchTitle: "",
-      page: 0,
+      page: 1,
       loading: false,
       networkfollowers: [],
       displayfollowers: []
@@ -95,13 +96,18 @@ export default {
     search() {
       if(this.searchTitle){
         this.loading = true;
-        this.page -= 1;
         console.log("searching...");
         console.log(this.searchTitle);
-        this.infiniteHandler();
+        this.$nextTick(() => {
+          this.page = 1;
+          this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
+        });
       }else{
         console.log("Empty search title: "+this.searchTitle);
-        this.infiniteHandler();
+        this.$nextTick(() => {
+          this.page = 1;
+          this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
+        });
       }
     },
     
@@ -139,28 +145,26 @@ export default {
       this.loading = false;
     },
 
-    BlockUser(user_id) {
-      this.loading = true;
-      console.log("network/"+this.url+"/lock/user/"+user_id);
-      this.axios.delete("network/"+this.url+"/lock/user/"+user_id)
-      .then(response => {
-        console.log(response);
-        this.blockUsers();
-        this.loading = false;
-        this.flashMessage.show({
-          status: "success",
-          message: "User blocked"
-        });
-      })
-      .catch(err => {
-        console.log({ err: err });
-        this.loading = false;
-        this.flashMessage.show({
-          status: "error",
-          message: "Unable to blocked User"
-        });
-      });
-    }
+    async handleFollow(Comdata) {
+      console.log("handleFollow", Comdata)
+      const url = Comdata.is_follow === 0 ? `/follow-community` : `/unfollow`;
+      console.log("uri", url)
+      const nextFollowState = Comdata.is_follow === 0 ? 1 : 0;
+      const data = {
+        networkId: this.url,
+        id: Comdata.id,
+        type: Comdata.type,
+      };
+      console.log("data", data)
+
+      await this.axios
+        .post(url, data)
+        .then(response => {
+          console.log("response", response);
+          Comdata.is_follow = nextFollowState;
+        })
+        .catch(err => console.log(err));
+    },
 
   }
 };

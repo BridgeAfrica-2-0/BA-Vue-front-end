@@ -16,8 +16,8 @@
           <div class="row">
             <div class="px-4 py-2 dialog-div">
               <p class="mb-0 dialog-text">
-                 {{ $t("general.International_Handricraft_Center") }}, Rond-point
-              Intendance, Yaound<span>é, {{ $t("general.Cameroon") }}</span>
+                {{ $t("general.International_Handricraft_Center") }}, Rond-point
+                Intendance, Yaound<span>é, {{ $t("general.Cameroon") }}</span>
               </p>
             </div>
           </div>
@@ -97,17 +97,8 @@
 import Contact from "../components/site/contact";
 import SiteFooter from "../components/site/siteFooter";
 import SiteHeader from "../components/site/siteHeader";
-import { MglMap, MglMarker, MglPopup } from "vue-mapbox";
+import { MglMap, MglPopup, MglMarker } from "vue-mapbox";
 export default {
-  components: {
-    Contact,
-    SiteFooter,
-    SiteHeader,
-    MglMarker,
-    MglMap,
-
-    MglPopup,
-  },
   data() {
     return {
       accessToken: process.env.VUE_APP_MAPBOX_TOKEN,
@@ -117,6 +108,14 @@ export default {
       isShowing: true
     };
   },
+  components: {
+    Contact,
+    SiteFooter,
+    SiteHeader,
+    MglMap,
+    MglMarker,
+    MglPopup,
+  },
 };
 </script>
 <style scoped>
@@ -125,8 +124,6 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
-
-@import url("https://api.tiles.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css");
 .font-arvo {
   font-family: "Arvo", serif;
 }
@@ -155,6 +152,13 @@ export default {
   height: 100vh;
 }
 
+.dialog-div {
+  min-width: 200px;
+}
+.dialog-text {
+  font-size: 15px;
+  font-weight: bold;
+}
 .keep-in-touch {
   background-image: url("../assets/contact-image.jpeg");
   width: 96%;
@@ -225,13 +229,5 @@ export default {
     border-right: none;
     border-bottom: 1px solid #d3d3d3;
   }
-}
-
-.dialog-div {
-  min-width: 200px;
-}
-.dialog-text {
-  font-size: 15px;
-  font-weight: bold;
 }
 </style>

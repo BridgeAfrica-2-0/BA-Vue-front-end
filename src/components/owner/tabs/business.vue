@@ -1,13 +1,12 @@
 <template>
-  <div>  
+  <div>
     <div class="people-style shadow" v-for="item in businesses" :key="item.id">
-      
       <b-row>
         <b-col md="8" xl="12" lg="12" cols="12" sm="8">
           <div class="d-inline-flex">
             <div class="center-img">
               <splide :options="options" class="r-image">
-                <splide-slide>
+                <splide-slide cl>
                   <img :src="item.picture" class="r-image" />
                 </splide-slide>
               </splide>
@@ -16,7 +15,7 @@
               <p class="textt">
                 <strong class="title">
                   <router-link :to="'business/' + item.id">
-                  {{ item.name }}
+                    {{ item.name }} 
                   </router-link>
                 </strong>
                 <br />
@@ -65,10 +64,28 @@
                 cols="4"
                 class="mt-2 text-center"
               >
-              
+                <b-button
+                  v-if="show == 'Follower'"
+                  disabled
+                  block
+                  size="sm"
+                  class="b-background shadow"
+                  :id="'followbtn' + item.id"
+                  :class="item.is_follow !== 0 && 'u-btn'"
+                  variant="primary"
+                 
+                >
+                  <i
+                    class="fas fa-lg btn-icon"
+                    :class="
+                      item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'
+                    "
+                  ></i>
+                  <span class="btn-com">Community</span>
+                </b-button>
 
                 <b-button
-                  
+                  v-else
                   block
                   size="sm"
                   class="b-background shadow"
@@ -148,6 +165,7 @@ export default {
         autoplay: true,
         perPage: 1,
         pagination: false,
+
         type: "loop",
         perMove: 1,
       },
@@ -223,18 +241,6 @@ export default {
         });
     },
 
-
-
-  getTotalCommunity(){
-         this.$store
-      .dispatch("follower/Tcommunity", this.foll_id)
-      .then((response) => {})
-      .catch((error) => {
-        console.log({ error: error });
-      });
-    },
-
-
     async handleFollow(user) {
       document.getElementById("followbtn" + user.id).disabled = true;
 
@@ -251,8 +257,6 @@ export default {
           console.log(response);
           user.is_follow = nextFollowState;
           document.getElementById("followbtn" + user.id).disabled = false;
-
-             this.getTotalCommunity();
         })
         .catch((err) => {
           console.log(err);

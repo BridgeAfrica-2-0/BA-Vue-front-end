@@ -22,7 +22,7 @@
           <b-col md="3" cols="4" sm="4" class="my-auto">
             <b-avatar
               class="p-avater"
-              variant="ligth"
+              variant="primary"
               :src="item.profile_picture"
             ></b-avatar>
           </b-col>
@@ -59,7 +59,7 @@
 
                 <b-col lg="6" xl="6" cols="12" md="12">
                   <div>
-                    <b-row class="mt-lg-0 ml-md-0 btns-mobile">
+                    <b-row class="mt-lg-0">
                       <b-col
                         md="6"
                         lg="12"
@@ -75,7 +75,7 @@
                         lg="12"
                         cols="6"
                         xl="12"
-                        class="mt-2 mt-lg-2 mt-xl-2 ml-n2 ml-md-0 btn-2 center"
+                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
                       >
                         <b-button
                           block
@@ -124,10 +124,6 @@ export default {
     },
   },
 
-  data: () => ({
-    loading: false,
-  }),
-
   methods: {
     count(number) {
       if (number >= 1000000) {
@@ -139,7 +135,7 @@ export default {
     },
 
     async handleFollow(user) {
-      this.loading = true;
+      console.log("yoo ma gee");
       document.getElementById("followbtn" + user.id).disabled = true;
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
@@ -151,14 +147,15 @@ export default {
       await axios
         .post(uri, data)
         .then(({ data }) => {
+          console.log(data);
           user.is_follow = nextFollowState;
           document.getElementById("followbtn" + user.id).disabled = false;
         })
+
         .catch((err) => {
           console.log({ err: err });
           document.getElementById("followbtn" + user.id).disabled = false;
-        })
-        .finally(() => (this.loading = false));
+        });
     },
   },
 };
@@ -189,9 +186,6 @@ export default {
 
   .btn-com {
     margin-left: 3px;
-  }
-  .btns-mobile{
-    margin-left: -2.2rem;
   }
 }
 

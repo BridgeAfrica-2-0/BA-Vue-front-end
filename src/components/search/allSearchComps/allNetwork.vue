@@ -16,76 +16,115 @@
     </b-alert>
 
     <div
-      class="people-style shadow"
-      v-for="(network, index) in networks.data"
-      :key="index"
+      v-for="item in networks.data"
+      :key="item.id"
+      class="people-style shadow h-100"
     >
       <b-row>
-        <b-col md="3" xl="3" lg="3" cols="4" sm="3">
-          <div class="center-img">
-            <img :src="network.image" class="r-image" />
+        <b-col md="8" xl="8" lg="12" cols="12" sm="8">
+          <div class="d-inline-flex">
+            <div class="center-img">
+              <img :src="item.image" class="r-image" />
+            </div>
+            <div class="flx100">
+              <p class="textt">
+                <strong class="title">
+                  <router-link :to="'network/' + item.id">
+                    {{ item.name }}
+                  </router-link>
+                </strong>
+                <br />
+
+                <span v-for="cat in item.assign_categories.slice(0,7)" :key="cat.name">
+                  {{ cat.name }},
+                </span>
+
+                {{ count(item.community) }}
+                {{ $t("dashboard.Community") }} <br />
+
+                <span class="location">
+                  <b-icon-geo-alt class="ico"></b-icon-geo-alt>
+                  {{ item.country }}
+                  <span class="ml-2"> {{ item.address }} </span>
+                </span>
+                <br />
+                <read-more
+                  :more-str="$t('search.read_more')"
+                  class="readmore"
+                  :text="item.description"
+                  link="#"
+                  :less-str="$t('search.read_less')"
+                  :max-chars="70"
+                >
+                </read-more>
+              </p>
+            </div>
           </div>
         </b-col>
-        <b-col md="7" cols="8" lg="5" sm="5">
-          <p class="textt">
-            <strong class="net-title">
-              <router-link :to="'network/' + network.id">
-                {{ network.name }}sda
-              </router-link>
-            </strong>
-            <br />
-            {{ network.purpose }}
-            <br />
-            {{ network.member_count }} {{ $t("search.Community_member") }}
-            <br />
 
-            <span class="location">
-              <b-icon-geo-alt class="ico"></b-icon-geo-alt>
-              {{ network.address }}
-            </span>
-            <br />
-            <read-more
-              :more-str="$t('search.read_more')"
-              class="readmore"
-              :text="network.description"
-              link="#"
-              :less-str="$t('search.read_less')"
-              :max-chars="30"
-            >
-            </read-more>
-            <!-- <b-link>{{ $t("search.Read_More") }}</b-link> -->
-          </p>
-        </b-col>
-
-        <b-col lg="4" md="12" xl="4" cols="12" sm="4">
+        <b-col lg="12" xl="4" md="4" cols="12" sm="4">
           <div class="s-button">
             <b-row>
-              <b-col md="4" lg="12" xl="12" sm="12" cols="4" class="mt-2">
+              <b-col
+                md="12"
+                lg="4"
+                xl="12"
+                sm="12"
+                cols="4"
+                class="mt-2 text-center"
+              >
+                <b-button
+                  block
+                  size="sm"
+                  :disabled="disable"
+                  :id="'followbtn' + item.id"
+                  :class="item.is_follow !== 0 && 'u-btn'"
+                  variant="primary"
+                  @click="handleFollow(item)"
+                >
+                  <i
+                    class="fas fa-lg btn-icon"
+                    :class="
+                      item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'
+                    "
+                  ></i>
+                  <span class="btn-com ml-1">
+                    {{ $t("dashboard.Community") }}</span
+                  >
+                </b-button>
+              </b-col>
+
+              <b-col
+                md="12"
+                lg="4"
+                xl="12"
+                sm="12"
+                cols="4"
+                class="mt-2 text-center"
+              >
+                <BtnCtaMessage :element="item" type="network" />
+              </b-col>
+
+              <b-col
+                md="12"
+                lg="4"
+                xl="12"
+                sm="12"
+                cols="4"
+                class="mt-2 text-center"
+              >
                 <b-button
                   block
                   size="sm"
                   class="b-background shadow"
                   variant="primary"
                 >
-                  <i class="fas fa-user-plus fa-lg btn-icon"></i>
-                  <span class="btn-com" v-b-modal.modal-sm>{{
-                    $t("search.Community")
-                  }}</span>
-                </b-button>
-              </b-col>
-
-              <b-col md="4" lg="12" xl="12" sm="12" cols="4" class="mt-2">
-                <BtnCtaMessage :element="network" type="network" />
-              </b-col>
-
-              <b-col md="4" lg="12" xl="12" sm="12" cols="4" class="mt-2">
-                <b-button
-                  block
-                  size="sm"
-                  class="b-background shadow btn-join-mobile"
-                  variant="primary"
-                >
-                  <i class="fas fa-lg btn-icon fa-user-plus"></i>
+                  <i
+                    class="fas fa-lg btn-icon"
+                    :class="
+                      item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'
+                    "
+                  ></i>
 
                   <span class="btn-text"> {{ $t("search.Join") }} </span>
                 </b-button>
@@ -135,7 +174,7 @@ export default {
     };
   },
   created() {
-    //console.log("Mini Networks => ".this.network());
+    console.log("Mini Networks => ".this.network());
   },
   computed: {
     networks() {
@@ -147,28 +186,6 @@ export default {
   },
 
   methods: {
-    async handleJoin(user) {
-      document.getElementById("joinbtn" + user.id).disabled = true;
-      const uri = user.is_member === 0 ? `/add-member` : `/remove-member`;
-      const nextFollowState = user.is_member === 0 ? 1 : 0;
-      const data = {
-        id: user.id,
-        type: "network",
-      };
-
-      await axios
-        .post(uri, data)
-        .then((response) => {
-          console.log(response);
-          user.is_member = nextFollowState;
-          document.getElementById("joinbtn" + user.id).disabled = false;
-        })
-        .catch((err) => {
-          console.log(err);
-          document.getElementById("joinbtn" + user.id).disabled = false;
-        });
-    },
-
     changePage(value) {
       this.$store.commit("networkSearch/setNetworks", { data: [] });
       this.$store.commit("networkSearch/setLoader", true);
@@ -211,7 +228,6 @@ export default {
   },
 };
 </script>
-
 <style scoped>
 @media only screen and (min-width: 768px) {
   .btn-text {
@@ -241,9 +257,6 @@ export default {
 
   .btn-com {
     margin-left: 3px;
-  }
-  .btn-join-mobile{
-    padding-left: 20px;
   }
 }
 

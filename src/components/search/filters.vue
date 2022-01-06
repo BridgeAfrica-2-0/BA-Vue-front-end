@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="filterType == '1' || filterType == '4'">
+    <div v-if="filterType == '1' || filterType == '4' || filterType == '0'">
       <div v-if="subCategories.length">
         <span>
           <b-form-radio
@@ -69,7 +69,18 @@
         </b-button>
       </b-modal>
 
-     
+      <b-form-checkbox
+        v-for="agriculture in categories_sub_filters"
+        v-model="yayaya"
+        :key="agriculture.value"
+        :value="agriculture.value"
+        name="flavour-4a"
+        button
+        class="m-1 shadow border br-3"
+        inline
+      >
+        {{ agriculture.text }}
+      </b-form-checkbox>
 
       <span v-if="showform == true">
         <b-form-group
@@ -167,7 +178,7 @@
       <!-- <b-link v-b-modal="'distance'"> {{ $t("search.See_all") }} </b-link> -->
 
       <div>
-        <span v-if="filterType == '1' || filterType == '4'">
+        <span v-if="filterType == '4'">
           <b-form-group
             label-cols-lg="12"
             :label="$t('search.Neighbourhood')"
@@ -192,8 +203,6 @@
           </b-link>
 
           <br />
-
-          <span v-if="filterType == '4'">   
           <label
             ><b>{{ $t("search.Price_Range") }}</b></label
           >
@@ -207,7 +216,6 @@
             @change="searchByPrice"
           ></b-form-input>
           <div class="mt-2 text-left">min: 100 Max: {{ priceRange }}</div>
-           </span>
         </span>
       </div>
     </div>
@@ -222,37 +230,69 @@
         >{{ $t("search.Reset") }}</b-button
       >
       <br />
-      <!-- Category -->   
-      <div v-if="categories.length > 0">
-        <b-form-group
-          label-cols-lg="3"
-          :label="$t('search.Categories')"
-          label-size="md"
-          label-class="font-weight-bold pt-0"
-          class="mb-0 pt-6 text-left"
+      <!-- Category -->
+
+      <!-- 
+      <b-form-group
+        label-cols-lg="12"
+       :label="$t('search.Neighbourhood')"
+        label-size="md"
+        label-class="font-weight-bold pt-0"
+        class="mb-0 text-left"
+      >
+        <b-form-checkbox id="" class="a-text" name="" value="">
+          Buea</b-form-checkbox
         >
-        </b-form-group>
-        <b-form-select
-          v-model="networkSelect.category"
-          :options="categories"
-          value-field="category.id"
-          text-field="category.name"
-          @change="allSearchByCat({ cat_id: networkSelect.category })"
+
+        <b-form-checkbox id="" class="a-text" name="" value="">
+          Tiko</b-form-checkbox
         >
-        </b-form-select>
 
+        <b-form-checkbox id="" class="a-text" name="" value="">
+          Limbe</b-form-checkbox
+        >
 
-        
+        <b-form-checkbox id="" class="a-text" name="" value="">
+          Mutengene</b-form-checkbox
+        >
+      </b-form-group>
 
+      <b-link v-b-modal="'Neighbourhood'"> See all </b-link>
 
-      </div>
+      <br />
 
       <hr />
-     
+
+      <b-form-group
+        label-cols-lg="12"
+       :label="$t('search.Distance')"
+        label-size="md"
+        label-class="font-weight-bold pt-0 text-left"
+        class="mb-0"
+      >
+        <b-form-checkbox id="" class="a-text" name="" value="">
+          3km</b-form-checkbox
+        >
+
+        <b-form-checkbox id="" class="a-text" name="" value="">
+          9km</b-form-checkbox
+        >
+
+        <b-form-checkbox id="" class="a-text" name="" value="">
+          15km</b-form-checkbox
+        >
+
+        <b-form-checkbox id="" class="a-text" name="" value="">
+          25km</b-form-checkbox
+        >
+      </b-form-group>
+
+      <b-link v-b-modal="'distance'"> See all </b-link>
+       -->
     </div>
 
     <!-- Network -->
-    <div v-if="filterType == '1' || filterType == '4'">
+    <div v-if="filterType == '4'">
       <hr />
       <b-form-group
         label-cols-lg="12"
@@ -1941,9 +1981,9 @@ export default {
         // method to search for a business lol
 
         this.$store
-          .dispatch("marketSearch/getFilter", subCat.id)
+          .dispatch("business/FIND_BUSINESS", subCat.id)
           .then((res) => {
-            this.searchBusiness({ cat_id: subCat.cat_id, sub_cat: subCat.id });
+            this.searchProducts({ cat_id: subCat.cat_id, sub_cat: subCat.id });
             console.log("Filters: ");
             console.log(res.data.data);
             if (res.data.data.length === 0) {
@@ -2000,25 +2040,13 @@ export default {
 
     searchByFilter(filter) {
       // this.showform = false;
-       if (this.filterType == 1) {
       console.log("[DEBUG] Filter: ", filter);
-      this.searchBusiness({
-        cat_id: filter.cat_id,
-        sub_cat: filter.sub_cat_id,
-        filter_id: filter.id,
-      });
-      this.$bvModal.hide("myModalllo");}
-       if (this.filterType == 4) {
-              
-              console.log("[DEBUG] Filter: ", filter);
       this.searchProducts({
         cat_id: filter.cat_id,
         sub_cat: filter.sub_cat_id,
         filter_id: filter.id,
       });
       this.$bvModal.hide("myModalllo");
-
-       }
     },
     getUserNeibourhoods() {
       console.log("[debug] neigbourhood: ", this.userNeighbourhoods);
@@ -2053,14 +2081,7 @@ export default {
       let data = {
         distanceInKM: this.distance,
       };
-       if (this.filterType == 1) {
       this.searchProducts(data);
-       }
-
-        if (this.filterType == 1) {
-
-          this.searchBusiness(data);
-        }
     },
     searchByPrice(value) {
       console.log("[DEBUG] PRICE: ", value);
@@ -2215,7 +2236,7 @@ export default {
         })
         .catch((err) => {
           console.log("Error erro!");
-        });   
+        });
     },
 
     // Not ED code

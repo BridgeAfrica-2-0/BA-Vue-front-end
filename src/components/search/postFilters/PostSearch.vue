@@ -5,13 +5,13 @@
       <fas-icon class="icons" :icon="['fas', 'exclamation-circle']" size="lg" />
     </h6>
 
-    <Sponsor @on:init="(val) => showSponsored = val" v-if="showSponsored" />
-    
+    <div>
+      <Sponsor />
+    </div>
     <h6>
       <fas-icon class="icons" :icon="['fab', 'readme']" size="lg" />
       {{ $t("search.Posting") }}
     </h6>
-
     <Loader v-if="!pageHasLoad || loaderState" />
     <NotFound v-if="!posts.length && !loaderState" :title="title" />
     <div v-else>
@@ -56,7 +56,6 @@ export default {
 
   data: () => ({
     pageHasLoad: false,
-    showSponsored: true
   }),
 
   destroyed() {
@@ -107,19 +106,11 @@ export default {
     }),
 
     async singlePost() {
-      this.setLoaderState(true);
-
       const response = await this.$repository.post.single({
         uuid: this.$route.query.uuid,
       });
 
-      if (response.success){ 
-        this.postStore([response.data])
-        this.setLoaderState(false);
-        this.pageHasLoad=true
-      }else{
-        this.pageHasLoad=true
-      }
+      if (response.success) this.postStore(response.data);
     },
 
     async getAuth() {

@@ -1,37 +1,25 @@
 <template>
-  <div>
-    <b-icon class="icon" variant="primary" icon="person-fill"></b-icon
-    >{{ $t("profileowner.About") }}
+  <div>   
+    <b-icon class="icon" variant="primary" icon="person-fill"></b-icon>{{ $t('profileowner.About') }} 
 
-    <hr />
+    <hr /> 
 
-    <b-card v-if="window.width < 768" no-body class="mobile p-2 ml-0">
+    <b-card v-if="window.width<768"  no-body class="mobile p-2">
       <b-tabs pills card justified>
-        <b-tab :title="$t('profileowner.BIOGRAPHY')" active
-          ><Biography
-        /></b-tab>
-        <b-tab :title="$t('profileowner.CONTACT_BASIC_INFO')"
-          ><ContactandInfo />
-        </b-tab>
-        <b-tab :title="$t('profileowner.WORK_EDUCATION')"
-          ><WorkAndEducation
-        /></b-tab>
+        <b-tab :title="$t('profileowner.BIOGRAPHY')" active><Biography /></b-tab>
+        <b-tab :title="$t('profileowner.CONTACT_BASIC_INFO')"><ContactandInfo /> </b-tab>
+        <b-tab :title="$t('profileowner.WORK_EDUCATION')"><WorkAndEducation /></b-tab>
       </b-tabs>
     </b-card>
 
     <b-card v-else no-body class="desktop">
       <b-tabs pills card vertical>
-        <b-tab :title="$t('profileowner.BIOGRAPHY')" active
-          ><Biography
-        /></b-tab>
-        <b-tab :title="$t('profileowner.CONTACT_BASIC_INFO')"
-          ><ContactandInfo />
-        </b-tab>
-        <b-tab :title="$t('profileowner.WORK_EDUCATION')"
-          ><WorkAndEducation
-        /></b-tab>
+        <b-tab :title="$t('profileowner.BIOGRAPHY')" active><Biography /></b-tab>  
+        <b-tab :title="$t('profileowner.CONTACT_BASIC_INFO')"><ContactandInfo /> </b-tab>
+        <b-tab :title="$t('profileowner.WORK_EDUCATION')"><WorkAndEducation /></b-tab>  
       </b-tabs>
     </b-card>
+
   </div>
 </template>
 
@@ -43,42 +31,49 @@ export default {
   components: {
     Biography,
     ContactandInfo,
-    WorkAndEducation,
+    WorkAndEducation
   },
   data() {
     return {
       size: 0,
-      mobile: null,
+      mobile:null,
       profile_about: null,
 
-      window: {
-        width: 0,
-        height: 0,
-      },
+       window: {
+            width: 0,
+            height: 0
+        }
+
     };
   },
   created() {
-    window.addEventListener("resize", this.handleResize);
-    this.handleResize();
+
+  
+   window.addEventListener('resize', this.handleResize);
+        this.handleResize();
+
 
     this.profile_about = JSON.parse(
-      JSON.stringify(this.$store.getters["profile/getProfileAbout"])
+            JSON.stringify(this.$store.getters['profile/getProfileAbout'])
     );
     console.log("Load User Profile About start ++++++", this.profile_about);
     this.$store
-      .dispatch("profile/loadUserProfileAbout", null)
-      .then((response) => {})
-      .catch((error) => {
-        console.log("Error from server or from browser error (2) ++++", error);
-      })
-      .finally(() => {
-        this.profile_about = JSON.parse(
-          JSON.stringify(this.$store.getters["profile/getProfileAbout_"])
-        );
-        console.log("Load User Profile About end ++++++", this.profile_about);
-      });
+            .dispatch("profile/loadUserProfileAbout", null)
+            .then(response => {
+              
+            })
+            .catch(error => {
+              console.log("Error from server or from browser error (2) ++++", error);
+            })
+            .finally(() => {
+              this.profile_about = JSON.parse(
+                      JSON.stringify(this.$store.getters['profile/getProfileAbout_'])
+              );
+              console.log("Load User Profile About end ++++++", this.profile_about);
+            });
   },
   computed: {
+
     vertical() {
       if (this.size > 768) return true;
       return false;
@@ -86,7 +81,7 @@ export default {
     card() {
       if (this.size > 992) return true;
       return false;
-    },
+    }
   },
   mounted() {
     var that = this;
@@ -95,16 +90,20 @@ export default {
     };
   },
 
-  destroyed() {
-    window.removeEventListener("resize", this.handleResize);
-  },
 
-  methods: {
-    handleResize() {
-      this.window.width = window.innerWidth;
-      this.window.height = window.innerHeight;
+
+   destroyed() {
+        window.removeEventListener('resize', this.handleResize);
     },
-  },
+
+    methods: {
+        handleResize() {
+            this.window.width = window.innerWidth;
+            this.window.height = window.innerHeight;
+        }
+    }
+
+
 };
 </script>
 
@@ -121,6 +120,8 @@ export default {
   background-color: rgb(242, 242, 242);
   border: none;
 }
+
+
 
 span {
   margin-left: 8px;

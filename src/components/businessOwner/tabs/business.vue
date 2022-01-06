@@ -164,18 +164,6 @@ export default {
   },
 
   methods: {
-
-      businessCommunityTotal() {
-      this.$store
-        .dispatch("businessOwner/businessCommunityTotal", this.biz_id)
-        .then(() => {
-          console.log("hey yeah");
-        })
-        .catch((err) => {
-          console.log({ err: err });
-        });
-    },
-
     gotoBusiness(id) {
       this.$router.push(`/business/${id}#about`);
     },
@@ -229,7 +217,7 @@ export default {
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
         id: user.id,
-        type: "business",
+        type: "user",
       };
 
       await axios
@@ -238,8 +226,6 @@ export default {
           console.log(data);
           user.is_follow = nextFollowState;
           document.getElementById("followbtn" + user.id).disabled = false;
-
-          this.businessCommunityTotal();
         })
 
         .catch((err) => {

@@ -2,8 +2,8 @@
   <div>
     <b-card>
      <b-tabs content-class="mt-3" pills>
-    <b-tab title="People" active><People/></b-tab>
-    <b-tab title="Businesses"><Businesses/></b-tab>
+    <b-tab :title="$t('general.People')" active><People/></b-tab>
+    <b-tab :title="$t('general.Businesses')"><Businesses/></b-tab>
   </b-tabs>
     </b-card>
   </div>

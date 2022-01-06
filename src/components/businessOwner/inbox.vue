@@ -2063,7 +2063,13 @@
                     <label for="file">
                       <b-icon
                         for="file"
-                        class="msg-icon primary icon-size icon-top float-right text-right"
+                        class="
+                          msg-icon
+                          primary
+                          icon-size icon-top
+                          float-right
+                          text-right
+                        "
                         icon="paperclip"
                       >
                       </b-icon>
@@ -2354,7 +2360,7 @@
                                 </tr>
                               </div>
                               <hr />
-                              <h5>Network</h5>
+                              <h5>{{ $t("general.Network") }}</h5>
                               <div v-if="allNetworks">
                                 <tr
                                   v-for="(biz, index) in allNetworks"
@@ -2389,7 +2395,7 @@
                                 </tr>
                               </div>
                               <hr />
-                              <h5>Editors</h5>
+                              <h5>{{ $t("general.Editors") }}</h5>
                               <div v-if="allEditors">
                                 <tr
                                   v-for="(biz, index) in allEditors"
@@ -2423,7 +2429,7 @@
                                 </tr>
                               </div>
                               <hr />
-                              <h5>Members</h5>
+                              <h5>{{ $t("general.Members") }}</h5>
                               <div v-if="allMembers">
                                 <tr
                                   v-for="(biz, index) in allMembers"
@@ -2911,15 +2917,15 @@ export default {
       chatSearchKeyword: "",
       tabIndex: 2,
       type: "",
-      // socket: io(process.env.NODE_SERVER_URL_DEV, {
+      // socket: io(process.env.VUE_APP_CHAT_SERVER_URL_DEV, {
       //   transports: ["websocket", "polling", "flashsocket"],
       // }),
-      // socket: io(process.env.VUE_APP_CHAT_SERVER_URL, {
-      //   transports: ["websocket", "polling", "flashsocket"],
-      // }),
-      socket: io("http://localhost:7000", {
+      socket: io(process.env.VUE_APP_CHAT_SERVER_URL, {
         transports: ["websocket", "polling", "flashsocket"],
       }),
+      // socket: io("http://localhost:7000", {
+      //   transports: ["websocket", "polling", "flashsocket"],
+      // }),
 
       nameSpace: {
         status: false,
@@ -3225,7 +3231,6 @@ export default {
       this.filePreview = false;
     },
     socketListenners() {
-      console.log("listenning...");
       // this.socket.on("generalMessage", (data) => {
       //   console.log("Received");
       //   console.log(data);
@@ -3259,6 +3264,7 @@ export default {
 
         this.saveMessage(this.formData);
       });
+      console.log("listenning...");
     },
     createGroup(receiver_business_id) {
       this.socket.emit("create-group", this.chatId);

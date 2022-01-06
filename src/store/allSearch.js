@@ -65,57 +65,57 @@ export default {
         },
     },
 
-  actions: {
-    SEARCH({ commit, state,getters }, data) {
-     
-     let islogin=this.getters["auth/isLogged"];
- 
-      commit("setNetworks", { data: [] });
-      commit("setPeoples", { data: [] });
-      commit("setProducts", { data: [] });
-      commit("setBusinesses", { data: [] });
-      commit("setPosts", { data: [] });
-      commit("setLoader", true);
+    actions: {
+        SEARCH({ commit, state, getters }, data) {
+            console.log("here:...", data);
+            let islogin = this.getters["auth/isLogged"];
 
-      
-      let page = 1;
-      const TYPES = ["business", "user", "network", "market", "post"];
-      let catId = data.cat_id ? "catId=" + data.cat_id : "";
-      let keyword = data.keyword ? "keyword=" + data.keyword : "";
-      let url="";
+            commit("setNetworks", { data: [] });
+            commit("setPeoples", { data: [] });
+            commit("setProducts", { data: [] });
+            commit("setBusinesses", { data: [] });
+            commit("setPosts", { data: [] });
+            commit("setLoader", true);
 
-      TYPES.map((type) => {
 
-        if(!islogin){  
+            let page = 1;
+            const TYPES = ["business", "user", "network", "market", "post"];
+            let catId = data.cat_id ? "catId=" + data.cat_id : "";
+            let keyword = data.keyword ? "keyword=" + data.keyword : "";
+            let url = "";
 
-           url = `/visitor/search/${type}?${catId}&${keyword}`;
+            TYPES.map((type) => {
 
-         }else{  
-        // console.log(`type => ${type} keyword = ${keyword}`);
-         url = `/search/${type}?${catId}&${keyword}`;
-       
+                if (!islogin) {
 
-      }
-        console.log(url);   
-        axios
-          .get(url)
-          .then((res) => {
-            if (type == "business") {
-              commit("setBusinesses", res.data);
-              console.log("business results: ", res.data);
-            } else if (type == "user") {
-              commit("setPeoples", res.data);
-              console.log("user results: ", res.data);
-            } else if (type == "market") {
-              commit("setProducts", res.data);
-              console.log("market results: ", res.data);
-            } else if (type == "network") {
-              commit("setNetworks", res.data);
-              console.log("network results: ", res.data);
-            } else if (type == "post") {
-              commit("setPosts", res.data);
-              console.log("post results: ", res.data);
-            }
+                    url = `/visitor/search/${type}?${catId}&${keyword}`;
+
+                } else {
+                    // console.log(`type => ${type} keyword = ${keyword}`);
+                    url = `/search/${type}?${catId}&${keyword}`;
+
+
+                }
+                console.log(url);
+                axios
+                    .get(url)
+                    .then((res) => {
+                        if (type == "business") {
+                            commit("setBusinesses", res.data);
+                            console.log("business results: ", res.data);
+                        } else if (type == "user") {
+                            commit("setPeoples", res.data);
+                            console.log("user results: ", res.data);
+                        } else if (type == "market") {
+                            commit("setProducts", res.data);
+                            console.log("market results: ", res.data);
+                        } else if (type == "network") {
+                            commit("setNetworks", res.data);
+                            console.log("network results: ", res.data);
+                        } else if (type == "post") {
+                            commit("setPosts", res.data);
+                            console.log("post results: ", res.data);
+                        }
 
                         commit("setLoader", false);
                         console.log("All Search results: ", res.data);
@@ -123,7 +123,7 @@ export default {
 
                 .catch((err) => {
                     commit("setLoader", false);
-                    console.log({err:err});
+                    console.log({ err: err });
                 });
             });
 

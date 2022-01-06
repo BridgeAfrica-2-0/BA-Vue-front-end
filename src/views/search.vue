@@ -403,14 +403,14 @@
             <!--filter for all takes just two fields at a time  -->
 
             <div id="all" v-if="selectedId == '0'">
-              <!-- <h6>
+              <h6>
                 {{$t("search.Sponsored_Result")}}
                 <fas-icon class="icons" :icon="['fas', 'exclamation-circle']" size="lg" />
               </h6>
 
               <div>
                 <Sponsor />
-              </div> -->
+              </div>
 
               <h6>
                 <fas-icon
@@ -536,13 +536,13 @@
             <!-- Filter out just the market -->
 
             <div v-if="selectedId == '4'">
-              <!-- <h6>
+              <h6>
                 <fas-icon class="icons" :icon="['fas', 'store']" size="lg" />
                 {{$t("search.Market")}}
-              </h6> -->
+              </h6>
 
               <div>
-                <!-- <Sponsor /> -->
+                <Sponsor />
               </div>
 
               <h6 class="mb-3">

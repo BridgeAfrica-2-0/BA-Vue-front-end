@@ -893,9 +893,7 @@
                             })
                           "
                         >
-
                           <b-col class="col-9">
-
                             <span style="display: inline-flex">
                               <b-avatar
                                 class="d-inline-block profile-pic"
@@ -988,7 +986,6 @@
                             })
                           "
                         >
-
                           <b-col class="col-9">
                             <span style="display: inline-flex">
                               <b-avatar
@@ -1082,9 +1079,7 @@
                             })
                           "
                         >
-
                           <b-col class="col-9">
-
                             <span style="display: inline-flex">
                               <b-avatar
                                 class="d-inline-block profile-pic"

@@ -96,8 +96,8 @@
                 data-toggle="popover"
                 class="form-control search-h"
                 style="font-size: 17px !important"
-                :placeholder="searchOptions.placeholder"
-                v-model="searchOptions.keyword"
+                :placeholder="credentials.placeholder"
+                v-model="credentials.keyword"
                 aria-label=""
                 data-original-title=""
                 title=""
@@ -197,7 +197,14 @@
                     <div v-for="message in messages" :key="message.id">
                       <hr class="h-divider" />
                       <div
-                        class="d-inline-flex flex-row justify-content-between align-items-center suggest-item cursor-pointer"
+                        class="
+                          d-inline-flex
+                          flex-row
+                          justify-content-between
+                          align-items-center
+                          suggest-item
+                          cursor-pointer
+                        "
                       >
                         <div class="d-inline-flex flex-row align-items-center">
                           <div>
@@ -258,7 +265,13 @@
                     >
                       <hr class="h-divider" />
                       <div
-                        class="d-inline-flex flex-row align-items-center suggest-item cursor-pointer"
+                        class="
+                          d-inline-flex
+                          flex-row
+                          align-items-center
+                          suggest-item
+                          cursor-pointer
+                        "
                       >
                         <!-- <div>
                           <img src="@/assets/img/profile-pic.jpg" class="rounded-circle" alt="" width="30" height="30" />
@@ -287,7 +300,13 @@
               </div>
               <!-- Notifications Ended -->
 
-              <div  v-if="islogin"  class="nav-item cursor" id="profilepic" triggers="hover" data-toggle="popover">
+              <div
+                v-if="islogin"
+                class="nav-item cursor"
+                id="profilepic"
+                triggers="hover"
+                data-toggle="popover"
+              >
                 <router-link :to="userOwnPage">
                   <b-avatar
                     variant="light"
@@ -330,10 +349,17 @@
                       v-if="'user' != user.user_type"
                       @click.prevent="switchToProfile"
                       href="#"
-                      class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+                      class="
+                        other-menu
+                        suggest-item
+                        cursor-pointer
+                        text-decoration-none text-dark
+                      "
                     >
                       <span class="mr-2"
-                        ><fas-icon class="violet search" :icon="['fas', 'user']"
+                        ><fas-icon
+                          class="violet search"
+                          :icon="['fas', 'user']"
                       /></span>
                       Profile
                     </a>
@@ -341,7 +367,12 @@
 
                     <router-link
                       :to="{ name: 'orders' }"
-                      class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+                      class="
+                        other-menu
+                        suggest-item
+                        cursor-pointer
+                        text-decoration-none text-dark
+                      "
                     >
                       <span class="mr-2"
                         ><fas-icon
@@ -354,10 +385,18 @@
 
                     <router-link
                       :to="{ name: 'settings' }"
-                      class="other-menu suggest-item cursor-pointer text-decoration-none text-dark w-full"
+                      class="
+                        other-menu
+                        suggest-item
+                        cursor-pointer
+                        text-decoration-none text-dark
+                        w-full
+                      "
                     >
                       <span class="mr-2 w-full"
-                        ><fas-icon class="violet search" :icon="['fas', 'cogs']"
+                        ><fas-icon
+                          class="violet search"
+                          :icon="['fas', 'cogs']"
                       /></span>
                       {{ $t("general.Account_Settings") }}
                     </router-link>
@@ -396,7 +435,12 @@
                     <a
                       @click="logout"
                       href="#"
-                      class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+                      class="
+                        other-menu
+                        suggest-item
+                        cursor-pointer
+                        text-decoration-none text-dark
+                      "
                     >
                       <span class="mr-2"
                         ><fas-icon
@@ -412,7 +456,6 @@
           </div>
         </div>
 
-        
         <b-modal ref="setcat" id="myModallnav" hide-footer title=" ">
           <div v-if="islogin" class="d-block d-lg-block d-xl-none">
             <div class="mt-3">
@@ -443,20 +486,30 @@
               v-if="'user' != user.user_type"
               @click.prevent="switchToProfile"
               href="#"
-              class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+              class="
+                other-menu
+                suggest-item
+                cursor-pointer
+                text-decoration-none text-dark
+              "
             >
               <span class="mr-2">
                 <fas-icon
                   class="violet search"
                   :icon="['fas', 'user']"
-                />
-              </span>Profile
+                /> </span
+              >Profile
             </a>
-            <hr class="h-divider" v-if="'user' === user.user_type"/>
+            <hr class="h-divider" v-if="'user' === user.user_type" />
 
             <router-link
               :to="{ name: 'orders' }"
-              class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+              class="
+                other-menu
+                suggest-item
+                cursor-pointer
+                text-decoration-none text-dark
+              "
             >
               <span class="mr-3"
                 ><fas-icon
@@ -469,7 +522,12 @@
 
             <router-link
               :to="{ name: 'settings' }"
-              class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+              class="
+                other-menu
+                suggest-item
+                cursor-pointer
+                text-decoration-none text-dark
+              "
             >
               <span class="mr-3"
                 ><fas-icon class="violet search" :icon="['fas', 'cogs']"
@@ -509,10 +567,17 @@
             <a
               href="#"
               @click.prevent="logout"
-              class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+              class="
+                other-menu
+                suggest-item
+                cursor-pointer
+                text-decoration-none text-dark
+              "
             >
               <span class="mr-3"
-                ><fas-icon class="violet search" :icon="['fas', 'sign-out-alt']"
+                ><fas-icon
+                  class="violet search"
+                  :icon="['fas', 'sign-out-alt']"
               /></span>
               {{ $t("general.Logout") }}
             </a>
@@ -546,7 +611,7 @@ export default {
   props: {
     credentials: {
       type: Object,
-      default: function() {
+      default: function () {
         return {
           keyword: "",
           placeholder: this.$t("general.All"),
@@ -645,15 +710,17 @@ export default {
   },
 
   watch: {
-    "$store.state.auth.profilConnected": function() {
+    "$store.state.auth.profilConnected": function () {
       this.updateNotificationEvent();
       this.userOwnPage = this.onRedirect();
     },
 
-    "$i18n.locale": async function() {
-      const response = await this.$repository.notification.changeLanguage(this.$i18n.locale);
+    "$i18n.locale": async function () {
+      const response = await this.$repository.notification.changeLanguage(
+        this.$i18n.locale
+      );
       if (response.success) {
-        this.updateNotificationEvent()
+        this.updateNotificationEvent();
       }
     },
 
@@ -726,13 +793,15 @@ export default {
 
     updateNotificationEvent() {
       try {
-        const newRouteNotificationApi = this.notificationPatterns[
-          this.$store.state.auth.profilConnected.user_type
-        ]();
+        const newRouteNotificationApi =
+          this.notificationPatterns[
+            this.$store.state.auth.profilConnected.user_type
+          ]();
 
-        const newRouteMessageApi = this.messagePatterns[
-          this.$store.state.auth.profilConnected.user_type
-        ]();
+        const newRouteMessageApi =
+          this.messagePatterns[
+            this.$store.state.auth.profilConnected.user_type
+          ]();
 
         this.newNotification(newRouteNotificationApi);
         this.newMessage(newRouteMessageApi);
@@ -802,7 +871,7 @@ export default {
         .catch(() => console.log("error"));
     },
 
-    logout: async function() {
+    logout: async function () {
       let loader = this.$loading.show({
         container: this.$refs.formContainer,
         canCancel: true,
@@ -828,7 +897,7 @@ export default {
       loader.hide();
     },
 
-    switchToProfile: async function() {
+    switchToProfile: async function () {
       let loader = this.$loading.show({
         container: this.$refs.formContainer,
         canCancel: true,
@@ -852,12 +921,12 @@ export default {
       this.$refs.mobileinput.style.display = "block";
     },
 
-    getNetworks: async function() {
+    getNetworks: async function () {
       let request = await this.$repository.share.getNetworks();
       if (request.success) this.setNetworks(request.data);
     },
 
-    getBusiness: async function() {
+    getBusiness: async function () {
       let request = await this.$repository.share.getBusiness();
       if (request.success) this.setBusiness(request.data);
     },

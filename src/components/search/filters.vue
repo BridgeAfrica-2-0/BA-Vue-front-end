@@ -69,8 +69,6 @@
         </b-button>
       </b-modal>
 
-     
-
       <span v-if="showform == true">
         <b-form-group
           label-cols-lg="3"
@@ -193,21 +191,21 @@
 
           <br />
 
-          <span v-if="filterType == '4'">   
-          <label
-            ><b>{{ $t("search.Price_Range") }}</b></label
-          >
-          <b-form-input
-            id="range-2"
-            v-model="priceRange"
-            type="range"
-            min="100"
-            max="2000000"
-            step="0.5"
-            @change="searchByPrice"
-          ></b-form-input>
-          <div class="mt-2 text-left">min: 100 Max: {{ priceRange }}</div>
-           </span>
+          <span v-if="filterType == '4'">
+            <label
+              ><b>{{ $t("search.Price_Range") }}</b></label
+            >
+            <b-form-input
+              id="range-2"
+              v-model="priceRange"
+              type="range"
+              min="100"
+              max="2000000"
+              step="0.5"
+              @change="searchByPrice"
+            ></b-form-input>
+            <div class="mt-2 text-left">min: 100 Max: {{ priceRange }}</div>
+          </span>
         </span>
       </div>
     </div>
@@ -222,8 +220,8 @@
         >{{ $t("search.Reset") }}</b-button
       >
       <br />
-      <!-- Category -->   
-      <div v-if="categories.length > 0">
+      <!-- Category -->
+      <!-- <div v-if="categories.length > 0">
         <b-form-group
           label-cols-lg="3"
           :label="$t('search.Categories')"
@@ -241,14 +239,9 @@
         >
         </b-form-select>
 
-
-        
-
-
       </div>
 
-      <hr />
-     
+      <hr /> -->
     </div>
 
     <!-- Network -->
@@ -2000,25 +1993,24 @@ export default {
 
     searchByFilter(filter) {
       // this.showform = false;
-       if (this.filterType == 1) {
-      console.log("[DEBUG] Filter: ", filter);
-      this.searchBusiness({
-        cat_id: filter.cat_id,
-        sub_cat: filter.sub_cat_id,
-        filter_id: filter.id,
-      });
-      this.$bvModal.hide("myModalllo");}
-       if (this.filterType == 4) {
-              
-              console.log("[DEBUG] Filter: ", filter);
-      this.searchProducts({
-        cat_id: filter.cat_id,
-        sub_cat: filter.sub_cat_id,
-        filter_id: filter.id,
-      });
-      this.$bvModal.hide("myModalllo");
-
-       }
+      if (this.filterType == 1) {
+        console.log("[DEBUG] Filter: ", filter);
+        this.searchBusiness({
+          cat_id: filter.cat_id,
+          sub_cat: filter.sub_cat_id,
+          filter_id: filter.id,
+        });
+        this.$bvModal.hide("myModalllo");
+      }
+      if (this.filterType == 4) {
+        console.log("[DEBUG] Filter: ", filter);
+        this.searchProducts({
+          cat_id: filter.cat_id,
+          sub_cat: filter.sub_cat_id,
+          filter_id: filter.id,
+        });
+        this.$bvModal.hide("myModalllo");
+      }
     },
     getUserNeibourhoods() {
       console.log("[debug] neigbourhood: ", this.userNeighbourhoods);
@@ -2053,14 +2045,13 @@ export default {
       let data = {
         distanceInKM: this.distance,
       };
-       if (this.filterType == 1) {
-      this.searchProducts(data);
-       }
+      if (this.filterType == 1) {
+        this.searchProducts(data);
+      }
 
-        if (this.filterType == 1) {
-
-          this.searchBusiness(data);
-        }
+      if (this.filterType == 1) {
+        this.searchBusiness(data);
+      }
     },
     searchByPrice(value) {
       console.log("[DEBUG] PRICE: ", value);
@@ -2173,7 +2164,7 @@ export default {
     },
 
     networkFilterReset() {
-      this.searchNetworks();
+      this.searchNetworks({ keyword: "" });
 
       this.networkFilter = {
         category: false,
@@ -2194,13 +2185,14 @@ export default {
 
     async searchNetworks(data) {
       this.networkFilter.category = true;
+      console.log("Data:", data);
       await this.$store
         .dispatch("networkSearch/SEARCH", data)
         .then((res) => {
           // console.log("categories loaded!");
         })
         .catch((err) => {
-          console.log("Error erro!");
+          console.error(err);
         });
     },
     // END Network search filter
@@ -2215,7 +2207,7 @@ export default {
         })
         .catch((err) => {
           console.log("Error erro!");
-        });   
+        });
     },
 
     // Not ED code

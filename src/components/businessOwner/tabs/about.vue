@@ -9,12 +9,12 @@
 
     <b-card>
       <div class="mb-3">
-        <mapbox :coordinates="[business_about.lng, business_about.lat]" />
+        <mapbox :business="business_about" />
       </div>
 
       <b-card>
         <b-row v-if="loading">
-          
+
           <b-col>
             <!-- <div class="edit">
                 <b-icon
@@ -864,8 +864,8 @@ export default {
       });
     
 
-   
-
+    
+     
         return keyword.substring(0, keyword.length-1);
      },
 

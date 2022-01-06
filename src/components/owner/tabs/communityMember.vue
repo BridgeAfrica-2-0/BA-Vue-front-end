@@ -47,7 +47,7 @@
                           >
                             <h6 class="follower m-15">
                               {{ count(item.followers) }}
-                              {{ $t("profileowner.Community") }}  <span v-if="!foll_id" class="ml-2"  @click="BlockUser(item.id, index)" style="cursor: pointer">   <b-icon
+                              {{ $t("profileowner.Community") }}  <span  class="ml-2"  @click="BlockUser(item.id, index)" style="cursor: pointer">   <b-icon
                               font-scale="1"
                               icon="exclamation-octagon"
                               v-b-tooltip.hover
@@ -280,7 +280,6 @@ export default {
             if (data.data.user_followers.length) {
               this.page += 1;
 
-              console.log(this.users);
               this.users.push(...data.data.user_followers);
               $state.loaded();
             } else {
@@ -291,13 +290,14 @@ export default {
               this.page += 1;
 
               this.users.push(...data.data.user_following);
+              console.log("yoo the motherfucker");
               $state.loaded();
             } else {
               $state.complete();
             }
           }
 
-          console.log(data);
+        //  console.log(data);
         })
         .catch((err) => {
           console.log({ err: err });

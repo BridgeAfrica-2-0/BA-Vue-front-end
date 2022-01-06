@@ -27,7 +27,7 @@
           <p class="textt">
             <strong class="net-title">
               <router-link :to="'network/' + network.id">
-                {{ network.name }}sda
+                {{ network.name }}
               </router-link>
             </strong>
             <br />
@@ -40,8 +40,6 @@
               <b-icon-geo-alt class="ico"></b-icon-geo-alt>
               {{ network.address }}
             </span>
-            <br />
-            {{ network.description }}
             <br />
             <read-more
               :more-str="$t('search.read_more')"

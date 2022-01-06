@@ -55,78 +55,9 @@ export default {
                 total_posts: 0,
             },
 
-            business_about: {
-                biography: {
-                    title: 'About Mapoure Agrobusiness',
-                    description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.\n' +
-                        '              Asperiores temporibus, rerum iste id obcaecati quae odit accusamus\n' +
-                        '              reprehenderit, ipsa nam laudantium pariatur. Harum, soluta. Nam\n' +
-                        '              accusantium hic numquam architecto debitis. Lorem ipsum dolor sit\n' +
-                        '              amet consectetur adipisicing elit. Asperiores temporibus, rerum\n' +
-                        '              iste id obcaecati quae odit accusamus reprehenderit, ipsa nam\n' +
-                        '              laudantium pariatur. Harum, soluta. Nam accusantium hic numquam\n' +
-                        '              architecto debitis. Asperiores temporibus, rerum iste id obcaecati\n' +
-                        '              architecto debitis. Asperiores temporibus, rerum iste id obcaecati\n' +
-                        '              architecto debitis. Asperiores temporibus, rerum iste id obcaecati\n' +
-                        '              architecto debitis. Asperiores temporibus, rerum iste id obcaecati\n' +
-                        '              architecto debitis. Asperiores temporibus, rerum iste id obcaecati\n' +
-                        '              quae odit accusamus reprehenderit, ipsa nam laudantium pariatur.\n' +
-                        '              quae odit accusamus reprehenderit, ipsa nam laudantium pariatur.\n' +
-                        '              Harum, soluta. Nam accusantium hic numquam architecto debitis.',
-                },
-                address: {
-                    businessName: 'Current or Last Organization',
-                    category: 'Agriculture',
-                    keywords: 'Agriculture',
-                    country: 'Cameroun',
-                    city: 'Yaounde',
-                    NeigbourHood: 'Melen',
-                    phones: { phone_1: '+237656602212', phone_2: '+237677754814' },
-                    businessEmail: 'info@businessname.com',
-                    businessHours: {
-                        open: 'Always Open',
-                        dayOfWorks: [
-                            { day: 'Monday', start: 1, end: 10, check: false },
-                            { day: 'Tuesday', start: null, end: null, check: false },
-                            { day: 'Wednesday', start: null, end: null, check: false },
-                            { day: 'Thursday', start: null, end: null, check: false },
-                            { day: 'Friday', start: null, end: null, check: false },
-                            { day: 'Saturday', start: null, end: null, check: false },
-                            { day: 'Sunday', start: null, end: null, check: false },
-                        ],
-                    },
-                },
-            },
+            business_about: {},
 
-            business_about1: {
-                name: 'Tierra Hermiston',
-                logo_path: 'http://localhost:8000/storage',
-                category: 'Hourse Marketing',
-                keywords: null,
-                language: null,
-                location_description: 'Tempore quo soluta voluptates quis. Doloremque autem minus ut nisi molestias maiores cum. Et assumenda velit expedita et et sint sed in.',
-                website: null,
-                community: 6,
-                phone: null,
-                email: null,
-                business_open_hours: [{
-                        day: 'monday',
-                        opening_time: '09:05:12',
-                        closing_time: '15:06:18',
-                    },
-                    {
-                        day: 'tuesday',
-                        opening_time: '07:05:38',
-                        closing_time: '14:05:43',
-                    },
-                ],
-                region: null,
-                address: null,
-                city: null,
-                country: null,
-                lat: -56.200329,
-                lng: -6.249487,
-            },
+            business_about1: {},
         }, ]
     },
     getters: {

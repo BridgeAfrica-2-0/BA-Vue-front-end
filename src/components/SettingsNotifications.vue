@@ -2,7 +2,7 @@
   <div class="settings-notifications">
     <!-- HEARDER -->
 
-    <div class="d-flex justify-content-between align-items-end mb-4">
+    <div class="d-flex flex-mobile-column justify-content-between align-items-md-end mb-4">
       <b-form-checkbox
         v-model="selectAll"
         class="cursor-pointer"
@@ -245,5 +245,10 @@ export default {
 }
 .btn-mark-as {
   outline: none !important;
+}
+@media only screen and (max-width: 600px){
+  .flex-mobile-column{
+    flex-direction: column;
+  }
 }
 </style>

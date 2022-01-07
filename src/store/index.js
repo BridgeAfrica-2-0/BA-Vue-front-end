@@ -102,7 +102,6 @@ export default new Vuex.Store({
     profileSettingsEdit,
     cart,
     networkSetting,
-    profileOrders
-
+    profileOrder
   }
 })

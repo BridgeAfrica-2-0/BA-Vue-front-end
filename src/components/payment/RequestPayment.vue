@@ -104,7 +104,7 @@ export default {
         number: this.number,
         amount: this.price,
         operator: this.operator,
-        order_id:this.order.order_id
+      
       });
 
       this.loading=false;

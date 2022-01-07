@@ -90,7 +90,6 @@
           </form>
           <span class="d-none d-lg-block">
             <form class="form-inline input-group b-shadow b-radius">
-
               <input
                 id="search-ba"
                 type="search"
@@ -426,7 +425,10 @@
         <b-modal ref="setcat" id="myModallnav" hide-footer title=" ">
           <div v-if="islogin" class="d-block d-lg-block d-xl-none">
             <div class="mt-3">
-              <div class="d-inline-flex flex-row align-items-center">
+              <div
+                class="d-inline-flex flex-row align-items-center"
+                @click="gotoProfile"
+              >
                 <div>
                   <b-avatar
                     variant="light"
@@ -447,8 +449,6 @@
               </div>
             </div>
 
-            <hr class="mup" />
-
             <a
               v-if="'user' != user.user_type"
               @click.prevent="switchToProfile"
@@ -461,8 +461,8 @@
                   :icon="['fas', 'user']"
                 /> </span
               >Profile
+              <hr class="h-divider" v-if="'user' === user.user_type" />
             </a>
-            <hr class="h-divider" v-if="'user' === user.user_type" />
 
             <router-link
               :to="{ name: 'orders' }"
@@ -576,7 +576,7 @@ export default {
       notificationPatterns: null,
       messagePatterns: null,
       redirectionPatterns: null,
-      query: '',
+      query: "",
       selectedUser: null,
       users: [],
     };
@@ -594,14 +594,14 @@ export default {
   },
   created() {
     //check for authentication
-    
+
     this.islogin = this.$store.getters["auth/isLogged"];
 
     if (this.islogin) {
       this.init();
       this.userOwnPage = this.onRedirect();
 
-      this.notificationPatterns = { 
+      this.notificationPatterns = {
         user: () => "user/notification",
         business: () => `/notification/business/${this.user.id}`,
         network: () => `/notification/network/${this.user.id}`,
@@ -690,6 +690,10 @@ export default {
     ...mapMutations({
       profile: "auth/profilConnected",
     }),
+
+    gotoProfile() {
+      this.$router.push("profile_owner");
+    },
 
     onRedirect() {
       const link = {

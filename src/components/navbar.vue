@@ -601,8 +601,8 @@ export default {
       this.init();
       this.userOwnPage = this.onRedirect();
 
-      this.notificationPatterns = {
-        user: () => "/notification/latest/user",
+      this.notificationPatterns = { 
+        user: () => "user/notification",
         business: () => `/notification/business/${this.user.id}`,
         network: () => `/notification/network/${this.user.id}`,
       };

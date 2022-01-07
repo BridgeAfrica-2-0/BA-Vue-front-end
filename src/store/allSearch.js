@@ -81,18 +81,20 @@ export default {
             let page = 1;
             const TYPES = ["business", "user", "network", "market", "post"];
             let catId = data.cat_id ? "catId=" + data.cat_id : "";
-            let keyword = data.keyword ? "keyword=" + data.keyword : "";
+            let keyword = data.keyword ? "&keyword=" + data.keyword : "";
+            let subCatId = data.sub_cat ? "&subCatId=" + data.sub_cat : "";
+
             let url = "";
 
             TYPES.map((type) => {
 
                 if (!islogin) {
 
-                    url = `/visitor/search/${type}?${catId}&${keyword}`;
+                    url = `/visitor/search/${type}?${catId+subCatId+keyword}`;
 
                 } else {
                     // console.log(`type => ${type} keyword = ${keyword}`);
-                    url = `/search/${type}?${catId}&${keyword}`;
+                    url = `/search/${type}?${catId+subCatId+keyword}`;
 
 
                 }

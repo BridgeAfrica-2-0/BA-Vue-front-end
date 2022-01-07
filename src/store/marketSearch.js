@@ -100,14 +100,14 @@ export default {
                                     sub_cat: sub_categories
 
                                 });
-                                console.log(all);
+                                // console.log(all);
                             })
                             .catch(err => {
                                 console.error(err);
                             });
                     });
 
-                    console.log(all);
+                    // console.log(all);
                     commit("setCategories", all);
                 })
                 .catch(err => {

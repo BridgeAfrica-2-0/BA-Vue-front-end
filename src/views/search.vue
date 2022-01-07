@@ -404,8 +404,12 @@
 
             <div id="all" v-if="selectedId == '0'">
               <h6>
-                {{$t("search.Sponsored_Result")}}
-                <fas-icon class="icons" :icon="['fas', 'exclamation-circle']" size="lg" />
+                {{ $t("search.Sponsored_Result") }}
+                <fas-icon
+                  class="icons"
+                  :icon="['fas', 'exclamation-circle']"
+                  size="lg"
+                />
               </h6>
 
               <div>
@@ -537,8 +541,12 @@
 
             <div v-if="selectedId == '4'">
               <h6>
-                <fas-icon class="icons" :icon="['fas', 'store']" size="lg" />
-                {{$t("search.Market")}}
+                {{ $t("search.Sponsored_Result") }}
+                <fas-icon
+                  class="icons"
+                  :icon="['fas', 'exclamation-circle']"
+                  size="lg"
+                />
               </h6>
 
               <div>
@@ -706,9 +714,18 @@ export default {
 
     this.strategY = {
       users: () => this.onFindUser(),
-      all: () => this.getKeyword(),
-      market: () => this.searchProducts(),
-      network: () => this.searchNetworks(),
+      all: () =>
+        this.getKeyword({
+          keyword: this.searchParams.keyword,
+        }),
+      market: () =>
+        this.searchProducts({
+          keyword: this.searchParams.keyword,
+        }),
+      network: () =>
+        this.searchNetworks({
+          keyword: this.searchParams.keyword,
+        }),
       business: () => this.onFindBusiness(),
     };
 
@@ -1676,7 +1693,7 @@ export default {
   },
 
   watch: {
-    selectedId: function() {
+    selectedId: function () {
       this.changeComponent();
       this.changePlaceHolder();
       this.changeNotFoundTitle();
@@ -1703,12 +1720,11 @@ export default {
       if (this.$route.query.uuid) this.selectedId = 5;
     },
     // [ED]----------
-    getKeyword() {
-      console.log("the keyword is: ", this.searchParams.keyword);
+    getKeyword(data) {
+      let elm = data ? data : { keyword: "" };
+      console.log("the keyword is: ", data);
       this.$store
-        .dispatch("allSearch/SEARCH", {
-          keyword: this.searchParams.keyword,
-        })
+        .dispatch("allSearch/SEARCH", elm)
         .then((res) => {
           // console.log("categories loaded!");
         })
@@ -1749,11 +1765,9 @@ export default {
         });
     },
 
-    searchProducts() {
+    searchProducts(data) {
       this.$store
-        .dispatch("marketSearch/searchProducts", {
-          keyword: this.searchParams.keyword,
-        })
+        .dispatch("marketSearch/searchProducts", data)
         .then((res) => {
           // console.log("categories loaded!");
         })
@@ -1762,11 +1776,9 @@ export default {
         });
     },
 
-    searchNetworks() {
+    searchNetworks(data) {
       this.$store
-        .dispatch("networkSearch/SEARCH", {
-          keyword: this.searchParams.keyword,
-        })
+        .dispatch("networkSearch/SEARCH", data)
         .then((res) => {
           // console.log("categories loaded!");
         })
@@ -1837,9 +1849,8 @@ export default {
 
     changeNotFoundTitle() {
       try {
-        this.notFoundComponentTitle = this.strategyForNotFoundComponentTitle[
-          this.selectedId
-        ]();
+        this.notFoundComponentTitle =
+          this.strategyForNotFoundComponentTitle[this.selectedId]();
       } catch (error) {
         this.notFoundComponentTitle = "";
       }
@@ -1979,7 +1990,8 @@ export default {
           break;
 
         case "MC":
-          this.selectcategories = this.Mayor_councils_filters_and_public_institution;
+          this.selectcategories =
+            this.Mayor_councils_filters_and_public_institution;
 
           break;
 

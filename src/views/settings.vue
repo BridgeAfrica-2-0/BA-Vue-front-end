@@ -128,7 +128,7 @@
 
                               <b-td class="a-text text">
                                 <b-link href="#">{{
-                                  getUserInfos.country.name
+                                  getUserInfos.country
                                 }}</b-link>
                               </b-td>
                             </b-tr>
@@ -140,7 +140,7 @@
 
                               <b-td class="a-text text">
                                 <b-link href="#">{{
-                                  getUserInfos.region.name
+                                  getUserInfos.region
                                 }}</b-link>
                               </b-td>
                             </b-tr>
@@ -154,7 +154,7 @@
 
                               <b-td class="a-text text">
                                 <b-link href="#">{{
-                                  getUserInfos.division.name
+                                  getUserInfos.division
                                 }}</b-link>
                               </b-td>
                             </b-tr>
@@ -168,7 +168,7 @@
 
                               <b-td class="a-text text">
                                 <b-link href="#">{{
-                                  getUserInfos.council.name
+                                  getUserInfos.council
                                 }}</b-link>
                               </b-td>
                             </b-tr>
@@ -195,7 +195,7 @@
 
                               <b-td class="a-text text">
                                 <b-link href="#">{{
-                                  getUserInfos.neigborhood.name
+                                  getUserInfos.neigborhood
                                 }}</b-link>
                               </b-td>
                             </b-tr>

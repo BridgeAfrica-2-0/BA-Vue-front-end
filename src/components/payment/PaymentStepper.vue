@@ -121,6 +121,7 @@ export default {
       showRequestPayment: false,
       showConfirmPayment: false,
       order_price: 0,
+      order_ids:[],
       operator:"",
       loading:false
     };
@@ -158,10 +159,11 @@ export default {
       this.steps[current_step - 1].status = false;
       this.steps[next_step - 1].status = true;
     },
-    handleShowOperator(price) {
+    handleShowOperator(price, order_ids ) {
       // this.showOperators = true;
       // this.showReview = false;
       this.order_price = price;
+      this.order_ids=order_ids;
       this.onClickNext();
     },
     handleShowReview() {
@@ -202,7 +204,7 @@ export default {
         },
       ];
     },
-    handleConfirmPayment({ number, amount, operator, order_id }) {
+    handleConfirmPayment({ number, amount, operator }) {
       // this.$emit("nextpaymentstep");
       // this.showRequestPayment = false;
       // this.showConfirmPayment = true;
@@ -212,7 +214,7 @@ export default {
       const data = {
         phone: number,
         amount: amount,
-        orderId: order_id,
+        orderId: this.order_ids.toString(),
         operator: operator,
       };
       let url=null;

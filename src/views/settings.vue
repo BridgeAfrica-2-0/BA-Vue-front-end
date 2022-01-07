@@ -421,6 +421,7 @@
                       >
                         <b-form-input
                           id="bname"
+                          type="password"
                           placeholder=""
                           required
                           v-model="currentPass"
@@ -442,6 +443,7 @@
                       >
                         <b-form-input
                           id="bname"
+                          type="password"
                           placeholder=""
                           required
                           v-model="newPass"
@@ -507,7 +509,7 @@ export default {
     Navbar,
     Footer,
     SettingsNotifications,
-    // Website,
+   // Website,
     Payment,
     Blocking,
   },
@@ -590,8 +592,9 @@ export default {
 
   data() {
     return {
-      activeTab: 0,
-      hasLoad: false,
+      activeTab:0,
+      loading:false,
+      hasLoad:false,
       size: 0,
       selected: "",
       options: "",
@@ -697,27 +700,37 @@ export default {
         .finally(() => loader.hide());
     },
 
-    changePassword() {
+    changePassword(){
+      this.loading=true;
       let formData2 = new FormData();
       formData2.append("check_password", this.currentPass);
       formData2.append("password", this.newPass);
       formData2.append("password_confirmation", this.newPass1);
 
-      if (this.newPass != this.newPass1) {
-        this.message = "the password does not match";
-      } else {
+      if(this.newPass != this.newPass1){
+        this.message = "the password does not match" ;
+         this.loading=false;
+      }else{
+
+        
         this.$store
-          .dispatch("profileSettingsEdit/changePassword", formData2)
-          .then((response) => {
-            console.log("------------------------");
-            console.log(response.data.message);
-            this.message = response.data.message;
-          })
-          .catch((err) => {
-            console.log("--------- error: ");
-            console.error(err);
-          });
-      }
+      .dispatch("profileSettingsEdit/changePassword",formData2)
+      .then(response =>{
+        console.log("------------------------");
+        console.log(response.data.message);
+        this.message = response.data.message ;
+
+         this.loading=false;
+        
+      })
+      .catch((err) => {
+       
+         this.message = "An error occured" ;
+        console.log('--------- error: ');
+          console.error(err);
+           this.loading=false;
+        });
+        }
     },
 
     getRegion() {

@@ -66,7 +66,7 @@
     <infinite-loading @infinite="infiniteHandler">
       <div slot="no-more">{{ $t("general.No_More_Notifications") }}</div>
       <div slot="no-results">
-        <b-alert show variant="secondary">{{ $t("general.") }}No_Notifications</b-alert>
+        <b-alert show variant="secondary">{{ $t("general.No_Notifications") }}</b-alert>
       </div>
     </infinite-loading>
   </div>

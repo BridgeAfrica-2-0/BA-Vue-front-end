@@ -21,7 +21,7 @@
 
 			<div class="row">
 				<div class="col-3 col-md-2 pr-0">	{{$t('general.Amount')}} :</div>
-				<div class="col">{{ formatMoney(Number(cart_item.product_price)) }}}</div>
+				<div class="col">{{ formatMoney(Number(cart_item.product_price)) }}</div>
 			</div>
 
 			<div class="row">

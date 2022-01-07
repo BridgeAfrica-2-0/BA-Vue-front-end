@@ -898,6 +898,7 @@ export default {
         keyword += item + ",";
       });
 
+
       return keyword.substring(0, keyword.length - 1);
     },
 
@@ -914,6 +915,7 @@ export default {
             )
           );
         });
+
     },
     validator(tag) {
       return tag.length > 2 && tag.length < 20;

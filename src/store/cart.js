@@ -15,9 +15,9 @@ export default {
     },
     actions: {
 
-        async addToCart({ commit }, idproduct) {
+        async addToCart({ commit }, payload) {
             await axios
-                .post(`market/product/${idproduct}/cart/add`)
+                .post(`market/product/${payload.id}/cart/add?business_id=${payload.business_id}`)
                 .then((response) => {
 
                     console.log(response.data);
@@ -25,7 +25,7 @@ export default {
                     commit('setStatus', response.data.message);
                 })
                 .catch((error) => {
-                    console.log(error);
+                    console.log({error:error});
                 });
         },
     }

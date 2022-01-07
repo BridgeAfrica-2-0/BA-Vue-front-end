@@ -234,9 +234,9 @@
                 </b-card-text>
               </b-tab>
 
-              <b-tab :title="$t('settings.Account_Type') ">
+              <!-- <b-tab :title="$t('settings.Account_Type') ">
                 <Website :profileId="getUserInfos.id"/>
-              </b-tab>
+              </b-tab> -->
 
               <b-tab :title="$t('settings.Payment')">
                 <Payment :profileId="getUserInfos.id"/>
@@ -263,6 +263,7 @@
 
                         <b-form-input
                           id="bname"
+                          type="password"
                           placeholder=""
                           required
                           v-model="currentPass"
@@ -286,6 +287,7 @@
 
                         <b-form-input
                           id="bname"
+                          type="password"
                           placeholder=""
                           required
                           v-model="newPass"
@@ -316,7 +318,7 @@
                         
                         </b-form-input> <br>
                         <p>{{message}}</p>
-                         <br> <button class=" btn btn-primary" @click="changePassword">{{$t("settings.change")}}</button>
+                         <br> <button class=" btn btn-primary" @click="changePassword"> <b-spinner v-if="loading" small variant="light"></b-spinner>  {{$t("settings.change")}}</button>
 
                       </b-form-group>
                     </b-container>
@@ -340,7 +342,7 @@
 import Navbar from '@/components/navbar';
 import Footer from '@/components/footer';
 import SettingsNotifications from '@/components/SettingsNotifications.vue';
-import Website from "@/components/businessOwner/settings/website";
+//import Website from "@/components/businessOwner/settings/website";
 import Payment from "@/components/businessOwner/settings/payment";
 import Blocking from "@/components/owner/settings/blocking";
 
@@ -349,7 +351,7 @@ export default {
     Navbar,
     Footer,
     SettingsNotifications,
-    Website,
+   // Website,
     Payment,
     Blocking
   },
@@ -441,6 +443,7 @@ export default {
   data() {
     return {
       activeTab:0,
+      loading:false,
       hasLoad:false,
       size: 0,
        selected: '',
@@ -554,6 +557,7 @@ export default {
     },
 
     changePassword(){
+      this.loading=true;
       let formData2 = new FormData();
       formData2.append("check_password", this.currentPass);
       formData2.append("password", this.newPass);
@@ -561,6 +565,7 @@ export default {
 
       if(this.newPass != this.newPass1){
         this.message = "the password does not match" ;
+         this.loading=false;
       }else{
 
         
@@ -570,12 +575,16 @@ export default {
         console.log("------------------------");
         console.log(response.data.message);
         this.message = response.data.message ;
+
+         this.loading=false;
         
       })
       .catch((err) => {
-        
+       
+         this.message = "An error occured" ;
         console.log('--------- error: ');
           console.error(err);
+           this.loading=false;
         });
         }
     },

@@ -140,10 +140,9 @@
         margin-top: -50px;
         background: white;
         padding: 0px;
-        margin-left: 10px;
       "
     >
-      <div class="mobile-top-div d-lg-none p-3">
+      <div class="mobile-top-div d-lg-none p-2">
         <h3 style="font-size: 20px">
           {{ $t('home.Empowering_Businesses_And_Consumers_With_Digital_Presence_To_Buy_And_Sell_Online') }}
         </h3>

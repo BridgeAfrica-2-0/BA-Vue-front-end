@@ -43,7 +43,7 @@
               />
             </div>
             <div class="operator-name">
-              <p class="mb-0 mx-4 title-font-size font-weight-bold">
+              <p class="mb-0 mx-2 mx-md-3 title-font-size font-weight-bold">
                 MTN Mobile Money
               </p>
             </div>
@@ -66,7 +66,7 @@
               />
             </div>
             <div class="operator-name">
-              <p class="mb-0 mx-4 title-font-size font-weight-bold">
+              <p class="mb-0 mx-2 mx-md-3 title-font-size font-weight-bold">
                 Orange Money
               </p>
             </div>
@@ -131,7 +131,7 @@
     >
       <b-overlay :show="show" rounded="sm">
         <div class="row">
-          <div class="col-10 col-sm-9 col-md-8">
+          <div class="col-12 col-sm-12 col-md-8">
             <b-form-input
               placeholder="237 6XX XXX XXX"
               id="number"
@@ -139,10 +139,12 @@
               type="tel"
             ></b-form-input>
           </div>
-          <div class="col-2 col-sm-3 col-md-4 px-0 btn-custom-box">
+          <div
+            class="col-12 col-sm-12 col-md-4 px-0 btn-custom-box mt-2 mt-md-0"
+          >
             <b-button
               variant="primary"
-              class="font-weight-light shadow-sm btn-custom text-14"
+              class="font-weight-light shadow-sm btn-custom text-14 d-block m-auto"
               @click="confirmDefaltPayment"
               >{{ $t("businessowner.Confirm") }}</b-button
             >
@@ -330,8 +332,8 @@ export default {
   }
   .operator-img-box {
     width: 100px !important;
-}
-.operator img {
+  }
+  .operator img {
     width: 250px;
   }
 }
@@ -375,6 +377,9 @@ export default {
   }
   .operator-select {
     float: right;
+  }
+  .title-font-size {
+    font-size: 10px !important;
   }
 }
 </style>

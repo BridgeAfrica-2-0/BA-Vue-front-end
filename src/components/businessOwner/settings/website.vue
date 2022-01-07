@@ -198,7 +198,7 @@
                   }}</b-col
                 >
                 <b-col
-                  >{{ Packages.premium_package_prices[0] }}XAF/{{
+                  >{{ Packages.premium_package_prices }}XAF/{{
                     $t("businessowner.Month")
                   }}
                   <b-button
@@ -221,9 +221,7 @@
                   - 36000XAF</b-col
                 >
                 <b-col
-                  >{{ Packages.premium_package_prices[1] }}XAF/{{
-                    $t("businessowner.Month")
-                  }}
+                  >{{ Packages }}XAF/{{ $t("businessowner.Month") }}
                   <b-button
                     v-b-modal.PackageSelection
                     @click="PaymentForm.subscribe = 'one year'"

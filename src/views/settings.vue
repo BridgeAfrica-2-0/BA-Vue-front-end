@@ -475,7 +475,7 @@
                           class=" btn btn-primary"
                           @click="changePassword"
                         >
-                          {{ $t("settings.change") }}
+                          Change
                         </button>
                       </b-form-group>
                     </b-container>

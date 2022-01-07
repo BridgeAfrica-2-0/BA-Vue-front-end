@@ -232,10 +232,6 @@ export default {
     this.$emit("reste");
   },
 
-  computed: mapGetters({
-    auth: "auth/profilConnected",
-  }),
-
   methods: {
     ...mapActions({
       submitPost: "UserProfileOwner/submitPost",

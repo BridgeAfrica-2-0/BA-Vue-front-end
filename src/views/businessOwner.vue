@@ -200,7 +200,6 @@ export default {
       this.selectedId = this.$store.state.profileSettingsEdit.selectedId;
     }
     this.url_data = this.$route.params.id;
-    console.log(this.url_data);
     this.businessInfo();
     this.CommunityBusiness();
     this.CommunityPeople();

@@ -27,7 +27,7 @@ export default {
     this.link = `${window.location.protocol}//${window.location.host}/search?uuid=${this.post.id}`
   },
 
-  metaInfo() {
+  /* metaInfo() {
     return {
       title: `${this.auth.name} - BridgeAfrica`,
       meta: [
@@ -39,6 +39,6 @@ export default {
                 {property: 'og:url', content: 'https://epiloge.com/'}
             ]
         }
-    },
+    }, */
 };
 </script>

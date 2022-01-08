@@ -11,24 +11,15 @@ export default {
     getndetails({ commit }) {
       return axios.get("profile/popular/network", {}).then(function({ data }) {
         commit("set_details", data.data);
-
-        console.log('lalaads shskdjdjdd djdjdhdjee djeejejeje ejsjsjsjsjs jcjcjcjcjc ');
-        console.log(data);
       });
     },
 
     roleCheck({ commit },id){
-        
-      
       return axios.get("network/"+id+"/determine-role")
         .then((data) => {
           return data;
         });
-
-
     },
-
-    
   },
 
   mutations: {

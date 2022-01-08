@@ -15,8 +15,8 @@
           <p class="textt">
 
             <router-link :to="{name: 'Membar Network Follower', params: {id: item.id}}">
-                  <strong class="net-title">{{ item.name }}</strong>
-                </router-link><br />
+              <strong class="net-title">{{ item.name }}</strong>
+            </router-link><br />
 
             {{ item.followers }} {{ $t("dashboard.Community") }} <br />
 
@@ -56,7 +56,7 @@
                       item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'
                     "
                   ></i>
-                  <span class="btn-com"> {{ $t("dashboard.Community") }}</span>
+                  <span class="btn-com">{{ $t("dashboard.Community") }}</span>
                 </b-button>
               </b-col>
 
@@ -80,7 +80,7 @@
                       item.is_member !== 0 ? 'fa-user-minus' : 'fa-user-plus'
                     "
                   ></i>
-                  <span class="btn-com"> {{ $t("general.Join") }} </span>
+                  <span class="btn-com">{{ $t("general.Join") }}</span>
                 </b-button>
               </b-col>
             </b-row>
@@ -101,16 +101,22 @@ export default {
   data() {
     return {
       page: 1,
+      network:[],
       options: {
         rewind: true,
         autoplay: true,
         perPage: 1,
         pagination: false,
-
         type: "loop",
         perMove: 1,
       },
     };
+  },
+
+  watch: {
+    "$store.state.networkDetails.ndetails": function(){
+      this.network = this.$store.state.networkDetails.ndetails
+    }
   },
 
   computed: {
@@ -118,9 +124,9 @@ export default {
       return this.$store.getters["networkDetails/getdetails.category"];
     },
 
-    network() {
+    /* network() {
       return this.$store.getters["networkDetails/getdetails"];
-    },
+    }, */
   },
   created() {
     this.$store
@@ -162,10 +168,11 @@ export default {
       axios
         .get(url + this.page)
         .then(({ data }) => {
+          console.log(data)
           if (data.data.length) {
-            this.page += 1;
 
-            this.network.push(...data.data);
+            this.page += 1;
+            this.network = [...this.network, ...data.data ]
             $state.loaded();
           } else {
             $state.complete();

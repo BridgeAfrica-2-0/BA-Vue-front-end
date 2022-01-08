@@ -374,6 +374,7 @@ const routes = [
       auth: true,
     },
   },
+  
 
   {
     path: "/search/:id",

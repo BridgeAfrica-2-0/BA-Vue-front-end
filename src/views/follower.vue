@@ -3,8 +3,10 @@
 
   
     <navbar />
-    <div v-if="isloaded">
-      <Profile v-if="info || isBblock==0" />
+
+
+    <div v-if="isloaded"  >
+      <Profile  :key="foll_id"  v-if="info || isBblock==0" />
       <notFound v-else />
       <Footer />   
     </div>
@@ -27,6 +29,7 @@ export default {
   data() {
     return {
       isloaded: false,
+      foll_id:'',
     };
   },
   computed: {
@@ -51,6 +54,12 @@ export default {
 
      return this.profile.viewer_blocked;
     }
+  },
+
+   beforeRouteUpdate(to, from, next) {
+
+    this.foll_id = to.params.id;
+    next();
   },
 
   created() {

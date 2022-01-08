@@ -66,6 +66,20 @@ const actions = {
 
   
 
+  async choseShipping({ commit },payload) {
+    await axios.post('update/shipping-address/status?shipping_address_id='+payload.id)
+      .then((response) => {
+        console.log(response)
+      
+      })
+      .catch((error) => {
+        console.log({error:error});
+      })
+  },
+
+
+
+
   async updateCart({ commit },payload) {
     await axios.post('cart/update-quantity/'+payload.index, {
       quantity:payload.quantity

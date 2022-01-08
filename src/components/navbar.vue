@@ -416,7 +416,7 @@
         <b-modal ref="setcat" id="myModallnav" hide-footer title=" ">
           <div v-if="islogin" class="d-block d-lg-block d-xl-none">
             <div class="mt-3">
-              <div class="d-inline-flex flex-row align-items-center">
+              <div class="d-inline-flex flex-row align-items-center" @click="gotoProfile">
                 <div>
                   <b-avatar
                     variant="light"
@@ -437,8 +437,6 @@
               </div>
             </div>
 
-            <hr class="mup" />
-
             <a
               v-if="'user' != user.user_type"
               @click.prevent="switchToProfile"
@@ -451,8 +449,8 @@
                   :icon="['fas', 'user']"
                 />
               </span>Profile
-            </a>
             <hr class="h-divider" v-if="'user' === user.user_type"/>
+            </a>
 
             <router-link
               :to="{ name: 'orders' }"
@@ -692,6 +690,10 @@ export default {
     ...mapMutations({
       profile: "auth/profilConnected",
     }),
+
+    gotoProfile(){
+      this.$router.push('profile_owner')
+    },
 
     onRedirect() {
       const link = {

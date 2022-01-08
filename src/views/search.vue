@@ -2069,6 +2069,8 @@ export default {
         this.searchBusiness({ cat_id: value.cat_id, sub_cat: value.id });
       } else if (this.selectedId == 0) {
         this.allSearchByCat({ cat_id: value.cat_id, sub_cat: value.id });
+      } else if (this.selectedId == 3) {
+        this.searchNetworks({ cat_id: value.cat_id, sub_cat: value.id });
       }
     },
 

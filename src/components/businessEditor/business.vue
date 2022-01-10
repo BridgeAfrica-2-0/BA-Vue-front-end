@@ -10,7 +10,7 @@
               <b-tab :title="$t('general.About')"><About /></b-tab>
               <b-tab :title="$t('general.Media')"><Media type="business" :showCoverAlbum="showCoverAlbum" :key="key"/></b-tab>
               <b-tab :title="$t('general.Market')"><MarketPlace /></b-tab>
-              <b-tab :title="$t('general.Networks')"><Networks /></b-tab> 
+              <b-tab :title="$t('general.Networks')"><Networks :activateBusinessNetwork="true" /></b-tab> 
               <b-tab :title="$t('general.Community')"><Followers /></b-tab>
             </b-tabs>
           </b-col>
@@ -26,7 +26,7 @@ import About from "@/components/businessOwner/tabs/about";
 import Media from "@/components/owner/tabs/media";
 import MarketPlace from "@/components/businessOwner/tabs/marketPlace";
 import Followers from "@/components/businessOwner/tabs/memberNetwork";
-import Networks from "@/components/businessOwner/tabs/networks";
+import Networks from '@/components/owner/tabs/networks';
 import HeadPageOwner from "@/components/businessOwner/headPageOwner";
 
 export default {

@@ -5,6 +5,7 @@
       <span class="t-color"> {{ $t("profileowner.Network") }} </span>
 
       <b-button
+        v-if="!activateBusinessNetwork"
         class="btn btn-outline-primary pull-right float-right mb-2 blec-font"
         style="margin-top: -6px"
         @click="showmodal(true, 'add')"
@@ -106,7 +107,7 @@
     ></infinite-loading>
 
     <div class="h-100 w-100" v-if="networks.length < 1 && !loader">
-      <div class="mx-auto text-center my-5">
+      <div class="mx-auto text-center my-5" v-if="!activateBusinessNetwork">
         <h2 class="my-3">
           {{ $t("profileowner.Build_networks_around_your_Business") }}
         </h2>
@@ -127,6 +128,14 @@
             $t("profileowner.Add_Network")
           }}</b-button>
         </p>
+      </div>
+    </div>
+
+    <div class="h-100 w-100" v-if="!profileNetworks.length && activateBusinessNetwork && profileNetworks">
+      <div class="mx-auto text-center my-5">
+        <h2 class="my-3">
+          No Network
+        </h2>
       </div>
     </div>
 
@@ -594,6 +603,8 @@ export default {
   data() {
     return {
       page: 1,
+      processing:false,
+      path:'',
       multiselecvalue: [],
       infiniteId: 1,
       logoimg_url: null,
@@ -660,6 +671,13 @@ export default {
   components: {
     Multiselect,
     VuePhoneNumberInput,
+  },
+
+  props:{
+    activateBusinessNetwork:{
+      type:Boolean,
+      default: () => false
+    }
   },
 
   mounted() {
@@ -865,8 +883,11 @@ export default {
     // },
 
     infiniteHandler($state) {
-      console.log("network?page=" + this.page);
-      let url = "network?page=" + this.page;
+      /* console.log("network?page=" + this.page);
+      let url = "network?page=" + this.page; */
+
+      const url = `${this.path}?page=${this.page}`
+
       if (this.page == 1) {
         this.profileNetworks.splice(0);
       }
@@ -875,8 +896,7 @@ export default {
         .dispatch("profile/loadMore", url)
 
         .then(({ data }) => {
-          console.log(data.data);
-          console.log("yoyoyooyoy");
+          this.processing = true
           if (data.data.length) {
             this.page += 1;
 
@@ -1157,6 +1177,10 @@ export default {
       console.log(this.selectedNetwork);
     },
   },
+
+  created(){
+    this.path= this.activateBusinessNetwork ? `business/network/${this.$route.params.id}` : "network"
+  }
 };
 </script>
 

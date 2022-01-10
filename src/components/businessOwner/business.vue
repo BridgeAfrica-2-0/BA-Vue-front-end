@@ -19,7 +19,7 @@
                 ><Media type="business" :showCoverAlbum="showCoverAlbum" :key="key"/></b-tab>
               <b-tab :title="$t('businessowner.Market')"><MarketPlace /></b-tab>
               <b-tab :title="$t('profileowner.Networks')">
-                <Networks />
+                <Networks :activateBusinessNetwork="true" />
               </b-tab>
               <b-tab :title="$t('businessowner.Community')"
                 ><Followers

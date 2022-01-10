@@ -9,7 +9,7 @@
           :items="items"
           :options="options"
           class="center-ly"
-        >
+        > 
         </ly-tab>
 
         <hr width="100%" class="d-none" d-md-block />

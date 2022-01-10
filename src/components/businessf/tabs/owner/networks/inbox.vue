@@ -3095,14 +3095,16 @@ export default {
       Number(this.$route.params.id)
     );
     console.log("router params:", this.currentBizId);
-    this.tabIndex = this.$route.query.msgTabId;
+    this.tabIndex = this.$route.query.msgTabId
+      ? Number(this.$route.query.msgTabId)
+      : "no";
 
     console.log("this.tabIndex:", this.tabIndex);
     console.log("Current biz:", this.currentBiz);
 
     // console.log("call to action checked:", this.ctaSelected);
 
-    if (this.tabIndex) {
+    if ([0, 1, 2].includes(this.tabIndex)) {
       console.log("here am i!");
       if (this.tabIndex == 1) {
         this.getChatList({ type: "business" });

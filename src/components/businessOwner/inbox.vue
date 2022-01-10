@@ -3054,12 +3054,14 @@ export default {
       Number(this.$route.params.id)
     );
     console.log("router params:", this.currentBizId);
-    this.tabIndex = Number(this.$route.query.msgTabId);
+    this.tabIndex = this.$route.query.msgTabId
+      ? Number(this.$route.query.msgTabId)
+      : "no";
 
     console.log("this.tabIndex:", this.tabIndex);
     // console.log("call to action checked:", this.ctaSelected);
 
-    if (this.tabIndex) {
+    if ([0, 1, 2].includes(this.tabIndex)) {
       console.log("here am i!");
       if (this.tabIndex == 1) {
         this.getChatList({ type: "business" });
@@ -3450,9 +3452,9 @@ export default {
       let receiver = { receiverID: data.id, keyword: null };
       if (data.type == "user") {
         this.histBizToUser(receiver);
-      } else if (data.type == "network") {
+      } else if (this.type == "network") {
         this.histBizToNetwork(receiver);
-      } else if (data.type == "business") {
+      } else if (this.type == "business") {
         this.histBizToBiz(receiver);
       } else {
         this.histBizToGroup(receiver);

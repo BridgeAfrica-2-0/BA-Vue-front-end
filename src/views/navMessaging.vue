@@ -1725,11 +1725,13 @@ export default {
   },
   created() {
     console.log("screen width:", window.screen.width);
-    this.tabIndex = Number(this.$route.query.msgTabId);
+    this.tabIndex = this.$route.query.msgTabId
+      ? Number(this.$route.query.msgTabId)
+      : "no";
     console.log("this.tabIndex:", typeof this.tabIndex);
     this.$store.commit("businessChat/setCurrentBizId", this.$route.params.id);
 
-    if (this.tabIndex) {
+    if ([0, 1, 2].includes(this.tabIndex)) {
       if (this.tabIndex == 1) {
         this.getChatList({ type: "business" });
       } else if (this.tabIndex == 2) {
@@ -1740,7 +1742,7 @@ export default {
         console.log("testing...");
       }
 
-      console.log("There");
+      console.log("The cta:", this.ctaSelected);
 
       this.selectedChat({ chat: this.ctaSelected, id: this.ctaSelected.id });
     } else {
@@ -1925,11 +1927,11 @@ export default {
       this.chatId = data.id;
       this.$store.commit("businessChat/setSelectedChatId", data.id);
       let receiver = { receiverID: data.id, keyword: null };
-      if (data.type == "business") {
+      if (this.type == "business") {
         this.histUserToBiz(receiver);
-      } else if (data.type == "network") {
+      } else if (this.type == "network") {
         this.histUserToNetwork(receiver);
-      } else if (data.type == "group") {
+      } else if (this.type == "group") {
         this.histUserToGroup(receiver);
       } else {
         this.histUserToUser(receiver);

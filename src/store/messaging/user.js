@@ -155,6 +155,7 @@ export default {
         },
         // [NO BUG]
         GET_USERS_CHAT_LIST({ commit, state }, data) {
+            console.log("[debug data]:", data);
             commit("setUsers", []);
             console.log("currentuser:", state.currentUser.user);
 

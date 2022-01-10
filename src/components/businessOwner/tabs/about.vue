@@ -3,9 +3,7 @@
     <b-icon icon="person-fill" class="icon-size" variant="primary"></b-icon>
     <b> {{ $t("businessowner.About") }} </b>
 
-
     <hr />
-
 
     <b-card>
       <div class="mb-3">
@@ -116,14 +114,9 @@
               <p>
                 <b-icon icon="geo-alt-fill" class="primary icon-size"></b-icon>
 
-
-               <span
-              >
-              
-             {{ business_about.address }}
-             
-              </span
-            >
+                <span>
+                  {{ business_about.address }}
+                </span>
               </p>
               <p>
                 <b-icon icon="link" class="primary icon-size"></b-icon>
@@ -896,9 +889,7 @@ export default {
       words.map((item) => {
         keyword += item + ",";
       });
-    
-    
-     
+
         return keyword.substring(0, keyword.length-1);
      },
     loadBusinessAbout(){
@@ -1005,6 +996,7 @@ export default {
           console.log("edit address business");
           this.test();
           console.log(this.business_about_input);
+
            var dat = {
              business_id: this.$route.params.id,
              data: {
@@ -1053,6 +1045,7 @@ export default {
                 message: this.$t("businessowner.Business_Profile_updated"),
               });
               this.loadBusinessAbout();
+
               this.business_about = this.$store.getters[
                 "businessOwner/getBusinessAbout"
               ];

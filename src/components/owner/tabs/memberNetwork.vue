@@ -6,15 +6,33 @@
         style="padding: 0px; margin-left: -12px; margin-right: -12px"
       >
         <b-tabs pills content-class="mt-3 f-left">
-          <b-tab :title="$t('profileowner.People')" active>
+          <b-tab  active>
+
+               <template slot="title">
+           {{ $t('profileowner.People')}} <span class="spa-color"> {{ nFormatter(total.total_people)}}  </span>
+          </template>
+
+
             <People @BlockUser="BlockUser" />
           </b-tab>
 
-          <b-tab :title="$t('profileowner.Businesses')">
+          <b-tab>
+
+              <template slot="title">
+           {{ $t('profileowner.Businesses')}} <span class="spa-color"> {{ nFormatter(total.total_business)}}  </span>
+          </template>
+
+
             <Businesses @BlockUser="BlockUser" />
           </b-tab>
 
-          <b-tab :title="$t('profileowner.Network')">
+          <b-tab >
+
+              <template slot="title">
+           {{ $t('profileowner.Network')}} <span class="spa-color"> {{ nFormatter(total.total_network)}}  </span>
+          </template>
+
+
             <Network @BlockUser="BlockUser" />
           </b-tab>
         </b-tabs>
@@ -35,6 +53,15 @@ export default {
     Businesses,
     Network,
   },
+
+  
+		computed: {
+			total() {
+				return this.$store.state.profile.Tcommunity;
+			},
+		},
+
+
   data() {
     return {
       perPage: 3,
@@ -43,6 +70,20 @@ export default {
   },
 
   methods: {
+
+    	nFormatter(num) {
+				if (num >= 1000000000) {
+					return (num / 1000000000).toFixed(1).replace(/\.0$/, "") + "G";
+				}
+				if (num >= 1000000) {
+					return (num / 1000000).toFixed(1).replace(/\.0$/, "") + "M";
+				}
+				if (num >= 1000) {
+					return (num / 1000).toFixed(1).replace(/\.0$/, "") + "K";
+				}
+				return num;
+			},
+
     community() {
       this.$store
         .dispatch("profile/profilecommunity", null)

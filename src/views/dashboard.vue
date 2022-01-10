@@ -5,10 +5,10 @@
     <div class="text-justify p-card pr-1">
       <CarousselDashboard class="mm-top" /> <br />
 
-      <div v-if="selectedb == 'owner'">
+      <div v-if="selectedb == 'owner'"> 
         <b-card class="border shadow hselect">
           <b-row>
-            <b-col md="6" sm="12" class="">
+            <b-col md="6" sm="12" class="">     
               <h6 class="font-weight-bolder text-design text-center t-center">
                 {{
                   $t(
@@ -332,6 +332,8 @@ export default {
       });
 
     this.dashboardPpost();
+
+    
   },
 
   computed: {

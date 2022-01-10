@@ -662,11 +662,11 @@
                 <b-col>
                   <b-form-input
                     id="textarea"
-                    v-model="searchQuery"
+                    v-model="newSearchQuery"
                     class="input-background"
                     style="width: 100%"
                     :placeholder="`Type the name of the ${type}`"
-                    @keydown="getList(searchQuery)"
+                    @keydown="getList(newSearchQuery)"
                   ></b-form-input>
                   <br />
                 </b-col>
@@ -1446,11 +1446,11 @@
                 <b-col>
                   <b-form-input
                     id="textarea"
-                    v-model="searchQuery"
+                    v-model="newSearchQuery"
                     class="input-background"
                     style="width: 100%"
                     :placeholder="`Type the name of the ${type}`"
-                    @keydown="getList(searchQuery)"
+                    @keydown="getList(newSearchQuery)"
                   ></b-form-input>
                   <br />
                 </b-col>
@@ -1637,6 +1637,7 @@ export default {
       showsearch: true,
       selecteduser: false,
       searchQuery: "",
+      newSearchQuery: "",
       newMsg: false,
       show: false,
       info: false,

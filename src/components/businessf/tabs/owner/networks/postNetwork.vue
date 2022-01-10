@@ -91,8 +91,8 @@
           </b-row>
         </b-col>
       </b-row>
-      <div class="pending-post-view pt-2 mt-3">
-        <p>
+      <div v-if="postStatus != 'member'" class="pending-post-view pt-2 mt-3">
+        <p class="text-center">
 <!-- {{pendingPost.data}} -->
           {{$t("network.Your")}}  {{$t("network.Posts_are_pending_for_approval")}}.&nbsp;&nbsp;&nbsp;&nbsp;
           <a
@@ -445,6 +445,7 @@ import Post from "@/components/businessOwner/ownerPostComponent";
 export default {
   name: "postNetwork",
   mixins: [AllPostFeatureMixin],
+  props: ['postStatus'],
   components: {
     Post,
   },

@@ -30,7 +30,7 @@ export default {
   },
   created() {
     this.foll_id = this.$route.params.id;
-
+this.isloaded = true;
     this.$store
       .dispatch("businessOwner/roleCheck", this.foll_id)
       .then((data) => {

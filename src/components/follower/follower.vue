@@ -164,13 +164,14 @@
             </b-tab>
 
             <b-tab :title="$t('profilefollower.About')"><About /></b-tab>
+             <b-tab :title="$t('profilefollower.Media')"
+              ><Media type="profile" :isEditor="false"
+            /></b-tab>
             <b-tab :title="$t('profilefollower.Business')"
               ><Businesses
             /></b-tab>
             <b-tab :title="$t('profilefollower.Network')"><Network /></b-tab>
-            <b-tab :title="$t('profilefollower.Media')"
-              ><Media type="profile"
-            /></b-tab>
+           
             <b-tab :title="$t('profilefollower.Community')"
               ><Community
             /></b-tab>

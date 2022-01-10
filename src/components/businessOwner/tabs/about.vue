@@ -2,36 +2,80 @@
   <div ref="about">
     <b-icon icon="person-fill" class="icon-size" variant="primary"></b-icon>
     <b> {{ $t("businessowner.About") }} </b>
-    
-    <hr /> 
-    
+
+    <hr />
+
     <b-card>
       <div class="mb-3">
-        <mapbox
-          v-if="business_about.lat && business_about.lng"
-          :business="business_about"
-        />
+        <mapbox :business="business_about" />
       </div>
       
       <b-card>
         <b-row v-if="loading">
-
-  
-         
-          <b-col>
-            
+          <!-- <b-col>
             <div
-                v-if="showPen != 'BusinessFollower'"
-                class="edit"
-                v-b-modal.biographyModal
-                @click="
-                  business_about_input = JSON.parse(
-                    JSON.stringify(business_about)
-                  )
-                "
-              >
-                <b-icon icon="pencil-fill" variant="primary"></b-icon>
-              </div>
+              class="edit"
+              v-b-modal.biographyModal
+              @click="
+                business_about_input = JSON.parse(
+                  JSON.stringify(business_about)
+                )
+              "
+            >
+              <b-icon
+                icon="pencil-fill"
+                variant="primary"
+                v-if="showPen != 'BusinessEditor'"
+              ></b-icon>
+            </div>
+            <h4 class="mb-4 text-center username">
+              {{ business_about.name }}
+            </h4>
+            <p class="text-justify text">
+              {{ business_about.location_description }}
+            </p>
+          </b-col> -->
+          <!-- <b-col>
+           
+            <div
+              class="edit"
+              v-b-modal.biographyModal
+              @click="
+                business_about_input = JSON.parse(
+                  JSON.stringify(business_about)
+                )
+              "
+            >
+              <b-icon icon="pencil-fill" variant="primary"></b-icon>
+            </div>
+            <h4 class="mb-4 text-center username">
+              {{ business_about.name }}
+            </h4>
+            <p class="text-justify text">
+              {{ business_about.location_description }}
+            </p>
+          </b-col> -->
+          <b-col>
+            <!-- <div class="edit">
+                <b-icon
+                  icon="pencil-fill"
+                  variant="primary"
+                  
+                ></b-icon>
+              </div> -->
+            <div
+              v-if="showPen != 'BusinessFollower'"
+              class="edit"
+              v-b-modal.biographyModal
+              @click="
+                business_about_input = JSON.parse(
+                  JSON.stringify(business_about)
+                )
+              "
+            >
+              <b-icon icon="pencil-fill" variant="primary"></b-icon>
+            </div>
+
             <h4 class="mb-4 text-center username">
               <b-icon icon="info-circle-fill" class="primary mr-2"></b-icon>
               {{ business_about.name }}
@@ -70,12 +114,9 @@
               <p>
                 <b-icon icon="geo-alt-fill" class="primary icon-size"></b-icon>
 
-               <span
-              >{{ business_about.address }}
-              <!-- {{ business_about.city }}, 
-             {{ business_about.country[0].name }} -->
-              </span
-            >
+                <span>
+                  {{ business_about.address }}
+                </span>
               </p>
               <p>
                 <b-icon icon="link" class="primary icon-size"></b-icon>
@@ -135,7 +176,6 @@
                   @click="load"
                 ></b-icon>
               </div>
-
               <p>
                 <b-icon
                   icon="briefcase-fill"
@@ -579,25 +619,6 @@ export default {
       division: [],
       municipality: [],
       locality: [],
-
-      // categories: [
-      //   { item: "Professional_and_home_service", name: "Professionals" },
-      //   { item: "Agriculture ", name: "Agriculture " },
-      //   { item: "Restaurant ", name: " Restaurant " },
-      //   { item: "Electronics ", name: "Electronics " },
-      //   { item: "Handicrafts", name: "Handicrafts" },
-      //   { item: "clothing", name: "clothing" },
-      //   { item: "Mechanics", name: "Mechanics" },
-      //   { item: "Health_unit ", name: "Health unit " },
-      //   { item: "Bars", name: "Bars" },
-      //   { item: "Hair_and_beauty ", name: "Hair and beauty " },
-      //   { item: "Real_estate ", name: "Real_estate " },
-      //   { item: "Travelling ", name: "Travelling " },
-      //   { item: "Hotels", name: "Hotels" },
-      //   { item: "station", name: " station  " },
-      //   { item: "Mayor_concils", name: "Mayor_concils" },
-      //   { item: "Taxis service", name: "Taxis service" },
-      // ],
       dayOfWorks: [
         { day: "Monday", opening_time: null, closing_time: null, check: false },
         {
@@ -704,7 +725,6 @@ export default {
           this.business_about = JSON.parse(
           JSON.stringify(this.$store.getters["businessOwner/getBusinessAbout"])
         );
-        
         this.dayOfWorks = this.initialize(this.dayOfWorks);
       })
       .catch((error) => {
@@ -738,7 +758,6 @@ export default {
             this.openNow.closing_time +
             " PM";
     },
-
     // business_about_input(){
     //   this.business_about_input = JSON.parse(
     //     JSON.stringify(this.business_about)
@@ -816,21 +835,49 @@ export default {
       return sub_cat;
     },
   },
-
   methods: {
-    loadBusinessAbout() {
-      this.$store
-        .dispatch("businessOwner/loadUserBusinessAbout", {
-          // business_abobusiness_id: this.business_about_input,
-          business_id: this.$route.params.id,
-        })
-        .then((res) => {
-          this.business_about = JSON.parse(
-            JSON.stringify(
-              this.$store.getters["businessOwner/getBusinessAbout"]
-            )
-          );
-        });
+    stringArray(words) {
+      let keyword = "";
+      words.map((item) => {
+        if (item.subcategoryId) {
+          keyword += item.subcategoryId + ",";
+        } else {
+          keyword += item.subcategory_id + ",";
+        }
+      });
+      return keyword.substring(0, keyword.length - 1);
+    },
+    stringArray1(words) {
+      let keyword = "";
+      words.map((item) => {
+        if (item.category_id) {
+          keyword += item.category_id + ",";
+        } else {
+          keyword += item.id + ",";
+        }
+      });
+      console.log("id ici ---", words, "---", keyword);
+      return keyword.substring(0, keyword.length - 1);
+    },
+    ArrayString(words) {
+      let keyword = "";
+      words.map((item) => {
+        keyword += item + ",";
+      });
+
+        return keyword.substring(0, keyword.length-1);
+     },
+    loadBusinessAbout(){
+        this.$store
+      .dispatch("businessOwner/loadUserBusinessAbout", {
+        // business_abobusiness_id: this.business_about_input,
+        business_id: this.$route.params.id,
+      }).then(res => {
+        this.business_about = JSON.parse(
+          JSON.stringify(this.$store.getters["businessOwner/getBusinessAbout"])
+        );
+      }
+      )
     },
     validator(tag) {
       return tag.length > 2 && tag.length < 20;
@@ -878,7 +925,6 @@ export default {
         JSON.stringify(this.business_about)
       );
     },
-
     validate(type) {
       switch (type) {
         case "modifyBiography":
@@ -886,13 +932,11 @@ export default {
             "vuex store +++++ " +
               this.$store.getters["businessOwner/getBusinessAbout"]
           );
-
           this.test();
           var data = {
             business_id: this.business_id,
             data: {
               about_business: this.business_about_input.about_business,
-
               name: this.business_about_input.name,
             },
           };
@@ -928,33 +972,34 @@ export default {
           this.test();
           console.log(this.business_about_input);
 
-          var dat = {
-            business_id: this.$route.params.id,
-            data: {
-              name: this.business_about_input.name,
-              about_business: this.business_about_input.about_business,
-              categoryId: this.business_about_input.category[0].category_id,
-              subCategoryId: this.business_about_input.subCatFilter[0]
-                .subcategoryId,
-              filterId: this.business_about_input.filter[0].filter_id,
-              keywords: this.stringKeyword(this.business_about_input.keywords),
-              primary_phone: this.business_about_input.phone1,
-              secondary_phone: this.business_about_input.phone2,
-              website: this.business_about_input.website,
-              email: this.business_about_input.email,
-              country: this.business_about_input.country[0].country_id,
-              region: this.business_about_input.region[0].region_id,
-              division: this.business_about_input.division[0].division_id,
-              council: this.business_about_input.council[0].council_id,
-              neigborhood: this.business_about_input.council[0].neighborhood_id,
-              locality: this.business_about_input.locality,
-              city: this.business_about_input.city,
-              openHours: this.business_about_input.business_open_hours,
-              lat: this.business_about_input.lat,
-              lng: this.business_about_input.lng,
-              address: this.business_about_input.address,
-            },
-          };
+           var dat = {
+             business_id: this.$route.params.id,
+             data: {
+            name: this.business_about_input.name,
+            about_business: this.business_about_input.about_business,
+            categoryId:  this.stringArray1(this.multiselecvalue), //this.business_about_input.category[0].category_id,
+            subCategoryId: this.stringArray(this.filterselectvalue),//this.business_about_input.subCatFilter[0].subcategoryId,
+            filterId: this.ArrayString(this.select_filterss),
+            keywords: this.stringKeyword(this.business_about_input.keywords),
+            primary_phone: this.business_about_input.phone1,
+            secondary_phone :this.business_about_input.phone2,
+            website: this.business_about_input.website,
+            email: this.business_about_input.email,
+            country: this.business_about_input.country[0].country_id,
+            region: this.business_about_input.region[0].region_id,
+            division: this.business_about_input.division[0].division_id, 
+            council: this.business_about_input.council[0].council_id,
+            neigborhood: this.business_about_input.neigborhood[0].neighborhood_id,
+            // locality: this.business_about_input.locality,
+            city: this.business_about_input.city,
+            openHours: this.business_about_input.business_open_hours,
+            lat: this.business_about_input.lat,
+            lng: this.business_about_input.lng,
+            address: this.business_about_input.address
+            }
+            
+          } 
+          console.log(this.select_filterss, 'data editer --',dat)
           this.$store
             .dispatch(
               "businessOwner/updateUserBusinessAbout",
@@ -970,10 +1015,10 @@ export default {
                 response
               );
               this.loadBusinessAbout();
+
               this.business_about = this.$store.getters[
                 "businessOwner/getBusinessAbout"
               ];
-
               this.$refs["addressBusinessModal"].hide();
               console.log("update user business about end");
             })
@@ -997,13 +1042,11 @@ export default {
           break;
       }
     },
-
     stringKeyword(words) {
       let keyword = "";
       words.map((item) => {
         keyword += item + ",";
       });
-
       return keyword.substring(0, keyword.length - 1);
     },
     test() {
@@ -1025,7 +1068,6 @@ export default {
         JSON.stringify(this.business_about)
       );
     },
-
     categories() {
       this.$store
         .dispatch("auth/categories")
@@ -1128,7 +1170,6 @@ export default {
           console.log({ err: err });
         });
     },
-
     editBusiness() {
       console.log("editBusiness");
       this.axios

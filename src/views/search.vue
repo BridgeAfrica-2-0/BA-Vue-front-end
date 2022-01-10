@@ -12,8 +12,6 @@
       </template>
     </Nav>
 
-    
-
     <SubNav
       @category="getCategory"
       @parentcategory="getparentCategory"
@@ -405,14 +403,18 @@
             <!--filter for all takes just two fields at a time  -->
 
             <div id="all" v-if="selectedId == '0'">
-              <!-- <h6>
-                {{$t("search.Sponsored_Result")}}
-                <fas-icon class="icons" :icon="['fas', 'exclamation-circle']" size="lg" />
+              <h6>
+                {{ $t("search.Sponsored_Result") }}
+                <fas-icon
+                  class="icons"
+                  :icon="['fas', 'exclamation-circle']"
+                  size="lg"
+                />
               </h6>
 
               <div>
                 <Sponsor />
-              </div> -->
+              </div>
 
               <h6>
                 <fas-icon
@@ -434,11 +436,14 @@
               <hr />
 
               <div class="d-flex">
-                <fas-icon class="icons mr-1" :icon="['fas', 'users']" size="lg" />
-              
+                <fas-icon
+                  class="icons mr-1"
+                  :icon="['fas', 'users']"
+                  size="lg"
+                />
+
                 <h6>{{ $t("search.People") }}</h6>
               </div>
-              
 
               <MiniPeople />
               <span class="float-right mb-3" @click="selectedId = 2">
@@ -535,13 +540,17 @@
             <!-- Filter out just the market -->
 
             <div v-if="selectedId == '4'">
-              <!-- <h6>
-                <fas-icon class="icons" :icon="['fas', 'store']" size="lg" />
-                {{$t("search.Market")}}
-              </h6> -->
+              <h6>
+                {{ $t("search.Sponsored_Result") }}
+                <fas-icon
+                  class="icons"
+                  :icon="['fas', 'exclamation-circle']"
+                  size="lg"
+                />
+              </h6>
 
               <div>
-                <!-- <Sponsor /> -->
+                <Sponsor />
               </div>
 
               <h6 class="mb-3">
@@ -692,9 +701,9 @@ export default {
   },
 
   created() {
-      this.islogin=this.$store.getters["auth/isLogged"];
-     
-     console.log(this.islogin);
+    this.islogin = this.$store.getters["auth/isLogged"];
+
+    console.log(this.islogin);
 
     if (this.$route.query.keyword)
       this.searchParams.keyword = this.$route.query.keyword;
@@ -705,9 +714,18 @@ export default {
 
     this.strategY = {
       users: () => this.onFindUser(),
-      all: () => this.getKeyword(),
-      market: () => this.searchProducts(),
-      network: () => this.searchNetworks(),
+      all: () =>
+        this.getKeyword({
+          keyword: this.searchParams.keyword,
+        }),
+      market: () =>
+        this.searchProducts({
+          keyword: this.searchParams.keyword,
+        }),
+      network: () =>
+        this.searchNetworks({
+          keyword: this.searchParams.keyword,
+        }),
       business: () => this.onFindBusiness(),
     };
 
@@ -718,7 +736,7 @@ export default {
 
   data() {
     return {
-       islogin:true,
+      islogin: true,
       searchParams: {
         keyword: "",
         cat_id: "",
@@ -1675,7 +1693,7 @@ export default {
   },
 
   watch: {
-    selectedId: function() {
+    selectedId: function () {
       this.changeComponent();
       this.changePlaceHolder();
       this.changeNotFoundTitle();
@@ -1702,12 +1720,11 @@ export default {
       if (this.$route.query.uuid) this.selectedId = 5;
     },
     // [ED]----------
-    getKeyword() {
-      console.log("the keyword is: ", this.searchParams.keyword);
+    getKeyword(data) {
+      let elm = data ? data : { keyword: "" };
+      console.log("the keyword is: ", data);
       this.$store
-        .dispatch("allSearch/SEARCH", {
-          keyword: this.searchParams.keyword,
-        })
+        .dispatch("allSearch/SEARCH", elm)
         .then((res) => {
           // console.log("categories loaded!");
         })
@@ -1748,11 +1765,9 @@ export default {
         });
     },
 
-    searchProducts() {
+    searchProducts(data) {
       this.$store
-        .dispatch("marketSearch/searchProducts", {
-          keyword: this.searchParams.keyword,
-        })
+        .dispatch("marketSearch/searchProducts", data)
         .then((res) => {
           // console.log("categories loaded!");
         })
@@ -1761,11 +1776,9 @@ export default {
         });
     },
 
-    searchNetworks() {
+    searchNetworks(data) {
       this.$store
-        .dispatch("networkSearch/SEARCH", {
-          keyword: this.searchParams.keyword,
-        })
+        .dispatch("networkSearch/SEARCH", data)
         .then((res) => {
           // console.log("categories loaded!");
         })
@@ -1813,10 +1826,10 @@ export default {
       };
 
       this.strategyForPlaceHolder = {
-        2: () => this.$t('general.Find_User'),
-        5: () => this.$t('general.Find_Post'),
-        0: () => this.$t('general.All'),
-        1: () => this.$t('general.Find_Businesses'),
+        2: () => this.$t("general.Find_User"),
+        5: () => this.$t("general.Find_Post"),
+        0: () => this.$t("general.All"),
+        1: () => this.$t("general.Find_Businesses"),
       };
 
       this.strategyForComponent = {
@@ -1826,9 +1839,9 @@ export default {
       };
 
       this.strategyForNotFoundComponentTitle = {
-        2: () => this.$t('general.Not_Find_users'),
-        5: () => this.$t('general.Not_Find_posts'),
-        1: () => this.$t('general.Not_Find_Business'),
+        2: () => this.$t("general.Not_Find_users"),
+        5: () => this.$t("general.Not_Find_posts"),
+        1: () => this.$t("general.Not_Find_Business"),
       };
 
       this.changePlaceHolder();
@@ -2056,11 +2069,12 @@ export default {
         this.searchBusiness({ cat_id: value.cat_id, sub_cat: value.id });
       } else if (this.selectedId == 0) {
         this.allSearchByCat({ cat_id: value.cat_id, sub_cat: value.id });
+      } else if (this.selectedId == 3) {
+        this.searchNetworks({ cat_id: value.cat_id, sub_cat: value.id });
       }
     },
 
-
-     allSearchByCat(data) {
+    allSearchByCat(data) {
       console.log("the category is: ", data);
       this.$store
         .dispatch("allSearch/SEARCH", data)
@@ -2069,10 +2083,8 @@ export default {
         })
         .catch((err) => {
           console.log("Error erro!");
-        });    
+        });
     },
-
-
 
     searchBusiness(data) {
       this.$store.commit("business/setLoading", true);

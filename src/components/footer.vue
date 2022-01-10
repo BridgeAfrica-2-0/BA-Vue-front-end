@@ -7,16 +7,16 @@
 						<div class="col-lg-9">
 							<ul class="list-group list-unstyled">
 								<li>
-									<a href="#">{{ $t("general.home") }}</a>
+									<a href="/">{{ $t("general.home") }}</a>
 								</li>
 								<li>
-									<a href="#">{{ $t("general.about_us") }}</a>
+									<a href="/about">{{ $t("general.about_us") }}</a>
 								</li>
 								<li>
 									<a href="#">{{ $t("general.privacy_policy") }}</a>
 								</li>
 								<li>
-									<a href="#">{{ $t("general.contact_us") }}</a>
+									<a href="/contact">{{ $t("general.contact_us") }}</a>
 								</li>
 								<li>
 									<a href="#">{{ $t("general.blog") }}</a>
@@ -46,7 +46,7 @@
 										class="ml-2"
 									>
 										<b-dropdown-item-button>{{ $t("general.Cameroon") }}</b-dropdown-item-button>
-										<b-dropdown-item-button>Nigeria</b-dropdown-item-button>
+										<!-- <b-dropdown-item-button>Nigeria</b-dropdown-item-button> -->
 									</b-dropdown>
 								</li>
 							</ul>

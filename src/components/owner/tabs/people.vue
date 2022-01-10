@@ -225,7 +225,7 @@ export default {
       .dispatch("follower/Tcommunity", this.foll_id)
       .then((response) => {})
       .catch((error) => {
-        console.log({ error: error });
+        console.log({ error: error });   
       });
     },
     async handleFollow(user) {

@@ -36,13 +36,16 @@
 					<div class="d-inline-flex">
 
 					
-                        <div class="col-1">   <input type="radio" :v-model="shipping_item.id"  :checked="shipping_item.active"     name="shipping" value="">   </div>
+                        <div class="col-1">
+
+				
+	   <input type="radio" :v-model="shipping_item.id"  @change="shipping(shipping_item)"   :checked="shipping_item.active==1"     name="shipping" value="">   </div>
 	
 
 	      <div>     
 
 	   
-						<p class="body-font-size">
+						<p class="body-font-size"> 
 							{{ shipping_item.name }}, {{ shipping_item.phone }},{{
 								shipping_item.country
 							}}, {{shipping_item.email}}
@@ -131,9 +134,48 @@
 			CreateShippingModal,
 			ChangeShippingAddress,
 		},
+
+		
 		methods: {
+
+
+			shipping(data){
+             
+			 	let loader = this.$loading.show({
+        container: this.fullPage ? null : this.$refs.preview,
+        canCancel: true,
+        onCancel: this.onCancel,
+        color: "#e75c18",
+      });
+
+
+			 this.$store.dispatch("checkout/choseShipping", data).then(() => {
+					  this.$store.dispatch("checkout/getCartt").then(() => {
+					     loader.hide();
+
+						 })
+				.catch(() => {
+					
+				});
+					
+				})
+				.catch(() => {
+					
+				});
+
+			
+			},
+
+
 			handleDeleteShipping(id) {
-				this.$store.dispatch("checkout/deleteShippingAdd", id);
+
+			
+				this.$store.dispatch("checkout/deleteShippingAdd", id)
+
+				
+				
+
+
 			},
 			showConfirmModal() {
 				this.$emit("showconfirm");

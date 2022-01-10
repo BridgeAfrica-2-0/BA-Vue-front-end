@@ -93,6 +93,12 @@ export default {
     },
   },
 
+  created(){
+    console.log(this.showCoverAlbum)
+    if (this.showCoverAlbum)
+      this.show()
+  },
+
   methods: {
     getFullMediaLink: fullMediaLink,
 

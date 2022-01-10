@@ -2,7 +2,7 @@
   <div class="settings-notifications">
     <!-- HEARDER -->
 
-    <div class="d-flex justify-content-between align-items-end mb-4">
+    <div class="d-flex flex-mobile-column justify-content-between align-items-md-end mb-4">
       <b-form-checkbox
         v-model="selectAll"
         class="cursor-pointer"
@@ -66,7 +66,7 @@
     <infinite-loading @infinite="infiniteHandler">
       <div slot="no-more">{{ $t("general.No_More_Notifications") }}</div>
       <div slot="no-results">
-        <b-alert show variant="secondary">{{ $t("general.") }}No_Notifications</b-alert>
+        <b-alert show variant="secondary">{{ $t("general.No_Notifications") }}</b-alert>
       </div>
     </infinite-loading>
   </div>
@@ -249,5 +249,10 @@ export default {
 }
 .btn-mark-as {
   outline: none !important;
+}
+@media only screen and (max-width: 600px){
+  .flex-mobile-column{
+    flex-direction: column;
+  }
 }
 </style>

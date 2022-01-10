@@ -23,6 +23,10 @@ import { mapGetters, mapActions } from "vuex";
 export default {
   // mixins: [Redis],
 
+  created(){
+    console.log(navigator.onLine)
+  },
+
   data() {
     return {
       prevHeight: 0,

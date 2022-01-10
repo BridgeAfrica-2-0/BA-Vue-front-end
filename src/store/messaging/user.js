@@ -152,6 +152,7 @@ export default {
         },
         // [NO BUG]
         GET_USERS_CHAT_LIST({ commit, state }, data) {
+            console.log("[debug data]:", data);
             commit("setUsers", []);
             console.log("currentuser:", state.currentUser.user);
 
@@ -263,40 +264,54 @@ export default {
             console.log("[DEBUG]", data);
             var payload = data.data
             var type = data.type
+            let exec = 0
 
             if (type == 'business') {
-                axios.post(`/messages/UserToBusiness`, payload, {
-                        headers: {
-                            'Content-Type': 'multipart/form-data'
-                        }
-                    })
-                    .then((res) => {
-                        console.log("Message saved...", res.data.data);
-                    })
-                    .catch((err) => {
-                        console.log(err);
-                    })
-            } else if (type == 'user') {
-                axios.post(`/messages/UserToUser`, payload, {
-                        headers: {
-                            'Content-Type': 'multipart/form-data'
-                        }
-                    })
-                    .then((res) => {
-                        console.log("Message saved...", res.data.data);
-                    })
-                    .catch((err) => {
-                        console.log(err);
-                    })
-            } else {
-                axios.post(`/messages/UserToNetwork`, payload)
-                    .then((res) => {
-                        console.log("Message saved...", res.data.data);
-                    })
-                    .catch((err) => {
-                        console.log(err);
-                    })
-            }
+                if (exec < 1) {
+                    axios.post(`/messages/UserToBusiness`, payload, {
+                            headers: {
+                                'Content-Type': 'multipart/form-data'
+                            }
+                        })
+                        .then((res) => {
+                            exec += 1
+                            console.log("exec:", exec);
+                            console.log("Message saved...", res.data.data);
+                        })
+                        .catch((err) => {
+                            console.log(err);
+                        })
+                }
+            } else if (type == 'user' && exec < 1) {
+                console.log("bug");
+                if (exec < 1) {
+                    axios.post(`/messages/UserToUser`, payload, {
+                            headers: {
+                                'Content-Type': 'multipart/form-data'
+                            }
+                        })
+                        .then((res) => {
+                            exec += 1
+                            console.log("exec:", exec);
+                            console.log("Message saved...", res.data.data);
+                        })
+                        .catch((err) => {
+                            console.log(err);
+                        })
+                }
+            } else if (type == 'network') {
+                if (exec < 1) {
+                    axios.post(`/messages/UserToNetwork`, payload)
+                        .then((res) => {
+                            exec += 1
+                            console.log("exec:", exec);
+                            console.log("Message saved...", res.data.data);
+                        })
+                        .catch((err) => {
+                            console.log(err);
+                        })
+                }
+            } else console.log("Not saved!");
 
         },
 

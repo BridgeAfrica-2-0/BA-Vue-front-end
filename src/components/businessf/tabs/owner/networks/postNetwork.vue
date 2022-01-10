@@ -92,7 +92,7 @@
         </b-col>
       </b-row>
       <div class="pending-post-view pt-2 mt-3">
-        <p>
+        <p class="text-center">
 <!-- {{pendingPost.data}} -->
           {{$t("network.Your")}}  {{$t("network.Posts_are_pending_for_approval")}}.&nbsp;&nbsp;&nbsp;&nbsp;
           <a

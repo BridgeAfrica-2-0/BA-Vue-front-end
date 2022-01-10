@@ -83,8 +83,13 @@
           <div class="row">
             <div class="col-lg-3 col-md-6 footer-contact">
               <div class="row">
-                <div class="col-8">
-                  <img src="../../assets/img/bavlogo.png" width="200px" class="size" alt="" />
+                <div class="col-8 footer-img-col">
+                  <img
+                    src="../../assets/img/bavlogo.png"
+                    width="200px"
+                    class="size px-n1 px-md-0"
+                    alt=""
+                  />
                 </div>
 
               
@@ -209,8 +214,10 @@ export default {};
   .footer-icons-div {
     width: 100%;
   }
-
-
+  .footer-img-col {
+    padding-left: 0;
+    margin-left: -6px;
+  }
 }
 
 .size{

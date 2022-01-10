@@ -10,9 +10,12 @@
           </b-col>
           <b-col md="7" cols="7" lg="5" sm="5">
             <p class="textt">
-              <strong class="title">
-                {{ item.name }}
-              </strong>
+              <router-link :to="{name: 'BusinessFollower', params:{id:item.id}}">
+                <strong class="title">
+                  {{ item.name }}
+                </strong>
+              </router-link>
+              
               <br />
               {{ item.category.map(category => category.name).join(", ") }} 
               <br />
@@ -41,14 +44,26 @@
                   class="mt-2 text-center"
                 >
                   <b-button
-                    block
-                    size="sm"
-                    class="b-background shadow"
-                    variant="primary"
-                  >
-                    <i class="fas fa-user-plus fa-lg btn-icon"></i>
-                    <span class="btn-com">{{ $t("search.Community") }}</span>
-                  </b-button>
+                      block
+                      size="sm"
+                      :disabled="disable"
+                      :class="item.is_follow !== 0 && 'u-btn'"
+                      variant="primary"
+                      :id="'followbtn' + item.id"
+                      @click="handleFollow(item)"
+                    >
+                      <i
+                        class="fas fa-lg btn-icon"
+                        :class="
+                          item.is_follow !== 0
+                            ? 'fa-user-minus'
+                            : 'fa-user-plus'
+                        "
+                      ></i>
+                      <span class="btn-com">
+                        {{ $t("search.Community") }}</span
+                      >
+                    </b-button>
                 </b-col>
 
                 <b-col
@@ -93,6 +108,7 @@
 
 <script>
 import { formatNumber } from "@/helpers";
+import axios from "axios"
 export default {
   props: ["title", "image"],
 
@@ -109,6 +125,7 @@ export default {
   data() {
     return {
       items: [],
+      disable:false,
       options: {
         rewind: true,
         autoplay: true,
@@ -149,9 +166,33 @@ export default {
 
       if (request.success) this.items = request.data;
     },
+
     gotoBusiness(id){
       this.$router.push(`/business/${id}#about`)
-    }
+    },
+
+    async handleFollow(user) {
+      this.disabled = true;
+
+      const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
+      const nextFollowState = user.is_follow === 0 ? 1 : 0;
+      const data = {
+        id: user.id,
+        type: "business",
+      };
+
+      await axios
+        .post(uri, data)
+        .then((response) => {
+          console.log(response);
+          user.is_follow = nextFollowState;
+          this.disabled = false;
+        })
+        .catch((err) => {
+          console.log(err);
+          this.disabled = false;
+        });
+    },
   },
 };
 </script>

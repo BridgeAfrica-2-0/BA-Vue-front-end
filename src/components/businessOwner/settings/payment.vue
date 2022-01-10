@@ -1,7 +1,13 @@
 <template>
   <b-container class="container-fluid">
     <b-container>
-      <p class="text">{{$t("businessowner.Select_a_payment_method_for_your_bridget_africa_account")}}</p>
+      <p class="text">
+        {{
+          $t(
+            "businessowner.Select_a_payment_method_for_your_bridget_africa_account"
+          )
+        }}
+      </p>
     </b-container>
 
     <div class="b-bottom">
@@ -33,11 +39,12 @@
             <div class="">
               <img
                 :src="require('@/assets/img/payment/mtn.png')"
+                class="img-cover"
                 alt="MOBILE MONEY"
               />
             </div>
             <div class="operator-name">
-              <p class="mb-0 mx-4 title-font-size font-weight-bold">
+              <p class="mb-0 mx-2 mx-md-3 title-font-size font-weight-bold">
                 MTN Mobile Money
               </p>
             </div>
@@ -55,11 +62,12 @@
             <div class="">
               <img
                 :src="require('@/assets/img/payment/orange_money.png')"
+                class="img-cover"
                 alt="ORANGE MONEY"
               />
             </div>
             <div class="operator-name">
-              <p class="mb-0 mx-4 title-font-size font-weight-bold">
+              <p class="mb-0 mx-2 mx-md-3 title-font-size font-weight-bold">
                 Orange Money
               </p>
             </div>
@@ -72,10 +80,11 @@
               ></b-form-radio>
             </div>
           </div>
-          <div class="my-4 operator">
+          <!-- <div class="my-4 operator">
             <div class="operator-img-box">
               <img
                 :src="require('@/assets/img/payment/expressU.jpg')"
+                class="img-cover"
                 alt="EXPRESS UNION"
               />
             </div>
@@ -92,7 +101,7 @@
                 class="operator-select"
               ></b-form-radio>
             </div>
-          </div>
+          </div> -->
 
           <div class="row p-2">
             <div class="col">
@@ -123,7 +132,7 @@
     >
       <b-overlay :show="show" rounded="sm">
         <div class="row">
-          <div class="col-10 col-sm-9 col-md-8">
+          <div class="col-12 col-sm-12 col-md-8">
             <b-form-input
               placeholder="237 6XX XXX XXX"
               id="number"
@@ -131,10 +140,12 @@
               type="tel"
             ></b-form-input>
           </div>
-          <div class="col-2 col-sm-3 col-md-4 px-0 btn-custom-box">
+          <div
+            class="col-12 col-sm-12 col-md-4 px-0 btn-custom-box mt-2 mt-md-0"
+          >
             <b-button
               variant="primary"
-              class="font-weight-light shadow-sm btn-custom text-14"
+              class="font-weight-light shadow-sm btn-custom text-14 d-block m-auto"
               @click="confirmDefaltPayment"
               >{{ $t("businessowner.Confirm") }}</b-button
             >
@@ -148,6 +159,7 @@
 <script>
 export default {
   name: "payment",
+  props: ["profileId"],
   data() {
     return {
       url: null,
@@ -178,9 +190,12 @@ export default {
       return this.$store.state.auth.country;
     },
   },
-
-  mounted(){
-    this.url = this.$route.params.id;
+  mounted() {
+    console.log("profileId", this.profileId);
+    this.url =
+      this.$route.params.id !== undefined
+        ? this.$route.params.id
+        : this.profileId;
     this.DefaultPayment();
     this.Country();
   },
@@ -212,16 +227,16 @@ export default {
     DefaultPayment() {
       console.log("defaultPayment");
       this.$store
-      .dispatch("businessAccountType/getDefaultPayment", {
-        path: `get-payement-method/${this.url}`
+        .dispatch("businessAccountType/getDefaultPayment", {
+          path: `get-payement-method/${this.url}`,
         })
-      .then(() => {
-        this.PaymentForm.operator = this.defaultPayment.payement_method;
-        console.log('ohh yeah');
-      })
-      .catch(err => {
-        console.log({ err: err });
-      });
+        .then(() => {
+          this.PaymentForm.operator = this.defaultPayment.payement_method;
+          console.log("ohh yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
     },
 
     confirmDefaltPayment() {
@@ -264,10 +279,13 @@ export default {
 };
 </script>
 
-
 <style scoped>
 .descrip {
   font-size: 14px;
+}
+
+.img-cover {
+  object-fit: cover;
 }
 .btn-custom {
   height: 38px;
@@ -329,6 +347,20 @@ export default {
     top: -5px;
     left: -20px;
   }
+  .operator-img-box {
+    width: 100px !important;
+  }
+  .operator img {
+    width: 250px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .operator img {
+    display: inline-block;
+    height: 40px;
+    width: 100%;
+  }
 }
 </style>
 <style scoped>
@@ -347,12 +379,7 @@ export default {
   align-items: center;
 }
 .operator-img-box {
-  width: 50px !important;
-}
-.operator img {
-  display: inline-block;
-  height: 40px;
-  width: 100%;
+  width: 50px;
 }
 .operator-name {
   width: 30rem;
@@ -367,6 +394,9 @@ export default {
   }
   .operator-select {
     float: right;
+  }
+  .title-font-size {
+    font-size: 10px !important;
   }
 }
 </style>

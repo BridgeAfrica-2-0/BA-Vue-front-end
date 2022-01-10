@@ -5,7 +5,6 @@
       :icon="['fas', 'file-image']"
     />{{ $t("profileowner.Media") }}
 
-
     <hr />
     <b-tabs content-class="mt-3" v-model="tabIndex" pills>
       <b-tab :title="$t('profileowner.Posts')" @click="getImages">
@@ -73,6 +72,26 @@ export default {
       type: Boolean,
     },
   },
+
+  watch: {
+    showCoverAlbum: function(newValue){
+      if (newValue){
+        this.tabIndex = 1
+      }else{
+        this.tabIndex = 0;
+      }
+    },
+
+    tabIndex: function(newValue){
+      if (newValue){
+        this.getAlbums()
+      }else{
+        this.getImages()
+      }
+    }
+
+  },
+
   data: function() {
     return {
       loading: false,
@@ -138,7 +157,6 @@ export default {
 
           })
           .finally(() => console.log("End load album"));
-
         //}
       } catch (error) {
         console.log(error);
@@ -161,7 +179,6 @@ export default {
             this.hasLoadAlbum = true;
           })
           .finally(() => console.log("End load images"));
-
         //}
       } catch (error) {
         console.log(error);
@@ -173,6 +190,7 @@ export default {
   created() {
     console.log(this.showCoverAlbum);
 
+    
     this.urlData = this.$route.params.id
       ? this.$route.params.id
       : this.profile.id;
@@ -200,7 +218,13 @@ export default {
       }),
     };
 
-    this.getImages();
+    if (this.showCoverAlbum){
+      this.tabIndex = 1;
+      this.getAlbums()
+    }else{
+      this.getImages();
+    }
+
   },
 };
 </script>

@@ -37,7 +37,17 @@
                     </span>
                     <br />
                     {{ count(item.followers) }}
-                    {{ $t("dashboard.Community") }} <br />
+                    {{ $t("dashboard.Community") }}   <span   @click="BlockUser(item.id, index)" class="ml-3"  style="cursor: pointer">  
+                      
+                      <b-icon
+                              font-scale="1"
+                              icon="exclamation-octagon"
+                              v-b-tooltip.hover
+                              title="Block This Business"
+                              variant="danger"
+                            ></b-icon>
+                            
+                              </span> <br />
 
                     <span class="location">
                       <b-icon-geo-alt class="ico"></b-icon-geo-alt>

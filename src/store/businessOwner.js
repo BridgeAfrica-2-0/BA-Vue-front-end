@@ -101,36 +101,7 @@ export default {
         },
 
         business_about1: {
-          name: 'Tierra Hermiston',
-          logo_path: 'http://localhost:8000/storage',
-          category: 'Hourse Marketing',
-          keywords: null,
-          language: null,
-          location_description:
-            'Tempore quo soluta voluptates quis. Doloremque autem minus ut nisi molestias maiores cum. Et assumenda velit expedita et et sint sed in.',
-          website: null,
-          community: 6,
-          phone: null,
-          email: null,
-          business_open_hours: [
-            {
-              day: 'monday',
-              opening_time: '09:05:12',
-              closing_time: '15:06:18',
-            },
-            {
-              day: 'tuesday',
-              opening_time: '07:05:38',
-              closing_time: '14:05:43',
-            },
-          ],
-          region: null,
-          address: null,
-          city: null,
-          country: null,
-          lat: -56.200329,
-          lng: -6.249487,
-        },
+          },
       },
     ]
   },

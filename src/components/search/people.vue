@@ -3,9 +3,9 @@
     <b-row class="mb-1">
       <b-col md="3" cols="4" sm="3" class="my-auto">
         <b-avatar
+          variant="light"
           class="p-avater"
-          variant="primary"
-          :src="people.profile_picture"
+          :src="people.profile_picutre"
         ></b-avatar>
       </b-col>
 
@@ -24,7 +24,10 @@
                     class="mt-lg-2"
                   >
                     <div class="mt-2 mt-lg-0 mt-xl-0 username">
-                      <b>{{ people.name }} </b>
+                      <router-link :to="{name:'Follower', params:{id: people.id}}">
+                        <b>{{ people.name }}</b>
+                      </router-link>
+                      {{people.profile_picture}}
                     </div>
                   </b-col>
 

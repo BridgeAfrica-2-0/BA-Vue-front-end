@@ -96,8 +96,8 @@
                 data-toggle="popover"
                 class="form-control search-h"
                 style="font-size: 17px !important"
-                :placeholder="searchOptions.placeholder"
-                v-model="searchOptions.keyword"
+                :placeholder="credentials.placeholder"
+                v-model="credentials.keyword"
                 aria-label=""
                 data-original-title=""
                 title=""
@@ -292,7 +292,13 @@
               </div>
               <!-- Notifications Ended -->
 
-              <div  v-if="islogin"  class="nav-item cursor" id="profilepic">
+              <div
+                v-if="islogin"
+                class="nav-item cursor"
+                id="profilepic"
+                triggers="hover"
+                data-toggle="popover"
+              >
                 <router-link :to="userOwnPage">
                   <b-avatar
                     variant="light"
@@ -303,7 +309,12 @@
                 </router-link>
               </div>
 
-              <b-tooltip v-if="islogin"  target="profilepic" variant="light" triggers="click">
+              <b-tooltip
+                v-if="islogin"
+                target="profilepic"
+                variant="light"
+                triggers="hover"
+              >
                 {{ user.name }}
               </b-tooltip>
 
@@ -419,7 +430,10 @@
         <b-modal ref="setcat" id="myModallnav" hide-footer title=" ">
           <div  v-if="islogin"  class="d-block d-lg-block d-xl-none">
             <div class="mt-3">
-              <div class="d-inline-flex flex-row align-items-center">
+              <div
+                class="d-inline-flex flex-row align-items-center"
+                @click="gotoProfile"
+              >
                 <div>
                   <img
                     src="@/assets/img/profile-pic.jpg"
@@ -455,7 +469,20 @@
               </div>
             </div>
 
-            <hr class="mup" />
+            <a
+              v-if="'user' != user.user_type"
+              @click.prevent="switchToProfile"
+              href="#"
+              class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+            >
+              <span class="mr-2">
+                <fas-icon
+                  class="violet search"
+                  :icon="['fas', 'user']"
+                /> </span
+              >Profile
+              <hr class="h-divider" v-if="'user' === user.user_type" />
+            </a>
 
             <router-link
               :to="{ name: 'orders' }"
@@ -514,7 +541,7 @@
               @click.prevent="logout"
               class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
             >
-              <span class="mr-2"
+              <span class="mr-3"
                 ><fas-icon
                   class="violet search"
                   :icon="['fas', 'sign-out-alt']"
@@ -569,10 +596,6 @@ export default {
       notificationPatterns: null,
       messagePatterns: null,
       redirectionPatterns: null,
-      searchOptions: {
-        keyword: "",
-        placeholder: this.$t("general.All"),
-      },
       query: "",
       selectedUser: null,
       users: [],
@@ -587,12 +610,12 @@ export default {
     }),
   },
   beforeMount() {
-    console.log("beforeMount");
-
     this.getLocation();
   },
   created() {
     //check for authentication
+
+    this.islogin = this.$store.getters["auth/isLogged"];
 
       this.islogin=this.$store.getters["auth/isLogged"];
      
@@ -603,17 +626,16 @@ export default {
     this.init();
     this.userOwnPage = this.onRedirect(); 
 
-    this.notificationPatterns = {
-      user: () => "/notification/latest/user",
-      business: () => `/notification/business/${this.user.id}`,
-      network: () => `/network/${this.user.id}/notifications`,
-    };
-
     this.messagePatterns = {
       user: () => "/messages/latest/user",
       business: () => `/messages/latest/${this.user.id}/business`,
       network: () => `/messages/latest/${this.user.id}/network`,
     };
+      this.notificationPatterns = {
+        user: () => "user/notification",
+        business: () => `/notification/business/${this.user.id}`,
+        network: () => `/notification/network/${this.user.id}`,
+      };
 
     this.redirectionPatterns = {
       message: {
@@ -661,6 +683,14 @@ export default {
         this.searchOptions = this.credentials;
       },
     },
+    "$i18n.locale": async function () {
+      const response = await this.$repository.notification.changeLanguage(
+        this.$i18n.locale
+      );
+      if (response.success) {
+        this.updateNotificationEvent();
+      }
+    },
 
     query(newQuery) {
       axios
@@ -690,6 +720,10 @@ export default {
     ...mapMutations({
       profile: "auth/profilConnected",
     }),
+
+    gotoProfile() {
+      this.$router.push("profile_owner");
+    },
 
     onRedirect() {
       const link = {
@@ -1139,10 +1173,8 @@ export default {
 @media only screen and (min-width: 768px) {
   .search-hh .form-control {
     height: 48px !important;
-
     margin-bottom: 0;
     border-radius: 0px;
-
     border-bottom: hidden;
   }
 }

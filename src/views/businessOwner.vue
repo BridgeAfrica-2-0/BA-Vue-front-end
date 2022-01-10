@@ -162,42 +162,45 @@ export default {
 
     this.selectedId = this.$route.query.tabId ? this.$route.query.tabId : "0";
     this.foll_id = this.$route.params.id;
-    this.$store
-      .dispatch("businessOwner/roleCheck", this.foll_id)
-      .then((data) => {
-        let role = data.data.data.role;
-        switch (role) {
-          case "editor":
-            this.$router.push({
-              name: "BusinessEditor",
-              params: { id: this.foll_id },
-            });
-            break;
-          case "visitor":
-            this.$router.push({
-              name: "BusinessFollower",
-              params: { id: this.foll_id },
-            });
-            break;
-        }
-        this.isloaded = true;
+    // this.$store
+    //   .dispatch("businessOwner/roleCheck", this.foll_id)
+    //   .then((data) => {
+    //     let role = data.data.data.role;
+    //     switch (role) {
+    //       case "editor":
+    //         this.$router.push({
+    //           name: "BusinessEditor",
+    //           params: { id: this.foll_id },
+    //         });
+    //         break;
+    //       case "visitor":
+    //         this.$router.push({
+    //           name: "BusinessFollower",
+    //           params: { id: this.foll_id },
+    //         });
+    //         break;
+    //     }
+    //     this.isloaded = true;
+    //     loader.hide()
+    //   })
+    //   .catch((error) => {
+    //     console.log({ error: error });
+    //     console.log(error.response.status);
+    //     loader.hide()
+    //     if (error.response.status == 404) {
+    //       this.$router.push({ name: "notFound" });
+    //     }
+    //   });
+
+
+     this.isloaded = true;
         loader.hide()
-      })
-      .catch((error) => {
-        console.log({ error: error });
-        console.log(error.response.status);
-        loader.hide()
-        if (error.response.status == 404) {
-          this.$router.push({ name: "notFound" });
-        }
-      });
   },
   mounted() {
     if (this.$store.state.profileSettingsEdit.etat == 1) {
       this.selectedId = this.$store.state.profileSettingsEdit.selectedId;
     }
     this.url_data = this.$route.params.id;
-    console.log(this.url_data);
     this.businessInfo();
     this.CommunityBusiness();
     this.CommunityPeople();

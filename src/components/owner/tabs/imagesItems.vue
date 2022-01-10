@@ -217,7 +217,6 @@ export default {
           }
         })
         .finally(() => loader.hide());
-
     },
   },
 };

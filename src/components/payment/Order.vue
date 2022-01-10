@@ -82,17 +82,21 @@
 						   
 						
 
-
-					this.$store
-					.dispatch("checkout/getorder", data)
-					.then(({ data }) => {
-                     
+						 console.log("yoo thee mother fucker ");
+						 console.log(data);
 					
 
-					 this.$emit("showoperator",data.data.total_cost);
+					 this.$emit("showoperator",data.data.total_orders_amount, data.data.order_ids);
 						 this.loading = false; 
 
-					})
+
+
+					// this.$store
+					// .dispatch("checkout/getorder", data)
+					// .then(({ data }) => {   
+                     
+
+					// })
 						 
 						  
 					})

@@ -190,7 +190,7 @@
                 class="mb-0"
               >
                 <b-form-input
-                  v-model="createdNetwork.name"
+                  v-model="createdNetwork.name" 
                   id="network_name"
                   placeholder=""
                   required
@@ -805,30 +805,30 @@ export default {
         });
     },
 
-    // getNetworks() {
-    //   this.loader = true;
-    //   axios
-    //     .get("profile/user/networks")
-    //     .then((res) => {
-    //       this.loader = false;
-    //       this.networks = res.data.data;
-    //     })
-    //     .catch((err) => {
-    //       this.loader = false;
-    //     });
-    // },
-
     getNetworks() {
-      console.log("network loading !!!!!");
-      this.$store
-        .dispatch("profile/profileNetwork")
-        .then(() => {
-          console.log("hey yeah");
+      this.loader = true;
+      axios
+        .get("profile/user/networks")
+        .then((res) => {
+          this.loader = false;
+          this.networks = res.data.data;
         })
         .catch((err) => {
-          console.log({ err: err });
+          this.loader = false;
         });
     },
+
+    // getNetworks() {
+    //   console.log("network loading !!!!!");
+    //   this.$store
+    //     .dispatch("profile/profileNetwork")
+    //     .then(() => {
+    //       console.log("hey yeah");
+    //     })
+    //     .catch((err) => {
+    //       console.log({ err: err });
+    //     });
+    // },
 
     infiniteHandler($state) {
       console.log("network?page=" + this.page);

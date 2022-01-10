@@ -35,6 +35,10 @@
             :showAlbumPictures="() => showAlbumPictures(album)"
             :type="type"
             :isEditor="isEditor"
+            :showCoverAlbum="
+              showCoverAlbum ? 
+              'Cover' == album.name ? true : false
+              : false"
           />
         </div>
 

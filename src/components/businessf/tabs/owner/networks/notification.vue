@@ -3,7 +3,7 @@
   <div class="container" style=" ">
     <div class="container">
       <b-row>
-        <b-col>
+        <b-col cols="12" md="6">
           <div class="b-bottomn f-left">
             <b-form-checkbox
               v-model="selectAll"
@@ -15,7 +15,7 @@
             </b-form-checkbox>
           </div>
         </b-col>
-        <b-col>
+        <b-col cols="12" md="6">
           <div class="b-bottomn f-right">
             <b-button 
               variant="primary" 

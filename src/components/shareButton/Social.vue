@@ -27,25 +27,18 @@ export default {
     this.link = `${window.location.protocol}//${window.location.host}/search?uuid=${this.post.id}`;
   },
 
-  metaInfo() {
+  /* metaInfo() {
     return {
       title: `${this.auth.name} - BridgeAfrica`,
       meta: [
-        {
-          name: "description",
-          content:
-            "Connect and follow " + "" + " on Epiloge - " + this.auth.name,
-        },
-        {
-          property: "og:title",
-          content: this.post.content + " - BridgeAfrica",
-        },
-        { property: "og:site_name", content: "BridgeAfrica" },
-        { property: "og:description", content: "Connect and follow artisant" },
-        { property: "og:type", content: "profile" },
-        { property: "og:url", content: "https://epiloge.com/" },
-      ],
-    };
-  },
+        { name: 'description', content: 'Connect and follow ' + '' + ' on Epiloge - ' + this.auth.name},
+                { property: 'og:title', content: this.post.content + ' - BridgeAfrica'},
+                { property: 'og:site_name', content: 'BridgeAfrica'},
+                { property: 'og:description', content: 'Connect and follow artisant'},
+                {property: 'og:type', content: 'profile'},
+                {property: 'og:url', content: 'https://epiloge.com/'}
+            ]
+        }
+    }, */
 };
 </script>

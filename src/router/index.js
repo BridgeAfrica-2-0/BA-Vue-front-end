@@ -432,7 +432,14 @@ router.beforeEach((to, from, next) => {
       //  next("/verify");
     }
   }
+  
+  document.title = (to.name) ? `BrigeAfrica - ${to.name}` : `BrigeAfrica - ${to.name.toLocaleLowerCase()}`
 
+  
+  document.querySelector('meta[name="description"]')
+  .setAttribute('content', `The Best Communication Platform for Business 
+We operate a 3 in 1 software a service platform, that helps people create websites, access directories, and network. The best part is that the site works online and offline through SMS`)
+  
   next();
 });
 

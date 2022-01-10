@@ -173,7 +173,7 @@ export default {
 }
 
 .poslang{
-  
+    margin-right: 10px;
     margin-left: -10px;
 }
 }

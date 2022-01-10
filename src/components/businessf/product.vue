@@ -6,7 +6,7 @@
 
         <b-spinner
            class="spin"
-          variant="primary">   </b-spinner> 
+          variant="primary">   </b-spinner>      
       
      </div>      
 
@@ -27,7 +27,7 @@
             <img
               :src="product.picture"
               class="r-image cursor-pointer"
-              @click="productDetails"
+             @click="productDetails(product)"
             />
           </div>
 
@@ -37,7 +37,7 @@
            <div class="flx50">  
        
           <p class="text">
-            <strong class="title cursor-pointer" @click="productDetails">
+            <strong class="title cursor-pointer" @click="productDetails(product)" >
               {{ product.name }}
             </strong>
             <br />
@@ -448,10 +448,12 @@ export default {
 
 
 
-
-    productDetails() {
+    productDetails(product) {
+      console.log(product);
+      this.product=product;
       this.viewProduct = true;
     },
+
     closeDetailsProduct() {
       this.viewProduct = false;
     },
@@ -459,37 +461,15 @@ export default {
     buyNow(product){
       this.handleAddToCard(product);
       this.$router.push({name: 'payment'})
-    //   var dataf = [];
-    //  var data =   {
-    //       produits:{
-    //         data: {
-    //           product_id: this.product.id,
-    //             quantity:1,
-    //             price: this.product.price,
-    //             product_kg: this.product.kg,
-    //             business_id:this.product.business_id,
-    //             sub_total: 20000
-    //         },
-    //     },
-    //     total_amount: this.product.price+this.product.tax_amount,
-    //     tax_amount: this.product.tax_amount,
-        
-    // }
-    //   console.log("buy now", data, this.shippingAddress)
-
-    //   this.shippingAddress.map(item =>{
-    //      dataf.push({ ...data, shipping_address: item.id });
-      
-    //   })
-    //   console.log("buy now", dataf)
+    
     },
 
     handleAddToCard(product) {
 
        this.product=product;
-      console.log("add to card ", this.product.id);
+      console.log("add to card ", this.product);
       this.$store
-        .dispatch("cart/addToCart", this.product.id)
+        .dispatch("cart/addToCart", product )
         .then((response) => {
           
 
@@ -677,7 +657,7 @@ h6 {
     text-align: left;
     margin-right: -5px;
     line-height: 25px;
-     margin-left: 65px;
+     margin-left: 75px;
   }
   .r-image {
     border-top-left-radius: 10px;
@@ -782,7 +762,7 @@ h6 {
     text-align: left;
     margin-right: -5px;
     line-height: 25px;
-     margin-left: 65px;
+     margin-left: 75px;
   }
   .r-image {
     border-top-left-radius: 10px;

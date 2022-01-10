@@ -1,6 +1,7 @@
 <template>
-  <div>
+  <div>  
     <div class="people-style shadow" v-for="item in businesses" :key="item.id">
+      
       <b-row>
         <b-col md="8" xl="12" lg="12" cols="12" sm="8">
           <div class="d-inline-flex">
@@ -64,27 +65,10 @@
                 cols="4"
                 class="mt-2 text-center"
               >
-                <b-button
-                  v-if="show == 'Follower'"
-                  disabled
-                  block
-                  size="sm"
-                  class="b-background shadow"
-                  :id="'followbtn' + item.id"
-                  :class="item.is_follow !== 0 && 'u-btn'"
-                  variant="primary"
-                >
-                  <i
-                    class="fas fa-lg btn-icon"
-                    :class="
-                      item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'
-                    "
-                  ></i>
-                  <span class="btn-com">Community</span>
-                </b-button>
+              
 
                 <b-button
-                  v-else
+                  
                   block
                   size="sm"
                   class="b-background shadow"

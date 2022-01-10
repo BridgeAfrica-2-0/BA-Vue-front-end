@@ -16,7 +16,9 @@
         ref="modalxl"
         centered
         hide-footer
-        :title="'image' == media ? $t('profileowner.Upload_image') : 'Upload video'"
+        :title="
+          'image' == media ? $t('profileowner.Upload_image') : 'Upload video'
+        "
       >
         <div id="preview" ref="preview" v-if="img_url">
           <img :src="img_url" v-if="'image' == media" />
@@ -60,8 +62,8 @@
           </a>
         </div>
       </div>
-      <div v-for="(image, cmp) in allImages" :key="cmp" >
-        <div class="img-gall" v-for="(im, index) in image.media" :key="index" style="width: 266px; height: 266px;">
+      <div v-for="(image, cmp) in allImages" :key="cmp">
+        <div class="img-gall" v-for="(im, index) in image.media" :key="index">
           <Picture
             :isAlbum="isAlbum"
             :im="im"
@@ -107,7 +109,7 @@ export default {
     canUpload: {},
     addItem: {
       type: Boolean,
-      default: function () {
+      default: function() {
         return false;
       },
     },
@@ -123,14 +125,14 @@ export default {
 
     isAlbum: {
       type: Boolean,
-      default: function () {
+      default: function() {
         return false;
       },
     },
 
     hasLoadPicture: {
       type: Boolean,
-      default: function () {
+      default: function() {
         return false;
       },
     },
@@ -145,7 +147,7 @@ export default {
 
     showAlbum: {
       type: Boolean,
-      default: function () {
+      default: function() {
         return false;
       },
     },
@@ -229,10 +231,6 @@ export default {
   destroyed() {
     this.$emit("reste");
   },
-
-  computed: mapGetters({
-    auth: 'auth/profilConnected'
-  }),
 
   methods: {
     ...mapActions({
@@ -464,7 +462,6 @@ export default {
         data: formData,
       };
 
-
       const data =
         "business" == this.type || "network" == this.type
           ? { businessId: this.$route.params.id, albumId }
@@ -485,7 +482,7 @@ export default {
             blockClass: "custom-block-class",
           });
           this.$refs["modalxl"].hide();
-          this.$emit('new-item')
+          this.$emit("new-item");
         })
         .then(() => {
           this.$emit("reste");
@@ -517,8 +514,8 @@ export default {
 
 <style scoped>
 .img-size {
-  width: 266px !important;
-  height: 266px !important;
+  width: 266px;
+  height: 266px;
 }
 
 .botmediadess-position {
@@ -680,6 +677,7 @@ export default {
     margin: 5px;
     float: left;
     width: 46.5%;
+    height: 175px;
     transition-duration: 0.4s;
     border-radius: 5px;
     -webkit-animation: winanim 0.5s;

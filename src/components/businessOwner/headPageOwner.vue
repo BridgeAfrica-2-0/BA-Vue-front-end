@@ -184,9 +184,9 @@
                     {{ $t("businessowner.Change_Cover") }}</b-dropdown-item
                   >
 
-                  <b-dropdown-item @click="viewAs">{{
-                    $t("businessowner.View_As")
-                  }}</b-dropdown-item>
+                  <b-dropdown-item >  <router-link :to="'/business/'+url " >   {{
+                    $t("businessowner.View_As")   
+                  }}      </router-link>  </b-dropdown-item>
                 </b-dropdown>
               </span>
             </div>
@@ -261,7 +261,7 @@ export default {
         });
     },
     gotoCoverImages() {
-      this.$parent.gotoCoverImages();
+      this.$emit('goto-cover-images');
     },
 
     viewAs() {

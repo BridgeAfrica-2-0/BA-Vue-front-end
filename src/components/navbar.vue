@@ -96,8 +96,8 @@
                 data-toggle="popover"
                 class="form-control search-h"
                 style="font-size: 17px !important"
-                :placeholder="searchOptions.placeholder"
-                v-model="searchOptions.keyword"
+                :placeholder="credentials.placeholder"
+                v-model="credentials.keyword"
                 aria-label=""
                 data-original-title=""
                 title=""
@@ -287,7 +287,17 @@
               </div>
               <!-- Notifications Ended -->
 
+<<<<<<< HEAD
               <div v-if="islogin" class="nav-item cursor" id="profilepic">
+=======
+              <div
+                v-if="islogin"
+                class="nav-item cursor"
+                id="profilepic"
+                triggers="hover"
+                data-toggle="popover"
+              >
+>>>>>>> main
                 <router-link :to="userOwnPage">
                   <b-avatar
                     variant="light"
@@ -302,7 +312,7 @@
                 v-if="islogin"
                 target="profilepic"
                 variant="light"
-                triggers="click"
+                triggers="hover"
               >
                 {{ user.name }}
               </b-tooltip>
@@ -419,7 +429,10 @@
         <b-modal ref="setcat" id="myModallnav" hide-footer title=" ">
           <div v-if="islogin" class="d-block d-lg-block d-xl-none">
             <div class="mt-3">
-              <div class="d-inline-flex flex-row align-items-center">
+              <div
+                class="d-inline-flex flex-row align-items-center"
+                @click="gotoProfile"
+              >
                 <div>
                   <b-avatar
                     variant="light"
@@ -440,8 +453,6 @@
               </div>
             </div>
 
-            <hr class="mup" />
-
             <a
               v-if="'user' != user.user_type"
               @click.prevent="switchToProfile"
@@ -454,8 +465,8 @@
                   :icon="['fas', 'user']"
                 /> </span
               >Profile
+              <hr class="h-divider" v-if="'user' === user.user_type" />
             </a>
-            <hr class="h-divider" v-if="'user' === user.user_type" />
 
             <router-link
               :to="{ name: 'orders' }"
@@ -569,10 +580,6 @@ export default {
       notificationPatterns: null,
       messagePatterns: null,
       redirectionPatterns: null,
-      searchOptions: {
-        keyword: "",
-        placeholder: this.$t("general.All"),
-      },
       query: "",
       selectedUser: null,
       users: [],
@@ -587,26 +594,21 @@ export default {
     }),
   },
   beforeMount() {
-    console.log("beforeMount");
-
     this.getLocation();
   },
   created() {
     //check for authentication
-    console.log("Language is  " + this.$i18n.locale);
-    this.islogin = this.$store.getters["auth/isLogged"];
 
-    console.log(this.islogin);
-    console.log("yoo mother fucjjeryt");
+    this.islogin = this.$store.getters["auth/isLogged"];
 
     if (this.islogin) {
       this.init();
       this.userOwnPage = this.onRedirect();
 
       this.notificationPatterns = {
-        user: () => "/notification/latest/user",
+        user: () => "user/notification",
         business: () => `/notification/business/${this.user.id}`,
-        network: () => `/network/${this.user.id}/notifications`,
+        network: () => `/notification/network/${this.user.id}`,
       };
 
       this.messagePatterns = {
@@ -664,13 +666,6 @@ export default {
       }
     },
 
-    credentials: {
-      deep: true,
-      handler() {
-        this.searchOptions = this.credentials;
-      },
-    },
-
     query(newQuery) {
       axios
         .get(`business-community/neighborhood/${newQuery}`)
@@ -699,6 +694,10 @@ export default {
     ...mapMutations({
       profile: "auth/profilConnected",
     }),
+
+    gotoProfile() {
+      this.$router.push("profile_owner");
+    },
 
     onRedirect() {
       const link = {
@@ -1130,10 +1129,8 @@ export default {
 @media only screen and (min-width: 768px) {
   .search-hh .form-control {
     height: 48px !important;
-
     margin-bottom: 0;
     border-radius: 0px;
-
     border-bottom: hidden;
   }
 }

@@ -403,18 +403,14 @@
             <!--filter for all takes just two fields at a time  -->
 
             <div id="all" v-if="selectedId == '0'">
-              <h6>
-                {{ $t("search.Sponsored_Result") }}
-                <fas-icon
-                  class="icons"
-                  :icon="['fas', 'exclamation-circle']"
-                  size="lg"
-                />
+              <!-- <h6>
+                {{$t("search.Sponsored_Result")}}
+                <fas-icon class="icons" :icon="['fas', 'exclamation-circle']" size="lg" />
               </h6>
 
               <div>
                 <Sponsor />
-              </div>
+              </div> -->
 
               <h6>
                 <fas-icon
@@ -540,17 +536,13 @@
             <!-- Filter out just the market -->
 
             <div v-if="selectedId == '4'">
-              <h6>
-                {{ $t("search.Sponsored_Result") }}
-                <fas-icon
-                  class="icons"
-                  :icon="['fas', 'exclamation-circle']"
-                  size="lg"
-                />
-              </h6>
+              <!-- <h6>
+                <fas-icon class="icons" :icon="['fas', 'store']" size="lg" />
+                {{$t("search.Market")}}
+              </h6> -->
 
               <div>
-                <Sponsor />
+                <!-- <Sponsor /> -->
               </div>
 
               <h6 class="mb-3">
@@ -714,18 +706,9 @@ export default {
 
     this.strategY = {
       users: () => this.onFindUser(),
-      all: () =>
-        this.getKeyword({
-          keyword: this.searchParams.keyword,
-        }),
-      market: () =>
-        this.searchProducts({
-          keyword: this.searchParams.keyword,
-        }),
-      network: () =>
-        this.searchNetworks({
-          keyword: this.searchParams.keyword,
-        }),
+      all: () => this.getKeyword(),
+      market: () => this.searchProducts(),
+      network: () => this.searchNetworks(),
       business: () => this.onFindBusiness(),
     };
 
@@ -1693,7 +1676,7 @@ export default {
   },
 
   watch: {
-    selectedId: function () {
+    selectedId: function() {
       this.changeComponent();
       this.changePlaceHolder();
       this.changeNotFoundTitle();
@@ -1720,11 +1703,12 @@ export default {
       if (this.$route.query.uuid) this.selectedId = 5;
     },
     // [ED]----------
-    getKeyword(data) {
-      let elm = data ? data : { keyword: "" };
-      console.log("the keyword is: ", data);
+    getKeyword() {
+      console.log("the keyword is: ", this.searchParams.keyword);
       this.$store
-        .dispatch("allSearch/SEARCH", elm)
+        .dispatch("allSearch/SEARCH", {
+          keyword: this.searchParams.keyword,
+        })
         .then((res) => {
           // console.log("categories loaded!");
         })
@@ -1765,9 +1749,11 @@ export default {
         });
     },
 
-    searchProducts(data) {
+    searchProducts() {
       this.$store
-        .dispatch("marketSearch/searchProducts", data)
+        .dispatch("marketSearch/searchProducts", {
+          keyword: this.searchParams.keyword,
+        })
         .then((res) => {
           // console.log("categories loaded!");
         })
@@ -1776,9 +1762,11 @@ export default {
         });
     },
 
-    searchNetworks(data) {
+    searchNetworks() {
       this.$store
-        .dispatch("networkSearch/SEARCH", data)
+        .dispatch("networkSearch/SEARCH", {
+          keyword: this.searchParams.keyword,
+        })
         .then((res) => {
           // console.log("categories loaded!");
         })
@@ -1849,8 +1837,9 @@ export default {
 
     changeNotFoundTitle() {
       try {
-        this.notFoundComponentTitle =
-          this.strategyForNotFoundComponentTitle[this.selectedId]();
+        this.notFoundComponentTitle = this.strategyForNotFoundComponentTitle[
+          this.selectedId
+        ]();
       } catch (error) {
         this.notFoundComponentTitle = "";
       }
@@ -1990,8 +1979,7 @@ export default {
           break;
 
         case "MC":
-          this.selectcategories =
-            this.Mayor_councils_filters_and_public_institution;
+          this.selectcategories = this.Mayor_councils_filters_and_public_institution;
 
           break;
 
@@ -2069,8 +2057,6 @@ export default {
         this.searchBusiness({ cat_id: value.cat_id, sub_cat: value.id });
       } else if (this.selectedId == 0) {
         this.allSearchByCat({ cat_id: value.cat_id, sub_cat: value.id });
-      } else if (this.selectedId == 3) {
-        this.searchNetworks({ cat_id: value.cat_id, sub_cat: value.id });
       }
     },
 

@@ -154,7 +154,7 @@ export default {
                 commit("setNetworks", res.data);
             } catch (err) {
                 commit("setLoader", false);
-                console.error(err);
+                console.log(err);
             }
 
         }

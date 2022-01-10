@@ -1,5 +1,7 @@
 <template>
   <div class="container-flex mobi d-none d-lg-none d-xl-block search">
+
+  
     <b-row>
       <b-col cols="1" lg="2"> </b-col>
       <b-col cols="8" lg="10" style="text-align: left">
@@ -8,17 +10,15 @@
             v-for="(category, index) in categories.slice(0, 6)"
             :key="index"
             @mouseover="showSubCat(category.category.id, category.sub_cat)"
+            @click="showSubCat(category.category.id, category.sub_cat)"
             @mouseleave="hideSubCat(category.category.id)"
           >
             <b-nav-item-dropdown
-              :id="'dropdown-' + index"
+              id="dropdown-1"
+              :text="category.category.name"
               :ref="category.category.id"
+              @click="searchProduct({ cat_id: category.category.id })"
             >
-              <template slot="button-content">
-                <span @click="bcategory({ cat_id: category.category.id })">
-                  {{ category.category.name }}
-                </span>
-              </template>
               <hr
                 style="
                   margin-top: -10px;
@@ -34,7 +34,7 @@
                   <b-dropdown-item
                     v-for="(subCat, subIndex) in category.sub_cat.slice(0, 6)"
                     :key="subIndex"
-                    @click="bcategory({ cat_id: subCat.cat_id, id: subCat.id })"
+                    @click="bcategory(subCat)"
                     href="#"
                     class="ml-2"
                   >
@@ -89,6 +89,8 @@
             </div>
           </b-nav-item-dropdown>
         </span>
+
+        <div></div>
       </b-col>
 
       <b-col cols="1" lg="2"> </b-col>
@@ -116,9 +118,8 @@ export default {
 
   methods: {
     bcategory(category) {
-      console.log("HOVER...", category);
       this.$emit("category", category);
-      // console.log(category);
+      console.log(category);
     },
 
     getCategories() {
@@ -140,22 +141,6 @@ export default {
       await this.$store.dispatch("marketSearch/searchProducts", data);
       // console.log("PRoducts ", this.$store.getters["marketSearch/getProducts"]);
     },
-    searchByCat(data) {
-      console.log("nani...");
-      this.allSearch(data);
-      this.searchProduct(data);
-    },
-    allSearch(data) {
-      console.log("[data]: ", data);
-      this.$store
-        .dispatch("allSearch/SEARCH", data)
-        .then((res) => {
-          // console.log("categories loaded!");
-        })
-        .catch((err) => {
-          console.log("Error erro!");
-        });
-    },
 
     showSubCat(catId, subCat) {
       this.$refs[catId][0].visible = true;
@@ -165,7 +150,7 @@ export default {
       // this.searchProduct({ catId: catId, cat_id: catId });
       this.$store.commit("marketSearch/setSubCat", subCat);
       if (!subCat.length) this.hideSubCat(catId);
-      // console.log("Subcat:", this.subCategories);
+      console.log("Subcat:", this.subCategories);
     },
     hideSubCat(catId) {
       this.$refs[catId][0].visible = false;

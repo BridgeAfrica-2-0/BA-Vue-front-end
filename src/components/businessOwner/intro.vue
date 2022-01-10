@@ -519,7 +519,13 @@ export default {
       this.multiselecvalue.push(tag);
     },
     businessInfos() {
-      this.$store.dispatch("businessOwner/businessInfo", this.url);
+      // this.$store.dispatch("businessOwner/businessInfo", this.$route.params.id);
+      this.$store
+      .dispatch("businessOwner/loadUserBusinessAbout", {
+        // business_abobusiness_id: this.business_about_input,
+        business_id: this.$route.params.id,
+      })
+      
     },
 
     change(val) {
@@ -779,6 +785,7 @@ export default {
     this.businessInfos();
   },
   mounted() {
+    this.businessInfos();
     this.form = JSON.parse(
       JSON.stringify(this.$store.getters["businessOwner/getBusinessAbout"])
     ); //this.$store.state.businessOwner.businessInfo;

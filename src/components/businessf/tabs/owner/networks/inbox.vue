@@ -794,13 +794,13 @@
                 <b-col>
                   <b-form-input
                     id="textarea"
-                    v-model="searchQuery"
+                    v-model="newSearchQuery"
                     class="input-background"
                     style="width: 100%"
                     :placeholder="
                       $t('businessowner.Type_the_name_of_person_or_Business')
                     "
-                    @keydown.enter="getList(searchQuery)"
+                    @keydown.enter="getList(newSearchQuery)"
                   ></b-form-input>
                 </b-col>
               </b-row>
@@ -2055,7 +2055,13 @@
                     <label for="file">
                       <b-icon
                         for="file"
-                        class="msg-icon primary icon-size icon-top float-right text-right"
+                        class="
+                          msg-icon
+                          primary
+                          icon-size icon-top
+                          float-right
+                          text-right
+                        "
                         icon="paperclip"
                       >
                       </b-icon>
@@ -2241,13 +2247,13 @@
                 <b-col>
                   <b-form-input
                     id="textarea"
-                    v-model="searchQuery"
+                    v-model="newSearchQuery"
                     class="input-background"
                     style="width: 100%"
                     :placeholder="
                       $t('businessowner.Type_the_name_of_person_or_Business')
                     "
-                    @keydown.enter="getList(searchQuery)"
+                    @keydown.enter="getList(newSearchQuery)"
                   ></b-form-input>
                 </b-col>
               </b-row>
@@ -2966,6 +2972,7 @@ export default {
       showsearch: true,
       selecteduser: false,
       searchQuery: "",
+      newSearchQuery: "",
       message: {},
       newMsg: false,
       show: false,

@@ -459,7 +459,10 @@
         <b-modal ref="setcat" id="myModallnav" hide-footer title=" ">
           <div v-if="islogin" class="d-block d-lg-block d-xl-none">
             <div class="mt-3">
-              <div class="d-inline-flex flex-row align-items-center" @click="gotoProfile">
+              <div
+                class="d-inline-flex flex-row align-items-center"
+                @click="gotoProfile"
+              >
                 <div>
                   <b-avatar
                     variant="light"
@@ -496,9 +499,9 @@
                   class="violet search"
                   :icon="['fas', 'user']"
 
-                />
-              </span>Profile
-            <hr class="h-divider" v-if="'user' === user.user_type"/>
+                /> </span
+              >Profile
+              <hr class="h-divider" v-if="'user' === user.user_type" />
             </a>
 
             <router-link
@@ -628,10 +631,6 @@ export default {
       notificationPatterns: null,
       messagePatterns: null,
       redirectionPatterns: null,
-      searchOptions: {
-        keyword: "",
-        placeholder: this.$t("general.All"),
-      },
       query: "",
       selectedUser: null,
       users: [],
@@ -646,26 +645,21 @@ export default {
     }),
   },
   beforeMount() {
-    console.log("beforeMount");
-
     this.getLocation();
   },
   created() {
     //check for authentication
-    console.log("Language is  " + this.$i18n.locale);
-    this.islogin = this.$store.getters["auth/isLogged"];
 
-    console.log(this.islogin);
-    console.log("yoo mother fucjjeryt");
+    this.islogin = this.$store.getters["auth/isLogged"];
 
     if (this.islogin) {
       this.init();
       this.userOwnPage = this.onRedirect();
 
       this.notificationPatterns = {
-        user: () => "/notification/latest/user",
+        user: () => "user/notification",
         business: () => `/notification/business/${this.user.id}`,
-        network: () => `/network/${this.user.id}/notifications`,
+        network: () => `/notification/network/${this.user.id}`,
       };
 
       this.messagePatterns = {
@@ -723,13 +717,6 @@ export default {
       }
     },
 
-    credentials: {
-      deep: true,
-      handler() {
-        this.searchOptions = this.credentials;
-      },
-    },
-
     query(newQuery) {
       axios
         .get(`business-community/neighborhood/${newQuery}`)
@@ -759,8 +746,8 @@ export default {
       profile: "auth/profilConnected",
     }),
 
-    gotoProfile(){
-      this.$router.push('profile_owner')
+    gotoProfile() {
+      this.$router.push("profile_owner");
     },
 
     onRedirect() {
@@ -1195,10 +1182,8 @@ export default {
 @media only screen and (min-width: 768px) {
   .search-hh .form-control {
     height: 48px !important;
-
     margin-bottom: 0;
     border-radius: 0px;
-
     border-bottom: hidden;
   }
 }

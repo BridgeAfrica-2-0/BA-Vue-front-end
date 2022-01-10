@@ -229,9 +229,9 @@ export default {
   destroyed() {
     this.$emit("reste");
   },
-  computed: mapGetters({
-    auth: "auth/profilConnected",
-  }),
+  // computed: mapGetters({
+  //   auth: "auth/profilConnected",
+  // }),
 
   methods: {
     ...mapActions({

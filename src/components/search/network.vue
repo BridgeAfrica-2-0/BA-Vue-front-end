@@ -18,7 +18,6 @@
       :key="index"
     >
       <b-row>
-        <!-- {{ network.id }} -->
         <b-col md="3" xl="3" lg="3" cols="5" sm="3">
           <div class="center-img">
             <img :src="network.image" class="r-image" />
@@ -59,21 +58,16 @@
           <div class="s-button">
             <b-row>
               <b-col md="4" lg="12" xl="12" sm="12" cols="4" class="mt-2">
-                <!-- <b>{{ network.is_follow }}</b> -->
                 <b-button
                   block
                   size="sm"
-                  :class="network.is_follow === 1 && 'u-btn'"
+                  class="b-background shadow"
                   variant="primary"
-                  @click="handleFollow(network)"
                 >
-                  <i
-                    class="fas fa-lg btn-icon"
-                    :class="
-                      network.is_follow === 1 ? 'fa-user-minus' : 'fa-user-plus'
-                    "
-                  ></i>
-                  <span class="btn-com">{{ $t("search.Community") }}</span>
+                  <i class="fas fa-user-plus fa-lg btn-icon"></i>
+                  <span class="btn-com" v-b-modal.modal-sm>{{
+                    $t("search.Community")
+                  }}</span>
                 </b-button>
               </b-col>
 
@@ -85,16 +79,10 @@
                 <b-button
                   block
                   size="sm"
-                  :class="network.is_member === 1 && 'u-btn'"
+                  class="b-background shadow"
                   variant="primary"
-                  @click="handleJoin(network)"
                 >
-                  <i
-                    class="fas fa-lg btn-icon"
-                    :class="
-                      network.is_member === 1 ? 'fa-user-minus' : 'fa-user-plus'
-                    "
-                  ></i>
+                  <i class="fas fa-lg btn-icon fa-user-plus"></i>
 
                   <span class="btn-text"> {{ $t("search.Join") }} </span>
                 </b-button>
@@ -172,35 +160,6 @@ export default {
   },
 
   methods: {
-    async handleFollow(user) {
-      const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
-      const nextFollowState = user.is_follow === 0 ? 1 : 0;
-      const data = {
-        id: user.id,
-        type: "network",
-      };
-      await axios
-        .post(uri, data)
-        .then((response) => {
-          user.is_follow = nextFollowState;
-        })
-        .catch((err) => console.log(err));
-    },
-    async handleJoin(user) {
-      const uri = user.is_member === 0 ? `/add-member` : `/remove-member`;
-      const nextFollowState = user.is_member === 0 ? 1 : 0;
-      const data = {
-        id: user.id,
-        type: "network",
-      };
-      await axios
-        .post(uri, data)
-        .then((response) => {
-          user.is_member = nextFollowState;
-        })
-        .catch((err) => console.log(err));
-    },
-
     changePage(value) {
       this.$store.commit("networkSearch/setNetworks", { data: [] });
       this.$store.commit("networkSearch/setLoader", true);

@@ -81,7 +81,7 @@
                           block
                           size="sm"
                           class="b-background flexx pobtn shadow"
-                          :class="item.is_follow === 0 && 'u-btn'"
+                          :class="item.is_follow !== 0 && 'u-btn'"
                           :id="'followbtn' + item.id"
                           variant="primary"
                           @click="handleFollow(item)"
@@ -89,7 +89,7 @@
                           <i
                             class="fas fa-lg btn-icon"
                             :class="
-                              item.is_follow === 0
+                              item.is_follow !== 0
                                 ? 'fa-user-minus'
                                 : 'fa-user-plus'
                             "
@@ -190,7 +190,7 @@ export default {
   .btn-com {
     margin-left: 3px;
   }
-  .btns-mobile {
+  .btns-mobile{
     margin-left: -2.2rem;
   }
 }

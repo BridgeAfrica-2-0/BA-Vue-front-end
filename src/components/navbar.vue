@@ -287,9 +287,6 @@
               </div>
               <!-- Notifications Ended -->
 
-<<<<<<< HEAD
-              <div v-if="islogin" class="nav-item cursor" id="profilepic">
-=======
               <div
                 v-if="islogin"
                 class="nav-item cursor"
@@ -297,7 +294,6 @@
                 triggers="hover"
                 data-toggle="popover"
               >
->>>>>>> main
                 <router-link :to="userOwnPage">
                   <b-avatar
                     variant="light"

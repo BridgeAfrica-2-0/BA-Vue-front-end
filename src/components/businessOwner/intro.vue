@@ -478,7 +478,7 @@ export default {
       this.filterselectvalue.push(tag);
     },
 
-    Region() {
+    Region() {   console.log(this.selectedcountry,"-----", this.country)
       let formData2 = new FormData();
       formData2.append("countryId", this.selectedcountry);
       this.$store
@@ -519,7 +519,13 @@ export default {
       this.multiselecvalue.push(tag);
     },
     businessInfos() {
-      this.$store.dispatch("businessOwner/businessInfo", this.url);
+      // this.$store.dispatch("businessOwner/businessInfo", this.$route.params.id);
+      this.$store
+      .dispatch("businessOwner/loadUserBusinessAbout", {
+        // business_abobusiness_id: this.business_about_input,
+        business_id: this.$route.params.id,
+      })
+      
     },
 
     change(val) {
@@ -746,6 +752,15 @@ export default {
     pcategories() {
       return this.$store.state.auth.categories;
     },
+
+    selectedcountry: function () {
+      let sub_cat = [];
+    
+      this.country.forEach((item) => {
+        sub_cat.push(item.id);
+      });
+      return sub_cat;
+    },
     selectedcategories: function () {
       let selectedUsers = [];
       this.multiselecvalue.forEach((item) => {
@@ -779,6 +794,7 @@ export default {
     this.businessInfos();
   },
   mounted() {
+    this.businessInfos();
     this.form = JSON.parse(
       JSON.stringify(this.$store.getters["businessOwner/getBusinessAbout"])
     ); //this.$store.state.businessOwner.businessInfo;

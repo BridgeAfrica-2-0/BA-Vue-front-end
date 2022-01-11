@@ -77,7 +77,7 @@
                 <b-card-text> <Roles /> </b-card-text
               ></b-tab> -->
 
-              <b-tab title="Insight">
+              <b-tab :title="$t('search.Insight')">
                 <b-card-text> <Insight /> </b-card-text
               ></b-tab>
 

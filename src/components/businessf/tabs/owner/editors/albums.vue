@@ -245,7 +245,7 @@ export default {
         // loader.hide();
         this.flashMessage.show({
           status: "error",
-          message: "Unable to Created Album"
+          message: this.$t('general.Unable_to_Create_Your_Album')
         });
       });
 		},

@@ -10,21 +10,21 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapMutations, mapGetters } from "vuex";
 
 export default {
   props: ["post", "network", "title"],
 
   data: () => ({
-    link:null
+    link: null,
   }),
 
   computed: mapGetters({
-    auth: 'auth/profilConnected'
+    auth: "auth/profilConnected",
   }),
 
-  created(){
-    this.link = `${window.location.protocol}//${window.location.host}/search?uuid=${this.post.id}`
+  created() {
+    this.link = `${window.location.protocol}//${window.location.host}/search?uuid=${this.post.id}`;
   },
 
   /* metaInfo() {

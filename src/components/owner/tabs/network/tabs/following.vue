@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import CommunityBusiness from '../../communitynetwork';
+import CommunityBusiness from '../../communitybusiness';
 export default {
   data() {
     return {

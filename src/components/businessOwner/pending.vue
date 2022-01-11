@@ -202,7 +202,7 @@ export default {
        this.$store
         .dispatch("businessOwner/loadMore", url)
         .then(({ data }) => {
-          
+          console.log(data);
           if (data.data.length) {
             this.page += 1;
 

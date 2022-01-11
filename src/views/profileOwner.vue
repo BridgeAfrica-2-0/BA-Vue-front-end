@@ -20,8 +20,9 @@
             <b-tab :title="$t('profileowner.Networks')">
               <Networks />
             </b-tab>
+
             <b-tab :title="$t('profileowner.Community')" href="#community" class="m-0 p-0">
-              <following />
+              <Following />
             </b-tab>
           </b-tabs>
         </b-col>

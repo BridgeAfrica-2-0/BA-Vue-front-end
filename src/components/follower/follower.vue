@@ -1,13 +1,10 @@
 <template>
   <div class="main">
-
- 
     <div class="images imageslg">
-      <div>     
+      <div>
         <img
-         
-           :src="info.user.cover_picture ? info.user.cover_picture : getCustomCover[0]"
-      
+          :src="info.user.cover_picture"
+          v-if="info.user.cover_picture != null"
           class="banner"
         />
       </div>
@@ -41,7 +38,7 @@
             <br />
 
             <span class="k15 duration">
-              {{ info.user.followers }} {{ $t("profilefollower.Community") }}
+              {{ info.user.community }} {{ $t("profilefollower.Community") }}
             </span>
           </div>
         </b-col>
@@ -108,7 +105,7 @@
           <div class="d-inline-block mt-4 ml-4 float-left texts">
             <h6 class="font-weight-bolder name">{{ info.user.name }}</h6>
             <p class="details">
-              {{ info.user.followers }} {{ $t("profilefollower.Community") }}
+              {{ info.user.community }} {{ $t("profilefollower.Community") }}
             </p>
           </div>
         </b-col>
@@ -188,18 +185,15 @@
 <script>
 import Post from "@/components/businessfollower/tabs/posts";
 import About from "@/components/follower/tabs/about";
-import Media from "@/components/owner/tabs/media";
+import Media from "@/components/businessfollower/tabs/media";
 import Community from "@/components/follower/tabs/community";
 import Businesses from "@/components/follower/tabs/businesses";
 import Network from "@/components/follower/tabs/networkk";
 import axios from "axios";
-
-
-import { mapMutations, mapGetters } from 'vuex'
-import { knowWhoIsConnected, defaultCoverImage } from "@/mixins";
+import { knowWhoIsConnected } from "@/mixins";
 
 export default {
-  mixins: [knowWhoIsConnected,defaultCoverImage],
+  mixins: [knowWhoIsConnected],
   name: "Home",
   data() {
     return {
@@ -216,11 +210,7 @@ export default {
     Network,
   },
 
-  
-
   created() {
-
-      this.currentAuthType = 'profile'
 
      this.foll_id = this.$route.params.id;
 
@@ -275,11 +265,6 @@ export default {
   },
 
   computed: {
-
-     ...mapGetters({
-      auth: 'auth/profilConnected'
-    }),
-
     info: function () {
       return this.$store.getters["follower/getUserPostIntro"];
     },

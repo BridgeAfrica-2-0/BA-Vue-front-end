@@ -29,8 +29,7 @@
       </b-tab>
       <b-tab :title="$t('profileowner.Albums')" @click="getAlbums">
         <div v-if="!hasLoadAlbum">
-          <b-spinner class="load" :label="$t('profileowner.Large_Spinner')">
-          </b-spinner>
+          <b-spinner class="load" :label="$t('profileowner.Large_Spinner')"></b-spinner>
         </div>
         <Album
           :isEditor="isEditor"
@@ -53,7 +52,6 @@ import _ from "lodash";
 
 import { mapGetters } from "vuex";
 
-
 export default {
   props: {
     type: {
@@ -62,12 +60,10 @@ export default {
         return ["profile", "network", "business"].indexOf(value) !== -1;
       },
     },
-
     showCoverAlbum: {
       type: Boolean,
       default: () => false,
     },
-
     isEditor: {
       type: Boolean,
       default: () => true,
@@ -153,13 +149,12 @@ export default {
         this.$store
           .dispatch(type.album, this.urlData)
           .then(() => {
-            this.hasLoadPicture = true;
             this.hasLoadAlbum = true;
             this.addItem = true;
           })
-          .catch(() => {
-            this.hasLoadPicture = true;
+          .catch((err) => {
             this.hasLoadAlbum = true;
+
           })
           .finally(() => console.log("End load album"));
         //}
@@ -177,10 +172,9 @@ export default {
           .dispatch(type.image, this.urlData)
           .then(() => {
             this.hasLoadPicture = true;
-            this.hasLoadAlbum = true;
             this.addItem = true;
           })
-          .catch(() => {
+          .catch((err) => {
             this.hasLoadPicture = true;
             this.hasLoadAlbum = true;
           })
@@ -194,6 +188,7 @@ export default {
   },
 
   created() {
+    console.log(this.showCoverAlbum);
 
     
     this.urlData = this.$route.params.id
@@ -204,7 +199,7 @@ export default {
       this.tabIndex = 1;
     }
 
-
+    if (this.showCoverAlbum) this.tabIndex = 1;
     this.strategy = {
       business: () => ({
         album: "businessOwner/getAlbums",

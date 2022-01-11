@@ -7,6 +7,7 @@
       subtitle="All peoples"
       :type="'network'"
       :post="post"
+      :isCommunity="isCommunity"
     />
     <!-- Share to people -->
 
@@ -18,6 +19,7 @@
       :type="'network'"
       :post="post"
       :update="update"
+      :isCommunity="isCommunity"
     >
       <template v-slot:owner>
         <div class="d-flex align-items-center py-3 px-2 mb-2 border">
@@ -72,6 +74,7 @@
       :type="'business'"
       :post="post"
       :update="update"
+      :isCommunity="isCommunity"
     >
       <template v-slot:owner>
         <div class="d-flex align-items-center py-3 px-2 mb-2 border">
@@ -209,8 +212,15 @@
       <b-popover :target="`sharing-community-${uuid}`" triggers="hover focus">
         <div class="popover-body">
           <div
-            @mousedown="open('modal-1-'+uuid)"
-            class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer"
+            @mousedown="open(`modal-1-${uuid}`, 'people')"
+            class="
+              d-inline-flex
+              flex-row
+              align-items-center
+              suggest-item
+              py-2
+              cursor-pointer
+            "
           >
             <span class="text-ored">
               <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
@@ -222,8 +232,15 @@
 
           <div
             v-if="'network' !== type"
-            class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer"
-            @mousedown="open(`modal-2-${uuid}`)"
+            class="
+              d-inline-flex
+              flex-row
+              align-items-center
+              suggest-item
+              py-2
+              cursor-pointer
+            "
+            @mousedown="open(`modal-2-${uuid}`, 'network')"
           >
             <span class="text-ored">
               <b-avatar
@@ -241,8 +258,15 @@
 
           <div
             v-if="'business' !== type"
-            @mousedown="open(`modal-3-${uuid}`)"
-            class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer"
+            @mousedown="open(`modal-3-${uuid}`, 'business')"
+            class="
+              d-inline-flex
+              flex-row
+              align-items-center
+              suggest-item
+              py-2
+              cursor-pointer
+            "
           >
             <span class="text-ored">
               <b-avatar
@@ -260,10 +284,11 @@
         </div>
       </b-popover>
 
-      <b-dropdown-item class="d-flex py-2 cursor-pointer"
-          v-clipboard:copy="link"
-          v-clipboard:success="onCopy"
-          v-clipboard:error="onError"
+      <b-dropdown-item
+        class="d-flex py-2 cursor-pointer"
+        v-clipboard:copy="link"
+        v-clipboard:success="onCopy"
+        v-clipboard:error="onError"
       >
         <span class="text-ored">
           <b-avatar
@@ -308,11 +333,18 @@
         <div class="popover-body">
           <div
             @mousedown="onShareVia('email')"
-            class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer"
+            class="
+              d-inline-flex
+              flex-row
+              align-items-center
+              suggest-item
+              py-2
+              cursor-pointer
+            "
           >
             <b-avatar
               size="24px"
-              class= "mr-2"
+              class="mr-2"
               variant="light"
               src="/icons/email.png"
               :square="true"
@@ -322,11 +354,18 @@
 
           <div
             @mousedown="onShareVia('facebook')"
-            class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer"
+            class="
+              d-inline-flex
+              flex-row
+              align-items-center
+              suggest-item
+              py-2
+              cursor-pointer
+            "
           >
             <b-avatar
               size="24px"
-              class= "mr-2"
+              class="mr-2"
               variant="light"
               src="/icons/facebook.png"
               :square="true"
@@ -336,11 +375,18 @@
 
           <div
             @mousedown="onShareVia('twitter')"
-            class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer"
+            class="
+              d-inline-flex
+              flex-row
+              align-items-center
+              suggest-item
+              py-2
+              cursor-pointer
+            "
           >
             <b-avatar
               size="24px"
-              class= "mr-2"
+              class="mr-2"
               variant="light"
               src="/icons/twitter.png"
               :square="true"
@@ -350,11 +396,18 @@
 
           <div
             @mousedown="onShareVia('whatsapp')"
-            class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer"
+            class="
+              d-inline-flex
+              flex-row
+              align-items-center
+              suggest-item
+              py-2
+              cursor-pointer
+            "
           >
             <b-avatar
               size="24px"
-              class= "mr-2"
+              class="mr-2"
               variant="light"
               src="/icons/whatsapp.png"
               :square="true"
@@ -430,14 +483,14 @@ export default {
     strategy: false,
     uuid: null,
     update: null,
-    link:null
+    link: null,
+    isCommunity: false,
   }),
 
   created() {
     this.uuid = this.post.post_id ? this.post.post_id : this.post.id;
     this.type = this.profile.user_type;
-    this.link = `${window.location.protocol}//${window.location.host}/search?uuid=${this.post.id}`
-
+    this.link = `${window.location.protocol}//${window.location.host}/search?uuid=${this.post.id}`;
   },
 
   computed: {
@@ -450,21 +503,19 @@ export default {
         this.profile.id == this.post.user_id &&
         this.profile.user_type == this.post.poster_type;
 
-      return isYourOwn ? false : true 
+      return isYourOwn ? false : true;
     },
 
     isBusiness() {
-      const authUserIsBusiness = this.profile.user_type == "business"
+      const authUserIsBusiness = this.profile.user_type == "business";
 
-      return authUserIsBusiness ? false : true
-  
+      return authUserIsBusiness ? false : true;
     },
 
     isNetwork() {
-      const authUserIsNetwork = this.profile.user_type == "network"
+      const authUserIsNetwork = this.profile.user_type == "network";
 
-      return authUserIsNetwork ? false: true
-  
+      return authUserIsNetwork ? false : true;
     },
   },
 
@@ -483,34 +534,41 @@ export default {
   },
 
   methods: {
-
     onCopy: function (e) {
-      
       this.flashMessage.show({
-        status: 'success',
-        blockClass: 'custom-block-class',
-        message: 'You just copied the link to the clipboard: ' + e.text,
+        status: "success",
+        blockClass: "custom-block-class",
+        message: "You just copied the link to the clipboard: " + e.text,
       });
     },
-    
+
     onError: function (e) {
       this.flashMessage.show({
-        status: 'success',
-        blockClass: 'custom-block-class',
-        message: 'Failed to copy the text to the clipboard',
+        status: "success",
+        blockClass: "custom-block-class",
+        message: "Failed to copy the text to the clipboard",
       });
     },
-    
+
     onShareVia(type) {
       const elm = document.querySelector(`#${type}-${this.uuid}`);
       elm.click();
     },
 
-    open(id) {
+    open(id, status = null) {
       this.modal = id;
 
-      if ([`modal-3-${this.uuid}`, `modal-2-${this.uuid}`].includes(id))
+      if (
+        [
+          `modal-3-${this.uuid}`,
+          `modal-2-${this.uuid}`,
+          `modal-1-${this.uuid}`,
+        ].includes(id)
+      ) {
         this.update = id;
+        this.isCommunity = status;
+      }
+
       this.$bvModal.show(id);
     },
 
@@ -532,7 +590,7 @@ export default {
       ]);
 
       loader.hide();
-      
+
       if (request.success)
         this.flashMessage.success({
           time: 5000,
@@ -544,7 +602,6 @@ export default {
 </script>
 
 <style scoped>
-
 .d-t {
   color: #e75c18;
 }

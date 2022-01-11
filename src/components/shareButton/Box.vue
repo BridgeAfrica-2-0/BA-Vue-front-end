@@ -42,11 +42,12 @@ export default {
     contacts: [],
     actionType: null,
     hasbeLoad: false,
-    uuid:null
+    uuid: null,
   }),
 
   props: {
     id: {},
+    isCommunity: {},
     modal: {
       type: String,
       required: true,
@@ -71,37 +72,46 @@ export default {
       type: String,
       required: true,
     },
-    update:{
-
-    }
+    update: {},
   },
 
-  created(){
-    this.uuid = this.post.post_id ? this.post.post_id : this.post.id
+  created() {
+    this.uuid = this.post.post_id ? this.post.post_id : this.post.id;
   },
 
-  watch:{
-    update:function(value){
-      console.log(value, this.type)
-      if([`modal-3-${this.uuid}`,`modal-2-${this.uuid}`].includes(value))
-        this.getContacts()
-    }
+  watch: {
+    update: function (value) {
+      if (
+        [`modal-3-${this.uuid}`, `modal-2-${this.uuid}`,`modal-1-${this.uuid}`].includes(value) &&
+        this.isCommunity
+      )
+        this.community();
+      else this.getContacts();
+    },
   },
-
 
   methods: {
+    community: function () {
+      console.log(this.isCommunity);
+      if (this.isCommunity == 'people') {
+        
+      }else if (this.isCommunity == 'people') {
+        
+      } else {
+        
+      }
+    },
     getContacts: async function () {
       this.loading = true;
 
-      const response = await this.$repository.share.showNetworkAndBussiness()
+      const response = await this.$repository.share.showNetworkAndBussiness();
 
-      if (response.success){
-
+      if (response.success) {
         if ("network" == this.type) {
           this.contacts = response.data.network;
           this.actionType = "network";
           this.loading = false;
-          return true
+          return true;
         }
 
         if ("business" == this.type) {

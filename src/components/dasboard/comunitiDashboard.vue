@@ -194,7 +194,7 @@ export default {
   computed: {
 
         total() {
-      return this.$store.state.businessOwner.Tcommunity;
+      return this.$store.state.profile.Tcommunity;
     },
 
     business() {
@@ -214,15 +214,27 @@ export default {
       .catch(err => {
         console.log({ err: err });
       });
-    this.$store
-      .dispatch("dashboardcommunity/gettotalcommunity")
 
-      .then(() => {
-        console.log("the response");
-      })
-      .catch(err => {
-        console.log({ err: err });
+    // this.$store
+    //   .dispatch("dashboardcommunity/gettotalcommunity")
+
+    //   .then(() => {
+    //     console.log("the response");
+    //   })
+    //   .catch(err => {
+    //     console.log({ err: err });
+    //   });
+
+
+      this.$store
+      .dispatch('profile/Tcommunity', null)
+      .then((response) => {})
+      .catch((error) => {
+        console.log({ error: error });
       });
+
+
+
   },
   methods: {
     count(number) {

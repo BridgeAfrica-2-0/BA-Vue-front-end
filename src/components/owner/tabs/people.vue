@@ -24,7 +24,7 @@
                       <b-col md="6" lg="6" cols="6" sm="6" class="mt-lg-2">
                         <div class="mt-2 mt-lg-0 mt-xl-0 username">
                           <router-link
-                            :to="{ name: 'Follower', params: { id: item.id } }"
+                            :to="'/profile/'+item.id"
                             ><b>{{ item.name }} </b></router-link
                           >
                         </div>

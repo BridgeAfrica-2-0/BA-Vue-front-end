@@ -346,7 +346,7 @@ export default {
         })
         .then(({ data }) => {
           console.log(data.data);
-          this.$store.commit("auth/setUserData", data.data);
+          this.$store.commit("auth/setSignupData", data.data);
 
           this.flashMessage.show({
             status: "success",

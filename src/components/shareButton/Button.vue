@@ -5,10 +5,27 @@
       :title="$t('search.Share_to_people')"
       :placeholder="$t('search.Search_for_people')"
       subtitle="All peoples"
-      :type="'network'"
+      :type="'people'"
       :post="post"
+      :listElmts="users"
       :isCommunity="isCommunity"
-    />
+    >
+      <template v-slot:owner>
+        <div class="d-flex align-items-center py-3 px-2 mb-2 border">
+          <b-avatar class="mr-3" :src="profile.profile_picture"></b-avatar>
+          <div>
+            <span class="mr-auto">{{ $t("search.Share_Post_As") }}</span
+            ><br />
+            <span class="mr-auto bold">{{ profile.name }}</span>
+            <p>
+              <i class="small">
+                {{ post.content }}
+              </i>
+            </p>
+          </div>
+        </div>
+      </template>
+    </Box>
     <!-- Share to people -->
 
     <Box
@@ -19,6 +36,7 @@
       :type="'network'"
       :post="post"
       :update="update"
+      :listElmts="networks"
       :isCommunity="isCommunity"
     >
       <template v-slot:owner>
@@ -74,6 +92,7 @@
       :type="'business'"
       :post="post"
       :update="update"
+      :listElmts="bizs"
       :isCommunity="isCommunity"
     >
       <template v-slot:owner>
@@ -492,12 +511,25 @@ export default {
     this.type = this.profile.user_type;
     this.link = `${window.location.protocol}//${window.location.host}/search?uuid=${this.post.id}`;
   },
+  mounted() {
+    this.getUsers("");
+    this.getBizs();
+    this.getNetworks();
+  },
 
   computed: {
     ...mapGetters({
       profile: "auth/profilConnected",
     }),
-
+    users() {
+      return this.$store.getters["userChat/getUsers"];
+    },
+    bizs() {
+      return this.$store.getters["userChat/getBizs"];
+    },
+    networks() {
+      return this.$store.getters["userChat/getNets"];
+    },
     isYourOwnPost() {
       const isYourOwn =
         this.profile.id == this.post.user_id &&
@@ -534,6 +566,16 @@ export default {
   },
 
   methods: {
+    getUsers(keyword) {
+      this.$store.dispatch("userChat/GET_USERS", keyword);
+    },
+    getBizs(keyword) {
+      this.$store.dispatch("businessChat/GET_BIZS", keyword);
+    },
+    getNetworks(keyword) {
+      this.$store.dispatch("networkChat/GET_BIZS", keyword);
+    },
+
     onCopy: function (e) {
       this.flashMessage.show({
         status: "success",

@@ -111,10 +111,7 @@ export default {
                     let users = res.data.data
                     usersFinal = users.filter((user) => { return user.id != state.currentUser.user.id })
                     commit("setUsers", usersFinal);
-                    commit("businessChat/setUsers", usersFinal);
-
-
-
+                    // commit("businessChat/setUsers", usersFinal);
                 })
                 .catch((err) => {
                     commit("setLoader", false);

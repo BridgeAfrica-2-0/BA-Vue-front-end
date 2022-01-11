@@ -10,7 +10,7 @@
             :src="item.user_picture"
           ></b-avatar> -->
           <b-avatar
-            class="p-avater"
+            class="p-avater bg-light"
             :square="'user' == item.poster_type ? false : true"
             variant="primary"
             :src="item.user_picture"

@@ -546,13 +546,15 @@ export default {
   },
   methods: {
 
-    deleteContact(id){
+
+deleteContact(id){
       console.log("---",id)
       
       this.$store.dispatch("profile/deleteContact", {id: id})
       .then(res => {
         this.$store.dispatch("profile/loadUserPostIntro", null);
       });
+    
     },
     getgender() {
       if (this.info.user.gender == "female") {

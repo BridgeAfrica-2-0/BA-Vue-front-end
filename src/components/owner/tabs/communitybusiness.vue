@@ -1,11 +1,11 @@
 <template>
-  <div class="p-2">
+  <div class="p-2">  
     <b-row>
       <b-col
         lg="6"
         sm="12"
         class="p-2"
-        v-for="(item, index) in businesses"
+        v-for="item in businesses"
         :key="item.id"
       >
         <div class="people-style shadow h-100">
@@ -13,21 +13,20 @@
             <b-col md="8" xl="8" lg="12" cols="12" sm="8">
               <div class="d-inline-flex">
                 <div class="center-img">
-                  <splide class="r-image">
-                    <splide-slide>
-                      <img :src="item.picture" class="r-image" />
-                    </splide-slide>
-                  </splide>
+                  
+
+                  <splide  class="r-image">
+                <splide-slide>
+                  <img :src="item.picture" class="r-image" />
+                </splide-slide>
+              </splide>
+
+
                 </div>
                 <div class="flx100">
                   <p class="textt">
                     <strong class="title">
-                      <router-link
-                        :to="{
-                          name: 'BusinessFollower',
-                          params: { id: item.id },
-                        }"
-                      >
+                      <router-link :to="'business/' + item.id">
                         {{ item.name }}
                       </router-link>
                     </strong>
@@ -70,6 +69,7 @@
                       :less-str="$t('search.read_less')"
                       :max-chars="100"
                     >
+                    
                     </read-more>
                   </p>
                 </div>
@@ -142,7 +142,30 @@
                       }}</span>
                     </b-button>
                   </b-col>
-                 
+                  <b-col
+                    md="12"
+                    lg="4"
+                    xl="12"
+                    sm="12"
+                    cols="4"
+                    class="mt-2 text-center"
+                  >
+                    <b-button
+                      block
+                      size="sm"
+                      class="b-background shadow"
+                      variant="primary"
+                      @click="$emit('BlockUser', item.id)"
+                      title="Block This User"
+                    >
+                      <b-icon
+                        font-scale="1"
+                        icon="exclamation-octagon-fill"
+                        v-b-tooltip.hover
+                      ></b-icon>
+                      <span class="btn-text">Block</span>
+                    </b-button>
+                  </b-col>
                 </b-row>
               </div>
             </b-col>
@@ -201,46 +224,6 @@ export default {
   },
 
   methods: {
-
-    
-  BlockUser(id, index) {
-
-     let dataInfo = {
-        id: id,
-        refernce: "business",
-        type: this.type,
-      };
-
-    
-      let fd = new FormData();
-      fd.append("id", dataInfo.id);
-      fd.append("type", dataInfo.refernce);
-      this.$store.dispatch("profile/Block", {
-        path: "block/entity",
-        formData: fd
-        })
-      .then(response => {
-        
-      
-        this.$delete(this.businesses,index);
-        console.log("user deleted");
-
-        console.log(response);
-        this.flashMessage.show({
-          status: "success",
-          message: dataInfo.refernce + " blocked"
-        });
-      })
-      .catch(err => {
-        console.log({ err: err });
-        this.flashMessage.show({
-          status: "error",
-          message: "Unable to blocked " + dataInfo.refernce
-        });
-      });
-    },
-
-
     count(number) {
       if (number >= 1000000) {
         return number / 1000000 + "M";

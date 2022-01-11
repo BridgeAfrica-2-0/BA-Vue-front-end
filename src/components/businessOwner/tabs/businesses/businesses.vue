@@ -8,7 +8,7 @@
             </span>
           </template>  
           
-          <Followers /></b-tab>
+          <Followers @BlockUser="BlockUser"/></b-tab>
       <b-tab >    <template slot="title">
             {{ $t('businessowner.Following') }}
             <span class="spa-color">
@@ -16,7 +16,7 @@
             </span>
           </template>
           
-          <Following /></b-tab>
+          <Following @BlockUser="BlockUser"/></b-tab>
     </b-tabs>
   </div>
 </template>
@@ -28,6 +28,12 @@ export default {
   components: {
     Followers,
     Following
+  },
+  methods: {
+    BlockUser(dataInfo) {
+      console.log(dataInfo);
+      this.$emit('BlockUser', dataInfo);
+    }
   }
   ,
    methods: {

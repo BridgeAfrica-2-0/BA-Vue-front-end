@@ -1,10 +1,10 @@
 <template>
   <div class="lalala">
     <b-tabs content-class="mt-3" fill pills>
-      <b-tab :title="$t('network.Followers')">
+      <b-tab :title="$t('memnetwork.Followers')">
         <Followers />
       </b-tab>
-      <b-tab :title="$t('network.Following')">
+      <b-tab :title="$t('memnetwork.Following')">
         <Following />
       </b-tab>
     </b-tabs>

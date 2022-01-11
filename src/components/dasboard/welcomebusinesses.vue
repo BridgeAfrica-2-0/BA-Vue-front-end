@@ -63,7 +63,6 @@
                   block
                   size="sm"
                   :id="'followbtn' + value.id"
-                  class="px-1"
                   :class="value.is_follow !== 0 && 'u-btn'"
                   variant="primary"
                   @click="handleFollow(value)"

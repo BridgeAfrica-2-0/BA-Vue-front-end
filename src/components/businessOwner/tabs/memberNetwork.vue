@@ -13,7 +13,7 @@
           </template>
           
           
-           <People /> </b-tab>
+           <People @BlockUser="BlockUser"/> </b-tab>
           <b-tab>  
             
              <template slot="title">
@@ -23,7 +23,7 @@
             </span>
           </template>
           
-           <Businesses /> </b-tab>
+           <Businesses @BlockUser="BlockUser"/> </b-tab>
           <b-tab>  
             
              <template slot="title">
@@ -35,7 +35,7 @@
           
           
           
-           <Network /> </b-tab>
+           <Network  @BlockUser="BlockUser"/> </b-tab>
         </b-tabs>
       </b-card>
     </div>
@@ -56,6 +56,7 @@ export default {
   },
   data() {
     return {
+      url: null,
       perPage: 3,
       currentPage: 1,
       items: [
@@ -65,8 +66,6 @@ export default {
   },
 
   methods: {
-   
-
       nFormatter(num) {
       if (num >= 1000000000) {
         return (num / 1000000000).toFixed(1).replace(/\.0$/, "") + "G";
@@ -79,11 +78,44 @@ export default {
       }
       return num;
     }, 
-
-
-
+    community() {
+      this.$store
+        .dispatch('profile/profilecommunity', null)
+        .then(() => {
+          console.log('hey yeah');
+        })
+        .catch(err => {
+          console.log({ err: err });
+        });
+    },
+    BlockUser(dataInfo) {
+      console.log(dataInfo);
+      let fd = new FormData();
+      fd.append("banned_id", dataInfo.id);
+      fd.append("banned_type", dataInfo.refernce);
+      this.$store.dispatch("businessBlocking/block", {
+        path: "community-banned/"+this.url,
+        formData: fd
+        })
+      .then(response => {
+        this.community();
+        console.log(response);
+        this.flashMessage.show({
+          status: "success",
+          message: dataInfo.refernce + " blocked"
+        });
+      })
+      .catch(err => {
+        console.log({ err: err });
+        this.flashMessage.show({
+          status: "error",
+          message: "Unable to blocked " + dataInfo.refernce
+        });
+      });
+    },
   },
   mounted() {
+    this.url = this.$route.params.id
     this.isLoading = true;
 
     console.log('Load User Profile Community start+++++++');

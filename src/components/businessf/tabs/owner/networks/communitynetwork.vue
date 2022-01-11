@@ -23,14 +23,13 @@
               <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{ member.city }}
             </span>
             <br />
-            <read-more
-              more-str="read more"
-              class="readmore"
-              :text="member.description"
-              link="#"
-              less-str="read less"
-              :max-chars="60"
-            ></read-more>
+            <span v-if="member.description.length < 55">{{
+              member.description
+            }}</span>
+            <span v-else
+              >{{ member.description.substring(0, 55) + "..." }}
+              <b-link>{{ $t("network.Read_More") }}</b-link></span
+            >
           </p>
         </b-col>
 
@@ -91,30 +90,6 @@
                 >
                   <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
                   <span class="btn-text">{{ $t("network.Join") }}</span>
-                </b-button>
-              </b-col>
-
-              <b-col
-                md="12"
-                lg="4"
-                xl="12"
-                sm="12"
-                cols="4"
-                class="mt-2 text-center"
-              >
-                <b-button
-                  block
-                  size="sm"
-                  class="b-background shadow"
-                  variant="primary"
-                  @click="$emit('BlockUser', member.id)"
-                >
-                  <b-icon
-                    font-scale="1"
-                    icon="exclamation-octagon"
-                    title="Block This User"
-                  ></b-icon>
-                  <span class="btn-text"> Block</span>
                 </b-button>
               </b-col>
             </b-row>

@@ -1444,7 +1444,7 @@ export default {
   },
 
   mounted() {
-    this.peopleAround();
+   // this.peopleAround();
     this.locateGeoLocation();
 
     this.Country();

@@ -41,7 +41,7 @@ export default {
   filters: {
     path: fullMediaLink,
     plural: function(val) {
-      return val ? `${val} items` : 'No item';
+      return val ? `${val} items` : this.$t('general.No_item');
     },
   },
 

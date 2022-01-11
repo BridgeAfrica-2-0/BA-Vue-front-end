@@ -122,9 +122,13 @@ export default {
   },
 
   mounted() {
+    console.log('Load User Info');
     this.$store
       .dispatch('profile/loadUserPostIntro', null)
       .then(response => {
+        console.log('Load User Intro test+++++ res');
+        console.log(response);
+        console.log('Load User Intro Finish Loading');
         this.userProfileOwner = this.$store.getters['profile/getUserPostIntro'];
         this.userProfileOwnerInput.workedAt = this.userProfileOwner.workedAt;
         this.userProfileOwnerInput.studiedAt = this.userProfileOwner.studiedAt;
@@ -138,20 +142,22 @@ export default {
       });
 
     this.$store
-      .dispatch('profile/getImages', this.$route.params.id)
+      .dispatch('profile/getImages')
       .then(response => {})
       .catch(error => {
         console.log({ error: error });
       });
   },
-
   computed: {
+
+
     showEdit(){
       return this.$route.name
     },
     info: function() {
       return this.$store.getters['follower/getUserPostIntro'];
     },
+
     total() {
       return this.$store.state.profile.Tcommunity;
     },

@@ -28,11 +28,11 @@
                         lg="12"
                         cols="6"
                         xl="12"
-                        class="mt-2 mt-lg-1 mt-xl-2"
+                        class="mt-3 mt-lg-1 mt-xl-3"
                       >
                         <h6 class="follower m-15">
                           {{ member.communityNum }}
-                          {{ $t("network.Community") }}
+                          {{ $t("memnetwork.Community") }}
                         </h6>
                       </b-col>
                     </b-row>
@@ -64,10 +64,11 @@
                           size="sm"
                           class="b-background flexx pobtn shadow"
                           variant="primary"
-                          @click="$emit('handleFollow', member)"
-                          :style="member.is_follow !== 0 ? 'background-color: rgb(162,107,80);' : ''"
-                        ><i :class="member.is_follow ? 'fas fa-user-minus fa-lg btn-icon':'fas fa-user-plus fa-lg btn-icon'"></i>
-                          <span class="btn-com">{{ $t('network.Community') }}</span>
+                        >
+                          <i class="fas fa-user-plus fa-lg btn-icon"></i>
+                          <span class="btn-com">{{
+                            $t("memnetwork.Community")
+                          }}</span>
                         </b-button>
                       </b-col>
                     </b-row>
@@ -392,6 +393,7 @@ export default {
     margin-left: -20px;
   }
 }
+
 .follower {
   font-size: 12px !important;
 }

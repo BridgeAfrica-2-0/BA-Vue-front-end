@@ -2,7 +2,7 @@
   <div ref="wrapper">
     <Navbar />
 
-    <div class="container wahala" v-if="getUserInfos">
+    <div class="container wahala" v-if="hasLoad">
       <b-row>
         <b-col cols="12" md="12" lg="12" xl="12">
           <div class="mbl-wrap">
@@ -30,7 +30,7 @@
                     <b-col cols="12" md="12">
                       <div>
                         <b-table-simple hover small caption-top responsive>
-                          <b-tbody v-if="getUserInfos.id">
+                           <b-tbody v-if="getUserInfos.id">
                             <b-tr>
                               <b-td class="a-text text">
                                 {{ $t("settings.Name") }}
@@ -51,7 +51,7 @@
 
                               <b-td class="text"
                                 ><b-link href="#">
-                                  http://blec.bridgeafrica.com
+                                  http://www.bridgeafrica.com
                                 </b-link>
                               </b-td>
                             </b-tr>
@@ -337,7 +337,7 @@
                             <br />
 
                             <br />
-                          </b-tbody>
+                          </b-tbody> 
                         </b-table-simple>
                       </div>
                     </b-col>
@@ -492,6 +492,7 @@
         <b-col> </b-col>
       </b-row>
     </div>
+
     <Footer />
   </div>
 </template>

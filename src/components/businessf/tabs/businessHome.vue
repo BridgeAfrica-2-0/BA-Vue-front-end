@@ -7,6 +7,7 @@
         <Followers />
         <HotBusiness  class="mb-md-3"  />
       </b-col>
+
       <b-col md="8" lg="7" xl="8">
         <Post />
       </b-col>

@@ -11,7 +11,7 @@
       <span class="ml-1"> {{ $t("businessf.Message") }}</span>
     </span>
 
-    <p class="d-flex" v-else>
+    <p v-else>
       <i class="fas fa-envelope fa-lg btn-icon pt-1 pr-1"></i>
       <span class="btn-text"> {{ $t("dashboard.Messages") }}</span>
     </p>

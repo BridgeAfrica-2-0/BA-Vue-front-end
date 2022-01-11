@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b class="basic">{{ $t('profilefollower.') }}{{ $t('profilefollower.Basic_Infomation') }}</b>
+    <b class="basic">{{ $t('profilefollower.Basic_Infomation') }}</b>
     <hr />
     <div class="basic row">
       <div class="col">

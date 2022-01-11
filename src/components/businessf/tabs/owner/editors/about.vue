@@ -4,7 +4,7 @@
 
       <b-icon icon="person-fill"  class="icon-size" variant="primary"></b-icon>
       <b>
-        About
+        {{ $t('general.About') }}
       </b>
 
       <hr />
@@ -59,7 +59,7 @@
         </p>
         <p><b-icon icon="link" class="primary icon-size"></b-icon> www.business.com</p>
         <p>
-          <b-icon icon="people-fill" class="primary icon-size"></b-icon> 1.1M Community
+          <b-icon icon="people-fill" class="primary icon-size"></b-icon> 1.1M {{$t("general.Community")}}
         </p>
         <p>
           <b-icon icon="telephone-fill" class="primary icon-size"></b-icon>
@@ -71,7 +71,7 @@
         </p>
         <p>
           <b-icon icon="clock" class="primary icon-size"></b-icon>
-          <b-link> Open now</b-link>
+          <b-link> {{$t("general.Open_now")}}</b-link>
           <br />
           <b-dropdown size="sm" variant="transperent">
             <template #button-content>

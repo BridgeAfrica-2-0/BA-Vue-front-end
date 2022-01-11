@@ -78,8 +78,8 @@
     <b-row>
       <b-col col="12">
         <infinite-loading @infinite="infiniteHandler" ref="infiniteLoading">
-          <div class="text-red" slot="no-more">No More Request</div>
-          <div class="text-red" slot="no-results">No More Request</div>
+          <div class="text-red" slot="no-more">{{ $t('general.No_More_Request') }}</div>
+          <div class="text-red" slot="no-results">{{ $t('general.No_More_Request') }}</div>
         </infinite-loading>
       </b-col>
     </b-row>
@@ -102,18 +102,18 @@ export default {
       filterData: false,
       spinner: false,
 
-      currentPage: 0,
+      currentPage: 1,
       currentIndex: -1,
       feedbacks: [],
 
       options: [
-        { value: "Improvement", text: "Suggestion for Improvement" },
-        { value: "Complain", text: "Complains" }
+        { value: "Improvement", text: this.$t('general.Suggestion_for_Improvement') },
+        { value: "Complain", text: this.$t('general.Complaints')}
       ],
       filters: [
         { value: "0", text: "Any" },
-        { value: "Improvement", text: "Suggestion for Improvement" },
-        { value: "Complain", text: "Complains" }
+         { value: "Improvement", text: this.$t('general.Suggestion_for_Improvement') },
+        { value: "Complain", text: this.$t('general.Complaints')}
       ],
       feedbackForm: {
         title: "Improvement",
@@ -150,7 +150,7 @@ export default {
       console.log("searching...");
       console.log(this.filterData);
       this.$nextTick(() => {
-        this.page = 0;
+        this.currentPage = 1;
         this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
       });
     },
@@ -159,20 +159,29 @@ export default {
       const data = this.getRequestDatas(this.filterData);
       console.log('keyword: '+data);
       let formData = new FormData();
-      formData.append('keyword', data);
+      formData.append('keywords', data);
       this.axios
         .post("network/"+this.url+"/feedbacks/"+this.currentPage, formData)
         .then(({ data }) => {
         console.log(data);
         console.log(this.currentPage);
-        if (data.data.length) {
+        console.log("converting to object");
+        console.log(Object.values(data.data));
+        let object = Object.values(data.data);
+        if (object.length) {
+          console.log("load more");
+          object.map((item) => {
+            this.feedbacks.push(item);
+            console.log(item);
+          })
           this.currentPage += 1;
           console.log(this.currentPage);
           console.log(...data.data);
-          this.feedbacks.push(...data.data);
+          // this.feedbacks.push(...data.data);
           this.loading = false;
           $state.loaded();
         } else {
+          console.log("No more data");
           this.loading = false;
           $state.complete();
         }

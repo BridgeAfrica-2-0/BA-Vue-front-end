@@ -26,21 +26,16 @@
               variant="primary"
               size="sm"
               @click="addFollower"
-              :disabled="buttonStatus" 
-              style="width: 120px;"
+              :disabled="buttonStatus"
+              :style="networkInfo.is_follow !== 0 ? 'background-color: rgb(162,107,80);' : ''"
               class="a-center"
-            >
-              <b-spinner v-if="SPcommunity" small></b-spinner>
-              
-
-                <i
-                            class="fas fa-lg btn-icon"
-                            :class="networkInfo.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"
-                          ></i>
-
-              <span class="ml-1" v-if="networkInfo.is_follow"> Unfollow</span> <span v-else> Follow</span>
+            ><b-spinner v-if="SPcommunity" small></b-spinner>
+              <i
+                class="fas fa-lg btn-icon"
+                :class="networkInfo.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"
+              ></i>
+              <span class="ml-1"> {{ $t('general.Community') }} </span>
             </b-button>
-            <b-tooltip target="Follow-Unfollow" variant="secondary">Click To Follow/Unfollow</b-tooltip>
           </b-col>
         </b-row>
       </b-container>
@@ -53,7 +48,7 @@
             <b-col>
               <p class="a-center ">
                 <b-icon icon="globe" variant="primary"></b-icon>
-                <span class="pivate text"> Private </span>
+                <span class="pivate text"> {{ $t('general.Private') }} </span>
               </p>
             </b-col>
             <b-col>
@@ -61,28 +56,23 @@
                 <b-icon icon="people-fill" variant="primary"></b-icon>
                 <span class="pivate text">
                   {{ nFormatter(networkInfo.community) }}
-                  community 
+                 {{ $t('general.community') }} 
                 </span>
               </p>
             </b-col>
           </b-row>
         </b-container>
-        <h6 class="mt-2 font-weight-bolder title ">About</h6>
+        <h6 class="mt-2 font-weight-bolder title ">{{ $t('general.About') }} </h6>
         <p class="text-justify text">
-
-
            <read-more
-              more-str="read more"
+              :more-str="$t('search.read_more')"
               class="readmore"
               :text="networkInfo.description"
               link="#"
-              less-str="read less"
+              :less-str="$t('search.read_less')"
               :max-chars="100"
-            >
-            </read-more>
-
-
-         
+            ></read-more>
+            
         </p>
       </b-card-text>
     </b-card>
@@ -155,7 +145,7 @@ export default {
           this.buttonStatus = false;
           this.flashMessage.show({
             status: "success",
-            message: "You Are Now Following"
+            message: this.$t('general.You_Are_Now_Following')
           });
         }
       })
@@ -164,7 +154,7 @@ export default {
         this.buttonStatus = false;
         this.flashMessage.show({
           status: "error",
-          message: "Unable To follow"
+          message: this.$t('general.Unable_To_follow')
         });
       });
     },
@@ -190,6 +180,7 @@ export default {
   justify-content: center;
   display: flex;
 }
+
 .b-none {
   border-style: none;
 }

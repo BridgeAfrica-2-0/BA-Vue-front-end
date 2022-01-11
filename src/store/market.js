@@ -131,6 +131,32 @@ export default {
     },
 
 
+    getBproducts({ commit }, url) {
+      return axios.get(url)
+        .then((res) => {
+          commit("setProducts", res.data);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    },   
+
+
+    bPnextPage({ commit }, url) {
+      commit("setProducts", []);
+
+      return axios.get(url)
+        .then((res) => {
+          console.log("products list: ", res.data);
+          commit("setProducts", res.data);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    },
+
+
+
 
 
      
@@ -172,7 +198,26 @@ export default {
        });
     },
 
-
+    UpdateProduct({ commit }, businessData) {
+      console.log("UpdateProduct")
+      console.log(businessData)
+      return axios
+        .post(businessData.path, businessData.formData, {
+          headers: { "Content-Type": "multipart/form-data" },
+        })
+        .then(({ data }) => {
+          return data;
+        })
+    },
+    DeleteProduct({ commit }, businessData) {
+      console.log("DeleteProduct")
+      console.log(businessData)
+      return axios
+        .delete(businessData.path)
+        .then(({ data }) => {
+          return data;
+        })
+    },
 
 
 

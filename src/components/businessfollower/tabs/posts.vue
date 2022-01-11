@@ -9,11 +9,12 @@
               <fas-icon class="icons" :icon="['fas', 'exclamation-circle']" size="lg" />
               {{ $t('profilefollower.Intro') }}
             </h2>
-            <span class="float-right btn m-0 p-0 action-intro" @click="editPage"
+            <span class="float-right btn m-0 p-0 action-intro" @click="editPage" v-if="showEdit != 'Follower' "
               ><b-icon icon="pencil-fill" class="icon-size" variant="primary"></b-icon>
             </span>
           </span>
           <!-- User Post Intro-->
+          <!-- {{info}} -->
           <b-card-text class="text-left username intro-head">
             <p>
               <b-icon icon="briefcase-fill" class="icon-size" variant="primary"></b-icon>
@@ -37,7 +38,7 @@
               <b-icon icon="house-fill" class="icon-size" variant="primary"></b-icon>
               {{ $t('profilefollower.Home_Town') }} :
               <span class="text">
-                {{ info.user.neighbor }}
+                {{ info.user.home_town }}
               </span>
             </p>
             <p>
@@ -50,7 +51,8 @@
               <b-icon icon="people-fill" class="icon-size" variant="primary"></b-icon>
               {{ $t('profilefollower.Community') }}:
               <span class="text">
-                {{ nFormatter(total.total_community) }}
+                
+                {{ nFormatter(info.user.followers) }}
               </span>
             </p>
           </b-card-text>
@@ -120,13 +122,9 @@ export default {
   },
 
   mounted() {
-    console.log('Load User Info');
     this.$store
       .dispatch('profile/loadUserPostIntro', null)
       .then(response => {
-        console.log('Load User Intro test+++++ res');
-        console.log(response);
-        console.log('Load User Intro Finish Loading');
         this.userProfileOwner = this.$store.getters['profile/getUserPostIntro'];
         this.userProfileOwnerInput.workedAt = this.userProfileOwner.workedAt;
         this.userProfileOwnerInput.studiedAt = this.userProfileOwner.studiedAt;
@@ -140,17 +138,20 @@ export default {
       });
 
     this.$store
-      .dispatch('profile/getImages')
+      .dispatch('profile/getImages', this.$route.params.id)
       .then(response => {})
       .catch(error => {
         console.log({ error: error });
       });
   },
-  computed: {
-    info: function() {
-      return this.$store.getters['profile/getUserPostIntro'];
-    },
 
+  computed: {
+    showEdit(){
+      return this.$route.name
+    },
+    info: function() {
+      return this.$store.getters['follower/getUserPostIntro'];
+    },
     total() {
       return this.$store.state.profile.Tcommunity;
     },

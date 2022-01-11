@@ -92,14 +92,14 @@
         </b-col>
       </b-row>
       <div class="pending-post-view pt-2 mt-3">
-        <p>
-
-          {{$t("network.Your")}} {{pendingPost.data}} {{$t("network.Posts_are_pending_for_approval")}}.&nbsp;&nbsp;&nbsp;&nbsp;
+        <p class="text-center">
+<!-- {{pendingPost.data}} -->
+          {{$t("network.Your")}}  {{$t("network.Posts_are_pending_for_approval")}}.&nbsp;&nbsp;&nbsp;&nbsp;
           <a
-            @click="RedirectPending"
-            style="color: #e75c18; text-decoration: underline; cursor:pointer"
-          >{{ $t("network.View_All") }}</a>
-
+            @click="editPage"
+            style="color: #e75c18; text-decoration: underline; cursor: pointer"
+            >{{ $t("network.View_All") }}</a
+          >
         </p>
       </div>
     </b-card>
@@ -125,7 +125,8 @@
               <b-avatar
                 class="d-inline-block avat"
                 variant="primary"
-                :src="imageProfile"
+                :square="'user' == profile.user_type ? false : true"
+                :src="profile.profile_picture"
               ></b-avatar>
             </b-col>
             <b-col cols="9" class="pt-2" style="margin-left: -5px">
@@ -343,26 +344,12 @@
                 </span>
               </div>
               <br />
-              <!-- <div v-for="hyperlink in createPost.hyperlinks" :key="hyperlink.fileName" class="bordder">
-                  <span class="float-left"> {{ hyperlink.fileName }} </span>
-                  <span class="float-right" @click="deleteItem(hyperlink.fileName)"> {{ $t('network.Delete') }}  </span>
-                </div>
 
-                <div v-for="movie in createPost.movies" :key="movie.fileName" class="">
-                  <div id="preview">
-                    <span class="upload-cancel" @click="deleteItem(movie.fileName)">
-                      <b-icon icon="x-circle" class="oorange"> </b-icon>
-                    </span>
-
-                    <img :src="movie.link" />
-                  </div>
-                </div> -->
-
-              <div class="h300px">
+              <div class="">
                 <div
                   v-for="hyperlink in createPost.hyperlinks"
                   :key="hyperlink.fileName"
-                  class="bordder"
+                  class="bordder h300px"
                 >
                   <span class="float-left"> {{ hyperlink.fileName }} </span>
                   <span
@@ -376,7 +363,7 @@
                 <div
                   v-for="movie in createPost.movies"
                   :key="movie.fileName"
-                  class=""
+                  class="h300px"
                 >
                   <div id="preview">
                     <span
@@ -402,7 +389,6 @@
                 variant="primary"
                 class="m13"
                 show-progress
-                :animated="animate"
               ></b-progress>
               <hr />
 
@@ -431,8 +417,8 @@
     </div>
 
     <Post
-      v-for="(item, index) in owner_post"
-      :key="index"
+      v-for="item in owner_post"
+      :key="item.updated_at"
       :post="item"
       :mapvideo="() => mapvideo(item.media)"
       :mapmediae="() => mapmediae(item.media)"
@@ -461,6 +447,12 @@ export default {
   mixins: [AllPostFeatureMixin],
   components: {
     Post,
+  },
+
+  props: {
+    postStatus: {
+      type: String,
+    }
   },
 
   data() {
@@ -493,18 +485,13 @@ export default {
   computed: {
     ...mapGetters({
       profile: "auth/profilConnected",
+      owner_post: "networkProfile/getOwnerPost",
     }),
-
-    imageProfile() {
-      return "yoo";
-    },
 
     business_logo() {
       return this.$store.state.networkProfile.networkInfo.logo_path;
     },
-    owner_post() {
-      return this.$store.state.networkProfile.ownerPost;
-    },
+
     profileNamePost() {
       return "yoo";
     },
@@ -516,15 +503,31 @@ export default {
   },
 
   methods: {
-
-    RedirectPending(){ this.$emit('changement')
-   
-      console.log("---- end")
-    },
-
     ...mapMutations({
       auth: "auth/profilConnected",
+      postRemove: "networkProfile/removePost",
+      postUpdate: "networkProfile/UpdatePost",
+      postCreate: "networkProfile/createPost",
     }),
+
+    editPage() {
+      console.log("editPage");
+      this.$emit('changeSelected');
+    },
+
+    AllPendingPost() {
+      console.log("AllPendingPost");
+      this.axios
+        .get("network/" + this.url + "/post/count-pending-posts")
+        .then(({ data }) => {
+          console.log("AllPendingPost yeahh");
+          console.log(data);
+          this.pendingPost = data;
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
 
     mapmediae(media) {
       let mediaarr = [];
@@ -600,46 +603,44 @@ export default {
     },
 
     deletePost(post) {
-      return (
-        this.axios
-          .delete("network/" + this.$route.params.id + "/post/" + post.id)
+      const uuid = post.post_id ? post.post_id : post.id;
+      return this.axios
+        .delete("network/" + this.$route.params.id + "/post/" + uuid)
+        .then(() => {
+          this.postRemove(uuid);
+          this.page = 1;
+          this.infiniteId += 1;
+          this.flashMessage.show({
+            status: "success",
+            blockClass: "custom-block-class",
+            message: "Post Deleted",
+          });
+          return true;
+        })
+        .catch((err) => {
+          this.sending = false;
 
-          // .then(() => this.ownerPost())
-          .then(() => {
-            this.page = 1;
-            this.infiniteId += 1;
+          if (err.response.status == 422) {
+            console.log({ err: err });
+
             this.flashMessage.show({
-              status: "success",
+              status: "error",
               blockClass: "custom-block-class",
-              message: "Post Deleted",
+              message: err.response.data.message,
             });
-            return true;
-          })
-          .catch((err) => {
-            this.sending = false;
+            // loader.hide();
+          } else {
+            this.flashMessage.show({
+              status: "error",
+              blockClass: "custom-block-class",
+              message: this.$t("network.Unable_to_Delete_your_Post"),
+            });
+            console.log({ err: err });
 
-            if (err.response.status == 422) {
-              console.log({ err: err });
-
-              this.flashMessage.show({
-                status: "error",
-                blockClass: "custom-block-class",
-                message: err.response.data.message,
-              });
-              // loader.hide();
-            } else {
-              this.flashMessage.show({
-                status: "error",
-                blockClass: "custom-block-class",
-                message: this.$t("network.Unable_to_Delete_your_Post"),
-              });
-              console.log({ err: err });
-
-              // loader.hide();
-            }
-            return false;
-          })
-      );
+            // loader.hide();
+          }
+          return false;
+        });
     },
 
     editPost(postarray) {
@@ -669,12 +670,8 @@ export default {
             "Content-Type": "multipart/form-data",
           },
         })
-        .then(() => {
-          this.$store.state.networkProfile.ownerPost.splice(
-            0,
-            this.$store.state.networkProfile.ownerPost.length
-          );
-          this.ownerPost();
+        .then((response) => {
+          this.postUpdate(response.data.data);
         })
         .then(() => {
           this.page = 1;
@@ -690,6 +687,7 @@ export default {
         })
         .catch((err) => {
           console.log(err);
+          this.loading = true;
           this.flashMessage.show({
             status: "error",
             message: "Unable to Update your post",
@@ -702,9 +700,11 @@ export default {
     },
 
     chooseImage: function () {},
+
     chooseVideo: function () {
       document.getElementById("chosefile").click();
     },
+
     chooseDocument() {
       document.getElementById("chosefile").click();
     },
@@ -728,6 +728,7 @@ export default {
         reader.readAsDataURL(file.files[0]);
       }
     },
+
     service(file) {
       let result = null;
       if (file.files) {
@@ -762,15 +763,14 @@ export default {
     },
 
     selectDocument(event) {
-      console.log(event);
       this.createPost.hyperlinks.push({
         target: event.target,
         document: this.service(event.target),
         fileName: event.target.files[0].name,
       });
     },
+
     selectDocumentOutsidePost(event) {
-      console.log(event);
       this.createPost.hyperlinks.push({
         target: event.target,
         document: this.service(event.target),
@@ -778,6 +778,7 @@ export default {
       });
       this.$refs["modal-xl"].show();
     },
+
     createPost_() {
       this.$refs["modal-xl"].show();
     },
@@ -816,6 +817,9 @@ export default {
     },
 
     async submitPost() {
+
+      const path = 'member' == this.postStatus ? "network/member-post/create/"+ this.url : "network/post/create/" + this.url
+
       this.loading = true;
       this.isUploading = true;
       this.fileImageArr = this.createPost.movies;
@@ -825,16 +829,13 @@ export default {
 
       this.fileImageArr.forEach((value, index) => {
         formData2.append("media[" + index + "]", value.target.files[0]);
-        console.log(value);
-        console.log(value.target.files[0]);
-        console.log("testingggg");
       });
 
       formData2.append("type", "image");
       //formData2.append("media", this.createPost.hyperlinks);
       formData2.append("content", this.createPost.postNetworkUpdate);
       await this.axios
-        .post("network/post/create/" + this.url, formData2, {
+        .post(path, formData2, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
@@ -847,6 +848,7 @@ export default {
         })
         // .then(() => this.ownerPost())
         .then((res) => {
+          this.postCreate(res.data.data);
           this.flashMessage.show({
             status: "success",
             blockClass: "custom-block-class",
@@ -861,6 +863,8 @@ export default {
         })
         .catch((err) => {
           this.loading = false;
+          this.isUploading = false;
+          this.loading = false;
           if (err.response.status == 422) {
             console.log({ err: err });
             console.log(err.response.data.message);
@@ -873,7 +877,7 @@ export default {
           } else {
             this.flashMessage.show({
               status: "error",
-              message: "Unable to Create Your Post",
+              message: err.response.data.message,
               blockClass: "custom-block-class",
             });
             console.log({ err: err });
@@ -957,7 +961,7 @@ export default {
   }
   .send-cmt {
     position: relative;
-    margin-left: 95%;
+    margin-left: 93%;
     top: -28px;
     cursor: pointer;
   }
@@ -1208,7 +1212,7 @@ export default {
   }
   .send-cmt {
     position: relative;
-    margin-left: 95%;
+    margin-left: 93%;
     top: -28px;
     cursor: pointer;
   }

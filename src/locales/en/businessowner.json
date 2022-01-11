@@ -8,10 +8,11 @@
     "This_Product_Is_On_Discount": "This Product Is On Discount",
     "This_Item_Is_A_Service": "This Item Is A Service",
     "In_stock": "In stock",
+    "Add_Network":"Add Network",
     "Product_Name": "Product Name",
     "Product_Description": "Product Description",
     "Conditions": "Conditions",
-    "Published": "Published",
+    "Published": "Public",
     "Add": "Add",
     "Product_Details": "Product Details",
     "Message": "Message",
@@ -36,7 +37,7 @@
     "Add_Movie": "Add Movie",
     "PhotoVideo": "Photo/Video",
     "Add_Hyperlink": "Add Hyperlink",
-    "Attach_File": "Attach File",
+    "Attach_File": "  Attach File",
     "Post": "Post",
     "Update_Post": "Update Post",
     "profileNamePost": "profileNamePost",
@@ -335,7 +336,7 @@
     "or_follow_your_business": "or follow your business",
     "Unblock": "Unblock",
     "No_Blocked_User_Available": "No Blocked User Available",
-    "Business_Visibility": "Business_Visibility",
+    "Business_Visibility": "Business Visibility",
     "All_business_posts_must_be_approved_by_an_admin": "All business posts must be approved by an admin",
     "Keyword_Alerts": "Keyword Alerts",
     "DELETE_BUSINESS": "DELETE BUSINESS",
@@ -409,7 +410,7 @@
     "where_you_can_sell_products_and_services_directly_to_customer": "where you can sell products and services directly to customer",
     "User_Unblocked": "User Unblocked",
     "Unable_to_Unblocked_User": "Unable to Unblock User",
-    "Unpublish": "Unpublished",
+    "Unpublish": "Private",
     "Admin_only": "Admin only",
     "Allow_editor_to_post": "Allow editor to post",
     "Changes_Made_Successfuly": "Changes Made Successfully",
@@ -528,6 +529,6 @@
     "orders":"orders",
     "my_orders":"my orders",
     "Operation_was_successful":"Operation was successful!!!",
-    "Something_went_wrong":"Something went wrong!!!"
-  
+    "Something_went_wrong":"Something went wrong!!!",
+    "Enter_new_keyword":"Enter new keyword"
 }

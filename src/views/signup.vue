@@ -346,13 +346,12 @@ export default {
         })
         .then(({ data }) => {
           console.log(data.data);
-          this.$store.commit("auth/setUserData", data.data);
+          this.$store.commit("auth/setSignupData", data.data);
 
           this.flashMessage.show({
             status: "success",
             title: this.$t('auth.Successfully_Register'),
-            message:
-              this.$t('auth.Thanks_for_registering_You_will_get_your_otp_code_in_a_second'),
+        
           });
 
           this.$router.push({ name: "verifyAccount" });

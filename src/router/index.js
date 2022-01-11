@@ -2,9 +2,11 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 //import Home from "../views/home.vue";
 import Login from "../views/login.vue";
+import LoginValidation from "../views/LoginValidation.vue";
 import home1 from "@/views/home1.vue";
 import signup from "../views/signup.vue";
-
+import success from "../views/success.vue";
+import failure from "../views/failure.vue";
 import RecoverPass1 from "../views/recoverPassword1.vue";
 import RecoverPass2 from "../views/recoverPassword2.vue";
 import RecoverPass3 from "../views/recoverPassword3.vue";
@@ -60,9 +62,7 @@ import about from "@/views/about";
 import contact from "@/views/contact";
 import cart from "@/views/card";
 
-
 Vue.use(VueRouter);
-
 
 const routes = [
   {
@@ -81,18 +81,18 @@ const routes = [
     path: "/myorders/detail/:id",
     name: "ordersdetail",
     component: OrderDetails,
-    // meta: {
-    //   auth: true,
-    // },
+     meta: {
+      auth: true,
+     },
   },
 
   {
     path: "/orders/detail/:id",
     name: "OrderDetail",
     component: OrderDetails,
-    // meta: {
-    //   auth: true,
-    // },
+     meta: {
+       auth: true,
+     },
   },
 
 
@@ -105,16 +105,17 @@ const routes = [
   {
     path: "/cart",
     name: "cart",
-    component: cart,
+    component: cart, 
+    meta: {
+      auth: true,
+    },
 
   },
   {
     path: '/about',
     name: 'about',
     component: about,
-    // meta: {
-    //   auth: true,
-    // },
+   
   },
   {
     path: '/contact',
@@ -130,16 +131,36 @@ const routes = [
     name: "market",
     component: market,
   },
+
+  {
+    path: "/success",
+    name: "success",
+    component: success,
+  },
+
+
+  {
+    path: "/failure",
+    name: "failure",
+    component: failure,
+  },
+
   {
     path: "/checkout",
     name: "payment",
-    component: payment
+    component: payment,
+    meta: {
+      auth: true,
+    },
   },
 
   {
     path: "/businessOwnerOrders",
     name: "businessOwnerOrders",
     component: businessOwnerOrders,
+    meta: {
+      auth: true,
+    },
 
   },
 
@@ -147,25 +168,25 @@ const routes = [
     path: "/business_owner/ordersdetail",
     name: "ordersdetail",
     component: businessordersdetail,
-    // meta: {
-    //   auth: true,
-    // },
+    meta: {
+      auth: true,
+    },
   },
   {
     path: "/myorders",
     name: "orders",
     component: orders,
-    // meta: {
-    //   auth: true,
-    // },
+    meta: {
+      auth: true,
+    },
   },
   {
     path: "/orders",
     name: "norders",
     component: orders,
-    // meta: {
-    //   auth: true,
-    // },
+    meta: {
+      auth: true,
+    },
   },
   {
     path: "/dashboard",
@@ -205,11 +226,17 @@ const routes = [
     path: "/profile_owner",
     name: "profile_owner",
     component: profile_owner,
+    meta: {
+      auth: true,
+    },
   },
   {
     path: "/profilefollower/:id?",
     name: "ProfileFollower",
     component: profileFollower,
+    meta: {
+      auth: true,
+    },
   },
   {
     path: "/template_viewer",
@@ -220,12 +247,18 @@ const routes = [
     path: "/business_owner/:id?",
     name: "BusinessOwner",
     component: businessOwner,
+    meta: {
+      auth: true,
+    },
   },
 
   {
     path: "/business_editor/:id?",
     name: "BusinessEditor",
     component: businessEditor,
+    meta: {
+      auth: true,
+    },
   },
 
   {
@@ -264,17 +297,25 @@ const routes = [
     path: "/network_editors/:id?",
     name: "NetworkEditors",
     component: networkEditors,
+    meta: {
+      auth: true,
+    },
   },
   {
     path: "/network_member/:id?",
     name: "memberNetwork",
     component: memberNetwork,
+    meta: {
+      auth: true,
+    },
   },
-
   {
     path: "/network_follower/:id?",
     name: "Membar Network Follower",
     component: memberNetworkFollower,
+    meta: {
+      auth: true,
+    },
 
   },
 
@@ -282,13 +323,9 @@ const routes = [
     path: "/network_member/:id?",
     name: "memberNetwork",
     component: memberNetwork,
-  },
-
-  {
-    path: "/network_follower/:id?",
-    name: "Membar Network Follower",
-    component: memberNetworkFollower,
-
+    meta: {
+      auth: true,
+    },
   },
 
   {
@@ -296,6 +333,13 @@ const routes = [
     name: "Login",
     component: Login,
   },
+
+  {
+    path: "/login/validation",
+    name: "Loginvalidation",
+    component: LoginValidation,
+  },
+
   {
     path: "/signup",
     name: "signup",
@@ -312,6 +356,9 @@ const routes = [
     path: "/verify",
     name: "verifyAccount",
     component: verifyAccount,
+    meta: {
+    //  auth: true,
+    },
   },
 
   {
@@ -328,12 +375,18 @@ const routes = [
     path: "/businessfollower/:id?",
     name: "BusinessFollower",
     component: businessFollower,
+    meta: {
+      auth: true,
+    },
   },
 
   {
     path: "/business/:id?",
     name: "BusinessFollower",
     component: businessFollower,
+    meta: {
+      auth: true,
+    },
   },
 
 
@@ -343,8 +396,6 @@ const routes = [
     component: businessVisitor,
   },
 
-
-
   {
     path: "/profilevisitor",
     name: "visitor",
@@ -352,8 +403,9 @@ const routes = [
   },
   {
     path: "/search",
-    name: "Search",
+    name: "GlobalSearch",
     component: search,
+
   },
 
   {
@@ -370,6 +422,7 @@ const routes = [
       auth: true,
     },
   },
+  
 
   {
     path: "/search/:id",
@@ -417,7 +470,6 @@ router.beforeEach((to, from, next) => {
 
   if (to.matched.some((record) => record.meta.auth) && !loggedIn) {
     next("/login");
-
     return;
   }
 
@@ -426,10 +478,17 @@ router.beforeEach((to, from, next) => {
     const userdata = JSON.parse(dat);
 
     if (userdata.user.verified_at == null) {
-      //  next("/verify");
+       next("/verify");
     }
   }
+  
+  document.title = (to.name) ? `BrigeAfrica - ${to.name}` : `BrigeAfrica - ${to.name.toLocaleLowerCase()}`
 
+  
+  document.querySelector('meta[name="description"]')
+  .setAttribute('content', `The Best Communication Platform for Business 
+We operate a 3 in 1 software a service platform, that helps people create websites, access directories, and network. The best part is that the site works online and offline through SMS`)
+  
   next();
 });
 

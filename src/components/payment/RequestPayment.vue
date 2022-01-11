@@ -1,10 +1,12 @@
 <template>
   <b-card class="border-0">
+
+  
     <b-button variant="link" @click="changepayment" class="px-0">
       <i class="fas fa-arrow-left"></i> Back
     </b-button>
     <div class="card-header px-0 text-black border-bottom-0  bg-white h-50">
-      Enter your MTN Mobile Money number
+      Enter your {{operator}} Mobile Money number
     </div>
     <div class="px-0">
       <div class="row">
@@ -31,18 +33,18 @@
             variant="primary"
             class="font-weight-light shadow-sm btn-custom text-14"
             @click="confirmPayment"
-            >PAY {{ formatMoney(price) }}</b-button
+            > <b-spinner v-if="loading" small variant="light"></b-spinner> PAY {{ formatMoney(price) }}</b-button
           >
         </div>
       </div>
       <div class="row my-3">
         <div class="col body-font-size">
           <p>
-            Please make sure your account balance is greater than 13 000XAF,
+            Please make sure your account balance is greater than {{ formatMoney(price) }},
             Otherwise your payment will not be completed.
           </p>
           <p>
-            Reference NO: XXXXXXXXXXXX
+            <!-- Reference NO: XXXXXXXXXXXX -->
           </p>
         </div>
       </div>
@@ -53,6 +55,8 @@
 <script>
 export default {
   name: "RequestPayment",
+
+  
   props: {
     operator: {
       type: String,
@@ -60,13 +64,30 @@ export default {
     amount: {
       type: String,
     },
+
+    loading: {
+      type: Boolean,
+      default:false,
+
+    },
+
     price: {
       type: Number,
       default: 0,
     },
   },
+  computed:{
+  
+			order() {
+				return this.$store.state.checkout.order.data;
+				
+			},
+
+  },
   data() {
     return {
+
+      	// loading: true,
       formatObject: new Intl.NumberFormat("fr-FR", {
         style: "currency",
         currency: "XAF",
@@ -77,11 +98,16 @@ export default {
   },
   methods: {
     confirmPayment() {
+     
+      
       this.$emit("confirmpayment", {
         number: this.number,
         amount: this.price,
         operator: this.operator,
+      
       });
+
+      this.loading=false;
     },
     formatMoney(money) {
       return this.formatObject.format(money);

@@ -8,7 +8,7 @@
       <b-card-header header-tag="header" class="p-1" role="tab">
         <p block v-b-toggle.accordion-1 variant="info">
           <b-icon :icon="openBusiness ? 'arrow-down' : 'arrow-up'"></b-icon>
-          Business
+          {{$t("general.Business")}}
         </p>
       </b-card-header>
       <b-collapse id="accordion-1" accordion="my-accordion" role="tabpanel">
@@ -23,21 +23,21 @@
               suggest-item
               cursor-pointer
               w-full
+              my-2
             "
             @click="activedBusiness(item)"
           >
             <div>
-              <img
+              <b-avatar
+                variant="light"
                 :src="item.logo_path"
+                :square="true"
                 class="logo-sizee"
-                alt=""
-                width="30"
-                height="30"
-              />
+              ></b-avatar>
             </div>
             <div class="d-flex flex-column ml-3">
               <div>
-                <span class="font-weight-bold">{{ item.business_name }}</span>
+                <span class="font-weight-bold">{{ item.name }}</span>
               </div>
             </div>
           </div>
@@ -49,7 +49,7 @@
       <b-card-header header-tag="header" class="p-1" role="tab">
         <p block v-b-toggle.accordion-2 variant="info">
           <b-icon :icon="openNetwork ? 'arrow-down' : 'arrow-up'"></b-icon>
-          Network
+          {{$t("general.Network")}}
         </p>
       </b-card-header>
       <b-collapse id="accordion-2" accordion="my-accordion" role="tabpanel">
@@ -65,20 +65,20 @@
               suggest-item
               cursor-pointer
               w-full
+              my-2
             "
           >
             <div>
-              <img
-                :src="item.network_image"
+              <b-avatar
+                variant="light"
+                :src="item.image"
+                :square="true"
                 class="logo-sizee"
-                alt=""
-                width="30"
-                height="30"
-              />
+              ></b-avatar>
             </div>
             <div class="d-flex flex-column ml-3">
               <div>
-                <span class="font-weight-bold">{{ item.network_name }}</span>
+                <span class="font-weight-bold">{{ item.name }}</span>
               </div>
             </div>
           </div>
@@ -135,9 +135,9 @@ export default {
     this.strategy = {
       business: {
         newType: (item) => ({
-          name: item.business_name,
+          name: item.name,
           profile_picture: item.logo_path,
-          id: item.business_id,
+          id: item.id,
           user_type: "business",
         }),
         redirect: (obj) => this.redirection(obj),
@@ -145,9 +145,9 @@ export default {
 
       network: {
         newType: (item) => ({
-          name: item.network_name,
-          profile_picture: item.network_image,
-          id: item.network_id,
+          name: item.name,
+          profile_picture: item.image,
+          id: item.id,
           user_type: "network",
         }),
         redirect: (obj) => this.redirection(obj),
@@ -187,17 +187,17 @@ export default {
       try {
         const data = {
           routeName: "network" == type ? "networks" : "BusinessOwner",
-          routeId: "network" == type ? item.network_id : item.business_id,
+          routeId: item.id,
         };
 
         const request =
           "network" == type
             ? await this.$repository.share.switch(
-                this.$route.params.id,
+                item.id,
                 "network"
               )
             : await this.$repository.share.switch(
-                this.$route.params.id,
+                item.id,
                 "business"
               );
 
@@ -206,8 +206,10 @@ export default {
             time: 5000,
             message:
               "business" == type
-                ? `You are now connected as ${item.business_name}`
-                : `You are connected as ${item.network_name}`,
+
+                ? `You are now connected as ${item.name}`
+                : `You are connected as ${item.name}`,
+
           });
 
           this.auth(this.strategy[type].newType(item));

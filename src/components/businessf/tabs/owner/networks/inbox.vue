@@ -1,77 +1,10 @@
 <template>
   <div>
     <b-container>
-      <div class="chat-box">
-        <b-row>
-          <!-- Mobile -->
-          <b-col class="pr-0" cols="12" xl="4" v-if="show">
-            <div class="right-mobile">
-              <b-row>
-                <b-col>
-                  <b-avatar
-                    class="d-inline-block profile-pic"
-                    variant="primary"
-                    src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
-                    square
-                  ></b-avatar>
-                </b-col>
-                <b-col>
-                  <h4 class="title m-10">{{ $t("businessowner.Messages") }}</h4>
-                </b-col>
-                <b-col>
-                  <b-icon
-                    @click="newMessage(true)"
-                    class="new-message primary icon-size m-10 float-right"
-                    icon="pencil-square"
-                  ></b-icon>
-                </b-col>
-              </b-row>
-              <b-container>
-                <input
-                  type="text"
-                  class="form-control input-background"
-                  :placeholder="$t('businessowner.Search_inbox')"
-                />
-              </b-container>
-            </div>
-            <div>
-              <div class="messages-mobile">
-                <b-row
-                  v-for="message in messages"
-                  :key="message.id"
-                  class="p-2 message"
-                  @click="showMessages(false)"
-                >
-                  <b-col class="col-10">
-                    <span style="display: inline-flex mb-2">
-                      <b-avatar
-                        class="d-inline-block profile-pic"
-                        variant="primary"
-                        src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
-                      ></b-avatar>
-
-                      <h6 class="d-inline-block ml-2">
-                        <b class="bold"> {{ message.name }}</b>
-                        <p class="duration">{{ message.startMessage }}</p>
-                      </h6>
-                    </span>
-                  </b-col>
-
-                  <b-col class="col-2 text-center">
-                    <small> {{ message.timeStamp }} </small>
-                    <p class="">
-                      <b-badge variant="info">
-                        {{ message.messageCount }}
-                      </b-badge>
-                    </p>
-                  </b-col>
-                </b-row>
-              </div>
-            </div>
-          </b-col>
-          <!-- ---- -->
-
-          <b-col class="pr-0">
+      <!-- Mobile -->
+      <div v-if="mobile">
+        <b-row class="chat-box">
+          <b-col class="pr-0" v-if="rightSide">
             <div class="right">
               <b-row>
                 <b-col class="p-2">
@@ -92,12 +25,7 @@
                   </h1>
                 </b-col>
                 <b-col>
-                  <b-icon
-                    @click="newMessage(true)"
-                    class="new-message primary icon-size float-right"
-                    icon="pencil-square"
-                  ></b-icon>
-                  <!-- <b-dropdown
+                  <b-dropdown
                     variant="white"
                     toggle-class="text-decoration-none"
                     no-caret
@@ -110,13 +38,17 @@
                         @click="this.newMsg = !this.newMsg"
                       ></b-icon>
                     </template>
-                    <b-dropdown-item @click="newMessage(true)">
+                    <b-dropdown-item
+                      @click="newMessage({ newmsg: true, bulk: false })"
+                    >
                       {{ $t("businessowner.New_Chat") }}</b-dropdown-item
                     >
-                    <b-dropdown-item @click="newMessage(true)">
+                    <b-dropdown-item
+                      @click="newMessage({ newmsg: true, bulk: true })"
+                    >
                       {{ $t("businessowner.New_Group_Chat") }}
                     </b-dropdown-item>
-                  </b-dropdown> -->
+                  </b-dropdown>
                 </b-col>
               </b-row>
 
@@ -137,7 +69,7 @@
                           <input
                             v-model="searchQuery"
                             class="form-control input-background"
-                            :placeholder="`Search chat list ${tabIndex}`"
+                            :placeholder="$t('general.Search_chat_list')"
                             @keypress.enter="
                               getChatList({
                                 type: 'user',
@@ -164,7 +96,9 @@
                               'p-2 message ',
                               {
                                 messageSelected:
-                                  chat.receiver_id ==
+                                  (chat.sender_id
+                                    ? chat.sender_id
+                                    : chat.receiver_id) ==
                                   (chatSelected.clickedId != null
                                     ? chatSelected.clickedId
                                     : false)
@@ -176,7 +110,11 @@
                               selectedChat({
                                 type: 'user',
                                 chat: chat,
-                                id: chat.receiver_id,
+                                id: chat.sender_id
+                                  ? chat.sender_id
+                                  : chat.sender_id
+                                  ? chat.sender_id
+                                  : chat.receiver_id,
                               })
                             "
                           >
@@ -185,7 +123,12 @@
                                 <b-avatar
                                   class="d-inline-block profile-pic"
                                   variant="primary"
-                                  src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
+                                  :src="
+                                    getImage({
+                                      type: 'user',
+                                      image: chat.profile_picture,
+                                    })
+                                  "
                                 ></b-avatar>
 
                                 <h6 class="mt-2 d-inline-block ml-2">
@@ -196,14 +139,9 @@
                             </b-col>
 
                             <b-col class="col-3 text-center">
-                              <small class="text-center">
+                              <small class="text-center small">
                                 {{ getCreatedAt(chat.created_at) }}
                               </small>
-                              <!-- <p class="text-center">
-                              <b-badge variant="info">
-                                {{ chat.receiver_id }}
-                              </b-badge>
-                            </p> -->
                             </b-col>
                           </b-row>
                         </div>
@@ -222,7 +160,7 @@
                           <input
                             v-model="searchQuery"
                             class="form-control input-background"
-                            :placeholder="`Search chat list ${tabIndex}`"
+                            :placeholder="$t('general.Search_chat_list')"
                             @keypress.enter="
                               getChatList({
                                 type: 'business',
@@ -249,7 +187,9 @@
                               'p-2 message ',
                               {
                                 messageSelected:
-                                  chat.receiver_business_id ==
+                                  (chat.sender_business_id
+                                    ? chat.sender_business_id
+                                    : chat.receiver_business_id) ==
                                   (chatSelected.clickedId != null
                                     ? chatSelected.clickedId
                                     : false)
@@ -261,7 +201,9 @@
                               selectedChat({
                                 type: 'business',
                                 chat: chat,
-                                id: chat.receiver_business_id,
+                                id: chat.sender_business_id
+                                  ? chat.sender_business_id
+                                  : chat.receiver_business_id,
                               })
                             "
                           >
@@ -270,7 +212,12 @@
                                 <b-avatar
                                   class="d-inline-block profile-pic"
                                   variant="primary"
-                                  src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
+                                  :src="
+                                    getImage({
+                                      type: 'business',
+                                      image: chat.logo_path,
+                                    })
+                                  "
                                 ></b-avatar>
 
                                 <h6 class="mt-2 d-inline-block ml-2">
@@ -281,14 +228,9 @@
                             </b-col>
 
                             <b-col class="col-3 text-center">
-                              <small class="text-center">
+                              <small class="text-center small">
                                 {{ getCreatedAt(chat.created_at) }}
                               </small>
-                              <!-- <p class="text-center">
-                              <b-badge variant="info">
-                                {{ chat.receiver_business_id }}
-                              </b-badge>
-                            </p> -->
                             </b-col>
                           </b-row>
                         </div>
@@ -307,7 +249,7 @@
                           <input
                             v-model="searchQuery"
                             class="form-control input-background"
-                            :placeholder="`Search chat list ${tabIndex}`"
+                            :placeholder="$t('general.Search_chat_list')"
                             @keypress.enter="
                               getChatList({
                                 type: 'network',
@@ -334,7 +276,9 @@
                             'p-2 message ',
                             {
                               messageSelected:
-                                chat.receiver_network_id ==
+                                (chat.sender_network_id == currentBizId
+                                  ? chat.receiver_network_id
+                                  : chat.sender_network_id) ==
                                 (chatSelected.clickedId != null
                                   ? chatSelected.clickedId
                                   : false)
@@ -346,7 +290,10 @@
                             selectedChat({
                               type: 'network',
                               chat: chat,
-                              id: chat.receiver_network_id,
+                              id:
+                                chat.sender_network_id == currentBizId
+                                  ? chat.receiver_network_id
+                                  : chat.sender_network_id,
                             })
                           "
                         >
@@ -366,14 +313,9 @@
                           </b-col>
 
                           <b-col class="col-3 text-center">
-                            <small class="text-center">
+                            <small class="text-center small">
                               {{ getCreatedAt(chat.created_at) }}
                             </small>
-                            <!-- <p class="text-center">
-                              <b-badge variant="info">
-                                {{ chat.receiver_network_id }}
-                              </b-badge>
-                            </p> -->
                           </b-col>
                         </b-row>
                       </div>
@@ -381,7 +323,7 @@
                       <!-- End Chats -->
                     </b-tab>
                     <b-tab
-                      title="Groups"
+                      :title="$t('general.Groups')"
                       @click="getChatList({ type: 'group' })"
                     >
                       <!-- Group Chats Available  -->
@@ -390,7 +332,7 @@
                           <input
                             v-model="searchQuery"
                             class="form-control input-background"
-                            :placeholder="`Search chat list ${tabIndex}`"
+                            :placeholder="$t('general.Search_chat_list')"
                             @keypress.enter="
                               getChatList({
                                 type: 'group',
@@ -438,7 +380,7 @@
                                 <b-avatar
                                   class="d-inline-block profile-pic"
                                   variant="primary"
-                                  src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
+                                  :src="require('@/assets/default_group.png')"
                                 ></b-avatar>
 
                                 <h6 class="mt-2 d-inline-block ml-2">
@@ -449,14 +391,9 @@
                             </b-col>
 
                             <b-col class="col-3 text-center">
-                              <small class="text-center">
+                              <small class="text-center small">
                                 {{ getCreatedAt(chat.created_at) }}
                               </small>
-                              <!-- <p class="text-center">
-                              <b-badge variant="info">
-                                {{ chat.receiver_business_id }}
-                              </b-badge>
-                            </p> -->
                             </b-col>
                           </b-row>
                         </div>
@@ -473,24 +410,22 @@
 
           <!-- selected Chat  -->
           <b-col
-            v-if="newMsg == false && info == false"
+            v-if="newMsg == false && info == false && !rightSide"
             class="p-0 back-image"
-            cols="12"
-            xl="8"
-            style="margin-right: 14px"
           >
             <div>
               <div class="chat-nav shadow">
-                <b-row class="mobile">
-                  <b-col class="col-1">
+                <b-row class="desk" v-if="chatSelected.active">
+                  <b-col class="col-1 mt-3 ma-4">
                     <b-icon
                       @click="showMessages(true)"
-                      icon="arrow-left"
+                      icon="arrow-left-square-fill"
+                      font-scale="1"
                       aria-hidden="true"
                       class="primary"
                     ></b-icon>
                   </b-col>
-                  <b-col class="col-3">
+                  <b-col class="col-3" @click="info = true">
                     <b-avatar
                       variant="primary"
                       :src="
@@ -504,46 +439,11 @@
                     ></b-avatar>
                   </b-col>
 
-                  <b-col class="detale">
-                    <h6>{{ chatSelected.name }}</h6>
-                    <!-- <small>Online </small> -->
-                  </b-col>
-                  <b-col cols="3">
-                    <b-row class="mt-3">
-                      <b-col class="col-3">
-                        <b-icon icon="search" class="primary"></b-icon>
-                      </b-col>
-                      <b-col class="col-3">
-                        <b-icon
-                          icon="three-dots"
-                          @click="showInfo(true)"
-                          aria-hidden="true"
-                          class="primary"
-                        ></b-icon>
-                      </b-col>
-                    </b-row>
-                  </b-col>
-                </b-row>
-                <b-row class="desk" v-if="chatSelected.active">
-                  <b-col class="col-2" @click="info = true">
-                    <b-avatar
-                      variant="primary"
-                      :src="
-                        chatSelected.chat
-                          ? chatSelected.chat.picture
-                            ? chatSelected.chat.picture
-                            : chatSelected.chat.image
-                          : ''
-                      "
-                      size="50"
-                    ></b-avatar>
-                  </b-col>
-
-                  <b-col class="detail" @click="info = true">
-                    <h5>{{ chatSelected.name }}</h5>
+                  <b-col class="col-sm-5" @click="info = true">
+                    <h4>{{ chatSelected.name }}</h4>
                     <!-- <p>{{ chatSelected }}</p> -->
                     <p
-                      v-if="groupMembers"
+                      v-if="groupMembers && type == 'group'"
                       class="d-inline-block text-truncate"
                       style="max-width: 200px"
                     >
@@ -556,97 +456,34 @@
                     </p>
                     <!-- <p>Online</p> -->
                   </b-col>
-                  <b-col class="col-4">
-                    <input
-                      v-model="chatSearchKeyword"
-                      @keypress.enter="
-                        histBizToBiz({
-                          type: type,
-                          receiverID: chatId,
-                          keyword: chatSearchKeyword,
-                        })
-                      "
-                      type="text"
-                      class="form-control input-background mb-6 pb-6"
-                      :placeholder="$t('businessowner.Search_message')"
-                    />
-                  </b-col>
-                  <b-col class="col-3">
-                    <b-row class="mt-3 ml-5">
-                      <b-col class="col-3">
-                        <b-icon
-                          @click="
-                            histBizToBiz({
-                              type: type,
-                              receiverID: chatId,
-                              keyword: chatSearchKeyword,
-                            })
-                          "
-                          class="msg-icon primary icon-size"
-                          icon="search"
-                          style="cursor: pointer"
-                        ></b-icon>
-                      </b-col>
 
-                      <b-col>
-                        <b-dropdown
-                          id="dropdown-1"
-                          class="mt-md-0 drop-hover"
-                          no-caret
-                          dropleft
-                          variant="outline-light"
-                        >
-                          <template #button-content>
-                            <b-icon-three-dots
-                              class="primary"
-                            ></b-icon-three-dots>
-                          </template>
-
-                          <b-dropdown-item-button @click="showInfo(true)">
-                            {{ $t("businessowner.View_Profile") }}
-                          </b-dropdown-item-button>
-
-                          <b-dropdown-item-button>
-                            {{ $t("businessowner.Disable_Notification") }}
-                          </b-dropdown-item-button>
-
-                          <b-dropdown-item-button>
-                            {{ $t("businessowner.Delete_Contact") }}
-                          </b-dropdown-item-button>
-
-                          <b-dropdown-item-button>
-                            {{ $t("businessowner.Delete_Chat") }}
-                          </b-dropdown-item-button>
-                        </b-dropdown>
-                      </b-col>
-                    </b-row>
+                  <b-col class="col-2 col-2 text-center mr-6">
+                    <b-icon
+                      v-b-toggle.collapse-1
+                      class="msg-icon primary icon-size"
+                      icon="search"
+                      style="cursor: pointer"
+                    ></b-icon>
                   </b-col>
                 </b-row>
-                <!-- <b-row class="desk" v-else>
-                  <b-col class="col-2" @click="info = true">
-                    <b-avatar
-                      variant="primary"
-                      src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
-                      size="60"
-                    ></b-avatar>
-                  </b-col>
-                  <b-col class="detail" @click="info = true">
-                    <h5>General Chat</h5>
-                     <p>Online({{online.length}})</p> 
-                  </b-col>
-                  <b-col class="col-4">
-                    <b-row class="mt-3 ml-5">
-                      <b-col class="col-3">
-                        <b-icon
-                          class="msg-icon primary icon-size"
-                          icon="search"
-                        ></b-icon>
-                      </b-col>
-                    </b-row>
-                  </b-col>
-                </b-row> -->
               </div>
-
+              <b-collapse id="collapse-1" class="mt-2">
+                <b-card style="margin-top: -15px">
+                  <input
+                    v-model="chatSearchKeyword"
+                    @keypress.enter="
+                      histBizToBiz({
+                        type: type,
+                        receiverID: chatId,
+                        keyword: chatSearchKeyword,
+                      })
+                    "
+                    type="text"
+                    class="form-control input-background mb-6 pb-6"
+                    placeholder="Search... press enter"
+                  />
+                </b-card>
+              </b-collapse>
               <section
                 v-if="chatSelected.active"
                 class="chats"
@@ -664,15 +501,13 @@
                   <!-- {{ chat }}<br /> -->
                   <div
                     v-if="
-                      currentBiz.id != chat.sender_business_id &&
+                      currentBiz.id != chat.sender_network_id &&
                       currentBiz.id != chat.businessID
                     "
                   >
                     <b-row class="p-4">
                       <b-col>
-                        <b v-if="type == 'group'">
-                          {{ getName(chat) }}
-                        </b>
+                        <b v-if="type == 'group'"> {{ getName(chat) }} </b>
                         <p
                           v-if="chat.attachment"
                           class="msg-text mt-0 text"
@@ -688,7 +523,7 @@
                           <span v-if="chat.post_details">
                             <small class="text-dark font-italic text-right"
                               ><i class="fas fa-share fa-xs pl-1"></i>Shared
-                              post</small
+                              {{ $t("general.post") }}</small
                             ><br />
                             <span class="font-italic">{{
                               chat.post_details.content
@@ -697,7 +532,9 @@
                             <hr />
                           </span>
                           {{ chat.message }}
-                          <small class="float-right mt-2 text-white pr-1 pt-1">
+                          <small
+                            class="float-right mt-2 text-white pr-1 pt-1 small"
+                          >
                             {{ getCreatedAt(chat.created_at) }}
                           </small>
                         </p>
@@ -720,8 +557,8 @@
                           </span>
                           <span v-if="chat.post_details">
                             <small class="text-dark font-italic"
-                              ><i class="fas fa-share fa-xs pl-1"></i>Shared
-                              post</small
+                              ><i class="fas fa-share fa-xs pl-1"></i
+                              >{{ $t("general.Shared_post") }}</small
                             >
                             <br />
                             <span class="font-italic">{{
@@ -730,7 +567,9 @@
                             <hr />
                           </span>
                           {{ chat.message }}
-                          <small class="float-right mt-2 text-white pr-1 pt-1">
+                          <small
+                            class="float-right mt-2 text-white pr-1 pt-1 small"
+                          >
                             {{ getCreatedAt(chat.created_at) }}
                           </small>
                         </p>
@@ -740,37 +579,1445 @@
                 </div>
               </section>
 
-              <!-- <section v-else class="chats" style="margin-left: 1px" ref="feed">
-                <div v-for="(message, index) in messages" :key="index">
-                  <div v-if="message.sender != currentUser.user.name">
+              <div class="bottom">
+                <b-row class="text-center">
+                  <b-alert
+                    :show="this.filePreview"
+                    class="mt-4"
+                    variant="warning"
+                    dismissible
+                    @dismissed="dismissed"
+                  >
+                    <span
+                      style="cursor: pointer !important"
+                      href=""
+                      @click="$bvModal.show('preview-file')"
+                    >
+                      {{ this.file.name
+                      }}<b class="pl-2 text-bold">{{
+                        convert(this.file.size)
+                      }}</b>
+                    </span>
+                  </b-alert>
+                </b-row>
+                <b-row v-if="!checked">
+                  <b-col cols="2" class="p-0">
+                    <label for="file">
+                      <b-icon
+                        for="file"
+                        class="
+                          msg-icon
+                          primary
+                          icon-size icon-top
+                          float-right
+                          text-right
+                        "
+                        icon="paperclip"
+                      >
+                      </b-icon>
+                      <i class="ion-images"></i>
+                      <input
+                        style="display: none"
+                        type="file"
+                        id="file"
+                        ref="file"
+                        @change="handleFileUpload()"
+                      />
+                    </label>
+                  </b-col>
+                  <b-col cols="8" class="p-0">
+                    <small v-if="nameSpace.status" class="pr-8 text-danger">
+                      {{ nameSpace.text }}
+                    </small>
+                    <b-form-input
+                      id="textarea"
+                      v-model="input"
+                      @keypress.enter="send"
+                      class="input-background"
+                      :placeholder="$t('businessowner.Enter_a_message')"
+                      rows="0"
+                      max-rows="3"
+                    ></b-form-input>
+
+                    <div class="wrapper">
+                      <emoji-picker @emoji="append" :search="search">
+                        <div
+                          class="emoji-invoker"
+                          slot="emoji-invoker"
+                          slot-scope="{ events: { click: clickEvent } }"
+                          @click.stop="clickEvent"
+                        >
+                          <svg
+                            height="24"
+                            viewBox="0 0 24 24"
+                            width="24"
+                            class="svgg"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path d="M0 0h24v24H0z" fill="none" />
+                            <path
+                              d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"
+                            />
+                          </svg>
+                        </div>
+                        <div
+                          slot="emoji-picker"
+                          slot-scope="{ emojis, insert, display }"
+                        >
+                          <div
+                            class="emoji-picker"
+                            :style="{
+                              top: display.y + 'px',
+                              left: display.x + 'px',
+                            }"
+                          >
+                            <div class="emoji-picker__search">
+                              <input type="text" v-model="search" v-focus />
+                            </div>
+                            <div>
+                              <div
+                                v-for="(emojiGroup, category) in emojis"
+                                :key="category"
+                              >
+                                <h5>{{ category }}</h5>
+                                <div class="emojis">
+                                  <span
+                                    v-for="(emoji, emojiName) in emojiGroup"
+                                    :key="emojiName"
+                                    @click="insert(emoji)"
+                                    :title="emojiName"
+                                    >{{ emoji }}</span
+                                  >
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </emoji-picker>
+                    </div>
+                  </b-col>
+
+                  <b-col cols="2" class="p-0">
+                    <b-icon
+                      @click="send"
+                      class="ml-12 pl-12 msg-icon primary icon-size icon-top"
+                      icon="cursor-fill"
+                    ></b-icon>
+                  </b-col>
+                </b-row>
+
+                <!-- <p v-if="checked" class="ml-5">
+                  You have blocked messages and calls from this user.
+                  <b-link @click="showInfo(true)">Unblock Now</b-link>
+                </p> -->
+              </div>
+            </div>
+          </b-col>
+          <!-- End selected Chat -->
+          <b-col v-if="info">
+            <div class="info-nav">
+              <b-button class="primary-bg" @click="showInfo(false)">
+                <fas-icon :icon="['fas', 'arrow-left']" />
+              </b-button>
+              <span class="cnt-info"
+                >{{ $t("businessowner.Contact_Info") }}
+              </span>
+            </div>
+            <div class="info-bottom">
+              <b-avatar
+                class="info-avatar"
+                variant="primary"
+                :src="chatSelected.logo_path"
+                size="200"
+              ></b-avatar>
+              <div class="info-detail">
+                <h1 class="info-name">{{ chatSelected.name }}</h1>
+                <!-- <b-link class="primary">{{
+                  $t("businessowner.View_Profile")
+                }}</b-link> -->
+                <b-row v-if="type == 'group'" class="justify-content-md-center">
+                  <b-col cols="12" md="auto">
+                    <table class="info-name">
+                      <tr class="text-center">
+                        <th>
+                          <u> Members </u>
+                        </th>
+                      </tr>
+
+                      <tr v-for="(member, index) in groupMembers" :key="index">
+                        <td>{{ getName(member) }}</td>
+                      </tr>
+                    </table>
+                  </b-col>
+                </b-row>
+              </div>
+            </div>
+            <div>
+              <ul>
+                <li>{{ $t("businessowner.Options") }}</li>
+                <li>
+                  <b-row
+                    ><b-col> {{ $t("businessowner.Block_Messages") }} </b-col>
+                    <b-col>
+                      <b-form-checkbox
+                        v-model="checked"
+                        name="check-button"
+                        class="primary"
+                        switch
+                      >
+                      </b-form-checkbox>
+                    </b-col>
+                  </b-row>
+                </li>
+                <li>{{ $t("businessowner.Report_User") }}</li>
+              </ul>
+            </div>
+          </b-col>
+
+          <!-- New message -->
+          <b-col
+            v-if="newMsg == true && info == false"
+            class="p-0 col-xl-8 col-12 back-image"
+            style="border: 1px solid gray"
+          >
+            <div class="new-msg back-image" style="margin-right: 07px">
+              <b-row>
+                <b-col class="col-1 mt-3 ma-3" v-if="screenX < 930">
+                  <b-icon
+                    @click="showMessages(true)"
+                    icon="arrow-left-square-fill"
+                    font-scale="1"
+                    aria-hidden="true"
+                    class="primary"
+                  ></b-icon>
+                </b-col>
+                <b-col>
+                  <b-form-input
+                    id="textarea"
+                    v-model="newSearchQuery"
+                    class="input-background"
+                    style="width: 100%"
+                    :placeholder="
+                      $t('businessowner.Type_the_name_of_person_or_Business')
+                    "
+                    @keydown.enter="getList(newSearchQuery)"
+                  ></b-form-input>
+                </b-col>
+              </b-row>
+              <b-row>
+                <b-col>
+                  <div class="new-msg-filter-list">
+                    <table class="table">
+                      <b-row v-if="bulk" style="overflow-x: hidden !important">
+                        <!-- business: {{ selectedBusiness }} Member:{{
+                            selectedPeople
+                          }}
+                          Network: {{ selectedNetwork }} -->
+                        <b-tabs
+                          v-model="tabMemberType"
+                          content-class=" ma-4 pt-6"
+                          fill
+                          pills
+                          card
+                        >
+                          <b-tab :title="$t('general.All')" @click="getAll()">
+                            <div v-if="loader" class="text-center">
+                              <b-spinner
+                                variant="primary"
+                                label="Spinning"
+                                class="centralizer"
+                              ></b-spinner>
+                            </div>
+                            <h5>{{ $t("businessowner.People") }}</h5>
+                            <div v-if="allUsers">
+                              <tr
+                                v-for="(biz, index) in allUsers"
+                                :key="index"
+                                class="p-2 message"
+                              >
+                                <td>
+                                  <b-form-group>
+                                    <b-form-checkbox-group
+                                      id="checkbox-group-2"
+                                      v-model="selectedPeople"
+                                      name="flavour-2"
+                                    >
+                                      <b-form-checkbox
+                                        :id="index + '_id'"
+                                        :name="biz.name"
+                                        :value="biz.id"
+                                      >
+                                        <b-avatar
+                                          class="d-inline-block"
+                                          variant="primary"
+                                          size="30"
+                                        ></b-avatar>
+                                        <span class="bold">
+                                          {{ biz.name }}
+                                        </span>
+                                      </b-form-checkbox>
+                                    </b-form-checkbox-group>
+                                  </b-form-group>
+                                </td>
+                              </tr>
+                            </div>
+                            <hr />
+                            <h5>{{ $t("general.Business") }}</h5>
+                            <div v-if="allBusiness">
+                              <tr
+                                v-for="(biz, index) in allBusiness"
+                                :key="index"
+                                class="p-2 message"
+                              >
+                                <td>
+                                  <b-form-group>
+                                    <b-form-checkbox-group
+                                      id="checkbox-group-2"
+                                      v-model="selectedBusiness"
+                                      name="flavour-2"
+                                    >
+                                      <b-form-checkbox
+                                        :id="index + '_id_biz'"
+                                        :name="biz.name"
+                                        :value="biz.id"
+                                      >
+                                        <b-avatar
+                                          class="d-inline-block"
+                                          variant="primary"
+                                          size="30"
+                                        ></b-avatar>
+                                        <span class="bold">
+                                          {{ biz.name }}
+                                        </span>
+                                      </b-form-checkbox>
+                                    </b-form-checkbox-group>
+                                  </b-form-group>
+                                </td>
+                              </tr>
+                            </div>
+                            <hr />
+                            <h5>{{ $t("general.Network") }}</h5>
+                            <div v-if="allNetworks">
+                              <tr
+                                v-for="(biz, index) in allNetworks"
+                                :key="index"
+                                class="p-2 message"
+                              >
+                                <td>
+                                  <b-form-group>
+                                    <b-form-checkbox-group
+                                      id="checkbox-group-2"
+                                      v-model="selectedNetwork"
+                                      name="flavour-2"
+                                    >
+                                      <b-form-checkbox
+                                        :id="index + '_id_net'"
+                                        :name="biz.name"
+                                        :value="biz.id"
+                                      >
+                                        <b-avatar
+                                          class="d-inline-block"
+                                          variant="primary"
+                                          size="30"
+                                        ></b-avatar>
+                                        <span class="bold">
+                                          {{ biz.name }}
+                                        </span>
+                                      </b-form-checkbox>
+                                    </b-form-checkbox-group>
+                                  </b-form-group>
+                                </td>
+                              </tr>
+                            </div>
+                            <hr />
+                            <h5>{{ $t("general.Editors") }}</h5>
+                            <div v-if="allEditors">
+                              <tr
+                                v-for="(biz, index) in allEditors"
+                                :key="index"
+                                class="p-2 message"
+                              >
+                                <td>
+                                  <b-form-group>
+                                    <b-form-checkbox-group
+                                      id="checkbox-group-2"
+                                      v-model="selectedEditor"
+                                      name="flavour-2"
+                                    >
+                                      <b-form-checkbox
+                                        :id="index + '_id_edit'"
+                                        :name="biz.name"
+                                        :value="biz.id"
+                                      >
+                                        <b-avatar
+                                          class="d-inline-block"
+                                          variant="primary"
+                                          size="30"
+                                        ></b-avatar>
+                                        <span class="bold">
+                                          {{ biz.name }}
+                                        </span>
+                                      </b-form-checkbox>
+                                    </b-form-checkbox-group>
+                                  </b-form-group>
+                                </td>
+                              </tr>
+                            </div>
+                            <hr />
+                            <h5>{{ $t("general.Members") }}</h5>
+                            <div v-if="allMembers">
+                              <tr
+                                v-for="(biz, index) in allMembers"
+                                :key="index"
+                                class="p-2 message"
+                              >
+                                <td>
+                                  <b-form-group>
+                                    <b-form-checkbox-group
+                                      id="checkbox-group-2"
+                                      v-model="selectedMember"
+                                      name="flavour-2"
+                                    >
+                                      <b-form-checkbox
+                                        :id="index + '_id_mem'"
+                                        :name="biz.name"
+                                        :value="biz.id"
+                                      >
+                                        <b-avatar
+                                          class="d-inline-block"
+                                          variant="primary"
+                                          size="30"
+                                        ></b-avatar>
+                                        <span class="bold">
+                                          {{ biz.fullname }}
+                                        </span>
+                                      </b-form-checkbox>
+                                    </b-form-checkbox-group>
+                                  </b-form-group>
+                                </td>
+                              </tr>
+                            </div>
+                            <hr />
+                          </b-tab>
+                          <b-tab
+                            :title="$t('general.People')"
+                            @click="getUsers()"
+                          >
+                            <b-row>
+                              <b-col>
+                                <b-card>
+                                  <b-row class="text-center">
+                                    <b-col>
+                                      <b-form-group>
+                                        <b-form-radio-group
+                                          id="radio-group-people"
+                                          v-model="selectedselectOption"
+                                          :options="selectOptions"
+                                          name="radio-options-people"
+                                          @change="selectedAllMulty"
+                                        ></b-form-radio-group>
+                                      </b-form-group>
+                                    </b-col>
+                                  </b-row>
+                                </b-card>
+                              </b-col>
+                            </b-row>
+                            <div v-if="loader" class="text-center">
+                              <b-spinner
+                                variant="primary"
+                                label="Spinning"
+                                class="centralizer"
+                              ></b-spinner>
+                            </div>
+
+                            <div v-if="bizs.length">
+                              <tr
+                                v-for="(biz, index) in bizs"
+                                :key="index"
+                                class="p-2 message"
+                              >
+                                <td>
+                                  <b-form-group>
+                                    <b-form-checkbox-group
+                                      id="checkbox-group-2"
+                                      v-model="selectedPeople"
+                                      name="flavour-2"
+                                    >
+                                      <b-form-checkbox
+                                        :id="index + '_id-user'"
+                                        :name="biz.name"
+                                        :value="biz.id"
+                                      >
+                                        <b-avatar
+                                          class="d-inline-block"
+                                          variant="primary"
+                                          size="30"
+                                        ></b-avatar>
+                                        <span class="bold">
+                                          {{ biz.name }}
+                                        </span>
+                                      </b-form-checkbox>
+                                    </b-form-checkbox-group>
+                                  </b-form-group>
+                                </td>
+                              </tr>
+                            </div>
+                            <h2 v-else>{{ $t("general.No_data") }}</h2>
+
+                            <!-- End Chats -->
+                          </b-tab>
+                          <b-tab
+                            :title="$t('general.Business')"
+                            @click="getBizs()"
+                          >
+                            <b-row>
+                              <b-col>
+                                <b-card>
+                                  <b-row class="text-center">
+                                    <b-col>
+                                      <b-form-group>
+                                        <b-form-radio-group
+                                          id="radio-group-business"
+                                          v-model="selectedselectOption"
+                                          :options="selectOptions"
+                                          name="radio-options-business"
+                                          @change="selectedAllMulty"
+                                        ></b-form-radio-group>
+                                      </b-form-group>
+                                    </b-col>
+                                  </b-row>
+                                </b-card>
+                              </b-col>
+                            </b-row>
+                            <div v-if="loader" class="text-center mt-12 pt-12">
+                              <b-spinner
+                                variant="primary"
+                                label="Spinning"
+                                class="centralizer"
+                              ></b-spinner>
+                            </div>
+                            <div v-if="bizs.length">
+                              <tr
+                                v-for="(elm, index) in bizs"
+                                :key="index"
+                                class="p-2 message"
+                              >
+                                <td>
+                                  <b-form-checkbox-group
+                                    id="checkbox-group-3"
+                                    v-model="selectedBusiness"
+                                    name="flavour-2"
+                                  >
+                                    <b-form-checkbox
+                                      :id="index + '_id-busid'"
+                                      :name="elm.name"
+                                      :value="elm.id"
+                                      :unchecked-value="false"
+                                    >
+                                      <!-- @input="selectedMember(elm)" -->
+                                      <b-avatar
+                                        class="d-inline-block"
+                                        variant="primary"
+                                        size="30"
+                                      ></b-avatar>
+                                      <span class="bold">
+                                        {{ elm.name }}
+                                      </span>
+                                    </b-form-checkbox>
+                                  </b-form-checkbox-group>
+                                </td>
+                              </tr>
+                            </div>
+                            <h2 v-else>{{ $t("general.No_Business") }}</h2>
+
+                            <!-- End Chats -->
+                          </b-tab>
+                          <b-tab
+                            :title="$t('general.Network')"
+                            @click="getNetworks()"
+                          >
+                            <b-row>
+                              <b-col>
+                                <b-card>
+                                  <b-row class="text-center">
+                                    <b-col>
+                                      <b-form-group>
+                                        <b-form-radio-group
+                                          id="radio-group-1"
+                                          v-model="selectedselectOption"
+                                          :options="selectOptions"
+                                          name="radio-options"
+                                          @change="selectedAllMulty"
+                                        ></b-form-radio-group>
+                                      </b-form-group>
+                                    </b-col>
+                                  </b-row>
+                                </b-card>
+                              </b-col>
+                            </b-row>
+
+                            <div v-if="loader" class="text-center">
+                              <b-spinner
+                                variant="primary"
+                                label="Spinning"
+                                class="centralizer"
+                              ></b-spinner>
+                            </div>
+                            <div v-if="bizs.length">
+                              <tr
+                                v-for="(biz, index) in bizs"
+                                :key="index"
+                                class="p-2 message"
+                              >
+                                <td>
+                                  <b-form-group>
+                                    <b-form-checkbox-group
+                                      id="checkbox-group-2"
+                                      v-model="selectedNetwork"
+                                      name="flavour-2"
+                                    >
+                                      <b-form-checkbox
+                                        :id="index + '_id-netw'"
+                                        :name="biz.name"
+                                        :value="biz.id"
+                                      >
+                                        <b-avatar
+                                          class="d-inline-block"
+                                          variant="primary"
+                                          size="30"
+                                        ></b-avatar>
+                                        <span class="bold">
+                                          {{ biz.name }}
+                                        </span>
+                                      </b-form-checkbox>
+                                    </b-form-checkbox-group>
+                                  </b-form-group>
+                                </td>
+                              </tr>
+                            </div>
+                            <h2 v-else>{{ $t("general.No_Network") }}</h2>
+
+                            <!-- End Chats -->
+                          </b-tab>
+
+                          <b-tab
+                            :title="$t('general.Editors')"
+                            @click="getEditors()"
+                          >
+                            <div v-if="loader" class="text-center">
+                              <b-spinner
+                                variant="primary"
+                                label="Spinning"
+                                class="centralizer"
+                              ></b-spinner>
+                            </div>
+                            <div v-if="bizs.length">
+                              <tr
+                                v-for="(biz, index) in bizs"
+                                :key="index"
+                                class="p-2 message"
+                              >
+                                <td>
+                                  <b-form-group>
+                                    <b-form-checkbox-group
+                                      id="checkbox-group-2"
+                                      v-model="selectedEditor"
+                                      name="flavour-2"
+                                    >
+                                      <b-form-checkbox
+                                        :id="index + '_id-edit'"
+                                        :name="biz.name"
+                                        :value="biz.id"
+                                      >
+                                        <b-avatar
+                                          class="d-inline-block"
+                                          variant="primary"
+                                          size="30"
+                                        ></b-avatar>
+                                        <span class="bold">
+                                          {{ biz.name }}
+                                        </span>
+                                      </b-form-checkbox>
+                                    </b-form-checkbox-group>
+                                  </b-form-group>
+                                </td>
+                              </tr>
+                            </div>
+                            <h2 v-else>{{ $t("general.No_Editor") }}</h2>
+
+                            <!-- End Chats -->
+                          </b-tab>
+                          <b-tab title="Members" @click="getNetworkMembers()">
+                            <!-- Length :{{ bizs }} -->
+
+                            <div v-if="loader" class="text-center">
+                              <b-spinner
+                                variant="primary"
+                                label="Spinning"
+                                class="centralizer"
+                              ></b-spinner>
+                            </div>
+                            <div v-if="bizs.length">
+                              <tr
+                                v-for="(biz, index) in bizs"
+                                :key="index"
+                                class="p-2 message"
+                              >
+                                <td>
+                                  <b-form-group>
+                                    <b-form-checkbox-group
+                                      id="checkbox-group-2"
+                                      v-model="selectedMember"
+                                      name="flavour-2"
+                                    >
+                                      <b-form-checkbox
+                                        :id="index + '_id-member'"
+                                        :name="biz.name"
+                                        :value="biz.id"
+                                      >
+                                        <b-avatar
+                                          class="d-inline-block"
+                                          variant="primary"
+                                          size="30"
+                                        ></b-avatar>
+                                        <span class="bold">
+                                          {{ biz.fullname }}
+                                        </span>
+                                      </b-form-checkbox>
+                                    </b-form-checkbox-group>
+                                  </b-form-group>
+                                </td>
+                              </tr>
+                            </div>
+
+                            <h2 v-else>{{ $t("general.No_Member") }}</h2>
+
+                            <!-- End Chats -->
+                          </b-tab>
+                        </b-tabs>
+                      </b-row>
+                      <!-- single selection -->
+                      <div
+                        v-else
+                        style="
+                          padding-left: 10px !important;
+                          overflow-x: hidden !important;
+                        "
+                      >
+                        <h2>{{ type.toUpperCase() }}</h2>
+                        <br />
+                        <div v-if="newChatLoader" class="text-center">
+                          <b-spinner
+                            variant="primary"
+                            label="Spinning"
+                            class="centralizer"
+                          ></b-spinner>
+                        </div>
+                        <table v-else class="table">
+                          <tbody v-if="type == 'user'">
+                            <tr
+                              v-for="(user, index) in users"
+                              :key="index"
+                              class="p-2 message"
+                              @click="
+                                selectedChat({
+                                  type: 'user',
+                                  chat: user,
+                                  id: user.id,
+                                })
+                              "
+                            >
+                              <td>
+                                <b-avatar
+                                  class="d-inline-block"
+                                  variant="primary"
+                                  size="30"
+                                  :src="user.profile_picture"
+                                ></b-avatar>
+                                <span class="bold"> {{ user.name }} </span>
+                              </td>
+                            </tr>
+                          </tbody>
+                          <tbody v-if="type == 'business'">
+                            <tr
+                              v-for="(biz, index) in allBizs"
+                              :key="index"
+                              class="p-2 message"
+                              @click="
+                                selectedChat({
+                                  type: 'business',
+                                  chat: biz,
+                                  id: biz.id,
+                                })
+                              "
+                            >
+                              <td>
+                                <b-avatar
+                                  class="d-inline-block"
+                                  variant="primary"
+                                  size="30"
+                                  :src="
+                                    getImage({
+                                      type: 'business',
+                                      image: biz.logo_path,
+                                    })
+                                  "
+                                ></b-avatar>
+                                <span class="bold"> {{ biz.name }} </span>
+                              </td>
+                            </tr>
+                          </tbody>
+                          <tbody v-if="type == 'network'">
+                            <tr
+                              v-for="(network, index) in nets"
+                              :key="index"
+                              class="p-2 message"
+                              @click="
+                                selectedChat({
+                                  type: 'network',
+                                  chat: network,
+                                  id: network.id,
+                                })
+                              "
+                            >
+                              <td>
+                                <b-avatar
+                                  class="d-inline-block"
+                                  variant="primary"
+                                  size="30"
+                                  :src="
+                                    getImage({
+                                      type: 'network',
+                                      image: network.image,
+                                    })
+                                  "
+                                ></b-avatar>
+                                <span class="bold"> {{ network.name }} </span>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </table>
+                  </div>
+                  <b-button
+                    v-if="bulk"
+                    block
+                    variant="primary"
+                    @click="$bvModal.show('group-name')"
+                    >{{ $t("businessowner.Next") }}</b-button
+                  >
+                  <!-- <b-button
+                      class="float-left"
+                      variant="primary"
+                      @click="selectedMultyChat()"
+                      :disabled="selectedMulty.length ? false : true"
+                      ><b-icon
+                        icon="arrow-left"
+                        class="text-bold"
+                        variant="white"
+                      ></b-icon
+                    ></b-button> -->
+                </b-col>
+              </b-row>
+            </div>
+          </b-col>
+        </b-row>
+      </div>
+      <!-- ---- -->
+      <!-- Desktop -->
+      <div v-else>
+        <b-row class="chat-box">
+          <b-col class="col-4 pr-0">
+            <div class="right">
+              <b-row>
+                <b-col class="p-2">
+                  <b-avatar
+                    class="d-inline-block profile-pic"
+                    variant="primary"
+                    :src="currentBiz.profile_picture"
+                    square
+                  ></b-avatar>
+                </b-col>
+                <b-col>
+                  <h1 class="mt-4 title text-bold">
+                    {{
+                      currentBiz.name
+                        ? currentBiz.name.split(" ")[0]
+                        : "loading..."
+                    }}
+                  </h1>
+                </b-col>
+                <b-col>
+                  <!-- <b-icon
+                    @click="newMessage(true)"
+                    class="new-message primary icon-size float-right"
+                    icon="pencil-square"
+                  ></b-icon> -->
+                  <b-dropdown
+                    variant="white"
+                    toggle-class="text-decoration-none"
+                    no-caret
+                    class="new-message"
+                  >
+                    <template #button-content>
+                      <b-icon
+                        class="primary icon-size float-right"
+                        icon="pencil-square"
+                      ></b-icon>
+                    </template>
+                    <b-dropdown-item
+                      @click="newMessage({ newmsg: true, bulk: false })"
+                    >
+                      {{ $t("businessowner.New_Chat") }}</b-dropdown-item
+                    >
+                    <b-dropdown-item
+                      @click="newMessage({ newmsg: true, bulk: true })"
+                    >
+                      {{ $t("businessowner.New_Group_Chat") }}
+                    </b-dropdown-item>
+                  </b-dropdown>
+                </b-col>
+              </b-row>
+
+              <b-row class="mt-12">
+                <b-col>
+                  <b-tabs
+                    v-model="tabIndex"
+                    content-class="mt-12 ma-4 pt-6"
+                    fill
+                  >
+                    <b-tab
+                      :title="$t('businessowner.Users')"
+                      @click="getChatList({ type: 'user' })"
+                    >
+                      <!-- Users Chats Available  -->
+                      <b-row class="pa-6">
+                        <b-col class="mb-6 pb-6">
+                          <input
+                            v-model="searchQuery"
+                            class="form-control input-background"
+                            :placeholder="$t('general.Search_chat_list')"
+                            @keypress.enter="
+                              getChatList({
+                                type: 'user',
+                                keyword: searchQuery,
+                              })
+                            "
+                          />
+                        </b-col>
+                      </b-row>
+
+                      <div class="messages">
+                        <div v-if="loader" class="text-center">
+                          <b-spinner
+                            variant="primary"
+                            label="Spinning"
+                            class="centralizer"
+                          ></b-spinner>
+                        </div>
+                        <div v-if="chatList.length > 0">
+                          <b-row
+                            v-for="(chat, index) in chatList"
+                            :key="index"
+                            :class="[
+                              'p-2 message ',
+                              {
+                                messageSelected:
+                                  (chat.sender_id
+                                    ? chat.sender_id
+                                    : chat.receiver_id) ==
+                                  (chatSelected.clickedId != null
+                                    ? chatSelected.clickedId
+                                    : false)
+                                    ? chatSelected.active
+                                    : false,
+                              },
+                            ]"
+                            @click="
+                              selectedChat({
+                                type: 'user',
+                                chat: chat,
+                                id: chat.sender_id
+                                  ? chat.sender_id
+                                  : chat.receiver_id,
+                              })
+                            "
+                          >
+                            <!-- <small class="small">{{ chat }}</small> -->
+                            <b-col class="col-9">
+                              <span style="display: inline-flex">
+                                <b-avatar
+                                  class="d-inline-block profile-pic"
+                                  variant="primary"
+                                  :src="
+                                    getImage({
+                                      type: 'user',
+                                      image: chat.profile_picture,
+                                    })
+                                  "
+                                ></b-avatar>
+
+                                <h6 class="mt-2 d-inline-block ml-2">
+                                  <b class="bold"> {{ chat.name }}</b>
+                                  <p class="duration">{{ chat.message }}</p>
+                                </h6>
+                              </span>
+                            </b-col>
+
+                            <b-col class="col-3 text-center">
+                              <small class="text-center small">
+                                {{ getCreatedAt(chat.created_at) }}
+                              </small>
+                              <!-- <p class="text-center">
+                              <b-badge variant="info">
+                                {{ chat.receiver_id }}
+                              </b-badge>
+                            </p> -->
+                            </b-col>
+                          </b-row>
+                        </div>
+                        <h2 v-else>{{ $t("businessowner.No_chat") }}</h2>
+                      </div>
+
+                      <!-- End Chats -->
+                    </b-tab>
+                    <b-tab
+                      :title="$t('businessowner.Business')"
+                      @click="getChatList({ type: 'business' })"
+                    >
+                      <!-- Business Chats Available  -->
+                      <b-row class="pa-6">
+                        <b-col class="mb-6 pb-6">
+                          <input
+                            v-model="searchQuery"
+                            class="form-control input-background"
+                            :placeholder="$t('general.Search_chat_list')"
+                            @keypress.enter="
+                              getChatList({
+                                type: 'business',
+                                keyword: searchQuery,
+                              })
+                            "
+                          />
+                        </b-col>
+                      </b-row>
+
+                      <div class="messages">
+                        <div v-if="loader" class="text-center">
+                          <b-spinner
+                            variant="primary"
+                            label="Spinning"
+                            class="centralizer"
+                          ></b-spinner>
+                        </div>
+                        <div v-if="chatList.length > 0">
+                          <b-row
+                            v-for="(chat, index) in chatList"
+                            :key="index"
+                            :class="[
+                              'p-2 message ',
+                              {
+                                messageSelected:
+                                  (chat.sender_business_id
+                                    ? chat.sender_business_id
+                                    : chat.receiver_business_id) ==
+                                  (chatSelected.clickedId != null
+                                    ? chatSelected.clickedId
+                                    : false)
+                                    ? chatSelected.active
+                                    : false,
+                              },
+                            ]"
+                            @click="
+                              selectedChat({
+                                type: 'business',
+                                chat: chat,
+                                id: chat.sender_business_id
+                                  ? chat.sender_business_id
+                                  : chat.receiver_business_id,
+                              })
+                            "
+                          >
+                            <!-- <small class="small">{{ chat }}</small> -->
+
+                            <b-col class="col-9">
+                              <span style="display: inline-flex">
+                                <b-avatar
+                                  class="d-inline-block profile-pic"
+                                  variant="primary"
+                                  :src="
+                                    getImage({
+                                      type: 'business',
+                                      image: chat.logo_path,
+                                    })
+                                  "
+                                ></b-avatar>
+
+                                <h6 class="mt-2 d-inline-block ml-2">
+                                  <b class="bold"> {{ chat.name }}</b>
+                                  <p class="duration">{{ chat.message }}</p>
+                                </h6>
+                              </span>
+                            </b-col>
+
+                            <b-col class="col-3 text-center">
+                              <small class="text-center small">
+                                {{ getCreatedAt(chat.created_at) }}
+                              </small>
+                              <!-- <p class="text-center">
+                              <b-badge variant="info">
+                                {{ chat.receiver_business_id }}
+                              </b-badge>
+                            </p> -->
+                            </b-col>
+                          </b-row>
+                        </div>
+                        <h2 v-else>{{ $t("businessowner.No_chat") }}</h2>
+                      </div>
+
+                      <!-- End Chats -->
+                    </b-tab>
+                    <b-tab
+                      :title="$t('businessowner.Network')"
+                      @click="getChatList({ type: 'network' })"
+                    >
+                      <!-- network Chats Available  -->
+                      <b-row class="pa-6">
+                        <b-col class="mb-6 pb-6">
+                          <input
+                            v-model="searchQuery"
+                            class="form-control input-background"
+                            :placeholder="$t('general.Search_chat_list')"
+                            @keypress.enter="
+                              getChatList({
+                                type: 'network',
+                                keyword: searchQuery,
+                              })
+                            "
+                          />
+                        </b-col>
+                      </b-row>
+
+                      <div class="messages">
+                        <div v-if="loader" class="text-center mt-12 pt-12">
+                          <b-spinner
+                            variant="primary"
+                            label="Spinning"
+                            class="centralizer"
+                          ></b-spinner>
+                        </div>
+                        <b-row
+                          v-else
+                          v-for="(chat, index) in chatList"
+                          :key="index"
+                          :class="[
+                            'p-2 message ',
+                            {
+                              messageSelected:
+                                (chat.sender_network_id == currentBizId
+                                  ? chat.receiver_network_id
+                                  : chat.sender_network_id) ==
+                                (chatSelected.clickedId != null
+                                  ? chatSelected.clickedId
+                                  : false)
+                                  ? chatSelected.active
+                                  : false,
+                            },
+                          ]"
+                          @click="
+                            selectedChat({
+                              type: 'network',
+                              chat: chat,
+                              id:
+                                chat.sender_network_id == currentBizId
+                                  ? chat.receiver_network_id
+                                  : chat.sender_network_id,
+                            })
+                          "
+                        >
+                          <b-col class="col-9">
+                            <span style="display: inline-flex">
+                              <b-avatar
+                                class="d-inline-block profile-pic"
+                                variant="primary"
+                                :src="chat.image"
+                              ></b-avatar>
+
+                              <h6 class="mt-2 d-inline-block ml-2">
+                                <b class="bold"> {{ chat.name }}</b>
+                                <p class="duration">{{ chat.message }}</p>
+                              </h6>
+                            </span>
+                          </b-col>
+
+                          <b-col class="col-3 text-center">
+                            <small class="text-center small">
+                              {{ getCreatedAt(chat.created_at) }}
+                            </small>
+                            <!-- <p class="text-center">
+                              <b-badge variant="info">
+                                {{ chat.receiver_network_id }}
+                              </b-badge>
+                            </p> -->
+                          </b-col>
+                        </b-row>
+                      </div>
+
+                      <!-- End Chats -->
+                    </b-tab>
+                    <b-tab
+                      :title="$t('general.Groups')"
+                      @click="getChatList({ type: 'group' })"
+                    >
+                      <!-- Group Chats Available  -->
+                      <b-row class="pa-6">
+                        <b-col class="mb-6 pb-6">
+                          <input
+                            v-model="searchQuery"
+                            class="form-control input-background"
+                            :placeholder="$t('general.Search_chat_list')"
+                            @keypress.enter="
+                              getChatList({
+                                type: 'group',
+                                keyword: searchQuery,
+                              })
+                            "
+                          />
+                        </b-col>
+                      </b-row>
+
+                      <div class="messages">
+                        <div v-if="loader" class="text-center">
+                          <b-spinner
+                            variant="primary"
+                            label="Spinning"
+                            class="centralizer"
+                          ></b-spinner>
+                        </div>
+                        <div v-if="chatList.length > 0">
+                          <b-row
+                            v-for="(chat, index) in chatList"
+                            :key="index"
+                            :class="[
+                              'p-2 message ',
+                              {
+                                messageSelected:
+                                  chat.id ==
+                                  (chatSelected.clickedId != null
+                                    ? chatSelected.clickedId
+                                    : false)
+                                    ? chatSelected.active
+                                    : false,
+                              },
+                            ]"
+                            @click="
+                              selectedChat({
+                                type: 'group',
+                                chat: chat,
+                                id: chat.id,
+                              })
+                            "
+                          >
+                            <b-col class="col-9">
+                              <span style="display: inline-flex">
+                                <b-avatar
+                                  class="d-inline-block profile-pic"
+                                  variant="primary"
+                                  :src="require('@/assets/default_group.png')"
+                                ></b-avatar>
+
+                                <h6 class="mt-2 d-inline-block ml-2">
+                                  <b class="bold"> {{ chat.groupName }}</b>
+                                  <p class="duration">{{ chat.message }}</p>
+                                </h6>
+                              </span>
+                            </b-col>
+
+                            <b-col class="col-3 text-center">
+                              <small class="text-center small">
+                                {{ getCreatedAt(chat.created_at) }}
+                              </small>
+                              <!-- <p class="text-center">
+                              <b-badge variant="info">
+                                {{ chat.receiver_business_id }}
+                              </b-badge>
+                            </p> -->
+                            </b-col>
+                          </b-row>
+                        </div>
+                        <h2 v-else>{{ $t("businessowner.No_chat") }}</h2>
+                      </div>
+
+                      <!-- End Chats -->
+                    </b-tab>
+                  </b-tabs>
+                </b-col>
+              </b-row>
+            </div>
+          </b-col>
+
+          <!-- selected Chat  -->
+          <b-col v-if="newMsg == false && info == false" class="p-0 back-image">
+            <div>
+              <div class="chat-nav shadow">
+                <b-row class="desk" v-if="chatSelected.active">
+                  <b-col class="col-3" @click="info = true">
+                    <b-avatar
+                      variant="primary"
+                      :src="
+                        chatSelected.chat
+                          ? chatSelected.chat.picture
+                            ? chatSelected.chat.picture
+                            : chatSelected.chat.image
+                          : ''
+                      "
+                      size="50"
+                    ></b-avatar>
+                  </b-col>
+
+                  <b-col class="col-5" @click="info = true">
+                    <h3>{{ chatSelected.name }}</h3>
+                    <!-- <p>{{ chatSelected }}</p> -->
+                    <p
+                      v-if="groupMembers && type == 'group'"
+                      class="d-inline-block text-truncate"
+                      style="max-width: 200px"
+                    >
+                      <span
+                        v-for="(member, index) in groupMembers"
+                        :key="index"
+                      >
+                        <small> {{ getName(member) }}, </small>
+                      </span>
+                    </p>
+                    <!-- <p>Online</p> -->
+                  </b-col>
+                  <b-col class="col-2">
+                    <b-row class="mt-3 ml-5">
+                      <b-col class="col-3">
+                        <b-icon
+                          v-b-toggle.collapse-1
+                          class="msg-icon primary icon-size"
+                          icon="search"
+                          style="cursor: pointer"
+                        ></b-icon>
+                      </b-col>
+                    </b-row>
+                  </b-col>
+                </b-row>
+              </div>
+              <b-collapse id="collapse-1" class="mt-2">
+                <b-card style="margin-top: -15px">
+                  <input
+                    v-model="chatSearchKeyword"
+                    @keypress.enter="
+                      histBizToBiz({
+                        type: type,
+                        receiverID: chatId,
+                        keyword: chatSearchKeyword,
+                      })
+                    "
+                    type="text"
+                    class="form-control input-background mb-6 pb-6"
+                    placeholder="Search... press enter"
+                  />
+                </b-card>
+              </b-collapse>
+              <section
+                v-if="chatSelected.active"
+                class="chats"
+                style="margin-left: 1px"
+                ref="feed"
+              >
+                <div v-if="loader" class="text-center mt-12 pt-12">
+                  <b-spinner
+                    variant="primary"
+                    label="Spinning"
+                    class="spinner centralizer"
+                  ></b-spinner>
+                </div>
+                <div v-else v-for="chat in chats" :key="chat.id">
+                  <!-- {{ chat }}<br /> -->
+                  <div
+                    v-if="
+                      currentBiz.id != chat.sender_network_id &&
+                      currentBiz.id != chat.businessID
+                    "
+                  >
                     <b-row class="p-4">
                       <b-col>
-                        <p class="msg-text mt-0 text">
-                          <b>{{ message.sender }}</b
-                          >: {{ message.message }}
-                          <small class="float-right mt-2 text-white pr-1 pt-1">
-                            {{ getCreatedAt(message.date) }}
+                        <b v-if="type == 'group'"> {{ getName(chat) }} </b>
+                        <p
+                          v-if="chat.attachment"
+                          class="msg-text mt-0 text"
+                        ></p>
+                        <br />
+                        <p v-if="chat.message" class="msg-text mt-0 text">
+                          <span v-if="chat.attachment">
+                            <img :src="chat.attachment" />
+                            <!-- <br />
+                            <b>{{ chat.attachment }}</b> -->
+                            <br />
+                          </span>
+                          <span v-if="chat.post_details">
+                            <small class="text-dark font-italic text-right"
+                              ><i class="fas fa-share fa-xs pl-1"></i>Shared
+                              {{ $t("general.post") }}</small
+                            ><br />
+                            <span class="font-italic">{{
+                              chat.post_details.content
+                            }}</span>
+
+                            <hr />
+                          </span>
+                          {{ chat.message }}
+                          <small
+                            class="float-right mt-2 text-white pr-1 pt-1 small"
+                          >
+                            {{ getCreatedAt(chat.created_at) }}
                           </small>
                         </p>
                       </b-col>
                     </b-row>
                   </div>
-
                   <div v-else>
                     <b-row class="p-4">
                       <b-col>
-                        <p id="sent" class="msg-text-sent text">
-                          <b>Me</b>: {{ message.message }}
-                          <small class="float-right mt-2 text-white pr-1 pt-1">
-                            {{ getCreatedAt(message.date) }}
+                        <p
+                          v-if="chat.message"
+                          id="sent"
+                          class="msg-text-sent text"
+                        >
+                          <span v-if="chat.attachment">
+                            <img :src="chat.attachment" />
+                            <!-- <br />
+                            <b>{{ chat.attachment }}</b> -->
+                            <br />
+                          </span>
+                          <span v-if="chat.post_details">
+                            <small class="text-dark font-italic"
+                              ><i class="fas fa-share fa-xs pl-1"></i
+                              >{{ $t("general.Shared_post") }}</small
+                            >
+                            <br />
+                            <span class="font-italic">{{
+                              chat.post_details.content
+                            }}</span>
+                            <hr />
+                          </span>
+                          {{ chat.message }}
+                          <small
+                            class="float-right mt-2 text-white pr-1 pt-1 small"
+                          >
+                            {{ getCreatedAt(chat.created_at) }}
                           </small>
                         </p>
                       </b-col>
                     </b-row>
                   </div>
                 </div>
-              </section> -->
-
+              </section>
               <section v-else class="chats" style="margin-left: 1px" ref="feed">
                 <div class="mt-12 pt-12">
                   <h1 class="text-center">
@@ -933,14 +2180,29 @@
               <b-avatar
                 class="info-avatar"
                 variant="primary"
-                src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
+                :src="chatSelected.logo_path"
                 size="200"
               ></b-avatar>
               <div class="info-detail">
-                <h1 class="info-name">{{ receiver.name }}</h1>
-                <b-link class="primary">{{
+                <h1 class="info-name">{{ chatSelected.name }}</h1>
+                <!-- <b-link class="primary">{{
                   $t("businessowner.View_Profile")
-                }}</b-link>
+                }}</b-link> -->
+                <b-row v-if="type == 'group'" class="justify-content-md-center">
+                  <b-col cols="12" md="auto">
+                    <table class="info-name">
+                      <tr class="text-center">
+                        <th>
+                          <u> Members </u>
+                        </th>
+                      </tr>
+
+                      <tr v-for="(member, index) in groupMembers" :key="index">
+                        <td>{{ getName(member) }}</td>
+                      </tr>
+                    </table>
+                  </b-col>
+                </b-row>
               </div>
             </div>
             <div>
@@ -968,340 +2230,75 @@
           <!-- New message -->
           <b-col
             v-if="newMsg == true && info == false"
-            class="p-0 col-xl-8 col-12 back-image"
+            class="p-0 back-image"
             style="border: 1px solid gray"
           >
-            <div class="new-msg back-image" style="margin-right: 17px">
-              <div class="info-nav">
-                <b-row>
-                  <b-col class="col-1 mt-3"> To </b-col>
-                  <b-col>
-                    <b-form-input
-                      id="textarea"
-                      v-model="searchQuery"
-                      class="input-background"
-                      style="width: 100%"
-                      :placeholder="
-                        $t('businessowner.Type_the_name_of_person_or_Business')
-                      "
-                      @keydown.enter="getAll(searchQuery)"
-                    ></b-form-input>
-
-                    <br />
-                  </b-col>
-                </b-row>
-                <b-row>
-                  <b-col>
-                    <div class="new-msg-filter-list">
-                      <table class="table">
-                        <b-row style="overflow-x: hidden !important">
-                          <b-tabs content-class=" ma-4 pt-6" fill pills card>
-                            <b-tab title="All" @click="getAll()">
-                              <div v-if="loader" class="text-center">
-                                <b-spinner
-                                  variant="primary"
-                                  label="Spinning"
-                                  class="centralizer"
-                                ></b-spinner>
-                              </div>
-                              <h5>People</h5>
-                              <div v-if="allUsers">
-                                <tr
-                                  v-for="(biz, index) in allUsers"
-                                  :key="index"
-                                  class="p-2 message"
-                                >
-                                  <td>
-                                    <b-form-group>
-                                      <b-form-checkbox-group
-                                        id="checkbox-group-2"
-                                        v-model="selectedMulty"
-                                        name="flavour-2"
-                                      >
-                                        <b-form-checkbox
-                                          :id="index + '_id'"
-                                          :name="biz.name"
-                                          :value="biz.id"
-                                        >
-                                          <b-avatar
-                                            class="d-inline-block"
-                                            variant="primary"
-                                            size="30"
-                                          ></b-avatar>
-                                          <span class="bold">
-                                            {{ biz.name }}
-                                          </span>
-                                        </b-form-checkbox>
-                                      </b-form-checkbox-group>
-                                    </b-form-group>
-                                  </td>
-                                </tr>
-                              </div>
-                              <hr />
-                              <h5>Business</h5>
-                              <div v-if="allBusiness">
-                                <tr
-                                  v-for="(biz, index) in allBusiness"
-                                  :key="index"
-                                  class="p-2 message"
-                                >
-                                  <td>
-                                    <b-form-group>
-                                      <b-form-checkbox-group
-                                        id="checkbox-group-2"
-                                        v-model="selectedMulty"
-                                        name="flavour-2"
-                                      >
-                                        <b-form-checkbox
-                                          :id="index + '_id'"
-                                          :name="biz.name"
-                                          :value="biz.id"
-                                        >
-                                          <b-avatar
-                                            class="d-inline-block"
-                                            variant="primary"
-                                            size="30"
-                                          ></b-avatar>
-                                          <span class="bold">
-                                            {{ biz.name }}
-                                          </span>
-                                        </b-form-checkbox>
-                                      </b-form-checkbox-group>
-                                    </b-form-group>
-                                  </td>
-                                </tr>
-                              </div>
-                              <hr />
-                              <h5>Network</h5>
-                              <div v-if="allNetworks">
-                                <tr
-                                  v-for="(biz, index) in allNetworks"
-                                  :key="index"
-                                  class="p-2 message"
-                                >
-                                  <td>
-                                    <b-form-group>
-                                      <b-form-checkbox-group
-                                        id="checkbox-group-2"
-                                        v-model="selectedMulty"
-                                        name="flavour-2"
-                                      >
-                                        <b-form-checkbox
-                                          :id="index + '_id'"
-                                          :name="biz.name"
-                                          :value="biz.id"
-                                        >
-                                          <b-avatar
-                                            class="d-inline-block"
-                                            variant="primary"
-                                            size="30"
-                                          ></b-avatar>
-                                          <span class="bold">
-                                            {{ biz.name }}
-                                          </span>
-                                        </b-form-checkbox>
-                                      </b-form-checkbox-group>
-                                    </b-form-group>
-                                  </td>
-                                </tr>
-                              </div>
-                              <hr />
-                              <h5>Editors</h5>
-                              <div v-if="allEditors">
-                                <tr
-                                  v-for="(biz, index) in allEditors"
-                                  :key="index"
-                                  class="p-2 message"
-                                >
-                                  <td>
-                                    <b-form-group>
-                                      <b-form-checkbox-group
-                                        id="checkbox-group-2"
-                                        v-model="selectedMulty"
-                                        name="flavour-2"
-                                      >
-                                        <b-form-checkbox
-                                          :id="index + '_id'"
-                                          :name="biz.name"
-                                          :value="biz.id"
-                                        >
-                                          <b-avatar
-                                            class="d-inline-block"
-                                            variant="primary"
-                                            size="30"
-                                          ></b-avatar>
-                                          <span class="bold">
-                                            {{ biz.name }}
-                                          </span>
-                                        </b-form-checkbox>
-                                      </b-form-checkbox-group>
-                                    </b-form-group>
-                                  </td>
-                                </tr>
-                              </div>
-                              <hr />
-                            </b-tab>
-                            <b-tab title="People" @click="getUsers()">
-                              <b-row>
-                                <b-col>
-                                  <b-card>
-                                    <b-row class="text-center">
-                                      <b-col>
-                                        <b-form-checkbox
-                                          id="all"
-                                          v-model="allSelectedMulty"
-                                          name="all"
-                                          value="accepted"
-                                          @change="selectedAllMulty"
-                                        >
-                                          All
-                                        </b-form-checkbox>
-                                      </b-col>
-                                      <b-col>
-                                        <b-form-checkbox
-                                          id="following"
-                                          v-model="following"
-                                          name="members"
-                                          :value="true"
-                                          :unchecked-value="false"
-                                          @change="selectedFollowings"
-                                        >
-                                          Following
-                                        </b-form-checkbox>
-                                      </b-col>
-                                      <b-col>
-                                        <b-form-checkbox
-                                          id="follower"
-                                          v-model="follower"
-                                          name="members"
-                                          :value="true"
-                                          :unchecked-value="false"
-                                          @change="selectedFollowers"
-                                        >
-                                          Follower
-                                        </b-form-checkbox>
-                                      </b-col>
-                                    </b-row>
-                                  </b-card>
-                                </b-col>
-                              </b-row>
-                              <div v-if="loader" class="text-center">
-                                <b-spinner
-                                  variant="primary"
-                                  label="Spinning"
-                                  class="centralizer"
-                                ></b-spinner>
-                              </div>
-                              <div v-if="bizs.length">
-                                <tr
-                                  v-for="(biz, index) in bizs"
-                                  :key="index"
-                                  class="p-2 message"
-                                >
-                                  <td>
-                                    <b-form-group>
-                                      <b-form-checkbox-group
-                                        id="checkbox-group-2"
-                                        v-model="selectedMulty"
-                                        name="flavour-2"
-                                      >
-                                        <b-form-checkbox
-                                          :id="index + '_id'"
-                                          :name="biz.name"
-                                          :value="biz.id"
-                                        >
-                                          <b-avatar
-                                            class="d-inline-block"
-                                            variant="primary"
-                                            size="30"
-                                          ></b-avatar>
-                                          <span class="bold">
-                                            {{ biz.name }}
-                                          </span>
-                                        </b-form-checkbox>
-                                      </b-form-checkbox-group>
-                                    </b-form-group>
-                                  </td>
-                                </tr>
-                              </div>
-                              <h2 v-else>No data</h2>
-
-                              <!-- End Chats -->
-                            </b-tab>
-                            <b-tab title="Business" @click="getBizs()">
-                              <b-row>
-                                <b-col>
-                                  <b-card>
-                                    <b-row class="text-center">
-                                      <b-col>
-                                        <b-form-checkbox
-                                          id="all"
-                                          v-model="allSelectedMulty"
-                                          name="all"
-                                          value="accepted"
-                                          @change="selectedAllMulty"
-                                        >
-                                          All
-                                        </b-form-checkbox>
-                                      </b-col>
-                                      <b-col>
-                                        <b-form-checkbox
-                                          id="following"
-                                          v-model="following"
-                                          name="members"
-                                          :value="true"
-                                          :unchecked-value="false"
-                                          @change="selectedFollowings"
-                                        >
-                                          Following
-                                        </b-form-checkbox>
-                                      </b-col>
-                                      <b-col>
-                                        <b-form-checkbox
-                                          id="follower"
-                                          v-model="follower"
-                                          name="members"
-                                          :value="true"
-                                          :unchecked-value="false"
-                                          @change="selectedFollowers"
-                                        >
-                                          Follower
-                                        </b-form-checkbox>
-                                      </b-col>
-                                    </b-row>
-                                  </b-card>
-                                </b-col>
-                              </b-row>
-                              <div
-                                v-if="loader"
-                                class="text-center mt-12 pt-12"
+            <div class="new-msg back-image" style="margin-right: 07px">
+              <b-row>
+                <b-col class="col-1 mt-3 ma-3" v-if="screenX < 930">
+                  <b-icon
+                    @click="showMessages(true)"
+                    icon="arrow-left-square-fill"
+                    font-scale="1"
+                    aria-hidden="true"
+                    class="primary"
+                  ></b-icon>
+                </b-col>
+                <b-col>
+                  <b-form-input
+                    id="textarea"
+                    v-model="newSearchQuery"
+                    class="input-background"
+                    style="width: 100%"
+                    :placeholder="
+                      $t('businessowner.Type_the_name_of_person_or_Business')
+                    "
+                    @keydown.enter="getList(newSearchQuery)"
+                  ></b-form-input>
+                </b-col>
+              </b-row>
+              <b-row>
+                <b-col>
+                  <div class="new-msg-filter-list">
+                    <table class="table">
+                      <b-row v-if="bulk" style="overflow-x: hidden !important">
+                        <!-- business: {{ selectedBusiness }} Member:{{
+                            selectedPeople
+                          }}
+                          Network: {{ selectedNetwork }} -->
+                        <b-tabs
+                          v-model="tabMemberType"
+                          content-class=" ma-4 pt-6"
+                          fill
+                          pills
+                          card
+                        >
+                          <b-tab :title="$t('general.All')" @click="getAll()">
+                            <div v-if="loader" class="text-center">
+                              <b-spinner
+                                variant="primary"
+                                label="Spinning"
+                                class="centralizer"
+                              ></b-spinner>
+                            </div>
+                            <h5>{{ $t("businessowner.People") }}</h5>
+                            <div v-if="allUsers">
+                              <tr
+                                v-for="(biz, index) in allUsers"
+                                :key="index"
+                                class="p-2 message"
                               >
-                                <b-spinner
-                                  variant="primary"
-                                  label="Spinning"
-                                  class="centralizer"
-                                ></b-spinner>
-                              </div>
-                              <div v-if="bizs.length">
-                                {{ selectedMulty }}
-
-                                <tr
-                                  v-for="(biz, index) in bizs"
-                                  :key="index"
-                                  class="p-2 message"
-                                >
-                                  <td>
+                                <td>
+                                  <b-form-group>
                                     <b-form-checkbox-group
-                                      id="checkbox-group-3"
-                                      v-model="selectedMulty"
+                                      id="checkbox-group-2"
+                                      v-model="selectedPeople"
                                       name="flavour-2"
                                     >
                                       <b-form-checkbox
                                         :id="index + '_id'"
                                         :name="biz.name"
                                         :value="biz.id"
-                                        :unchecked-value="false"
-                                        @input="selectedMember(biz)"
                                       >
                                         <b-avatar
                                           class="d-inline-block"
@@ -1313,158 +2310,557 @@
                                         </span>
                                       </b-form-checkbox>
                                     </b-form-checkbox-group>
-                                  </td>
-                                </tr>
-                              </div>
-                              <h2 v-else>No Business</h2>
-
-                              <!-- End Chats -->
-                            </b-tab>
-                            <b-tab title="Network" @click="getNetworks()">
-                              <b-row>
-                                <b-col>
-                                  <b-card>
-                                    <b-row class="text-center">
-                                      <b-col>
-                                        <b-form-checkbox
-                                          id="all"
-                                          v-model="allSelectedMulty"
-                                          name="all"
-                                          value="accepted"
+                                  </b-form-group>
+                                </td>
+                              </tr>
+                            </div>
+                            <hr />
+                            <h5>{{ $t("general.Business") }}</h5>
+                            <div v-if="allBusiness">
+                              <tr
+                                v-for="(biz, index) in allBusiness"
+                                :key="index"
+                                class="p-2 message"
+                              >
+                                <td>
+                                  <b-form-group>
+                                    <b-form-checkbox-group
+                                      id="checkbox-group-2"
+                                      v-model="selectedBusiness"
+                                      name="flavour-2"
+                                    >
+                                      <b-form-checkbox
+                                        :id="index + '_id_biz'"
+                                        :name="biz.name"
+                                        :value="biz.id"
+                                      >
+                                        <b-avatar
+                                          class="d-inline-block"
+                                          variant="primary"
+                                          size="30"
+                                        ></b-avatar>
+                                        <span class="bold">
+                                          {{ biz.name }}
+                                        </span>
+                                      </b-form-checkbox>
+                                    </b-form-checkbox-group>
+                                  </b-form-group>
+                                </td>
+                              </tr>
+                            </div>
+                            <hr />
+                            <h5>{{ $t("general.Network") }}</h5>
+                            <div v-if="allNetworks">
+                              <tr
+                                v-for="(biz, index) in allNetworks"
+                                :key="index"
+                                class="p-2 message"
+                              >
+                                <td>
+                                  <b-form-group>
+                                    <b-form-checkbox-group
+                                      id="checkbox-group-2"
+                                      v-model="selectedNetwork"
+                                      name="flavour-2"
+                                    >
+                                      <b-form-checkbox
+                                        :id="index + '_id_net'"
+                                        :name="biz.name"
+                                        :value="biz.id"
+                                      >
+                                        <b-avatar
+                                          class="d-inline-block"
+                                          variant="primary"
+                                          size="30"
+                                        ></b-avatar>
+                                        <span class="bold">
+                                          {{ biz.name }}
+                                        </span>
+                                      </b-form-checkbox>
+                                    </b-form-checkbox-group>
+                                  </b-form-group>
+                                </td>
+                              </tr>
+                            </div>
+                            <hr />
+                            <h5>{{ $t("general.Editors") }}</h5>
+                            <div v-if="allEditors">
+                              <tr
+                                v-for="(biz, index) in allEditors"
+                                :key="index"
+                                class="p-2 message"
+                              >
+                                <td>
+                                  <b-form-group>
+                                    <b-form-checkbox-group
+                                      id="checkbox-group-2"
+                                      v-model="selectedEditor"
+                                      name="flavour-2"
+                                    >
+                                      <b-form-checkbox
+                                        :id="index + '_id_edit'"
+                                        :name="biz.name"
+                                        :value="biz.id"
+                                      >
+                                        <b-avatar
+                                          class="d-inline-block"
+                                          variant="primary"
+                                          size="30"
+                                        ></b-avatar>
+                                        <span class="bold">
+                                          {{ biz.name }}
+                                        </span>
+                                      </b-form-checkbox>
+                                    </b-form-checkbox-group>
+                                  </b-form-group>
+                                </td>
+                              </tr>
+                            </div>
+                            <hr />
+                            <h5>{{ $t("general.Members") }}</h5>
+                            <div v-if="allMembers">
+                              <tr
+                                v-for="(biz, index) in allMembers"
+                                :key="index"
+                                class="p-2 message"
+                              >
+                                <td>
+                                  <b-form-group>
+                                    <b-form-checkbox-group
+                                      id="checkbox-group-2"
+                                      v-model="selectedMember"
+                                      name="flavour-2"
+                                    >
+                                      <b-form-checkbox
+                                        :id="index + '_id_mem'"
+                                        :name="biz.name"
+                                        :value="biz.id"
+                                      >
+                                        <b-avatar
+                                          class="d-inline-block"
+                                          variant="primary"
+                                          size="30"
+                                        ></b-avatar>
+                                        <span class="bold">
+                                          {{ biz.fullname }}
+                                        </span>
+                                      </b-form-checkbox>
+                                    </b-form-checkbox-group>
+                                  </b-form-group>
+                                </td>
+                              </tr>
+                            </div>
+                            <hr />
+                          </b-tab>
+                          <b-tab
+                            :title="$t('general.People')"
+                            @click="getUsers()"
+                          >
+                            <b-row>
+                              <b-col>
+                                <b-card>
+                                  <b-row class="text-center">
+                                    <b-col>
+                                      <b-form-group>
+                                        <b-form-radio-group
+                                          id="radio-group-people"
+                                          v-model="selectedselectOption"
+                                          :options="selectOptions"
+                                          name="radio-options-people"
                                           @change="selectedAllMulty"
-                                        >
-                                          All
-                                        </b-form-checkbox>
-                                      </b-col>
-                                      <b-col>
-                                        <b-form-checkbox
-                                          id="following"
-                                          v-model="following"
-                                          name="members"
-                                          :value="true"
-                                          :unchecked-value="false"
-                                          @change="selectedFollowings"
-                                        >
-                                          Following
-                                        </b-form-checkbox>
-                                      </b-col>
-                                      <b-col>
-                                        <b-form-checkbox
-                                          id="follower"
-                                          v-model="follower"
-                                          name="members"
-                                          :value="true"
-                                          :unchecked-value="false"
-                                          @change="selectedFollowers"
-                                        >
-                                          Follower
-                                        </b-form-checkbox>
-                                      </b-col>
-                                    </b-row>
-                                  </b-card>
-                                </b-col>
-                              </b-row>
+                                        ></b-form-radio-group>
+                                      </b-form-group>
+                                    </b-col>
+                                  </b-row>
+                                </b-card>
+                              </b-col>
+                            </b-row>
+                            <div v-if="loader" class="text-center">
+                              <b-spinner
+                                variant="primary"
+                                label="Spinning"
+                                class="centralizer"
+                              ></b-spinner>
+                            </div>
 
-                              <div v-if="loader" class="text-center">
-                                <b-spinner
-                                  variant="primary"
-                                  label="Spinning"
-                                  class="centralizer"
-                                ></b-spinner>
-                              </div>
-                              <div v-if="bizs.length">
-                                <tr
-                                  v-for="(biz, index) in bizs"
-                                  :key="index"
-                                  class="p-2 message"
-                                >
-                                  <td>
-                                    <b-form-group>
-                                      <b-form-checkbox-group
-                                        id="checkbox-group-2"
-                                        v-model="selectedMulty"
-                                        name="flavour-2"
+                            <div v-if="bizs.length">
+                              <tr
+                                v-for="(biz, index) in bizs"
+                                :key="index"
+                                class="p-2 message"
+                              >
+                                <td>
+                                  <b-form-group>
+                                    <b-form-checkbox-group
+                                      id="checkbox-group-2"
+                                      v-model="selectedPeople"
+                                      name="flavour-2"
+                                    >
+                                      <b-form-checkbox
+                                        :id="index + '_id-user'"
+                                        :name="biz.name"
+                                        :value="biz.id"
                                       >
-                                        <b-form-checkbox
-                                          :id="index + '_id'"
-                                          :name="biz.name"
-                                          :value="biz.id"
-                                        >
-                                          <b-avatar
-                                            class="d-inline-block"
-                                            variant="primary"
-                                            size="30"
-                                          ></b-avatar>
-                                          <span class="bold">
-                                            {{ biz.name }}
-                                          </span>
-                                        </b-form-checkbox>
-                                      </b-form-checkbox-group>
-                                    </b-form-group>
-                                  </td>
-                                </tr>
-                              </div>
-                              <h2 v-else>No Network</h2>
+                                        <b-avatar
+                                          class="d-inline-block"
+                                          variant="primary"
+                                          size="30"
+                                        ></b-avatar>
+                                        <span class="bold">
+                                          {{ biz.name }}
+                                        </span>
+                                      </b-form-checkbox>
+                                    </b-form-checkbox-group>
+                                  </b-form-group>
+                                </td>
+                              </tr>
+                            </div>
+                            <h2 v-else>{{ $t("general.No_data") }}</h2>
 
-                              <!-- End Chats -->
-                            </b-tab>
+                            <!-- End Chats -->
+                          </b-tab>
+                          <b-tab
+                            :title="$t('general.Business')"
+                            @click="getBizs()"
+                          >
+                            <b-row>
+                              <b-col>
+                                <b-card>
+                                  <b-row class="text-center">
+                                    <b-col>
+                                      <b-form-group>
+                                        <b-form-radio-group
+                                          id="radio-group-business"
+                                          v-model="selectedselectOption"
+                                          :options="selectOptions"
+                                          name="radio-options-business"
+                                          @change="selectedAllMulty"
+                                        ></b-form-radio-group>
+                                      </b-form-group>
+                                    </b-col>
+                                  </b-row>
+                                </b-card>
+                              </b-col>
+                            </b-row>
+                            <div v-if="loader" class="text-center mt-12 pt-12">
+                              <b-spinner
+                                variant="primary"
+                                label="Spinning"
+                                class="centralizer"
+                              ></b-spinner>
+                            </div>
+                            <div v-if="bizs.length">
+                              <tr
+                                v-for="(elm, index) in bizs"
+                                :key="index"
+                                class="p-2 message"
+                              >
+                                <td>
+                                  <b-form-checkbox-group
+                                    id="checkbox-group-3"
+                                    v-model="selectedBusiness"
+                                    name="flavour-2"
+                                  >
+                                    <b-form-checkbox
+                                      :id="index + '_id-busid'"
+                                      :name="elm.name"
+                                      :value="elm.id"
+                                      :unchecked-value="false"
+                                    >
+                                      <!-- @input="selectedMember(elm)" -->
+                                      <b-avatar
+                                        class="d-inline-block"
+                                        variant="primary"
+                                        size="30"
+                                      ></b-avatar>
+                                      <span class="bold">
+                                        {{ elm.name }}
+                                      </span>
+                                    </b-form-checkbox>
+                                  </b-form-checkbox-group>
+                                </td>
+                              </tr>
+                            </div>
+                            <h2 v-else>{{ $t("general.No_Business") }}</h2>
 
-                            <b-tab title="Editors" @click="getEditors()">
-                              <div v-if="loader" class="text-center">
-                                <b-spinner
-                                  variant="primary"
-                                  label="Spinning"
-                                  class="centralizer"
-                                ></b-spinner>
-                              </div>
-                              <div v-if="bizs.length">
-                                <tr
-                                  v-for="(biz, index) in bizs"
-                                  :key="index"
-                                  class="p-2 message"
-                                >
-                                  <td>
-                                    <b-form-group>
-                                      <b-form-checkbox-group
-                                        id="checkbox-group-2"
-                                        v-model="selectedMulty"
-                                        name="flavour-2"
+                            <!-- End Chats -->
+                          </b-tab>
+                          <b-tab
+                            :title="$t('general.Network')"
+                            @click="getNetworks()"
+                          >
+                            <b-row>
+                              <b-col>
+                                <b-card>
+                                  <b-row class="text-center">
+                                    <b-col>
+                                      <b-form-group>
+                                        <b-form-radio-group
+                                          id="radio-group-1"
+                                          v-model="selectedselectOption"
+                                          :options="selectOptions"
+                                          name="radio-options"
+                                          @change="selectedAllMulty"
+                                        ></b-form-radio-group>
+                                      </b-form-group>
+                                    </b-col>
+                                  </b-row>
+                                </b-card>
+                              </b-col>
+                            </b-row>
+
+                            <div v-if="loader" class="text-center">
+                              <b-spinner
+                                variant="primary"
+                                label="Spinning"
+                                class="centralizer"
+                              ></b-spinner>
+                            </div>
+                            <div v-if="bizs.length">
+                              <tr
+                                v-for="(biz, index) in bizs"
+                                :key="index"
+                                class="p-2 message"
+                              >
+                                <td>
+                                  <b-form-group>
+                                    <b-form-checkbox-group
+                                      id="checkbox-group-2"
+                                      v-model="selectedNetwork"
+                                      name="flavour-2"
+                                    >
+                                      <b-form-checkbox
+                                        :id="index + '_id-netw'"
+                                        :name="biz.name"
+                                        :value="biz.id"
                                       >
-                                        <b-form-checkbox
-                                          :id="index + '_id'"
-                                          :name="biz.name"
-                                          :value="biz.id"
-                                        >
-                                          <b-avatar
-                                            class="d-inline-block"
-                                            variant="primary"
-                                            size="30"
-                                          ></b-avatar>
-                                          <span class="bold">
-                                            {{ biz.name }}
-                                          </span>
-                                        </b-form-checkbox>
-                                      </b-form-checkbox-group>
-                                    </b-form-group>
-                                  </td>
-                                </tr>
-                              </div>
-                              <h2 v-else>No Editor</h2>
+                                        <b-avatar
+                                          class="d-inline-block"
+                                          variant="primary"
+                                          size="30"
+                                        ></b-avatar>
+                                        <span class="bold">
+                                          {{ biz.name }}
+                                        </span>
+                                      </b-form-checkbox>
+                                    </b-form-checkbox-group>
+                                  </b-form-group>
+                                </td>
+                              </tr>
+                            </div>
+                            <h2 v-else>{{ $t("general.No_Network") }}</h2>
 
-                              <!-- End Chats -->
-                            </b-tab>
-                          </b-tabs>
-                        </b-row>
-                      </table>
-                    </div>
-                    <b-button
-                      block
-                      variant="primary"
-                      @click="$bvModal.show('group-name')"
-                      :disabled="selectedMulty.length ? false : true"
-                      >{{ $t("businessowner.Next") }}</b-button
-                    >
-                    <!-- <b-button
+                            <!-- End Chats -->
+                          </b-tab>
+
+                          <b-tab
+                            :title="$t('general.Editors')"
+                            @click="getEditors()"
+                          >
+                            <div v-if="loader" class="text-center">
+                              <b-spinner
+                                variant="primary"
+                                label="Spinning"
+                                class="centralizer"
+                              ></b-spinner>
+                            </div>
+                            <div v-if="bizs.length">
+                              <tr
+                                v-for="(biz, index) in bizs"
+                                :key="index"
+                                class="p-2 message"
+                              >
+                                <td>
+                                  <b-form-group>
+                                    <b-form-checkbox-group
+                                      id="checkbox-group-2"
+                                      v-model="selectedEditor"
+                                      name="flavour-2"
+                                    >
+                                      <b-form-checkbox
+                                        :id="index + '_id-edit'"
+                                        :name="biz.name"
+                                        :value="biz.id"
+                                      >
+                                        <b-avatar
+                                          class="d-inline-block"
+                                          variant="primary"
+                                          size="30"
+                                        ></b-avatar>
+                                        <span class="bold">
+                                          {{ biz.name }}
+                                        </span>
+                                      </b-form-checkbox>
+                                    </b-form-checkbox-group>
+                                  </b-form-group>
+                                </td>
+                              </tr>
+                            </div>
+                            <h2 v-else>{{ $t("general.No_Editor") }}</h2>
+
+                            <!-- End Chats -->
+                          </b-tab>
+                          <b-tab title="Members" @click="getNetworkMembers()">
+                            <!-- Length :{{ bizs }} -->
+
+                            <div v-if="loader" class="text-center">
+                              <b-spinner
+                                variant="primary"
+                                label="Spinning"
+                                class="centralizer"
+                              ></b-spinner>
+                            </div>
+                            <div v-if="bizs.length">
+                              <tr
+                                v-for="(biz, index) in bizs"
+                                :key="index"
+                                class="p-2 message"
+                              >
+                                <td>
+                                  <b-form-group>
+                                    <b-form-checkbox-group
+                                      id="checkbox-group-2"
+                                      v-model="selectedMember"
+                                      name="flavour-2"
+                                    >
+                                      <b-form-checkbox
+                                        :id="index + '_id-member'"
+                                        :name="biz.name"
+                                        :value="biz.id"
+                                      >
+                                        <b-avatar
+                                          class="d-inline-block"
+                                          variant="primary"
+                                          size="30"
+                                        ></b-avatar>
+                                        <span class="bold">
+                                          {{ biz.fullname }}
+                                        </span>
+                                      </b-form-checkbox>
+                                    </b-form-checkbox-group>
+                                  </b-form-group>
+                                </td>
+                              </tr>
+                            </div>
+
+                            <h2 v-else>{{ $t("general.No_Member") }}</h2>
+
+                            <!-- End Chats -->
+                          </b-tab>
+                        </b-tabs>
+                      </b-row>
+                      <!-- single selection -->
+                      <div
+                        v-else
+                        style="
+                          padding-left: 10px !important;
+                          overflow-x: hidden !important;
+                        "
+                      >
+                        <h2>{{ type.toUpperCase() }}</h2>
+                        <br />
+                        <div v-if="newChatLoader" class="text-center">
+                          <b-spinner
+                            variant="primary"
+                            label="Spinning"
+                            class="centralizer"
+                          ></b-spinner>
+                        </div>
+                        <table v-else class="table">
+                          <tbody v-if="type == 'user'">
+                            <tr
+                              v-for="(user, index) in users"
+                              :key="index"
+                              class="p-2 message"
+                              @click="
+                                selectedChat({
+                                  type: 'user',
+                                  chat: user,
+                                  id: user.id,
+                                })
+                              "
+                            >
+                              <td>
+                                <b-avatar
+                                  class="d-inline-block"
+                                  variant="primary"
+                                  size="30"
+                                  :src="user.profile_picture"
+                                ></b-avatar>
+                                <span class="bold"> {{ user.name }} </span>
+                              </td>
+                            </tr>
+                          </tbody>
+                          <tbody v-if="type == 'business'">
+                            <tr
+                              v-for="(biz, index) in allBizs"
+                              :key="index"
+                              class="p-2 message"
+                              @click="
+                                selectedChat({
+                                  type: 'business',
+                                  chat: biz,
+                                  id: biz.id,
+                                })
+                              "
+                            >
+                              <td>
+                                <b-avatar
+                                  class="d-inline-block"
+                                  variant="primary"
+                                  size="30"
+                                  :src="
+                                    getImage({
+                                      type: 'business',
+                                      image: biz.logo_path,
+                                    })
+                                  "
+                                ></b-avatar>
+                                <span class="bold"> {{ biz.name }} </span>
+                              </td>
+                            </tr>
+                          </tbody>
+                          <tbody v-if="type == 'network'">
+                            <tr
+                              v-for="(network, index) in nets"
+                              :key="index"
+                              class="p-2 message"
+                              @click="
+                                selectedChat({
+                                  type: 'network',
+                                  chat: network,
+                                  id: network.id,
+                                })
+                              "
+                            >
+                              <td>
+                                <b-avatar
+                                  class="d-inline-block"
+                                  variant="primary"
+                                  size="30"
+                                  :src="
+                                    getImage({
+                                      type: 'network',
+                                      image: network.image,
+                                    })
+                                  "
+                                ></b-avatar>
+                                <span class="bold"> {{ network.name }} </span>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </table>
+                  </div>
+                  <b-button
+                    v-if="bulk"
+                    block
+                    variant="primary"
+                    @click="$bvModal.show('group-name')"
+                    >{{ $t("businessowner.Next") }}</b-button
+                  >
+                  <!-- <b-button
                       class="float-left"
                       variant="primary"
                       @click="selectedMultyChat()"
@@ -1475,13 +2871,13 @@
                         variant="white"
                       ></b-icon
                     ></b-button> -->
-                  </b-col>
-                </b-row>
-              </div>
+                </b-col>
+              </b-row>
             </div>
           </b-col>
         </b-row>
       </div>
+      <!-- ---- -->
 
       <!-- Modals -->
       <!-- create group -->
@@ -1502,6 +2898,12 @@
           $t("businessowner.Create")
         }}</b-button>
       </b-modal>
+      <b-modal id="preview-file" hide-footer>
+        <div class="d-block text-center">
+          <h3>Preview file:</h3>
+          <b-img thumbnail fluid :src="previewSrc" id="filePreview"></b-img>
+        </div>
+      </b-modal>
     </b-container>
   </div>
 </template>
@@ -1517,27 +2919,30 @@ export default {
   },
   data() {
     return {
+      screenWidth: window.screen.width,
+      screenX: 0,
+      mobile: false,
+      rightSide: true,
+      leftSide: true,
+      audio: new Audio("@/assets/sound/message.mp3"),
+
       formData: new FormData(),
       groupName: "",
-      allSelection: true,
-      allSelectedMulty: false,
-      peopleMulty: false,
-      businessMulty: false,
-      networkMulty: false,
+      tabMemberType: 0,
+      selectOptions: [
+        { text: "All", value: "all" },
+        { text: "Followers", value: "follower" },
+        { text: "Following", value: "following" },
+      ],
+      selectedselectOption: "",
 
-      followers: false,
-      followings: false,
-      follower: false,
-      following: false,
-
-      clickedFilterType: "",
-
-      visibleCollaps: false,
+      selectedBusiness: [],
+      selectedPeople: [],
+      selectedNetwork: [],
+      selectedMember: [],
+      selectedEditor: [],
 
       selectedMulty: [],
-      peopleSelectedAllMulty: [],
-      businessSelectedAllMulty: [],
-      networkSelectedAllMulty: [],
 
       filePreview: false,
       previewSrc: "",
@@ -1549,12 +2954,16 @@ export default {
       chatSearchKeyword: "",
       tabIndex: 2,
       type: "",
-      // socket: io("https://ba-chat-server.herokuapp.com", {
+      // socket: io(process.env.NODE_SERVER_URL_DEV, {
+      //   transports: ["websocket", "polling", "flashsocket"],
+      // }),
+      // socket: io(process.env.VUE_APP_CHAT_SERVER_URL, {
       //   transports: ["websocket", "polling", "flashsocket"],
       // }),
       socket: io("http://localhost:7000", {
         transports: ["websocket", "polling", "flashsocket"],
       }),
+
       nameSpace: {
         status: false,
         text: "",
@@ -1563,6 +2972,7 @@ export default {
       showsearch: true,
       selecteduser: false,
       searchQuery: "",
+      newSearchQuery: "",
       message: {},
       newMsg: false,
       show: false,
@@ -1573,44 +2983,56 @@ export default {
       messages: null,
     };
   },
+  watch: {
+    screenWidth(newWidth, oldWidth) {
+      this.screenX = newWidth;
+      this.mobile = this.screenX < 930;
+    },
+  },
   computed: {
     all() {
-      return this.$store.getters["businessChat/getAll"];
+      return this.$store.getters["networkChat/getAll"];
     },
     allNetworks() {
-      return this.$store.getters["businessChat/getAllNetworks"];
+      return this.$store.getters["networkChat/getAllNetworks"];
     },
     allUsers() {
-      return this.$store.getters["businessChat/getAllUsers"];
+      return this.$store.getters["networkChat/getAllUsers"];
     },
     allBusiness() {
-      return this.$store.getters["businessChat/getAllBusinesses"];
+      return this.$store.getters["networkChat/getAllBusinesses"];
     },
     allEditors() {
-      return this.$store.getters["businessChat/getAllEditors"];
+      return this.$store.getters["networkChat/getAllEditors"];
+    },
+    allMembers() {
+      return this.$store.getters["networkChat/getAllMembers"];
     },
     groupMembers() {
-      return this.$store.getters["businessChat/getGroupMembers"];
+      return this.$store.getters["networkChat/getGroupMembers"];
     },
 
     ctaSelected() {
-      return this.$store.getters["businessChat/getSelectedChat"];
+      return this.$store.getters["networkChat/getSelectedChat"];
     },
     chatId() {
-      return this.$store.getters["businessChat/getSelectedChatId"];
+      return this.$store.getters["networkChat/getSelectedChatId"];
     },
     currentBizId() {
-      return this.$store.getters["businessChat/getCurrentBizId"];
+      return this.$store.getters["networkChat/getCurrentBizId"];
     },
     currentBiz() {
       return this.$store.getters["auth/profilConnected"];
     },
+    userInfo() {
+      return this.$store.getters["networkChat/getUserInfo"];
+    },
 
     bizs() {
-      return this.$store.getters["businessChat/getBizs"];
+      return this.$store.getters["networkChat/getBizs"];
     },
     chatList() {
-      return this.$store.getters["businessChat/getChatList"];
+      return this.$store.getters["networkChat/getChatList"];
     },
 
     currentUser() {
@@ -1620,12 +3042,20 @@ export default {
     users() {
       return this.$store.getters["userChat/getUsers"];
     },
-    chats() {
-      return this.$store.getters["businessChat/getChats"];
+    allBizs() {
+      return this.$store.getters["userChat/getBizs"];
     },
-
+    nets() {
+      return this.$store.getters["userChat/getNets"];
+    },
+    chats() {
+      return this.$store.getters["networkChat/getChats"];
+    },
+    newChatLoader() {
+      return this.$store.getters["userChat/getLoader"];
+    },
     loader() {
-      return this.$store.getters["businessChat/getLoader"];
+      return this.$store.getters["networkChat/getLoader"];
     },
     receiver() {
       return this.chats[0] ? this.chats[0].receiver : "";
@@ -1644,36 +3074,37 @@ export default {
     },
   },
   mounted() {
-    let obj = [
-      {
-        id: { first: "edouard", second: "lele" },
-        names: { first: "edouard", second: "lele" },
-      },
-    ];
-    let tableau = Object.keys(obj).map((key) => [Number(key), obj[key]]);
-
-    console.log("finale+++", tableau);
+    this.mobile = this.screenWidth < 930;
+    console.log("mobile:", this.mobile);
     if (this.chatList.length < 0) {
       this.getChatList({ type: "business" });
     }
     this.getAll();
     this.getBizs();
+    window.addEventListener("resize", () => {
+      this.screenWidth = window.screen.width;
+    });
   },
   created() {
     this.socketListenners();
     this.getCurBiz();
+    this.getUserInfo();
 
     this.$store.commit(
-      "businessChat/setCurrentBizId",
+      "networkChat/setCurrentBizId",
       Number(this.$route.params.id)
     );
     console.log("router params:", this.currentBizId);
-    this.tabIndex = this.$route.query.msgTabId;
+    this.tabIndex = this.$route.query.msgTabId
+      ? Number(this.$route.query.msgTabId)
+      : "no";
 
     console.log("this.tabIndex:", this.tabIndex);
+    console.log("Current biz:", this.currentBiz);
+
     // console.log("call to action checked:", this.ctaSelected);
 
-    if (this.tabIndex) {
+    if ([0, 1, 2].includes(this.tabIndex)) {
       console.log("here am i!");
       if (this.tabIndex == 1) {
         this.getChatList({ type: "business" });
@@ -1702,8 +3133,28 @@ export default {
     },
   },
   methods: {
+    getImage(data) {
+      // console.log("data IN", data);
+      let image = data.image;
+      let finale = "";
+      let user = "...";
+      let network = require("@/assets/network_default.png");
+      let business = require("@/assets/business_default.png");
+
+      if (data.type == "user") {
+        finale = image ? image : user;
+      } else if (data.type == "network") {
+        finale = image ? image : network;
+      } else if (data.type == "business") {
+        finale = image ? image : business;
+      }
+
+      // console.log("debug ", finale);
+      // console.log(this.type);
+      return finale;
+    },
     getCurBiz() {
-      this.$store.dispatch("businessChat/GET_CUR_BIZ");
+      this.$store.dispatch("networkChat/GET_CUR_BIZ");
     },
     getName(chat) {
       return chat.business_i_d
@@ -1726,136 +3177,100 @@ export default {
       const i = Math.floor(Math.log(bytes) / Math.log(k));
       return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + " " + sizes[i];
     },
-    selectedMember(elm) {
-      console.log("selectedMulty:", this.selectedMulty.length);
-      let length = this.selectedMulty.length;
-      if (this.selectedMulty[length - 1] == elm.id) {
-        this.groupMembers.push({ type: elm.accountType, id: elm.id });
-      } else this.groupMembers.pop();
 
-      console.log("selected:", this.groupMembers);
-    },
-    selectedAllMulty() {
-      // this.visibleCollaps = false;
-      this.allSelection = true;
-      this.selectedMulty = [];
-      if (this.allSelectedMulty) {
-        this.bizs.map((biz) => {
-          this.selectedMulty.push(biz.id);
-        });
-      } else {
-        this.selectedMulty = [];
-        this.groupMembers = [];
+    startNewChat() {
+      if (this.selectedMulty.length > 1) {
+        this.$bvModal.show("group-name");
       }
+      // else {
+      //   this.selectedChat({
+      //     type: "user",
+      //     chat: user,
+      //     id: user.id,
+      //   });
+      // }
     },
-    selectedFollowers() {
-      this.allSelection = true;
-      this.selectedMulty = [];
+
+    selectedAllMulty(val) {
+      console.log("new val:", val);
       let selected = [];
-      if (this.follower) {
-        selected = this.bizs.filter((biz) => {
-          return biz.statusType === "follower";
-        });
-        selected.map((elm) => {
-          this.selectedMulty.push(elm.id);
-          this.groupMembers.push({ type: elm.accountType, id: elm.id });
-        });
-      } else {
-        this.selectedMulty = [];
-        this.groupMembers = [];
-      }
-      console.log("Selected: ", selected);
-    },
-    selectedFollowings() {
-      this.allSelection = true;
-      this.selectedMulty = [];
-      let selected = [];
-      if (this.following) {
-        selected = this.bizs.filter((biz) => {
-          return biz.statusType === "following";
-        });
-        selected.map((elm) => {
-          this.selectedMulty.push(elm.id);
-          this.groupMembers.push({ type: elm.accountType, id: elm.id });
-        });
-      } else {
-        this.selectedMulty = [];
-        this.groupMembers = [];
-      }
-      console.log("Selected: ", selected);
-    },
+      switch (this.tabMemberType) {
+        case 1:
+          this.selectedPeople = [];
+          if (val == "all") {
+            this.bizs.map((biz) => {
+              this.selectedPeople.push(biz.id);
+            });
+          } else if (val == "follower") {
+            selected = this.bizs.filter((biz) => {
+              return biz.statusType === "follower";
+            });
+            selected.map((elm) => {
+              this.selectedPeople.push(elm.id);
+              this.groupMembers.push({ type: elm.accountType, id: elm.id });
+            });
+          } else {
+            selected = this.bizs.filter((biz) => {
+              return biz.statusType === "following";
+            });
+            selected.map((elm) => {
+              this.selectedPeople.push(elm.id);
+              this.groupMembers.push({ type: elm.accountType, id: elm.id });
+            });
+          }
+          break;
 
-    followerFollowing() {
-      if (this.follower) {
-        this.followers = this.bizs.filter((elm) => {
-          console.log("followers: ", elm);
-          return elm.statusType == "follower";
-        });
-        console.log("followers: ", this.followers);
-      } else if (this.following) {
-        this.followings = this.bizs.filter((elm) => {
-          return elm.statusType == "following";
-        });
-        console.log("followings: ", this.followings);
-      }
-      console.log("all: ", this.bizs);
-    },
-    peopleAllMulty() {
-      this.visibleCollaps = !this.visibleCollaps;
-      this.clickedFilterType = "people";
-      // this.bizs = this.allUsers;
-      this.allSelection = false;
+        case 2:
+          this.selectedBusiness = [];
+          if (val == "all") {
+            this.bizs.map((biz) => {
+              this.selectedBusiness.push(biz.id);
+            });
+          } else if (val == "follower") {
+            selected = this.bizs.filter((biz) => {
+              return biz.statusType === "follower";
+            });
+            selected.map((elm) => {
+              this.selectedBusiness.push(elm.id);
+              this.groupMembers.push({ type: elm.accountType, id: elm.id });
+            });
+          } else {
+            selected = this.bizs.filter((biz) => {
+              return biz.statusType === "following";
+            });
+            selected.map((elm) => {
+              this.selectedBusiness.push(elm.id);
+              this.groupMembers.push({ type: elm.accountType, id: elm.id });
+            });
+          }
+          break;
 
-      this.getUsers();
-      this.$store.commit("businessChat/setBizs", this.allUsers);
+        case 3:
+          this.selectedNetwork = [];
+          if (val == "all") {
+            this.bizs.map((biz) => {
+              this.selectedNetwork.push(biz.id);
+            });
+          } else if (val == "follower") {
+            selected = this.bizs.filter((biz) => {
+              return biz.statusType === "follower";
+            });
+            selected.map((elm) => {
+              this.selectedNetwork.push(elm.id);
+              this.groupMembers.push({ type: elm.accountType, id: elm.id });
+            });
+          } else {
+            selected = this.bizs.filter((biz) => {
+              return biz.statusType === "following";
+            });
+            selected.map((elm) => {
+              this.selectedNetwork.push(elm.id);
+              this.groupMembers.push({ type: elm.accountType, id: elm.id });
+            });
+          }
+          break;
 
-      this.selectedMulty = [];
-      if (this.peopleMulty) {
-        this.bizs.map((biz) => {
-          this.selectedMulty.push(biz.id);
-        });
-      } else {
-        this.selectedMulty = [];
-        this.groupMembers = [];
-      }
-    },
-    businessAllMulty() {
-      // this.bizs = this.allBusiness;
-      this.visibleCollaps = !this.visibleCollaps;
-
-      this.clickedFilterType = "business";
-      this.getBizs();
-
-      this.$store.commit("businessChat/setBizs", this.allBusiness);
-
-      this.allSelection = false;
-
-      this.selectedMulty = [];
-      if (this.businessMulty) {
-        this.bizs.map((biz) => {
-          this.selectedMulty.push(biz.id);
-        });
-      } else {
-        this.selectedMulty = [];
-      }
-    },
-    networkAllMulty() {
-      // this.bizs = this.allNetworks;
-      this.visibleCollaps = !this.visibleCollaps;
-
-      this.clickedFilterType = "network";
-
-      this.$store.commit("businessChat/setBizs", this.allNetworks);
-      this.getNetworks();
-      this.allSelection = false;
-
-      this.selectedMulty = [];
-      if (this.networkMulty) {
-        this.bizs.map((biz) => {
-          this.selectedMulty.push(biz.id);
-        });
-      } else {
-        this.selectedMulty = [];
+        default:
       }
     },
     getAll() {
@@ -1863,6 +3278,7 @@ export default {
       this.getNetworks();
       this.getBizs();
       this.getEditors();
+      this.getNetworkMembers();
     },
     dismissed() {
       this.file = "";
@@ -1870,43 +3286,29 @@ export default {
     },
     socketListenners() {
       console.log("listenning...");
-      // this.socket.on("generalMessage", (data) => {
-      //   console.log("Received");
-      //   console.log(data);
-      //   this.messages.push(data);
-      // });
       this.socket.on("groupMessage", (data) => {
         console.log("group message Received");
+        this.audio.play();
         console.log(data);
         this.chats.push(data);
-        // userID:1,2,3,4,5
-        // businessID:2
-        // networkID:1,2,3,4
-        // businessEditorID:2
-        // message:Life has no meaning the moment you lose the illusion of being eternal.
 
-        // this.formData.append("sender_business_id", data.sender_business_id);
         this.formData.append("message", data.message);
 
         this.formData.append("userID", data.userID);
         this.formData.append("businessID", data.businessID);
         this.formData.append("networkID", data.networkID);
-        this.formData.append("businessEditorID", data.businessEditorID);
-
-        // this.formData.append("receiver_network_id", data.receiver_business_id);
-        // this.formData.append("receiver_id", data.receiver_business_id);
-        // this.formData.append("group_id", data.group_id);
-        // this.formData.append("type", data.type);
+        this.formData.append("networkEditorID", data.networkEditorID);
+        this.formData.append("memberID", data.memberID);
 
         this.saveMessage(this.formData);
       });
       this.socket.on("privateMessage", (data) => {
         console.log("Received");
+        // this.audio.play();
         console.log(data);
         this.chats.push(data);
         console.log(this.chats);
-
-        this.formData.append("sender_business_id", data.sender_business_id);
+        this.formData.append("sender_network_id", data.sender_network_id);
         this.formData.append("message", data.message);
         this.formData.append("receiver_business_id", data.receiver_business_id);
         this.formData.append("receiver_network_id", data.receiver_business_id);
@@ -1918,62 +3320,27 @@ export default {
     },
     createGroup(receiver_business_id) {
       this.socket.emit("create-group", this.chatId);
-      // let sender_business_id = this.currentUser.user.id;
-      var membersPeople = [];
-      var membersBuiness = [];
-      var membersNetwork = [];
-      var membersEditor = [];
-      if (this.groupMembers) {
-        membersPeople = this.groupMembers.filter((member) => {
-          return member.type == "people";
-        });
-        membersBuiness = this.groupMembers.filter((member) => {
-          return member.type == "business";
-        });
-        membersNetwork = this.groupMembers.filter((member) => {
-          return member.type == "network";
-        });
-        membersEditor = this.groupMembers.filter((member) => {
-          return member.type == "editor";
-        });
-      }
-      let membersPeopleIds = [];
-      let membersBusinessIds = [];
-      let membersNetworkIds = [];
-      let membersEditorIds = [];
-
-      membersPeople.map((biz) => {
-        membersPeopleIds.push(biz.id);
-      });
-      membersBuiness.map((biz) => {
-        membersBusinessIds.push(biz.id);
-      });
-      membersNetwork.map((biz) => {
-        membersNetworkIds.push(biz.id);
-      });
-      membersEditor.map((biz) => {
-        membersEditorIds.push(biz.id);
-      });
-
-      console.log("members: ", this.groupMembers);
-      console.log("Business: ", membersBuiness);
-      console.log("People: ", membersPeople);
-      console.log("Editor: ", membersEditor);
-      console.log("Network: ", membersNetwork);
 
       let sender_business_id = this.chatId;
-      this.room = [sender_business_id, ...this.selectedMulty];
+      this.room = [
+        sender_business_id,
+        ...this.selectedPeople,
+        ...this.selectedBusiness,
+        ...this.selectedNetwork,
+        ...this.selectedMember,
+        ...this.selectedEditor,
+      ];
       console.log("ROOMS: ", this.room);
       this.tabIndex = 3;
-      // this.getChatList({ type: "group" });
-      this.$store.dispatch("businessChat/CREATE_GROUP", {
+      this.getChatList({ type: "group" });
+      this.$store.dispatch("networkChat/CREATE_GROUP", {
         groupName: this.groupName,
-        userID: `${membersPeopleIds}`,
 
-        businessID: `${membersBusinessIds}`,
-        networkID: `${membersNetworkIds}`,
-
-        businessEditorsID: `${membersEditorIds}`,
+        userID: this.selectedPeople.toString(),
+        businessID: this.selectedBusiness.toString(),
+        networkID: this.selectedNetwork.toString(),
+        memberID: this.selectedMember.toString(),
+        networkEditorsID: this.selectedEditor.toString(),
       });
     },
     createRoom(receiver_business_id) {
@@ -1981,45 +3348,68 @@ export default {
       let sender_business_id = this.currentBizId;
       this.room = [receiver_business_id, sender_business_id];
       console.log("ROOMS: ", this.room);
-      this.socket.emit("create-biz", this.room);
+      this.socket.emit("create", this.room);
     },
     getCreatedAt(data) {
-      let date = moment(data).isBefore(today);
-      let today = moment().format("MM/DD/YYYY");
-      // console.log("days:", date);
-      if (date) {
-        return moment(data).format("lll");
+      if (moment(data).isBefore(moment())) {
+        return moment(data).format("ddd") + " " + moment(data).format("LT");
       } else {
-        // return moment(data).format('LT');
-        return moment(data).fromNow();
+        return moment(data).format("LT");
+        // return moment(data).fromNow();
       }
     },
-    // async getAll(keyword) {
-    //   this.allSelection = true;
-    //   await this.$store.dispatch("businessChat/GET_ALL", keyword);
-    // },
+    getList(keyword) {
+      if (this.type == "user") {
+        this.$store.dispatch("userChat/GET_USERS", keyword);
+      } else if (this.type == "business") {
+        this.$store.dispatch("userChat/GET_BIZS", keyword);
+      } else {
+        console.log("network");
+        this.$store.dispatch("userChat/GET_NETS", keyword);
+      }
+    },
+
+    getUserInfo() {
+      this.$store.dispatch("networkChat/GET_USER_INFO").then(() => {
+        console.log("user info: ", this.userInfo);
+      });
+    },
+    initFilter() {
+      this.selectedselectOption = "";
+      this.selectedPeople = [];
+      this.selectedBusiness = [];
+      this.selectedNetwork = [];
+      this.selectedEditor = [];
+      this.selectedMember = [];
+    },
+    getNetworkMembers(keyword) {
+      this.initFilter();
+      this.$store.dispatch("networkChat/GET_NETWORK_MEMBERS", {
+        keyword: keyword,
+      });
+    },
     getEditors(keyword) {
-      this.$store.dispatch("businessChat/GET_EDITORS", {
+      this.initFilter();
+      this.$store.dispatch("networkChat/GET_EDITORS", {
         keyword: keyword,
       });
     },
     getNetworks(keyword) {
-      this.visibleCollaps = true;
-      this.$store.dispatch("businessChat/GET_NETWORKS", {
+      this.initFilter();
+      this.$store.dispatch("networkChat/GET_NETWORKS", {
         keyword: keyword,
       });
     },
     getUsers(keyword) {
-      this.visibleCollaps = true;
-
-      this.$store.dispatch("businessChat/GET_USERS", {
+      this.initFilter();
+      this.$store.dispatch("networkChat/GET_USERS", {
         keyword: keyword,
       });
     },
     getBizs(keyword) {
-      this.visibleCollaps = true;
+      this.initFilter();
       this.$store
-        .dispatch("businessChat/GET_BIZS", {
+        .dispatch("networkChat/GET_BIZS", {
           keyword: keyword,
         })
         .then(() => {
@@ -2030,53 +3420,54 @@ export default {
     getChatList(data) {
       // alert("Clicked!")
       this.type = data.type;
-      // this.chatSelected.active = false;
+      this.chatSelected.active = false;
       this.newMsg = false;
       console.log("tab type:", this.tabIndex);
 
-      this.$store.dispatch("businessChat/GET_BIZS_CHAT_LIST", data);
+      this.$store.dispatch("networkChat/GET_BIZS_CHAT_LIST", data);
       // this.scrollToBottom();
     },
 
     async histBizToBiz(data) {
       console.log("search data:", data);
       if (data.type == "user") {
-        await this.$store.dispatch("businessChat/GET_BIZ_TO_USER", data);
+        await this.$store.dispatch("networkChat/GET_BIZ_TO_USER", data);
       } else if (data.type == "network") {
-        await this.$store.dispatch("businessChat/GET_BIZ_TO_NETWORK", data);
+        await this.$store.dispatch("networkChat/GET_BIZ_TO_NETWORK", data);
       } else if (data.type == "group") {
-        await this.$store.dispatch("businessChat/GET_BIZ_TO_GROUP", data);
+        console.log("Here...");
+        await this.$store.dispatch("networkChat/GET_BIZ_TO_GROUP", data);
       } else {
-        await this.$store.dispatch("businessChat/GET_BIZ_TO_BIZ", data);
+        await this.$store.dispatch("networkChat/GET_BIZ_TO_BIZ", data);
       }
     },
     async histBizToUser(receiverId) {
       await this.$store
-        .dispatch("businessChat/GET_BIZ_TO_USER", receiverId)
+        .dispatch("networkChat/GET_BIZ_TO_USER", receiverId)
         .then(() => {})
         .catch(() => console.log("error"));
     },
     async histBizToNetwork(receiverId) {
       await this.$store
-        .dispatch("businessChat/GET_BIZ_TO_NETWORK", receiverId)
+        .dispatch("networkChat/GET_BIZ_TO_NETWORK", receiverId)
         .then(() => {})
         .catch(() => console.log("error"));
     },
     async histBizToGroup(receiverId) {
-      await this.$store.dispatch("businessChat/GET_BIZ_TO_GROUP", receiverId);
+      await this.$store.dispatch("networkChat/GET_BIZ_TO_GROUP", receiverId);
       console.log("group members: ++++>", this.groupMembers);
     },
     saveMessage(data) {
       console.log("[DEBUG SAVE]", { data: data, type: this.type });
       if (this.type == "group") {
-        this.$store.dispatch("businessChat/SAVE_GROUP_CHAT", {
+        this.$store.dispatch("networkChat/SAVE_GROUP_CHAT", {
           data: data,
           group_id: this.chatId,
           sender_id: this.currentBizId,
           type: this.type,
         });
       } else {
-        this.$store.dispatch("businessChat/SAVE_BUSINESS_CHAT", {
+        this.$store.dispatch("networkChat/SAVE_BUSINESS_CHAT", {
           data: data,
           type: this.type,
         });
@@ -2089,7 +3480,7 @@ export default {
       this.createGroup();
       let dumId = 7;
       // this.chatId = data.id;
-      this.$store.commit("businessChat/setSelectedChatId", dumId);
+      this.$store.commit("networkChat/setSelectedChatId", dumId);
       let receiver = { receiverID: dumId, keyword: null };
       this.histBizToUser(receiver);
 
@@ -2100,30 +3491,42 @@ export default {
         clickedId: dumId,
         name: this.groupName,
       };
-
       console.log("[DEBUG] Chat selected:", this.chatSelected);
       this.groupName = "";
     },
     selectedChat(data) {
       console.log("[type tabs]", this.tabIndex);
+      this.type = data.type;
       // this.scrollToBottom();
       console.log("[selected Chat]", data);
       this.createRoom(data.id);
       if (this.type == "group") {
         this.createGroup();
       }
-      this.chatId = data.id;
-      this.$store.commit("businessChat/setSelectedChatId", data.id);
+      // this.chatId = data.id;
+      this.rightSide = screenX > 930;
+
+      this.$store.commit("networkChat/setSelectedChatId", data.id);
       let receiver = { receiverID: data.id, keyword: null };
       if (data.type == "user") {
+        this.tabIndex = 0;
+        this.getChatList({ type: data.type });
         this.histBizToUser(receiver);
       } else if (data.type == "network") {
+        this.tabIndex = 2;
+        this.getChatList({ type: data.type });
         this.histBizToNetwork(receiver);
       } else if (data.type == "business") {
+        this.tabIndex = 1;
+        this.getChatList({ type: data.type });
         this.histBizToBiz(receiver);
       } else {
+        this.tabIndex = 3;
+        this.getChatList({ type: data.type });
         this.histBizToGroup(receiver);
       }
+      this.rightSide = screenX > 930;
+
       this.newMsg = false;
       // this.chatSelected = { active: true, clickedId: data.id, ...data.chat };
       this.chatSelected = {
@@ -2166,8 +3569,9 @@ export default {
       this.socket.emit("privateMessage", {
         type: this.type,
         message: this.input,
-        sender_business_id: this.currentBiz.id,
+        sender_network_id: Number(this.currentBiz.id),
         room: this.room,
+        receiver_network_id: this.chatSelected.id,
         receiver_business_id: this.chatSelected.id,
         receiver_id: this.chatId,
         attachment: this.file,
@@ -2190,6 +3594,8 @@ export default {
       var membersBuiness = [];
       var membersNetwork = [];
       var membersEditor = [];
+      var membersMember = [];
+
       console.log("Group members:", this.groupMembers);
       let data = {};
       if (this.groupMembers.length) {
@@ -2206,13 +3612,17 @@ export default {
           return member.networkID != null;
         });
         membersEditor = this.groupMembers.filter((member) => {
-          return member.businessEditorsID != null;
+          return member.networkEditorID != null;
+        });
+        membersMember = this.groupMembers.filter((member) => {
+          return member.memberID != null;
         });
 
         let membersPeopleIds = [];
         let membersBusinessIds = [];
         let membersNetworkIds = [];
         let membersEditorIds = [];
+        let membersMemberIds = [];
 
         membersPeople.map((biz) => {
           membersPeopleIds.push(biz.userID);
@@ -2224,30 +3634,24 @@ export default {
           membersNetworkIds.push(biz.networkID);
         });
         membersEditor.map((biz) => {
-          membersEditorIds.push(biz.businessEditorsID);
+          membersEditorIds.push(biz.networkEditorID);
         });
+        membersMember.map((biz) => {
+          membersMemberIds.push(biz.memberID);
+        });
+
         data = {
           userID: membersPeopleIds,
           businessID: membersBusinessIds,
           networkID: membersNetworkIds,
-          businessEditorID: membersEditorIds,
+          networkEditorID: membersEditorIds,
+          memberID: membersMemberIds,
           message: this.input,
         };
+        this.socket.emit("groupMessage", data);
       }
 
-      this.socket.emit("groupMessage", data);
-
-      // this.socket.emit("groupMessage", {
-      //   type: this.type,
-      //   message: this.input,
-      //   sender_business_id: this.currentBiz.id,
-      //   room: this.room,
-      //   receiver_business_id: this.chatSelected.id,
-      //   receiver_id: this.chatId,
-      //   group_id: this.chatId,
-      // });
-
-      console.log("SENT...");
+      console.log("group SENT...");
       this.input = "";
       this.dismissed();
       this.scrollToBottom();
@@ -2257,13 +3661,11 @@ export default {
       this.file = this.$refs.file.files[0];
       this.filePreview = true;
       this.previewSrc = URL.createObjectURL(this.file);
-
       const fileType = this.file["type"];
       const validImageTypes = ["image/gif", "image/jpeg", "image/png"];
       if (validImageTypes.includes(fileType)) {
         this.$bvModal.show("preview-file");
       }
-
       console.log("file:", this.preview);
       console.log("preview:", this.filePreview);
     },
@@ -2284,6 +3686,7 @@ export default {
 
     showMessages(arg) {
       this.show = arg;
+      this.rightSide = true;
     },
     showInfo(arg) {
       this.info = arg;
@@ -2291,9 +3694,15 @@ export default {
       console.log(this.checked);
     },
     newMessage(arg) {
+      this.rightSide = false;
       console.log("hey");
+      this.getList();
       this.newMsg = !this.newMsg;
       this.show = false;
+      this.bulk = arg.bulk;
+      if (arg.bulk) {
+        this.getAll();
+      }
     },
 
     scrollToBottom() {
@@ -2320,16 +3729,18 @@ export default {
   overflow-x: hidden;
   /* background-color: lightblue; */
 }
+.small {
+  font-size: 10px !important;
+}
 .spinner {
   font-size: 30px;
   width: 08%;
   height: 07%;
 }
 .centralizer {
-  margin: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
+  margin-top: 5%;
+  width: 3rem;
+  height: 3rem;
 }
 .right {
   padding: 10px;
@@ -2444,16 +3855,17 @@ h1 {
   background-color: white;
 }
 .detail {
+  cursor: pointer;
   margin-left: -40px;
 }
 
-.mobile {
+/* .mobile {
   display: none;
 }
 
 .right-mobile {
   display: none;
-}
+} */
 
 .info-nav {
   position: relative;
@@ -2497,12 +3909,12 @@ li {
   .mobile {
     display: flex;
   }
-  .right {
+  /* .right {
     display: none;
   }
   .messages {
     display: none;
-  }
+  } */
   .chat-nav {
     position: relative;
     min-height: 70px;
@@ -2515,9 +3927,9 @@ li {
     border-top-left-radius: 20px;
     margin-top: -3px;
   }
-  .desk {
+  /* .desk {
     display: none;
-  }
+  } */
 
   #sent {
     margin-left: 100px;

@@ -81,7 +81,7 @@
                 <b-card-text> <Insight /> </b-card-text
               ></b-tab>
 
-              <b-tab title="Pending Post">
+              <b-tab :title="$t('general.Pending_Post')">
                 <b-card-text> <Pending /> </b-card-text
               ></b-tab>
 

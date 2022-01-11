@@ -1,4 +1,5 @@
 import moment from 'moment'
+
 import axios from "axios"
 
 export const getRootSchemeForRedis = () => axios.defaults.baseURL.substring(0, axios.defaults.baseURL.length - 8)
@@ -20,11 +21,8 @@ export const fullMediaLink = (media) => {
   return ""
 }
 
-export const fromNow = (dateTime) => {
-  const data = (new Date(dateTime)).toISOString()
-  const newDate = moment(data, "YYYYMMDD")
-  return newDate.fromNow()
-}
+export const fromNow = (dateTime) => (moment(dateTime).local("en" == localStorage.getItem('lang') ? "en" : "fr")).fromNow()
+
 
 export const formatNumber = (num) => {
   if (num >= 1000000000) {
@@ -37,4 +35,13 @@ export const formatNumber = (num) => {
     return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
   }
   return num;
+}
+
+
+console.log(localStorage.getItem('lang'))
+
+export const diffBetweenTwoDate = (end, start) => {
+  const startDate = moment(start)
+  const endDate = moment(end)
+  return endDate.diff(startDate)
 }

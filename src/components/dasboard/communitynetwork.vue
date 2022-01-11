@@ -32,13 +32,14 @@
                 <br />
 
                 <read-more
-                  more-str="read more"
+                  :more-str="$t('search.read_more')"
                   class="readmore"
                   :text="item.about_network"
                   link="#"
-                  less-str="read less"
+                  :less-str="$t('search.read_less')"
                   :max-chars="100"
                 >
+                   
                 </read-more>
               </p>
             </b-col>
@@ -85,7 +86,7 @@
                             : 'fa-user-plus'
                         "
                       ></i>
-                      <span class="btn-com"> Join </span>
+                      <span class="btn-com"> {{ $t("general.Join") }} </span>
                     </b-button>
                   </b-col>
                 </b-row>
@@ -134,7 +135,7 @@ export default {
     },
   },
   methods: {
-    async handleJoin(user) {
+    async handle (user) {
       document.getElementById("joinbtn" + user.id).disabled = true;
       const uri = user.is_member === 0 ? `/add-member` : `/remove-member`;
       const nextFollowState = user.is_member === 0 ? 1 : 0;

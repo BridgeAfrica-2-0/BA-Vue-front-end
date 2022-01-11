@@ -6,8 +6,8 @@ import NotFound from "@/components/NotFoundComponent"
 import NoMoreData from "@/components/businessOwner/PaginationMessage"
 import ClipLoader from 'vue-spinner/src/ClipLoader.vue'
 
-import './notifications.mixins'
-import './post.mixins'
+
+export { Redis, Pusher } from './notifications.mixins'
 
 export const loader = {
   methods: {
@@ -66,6 +66,71 @@ export const search = {
     ...mapActions({
       page: "search/SET_CURRENT_PAGINATION_PAGE",
     }),
+  }
+}
+
+export const NoMoreDataForComment = {
+  components: {
+    NoMoreData
+  },
+  data: () => ({
+    hasData: true,
+    page: 1
+  })
+}
+
+export const WhoIsIt = {
+  computed: {
+    ...mapGetters({
+      profile: 'auth/profilConnected',
+      token: 'auth/getAuthToken'
+    })
+  },
+
+  methods: {
+    ...mapMutations({
+      auth: 'auth/profilConnected',
+    }),
+    async getAuth() {
+
+      const type = ([
+        'NetworkEditors',
+        'networks',
+        "Membar Network Follower",
+        "memberNetwork",].includes(this.$route.name)) ? this.$route.params.id : null
+
+      const response = await this.$repository.share.WhoIsConnect({ networkId: type, type });
+      if (response.success) this.auth(response.data);
+      
+    },
+  },
+
+  created() {
+    this.getAuth()
+  }
+}
+
+export const knowWhoIsConnected = {
+
+  methods: {
+    ...mapMutations({
+      auth: 'auth/profilConnected',
+    }),
+    async getAuth() {
+      const type = ([
+        'NetworkEditors',
+        'networks',
+        "Membar Network Follower",
+        "memberNetwork"].includes(this.$route.name)) ? this.$route.params.id : null
+
+      const response = await this.$repository.share.WhoIsConnect({ networkId: type, type });
+
+      if (response.success) this.auth(response.data);
+    },
+  },
+
+  created() {
+    this.getAuth()
   }
 }
 
@@ -128,7 +193,6 @@ export const commentMixinsBuisness = {
               : 0,
         });
 
-      console.log(this.comment)
     },
 
     onShowReply: async function () {
@@ -193,16 +257,6 @@ export const commentMixinsBuisness = {
       if (state) this.onShowReply();
     },
   },
-}
-
-export const NoMoreDataForComment = {
-  components: {
-    NoMoreData
-  },
-  data: () => ({
-    hasData: true,
-    page: 1
-  })
 }
 
 export const commentMixins = {
@@ -299,61 +353,6 @@ export const commentMixins = {
   },
 }
 
-export const WhoIsIt = {
-  computed: {
-    ...mapGetters({
-      profile: 'auth/profilConnected',
-      token: 'auth/getAuthToken'
-    })
-  },
-
-  methods: {
-    ...mapMutations({
-      auth: 'auth/profilConnected',
-    }),
-    async getAuth() {
-
-      const type = ([
-        'NetworkEditors',
-        'networks',
-        "Membar Network Follower",
-        "memberNetwork",].includes(this.$route.name)) ? this.$route.params.id : null
-
-      const response = await this.$repository.share.WhoIsConnect({ networkId: type, type });
-      if (response.success) this.auth(response.data);
-      console.log(this.profile)
-    },
-  },
-
-  created() {
-    this.getAuth()
-  }
-}
-
-export const knowWhoIsConnected = {
-
-  methods: {
-    ...mapMutations({
-      auth: 'auth/profilConnected',
-    }),
-    async getAuth() {
-      const type = ([
-        'NetworkEditors',
-        'networks',
-        "Membar Network Follower",
-        "memberNetwork"].includes(this.$route.name)) ? this.$route.params.id : null
-
-      const response = await this.$repository.share.WhoIsConnect({ networkId: type, type });
-
-      if (response.success) this.auth(response.data);
-    },
-  },
-
-  created() {
-    this.getAuth()
-  }
-}
-
 export const isYourOwnPostMixins = {
 
   computed: {
@@ -403,4 +402,101 @@ export const PostComponentMixin = {
 
 export const AllPostFeatureMixin = {
   mixins: [PostComponentMixin],
+}
+
+
+export const defaultCoverImage = {
+
+  data: () => ({
+    limit: 1117,
+    currentAuthType: null,
+    strategy: null,
+    isMobile: false,
+    placeholderImage: null
+  }),
+
+  created() {
+    this.strategy = {
+      mobile:{
+        
+        business: () =>  {
+          this.placeholderImage = '/covers/business-msg-en.png'
+          return "fr" == this.$i18n.locale
+            ? ['/covers/business-one.png','/covers/business-two.jpg','/covers/business-tree.jpg']
+            : ['/covers/business-one.png','/covers/business-two.jpg','/covers/business-tree.jpg']
+        },
+        
+        profile: () => { 
+          return "fr" == this.$i18n.locale
+          ? ['/covers/profile mobile FR.png']
+          : ['/covers/profile mobile.png']
+        }
+
+      },
+
+      desktop:{
+        
+        business: () =>  {
+          this.placeholderImage = '/covers/business-msg-en.png'
+          return "fr" == this.$i18n.locale
+            ? ['/covers/business-one.png','/covers/business-two.jpg','/covers/business-tree.jpg']
+            : ['/covers/business-one.png','/covers/business-two.jpg','/covers/business-tree.jpg']
+        },
+        
+        profile: () => {
+          return "fr" == this.$i18n.locale
+          ? ['/covers/profile FR.png']
+          : ['/covers/profile.png']
+        }
+      }
+    }
+
+    window.addEventListener("resize", this.onChangeSize);
+  },
+
+  destroyed() {
+    window.removeEventListener("resize", this.onChangeSize);
+  },
+
+  watch: {
+    "$i18n.locale": function(){
+
+    }
+  },
+
+  computed:{
+    
+    getPlaceHolderImage(){
+      return this.placeholderImage;
+    },
+
+    getCustomCover(){
+      try{
+        return this.strategy[this.isMobile ? "mobile" : "desktop"][this.currentAuthType]()
+      }catch(error){
+        console.log(error)
+      }  
+    }
+  },
+  
+  methods: {
+    onChangeSize(e) {
+      const newWidth = document.documentElement.clientWidth;
+      this.updateStatus(newWidth)
+    },
+
+    updateStatus(width){
+      this.isMobile = (width <= this.limit) ? true : false
+    },
+
+  }
+}
+
+export const ResizeMediaImage = {
+
+  computed: {
+    getStyle(){
+      return ['network'].includes(this.type) ? "width: 226px !important;height: 226px !important" : "width: 250px !important;height: 250px !important"
+    }
+  }
 }

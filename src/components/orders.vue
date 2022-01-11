@@ -131,7 +131,7 @@
         </div>
         <div id="m4" class="mobile2 col t" @click="changeTab(4)">
           <div class="cercle2">4</div>
-          <h2 class="h2 text-position text-center">Cancel</h2>
+          <h2 class="h2 text-position text-center">{{ $t("myOrders.Cancel") }}</h2>
         </div>
       </div>
     </div>
@@ -189,7 +189,7 @@
             >Archive</b-dropdown-item
           >
           <b-dropdown-item @click="updateOrderStatus('delete', order.order_id)"
-            >Delete</b-dropdown-item
+            >{{ $t("general.Delete") }}</b-dropdown-item
           >
         </b-dropdown>
       </div>
@@ -307,7 +307,7 @@ export default {
       loading: false,
       img: ["http://urlr.me/YMQXD", "https://placekitten.com/400/300"],
       showOptions: [
-        { value: null, text: "Please select an option" },
+        { value: null, text: this.$t('general.Please_select_an_option') },
         { value: "a", text: "last 5 days" },
         { value: "b", text: "last 10 days" },
       ],

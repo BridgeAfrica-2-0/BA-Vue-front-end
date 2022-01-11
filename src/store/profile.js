@@ -19,8 +19,9 @@ export default {
     educations: [],
     professions: [],
     networks: [],
-
-
+    blockuser: [],
+    blockbusiness: [],
+    blocknetwork: [],
 
     profile_about: { "user": {}, "user_address": [], "user_education": [], "user_experience": [], "user_websites": [] },
     profileIntro: { "user": {}, "user_address": [], "user_education": [], "user_experience": [], "user_websites": [] },
@@ -137,16 +138,25 @@ export default {
 
   },
   getters: {
+    getblockusers(state){
+      return state.blockuser
+    },
+    getblockbusiness(state){
+      return state.blockbusiness
+    },
+    getblocknetwork(state){
+      return state.blocknetwork
+    },
     getAlbums(state) {
       return state.albums;
     },
 
+    getOwnerPost(state) {
+      return state.ownerPost
+    },
+
     getUserPostIntro(state) {
-
-
       return state.profileIntro;
-
-
     },
 
     getImages(state) {
@@ -195,28 +205,45 @@ export default {
       return state.bdetails;
     }
   },
+
   mutations: {
+    setblockusers(state, blockuser){
+      state.blockuser = blockuser
+    },
+    setblockbusiness(state, blockbusiness){
+      state.blockbusiness = blockbusiness
+    },
+    setblocknetwork(state, blocknetwork){
+      state.blocknetwork = blocknetwork
+    },
+
+    removePost(state, uuid) {
+      const newPosts = state.ownerPost.filter(post => post.id != uuid)
+      state.ownerPost = newPosts
+    },
+
+    UpdatePost(state, payload) {
+
+      const newPosts = state.ownerPost.map(post => post.id == payload.id ? payload : post)
+      state.ownerPost = newPosts
+    },
+
+    createPost(state, payload) {
+      state.ownerPost = [payload, ...state.ownerPost]
+    },
 
     //set community data  
-
     setTcommunity(state, data) {
-
       state.Tcommunity = data;
-
     },
 
 
     setNcommunityFollower(state, data) {
-
       state.NcommunityFollower = data;
-
     },
 
     setUcommunityFollowing(state, data) {
-
-
       state.UcommunityFollowing = data;
-
     },
 
 
@@ -580,8 +607,10 @@ export default {
         });
     },
 
-    getImages({ commit }) {
-      return axios.get("profile/user/media").then(({ data }) => {
+    getImages({ commit }, uuid=null) {
+      const path = uuid ? `profile/user/media?id=${uuid}`: 'profile/user/media';
+
+      return axios.get(path).then(({ data }) => {
         commit("setImages", data.data);
         console.log(data);
       });
@@ -643,6 +672,16 @@ export default {
         });
     },
 
+    Block({ commit }, blockData) {
+      console.log("Block");
+      return axios
+        .post(`profile/${blockData.path}`, blockData.formData)
+        .then(({ data }) => {
+          console.log(data);
+          return data;
+        });
+    },
+
 
 
 
@@ -696,14 +735,9 @@ export default {
       await axios.get('userIntro')
 
         .then(response => {
-          console.log("load user Intro Post test1 successsss +++");
-          console.log(response);
           if (!response) {
             throw "Cannot Found User Post Intro";
           }
-          console.log(context);
-          console.log(payload);
-          console.log("Load User Intro Post test3 blec +++");
           response_ = response.data[0];
           context.commit("editPostUserIntro", response.data.data);
         })
@@ -780,19 +814,6 @@ export default {
       return response_;
     },
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     async loadUserProfileAbout({ commit }, payload) {
       console.log(payload, "load user Profile About start +++++");
 
@@ -830,9 +851,6 @@ export default {
         });
       return response_;
     },
-
-
-
 
     async loadUserBasicInfosBirthDate(context, payload) {
       console.log(payload);
@@ -1436,7 +1454,31 @@ export default {
         commit("set_details", data.data);
         console.log(data);
       });
-    }
+    },
+    getblockusers( {commit}, path ){
+      return axios
+      .get(`profile/${path}`)
+      .then(({ data }) => {
+          commit("setblockusers", data.data);
+        console.log(data);
+      })
+    },
+    getblockbusiness( {commit}, path ){
+      return axios
+      .get(`profile/${path}`)
+      .then(({ data }) => {
+          commit("setblockbusiness", data.data);
+        console.log(data);
+      })
+    },
+    getblocknetwork( {commit}, path ){
+      return axios
+      .get(`profile/${path}`)
+      .then(({ data }) => {
+          commit("setblocknetwork", data.data);
+        console.log(data);
+      })
+    },
 
 
 

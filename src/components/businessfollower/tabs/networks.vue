@@ -57,13 +57,14 @@
                   <br />
 
                   <read-more
-                    more-str="read more"
+                     :more-str="$t('search.read_more')"
                     class="readmore"
                     :text="network.description"
                     link="#"
-                    less-str="read less"
+                    :less-str="$t('search.read_less')"
                     :max-chars="100"
                   >
+                  
                   </read-more>
                 </p>
               </div>
@@ -253,7 +254,7 @@
             <b-col md="6">
               <b-form-group
                 label-cols-lg="12"
-                label="Purpose Of Network"
+                :label="$t('profileowner.Purpose_Of_Network')"
                 label-size="md"
                 label-class=" pt-0"
                 class="mb-0"
@@ -686,7 +687,7 @@ export default {
           this.flashMessage.show({
             status: 'error',
 
-            message: 'Something went wrong',
+            message: 'Something_went_wrong',
 
             blockClass: 'custom-block-class',
           });

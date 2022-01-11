@@ -11,9 +11,9 @@ export default {
         neighbourhoods: [],
 
         prodLoader: false,
-        success: false,
-        token: "51|HZT2jfu5klFDkJhpvEI6dBhAQBDEdBQ2fABwhhaf"
+        success: false
     },
+
     getters: {
         getNetworks(state) {
             return state.networks;
@@ -78,7 +78,9 @@ export default {
         COUNTRIES({ commit, state }) {
             console.log("[DEBUG] Getting countries");
 
-            return axios.get("countries")
+
+            return axios
+                .get("countries")
                 .then((res) => {
                     commit("setCountries", res.data.data);
                     console.log("countries results: ", state.countries);
@@ -88,7 +90,8 @@ export default {
                 });
         },
         REGIONS({ commit }, data) {
-            return axios.post("regions", { country_id: data.country_id })
+            return axios
+                .post("regions", { countryId: data.country_id })
                 .then((res) => {
                     commit("setRegions", res.data.data);
                 })
@@ -98,7 +101,8 @@ export default {
         },
 
         DIVISIONS({ commit }, data) {
-            return axios.post("divisions", { region_id: data.region_id })
+            return axios
+                .post("divisions", { regionId: data.region_id })
                 .then((res) => {
                     commit("setDivisions", res.data.data);
                 })
@@ -107,7 +111,8 @@ export default {
                 });
         },
         COUNCILS({ commit }, data) {
-            return axios.post("councils", { division_id: data.division_id })
+            return axios
+                .post("councils", { divisionId: data.division_id })
                 .then((res) => {
                     commit("setCouncils", res.data.data);
                 })
@@ -116,7 +121,8 @@ export default {
                 });
         },
         NEIGHBOURHOODS({ commit }, data) {
-            return axios.post("neighborhood/show", { council_id: data.council_id })
+            return axios
+                .post("neighborhood/show", { councilId: data.council_id })
                 .then((res) => {
                     commit("setNeighbourhoods", res.data.data);
                 })
@@ -124,19 +130,25 @@ export default {
                     console.error(err);
                 });
         },
-
-
-
         async SEARCH({ commit, state }, data) {
             commit("setNetworks", { data: [] });
             commit("setLoader", true);
             console.log("[DEBUG] HELLO NETWORK SEARCH", data);
-            let page = 1
-            if (data.page) page = data.page
-            else console.log("Page not set!");
+
+            let page = data.page ? data.page : 1
+            let keyword = data.keyword ? data.keyword : ''
+            let catId = data.cat_id ? "&cat_id=" + data.cat_id : ''
+            let countryId = data.country_id ? "&countryId=" + data.country_id : ''
+
+            let regionId = data.region_id ? "&regionId=" + data.region_id : ''
+            let divisionId = data.division_id ? "&divisionId=" + data.division_id : ''
+            let councilId = data.council_id ? "&councilId=" + data.council_id : ''
+            let neighborhood_id = data.neighborhood_id ? "&neighborhood_id=" + data.neighborhood_id : ''
+            let distanceInKM = data.distanceInKM ? "&distanceInKM=" + data.distanceInKM : ''
+
             console.log("[debug] page:", page);
             try {
-                const res = await axios.post(`network/search?page=${page}`, data);
+                const res = await axios.get(`network/search?keyword=${keyword}&page=${page + catId+countryId+regionId+divisionId+councilId+neighborhood_id+distanceInKM}`);
                 commit("setLoader", false);
                 console.log("Network Search results: ", res.data);
                 commit("setNetworks", res.data);
@@ -148,5 +160,5 @@ export default {
         }
 
 
-    }
+    },
 };

@@ -1,13 +1,20 @@
 <template>
   <b-button
-    block
+    :block="header"
     variant="primary"
     size="sm"
-    class="b-background flexx  shadow"
+    :class="header ? 'message size' : 'b-background flexx shadow'"
     @click="cta()"
   >
-    <i class="fas fa-envelope fa-lg btn-icon pt-1 pr-1"></i>
-    <span class="btn-text"> {{ $t("dashboard.Messages") }}</span>
+    <span v-if="header" style="margin-left:-3px">
+      <i class="fas fa-envelope fa-lg btn-icon"></i>
+      <span class="ml-1"> {{ $t("businessf.Message") }}</span>
+    </span>
+
+    <p class="d-flex" v-else>
+      <i class="fas fa-envelope fa-lg btn-icon pt-1 pr-1"></i>
+      <span class="btn-text"> {{ $t("dashboard.Messages") }}</span>
+    </p>
   </b-button>
 </template>
 
@@ -20,6 +27,10 @@ export default {
     },
     type: {
       type: String,
+    },
+    header: {
+      default: false,
+      type: Boolean,
     },
   },
   data() {
@@ -50,7 +61,7 @@ export default {
       if (this.activeAccount.user_type == "business") {
         path = "/business_owner/" + this.activeAccount.id;
       } else if (this.activeAccount.user_type == "network") {
-        path = "/";
+        path = "/network/" + this.activeAccount.id;
       } else path = "/messaging";
 
       let msgTabId = 0;
@@ -62,7 +73,10 @@ export default {
         msgTabId = 2;
       }
       console.log("path:", path);
-      this.$router.push({ path: `${path}`, query: { tabId: 1, msgTabId: msgTabId } });
+      this.$router.push({
+        path: `${path}`,
+        query: { tabId: 1, msgTabId: msgTabId },
+      });
       // this.$router.push({ path: `/business_owner/${this.activeAccount.id}`, query: { tabId: 1, msgTabId: 0 } });
     },
   },
@@ -88,4 +102,16 @@ export default {
 .pobtn {
   font-size: 10px;
 }
+
+/* cta comp */
+.message {
+  color: #fff !important;
+  background-color: #32a400;
+  border: none;
+  border-radius: none;
+}
+.message:hover {
+  background-color: #006400;
+}
+/* cta comp */
 </style>

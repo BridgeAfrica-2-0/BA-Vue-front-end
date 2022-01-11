@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-icon class="icon" variant="primary" icon="person-fill"></b-icon> {{ $t('profilefollowerAbout.') }}
+    <b-icon class="icon" variant="primary" icon="person-fill"></b-icon> {{ $t('general.About') }}
 
     <hr />
 

@@ -15,7 +15,7 @@
         </b-col>
         <b-col cols="9" md="11" class="p-0 m-0 pr-3">
           <input
-            placeholder="Post a business update"
+            :placeholder="$t('general.Post_a_business_update')"
             v-b-modal.modal-xl
             class="comment"
             type="text"
@@ -71,7 +71,7 @@
                 class="post-btn"
               >
                 <fas-icon class="icons" :icon="['fas', 'file']" size="lg" />
-                <span class="username"> Attach File </span>
+                <span class="username">{{ $t("general.Attach_File")}} </span>
               </b-button>
             </b-col>
             <!-- Post-->
@@ -88,7 +88,7 @@
                   :icon="['fas', 'paper-plane']"
                   size="lg"
                 />
-                <span class="username"> Post </span>
+                <span class="username"> {{ $t("general.Post")}} </span>
               </b-button>
             </b-col>
           </b-row>
@@ -108,7 +108,7 @@
           ref="modal-edit"
           centered
           hide-footer
-          title="Update Post"
+          :title="$t('general.Update_Post')"
           @hidden="resetPostData"
         >
           <b-row ref="loader">
@@ -134,7 +134,7 @@
                 <b-form-textarea
                   id="textarea-small"
                   class="mb-2 border-none"
-                  placeholder="Post a business update"
+                  :placeholder="$t('general.Post_a_business_update')"
                   v-model="edit_description"
                 ></b-form-textarea>
 
@@ -252,7 +252,7 @@
               <span>
                 <b-button @click="updatePost" variant="primary" block
                   ><b-icon icon="cursor-fill" variant="primary"></b-icon>
-                  Publish</b-button
+                  {{ $t("general.Publish")}}</b-button
                 >
               </span>
             </b-col>
@@ -265,7 +265,7 @@
           ref="modal-xl"
           centered
           hide-footer
-          title="Create Post"
+          :title="$t('general.Create_Post')"
           @hidden="resetPostData"
         >
           <b-row ref="loader">
@@ -298,7 +298,7 @@
                 ></b-form-textarea>
               </div>
               <div class="bordder">
-                <span class="float-left"> Add to Your Post </span>
+                <span class="float-left"> {{$t("general.Add_to_Your_Post")}} </span>
                 <span class="float-right">
                   <b-button-group size="sm" class="">
                     <input id="video" type="file" hidden />
@@ -320,7 +320,7 @@
                     />
 
                     <b-button
-                      title="Add Movie"
+                      :title="$t('general.Ad_Movie')"
                       size="sm"
                       variant="outline-primary"
                       @click="$refs.movies.click()"
@@ -359,7 +359,8 @@
                     class="float-right"
                     @click="deleteItem(hyperlink.fileName)"
                   >
-                    delete
+                   
+                   {{$t("general.delete")}}  
                   </span>
                 </div>
 
@@ -397,7 +398,7 @@
               <span>
                 <b-button @click="submitPost" variant="primary" block
                   ><b-icon icon="cursor-fill" variant="primary"></b-icon>
-                  Publish</b-button
+                  {{$t("general.Publish")}} </b-button
                 >
               </span>
             </b-col>
@@ -583,7 +584,7 @@ export default {
           this.flashMessage.show({
             status: "success",
             blockClass: "custom-block-class",
-            message: "Post Deleted",
+            message:  this.$t('general.Post_Deleted'),
           });
 
           loader.hide();
@@ -605,7 +606,7 @@ export default {
             this.flashMessage.show({
               status: "error",
               blockClass: "custom-block-class",
-              message: "Unable to Delete your Post",
+              message: this.$t('general.Unable_to_Delete_your_Post'),
             });
             console.log({ err: err });
 

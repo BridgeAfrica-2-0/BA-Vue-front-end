@@ -9,12 +9,12 @@
 </template>
 
 <script>
-import navbar from '@/components/navbar';
-import Business from '../components/businessf/business';
-import Footer from '../components/footer';
+import navbar from "@/components/navbar";
+import Business from "../components/businessf/business";
+import Footer from "../components/footer";
 
 export default {
-  name: 'Home',
+  name: "Home",
   components: {
     navbar,
     Business,
@@ -25,14 +25,14 @@ export default {
       tabIndex: null,
       foll_id: null,
       isloaded: false,
-      tabs: ['#post', '#about', '#business', '#media', '#community'],
+      tabs: ["#post", "#about", "#business", "#media", "#community"],
     };
   },
   created() {
     this.foll_id = this.$route.params.id;
-
+this.isloaded = true;
     this.$store
-      .dispatch('businessOwner/roleCheck', this.foll_id)
+      .dispatch("businessOwner/roleCheck", this.foll_id)
       .then((data) => {
         this.isloaded = true;
       })
@@ -42,7 +42,7 @@ export default {
         console.log(error.response.status);
 
         if (error.response.status == 404) {
-          this.$router.push({ name: 'notFound' });
+          this.$router.push({ name: "notFound" });
         }
       });
   },

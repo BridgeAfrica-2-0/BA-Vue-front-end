@@ -14,17 +14,22 @@
 
         <b-col md="5" cols="7" lg="7" xl="7" sm="5">
           <p class="textt">
-            <strong class="title"> {{ item.name }} </strong> <br />
+            <router-link
+              :to="{ name: 'Membar Network Follower', params: { id: item.id } }"
+            >
+              <strong class="title"> {{ item.name }} </strong>
+            </router-link>
+            <br />
             {{ item.category }}
             <br />
             {{ item.followers }} {{ $t("profileowner.Community") }}<br />
 
             <read-more
-              more-str="read more"
+              :more-str="$t('search.read_more')"
               class="readmore"
               :text="item.about_network"
               link="#"
-              less-str="read less"
+              :less-str="$t('search.read_less')"
               :max-chars="100"
             >
             </read-more>
@@ -42,7 +47,10 @@
                 cols="4"
                 class="mt-2 text-center"
               >
+              
+
                 <b-button
+              
                   block
                   size="sm"
                   class="b-background shadow"
@@ -97,7 +105,7 @@
                       item.is_member !== 0 ? 'fa-user-minus' : 'fa-user-plus'
                     "
                   ></i>
-                  <span class="btn-com"> Join </span>
+                  <span class="btn-com"> {{ $t("general.Join") }} </span>
                 </b-button>
               </b-col>
             </b-row>
@@ -133,7 +141,11 @@ export default {
     };
   },
 
-  computed: {},
+  computed: {
+    show() {
+      return this.$route.name;
+    },
+  },
 
   mounted() {
     this.foll_id = this.$route.params.id ? this.$route.params.id : "";
@@ -201,6 +213,18 @@ export default {
         });
     },
 
+
+    
+  getTotalCommunity(){
+         this.$store
+      .dispatch("follower/Tcommunity", this.foll_id)
+      .then((response) => {})
+      .catch((error) => {
+        console.log({ error: error });
+      });
+    },
+
+
     async handleFollow(user) {
       document.getElementById("followbtn" + user.id).disabled = true;
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
@@ -215,6 +239,8 @@ export default {
         .then((response) => {
           user.is_follow = nextFollowState;
           document.getElementById("followbtn" + user.id).disabled = false;
+
+             this.getTotalCommunity();
         })
         .catch((err) => {
           console.log(err);

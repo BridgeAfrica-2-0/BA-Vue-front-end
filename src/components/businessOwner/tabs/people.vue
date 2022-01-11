@@ -15,7 +15,9 @@
                     <b-row>
                       <b-col md="6" lg="6" cols="6" sm="6" class="mt-lg-2">
                         <div class="mt-2 mt-lg-0 mt-xl-0 username">
-                          <b> {{ item.name }} </b>
+                            <router-link :to="'/profilefollower/' + item.id">
+                              {{ item.name }} 
+                            </router-link>
                         </div>
                       </b-col>
 
@@ -158,6 +160,18 @@ export default {
         });
     },
 
+     businessCommunityTotal() {
+      this.$store
+        .dispatch("businessOwner/businessCommunityTotal", this.biz_id)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+
     async handleFollow(user) {
       
       console.log("yoo ma gee");
@@ -175,6 +189,8 @@ export default {
           console.log(data);
           user.is_follow = nextFollowState;
            document.getElementById("followbtn"+user.id).disabled = false;
+
+           this.businessCommunityTotal();
         })
          
           .catch((err) =>{  

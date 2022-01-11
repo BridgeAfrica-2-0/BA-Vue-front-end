@@ -7,13 +7,13 @@
           </h6>
         </template>
  
-        <post-network @changement="changer"></post-network>
+        <post-network @changeSelected="changeSelected"></post-network>
       </b-tab>
       <b-tab>
         <template slot="title" class="tt-color">
           <h6 class="h6">{{ $t('network.Media') }}</h6>
         </template>
-
+        
         <media-network :type="'network'"></media-network>
       </b-tab>
       <b-tab>
@@ -62,9 +62,9 @@ export default {
   },
 
   methods: {
-    changer(){
+    changeSelected(){
+      console.log("defaultNetwork")
       this.$emit('changeSelected')
-      console.log("evenement reçu ----")
     }
   }
 };

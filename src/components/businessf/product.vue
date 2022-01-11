@@ -1,56 +1,120 @@
 <template>
   <div>
+
+
+    <div class="text-center" v-if="loader" >
+
+        <b-spinner
+           class="spin"
+          variant="primary">   </b-spinner>      
+      
+     </div>      
+
+  
+
+
+  
+    <b-row v-if="!loader">
+            <b-col md="12" lg="6" class=" mb-2" v-for="product in products.data" :key="product.id">
     
-    <div class="people-style p-3 shadow">
-      <b-row>
-        <b-col cols="5" lg="4" sm="4" md="5">
+    <div class="people-style p-3 shadow h-100">
+   
+        <div class="d-inline-flex">
+
+          <div> 
+
           <div class="center-img">
             <img
               :src="product.picture"
               class="r-image cursor-pointer"
-              @click="productDetails"
+             @click="productDetails(product)"
             />
           </div>
-        </b-col>
-        <b-col cols="7" sm="8" md="7">
+
+          </div>
+           
+
+           <div class="flx50">  
+       
           <p class="text">
-            <strong class="title cursor-pointer" @click="productDetails">
+            <strong class="title cursor-pointer" @click="productDetails(product)" >
               {{ product.name }}
             </strong>
             <br />
-            <strong> Description </strong> <br />
-            {{ product.description.substring(0, 30) }}
-            <b-link v-if="product.description.length >= 30"> see more </b-link>
-            <br />
-            <span class="price">
-              <strong> {{ product.price }} </strong>
-            </span>
-            <br />
-          </p>
+            
+            
+               <read-more
+                        more-str="read more"
+                        class="readmore"
+                        :text="product.description"
+                        link="#"
+                        less-str="read less"
+                        :max-chars="100"
+                      >
+                      </read-more>
+
           
-            <div class="row">
-              <div class="col marge" >
+            
+            
+
+            <span class="price username mt-2">
+             {{ product.price }} FCFA
+            </span>
+        
+
+          </p>
+
+           </div>
+
+        </div>
+
+
+        <br>
+          
+            <div class="d-inline-flex float-right  mt-2">
+              <div class=" " >
                   <b-button variant="primary"
-                  @click="buyNow" 
+                  @click="buyNow(product)" 
                   ><span>{{$t("general.Buy_Now")}}</span>
                  </b-button>
               </div>
-              <div class="w-100 my-1"></div>
-            <div class="col marge">
-              <b-button variant="primary" @click="handleAddToCard"
+             
+            <div class=" ml-2 ">
+              <b-button variant="primary" @click="handleAddToCard(product)"
               ><span>{{$t("general.Add_to_Cart")}}</span>
              </b-button>
             </div>
 
             </div>
-         
-        </b-col>
-      </b-row>
 
-      <!-- <div>
-        <br />
-      </div> -->
+         <br>   <br>  
+         
     </div>
+
+
+
+    
+            </b-col>
+    </b-row>
+
+
+
+ <span v-if="!loader"> 
+     <b-pagination
+      v-if="products.next || products.previous"
+      v-model="currentPage"
+      pills
+      :total-rows="products.total"
+      :per-page="per_page"
+      aria-controls="my-table"
+      @change="changePage"
+      align="center"
+    ></b-pagination>
+
+  </span>
+
+
+
     <!-- EDIT PRODUCT MODAL -->
 
     <b-modal hide-footer title="Edit product">
@@ -276,10 +340,27 @@
 <script>
 import ProductDetails from "./ProductDetails.vue";
 export default {
-  props: ["product"],
+
   data() {
     return {
       viewProduct: false,
+
+      businessId:null,
+     // products:[],
+       product:[],
+      load: false,
+      loader: false,
+      pro_img:'',
+      showModal: false,
+      Edit: false,
+      selectedProduct: "",
+       total: 0,
+      per_page: 10,
+     
+      currentPage: 1,
+      nextLoad: false,
+
+
     };
   },
   components: {
@@ -287,6 +368,14 @@ export default {
   },
 
   computed: {
+
+     products(){
+      
+       return this.$store.state.market.products;
+
+    },
+
+
     getStatus() {
       return this.$store.state.cart.status;
     },
@@ -296,61 +385,101 @@ export default {
 				return this.$store.state.checkout.allShipping;
     }
   },
+
+  beforeMount() {
+
+     this.loader = true;
+     this.businessId = this.$route.params.id;
+      this.getProducts();
+   
+
+  },
+
   methods: {
     /**
      * Used to view produduct details
      * @param id
      * @return void
      */
-    productDetails() {
+
+
+    
+
+
+    
+        changePage(value) {
+      console.log("next page loading ");
+      
+      this.loader=true;
+      this.currentPage = value;
+     let url="/market?business_id="+this.businessId+"&page="+value;    
+
+      this.$store
+        .dispatch("market/bPnextPage", url).then((res) => {
+          console.log(res);
+          this.loader=false;
+          
+        })
+       
+        .catch((err) => {
+         
+          console.error(err);
+        });
+    },
+
+
+
+      getProducts: async function () {
+        let url="/market?business_id="+this.businessId;
+       await this.$store
+        .dispatch("market/getBproducts", url).then((res) => {
+          console.log(res);
+             
+             
+          
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+        .finally(() => {
+          this.loader = false;
+        });
+    },
+
+
+
+    productDetails(product) {
+      console.log(product);
+      this.product=product;
       this.viewProduct = true;
     },
+
     closeDetailsProduct() {
       this.viewProduct = false;
     },
 
-    buyNow(){
-      this.handleAddToCard();
+    buyNow(product){
+      this.handleAddToCard(product);
       this.$router.push({name: 'payment'})
-    //   var dataf = [];
-    //  var data =   {
-    //       produits:{
-    //         data: {
-    //           product_id: this.product.id,
-    //             quantity:1,
-    //             price: this.product.price,
-    //             product_kg: this.product.kg,
-    //             business_id:this.product.business_id,
-    //             sub_total: 20000
-    //         },
-    //     },
-    //     total_amount: this.product.price+this.product.tax_amount,
-    //     tax_amount: this.product.tax_amount,
-        
-    // }
-    //   console.log("buy now", data, this.shippingAddress)
-
-    //   this.shippingAddress.map(item =>{
-    //      dataf.push({ ...data, shipping_address: item.id });
-      
-    //   })
-    //   console.log("buy now", dataf)
+    
     },
 
-    handleAddToCard() {
-      console.log("add to card ", this.product.id);
+    handleAddToCard(product) {
+
+       this.product=product;
+      console.log("add to card ", this.product);
       this.$store
-        .dispatch("cart/addToCart", this.product.id)
+        .dispatch("cart/addToCart", product )
         .then((response) => {
-          console.log("----", this.getStatus);
+          
 
           this.flashMessage.show({
             status: "success",
             message: this.getStatus,
           });
         })
-        .catch((error) => {
-          console.log(error);
+        .catch((err) => {
+          console.log({err:err});
           this.flashMessage.show({
             status: "error",
             message: "error occur",
@@ -373,6 +502,22 @@ export default {
 </script>
 
 <style scoped>
+
+
+.flx50{
+  flex-basis: 80%;
+}
+
+.spin{
+          text-align: center;
+    margin-top: 10%;
+      margin-bottom: 10%;
+    width: 4rem;
+     height: 4rem;
+        }
+
+
+
 .discount {
   color: orange;
   margin-left: 60px;
@@ -471,7 +616,7 @@ h6 {
     font-style: normal;
     padding: 1px;
     text-align: left;
-    margin-left: -30px;
+    /* margin-left: -30px; */
     line-height: 25px;
   }
   .r-image {
@@ -512,6 +657,7 @@ h6 {
     text-align: left;
     margin-right: -5px;
     line-height: 25px;
+     margin-left: 75px;
   }
   .r-image {
     border-top-left-radius: 10px;
@@ -616,6 +762,7 @@ h6 {
     text-align: left;
     margin-right: -5px;
     line-height: 25px;
+     margin-left: 75px;
   }
   .r-image {
     border-top-left-radius: 10px;

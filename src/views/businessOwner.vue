@@ -1,7 +1,7 @@
 <template>
-  <div class="" style="overflow-y: hidden; padding: 0px">
-    <span v-if="isloaded">
-      <navbar />
+  <div class="" style="overflow-y: hidden; padding: 0px" ref="wrapper">
+    <navbar />
+    <div v-if="isloaded">
       <div class="container-fluid">
         <ly-tab
           v-model="selectedId"
@@ -14,21 +14,12 @@
       </div>
 
       <div class="" v-if="selectedId == '0'">
-        <Business />
+        <Business @pageChange="pageChange" />
       </div>
 
       <div class="mt-3" v-if="selectedId == '1'">
         <Inbox />
       </div>
-
-      <!-- <div class="container-fluid">
-        <ly-tab
-          v-model="selectedId"
-          :items="items"
-          :options="options"
-          class="center-ly"
-        >
-        </ly-tab> -->
 
       <div class="mt-3" v-if="selectedId == '2'">
         <Settings v-bind:currenttab="selectedId" />
@@ -45,9 +36,12 @@
       <div class="mt-3" v-if="selectedId == '5'">
         <Settings v-bind:currenttab="selectedId" />
       </div>
-      <!-- </div> -->
-      <Footer />
-    </span>
+
+      <div class="mt-3" v-if="selectedId == '6'">
+        <Settings v-bind:currenttab="selectedId" />
+      </div>
+    </div>
+    <Footer />
   </div>
 </template>
 
@@ -92,6 +86,9 @@ export default {
     };
   },
   methods: {
+    pageChange(){
+      this.selectedId = 6
+    },
     businessInfo() {
       this.$store
         .dispatch("businessOwner/businessInfo", this.url_data)
@@ -154,6 +151,14 @@ export default {
   },
 
   created() {
+
+    let loader = this.$loading.show({
+      container: this.$refs.wrapper,
+      canCancel: true,
+      onCancel: this.onCancel,
+      color: "#e75c18",
+    });
+
     this.selectedId = this.$route.query.tabId ? this.$route.query.tabId : "0";
     this.foll_id = this.$route.params.id;
     this.$store
@@ -175,21 +180,25 @@ export default {
             break;
         }
         this.isloaded = true;
+        loader.hide()
       })
       .catch((error) => {
         console.log({ error: error });
         console.log(error.response.status);
+        loader.hide()
         if (error.response.status == 404) {
           this.$router.push({ name: "notFound" });
         }
       });
+
+
+   
   },
   mounted() {
     if (this.$store.state.profileSettingsEdit.etat == 1) {
       this.selectedId = this.$store.state.profileSettingsEdit.selectedId;
     }
     this.url_data = this.$route.params.id;
-    console.log(this.url_data);
     this.businessInfo();
     this.CommunityBusiness();
     this.CommunityPeople();

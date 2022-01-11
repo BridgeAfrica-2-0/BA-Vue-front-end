@@ -6,24 +6,39 @@
 
     <div class="people-style shadow" v-for="item in network" :key="item.id">
       <b-row>
-        <b-col md="3" xl="5" lg="5" cols="5" sm="3">
+        <b-col md="8" xl="12" lg="12" cols="12" sm="8">
+          <div class="d-inline-flex">
+
           <div class="center-img">
             <img :src="item.picture" class="r-image" />
           </div>
-        </b-col>
+        
 
-        <b-col md="5" cols="7" lg="7" xl="7" sm="5">
+        <div class="flx100">
           <p class="textt">
-            <strong class="title"> {{ item.name }} </strong> <br />
+            <strong class="title"> 
+              <router-link :to="'/network_follower/' + item.id">
+                {{ item.name }} 
+              </router-link>
+            </strong> <br />
             {{ item.category }}
             <br />
             {{ item.followers }} {{ $t("businessowner.Community") }}<br />
-
-            {{ item.about_network }}
-            <b-link> {{ $t("businessowner.Read_More") }}</b-link>
-          </p>
+       
+           
+                      <read-more
+                        :more-str="$t('search.read_more')"
+                        class="readmore"
+                        :text="item.about_network"
+                        link="#"
+                        :less-str="$t('search.read_less')"
+                        :max-chars="100"
+                      >
+                     
+                      </read-more>
+          </p>  </div> </div>
+    
         </b-col>
-
         <b-col lg="12" xl="12" md="4" cols="12" sm="4">
           <div class="s-button">
             <b-row>
@@ -78,13 +93,17 @@
                 <b-button
                   block
                   size="sm"
-                  class="b-background shadow"
+                  :id="'followbtn'+item.id"
+                  class="b-background flexx pobtn shadow mr-lg-3 mr-xl-3"
+                  :class="item.is_follow !== 0 && 'u-btn'"
                   variant="primary"
+                  @click="networkJoin(item)"
                 >
-                  <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
-                  <span class="btn-text">
-                    {{ $t("businessowner.Direction") }}</span
-                  >
+                  <i
+                    class="fas fa-lg btn-icon"
+                    :class="item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"
+                  ></i>
+                    <span class="btn-com">Join</span>
                 </b-button>
               </b-col>
             </b-row>
@@ -92,6 +111,12 @@
         </b-col>
       </b-row>
     </div>
+
+
+
+
+
+
 
     <infinite-loading @infinite="infiniteHandler"></infinite-loading>
   </div>
@@ -135,6 +160,23 @@ export default {
   },
 
   methods: {
+
+    networkJoin: async function(item){
+      const status = item.is_follow
+
+      const request = !status ? await this.$repository.share.jointNetwork({id: item.id , type: "network"}) : await this.$repository.share.removeNetwork({id: item.id , type: "network"})
+        
+
+      if (request.success){
+        item = Object.assign(item, {is_follow: status ? 0 : 1})
+
+        this.flashMessage.show({
+          status: "success",
+          title: request.data,
+        });
+      }
+    },
+
     infiniteHandler($state) {
       console.log("loading network 1 1");
 
@@ -174,6 +216,18 @@ export default {
         });
     },
 
+
+     businessCommunityTotal() {
+      this.$store
+        .dispatch("businessOwner/businessCommunityTotal", this.biz_id)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
     async handleFollow(user) {
       document.getElementById("followbtn" + user.id).disabled = true;
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
@@ -188,6 +242,8 @@ export default {
         .then((response) => {
           user.is_follow = nextFollowState;
           document.getElementById("followbtn" + user.id).disabled = false;
+
+          this.businessCommunityTotal();
         })
         .catch((err) => {
           console.log(err);
@@ -251,6 +307,7 @@ export default {
   text-align: center;
 
   padding: 15px;
+  padding-top: 2px;
 }
 
 @media only screen and (max-width: 768px) {
@@ -288,7 +345,7 @@ export default {
     padding: 1px;
     text-align: left;
 
-    margin-left: -30px;
+    margin-left: 2px;
 
     margin-right: -5px;
 
@@ -341,7 +398,7 @@ export default {
     padding: 1px;
     text-align: left;
 
-    margin-left: 30px;
+    margin-left: 65px;
 
     margin-right: -5px;
 

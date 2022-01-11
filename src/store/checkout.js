@@ -7,14 +7,22 @@ const state = {
 
   ],
   order: {
-
+    data: 
+   { order_id: "",
+    total_cost: 0}
   },
+
+
   cart: [],
+  cart_summary:{},
+  total:null,
+ 
   buisinessOrdered: []
 
 }
 const getters = {
-  getAllShipping: (state) => state.allShipping
+  getAllShipping: (state) => state.allShipping,
+  getCartSummary: (state) => state.cart_summary
 }
 const actions = {
   async createShipping({ commit }, newShippingAdd) {
@@ -28,6 +36,65 @@ const actions = {
         console.log(error)
       })
   },
+
+
+  async getCartSummary({ commit }) {
+    await axios.get('cart/summary')
+      .then((response) => {
+        console.log(response.data)
+       
+        commit('setCartSummary', response.data.data)
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  },
+
+
+
+  async getTotal({ commit }) {
+    await axios.get('cart/total')
+      .then((response) => {
+        console.log(response.data)
+       
+        commit('setCartTotal', response.data.data)
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  },
+
+  
+
+  async choseShipping({ commit },payload) {
+    await axios.post('update/shipping-address/status?shipping_address_id='+payload.id)
+      .then((response) => {
+        console.log(response)
+      
+      })
+      .catch((error) => {
+        console.log({error:error});
+      })
+  },
+
+
+
+
+  async updateCart({ commit },payload) {
+    await axios.post('cart/update-quantity/'+payload.index, {
+      quantity:payload.quantity
+    })
+      .then((response) => {
+        console.log(response)
+        console.log("yooo the mother fucker");
+      //  commit('setCartSummary', response.data.data)
+      })
+      .catch((error) => {
+        console.log({error:error});
+      })
+  },
+
+
 
   async getAllShippingAdd({ commit }) {
     await axios.get('shipping/checkout/shippingAddresses')
@@ -47,22 +114,76 @@ const actions = {
         console.log(error);
       })
   },
-  async createOrder({ commit }, newOrder) {
-    await axios.post('cart/create', newOrder).then((response) => {
-      commit('setOrder', newOrder)
-      console.log(response.data);
+
+
+   createOrder({ commit }) {
+
+    return  axios.post('cart/create').then((data) => {
+
+     let orderId=data.data.data;
+    console.log(data.data);
+
+    return   data; 
+
+     
+   
+   
     }).catch((error) => {
       console.log(error)
     })
   },
+
+
+  getorder({ commit },payload ){
+
+    return   axios.get('cart/payement-amount/'+payload.data).then((data) => {   
+
+    
+     
+
+      commit('setOrder', data.data);
+      localStorage.setItem("Order", data.data);
+
+
+      return   data; 
+
+     
+      
+}).catch((error) => {
+  console.log(error)
+})
+
+  } ,
+
   async getCart({ commit }) {
     await axios.get('cart').then((response) => {
-      console.log(response.data)
+      console.log(response)
       commit('setCart', response.data)
     }).catch((error) => {
-      console.log(error)
+      console.log({error:error})
     })
   },
+
+
+
+  async getCartt({ commit }) {
+    await axios.get('ckeckout-cart').then((response) => {
+      console.log(response)
+      commit('setCart', response.data)
+    }).catch((error) => {
+      console.log({error:error})
+    })
+  },
+
+    async next({ commit }, url) {
+    await axios.get(url).then((response) => {
+      console.log(response)
+      commit('setCart', response.data)
+    }).catch((error) => {
+      console.log({error:error})
+    })
+  },
+
   async getBussiness({ commit }, id) {
     await axios.get(`profile/businessInfo/${id}`).then((response) => {
       commit("setBuisiness", response.data)
@@ -85,6 +206,13 @@ const actions = {
 }
 const mutations = {
   setAllShipping: (state, newShippingTab) => state.allShipping = newShippingTab,
+
+  setCartSummary: (state, cartSummary) => state.cart_summary = cartSummary,
+
+  setCartTotal: (state, cartSummary) => state.total = cartSummary,
+
+  
+
   addShipping: (state, newShippingAdd) => state.allShipping.unshift(newShippingAdd),
   deleteShippingAdd: (state, idShipping) => state.allShipping = state.allShipping.filter(el => el.id !== idShipping),
   setOrder: (state, newOrder) => state.order = newOrder,

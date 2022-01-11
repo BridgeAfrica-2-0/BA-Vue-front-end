@@ -17,8 +17,7 @@
     </b-row>
     <br />
 
-
-        <CommunityBusiness  :searchh="search" ref="search" type="Follower" />
+        <CommunityBusiness @BlockUser="BlockUser" :searchh="search" ref="search" type="Follower" />
         
      
   </div>
@@ -37,10 +36,16 @@ export default {
     CommunityBusiness
   },
   
-  methods:{
-
-
-
+  methods: {
+    BlockUser(id) {
+      console.log(id);
+      let dataInfo = {
+        id: id,
+        refernce: "business",
+        type: "follower",
+      };
+      this.$emit('BlockUser', dataInfo);
+    },
   }
 
   

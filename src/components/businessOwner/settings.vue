@@ -54,7 +54,7 @@
         <div class="bv-example-row">
           <div>
             <b-tabs
-            lazy
+              lazy
               pills
               v-model="tabIndex"
               vertical
@@ -153,6 +153,12 @@ export default {
 
         if (newVal == 5) {
           this.selectedIdd = "0";
+          this.tabIndex = "0";
+        }
+
+        if (newVal == 6) {
+          console.log(newVal);
+          this.selectedIdd = "6";
           this.tabIndex = "7";
         }
       },

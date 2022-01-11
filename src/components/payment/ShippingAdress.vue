@@ -27,19 +27,37 @@
 					class="ship-add w-100 col-12 d-flex justify-content-between align-items-start"
 					v-for="shipping_item in shippingsTab"
 					:key="shipping_item.id"
-				>
-					<div>
-						<p class="body-font-size">
-							{{ shipping_item.user_name }}. {{ shipping_item.phone }},{{
-								shipping_item.country_name
+				>  
+
+			
+    
+
+
+					<div class="d-inline-flex">
+
+					
+                        <div class="col-1">
+
+				
+	   <input type="radio" :v-model="shipping_item.id"  @change="shipping(shipping_item)"   :checked="shipping_item.active==1"     name="shipping" value="">   </div>
+	
+
+	      <div>     
+
+	   
+						<p class="body-font-size"> 
+							{{ shipping_item.name }}, {{ shipping_item.phone }},{{
+								shipping_item.country
 							}}, {{shipping_item.email}}
 						</p>
 						<p class="body-font-size">
-							{{ shipping_item.region_name }},{{
-								shipping_item.division_name
-							}}.{{ shipping_item.council_name }}, {{ shipping_item.city }},
-							{{ shipping_item.neighbourhood_name }}
-						</p>
+							{{ shipping_item.region }},{{ shipping_item.city }}
+							
+							<!-- ,{{
+								shipping_item.division
+							}}.{{ shipping_item.council_name }},
+							{{ shipping_item.neighbourhood_name }} -->
+						</p>   </div>
 					</div>
 					<div class="">
 						<div class="">
@@ -62,8 +80,8 @@
 									</template>
 									<b-dropdown-item-button v-b-modal.create-shipping-modal>
 										<b-icon
-											variant=""
-											class="mr-2"
+											variant="primary"
+											class="mr-2 icon-size"
 											icon="plus"
 											aria-hidden="true"
 										></b-icon>
@@ -71,15 +89,15 @@
 									</b-dropdown-item-button>
 									<b-dropdown-item-button v-b-modal.change-shipping-modal>
 										<b-icon
-											variant=""
-											class="mr-2"
+											variant="primary"
+											class="mr-2 icon-size"
 											icon="arrow-down-up"
 											aria-hidden="true"
 										></b-icon>
 										<span class="">{{$t("general.Change")}}</span>
 									</b-dropdown-item-button>
 									<ConfirmOperation
-										message="Do you want to delete this shipping address?"
+										:message="$t('general.Do_you_want_to_delete_this_shipping_address')"
 										@sendid="handleDeleteShipping"
 										:id_item="shipping_item.id"
 									/>
@@ -87,12 +105,14 @@
 							</div>
 						</div>
 					</div>
+
+				
 				</div>
 			</div>
 		</b-card-text>
 		<div class="row" v-if="loading">
 			<div class="col-12 d-flex justify-content-center">
-				<b-spinner large label="loading shipping..."></b-spinner>
+				<b-spinner variant="primary" large label="loading shipping..."></b-spinner>
 			</div>
 		</div>
 	</b-card>
@@ -114,9 +134,48 @@
 			CreateShippingModal,
 			ChangeShippingAddress,
 		},
+
+		
 		methods: {
+
+
+			shipping(data){
+             
+			 	let loader = this.$loading.show({
+        container: this.fullPage ? null : this.$refs.preview,
+        canCancel: true,
+        onCancel: this.onCancel,
+        color: "#e75c18",
+      });
+
+
+			 this.$store.dispatch("checkout/choseShipping", data).then(() => {
+					  this.$store.dispatch("checkout/getCartt").then(() => {
+					     loader.hide();
+
+						 })
+				.catch(() => {
+					
+				});
+					
+				})
+				.catch(() => {
+					
+				});
+
+			
+			},
+
+
 			handleDeleteShipping(id) {
-				this.$store.dispatch("checkout/deleteShippingAdd", id);
+
+			
+				this.$store.dispatch("checkout/deleteShippingAdd", id)
+
+				
+				
+
+
 			},
 			showConfirmModal() {
 				this.$emit("showconfirm");
@@ -126,28 +185,7 @@
 			shippingsTab() {
 				console.log(this.$store.state.checkout.allShipping);
 				return this.$store.state.checkout.allShipping;
-				// return [
-				// 	{
-				// 		user_name: "Rivaland",
-				// 		phone: "+23752513344",
-				// 		country_name: "Cameroun",
-				// 		region_name: "Centre",
-				// 		council_name: "Yaoundé IV",
-				// 		division_name: "MEFOU",
-				// 		neighbourhood_name: "Mimboman",
-				// 		city: "Yaoundé",
-				// 	},
-				// 	{
-				// 		user_name: "Rivaland",
-				// 		phone: "+23752513344",
-				// 		country_name: "Gabon",
-				// 		region_name: "Nord",
-				// 		council_name: "Libreville IV",
-				// 		division_name: "Ondo Ondo",
-				// 		neighbourhood_name: "Adjougou",
-				// 		city: "Libreville",
-				// 	},
-				// ];
+				
 			},
 		},
 		mounted() {

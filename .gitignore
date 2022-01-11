@@ -29,3 +29,6 @@ pnpm-debug.log*
 yarn.lock
 package-lock.json
 src/components/Navbar.vue
+
+*fuse_hidden*
+src/components/Navbar.vue

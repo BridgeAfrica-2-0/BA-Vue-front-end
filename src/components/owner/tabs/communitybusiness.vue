@@ -5,7 +5,7 @@
         lg="6"
         sm="12"
         class="p-2"
-        v-for="item in businesses"
+        v-for="(item, index) in businesses"
         :key="item.id"
       >
         <div class="people-style shadow h-100">
@@ -13,8 +13,8 @@
             <b-col md="8" xl="8" lg="12" cols="12" sm="8">
               <div class="d-inline-flex">
                 <div class="center-img">
-                  <splide :options="options" class="r-image">
-                    <splide-slide cl>
+                  <splide class="r-image">
+                    <splide-slide>
                       <img :src="item.picture" class="r-image" />
                     </splide-slide>
                   </splide>
@@ -22,7 +22,12 @@
                 <div class="flx100">
                   <p class="textt">
                     <strong class="title">
-                      <router-link :to="'business/' + item.id">
+                      <router-link
+                        :to="{
+                          name: 'BusinessFollower',
+                          params: { id: item.id },
+                        }"
+                      >
                         {{ item.name }}
                       </router-link>
                     </strong>
@@ -33,7 +38,17 @@
                     </span>
                     <br />
                     {{ count(item.followers) }}
-                    {{ $t("dashboard.Community") }} <br />
+                    {{ $t("dashboard.Community") }}   <span   @click="BlockUser(item.id, index)" class="ml-3"  style="cursor: pointer">  
+                      
+                      <b-icon
+                              font-scale="1"
+                              icon="exclamation-octagon"
+                              v-b-tooltip.hover
+                              title="Block This Business"
+                              variant="danger"
+                            ></b-icon>
+                            
+                              </span> <br />
 
                     <span class="location">
                       <b-icon-geo-alt class="ico"></b-icon-geo-alt>
@@ -48,11 +63,11 @@
                     </span>
                     <br />
                     <read-more
-                      more-str="read more"
+                      :more-str="$t('search.read_more')"
                       class="readmore"
                       :text="item.about_business"
                       link="#"
-                      less-str="read less"
+                      :less-str="$t('search.read_less')"
                       :max-chars="100"
                     >
                     </read-more>
@@ -119,6 +134,7 @@
                       size="sm"
                       class="b-background shadow"
                       variant="primary"
+                      @click="gotobusiness(item.id)"
                     >
                       <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
                       <span class="btn-text">{{
@@ -126,6 +142,7 @@
                       }}</span>
                     </b-button>
                   </b-col>
+                 
                 </b-row>
               </div>
             </b-col>
@@ -184,6 +201,46 @@ export default {
   },
 
   methods: {
+
+    
+  BlockUser(id, index) {
+
+     let dataInfo = {
+        id: id,
+        refernce: "business",
+        type: this.type,
+      };
+
+    
+      let fd = new FormData();
+      fd.append("id", dataInfo.id);
+      fd.append("type", dataInfo.refernce);
+      this.$store.dispatch("profile/Block", {
+        path: "block/entity",
+        formData: fd
+        })
+      .then(response => {
+        
+      
+        this.$delete(this.businesses,index);
+        console.log("user deleted");
+
+        console.log(response);
+        this.flashMessage.show({
+          status: "success",
+          message: dataInfo.refernce + " blocked"
+        });
+      })
+      .catch(err => {
+        console.log({ err: err });
+        this.flashMessage.show({
+          status: "error",
+          message: "Unable to blocked " + dataInfo.refernce
+        });
+      });
+    },
+
+
     count(number) {
       if (number >= 1000000) {
         return number / 1000000 + "M";
@@ -193,6 +250,9 @@ export default {
       } else return number;
     },
 
+    gotobusiness(id) {
+      this.$router.push(`business/${id}#about`);
+    },
     async handleFollow(user) {
       document.getElementById("followbtn" + user.id).disabled = true;
 

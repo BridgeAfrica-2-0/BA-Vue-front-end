@@ -12,9 +12,12 @@
             ></b-icon>
           </span>
 
-          <a class="d-inline-block align-top mt-1" href="#">
+          <router-link
+            class="d-inline-block align-top mt-1"
+            :to="{ name: 'home1' }"
+          >
             <img src="@/assets/logo.png" alt="" class="balogo" loading="lazy" />
-          </a>
+          </router-link>
         </div>
 
         <div class="col-lg-9 col-xl-6">
@@ -39,7 +42,7 @@
                 data-toggle="popover"
                 class="form-control search-mobile"
                 style="border-left: none"
-                :placeholder="$t('general.Find_Pharmacies')"
+                :placeholder="$t('general.All')"
                 aria-label=""
                 data-original-title=""
                 title=""
@@ -72,7 +75,7 @@
                   data-toggle="popover"
                   class="form-control search-mobile"
                   style="border-left: none"
-                  :placeholder="$t('general.Find_Pharmacy')"
+                  :placeholder="$t('general.Where')"
                   aria-label=""
                   data-original-title=""
                   title=""
@@ -93,8 +96,8 @@
                 data-toggle="popover"
                 class="form-control search-h"
                 style="font-size: 17px !important"
-                :placeholder="searchOptions.placeholder"
-                v-model="searchOptions.keyword"
+                :placeholder="credentials.placeholder"
+                v-model="credentials.keyword"
                 aria-label=""
                 data-original-title=""
                 title=""
@@ -103,20 +106,11 @@
               <vue-bootstrap-typeahead
                 v-model="query"
                 :data="neigbourhoods"
-                minMatchingChars="0"
-                maxMatches="10"
+                :minMatchingChars="0"
+                :maxMatches="10"
                 :serializer="(item) => item.name"
                 placeholder="Where"
                 class="search-hh w-44"
-              />
-
-              <vue-bootstrap-typeahead
-                v-model="query"
-                :data="users"
-                :serializer="(item) => item.login"
-                @hit="selectedUser = $event"
-                :placeholder="$t('general.Where')"
-                class="search-hh"
               />
 
               <slot name="button">
@@ -151,49 +145,46 @@
                 <router-link
                   :to="navLink('home')"
                   class="nav-link text-dark hov"
-                  href=""
                 >
-                  {{ "home1" == navLink("home") ? "Home" : "Dashboard" }}
+                  Home
                 </router-link>
               </div>
 
               <div class="nav-item">
                 <router-link
-                  :to="{ name: 'market' }"
+                  :to="{ name: 'GlobalSearch' }"
                   class="nav-link text-dark hov"
-                  href=""
                 >
                   {{ $t("general.Market") }}
                 </router-link>
               </div>
 
-              <!-- Messages Started -->
-              <div class="nav-item">
-                <a
-                  v-if="hasNewMessage"
-                  id="messages"
-                  class="nav-link"
-                  data-toggle="popover"
-                  role="button"
-                  data-original-title=""
-                  title=""
-                  ><span class="text-ored"
-                    ><fas-icon
-                      class="primary"
-                      :icon="['fas', 'comment']"
-                    /><b-badge class="msg-number">{{
-                      hasNewMessage
-                    }}</b-badge></span
-                  ></a
+              <div v-if="!islogin" class="nav-item">
+                <router-link
+                  :to="{ name: 'signup' }"
+                  class="nav-link text-dark hov"
                 >
+                  {{ $t("auth.signup") }}
+                </router-link>
+              </div>
 
+              <div v-if="!islogin" class="nav-item">
+                <router-link
+                  :to="{ name: 'Login' }"
+                  class="nav-link text-dark hov"
+                >
+                  {{ $t("auth.login") }}
+                </router-link>
+              </div>
+
+              <!-- Messages Started -->
+              <div v-if="islogin" class="nav-item">
                 <a
                   id="messages"
                   class="nav-link"
                   role="button"
                   data-original-title=""
                   title=""
-                  v-else
                   ><span class="text-ored"
                     ><fas-icon
                       class="primary"
@@ -206,14 +197,7 @@
                     <div v-for="message in messages" :key="message.id">
                       <hr class="h-divider" />
                       <div
-                        class="
-                          d-inline-flex
-                          flex-row
-                          justify-content-between
-                          align-items-center
-                          suggest-item
-                          cursor-pointer
-                        "
+                        class="d-inline-flex flex-row justify-content-between align-items-center suggest-item cursor-pointer"
                       >
                         <div class="d-inline-flex flex-row align-items-center">
                           <div>
@@ -252,7 +236,7 @@
               </div>
               <!-- Messages Ended -->
               <!-- Notifications Started -->
-              <div class="nav-item">
+              <div v-if="islogin" class="nav-item">
                 <a
                   id="notif"
                   class="nav-link"
@@ -261,7 +245,7 @@
                   data-original-title=""
                   title=""
                   ><span class="text-ored"
-                    ><b-icon-bell-fill class="col-bg"></b-icon-bell-fill></span
+                    ><b-icon-bell-fill class="col-bg"> </b-icon-bell-fill></span
                 ></a>
                 <b-popover target="notif" triggers="hover" placement="top">
                   <div class="popover-body">
@@ -274,13 +258,7 @@
                     >
                       <hr class="h-divider" />
                       <div
-                        class="
-                          d-inline-flex
-                          flex-row
-                          align-items-center
-                          suggest-item
-                          cursor-pointer
-                        "
+                        class="d-inline-flex flex-row align-items-center suggest-item cursor-pointer"
                       >
                         <!-- <div>
                           <img src="@/assets/img/profile-pic.jpg" class="rounded-circle" alt="" width="30" height="30" />
@@ -304,37 +282,38 @@
                         $t("general.See_all_Notifications")
                       }}</u></router-link
                     >
-                    <!-- <a
-                      href="https://bridgeafrica.info/nav/notifications-view-all.html"
-                      class="text-ored"
-                      ><u>See all Notifications</u></a
-                    > -->
                   </div>
                 </b-popover>
               </div>
               <!-- Notifications Ended -->
 
               <div
-                class="nav-item"
+                v-if="islogin"
+                class="nav-item cursor"
                 id="profilepic"
-                @click.prevent="switchToProfile"
+                triggers="hover"
+                data-toggle="popover"
               >
-                <span
-                  ><img
+                <router-link :to="userOwnPage">
+                  <b-avatar
+                    variant="light"
                     :src="user.profile_picture"
-                    :class="`${
-                      'user' == user.user_type ? 'rounded-circle' : ''
-                    } logo-sizee`"
-                    alt=""
-                /></span>
-                <!-- </router-link> -->
+                    :square="'user' == user.user_type ? false : true"
+                    class="logo-sizee"
+                  ></b-avatar>
+                </router-link>
               </div>
 
-              <b-tooltip target="profilepic" variant="light" triggers="hover">
+              <b-tooltip
+                v-if="islogin"
+                target="profilepic"
+                variant="light"
+                triggers="hover"
+              >
                 {{ user.name }}
               </b-tooltip>
 
-              <div class="nav-item">
+              <div v-if="islogin" class="nav-item">
                 <a
                   id="other-menu"
                   class="nav-link text-dark arrow-down"
@@ -347,30 +326,20 @@
                 <b-popover target="other-menu" triggers="hover" placement="top">
                   <div class="popover-body">
                     <div
-                      class="
-                        d-inline-flex
-                        flex-row
-                        align-items-center
-                        mb-1
-                        w-full
-                      "
+                      style="width: 100%"
+                      class="d-inline-flex flex-row align-items-center mb-1"
                     >
-                      <Activity />
+                      <Activity class="w-full" />
                     </div>
 
                     <a
                       v-if="'user' != user.user_type"
                       @click.prevent="switchToProfile"
                       href="#"
-                      class="
-                        other-menu
-                        suggest-item
-                        cursor-pointer
-                        text-decoration-none text-dark
-                      "
+                      class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
                     >
                       <span class="mr-2"
-                        ><fas-icon class="violet search"
+                        ><fas-icon class="violet search" :icon="['fas', 'user']"
                       /></span>
                       Profile
                     </a>
@@ -378,12 +347,7 @@
 
                     <router-link
                       :to="{ name: 'orders' }"
-                      class="
-                        other-menu
-                        suggest-item
-                        cursor-pointer
-                        text-decoration-none text-dark
-                      "
+                      class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
                     >
                       <span class="mr-2"
                         ><fas-icon
@@ -396,17 +360,10 @@
 
                     <router-link
                       :to="{ name: 'settings' }"
-                      class="
-                        other-menu
-                        suggest-item
-                        cursor-pointer
-                        text-decoration-none text-dark
-                      "
+                      class="other-menu suggest-item cursor-pointer text-decoration-none text-dark w-full"
                     >
-                      <span class="mr-2"
-                        ><fas-icon
-                          class="violet search"
-                          :icon="['fas', 'cogs']"
+                      <span class="mr-2 w-full"
+                        ><fas-icon class="violet search" :icon="['fas', 'cogs']"
                       /></span>
                       {{ $t("general.Account_Settings") }}
                     </router-link>
@@ -420,10 +377,11 @@
                       {{ $t("general.Help_and_Support") }}
                     </div>
                     <hr class="h-divider" />
+
                     <div class="other-menu suggest-item cursor-pointer">
-                      <b-link v-b-toggle="'collapse-2'" class="m-1"
+                      <b-link v-b-toggle="'collapse-2'"
                         ><fas-icon
-                          class="violet search"
+                          class="violet search mr-1"
                           :icon="['fas', 'globe-americas']"
                         />
                         {{ $t("general.Language") }}</b-link
@@ -444,12 +402,7 @@
                     <a
                       @click="logout"
                       href="#"
-                      class="
-                        other-menu
-                        suggest-item
-                        cursor-pointer
-                        text-decoration-none text-dark
-                      "
+                      class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
                     >
                       <span class="mr-2"
                         ><fas-icon
@@ -466,17 +419,19 @@
         </div>
 
         <b-modal ref="setcat" id="myModallnav" hide-footer title=" ">
-          <div class="d-block d-lg-block d-xl-none">
+          <div v-if="islogin" class="d-block d-lg-block d-xl-none">
             <div class="mt-3">
-              <div class="d-inline-flex flex-row align-items-center">
+              <div
+                class="d-inline-flex flex-row align-items-center"
+                @click="gotoProfile"
+              >
                 <div>
-                  <img
-                    src="@/assets/img/profile-pic.jpg"
-                    class="rounded-circle"
-                    alt=""
-                    width="30"
-                    height="30"
-                  />
+                  <b-avatar
+                    variant="light"
+                    :src="user.profile_picture"
+                    :square="'user' == user.user_type ? false : true"
+                    class="logo-sizee"
+                  ></b-avatar>
                 </div>
                 <div class="d-flex flex-column ml-1 line-size">
                   <div class="font-weight-bold">{{ user.name }}</div>
@@ -485,37 +440,31 @@
               </div>
 
               <br />
-
               <div class="d-inline-flex flex-row align-items-center mb-1">
-                <div>
-                  <img
-                    src="@/assets/img/logo3.png"
-                    class="rounded-circle"
-                    alt=""
-                    width="25"
-                    height="25"
-                  />
-                </div>
-                <div class="ml-3 mt-2">
-                  <p class="font-weight-bold">
-                    {{ $t("general.Your_Businesses") }}
-                  </p>
-                </div>
+                <Activity class="w-full" />
               </div>
             </div>
 
-            <hr class="mup" />
-
+            <div
+              v-if="'user' != user.user_type"
+              @click.prevent="switchToProfile"
+              href="#"
+              class="other-menu suggest-item cursor-pointer text-decoration-none text-dark mx-1"
+            >
+              <span class="mr-3">
+                <fas-icon
+                  class="violet search"
+                  :icon="['fas', 'user']"
+                /> </span
+              >Profile
+              <hr class="h-divider" v-if="'user' === user.user_type" />
+            </div>
+            <hr class="h-divider" />
             <router-link
               :to="{ name: 'orders' }"
-              class="
-                other-menu
-                suggest-item
-                cursor-pointer
-                text-decoration-none text-dark
-              "
+              class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
             >
-              <span class="mr-2"
+              <span class="mr-3"
                 ><fas-icon
                   class="violet search"
                   :icon="['fas', 'cart-arrow-down']"
@@ -526,14 +475,9 @@
 
             <router-link
               :to="{ name: 'settings' }"
-              class="
-                other-menu
-                suggest-item
-                cursor-pointer
-                text-decoration-none text-dark
-              "
+              class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
             >
-              <span class="mr-2"
+              <span class="mr-3"
                 ><fas-icon class="violet search" :icon="['fas', 'cogs']"
               /></span>
 
@@ -541,16 +485,16 @@
             </router-link>
             <hr class="h-divider" />
             <div class="other-menu suggest-item cursor-pointer">
-              <span class="mr-1"
+              <span class="mr-3"
                 ><fas-icon class="violet search" :icon="['fas', 'question']"
               /></span>
               {{ $t("general.Help_and_Support") }}
             </div>
             <hr class="h-divider" />
             <div class="other-menu suggest-item cursor-pointer">
-              <b-link v-b-toggle="'collapse-2'" class="m-1"
+              <b-link v-b-toggle="'collapse-2'"
                 ><fas-icon
-                  class="violet search"
+                  class="violet search mr-1"
                   :icon="['fas', 'globe-americas']"
                 />
                 {{ $t("general.Language") }}</b-link
@@ -570,18 +514,11 @@
             <hr class="h-divider" />
             <a
               href="#"
-              @click="logout"
-              class="
-                other-menu
-                suggest-item
-                cursor-pointer
-                text-decoration-none text-dark
-              "
+              @click.prevent="logout"
+              class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
             >
-              <span class="mr-2"
-                ><fas-icon
-                  class="violet search"
-                  :icon="['fas', 'sign-out-alt']"
+              <span class="mr-3"
+                ><fas-icon class="violet search" :icon="['fas', 'sign-out-alt']"
               /></span>
               {{ $t("general.Logout") }}
             </a>
@@ -590,27 +527,13 @@
       </div>
     </nav>
 
-    <div>
-      <!-- 
-
-           <div>
-  <vue-bootstrap-typeahead
-    class="mb-4"
-    v-model="query"
-    :data="users"
-    :serializer="item => item.login"
-    @hit="selectedUser = $event"
-    placeholder="Search GitHub Users"
-  />
-
- <h3>Selected User JSON</h3>
- <pre>{{ selectedUser | stringify }}</pre>
-</div> -->
-    </div>
+    <div></div>
   </header>
 </template>
 
 <script>
+import _ from "lodash";
+
 import Button from "@/components/ButtonNavBarFind.vue";
 import Activity from "@/components/ShowActivity.vue";
 // import NavBarNotifications from '@/components/NavBarNotifications.vue';
@@ -629,10 +552,10 @@ export default {
   props: {
     credentials: {
       type: Object,
-      default: function () {
+      default: function() {
         return {
           keyword: "",
-          placeholder: "All",
+          placeholder: this.$t("general.All"),
         };
       },
     },
@@ -640,13 +563,13 @@ export default {
   data() {
     return {
       isActive: false,
+      islogin: true,
       shownav: false,
       notifications: [],
       messages: [],
       notificationPatterns: null,
       messagePatterns: null,
       redirectionPatterns: null,
-
       query: "",
       selectedUser: null,
       users: [],
@@ -655,75 +578,90 @@ export default {
   computed: {
     ...mapGetters({
       hasLauchNetworkRequest: "social/INIT",
-      hasNewMessage: "notification/HAS_MESSAGE",
       user: "auth/profilConnected",
       auth: "auth/user",
       neigbourhoods: "auth/neigbourhoods",
     }),
   },
   beforeMount() {
-    console.log("beforeMount");
-
     this.getLocation();
   },
   created() {
-    console.log("created");
-    this.init();
+    //check for authentication
 
-    this.notificationPatterns = {
-      user: () => "/notification/latest/user",
-      business: () => `/notification/business/${this.user.id}`,
-      network: () => null,
-    };
+    this.islogin = this.$store.getters["auth/isLogged"];
 
-    this.messagePatterns = {
-      user: () => "/messages/latest/user",
-      business: () => "/messages/latest/user",
-      network: () => "/messages/latest/user",
-    };
+    if (this.islogin) {
+      this.init();
+      this.userOwnPage = this.onRedirect();
 
-    this.redirectionPatterns = {
-      message: {
-        user: () => () => ({
-          name: "messaging",
-        }),
-        business: () => ({
-          name: "BusinessOwner",
-          params: { id: this.user.id },
-          query: { tabId: 1 },
-        }),
-        network: () => null,
-      },
-      notification: {
-        business: () => ({
-          name: "BusinessOwner",
-          params: { id: this.user.id },
-          query: { tabId: 2 },
-        }),
+      this.notificationPatterns = {
+        user: () => "user/notification",
+        business: () => `/notification/business/${this.user.id}`,
+        network: () => `/notification/network/${this.user.id}`,
+      };
 
-        user: () => ({
-          name: "settings",
-        }),
-        network: () => ({
-          name: "networks",
-          params: { id: this.user.id },
-          query: { tabId: 2 },
-        }),
-      },
-    };
+      this.messagePatterns = {
+        user: () => "/messages/latest/user",
+        business: () => `/messages/latest/${this.user.id}/business`,
+        network: () => `/messages/latest/${this.user.id}/network`,
+      };
 
-    this.updateNotificationEvent();
+      this.redirectionPatterns = {
+        message: {
+          user: () => ({
+            name: "Nav Meassage",
+          }),
+          business: () => ({
+            name: "BusinessOwner",
+            params: { id: this.user.id },
+            query: { tabId: 1 },
+          }),
+          network: () => null,
+        },
+        notification: {
+          business: () => ({
+            name: "BusinessOwner",
+            params: { id: this.user.id },
+            query: { tabId: 2 },
+          }),
+
+          user: () => ({
+            name: "settings",
+          }),
+          network: () => ({
+            name: "networks",
+            params: { id: this.user.id },
+            query: { tabId: 2 },
+          }),
+        },
+      };
+
+      this.updateNotificationEvent();
+    }
   },
 
   watch: {
-    "$store.state.auth.profilConnected": function () {
+    "$store.state.auth.profilConnected": function() {
       this.updateNotificationEvent();
+      this.userOwnPage = this.onRedirect();
+    },
+
+    "$i18n.locale": async function() {
+      const response = await this.$repository.notification.changeLanguage(
+        this.$i18n.locale
+      );
+      if (response.success) {
+        this.updateNotificationEvent();
+      }
     },
 
     query(newQuery) {
-      axios.get(`neighborhood/${newQuery}`).then(({ data }) => {
-        this.$store.commit("auth/setneigbourhoods", data.data);
-      });
+      axios
+        .get(`business-community/neighborhood/${newQuery}`)
+        .then(({ data }) => {
+          this.$store.commit("auth/setneigbourhoods", data.data);
+        });
     },
   },
 
@@ -732,23 +670,36 @@ export default {
       return JSON.stringify(value, null, 2);
     },
   },
-  
+
   methods: {
     ...mapActions({
       setNetworks: "social/FIND_USER_NETWORK",
       setBusiness: "social/FIND_USER_BUSNESS",
       lauchNetworkRequest: "social/INIT",
-
       getGeo: "business/getGeo",
-
       getNeigbourhoods: "auth/neigbourhoods",
-
       Logout: "auth/logout",
     }),
 
     ...mapMutations({
       profile: "auth/profilConnected",
     }),
+
+    gotoProfile() {
+      this.$router.push("profile_owner");
+    },
+
+    onRedirect() {
+      const link = {
+        network: () => ({ name: "networks", params: { id: this.user.id } }),
+        business: () => ({
+          name: "BusinessOwner",
+          params: { id: this.user.id },
+        }),
+        user: () => ({ name: "profile_owner" }),
+      };
+      return link[this.user.user_type]();
+    },
 
     getLocation() {
       const success = (position) => {
@@ -771,15 +722,13 @@ export default {
 
     updateNotificationEvent() {
       try {
-        const newRouteNotificationApi =
-          this.notificationPatterns[
-            this.$store.state.auth.profilConnected.user_type
-          ]();
+        const newRouteNotificationApi = this.notificationPatterns[
+          this.$store.state.auth.profilConnected.user_type
+        ]();
 
-        const newRouteMessageApi =
-          this.messagePatterns[
-            this.$store.state.auth.profilConnected.user_type
-          ]();
+        const newRouteMessageApi = this.messagePatterns[
+          this.$store.state.auth.profilConnected.user_type
+        ]();
 
         this.newNotification(newRouteNotificationApi);
         this.newMessage(newRouteMessageApi);
@@ -806,9 +755,10 @@ export default {
     },
 
     getKeyword() {
-      if (!this.credentials.keyword) return false;
+      if (!this.searchOptions.keyword) return false;
 
       if (this.$route.name != "Search") {
+        console.log("the keyword is: ", this.credentials.keyword);
         this.$store
           .dispatch("allSearch/SEARCH", {
             keyword: this.credentials.keyword,
@@ -817,13 +767,16 @@ export default {
             console.log("Error erro!");
           });
 
-        this.$router.push({ name: "Search" });
+        this.$router.push({
+          name: "GlobalSearch",
+          query: { keyword: this.credentials.keyword },
+        });
       }
     },
     navLink(type) {
       const link = {
         home: () => {
-          return this.profile ? "dashbord" : "home1";
+          return this.profile ? { name: "dashboard" } : { name: "home1" };
         },
       };
       try {
@@ -845,16 +798,33 @@ export default {
         .catch(() => console.log("error"));
     },
 
-    logout: async function () {
-      const response = await this.$repository.notification.logOut();
-      if (response.success) {
-        this.Logout();
-      } else {
-        this.Logout();
+    logout: async function() {
+      let loader = this.$loading.show({
+        container: this.$refs.formContainer,
+        canCancel: true,
+        onCancel: this.onCancel,
+        color: "#e75c18",
+      });
+
+      const requestForReset = await this.$repository.share.switch(
+        null,
+        "reset"
+      );
+
+      if (requestForReset.success) {
+        const response = await this.$repository.notification.logOut();
+
+        if (response.success) {
+          loader.hide();
+          this.$router.push({ name: "home1" });
+          this.Logout();
+        }
+        return false;
       }
+      loader.hide();
     },
 
-    switchToProfile: async function () {
+    switchToProfile: async function() {
       let loader = this.$loading.show({
         container: this.$refs.formContainer,
         canCancel: true,
@@ -863,9 +833,14 @@ export default {
       });
 
       const response = await this.$repository.share.switch(null, "reset");
+
       if (response.success) {
         this.profile({ ...this.auth.user, user_type: "user" });
+        this.$router.push({
+          name: "profile_owner",
+        });
       }
+
       loader.hide();
     },
 
@@ -873,12 +848,12 @@ export default {
       this.$refs.mobileinput.style.display = "block";
     },
 
-    getNetworks: async function () {
+    getNetworks: async function() {
       let request = await this.$repository.share.getNetworks();
       if (request.success) this.setNetworks(request.data);
     },
 
-    getBusiness: async function () {
+    getBusiness: async function() {
       let request = await this.$repository.share.getBusiness();
       if (request.success) this.setBusiness(request.data);
     },
@@ -909,7 +884,7 @@ export default {
       await axios
         .get(url)
         .then((response) => {
-          this.notifications = response.data.data;
+          this.notifications = response.data.data.slice(0, 5);
         })
         .catch((error) => console.log("Error In newNotification  => " + error));
     },
@@ -922,24 +897,6 @@ export default {
         })
         .catch((error) => console.log(error));
     },
-
-    // async getNotifications() {
-    //   await axios
-    //     .get(`notification/latest/user`)
-    //     .then((response) => {
-    //       console.warn(response.data.data);
-    //       this.notifications = response.data.data;
-    //     })
-    //     .catch((error) => console.log("Error In newMessage  => " + error));
-    // },
-    // async getMessages() {
-    //   await axios
-    //     .get(`messages/latest/user`)
-    //     .then((response) => {
-    //       this.messages = response.data.data;
-    //     })
-    //     .catch((error) => console.log(error));
-    // },
   },
 };
 </script>
@@ -1118,7 +1075,7 @@ export default {
 
 @media (max-width: 992px) {
   .navbar-toggler {
-    padding: 0.25rem 0.75rem;
+    padding: 0.25rem 1.5rem;
     font-size: 1.25rem;
     line-height: 1;
     background-color: transparent;
@@ -1158,14 +1115,12 @@ export default {
 }
 </style>
 
-<style >
+<style>
 @media only screen and (min-width: 768px) {
   .search-hh .form-control {
     height: 48px !important;
-
     margin-bottom: 0;
     border-radius: 0px;
-
     border-bottom: hidden;
   }
 }

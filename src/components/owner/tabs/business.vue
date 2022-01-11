@@ -1,12 +1,13 @@
 <template>
-  <div>
+  <div>  
     <div class="people-style shadow" v-for="item in businesses" :key="item.id">
+      
       <b-row>
         <b-col md="8" xl="12" lg="12" cols="12" sm="8">
           <div class="d-inline-flex">
             <div class="center-img">
               <splide :options="options" class="r-image">
-                <splide-slide cl>
+                <splide-slide>
                   <img :src="item.picture" class="r-image" />
                 </splide-slide>
               </splide>
@@ -15,7 +16,7 @@
               <p class="textt">
                 <strong class="title">
                   <router-link :to="'business/' + item.id">
-                    {{ item.name }}
+                  {{ item.name }}
                   </router-link>
                 </strong>
                 <br />
@@ -39,13 +40,14 @@
                 </span>
                 <br />
                 <read-more
-                  more-str="read more"
+                  :more-str="$t('search.read_more')"
                   class="readmore"
                   :text="item.about_business"
                   link="#"
-                  less-str="read less"
+                  :less-str="$t('search.read_less')"
                   :max-chars="75"
                 >
+                 
                 </read-more>
               </p>
             </div>
@@ -63,7 +65,10 @@
                 cols="4"
                 class="mt-2 text-center"
               >
+              
+
                 <b-button
+                  
                   block
                   size="sm"
                   class="b-background shadow"
@@ -106,6 +111,7 @@
                   size="sm"
                   class="b-background shadow"
                   variant="primary"
+                  @click="gotobusiness(item.id)"
                 >
                   <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
                   <span class="btn-text">Direction</span>
@@ -142,7 +148,6 @@ export default {
         autoplay: true,
         perPage: 1,
         pagination: false,
-
         type: "loop",
         perMove: 1,
       },
@@ -150,6 +155,9 @@ export default {
   },
 
   computed: {
+    show(){
+      return this.$route.name;
+    },
     old_businesses() {
       if (this.type == "Follower") {
         return this.$store.state.businessOwner.BcommunityFollower
@@ -173,6 +181,9 @@ export default {
       if (number >= 1000) {
         return number / 1000 + "K";
       } else return number;
+    },
+    gotobusiness(id) {
+      this.$router.push(`business/${id}#about`);
     },
 
     infiniteHandler($state) {
@@ -212,6 +223,18 @@ export default {
         });
     },
 
+
+
+  getTotalCommunity(){
+         this.$store
+      .dispatch("follower/Tcommunity", this.foll_id)
+      .then((response) => {})
+      .catch((error) => {
+        console.log({ error: error });
+      });
+    },
+
+
     async handleFollow(user) {
       document.getElementById("followbtn" + user.id).disabled = true;
 
@@ -228,6 +251,8 @@ export default {
           console.log(response);
           user.is_follow = nextFollowState;
           document.getElementById("followbtn" + user.id).disabled = false;
+
+             this.getTotalCommunity();
         })
         .catch((err) => {
           console.log(err);

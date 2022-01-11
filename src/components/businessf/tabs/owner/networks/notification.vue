@@ -3,7 +3,7 @@
   <div class="container" style=" ">
     <div class="container">
       <b-row>
-        <b-col>
+        <b-col cols="12" md="6">
           <div class="b-bottomn f-left">
             <b-form-checkbox
               v-model="selectAll"
@@ -15,7 +15,7 @@
             </b-form-checkbox>
           </div>
         </b-col>
-        <b-col>
+        <b-col cols="12" md="6">
           <div class="b-bottomn f-right">
             <b-button 
               variant="primary" 
@@ -29,22 +29,22 @@
               @click="Delete" 
               :disabled="indeterminate ? false : true"
               class="a-button-l duration"
-            >Delete</b-button>
+            >{{ $t('general.Delete') }}</b-button>
           </div>
         </b-col>
       </b-row>
-      <br />
-
+     
       <b-row>
-        <div>
+        <!-- <div>
           Selected: <strong>{{ selected }}</strong
           ><br />
           All Selected: <strong>{{ selectAll }}</strong>
-        </div>
+        </div> -->
+        <hr width="100%" />
         <b-col cols="12"
           :class="{ active: index == currentPage }"
           v-for="(notification, index) in notifications"
-          :key="index"
+          :key="notification.updated_at"
         >
           <div :class="notification.mark_as_read ? 'text-secondary' : 'font-weight-bold'">
             <p class="">
@@ -52,19 +52,21 @@
                 <b-form-checkbox
                   name="checkbox-1"
                   v-model="selected"
-                  :value="notification.notification_id"
+                  :value="notification.id"
                   @change="updateCheckall"
-                  :disabled="notification.mark_as_read ? true : false"
                   class="m-left-top"
                 ></b-form-checkbox>
                 <b-avatar
                   class="d-inline-block profile-pic"
                   variant="primary"
-                  :text="notification.data[0].fullname.charAt(0,1)"
-                  :src="notification.data[0].profile_picture"
+                  :text="notification.full_name.charAt(0,1)"
+                  :src="notification.profile_picture"
                 ></b-avatar>
                 <span class="m-0  d-inline-block ml-2 username">
-                  {{ notification.data[0].fullname }}
+                  <router-link :to="'/'+notification.lien">
+                    <span v-if="notification.mark_as_read" class="title"> {{ notification.full_name }}</span>
+                    <span v-else><strong class="title"> {{ notification.full_name }}</strong></span>
+                  </router-link>
                   <div class="duration">{{ moment(notification.created_at).fromNow() }}</div>
                 </span>
               </span>
@@ -74,16 +76,16 @@
           </div>
           <hr width="100%" />
         </b-col>
-        <!-- <b-col cols="12" v-if="notifications.total > notifications.per_page">
+        <b-col cols="12" v-if="noti_Details.total > noti_Details.per_page">
           <div class="b-bottomn f-right">
             <b-pagination
               v-model="currentPage"
-              :total-rows="notifications.total"
-              :per-page="notifications.per_page"
+              :total-rows="noti_Details.total"
+              :per-page="noti_Details.per_page"
               @change="handlePageChange"
             ></b-pagination>
           </div>
-        </b-col> -->
+        </b-col>
       </b-row>
       <!-- {{notifications}}
       {{newNotifications}} -->
@@ -96,7 +98,7 @@
 
 <script>
 import moment from 'moment';
-import {mapGetters} from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   name: "notification",
@@ -105,58 +107,7 @@ export default {
       url: null,
       moment: moment,
       loader:false,
-      currentPage: 0,
-
-      // notifications: [ 
-      //   {
-      //     "data": [
-      //         {
-      //             "fullname": "wifi",
-      //             "profile_picture": "https://picsum.photos/250/250/?image=27"
-      //         }
-      //     ],
-      //     "notification_id": 4,
-      //     "reference_id": 1,
-      //     "notification_text": "You’ve unblock Ramona Braun",
-      //     "created_at": "2021-10-12T15:28:23.000000Z",
-      //     "updated_at": "2021-10-12T15:28:23.000000Z",
-      //     "is_read": 0,
-      //     "user_id": 1,
-      //     "mark_as_read": 1
-      //   },
-      //   {
-      //     "data": [
-      //         {
-      //             "fullname": "Cyclone wifi",
-      //             "profile_picture": "https://picsum.photos/250/250/?image=22"
-      //         }
-      //     ],
-      //     "notification_id": 9,
-      //     "reference_id": 1,
-      //     "notification_text": "You’ve unblock Ramona Braun",
-      //     "created_at": "2021-10-12T15:28:23.000000Z",
-      //     "updated_at": "2021-10-12T15:28:23.000000Z",
-      //     "is_read": 0,
-      //     "user_id": 1,
-      //     "mark_as_read": 1
-      //   },
-      //   {
-      //     "data": [
-      //         {
-      //             "fullname": "Cyclone ",
-      //             "profile_picture": "https://picsum.photos/250/250/?image=22"
-      //         }
-      //     ],
-      //     "notification_id": 6,
-      //     "reference_id": 1,
-      //     "notification_text": "Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.",
-      //     "created_at": "2021-12-12T15:28:23.000000Z",
-      //     "updated_at": "2021-10-12T15:28:23.000000Z",
-      //     "is_read": 1,
-      //     "user_id": 1,
-      //     "mark_as_read": 1
-      //   },
-      // ],
+      currentPage: 1,
       selected: [],
       selectAll: false,
       indeterminate: false
@@ -164,13 +115,13 @@ export default {
   },
   
   computed: {
-    notifications() {
-      return this.$store.state.networkNotification.notifications;
-    },
-
     ...mapGetters({
-      newNotifications: 'notification/NEW_NETWORK_NOTIFICATION'
-    })
+      newNotifications: 'notification/NEW_NETWORK_NOTIFICATION',
+      notifications: 'networkNotification/getAllNotifications'
+    }),
+    noti_Details() {
+      return this.$store.state.networkNotification.notificationsDetails;
+    }
   },
 
   watch: {
@@ -188,10 +139,8 @@ export default {
       }
     },
     newNotifications: function (val) {
-      console.log("newNotifications");
-      console.log(val);
       this.newNotifications.forEach(e => {
-        this.notifications.push(e)
+        this.add(e)
       });
     },
   },
@@ -200,14 +149,20 @@ export default {
     this.getNotifications() 
   },
   methods: {
+
+    ...mapMutations({
+      add: 'networkNotification/addNotification'
+    }),
+
     select(checked) {
       console.log("this.selectAll: "+this.selectAll);
       console.log("checked: "+checked);
+      console.log(this.notifications);
       this.selected = [];
       if (checked) {
         for (let notification in this.notifications) {
-            this.selected.push(this.notifications[notification].notification_id.toString());
-            console.log("this.notifications[notification].id: "+this.notifications[notification].notification_id);
+            this.selected.push(this.notifications[notification].id.toString());
+            console.log("this.notifications[notification].id: "+this.notifications[notification].id);
         }
       }
     },
@@ -218,17 +173,14 @@ export default {
         this.selectAll = false;
       }
     },
+
     getNotifications() {
-      console.log('getNotifications Mounted');
     this.$store
       .dispatch("networkNotification/getNotifications", 
       {
-        "id":this.url,
-        "path":"notifications?page="+this.currentPage
+        "id":`notification/network/${this.$route.params.id}`,
+        "path":"?page="+this.currentPage
         })
-      .then(() => {
-        console.log('ohh yeah');
-      })
       .catch(err => {
         console.log({ err: err });
       });
@@ -244,17 +196,18 @@ export default {
       this.$store
       .dispatch("networkNotification/MarkAsRead", 
       {
-        "path": this.url+"/notifications/mark-read",
+        "path": "notification/mark-read",
         "formData": formData
       })
       .then(({data}) => {
         console.log(data);
         console.log('ohh yeah');
+        this.selected = [];
         this.getNotifications();
         this.indeterminate = true;
         this.flashMessage.show({
           status: "success",
-          message: "Marked As Read"
+          message: this.$t('general.Marked_As_Read')
         });
       })
       .catch(err => {
@@ -262,7 +215,7 @@ export default {
         this.indeterminate = true;
         this.flashMessage.show({
           status: "error",
-          message: "Unable To Mark As Read"
+          message: this.$t('general.Unable_To_Mark_As_Read')
         });
       });
 		},
@@ -277,17 +230,18 @@ export default {
       this.$store
       .dispatch("networkNotification/Delete", 
       {
-        "path": this.url+"/notifications/deleteAll",
+        "path": "notification/deleteAll",
         "formData": formData
       })
       .then(({data}) => {
         console.log(data);
         console.log('ohh yeah');
+        this.selected = [];
         this.getNotifications();
         this.indeterminate = true;
         this.flashMessage.show({
           status: "success",
-          message: "Notification(s) Deleted"
+          message: this.$t('general.Notification_Deleted')
         });
       })
       .catch(err => {
@@ -295,7 +249,7 @@ export default {
         this.indeterminate = true;
         this.flashMessage.show({
           status: "error",
-          message: "Unable To Deleted Notification(s)"
+          message: this.$t('general.Unable_To_Deleted_Notification')
         });
       });
 		},

@@ -1,5 +1,6 @@
 <template>
   <b-container v-if="networkinfo != 0">
+    <!-- {{networkinfo}} -->
     <div class="">
       <b-container>
         <b-form-group
@@ -13,7 +14,7 @@
             <b-form-radio-group
               class="pt-2 text"
               v-model="networkinfo[0].setting_value"
-              :options="['Public', 'Private']"
+              :options="[this.$t('network.Public'), this.$t('network.Private')]"
             ></b-form-radio-group>
           </b-form-group>
           <!-- <div class="mt-3">{{ privacy }}</div> -->
@@ -46,7 +47,7 @@
       <hr />
     </div>
 
-    <div>
+    <div v-if="networkinfo[1].setting_value !== 'Admin only'">
       <b-container>
         <b-form-group
           label-cols-lg="3"
@@ -209,7 +210,7 @@ export default {
           this.load = false;
           this.flashMessage.show({
             status: "success",
-            message: "Changes Made Successfully",
+            message: this.$t('general.Changes_Made_Successfully'),
           });
         })
         .catch((err) => {
@@ -217,7 +218,7 @@ export default {
           this.load = false;
           this.flashMessage.show({
             status: "error",
-            message: "Unable To Make Changes",
+            message: this.$t('general.Unable_To_Make_Changes'),
           });
         });
     },
@@ -233,14 +234,14 @@ export default {
           console.log("ohh yeah");
           this.flashMessage.show({
             status: "success",
-            message: "Network Deleted",
+            message: this.$t('general.Network_Deleted'),
           });
         })
         .catch((err) => {
           console.log({ err: err });
           this.flashMessage.show({
             status: "error",
-            message: "Unable To Delete Network",
+            message: this.$t('general.Unable_To_Delete_Network'),
           });
         });
     },

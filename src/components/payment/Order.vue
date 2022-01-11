@@ -1,9 +1,11 @@
 <template>
-<b-card class="">
+<b-card class=""> 
+
+
 		<div class="card-header title-font-size font-weight-bold bg-white h-50">
 			{{$t("Order.Review_and_confirm_your_Order")}} ( {{ cartLenght }} {{$t("Order.item")}})
 			<br />
-			{{$t("Order.Business")}}: Largo
+			
 		</div>
 		<div class="order card-body">
 			<div>
@@ -15,7 +17,7 @@
 							class="btn text-14 btn-custom btn-primary px-5 shadow-sm"
 						>
 							<b-spinner v-if="loading" small variant="light"></b-spinner>
-							{{$t("Order.Order")}}
+							{{$t("Order.Order")}}   
 						</button>
 					</div>
 				</div>
@@ -40,50 +42,20 @@
 		computed: {
 			cartLenght() {
 				return this.$store.state.checkout.cart.data.length;
-				// return this.cart.data.length;
+				
 			},
+
+			
+
+			order() {
+				return this.$store.state.checkout.order.data;
+				
+			},
+
+
 			cart() {
-				return this.$store.state.checkout.cart;
-				// return {
-				// 	data: [
-				// 		{
-				// 			product_name: "Headset1",
-				// 			quantity: 3,
-				// 			product_price: 2000,
-				// 		},
-				// 		{
-				// 			product_name: "Headset2",
-				// 			quantity: 3,
-				// 			product_price: 2000,
-				// 		},
-				// 		{
-				// 			product_name: "Headset3",
-				// 			quantity: 3,
-				// 			product_price: 2000,
-				// 		},
-				// 		{
-				// 			product_name: "Headset4",
-				// 			quantity: 3,
-				// 			product_price: 2000,
-				// 		},
-				// 		{
-				// 			product_name: "Headset5",
-				// 			quantity: 3,
-				// 			product_price: 2000,
-				// 		},
-				// 		{
-				// 			product_name: "Headset6",
-				// 			quantity: 3,
-				// 			product_price: 2000,
-				// 		},
-				// 		{
-				// 			product_name: "Headset6",
-				// 			quantity: 3,
-				// 			product_price: 2000,
-				// 		},
-				// 	],
-				// 	shipping_amount: 1000,
-				// };
+				return this.$store.state.checkout.cart; 
+				
 			},
 			allShipping() {
 				return this.$store.state.checkout.allShipping;
@@ -94,44 +66,53 @@
 				this.prepareOrder();
 				this.$emit("showoperator");
 			},
-			handleCreateOrder() {
+		 	 handleCreateOrder() {
+
+				if(this.cartLenght){  
 				this.loading = true;
 				let order_data = {};
-				order_data["produits"] = {};
+				
 				let order_items = this.cart.data;
+				
 				const productlength = this.cartLenght;
 
-				this.$store.dispatch("checkout/getBussiness", 1);
-				//init variable
-				order_data.total_amount = 0;
-				order_data.tax_amount = 200;
-				order_data.shipping_address = this.allShipping[0].id;
-				order_data.shipping_amount = 3000;
+			  	this.$store
+					.dispatch("checkout/createOrder")
+					.then(({ data }) => {
+						   
+						
 
-				console.log(order_items[0]);
-				for (let index = 0; index < productlength; index++) {
-					order_data["produits"][`data${index}`] = {
-						product_id: order_items[index].product_id,
-						quantity: order_items[index].quantity,
-						price: order_items[index].product_price,
-						business_id: order_items[index].business_id,
-						total_amount:
-							order_items[index].product_price * order_items[index].quantity,
-					};
-					order_data.total_amount +=
-						order_data["produits"][`data${index}`].total_amount;
-				}
-				order_data.total_amount += order_data.shipping_amount;
-				console.log(order_data);
-				this.$store
-					.dispatch("checkout/createOrder", order_data)
-					.then(() => {
-						this.$emit("showoperator", order_data.total_amount);
-						this.loading = false;
+						 console.log("yoo thee mother fucker ");
+						 console.log(data);
+					
+
+					 this.$emit("showoperator",data.data.total_orders_amount, data.data.order_ids);
+						 this.loading = false; 
+
+
+
+					// this.$store
+					// .dispatch("checkout/getorder", data)
+					// .then(({ data }) => {   
+                     
+
+					// })
+						 
+						  
 					})
 					.catch(() => {
 						this.loading = false;
 					});
+					
+					} else{
+
+				this.flashMessage.show({
+                status: 'error',
+
+                message: "no product in your shopping cart",
+                blockClass: 'custom-block-class',
+              });
+					}
 			},
 		},
 		mounted() {},

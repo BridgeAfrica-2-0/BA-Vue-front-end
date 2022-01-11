@@ -4,14 +4,14 @@
       v-for="value in people_around"
       v-bind:key="value.name"
       class="people-style border shadow"
-    >
+    >  page number {{page}}
       <b-row class="mb-1">
         <b-col md="3" cols="4" sm="4" class="my-auto">
           <b-avatar
             class="p-avater"
-            variant="primary"
+          
             :src="value.profile_picutre"
-          ></b-avatar>
+          ></b-avatar>  
         </b-col>
 
         <b-col md="8" cols="8" sm="8">
@@ -109,7 +109,7 @@ export default {
   },
   data() {
     return {
-      page: 1,
+      page: 2,
       // people_around:[],
       options: {
         rewind: true,

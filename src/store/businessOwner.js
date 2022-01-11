@@ -101,42 +101,17 @@ export default {
         },
 
         business_about1: {
-          name: 'Tierra Hermiston',
-          logo_path: 'http://localhost:8000/storage',
-          category: 'Hourse Marketing',
-          keywords: null,
-          language: null,
-          location_description:
-            'Tempore quo soluta voluptates quis. Doloremque autem minus ut nisi molestias maiores cum. Et assumenda velit expedita et et sint sed in.',
-          website: null,
-          community: 6,
-          phone: null,
-          email: null,
-          business_open_hours: [
-            {
-              day: 'monday',
-              opening_time: '09:05:12',
-              closing_time: '15:06:18',
-            },
-            {
-              day: 'tuesday',
-              opening_time: '07:05:38',
-              closing_time: '14:05:43',
-            },
-          ],
-          region: null,
-          address: null,
-          city: null,
-          country: null,
-          lat: -56.200329,
-          lng: -6.249487,
-        },
+          },
       },
     ]
   },
   getters: {
     getAlbums(state) {
       return state.albums;
+    },
+
+    getOwnerPost(state) {
+      return state.ownerPost
     },
 
     getalbumImages(state) {
@@ -223,15 +198,27 @@ export default {
       return state.peopleFollowers;
     },
   },
+
   mutations: {
     //set media data
+
+    addCoverPicture(state, picture) {
+      const hasCover = state.businessInfo.cover.find(item => item.id == picture.id)
+      if (!hasCover)
+        state.businessInfo.cover.push(picture)
+    },
+
+    addMultiCoverPicture(state, pictures) {
+      state.businessInfo.cover = pictures
+    },
+
     updateAlbum(state, payload) {
       const newState = state.albums.map(album => (album.id == payload.id) ? Object.assign(album, { name: payload.name }) : album)
       state.albums = newState
     },
 
     updateAlbumItem(state, payload) {
-      const newState = state.albums.map(album => (album.id == payload.id) ? Object.assign(album, { items: ('remove' == payload.action) ? parseInt(album.items) - 1 : parseInt(album.items) + 1 }) : album)
+      const newState = state.albums.map(album => (album.id == payload.id) ? Object.assign(album, { cover: album.cover.length ? album.cover : payload.cover ? [payload.cover] : album.cover, items: ('remove' == payload.action) ? parseInt(album.items) - 1 : parseInt(album.items) + 1 }) : album)
       state.albums = newState
     },
 
@@ -246,6 +233,21 @@ export default {
         throw new Error(error)
       }
 
+    },
+
+    removePost(state, uuid) {
+      const newPosts = state.ownerPost.filter(post => post.id != uuid)
+      state.ownerPost = newPosts
+    },
+
+    UpdatePost(state, payload) {
+      console.log('in there')
+      const newPosts = state.ownerPost.map(post => post.id == payload.id ? payload : post)
+      state.ownerPost = newPosts
+    },
+
+    createPost(state, payload) {
+      state.ownerPost = [payload, ...state.ownerPost]
     },
 
     removeAlbum(state, uuid) {
@@ -387,18 +389,11 @@ export default {
       return num;
     },
 
-
-
-
     roleCheck({ commit }, id) {
-
-
       return axios.get("business/role-check?id=" + id)
         .then((data) => {
           return data;
         });
-
-
     },
 
     loadMore({ commit }, url) {
@@ -407,32 +402,26 @@ export default {
         .then((data) => {
           return data;
         });
-
     },
 
     updateBusinessBiographie({ commit }, data) {
-
       return axios.post(`business/update-biography/${data.business_id}`, data.data)
         .then((data) => {
           console.log(data);
         });
     },
 
-    async loadUserBusinessAbout(context, payload) {
+    async loadUserBusinessAbout({ commit }, payload) {
       let response_ = null;
       const id_Business = 2;
-      await axios("business/info" +
+      await axios.get("business/edit" +
         "/" +
-        payload.business_id,
-        {
-          method: "GET",
-          headers: {
-            Accept: "application/json",
+        payload.business_id
 
-          }
-        }
+
       )
         .then(response => {
+          console.log("----", response)
           if (response.status !== 200 && response.status !== 201) {
             throw 'Error from the server';
           }
@@ -442,48 +431,28 @@ export default {
           if (!response) {
             throw new Error('Error for loading Business About +++++');
           }
-          context.commit('updateUserBusinessAbout', {
+          commit('updateUserBusinessAbout', {
             businessAbout: response.data,
           });
           response_ = response;
         })
         .catch(error => { });
-      return response_;
+
     },
 
 
-    async updateUserBusinessAbout(context, payload) {
+    async updateUserBusinessAbout({ commit }, payload) {
       let response_ = null;
       const id_Business = 47;
-      await axios("business/update" +
+      console.log("-------testt----", payload)
+      await axios.post("business/update" +
         "/" +
-        payload.business_id,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
+        payload.business_id, payload.data
 
-          },
-          body: JSON.stringify({
-            name: payload.business_about.name,
-            category: payload.business_about.category,
-            subCategoryId: payload.business_about.subCategoryId,
-            filterId: payload.business_about.filterId,
-            keywords: payload.business_about.keywords,
-            phone: payload.business_about.phone,
-            email: payload.business_about.email,
-            country: payload.business_about.country,
-            region: payload.business_about.region,
-            division: payload.business_about.division,
-            council: payload.business_about.council,
-            locality: payload.business_about.locality,
-            city: payload.business_about.city,
-            openHours: payload.business_about.business_open_hours
-          })
-        }
       )
         .then(response => {
+
+
           console.log('update user Business About response (1) +++++++', response);
           if (response.status !== 200 && response.status !== 201) {
             throw 'Error From The Server';
@@ -496,7 +465,7 @@ export default {
             console.log('Error THe Server++++++');
             throw new Error('Error For Updating Business About +++++');
           }
-          context.commit('updateUserBusinessAbout', {
+          commit('updateUserBusinessAbout', {
             businessAbout: payload.business_about,
           });
           response_ = response;

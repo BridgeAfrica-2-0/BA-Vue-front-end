@@ -12,6 +12,8 @@ export default {
         currentBizId: null,
         currentBiz: [],
         bizs: [],
+        nets: [],
+
         chats: [],
         chatList: [],
         groupMembers: [],
@@ -50,8 +52,14 @@ export default {
         getBizs(state) {
             return state.bizs;
         },
+        getNets(state) {
+            return state.nets;
+        },
         getChats(state) {
             return state.chats;
+        },
+        getUserInfo(state) {
+            return state.userInfo;
         },
         getUser(state) {
             return state.currentUser;
@@ -100,6 +108,12 @@ export default {
         setChats(state, data) {
             state.chats = data
         },
+        setNets(state, data) {
+            state.nets = data
+        },
+        setUsers(state, data) {
+            state.users = data
+        },
         setBizs(state, data) {
             state.bizs = data;
         },
@@ -109,7 +123,9 @@ export default {
         setChatList(state, data) {
             state.chatList = data
         },
-
+        setUserInfo(state, data) {
+            state.userInfo = data
+        },
         setSelectedChatId(state, data) {
             state.selectedChatId = data
         },
@@ -165,6 +181,26 @@ export default {
                     commit("setLoader", false);
                     console.log(err);
                 })
+        },
+        async GET_BUSINESS_MEMBERS({ commit, state }) {
+            commit("setBizs", []);
+
+            await axios.post(`network/${state.currentBizId}/business/members`)
+                .then((res) => {
+                    commit("setLoader", false);
+                    let editor = res.data.data
+                    if (editor.length > 0) {
+                        state.editors = { accountType: "member", ...res.data.data }
+                    }
+                    console.log("member:", state.editors);
+                    commit("setBizs", state.editors);
+                })
+                .catch((err) => {
+                    commit("setLoader", false);
+                    console.log(err);
+                })
+                // commit("setCurrentBiz", rootGetters['auth/profilConnected']);
+
         },
         async GET_GROUP_MEMBERS({ commit, state }, data) {
             commit("setLoader", true);
@@ -258,7 +294,7 @@ export default {
 
             commit("setLoader", true);
             let keyword = data.keyword ? '/' + data.keyword : ''
-            return axios.get(`/business-community/user-follower/${state.currentBizId+keyword}`)
+            return axios.get(`/business-community/people-follower/${state.currentBizId+keyword}`)
                 .then((res) => {
                     commit("setLoader", false);
                     let users = res.data.data.data
@@ -268,17 +304,15 @@ export default {
                         })
                     }
 
-                    axios.get(`/business-community/user-following/${state.currentBizId+keyword}`)
+                    axios.get(`/business-community/people-following/${state.currentBizId+keyword}`)
                         .then((res1) => {
                             commit("setLoader", false);
 
                             if (res1.data.data.data.length > 0) {
                                 res1.data.data.data.map((elm) => {
-                                        state.users.push({ accountType: "people", statusType: "following", ...elm })
-                                    })
-                                    // state.businesses.push({ statusType: "following", ...res1.data.data.data })
+                                    state.users.push({ accountType: "people", statusType: "following", ...elm })
+                                })
                             }
-                            // state.users.push({ statusType: "following", ...res1.data.data })
                             commit("setBizs", state.users);
                         })
                         .catch((err) => {
@@ -290,17 +324,6 @@ export default {
                     commit("setLoader", false);
                     console.log(err);
                 })
-                // return axios.get(`/user/all-user${keyword}`)
-                //     .then((res) => {
-                //         commit("setLoader", false);
-                //         let users = res.data.data
-                //         state.users = users
-                //         commit("setBizs", users);
-                //     })
-                //     .catch((err) => {
-                //         commit("setLoader", false);
-                //         console.log(err);
-                //     })
         },
         GET_NETWORKS({ commit, state }, data) {
             commit("setBizs", []);
@@ -406,13 +429,17 @@ export default {
 
         async GET_EDITORS({ commit, state }) {
             commit("setBizs", []);
+            state.editors = []
 
             await axios.get(`/business/role/editor/${state.currentBizId}`)
                 .then((res) => {
                     commit("setLoader", false);
                     let editor = res.data.data
                     if (editor.length > 0) {
-                        state.editors = { accountType: "business", ...res.data.data }
+                        editor.map((elm) => {
+                            state.editors.push({ accountType: "editor", ...elm })
+                        })
+
                     }
                     console.log("editor:", state.editors);
                     commit("setBizs", state.editors);
@@ -423,6 +450,57 @@ export default {
                 })
                 // commit("setCurrentBiz", rootGetters['auth/profilConnected']);
 
+        },
+
+        GET_ALL_USERS({ commit, state }, data) {
+            commit("setUsers", []);
+
+            commit("setLoader", true);
+            let keyword = data ? '/' + data : ''
+            let usersFinal = []
+            axios.get(`/user/all-user${keyword}`)
+                .then((res) => {
+                    commit("setLoader", false);
+                    let users = res.data.data
+                    usersFinal = users.filter((user) => { return user.id != state.currentUser.user.id })
+                    commit("setUsers", usersFinal);
+                })
+                .catch((err) => {
+                    commit("setLoader", false);
+                    console.log(err);
+                })
+        },
+        GET_ALL_BIZS({ commit, state }, data) {
+            commit("setBizs", []);
+            commit("setLoader", true);
+            let keyword = data ? '/' + data : ''
+            axios.get(`/business/all${keyword}`)
+                .then((res) => {
+                    commit("setLoader", false);
+                    let bizs = res.data.data
+                    commit("setBizs", bizs);
+
+                })
+                .catch((err) => {
+                    commit("setLoader", false);
+                    console.log(err);
+                })
+        },
+        GET_ALL_NETS({ commit, state }, data) {
+            commit("setNets", []);
+            commit("setLoader", true);
+            let keyword = data ? '?keyword=' + data : ''
+            axios.get(`/network/search${keyword}`)
+                .then((res) => {
+                    commit("setLoader", false);
+                    let bizs = res.data.data
+                    commit("setNets", bizs);
+
+                })
+                .catch((err) => {
+                    commit("setLoader", false);
+                    console.log(err);
+                })
         },
 
         // [NO BUG]
@@ -539,40 +617,67 @@ export default {
             console.log("[DEBUG]", data);
             var payload = data.data
             var type = data.type
+            let exec = 0
+
 
             if (type == 'business') {
-                axios.post(`/messages/BusinesstoBusiness`, payload, {
-                        headers: {
-                            'Content-Type': 'multipart/form-data'
-                        }
-                    })
-                    .then((res) => {
-                        console.log("Message saved...", res.data.data);
-                    })
-                    .catch((err) => {
-                        console.log(err);
-                    })
+                if (exec < 1) {
+                    axios.post(`/messages/BusinesstoBusiness`, payload, {
+                            headers: {
+                                'Content-Type': 'multipart/form-data'
+                            }
+                        })
+                        .then((res) => {
+                            exec += 1
+                            console.log("Message saved...", res.data.data);
+                        })
+                        .catch((err) => {
+                            console.log(err);
+                        })
+                }
             } else if (type == 'user') {
-                axios.post(`/messages/BusinesstoUser`, payload, {
-                        headers: {
-                            'Content-Type': 'multipart/form-data'
-                        }
-                    })
-                    .then((res) => {
-                        console.log("Message saved...", res.data.data);
-                    })
-                    .catch((err) => {
-                        console.log(err);
-                    })
+                if (exec < 1) {
+                    axios.post(`/messages/BusinesstoUser`, payload, {
+                            headers: {
+                                'Content-Type': 'multipart/form-data'
+                            }
+                        })
+                        .then((res) => {
+                            exec += 1
+
+                            console.log("Message saved...", res.data.data);
+                        })
+                        .catch((err) => {
+                            console.log(err);
+                        })
+                }
+
             } else if (type == 'network') {
-                axios.post(`/messages/BusinesstoNetwork`, payload)
-                    .then((res) => {
-                        console.log("Message saved...", res.data.data);
-                    })
-                    .catch((err) => {
-                        console.log(err);
-                    })
+                if (exec < 1) {
+                    axios.post(`/messages/BusinesstoNetwork`, payload)
+                        .then((res) => {
+                            exec += 1
+
+                            console.log("Message saved...", res.data.data);
+                        })
+                        .catch((err) => {
+                            console.log(err);
+                        })
+                }
+
             }
+        },
+        GET_USER_INFO({ commit, state }, data) {
+
+            return axios.get(`/userIntro`)
+                .then((res) => {
+                    console.log("USER INFO", res.data.data.user);
+                    commit("setUserInfo", res.data.data.user);
+
+                })
+                .catch((err) => {
+                    console.log(err);
+                })
         },
         SAVE_GROUP_CHAT({ commit }, data) {
             // commit("setUsers", []);

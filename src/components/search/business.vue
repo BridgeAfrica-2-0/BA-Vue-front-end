@@ -1,9 +1,16 @@
 <template>
-  <div>
-    <NotFoundComponent
-      v-if="!business.data.length && !prodLoader"
+  <div v-if="islogin">  
+
+  
+     <NotFoundComponent
+      v-if="business.data.length < 1 && prodLoader == false"
       :title="title"
-    />
+    /> 
+    <b-spinner
+      v-if="prodLoader"
+      variant="primary"
+      :label="$t('search.Spinning')"
+    ></b-spinner>
 
     <div
       v-for="item in business.data"
@@ -117,6 +124,7 @@
                   size="sm"
                   class="b-background shadow"
                   variant="primary"
+                  @click="gotoBusiness(item.id)"
                 >
                   <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
                   <span class="btn-text">{{ $t("dashboard.Direction") }}</span>
@@ -137,24 +145,31 @@
       @change="changePage"
       align="center"
     ></b-pagination>
-  </div>
+  </div>  <div v-else> 
+    
+
+
+       <login />
+    
+     </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import moment from "moment";
 import axios from "axios";
-
+import login from "@/components/search/login";
 import NotFoundComponent from "@/components/NotFoundComponent";
 export default {
   props: ["image"],
   components: {
     NotFoundComponent,
+    login
   },
 
   data() {
     return {
       total: 0,
+      islogin:true,
       per_page: 10,
       list: [],
       currentPage: 1,
@@ -185,6 +200,12 @@ export default {
   mounted() {
     this.getBusiness();
   },
+  created(){
+   
+      this.islogin=this.$store.getters["auth/isLogged"];
+     
+     console.log(this.islogin);
+  },
 
   methods: {
     count(number) {
@@ -194,6 +215,9 @@ export default {
       if (number >= 1000) {
         return number / 1000 + "K";
       } else return number;
+    },
+    gotoBusiness(id) {
+      this.$router.push(`/business/${id}#about`);
     },
 
     async handleFollow(user) {
@@ -230,15 +254,13 @@ export default {
 
       this.findBusiness({})
         .then((res) => {
-          console.log("business list: ");
+          console.log("business list: ", res);
           console.log(this.business);
           this.$store.commit("business/setLoading", false);
-
           this.total = this.business.total;
         })
         .catch((err) => {
           this.$store.commit("business/setLoading", false);
-
           console.error(err);
         });
     },
@@ -253,10 +275,10 @@ export default {
         .then((res) => {
           console.log("business list: ");
           console.log(this.business);
-          this.prodLoader = false;
+          this.$store.commit("business/setLoading", true);
         })
         .catch((err) => {
-          this.prodLoader = false;
+          this.$store.commit("business/setLoading", true);
           this.total = this.business.total;
           console.error(err);
         });

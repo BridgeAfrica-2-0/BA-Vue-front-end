@@ -10,7 +10,7 @@
           <b-col md="3" cols="4" lg="3" class="my-auto">
             <b-avatar
               class="p-avater"
-              variant="primary"
+              variant="ligth"
               :src="item.profile_picture"
             ></b-avatar>
           </b-col>
@@ -23,7 +23,10 @@
                     <b-row>
                       <b-col md="6" lg="6" cols="6" sm="6" class="mt-lg-2">
                         <div class="mt-2 mt-lg-0 mt-xl-0 username">
-                          <b> {{ item.name }} </b>
+                          <router-link
+                            :to="'/profile/'+item.id"
+                            ><b>{{ item.name }} </b></router-link
+                          >
                         </div>
                       </b-col>
 
@@ -65,7 +68,10 @@
                         xl="6"
                         class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
                       >
+                       
+
                         <b-button
+                         
                           block
                           size="sm"
                           :id="'followbtn' + item.id"
@@ -129,6 +135,9 @@ export default {
   },
 
   computed: {
+    show() {
+      return this.$route.name;
+    },
     old_users() {
       if (this.type == "Follower") {
         return this.$store.state.profile.UcommunityFollower.user_followers;
@@ -182,6 +191,14 @@ export default {
         });
     },
 
+    getTotalCommunity(){
+         this.$store
+      .dispatch("follower/Tcommunity", this.foll_id)
+      .then((response) => {})
+      .catch((error) => {
+        console.log({ error: error });   
+      });
+    },
     async handleFollow(user) {
       console.log("yoo ma gee");
       document.getElementById("followbtn" + user.id).disabled = true;
@@ -198,6 +215,8 @@ export default {
           console.log(data);
           user.is_follow = nextFollowState;
           document.getElementById("followbtn" + user.id).disabled = false;
+
+          this.getTotalCommunity();
         })
 
         .catch((err) => {

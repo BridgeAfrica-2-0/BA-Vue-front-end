@@ -92,6 +92,11 @@ export default {
       state.images = payload;
     },
 
+     updateAlbumItem(state, payload) {
+      const newState = state.albums.map(album => (album.id == payload.id) ? Object.assign(album, { cover: album.cover.length ? album.cover: payload.cover ? [payload.cover]: album.cover, items: ('remove' == payload.action) ? parseInt(album.items) - 1 : parseInt(album.items) + 1 }) : album)
+      state.albums = newState
+    },
+
     updateAlbum(state, payload) {
       const newState = state.albums.map(album => (album.id == payload.id) ? Object.assign(album, { name: payload.name }) : album)
       state.albums = newState
@@ -120,8 +125,8 @@ export default {
     },
 
     // for albums
-    async getAlbums({ commit }) {
-      const res = await axios.get("profile/album/show");
+    async getAlbums({ commit }, id) {
+      const res = await axios.get("profile/album/show?id="+id);
       commit("setAlbums", res.data.data.album);
     },
 
@@ -139,13 +144,14 @@ export default {
     },
 
     // for images
-    async getImages({ commit }) {
-      const res = await axios.get("profile/post/media");
+    async getImages({ commit }, id) {
+      const res = await axios.get("profile/post/media?id="+id);
       commit("setImages", res.data.data);
     },
 
     async submitPost({ commit }, payload) {
-      return axios.post(`profile/upload/${payload.id}`, payload.data);
+      console.log(payload)
+      return axios.post(`profile/upload/${payload.albumID}`, payload.data);
     },
 
     async setProfilePic({ commit }, id) {

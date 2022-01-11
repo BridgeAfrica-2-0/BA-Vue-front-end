@@ -3,33 +3,41 @@ import axios from "axios";
 export default {
   namespaced: true,
   state: {
-    notifications: []
+    notifications: [],
+    notificationsDetails: [],
+    all:[]
+
   },
 
   getters: {
-    getNotifications(state) {
-      return state.notifications;
+    getAllNotifications(state) {
+      console.log(state.all)
+      return state.all;
     }
   },
 
   mutations: {
     setNotifications(state, notifications) {
         state.notifications = notifications;
+        state.all =  notifications
     },
+
+    setNotificationsDetails(state, notificationsDetails) {
+        state.notificationsDetails = notificationsDetails;
+    },
+
+    addNotification(state, notification) {
+      state.all = [notification , ...state.all]
+    }
   },
 
   actions: {
-
-    getNotifications( {commit}, dataInfo ){
-      console.log("Store File");
-      console.log(dataInfo.id); 
-      console.log(dataInfo.path);
+    getNotifications({commit}, dataInfo ){
       return axios
-      .get(`network/${dataInfo.id}/${dataInfo.path}`)
+      .get(`${dataInfo.id}${dataInfo.path}`)
       .then(({ data }) => {
           commit("setNotifications", data.data);
-        console.log(data);
-        console.log(`network/${dataInfo.id}/${dataInfo.path}`);
+          commit("setNotificationsDetails", data);
       })
     },
 
@@ -38,7 +46,7 @@ export default {
       console.log(dataInfo.path);
       console.log(dataInfo.formData); 
       return axios
-      .post(`/network/${dataInfo.path}`, dataInfo.formData)
+      .post(`/${dataInfo.path}`, dataInfo.formData)
       .then(({ data }) => {
         console.log(data);
         return data;
@@ -50,7 +58,7 @@ export default {
       console.log(dataInfo.path);
       console.log(dataInfo.formData); 
       return axios
-      .post(`/network/${dataInfo.path}`, dataInfo.formData)
+      .post(`/${dataInfo.path}`, dataInfo.formData)
       .then(({ data }) => {
         console.log(data);
         return data;

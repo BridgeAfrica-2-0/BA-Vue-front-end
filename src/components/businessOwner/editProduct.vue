@@ -1,13 +1,13 @@
 <template>
-    <div>
-        <b-modal
-    v-model="canShowModal"
-    hide-footer
-    :id="product.id"
-    size="xl"
-    title="Edit Product"
-    @close="closeModal"
-  >
+  <div>
+    <b-modal
+      v-model="canShowModal"
+      hide-footer
+      id="product-details"
+      size="xl"
+      title="Product Details"
+      @close="closeModal"
+    >
       <b-form>
         <b-row>
           <b-col cols="12" md="6">
@@ -119,25 +119,23 @@
 
         <b-button class="mt-2 btn-block" variant="primary"> Update</b-button>
       </b-form>
-     </b-modal>
-    </div>
+    </b-modal>
+  </div>
 </template>
 
 <script>
 export default {
-    data() {
+  data() {
     return {
-    //   viewProduct: false,
-      //  canShowModal: false,
-      url: null,
-      hide: false
+      viewProduct: false,
+      canShowModal: false
     };
   },
-    props: {
-    // showModal: {
-    //   type: Boolean,
-    //   default: false,
-    // },
+  props: {
+    showModal: {
+      type: Boolean,
+      default: false,
+    },
     product: {
       type: Object,
       required: true,
@@ -153,32 +151,6 @@ export default {
     findImage(){
       document.getElementById("img").click();
     },
-
-    pickImage(f){
-      
-      // console.log(f.target.files[0]);
-      // var image = document.getElementById("image");
-      //   // e.files contient un objet FileList
-      //   const [picture] = f.target.files[0];
-      //     const file = f.target.files[0];
-        // "picture" est un objet File
-       
-            // On change l'URL de l'image
-        this.hide = true;
-            // image.src = URL.createObjectURL(f.target.files)
-         this.url = URL.createObjectURL(f.target.files[0]);
-        console.log("---",this.url)
-    }
   },
-  mounted(){
-    console.log(this.product)
-  }
-}
+};
 </script>
-
-<style scoped>
-.hide1{
-  display: none;
-  
-}
-</style>

@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div class="row">
+    <div class="row" >
       <div class="container-fluid" v-if="!showalbum">
         <div class="one2">
-          <div class="createp img-gall image-wrapp img-size" v-if="isEditor" v-b-modal.createalbumModal>
+          <div class="createp img-gall image-wrapp img-size" v-if="isEditor" v-b-modal.createalbumModal :style="getStyle">
             <div class="">
               <a>
                 <div class="drag-textt">
@@ -24,7 +24,7 @@
               </b-form>
             </div>
           </b-modal>
-
+          
           <AlbumItem
             v-for="album in strategy[type]().albums"
             :key="album.id"
@@ -35,6 +35,10 @@
             :showAlbumPictures="() => showAlbumPictures(album)"
             :type="type"
             :isEditor="isEditor"
+            :showCoverAlbum="
+              showCoverAlbum ? 
+              'Cover' == album.name ? true : false
+              : false"
           />
         </div>
 
@@ -103,9 +107,11 @@
       <b-button variant="outline-primary" size="sm" @click="hidealbum">
         {{ $t('profileowner.Back') }}
       </b-button>
-      <span class="text-center ml-2 f-20"> {{ this.album_name }}</span>
+      <span class="text-center ml-2 f-20"> {{ album_name }}</span>
 
       <Images
+
+        :isAlbum="true"
         @update:item="() => updateItem()"
         :showCreateForm="isEditor"
         :hasLoadPicture="hasLoadPicture"
@@ -121,6 +127,7 @@
         "
         :images="strategy[type]().showAlbumImages"
         @reste="hidealbum"
+
       />
     </div>
   </div>
@@ -135,8 +142,11 @@ import { mapActions, mapGetters, mapMutations } from 'vuex';
 import defaultImage from '@/assets/img/nothing.jpg';
 
 import { fullMediaLink } from '@/helpers';
+import { ResizeMediaImage } from '@/mixins' 
 
 export default {
+  
+  mixins: [ResizeMediaImage],
   components: {
     Images,
     AlbumItem,
@@ -147,16 +157,24 @@ export default {
       type: Boolean,
       required: true,
     },
+
+    showCoverAlbum:{
+      type:Boolean,
+      default: () => false
+    },
+
     type: {
       type: String,
       require: true,
     },
+    
     getImages: {},
     getAlbums: {},
   },
 
   data: function () {
     return {
+      key:1,
       hasLoadPicture: true,
       canViewAlbum: true,
       showalbum: false,
@@ -178,7 +196,7 @@ export default {
   },
 
   created() {
-    this.url = this.$route.params.id;
+    this.url = this.$route.params.id ? this.$route.params.id : this.profile.id;
 
     this.strategy = {
       business: () => ({
@@ -238,6 +256,8 @@ export default {
       getAlbumsNetwork: 'networkProfileMedia/getAlbums',
       getAlbumImageNetwork: 'networkProfileMedia/getAlbumImage',
       albumImagesNetwork: 'networkProfileMedia/getAlbumImages',
+
+      profile: 'auth/profilConnected'
     }),
 
     canCreateAlbum() {
@@ -288,6 +308,7 @@ export default {
     },
 
     showAlbumPictures(album) {
+      this.key = this.key++
       const credentials =
         'business' == this.type || 'network' == this.type
           ? {
@@ -329,8 +350,8 @@ export default {
       this.strategy[this.type]()
         .createAlbum(data)
         .then(() => {
-          this.strategy[this.type]().fetchAlbums(this.$route.params.id);
-          this.getAlbums();
+          this.strategy[this.type]().fetchAlbums(this.$route.params.id ? this.$route.params.id: this.profile.id);
+          
         })
         .then(() => {
           this.$bvModal.hide('createalbumModal');
@@ -340,7 +361,7 @@ export default {
           };
           this.flashMessage.show({
             status: 'success',
-            message: 'Album Created',
+            message: this.$t('general.Album_Created')
           });
 
           this.loading = false;

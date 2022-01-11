@@ -17,14 +17,16 @@
                 <div class="d-inline-flex">
                   <div class="center-img">
                     <splide :options="options" class="r-image">
-                      <splide-slide cl>
-                        <img :src="item.picture" class="r-image" />
+                      <splide-slide>
+                        <img :src="item.logo_path" class="r-image" />
                       </splide-slide>
                     </splide>
                   </div>
                   <div class="flx100 text-left">
                     <p class="ml-3 textt text-left">
-                      <strong class="title"> {{ item.name }} </strong> <br />
+                     
+                       <router-link :to="({name:'BusinessFollower', params:{id: item.id}})">
+                      <strong class="title over" > {{ item.name }}</strong> </router-link>   <br />
 
                       <span v-for="cat in item.category" :key="cat.name">
                         {{ cat.name }}
@@ -41,13 +43,14 @@
                       </span>
                       <br />
                       <read-more
-                        more-str="read more"
+                        :more-str="$t('search.read_more')"
                         class="readmore"
                         :text="item.about_business"
                         link="#"
-                        less-str="read less"
+                        :less-str="$t('search.read_less')"
                         :max-chars="100"
                       >
+                      
                       </read-more>
                     </p>
                   </div>
@@ -155,6 +158,11 @@ export default {
   },
 
   methods: {
+
+    // bizzFollower(id){
+    //   console.log(id);
+    //   this.$router.push({name:'BusinessFollower', params:{id: id}})
+    // },
     count(number) {
       if (number >= 1000000) {
         return number / 1000000 + "M";
@@ -213,6 +221,8 @@ export default {
     },
   },
   computed: {
+
+    
     old_busineses() {
       return this.$store.state.follower.profileBusiness;
     },
@@ -230,6 +240,13 @@ export default {
 </script>
 
 <style scoped>
+
+  .over{
+    cursor: pointer;
+      }
+      .over:hover{
+     color: #e75c18;
+      }
 @media only screen and (min-width: 768px) {
   .btn-text {
     margin-left: 8px;

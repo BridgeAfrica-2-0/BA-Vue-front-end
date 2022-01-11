@@ -254,7 +254,7 @@
     "Tel_2": "Tel 2",
     "Location": "Location",
     "Allow_Business_to_join_network": "Allow Business to join network",
-    "Update_Network": "Update_Network",
+    "Update_Network": "Update Network",
     "Upload_Profile_Picture": "Upload Profile Picture",
     "Edit_Your_New_picture": "Edit Your New picture",
     "Upload": "Upload",
@@ -306,7 +306,16 @@
     "Municipality":"Municipality",
     "Selected":"Selected",
     "All_Selected":"All Selected",
-    "No_notifications_to_show":"No notifications to show"
+    "No_notifications_to_show":"No notifications to show",
+    "about":"About",
+    "No_Result_On_Networks":"No Result On Networks",
+    "Anyone":"Anyone",
+    "Allow_Business":"Autoriser les entreprise",
+    "Search_or_add_a_tag":"Search or add a tag",
+
+    "You_Are_Not_more_Following":"You Are Not more Following",
+    "You_Are_Now_Following":"You Are Now Following",
+    "Unable_To_follow":"Unable To follow"
 
 
 }

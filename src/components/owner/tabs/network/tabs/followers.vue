@@ -9,7 +9,7 @@
             v-model="keywords"
           ></b-form-input>
 
-          <b-input-group-prepend is-text  @click="$refs.search.search()">
+          <b-input-group-prepend is-text @click="$refs.search.search()">
             <b-icon-search class="text-primary border-none"></b-icon-search>
           </b-input-group-prepend>
         </b-input-group>
@@ -17,30 +17,34 @@
     </b-row>
     <br />
 
-
-        <CommunityBusiness   :searchh="keywords" ref="search"  type="Follower" />
-        
-     
+    <CommunityBusiness @BlockUser="BlockUser" :searchh="keywords" ref="search" type="Follower" />
   </div>
 </template>
 
 <script>
-import CommunityBusiness from "../../communitynetwork";
+import CommunityBusiness from '../../communitynetwork';
 export default {
   data() {
     return {
-        keywords:"",
-    }
-    },
+      keywords: '',
+    };
+  },
   components: {
-    CommunityBusiness
+    CommunityBusiness,
   },
 
-
-   computed: {
-   
-  },
-
+  computed: {},
+  methods: {
+    BlockUser(id) {
+      console.log(id);
+      let dataInfo = {
+        id: id,
+        refernce: "network",
+        type: "follower",
+      };
+      this.$emit('BlockUser', dataInfo);
+    },
+  }
 };
 </script>
 

@@ -26,7 +26,7 @@
               xl="8"
               class="order-sm-0 mt-sm-10 mt-md-10 mt-xl-0 marg-tap"
             >
-              <Default />
+              <Default @changeSelected="changer" />
             </b-col>
           </b-row>
         </div>
@@ -105,7 +105,6 @@ export default {
 
         { label: this.$t("network.Settings"), icon: "" },
       ],
-
       options: {
         activeColor: "#32a400",
       },
@@ -151,6 +150,10 @@ export default {
   },
 
   methods: {
+    changer(){
+      this.selectedId = 4
+      console.log("evenement arrive au parent network",  this.selectedId )
+    },
     handleChange(item, index) {
       console.log(item, index);
     },

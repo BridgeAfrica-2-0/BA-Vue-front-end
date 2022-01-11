@@ -39,7 +39,7 @@
               alt="Kitten"
             />
 
-            <b-button variant="primary" class="text-center mt-3">
+            <b-button @click="$emit('pageChange')" variant="primary" class="text-center mt-3">
               {{ $t("businessowner.Upgrade_Now") }}
             </b-button>
           </div>

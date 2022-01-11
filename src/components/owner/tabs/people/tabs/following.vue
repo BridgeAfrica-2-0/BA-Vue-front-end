@@ -5,18 +5,19 @@
         <b-input-group class="mb-2 px-md-3 float-right">
           <b-form-input
             aria-label="Text input with checkbox"
+            v-model="keywords"
             :placeholder="$t('profileowner.Search_Something')"
           ></b-form-input>
 
           <b-input-group-prepend  @click="$refs.search.search()" is-text>
             <b-icon-search class="text-primary border-none"></b-icon-search>
           </b-input-group-prepend>
-        </b-input-group>
+        </b-input-group>  
       </b-col>
     </b-row>
     <br />
 
-        <CommunityMembers  :searchh="keywords" ref="search" type="Following"  />
+        <CommunityMembers  @BlockUser="BlockUser" :searchh="keywords" ref="search" type="Following"  />
      
   </div>
 </template>
@@ -36,6 +37,17 @@ export default {
   computed: {
    
   },
+  methods: {
+    BlockUser(id) {
+      console.log(id);
+      let dataInfo = {
+        id: id,
+        refernce: "user",
+        type: "following",
+      };
+      this.$emit('BlockUser', dataInfo);
+    },
+  }
 
 };
 </script>

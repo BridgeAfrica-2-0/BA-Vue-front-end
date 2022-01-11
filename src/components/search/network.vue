@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="islogin">
     <b-spinner
       v-if="loader"
       variant="primary"
@@ -17,18 +17,19 @@
       v-for="(network, index) in networks.data"
       :key="index"
     >
-      <b-row @mouseover="showAction = index" @mouseleave="showAction = null">
+      <b-row>
         <b-col md="3" xl="3" lg="3" cols="5" sm="3">
           <div class="center-img">
-            <img
-              src="https://i.pinimg.com/originals/5e/8f/0b/5e8f0b24f19624754d2aa37968217d5d.jpg"
-              class="r-image"
-            />
+            <img :src="network.image" class="r-image" />
           </div>
         </b-col>
         <b-col md="7" cols="7" lg="5" sm="5">
           <p class="textt">
-            <strong class="net-title"> {{ network.name }} </strong>
+            <strong class="net-title">
+              <router-link :to="'network/' + network.id">
+                {{ network.name }}
+              </router-link>
+            </strong>
             <br />
             {{ network.purpose }}
             <br />
@@ -40,21 +41,20 @@
               {{ network.address }}
             </span>
             <br />
-            {{ network.description }}
-            <br />
-            <b-link>{{ $t("search.Read_More") }}</b-link>
+            <read-more
+              :more-str="$t('search.read_more')"
+              class="readmore"
+              :text="network.description"
+              link="#"
+              :less-str="$t('search.read_less')"
+              :max-chars="30"
+            >
+            </read-more>
+            <!-- <b-link>{{ $t("search.Read_More") }}</b-link> -->
           </p>
         </b-col>
 
-        <b-col
-          lg="4"
-          md="12"
-          xl="4"
-          cols="12"
-          sm="4"
-          v-if="index == showAction"
-        >
-          <b>{{ index }}</b>
+        <b-col lg="4" md="12" xl="4" cols="12" sm="4">
           <div class="s-button">
             <b-row>
               <b-col md="4" lg="12" xl="12" sm="12" cols="4" class="mt-2">
@@ -76,6 +76,16 @@
               </b-col>
 
               <b-col md="4" lg="12" xl="12" sm="12" cols="4" class="mt-2">
+                <b-button
+                  block
+                  size="sm"
+                  class="b-background shadow"
+                  variant="primary"
+                >
+                  <i class="fas fa-lg btn-icon fa-user-plus"></i>
+
+                  <span class="btn-text"> {{ $t("search.Join") }} </span>
+                </b-button>
               </b-col>
             </b-row>
           </div>
@@ -101,9 +111,14 @@
       {{ $t("search.Do_you_want_to_join_this_network") }}?
     </b-modal>
   </div>
+  <div v-else>
+    <login />
+  </div>
 </template>
 
 <script>
+import axios from "axios";
+import login from "@/components/search/login";
 export default {
   props: ["title", "image"],
   data() {
@@ -113,10 +128,16 @@ export default {
       total: 0,
       per_page: 10,
       list: [],
+      islogin: true,
       currentPage: 1,
       nextLoad: false,
     };
   },
+
+  components: {
+    login,
+  },
+
   computed: {
     networks() {
       return this.$store.getters["networkSearch/getNetworks"];
@@ -132,6 +153,10 @@ export default {
 
       this.networkSearch();
     }
+
+    this.islogin = this.$store.getters["auth/isLogged"];
+
+    console.log(this.islogin);
   },
 
   methods: {

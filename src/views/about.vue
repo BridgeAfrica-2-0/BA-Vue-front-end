@@ -38,7 +38,7 @@
       <div class="row px-md-5 px-2">
         <div class="col-md-6">
           <img
-            src="http://info.bridgeafrica.com/wp-content/uploads/2021/07/DSC09065-scaled-1-1024x683.jpg"
+            src="../assets/img/about/DSC09065-scaled-1-1024x683 img1.jpg"
             alt="People Image"
           />
         </div>
@@ -71,9 +71,9 @@
               <b-collapse id="accordion-2" visible accordion="my-accordion" role="tabpanel">
                 <b-card-body>
                   <b-card-text class="color-black">
-                    {{$t("about.With_87.5%_of_businesses_lacking_websites_and_99%_having_never_sold_online")}}, 
+                    {{$t("about.With_875_of_businesses_lacking_websites_and_99_having_never_sold_online")}}, 
                     {{$t("about.the_digital_divide_is_limiting_the_economic_growth_and_productivity_of_businesses_in_Cameroon_and_Africa")}}. 
-                    {{$t("about.That_is_why_we_are_on_a_mission_to_see_every_SME_in_Africa_have_a digital_identity_so_they_can_expand_their_market_space_and_sell_more_online")}}.
+                    {{$t("about.That_is_why_we_are_on_a_mission_to_see_every_SME_in_Africa_have_a_digital_identity_so_they_can_expand_their_market_space_and_sell_more_online")}}.
                   </b-card-text>
                 </b-card-body>
               </b-collapse>
@@ -88,9 +88,9 @@
               <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel">
                 <b-card-body>
                   <b-card-text class="color-black">
-                    {{$t("about.With_87.5%_of_businesses_lacking_websites_and_99%_having_never_sold_online")}}, 
+                    {{$t("about.With_875_of_businesses_lacking_websites_and_99_having_never_sold_online")}}, 
                     {{$t("about.the_digital_divide_is_limiting_the_economic_growth_and_productivity_of_businesses_in_Cameroon_and_Africa")}}. 
-                    {{$t("about.That is why we_are_on_a_mission_to_see_every_SME_in_Africa_have_a_digital_identity_so_they_can_expand_their_market_space and sell more online")}}.
+                    {{$t("about.That_is_why_we_are_on_a_mission_to_see_every_SME_in_Africa_have_a_digital_identity_so_they_can_expand_their_market_space_and_sell_more_online")}}.
                   </b-card-text>
                 </b-card-body>
               </b-collapse>
@@ -122,7 +122,7 @@
               <div class="card container border-0 rounded-0 functionality-div first pb-5 mt-md-5">
                 <p class="mt-5 pt-2 text-right">
                   <img
-                    src="http://info.bridgeafrica.com/wp-content/uploads/2021/07/about-web-design-icon.png"
+                    src="../assets/img/about/about-web-design-iconimg2.png"
                     alt="web design icon"
                     class="functionality-icons"
                   />
@@ -142,7 +142,7 @@
               <div class="card container border-0 rounded-0 functionality-div second pb-5">
                 <p class="mt-5 pt-2 text-right">
                   <img
-                    src="http://info.bridgeafrica.com/wp-content/uploads/2021/07/about-phone-book.png"
+                    src="../assets/img/about/about-phone-book-img3.png"
                     alt="web design icon"
                     class="functionality-icons"
                   />
@@ -167,14 +167,14 @@
               <div class="card container border-0 rounded-0 functionality-div third pb-5">
                 <p class="mt-5 pt-2 text-right">
                   <img
-                    src="http://info.bridgeafrica.com/wp-content/uploads/2021/07/about-group.png"
+                    src="../assets/img/about/about-group-img4.png"
                     alt="web design icon"
                     class="functionality-icons"
                   />
                 </p>
                 <div class="pl-4">
                   <h6 class="font-weight-bold font-mont functionality-div-headings">
-                    {{$t("about.COMMUNIT_ENGAGEMENT")}}
+                    {{$t("about.COMMUNITY_ENGAGEMENT")}}
                   </h6>
                   <p class="text-left font-14">
                     {{$t("about.Our_platform_provides_community_engagement_functionalities_enabling_businesses_and_consumers_to_follow_one_another")}}, 
@@ -187,7 +187,7 @@
               <div class="card container border-0 rounded-0 functionality-div forth pb-5 mt-md-4">
                 <p class="mt-5 pt-2 text-right">
                   <img
-                    src="http://info.bridgeafrica.com/wp-content/uploads/2021/07/about-sms.png"
+                    src="../assets/img/about/about-sms-img5.png"
                     alt="web design icon"
                     class="functionality-icons"
                   />
@@ -213,7 +213,7 @@
         <div class="row">
           <div class="col-md-6 px-md-0 pb-0">
             <img
-              src="http://info.bridgeafrica.com/wp-content/uploads/2021/07/blocks-image-17.jpg"
+              src="../assets/img/about/blocks-image-17-img6.jpg"
               alt="photography"
               class=""
             />
@@ -242,7 +242,7 @@
           <div class="col-md-6 pl-0" style="z-index:1010">
             <video
               class="bridge-america-video"
-              src="http://info.bridgeafrica.com/wp-content/uploads/2021/07/Bridge-Africa-logo-1.mp4"
+              src="../assets/img/about/Bridge-Africa-logo-1.mp4"
               autoplay=""
               loop=""
               muted="muted"
@@ -254,7 +254,7 @@
       </div>
       <div class="col-md-4 px-md-0 d-none d-md-block">
         <img
-          src="http://info.bridgeafrica.com/wp-content/uploads/2021/07/blocks-image-75-1.jpg"
+          src="../assets/img/about/blocks-image-75-1-img7.jpg"
           alt="image"
           class="only-img"
         />
@@ -262,7 +262,7 @@
     </div>
     <div class="row">
       <div class="col-md-4 p-0">
-        <img src="http://info.bridgeafrica.com/wp-content/uploads/2021/07/blocks-image-73-1.jpg" alt="Yello Image" />
+        <img src="../assets/img/about/blocks-image-73-1-img8.jpg" alt="Yello Image" />
       </div>
       <div class="col-md-4 p-0">
         <div class="container my-md-5 px-5">
@@ -298,7 +298,7 @@
           <div class="video pl-md-5 py-5">
             <video
               class="elementor-video my-4"
-              src="http://info.bridgeafrica.com/wp-content/uploads/2021/07/sceen-video.mp4"
+              src="../assets/img/about/sceen-video.mp4"
               autoplay=""
               loop=""
               muted="muted"
@@ -318,7 +318,7 @@
         <div class="col-md-3 pr-md-0">
           <div class="d-none d-md-block">
             <img
-              src="http://info.bridgeafrica.com/wp-content/uploads/2021/07/tissu-choisit.jpg"
+              src="../assets/img/about/tissu-choisit-img9.jpg"
               alt="black image"
               class="black-img"
             />
@@ -355,7 +355,7 @@
           <div class="d-none d-md-block yellow-img">
             <img
               data-v-e7ab893a=""
-              src="http://info.bridgeafrica.com/wp-content/uploads/2021/07/blocks-image-73-1.jpg"
+              src="../assets/img/about/blocks-image-73-1-img10.jpg"
               alt="Yello Image"
             />
           </div>
@@ -385,7 +385,7 @@
               pill
               :variant="selectedResource == 'cameroon' ? 'primary' : 'outline-primary'"
               @click="changeResource('cameroon')"
-              >{{$t("about.Cameroon_Gallery")}}</b-button
+              >Cameroon Gallery</b-button
             >
             <b-button
               pill
@@ -447,38 +447,38 @@
       <div class="row px-4">
         <div class="col-md-4 mt-3">
           <div class="blog-img-div position-relative">
-            <img src="https://bridgeafricaventures.com/wp-content/uploads/2021/07/post3.jpg" alt="..." />
+            <img src="../assets/img/about/post3-img17.jpg" alt="..." />
             <h5>{{$t("about.Creating_the_Next_Generation_of_Leaders_at_Your_Company")}} (Demo)</h5>
           </div>
         </div>
         <div class="col-md-4 mt-3">
           <div class="blog-img-div position-relative">
-            <img src="https://bridgeafricaventures.com/wp-content/uploads/2021/07/post3.jpg" alt="..." />
+            <img src="../assets/img/about/post3-img17.jpg" alt="..." />
             <h5>{{$t("about.Creating_the_Next_Generation_of_Leaders_at_Your_Company")}} (Demo)</h5>
           </div>
         </div>
         <div class="col-md-4 mt-3">
           <div class="blog-img-div position-relative">
-            <img src="https://bridgeafricaventures.com/wp-content/uploads/2021/07/post3.jpg" alt="..." />
+            <img src="../assets/img/about/post3-img17.jpg" alt="..." />
             <h5>{{$t("about.Creating_the_Next_Generation_of_Leaders_at_Your_Company")}} (Demo)</h5>
           </div>
         </div>
 
         <div class="col-md-4 mt-3">
           <div class="blog-img-div position-relative">
-            <img src="https://bridgeafricaventures.com/wp-content/uploads/2021/07/post3.jpg" alt="..." />
+            <img src="../assets/img/about/post3-img17.jpg" alt="..." />
             <h5>{{$t("about.Creating_the_Next_Generation_of_Leaders_at_Your_Company")}} (Demo)</h5>
           </div>
         </div>
         <div class="col-md-4 mt-3">
           <div class="blog-img-div position-relative">
-            <img src="https://bridgeafricaventures.com/wp-content/uploads/2021/07/post3.jpg" alt="..." />
+            <img src="../assets/img/about/post3-img17.jpg" alt="..." />
             <h5>{{$t("about.Creating_the_Next_Generation_of_Leaders_at_Your_Company")}} (Demo)</h5>
           </div>
         </div>
         <div class="col-md-4 mt-3">
           <div class="blog-img-div position-relative">
-            <img src="https://bridgeafricaventures.com/wp-content/uploads/2021/07/post3.jpg" alt="..." />
+            <img src="../assets/img/about/post3-img17.jpg" alt="..." />
             <h5>{{$t("about.Creating_the_Next_Generation_of_Leaders_at_Your_Company")}} (Demo)</h5>
           </div>
         </div>
@@ -492,7 +492,7 @@
       <div class="row justify-content-center p-5">
         <div class="col-md-3 m-3 border border-dark team-div px-5 pt-5">
           <img
-            src="http://info.bridgeafrica.com/wp-content/uploads/2020/02/lorenzo-thegem-person-160.png"
+            src="../assets/img/team/lorent.png"
             alt="img"
             class="rounded-circle d-block m-auto team-img"
           />
@@ -502,7 +502,7 @@
 
         <div class="col-md-3 m-3 border border-dark team-div px-5 pt-5">
           <img
-            src="http://info.bridgeafrica.com/wp-content/uploads/2020/02/bruno.png"
+            src="../assets/img/team/bruno.png"
             alt="img"
             class="rounded-circle d-block m-auto team-img"
           />
@@ -512,7 +512,7 @@
 
         <div class="col-md-3 m-3 border border-dark team-div px-5 pt-5">
           <img
-            src="http://info.bridgeafrica.com/wp-content/uploads/2020/02/lengweh-blaise-thegem-person.png"
+            src="../assets/img/team/blec.png"
             alt="img"
             class="rounded-circle d-block m-auto team-img"
           />
@@ -522,7 +522,7 @@
 
         <div class="col-md-3 m-3 border border-dark team-div px-5 pt-5">
           <img
-            src="http://info.bridgeafrica.com/wp-content/uploads/2020/02/arlet.jpg"
+            src="../assets/img/team/arlet.jpg"
             alt="img"
             class="rounded-circle d-block m-auto team-img"
           />
@@ -532,7 +532,7 @@
 
         <div class="col-md-3 m-3 border border-dark team-div px-5 pt-5">
           <img
-            src="http://info.bridgeafrica.com/wp-content/uploads/2020/02/eunice.jpg"
+            src="../assets/img/team/eunice.jpg"
             alt="img"
             class="rounded-circle d-block m-auto team-img"
           />
@@ -542,7 +542,7 @@
 
         <div class="col-md-3 m-3 border border-dark team-div px-5 pt-5">
           <img
-            src="http://info.bridgeafrica.com/wp-content/uploads/2020/02/maxines.png"
+            src="../assets/img/team/maxine.png"
             alt="img"
             class="rounded-circle d-block m-auto team-img"
           />
@@ -557,7 +557,7 @@
     <section class="subscribe container">
       <div class="row">
         <div class="col-md-4 px-md-0 d-none d-md-block">
-          <img src="http://info.bridgeafrica.com/wp-content/uploads/2021/07/contact2.png" alt="Women" class="sub-img" />
+          <img src="../assets/img/about/contact2-img18.png" alt="Women" class="sub-img" />
         </div>
         <div class="col-md-4 px-md-0">
           <div class="bg-black sub-div d-flex flex-column justify-content-center">
@@ -576,7 +576,7 @@
         </div>
         <div class="col-md-4 px-md-0 d-none d-md-block">
           <img
-            src="http://info.bridgeafrica.com/wp-content/uploads/2021/07/Gem-Lane-contact.jpg"
+            src="../assets/img/about/Gem-Lane-contact-img19.jpg"
             alt="Calling Man"
             class="sub-img"
           />
@@ -599,7 +599,7 @@
           <p class="text-center font-mont text-light font-weight-bold">
             {{$t("about.We_hope_you_enjoy_our_products_and_services_as_much_as_we_enjoy_offering_them_to_you")}}. 
             {{$t("about.If_you_have_any_questions_or_comments")}}, 
-            {{$t("about.please_don’t_hesitate_to_contact_us")}}. 
+            {{$t("about.please_don't_hesitate_to_contact_us")}}. 
             {{$t("about.via_the_media_below")}}.
           </p>
         </div>
@@ -624,20 +624,6 @@
       </div>
     </section>
     <div>
-
-        <p class="text-center">
-     
-      <span class="display-inline">
-        <b-link @click=" setLang('en')  "> {{ $t("auth.english") }} </b-link>
-        <span class="vl"></span> 
-        <b-link class="ml-2"  @click="setLang('fr')">
-          {{ $t("auth.french") }}
-        </b-link>
-      </span>
-
-
-      Bridge Africa © 2021
-    </p>
         </div>
 
     <!-- Footer -->
@@ -662,36 +648,38 @@ export default {
       resources: [
         {
           id: '1',
-          title: 'HOW TO USE BRIDGEAFRICA.COM',
+          title: this.$t('general.HOW_TO_USE_BRIDGEAFRICA'),
           img_url:
-            'http://info.bridgeafrica.com/wp-content/uploads/2021/07/WSIS-thumbnail-1024x592-1-thegem-portfolio-masonry.png',
+            require('../assets/img/about/WSIS-thumbnail-1024x592-1-thegem-portfolio-masonry-img11.png'),
           tag: ['bridgeafrica', 'cameroon', 'cunsulting', 'media'],
         },
         {
           id: '2',
-          title: 'BETA LAUNCH OF BRIDGEAFRICA',
+          title: this.$t("general.BETA_LAUNCH_OF_BRIDGEAFRICA"),
           img_url:
-            'http://info.bridgeafrica.com/wp-content/uploads/2021/07/THINDFDF-1024x743-1-thegem-portfolio-masonry.png',
+            require('../assets/img/about/THINDFDF-1024x743-1-thegem-portfolio-masonry-img12.png'),
           tag: ['bridgeafrica', 'cameroon'],
         },
         {
           id: '3',
-          title: 'BridgeAfrica.com Partners with Pea Jeunes (Demo)',
+          title: this.$t('general.Partners_with_Pea'),
           img_url:
-            'http://info.bridgeafrica.com/wp-content/uploads/2021/07/mapoure-1024x576-1-thegem-portfolio-masonry.png',
+            require('../assets/img/about/mapoure-1024x576-1-thegem-portfolio-masonry-14.png'),
           tag: ['bridgeafrica', 'media'],
         },
         {
           id: '4',
+
           title: 'BridgeAfrica.com Gives Digital Literacy Training (Demo)',
-          img_url: 'http://info.bridgeafrica.com/wp-content/uploads/2021/07/000000.png',
+          img_url: require('../assets/img/about/000000-img15.png'),
+
           tag: ['cunsulting', 'media'],
         },
         {
           id: '5',
-          title: 'Cameroon Gallery Commercial (Demo)',
+          title: this.$t('general.Cameroon_Gallery_Commercial'),
           img_url:
-            'http://info.bridgeafrica.com/wp-content/uploads/2021/07/caeroon-gallery-thegem-portfolio-masonry.jpg',
+            require('../assets/img/about/caeroon-gallery-thegem-portfolio-masonry-16.jpg'),
           tag: ['cameroon', 'media'],
         },
       ],
@@ -723,19 +711,19 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 .font-arvo {
-  font-family: 'Arvo', serif;
+  /* font-family: 'Arvo', serif; */
 }
 .font-rob {
-  font-family: 'Roboto', Sans-serif;
+  /* font-family: 'Roboto', Sans-serif; */
 }
 .font-poppin {
-  font-family: 'Poppins', sans-serif;
+  /* font-family: 'Poppins', sans-serif; */
 }
 .font-source {
-  font-family: 'Source Sans Pro', sans-serif;
+  /* font-family: 'Source Sans Pro', sans-serif; */
 }
 .font-mont {
-  font-family: 'Montserrat', sans-serif;
+  /* font-family: 'Montserrat', sans-serif; */
 }
 .balogo {
   width: 170px;
@@ -757,7 +745,7 @@ export default {
 }
 .bg-img {
   background-color: #010000;
-  background-image: url(http://info.bridgeafrica.com/wp-content/uploads/2021/07/empower.jpg);
+  background-image: url('../assets/img/empower.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   width: 100%;
@@ -978,7 +966,7 @@ export default {
 .contact-us-form {
   width: 100%;
   min-height: 100vh;
-  background-image: url(http://info.bridgeafrica.com/wp-content/uploads/2021/07/blocks-image-05.jpg);
+  background-image: url('../assets/img/about/blocks-image-05-img20.jpg');
 }
 .contact-img {
   margin-top: 5.5rem;
@@ -1014,7 +1002,7 @@ export default {
   width: 100%;
 }
 .social-icons {
-  background-image: url('http://info.bridgeafrica.com/wp-content/uploads/2021/07/shiny-dust-on-black-background-overlay-layer-7YKB5W3-scaled-1.jpg');
+  background-image: url('../assets/img/about/shiny.jpg');
   width: 100%;
   min-height: 50vh;
 }

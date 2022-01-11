@@ -5,14 +5,14 @@
       <b-row class="mt-2">
         <b-col cols="3" md="1" class="m-md-0 p-md-0">
           <b-avatar
-            variant="primary"
-            square
+            variant="light"
+            :square =" 'user' === profile.user_type ? false : true"
             class="img-fluid avat-comment"
-            :src="business_intro.logo_path"
+            :src="profile.profile_picture"
           ></b-avatar>
         </b-col>
         <b-col cols="9" md="11" class="p-0 m-0 pr-3">
-          <input :placeholder="$t('businessowner.Post_a_business_update')" v-b-modal.modal-xl class="comment" type="text" />
+          <input :placeholder="$t('businessowner.Post_a_business_update')" v-b-modal.modal-xl_ class="comment" type="text" />
           <fas-icon class="primary send-cmt" :icon="['fas', 'paper-plane']" />
         </b-col>
       </b-row>
@@ -39,7 +39,7 @@
                 class="post-btn"
               >
                 <fas-icon class="icons" :icon="['fas', 'photo-video']" size="lg" />
-                <span class="username"> {{ $t('businessowner.Photo_Video') }}</span>
+                <span class="username">{{ $t('businessowner.Photo_Video') }}</span>
               </b-button>
             </b-col>
             <!-- Attach File-->
@@ -76,14 +76,20 @@
     </b-card>
 
     <!-- User Posts Listing Section-->
-    <b-card class="px-md-3">
-      <div class="">
+    
+      <div class="px-md-3">
         <div class="col-md-12 col-lg-12 d-flex align-items-stretch mb-lg-0" style="padding-left: 0; padding-top: 3px">
           <b-modal id="modal-edit" ref="modal-edit" centered hide-footer :title="$t('businessowner.Update_Post')" @hidden="resetPostData">
             <b-row ref="loader">
               <b-col cols="1" class="m-0 p-0"></b-col>
               <b-col cols="2" class="m-0 p-0">
-                <b-avatar class="d-inline-block avat" variant="primary" :src="business_intro.logo_path"></b-avatar>
+                <b-avatar 
+                  class="d-inline-block avat" 
+                  variant="light" 
+                  :square ="'user' === profile.user_type ? false : true"
+                  :src="profile.profile_picture"
+                >
+                </b-avatar>
               </b-col>
               <b-col cols="9" class="pt-2" style="margin-left: -5px">
                 <h5 class="m-0 font-weight-bolder">
@@ -94,7 +100,6 @@
             <b-row>
               <b-col cols="1" md="1" cl ass="m-0 p-0"></b-col>
               <b-col cols="10" md="10" class="m-0 p-0">
-                <br />
                 <div class="cursor">
                   <b-form-textarea
                     id="textarea-small"
@@ -106,44 +111,6 @@
 
                   <i></i>
                 </div>
-                <div class="bordder">
-                  <span class="float-left"> {{ $t('businessowner.Add_to_Your_Post') }} </span>
-                  <span class="float-right">
-                    <b-button-group size="sm" class="">
-                      <input id="video" type="file" hidden />
-                      <input
-                        id="image"
-                        type="file"
-                        hidden
-                        @change="selectMovies"
-                        accept="video/mpeg,video/mp4,image/*"
-                        ref="movies"
-                      />
-                      <input
-                        id="document"
-                        type="file"
-                        @change="selectDocument"
-                        hidden
-                        accept="application/pdf"
-                        ref="document"
-                      />
-
-                      <b-button :title="$t('businessowner.Add_Movie')" size="sm" variant="outline-primary" @click="$refs.movies.click()">
-                        <fas-icon class="icons" :icon="['fas', 'photo-video']" size="lg" />
-                      </b-button>
-                      <b-button
-                        :title="$t('businessowner.Add_Hyperlink')"
-                        size="sm"
-                        variant="outline-primary"
-                        @click="$refs.document.click()"
-                      >
-                        <fas-icon class="icons" :icon="['fas', 'file']" size="lg" />
-                      </b-button>
-                    </b-button-group>
-                  </span>
-
-                <i></i>
-              </div>
               <div class="bordder">
                 <span class="float-left">
                   {{ $t("businessowner.Add_to_Your_Post") }}
@@ -232,9 +199,9 @@
             <b-col cols="2" class="m-0 p-0">
               <b-avatar
                 class="d-inline-block avat"
-                variant="primary"
-                square
-                :src="business_intro.logo_path"
+                variant="light"
+                :square ="'user' === profile.user_type ? false : true"
+                :src="profile.profile_picture"
               ></b-avatar>
             </b-col>
             <b-col cols="9" class="pt-2" style="margin-left: -5px">
@@ -356,8 +323,8 @@
         </b-modal>
 
         <b-modal
-          id="modal-xl"
-          ref="modal-xl"
+          id="modal-xl_"
+          ref="modal-xl_"
           centered
           hide-footer
           :title="$t('businessowner.Create_Post')"
@@ -368,8 +335,8 @@
             <b-col cols="2" class="m-0 p-0">
               <b-avatar
                 class="d-inline-block avat"
-                variant="primary"
-                square
+                variant="light"
+                :square =" 'user' === profile.user_type ? false : true"
                 :src="business_intro.logo_path"
               ></b-avatar>
             </b-col>
@@ -444,11 +411,11 @@
               </div>
               <br />
 
-              <div class="h300px">
+              
                 <div
                   v-for="hyperlink in createPost.hyperlinks"
                   :key="hyperlink.fileName"
-                  class="bordder"
+                  class="bordder h300px"
                 >
                   <span class="float-left"> {{ hyperlink.fileName }} </span>
                   <span
@@ -458,13 +425,8 @@
                     {{ $t("businessowner.delete") }}
                   </span>
                 </div>
-              </div>
-                <div class="h300px">
-                  <div v-for="hyperlink in createPost.hyperlinks" :key="hyperlink.fileName" class="bordder">
-                    <span class="float-left"> {{ hyperlink.fileName }} </span>
-                    <span class="float-right" @click="deleteItem(hyperlink.fileName)"> {{ $t('businessowner.delete') }} </span>
-                  </div>
-                </div>
+              
+                
                   <div v-for="movie in createPost.movies" :key="movie.fileName" class="">
                     <div id="preview">
                       <span class="upload-cancel" @click="deleteItem(movie.fileName)">
@@ -499,10 +461,10 @@
           </b-modal>
         </div>
       </div>  
-
+      
       <Post
-        v-for="(item, index) in owner_post"
-        :key="index"
+        v-for="item in owner_post"
+        :key="item.updated_at"
         :post="item"
         :mapvideo="() => mapvideo(item.media)"
         :mapmediae="() => mapmediae(item.media)"
@@ -512,7 +474,7 @@
       />
 
       <infinite-loading :identifier="infiniteId" ref="infiniteLoading" @infinite="infiniteHandler"></infinite-loading>
-    </b-card>
+    
   </div>
 </template>
 
@@ -565,7 +527,11 @@ export default {
   methods: {
     ...mapMutations({
       auth: "auth/profilConnected",
+      postRemove: "businessOwner/removePost",
+      postUpdate: "businessOwner/UpdatePost",
+      postCreate: "businessOwner/createPost",
     }),
+
     async getAuth() {
       const type = [
         "NetworkEditors",
@@ -649,7 +615,6 @@ export default {
     },
 
     deletePost(post) {
-      console.log(post);
 
       let loader = this.$loading.show({
         container: this.fullPage ? null : this.$refs.creatform,
@@ -658,12 +623,15 @@ export default {
         color: "#e75c18",
       });
 
+      const uuid = post.post_id ? post.post_id : post.id
+
       axios
-        .post("business/delete/post/" + post.post_id, {
+        .post("business/delete/post/"+ uuid , {
           name: this.name,
         })
         .then((response) => {
-          console.log(response.data);
+
+          this.postRemove(uuid)
 
           this.flashMessage.show({
             status: "success",
@@ -703,9 +671,6 @@ export default {
       this.edit_description = postarray.content;
       this.edit_image = postarray.media;
       this.edit_id = postarray.post_id ? postarray.post_id : postarray.id;
-
-      console.log(this.edit_image);
-
       this.$refs["modal-edit"].show();
     },
 
@@ -750,6 +715,7 @@ export default {
         .then((response) => {
           console.log(response);
 
+          this.postUpdate(response.data.data)
           this.flashMessage.show({
             status: "success",
             blockClass: "custom-block-class",
@@ -848,7 +814,7 @@ export default {
         reader.readAsDataURL(file.files[0]);
       }
 
-      this.$refs["modal-xl"].show();
+      this.$refs["modal-xl_"].show();
     },
 
     selectDocument(event) {
@@ -861,17 +827,17 @@ export default {
     },
 
     selectDocumentOutsidePost(event) {
-      console.log(event);
+      
       this.createPost.hyperlinks.push({
         target: event.target,
         document: this.service(event.target),
         fileName: event.target.files[0].name,
       });
-      this.$refs["modal-xl"].show();
+      this.$refs["modal-xl_"].show();
     },
 
     createPost_() {
-      this.$refs["modal-xl"].show();
+      this.$refs["modal-xl_"].show();
     },
 
     deleteItem(name) {
@@ -934,8 +900,6 @@ export default {
         });
       }
 
-      formData2.append("type", "image");
-
       formData2.append("content", this.createPost.postBusinessUpdate);
 
       console.log(formData2);
@@ -953,21 +917,24 @@ export default {
           }.bind(this),
         })
         .then((response) => {
-          console.log(response);
+          this.postCreate(response.data.data)
 
           this.flashMessage.show({
             status: "success",
             blockClass: "custom-block-class",
-            message: this.$t('businessowner.Post_has_been_created.'),
+            message: this.$t('businessowner.Post_has_been_created'),
           });
           this.isUploading = false;
           loader.hide();
-          this.$refs["modal-xl"].hide();
+          this.$refs["modal-xl_"].hide();
           this.reloads();
           this.page = 1;
           this.infiniteId += 1;
+          this.uploadPercentage = 0
+          
         })
         .catch((err) => {
+          this.uploadPercentage = 0
           if (err.response.status == 422) {
             this.flashMessage.show({
               status: "error",
@@ -998,6 +965,7 @@ export default {
     },
     resetPostData() {
       if (!this.isSubmitted) {
+        this.uploadPercentage = 0
         this.createPost.hyperlinks = [];
         this.createPost.movies = [];
         this.createPost.postBusinessUpdate = "";
@@ -1008,6 +976,7 @@ export default {
   computed: {
     ...mapGetters({
       profile: "auth/profilConnected",
+      owner_post: "businessOwner/getOwnerPost"
     }),
 
     business_intro() {
@@ -1019,10 +988,6 @@ export default {
       return this.$store.state.businessOwner.businessInfo;
     },
 
-    owner_post() {
-      console.log(this.$store.state.businessOwner.ownerPost);
-      return this.$store.state.businessOwner.ownerPost;
-    },
   },
   mounted() {
     this.url = this.$route.params.id;
@@ -1136,7 +1101,7 @@ export default {
   }
   .send-cmt {
     position: relative;
-    margin-left: 95%;
+    margin-left: 93%;
     top: -28px;
     cursor: pointer;
   }

@@ -36,25 +36,26 @@
     <div class="col-12">
       <hr class="h-divider" />
     </div>
-    <div class="products">
+    <div class="">
       <!-- MARKET HEADER BAR -->
 
       <!-- MARKET PRODUCT LIST -->
-          
-        <div class="col-md-6" v-for="(product, index) in products" :key="index">
-          <Product v-show="!orders && market" :product="product" />
-        </div>
-      
 
+        
+          
+        <!-- <div class="col-md-6" v-for="(product, index) in products" :key="index">
+          <Product v-show="!orders && market"  :product="products" />
+        </div> -->
+  <Product v-show="!orders && market"  />
+       
+  
       <b-col v-if="loader" class="load">
-        <b-spinner
+        <!-- <b-spinner
           style="width: 7rem; height: 7rem"
           variant="primary"
-        ></b-spinner>
+        ></b-spinner> -->
       </b-col>
-      <b-col class="my-4 load" v-if="products.length < 1 && !loader">
-        <p>{{ $t('businessowner.No_Products_in_Market') }} !!</p>
-      </b-col>
+      
       <div v-if="isShowOrders" class="col-12 orders">
         <Orders />
       </div>
@@ -72,7 +73,7 @@
 
     </div>
     <!-- ADDPRODUCT FORM -->
-    <b-modal hide-footer :title="$t('businessowner.Add_product')" v-model="showModal">
+    <b-modal hide-footer :title="$t('businessowner.Add_product')"   @hidden="resetPostData" v-model="showModal">
       <b-form>
         <b-row>
           <b-col cols="12" md="6">
@@ -107,7 +108,7 @@
             </b-form-group>
           </b-col>
           <b-col cols="12" md="6">
-            <div class="image-upload-wrap" @click="picImage">
+            <div class="image-upload-wrap" @click="picImage" style="display: flex; justify-content: center; align-items: center; overflow: hidden">
               <input
                 type="file"
                 name=""
@@ -118,12 +119,14 @@
                 required
               />
               <a href="#" data-toggle="modal" data-target="#createalbumModal">
-                <div class="drag-text">
+                <div v-if="selectedImagePrv">
+                  <img :src="selectedImagePrv" :srcset="selectedImagePrv" style="min-width: 100%; min-height: 100%">
+                </div>
+                <div v-else class="drag-text">
                   <i class="fa fa-plus"></i>
                   <h6>{{ $t('businessowner.Product_Image') }}</h6>
                 </div>
               </a>
-              <div></div>
             </div>
           </b-col>
         </b-row>
@@ -219,7 +222,7 @@
         </b-form-group>
         <!-- CATEGORIES -->
         <div class="mt-2">
-          <label class="typo__label"> {{ $t('businessowner.Category') }} </label>
+          <label class="typo__label"> {{ $t('businessowner.Category') }} </label> 
           <multi-select
             v-model="multiselecvalue"
             @input="subcategories"
@@ -228,23 +231,21 @@
             :label="$t('businessowner.name')"
             track-by="id"
             :options="BuCategories"
-            :taggable="true"
-            @tag="addTag"
+           
           ></multi-select>
         </div>
         <!-- SUB-CATEGORIES -->
         <div class="mt-2">
-          <label class="typo__label"> {{ $t('businessowner.Sub_Category') }}</label>
+          <label class="typo__label"> {{ $t('businessowner.Sub_Category') }}</label> 
           <multi-select
             v-model="filterselectvalue"
-            :tag-placeholder="$t('businessowner.Add_this_as_new_tag')"
+         
             :placeholder="$t('businessowner.Search_or_add_a_tag')"
             :label="$t('businessowner.name')"
-            track-by="subcategoryId"
+            track-by="subcategory_id"
             :options="scategories"
             :multiple="true"
-            :taggable="true"
-            @tag="addFilter"
+         
           ></multi-select>
         </div>
         <label class="typo__label">{{ $t('businessowner.Filters') }} </label>
@@ -252,7 +253,7 @@
           <b-card no-body>
             <b-tabs pills card vertical>
               <b-tab
-                :title="$t('businessowner.filters').name"
+                :title="filters.name"
                 v-for="filters in filterselectvalue"
                 :key="filters.id"
                 active
@@ -282,6 +283,7 @@
 
         <b-alert v-if="success" :variant="val" show> {{ msg }} </b-alert>
         <b-button @click="addProduct" class="mt-2 btn-block" variant="primary">
+
           <b-spinner small v-if="load" variant="white"></b-spinner>
 
           {{ $t('businessowner.Add') }}</b-button
@@ -292,9 +294,9 @@
 </template>
 
 <script>
-import Product from "../product";
 import axios from "axios";
 import MultiSelect from "vue-multiselect";
+import Product from "../product";
 import Orders from "@/views/businessOwnerOrders";
 import Archive from "../archive";
 export default {
@@ -310,9 +312,10 @@ export default {
       options: ["list", "of", "options"],
       orders: false,
       archive: false,
-
+     businessId:null,
       market: true,
-      my_orders: "orders",
+      my_orders: this.$t('businessowner.orders'),
+      selectedImagePrv: "",
 
       showModal: false,
       load: false,
@@ -322,11 +325,11 @@ export default {
         description: "",
         picture: null,
         price: "",
-        in_stock: "",
-        on_discount: false,
+        in_stock: 1,
+        on_discount: 0,
         discount_price: 0,
         condition: "",
-        is_service: null,
+        is_service: 0,
         status: 1,
         business_id: "",
         categoryId: "",
@@ -342,11 +345,6 @@ export default {
       multiselecvalue: [],
       filterselectvalue: [],
       select_filterss: [],
-      multiselec: [
-        { name: "Vue.js", code: "vu" },
-        { name: "Javascript", code: "js" },
-        { name: "Open Source", code: "os" },
-      ],
       isShowOrders: false,
     };
   },
@@ -394,13 +392,16 @@ export default {
       }
       console.log("----" + this.status);
     },
-    getProducts: async function () {
-      await axios
-        .get("/market")
-        .then((res) => {
-          console.log(res.data);
-          this.products = res.data.data;
-          console.log(this.products);
+  
+
+     getProducts: async function () {
+        let url="/market?business_id="+this.businessId;
+       await this.$store
+        .dispatch("market/getBproducts", url).then((res) => {
+          console.log(res);
+             
+             
+          
         })
         .catch((error) => {
           console.log(error);
@@ -409,6 +410,30 @@ export default {
           this.loader = false;
         });
     },
+
+
+
+      flashErrors(errors) {
+      let err = '';
+      Object.values(errors).forEach((element) => {
+        err = element[0];
+      });
+
+      return err;
+    },
+
+
+   resetPostData(){
+
+this.newProduct=[];
+this.selectedImagePrv='';
+this.filterselectvalue=[];
+
+this.multiselecvalue=[];
+
+this.select_filterss=[];
+   },
+
     addProduct() {
       this.load = true;
       let fd = new FormData();
@@ -421,35 +446,72 @@ export default {
         .join();
       this.newProduct.filterId = this.select_filterss.join();
 
-      //transform product data in form data
+      console.log("starting to display the map data");
+     
+
+     // transform product data in form data
       for (const key in this.newProduct) {
         fd.append(key, this.newProduct[key]);
       }
       console.log("NEW PRODUCT", this.newProduct);
       axios
-        .post("market", fd)
+        .post("market?business_id="+this.businessId, fd)
         .then((res) => {
           this.load = false;
           (this.success = true), (this.val = "success");
           this.msg = this.$t('businessowner.Operation_was_successful');
-          this.getProducts();
-        })
-        .catch((err) => {
-          this.load = false;
-          (this.success = true), (this.val = "danger");
-          this.msg = this.$t('businessowner.Something_went_wrong');
 
-          setTimeout(() => {
-            this.success = false;
-          }, 5000);
-        });
+           this.flashMessage.show({
+            status: 'success',
+            message: this.msg,
+            blockClass: 'custom-block-class',
+          });
+
+       this.showModal = false;
+
+          this.getProducts();
+        }) .catch((err) => {
+            console.log({ err: err });
+
+             this.load = false;
+
+            if (err.response.status == 422) {
+              console.log({ err: err });
+
+              this.flashMessage.show({
+                status: 'error',
+
+                message: this.flashErrors(err.response.data.errors),
+                blockClass: 'custom-block-class',
+              });
+            } else {
+              this.flashMessage.show({
+                status: 'error',
+
+                message:  this.$t('businessowner.Something_went_wrong'),
+                blockClass: 'custom-block-class',
+              });
+              console.log({ err: err });
+            }
+            
+            
+          });
+
+
+
     },
     picImage() {
       document.querySelector("#image").click();
     },
+
+    
     getImage(e) {
+      console.log("getImage");
       console.log(e.target.files[0]);
       this.newProduct.picture = e.target.files[0];
+      let file = e.target.files[0] || e.dataTransfer.files;
+      this.selectedImagePrv = URL.createObjectURL(file);
+      console.log("this.selectedImagePrv", this.selectedImagePrv);
     },
     createProduct() {
       this.showModal = !this.showModal;
@@ -482,13 +544,9 @@ export default {
     },
   },
   beforeMount() {
-    this.loader = true;
-    //get market place products
-    this.getProducts();
-    console.log("--test ----");
-    //get categories for current business
-    const businessId = this.$route.params.id;
-    // this.$store.dispatch('market/getBuCategories', businessId);
+    //this.loader = true;
+    this.businessId = this.$route.params.id;
+    
 
     this.categories();
     this.subcategories();
@@ -497,6 +555,13 @@ export default {
 </script>
 
 <style scoped>
+
+.h-100{
+
+  height: 100%;
+}
+
+
 .pos {
   /* margin-left: 900px; */
   margin-bottom: 22px;

@@ -33,6 +33,88 @@ class Repository {
     }
   }
 
+  async blocking(data, uuid) {
+    try {
+      const response = await axios.post(`business/community-banned/${uuid}`, data)
+      return {
+        success: (response.data.data) ? true : false
+      }
+    } catch (error) {
+      return {
+        success: false,
+        data: error
+      }
+    }
+  }
+
+
+  async jointNetwork(data) {
+    try {
+      const response = await axios.post(`add-member`, data)
+      return {
+        success: true,
+        data: response.data.message
+      }
+
+    } catch (error) {
+      return {
+        success: false,
+        data: error
+      }
+    }
+  }
+
+  async removeNetwork(data) {
+    try {
+      const response = await axios.post(`remove-member`, data)
+      return {
+        success: true,
+        data: response.data.message
+      }
+
+    } catch (error) {
+      return {
+        success: false,
+        data: error
+      }
+    }
+  }
+
+  async showNetworkAndBussiness() {
+    try {
+      const response = await axios.get(`share/destination`)
+      return {
+        success: true,
+        data: response.data.data
+      }
+
+    } catch (error) {
+      return {
+        success: false,
+        data: error
+      }
+    }
+  }
+
+  async getNetworkAndBusiness(networkId = null) {
+    try {
+      const link = networkId ? `user-business-network?networkId=${networkId}` : `user-business-network`
+
+      console.log(link)
+      const response = await axios.get(link)
+      return {
+        success: true,
+        data: response.data.data
+      }
+
+    } catch (error) {
+      return {
+        success: false,
+        data: error
+      }
+    }
+  }
+
   async getNetworks() {
     try {
       const response = await axios.get(`profile/networks/user`)
@@ -86,7 +168,6 @@ class Repository {
 
   async WhoIsConnect({ networkId, type }) {
     try {
-      console.log('type==', type)
       const response = await axios.get(type ? `interface?networkId=${networkId}` : `interface`)
       return {
         success: true,
@@ -109,7 +190,6 @@ class Repository {
       }
 
     } catch (error) {
-      console.log(error)
       return {
         success: false,
         data: error.response.message

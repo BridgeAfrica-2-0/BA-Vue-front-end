@@ -1,5 +1,4 @@
 <template>
-  <div>
     <b-row class="mt-2 px-4">
       <b-col :class="`${proccesEdit ? 'd-flex' : ''}`">
         <b-avatar
@@ -44,26 +43,35 @@
         </div>
 
         <!-- Edit message -->
-        <p
+        <div
           class="p-0 m-0 pl-3 msg text inline-comment"
           style="
             background: transparent;
             border: 1px solid transparent;
             width: 100%;
+            position: relative
           "
           v-if="proccesEdit"
         >
-          <input
+          <textarea-autosize
+              :placeholder="$t('general.Reply_comment')"
+              class="comment py-2 pr-5 pl-3"
+              type="text"
+              style="background: transparent"
+              v-model="updateCommentText"
+              @keypress.enter="onProcess"
+            />
+          <!-- <input
             placeholder="Edit a Reply Comment"
-            class="comment"
+            class="comment py-2 pr-5 pl-3"
             type="text"
             style="background: transparent"
-            v-model="updateCommentText"
-            @keypress.enter="onProcess"
-          />
+            
+          /> -->
           <b-spinner
-            style="color: rgb(231, 92, 24); position: absolute; right: 17px"
+            style="color: rgb(231, 92, 24)"
             v-if="replyLoading"
+            class="send-cmt"
           ></b-spinner>
           <fas-icon
             class="primary send-cmt"
@@ -71,17 +79,15 @@
             @click="onProcess"
             v-if="updateCommentText.trim().length >= 1 && !replyLoading"
           />
-        </p>
-
+        </div>
         <p class="fs-12" v-if="proccesEdit">
-          <a href="#" @click.prevent="toggle">Cancel</a>
+          <a href="#" @click.prevent="toggle">{{ $t('network.Cancel') }}</a>
         </p>
         <span v-if="!proccesEdit" class="ml-2 reply">
           <i class="fs-12">{{ comment.updated_at | date }}</i>
         </span>
       </b-col>
     </b-row>
-  </div>
 </template>
 
 <script>
@@ -175,11 +181,11 @@ export default {
 <style scoped>
 .msg {
   background-color: #ddd;
-  padding: 20px;
+  padding: 13px;
   border-radius: 25px;
   border: solid 1px #ccc;
   margin-left: 40px;
-  margin-top: -40px;
+  margin-top: -38px;
 }
 .reply {
   cursor: pointer;
@@ -198,17 +204,15 @@ export default {
 .comment:focus {
   outline: none;
 }
+
 .send-cmt {
-  position: relative;
-  margin-left: 95%;
-  top: -28px;
+  position: absolute;
+  top: 14px;
+  right: 19px;
   cursor: pointer;
 }
-@media only screen and (max-width: 768px) {
-  .send-cmt {
-    margin-left: 88%;
-  }
 
+@media only screen and (max-width: 768px) {
   .avat-comment {
     width: 40px;
     height: 40px;

@@ -1,92 +1,13 @@
 
 <template>
   <div>
-    <head>
-      <meta charset="utf-8" />
-      <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-
-      <title>Bridge Africa</title>
-      <meta content="" name="description" />
-      <meta content="" name="keywords" />
-
-      <!-- Favicons -->
-      <link href="assets/img/favicon.png" rel="icon" />
-      <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
-
-      <!-- Google Fonts -->
-      <!-- <link
-        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Jost:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-        rel="stylesheet"
-      /> -->
-    </head>
+  
 
     <!-- ======= Header ======= -->
     
 
      <site-header class="topbar" />   
-    <header id="header" class="fixed-topp">
-      <div class="container d-flex align-items-center">
-<!--       
-        <a href="index.html" class="logo mr-auto"
-          ><img src="../assets/img/BAC-clear-dotted-logo.png" alt="" class="img-fluid b-logo"
-        /></a> -->
-
-        
-
-
-      <div>
-  <!-- <b-navbar toggleable="sm" type="ligth" variant="ligth">
-   
-
-    <b-navbar-toggle target="nav-collapse ">
-      <template :default=" expanded ">
-        <b-icon v-if="expanded" icon="justify" class="couleur" @click="Expanded(1)"></b-icon>
-        <b-icon v-else icon="X" class="couleur" @click="Expanded(2)"></b-icon>
-      </template>
-    </b-navbar-toggle>
-
-    <b-collapse id="nav-collapse" is-nav> -->
-      
-
-      <!-- Right aligned nav items -->
-      <!-- <b-navbar-nav class="ml-auto bold size_nav" >
-       
-      <b-nav-item > <router-link to="/" class="mx-2">{{ $t('home.Home') }}</router-link></b-nav-item>
-        
-         <b-nav-item ><router-link :to="{ name: 'about' }" class="mx-2">{{ $t('home.About_Us') }} </router-link></b-nav-item>
-        
-        <b-nav-item > <router-link :to="{ name: 'contact' }" class="mx-2">  {{ $t('home.Contact_Us') }}  </router-link></b-nav-item>
-      
-         <b-nav-item ><router-link to="/login" class="mx-2">  {{ $t('home.Login') }}  </router-link></b-nav-item>
-        <b-nav-item ><router-link to="/signup" class="mx-2"> {{ $t('home.Signup') }} </router-link></b-nav-item>
-
-
-      </b-navbar-nav>
-    </b-collapse>
-  </b-navbar> -->
-</div>
-
-
-
-
-
-        <!-- .nav-menu -->
-
-        <!-- <a
-          href="#about"
-          class="black d-lg-none"
-          style="color: black; font-weight: bold; font-size: 18px"
-          >Login</a
-        >
-
-        <a
-          href="#about"
-          class="get-started-btn d-lg-none"
-          style="font-size: 18px"
-          >{{ $t('home.Sign_Up')}}</a
-        > -->
-      </div>
-    </header>
+  
     <!-- End Header -->
 
     <div class="container p-0">
@@ -114,7 +35,7 @@
             data-toggle="popover"
             class="form-control search-mobile"
             style="border-left: none"
-            :placeholder="$t('home.Find_Pharmacy')"
+            placeholder="What "
             aria-label=""
             data-original-title=""
             title=""
@@ -138,7 +59,7 @@
             data-toggle="popover"
             class="form-control search-mobile"
             style="border-left: none"
-            :placeholder="$t('home.Find_Pharmacy')"
+            placeholder="Where"
             aria-label=""
             data-original-title=""
             title=""
@@ -169,7 +90,7 @@
               aria-label=""
               data-original-title=""
               title=""
-              :placeholder="$t('home.All')"
+              placeholder="What are you looking for"
               v-model="credentials.keyword"
             />
 
@@ -180,7 +101,7 @@
               list="browsers"
               data-toggle="popover"
               class="form-control search-h"
-              :placeholder="$t('home.Where') "
+              placeholder="Location"
               aria-label="search bridge africa"
               data-original-title=""
               title=""
@@ -219,10 +140,9 @@
         margin-top: -50px;
         background: white;
         padding: 0px;
-        margin-left: 10px;
       "
     >
-      <div class="mobile-top-div d-lg-none p-3">
+      <div class="mobile-top-div d-lg-none p-2">
         <h3 style="font-size: 20px">
           {{ $t('home.Empowering_Businesses_And_Consumers_With_Digital_Presence_To_Buy_And_Sell_Online') }}
         </h3>
@@ -263,7 +183,7 @@
                   <h3
                     class="card-title"
                     style="
-                      font-family: Antic, sans-serif;
+                     ;
                       color: rgb(81, 87, 94);
                       font-size: 0.99em;
                     "
@@ -273,7 +193,7 @@
                   <p
                     class="card-text"
                     style="
-                      font-family: Antic, sans-serif;
+                     ;
                       color: rgb(81, 87, 94);
                     "
                   ></p>
@@ -302,7 +222,7 @@
                   <h3
                     class="card-title"
                     style="
-                      font-family: Antic, sans-serif;
+                     ;
                       color: rgb(81, 87, 94);
                       font-size: 0.99em;
                     "
@@ -312,7 +232,7 @@
                   <p
                     class="card-text"
                     style="
-                      font-family: Antic, sans-serif;
+                     ;
                       color: rgb(81, 87, 94);
                     "
                   ></p>
@@ -341,7 +261,7 @@
                   <h3
                     class="card-title"
                     style="
-                      font-family: Antic, sans-serif;
+                     ;
                       color: rgb(81, 87, 94);
                       font-size: 0.99em;
                     "
@@ -351,7 +271,7 @@
                   <p
                     class="card-text"
                     style="
-                      font-family: Antic, sans-serif;
+                     ;
                       color: rgb(81, 87, 94);
                     "
                   ></p>
@@ -380,7 +300,7 @@
                   <h3
                     class="card-title"
                     style="
-                      font-family: Antic, sans-serif;
+                     ;
                       color: rgb(81, 87, 94);
                       font-size: 0.99em;
                     "
@@ -390,7 +310,7 @@
                   <p
                     class="card-text"
                     style="
-                      font-family: Antic, sans-serif;
+                     ;
                       color: rgb(81, 87, 94);
                     "
                   ></p>
@@ -401,7 +321,7 @@
         </div>
       </div>
     </section>
-    <div class="w-100 text-light"  id="animation"   >  .</div>
+    <!-- <div class="w-100 text-light"  id="animation"   >  .</div> -->
     <section id="why-us" class="why-us">
       <div class="container-fluid" id="anim">
         <div class="row">
@@ -479,8 +399,8 @@
               </div>
             </div> -->
             
-             <div class="scroll-container">
-              <div class="scroll-element js-scroll slide-left">
+             <div class="scroll-container ">
+              <div class="scroll-element js-scroll slide-left text-center">
 
                 <video class="business-vid1" playsinline autoplay muted loop poster="assets/img/Home scroll copy.png"
                   id="Test_Video">
@@ -813,89 +733,8 @@
       </div>
     </section>
     <!-- End Why Us Section -->
-
-    <footer id="footer">
-      <div class="footer-top black-back">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-3 col-md-6 footer-contact">
-              <div class="row">
-                <div class="col-6">
-                  <img src="../assets/img/logobr.png" width="200px" alt="" />
-                </div>
-
-                <div class="col-6 bblogo">Bridge Africa</div>
-              </div>
-
-              <div class="social-links mt-3 text-left">
-                <a href="#" class="twitter bridge-icon"
-                  ><i class="bx bxl-twitter"></i
-                ></a>
-                <a href="#" class="facebook bridge-icon"
-                  ><i class="bx bxl-facebook"></i
-                ></a>
-                <a href="#" class="instagram bridge-icon"
-                  ><i class="bx bxl-instagram"></i
-                ></a>
-
-                <a href="#" class="youtube bridge-icon"
-                  ><i class="bx bxl-youtube"></i
-                ></a>
-              </div>
-
-              <br />
-
-              <span style="float: left">
-                <span style="color: #e75c18">©2021</span> Bridge Africa
-              </span>
-            </div>
-
-            <div class="col-lg-3 col-md-6 footer-links">
-              <h4 class="bridge-header text-left white">{{ $t('home.OUR_ADRESSE') }}</h4>
-              <ul class="text-left white">
-                <li>{{ $t('home.International_Handicraft_Center') }}, {{ $t('home.Rond_point_Intendance') }}</li>
-
-                <li>{{ $t('home.Yaounde') }}</li>
-
-                <li>{{ $t('home.Cameroon') }}</li>
-              </ul>
-            </div>
-
-            <div class="col-lg-3 col-md-6 footer-links white">
-              <h4 class="bridge-header text-left white">{{ $t('home.USEFULL_LINKS') }}</h4>
-              <ul class="white">
-                <li class="white"><a href="#">Bridgeafricaventures.com</a></li>
-
-                <li class="white"><a href="#">{{ $t('home.Home') }}</a></li>
-
-                <li class="white">
-                  <router-link :to="{name: 'about'}">{{ $t('home.About_Us') }}</router-link>
-                </li>
-
-                <li class="white">
-                  <router-link :to="{name: 'contact'}">{{ $t('home.Contact_Us') }}</router-link>
-                </li>
-
-                <!--   
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
-                          -->
-              </ul>
-            </div>
-
-            <div class="col-lg-3 col-md-6 footer-links">
-              <h4 class="bridge-header text-left white">{{ $t('home.WORKING_HOURS') }}</h4>
-              <ul class="white">
-                <li>{{ $t('home.Monday') }}-{{ $t('home.Friday') }}: {{ $t('home.09AM_05PM') }}</li>
-
-                <li>{{ $t('home.Saturday') }}: {{ $t('home.09AM_01PM') }}</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
-    <!-- End Footer -->
+     <SiteFooter />
+   
 
     <!-- <div id="preloader"></div> -->
   </div>
@@ -906,22 +745,14 @@
     
 
 <script>
-// import "../assets/vendor/jquery/jquery.min.js";
-// import "../assets/vendor/bootstrap/js/bootstrap.bundle.min.js";
-// import "../assets/vendor/jquery.easing/jquery.easing.min.js";
-// import "../assets/vendor/php-email-form/validate.js";
-// import "../assets/vendor/waypoints/jquery.waypoints.min.js";
-// import "../assets/vendor/isotope-layout/isotope.pkgd.min.js";
-// import "../assets/vendor/venobox/venobox.min.js";
-// import "../assets/vendor/owl.carousel/owl.carousel.min.js";
-// import "../assets/vendor/aos/aos.js";
 
+import SiteFooter from '../components/site/siteFooter';
 import "../assets/js/main.js";
 // import "../assets/js/js.js";
 import Button from '@/components/ButtonNavBarFind.vue';
 import SiteHeader from '../components/site/siteHeader';
 export default {
-  components: {Button, SiteHeader},
+  components: {Button, SiteHeader,SiteFooter},
   data(){
     return {
       expanded:true,
@@ -1062,7 +893,7 @@ export default {
 
     const elementInView = (el, dividend = 1) => {
       const elementTop = el.getBoundingClientRect().top;
-      console.log(document.documentElement.clientHeight);
+    
 
       return (
         elementTop <=
@@ -1265,7 +1096,7 @@ export default {
 }
 
 .mobile-top-div {
-  font-family: poppins, Helvetica Neue, Helvetica, Arial, sans-serif;
+  /* font-family: poppins, Helvetica Neue, Helvetica, Arial, sans-serif; */
   font-weight: 700;
   font-size: 20px;
   line-height: 40px;
@@ -1276,6 +1107,10 @@ export default {
 @media only screen and (max-width: 968px) {
   .mt-md-30 {
     margin-top: 20px;
+  }
+
+  .hidde{
+    display: none;
   }
 }
 
@@ -1294,9 +1129,6 @@ export default {
 }
 .taille{
   height: 704px;
-}
-.topbar{
-    position: fixed;
 }
 
   .sizeimg{
@@ -1341,7 +1173,7 @@ export default {
 
     margin-bottom: 100px;
 
-    font-family: poppins, Helvetica Neue, Helvetica, Arial, sans-serif;
+    /* font-family: poppins, Helvetica Neue, Helvetica, Arial, sans-serif; */
     font-weight: 700;
     font-size: 25px;
     line-height: 40px;
@@ -1406,7 +1238,7 @@ export default {
 
     margin-bottom: 100px;
 
-    font-family: poppins, Helvetica Neue, Helvetica, Arial, sans-serif;
+    /* font-family: poppins, Helvetica Neue, Helvetica, Arial, sans-serif; */
     font-weight: 700;
     font-size: 32px;
     line-height: 40px;
@@ -1442,7 +1274,7 @@ export default {
   .business-vid1 {
     height: 700px;
 
-    margin-left: -10%;
+    /* margin-left: -10%; */
 
     z-index: 1;
     position: relative;

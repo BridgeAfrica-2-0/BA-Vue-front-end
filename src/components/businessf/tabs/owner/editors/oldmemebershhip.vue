@@ -19,7 +19,7 @@
           </b-input-group-prepend>
           <b-form-input
             aria-label="Text input with checkbox"
-            placeholder="Search Something"
+            :placeholder="$('general.Search_Something')"
           ></b-form-input>
         </b-input-group>
       </b-col>
@@ -109,7 +109,7 @@
                               variant="primary"
                             >
                               <b-icon icon="plus-circle" class="mr-1"> </b-icon>
-                              community
+                              {{ $t('general.Community') }}
                             </b-button>
                           </b-col>
                         </b-row>

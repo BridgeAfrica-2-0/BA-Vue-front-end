@@ -2,13 +2,14 @@
   <div class="t-color">
     <div>
       <fas-icon class="icons" :icon="['fas', 'project-diagram']" size="lg" />
-      <span class="t-color"> Network </span>
+      <span class="t-color"> {{$t("general.Network")}} </span>
 
-      <b-button
+      <b-button 
+      v-if="display != 'BusinessFollower' "
         class="float-right w-auto"
         @click="showmodal(true, 'add')"
         variant="primary"
-        >Add Network</b-button
+        >{{$t("general.Add_Network")}}</b-button
       >
       <hr />
       <b-row>
@@ -34,7 +35,7 @@
                     {{ cat }}
                   </span>
                   <br />
-                  {{ network.followers }} Community <br />
+                  {{ network.followers }} {{$t("general.Community")}} <br />
 
                   <span class="location">
                     <b-icon-geo-alt class="ico"></b-icon-geo-alt>
@@ -44,12 +45,13 @@
 
                   <read-more
                     v-if="network.description"
-                    more-str="read more"
+                     :more-str="$t('search.read_more')"
                     :text="network.description"
                     link="#"
-                    less-str="read less"
+                    :less-str="$t('search.read_less')"
                     :max-chars="200"
                   ></read-more>
+                  
                 </p>
               </b-col>
 
@@ -65,7 +67,7 @@
                       >
                         <i class="fas fa-user-plus fa-lg btn-icon"></i>
                         <span class="btn-com" v-b-modal.modal-sm
-                          >Community</span
+                          >{{$t("general.Community")}}</span
                         >
                       </b-button>
                     </b-col>
@@ -132,6 +134,9 @@ export default {
   },
 
   computed: {
+    display(){
+      return this.$route.name;
+    },
     network() {
       return this.$store.state.businessOwner.networks;
     },

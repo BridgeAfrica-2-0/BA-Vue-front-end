@@ -97,7 +97,7 @@
             separator=" ,;"
             :limit="limit"
             :tag-validator="validator"
-            :placeholder="$t('businessowner.Enter_new_keywords_alert_separated_by_space_comma_or_semicolon')"
+            :placeholder="$t('general.Enter_new_keywords_alert_separated_by_space_comma_or_semicolon')"
             no-add-on-enter
             required
           ></b-form-tags>
@@ -192,7 +192,7 @@ export default {
   },
   
   mounted() {
-    this.url = this.$route.params.id;
+    this.url = this.$route.params.id !== undefined ? this.$route.params.id : this.$router.push('notFound');
     this.getBusiness();
   },
 

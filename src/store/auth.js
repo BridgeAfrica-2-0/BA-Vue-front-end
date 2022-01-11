@@ -10,7 +10,7 @@ export default {
     isVerified: null,
     passwordToken: null,
     registerData: null,
-    neigbourhoods:[],
+    neigbourhoods: [],
     businessAround: [],
     peopleAround: [],
     categories: [],
@@ -25,21 +25,39 @@ export default {
     profilConnected: null,
   },
 
+
   mutations: {
+
+    updateProfilePicture(state, picture) {
+      if (picture !== state.profilConnected.profile_picture)
+        state.profilConnected = { ...state.profilConnected, profile_picture: picture }
+    },
+
+    addCoverPicture(state, picture) {
+
+      state.profilConnected = { ...state.profilConnected, cover_picture: picture }
+      let newUser = JSON.parse(localStorage.getItem('user'));
+
+      newUser.user.cover_picture = picture
+
+      localStorage.setItem('user', JSON.stringify(newUser));
+
+    },
+    
     setUserData(state, userData) {
       localStorage.removeItem('user');
       state.user = userData;
-      state.profilConnected = { ...userData.user, user_type: 'user' };
+   
 
       localStorage.setItem('user', JSON.stringify(userData));
       axios.defaults.headers.common.Authorization = `Bearer ${userData.accessToken}`;
-
+      state.profilConnected = { ...userData.user, user_type: 'user' };
       const userInfo = localStorage.getItem('user');
     },
 
 
 
-    setAppLanguage(state, language) {
+    setAppLanguage(state, language) { 
       state.appLanguage = language;
       localStorage.setItem("lang", language); // Whenever we change the appLanguage we save it to the localStorage
     },
@@ -47,16 +65,18 @@ export default {
 
     setUserDataa(state, userData) {
       state.user.user = userData.user;
-
-      localStorage.setItem("user.user", JSON.stringify(userData.user));
-
-
+      localStorage.setItem("user.user", JSON.stringify(userData.user))
     },
 
-    setneigbourhoods(state, data){
-    
-      state.neigbourhoods=data;
+    setSignupData(state, userData) {
+      state.user = userData;
+      localStorage.setItem("signup", JSON.stringify(userData.user))
+    },
 
+
+
+    setneigbourhoods(state, data) {
+      state.neigbourhoods = data;
     },
 
     setCountry(state, data) {
@@ -117,15 +137,24 @@ export default {
 
     clearUserData() {
       localStorage.removeItem('user');
-      location.reload();
+    // location.reload();
+
     },
 
     profilConnected(state, payload) {
-      state.profilConnected = payload;
+      state.profilConnected = payload
     },
   },
 
+
   actions: {
+    sendOtp({ commit }, payload) {
+      return axios.post(payload.url, payload).then(({ data }) => {
+        console.log(data);
+        // commit("setUserData", data.data);
+      });
+    },
+
     login({ commit }, credentials) {
       return axios.post("user/login", credentials).then(({ data }) => {
         console.log(data);
@@ -134,11 +163,11 @@ export default {
     },
 
 
-    neigbourhoods({ commit }, payload){
+    neigbourhoods({ commit }, payload) {
 
       console.log(payload);
-      
-      return axios.get("user/neighborhood?lat="+payload.lat+"&lng="+payload.lng).then(({ data }) => {
+
+      return axios.get("user/neighborhood?lat=" + payload.lat + "&lng=" + payload.lng).then(({ data }) => {
 
         console.log("logging data for neigbourhood");
         console.log(data);
@@ -175,6 +204,7 @@ export default {
       return axios.post('neighborhoods', data).then(({ data }) => {
         console.log(data);
         commit('setLocality', data.data);
+        return true
       });
     },
 
@@ -199,17 +229,13 @@ export default {
       });
     },
 
-
-
-
     completeWelcome({ commit }) {
-      localStorage.removeItem('user');
+      // localStorage.removeItem('user');
       return axios.get('user/completewelcome').then(({ data }) => {
         console.log(data);
         commit("setUserDataa", data.data);
       });
     },
-
 
     businessAround({ commit }) {
       return axios.get('business/around').then(({ data }) => {
@@ -242,7 +268,7 @@ export default {
     },
 
     verify({ commit }, mydata) {
-      const url = 'user/verifyOtp/' + this.state.auth.user.user.id;
+      const url = 'user/verifyOtp/' + mydata.id;
 
       return axios.post(url, mydata).then(({ data }) => {
         console.log(data.data);
@@ -251,12 +277,12 @@ export default {
       });
     },
 
-  
+
 
   },
 
   getters: {
-    isLogged: state => !!state.user,
+    isLogged: state => !!state.user.accessToken,
     isVerified: state => !!state.user,
     user: state => state.user,
 
@@ -268,10 +294,7 @@ export default {
 
     neigbourhoods: state => state.neigbourhoods,
 
-
-    
-      getAppLanguage: (state) => state.appLanguage
-    
+    getAppLanguage: (state) => state.appLanguage
 
   },
 };

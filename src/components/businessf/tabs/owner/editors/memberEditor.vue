@@ -5,11 +5,11 @@
 
 
         <b-tabs  pills content-class="mt-3 f-left">
-          <b-tab title="People" active> <People />  </b-tab>
+          <b-tab :title="$t('general.People')" active> <People />  </b-tab>
 
-          <b-tab title="Businesses"> <Businesses /> </b-tab>
+          <b-tab :title="$t('general.Businesses')"> <Businesses /> </b-tab>
 
-          <b-tab title="Networks"> <Networks /> </b-tab>
+          <b-tab :title="$t('general.Networks')"> <Networks /> </b-tab>
         </b-tabs>
 
 

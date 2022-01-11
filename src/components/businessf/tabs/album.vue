@@ -19,11 +19,11 @@
             <div ref="creatform">
               <b-form>
                 <b-form-input
-                  placeholder="Album name"
+                  placeholder="$t('general.Album_name')"
                   v-model="name"
                 ></b-form-input>
                 <b-button class="mt-2" variant="primary" @click="createAlbum">
-                  Create</b-button
+                  {{$t("general.Create")}}</b-button
                 >
               </b-form>
             </div>
@@ -57,14 +57,14 @@
 
         <b-modal
           hide-footer
-          title="Create album"
+          :title="$t('general.Create_album')"
           ref="editalbum"
           id="editalbum"
         >
           <div ref="creatform">
             <b-form>
               <b-form-input
-                placeholder="Album name"
+                :placeholder="$t('general.Album_name')"
                 v-model="edit_name"
               ></b-form-input>
               <b-button
@@ -72,7 +72,7 @@
                 variant="primary"
                 @click="updateAlbum(edit_id)"
               >
-                Update</b-button
+                {{$t("general.Update")}}</b-button
               >
             </b-form>
           </div>
@@ -105,9 +105,9 @@
                             class="dropdown-item"
                             data-toggle="modal"
                             data-target="#namealbumModal"
-                            >Edit Name</a
+                            >{{$t("general.Edit_Name")}}</a
                           >
-                          <a class="dropdown-item">Delete Album</a>
+                          <a class="dropdown-item">{{$t("general.Delete_Album")}}</a>
                         </div>
                       </li>
                     </ul>
@@ -116,12 +116,12 @@
                     <label
                       class="col-md-4 control-label pr-0 text-design"
                       for="name"
-                      >14 Items -
+                      >14 {{$t("general.Items")}} -
                     </label>
                     <div class="col-md-5 pl-0 pr-0">
                       <select id="gender" class="form-control w-100">
-                        <option>Public</option>
-                        <option>Private</option>
+                        <option>{{$t("general.Public")}}</option>
+                        <option>{{$t("general.Private")}}</option>
                       </select>
                     </div>
                   </div>
@@ -218,7 +218,7 @@ export default {
           this.flashMessage.show({
             status: "success",
 
-            message: "Album Deleted",
+            message: this.$t('general.Album_Deleted'),
           });
 
           loader.hide();
@@ -316,7 +316,7 @@ export default {
           this.flashMessage.show({
             status: "success",
 
-            message: "Album Created",
+            message: this.$t('general.Album_Created'),
           });
 
           loader.hide();

@@ -207,41 +207,13 @@
                         class="form-control text"
                       />
                     </div>
-                    <!-- 
                     <div class="form-group">
-                      <label for="Neighbor" class="username"> {{ $t('welcome.Neighbor') }} :</label
+                      <label for="Neighbour" class="username"> Neighbour:</label
                       ><br />
-                      <input
-                        type="text"
-                        name="alias"
-                        v-model="Neighbor"
-                        id="Neighbor"
-                        :placeholder="$t('welcome.Neighbor')"
-                        class="form-control text"
+                      <autocomplete-mapbox
+                        @get-address-details="getAddressDetails"
                       />
-                    </div> -->
-
-                    <autocomplete-mapbox
-                      @get-address-details="getAddressDetails"
-                    />
-                    <!-- <gmap-autocomplete
-                      @place_changed="initMarker"
-                      class="form-control mb-2"
-                    >
-                    </gmap-autocomplete>
-
-                    <gmap-map
-                      :zoom="14"
-                      :center="center"
-                      style="width: 100%; height: 200px"
-                    >
-                      <gmap-marker
-                        :key="index"
-                        v-for="(m, index) in locationMarkers"
-                        :position="m.position"
-                        @click="center = m.position"
-                      ></gmap-marker>
-                    </gmap-map> -->
+                    </div>
                   </div>
 
                   <div>
@@ -416,46 +388,13 @@
                         class="form-control text"
                       />
                     </div>
-
-                    <!-- <div class="form-group">
-                      <label for="Neighbor" class="username"> {{ $t('welcome.Neighbor') }} :</label
+                    <div class="form-group">
+                      <label for="Neighbour" class="username"> Neighbour:</label
                       ><br />
-                      <input
-                        type="text"
-                        name="alias"
-                        v-model="Neighbor"
-                        id="Neighbor"
-                        :placeholder="$t('welcome.Neighbor')"
-                        class="form-control text"
+                      <autocomplete-mapbox
+                        @get-address-details="getAddressDetails"
                       />
-                    </div> -->
-                    <autocomplete-mapbox
-                      @get-address-details="getAddressDetails"
-                    />
-                    <!-- <div class="form-group">
-                      <label for="Neighbor" class="username">
-                        {{ $t("welcome.Adress") }} :</label
-                      >
-
-                      <gmap-autocomplete
-                        @place_changed="initMarker"
-                        class="form-control"
-                      >
-                      </gmap-autocomplete>
                     </div>
-
-                    <gmap-map
-                      :zoom="14"
-                      :center="center"
-                      style="width: 100%; height: 200px"
-                    >
-                      <gmap-marker
-                        :key="index"
-                        v-for="(m, index) in locationMarkers"
-                        :position="m.position"
-                        @click="center = m.position"
-                      ></gmap-marker>
-                    </gmap-map> -->
                   </div>
                 </div>
               </div>
@@ -792,28 +731,14 @@
                       <label for="Neighbor" class="username">
                         {{ $t("welcome.Adress") }} :</label
                       >
-
-                      <gmap-autocomplete
-                        @place_changed="initMarker"
-                        class="form-control"
-                      >
-                      </gmap-autocomplete>
+                      <BusinessAutocomplete
+                        @business-instance-location="businessInstanceLocation"
+                      />
                     </div>
                   </div>
                 </div>
 
-                <gmap-map
-                  :zoom="14"
-                  :center="center"
-                  style="width: 100%; height: 200px"
-                >
-                  <gmap-marker
-                    :key="index"
-                    v-for="(m, index) in locationMarkers"
-                    :position="m.position"
-                    @click="center = m.position"
-                  ></gmap-marker>
-                </gmap-map>
+                <businessmap :center="businessInstanceCenter" />
               </div>
             </tab-content>
 
@@ -843,7 +768,10 @@
 
 <script>
 import People from "@/components/dasboard/suggestedpeople";
+import businessmap from "@/components/welcome/businessmap";
 import AutocompleteMapbox from "@/components/AutocompleteMapbox";
+import BusinessAutocomplete from "@/components/welcome/BusinessAutocomplete";
+
 import Business from "@/components/dasboard/welcomebusinesses";
 
 import Tutorial from "@/components/dasboard/tutorial";
@@ -860,6 +788,7 @@ export default {
   data() {
     return {
       useas: "",
+      businessInstanceCenter: [11.504929555178624, 3.8465173382452815],
       municipality: [],
       min: moment()
         .subtract(18, "years")
@@ -1160,6 +1089,10 @@ export default {
       }
     },
 
+    businessInstanceLocation(result) {
+      this.businessInstanceCenter = result.center;
+      this.address = result.place_name;
+    },
     validateBusiness() {
       return new Promise((resolve, reject) => {
         this.$v.form.$touch();
@@ -1197,8 +1130,8 @@ export default {
           formData2.append("council", this.selectedmunicipality);
 
           formData2.append("neigborhood", this.selectedlocality);
-          formData2.append("lat", this.center.lat);
-          formData2.append("lng", this.center.lng);
+          formData2.append("lat", this.businessInstanceCenter[1]);
+          formData2.append("lng", this.businessInstanceCenter[0]);
 
           formData2.append("name", this.form.business_name);
           //  formData2.append("keywords", this.selectedKeywords);
@@ -1396,8 +1329,8 @@ export default {
         formData.append("region", this.selectedpregion);
         formData.append("city", this.city);
         formData.append("neighbor", this.Neighbor);
-        formData.append("lat", this.coordinates[0]);
-        formData.append("lng", this.coordinates[1]);
+        formData.append("lat", this.coordinates[1]);
+        formData.append("lng", this.coordinates[0]);
         formData.append("address", this.address);
 
         axios
@@ -1511,7 +1444,7 @@ export default {
   },
 
   mounted() {
-    this.peopleAround();
+   // this.peopleAround();
     this.locateGeoLocation();
 
     this.Country();
@@ -1528,6 +1461,8 @@ export default {
     Business,
     Tutorial,
     AutocompleteMapbox,
+    businessmap,
+    BusinessAutocomplete,
   },
 
   computed: {

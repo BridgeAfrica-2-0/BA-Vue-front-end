@@ -52,6 +52,7 @@ export default {
 
     confirmPayment( {commit}, Data ){
       console.log("confirmPayment");
+      console.log(Data);
       return axios
       .post(`business/${Data.path}`, Data.formData)
       .then(({ data }) => {

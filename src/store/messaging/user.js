@@ -5,6 +5,9 @@ export default {
     state: {
         currentUser: JSON.parse(localStorage.getItem("user")),
         users: [],
+        bizs: [],
+        nets: [],
+
         chatList: [],
         userToUser: [],
         userToBiz: [],
@@ -26,6 +29,12 @@ export default {
         },
         getUserToUser(state) {
             return state.userToUser;
+        },
+        getBizs(state) {
+            return state.bizs;
+        },
+        getNets(state) {
+            return state.nets;
         },
         getUsers(state) {
             return state.users;
@@ -67,6 +76,12 @@ export default {
         setUsers(state, data) {
             state.users = data;
         },
+        setBizs(state, data) {
+            state.bizs = data
+        },
+        setNets(state, data) {
+            state.nets = data
+        },
         setUser(state, data) {
             state.currentUser = data
         },
@@ -96,6 +111,41 @@ export default {
                     let users = res.data.data
                     usersFinal = users.filter((user) => { return user.id != state.currentUser.user.id })
                     commit("setUsers", usersFinal);
+                    commit("businessChat/setUsers", usersFinal);
+
+
+
+                })
+                .catch((err) => {
+                    commit("setLoader", false);
+                    console.log(err);
+                })
+        },
+        GET_BIZS({ commit, state }, data) {
+            commit("setBizs", []);
+            commit("setLoader", true);
+            let keyword = data ? '/' + data : ''
+            axios.get(`/business/all${keyword}`)
+                .then((res) => {
+                    commit("setLoader", false);
+                    let bizs = res.data.data
+                    commit("setBizs", bizs);
+
+                })
+                .catch((err) => {
+                    commit("setLoader", false);
+                    console.log(err);
+                })
+        },
+        GET_NETS({ commit, state }, data) {
+            commit("setNets", []);
+            commit("setLoader", true);
+            let keyword = data ? '?keyword=' + data : ''
+            axios.get(`/network/search${keyword}`)
+                .then((res) => {
+                    commit("setLoader", false);
+                    let bizs = res.data.data
+                    commit("setNets", bizs);
 
                 })
                 .catch((err) => {
@@ -216,40 +266,54 @@ export default {
             console.log("[DEBUG]", data);
             var payload = data.data
             var type = data.type
+            let exec = 0
 
             if (type == 'business') {
-                axios.post(`/messages/UserToBusiness`, payload, {
-                        headers: {
-                            'Content-Type': 'multipart/form-data'
-                        }
-                    })
-                    .then((res) => {
-                        console.log("Message saved...", res.data.data);
-                    })
-                    .catch((err) => {
-                        console.log(err);
-                    })
-            } else if (type == 'user') {
-                axios.post(`/messages/UserToUser`, payload, {
-                        headers: {
-                            'Content-Type': 'multipart/form-data'
-                        }
-                    })
-                    .then((res) => {
-                        console.log("Message saved...", res.data.data);
-                    })
-                    .catch((err) => {
-                        console.log(err);
-                    })
-            } else {
-                axios.post(`/messages/UserToNetwork`, payload)
-                    .then((res) => {
-                        console.log("Message saved...", res.data.data);
-                    })
-                    .catch((err) => {
-                        console.log(err);
-                    })
-            }
+                if (exec < 1) {
+                    axios.post(`/messages/UserToBusiness`, payload, {
+                            headers: {
+                                'Content-Type': 'multipart/form-data'
+                            }
+                        })
+                        .then((res) => {
+                            exec += 1
+                            console.log("exec:", exec);
+                            console.log("Message saved...", res.data.data);
+                        })
+                        .catch((err) => {
+                            console.log(err);
+                        })
+                }
+            } else if (type == 'user' && exec < 1) {
+                console.log("bug");
+                if (exec < 1) {
+                    axios.post(`/messages/UserToUser`, payload, {
+                            headers: {
+                                'Content-Type': 'multipart/form-data'
+                            }
+                        })
+                        .then((res) => {
+                            exec += 1
+                            console.log("exec:", exec);
+                            console.log("Message saved...", res.data.data);
+                        })
+                        .catch((err) => {
+                            console.log(err);
+                        })
+                }
+            } else if (type == 'network') {
+                if (exec < 1) {
+                    axios.post(`/messages/UserToNetwork`, payload)
+                        .then((res) => {
+                            exec += 1
+                            console.log("exec:", exec);
+                            console.log("Message saved...", res.data.data);
+                        })
+                        .catch((err) => {
+                            console.log(err);
+                        })
+                }
+            } else console.log("Not saved!");
 
         },
 

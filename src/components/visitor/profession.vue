@@ -1,12 +1,12 @@
 <template>
   <div>
-    <b class="profession">Profession</b>
+    <b class="profession">{{$("general.Profession")}}</b>
     <hr />
     <b-list-group-item class="d-flex align-items-center mb-4 item">
       <div class="datails">
         <div class="row">
           <div class="col">
-            <span class="mr-auto"> My Profession </span>
+            <span class="mr-auto"> {{$("general.My")}}   </span>
           </div>
         </div>
       </div>

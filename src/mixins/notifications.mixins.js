@@ -1,55 +1,8 @@
 
-// import './pusher-notification';
+import { initPusher } from '@/pusher-notification';
 import { initRedis } from '@/redis-notification'
 
-// import * as firebase from 'firebase/app';
-// import 'firebase/messaging';
-
 import { mapGetters, mapActions, mapMutations } from "vuex";
-
-
-export const FireBase = {
-  data() {
-    return {
-      title: '',
-      from: '',
-      subject: '',
-      userimg: '',
-      currentMessage: '',
-    };
-  },
-
-  methods: {
-    receiveMessage() {
-      console.log("call echo firebase")
-      // try {
-      //   firebase.messaging().onMessage((payload) => {
-      //     // debugger
-      //     this.currentMessage = payload;
-      //     console.log(this.currentMessage);
-      //     let message;
-      //     message = payload.data.username + ':\n\n' + payload.data.message;
-      //     this.setNotificationBoxForm(payload.data.shipmentWallNumber, payload.data.username, payload.data.message);
-      //     console.log(message);
-      //   });
-      // } catch (e) {
-      //   console.log(e);
-      // }
-    },
-
-    setNotificationBoxForm(title, from, subject) {
-      this.title = title;
-      this.from = from;
-      this.subject = subject;
-
-      const message = `<span><b>${this.from}</b></span><br>${this.subject}`;
-    },
-  },
-
-  created() {
-    console.info('create notification info');
-  },
-}
 
 export const Pusher = {
 
@@ -93,36 +46,29 @@ export const Redis = {
   watch: {
     '$store.state.auth.profilConnected': function () {
       this.updateEventListener(this.$store.state.auth.profilConnected.user_type)
+    },
+
+    '$store.state.auth.user': {
+      deep: true,
+      handle () {
+        this.initRedis(this.$store.state.auth.user.accessToken)
+      }
     }
+
+      
   },
 
   methods: {
     ...mapMutations({
-      newNotificationBusiness: "notification/NEW_BUSINESS_NOTIFICATION",
-      newNotificationProfile: "notification/NEW_PROFILE_NOTIFICATION",
-      newNotificationNetwork: "notification/NEW_NETWORK_NOTIFICATION",
-      auth: "auth/profilConnected"
+	      newNotificationBusiness: "notification/NEW_BUSINESS_NOTIFICATION",
+	      newNotificationProfile: "notification/NEW_PROFILE_NOTIFICATION",
+	      newNotificationNetwork: "notification/NEW_NETWORK_NOTIFICATION",
+	      auth: "auth/profilConnected"
     }),
 
-    async getAuth() {
-      const type = ([
-        'NetworkEditors',
-        'networks',
-        "Membar Network Follower",
-        "memberNetwork",].includes(this.$route.name)) ? this.$route.params.id : null
-      const response = await this.$repository.share.WhoIsConnect({ networkId: type, type });
-
-      if (response.access) this.auth(response.data);
-    },
-
-    initBusinessNotification: async function () {
-      const response = this.$repository.notification.business()
-      if (response.status)
-        this.newNotificationBusiness({ init: true, data: response.data })
-    },
-
+ 
     listenBusinessEvent() {
-      initRedis(this.token)
+      
       const $event = `business-channel${this.profile.id}`
       window.Redis.private($event)
         .listen(".BusinessNotificationEvent", payload => {
@@ -132,7 +78,7 @@ export const Redis = {
     },
 
     listenProfileEvent() {
-      initRedis(this.token)
+      
       const $event = `user.${this.profile.id}`;
 
       window.Redis.private($event)
@@ -142,7 +88,7 @@ export const Redis = {
     },
 
     listenNetworkeEvent() {
-      initRedis(this.token)
+      
       const $event = `user.${this.profile.id}`;
 
       window.Redis.private($event)
@@ -157,56 +103,17 @@ export const Redis = {
       } catch (error) {
         console.error(new Error(error))
       }
-    },
-
-    init: async function () {
-      if (this.profile) {
-        await this.getAuth()
-        this.updateEventListener(this.profile.user_type)
-      }
     }
   },
 
 
   created() {
-    this.strategy = {
-      user: () => this.listenProfileEvent(),
-      business: () => this.listenBusinessEvent(),
-      network: () => this.listenNetworkeEvent(),
-    }
-    // this.init()
-  }
-}
 
-export const FirebaseNotification = {
-  methods: {
-    notified() {
-      // try {
-      //   firebase
-      //     .messaging()
-      //     .requestPermission()
-      //     .then(() => {
-      //       console.log('Notification permission granted');
-      //       return firebase
-      //         .messaging()
-      //         .getToken()
-      //         .then((token) => {
-      //           console.info(token);
-      //           // this.$repository.post.SendToken(token)
-      //           return true;
-      //         })
-      //         .then(() => this.receiveMessage())
-      //         .catch((error) => console.error(error));
-      //     })
-      //     .catch((error) => console.error(error));
-      // } catch (error) {
-      //   console.log(error);
-      // }
-    }
-  },
+  	this.strategy = {
+  		user: () => this.listenProfileEvent(),
+  		network: () => this.listenNetworkeEvent(),
+  		business: () => this.listenBusinessEvent()
+  	}
 
-  created() {
-    console.log("call laravel firebase")
-    this.notified()
   }
 }

@@ -5,7 +5,7 @@
         <b-input-group class="mb-2 px-md-3 float-right">
           <b-form-input
             aria-label="Text input with checkbox"
-            placeholder="Search Something"
+            :placeholder="$t('general.Search_Something')"
              v-model="search"
           ></b-form-input>
 

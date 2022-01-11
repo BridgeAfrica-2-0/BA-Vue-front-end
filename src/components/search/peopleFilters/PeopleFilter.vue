@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-form class="mb-4">
-      <label for="feedback-user">Profession</label>
+      <label for="feedback-user">{{$t("general.Profession")}}</label>
       <b-form-input
         @input="debounceInput"
         id="feedback-user"
@@ -16,7 +16,7 @@
       @click.prevent="toogleRootSection"
     >
       <b-row class="fl px-3">
-        <span>People from</span>
+        <span>{{$t("general.People_from")}}</span>
         <b-icon
           :icon="rootSectionIsVisible ? 'arrow-down' : 'arrow-up'"
         ></b-icon>
@@ -36,7 +36,7 @@
           @click.prevent="peopleSectionIsVisible = !peopleSectionIsVisible"
         >
           <b-row class="fl px-3">
-            <span>People </span>
+            <span>{{$t("general.People")}} </span>
             <b-icon
               :icon="peopleSectionIsVisible ? 'arrow-down' : 'arrow-up'"
             ></b-icon>
@@ -72,7 +72,7 @@
           @click.prevent="buisnessSectionIsVisible = !buisnessSectionIsVisible"
         >
           <b-row class="fl px-3">
-            <span>Buisness </span>
+            <span>{{$t("general.Buisness")}} </span>
             <b-icon
               :icon="buisnessSectionIsVisible ? 'arrow-down' : 'arrow-up'"
             ></b-icon>
@@ -108,7 +108,7 @@
           @click.prevent="networkSectionIsVisible = !networkSectionIsVisible"
         >
           <b-row class="fl px-3">
-            <span>Network</span>
+            <span>{{$t("general.Network")}} </span>
             <b-icon
               :icon="networkSectionIsVisible ? 'arrow-down' : 'arrow-up'"
             ></b-icon>
@@ -149,7 +149,7 @@ import { mapActions, mapGetters } from "vuex";
 const options = [
   { text: "Follower", value: "Follower" },
   { text: "Following", value: "Following" },
-  { text: "Community", value: "Community" },
+  { text: "Community", value: "Community" }
 ];
 //import Button from "@/components/Button";
 export default {

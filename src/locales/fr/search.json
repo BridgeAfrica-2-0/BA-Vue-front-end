@@ -26,7 +26,7 @@
     "cameroon": "cameroun",
     "car": "Voiture",
     "swag": "swag",
-    "About": "À propos de",
+    "About": "À propos",
     "See_all": "Voir tout",
     "No_data_available_for_that_search": "Aucune donneé disponible pour cette recherche",
     "Followers": "Abonnée",
@@ -129,8 +129,8 @@
     "Networks": "Réseaux",
     "Join": "Rejoindre",
     "No_Business_Found": "Aucune entreprise trouvée",
-    "read_more": "lire plus",
-    "read_less": "lire moins",
+    "read_more": "Lire la suite",
+    "read_less": "Lire moins",
     "All": "Tout",
     "Business": "Entreprise",
     "Home": "Accueil",
@@ -138,5 +138,6 @@
     "Notification": "Notification",
     "Pending_Post": "Publication en attente",
     "Insight": "Apperçu",
-    "Settings": "Paramètres"
+    "Settings": "Paramètres",
+    "Copy_link":"Copier le lien"
 }

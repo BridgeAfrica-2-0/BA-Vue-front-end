@@ -5,7 +5,7 @@
     
 
 
-
+    <!-- {{info}}  -->
 
 
 
@@ -53,9 +53,11 @@ export default {
       info(){
    return this.$store.state.follower.profileIntro;
     },
+   
 
   },
 
+  
 };
 </script>
 

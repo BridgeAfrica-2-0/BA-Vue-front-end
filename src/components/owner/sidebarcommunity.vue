@@ -1,10 +1,11 @@
 <template>
   <div class="lalala">
     <div class=" border mt-2 ">
+      <!-- {{total}} -->
       <span>  
         <h6 class="title m-3">
           <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
-          <b> {{ $t('profileowner.COMMUNITY') }} </b> <span class="h4-color"> {{ nFormatter(total.total_community)}} </span>
+          <b> {{ $t('profileowner.COMMUNITY') }}</b> <span class="h4-color"> {{ nFormatter(total.total_community)}} </span>
         </h6>
       </span>
 
@@ -65,9 +66,6 @@
           </div>
         </b-tab>
 
-
-
-
           <b-tab>
           <template slot="title">
             {{ $t('profileowner.Network') }} <span class="spa-color">  {{ nFormatter(total.total_network)}}</span>
@@ -93,16 +91,13 @@
             </b-tabs>
           </div>
         </b-tab>
-
-
-
-
       </b-tabs>
     </div>
   </div>
 </template>
 
 <script>
+
 	import Business from "@/components/owner/tabs/business";
 	import People from "@/components/owner/tabs/people";
 	import Network from "@/components/owner/tabs/network";
@@ -114,6 +109,23 @@
 			Business,
 			Network,
 		},
+    
+    data() {
+      return {
+        id: null,
+      }
+    },
+
+		computed: {
+			total() {
+				return this.$store.state.profile.Tcommunity;
+			},
+		},
+
+    mounted() {
+      this.id = this.$route.params.id ? this.$route.params.id : "";
+      this.getTcommunity();
+    },
 
 		methods: {
 			nFormatter(num) {
@@ -128,12 +140,16 @@
 				}
 				return num;
 			},
-		},
-
-		computed: {
-			total() {
-				return this.$store.state.follower.Tcommunity;
-			},
-		},
+      getTcommunity() {
+        this.$store
+          .dispatch("profile/Tcommunity", this.id)
+          .then(() => {
+            console.log("ohh yeah");
+          })
+          .catch((err) => {
+            console.log({ err: err });
+          });
+      },
+		}
 	};
 </script>

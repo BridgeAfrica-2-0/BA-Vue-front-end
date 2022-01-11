@@ -127,7 +127,7 @@
                           <input
                             v-model="searchQuery"
                             class="form-control input-background"
-                            :placeholder="`Search chat list ${tabIndex}`"
+                            :placeholder="$t('general.Search_chat_list')"
                             @keypress.enter="
                               getChatList({
                                 type: 'user',
@@ -212,7 +212,7 @@
                           <input
                             v-model="searchQuery"
                             class="form-control input-background"
-                            :placeholder="`Search chat list ${tabIndex}`"
+                            :placeholder="$t('general.Search_chat_list')"
                             @keypress.enter="
                               getChatList({
                                 type: 'business',
@@ -288,7 +288,7 @@
                       <!-- End Chats -->
                     </b-tab>
                     <b-tab
-                      title="Network"
+                      :title="$t('general.Network')"
                       @click="getChatList({ type: 'network' })"
                     >
                       <!-- network Chats Available  -->
@@ -297,7 +297,7 @@
                           <input
                             v-model="searchQuery"
                             class="form-control input-background"
-                            :placeholder="`Search chat list ${tabIndex}`"
+                            :placeholder="$t('general.Search_chat_list')"
                             @keypress.enter="
                               getChatList({
                                 type: 'network',
@@ -371,7 +371,7 @@
                       <!-- End Chats -->
                     </b-tab>
                     <b-tab
-                      title="Groups"
+                      :title="$t('general.Groups')"
                       @click="getChatList({ type: 'group' })"
                     >
                       <!-- Business Chats Available  -->
@@ -380,7 +380,7 @@
                           <input
                             v-model="searchQuery"
                             class="form-control input-background"
-                            :placeholder="`Search chat list ${tabIndex}`"
+                            :placeholder="$t('general.Search_chat_list')"
                             @keypress.enter="
                               getChatList({
                                 type: 'business',
@@ -897,7 +897,7 @@
             <div class="new-msg back-image" style="margin-right: 17px">
               <div class="info-nav">
                 <b-row>
-                  <b-col class="col-1 mt-3"> To </b-col>
+                  <b-col class="col-1 mt-3"> {{ $t("general.To") }} </b-col>
                   <b-col>
                     <b-form-input
                       id="textarea"
@@ -930,7 +930,7 @@
                               value="accepted"
                               @change="selectedAllMulty"
                             >
-                              All
+                              {{ $t("general.All") }}
                             </b-form-checkbox>
                           </b-col>
                           <b-col>
@@ -940,7 +940,7 @@
                               name="people"
                               @change="peopleAllMulty"
                             >
-                              People
+                              {{ $t("general.People") }}
                             </b-form-checkbox>
                           </b-col>
 
@@ -951,7 +951,7 @@
                               name="business"
                               @change="businessAllMulty"
                             >
-                              Business
+                              {{ $t("general.Business") }}
                             </b-form-checkbox>
                           </b-col>
                           <b-col>
@@ -961,7 +961,7 @@
                               v-model="networkMulty"
                               @change="networkAllMulty"
                             >
-                              Network
+                              {{ $t("general.Network") }}
                             </b-form-checkbox>
                           </b-col>
                           <!--
@@ -1000,7 +1000,7 @@
                               class="p-2 message"
                               @click="selectedChat({ chat: biz, id: biz.id })"
                             > -->
-                          <h2>All</h2>
+                          <h2>{{ $t("general.All") }}</h2>
                           <tr
                             v-for="(elmt, index) in all"
                             :key="index"
@@ -1067,7 +1067,7 @@
                       variant="primary"
                       @click="$bvModal.show('group-name')"
                       :disabled="selectedMulty.length ? false : true"
-                      >Next</b-button
+                      >{{ $t("general.Next") }}</b-button
                     >
                     <!-- <b-button
                       class="float-left"

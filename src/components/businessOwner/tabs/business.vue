@@ -13,7 +13,11 @@
             </div>
             <div class="flx100">
               <p class="textt">
-                <strong class="title"> {{ item.name }} </strong> <br />
+                <strong class="title"> 
+                  <router-link :to="'/business/' + item.id">
+                    {{ item.name }} 
+                  </router-link>
+                </strong> <br />
 
                 <span v-for="cat in item.category" :key="cat.name">
                   {{ cat.name }}
@@ -28,13 +32,14 @@
                 </span>
                 <br />
                 <read-more
-                  more-str="read more"
+                  :more-str="$t('search.read_more')"
                   class="readmore"
                   :text="item.about_business"
                   link="#"
-                  less-str="read less"
+                  :less-str="$t('search.read_less')"
                   :max-chars="75"
                 >
+                
                 </read-more>
               </p>
             </div>
@@ -97,6 +102,7 @@
                   size="sm"
                   class="b-background shadow"
                   variant="primary"
+                  @click="gotoBusiness(item.id)"
                 >
                   <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
                   <span class="btn-text">{{
@@ -158,6 +164,21 @@ export default {
   },
 
   methods: {
+
+      businessCommunityTotal() {
+      this.$store
+        .dispatch("businessOwner/businessCommunityTotal", this.biz_id)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+    gotoBusiness(id) {
+      this.$router.push(`/business/${id}#about`);
+    },
     count(number) {
       if (number >= 1000000) {
         return number / 1000000 + "M";
@@ -208,7 +229,7 @@ export default {
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
         id: user.id,
-        type: "user",
+        type: "business",
       };
 
       await axios
@@ -217,6 +238,8 @@ export default {
           console.log(data);
           user.is_follow = nextFollowState;
           document.getElementById("followbtn" + user.id).disabled = false;
+
+          this.businessCommunityTotal();
         })
 
         .catch((err) => {

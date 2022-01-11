@@ -1,14 +1,15 @@
 <template>
-  <div class="body">
-    <span v-if="isloaded">
-      <navbar />
+  <div class="body" ref="wrapper">
 
-      <Profile v-if="info" />
+  
+    <navbar />
 
+
+    <div v-if="isloaded"  >
+      <Profile  :key="foll_id"  v-if="info || isBblock==0" />
       <notFound v-else />
-
       <Footer />   
-    </span>
+    </div>
   </div>
 </template>
 
@@ -28,6 +29,7 @@ export default {
   data() {
     return {
       isloaded: false,
+      foll_id:'',
     };
   },
   computed: {
@@ -47,17 +49,38 @@ export default {
     profile: function () {
       return this.$store.getters["follower/getUserPostIntro"];
     },
+
+    isBblock: function(){
+
+     return this.profile.viewer_blocked;
+    }
+  },
+
+   beforeRouteUpdate(to, from, next) {
+
+    this.foll_id = to.params.id;
+    next();
   },
 
   created() {
+
+    let loader = this.$loading.show({
+      container: this.$refs.wrapper,
+      canCancel: true,
+      onCancel: this.onCancel,
+      color: "#e75c18",
+    });
+
     this.foll_id = this.$route.params.id;
 
     this.$store
       .dispatch("follower/loadUserPostIntro", this.foll_id)
       .then((response) => {
         this.isloaded = true;
+        loader.hide()
       })
       .catch((error) => {
+        loader.hide()
         console.log({ error: error });
       });
   },

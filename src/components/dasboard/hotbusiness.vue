@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="people-style shadow" v-for="item in business" :key="item.id">
-      <b-row>
+      <b-row>  
         <b-col md="8" xl="8" lg="12" cols="12" sm="8">
           <div class="d-inline-flex">
             <div class="center-img">
@@ -39,13 +39,14 @@
                 </span>
                 <br />
                 <read-more
-                  more-str="read more"
+                  :more-str="$t('search.read_more')"
                   class="readmore"
                   :text="item.about_business"
                   link="#"
-                  less-str="read less"
+                  :less-str="$t('search.read_less')"
                   :max-chars="100"
                 >
+                      
                 </read-more>
               </p>
             </div>
@@ -106,6 +107,7 @@
                   size="sm"
                   class="b-background shadow"
                   variant="primary"
+                  @click="gotoBusiness(item.id)"
                 >
                   <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
                   <span class="btn-text">{{ $t("dashboard.Direction") }}</span>
@@ -147,6 +149,9 @@ export default {
   },
 
   methods: {
+    gotoBusiness(id) {
+      this.$router.push(`/business/${id}#about`);
+    },
     count(number) {
       if (number >= 1000000) {
         return number / 1000000 + "M";
@@ -455,7 +460,7 @@ export default {
 }
 </style>
 
-<style >
+<style>
 .u-btn {
   filter: grayscale(0.6);
 }

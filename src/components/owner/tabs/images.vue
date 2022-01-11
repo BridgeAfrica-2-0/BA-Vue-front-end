@@ -16,7 +16,9 @@
         ref="modalxl"
         centered
         hide-footer
-        :title="'image' == media ? $t('profileowner.Upload_image') : 'Upload video'"
+        :title="
+          'image' == media ? $t('profileowner.Upload_image') : 'Upload video'
+        "
       >
         <div id="preview" ref="preview" v-if="img_url">
           <img :src="img_url" v-if="'image' == media" />
@@ -52,7 +54,7 @@
             hidden
             ref="movie"
           />
-          <a @click="$refs.movie.click()">
+          <a>
             <div class="drag-textt">
               <fas-icon :icon="['fas', 'plus']" />
               <h3>{{ $t("profileowner.Add_Item") }}</h3>
@@ -63,6 +65,7 @@
       <div v-for="(image, cmp) in allImages" :key="cmp">
         <div class="img-gall" v-for="(im, index) in image.media" :key="index">
           <Picture
+            :isAlbum="isAlbum"
             :im="im"
             :typeOfMedia="() => typeOfMedia(im.path)"
             :getFullMediaLink="() => getFullMediaLink(im.path)"
@@ -92,7 +95,7 @@
 
 <script>
 import Picture from "./imagesItems.vue";
-import { mapActions, mapMutations } from "vuex";
+import { mapActions, mapMutations, mapGetters } from "vuex";
 import { fullMediaLink } from "@/helpers";
 import { v4 } from "uuid";
 
@@ -106,7 +109,7 @@ export default {
     canUpload: {},
     addItem: {
       type: Boolean,
-      default: function () {
+      default: function() {
         return false;
       },
     },
@@ -120,9 +123,16 @@ export default {
       required: true,
     },
 
+    isAlbum: {
+      type: Boolean,
+      default: function() {
+        return false;
+      },
+    },
+
     hasLoadPicture: {
       type: Boolean,
-      default: function () {
+      default: function() {
         return false;
       },
     },
@@ -137,7 +147,7 @@ export default {
 
     showAlbum: {
       type: Boolean,
-      default: function () {
+      default: function() {
         return false;
       },
     },
@@ -169,6 +179,8 @@ export default {
 
   created() {
     this.allImages = this.images;
+
+    this.url = this.$route.params.id;
 
     this.pattern = {
       profile: () => ({
@@ -214,7 +226,6 @@ export default {
       "video/mp4": () => "video",
     };
     this.loadImages();
-    this.url = this.$route.params.id;
   },
 
   destroyed() {
@@ -278,17 +289,15 @@ export default {
     },
 
     loadImages() {
-      const pictures = this.allImages
+      const pictures = this.images
         .filter((e) => e.media.length)
         .map((e) => {
           return this.getFullMediaLink(e.media[0].path);
         });
-
       this.Slideimges = pictures;
     },
 
     getFileExtension(file) {
-      console.log(file);
       if (file.startsWith("https://www.youtube.com")) return "youtube";
 
       const fileArray = file.split(".");
@@ -381,14 +390,14 @@ export default {
     },
     //set an image as a cover photo
 
-    setCoverPic(id) {
+    async setCoverPic(id) {
       this.loading = true;
       const data =
         "business" == this.type || "network" == this.type
           ? { businessID: this.$route.params.id, albumID: id }
           : id;
 
-      this.pattern[this.type]()
+      return await this.pattern[this.type]()
         .setCoverPicture(data)
         .then(() => {
           this.loading = false;
@@ -396,7 +405,7 @@ export default {
             status: "success",
             message: "Cover Picture succesfully set",
           });
-          return false;
+          return true;
         })
         .catch((error) => {
           this.sending = false;
@@ -410,13 +419,13 @@ export default {
     },
     //set image as profile pic
 
-    setProfilePic(id) {
+    async setProfilePic(id) {
       this.loading = true;
       const data =
         "business" == this.type || "network" == this.type
           ? { businessID: this.$route.params.id, albumID: id }
           : id;
-      this.pattern[this.type]()
+      return await this.pattern[this.type]()
         .setProfilePicture(data)
         .then(() => {
           this.loading = false;
@@ -424,7 +433,7 @@ export default {
             status: "success",
             message: "Profile Picture set",
           });
-          return false;
+          return true;
         })
         .catch((error) => {
           this.sending = false;
@@ -460,8 +469,10 @@ export default {
 
       this.pattern[this.type]()
         .submitPost(payload)
-        .then(() => {
-          this.pattern[this.type]().updateItem({ id: albumId, action: "add" });
+        .then((response) => {
+          console.log(response)
+
+          this.pattern[this.type]().updateItem({ id: albumId, action: "add", "cover": response.data.data });
           this.pattern[this.type]().getAlbumImages(data);
           this.loading = false;
           this.text = "";
@@ -471,6 +482,7 @@ export default {
             blockClass: "custom-block-class",
           });
           this.$refs["modalxl"].hide();
+          this.$emit("new-item");
         })
         .then(() => {
           this.$emit("reste");
@@ -502,8 +514,8 @@ export default {
 
 <style scoped>
 .img-size {
-  width: 266px !important;
-  height: 266px !important;
+  width: 266px;
+  height: 266px;
 }
 
 .botmediadess-position {
@@ -665,6 +677,7 @@ export default {
     margin: 5px;
     float: left;
     width: 46.5%;
+    height: 175px;
     transition-duration: 0.4s;
     border-radius: 5px;
     -webkit-animation: winanim 0.5s;

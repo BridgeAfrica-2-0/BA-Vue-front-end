@@ -3,9 +3,10 @@
     <Nav :credentials.sync="searchParams" id="top">
       <template v-slot:button>
         <Button @click.native="strategY['all']" v-if="selectedId == 0" />
+        <Button @click.native="strategY['business']" v-if="selectedId == 1" />
+        <!-- <Button @click.native="strategY['users']" v-if="selectedId == 2" /> -->
         <Button @click.native="strategY['network']" v-if="selectedId == 3" />
         <Button @click.native="strategY['market']" v-if="selectedId == 4" />
-        <Button @click.native="strategY['business']" v-if="selectedId == 1" />
 
         <Button @click.native="strategies" v-if="[2, 5].includes(selectedId)" />
       </template>
@@ -429,8 +430,16 @@
               <br />
 
               <hr />
-              <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
-              <h6>{{ $t("search.People") }}</h6>
+
+              <div class="d-flex">
+                <fas-icon
+                  class="icons mr-1"
+                  :icon="['fas', 'users']"
+                  size="lg"
+                />
+
+                <h6>{{ $t("search.People") }}</h6>
+              </div>
 
               <MiniPeople />
               <span class="float-right mb-3" @click="selectedId = 2">
@@ -498,11 +507,11 @@
 
                 {{ $t("search.Businesses") }}
               </h6>
-              <b-spinner
+              <!-- <b-spinner
                 v-if="prodLoaderr"
                 variant="primary"
                 :label="$t('search.Spinning')"
-              ></b-spinner>
+              ></b-spinner> -->
             </div>
 
             <!-- filter out only people -->
@@ -539,11 +548,20 @@
               <h6 class="mb-3">
                 <fas-icon class="icons" :icon="['fas', 'store']" size="lg" />
                 {{ $t("search.Market") }}
+                <b-button
+                  to="/checkout"
+                  size="sm"
+                  variant="primary"
+                  class="float-right"
+                >
+                  <b-icon icon="cart4"></b-icon> Cart
+                </b-button>
                 <div class="float-right">
                   <b-button
                     size="sm"
                     variant="outline-primary"
                     @click="getProducts"
+                    class="mx-3"
                   >
                     <b-spinner small v-if="prodLoader"></b-spinner>
                     <span v-else>{{
@@ -566,7 +584,7 @@
         <b-col cols="12" md="4" lg="4" xl="3" class="showmap" ref="mapblock">
           <div id="map" style="margin-top: 20px" class="">
             <div v-if="selectedId == '1'">
-              <businessmap :businessPage="businessPage" />
+              <businessmap :businesses="businesses.data" />
             </div>
             <div v-if="selectedId == '4'">
               <mapbox :products="allproducts.data" />
@@ -575,6 +593,7 @@
               <mapbox
                 :businesses="businesses.data"
                 :products="miniproducts.data"
+                :networks="mininetworks.data"
               />
             </div>
           </div>
@@ -614,6 +633,7 @@ import Button from "@/components/ButtonNavBarFind";
 import { PostComponent, PeopleComponent } from "@/components/search";
 
 import BusinessComponent from "@/components/search/business";
+//import login from "@/components/search/login";
 
 import { loader } from "@/mixins";
 
@@ -626,6 +646,7 @@ export default {
     Nav,
     SubNav,
     Filters,
+    //login,
     Map,
     Sponsor,
     BusinessComponent,
@@ -662,6 +683,9 @@ export default {
     allproducts() {
       return this.$store.getters["marketSearch/getProducts"];
     },
+    mininetworks() {
+      return this.$store.getters["allSearch/getNetworks"];
+    },
 
     products() {
       return this.$store.state.market.products;
@@ -669,6 +693,10 @@ export default {
   },
 
   created() {
+    this.islogin = this.$store.getters["auth/isLogged"];
+
+    console.log(this.islogin);
+
     if (this.$route.query.keyword)
       this.searchParams.keyword = this.$route.query.keyword;
 
@@ -691,6 +719,7 @@ export default {
 
   data() {
     return {
+      islogin: true,
       searchParams: {
         keyword: "",
         cat_id: "",
@@ -1647,7 +1676,7 @@ export default {
   },
 
   watch: {
-    selectedId: function () {
+    selectedId: function() {
       this.changeComponent();
       this.changePlaceHolder();
       this.changeNotFoundTitle();
@@ -1780,13 +1809,15 @@ export default {
         2: () => this.onFindUser(),
         5: () => this.onFindPost(),
         1: () => this.onFindBusiness(),
+        3: () => this.searchNetworks(),
+        4: () => this.searchProducts(),
       };
 
       this.strategyForPlaceHolder = {
-        2: () => "Find User",
-        5: () => "Find Post",
-        0: () => "All",
-        1: () => "Find Businesses",
+        2: () => this.$t("general.Find_User"),
+        5: () => this.$t("general.Find_Post"),
+        0: () => this.$t("general.All"),
+        1: () => this.$t("general.Find_Businesses"),
       };
 
       this.strategyForComponent = {
@@ -1796,9 +1827,9 @@ export default {
       };
 
       this.strategyForNotFoundComponentTitle = {
-        2: () => "Not Find users",
-        5: () => "Not Find posts",
-        1: () => "Not Find Business",
+        2: () => this.$t("general.Not_Find_users"),
+        5: () => this.$t("general.Not_Find_posts"),
+        1: () => this.$t("general.Not_Find_Business"),
       };
 
       this.changePlaceHolder();
@@ -2024,7 +2055,21 @@ export default {
         this.searchProducts({ cat_id: value.cat_id, sub_cat: value.id });
       } else if (this.selectedId == 1) {
         this.searchBusiness({ cat_id: value.cat_id, sub_cat: value.id });
+      } else if (this.selectedId == 0) {
+        this.allSearchByCat({ cat_id: value.cat_id, sub_cat: value.id });
       }
+    },
+
+    allSearchByCat(data) {
+      console.log("the category is: ", data);
+      this.$store
+        .dispatch("allSearch/SEARCH", data)
+        .then((res) => {
+          // console.log("categories loaded!");
+        })
+        .catch((err) => {
+          console.log("Error erro!");
+        });
     },
 
     searchBusiness(data) {

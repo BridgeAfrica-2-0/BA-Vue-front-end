@@ -5,7 +5,7 @@
     <hr />
 
     <b-tabs content-class="mt-3" pills>
-      <b-tab title="Posts" active @click="getImages">
+      <b-tab :title="$t('general.Posts')" active @click="getImages">
         <div v-if="!hasLoadPicture">
           <b-spinner class="load" label="Large Spinner"></b-spinner>
         </div>
@@ -20,7 +20,7 @@
           v-else
         />
       </b-tab>
-      <b-tab title="Albums" @click="getAlbums">
+      <b-tab :title="$t('general.Albums')" @click="getAlbums">
         <div v-if="!hasLoadAlbum">
           <b-spinner class="load" label="Large Spinner"></b-spinner>
         </div>
@@ -138,7 +138,7 @@ export default {
 
   created() {
     this.urlData = this.$route.params.id;
-
+ 
     this.strategy = {
       business: () => ({
         album: 'businessOwner/getAlbums',

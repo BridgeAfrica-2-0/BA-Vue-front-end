@@ -53,7 +53,7 @@
           label-class="font-weight-bold pt-0"
           class="mb-0"
         >
-          <VuePhoneNumberInput v-model="editnetworkinfo.primary_phone" />
+          <VuePhoneNumberInput v-model="editnetworkinfo.primary_phone" default-country-code="CM"/>
         </b-form-group>
       </b-container>
     </div>
@@ -67,7 +67,64 @@
           label-class="font-weight-bold pt-0"
           class="mb-0"
         >
-          <VuePhoneNumberInput v-model="editnetworkinfo.secondary_phone" />
+          <VuePhoneNumberInput v-model="editnetworkinfo.secondary_phone" default-country-code="CM"/>
+        </b-form-group>
+      </b-container>
+    </div>
+
+    <div class="b-bottom">
+      <b-container>
+        <b-form-group
+          label-cols-lg="3"
+          :label="$t('general.Purpose')"
+          label-size=" md"
+          label-class="font-weight-bold pt-0"
+          class="mb-0"
+        >
+          <b-form-input
+            id="bname"
+            placeholder=""
+            v-model="editnetworkinfo.purpose"
+            required
+          ></b-form-input>
+        </b-form-group>
+      </b-container>
+    </div>
+
+    <div class="b-bottom">
+      <b-container>
+        <b-form-group
+          label-cols-lg="3"
+          :label="$t('general.Special_Needs')"
+          label-size=" md"
+          label-class="font-weight-bold pt-0"
+          class="mb-0"
+        >
+          <b-form-input
+            id="bname"
+            placeholder=""
+            v-model="editnetworkinfo.special_needs"
+            required
+          ></b-form-input>
+        </b-form-group>
+      </b-container>
+    </div>
+
+    <div class="b-bottom">
+      <b-container>
+        <b-form-group
+          label-cols-lg="3"
+          label="Address"
+          label-size=" md"
+          label-class="font-weight-bold pt-0"
+          class="mb-0"
+        >
+          <b-form-input
+            id="bname"
+            placeholder=""
+            v-model="editnetworkinfo.address"
+            required
+          ></b-form-input>
         </b-form-group>
       </b-container>
     </div>
@@ -225,6 +282,26 @@
         </b-form-group>
       </b-container>
     </div>
+    
+    <div class="b-bottom">
+      <b-container>
+        <b-form-group
+          label-cols-lg="3"
+          :label="$t('network.Allow_Business')"
+          label-size=" md"
+          label-class="font-weight-bold pt-0"
+          class="mb-0"
+        >
+          <b-form-checkbox 
+            v-model="editnetworkinfo.allow_business" 
+            name="check-button" 
+            value="1"
+            unchecked-value="0"
+            switch
+          ></b-form-checkbox>
+        </b-form-group>
+      </b-container>
+    </div>
 
     <b-container class="">
       <b-row>
@@ -366,7 +443,6 @@ export default {
     getEditNetworkInfo() {
       console.log("getEditNetworkInfo");
       this.$store
-        // .dispatch("NetworkSettings/getnetworkinfo", this.url)
         .dispatch("NetworkSettings/getEditNetworkInfo", this.url)
         .then(() => {
           console.log("Edit Network Information Available ");
@@ -454,11 +530,12 @@ export default {
       console.log("setting Network data");
       console.log(this.editnetworkinfo);
       this.multiselecvalue=this.editnetworkinfo.assign_categories;
-      this.countries.forEach(e => {
-        if(e.name == this.editnetworkinfo.country){
-          this.country.push(e)
-        }
-      });
+      this.country.push({ id: this.editnetworkinfo.country_id, name: this.editnetworkinfo.country })
+      // this.countries.forEach(e => {
+      //   if(e.name == this.editnetworkinfo.country){
+      //     this.country.push(e)
+      //   }
+      // });
       this.regions.forEach(e => {
         if(e.name == this.editnetworkinfo.region){
           this.region.push(e)
@@ -506,6 +583,10 @@ export default {
       formData.append('primary_phone', editnetworkinfo.primary_phone);
       formData.append('secondary_phone', editnetworkinfo.secondary_phone);
       formData.append('email', editnetworkinfo.email);
+      formData.append('purpose', editnetworkinfo.purpose);
+      formData.append('special_needs', editnetworkinfo.special_needs);
+      formData.append('address', editnetworkinfo.address);
+      formData.append('allow_business', editnetworkinfo.allow_business);
       formData.append('description', editnetworkinfo.description);
 
       console.log('name', editnetworkinfo.admin_name);
@@ -518,6 +599,10 @@ export default {
       console.log('primary_phone', editnetworkinfo.primary_phone);
       console.log('secondary_phone', editnetworkinfo.secondary_phone);
       console.log('email', editnetworkinfo.email);
+      console.log('purpose', editnetworkinfo.purpose);
+      console.log('special_needs', editnetworkinfo.special_needs);
+      console.log('address', editnetworkinfo.address);
+      console.log('allow_business', editnetworkinfo.allow_business);
       console.log('description', editnetworkinfo.description);
       console.log(formData);
       this.$store
@@ -532,7 +617,7 @@ export default {
         this.Lspinner = false;
         this.flashMessage.show({
           status: "success",
-          message: "Changes Made Successfuly"
+          message: this.$t('general.Changes_Made_Successfuly')
         });  
       })
       .catch(err => {
@@ -540,7 +625,7 @@ export default {
         this.Lspinner = false;
         this.flashMessage.show({
           status: "error",
-          message: "Unable To Make Changes"
+          message: this.$t('general.Unable_To_Make_Changes')
         });
       });
     },

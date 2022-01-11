@@ -45,7 +45,7 @@
     <b-row class="center-content d-none d-md-block">
       <b-col cols="10">
         <div class="bv-example-row">
-            <b-tabs pills v-model="tabIndex" vertical class="itzlala" nav-wrapper-class="w-15">
+            <b-tabs lazy pills v-model="tabIndex" vertical class="itzlala" nav-wrapper-class="w-15">
               <b-tab :title="$t('network.Notifications')">
                 <b-card-text> <Notification /> </b-card-text
               ></b-tab>
@@ -124,12 +124,12 @@ watch: {
 
         if (newVal == 4) {
           this.selectedIdd = '4';
-          this.tabIndex = '2';
+          this.tabIndex = '5';
         }
 
         if (newVal == 5) {
           this.selectedIdd = '5';
-          this.tabIndex = '3';
+          this.tabIndex = '6';
         }
 
         if (newVal == 6) {
@@ -162,6 +162,7 @@ watch: {
   data() {
     return {
       size: 0,
+      tab: this.$route.params.currenttab != 0 ? this.$route.params.currenttab : 0,
       tabIndex: 1,
       selectedIdd: 0,
       seetings_id: 0,

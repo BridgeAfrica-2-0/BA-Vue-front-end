@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="container-fluid " style="padding:0px">
-      <div class="splide" v-if="business_info.cover.length">
+    <div class="container-fluid" style="padding: 0px">
+      <div class="splide" v-if="business_info.cover.length" :key="key">
         <splide :options="options" class="banner r-image">
           <splide-slide v-for="cover in business_info.cover" :key="cover.id">
             <img :src="cover.media_url" class="r-image" />
@@ -11,31 +11,23 @@
 
       <div v-else class="splide">
         <splide :options="options" class="banner r-image">
-          <splide-slide>
-            <img src="@/assets/img/Business 1.jpg" class="r-image" />
-          </splide-slide>
-
-          <splide-slide>
-            <img src="@/assets/img/business 2.jpg" class="r-image" />
-          </splide-slide>
-
-          <splide-slide>
-            <img src="@/assets/img/business 3.png" class="r-image" />
+          <splide-slide v-for="(cover, index) in getCustomCover" :key="index">
+            <img :src="cover" class="r-image" />
           </splide-slide>
         </splide>
       </div>
       <!-- <router-link to="#media?type=cover"> -->
-        <b-button @click="gotoCoverImages" class="float-right see-all">
-          {{ $t('businessowner.See_All') }}
-        </b-button>
+      <b-button @click="gotoCoverImages" class="float-right see-all">
+        {{ $t("businessowner.See_All") }}
+      </b-button>
       <!-- </router-link> -->
 
       <div class="container-fluid logo-container">
         <b-row class="mt-md-2">
           <b-col cols="8" md="6" class="m-0 p-0">
             <b-avatar
-              :src="business_info.logo_path"
-              class=" float-left   mt-2 mr-2 mr-xl-5 mr-lg-5 round-coner  logo_avat"
+              :src="profile.profile_picture"
+              class="float-left mt-2 mr-2 mr-xl-5 mr-lg-5 round-coner logo_avat"
               badge-variant="primary"
               badge-offset="10px"
               square
@@ -53,13 +45,14 @@
             <div class="">
               <div class="text-box">
                 <span>
-                  <h6 class=" m-0 p-0 ml-3   profile-name">
+                  <h6 class="m-0 p-0 ml-3 profile-name">
                     <b>
                       <b-link> {{ business_info.name }} </b-link>
                     </b>
                     <br />
                     <span class="community">
-                      {{ business_info.community }} {{ $t('businessowner.Community') }}
+                      {{ business_info.community }}
+                      {{ $t("businessowner.Community") }}
                     </span>
                   </h6>
                 </span>
@@ -117,8 +110,7 @@
                     <h4>Edit Your New picture</h4>
                   </div>
                 </div>
-
---->
+              --->
               </div>
             </b-modal>
 
@@ -162,35 +154,39 @@
               </div>
             </b-modal>
           </b-col>
-
           <b-col cols="4" md="6" class="">
-            <div class="my-auto ">
+            <div class="my-auto">
               <span class="float-right">
+                <b-button
+                  variant="primary"
+                  class="edit-btn d-none d-md-inline"
+                  @click="selectCover"
+                >
+                  <fas-icon
+                    class="mr-2"
+                    :icon="['fas', 'pencil-alt']"
+                    size="lg"
+                  />
+                  {{ $t("businessowner.Add_Cover") }}
+                </b-button>
 
-                <b-button variant="primary" class="edit-btn  d-none d-md-inline"     @click="selectCover"  > <fas-icon class="mr-2" :icon="['fas', 'pencil-alt']" size="lg" />   {{ $t('businessowner.Add_Cover') }} </b-button>
-                
-                
-                <b-dropdown id="dropdown-1" class="float-right  mt-2 mt-sm-2 mt-md-0  dot-btn" no-caret variant="outline-primary">
+                <b-dropdown
+                  id="dropdown-1"
+                  class="float-right mt-2 mt-sm-2 mt-md-0 dot-btn"
+                  no-caret
+                  variant="outline-primary"
+                >
                   <template #button-content>
                     <b-icon-three-dots></b-icon-three-dots>
                   </template>
 
-
-
-    
-
-                  <b-dropdown-item  @click="selectCover" 
-                    > {{ $t('businessowner.Change_Cover') }}</b-dropdown-item
+                  <b-dropdown-item @click="selectCover">
+                    {{ $t("businessowner.Change_Cover") }}</b-dropdown-item
                   >
 
-                  <!--
-                  <b-dropdown-item
-                    >Invite Friends On Bridge Africa</b-dropdown-item
-                  >
-
- -->
-
-            <b-dropdown-item  @click="viewAs"  >{{ $t('businessowner.View_As') }}</b-dropdown-item> 
+                  <b-dropdown-item >  <router-link :to="'/business/'+url " >   {{
+                    $t("businessowner.View_As")   
+                  }}      </router-link>  </b-dropdown-item>
                 </b-dropdown>
               </span>
             </div>
@@ -204,11 +200,21 @@
 </template>
 
 <script>
+import { mapMutations, mapGetters } from "vuex";
+
+import {defaultCoverImage} from '@/mixins';
+
 export default {
   name: "headPageOwner",
+  mixins:[defaultCoverImage],
+
+  created(){
+    this.currentAuthType = 'business'
+  },
 
   data() {
     return {
+      key:0,
       url: null,
       img_url: null,
       cover_photo: null,
@@ -224,20 +230,26 @@ export default {
         perMove: 1,
 
         breakpoints: {
-          "760": {
+          760: {
             perPage: 1,
             gap: "0rem",
           },
-          "992": {
+          992: {
             perPage: 2,
             gap: "1rem",
           },
         },
-      },
+      },  
     };
   },
 
+
   methods: {
+    ...mapMutations({
+      updatePictureState: "auth/updateProfilePicture",
+      addCoverPicture: "businessOwner/addMultiCoverPicture"
+    }),
+
     businessInfo() {
       this.$store
         .dispatch("businessOwner/businessInfo", this.url)
@@ -248,8 +260,8 @@ export default {
           console.log({ err: err });
         });
     },
-    gotoCoverImages(){
-      this.$parent.gotoCoverImages();
+    gotoCoverImages() {
+      this.$emit('goto-cover-images');
     },
 
     viewAs() {
@@ -283,11 +295,11 @@ export default {
       this.$refs["coverphoto"].show();
     },
 
-    chooseProfile2: function() {
+    chooseProfile2: function () {
       document.getElementById("cover-imag").click();
     },
 
-    chooseProfile1: function() {
+    chooseProfile1: function () {
       document.getElementById("profile-imag").click();
     },
 
@@ -315,27 +327,22 @@ export default {
 
           this.flashMessage.show({
             status: "success",
-
-            message: this.$t('businessowner.Logo_Updated'),
-
+            message: this.$t("businessowner.Logo_Updated"),
             blockClass: "custom-block-class",
           });
 
           loader.hide();
-          this.$refs["modalxl"].hide();
+          this.$refs["logomodal"].hide();
         })
-
         .catch((err) => {
           console.log({ err: err });
 
           this.flashMessage.show({
             status: "error",
-
-            message: this.$t('businessowner.Unable_to_set_your_Logo'),
+            message: this.$t("businessowner.Unable_to_set_your_Logo"),
             blockClass: "custom-block-class",
           });
           console.log({ err: err });
-
           loader.hide();
         });
     },
@@ -358,15 +365,10 @@ export default {
           },
         })
         .then((response) => {
-          console.log(response);
-
           this.businessInfo();
-
           this.flashMessage.show({
             status: "success",
-
-            message: this.$t('businessowner.Profile_Updated'),
-
+            message: this.$t("businessowner.Profile_Updated"),
             blockClass: "custom-block-class",
           });
 
@@ -382,7 +384,6 @@ export default {
 
             this.flashMessage.show({
               status: "error",
-
               message: err.response.data.message,
               blockClass: "custom-block-class",
             });
@@ -391,12 +392,10 @@ export default {
           } else {
             this.flashMessage.show({
               status: "error",
-
-              message: this.$t('businessowner.Unable_to_upload_your_image'),
+              message: this.$t("businessowner.Unable_to_upload_your_image"),
               blockClass: "custom-block-class",
             });
             console.log({ err: err });
-
             loader.hide();
           }
         });
@@ -408,11 +407,25 @@ export default {
   },
 
   computed: {
-    business_info() {
-      return this.$store.state.businessOwner.businessInfo;
+    ...mapGetters({ 
+      profile: 'auth/profilConnected',
+      business_info: 'businessOwner/getBusinessInfo'
+    }),
+  },
+
+  watch: {
+    "$store.state.businessOwner.businessInfo": {
+      deep: true,
+      handler () {
+        
+        this.updatePictureState(this.$store.state.businessOwner.businessInfo.logo_path);
+        this.addCoverPicture(this.$store.state.businessOwner.businessInfo.cover)
+        this.key = this.key+1
+      }
     },
   },
 };
+
 </script>
 
 <style scoped>

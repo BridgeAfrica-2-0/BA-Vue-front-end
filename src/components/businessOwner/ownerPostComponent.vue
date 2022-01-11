@@ -6,7 +6,7 @@
           <!-- <b-avatar
             class="logo-sizee avat"
             :square="'user' == item.poster_type ? false : true"
-            variant="light"
+            variant="primary"
             :src="item.user_picture"
           ></b-avatar> -->
           <b-avatar
@@ -23,7 +23,6 @@
               {{ item.user_name }}
             </h5>
           </router-link>
-
           <p class="duration">{{ item.created_at | now }}</p>
         </div>
 
@@ -85,7 +84,7 @@
             <b-avatar
               class="logo-sizee avat"
               :square="'user' == item.source.poster_type ? false : true"
-              variant="light"
+              variant="primary"
               :src="item.source.logo_path"
             >
             </b-avatar>
@@ -192,7 +191,7 @@
         <b-avatar
           b-avatar
           class="logo-sizee-18 avat img-fluid avat-comment avatar-border"
-          variant="light"
+          variant="primary"
           :square="'user' == profile.user_type ? false : true"
           :src="profile.profile_picture"
         ></b-avatar>
@@ -307,7 +306,6 @@ export default {
 
   created() {
     this.item = this.post;
-
     this.posterID = this.post.poster_id
       ? this.post.poster_id
       : this.post.user_id;
@@ -337,7 +335,6 @@ export default {
           : { name: "networks", params: { id: this.posterID } };
       },
     };
-
     if (!this.isDisplayInSearch) this.comments = this.post.comments;
   },
 

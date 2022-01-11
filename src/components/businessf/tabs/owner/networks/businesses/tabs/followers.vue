@@ -50,7 +50,7 @@
     </b-row>
     <b-row>
       <b-col col="12">
-        <infinite-loading @infinite="infiniteHandler" ref="infiniteLoading">
+        <infinite-loading @infinite="infiniteHandler">
           <div class="text-red" slot="no-more">
             {{ $t("network.No_More_Request") }}
           </div>
@@ -174,15 +174,10 @@ export default {
       this.loading = true;
       console.log("network/" + this.url + "/lock/business/" + user_id);
       this.axios
-        .post("network/" + this.url + "/lock/business/" + user_id)
+        .delete("network/" + this.url + "/lock/business/" + user_id)
         .then((response) => {
           console.log(response);
-          this.businessfollowers = [];
-          this.displayfollowers = [];
-          this.$nextTick(() => {
-            this.page = 1;
-            this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
-          });
+          this.blockUsers();
           this.loading = false;
           this.flashMessage.show({
             status: "success",

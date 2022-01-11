@@ -3,9 +3,9 @@
     <div
       v-for="value in business_around"
       v-bind:key="value.name"
-      class="people-style shadow"
+      class="people-style shadow"  
     >
-      <b-row>
+      <b-row> 
         <b-col md="4" xl="3" lg="3" cols="5" sm="3">
           <div class="center-img">
             <splide :options="options" class="r-image">
@@ -63,7 +63,6 @@
                   block
                   size="sm"
                   :id="'followbtn' + value.id"
-                  class="px-1"
                   :class="value.is_follow !== 0 && 'u-btn'"
                   variant="primary"
                   @click="handleFollow(value)"
@@ -128,7 +127,7 @@ export default {
   },
   data() {
     return {
-      page: 1,
+      page: 2,
       options: {
         rewind: true,
         autoplay: true,

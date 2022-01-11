@@ -3,12 +3,41 @@
     <div>
       <b-tabs pills content-class="mt-3 f-left">
         <b-tab :title="$t('network.People')" active> 
-          <People /> 
+
+           <template slot="title">
+            {{ $t("network.People") }}
+            <span class="spa-color">
+              {{ nFormatter(userdetails.total_people) }}
+            </span>
+          </template>
+
+
+         <People /> 
         </b-tab>
-        <b-tab :title="$t('network.Businesses')"> 
+
+        
+        <b-tab > 
+
+           <template slot="title">
+            {{ $t("network.Businesses") }}
+            <span class="spa-color">
+              {{ nFormatter(businessdetails.total_Business)  }}
+            </span>
+          </template>
+
+
           <Businesses /> 
         </b-tab>
-        <b-tab :title="$t('network.Network')"> 
+        <b-tab > 
+
+           <template slot="title">
+            {{ $t('network.Network') }}
+            <span class="spa-color">
+              {{ nFormatter(networkdetails.total_Network) }}
+            </span>
+          </template>
+
+
           <Networks /> 
         </b-tab>
       </b-tabs>
@@ -28,6 +57,35 @@ export default {
     Businesses,
     Networks
   },
+
+   methods: {
+    nFormatter: function(num) {
+      if (num >= 1000000000) {
+        return (num / 1000000000).toFixed(1).replace(/\.0$/, "") + "G";
+      }
+      if (num >= 1000000) {
+        return (num / 1000000).toFixed(1).replace(/\.0$/, "") + "M";
+      }
+      if (num >= 1000) {
+        return (num / 1000).toFixed(1).replace(/\.0$/, "") + "K";
+      }
+      return num;
+    }
+   },
+
+    computed: {
+    userdetails() {
+      return this.$store.state.networkProfileCommunitySidebar.userdetails;
+    },
+    businessdetails() {
+      return this.$store.state.networkProfileCommunitySidebar.businessdetails;
+    },
+    networkdetails() {
+      return this.$store.state.networkProfileCommunitySidebar.networkdetails;
+    },
+  },
+
+
 };
 </script>
 

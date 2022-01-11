@@ -9,7 +9,7 @@
           </b-input-group-prepend>
           <b-form-input
             aria-label="Text input with checkbox"
-            :placeholder="$t('network.Search_Something')"
+            :placeholder="$t('memnetwork.Search_Something')"
             type="text"
             class="form-control"
             v-model="searchTitle"
@@ -19,7 +19,7 @@
     </b-row>
     <br/>
 
-    <b-row cols="1">
+    <b-row cols="2">
       <b-col class="ml-0 mr-0"
         v-for="member in displayfollowers"
         :key="member.id"
@@ -33,21 +33,20 @@
             </b-card>
           </template>
         <div style="display:none;">{{member['communityNum'] = nFormatter(member.followers)}}</div>
-        <div style="display:none;">{{member['type'] = "user"}}</div>
-        <CommunityMembers :member="member" @handleFollow="handleFollow" />
+        <CommunityMembers :member="member" @BlockUser="BlockUser" />
         </b-skeleton-wrapper>
       </b-col>
     </b-row>
     <b-row >
       <b-col col="12">
-        <infinite-loading @infinite="infiniteHandler" ref="infiniteLoading">
-          <div class="text-red" slot="no-more">{{ $t('network.No_More_Request') }}</div>
-          <div class="text-red" slot="no-results">{{ $t('network.No_More_Request') }}</div>
+        <infinite-loading @infinite="infiniteHandler">
+          <div class="text-red" slot="no-more">{{ $t('memnetwork.No_More_Request') }}</div>
+          <div class="text-red" slot="no-results">{{ $t('memnetwork.No_More_Request') }}</div>
         </infinite-loading>
       </b-col>
     </b-row>
     
-    <!--  -->
+    
   </div>
 </template>
 
@@ -61,7 +60,7 @@ export default {
     return {
       url:null,
       searchTitle: "",
-      page: 1,
+      page: 0,
       loading: false,
       peoplefollowers: [],
       displayfollowers: []
@@ -96,18 +95,13 @@ export default {
     search() {
       if(this.searchTitle){
         this.loading = true;
+        this.page -= 1;
         console.log("searching...");
         console.log(this.searchTitle);
-        this.$nextTick(() => {
-          this.page = 1;
-          this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
-        });
+        this.infiniteHandler();
       }else{
         console.log("Empty search title: "+this.searchTitle);
-        this.$nextTick(() => {
-          this.page = 1;
-          this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
-        });
+        this.infiniteHandler();
       }
     },
     
@@ -118,56 +112,56 @@ export default {
       let formData = new FormData();
       formData.append('keyword', keyword);
       console.log("network/"+this.url+"/people/follower/"+this.page);
-      let lien = "";
-      if(keyword == ""){
-          lien =  'network/'+this.url+'/people/follower/'+this.page;
-      }else{ lien ='network/'+this.url+'/people/follower/'+this.page+','+ formData}
       this.axios
-      .post(lien)
-      .then( ({data})  => {
+      .post("network/"+this.url+"/people/follower/"+this.page, formData)
+      .then(({ data }) => {
        console.log(data);
        console.log(this.page);
-        // if(keyword){
-        //   this.displayfollowers = data.data;
-        //   this.searchTitle = "";
-        //   $state.complete();
-        // }else{
+        if(keyword){
+          this.displayfollowers = data.data;
+          this.searchTitle = "";
+          $state.complete();
+        }else{
           if (data.data.length) {
             this.page += 1;
             console.log(this.page);
             console.log(...data.data);
-            this.displayfollowers.push(...data.data);
-            // this.displayfollowers = this.peoplefollowers;
+            this.peoplefollowers.push(...data.data);
+            this.displayfollowers = this.peoplefollowers;
             $state.loaded();
           } else {
             $state.complete();
           }
-        // }
+        }
       }) .catch((err) => {
           console.log({ err: err });
       })
       this.loading = false;
     },
 
-    async handleFollow(Comdata) {
-      console.log("handleFollow", Comdata)
-      const url = Comdata.is_follow === 0 ? `/follow-community` : `/unfollow`;
-      console.log("uri", url)
-      const nextFollowState = Comdata.is_follow === 0 ? 1 : 0;
-      const data = {
-        id: Comdata.id,
-        type: Comdata.type,
-      };
-      console.log("data", data)
-
-      await this.axios
-        .post(url, data)
-        .then(response => {
-          console.log("response", response);
-          Comdata.is_follow = nextFollowState;
-        })
-        .catch(err => console.log(err));
-    },
+        
+    BlockUser(user_id) {
+      this.loading = true;
+      console.log("network/"+this.url+"/lock/user/"+user_id);
+      this.axios.delete("network/"+this.url+"/lock/user/"+user_id)
+      .then(response => {
+        console.log(response);
+        this.blockUsers();
+        this.loading = false;
+        this.flashMessage.show({
+          status: "success",
+          message: this.$t('memnetwork.User_blocked')
+        });
+      })
+      .catch(err => {
+        console.log({ err: err });
+        this.loading = false;
+        this.flashMessage.show({
+          status: "error",
+          message: this.$t('memnetwork.Unable_to_blocked_User')
+        });
+      });
+    }
 
   }
 };

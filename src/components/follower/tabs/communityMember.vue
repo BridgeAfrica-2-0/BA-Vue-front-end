@@ -8,7 +8,7 @@
               <b-col md="3" cols="4" sm="4" class="my-auto">
                 <b-avatar
                   class="p-avater"
-                  variant="ligth"
+                  variant="primary"
                   :src="item.profile_picture"
                 ></b-avatar>
               </b-col>
@@ -27,7 +27,7 @@
                             class="mt-lg-2"
                           >
                             <div class="mt-3 mt-lg-0 mt-xl-0 username">
-                              <b>---{{ item.name }}</b>
+                              <b> {{ item.name }} </b>
                             </div>
                           </b-col>
 

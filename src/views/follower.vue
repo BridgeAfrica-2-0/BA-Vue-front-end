@@ -1,10 +1,8 @@
 <template>
   <div class="body" ref="wrapper">
-
-  
     <navbar />
-    <div v-if="isloaded">
-      <Profile v-if="info || isBblock==0" />
+    <div v-if="isloaded"  >
+      <Profile  :key="foll_id"  v-if="info || isBblock==0" />
       <notFound v-else />
       <Footer />   
     </div>
@@ -27,6 +25,7 @@ export default {
   data() {
     return {
       isloaded: false,
+      foll_id:'',
     };
   },
   computed: {
@@ -46,11 +45,12 @@ export default {
     profile: function () {
       return this.$store.getters["follower/getUserPostIntro"];
     },
+  },
 
-    isBblock: function(){
+   beforeRouteUpdate(to, from, next) {
 
-     return this.profile.viewer_blocked;
-    }
+    this.foll_id = to.params.id;
+    next();
   },
 
   created() {

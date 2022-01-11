@@ -9,7 +9,7 @@
         <span>
           <h6 class="title">
             <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
-            <b class="ml-2">  {{ $t('dashboard.Community') }} </b> <span class="h4-color"> {{totalcommunity.total}} </span>
+            <b class="ml-2">  {{ $t('dashboard.Community') }} </b> <span class="h4-color">  {{ nFormatter(total.total) }}  </span>
           </h6>
         </span>
 
@@ -18,7 +18,7 @@
             <template slot="title">
               {{ $t('dashboard.People') }}
               <span class="spa-color">
-                {{peoplecommunity.total_people}} 
+               {{ nFormatter(total.total_user_follower) }}
               </span>
             </template>
 
@@ -31,7 +31,7 @@
                       <template slot="title">
                         {{ $t('dashboard.Followers') }}
                         <span class="spa-color">
-                          {{peoplecommunity.total_followers}}
+                           {{ nFormatter( total.total_user_follower) }}
                         </span>
                       </template>
 
@@ -39,7 +39,7 @@
                       
                           <div>
                             <People
-                              :people="peoplecommunity.user_followers" 
+                              type="Follower" 
                             />
                           </div>  
                         
@@ -50,7 +50,7 @@
                       <template slot="title">
                         {{ $t('dashboard.Following') }}
                         <span class="spa-color">
-                          {{peoplecommunity.total_following}} 
+                        {{ nFormatter(total.total_user_following) }}
                         </span>
                       </template>
 
@@ -58,7 +58,7 @@
                       
                           <div>
                             <People
-                              :people="peoplecommunity.user_following"
+                              type="Following" 
                             />
                           </div>
                         
@@ -74,7 +74,7 @@
             <template slot="title">
               {{ $t('dashboard.Businesses') }}
               <span class="spa-color">
-                {{ count(businesscommunity.total_Business) }}
+               {{ nFormatter(total.total_business_follower ) }}
               </span>
             </template>
 
@@ -84,7 +84,7 @@
                   <template slot="title">
                      {{ $t('dashboard.Followers') }}
                     <span class="spa-color">
-                      {{ count(businesscommunity.total_followers) }}
+                      {{ nFormatter(total.total_business_follower) }}
                     </span>
                   </template>
 
@@ -92,7 +92,7 @@
                   
                       <div>
                         <Business
-                          :business="businesscommunity.Business_followers" 
+                            type="Follower" 
                         />
                       </div>
                    
@@ -103,7 +103,7 @@
                   <template slot="title">
                     {{ $t('dashboard.Following') }}
                     <span class="spa-color">
-                     {{businesscommunity.totat_following}}
+                    {{ nFormatter(total.total_business_following) }}
                     </span>
                   </template>
 
@@ -111,7 +111,7 @@
                 
                       <div>
                         <Business
-                          :business="businesscommunity.Business_following"
+                           type="Following"  
                         />
                       </div>
                   
@@ -127,7 +127,7 @@
             <template slot="title">
              {{ $t('dashboard.Network') }}
               <span class="spa-color">
-               0
+               {{ nFormatter(total.total_network_follower ) }}
               </span>
             </template>
 
@@ -137,7 +137,7 @@
                   <template slot="title">
                    {{ $t('dashboard.Followers') }}
                     <span class="spa-color">
-                     0
+                  {{ nFormatter(total.total_network_follower) }}
                     </span>
                   </template>
 
@@ -145,7 +145,7 @@
                    
                       <div>
                         <Network
-                         :network="[]" 
+                         type="Follower" 
                         />
                       </div>
                   
@@ -156,7 +156,7 @@
                   <template slot="title">
                     {{ $t('dashboard.Following') }}
                     <span class="spa-color">
-                 0
+                 {{ nFormatter(total.total_network_following) }}
                     </span>
                   </template>
 
@@ -164,7 +164,7 @@
                    
                       <div class="p-2">
                         <Network
-                          :network="[]" 
+                            type="Following" 
                         />
                       </div>
                    
@@ -195,12 +195,15 @@ export default {
   },
   computed: {   
     business() {
-      return this.$store.getters["dashboardcommunity/getProfileCommunity"];
+      return this.$store.getters["dashboardcommunity/getProfileCommunity"]; 
     },
     com() {
       return this.$store.getters["dashboardcommunity/getcom"];
     },
 
+     businessId() {   
+      return this.$store.state.dashboard.dBusinessId;
+    },
 
      peoplecommunity() {
 
@@ -211,11 +214,11 @@ export default {
 
 
 
-      totalcommunity() {
 
-      return  this.$store.state.businessOwner.communityTotal;  
 
-    
+
+      total() {
+      return this.$store.state.businessOwner.Tcommunity;
     },
 
 
@@ -230,6 +233,9 @@ export default {
 
   },
   created() {
+
+    this.businessCommunityTotal();
+
     this.$store
       .dispatch("dashboardcommunity/getdetails")
 
@@ -239,15 +245,12 @@ export default {
       .catch(err => {
         console.log({ err: err });
       });
-    this.$store
-      .dispatch("dashboardcommunity/gettotalcommunity")
 
-      .then(() => {
-        console.log("the response");
-      })
-      .catch(err => {
-        console.log({ err: err });
-      });
+
+      
+    
+   
+
   },
   methods: {
     count(number) {
@@ -257,7 +260,37 @@ export default {
       if (number >= 1000) {
         return number / 1000 + "K";
       } else return number;
-    }
+    }, 
+
+
+      businessCommunityTotal() {
+      this.$store
+        .dispatch("businessOwner/businessCommunityTotal", this.businessId)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+
+     nFormatter(num) {
+      if (num >= 1000000000) {
+        return (num / 1000000000).toFixed(1).replace(/\.0$/, "") + "G";
+      }
+      if (num >= 1000000) {
+        return (num / 1000000).toFixed(1).replace(/\.0$/, "") + "M";
+      }
+      if (num >= 1000) {
+        return (num / 1000).toFixed(1).replace(/\.0$/, "") + "K";
+      }
+      return num;
+    },
+
+
+
+
   }
 };
 </script>

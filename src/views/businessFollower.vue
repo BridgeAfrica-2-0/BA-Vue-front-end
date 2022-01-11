@@ -5,7 +5,7 @@
       <Business />
       <Footer />
     </span>
-  </div> 
+  </div>
 </template>
 
 <script>

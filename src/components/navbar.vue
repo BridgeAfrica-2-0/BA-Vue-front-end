@@ -28,11 +28,9 @@
                   class="input-group-text border-left-0 color-mobile"
                   style="width: 40px; border-right: none"
                 >
-                  <b-icon
-                    icon="search"
-                    style="color: #e75c18"
-                    font-scale="1.5"
-                  ></b-icon>
+                  <slot name="mobile">
+                    <Button @click.native="getKeyword" media="mobile" />
+                  </slot>
                 </span>
               </div>
 
@@ -43,6 +41,7 @@
                 class="form-control search-mobile"
                 style="border-left: none"
                 :placeholder="$t('general.All')"
+                v-model="credentials.keyword"
                 aria-label=""
                 data-original-title=""
                 title=""
@@ -64,7 +63,7 @@
                       icon="geo-alt"
                       style="color: #e75c18"
                       font-scale="1.5"
-                    ></b-icon>
+                    ></b-icon> 
                   </span>
                 </div>
 
@@ -114,7 +113,7 @@
               />
 
               <slot name="button">
-                <Button @click.native="getKeyword" />
+                <Button @click.native="getKeyword" media="desktop" />
               </slot>
             </form>
           </span>
@@ -761,7 +760,7 @@ export default {
     },
 
     getKeyword() {
-      if (!this.searchOptions.keyword) return false;
+      if (!this.credentials.keyword) return false;
 
       if (this.$route.name != "Search") {
         console.log("the keyword is: ", this.credentials.keyword);

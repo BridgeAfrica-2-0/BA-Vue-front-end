@@ -5,6 +5,7 @@
     <b-form-input
       :placeholder="placeholder"
       class="input-search"
+      @input="debounceInput"
       v-model="text"
       type="search"
     ></b-form-input>
@@ -39,7 +40,8 @@ export default {
   data: () => ({
     loading: false,
     text: "",
-    contacts: [],
+    all: [],
+    contacts:[],
     actionType: null,
     hasbeLoad: false,
     uuid:null
@@ -82,7 +84,6 @@ export default {
 
   watch:{
     update:function(value){
-      console.log(value, this.type)
       if([`modal-3-${this.uuid}`,`modal-2-${this.uuid}`].includes(value))
         this.getContacts()
     }
@@ -90,6 +91,23 @@ export default {
 
 
   methods: {
+
+    debounceInput: _.debounce(function (e) {
+      if (e) {
+        const result = this.all.filter(contact => contact.name.toLowerCase().includes(e.toLowerCase()))
+
+        if (result.length)
+          this.contacts = result
+        else
+          this.flashMessage.show({
+            status: 'error',
+            message: `No ${this.type} name start with ${e}`,
+          });
+      }else {
+        this.contacts = this.all 
+      }
+    }, 2000),
+
     getContacts: async function () {
       this.loading = true;
 
@@ -109,6 +127,8 @@ export default {
           this.actionType = "business";
           this.loading = false;
         }
+
+        this.all = this.contacts
       }
     },
   },

@@ -112,12 +112,6 @@
       </b-row>
     </div>
 
-
-
-
-
-
-
     <infinite-loading @infinite="infiniteHandler"></infinite-loading>
   </div>
 </template>

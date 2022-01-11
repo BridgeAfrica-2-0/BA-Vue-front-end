@@ -157,7 +157,7 @@
               ><Media  :key="key" :type="'business'" :isEditor="false" :showCoverAlbum="showCoverAlbum"
             /></b-tab>
             <b-tab :title="$t('general.Market')"><MarketPlace /></b-tab>
-            <b-tab :title="$t('general.Networks')"><Networks :activateBusinessNetwork="true" /></b-tab>
+            <b-tab :title="$t('general.Networks')"><Networks type="business" /></b-tab>
             <b-tab :title="$t('general.Community')"><Community /></b-tab>
           </b-tabs>
         </b-col>
@@ -173,7 +173,7 @@ import About from "./tabs/about";
 import Media from "@/components/owner/tabs/media";
 import MarketPlace from "./tabs/marketPlace";
 import Community from "@/components/businessOwner/tabs/memberNetwork";
-import Networks from '@/components/owner/tabs/networks';
+import Networks from "@/components/owner/tabs/networks";
 
 import {defaultCoverImage} from '@/mixins';
 

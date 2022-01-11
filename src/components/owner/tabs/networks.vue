@@ -5,7 +5,7 @@
       <span class="t-color"> {{ $t("profileowner.Network") }} </span>
 
       <b-button
-        v-if="!activateBusinessNetwork"
+        v-if="type == 'others'"
         class="btn btn-outline-primary pull-right float-right mb-2 blec-font"
         style="margin-top: -6px"
         @click="showmodal(true, 'add')"
@@ -23,7 +23,7 @@
           :key="index"
         >
           <div class="people-style shadow h-100">
-            <div class="float-right others">
+            <div class="float-right others" v-if="type == 'others'">
               <b-dropdown
                 size="lg"
                 variant="link"
@@ -107,7 +107,7 @@
     ></infinite-loading>
 
     <div class="h-100 w-100" v-if="networks.length < 1 && !loader">
-      <div class="mx-auto text-center my-5" v-if="!activateBusinessNetwork">
+      <div class="mx-auto text-center my-5" v-if="type == 'others'">
         <h2 class="my-3">
           {{ $t("profileowner.Build_networks_around_your_Business") }}
         </h2>
@@ -129,13 +129,10 @@
           }}</b-button>
         </p>
       </div>
-    </div>
-
-    <div class="h-100 w-100" v-if="!profileNetworks.length && activateBusinessNetwork && profileNetworks">
-      <div class="mx-auto text-center my-5">
-        <h2 class="my-3">
-          No Network
-        </h2>
+      <div class="mx-auto text-center my-5" v-else>
+        <p class="my-2" v-if="!networks.length">
+          No network found
+        </p>
       </div>
     </div>
 
@@ -600,11 +597,17 @@ import axios from "axios";
 import Multiselect from "vue-multiselect";
 import VuePhoneNumberInput from "vue-phone-number-input";
 export default {
+
+  props:{
+    type: {
+      type: String,
+      default: () => 'others'
+    }
+  },
+
   data() {
     return {
       page: 1,
-      processing:false,
-      path:'',
       multiselecvalue: [],
       infiniteId: 1,
       logoimg_url: null,
@@ -671,13 +674,6 @@ export default {
   components: {
     Multiselect,
     VuePhoneNumberInput,
-  },
-
-  props:{
-    activateBusinessNetwork:{
-      type:Boolean,
-      default: () => false
-    }
   },
 
   mounted() {
@@ -883,11 +879,11 @@ export default {
     // },
 
     infiniteHandler($state) {
-      /* console.log("network?page=" + this.page);
-      let url = "network?page=" + this.page; */
+      console.log("network?page=" + this.page);
 
-      const url = `${this.path}?page=${this.page}`
-
+      let url = this.type == 'others' ? "network?page=" + this.page : 
+`business/network/${this.$route.params.id}?page=${this.page}`
+      
       if (this.page == 1) {
         this.profileNetworks.splice(0);
       }
@@ -896,7 +892,6 @@ export default {
         .dispatch("profile/loadMore", url)
 
         .then(({ data }) => {
-          this.processing = true
           if (data.data.length) {
             this.page += 1;
 
@@ -1177,10 +1172,6 @@ export default {
       console.log(this.selectedNetwork);
     },
   },
-
-  created(){
-    this.path= this.activateBusinessNetwork ? `business/network/${this.$route.params.id}` : "network"
-  }
 };
 </script>
 

@@ -8,12 +8,22 @@
     ></b-form-textarea>
 
     <h6 class="mt-3 fw-b">{{ subtitle }}</h6>
+
     <b-form-input
+      v-if="isCommunity"
       :placeholder="`${placeholder}... press enter`"
       class="input-search mb-2"
       v-model="name"
       type="search"
       @keypress.enter="search(name)"
+    ></b-form-input>
+
+    <b-form-input
+      :placeholder="placeholder"
+      class="input-search mb-2"
+      v-model="text"
+      type="search"
+      @input="debounceInput"
     ></b-form-input>
     <div v-if="isCommunity">
       <b-list-group class="ma-2 list">
@@ -100,6 +110,7 @@ export default {
     name: "",
     message: "",
     text: "",
+    all: [],
     contacts: [],
     actionType: null,
     hasbeLoad: false,
@@ -172,6 +183,23 @@ export default {
   },
 
   methods: {
+    debounceInput: _.debounce(function (e) {
+      if (e) {
+        const result = this.all.filter((contact) =>
+          contact.name.toLowerCase().includes(e.toLowerCase())
+        );
+
+        if (result.length) this.contacts = result;
+        else
+          this.flashMessage.show({
+            status: "error",
+            message: `No ${this.type} name start with ${e}`,
+          });
+      } else {
+        this.contacts = this.all;
+      }
+    }, 2000),
+
     community: function () {
       console.log(this.isCommunity);
       // if (this.isCommunity == "people") {
@@ -225,6 +253,7 @@ export default {
         }
       }
     },
+
     search(keyword) {
       this.sentList = [];
       console.log("Keywork:", keyword);
@@ -256,6 +285,8 @@ export default {
           this.actionType = "business";
           this.loading = false;
         }
+
+        this.all = this.contacts;
       }
     },
   },

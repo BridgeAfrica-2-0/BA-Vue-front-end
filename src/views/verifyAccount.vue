@@ -5,7 +5,7 @@
       autocomplete="off"
       class="md-layout"
       @submit.prevent="validateUser"
-    >
+    > 
       <md-card class="md-layout-item md-size-50 md-small-size-100 p-card">
         <md-card-header>
           <div class="md-title center f-22">
@@ -16,7 +16,7 @@
         <md-card-content>
           <div class="center"></div>
 
-          <br />
+          <br />   
 
           <div v-if="!verify_method">
             <b-row class="row border">
@@ -32,7 +32,7 @@
 
                   <span class="ml-3 md-title l-20">
                     Via Email To <br />
-                    {{ this.$store.state.auth.user.user.email }}
+                 {{auth.email}}
                   </span>
                 </div>
               </b-col>
@@ -55,7 +55,7 @@
                 <div class="d-inline-flex mt-3 mb-3">
                   <span class="mr-4">
                     <b-icon
-                      icon="telephone"
+                      icon="telephone"   
                       variant="primary"
                       font-scale="3"
                     ></b-icon>
@@ -63,7 +63,7 @@
 
                   <span class="ml-3 md-title l-20">
                     Via SMS To <br />
-                    {{ this.$store.state.auth.user.user.phone }}
+                    {{ auth.phone }}
                   </span>
                 </div>
               </b-col>
@@ -168,7 +168,7 @@ export default {
       password: null,
       email: null,
     },
-
+     das:[],
     langs: ["en", "fr"],
     token: "",
     verify_method: false,
@@ -188,6 +188,26 @@ export default {
       },
     },
   },
+
+  created(){
+ this.das = JSON.parse(localStorage.getItem('signup'));
+  },
+
+   computed: {
+    auth() {
+
+   
+
+      let type = this.$store.state.auth.user.user? this.$store.state.auth.user.user: this.das ;
+      
+
+      return  type;
+    },
+
+
+  },
+
+
   methods: {
     verifyMethod(metho) {
       this.chosemethod = metho;
@@ -199,13 +219,13 @@ export default {
         url = "user/email/sendOtp";
       }
       this.sending = true;
-      console.log(this.$store.state.auth.user.user.phone);
+   
 
       this.$store
         .dispatch("auth/sendOtp", {
           url: url,
-          email: this.$store.state.auth.user.user.email,
-          phone: this.$store.state.auth.user.user.phone,
+          email: this.auth.email,
+          phone: this.auth.phone,
         })
         .then((response) => {
           this.sending = false;
@@ -231,8 +251,8 @@ export default {
 
       axios
         .post(url, {
-          phone: this.$store.state.auth.user.user.phone,
-          email: this.$store.state.auth.user.user.email,
+            email: this.auth.email,
+          phone: this.auth.phone,
         })
         .then((response) => {
           if (response.status === 200) {
@@ -276,13 +296,13 @@ export default {
 
     Verify() {
       this.sending = true;
-      console.log(this.$store.state.auth.user.user.phone);
+     
       this.$store
         .dispatch("auth/verify", {
           OTP: this.token,
-          id: this.$store.state.auth.user.user.id,
-          email: this.$store.state.auth.user.user.email,
-          phone: this.$store.state.auth.user.user.email,
+          id: this.auth.id,
+          email: this.auth.email,
+          phone: this.auth.phone,
         })
         .then((response) => {
           this.sending = false;

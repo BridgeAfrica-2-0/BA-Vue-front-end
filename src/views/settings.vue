@@ -5,7 +5,7 @@
     <div class="container wahala" v-if="getUserInfos">
       <b-row>
         <b-col cols="12" md="12" lg="12" xl="12">
-          <div>
+          <div class="mbl-wrap">
             <b-tabs
               pills
               :vertical="vertical"
@@ -509,7 +509,7 @@ export default {
     Navbar,
     Footer,
     SettingsNotifications,
-   // Website,
+    // Website,
     Payment,
     Blocking,
   },
@@ -592,9 +592,9 @@ export default {
 
   data() {
     return {
-      activeTab:0,
-      loading:false,
-      hasLoad:false,
+      activeTab: 0,
+      loading: false,
+      hasLoad: false,
       size: 0,
       selected: "",
       options: "",
@@ -700,37 +700,33 @@ export default {
         .finally(() => loader.hide());
     },
 
-    changePassword(){
-      this.loading=true;
+    changePassword() {
+      this.loading = true;
       let formData2 = new FormData();
       formData2.append("check_password", this.currentPass);
       formData2.append("password", this.newPass);
       formData2.append("password_confirmation", this.newPass1);
 
-      if(this.newPass != this.newPass1){
-        this.message = "the password does not match" ;
-         this.loading=false;
-      }else{
-
-        
+      if (this.newPass != this.newPass1) {
+        this.message = "the password does not match";
+        this.loading = false;
+      } else {
         this.$store
-      .dispatch("profileSettingsEdit/changePassword",formData2)
-      .then(response =>{
-        console.log("------------------------");
-        console.log(response.data.message);
-        this.message = response.data.message ;
+          .dispatch("profileSettingsEdit/changePassword", formData2)
+          .then((response) => {
+            console.log("------------------------");
+            console.log(response.data.message);
+            this.message = response.data.message;
 
-         this.loading=false;
-        
-      })
-      .catch((err) => {
-       
-         this.message = "An error occured" ;
-        console.log('--------- error: ');
-          console.error(err);
-           this.loading=false;
-        });
-        }
+            this.loading = false;
+          })
+          .catch((err) => {
+            this.message = "An error occured";
+            console.log("--------- error: ");
+            console.error(err);
+            this.loading = false;
+          });
+      }
     },
 
     getRegion() {
@@ -843,6 +839,24 @@ export default {
     font-size: 12px;
     padding-left: 10px;
     padding-right: 10px;
+  }
+  .mbl-wrap {
+    overflow: hidden;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+  }
+  .nav.nav-pills {
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    max-width: 500px;
+    overflow: auto;
+
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE 10+ */
+  }
+  .nav.nav-pills::-webkit-scrollbar {
+    display: none;
   }
 }
 </style>

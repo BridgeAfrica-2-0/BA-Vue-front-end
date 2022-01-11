@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 //import Home from "../views/home.vue";
 import Login from "../views/login.vue";
+import LoginValidation from "../views/LoginValidation.vue";
 import home1 from "@/views/home1.vue";
 import signup from "../views/signup.vue";
 import success from "../views/success.vue";
@@ -332,6 +333,13 @@ const routes = [
     name: "Login",
     component: Login,
   },
+
+  {
+    path: "/login/validation",
+    name: "Loginvalidation",
+    component: LoginValidation,
+  },
+
   {
     path: "/signup",
     name: "signup",

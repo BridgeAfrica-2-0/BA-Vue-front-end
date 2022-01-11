@@ -96,8 +96,8 @@
                 data-toggle="popover"
                 class="form-control search-h"
                 style="font-size: 17px !important"
-                :placeholder="searchOptions.placeholder"
-                v-model="searchOptions.keyword"
+                :placeholder="credentials.placeholder"
+                v-model="credentials.keyword"
                 aria-label=""
                 data-original-title=""
                 title=""
@@ -287,7 +287,13 @@
               </div>
               <!-- Notifications Ended -->
 
-              <div  v-if="islogin"  class="nav-item cursor" id="profilepic" triggers="hover" data-toggle="popover">
+              <div
+                v-if="islogin"
+                class="nav-item cursor"
+                id="profilepic"
+                triggers="hover"
+                data-toggle="popover"
+              >
                 <router-link :to="userOwnPage">
                   <b-avatar
                     variant="light"
@@ -333,7 +339,9 @@
                       class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
                     >
                       <span class="mr-2"
-                        ><fas-icon class="violet search" :icon="['fas', 'user']"
+                        ><fas-icon
+                          class="violet search"
+                          :icon="['fas', 'user']"
                       /></span>
                       Profile
                     </a>
@@ -357,7 +365,9 @@
                       class="other-menu suggest-item cursor-pointer text-decoration-none text-dark w-full"
                     >
                       <span class="mr-2 w-full"
-                        ><fas-icon class="violet search" :icon="['fas', 'cogs']"
+                        ><fas-icon
+                          class="violet search"
+                          :icon="['fas', 'cogs']"
                       /></span>
                       {{ $t("general.Account_Settings") }}
                     </router-link>
@@ -412,11 +422,13 @@
           </div>
         </div>
 
-        
         <b-modal ref="setcat" id="myModallnav" hide-footer title=" ">
           <div v-if="islogin" class="d-block d-lg-block d-xl-none">
             <div class="mt-3">
-              <div class="d-inline-flex flex-row align-items-center" @click="gotoProfile">
+              <div
+                class="d-inline-flex flex-row align-items-center"
+                @click="gotoProfile"
+              >
                 <div>
                   <b-avatar
                     variant="light"
@@ -447,9 +459,9 @@
                 <fas-icon
                   class="violet search"
                   :icon="['fas', 'user']"
-                />
-              </span>Profile
-            <hr class="h-divider" v-if="'user' === user.user_type"/>
+                /> </span
+              >Profile
+              <hr class="h-divider" v-if="'user' === user.user_type" />
             </a>
 
             <router-link
@@ -510,7 +522,9 @@
               class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
             >
               <span class="mr-3"
-                ><fas-icon class="violet search" :icon="['fas', 'sign-out-alt']"
+                ><fas-icon
+                  class="violet search"
+                  :icon="['fas', 'sign-out-alt']"
               /></span>
               {{ $t("general.Logout") }}
             </a>
@@ -544,7 +558,7 @@ export default {
   props: {
     credentials: {
       type: Object,
-      default: function() {
+      default: function () {
         return {
           keyword: "",
           placeholder: this.$t("general.All"),
@@ -562,10 +576,6 @@ export default {
       notificationPatterns: null,
       messagePatterns: null,
       redirectionPatterns: null,
-      searchOptions: {
-        keyword: "",
-        placeholder: this.$t("general.All"),
-      },
       query: "",
       selectedUser: null,
       users: [],
@@ -580,26 +590,21 @@ export default {
     }),
   },
   beforeMount() {
-    console.log("beforeMount");
-
     this.getLocation();
   },
   created() {
     //check for authentication
-    console.log("Language is  " + this.$i18n.locale);
-    this.islogin = this.$store.getters["auth/isLogged"];
 
-    console.log(this.islogin);
-    console.log("yoo mother fucjjeryt");
+    this.islogin = this.$store.getters["auth/isLogged"];
 
     if (this.islogin) {
       this.init();
       this.userOwnPage = this.onRedirect();
 
       this.notificationPatterns = {
-        user: () => "/notification/latest/user",
+        user: () => "user/notification",
         business: () => `/notification/business/${this.user.id}`,
-        network: () => `/network/${this.user.id}/notifications`,
+        network: () => `/notification/network/${this.user.id}`,
       };
 
       this.messagePatterns = {
@@ -643,23 +648,18 @@ export default {
   },
 
   watch: {
-    "$store.state.auth.profilConnected": function() {
+    "$store.state.auth.profilConnected": function () {
       this.updateNotificationEvent();
       this.userOwnPage = this.onRedirect();
     },
 
-    "$i18n.locale": async function() {
-      const response = await this.$repository.notification.changeLanguage(this.$i18n.locale);
+    "$i18n.locale": async function () {
+      const response = await this.$repository.notification.changeLanguage(
+        this.$i18n.locale
+      );
       if (response.success) {
-        this.updateNotificationEvent()
+        this.updateNotificationEvent();
       }
-    },
-
-    credentials: {
-      deep: true,
-      handler() {
-        this.searchOptions = this.credentials;
-      },
     },
 
     query(newQuery) {
@@ -691,8 +691,8 @@ export default {
       profile: "auth/profilConnected",
     }),
 
-    gotoProfile(){
-      this.$router.push('profile_owner')
+    gotoProfile() {
+      this.$router.push("profile_owner");
     },
 
     onRedirect() {
@@ -804,7 +804,7 @@ export default {
         .catch(() => console.log("error"));
     },
 
-    logout: async function() {
+    logout: async function () {
       let loader = this.$loading.show({
         container: this.$refs.formContainer,
         canCancel: true,
@@ -830,7 +830,7 @@ export default {
       loader.hide();
     },
 
-    switchToProfile: async function() {
+    switchToProfile: async function () {
       let loader = this.$loading.show({
         container: this.$refs.formContainer,
         canCancel: true,
@@ -854,12 +854,12 @@ export default {
       this.$refs.mobileinput.style.display = "block";
     },
 
-    getNetworks: async function() {
+    getNetworks: async function () {
       let request = await this.$repository.share.getNetworks();
       if (request.success) this.setNetworks(request.data);
     },
 
-    getBusiness: async function() {
+    getBusiness: async function () {
       let request = await this.$repository.share.getBusiness();
       if (request.success) this.setBusiness(request.data);
     },
@@ -1125,10 +1125,8 @@ export default {
 @media only screen and (min-width: 768px) {
   .search-hh .form-control {
     height: 48px !important;
-
     margin-bottom: 0;
     border-radius: 0px;
-
     border-bottom: hidden;
   }
 }

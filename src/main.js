@@ -32,8 +32,8 @@ Vue.use('vue-bootstrap-typeahead', VueBootstrapTypeahead)
 import plugin from './http';
 Vue.use(plugin);
 
-import VueMeta from 'vue-meta'
-Vue.use(VueMeta)
+/* import VueMeta from 'vue-meta'
+Vue.use(VueMeta) */
 
 import VueClipboard from 'vue-clipboard2'
 

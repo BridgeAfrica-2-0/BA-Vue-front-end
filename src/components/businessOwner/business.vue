@@ -18,6 +18,9 @@
               <b-tab :title="$t('businessowner.Media')"
                 ><Media type="business" :showCoverAlbum="showCoverAlbum" :key="key"/></b-tab>
               <b-tab :title="$t('businessowner.Market')"><MarketPlace /></b-tab>
+              <b-tab :title="$t('profileowner.Networks')">
+                <Networks />
+              </b-tab>
               <b-tab :title="$t('businessowner.Community')"
                 ><Followers
               /></b-tab>
@@ -35,7 +38,7 @@ import About from "./tabs/about";
 import Media from "@/components/owner/tabs/media";
 import MarketPlace from "./tabs/marketPlace";
 import Followers from "./tabs/memberNetwork";
-//import Networks from "./tabs/networks";
+import Networks from '@/components/owner/tabs/networks';
 import HeadPageOwner from "@/components/businessOwner/headPageOwner";
 export default {
   name: "Home",
@@ -46,8 +49,9 @@ export default {
     Media,
     MarketPlace,
     Followers,
-    //  Networks
+    Networks
   },
+
   data() {
     return {
       currentTab: 0,
@@ -58,12 +62,12 @@ export default {
       tabs: ["#post", "#about", "#media", "#market", "#community"],
     };
   },
-  computed: {},
+
   methods: {
     gotoCoverImages() {
       this.showCoverAlbum = true
       this.isCover = true;
-      this.key = this.key+1
+      this.key = this.key + 1
       this.currentTab = 2;
     },
 
@@ -71,29 +75,16 @@ export default {
       this.$emit('pageChange')
     }
   },
-  created() {
-    let tab = this.tabs.findIndex((tab) => tab === this.$route.hash);
-
-    if (tab == -1) {
-      this.currentTab =
-        localStorage.getItem("ba-business-active-tab") !== null
-          ? localStorage.getItem("ba-business-active-tab")
-          : 0;
-    } else {
-      this.currentTab = tab;
-    }
-  },
-
+  
   watch: {
     currentTab: (newVal, oldVal) => {
-      if (2 != newVal)
+      if (2 != newVal){
         this.showCoverAlbum = false
-
-      localStorage.setItem("ba-business-active-tab", newVal);
+        this.key = this.key - 1
+      }
     },
 
     $route(to, from) {
-      console.log(to.hash);
       this.currentTab = this.tabs.findIndex((tab) => tab === to.hash);
     },
   },

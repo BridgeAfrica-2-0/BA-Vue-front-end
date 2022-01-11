@@ -261,7 +261,7 @@ export default {
         });
     },
     gotoCoverImages() {
-      this.$parent.gotoCoverImages();
+      this.$emit('goto-cover-images');
     },
 
     viewAs() {

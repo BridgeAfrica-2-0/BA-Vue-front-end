@@ -183,7 +183,6 @@
                   @click="load"
                 ></b-icon>
               </div>
-
               <p>
                 <b-icon
                   icon="briefcase-fill"
@@ -634,7 +633,6 @@ export default {
       division: [],
       municipality: [],
       locality: [],
-
       dayOfWorks: [
         {
           day: this.$t("home.Monday"),
@@ -755,7 +753,6 @@ export default {
         this.business_about = JSON.parse(
           JSON.stringify(this.$store.getters["businessOwner/getBusinessAbout"])
         );
-
         this.dayOfWorks = this.initialize(this.dayOfWorks);
       })
       .catch((error) => {
@@ -789,7 +786,6 @@ export default {
             this.openNow.closing_time +
             " PM";
     },
-
     // business_about_input(){
     //   this.business_about_input = JSON.parse(
     //     JSON.stringify(this.business_about)
@@ -871,7 +867,6 @@ export default {
       return sub_cat;
     },
   },
-
   methods: {
     stringArray(words) {
       let keyword = "";
@@ -882,10 +877,8 @@ export default {
           keyword += item.subcategory_id + ",";
         }
       });
-
       return keyword.substring(0, keyword.length - 1);
     },
-
     stringArray1(words) {
       let keyword = "";
       words.map((item) => {
@@ -898,34 +891,27 @@ export default {
       console.log("id ici ---", words, "---", keyword);
       return keyword.substring(0, keyword.length - 1);
     },
-
     ArrayString(words) {
       let keyword = "";
       words.map((item) => {
         keyword += item + ",";
       });
     
-
     
      
         return keyword.substring(0, keyword.length-1);
      },
-
     loadBusinessAbout(){
         this.$store
       .dispatch("businessOwner/loadUserBusinessAbout", {
         // business_abobusiness_id: this.business_about_input,
         business_id: this.$route.params.id,
       }).then(res => {
-
         this.business_about = JSON.parse(
           JSON.stringify(this.$store.getters["businessOwner/getBusinessAbout"])
         );
       }
-
       )
-
-
     },
     validator(tag) {
       return tag.length > 2 && tag.length < 20;
@@ -973,7 +959,6 @@ export default {
         JSON.stringify(this.business_about)
       );
     },
-
     validate(type) {
       switch (type) {
         case "modifyBiography":
@@ -981,13 +966,11 @@ export default {
             "vuex store +++++ " +
               this.$store.getters["businessOwner/getBusinessAbout"]
           );
-
           this.test();
           var data = {
             business_id: this.business_id,
             data: {
               about_business: this.business_about_input.about_business,
-
               name: this.business_about_input.name,
             },
           };
@@ -1022,9 +1005,6 @@ export default {
           console.log("edit address business");
           this.test();
           console.log(this.business_about_input);
-
-
-
            var dat = {
              business_id: this.$route.params.id,
              data: {
@@ -1053,8 +1033,6 @@ export default {
             
           } 
           console.log(this.select_filterss, 'data editer --',dat)
-
-
           this.$store
             .dispatch(
               "businessOwner/updateUserBusinessAbout",
@@ -1078,7 +1056,6 @@ export default {
               this.business_about = this.$store.getters[
                 "businessOwner/getBusinessAbout"
               ];
-
               this.$refs["addressBusinessModal"].hide();
               console.log("update user business about end");
             })
@@ -1102,13 +1079,11 @@ export default {
           break;
       }
     },
-
     stringKeyword(words) {
       let keyword = "";
       words.map((item) => {
         keyword += item + ",";
       });
-
       return keyword.substring(0, keyword.length - 1);
     },
     test() {
@@ -1130,7 +1105,6 @@ export default {
         JSON.stringify(this.business_about)
       );
     },
-
     categories() {
       this.$store
         .dispatch("auth/categories")
@@ -1233,7 +1207,6 @@ export default {
           console.log({ err: err });
         });
     },
-
     editBusiness() {
       console.log("editBusiness");
       this.axios

@@ -794,13 +794,13 @@
                 <b-col>
                   <b-form-input
                     id="textarea"
-                    v-model="searchQuery"
+                    v-model="newSearchQuery"
                     class="input-background"
                     style="width: 100%"
                     :placeholder="
                       $t('businessowner.Type_the_name_of_person_or_Business')
                     "
-                    @keydown.enter="getList(searchQuery)"
+                    @keydown.enter="getList(newSearchQuery)"
                   ></b-form-input>
                 </b-col>
               </b-row>
@@ -2055,7 +2055,13 @@
                     <label for="file">
                       <b-icon
                         for="file"
-                        class="msg-icon primary icon-size icon-top float-right text-right"
+                        class="
+                          msg-icon
+                          primary
+                          icon-size icon-top
+                          float-right
+                          text-right
+                        "
                         icon="paperclip"
                       >
                       </b-icon>
@@ -2241,13 +2247,13 @@
                 <b-col>
                   <b-form-input
                     id="textarea"
-                    v-model="searchQuery"
+                    v-model="newSearchQuery"
                     class="input-background"
                     style="width: 100%"
                     :placeholder="
                       $t('businessowner.Type_the_name_of_person_or_Business')
                     "
-                    @keydown.enter="getList(searchQuery)"
+                    @keydown.enter="getList(newSearchQuery)"
                   ></b-form-input>
                 </b-col>
               </b-row>
@@ -2966,6 +2972,7 @@ export default {
       showsearch: true,
       selecteduser: false,
       searchQuery: "",
+      newSearchQuery: "",
       message: {},
       newMsg: false,
       show: false,
@@ -3088,14 +3095,16 @@ export default {
       Number(this.$route.params.id)
     );
     console.log("router params:", this.currentBizId);
-    this.tabIndex = this.$route.query.msgTabId;
+    this.tabIndex = this.$route.query.msgTabId
+      ? Number(this.$route.query.msgTabId)
+      : "no";
 
     console.log("this.tabIndex:", this.tabIndex);
     console.log("Current biz:", this.currentBiz);
 
     // console.log("call to action checked:", this.ctaSelected);
 
-    if (this.tabIndex) {
+    if ([0, 1, 2].includes(this.tabIndex)) {
       console.log("here am i!");
       if (this.tabIndex == 1) {
         this.getChatList({ type: "business" });

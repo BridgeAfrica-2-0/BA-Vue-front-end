@@ -257,6 +257,8 @@
               v-model="form.region"
               text-field="name"
             ></b-form-select>
+            
+
           </div>
           <b-form-group
             id="input-group-2"

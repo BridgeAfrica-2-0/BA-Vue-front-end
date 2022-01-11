@@ -478,7 +478,7 @@ export default {
       this.filterselectvalue.push(tag);
     },
 
-    Region() {
+    Region() {   console.log(this.selectedcountry,"-----", this.country)
       let formData2 = new FormData();
       formData2.append("countryId", this.selectedcountry);
       this.$store
@@ -751,6 +751,15 @@ export default {
 
     pcategories() {
       return this.$store.state.auth.categories;
+    },
+
+    selectedcountry: function () {
+      let sub_cat = [];
+    
+      this.country.forEach((item) => {
+        sub_cat.push(item.id);
+      });
+      return sub_cat;
     },
     selectedcategories: function () {
       let selectedUsers = [];

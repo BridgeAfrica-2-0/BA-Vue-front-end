@@ -430,12 +430,25 @@
             :multiple="true"
           ></multiselect>
         </b-form-group>
+         <label for="country" class="username">
+              {{ $t("businessowner.Region") }} :</label
+            ><br />
+
+            <multiselect
+              v-model="region"
+              track-by="id"
+              label="name"
+              :options="regions"
+              :multiple="true"
+            ></multiselect>
+
         <b-form-group
           id="input-group-2"
           :label="$t('businessowner.City')"
           label-for="input-2"
           label-size="sm"
         >
+
           <b-form-input
             id="input-1"
             class="mt-1"
@@ -678,37 +691,7 @@ export default {
         },
       ],
       business_about: {},
-      business_about_input: {
-        name: "TONTON LA FORCE",
-        logo_path: "http://localhost:8000/storage",
-        category: "Hourse Marketing",
-        keywords: null,
-        language: null,
-        location_description:
-          "Tempore quo soluta voluptates quis. Doloremque autem minus ut nisi molestias maiores cum. Et assumenda velit expedita et et sint sed in.",
-        website: null,
-        community: 6,
-        phone: null,
-        email: null,
-        business_open_hours: [
-          {
-            day: "monday",
-            opening_time: "09:05:12",
-            closing_time: "15:06:18",
-          },
-          {
-            day: "tuesday",
-            opening_time: "07:05:38",
-            closing_time: "14:05:43",
-          },
-        ],
-        region: null,
-        address: null,
-        city: null,
-        country: null,
-        lat: -56.200329,
-        lng: -6.249487,
-      },
+      business_about_input: {},
       openNow: null,
       open: null,
     };
@@ -834,7 +817,7 @@ export default {
     selectedcountry: function () {
       let sub_cat = [];
       this.country.forEach((item) => {
-        sub_cat.push(item.country_id);
+        sub_cat.push(item.id);
       });
       return sub_cat;
     },

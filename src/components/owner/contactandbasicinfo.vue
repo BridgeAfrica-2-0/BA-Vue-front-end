@@ -545,6 +545,15 @@ export default {
     },
   },
   methods: {
+
+    deleteContact(id){
+      console.log("---",id)
+      
+      this.$store.dispatch("profile/deleteContact", {id: id})
+      .then(res => {
+        this.$store.dispatch("profile/loadUserPostIntro", null);
+      });
+    },
     getgender() {
       if (this.info.user.gender == "female") {
         this.usergen = "F";
@@ -618,6 +627,7 @@ export default {
           mobilePhones: this.info.user.phone,
         })
         .then((response) => {
+          this.$store.dispatch("profile/loadUserPostIntro", null);
           console.log("update phone user response (3) ++++", response);
         })
         .catch((error) => {

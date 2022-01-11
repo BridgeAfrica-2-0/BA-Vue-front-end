@@ -20,8 +20,9 @@
             <b-tab :title="$t('profileowner.Networks')">
               <Networks />
             </b-tab>
+
             <b-tab :title="$t('profileowner.Community')" href="#community" class="m-0 p-0">
-              <following />
+              <Following />
             </b-tab>
           </b-tabs>
         </b-col>
@@ -127,47 +128,7 @@ export default {
         console.log({ error: error });
       });
 
-    this.$store
-      .dispatch('follower/UcommunityFollower', null)
-      .then((response) => {})
-      .catch((error) => {
-        console.log({ error: error });
-      });
-
-    this.$store
-      .dispatch('profile/UcommunityFollowing', null)
-      .then((response) => {})
-      .catch((error) => {
-        console.log({ error: error });
-      });
-
-    this.$store
-      .dispatch('profile/BcommunityFollower', null)
-      .then((response) => {})
-      .catch((error) => {
-        console.log({ error: error });
-      });
-
-    this.$store
-      .dispatch('profile/BcommunityFollowing', null)
-      .then((response) => {})
-      .catch((error) => {
-        console.log({ error: error });
-      });
-
-    this.$store
-      .dispatch('profile/NcommunityFollower', null)
-      .then((response) => {})
-      .catch((error) => {
-        console.log({ error: error });
-      });
-
-    this.$store
-      .dispatch('profile/NcommunityFollowing', null)
-      .then((response) => {})
-      .catch((error) => {
-        console.log({ error: error });
-      });
+  
   },
 };
 </script>

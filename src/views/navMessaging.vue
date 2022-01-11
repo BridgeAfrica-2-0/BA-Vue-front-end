@@ -893,7 +893,7 @@
                             })
                           "
                         >
-                          <b-col class="col-9">
+                          <b-col class="col-8">
                             <span style="display: inline-flex">
                               <b-avatar
                                 class="d-inline-block profile-pic"
@@ -913,8 +913,8 @@
                             </span>
                           </b-col>
 
-                          <b-col class="col-3 text-center">
-                            <small class="text-center">
+                          <b-col class="col-4 text-center">
+                            <small class="text-center small">
                               {{ getCreatedAt(chat.created_at) }}
                             </small>
                             <!-- <p class="text-center">
@@ -986,7 +986,7 @@
                             })
                           "
                         >
-                          <b-col class="col-9">
+                          <b-col class="col-8">
                             <span style="display: inline-flex">
                               <b-avatar
                                 class="d-inline-block profile-pic"
@@ -1006,8 +1006,8 @@
                             </span>
                           </b-col>
 
-                          <b-col class="col-3 text-center">
-                            <small class="text-center">
+                          <b-col class="col-4 text-center">
+                            <small class="text-center small">
                               {{ getCreatedAt(chat.created_at) }}
                             </small>
                             <!-- <p class="text-center">
@@ -1079,7 +1079,7 @@
                             })
                           "
                         >
-                          <b-col class="col-9">
+                          <b-col class="col-8">
                             <span style="display: inline-flex">
                               <b-avatar
                                 class="d-inline-block profile-pic"
@@ -1099,8 +1099,8 @@
                             </span>
                           </b-col>
 
-                          <b-col class="col-3 text-center">
-                            <small class="text-center">
+                          <b-col class="col-4 text-center">
+                            <small class="text-center small">
                               {{ getCreatedAt(chat.created_at) }}
                             </small>
                             <!-- <p class="text-center">
@@ -1624,15 +1624,15 @@ export default {
       chatSearchKeyword: "",
       chatId: "",
       type: "",
-      // socket: io(process.env.VUE_APP_CHAT_SERVER_URL_DEV, {
+      // socket: io(process.env.VUE_APP_CHAT_SERVER_URL, {
       //   transports: ["websocket", "polling", "flashsocket"],
       // }),
-      socket: io(process.env.VUE_APP_CHAT_SERVER_URL, {
+      // socket: io("https://ba-chat-server.herokuapp.com", {
+      //   transports: ["websocket", "polling", "flashsocket"],
+      // }),
+      socket: io("localhost:7000", {
         transports: ["websocket", "polling", "flashsocket"],
       }),
-      // socket: io("localhost:7000", {
-      //   transports: ["websocket", "polling", "flashsocket"],
-      // }),
       chatSelected: [],
       showsearch: true,
       selecteduser: false,
@@ -1724,12 +1724,12 @@ export default {
     });
   },
   created() {
+    this.$store.commit("businessChat/setCurrentBizId", this.$route.params.id);
     console.log("screen width:", window.screen.width);
     this.tabIndex = this.$route.query.msgTabId
       ? Number(this.$route.query.msgTabId)
       : "no";
     console.log("this.tabIndex:", typeof this.tabIndex);
-    this.$store.commit("businessChat/setCurrentBizId", this.$route.params.id);
 
     if ([0, 1, 2].includes(this.tabIndex)) {
       if (this.tabIndex == 1) {
@@ -1810,8 +1810,23 @@ export default {
       this.socket.emit("create-group", this.chatId);
     },
     socketListenners() {
-      console.log("Listen type of chat:", this.type);
+      this.socket.on("groupMessage", (data) => {
+        console.log("group message Received");
+        console.log(data);
+        this.chats.push(data);
 
+        this.formData.append("sender_business_id", data.sender_business_id);
+        this.formData.append("message", data.message);
+        this.formData.append("receiver_business_id", data.receiver_business_id);
+        this.formData.append("receiver_network_id", data.receiver_business_id);
+        this.formData.append("receiver_id", data.receiver_business_id);
+        this.formData.append("group_id", data.group_id);
+        this.formData.append("type", data.type);
+
+        if (this.currentUser.user.id == data.sender_id) {
+          this.saveMessage(this.formData, data.type);
+        }
+      });
       this.socket.on("privateMessage", (data) => {
         console.log("Received");
         console.log(data);
@@ -1831,28 +1846,31 @@ export default {
           ? this.saveMessage(this.formData, data.type)
           : "Receiver";
       });
-      console.log("listenning...");
+      this.socket.on("generalMessage", (data) => {
+        console.log("Received");
+        console.log(data);
+        // this.messages.push(data);
+      });
     },
     getCreatedAt(data) {
       if (moment(data).isBefore(moment())) {
-        return moment(data).format("lll");
+        return moment(data).format("ddd") + " " + moment(data).format("LT");
       } else {
-        // return moment(data).format('LT');
-        return moment(data).fromNow();
+        return moment(data).format("LT");
+        // return moment(data).fromNow();
       }
     },
-    getList(keyword) {
+    getList() {
       if (this.type == "user") {
-        this.$store.dispatch("userChat/GET_USERS", keyword);
+        this.$store.dispatch("userChat/GET_USERS");
       } else if (this.type == "business") {
-        this.$store.dispatch("userChat/GET_BIZS", keyword);
+        this.$store.dispatch("userChat/GET_BIZS");
       } else {
         console.log("network");
-        this.$store.dispatch("userChat/GET_NETS", keyword);
+        this.$store.dispatch("userChat/GET_NETS");
       }
     },
     getChatList(data) {
-      console.log("[data]", data);
       this.chatSelected.active = false;
       this.newMsg = false;
       this.type = data.type;
@@ -1965,9 +1983,11 @@ export default {
         .catch(() => console.log("error"));
     },
     saveMessage(data, type) {
-      console.log("[DEBUG SAVE]", { data: data, type: type, type2: this.type });
-      let payload = { data: data, type: this.type };
-      this.$store.dispatch("userChat/SAVE_USERS_CHAT", payload);
+      console.log("[DEBUG SAVE]", { data: data, type: type });
+      this.$store.dispatch("userChat/SAVE_USERS_CHAT", {
+        data: data,
+        type: this.type,
+      });
     },
     //-------
 
@@ -2082,6 +2102,9 @@ export default {
   overflow-y: auto;
   overflow-x: hidden;
   /* background-color: lightblue; */
+}
+.small {
+  font-size: 10px !important;
 }
 .spinner {
   font-size: 30px;

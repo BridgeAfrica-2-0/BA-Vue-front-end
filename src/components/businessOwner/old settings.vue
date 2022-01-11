@@ -59,7 +59,7 @@
            
             <b-tab>
               <template slot="title" class="t-color">
-                <h6 class="t-color"> Insight </h6>
+                <h6 class="t-color"> {{$t("search.Insight") }}</h6>
               </template>
               <b-card-text> <Insight /> </b-card-text
             ></b-tab>

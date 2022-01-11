@@ -54,15 +54,14 @@ export default {
     Businesses,
     Network,
   },
-
-  
-		computed: {
+	computed: {
 			total() {
 				return this.$store.state.profile.Tcommunity;
 			},
-		},
-
-
+      rows() {
+        return this.items.length;
+      }
+	},
   data() {
     return {
       perPage: 3,
@@ -141,12 +140,6 @@ export default {
     this.community();
     
     },
-
-  computed: {
-    rows() {
-      return this.items.length;
-    }
-  }
 };
 </script>
 

@@ -678,6 +678,7 @@ export default {
           selectedUsers.push(item.id);
         }
       });
+      return selectedUsers;
     },
     region() {
       let region = [];

@@ -33,13 +33,8 @@ export default {
     BlockUser(dataInfo) {
       console.log(dataInfo);
       this.$emit('BlockUser', dataInfo);
-    }
-  }
-  ,
-   methods: {
-   
-
-      nFormatter(num) {
+    },
+    nFormatter(num) {
       if (num >= 1000000000) {
         return (num / 1000000000).toFixed(1).replace(/\.0$/, "") + "G";
       }
@@ -51,9 +46,6 @@ export default {
       }
       return num;
     }, 
-
-
-
   },
   computed: {
     total() {

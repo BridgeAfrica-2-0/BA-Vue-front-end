@@ -29,7 +29,7 @@
         </p>
         <p class="d-flex justify-content-start align-items-start">
           <b-icon icon="geo-alt-fill" class="primary icon-size"></b-icon>
-          {{ business_intro.city }}
+          {{ business_intro.address }}
         </p>
         <p class="d-flex justify-content-start align-items-start">
           <b-icon icon="link" class="primary icon-size"></b-icon>
@@ -204,7 +204,7 @@
 
           <b-form-group
             id="input-group-2"
-            :label="$t('businessowner.City')"
+            label="address"
             label-for="input-2"
             label-size="sm"
             class=""
@@ -212,7 +212,7 @@
             <b-form-input
               id="input-1"
               class="mt-1"
-              v-model="form.city"
+              v-model="form.address"
               type="text"
               required
             ></b-form-input>
@@ -651,7 +651,7 @@ export default {
       formData2.append("neigborhood", this.LocationFormat(this.form.neigborhood));
       formData2.append("city", this.form.city);
 
-      formData2.append("address", this.form.adress);
+      formData2.append("address", this.form.address);
 
       formData2.append("lat", this.form.lat);
       formData2.append("lng", this.form.lng);

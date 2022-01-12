@@ -517,7 +517,7 @@
         </div>
         <b-form-group
           id="input-group-2"
-          :label="$t('businessowner.Neigbourhood')"
+          label="Adress"
           label-for="input-2"
           label-size="sm"
         >

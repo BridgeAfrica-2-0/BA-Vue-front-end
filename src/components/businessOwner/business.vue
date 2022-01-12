@@ -21,7 +21,7 @@
               /></b-tab>
               <b-tab :title="$t('businessowner.Market')"><MarketPlace /></b-tab>
               <b-tab :title="$t('profileowner.Networks')">
-                <Networks />
+                <Networks type="business" />
               </b-tab>
               <b-tab :title="$t('businessowner.Community')"
                 ><Followers
@@ -40,7 +40,7 @@ import About from "./tabs/about";
 import Media from "@/components/owner/tabs/media";
 import MarketPlace from "./tabs/marketPlace";
 import Followers from "./tabs/memberNetwork";
-import Networks from '@/components/owner/tabs/networks';
+import Networks from "@/components/owner/tabs/networks";
 import HeadPageOwner from "@/components/businessOwner/headPageOwner";
 export default {
   name: "Home",

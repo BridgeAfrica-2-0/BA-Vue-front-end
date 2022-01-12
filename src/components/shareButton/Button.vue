@@ -5,9 +5,27 @@
       :title="$t('search.Share_to_people')"
       :placeholder="$t('search.Search_for_people')"
       subtitle="All peoples"
-      :type="'network'"
+      :type="'people'"
       :post="post"
-    />
+      :listElmts="users"
+      :isCommunity="isCommunity"
+    >
+      <template v-slot:owner>
+        <div class="d-flex align-items-center py-3 px-2 mb-2 border">
+          <b-avatar class="mr-3" :src="profile.profile_picture"></b-avatar>
+          <div>
+            <span class="mr-auto">{{ $t("search.Share_Post_As") }}</span
+            ><br />
+            <span class="mr-auto bold">{{ profile.name }}</span>
+            <p>
+              <i class="small">
+                {{ post.content }}
+              </i>
+            </p>
+          </div>
+        </div>
+      </template>
+    </Box>
     <!-- Share to people -->
 
     <Box
@@ -18,6 +36,8 @@
       :type="'network'"
       :post="post"
       :update="update"
+      :listElmts="networks"
+      :isCommunity="isCommunity"
     >
       <template v-slot:owner>
         <div class="d-flex align-items-center py-3 px-2 mb-2 border">
@@ -72,6 +92,8 @@
       :type="'business'"
       :post="post"
       :update="update"
+      :listElmts="bizs"
+      :isCommunity="isCommunity"
     >
       <template v-slot:owner>
         <div class="d-flex align-items-center py-3 px-2 mb-2 border">
@@ -118,7 +140,9 @@
           <b-avatar
             variant="light"
             src="/icons/profile.png"
-            square="true"
+            size="24px"
+            class="icon-wh"
+            :square="true"
           ></b-avatar>
         </span>
         <div class="d-flex flex-column ml-1">
@@ -134,8 +158,10 @@
         <span class="text-ored">
           <b-avatar
             variant="light"
+            class="icon-wh"
             src="/icons/newsfeed.png"
-            square="true"
+            size="24px"
+            :square="true"
           ></b-avatar>
         </span>
         <div class="d-flex flex-column ml-1">
@@ -152,7 +178,9 @@
           <b-avatar
             variant="light"
             src="/icons/network.png"
-            square="true"
+            size="24px"
+            class="icon-wh"
+            :square="true"
           ></b-avatar>
         </span>
         <div class="d-flex flex-column ml-1">
@@ -169,7 +197,9 @@
           <b-avatar
             variant="light"
             src="/icons/business.png"
-            square="true"
+            size="24px"
+            class="icon-wh"
+            :square="true"
           ></b-avatar>
         </span>
         <div class="d-flex flex-column ml-1">
@@ -179,7 +209,7 @@
 
       <b-dropdown-item
         class="d-flex py-2 cursor-pointer"
-        id="sharing-community"
+        :id="`sharing-community-${uuid}`"
         data-toggle="popover"
         role="button"
         data-original-title=""
@@ -187,8 +217,10 @@
         <span class="text-ored">
           <b-avatar
             variant="light"
+            class="icon-wh"
             src="/icons/community.png"
-            square="true"
+            size="24px"
+            :square="true"
           ></b-avatar>
         </span>
         <div class="d-flex flex-column ml-1">
@@ -196,11 +228,18 @@
         </div>
       </b-dropdown-item>
 
-      <b-popover target="sharing-community" triggers="hover">
+      <b-popover :target="`sharing-community-${uuid}`" triggers="hover focus">
         <div class="popover-body">
           <div
-            @mousedown="open('modal-1')"
-            class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer"
+            @mousedown="open(`modal-1-${uuid}`, 'people')"
+            class="
+              d-inline-flex
+              flex-row
+              align-items-center
+              suggest-item
+              py-2
+              cursor-pointer
+            "
           >
             <span class="text-ored">
               <b-icon-bell-fill class="col-bg"></b-icon-bell-fill>
@@ -212,13 +251,23 @@
 
           <div
             v-if="'network' !== type"
-            class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer"
+            class="
+              d-inline-flex
+              flex-row
+              align-items-center
+              suggest-item
+              py-2
+              cursor-pointer
+            "
+            @mousedown="open(`modal-2-${uuid}`, 'network')"
           >
             <span class="text-ored">
               <b-avatar
+                size="24px"
                 variant="light"
                 src="/icons/network.png"
-                square="true"
+                class="icon-wh"
+                :square="true"
               ></b-avatar>
             </span>
             <div class="d-flex flex-column ml-3">
@@ -228,14 +277,23 @@
 
           <div
             v-if="'business' !== type"
-            @mousedown="open(`modal-5-${uuid}`)"
-            class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer"
+            @mousedown="open(`modal-3-${uuid}`, 'business')"
+            class="
+              d-inline-flex
+              flex-row
+              align-items-center
+              suggest-item
+              py-2
+              cursor-pointer
+            "
           >
             <span class="text-ored">
               <b-avatar
                 variant="light"
+                class="icon-wh"
                 src="/icons/business.png"
-                square="true"
+                size="24px"
+                :square="true"
               ></b-avatar>
             </span>
             <div class="d-flex flex-column ml-3">
@@ -245,12 +303,19 @@
         </div>
       </b-popover>
 
-      <b-dropdown-item class="d-flex py-2 cursor-pointer">
+      <b-dropdown-item
+        class="d-flex py-2 cursor-pointer"
+        v-clipboard:copy="link"
+        v-clipboard:success="onCopy"
+        v-clipboard:error="onError"
+      >
         <span class="text-ored">
           <b-avatar
             variant="light"
+            class="icon-wh"
             src="/icons/copy.png"
-            square="true"
+            size="24px"
+            :square="true"
           ></b-avatar>
         </span>
         <div class="d-flex flex-column ml-1">
@@ -268,8 +333,10 @@
         <span class="text-ored">
           <b-avatar
             variant="light"
+            size="24px"
+            class="icon-wh"
             src="/icons/share_via.png"
-            square="true"
+            :square="true"
           ></b-avatar>
         </span>
         <div class="d-flex flex-column ml-1">
@@ -285,48 +352,84 @@
         <div class="popover-body">
           <div
             @mousedown="onShareVia('email')"
-            class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer"
+            class="
+              d-inline-flex
+              flex-row
+              align-items-center
+              suggest-item
+              py-2
+              cursor-pointer
+            "
           >
             <b-avatar
+              size="24px"
+              class="mr-2"
               variant="light"
               src="/icons/email.png"
-              square="true"
+              :square="true"
             ></b-avatar>
             <span>{{ $t("search.Share_via") }} Email</span>
           </div>
 
           <div
             @mousedown="onShareVia('facebook')"
-            class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer"
+            class="
+              d-inline-flex
+              flex-row
+              align-items-center
+              suggest-item
+              py-2
+              cursor-pointer
+            "
           >
             <b-avatar
+              size="24px"
+              class="mr-2"
               variant="light"
               src="/icons/facebook.png"
-              square="true"
+              :square="true"
             ></b-avatar>
             <span>{{ $t("search.Share_via") }} Facebook</span>
           </div>
 
           <div
             @mousedown="onShareVia('twitter')"
-            class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer"
+            class="
+              d-inline-flex
+              flex-row
+              align-items-center
+              suggest-item
+              py-2
+              cursor-pointer
+            "
           >
             <b-avatar
+              size="24px"
+              class="mr-2"
               variant="light"
               src="/icons/twitter.png"
-              square="true"
+              :square="true"
             ></b-avatar>
             <span>{{ $t("search.Share_via") }} Twitter</span>
           </div>
 
           <div
             @mousedown="onShareVia('whatsapp')"
-            class="d-inline-flex flex-row align-items-center suggest-item py-2 cursor-pointer"
+            class="
+              d-inline-flex
+              flex-row
+              align-items-center
+              suggest-item
+              py-2
+              cursor-pointer
+            "
           >
             <b-avatar
+              size="24px"
+              class="mr-2"
               variant="light"
               src="/icons/whatsapp.png"
-              square="true"
+              :square="true"
             ></b-avatar>
             <span>{{ $t("search.Share_via") }} Whatsapp </span>
           </div>
@@ -399,67 +502,52 @@ export default {
     strategy: false,
     uuid: null,
     update: null,
+    link: null,
+    isCommunity: false,
   }),
 
   created() {
     this.uuid = this.post.post_id ? this.post.post_id : this.post.id;
     this.type = this.profile.user_type;
+    this.link = `${window.location.protocol}//${window.location.host}/search?uuid=${this.post.id}`;
+  },
+  mounted() {
+    this.getUsers("");
+    this.getBizs();
+    this.getNetworks();
   },
 
   computed: {
     ...mapGetters({
       profile: "auth/profilConnected",
     }),
-
+    users() {
+      return this.$store.getters["userChat/getUsers"];
+    },
+    bizs() {
+      return this.$store.getters["userChat/getBizs"];
+    },
+    networks() {
+      return this.$store.getters["userChat/getNets"];
+    },
     isYourOwnPost() {
-      const isItOwnerPage =
-        this.$route.name == "BusinessOwner" ||
-        this.$route.name == "profile_owner" ||
-        this.$route.name == "NetworkEditors" ||
-        this.$route.name == "networks"
-          ? false
-          : true;
-
       const isYourOwn =
         this.profile.id == this.post.user_id &&
         this.profile.user_type == this.post.poster_type;
 
-      return isItOwnerPage ? (isYourOwn ? false : true) : false;
+      return isYourOwn ? false : true;
     },
 
     isBusiness() {
-      const isItOwnerPage =
-        this.$route.name == "BusinessOwner" ||
-        this.$route.name == "profile_owner"
-          ? true
-          : false;
+      const authUserIsBusiness = this.profile.user_type == "business";
 
-      const isYourOwn =
-        this.profile.id == this.post.user_id &&
-        this.profile.user_type == this.post.poster_type;
-
-      return !isItOwnerPage
-        ? isYourOwn && this.$route.name == "dashboard"
-          ? false
-          : true
-        : true;
+      return authUserIsBusiness ? false : true;
     },
 
     isNetwork() {
-      const isItOwnerPage =
-        this.$route.name == "NetworkEditors" || this.$route.name == "networks"
-          ? true
-          : false;
+      const authUserIsNetwork = this.profile.user_type == "network";
 
-      const isYourOwn =
-        this.profile.id == this.post.user_id &&
-        this.profile.user_type == this.post.poster_type;
-
-      return !isItOwnerPage
-        ? isYourOwn && this.$route.name == "dashboard"
-          ? false
-          : true
-        : false;
+      return authUserIsNetwork ? false : true;
     },
   },
 
@@ -478,16 +566,51 @@ export default {
   },
 
   methods: {
+    getUsers(keyword) {
+      this.$store.dispatch("userChat/GET_USERS", keyword);
+    },
+    getBizs(keyword) {
+      this.$store.dispatch("businessChat/GET_BIZS", keyword);
+    },
+    getNetworks(keyword) {
+      this.$store.dispatch("networkChat/GET_BIZS", keyword);
+    },
+
+    onCopy: function (e) {
+      this.flashMessage.show({
+        status: "success",
+        blockClass: "custom-block-class",
+        message: "You just copied the link to the clipboard: " + e.text,
+      });
+    },
+
+    onError: function (e) {
+      this.flashMessage.show({
+        status: "success",
+        blockClass: "custom-block-class",
+        message: "Failed to copy the text to the clipboard",
+      });
+    },
+
     onShareVia(type) {
       const elm = document.querySelector(`#${type}-${this.uuid}`);
       elm.click();
     },
 
-    open(id) {
+    open(id, status = null) {
       this.modal = id;
 
-      if ([`modal-3-${this.uuid}`, `modal-2-${this.uuid}`].includes(id))
+      if (
+        [
+          `modal-3-${this.uuid}`,
+          `modal-2-${this.uuid}`,
+          `modal-1-${this.uuid}`,
+        ].includes(id)
+      ) {
         this.update = id;
+        this.isCommunity = status;
+      }
+
       this.$bvModal.show(id);
     },
 
@@ -507,7 +630,9 @@ export default {
       const request = await this.$repository.share.userPost(data, [
         `${this.post.poster_type}`,
       ]);
+
       loader.hide();
+
       if (request.success)
         this.flashMessage.success({
           time: 5000,

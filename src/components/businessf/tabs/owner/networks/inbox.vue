@@ -2344,6 +2344,56 @@
                                         </span>
                                       </b-form-checkbox>
                                     </b-form-checkbox-group>
+
+                                  </b-form-group>
+                                  </td>
+                                </tr>
+                              </div>
+                              <h2 v-else>{{ $t("general.No_Business") }}</h2>
+
+                              <!-- End Chats -->
+                            </b-tab>
+                            <b-tab :title="$t('general.Network')" @click="getNetworks()">
+                              <b-row>
+                                <b-col>
+                                  <b-card>
+                                    <b-row class="text-center">
+                                      <b-col>
+                                        <b-form-group>
+                                          <b-form-radio-group
+                                            id="radio-group-1"
+                                            v-model="selectedselectOption"
+                                            :options="selectOptions"
+                                            name="radio-options"
+                                            @change="selectedAllMulty"
+                                          ></b-form-radio-group>
+                                        </b-form-group>
+                                      </b-col>
+                                    </b-row>
+                                  </b-card>
+                                </b-col>
+                              </b-row>
+
+                              <div v-if="loader" class="text-center">
+                                <b-spinner
+                                  variant="primary"
+                                  label="Spinning"
+                                  class="centralizer"
+                                ></b-spinner>
+                              </div>
+                              <div v-if="bizs.length">
+                                <tr
+                                  v-for="(biz, index) in bizs"
+                                  :key="index"
+                                  class="p-2 message"
+                                >
+                                  <td>
+                                    <b-form-group>
+                                      <b-form-checkbox-group
+                                        id="checkbox-group-2"
+                                        v-model="selectedNetwork"
+                                        name="flavour-2" />
+
                                   </b-form-group>
                                 </td>
                               </tr>

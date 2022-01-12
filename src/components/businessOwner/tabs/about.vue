@@ -846,14 +846,24 @@ export default {
     selectedcategories: function() {
       let selectedUsers = [];
       this.multiselecvalue.forEach((item) => {
-        selectedUsers.push(item.category_id);
+        if(item.category_id){
+
+          selectedUsers.push(item.category_id);
+        }else {
+           selectedUsers.push(item.id);
+        }
       });
       return selectedUsers;
     },
     selectedsubcategories: function() {
       let sub_cat = [];
       this.filterselectvalue.forEach((item) => {
-        sub_cat.push(item.subcategory_id);
+        if(item.subcategory_id){
+
+          sub_cat.push(item.subcategory_id);
+        }else {
+          sub_cat.push(item.id);
+        }
       });
       return sub_cat;
     },
@@ -929,7 +939,7 @@ export default {
         if (item.subcategoryId) {
           keyword += item.subcategoryId + ",";
         } else {
-          keyword += item.subcategory_id + ",";
+          keyword += item.id + ",";
         }
       });
 
@@ -1069,7 +1079,7 @@ export default {
               division: this.ArrayString(this.selecteddivision), //this.business_about_input.division[0].division_id,
               council: this.ArrayString(this.selectedmunicipality), //this.business_about_input.council[0].council_id,
               neigborhood: this.ArrayString(this.selectedlocality), //this.business_about_input.council[0].neighborhood_id,
-              locality: this.business_about_input.locality,
+              
               city: this.business_about_input.city,
               openHours: this.business_about_input.business_open_hours,
               lat: this.business_about_input.lat,
@@ -1091,6 +1101,11 @@ export default {
                 "update user business about response ++++++",
                 response
               );
+              this.flashMessage.show({
+              status: "success",
+              blockClass: "custom-block-class",
+              message: this.$t("businessowner.Business_Profile_updated"),
+              });
               this.loadBusinessAbout();
               this.business_about = this.$store.getters[
                 "businessOwner/getBusinessAbout"

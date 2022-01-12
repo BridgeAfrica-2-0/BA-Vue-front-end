@@ -118,7 +118,7 @@
                               ></b-avatar>
 
                               <h6 class="mt-2 d-inline-block ml-2">
-                                <b class="bold"> {{ chat.name }}</b>
+                                <b class="bold"> {{ formatName(chat)}} </b>
                                 <p class="duration">{{ chat.message }}</p>
                               </h6>
                             </span>
@@ -211,7 +211,7 @@
                               ></b-avatar>
 
                               <h6 class="mt-2 d-inline-block ml-2">
-                                <b class="bold"> {{ chat.name }}</b>
+                                <b class="bold"> {{ formatName(chat) }}</b>
                                 <p class="duration">{{ chat.message }}</p>
                               </h6>
                             </span>
@@ -301,7 +301,7 @@
                               ></b-avatar>
 
                               <h6 class="mt-2 d-inline-block ml-2">
-                                <b class="bold"> {{ chat.name }}</b>
+                                <b class="bold"> {{ formatName(chat) }}</b>
                                 <p class="duration">{{ chat.message }}</p>
                               </h6>
                             </span>
@@ -346,11 +346,11 @@
                   <b-avatar
                     variant="primary"
                     :src="
-                      chatSelected.profile_picture
-                        ? chatSelected.profile_picture
-                        : chatSelected.logo_path
-                        ? chatSelected.logo_path
-                        : chatSelected.image
+                      chatSelected.chat.profile_picture
+                        ? chatSelected.chat.profile_picture
+                        : chatSelected.chat.logo_path
+                        ? chatSelected.chat.logo_path
+                        : chatSelected.chat.image
                     "
                     size="60"
                   ></b-avatar>
@@ -674,6 +674,8 @@
               </b-row>
               <b-row>
                 <b-col class="new-msg-filter-list">
+                  <h3>{{ type }}</h3>
+
                   <div v-if="loader" class="text-center mt-12 pt-12">
                     <b-spinner variant="primary" label="Spinning"></b-spinner>
                   </div>
@@ -908,7 +910,7 @@
                               ></b-avatar>
 
                               <h6 class="mt-2 d-inline-block ml-2">
-                                <b class="bold"> {{ chat.name }}</b>
+                                <b class="bold"> {{ formatName(chat) }}</b>
                                 <p class="duration">{{ chat.message }}</p>
                               </h6>
                             </span>
@@ -1001,7 +1003,7 @@
                               ></b-avatar>
 
                               <h6 class="mt-2 d-inline-block ml-2">
-                                <b class="bold"> {{ chat.name }}</b>
+                                <b class="bold"> {{ formatName(chat) }}</b>
                                 <p class="duration">{{ chat.message }}</p>
                               </h6>
                             </span>
@@ -1094,7 +1096,7 @@
                               ></b-avatar>
 
                               <h6 class="mt-2 d-inline-block ml-2">
-                                <b class="bold"> {{ chat.name }}</b>
+                                <b class="bold"> {{ formatName(chat) }}</b>
                                 <p class="duration">{{ chat.message }}</p>
                               </h6>
                             </span>
@@ -1661,6 +1663,7 @@ export default {
       this.mobile = this.screenX < 930;
     },
   },
+
   computed: {
     ctaSelected() {
       return this.$store.getters["businessChat/getSelectedChat"];
@@ -1708,6 +1711,7 @@ export default {
       }
     },
   },
+
   mounted() {
     this.mobile = this.screenWidth < 930;
     // log("currentUser",this.currentUser)
@@ -1753,6 +1757,29 @@ export default {
     this.socketListenners();
   },
   methods: {
+    formatName(value) {
+      var name = "";
+      console.log("Value:", value);
+      console.log("Current:", this.currentUser);
+      if (this.type == "user") {
+        name =
+          value.sender.id == this.currentUser.user.id
+            ? value.receiver.name
+            : value.sender.name;
+      } else if (this.type == "business") {
+        name = value.receiver_business
+          ? value.receiver_business.name
+          : value.sender_business.name;
+      } else if (this.type == "network") {
+        name = value.receiver_network
+          ? value.receiver_network.name
+          : value.sender_network
+          ? value.sender_network.name
+          : value.name;
+      }
+
+      return name;
+    },
     getImage(data) {
       // console.log("data IN", data);
       let image = data.image;

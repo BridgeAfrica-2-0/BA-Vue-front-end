@@ -18,7 +18,9 @@
                   <h1 class="mt-4 title text-bold">
                     {{
                       currentBiz.name
-                        ? currentBiz.name.split(" ")[0]
+                        ? currentBiz.name.length > 7
+                          ? currentBiz.name.substring(0, 6) + "..."
+                          : currentBiz.name
                         : "loading..."
                     }}
                   </h1>
@@ -39,7 +41,6 @@
                       <b-icon
                         class="h2 primary float-right"
                         icon="pencil-square"
-                        @click="this.newMsg = !this.newMsg"
                       ></b-icon>
                     </template>
                     <b-dropdown-item
@@ -134,7 +135,7 @@
                                 ></b-avatar>
 
                                 <h6 class="mt-2 d-inline-block ml-2">
-                                  <b class="bold"> {{ chat.name }}</b>
+                                  <b class="bold"> {{ formatName(chat) }}</b>
                                   <p class="duration">{{ chat.message }}</p>
                                 </h6>
                               </span>
@@ -229,7 +230,7 @@
                                 ></b-avatar>
 
                                 <h6 class="mt-2 d-inline-block ml-2">
-                                  <b class="bold"> {{ chat.name }}</b>
+                                  <b class="bold"> {{ formatName(chat) }}</b>
                                   <p class="duration">{{ chat.message }}</p>
                                 </h6>
                               </span>
@@ -316,11 +317,16 @@
                               <b-avatar
                                 class="d-inline-block profile-pic"
                                 variant="primary"
-                                :src="chat.image"
+                                :src="
+                                  getImage({
+                                    type: 'network',
+                                    image: chat.image,
+                                  })
+                                "
                               ></b-avatar>
 
                               <h6 class="mt-2 d-inline-block ml-2">
-                                <b class="bold"> {{ chat.name }}</b>
+                                <b class="bold"> {{ formatName(chat) }}</b>
                                 <p class="duration">{{ chat.message }}</p>
                               </h6>
                             </span>
@@ -434,7 +440,7 @@
 
           <!-- selected Chat  -->
           <b-col
-            v-if="newMsg == false && info == false && !rightSide"
+            v-if="newMsg == false && info == false && rightSide == false"
             class="p-0 back-image"
           >
             <div>
@@ -464,7 +470,7 @@
                   </b-col>
 
                   <b-col class="col-sm-5" @click="info = true">
-                    <h4>{{ chatSelected.name }}</h4>
+                    <h4>{{ formatName(chatSelected.chat) }}</h4>
                     <!-- <p>{{ chatSelected }}</p> -->
                     <p
                       v-if="groupMembers && type == 'group'"
@@ -487,6 +493,17 @@
                       class="msg-icon primary icon-size float-right"
                       icon="search"
                       style="cursor: pointer"
+                    ></b-icon>
+                  </b-col>
+                </b-row>
+                <b-row class="desk" v-else>
+                  <b-col class="col-2 mt-3 ma-4 mr-auto">
+                    <b-icon
+                      @click="showMessages(true)"
+                      icon="arrow-left-square-fill"
+                      font-scale="1"
+                      aria-hidden="true"
+                      class="primary"
                     ></b-icon>
                   </b-col>
                 </b-row>
@@ -530,7 +547,7 @@
                       currentBiz.id != chat.businessID
                     "
                   >
-                    <b-row class="p-4">
+                    <b-row class="p-2">
                       <b-col>
                         <b v-if="type == 'group'">
                           {{ getName(chat) }}
@@ -569,7 +586,7 @@
                     </b-row>
                   </div>
                   <div v-else>
-                    <b-row class="p-4">
+                    <b-row class="p-2">
                       <b-col>
                         <p
                           v-if="chat.message"
@@ -603,14 +620,6 @@
                       </b-col>
                     </b-row>
                   </div>
-                </div>
-              </section>
-
-              <section v-else class="chats" style="margin-left: 1px" ref="feed">
-                <div class="mt-12 pt-12">
-                  <h1 class="text-center">
-                    {{ $t("businessowner.Select_a_chat") }}
-                  </h1>
                 </div>
               </section>
 
@@ -816,7 +825,7 @@
 
           <!-- New message -->
           <b-col
-            v-if="newMsg == true && info == false"
+            v-if="newMsg == true && info == false && rightSide == false"
             class="p-0 back-image"
             style="border: 1px solid gray"
           >
@@ -1446,7 +1455,9 @@
                   <h1 class="mt-4 title text-bold">
                     {{
                       currentBiz.name
-                        ? currentBiz.name.split(" ")[0]
+                        ? currentBiz.name.length > 8
+                          ? currentBiz.name.substring(0, 6) + "..."
+                          : currentBiz.name
                         : "loading..."
                     }}
                   </h1>
@@ -1564,7 +1575,7 @@
                                 ></b-avatar>
 
                                 <h6 class="mt-2 d-inline-block ml-2">
-                                  <b class="bold"> {{ chat.name }}</b>
+                                  <b class="bold"> {{ formatName(chat) }}</b>
                                   <p class="duration">{{ chat.message }}</p>
                                 </h6>
                               </span>
@@ -1659,7 +1670,7 @@
                                 ></b-avatar>
 
                                 <h6 class="mt-2 d-inline-block ml-2">
-                                  <b class="bold"> {{ chat.name }}</b>
+                                  <b class="bold"> {{ formatName(chat) }}</b>
                                   <p class="duration">{{ chat.message }}</p>
                                 </h6>
                               </span>
@@ -1745,11 +1756,16 @@
                               <b-avatar
                                 class="d-inline-block profile-pic"
                                 variant="primary"
-                                :src="chat.image"
+                                :src="
+                                  getImage({
+                                    type: 'network',
+                                    image: chat.image,
+                                  })
+                                "
                               ></b-avatar>
 
                               <h6 class="mt-2 d-inline-block ml-2">
-                                <b class="bold"> {{ chat.name }}</b>
+                                <b class="bold"> {{ formatName(chat) }}</b>
                                 <p class="duration">{{ chat.message }}</p>
                               </h6>
                             </span>
@@ -1881,7 +1897,7 @@
                   </b-col>
 
                   <b-col class="detail" @click="info = true">
-                    <h3>{{ chatSelected.name }}</h3>
+                    <h3>{{ formatName(chatSelected.chat) }}</h3>
                     <!-- <p>{{ chatSelected }}</p> -->
                     <p
                       v-if="groupMembers && type == 'group'"
@@ -1950,7 +1966,7 @@
                       currentBiz.id != chat.businessID
                     "
                   >
-                    <b-row class="p-4">
+                    <b-row class="p-2">
                       <b-col>
                         <b v-if="type == 'group'">
                           {{ getName(chat) }}
@@ -1989,7 +2005,7 @@
                     </b-row>
                   </div>
                   <div v-else>
-                    <b-row class="p-4">
+                    <b-row class="p-2">
                       <b-col>
                         <p
                           v-if="chat.message"
@@ -2952,6 +2968,7 @@ export default {
       this.mobile = this.screenX < 930;
     },
   },
+
   computed: {
     all() {
       return this.$store.getters["businessChat/getAll"];
@@ -3035,6 +3052,7 @@ export default {
   },
   mounted() {
     this.mobile = this.screenWidth < 930;
+    console.log("mobile:", this.mobile);
     if (this.chatList.length < 0) {
       this.getChatList({ type: "business" });
     }
@@ -3090,20 +3108,53 @@ export default {
     },
   },
   methods: {
+    formatName(value) {
+      var name = "";
+      console.log("Value:", value);
+      console.log("Current:", this.currentBizId);
+      if (this.type == "user") {
+        name = value.sender ? value.sender.name : value.receiver.name;
+      } else if (this.type == "business") {
+        name =
+          value.sender_business_id == this.currentBizId
+            ? value.receiver_business.name
+            : value.sender_business.name;
+      } else if (this.type == "network") {
+        name = value.receiver_network
+          ? value.receiver_network.name
+          : value.sender_network
+          ? value.sender_network.name
+          : value.name;
+      }
+
+      return name;
+    },
     getImage(data) {
       // console.log("data IN", data);
       let image = data.image;
       let finale = "";
-      let user = "...";
+      let user = require("@/assets/profile_white.png");
       let network = require("@/assets/network_default.png");
-      let business = require("@/assets/business_default.png");
+      let business = require("@/assets/business_white.png");
 
       if (data.type == "user") {
-        finale = image ? image : user;
+        finale = image
+          ? image.includes("profile_default.png")
+            ? user
+            : image
+          : user;
       } else if (data.type == "network") {
-        finale = image ? image : network;
+        finale = image
+          ? image.includes("network_default.png")
+            ? network
+            : image
+          : network;
       } else if (data.type == "business") {
-        finale = image ? image : business;
+        finale = image
+          ? image.includes("business_default.png")
+            ? business
+            : image
+          : business;
       }
 
       // console.log("debug ", finale);
@@ -3630,7 +3681,7 @@ export default {
       this.rightSide = false;
       console.log("hey");
       this.getList();
-      this.newMsg = !this.newMsg;
+      this.newMsg = true;
       this.show = false;
       this.bulk = arg.bulk;
       if (arg.bulk) {
@@ -3702,7 +3753,7 @@ export default {
 
 .chats {
   /* border: 2px solid green; */
-  height: 740px;
+  height: 540px;
   overflow-y: scroll;
   overflow-x: hidden;
 }
@@ -3727,7 +3778,7 @@ h1 {
 .messages {
   overflow-y: scroll;
   overflow-x: hidden;
-  height: 710px;
+  height: 500px;
 }
 .txt {
   font-size: 13px;
@@ -3822,7 +3873,7 @@ li {
   width: 100%;
 }
 .newMsg-bottom {
-  margin-top: 710px;
+  margin-top: 500px;
 }
 .new-msg {
   background-color: #ccc;

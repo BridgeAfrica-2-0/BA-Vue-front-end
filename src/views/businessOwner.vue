@@ -41,7 +41,7 @@
         <Settings v-bind:currenttab="selectedId" />
       </div>
     </div>
-    <Footer />
+    <Footer v-if="selectedId != '1'" />
   </div>
 </template>
 
@@ -73,12 +73,12 @@ export default {
       isloaded: false,
       url_data: null,
       items: [
-        { label: this.$t('search.Home'), icon: "" },
-        { label: this.$t('search.Inbox'), icon: "" },
-        { label: this.$t('search.Notification'), icon: "" },
-        { label: this.$t('search.Pending_Post'), icon: "" },
-        { label: this.$t('search.Insight'), icon: "" },
-        { label: this.$t('search.Settings'), icon: "" },
+        { label: this.$t("search.Home"), icon: "" },
+        { label: this.$t("search.Inbox"), icon: "" },
+        { label: this.$t("search.Notification"), icon: "" },
+        { label: this.$t("search.Pending_Post"), icon: "" },
+        { label: this.$t("search.Insight"), icon: "" },
+        { label: this.$t("search.Settings"), icon: "" },
       ],
       options: {
         activeColor: "#1d98bd",
@@ -86,8 +86,8 @@ export default {
     };
   },
   methods: {
-    pageChange(){
-      this.selectedId = 6
+    pageChange() {
+      this.selectedId = 6;
     },
     businessInfo() {
       this.$store
@@ -151,7 +151,6 @@ export default {
   },
 
   created() {
-
     let loader = this.$loading.show({
       container: this.$refs.wrapper,
       canCancel: true,
@@ -191,9 +190,8 @@ export default {
     //     }
     //   });
 
-
-     this.isloaded = true;
-        loader.hide()
+    this.isloaded = true;
+    loader.hide();
   },
   mounted() {
     if (this.$store.state.profileSettingsEdit.etat == 1) {

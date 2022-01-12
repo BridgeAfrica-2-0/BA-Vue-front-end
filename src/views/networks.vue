@@ -55,7 +55,7 @@
         </div>
       </div>
     </div>
-    <Footer />
+    <Footer v-if="selectedId != '1'"/>
   </div>
 </template>
 

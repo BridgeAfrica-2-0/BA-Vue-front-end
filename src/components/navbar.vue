@@ -459,7 +459,6 @@
               >Profile
               <hr class="h-divider" v-if="'user' === user.user_type" />
             </div>
-            <hr class="h-divider" />
             <router-link
               :to="{ name: 'orders' }"
               class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"

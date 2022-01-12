@@ -81,7 +81,7 @@
                   :key="index"
                   class="padding:50px"
                 >
-                  <b-dropdown-item class="ml-1" @click="getProducts()">
+                  <b-dropdown-item class="ml-1" @click="bcategory({ cat_id: category.category.id })">
                     {{ category.category.name }}
                   </b-dropdown-item>
                 </b-col>

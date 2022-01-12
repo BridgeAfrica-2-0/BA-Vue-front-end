@@ -182,7 +182,7 @@
 
                               <b-td class="a-text text">
                                 <b-link href="#">{{
-                                  getUserInfos.city ? getUserInfos.city.name : Null
+                                  getUserInfos.city
                                 }}</b-link>
                               </b-td>
                             </b-tr>
@@ -210,6 +210,7 @@
 
                               <b-modal
                                 id="modal-10"
+                                ref="modal-10"
                                 title="$t('settings.Edit_your_information_here')"
                                 hide-footer
                               >
@@ -320,11 +321,6 @@
                                       v-model="getUserInfos.city"
                                     />
                                   </div>
-                                  <div class="mb-3">
-                                    <label class="form-label">{{
-                                      message1
-                                    }}</label>
-                                  </div>
                                   <button
                                     class="btn btn-primary"
                                     @click="update"
@@ -391,13 +387,14 @@
                         label-class=" text"
                         class="mb-0"
                       >
-                        <b-form-input
-                          id="bname"
-                          type="password"
-                          placeholder=""
-                          required
+                        <VuePassword
                           v-model="newPass"
-                        ></b-form-input>
+                          id="password1"
+                          :strength="psw1Strength"
+                          type="password"
+                          @input="update1Strength"
+                          required
+                        />
                       </b-form-group>
                     </b-container>
                   </div>
@@ -413,22 +410,19 @@
                         label-class="text"
                         class="mb-0"
                       >
-                        <b-form-input
-                          id="bname"
-                          placeholder=""
-                          required
+                        <VuePassword
                           v-model="newPass1"
-                        >
-                        </b-form-input>
-                        <br />
-                        <p>{{ message }}</p>
+                          id="password2"
+                          type="password"
+                          :strength="psw2Strength"
+                          @input="update2Strength"
+                          required
+                        />
                         <br />
                         <button
                           class=" btn btn-primary"
                           @click="changePassword"
-                        >
-                          Change
-                        </button>
+                        >Change Password</button>
                       </b-form-group>
                     </b-container>
                   </div>
@@ -452,6 +446,7 @@ import Footer from '@/components/footer';
 import SettingsNotifications from '@/components/SettingsNotifications.vue';
 import Payment from "@/components/owner/settings/payment";
 import Blocking from "@/components/owner/settings/blocking";
+import VuePassword from 'vue-password';
 
 export default {
   components: {
@@ -460,6 +455,7 @@ export default {
     SettingsNotifications,
     Payment,
     Blocking,
+    VuePassword
   },
 
   computed: {
@@ -561,10 +557,28 @@ export default {
         { value: "male", text: "male" },
         { value: "female", text: "female" },
       ],
+      psw1Strength: 0,
+      psw2Strength: 0,
     };
   },
 
   methods: {
+    update1Strength(newPass){
+      console.log(newPass)
+      this.psw1Strength = this.checkPassword(newPass);
+    },
+    update2Strength(newPass1){
+      console.log(newPass1)
+      this.psw2Strength = this.checkPassword(newPass1);
+    },
+    checkPassword(pass){
+      let crossMinNum = pass.length > 4 ? 1 : 0;
+      let hasNum = /\d/.test(pass) ? 1 : 0;
+      let hasLetters = /[a-zA-Z]/.test(pass) ? 1 : 0;
+      let hasSymbols = /[ `!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?~]/.test(pass) ? 1 : 0;
+      return crossMinNum + hasNum + hasLetters + hasSymbols;
+    },
+
     userInfos() {
       this.$store
         .dispatch("profileSettingsEdit/userInfos")
@@ -604,7 +618,11 @@ export default {
         .then((response) => {
           console.log(response);
           console.log(this.getUserInfos);
-          this.message1 = response.data.message;
+          this.flashMessage.show({
+            status: "success",
+            message: response.data.message
+          });  
+          this.$refs['modal-10'].hide()
           this.userInfos();
         })
         .catch((err) => {
@@ -656,7 +674,10 @@ export default {
       formData2.append("password_confirmation", this.newPass1);
 
       if(this.newPass != this.newPass1){
-        this.message = "the password does not match" ;
+        this.flashMessage.show({
+          status: "warning",
+          message: "the password does not match"
+        }); 
          this.loading=false;
       }else{
 
@@ -666,14 +687,18 @@ export default {
       .then(response =>{
         console.log("------------------------");
         console.log(response.data.message);
-        this.message = response.data.message ;
-
+        this.flashMessage.show({
+          status: "success",
+          message: response.data.message
+        }); 
          this.loading=false;
         
       })
       .catch((err) => {
-       
-         this.message = "An error occured" ;
+        this.flashMessage.show({
+          status: "error",
+          message: "An error occured"
+        }); 
         console.log('--------- error: ');
           console.error(err);
            this.loading=false;

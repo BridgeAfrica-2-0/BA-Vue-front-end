@@ -34,8 +34,9 @@
                 </b-col>
                 <b-col>
                   <b-icon
+                    style="font-size: 38px !important"
                     @click="newMessage(true)"
-                    class="new-message primary icon-size float-right"
+                    class="h2 new-message primary icon-size float-right pr-3"
                     icon="pencil-square"
                   ></b-icon>
                 </b-col>
@@ -106,7 +107,7 @@
                           <b-col class="col-8">
                             <span style="display: inline-flex">
                               <b-avatar
-                                class="d-inline-block profile-pic"
+                                class="d-inline-block"
                                 variant="primary"
                                 :src="
                                   getImage({
@@ -401,7 +402,7 @@
               </div>
               <div v-else v-for="chat in userToUser" :key="chat.id">
                 <div v-if="currentUser.user.id != chat.sender_id">
-                  <b-row class="p-4">
+                  <b-row class="p-1">
                     <b-col>
                       <p v-if="chat.message" class="msg-text mt-0 text">
                         <span v-if="chat.attachment">
@@ -429,7 +430,7 @@
                   </b-row>
                 </div>
                 <div v-else>
-                  <b-row class="p-4">
+                  <b-row class="p-1">
                     <b-col>
                       <p
                         v-if="chat.message"
@@ -672,7 +673,7 @@
                 </b-col>
               </b-row>
               <b-row>
-                <b-col>
+                <b-col class="new-msg-filter-list">
                   <div v-if="loader" class="text-center mt-12 pt-12">
                     <b-spinner variant="primary" label="Spinning"></b-spinner>
                   </div>
@@ -825,7 +826,7 @@
                 <b-col>
                   <b-icon
                     @click="newMessage(true)"
-                    class="new-message primary icon-size float-right"
+                    class="new-message primary icon-size float-right h3 pr-6"
                     icon="pencil-square"
                   ></b-icon>
                 </b-col>
@@ -1196,7 +1197,7 @@
               </div>
               <div v-else v-for="chat in userToUser" :key="chat.id">
                 <div v-if="currentUser.user.id != chat.sender_id">
-                  <b-row class="p-4">
+                  <b-row class="p-2">
                     <b-col>
                       <p v-if="chat.message" class="msg-text mt-0 text">
                         <span v-if="chat.attachment">
@@ -1224,7 +1225,7 @@
                   </b-row>
                 </div>
                 <div v-else>
-                  <b-row class="p-4">
+                  <b-row class="p-2">
                     <b-col>
                       <p
                         v-if="chat.message"
@@ -1456,7 +1457,7 @@
                 </b-col>
               </b-row>
               <b-row>
-                <b-col>
+                <b-col class="new-msg-filter-list">
                   <div v-if="loader" class="text-center mt-12 pt-12">
                     <b-spinner variant="primary" label="Spinning"></b-spinner>
                   </div>
@@ -1489,6 +1490,7 @@
                       </div>
                     </div> -->
                   <table v-else class="table">
+                    <h3>{{ type }}</h3>
                     <tbody v-if="type == 'user'">
                       <tr
                         v-for="(user, index) in users"
@@ -1588,13 +1590,11 @@
         </div>
       </b-modal>
     </b-container>
-    <Footer />
   </div>
 </template>
 
 <script>
 import Navbar from "@/components/navbar";
-import Footer from "@/components/footer";
 import EmojiPicker from "vue-emoji-picker";
 import io from "socket.io-client";
 import moment from "moment";
@@ -1602,7 +1602,6 @@ import moment from "moment";
 export default {
   components: {
     Navbar,
-    Footer,
     EmojiPicker,
   },
   data() {
@@ -1758,9 +1757,9 @@ export default {
       // console.log("data IN", data);
       let image = data.image;
       let finale = "";
-      let user = require("@/assets/profile_default.png");
+      let user = require("@/assets/profile_white.png");
       let network = require("@/assets/network_default.png");
-      let business = require("@/assets/business_default.png");
+      let business = require("@/assets/business_white.png");
 
       if (data.type == "user") {
         finale = image ? image : user;
@@ -2070,6 +2069,9 @@ export default {
 </script>
 
 <style scoped>
+.b-avatar .b-avatar-img img {
+  background-color: white !important;
+}
 .table {
   display: block;
   position: static;
@@ -2078,7 +2080,7 @@ export default {
 .new-msg-filter-list {
   padding: 15px !important;
   /* border: 1px solid black; */
-  max-height: 700px !important;
+  max-height: 600px !important;
   overflow-y: auto;
   overflow-x: hidden;
   /* background-color: lightblue; */
@@ -2106,7 +2108,7 @@ export default {
 .chat-box {
   position: relative;
   border: solid 2px rgb(223, 223, 223);
-  margin-bottom: 100px;
+  /* margin-bottom: 100px; */
 }
 
 .chat-nav {
@@ -2118,7 +2120,7 @@ export default {
 }
 .chats {
   /* border: 2px solid green; */
-  height: 740px;
+  min-height: 540px;
   overflow-y: scroll;
   overflow-x: hidden;
 }
@@ -2142,7 +2144,7 @@ h1 {
 .messages {
   overflow-y: scroll;
   overflow-x: hidden;
-  height: 710px;
+  height: 500px;
 }
 .txt {
   font-size: 13px;
@@ -2244,12 +2246,26 @@ li {
   width: 100%;
 }
 .newMsg-bottom {
-  margin-top: 710px;
+  margin-top: 500px;
 }
 .new-msg {
   background-color: #ccc;
 }
 @media only screen and (max-width: 768px) {
+  .new-msg-filter-list {
+    height: 500px !important;
+  }
+  .messages {
+    height: 480px !important;
+  }
+  .newMsg-bottom {
+    margin-top: 480px !important;
+  }
+  .chats {
+    /* border: 2px solid green; */
+    min-height: 430px;
+  }
+
   .m-10 {
     margin-top: 10px;
   }

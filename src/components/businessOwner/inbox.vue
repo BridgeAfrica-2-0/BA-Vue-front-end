@@ -31,13 +31,13 @@
                   ></b-icon> -->
                   <b-dropdown
                     variant="white"
-                    toggle-class="text-decoration-none"
+                    toggle-class=""
                     no-caret
                     class="new-message"
                   >
                     <template #button-content>
                       <b-icon
-                        class="primary icon-size float-right"
+                        class="h2 primary float-right"
                         icon="pencil-square"
                         @click="this.newMsg = !this.newMsg"
                       ></b-icon>
@@ -1465,7 +1465,7 @@
                   >
                     <template #button-content>
                       <b-icon
-                        class="primary icon-size float-right"
+                        class="h2 primary icon-size float-right"
                         icon="pencil-square"
                         @click="this.newMsg = !this.newMsg"
                       ></b-icon>
@@ -3688,7 +3688,6 @@ export default {
 
 .chat-box {
   position: relative;
-
   border: solid 2px rgb(223, 223, 223);
   margin-bottom: 100px;
 }

@@ -1,6 +1,6 @@
 <template>
-  <header class=""> 
-    <nav class="navbar navbar-expand-xl p-3 mb-3 rounded" >
+  <header class="">
+    <nav class="navbar navbar-expand-xl p-3 mb-3 rounded">
       <div class="container-fluid">
         <div class="col-md-12 col-lg-2 col-xl-2 text-center">
           <span class="d-block d-lg-none">
@@ -28,11 +28,9 @@
                   class="input-group-text border-left-0 color-mobile"
                   style="width: 40px; border-right: none"
                 >
-                  <b-icon
-                    icon="search"
-                    style="color: #e75c18"
-                    font-scale="1.5"
-                  ></b-icon>
+                  <slot name="mobile">
+                    <Button @click.native="getKeyword" media="mobile" />
+                  </slot>
                 </span>
               </div>
 
@@ -42,7 +40,8 @@
                 data-toggle="popover"
                 class="form-control search-mobile"
                 style="border-left: none"
-                :placeholder="$t('general.Find_Pharmacies')"
+                :placeholder="$t('general.All')"
+                v-model="credentials.keyword"
                 aria-label=""
                 data-original-title=""
                 title=""
@@ -114,7 +113,7 @@
               />
 
               <slot name="button">
-                <Button @click.native="getKeyword" />
+                <Button @click.native="getKeyword" media="desktop" />
               </slot>
             </form>
           </span>
@@ -160,8 +159,7 @@
                 </router-link>
               </div>
 
-
-              <div  v-if="!islogin" class="nav-item" >
+              <div v-if="!islogin" class="nav-item">
                 <router-link
                   :to="{ name: 'signup' }"
                   class="nav-link text-dark hov"
@@ -170,8 +168,7 @@
                 </router-link>
               </div>
 
-
-              <div  v-if="!islogin" class="nav-item" >
+              <div v-if="!islogin" class="nav-item">
                 <router-link
                   :to="{ name: 'Login' }"
                   class="nav-link text-dark hov"
@@ -179,8 +176,6 @@
                   {{ $t("auth.login") }}
                 </router-link>
               </div>
-
-
 
               <!-- Messages Started -->
               <div v-if="islogin" class="nav-item">
@@ -318,7 +313,7 @@
                 {{ user.name }}
               </b-tooltip>
 
-              <div  v-if="islogin"  class="nav-item">
+              <div v-if="islogin" class="nav-item">
                 <a
                   id="other-menu"
                   class="nav-link text-dark arrow-down"
@@ -344,7 +339,9 @@
                       class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
                     >
                       <span class="mr-2"
-                        ><fas-icon class="violet search" :icon="['fas', 'user']"
+                        ><fas-icon
+                          class="violet search"
+                          :icon="['fas', 'user']"
                       /></span>
                       Profile
                     </a>
@@ -368,7 +365,9 @@
                       class="other-menu suggest-item cursor-pointer text-decoration-none text-dark w-full"
                     >
                       <span class="mr-2 w-full"
-                        ><fas-icon class="violet search" :icon="['fas', 'cogs']"
+                        ><fas-icon
+                          class="violet search"
+                          :icon="['fas', 'cogs']"
                       /></span>
                       {{ $t("general.Account_Settings") }}
                     </router-link>
@@ -424,7 +423,7 @@
         </div>
 
         <b-modal ref="setcat" id="myModallnav" hide-footer title=" ">
-          <div  v-if="islogin"  class="d-block d-lg-block d-xl-none">
+          <div v-if="islogin" class="d-block d-lg-block d-xl-none">
             <div class="mt-3">
               <div
                 class="d-inline-flex flex-row align-items-center"
@@ -538,7 +537,9 @@
               class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
             >
               <span class="mr-3"
-                ><fas-icon class="violet search" :icon="['fas', 'sign-out-alt']"
+                ><fas-icon
+                  class="violet search"
+                  :icon="['fas', 'sign-out-alt']"
               /></span>
               {{ $t("general.Logout") }}
             </a>
@@ -572,7 +573,7 @@ export default {
   props: {
     credentials: {
       type: Object,
-      default: function() {
+      default: function () {
         return {
           keyword: "",
           placeholder: this.$t("general.All"),
@@ -583,7 +584,7 @@ export default {
   data() {
     return {
       isActive: false,
-      islogin:true,
+      islogin: true,
       shownav: false,
       notifications: [],
       messages: [],
@@ -611,62 +612,62 @@ export default {
 
     this.islogin = this.$store.getters["auth/isLogged"];
 
-      this.islogin=this.$store.getters["auth/isLogged"];
-     
-     console.log(this.islogin);
-     console.log("yoo mother fucjjeryt");
-     
-     if(this.islogin){    
-    this.init();
-    this.userOwnPage = this.onRedirect(); 
+    this.islogin = this.$store.getters["auth/isLogged"];
 
-    this.messagePatterns = {
-      user: () => "/messages/latest/user",
-      business: () => `/messages/latest/${this.user.id}/business`,
-      network: () => `/messages/latest/${this.user.id}/network`,
-    };
+    console.log(this.islogin);
+    console.log("yoo mother fucjjeryt");
+
+    if (this.islogin) {
+      this.init();
+      this.userOwnPage = this.onRedirect();
+
+      this.messagePatterns = {
+        user: () => "/messages/latest/user",
+        business: () => `/messages/latest/${this.user.id}/business`,
+        network: () => `/messages/latest/${this.user.id}/network`,
+      };
       this.notificationPatterns = {
         user: () => "user/notification",
         business: () => `/notification/business/${this.user.id}`,
         network: () => `/notification/network/${this.user.id}`,
       };
 
-    this.redirectionPatterns = {
-      message: {
-        user: () => ({
-          name: "Nav Meassage",
-        }),
-        business: () => ({
-          name: "BusinessOwner",
-          params: { id: this.user.id },
-          query: { tabId: 1 },
-        }),
-        network: () => null,
-      },
-      notification: {
-        business: () => ({
-          name: "BusinessOwner",
-          params: { id: this.user.id },
-          query: { tabId: 2 },
-        }),
+      this.redirectionPatterns = {
+        message: {
+          user: () => ({
+            name: "Nav Meassage",
+          }),
+          business: () => ({
+            name: "BusinessOwner",
+            params: { id: this.user.id },
+            query: { tabId: 1 },
+          }),
+          network: () => null,
+        },
+        notification: {
+          business: () => ({
+            name: "BusinessOwner",
+            params: { id: this.user.id },
+            query: { tabId: 2 },
+          }),
 
-        user: () => ({
-          name: "settings",
-        }),
-        network: () => ({
-          name: "networks",
-          params: { id: this.user.id },
-          query: { tabId: 2 },
-        }),
-      },
-    };
+          user: () => ({
+            name: "settings",
+          }),
+          network: () => ({
+            name: "networks",
+            params: { id: this.user.id },
+            query: { tabId: 2 },
+          }),
+        },
+      };
 
-    this.updateNotificationEvent();
-     }
+      this.updateNotificationEvent();
+    }
   },
 
   watch: {
-    "$store.state.auth.profilConnected": function() {
+    "$store.state.auth.profilConnected": function () {
       this.updateNotificationEvent();
       this.userOwnPage = this.onRedirect();
     },
@@ -785,7 +786,7 @@ export default {
     },
 
     getKeyword() {
-      if (!this.searchOptions.keyword) return false;
+      if (!this.credentials.keyword) return false;
 
       if (this.$route.name != "Search") {
         console.log("the keyword is: ", this.credentials.keyword);
@@ -828,7 +829,7 @@ export default {
         .catch(() => console.log("error"));
     },
 
-    logout: async function() {
+    logout: async function () {
       let loader = this.$loading.show({
         container: this.$refs.formContainer,
         canCancel: true,
@@ -854,7 +855,7 @@ export default {
       loader.hide();
     },
 
-    switchToProfile: async function() {
+    switchToProfile: async function () {
       let loader = this.$loading.show({
         container: this.$refs.formContainer,
         canCancel: true,
@@ -878,12 +879,12 @@ export default {
       this.$refs.mobileinput.style.display = "block";
     },
 
-    getNetworks: async function() {
+    getNetworks: async function () {
       let request = await this.$repository.share.getNetworks();
       if (request.success) this.setNetworks(request.data);
     },
 
-    getBusiness: async function() {
+    getBusiness: async function () {
       let request = await this.$repository.share.getBusiness();
       if (request.success) this.setBusiness(request.data);
     },

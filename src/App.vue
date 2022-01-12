@@ -16,13 +16,15 @@
   </div>
 </template>
 <script>
-// import { Redis } from "@/mixins";
+
+import { Redis } from "@/mixins";
 
 import { mapGetters, mapActions } from "vuex";
 
 export default {
-  // mixins: [Redis],
-
+  
+  mixins: [Redis],
+  
   created(){
     console.log(navigator.onLine)
   },

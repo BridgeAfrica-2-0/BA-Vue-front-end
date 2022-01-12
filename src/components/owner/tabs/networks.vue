@@ -23,12 +23,14 @@
           :key="index"
         >
           <div class="people-style shadow h-100">
-            <div class="float-right others" v-if="type == 'others'">
+            <div class="float-right others" 
+            v-if="type == 'others' ? network.is_owner ? true:false : false">
               <b-dropdown
                 size="lg"
                 variant="link"
                 toggle-class="text-decoration-none"
                 no-caret
+              
               >
                 <template #button-content>
                   <b-icon
@@ -63,8 +65,7 @@
                   <strong class="title">
                     <router-link :to="'/network/' + network.id">
                       {{ network.name }}
-                      <span v-if="network.is_approve == 1"> (Approved) </span>
-                      <span v-else> (UnApproved) </span>
+                      <span>{{ `${network.is_owner ? network.is_approve ? '(Approved)' :'(UnApproved)' : ''}` }}</span>
                     </router-link>
                   </strong>
                   <br />
@@ -848,7 +849,7 @@ export default {
       console.log("network?page=" + this.page);
 
       let url = this.type == 'others' ? "network?page=" + this.page : 
-`business/network/${this.$route.params.id}?page=${this.page}`
+`business/network/${this.$route.params.id}/${this.page}`
       
       if (this.page == 1) {
         this.profileNetworks.splice(0);

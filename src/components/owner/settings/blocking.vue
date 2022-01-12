@@ -4,11 +4,12 @@
       <p class="t-left text">
         {{
           $t(
-            "businessowner.Blocked_users_can_no_longer_see_things_you_post_on_your_business"
+            "settings.Blocked_users_can_no_longer_see_things_you_post_on_your_business"
           )
-        }}, {{ $t("businessowner.invite_your_business_to_networks") }},
-        {{ $t("businessowner.start_a_conversation") }},
-        {{ $t("businessowner.or_follow_your_business") }}.
+        }}, 
+        {{ $t("settings.invite_your_business_to_networks") }},
+        {{ $t("settings.start_a_conversation") }},
+        {{ $t("settings.or_follow_your_business") }}.
       </p>
     </b-container>
 
@@ -32,7 +33,7 @@
             ></b-avatar>
             <span class="mr-auto">{{ blockuser.name }}</span>
             <span class="mr-auto" @click="UnblockBlockUser(blockuser, 'user')"
-              ><b-link href="#">{{ $t("businessowner.Unblock") }}</b-link></span
+              ><b-link href="#">{{ $t("settings.Unblock") }}</b-link></span
             >
           </b-list>
         </b-skeleton-wrapper>
@@ -41,7 +42,7 @@
     <b-container v-else>
       <b-card bg-variant="white" text-variant="black" class="text-center">
         <b-card-text
-          >{{ $t("businessowner.No_Blocked_User_Available") }}.</b-card-text
+          >{{ $t("settings.No_Blocked_User_Available") }}.</b-card-text
         >
       </b-card>
     </b-container>
@@ -71,7 +72,7 @@
             <span
               class="mr-auto"
               @click="UnblockBlockUser(blockbusines, 'business')"
-              ><b-link href="#">{{ $t("businessowner.Unblock") }}</b-link></span
+              ><b-link href="#">{{ $t("settings.Unblock") }}</b-link></span
             >
           </b-list>
         </b-skeleton-wrapper>
@@ -79,7 +80,7 @@
     </b-container>
     <b-container v-else>
       <b-card bg-variant="white" text-variant="black" class="text-center">
-        <b-card-text class="font-mobile-14">No Blocked Business Available.</b-card-text>
+        <b-card-text class="font-mobile-14">{{ $t("settings.No_Blocked_Business_Available") }}.</b-card-text>
       </b-card>
     </b-container>
 
@@ -103,7 +104,7 @@
             ></b-avatar>
             <span class="mr-auto">{{ blocknet.name }}</span>
             <span class="mr-auto" @click="UnblockBlockUser(blocknet, 'network')"
-              ><b-link href="#">{{ $t("businessowner.Unblock") }}</b-link></span
+              ><b-link href="#">{{ $t("settings.Unblock") }}</b-link></span
             >
           </b-list>
         </b-skeleton-wrapper>
@@ -111,7 +112,7 @@
     </b-container>
     <b-container v-else>
       <b-card bg-variant="white" text-variant="black" class="text-center">
-        <b-card-text class="font-mobile-14">No Blocked Network Available.</b-card-text>
+        <b-card-text class="font-mobile-14">{{ $t("settings.No_Blocked_Network_Available") }}.</b-card-text>
       </b-card>
     </b-container>
   </b-container>
@@ -213,7 +214,7 @@ export default {
           this.loading = false;
           this.flashMessage.show({
             status: "error",
-            message: this.$t("businessowner.Unable_to_Unblocked_User"),
+            message: this.$t("settings.Unable_to_Unblocked_User"),
           });
         });
     },

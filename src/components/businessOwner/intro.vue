@@ -138,7 +138,7 @@
     <b-modal
       id="bv-edit-about"
       hide-footer
-      :title="$t('businessowner.Edit_Address')"
+      :title="$t('businessowner.Edit_Business')"
       size="lg"
     >
       <b-form>

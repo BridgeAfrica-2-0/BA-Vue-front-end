@@ -392,8 +392,87 @@ export default {
      * @return void
      */
 
+    stringArray(words) {
+      let keyword = "";
+      words.map((item) => {
+        if (item.subcategoryId) {
+          keyword += item.subcategoryId + ",";
+        } else {
+          keyword += item.subcategory_id + ",";
+        }
+      });
+
+      return keyword.substring(0, keyword.length - 1);
+    },
+    stringArray1(words) {
+      let keyword = "";
+      words.map((item) => {
+        if (item.category_id) {
+          keyword += item.category_id + ",";
+        } else {
+          keyword += item.id + ",";
+        }
+      });
+      console.log("id ici ---", words, "---", keyword);
+      return keyword.substring(0, keyword.length - 1);
+    },
+    addFilter(newTag) {
+      const tag = {
+        name: newTag,
+        id: newTag.substring(0, 2) + Math.floor(Math.random() * 10000000),
+      };
+      this.multiselec.push(tag);
+      this.filterselectvalue.push(tag);
+    },
+
+    Region() {   console.log(this.selectedcountry,"-----", this.country)
+      let formData2 = new FormData();
+      formData2.append("countryId", this.selectedcountry);
+      this.$store
+        .dispatch("auth/region", formData2)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+    subcategories() {
+      console.log(
+        this.pcategories,
+        " subcategories here",
+        this.selectedcategories
+      );
+      let formData2 = new FormData();
+      formData2.append("categoryId", this.ArrayString(this.selectedcategories));
+      console.log("select cat ", this.ArrayString(this.selectedcategories));
+      this.$store
+        .dispatch("auth/subcategories", formData2)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+    addTag(newTag) {
+      const tag = {
+        name: newTag,
+        id: newTag.substring(0, 2) + Math.floor(Math.random() * 10000000),
+      };
+      this.multiselec.push(tag);
+      this.multiselecvalue.push(tag);
+    },
     businessInfos() {
-      this.$store.dispatch("businessOwner/businessInfo", this.url);
+      // this.$store.dispatch("businessOwner/businessInfo", this.$route.params.id);
+      this.$store
+      .dispatch("businessOwner/loadUserBusinessAbout", {
+        // business_abobusiness_id: this.business_about_input,
+        business_id: this.$route.params.id,
+      })
+      
     },
 
     change(val) {
@@ -567,6 +646,40 @@ export default {
   },
 
   computed: {
+    countries() {
+      return this.$store.state.auth.country;
+    },
+
+    regions() {
+      return this.$store.state.auth.region;
+    },
+    scategories() {
+      return this.$store.state.auth.subcategories;
+    },
+
+    pcategories() {
+      return this.$store.state.auth.categories;
+    },
+
+    selectedcountry: function () {
+      let sub_cat = [];
+    
+      this.country.forEach((item) => {
+        sub_cat.push(item.id);
+      });
+      return sub_cat;
+    },
+    selectedcategories: function () {
+      let selectedUsers = [];
+      this.multiselecvalue.forEach((item) => {
+        if (item.category_id) {
+          selectedUsers.push(item.category_id);
+        } else {
+          selectedUsers.push(item.id);
+        }
+      });
+      return selectedUsers;
+    },
     region() {
       let region = [];
       this.$store.state.auth.region.map((dat) => {
@@ -597,8 +710,11 @@ export default {
     this.businessInfos();
   },
   mounted() {
-    this.form = this.$store.state.businessOwner.businessInfo;
-
+    this.businessInfos();
+    this.form = JSON.parse(
+      JSON.stringify(this.$store.getters["businessOwner/getBusinessAbout"])
+    ); //this.$store.state.businessOwner.businessInfo;
+    this.editBusiness();
     this.getCountry();
     this.getCathegorie();
     this.setcoordintes();

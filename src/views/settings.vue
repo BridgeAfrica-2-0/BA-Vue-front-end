@@ -2,10 +2,10 @@
   <div ref="wrapper">
     <Navbar />
 
-    <div class="container wahala" v-if="getUserInfos">
+    <div class="container wahala" v-if="hasLoad">
       <b-row>
         <b-col cols="12" md="12" lg="12" xl="12">
-          <div>
+          <div class="mbl-wrap">
             <b-tabs
               pills
               :vertical="vertical"
@@ -30,7 +30,7 @@
                     <b-col cols="12" md="12">
                       <div>
                         <b-table-simple hover small caption-top responsive>
-                          <b-tbody v-if="getUserInfos.id">
+                           <b-tbody v-if="getUserInfos.id">
                             <b-tr>
                               <b-td class="a-text text">
                                 {{ $t("settings.Name") }}
@@ -51,7 +51,7 @@
 
                               <b-td class="text"
                                 ><b-link href="#">
-                                  http://blec.bridgeafrica.com
+                                  http://www.bridgeafrica.com
                                 </b-link>
                               </b-td>
                             </b-tr>
@@ -333,7 +333,7 @@
                             <br />
 
                             <br />
-                          </b-tbody>
+                          </b-tbody> 
                         </b-table-simple>
                       </div>
                     </b-col>
@@ -436,6 +436,7 @@
         <b-col> </b-col>
       </b-row>
     </div>
+
     <Footer />
   </div>
 </template>
@@ -536,9 +537,9 @@ export default {
 
   data() {
     return {
-      activeTab:0,
-      loading:false,
-      hasLoad:false,
+      activeTab: 0,
+      loading: false,
+      hasLoad: false,
       size: 0,
       selected: "",
       options: "",
@@ -666,8 +667,8 @@ export default {
         .finally(() => loader.hide());
     },
 
-    changePassword(){
-      this.loading=true;
+    changePassword() {
+      this.loading = true;
       let formData2 = new FormData();
       formData2.append("check_password", this.currentPass);
       formData2.append("password", this.newPass);
@@ -816,6 +817,24 @@ export default {
     font-size: 12px;
     padding-left: 10px;
     padding-right: 10px;
+  }
+  .mbl-wrap {
+    overflow: hidden;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+  }
+  .nav.nav-pills {
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    max-width: 500px;
+    overflow: auto;
+
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE 10+ */
+  }
+  .nav.nav-pills::-webkit-scrollbar {
+    display: none;
   }
 }
 </style>

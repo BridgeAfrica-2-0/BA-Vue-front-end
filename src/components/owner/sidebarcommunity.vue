@@ -127,7 +127,7 @@
 
 		computed: {
 			total() {
-				return this.$store.state.follower.Tcommunity;
+				return this.$store.state.profile.Tcommunity;
 			},
 		},
 
@@ -151,7 +151,7 @@
 			},
       getTcommunity() {
         this.$store
-          .dispatch("follower/Tcommunity", this.id)
+          .dispatch("profile/Tcommunity", this.id)
           .then(() => {
             console.log("ohh yeah");
           })

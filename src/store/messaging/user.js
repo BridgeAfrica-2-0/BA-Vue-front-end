@@ -111,7 +111,7 @@ export default {
                     let users = res.data.data
                     usersFinal = users.filter((user) => { return user.id != state.currentUser.user.id })
                     commit("setUsers", usersFinal);
-
+                    // commit("businessChat/setUsers", usersFinal);
                 })
                 .catch((err) => {
                     commit("setLoader", false);
@@ -152,7 +152,6 @@ export default {
         },
         // [NO BUG]
         GET_USERS_CHAT_LIST({ commit, state }, data) {
-            console.log("[debug data]:", data);
             commit("setUsers", []);
             console.log("currentuser:", state.currentUser.user);
 

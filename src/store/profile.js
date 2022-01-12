@@ -287,7 +287,6 @@ export default {
 
 
     setProfileNetwork(state, data) {
-      console.log("commiting this issdshd");
       state.profileNetwork = data;
     },
 
@@ -415,10 +414,7 @@ export default {
 
       return axios
         .delete('user/cover')
-        .then(({ data }) => {
-          console.log(data);
-        });
-
+        .then(({ data }) => data);
     },
 
 
@@ -429,9 +425,7 @@ export default {
         .then(({ data }) => {
           console.log(data);
         });
-
     },
-
 
 
     Tcommunity({ commit }) {
@@ -440,7 +434,6 @@ export default {
         .get('profile/total/community')
         .then(({ data }) => {
           commit('setTcommunity', data.data);
-          console.log(data);
         });
 
     },

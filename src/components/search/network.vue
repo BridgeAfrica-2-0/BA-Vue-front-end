@@ -61,13 +61,17 @@
                 <b-button
                   block
                   size="sm"
-                  class="b-background shadow"
+                  :id="'followbtn' + network.id"
+                  :class="network.is_follow !== 0 && 'u-btn'"
                   variant="primary"
                 >
-                  <i class="fas fa-user-plus fa-lg btn-icon"></i>
-                  <span class="btn-com" v-b-modal.modal-sm>{{
-                    $t("search.Community")
-                  }}</span>
+                  <i
+                    class="fas fa-lg btn-icon"
+                    :class="
+                      network.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'
+                    "
+                  ></i>
+                  <span class="btn-com"> {{ $t("dashboard.Community") }}</span>
                 </b-button>
               </b-col>
 
@@ -80,11 +84,18 @@
                   block
                   size="sm"
                   class="b-background shadow"
+                  :class="network.is_member !== 0 && 'u-btn'"
                   variant="primary"
+                  :id="'joinbtn' + network.id"
+                  @click="handleJoin(network)"
                 >
-                  <i class="fas fa-lg btn-icon fa-user-plus"></i>
-
-                  <span class="btn-text"> {{ $t("search.Join") }} </span>
+                  <i
+                    class="fas fa-lg btn-icon"
+                    :class="
+                      network.is_member != 0 ? 'fa-user-minus' : 'fa-user-plus'
+                    "
+                  ></i>
+                  <span class="btn-com"> {{ $t("general.Join") }} </span>
                 </b-button>
               </b-col>
             </b-row>

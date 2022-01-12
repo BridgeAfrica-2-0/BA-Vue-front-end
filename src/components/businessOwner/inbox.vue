@@ -835,13 +835,13 @@
                   <b-col>
                     <b-form-input
                       id="textarea"
-                      v-model="searchQuery"
+                      v-model="newSearchQuery"
                       class="input-background"
                       style="width: 100%"
                       :placeholder="
                         $t('businessowner.Type_the_name_of_person_or_Business')
                       "
-                      @keydown.enter="getList(searchQuery)"
+                      @keydown.enter="getList(newSearchQuery)"
                     ></b-form-input>
                   </b-col>
                 </b-row>
@@ -2233,13 +2233,13 @@
                   <b-col>
                     <b-form-input
                       id="textarea"
-                      v-model="searchQuery"
+                      v-model="newSearchQuery"
                       class="input-background"
                       style="width: 100%"
                       :placeholder="
                         $t('businessowner.Type_the_name_of_person_or_Business')
                       "
-                      @keydown.enter="getAll(searchQuery)"
+                      @keydown.enter="getList(newSearchQuery)"
                     ></b-form-input>
 
                     <br />
@@ -2928,15 +2928,15 @@ export default {
       chatSearchKeyword: "",
       tabIndex: 2,
       type: "",
-      // socket: io(process.env.VUE_APP_CHAT_SERVER_URL_DEV, {
+      // socket: io(process.env.NODE_SERVER_URL_DEV, {
       //   transports: ["websocket", "polling", "flashsocket"],
       // }),
-      socket: io(process.env.VUE_APP_CHAT_SERVER_URL, {
+      // socket: io(process.env.VUE_APP_CHAT_SERVER_URL, {
+      //   transports: ["websocket", "polling", "flashsocket"],
+      // }),
+      socket: io("http://localhost:7000", {
         transports: ["websocket", "polling", "flashsocket"],
       }),
-      // socket: io("http://localhost:7000", {
-      //   transports: ["websocket", "polling", "flashsocket"],
-      // }),
 
       nameSpace: {
         status: false,
@@ -2946,6 +2946,7 @@ export default {
       showsearch: true,
       selecteduser: false,
       searchQuery: "",
+      newSearchQuery: "",
       message: {},
       newMsg: false,
       show: false,
@@ -3056,12 +3057,14 @@ export default {
       Number(this.$route.params.id)
     );
     console.log("router params:", this.currentBizId);
-    this.tabIndex = Number(this.$route.query.msgTabId);
+    this.tabIndex = this.$route.query.msgTabId
+      ? Number(this.$route.query.msgTabId)
+      : "no";
 
     console.log("this.tabIndex:", this.tabIndex);
     // console.log("call to action checked:", this.ctaSelected);
 
-    if (this.tabIndex) {
+    if ([0, 1, 2].includes(this.tabIndex)) {
       console.log("here am i!");
       if (this.tabIndex == 1) {
         this.getChatList({ type: "business" });
@@ -3234,6 +3237,7 @@ export default {
       this.filePreview = false;
     },
     socketListenners() {
+      console.log("listenning...");
       // this.socket.on("generalMessage", (data) => {
       //   console.log("Received");
       //   console.log(data);
@@ -3267,7 +3271,6 @@ export default {
 
         this.saveMessage(this.formData);
       });
-      console.log("listenning...");
     },
     createGroup(receiver_business_id) {
       this.socket.emit("create-group", this.chatId);
@@ -3445,9 +3448,9 @@ export default {
       let receiver = { receiverID: data.id, keyword: null };
       if (data.type == "user") {
         this.histBizToUser(receiver);
-      } else if (data.type == "network") {
+      } else if (this.type == "network") {
         this.histBizToNetwork(receiver);
-      } else if (data.type == "business") {
+      } else if (this.type == "business") {
         this.histBizToBiz(receiver);
       } else {
         this.histBizToGroup(receiver);

@@ -165,7 +165,7 @@
               ><Media :type="'business'" :isEditor="false"
             /></b-tab>
             <b-tab :title="$t('general.Market')"><MarketPlace /></b-tab>
-            <b-tab :title="$t('general.Networks')"><Networks /></b-tab>
+            <b-tab :title="$t('general.Networks')"><Networks type="business" /></b-tab>
             <b-tab :title="$t('general.Community')"><Community /></b-tab>
           </b-tabs>
         </b-col>
@@ -180,7 +180,7 @@ import About from "./tabs/about";
 import Media from "@/components/owner/tabs/media";
 import MarketPlace from "./tabs/marketPlace";
 import Community from "@/components/businessOwner/tabs/memberNetwork";
-import Networks from "./tabs/networks";
+import Networks from "@/components/owner/tabs/networks";
 
 import axios from "axios";
 
@@ -243,6 +243,7 @@ export default {
     },
     
     currentTab: (newVal, oldVal) => {
+      localStorage.setItem("ba-business-active-tab", newVal);
       if (2 != newVal){
         this.showCoverAlbum = false
         this.key = this.key - 1

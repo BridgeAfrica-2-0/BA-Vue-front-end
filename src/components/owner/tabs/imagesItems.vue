@@ -173,7 +173,7 @@ export default {
     },
     //set an image as a cover photo
 
-    async onSetCoverPic() {
+    onSetCoverPic() {
       let loader = this.$loading.show({
         container: this.$refs[`sHowMedia-${this.im.id}`],
         canCancel: true,
@@ -204,7 +204,6 @@ export default {
         onCancel: this.onCancel,
         color: "#e75c18",
       });
-
       this.setProfilePic()
         .then(() => {
           try {

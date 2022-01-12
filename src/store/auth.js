@@ -35,11 +35,11 @@ export default {
     setUserData(state, userData) {
       localStorage.removeItem('user');
       state.user = userData;
-      state.profilConnected = { ...userData.user, user_type: 'user' };
+   
 
       localStorage.setItem('user', JSON.stringify(userData));
       axios.defaults.headers.common.Authorization = `Bearer ${userData.accessToken}`;
-
+      state.profilConnected = { ...userData.user, user_type: 'user' };
       const userInfo = localStorage.getItem('user');
     },
 
@@ -55,6 +55,13 @@ export default {
       state.user.user = userData.user;
       localStorage.setItem("user.user", JSON.stringify(userData.user))
     },
+
+    setSignupData(state, userData) {
+      state.user = userData;
+      localStorage.setItem("signup", JSON.stringify(userData.user))
+    },
+
+
 
     setneigbourhoods(state, data) {
       state.neigbourhoods = data;
@@ -249,7 +256,7 @@ export default {
     },
 
     verify({ commit }, mydata) {
-      const url = 'user/verifyOtp/' + this.state.auth.user.user.id;
+      const url = 'user/verifyOtp/' + mydata.id;
 
       return axios.post(url, mydata).then(({ data }) => {
         console.log(data.data);

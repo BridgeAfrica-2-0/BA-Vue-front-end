@@ -2,9 +2,9 @@
   <div ref="about">
     <b-icon icon="person-fill" class="icon-size" variant="primary"></b-icon>
     <b> {{ $t("businessowner.About") }} </b>
-
-    <hr />
-
+    
+    <hr /> 
+    
     <b-card>
       <div class="mb-3">
         <mapbox :business="business_about" />
@@ -419,12 +419,25 @@
             :multiple="true"
           ></multiselect>
         </b-form-group>
+         <label for="country" class="username">
+              {{ $t("businessowner.Region") }} :</label
+            ><br />
+
+            <multiselect
+              v-model="region"
+              track-by="id"
+              label="name"
+              :options="regions"
+              :multiple="true"
+            ></multiselect>
+
         <b-form-group
           id="input-group-2"
           :label="$t('businessowner.City')"
           label-for="input-2"
           label-size="sm"
         >
+
           <b-form-input
             id="input-1"
             class="mt-1"
@@ -648,40 +661,8 @@ export default {
         },
         { day: "Sunday", opening_time: null, closing_time: null, check: false },
       ],
-      business_about: {
-     
-      },
-      business_about_input: {
-        name: "TONTON LA FORCE",
-        logo_path: "http://localhost:8000/storage",
-        category: "Hourse Marketing",
-        keywords: null,
-        language: null,
-        location_description:
-          "Tempore quo soluta voluptates quis. Doloremque autem minus ut nisi molestias maiores cum. Et assumenda velit expedita et et sint sed in.",
-        website: null,
-        community: 6,
-        phone: null,
-        email: null,
-        business_open_hours: [
-          {
-            day: "monday",
-            opening_time: "09:05:12",
-            closing_time: "15:06:18",
-          },
-          {
-            day: "tuesday",
-            opening_time: "07:05:38",
-            closing_time: "14:05:43",
-          },
-        ],
-        region: null,
-        address: null,
-        city: null,
-        country: null,
-        lat: -56.200329,
-        lng: -6.249487,
-      },
+      business_about: {},
+      business_about_input: {},
       openNow: null,
       open: null,
     };
@@ -802,7 +783,7 @@ export default {
     selectedcountry: function() {
       let sub_cat = [];
       this.country.forEach((item) => {
-        sub_cat.push(item.country_id);
+        sub_cat.push(item.id);
       });
       return sub_cat;
     },
@@ -864,7 +845,9 @@ export default {
       words.map((item) => {
         keyword += item + ",";
       });
-
+    
+    
+     
         return keyword.substring(0, keyword.length-1);
      },
     loadBusinessAbout(){
@@ -972,34 +955,33 @@ export default {
           this.test();
           console.log(this.business_about_input);
 
-           var dat = {
-             business_id: this.$route.params.id,
-             data: {
-            name: this.business_about_input.name,
-            about_business: this.business_about_input.about_business,
-            categoryId:  this.stringArray1(this.multiselecvalue), //this.business_about_input.category[0].category_id,
-            subCategoryId: this.stringArray(this.filterselectvalue),//this.business_about_input.subCatFilter[0].subcategoryId,
-            filterId: this.ArrayString(this.select_filterss),
-            keywords: this.stringKeyword(this.business_about_input.keywords),
-            primary_phone: this.business_about_input.phone1,
-            secondary_phone :this.business_about_input.phone2,
-            website: this.business_about_input.website,
-            email: this.business_about_input.email,
-            country: this.business_about_input.country[0].country_id,
-            region: this.business_about_input.region[0].region_id,
-            division: this.business_about_input.division[0].division_id, 
-            council: this.business_about_input.council[0].council_id,
-            neigborhood: this.business_about_input.neigborhood[0].neighborhood_id,
-            // locality: this.business_about_input.locality,
-            city: this.business_about_input.city,
-            openHours: this.business_about_input.business_open_hours,
-            lat: this.business_about_input.lat,
-            lng: this.business_about_input.lng,
-            address: this.business_about_input.address
-            }
-            
-          } 
-          console.log(this.select_filterss, 'data editer --',dat)
+          var dat = {
+            business_id: this.$route.params.id,
+            data: {
+              name: this.business_about_input.name,
+              about_business: this.business_about_input.about_business,
+              categoryId: this.business_about_input.category[0].category_id,
+              subCategoryId: this.business_about_input.subCatFilter[0]
+                .subcategoryId,
+              filterId: this.business_about_input.filter[0].filter_id,
+              keywords: this.stringKeyword(this.business_about_input.keywords),
+              primary_phone: this.business_about_input.phone1,
+              secondary_phone: this.business_about_input.phone2,
+              website: this.business_about_input.website,
+              email: this.business_about_input.email,
+              country: this.business_about_input.country[0].country_id,
+              region: this.business_about_input.region[0].region_id,
+              division: this.business_about_input.division[0].division_id,
+              council: this.business_about_input.council[0].council_id,
+              neigborhood: this.business_about_input.council[0].neighborhood_id,
+              locality: this.business_about_input.locality,
+              city: this.business_about_input.city,
+              openHours: this.business_about_input.business_open_hours,
+              lat: this.business_about_input.lat,
+              lng: this.business_about_input.lng,
+              address: this.business_about_input.address,
+            },
+          };
           this.$store
             .dispatch(
               "businessOwner/updateUserBusinessAbout",
@@ -1015,7 +997,6 @@ export default {
                 response
               );
               this.loadBusinessAbout();
-
               this.business_about = this.$store.getters[
                 "businessOwner/getBusinessAbout"
               ];

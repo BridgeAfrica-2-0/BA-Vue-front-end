@@ -794,13 +794,13 @@
                 <b-col>
                   <b-form-input
                     id="textarea"
-                    v-model="searchQuery"
+                    v-model="newSearchQuery"
                     class="input-background"
                     style="width: 100%"
                     :placeholder="
                       $t('businessowner.Type_the_name_of_person_or_Business')
                     "
-                    @keydown.enter="getList(searchQuery)"
+                    @keydown.enter="getList(newSearchQuery)"
                   ></b-form-input>
                 </b-col>
               </b-row>
@@ -2241,13 +2241,13 @@
                 <b-col>
                   <b-form-input
                     id="textarea"
-                    v-model="searchQuery"
+                    v-model="newSearchQuery"
                     class="input-background"
                     style="width: 100%"
                     :placeholder="
                       $t('businessowner.Type_the_name_of_person_or_Business')
                     "
-                    @keydown.enter="getList(searchQuery)"
+                    @keydown.enter="getList(newSearchQuery)"
                   ></b-form-input>
                 </b-col>
               </b-row>
@@ -2338,6 +2338,57 @@
                                         </span>
                                       </b-form-checkbox>
                                     </b-form-checkbox-group>
+<<<<<<< HEAD
+=======
+                                  </b-form-group>
+                                  </td>
+                                </tr>
+                              </div>
+                              <h2 v-else>{{ $t("general.No_Business") }}</h2>
+
+                              <!-- End Chats -->
+                            </b-tab>
+                            <b-tab :title="$t('general.Network')" @click="getNetworks()">
+                              <b-row>
+                                <b-col>
+                                  <b-card>
+                                    <b-row class="text-center">
+                                      <b-col>
+                                        <b-form-group>
+                                          <b-form-radio-group
+                                            id="radio-group-1"
+                                            v-model="selectedselectOption"
+                                            :options="selectOptions"
+                                            name="radio-options"
+                                            @change="selectedAllMulty"
+                                          ></b-form-radio-group>
+                                        </b-form-group>
+                                      </b-col>
+                                    </b-row>
+                                  </b-card>
+                                </b-col>
+                              </b-row>
+
+                              <div v-if="loader" class="text-center">
+                                <b-spinner
+                                  variant="primary"
+                                  label="Spinning"
+                                  class="centralizer"
+                                ></b-spinner>
+                              </div>
+                              <div v-if="bizs.length">
+                                <tr
+                                  v-for="(biz, index) in bizs"
+                                  :key="index"
+                                  class="p-2 message"
+                                >
+                                  <td>
+                                    <b-form-group>
+                                      <b-form-checkbox-group
+                                        id="checkbox-group-2"
+                                        v-model="selectedNetwork"
+                                        name="flavour-2" />
+>>>>>>> main
                                   </b-form-group>
                                 </td>
                               </tr>
@@ -2966,6 +3017,7 @@ export default {
       showsearch: true,
       selecteduser: false,
       searchQuery: "",
+      newSearchQuery: "",
       message: {},
       newMsg: false,
       show: false,
@@ -3088,14 +3140,16 @@ export default {
       Number(this.$route.params.id)
     );
     console.log("router params:", this.currentBizId);
-    this.tabIndex = this.$route.query.msgTabId;
+    this.tabIndex = this.$route.query.msgTabId
+      ? Number(this.$route.query.msgTabId)
+      : "no";
 
     console.log("this.tabIndex:", this.tabIndex);
     console.log("Current biz:", this.currentBiz);
 
     // console.log("call to action checked:", this.ctaSelected);
 
-    if (this.tabIndex) {
+    if ([0, 1, 2].includes(this.tabIndex)) {
       console.log("here am i!");
       if (this.tabIndex == 1) {
         this.getChatList({ type: "business" });

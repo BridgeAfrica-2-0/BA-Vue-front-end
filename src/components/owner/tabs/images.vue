@@ -121,7 +121,6 @@ export default {
       type: String,
       required: true,
     },
-
     isAlbum: {
       type: Boolean,
       default: function() {
@@ -230,6 +229,9 @@ export default {
   destroyed() {
     this.$emit("reste");
   },
+  // computed: mapGetters({
+  //   auth: "auth/profilConnected",
+  // }),
 
   methods: {
     ...mapActions({

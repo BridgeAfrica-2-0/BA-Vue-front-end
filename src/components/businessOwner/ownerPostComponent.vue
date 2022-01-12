@@ -23,7 +23,6 @@
               {{ item.user_name }}
             </h5>
           </router-link>
-
           <p class="duration">{{ item.created_at | now }}</p>
         </div>
 
@@ -307,7 +306,6 @@ export default {
 
   created() {
     this.item = this.post;
-
     this.posterID = this.post.poster_id
       ? this.post.poster_id
       : this.post.user_id;
@@ -337,7 +335,6 @@ export default {
           : { name: "networks", params: { id: this.posterID } };
       },
     };
-
     if (!this.isDisplayInSearch) this.comments = this.post.comments;
   },
 

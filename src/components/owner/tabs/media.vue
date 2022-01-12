@@ -60,12 +60,10 @@ export default {
         return ["profile", "network", "business"].indexOf(value) !== -1;
       },
     },
-
     showCoverAlbum: {
       type: Boolean,
       default: () => false,
     },
-
     isEditor: {
       type: Boolean,
       default: () => true,
@@ -189,6 +187,7 @@ export default {
   },
 
   created() {
+    console.log(this.showCoverAlbum);
 
     
     this.urlData = this.$route.params.id
@@ -199,7 +198,7 @@ export default {
       this.tabIndex = 1;
     }
 
-
+    if (this.showCoverAlbum) this.tabIndex = 1;
     this.strategy = {
       business: () => ({
         album: "businessOwner/getAlbums",

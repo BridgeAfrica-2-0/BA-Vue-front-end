@@ -1,6 +1,6 @@
 <template>
-  <header class=""> 
-    <nav class="navbar navbar-expand-xl p-3 mb-3 rounded" >
+  <header class="">
+    <nav class="navbar navbar-expand-xl p-3 mb-3 rounded">
       <div class="container-fluid">
         <div class="col-md-12 col-lg-2 col-xl-2 text-center">
           <span class="d-block d-lg-none">
@@ -28,11 +28,9 @@
                   class="input-group-text border-left-0 color-mobile"
                   style="width: 40px; border-right: none"
                 >
-                  <b-icon
-                    icon="search"
-                    style="color: #e75c18"
-                    font-scale="1.5"
-                  ></b-icon>
+                  <slot name="mobile">
+                    <Button @click.native="getKeyword" media="mobile" />
+                  </slot>
                 </span>
               </div>
 
@@ -42,7 +40,8 @@
                 data-toggle="popover"
                 class="form-control search-mobile"
                 style="border-left: none"
-                :placeholder="$t('general.Find_Pharmacies')"
+                :placeholder="$t('general.All')"
+                v-model="credentials.keyword"
                 aria-label=""
                 data-original-title=""
                 title=""
@@ -114,7 +113,7 @@
               />
 
               <slot name="button">
-                <Button @click.native="getKeyword" />
+                <Button @click.native="getKeyword" media="desktop" />
               </slot>
             </form>
           </span>
@@ -160,8 +159,7 @@
                 </router-link>
               </div>
 
-
-              <div  v-if="!islogin" class="nav-item" >
+              <div v-if="!islogin" class="nav-item">
                 <router-link
                   :to="{ name: 'signup' }"
                   class="nav-link text-dark hov"
@@ -170,8 +168,7 @@
                 </router-link>
               </div>
 
-
-              <div  v-if="!islogin" class="nav-item" >
+              <div v-if="!islogin" class="nav-item">
                 <router-link
                   :to="{ name: 'Login' }"
                   class="nav-link text-dark hov"
@@ -179,8 +176,6 @@
                   {{ $t("auth.login") }}
                 </router-link>
               </div>
-
-
 
               <!-- Messages Started -->
               <div v-if="islogin" class="nav-item">
@@ -202,14 +197,7 @@
                     <div v-for="message in messages" :key="message.id">
                       <hr class="h-divider" />
                       <div
-                        class="
-                          d-inline-flex
-                          flex-row
-                          justify-content-between
-                          align-items-center
-                          suggest-item
-                          cursor-pointer
-                        "
+                        class="d-inline-flex flex-row justify-content-between align-items-center suggest-item cursor-pointer"
                       >
                         <div class="d-inline-flex flex-row align-items-center">
                           <div>
@@ -270,13 +258,7 @@
                     >
                       <hr class="h-divider" />
                       <div
-                        class="
-                          d-inline-flex
-                          flex-row
-                          align-items-center
-                          suggest-item
-                          cursor-pointer
-                        "
+                        class="d-inline-flex flex-row align-items-center suggest-item cursor-pointer"
                       >
                         <!-- <div>
                           <img src="@/assets/img/profile-pic.jpg" class="rounded-circle" alt="" width="30" height="30" />
@@ -331,7 +313,7 @@
                 {{ user.name }}
               </b-tooltip>
 
-              <div  v-if="islogin"  class="nav-item">
+              <div v-if="islogin" class="nav-item">
                 <a
                   id="other-menu"
                   class="nav-link text-dark arrow-down"
@@ -354,12 +336,7 @@
                       v-if="'user' != user.user_type"
                       @click.prevent="switchToProfile"
                       href="#"
-                      class="
-                        other-menu
-                        suggest-item
-                        cursor-pointer
-                        text-decoration-none text-dark
-                      "
+                      class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
                     >
                       <span class="mr-2"
                         ><fas-icon
@@ -372,12 +349,7 @@
 
                     <router-link
                       :to="{ name: 'orders' }"
-                      class="
-                        other-menu
-                        suggest-item
-                        cursor-pointer
-                        text-decoration-none text-dark
-                      "
+                      class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
                     >
                       <span class="mr-2"
                         ><fas-icon
@@ -390,13 +362,7 @@
 
                     <router-link
                       :to="{ name: 'settings' }"
-                      class="
-                        other-menu
-                        suggest-item
-                        cursor-pointer
-                        text-decoration-none text-dark
-                        w-full
-                      "
+                      class="other-menu suggest-item cursor-pointer text-decoration-none text-dark w-full"
                     >
                       <span class="mr-2 w-full"
                         ><fas-icon
@@ -440,12 +406,7 @@
                     <a
                       @click="logout"
                       href="#"
-                      class="
-                        other-menu
-                        suggest-item
-                        cursor-pointer
-                        text-decoration-none text-dark
-                      "
+                      class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
                     >
                       <span class="mr-2"
                         ><fas-icon
@@ -462,7 +423,7 @@
         </div>
 
         <b-modal ref="setcat" id="myModallnav" hide-footer title=" ">
-          <div  v-if="islogin"  class="d-block d-lg-block d-xl-none">
+          <div v-if="islogin" class="d-block d-lg-block d-xl-none">
             <div class="mt-3">
               <div
                 class="d-inline-flex flex-row align-items-center"
@@ -503,35 +464,33 @@
               </div>
             </div>
 
+<<<<<<< HEAD
             <a
+=======
+            <div
+>>>>>>> main
               v-if="'user' != user.user_type"
               @click.prevent="switchToProfile"
               href="#"
-              class="
-                other-menu
-                suggest-item
-                cursor-pointer
-                text-decoration-none text-dark
-              "
+              class="other-menu suggest-item cursor-pointer text-decoration-none text-dark mx-1"
             >
-              <span class="mr-2">
+              <span class="mr-3">
                 <fas-icon
                   class="violet search"
                   :icon="['fas', 'user']"
-
                 /> </span
               >Profile
               <hr class="h-divider" v-if="'user' === user.user_type" />
+<<<<<<< HEAD
             </a>
 
+=======
+            </div>
+            <hr class="h-divider" />
+>>>>>>> main
             <router-link
               :to="{ name: 'orders' }"
-              class="
-                other-menu
-                suggest-item
-                cursor-pointer
-                text-decoration-none text-dark
-              "
+              class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
             >
               <span class="mr-2"
                 ><fas-icon
@@ -544,12 +503,7 @@
 
             <router-link
               :to="{ name: 'settings' }"
-              class="
-                other-menu
-                suggest-item
-                cursor-pointer
-                text-decoration-none text-dark
-              "
+              class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
             >
               <span class="mr-2"
                 ><fas-icon class="violet search" :icon="['fas', 'cogs']"
@@ -589,12 +543,7 @@
             <a
               href="#"
               @click.prevent="logout"
-              class="
-                other-menu
-                suggest-item
-                cursor-pointer
-                text-decoration-none text-dark
-              "
+              class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
             >
               <span class="mr-3"
                 ><fas-icon
@@ -644,7 +593,7 @@ export default {
   data() {
     return {
       isActive: false,
-      islogin:true,
+      islogin: true,
       shownav: false,
       notifications: [],
       messages: [],
@@ -671,6 +620,7 @@ export default {
     //check for authentication
 
     this.islogin = this.$store.getters["auth/isLogged"];
+<<<<<<< HEAD
 
       this.islogin=this.$store.getters["auth/isLogged"];
      
@@ -687,44 +637,61 @@ export default {
       network: () => `/network/${this.user.id}/notifications`,
     };
 
+=======
+
+    this.islogin = this.$store.getters["auth/isLogged"];
+
+    console.log(this.islogin);
+    console.log("yoo mother fucjjeryt");
+
+    if (this.islogin) {
+      this.init();
+      this.userOwnPage = this.onRedirect();
+
+      this.messagePatterns = {
+        user: () => "/messages/latest/user",
+        business: () => `/messages/latest/${this.user.id}/business`,
+        network: () => `/messages/latest/${this.user.id}/network`,
+      };
+>>>>>>> main
       this.notificationPatterns = {
         user: () => "user/notification",
         business: () => `/notification/business/${this.user.id}`,
         network: () => `/notification/network/${this.user.id}`,
       };
 
-    this.redirectionPatterns = {
-      message: {
-        user: () => ({
-          name: "Nav Meassage",
-        }),
-        business: () => ({
-          name: "BusinessOwner",
-          params: { id: this.user.id },
-          query: { tabId: 1 },
-        }),
-        network: () => null,
-      },
-      notification: {
-        business: () => ({
-          name: "BusinessOwner",
-          params: { id: this.user.id },
-          query: { tabId: 2 },
-        }),
+      this.redirectionPatterns = {
+        message: {
+          user: () => ({
+            name: "Nav Meassage",
+          }),
+          business: () => ({
+            name: "BusinessOwner",
+            params: { id: this.user.id },
+            query: { tabId: 1 },
+          }),
+          network: () => null,
+        },
+        notification: {
+          business: () => ({
+            name: "BusinessOwner",
+            params: { id: this.user.id },
+            query: { tabId: 2 },
+          }),
 
-        user: () => ({
-          name: "settings",
-        }),
-        network: () => ({
-          name: "networks",
-          params: { id: this.user.id },
-          query: { tabId: 2 },
-        }),
-      },
-    };
+          user: () => ({
+            name: "settings",
+          }),
+          network: () => ({
+            name: "networks",
+            params: { id: this.user.id },
+            query: { tabId: 2 },
+          }),
+        },
+      };
 
-    this.updateNotificationEvent();
-     }
+      this.updateNotificationEvent();
+    }
   },
 
   watch: {
@@ -733,6 +700,15 @@ export default {
       this.userOwnPage = this.onRedirect();
     },
 
+<<<<<<< HEAD
+=======
+    credentials: {
+      deep: true,
+      handler() {
+        this.searchOptions = this.credentials;
+      },
+    },
+>>>>>>> main
     "$i18n.locale": async function () {
       const response = await this.$repository.notification.changeLanguage(
         this.$i18n.locale
@@ -808,15 +784,13 @@ export default {
 
     updateNotificationEvent() {
       try {
-        const newRouteNotificationApi =
-          this.notificationPatterns[
-            this.$store.state.auth.profilConnected.user_type
-          ]();
+        const newRouteNotificationApi = this.notificationPatterns[
+          this.$store.state.auth.profilConnected.user_type
+        ]();
 
-        const newRouteMessageApi =
-          this.messagePatterns[
-            this.$store.state.auth.profilConnected.user_type
-          ]();
+        const newRouteMessageApi = this.messagePatterns[
+          this.$store.state.auth.profilConnected.user_type
+        ]();
 
         this.newNotification(newRouteNotificationApi);
         this.newMessage(newRouteMessageApi);
@@ -843,7 +817,7 @@ export default {
     },
 
     getKeyword() {
-      if (!this.searchOptions.keyword) return false;
+      if (!this.credentials.keyword) return false;
 
       if (this.$route.name != "Search") {
         console.log("the keyword is: ", this.credentials.keyword);

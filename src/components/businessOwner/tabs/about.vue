@@ -7,7 +7,7 @@
     
     <b-card>
       <div class="mb-3">
-        <mapbox :business="business_about" />
+        <mapbox v-if="business_about.lat && business_about.lng" :business="business_about" />
       </div>
       
       <b-card>

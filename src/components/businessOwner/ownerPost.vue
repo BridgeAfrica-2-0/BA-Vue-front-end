@@ -1220,6 +1220,16 @@ export default {
     height: 40px;
   }
 }
+
+.comment {
+  width: 90%;
+  border: solid 1px #ccc;
+  border-radius: 25px;
+  background-color: #ddd;
+  height: 34px;
+  padding-left: 10px;
+  margin-left: 8%;
+}
 @media (max-width: 762px) {
   .commentt[data-v-41fcb621] {
     width: 99%;
@@ -1233,11 +1243,7 @@ export default {
 
   .comment {
     width: 100%;
-    border: solid 1px #ccc;
-    border-radius: 25px;
-    background-color: #ddd;
-    height: 34px;
-    padding-left: 10px;
+    margin-left: -10px;
   }
 
   .post-btn {
@@ -1246,7 +1252,7 @@ export default {
   }
   .send-cmt {
     position: relative;
-    margin-left: 90%;
+    margin-left: 85%;
     top: -28px;
     cursor: pointer;
   }
@@ -1273,15 +1279,6 @@ export default {
   border-radius: 24px;
   height: 34px;
   width: 315px;
-}
-.comment {
-  width: 90%;
-  border: solid 1px #ccc;
-  border-radius: 25px;
-  background-color: #ddd;
-  height: 34px;
-  padding-left: 10px;
-  margin-left: 8%;
 }
 .comment:focus {
   outline: none;

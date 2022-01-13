@@ -8,7 +8,7 @@
               <b-col md="3" cols="4" sm="4" class="my-auto">
                 <b-avatar
                   class="p-avater"
-                  variant="primary"
+                  variant="light"
                   :src="item.profile_picture"
                 ></b-avatar>
               </b-col>
@@ -28,7 +28,7 @@
                           >
                             <div class="mt-3 mt-lg-0 mt-xl-0 username">
                               <b>
-                                <router-link :to="'/profilefollower/' + item.id">
+                                <router-link :to="{name: 'Follower', params: {id:item.id}}">
                                   {{ item.name }}
                                 </router-link>   
                               </b>

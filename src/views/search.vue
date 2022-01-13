@@ -1723,9 +1723,7 @@ export default {
         { value: "Sub-divisions", text: "Sub-divisions" },
         { value: "City", text: "City" },
       ],
-
       default_category: "",
-
       optionsnav: {
         activeColor: "#top1d98bd",
       },
@@ -1733,8 +1731,9 @@ export default {
   },
 
   watch: {
-    selectedId: function () {
-      this.changeComponent();
+    selectedId: function (newVal) {
+      if ([2, 5].includes(newVal)) this.changeComponent();
+
       this.changePlaceHolder();
       this.changeNotFoundTitle();
     },
@@ -1889,8 +1888,9 @@ export default {
 
     changeNotFoundTitle() {
       try {
-        this.notFoundComponentTitle =
-          this.strategyForNotFoundComponentTitle[this.selectedId]();
+        this.notFoundComponentTitle = this.strategyForNotFoundComponentTitle[
+          this.selectedId
+        ]();
       } catch (error) {
         this.notFoundComponentTitle = "";
       }
@@ -2030,8 +2030,7 @@ export default {
           break;
 
         case "MC":
-          this.selectcategories =
-            this.Mayor_councils_filters_and_public_institution;
+          this.selectcategories = this.Mayor_councils_filters_and_public_institution;
 
           break;
 

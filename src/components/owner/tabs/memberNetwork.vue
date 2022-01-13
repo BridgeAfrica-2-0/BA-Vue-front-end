@@ -33,7 +33,6 @@
            {{ $t('profileowner.Network')}} <span class="spa-color"> {{ nFormatter(total.total_network)}}  </span>
           </template>
 
-
             <Network @BlockUser="BlockUser" />
           </b-tab>
         </b-tabs>

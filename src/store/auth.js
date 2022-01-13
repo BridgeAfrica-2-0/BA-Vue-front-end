@@ -6,7 +6,7 @@ export default {
 
   state: {
     appLanguage: 'fr',
-    user: [],
+    user: null,
     isVerified: null,
     passwordToken: null,
     registerData: null,
@@ -51,8 +51,8 @@ export default {
 
       localStorage.setItem('user', JSON.stringify(userData));
       axios.defaults.headers.common.Authorization = `Bearer ${userData.accessToken}`;
-      state.profilConnected = { ...userData.user, user_type: 'user' };
       const userInfo = localStorage.getItem('user');
+      state.profilConnected = { ...userData.user, user_type: 'user'};
     },
 
 
@@ -157,7 +157,6 @@ export default {
 
     login({ commit }, credentials) {
       return axios.post("user/login", credentials).then(({ data }) => {
-        console.log(data);
         commit("setUserData", data.data);
       });
     },

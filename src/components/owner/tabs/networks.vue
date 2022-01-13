@@ -1052,7 +1052,7 @@ export default {
         "secondary_phone",
         this.createdNetwork.secondary_phone.split(" ").join("")
       );
-      fd.append("email", "dev@bav.com");
+      fd.append("email",  this.createdNetwork.email);
       fd.append("network_categories", this.selectedcategories);
 
       fd.append("description", this.createdNetwork.description);

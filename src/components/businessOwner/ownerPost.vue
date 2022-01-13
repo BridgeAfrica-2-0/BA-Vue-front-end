@@ -7,7 +7,7 @@
           <b-avatar
             variant="light"
             :square =" 'user' === profile.user_type ? false : true"
-            class="img-fluid avat-comment"
+            class="img-fluid avat-comment mb-2"
             :src="profile.profile_picture"
           ></b-avatar>
         </b-col>
@@ -100,7 +100,7 @@
             <b-row>
               <b-col cols="1" md="1" cl ass="m-0 p-0"></b-col>
               <b-col cols="10" md="10" class="m-0 p-0">
-                <div class="cursor">
+                <div class="cursor mt-2">
                   <b-form-textarea
                     id="textarea-small"
                     autofocus
@@ -163,7 +163,50 @@
                 </span>
 
                 <!-- <img :src="movie.link" /> -->
+
+
+                
               </div>
+
+
+              <div class="mt-3">
+                <div v-for="hyperlink in createPost.hyperlinks" :key="hyperlink.fileName" class="bordder">
+                  <span class="float-left"> {{ hyperlink.fileName }} </span>
+                  <span class="float-right" @click="deleteItem(hyperlink.fileName)">
+                    {{ $t('profileowner.delete') }}
+                  </span>
+                </div>
+
+                <div id="preview" v-for="(movie, index) in edit_image" :key="movie.id">
+                  <span class="upload-cancel" @click="deleteImage(index, movie)">
+                    <b-icon icon="x-circle" class="oorange"> </b-icon>
+                  </span>
+
+                  <img :src="movie.media_url" />
+                </div>
+                <hr />
+
+                <div v-for="movie in createPost.movies" :key="movie.fileName" class="">
+                  <div id="preview">
+                    <span class="upload-cancel" @click="deleteItem(movie.fileName)">
+                      <b-icon icon="x-circle" class="oorange"> </b-icon>
+                    </span>
+                     
+                     
+                    <span> </span>
+                    <img v-if="movie.fileType == 'image'" :src="movie.link" />
+
+                    <video v-else width="97%" height="240" autoplay>
+                      <source :src="movie.link" type="video/mp4" />
+                    </video>
+
+                  </div>
+                </div> 
+              </div>
+
+
+
+
             </b-col>
           </b-row>
           <br />
@@ -214,7 +257,7 @@
             <b-col cols="1" md="1" cl ass="m-0 p-0"></b-col>
             <b-col cols="10" md="10" class="m-0 p-0">
               <br />
-              <div class="cursor">
+              <div class="cursor mt-3">
                 <b-form-textarea
                   id="textarea-small"
                   autofocus
@@ -321,7 +364,7 @@
             <b-col cols="1" md="1" class="m-0 p-0"></b-col>
           </b-row>
         </b-modal>
-
+<!-- //end modal update  lalalalal  -->
         <b-modal
           id="modal-xl_"
           ref="modal-xl_"
@@ -695,7 +738,8 @@ export default {
       });
 
       this.fileImageArr.forEach((value, index) => {
-        formData2.append("media[" + index + "]", value.target.files[0]);
+       
+         formData2.append('media[' + index + ']', value.thisfile);
 
         console.log(value);
       });
@@ -773,6 +817,7 @@ export default {
           this.createPost.movies.push({
             target: event.target,
             movie: e.target.result,
+              thisfile:event.target.files[0],
             fileName: event.target.files[0].name,
             link: URL.createObjectURL(event.target.files[0]),
             fileType: e.target.result.match(/^data:([^/]+)\/([^;]+);/)[1] || [],
@@ -806,6 +851,7 @@ export default {
           this.createPost.movies.push({
             target: event.target,
             movie: e.target.result,
+              thisfile:event.target.files[0],
             fileName: event.target.files[0].name,
             link: URL.createObjectURL(event.target.files[0]),
             fileType: e.target.result.match(/^data:([^/]+)\/([^;]+);/)[1] || [],
@@ -821,6 +867,7 @@ export default {
       console.log(event);
       this.createPost.hyperlinks.push({
         target: event.target,
+          thisfile:event.target.files[0],
         document: this.service(event.target),
         fileName: event.target.files[0].name,
       });
@@ -831,6 +878,7 @@ export default {
       this.createPost.hyperlinks.push({
         target: event.target,
         document: this.service(event.target),
+          thisfile:event.target.files[0],
         fileName: event.target.files[0].name,
       });
       this.$refs["modal-xl_"].show();
@@ -896,7 +944,7 @@ export default {
         this.fileImageArr = this.createPost.movies;
 
         this.fileImageArr.forEach((value, index) => {
-          formData2.append("media[" + index + "]", value.target.files[0]);
+        formData2.append('media[' + index + ']', value.thisfile);
         });
       }
 

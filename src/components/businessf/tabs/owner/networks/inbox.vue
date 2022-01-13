@@ -435,11 +435,14 @@
                     <b-avatar
                       variant="primary"
                       :src="
-                        chatSelected.chat.profile_picture
-                          ? chatSelected.chat.profile_picture
-                          : chatSelected.chat.logo_path
-                          ? chatSelected.chat.logo_path
-                          : chatSelected.chat.image
+                        getImage({
+                          type: type,
+                          image: chatSelected.profile_picture
+                            ? chatSelected.profile_picture
+                            : chatSelected.logo_path
+                            ? chatSelected.logo_path
+                            : chatSelected.image,
+                        })
                       "
                       size="50"
                     ></b-avatar>
@@ -1454,8 +1457,8 @@
                   <h1 class="mt-4 title text-bold">
                     {{
                       currentBiz.name
-                        ? currentBiz.name.length > 9
-                          ? currentBiz.name.substring(0, 8) + "..."
+                        ? currentBiz.name.length > 7
+                          ? currentBiz.name.substring(0, 6) + "..."
                           : currentBiz.name
                         : "loading..."
                     }}
@@ -1884,11 +1887,14 @@
                     <b-avatar
                       variant="primary"
                       :src="
-                        chatSelected.chat.profile_picture
-                          ? chatSelected.chat.profile_picture
-                          : chatSelected.chat.logo_path
-                          ? chatSelected.chat.logo_path
-                          : chatSelected.chat.image
+                        getImage({
+                          type: type,
+                          image: chatSelected.profile_picture
+                            ? chatSelected.profile_picture
+                            : chatSelected.logo_path
+                            ? chatSelected.logo_path
+                            : chatSelected.image,
+                        })
                       "
                       size="50"
                     ></b-avatar>
@@ -3157,10 +3163,17 @@ export default {
       // console.log("Current:", this.currentBizId);
       if (this.type == "user") {
         name = value.sender ? value.sender.name : value.receiver.name;
+        name = value.sender
+          ? value.sender.name
+          : value.receiver
+          ? value.receiver.name
+          : value.name;
       } else if (this.type == "business") {
         name = value.sender_business
           ? value.sender_business.name
-          : value.sender_business.name;
+          : value.receiver_business
+          ? value.receiver_business.name
+          : value.name;
       } else if (this.type == "network") {
         name =
           value.sender_network_id == this.currentBizId

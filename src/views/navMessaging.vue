@@ -118,7 +118,7 @@
                               ></b-avatar>
 
                               <h6 class="mt-2 d-inline-block ml-2">
-                                <b class="bold"> {{ formatName(chat)}} </b>
+                                <b class="bold"> {{ formatName(chat) }} </b>
                                 <p class="duration">{{ chat.message }}</p>
                               </h6>
                             </span>
@@ -283,7 +283,9 @@
                             selectedChat({
                               type: 'network',
                               chat: chat,
-                              id: chat.id,
+                              id: (chat.receiver_network_id
+                                  ? chat.receiver_network_id
+                                  : chat.sender_network_id)
                             })
                           "
                         >
@@ -346,11 +348,14 @@
                   <b-avatar
                     variant="primary"
                     :src="
-                      chatSelected.chat.profile_picture
-                        ? chatSelected.chat.profile_picture
-                        : chatSelected.chat.logo_path
-                        ? chatSelected.chat.logo_path
-                        : chatSelected.chat.image
+                      getImage({
+                        type: type,
+                        image: chatSelected.profile_picture
+                          ? chatSelected.profile_picture
+                          : chatSelected.logo_path
+                          ? chatSelected.logo_path
+                          : chatSelected.image,
+                      })
                     "
                     size="60"
                   ></b-avatar>
@@ -726,7 +731,12 @@
                             class="d-inline-block"
                             variant="primary"
                             size="30"
-                            :src="user.profile_picture"
+                            :src="
+                              getImage({
+                                type: 'user',
+                                image: user.profile_picture,
+                              })
+                            "
                           ></b-avatar>
                           <span class="bold"> {{ user.name }} </span>
                         </td>
@@ -890,7 +900,7 @@
                               type: 'user',
                               chat: chat,
                               id:
-                                chat.sender_id == currentUser
+                                chat.sender_id == currentUser.user.id
                                   ? chat.receiver_id
                                   : chat.sender_id,
                             })
@@ -1129,18 +1139,21 @@
                   <b-avatar
                     variant="primary"
                     :src="
-                      chatSelected.profile_picture
-                        ? chatSelected.profile_picture
-                        : chatSelected.logo_path
-                        ? chatSelected.logo_path
-                        : chatSelected.image
+                      getImage({
+                        type: type,
+                        image: chatSelected.profile_picture
+                          ? chatSelected.profile_picture
+                          : chatSelected.logo_path
+                          ? chatSelected.logo_path
+                          : chatSelected.image,
+                      })
                     "
                     size="60"
                   ></b-avatar>
                 </b-col>
 
                 <b-col class="col-sm-5" @click="info = true">
-                  <h4>{{ chatSelected.name }}</h4>
+                  <h4>{{ formatName(chatSelected) }}</h4>
                   <!-- <p>Online</p> -->
                 </b-col>
                 <!-- <b-col class="col-4" v-show="false">
@@ -1511,7 +1524,12 @@
                             class="d-inline-block"
                             variant="primary"
                             size="30"
-                            :src="user.profile_picture"
+                            :src="
+                              getImage({
+                                type: 'user',
+                                image: user.profile_picture,
+                              })
+                            "
                           ></b-avatar>
                           <span class="bold"> {{ user.name }} </span>
                         </td>
@@ -1733,6 +1751,7 @@ export default {
       : "no";
     console.log("this.tabIndex:", typeof this.tabIndex);
     this.$store.commit("businessChat/setCurrentBizId", this.$route.params.id);
+    this.socketListenners();
 
     if ([0, 1, 2].includes(this.tabIndex)) {
       if (this.tabIndex == 1) {
@@ -1753,23 +1772,25 @@ export default {
       this.getChatList({ type: "user" });
       console.log("Here testing...");
     }
-
-    this.socketListenners();
   },
   methods: {
     formatName(value) {
       var name = "";
-      console.log("Value:", value);
-      console.log("Current:", this.currentUser);
+      // console.log("Value:", value);
+      // console.log("Current:", this.currentUser);
       if (this.type == "user") {
         name =
           value.sender.id == this.currentUser.user.id
             ? value.receiver.name
-            : value.sender.name;
+            : value.sender
+            ? value.sender.name
+            : value.name;
       } else if (this.type == "business") {
         name = value.receiver_business
           ? value.receiver_business.name
-          : value.sender_business.name;
+          : value.sender
+          ? value.sender_business.name
+          : value.name;
       } else if (this.type == "network") {
         name = value.receiver_network
           ? value.receiver_network.name
@@ -1789,11 +1810,23 @@ export default {
       let business = require("@/assets/business_white.png");
 
       if (data.type == "user") {
-        finale = image ? image : user;
+        finale = image
+          ? image.includes("profile_default.png")
+            ? user
+            : image
+          : user;
       } else if (data.type == "network") {
-        finale = image ? image : network;
+        finale = image
+          ? image.includes("network_default.png")
+            ? network
+            : image
+          : network;
       } else if (data.type == "business") {
-        finale = image ? image : business;
+        finale = image
+          ? image.includes("business_default.png")
+            ? business
+            : image
+          : business;
       }
 
       // console.log("debug ", finale);
@@ -1943,6 +1976,7 @@ export default {
     },
     selectedChat(data) {
       // this.scrollToBottom();
+      console.log("currentUser:", this.currentUser.user.id);
       console.log("Data logged:", data);
       console.log("free up:", this.ctaSelected);
       this.type = data.type;
@@ -2074,9 +2108,9 @@ export default {
         group_id: this.chatId,
       });
     },
-    sendPrivate() {
+    async sendPrivate() {
       this.formData.append("attachment", this.file);
-      this.socket.emit("privateMessage", {
+      await this.socket.emit("privateMessage", {
         message: this.input,
         sender_id: this.currentUser.user.id,
         room: this.room,
@@ -2147,7 +2181,7 @@ export default {
 }
 .chats {
   /* border: 2px solid green; */
-  min-height: 540px;
+  height: 540px;
   overflow-y: scroll;
   overflow-x: hidden;
 }

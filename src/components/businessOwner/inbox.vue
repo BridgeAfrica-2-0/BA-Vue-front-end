@@ -459,11 +459,14 @@
                     <b-avatar
                       variant="primary"
                       :src="
-                        chatSelected.chat
-                          ? chatSelected.chat.picture
-                            ? chatSelected.chat.picture
-                            : chatSelected.chat.image
-                          : ''
+                        getImage({
+                          type: type,
+                          image: chatSelected.profile_picture
+                            ? chatSelected.profile_picture
+                            : chatSelected.logo_path
+                            ? chatSelected.logo_path
+                            : chatSelected.image,
+                        })
                       "
                       size="50"
                     ></b-avatar>
@@ -1886,11 +1889,14 @@
                     <b-avatar
                       variant="primary"
                       :src="
-                        chatSelected.chat
-                          ? chatSelected.chat.picture
-                            ? chatSelected.chat.picture
-                            : chatSelected.chat.image
-                          : ''
+                        getImage({
+                          type: type,
+                          image: chatSelected.profile_picture
+                            ? chatSelected.profile_picture
+                            : chatSelected.logo_path
+                            ? chatSelected.logo_path
+                            : chatSelected.image,
+                        })
                       "
                       size="50"
                     ></b-avatar>
@@ -3110,15 +3116,21 @@ export default {
   methods: {
     formatName(value) {
       var name = "";
-      console.log("Value:", value);
-      console.log("Current:", this.currentBizId);
+      // console.log("Value:", value);
+      // console.log("Current:", this.currentBizId);
       if (this.type == "user") {
-        name = value.sender ? value.sender.name : value.receiver.name;
+        name = value.sender
+          ? value.sender.name
+          : value.receiver
+          ? value.receiver.name
+          : value.name;
       } else if (this.type == "business") {
         name =
           value.sender_business_id == this.currentBizId
             ? value.receiver_business.name
-            : value.sender_business.name;
+            : value.sender_business
+            ? value.sender_business.name
+            : value.name;
       } else if (this.type == "network") {
         name = value.receiver_network
           ? value.receiver_network.name

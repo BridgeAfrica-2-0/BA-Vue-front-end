@@ -6,7 +6,7 @@
     <hr />
 
     <b-card>
-      <div class="mb-3">
+      <div class="mb-3" v-if="loading">
         <mapbox :business="business_about" />
       </div>
 

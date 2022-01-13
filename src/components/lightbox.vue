@@ -17,7 +17,7 @@
         <b-row class="p-0">       
             
             
-            <b-col col="6" class="p-0"  v-for="(src, i) in items" :key="i" @click="show(i)" >      
+            <b-col cols="6" class="p-0"  v-for="(src, i) in items" :key="i" @click="show(i)" >      
                 <img :src="src" class="single-image pr-1" style="object-fit:cover; height:100%">
                 </b-col>    </b-row>
    </div>

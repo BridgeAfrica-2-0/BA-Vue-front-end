@@ -27,6 +27,7 @@
           <input
             type="file"
             id="chosefile"
+            multiple
             @change="selectMoviesOutsidePost"
             accept="video/mpeg, video/mp4, image/*"
             hidden
@@ -53,6 +54,7 @@
                 type="file"
                 id="document2"
                 @change="selectDocumentOutsidePost"
+                multiple
                 accept="application/pdf"
                 hidden
                 ref="document2"
@@ -132,6 +134,7 @@
                       id="image"
                       type="file"
                       hidden
+                      multiple
                       @change="selectMovies"
                       accept="video/mpeg,video/mp4,image/*"
                       ref="movies"
@@ -188,8 +191,17 @@
                     <span class="upload-cancel" @click="deleteItem(movie.fileName)">
                       <b-icon icon="x-circle" class="oorange"> </b-icon>
                     </span>
+                     
+                     
+                    <span> </span>
+                    <img v-if="movie.fileType == 'image'" :src="movie.link" />
+
+                    <video v-else width="97%" height="240" autoplay>
+                      <source :src="movie.link" type="video/mp4" />
+                    </video>
+
                   </div>
-                </div>
+                </div> 
               </div>
              
               <span>
@@ -201,7 +213,7 @@
             <b-col cols="1" md="1" class="m-0 p-0"></b-col>
           </b-row>
         </b-modal>
-        <!-- create post -->
+        <!-- create post  lllllll -->
 
         <b-modal
           id="modal-xl"
@@ -244,6 +256,7 @@
                       id="image"
                       type="file"
                       hidden
+                      multiple
                       @change="selectMovies"
                       accept="video/mpeg,video/mp4,image/*"
                       ref="movies"
@@ -251,6 +264,7 @@
                     <input
                       id="document"
                       type="file"
+                      multiple
                       @change="selectDocument"
                       hidden
                       accept="application/pdf"
@@ -544,7 +558,9 @@ export default {
       });
 
       this.fileImageArr.forEach((value, index) => {
-        formData2.append('media[' + index + ']', value.target.files[0]);
+       
+
+         formData2.append('media[' + index + ']', value.thisfile);
 
         console.log(value);
       });
@@ -613,13 +629,16 @@ export default {
 
     selectMovies(event) {
       const file = event.target;
-
+      console.log(file);
+   
       if (file.files) {
         console.log('logging start');
         let reader = new FileReader();
         reader.onload = (e) => {
           this.createPost.movies.push({
             target: event.target,
+            // thisfile:this.$refs.movies.files[0],
+              thisfile:event.target.files[0],
             movie: e.target.result,
             fileName: event.target.files[0].name,
             link: URL.createObjectURL(event.target.files[0]),
@@ -629,6 +648,8 @@ export default {
         };
         reader.readAsDataURL(file.files[0]);
       }
+
+      console.log(this.createPost.movies);
     },
 
     service(file) {
@@ -653,6 +674,7 @@ export default {
           this.createPost.movies.push({
             target: event.target,
             movie: e.target.result,
+             thisfile:event.target.files[0],
             fileName: event.target.files[0].name,
             link: URL.createObjectURL(event.target.files[0]),
             fileType: e.target.result.match(/^data:([^/]+)\/([^;]+);/)[1] || [],
@@ -669,6 +691,7 @@ export default {
       this.createPost.hyperlinks.push({
         target: event.target,
         document: this.service(event.target),
+         thisfile:event.target.files[0],
         fileName: event.target.files[0].name,
       });
     },
@@ -678,6 +701,7 @@ export default {
       this.createPost.hyperlinks.push({
         target: event.target,
         document: this.service(event.target),
+         thisfile:event.target.files[0],
         fileName: event.target.files[0].name,
       });
       this.$refs['modal-xl'].show();
@@ -716,6 +740,7 @@ export default {
           console.log({ err: err });
         });
     },
+    
 
     submitPost() {
       this.isUploading = true;
@@ -731,13 +756,22 @@ export default {
       let formData2 = new FormData();
       console.log(this.createPost.movies);
       if (this.createPost.movies[0]) {
+
+
+
+
         fileImage = this.createPost.movies[0].target.files[0];
 
         this.fileImageArr = this.createPost.movies;
         console.log(this.fileImageArr);
 
         this.fileImageArr.forEach((value, index) => {
-          formData2.append('media[' + index + ']', value.target.files[0]);
+
+          
+
+          formData2.append('media[' + index + ']', value.thisfile);
+
+          console.log(formData2);
         });
       }
 

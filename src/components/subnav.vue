@@ -24,7 +24,7 @@
                   margin-top: -10px;
                   background-color: red;
                   height: 3px;
-                  width: 40%;
+                  width: 41%;
                   float: left;
                 "
               />
@@ -81,7 +81,10 @@
                   :key="index"
                   class="padding:50px"
                 >
-                  <b-dropdown-item class="ml-1" @click="bcategory({ cat_id: category.category.id })">
+                  <b-dropdown-item
+                    class="ml-1"
+                    @click="bcategory({ cat_id: category.category.id })"
+                  >
                     {{ category.category.name }}
                   </b-dropdown-item>
                 </b-col>

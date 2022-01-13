@@ -100,14 +100,14 @@ export default {
                                     sub_cat: sub_categories
 
                                 });
-                                console.log(all);
+                                // console.log(all);
                             })
                             .catch(err => {
                                 console.error(err);
                             });
                     });
 
-                    console.log(all);
+                    // console.log(all);
                     commit("setCategories", all);
                 })
                 .catch(err => {
@@ -153,19 +153,18 @@ export default {
                     console.error(err);
                 });
         },
-        getUserNeigbourhoods({ commit }, data) {
+        async getUserNeigbourhoods({ commit }, data) {
             console.log("[...neigbourb...]");
-            return axios.get("user/neighborhood")
-                .then((res) => {
-                    console.log("[...neigbourb...]", res.data.data);
+            try {
+                const res = await axios.get("user/neighborhood");
+                console.log("[...neigbourb...]", res.data.data);
 
-                    commit("setUserNeighbourhoods", res.data.data);
-                })
-                .catch((err) => {
-                    console.error(err);
-                });
+                commit("setUserNeighbourhoods", res.data.data);
+            } catch (err) {
+                console.error(err);
+            }
         },
-        searchProducts({ commit, state }, data) {
+        async searchProducts({ commit, state }, data) {
             commit("setProducts", { data: [] });
             commit("setLoader", true);
 
@@ -176,17 +175,15 @@ export default {
             let page = data.page ? data.page : ''
             let distance = data.distanceInKM ? data.distanceInKM : ''
 
-
-            return axios.get(`market/search?keyword=${keyword}&cat_id=${cat_id}&sub_cat_id=${sub_cat}&filter_id=${filter_id}&distanceInKM=${distance}&page=${page}`)
-                .then((res) => {
-                    commit("setLoader", false);
-                    console.log("Search results: ", res.data);
-                    commit("setProducts", res.data);
-                })
-                .catch((err) => {
-                    commit("setLoader", false);
-                    console.log(err);
-                });
+            try {
+                const res = await axios.get(`market/search?keyword=${keyword}&cat_id=${cat_id}&sub_cat_id=${sub_cat}&filter_id=${filter_id}&distanceInKM=${distance}&page=${page}`);
+                commit("setLoader", false);
+                console.log("Search results: ", res.data);
+                commit("setProducts", res.data);
+            } catch (err) {
+                commit("setLoader", false);
+                console.log(err);
+            }
         },
 
 

@@ -120,15 +120,14 @@ export default {
                     console.error(err);
                 });
         },
-        NEIGHBOURHOODS({ commit }, data) {
-            return axios
-                .post("neighborhood/show", { councilId: data.council_id })
-                .then((res) => {
-                    commit("setNeighbourhoods", res.data.data);
-                })
-                .catch((err) => {
-                    console.error(err);
-                });
+        async NEIGHBOURHOODS({ commit }, data) {
+            try {
+                const res = await axios
+                    .post("neighborhood/show", { councilId: data.council_id });
+                commit("setNeighbourhoods", res.data.data);
+            } catch (err) {
+                console.error(err);
+            }
         },
         async SEARCH({ commit, state }, data) {
             commit("setNetworks", { data: [] });
@@ -154,7 +153,7 @@ export default {
                 commit("setNetworks", res.data);
             } catch (err) {
                 commit("setLoader", false);
-                console.log(err);
+                console.error(err);
             }
 
         }

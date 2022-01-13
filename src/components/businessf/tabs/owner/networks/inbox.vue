@@ -1550,7 +1550,12 @@
                                 <b-avatar
                                   class="d-inline-block profile-pic"
                                   variant="primary"
-                                  src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
+                                  :src="
+                                    getImage({
+                                      type: 'user',
+                                      image: chat.profile_picture,
+                                    })
+                                  "
                                 ></b-avatar>
 
                                 <h6 class="mt-2 d-inline-block ml-2">
@@ -1561,7 +1566,7 @@
                             </b-col>
 
                             <b-col class="col-3 text-center">
-                              <small class="text-center">
+                              <small class="text-center small">
                                 {{ getCreatedAt(chat.created_at) }}
                               </small>
                               <!-- <p class="text-center">
@@ -1641,7 +1646,12 @@
                                 <b-avatar
                                   class="d-inline-block profile-pic"
                                   variant="primary"
-                                  src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
+                                  :src="
+                                    getImage({
+                                      type: 'business',
+                                      image: chat.logo_path,
+                                    })
+                                  "
                                 ></b-avatar>
 
                                 <h6 class="mt-2 d-inline-block ml-2">
@@ -1652,7 +1662,7 @@
                             </b-col>
 
                             <b-col class="col-3 text-center">
-                              <small class="text-center">
+                              <small class="text-center small">
                                 {{ getCreatedAt(chat.created_at) }}
                               </small>
                               <!-- <p class="text-center">
@@ -1742,7 +1752,7 @@
                           </b-col>
 
                           <b-col class="col-3 text-center">
-                            <small class="text-center">
+                            <small class="text-center small">
                               {{ getCreatedAt(chat.created_at) }}
                             </small>
                             <!-- <p class="text-center">
@@ -1814,7 +1824,7 @@
                                 <b-avatar
                                   class="d-inline-block profile-pic"
                                   variant="primary"
-                                  src="https://i.pinimg.com/originals/ee/bb/d0/eebbd0baab26157ff9389d75ae1fabb5.jpg"
+                                  :src="require('@/assets/default_group.png')"
                                 ></b-avatar>
 
                                 <h6 class="mt-2 d-inline-block ml-2">
@@ -1825,7 +1835,7 @@
                             </b-col>
 
                             <b-col class="col-3 text-center">
-                              <small class="text-center">
+                              <small class="text-center small">
                                 {{ getCreatedAt(chat.created_at) }}
                               </small>
                               <!-- <p class="text-center">
@@ -1931,7 +1941,7 @@
                   <!-- {{ chat }}<br /> -->
                   <div
                     v-if="
-                      currentBiz.id != chat.sender_business_id &&
+                      currentBiz.id != chat.sender_network_id &&
                       currentBiz.id != chat.businessID
                     "
                   >
@@ -1962,7 +1972,9 @@
                             <hr />
                           </span>
                           {{ chat.message }}
-                          <small class="float-right mt-2 text-white pr-1 pt-1">
+                          <small
+                            class="float-right mt-2 text-white pr-1 pt-1 small"
+                          >
                             {{ getCreatedAt(chat.created_at) }}
                           </small>
                         </p>
@@ -1985,7 +1997,8 @@
                           </span>
                           <span v-if="chat.post_details">
                             <small class="text-dark font-italic"
-                              ><i class="fas fa-share fa-xs pl-1"></i>{{ $t("general.Shared_post") }}</small
+                              ><i class="fas fa-share fa-xs pl-1"></i
+                              >{{ $t("general.Shared_post") }}</small
                             >
                             <br />
                             <span class="font-italic">{{
@@ -1994,7 +2007,9 @@
                             <hr />
                           </span>
                           {{ chat.message }}
-                          <small class="float-right mt-2 text-white pr-1 pt-1">
+                          <small
+                            class="float-right mt-2 text-white pr-1 pt-1 small"
+                          >
                             {{ getCreatedAt(chat.created_at) }}
                           </small>
                         </p>
@@ -2329,6 +2344,7 @@
                                         </span>
                                       </b-form-checkbox>
                                     </b-form-checkbox-group>
+
                                   </b-form-group>
                                   </td>
                                 </tr>
@@ -2377,6 +2393,7 @@
                                         id="checkbox-group-2"
                                         v-model="selectedNetwork"
                                         name="flavour-2" />
+
                                   </b-form-group>
                                 </td>
                               </tr>
@@ -2987,15 +3004,15 @@ export default {
       chatSearchKeyword: "",
       tabIndex: 2,
       type: "",
-      // socket: io(process.env.NODE_SERVER_URL_DEV, {
+      // socket: io(process.env.VUE_APP_CHAT_SERVER_URL_DEV, {
       //   transports: ["websocket", "polling", "flashsocket"],
       // }),
-      // socket: io(process.env.VUE_APP_CHAT_SERVER_URL, {
-      //   transports: ["websocket", "polling", "flashsocket"],
-      // }),
-      socket: io("http://localhost:7000", {
+      socket: io(process.env.VUE_APP_CHAT_SERVER_URL, {
         transports: ["websocket", "polling", "flashsocket"],
       }),
+      // socket: io("http://localhost:7000", {
+      //   transports: ["websocket", "polling", "flashsocket"],
+      // }),
 
       nameSpace: {
         status: false,
@@ -3075,10 +3092,18 @@ export default {
     users() {
       return this.$store.getters["userChat/getUsers"];
     },
+    allBizs() {
+      return this.$store.getters["userChat/getBizs"];
+    },
+    nets() {
+      return this.$store.getters["userChat/getNets"];
+    },
     chats() {
       return this.$store.getters["networkChat/getChats"];
     },
-
+    newChatLoader() {
+      return this.$store.getters["userChat/getLoader"];
+    },
     loader() {
       return this.$store.getters["networkChat/getLoader"];
     },
@@ -3310,7 +3335,6 @@ export default {
       this.filePreview = false;
     },
     socketListenners() {
-      console.log("listenning...");
       this.socket.on("groupMessage", (data) => {
         console.log("group message Received");
         this.audio.play();
@@ -3342,6 +3366,7 @@ export default {
 
         this.saveMessage(this.formData);
       });
+      console.log("listenning...");
     },
     createGroup(receiver_business_id) {
       this.socket.emit("create-group", this.chatId);
@@ -3376,14 +3401,21 @@ export default {
       this.socket.emit("create", this.room);
     },
     getCreatedAt(data) {
-      let date = moment(data).isBefore(today);
-      let today = moment().format("MM/DD/YYYY");
-      // console.log("days:", date);
-      if (date) {
-        return moment(data).format("lll");
+      if (moment(data).isBefore(moment())) {
+        return moment(data).format("ddd") + " " + moment(data).format("LT");
       } else {
         return moment(data).format("LT");
         // return moment(data).fromNow();
+      }
+    },
+    getList(keyword) {
+      if (this.type == "user") {
+        this.$store.dispatch("userChat/GET_USERS", keyword);
+      } else if (this.type == "business") {
+        this.$store.dispatch("userChat/GET_BIZS", keyword);
+      } else {
+        console.log("network");
+        this.$store.dispatch("userChat/GET_NETS", keyword);
       }
     },
 
@@ -3439,7 +3471,7 @@ export default {
       // alert("Clicked!")
       this.type = data.type;
       this.chatSelected.active = false;
-      // this.newMsg = false;
+      this.newMsg = false;
       console.log("tab type:", this.tabIndex);
 
       this.$store.dispatch("networkChat/GET_BIZS_CHAT_LIST", data);
@@ -3714,6 +3746,7 @@ export default {
     newMessage(arg) {
       this.rightSide = false;
       console.log("hey");
+      this.getList();
       this.newMsg = !this.newMsg;
       this.show = false;
       this.bulk = arg.bulk;
@@ -3745,6 +3778,9 @@ export default {
   overflow-y: auto;
   overflow-x: hidden;
   /* background-color: lightblue; */
+}
+.small {
+  font-size: 10px !important;
 }
 .spinner {
   font-size: 30px;

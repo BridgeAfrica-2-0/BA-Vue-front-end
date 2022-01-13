@@ -67,7 +67,7 @@ export default {
 
     actions: {
         SEARCH({ commit, state, getters }, data) {
-            console.log("here:...", data);
+            console.log("[here]:", data);
             let islogin = this.getters["auth/isLogged"];
 
             commit("setNetworks", { data: [] });

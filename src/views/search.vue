@@ -2,13 +2,66 @@
   <div style="overflow-x: hidden; color: black">
     <Nav :credentials.sync="searchParams" id="top">
       <template v-slot:button>
-        <Button @click.native="strategY['all']" v-if="selectedId == 0" />
-        <Button @click.native="strategY['business']" v-if="selectedId == 1" />
-        <!-- <Button @click.native="strategY['users']" v-if="selectedId == 2" /> -->
-        <Button @click.native="strategY['network']" v-if="selectedId == 3" />
-        <Button @click.native="strategY['market']" v-if="selectedId == 4" />
+        <Button
+          media="desktop"
+          @click.native="strategY['all']"
+          v-if="selectedId == 0"
+        />
 
-        <Button @click.native="strategies" v-if="[2, 5].includes(selectedId)" />
+        <Button
+          media="desktop"
+          @click.native="strategY['business']"
+          v-if="selectedId == 1"
+        />
+        <!-- <Button @click.native="strategY['users']" v-if="selectedId == 2" /> -->
+        <Button
+          media="desktop"
+          @click.native="strategY['network']"
+          v-if="selectedId == 3"
+        />
+        <Button
+          media="desktop"
+          @click.native="strategY['market']"
+          v-if="selectedId == 4"
+        />
+
+        <Button
+          media="desktop"
+          @click.native="strategies"
+          v-if="[2, 5].includes(selectedId)"
+        />
+      </template>
+
+      <template v-slot:mobile>
+        <Button
+          media="mobile"
+          @click.native="strategY['all']"
+          v-if="selectedId == 0"
+        />
+
+        <Button
+          media="mobile"
+          @click.native="strategY['business']"
+          v-if="selectedId == 1"
+        />
+
+        <Button
+          media="mobile"
+          @click.native="strategY['network']"
+          v-if="selectedId == 3"
+        />
+
+        <Button
+          media="mobile"
+          @click.native="strategY['market']"
+          v-if="selectedId == 4"
+        />
+
+        <Button
+          media="mobile"
+          @click.native="strategies"
+          v-if="[2, 5].includes(selectedId)"
+        />
       </template>
     </Nav>
 
@@ -540,17 +593,13 @@
             <!-- Filter out just the market -->
 
             <div v-if="selectedId == '4'">
-              <h6>
-                {{ $t("search.Sponsored_Result") }}
-                <fas-icon
-                  class="icons"
-                  :icon="['fas', 'exclamation-circle']"
-                  size="lg"
-                />
-              </h6>
+              <!-- <h6>
+                <fas-icon class="icons" :icon="['fas', 'store']" size="lg" />
+                {{$t("search.Market")}}
+              </h6> -->
 
               <div>
-                <Sponsor />
+                <!-- <Sponsor /> -->
               </div>
 
               <h6 class="mb-3">
@@ -714,18 +763,9 @@ export default {
 
     this.strategY = {
       users: () => this.onFindUser(),
-      all: () =>
-        this.getKeyword({
-          keyword: this.searchParams.keyword,
-        }),
-      market: () =>
-        this.searchProducts({
-          keyword: this.searchParams.keyword,
-        }),
-      network: () =>
-        this.searchNetworks({
-          keyword: this.searchParams.keyword,
-        }),
+      all: () => this.getKeyword(),
+      market: () => this.searchProducts(),
+      network: () => this.searchNetworks(),
       business: () => this.onFindBusiness(),
     };
 
@@ -1722,7 +1762,7 @@ export default {
     // [ED]----------
     getKeyword(data) {
       let elm = data ? data : { keyword: "" };
-      console.log("the keyword is: ", data);
+      console.log("the keyword is: ", this.searchParams.keyword);
       this.$store
         .dispatch("allSearch/SEARCH", elm)
         .then((res) => {
@@ -2069,8 +2109,6 @@ export default {
         this.searchBusiness({ cat_id: value.cat_id, sub_cat: value.id });
       } else if (this.selectedId == 0) {
         this.allSearchByCat({ cat_id: value.cat_id, sub_cat: value.id });
-      } else if (this.selectedId == 3) {
-        this.searchNetworks({ cat_id: value.cat_id, sub_cat: value.id });
       }
     },
 

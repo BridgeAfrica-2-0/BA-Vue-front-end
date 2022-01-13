@@ -116,14 +116,12 @@ export default {
   created() {
     this.getCategories();
   },
-
   methods: {
     bcategory(category) {
       console.log("HOVER...", category);
       this.$emit("category", category);
       // console.log(category);
     },
-
     getCategories() {
       this.$store
         .dispatch("marketSearch/getCategories")
@@ -159,12 +157,10 @@ export default {
           console.log("Error erro!");
         });
     },
-
     showSubCat(catId, subCat) {
       this.$refs[catId][0].visible = true;
       this.$emit("parentcategory", catId);
       // this.subCategories.push(subCat);
-
       // this.searchProduct({ catId: catId, cat_id: catId });
       this.$store.commit("marketSearch/setSubCat", subCat);
       if (!subCat.length) this.hideSubCat(catId);
@@ -174,9 +170,7 @@ export default {
       this.$refs[catId][0].visible = false;
       this.subCategories = [];
     },
-
     // ------------------------------------
-
     onOverMore() {
       this.$refs.More.visible = true;
       this.$emit("parentcategory", "More");
@@ -192,22 +186,18 @@ export default {
 .logo-img {
   width: 25px;
 }
-
 .mgmg {
   margin-left: 30px;
 }
-
 @media only screen and (max-width: 768px) {
   .mobi {
     display: none;
   }
 }
-
 .a-center {
   align-content: center;
   text-align: center;
 }
-
 .drop-text {
   color: black;
 }

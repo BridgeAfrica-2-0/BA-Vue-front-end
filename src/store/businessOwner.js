@@ -715,72 +715,54 @@ export default {
         });
     },
 
-    // Getting the notifications
-    async getNotifications({ commit }, id) {
-      commit('setLoader', true);
+        // Sending a read request
+        async readNotifiactions({ dispatch, commit }, payload) {
+            console.log(payload);
+            let items = {
+                ids: [],
+            };
 
-      return await axios
-        .get(`notification/business/${id}`)
-        .then(res => {
-          commit('setLoader', false);
-          commit('setSuccess', true);
-          commit('setNotifications', res.data.data);
-          setTimeout(() => {
-            commit('setSuccess', false);
-          }, 2000);
+            payload.forEach(element => {
+                let objId = {
+                    id: null,
+                };
+                objId.id = element.id;
+                items.ids.push(objId);
+            });
+            await axios
+                .post('notification/mark-read', payload)
+                .then(() => {
+                    return true;
+                    // dispatch('getNotifications');
+                })
+                .catch(err => [console.log(err)]);
+        },
 
-          return res.data.data
-        })
-        .catch(err => {
-          commit('setLoader', false);
-          console.log('Unauthorized request !!');
-        });
-    },
+        // Delete All Notifications
+        async deleteNotifications({ dispatch, commit }, payload) {
+            console.log(payload);
+            let items = {
+                ids: [],
+            };
 
-    // Sending a read request
-    async readNotifiactions({ dispatch, commit }, payload) {
-      let items = {
-        ids: [],
-      };
-
-      payload.forEach(element => {
-        let objId = {
-          id: null,
-        };
-        objId.id = element.id;
-        items.ids.push(objId);
-      });
-      await axios
-        .post('notification/mark-read', items)
-        .then(() => {
-          dispatch('getNotifications');
-        })
-        .catch(err => [console.log(err)]);
-    },
-
-    // Delete All Notifications
-    async deleteNotifications({ dispatch, commit }, payload) {
-      let items = {
-        ids: [],
-      };
-
-      payload.forEach(element => {
-        let objId = {
-          id: null,
-        };
-        objId.id = element;
-        items.ids.push(objId);
-      });
-      await axios.post('notification/deleteAll', items).then(() => {
-        dispatch('getNotifications');
-      });
-    },
-    // delete a single notification
-    delete({ dispatch }, id) {
-      axios.delete(`notification/${id}`).then(() => {
-        dispatch('getNotifications');
-      });
-    },
+            payload.forEach(element => {
+                let objId = {
+                    id: null,
+                };
+                objId.id = element;
+                items.ids.push(objId);
+            });
+            await axios.post('notification/deleteAll', payload).then(() => {
+                return true;
+                // dispatch('getNotifications');
+            });
+        },
+        // delete a single notification
+        delete({ dispatch }, id) {
+            axios.delete(`notification/${id}`).then(() => {
+                dispatch('getNotifications');
+            });
+        },
 
     //Get pending posts from database
     async getPendingPost({ commit }) {

@@ -61,43 +61,50 @@
 </template>
 
 <script>
-export default {
-  name: "profile",
-  computed: {
-    details() {
-      return this.$store.getters["ProfileAndBusinessDetails/getdetails"];
-    },
-    community() {
-      if (this.$i18n.locale === "en") {
-        if (this.profile.followers > 1) {
-          return "Communities";
-        }
-        return "Community";
-      } else if (this.$i18n.locale === "fr") {
-        if (this.profile.followers > 1) {
-          return "Communautés";
-        }
-        return "Communauté";
-      }
-      return "Community";
-    },
-    profile() {
-      return this.$store.state.ProfileAndBusinessDetails.profile;
-    },
-  },
-  mounted() {
-    this.$store
-      .dispatch("ProfileAndBusinessDetails/getdetails")
-      .then(() => {
-        console.log("the response");
-      })
-      .catch((err) => {
-        console.log({ err: err });
-      });
-  },
+	export default {
+	  name: "profile",
+	  computed: {
+	    details() {
+	      return this.$store.getters["ProfileAndBusinessDetails/getdetails"];
+	    },
+	    community(){
+	      if((this.$i18n.locale==='en')){
+	        if(this.profile.followers>1){
+	          return "Communities"
+	        }
+          return "Community"
 
-  methods: {},
-};
+	      }else if(this.$i18n.locale==='fr'){
+	        if(this.profile.followers>1){
+	          return "Communautés"
+	        }
+          return "Communauté"
+
+	      }
+        return "Community"
+	    },
+	    profile(){
+	    return this.$store.state.ProfileAndBusinessDetails.profile;
+	    },
+
+
+	  },
+	  mounted() {
+	    this.$store
+	      .dispatch("ProfileAndBusinessDetails/getdetails")
+	      .then(() => {
+
+	        console.log("the response");
+	      })
+	      .catch(err => {
+	        console.log({ err: err });
+	      });
+	  },
+
+	  methods:{
+
+	  }
+	};
 </script>
 
 <style scoped>

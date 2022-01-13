@@ -50,25 +50,23 @@ export const Redis = {
 
     '$store.state.auth.user': {
       deep: true,
-      handle () {
+      handle() {
         this.initRedis(this.$store.state.auth.user.accessToken)
       }
     }
-
-      
   },
 
   methods: {
     ...mapMutations({
-	      newNotificationBusiness: "notification/NEW_BUSINESS_NOTIFICATION",
-	      newNotificationProfile: "notification/NEW_PROFILE_NOTIFICATION",
-	      newNotificationNetwork: "notification/NEW_NETWORK_NOTIFICATION",
-	      auth: "auth/profilConnected"
+      newNotificationBusiness: "notification/NEW_BUSINESS_NOTIFICATION",
+      newNotificationProfile: "notification/NEW_PROFILE_NOTIFICATION",
+      newNotificationNetwork: "notification/NEW_NETWORK_NOTIFICATION",
+      auth: "auth/profilConnected"
     }),
 
- 
+
     listenBusinessEvent() {
-      
+
       const $event = `business-channel${this.profile.id}`
       window.Redis.private($event)
         .listen(".BusinessNotificationEvent", payload => {
@@ -78,7 +76,7 @@ export const Redis = {
     },
 
     listenProfileEvent() {
-      
+
       const $event = `user.${this.profile.id}`;
 
       window.Redis.private($event)
@@ -88,7 +86,7 @@ export const Redis = {
     },
 
     listenNetworkeEvent() {
-      
+
       const $event = `user.${this.profile.id}`;
 
       window.Redis.private($event)
@@ -109,11 +107,11 @@ export const Redis = {
 
   created() {
 
-  	this.strategy = {
-  		user: () => this.listenProfileEvent(),
-  		network: () => this.listenNetworkeEvent(),
-  		business: () => this.listenBusinessEvent()
-  	}
+    this.strategy = {
+      user: () => this.listenProfileEvent(),
+      network: () => this.listenNetworkeEvent(),
+      business: () => this.listenBusinessEvent()
+    }
 
   }
 }

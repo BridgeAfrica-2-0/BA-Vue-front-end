@@ -2,13 +2,28 @@
   <div style="overflow-x: hidden; color: black">
     <Nav :credentials.sync="searchParams" id="top">
       <template v-slot:button>
-        <Button @click.native="strategY['all']" v-if="selectedId == 0" />
-        <Button @click.native="strategY['business']" v-if="selectedId == 1" />
+        
+        <Button media='desktop' @click.native="strategY['all']" v-if="selectedId == 0" />
+        
+        <Button media='desktop' @click.native="strategY['business']" v-if="selectedId == 1" />
         <!-- <Button @click.native="strategY['users']" v-if="selectedId == 2" /> -->
-        <Button @click.native="strategY['network']" v-if="selectedId == 3" />
-        <Button @click.native="strategY['market']" v-if="selectedId == 4" />
+        <Button media='desktop' @click.native="strategY['network']" v-if="selectedId == 3" />
+        <Button media='desktop' @click.native="strategY['market']" v-if="selectedId == 4" />
 
-        <Button @click.native="strategies" v-if="[2, 5].includes(selectedId)" />
+        <Button media='desktop' @click.native="strategies" v-if="[2, 5].includes(selectedId)" />
+      </template>
+
+      <template v-slot:mobile>
+        
+        <Button media='mobile' @click.native="strategY['all']" v-if="selectedId == 0" />
+        
+        <Button media='mobile' @click.native="strategY['business']" v-if="selectedId == 1" />
+        
+        <Button media='mobile' @click.native="strategY['network']" v-if="selectedId == 3" />
+        
+        <Button media='mobile' @click.native="strategY['market']" v-if="selectedId == 4" />
+
+        <Button media='mobile' @click.native="strategies" v-if="[2, 5].includes(selectedId)" />
       </template>
     </Nav>
 

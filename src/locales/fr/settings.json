@@ -2,7 +2,7 @@
 
         "Title": "Paramètres",
         "General": "Général",
-        "Account_type": "Type de compte",
+        "Account_Type": "Type de compte",
         "Password": "Mot de passe",
         "Payment": "Paiement",
         "Name": "Nom",
@@ -14,8 +14,10 @@
         "Country": "Pays",
         "City": "Ville",
         "Neighbourhood": "Quartier",
-        "Upgrade_your_business_account": "Mettez à niveau votre compte d'entreprise",
-        "Make_more_money": "Gagnez plus d'argent en déverrouillant les fonctionnalités de votre boutique où vous pouvez vendre des produits et services directement aux clients et recevoir des paiements instantanés.",
+        "Upgrade_Your_Business_Account": "Mettez à niveau votre compte d'entreprise",
+        "Make_more_money_by_unlocking_your_marketplace_features":"Gagnez plus d'argent en débloquant les fonctionnalités de votre place de marché",
+        "where_you_can_sell_products_and_services_directly_to_customer":"où vous pouvez vendre des produits et des services directement au client.",
+        "and_recieve_instant_payments":"et recevoir des paiements instantanés",
         "Upgrade_Now":"Mettre à niveau maintenant",
         "Chose_Default_Payment_Method":"Choisissez le mode de paiement par défaut",
         "Change_current_password":"Changer votre mot de passe actuel",
@@ -31,5 +33,12 @@
         "Save_changes":"Sauvegarder les changements",
         "Change":"Changement",
         "Notifications":"Notifications",
-        "Update":"Mise à jour"
+        "Update":"Mise à jour",
+        "No_Blocked_User_Available":"Aucun utlisateur bloqué disponible",
+        "No_Blocked_Network_Available":"Aucun réseau bloqué disponible",
+        "No_Blocked_Business_Available":"Aucune entreprise bloquée disponible",
+        "Blocked_users_can_no_longer_see_things_you_post_on_your_business":"Les utilisateurs bloqués ne peuvent plus voir ce que vous publiez sur votre entreprise",
+        "invite_your_business_to_networks":"invitez votre entreprise à des réseaux",
+        "start_a_conversation":"commencer une conversation",
+	"or_follow_your_business":"ou suivre votre entreprise"
 }

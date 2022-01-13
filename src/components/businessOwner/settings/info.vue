@@ -130,7 +130,7 @@
                 tag-variant="primary"
                 :limit="limit"
                 :tag-validator="validator"
-                :placeholder="$t('general.Enter_new_keywords_separated_by_space_comma_or_semicolon')"
+                :placeholder="$t('businessowner.Enter_new_keywords_separated_by_space_comma_or_semicolon')"
                 no-add-on-enter
               ></b-form-tags>
             </b-form-group>
@@ -849,14 +849,14 @@ export default {
     selecteddivision: function () {
       let sub_cat = [];
       this.division.forEach((item) => {
-        sub_cat.push(item.division_id);
+        sub_cat.push(item.id);
       });
       return sub_cat;
     },
     selectedmunicipality: function () {
       let sub_cat = [];
       this.municipality.forEach((item) => {
-        sub_cat.push(item.council_id);
+        sub_cat.push(item.id);
       });
       return sub_cat;
     },

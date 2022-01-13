@@ -12,14 +12,16 @@
               pills
               v-model="currentTab"
             >
-
-              <b-tab :title="$t('businessowner.Home')"><HomePage @pageChange="pageChange" /></b-tab>
+              <b-tab :title="$t('businessowner.Home')"
+                ><HomePage @pageChange="pageChange"
+              /></b-tab>
               <b-tab :title="$t('businessowner.About')"><About /></b-tab>
               <b-tab :title="$t('businessowner.Media')"
-                ><Media type="business" :showCoverAlbum="showCoverAlbum" :key="key"/></b-tab>
+                ><Media type="business"
+              /></b-tab>
               <b-tab :title="$t('businessowner.Market')"><MarketPlace /></b-tab>
               <b-tab :title="$t('profileowner.Networks')">
-                <Networks />
+                <Networks type="business" />
               </b-tab>
               <b-tab :title="$t('businessowner.Community')"
                 ><Followers
@@ -38,7 +40,7 @@ import About from "./tabs/about";
 import Media from "@/components/owner/tabs/media";
 import MarketPlace from "./tabs/marketPlace";
 import Followers from "./tabs/memberNetwork";
-import Networks from '@/components/owner/tabs/networks';
+import Networks from "@/components/owner/tabs/networks";
 import HeadPageOwner from "@/components/businessOwner/headPageOwner";
 export default {
   name: "Home",
@@ -55,29 +57,28 @@ export default {
   data() {
     return {
       currentTab: 0,
-      key:0,
       tabIndex: null,
-      showCoverAlbum:false,
       isCover: false,
-      tabs: ["#post", "#about", "#media", "#market", "#community"],
+      tabs: ["#post", "#about", "#media", "#market", "#network", "#community"],
     };
   },
 
   methods: {
     gotoCoverImages() {
-      this.showCoverAlbum = true
+      console.log("parent cover method");
       this.isCover = true;
       this.key = this.key + 1
       this.currentTab = 2;
     },
-
-    pageChange(){
-      this.$emit('pageChange')
-    }
+    pageChange() {
+      console.log("business pageChange");
+      this.$emit("pageChange");
+    },
   },
   
   watch: {
     currentTab: (newVal, oldVal) => {
+      localStorage.setItem("ba-business-active-tab", newVal);
       if (2 != newVal){
         this.showCoverAlbum = false
         this.key = this.key - 1

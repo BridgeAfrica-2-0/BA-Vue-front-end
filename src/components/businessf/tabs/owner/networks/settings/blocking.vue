@@ -39,7 +39,7 @@
       </div>
       <div v-if="blocknetworks != 0">
         <h6 class="font-weight-bolder">
-          {{ $t('network.Blocked_Networks') }} ({{blocknetworks.length}})
+          {{ $t('network.Blocked_Users') }} ({{blocknetworks.length}})
         </h6>
         <hr width="100%" />
         <b-list-group v-for="blocknetwork in blocknetworks" :key="blocknetwork.id">
@@ -67,7 +67,7 @@
       </div>
       <div v-if="blockbusiness != 0">
         <h6 class="font-weight-bolder">
-          {{ $t('network.Blocked_Businesses') }} ({{blockbusiness.length}})
+          {{ $t('network.Blocked_Users') }} ({{blockbusiness.length}})
         </h6>
         <hr width="100%" />
         <b-list-group v-for="blockbusines in blockbusiness" :key="blockbusines.id">
@@ -185,7 +185,7 @@ export default {
       this.$store
       .dispatch("NetworkSettings/UnBlock", 
       {
-        path: "unblocked-user/"+this.url+"/"+blockuser.id,
+        path: "users/unblocked/"+this.url+"/"+blockuser.id,
       })
 			.then(response => {
 			  console.log(response);
@@ -211,11 +211,11 @@ export default {
       this.$store
       .dispatch("NetworkSettings/UnBlock", 
       {
-        path: "unblocked-network/"+this.url+"/"+blocknetwork.id,
+        path: "network-banned/unblocked/"+this.url+"/"+blocknetwork.id,
       })
 			.then(response => {
 			  console.log(response);
-        this.blockNetworks();
+        this.blockUsers();
         this.loading = false;
         this.flashMessage.show({
           status: "success",
@@ -237,11 +237,11 @@ export default {
       this.$store
       .dispatch("NetworkSettings/UnBlock", 
       {
-        path: "unblocked-business/"+this.url+"/"+blockbusines.id,
+        path: "business-banned/unblocked/"+this.url+"/"+blockbusines.id,
       })
 			.then(response => {
 			  console.log(response);
-        this.blockBusiness();
+        this.blockUsers();
         this.loading = false;
         this.flashMessage.show({
           status: "success",

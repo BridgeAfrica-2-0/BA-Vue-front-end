@@ -113,20 +113,11 @@ export default {
     };
   },
 
-  watch: {
-    "$store.state.networkDetails.ndetails": function(){
-      this.network = this.$store.state.networkDetails.ndetails
-    }
-  },
-
+  
   computed: {
     business() {
       return this.$store.getters["networkDetails/getdetails.category"];
     },
-
-    /* network() {
-      return this.$store.getters["networkDetails/getdetails"];
-    }, */
   },
   created() {
     this.$store
@@ -140,6 +131,7 @@ export default {
   },
 
   methods: {
+
     async handleJoin(user) {
       document.getElementById("joinbtn" + user.id).disabled = true;
       const uri = user.is_member === 0 ? `/add-member` : `/remove-member`;
@@ -184,9 +176,12 @@ export default {
     },
 
     async handleFollow(user) {
+
       document.getElementById("followbtn" + user.id).disabled = true;
+      
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
+      
       const data = {
         id: user.id,
         type: "network",

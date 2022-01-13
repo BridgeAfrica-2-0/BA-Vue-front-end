@@ -2,7 +2,7 @@
   <div ref="wrapper">
     <Navbar />
 
-    <div class="container wahala" v-if="getUserInfos">
+    <div class="container wahala" v-if="hasLoad">
       <b-row>
         <b-col cols="12" md="12" lg="12" xl="12">
           <div class="mbl-wrap">
@@ -30,7 +30,7 @@
                     <b-col cols="12" md="12">
                       <div>
                         <b-table-simple hover small caption-top responsive>
-                          <b-tbody v-if="getUserInfos.id">
+                           <b-tbody v-if="getUserInfos.id">
                             <b-tr>
                               <b-td class="a-text text">
                                 {{ $t("settings.Name") }}
@@ -51,7 +51,7 @@
 
                               <b-td class="text"
                                 ><b-link href="#">
-                                  http://blec.bridgeafrica.com
+                                  http://www.bridgeafrica.com
                                 </b-link>
                               </b-td>
                             </b-tr>
@@ -337,7 +337,7 @@
                             <br />
 
                             <br />
-                          </b-tbody>
+                          </b-tbody> 
                         </b-table-simple>
                       </div>
                     </b-col>
@@ -351,7 +351,7 @@
                   <div class="text-center">
                     <span class="username text-center mb-3">
                       <b>
-                        {{ $t("businessowner.Upgrade_Your_Business_Account") }}
+                        {{ $t("settings.Upgrade_Your_Business_Account") }}
                       </b>
                     </span>
                   </div>
@@ -359,17 +359,13 @@
                   <div class="container">
                     <span class="text text-left">
                       <br />
+                      {{$t("settings.Make_more_money_by_unlocking_your_marketplace_features")}}
                       {{
                         $t(
-                          "businessowner.Make_more_money_by_unlocking_your_marketplace_features"
+                          "settings.where_you_can_sell_products_and_services_directly_to_customer"
                         )
                       }}
-                      {{
-                        $t(
-                          "businessowner.where_you_can_sell_products_and_services_directly_to_customer"
-                        )
-                      }}
-                      {{ $t("businessowner.and_recieve_instant_payments") }}
+                      {{ $t("settings.and_recieve_instant_payments") }}
                     </span>
                   </div>
                   <img
@@ -389,7 +385,7 @@
                       variant="primary"
                       class="text-center mt-3"
                     >
-                      {{ $t("businessowner.Upgrade_Now") }}
+                      {{ $t("settings.Upgrade_Now") }}
                     </b-button>
                   </div>
                 </b-card>
@@ -477,7 +473,7 @@
                           class=" btn btn-primary"
                           @click="changePassword"
                         >
-                          Change
+                          {{$t("settings.Change")}}
                         </button>
                       </b-form-group>
                     </b-container>
@@ -492,6 +488,7 @@
         <b-col> </b-col>
       </b-row>
     </div>
+
     <Footer />
   </div>
 </template>

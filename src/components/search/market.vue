@@ -25,10 +25,8 @@
         <b-col lg="12" xl="4" md="4" cols="12" sm="4">
           <div class="flx100">
             <p class="textt">
-              <strong class="title">
-                <router-link to="'business/' + item.id">
-                  {{ prod.name }}
-                </router-link>
+              <strong class="title cursor-pointer" @click="productDetails(product)">
+                {{ prod.name }}
               </strong>
               <br />
 
@@ -467,6 +465,11 @@
         </b-col>
       </b-row>
     </b-modal>
+    <ProductDetails
+      @closemodal="closeDetailsProduct"
+      :showModal="viewProduct"
+      :product="product"
+    />
   </div>
    <div v-else> 
          <login />
@@ -475,6 +478,7 @@
 </template>
 
 <script>
+import ProductDetails from "@/components/businessf/ProductDetails.vue";
 import login from "@/components/search/login";
 export default {
   data() {
@@ -485,7 +489,7 @@ export default {
       list: [],
       islogin:true,
       currentPage: 1,
-      nextLoad: false,
+      nextLoad: false
     };
   },
   computed: {
@@ -502,7 +506,7 @@ export default {
   },
 
   components: {
- 
+ ProductDetails,
     login
   },
 
@@ -515,6 +519,11 @@ export default {
   },
 
   methods: {
+    productDetails(product) {
+      console.log(product);
+      this.product = product;
+      this.viewProduct = true;
+    },
     changePage(value) {
       // this.$store.commit("marketSearch/setProducts", '');
       // this.$store.commit("marketSearch/setLoader", true);

@@ -556,6 +556,18 @@
 
             <div id="businesses" v-if="selectedId == '1'">
               <h6>
+                {{ $t("search.Sponsored_Result") }}
+                <fas-icon
+                  class="icons"
+                  :icon="['fas', 'exclamation-circle']"
+                  size="lg"
+                />
+              </h6>
+
+              <div>
+                <Sponsor />
+              </div>
+              <h6>
                 <fas-icon
                   class="icons"
                   :icon="['fas', 'hands-helping']"
@@ -579,6 +591,18 @@
 
             <div v-if="selectedId == '3'">
               <h6>
+                {{ $t("search.Sponsored_Result") }}
+                <fas-icon
+                  class="icons"
+                  :icon="['fas', 'exclamation-circle']"
+                  size="lg"
+                />
+              </h6>
+
+              <div>
+                <Sponsor />
+              </div>
+              <h6>
                 <fas-icon
                   class="icons"
                   :icon="['fas', 'project-diagram']"
@@ -593,13 +617,17 @@
             <!-- Filter out just the market -->
 
             <div v-if="selectedId == '4'">
-              <!-- <h6>
-                <fas-icon class="icons" :icon="['fas', 'store']" size="lg" />
-                {{$t("search.Market")}}
-              </h6> -->
+              <h6>
+                {{ $t("search.Sponsored_Result") }}
+                <fas-icon
+                  class="icons"
+                  :icon="['fas', 'exclamation-circle']"
+                  size="lg"
+                />
+              </h6>
 
               <div>
-                <!-- <Sponsor /> -->
+                <Sponsor />
               </div>
 
               <h6 class="mb-3">

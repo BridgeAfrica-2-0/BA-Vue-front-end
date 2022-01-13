@@ -126,7 +126,7 @@
     <!-- Request Payment -->
     <b-modal
       v-model="AcRequestPayment"
-      title="Enter your Number"
+      :title="$t('businessowner.Enter_your_Number')"
       size="md"
       hide-footer
     >

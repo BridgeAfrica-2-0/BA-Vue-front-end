@@ -306,7 +306,7 @@
       id="addressBusinessModal"
       ref="addressBusinessModal"
       hide-footer
-      :title="$t('businessowner.Edit_Address')"
+      :title="$t('businessowner.Edit_Business')"
       size="lg"
       @close="cancel"
       @keyup="validate('editAddress')"
@@ -526,7 +526,7 @@
         </b-form-group>
 
         <div class="form-group">
-          <label for="description">Description</label><br />
+          <label for="description">{{$t("businessowner.Description")}}</label><br />
           <textarea
             type="text"
             id="description"
@@ -542,7 +542,7 @@
           <b-container>
             <b-form-group
               label-cols-lg="12"
-              :label="$t('businessowner.Busines_Hours')"
+              :label="$t('businessowner.Business_Hours')"
               label-size="md"
               label-class=" pt-0 "
               class="mb-0"

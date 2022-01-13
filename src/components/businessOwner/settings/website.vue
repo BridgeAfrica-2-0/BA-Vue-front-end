@@ -35,11 +35,7 @@
                       {{ Package.name }}
                     </b-td>
                     <b-td class="a-text">
-                      <b-link>{{
-                        Package.id === Packages.user_actived_plan[0].package_id
-                          ? "Current"
-                          : "Upgrade"
-                      }}</b-link>
+                      <b-link>{{Package.id === Packages.user_actived_plan[0].package_id ? "Current": "Upgrade"}}</b-link>
                       <span class="text-success">
                         {{
                           Package.id ===
@@ -221,7 +217,7 @@
                   - 36000XAF</b-col
                 >
                 <b-col
-                  >{{ Packages }}XAF/{{ $t("businessowner.Month") }}
+                  >{{ Packages.premium_package_prices }}XAF/{{ $t("businessowner.Month") }}
                   <b-button
                     v-b-modal.PackageSelection
                     @click="PaymentForm.subscribe = 'one year'"

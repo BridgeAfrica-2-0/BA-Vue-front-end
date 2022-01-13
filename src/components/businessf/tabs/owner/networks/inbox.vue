@@ -2338,8 +2338,6 @@
                                         </span>
                                       </b-form-checkbox>
                                     </b-form-checkbox-group>
-<<<<<<< HEAD
-=======
                                   </b-form-group>
                                   </td>
                                 </tr>
@@ -2388,7 +2386,6 @@
                                         id="checkbox-group-2"
                                         v-model="selectedNetwork"
                                         name="flavour-2" />
->>>>>>> main
                                   </b-form-group>
                                 </td>
                               </tr>

@@ -464,11 +464,7 @@
               </div>
             </div>
 
-<<<<<<< HEAD
-            <a
-=======
             <div
->>>>>>> main
               v-if="'user' != user.user_type"
               @click.prevent="switchToProfile"
               href="#"
@@ -481,13 +477,8 @@
                 /> </span
               >Profile
               <hr class="h-divider" v-if="'user' === user.user_type" />
-<<<<<<< HEAD
-            </a>
-
-=======
             </div>
             <hr class="h-divider" />
->>>>>>> main
             <router-link
               :to="{ name: 'orders' }"
               class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
@@ -620,24 +611,6 @@ export default {
     //check for authentication
 
     this.islogin = this.$store.getters["auth/isLogged"];
-<<<<<<< HEAD
-
-      this.islogin=this.$store.getters["auth/isLogged"];
-     
-     console.log(this.islogin);
-     console.log("yoo mother fucjjeryt");
-     
-     if(this.islogin){    
-    this.init();
-    this.userOwnPage = this.onRedirect(); 
-
-    this.notificationPatterns = {
-      user: () => "/notification/latest/user",
-      business: () => `/notification/business/${this.user.id}`,
-      network: () => `/network/${this.user.id}/notifications`,
-    };
-
-=======
 
     this.islogin = this.$store.getters["auth/isLogged"];
 
@@ -653,7 +626,6 @@ export default {
         business: () => `/messages/latest/${this.user.id}/business`,
         network: () => `/messages/latest/${this.user.id}/network`,
       };
->>>>>>> main
       this.notificationPatterns = {
         user: () => "user/notification",
         business: () => `/notification/business/${this.user.id}`,
@@ -700,15 +672,12 @@ export default {
       this.userOwnPage = this.onRedirect();
     },
 
-<<<<<<< HEAD
-=======
     credentials: {
       deep: true,
       handler() {
         this.searchOptions = this.credentials;
       },
     },
->>>>>>> main
     "$i18n.locale": async function () {
       const response = await this.$repository.notification.changeLanguage(
         this.$i18n.locale

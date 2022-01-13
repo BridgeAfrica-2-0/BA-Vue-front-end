@@ -41,6 +41,7 @@
       </b-modal>
 
       <div
+        :style="getStyle"
         class="createp img-gall image-wrapp img-size"
         v-if="isEditor ? (!canUpload ? true : false) : false"
         @click="$refs.movie.click()"
@@ -62,8 +63,8 @@
           </a>
         </div>
       </div>
-      <div v-for="(image, cmp) in allImages" :key="cmp">
-        <div class="img-gall" v-for="(im, index) in image.media" :key="index">
+      <div v-for="(image, cmp) in allImages" :key="cmp" >
+        <div class="img-gall" v-for="(im, index) in image.media" :key="index" :style="getStyle">
           <Picture
             :im="im"
             :typeOfMedia="() => typeOfMedia(im.path)"
@@ -78,6 +79,7 @@
             :imageProps="imageProps"
             :isEditor="isEditor"
             :type="type"
+            :getStyle="getStyle"
           />
         </div>
       </div>
@@ -98,7 +100,10 @@ import { mapActions, mapMutations } from "vuex";
 import { fullMediaLink } from "@/helpers";
 import { v4 } from "uuid";
 
+import { ResizeMediaImage } from '@/mixins'
+
 export default {
+  mixins: [ResizeMediaImage],
   components: {
     Picture,
   },

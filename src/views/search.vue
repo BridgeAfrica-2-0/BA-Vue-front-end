@@ -1691,8 +1691,11 @@ export default {
   },
 
   watch: {
-    selectedId: function() {
-      this.changeComponent();
+    selectedId: function(newVal) {
+      
+      if ([2, 5].includes(newVal))
+        this.changeComponent();
+      
       this.changePlaceHolder();
       this.changeNotFoundTitle();
     },
@@ -1915,6 +1918,7 @@ export default {
         this.lauchLoader(false);
       }
     },
+
 
     onFindUser() {
       if (this.searchParams.keyword.trim()) {

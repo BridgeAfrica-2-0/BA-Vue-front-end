@@ -3,11 +3,11 @@
     class="createp img-gall predit2"
     @mouseover="upHere = true"
     @mouseleave="upHere = false"
-    style="width: 266px;height: 266px;"
+    :style="getStyle"
   >
     <a>
       <span>
-        <img class="card-img album-img" :src="cover(album.cover)" alt="" style="width: 266px;height: 266px;"/>
+        <img class="card-img album-img" :src="cover(album.cover)" alt="" :style="getStyle" />
       </span>
       <div class="createdesc botmedia">
         <div class="botmediadess-position" v-if="loading">
@@ -21,7 +21,7 @@
             {{ album.name }}
           </h6>
           <p style="font-size: 24px; font-weight: bold">
-            {{ album.items | plural }}
+            {{ plural }}
           </p>
 
           <b-button
@@ -66,11 +66,13 @@
 </template>
 
 <script>
-import defaultImage from "@/assets/img/nothing.jpg";
 
+import defaultImage from "@/assets/img/nothing.jpg";
 import { fullMediaLink } from "@/helpers";
+import { ResizeMediaImage } from '@/mixins'
 
 export default {
+  mixins: [ResizeMediaImage],
   props: [
     "album",
     "type",
@@ -79,22 +81,26 @@ export default {
     "canBeUpdate",
     "showAlbumPictures",
     "isEditor",
+    "showCoverAlbum"
   ],
 
   data: () => ({
     upHere: false,
     loading: false,
+    noItem: null,
   }),
 
   filters: {
     path: fullMediaLink,
-    plural: function (val) {
-      return val ? `${val} items` : this.$t('general.No_item');
+  },
+
+  computed:{
+    plural(){
+      return this.album.items ? `${this.album.items} items` : this.$t('general.No_item');
     },
   },
 
   created(){
-    console.log(this.showCoverAlbum)
     if (this.showCoverAlbum)
       this.show()
   },

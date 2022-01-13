@@ -135,7 +135,6 @@ export default {
     },
 
     async handleFollow(user) {
-      console.log("yoo ma gee");
       document.getElementById("followbtn" + user.id).disabled = true;
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
       const nextFollowState = user.is_follow === 0 ? 1 : 0;

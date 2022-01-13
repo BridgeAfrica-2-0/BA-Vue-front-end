@@ -24,7 +24,6 @@
       />
     </div>
 
-    <p class="text-center" v-if="haveNotData">{{ $t("search.Not_Data") }}</p>
     <ScrollLoader
       :loading="loadingIsActive"
       color="#ced4da"
@@ -61,6 +60,7 @@ export default {
       canScrool: "search/END_INITIAL_REQUEST",
       getPage: "search/GET_CURRENT_PAGINATION_PAGE",
       getKeywork: "search/POST_KEYWORD",
+      getStack: "search/STACK_VALUE"
     }),
 
     loadingIsActive: function () {
@@ -75,6 +75,13 @@ export default {
   created() {
     //this.getAuth();
     this.init();
+  },
+
+  watch:{
+    "$store.state.search.page":function(newVal){
+      if ( 1 == newVal)
+        this.haveNotData = false
+    }
   },
 
   methods: {
@@ -136,6 +143,7 @@ export default {
     },
 
     onscroll: async function () {
+      console.log(this.getStack,this.getPage)
       if (!this.getKeywork) return false;
 
       const scrollY = window.scrollY;
@@ -152,7 +160,7 @@ export default {
         this.setLoaderState(true);
 
         const request = await this.callback({
-          data: { ...this.getStack },
+          ...this.getStack ,
           page: this.getPage,
         });
 

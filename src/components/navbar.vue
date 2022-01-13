@@ -144,7 +144,6 @@
                 <router-link
                   :to="navLink('home')"
                   class="nav-link text-dark hov"
-                  href=""
                 >
                   Home
                 </router-link>
@@ -152,7 +151,7 @@
 
               <div class="nav-item">
                 <router-link
-                  :to="{ name: 'Search' }"
+                  :to="{ name: 'GlobalSearch' }"
                   class="nav-link text-dark hov"
                 >
                   {{ $t("general.Market") }}

@@ -977,9 +977,7 @@ export default {
             });
           } else {
             this.flashMessage.show({
-              status: "error",
-
-
+                status: "error",
                 message: this.$t('general.Unable_to_Create_Your_Network'),
                 blockClass: "custom-block-class",
               });

@@ -337,6 +337,30 @@
                 </b-form-input>
               </b-form-group>
             </b-col>
+
+
+
+
+             <b-col md="6">
+              <b-form-group
+                label-cols-lg="12"
+                :label="$t('auth.email')"
+                label-size="md"
+                label-class=" pt-0"
+                class="mb-0"
+              >
+                <b-form-input
+                  v-model="createdNetwork.email"
+                  id="network_email"
+                  placeholder=""
+                  required
+                >
+                </b-form-input>
+              </b-form-group>
+            </b-col>
+
+
+
             <b-col md="6">
               <b-form-group
                 label-cols-lg="12"

@@ -2368,6 +2368,7 @@
                                         </span>
                                       </b-form-checkbox>
                                     </b-form-checkbox-group>
+
                                   </b-form-group>
                                 </td>
                               </tr>

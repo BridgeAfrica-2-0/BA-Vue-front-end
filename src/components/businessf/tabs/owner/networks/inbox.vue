@@ -3162,7 +3162,6 @@ export default {
       // console.log("Value:", value);
       // console.log("Current:", this.currentBizId);
       if (this.type == "user") {
-        name = value.sender ? value.sender.name : value.receiver.name;
         name = value.sender
           ? value.sender.name
           : value.receiver

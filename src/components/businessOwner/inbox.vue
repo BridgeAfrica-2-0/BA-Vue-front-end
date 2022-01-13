@@ -1346,7 +1346,12 @@
                                     class="d-inline-block"
                                     variant="primary"
                                     size="30"
-                                    :src="user.profile_picture"
+                                    :src="
+                                      getImage({
+                                        type: 'user',
+                                        image: user.profile_picture,
+                                      })
+                                    "
                                   ></b-avatar>
                                   <span class="bold"> {{ user.name }} </span>
                                 </td>
@@ -2768,7 +2773,12 @@
                                     class="d-inline-block"
                                     variant="primary"
                                     size="30"
-                                    :src="user.profile_picture"
+                                    :src="
+                                      getImage({
+                                        type: 'user',
+                                        image: user.profile_picture,
+                                      })
+                                    "
                                   ></b-avatar>
                                   <span class="bold"> {{ user.name }} </span>
                                 </td>
@@ -3124,12 +3134,13 @@ export default {
           ? value.receiver.name
           : value.name;
       } else if (this.type == "business") {
-        name =
-          value.sender_business_id == this.currentBizId
+        name = value.sender_business_id
+          ? value.sender_business_id == this.currentBizId
             ? value.receiver_business.name
             : value.sender_business
             ? value.sender_business.name
-            : value.name;
+            : value.name
+          : value.name;
       } else if (this.type == "network") {
         name = value.receiver_network
           ? value.receiver_network.name

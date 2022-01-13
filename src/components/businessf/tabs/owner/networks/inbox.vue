@@ -3174,12 +3174,13 @@ export default {
           ? value.receiver_business.name
           : value.name;
       } else if (this.type == "network") {
-        name =
-          value.sender_network_id == this.currentBizId
+        name = value.sender_business
+          ? value.sender_network_id == this.currentBizId
             ? value.receiver_network.name
             : value.sender_network
             ? value.sender_network.name
-            : value.name;
+            : value.name
+          : value.name;
       }
 
       return name;

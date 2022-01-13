@@ -283,9 +283,9 @@
                             selectedChat({
                               type: 'network',
                               chat: chat,
-                              id: (chat.receiver_network_id
-                                  ? chat.receiver_network_id
-                                  : chat.sender_network_id)
+                              id: chat.receiver_network_id
+                                ? chat.receiver_network_id
+                                : chat.sender_network_id,
                             })
                           "
                         >
@@ -362,7 +362,7 @@
                 </b-col>
 
                 <b-col class="col-sm-5" @click="info = true">
-                  <h4>{{ chatSelected.name }}</h4>
+                  <h4>{{ formatName(chatSelected) }}</h4>
                   <!-- <p>Online</p> -->
                 </b-col>
                 <b-col class="col-2 text-center mr-6">
@@ -1776,15 +1776,17 @@ export default {
   methods: {
     formatName(value) {
       var name = "";
-      // console.log("Value:", value);
+
+      console.log("Value:", value);
       // console.log("Current:", this.currentUser);
       if (this.type == "user") {
-        name =
-          value.sender.id == this.currentUser.user.id
+        name = value.sender
+          ? value.sender.id == this.currentUser.user.id
             ? value.receiver.name
             : value.sender
             ? value.sender.name
-            : value.name;
+            : value.name
+          : value.name;
       } else if (this.type == "business") {
         name = value.receiver_business
           ? value.receiver_business.name

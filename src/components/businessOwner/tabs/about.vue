@@ -7,7 +7,10 @@
 
     <b-card>
       <div class="mb-3">
-        <mapbox :business="business_about" />
+        <mapbox
+          v-if="business_about.lat && business_about.lng"
+          :business="business_about"
+        />
       </div>
 
       <b-card>
@@ -1060,7 +1063,6 @@ export default {
           console.log("edit address business");
           this.test();
           console.log(this.business_about_input);
-
           var dat = {
             business_id: this.$route.params.id,
             data: {

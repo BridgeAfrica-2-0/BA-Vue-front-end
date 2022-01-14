@@ -9,7 +9,7 @@
         <b-row class="mb-1">
           <b-col md="3" cols="4" lg="3" class="my-auto">
             <b-avatar
-              class="p-avater"
+              class="p-avater bg-light"
               variant="primary"
               :src="item.profile_picture"
             ></b-avatar>

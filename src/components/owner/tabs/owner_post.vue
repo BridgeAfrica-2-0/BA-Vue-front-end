@@ -7,7 +7,7 @@
           <b-avatar
             variant="light"
             :square="'user' == profile.user_type ? false : true"
-            class="img-fluid avat-comment"
+            class="img-fluid avat-comment bg-light"
             :src="profile.profile_picture"
           ></b-avatar>
         </b-col>
@@ -104,7 +104,7 @@
           <b-row ref="loader">
             <b-col cols="1" class="m-0 p-0"></b-col>
             <b-col cols="2" class="m-0 p-0">
-              <b-avatar class="d-inline-block avat" variant="primary" :src="profile.profile_picture"></b-avatar>
+              <b-avatar class="d-inline-block avat bg-light" variant="primary" :src="profile.profile_picture"></b-avatar>
             </b-col>
             <b-col cols="9" class="pt-2" style="margin-left: -5px">
               <h5 class="m-0 font-weight-bolder"></h5>
@@ -226,7 +226,7 @@
           <b-row ref="loader">
             <b-col cols="1" class="m-0 p-0"></b-col>
             <b-col cols="2" class="m-0 p-0">
-              <b-avatar class="d-inline-block avat" variant="primary" :src="info.user.profile_picture"></b-avatar>
+              <b-avatar class="d-inline-block avat bg-light" variant="primary" :src="info.user.profile_picture"></b-avatar>
             </b-col>
             <b-col cols="9" class="pt-2" style="margin-left: -5px">
               <h5 class="m-0 font-weight-bolder">{{ info.user.name }}</h5>

@@ -680,7 +680,7 @@ export default {
     position: relative;
     margin: 5px;
     float: left;
-    width: 46.5%;
+    width: 45.5%;
     height: 175px;
     transition-duration: 0.4s;
     border-radius: 5px;

@@ -5,6 +5,7 @@
       :zoom="zoom"
       :center="center"
       :mapStyle.sync="mapStyle"
+      @load="onMapLoad"
     >
       <MglMarker
         v-for="(business, key) in businesses"
@@ -79,7 +80,6 @@
   </div>
 </template>
 <script>
-import Mapbox from "mapbox-gl";
 import { MglMap, MglMarker, MglPopup } from "vue-mapbox";
 export default {
   components: {
@@ -94,22 +94,21 @@ export default {
       accessToken: process.env.VUE_APP_MAPBOX_TOKEN,
       mapStyle: "mapbox://styles/mapbox/outdoors-v11",
       center: [11.504929555178624, 3.8465173382452815], // Lng,Lat
-      zoom: 6,
+      zoom: 5,
     };
   },
   created() {
-    this.mapbox = Mapbox;
-  },
-  mounted() {
-    setTimeout(() => {
-     // console.log("Business => ".this.businesses);
-     // console.log("Products => ".this.products);
-      //console.log("networks => ".this.networks);
-    }, 5000);
+    console.log(MglMap);
   },
   methods: {
     gotoBusiness(id) {
       this.$router.push(`/business/${id}`);
+    },
+    onMapLoad({ map }) {
+      map.resize();
+      map.on("idle", function() {
+        map.resize();
+      });
     },
   },
 };

@@ -14,7 +14,7 @@
             v-for="post in posts"
             :key="post.id"
           >
-            <div class="container-fluid  " v-if="post.video">
+            <div class="container-fluid px-1 px-md-2" v-if="post.video">
               <b-embed
                 type="iframe"
                 aspect="16by9"
@@ -125,7 +125,7 @@ export default {
   }
 
   .embed-responsive-16by9 {
-    height: 160px !important;
+    height: 150px !important;
   }
 }
 

@@ -457,7 +457,7 @@
                   :icon="['fas', 'user']"
                 /> </span
               >Profile
-              <hr class="h-divider" v-if="'user' === user.user_type" />
+              <hr class="h-divider"/>
             </div>
             <router-link
               :to="{ name: 'orders' }"

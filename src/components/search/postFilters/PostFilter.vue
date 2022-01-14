@@ -171,7 +171,21 @@ const options = [
 ];
 
 export default {
- 
+  
+  created(){
+     this.optionsBuisness = [
+      ...options,
+      { text: this.$t('general.Editor'), value: "Editor" },
+      { text: this.$t('general.Owner'), value: "Owner" },
+    ];
+
+    this.optionsNetwork = [
+      { text: this.$t('general.Editor'), value: "Editor" },
+      { text: this.$t('general.Member'), value: "Member" },
+      { text: this.$t('general.Owner'), value: "Owner" },
+    ];
+  },
+  
   data: () => ({
     created_at: null,
     isRecentPost: false,
@@ -184,20 +198,13 @@ export default {
     selectedBuisness: [],
     selectedNetwork: [],
     optionsPeople: options,
-    optionsBuisness: [
-      ...options,
-      { text: this.$t('general.Editor'), value: "Editor" },
-      { text: this.$t('general.Owner'), value: "Owner" },
-    ],
-    optionsNetwork: [
-      { text: this.$t('general.Editor'), value: "Editor" },
-      { text: this.$t('general.Member'), value: "Member" },
-      { text: this.$t('general.Owner'), value: "Owner" },
-    ],
+    optionsBuisness: null,
+    optionsNetwork: null,
     strategies: null,
   }),
 
   watch: {
+
     isRecentPost: function (newValue) {
       if (!this.keyword && newValue) {
         this.onNotified("the keyword does not exist");
@@ -251,6 +258,7 @@ export default {
     },
 
     created_at: function (newValue) {
+      console.log(newValue)
       if (!this.keyword && newValue) {
         this.onNotified("the keyword does not exist");
         return false;
@@ -401,7 +409,6 @@ export default {
       }
 
       this.findPeoplePost(render);
-
       this.lauchLoader(false);
     },
 
@@ -424,21 +431,26 @@ export default {
     }, 2000),
 
     showRecentPost() {
+      console.log('test me')
       this.isRecentPost = !this.isRecentPost;
     },
+    
     showPostHaveNotSeen() {
       this.isPostHaveNotSeen = !this.isPostHaveNotSeen;
     },
+    
     toogleRootSection() {
       this.rootSectionIsVisible = !this.rootSectionIsVisible;
 
       if (!this.rootSectionIsVisible) this.closeAllSections();
     },
+
     closeAllSections() {
       this.peopleSectionIsVisible = false;
       this.buisnessSectionIsVisible = false;
       this.networkSectionIsVisible = false;
     },
+
   },
 };
 </script>

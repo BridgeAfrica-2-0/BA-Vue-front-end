@@ -21,7 +21,8 @@ export default {
         state.notifications = notifications;
         state.all =  notifications
     },
-    setNotificationDetails(state, notificationsDetails) {
+
+    setNotificationsDetails(state, notificationsDetails) {
         state.notificationsDetails = notificationsDetails;
     },
 
@@ -36,7 +37,7 @@ export default {
       .get(`${dataInfo.id}${dataInfo.path}`)
       .then(({ data }) => {
           commit("setNotifications", data.data);
-          commit("setNotificationDetails", data.data);
+          commit("setNotificationsDetails", data);
       })
     },
 
@@ -45,7 +46,7 @@ export default {
       console.log(dataInfo.path);
       console.log(dataInfo.formData); 
       return axios
-      .post(`/network/${dataInfo.path}`, dataInfo.formData)
+      .post(`/${dataInfo.path}`, dataInfo.formData)
       .then(({ data }) => {
         console.log(data);
         return data;
@@ -57,7 +58,7 @@ export default {
       console.log(dataInfo.path);
       console.log(dataInfo.formData); 
       return axios
-      .post(`/network/${dataInfo.path}`, dataInfo.formData)
+      .post(`/${dataInfo.path}`, dataInfo.formData)
       .then(({ data }) => {
         console.log(data);
         return data;

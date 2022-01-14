@@ -16,7 +16,7 @@
       </b-col>
     </b-row>
     <br />
-        <CommunityMembers @BlockUser="BlockUser" :searchh="keywords" ref="search" type="Follower"  />
+        <CommunityMembers @BlockUser="BlockUser" :searchh="keywords" ref="search" type="Follower" />
     
   </div>
 </template>

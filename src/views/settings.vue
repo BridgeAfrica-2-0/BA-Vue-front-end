@@ -127,9 +127,9 @@
                               </b-td>
 
                               <b-td class="a-text text">
-                                <b-link href="#">
-                                  {{getUserInfos.country ? getUserInfos.country.name : Null}}
-                                </b-link>
+                                <b-link href="#">{{
+                                  getUserInfos.country
+                                }}</b-link>
                               </b-td>
                             </b-tr>
                             <br />
@@ -139,9 +139,9 @@
                               </b-td>
 
                               <b-td class="a-text text">
-                                <b-link href="#">
-                                  {{getUserInfos.region ? getUserInfos.region.name : Null}}
-                                </b-link>
+                                <b-link href="#">{{
+                                  getUserInfos.region
+                                }}</b-link>
                               </b-td>
                             </b-tr>
 
@@ -154,7 +154,7 @@
 
                               <b-td class="a-text text">
                                 <b-link href="#">{{
-                                  getUserInfos.division ? getUserInfos.division.name : Null
+                                  getUserInfos.division
                                 }}</b-link>
                               </b-td>
                             </b-tr>
@@ -168,7 +168,7 @@
 
                               <b-td class="a-text text">
                                 <b-link href="#">{{
-                                  getUserInfos.council ? getUserInfos.council.name : Null
+                                  getUserInfos.council
                                 }}</b-link>
                               </b-td>
                             </b-tr>
@@ -195,7 +195,7 @@
 
                               <b-td class="a-text text">
                                 <b-link href="#">{{
-                                  getUserInfos.neigborhood ? getUserInfos.neigborhood.name : Null
+                                  getUserInfos.neigborhood
                                 }}</b-link>
                               </b-td>
                             </b-tr>
@@ -210,7 +210,6 @@
 
                               <b-modal
                                 id="modal-10"
-                                ref="modal-10"
                                 title="$t('settings.Edit_your_information_here')"
                                 hide-footer
                               >
@@ -321,6 +320,11 @@
                                       v-model="getUserInfos.city"
                                     />
                                   </div>
+                                  <div class="mb-3">
+                                    <label class="form-label">{{
+                                      message1
+                                    }}</label>
+                                  </div>
                                   <button
                                     class="btn btn-primary"
                                     @click="update"
@@ -339,6 +343,52 @@
                     </b-col>
                   </b-row>
                 </b-card-text>
+              </b-tab>
+
+              <b-tab :title="$t('settings.Account_Type')">
+                <!-- <Website :profileId="getUserInfos.id" /> -->
+                <b-card>
+                  <div class="text-center">
+                    <span class="username text-center mb-3">
+                      <b>
+                        {{ $t("settings.Upgrade_Your_Business_Account") }}
+                      </b>
+                    </span>
+                  </div>
+
+                  <div class="container">
+                    <span class="text text-left">
+                      <br />
+                      {{$t("settings.Make_more_money_by_unlocking_your_marketplace_features")}}
+                      {{
+                        $t(
+                          "settings.where_you_can_sell_products_and_services_directly_to_customer"
+                        )
+                      }}
+                      {{ $t("settings.and_recieve_instant_payments") }}
+                    </span>
+                  </div>
+                  <img
+                    src="@/assets/img/buynow.png"
+                    class="buynow"
+                    alt="buy now"
+                  />
+                  <div class="container text-center">
+                    <img
+                      src="@/assets/img/fruits.jpg"
+                      class="img-fluid banner"
+                      alt="Kitten"
+                    />
+
+                    <b-button
+                      @click="$emit('pageChange')"
+                      variant="primary"
+                      class="text-center mt-3"
+                    >
+                      {{ $t("settings.Upgrade_Now") }}
+                    </b-button>
+                  </div>
+                </b-card>
               </b-tab>
 
               <b-tab :title="$t('settings.Payment')">
@@ -387,14 +437,13 @@
                         label-class=" text"
                         class="mb-0"
                       >
-                        <VuePassword
-                          v-model="newPass"
-                          id="password1"
-                          :strength="psw1Strength"
+                        <b-form-input
+                          id="bname"
                           type="password"
-                          @input="update1Strength"
+                          placeholder=""
                           required
-                        />
+                          v-model="newPass"
+                        ></b-form-input>
                       </b-form-group>
                     </b-container>
                   </div>
@@ -410,14 +459,15 @@
                         label-class="text"
                         class="mb-0"
                       >
-                        <VuePassword
-                          v-model="newPass1"
-                          id="password2"
-                          type="password"
-                          :strength="psw2Strength"
-                          @input="update2Strength"
+                        <b-form-input
+                          id="bname"
+                          placeholder=""
                           required
-                        />
+                          v-model="newPass1"
+                        >
+                        </b-form-input>
+                        <br />
+                        <p>{{ message }}</p>
                         <br />
                         <button
                           class=" btn btn-primary"
@@ -444,21 +494,21 @@
 </template>
 
 <script>
-import Navbar from '@/components/navbar';
-import Footer from '@/components/footer';
-import SettingsNotifications from '@/components/SettingsNotifications.vue';
-import Payment from "@/components/owner/settings/payment";
+import Navbar from "@/components/navbar";
+import Footer from "@/components/footer";
+import SettingsNotifications from "@/components/SettingsNotifications.vue";
+import Website from "@/components/businessOwner/settings/website";
+import Payment from "@/components/businessOwner/settings/payment";
 import Blocking from "@/components/owner/settings/blocking";
-import VuePassword from 'vue-password';
 
 export default {
   components: {
     Navbar,
     Footer,
     SettingsNotifications,
+    // Website,
     Payment,
     Blocking,
-    VuePassword
   },
 
   computed: {
@@ -560,28 +610,10 @@ export default {
         { value: "male", text: "male" },
         { value: "female", text: "female" },
       ],
-      psw1Strength: 0,
-      psw2Strength: 0,
     };
   },
 
   methods: {
-    update1Strength(newPass){
-      console.log(newPass)
-      this.psw1Strength = this.checkPassword(newPass);
-    },
-    update2Strength(newPass1){
-      console.log(newPass1)
-      this.psw2Strength = this.checkPassword(newPass1);
-    },
-    checkPassword(pass){
-      let crossMinNum = pass.length > 4 ? 1 : 0;
-      let hasNum = /\d/.test(pass) ? 1 : 0;
-      let hasLetters = /[a-zA-Z]/.test(pass) ? 1 : 0;
-      let hasSymbols = /[ `!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?~]/.test(pass) ? 1 : 0;
-      return crossMinNum + hasNum + hasLetters + hasSymbols;
-    },
-
     userInfos() {
       this.$store
         .dispatch("profileSettingsEdit/userInfos")
@@ -621,11 +653,7 @@ export default {
         .then((response) => {
           console.log(response);
           console.log(this.getUserInfos);
-          this.flashMessage.show({
-            status: "success",
-            message: response.data.message
-          });  
-          this.$refs['modal-10'].hide()
+          this.message1 = response.data.message;
           this.userInfos();
         })
         .catch((err) => {
@@ -676,37 +704,26 @@ export default {
       formData2.append("password", this.newPass);
       formData2.append("password_confirmation", this.newPass1);
 
-      if(this.newPass != this.newPass1){
-        this.flashMessage.show({
-          status: "warning",
-          message: "the password does not match"
-        }); 
-         this.loading=false;
-      }else{
-
-        
+      if (this.newPass != this.newPass1) {
+        this.message = "the password does not match";
+        this.loading = false;
+      } else {
         this.$store
-      .dispatch("profileSettingsEdit/changePassword",formData2)
-      .then(response =>{
-        console.log("------------------------");
-        console.log(response.data.message);
-        this.flashMessage.show({
-          status: "success",
-          message: response.data.message
-        }); 
-         this.loading=false;
-        
-      })
-      .catch((err) => {
-        this.flashMessage.show({
-          status: "error",
-          message: "An error occured"
-        }); 
-        console.log('--------- error: ');
-          console.error(err);
-           this.loading=false;
-        });
-        }
+          .dispatch("profileSettingsEdit/changePassword", formData2)
+          .then((response) => {
+            console.log("------------------------");
+            console.log(response.data.message);
+            this.message = response.data.message;
+
+            this.loading = false;
+          })
+          .catch((err) => {
+            this.message = "An error occured";
+            console.log("--------- error: ");
+            console.error(err);
+            this.loading = false;
+          });
+      }
     },
 
     getRegion() {

@@ -210,7 +210,6 @@ export default {
           },
         })
         .then(({ data }) => {
-          console.log("Gatia");
           console.log(data);
           console.log(Object.values(data.data));
           let object = Object.values(data.data);

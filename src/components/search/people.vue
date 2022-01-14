@@ -69,14 +69,29 @@
                     xl="12"
                     class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
                   >
+
                     <b-button
-                      block
-                      size="sm"
-                      class="b-background flexx pobtn shadow"
-                      variant="primary"
-                    >
-                      <i class="fas fa-user-plus fa-lg btn-icon"></i>
-                      <span class="btn-com">{{ $t("search.Community") }}</span>
+                          block
+                          size="sm"
+                          class="b-background flexx pobtn shadow"
+                          :class="people.is_follow !== 0 && 'u-btn'"
+                          :id="'followbtn' + people.id"
+                          variant="primary"
+                          @click="handleFollow(people)"
+                        >
+                          <i
+                            class="fas fa-lg btn-icon"
+                            :class="
+                              people.is_follow !== 0
+                                ? 'fa-user-minus'
+                                : 'fa-user-plus'
+                            "
+                          ></i>
+
+                          <span class="btn-com">
+                            {{ $t("search.Community") }}
+                          </span>
+                        
                     </b-button>
                   </b-col>
                 </b-row>
@@ -90,6 +105,8 @@
 </template>
 
 <script>
+import axios from "axios"
+
 export default {
   name: "PeopleComponent",
   props: {
@@ -97,6 +114,31 @@ export default {
       type: Object,
     },
   },
+
+  methods:{
+    async handleFollow(user) {
+      document.getElementById("followbtn" + user.id).disabled = true;
+      const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
+      const nextFollowState = user.is_follow === 0 ? 1 : 0;
+      const data = {
+        id: user.id,
+        type: "user",
+      };
+
+      await axios
+        .post(uri, data)
+        .then(({ data }) => {
+          console.log(data);
+          user.is_follow = nextFollowState;
+          document.getElementById("followbtn" + user.id).disabled = false;
+        })
+
+        .catch((err) => {
+          console.log({ err: err });
+          document.getElementById("followbtn" + user.id).disabled = false;
+        });
+    }
+  }
 };
 </script>
 

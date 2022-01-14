@@ -11,78 +11,91 @@
         </a></b-alert
       > 
 
-      <b-row class="m-1 mt-4" v-for="(post, index) in posts.data" :key="index">
+
+      <Post
+        v-for="item in posts.data"
+        :key="item.updated_at"
+        :post="item"
+        :mapvideo="() => mapvideo(item.media)"
+        :mapmediae="() => mapmediae(item.media)"
+        :businessLogo="item.logo_path"
+        :editPost="f => f"
+        :deletePost="f => f"
+        :isDisplayInSearch="true"
+      />
+
+      <!-- <b-row class="m-1 mt-4" v-for="(post, index) in posts.data" :key="index">
      
     
-      <b-col cols="12" class="mt-4">
-        <b-row>
-          <b-col cols="2" md="1" class="m-0 p-0">
-            <b-avatar class="d-inline-block avat" variant="primary" :src="post.profile_picture"></b-avatar>
-          </b-col>
-          <b-col cols="10" md="11" class="pt-2">
-            <h5 class="m-0 font-weight-bolder">{{ post.name }}</h5>
-            <p class="duration">{{ post.created_at | fromNow }}</p>
-          </b-col>
-        </b-row>
-        <b-row>
-          <b-col cols="12" class="mt-2">
-            <p class="post-text">{{ post.content }}</p>
-          </b-col>
-        </b-row>
-        <b-row>
-          <b-col cols="12" class="mt-2" v-if="post.media.length">
-            <div class="" v-if="1 === post.media.length">
-              <img class="img-fluid post-container" :src="post.media[0]" alt="Photo1" />
+        <b-col cols="12" class="mt-4">
+          <b-row>
+            <b-col cols="2" md="1" class="m-0 p-0">
+              <b-avatar class="d-inline-block avat" variant="primary" :src="post.profile_picture"></b-avatar>
+            </b-col>
+            <b-col cols="10" md="11" class="pt-2">
+              <h5 class="m-0 font-weight-bolder">{{ post.name }}</h5>
+              <p class="duration">{{ post.created_at | fromNow }}</p>
+            </b-col>
+          </b-row>
+          <b-row>
+            <b-col cols="12" class="mt-2">
+              <p class="post-text">{{ post.content }}</p>
+            </b-col>
+          </b-row>
+          <b-row>
+            <b-col cols="12" class="mt-2" v-if="post.media.length">
+              <div class="" v-if="1 === post.media.length">
+                <img class="img-fluid post-container" :src="post.media[0]" alt="Photo1" />
+              </div>
+              <lightbox :cells="post.media.length" :items="post.media" v-else></lightbox>
+            </b-col>
+            <b-col class="mt-1">
+              <span class="mr-3 cursor" 
+                ><b-icon :icon="post.is_liked ? 'suit-heart-fill' : 'suit-heart'" variant="primary" aria-hidden="true"></b-icon>
+                {{ post.likes_count | formatNumber }}</span
+              >
+              <span class="cursor">
+                <b-icon icon="chat-fill" variant="primary" aria-hidden="true"></b-icon>
+                {{ post.comment_count | formatNumber }}</span
+              >
+            </b-col>
+          </b-row>
+          <div class="mt-2 d-inline-flex w-100" v-if="toggle">
+            <div class="m-md-0 p-md-0">
+              <b-avatar variant="primary" square :src="post.profile_picture" class="img-fluid avat-comment"></b-avatar>
             </div>
-            <lightbox :cells="post.media.length" :items="post.media" v-else></lightbox>
-          </b-col>
-          <b-col class="mt-1">
-            <span class="mr-3 cursor" 
-              ><b-icon :icon="post.is_liked ? 'suit-heart-fill' : 'suit-heart'" variant="primary" aria-hidden="true"></b-icon>
-              {{ post.likes_count | formatNumber }}</span
-            >
-            <span class="cursor">
-              <b-icon icon="chat-fill" variant="primary" aria-hidden="true"></b-icon>
-              {{ post.comment_count | formatNumber }}</span
-            >
-          </b-col>
-        </b-row>
-        <div class="mt-2 d-inline-flex w-100" v-if="toggle">
-          <div class="m-md-0 p-md-0">
-            <b-avatar variant="primary" square :src="post.profile_picture" class="img-fluid avat-comment"></b-avatar>
-          </div>
 
-          <div class="p-0 m-0 pr-3 inline-comment" style="width: 100%">
-            <input
-              :placeholder="$t('search.Post_a_Comment')"
-              class="comment"
-              type="text"
-              v-model="comment"
-              @keypress.enter="onCreateComment(post)"
-            />
-            <b-spinner
-              style="color: rgb(231, 92, 24); position: absolute; right: 17px"
-              v-if="createCommentRequestIsActive"
-            ></b-spinner>
-            <fas-icon
-              class="primary send-cmt"
-              :icon="['fas', 'paper-plane']"
-              @click="onCreateComment(post)"
-              v-if="comment.trim().length > 2 && !createCommentRequestIsActive"
-            />
+            <div class="p-0 m-0 pr-3 inline-comment" style="width: 100%">
+              <input
+                :placeholder="$t('search.Post_a_Comment')"
+                class="comment"
+                type="text"
+                v-model="comment"
+                @keypress.enter="onCreateComment(post)"
+              />
+              <b-spinner
+                style="color: rgb(231, 92, 24); position: absolute; right: 17px"
+                v-if="createCommentRequestIsActive"
+              ></b-spinner>
+              <fas-icon
+                class="primary send-cmt"
+                :icon="['fas', 'paper-plane']"
+                @click="onCreateComment(post)"
+                v-if="comment.trim().length > 2 && !createCommentRequestIsActive"
+              />
+            </div>
           </div>
-        </div>
-        <Comment v-for="(comment, index) in comments" :key="index" :item="comment" :uuid="post.post_id" />
-        <Loader v-if="loadComment" />
-        <NoMoreData
-          v-if="comments.length && !loadComment"
-          :hasData="hasData"
-          @click.native="onShowComment"
-          :moreDataTitle="'Show more post'"
-          :noDataTitle="'No post'"
-        />
-      </b-col>
-    </b-row>
+          <Comment v-for="(comment, index) in comments" :key="index" :item="comment" :uuid="post.post_id" />
+          <Loader v-if="loadComment" />
+          <NoMoreData
+            v-if="comments.length && !loadComment"
+            :hasData="hasData"
+            @click.native="onShowComment"
+            :moreDataTitle="'Show more post'"
+            :noDataTitle="'No post'"
+          />
+        </b-col>
+      </b-row> -->
     </div>
   </div>
 </template>
@@ -97,24 +110,12 @@ import { NoMoreDataForComment } from '@/mixins';
 
 import { mapGetters } from 'vuex';
 
-export default {
- name: 'postNetwork',
-  mixins: [NoMoreDataForComment],
-  data() {
-    
-     return {
-      toggle: false,
-      comments: [],
-      loadComment: false,
-      comment: '',
-      showComment: false,
-      processLike: false,
-      createCommentRequestIsActive: false,
+import Post from "@/components/businessOwner/ownerPostComponent.vue";
 
-      post:{},
-    
-    };
-  },
+export default {
+  name: 'postNetwork',
+  mixins: [NoMoreDataForComment],
+  
   computed: {
     posts() {
       return this.$store.getters["allSearch/getPosts"];
@@ -127,111 +128,42 @@ export default {
       profile: 'auth/profilConnected',
     }),
 
-    icon() {
-      return this.post.is_liked ? 'suit-heart-fill' : 'suit-heart';
-    },
-
   },
 
    components: {
-    Comment,
-    Loader,
+    Post,
   },
 
   methods: {
-    onCreateComment: async function (post) {
-       
-       this.post=post;
-      if (!(this.comment.trim().length > 2 && !this.createCommentRequestIsActive)) return false;
-      this.createCommentRequestIsActive = true;
-      this.loadComment = true;
-      const request = await this.$repository.share.createComment({
-        post: this.post.post_id,
-        data: {
-          networkId: this.profile.id,
-          comment: this.comment,
-        },
+
+    mapmediae(media) {
+      let mediaarr = [];
+
+      media.forEach((item) => {
+        let type = this.checkMediaType(item.media_type);
+        if (type != "video") {
+          mediaarr.push(item.media_url);
+        }
       });
 
-      if (request.success) {
-        this.page = 1;
-        this.onShowComment();
-        this.comment = '';
-        this.post = {
-          ...this.post,
-          comment_count: this.post.comment_count + 1,
-        };
-        this.flashMessage.success({
-          message: 'Comment created',
-        });
-      }
-
-      this.createCommentRequestIsActive = false;
-      this.loadComment = false;
-    },
-    onLike: async function (post) {
-      this.post=post;
-      if (!this.processLike) {
-        this.processLike = true;
-
-        const request = await this.$repository.share.postLike({
-          post: this.post.post_id,
-          network: this.profile.id,
-        });
-
-        if (request.success)
-          this.post = Object.assign(this.post, {
-            is_liked: this.post.is_liked ? 0 : 1,
-            likes_count: !this.post.is_liked
-              ? this.post.likes_count + 1
-              : this.post.likes_count
-              ? this.post.likes_count - 1
-              : 0,
-          });
-        this.processLike = false;
-      }
-    },
-    chooseImage: function () {
-      document.getElementById('image').click();
+      return mediaarr;
     },
 
-    chooseVideo: function () {
-      document.getElementById('video').click();
+    checkMediaType(media) {
+      return media.split("/")[0];
     },
 
-    chooseDocument: function () {
-      document.getElementById('document').click();
-    },
+    mapvideo(media) {
+      let mediaarr = [];
 
-    showModal() {
-      this.$refs['modal-3'].show();
-    },
-    hideModal() {
-      this.$refs['modal-3'].hide();
-    },
-
-    onToggle() {
-      this.toggle = !this.toggle;
-      if (this.toggle) this.onShowComment();
-    },
-
-    onShowComment: async function () {
-      if (!this.hasData) return false;
-
-      this.loadComment = true;
-
-      const request = await this.$repository.post.fetch({
-        uuid: this.post.post_id,
-        page: this.page,
+      media.forEach((item) => {
+        let type = this.checkMediaType(item.media_type);
+        if (type == "video") {
+          mediaarr.push(item.media_url);
+        }
       });
 
-      if (request.success) {
-        this.comments = [...this.comments, ...request.data];
-        this.hasData = request.data.length ? true : false;
-        this.page = request.data.length ? this.page + 1 : this.page;
-      }
-
-      this.loadComment = false;
+      return mediaarr;
     },
   },
 };

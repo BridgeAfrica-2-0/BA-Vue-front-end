@@ -516,6 +516,11 @@ export default {
   width: 266px;
   height: 266px;
 }
+@media only screen and (max-width: 600px) {
+  .img-size {
+    height: 150px;
+  }
+}
 
 .botmediadess-position {
   text-align: center;

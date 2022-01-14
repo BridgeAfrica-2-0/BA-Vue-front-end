@@ -1,5 +1,6 @@
 <template>
   <div
+    v-if = "media == 'desktop'"
     class="input-group-append color-sit cursor-pointer"
     style="
       color: white;
@@ -11,9 +12,31 @@
       <b-icon icon="search" style="color: white" font-scale="1.5"></b-icon>
     </span>
   </div>
+  <b-icon
+    v-else
+    icon="search"
+    style="color: #e75c18"
+    font-scale="1.5"
+  ></b-icon>
 </template>
 
+<script type="text/javascript">
+  
+  export default {
+    name: "ShareButton",
+    props: {
+      media: String,
+      default : () => 'desktop',
+    },
+    created(){
+      console.log(this.media)
+    }
+  }
+
+</script>
+
 <style scoped>
+
 .color-sit {
   background-color: #e75c18;
 }

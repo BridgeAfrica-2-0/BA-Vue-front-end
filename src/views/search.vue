@@ -2,13 +2,66 @@
   <div style="overflow-x: hidden; color: black">
     <Nav :credentials.sync="searchParams" id="top">
       <template v-slot:button>
-        <Button @click.native="strategY['all']" v-if="selectedId == 0" />
-        <Button @click.native="strategY['business']" v-if="selectedId == 1" />
-        <!-- <Button @click.native="strategY['users']" v-if="selectedId == 2" /> -->
-        <Button @click.native="strategY['network']" v-if="selectedId == 3" />
-        <Button @click.native="strategY['market']" v-if="selectedId == 4" />
+        <Button
+          media="desktop"
+          @click.native="strategY['all']"
+          v-if="selectedId == 0"
+        />
 
-        <Button @click.native="strategies" v-if="[2, 5].includes(selectedId)" />
+        <Button
+          media="desktop"
+          @click.native="strategY['business']"
+          v-if="selectedId == 1"
+        />
+        <!-- <Button @click.native="strategY['users']" v-if="selectedId == 2" /> -->
+        <Button
+          media="desktop"
+          @click.native="strategY['network']"
+          v-if="selectedId == 3"
+        />
+        <Button
+          media="desktop"
+          @click.native="strategY['market']"
+          v-if="selectedId == 4"
+        />
+
+        <Button
+          media="desktop"
+          @click.native="strategies"
+          v-if="[2, 5].includes(selectedId)"
+        />
+      </template>
+
+      <template v-slot:mobile>
+        <Button
+          media="mobile"
+          @click.native="strategY['all']"
+          v-if="selectedId == 0"
+        />
+
+        <Button
+          media="mobile"
+          @click.native="strategY['business']"
+          v-if="selectedId == 1"
+        />
+
+        <Button
+          media="mobile"
+          @click.native="strategY['network']"
+          v-if="selectedId == 3"
+        />
+
+        <Button
+          media="mobile"
+          @click.native="strategY['market']"
+          v-if="selectedId == 4"
+        />
+
+        <Button
+          media="mobile"
+          @click.native="strategies"
+          v-if="[2, 5].includes(selectedId)"
+        />
       </template>
     </Nav>
 
@@ -403,14 +456,18 @@
             <!--filter for all takes just two fields at a time  -->
 
             <div id="all" v-if="selectedId == '0'">
-              <!-- <h6>
-                {{$t("search.Sponsored_Result")}}
-                <fas-icon class="icons" :icon="['fas', 'exclamation-circle']" size="lg" />
+              <h6>
+                {{ $t("search.Sponsored_Result") }}
+                <fas-icon
+                  class="icons"
+                  :icon="['fas', 'exclamation-circle']"
+                  size="lg"
+                />
               </h6>
 
               <div>
                 <Sponsor />
-              </div> -->
+              </div>
 
               <h6>
                 <fas-icon
@@ -1676,7 +1733,7 @@ export default {
   },
 
   watch: {
-    selectedId: function() {
+    selectedId: function () {
       this.changeComponent();
       this.changePlaceHolder();
       this.changeNotFoundTitle();
@@ -1703,12 +1760,11 @@ export default {
       if (this.$route.query.uuid) this.selectedId = 5;
     },
     // [ED]----------
-    getKeyword() {
+    getKeyword(data) {
+      let elm = data ? data : { keyword: "" };
       console.log("the keyword is: ", this.searchParams.keyword);
       this.$store
-        .dispatch("allSearch/SEARCH", {
-          keyword: this.searchParams.keyword,
-        })
+        .dispatch("allSearch/SEARCH", elm)
         .then((res) => {
           // console.log("categories loaded!");
         })
@@ -1749,11 +1805,9 @@ export default {
         });
     },
 
-    searchProducts() {
+    searchProducts(data) {
       this.$store
-        .dispatch("marketSearch/searchProducts", {
-          keyword: this.searchParams.keyword,
-        })
+        .dispatch("marketSearch/searchProducts", data)
         .then((res) => {
           // console.log("categories loaded!");
         })
@@ -1762,11 +1816,9 @@ export default {
         });
     },
 
-    searchNetworks() {
+    searchNetworks(data) {
       this.$store
-        .dispatch("networkSearch/SEARCH", {
-          keyword: this.searchParams.keyword,
-        })
+        .dispatch("networkSearch/SEARCH", data)
         .then((res) => {
           // console.log("categories loaded!");
         })
@@ -1837,9 +1889,8 @@ export default {
 
     changeNotFoundTitle() {
       try {
-        this.notFoundComponentTitle = this.strategyForNotFoundComponentTitle[
-          this.selectedId
-        ]();
+        this.notFoundComponentTitle =
+          this.strategyForNotFoundComponentTitle[this.selectedId]();
       } catch (error) {
         this.notFoundComponentTitle = "";
       }
@@ -1979,7 +2030,8 @@ export default {
           break;
 
         case "MC":
-          this.selectcategories = this.Mayor_councils_filters_and_public_institution;
+          this.selectcategories =
+            this.Mayor_councils_filters_and_public_institution;
 
           break;
 

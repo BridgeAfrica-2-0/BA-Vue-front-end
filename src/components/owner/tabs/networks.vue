@@ -5,6 +5,7 @@
       <span class="t-color"> {{ $t("profileowner.Network") }} </span>
 
       <b-button
+        v-if="type == 'others'"
         class="btn btn-outline-primary pull-right float-right mb-2 blec-font"
         style="margin-top: -6px"
         @click="showmodal(true, 'add')"
@@ -22,7 +23,7 @@
           :key="index"
         >
           <div class="people-style shadow h-100">
-            <div class="float-right others">
+            <div class="float-right others" v-if="type == 'others'">
               <b-dropdown
                 size="lg"
                 variant="link"
@@ -106,7 +107,7 @@
     ></infinite-loading>
 
     <div class="h-100 w-100" v-if="networks.length < 1 && !loader">
-      <div class="mx-auto text-center my-5">
+      <div class="mx-auto text-center my-5" v-if="type == 'others'">
         <h2 class="my-3">
           {{ $t("profileowner.Build_networks_around_your_Business") }}
         </h2>
@@ -126,6 +127,11 @@
           <b-button @click="showmodal(true, 'add')" variant="primary">{{
             $t("profileowner.Add_Network")
           }}</b-button>
+        </p>
+      </div>
+      <div class="mx-auto text-center my-5" v-else>
+        <p class="my-2" v-if="!networks.length">
+          No network found
         </p>
       </div>
     </div>
@@ -597,6 +603,14 @@ import Multiselect from "vue-multiselect";
 import VuePhoneNumberInput from "vue-phone-number-input";
 import Address from "./network/Address";
 export default {
+
+  props:{
+    type: {
+      type: String,
+      default: () => 'others'
+    }
+  },
+
   data() {
     return {
       page: 1,
@@ -876,7 +890,10 @@ export default {
 
     infiniteHandler($state) {
       console.log("network?page=" + this.page);
-      let url = "network?page=" + this.page;
+
+      let url = this.type == 'others' ? "network?page=" + this.page : 
+`business/network/${this.$route.params.id}?page=${this.page}`
+      
       if (this.page == 1) {
         this.profileNetworks.splice(0);
       }
@@ -885,8 +902,6 @@ export default {
         .dispatch("profile/loadMore", url)
 
         .then(({ data }) => {
-          console.log(data.data);
-          console.log("yoyoyooyoy");
           if (data.data.length) {
             this.page += 1;
 
@@ -1072,7 +1087,7 @@ export default {
         "secondary_phone",
         this.createdNetwork.secondary_phone.split(" ").join("")
       );
-      fd.append("email", "dev@bav.com");
+      fd.append("email",  this.createdNetwork.email);
       fd.append("network_categories", this.selectedcategories);
 
       fd.append("description", this.createdNetwork.description);

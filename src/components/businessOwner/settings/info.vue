@@ -130,7 +130,7 @@
                 tag-variant="primary"
                 :limit="limit"
                 :tag-validator="validator"
-                :placeholder="$t('general.Enter_new_keywords_separated_by_space_comma_or_semicolon')"
+                :placeholder="$t('businessowner.Enter_new_keywords_separated_by_space_comma_or_semicolon')"
                 no-add-on-enter
               ></b-form-tags>
             </b-form-group>

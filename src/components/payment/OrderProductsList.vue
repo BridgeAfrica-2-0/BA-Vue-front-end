@@ -1,56 +1,27 @@
 <template>
 	<div id="orderList">    
 		<div
-			class="row order-item mb-4"
+			class=" order-item mb-4"
 			v-for="(cart_item, i) in cart.data "
 			:key="i"
-		> 
+		>  
 
-			<div class="col-12 order-item-caroussel col-sm-4 mb-3 col-md-4">
+<div  class="d-inline-flex">   
+			<div class="">
 				<!-- <ProductCaroussel :productImages="images(cart_item.product_picture)" /> -->
 				<img :src="cart_item.product_picture" class="r-image" alt="">
 			</div>
 			<div
-				class="col-auto flex-fill order-info body-font-size col-sm-8 col-md-8 "
+				class=" flex-fill order-info body-font-size  "
 			>
-
-			<div class="row">
-				<div class="col-3 col-md-2 pr-0">	{{$t('general.Name')}}</div>
-				<div class="col">{{ cart_item.product_name }}</div>
-			</div>
-
-			<div class="row">
-				<div class="col-3 col-md-2 pr-0">	{{$t('general.Amount')}} :</div>
-				<div class="col">{{ formatMoney(Number(cart_item.product_price)) }}</div>
-			</div>
-
-			<div class="row">
-				<div class="col-3 col-md-2 pr-0">{{$t('general.tax')}} :</div>
-				<div class="col">{{ formatMoney(Number(cart_item.tax_amount)) }}</div>
-			</div>
-
-			<div class="row">
-				<div class="col-3 col-md-2 pr-0">	{{$t('general.Quantity')}} :</div>
-				<div class="col">{{cart_item.quantity}}</div>
-			</div>
-
-			<div class="row">
-				<div class="col-3 col-md-2 pr-0">		{{$t('general.Shipping')}}:</div>
-				<div class="col"><span  
-									class=" cursor"
-									v-b-tooltip.hover.top="cart_item.shipping_address"
-									> 
-									 {{ formatMoney(Number( cart_item.shipping_cost )) }} </span>	</div>
-			</div>
-				<!-- <b-table-simple borderless>
-					<b-tbody>
+				
 						<b-tr>
 							<b-td>
 								{{$t('general.Name')}}
 							</b-td>
 							<b-th>
 								{{ cart_item.product_name }}
-								 {{ cart_item.name }} 
+								
 							</b-th>
 						</b-tr>
 						<b-tr>
@@ -59,11 +30,23 @@
 							</b-td>
 							<b-th>
 								{{ formatMoney(Number(cart_item.product_price)) }}
-							
+								
 							</b-th>
 						</b-tr>
 
 						<b-tr>
+							<b-td>
+								{{$t('general.Shipping')}} :
+							</b-td>
+							<b-th>
+								{{ formatMoney(Number( cart_item.shipping_cost )) }}
+								
+							</b-th>
+						</b-tr>
+
+
+
+                        <b-tr>
 							<b-td>
 								{{$t('general.tax')}} :
 							</b-td>
@@ -81,53 +64,47 @@
 							<b-th>
 
 								{{cart_item.quantity}}
-								
+								<!-- <input
+									class="quantity-input"
+									type="number"
+									min="1"
+									@change="changeQuantity($event, i)"
+									v-model="cart_item.quantity"
+								/> -->
 							</b-th>
 						</b-tr>
 						<b-tr>
-							<b-td>
-								{{$t('general.Shipping')}}:
-							</b-td>
-							<b-th >
 							
-								<div class="row">
-									<th  
-									class=" cursor"
-									v-b-tooltip.hover.top="cart_item.shipping_address"
-									>
-									 {{ formatMoney(Number( cart_item.shipping_cost )) }}									</th>
-								</div>
-							</b-th>
+							
 						</b-tr>
 						<b-tr>
 							<b-td>
 								{{$t('general.Total')}}:
 							</b-td>
 							<b-th>
-								<div  class="row">
-									<th 
-									class=" cursor"
-									
-									>  	   {{ formatMoney(Number(cart_item.sub_total) ) }} 
-
-
-									
-									
-										 
-									</th>
-								</div>
+								 {{ formatMoney(Number(cart_item.sub_total) ) }} 
 								
-								
-								
+								<!-- {{
+									formatMoney(
+										Number(cart_item.product_price) * cart_item.quantity + 1000
+									)
+								}} -->
+								<!-- {{
+									formatMoney(
+										Number(cart_item.amount) * cart_item.quantity +
+											cart_item.shipping
+									)
+								}} -->
 							</b-th>
 						</b-tr>
-					</b-tbody>
-				</b-table-simple> -->
+				
 			</div>
+
+			 </div>
 		</div>
 		<div class="row my-4" v-if="loading">
 			<div class="col-12 d-flex justify-content-center align-items-center">
-				<b-spinner  variant="primary"
+				<b-spinner variant="primary"
 					style="width: 3rem; height: 3rem;"
 					label="Loading"
 				></b-spinner>
@@ -170,7 +147,7 @@
 		async created() {
 			this.loading = true;
 			await this.$store
-				.dispatch("checkout/getCartt")
+				.dispatch("checkout/getCart")
 				.then(() => {
 					this.loading = false;
 					this.error = false;  

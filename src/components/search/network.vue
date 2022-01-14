@@ -1,5 +1,5 @@
 <template>
-  <div  v-if="islogin">
+  <div v-if="islogin">
     <b-spinner
       v-if="loader"
       variant="primary"
@@ -64,7 +64,6 @@
                   :id="'followbtn' + network.id"
                   :class="network.is_follow !== 0 && 'u-btn'"
                   variant="primary"
-                  @click="handleFollow(network)"
                 >
                   <i
                     class="fas fa-lg btn-icon"
@@ -122,10 +121,10 @@
     <b-modal id="modal-sm" size="sm" hide-header>
       {{ $t("search.Do_you_want_to_join_this_network") }}?
     </b-modal>
-  </div> <div v-else> 
-         <login />
-    
-     </div>
+  </div>
+  <div v-else>
+    <login />
+  </div>
 </template>
 
 <script>
@@ -140,15 +139,14 @@ export default {
       total: 0,
       per_page: 10,
       list: [],
-      islogin:true,
+      islogin: true,
       currentPage: 1,
       nextLoad: false,
     };
   },
 
   components: {
- 
-    login
+    login,
   },
 
   computed: {
@@ -167,9 +165,9 @@ export default {
       this.networkSearch();
     }
 
-     this.islogin=this.$store.getters["auth/isLogged"];
-     
-     console.log(this.islogin);
+    this.islogin = this.$store.getters["auth/isLogged"];
+
+    console.log(this.islogin);
   },
 
   methods: {
@@ -179,51 +177,6 @@ export default {
       this.currentPage = value;
       console.log("[debug] page before:", value);
       this.networkSearch();
-    },
-    async handleJoin(user) {
-      document.getElementById("joinbtn" + user.id).disabled = true;
-      const uri = user.is_member == 0 ? `/add-member` : `/remove-member`;
-      const nextFollowState = user.is_member == 0 ? 1 : 0;
-      const data = {
-        id: user.id,
-        type: "network",
-      };
-      console.log(user);
-
-      console.log("is member: ", user.is_member);
-      await axios
-        .post(uri, data)
-        .then((response) => {
-          console.log(response);
-          user.is_member = nextFollowState;
-          console.log("join state:", user.is_member);
-          document.getElementById("joinbtn" + user.id).disabled = false;
-        })
-        .catch((err) => {
-          console.log(err);
-          document.getElementById("joinbtn" + user.id).disabled = false;
-        });
-    },
-
-    async handleFollow(user) {
-      document.getElementById("followbtn" + user.id).disabled = true;
-      const uri = user.is_follow == 0 ? `/follow-community` : `/unfollow`;
-      const nextFollowState = user.is_follow === 0 ? 1 : 0;
-      const data = {
-        id: user.id,
-        type: "network",
-      };
-
-      await axios
-        .post(uri, data)
-        .then((response) => {
-          user.is_follow = nextFollowState;
-          document.getElementById("followbtn" + user.id).disabled = false;
-        })
-        .catch((err) => {
-          console.log({ err: err });
-          document.getElementById("followbtn" + user.id).disabled = false;
-        });
     },
 
     networkSearch() {

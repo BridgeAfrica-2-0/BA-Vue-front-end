@@ -139,23 +139,31 @@
                   v-model="edit_description"
                 ></b-form-textarea>
 
-                <i></i>
-              </div>
-              <div class="bordder">
-                <span class="float-left">
-                  {{ $t("businessowner.Add_to_Your_Post") }}
-                </span>
-                <span class="float-right">
-                  <b-button-group size="sm" class="">
-                    <input id="video" type="file" hidden />
-                    <input
-                      id="image"
-                      type="file"
-                      hidden
-                      @change="selectMovies"
-                      accept="video/mpeg,video/mp4,image/*"
-                      ref="movies"
-                    />
+                <div class="cursor mt-2">
+
+                  <b-form-textarea
+                    id="textarea-small"
+                    autofocus
+                    class="mb-2 border-none"
+                    :placeholder="$t('businessowner.Post_a_business_update')"
+                    v-model="edit_description"
+                  ></b-form-textarea>
+
+                  <i></i>
+                </div>
+                <div class="bordder">
+                  <span class="float-left"> {{ $t('businessowner.Add_to_Your_Post') }} </span>
+                  <span class="float-right">
+                    <b-button-group size="sm" class="">
+                      <input id="video" type="file" hidden />
+                      <input
+                        id="image"
+                        type="file"
+                        hidden
+                        @change="selectMovies"
+                        accept="video/mpeg,video/mp4,image/*"
+                        ref="movies"
+                      />
                     <b-button
                       :title="$t('businessowner.Add_Hyperlink')"
                       size="sm"

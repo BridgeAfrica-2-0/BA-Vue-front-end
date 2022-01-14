@@ -140,7 +140,7 @@
           <b-avatar
             variant="light"
             src="/icons/profile.png"
-            size="24px"
+            size="15px"
             class="icon-wh"
             :square="true"
           ></b-avatar>
@@ -160,7 +160,7 @@
             variant="light"
             class="icon-wh"
             src="/icons/newsfeed.png"
-            size="24px"
+            size="15px"
             :square="true"
           ></b-avatar>
         </span>
@@ -178,7 +178,7 @@
           <b-avatar
             variant="light"
             src="/icons/network.png"
-            size="24px"
+            size="15px"
             class="icon-wh"
             :square="true"
           ></b-avatar>
@@ -197,7 +197,7 @@
           <b-avatar
             variant="light"
             src="/icons/business.png"
-            size="24px"
+            size="15px"
             class="icon-wh"
             :square="true"
           ></b-avatar>
@@ -219,7 +219,7 @@
             variant="light"
             class="icon-wh"
             src="/icons/community.png"
-            size="24px"
+            size="15px"
             :square="true"
           ></b-avatar>
         </span>
@@ -263,7 +263,7 @@
           >
             <span class="text-ored">
               <b-avatar
-                size="24px"
+                size="15px"
                 variant="light"
                 src="/icons/network.png"
                 class="icon-wh"
@@ -292,7 +292,7 @@
                 variant="light"
                 class="icon-wh"
                 src="/icons/business.png"
-                size="24px"
+                size="15px"
                 :square="true"
               ></b-avatar>
             </span>
@@ -314,7 +314,7 @@
             variant="light"
             class="icon-wh"
             src="/icons/copy.png"
-            size="24px"
+            size="15px"
             :square="true"
           ></b-avatar>
         </span>
@@ -333,7 +333,7 @@
         <span class="text-ored">
           <b-avatar
             variant="light"
-            size="24px"
+            size="15px"
             class="icon-wh"
             src="/icons/share_via.png"
             :square="true"
@@ -362,7 +362,7 @@
             "
           >
             <b-avatar
-              size="24px"
+              size="15px"
               class="mr-2"
               variant="light"
               src="/icons/email.png"
@@ -383,7 +383,7 @@
             "
           >
             <b-avatar
-              size="24px"
+              size="15px"
               class="mr-2"
               variant="light"
               src="/icons/facebook.png"
@@ -404,7 +404,7 @@
             "
           >
             <b-avatar
-              size="24px"
+              size="15px"
               class="mr-2"
               variant="light"
               src="/icons/twitter.png"
@@ -425,7 +425,7 @@
             "
           >
             <b-avatar
-              size="24px"
+              size="15px"
               class="mr-2"
               variant="light"
               src="/icons/whatsapp.png"

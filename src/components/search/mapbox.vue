@@ -97,9 +97,6 @@ export default {
       zoom: 5,
     };
   },
-  created() {
-    console.log(MglMap);
-  },
   methods: {
     gotoBusiness(id) {
       this.$router.push(`/business/${id}`);

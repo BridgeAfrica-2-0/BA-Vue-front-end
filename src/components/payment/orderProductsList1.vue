@@ -1,20 +1,20 @@
 <template>
 	<div id="orderList">    
 		<div
-			class="row order-item mb-4"
+			class=" order-item mb-4"
 			v-for="(cart_item, i) in cart.data "
 			:key="i"
 		>  
 
-			<div class="col-12 order-item-caroussel col-sm-4 mb-3 col-md-4">
+<div  class="d-inline-flex">   
+			<div class="">
 				<!-- <ProductCaroussel :productImages="images(cart_item.product_picture)" /> -->
 				<img :src="cart_item.product_picture" class="r-image" alt="">
 			</div>
 			<div
-				class="col-auto flex-fill order-info body-font-size col-sm-8 col-md-8 "
+				class=" flex-fill order-info body-font-size  "
 			>
-				<b-table-simple borderless>
-					<b-tbody>
+				
 						<b-tr>
 							<b-td>
 								{{$t('general.Name')}}
@@ -85,9 +85,10 @@
 								}} -->
 							</b-th>
 						</b-tr>
-					</b-tbody>
-				</b-table-simple>
+				
 			</div>
+
+			 </div>
 		</div>
 		<div class="row my-4" v-if="loading">
 			<div class="col-12 d-flex justify-content-center align-items-center">

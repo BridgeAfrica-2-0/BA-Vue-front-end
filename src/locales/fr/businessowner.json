@@ -80,7 +80,7 @@
     "Select_Country": "Sélectionnez un Pays",
     "Region": "Région",
     "Modify": "Modifer",
-    "Edit_Address": "Modifier l'Address",
+    "Edit_Address": "Modifier l'entreprise",
     "Enter_your_Keywords": "Entrez vos mots-clés",
     "Start_Date": "Date du début",
     "End_Date": "Date de fin",
@@ -522,6 +522,7 @@
     "Billed_Monthly":"Facturer Mensuellement",
     "Billed_Anually":"Facturer Annuellement",
     "Select":"Sélectionnez",
+    "Enter_your_Number":"Entrez votre numéro",
     "All_the_functionalities_as_in_the_normal_account":"Toutes les fonctionnalités du compte normal",
     "Advanced_business_verification":"Vérification avancée des entreprises",
     "Shipping_calculation":"Calcul des frais d'expédition",
@@ -530,5 +531,6 @@
     "orders":"commandes",
     "my_orders":"mes commandes",
     "Operation_was_successful":"L'opération a réussi!!!",
-    "Something_went_wrong":"Quelque chose a mal tourné!!!"
+    "Something_went_wrong":"Quelque chose a mal tourné!!!",
+    "No Blocked Business Available":"Aucune entreprise bloquée disponible"
 }

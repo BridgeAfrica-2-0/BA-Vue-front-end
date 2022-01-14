@@ -81,7 +81,7 @@
     "Select_Country": "Select Country",
     "Region": "Region",
     "Modify": "Modify",
-    "Edit_Address": "Edit Address",
+    "Edit_Business": "Edit Business",
     "Enter_your_Keywords": "Enter your Keywords",
     "Start_Date": "Start Date",
     "End_Date": "End Date",
@@ -522,6 +522,7 @@
     "Billed_Anually":"Billed Anually",
     "Select":"Select",
     "All_the_functionalities_as_in_the_normal_account":"All the functionalities as in the normal account",
+    "Enter_your_Number":"Enter your Number",
     "Advanced_business_verification":"Advanced business verification",
     "Shipping_calculation":"Shipping calculation",
     "Search_or_add_a_tag":"Search or add a tag",
@@ -530,5 +531,7 @@
     "my_orders":"my orders",
     "Operation_was_successful":"Operation was successful!!!",
     "Something_went_wrong":"Something went wrong!!!",
-    "Enter_new_keyword":"Enter new keyword"
+    "Enter_new_keyword":"Enter new keyword",
+    "No_Blocked_Business_Available":"No Blocked Business Available",
+    "Make_more_money_by_unlocking_your_marketplace_features":"Make more money by unlocking your marketplace features"
 }

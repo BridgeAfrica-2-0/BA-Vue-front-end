@@ -11104,6 +11104,11 @@ vue-observe-visibility@^0.4.4:
   resolved "https://registry.yarnpkg.com/vue-observe-visibility/-/vue-observe-visibility-0.4.6.tgz#878cb8ebcf3078e40807af29774e97105ebd519e"
   integrity sha512-xo0CEVdkjSjhJoDdLSvoZoQrw/H2BlzB5jrCBKGZNXN2zdZgMuZ9BKrxXDjNP2AxlcCoKc8OahI3F3r3JGLv2Q==
 
+vue-password@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/vue-password/-/vue-password-3.1.0.tgz#7b3c167519bd56c5b25733cd4828ebf76cc36972"
+  integrity sha512-78ZFb8jkLJg/6F3Qz0Lqx6pmaR/oW1jwbJ5NGIkMx/EdKjZBbCsu8VXjGLVaZ/4bzfQZheCO1mQfYi4WkI32VA==
+
 vue-phone-number-input@^1.1.10:
   version "1.1.12"
   resolved "https://registry.yarnpkg.com/vue-phone-number-input/-/vue-phone-number-input-1.1.12.tgz#bb2c5fa453d0dbfe6d70a666f9db5fd54ce3f7df"

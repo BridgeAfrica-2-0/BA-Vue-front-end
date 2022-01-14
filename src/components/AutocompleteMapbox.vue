@@ -42,6 +42,7 @@ export default {
         zoom: this.zoom,
         center: this.center,
       });
+      console.log(this.region);
       var regon = this.region ? this.region.name.toLowerCase() : "centre";
       regon = regon.charAt(0).toUpperCase() + regon.slice(1);
       console.log(regon);

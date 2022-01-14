@@ -138,6 +138,7 @@
                   :placeholder="$t('businessowner.Post_a_business_update')"
                   v-model="edit_description"
                 ></b-form-textarea>
+                </div>
 
                 <div class="cursor mt-2">
 

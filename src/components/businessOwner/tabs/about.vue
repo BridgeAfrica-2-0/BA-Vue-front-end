@@ -1060,7 +1060,6 @@ export default {
           console.log("edit address business");
           this.test();
           console.log(this.business_about_input);
-
           var dat = {
             business_id: this.$route.params.id,
             data: {

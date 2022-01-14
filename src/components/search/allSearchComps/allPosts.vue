@@ -162,7 +162,10 @@ export default {
       return this.post.is_liked ? "suit-heart-fill" : "suit-heart";
     },
   },
-
+  filters: {
+    fromNow,
+    formatNumber,
+  },
   components: {
     Comment,
     Loader,

@@ -6,15 +6,21 @@
     :class="header ? 'message size' : 'b-background flexx shadow'"
     @click="cta()"
   >
-    <span v-if="header" style="margin-left:-3px">
-      <i class="fas fa-envelope fa-lg btn-icon"></i>
+    <i
+      :class="
+        header
+          ? 'fas fa-envelope fa-lg btn-icon'
+          : 'fas fa-envelope fa-lg btn-icon pt-1 pr-1'
+      "
+    ></i>
+
+    <span v-if="header" style="margin-left: -3px">
       <span class="ml-1"> {{ $t("businessf.Message") }}</span>
     </span>
 
-    <p v-else>
-      <i class="fas fa-envelope fa-lg btn-icon pt-1 pr-1"></i>
+    <span v-else>
       <span class="btn-text"> {{ $t("dashboard.Messages") }}</span>
-    </p>
+    </span>
   </b-button>
 </template>
 
@@ -114,4 +120,6 @@ export default {
   background-color: #006400;
 }
 /* cta comp */
+@media only screen and (max-width: 768px) {
+}
 </style>

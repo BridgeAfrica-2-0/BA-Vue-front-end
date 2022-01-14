@@ -87,154 +87,59 @@
     <hr style="margin-top: -0px" />
 
     <div
-      class="d-block d- d-sm-block d-md-block d-lg-block d-xl-none"
-      v-if="selectedId == '1' || selectedId == '4'"
+      class="d-block d-none d-sm-block d-md-block d-lg-block d-xl-none"
+      v-if="selectedId == '0' || selectedId == '4'"
     >
-      <b-row>
-        <b-col cols="3" class="text-center">
-          <b-link class="cat" @click="SetCat('Agriculture')">
+      <b-row align-v="start">
+        <b-col
+          cols="3"
+          class="text-center"
+          v-for="(category, index) in categories.slice(0, 7)"
+          :key="index"
+        >
+          <b-link
+            class="cat"
+            @click="getCategory({ cat_id: category.category.id })"
+          >
             <img
               class="img-fluid picture logo-img"
               src="@/assets/icons/mobile/agriculture.png"
             />
 
-            {{ $t("search.Agriculture") }}
+            {{
+              category.category.name.length > 11
+                ? category.category.name.substring(0, 11) + "..."
+                : category.category.name
+            }}
           </b-link>
         </b-col>
-
-        <b-col cols="3" class="text-center">
-          <b-link class="cat" @click="SetCat('Restaurants')">
-            <img
-              class="img-fluid picture logo-img"
-              src="@/assets/icons/mobile/restaurants.png"
-            />
-            {{ $t("search.Restaurants") }}
-          </b-link>
-        </b-col>
-
-        <b-col cols="3" class="text-center">
-          <b-link class="cat" @click="SetCat('Clothing')">
-            <img
-              class="img-fluid picture logo-img"
-              src="@/assets/icons/mobile/clothing.png"
-            />
-            {{ $t("search.Clothing") }}
-          </b-link>
-        </b-col>
-
-        <b-col cols="3" class="text-center">
-          <b-link class="cat" @click="SetCat('MC')">
-            <img
-              class="img-fluid picture logo-img"
-              src="@/assets/icons/mobile/mayor.png"
-            />
-
-            PI
-          </b-link>
-        </b-col>
-
-        <b-col cols="3" class="text-center mt-2">
-          <b-link class="cat" @click="SetCat('Electronics')">
-            <img
-              class="img-fluid picture logo-img"
-              src="@/assets/icons/mobile/electronics.png"
-            />
-            {{ $t("search.Electronics") }}
-          </b-link>
-        </b-col>
-
-        <b-col cols="3" class="text-center mt-2">
-          <b-link class="cat" @click="SetCat('Handicraft')">
-            <img
-              class="img-fluid picture logo-img"
-              src="@/assets/icons/mobile/handicrft 2.png"
-            />
-
-            {{ $t("search.Handicraft") }}
-          </b-link>
-        </b-col>
-
-        <b-col cols="3" class="text-center mt-2">
-          <b-link class="cat" @click="SetCat('HU')">
-            <img
-              class="img-fluid picture logo-img"
-              src="@/assets/icons/mobile/health unit.png"
-            />
-            {{ $t("search.Health") }}
-          </b-link>
-        </b-col>
-
-        <b-col cols="3" class="text-center mt-2">
-          <b-link class="cat" v-b-modal="'myModalla'">
-            <img
-              class="img-fluid picture logo-img"
-              src="@/assets/icons/more.png"
-            />
-            {{ $t("search.More") }}
+        <b-col
+          align-self="center"
+          cols="3"
+          class="text-center"
+          @mouseover="onOverMore()"
+          @mouseleave="onLeaveMore()"
+          ref="more"
+        >
+          <b-link class="cat mt-4" v-b-modal.myModalla>
+            <b-icon icon="chevron-down" aria-hidden="true"></b-icon> More
           </b-link>
         </b-col>
       </b-row>
 
-      <b-modal ref="setcat" id="myModalla" hide-footer title=" ">
-        <b-row>
-          <b-col cols="6" class="p-2">
-            <p>
-              <b-link @click="SetCat('Handicraft')" href="#">
-                {{ $t("search.Handicraft") }}
-              </b-link>
-            </p>
-
-            <p>
-              <b-link @click="SetCat('Hotels')" href="#">
-                {{ $t("search.Hotels") }}
-              </b-link>
-            </p>
-
-            <p>
-              <b-link @click="SetCat('Transport')" href="#">
-                {{ $t("search.Transport") }}
-              </b-link>
-            </p>
-
-            <p>
-              <b-link @click="SetCat('Grooming')" href="#">
-                Mens & Women <br />
-                Grooming
-              </b-link>
-            </p>
-
-            <p>
-              <b-link @click="SetCat('Station')" href="#">
-                {{ $t("search.Station") }}
-              </b-link>
-            </p>
-          </b-col>
-
-          <b-col cols="6" class="p-2">
-            <p>
-              <b-link @click="SetCat('Auto Mechanics')" href="#">
-                {{ $t("search.Auto_Mechanics") }}
-              </b-link>
-            </p>
-            <p>
-              <b-link @click="SetCat('Carding')" href="#">
-                {{ $t("search.Carding") }}
-              </b-link>
-            </p>
-
-            <p>
-              <b-link @click="SetCat('Education')" href="#">
-                {{ $t("search.Education") }}
-              </b-link>
-            </p>
-            <p>
-              <b-link @click="SetCat('Professional')" href="#">
-                {{ $t("search.Professional") }} <br />
-                {{ $t("search.Service") }}</b-link
-              >
-            </p>
-          </b-col>
-        </b-row>
+      <b-modal ref="setcat" id="myModalla" hide-footer title="More Categories">
+        <div style="column-count: 2">
+          <b-form-radio
+            v-for="(category, index) in categories.slice(7)"
+            :key="index"
+            v-model="selected_sub_cat"
+            :value="category.category.id"
+            @change="getCategory({ cat_id: category.category.id })"
+            name="subCategories-list-modal"
+          >
+            {{ category.category.name }}
+          </b-form-radio>
+        </div>
       </b-modal>
     </div>
 
@@ -775,6 +680,12 @@ export default {
     products() {
       return this.$store.state.market.products;
     },
+    categories() {
+      return this.$store.getters["marketSearch/getCategories"];
+    },
+    subCategories() {
+      return this.$store.getters["marketSearch/getSubCat"];
+    },
   },
 
   created() {
@@ -1032,25 +943,6 @@ export default {
         { value: "Dairy", text: "Dairy" },
 
         { value: "Raw_material", text: "Raw material " },
-      ],
-
-      categories: [
-        { item: "Professional_and_home_service", name: "Professionals" },
-        { item: "Agriculture ", name: "Agriculture " },
-        { item: "Restaurant ", name: " Restaurant " },
-        { item: "Electronics ", name: "Electronics " },
-        { item: "Handicraft", name: "Handicraft" },
-        { item: "clothing", name: "clothing" },
-        { item: "Mechanics", name: "Mechanics" },
-        { item: "Health_unit ", name: "Health unit " },
-        { item: "Bars", name: "Bars" },
-        { item: "Hair_and_beauty ", name: "Hair and beauty " },
-        { item: "Real_estate ", name: "Real_estate " },
-        { item: "Travelling ", name: "Travelling " },
-        { item: "Hotels", name: "Hotels" },
-        { item: "Station", name: " station  " },
-        { item: "Mayor_concils", name: "Mayor_concils" },
-        { item: "Taxis service", name: "Taxis service" },
       ],
 
       //categories_filters:[],
@@ -1788,6 +1680,14 @@ export default {
       if (this.$route.query.uuid) this.selectedId = 5;
     },
     // [ED]----------
+
+    onOverMore() {
+      this.$refs.More.visible = true;
+      this.$emit("parentcategory", "More");
+    },
+    onLeaveMore() {
+      this.$refs.More.visible = false;
+    },
     getKeyword(data) {
       let elm = data ? data : { keyword: "" };
       console.log("the keyword is: ", this.searchParams.keyword);

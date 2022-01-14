@@ -210,7 +210,7 @@
                     <div class="form-group">
                       <label for="Neighbour" class="username"> Neighbour:</label
                       ><br />
-                      <autocomplete-mapbox
+                      <autocomplete-mapbox :region="region"
                         @get-address-details="getAddressDetails"
                       />
                     </div>
@@ -391,7 +391,7 @@
                     <div class="form-group">
                       <label for="Neighbour" class="username"> Neighbour:</label
                       ><br />
-                      <autocomplete-mapbox
+                      <autocomplete-mapbox :region="region"
                         @get-address-details="getAddressDetails"
                       />
                     </div>
@@ -732,6 +732,7 @@
                         {{ $t("welcome.Adress") }} :</label
                       >
                       <BusinessAutocomplete
+                      :region="regionn"
                         @business-instance-location="businessInstanceLocation"
                       />
                     </div>

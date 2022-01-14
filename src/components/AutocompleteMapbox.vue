@@ -8,11 +8,12 @@
 import Mapbox from "mapbox-gl";
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 export default {
+  props: ["region"],
   data() {
     return {
       loading: false,
       accessToken: process.env.VUE_APP_MAPBOX_TOKEN,
-      mapStyle: "mapbox://styles/mapbox/streets-v11",
+      mapStyle: "mapbox://styles/mapbox/outdoors-v11",
       center: [11.504929555178624, 3.8465173382452815], // Lng,Lat
       zoom: 5,
     };
@@ -41,12 +42,19 @@ export default {
         zoom: this.zoom,
         center: this.center,
       });
-
+      var regon = this.region ? this.region.name.toLowerCase() : "centre";
+      regon = regon.charAt(0).toUpperCase() + regon.slice(1);
+      console.log(regon);
       const geocoder = new MapboxGeocoder({
         accessToken: mapboxgl.accessToken,
         mapboxgl: mapboxgl,
-        country: "cameroon",
+        countries: "cm",
         placeholder: "Address",
+        filter: function(item) {
+          return item.context.some((i) => {
+            return i.text === regon;
+          });
+        },
       });
 
       document.getElementById("geocoder").appendChild(geocoder.onAdd(map));

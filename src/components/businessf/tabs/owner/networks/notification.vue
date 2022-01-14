@@ -131,7 +131,7 @@ export default {
         this.indeterminate = false;
         this.selectAll = false;
       } else if (newValue.length === this.notifications.length) {
-        this.indeterminate = false;
+        this.indeterminate = true;
         this.selectAll = true;
       } else {
         this.indeterminate = true;

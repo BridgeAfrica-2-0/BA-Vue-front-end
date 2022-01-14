@@ -61,7 +61,6 @@
             name="checkbox-options"
             :options="lists"
             v-model="networkinfo[2].setting_value"
-            @change="test"
           >
           </b-form-checkbox-group>
         </b-form-group>

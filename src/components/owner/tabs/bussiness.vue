@@ -323,6 +323,7 @@
                 </div>
                 <div style="width: 100%; height: 200px; overflow:hidden">
                   <AutocompleteLocation
+                    v-if="region && region.length > 0"
                     :region="region"
                     @get-address-details="getGeoCoderResult"
                   />

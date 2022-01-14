@@ -210,7 +210,9 @@
                     <div class="form-group">
                       <label for="Neighbour" class="username"> Neighbour:</label
                       ><br />
-                      <autocomplete-mapbox :region="region"
+                      <autocomplete-mapbox
+                        v-if="region"
+                        :region="region"
                         @get-address-details="getAddressDetails"
                       />
                     </div>
@@ -391,7 +393,9 @@
                     <div class="form-group">
                       <label for="Neighbour" class="username"> Neighbour:</label
                       ><br />
-                      <autocomplete-mapbox :region="region"
+                      <autocomplete-mapbox
+                        v-if="region"
+                        :region="region"
                         @get-address-details="getAddressDetails"
                       />
                     </div>
@@ -732,7 +736,8 @@
                         {{ $t("welcome.Adress") }} :</label
                       >
                       <BusinessAutocomplete
-                      :region="regionn"
+                        v-if="regionn && regionn.length > 0"
+                        :region="regionn"
                         @business-instance-location="businessInstanceLocation"
                       />
                     </div>
@@ -1445,7 +1450,7 @@ export default {
   },
 
   mounted() {
-   // this.peopleAround();
+    // this.peopleAround();
     this.locateGeoLocation();
 
     this.Country();

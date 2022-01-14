@@ -4,6 +4,7 @@ export default {
   namespaced: true,
   state: {
     notifications: [],
+    notificationsDetails: [],
     all:[]
 
   },
@@ -20,6 +21,9 @@ export default {
         state.notifications = notifications;
         state.all =  notifications
     },
+    setNotificationDetails(state, notificationsDetails) {
+        state.notificationsDetails = notificationsDetails;
+    },
 
     addNotification(state, notification) {
       state.all = [notification , ...state.all]
@@ -32,6 +36,7 @@ export default {
       .get(`${dataInfo.id}${dataInfo.path}`)
       .then(({ data }) => {
           commit("setNotifications", data.data);
+          commit("setNotificationDetails", data.data);
       })
     },
 

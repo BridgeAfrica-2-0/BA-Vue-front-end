@@ -422,7 +422,9 @@
                         <button
                           class=" btn btn-primary"
                           @click="changePassword"
-                        >Change Password</button>
+                        >
+                          {{$t("settings.Change")}}
+                        </button>
                       </b-form-group>
                     </b-container>
                   </div>

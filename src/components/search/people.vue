@@ -24,10 +24,12 @@
                     class="mt-lg-2"
                   >
                     <div class="mt-2 mt-lg-0 mt-xl-0 username">
-                      <router-link :to="{name:'Follower', params:{id: people.id}}">
+                      <router-link
+                        :to="{ name: 'Follower', params: { id: people.id } }"
+                      >
                         <b>{{ people.name }}</b>
                       </router-link>
-                      {{people.profile_picture}}
+                      {{ people.profile_picture }}
                     </div>
                   </b-col>
 
@@ -69,29 +71,27 @@
                     xl="12"
                     class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
                   >
-
                     <b-button
-                          block
-                          size="sm"
-                          class="b-background flexx pobtn shadow"
-                          :class="people.is_follow !== 0 && 'u-btn'"
-                          :id="'followbtn' + people.id"
-                          variant="primary"
-                          @click="handleFollow()"
-                        >
-                          <i
-                            class="fas fa-lg btn-icon"
-                            :class="
-                              people.is_follow !== 0
-                                ? 'fa-user-minus'
-                                : 'fa-user-plus'
-                            "
-                          ></i>
+                      block
+                      size="sm"
+                      class="b-background flexx pobtn shadow"
+                      :class="people.is_follow !== 0 && 'u-btn'"
+                      :id="'followbtn' + people.id"
+                      variant="primary"
+                      @click="handleFollow(people)"
+                    >
+                      <i
+                        class="fas fa-lg btn-icon"
+                        :class="
+                          people.is_follow !== 0
+                            ? 'fa-user-minus'
+                            : 'fa-user-plus'
+                        "
+                      ></i>
 
-                          <span class="btn-com">
-                            {{ $t("search.Community") }}
-                          </span>
-                        
+                      <span class="btn-com">
+                        {{ $t("search.Community") }}
+                      </span>
                     </b-button>
                   </b-col>
                 </b-row>
@@ -105,7 +105,7 @@
 </template>
 
 <script>
-import axios from "axios"
+import axios from "axios";
 
 export default {
   name: "PeopleComponent",
@@ -115,7 +115,7 @@ export default {
     },
   },
 
-  methods:{
+  methods: {
     async handleFollow(user) {
       document.getElementById("followbtn" + user.id).disabled = true;
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
@@ -137,8 +137,8 @@ export default {
           console.log({ err: err });
           document.getElementById("followbtn" + user.id).disabled = false;
         });
-    }
-  }
+    },
+  },
 };
 </script>
 

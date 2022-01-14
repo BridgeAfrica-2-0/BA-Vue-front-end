@@ -46,12 +46,11 @@ export const Redis = {
 
   watch: {
     '$store.state.auth.profilConnected': {
-      deep:true,
-      handler: function(newValue) {
-        console.log('$store.state.auth.profilConnected')
+      deep: true,
+      handler: function (newValue) {
         initRedis(this.$store.state.auth.user.accessToken)
         if (this.$store.state.auth.profilConnected && this.$store.state.auth.profilConnected.user_type)
-         this.updateEventListener(this.$store.state.auth.profilConnected.user_type)
+          this.updateEventListener(this.$store.state.auth.profilConnected.user_type)
       }
     },
 
@@ -73,6 +72,11 @@ export const Redis = {
           console.log(payload)
           this.newNotificationBusiness({ init: false, data: payload.data })
         })
+
+      /* this.$echo.private($event).listen('BusinessNotificationEvent', (payload) => {
+         console.log(payload)
+        this.newNotificationBusiness({ init: false, data: payload.data })
+      }); */
     },
 
     listenProfileEvent() {
@@ -85,6 +89,10 @@ export const Redis = {
         .listen(".UserNotification", payload => {
           this.newNotificationProfile({ init: false, data: payload.notification })
         })
+
+      /* this.$echo.private($event).listen('UserNotification', (payload) => {
+        this.newNotificationProfile({ init: false, data: payload.notification })
+      }); */
     },
 
     listenNetworkeEvent() {
@@ -95,6 +103,10 @@ export const Redis = {
         .listen(".NetworkNotification", payload => {
           this.newNotificationNetwork({ init: false, data: payload.notification })
         })
+
+      /* this.$echo.private($event).listen('NetworkNotification', (payload) => {
+        this.newNotificationNetwork({ init: false, data: payload.notification })
+      }); */
     },
 
     updateEventListener(type) {

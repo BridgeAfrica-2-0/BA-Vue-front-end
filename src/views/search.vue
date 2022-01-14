@@ -694,7 +694,7 @@ import BusinessComponent from "@/components/search/business";
 
 import { loader } from "@/mixins";
 
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapActions, mapMutations } from "vuex";
 
 export default {
   components: {
@@ -730,7 +730,9 @@ export default {
   computed: {
     ...mapGetters({
       prodLoaderr: "business/getloadingState",
+      auth: "auth/user",
     }),
+
     businesses() {
       return this.$store.getters["allSearch/getBusinesses"];
     },
@@ -1749,7 +1751,33 @@ export default {
     },
   },
 
+  destroyed(){
+    this.switchToProfile()
+  },
+
   methods: {
+    
+    ...mapMutations({
+      profile: "auth/profilConnected",
+    }),
+
+    switchToProfile: async function () {
+      let loader = this.$loading.show({
+        container: this.$refs.formContainer,
+        canCancel: true,
+        onCancel: this.onCancel,
+        color: "#e75c18",
+      });
+
+      const response = await this.$repository.share.switch(null, "reset");
+
+      if (response.success) {
+        this.profile({ ...this.auth.user, user_type: "user" });
+      }
+
+      loader.hide();
+    },
+
     onProcessQuery() {
       if (this.$route.query.market) {
         this.selectedId = 4;

@@ -21,11 +21,12 @@ import VueSocialauth from 'vue-social-auth';
 
 import ShareNetwork from 'vue-social-sharing';
 import BtnCtaMessage from "@/components/messagesCTA/Btn-cta-message";
-Vue.component('BtnCtaMessage', BtnCtaMessage);
 
+Vue.component('BtnCtaMessage', BtnCtaMessage);
 Vue.use(ShareNetwork);
 
 import VueBootstrapTypeahead from 'vue-bootstrap-typeahead'
+
 Vue.use('vue-bootstrap-typeahead', VueBootstrapTypeahead)
 
 // don't comment that 2 line URGENT
@@ -38,9 +39,7 @@ Vue.use(VueMeta) */
 import VueClipboard from 'vue-clipboard2'
 
 Vue.use(VueClipboard)
-
 Vue.use(require('vue-moment'));
-
 IconifyIcon.addIcon('home', homeIconData);
 
 Vue.use(Vuex);
@@ -49,6 +48,7 @@ Vue.use(VueAxios, axios);
 import LoadScript from 'vue-plugin-load-script';
 import InfiniteLoading from 'vue-infinite-loading';
 import VueAnimateOnScroll from 'vue-animate-onscroll'
+
 Vue.use(VueAnimateOnScroll)
 Vue.use(InfiniteLoading, {
     /* options */
@@ -58,9 +58,10 @@ Vue.use(InfiniteLoading, {
         noResults: "",
     },
 });
-Vue.use(LoadScript);
 
+Vue.use(LoadScript);
 Vue.use(ReadMore);
+
 Vue.prototype.$axios = axios;
 
 // const firebaseConfig = {
@@ -117,7 +118,6 @@ Vue.use(VueMaterial);
 
 import Lightbox from '@morioh/v-lightbox';
 
-
 import VueSplide from "@splidejs/vue-splide";
 Vue.use(VueSplide);
 import "@splidejs/splide/dist/css/themes/splide-default.min.css";
@@ -134,7 +134,6 @@ library.add(fas);
 Vue.component('fas-icon', FontAwesomeIcon);
 Vue.component('fab-icon', FontAwesomeIcon);
 
-
 import vueCountryRegionSelect from 'vue-country-region-select';
 Vue.use(vueCountryRegionSelect);
 
@@ -147,7 +146,6 @@ import 'bootstrap-vue/dist/bootstrap-vue.css';
 import 'vue-select/dist/vue-select.css';
 
 import '@/assets/css/bootstrap.css';
-
 import '@/assets/css/bootstrap.css';
 
 Vue.use(BootstrapVue);
@@ -161,6 +159,7 @@ Vue.use(IconsPlugin);
 
 import VueLoading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
+
 Vue.use(VueLoading);
 
 import VueYoutube from 'vue-youtube'
@@ -191,7 +190,6 @@ Vue.config.productionTip = false;
 
 var user = null;
 
-
 new Vue({
     router,
     store,
@@ -206,17 +204,18 @@ new Vue({
             user = userData;
             this.$store.commit('auth/setUserData', userData);
         }
+
         axios.interceptors.response.use(
-            response => response,
-            error => {
-                if (error.response) {
-                    if (error.response.status === 401) {
-                        this.$store.dispatch('auth/logout');
-                        console.log('error has ocurred', error);
-                    }
-                }
-                return Promise.reject(error);
-            },
+          response => response,
+          error => {
+            if (error.response) {
+              if (error.response.status === 401) {
+                this.$store.dispatch('auth/logout');
+                console.log('error has ocurred', error);
+              }
+            }
+            return Promise.reject(error);
+          },
         );
 
         axios.interceptors.request.use(function (config) {

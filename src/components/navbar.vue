@@ -806,7 +806,7 @@ export default {
     navLink(type) {
       const link = {
         home: () => {
-          return this.profile ? "dashboard" : "home1";
+          return this.profile ? {name: "dashboard"}: { name:"home1" };
         },
       };
       try {
@@ -853,6 +853,7 @@ export default {
       }
       loader.hide();
     },
+
 
     switchToProfile: async function () {
       let loader = this.$loading.show({

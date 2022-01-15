@@ -6,7 +6,7 @@
         <b-col cols="3" md="1" class="m-md-0 p-md-0">
           <b-avatar
             variant="primary"
-            class="img-fluid avat-comment"
+            class="img-fluid avat-comment bg-light"
             :src="business_logo"
           ></b-avatar>
         </b-col>

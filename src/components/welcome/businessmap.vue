@@ -22,7 +22,7 @@ export default {
   data() {
     return {
       accessToken: process.env.VUE_APP_MAPBOX_TOKEN,
-      mapStyle: "mapbox://styles/mapbox/streets-v11",
+      mapStyle: "mapbox://styles/mapbox/outdoors-v11",
       zoom: 12,
     };
   },

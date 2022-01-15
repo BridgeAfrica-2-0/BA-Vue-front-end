@@ -144,6 +144,7 @@
                 <router-link
                   :to="navLink('home')"
                   class="nav-link text-dark hov"
+                  href=""
                 >
                   Home
                 </router-link>
@@ -151,7 +152,7 @@
 
               <div class="nav-item">
                 <router-link
-                  :to="{ name: 'GlobalSearch' }"
+                  :to="{ name: 'Search' }"
                   class="nav-link text-dark hov"
                 >
                   {{ $t("general.Market") }}
@@ -853,7 +854,6 @@ export default {
       }
       loader.hide();
     },
-
 
     switchToProfile: async function () {
       let loader = this.$loading.show({

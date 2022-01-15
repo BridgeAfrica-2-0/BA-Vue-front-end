@@ -160,6 +160,11 @@ body{
     #search-radio-button {
       display: inline-block;
     }
+    .mapboxgl-canvas-container {
+
+      height: 100vh;
+  
+  }
 }
 
 .small-btn {

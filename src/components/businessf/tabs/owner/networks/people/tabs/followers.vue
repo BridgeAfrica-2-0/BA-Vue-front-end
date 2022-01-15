@@ -96,13 +96,20 @@ export default {
     search() {
       if(this.searchTitle){
         this.loading = true;
-        this.page = 1;
         console.log("searching...");
         console.log(this.searchTitle);
-        this.infiniteHandler();
+        this.displayfollowers = [];
+        this.$nextTick(() => {
+          this.page = 1;
+          this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
+        });
       }else{
+        this.peoplefollowers = [];
         console.log("Empty search title: "+this.searchTitle);
-        this.infiniteHandler();
+        this.$nextTick(() => {
+          this.page = 1;
+          this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
+        });
       }
     },
     
@@ -113,31 +120,31 @@ export default {
       let formData = new FormData();
       formData.append('keyword', keyword);
       console.log("network/"+this.url+"/people/follower/"+this.page);
-      let lien = "";
-      if(keyword == ""){
-          lien =  'network/'+this.url+'/people/follower/'+this.page;
-      }else{ lien ='network/'+this.url+'/people/follower/'+this.page+','+ formData}
+      // let lien = "";
+      // if(keyword == ""){
+      //     lien =  'network/'+this.url+'/people/follower/'+this.page;
+      // }else{ lien ='network/'+this.url+'/people/follower/'+this.page+','+ formData;}
       this.axios
-      .post(lien)
+      .post('network/'+this.url+'/people/follower/'+this.page,formData)
       .then( ({data})  => {
        console.log(data);
        console.log(this.page);
-        // if(keyword){
-        //   this.displayfollowers = data.data;
-        //   this.searchTitle = "";
-        //   $state.complete();
-        // }else{
+        if(keyword){
+          this.displayfollowers = data.data;
+          this.searchTitle = "";
+          $state.complete();
+        }else{
           if (data.data.length) {
             this.page += 1;
             console.log(this.page);
             console.log(...data.data);
-            this.displayfollowers.push(...data.data);
-            // this.displayfollowers = this.peoplefollowers;
+            this.peoplefollowers.push(...data.data);
+            this.displayfollowers = this.peoplefollowers;
             $state.loaded();
           } else {
             $state.complete();
           }
-        // }
+        }
       }) .catch((err) => {
           console.log({ err: err });
       })

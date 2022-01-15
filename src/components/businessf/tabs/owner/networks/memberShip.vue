@@ -104,7 +104,7 @@
       </div>
       <b-row>
         <b-col cols="12">
-        <infinite-loading ref="infiniteLoading" @infinite="infiniteHandler">
+        <infinite-loading ref="InfiniteLoading" @infinite="infiniteHandler">
             <div class="text-red" slot="no-more">{{ $t('network.No_More_Request') }}</div>
             <div class="text-red" slot="no-results">{{ $t('network.No_More_Request') }}</div>
         </infinite-loading>
@@ -123,25 +123,20 @@ export default {
       url:null,
       page:0,
       loading: false,
+      requests: []
     }
   },
-  computed: {
-    requests() {
-      return this.$store.state.networkProfileMemberRequest.requests;
-    },
-  },
+
   mounted() {
     this.url =  this.$route.params.id !== undefined ? this.$route.params.id : this.$router.push('notFound');
   },
   methods: {
     infiniteHandler($state) {
        console.log("loop");
+       console.log("network/"+this.url+"/members/users/request/"+this.page);
       this.axios
       .get("network/"+this.url+"/members/users/request/"+this.page)
       .then(({ data }) => {
-        console.log("// convert array to th object");
-        let obj = Object.assign({}, data);
-        console.log(obj);
        console.log(data);
        console.log(this.page);
         if (data.data.length) {
@@ -162,8 +157,11 @@ export default {
       console.log('user_id: ', user_id);
       this.axios.get("network/"+this.url+"/members/request/approve/"+user_id)
       .then(() => {
-        this.infiniteHandler();
-        // this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
+        this.requests = [];
+        this.$nextTick(() => {
+          this.page = 0;
+          this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
+        });
         console.log('ohh yeah');
         this.loading = false;
         this.flashMessage.show({
@@ -185,8 +183,11 @@ export default {
       console.log('user_id: ', user_id);
       this.axios.get("network/"+this.url+"/members/request/decline/"+user_id)
       .then(() => {
-        this.infiniteHandler();
-        // this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
+        this.requests = [];
+        this.$nextTick(() => {
+          this.page = 0;
+          this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
+        });
         console.log('ohh yeah');
         this.loading = false;
         this.flashMessage.show({

@@ -76,24 +76,46 @@
     </b-card>
 
     <!-- User Posts Listing Section-->
-    
-      <div class="px-md-3">
-        <div class="col-md-12 col-lg-12 d-flex align-items-stretch mb-lg-0" style="padding-left: 0; padding-top: 3px">
-          <b-modal id="modal-edit" ref="modal-edit" centered hide-footer :title="$t('businessowner.Update_Post')" @hidden="resetPostData">
-            <b-row ref="loader">
-              <b-col cols="1" class="m-0 p-0"></b-col>
-              <b-col cols="2" class="m-0 p-0">
-                <b-avatar class="d-inline-block avat" variant="primary" :src="business_intro.logo_path"></b-avatar>
-              </b-col>
-              <b-col cols="9" class="pt-2" style="margin-left: -5px">
-                <h5 class="m-0 font-weight-bolder">
-                  {{ business_intro.name }}
-                </h5>
-              </b-col>
-            </b-row>
-            <b-row>
-              <b-col cols="1" md="1" cl ass="m-0 p-0"></b-col>
-              <b-col cols="10" md="10" class="m-0 p-0">
+    <div class="px-md-3">
+      <div
+        class="col-md-12 col-lg-12 d-flex align-items-stretch mb-lg-0"
+        style="padding-left: 0; padding-top: 3px"
+      >
+        <b-modal
+          id="modal-edit"
+          ref="modal-edit"
+          centered
+          hide-footer
+          :title="$t('businessowner.Update_Post')"
+          @hidden="resetPostData"
+        >
+          <b-row ref="loader">
+            <b-col cols="1" class="m-0 p-0"></b-col>
+            <b-col cols="2" class="m-0 p-0">
+              <b-avatar
+                class="d-inline-block avat"
+                variant="primary"
+                :src="business_intro.logo_path"
+              ></b-avatar>
+            </b-col>
+            <b-col cols="9" class="pt-2" style="margin-left: -5px">
+              <h5 class="m-0 font-weight-bolder">
+                {{ business_intro.name }}
+              </h5>
+            </b-col>
+          </b-row>
+          <b-row>
+            <b-col cols="1" md="1" cl ass="m-0 p-0"></b-col>
+            <b-col cols="10" md="10" class="m-0 p-0">
+              <div class="cursor mt-2">
+                <b-form-textarea
+                  id="textarea-small"
+                  autofocus
+                  class="mb-2 border-none"
+                  :placeholder="$t('businessowner.Post_a_business_update')"
+                  v-model="edit_description"
+                ></b-form-textarea>
+                </div>
 
                 <div class="cursor mt-2">
 
@@ -197,22 +219,32 @@
                 </span>
 
                 <!-- <img :src="movie.link" /> -->
-
-
-                
               </div>
 
-
               <div class="mt-3">
-                <div v-for="hyperlink in createPost.hyperlinks" :key="hyperlink.fileName" class="bordder">
+                <div
+                  v-for="hyperlink in createPost.hyperlinks"
+                  :key="hyperlink.fileName"
+                  class="bordder"
+                >
                   <span class="float-left"> {{ hyperlink.fileName }} </span>
-                  <span class="float-right" @click="deleteItem(hyperlink.fileName)">
-                    {{ $t('profileowner.delete') }}
+                  <span
+                    class="float-right"
+                    @click="deleteItem(hyperlink.fileName)"
+                  >
+                    {{ $t("profileowner.delete") }}
                   </span>
                 </div>
 
-                <div id="preview" v-for="(movie, index) in edit_image" :key="movie.id">
-                  <span class="upload-cancel" @click="deleteImage(index, movie)">
+                <div
+                  id="preview"
+                  v-for="(movie, index) in edit_image"
+                  :key="movie.id"
+                >
+                  <span
+                    class="upload-cancel"
+                    @click="deleteImage(index, movie)"
+                  >
                     <b-icon icon="x-circle" class="oorange"> </b-icon>
                   </span>
 
@@ -220,27 +252,28 @@
                 </div>
                 <hr />
 
-                <div v-for="movie in createPost.movies" :key="movie.fileName" class="">
+                <div
+                  v-for="movie in createPost.movies"
+                  :key="movie.fileName"
+                  class=""
+                >
                   <div id="preview">
-                    <span class="upload-cancel" @click="deleteItem(movie.fileName)">
+                    <span
+                      class="upload-cancel"
+                      @click="deleteItem(movie.fileName)"
+                    >
                       <b-icon icon="x-circle" class="oorange"> </b-icon>
                     </span>
-                     
-                     
+
                     <span> </span>
                     <img v-if="movie.fileType == 'image'" :src="movie.link" />
 
                     <video v-else width="97%" height="240" autoplay>
                       <source :src="movie.link" type="video/mp4" />
                     </video>
-
                   </div>
-                </div> 
+                </div>
               </div>
-
-
-
-
             </b-col>
           </b-row>
           <br />
@@ -398,7 +431,7 @@
             <b-col cols="1" md="1" class="m-0 p-0"></b-col>
           </b-row>
         </b-modal>
-<!-- //end modal update  lalalalal  -->
+        <!-- //end modal update  lalalalal  -->
         <b-modal
           id="modal-xl_"
           ref="modal-xl_"
@@ -776,8 +809,7 @@ export default {
       });
 
       this.fileImageArr.forEach((value, index) => {
-       
-         formData2.append('media[' + index + ']', value.thisfile);
+        formData2.append("media[" + index + "]", value.thisfile);
 
         console.log(value);
       });
@@ -855,7 +887,7 @@ export default {
           this.createPost.movies.push({
             target: event.target,
             movie: e.target.result,
-              thisfile:event.target.files[0],
+            thisfile: event.target.files[0],
             fileName: event.target.files[0].name,
             link: URL.createObjectURL(event.target.files[0]),
             fileType: e.target.result.match(/^data:([^/]+)\/([^;]+);/)[1] || [],
@@ -889,7 +921,7 @@ export default {
           this.createPost.movies.push({
             target: event.target,
             movie: e.target.result,
-              thisfile:event.target.files[0],
+            thisfile: event.target.files[0],
             fileName: event.target.files[0].name,
             link: URL.createObjectURL(event.target.files[0]),
             fileType: e.target.result.match(/^data:([^/]+)\/([^;]+);/)[1] || [],
@@ -905,7 +937,7 @@ export default {
       console.log(event);
       this.createPost.hyperlinks.push({
         target: event.target,
-          thisfile:event.target.files[0],
+        thisfile: event.target.files[0],
         document: this.service(event.target),
         fileName: event.target.files[0].name,
       });
@@ -916,7 +948,7 @@ export default {
       this.createPost.hyperlinks.push({
         target: event.target,
         document: this.service(event.target),
-          thisfile:event.target.files[0],
+        thisfile: event.target.files[0],
         fileName: event.target.files[0].name,
       });
       this.$refs["modal-xl_"].show();
@@ -982,7 +1014,7 @@ export default {
         this.fileImageArr = this.createPost.movies;
 
         this.fileImageArr.forEach((value, index) => {
-        formData2.append('media[' + index + ']', value.thisfile);
+          formData2.append("media[" + index + "]", value.thisfile);
         });
       }
 

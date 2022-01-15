@@ -21,7 +21,7 @@
       :key="index"
     >
       <b-row>
-        <b-col md="3" xl="3" lg="3" cols="4" sm="3">
+        <b-col md="3" xl="3" lg="3" cols="4" sm="3" class="pr-0">
           <div class="center-img">
             <img :src="network.image" class="r-image" />
           </div>

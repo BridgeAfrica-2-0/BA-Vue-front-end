@@ -9,8 +9,13 @@
 
       <div class="s-card">
         <b-row>
-          <b-col cols="6" class="m-media" v-for="post in posts" :key="post.id">
-            <div class="container-fluid  " v-if="post.video">
+          <b-col
+            cols="6"
+            class="m-media m-0 p-0"
+            v-for="post in posts"
+            :key="post.id"
+          >
+            <div class="container-fluid px-1 px-md-2" v-if="post.video">
               <b-embed
                 type="iframe"
                 aspect="16by9"
@@ -120,6 +125,10 @@ export default {
 
   .text {
     font-size: 12px;
+  }
+
+  .embed-responsive-16by9 {
+    height: 150px !important;
   }
 }
 

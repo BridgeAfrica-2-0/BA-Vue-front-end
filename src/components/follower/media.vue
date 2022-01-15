@@ -55,9 +55,9 @@ export default {
     },
   },
 
-  mounted() {
+  created() {
     this.foll_id = this.$route.params.id;
-
+    console.log(this.foll_id, "++++++++++++++++++++++++++++++++++++++++")
     this.$store
       .dispatch("follower/getImages", this.foll_id)
       .then((response) => {})

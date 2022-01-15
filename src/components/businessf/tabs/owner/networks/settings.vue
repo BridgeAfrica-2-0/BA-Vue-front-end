@@ -536,30 +536,31 @@ export default {
       //     this.country.push(e)
       //   }
       // });
-      this.region.push({ id: this.editnetworkinfo.region_id, name: this.editnetworkinfo.region })
-      // this.regions.forEach(e => {
-      //   if(e.name == this.editnetworkinfo.region){
-      //     this.region.push(e)
-      //   }
-      // });
-      this.division.push({ id: this.editnetworkinfo.division_id, name: this.editnetworkinfo.division })
-      // this.divisions.forEach(e => {
-      //   if(e.name == this.editnetworkinfo.division){
-      //     this.division.push(e)
-      //   }
-      // });
-      this.municipality.push({ id: this.editnetworkinfo.council_id, name: this.editnetworkinfo.council })
-      // this.municipalities.forEach(e => {
-      //   if(e.name == this.editnetworkinfo.council){
-      //     this.municipality.push(e)
-      //   }
-      // });
- 
+      this.regions.forEach(e => {
+        if(e.name == this.editnetworkinfo.region){
+          this.region.push(e)
+        }
+      });
+      this.divisions.forEach(e => {
+        if(e.name == this.editnetworkinfo.division){
+          this.division.push(e)
+        }
+      });
+      this.municipalities.forEach(e => {
+        if(e.name == this.editnetworkinfo.council){
+          this.municipality.push(e)
+        }
+      });
+      this.localities.forEach(e => {
+        if(e.name == this.editnetworkinfo.neighborhood){
+          this.locality.push(e)
+        }
+      });
       // this.country=this.editnetworkinfo.country;
       // this.region=this.editnetworkinfo.region;
       // this.division=this.editnetworkinfo.division;
       // this.municipality=this.editnetworkinfo.council;
-      this.locality=this.editnetworkinfo.neighborhood;
+      // this.locality=this.editnetworkinfo.neighborhood;
 
       this.Region();
       this.Division();

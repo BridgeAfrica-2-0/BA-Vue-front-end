@@ -204,9 +204,10 @@ export default {
         hash[value] = "";
         return hash;
       }, {});
-      this.stack({ payload: { ...data }, page: 1 });
+      this.stack({ data: { ...data, keyword: this.postKeyword }, page: 1 });
       this.setCallback(this.$repository.search.findUserByParam);
-      this._onFindUser({ payload: { ...data }, page: 1 });
+
+      this._onFindUser({...data,keyword: this.postKeyword});
     }, 2000),
 
     async _onFindUser(payload) {
@@ -229,7 +230,7 @@ export default {
     debounceInput: _.debounce(function (e) {
       if (e && this.postKeyword) {
         this.page(1);
-        this.stack({ profession: e, keyword: this.postKeyword });
+        this.stack({data:{ profession: e, keyword: this.postKeyword },page: 1});
         this.setCallback(this.$repository.search.findUserByParam);
         this._onFindUser({
           profession: e,

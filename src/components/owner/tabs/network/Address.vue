@@ -1,7 +1,6 @@
 <template>
   <div>
-    <div id="map"></div>
-    <div id="geocoder" class="geocoder"></div>
+    <div id="geocoder"></div>
   </div>
 </template>
 <script>
@@ -16,11 +15,7 @@ export default {
   },
   data() {
     return {
-      loading: false,
       accessToken: process.env.VUE_APP_MAPBOX_TOKEN,
-      mapStyle: "mapbox://styles/mapbox/streets-v11",
-      center: [11.504929555178624, 3.8465173382452815], // Lng,Lat
-      zoom: 5,
     };
   },
   methods: {
@@ -28,20 +23,22 @@ export default {
       let mapboxgl = this.mapbox;
       mapboxgl.accessToken = this.accessToken;
 
-      var map = new mapboxgl.Map({
-        container: "map",
-        style: this.mapStyle,
-        zoom: this.zoom,
-        center: this.center,
-      });
-
       const geocoder = new MapboxGeocoder({
         accessToken: mapboxgl.accessToken,
         types: "country,region,place,postcode,locality,neighborhood",
       });
       geocoder.addTo("#geocoder");
       geocoder.on("result", (e) => {
-        console.log(e.result);
+        let response = e.result;
+        let details = {
+          coordinates: response.center,
+          address: response.place_name,
+        };
+        console.log(details);
+        this.$emit("get-address-details", details);
+      });
+      geocoder.on("clear", () => {
+        console.log("cleared!");
       });
     },
   },
@@ -53,19 +50,9 @@ export default {
 @import url("https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.css");
 #geocoder {
   z-index: 1;
-  /* margin: 20px; */
+  width: 100%;
 }
 .mapboxgl-ctrl-geocoder {
   min-width: 100%;
-}
-body {
-  margin: 0;
-  padding: 0;
-}
-#map {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 100%;
 }
 </style>

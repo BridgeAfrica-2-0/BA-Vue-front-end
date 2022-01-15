@@ -2,6 +2,7 @@
   <div id="app" class="" ref="formContainer">
     <div id="flashmessage">
       <FlashMessage />
+        <vue-confirm-dialog></vue-confirm-dialog>
     </div>
 
     <transition

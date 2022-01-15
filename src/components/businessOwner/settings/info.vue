@@ -511,54 +511,230 @@
 
                 <!-- {{ businessInfo.business_open_hours }} -->
                 <b-container v-if="!openHour">
-                  <div
-                    v-for="openHours in businessInfo.business_open_hours"
-                    :key="openHours.id"
-                  >
-                    <b-row>
-                      <b-col cols="2"
-                        ><b-form-checkbox
-                          id=""
-                          class="a-text text"
-                          name=""
-                          v-model="openDaysStatus"
-                          value="Mon_disabled"
-                          unchecked-value="0"
+                  <span v-if="businessInfo.business_open_hours > 0">
+                    <div
+                      v-for="openHours in businessInfo.business_open_hours"
+                      :key="openHours.id"
+                    >
+                      <b-row>
+                        <b-col cols="2"
+                          ><b-form-checkbox
+                            id=""
+                            class="a-text text"
+                            name=""
+                            v-model="openDaysStatus"
+                            value="Mon_disabled"
+                            unchecked-value="0"
+                          >
+                            {{ openHours.day }}</b-form-checkbox
+                          ></b-col
                         >
-                          {{ openHours.day }}</b-form-checkbox
-                        ></b-col
-                      >
 
-                      <b-col>
-                        <b-form-input
-                          name=""
-                          type="time"
-                          @change="
-                            setOpenHours(
-                              openHours.day,
-                              openHours.opening_time,
-                              openHours.closing_time
-                            )
-                          "
-                          v-model="openHours.opening_time"
-                        ></b-form-input> </b-col
-                      >- -<b-col
-                        ><b-form-input
-                          name=""
-                          type="time"
-                          @change="
-                            setOpenHours(
-                              openHours.day,
-                              openHours.opening_time,
-                              openHours.closing_time
-                            )
-                          "
-                          v-model="openHours.closing_time"
-                        ></b-form-input
-                      ></b-col>
-                    </b-row>
-                    <br />
-                  </div>
+                        <b-col>
+                          <b-form-input
+                            name=""
+                            type="time"
+                            @change="
+                              setOpenHours(
+                                openHours.day,
+                                openHours.opening_time,
+                                openHours.closing_time
+                              )
+                            "
+                            v-model="openHours.opening_time"
+                          ></b-form-input> </b-col
+                        >- -<b-col
+                          ><b-form-input
+                            name=""
+                            type="time"
+                            @change="
+                              setOpenHours(
+                                openHours.day,
+                                openHours.opening_time,
+                                openHours.closing_time
+                              )
+                            "
+                            v-model="openHours.closing_time"
+                          ></b-form-input
+                        ></b-col>
+                      </b-row>
+                      <br />
+                    </div>
+                  </span>
+                  <span v-else>
+                    {{ setOpenHours('null', 'null', 'null')}}
+                     <div>
+                      <b-row>
+                        <b-col cols="2"
+                          ><b-form-checkbox
+                            id=""
+                            class="a-text text"
+                            name=""
+                            value="Mon_disabled"
+                            unchecked-value="0"
+                          >Mondey</b-form-checkbox>
+                        </b-col>
+                        <b-col>
+                          <b-form-input
+                            name=""
+                            type="time"
+                            v-model="businessInfo.mon_start"
+                          ></b-form-input> 
+                          </b-col>- -<b-col>
+                          <b-form-input
+                            name=""
+                            type="time"
+                            v-model="businessInfo.mon_end"
+                          ></b-form-input
+                        ></b-col>
+                      </b-row>
+                        <b-row>
+                        <b-col cols="2"
+                          ><b-form-checkbox
+                            id=""
+                            class="a-text text"
+                            name=""
+                            value="Mon_disabled"
+                            unchecked-value="0"
+                          >Tuesday</b-form-checkbox>
+                        </b-col>
+                        <b-col>
+                          <b-form-input
+                            name=""
+                            type="time"
+                            v-model="businessInfo.tues_start"
+                          ></b-form-input> 
+                          </b-col>- -<b-col>
+                          <b-form-input
+                            name=""
+                            type="time"
+                            v-model="businessInfo.tues_end"
+                          ></b-form-input
+                        ></b-col>
+                      </b-row>
+                        <b-row>
+                        <b-col cols="2"
+                          ><b-form-checkbox
+                            id=""
+                            class="a-text text"
+                            name=""
+                            value="Mon_disabled"
+                            unchecked-value="0"
+                          >Wednesday</b-form-checkbox>
+                        </b-col>
+                        <b-col>
+                          <b-form-input
+                            name=""
+                            type="time"
+                            v-model="businessInfo.wed_start"
+                          ></b-form-input> 
+                          </b-col>- -<b-col>
+                          <b-form-input
+                            name=""
+                            type="time"
+                            v-model="businessInfo.wed_end"
+                          ></b-form-input
+                        ></b-col>
+                      </b-row>
+                        <b-row>
+                        <b-col cols="2"
+                          ><b-form-checkbox
+                            id=""
+                            class="a-text text"
+                            name=""
+                            value="Mon_disabled"
+                            unchecked-value="0"
+                          >Thursday</b-form-checkbox>
+                        </b-col>
+                        <b-col>
+                          <b-form-input
+                            name=""
+                            type="time"
+                            v-model="businessInfo.thurs_start"
+                          ></b-form-input> 
+                          </b-col>- -<b-col>
+                          <b-form-input
+                            name=""
+                            type="time"
+                            v-model="businessInfo.thurs_end"
+                          ></b-form-input
+                        ></b-col>
+                      </b-row>
+                        <b-row>
+                        <b-col cols="2"
+                          ><b-form-checkbox
+                            id=""
+                            class="a-text text"
+                            name=""
+                            value="Mon_disabled"
+                            unchecked-value="0"
+                          >Friday</b-form-checkbox>
+                        </b-col>
+                        <b-col>
+                          <b-form-input
+                            name=""
+                            type="time"
+                            v-model="businessInfo.fri_start"
+                          ></b-form-input> 
+                          </b-col>- -<b-col>
+                          <b-form-input
+                            name=""
+                            type="time"
+                            v-model="businessInfo.fri_end"
+                          ></b-form-input
+                        ></b-col>
+                      </b-row>
+                        <b-row>
+                        <b-col cols="2"
+                          ><b-form-checkbox
+                            id=""
+                            class="a-text text"
+                            name=""
+                            value="Mon_disabled"
+                            unchecked-value="0"
+                          >Saturday</b-form-checkbox>
+                        </b-col>
+                        <b-col>
+                          <b-form-input
+                            name=""
+                            type="time"
+                            v-model="businessInfo.sat_start"
+                          ></b-form-input> 
+                          </b-col>- -<b-col>
+                          <b-form-input
+                            name=""
+                            type="time"
+                            v-model="businessInfo.sat_end"
+                          ></b-form-input
+                        ></b-col>
+                      </b-row>
+                        <b-row>
+                        <b-col cols="2"
+                          ><b-form-checkbox
+                            id=""
+                            class="a-text text"
+                            name=""
+                            value="Mon_disabled"
+                            unchecked-value="0"
+                          >Sunday</b-form-checkbox>
+                        </b-col>
+                        <b-col>
+                          <b-form-input
+                            name=""
+                            type="time"
+                            v-model="businessInfo.sun_start"
+                          ></b-form-input> 
+                          </b-col>- -<b-col>
+                          <b-form-input
+                            name=""
+                            type="time"
+                            v-model="businessInfo.sun_end"
+                          ></b-form-input
+                        ></b-col>
+                      </b-row>
+                      <br />
+                    </div>
+                  </span>
                 </b-container>
               </b-form-group>
             </b-form-group>
@@ -1053,7 +1229,7 @@ export default {
           break;
         default:
           console.log("try looking up for a hint");
-          if (this.openHour) {
+          if (!this.openHour) {
             this.businessInfo["monday"] = "monday";
             this.businessInfo["mon_start"] = startTime;
             this.businessInfo["mon_end"] = endDay;

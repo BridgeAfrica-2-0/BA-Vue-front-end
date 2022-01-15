@@ -1,13 +1,13 @@
 <template>
   <div class="p-2">
-    <div class="s-ccard">
+    <div class="s-ccard">  
       <b-row>
-        <b-col lg="6" sm="12" class="p-2" v-for="item in users" :key="item.id">
+        <b-col lg="6" sm="12" class="p-2" v-for="(item, index) in users" :key="item.id">
           <div class="people-style border shadow">
             <b-row class="mb-1">
               <b-col md="3" cols="4" sm="4" class="my-auto">
                 <b-avatar
-                  class="p-avater"
+                  class="p-avater bg-light"
                   variant="primary"
                   :src="item.profile_picture"
                 ></b-avatar>
@@ -22,47 +22,41 @@
                           <b-col
                             md="6"
                             lg="12"
-                            cols="6"
+                            cols="5"
                             xl="12"
                             class="mt-lg-2"
                           >
                             <div class="mt-3 mt-lg-0 mt-xl-0 username">
-                             <router-link :to="{name: 'ProfileFollower', params: {id:item.id}}">
-                              <strong class="title"> {{ item.name }}</strong>
-                            </router-link>
+                              <router-link
+                                :to="{
+                                  name: 'ProfileFollower',
+                                  params: { id: item.id },
+                                }"
+                              >
+                                <strong> {{ item.name }}</strong>
+                              </router-link>
                             </div>
                           </b-col>
 
                           <b-col
                             md="6"
                             lg="12"
-                            cols="6"
+                            cols="5"
                             xl="12"
                             class="mt-2 mt-lg-1 mt-xl-2"
                           >
                             <h6 class="follower">
                               {{ count(item.followers) }}
-                              {{ $t("businessowner.Community") }}
+                              {{ $t("businessowner.Community") }}    <span  class="ml-2"  @click="BlockUser(item.id, index)" style="cursor: pointer">   <b-icon
+                              font-scale="1"
+                              icon="exclamation-octagon"
+                              v-b-tooltip.hover
+                              title="Block This User"
+                              variant="danger"
+                            ></b-icon>  </span>
                             </h6>
                           </b-col>
-                          
-                          <b-col
-                            md="6"
-                            lg="12"
-                            cols="6"
-                            xl="12"
-                            class="mt-2 mt-lg-1 mt-xl-2"
-                            @click="$emit('BlockUser', item.id)"
-                            style="cursor: pointer"
-                          >
-                              <b-icon
-                                font-scale="1"
-                                icon="exclamation-octagon"
-                                v-b-tooltip.hover
-                                title="Block This User"
-                                variant="danger"
-                              ></b-icon>
-                          </b-col>
+                       
                         </b-row>
                       </div>
                     </b-col>
@@ -110,7 +104,6 @@
                               }}</span>
                             </b-button>
                           </b-col>
-                          
                         </b-row>
                       </div>
                     </b-col>
@@ -172,6 +165,45 @@ export default {
   },
 
   methods: {
+
+     
+  BlockUser(id, index) {
+
+     let dataInfo = {
+        id: id,
+        refernce: "user",
+        type: this.type,
+      };
+
+    
+      let fd = new FormData();
+      fd.append("id", dataInfo.id);
+      fd.append("type", dataInfo.refernce);
+      this.$store.dispatch("profile/Block", {
+        path: "block/entity",
+        formData: fd
+        })
+      .then(response => {
+        
+      
+        this.$delete(this.users,index);
+        console.log("user deleted");
+
+        console.log(response);
+        this.flashMessage.show({
+          status: "success",
+          message: dataInfo.refernce + " blocked"
+        });
+      })
+      .catch(err => {
+        console.log({ err: err });
+        this.flashMessage.show({
+          status: "error",
+          message: "Unable to blocked " + dataInfo.refernce
+        });
+      });
+    },  
+
     cta(data) {
       console.log(data);
       this.$store.commit("businessChat/setSelectedChat", data);
@@ -192,18 +224,8 @@ export default {
     search() {
       console.log("search started");
 
-      if (this.type == "Follower") {
-        this.$store.commit("businessOwner/setUcommunityFollower", {
-          user_followers: [],
-          total_user_follower: 0,
-        });
-      } else {
-        this.$store.commit("businessOwner/setUcommunityFollowing", {
-          user_following: [],
-          total_user_following: 0,
-        });
-      }
-
+      
+       this.users=[];
       this.page = 1;
       this.infiniteId += 1;
 
@@ -251,6 +273,8 @@ export default {
       } else {
         url = "business/community/people-following/" + this.biz_id + "/";
       }
+
+      console.log(url + this.page + "?keyword=" + this.searchh);
 
       axios
         .get(url + this.page + "?keyword=" + this.searchh)
@@ -304,6 +328,11 @@ export default {
 @media only screen and (max-width: 768px) {
   .btn-icon {
     margin-top: 3px;
+  }
+  .danger-icont{
+    position: absolute;
+    top: 23px;
+    right: 30px;
   }
 
   .btn-text {

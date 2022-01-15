@@ -31,6 +31,12 @@ Vue.use('vue-bootstrap-typeahead', VueBootstrapTypeahead)
 // don't comment that 2 line URGENT
 import plugin from './http';
 Vue.use(plugin);
+//vue confirm dialog  
+import VueConfirmDialog from 'vue-confirm-dialog'
+
+Vue.use(VueConfirmDialog)
+Vue.component('vue-confirm-dialog', VueConfirmDialog.default)
+
 
 /* import VueMeta from 'vue-meta'
 Vue.use(VueMeta) */

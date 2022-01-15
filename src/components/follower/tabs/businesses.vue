@@ -8,9 +8,12 @@
 
     <hr />
 
+
+
     <div class="business" v-if="noBusiness == false">
       <b-row>
         <b-col lg="6" class="p-0 mb-2" v-for="item in busineses" :key="item.id">
+         
           <div class="people-style shadow h-100">
             <b-row>
               <b-col md="8" xl="8" lg="12" cols="12" sm="8">
@@ -18,14 +21,16 @@
                   <div class="center-img">
                     <splide :options="options" class="r-image">
                       <splide-slide cl>
-                        <img :src="item.picture" class="r-image" />
+                        <img :src="item.logo_path" class="r-image" />
                       </splide-slide>
                     </splide>
                   </div>
                   <div class="flx100 text-left">
                     <p class="ml-3 textt text-left">
                      
-                       <router-link :to="({name:'BusinessFollower', params:{id: item.id}})">
+                       
+                          <router-link :to="'business/'+item.id">
+
                       <strong class="title over" > {{ item.name }}  </strong> </router-link>   <br />
 
                       <span v-for="cat in item.category" :key="cat.name">
@@ -142,6 +147,14 @@
         {{ $t("profilefollower.Please_check_back_later") }}
       </p>
     </div>
+
+    
+     <div class="mx-auto text-center my-5"  v-if="!busineses.length"  >
+        <p class="my-2" >
+          No Business found
+        </p>
+      </div>  
+
   </div>
 </template>
 

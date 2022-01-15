@@ -1,58 +1,98 @@
 <template>
-  <div class=" p-0 mt-3">
-    <div class="container-fluid border">
-      <b-tabs pills content-class="mt-3  f-left">
-        <b-tab :title="$t('profilefollower.People')" active>
-          <People />
-        </b-tab>
+  <div class="mt-3">
+    <div class="">
+      <b-card
+        class="f-left"
+        style="padding: 0px; margin-left: -12px; margin-right: -12px"
+      >
+        <b-tabs pills content-class="mt-3 f-left">
+          <b-tab  active>
 
-        <b-tab :title="$t('profilefollower.Businesses')">
-          <Business />
-        </b-tab>
+               <template slot="title">
+           {{ $t('profileowner.People')}} <span class="spa-color"> {{ nFormatter(total.total_people)}}  </span>
+          </template>
 
-        <b-tab :title="$t('profilefollower.Netwoks')">
-          <Network />
-        </b-tab>
-      </b-tabs>
+
+            <People @BlockUser="BlockUser" />
+          </b-tab>
+
+          <b-tab>
+
+              <template slot="title">
+           {{ $t('profileowner.Businesses')}} <span class="spa-color"> {{ nFormatter(total.total_business)}}  </span>
+          </template>
+
+
+            <Businesses @BlockUser="BlockUser" />
+          </b-tab>
+
+          <b-tab >
+
+              <template slot="title">
+           {{ $t('profileowner.Network')}} <span class="spa-color"> {{ nFormatter(total.total_network)}}  </span>
+          </template>
+
+
+            <Network @BlockUser="BlockUser" />
+          </b-tab>
+        </b-tabs>
+      </b-card>
     </div>
   </div>
 </template>
 
 <script>
-import Business from "./businesses/businesses";
 import People from "./people/people";
+import Businesses from "./businesses/businesses";
 import Network from "./network/network";
 
 export default {
-  name: "SidebarCommunity",
+  name: "memberNetwork",
   components: {
-    Business,
     People,
-    Network
+    Businesses,
+    Network,
   },
+
+  
+		computed: {
+			total() {
+				return this.$store.state.follower.Tcommunity;
+			},
+		},
+
 
   data() {
     return {
       perPage: 3,
       currentPage: 1,
-      items: [
-        { id: 1, first_name: "Fred", last_name: "Flintstone" },
-        { id: 2, first_name: "Wilma", last_name: "Flintstone" },
-        { id: 3, first_name: "Barney", last_name: "Rubble" },
-        { id: 4, first_name: "Betty", last_name: "Rubble" },
-        { id: 5, first_name: "Pebbles", last_name: "Flintstone" },
-        { id: 6, first_name: "Bamm Bamm", last_name: "Rubble" },
-        { id: 7, first_name: "The Great", last_name: "Gazzoo" },
-        { id: 8, first_name: "Rockhead", last_name: "Slate" },
-        { id: 9, first_name: "Pearl", last_name: "Slaghoople" }
-      ]
     };
   },
-  computed: {
-    rows() {
-      return this.items.length;
-    }
-  }
+
+  methods: {
+
+    	nFormatter(num) {
+				if (num >= 1000000000) {
+					return (num / 1000000000).toFixed(1).replace(/\.0$/, "") + "G";
+				}
+				if (num >= 1000000) {
+					return (num / 1000000).toFixed(1).replace(/\.0$/, "") + "M";
+				}
+				if (num >= 1000) {
+					return (num / 1000).toFixed(1).replace(/\.0$/, "") + "K";
+				}
+				return num;
+			},
+
+    
+
+  },
+  mounted() {
+    this.isLoading = true;
+
+    console.log("Load User Profile Community start+++++++");
+  
+  },
 };
 </script>
 
@@ -73,11 +113,6 @@ hr {
   background-color: #e75c18;
 }
 
-f-right {
-  text-align: right;
-  align-content: right;
-}
-
 .f-left {
   text-align: left;
   align-content: left;
@@ -89,62 +124,7 @@ f-right {
   }
 }
 
-.detail {
-  position: relative;
-  left: 92px;
-  top: -30px;
-}
-.name {
-  position: relative;
-  top: -10px;
-  left: 10px;
-}
-
-.b-background {
-  background-color: red;
-  color: white;
-}
-
-.people-style {
-  border-top-left-radius: 40px;
-
-  border-bottom-left-radius: 40px;
-
-  border-top-right-radius: 15px;
-
-  border-bottom-right-radius: 15px;
-
-  height: 78px;
-
-  background: white;
-
-  background-color: #fff;
-  background-clip: border-box;
-  border: 1px solid rgba(0, 0, 0, 0.125);
-
-  margin-bottom: 10px;
-  margin-right: -30px;
-  margin-left: -30px;
-}
-
-.p-buttons {
-  margin-right: 1px;
-
-  margin-left: -5px;
-  margin-bottom: 2.5px;
-  margin-top: 2.5px;
-
-  padding-right: 5px;
-}
-
-.e-name {
-  margin-right: -12px;
-  margin-left: -25px;
-}
-.p-avater {
-  margin-right: -10px;
-}
-.a-text {
-  margin-top: 2px;
+.card-body {
+  padding: 2px;
 }
 </style>

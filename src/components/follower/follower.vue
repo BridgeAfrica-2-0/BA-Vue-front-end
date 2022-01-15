@@ -163,7 +163,7 @@
               <Post />
             </b-tab>
 
-            <b-tab :title="$t('profilefollower.About')"><About /></b-tab>
+            <b-tab :title="$t('profilefollower.About')"><About /></b-tab>   
              <b-tab :title="$t('profilefollower.Media')"
               ><Media type="profile" :isEditor="false"
             /></b-tab>
@@ -183,8 +183,9 @@
 </template>
 
 <script>
+//import Post from "@/components/follower/tabs/posts";
 import Post from "@/components/businessfollower/tabs/posts";
-import About from "@/components/follower/tabs/about";
+import About from "@/components/follower/tabs/about";  
 import Media from "@/components/businessfollower/tabs/media";
 import Community from "@/components/follower/tabs/community";
 import Businesses from "@/components/follower/tabs/businesses";

@@ -301,6 +301,14 @@
         
       />
 
+     
+
+      <div class="mx-auto text-center my-5" >
+        <p class="my-2" v-if="!owner_post.length">
+          No Post found
+        </p>
+      </div>
+
       <infinite-loading :identifier="infiniteId" ref="infiniteLoading" @infinite="infiniteHandler"></infinite-loading>
     
   </div>

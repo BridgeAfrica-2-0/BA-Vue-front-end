@@ -43,7 +43,6 @@ import Post from "@/components/businessOwner/ownerPostComponent.vue";
 export default {
   name: "postNetwork",
   mixins: [NoMoreDataForComment],
-
   computed: {
     posts() {
       return this.$store.getters["allSearch/getPosts"];

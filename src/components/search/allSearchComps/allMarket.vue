@@ -7,33 +7,17 @@
     ></b-spinner>
 
     <b-alert v-if="products.total == 0" show variant="warning"
-      ><a href="#" class="alert-link">    
+      ><a href="#" class="alert-link">
         {{ $t("search.No_product_available_for_that_search") }}!
       </a></b-alert
     >
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-    <div   v-for="(product, index) in products.data"
-      :key="index"  class="people-style p-3 shadow h-100">
-   
-        <div class="d-inline-flex">
-
-          <div> 
-
+    <div
+      v-for="(product, index) in products.data"
+      :key="index"
+      class="people-style p-3 shadow h-100"
+    >
+      <div class="d-inline-flex">
+        <div>
           <div class="center-img">
             <img
               :src="product.picture"
@@ -41,85 +25,58 @@
               @click="productDetails(product)"
             />
           </div>
+        </div>
 
-          </div>
-           
-
-           <div class="flx50">  
-       
+        <div class="flx50">
           <p class="text">
-            <strong class="title cursor-pointer" @click="productDetails(product)">
+            <strong
+              class="title cursor-pointer"
+              @click="productDetails(product)"
+            >
               {{ product.name }}
             </strong>
             <br />
-            
-            
-               <read-more
-                        more-str="read more"
-                        class="readmore"
-                        :text="product.description"
-                        link="#"
-                        less-str="read less"
-                        :max-chars="100"
-                      >
-                      </read-more>
 
-          
-            
-            
-
-            <span class="price username mt-2">
-             {{ product.price }} FCFA
-            </span>
-        
-
+            <read-more
+              more-str="read more"
+              class="readmore"
+              :text="product.description"
+              link="#"
+              less-str="read less"
+              :max-chars="100"
+            >
+            </read-more>
+            <span class="price username mt-2"> {{ product.price }} FCFA </span>
           </p>
-
-           </div>
-
+        </div>
+      </div>
+      <br />
+      <div class="d-inline-flex float-right mt-2">
+        <div class="">
+          <b-button variant="primary" @click="buyNow(product)"
+            ><span>{{ $t("general.Buy_Now") }}</span>
+          </b-button>
         </div>
 
+        <div class="ml-2">
+          <b-button variant="primary" @click="handleAddToCard(product)"
+            ><span>{{ $t("general.Add_to_Cart") }}</span>
+          </b-button>
+        </div>
+      </div>
 
-        <br>
-          
-            <div class="d-inline-flex float-right  mt-2">
-              <div class=" " >
-                  <b-button variant="primary"
-                  @click="buyNow(product)" 
-                  ><span>{{$t("general.Buy_Now")}}</span>
-                 </b-button>
-              </div>
-             
-            <div class=" ml-2 ">
-              <b-button variant="primary" @click="handleAddToCard(product)"
-              ><span>{{$t("general.Add_to_Cart")}}</span>
-             </b-button>
-            </div>
-
-            </div>
-
-         <br>   <br>  
-         
+      <br />
+      <br />
     </div>
-
-
-
-
-
-
-<ProductDetails
+    <ProductDetails
       @closemodal="closeDetailsProduct"
       :showModal="viewProduct"
       :product="product"
     />
-
-
-
   </div>
 </template>
 
 <script>
-
 import ProductDetails from "@/components/businessf/ProductDetails.vue";
 export default {
   props: ["products"],
@@ -134,7 +91,7 @@ export default {
     };
   },
 
-    components: {
+  components: {
     ProductDetails,
   },
 
@@ -145,70 +102,62 @@ export default {
   },
 
   methods: {
-
-
-    
     productDetails(product) {
       console.log(product);
-      this.product=product;
+      this.product = product;
       this.viewProduct = true;
     },
     closeDetailsProduct() {
       this.viewProduct = false;
     },
 
-    buyNow(product){
+    buyNow(product) {
       this.handleAddToCard(product);
-      this.$router.push({name: 'payment'})
-    //   var dataf = [];
-    //  var data =   {
-    //       produits:{
-    //         data: {
-    //           product_id: this.product.id,
-    //             quantity:1,
-    //             price: this.product.price,
-    //             product_kg: this.product.kg,
-    //             business_id:this.product.business_id,
-    //             sub_total: 20000
-    //         },
-    //     },
-    //     total_amount: this.product.price+this.product.tax_amount,
-    //     tax_amount: this.product.tax_amount,
-        
-    // }
-    //   console.log("buy now", data, this.shippingAddress)
+      this.$router.push({ name: "payment" });
+      //   var dataf = [];
+      //  var data =   {
+      //       produits:{
+      //         data: {
+      //           product_id: this.product.id,
+      //             quantity:1,
+      //             price: this.product.price,
+      //             product_kg: this.product.kg,
+      //             business_id:this.product.business_id,
+      //             sub_total: 20000
+      //         },
+      //     },
+      //     total_amount: this.product.price+this.product.tax_amount,
+      //     tax_amount: this.product.tax_amount,
 
-    //   this.shippingAddress.map(item =>{
-    //      dataf.push({ ...data, shipping_address: item.id });
-      
-    //   })
-    //   console.log("buy now", dataf)
+      // }
+      //   console.log("buy now", data, this.shippingAddress)
+
+      //   this.shippingAddress.map(item =>{
+      //      dataf.push({ ...data, shipping_address: item.id });
+
+      //   })
+      //   console.log("buy now", dataf)
     },
 
     handleAddToCard(product) {
-
-       this.product=product;
+      this.product = product;
       console.log("add to card ", this.product.id);
       this.$store
         .dispatch("cart/addToCart", this.product.id)
         .then((response) => {
-          
-
           this.flashMessage.show({
             status: "success",
             message: this.getStatus,
           });
         })
         .catch((err) => {
-          console.log({err:err});
+          console.log({ err: err });
           this.flashMessage.show({
             status: "error",
             message: "error occur",
           });
         });
     },
-
-
 
     changePage(value) {
       // this.$store.commit("marketSearch/setProducts", '');
@@ -237,21 +186,17 @@ export default {
 
 
 <style scoped>
-
-
-.flx50{
+.flx50 {
   flex-basis: 80%;
 }
 
-.spin{
-          text-align: center;
-    margin-top: 10%;
-      margin-bottom: 10%;
-    width: 4rem;
-     height: 4rem;
-        }
-
-
+.spin {
+  text-align: center;
+  margin-top: 10%;
+  margin-bottom: 10%;
+  width: 4rem;
+  height: 4rem;
+}
 
 .discount {
   color: orange;
@@ -305,9 +250,8 @@ h6 {
   cursor: pointer;
 }
 @media only screen and (min-width: 768px) {
-
-  .marge{
-    margin-left: 200px
+  .marge {
+    margin-left: 200px;
   }
   .pos {
     margin-left: 200px;
@@ -392,7 +336,7 @@ h6 {
     text-align: left;
     margin-right: -5px;
     line-height: 25px;
-     margin-left: 75px;
+    margin-left: 75px;
   }
   .r-image {
     border-top-left-radius: 10px;
@@ -497,7 +441,7 @@ h6 {
     text-align: left;
     margin-right: -5px;
     line-height: 25px;
-     margin-left: 75px;
+    margin-left: 75px;
   }
   .r-image {
     border-top-left-radius: 10px;

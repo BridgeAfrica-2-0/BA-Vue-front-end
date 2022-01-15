@@ -60,13 +60,13 @@
         </div>
 
         <br />
-        <b-button
+        <!-- <b-button
           :disabled="selectedFilter.length < 1"
           variant="primary"
           class="m-3 float-right"
         >
           {{ $t("search.Search") }}
-        </b-button>
+        </b-button> -->
       </b-modal>
 
       <span v-if="showform == true">

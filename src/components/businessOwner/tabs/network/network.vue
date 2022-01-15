@@ -8,7 +8,7 @@
             </span>
           </template>
           
-          <Followers @BlockUser="BlockUser"/></b-tab>
+          <Followers /></b-tab>
       <b-tab >    <template slot="title">
             {{ $t('businessowner.Following') }}
             <span class="spa-color">
@@ -16,7 +16,7 @@
             </span>
           </template>  
           
-          <Following @BlockUser="BlockUser"/></b-tab>
+          <Following /></b-tab>
     </b-tabs>
   </div>
 </template>
@@ -30,11 +30,9 @@ export default {
     Following
   },
    methods: {
-    BlockUser(dataInfo) {
-      console.log(dataInfo);
-      this.$emit('BlockUser', dataInfo);
-    },
-    nFormatter(num) {
+   
+
+      nFormatter(num) {
       if (num >= 1000000000) {
         return (num / 1000000000).toFixed(1).replace(/\.0$/, "") + "G";
       }
@@ -46,8 +44,10 @@ export default {
       }
       return num;
     }, 
-  },
-  computed: {
+
+
+
+  },computed: {
     total() {
       return this.$store.state.businessOwner.Tcommunity;
     },

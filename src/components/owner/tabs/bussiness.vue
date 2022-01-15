@@ -716,7 +716,13 @@
       <div class="row">
         <div class="col">
           <h6 class="mb-0"><b></b></h6>
-          <b-row>
+          <b-row>  
+
+
+            
+
+     
+
             <b-col md="12" lg="6" class="p-0 mb-2" v-for="business in profileBusinesss" :key="business.business_id">
               <div class="people-style shadow h-100"> 
                 <b-link>

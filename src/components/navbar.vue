@@ -28,9 +28,11 @@
                   class="input-group-text border-left-0 color-mobile"
                   style="width: 40px; border-right: none"
                 >
-                  <slot name="mobile">
-                    <Button @click.native="getKeyword" media="mobile" />
-                  </slot>
+                  <b-icon
+                    icon="search"
+                    style="color: #e75c18"
+                    font-scale="1.5"
+                  ></b-icon>
                 </span>
               </div>
 
@@ -41,7 +43,6 @@
                 class="form-control search-mobile"
                 style="border-left: none"
                 :placeholder="$t('general.All')"
-                v-model="credentials.keyword"
                 aria-label=""
                 data-original-title=""
                 title=""
@@ -74,7 +75,7 @@
                   data-toggle="popover"
                   class="form-control search-mobile"
                   style="border-left: none"
-                  :placeholder="$t('general.Find_Pharmacy')"
+                  :placeholder="$t('general.Where')"
                   aria-label=""
                   data-original-title=""
                   title=""
@@ -113,7 +114,7 @@
               />
 
               <slot name="button">
-                <Button @click.native="getKeyword" media="desktop" />
+                <Button @click.native="getKeyword" />
               </slot>
             </form>
           </span>
@@ -144,7 +145,6 @@
                 <router-link
                   :to="navLink('home')"
                   class="nav-link text-dark hov"
-                  href=""
                 >
                   Home
                 </router-link>
@@ -152,7 +152,7 @@
 
               <div class="nav-item">
                 <router-link
-                  :to="{ name: 'Search' }"
+                  :to="{ name: 'GlobalSearch' }"
                   class="nav-link text-dark hov"
                 >
                   {{ $t("general.Market") }}
@@ -339,9 +339,7 @@
                       class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
                     >
                       <span class="mr-2"
-                        ><fas-icon
-                          class="violet search"
-                          :icon="['fas', 'user']"
+                        ><fas-icon class="violet search" :icon="['fas', 'user']"
                       /></span>
                       Profile
                     </a>
@@ -365,9 +363,7 @@
                       class="other-menu suggest-item cursor-pointer text-decoration-none text-dark w-full"
                     >
                       <span class="mr-2 w-full"
-                        ><fas-icon
-                          class="violet search"
-                          :icon="['fas', 'cogs']"
+                        ><fas-icon class="violet search" :icon="['fas', 'cogs']"
                       /></span>
                       {{ $t("general.Account_Settings") }}
                     </router-link>
@@ -430,13 +426,12 @@
                 @click="gotoProfile"
               >
                 <div>
-                  <img
-                    src="@/assets/img/profile-pic.jpg"
-                    class="rounded-circle"
-                    alt=""
-                    width="30"
-                    height="30"
-                  />
+                  <b-avatar
+                    variant="light"
+                    :src="user.profile_picture"
+                    :square="'user' == user.user_type ? false : true"
+                    class="logo-sizee"
+                  ></b-avatar>
                 </div>
                 <div class="d-flex flex-column ml-1 line-size">
                   <div class="font-weight-bold">{{ user.name }}</div>
@@ -445,22 +440,8 @@
               </div>
 
               <br />
-
               <div class="d-inline-flex flex-row align-items-center mb-1">
-                <div>
-                  <img
-                    src="@/assets/img/logo3.png"
-                    class="rounded-circle"
-                    alt=""
-                    width="25"
-                    height="25"
-                  />
-                </div>
-                <div class="ml-3 mt-2">
-                  <p class="font-weight-bold">
-                    {{ $t("general.Your_Businesses") }}
-                  </p>
-                </div>
+                <Activity class="w-full" />
               </div>
             </div>
 
@@ -478,12 +459,11 @@
               >Profile
               <hr class="h-divider" v-if="'user' === user.user_type" />
             </div>
-            <hr class="h-divider" />
             <router-link
               :to="{ name: 'orders' }"
               class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
             >
-              <span class="mr-2"
+              <span class="mr-3"
                 ><fas-icon
                   class="violet search"
                   :icon="['fas', 'cart-arrow-down']"
@@ -496,7 +476,7 @@
               :to="{ name: 'settings' }"
               class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
             >
-              <span class="mr-2"
+              <span class="mr-3"
                 ><fas-icon class="violet search" :icon="['fas', 'cogs']"
               /></span>
 
@@ -504,16 +484,16 @@
             </router-link>
             <hr class="h-divider" />
             <div class="other-menu suggest-item cursor-pointer">
-              <span class="mr-1"
+              <span class="mr-3"
                 ><fas-icon class="violet search" :icon="['fas', 'question']"
               /></span>
               {{ $t("general.Help_and_Support") }}
             </div>
             <hr class="h-divider" />
             <div class="other-menu suggest-item cursor-pointer">
-              <b-link v-b-toggle="'collapse-2'" class="m-1"
+              <b-link v-b-toggle="'collapse-2'"
                 ><fas-icon
-                  class="violet search"
+                  class="violet search mr-1"
                   :icon="['fas', 'globe-americas']"
                 />
                 {{ $t("general.Language") }}</b-link
@@ -537,9 +517,7 @@
               class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
             >
               <span class="mr-3"
-                ><fas-icon
-                  class="violet search"
-                  :icon="['fas', 'sign-out-alt']"
+                ><fas-icon class="violet search" :icon="['fas', 'sign-out-alt']"
               /></span>
               {{ $t("general.Logout") }}
             </a>
@@ -573,7 +551,7 @@ export default {
   props: {
     credentials: {
       type: Object,
-      default: function () {
+      default: function() {
         return {
           keyword: "",
           placeholder: this.$t("general.All"),
@@ -612,24 +590,20 @@ export default {
 
     this.islogin = this.$store.getters["auth/isLogged"];
 
-    this.islogin = this.$store.getters["auth/isLogged"];
-
-    console.log(this.islogin);
-    console.log("yoo mother fucjjeryt");
-
     if (this.islogin) {
       this.init();
       this.userOwnPage = this.onRedirect();
+
+      this.notificationPatterns = {
+        user: () => "user/notification",
+        business: () => `/notification/business/${this.user.id}`,
+        network: () => `/notification/network/${this.user.id}`,
+      };
 
       this.messagePatterns = {
         user: () => "/messages/latest/user",
         business: () => `/messages/latest/${this.user.id}/business`,
         network: () => `/messages/latest/${this.user.id}/network`,
-      };
-      this.notificationPatterns = {
-        user: () => "user/notification",
-        business: () => `/notification/business/${this.user.id}`,
-        network: () => `/notification/network/${this.user.id}`,
       };
 
       this.redirectionPatterns = {
@@ -667,18 +641,12 @@ export default {
   },
 
   watch: {
-    "$store.state.auth.profilConnected": function () {
+    "$store.state.auth.profilConnected": function() {
       this.updateNotificationEvent();
       this.userOwnPage = this.onRedirect();
     },
 
-    credentials: {
-      deep: true,
-      handler() {
-        this.searchOptions = this.credentials;
-      },
-    },
-    "$i18n.locale": async function () {
+    "$i18n.locale": async function() {
       const response = await this.$repository.notification.changeLanguage(
         this.$i18n.locale
       );
@@ -786,7 +754,7 @@ export default {
     },
 
     getKeyword() {
-      if (!this.credentials.keyword) return false;
+      if (!this.searchOptions.keyword) return false;
 
       if (this.$route.name != "Search") {
         console.log("the keyword is: ", this.credentials.keyword);
@@ -807,7 +775,7 @@ export default {
     navLink(type) {
       const link = {
         home: () => {
-          return this.profile ? "dashboard" : "home1";
+          return this.profile ? { name: "dashboard" } : { name: "home1" };
         },
       };
       try {
@@ -829,7 +797,7 @@ export default {
         .catch(() => console.log("error"));
     },
 
-    logout: async function () {
+    logout: async function() {
       let loader = this.$loading.show({
         container: this.$refs.formContainer,
         canCancel: true,
@@ -855,7 +823,7 @@ export default {
       loader.hide();
     },
 
-    switchToProfile: async function () {
+    switchToProfile: async function() {
       let loader = this.$loading.show({
         container: this.$refs.formContainer,
         canCancel: true,
@@ -879,12 +847,12 @@ export default {
       this.$refs.mobileinput.style.display = "block";
     },
 
-    getNetworks: async function () {
+    getNetworks: async function() {
       let request = await this.$repository.share.getNetworks();
       if (request.success) this.setNetworks(request.data);
     },
 
-    getBusiness: async function () {
+    getBusiness: async function() {
       let request = await this.$repository.share.getBusiness();
       if (request.success) this.setBusiness(request.data);
     },
@@ -928,24 +896,6 @@ export default {
         })
         .catch((error) => console.log(error));
     },
-
-    // async getNotifications() {
-    //   await axios
-    //     .get(`notification/latest/user`)
-    //     .then((response) => {
-    //       console.warn(response.data.data);
-    //       this.notifications = response.data.data;
-    //     })
-    //     .catch((error) => console.log("Error In newMessage  => " + error));
-    // },
-    // async getMessages() {
-    //   await axios
-    //     .get(`messages/latest/user`)
-    //     .then((response) => {
-    //       this.messages = response.data.data;
-    //     })
-    //     .catch((error) => console.log(error));
-    // },
   },
 };
 </script>
@@ -1124,7 +1074,7 @@ export default {
 
 @media (max-width: 992px) {
   .navbar-toggler {
-    padding: 0.25rem 0.75rem;
+    padding: 0.25rem 1.5rem;
     font-size: 1.25rem;
     line-height: 1;
     background-color: transparent;
@@ -1164,7 +1114,7 @@ export default {
 }
 </style>
 
-<style >
+<style>
 @media only screen and (min-width: 768px) {
   .search-hh .form-control {
     height: 48px !important;

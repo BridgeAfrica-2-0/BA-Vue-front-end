@@ -154,7 +154,6 @@ export default {
           })
           .catch((err) => {
             this.hasLoadAlbum = true;
-
           })
           .finally(() => console.log("End load album"));
         //}

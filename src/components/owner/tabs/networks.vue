@@ -44,10 +44,11 @@
                   >Edit</b-dropdown-item
                 >
                 <b-dropdown-item
-                 @click="selectNetwork(network)"
-                 v-b-modal.deleteBusinessModal
-                 no-stacking
-                >Delete</b-dropdown-item>
+                  @click="selectNetwork(network)"
+                  v-b-modal.deleteBusinessModal
+                  no-stacking
+                  >Delete</b-dropdown-item
+                >
               </b-dropdown>
             </div>
 
@@ -137,7 +138,11 @@
 
     <b-modal
       hide-footer
-      :title="editNet ? $t('profileowner.Edit_network') : $t('profileowner.Add_Network')"
+      :title="
+        editNet
+          ? $t('profileowner.Edit_network')
+          : $t('profileowner.Add_Network')
+      "
       size="lg"
       v-model="showModal"
       ref="netmodal"
@@ -196,7 +201,7 @@
                 class="mb-0"
               >
                 <b-form-input
-                  v-model="createdNetwork.name" 
+                  v-model="createdNetwork.name"
                   id="network_name"
                   placeholder=""
                   required
@@ -229,13 +234,7 @@
                 label-class=" pt-0"
                 class="mb-0"
               >
-                <b-form-input
-                  v-model="createdNetwork.address"
-                  id="network_name"
-                  placeholder=""
-                  required
-                >
-                </b-form-input>
+                <Address @get-address-details="getAddressDetails" />
               </b-form-group>
             </b-col>
 
@@ -308,8 +307,8 @@
             <b-col md="6">
               <div class="form-group">
                 <label for="Neighbor" class="username">
-                  {{ $t("profileowner.Neighbor") }} :
-                </label ><br />
+                  {{ $t("profileowner.Neighbor") }} : </label
+                ><br />
                 <multiselect
                   v-model="locality"
                   :placeholder="$t('profileowner.Search')"
@@ -515,7 +514,11 @@
           >
           <b-spinner v-if="loader" variant="primary"></b-spinner>
           <b-button @click="action" class="mt-2 button-btn" variant="primary">
-            {{editNet ? $t("profileowner.Edit_Network") : $t("profileowner.Add_Network")}}
+            {{
+              editNet
+                ? $t("profileowner.Edit_Network")
+                : $t("profileowner.Add_Network")
+            }}
           </b-button>
         </b-form>
       </b-container>
@@ -553,14 +556,41 @@
       </p>
     </b-modal>
 
-    <b-modal id="deleteBusinessModal" title="Do you really want to delete network!!" centered hide-footer no-stacking>
+    <b-modal
+      id="deleteBusinessModal"
+      title="Do you really want to delete network!!"
+      centered
+      hide-footer
+      no-stacking
+    >
       <b-row>
-        <b-col><b-button class="mt-3" variant="success" block @click="$bvModal.hide('deleteBusinessModal')">Cancel</b-button></b-col>
-        <b-col><b-button class="mt-3" variant="primary" block v-b-modal.deleteBusinessModal2>Approve</b-button></b-col>
+        <b-col
+          ><b-button
+            class="mt-3"
+            variant="success"
+            block
+            @click="$bvModal.hide('deleteBusinessModal')"
+            >Cancel</b-button
+          ></b-col
+        >
+        <b-col
+          ><b-button
+            class="mt-3"
+            variant="primary"
+            block
+            v-b-modal.deleteBusinessModal2
+            >Approve</b-button
+          ></b-col
+        >
       </b-row>
     </b-modal>
 
-    <b-modal id="deleteBusinessModal2" title="Any particular reason why you want to delete network?" centered hide-footer>
+    <b-modal
+      id="deleteBusinessModal2"
+      title="Any particular reason why you want to delete network?"
+      centered
+      hide-footer
+    >
       <b-form @submit.prevent="deleteNetwork(selectedNetwork)">
         <p>
           <b-form-textarea
@@ -575,7 +605,16 @@
           ></b-form-textarea>
         </p>
         <b-row>
-          <b-col><b-button class="mt-3" variant="primary" type="submit" @click="$bvModal.hide('deleteBusinessModal2')" block>Delete</b-button></b-col>
+          <b-col
+            ><b-button
+              class="mt-3"
+              variant="primary"
+              type="submit"
+              @click="$bvModal.hide('deleteBusinessModal2')"
+              block
+              >Delete</b-button
+            ></b-col
+          >
         </b-row>
       </b-form>
     </b-modal>
@@ -586,6 +625,7 @@
 import axios from "axios";
 import Multiselect from "vue-multiselect";
 import VuePhoneNumberInput from "vue-phone-number-input";
+import Address from "./network/Address";
 export default {
 
   props:{
@@ -664,6 +704,7 @@ export default {
   components: {
     Multiselect,
     VuePhoneNumberInput,
+    Address,
   },
 
   mounted() {
@@ -672,7 +713,7 @@ export default {
   },
 
   computed: {
-    old_profileNetworks: function () {
+    old_profileNetworks: function() {
       return this.$store.state.profile.profilenetwork;
     },
 
@@ -680,7 +721,7 @@ export default {
       return this.$store.state.auth.categories;
     },
 
-    selectedcategories: function () {
+    selectedcategories: function() {
       let selectedUsers = [];
 
       this.multiselecvalue.forEach((item) => {
@@ -693,7 +734,7 @@ export default {
       return selectedUsers;
     },
 
-    pagee: function () {
+    pagee: function() {
       return this.page;
     },
 
@@ -717,20 +758,20 @@ export default {
       return this.$store.state.auth.locality;
     },
 
-    selectedcountry: function () {
+    selectedcountry: function() {
       return this.country.id;
     },
-    selectedregion: function () {
+    selectedregion: function() {
       return this.region.id;
     },
 
-    selecteddivision: function () {
+    selecteddivision: function() {
       return this.division.id;
     },
-    selectedmunicipality: function () {
+    selectedmunicipality: function() {
       return this.municipality.id;
     },
-    selectedlocality: function () {
+    selectedlocality: function() {
       return this.locality.id;
     },
   },
@@ -743,6 +784,9 @@ export default {
       });
 
       return err;
+    },
+    getAddressDetails(details) {
+      this.createdNetwork.address = details.address;
     },
 
     categories() {
@@ -1002,12 +1046,11 @@ export default {
             this.flashMessage.show({
               status: "error",
 
-
-                message: this.$t('general.Unable_to_Create_Your_Network'),
-                blockClass: "custom-block-class",
-              });
-              console.log({ err: err });
-            }
+              message: this.$t("general.Unable_to_Create_Your_Network"),
+              blockClass: "custom-block-class",
+            });
+            console.log({ err: err });
+          }
 
           loader.hide();
           setTimeout(() => {
@@ -1028,7 +1071,7 @@ export default {
 
       console.log(this.textReason);
       let fd = new FormData();
-      fd.append("reason", this.textReason)
+      fd.append("reason", this.textReason);
       axios
         .post(`network/${network.id}`, fd)
         .then((res) => {
@@ -1037,15 +1080,15 @@ export default {
           loader.hide();
           this.flashMessage.show({
             status: "success",
-            message: "Operation was successful !!"
-          });  
+            message: "Operation was successful !!",
+          });
         })
         .catch((err) => {
           this.loader = false;
           loader.hide();
           this.flashMessage.show({
             status: "error",
-            message: "Something wen't wrong !!"
+            message: "Something wen't wrong !!",
           });
         });
     },

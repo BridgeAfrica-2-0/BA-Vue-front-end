@@ -7,7 +7,7 @@
             <b-row class="mb-1">
               <b-col md="3" cols="4" sm="4" class="my-auto">
                 <b-avatar
-                  class="p-avater"
+                  class="p-avater bg-light"
                   variant="primary"
                   :src="item.profile_picture"
                 ></b-avatar>
@@ -22,21 +22,26 @@
                           <b-col
                             md="6"
                             lg="12"
-                            cols="6"
+                            cols="5"
                             xl="12"
                             class="mt-lg-2"
                           >
                             <div class="mt-3 mt-lg-0 mt-xl-0 username">
-                             <router-link :to="{name: 'ProfileFollower', params: {id:item.id}}">
-                              <strong class="title"> {{ item.name }}</strong>
-                            </router-link>
+                              <router-link
+                                :to="{
+                                  name: 'ProfileFollower',
+                                  params: { id: item.id },
+                                }"
+                              >
+                                <strong> {{ item.name }}</strong>
+                              </router-link>
                             </div>
                           </b-col>
 
                           <b-col
                             md="6"
                             lg="12"
-                            cols="6"
+                            cols="5"
                             xl="12"
                             class="mt-2 mt-lg-1 mt-xl-2"
                           >
@@ -99,7 +104,6 @@
                               }}</span>
                             </b-button>
                           </b-col>
-                          
                         </b-row>
                       </div>
                     </b-col>
@@ -324,6 +328,11 @@ export default {
 @media only screen and (max-width: 768px) {
   .btn-icon {
     margin-top: 3px;
+  }
+  .danger-icont{
+    position: absolute;
+    top: 23px;
+    right: 30px;
   }
 
   .btn-text {

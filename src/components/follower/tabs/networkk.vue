@@ -11,6 +11,12 @@
       {{ $t("profilefollower.Do_you_want_to_join_this_network") }}
     </b-modal>
 
+    <div class="mx-auto text-center my-5"  v-if="!network.length"  >
+        <p class="my-2" >
+          No Network found
+        </p>
+    </div>  
+
     <b-row>
       <b-col
         lg="6"

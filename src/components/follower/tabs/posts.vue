@@ -7,7 +7,7 @@
         <Media />
       </b-col>
 
-      <b-col md="8" lg="7" xl="8">  
+      <b-col md="8" lg="7" xl="8" class="post-padding">    
         <Post />
       </b-col>
     </b-row>
@@ -30,4 +30,10 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>   @media (min-width: 768px) {
+  
+  .post-padding{
+        padding-left: 60px !important;
+    padding-right: 70px !important;
+  }
+}</style>

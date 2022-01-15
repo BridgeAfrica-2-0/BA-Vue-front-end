@@ -8,6 +8,8 @@
 
     <hr />
 
+
+
     <div class="business" v-if="noBusiness == false">
       <b-row>
         <b-col lg="6" class="p-0 mb-2" v-for="item in busineses" :key="item.id">
@@ -26,7 +28,9 @@
                   <div class="flx100 text-left">
                     <p class="ml-3 textt text-left">
                      
-                       <router-link :to="({name:'BusinessFollower', params:{id: item.id}})">
+                       
+                          <router-link :to="'business/'+item.id">
+
                       <strong class="title over" > {{ item.name }}  </strong> </router-link>   <br />
 
                       <span v-for="cat in item.category" :key="cat.name">
@@ -143,6 +147,14 @@
         {{ $t("profilefollower.Please_check_back_later") }}
       </p>
     </div>
+
+    
+     <div class="mx-auto text-center my-5"  v-if="!busineses.length"  >
+        <p class="my-2" >
+          No Business found
+        </p>
+      </div>  
+
   </div>
 </template>
 

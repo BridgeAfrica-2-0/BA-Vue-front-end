@@ -142,7 +142,7 @@
                         accept="video/mpeg,video/mp4,image/*"
                         ref="movies"
                       />
-                    </b-button>
+                    
                     <b-button
                       :title="$t('businessowner.Add_Hyperlink')"
                       size="sm"

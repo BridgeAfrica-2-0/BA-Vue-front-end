@@ -5,12 +5,12 @@
         <b-col cols="12 mb-3">
           <div class="d-flex justify-content-start align-items-center">
             <div>
-              <b-icon variant="primary" icon="heart" class="mr-2"></b-icon
-              ><span>12</span>
+              <b-icon variant="primary" icon="heart" class="mr-2" @click="like(product.id)"></b-icon
+              ><span>  {{ product.product_likes }}</span>
             </div>
             <div class="ml-3">
               <b-icon variant="primary" icon="chat-fill" class="mr-2"></b-icon
-              ><span>{{ comments.length }}</span>
+              ><span> {{product.comments_count}}</span>
             </div>
           </div>
         </b-col>
@@ -48,6 +48,7 @@ export default {
       type: Number,
       required: true,
     },
+    product: {Object}
   },
   data() {
     return {
@@ -66,6 +67,12 @@ export default {
     },
   },
   methods: {
+
+    like(id){
+      console.log('likes---', id) 
+      this.$store.dispatch("productComments/productLikes",id);
+    },
+
     handleDeleteComment(idcomment) {
       this.loadComments = this.loadComments.filter(
         (el) => el.comment_id !== idcomment

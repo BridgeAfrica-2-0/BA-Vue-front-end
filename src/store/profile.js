@@ -494,10 +494,10 @@ export default {
     },
 
 
-    deleteContact({ commit }, id) {
+    deleteContact({ commit }, payload) {
 
-      console.log(id)
-      return axios.post("user/contact-delete/" + id, {
+      console.log(payload)
+      return axios.post("user/contact-delete/" + payload.id, {
 
       })
         .then((res) => {
@@ -600,8 +600,10 @@ export default {
         });
     },
 
-    getImages({ commit }) {
-      return axios.get("profile/user/media").then(({ data }) => {
+    getImages({ commit }, uuid=null) {
+      const path = uuid ? `profile/user/media?id=${uuid}`: 'profile/user/media';
+
+      return axios.get(path).then(({ data }) => {
         commit("setImages", data.data);
         console.log(data);
       });
@@ -1011,16 +1013,24 @@ export default {
     async updateUserBasicInfosCurrentCity(context, payload) {
       console.log(payload, "edit user currentcity start +++++");
       let response_ = null;
-      await axios.patch(
+      await axios(
 
-        "userIntro/CurrentCity", payload
-        
+        "userIntro/addCurrentCity/11" +
+        "?city=" +
+        payload.currentCity,
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+
+          }
+        }
       )
         .then(response => {
           console.log("edit user current city response (1) +++++++", response);
           if (response.status !== 200 && response.status !== 201) {
             console.log("Error From The Server");
-            // throw "Error From The Server";
+            throw "Error From The Server";
           }
           return response;
         })
@@ -1031,7 +1041,7 @@ export default {
           );
           if (!response) {
             console.log("Error From The Server +++++++");
-            // throw new Error("Error From Add New Current City+++++");
+            throw new Error("Error From Add New Current City+++++");
           }
           context.commit("storeCurrentCity", {
             currentCity: payload.currentCity
@@ -1040,7 +1050,7 @@ export default {
         })
         .catch(error => {
           console.log("Error From The Server or The Browser", error);
-          // throw error;
+          throw error;
         });
       return response_;
     },
@@ -1243,10 +1253,9 @@ export default {
             cityTown: payload.workPlace.cityTown,
             position: payload.workPlace.position,
             jobResponsibilities: payload.workPlace.jobResponsibilities,
-            currentlyWorking: payload.workPlace.currently_working === true ? 1 : 0,
+            currentlyWorking: payload.workPlace === true ? 1 : 0,
             startDate: payload.workPlace.startDate,
-            endDate: payload.workPlace.endDate,
-           
+            endDate: payload.workPlace.endDate
           }
         };
       } else if (payload.method === "PUT") {
@@ -1262,12 +1271,11 @@ export default {
             cityTown: payload.workPlace.city_town,
             position: payload.workPlace.position,
             jobResponsibilities: payload.workPlace.job_responsibilities,
-            currentlyWorking: payload.workPlace.currently_working === true ? 1 : 0,
+            currentlyWorking: payload.workPlace === true ? 1 : 0,
             startDate: payload.workPlace.startDate,
-            privacy: payload.workPlace.access,
             // endDate: null,
             // endDate: payload.workPlace.endDate,
-            endDate: payload.workPlace.currently_working === true ? null : payload.workPlace.endDate,
+            endDate: payload.workPlace === true ? null : payload.workPlace.endDate,
           }
         };
       } else if (payload.method === "DELETE") {

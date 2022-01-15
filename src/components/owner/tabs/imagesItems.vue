@@ -2,7 +2,7 @@
   <div
     class="img-gall-item img-size"
     :ref="`sHowMedia-${im.id}`"
-    style="position:relative"
+    :style="`${getStyle};position:relative`"
   >
     <a v-if="typeOfMedia() == 'image' && !loading"
       ><b-img
@@ -115,6 +115,7 @@ export default {
     "setCoverPic",
     "deleteImage",
     "isAlbum",
+    "getStyle"
   ],
 
   created() {

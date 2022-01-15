@@ -2,6 +2,7 @@
   <div class="map-container">
     <div id="map"></div>
     <div id="geocoder" class="geocoder"></div>
+    
   </div>
 </template>
 <script>
@@ -34,7 +35,7 @@ export default {
       this.$emit("get-address-details", details);
     },
     initmap() {
-      let mapboxgl = this.mapbox;
+      let mapboxgl = this.mapbox; 
       mapboxgl.accessToken = this.accessToken;
       var map = new mapboxgl.Map({
         container: "map",
@@ -72,6 +73,10 @@ export default {
         this.$emit("get-address-details", details);
       });
     },
+
+
+
+
   },
 };
 </script>

@@ -3,7 +3,7 @@
     <div class="row">
       <div class="container-fluid" v-if="!showalbum">
         <div class="one2">
-          <div class="createp img-gall image-wrapp img-size" v-if="isEditor" v-b-modal.createalbumModal>
+          <div :style="getStyle" class="createp img-gall image-wrapp img-size" v-if="isEditor" v-b-modal.createalbumModal>
             <div class="">
               <a>
                 <div class="drag-textt">
@@ -140,7 +140,10 @@ import defaultImage from '@/assets/img/nothing.jpg';
 
 import { fullMediaLink } from '@/helpers';
 
+import { ResizeMediaImage } from '@/mixins'
+
 export default {
+  mixins: [ResizeMediaImage],
   components: {
     Images,
     AlbumItem,
@@ -157,6 +160,7 @@ export default {
     },
     getImages: {},
     getAlbums: {},
+    showCoverAlbum:{}
   },
 
   data: function () {

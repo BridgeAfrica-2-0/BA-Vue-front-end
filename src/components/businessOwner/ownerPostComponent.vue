@@ -1,6 +1,6 @@
 <template>
-  <div class="p-3 card-border my-3" style="position: relative">
-    <div class="mt-2">
+  <div class="p-3 pt-0 card-border my-3" style="position: relative">
+    <div class="mt-0">
       <div class="d-inline-flex">
         <span md="1" class="m-0 p-0">
           <!-- <b-avatar
@@ -10,7 +10,7 @@
             :src="item.user_picture"
           ></b-avatar> -->
           <b-avatar
-            class="p-avater bg-light"
+            class="p-avater"
             :square="'user' == item.poster_type ? false : true"
             variant="primary"
             :src="item.user_picture"
@@ -715,9 +715,7 @@ export default {
     padding-left: 10 px;
     margin-left: 2%;
   }
-  .comment.py-2.pr-5.pl-3 {
-  }
-
+ 
   .post-btn {
     border: none !important;
     margin-right: 0px;

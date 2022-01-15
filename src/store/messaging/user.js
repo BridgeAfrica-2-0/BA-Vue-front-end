@@ -137,7 +137,7 @@ export default {
         GET_NETS({ commit, state }, data) {
             commit("setNets", []);
             commit("setLoader", true);
-            let keyword = data ? '/' + data : ''
+            let keyword = data ? '?keyword=' + data : ''
             axios.get(`/network/search${keyword}`)
                 .then((res) => {
                     commit("setLoader", false);

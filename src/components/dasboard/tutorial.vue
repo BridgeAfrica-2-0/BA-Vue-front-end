@@ -2,8 +2,9 @@
   <div>
     <b-card class=" border shadow ">
       <h6 class="title">
-        <fas-icon class="icons" :icon="['fas', 'video']" />
-        <b> {{ $t("dashboard.Tutorial") }}</b>
+
+        <fas-icon class="icons" :icon="['fas', 'video']" /> <b> {{ $t('dashboard.Tutorial') }}</b>
+
       </h6>
 
       <div class="s-card">
@@ -23,8 +24,10 @@
                 class="s-embed"
               ></b-embed>
               <p class="text">
-                {{ $t("dashboard.video_name") }} <br />
-                {{ $t("dashboard.video_description") }}
+
+                {{ $t('dashboard.video_name') }} <br />
+                {{ $t('dashboard.video_description') }}
+
               </p>
             </div>
           </b-col>
@@ -44,7 +47,7 @@ export default {
           video: "https://www.youtube.com/embed/JKJECtmqviQ",
           title: "Title 1",
           text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
+            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
         },
 
         {
@@ -52,7 +55,7 @@ export default {
           video: "https://www.youtube.com/embed/xVISKL18jLs",
           title: "Title 1",
           text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
+            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
         },
 
         {
@@ -60,7 +63,7 @@ export default {
           video: "https://www.youtube.com/embed/nMBQrM1FHZw",
           title: "Title 1",
           text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
+            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
         },
 
         {
@@ -68,16 +71,16 @@ export default {
           video: "https://www.youtube.com/embed/iPhGrDZhaAU",
           title: "Title 1",
           text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
+            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
         },
         {
           id: 7,
           image: "https://picsum.photos/300/150/?image=41",
           title: "Title 2",
           text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis.",
-        },
-      ],
+            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
+        }
+      ]
     };
   },
   methods: {
@@ -99,8 +102,8 @@ export default {
       if (index > -1) {
         this.posts.splice(index, 1);
       }
-    },
-  },
+    }
+  }
 };
 </script>
 

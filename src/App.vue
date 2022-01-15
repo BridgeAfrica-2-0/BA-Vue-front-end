@@ -2,6 +2,7 @@
   <div id="app" class="" ref="formContainer">
     <div id="flashmessage">
       <FlashMessage />
+        <vue-confirm-dialog></vue-confirm-dialog>
     </div>
 
     <transition
@@ -16,16 +17,12 @@
   </div>
 </template>
 <script>
-// import { Redis } from "@/mixins";
+import { Redis } from "@/mixins";
 
 import { mapGetters, mapActions } from "vuex";
 
 export default {
-  // mixins: [Redis],
-
-  created(){
-    console.log(navigator.onLine)
-  },
+  //mixins: [Redis],
 
   data() {
     return {
@@ -39,8 +36,8 @@ export default {
 
   watch: {
     "$store.state.auth.profilConnected": function (newProfile) {
-      const uuid = "network" === newProfile.user_type ? newProfile.id : null
-      
+      const uuid = "network" === newProfile.user_type ? newProfile.id : null;
+
       this.getNetworkAndBusiness(
         "network" === newProfile.user_type ? newProfile.id : null
       );

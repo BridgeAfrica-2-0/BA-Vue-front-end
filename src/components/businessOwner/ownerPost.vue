@@ -6,18 +6,13 @@
         <b-col cols="3" md="1" class="m-md-0 p-md-0">
           <b-avatar
             variant="primary"
-            :square="'user' === profile.user_type ? false : true"
-            class="img-fluid avat-comment"
+            :square =" 'user' === profile.user_type ? false : true"
+            class="img-fluid avat-comment mb-2"
             :src="profile.profile_picture"
           ></b-avatar>
         </b-col>
         <b-col cols="9" md="11" class="p-0 m-0 pr-3">
-          <input
-            :placeholder="$t('businessowner.Post_a_business_update')"
-            v-b-modal.modal-xl_
-            class="comment"
-            type="text"
-          />
+          <input :placeholder="$t('businessowner.Post_a_business_update')" v-b-modal.modal-xl_ class="comment" type="text" />
           <fas-icon class="primary send-cmt" :icon="['fas', 'paper-plane']" />
         </b-col>
       </b-row>
@@ -43,14 +38,8 @@
                 @click="$refs.movie.click()"
                 class="post-btn"
               >
-                <fas-icon
-                  class="icons"
-                  :icon="['fas', 'photo-video']"
-                  size="lg"
-                />
-                <span class="username">{{
-                  $t("businessowner.Photo_Video")
-                }}</span>
+                <fas-icon class="icons" :icon="['fas', 'photo-video']" size="lg" />
+                <span class="username">{{ $t('businessowner.Photo_Video') }}</span>
               </b-button>
             </b-col>
             <!-- Attach File-->
@@ -71,26 +60,14 @@
                 class="post-btn"
               >
                 <fas-icon class="icons" :icon="['fas', 'file']" size="lg" />
-                <span class="username">
-                  {{ $t("businessowner.Attach_File") }}
-                </span>
+                <span class="username"> {{ $t('businessowner.Attach_File') }} </span>
               </b-button>
             </b-col>
             <!-- Post-->
             <b-col cols="3" class="text-right p-0 m-0">
-              <b-button
-                :title="$t('businessowner.Add_Hyperlink')"
-                size="sm"
-                variant="outline-primary"
-                @click="createPost_"
-                class="post-btn"
-              >
-                <fas-icon
-                  class="icons"
-                  :icon="['fas', 'paper-plane']"
-                  size="lg"
-                />
-                <span class="username"> {{ $t("businessowner.Post") }} </span>
+              <b-button :title="$t('businessowner.Add_Hyperlink')" size="sm" variant="outline-primary" @click="createPost_" class="post-btn">
+                <fas-icon class="icons" :icon="['fas', 'paper-plane']" size="lg" />
+                <span class="username"> {{ $t('businessowner.Post') }} </span>
               </b-button>
             </b-col>
           </b-row>
@@ -165,20 +142,28 @@
                         accept="video/mpeg,video/mp4,image/*"
                         ref="movies"
                       />
-                    <b-button
-                      :title="$t('businessowner.Add_Hyperlink')"
-                      size="sm"
-                      variant="outline-primary"
-                      @click="$refs.document.click()"
-                    >
-                      <fas-icon
-                        class="icons"
-                        :icon="['fas', 'file']"
-                        size="lg"
+                      <input
+                        id="document"
+                        type="file"
+                        @change="selectDocument"
+                        hidden
+                        accept="application/pdf"
+                        ref="document"
                       />
-                    </b-button>
-                  </b-button-group>
-                </span>
+
+                      <b-button :title="$t('businessowner.Add_Movie')" size="sm" variant="outline-primary" @click="$refs.movies.click()">
+                        <fas-icon class="icons" :icon="['fas', 'photo-video']" size="lg" />
+                      </b-button>
+                      <b-button
+                        :title="$t('businessowner.Add_Hyperlink')"
+                        size="sm"
+                        variant="outline-primary"
+                        @click="$refs.document.click()"
+                      >
+                        <fas-icon class="icons" :icon="['fas', 'file']" size="lg" />
+                      </b-button>
+                    </b-button-group>
+                  </span>
 
                 <i></i>
               </div>
@@ -304,7 +289,7 @@
           <span>
             <b-button @click="updatePost" variant="primary" block
               ><b-icon icon="cursor-fill" variant="primary"></b-icon>
-              {{ $t("businessowner.Publish") }}</b-button
+              {{ $t('businessowner.Publish') }}</b-button
             >
           </span>
 
@@ -406,12 +391,7 @@
                   class="bordder"
                 >
                   <span class="float-left"> {{ hyperlink.fileName }} </span>
-                  <span
-                    class="float-right"
-                    @click="deleteItem(hyperlink.fileName)"
-                  >
-                    {{ $t("businessowner.delete") }}
-                  </span>
+                  <span class="float-right" @click="deleteItem(hyperlink.fileName)"> {{ $t('businessowner.delete') }} </span>
                 </div>
 
                 <div
@@ -541,83 +521,75 @@
               </div>
               <br />
 
-              <div
-                v-for="hyperlink in createPost.hyperlinks"
-                :key="hyperlink.fileName"
-                class="bordder h300px"
-              >
-                <span class="float-left"> {{ hyperlink.fileName }} </span>
-                <span
-                  class="float-right"
-                  @click="deleteItem(hyperlink.fileName)"
+              
+                <div
+                  v-for="hyperlink in createPost.hyperlinks"
+                  :key="hyperlink.fileName"
+                  class="bordder h300px"
                 >
-                  {{ $t("businessowner.delete") }}
-                </span>
-              </div>
-
-              <div
-                v-for="movie in createPost.movies"
-                :key="movie.fileName"
-                class=""
-              >
-                <div id="preview">
+                  <span class="float-left"> {{ hyperlink.fileName }} </span>
                   <span
-                    class="upload-cancel"
-                    @click="deleteItem(movie.fileName)"
+                    class="float-right"
+                    @click="deleteItem(hyperlink.fileName)"
                   >
-                    <b-icon icon="x-circle" class="oorange"> </b-icon>
+                    {{ $t("businessowner.delete") }}
                   </span>
-
-                  <span> </span>
-                  <img v-if="movie.fileType == 'image'" :src="movie.link" />
-
-                  <video v-else width="97%" height="240" autoplay>
-                    <source :src="movie.link" type="video/mp4" />
-                  </video>
                 </div>
-              </div>
-              <b-progress
-                v-if="isUploading"
-                :value="uploadPercentage"
-                variant="primary"
-                class="m13"
-                show-progress
-                :animated="animate"
-              ></b-progress>
-              <hr />
-              <span>
-                <b-button @click="submitPost" variant="primary" block
-                  ><b-icon icon="cursor-fill" variant="primary"></b-icon>
-                  {{ $t("businessowner.Publish") }}</b-button
-                >
-              </span>
-            </b-col>
-            <b-col cols="1" md="1" class="m-0 p-0"></b-col>
-          </b-row>
-        </b-modal>
-      </div>
-    </div>
+              
+                
+                  <div v-for="movie in createPost.movies" :key="movie.fileName" class="">
+                    <div id="preview">
+                      <span class="upload-cancel" @click="deleteItem(movie.fileName)">
+                        <b-icon icon="x-circle" class="oorange"> </b-icon>
+                      </span>
 
-    <Post
-      v-for="item in owner_post"
-      :key="item.updated_at"
-      :post="item"
-      :mapvideo="() => mapvideo(item.media)"
-      :mapmediae="() => mapmediae(item.media)"
-      :businessLogo="business_intro.logo_path"
-      :editPost="() => editPost(item)"
-      :deletePost="() => deletePost(item)"
-    />
+                    <span> </span>
+                    <img v-if="movie.fileType == 'image'" :src="movie.link" />
 
-    <infinite-loading
-      :identifier="infiniteId"
-      ref="infiniteLoading"
-      @infinite="infiniteHandler"
-    ></infinite-loading>
+                    <video v-else width="97%" height="240" autoplay>
+                      <source :src="movie.link" type="video/mp4" />
+                    </video>
+                  </div>
+                </div>
+                <b-progress
+                  v-if="isUploading"
+                  :value="uploadPercentage"
+                  variant="primary"
+                  class="m13"
+                  show-progress
+                  :animated="animate"
+                ></b-progress>
+                <hr />
+                <span>
+                  <b-button @click="submitPost" variant="primary" block
+                    ><b-icon icon="cursor-fill" variant="primary"></b-icon> {{ $t('businessowner.Publish') }}</b-button
+                  >
+                </span>
+              </b-col>
+              <b-col cols="1" md="1" class="m-0 p-0"></b-col>
+            </b-row>
+          </b-modal>
+        </div>
+      </div>  
+
+      <Post
+        v-for="item in owner_post"
+        :key="item.updated_at"
+        :post="item"
+        :mapvideo="() => mapvideo(item.media)"
+        :mapmediae="() => mapmediae(item.media)"
+        :businessLogo="business_intro.logo_path"
+        :editPost="() => editPost(item)"
+        :deletePost="() => deletePost(item)"
+      />
+
+      <infinite-loading :identifier="infiniteId" ref="infiniteLoading" @infinite="infiniteHandler"></infinite-loading>
+    
   </div>
 </template>
 
 <script>
+
 import moment from "moment";
 import axios from "axios";
 
@@ -754,6 +726,7 @@ export default {
     },
 
     deletePost(post) {
+
       let loader = this.$loading.show({
         container: this.fullPage ? null : this.$refs.creatform,
         canCancel: true,
@@ -761,19 +734,20 @@ export default {
         color: "#e75c18",
       });
 
-      const uuid = post.post_id ? post.post_id : post.id;
+      const uuid = post.post_id ? post.post_id : post.id
 
       axios
-        .post("business/delete/post/" + uuid, {
+        .post("business/delete/post/"+ uuid , {
           name: this.name,
         })
         .then((response) => {
-          this.postRemove(uuid);
+
+          this.postRemove(uuid)
 
           this.flashMessage.show({
             status: "success",
             blockClass: "custom-block-class",
-            message: this.$t("businessowner.Post_Deleted"),
+            message: this.$t('businessowner.Post_Deleted'),
           });
 
           loader.hide();
@@ -795,7 +769,7 @@ export default {
             this.flashMessage.show({
               status: "error",
               blockClass: "custom-block-class",
-              message: this.$t("businessowner.Unable_to_Delete_your_Post"),
+              message: this.$t('businessowner.Unable_to_Delete_your_Post'),
             });
             console.log({ err: err });
 
@@ -855,11 +829,11 @@ export default {
         .then((response) => {
           console.log(response);
 
-          this.postUpdate(response.data.data);
+          this.postUpdate(response.data.data)
           this.flashMessage.show({
             status: "success",
             blockClass: "custom-block-class",
-            message: this.$t("businessowner.Content_successfuly_uploaded"),
+            message: this.$t('businessowner.Content_successfuly_uploaded'),
           });
           loader.hide();
 
@@ -883,7 +857,7 @@ export default {
             this.flashMessage.show({
               status: "error",
 
-              message: this.$t("businessowner.Unable_to_Update_your_post"),
+              message: this.$t('businessowner.Unable_to_Update_your_post'),
               blockClass: "custom-block-class",
             });
             console.log({ err: err });
@@ -893,9 +867,9 @@ export default {
         });
     },
 
-    chooseImage: function() {},
+    chooseImage: function () {},
 
-    chooseVideo: function() {
+    chooseVideo: function () {
       document.getElementById("chosefile").click();
     },
 
@@ -970,6 +944,7 @@ export default {
     },
 
     selectDocumentOutsidePost(event) {
+      
       this.createPost.hyperlinks.push({
         target: event.target,
         document: this.service(event.target),
@@ -1053,19 +1028,19 @@ export default {
             "Content-Type": "multipart/form-data",
           },
 
-          onUploadProgress: function(progressEvent) {
+          onUploadProgress: function (progressEvent) {
             this.uploadPercentage = parseInt(
               Math.round((progressEvent.loaded / progressEvent.total) * 100)
             );
           }.bind(this),
         })
         .then((response) => {
-          this.postCreate(response.data.data);
+          this.postCreate(response.data.data)
 
           this.flashMessage.show({
             status: "success",
             blockClass: "custom-block-class",
-            message: this.$t("businessowner.Post_has_been_created"),
+            message: this.$t('businessowner.Post_has_been_created'),
           });
           this.isUploading = false;
           loader.hide();
@@ -1073,10 +1048,11 @@ export default {
           this.reloads();
           this.page = 1;
           this.infiniteId += 1;
-          this.uploadPercentage = 0;
+          this.uploadPercentage = 0
+          
         })
         .catch((err) => {
-          this.uploadPercentage = 0;
+          this.uploadPercentage = 0
           if (err.response.status == 422) {
             this.flashMessage.show({
               status: "error",
@@ -1107,7 +1083,7 @@ export default {
     },
     resetPostData() {
       if (!this.isSubmitted) {
-        this.uploadPercentage = 0;
+        this.uploadPercentage = 0
         this.createPost.hyperlinks = [];
         this.createPost.movies = [];
         this.createPost.postBusinessUpdate = "";
@@ -1118,7 +1094,7 @@ export default {
   computed: {
     ...mapGetters({
       profile: "auth/profilConnected",
-      owner_post: "businessOwner/getOwnerPost",
+      owner_post: "businessOwner/getOwnerPost"
     }),
 
     business_intro() {
@@ -1129,13 +1105,14 @@ export default {
       //  return this.$store.state.businessOwner.businessInfo.logo_path;
       return this.$store.state.businessOwner.businessInfo;
     },
+
   },
   mounted() {
     this.url = this.$route.params.id;
   },
 };
 </script>
-<style>
+<style >
 .h-lg-250 {
   height: 350px !important;
 }
@@ -1264,16 +1241,6 @@ export default {
     height: 40px;
   }
 }
-
-.comment {
-  width: 90%;
-  border: solid 1px #ccc;
-  border-radius: 25px;
-  background-color: #ddd;
-  height: 34px;
-  padding-left: 10px;
-  margin-left: 8%;
-}
 @media (max-width: 762px) {
   .commentt[data-v-41fcb621] {
     width: 99%;
@@ -1285,18 +1252,13 @@ export default {
     margin-left: 2%;
   }
 
-  .comment {
-    width: 100%;
-    margin-left: -10px;
-  }
-
   .post-btn {
     border: none !important;
     margin-right: 0px;
   }
   .send-cmt {
     position: relative;
-    margin-left: 85%;
+    margin-left: 90%;
     top: -28px;
     cursor: pointer;
   }
@@ -1323,6 +1285,15 @@ export default {
   border-radius: 24px;
   height: 34px;
   width: 315px;
+}
+.comment {
+  width: 90%;
+  border: solid 1px #ccc;
+  border-radius: 25px;
+  background-color: #ddd;
+  height: 34px;
+  padding-left: 10px;
+  margin-left: 8%;
 }
 .comment:focus {
   outline: none;

@@ -96,7 +96,7 @@
 
         <Media />
       </b-col>
-      <b-col md="12" lg="7" xl="8" class="m-0 p-0 px-lg-4">
+      <b-col md="12" lg="7" xl="8" class="m-0 p-0 px-lg-4 post-padding"> 
         <Owner_post />
       </b-col>
     </b-row>
@@ -213,6 +213,16 @@ export default {
 </script>
 
 <style scoped>
+
+  @media (min-width: 768px) {
+  
+  .post-padding{
+        padding-left: 60px !important;
+    padding-right: 70px !important;
+  }
+}
+
+
 .eedit:hover {
   font-size: 18px;
   color: #e75c18;

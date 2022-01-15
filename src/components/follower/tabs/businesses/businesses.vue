@@ -1,8 +1,18 @@
 <template>
   <div class="lalala">
     <b-tabs content-class="mt-3" lazy fill pills>
-      <b-tab :title="$t('general.Followers')"><Followers /></b-tab>
-      <b-tab :title="$t('general.Following')"><Following /></b-tab>
+      <b-tab :title="$t('profileowner.Followers')">    <template slot="title">
+            {{ $t('profileowner.Followers') }} <span class="spa-color">  {{ nFormatter(total.total_business_follower)}} </span>
+          </template>   
+          
+          <Followers @BlockUser="BlockUser"/></b-tab>
+      <b-tab :title="$t('profileowner.Following')">  
+        
+        <template slot="title">
+            {{ $t('profileowner.Following') }} <span class="spa-color">  {{ nFormatter(total.total_business_following)}}  </span>
+          </template>
+          
+          <Following @BlockUser="BlockUser"/></b-tab>
     </b-tabs>
   </div>
 </template>
@@ -14,6 +24,33 @@ export default {
   components: {
     Followers,
     Following
+  },
+
+  	computed: {
+			total() {
+				return this.$store.state.follower.Tcommunity;
+			},
+		},
+
+  methods: {
+
+    	nFormatter(num) {
+				if (num >= 1000000000) {
+					return (num / 1000000000).toFixed(1).replace(/\.0$/, "") + "G";
+				}
+				if (num >= 1000000) {
+					return (num / 1000000).toFixed(1).replace(/\.0$/, "") + "M";
+				}
+				if (num >= 1000) {
+					return (num / 1000).toFixed(1).replace(/\.0$/, "") + "K";
+				}
+				return num;
+			},
+
+    BlockUser(dataInfo) {
+      console.log(dataInfo);
+      this.$emit('BlockUser', dataInfo);
+    },
   }
 };
 </script>

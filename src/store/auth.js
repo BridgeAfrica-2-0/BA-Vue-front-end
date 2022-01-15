@@ -6,7 +6,7 @@ export default {
 
   state: {
     appLanguage: 'fr',
-    user: [],
+    user: null,
     isVerified: null,
     passwordToken: null,
     registerData: null,
@@ -25,6 +25,7 @@ export default {
     profilConnected: null,
   },
 
+
   mutations: {
 
     updateProfilePicture(state, picture) {
@@ -32,6 +33,17 @@ export default {
         state.profilConnected = { ...state.profilConnected, profile_picture: picture }
     },
 
+    addCoverPicture(state, picture) {
+
+      state.profilConnected = { ...state.profilConnected, cover_picture: picture }
+      let newUser = JSON.parse(localStorage.getItem('user'));
+
+      newUser.user.cover_picture = picture
+
+      localStorage.setItem('user', JSON.stringify(newUser));
+
+    },
+    
     setUserData(state, userData) {
       localStorage.removeItem('user');
       state.user = userData;
@@ -39,8 +51,8 @@ export default {
 
       localStorage.setItem('user', JSON.stringify(userData));
       axios.defaults.headers.common.Authorization = `Bearer ${userData.accessToken}`;
-      state.profilConnected = { ...userData.user, user_type: 'user' };
       const userInfo = localStorage.getItem('user');
+      state.profilConnected = { ...userData.user, user_type: 'user'};
     },
 
 
@@ -145,7 +157,6 @@ export default {
 
     login({ commit }, credentials) {
       return axios.post("user/login", credentials).then(({ data }) => {
-        console.log(data);
         commit("setUserData", data.data);
       });
     },

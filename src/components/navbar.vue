@@ -807,7 +807,7 @@ export default {
     navLink(type) {
       const link = {
         home: () => {
-          return this.profile ? "dashboard" : "home1";
+          return this.profile ? {name: "dashboard"}: { name:"home1" };
         },
       };
       try {

@@ -50,7 +50,7 @@
     </b-row>
     <b-row>
       <b-col col="12">
-        <infinite-loading @infinite="infiniteHandler">
+        <infinite-loading @infinite="infiniteHandler" ref="infiniteLoading">
           <div class="text-red" slot="no-more">
             {{ $t("network.No_More_Request") }}
           </div>
@@ -110,13 +110,19 @@ export default {
     search() {
       if (this.searchTitle) {
         this.loading = true;
-        this.page -= 1;
         console.log("searching...");
         console.log(this.searchTitle);
-        this.infiniteHandler();
+        this.$nextTick(() => {
+          this.page = 1;
+          this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
+        });
       } else {
         console.log("Empty search title: " + this.searchTitle);
-        this.infiniteHandler();
+        this.businessfollowers = [];
+        this.$nextTick(() => {
+          this.page = 1;
+          this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
+        });
       }
     },
 
@@ -127,27 +133,20 @@ export default {
       let formData = new FormData();
       formData.append("keyword", keyword);
       console.log("network/" + this.url + "/business/follower/" + this.page);
-      let lien = "";
-      if (keyword == "") {
-        lien = "network/" + this.url + "/business/follower/" + this.page;
-      } else {
-        lien =
-          "network/" +
-          this.url +
-          "/business/follower/" +
-          this.page +
-          "," +
-          formData;
-      }
+      // let lien = "";
+      // if (keyword == "") {
+      //   lien = "network/" + this.url + "/business/follower/" + this.page;
+      // } else {
+      //   lien ="network/"+this.url +"/business/follower/"+this.page +"," +formData;
+      // }
 
       this.axios
-        .post(lien)
+        .post("network/"+this.url +"/business/follower/"+this.page, formData)
         .then(({ data }) => {
           console.log(data);
           console.log(this.page);
           if (keyword) {
             this.displayfollowers = data.data;
-
             this.searchTitle = "";
             $state.complete();
           } else {

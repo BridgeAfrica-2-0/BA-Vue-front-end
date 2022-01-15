@@ -28,7 +28,6 @@
       />
     </div>
 
-    <p class="text-center" v-if="haveNotData">{{ $t("search.Not_Data") }}</p>
     <ScrollLoader
       :loading="loadingIsActive"
       color="#ced4da"
@@ -63,6 +62,13 @@ export default {
       let query = Object.assign({}, this.$route.query);
       delete query.uuid;
       this.$router.replace({ query });
+    }
+  },
+
+  watch:{
+    "$store.state.search.page":function(newVal){
+      if ( 1 == newVal)
+        this.haveNotData = false
     }
   },
 

@@ -7,7 +7,7 @@
 
     <b-card>
       <div class="mb-3">
-        <mapbox v-if="business_about.lat && business_about.lng" :business="business_about" />
+        <mapbox :business="business_about" />
       </div>
 
       <b-card>
@@ -697,7 +697,7 @@ export default {
       business_id: null,
       limit: 20,
       accessToken: process.env.VUE_APP_MAPBOX_TOKEN,
-      mapStyle: "mapbox://styles/mapbox/streets-v11",
+      mapStyle: "mapbox://styles/mapbox/outdoors-v11",
       coordinates: [11.504929555178624, 3.8465173382452815], // Lng,Lat
       zoom: 12,
       multiselecvalue: [],
@@ -1060,6 +1060,7 @@ export default {
           console.log("edit address business");
           this.test();
           console.log(this.business_about_input);
+
           var dat = {
             business_id: this.$route.params.id,
             data: {

@@ -2,7 +2,7 @@
   <div
     class="img-gall-item img-size"
     :ref="`sHowMedia-${im.id}`"
-    style="position:relative"
+    :style="`${getStyle};position:relative`"
   >
     <a v-if="typeOfMedia() == 'image' && !loading"
       ><b-img
@@ -115,6 +115,7 @@ export default {
     "setCoverPic",
     "deleteImage",
     "isAlbum",
+    "getStyle"
   ],
 
   created() {
@@ -387,7 +388,7 @@ export default {
     position: relative;
     margin: 5px;
     float: left;
-    width: 46.5%;
+    width: 45.5% !important;
     transition-duration: 0.4s;
     border-radius: 5px;
     -webkit-animation: winanim 0.5s;

@@ -10,7 +10,7 @@
             :src="item.user_picture"
           ></b-avatar> -->
           <b-avatar
-            class="p-avater bg-light"
+            class="p-avater"
             :square="'user' == item.poster_type ? false : true"
             variant="primary"
             :src="item.user_picture"
@@ -82,7 +82,7 @@
         <div class="d-inline-flex">
           <span md="1" class="m-0 p-0">
             <b-avatar
-              class="logo-sizee avat"
+              class="logo-sizee avat bg-light"
               :square="'user' == item.source.poster_type ? false : true"
               variant="primary"
               :src="item.source.logo_path"
@@ -190,7 +190,7 @@
       <div class="m-md-0 p-md-0">
         <b-avatar
           b-avatar
-          class="logo-sizee-18 avat img-fluid avat-comment avatar-border"
+          class="logo-sizee-18 avat img-fluid avat-comment avatar-border bg-light"
           variant="primary"
           :square="'user' == profile.user_type ? false : true"
           :src="profile.profile_picture"

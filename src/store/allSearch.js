@@ -82,7 +82,9 @@ export default {
             const TYPES = ["business", "user", "network", "market", "post"];
             let catId = data.cat_id ? "catId=" + data.cat_id : "";
             let keyword = data.keyword ? "&keyword=" + data.keyword : "";
+
             let subCatId = data.sub_cat ? "&subCatId=" + data.sub_cat : "";
+            let filterId = data.filter_id ? "&filterId=" + data.filter_id : "";
 
             let url = "";
 
@@ -90,11 +92,11 @@ export default {
 
                 if (!islogin) {
 
-                    url = `/visitor/search/${type}?${catId+subCatId+keyword}`;
+                    url = `/visitor/search/${type}?${catId+subCatId+filterId+keyword}`;
 
                 } else {
                     // console.log(`type => ${type} keyword = ${keyword}`);
-                    url = `/search/${type}?${catId+subCatId+keyword}`;
+                    url = `/search/${type}?${catId+subCatId+filterId+keyword}`;
 
 
                 }

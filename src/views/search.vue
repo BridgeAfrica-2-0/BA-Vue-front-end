@@ -86,10 +86,7 @@
 
     <hr style="margin-top: -0px" />
 
-    <div
-      class="d-block d-none d-sm-block d-md-block d-lg-block d-xl-none"
-      v-if="selectedId == '0' || selectedId == '4'"
-    >
+    <div class="d-block d-none d-sm-block d-md-block d-lg-block d-xl-none">
       <b-row align-v="start">
         <b-col
           cols="3"
@@ -132,7 +129,7 @@
           <b-form-radio
             v-for="(category, index) in categories.slice(7)"
             :key="index"
-            v-model="selected_sub_cat"
+            v-model="catChose"
             :value="category.category.id"
             @change="getCategory({ cat_id: category.category.id })"
             name="subCategories-list-modal"
@@ -153,8 +150,31 @@
 
         <b-modal ref="myfilters" id="myModall" hide-footer title=" ">
           <div class="d-block d- d-sm-block d-md-block d-lg-block d-xl-none">
-            <div style="column-count: 2">
-              <b-form-checkbox
+            <div>
+              <!-- Category -->
+              <div v-if="categories.length > 0">
+                <b-form-group
+                  label-cols-lg="3"
+                  :label="$t('search.Categories')"
+                  label-size="md"
+                  label-class="font-weight-bold pt-0"
+                  class="mb-0 pt-6 text-left"
+                >
+                </b-form-group>
+                <b-form-select v-model="catChose">
+                  <option :value="null" disabled>
+                    -- Please select a category --
+                  </option>
+                  <option
+                    v-for="(elm, index) in categories"
+                    :key="index"
+                    :value="elm"
+                  >
+                    {{ elm.category.name }}
+                  </option>
+                </b-form-select>
+              </div>
+              <!-- <b-form-checkbox
                 v-for="category in selectcategories"
                 @change="switchcategories"
                 :key="category.value"
@@ -164,12 +184,67 @@
                 class="m-1 s br-3"
               >
                 {{ category.text }}
-              </b-form-checkbox>
+              </b-form-checkbox> -->
+            </div>
+
+            <hr />
+            <div>
+              <!-- sub Category -->
+              <div v-if="catChose">
+                <b-form-group
+                  label-cols-lg="3"
+                  label="sub categories"
+                  label-size="md"
+                  label-class="font-weight-bold pt-0"
+                  class="mb-0 pt-6 text-left"
+                >
+                </b-form-group>
+                <b-form-select v-model="subCatChose" @change="getFilter">
+                  <option :value="null" disabled>
+                    -- Please select a sub category --
+                  </option>
+                  <option
+                    v-for="(elm, index) in catChose.sub_cat"
+                    :key="index"
+                    :value="elm"
+                  >
+                    {{ elm.name }}
+                  </option>
+                </b-form-select>
+              </div>
             </div>
 
             <hr />
 
-            <span v-if="categories_filters.length">
+            <div>
+              <!-- Filters -->
+              <div v-if="subFilters.length > 0">
+                <b-form-group
+                  label-cols-lg="3"
+                  label="Filters"
+                  label-size="md"
+                  label-class="font-weight-bold pt-0"
+                  class="mb-0 pt-6 text-left"
+                >
+                </b-form-group>
+                <b-form-select v-model="filterChose">
+                  <option :value="null" disabled>
+                    -- Please select a filter --
+                  </option>
+                  <option
+                    v-for="(elm, index) in subFilters"
+                    :key="index"
+                    :value="elm.id"
+                  >
+                    {{ elm.name }}
+                  </option>
+                </b-form-select>
+              </div>
+            </div>
+
+            <hr />
+
+            <!-- <span v-if="categories_filters.length">
               <h6>{{ $t("search.Filters") }}</h6>
             </span>
             <div style="column-count: 2">
@@ -307,9 +382,13 @@
               <b-form-checkbox id="" class="a-text" name="" value="">
                 25km</b-form-checkbox
               >
-            </b-form-group>
+            </b-form-group> -->
 
-            <b-button variant="primary" class="m-3 float-right">
+            <b-button
+              variant="primary"
+              class="m-3 float-right"
+              @click="searchFilter"
+            >
               {{ $t("search.Search") }}
             </b-button>
           </div>
@@ -686,6 +765,9 @@ export default {
     subCategories() {
       return this.$store.getters["marketSearch/getSubCat"];
     },
+    subFilters() {
+      return this.$store.getters["marketSearch/getSubFilters"];
+    },
   },
 
   created() {
@@ -715,6 +797,10 @@ export default {
 
   data() {
     return {
+      catChose: "",
+      subCatChose: "",
+      filterChose: "",
+
       islogin: true,
       searchParams: {
         keyword: "",
@@ -2027,8 +2113,39 @@ export default {
 
       this.$refs["myfilters"].show();
     },
+    getFilter() {
+      this.subFilters = [];
+      this.$store
+        .dispatch("marketSearch/getFilter", this.subCatChose.id)
+        .then((res) => {
+          this.$store.commit("marketSearch/setSubFilters", res.data.data);
+          this.subFilters = res.data.data;
+          console.log("filter:", res.data.data);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    },
+    searchFilter() {
+      console.log(this.catChose);
+      var catId = this.catChose ? this.catChose.category.id : "";
+      var subCatId = this.subCatChose ? this.subCatChose.id : "";
+      var filterId = this.filterChose ? this.filterChose : "";
+      var data = { cat_id: catId, sub_cat: subCatId, filter_id: filterId };
+      if (this.selectedId == 4) {
+        this.searchProducts(data);
+      } else if (this.selectedId == 1) {
+        this.searchBusiness(data);
+      } else if (this.selectedId == 0) {
+        this.allSearchByCat(data);
+      }
 
+      this.$bvModal.hide("myModall");
+
+    },
     getCategory(value) {
+      console.log("value:", value);
+
       this.Selectedcategory = value;
 
       if (this.selectedId == 4) {

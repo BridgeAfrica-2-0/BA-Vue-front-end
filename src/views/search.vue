@@ -1775,8 +1775,12 @@ export default {
       this.$refs.More.visible = false;
     },
     getKeyword(data) {
-      let elm = data ? data : { keyword: "" };
+      var keyword = this.searchParams.keyword;
+
+      let elm = data ? data : keyword ? { keyword: keyword } : { keyword: "" };
       console.log("the keyword is: ", this.searchParams.keyword);
+      console.log("keyword: ", data);
+
       this.$store
         .dispatch("allSearch/SEARCH", elm)
         .then((res) => {
@@ -2141,7 +2145,6 @@ export default {
       }
 
       this.$bvModal.hide("myModall");
-
     },
     getCategory(value) {
       console.log("value:", value);

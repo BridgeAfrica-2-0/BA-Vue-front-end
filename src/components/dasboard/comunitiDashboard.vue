@@ -1,17 +1,23 @@
-<template>
-    <div class="lalala">
+¸<template>
+  <div class="lalala">
     <div class=" border mt-2 ">
       <span>
         <h6 class="title m-3">
           <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
-          <b class="ml-2">{{ $t('dashboard.COMMUNITY') }}  </b> <span class="h4-color"> {{ nFormatter(total.total_community) }} </span>
+          <b class="ml-2">{{ $t("dashboard.COMMUNITY") }} </b>
+          <span class="h4-color">
+            {{ nFormatter(total.total_community) }}
+          </span>
         </h6>
       </span>
 
       <b-tabs pills lazy content-class="mt-3  f-left ">
         <b-tab active>
           <template slot="title">
-            {{ $t('dashboard.People') }} <span class="spa-color"> {{ nFormatter(total.total_people) }} </span>
+            {{ $t("dashboard.People") }}
+            <span class="spa-color">
+              {{ nFormatter(total.total_people) }}
+            </span>
           </template>
 
           <div>
@@ -20,7 +26,10 @@
                 <b-tabs lazy fill pills content-class="mt-3  f-left m-up">
                   <b-tab active>
                     <template slot="title">
-                      {{ $t('dashboard.Followers') }} <span class="spa-color"> {{ nFormatter(total.total_user_follower) }} </span>
+                      {{ $t("dashboard.Followers") }}
+                      <span class="spa-color">
+                        {{ nFormatter(total.total_user_follower) }}
+                      </span>
                     </template>
 
                     <div class="s-comcard"><People type="Follower" /></div>
@@ -28,7 +37,10 @@
 
                   <b-tab>
                     <template slot="title">
-                      {{ $t('dashboard.Following') }} <span class="spa-color"> {{ nFormatter(total.total_user_following) }} </span>
+                      {{ $t("dashboard.Following") }}
+                      <span class="spa-color">
+                        {{ nFormatter(total.total_user_following) }}
+                      </span>
                     </template>
 
                     <div class="s-comcard"><People type="Following" /></div>
@@ -41,14 +53,25 @@
 
         <b-tab>
           <template slot="title">
-            {{ $t('dashboard.Businesses') }} <span class="spa-color"> {{ nFormatter(total.total_business) }} </span>
+            {{ $t("dashboard.Businesses") }}
+            <span class="spa-color">
+              {{ nFormatter(total.total_business) }}
+            </span>
           </template>
 
           <div>
-            <b-tabs lazy fill pills content-class="mt-3  f-left m-up checkcheck">
+            <b-tabs
+              lazy
+              fill
+              pills
+              content-class="mt-3  f-left m-up checkcheck"
+            >
               <b-tab active>
                 <template slot="title">
-                  {{ $t('dashboard.Followers') }} <span class="spa-color"> {{ nFormatter(total.total_business_follower) }} </span>
+                  {{ $t("dashboard.Followers") }}
+                  <span class="spa-color">
+                    {{ nFormatter(total.total_business_follower) }}
+                  </span>
                 </template>
 
                 <div class="s-comcard"><Business type="Follower" /></div>
@@ -56,7 +79,10 @@
 
               <b-tab>
                 <template slot="title">
-                  {{ $t('dashboard.Following') }} <span class="spa-color"> {{ nFormatter(total.total_business_following) }}</span>
+                  {{ $t("dashboard.Following") }}
+                  <span class="spa-color">
+                    {{ nFormatter(total.total_business_following) }}</span
+                  >
                 </template>
 
                 <div class="s-comcard"><Business type="following" /></div>
@@ -67,14 +93,25 @@
 
         <b-tab>
           <template slot="title">
-            {{ $t('dashboard.Network') }} <span class="spa-color"> {{ nFormatter(total.total_network) }}</span>
+            {{ $t("dashboard.Network") }}
+            <span class="spa-color">
+              {{ nFormatter(total.total_network) }}</span
+            >
           </template>
 
           <div>
-            <b-tabs lazy fill pills content-class="mt-3  f-left m-up checkcheck">
+            <b-tabs
+              lazy
+              fill
+              pills
+              content-class="mt-3  f-left m-up checkcheck"
+            >
               <b-tab active>
                 <template slot="title">
-                  {{ $t('dashboard.Followers') }} <span class="spa-color"> {{ nFormatter(total.total_network_follower) }} </span>
+                  {{ $t("dashboard.Followers") }}
+                  <span class="spa-color">
+                    {{ nFormatter(total.total_network_follower) }}
+                  </span>
                 </template>
 
                 <div class="s-comcard"><Network type="Follower" /></div>
@@ -82,7 +119,10 @@
 
               <b-tab>
                 <template slot="title">
-                  {{ $t('dashboard.Following') }} <span class="spa-color"> {{ nFormatter(total.total_network_following) }} </span>
+                  {{ $t("dashboard.Following") }}
+                  <span class="spa-color">
+                    {{ nFormatter(total.total_network_following) }}
+                  </span>
                 </template>
 
                 <div class="s-comcard"><Network type="Following" /></div>
@@ -109,91 +149,58 @@ export default {
     Network,
   },
 
-  mounted(){
-    
-      this.$store
+  mounted() {
+    this.$store
       .dispatch("profile/Tcommunity", null)
-      .then((response) => {
-       
-      })
+      .then((response) => {})
       .catch((error) => {
-        console.log({error:error});
+        console.log({ error: error });
       });
 
-
-
-
-      
-
- 
-      this.$store
+    this.$store
       .dispatch("profile/UcommunityFollower", null)
-      .then((response) => {
-       
-      })
+      .then((response) => {})
       .catch((error) => {
-        console.log({error:error});
+        console.log({ error: error });
       });
 
-
-
-      
-      this.$store
+    this.$store
       .dispatch("profile/UcommunityFollowing", null)
-      .then((response) => {
-       
-      })
+      .then((response) => {})
       .catch((error) => {
-        console.log({error:error});
+        console.log({ error: error });
       });
 
-     
-   
-      this.$store
+    this.$store
       .dispatch("profile/BcommunityFollower", null)
-      .then((response) => {
-       
-      })
+      .then((response) => {})
       .catch((error) => {
-        console.log({error:error});
+        console.log({ error: error });
       });
 
-     
-      this.$store
+    this.$store
       .dispatch("profile/BcommunityFollowing", null)
-      .then((response) => {
-       
-      })
+      .then((response) => {})
       .catch((error) => {
-        console.log({error:error});
+        console.log({ error: error });
       });
 
-
-
-      
-      this.$store
+    this.$store
       .dispatch("profile/NcommunityFollower", null)
-      .then((response) => {
-       
-      })
+      .then((response) => {})
       .catch((error) => {
-        console.log({error:error});
+        console.log({ error: error });
       });
 
-      
-      this.$store
+    this.$store
       .dispatch("profile/NcommunityFollowing", null)
-      .then((response) => {
-       
-      })
+      .then((response) => {})
       .catch((error) => {
-        console.log({error:error});
+        console.log({ error: error });
       });
-
   },
   computed: {
-
-        total() {
+    total() {
       return this.$store.state.profile.Tcommunity;
     },
 
@@ -202,7 +209,7 @@ export default {
     },
     com() {
       return this.$store.getters["dashboardcommunity/getcom"];
-    }
+    },
   },
   created() {
     this.$store
@@ -211,7 +218,7 @@ export default {
       .then(() => {
         console.log("the response");
       })
-      .catch(err => {
+      .catch((err) => {
         console.log({ err: err });
       });
 
@@ -225,16 +232,12 @@ export default {
     //     console.log({ err: err });
     //   });
 
-
-      this.$store
-      .dispatch('profile/Tcommunity', null)
+    this.$store
+      .dispatch("profile/Tcommunity", null)
       .then((response) => {})
       .catch((error) => {
         console.log({ error: error });
       });
-
-
-
   },
   methods: {
     count(number) {
@@ -246,21 +249,19 @@ export default {
       } else return number;
     },
 
-
-       nFormatter(num) {
+    nFormatter(num) {
       if (num >= 1000000000) {
-        return (num / 1000000000).toFixed(1).replace(/\.0$/, '') + 'G';
+        return (num / 1000000000).toFixed(1).replace(/\.0$/, "") + "G";
       }
       if (num >= 1000000) {
-        return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+        return (num / 1000000).toFixed(1).replace(/\.0$/, "") + "M";
       }
       if (num >= 1000) {
-        return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+        return (num / 1000).toFixed(1).replace(/\.0$/, "") + "K";
       }
       return num;
     },
-
-  }
+  },
 };
 </script>
 

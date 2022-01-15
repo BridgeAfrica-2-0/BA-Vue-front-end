@@ -5,8 +5,9 @@
     </b-modal>
 
     <b-row>
-      <b-col lg="6" sm="12" class="p-2" v-for="item in network" :key="item.id">
-        <div class="people-style shadow">
+      <b-col lg="6" sm="12" class="p-2" v-for="(item,index) in network" :key="item.id">
+        
+        <div class="people-style h-100 shadow">
           <b-row>
             <b-col md="3" xl="3" lg="3" cols="5" sm="3">
               <div class="center-img">
@@ -19,10 +20,11 @@
                    <router-link :to="'/network_follower/' + item.id">
                       {{ item.name }}
                     </router-link> 
-                </strong> <br />
+                </strong> 
                 {{ item.category }}
                 <br />
-                {{ count(item.followers)  }} {{ $t('profileowner.Community') }}     <span   @click="BlockUser(item.id, index)"  class="ml-3"  style="cursor: pointer">  
+                {{ count(item.followers)  }} {{ $t('profileowner.Community') }}     <span   @click="BlockUser(item.id, index)"  class="ml-3"  style="cursor: pointer"> 
+
                       
                       <b-icon
                               font-scale="1"
@@ -94,22 +96,6 @@
                     </b-button>
                   </b-col>
 
-                  <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2">
-                    <b-button
-                      block
-                      size="sm"
-                      class="b-background shadow"
-                      variant="primary"
-                      @click="$emit('BlockUser', item.id)"
-                    >
-                      <b-icon
-                        font-scale="1"
-                        icon="exclamation-octagon-fill"
-                        v-b-tooltip.hover
-                      ></b-icon>
-                      <span class="btn-com"> Block</span>
-                    </b-button>
-                  </b-col>
                 </b-row>
               </div>
             </b-col>
@@ -162,6 +148,84 @@ export default {
   },
 
   methods: {
+
+    
+  BlockUser(id, index) {
+
+
+      this.$confirm(
+        {
+          message: `Are you sure?`,
+          button: {
+            no: 'No',
+            yes: 'Yes'
+          },
+          /**
+          * Callback Function
+          * @param {Boolean} confirm
+          */
+          callback: confirm => {
+            if (confirm) {
+              
+
+              
+
+     let dataInfo = {
+        id: id,
+        refernce: "network",
+        type: this.type,
+      };
+
+    
+      let fd = new FormData();
+      fd.append("id", dataInfo.id);
+      fd.append("type", dataInfo.refernce);
+      this.$store.dispatch("profile/Block", {
+        path: "block/entity",
+        formData: fd
+        })
+      .then(response => {
+        
+      
+        this.$delete(this.network,index);
+        console.log("user deleted");
+
+        console.log(response);
+        this.flashMessage.show({
+          status: "success",
+          message: dataInfo.refernce + " blocked"
+        });
+      })
+      .catch(err => {
+        console.log({ err: err });
+        this.flashMessage.show({
+          status: "error",
+          message: "Unable to blocked " + dataInfo.refernce
+        });
+      });
+
+
+            }
+          }
+        }
+      )
+
+
+
+
+    },
+
+
+
+      count(number) {
+      if (number >= 1000000) {
+        return number / 1000000 + "M";
+      }
+      if (number >= 1000) {
+        return number / 1000 + "K";
+      } else return number;
+    },
+
     async handleJoin(user) {
       document.getElementById('joinbtn' + user.id).disabled = true;
       const uri = user.is_member === 0 ? `/add-member` : `/remove-member`;

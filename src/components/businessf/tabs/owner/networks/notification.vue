@@ -3,7 +3,7 @@
   <div class="container" style=" ">
     <div class="container">
       <b-row>
-        <b-col>
+        <b-col cols="12" md="6">
           <div class="b-bottomn f-left">
             <b-form-checkbox
               v-model="selectAll"
@@ -15,7 +15,7 @@
             </b-form-checkbox>
           </div>
         </b-col>
-        <b-col>
+        <b-col cols="12" md="6">
           <div class="b-bottomn f-right">
             <b-button 
               variant="primary" 
@@ -40,7 +40,6 @@
           ><br />
           All Selected: <strong>{{ selectAll }}</strong>
         </div> -->
-        <hr width="100%" />
         <b-col cols="12"
           :class="{ active: index == currentPage }"
           v-for="(notification, index) in notifications"
@@ -52,8 +51,9 @@
                 <b-form-checkbox
                   name="checkbox-1"
                   v-model="selected"
-                  :value="notification.id"
+                  :value="notification.notification_id"
                   @change="updateCheckall"
+                  :disabled="notification.mark_as_read ? true : false"
                   class="m-left-top"
                 ></b-form-checkbox>
                 <b-avatar
@@ -63,10 +63,7 @@
                   :src="notification.profile_picture"
                 ></b-avatar>
                 <span class="m-0  d-inline-block ml-2 username">
-                  <router-link :to="'/'+notification.lien">
-                    <span v-if="notification.mark_as_read" class="title"> {{ notification.full_name }}</span>
-                    <span v-else><strong class="title"> {{ notification.full_name }}</strong></span>
-                  </router-link>
+                  {{ notification.full_name }}
                   <div class="duration">{{ moment(notification.created_at).fromNow() }}</div>
                 </span>
               </span>
@@ -76,16 +73,16 @@
           </div>
           <hr width="100%" />
         </b-col>
-        <b-col cols="12" v-if="noti_Details.total > noti_Details.per_page">
+        <!-- <b-col cols="12" v-if="notifications.total > notifications.per_page">
           <div class="b-bottomn f-right">
             <b-pagination
               v-model="currentPage"
-              :total-rows="noti_Details.total"
-              :per-page="noti_Details.per_page"
+              :total-rows="notifications.total"
+              :per-page="notifications.per_page"
               @change="handlePageChange"
             ></b-pagination>
           </div>
-        </b-col>
+        </b-col> -->
       </b-row>
       <!-- {{notifications}}
       {{newNotifications}} -->
@@ -118,10 +115,7 @@ export default {
     ...mapGetters({
       newNotifications: 'notification/NEW_NETWORK_NOTIFICATION',
       notifications: 'networkNotification/getAllNotifications'
-    }),
-    noti_Details() {
-      return this.$store.state.networkNotification.notificationsDetails;
-    }
+    })
   },
 
   watch: {
@@ -157,12 +151,11 @@ export default {
     select(checked) {
       console.log("this.selectAll: "+this.selectAll);
       console.log("checked: "+checked);
-      console.log(this.notifications);
       this.selected = [];
       if (checked) {
         for (let notification in this.notifications) {
-            this.selected.push(this.notifications[notification].id.toString());
-            console.log("this.notifications[notification].id: "+this.notifications[notification].id);
+            this.selected.push(this.notifications[notification].notification_id.toString());
+            console.log("this.notifications[notification].id: "+this.notifications[notification].notification_id);
         }
       }
     },
@@ -196,13 +189,12 @@ export default {
       this.$store
       .dispatch("networkNotification/MarkAsRead", 
       {
-        "path": "notification/mark-read",
+        "path": this.url+"/notifications/mark-read",
         "formData": formData
       })
       .then(({data}) => {
         console.log(data);
         console.log('ohh yeah');
-        this.selected = [];
         this.getNotifications();
         this.indeterminate = true;
         this.flashMessage.show({
@@ -230,13 +222,12 @@ export default {
       this.$store
       .dispatch("networkNotification/Delete", 
       {
-        "path": "notification/deleteAll",
+        "path": this.url+"/notifications/deleteAll",
         "formData": formData
       })
       .then(({data}) => {
         console.log(data);
         console.log('ohh yeah');
-        this.selected = [];
         this.getNotifications();
         this.indeterminate = true;
         this.flashMessage.show({

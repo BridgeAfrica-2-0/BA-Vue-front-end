@@ -2,13 +2,13 @@
   <div class="p-2">
     <div class="s-ccard">
       <b-row>
-        <b-col lg="6" sm="12" class="p-2" v-for="item in users" :key="item.id">
+        <b-col lg="6" sm="12" class="p-2" v-for="(item, index) in users" :key="index">
           <div class="people-style border shadow">
             <b-row class="mb-1">
               <b-col md="3" cols="4" sm="4" class="my-auto">
                 <b-avatar
                   class="p-avater"
-                  variant="primary"
+                  variant="ligth"
                   :src="item.profile_picture"
                 ></b-avatar>
               </b-col>
@@ -27,11 +27,14 @@
                             class="mt-lg-2"
                           >
                             <div class="mt-3 mt-lg-0 mt-xl-0 username">
-                              <b>
-                                <router-link :to="'/profilefollower/' + item.id">
-                                  {{ item.name }}
-                                </router-link>   
-                              </b>
+                              <router-link
+                                :to="{
+                                  name: 'Follower',
+                                  params: { id: item.id },
+                                }"
+                              >
+                                <b>{{ item.name }}</b>
+                              </router-link>
                             </div>
                           </b-col>
 
@@ -53,22 +56,18 @@
                             ></b-icon>  </span>
                             </h6>
                           </b-col>
+
+                        
                           <b-col
-                            @click="$emit('BlockUser', item.id)"
+                           
                             md="6"
                             lg="12"
                             cols="6"
                             xl="12"
                             class="mt-1 mt-lg-1 mt-xl-2"
-                            style="cursor: pointer"
+                            
                           >
-                            <b-icon
-                              font-scale="1"
-                              icon="exclamation-octagon"
-                              v-b-tooltip.hover
-                              title="Block This User"
-                              variant="danger"
-                            ></b-icon>
+                           
                           </b-col>
                         </b-row>
                       </div>
@@ -179,6 +178,70 @@ export default {
   },
 
   methods: {
+
+    
+
+  BlockUser(id, index) {
+
+
+     this.$confirm(
+        {
+          message: `Are you sure?`,
+          button: {
+            no: 'No',
+            yes: 'Yes'
+          },
+          /**
+          * Callback Function
+          * @param {Boolean} confirm
+          */
+          callback: confirm => {
+            if (confirm) {
+                   
+
+     let dataInfo = {
+        id: id,
+        refernce: "user",
+        type: this.type,
+      };
+
+    
+      let fd = new FormData();
+      fd.append("id", dataInfo.id);
+      fd.append("type", dataInfo.refernce);
+      this.$store.dispatch("profile/Block", {
+        path: "block/entity",
+        formData: fd
+        })
+      .then(response => {
+        
+      
+        this.$delete(this.users,index);
+        console.log("user deleted");
+
+        console.log(response);
+        this.flashMessage.show({
+          status: "success",
+          message: dataInfo.refernce + " blocked"
+        });
+      })
+      .catch(err => {
+        console.log({ err: err });
+        this.flashMessage.show({
+          status: "error",
+          message: "Unable to blocked " + dataInfo.refernce
+        });
+      });
+
+            }
+          }
+        }
+      )
+
+
+    },
+
+
     async handleFollow(user) {
       console.log("yoo ma gee");
       document.getElementById("followbtn" + user.id).disabled = true;
@@ -228,6 +291,7 @@ export default {
       } else {
         url = "profile/user/following/";
       }
+      console.log( url + this.page + "?keyword=" + this.searchh + "&id=" + this.foll_id);
 
       axios
         .get(

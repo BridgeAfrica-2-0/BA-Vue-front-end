@@ -61,7 +61,7 @@
           </div>
           <hr class="h-divider" />
           <div class="mt-3">
-            <ProductComments :idproduct="product.id" />
+            <ProductComments :idproduct="product.id" :product="product" />
           </div>
         </b-col>
       </b-row>

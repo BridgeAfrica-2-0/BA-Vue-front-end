@@ -124,6 +124,7 @@
         class="mt-2 mb-2"
         v-model="educationInput.schoolName"
         :placeholder="$t('profileowner.School')"
+        required
       ></b-form-input>
 
       <b-form-checkbox
@@ -258,8 +259,45 @@ export default {
         });
 		},
 
+    validate(){ 
+      if(!this.educationInput.schoolName ){
+        this.flashMessage.show({
+            status: "error",
+            message: "name of school is required",
+            blockClass: "custom-block-class",
+          }) 
+          return 1;
+      }else if(!this.educationInput.durationFrom){
+        this.flashMessage.show({
+            status: "error",
+            message: "start date  is required",
+            blockClass: "custom-block-class",
+          })
+           return 1;
+      } else if(!this.educationInput.durationTo){
+         this.flashMessage.show({
+            status: "error",
+            message: "end date is required",
+            blockClass: "custom-block-class",
+          })
+           return 1;
+      }
+      else if (!this.educationInput.major){
+        this.flashMessage.show({
+            status: "error",
+            message: "major is required",
+            blockClass: "custom-block-class",
+          })
+           return 1;
+      }else { return 0;}
+    },
 
-    save() {
+    save(bvModalEvt) {
+       bvModalEvt.preventDefault();
+        this.validate();
+        if(this.validate() == 1){
+          return
+        }
       console.log("Save/Update/Delete Education User Profile About");
       let method = null;
       if (this.index !== null) {
@@ -276,6 +314,14 @@ export default {
         .then(response => {
           console.log(response);
           console.log("save/edit/delete education user end response (3)+++++");
+          this.$refs["educationModal"].hide();
+
+          this.flashMessage.show({
+            status: "success",
+            message: "Your school or university have been added",
+            blockClass: "custom-block-class",
+          })
+
         })
         .catch(error => {
           console.log(error);

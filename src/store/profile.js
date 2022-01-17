@@ -1364,7 +1364,7 @@ export default {
           );
           if (response.status !== 200 || response.status !== 201) {
             console.log("Error From The server +++++++");
-            throw new Error("Error From save/edit/delete Education+++++");
+            
           }
           return response;
         })
@@ -1375,7 +1375,7 @@ export default {
           );
           if (response.errors) {
             console.log("Error From Server +++++++");
-            throw new Error("Error From save/edit/delete Education+++++");
+            
           }
           context.commit("storeEducation", {
             education: payload.education,

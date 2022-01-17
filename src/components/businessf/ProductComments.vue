@@ -27,6 +27,7 @@
               @submit-comment="submitComment"
               :idproduct="idproduct"
               @deletecomment="handleDeleteComment"
+              @getNewDetail="setNewDetail"
             ></comments>
           </div>
         </b-col>
@@ -67,10 +68,25 @@ export default {
     },
   },
   methods: {
+    
+      getDetail (id) {
+       this.$store
+      .dispatch("productDetails/getProductDetails", id)
+      .then((product) => {
+        this.product = product;
+       console.log("new product detail ", product)
+      });
+         
+        
+        
+      },
 
     like(id){
       console.log('likes---', id) 
-      this.$store.dispatch("productComments/productLikes",id);
+      this.$store.dispatch("productComments/productLikes",id)
+      .then(res =>{
+        this.getDetail(id);
+      })
     },
 
     handleDeleteComment(idcomment) {
@@ -78,25 +94,33 @@ export default {
         (el) => el.comment_id !== idcomment
       );
     },
+
+    setNewDetail(product){
+      this.product = product;
+    },
+
     submitComment: function(reply) {
       // this.comments.push({
       //   id: this.comments.length + 1,
       //   user: this.current_user.user,
       //   avatar: this.current_user.avatar,
       //   text: reply,
-      // });
+      // }); 
+      console.log('submit comment')
       const comment = {
         idproduct: this.idproduct,
         text: reply,
       };
-
+       
       this.$store.dispatch("productComments/postComment", comment).then(() => {
+        
         this.$store
           .dispatch("productComments/getComments", {
             id: this.idproduct,
             page: this.current_comment_page,
           })
           .then((data) => {
+            
             this.loadComments = data;
             console.log(this.loadComments);
           });

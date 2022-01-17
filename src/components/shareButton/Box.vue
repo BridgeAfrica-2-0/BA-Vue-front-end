@@ -18,7 +18,7 @@
       @keypress.enter="search(name)"
     ></b-form-input>
 
-    <b-form-input
+    <b-form-input v-else
       :placeholder="placeholder"
       class="input-search mb-2"
       v-model="text"

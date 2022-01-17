@@ -25,7 +25,7 @@
 				:idproduct="idproduct"
 				@deletecomment="deleteComment"
       ></single-comment>
-      <b-button variant="link" @click="seeMore">see more</b-button>
+      <b-button v-if="showSee" variant="link" @click="seeMore">see more</b-button>
     </div>
   </div>
 </template>
@@ -40,7 +40,8 @@ export default {
   data() {
     return {
       reply: "",
-      current_comment_page: 1
+      current_comment_page: 1,
+      showSee: true
     };
   },
 
@@ -62,7 +63,10 @@ export default {
             page: this.current_comment_page,
           })
           .then(res => {
-            
+            if(res.length == 0){
+              this.showSee = false
+            }
+            console.log('reponse du see more', res)
           })
 
     },
@@ -78,6 +82,19 @@ export default {
           })
     },
 
+    getDetail (id) {
+       this.$store
+      .dispatch("productDetails/getProductDetails", id)
+      .then((product) => {
+        
+        this.$emit("getNewDetail", product)
+       console.log("new product detail ", product)
+      });
+         
+        
+        
+      },
+
     submitComment() {
       console.log("------", this.reply)
       const comment = {
@@ -87,6 +104,7 @@ export default {
 
       this.$store.dispatch("productComments/postComment", comment).then(() => {
         this.getComment();
+        this.getDetail(this.idproduct);
         console.log('èèè', this.Comments)
       })
       // if (this.reply !== "") {
@@ -96,7 +114,9 @@ export default {
     },
 		deleteComment(idcomment){
 			this.$emit("deletecomment", idcomment)
-		}
+		},
+
+    
   },
   props: ["comments", "comments_wrapper_classes","idproduct"],
 };

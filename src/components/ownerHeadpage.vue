@@ -13,7 +13,7 @@
           <b-col cols="12" md="12" class="m-0 p-0 text-left put-top">
             <b-avatar
               :src="auth.profile_picture"
-              class="avat text-center"
+              class="avat text-center bg-light"
               badge-variant="primary"
               badge-offset="10px"
             ></b-avatar>

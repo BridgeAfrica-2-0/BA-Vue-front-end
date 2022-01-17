@@ -6,7 +6,7 @@
         <b-col cols="3" md="1" class="m-md-0 p-md-0">
           <b-avatar
             variant="primary"
-            class="img-fluid avat-comment"
+            class="img-fluid avat-comment bg-light"
             :src="business_logo"
           ></b-avatar>
         </b-col>
@@ -91,7 +91,7 @@
           </b-row>
         </b-col>
       </b-row>
-      <div class="pending-post-view pt-2 mt-3">
+      <div v-if="postStatus != 'member'" class="pending-post-view pt-2 mt-3">
         <p class="text-center">
 <!-- {{pendingPost.data}} -->
           {{$t("network.Your")}}  {{$t("network.Posts_are_pending_for_approval")}}.&nbsp;&nbsp;&nbsp;&nbsp;
@@ -445,6 +445,7 @@ import Post from "@/components/businessOwner/ownerPostComponent";
 export default {
   name: "postNetwork",
   mixins: [AllPostFeatureMixin],
+  props: ['postStatus'],
   components: {
     Post,
   },

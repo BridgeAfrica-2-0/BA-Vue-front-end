@@ -8,6 +8,7 @@
 import Mapbox from "mapbox-gl";
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 export default {
+  props: ["region"],
   created() {
     this.mapbox = Mapbox;
   },
@@ -18,7 +19,7 @@ export default {
     return {
       loading: false,
       accessToken: process.env.VUE_APP_MAPBOX_TOKEN,
-      mapStyle: "mapbox://styles/mapbox/streets-v11",
+      mapStyle: "mapbox://styles/mapbox/outdoors-v11",
       center: [11.504929555178624, 3.8465173382452815], // Lng,Lat
       zoom: 5,
     };
@@ -35,9 +36,19 @@ export default {
         center: this.center,
       });
 
+      var regon = this.region ? this.region[0].name.toLowerCase() : "centre";
+      regon = regon.charAt(0).toUpperCase() + regon.slice(1);
+      console.log(this.region);
       const geocoder = new MapboxGeocoder({
         accessToken: mapboxgl.accessToken,
-        types: "country,region,place,postcode,locality,neighborhood",
+        mapboxgl: mapboxgl,
+        countries: "cm",
+        placeholder: "Address",
+        filter: function(item) {
+          return item.context.some((i) => {
+            return i.text === regon;
+          });
+        },
       });
       geocoder.addTo("#geolocation");
       geocoder.on("result", (e) => {

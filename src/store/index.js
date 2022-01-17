@@ -49,7 +49,7 @@ import cart from "./cart"
 import productComments from './productComments';
 import { social } from './social';
 import networkSetting from './networkSetting';
-
+import productDetails from './productDetails';
 Vue.use(Vuex);
 
 
@@ -104,6 +104,7 @@ export default new Vuex.Store({
     cart,
     networkSetting,
     profileOrders,
-    productComments
+    productComments,
+    productDetails
   }
 })

@@ -6,18 +6,18 @@ const state = {
 const getters = {};
 const actions = {
   async getComments({ commit }, details) {
-    // return await new Promise((resolve, reject) => {
+    return await new Promise((resolve, reject) => {
       axios
         .get(`market/product/detail/${details.id}/comments/${details.page}`)
         .then((response) => {
           commit('setComment', response.data.data);
           console.log("Products comments", response.data);
-          // resolve(response.data.data);
+          resolve(response.data.data);
         })
         .catch((error) => {
           console.log(error);
         });
-    // });
+    });
   },
   async getProductLikes({ commit }, idproduct) {
     return await new Promise((resolve, reject) => {
@@ -78,7 +78,10 @@ const mutations = {
   // },
 
   setComment(state, data){
-    state.comments = data
+    data.map(item =>{
+      state.comments.push(item)
+    })
+    
   }
 };
 

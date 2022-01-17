@@ -23,7 +23,7 @@
           </div>
           <hr class="h-divider" />
           <div>
-            <h4>{{$t("general.Product_Desciption")}}</h4>
+            <h4>{{ $t("general.Product_Desciption") }}</h4>
             <p class="text-justify">
               {{ product.description }}
             </p>
@@ -31,17 +31,32 @@
           <hr class="h-divider" />
 
           <div
-            class="buttons my-3 d-flex justify-content-between align-items-center"
+            class="
+              buttons
+              my-3
+              d-flex
+              justify-content-between
+              align-items-center
+            "
           >
-            <b-button variant="primary" class="font-weight-light shadow-sm">
-              <span v-if="packageProduct === 'basic'"> Messages </span>
-              <span v-else-if="packageProduct === 'premium'">{{$t("general.Buy_Now")}}</span>
-            </b-button>
+            <BtnCtaMessage
+              v-if="packageProduct === 'basic'"
+              :element="product"
+              type="business"
+            />
             <b-button
-              variant="success"
+              v-else-if="packageProduct === 'premium'"
+              variant="primary"
               class="font-weight-light shadow-sm"
-              @click="closeModal"
-              >{{$t("general.Check_On_Website")}}</b-button
+            >
+              <span>{{ $t("general.Buy_Now") }}</span>
+            </b-button>
+            <router-link :to="`/business/${product.business_id}`"
+              ><b-button
+                variant="success"
+                class="font-weight-light shadow-sm"
+                >{{ $t("general.Check_On_Website") }}</b-button
+              ></router-link
             >
           </div>
           <hr class="h-divider" />
@@ -100,6 +115,7 @@ export default {
     },
   },
   mounted() {
+    console.log("product", this.product);
     //get prooduct package type
     this.$store
       .dispatch("productDetails/getProductDetails", this.product.id)

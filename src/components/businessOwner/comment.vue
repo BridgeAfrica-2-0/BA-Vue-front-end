@@ -5,7 +5,7 @@
         variant="info"
         :src="comment.picture"
         :square="'user' == comment.user_type ? false : true"
-        class="avat-comment b-r"
+        class="avat-comment b-r bg-light"
       ></b-avatar>
 
       <div class="msg text" v-if="!proccesEdit">

@@ -15,15 +15,14 @@
 
       <div
         class="people-style border shadow"
-        v-for="item in users.data.data"
+        v-for="item in users.data"
         :key="item.id"
       >
         <b-row class="mb-1">
           <b-col md="3" cols="4" sm="4" class="my-auto">
             <b-avatar
               class="p-avater"
-            
-              :src="item.profile_picture"
+              :src="getImage(item.profile_picutre)"
             ></b-avatar>
           </b-col>
 
@@ -125,6 +124,16 @@ export default {
   },
 
   methods: {
+    getImage(image) {
+      let finale = "";
+      let user = require("@/assets/profile_white.png");
+      finale = image
+        ? image.includes("profile_default.png")
+          ? user
+          : image
+        : user;
+      return finale;
+    },
     count(number) {
       if (number >= 1000000) {
         return number / 1000000 + "M";
@@ -135,7 +144,6 @@ export default {
     },
 
     async handleFollow(user) {
-      console.log("yoo ma gee");
       document.getElementById("followbtn" + user.id).disabled = true;
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
@@ -187,7 +195,7 @@ export default {
   .btn-com {
     margin-left: 3px;
   }
-  .btns-mobile{
+  .btns-mobile {
     margin-left: -2.2rem;
   }
 }

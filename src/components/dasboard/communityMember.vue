@@ -7,8 +7,8 @@
             <b-row class="mb-1">
               <b-col md="3" cols="4" sm="4" class="my-auto">
                 <b-avatar
-                  class="p-avater bg-light"
-                  variant="primary"
+                  class="p-avater"
+                  variant="light"
                   :src="item.profile_picture"
                 ></b-avatar>
               </b-col>

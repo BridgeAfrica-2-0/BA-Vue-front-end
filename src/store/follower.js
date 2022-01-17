@@ -293,7 +293,7 @@ export default {
     },
 
     getImages({ commit }, id) {
-      return axios.get("profile/user/media?id=" + id).then(({ data }) => {
+      return axios.get("profile/user/media?id="+id).then(({ data }) => {
         commit("setImagess", data.data);
         console.log(data);
       });

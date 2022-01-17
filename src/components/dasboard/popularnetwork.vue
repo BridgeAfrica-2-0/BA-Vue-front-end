@@ -6,27 +6,33 @@
 
     <div class="people-style shadow" v-for="item in network" :key="item.id">
       <b-row>
-        <b-col md="3" xl="3" lg="3" cols="5" sm="3">
-          <div class="center-img">
-            <img :src="item.picture" class="r-image" />
-          </div>
-        </b-col>
-        <b-col md="5" cols="7" lg="7" xl="5" sm="5">
-          <p class="textt">
+     
 
-            <router-link :to="{name: 'Membar Network Follower', params: {id: item.id}}">
+       <b-col md="8" xl="8" lg="12" cols="12" sm="8">
+          <div class="d-inline-flex">
+            <div class="center-img">
+              
+           <img :src="item.picture" class="r-image" />
+              
+            </div>
+            <div class="pl-3 flx100">
+              <p class="textt">
+                <strong class="title">
+                   <router-link :to="{name: 'Membar Network Follower', params: {id: item.id}}">
               <strong class="net-title">{{ item.name }}</strong>
             </router-link><br />
+                </strong>
+                
+                {{ count(item.followers) }}
+                {{ $t("dashboard.Community") }} <br />
 
-            {{ item.followers }} {{ $t("dashboard.Community") }} <br />
-
-            <span class="location">
+                <span class="location">
               <b-icon-geo-alt class="ico"></b-icon-geo-alt>
               {{ item.location_description }}
             </span>
-            <br />
 
-            <read-more
+                <br />
+                 <read-more
               :more-str="$t('dashboard.read_more')"
               class="readmore"
               :text="item.about_network"
@@ -35,10 +41,14 @@
               :max-chars="50"
             >
             </read-more>
-          </p>
+              </p>
+            </div>
+          </div>
         </b-col>
 
-        <b-col lg="12" md="4" xl="4" cols="12" sm="4">
+        <b-col lg="12" xl="4" md="4" cols="12" sm="4">
+
+
           <div class="s-button">
             <b-row>
               <b-col md="12" lg="4" xl="12" sm="12" cols="4" class="mt-2">
@@ -132,6 +142,16 @@ export default {
 
   methods: {
 
+     count(number) {
+      if (number >= 1000000) {
+        return number / 1000000 + "M";
+      }
+      if (number >= 1000) {
+        return number / 1000 + "K";
+      } else return number;
+    },
+
+
     async handleJoin(user) {
       document.getElementById("joinbtn" + user.id).disabled = true;
       const uri = user.is_member === 0 ? `/add-member` : `/remove-member`;
@@ -202,7 +222,12 @@ export default {
 };
 </script>
 
+
+
 <style scoped>
+.flx100 {
+  flex-basis: 80% !important;
+}
 @media only screen and (min-width: 768px) {
   .btn-text {
     margin-left: 8px;
@@ -264,7 +289,7 @@ export default {
     margin-top: -15px;
   }
 
-  .net-title {
+  .title {
     font-size: 16px;
     color: black;
 
@@ -277,7 +302,7 @@ export default {
 
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: normal;
-    font-size: 14px;
+    font-size: 12px;
     line-height: 30px;
     color: rgba(117, 114, 128, 1);
     text-align: left;
@@ -288,8 +313,6 @@ export default {
 
     padding: 1px;
     text-align: left;
-
-    margin-left: -30px;
 
     margin-right: -5px;
 
@@ -317,7 +340,7 @@ export default {
 }
 
 @media only screen and (min-width: 768px) {
-  .net-title {
+  .title {
     font-size: 20px;
     color: black;
 
@@ -342,7 +365,7 @@ export default {
     padding: 1px;
     text-align: left;
 
-    margin-left: 30px;
+    margin-left: 60px;
 
     margin-right: -5px;
 
@@ -402,7 +425,7 @@ export default {
     border-bottom-right-radius: 5px;
 
     background: white;
-
+    height: 100%;
     background-color: #fff;
     background-clip: border-box;
     border: 1px solid rgba(0, 0, 0, 0.125);
@@ -425,13 +448,13 @@ export default {
     border-bottom-right-radius: 5px;
 
     background: white;
-
+    height: 100%;
     background-color: #fff;
     background-clip: border-box;
     border: 1px solid rgba(0, 0, 0, 0.125);
     margin-bottom: 10px;
-
-    margin-right: 8px;
+    margin-right: -8px;
+    margin-left: -8px;
 
     padding: 7px;
   }
@@ -451,5 +474,11 @@ export default {
   .btn {
     display: flex;
   }
+}
+</style>
+
+<style>
+.u-btn {
+  filter: grayscale(0.6);
 }
 </style>

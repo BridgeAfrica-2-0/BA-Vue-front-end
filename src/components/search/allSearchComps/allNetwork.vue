@@ -21,7 +21,7 @@
       :key="index"
     >
       <b-row>
-        <b-col md="3" xl="3" lg="3" cols="4" sm="3">
+        <b-col md="3" xl="3" lg="3" cols="4" sm="3" class="pr-0">
           <div class="center-img">
             <img :src="network.image" class="r-image" />
           </div>
@@ -30,7 +30,7 @@
           <p class="textt">
             <strong class="net-title">
               <router-link :to="'network/' + network.id">
-                {{ network.name }}sda
+                {{ network.name }}
               </router-link>
             </strong>
             <br />
@@ -64,13 +64,17 @@
                 <b-button
                   block
                   size="sm"
-                  class="b-background shadow"
+                  :class="network.is_follow === 1 && 'u-btn'"
                   variant="primary"
+                  @click="handleFollow(network)"
                 >
-                  <i class="fas fa-user-plus fa-lg btn-icon"></i>
-                  <span class="btn-com" v-b-modal.modal-sm>{{
-                    $t("search.Community")
-                  }}</span>
+                  <i
+                    class="fas fa-lg btn-icon"
+                    :class="
+                      network.is_follow === 1 ? 'fa-user-minus' : 'fa-user-plus'
+                    "
+                  ></i>
+                  <span class="btn-com">{{ $t("search.Community") }}</span>
                 </b-button>
               </b-col>
 
@@ -82,10 +86,16 @@
                 <b-button
                   block
                   size="sm"
-                  class="b-background shadow btn-join-mobile"
+                  :class="network.is_member == 1 && 'u-btn'"
                   variant="primary"
+                  @click="handleJoin(network)"
                 >
-                  <i class="fas fa-lg btn-icon fa-user-plus"></i>
+                  <i
+                    class="fas fa-lg btn-icon"
+                    :class="
+                      network.is_member == 1 ? 'fa-user-minus' : 'fa-user-plus'
+                    "
+                  ></i>
 
                   <span class="btn-text"> {{ $t("search.Join") }} </span>
                 </b-button>
@@ -118,7 +128,6 @@
 </template>
 
 <script>
-import moment from "moment";
 import axios from "axios";
 
 export default {
@@ -147,26 +156,33 @@ export default {
   },
 
   methods: {
-    async handleJoin(user) {
-      document.getElementById("joinbtn" + user.id).disabled = true;
-      const uri = user.is_member === 0 ? `/add-member` : `/remove-member`;
-      const nextFollowState = user.is_member === 0 ? 1 : 0;
+    async handleFollow(user) {
+      const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
+      const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
         id: user.id,
         type: "network",
       };
-
       await axios
         .post(uri, data)
         .then((response) => {
-          console.log(response);
-          user.is_member = nextFollowState;
-          document.getElementById("joinbtn" + user.id).disabled = false;
+          user.is_follow = nextFollowState;
         })
-        .catch((err) => {
-          console.log(err);
-          document.getElementById("joinbtn" + user.id).disabled = false;
-        });
+        .catch((err) => console.log(err));
+    },
+    async handleJoin(user) {
+      const uri = user.is_member == 0 ? `/add-member` : `/remove-member`;
+      const nextFollowState = user.is_member == 0 ? 1 : 0;
+      const data = {
+        id: user.id,
+        type: "network",
+      };
+      await axios
+        .post(uri, data)
+        .then((response) => {
+          user.is_member = nextFollowState;
+        })
+        .catch((err) => console.log(err));
     },
 
     changePage(value) {
@@ -185,32 +201,10 @@ export default {
         return number / 1000 + "K";
       } else return number;
     },
-
-    async handleFollow(user) {
-      document.getElementById("followbtn" + user.id).disabled = true;
-
-      const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
-      const nextFollowState = user.is_follow === 0 ? 1 : 0;
-      const data = {
-        id: user.id,
-        type: "network",
-      };
-
-      await axios
-        .post(uri, data)
-        .then((response) => {
-          console.log(response);
-          user.is_follow = nextFollowState;
-          document.getElementById("followbtn" + user.id).disabled = false;
-        })
-        .catch((err) => {
-          console.log(err);
-          document.getElementById("followbtn" + user.id).disabled = false;
-        });
-    },
   },
 };
 </script>
+
 <style scoped>
 @media only screen and (min-width: 768px) {
   .btn-text {
@@ -241,7 +235,7 @@ export default {
   .btn-com {
     margin-left: 3px;
   }
-  .btn-join-mobile{
+  .btn-join-mobile {
     padding-left: 20px;
   }
 }

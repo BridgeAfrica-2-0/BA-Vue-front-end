@@ -86,10 +86,7 @@
 
     <hr style="margin-top: -0px" />
 
-    <div
-      class="d-block d-none d-sm-block d-md-block d-lg-block d-xl-none"
-      v-if="selectedId == '0' || selectedId == '4'"
-    >
+    <div class="d-block d-none d-sm-block d-md-block d-lg-block d-xl-none">
       <b-row align-v="start">
         <b-col
           cols="3"
@@ -103,7 +100,7 @@
           >
             <img
               class="img-fluid picture logo-img"
-              src="@/assets/icons/mobile/agriculture.png"
+              :src="category.category.cat_image"
             />
 
             {{
@@ -132,7 +129,7 @@
           <b-form-radio
             v-for="(category, index) in categories.slice(7)"
             :key="index"
-            v-model="selected_sub_cat"
+            v-model="catChose"
             :value="category.category.id"
             @change="getCategory({ cat_id: category.category.id })"
             name="subCategories-list-modal"
@@ -153,163 +150,94 @@
 
         <b-modal ref="myfilters" id="myModall" hide-footer title=" ">
           <div class="d-block d- d-sm-block d-md-block d-lg-block d-xl-none">
-            <div style="column-count: 2">
-              <b-form-checkbox
-                v-for="category in selectcategories"
-                @change="switchcategories"
-                :key="category.value"
-                :value="category.value"
-                v-model="default_category"
-                name="flavour-4a"
-                class="m-1 s br-3"
-              >
-                {{ category.text }}
-              </b-form-checkbox>
+            <div>
+              <!-- Category -->
+              <div v-if="categories.length > 0">
+                <b-form-group
+                  label-cols-lg="3"
+                  :label="$t('search.Categories')"
+                  label-size="md"
+                  label-class="font-weight-bold pt-0"
+                  class="mb-0 pt-6 text-left"
+                >
+                </b-form-group>
+                <b-form-select v-model="catChose">
+                  <option :value="null" disabled>
+                    -- Please select a category --
+                  </option>
+                  <option
+                    v-for="(elm, index) in categories"
+                    :key="index"
+                    :value="elm"
+                  >
+                    {{ elm.category.name }}
+                  </option>
+                </b-form-select>
+              </div>
+            </div>
+
+            <hr />
+            <div>
+              <!-- sub Category -->
+              <div v-if="catChose">
+                <b-form-group
+                  label-cols-lg="3"
+                  label="sub categories"
+                  label-size="md"
+                  label-class="font-weight-bold pt-0"
+                  class="mb-0 pt-6 text-left"
+                >
+                </b-form-group>
+                <b-form-select v-model="subCatChose" @change="getFilter">
+                  <option :value="null" disabled>
+                    -- Please select a sub category --
+                  </option>
+                  <option
+                    v-for="(elm, index) in catChose.sub_cat"
+                    :key="index"
+                    :value="elm"
+                  >
+                    {{ elm.name }}
+                  </option>
+                </b-form-select>
+              </div>
             </div>
 
             <hr />
 
-            <span v-if="categories_filters.length">
-              <h6>{{ $t("search.Filters") }}</h6>
-            </span>
-            <div style="column-count: 2">
-              <b-form-checkbox
-                v-for="agriculture in categories_filters"
-                v-model="selectedfilter"
-                :key="agriculture.value"
-                :value="agriculture.value"
-                name="flavour-4a"
-                class="m-1 br-3"
-              >
-                {{ agriculture.text }}
-              </b-form-checkbox>
+            <div>
+              <!-- Filters -->
+              <div v-if="subFilters.length > 0">
+                <b-form-group
+                  label-cols-lg="3"
+                  label="Filters"
+                  label-size="md"
+                  label-class="font-weight-bold pt-0"
+                  class="mb-0 pt-6 text-left"
+                >
+                </b-form-group>
+                <b-form-select v-model="filterChose">
+                  <option :value="null" disabled>
+                    -- Please select a filter --
+                  </option>
+                  <option
+                    v-for="(elm, index) in subFilters"
+                    :key="index"
+                    :value="elm.id"
+                  >
+                    {{ elm.name }}
+                  </option>
+                </b-form-select>
+              </div>
             </div>
-
-            <span v-if="showform == true">
-              <b-form-group
-                label-cols-lg="3"
-                :label="$t('search.Region')"
-                label-size="md"
-                label-class="font-weight-bold pt-0"
-                class="mb-0 text-left"
-              >
-              </b-form-group>
-
-              <b-form-select v-model="selected">
-                <b-form-select-option value="a">
-                  {{ $t("search.Yaounde") }}
-                </b-form-select-option>
-              </b-form-select>
-
-              <br />
-
-              <b-form-group
-                label-cols-lg="3"
-                :label="$t('search.Division')"
-                label-size="md"
-                label-class="font-weight-bold pt-0 text-left"
-                class="mb-0"
-              >
-              </b-form-group>
-
-              <b-form-select v-model="selected">
-                <b-form-select-option value="a">
-                  {{ $t("search.My_Location") }}
-                </b-form-select-option>
-              </b-form-select>
-
-              <br />
-
-              <b-form-group
-                label-cols-lg="12"
-                :label="$t('search.Sub_Division')"
-                label-size="md"
-                label-class="font-weight-bold pt-0 text-left"
-                class="mb-0"
-              >
-              </b-form-group>
-
-              <b-form-select v-model="selected">
-                <b-form-select-option value="a">
-                  {{ $t("search.My_Location") }}
-                </b-form-select-option>
-              </b-form-select>
-
-              <br />
-
-              <b-form-group
-                label-cols-lg="3"
-                :label="$t('search.City')"
-                label-size="md"
-                label-class="font-weight-bold pt-0 text-left"
-                class="mb-0"
-              >
-              </b-form-group>
-
-              <b-form-select v-model="selected">
-                <b-form-select-option value="a">
-                  {{ $t("search.My_Location") }}
-                </b-form-select-option>
-              </b-form-select>
-
-              <br />
-
-              <hr />
-            </span>
-
-            <b-form-group
-              label-cols-lg="12"
-              :label="$t('search.Neighbourhood')"
-              label-size="md"
-              label-class="font-weight-bold pt-0"
-              class="mb-0 text-left"
-            >
-              <b-form-checkbox id="" class="a-text" name="" value="">
-                Buea</b-form-checkbox
-              >
-
-              <b-form-checkbox id="" class="a-text" name="" value="">
-                Tiko</b-form-checkbox
-              >
-
-              <b-form-checkbox id="" class="a-text" name="" value="">
-                Limbe</b-form-checkbox
-              >
-
-              <b-form-checkbox id="" class="a-text" name="" value="">
-                Mutengene</b-form-checkbox
-              >
-            </b-form-group>
-
-            <br />
 
             <hr />
 
-            <b-form-group
-              label-cols-lg="12"
-              :label="$t('search.Distance')"
-              label-size="md"
-              label-class="font-weight-bold pt-0 text-left"
-              class="mb-0"
+            <b-button
+              variant="primary"
+              class="m-3 float-right"
+              @click="searchFilter"
             >
-              <b-form-checkbox id="" class="a-text" name="" value="">
-                3km</b-form-checkbox
-              >
-
-              <b-form-checkbox id="" class="a-text" name="" value="">
-                9km</b-form-checkbox
-              >
-
-              <b-form-checkbox id="" class="a-text" name="" value="">
-                15km</b-form-checkbox
-              >
-
-              <b-form-checkbox id="" class="a-text" name="" value="">
-                25km</b-form-checkbox
-              >
-            </b-form-group>
-
-            <b-button variant="primary" class="m-3 float-right">
               {{ $t("search.Search") }}
             </b-button>
           </div>
@@ -627,7 +555,7 @@ import BusinessComponent from "@/components/search/business";
 
 import { loader } from "@/mixins";
 
-import { mapGetters, mapActions, mapMutations } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   components: {
@@ -663,9 +591,7 @@ export default {
   computed: {
     ...mapGetters({
       prodLoaderr: "business/getloadingState",
-      auth: "auth/user",
     }),
-
     businesses() {
       return this.$store.getters["allSearch/getBusinesses"];
     },
@@ -687,6 +613,9 @@ export default {
     },
     subCategories() {
       return this.$store.getters["marketSearch/getSubCat"];
+    },
+    subFilters() {
+      return this.$store.getters["marketSearch/getSubFilters"];
     },
   },
 
@@ -717,6 +646,10 @@ export default {
 
   data() {
     return {
+      catChose: "",
+      subCatChose: "",
+      filterChose: "",
+
       islogin: true,
       searchParams: {
         keyword: "",
@@ -1645,7 +1578,9 @@ export default {
         { value: "Sub-divisions", text: "Sub-divisions" },
         { value: "City", text: "City" },
       ],
+
       default_category: "",
+
       optionsnav: {
         activeColor: "#top1d98bd",
       },
@@ -1653,9 +1588,8 @@ export default {
   },
 
   watch: {
-    selectedId: function (newVal) {
-      if ([2, 5].includes(newVal)) this.changeComponent();
-
+    selectedId: function () {
+      this.changeComponent();
       this.changePlaceHolder();
       this.changeNotFoundTitle();
     },
@@ -1671,33 +1605,7 @@ export default {
     },
   },
 
-  destroyed(){
-    this.switchToProfile()
-  },
-
   methods: {
-    
-    ...mapMutations({
-      profile: "auth/profilConnected",
-    }),
-
-    switchToProfile: async function () {
-      let loader = this.$loading.show({
-        container: this.$refs.formContainer,
-        canCancel: true,
-        onCancel: this.onCancel,
-        color: "#e75c18",
-      });
-
-      const response = await this.$repository.share.switch(null, "reset");
-
-      if (response.success) {
-        this.profile({ ...this.auth.user, user_type: "user" });
-      }
-
-      loader.hide();
-    },
-
     onProcessQuery() {
       if (this.$route.query.market) {
         this.selectedId = 4;
@@ -1716,8 +1624,12 @@ export default {
       this.$refs.More.visible = false;
     },
     getKeyword(data) {
-      let elm = data ? data : { keyword: "" };
+      var keyword = this.searchParams.keyword;
+
+      let elm = data ? data : keyword ? { keyword: keyword } : { keyword: "" };
       console.log("the keyword is: ", this.searchParams.keyword);
+      console.log("keyword: ", data);
+
       this.$store
         .dispatch("allSearch/SEARCH", elm)
         .then((res) => {
@@ -1844,9 +1756,8 @@ export default {
 
     changeNotFoundTitle() {
       try {
-        this.notFoundComponentTitle = this.strategyForNotFoundComponentTitle[
-          this.selectedId
-        ]();
+        this.notFoundComponentTitle =
+          this.strategyForNotFoundComponentTitle[this.selectedId]();
       } catch (error) {
         this.notFoundComponentTitle = "";
       }
@@ -1986,7 +1897,8 @@ export default {
           break;
 
         case "MC":
-          this.selectcategories = this.Mayor_councils_filters_and_public_institution;
+          this.selectcategories =
+            this.Mayor_councils_filters_and_public_institution;
 
           break;
 
@@ -2054,8 +1966,38 @@ export default {
 
       this.$refs["myfilters"].show();
     },
+    getFilter() {
+      this.subFilters = [];
+      this.$store
+        .dispatch("marketSearch/getFilter", this.subCatChose.id)
+        .then((res) => {
+          this.$store.commit("marketSearch/setSubFilters", res.data.data);
+          this.subFilters = res.data.data;
+          console.log("filter:", res.data.data);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    },
+    searchFilter() {
+      console.log(this.catChose);
+      var catId = this.catChose ? this.catChose.category.id : "";
+      var subCatId = this.subCatChose ? this.subCatChose.id : "";
+      var filterId = this.filterChose ? this.filterChose : "";
+      var data = { cat_id: catId, sub_cat: subCatId, filter_id: filterId };
+      if (this.selectedId == 4) {
+        this.searchProducts(data);
+      } else if (this.selectedId == 1) {
+        this.searchBusiness(data);
+      } else if (this.selectedId == 0) {
+        this.allSearchByCat(data);
+      }
 
+      this.$bvModal.hide("myModall");
+    },
     getCategory(value) {
+      console.log("value:", value);
+
       this.Selectedcategory = value;
 
       if (this.selectedId == 4) {

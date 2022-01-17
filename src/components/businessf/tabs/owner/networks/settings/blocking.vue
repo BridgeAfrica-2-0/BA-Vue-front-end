@@ -181,11 +181,11 @@ export default {
      
     UnblockUser(blockuser) {
       this.loading = true;
-      console.log("UnblockUser"+this.url+"/"+blockuser.id);
+      console.log("unblocked-user/"+this.url+"/"+blockuser.id);
       this.$store
       .dispatch("NetworkSettings/UnBlock", 
       {
-        path: "users/unblocked/"+this.url+"/"+blockuser.id,
+        path: "unblocked-user/"+this.url+"/"+blockuser.id,
       })
 			.then(response => {
 			  console.log(response);
@@ -207,11 +207,11 @@ export default {
     },
     UnblockNetwork(blocknetwork) {
       this.loading = true;
-      console.log("business/unblocking/"+this.url+"/"+blocknetwork.id);
+      console.log("unblocked-network/"+this.url+"/"+blocknetwork.id);
       this.$store
       .dispatch("NetworkSettings/UnBlock", 
       {
-        path: "network-banned/unblocked/"+this.url+"/"+blocknetwork.id,
+        path: "unblocked-network/"+this.url+"/"+blocknetwork.id,
       })
 			.then(response => {
 			  console.log(response);
@@ -233,11 +233,11 @@ export default {
     },
     UnblockBusines(blockbusines) {
       this.loading = true;
-      console.log("business/unblocking/"+this.url+"/"+blockbusines.id);
+      console.log("unblocked-business/"+this.url+"/"+blockbusines.id);
       this.$store
       .dispatch("NetworkSettings/UnBlock", 
       {
-        path: "business-banned/unblocked/"+this.url+"/"+blockbusines.id,
+        path: "unblocked-business/"+this.url+"/"+blockbusines.id,
       })
 			.then(response => {
 			  console.log(response);

@@ -211,7 +211,7 @@
                               <b-modal
                                 id="modal-10"
                                 ref="modal-10"
-                                title="$t('settings.Edit_your_information_here')"
+                                :title="$t('settings.Edit_your_information_here')"
                                 hide-footer
                               >
                                 <form>
@@ -273,7 +273,7 @@
                                     ></b-form-select>
                                   </div>
                                   <div class="mb-3">
-                                    {{ $t("settings.Region ") }}
+                                    {{ $t("settings.Region") }}
                                     <b-form-select
                                       v-model="selectedRegion"
                                       :options="region"
@@ -391,7 +391,7 @@
                 <Payment :profileId="getUserInfos.id" />
               </b-tab>
 
-              <b-tab title="Blocking">
+              <b-tab :title="$t('settings.Blocking')">
                 <Blocking :profileId="getUserInfos.id" />
               </b-tab>
 

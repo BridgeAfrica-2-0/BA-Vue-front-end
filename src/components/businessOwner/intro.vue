@@ -189,7 +189,7 @@
 
            <b-form-group
             id="input-group-2"
-            label="website"
+            :label="$t('businessowner.website')"
             label-for="input-2"
             label-size="sm"
             class=""
@@ -204,7 +204,7 @@
 
           <b-form-group
             id="input-group-2"
-            label="address"
+            :label="$t('businessowner.address')"
             label-for="input-2"
             label-size="sm"
             class=""

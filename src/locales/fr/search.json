@@ -88,7 +88,7 @@
     "Share_to_network": "Partager vers le réseau",
     "Share_Post_As": "Partager la publication comme",
     "Send_Inbox": "Envoyer la boîte de réception",
-    "Share_business": "Partager l'entreprise",
+    "Share_business": "Partager à l'entreprise",
     "Search_for_business": "Rechercher une entreprise",
     "Share": "Partager",
     "Share_to_your_Profile": "Partager avec votre profil",
@@ -139,5 +139,6 @@
     "Pending_Post": "Publication en attente",
     "Insight": "Apperçu",
     "Settings": "Paramètres",
-    "Copy_link":"Copier le lien"
+    "Copy_link":"Copier le lien",
+    "All_business":"Toutes les entreprises"
 }

@@ -43,13 +43,13 @@
                   @click="showEditNetwork(network)"
                   v-b-modal.updateBusinessModal
                   variant=""
-                  >Edit</b-dropdown-item
+                  >{{$t("profileowner.Edit")}}</b-dropdown-item
                 >
                 <b-dropdown-item
                  @click="selectNetwork(network)"
                  v-b-modal.deleteBusinessModal
                  no-stacking
-                >Delete</b-dropdown-item>
+                >{{$t("profileowner.Delete")}}</b-dropdown-item>
               </b-dropdown>
             </div>
 
@@ -131,14 +131,14 @@
       </div>
       <div class="mx-auto text-center my-5" v-else>
         <p class="my-2" v-if="!networks.length">
-          No network found
+          {{$t("profileowner.No_network_found")}}
         </p>
       </div>
     </div>
 
     <b-modal
       hide-footer
-      :title="editNet ? $t('profileowner.Edit_network') : $t('profileowner.Add_Network')"
+      :title="editNet ? $t('profileowner.Edit_Network') : $t('profileowner.Add_Network')"
       size="lg"
       v-model="showModal"
       ref="netmodal"

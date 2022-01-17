@@ -11,7 +11,7 @@
     "Update": "Mettre à jour",
     "Upload_image": "Télécharger l'Image",
     "Custom_Album_1": "Album personnalisé 1",
-    "Edit_Name": "Modifier Nom",
+    "Edit_Name": "Modifier le Nom",
     "Delete_Album": "Supprimer l'Album",
     "14_Items": "14 élements",
     "Public": "Public",
@@ -201,7 +201,7 @@
     "People_I_Am_Following": "Mes abonnements",
     "Upoad_Image": "Télécharger l'image",
     "Albums": "Albums",
-    "Edit_Network": "Modifie run réseau",
+    "Edit_Network": "Modifier un réseau",
     "Add_Movie": "Ajouter un film",
     "Add_Hyperlink": "Ajouter un pyperlien",
     "Update_Post": "Metre à jour la publication",
@@ -266,6 +266,7 @@
     "Business_Delete":"Suppression de l'entreprise",
     "Add_Bussiness": "Ajouter une entreprise",
     "Add_business": "Ajouter une entreprise",
-    "Unable_to_update_Your_Business": "Impossible de mettre à jour votre entreprise"
+    "Unable_to_update_Your_Business": "Impossible de mettre à jour votre entreprise",
+    "No_network_found":"Aucun réseau trouvé"
 
 }

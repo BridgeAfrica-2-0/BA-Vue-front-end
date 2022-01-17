@@ -133,12 +133,7 @@
       <b-overlay :show="show" rounded="sm">
         <div class="row">
           <div class="col-12 col-sm-12 col-md-8">
-            <b-form-input
-              placeholder="237 6XX XXX XXX"
-              id="number"
-              v-model="PaymentForm.phone"
-              type="tel"
-            ></b-form-input>
+            <VuePhoneNumberInput id="number" default-country-code="CM" v-model="PaymentForm.phone" placeholder="237 6XX XXX XXX" required/>
           </div>
           <div
             class="col-12 col-sm-12 col-md-4 px-0 btn-custom-box mt-2 mt-md-0"
@@ -157,9 +152,14 @@
 </template>
 
 <script>
+import VuePhoneNumberInput from "vue-phone-number-input";
+import "vue-phone-number-input/dist/vue-phone-number-input.css";
 export default {
   name: "payment",
   props: ["profileId"],
+  components: {
+    VuePhoneNumberInput,
+  },
   data() {
     return {
       url: null,

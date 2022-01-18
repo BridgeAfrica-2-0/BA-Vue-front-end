@@ -39,7 +39,7 @@
           <div class="cercle2">3</div>
 
           <h2 class="h2 text-position text-center">
-            {{ $t("businessowner.re_shedule") }}
+            {{ $t("businessowner.Reshedule") }}
           </h2>
         </div>
         <div id="m4" class="mobile2 col t" @click="changeElementType(4)">
@@ -73,7 +73,7 @@
               ></b-form-select>
             </div>
           </div>
-          <div v-for="(item, index) in getAll" :key="index">
+          <div v-for="(item, index) in orders" :key="index">
             <div class="justify-content-start container row marghr">
               <div class="justify-content-start container">
                 <div class="container d-flex justify-content-end btn-marg">
@@ -190,374 +190,16 @@
           </div>
         </div>
 
-        <div v-if="status == 2" class="inprogress">
-          <div class="show row">
-            <div class="col-3">{{ $t("businessowner.Show") }}:</div>
-            <div class="col">
-              <b-form-select
-                v-model="selected"
-                :options="options"
-              ></b-form-select>
-            </div>
-          </div>
-          <div v-for="(item, index) in getProcess" :key="index">
-            <div class="justify-content-start container row marghr">
-              <div class="justify-content-start container">
-                <div class="container d-flex justify-content-end btn-marg">
-                  <div class="manage">
-                    <b-dropdown
-                      variant="ligth"
-                      id="dropdown-1"
-                      text="Manage"
-                      class="m-md-2"
-                    >
-                      <b-dropdown-item>{{
-                        $t("businessowner.Archive")
-                      }}</b-dropdown-item>
 
-                      <b-dropdown-item>{{
-                        $t("businessowner.shipped")
-                      }}</b-dropdown-item>
-                      <b-dropdown-item @click="updateStatus(9, 'cancel')">{{
-                        $t("businessowner.Delete")
-                      }}</b-dropdown-item>
-                      <b-dropdown-item @click="updateStatus(9, 're-shedule')">{{
-                        $t("businessowner.Reshedule")
-                      }}</b-dropdown-item>
-                    </b-dropdown>
-                  </div>
-                </div>
-                <span class="gras">{{ $t("businessowner.Order") }}</span>
-                <span class="text-success order">#{{ item.oderId }}</span>
-                <br />
-                <span class="flou">
-                  {{ moment(item.dateCreated).format("DD/MM/YYYY HH:mm") }}
-                </span>
-              </div>
 
-              <span class="row posstatus">
-                <p class="h3 statusp">{{ $t("businessowner.Status") }}:</p>
-                <h3 class="text-success h3 margstatus">{{ item.status }}</h3>
-              </span>
-            </div>
-            <hr />
 
-            <div class="justify-content-center row">
-              <div class="col-4 margimg">
-                <splide :options="{ rewind: true }" class="r-img1">
-                  <splide-slide
-                    cl
-                    v-for="(im, index) in item.productImg"
-                    :key="index"
-                  >
-                    <img :src="item.productImg[index]" class="r-img1" />
-                  </splide-slide>
-                </splide>
-              </div>
 
-              <div class="col-4 text-end">
-                <h3 class="h3 margm2">
-                  {{ $t("businessowner.Product_Qte") }} :
-                </h3>
-                <h3 class="h3 margm2">{{ $t("businessowner.Price") }}:</h3>
 
-                <h3 class="h3 margm2">
-                  {{ $t("businessowner.Shipping Cost") }}:
-                </h3>
-                <h3 class="h3 margm2">{{ $t("businessowner.Total") }} :</h3>
-              </div>
 
-              <div class="col-4">
-                <h3 class="h3">{{ item.Totalproduct }}</h3>
 
-                <h3 class="h3">{{ item.Totalprice }} XAF</h3>
-                <h3 class="h3">{{ item.shippingCost }} XAF</h3>
-                <h3 class="h3">{{ item.total }} XAF</h3>
-              </div>
-            </div>
 
-            <div class="justify-content-center container row">
-              <br />
-            </div>
 
-            <div class="justify-content-center container row">
-              <div class="">
-                <button
-                  @click="updateStatus(9, 'shipped')"
-                  class="buttonm btn shadow text-center"
-                >
-                  <h3 class="h3 button-text">
-                    {{ $t("businessowner.Shipped") }}
-                  </h3>
-                </button>
-              </div>
-            </div>
-            <div class="justify-content-center container row">
-              <br />
-              <br />
-            </div>
-            <!-- <hr /> -->
-          </div>
-          <div class="overflow-auto">
-            <div>
-              <h6 class="text-center">
-                {{ $t("businessowner.Pages") }} {{ currentPage }}
-              </h6>
-              <b-pagination
-                @input="getpage"
-                v-model="currentPage"
-                pills
-                :total-rows="rows"
-                :per-page="perPage"
-                align="center"
-                size="sm"
-              ></b-pagination>
-            </div>
-          </div>
-        </div>
 
-        <div v-if="status == 3" class="complete">
-          <div class="show row">
-            <div class="col-3">{{ $t("businessowner.Show") }}:</div>
-            <div class="col">
-              <b-form-select
-                v-model="selected"
-                :options="options"
-              ></b-form-select>
-            </div>
-          </div>
-          <div v-for="(item, index) in getReshedule" :key="index">
-            <div class="justify-content-start container row marghr">
-              <div class="justify-content-start container">
-                <div class="container d-flex justify-content-end btn-marg">
-                  <div class="manage">
-                    <b-dropdown
-                      variant="ligth"
-                      id="dropdown-1"
-                      text="Manage"
-                      class="m-md-2"
-                    >
-                      <b-dropdown-item>{{
-                        $t("businessowner.Delete")
-                      }}</b-dropdown-item>
-                      <b-dropdown-item>{{
-                        $t("businessowner.shipped")
-                      }}</b-dropdown-item>
-                      <b-dropdown-item>{{
-                        $t("businessowner.Reshedule")
-                      }}</b-dropdown-item>
-                      <b-dropdown-item @click="updateStatus(9, 'cancel')">{{
-                        $t("businessowner.Delete")
-                      }}</b-dropdown-item>
-                      <b-dropdown-item @click="updateStatus(9, 're-shedule')">{{
-                        $t("businessowner.Reshedule")
-                      }}</b-dropdown-item>
-                    </b-dropdown>
-                  </div>
-                </div>
-                <span class="gras">{{ $t("businessowner.Order") }}</span>
-                <span class="text-success order">#{{ item.oderId }}</span>
-                <br />
-                <span class="flou">
-                  {{ moment(item.dateCreated).format("DD/MM/YYYY HH:mm") }}
-                </span>
-              </div>
-
-              <span class="row posstatus">
-                <p class="h3 statusp">{{ $t("businessowner.Status") }}:</p>
-                <h3 class="text-success h3 margstatus">{{ item.status }}</h3>
-              </span>
-            </div>
-            <hr />
-
-            <div class="justify-content-center row">
-              <div class="col-4 margimg">
-                <splide :options="{ rewind: true }" class="r-img1">
-                  <splide-slide
-                    cl
-                    v-for="(im, index) in item.productImg"
-                    :key="index"
-                  >
-                    <img :src="item.productImg[index]" class="r-img1" />
-                  </splide-slide>
-                </splide>
-              </div>
-
-              <div class="col-4 text-end">
-                <h3 class="h3 margm2">
-                  {{ $t("businessowner.Product_Qte") }} :
-                </h3>
-                <h3 class="h3 margm2">{{ $t("businessowner.Price") }}:</h3>
-
-                <h3 class="h3 margm2">
-                  {{ $t("businessowner.Shipping Cost") }}:
-                </h3>
-                <h3 class="h3 margm2">{{ $t("businessowner.Total") }} :</h3>
-              </div>
-
-              <div class="col-4">
-                <h3 class="h3">{{ item.Totalproduct }}</h3>
-
-                <h3 class="h3">{{ item.Totalprice }} XAF</h3>
-                <h3 class="h3">{{ item.shippingCost }} XAF</h3>
-                <h3 class="h3">{{ item.total }} XAF</h3>
-              </div>
-            </div>
-
-            <div class="justify-content-center container row">
-              <br />
-            </div>
-
-            <div class="justify-content-center container row">
-              <div class="">
-                <button
-                  @click="updateStatus(9, 'shipped')"
-                  class="buttonm btn shadow text-center"
-                >
-                  <h3 class="h3 button-text">
-                    {{ $t("businessowner.Shipped") }}
-                  </h3>
-                </button>
-              </div>
-            </div>
-            <div class="justify-content-center container row">
-              <br />
-              <br />
-            </div>
-            <!-- <hr /> -->
-          </div>
-
-          <div class="overflow-auto">
-            <div>
-              <h6 class="text-center">
-                {{ $t("businessowner.Pages") }} {{ currentPage }}
-              </h6>
-              <b-pagination
-                @input="getpage"
-                v-model="currentPage"
-                pills
-                :total-rows="rows"
-                :per-page="perPage"
-                align="center"
-                size="sm"
-              ></b-pagination>
-            </div>
-          </div>
-        </div>
-
-        <div v-if="status == 4" class="cancel">
-          <div class="show row">
-            <div class="col-3">{{ $t("businessowner.Show") }}:</div>
-            <div class="col">
-              <b-form-select
-                v-model="selected"
-                :options="options"
-              ></b-form-select>
-            </div>
-          </div>
-          <div v-for="(item, index) in getShipped" :key="index">
-            <div class="justify-content-start container row marghr">
-              <div class="justify-content-start container">
-                <div class="container d-flex justify-content-end btn-marg">
-                  <div class="manage">
-                    <b-dropdown
-                      variant="ligth"
-                      id="dropdown-1"
-                      text="Manage"
-                      class="m-md-2"
-                    >
-                      <b-dropdown-item @click="updateStatus(9, 'archive')">{{
-                        $t("businessowner.Archive")
-                      }}</b-dropdown-item>
-                      <b-dropdown-item @click="updateStatus(9, 'cancel')">{{
-                        $t("businessowner.Delete")
-                      }}</b-dropdown-item>
-                      <b-dropdown-item>{{
-                        $t("businessowner.shipped")
-                      }}</b-dropdown-item>
-                      <b-dropdown-item>{{
-                        $t("businessowner.Reshedule")
-                      }}</b-dropdown-item>
-                    </b-dropdown>
-                  </div>
-                </div>
-                <span class="gras">{{ $t("businessowner.Order") }}</span>
-                <span class="text-success order">#{{ item.oderId }}</span>
-                <br />
-                <span class="flou">
-                  {{ moment(item.dateCreated).format("DD/MM/YYYY HH:mm") }}
-                </span>
-              </div>
-
-              <span class="row posstatus">
-                <p class="h3 statusp">{{ $t("businessowner.Status") }}:</p>
-                <h3 class="text-success h3 margstatus">{{ item.status }}</h3>
-              </span>
-            </div>
-            <hr />
-
-            <div class="justify-content-center row">
-              <div class="col-4 margimg">
-                <splide :options="{ rewind: true }" class="r-img1">
-                  <splide-slide
-                    cl
-                    v-for="(im, index) in item.productImg"
-                    :key="index"
-                  >
-                    <img :src="item.productImg[index]" class="r-img1" />
-                  </splide-slide>
-                </splide>
-              </div>
-
-              <div class="col-4 text-end">
-                <h3 class="h3 margm2">
-                  {{ $t("businessowner.Product_Qte") }} :
-                </h3>
-                <h3 class="h3 margm2">{{ $t("businessowner.Price") }}:</h3>
-
-                <h3 class="h3 margm2">
-                  {{ $t("businessowner.Shipping Cost") }}:
-                </h3>
-                <h3 class="h3 margm2">{{ $t("businessowner.Total") }} :</h3>
-              </div>
-
-              <div class="col-4">
-                <h3 class="h3">{{ item.Totalproduct }}</h3>
-
-                <h3 class="h3">{{ item.Totalprice }} XAF</h3>
-                <h3 class="h3">{{ item.shippingCost }} XAF</h3>
-                <h3 class="h3">{{ item.total }} XAF</h3>
-              </div>
-            </div>
-
-            <div class="justify-content-center container row">
-              <br />
-            </div>
-
-            <div class="justify-content-center container row">
-              <br />
-              <br />
-            </div>
-            <!-- <hr /> -->
-          </div>
-
-          <div class="overflow-auto">
-            <div>
-              <h6 class="text-center">
-                {{ $t("businessowner.Pages") }} {{ currentPage }}
-              </h6>
-              <b-pagination
-                @input="getpage"
-                v-model="currentPage"
-                pills
-                :total-rows="rows"
-                :per-page="perPage"
-                align="center"
-                size="sm"
-              ></b-pagination>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
     <div class="justify-content-between row"></div>
@@ -663,7 +305,7 @@
               ></b-form-select>
             </div>
           </div>
-          <div v-for="item in getAll" :key="item.oderId">
+          <div v-for="item in orders" :key="item.oderId">
             <div class="justify-content-start container">
               <div class="container d-flex justify-content-end btn-marg">
                 <div class="manage">
@@ -771,338 +413,9 @@
           </div>
         </div>
 
-        <div v-if="status == 2" class="inprogress">
-          <div class="show row">
-            <div class="col-3">{{ $t("businessowner.Show") }}:</div>
-            <div class="col">
-              <b-form-select
-                v-model="selected"
-                :options="options"
-              ></b-form-select>
-            </div>
-          </div>
 
-          <div v-for="(item, index) in getProcess" :key="index">
-            <div class="justify-content-start container">
-              <div class="container d-flex justify-content-end btn-marg">
-                <div class="manage">
-                  <b-dropdown
-                    variant="ligth"
-                    id="dropdown-1"
-                    text="Manage"
-                    class="m-md-2"
-                  >
-                    <b-dropdown-item @click="updateStatus(9, 'cancel')">{{
-                      $t("businessowner.Delete")
-                    }}</b-dropdown-item>
-                    <b-dropdown-item @click="updateStatus(9, 're-shedule')">{{
-                      $t("businessowner.Reshedule")
-                    }}</b-dropdown-item>
-
-                    <b-dropdown-item>{{
-                      $t("businessowner.shipped")
-                    }}</b-dropdown-item>
-                    <b-dropdown-item>{{
-                      $t("businessowner.Reshedule")
-                    }}</b-dropdown-item>
-                  </b-dropdown>
-                </div>
-              </div>
-              <span class="gras">{{ $t("businessowner.Order") }}</span>
-              <span class="text-success"># {{ item.oderId }}</span> <br />
-
-              <span class="flou">
-                {{ moment(item.dateCreated).format("DD/MM/YYYY HH:mm") }}</span
-              >
-
-              <hr />
-            </div>
-
-            <div class="justify-content-between row">
-              <div class="col-3">
-                <splide :options="{ rewind: true }" class="r-img">
-                  <splide-slide
-                    cl
-                    v-for="(im, index) in item.productImg"
-                    :key="index"
-                  >
-                    <img :src="item.productImg[index]" class="r-img" />
-                  </splide-slide>
-                </splide>
-              </div>
-
-              <div class="col-2 text-end text-start bold">
-                <h3>{{ $t("businessowner.Product_Qte") }} :</h3>
-                <h3>{{ $t("businessowner.Price") }} :</h3>
-
-                <h3>{{ $t("businessowner.Shipping Cost") }}:</h3>
-                <h3>{{ $t("businessowner.Total") }} :</h3>
-              </div>
-
-              <div class="col-3 text-start">
-                <h3>{{ item.Totalproduct }}</h3>
-                <h3>{{ item.Totalprice }} XAF</h3>
-                <h3>{{ item.shippingCost }} XAF</h3>
-                <h3>{{ item.total }} XAF</h3>
-              </div>
-
-              <div class="col" id="hidedesktop1">
-                <h3 class="bold1">{{ $t("businessowner.status") }}</h3>
-                <h3 class="text-success">{{ item.status }}</h3>
-              </div>
-
-              <div class="container d-flex justify-content-end btn-marg">
-                <button
-                  @click="updateStatus(9, 'shipped')"
-                  class="button btn shadow"
-                >
-                  <h3 class="h3 button-text">
-                    {{ $t("businessowner.Shipped") }}
-                  </h3>
-                </button>
-              </div>
-
-              <div class="justify-content-center container row">
-                <br />
-              </div>
-
-              <div class="justify-content-center container row">
-                <br />
-              </div>
-            </div>
-          </div>
-          <div class="overflow-auto">
-            <div>
-              <h6 class="text-center">
-                {{ $t("businessowner.Pages") }} {{ currentPage }}
-              </h6>
-              <b-pagination
-                @input="getpage"
-                v-model="currentPage"
-                pills
-                :total-rows="rows"
-                :per-page="perPage"
-                align="center"
-                size="sm"
-              ></b-pagination>
-            </div>
-          </div>
-        </div>
-
-        <div v-if="status == 3" class="complete">
-          <div class="show row">
-            <div class="col-3">{{ $t("businessowner.Show") }}:</div>
-            <div class="col">
-              <b-form-select
-                v-model="selected"
-                :options="options"
-              ></b-form-select>
-            </div>
-          </div>
-
-          <div v-for="(item, index) in getReshedule" :key="index">
-            <div class="justify-content-start container">
-              <div class="container d-flex justify-content-end btn-marg">
-                <div class="manage">
-                  <b-dropdown
-                    variant="ligth"
-                    id="dropdown-1"
-                    text="Manage"
-                    class="m-md-2"
-                  >
-                    <b-dropdown-item @click="updateStatus(9, 'delete')">{{
-                      $t("businessowner.Delete")
-                    }}</b-dropdown-item>
-                    <b-dropdown-item @click="updateStatus(9, 're-shedule')">{{
-                      $t("businessowner.Reshedule")
-                    }}</b-dropdown-item>
-                  </b-dropdown>
-                </div>
-              </div>
-              <span class="gras">{{ $t("businessowner.Order") }}</span>
-              <span class="text-success">#{{ item.oderId }}</span> <br />
-
-              <span class="flou"
-                >,
-                {{ moment(item.dateCreated).format("DD/MM/YYYY HH:mm") }}</span
-              >
-
-              <hr />
-            </div>
-
-            <div class="justify-content-between row">
-              <div class="col-3">
-                <splide :options="{ rewind: true }" class="r-img">
-                  <splide-slide
-                    cl
-                    v-for="(im, index) in item.productImg"
-                    :key="index"
-                  >
-                    <img :src="item.productImg[index]" class="r-img" />
-                  </splide-slide>
-                </splide>
-              </div>
-
-              <div class="col-2 text-end text-start bold">
-                <h3>{{ $t("businessowner.Product_Qte") }} :</h3>
-                <h3>{{ $t("businessowner.Price") }} :</h3>
-
-                <h3>{{ $t("businessowner.Shipping Cost") }}:</h3>
-                <h3>{{ $t("businessowner.Total") }} :</h3>
-              </div>
-
-              <div class="col-3 text-start">
-                <h3>{{ item.Totalproduct }}</h3>
-                <h3>{{ item.Totalprice }} XAF</h3>
-                <h3>{{ item.shippingCost }} XAF</h3>
-                <h3>{{ item.total }} XAF</h3>
-              </div>
-
-              <div class="col" id="hidedesktop1">
-                <h3 class="bold1">{{ $t("businessowner.status") }}</h3>
-                <h3 class="text-success">{{ item.status }}</h3>
-              </div>
-
-              <div class="container d-flex justify-content-end btn-marg">
-                <button
-                  @click="updateStatus(9, 'shipped')"
-                  class="button btn shadow"
-                >
-                  <h3 class="h3 button-text">
-                    {{ $t("businessowner.Shipped") }}
-                  </h3>
-                </button>
-              </div>
-
-              <div class="justify-content-cetatenter container row">
-                <br />
-              </div>
-
-              <div class="justify-content-center container row">
-                <br />
-              </div>
-            </div>
-          </div>
-
-          <div class="overflow-auto">
-            <div>
-              <h6 class="text-center">
-                {{ $t("businessowner.Pages") }} {{ currentPage }}
-              </h6>
-              <b-pagination
-                @input="getpage"
-                v-model="currentPage"
-                pills
-                :total-rows="rows"
-                :per-page="perPage"
-                align="center"
-                size="sm"
-              ></b-pagination>
-            </div>
-          </div>
-        </div>
-
-        <div v-if="status == 4" class="canel">
-          <div class="show row">
-            <div class="col-3">{{ $t("businessowner.Show") }}:</div>
-            <div class="col">
-              <b-form-select
-                v-model="selected"
-                :options="options"
-              ></b-form-select>
-            </div>
-          </div>
-
-          <div v-for="(item, index) in getShipped" :key="index">
-            <div class="justify-content-start container">
-              <div class="container d-flex justify-content-end btn-marg">
-                <div class="manage">
-                  <b-dropdown
-                    variant="ligth"
-                    id="dropdown-1"
-                    text="Manage"
-                    class="m-md-2"
-                  >
-                    <b-dropdown-item @click="updateStatus(9, 'archive')">{{
-                      $t("businessowner.Archive")
-                    }}</b-dropdown-item>
-                    <b-dropdown-item @click="updateStatus(9, 'cancel')">{{
-                      $t("businessowner.Delete")
-                    }}</b-dropdown-item>
-                  </b-dropdown>
-                </div>
-              </div>
-              <span class="gras">{{ $t("businessowner.Order") }}</span>
-              <span class="text-success"># {{ item.oderId }}</span> <br />
-
-              <span class="flou"
-                >,
-                {{ moment(item.dateCreated).format("DD/MM/YYYY HH:mm") }}</span
-              >
-
-              <hr />
-            </div>
-
-            <div class="justify-content-between row">
-              <div class="col-3">
-                <splide :options="{ rewind: true }" class="r-img">
-                  <splide-slide
-                    cl
-                    v-for="(im, index) in item.productImg"
-                    :key="index"
-                  >
-                    <img :src="item.productImg[index]" class="r-img" />
-                  </splide-slide>
-                </splide>
-              </div>
-
-              <div class="col-2 text-end text-start bold">
-                <h3>{{ $t("businessowner.Product_Qte") }} :</h3>
-                <h3>{{ $t("businessowner.Price") }} :</h3>
-
-                <h3>{{ $t("businessowner.Shipping Cost") }}:</h3>
-                <h3>{{ $t("businessowner.Total") }} :</h3>
-              </div>
-
-              <div class="col-3 text-start">
-                <h3>{{ item.Totalproduct }}</h3>
-                <h3>{{ item.Totalprice }} XAF</h3>
-                <h3>{{ item.shippingCost }} XAF</h3>
-                <h3>{{ item.total }} XAF</h3>
-              </div>
-
-              <div class="col" id="hidedesktop1">
-                <h3 class="bold1">{{ $t("businessowner.status") }}</h3>
-                <h3 class="text-success">{{ item.status }}</h3>
-              </div>
-
-              <div class="justify-content-center container row">
-                <br />
-              </div>
-
-              <div class="justify-content-center container row">
-                <br />
-              </div>
-            </div>
-          </div>
-
-          <div class="overflow-auto">
-            <div>
-              <h6 class="text-center">
-                {{ $t("businessowner.Pages") }} {{ currentPage }}
-              </h6>
-              <b-pagination
-                @input="getpage"
-                v-model="currentPage"
-                pills
-                :total-rows="rows"
-                :per-page="perPage"
-                align="center"
-                size="sm"
-              ></b-pagination>
-            </div>
-          </div>
-        </div>
+         
+        
       </div>
     </div>
   </div>
@@ -1134,12 +447,9 @@ export default {
     };
   },
 
-  mounted() {
+  mounted() { 
+    console.log('mounted business orders compoments');
     this.url = this.$route.params.id;
-    //  let url =  window.location.href.split("/");
-    //  let data = url[window.location.href.split("/").length - 1];
-    //  console.log(data);
-
     this.getOrder("");
   },
 
@@ -1150,20 +460,20 @@ export default {
 
       if (p == 1) {
         this.etat = "All";
-        this.rows = this.limitall;
+       
 
         this.currentPage = 1;
       } else if (p == 2) {
         this.etat = "In process";
-        this.rows = this.limitprocess;
+       
         this.currentPage = 1;
       } else if (p == 3) {
         this.etat = "Re-shedule";
-        this.rows = this.limitshedule;
+      
         this.currentPage = 1;
       } else if (p == 4) {
         this.etat = "Shipped";
-        this.rows = this.limitshipped;
+       
         this.currentPage = 1;
       }
       //transition partie desktop
@@ -1191,10 +501,12 @@ export default {
       });
       el.classList.add("green");
     },
+
     getpage() {
       let start = this.getCurrentpage * this.perPage;
       console.log(this.getCurrentpage);
     },
+    
 
     getOrder(status) {
     
@@ -1203,7 +515,7 @@ export default {
       
       
       this.$store
-        .dispatch("orderBusiness/getOrder", {id:biz_id, status:status})
+        .dispatch("orderBusiness/getOrder", {id:biz_id, status:status, page:1 })
         .then(() => {
           console.log("hey yeah orders");
 
@@ -1251,50 +563,16 @@ export default {
       return this.currentPage;
     },
 
-    getAll() {
-      let start = this.getCurrentpage * this.perPage;
-      return this.$store.state.orderBusiness.all.slice(
-        start - this.perPage,
-        start - this.perPage + this.perPage
-      );
-    },
-    getProcess() {
-      let start = this.getCurrentpage * this.perPage;
-      return this.$store.getters["orderBusiness/process"].slice(
-        start - this.perPage,
-        start - this.perPage + this.perPage
-      );
+    orders() {
+      
+      return this.$store.state.orderBusiness.orders;
+       
     },
 
-    getReshedule() {
-      let start = this.getCurrentpage * this.perPage;
-      return this.$store.getters["orderBusiness/reshedule"].slice(
-        start - this.perPage,
-        start - this.perPage + this.perPage
-      );
-    },
-    getShipped() {
-      let start = this.getCurrentpage * this.perPage;
-      return this.$store.getters["orderBusiness/shipped"].slice(
-        start - this.perPage,
-        start - this.perPage + this.perPage
-      );
-    },
 
-    limitall() {
-      return this.$store.state.orderBusiness.all.length;
-    },
+    
+    
 
-    limitprocess() {
-      return this.$store.getters["orderBusiness/process"].length;
-    },
-
-    limitshedule() {
-      return this.$store.getters["orderBusiness/reshedule"].length;
-    },
-    limitshipped() {
-      return this.$store.getters["orderBusiness/shipped"].length;
-    },
   },
 };
 </script>

@@ -114,7 +114,7 @@
               />
 
               <slot name="button">
-                <Button @click.native="getKeyword" />
+                <Button @click.native="getKeyword" media='desktop' />
               </slot>
             </form>
           </span>

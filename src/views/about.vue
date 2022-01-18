@@ -879,6 +879,12 @@ export default {
   width: 100%;
   height: 700px;
   object-fit: cover;
+  margin-top: -8px;
+}
+
+.pl-md-0, .px-md-0 {
+    
+    margin-top: 14px;
 }
 .specific-heading {
   font-size: 24px;
@@ -1098,6 +1104,11 @@ export default {
   -webkit-transition: 0.3s ease-in-out;
   transition: 0.3s ease-in-out;
 }
+
+.mt-md-4, .my-md-4 {
+    margin-top: 0rem !important;
+}
+
 @media only screen and (max-width: 660px) {
   .header-img-text {
     font-size: 27px;

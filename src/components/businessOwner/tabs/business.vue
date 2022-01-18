@@ -28,7 +28,7 @@
 
                 <span class="location">
                   <b-icon-geo-alt class="ico"></b-icon-geo-alt
-                  >{{ item.country }}
+                  >{{ item.city }}
                 </span>
                 <br />
                 <read-more

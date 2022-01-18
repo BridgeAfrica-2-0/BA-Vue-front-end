@@ -163,6 +163,19 @@ export default {
   methods: {
 
      
+
+        businessCommunityTotal() {
+      this.$store
+        .dispatch("businessOwner/businessCommunityTotal", this.biz_id)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+
   BlockUser(id, index) {
 
      let dataInfo = {
@@ -181,7 +194,7 @@ export default {
         })
       .then(response => {
         
-      
+      this.businessCommunityTotal();
         this.$delete(this.users,index);
         console.log("user deleted");
 
@@ -241,6 +254,7 @@ export default {
       await axios
         .post(uri, data)
         .then(({ data }) => {
+          this.businessCommunityTotal();
           console.log(data);
           user.is_follow = nextFollowState;
           document.getElementById("followbtn" + user.id).disabled = false;

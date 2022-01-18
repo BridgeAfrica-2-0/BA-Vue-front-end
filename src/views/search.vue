@@ -622,10 +622,10 @@ export default {
   created() {
     this.islogin = this.$store.getters["auth/isLogged"];
 
-    console.log(this.islogin);
 
-    if (this.$route.query.keyword)
+    if (this.$route.query.keyword){
       this.searchParams.keyword = this.$route.query.keyword;
+    }
 
     this.onProcessQuery();
 

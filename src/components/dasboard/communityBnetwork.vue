@@ -13,9 +13,13 @@
                 <img :src="item.picture" class="r-image" />
               </div>
             </b-col>
+            
             <b-col md="5" cols="7" lg="7" xl="5" sm="5">
               <p class="textt">
-                <strong class="net-title"> {{ item.name }} </strong> <br />
+                <router-link :to="'network/' + item.id">
+                  {{ item.name }}
+                </router-link>
+                <br />
                 {{ item.category }}
                 <br />
                 {{ item.followers }} {{ $t("dashboard.Community") }} <br />

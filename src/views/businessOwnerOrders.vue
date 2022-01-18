@@ -16,7 +16,7 @@
           @click="changeElementType(1)"
         >
           <div class="cercle1">1</div>
-          <h2 class="h2 text-position">{{ $t("businessowner.All") }}</h2>
+          <h2 class="h2 text-position">{{ $t("businessowner.All") }}</h2>  
         </div>
 
         <div
@@ -1140,7 +1140,7 @@ export default {
     //  let data = url[window.location.href.split("/").length - 1];
     //  console.log(data);
 
-    this.getOrder();
+    this.getOrder("");
   },
 
   methods: {
@@ -1196,18 +1196,14 @@ export default {
       console.log(this.getCurrentpage);
     },
 
-    getOrder(param) {
-      console.log(param);
-      let data = this.$route.params.id;
-      let url = "";
-      if (!param) {
-        url = `/order/getOrderBusiness/${data}/`;
-      } else {
-        url = "order/filtreOrderBusiness/1/" + param + "/";
-      }
-      console.log("---", url);
+    getOrder(status) {
+    
+      let biz_id = this.$route.params.id;
+
+      
+      
       this.$store
-        .dispatch("orderBusiness/getOrder", url)
+        .dispatch("orderBusiness/getOrder", {id:biz_id, status:status})
         .then(() => {
           console.log("hey yeah orders");
 

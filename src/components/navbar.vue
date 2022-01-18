@@ -28,11 +28,9 @@
                   class="input-group-text border-left-0 color-mobile"
                   style="width: 40px; border-right: none"
                 >
-                  <b-icon
-                    icon="search"
-                    style="color: #e75c18"
-                    font-scale="1.5"
-                  ></b-icon>
+                  <slot name="mobile">
+                    <Button @click.native="getKeyword" media="mobile" />
+                  </slot>
                 </span>
               </div>
 
@@ -42,13 +40,15 @@
                 data-toggle="popover"
                 class="form-control search-mobile"
                 style="border-left: none"
-                :placeholder="$t('general.All')"
+                :placeholder="credentials.placeholder"
+                v-model="credentials.keyword"
                 aria-label=""
                 data-original-title=""
                 title=""
                 v-on:click="toggleinput()"
               />
             </b-input-group>
+
 
             <span style="display: none" ref="mobileinput">
               <b-input-group class="b-shadow mt-2">
@@ -332,6 +332,7 @@
                       <Activity class="w-full" />
                     </div>
 
+
                     <a
                       v-if="'user' != user.user_type"
                       @click.prevent="switchToProfile"
@@ -445,6 +446,36 @@
               </div>
             </div>
 
+            <div class="other-menu suggest-item cursor-pointer">
+              <router-link
+                :to="navLink('home')"
+                class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+              >
+                <span class="mr-3"
+                  ><fas-icon
+                    class="violet search"
+                    :icon="['fas', 'home']"
+                /></span>
+                Home
+              </router-link>
+            </div>
+            <hr class="h-divider" />
+
+            <div class="other-menu suggest-item cursor-pointer">
+              <router-link
+                :to="{ name: 'GlobalSearch' }"
+                class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+              >
+                <span class="mr-3"
+                  ><fas-icon
+                    class="violet search"
+                    :icon="['fas', 'shopping-bag']"
+                /></span>
+                {{ $t("general.Market") }}
+              </router-link>
+            </div>
+            <hr class="h-divider" />
+              
             <div
               v-if="'user' != user.user_type"
               @click.prevent="switchToProfile"
@@ -754,7 +785,8 @@ export default {
     },
 
     getKeyword() {
-      if (!this.searchOptions.keyword) return false;
+      console.log(this.credentials.keyword)
+      if (!this.credentials.keyword) return false;
 
       if (this.$route.name != "Search") {
         console.log("the keyword is: ", this.credentials.keyword);

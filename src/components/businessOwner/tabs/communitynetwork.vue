@@ -154,6 +154,17 @@ export default {
 
   methods: {
 
+   businessCommunityTotal() {
+      this.$store
+        .dispatch("businessOwner/businessCommunityTotal", this.biz_id)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
 
       
   BlockUser(id, index) {
@@ -174,7 +185,7 @@ export default {
         })
       .then(response => {
         
-      
+        this.businessCommunityTotal();
         this.$delete(this.network,index);
         console.log("user deleted");
 
@@ -273,6 +284,7 @@ export default {
         .then((response) => {
           user.is_follow = nextFollowState;
           document.getElementById("followbtn" + user.id).disabled = false;
+          this.businessCommunityTotal();
         })
         .catch((err) => {
           console.log(err);

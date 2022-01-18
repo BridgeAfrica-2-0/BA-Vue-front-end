@@ -64,7 +64,7 @@
                 cols="4"
                 class="mt-2 text-center"
               >
-                <b-button variant="primary" @click="AddToCard(prod.id, true)"
+                <b-button variant="primary" @click="buyNow(prod)"
                   ><span> {{ $t("search.Buy_now") }} </span>
                 </b-button>
               </b-col>
@@ -77,7 +77,7 @@
                 cols="4"
                 class="mt-2 text-center"
               >
-                <b-button variant="primary" @click="AddToCard(prod.id)"
+                <b-button variant="primary" @click="AddToCard(prod)"
                   ><span>Add to Cart</span>
                 </b-button>
               </b-col>
@@ -196,8 +196,8 @@ export default {
         });
     },
 
-    buyNow() {
-      this.AddToCard();
+    buyNow(prod) {
+      this.AddToCard(prod);
       this.$router.push({ name: "payment" });
     },
 

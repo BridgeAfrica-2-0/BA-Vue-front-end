@@ -56,6 +56,42 @@ export default {
   },
 
   methods: {
+
+      mapmediae(media) {
+      let mediaarr = [];
+
+      media.forEach((item) => {
+        let type = this.checkMediaType(item.media_type);
+        if (type != 'video') {
+          mediaarr.push(item.media_url);
+        }
+      });
+
+      return mediaarr;
+    },
+
+    getId(video_url) {
+      return this.$youtube.getIdFromUrl(video_url);
+    },
+
+    mapvideo(media) {
+      let mediaarr = [];
+
+      media.forEach((item) => {
+        let type = this.checkMediaType(item.media_type);
+        if (type == 'video') {
+          mediaarr.push(item.media_url);
+        }
+      });
+
+      return mediaarr;
+    },
+
+    checkMediaType(media) {
+      return media.split('/')[0];
+    },
+
+
     infiniteHandler($state) {
       axios
         .get(
@@ -101,7 +137,7 @@ export default {
   computed: {
     imageProfile() {
       return "yoo";
-    },
+    }, 
 
     business_logo() {
       return this.$store.state.businessOwner.businessInfo.logo_path;

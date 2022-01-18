@@ -9,7 +9,7 @@
       </b-col>
 
       <b-col md="8" lg="7" xl="8">
-        <Post />
+        <Post   style="padding-left:70px; padding-right:60px"  />
       </b-col>
     </b-row>
   </div>

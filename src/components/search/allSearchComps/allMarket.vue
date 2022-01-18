@@ -114,36 +114,14 @@ export default {
     buyNow(product) {
       this.handleAddToCard(product);
       this.$router.push({ name: "payment" });
-      //   var dataf = [];
-      //  var data =   {
-      //       produits:{
-      //         data: {
-      //           product_id: this.product.id,
-      //             quantity:1,
-      //             price: this.product.price,
-      //             product_kg: this.product.kg,
-      //             business_id:this.product.business_id,
-      //             sub_total: 20000
-      //         },
-      //     },
-      //     total_amount: this.product.price+this.product.tax_amount,
-      //     tax_amount: this.product.tax_amount,
-
-      // }
-      //   console.log("buy now", data, this.shippingAddress)
-
-      //   this.shippingAddress.map(item =>{
-      //      dataf.push({ ...data, shipping_address: item.id });
-
-      //   })
-      //   console.log("buy now", dataf)
+     
     },
 
     handleAddToCard(product) {
       this.product = product;
       console.log("add to card ", this.product.id);
       this.$store
-        .dispatch("cart/addToCart", this.product.id)
+        .dispatch("cart/addToCart", product)
         .then((response) => {
           this.flashMessage.show({
             status: "success",

@@ -46,8 +46,8 @@
         </b-card>
       </b-col>
 
-      <b-col md="8" lg="7" xl="8">
-        <Post />
+      <b-col md="8" lg="7" xl="8" style="padding-left:70px; padding-right:60px"  >
+        <Post />    
       </b-col>
     </b-row>
   </div>

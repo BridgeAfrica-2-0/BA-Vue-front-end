@@ -35,7 +35,7 @@
             data-toggle="popover"
             class="form-control search-mobile"
             style="border-left: none"
-            placeholder="What are you looking for"
+            :placeholder="$t('home.What_are_you_looking_for')"
             aria-label=""
             data-original-title=""
             title=""
@@ -59,7 +59,7 @@
             data-toggle="popover"
             class="form-control search-mobile"
             style="border-left: none"
-            placeholder="Location"
+            :placeholder="$t('home.Location')"
             aria-label=""
             data-original-title=""
             title=""
@@ -90,7 +90,7 @@
               aria-label=""
               data-original-title=""
               title=""
-              placeholder="What are you looking for"
+              :placeholder="$t('home.What_are_you_looking_for')"
               v-model="credentials.keyword"
             />
 
@@ -101,7 +101,7 @@
               list="browsers"
               data-toggle="popover"
               class="form-control search-h"
-              placeholder="Location"
+              :placeholder="$t('home.Location')"
               aria-label="search bridge africa"
               data-original-title=""
               title=""
@@ -1129,9 +1129,6 @@ export default {
 }
 .taille{
   height: 704px;
-}
-.topbar{
-    /* position: fixed; */
 }
 
   .sizeimg{

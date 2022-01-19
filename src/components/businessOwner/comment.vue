@@ -2,7 +2,7 @@
   <b-row class="my-4 ml-4" @keydown="onEscape">
     <b-col :class="`${proccesEdit ? 'd-flex' : ''}`">
       <b-avatar
-        variant="info"
+        variant="light"
         :src="comment.picture"
         :square="'user' == comment.user_type ? false : true"
         class="avat-comment b-r bg-light"
@@ -96,13 +96,13 @@
           <b-col cols="1">
             <b-avatar
               v-if="(comment.user_type = 'user')"
-              variant="info"
+              variant="light"
               :src="comment.picture"
               class="avat-comment"
             ></b-avatar>
             <b-avatar
               v-else
-              variant="info"
+              variant="light"
               square
               :src="comment.picture"
               class="avat-comment"

@@ -313,10 +313,6 @@
                   <VuePhoneNumberInput default-country-code="CM" v-model="PaymentForm.phone" placeholder="237 6XX XXX XXX" required/>
                 </div>
                 <div class="col-2 col-sm-3 col-md-4 px-0 btn-custom-box">
-                  <!-- <b-button
-                    variant="primary"
-                    class="font-weight-light btn-custom text-14 shadow-sm"
-                  >CHANGE</b-button> -->
                   <b-button
                     variant="primary"
                     class="font-weight-light shadow-sm btn-custom text-14"
@@ -325,15 +321,6 @@
                   >
                 </div>
               </div>
-              <!-- <div class="row my-3">
-                <div class="col btn-custom-box">
-                  <b-button
-                    variant="primary"
-                    class="font-weight-light shadow-sm btn-custom text-14"
-                    @click="confirmPayment"
-                  >PAY {{formatMoney(2000)}}</b-button>
-                </div>
-              </div> -->
               <div class="row my-3">
                 <div class="col body-font-size">
                   <p>

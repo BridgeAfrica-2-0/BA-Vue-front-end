@@ -4,7 +4,7 @@
       <span>
         <h6 class="title m-1">
           <fas-icon class="icons" :icon="['fas', 'hands-helping']" size="lg" />
-          <b> Hot Businesses </b>
+          <b> {{ $t("general.Hot_Businesses") }} </b>
         </h6>
       </span>
 
@@ -84,7 +84,7 @@
                             : 'fa-user-plus'
                         "
                       ></i>
-                      <span class="btn-com">Community</span>
+                      <span class="btn-com">{{ $t("general.Community") }}</span>
                     </b-button>
                   </b-col>
 
@@ -114,7 +114,7 @@
                       variant="primary"
                     >
                       <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
-                      <span class="btn-text">Direction</span>
+                      <span class="btn-text">{{ $t("general.Direction") }}</span>
                     </b-button>
                   </b-col>
                 </b-row>

@@ -202,7 +202,7 @@
     "People_I_Am_Following": "People i am following",
     "Upoad_Image": "Upoad image",
     "Albums": "Albums",
-    "Edit_Network": "Edit network",
+    "Edit_Network": "Edit Network",
     "Add_Movie": "Add movie",
     "Add_Hyperlink": "Add hyperlink",
     "Update_Post": "Update post",
@@ -263,6 +263,7 @@
     "Content_successfuly_uploaded":"Content successfully uploaded",
     "Update_Bussiness":"Update Bussiness",
     "Fiters":"Fiters",
-    "Business_Delete":"Business Delete"
+    "Business_Delete":"Business Delete",
+    "No_network_found":"No network found"
     
 }

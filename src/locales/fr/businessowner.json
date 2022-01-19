@@ -15,7 +15,7 @@
     "Add": "Ajouter",
     "Product_Details": "Détails du Produit",
     "Message": "Message",
-    "Checkout_on_website": "Checkout_on_website",
+    "Checkout_on_website": "Vérification sur le site web",
     "Post_a_Comment": "Publier un commentaire",
     "Product_Detail": "Détail du Produit",
     "5_minutes_ago": "Il y a 5 minutes",
@@ -44,8 +44,8 @@
     "Publish": "Publier",
     "Create_Post": "Créer une Publication",
     "Edit": "Modifier",
-    "Business_Settings": "Business_Settings",
-    "General": "Généralités",
+    "Business_Settings": "Paramètres de l'entreprise",
+    "General": "Général",
     "Notifications": "Notifications",
     "Business_Info": "Informations du l'entreprise",
     "Business_Roles": "Rôles de l'entreprie",
@@ -209,7 +209,7 @@
     "Title": "Titre",
     "No_Choices": "Aucun choix",
     "Phone_Contact": "Contact téléphonique",
-    "Business_Email": "Entrez l'e-mail de l'entreprise",
+    "Business_Email": "E-mail de l'entreprise",
     "Enter_your_email": "Enrez votre e-mail",
     "Business_Hours": "Horaires de l'entreprise",
     "Search_Something": "Rechercher quelque chose",
@@ -531,6 +531,10 @@
     "orders":"commandes",
     "my_orders":"mes commandes",
     "Operation_was_successful":"L'opération a réussi!!!",
-    "Something_went_wrong":"Quelque chose a mal tourné!!!",
-    "No Blocked Business Available":"Aucune entreprise bloquée disponible"
+    "Something_went_wrong":"Une erreur s'est produitess",
+    "No_Blocked_Business_Available":"Aucune entreprise bloquée disponible",
+    "Edit_Business":"Modifier l'entreprise",
+    "website":"Site Web",
+    "address":"Adresse"
+
 }

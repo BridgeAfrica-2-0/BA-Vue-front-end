@@ -88,7 +88,7 @@
       :modal="`modal-3-${uuid}`"
       :title="$t('search.Share_business')"
       :placeholder="$t('search.Search_for_business')"
-      subtitle="All business"
+      :subtitle="$t('search.All_business')"
       :type="'business'"
       :post="post"
       :update="update"

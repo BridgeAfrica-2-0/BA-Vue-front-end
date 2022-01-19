@@ -18,7 +18,7 @@
         <b-col>
           <div class="b-bottomn f-right">
             <b-button variant="primary" class="a-button-l duration">
-              Mark as Read</b-button
+              {{$t("general.Mark_as_Read")}}</b-button
             >
           </div>
         </b-col>

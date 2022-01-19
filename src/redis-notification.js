@@ -1,6 +1,6 @@
 import Echo from 'laravel-echo';
 
-window.io = require('socket.io-client')
+window.io = require('socket.io-client');
 
 export const initRedis = (token) => {
 

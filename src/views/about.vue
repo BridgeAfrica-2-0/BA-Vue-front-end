@@ -546,7 +546,7 @@
             alt="img"
             class="rounded-circle d-block m-auto team-img"
           />
-          <p class="text-center team-name color-black mt-5">Maxine Meffo</p>
+          <p class="text-center team-name color-black mt-5">Maxine Moffet</p>
           <p class="text-center team-position color-black">{{$t("about.Co_founder")}}</p>
         </div>
       </div>

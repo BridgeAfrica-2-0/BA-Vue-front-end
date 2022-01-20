@@ -23,6 +23,7 @@ export default {
     locality: [],
     division: [],
     profilConnected: null,
+    password_reset: [],
   },
 
   mutations: {
@@ -71,6 +72,14 @@ export default {
       state.user = userData;
       localStorage.setItem("signup", JSON.stringify(userData.user))
     },
+
+
+
+    setPasswordReset(state, userData) {
+      state.password_reset = userData;
+     
+    },
+
 
 
 
@@ -275,6 +284,54 @@ export default {
       });
     },
 
+
+     
+
+
+    verifyuser({ commit }, payload) {
+
+ 
+
+      return axios.post(payload.url, payload).then(({ data }) => {
+        console.log(data.data);
+
+        //commit('setUserData', data.data);
+        commit('setPasswordReset', data.data);
+      });
+    },
+
+
+
+    VerifyOtp({ commit }, payload) {
+
+ 
+
+      return axios.post(payload.url, payload).then(({ data }) => {
+       // console.log(data.data);
+
+      //  commit('setPasswordReset', data.data);
+      return data;
+      });
+    },
+
+
+       
+
+    ResetPassword({ commit }, payload) {
+
+ 
+
+      return axios.post(payload.url, payload).then(({ data }) => {
+        console.log(data.data);
+
+        //commit('setUserData', data.data);
+      });
+    },
+
+
+
+
+    
 
 
   },

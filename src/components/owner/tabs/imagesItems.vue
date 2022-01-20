@@ -1,6 +1,6 @@
 <template>
   <b-col cols="6" md="4" 
-    class="img-gall-item img-size col-sm-6 col-md-4"
+    class="col-sm-6 col-md-4"
     :ref="`sHowMedia-${im.id}`"
     style="`position:relative`"
   >

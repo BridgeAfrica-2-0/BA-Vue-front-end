@@ -64,9 +64,10 @@
         </div>
       </div>
       
-      <div v-for="(image, cmp) in allImages" :key="cmp" >
-        <b-row class="img-gall row" v-for="(im, index) in image.media" :key="index">
+      <b-row v-for="(image, cmp) in allImages" :key="cmp" >
+        
           <Picture
+            class="img-gall row" v-for="(im, index) in image.media" :key="index"
             :im="im"
             :typeOfMedia="() => typeOfMedia(im.path)"
             :getFullMediaLink="() => getFullMediaLink(im.path)"
@@ -81,8 +82,8 @@
             :isEditor="isEditor"
             :type="type"
           />
-        </b-row>
-      </div>
+        
+      </b-row>
 
       <vue-easy-lightbox
         :visible="visible"

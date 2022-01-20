@@ -150,7 +150,7 @@
 
         <b-modal ref="myfilters" id="myModall" hide-footer title=" ">
           <div class="d-block d- d-sm-block d-md-block d-lg-block d-xl-none">
-            <div>
+            <div v-if="!isFilter">
               <!-- Category -->
               <div v-if="categories.length > 0">
                 <b-form-group
@@ -176,8 +176,8 @@
               </div>
             </div>
 
-            <hr />
-            <div>
+            <hr v-if="!isFilter" />
+            <div v-if="!isFilter">
               <!-- sub Category -->
               <div v-if="catChose">
                 <b-form-group
@@ -203,9 +203,9 @@
               </div>
             </div>
 
-            <hr />
+            <hr v-if="!isFilter" />
 
-            <div>
+            <div v-if="!isFilter">
               <!-- Filters -->
               <div v-if="subFilters.length > 0">
                 <b-form-group
@@ -231,9 +231,11 @@
               </div>
             </div>
 
-            <hr />
+            <component :is="isFilter" />
+            <hr v-if="!isFilter" />
 
             <b-button
+              v-if="!isFilter"
               variant="primary"
               class="m-3 float-right"
               @click="searchFilter"
@@ -548,7 +550,8 @@ import SubNav from "@/components/subnav";
 import Sponsor from "@/components/search/sponsoredBusiness";
 import Button from "@/components/ButtonNavBarFind";
 
-import { PostComponent, PeopleComponent } from "@/components/search";
+import { PostComponent, PeopleComponent, PostFilter, PeopleFilter } from "@/components/search";
+
 
 import BusinessComponent from "@/components/search/business";
 //import login from "@/components/search/login";
@@ -640,7 +643,6 @@ export default {
     };
 
     this.getKeyword();
-
     this.initialize();
   },
 
@@ -665,6 +667,7 @@ export default {
       strategyForComponent: null,
       notFoundComponentTitle: "",
       isComponent: null,
+      isFilter:null,
       strategyForPlaceHolder: {},
       strategyForNotFoundComponentTitle: {},
 
@@ -1599,7 +1602,6 @@ export default {
       deep: true,
       handler(newValue, oldValue) {
         console.log("Prop changed: ", newValue, " | was: ", oldValue);
-
         this.$store.commit("business/setKeyword", newValue.keyword);
       },
     },
@@ -1740,9 +1742,18 @@ export default {
       };
 
       this.strategyForComponent = {
-        2: () => PeopleComponent,
-        5: () => PostComponent,
-        1: () => BusinessComponent,
+        2: () => ({
+          component:PeopleComponent,
+          filter:PeopleFilter
+        }),
+        5: () => ({
+          component:PostComponent,
+          filter: PostFilter
+        }),
+        1: () => ({
+          component:BusinessComponent,
+          filter: null
+        }),
       };
 
       this.strategyForNotFoundComponentTitle = {
@@ -1767,9 +1778,12 @@ export default {
     },
     changeComponent() {
       try {
-        this.isComponent = this.strategyForComponent[this.selectedId]();
+        const data = this.strategyForComponent[this.selectedId]();
+        this.isComponent = data.component
+        this.isFilter = data.filter
       } catch (error) {
         this.isComponent = null;
+        this.isFilter = null;
       }
     },
 

@@ -213,9 +213,6 @@ export default {
     this.$store
       .dispatch("profile/loadUserPostIntro", null)
       .then((response) => {
-        console.log("Load User Intro test+++++ res");
-        console.log(response);
-        console.log("Load User Intro Finish Loading");
         this.userProfileOwner = this.$store.getters["profile/getUserPostIntro"];
         this.userProfileOwnerInput.workedAt = this.userProfileOwner.workedAt;
         this.userProfileOwnerInput.studiedAt = this.userProfileOwner.studiedAt;

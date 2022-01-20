@@ -127,13 +127,19 @@
       <b-modal ref="setcat" id="myModalla" hide-footer title="More Categories">
         <div style="column-count: 2">
           <b-form-radio
-            v-for="(category, index) in categories.slice(7)"
+            v-for="(category, index) in categories"
             :key="index"
             v-model="catChose"
             :value="category.category.id"
             @change="getCategory({ cat_id: category.category.id })"
             name="subCategories-list-modal"
+            class="mt-2"
           >
+          <img
+              class="img-fluid picture"
+              style="max-height: 26px"
+              :src="category.category.cat_image"
+            />
             {{ category.category.name }}
           </b-form-radio>
         </div>
@@ -482,9 +488,7 @@
                     class="mx-3"
                   >
                     <b-spinner small v-if="prodLoader"></b-spinner>
-                    <span v-else>{{
-                      $t("search.Load_All_market_Products")
-                    }}</span>
+                    <span v-else><b-icon icon="arrow-clockwise" aria-hidden="true"></b-icon></span>
                   </b-button>
                 </div>
               </h6>

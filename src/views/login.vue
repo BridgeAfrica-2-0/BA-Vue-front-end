@@ -110,7 +110,7 @@
             </b-col>
           </b-row>
 
-          <router-link to="recoverPass1" class="nav-link text">
+          <router-link to="password" class="nav-link text">
             {{ $t("auth.forget_password") }}
           </router-link>
         </div>

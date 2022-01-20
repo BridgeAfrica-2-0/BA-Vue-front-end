@@ -498,7 +498,7 @@ export default {
       if (this.chosemethod == "email") {
         url = "user/resetemail";
       } else {
-        url = "user/verifyResetOtp";
+        url = "user/reset";
       }
 
       this.$store

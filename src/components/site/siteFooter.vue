@@ -94,17 +94,17 @@
               </div>
 
               <div class="social-links mt-3 text-left">
-                <a href="#" class="twitter bridge-icon"
+                <a href="https://twitter.com/bridgeafricacom" class="twitter bridge-icon" target="_blank"
                   ><i class="bx bxl-twitter"></i
                 ></a>
-                <a href="#" class="facebook bridge-icon"
+                <a href="http://facebook.com/bridgeafricacom" class="facebook bridge-icon" target="_blank"
                   ><i class="bx bxl-facebook"></i
                 ></a>
-                <a href="#" class="instagram bridge-icon"
+                <a href="https://instagram.com/bridgeafricacom" class="instagram bridge-icon" target="_blank"
                   ><i class="bx bxl-instagram"></i
                 ></a>
 
-                <a href="#" class="youtube bridge-icon"
+                <a href="https://www.youtube.com/channel/UC8JjdBDrz7GsqnO7kpEEHvA" class="youtube bridge-icon" target="_blank"
                   ><i class="bx bxl-youtube"></i
                 ></a>
               </div>
@@ -118,7 +118,7 @@
 
             <div class="col-lg-3 col-md-6 footer-links">
               <h4 class="bridge-header text-left white">
-                {{ $t("home.OUR_ADRESSE") }}
+                {{ $t("home.OUR_ADDRESS") }}
               </h4>
               <ul class="text-left white">
                 <li>
@@ -134,7 +134,7 @@
 
             <div class="col-lg-3 col-md-6 footer-links white">
               <h4 class="bridge-header text-left white">
-                {{ $t("home.USEFULL_LINKS") }}
+                {{ $t("home.USEFUL_LINKS") }}
               </h4>
               <ul class="white">
                 <li class="white"><a href="#">bridgeafricaventures.com</a></li>
@@ -187,21 +187,7 @@ export default {};
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
-.font-arvo {
-  /* font-family: 'Arvo', serif; */
-}
-.font-rob {
-  /* font-family: 'Roboto', Sans-serif; */
-}
-.font-poppin {
-  /* font-family: 'Poppins', sans-serif; */
-}
-.font-source {
-  /* font-family: 'Source Sans Pro', sans-serif; */
-}
-.font-mont {
-  /* font-family: 'Montserrat', sans-serif; */
-}
+
 .footer {
   margin-top: 2px;
   width: 100%;
@@ -224,6 +210,13 @@ export default {};
 .color-white {
   color: #ffffff;
 }
+
+@media only screen and (max-width: 768px) {
+  img{
+
+    margin-left: -31px;
+  }
+}
 @media only screen and (max-width: 660px) {
   .footer-icons-div {
     width: 100%;
@@ -233,8 +226,4 @@ export default {};
   }
 }
 
-.size {
-  /* height: 100px;
-  width: 300px; */
-}
 </style>

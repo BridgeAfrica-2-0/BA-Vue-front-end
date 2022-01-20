@@ -2,7 +2,7 @@
     <b-row class="mt-2 px-4">
       <b-col :class="`${proccesEdit ? 'd-flex' : ''}`">
         <b-avatar
-          variant="info"
+          variant="light"
           :src="comment.picture"
           :square="'user' == comment.user_type ? false : true"
           class="avat-comment b-r"

@@ -4,7 +4,11 @@
       <span>
         <h6 class="title m-1">
           <fas-icon class="icons" :icon="['fas', 'hands-helping']" size="lg" />
+<<<<<<< HEAD
           <b> {{ $t("general.Hot_Businesses") }} </b>
+=======
+          <b>  {{ $t("general.Hot_Businesses") }}  </b>
+>>>>>>> 2a7132b80152ee73d879692289ccd69b4a6d2b54
         </h6>
       </span>
 
@@ -96,7 +100,7 @@
                     cols="4"
                     class="mt-2 text-center"
                   >
-                    <BtnCtaMessage :element="item" type="business" />
+                    <BtnCtaMessage :element="item" :type="$t('general.business')" />
                   </b-col>
 
                   <b-col
@@ -114,7 +118,11 @@
                       variant="primary"
                     >
                       <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
+<<<<<<< HEAD
                       <span class="btn-text">{{ $t("general.Direction") }}</span>
+=======
+                      <span class="btn-text">{{$t("general.Direction")}}</span>
+>>>>>>> 2a7132b80152ee73d879692289ccd69b4a6d2b54
                     </b-button>
                   </b-col>
                 </b-row>

@@ -15,11 +15,13 @@
       Contact US
     </h3>
     <div class="px-5">
+          <b-form @submit="Contact" >
       <div class="row mx-md-4 mx-2">
         <div class="col-md-4">
           <b-form-input
             v-model="contact.name"
             placeholder="Name*"
+            required
             class="sub-input d-block mx-auto my-3 contact-input name"
           ></b-form-input>
         </div>
@@ -27,36 +29,42 @@
           <b-form-input
             v-model="contact.email"
             placeholder="Email*"
+            type="email"
+            required
             class="sub-input d-block mx-auto my-3 contact-input email"
           ></b-form-input>
         </div>
         <div class="col-md-4">
           <b-form-input
             v-model="contact.website"
-            placeholder="Website*"
+            placeholder="Website"
             class="sub-input d-block mx-auto my-3 contact-input website"
           ></b-form-input>
         </div>
         <div class="col-md-12">
           <b-form-textarea
             id="textarea"
-            v-model="contact.msg"
-            placeholder="Enter something..."
+            v-model="contact.message"
+            placeholder="Enter something...*"
+            required
             rows="3"
             min-rows="6"
             class="sub-input my-3 contact-msg"
           ></b-form-textarea>
         </div>
         <div class="col-md-2 my-5">
-          <b-button variant="primary" class="font-weight-bold font-arvo text-uppercase btn-block"
+          <b-button variant="primary"  type="submit" class="font-weight-bold font-arvo text-uppercase btn-block"
             >Submit Message</b-button
           >
         </div>
+         
       </div>
+       </b-form>
     </div>
   </section>
 </template>
 <script>
+import axios from 'axios'
 export default {
   data() {
     return {
@@ -64,10 +72,35 @@ export default {
         name: '',
         email: '',
         website: '',
-        msg: '',
+        message: '',
       },
     };
   },
+  methods : {
+
+    Contact(event){
+      event.preventDefault()
+      console.log(this.contact)
+      axios.post("contact/create",this.contact)
+      .then(res =>{
+          console.log(res)
+          this.flashMessage.show({
+        status: "success",
+        message: "your message was submited successfuly",
+         blockClass: "custom-block-class",
+      })
+      })
+      .catch (err =>{
+        console.log(err)
+         this.flashMessage.show({
+        status: "error",
+        message: "error unable to send your message",
+         blockClass: "custom-block-class",
+      })
+             
+      })
+    }
+  }
 };
 </script>
 <style scoped>

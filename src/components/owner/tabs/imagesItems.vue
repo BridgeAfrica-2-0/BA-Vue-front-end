@@ -1,12 +1,12 @@
 <template>
-  <div
-    class="img-gall-item img-size"
+  <b-col cols="6" md="4" 
+    class="img-gall-item img-size col-sm-6 col-md-4"
     :ref="`sHowMedia-${im.id}`"
-    :style="`${getStyle};position:relative`"
+    style="`position:relative`"
   >
     <a v-if="typeOfMedia() == 'image' && !loading"
       ><b-img
-        class="card-img btn p-0 album-img"
+        class="card-img btn p-0 album-img img-fluid"
         thumbnail
         fluid
         rounded
@@ -92,9 +92,7 @@
         </li>
       </ul>
     </div>
-
-    <br />
-  </div>
+  </b-col>
 </template>
 
 <script>
@@ -114,8 +112,7 @@ export default {
     "setProfilePic",
     "setCoverPic",
     "deleteImage",
-    "isAlbum",
-    "getStyle"
+    "isAlbum"
   ],
 
   created() {

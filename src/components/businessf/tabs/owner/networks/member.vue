@@ -180,7 +180,7 @@
         </b-skeleton-wrapper>
       </b-col>
       <b-col col="12">
-        <infinite-loading @infinite="infiniteHandler">
+        <infinite-loading @infinite="infiniteHandler" ref="infiniteLoading">
           <div class="text-red" slot="no-more">{{ $t('network.No_More_Request') }}</div>
           <div class="text-red" slot="no-results">{{ $t('network.No_More_Request') }}</div>
         </infinite-loading>
@@ -202,16 +202,13 @@ export default {
       page: 0,
       currentPage: null,
       searchTitle: "",
-      // members:"",
+      members: [],
 
       currentIndex: -1,
       loading: false
     };
   },
   computed: {
-    members() {
-      return this.$store.state.networkProfileMembers.members;
-    },
     admins() {
       return this.$store.state.networkProfileMembers.admins;
     },
@@ -255,12 +252,6 @@ export default {
       console.log('keyword: '+data);
       let formData = new FormData();
       formData.append('keyword', data);
-      // this.$store
-      //   .dispatch("networkProfileMembers/getMembers", {
-      //     path: this.url+"/members/list/"+this.page,
-      //     formData: formData
-      //   })
-
       let lien = "";
       if(data == ""){
           lien =  'network/'+this.url+'/members/list/'+this.page;
@@ -272,11 +263,15 @@ export default {
         .then(({ data }) => {
         console.log(data);
         console.log(this.page);
-        if (data.data.length) {
+        console.log(Object.values(data.data));
+        let object = Object.values(data.data);
+        if (object.length) {
+          console.log("Pushing data");
+          object.map((item) => {
+            this.members.push(item);
+            console.log(item);
+          })
           this.page += 1;
-          console.log(this.page);
-          console.log(...data.data);
-          this.members.push(...data.data);
           $state.loaded();
         } else {
           $state.complete();
@@ -325,12 +320,14 @@ export default {
         });
     },
     search() {
-      // this.loading = true;
       this.loading = true;
-      this.page -= 1;
       console.log("searching...");
       console.log(this.searchTitle);
-      this.infiniteHandler();
+      this.$nextTick(() => {
+        this.members = [];
+        this.page = 0;
+        this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
+      });
       this.getAdmins();
       this.getBusiness();
     },

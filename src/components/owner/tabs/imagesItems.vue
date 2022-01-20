@@ -1,22 +1,19 @@
 <template>
-  <b-col cols="6" md="4" 
-    class="col-sm-6 col-md-4"
+  <div class="col-sm-6 col-md-4" 
     :ref="`sHowMedia-${im.id}`"
     style="`position:relative`"
   >
-    <a v-if="typeOfMedia() == 'image' && !loading"
-      ><b-img
-        class="card-img btn p-0 album-img img-fluid"
-        thumbnail
-        fluid
-        rounded
+      <b-img
+        v-if="typeOfMedia() == 'image' && !loading"
+        class="card-img btn p-0 album-img "
+        
         :src="getFullMediaLink()"
         alt="media_img"
         v-b-modal="`modal-${im.id}`"
         v-bind="imageProps"
         style="width: 100%;height: 100%;"
       ></b-img>
-    </a>
+    
     <video
       style="width: 100%;height: 100%;"
       controls
@@ -92,7 +89,7 @@
         </li>
       </ul>
     </div>
-  </b-col>
+  </div>
 </template>
 
 <script>

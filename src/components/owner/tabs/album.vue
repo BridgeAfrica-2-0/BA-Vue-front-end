@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div class="row">
-      <div class="container-fluid" v-if="!showalbum">
-        <div class="one2">
-          <div :style="getStyle" class="createp img-gall image-wrapp img-size" v-if="isEditor" v-b-modal.createalbumModal>
+    <div class="container-fluid">
+      <div class="row" v-if="!showalbum">
+        
+          <div  class="col-sm-6 col-md-3  createp img-gall image-wrapp img-size" v-if="isEditor" v-b-modal.createalbumModal>
             <div class="">
               <a>
                 <div class="drag-textt">
@@ -40,6 +40,7 @@
               'Cover' == album.name ? true : false
               : false"
           />
+
         </div>
 
         <b-modal hide-footer title="Edit album" ref="editalbum" id="editalbum">
@@ -99,7 +100,7 @@
             </div>
           </div>
         </div>
-      </div>
+      
     </div>
     <!-- show  images in an album -->
 

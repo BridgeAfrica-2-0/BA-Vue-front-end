@@ -283,27 +283,6 @@
                 ></b-form-radio>
               </div>
             </div>
-            <div class="my-4 operator">
-              <div class="operator-img-box">
-                <img
-                  :src="require('@/assets/img/payment/expressU.jpg')"
-                  alt="EXPRESS UNION"
-                />
-              </div>
-              <div class="operator-name">
-                <p class="mb-0 mx-4 title-font-size font-weight-bold">
-                  Express Union
-                </p>
-              </div>
-              <div class="operator-select-box ml-md-2">
-                <b-form-radio
-                  v-model="PaymentForm.operator"
-                  name="operator"
-                  value="EXPRESS"
-                  class="operator-select"
-                ></b-form-radio>
-              </div>
-            </div>
 
             <div class="row p-2">
               <div class="col">
@@ -331,12 +310,7 @@
             <b-overlay :show="show" rounded="sm">
               <div class="row">
                 <div class="col-10 col-sm-9 col-md-8">
-                  <b-form-input
-                    placeholder="237 6XX XXX XXX"
-                    id="number"
-                    v-model="PaymentForm.phone"
-                    type="tel"
-                  ></b-form-input>
+                  <VuePhoneNumberInput default-country-code="CM" v-model="PaymentForm.phone" placeholder="237 6XX XXX XXX" required/>
                 </div>
                 <div class="col-2 col-sm-3 col-md-4 px-0 btn-custom-box">
                   <!-- <b-button
@@ -432,10 +406,15 @@
 </template>
 
 <script>
+import VuePhoneNumberInput from "vue-phone-number-input";
+import "vue-phone-number-input/dist/vue-phone-number-input.css";
 import moment from "moment";
 export default {
   name: "website",
   props: ["profileId"],
+  components: {
+    VuePhoneNumberInput,
+  },
   data() {
     return {
       url: null,

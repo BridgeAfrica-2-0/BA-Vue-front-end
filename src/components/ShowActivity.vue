@@ -3,7 +3,7 @@
     <b-card
       class="mb-1"
       style="width: 100%"
-      v-if="'business' != profile.user_type"
+      v-if="'business' != profile.user_type && business.length"
     >
       <b-card-header header-tag="header" class="p-1" role="tab">
         <p block v-b-toggle.accordion-1 variant="info">
@@ -45,7 +45,7 @@
       </b-collapse>
     </b-card>
 
-    <b-card class="mb-1" v-if="'network' != profile.user_type">
+    <b-card class="mb-1" v-if="'network' != profile.user_type && networks.length">
       <b-card-header header-tag="header" class="p-1" role="tab">
         <p block v-b-toggle.accordion-2 variant="info">
           <b-icon :icon="openNetwork ? 'arrow-down' : 'arrow-up'"></b-icon>
@@ -207,8 +207,8 @@ export default {
             message:
               "business" == type
 
-                ? `You are now connected as ${item.name}`
-                : `You are connected as ${item.name}`,
+                ? item.is_owner ? `You are now connected as ${item.name}` : `You are now redirect to ${item.name}`
+                : item.is_owner ? `You are now connected as ${item.name}` : `You are now redirect to ${item.name}`,
 
           });
 

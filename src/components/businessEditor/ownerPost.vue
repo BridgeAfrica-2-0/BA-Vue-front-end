@@ -293,7 +293,7 @@
                   id="textarea-small"
                   autofocus
                   class="mb-2 border-none"
-                  placeholder="Post a business update"
+                  :placeholder="$t('general.Post_a_business_update')"
                   v-model="createPost.postBusinessUpdate"
                 ></b-form-textarea>
               </div>
@@ -320,7 +320,7 @@
                     />
 
                     <b-button
-                      :title="$t('general.Ad_Movie')"
+                      :title="$t('general.Add_Movie')"
                       size="sm"
                       variant="outline-primary"
                       @click="$refs.movies.click()"
@@ -669,7 +669,7 @@ export default {
           this.flashMessage.show({
             status: "success",
             blockClass: "custom-block-class",
-            message: "Content successfuly uploaded",
+            message: this.$t('general.Content_successfuly_uploaded'),
           });
           loader.hide();
 
@@ -693,7 +693,7 @@ export default {
             this.flashMessage.show({
               status: "error",
 
-              message: "Unable to Update your post",
+              message: this.$t('general.Unable_to_Update_your_post'),
               blockClass: "custom-block-class",
             });
             console.log({ err: err });
@@ -867,7 +867,7 @@ export default {
           this.flashMessage.show({
             status: "success",
             blockClass: "custom-block-class",
-            message: "Content successfuly uploaded",
+            message: this.$t('general.Content_successfuly_uploaded'),
           });
           this.isUploading = false;
           loader.hide();

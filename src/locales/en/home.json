@@ -31,11 +31,11 @@
     "We_provide_face_to_face_digital_literacy_trainings": "We provide face-to-face digital literacy trainings",
     "for_businesses_who_lack_digital_know_how_through_our_army_of_digital_coaches": "for businesses who lack digital know how through our army of digital coaches",
     "See_Videos": "See Videos",
-    "OUR_ADRESSE": "OUR ADRESSE",
+    "OUR_ADDRESS": "OUR ADDRESS",
     "International_Handicraft_Center": "International Handicraft Center",
     "Rond_point_Intendance": "Rond-point Intendance",
     "Cameroon": "Cameroon",
-    "USEFULL_LINKS": "USEFULL LINKS",
+    "USEFUL_LINKS": "USEFUL LINKS",
     "WORKING_HOURS": "WORKING HOURS",
     "Monday": "Monday",
     "Friday": "Friday",
@@ -49,5 +49,7 @@
     "Following": "Following",
     "Where": "Where",
     "For_businesses_and_consumers_in_zones_of_low_or_no_internet_penetration": "For businesses and consumers in zones of low or no internet penetration",
-    "our_platform_works_offline_via_SMS_and_USSD": "our platform works offline via SMS and USSD"
+    "our_platform_works_offline_via_SMS_and_USSD": "our platform works offline via SMS and USSD",
+    "What_are_you_looking_for":"What are you looking for ?",
+    "Location":"Location"
 }

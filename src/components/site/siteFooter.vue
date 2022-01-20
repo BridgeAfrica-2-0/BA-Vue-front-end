@@ -94,17 +94,17 @@
               </div>
 
               <div class="social-links mt-3 text-left">
-                <a href="#" class="twitter bridge-icon"
+                <a href="https://twitter.com/bridgeafricacom" class="twitter bridge-icon" target="_blank"
                   ><i class="bx bxl-twitter"></i
                 ></a>
-                <a href="#" class="facebook bridge-icon"
+                <a href="http://facebook.com/bridgeafricacom" class="facebook bridge-icon" target="_blank"
                   ><i class="bx bxl-facebook"></i
                 ></a>
-                <a href="#" class="instagram bridge-icon"
+                <a href="https://instagram.com/bridgeafricacom" class="instagram bridge-icon" target="_blank"
                   ><i class="bx bxl-instagram"></i
                 ></a>
 
-                <a href="#" class="youtube bridge-icon"
+                <a href="https://www.youtube.com/channel/UC8JjdBDrz7GsqnO7kpEEHvA" class="youtube bridge-icon" target="_blank"
                   ><i class="bx bxl-youtube"></i
                 ></a>
               </div>
@@ -223,6 +223,13 @@ export default {};
 }
 .color-white {
   color: #ffffff;
+}
+
+@media only screen and (max-width: 768px) {
+  img{
+
+    margin-left: -31px;
+  }
 }
 @media only screen and (max-width: 660px) {
   .footer-icons-div {

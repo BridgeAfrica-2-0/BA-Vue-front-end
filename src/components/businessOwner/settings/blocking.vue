@@ -99,7 +99,7 @@ export default {
         this.loading = false;
         this.flashMessage.show({
           status: "error",
-          message: this.$t('settings.Unable_to_Unblocked_User')
+          message: this.$t('settings.Unable_to_Unblock_User')
         });
       });
     }

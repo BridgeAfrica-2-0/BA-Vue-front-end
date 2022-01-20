@@ -145,8 +145,8 @@
     "Profile":"Profil",
 
     "HOW_TO_USE_BRIDGEAFRICA":"HOW TO USE BRIDGEAFRICA.COM",
-    "Partners_with_Pea":"BridgeAfrica.com Partners with Pea Jeunes (Demo)",
-    "Gives_Digital_Literacy_Training":"BridgeAfrica.com Gives Digital Literacy Training (Demo)",
+    "Partners_with_Pea":"bridgeafrica.com Partners with Pea Jeunes (Demo)",
+    "Gives_Digital_Literacy_Training":"bridgeafrica.com Gives Digital Literacy Training (Demo)",
     "Cameroon_Gallery_Commercial":"Cameroon Gallery Commercial (Demo)",
     "About_Us":"About Us",
     "Contact_Us":"Contact Us",
@@ -306,7 +306,7 @@
     "Unable_To_Delete_Editor":"Unable To Delete Editor",
     "Marked_As_Read":"Marked As Read",
     "Unable_To_Mark_As_Read":"Unable To Mark As Read",
-    "Mark_as_Read":"Mark As Read",
+    "Mark_as_Read":"Mark as Read",
     "Notification_Deleted":"Notification(s) Deleted",
     "Unable_To_Deleted_Notification":"Unable To Deleted Notification(s)",
     "Changes_Made_Successfuly":"Changes Made Successfuly",
@@ -316,7 +316,14 @@
     "Unable_To_Delete_Network":"Unable To Delete Network",
     "Product_Deleted_Successfuly":"Product Deleted Successfuly",
     "Unable_To_Delete_Product":"Unable To Delete Product",
-    "You_Are_Now_Following":"You Are Now Following"
+    "You_Are_Now_Following":"You Are Now Following",
+    "Content_successfuly_uploaded":"Content successfully uploaded",
+    "Unable_to_Update_your_post":"Unable to Update your post",
+    "BETA_LAUNCH_OF_BRIDGEAFRICA":"BETA LAUNCH OF BRIDGEAFRICA",
+    "business":"business",
+    "Direction":"Direction",
+    "Hot_Businesses":"Hot Businesses",
+    "No_item":"No item"
 
    
 

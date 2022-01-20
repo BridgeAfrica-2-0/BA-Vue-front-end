@@ -19,12 +19,13 @@
     </div>
     <div :class="comments_wrapper_classes">
       <single-comment
-        v-for="comment in comments"
+        v-for="comment in Comments"
         :comment="comment"
         :key="comment.id"
 				:idproduct="idproduct"
 				@deletecomment="deleteComment"
       ></single-comment>
+      <b-button v-if="showSee" variant="link" @click="seeMore">see more</b-button>
     </div>
   </div>
 </template>
@@ -39,18 +40,83 @@ export default {
   data() {
     return {
       reply: "",
+      current_comment_page: 1,
+      showSee: true
     };
   },
+
+  computed: {
+
+    Comments(){
+      return  this.$store.state.productComments.comments;
+    }
+  },
+
   methods: {
+
+    seeMore(){
+        this.current_comment_page++;
+        
+         this.$store
+          .dispatch("productComments/getComments", {
+            id: this.idproduct,
+            page: this.current_comment_page,
+          })
+          .then(res => {
+            if(res.length == 0){
+              this.showSee = false
+            }
+            console.log('reponse du see more', res)
+          })
+
+    },
+
+    getComment(){
+      this.$store
+          .dispatch("productComments/getComments", {
+            id: this.idproduct,
+            page: this.current_comment_page,
+          })
+          .then(res => {
+            
+          })
+    },
+
+    getDetail (id) {
+       this.$store
+      .dispatch("productDetails/getProductDetails", id)
+      .then((product) => {
+        
+        this.$emit("getNewDetail", product)
+       console.log("new product detail ", product)
+      });
+         
+        
+        
+      },
+
     submitComment() {
-      if (this.reply !== "") {
-        this.$emit("submit-comment", this.reply);
-        this.reply = "";
-      }
+      console.log("------", this.reply)
+      const comment = {
+        idproduct: this.idproduct,
+        text: this.reply,
+      };
+
+      this.$store.dispatch("productComments/postComment", comment).then(() => {
+        this.getComment();
+        this.getDetail(this.idproduct);
+        console.log('èèè', this.Comments)
+      })
+      // if (this.reply !== "") {
+      //   this.$emit("submit-comment", this.reply);
+      //   this.reply = "";
+      // }
     },
 		deleteComment(idcomment){
 			this.$emit("deletecomment", idcomment)
-		}
+		},
+
+    
   },
   props: ["comments", "comments_wrapper_classes","idproduct"],
 };

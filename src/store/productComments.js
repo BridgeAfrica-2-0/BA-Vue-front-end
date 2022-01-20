@@ -10,7 +10,7 @@ const actions = {
       axios
         .get(`market/product/detail/${details.id}/comments/${details.page}`)
         .then((response) => {
-          commit;
+          commit('setComment', response.data.data);
           console.log("Products comments", response.data);
           resolve(response.data.data);
         })
@@ -20,6 +20,21 @@ const actions = {
     });
   },
   async getProductLikes({ commit }, idproduct) {
+    return await new Promise((resolve, reject) => {
+      axios
+        .get(`/market/product/detail/${idproduct}/like`)
+        .then((response) => {
+          commit;
+          console.log(response.data);
+          resolve(response.data.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    });
+  },
+
+  async productLikes({ commit }, idproduct) {
     return await new Promise((resolve, reject) => {
       axios
         .get(`/market/product/detail/${idproduct}/like`)
@@ -61,6 +76,13 @@ const mutations = {
   //     console.log("Product comment mutations",state.comments);
   //   }
   // },
+
+  setComment(state, data){
+    data.map(item =>{
+      state.comments.push(item)
+    })
+    
+  }
 };
 
 export default {

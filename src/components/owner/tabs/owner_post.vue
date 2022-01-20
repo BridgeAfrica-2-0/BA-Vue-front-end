@@ -292,7 +292,7 @@
               </div>
               <br />
 
-              <div class="h300px">
+              <div class="">
                 <div v-for="hyperlink in createPost.hyperlinks" :key="hyperlink.fileName" class="bordder">
                   <span class="float-left"> {{ hyperlink.fileName }} </span>
                   <span class="float-right" @click="deleteItem(hyperlink.fileName)">

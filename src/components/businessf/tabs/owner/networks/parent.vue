@@ -438,6 +438,7 @@ export default {
         })
         .then(({ data }) => {
           console.log(data);
+          this.showModal = false;
           this.SPupdateN = false;
           this.getNetworkInfo();
           this.flashMessage.show({
@@ -468,6 +469,7 @@ export default {
         })
         .then(({ data }) => {
           console.log(data);
+          this.$refs['modal-4'].hide();
           this.getNetworkInfo();
           this.SPupdateN = !this.SPupdateN;
           this.flashMessage.show({

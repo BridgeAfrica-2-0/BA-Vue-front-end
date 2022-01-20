@@ -45,7 +45,7 @@ export default {
       console.log(dataInfo.path);
       console.log(dataInfo.formData); 
       return axios
-      .post(`/network/${dataInfo.path}`, dataInfo.formData)
+      .post(`/${dataInfo.path}`, dataInfo.formData)
       .then(({ data }) => {
         console.log(data);
         return data;
@@ -57,7 +57,7 @@ export default {
       console.log(dataInfo.path);
       console.log(dataInfo.formData); 
       return axios
-      .post(`/network/${dataInfo.path}`, dataInfo.formData)
+      .post(`/${dataInfo.path}`, dataInfo.formData)
       .then(({ data }) => {
         console.log(data);
         return data;

@@ -30,7 +30,7 @@
         "Municipality":"Municipality",
         "Edit":"Edit",
         "Save_Changes":"Save Changes",
-        "Change":"Change",
+        "Change":"Save",
 		"Notifications":"Notifications",
 		"Make_More_Money":"Make More Money",
 		"Update":"Update",
@@ -41,6 +41,10 @@
 		"Blocked_users_can_no_longer_see_things_you_post_on_your_business":"Blocked users can no longer see things you post on your business",
 		"invite_your_business_to_networks":"invite your business to networks",
 		"start_a_conversation":"start a conversation",
-		"or_follow_your_business":"or follow your business"
-
+		"or_follow_your_business":"or follow your business",
+		"Blocking":"Blocking",
+		"An_error_occured":"An error occured",
+		"Mark_as_Read":"Mark as Read",
+		"Unblock":"Unblock",
+		"Unable_to_Unblock_User":"Unable to unblock User"
 }

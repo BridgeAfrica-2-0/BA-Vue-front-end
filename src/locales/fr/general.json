@@ -297,7 +297,7 @@
     "Unable_to_Assigned_New_Role":"Impossible d'assigner un nouveau rôle",
     "Editor_Deleted":"Éditeur supprimé",
     "Unable_To_Delete_Editor":"Impossible de supprimer l'éditeur",
-    "Marked_As_Read":"Marqué comme lu",
+    "Mark_as_Read":"Marquer comme lu",
     "Unable_To_Mark_As_Read":"Impossible de marquer comme lu",
     "Notification_Deleted":"Notification(s) supprimée",
     "Unable_To_Deleted_Notification":"Impossible de supprimer les notification(s)",
@@ -308,7 +308,14 @@
     "Unable_To_Delete_Network":"Impossible de supprimer le réseau",
     "Product_Deleted_Successfuly":"Le produit a été supprimé avec succès",
     "Unable_To_Delete_Product":"Impossible de supprimer le produit",
-    "You_Are_Now_Following":"Vous êtes maintenant abonné"
+    "You_Are_Now_Following":"Vous êtes maintenant abonné",
+    "Content_successfuly_uploaded":"Contenu téléchargé avec succès",
+    "Unable_to_Update_your_post":"Impossible de mettre à jour votre publication",
+    "BETA_LAUNCH_OF_BRIDGEAFRICA":"LANCEMENT DE LA VERSION BÊTA DE BRIDGEAFRICA",
+    "business":"entreprise",
+    "Direction":"Direction",
+    "Hot_Businesses":"Entreprises Populaires",
+    "No_item":"Aucun élément"
 
    
 

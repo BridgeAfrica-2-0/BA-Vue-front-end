@@ -46,14 +46,17 @@ import homeRedirection from './homeRedirection';
 
 import profileSettingsEdit from "./profileSettingsEdit";
 import cart from "./cart"
-
+import productComments from './productComments';
 import { social } from './social';
 import networkSetting from './networkSetting';
-
+import productDetails from './productDetails';
 Vue.use(Vuex);
 
+
+
 axios.defaults.baseURL = process.env.VUE_APP_API_URL;
- //axios.defaults.baseURL = "https://wise-shrimp-77.loca.lt/api/v1" ;
+
+
 
 export default new Vuex.Store({
   modules: {
@@ -101,6 +104,8 @@ export default new Vuex.Store({
     profileSettingsEdit,
     cart,
     networkSetting,
-    profileOrders
+    profileOrders,
+    productComments,
+    productDetails
   }
 })

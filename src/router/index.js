@@ -388,15 +388,7 @@ const routes = [
     name: "RecoverPass3",
     component: RecoverPass3,
   },
-  {
-    path: "/businessfollower/:id?",
-    name: "BusinessFollower",
-    component: businessFollower,
-    meta: {
-      auth: true,
-    },
-  },
-
+  
   {
     path: "/business/:id?",
     name: "BusinessFollower",

@@ -27,7 +27,7 @@
             <img
               :src="product.picture"
               class="r-image cursor-pointer"
-              @click="productDetails"
+              @click="productDetails(product)"
             />
           </div>
 
@@ -37,7 +37,7 @@
            <div class="flx50">  
        
           <p class="text">
-            <strong class="title cursor-pointer" @click="productDetails">
+            <strong class="title cursor-pointer" @click="productDetails(product)">
               {{ product.name }}
             </strong>
             <br />
@@ -449,7 +449,8 @@ export default {
 
 
 
-    productDetails() {
+    productDetails(prod) {
+      this.product = prod;
       this.viewProduct = true;
     },
     closeDetailsProduct() {

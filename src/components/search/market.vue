@@ -17,12 +17,12 @@
       class="people-style shadow h-100"
     >
       <b-row>
-        <b-col lg="12" xl="4" md="4" cols="12" sm="12">
+        <b-col md="4" cols="4">
           <div class="center-img">
             <img fluid :src="prod.picture" center class="r-image" />
           </div>
         </b-col>
-        <b-col lg="12" xl="4" md="4" cols="12" sm="12">
+        <b-col md="4" cols="8">
           <div class="flx100">
             <p class="textt">
               <strong
@@ -53,9 +53,9 @@
           </div>
         </b-col>
 
-        <b-col lg="12" xl="4" md="4" cols="12" sm="12">
+        <b-col md="4" cols="12">
           <div class="s-button">
-            <b-row>
+            <b-row align-h="center">
               <b-col
                 md="12"
                 lg="4"

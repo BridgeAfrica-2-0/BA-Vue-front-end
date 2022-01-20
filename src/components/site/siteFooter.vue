@@ -118,7 +118,7 @@
 
             <div class="col-lg-3 col-md-6 footer-links">
               <h4 class="bridge-header text-left white">
-                {{ $t("home.OUR_ADRESSE") }}
+                {{ $t("home.OUR_ADDRESS") }}
               </h4>
               <ul class="text-left white">
                 <li>
@@ -134,7 +134,7 @@
 
             <div class="col-lg-3 col-md-6 footer-links white">
               <h4 class="bridge-header text-left white">
-                {{ $t("home.USEFULL_LINKS") }}
+                {{ $t("home.USEFUL_LINKS") }}
               </h4>
               <ul class="white">
                 <li class="white"><a href="#">bridgeafricaventures.com</a></li>
@@ -187,21 +187,7 @@ export default {};
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
-.font-arvo {
-  /* font-family: 'Arvo', serif; */
-}
-.font-rob {
-  /* font-family: 'Roboto', Sans-serif; */
-}
-.font-poppin {
-  /* font-family: 'Poppins', sans-serif; */
-}
-.font-source {
-  /* font-family: 'Source Sans Pro', sans-serif; */
-}
-.font-mont {
-  /* font-family: 'Montserrat', sans-serif; */
-}
+
 .footer {
   margin-top: 2px;
   width: 100%;
@@ -240,8 +226,4 @@ export default {};
   }
 }
 
-.size {
-  /* height: 100px;
-  width: 300px; */
-}
 </style>

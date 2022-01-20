@@ -155,7 +155,7 @@
                     {{$t("about.Our_localised_business_directory_helps_to_make_businesses_visible_and_locatable")}}, 
                     {{$t("about.and_enables_consumers_to_search_for_and_compare_product_prices")}}. 
                     {{$t("about.Customers_can_search_based_on_location")}},
-                    {{$t("about.")}}{{$t("about.Category,")}} 
+                    {{$t("about.Category")}} 
                     {{$t("about.price")}}
                   </p>
                 </div>
@@ -281,7 +281,7 @@
             {{$t("about.Consulting")}}
           </h3>
           <p class="text-md-left text-center production-text text-light">
-            {{$t("about.We_provide_media_and_management_consulting_services_to_both_public_and_private_entities")}}s.
+            {{$t("about.We_provide_media_and_management_consulting_services_to_both_public_and_private_entities")}}.
           </p>
         </div>
       </div>
@@ -293,7 +293,7 @@
         <div class="col-md-6 pt-md-5">
           <div class="my-5">
             <h1 class="color-black text-center font-arvo about-heading text-center pt-4">{{$t("about.ABOUT")}}</h1>
-            <h1 class="color-black mt-md-4 text-center font-arvo about-heading text-center">BRIDGE AFRICA.COM</h1>
+            <h1 class="color-black mt-md-4 text-center font-arvo about-heading text-center">bridgeafrica.com</h1>
           </div>
           <div class="video pl-md-5 py-5">
             <video
@@ -340,14 +340,14 @@
         </div>
         <div class="col-md-3 pl-md-0">
           <div class="specific-main-div px-3">
-            <h5 class="text-md-left text-center  specific-heading">BRIDGE</h5>
-            <h5 class="text-md-left text-center specific-heading">AFRICA.COM</h5>
+            <h5 class="text-md-left text-center  specific-heading">bridge</h5>
+            <h5 class="text-md-left text-center specific-heading">africa.com</h5>
             <h5 class="text-md-left text-center specific-heading">{{$t("about.SPECIFIC_INFO")}}</h5>
             <p>
               {{$t("about.Businesses_in_Africa_still_suffer_from_the_digital_divide")}}, 
               {{$t("about.which_limits_their_integration_into_the_digital_economy")}}. 
               {{$t("about.To_break_these_barriers")}}, 
-              {{$t("about.our_bridgeafrica_com_platform_enables_the_87_5%_of_businesses_that_lack_websites_to_easily_get_one_online_and_offline_via_SMS")}}; 
+              {{$t("about.bridge_about_info")}}; 
               {{$t("about.our_localised_business_directory_makes_them_visible")}}. 
               {{$t("about.Our_online_marketplace_will_also_enable_the_99%_of_businesses_that_had_never_sold_online_to_engage_in_e_commerce")}}.
             </p>
@@ -379,7 +379,7 @@
               pill
               :variant="selectedResource == 'bridgeafrica' ? 'primary' : 'outline-primary'"
               @click="changeResource('bridgeafrica')"
-              >BridgeAfrica.com</b-button
+              >bridgeafrica.com</b-button
             >
             <b-button
               pill
@@ -546,7 +546,9 @@
             alt="img"
             class="rounded-circle d-block m-auto team-img"
           />
+
           <p class="text-center team-name color-black mt-5">Maxine Moffet</p>
+
           <p class="text-center team-position color-black">{{$t("about.Co_founder")}}</p>
         </div>
       </div>
@@ -565,7 +567,7 @@
             <h2 class="text-light font-arvo text-center sub-heading">{{$t("about.STAY_IN_TOUCH")}}</h2>
             <b-form-input
               v-model="subEmail"
-              placeholder="Your Email Address"
+              :placeholder="$t('about.Your_Email_Address')"
               class="sub-input d-block mx-auto my-3"
             ></b-form-input>
 
@@ -599,8 +601,8 @@
           <p class="text-center font-mont text-light font-weight-bold">
             {{$t("about.We_hope_you_enjoy_our_products_and_services_as_much_as_we_enjoy_offering_them_to_you")}}. 
             {{$t("about.If_you_have_any_questions_or_comments")}}, 
-            {{$t("about.please_don't_hesitate_to_contact_us")}}. 
-            {{$t("about.via_the_media_below")}}.
+            {{$t("about.please_don_t_hesitate_to_contact_us")}}
+            {{$t("about.via_the_media_below")}}
           </p>
         </div>
       </div>
@@ -710,21 +712,7 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
-.font-arvo {
-  /* font-family: 'Arvo', serif; */
-}
-.font-rob {
-  /* font-family: 'Roboto', Sans-serif; */
-}
-.font-poppin {
-  /* font-family: 'Poppins', sans-serif; */
-}
-.font-source {
-  /* font-family: 'Source Sans Pro', sans-serif; */
-}
-.font-mont {
-  /* font-family: 'Montserrat', sans-serif; */
-}
+
 .balogo {
   width: 170px;
 }

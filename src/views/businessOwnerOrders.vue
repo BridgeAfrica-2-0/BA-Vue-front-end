@@ -4,7 +4,8 @@
     <!-- partie mobile--------------------------------------------------------------------- 
     
     ----------------------DEBUT -----------------------------------------------------
-    -->
+    -->  
+   
     <div id="hidemobile">
       <div
         class="justify-content-between d-flex row cd B"
@@ -63,7 +64,7 @@
       <hr />
 
       <div>
-        <div v-if="status == 1" class="inprogress">
+        <div class="inprogress">
           <div class="show row">
             <div class="col-3">{{ $t("businessowner.Show") }}:</div>
             <div class="col">
@@ -73,7 +74,7 @@
               ></b-form-select>
             </div>
           </div>
-          <div v-for="(item, index) in orders" :key="index">
+          <div v-for="(item, index) in orders.data" :key="index">
             <div class="justify-content-start container row marghr">
               <div class="justify-content-start container">
                 <div class="container d-flex justify-content-end btn-marg">
@@ -207,7 +208,7 @@
 
     <!-- <div class="container d-flex justify-content-end">clear history</div> -->
     <!--  partie desktop---------------------------------------------------------------------------------------- -->
-
+ 
     <div class="hidedesktop" id="hidedesktop">
       <!-- navigation--------------- -->
       <div class="row parent">
@@ -294,7 +295,7 @@
       </div>
 
       <div>
-        <div v-if="status == 1" class="inprogress">
+        <div  class="inprogress">
           <div class="show row">
             <div class="col-3">{{ $t("businessowner.Show") }}:</div>
             <div class="col">
@@ -305,7 +306,7 @@
               ></b-form-select>
             </div>
           </div>
-          <div v-for="item in orders" :key="item.oderId">
+          <div v-for="item in orders.data" :key="item.oderId">
             <div class="justify-content-start container">
               <div class="container d-flex justify-content-end btn-marg">
                 <div class="manage">
@@ -460,18 +461,22 @@ export default {
 
       if (p == 1) {
         this.etat = "All";
-       
+        
+        this.getOrder('');
 
         this.currentPage = 1;
       } else if (p == 2) {
         this.etat = "In process";
+        this.getOrder('pending');
        
         this.currentPage = 1;
       } else if (p == 3) {
+        this.getOrder('Re-shedule');
         this.etat = "Re-shedule";
       
         this.currentPage = 1;
       } else if (p == 4) {
+        this.getOrder('Shipped');
         this.etat = "Shipped";
        
         this.currentPage = 1;

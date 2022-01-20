@@ -65,12 +65,13 @@ import axios from "axios"
        
      
 
-     let url=`order/Business/list?businessId=${payload.id}&status=${payload.status}$page=${payload.page}`;
+      let url=`order/Business/list?businessId=${payload.id}&status=${payload.status}&page=${payload.page}`;
+   // let url=`order/Business/list?businessId=${payload.id}$page=${payload.page}`;
 
   
         return axios.post(url).then( response  => {
          
-          console.log('this is good');
+        
          console.log(response);
           commit("setOrders", response.data);
           

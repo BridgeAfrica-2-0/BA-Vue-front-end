@@ -32,7 +32,7 @@
                 size="4em"
               ></b-avatar>
               <span class="mr-auto">{{blockuser.name}}</span>
-              <span class="mr-auto float-right mt-1" @click="UnblockUser(blockuser)"><b-link href="#">{{ $t('network.Unblock') }}</b-link></span>
+              <span class="mr-auto float-right text-center mt-1" @click="UnblockUser(blockuser)"><b-link>{{ $t('network.Unblock') }}</b-link></span>
             </b-list>
           </b-skeleton-wrapper>
         </b-list-group>
@@ -111,14 +111,14 @@ export default {
   data() {
     return {
       url: null,
-      loading: false,
+      loading: false
     }
 	},
 
   computed: {
-    blockusers() {
-      return this.$store.state.NetworkSettings.blockusers;
-    },
+    // blockusers() {
+    //   return this.$store.state.NetworkSettings.blockusers;
+    // },
     blocknetworks() {
       return this.$store.state.NetworkSettings.blocknetworks;
     },

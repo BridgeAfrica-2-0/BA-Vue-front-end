@@ -502,5 +502,21 @@ export const ResizeMediaImage = {
 
   data:() => ({
     style: null
-  })
+  }),
+
+  mounted() {
+    window.addEventListener("resize", this.onResize);
+  },
+
+  destroyed() {
+    window.removeEventListener("resize", this.onResize);
+  },
+
+
+  methods: {
+    onResize(){
+      const newWidth = document.documentElement.clientWidth;
+      //console.log(newWidth)
+    }
+  }
 }

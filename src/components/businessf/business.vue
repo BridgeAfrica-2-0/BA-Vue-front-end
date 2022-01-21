@@ -231,6 +231,7 @@ export default {
   },
 
   created() {
+     this.currentTab = this.$route.query.tabId ? this.$route.query.tabId : 0;
     this.currentAuthType = 'business'
     this.url_data = this.$route.params.id;
     this.businessInfo();

@@ -154,11 +154,6 @@ export default {
       console.log('keyword: '+data);
       let formData = new FormData();
       formData.append('keyword', data);
-      // this.$store
-      //   .dispatch("networkProfileMembers/getMembers", {
-      //     path: this.url+"/members/list/"+this.page,
-      //     formData: formData
-      //   })
       console.log("network/"+this.url+"/feedbacks/"+this.currentPage)
       this.axios
         .post("network/"+this.url+"/feedbacks/"+this.currentPage, formData)

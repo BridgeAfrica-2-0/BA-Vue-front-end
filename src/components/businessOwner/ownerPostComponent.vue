@@ -12,7 +12,7 @@
           <b-avatar
             class="p-avater"
             :square="'user' == item.poster_type ? false : true"
-            variant="primary"
+            variant="light"
             :src="item.user_picture"
             size="5em"
           ></b-avatar>
@@ -84,7 +84,7 @@
             <b-avatar
               class="logo-sizee avat bg-light"
               :square="'user' == item.source.poster_type ? false : true"
-              variant="primary"
+              variant="light"
               :src="item.source.logo_path"
             >
             </b-avatar>
@@ -830,6 +830,10 @@ export default {
   font-weight: 400;
   font-size: 15px;
   color: black;
+}
+
+.usernamee:hover {
+  color: #e75c18;
 }
 </style>
 <style>

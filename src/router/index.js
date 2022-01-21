@@ -7,7 +7,7 @@ import home1 from "@/views/home1.vue";
 import signup from "../views/signup.vue";
 import success from "../views/success.vue";
 import failure from "../views/failure.vue";
-import RecoverPass1 from "../views/recoverPassword1.vue";
+import Password from "../views/recoverPassword.vue";
 import RecoverPass2 from "../views/recoverPassword2.vue";
 import RecoverPass3 from "../views/recoverPassword3.vue";
 
@@ -334,6 +334,23 @@ const routes = [
     component: Login,
   },
 
+
+  {
+    path: "/auth/facebook/callback",
+    name: "Login",
+    component: Login,
+  },
+
+   
+  {
+    path: "/auth/google/callback",
+    name: "Login",
+    component: Login,
+  },
+
+
+  
+
   {
     path: "/login/validation",
     name: "Loginvalidation",
@@ -347,9 +364,9 @@ const routes = [
   },
 
   {
-    path: "/recoverPass1",
-    name: "RecoverPass1",
-    component: RecoverPass1,
+    path: "/password",
+    name: "Password",
+    component: Password,
   },
 
   {
@@ -371,15 +388,7 @@ const routes = [
     name: "RecoverPass3",
     component: RecoverPass3,
   },
-  {
-    path: "/businessfollower/:id?",
-    name: "BusinessFollower",
-    component: businessFollower,
-    meta: {
-      auth: true,
-    },
-  },
-
+  
   {
     path: "/business/:id?",
     name: "BusinessFollower",

@@ -17,12 +17,12 @@
       class="people-style shadow h-100"
     >
       <b-row>
-        <b-col lg="12" xl="4" md="4" cols="12" sm="12">
+        <b-col md="4" cols="4">
           <div class="center-img">
             <img fluid :src="prod.picture" center class="r-image" />
           </div>
         </b-col>
-        <b-col lg="12" xl="4" md="4" cols="12" sm="12">
+        <b-col md="4" cols="8">
           <div class="flx100">
             <p class="textt">
               <strong
@@ -53,9 +53,9 @@
           </div>
         </b-col>
 
-        <b-col lg="12" xl="4" md="4" cols="12" sm="12">
+        <b-col md="4" cols="12">
           <div class="s-button">
-            <b-row>
+            <b-row align-h="center">
               <b-col
                 md="12"
                 lg="4"
@@ -64,7 +64,7 @@
                 cols="4"
                 class="mt-2 text-center"
               >
-                <b-button variant="primary" @click="AddToCard(prod.id, true)"
+                <b-button variant="primary" @click="buyNow(prod)"
                   ><span> {{ $t("search.Buy_now") }} </span>
                 </b-button>
               </b-col>
@@ -77,7 +77,7 @@
                 cols="4"
                 class="mt-2 text-center"
               >
-                <b-button variant="primary" @click="AddToCard(prod.id)"
+                <b-button variant="primary" @click="AddToCard(prod)"
                   ><span>Add to Cart</span>
                 </b-button>
               </b-col>
@@ -196,8 +196,8 @@ export default {
         });
     },
 
-    buyNow() {
-      this.AddToCard();
+    buyNow(prod) {
+      this.AddToCard(prod);
       this.$router.push({ name: "payment" });
     },
 

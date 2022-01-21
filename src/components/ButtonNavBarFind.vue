@@ -24,10 +24,12 @@
   
   export default {
     name: "ShareButton",
+    
     props: {
       media: String,
-      default : () => 'desktop',
+      default: () => 'desktop',
     },
+    
     created(){
       console.log(this.media)
     }

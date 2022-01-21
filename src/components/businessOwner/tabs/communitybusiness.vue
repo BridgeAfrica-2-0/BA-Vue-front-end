@@ -21,11 +21,9 @@
                 </div>
                 <div class="flx100">
                   <p class="textt">
+                 
                     <router-link
-                      :to="{
-                        name: 'BusinessFollower',
-                        params: { id: item.id },
-                      }"
+                      :to="'business/'+item.id"
                     >
                       <strong class="title">
                         {{ item.name }}</strong
@@ -51,7 +49,7 @@
 
                     <span class="location">
                       <b-icon-geo-alt class="ico"></b-icon-geo-alt
-                      >{{ item.country }}
+                      >{{ item.city }}
                     </span>
                     <br />
                     <read-more
@@ -200,7 +198,17 @@ export default {
 
   methods: {
 
-     
+        businessCommunityTotal() {
+      this.$store
+        .dispatch("businessOwner/businessCommunityTotal", this.biz_id)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
   BlockUser(id, index) {
 
      let dataInfo = {
@@ -219,7 +227,7 @@ export default {
         })
       .then(response => {
         
-      
+      this.businessCommunityTotal();
         this.$delete(this.businesses,index);
         console.log("user deleted");
 
@@ -279,6 +287,7 @@ export default {
       await axios
         .post(uri, data)
         .then(({ data }) => {
+          this.businessCommunityTotal();
           console.log(data);
           user.is_follow = nextFollowState;
           document.getElementById("followbtn" + user.id).disabled = false;

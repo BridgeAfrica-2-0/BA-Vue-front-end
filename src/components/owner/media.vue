@@ -29,7 +29,6 @@
     </CoolLightBox>
 
 
-
         <b-row>   
 
 

@@ -317,6 +317,9 @@
     "Product_Deleted_Successfuly":"Product Deleted Successfuly",
     "Unable_To_Delete_Product":"Unable To Delete Product",
     "You_Are_Now_Following":"You Are Now Following",
+<<<<<<< HEAD
+    "All_networks":"All networks"
+=======
     "Content_successfuly_uploaded":"Content successfully uploaded",
     "Unable_to_Update_your_post":"Unable to Update your post",
     "BETA_LAUNCH_OF_BRIDGEAFRICA":"BETA LAUNCH OF BRIDGEAFRICA",
@@ -324,6 +327,7 @@
     "Direction":"Direction",
     "Hot_Businesses":"Hot Businesses",
     "No_item":"No item"
+>>>>>>> 2a7132b80152ee73d879692289ccd69b4a6d2b54
 
    
 

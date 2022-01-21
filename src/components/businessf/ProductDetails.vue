@@ -51,17 +51,16 @@
             >
               <span>{{ $t("general.Buy_Now") }}</span>
             </b-button>
-            <router-link :to="`/business/${product.business_id}`"
-              ><b-button
-                variant="success"
-                class="font-weight-light shadow-sm"
-                >{{ $t("general.Check_On_Website") }}</b-button
-              ></router-link
+            <b-button
+              variant="success"
+              class="font-weight-light shadow-sm"
+              @click="goToWebsiteMarket(product)"
+              >{{ $t("general.Check_On_Website") }}</b-button
             >
           </div>
           <hr class="h-divider" />
           <div class="mt-3">
-            <ProductComments :idproduct="product.id" />
+            <ProductComments :idproduct="product.id" :product="product" />
           </div>
         </b-col>
       </b-row>
@@ -101,6 +100,12 @@ export default {
   },
   computed: {},
   methods: {
+    goToWebsiteMarket(product) {
+      this.$router.push({
+        path: `/business/${product.business_id}`,
+        query: { tabId: 3 },
+      });
+    },
     formatMoney(money) {
       return this.formatObject.format(money);
     },

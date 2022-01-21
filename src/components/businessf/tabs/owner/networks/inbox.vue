@@ -124,12 +124,7 @@
                                 <b-avatar
                                   class="d-inline-block profile-pic"
                                   variant="primary"
-                                  :src="
-                                    getImage({
-                                      type: 'user',
-                                      image: chat.profile_picture,
-                                    })
-                                  "
+                                  :src="chatListImage(chatSelected.chat)"
                                 ></b-avatar>
 
                                 <h6 class="mt-2 d-inline-block ml-2">
@@ -213,12 +208,7 @@
                                 <b-avatar
                                   class="d-inline-block profile-pic"
                                   variant="primary"
-                                  :src="
-                                    getImage({
-                                      type: 'business',
-                                      image: chat.logo_path,
-                                    })
-                                  "
+                                  :src="chatListImage(chatSelected.chat)"
                                 ></b-avatar>
 
                                 <h6 class="mt-2 d-inline-block ml-2">
@@ -303,12 +293,7 @@
                               <b-avatar
                                 class="d-inline-block profile-pic"
                                 variant="primary"
-                                :src="
-                                  getImage({
-                                    type: 'network',
-                                    image: chat.image,
-                                  })
-                                "
+                                :src="chatListImage(chatSelected.chat)"
                               ></b-avatar>
 
                               <h6 class="mt-2 d-inline-block ml-2">
@@ -434,16 +419,7 @@
                   <b-col class="col-3" @click="info = true">
                     <b-avatar
                       variant="primary"
-                      :src="
-                        getImage({
-                          type: type,
-                          image: chatSelected.profile_picture
-                            ? chatSelected.profile_picture
-                            : chatSelected.logo_path
-                            ? chatSelected.logo_path
-                            : chatSelected.image,
-                        })
-                      "
+                      :src="chatListImage(chatSelected.chat)"
                       size="50"
                     ></b-avatar>
                   </b-col>
@@ -1566,12 +1542,7 @@
                                 <b-avatar
                                   class="d-inline-block profile-pic"
                                   variant="primary"
-                                  :src="
-                                    getImage({
-                                      type: 'user',
-                                      image: chat.profile_picture,
-                                    })
-                                  "
+                                  :src="chatListImage(chat)"
                                 ></b-avatar>
 
                                 <h6 class="mt-2 d-inline-block ml-2">
@@ -1662,12 +1633,7 @@
                                 <b-avatar
                                   class="d-inline-block profile-pic"
                                   variant="primary"
-                                  :src="
-                                    getImage({
-                                      type: 'business',
-                                      image: chat.logo_path,
-                                    })
-                                  "
+                                  :src="chatListImage(chat)"
                                 ></b-avatar>
 
                                 <h6 class="mt-2 d-inline-block ml-2">
@@ -1757,12 +1723,7 @@
                               <b-avatar
                                 class="d-inline-block profile-pic"
                                 variant="primary"
-                                :src="
-                                  getImage({
-                                    type: 'network',
-                                    image: chat.image,
-                                  })
-                                "
+                                :src="chatListImage(chat)"
                               ></b-avatar>
 
                               <h6 class="mt-2 d-inline-block ml-2">
@@ -1886,16 +1847,7 @@
                   <b-col class="col-3" @click="info = true">
                     <b-avatar
                       variant="primary"
-                      :src="
-                        getImage({
-                          type: type,
-                          image: chatSelected.profile_picture
-                            ? chatSelected.profile_picture
-                            : chatSelected.logo_path
-                            ? chatSelected.logo_path
-                            : chatSelected.image,
-                        })
-                      "
+                      :src="chatListImage(chatSelected.chat)"
                       size="50"
                     ></b-avatar>
                   </b-col>
@@ -3179,7 +3131,7 @@ export default {
           ? value.receiver_business.name
           : value.name;
       } else if (this.type == "network") {
-        name = value.sender_business
+        name = value.sender_network
           ? value.sender_network_id == this.currentBizId
             ? value.receiver_network.name
             : value.sender_network
@@ -3221,6 +3173,40 @@ export default {
       // console.log("debug ", finale);
       // console.log(this.type);
       return finale;
+    },
+    chatListImage(value) {
+      var image = "";
+      let user = require("@/assets/profile_white.png");
+      let network = require("@/assets/network_default.png");
+      let business = require("@/assets/business_white.png");
+
+      if (this.type == "user") {
+        image = value.sender
+          ? value.sender.profile_picture
+          : value.receiver
+          ? value.receiver.profile_picture
+          : value.profile_picture
+          ? value.profile_picture
+          : user;
+      } else if (this.type == "business") {
+        image = value.sender_business
+          ? value.sender_business.logo_path
+          : value.receiver_business
+          ? value.receiver_business.logo_path
+          : value.logo_path
+          ? value.logo_path
+          : business;
+      } else if (this.type == "network") {
+        image = value.sender_network
+          ? value.sender_network_id == this.currentBizId
+            ? value.receiver_network.image
+            : value.sender_network
+            ? value.sender_network.image
+            : value.image
+          : network;
+      }
+      // console.log("chatlist image:", image);
+      return image;
     },
     getCurBiz() {
       this.$store.dispatch("networkChat/GET_CUR_BIZ");

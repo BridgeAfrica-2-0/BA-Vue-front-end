@@ -109,12 +109,7 @@
                               <b-avatar
                                 class="d-inline-block"
                                 variant="primary"
-                                :src="
-                                  getImage({
-                                    type: 'user',
-                                    image: chat.profile_picture,
-                                  })
-                                "
+                                :src="chatListImage(chat)"
                               ></b-avatar>
 
                               <h6 class="mt-2 d-inline-block ml-2">
@@ -202,12 +197,7 @@
                               <b-avatar
                                 class="d-inline-block profile-pic"
                                 variant="primary"
-                                :src="
-                                  getImage({
-                                    type: 'business',
-                                    image: chat.logo_path,
-                                  })
-                                "
+                                :src="chatListImage(chat)"
                               ></b-avatar>
 
                               <h6 class="mt-2 d-inline-block ml-2">
@@ -294,12 +284,7 @@
                               <b-avatar
                                 class="d-inline-block profile-pic"
                                 variant="primary"
-                                :src="
-                                  getImage({
-                                    type: 'network',
-                                    image: chat.image,
-                                  })
-                                "
+                                :src="chatListImage(chat)"
                               ></b-avatar>
 
                               <h6 class="mt-2 d-inline-block ml-2">
@@ -498,15 +483,11 @@
                   <label for="file">
                     <b-icon
                       for="file"
-                      class="
-                        msg-icon
-                        primary
-                        icon-size icon-top
-                      "
+                      class="msg-icon primary icon-size icon-top"
                       icon="paperclip"
                     >
                     </b-icon>
-                    
+
                     <input
                       style="display: none"
                       type="file"
@@ -908,12 +889,7 @@
                               <b-avatar
                                 class="d-inline-block profile-pic"
                                 variant="primary"
-                                :src="
-                                  getImage({
-                                    type: 'user',
-                                    image: chat.profile_picture,
-                                  })
-                                "
+                                :src="chatListImage(chat)"
                               ></b-avatar>
 
                               <h6 class="mt-2 d-inline-block ml-2">
@@ -1001,12 +977,7 @@
                               <b-avatar
                                 class="d-inline-block profile-pic"
                                 variant="primary"
-                                :src="
-                                  getImage({
-                                    type: 'business',
-                                    image: chat.logo_path,
-                                  })
-                                "
+                                :src="chatListImage(chat)"
                               ></b-avatar>
 
                               <h6 class="mt-2 d-inline-block ml-2">
@@ -1094,12 +1065,7 @@
                               <b-avatar
                                 class="d-inline-block profile-pic"
                                 variant="primary"
-                                :src="
-                                  getImage({
-                                    type: 'network',
-                                    image: chat.image,
-                                  })
-                                "
+                                :src="chatListImage(chat)"
                               ></b-avatar>
 
                               <h6 class="mt-2 d-inline-block ml-2">
@@ -1135,16 +1101,7 @@
                 <b-col class="col-3" @click="info = true">
                   <b-avatar
                     variant="primary"
-                    :src="
-                      getImage({
-                        type: type,
-                        image: chatSelected.profile_picture
-                          ? chatSelected.profile_picture
-                          : chatSelected.logo_path
-                          ? chatSelected.logo_path
-                          : chatSelected.image,
-                      })
-                    "
+                    :src="chatListImage(chatSelected.chat)"
                     size="60"
                   ></b-avatar>
                 </b-col>
@@ -1779,6 +1736,40 @@ export default {
       console.log("press...");
       this.getList(e);
     }, 1000),
+    chatListImage(value) {
+      var image = "";
+      let user = require("@/assets/profile_white.png");
+      let network = require("@/assets/network_default.png");
+      let business = require("@/assets/business_white.png");
+
+      if (this.type == "user") {
+        image = value.sender
+          ? value.sender.id == this.currentUser.user.id
+            ? value.receiver.profile_picture
+            : value.sender
+            ? value.sender.profile_picture
+            : value.profile_picture
+          : user;
+      } else if (this.type == "business") {
+        image = value.sender_business
+          ? value.sender_business.logo_path
+          : value.receiver_business
+          ? value.receiver_business.logo_path
+          : value.logo_path
+          ? value.logo_path
+          : business;
+      } else if (this.type == "network") {
+        image = value.receiver_network
+          ? value.receiver_network.image
+          : value.sender_network
+          ? value.sender_network.image
+          : value.image
+          ? value.image
+          : network;
+      }
+      // console.log("chatlist image:", image);
+      return image;
+    },
     formatName(value) {
       var name = "";
 

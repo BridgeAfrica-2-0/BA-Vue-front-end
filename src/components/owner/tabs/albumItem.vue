@@ -1,13 +1,12 @@
 <template>
-  <div
-    class="createp img-gall predit2"
+  <div class ="col-sm-6 col-md-4 createp img-gall predit2"
     @mouseover="upHere = true"
     @mouseleave="upHere = false"
-    :style="getStyle"
+    
   >
     <a>
       <span>
-        <img class="card-img album-img" :src="cover(album.cover)" alt="" :style="getStyle" />
+        <img class="card-img album-img img-fluid" :src="cover(album.cover)" alt="" style="width: 100%;height: 100%;" />
       </span>
       <div class="createdesc botmedia">
         <div class="botmediadess-position" v-if="loading">

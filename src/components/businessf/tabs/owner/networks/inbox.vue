@@ -706,10 +706,10 @@
                     </div>
                   </b-col>
 
-                  <b-col cols="2" class="p-0">
+                  <b-col cols="2" class="p-0 pl-2">
                     <b-icon
                       @click="send"
-                      class="ml-12 pl-12 msg-icon primary icon-size icon-top"
+                      class="msg-icon primary icon-size icon-top"
                       icon="cursor-fill"
                     ></b-icon>
                   </b-col>
@@ -809,7 +809,7 @@
                     :placeholder="
                       $t('businessowner.Type_the_name_of_person_or_Business')
                     "
-                    @keydown.enter="getList(newSearchQuery)"
+                    @input="onPressSearchNewChat"
                   ></b-form-input>
                 </b-col>
               </b-row>
@@ -2173,10 +2173,10 @@
                     </div>
                   </b-col>
 
-                  <b-col cols="2" class="p-0">
+                  <b-col cols="2" class="p-0 pl-2">
                     <b-icon
                       @click="send"
-                      class="ml-12 pl-12 msg-icon primary icon-size icon-top"
+                      class="msg-icon primary icon-size icon-top"
                       icon="cursor-fill"
                     ></b-icon>
                   </b-col>
@@ -2277,7 +2277,7 @@
                     :placeholder="
                       $t('businessowner.Type_the_name_of_person_or_Business')
                     "
-                    @keydown.enter="getList(newSearchQuery)"
+                    @input="onPressSearchNewChat"
                   ></b-form-input>
                 </b-col>
               </b-row>
@@ -2936,6 +2936,7 @@
 import EmojiPicker from "vue-emoji-picker";
 import io from "socket.io-client";
 import moment from "moment";
+import _ from "lodash";
 
 export default {
   components: {
@@ -3157,6 +3158,10 @@ export default {
     },
   },
   methods: {
+    onPressSearchNewChat: _.debounce(function (e) {
+      console.log("press...", e);
+      this.getList(e);
+    }, 1000),
     formatName(value) {
       var name = "";
       // console.log("Value:", value);
@@ -3428,7 +3433,7 @@ export default {
       } else if (this.type == "business") {
         this.$store.dispatch("userChat/GET_BIZS", keyword);
       } else {
-        console.log("network");
+        console.log("network", keyword);
         this.$store.dispatch("userChat/GET_NETS", keyword);
       }
     },
@@ -3612,7 +3617,7 @@ export default {
         .catch(() => console.log("error"));
     },
     send() {
-      if (this.input.length > 0 && this.input.length < 500) {
+      if (this.file || (this.input.length > 0 && this.input.length < 500)) {
         if (this.type == "group") {
           this.sendGroup();
         } else {

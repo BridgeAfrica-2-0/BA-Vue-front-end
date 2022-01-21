@@ -3,7 +3,7 @@
     <div class="container-fluid">
       <div class="row" v-if="!showalbum">
         
-          <div  class="col-sm-6 col-md-3  createp img-gall image-wrapp img-size" v-if="isEditor" v-b-modal.createalbumModal>
+          <div  :style="getStyle" class="createp img-gall image-wrapp img-size" v-if="isEditor" v-b-modal.createalbumModal>
             <div class="">
               <a>
                 <div class="drag-textt">
@@ -124,7 +124,7 @@
             album_name,
           )
         "
-        :images="strategy[type]().showAlbumImages"
+        :images="allAlbumImage"
         @reste="hidealbum"
       />
     </div>
@@ -142,6 +142,8 @@ import defaultImage from '@/assets/img/nothing.jpg';
 import { fullMediaLink } from '@/helpers';
 
 import { ResizeMediaImage } from '@/mixins'
+
+import _ from 'lodash'
 
 export default {
   mixins: [ResizeMediaImage],
@@ -254,6 +256,30 @@ export default {
     canCreateAlbum() {
       return this.albumInfo.name ? false : true;
     },
+
+    allAlbumImage(){
+      
+      const wrapper = (data) => {
+        const newData = data
+          .filter((img) => img.media.length)
+          .map((img) => {
+            let render = img.media.map((picture) => {
+              return {
+                id: '',
+                content: '',
+                media: { 
+                  path: picture.path, type: picture.type, id: picture.id 
+                },
+              };
+            });
+
+            return render;
+          });
+        return _.flatten(newData);
+      };
+
+      return wrapper(this.strategy[this.type]().showAlbumImages)
+    }
   },
 
   methods: {
@@ -435,8 +461,8 @@ export default {
 
 <style scoped>
 .img-size {
-  width: 266px !important;
-  height: 266px !important;
+  width: 266px ;
+  height: 266px;
 }
 ._vue-flash-msg-body._vue-flash-msg-body_success,
 ._vue-flash-msg-body._vue-flash-msg-body_error {

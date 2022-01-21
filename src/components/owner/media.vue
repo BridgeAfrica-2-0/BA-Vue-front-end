@@ -55,7 +55,6 @@ export default {
 
   data: function () {
     return {
-     
       index: null
     };
   },
@@ -74,15 +73,7 @@ export default {
       console.log("Pictures" , arr);
       return arr;
     }
-
   },
-
-  mounted(){
-
-    
-
-  }
-
 
 };
 </script>
@@ -95,7 +86,5 @@ export default {
     object-fit: cover;
     width: 100%;
 }
-
-
 
 </style>

@@ -31,7 +31,7 @@
                   </span>
 
                   <span class="ml-3 md-title l-20">
-                    Via Email To <br />
+                    {{$t("verification.Via_Email_To")}} <br />
                  {{auth.email}}
                   </span>
                 </div>
@@ -62,7 +62,7 @@
                   </span>
 
                   <span class="ml-3 md-title l-20">
-                    Via SMS To <br />
+                    {{$t('verification.Via_SMS_To')}} <br />
                     {{ auth.phone }}
                   </span>
                 </div>
@@ -310,7 +310,7 @@ export default {
           this.flashMessage.show({
             status: "success",
 
-            message: this.$t("account verification success"),
+            message: this.$t("verification.account_verification_success"),
           });
 
           this.$router.push({ name: "welcome" });

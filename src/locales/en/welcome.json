@@ -85,5 +85,8 @@
     "Registration_Failed": "Registration Failed",
     "Business_Profile_Created": "Business Profile Created",
     "Unable_to_Create_Your_Business": "Unable to Create Your Business",
-    "Neighbour":"Neighbourhood"
+    "Neighbour":"Neighbourhood",
+    "Look_like_you_re_lost":"Look like you're lost",
+    "the_page_you_are_looking_for_not_avaible":"the page you are looking for not avaible",
+    "Go_to_Home":"Go to Home"
 }

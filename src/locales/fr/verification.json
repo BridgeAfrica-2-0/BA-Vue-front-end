@@ -14,5 +14,8 @@
     "Via_Email_To":"Via e-mail à",
     "account_verification_success":"vérification du compte réussie",
     "Via_SMS_To":"Via SMS à",
-    "Neighbour":"Quartier"
+    "Neighbour":"Quartier",
+    "Password_reset":"Réinitialisation du mot de passe",
+    "tel":"Téléphone",
+    "tel_is_required":"Le téléphone est requis"
 }

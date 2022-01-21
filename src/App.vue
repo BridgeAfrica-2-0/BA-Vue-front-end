@@ -22,8 +22,8 @@ import { Redis } from "@/mixins";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
-  //mixins: [Redis],
-
+  mixins: [Redis],
+  
   data() {
     return {
       prevHeight: 0,

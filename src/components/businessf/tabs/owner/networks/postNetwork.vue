@@ -484,7 +484,7 @@ export default {
     }),
 
     business_logo() {
-      return this.$store.state.networkProfile.networkInfo.logo_path;
+      return this.$store.state.networkProfile.networkInfo.image;
     },
 
     profileNamePost() {

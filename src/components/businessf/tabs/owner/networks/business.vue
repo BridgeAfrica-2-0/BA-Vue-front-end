@@ -22,7 +22,7 @@
               {{ business.name.substring(0, 10) + "..." }}
             </strong>
             <br />
-            {{ business.category }}
+            <span v-for="cat in business.category" :key="cat.id">{{ cat.name }}, </span>
             <br />
             {{ business.followers }} {{ $t("network.Community") }} <br />
 

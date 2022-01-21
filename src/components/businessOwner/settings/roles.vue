@@ -3,7 +3,7 @@
     <h5 class="a-text">{{ $t('businessowner.Assign_Role') }}</h5>
     <b-container class="b-bottom">
       <b-row>
-        <b-col cols="5">
+        <b-col cols="7">
           <b-form-group
             label-cols-lg="3"
             :label="$t('businessowner.User')"
@@ -24,7 +24,7 @@
           </b-form-group>
         </b-col>
 
-        <b-col>
+        <b-col cols="3">
           <b-form-group
             label-cols-lg="3"
             :label="$t('businessowner.Role')"
@@ -45,7 +45,7 @@
           </b-form-group>
         </b-col>
 
-        <b-col>
+        <b-col cols="2">
           <b-button variant="primary" class="" @click="assignRole()">
             <b-spinner v-if="SPassign" small type="grow"></b-spinner>{{ $t('businessowner.Assign') }}
           </b-button>

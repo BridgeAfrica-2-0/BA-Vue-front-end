@@ -32,7 +32,7 @@
                 size="4em"
               ></b-avatar>
               <span class="mr-auto">{{blockuser.name}}</span>
-              <span class="mr-auto float-right mt-1" @click="UnblockUser(blockuser)"><b-link href="#">{{ $t('network.Unblock') }}</b-link></span>
+              <span class="mr-auto float-right text-center mt-1" @click="UnblockUser(blockuser)"><b-link>{{ $t('network.Unblock') }}</b-link></span>
             </b-list>
           </b-skeleton-wrapper>
         </b-list-group>
@@ -111,14 +111,14 @@ export default {
   data() {
     return {
       url: null,
-      loading: false,
+      loading: false
     }
 	},
 
   computed: {
-    blockusers() {
-      return this.$store.state.NetworkSettings.blockusers;
-    },
+    // blockusers() {
+    //   return this.$store.state.NetworkSettings.blockusers;
+    // },
     blocknetworks() {
       return this.$store.state.NetworkSettings.blocknetworks;
     },
@@ -181,11 +181,11 @@ export default {
      
     UnblockUser(blockuser) {
       this.loading = true;
-      console.log("UnblockUser"+this.url+"/"+blockuser.id);
+      console.log("unblocked-user/"+this.url+"/"+blockuser.id);
       this.$store
       .dispatch("NetworkSettings/UnBlock", 
       {
-        path: "users/unblocked/"+this.url+"/"+blockuser.id,
+        path: "unblocked-user/"+this.url+"/"+blockuser.id,
       })
 			.then(response => {
 			  console.log(response);
@@ -207,11 +207,11 @@ export default {
     },
     UnblockNetwork(blocknetwork) {
       this.loading = true;
-      console.log("business/unblocking/"+this.url+"/"+blocknetwork.id);
+      console.log("unblocked-network/"+this.url+"/"+blocknetwork.id);
       this.$store
       .dispatch("NetworkSettings/UnBlock", 
       {
-        path: "network-banned/unblocked/"+this.url+"/"+blocknetwork.id,
+        path: "unblocked-network/"+this.url+"/"+blocknetwork.id,
       })
 			.then(response => {
 			  console.log(response);
@@ -233,11 +233,11 @@ export default {
     },
     UnblockBusines(blockbusines) {
       this.loading = true;
-      console.log("business/unblocking/"+this.url+"/"+blockbusines.id);
+      console.log("unblocked-business/"+this.url+"/"+blockbusines.id);
       this.$store
       .dispatch("NetworkSettings/UnBlock", 
       {
-        path: "business-banned/unblocked/"+this.url+"/"+blockbusines.id,
+        path: "unblocked-business/"+this.url+"/"+blockbusines.id,
       })
 			.then(response => {
 			  console.log(response);

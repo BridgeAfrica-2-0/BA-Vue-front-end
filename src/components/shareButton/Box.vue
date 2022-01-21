@@ -18,7 +18,7 @@
       @keypress.enter="search(name)"
     ></b-form-input>
 
-    <b-form-input v-else
+    <b-form-input v-if = "contacts.length && !isCommunity"
       :placeholder="placeholder"
       class="input-search mb-2"
       v-model="text"
@@ -185,15 +185,18 @@ export default {
   methods: {
     debounceInput: _.debounce(function (e) {
       if (e) {
-        const result = this.all.filter((contact) =>
-          contact.name.toLowerCase().includes(e.toLowerCase())
-        );
+        
+        const result = this.all.filter((contact) => {
+          console.log(contact.name.toLowerCase())
+          console.log(e.toLowerCase())
+          return contact.name.toLowerCase().includes(e.toLowerCase())
+        });
 
         if (result.length) this.contacts = result;
         else
           this.flashMessage.show({
             status: "error",
-            message: `No ${this.type} name start with ${e}`,
+            message: `No ${this.type} name contains ${e}`,
           });
       } else {
         this.contacts = this.all;

@@ -83,7 +83,10 @@
         <hr />
       </div>
 
-      <infinite-loading :identifier="infiniteId" ref="infiniteLoading" @infinite="infiniteHandler"></infinite-loading>
+      <infinite-loading :identifier="infiniteId" ref="infiniteLoading" @infinite="infiniteHandler">
+        <div class="text-red" slot="no-more">No Pending Posts To Show</div>
+        <div class="text-red" slot="no-results">No Pending Posts To Show</div>
+      </infinite-loading>
     </b-card>
   </div>
 </template>

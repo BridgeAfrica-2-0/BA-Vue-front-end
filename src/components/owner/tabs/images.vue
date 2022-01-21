@@ -63,8 +63,9 @@
           </a>
         </div>
       </div>
+      
       <div v-for="(image, cmp) in allImages" :key="cmp" >
-        <div class="img-gall" v-for="(im, index) in image.media" :key="index" :style="getStyle">
+        <b-row class="img-gall row" v-for="(im, index) in image.media" :key="index">
           <Picture
             :im="im"
             :typeOfMedia="() => typeOfMedia(im.path)"
@@ -79,9 +80,8 @@
             :imageProps="imageProps"
             :isEditor="isEditor"
             :type="type"
-            :getStyle="getStyle"
           />
-        </div>
+        </b-row>
       </div>
 
       <vue-easy-lightbox

@@ -7,12 +7,19 @@ import axios from "axios"
     namespaced: true,
     state: {
       
-           all:[],
+           orders:[],
            followers: []
    
     },
 
     getters: {
+
+      orders: state => {
+        return state.orders;
+      },
+
+
+
       process: state => {
         return state.all.filter(val => val.status == "pending")
       },
@@ -31,6 +38,12 @@ import axios from "axios"
   },
 
   mutations: {
+
+    setOrders(state, data){
+      state.orders=data;
+    },
+
+
     setAll(state, data){
         state.all.push(data) 
       },
@@ -48,24 +61,26 @@ import axios from "axios"
 
   actions : {
   
-    getOrder({ commit,state },data) { 
-        let pages = 1;
-        let continu = true
-        commit("resetAll")
-     while (continu) {
-        return axios.get(data+''+pages ).then( response  => {
-          continu = response.data.data.length ;
-          pages++
+    getOrder({ commit},payload) { 
+       
+     
+
+      let url=`order/Business/list?businessId=${payload.id}&status=${payload.status}&page=${payload.page}`;
+   // let url=`order/Business/list?businessId=${payload.id}$page=${payload.page}`;
+
+  
+        return axios.post(url).then( response  => {
+         
         
-          response.data.data.forEach(element => {
-            commit("setAll", element);
-            console.log(state.all);
-          });
-    
+         console.log(response);
+          commit("setOrders", response.data);
           
-        });
+        }).catch((err) => {
+          console.log("Something went wrong");
+          console.log({ err: err })
+        }); 
         
-      }
+    
         
      
     

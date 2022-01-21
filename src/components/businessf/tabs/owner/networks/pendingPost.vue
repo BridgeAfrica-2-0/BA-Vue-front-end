@@ -2,7 +2,7 @@
   <div class="container">
     <b-row>
       <b-col cols="12" class="f-left">
-post<div v-for="post in owner_post" :key="post.id" :loading="load" class="mb-4">
+        <div v-for="post in owner_post" :key="post.id" :loading="load" class="mb-4">
           <div class="mb-2">
             <div class="f-left">
               <b-row class="px-md-3">
@@ -79,9 +79,9 @@ post<div v-for="post in owner_post" :key="post.id" :loading="load" class="mb-4">
     </b-row>
     <b-row>
       <b-col>
-        <p class="text-center" v-if="owner_post < 1">
-          {{ $t('network.No_Pending_Posts_To_Show') }}
-        </p>
+        <b-card bg-variant="white" text-variant="black" class="text-center" v-if="owner_post < 1">
+          <b-card-text>{{ $t('network.No_Pending_Posts_To_Show') }}</b-card-text>
+        </b-card>
       </b-col>
     </b-row>
   </div>

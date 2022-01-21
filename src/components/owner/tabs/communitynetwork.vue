@@ -149,6 +149,18 @@ export default {
 
   methods: {
 
+
+
+ getTotalCommunity(){
+         this.$store
+      .dispatch("follower/Tcommunity", this.foll_id)
+      .then((response) => {})
+      .catch((error) => {
+        console.log({ error: error });
+      });
+    },
+
+
     
   BlockUser(id, index) {
 
@@ -186,7 +198,7 @@ export default {
         })
       .then(response => {
         
-      
+       this.getTotalCommunity();
         this.$delete(this.network,index);
         console.log("user deleted");
 
@@ -260,6 +272,7 @@ export default {
       await axios
         .post(uri, data)
         .then((response) => {
+           this.getTotalCommunity();
           user.is_follow = nextFollowState;
           document.getElementById('followbtn' + user.id).disabled = false;
         })

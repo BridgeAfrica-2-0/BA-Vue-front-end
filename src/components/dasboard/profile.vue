@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-card class="border shadow card pr-3 " style="height:300px">
+    <b-card class="border shadow card pr-3" style="height: 300px">
       <span>
         <h3 class="name mb-3">
           <h6 class="name">
@@ -26,7 +26,7 @@
           </h6>
           <p class="mb-1">
             {{ profile.followers }} {{ community }}
-            <span class="float-right "
+            <span class="float-right"
               >{{ $t("dashboard.Current_Plan") }}:
               <span class="text-success">{{
                 $t("dashboard.Basic")
@@ -40,14 +40,16 @@
               {{ $t("dashboard.Visit_Profile") }}</router-link
             >
           </p>
-          <p class="mb-1 ">
+          <p class="mb-1">
             <b-icon-chat-fill class="text-primary"></b-icon-chat-fill>
-            {{ $t("dashboard.Messages") }}
+            <router-link to="/messaging">
+              {{ $t("dashboard.Messages") }}</router-link
+            >
             <span class="badge rounded-pill bg-primary float-right mt-1">
               {{ profile.message }}
             </span>
           </p>
-          <p class="mb-1 ">
+          <p class="mb-1">
             <b-icon-bell-fill class="text-primary"></b-icon-bell-fill>
             {{ $t("dashboard.Notifications") }}
             <span class="badge rounded-pill bg-primary float-right mt-1">
@@ -61,58 +63,51 @@
 </template>
 
 <script>
-	export default {
-	  name: "profile",
-	  computed: {
-	    details() {
-	      return this.$store.getters["ProfileAndBusinessDetails/getdetails"];
-	    },
-	    community(){
-	      if((this.$i18n.locale==='en')){
-	        if(this.profile.followers>1){
-	          return "Communities"
-	        }
-          return "Community"
+export default {
+  name: "profile",
+  computed: {
+    details() {
+      return this.$store.getters["ProfileAndBusinessDetails/getdetails"];
+    },
+    community() {
+      if (this.$i18n.locale === "en") {
+        if (this.profile.followers > 1) {
+          return "Communities";
+        }
+        return "Community";
+      } else if (this.$i18n.locale === "fr") {
+        if (this.profile.followers > 1) {
+          return "Communautés";
+        }
+        return "Communauté";
+      }
+      return "Community";
+    },
+    profile() {
+      return this.$store.state.ProfileAndBusinessDetails.profile;
+    },
+  },
+  mounted() {
+    this.$store
+      .dispatch("ProfileAndBusinessDetails/getdetails")
+      .then(() => {
+        console.log("the response");
+      })
+      .catch((err) => {
+        console.log({ err: err });
+      });
+  },
 
-	      }else if(this.$i18n.locale==='fr'){
-	        if(this.profile.followers>1){
-	          return "Communautés"
-	        }
-          return "Communauté"
-
-	      }
-        return "Community"
-	    },
-	    profile(){
-	    return this.$store.state.ProfileAndBusinessDetails.profile;
-	    },
-
-
-	  },
-	  mounted() {
-	    this.$store
-	      .dispatch("ProfileAndBusinessDetails/getdetails")
-	      .then(() => {
-
-	        console.log("the response");
-	      })
-	      .catch(err => {
-	        console.log({ err: err });
-	      });
-	  },
-
-	  methods:{
-
-	  }
-	};
+  methods: {},
+};
 </script>
 
 <style scoped>
 .mt-top-60 {
   margin-top: -50px;
 }
-.bg-white{
-  background-color: #ffffff
+.bg-white {
+  background-color: #ffffff;
 }
 
 @media only screen and (min-width: 768px) {

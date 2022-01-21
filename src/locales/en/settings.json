@@ -46,5 +46,6 @@
 		"An_error_occured":"An error occured",
 		"Mark_as_Read":"Mark as Read",
 		"Unblock":"Unblock",
-		"Unable_to_Unblock_User":"Unable to unblock User"
+		"Unable_to_Unblock_User":"Unable to unblock User",
+		"User_blocked":"User blocked"
 }

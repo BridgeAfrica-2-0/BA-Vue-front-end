@@ -128,9 +128,9 @@ export default {
               return {
                 id: img.id,
                 content: img.content,
-                media: [
-                  { path: picture.path, type: picture.type, id: picture.id },
-                ],
+                media: { 
+                  path: picture.path, type: picture.type, id: picture.id 
+                },
               };
             });
 
@@ -187,8 +187,6 @@ export default {
   },
 
   created() {
-    console.log(this.showCoverAlbum);
-
     
     this.urlData = this.$route.params.id
       ? this.$route.params.id

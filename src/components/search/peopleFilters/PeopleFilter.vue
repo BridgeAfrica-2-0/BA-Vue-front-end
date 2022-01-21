@@ -153,9 +153,7 @@ const options = [
 ];
 //import Button from "@/components/Button";
 export default {
-  /*components: {
-    Button,
-  },*/
+  
   data: () => ({
     profession: null,
     rootSectionIsVisible: false,
@@ -191,6 +189,11 @@ export default {
       page: "search/SET_CURRENT_PAGINATION_PAGE",
       reset: "search/RESET_RESULT",
     }),
+
+    hide(){
+      this.$bvModal.hide('myModall')
+    },
+
     map(data, type) {
       return data.map((e) => `${type}_${e.toLowerCase()}`);
     },
@@ -208,6 +211,7 @@ export default {
       this.setCallback(this.$repository.search.findUserByParam);
 
       this._onFindUser({...data,keyword: this.postKeyword});
+      this.hide()
     }, 2000),
 
     async _onFindUser(payload) {
@@ -237,6 +241,7 @@ export default {
           keyword: this.postKeyword,
           page: 1,
         });
+        this.hide()
       }
     }, 1000),
 

@@ -140,5 +140,13 @@
     "Insight": "Apperçu",
     "Settings": "Paramètres",
     "Copy_link":"Copier le lien",
-    "All_business":"Toutes les entreprises"
+    "All_business":"Toutes les entreprises",
+    "Share_as":"Partagez en tant que",
+    "Write_post":"Créer une publication",
+    "Publish":"Publier",
+    "Add_Hyperlink":"Ajouter un hyperlien",
+    "Enter_a_description":"Entrez une description",
+    "Add_Item":"Ajouter un article",
+    "Operation_success":"Opération effectuée avec succès",
+    "Failed_to_copy_the_text_to_the_clipboard":"Échec de la copie du texte dans le presse-papiers"
 }

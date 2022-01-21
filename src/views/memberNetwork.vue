@@ -38,7 +38,6 @@
 <script>
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
-//import Posts from "../components/memberNetworkF/postNetwork";
 import Posts from "@/components/businessf/tabs/owner/networks/postNetwork";
 import Parent from "../components/memberNetworkF/parent";
 import Media from "@/components/owner/tabs/media";

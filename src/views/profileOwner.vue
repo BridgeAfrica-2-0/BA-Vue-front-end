@@ -28,11 +28,14 @@
         </b-col>
       </b-row>
     </div>
+
+    <Footer> </Footer>
   </div>
 </template>
 
 <script>
 import navbar from '@/components/navbar';
+import Footer from '@/components/footer';
 import headPage from '@/components/ownerHeadpage';
 import Post from '@/components/owner/tabs/posts';
 import About from '@/components/owner/tabs/about';
@@ -53,6 +56,7 @@ export default {
     navbar,
     headPage,
     Post,
+    Footer,
     About,
     Media,
     Networks,

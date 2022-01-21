@@ -89,7 +89,8 @@
                     </b-button>
                   </b-col>
 
-                  <b-col
+                  
+                    <b-col
                     md="12"
                     lg="4"
                     xl="12"
@@ -99,6 +100,7 @@
                   >
                     <BtnCtaMessage :element="item" type="business" />
                   </b-col>
+
 
                   <b-col
                     md="12"
@@ -228,10 +230,9 @@ export default {
 };
 </script>
 
+
+
 <style scoped>
-.flx100 {
-  flex-basis: 80% !important;
-}
 @media only screen and (min-width: 768px) {
   .btn-text {
     margin-left: 8px;
@@ -318,6 +319,8 @@ export default {
     padding: 1px;
     text-align: left;
 
+    margin-left: 10px;
+
     margin-right: -5px;
 
     line-height: 25px;
@@ -369,7 +372,7 @@ export default {
     padding: 1px;
     text-align: left;
 
-    margin-left: 60px;
+    margin-left: 70px;
 
     margin-right: -5px;
 
@@ -429,7 +432,7 @@ export default {
     border-bottom-right-radius: 5px;
 
     background: white;
-    height: 100%;
+
     background-color: #fff;
     background-clip: border-box;
     border: 1px solid rgba(0, 0, 0, 0.125);
@@ -452,7 +455,7 @@ export default {
     border-bottom-right-radius: 5px;
 
     background: white;
-    height: 100%;
+
     background-color: #fff;
     background-clip: border-box;
     border: 1px solid rgba(0, 0, 0, 0.125);

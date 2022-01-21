@@ -301,8 +301,8 @@ export default {
         .dispatch("auth/verify", {
           OTP: this.token,
           id: this.auth.id,
-          email: this.auth.email,
-          phone: this.auth.phone,
+          phone: this.auth.email,
+         // phone: this.auth.phone,
         })
         .then((response) => {
           this.sending = false;

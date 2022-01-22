@@ -443,7 +443,7 @@
                   <b-col class="col-2" @click="info = true">
                     <b-avatar
                       variant="primary"
-                      :src="chatListImage(chatSelected.chat)"
+                      :src="chatListImage(chatSelected)"
                       size="50"
                     ></b-avatar>
                   </b-col>
@@ -1853,7 +1853,7 @@
                   <b-col class="col-2" @click="info = true">
                     <b-avatar
                       variant="primary"
-                      :src="chatListImage(chatSelected.chat)"
+                      :src="chatListImage(chatSelected)"
                       size="50"
                     ></b-avatar>
                   </b-col>
@@ -3084,30 +3084,31 @@ export default {
       let user = require("@/assets/profile_white.png");
       let network = require("@/assets/network_default.png");
       let business = require("@/assets/business_white.png");
+      let data = value.chat ? value.chat : value;
 
       if (this.type == "user") {
-        image = value.sender
-          ? value.sender.profile_picture
-          : value.receiver
-          ? value.receiver.profile_picture
-          : value.profile_picture
-          ? value.profile_picture
+        image = data.sender
+          ? data.sender.profile_picture
+          : data.receiver
+          ? data.receiver.profile_picture
+          : data.profile_picture
+          ? data.profile_picture
           : user;
       } else if (this.type == "business") {
-        image = value.sender_business_id
-          ? value.sender_business_id == this.currentBizId
-            ? value.receiver_business.logo_path
-            : value.sender_business
-            ? value.sender_business.logo_path
-            : value.logo_path
+        image = data.sender_business_id
+          ? data.sender_business_id == this.currentBizId
+            ? data.receiver_business.logo_path
+            : data.sender_business
+            ? data.sender_business.logo_path
+            : data.logo_path
           : business;
       } else if (this.type == "network") {
-        image = value.receiver_network
-          ? value.receiver_network.image
-          : value.sender_network
-          ? value.sender_network.image
-          : value.image
-          ? value.image
+        image = data.receiver_network
+          ? data.receiver_network.image
+          : data.sender_network
+          ? data.sender_network.image
+          : data.image
+          ? data.image
           : network;
       }
       // console.log("chatlist image:", image);

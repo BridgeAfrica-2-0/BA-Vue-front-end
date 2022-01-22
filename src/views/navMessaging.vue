@@ -332,22 +332,13 @@
                 <b-col class="col-3" @click="info = true">
                   <b-avatar
                     variant="primary"
-                    :src="
-                      getImage({
-                        type: type,
-                        image: chatSelected.profile_picture
-                          ? chatSelected.profile_picture
-                          : chatSelected.logo_path
-                          ? chatSelected.logo_path
-                          : chatSelected.image,
-                      })
-                    "
+                    :src="chatListImage(chatSelected)"
                     size="60"
                   ></b-avatar>
                 </b-col>
 
                 <b-col class="col-sm-5" @click="info = true">
-                  <h4>{{ formatName(chatSelected) }}</h4>
+                  <h4>{{ formatHeadChatName(chatSelected) }}</h4>
                   <!-- <p>Online</p> -->
                 </b-col>
                 <b-col class="col-2 text-center mr-6">
@@ -1101,13 +1092,13 @@
                 <b-col class="col-3" @click="info = true">
                   <b-avatar
                     variant="primary"
-                    :src="chatListImage(chatSelected.chat)"
+                    :src="chatListImage(chatSelected)"
                     size="60"
                   ></b-avatar>
                 </b-col>
 
                 <b-col class="col-sm-5" @click="info = true">
-                  <h4>{{ formatName(chatSelected) }}</h4>
+                  <h4>{{ formatHeadChatName(chatSelected) }}</h4>
                   <!-- <p>Online</p> -->
                 </b-col>
                 <!-- <b-col class="col-4" v-show="false">
@@ -1697,6 +1688,17 @@ export default {
       this.getChatList({ type: "user" });
     }
     console.log("call to action:", this.ctaSelected);
+    if (this.ctaSelected) {
+      if (this.tabIndex == 1) {
+        this.getChatList({ type: "business" });
+      } else if (this.tabIndex == 2) {
+        this.getChatList({ type: "network" });
+      } else {
+        // this.tabIndex = 0;
+        this.getChatList({ type: "user" });
+        console.log("testing...");
+      }
+    }
     // this.getChatList({ type: "user" });
     window.addEventListener("resize", () => {
       this.screenWidth = window.screen.width;
@@ -1724,7 +1726,12 @@ export default {
 
       console.log("The cta:", this.ctaSelected);
 
-      this.selectedChat({ chat: this.ctaSelected, id: this.ctaSelected.id });
+      this.selectedChat({
+        chat: this.ctaSelected,
+        id: this.ctaSelected.business_id
+          ? this.ctaSelected.business_id
+          : this.ctaSelected.id,
+      });
     } else {
       this.tabIndex = 0;
       this.getChatList({ type: "user" });
@@ -1741,33 +1748,35 @@ export default {
       let user = require("@/assets/profile_white.png");
       let network = require("@/assets/network_default.png");
       let business = require("@/assets/business_white.png");
-
+      // console.log("value:", value);
+      let data = value.chat ? value.chat : value;
       if (this.type == "user") {
-        image = value.sender
-          ? value.sender.id == this.currentUser.user.id
-            ? value.receiver.profile_picture
-            : value.sender
-            ? value.sender.profile_picture
-            : value.profile_picture
+        image = data.sender
+          ? data.sender.id == this.currentUser.user.id
+            ? data.receiver
+              ? data.receiver.profile_picture
+              : data.profile_picture
+            : data.sender.profile_picture
           : user;
       } else if (this.type == "business") {
-        image = value.sender_business
-          ? value.sender_business.logo_path
-          : value.receiver_business
-          ? value.receiver_business.logo_path
-          : value.logo_path
-          ? value.logo_path
+        image = data.sender_business
+          ? data.sender_business.logo_path
+          : data.receiver_business
+          ? data.receiver_business.logo_path
+          : data.logo_path
+          ? data.logo_path
           : business;
       } else if (this.type == "network") {
-        image = value.receiver_network
-          ? value.receiver_network.image
-          : value.sender_network
-          ? value.sender_network.image
-          : value.image
-          ? value.image
+        image = data.receiver_network
+          ? data.receiver_network.image
+          : data.sender_network
+          ? data.sender_network.image
+          : data.image
+          ? data.image
           : network;
       }
       // console.log("chatlist image:", image);
+
       return image;
     },
     formatName(value) {
@@ -1795,6 +1804,40 @@ export default {
           : value.sender_network
           ? value.sender_network.name
           : value.name;
+      }
+
+      return name;
+    },
+    formatHeadChatName(value) {
+      var name = "";
+
+      console.log("Value--:", value);
+      // console.log("Current:", this.currentUser);
+      if (this.ctaSelected) {
+        name = value.name;
+      }
+      if (!value.name) {
+        if (this.type == "user") {
+          name = value.sender
+            ? value.sender.id == this.currentUser.user.id
+              ? value.receiver.name
+              : value.sender
+              ? value.sender.name
+              : value.name
+            : value.name;
+        } else if (this.type == "business") {
+          name = value.receiver_business
+            ? value.receiver_business.name
+            : value.sender
+            ? value.sender_business.name
+            : value.name;
+        } else if (this.type == "network") {
+          name = value.receiver_network
+            ? value.receiver_network.name
+            : value.sender_network
+            ? value.sender_network.name
+            : value.name;
+        }
       }
 
       return name;
@@ -1886,7 +1929,7 @@ export default {
         console.log(this.currentUser.user.id + "==" + data.sender_id);
         this.currentUser.user.id == data.sender_id
           ? this.saveMessage(this.formData, data.type)
-          : "Receiver";
+          : this.getChatList({ type: data.type });
       });
       console.log("listenning...");
     },
@@ -1910,10 +1953,14 @@ export default {
       }
     },
     getChatList(data) {
-      console.log("[data]", data);
-      this.chatSelected.active = false;
-      this.newMsg = false;
       this.type = data.type;
+
+      console.log("[data...]", data);
+      console.log("[data...]", this.type);
+
+      this.chatSelected.active = this.ctaSelected ? true : false;
+      this.newMsg = false;
+
       this.$store
         .dispatch("userChat/GET_USERS_CHAT_LIST", data)
         .then(() => {
@@ -2002,10 +2049,14 @@ export default {
       this.chatSelected = {
         active: true,
         clickedId: data.id,
-        name: data.chat.name ? data.chat.name : data.chat.groupName,
         ...data.chat,
       };
-      console.log("[DEBUG] Chat selected:", this.chatSelected);
+      (this.chatSelected.name = data.chat.isProduct
+        ? data.chat.business_name
+        : data.chat.name
+        ? data.chat.name
+        : data.chat.groupName),
+        console.log("[DEBUG] Chat selected:", this.chatSelected);
     },
     searchUser(keyword) {
       this.$store

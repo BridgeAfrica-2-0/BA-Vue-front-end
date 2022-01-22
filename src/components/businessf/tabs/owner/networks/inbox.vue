@@ -3179,30 +3179,31 @@ export default {
       let user = require("@/assets/profile_white.png");
       let network = require("@/assets/network_default.png");
       let business = require("@/assets/business_white.png");
+      let data = value.chat ? value.chat : value;
 
       if (this.type == "user") {
-        image = value.sender
-          ? value.sender.profile_picture
-          : value.receiver
-          ? value.receiver.profile_picture
-          : value.profile_picture
-          ? value.profile_picture
+        image = data.sender
+          ? data.sender.profile_picture
+          : data.receiver
+          ? data.receiver.profile_picture
+          : data.profile_picture
+          ? data.profile_picture
           : user;
       } else if (this.type == "business") {
-        image = value.sender_business
-          ? value.sender_business.logo_path
-          : value.receiver_business
-          ? value.receiver_business.logo_path
-          : value.logo_path
-          ? value.logo_path
+        image = data.sender_business
+          ? data.sender_business.logo_path
+          : data.receiver_business
+          ? data.receiver_business.logo_path
+          : data.logo_path
+          ? data.logo_path
           : business;
       } else if (this.type == "network") {
-        image = value.sender_network
-          ? value.sender_network_id == this.currentBizId
-            ? value.receiver_network.image
-            : value.sender_network
-            ? value.sender_network.image
-            : value.image
+        image = data.sender_network
+          ? data.sender_network_id == this.currentBizId
+            ? data.receiver_network.image
+            : data.sender_network
+            ? data.sender_network.image
+            : data.image
           : network;
       }
       // console.log("chatlist image:", image);
@@ -3339,7 +3340,7 @@ export default {
       this.file = "";
       this.filePreview = false;
     },
-    socketListenners() {
+    async socketListenners() {
       this.socket.on("groupMessage", (data) => {
         console.log("group message Received");
         this.audio.play();
@@ -3370,6 +3371,7 @@ export default {
         this.formData.append("type", data.type);
 
         this.saveMessage(this.formData);
+        //  if(data.newChatLoad) this.getList({type:data.type})
       });
       console.log("listenning...");
     },

@@ -216,6 +216,14 @@
               type="text"
               required
             ></b-form-input>
+
+            <div style="width: 100%; height: 200px; overflow:hidden">
+                  <AutocompleteLocation
+                  
+                    :region="region"
+                    @get-address-details="getGeoCoderResult"
+                  />
+                </div>
           </b-form-group>
 
           </div>
@@ -338,6 +346,7 @@
 </template>
 
 <script>
+import AutocompleteLocation from "@/components/AutocompleteLocation";
 import VuePhoneNumberInput from "vue-phone-number-input";
 import axios from "axios";
 import Multiselect from "vue-multiselect";
@@ -349,6 +358,7 @@ import { required, email, minLength } from "vuelidate/lib/validators";
 
 export default {
   mixins: [validationMixin],
+  
   data() {
     return {
       form: null,
@@ -435,6 +445,14 @@ export default {
      * Used to edit biography
      * @return void
      */
+
+    getGeoCoderResult(response) {console.log(response);
+      this.coordinates = response.coordinates;
+      this.address = response.address;
+      console.log("yoo mother fuckers");
+      console.log(response);
+    },
+
     LocationFormat(data){
       let keyword = '';
       data.map(item =>{
@@ -751,7 +769,8 @@ export default {
     MglMap,
     MglMarker,
     MglPopup,
-    Multiselect
+    Multiselect,
+    AutocompleteLocation
   },
 
   computed: {

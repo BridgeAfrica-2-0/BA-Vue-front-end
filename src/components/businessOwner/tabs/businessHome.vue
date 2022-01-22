@@ -46,7 +46,7 @@
         </b-card>
       </b-col>
 
-      <b-col md="8" lg="7" xl="8" style="padding-left:70px; padding-right:60px"  >
+      <b-col md="8" lg="7" xl="8" class="postpadding" >
         <Post />    
       </b-col>
     </b-row>
@@ -77,4 +77,13 @@ export default {
   margin-left: -10px;
   position: relative;
 }
+
+ @media only screen and (min-width: 1200px) {
+ .postpadding{
+
+  padding-left:70px;
+  padding-right:60px
+ }
+ }
+
 </style>

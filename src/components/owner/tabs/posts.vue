@@ -179,12 +179,12 @@
 
         <Community />
 
-        <Media />
+        <Media class="mb-3" />
       </b-col>
 
       <b-col md="12" lg="7" xl="8" class="m-0 p-0 px-lg-4 post-padding ">
 
-        <owner-post />
+        <owner-post  />
       </b-col>
     </b-row>
   </div>
@@ -349,11 +349,28 @@ export default {
     height: 40px;
   }
 
-  .post-padding{
+  
+}
+
+
+@media (min-width: 1200px) {
+  .profile-pic {
+    width: 64px;
+    height: 64px;
+  }
+  .comment-pic {
+    width: 40px;
+    height: 40px;
+  }
+
+  .post-padding{ 
         padding-left: 60px !important;
     padding-right: 70px !important;
   }
 }
+
+
+
 @media (max-width: 768px) {
   .profile-pic {
     width: 40px;

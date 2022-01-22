@@ -53,9 +53,15 @@
       <br />
       <div class="d-inline-flex float-right mt-2">
         <div class="">
-          <b-button variant="primary" @click="buyNow(product)"
+          <!-- <b-button variant="primary" @click="buyNow(product)"
             ><span>{{ $t("general.Buy_Now") }}</span>
-          </b-button>
+          </b-button> -->
+          <BtnCtaMessage
+            :element="product"
+            :isProduct="true"
+            :isBuyNow="true"
+            type="business"
+          />
         </div>
 
         <div class="ml-2">
@@ -114,7 +120,6 @@ export default {
     buyNow(product) {
       this.handleAddToCard(product);
       this.$router.push({ name: "payment" });
-     
     },
 
     handleAddToCard(product) {

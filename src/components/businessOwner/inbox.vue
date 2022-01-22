@@ -126,12 +126,7 @@
                                 <b-avatar
                                   class="d-inline-block profile-pic"
                                   variant="primary"
-                                  :src="
-                                    getImage({
-                                      type: 'user',
-                                      image: chat.profile_picture,
-                                    })
-                                  "
+                                  :src="chatListImage(chat)"
                                 ></b-avatar>
 
                                 <h6 class="mt-2 d-inline-block ml-2">
@@ -221,12 +216,7 @@
                                 <b-avatar
                                   class="d-inline-block profile-pic"
                                   variant="primary"
-                                  :src="
-                                    getImage({
-                                      type: 'business',
-                                      image: chat.logo_path,
-                                    })
-                                  "
+                                  :src="chatListImage(chat)"
                                 ></b-avatar>
 
                                 <h6 class="mt-2 d-inline-block ml-2">
@@ -317,12 +307,7 @@
                               <b-avatar
                                 class="d-inline-block profile-pic"
                                 variant="primary"
-                                :src="
-                                  getImage({
-                                    type: 'network',
-                                    image: chat.image,
-                                  })
-                                "
+                                :src="chatListImage(chat)"
                               ></b-avatar>
 
                               <h6 class="mt-2 d-inline-block ml-2">
@@ -458,16 +443,7 @@
                   <b-col class="col-2" @click="info = true">
                     <b-avatar
                       variant="primary"
-                      :src="
-                        getImage({
-                          type: type,
-                          image: chatSelected.profile_picture
-                            ? chatSelected.profile_picture
-                            : chatSelected.logo_path
-                            ? chatSelected.logo_path
-                            : chatSelected.image,
-                        })
-                      "
+                      :src="chatListImage(chatSelected)"
                       size="50"
                     ></b-avatar>
                   </b-col>
@@ -749,12 +725,12 @@
                     </div>
                   </b-col>
 
-                 <b-col cols="2" class="p-0 pl-2">
-                  <b-icon
-                    @click="send"
-                    class="msg-icon primary icon-size icon-top"
-                    icon="cursor-fill"
-                  ></b-icon>
+                  <b-col cols="2" class="p-0 pl-2">
+                    <b-icon
+                      @click="send"
+                      class="msg-icon primary icon-size icon-top"
+                      icon="cursor-fill"
+                    ></b-icon>
                   </b-col>
                 </b-row>
 
@@ -1573,12 +1549,7 @@
                                 <b-avatar
                                   class="d-inline-block profile-pic"
                                   variant="primary"
-                                  :src="
-                                    getImage({
-                                      type: 'user',
-                                      image: chat.profile_picture,
-                                    })
-                                  "
+                                  :src="chatListImage(chat)"
                                 ></b-avatar>
 
                                 <h6 class="mt-2 d-inline-block ml-2">
@@ -1668,12 +1639,7 @@
                                 <b-avatar
                                   class="d-inline-block profile-pic"
                                   variant="primary"
-                                  :src="
-                                    getImage({
-                                      type: 'business',
-                                      image: chat.logo_path,
-                                    })
-                                  "
+                                  :src="chatListImage(chat)"
                                 ></b-avatar>
 
                                 <h6 class="mt-2 d-inline-block ml-2">
@@ -1763,12 +1729,7 @@
                               <b-avatar
                                 class="d-inline-block profile-pic"
                                 variant="primary"
-                                :src="
-                                  getImage({
-                                    type: 'network',
-                                    image: chat.image,
-                                  })
-                                "
+                                :src="chatListImage(chat)"
                               ></b-avatar>
 
                               <h6 class="mt-2 d-inline-block ml-2">
@@ -1892,16 +1853,7 @@
                   <b-col class="col-2" @click="info = true">
                     <b-avatar
                       variant="primary"
-                      :src="
-                        getImage({
-                          type: type,
-                          image: chatSelected.profile_picture
-                            ? chatSelected.profile_picture
-                            : chatSelected.logo_path
-                            ? chatSelected.logo_path
-                            : chatSelected.image,
-                        })
-                      "
+                      :src="chatListImage(chatSelected)"
                       size="50"
                     ></b-avatar>
                   </b-col>
@@ -2184,11 +2136,11 @@
                   </b-col>
 
                   <b-col cols="2" class="p-0 pl-2">
-                  <b-icon
-                    @click="send"
-                    class="msg-icon primary icon-size icon-top"
-                    icon="cursor-fill"
-                  ></b-icon>
+                    <b-icon
+                      @click="send"
+                      class="msg-icon primary icon-size icon-top"
+                      icon="cursor-fill"
+                    ></b-icon>
                   </b-col>
                 </b-row>
 
@@ -3127,6 +3079,41 @@ export default {
       console.log("press...");
       this.getList(e);
     }, 1000),
+    chatListImage(value) {
+      var image = "";
+      let user = require("@/assets/profile_white.png");
+      let network = require("@/assets/network_default.png");
+      let business = require("@/assets/business_white.png");
+      let data = value.chat ? value.chat : value;
+
+      if (this.type == "user") {
+        image = data.sender
+          ? data.sender.profile_picture
+          : data.receiver
+          ? data.receiver.profile_picture
+          : data.profile_picture
+          ? data.profile_picture
+          : user;
+      } else if (this.type == "business") {
+        image = data.sender_business_id
+          ? data.sender_business_id == this.currentBizId
+            ? data.receiver_business.logo_path
+            : data.sender_business
+            ? data.sender_business.logo_path
+            : data.logo_path
+          : business;
+      } else if (this.type == "network") {
+        image = data.receiver_network
+          ? data.receiver_network.image
+          : data.sender_network
+          ? data.sender_network.image
+          : data.image
+          ? data.image
+          : network;
+      }
+      // console.log("chatlist image:", image);
+      return image;
+    },
     formatName(value) {
       var name = "";
       // console.log("Value:", value);
@@ -3557,7 +3544,7 @@ export default {
         .catch(() => console.log("error"));
     },
     send() {
-      if (this.file || this.input.length > 0 && this.input.length < 500) {
+      if (this.file || (this.input.length > 0 && this.input.length < 500)) {
         if (this.type == "group") {
           this.sendGroup();
         } else {

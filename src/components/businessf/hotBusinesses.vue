@@ -114,6 +114,7 @@
                       variant="primary"
                     >
                       <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
+                      <span class="btn-text">{{ $t("general.Direction") }}</span>
                       <span class="btn-text">{{$t("general.Direction")}}</span>
                     </b-button>
                   </b-col>

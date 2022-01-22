@@ -1,7 +1,7 @@
 <template>
-  <div class="col-sm-6 col-md-4" 
+  <div  
     :ref="`sHowMedia-${im.id}`"
-    style="`position:relative`"
+    style="`${getStyle};position:relative`"
   >
       <b-img
         v-if="typeOfMedia() == 'image' && !loading"
@@ -11,11 +11,11 @@
         alt="media_img"
         v-b-modal="`modal-${im.id}`"
         v-bind="imageProps"
-        style="width: 100%;height: 100%;"
+        :style="getStyle"
       ></b-img>
     
     <video
-      style="width: 100%;height: 100%;"
+      :style="getStyle"
       controls
       v-else-if="typeOfMedia() == 'video' && !loading"
       class="card-img btn p-0 album-img"
@@ -23,7 +23,7 @@
       <source :src="getFullMediaLink()" />
     </video>
     <youtube
-      style="width: 100%;height: 100%;"
+      :style="getStyle"
       class="card-img btn p-0 album-img"
       v-if="typeOfMedia == 'youtube' && !loading"
       :video-id="getYoutubeKey()"
@@ -109,7 +109,8 @@ export default {
     "setProfilePic",
     "setCoverPic",
     "deleteImage",
-    "isAlbum"
+    "isAlbum",
+    "getStyle"
   ],
 
   created() {

@@ -208,7 +208,7 @@
                       />
                     </div>
                     <div class="form-group">
-                      <label for="Neighbour" class="username"> Neighbour:</label
+                      <label for="Neighbour" class="username"> {{$t('welcome.Neighbour')}}:</label
                       ><br />
                       <autocomplete-mapbox
                         v-if="region"
@@ -391,7 +391,7 @@
                       />
                     </div>
                     <div class="form-group">
-                      <label for="Neighbour" class="username"> Neighbour:</label
+                      <label for="Neighbour" class="username"> {{$t("welcome.Neighbour")}}:</label
                       ><br />
                       <autocomplete-mapbox
                         v-if="region"

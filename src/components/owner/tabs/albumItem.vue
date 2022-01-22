@@ -1,12 +1,16 @@
 <template>
-  <div class ="col-sm-6 col-md-4 createp img-gall predit2"
+  <div class ="createp img-gall predit2"
     @mouseover="upHere = true"
     @mouseleave="upHere = false"
+    :style="getStyle"
     
   >
     <a>
       <span>
-        <img class="card-img album-img img-fluid" :src="cover(album.cover)" alt="" style="width: 100%;height: 100%;" />
+        <img 
+          class="card-img album-img img-fluid" 
+          :src="cover(album.cover)" 
+          :style="getStyle" />
       </span>
       <div class="createdesc botmedia">
         <div class="botmediadess-position" v-if="loading">
@@ -16,10 +20,10 @@
           ></b-spinner>
         </div>
         <div class="botmediadess-position" v-else>
-          <h6 style="font-size: 26px; font-weight: bold">
+          <h6 style="font-size: 1rem; font-weight: bold">
             {{ album.name }}
           </h6>
-          <p style="font-size: 24px; font-weight: bold">
+          <p style="font-size: 1rem; font-weight: bold">
             {{ plural }}
           </p>
 

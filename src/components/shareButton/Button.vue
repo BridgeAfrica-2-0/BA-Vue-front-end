@@ -32,7 +32,7 @@
       :modal="`modal-2-${uuid}`"
       :title="$t('search.Share_to_network')"
       :placeholder="$t('search.Search_for_network')"
-      subtitle="All networks"
+      :subtitle="this.$t('general.All_networks')"
       :type="'network'"
       :post="post"
       :update="update"
@@ -56,7 +56,7 @@
       :modal="`modal-5-${uuid}`"
       :title="$t('search.Send_Inbox')"
       :placeholder="$t('search.Search_for_network')"
-      subtitle="All networks"
+      :subtitle="this.$t('general.All_networks')"
       :type="'network'"
       :post="post"
     >
@@ -588,7 +588,7 @@ export default {
       this.flashMessage.show({
         status: "success",
         blockClass: "custom-block-class",
-        message: "Failed to copy the text to the clipboard",
+        message: this.$t('search.Failed_to_copy_the_text_to_the_clipboard'),
       });
     },
 
@@ -636,7 +636,7 @@ export default {
       if (request.success)
         this.flashMessage.success({
           time: 5000,
-          message: "Operation success",
+          message: this.$t('search.Operation_success'),
         });
     },
   },

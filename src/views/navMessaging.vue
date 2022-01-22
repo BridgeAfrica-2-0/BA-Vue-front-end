@@ -409,7 +409,7 @@
                 <div v-if="currentUser.user.id != chat.sender_id">
                   <b-row class="p-1">
                     <b-col>
-                      <p v-if="chat.message" class="msg-text mt-0 text">
+                      <p class="msg-text mt-0 text">
                         <span v-if="chat.attachment">
                           <img :src="chat.attachment" />
                           <!-- <br />
@@ -437,11 +437,7 @@
                 <div v-else>
                   <b-row class="p-1">
                     <b-col>
-                      <p
-                        v-if="chat.message"
-                        id="sent"
-                        class="msg-text-sent text"
-                      >
+                      <p id="sent" class="msg-text-sent text">
                         <span v-if="chat.attachment">
                           <img :src="chat.attachment" />
                           <!-- <br />
@@ -506,13 +502,11 @@
                         msg-icon
                         primary
                         icon-size icon-top
-                        float-right
-                        text-right
                       "
                       icon="paperclip"
                     >
                     </b-icon>
-                    <i class="ion-images"></i>
+                    
                     <input
                       style="display: none"
                       type="file"
@@ -525,6 +519,9 @@
                   <!-- <button v-on:click="submitFile()">Submit</button> -->
                 </b-col>
                 <b-col cols="8" class="p-0">
+                  <small v-if="nameSpace.status" class="pr-8 text-danger">
+                    {{ nameSpace.text }}
+                  </small>
                   <b-form-input
                     id="textarea"
                     v-model="input"
@@ -591,10 +588,10 @@
                   </div>
                 </b-col>
 
-                <b-col cols="2" class="p-0">
+                <b-col cols="2" class="p-0 pl-2">
                   <b-icon
                     @click="send"
-                    class="ml-12 pl-12 msg-icon primary icon-size icon-top"
+                    class="msg-icon primary icon-size icon-top"
                     icon="cursor-fill"
                   ></b-icon>
                 </b-col>
@@ -672,7 +669,7 @@
                     class="input-background"
                     style="width: 100%"
                     :placeholder="`Type the name of the ${type}`"
-                    @keydown="getList(newSearchQuery)"
+                    @keydown="onPressSearchNewChat"
                   ></b-form-input>
                   <br />
                 </b-col>
@@ -859,7 +856,7 @@
                             v-model="searchQuery"
                             class="form-control input-background"
                             :placeholder="$t('general.Search_chat_list')"
-                            @keypress.enter="
+                            @keypress="
                               getChatList({
                                 type: 'user',
                                 keyword: searchQuery,
@@ -1214,7 +1211,7 @@
                 <div v-if="currentUser.user.id != chat.sender_id">
                   <b-row class="p-2">
                     <b-col>
-                      <p v-if="chat.message" class="msg-text mt-0 text">
+                      <p class="msg-text mt-0 text">
                         <span v-if="chat.attachment">
                           <img :src="chat.attachment" />
                           <!-- <br />
@@ -1242,11 +1239,7 @@
                 <div v-else>
                   <b-row class="p-2">
                     <b-col>
-                      <p
-                        v-if="chat.message"
-                        id="sent"
-                        class="msg-text-sent text"
-                      >
+                      <p id="sent" class="msg-text-sent text">
                         <span v-if="chat.attachment">
                           <img :src="chat.attachment" />
                           <!-- <br />
@@ -1330,6 +1323,9 @@
                   <!-- <button v-on:click="submitFile()">Submit</button> -->
                 </b-col>
                 <b-col cols="8" class="p-0">
+                  <small v-if="nameSpace.status" class="pr-8 text-danger">
+                    {{ nameSpace.text }}
+                  </small>
                   <b-form-input
                     id="textarea"
                     v-model="input"
@@ -1396,10 +1392,10 @@
                   </div>
                 </b-col>
 
-                <b-col cols="2" class="p-0">
+                <b-col cols="2" class="p-0 pl-2">
                   <b-icon
                     @click="send"
-                    class="ml-12 pl-12 msg-icon primary icon-size icon-top"
+                    class="msg-icon primary icon-size icon-top"
                     icon="cursor-fill"
                   ></b-icon>
                 </b-col>
@@ -1466,7 +1462,7 @@
                     class="input-background"
                     style="width: 100%"
                     :placeholder="`Type the name of the ${type}`"
-                    @keydown="getList(newSearchQuery)"
+                    @input="onPressSearchNewChat"
                   ></b-form-input>
                   <br />
                 </b-col>
@@ -1618,6 +1614,7 @@ import Navbar from "@/components/navbar";
 import EmojiPicker from "vue-emoji-picker";
 import io from "socket.io-client";
 import moment from "moment";
+import _ from "lodash";
 
 export default {
   components: {
@@ -1652,6 +1649,10 @@ export default {
       // socket: io("localhost:7000", {
       //   transports: ["websocket", "polling", "flashsocket"],
       // }),
+      nameSpace: {
+        status: false,
+        text: "",
+      },
       chatSelected: [],
       showsearch: true,
       selecteduser: false,
@@ -1774,10 +1775,14 @@ export default {
     }
   },
   methods: {
+    onPressSearchNewChat: _.debounce(function (e) {
+      console.log("press...");
+      this.getList(e);
+    }, 1000),
     formatName(value) {
       var name = "";
 
-      console.log("Value:", value);
+      // console.log("Value:", value);
       // console.log("Current:", this.currentUser);
       if (this.type == "user") {
         name = value.sender
@@ -1903,6 +1908,7 @@ export default {
       }
     },
     getList(keyword) {
+      console.log(keyword);
       if (this.type == "user") {
         this.$store.dispatch("userChat/GET_USERS", keyword);
       } else if (this.type == "business") {
@@ -2090,13 +2096,26 @@ export default {
       // console.log(this.$refs.feed.scrollTop);
     },
     send() {
-      if (this.input != "") {
+      // if (this.type == "group") {
+      //   this.sendGroup();
+      // } else {
+      //   this.sendPrivate();
+      // }
+
+      if (this.file || (this.input.length > 0 && this.input.length < 500)) {
         if (this.type == "group") {
           this.sendGroup();
         } else {
           this.sendPrivate();
         }
-      } else alert("Enter a message");
+      } else {
+        this.nameSpace.status = true;
+
+        this.nameSpace.text =
+          this.input.length == 0
+            ? "Enter at least one character"
+            : "Enter at most 500 characters";
+      }
     },
     sendGroup() {
       this.socket.emit("groupMessage", {
@@ -2226,7 +2245,7 @@ h1 {
 }
 
 .msg-icon {
-  font-size: 20px;
+  font-size: 24px;
   cursor: pointer;
 }
 

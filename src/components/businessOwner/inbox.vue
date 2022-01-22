@@ -749,12 +749,12 @@
                     </div>
                   </b-col>
 
-                  <b-col cols="2" class="p-0">
-                    <b-icon
-                      @click="send"
-                      class="ml-12 pl-12 msg-icon primary icon-size icon-top"
-                      icon="cursor-fill"
-                    ></b-icon>
+                 <b-col cols="2" class="p-0 pl-2">
+                  <b-icon
+                    @click="send"
+                    class="msg-icon primary icon-size icon-top"
+                    icon="cursor-fill"
+                  ></b-icon>
                   </b-col>
                 </b-row>
 
@@ -853,7 +853,7 @@
                       :placeholder="
                         $t('businessowner.Type_the_name_of_person_or_Business')
                       "
-                      @keydown.enter="getList(newSearchQuery)"
+                      @keydown="onPressSearchNewChat"
                     ></b-form-input>
                   </b-col>
                 </b-row>
@@ -2183,12 +2183,12 @@
                     </div>
                   </b-col>
 
-                  <b-col cols="2" class="p-0">
-                    <b-icon
-                      @click="send"
-                      class="ml-12 pl-12 msg-icon primary icon-size icon-top"
-                      icon="cursor-fill"
-                    ></b-icon>
+                  <b-col cols="2" class="p-0 pl-2">
+                  <b-icon
+                    @click="send"
+                    class="msg-icon primary icon-size icon-top"
+                    icon="cursor-fill"
+                  ></b-icon>
                   </b-col>
                 </b-row>
 
@@ -2279,7 +2279,7 @@
                       :placeholder="
                         $t('businessowner.Type_the_name_of_person_or_Business')
                       "
-                      @keydown.enter="getList(newSearchQuery)"
+                      @input="onPressSearchNewChat"
                     ></b-form-input>
                     <br />
                   </b-col>
@@ -2907,7 +2907,7 @@
 import EmojiPicker from "vue-emoji-picker";
 import io from "socket.io-client";
 import moment from "moment";
-
+import _ from "lodash";
 export default {
   components: {
     EmojiPicker,
@@ -3123,6 +3123,10 @@ export default {
     },
   },
   methods: {
+    onPressSearchNewChat: _.debounce(function (e) {
+      console.log("press...");
+      this.getList(e);
+    }, 1000),
     formatName(value) {
       var name = "";
       // console.log("Value:", value);
@@ -3553,7 +3557,7 @@ export default {
         .catch(() => console.log("error"));
     },
     send() {
-      if (this.input.length > 0 && this.input.length < 500) {
+      if (this.file || this.input.length > 0 && this.input.length < 500) {
         if (this.type == "group") {
           this.sendGroup();
         } else {

@@ -10,5 +10,9 @@
     "Send_Failed": "Send Failed",
     "Message_not_send": "Message not send",
     "Verification_Failed": "Verification Failed",
-    "Unable_to_verify_your_account": "Unable to verify your account"
+    "Unable_to_verify_your_account": "Unable to verify your account",
+    "Via_Email_To":"Via Email To",
+    "account_verification_success":"account verification success",
+    "Via_SMS_To":"Via SMS To",
+    "Password_reset":"Password reset"
 }

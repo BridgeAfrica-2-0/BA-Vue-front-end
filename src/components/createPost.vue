@@ -29,7 +29,7 @@
                 <b-icon icon="camera-video-fill" aria-hidden="true"></b-icon>
               </b-button>
               <b-button
-                title="Add Hyperlink"
+                :title="$t('search.Add_Hyperlink')"
                 size="sm"
                 variant="outline-primary"
               >
@@ -40,7 +40,7 @@
           <span class="float-right">
             <b-button variant="outline-primary" size="sm"
               ><b-icon icon="cursor-fill" variant="primary"></b-icon>
-              Publish</b-button
+              {{$t("search.Publish")}}</b-button
             >
           </span>
         </b-col>

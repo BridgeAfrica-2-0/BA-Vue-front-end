@@ -29,13 +29,13 @@
           <b-form-textarea id="textarea-small"
                     class="mb-2 border-none"
                     v-model="text"
-                    placeholder="Enter a description"> </b-form-textarea>
+                    :placeholder="$t('search.Enter_a_description')"> </b-form-textarea>
 
                     <br>
 
           <b-button @click="submitPost" variant="primary" block
             ><b-icon icon="cursor-fill" variant="primary"></b-icon>
-            Publish</b-button
+            {{$t("search.Publish")}}</b-button
           >
         </b-modal>
 
@@ -56,7 +56,7 @@
               <a  @click="$refs.movie.click()"  >
                 <div class="drag-textt">
                   <fas-icon :icon="['fas', 'plus']" />
-                  <h3>Add Item</h3>
+                  <h3>{{$t("search.Add_Item")}}/h3>
                 </div>
               </a>
             </div>

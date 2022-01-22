@@ -5,6 +5,7 @@ export default {
   state: {
     members: [],
     admins: [],
+    editors: [],
     business: []
   },
 
@@ -14,6 +15,9 @@ export default {
     },
     getadmins(state) {
       return state.admins;
+    },
+    geteditors(state) {
+      return state.editors;
     },
     getbusiness(state) {
       return state.business;
@@ -26,6 +30,9 @@ export default {
     },
     setadmins(state, admins) {
         state.admins = admins;
+    },
+    seteditors(state, editors) {
+        state.editors = editors;
     },
     setbusiness(state, business) {
         state.business = business;
@@ -66,6 +73,16 @@ export default {
         return data;
       })
     },
+    removeAsEditor({commit}, data ){
+      console.log("removeAsEditor");
+      console.log(data);  
+      return axios
+      .delete(`network/${data.url}/remove/editor/${data.id}`)
+      .then(({ data }) => {
+        console.log(data);
+        return data;
+      })
+    },
  
     getadmins( {commit}, data){
       console.log('getadmins: '+data.path);
@@ -75,6 +92,17 @@ export default {
       .post(`network/${data.path}`, { "keyword": data.keyword})
       .then(({ data }) => {
           commit("setadmins", data.data);
+        console.log(data);
+      })
+    },
+    geteditors( {commit}, data){
+      console.log('geteditors: '+data.path);
+      console.log('keyword: '+data.keyword);
+      console.log(data.keyword);
+      return axios
+      .post(`network/${data.path}`, { "keyword": data.keyword})
+      .then(({ data }) => {
+          commit("seteditors", data.data);
         console.log(data);
       })
     },

@@ -6,63 +6,15 @@
     <hr />
 
     <b-card>
-      <div class="mb-3">
+      <div class="mb-3" v-if="loading">
         <mapbox :business="business_about" />
       </div>
 
       <b-card>
         <b-row v-if="loading">
-          <!-- <b-col>
-            <div
-              class="edit"
-              v-b-modal.biographyModal
-              @click="
-                business_about_input = JSON.parse(
-                  JSON.stringify(business_about)
-                )
-              "
-            >
-              <b-icon
-                icon="pencil-fill"
-                variant="primary"
-                v-if="showPen != 'BusinessEditor'"
-              ></b-icon>
-            </div>
-            <h4 class="mb-4 text-center username">
-              {{ business_about.name }}
-            </h4>
-            <p class="text-justify text">
-              {{ business_about.location_description }}
-            </p>
-          </b-col> -->
-          <!-- <b-col>
-           
-            <div
-              class="edit"
-              v-b-modal.biographyModal
-              @click="
-                business_about_input = JSON.parse(
-                  JSON.stringify(business_about)
-                )
-              "
-            >
-              <b-icon icon="pencil-fill" variant="primary"></b-icon>
-            </div>
-            <h4 class="mb-4 text-center username">
-              {{ business_about.name }}
-            </h4>
-            <p class="text-justify text">
-              {{ business_about.location_description }}
-            </p>
-          </b-col> -->
+         
           <b-col>
-            <!-- <div class="edit">
-                <b-icon
-                  icon="pencil-fill"
-                  variant="primary"
-                  
-                ></b-icon>
-              </div> -->
+            
             <div
               v-if="showPen != 'BusinessFollower'"
               class="edit"
@@ -528,6 +480,15 @@
             v-model="business_about_input.address"
             required
           ></b-form-input>
+
+           <div style="width: 100%; height: 200px; overflow:hidden">
+                  <AutocompleteLocation
+                  
+                    :region="region"
+                    @get-address-details="getGeoCoderResult"
+                  />
+                </div>
+
         </b-form-group>
 
        
@@ -682,10 +643,13 @@ import { validationMixin } from "vuelidate";
 import { required, email, minLength } from "vuelidate/lib/validators";
 import mapbox from "@/components/mapbox";
 import Multiselect from "vue-multiselect";
+import AutocompleteLocation from "@/components/AutocompleteLocation";
+
 export default {
   components: {
     Multiselect,
     VuePhoneNumberInput,
+    AutocompleteLocation,
     // MglMap,
     mapbox,
     // MglMarker,
@@ -699,6 +663,7 @@ export default {
       accessToken: process.env.VUE_APP_MAPBOX_TOKEN,
       mapStyle: "mapbox://styles/mapbox/outdoors-v11",
       coordinates: [11.504929555178624, 3.8465173382452815], // Lng,Lat
+      address: "",
       zoom: 12,
       multiselecvalue: [],
       filterselectvalue: [],
@@ -920,6 +885,13 @@ export default {
     },
   },
   methods: {
+
+    getGeoCoderResult(response) {console.log(response);
+      this.coordinates = response.coordinates;
+      this.address = response.address;
+      console.log("yoo mother fuckers");
+      console.log(response);
+    },
     
     stringArray1(words) {
       let keyword = "";

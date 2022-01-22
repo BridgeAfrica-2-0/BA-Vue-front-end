@@ -316,14 +316,14 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="Neighbor" class="username">
-                        {{ $t("profileowner.Adress") }} :</label
+                        {{ $t("profileowner.Adress") }} : {{address}} </label
                       >
                     </div>
                   </div>
                 </div>
                 <div style="width: 100%; height: 200px; overflow:hidden">
                   <AutocompleteLocation
-                    v-if="region && region.length > 0"
+                   
                     :region="region"
                     @get-address-details="getGeoCoderResult"
                   />
@@ -704,12 +704,12 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="Neighbor" class="username">
-                        {{ $t("profileowner.Adress") }} :</label
+                        {{ $t("profileowner.Adress") }} : {{address}} </label
                       >
                     </div>
                   </div>
 
-                  <div style="width: 100%; height: 200px; overflow:hidden">
+                  <div class="col-md" style="width: 100%; height: 200px; overflow:hidden">
                     <AutocompleteLocation
                       :region="region"
                       @get-address-details="getGeoCoderResult"
@@ -1533,7 +1533,7 @@ export default {
         formData2.append("city", this.city);
         formData2.append("country", this.selectedcountry);
 
-        formData2.append("address", this.adress);
+        formData2.append("address", this.address);
         formData2.append("division", this.selecteddivision);
         formData2.append("council", this.selectedmunicipality);
         formData2.append("neigborhood", this.selectedlocality);

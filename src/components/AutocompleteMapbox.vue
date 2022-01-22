@@ -1,9 +1,7 @@
 <template>
   <div class="map-container">
-    <div id="map1"></div>
-    <canvas id="viewport" style="float: right" width="800" height="600"></canvas>
+    <div id="map"></div>
     <div id="geocoder" class="geocoder"></div>
-    
   </div>
 </template>
 <script>
@@ -36,79 +34,41 @@ export default {
       this.$emit("get-address-details", details);
     },
     initmap() {
-      let mapboxgl = this.mapbox; 
+      let mapboxgl = this.mapbox;
       mapboxgl.accessToken = this.accessToken;
-    //   var map = new mapboxgl.Map({
-    //     container: "map",
-    //     style: this.mapStyle,
-    //     zoom: this.zoom,
-    //     center: this.center,
-    //   });
-    //   console.log(this.region);
-    //   var regon =
-    //     this.region && this.region.length > 0
-    //       ? this.region[0].name.toLowerCase()
-    //       : "centre";
-    //   regon = regon.charAt(0).toUpperCase() + regon.slice(1);
-    //   console.log(this.region);
-    //   const geocoder = new MapboxGeocoder({
-    //     accessToken: mapboxgl.accessToken,
-    //     mapboxgl: mapboxgl,
-    //     countries: "cm",
-    //     placeholder: "Address",
-    //     filter: function(item) {
-    //       return item.context.some((i) => {
-    //         return i.text === regon;
-    //       });
-    //     },
-    //   });
+      var map = new mapboxgl.Map({
+        container: "map",
+        style: this.mapStyle,
+        zoom: this.zoom,
+        center: this.center,
+      });
+      console.log(this.region);
+      var regon = this.region ? this.region.name.toLowerCase() : "centre";
+      regon = regon.charAt(0).toUpperCase() + regon.slice(1);
+      console.log(regon);
+      const geocoder = new MapboxGeocoder({
+        accessToken: mapboxgl.accessToken,
+        mapboxgl: mapboxgl,
+        countries: "cm",
+        placeholder: "Address",
+        filter: function(item) {
+          return item.context.some((i) => {
+            return i.text === regon;
+          });
+        },
+      });
 
-    //   document.getElementById("geocoder").appendChild(geocoder.onAdd(map));
+      document.getElementById("geocoder").appendChild(geocoder.onAdd(map));
 
-    //   geocoder.on("result", (e) => { 
-    //     let response = e.result;
-    //     let details = {
-    //       coordinates: response.center,
-    //       address: response.place_name,
-    //     };
-    //     this.$emit("get-address-details", details);
-        
-    //   });
-
-
-
-
-
-    // mapboxgl.accessToken = 'YOUR_MAPBOX_ACCESS_TOKEN';
-const map1 = new mapboxgl.Map({
-container: 'viewport',
-style: 'mapbox://styles/mapbox/streets-v11',
-center: [-79.4512, 43.6568],
-zoom: 13
-});
- 
-// Add the control to the map.
-map1.addControl(
-new MapboxGeocoder({
-accessToken: mapboxgl.accessToken,
-mapboxgl: mapboxgl,
-countries: "cm",
-}).
-on("result", (e) => { 
+      geocoder.on("result", (e) => {
         let response = e.result;
         let details = {
           coordinates: response.center,
           address: response.place_name,
         };
         this.$emit("get-address-details", details);
-        
-      })
-);
+      });
     },
-
-
-
-
   },
 };
 </script>
@@ -119,11 +79,6 @@ on("result", (e) => {
   width: 100%;
   min-height: 400px;
 }
-#map1 {
-  height: 100%;
-  width: 100%;
-}
-
 .geocoder {
   position: absolute;
   z-index: 1;
@@ -131,7 +86,6 @@ on("result", (e) => {
   left: 50%;
   margin-left: -49.5%;
   top: 10px;
-  background-color: red;
 }
 .mapboxgl-ctrl-geocoder {
   min-width: 100%;

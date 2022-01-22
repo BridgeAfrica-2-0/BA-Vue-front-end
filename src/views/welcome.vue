@@ -209,7 +209,7 @@
                       />
                     </div>
                     <div class="form-group">
-                      <label for="Neighbour" class="username"> Neighbour:</label
+                      <label for="Neighbour" class="username"> {{$t('welcome.Neighbour')}}:</label
                       ><br />
                        <input
                         type="text"
@@ -406,7 +406,11 @@
                       />
                     </div>
                     <div class="form-group">
+<<<<<<< HEAD
                       <label for="Neighbour" class="username"> Neighbour:</label 
+=======
+                      <label for="Neighbour" class="username"> {{$t("welcome.Neighbour")}}:</label
+>>>>>>> c8ffe09d71347bb2043eeec49680dff4dbf86065
                       ><br />
                       <input
                         type="text"

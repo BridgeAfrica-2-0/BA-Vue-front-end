@@ -165,9 +165,9 @@ import _ from "lodash";
 import { mapActions, mapGetters } from "vuex";
 
 const options = [
-   { text: "Follower", value: "Follower" },
-  { text: "Following", value: "Following" },
-  { text: "Community", value: "Community" }
+    { text: "Follower", value: "Follower" },
+    { text: "Following", value: "Following" },
+    { text: "Community", value: "Community" }
 ];
 
 export default {
@@ -230,6 +230,7 @@ export default {
             keyword: this.keyword,
           },
         });
+        this.hide()
       }
     },
 
@@ -254,6 +255,7 @@ export default {
             keyword: this.keyword,
           },
         });
+        this.hide()
       }
     },
 
@@ -280,6 +282,7 @@ export default {
             keyword: this.keyword,
           },
         });
+        this.hide()
       }
     },
 
@@ -309,6 +312,10 @@ export default {
       stack: "search/STACK_VALUE",
       reset: "search/RESET_RESULT",
     }),
+
+    hide(){
+      this.$bvModal.hide('myModall')
+    },
 
     hasKeyWord() {
       if (!this.keyword) {
@@ -354,7 +361,6 @@ export default {
 
     onNotified(message) {
       this.flashMessage.error({
-       title: "$t('search.Important_message')",
         message,
       });
     },
@@ -428,6 +434,7 @@ export default {
       this.stack(data);
       this.newCallbackForPagination(this._onFind);
       this._onFind(data);
+      this.hide()
     }, 2000),
 
     showRecentPost() {

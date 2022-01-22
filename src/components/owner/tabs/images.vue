@@ -5,8 +5,8 @@
       :label="$t('profileowner.Large_Spinner')"
     ></b-spinner>
   </div>
-  <div class="row" v-else>
-    <div class="container-fluid">
+  <b-container fluid v-else>
+    <b-row>
       <p v-if="!allImages.length" style="font-size: 3rem">
         {{ $t("profileowner.No_items_found") }}
       </p>
@@ -63,26 +63,25 @@
           </a>
         </div>
       </div>
+     
       
-      <div v-for="(image, cmp) in allImages" :key="cmp" >
-        <b-row class="img-gall row" v-for="(im, index) in image.media" :key="index">
           <Picture
+            class="img-gall" v-for="(im, index) in allImages" :key="index"
             :im="im"
-            :typeOfMedia="() => typeOfMedia(im.path)"
-            :getFullMediaLink="() => getFullMediaLink(im.path)"
-            :getYoutubeKey="() => getYoutubeKey(getFullMediaLink(im.path))"
-            :showImg="() => showImg(getFullMediaLink(im.path))"
+            :typeOfMedia="() => typeOfMedia(im.media.path)"
+            :getFullMediaLink="() => getFullMediaLink(im.media.path)"
+            :getYoutubeKey="() => getYoutubeKey(getFullMediaLink(im.media.path))"
+            :showImg="() => showImg(getFullMediaLink(im.media.path))"
             :downloadPic="() => downloadPic(im)"
-            :setProfilePic="() => setProfilePic(im.id)"
-            :setCoverPic="() => setCoverPic(im.id)"
-            :deleteImage="() => deleteImage(im.id, cmp)"
-            :content="image.content"
+            :setProfilePic="() => setProfilePic(im.media.id)"
+            :setCoverPic="() => setCoverPic(im.media.id)"
+            :deleteImage="() => deleteImage(im.media.id, index)"
+            :content="im.content"
             :imageProps="imageProps"
             :isEditor="isEditor"
             :type="type"
           />
-        </b-row>
-      </div>
+        
 
       <vue-easy-lightbox
         :visible="visible"
@@ -90,8 +89,10 @@
         :index="currentPicture"
         @hide="handleHide"
       ></vue-easy-lightbox>
-    </div>
-  </div>
+
+    </b-row>
+  </b-container>
+ 
 </template>
 
 <script>
@@ -181,8 +182,10 @@ export default {
   },
 
   created() {
-    this.allImages = this.images;
 
+    console.log(this.images)
+    this.allImages = this.images
+   
     this.url = this.$route.params.id;
 
     this.pattern = {
@@ -602,7 +605,7 @@ export default {
 
   .img-gall {
     position: relative;
-    margin: 5px;
+    margin: 3px;
     float: left;
     width: 19.1%;
     transition-duration: 0.4s;
@@ -634,7 +637,7 @@ export default {
   .img-gall {
     background-size: contain;
     cursor: pointer;
-    margin: 10px;
+    margin: 5px;
     border-radius: 3px;
   }
 
@@ -642,7 +645,7 @@ export default {
     position: relative;
     margin: 5px;
     float: left;
-    width: 31%;
+    
     transition-duration: 0.4s;
     border-radius: 5px;
     -webkit-animation: winanim 0.5s;

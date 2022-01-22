@@ -1,5 +1,5 @@
 <template>
-  <b-modal :id="modal" hide-footer title="Write post">
+  <b-modal :id="modal" hide-footer :title="$t('search.Write_post')">
     <div class="d-flex align-items-center py-1 px-2">
       <b-avatar
         class="mr-3"

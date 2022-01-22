@@ -10,5 +10,12 @@
     "Send_Failed": "Échec d'envoi",
     "Message_not_send": "Le message n'a pas été envoyé",
     "Verification_Failed": "Échec de la vérification",
-    "Unable_to_verify_your_account": "Impossible de vérifier votre compte"
+    "Unable_to_verify_your_account": "Impossible de vérifier votre compte",
+    "Via_Email_To":"Via e-mail à",
+    "account_verification_success":"vérification du compte réussie",
+    "Via_SMS_To":"Via SMS à",
+    "Neighbour":"Quartier",
+    "Password_reset":"Réinitialisation du mot de passe",
+    "tel":"Téléphone",
+    "tel_is_required":"Le téléphone est requis"
 }

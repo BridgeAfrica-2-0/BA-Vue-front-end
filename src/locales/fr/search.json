@@ -85,7 +85,7 @@
     "Share_to_people": "Partager avec les gens",
     "Search_for_people": "Recherche de personnes",
     "Search_for_network": "Recherche de réseau",
-    "Share_to_network": "Partager vers le réseau",
+    "Share_to_network": "Partager au réseau",
     "Share_Post_As": "Partager la publication comme",
     "Send_Inbox": "Envoyer la boîte de réception",
     "Share_business": "Partager à l'entreprise",
@@ -93,7 +93,7 @@
     "Share": "Partager",
     "Share_to_your_Profile": "Partager avec votre profil",
     "Share_to_News_Feed": "Parteger avec le fil d'actualités",
-    "Share_to_Network": "Partager vers le réseau",
+    "Share_to_Network": "Partager au réseau",
     "Share_to_Business": "Partager à l'entreprise",
     "Share_to_commnunity": "Partager avec la commnunauté",
     "Share_to_People": "Partager avec le gens",
@@ -140,5 +140,13 @@
     "Insight": "Apperçu",
     "Settings": "Paramètres",
     "Copy_link":"Copier le lien",
-    "All_business":"Toutes les entreprises"
+    "All_business":"Toutes les entreprises",
+    "Share_as":"Partagez en tant que",
+    "Write_post":"Créer une publication",
+    "Publish":"Publier",
+    "Add_Hyperlink":"Ajouter un hyperlien",
+    "Enter_a_description":"Entrez une description",
+    "Add_Item":"Ajouter un article",
+    "Operation_success":"Opération effectuée avec succès",
+    "Failed_to_copy_the_text_to_the_clipboard":"Échec de la copie du texte dans le presse-papiers"
 }

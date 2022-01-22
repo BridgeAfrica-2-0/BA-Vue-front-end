@@ -309,13 +309,15 @@
     "Product_Deleted_Successfuly":"Le produit a été supprimé avec succès",
     "Unable_To_Delete_Product":"Impossible de supprimer le produit",
     "You_Are_Now_Following":"Vous êtes maintenant abonné",
-    "Content_successfuly_uploaded":"Contenu téléchargé avec succès",
+    "All_networks":"Tous les réseaux",
+    "Content_successfuly_uploaded":"Publication créée",
     "Unable_to_Update_your_post":"Impossible de mettre à jour votre publication",
     "BETA_LAUNCH_OF_BRIDGEAFRICA":"LANCEMENT DE LA VERSION BÊTA DE BRIDGEAFRICA",
     "business":"entreprise",
     "Direction":"Direction",
     "Hot_Businesses":"Entreprises Populaires",
-    "No_item":"Aucun élément"
+    "No_item":"Aucun élément",
+    "Unable_to_Create_Your_Business":"Impossible de créer votre entreprise"
 
    
 

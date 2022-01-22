@@ -282,7 +282,7 @@
     "Comment_Deleted":"Comment Deleted",
     "Something_wrong_happen_Try_again":"Something wrong happen. Try again",
     "Comment_Updated":"Comment Updated",
-    "Post_created":"Post created",
+    "Post_created":"Comment created",
     "Try_to_write_something":"Try to write something",
     "Show_more_comments":"Show more comments",
 
@@ -317,13 +317,15 @@
     "Product_Deleted_Successfuly":"Product Deleted Successfuly",
     "Unable_To_Delete_Product":"Unable To Delete Product",
     "You_Are_Now_Following":"You Are Now Following",
-    "Content_successfuly_uploaded":"Content successfully uploaded",
+    "All_networks":"All networks",
+    "Content_successfuly_uploaded":"Post Created",
     "Unable_to_Update_your_post":"Unable to Update your post",
     "BETA_LAUNCH_OF_BRIDGEAFRICA":"BETA LAUNCH OF BRIDGEAFRICA",
     "business":"business",
     "Direction":"Direction",
     "Hot_Businesses":"Hot Businesses",
-    "No_item":"No item"
+    "No_item":"No item",
+    "Unable_to_Create_Your_Business":"Unable to Create Your Business"
 
    
 

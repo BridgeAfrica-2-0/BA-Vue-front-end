@@ -144,5 +144,13 @@
     "Insight": "Insight",
     "Settings": "Settings",
     "Copy_link":"Copy link",
-    "All_business":"All business"
+    "All_business":"All business",
+    "Share_as":"Share as",
+    "Write_post":"Create post",
+    "Publish":"Publish",
+    "Add_Hyperlink":"Add Hyperlink",
+    "Enter_a_description":"Enter a description",
+    "Add_Item":"Add Item",
+    "Operation_success":"Operation success",
+    "Failed_to_copy_the_text_to_the_clipboard":"Failed to copy the text to the clipboard"
 }

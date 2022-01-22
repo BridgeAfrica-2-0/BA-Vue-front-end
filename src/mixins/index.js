@@ -495,8 +495,28 @@ export const defaultCoverImage = {
 export const ResizeMediaImage = {
 
   computed: {
-    getStyle(){
+    getStyle() {
       return ['network'].includes(this.type) ? "width: 226px !important;height: 226px !important" : "width: 250px !important;height: 250px !important"
+    }
+  },
+
+  data:() => ({
+    style: null
+  }),
+
+  mounted() {
+    window.addEventListener("resize", this.onResize);
+  },
+
+  destroyed() {
+    window.removeEventListener("resize", this.onResize);
+  },
+
+
+  methods: {
+    onResize(){
+      const newWidth = document.documentElement.clientWidth;
+      //console.log(newWidth)
     }
   }
 }

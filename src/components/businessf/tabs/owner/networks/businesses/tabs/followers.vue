@@ -200,6 +200,7 @@ export default {
       const data = {
         id: Comdata.id,
         type: Comdata.type,
+        network_id: this.url
       };
 
       await this.axios

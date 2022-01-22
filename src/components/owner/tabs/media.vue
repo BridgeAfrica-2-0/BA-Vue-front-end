@@ -138,6 +138,7 @@ export default {
           });
         return _.flatten(newData);
       };
+
       return wrapper(this.strategy[this.type]().pictures);
     },
 

@@ -1199,8 +1199,8 @@ export default {
           formData2.append("lng", this.businessInstanceCenter[0]);
 
           formData2.append("name", this.form.business_name);
-          //  formData2.append("keywords", this.selectedKeywords);
-          formData2.append("keywords", "blec this");
+           formData2.append("keywords", this.selectedKeywords);
+          // formData2.append("keywords", "blec this");
           formData2.append("timezone", this.time_zone);
           formData2.append("language", this.language);
           formData2.append("about_business", this.about);

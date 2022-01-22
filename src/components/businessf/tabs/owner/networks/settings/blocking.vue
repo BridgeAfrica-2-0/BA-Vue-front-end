@@ -88,7 +88,7 @@
                 size="4em"
               ></b-avatar>
               <span class="mr-auto">{{blockbusines.name}}</span>
-              <span class="mr-auto float-right mt-1" @click="UnblockBusines(blockbusines)"><b-link href="#">{{ $t('network.Unblock') }}</b-link></span>
+              <span class="float-right mt-1" @click="UnblockBusines(blockbusines)"><b-link href="#">{{ $t('network.Unblock') }}</b-link></span>
             </b-list>
           </b-skeleton-wrapper>
         </b-list-group>
@@ -116,9 +116,9 @@ export default {
 	},
 
   computed: {
-    // blockusers() {
-    //   return this.$store.state.NetworkSettings.blockusers;
-    // },
+    blockusers() {
+      return this.$store.state.NetworkSettings.blockusers;
+    },
     blocknetworks() {
       return this.$store.state.NetworkSettings.blocknetworks;
     },

@@ -42,6 +42,7 @@
             <BtnCtaMessage
               v-if="packageProduct === 'basic'"
               :element="product"
+              :isProduct="true"
               type="business"
             />
             <b-button

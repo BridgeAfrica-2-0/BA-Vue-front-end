@@ -369,7 +369,7 @@ export default {
       country: [],
       region: [],
       url: null,
-
+      test:[],
       markers: [],
       accessToken: process.env.VUE_APP_MAPBOX_TOKEN,
       mapStyle: "mapbox://styles/mapbox/outdoors-v11",
@@ -446,7 +446,10 @@ export default {
      * @return void
      */
 
-    getGeoCoderResult(response) {console.log(response);
+    getGeoCoderResult(response) {
+      this.form.address = response.address;
+      console.log('teststststst')
+      console.log(response);
       this.coordinates = response.coordinates;
       this.address = response.address;
       console.log("yoo mother fuckers");

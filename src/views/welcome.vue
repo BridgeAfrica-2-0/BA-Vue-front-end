@@ -70,6 +70,7 @@
           <form-wizard
             @on-complete="onComplete"
             @on-loading="setLoading"
+            
             color="#e75c18"
           >
             <input
@@ -210,11 +211,25 @@
                     <div class="form-group">
                       <label for="Neighbour" class="username"> {{$t('welcome.Neighbour')}}:</label
                       ><br />
-                      <autocomplete-mapbox
+                       <input
+                        type="text"
+                        name="alias"
+                        id="Neighbor"
+                        v-model="Neighbor"
+                        placeholder="Neighbor"
+                        class="form-control text"
+                      />
+                      <!-- <autocomplete-mapbox
                         v-if="region"
                         :region="region"
                         @get-address-details="getAddressDetails"
-                      />
+                      /> -->
+                      <AutocompleteLocation
+                        v-if="showMap"
+                       :region="region"
+                       @get-address-details="getAddressDetails"
+                       />
+                       
                     </div>
                   </div>
 
@@ -264,7 +279,7 @@
         />
 
         <div>
-          <form-wizard @on-complete="onComplete">
+          <form-wizard @on-complete="onComplete" @on-change="changeTab">
             <tab-content
               :title="$t('welcome.Complete_Profile')"
               :before-change="updateUserProfile"
@@ -393,11 +408,24 @@
                     <div class="form-group">
                       <label for="Neighbour" class="username"> {{$t("welcome.Neighbour")}}:</label
                       ><br />
-                      <autocomplete-mapbox
+                      <input
+                        type="text"
+                        name="alias"
+                        id="Neighbor"
+                        v-model="Neighbor"
+                        placeholder="Neighbor"
+                        class="form-control text"
+                      />
+                      <!-- <autocomplete-mapbox
                         v-if="region"
                         :region="region"
                         @get-address-details="getAddressDetails"
-                      />
+                      /> -->
+                      <AutocompleteLocation
+                      v-if="showMap"
+                       :region="region"
+                       @get-address-details="getAddressDetails"
+                       />
                     </div>
                   </div>
                 </div>
@@ -721,6 +749,7 @@
                       <label for="username" class="username"
                         >{{ $t("welcome.TimeZone") }}:</label
                       ><br />
+                      
 
                       <b-form-select
                         id="timezone"
@@ -735,16 +764,36 @@
                       <label for="Neighbor" class="username">
                         {{ $t("welcome.Adress") }} :</label
                       >
-                      <BusinessAutocomplete
+                      <!-- <BusinessAutocomplete
                         v-if="regionn && regionn.length > 0"
                         :region="regionn"
                         @business-instance-location="businessInstanceLocation"
+                      /> -->
+                      <input
+                        type="text"
+                        name="alias"
+                        id="Neighbor"
+                        v-model="address"
+                        placeholder="Neighborhood"
+                        class="form-control text"
                       />
-                    </div>
+                      <AutocompleteLocation
+                       v-if="!showMap"
+                       :region="region"
+                       @get-address-details="getAddressDetails"
+                       />
+                    </div> 
                   </div>
-                </div>
-
-                <businessmap :center="businessInstanceCenter" />
+                </div> 
+               
+                  
+                  <!-- <AutocompleteMapbox
+                    v-if="!showMap"
+                       :region="region"
+                       @get-address-details="getAddressDetails"
+                       /> -->
+                        
+                <!-- <businessmap :center="businessInstanceCenter" /> -->
               </div>
             </tab-content>
 
@@ -766,6 +815,7 @@
               </div>
             </tab-content>
           </form-wizard>
+          
         </div>
       </form>
     </div>
@@ -774,9 +824,9 @@
 
 <script>
 import People from "@/components/dasboard/suggestedpeople";
-import businessmap from "@/components/welcome/businessmap";
-import AutocompleteMapbox from "@/components/AutocompleteMapbox";
-import BusinessAutocomplete from "@/components/welcome/BusinessAutocomplete";
+// import businessmap from "@/components/welcome/businessmap";
+// import AutocompleteMapbox from "@/components/AutocompleteMapbox";
+// import BusinessAutocomplete from "@/components/welcome/BusinessAutocomplete";
 
 import Business from "@/components/dasboard/welcomebusinesses";
 
@@ -788,6 +838,7 @@ import Multiselect from "vue-multiselect";
 import { validationMixin } from "vuelidate";
 import moment from "moment";
 import { required, email, minLength } from "vuelidate/lib/validators";
+import AutocompleteLocation from "@/components/AutocompleteLocation";
 
 export default {
   mixins: [validationMixin],
@@ -810,12 +861,14 @@ export default {
       reg: "",
       countryy: [],
       regionn: [],
-      region: "",
+      region: [],
       username: this.$store.state.auth.user.user.name,
       img_url: null,
       select_filterss: [],
       sendingP: false,
       address: null,
+      adress:null,
+      showMap: true,
       sendingB: false,
       profile_pic: "",
       dob: null,
@@ -880,6 +933,10 @@ export default {
   },
 
   methods: {
+    changeTab(e,e1){
+      console.log('-----',e, '--',e1)
+      if(e == 1 && e1 == 0) this.showMap = true;
+    },
     //  switchLang(value){
 
     //  console.log(this.language);
@@ -891,6 +948,8 @@ export default {
     //  },
 
     getAddressDetails(details) {
+      this.address = details.address;
+      this.Neighbor =  details.address;
       this.coordinates = details.coordinates;
       this.address = details.address;
       console.log(details);
@@ -1140,8 +1199,8 @@ export default {
           formData2.append("lng", this.businessInstanceCenter[0]);
 
           formData2.append("name", this.form.business_name);
-          //  formData2.append("keywords", this.selectedKeywords);
-          formData2.append("keywords", "blec this");
+           formData2.append("keywords", this.selectedKeywords);
+          // formData2.append("keywords", "blec this");
           formData2.append("timezone", this.time_zone);
           formData2.append("language", this.language);
           formData2.append("about_business", this.about);
@@ -1321,7 +1380,7 @@ export default {
         onCancel: this.onCancel,
         color: "#e75c18",
       });
-
+  console.log("((((((jr ------")
       return new Promise((resolve, reject) => {
         console.log("sending user data");
 
@@ -1343,7 +1402,7 @@ export default {
           .post("/complete/profile", formData)
           .then((response) => {
             console.log(response);
-
+                this.showMap =false;
             this.step1 = true;
             loader.hide();
 
@@ -1466,12 +1525,15 @@ export default {
     People,
     Business,
     Tutorial,
-    AutocompleteMapbox,
-    businessmap,
-    BusinessAutocomplete,
+    // AutocompleteMapbox,
+    // businessmap,
+    // BusinessAutocomplete,
+    AutocompleteLocation
   },
 
   computed: {
+
+    
     selectedcategories: function() {
       let selectedUsers = [];
       this.multiselecvalue.forEach((item) => {

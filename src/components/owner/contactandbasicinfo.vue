@@ -704,9 +704,18 @@ deleteContact(id){
         .then((response) => {
           console.log("save new websites user response (3) ++++++", response);
           console.log("save new websites user end +++++");
+          this.flashMessage.show({
+            status: "success",
+            message: response.data.message
+          })
+           this.$refs["websiteModal"].hide();
         })
         .catch((error) => {
-          console.log(error, "not save new websites user end error (2) +++++");
+          console.log(error, "not save new websites user end error (2) +++++" );
+          this.flashMessage.show({
+            status: "error",
+            message: error.response.data.errors.webUrl[0]
+          })
         })
         .finally(() => {
           this.$store
@@ -717,7 +726,7 @@ deleteContact(id){
             .catch((error) => {
               console.log(error);
             });
-          this.$refs["websiteModal"].hide();
+         
         });
     },
     deleteWebsite(website) {

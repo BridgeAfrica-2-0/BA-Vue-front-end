@@ -5,12 +5,12 @@
       :label="$t('profileowner.Large_Spinner')"
     ></b-spinner>
   </div>
-  <b-container fluid v-else>
-    <b-row>
-      <p v-if="!allImages.length" style="font-size: 3rem">
-        {{ $t("profileowner.No_items_found") }}
-      </p>
-
+  <div fluid v-else>
+    <p v-if="!allImages.length" style="font-size: 3rem">
+      {{ $t("profileowner.No_items_found") }}
+    </p>
+    <div>
+      
       <b-modal
         id="modalxl"
         ref="modalxl"
@@ -55,7 +55,7 @@
             hidden
             ref="movie"
           />
-          <a @click="$refs.movie.click()">
+          <a>
             <div class="drag-textt">
               <fas-icon :icon="['fas', 'plus']" />
               <h3>{{ $t("profileowner.Add_Item") }}</h3>
@@ -80,6 +80,7 @@
             :imageProps="imageProps"
             :isEditor="isEditor"
             :type="type"
+            :getStyle="getStyle"
           />
         
 
@@ -90,8 +91,8 @@
         @hide="handleHide"
       ></vue-easy-lightbox>
 
-    </b-row>
-  </b-container>
+    </div>
+  </div>
  
 </template>
 
@@ -574,7 +575,6 @@ export default {
     position: relative;
     margin: 5px;
     float: left;
-    width: 46.5%;
     transition-duration: 0.4s;
     border-radius: 5px;
     -webkit-animation: winanim 0.5s;
@@ -587,7 +587,7 @@ export default {
     position: relative;
     margin: 5px;
     float: left;
-    width: 20%;
+    
     transition-duration: 0.4s;
     border-radius: 5px;
     -webkit-animation: winanim 0.5s;

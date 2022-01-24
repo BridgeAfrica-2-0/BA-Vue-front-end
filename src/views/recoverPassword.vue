@@ -9,7 +9,7 @@
       <md-card class="md-layout-item md-size-50 md-small-size-100 p-card">
         <md-card-header>
           <div class="md-title center f-22">
-            {{ $t("verification.Passwor_reset") }}
+            {{ $t("verification.Password_reset") }}
           </div>
         </md-card-header>
 

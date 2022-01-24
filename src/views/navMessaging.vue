@@ -1757,6 +1757,8 @@ export default {
               ? data.receiver.profile_picture
               : data.profile_picture
             : data.sender.profile_picture
+          : data.profile_picture
+          ? data.profile_picture
           : user;
       } else if (this.type == "business") {
         image = data.sender_business
@@ -1816,7 +1818,9 @@ export default {
       if (this.ctaSelected) {
         name = value.name;
       }
-      if (!value.name) {
+      if (value.name) {
+        name = value.name;
+      } else {
         if (this.type == "user") {
           name = value.sender
             ? value.sender.id == this.currentUser.user.id
@@ -1929,7 +1933,7 @@ export default {
         console.log(this.currentUser.user.id + "==" + data.sender_id);
         this.currentUser.user.id == data.sender_id
           ? this.saveMessage(this.formData, data.type)
-          : this.getChatList({ type: data.type });
+          : console.log("Receiver...");
       });
       console.log("listenning...");
     },

@@ -436,7 +436,7 @@ export default {
           ? { businessID: this.$route.params.id, id: id }
           : id;
 
-      this.pattern[this.type]()
+      return this.pattern[this.type]()
         .setProfilePicture(data)
         .then(() => {
           this.loading = false;

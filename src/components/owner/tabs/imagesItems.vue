@@ -2,6 +2,7 @@
   <div  
     :ref="`sHowMedia-${im.id}`"
     style="`${getStyle};position:relative`"
+    class="p-3"
   >
       <b-img
         v-if="typeOfMedia() == 'image' && !loading"

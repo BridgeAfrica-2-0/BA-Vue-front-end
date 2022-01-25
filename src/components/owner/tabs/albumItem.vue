@@ -2,7 +2,7 @@
   <div class ="createp img-gall predit2"
     @mouseover="upHere = true"
     @mouseleave="upHere = false"
-    :style="getStyle"
+    
     
   >
     <a>

@@ -224,6 +224,7 @@ export default {
     },
 
     mutations: {
+        
         //set media data
         updateAlbum(state, payload) {
             const newState = state.albums.map(album => (album.id == payload.id) ? Object.assign(album, { name: payload.name }) : album)

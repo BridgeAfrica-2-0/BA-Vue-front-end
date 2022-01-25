@@ -84,5 +84,8 @@
     "Business_Name_Is_Required": "Le nom de l'entreprise est requis",
     "Registration_Failed": "Échec de l'enregistrement",
     "Business_Profile_Created": "Profil d'entreprise créé",
-    "Unable_to_Create_Your_Business": "Impossible de créer votre entreprise"
+    "Unable_to_Create_Your_Business": "Impossible de créer votre entreprise",
+    "Look_like_you_re_lost":"On dirait que vous êtes perdu",
+    "the_page_you_are_looking_for_not_avaible":"la page que vous recherchez n'est pas disponible",
+    "Go_to_Home":"Aller à l'accueil"
 }

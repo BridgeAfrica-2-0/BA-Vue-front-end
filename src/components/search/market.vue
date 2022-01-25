@@ -64,9 +64,15 @@
                 cols="4"
                 class="mt-2 text-center"
               >
-                <b-button variant="primary" @click="buyNow(prod)"
+                <!-- <b-button variant="primary" @click="buyNow(prod)"
                   ><span> {{ $t("search.Buy_now") }} </span>
-                </b-button>
+                </b-button> -->
+                <BtnCtaMessage
+                  :element="prod"
+                  :isProduct="true"
+                  :isBuyNow="true"
+                  type="business"
+                />
               </b-col>
 
               <b-col

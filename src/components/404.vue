@@ -8,11 +8,11 @@
              
             </div>
             <div class="contant_box_404">
-              <h3 class="h2">Look like you're lost</h3>
-              <p>the page you are looking for not avaible!</p>
+              <h3 class="h2">{{$("welcome.Look_like_you_re_lost")}}</h3>
+              <p>{{$("welcome.the_page_you_are_looking_for_not_avaible")}}!</p>
               <router-link to="dashboard">
                 <md-button class="bt link_404 btn-primary">
-                  Go to Home
+                  {{$("welcome.Go_to_Home")}}
                 </md-button>
               </router-link>
             </div>

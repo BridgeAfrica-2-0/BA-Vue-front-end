@@ -3,6 +3,7 @@ import axios from "axios";
 export default {
     namespaced: true,
     state: {
+        // currentAuth: rootState.auth.profilConnected,
         currentUser: JSON.parse(localStorage.getItem("user")),
         users: [],
         bizs: [],
@@ -118,33 +119,36 @@ export default {
                     console.log(err);
                 })
         },
-        GET_BIZS({ commit, state }, data) {
+        GET_BIZS({ commit, rootState }, data) {
             commit("setBizs", []);
             commit("setLoader", true);
             let keyword = data ? '/' + data : ''
+            let currentAuth = rootState.auth.profilConnected
+
             axios.get(`/business/all${keyword}`)
                 .then((res) => {
                     commit("setLoader", false);
                     let bizs = res.data.data
-                    commit("setBizs", bizs);
-
+                    let bizsFinal = currentAuth.user_type == 'business' ? bizs.filter((biz) => { return biz.id != currentAuth.id }) : bizs
+                    commit("setBizs", bizsFinal);
                 })
                 .catch((err) => {
                     commit("setLoader", false);
                     console.log(err);
                 })
         },
-        GET_NETS({ commit, state }, data) {
+        GET_NETS({ commit, state, rootState }, data) {
             commit("setNets", []);
             commit("setLoader", true);
-            let keyword = data ? data : ''
+            let keyword = data ? '?keyword=' + data : ''
+            let currentAuth = rootState.auth.profilConnected
 
-            axios.get(`/network/search?keyword=${keyword}`)
+            axios.get(`/network/search${keyword}`)
                 .then((res) => {
                     commit("setLoader", false);
                     let bizs = res.data.data
-                    commit("setNets", bizs);
-
+                    let bizsFinal = currentAuth.user_type == 'network' ? bizs.filter((biz) => { return biz.id != currentAuth.id }) : bizs
+                    commit("setNets", bizsFinal);
                 })
                 .catch((err) => {
                     commit("setLoader", false);
@@ -154,6 +158,8 @@ export default {
         // [NO BUG]
         GET_USERS_CHAT_LIST({ commit, state }, data) {
             commit("setUsers", []);
+            console.log("[data]:", data);
+
             console.log("currentuser:", state.currentUser.user);
 
             commit("setLoader", true);

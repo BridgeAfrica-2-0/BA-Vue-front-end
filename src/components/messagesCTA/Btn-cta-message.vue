@@ -6,23 +6,19 @@
     :class="header ? 'message size' : 'b-background flexx shadow'"
     @click="cta()"
   >
-    <span v-if="header" style="margin-left:-3px">
+    <span v-if="header" style="margin-left: -3px">
       <i class="fas fa-envelope fa-lg btn-icon"></i>
       <span class="ml-1"> {{ $t("businessf.Message") }}</span>
     </span>
-
-
-
-    <span v-else style=" display:inline-flex">
-      <i class="fas fa-envelope fa-lg btn-icon pb-3 mt-1 mr-1 mt-sm-1 " ></i>
-      <span class="btn-text"  style="margin-top: -1px;"> {{ $t("dashboard.Messages") }}</span>
+    <span v-else-if="isBuyNow" style="display: inline-flex">
+      <span class="btn-text" style="margin-top: -1px"> Buy Now</span>
     </span>
-
-
-  
-
-
-
+    <span v-else style="display: inline-flex">
+      <i class="fas fa-envelope fa-lg btn-icon pb-3 mt-1 mr-1 mt-sm-1"></i>
+      <span class="btn-text" style="margin-top: -1px">
+        {{ $t("businessf.Message") }}</span
+      >
+    </span>
   </b-button>
 </template>
 
@@ -37,6 +33,14 @@ export default {
       type: String,
     },
     header: {
+      default: false,
+      type: Boolean,
+    },
+    isProduct: {
+      default: false,
+      type: Boolean,
+    },
+    isBuyNow: {
       default: false,
       type: Boolean,
     },
@@ -63,14 +67,21 @@ export default {
   methods: {
     cta() {
       console.log(this.element);
-      this.$store.commit("businessChat/setSelectedChat", this.element);
+      this.$store.commit("businessChat/setSelectedChat", {
+        isProduct: this.isProduct,
+        ...this.element,
+      });
       let path = "";
 
-      if (this.activeAccount.user_type == "business") {
-        path = "/business_owner/" + this.activeAccount.id;
-      } else if (this.activeAccount.user_type == "network") {
-        path = "/network/" + this.activeAccount.id;
-      } else path = "/messaging";
+      if (this.isProduct) {
+        path = "/messaging";
+      } else {
+        if (this.activeAccount.user_type == "business") {
+          path = "/business_owner/" + this.activeAccount.id;
+        } else if (this.activeAccount.user_type == "network") {
+          path = "/network/" + this.activeAccount.id;
+        } else path = "/messaging";
+      }
 
       let msgTabId = 0;
       if (this.type == "people") {
@@ -123,10 +134,8 @@ export default {
 }
 /* cta comp */
 
-@media only screen and (max-width: 768px) { 
-
-  .mt-sm-1{
-
+@media only screen and (max-width: 768px) {
+  .mt-sm-1 {
     margin-top: 1px !important;
   }
 }

@@ -399,7 +399,7 @@ export default {
                 .then((res) => {
                     commit("setLoader", false);
                     let bizs = res.data.data
-                    console.log('businesses +++:', bizs)
+                        // console.log('businesses +++:', bizs)
 
                     let curBiz = bizs.filter((biz) => {
                         return state.currentBizId == biz.id

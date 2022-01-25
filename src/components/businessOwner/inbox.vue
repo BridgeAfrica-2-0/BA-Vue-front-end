@@ -522,8 +522,8 @@
                   <!-- {{ chat }}<br /> -->
                   <div
                     v-if="
-                      currentBiz.id != chat.sender_business_id &&
-                      currentBiz.id != chat.businessID
+                      currentBizId != chat.sender_business_id &&
+                      currentBizId != chat.businessID
                     "
                   >
                     <b-row class="p-2">
@@ -1924,8 +1924,8 @@
                   <!-- {{ chat }}<br /> -->
                   <div
                     v-if="
-                      currentBiz.id != chat.sender_business_id &&
-                      currentBiz.id != chat.businessID
+                      currentBizId != chat.sender_business_id &&
+                      currentBizId != chat.businessID
                     "
                   >
                     <b-row class="p-2">
@@ -3084,6 +3084,8 @@ export default {
       let user = require("@/assets/profile_white.png");
       let network = require("@/assets/network_default.png");
       let business = require("@/assets/business_white.png");
+      let group = require("@/assets/default_group.png");
+
       let data = value.chat ? value.chat : value;
 
       if (this.type == "user") {
@@ -3110,7 +3112,7 @@ export default {
           : data.image
           ? data.image
           : network;
-      }
+      } else image = group;
       // console.log("chatlist image:", image);
       return image;
     },
@@ -3138,7 +3140,7 @@ export default {
           : value.sender_network
           ? value.sender_network.name
           : value.name;
-      }
+      } else name = value.groupName;
 
       return name;
     },
@@ -3565,7 +3567,7 @@ export default {
       this.socket.emit("privateMessage", {
         type: this.type,
         message: this.input,
-        sender_business_id: this.currentBiz.id,
+        sender_business_id: this.currentBizId,
         room: this.room,
         receiver_business_id: this.chatSelected.id,
         receiver_id: this.chatId,
@@ -3574,7 +3576,7 @@ export default {
       console.log("SENT...", {
         type: this.type,
         message: this.input,
-        sender_business_id: this.currentBiz.id,
+        sender_business_id: this.currentBizId,
         room: this.room,
         receiver_business_id: this.chatSelected.id,
         receiver_id: this.chatId,

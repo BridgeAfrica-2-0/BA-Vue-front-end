@@ -150,7 +150,7 @@ export default {
 
   methods: {
     gotoBusiness(id) {
-      this.$router.push(`/business/${id}#about`);
+      this.$router.push(`/business/${id}?tabId=1`);
     },
     count(number) {
       if (number >= 1000000) {

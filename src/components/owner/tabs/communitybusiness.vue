@@ -286,7 +286,8 @@ export default {
     },
 
     gotobusiness(id) {
-      this.$router.push(`business/${id}#about`);
+      this.$router.push(`business/${id}?tabId=1`);
+      
     },
     async handleFollow(user) {
       document.getElementById("followbtn" + user.id).disabled = true;

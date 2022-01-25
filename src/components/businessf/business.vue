@@ -252,7 +252,7 @@ export default {
       }
     },
 
-    $route(to, from) {
+    $route(to, from) { console.log("----route--")
       if ("#media" == to.hash) this.showCoverAlbum = true;
 
       this.currentTab = this.tabs.findIndex((tab) => tab === to.hash);
@@ -264,6 +264,8 @@ export default {
     this.ownerPost();
   },
   methods: {
+
+    
     gotoCoverImages() {
       this.showCoverAlbum = true;
       this.key = this.key + 1;

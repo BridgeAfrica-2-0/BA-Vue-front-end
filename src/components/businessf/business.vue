@@ -15,12 +15,10 @@
         </splide-slide>
       </splide>
     </div>
-    
-    
+
     <b-button class="float-right see-all" @click="gotoCoverImages">
       {{ $t("businessf.See_All") }}
     </b-button>
-    
 
     <b-row class="mt-4 desktop container-fluid">
       <b-col>
@@ -56,8 +54,9 @@
             <span> {{ $t("businessf.Community") }}</span>
           </b-button>
 
-          <BtnCtaMessage class="ml-1"
-            :element="business_info"
+          <BtnCtaMessage
+            class="ml-1"
+            :element="{ id: Number(url_data), ...business_info }"
             type="business"
             :header="true"
           />
@@ -117,7 +116,7 @@
         </b-col>
       </b-row>
     </div>
-    <div class="mb-1 m-btn  d-inline-flex  d-md-none">
+    <div class="mb-1 m-btn d-inline-flex d-md-none">
       <!-- <b-button class="message size">
         <i class="fas fa-envelope fa-lg btn-icon"></i>
         <span>{{ $t("businessf.Message") }}</span>
@@ -154,7 +153,11 @@
             <b-tab :title="$t('general.Home')"><HomePage /></b-tab>
             <b-tab :title="$t('general.About')"><About /></b-tab>
             <b-tab type="business" :title="$t('general.Media')"
-              ><Media  :key="key" :type="'business'" :isEditor="false" :showCoverAlbum="showCoverAlbum"
+              ><Media
+                :key="key"
+                :type="'business'"
+                :isEditor="false"
+                :showCoverAlbum="showCoverAlbum"
             /></b-tab>
             <b-tab :title="$t('general.Market')"><MarketPlace /></b-tab>
             <b-tab :title="$t('general.Networks')"><Networks /></b-tab>
@@ -175,13 +178,13 @@ import MarketPlace from "./tabs/marketPlace";
 import Community from "@/components/businessOwner/tabs/memberNetwork";
 import Networks from "./tabs/networks";
 
-import {defaultCoverImage} from '@/mixins';
+import { defaultCoverImage } from "@/mixins";
 
 import axios from "axios";
 
 export default {
   name: "Home",
-  mixins:[defaultCoverImage],
+  mixins: [defaultCoverImage],
 
   components: {
     HomePage,
@@ -194,9 +197,9 @@ export default {
 
   data() {
     return {
-      key:0,     
+      key: 0,
       hasBeFollow: 0,
-      showCoverAlbum:false,
+      showCoverAlbum: false,
       url_data: null,
       currentTab: 0,
       tabIndex: null,
@@ -231,8 +234,8 @@ export default {
   },
 
   created() {
-     this.currentTab = this.$route.query.tabId ? this.$route.query.tabId : 0;
-    this.currentAuthType = 'business'
+    this.currentTab = this.$route.query.tabId ? this.$route.query.tabId : 0;
+    this.currentAuthType = "business";
     this.url_data = this.$route.params.id;
     this.businessInfo();
   },
@@ -241,17 +244,16 @@ export default {
     "$store.state.businessOwner.businessInfo": function () {
       this.hasBeFollow = this.$store.state.businessOwner.businessInfo.is_follow;
     },
-    
+
     currentTab: (newVal, oldVal) => {
-      if (2 != newVal){
-        this.showCoverAlbum = false
-        this.key = this.key - 1
+      if (2 != newVal) {
+        this.showCoverAlbum = false;
+        this.key = this.key - 1;
       }
     },
 
     $route(to, from) {
-      if ("#media" == to.hash)
-        this.showCoverAlbum = true
+      if ("#media" == to.hash) this.showCoverAlbum = true;
 
       this.currentTab = this.tabs.findIndex((tab) => tab === to.hash);
     },
@@ -262,15 +264,14 @@ export default {
     this.ownerPost();
   },
   methods: {
-
     gotoCoverImages() {
-      this.showCoverAlbum = true
-      this.key = this.key + 1
+      this.showCoverAlbum = true;
+      this.key = this.key + 1;
       this.currentTab = 2;
     },
 
     async handleFollow() {
-      console.log(this.business_info)
+      console.log(this.business_info);
       // document.getElementById("followbtn").disabled = true;
 
       const uri = !this.hasBeFollow ? `/follow-community` : `/unfollow`;
@@ -334,8 +335,7 @@ export default {
 </script>
 
 <style scoped>
-
-.place_holder{
+.place_holder {
   width: 50% !important;
   height: 50% !important;
 }

@@ -387,6 +387,19 @@ export default {
         ppleFollowers(state, payload) {
             state.peopleFollowers = payload;
         },
+
+        addCoverPicture(state, pictures){
+
+            if (Array.isArray(pictures))
+                state.businessInfo.cover = pictures
+            else{
+                if (state.businessInfo.cover)
+                    state.businessInfo.cover = [...state.businessInfo.cover,pictures]
+                else
+                    state.businessInfo.cover = [pictures]
+
+            }
+        }
     },
 
     actions: {
@@ -844,7 +857,12 @@ export default {
         },
 
         async submitPost({ commit }, payload) {
-            return axios.post(`business/store/media/${payload.businessID}/${payload.id}`, payload.data);
+            const config = {
+              headers: {
+                "Access-Control-Allow-Origin": "*",
+              }
+            }
+            return axios.post(`business/store/media/${payload.businessID}/${payload.id}`, payload.data, config);
         },
 
         async setProfilePic({ commit }, { businessID, id }) {

@@ -2,7 +2,6 @@
   <div  
     :ref="`sHowMedia-${im.id}`"
     style="`${getStyle};position:relative`"
-    class="p-3"
   >
       <b-img
         v-if="typeOfMedia() == 'image' && !loading"
@@ -12,7 +11,7 @@
         alt="media_img"
         v-b-modal="`modal-${im.id}`"
         v-bind="imageProps"
-        :style="getStyle"
+        style="width:100% !important; height:100% !important"
       ></b-img>
     
     <video
@@ -147,8 +146,8 @@ export default {
 
     ...mapMutations({
       updatePictureState: "auth/updateProfilePicture",
-      addCoverPictureBusiness: "businessOwner/updateAlbumItem",
-      addCoverPictureProfile: "networkProfileMedia/updateAlbumItem",
+      addCoverPictureBusiness: "businessOwner/addCoverPicture",
+      addCoverPictureProfile: "auth/addCoverPicture",
       
     }),
     async onDownloadPic() {

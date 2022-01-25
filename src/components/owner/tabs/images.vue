@@ -270,6 +270,7 @@ export default {
       updateItem: "UserProfileOwner/updateAlbumItem",
       updateItemBusiness: "businessOwner/updateAlbumItem",
       updateItemNetwork: "networkProfileMedia/updateAlbumItem",
+      
     }),
 
     getFullMediaLink: fullMediaLink,

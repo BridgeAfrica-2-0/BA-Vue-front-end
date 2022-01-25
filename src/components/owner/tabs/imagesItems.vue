@@ -94,6 +94,9 @@
 </template>
 
 <script>
+
+import { mapMutations } from 'vuex'
+
 export default {
   props: [
     "im",
@@ -141,6 +144,13 @@ export default {
   },
 
   methods: {
+
+    ...mapMutations({
+      updatePictureState: "auth/updateProfilePicture",
+      addCoverPictureBusiness: "businessOwner/updateAlbumItem",
+      addCoverPictureProfile: "networkProfileMedia/updateAlbumItem",
+      
+    }),
     async onDownloadPic() {
       let loader = this.$loading.show({
         container: this.$refs[`sHowMedia-${this.im.id}`],

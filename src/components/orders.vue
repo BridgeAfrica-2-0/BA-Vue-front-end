@@ -3,6 +3,32 @@
     <navbar />
     <hr />
     <!-- Desktop Top Bar -->
+
+    <div v-if="showPayment">   
+
+      <PaymentOperator  v-if="showOperator"
+            @requestpayment="handleRequestPayment"
+            @showreview="handleShowReview"
+            :price="order_price"
+          />
+
+
+
+            <RequestPayment  v-if="showRequestPayment"
+            :price="order_price"
+            :operator="operator"
+            :loading="loading"
+            @changepayment="handleChangePayment"
+            @confirmpayment="handleConfirmPayment"
+          />
+
+     </div>
+
+
+
+  <div v-if="!showPayment">  
+
+
     <div class="row m-0 parent desktop">
       <b-avatar
         id="a1"
@@ -158,11 +184,12 @@
     <div class="row my-4" v-if="loading">
       <div class="col-12 d-flex justify-content-center align-items-center">
         <b-spinner
+        variant="primary"
           style="width: 3rem; height: 3rem"
           label="Loading"
         ></b-spinner>
       </div>
-    </div>
+    </div>  
     <div v-for="order in orders" :key="order.order_id">
       <div class="row d-flex justify-content-between px-3">
         <p class="order-text align-self-center pb-0 mb-0">
@@ -212,17 +239,17 @@
       >
         <div class="col-lg-3 col-4">
           <splide :options="{ rewind: true }" class="r-img">
-            <splide-slide cl v-for="(im, index) in img" :key="index">
-              <img :src="img[index]" class="r-img" />
+            <splide-slide cl v-for="(im, index) in order.images" :key="index">
+              <img :src="im" class="r-img" />
             </splide-slide>
           </splide>
-        </div>
+        </div>  
         <div class="col-lg-3 col-4 font-weight-bold text-left">
           <h3 class="text-small text-capitalize">
             {{ $t("myOrders.Product_Qty") }} :
           </h3>
           <h3 class="text-small text-capitalize">
-            {{ $t("myOrders.Price") }} :
+            {{ $t("myOrders.Price") }} :   
           </h3>
           <h3 class="text-small text-capitalize">
             {{ $t("myOrders.shipping_cost") }}:
@@ -265,21 +292,28 @@
         <b-button
           variant="primary"
           class="px-5"
-          @click="updateOrderStatus('complete', order.order_id)"
-          >{{ $t("myOrders.Reorder") }}</b-button
+          @click="reOrder(order)"
+          >   <b-spinner
+          style="width: 1.5rem; height: 1.5rem"
+          variant="light"
+          v-if="order_loading"
+          label="Loading"
+        ></b-spinner>    {{ $t("myOrders.Reorder") }}     </b-button
         >
       </div>
     </div>
     <div class="row my-4" v-if="loading">
       <div class="col-12 d-flex justify-content-center align-items-center">
-        <b-spinner
+        <!-- <b-spinner
           style="width: 3rem; height: 3rem"
+          variant="primary"
           label="Loading"
-        ></b-spinner>
+        ></b-spinner> -->
       </div>
     </div>
     <div class="row d-flex justify-content-center">
-      <b-pagination
+      <b-pagination  v-if="!loading  && next   && prev "
+     
         v-model="currentPage"
         pills
         :total-rows="totalOrders"
@@ -287,27 +321,40 @@
         @change="handlePageChange"
       ></b-pagination>
     </div>
-  </div>
+    
+  </div>  
+   </div>
 </template>
 <script>
 import axios from "axios";
 import navbar from "./navbar.vue";
+import PaymentOperator from "./payment/PaymentOperator";
+import RequestPayment from "./payment/RequestPayment";
 import moment from "moment";
 export default {
-  components: { navbar },
+  components: { navbar, PaymentOperator, RequestPayment },
   data() {
     return {
       isTabActive: 1,
       orders: [],
+      operator: "",
+      showRequestPayment: false,
+      showPayment: false,
+      showOperator:false,
       moment: moment,
       totalOrders: 0,
       orderPerPage: 5,
       currentPage: 1,
+      order_price: 0,
+      order_id: null,
+      order_loading:false,
+      next: "",
+      prev: "",
       selectedShow: null,
       loading: false,
       img: ["http://urlr.me/YMQXD", "https://placekitten.com/400/300"],
       showOptions: [
-        { value: null, text: this.$t('general.Please_select_an_option') },
+        { value: null, text: this.$t("general.Please_select_an_option") },
         { value: "a", text: "last 5 days" },
         { value: "b", text: "last 10 days" },
       ],
@@ -331,6 +378,139 @@ export default {
         this.getAllOrders();
       }
     },
+
+    async reOrder(order) {
+
+       let loader = this.$loading.show({
+          container: this.fullPage ? null : this.$refs.loader,
+          canCancel: true,
+          onCancel: this.onCancel,
+          color: "#e75c18",
+        });
+
+
+  
+      await axios
+        .post(`shipping-checkout/re-order?order_id=${order.order_id}`)
+        .then((res) => {
+            console.log(res);
+
+          this.order_price = res.data.data.total_amount;
+          this.order_id = res.data.data.order_id;
+
+              loader.hide();
+
+           this.showPayment= true;
+            this.showOperator =true;
+        })
+        .catch((err) => {
+          console.log(err);
+            loader.hide();
+        });
+    },
+
+    handleChangePayment() {
+        
+
+          this.showPayment= true;
+      this.showOperator=true;
+      this.showRequestPayment=false;
+
+    },
+
+    handleConfirmPayment({ number, amount, operator }) {
+      // this.$emit("nextpaymentstep");
+      // this.showRequestPayment = false;
+      // this.showConfirmPayment = true;
+
+
+    
+
+      const data = {
+        phone: number,
+        amount: amount,
+        orderId: this.order_id,
+        operator: operator,
+      };
+
+      console.log(data);
+      let url = null;
+      if (operator == "ORANGE") {
+        this.loading = true;
+
+        url = "orange/start-orange-money-transaction";
+
+        axios
+          .post(url, data)
+          .then((response) => {
+            // this.showConfirmPayment = true;
+         
+            console.log(response.data.data);
+
+            window.location.href = response.data.data.payment_url;
+            this.loading = false;
+            console.log("testing orange");
+          })
+          .catch((error) => {
+            this.flashMessage.show({
+              status: "error",
+
+              message: "Transaction Failed",
+            });
+            console.dir(error);
+
+            this.loading = false;
+          });
+      }
+
+      if (operator == "MTN") {
+        this.loading = true;
+
+        url = "mtn/start-momo-transaction";
+
+        axios
+          .post(url, data)
+          .then((response) => {
+
+            this.flashMessage.show({
+              status: "success",
+
+              message: "Transaction Pending",
+            });
+
+
+            
+               this.showPayment= false;
+             this.showOperator=false;
+              this.showRequestPayment=false;
+           
+            this.loading = false;
+          })      
+          .catch((error) => {
+            this.flashMessage.show({
+              status: "error",
+
+              message: "Transaction Failed",
+            });
+            console.dir(error);
+            this.loading = false;
+          });
+      }
+    },
+
+    handleRequestPayment(price, operator) {
+     
+         this.showPayment= true;
+      this.showOperator=false;
+      this.showRequestPayment=true;
+      this.operator=operator;
+    },
+
+    handleShowReview() {
+      this.showReview = true;
+      this.showOperators = false;
+    },
+
     async getAllOrders() {
       let page = this.currentPage;
       this.loading = true;
@@ -340,6 +520,9 @@ export default {
           this.orders = res.data.data;
           this.totalOrders = res.data.total;
           this.orderPerPage = res.data.per_page;
+
+          this.next = res.data.next;
+          this.prev = res.data.previous;
           this.loading = false;
         })
         .catch((err) => {
@@ -356,6 +539,9 @@ export default {
           this.orders = res.data.data;
           this.totalOrders = res.data.total;
           this.orderPerPage = res.data.per_page;
+
+          this.next = res.data.next;
+          this.next = res.data.previous;
           this.loading = false;
 
           console.log(res.data);
@@ -373,7 +559,7 @@ export default {
       };
       axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
       await axios
-        .post(`order/actionUserOrder`, data)
+        .post(`order/actionUserOrder/${id}/${status}`, data)
         .then((res) => {
           if (res.status == 200) {
             this.flashMessage.show({

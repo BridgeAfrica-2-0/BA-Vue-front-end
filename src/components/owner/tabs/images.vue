@@ -404,7 +404,7 @@ export default {
       this.loading = true;
       const data =
         "business" == this.type || "network" == this.type
-          ? { businessID: this.$route.params.id, albumID: id }
+          ? { businessID: this.$route.params.id, id: id }
           : id;
 
       this.pattern[this.type]()
@@ -433,8 +433,9 @@ export default {
       this.loading = true;
       const data =
         "business" == this.type || "network" == this.type
-          ? { businessID: this.$route.params.id, albumID: id }
+          ? { businessID: this.$route.params.id, id: id }
           : id;
+
       this.pattern[this.type]()
         .setProfilePicture(data)
         .then(() => {
@@ -461,10 +462,12 @@ export default {
       let albumId = this.album;
 
       let formData = new FormData();
+      
       formData.append("media", this.profile_pic);
       formData.append("dob", this.text);
+
       let payload = {
-        albumID: albumId,
+        id: albumId,
         businessID:
           "business" == this.type || "network" == this.type
             ? this.$route.params.id

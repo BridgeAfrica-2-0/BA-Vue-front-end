@@ -843,15 +843,15 @@ export default {
         },
 
         async submitPost({ commit }, payload) {
-            return axios.post(`business/store/media/${payload.businessID}/${payload.albumID}`, payload.data);
+            return axios.post(`business/store/media/${payload.businessID}/${payload.id}`, payload.data);
         },
 
-        async setProfilePic({ commit }, { businessID, albumID }) {
-            return axios.post(`business/make/logopic/${businessID}/${albumID}`);
+        async setProfilePic({ commit }, { businessID, id }) {
+            return axios.post(`business/make/logopic/${businessID}/${id}`);
         },
 
-        async setCoverPic({ commit }, { businessID, albumID }) {
-            return axios.post(`business/make/coverpic/${businessID}/${albumID}`);
+        async setCoverPic({ commit }, { businessID, id }) {
+            return axios.post(`business/make/coverpic/${businessID}/${id}`);
         },
 
         async deleteImage({ commit }, id) {

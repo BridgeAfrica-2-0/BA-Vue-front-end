@@ -3138,7 +3138,7 @@ export default {
             ? value.sender_network.name
             : value.name
           : value.name;
-      }
+      } else name = value.groupName;
 
       return name;
     },
@@ -3149,6 +3149,7 @@ export default {
       let user = require("@/assets/profile_white.png");
       let network = require("@/assets/network_default.png");
       let business = require("@/assets/business_white.png");
+      let group = require("@/assets/default_group.png");
 
       if (data.type == "user") {
         finale = image
@@ -3168,6 +3169,8 @@ export default {
             ? business
             : image
           : business;
+      } else {
+        finale = group;
       }
 
       // console.log("debug ", finale);
@@ -3179,6 +3182,8 @@ export default {
       let user = require("@/assets/profile_white.png");
       let network = require("@/assets/network_default.png");
       let business = require("@/assets/business_white.png");
+      let group = require("@/assets/default_group.png");
+
       let data = value.chat ? value.chat : value;
 
       if (this.type == "user") {
@@ -3205,7 +3210,7 @@ export default {
             ? data.sender_network.image
             : data.image
           : network;
-      }
+      } else image = group;
       // console.log("chatlist image:", image);
       return image;
     },
@@ -3704,7 +3709,9 @@ export default {
           networkEditorID: membersEditorIds,
           memberID: membersMemberIds,
           message: this.input,
+          attachment: this.file,
         };
+        this.formData.append("attachment", this.file);
         this.socket.emit("groupMessage", data);
       }
 

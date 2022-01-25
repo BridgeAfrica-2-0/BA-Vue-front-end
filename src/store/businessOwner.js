@@ -857,12 +857,7 @@ export default {
         },
 
         async submitPost({ commit }, payload) {
-            const config = {
-              headers: {
-                "Access-Control-Allow-Origin": "*",
-              }
-            }
-            return axios.post(`business/store/media/${payload.businessID}/${payload.id}`, payload.data, config);
+            return axios.post(`business/store/media/${payload.businessID}/${payload.id}/`, payload.data);
         },
 
         async setProfilePic({ commit }, { businessID, id }) {

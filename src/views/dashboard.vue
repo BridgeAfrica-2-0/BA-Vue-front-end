@@ -59,8 +59,20 @@
                 ></b-form-select>
               </b-card>
             </div>
-          </b-col>
-          <b-col md="6" sm="12" class="mt-2"> <Map /> </b-col>
+          </b-col> 
+          <b-col md="6" sm="12" class="mt-2" > 
+             <b-card class=" border shadow pr-3" style="height:350px">
+              <h6 class="title">
+                <fas-icon class="icons" :icon="['fas', 'map-marker-alt']" size="lg" />
+                <b>  {{$t('dashboard.get_direction').toUpperCase()}} </b>
+              </h6>
+            <!-- <Map />  --> 
+            <div v-if="selectedBusiness"> 
+            <mapbox :business="selectedBusiness" />
+
+            </div>
+            </b-card>
+            </b-col>
         </b-row>
 
         <br />
@@ -155,10 +167,10 @@ import Profile from "@/components/dasboard/profile";
 
 import Business from "@/components/dasboard/hotbusiness";
 
-import Map from "@/components/dasboard/map";
+// import Map from "@/components/dasboard/map";
 import EmptyBusiness from "@/components/dasboard/emptybusiness";
 import Popularnetwork from "@/components/dasboard/popularnetwork";
-
+import mapbox from "@/components/mapbox";
 import { WhoIsIt } from "@/mixins";
 
 export default {
@@ -176,6 +188,7 @@ export default {
       category: "",
       boptions: [],
       detail: null,
+      data1: null
     };
   },
 
@@ -189,15 +202,17 @@ export default {
     Tutorial,
     Insights,
     Popularnetwork,
-    Map,
+    // Map,
     EmptyBusiness,
     Profile,
     CarousselDashboard,
     Navbar,
+    mapbox
   },
 
   methods: {
     async switchBusiness(value) {
+      this.data1 = false;
       console.log("business switch" + value);
 
       if (value != "Owner") {
@@ -215,8 +230,9 @@ export default {
 
         await this.$store
           .dispatch("dashboard/dashboardBusiness", value)
-          .then(() => {
-            console.log("business switch");
+          .then((res) => {
+            console.log("business switch----", res);
+             this.data1 = true;
           })
           .catch((err) => {
             console.log({ err: err });
@@ -329,6 +345,7 @@ export default {
       .dispatch("ProfileAndBusinessDetails/getdetails")
       .then((response) => {
         this.getbusiness();
+
       });
 
     this.dashboardPpost();
@@ -336,7 +353,26 @@ export default {
     
   },
 
+  mounted(){
+    this.$store
+      .dispatch("ProfileAndBusinessDetails/getdetails")
+      .then((response) => {
+        this.getbusiness();
+       this.data1 = true;
+        console.log('response----',response.data.business[0])
+      });
+
+    this.dashboardPpost();
+  },
+
   computed: {
+    selectedBusiness: function(){
+      let data = this.$store.state.dashboard.dashboard_business;
+      data.lat= data.latitute;
+      data.lng = data.longitute;
+     
+      return data
+    },
     details() {
       return this.$store.getters["ProfileAndBusinessDetails/getdetails"];
     },

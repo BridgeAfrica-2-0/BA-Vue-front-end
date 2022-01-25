@@ -137,20 +137,24 @@
                 {{ $t("home.USEFUL_LINKS") }}
               </h4>
               <ul class="white">
-                <li class="white"><a href="#">bridgeafricaventures.com</a></li>
+                <li class="white over">bridgeafricaventures.com</li>
 
-                <li class="white">
-                  <a href="#">{{ $t("home.Home") }}</a>
+                <li class="white ">
+                 
+
+                   <router-link class="over" :to="{ name: 'home1' }">{{
+                    $t("home.Home")
+                  }}</router-link>
                 </li>
 
-                <li class="white">
-                  <router-link :to="{ name: 'about' }">{{
+                <li class="white ">
+                  <router-link class="over" :to="{ name: 'about' }">{{
                     $t("home.About_Us")
                   }}</router-link>
                 </li>
 
-                <li class="white">
-                  <router-link :to="{ name: 'contact' }">{{
+                <li class="white ">
+                  <router-link class="over" :to="{ name: 'contact' }">{{
                     $t("home.Contact_Us")
                   }}</router-link>
                 </li>
@@ -210,6 +214,11 @@ export default {};
 .color-white {
   color: #ffffff;
 }
+
+.over:hover{
+  color: #e75c18 !important;
+}
+
 
 @media only screen and (max-width: 768px) {
   img{

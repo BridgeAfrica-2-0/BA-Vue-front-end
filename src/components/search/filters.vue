@@ -313,7 +313,7 @@
             :options="countries"
             value-field="id"
             text-field="name"
-            @change="networkFilterFill()"
+            @change="getRegions()"
           >
           </b-form-select>
         </div>
@@ -334,7 +334,7 @@
             :options="regions"
             value-field="id"
             text-field="name"
-            @change="networkFilterFill()"
+            @change="getDivisions()"
           >
           </b-form-select>
         </div>
@@ -354,7 +354,7 @@
             :options="divisions"
             value-field="id"
             text-field="name"
-            @change="networkFilterFill()"
+            @change="getCouncils()"
           >
           </b-form-select>
         </div>
@@ -374,7 +374,7 @@
             :options="councils"
             value-field="id"
             text-field="name"
-            @change="networkFilterFill()"
+            @change="getNeighbourhoods({ council_id: networkSelect.council })"
           >
           </b-form-select>
         </div>
@@ -1772,6 +1772,7 @@ export default {
         .then((res) => {
           // console.log("categories loaded!");
           console.log("countries: ", this.countries);
+          if (this.networkSelect.country) this.getRegions();
         })
         .catch((err) => {
           console.log("Error erro!");
@@ -1785,6 +1786,18 @@ export default {
       this.$store
         .dispatch("networkSearch/REGIONS", data)
         .then((res) => {
+          if (this.networkSelect.region) this.getDivisions();
+          this.networkFilter = {
+            category: false,
+            region: true,
+            division: false,
+            council: false,
+            neighbourhood: false,
+          };
+          this.networkSelect.region = null;
+          this.networkSelect.division = null;
+          this.networkSelect.council = null;
+          this.networkSelect.neighbourhood = null;
           console.log("regions: ", this.regions);
         })
         .catch((err) => {
@@ -1804,35 +1817,73 @@ export default {
         .dispatch("networkSearch/DIVISIONS", data)
         .then((res) => {
           console.log("divisions: ", this.divisions);
+          if (this.networkSelect.division) this.getCouncils();
+          this.networkFilter = {
+            category: false,
+            region: true,
+            division: true,
+            council: false,
+            neighbourhood: false,
+          };
+          // this.networkSelect.region = null;
+
+          this.networkSelect.division = null;
+          this.networkSelect.council = null;
+          this.networkSelect.neighbourhood = null;
         })
         .catch((err) => {
           console.log("Error erro!");
         });
     },
-    getCouncils() {
-      console.log("[debug] networks: ", this.networkSelect);
+    async getCouncils() {
+      console.log("[debug] networks...: ", this.networkSelect);
       const data = { division_id: this.networkSelect.division };
-      this.searchNetworks(data);
-      this.$store
+      await this.$store
         .dispatch("networkSearch/COUNCILS", data)
         .then((res) => {
           console.log("councils: ", this.councils);
+
+          this.networkFilter = {
+            category: false,
+            region: true,
+            division: true,
+            council: true,
+            neighbourhood: false,
+          };
+
+          this.networkSelect.neighbourhood = null;
         })
         .catch((err) => {
           console.log("Error erro!");
         });
+      if (this.networkSelect.council) {
+        console.log("Here...");
+        this.getNeighbourhoods({ council_id: this.networkSelect.council });
+      }
+      this.searchNetworks(data);
     },
-    getNeighbourhoods(data) {
+    async getNeighbourhoods(data) {
+      console.log("[debug] networks...: ", this.networkSelect);
+      console.log("DATA:", data);
       console.log("[debug] Neighbourhoods: ", this.neighbourhoods);
       this.searchNetworks(data);
-      this.$store
+      await this.$store
         .dispatch("networkSearch/NEIGHBOURHOODS", data)
         .then((res) => {
           console.log("Neighbourhoods: ", this.neighbourhoods);
+          this.networkFilter = {
+            category: false,
+            region: true,
+            division: true,
+            council: true,
+            neighbourhood: true,
+          };
         })
         .catch((err) => {
           console.log("Error erro!");
         });
+      this.searchNetworks(data);
+
     },
     networkFilterFill() {
       if (this.networkFilter.region == false) this.getRegions();

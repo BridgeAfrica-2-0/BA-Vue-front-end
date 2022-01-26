@@ -18,7 +18,7 @@
             </b-tab>
         
             <b-tab :title="$t('profileowner.Networks')">
-              <Networks />
+              <Networks @on:media="goToMedia"/>
             </b-tab>
 
             <b-tab :title="$t('profileowner.Community')" href="#community" class="m-0 p-0">
@@ -75,6 +75,11 @@ export default {
     ...mapMutations({
       auth: 'auth/profilConnected',
     }),
+
+    goToMedia(value) {
+      this.tabIndex = 2
+      console.log("go to media")
+    },
 
     async getAuth() {
       const response = await this.$repository.share.switch(null, 'reset');

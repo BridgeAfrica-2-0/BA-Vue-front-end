@@ -14,10 +14,9 @@
         <b> {{ $t('profileowner.Media') }} </b>
       </h6>
 
-      <span class="float-right">
-        <b-link href="#media"
-          ><b-icon icon="eye-fill" variant="primary"> </b-icon> {{ $t('profileowner.View_All') }}
-        </b-link></span
+      <span class="float-right cursor" @click="goToMedia">
+        <b-icon icon="eye-fill" variant="primary" > </b-icon> {{ $t('profileowner.View_All') }}
+        </span
       >
 
 
@@ -59,6 +58,12 @@ export default {
     };
   },
 
+  methods:{
+    goToMedia(){
+      this.$emit('on:media',{})
+    }
+  },
+
   computed: {
     pictures() {
       return this.$store.getters["profile/getImages"] ;  
@@ -85,6 +90,10 @@ export default {
     height: 150px !important;
     object-fit: cover;
     width: 100%;
+}
+
+.cursor{
+  cursor: pointer
 }
 
 </style>

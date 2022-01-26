@@ -1,5 +1,5 @@
 <template>
-  <div class="map-container">
+  <div class="map-container">  
     <MglMap
       :accessToken="accessToken"
       :zoom="zoom"
@@ -96,7 +96,7 @@ export default {
   computed: {
     ...mapGetters({
       searchstate: "business/getSearchState",
-      business: "business/getBusiness",
+      // businessess: "business/getBusiness",
       sponsorbusiness: "business/getSponsorBusinesses",
       prodLoader: "business/getloadingState",
     }),

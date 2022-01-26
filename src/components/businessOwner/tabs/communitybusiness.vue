@@ -247,7 +247,16 @@ export default {
     },
 
     gotoBusiness(id) {
-      this.$router.push(`/business/${id}#about`);
+
+       if(this.$route.name == 'BusinessFollower'){
+          // this.$emit('gotoabout')
+          this.$router.push(`/business/${id}#about`);
+          console.log("direction --")
+      }else {
+
+        this.$router.push(`/business/${id}?tabId=1`);
+      }
+      // this.$router.push(`/business/${id}?tabId=1`);
     },
     cta(data) {
       console.log(data);

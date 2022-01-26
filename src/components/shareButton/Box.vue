@@ -178,6 +178,7 @@ export default {
       else this.getContacts();
     },
   },
+  
   mounted() {
     this.search();
   },

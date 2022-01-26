@@ -110,15 +110,15 @@ export default {
     },
 
     async submitPost({ commit }, payload) {
-      return axios.post(`network/store/media/${payload.businessID}/${payload.albumID}`, payload.data);
+      return axios.post(`network/store/media/${payload.businessID}/${payload.id}`, payload.data);
     },
 
-    async setProfilePic({ commit }, { businessID, albumID }) {
-      return axios.post(`network/make/logopic/${businessID}/${albumID}`);
+    async setProfilePic({ commit }, { businessID, id }) {
+      return axios.post(`network/make/logopic/${businessID}/${id}`);
     },
 
-    async setCoverPic({ commit }, { businessID, albumID }) {
-      return axios.post(`network/make/coverpic/${businessID}/${albumID}`);
+    async setCoverPic({ commit }, { businessID, id }) {
+      return axios.post(`network/make/coverpic/${businessID}/${id}`);
     },
 
     async deleteImage({ commit }, id) {

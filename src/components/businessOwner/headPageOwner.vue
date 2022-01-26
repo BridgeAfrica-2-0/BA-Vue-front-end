@@ -202,7 +202,6 @@
 
 <script>
 import { mapMutations, mapGetters } from "vuex";
-
 import { defaultCoverImage } from "@/mixins";
 
 export default {
@@ -246,6 +245,7 @@ export default {
   methods: {
     ...mapMutations({
       updatePictureState: "auth/updateProfilePicture",
+      addCoverPictureBusiness: "businessOwner/addCoverPicture",
     }),
 
     businessInfo() {
@@ -267,7 +267,6 @@ export default {
     },
 
     setlogo(e) {
-      console.log(e);
 
       this.profile_photo = e.target.files[0];
       const file = e.target.files[0];
@@ -375,27 +374,23 @@ export default {
         })
 
         .catch((err) => {
-          console.log({ err: err });
-
-          if (err.response.status == 422) {
-            console.log({ err: err });
-
+          
+          if (err.response && err.response.status == 422) {
             this.flashMessage.show({
               status: "error",
               message: err.response.data.message,
               blockClass: "custom-block-class",
             });
 
-            loader.hide();
           } else {
             this.flashMessage.show({
               status: "error",
               message: this.$t("businessowner.Unable_to_upload_your_image"),
               blockClass: "custom-block-class",
             });
-            console.log({ err: err });
-            loader.hide();
           }
+
+          loader.hide();
         });
     },
   },
@@ -411,8 +406,10 @@ export default {
   },
 
   watch: {
-    "$store.state.businessOwner.businessInfo": function ({ logo_path }) {
-      this.updatePictureState(logo_path);
+    "$store.state.businessOwner.businessInfo": function (data) {
+      console.log(data)
+      this.updatePictureState(data.logo_path);
+      this.addCoverPictureBusiness(data.cover);
     },
   },
 };

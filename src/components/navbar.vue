@@ -202,7 +202,7 @@
                         <div class="d-inline-flex flex-row align-items-center">
                           <div>
                             <img
-                              src="@/assets/img/profile-pic.jpg"
+                              :src="profileSenderImange(message.sender)"
                               class="rounded-circle"
                               alt=""
                               width="30"
@@ -261,7 +261,7 @@
                         class="d-inline-flex flex-row align-items-center suggest-item cursor-pointer"
                       >
                         <!-- <div>
-                          <img src="@/assets/img/profile-pic.jpg" class="rounded-circle" alt="" width="30" height="30" />
+                          <img :src="profileSenderImange(notification.sender)" class="rounded-circle" alt="" width="30" height="30" />
                         </div> -->
                         <div class="d-flex flex-column ml-3">
                           <div>{{ notification.notification_text }}</div>
@@ -694,11 +694,13 @@ export default {
         });
     },
   },
-
+  //image.profile_picture image.logo_path, image.image
   filters: {
+    
     stringify(value) {
       return JSON.stringify(value, null, 2);
     },
+
   },
 
   methods: {
@@ -710,6 +712,16 @@ export default {
       getNeigbourhoods: "auth/neigbourhoods",
       Logout: "auth/logout",
     }),
+
+    profileSenderImange(image) {
+      const picture = image.profile_picture 
+        ? image.profile_picture 
+        : image.logo_path
+          ? image.logo_path
+          : image.image
+
+      return picture
+    },
 
     ...mapMutations({
       profile: "auth/profilConnected",
@@ -816,10 +828,12 @@ export default {
         throw new Error(error);
       }
     },
+
     toggleinfput() {
       this.$refs.mobileinput.style.display = "block";
       this.isActive = true;
     },
+
     getUsers() {
       this.$store
         .dispatch("userChat/GET_USERS", "")

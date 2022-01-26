@@ -11,7 +11,7 @@
         alt="media_img"
         v-b-modal="`modal-${im.id}`"
         v-bind="imageProps"
-        :style="getStyle"
+        style="width:100% !important; height:100% !important"
       ></b-img>
     
     <video
@@ -93,6 +93,9 @@
 </template>
 
 <script>
+
+import { mapMutations } from 'vuex'
+
 export default {
   props: [
     "im",
@@ -140,6 +143,13 @@ export default {
   },
 
   methods: {
+
+    ...mapMutations({
+      updatePictureState: "auth/updateProfilePicture",
+      addCoverPictureBusiness: "businessOwner/addCoverPicture",
+      addCoverPictureProfile: "auth/addCoverPicture",
+      
+    }),
     async onDownloadPic() {
       let loader = this.$loading.show({
         container: this.$refs[`sHowMedia-${this.im.id}`],

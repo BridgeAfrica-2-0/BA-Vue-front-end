@@ -176,8 +176,16 @@ export default {
         });
     },
 
-    gotoBusiness(id) {
-      this.$router.push(`/business/${id}#about`);
+    gotoBusiness(id) { 
+      // this.$router.push({name: 'home1'});
+      if(this.$route.name == 'BusinessFollower'){
+          // this.$emit('gotoabout')
+          this.$router.push(`/business/${id}#about`);
+          console.log("direction --")
+      }else {
+
+        this.$router.push(`/business/${id}?tabId=1`);
+      }
     },
     count(number) {
       if (number >= 1000000) {

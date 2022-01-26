@@ -85,7 +85,7 @@
                   >
                 </template>
 
-                <div class="s-comcard"><Business type="following" /></div>
+                <div class="s-comcard"><Business  type="following"  /></div>
               </b-tab>
             </b-tabs>
           </div>
@@ -149,6 +149,8 @@ export default {
   },
 
   methods: {
+
+    
     nFormatter(num) {
       if (num >= 1000000000) {
         return (num / 1000000000).toFixed(1).replace(/\.0$/, "") + "G";

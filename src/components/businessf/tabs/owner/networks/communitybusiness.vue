@@ -119,7 +119,7 @@ export default {
     };
   },
   method: {
-    goToBusinessAbout(id){
+    goToBusinessAbout(id){ 
       // if(this.$route.name != 'BusinessFollower'){
         this.$router.push(`/business/${id}?tabId=1`);
       // }else {

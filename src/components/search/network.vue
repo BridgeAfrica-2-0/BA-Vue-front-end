@@ -64,6 +64,7 @@
                   :id="'followbtn' + network.id"
                   :class="network.is_follow !== 0 && 'u-btn'"
                   variant="primary"
+                  @click="handleFollow(network)"
                 >
                   <i
                     class="fas fa-lg btn-icon"
@@ -171,6 +172,35 @@ export default {
   },
 
   methods: {
+    async handleFollow(user) {
+      const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
+      const nextFollowState = user.is_follow === 0 ? 1 : 0;
+      const data = {
+        id: user.id,
+        type: "network",
+      };
+      await axios
+        .post(uri, data)
+        .then((response) => {
+          user.is_follow = nextFollowState;
+        })
+        .catch((err) => console.log(err));
+    },
+
+    async handleJoin(user) {
+      const uri = user.is_member == 0 ? `/add-member` : `/remove-member`;
+      const nextFollowState = user.is_member == 0 ? 1 : 0;
+      const data = {
+        id: user.id,
+        type: "network",
+      };
+      await axios
+        .post(uri, data)
+        .then((response) => {
+          user.is_member = nextFollowState;
+        })
+        .catch((err) => console.log(err));
+    },
     changePage(value) {
       this.$store.commit("networkSearch/setNetworks", { data: [] });
       this.$store.commit("networkSearch/setLoader", true);

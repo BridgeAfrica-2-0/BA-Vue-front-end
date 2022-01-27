@@ -1,5 +1,5 @@
 <template>
-  <div style="overflow-x: hidden; color: black">
+  <div style="overflow-x: hidden; color: black">  
     <Nav :credentials.sync="searchParams" id="top">
       <template v-slot:button>
         <Button
@@ -317,7 +317,7 @@
                   size="lg"
                 />
 
-                {{ $t("search.Businesses") }}
+                {{ $t("search.Businesses") }} 
               </h6>
 
               <MiniBusiness :businesses="businesses" />
@@ -415,7 +415,7 @@
                   size="lg"
                 />
 
-                {{ $t("search.Businesses") }}
+                {{ $t("search.Businesses") }} 
               </h6>
               <!-- <b-spinner
                 v-if="prodLoaderr"
@@ -508,14 +508,14 @@
         <b-col cols="12" md="4" lg="4" xl="3" class="showmap" ref="mapblock">
           <div id="map" style="margin-top: 20px" class="">
             <div v-if="selectedId == '1'">
-              <businessmap :businesses="businesses.data" />
+              <businessmap :businesses="businessess.data" />
             </div>
             <div v-if="selectedId == '4'">
               <mapbox :products="allproducts.data" />
             </div>
             <div v-if="selectedId == '0'">
               <mapbox
-                :businesses="businesses.data"
+                :businesses="businessess.data"
                 :products="miniproducts.data"
                 :networks="mininetworks.data"
               />
@@ -598,6 +598,7 @@ export default {
   computed: {
     ...mapGetters({
       prodLoaderr: "business/getloadingState",
+      businessess: "business/getBusiness",
     }),
     businesses() {
       return this.$store.getters["allSearch/getBusinesses"];

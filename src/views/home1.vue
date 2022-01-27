@@ -18,7 +18,7 @@
               class="input-group-text border-left-0 color-mobile"
               style="width: 40px; border-right: none; background-color: white"
             > 
-            <Button @click.native="getKeyword" style="width: 5px; height:20px " />
+            <!-- <Button @click.native="getKeyword" style="width: 5px; height:20px " /> -->
               <i
                 class="bx bx-search"
                 style="color: #e75c18"

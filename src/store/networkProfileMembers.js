@@ -115,7 +115,19 @@ export default {
           commit("setbusiness", data.data);
         console.log(data);
       })
-    }
+    },
+
+    getmembers( {commit}, data ){
+     
+     
+    return axios
+    .post(`network/${data.path}`, { "keyword": data.keyword})   
+    .then(({ data }) => {
+        commit("setmembers", data.data);
+        
+      console.log(data);
+    })
+  }
 
   },
 };

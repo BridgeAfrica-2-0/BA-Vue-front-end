@@ -19,7 +19,17 @@
             >
             <br />
             {{ member.communityNum }}
-            {{ $t("network.Community") }} <br />
+            {{ $t("network.Community") }}     <span    @click="$emit('BlockUser', member.id,index)"  class="ml-3"  style="cursor: pointer">  
+                      
+                      <b-icon
+                              font-scale="1"
+                              icon="exclamation-octagon"
+                              v-b-tooltip.hover
+                              title="Block This Business"
+                              variant="danger"
+                            ></b-icon>
+                            
+                              </span>   <br />
 
             <!-- <span class="location">
               <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{ member.location_description }}
@@ -105,7 +115,7 @@
 
 <script>
 export default {
-  props: ["member"],
+  props: ["member","index"],
   data() {
     return {
       options: {

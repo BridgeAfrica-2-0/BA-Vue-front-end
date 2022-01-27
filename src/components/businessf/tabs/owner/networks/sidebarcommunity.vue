@@ -16,7 +16,7 @@
           >
         </h6>
       </span>
-      <b-tabs pills content-class="mt-3  f-left ">
+      <b-tabs lazy pills content-class="mt-3  f-left ">
         <b-tab active>
           <template slot="title">
             {{ $t("network.People") }}
@@ -36,10 +36,7 @@
                       </span>
                     </template>
                     <div class="s-comcard">
-                      <People
-                        :peoples="userdetails.user_followers"
-                        @handleFollow="handleFollow"
-                      />
+                      <People type="Follower" />
                     </div>
                   </b-tab>
                   <b-tab>
@@ -50,9 +47,7 @@
                       </span>
                     </template>
                     <div class="s-comcard">
-                      <People
-                        :peoples="userdetails.user_following"
-                        @handleFollow="handleFollow"
+                      <People type="Following"
                       />
                     </div>
                   </b-tab>
@@ -83,10 +78,7 @@
                   </span>
                 </template>
                 <div class="s-comcard">
-                  <Business
-                    :businesses="businessdetails.Business_followers"
-                    @handleFollow="handleFollow"
-                  />
+                  <Business type="Follower"  />
                 </div>
               </b-tab>
               <b-tab>
@@ -97,10 +89,7 @@
                   </span>
                 </template>
                 <div class="s-comcard">
-                  <Business
-                    :businesses="businessdetails.Business_following"
-                    @handleFollow="handleFollow"
-                  />
+                  <Business type="Following"/>
                 </div>
               </b-tab>
             </b-tabs>
@@ -129,9 +118,7 @@
                 </template>
                 <!-- <div class="s-comcard">{{networkdetails.Network_followers}}</div> -->
                 <div class="s-comcard">
-                  <Network
-                    :networks="networkdetails.Network_followers"
-                    @handleFollow="handleFollow"
+                  <Network type="Followers"
                   />
                 </div>
               </b-tab>
@@ -144,10 +131,7 @@
                 </template>
                 <!-- <div class="s-comcard">{{networkdetails.Network_following}}</div> -->
                 <div class="s-comcard">
-                  <Network
-                    :networks="networkdetails.Network_following"
-                    @handleFollow="handleFollow"
-                  />
+                  <Network type="Following" />
                 </div>
               </b-tab>
             </b-tabs>
@@ -162,7 +146,7 @@ import People from "./people";
 import Business from "./business";
 import Network from "./network";
 export default {
-  name: "sidebarcommunity",
+  name: "sidebarcommunity",       
   components: {
     People,
     Business,
@@ -204,16 +188,18 @@ export default {
       return num;
     },
 
-    UserDetails() {
+    UserDetails() {   
       this.$store
-        .dispatch("networkProfileCommunitySidebar/getUserDetails", this.url)
+        .dispatch("networkProfileCommunitySidebar/getUserDetails", this.url)   
         .then(() => {
           console.log("ohh year");
         })
         .catch((err) => {
           console.log({ err: err });
         });
-    },
+    },  
+
+
     businessDetails() {
       this.$store
         .dispatch("networkProfileCommunitySidebar/getBusinessDetails", this.url)
@@ -224,6 +210,8 @@ export default {
           console.log({ err: err });
         });
     },
+
+
     networkDetails() {
       console.log("networkDetails");
       this.$store

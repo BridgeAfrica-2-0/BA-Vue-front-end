@@ -25,8 +25,8 @@
     <b-row cols="1">
       <b-col
         class="ml-0 mr-0"
-        v-for="member in displayfollowers"
-        :key="member.id"
+        v-for="(member, index) in displayfollowers"
+        :key="index"
       >
         <b-skeleton-wrapper :loading="loading">
           <template #loading>
@@ -43,6 +43,7 @@
           <CommunityBusiness
             :member="member"
             @BlockUser="BlockUser"
+            :index="index"
             @handleFollow="handleFollow"
           />
         </b-skeleton-wrapper>
@@ -169,18 +170,23 @@ export default {
       this.loading = false;
     },
 
-    BlockUser(user_id) {
-      this.loading = true;
+    BlockUser(user_id, index) {
+     
       console.log("network/" + this.url + "/lock/business/" + user_id);
       this.axios
-        .delete("network/" + this.url + "/lock/business/" + user_id)
+        .post("network/" + this.url + "/lock/business/" + user_id)
         .then((response) => {
           console.log(response);
-          this.blockUsers();
+          
           this.loading = false;
+
+          this.businessDetails();
+         this.$delete(this.displayfollowers,index);
+
+
           this.flashMessage.show({
             status: "success",
-            message: "User blocked",
+            message: "Business blocked",
           });
         })
         .catch((err) => {
@@ -192,6 +198,22 @@ export default {
           });
         });
     },
+
+
+
+   businessDetails() {
+      this.$store
+        .dispatch("networkProfileCommunitySidebar/getBusinessDetails", this.url)
+        .then(() => {
+        
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+
+
     async handleFollow(Comdata) {
       console.log("handleFollow", Comdata);
       const url = Comdata.is_follow === 0 ? `/follow-community` : `/unfollow`;
@@ -208,6 +230,7 @@ export default {
         .then((response) => {
           console.log("response", response);
           Comdata.is_follow = nextFollowState;
+          this.businessDetails();
         })
         .catch((err) => console.log(err));
     },

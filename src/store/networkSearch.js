@@ -75,11 +75,9 @@ export default {
     },
 
     actions: {
-        COUNTRIES({ commit, state }) {
+        async COUNTRIES({ commit, state }) {
             console.log("[DEBUG] Getting countries");
-
-
-            return axios
+            await axios
                 .get("countries")
                 .then((res) => {
                     commit("setCountries", res.data.data);
@@ -110,8 +108,9 @@ export default {
                     console.error(err);
                 });
         },
-        COUNCILS({ commit }, data) {
-            return axios
+        async COUNCILS({ commit }, data) {
+            console.log("[debug...]", data);
+            await axios
                 .post("councils", { divisionId: data.division_id })
                 .then((res) => {
                     commit("setCouncils", res.data.data);
@@ -121,6 +120,8 @@ export default {
                 });
         },
         async NEIGHBOURHOODS({ commit }, data) {
+            console.log("[data]:", data);
+
             try {
                 const res = await axios
                     .post("neighborhood/show", { councilId: data.council_id });
@@ -133,17 +134,27 @@ export default {
             commit("setNetworks", { data: [] });
             commit("setLoader", true);
             console.log("[DEBUG] HELLO NETWORK SEARCH", data);
+            let page
+            let keyword
+            let catId
+            let countryId
+            let regionId
+            let divisionId
+            let councilId
+            let neighborhood_id
+            let distanceInKM
 
-            let page = data.page ? data.page : 1
-            let keyword = data.keyword ? data.keyword : ''
-            let catId = data.cat_id ? "&cat_id=" + data.cat_id : ''
-            let countryId = data.country_id ? "&countryId=" + data.country_id : ''
-
-            let regionId = data.region_id ? "&regionId=" + data.region_id : ''
-            let divisionId = data.division_id ? "&divisionId=" + data.division_id : ''
-            let councilId = data.council_id ? "&councilId=" + data.council_id : ''
-            let neighborhood_id = data.neighborhood_id ? "&neighborhood_id=" + data.neighborhood_id : ''
-            let distanceInKM = data.distanceInKM ? "&distanceInKM=" + data.distanceInKM : ''
+            if (data) {
+                page = data.page ? data.page : 1
+                keyword = data.keyword ? data.keyword : ''
+                catId = data.cat_id ? "&cat_id=" + data.cat_id : ''
+                countryId = data.country_id ? "&countryId=" + data.country_id : ''
+                regionId = data.region_id ? "&regionId=" + data.region_id : ''
+                divisionId = data.division_id ? "&divisionId=" + data.division_id : ''
+                councilId = data.council_id ? "&councilId=" + data.council_id : ''
+                neighborhood_id = data.neighborhood_id ? "&neighborhood_id=" + data.neighborhood_id : ''
+                distanceInKM = data.distanceInKM ? "&distanceInKM=" + data.distanceInKM : ''
+            }
 
             console.log("[debug] page:", page);
             try {

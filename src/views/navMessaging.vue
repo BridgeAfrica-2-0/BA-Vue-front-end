@@ -1835,17 +1835,30 @@ export default {
               : value.name
             : value.name;
         } else if (this.type == "business") {
-          name = value.receiver_business
-            ? value.receiver_business.name
+          name = value.receiver
+            ? value.receiver.name
             : value.sender
+            ? value.sender.name
+            : value.receiver_business
+            ? value.receiver_business.name
+            : value.sender_business
             ? value.sender_business.name
             : value.name;
         } else if (this.type == "network") {
-          name = value.receiver_network
+          name = value.receiver
+            ? value.receiver.name
+            : value.sender
+            ? value.sender.name
+            : value.receiver_network
             ? value.receiver_network.name
             : value.sender_network
             ? value.sender_network.name
             : value.name;
+          // name = value.receiver_network
+          //   ? value.receiver_network.name
+          //   : value.sender_network
+          //   ? value.sender_network.name
+          //   : value.name;
         }
       }
 

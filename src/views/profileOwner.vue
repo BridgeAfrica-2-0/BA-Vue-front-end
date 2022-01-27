@@ -7,7 +7,7 @@
         <b-col cols="12" class="p-3">
           <b-tabs content-class="mt-3" pills small fill lazy v-model="tabIndex">
             <b-tab :title="$t('profileowner.Posts')" href="#post">
-              <Post />
+              <Post @on:media="goToMedia" />
             </b-tab>
             <b-tab :title="$t('profileowner.About')" href="#about"><About /></b-tab>
                 <b-tab :title="$t('profileowner.Media')" href="#media">
@@ -18,7 +18,7 @@
             </b-tab>
         
             <b-tab :title="$t('profileowner.Networks')">
-              <Networks @on:media="goToMedia"/>
+              <Networks />
             </b-tab>
 
             <b-tab :title="$t('profileowner.Community')" href="#community" class="m-0 p-0">

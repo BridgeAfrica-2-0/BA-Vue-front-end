@@ -58,9 +58,16 @@ export default {
     };
   },
 
+  props:{
+    activated:{
+      type: Boolean,
+      default: () => false
+    }
+  },
+
   methods:{
     goToMedia(){
-      this.$emit('on:media',{})
+      this.$emit('on:media',true)
     }
   },
 

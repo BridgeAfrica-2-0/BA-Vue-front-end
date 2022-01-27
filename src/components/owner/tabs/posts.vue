@@ -179,7 +179,7 @@
 
         <Community />
 
-        <Media />
+        <Media :activated.sync="redirectToMedia" />
       </b-col>
 
       <b-col md="12" lg="7" xl="8" class="m-0 p-0 px-lg-4 post-padding ">
@@ -208,6 +208,17 @@ export default {
     Community,
   },
 
+  watch: {
+    redirectToMedia: function(value){
+      if (value)
+        this.$emit('on:media', true)
+    }
+  },
+
+  destroyed(){
+    this.redirectToMedia = false
+  },
+  
   created() {
     console.log("Load User Info");
     this.$store
@@ -232,6 +243,7 @@ export default {
         console.log({ error: error });
       });
   },
+
   computed: {
     info: function() {
       return this.$store.getters["profile/getUserPostIntro"];
@@ -241,8 +253,10 @@ export default {
       return this.$store.state.profile.Tcommunity;
     },
   },
+
   data() {
     return {
+      redirectToMedia: false,
       userProfileOwner: {
         workedAt: this.$t("profileowner.Current_or_Last_Organization"),
         studiedAt: this.$t("profileowner.Last_Education"),
@@ -263,6 +277,7 @@ export default {
       currentCityState: null,
     };
   },
+
   methods: {
     nFormatter(num) {
       if (num >= 1000000000) {

@@ -179,7 +179,7 @@
 
         <Community />
 
-        <Media :activated.sync="redirectToMedia" />
+        <Media @on:media="(value) => redirectToMedia(value)" />
       </b-col>
 
       <b-col md="12" lg="7" xl="8" class="m-0 p-0 px-lg-4 post-padding ">
@@ -207,20 +207,8 @@ export default {
     OwnerPost,
     Community,
   },
-
-  watch: {
-    redirectToMedia: function(value){
-      if (value)
-        this.$emit('on:media', true)
-    }
-  },
-
-  destroyed(){
-    this.redirectToMedia = false
-  },
-  
+ 
   created() {
-    console.log("Load User Info");
     this.$store
       .dispatch("profile/loadUserPostIntro", null)
       .then((response) => {
@@ -256,7 +244,6 @@ export default {
 
   data() {
     return {
-      redirectToMedia: false,
       userProfileOwner: {
         workedAt: this.$t("profileowner.Current_or_Last_Organization"),
         studiedAt: this.$t("profileowner.Last_Education"),
@@ -279,6 +266,13 @@ export default {
   },
 
   methods: {
+    
+    redirectToMedia: function(value){
+      console.log('redirectToMedia in posts')
+      if (value)
+        this.$emit('on:media', true)
+    },
+
     nFormatter(num) {
       if (num >= 1000000000) {
         return (num / 1000000000).toFixed(1).replace(/\.0$/, "") + "G";

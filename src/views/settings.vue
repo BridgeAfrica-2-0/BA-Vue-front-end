@@ -240,11 +240,13 @@
                                     <label class="form-label">{{
                                       $t("settings.Phone")
                                     }}</label>
-                                    <input
-                                      type="number"
-                                      class="form-control"
+
+                                    <VuePhoneNumberInput
+                                      default-country-code="CM"
                                       v-model="getUserInfos.phone"
+                                      required
                                     />
+                                    
                                   </div>
                                   <div class="mb-3">
                                     <label class="form-label">{{
@@ -450,6 +452,7 @@ import SettingsNotifications from '@/components/SettingsNotifications.vue';
 import Payment from "@/components/owner/settings/payment";
 import Blocking from "@/components/owner/settings/blocking";
 import VuePassword from 'vue-password';
+import VuePhoneNumberInput from "vue-phone-number-input";
 
 export default {
   components: {
@@ -458,7 +461,8 @@ export default {
     SettingsNotifications,
     Payment,
     Blocking,
-    VuePassword
+    VuePassword,
+    VuePhoneNumberInput
   },
 
   computed: {

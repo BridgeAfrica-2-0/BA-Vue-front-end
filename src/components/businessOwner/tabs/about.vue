@@ -467,21 +467,22 @@
         </b-form-group>
         </div>
         </div>
+
+        <div class="row">
+
+        <div class="col-6">
+
+        
         <b-form-group
           id="input-group-2"
-          label="Adress"
+          label="Adress :"
           label-for="input-2"
           label-size="sm"
         >
-          <b-form-input
-            id="input-1"
-            class="mt-1"
-            type="text"
-            v-model="business_about_input.address"
-            required
-          ></b-form-input>
+        {{business_about_input.address}}
+          
 
-           <div style="width: 100%; height: 200px; overflow:hidden">
+           <div class="" style="height: 200px; overflow:hidden">
                   <AutocompleteLocation
                   
                     :region="region"
@@ -490,7 +491,8 @@
                 </div>
 
         </b-form-group>
-
+        </div>
+        </div>
        
         <div class="row">
         <div class="col-6">
@@ -822,6 +824,7 @@ export default {
     },
     selectedsubcategories: function() {
       let sub_cat = [];
+      console.log("sous cat --- ",this.filterselectvalue)
       this.filterselectvalue.forEach((item) => {
         if(item.subcategory_id){
 
@@ -888,7 +891,7 @@ export default {
 
     getGeoCoderResult(response) {console.log(response);
       this.coordinates = response.coordinates;
-      this.address = response.address;
+      this.business_about_input.address = response.address;
       console.log("yoo mother fuckers");
       console.log(response);
     },
@@ -952,6 +955,7 @@ export default {
       this.multiselecvalue.push(tag);
     },
     addFilter(newTag) {
+      console.log("sous cat --- ",this.filterselectvalue)
       const tag = {
         name: newTag,
         id: newTag.substring(0, 2) + Math.floor(Math.random() * 10000000),
@@ -1030,6 +1034,8 @@ export default {
           break;
         case "editAddress":
           console.log("edit address business");
+          console.log(this.multiselecvalue, " --sous cat --- ",this.filterselectvalue);
+          
           this.test();
           console.log(this.business_about_input);
 
@@ -1251,6 +1257,7 @@ export default {
       console.log(business);
       this.multiselecvalue = business.category;
       this.filterselectvalue = business.subCatFilter;
+      
       let Bcountry = business.country;
       Bcountry.map((c) => {
         this.country.push({ id: c.country_id, name: c.name });
@@ -1274,9 +1281,10 @@ export default {
 </script>
 
 <style scoped>
+
 .map {
   border: 0;
-  width: 100%;
+  width: 50%;
 }
 .btn-item {
   color: green;
@@ -1295,6 +1303,8 @@ p {
   .primary {
     margin-right: 6px;
   }
+
+ 
 }
 @media (min-width: 762px) {
   .primary {

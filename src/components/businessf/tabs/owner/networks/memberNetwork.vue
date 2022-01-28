@@ -1,7 +1,7 @@
 <template>
   <div class="mt-3">
     <div>
-      <b-tabs pills content-class="mt-3 f-left">
+      <b-tabs lazy pills content-class="mt-3 f-left">
         <b-tab :title="$t('network.People')" active> 
 
            <template slot="title">

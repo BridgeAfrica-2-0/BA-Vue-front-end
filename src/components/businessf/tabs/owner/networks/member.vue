@@ -21,7 +21,7 @@
     <b-row class="mt-4">
       <b-col cols="12">
         <h6 class="font-weight-bolder">
-          {{ $t('network.Network_Admins') }} ({{nFormatter(admins.length)}})
+          {{ $t('network.Network_Admins') }} ({{nFormatter(admins.admin_count)}})
         </h6>
         <hr width="100%" />
         <b-skeleton-wrapper :loading="loading">
@@ -32,8 +32,8 @@
               <b-skeleton width="70%"></b-skeleton>
             </b-card>
           </template>
-          <div class="scroll" v-if="admins.length != 0">
-            <div v-for="admin in admins" :key="admin.id">
+          <div class="scroll" v-if="admins.admin.length != 0">
+            <div v-for="admin in admins.admin" :key="admin.id">
               <p class="">
                 <span class="">
                   <b-avatar
@@ -77,7 +77,7 @@
     <b-row class="mt-4">
       <b-col cols="12">
         <h6 class="font-weight-bolder">
-          Editors ({{nFormatter(editors.length)}})
+          Editors ({{nFormatter(editors.editor_count)}})
         </h6>
         <hr width="100%" />
         <b-skeleton-wrapper :loading="loading">
@@ -88,8 +88,8 @@
               <b-skeleton width="70%"></b-skeleton>
             </b-card>
           </template>
-          <div class="scroll" v-if="editors.length != 0">
-            <div v-for="editor in editors" :key="editor.id">
+          <div class="scroll" v-if="editors.editor.length != 0">
+            <div v-for="editor in editors.editor" :key="editor.id">
               <p class="">
                 <span class="">
                   <b-avatar
@@ -133,7 +133,7 @@
     <b-row class="mt-4">
       <b-col cols="12" >
         <h6 class="font-weight-bolder">
-          {{ $t('network.Bussiness') }} ({{nFormatter(business.length)}})
+          {{ $t('network.Bussiness') }} ({{nFormatter(business.business_count)}})
         </h6>
         <hr width="100%" />
         <b-skeleton-wrapper :loading="loading">
@@ -144,8 +144,8 @@
               <b-skeleton width="70%"></b-skeleton>
             </b-card>
           </template>
-          <div class="scroll" v-if="business.length != 0">
-            <div v-for="busines in business" :key="busines.id">
+          <div class="scroll" v-if="business.businesses.length != 0">
+            <div v-for="busines in business.businesses" :key="busines.id">
               <p class="">
                 <span class="">
                   <b-avatar
@@ -187,7 +187,7 @@
     <b-row class="mt-4" >
       <b-col cols="12">
         <h6 class="font-weight-bolder">
-          {{ $t('network.All_Members') }} ({{nFormatter(members.length)}})
+          {{ $t('network.All_Members') }} ({{nFormatter(memberss.user_count)}})
         </h6>
         <hr width="100%" />
         <b-skeleton-wrapper :loading="loading">
@@ -198,6 +198,7 @@
               <b-skeleton width="70%"></b-skeleton>
             </b-card>
           </template>
+          {{members}}
           <div v-for="member in members" :key="member.id" >
             <p class="">
               <span class="">
@@ -252,7 +253,7 @@ export default {
     return {
       url:null,
       perPage: null,
-      page: 0,
+      page: 1,
       currentPage: null,
       searchTitle: "",
       members: [],
@@ -271,12 +272,20 @@ export default {
     business() {
       return this.$store.state.networkProfileMembers.business;
     }
+,
+
+     memberss() {
+      return this.$store.state.networkProfileMembers.members;
+    }
+
   },
   mounted(){
     this.url = this.$route.params.id
     this.getAdmins()
     this.getEditors()
     this.getBusiness()
+
+     this.getmembers()
   },
   methods:{
 
@@ -304,7 +313,7 @@ export default {
     },
 
     infiniteHandler($state) {
-      console.log("loop");
+     
       const data = this.getRequestDatas(this.searchTitle);
       console.log('keyword: '+data);
       let formData = new FormData();
@@ -319,15 +328,13 @@ export default {
         .post(lien)
         .then(({ data }) => {
         console.log(data);
-        console.log(this.page);
-        console.log(Object.values(data.data));
-        let object = Object.values(data.data);
-        if (object.length) {
-          console.log("Pushing data");
-          object.map((item) => {
-            this.members.push(item);
-            console.log(item);
-          })
+         if (data.users.length) {
+
+           console.log("loading data of page "+this.page);
+          console.log(data);
+            this.members.push(data.data.users);
+           
+
           this.page += 1;
           $state.loaded();
         } else {
@@ -358,6 +365,28 @@ export default {
           this.loading = false;
         });
     },
+
+
+     getmembers() {
+      this.loading = true;
+      const data = this.getRequestDatas(this.searchTitle);
+      console.log('keyword: '+data);
+      this.$store
+        .dispatch("networkProfileMembers/getmembers", {
+          'path':this.url+"/members/list",
+          'keyword':data
+          })
+        .then(() => {
+          console.log('members Available');
+          this.loading = false;
+        })
+        .catch(err => {
+          console.log({ err: err });
+          this.loading = false;
+        });
+    },
+
+
 
     getEditors() {
       this.loading = true;

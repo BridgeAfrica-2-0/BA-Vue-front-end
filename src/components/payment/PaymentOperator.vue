@@ -12,9 +12,10 @@
 			
 
 			<div class="my-4 operator">
-				<div class="">
+				<div class="operator-img-box">
 					<img
 						:src="require('@/assets/img/payment/mtn.png')"
+						style="width:40px"
 						alt="MOBILE MONEY"
 					/>
 				</div>
@@ -34,10 +35,11 @@
 			</div>
 
 			<div class="my-4 operator">
-				<div class="">
+				<div class="operator-img-box">
 					<img
 						:src="require('@/assets/img/payment/orange_money.png')"
 						alt="ORANGE MONEY"
+						style="width:40px"
 					/>
 				</div>
 				<div class="operator-name">
@@ -57,6 +59,8 @@
 					<img
 						:src="require('@/assets/img/payment/expressU.jpg')"
 						alt="EXPRESS UNION"
+
+						style="width:40px"
 					/>
 				</div>
 				<div class="operator-name">
@@ -137,8 +141,12 @@
 		justify-content: start;
 		align-items: center;
 	}
+
+	@media only screen and (max-width: 768px) {
 	.operator-img-box {
-		width: 50px !important;
+		width: 50% !important;
+	}
+
 	}
 	.operator img {
 		display: inline-block;

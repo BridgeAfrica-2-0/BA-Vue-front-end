@@ -1,7 +1,7 @@
 <template>
   <b-container>
     <div class="s-card">
-      <div v-for="request in requests" :key="request.id" class="people-style border shadow">
+      <div v-for="(request, index)  in requests" :key="index" class="people-style border shadow">
         <b-skeleton-wrapper :loading="loading">
           <template #loading>
             <b-card>
@@ -9,7 +9,7 @@
               <b-skeleton width="55%"></b-skeleton>
               <b-skeleton width="70%"></b-skeleton>
             </b-card>
-          </template>
+          </template>    
             
         <b-row class="mb-1">
           <b-col md="3" cols="4" sm="3" lg="3" class="my-auto">
@@ -69,7 +69,7 @@
                           variant="primary"
                           size="sm"
                           class="b-background flexx pobtn shadow"
-                          @click="ApproveRequest(request.user_id)"
+                          @click="ApproveRequest(request.user_id, index)"
                         >
                           <span class="btn-text text-center">{{ $t('network.Approve') }}</span>
                         </b-button>
@@ -88,7 +88,7 @@
                           size="sm"
                           class="b-background flexx pobtn shadow text-center"
                           variant="primary"
-                          @click="DeclineRequest(request.user_id)"
+                          @click="DeclineRequest(request.user_id, index )"
                         >
                           <span class="btn-com text-center">{{ $t('network.Decline') }}</span>
                         </b-button>
@@ -152,17 +152,21 @@ export default {
           console.log({ err: err });
       })
     },
-    ApproveRequest: function(user_id){
-      this.loading = true;
+    ApproveRequest: function(user_id, index){
+      // this.loading = true;
       console.log('user_id: ', user_id);
       this.axios.get("network/"+this.url+"/members/request/approve/"+user_id)
       .then(() => {
-        this.requests = [];
-        this.$nextTick(() => {
-          this.page = 0;
-          this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
-        });
-        console.log('ohh yeah');
+        // this.requests = [];
+
+
+        // this.$nextTick(() => {
+        //   this.page = 0;
+        //   this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
+        // });
+
+       this.$delete(this.requests,index);
+
         this.loading = false;
         this.flashMessage.show({
           status: "success",
@@ -178,17 +182,22 @@ export default {
         });
       });
     },
-    DeclineRequest: function(user_id){
+
+    
+    DeclineRequest: function(user_id, index ){
       this.loading = true;
       console.log('user_id: ', user_id);
       this.axios.get("network/"+this.url+"/members/request/decline/"+user_id)
       .then(() => {
-        this.requests = [];
-        this.$nextTick(() => {
-          this.page = 0;
-          this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
-        });
-        console.log('ohh yeah');
+        // this.requests = [];
+        // this.$nextTick(() => {
+        //   this.page = 0;
+        //   this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
+        // });
+
+        this.$delete(this.requests,index);   
+
+       
         this.loading = false;
         this.flashMessage.show({
           status: "success",
@@ -440,7 +449,7 @@ f-right {
     text-overflow: ellipsis;
     overflow: hidden;
     width: 100%;
-    height: 1.2em;
+    height: 1.5em;
     white-space: nowrap;
   }
   .follower {

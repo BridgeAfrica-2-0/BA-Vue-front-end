@@ -348,6 +348,10 @@ export default {
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 
+ .btn{
+    font-size:13px !important;
+  }
+  
   .textt {
     color: #000;
 

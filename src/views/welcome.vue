@@ -188,7 +188,7 @@
                         v-model="region"
                         @input="Division"
                         :placeholder="$t('welcome.Search')"
-                        :label="$t('welcome.name')"
+                        label="name"
                         track-by="id"
                         :options="regions"
                         :multiple="false"
@@ -757,7 +757,7 @@
                         :options="timezone"
                       ></b-form-select>
                     </div>
-                  </div>
+                  </div>  
 
                   <div class="col-md-6">
                     <div class="form-group">
@@ -884,7 +884,7 @@ export default {
       },
       business_category: "Testing",
       business_keyword: [],
-      time_zone: null,
+      time_zone: '+1',
       language: null,
       about: null,
       loadingWizard: false,

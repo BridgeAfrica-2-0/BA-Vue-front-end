@@ -2,9 +2,9 @@
   <div>
     <div class="s-cardd">
       <div class="people-style border shadow" v-for="item in users" :key="item.id">
-        <b-row class="mb-1">
-          <b-col md="3" cols="4" lg="3" class="my-auto">
-            <b-avatar class="p-avater" variant="primary" :src="item.profile_picture"></b-avatar>
+        <b-row class="mb-1">      
+          <b-col md="3" cols="4" lg="3" class="my-auto">  
+            <b-avatar class="p-avater" variant="light" :src="item.profile_picture"></b-avatar>
           </b-col>
 
           <b-col md="8" cols="8" lg="8">

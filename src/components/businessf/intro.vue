@@ -21,7 +21,7 @@
         </p>
         <p>
           <b-icon icon="geo-alt-fill" class="primary h_icon"></b-icon>
-          {{ business_intro.city }},
+          {{ business_intro.address }},
           {{
             business_intro.country != null ? business_intro.country[0].name : ""
           }}

@@ -1,47 +1,46 @@
 <template>
   <div>
-    <!-- {{networks}} -->
-    <div
-      v-for="network in networks"
-      :key="network.id"
-      class="people-style shadow"
-    >
+    <b-modal id="modal-sm" size="sm" hide-header>
+      {{ $t("businessowner.Do_you_want_to_join_this_network") }}?
+    </b-modal>
+
+    <div class="people-style shadow" v-for="item in network" :key="item.id"> 
       <b-row>
-        <div style="display: none">{{ (network["type"] = "network") }}</div>
-        <b-col md="3" xl="5" lg="5" cols="5" sm="3">
+        <b-col md="8" xl="12" lg="12" cols="12" sm="8">
+          <div class="d-inline-flex">
+
           <div class="center-img">
-            <splide :options="options" class="r-image">
-              <splide-slide cl>
-                <img :src="network.logo_path" class="r-image" />
-              </splide-slide>
-            </splide>
+            <img :src="item.logo_path" class="r-image" />
           </div>
-        </b-col>
-        <b-col md="5" cols="7" lg="7" xl="7" sm="5">
+        
+
+        <div class="flx100">
           <p class="textt">
-            <strong class="title">
-              {{ network.name.substring(0, 10) + "..." }}
-            </strong>
+            <strong class="title"> 
+              <router-link :to="'/network_follower/' + item.id">
+                {{ item.name }} 
+              </router-link>
+            </strong> <br />
+          <span v-for=" (cat, index) in item.category.slice(0,1)" :key="index">     {{cat.name}}      </span>
             <br />
-            <!-- {{network.category ? network.category[0].name : "null"}} -->
-            <br />
-            {{ network.followers }} {{ $t("network.Community") }} <br />
-
-            <span class="location">
-              <b-icon-geo-alt class="ico"></b-icon-geo-alt>
-              {{ network.address }}
+            {{ item.followers }} {{ $t("businessowner.Community") }}<br />
+           <span class="location">
+              <b-icon-geo-alt class="ico"></b-icon-geo-alt> {{ item.address }}
             </span>
-            <br />
-            <span v-if="network.description.length < 15">{{
-              network.description
-            }}</span>
-            <span v-else
-              >{{ network.description.substring(0, 15) + "..." }}
-              <b-link>{{ $t("network.Read_More") }}</b-link></span
-            >
-          </p>
+           
+                      <read-more
+                        :more-str="$t('search.read_more')"
+                        class="readmore"
+                        :text="item.description"
+                        link="#"
+                        :less-str="$t('search.read_less')"
+                        :max-chars="100"
+                      >
+                     
+                      </read-more>
+          </p>  </div> </div>
+    
         </b-col>
-
         <b-col lg="12" xl="12" md="4" cols="12" sm="4">
           <div class="s-button">
             <b-row>
@@ -57,18 +56,20 @@
                   block
                   size="sm"
                   class="b-background shadow"
+                  :class="item.is_follow !== 0 && 'u-btn'"
                   variant="primary"
-                  @click="$emit('handleFollow', network)"
-                  :style="network.is_follow !== 0 ? 'background-color: rgb(162,107,80);' : ''"
+                  :id="'followbtn' + item.id"
+                  @click="handleFollow(item)"
                 >
                   <i
+                    class="fas fa-lg btn-icon"
                     :class="
-                      network.is_follow
-                        ? 'fas fa-user-minus fa-lg btn-icon'
-                        : 'fas fa-user-plus fa-lg btn-icon'
+                      item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'
                     "
                   ></i>
-                  <span class="btn-com">{{ $t("network.Community") }}</span>
+                  <span class="btn-com">
+                    {{ $t("businessowner.Community") }}</span
+                  >
                 </b-button>
               </b-col>
 
@@ -80,7 +81,7 @@
                 cols="4"
                 class="mt-2 text-center"
               >
-                <BtnCtaMessage :element="network" type="network" />
+                <BtnCtaMessage :element="item" type="network" />
               </b-col>
 
               <b-col
@@ -94,11 +95,17 @@
                 <b-button
                   block
                   size="sm"
-                  class="b-background shadow"
+                  :id="'followbtn'+item.id"
+                  class="b-background flexx pobtn shadow mr-lg-3 mr-xl-3"
+                  :class="item.is_follow !== 0 && 'u-btn'"
                   variant="primary"
+                  @click="networkJoin(item)"
                 >
-                  <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
-                  <span class="btn-text">{{ $t("network.Direction") }}</span>
+                  <i
+                    class="fas fa-lg btn-icon"
+                    :class="item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"
+                  ></i>
+                    <span class="btn-com">Join</span>
                 </b-button>
               </b-col>
             </b-row>
@@ -106,15 +113,27 @@
         </b-col>
       </b-row>
     </div>
+
+
+
+
+
+
+
+    <infinite-loading @infinite="infiniteHandler"></infinite-loading>
   </div>
 </template>
 
 <script>
-export default {
-  props: ["networks"],
+import axios from "axios";
 
+export default {
+  props: ["type"],
   data() {
     return {
+      page: 1,
+      net_id: null,
+      network: [],
       options: {
         rewind: true,
         autoplay: true,
@@ -126,10 +145,125 @@ export default {
       },
     };
   },
+
+  computed: {
+    old_network() {
+      if (this.type == "Follower") {
+        return this.$store.state.businessOwner.NcommunityFollower
+          .network_followers;
+      } else {
+        return this.$store.state.profile.NcommunityFollowing.network_following;
+      }
+    },
+  },
+
+  mounted() {
+    this.net_id = this.$route.params.id;
+  },
+
+  methods: {
+
+    networkJoin: async function(item){
+      const status = item.is_follow
+
+      const request = !status ? await this.$repository.share.jointNetwork({id: item.id , type: "network"}) : await this.$repository.share.removeNetwork({id: item.id , type: "network"})
+        
+
+      if (request.success){
+        item = Object.assign(item, {is_follow: status ? 0 : 1})
+
+        this.flashMessage.show({
+          status: "success",
+          title: request.data,
+        });
+      }
+    }, 
+
+    infiniteHandler($state) {
+     
+
+      const url = `network/community/networks/${this.net_id}/`
+      axios
+        .get(url + this.page)
+        .then(({ data }) => {
+          console.log("lading network after response");
+          console.log(data);
+          if (this.type == "Follower") {
+            if (data.data.Network_followers.length) {
+              this.page += 1;
+              this.network.push(...data.data.Network_followers);
+
+              $state.loaded();
+            } else {
+              $state.complete();
+            }
+          } else {
+            if (data.data.Network_following.length) {
+              this.page += 1;
+
+              this.network.push(...data.data.Network_following);
+
+              $state.loaded();
+            } else {
+              $state.complete();
+            }
+          }
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+ 
+
+   networkDetails() {
+      console.log("networkDetails");
+      this.$store
+        .dispatch("networkProfileCommunitySidebar/getNetworkDetails", this.net_id)
+        .then(() => {
+          console.log("ohh year");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+ 
+
+    async handleFollow(user) {
+      document.getElementById("followbtn" + user.id).disabled = true;
+      const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
+      const nextFollowState = user.is_follow === 0 ? 1 : 0;
+      const data = {
+        id: user.id,
+        type: "network",
+      };
+
+      await axios
+        .post(uri, data)
+        .then((response) => {
+          user.is_follow = nextFollowState;
+          document.getElementById("followbtn" + user.id).disabled = false;
+
+          this.networkDetails();
+        })
+        .catch((err) => {
+          console.log(err);
+          document.getElementById("followbtn" + user.id).disabled = false;
+        });
+    },
+  },
 };
 </script>
 
+
+
+
 <style scoped>
+
+.flx100{
+  flex-basis: 70%;
+}
 @media only screen and (min-width: 768px) {
   .btn-text {
     margin-left: 8px;
@@ -161,6 +295,9 @@ export default {
   }
 }
 
+.u-btn {
+  filter: grayscale(0.6);
+}
 .btnpngs {
   width: 20px;
   margin-right: 5px;
@@ -179,6 +316,7 @@ export default {
   text-align: center;
 
   padding: 15px;
+  padding-top: 2px;
 }
 
 @media only screen and (max-width: 768px) {
@@ -216,7 +354,7 @@ export default {
     padding: 1px;
     text-align: left;
 
-    margin-left: -30px;
+    margin-left: 2px;
 
     margin-right: -5px;
 
@@ -269,7 +407,7 @@ export default {
     padding: 1px;
     text-align: left;
 
-    margin-left: 30px;
+    margin-left: 65px;
 
     margin-right: -5px;
 
@@ -283,8 +421,11 @@ export default {
   .btn {
     padding-top: 6px;
     height: 38px;
-    width: 123px;
-    font-size: 14px;
+    width: 110px;
+    font-size: 12px;
+    margin-left: -10px;
+
+    padding-top: 8px;
   }
 
   .r-image {
@@ -380,11 +521,13 @@ export default {
   }
 }
 
-@media only screen and (min-width: 992px) and (max-width: 1421px) {
+@media only screen and (min-width: 992px) and (max-width: 1331px) {
   .btn {
-    width: 100px;
-    height: 38px;
-    font-size: 14px;
+    width: 98px;
+    height: 33px;
+    font-size: 12px;
+    margin-left: -10px;
+    padding-top: 8px;
   }
 }
 </style>

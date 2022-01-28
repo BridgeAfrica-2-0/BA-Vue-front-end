@@ -21,8 +21,8 @@
 
     <b-row cols="1">
       <b-col class="ml-0 mr-0"
-        v-for="member in displayfollowers"
-        :key="member.id"
+        v-for=" (member, index) in displayfollowers"
+        :key="index"
       >
         <b-skeleton-wrapper :loading="loading" >
           <template #loading>
@@ -34,7 +34,7 @@
           </template>
         <div style="display:none;">{{member['communityNum'] = nFormatter(member.followers)}}</div>
         <div style="display:none;">{{member['type'] = "user"}}</div>
-        <CommunityMembers :member="member" @BlockUser="BlockUser" @handleFollow="handleFollow" />
+        <CommunityMembers :member="member" :index="index" @BlockUser="BlockUser" @handleFollow="handleFollow" />
         </b-skeleton-wrapper>
       </b-col>
     </b-row>
@@ -83,6 +83,19 @@ export default {
       }
       return num;
     },
+
+
+ UserDetails() {   
+      this.$store
+        .dispatch("networkProfileCommunitySidebar/getUserDetails", this.net_id)   
+        .then(() => {
+          console.log("ohh year");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    }, 
+
 
     getRequestDatas(searchTitle) {
       let data = "";
@@ -152,14 +165,16 @@ export default {
     },
 
         
-    BlockUser(user_id) {
-      this.loading = true;
+    BlockUser(user_id, index) {
+     // this.loading = true;
       console.log("----",user_id);
       console.log("network/"+this.url+"/lock/user/"+user_id);
       this.axios.post("network/"+this.url+"/lock/user/"+user_id)
       .then(response => {
         console.log(response);
         // this.blockUsers();
+        this.UserDetails();
+         this.$delete(this.displayfollowers,index);
         this.loading = false;
         this.flashMessage.show({
           status: "success",
@@ -193,6 +208,7 @@ export default {
         .then(response => {
           console.log("response", response);
           Comdata.is_follow = nextFollowState;
+          this.UserDetails();
         })
         .catch(err => console.log(err));
     },

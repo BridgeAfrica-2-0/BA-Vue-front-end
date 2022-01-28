@@ -306,7 +306,7 @@ export default {
           JSON.stringify(
             this.$store.getters["ProfileAndBusinessDetails/getdetails"]
           )
-        ).owner
+        )
       );
 
       let owner = JSON.parse(
@@ -315,27 +315,32 @@ export default {
         )
       ).owner;
 
-      owner = owner.map((value) => {
-        this.boptions.push({ text: value.name, value: "owner" });
-        return value;
-      });
+      const ownerData = owner.map((value) => ({ text: value.name, value: "owner" }));
 
-      console.log(
+      let data = ownerData
+
+      /* console.log(
         JSON.parse(
           JSON.stringify(
             this.$store.getters["ProfileAndBusinessDetails/getdetails"]
           )
         ).business
-      );
+      ); */
+
       let businesses = JSON.parse(
         JSON.stringify(
           this.$store.getters["ProfileAndBusinessDetails/getdetails"]
         )
       ).business;
-      businesses = businesses.map((value) => {
-        this.boptions.push({ text: value.name, value: value.id });
-        return value;
-      });
+
+      const businessesData = businesses.map((value) => ({ text: value.name, value: value.id }) );
+
+      data = [ ...businessesData, ...ownerData]
+
+      console.log(data)
+      
+      this.boptions = data
+
       return this.boptions;
     },
   },

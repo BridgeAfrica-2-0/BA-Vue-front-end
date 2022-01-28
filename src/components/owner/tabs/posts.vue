@@ -209,6 +209,10 @@ export default {
   },
  
   created() {
+
+    this.workedAt = this.$t("profileowner.Current_or_Last_Organization");
+    this.studiedAt = this.$t("profileowner.Last_Education");
+
     this.$store
       .dispatch("profile/loadUserPostIntro", null)
       .then((response) => {
@@ -245,8 +249,8 @@ export default {
   data() {
     return {
       userProfileOwner: {
-        workedAt: this.$t("profileowner.Current_or_Last_Organization"),
-        studiedAt: this.$t("profileowner.Last_Education"),
+        workedAt: null,
+        studiedAt: null,
         homeTown: "Dummy",
         currentCity: "Dummy",
         numbersOfFollowers: 256,

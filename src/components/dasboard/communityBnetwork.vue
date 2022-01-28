@@ -264,6 +264,10 @@ export default {
     margin-right: -15px;
   }
 
+   .btn{
+    font-size:13px !important;
+  }
+
   .s-button {
     padding: 15px;
     margin-top: -15px;

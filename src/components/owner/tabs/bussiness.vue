@@ -844,7 +844,7 @@
                     </div>
                   </div>
 
-                  <div>
+                  <div class="flx70">
                     <p class="textt text">
                       <strong class="title">
                         <router-link :to="'/business_owner/' + business.id">
@@ -2047,6 +2047,11 @@ import "vue-form-wizard/dist/vue-form-wizard.min.css";
     margin-right: 8px;
     padding: 7px;
   }
+}
+
+
+.flx70{
+      flex-basis: 70%;
 }
 </style>
 

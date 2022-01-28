@@ -21,8 +21,8 @@
 
     <b-row cols="1">
       <b-col class="ml-0 mr-0"
-        v-for="member in displayfollowing"
-        :key="member.id"
+        v-for="(member, index) in displayfollowing"
+        :key="index"
       >
         <b-skeleton-wrapper :loading="loading" >
           <template #loading>
@@ -34,7 +34,7 @@
           </template>
         <div style="display:none;">{{member['communityNum'] = nFormatter(member.followers)}}</div>
         <div style="display:none;">{{member['type'] = "business"}}</div>
-        <CommunityBusiness :member="member" @handleFollow="handleFollow" />
+        <CommunityBusiness :index="index" :member="member" @BlockUser="BlockUser"  @handleFollow="handleFollow" />
         </b-skeleton-wrapper>
       </b-col>
     </b-row>
@@ -59,7 +59,7 @@ export default {
     return {
       url:null,
       searchTitle: "",
-      page: 0,
+      page: 1,
       loading: false,
       businessfollowing: [],
       displayfollowing: []
@@ -154,9 +154,58 @@ export default {
         .then(response => {
           console.log("response", response);
           Comdata.is_follow = nextFollowState;
+
+          this.businessDetails();
         })
         .catch(err => console.log(err));
     },
+
+
+
+
+
+       BlockUser(user_id, index) {
+    
+      console.log("network/" + this.url + "/lock/business/" + user_id);
+      this.axios
+        .post("network/" + this.url + "/lock/business/" + user_id)
+        .then((response) => {
+          console.log(response);
+         
+          this.loading = false;
+
+          this.businessDetails();
+         this.$delete(this.displayfollowing,index);
+
+
+          this.flashMessage.show({
+            status: "success",
+            message: "business blocked",
+          });
+        })
+        .catch((err) => {
+          console.log({ err: err });
+          this.loading = false;
+          this.flashMessage.show({
+            status: "error",
+            message: err.response.data.message,
+          });
+        });
+    },
+
+
+   businessDetails() {
+      this.$store
+        .dispatch("networkProfileCommunitySidebar/getBusinessDetails", this.url)
+        .then(() => {
+        
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+
 
   }
 };

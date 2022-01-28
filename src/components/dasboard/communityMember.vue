@@ -355,7 +355,7 @@ f-right {
 }
 
 .follower {
-  font-size: 14px;
+  font-size: 13px;
   margin-top: 5px;
 }
 
@@ -380,7 +380,7 @@ f-right {
   .btn {
     width: 123px;
     height: 38px;
-    font-size: 14px;
+    font-size: 13px;
   }
 
   .center {
@@ -515,7 +515,7 @@ f-right {
   .btn {
     width: 123px;
     height: 38px;
-    font-size: 14px;
+    font-size: 13px;
   }
 
   .center {

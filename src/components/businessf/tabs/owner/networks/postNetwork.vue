@@ -332,7 +332,7 @@
                       :title="$t('network.Add_Hyperlink')"
                       size="sm"
                       variant="outline-primary"
-                      @click="$refs.document.click()"
+                      @click="$refs.document.click()"  
                     >
                       <fas-icon
                         class="icons"
@@ -363,7 +363,7 @@
                 <div
                   v-for="movie in createPost.movies"
                   :key="movie.fileName"
-                  class="h300px"
+                  class="h300px"    
                 >
                   <div id="preview">
                     <span
@@ -653,9 +653,13 @@ export default {
       this.delete.forEach((value, index) => {
         formData2.append("deleteImg[" + index + "]", value.id);
       });
+      
+
       this.fileImageArr.forEach((value, index) => {
-        formData2.append("media[" + index + "]", value.target.files[0]);
-      });
+          formData2.append("media[" + index + "]", value.thisfile);
+        });
+
+
       formData2.append("type", "image");
       formData2.append("content", this.edit_description);
       formData2.append("networkId", this.$route.params.id);
@@ -715,6 +719,7 @@ export default {
             fileName: event.target.files[0].name,
             link: URL.createObjectURL(event.target.files[0]),
             fileType: e.target.result.match(/^data:([^/]+)\/([^;]+);/)[1] || [],
+             thisfile: event.target.files[0],
           });
           console.log();
         };
@@ -746,6 +751,7 @@ export default {
             fileName: event.target.files[0].name,
             link: URL.createObjectURL(event.target.files[0]),
             fileType: e.target.result.match(/^data:([^/]+)\/([^;]+);/)[1] || [],
+             thisfile: event.target.files[0],
           });
         };
         reader.readAsDataURL(file.files[0]);
@@ -759,6 +765,7 @@ export default {
       this.createPost.hyperlinks.push({
         target: event.target,
         document: this.service(event.target),
+         thisfile: event.target.files[0],
         fileName: event.target.files[0].name,
       });
     },
@@ -767,6 +774,7 @@ export default {
       this.createPost.hyperlinks.push({
         target: event.target,
         document: this.service(event.target),
+         thisfile: event.target.files[0],
         fileName: event.target.files[0].name,
       });
       this.$refs["modal-xl"].show();
@@ -816,12 +824,15 @@ export default {
       let formData2 = new FormData();
       //console.log(this.fileImageArr)
 
+
+
       this.fileImageArr.forEach((value, index) => {
-        formData2.append("media[" + index + "]", value.target.files[0]);
-      });
+          formData2.append("media[" + index + "]", value.thisfile);
+        });
+
 
       formData2.append("type", "image");
-      //formData2.append("media", this.createPost.hyperlinks);
+  
       formData2.append("content", this.createPost.postNetworkUpdate);
       await this.axios
         .post("network/post/create/" + this.url, formData2, {

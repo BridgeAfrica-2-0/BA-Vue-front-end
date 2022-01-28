@@ -39,6 +39,12 @@ export default {
   mutations: {
     //set media data
 
+
+    updateAlbumItem(state, payload) {
+      const newState = state.albums.map(album => (album.id == payload.id) ? Object.assign(album, { items: ('remove' == payload.action) ? parseInt(album.items) - 1 : parseInt(album.items) + 1 }) : album)
+      state.albums = newState
+    },
+
     setAlbums(state, data) {
       state.albums = data;
     },

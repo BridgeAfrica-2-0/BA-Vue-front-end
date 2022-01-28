@@ -224,6 +224,7 @@ export default {
     },
 
     mutations: {
+        
         //set media data
         updateAlbum(state, payload) {
             const newState = state.albums.map(album => (album.id == payload.id) ? Object.assign(album, { name: payload.name }) : album)
@@ -386,6 +387,19 @@ export default {
         ppleFollowers(state, payload) {
             state.peopleFollowers = payload;
         },
+
+        addCoverPicture(state, pictures){
+
+            if (Array.isArray(pictures))
+                state.businessInfo.cover = pictures
+            else{
+                if (state.businessInfo.cover)
+                    state.businessInfo.cover = [...state.businessInfo.cover,pictures]
+                else
+                    state.businessInfo.cover = [pictures]
+
+            }
+        }
     },
 
     actions: {
@@ -843,15 +857,15 @@ export default {
         },
 
         async submitPost({ commit }, payload) {
-            return axios.post(`business/store/media/${payload.businessID}/${payload.albumID}`, payload.data);
+            return axios.post(`business/store/media/${payload.businessID}/${payload.id}/`, payload.data);
         },
 
-        async setProfilePic({ commit }, { businessID, albumID }) {
-            return axios.post(`business/make/logopic/${businessID}/${albumID}`);
+        async setProfilePic({ commit }, { businessID, id }) {
+            return axios.post(`business/make/logopic/${businessID}/${id}`);
         },
 
-        async setCoverPic({ commit }, { businessID, albumID }) {
-            return axios.post(`business/make/coverpic/${businessID}/${albumID}`);
+        async setCoverPic({ commit }, { businessID, id }) {
+            return axios.post(`business/make/coverpic/${businessID}/${id}`);
         },
 
         async deleteImage({ commit }, id) {

@@ -1728,9 +1728,14 @@ export default {
 
       this.selectedChat({
         chat: this.ctaSelected,
-        id: this.ctaSelected.business_id
-          ? this.ctaSelected.business_id
-          : this.ctaSelected.id,
+        id:
+          this.type == "network" || this.type == "user"
+            ? this.ctaSelected.id
+            : this.type == "business"
+            ? this.ctaSelected.business_id
+              ? this.ctaSelected.business_id
+              : this.ctaSelected.id
+            : this.ctaSelected.id,
       });
     } else {
       this.tabIndex = 0;
@@ -1797,7 +1802,7 @@ export default {
       } else if (this.type == "business") {
         name = value.receiver_business
           ? value.receiver_business.name
-          : value.sender
+          : value.sender_business
           ? value.sender_business.name
           : value.name;
       } else if (this.type == "network") {
@@ -1830,17 +1835,30 @@ export default {
               : value.name
             : value.name;
         } else if (this.type == "business") {
-          name = value.receiver_business
-            ? value.receiver_business.name
+          name = value.receiver
+            ? value.receiver.name
             : value.sender
+            ? value.sender.name
+            : value.receiver_business
+            ? value.receiver_business.name
+            : value.sender_business
             ? value.sender_business.name
             : value.name;
         } else if (this.type == "network") {
-          name = value.receiver_network
+          name = value.receiver
+            ? value.receiver.name
+            : value.sender
+            ? value.sender.name
+            : value.receiver_network
             ? value.receiver_network.name
             : value.sender_network
             ? value.sender_network.name
             : value.name;
+          // name = value.receiver_network
+          //   ? value.receiver_network.name
+          //   : value.sender_network
+          //   ? value.sender_network.name
+          //   : value.name;
         }
       }
 

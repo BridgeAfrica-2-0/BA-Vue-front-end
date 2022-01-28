@@ -4,7 +4,7 @@
       <b-col md="12" lg="5" xl="4">
         <Intro />
         <Media />
-        <Followers />
+        <Followers  />
         <HotBusiness  class="mb-md-3"  />
       </b-col>
 
@@ -30,6 +30,11 @@ export default {
     Post,
     Media,
   },
+
+  methods : {
+
+    
+  }
 };
 </script>
 

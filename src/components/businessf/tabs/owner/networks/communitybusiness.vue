@@ -130,7 +130,12 @@ export default {
   },
   method: {
     goToBusinessAbout(id){
-      this.$router.push(`/business/${id}#about`);
+      // if(this.$route.name != 'BusinessFollower'){
+        this.$router.push(`/business/${id}?tabId=1`);
+      // }else {
+        console.log("------------------ttt")
+        // this.$router.push(`/business/${id}#about`);
+      // }
     }
   },
 };

@@ -362,7 +362,7 @@
 
 
 
-            <b-col md="6">
+            <b-col md="6" class="pt-3">
               <b-form-group
                 label-cols-lg="12"
                 :label="$t('profileowner.Primary_Phone')"
@@ -377,7 +377,7 @@
                 />
               </b-form-group>
             </b-col>
-            <b-col md="6">
+            <b-col md="6" class="pt-3">
               <b-form-group
                 label-cols-lg="12"
                 :label="$t('profileowner.Secondary_Phone')"
@@ -392,7 +392,7 @@
                 />
               </b-form-group>
             </b-col>
-            <b-col md="6">
+            <b-col md="6" class="pt-3">
               <b-form-group
                 label-cols-lg="12"
                 :label="$t('profileowner.Brief_Description')"
@@ -409,7 +409,7 @@
                 ></b-form-textarea>
               </b-form-group>
             </b-col>
-            <b-col md="6">
+            <b-col md="6" class="pt-3">
               <b-form-group
                 label-cols-lg="12"
                 :label="$t('profileowner.Purpose_Of_Network')"
@@ -426,7 +426,7 @@
                 ></b-form-textarea>
               </b-form-group>
             </b-col>
-            <b-col md="6">
+            <b-col md="6" class="pt-3">
               <b-form-group
                 label-cols-lg="12"
                 :label="$t('profileowner.Special_Needs')"
@@ -984,8 +984,16 @@ export default {
           setTimeout(() => {
             this.success.state = false;
           }, 5000);
-          this.getNetworks();
+          this.profileNetworks = this.profileNetworks.map(net => {
+            if (net.id == editedNetwork.id)
+              return res.data.data
+            else
+              return net
+          })
+          //this.getNetworks();
           loader.hide();
+          this.showmodal(false, "edit")
+          console.log('update sucess')
         })
         .catch((err) => {
           console.log({ err: err });
@@ -995,16 +1003,17 @@ export default {
           if (err.response.status == 422) {
             this.flashMessage.show({
               status: "error",
-
               message: this.flashErrors(err.response.data.errors),
               blockClass: "custom-block-class",
             });
           } else {
-            this.flashMessage.show({
+            this.wrapperError(err.response.data.errors).map(er => {
+              this.flashMessage.show({
                 status: "error",
-                message: this.$t('general.Unable_to_Create_Your_Network'),
+                message: er,
                 blockClass: "custom-block-class",
               });
+            })
               console.log({ err: err });
             }
 
@@ -1014,6 +1023,10 @@ export default {
           }, 5000);
           this.loader = false;
         });
+    },
+
+    wrapperError(error){
+      return Object.values(error).map(err => err[0])
     },
 
     // delete a network

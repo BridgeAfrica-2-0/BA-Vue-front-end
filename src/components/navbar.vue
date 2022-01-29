@@ -260,9 +260,9 @@
                       <div
                         class="d-inline-flex flex-row align-items-center suggest-item cursor-pointer"
                       >
-                        <!-- <div>
+                        <div>
                           <img :src="profileSenderImange(notification.sender)" class="rounded-circle" alt="" width="30" height="30" />
-                        </div> -->
+                        </div>
                         <div class="d-flex flex-column ml-3">
                           <div>{{ notification.notification_text }}</div>
                           <div class="small text-muted">

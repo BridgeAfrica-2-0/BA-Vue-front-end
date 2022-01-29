@@ -43,5 +43,26 @@ console.log(localStorage.getItem('lang'))
 export const diffBetweenTwoDate = (end, start) => {
     const startDate = moment(start)
     const endDate = moment(end)
+
     return endDate.diff(startDate)
 }
+
+export const notification = (notification) => {
+
+    const time = () => notification.created_at
+
+    return `
+    <div class="d-inline-flex flex-row align-items-center suggest-item cursor-pointer">
+        <div>
+            <img src="${notification.avatar}" class="rounded-circle" alt="" width="30" height="30" />
+        </div>
+        <div class="d-flex flex-column ml-3">
+            <div>${notification.notification_text}</div>
+            <div class="small text-muted">
+                <span class="text-capitalize">
+                ${time()}
+                </span>
+            </div>
+        </div>
+    </div>
+`}

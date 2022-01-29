@@ -73,11 +73,24 @@ export default {
         return data;
       })
     },
+
+
+    removeBusinessFromNetwork({commit}, data ){
+    
+      return axios
+      .delete(`network/${data.url}/business/remove/${data.id}`)
+      .then(({ data }) => {
+        console.log(data);
+        return data;
+      })
+    },
+
+
     removeAsEditor({commit}, data ){
       console.log("removeAsEditor");
       console.log(data);  
       return axios
-      .delete(`network/${data.url}/remove/editor/${data.id}`)
+      .put(`network/${data.url}/remove/editor/${data.id}`)
       .then(({ data }) => {
         console.log(data);
         return data;

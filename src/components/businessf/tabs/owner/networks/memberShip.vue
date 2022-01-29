@@ -1,6 +1,13 @@
 <template>
   <b-container>
     <div class="s-card">
+
+      <h6 class="font-weight-bolder">
+          {{ $t("network.All_Members") }} 
+        </h6>
+        <hr width="100%" />
+
+
       <div v-for="(request, index)  in requests" :key="index" class="people-style border shadow">
         <b-skeleton-wrapper :loading="loading">
           <template #loading>
@@ -110,9 +117,130 @@
         </infinite-loading>
         </b-col>
       </b-row>
+   
+     <h6 class="font-weight-bolder">
+          {{ $t("network.Bussiness") }}
+        </h6>
+        <hr width="100%" />
 
-      
+
+      <div v-for="(request, index)  in business" :key="index" class="people-style border shadow">
+        <b-skeleton-wrapper :loading="loading">
+          <template #loading>
+            <b-card>
+              <b-skeleton width="85%"></b-skeleton>
+              <b-skeleton width="55%"></b-skeleton>
+              <b-skeleton width="70%"></b-skeleton>
+            </b-card>
+          </template>    
+            
+        <b-row class="mb-1">
+          <b-col md="3" cols="4" sm="3" lg="3" class="my-auto">
+            <b-avatar
+              class="p-avater"
+              variant="primary"
+              :src="request.profile_picture"
+            ></b-avatar>
+          </b-col>
+
+          <b-col md="8" cols="8" lg="8" sm="8">
+            <div>
+              <b-row class="shift">
+                <b-col md="12" lg="12" xl="6" sm="6">
+                  <div class="e-name">
+                    <b-row>
+                      <b-col
+                        md="6"
+                        lg="6"
+                        cols="6"
+                        sm="12"
+                        xl="12"
+                        class="mt-lg-2"
+                      >
+                        <div class="mt-2 mt-lg-0 mt-xl-0 username">
+                          <b> {{request.fullname}} </b>
+                        </div>
+                      </b-col>
+
+                      <b-col
+                        md="6"
+                        lg="6"
+                        cols="6"
+                        sm="12"
+                        xl="12"
+                        class="mt-3 mt-lg-2 mt-xl-0"
+                      >
+                        <h6 class="follower"> {{ $t('network.Community') }}</h6>
+                      </b-col>
+                    </b-row>
+                  </div>
+                </b-col>
+
+                <b-col lg="12" xl="6" cols="12" sm="6" md="12">
+                  <div>
+                    <b-row class="mt-lg-0">
+                      <b-col
+                        md="6"
+                        lg="6"
+                        cols="6"
+                        sm="12"
+                        xl="12"
+                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
+                      >
+                        <b-button
+                          block
+                          variant="primary"
+                          size="sm"
+                          class="b-background flexx pobtn shadow"
+                          @click="BApproveRequest(request.user_id, index)"
+                        >
+                          <span class="btn-text text-center">{{ $t('network.Approve') }}</span>
+                        </b-button>
+                      </b-col>
+
+                      <b-col
+                        md="6"
+                        lg="6"
+                        cols="6"
+                        sm="12"
+                        xl="12"
+                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
+                      >
+                        <b-button
+                          block
+                          size="sm"
+                          class="b-background flexx pobtn shadow text-center"
+                          variant="primary"
+                          @click="BDeclineRequest(request.user_id, index )"
+                        >
+                          <span class="btn-com text-center">{{ $t('network.Decline') }}</span>
+                        </b-button>
+                      </b-col>
+                    </b-row>
+                  </div>
+                </b-col>
+              </b-row>
+            </div>
+          </b-col>
+        </b-row>
+        </b-skeleton-wrapper>
+      </div>
+      <b-row>
+        <b-col cols="12">
+        <infinite-loading ref="BInfiniteLoading" @infinite="BinfiniteHandler">
+            <div class="text-red" slot="no-more">{{ $t('network.No_More_Request') }}</div>
+            <div class="text-red" slot="no-results">{{ $t('network.No_More_Request') }}</div>
+        </infinite-loading>
+        </b-col>
+      </b-row>
+    
     </div>
+
+
+
+
+
+
   </b-container>
 </template>
 
@@ -121,9 +249,14 @@ export default {
   data() {
     return {
       url:null,
-      page:0,
+      page:1,
+
+      businesspage:1,
+
       loading: false,
-      requests: []
+      requests: [],
+
+      business:[],
     }
   },
 
@@ -131,6 +264,8 @@ export default {
     this.url =  this.$route.params.id !== undefined ? this.$route.params.id : this.$router.push('notFound');
   },
   methods: {
+
+
     infiniteHandler($state) {
        console.log("loop");
        console.log("network/"+this.url+"/members/users/request/"+this.page);
@@ -151,19 +286,40 @@ export default {
       }) .catch((err) => {
           console.log({ err: err });
       })
+    },    
+
+
+
+
+      BinfiniteHandler($state) {
+
+
+      this.axios
+      .get("network/"+this.url+"/members/business/request/"+this.businesspage)
+      .then(({ data }) => {
+      
+        if (data.data.length) {
+        this.businesspage += 1;
+       
+        this.business.push(...data.data);
+          $state.loaded();
+          } else {   
+          $state.complete();
+        }
+      }) .catch((err) => {
+          console.log({ err: err });
+      })
     },
+
+
+
+
     ApproveRequest: function(user_id, index){
-      // this.loading = true;
+    
       console.log('user_id: ', user_id);
       this.axios.get("network/"+this.url+"/members/request/approve/"+user_id)
       .then(() => {
-        // this.requests = [];
-
-
-        // this.$nextTick(() => {
-        //   this.page = 0;
-        //   this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
-        // });
+      
 
        this.$delete(this.requests,index);
 
@@ -183,17 +339,75 @@ export default {
       });
     },
 
+
+
+
+
+    
+    BApproveRequest: function(user_id, index){
+    
+      console.log('user_id: ', user_id);
+      this.axios.get("network/"+this.url+"/business/request/approve/"+user_id)
+      .then(() => {
+      
+
+       this.$delete(this.business,index);
+
+        this.loading = false;
+        this.flashMessage.show({
+          status: "success",
+          message: this.$t('network.Request_Approved')
+        });
+      })
+      .catch(err => {
+        console.log({ err: err });
+        this.loading = false;
+        this.flashMessage.show({
+          status: "error",
+          message: this.$t('network.Unable_to_Approve_Request')
+        });
+      });
+    },
+
+
+
+
+
+
+    
+    BDeclineRequest: function(user_id, index ){
+      this.loading = true;
+      console.log('user_id: ', user_id);
+      this.axios.get("network/"+this.url+"/business/request/decline/"+user_id)
+      .then(() => {
+        
+
+        this.$delete(this.business,index);   
+
+       
+        this.flashMessage.show({
+          status: "success",
+          message: this.$t('network.Request_Deleted')
+        });
+      })
+      .catch(err => {
+        console.log({ err: err });
+        this.loading = false;
+        this.flashMessage.show({
+          status: "error",
+          message: this.$t('network.Unable_to_Deleted_Request')
+        });
+      });
+    },
+
+
     
     DeclineRequest: function(user_id, index ){
       this.loading = true;
       console.log('user_id: ', user_id);
       this.axios.get("network/"+this.url+"/members/request/decline/"+user_id)
       .then(() => {
-        // this.requests = [];
-        // this.$nextTick(() => {
-        //   this.page = 0;
-        //   this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
-        // });
+        
 
         this.$delete(this.requests,index);   
 

@@ -2,7 +2,7 @@
   <div>
     <b>{{ $t('profileowner.') }}{{ $t('profileowner.Contact_Infomation') }}</b>
     <hr />
-    <div v-for="(contact, index) in contacts" class="row" :key="index">
+    <div v-for="(contact, index) in contacts" class="row" :key="index"> 
       <div class="col">
         {{ $t('profileowner.Mobile_Phone') }}:
       </div>

@@ -16,7 +16,7 @@
           <b-col>
             
             <div
-              v-if="showPen != 'BusinessFollower'"
+              v-if="showPen"
               class="edit"
               v-b-modal.biographyModal
               @click="
@@ -40,7 +40,7 @@
             <b-card-text>
               <div class="edit" v-b-modal.addressBusinessModal>
                 <b-icon
-                  v-if="showPen != 'BusinessFollower'"
+                  v-if="showPen"
                   icon="pencil-fill"
                   variant="primary"
                   @click="load"
@@ -770,7 +770,12 @@ export default {
   },
   computed: {
     showPen() {
-      return this.$route.name;
+      if (this.$route.name == 'BusinessFollower' || this.$route.name == 'BusinessEditor'){
+        return false ;
+      } else {
+
+        return true ;
+      }
     },
     hoursOpen() {
       console.log();

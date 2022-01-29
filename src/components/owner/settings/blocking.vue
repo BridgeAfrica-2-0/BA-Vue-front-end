@@ -23,18 +23,21 @@
               <b-skeleton width="70%"></b-skeleton>
             </b-card>
           </template>
-          <b-list class="d-flex align-items-center m-list">
-            <b-avatar
-              variant="primary"
-              :text="blockuser.name.charAt(0)"
-              :src="blockuser.profile_picture"
-              class="mr-3"
-              size="4em"
-            ></b-avatar>
-            <span class="mr-auto">{{ blockuser.name }}</span>
-            <span class="mr-auto" @click="UnblockBlockUser(blockuser, 'user')"
-              ><b-link href="#">{{ $t("settings.Unblock") }}</b-link></span
-            >
+          <b-list class="d-flex justify-content-between align-items-center m-list">
+            
+            <span class="mr-auto">
+              <b-avatar
+                variant="primary"
+                :text="blockuser.name.charAt(0)"
+                :src="blockuser.profile_picture"
+                class="mr-3"
+                size="4em"
+              ></b-avatar>
+            {{ blockuser.name }}
+            </span>
+            <span class="mr-auto" @click="UnblockBlockUser(blockuser, 'user')">
+              <b-link href="#">{{ $t("settings.Unblock") }}</b-link>
+            </span>
           </b-list>
         </b-skeleton-wrapper>
       </b-list-group>
@@ -61,19 +64,23 @@
             </b-card>
           </template>
           <b-list class="d-flex align-items-center m-list">
-            <b-avatar
-              variant="primary"
-              :text="blockbusines.name.charAt(0)"
-              :src="blockbusines.profile_picture"
-              class="mr-3"
-              size="4em"
-            ></b-avatar>
-            <span class="mr-auto">{{ blockbusines.name }}</span>
+            
+            <span class="mr-auto">
+              <b-avatar
+                variant="primary"
+                :text="blockbusines.name.charAt(0)"
+                :src="blockbusines.profile_picture"
+                class="mr-3"
+                size="4em"
+              ></b-avatar>
+              {{ blockbusines.name }}
+            </span>
             <span
               class="mr-auto"
               @click="UnblockBlockUser(blockbusines, 'business')"
-              ><b-link href="#">{{ $t("settings.Unblock") }}</b-link></span
-            >
+              >
+              <b-link href="#">{{ $t("settings.Unblock") }}</b-link>
+            </span>
           </b-list>
         </b-skeleton-wrapper>
       </b-list-group>

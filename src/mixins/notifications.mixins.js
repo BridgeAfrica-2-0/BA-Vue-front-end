@@ -85,7 +85,7 @@ export const Redis = {
         .listen(".UserNotification", payload => {
           
           const type  = notification(payload.notification)
-                    
+          
           this.$notify({
             text: `new notification for user: ${payload.notification.notification_text}`,
           });

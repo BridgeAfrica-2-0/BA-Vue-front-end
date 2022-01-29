@@ -49,7 +49,6 @@ export const diffBetweenTwoDate = (end, start) => {
 
 export const notification = (notification) => {
 
-    console.log(notification)
     const time = () => notification.created_at
 
     return `

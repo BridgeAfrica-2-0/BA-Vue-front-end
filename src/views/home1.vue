@@ -815,13 +815,13 @@ export default {
 
       if (this.$route.name != "Search") {
         console.log("the keyword is: ", this.credentials.keyword);
-        this.$store
-          .dispatch("allSearch/SEARCH", {
-            keyword: this.credentials.keyword,
-          })
-          .catch((err) => {
-            console.log("Error erro!");
-          });
+        // this.$store
+        //   .dispatch("allSearch/SEARCH", {
+        //     keyword: this.credentials.keyword,
+        //   })
+        //   .catch((err) => {
+        //     console.log("Error erro!");
+        //   });
 
         this.$router.push({
           name: "GlobalSearch",

@@ -54,6 +54,10 @@ Vue.use(VueAxios, axios);
 import LoadScript from 'vue-plugin-load-script';
 import InfiniteLoading from 'vue-infinite-loading';
 import VueAnimateOnScroll from 'vue-animate-onscroll'
+import Notifications from 'vue-notification'
+
+
+Vue.use(Notifications)
 
 Vue.use(VueAnimateOnScroll)
 Vue.use(InfiniteLoading, {

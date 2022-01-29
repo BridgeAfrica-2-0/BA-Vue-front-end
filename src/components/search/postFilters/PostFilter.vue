@@ -206,12 +206,7 @@ export default {
   watch: {
 
     isRecentPost: function (newValue) {
-      if (!this.keyword && newValue) {
-        this.onNotified("the keyword does not exist");
-        this.isRecentPost = false;
-        return false;
-      }
-
+      
       if (newValue) {
         this.page(1);
         this.newCallbackForPagination(

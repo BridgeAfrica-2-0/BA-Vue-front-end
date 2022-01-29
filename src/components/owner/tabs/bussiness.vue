@@ -319,14 +319,14 @@
                         {{ $t("profileowner.Adress") }} : {{address}} </label
                       >
                     </div>
-                  </div>
-                </div>
                 <div style="width: 100%; height: 200px; overflow:hidden">
                   <AutocompleteLocation
                    
                     :region="region"
                     @get-address-details="getGeoCoderResult"
                   />
+                </div>
+                  </div>
                 </div>
               </div>
             </tab-content>

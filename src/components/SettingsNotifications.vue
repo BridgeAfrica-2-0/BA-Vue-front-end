@@ -47,14 +47,14 @@
               </div>
             </div>
             <p class="mb-0">
-              {{
+              <!-- {{
                 notif.notification_text.length > 226
                   ? `${notif.notification_text.slice(0, 226)}...`
                   : notif.notification_text
-              }}
-              <!-- {{
-                notif.notification_text
               }} -->
+              {{
+                notif.notification_text
+              }}
             </p>
           </div>
           <b-badge v-if="!notif.mark_as_read" pill variant="primary"><span class="text-primary">.</span></b-badge>
@@ -118,15 +118,13 @@ export default {
     toggleAll(checked) {
       if (!checked) {
         this.selectedNotif = [];
-        console.log('De selected all Notifs');
       } else {
         this.selectedNotif = this.allNotifs.map(notif => notif.id);
-        console.log('All notifs', this.selectNotif);
       }
-      console.log('Selected All', checked);
       console.log(this.allCheckBox);
       this.setCheckMode(checked);
     },
+
     setCheckMode(status) {
       if (status) {
         for (const index in this.allCheckBox) {
@@ -210,16 +208,15 @@ export default {
           },
         })
         .then(({ data }) => {
-          console.log("Gatia");
-          console.log(data);
-          console.log(Object.values(data.data));
-          let object = Object.values(data.data);
-          if (object.length) {
-            console.log("chai blez which kind of code is this  yehumm")
+          
+          const render = data.data
+          console.log(render)
+
+          if (render.length) {
             if (this.page === 1) {
-              this.$store.commit('notification/NEW_PROFILE_NOTIFICATION', { init: true, data: object});
+              this.$store.commit('notification/NEW_PROFILE_NOTIFICATION', { init: true, data: render});
             } else {
-              this.$store.commit('notification/NEW_PROFILE_NOTIFICATION', { init: false, data: object });
+              this.$store.commit('notification/NEW_PROFILE_NOTIFICATION', { init: false, data: render });
             }           
             this.page += 1;
             $state.loaded();

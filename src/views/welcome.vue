@@ -211,14 +211,15 @@
                     <div class="form-group">
                       <label for="Neighbour" class="username"> {{$t('welcome.Neighbour')}}:</label
                       ><br />
-                       <input
+                      {{Neighbor}}
+                       <!-- <input
                         type="text"
                         name="alias"
                         id="Neighbor"
                         v-model="Neighbor"
                         placeholder="Neighbor"
                         class="form-control text"
-                      />
+                      /> -->
                       <!-- <autocomplete-mapbox
                         v-if="region"
                         :region="region"
@@ -408,14 +409,15 @@
                     <div class="form-group">
                       <label for="Neighbour" class="username"> {{$t("welcome.Neighbour")}}:</label
                       ><br />
-                      <input
+                      {{Neighbor}}
+                      <!-- <input
                         type="text"
                         name="alias"
                         id="Neighbor"
                         v-model="Neighbor"
                         placeholder="Neighbor"
                         class="form-control text"
-                      />
+                      /> -->
                       <!-- <autocomplete-mapbox
                         v-if="region"
                         :region="region"

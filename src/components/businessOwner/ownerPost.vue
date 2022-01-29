@@ -804,7 +804,6 @@ export default {
 
       this.delete.forEach((value, index) => {
         formData2.append("deleteImg[" + index + "]", value.id);
-
         console.log(value);
       });
 

@@ -49,13 +49,15 @@
         >
           <b-card>
             <b-form-group v-slot="{ people }">
-              <b-form-checkbox-group
+              <b-form-radio-group
+                id="one"
                 v-model="selectedPeople"
                 :options="optionsPeople"
                 :aria-describedby="people"
                 name="people-2a"
                 stacked
-              ></b-form-checkbox-group>
+              >
+              </b-form-radio-group>
             </b-form-group>
           </b-card>
         </b-collapse>
@@ -85,13 +87,16 @@
         >
           <b-card>
             <b-form-group v-slot="{ bui }">
-              <b-form-checkbox-group
+              <b-form-radio-group
+                id="two"
                 v-model="selectedBuisness"
                 :options="optionsBuisness"
                 :aria-describedby="bui"
                 name="bui-2a"
                 stacked
-              ></b-form-checkbox-group>
+              >
+
+              </b-form-radio-group>
             </b-form-group>
           </b-card>
         </b-collapse>
@@ -121,13 +126,15 @@
         >
           <b-card>
             <b-form-group v-slot="{ network }">
-              <b-form-checkbox-group
-                v-model="selectedNetwork"
+              <b-form-radio-group
                 :options="optionsNetwork"
+                id="three"
+                v-model="selectedNetwork"
                 :aria-describedby="network"
                 name="network-2a"
                 stacked
-              ></b-form-checkbox-group>
+              >
+              </b-form-radio-group>
             </b-form-group>
           </b-card>
         </b-collapse>
@@ -138,6 +145,7 @@
           class="mt-4"
           fas="fas fa-search  fa-lg btn-icon "
         /> -->
+        
       </b-card>
     </b-collapse>
   </div>
@@ -160,9 +168,9 @@ export default {
     peopleSectionIsVisible: false,
     buisnessSectionIsVisible: false,
     networkSectionIsVisible: false,
-    selectedPeople: [],
-    selectedBuisness: [],
-    selectedNetwork: [],
+    selectedPeople: null,
+    selectedBuisness: null,
+    selectedNetwork: null,
     optionsPeople: options,
     optionsBuisness: options,
     optionsNetwork: [...options, { text: "Member", value: "Member" }],
@@ -194,19 +202,23 @@ export default {
       this.$bvModal.hide('myModall')
     },
 
-    map(data, type) {
-      return data.map((e) => `${type}_${e.toLowerCase()}`);
+    map(e, type) {
+      return e ? [`${type}_${e.toLowerCase()}`] : [];
     },
 
     onProcess: _.debounce(function (e) {
       this.page(1);
+
       const user = this.map(this.selectedPeople, `user`);
       const buisness = this.map(this.selectedBuisness, `buisness`);
       const network = this.map(this.selectedNetwork, `network`);
+
+
       const data = [...user, ...buisness, ...network].reduce((hash, value) => {
         hash[value] = "";
         return hash;
       }, {});
+
       this.stack({ data: { ...data, keyword: this.postKeyword }, page: 1 });
       this.setCallback(this.$repository.search.findUserByParam);
 
@@ -231,6 +243,7 @@ export default {
       }
       this.lauchLoader(false);
     },
+
     debounceInput: _.debounce(function (e) {
       if (e && this.postKeyword) {
         this.page(1);
@@ -249,6 +262,7 @@ export default {
       this.rootSectionIsVisible = !this.rootSectionIsVisible;
       if (!this.rootSectionIsVisible) this.closeAllSections();
     },
+
     closeAllSections() {
       this.peopleSectionIsVisible = false;
       this.buisnessSectionIsVisible = false;

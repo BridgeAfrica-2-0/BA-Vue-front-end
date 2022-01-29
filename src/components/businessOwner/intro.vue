@@ -209,13 +209,14 @@
             label-size="sm"
             class=""
           >
-            <b-form-input
+          {{form.address}}
+            <!-- <b-form-input
               id="input-1"
               class="mt-1"
               v-model="form.address"
               type="text"
               required
-            ></b-form-input>
+            ></b-form-input> -->
 
             <div style="width: 100%; height: 200px; overflow:hidden">
                   <AutocompleteLocation

@@ -624,7 +624,7 @@ export default {
             let group_id = data.group_id
             let sender_id = data.sender_id
 
-            return axios.post(`/group/${group_id}/business/${sender_id}`, payload, {
+            return axios.post(`/group/${group_id}/business`, payload, {
                     headers: {
                         'Content-Type': 'multipart/form-data'
                     }

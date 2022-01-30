@@ -2866,6 +2866,7 @@ export default {
   },
   data() {
     return {
+      groupAdminId: null,
       screenWidth: window.screen.width,
       screenX: 0,
       mobile: false,
@@ -3335,7 +3336,7 @@ export default {
       });
       console.log("listenning...");
     },
-    createGroup(receiver_business_id) {
+    async createGroup(receiver_business_id) {
       this.socket.emit("create-group", this.chatId);
 
       let sender_business_id = this.chatId;
@@ -3348,14 +3349,16 @@ export default {
       ];
       console.log("ROOMS: ", this.room);
       this.tabIndex = 3;
-      this.getChatList({ type: "group" });
-      this.$store.dispatch("businessChat/CREATE_GROUP", {
+      
+      await this.$store.dispatch("businessChat/CREATE_GROUP", {
         groupName: this.groupName,
         userID: this.selectedPeople.toString(),
         businessID: this.selectedBusiness.toString(),
         networkID: this.selectedNetwork.toString(),
         businessEditorsID: this.selectedEditor.toString(),
       });
+
+      // this.getChatList({ type: "group" });
     },
     createRoom(receiver_business_id) {
       // let sender_business_id = this.currentUser.user.id;
@@ -3485,6 +3488,7 @@ export default {
       this.$bvModal.hide("group-name");
       console.log("type tabs:", this.tabIndex);
       // console.log("selected Chat:", data);
+
       this.createGroup();
       let dumId = 7;
       // this.chatId = data.id;
@@ -3500,6 +3504,7 @@ export default {
         name: this.groupName,
       };
 
+      this.getChatList({ type: "group" });
       console.log("[DEBUG] Chat selected:", this.chatSelected);
       this.groupName = "";
     },
@@ -3534,6 +3539,9 @@ export default {
         name: data.chat.name ? data.chat.name : data.chat.groupName,
         chat: data.chat,
       };
+      this.groupAdminId = data.chat.admin_businessID
+        ? data.chat.admin_businessID
+        : null;
       console.log("[DEBUG] Chat selected:", this.chatSelected);
     },
 
@@ -3627,12 +3635,17 @@ export default {
         membersEditor.map((biz) => {
           membersEditorIds.push(biz.businessEditorsID);
         });
+        // data = {
+        //   userID: membersPeopleIds,
+        //   businessID: membersBusinessIds,
+        //   networkID: membersNetworkIds,
+        //   businessEditorID: membersEditorIds,
+        //   message: this.input,
+        // };
         data = {
-          userID: membersPeopleIds,
-          businessID: membersBusinessIds,
-          networkID: membersNetworkIds,
-          businessEditorID: membersEditorIds,
+          businessID: this.groupAdminId,
           message: this.input,
+          attachment: this.file,
         };
       }
 

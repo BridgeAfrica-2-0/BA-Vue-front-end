@@ -629,7 +629,7 @@ export default {
                         console.log(err);
                     })
             } else {
-                return axios.post(`/group/${state.selectedChatId}/network/${sender_id}`, payload, {
+                return axios.post(`/group/${state.selectedChatId}/network`, payload, {
                         headers: {
                             'Content-Type': 'multipart/form-data'
                         }

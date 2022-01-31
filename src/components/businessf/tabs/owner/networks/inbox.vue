@@ -3404,8 +3404,9 @@ export default {
         memberID: this.selectedMember.toString(),
         networkEditorsID: this.selectedEditor.toString(),
       });
+      this.newMsg = false;
 
-      this.getChatList({ type: "group" });
+      // this.getChatList({ type: "group" });
     },
     createRoom(receiver_business_id) {
       // let sender_business_id = this.currentUser.user.id;

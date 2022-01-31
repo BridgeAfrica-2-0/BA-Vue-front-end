@@ -36,9 +36,9 @@ import axios from "axios"
   actions : {
   
 
-    newKeyWord({ commit },data) {
+    newKeyWord({ commit },data) { 
         
-      return axios.post("/alerts/storetAlertnetwork" ,data).then( response  => {
+      return axios.post("alerts/storetAlertnetwork" ,data).then( response  => {
         console.log(response);
         //commit("setUserData", data.data);
       });

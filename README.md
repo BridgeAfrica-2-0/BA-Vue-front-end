@@ -1,4 +1,4 @@
-# bridge_task
+# Bridge Africa
 
 ## Project setup
 ```

@@ -1571,6 +1571,7 @@ export default {
   },
   data() {
     return {
+      occurence: null,
       screenWidth: window.screen.width,
       screenX: 0,
       mobile: false,
@@ -1703,6 +1704,7 @@ export default {
     window.addEventListener("resize", () => {
       this.screenWidth = window.screen.width;
     });
+    this.occurence = { [`user-${this.currentUser.user.id}`]: true };
   },
   created() {
     console.log("screen width:", window.screen.width);
@@ -1933,6 +1935,9 @@ export default {
     },
     socketListenners() {
       console.log("Listen type of chat:", this.type);
+      this.socket.on("create-chatList", (data) => {
+        this.getChatList({ type: this.getChatList({ type: data.type }) });
+      });
 
       this.socket.on("privateMessage", (data) => {
         console.log("Received");
@@ -1949,9 +1954,25 @@ export default {
         console.log(this.currentUser);
 
         console.log(this.currentUser.user.id + "==" + data.sender_id);
-        this.currentUser.user.id == data.sender_id
-          ? this.saveMessage(this.formData, data.type)
-          : console.log("Receiver...");
+
+        // if (this.currentUser.user.id == data.sender_id) {
+        //   this.saveMessage(this.formData, data.type);
+        // } else {
+        //   if (this.occurence[`user-${this.currentUser.user.id}`]) {
+        //     // this.getChatList
+        //     this.getChatList({ type: this.getChatList({ type: data.type }) });
+        //     console.log("zee-type:", data.type);
+        //     this.occurence[`user-${this.currentUser.user.id}`] = false;
+        //   }
+        //   console.log("zee-occurence:", this.occurence);
+        // }
+
+        // console.log("zee-occurence:", this.occurence);
+
+        // this.currentUser.user.id == data.sender_id
+        //   ? this.saveMessage(this.formData, data.type)
+        //   : (this.occurence += 1);
+        // console.log("Receiver...");
       });
       console.log("listenning...");
     },
@@ -1990,6 +2011,8 @@ export default {
         })
         .catch(() => console.log("error"));
       console.log("testing...");
+
+      this.socket.emit("create-chatList", this.currentUser.user.id);
 
       // this.scrollToBottom();
     },

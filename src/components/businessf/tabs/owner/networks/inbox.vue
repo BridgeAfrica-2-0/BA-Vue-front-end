@@ -2896,6 +2896,7 @@ export default {
   },
   data() {
     return {
+      groupAdminId: null,
       screenWidth: window.screen.width,
       screenX: 0,
       mobile: false,
@@ -3380,7 +3381,7 @@ export default {
       });
       console.log("listenning...");
     },
-    createGroup(receiver_business_id) {
+    async createGroup(receiver_business_id) {
       this.socket.emit("create-group", this.chatId);
 
       let sender_business_id = this.chatId;
@@ -3394,8 +3395,7 @@ export default {
       ];
       console.log("ROOMS: ", this.room);
       this.tabIndex = 3;
-      this.getChatList({ type: "group" });
-      this.$store.dispatch("networkChat/CREATE_GROUP", {
+      await this.$store.dispatch("networkChat/CREATE_GROUP", {
         groupName: this.groupName,
 
         userID: this.selectedPeople.toString(),
@@ -3404,6 +3404,8 @@ export default {
         memberID: this.selectedMember.toString(),
         networkEditorsID: this.selectedEditor.toString(),
       });
+
+      this.getChatList({ type: "group" });
     },
     createRoom(receiver_business_id) {
       // let sender_business_id = this.currentUser.user.id;
@@ -3540,17 +3542,15 @@ export default {
       console.log("type tabs:", this.tabIndex);
       // console.log("selected Chat:", data);
       this.createGroup();
-      let dumId = 7;
-      // this.chatId = data.id;
-      this.$store.commit("networkChat/setSelectedChatId", dumId);
-      let receiver = { receiverID: dumId, keyword: null };
-      this.histBizToUser(receiver);
+
+      // let receiver = { receiverID: dumId, keyword: null };
+      // this.histBizToUser(receiver);
 
       this.newMsg = false;
       // this.chatSelected = { active: true, clickedId: data.id, ...data.chat };
       this.chatSelected = {
         active: true,
-        clickedId: dumId,
+        clickedId: this.chatId,
         name: this.groupName,
       };
       console.log("[DEBUG] Chat selected:", this.chatSelected);
@@ -3598,6 +3598,9 @@ export default {
         name: data.chat.name ? data.chat.name : data.chat.groupName,
         chat: data.chat,
       };
+      this.groupAdminId = data.chat.admin_networkID
+        ? data.chat.admin_networkID
+        : null;
       console.log("[DEBUG] Chat selected:", this.chatSelected);
     },
 
@@ -3702,15 +3705,21 @@ export default {
           membersMemberIds.push(biz.memberID);
         });
 
+        // data = {
+        //   userID: membersPeopleIds,
+        //   businessID: membersBusinessIds,
+        //   networkID: membersNetworkIds,
+        //   networkEditorID: membersEditorIds,
+        //   memberID: membersMemberIds,
+        //   message: this.input,
+        //   attachment: this.file,
+        // };
         data = {
-          userID: membersPeopleIds,
-          businessID: membersBusinessIds,
-          networkID: membersNetworkIds,
-          networkEditorID: membersEditorIds,
-          memberID: membersMemberIds,
+          networkID: this.groupAdminId,
           message: this.input,
           attachment: this.file,
         };
+
         this.formData.append("attachment", this.file);
         this.socket.emit("groupMessage", data);
       }

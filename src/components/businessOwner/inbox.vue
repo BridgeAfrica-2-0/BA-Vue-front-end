@@ -2286,7 +2286,6 @@
                                             class="d-inline-block"
                                             variant="primary"
                                             size="30"
-                                            :src="biz.profile_picture"
                                           ></b-avatar>
                                           <span class="bold">
                                             {{ biz.name }}
@@ -2321,12 +2320,6 @@
                                             class="d-inline-block"
                                             variant="primary"
                                             size="30"
-                                            :src="
-                                              getImage({
-                                                type: 'business',
-                                                image: chat.logo_path,
-                                              })
-                                            "
                                           ></b-avatar>
                                           <span class="bold">
                                             {{ biz.name }}
@@ -2361,7 +2354,6 @@
                                             class="d-inline-block"
                                             variant="primary"
                                             size="30"
-                                            :src="biz.image"
                                           ></b-avatar>
                                           <span class="bold">
                                             {{ biz.name }}
@@ -2406,40 +2398,7 @@
                                   </td>
                                 </tr>
                               </div>
-                              <hr />
-                              <h5>Members</h5>
-                              <div v-if="allMembers">
-                                <tr
-                                  v-for="(biz, index) in allMembers"
-                                  :key="index"
-                                  class="p-2 message"
-                                >
-                                  <td>
-                                    <b-form-group>
-                                      <b-form-checkbox-group
-                                        id="checkbox-group-2"
-                                        v-model="selectedMember"
-                                        name="flavour-2"
-                                      >
-                                        <b-form-checkbox
-                                          :id="index + '_id_mem'"
-                                          :name="biz.name"
-                                          :value="biz.id"
-                                        >
-                                          <b-avatar
-                                            class="d-inline-block"
-                                            variant="primary"
-                                            size="30"
-                                          ></b-avatar>
-                                          <span class="bold">
-                                            {{ biz.name }}
-                                          </span>
-                                        </b-form-checkbox>
-                                      </b-form-checkbox-group>
-                                    </b-form-group>
-                                  </td>
-                                </tr>
-                              </div>
+
                               <hr />
                             </b-tab>
                             <b-tab
@@ -2866,6 +2825,7 @@ export default {
   },
   data() {
     return {
+      groupAdminId: null,
       screenWidth: window.screen.width,
       screenX: 0,
       mobile: false,
@@ -3140,7 +3100,7 @@ export default {
           : value.sender_network
           ? value.sender_network.name
           : value.name;
-      } else name = value.groupName;
+      } else name = value.groupName ? value.groupName : value.name;
 
       return name;
     },
@@ -3335,7 +3295,15 @@ export default {
       });
       console.log("listenning...");
     },
-    createGroup(receiver_business_id) {
+    async createGroup(receiver_business_id) {
+      await this.$store.dispatch("businessChat/CREATE_GROUP", {
+        groupName: this.groupName,
+        userID: this.selectedPeople.toString(),
+        businessID: this.selectedBusiness.toString(),
+        networkID: this.selectedNetwork.toString(),
+        businessEditorsID: this.selectedEditor.toString(),
+      });
+      console.log("chat id selected:", this.chatId);
       this.socket.emit("create-group", this.chatId);
 
       let sender_business_id = this.chatId;
@@ -3348,14 +3316,7 @@ export default {
       ];
       console.log("ROOMS: ", this.room);
       this.tabIndex = 3;
-      this.getChatList({ type: "group" });
-      this.$store.dispatch("businessChat/CREATE_GROUP", {
-        groupName: this.groupName,
-        userID: this.selectedPeople.toString(),
-        businessID: this.selectedBusiness.toString(),
-        networkID: this.selectedNetwork.toString(),
-        businessEditorsID: this.selectedEditor.toString(),
-      });
+      // this.getChatList({ type: "group" });
     },
     createRoom(receiver_business_id) {
       // let sender_business_id = this.currentUser.user.id;
@@ -3481,39 +3442,40 @@ export default {
         });
       }
     },
-    selectedMultyChat() {
+    async selectedMultyChat() {
       this.$bvModal.hide("group-name");
       console.log("type tabs:", this.tabIndex);
-      // console.log("selected Chat:", data);
-      this.createGroup();
-      let dumId = 7;
-      // this.chatId = data.id;
-      this.$store.commit("businessChat/setSelectedChatId", dumId);
-      let receiver = { receiverID: dumId, keyword: null };
-      this.histBizToUser(receiver);
 
+      await this.createGroup();
+
+      // this.$store.commit("businessChat/setSelectedChatId", this.chatId);
+      // let receiver = { receiverID: this.chatId, keyword: null };
+      // this.histBizToUser(receiver);
+      this.type = "group";
       this.newMsg = false;
-      // this.chatSelected = { active: true, clickedId: data.id, ...data.chat };
+      // this.chatSelected = { active: true, clickedId: this.chatId, ...data.chat };
       this.chatSelected = {
         active: true,
-        clickedId: dumId,
-        name: this.groupName,
+        clickedId: this.chatId,
+        groupName: this.groupName,
       };
 
+      this.getChatList({ type: "group" });
       console.log("[DEBUG] Chat selected:", this.chatSelected);
-      this.groupName = "";
+      // this.groupName = "";
     },
     selectedChat(data) {
       console.log("[type tabs]", this.tabIndex);
       // this.scrollToBottom();
       console.log("[selected Chat]", data);
+      this.chatId = data.id;
+
       this.createRoom(data.id);
       if (this.type == "group") {
         this.createGroup();
       }
       this.rightSide = screenX > 930;
 
-      this.chatId = data.id;
       this.$store.commit("businessChat/setSelectedChatId", data.id);
       let receiver = { receiverID: data.id, keyword: null };
       if (data.type == "user") {
@@ -3534,6 +3496,9 @@ export default {
         name: data.chat.name ? data.chat.name : data.chat.groupName,
         chat: data.chat,
       };
+      this.groupAdminId = data.chat.admin_businessID
+        ? data.chat.admin_businessID
+        : null;
       console.log("[DEBUG] Chat selected:", this.chatSelected);
     },
 
@@ -3627,12 +3592,17 @@ export default {
         membersEditor.map((biz) => {
           membersEditorIds.push(biz.businessEditorsID);
         });
+        // data = {
+        //   userID: membersPeopleIds,
+        //   businessID: membersBusinessIds,
+        //   networkID: membersNetworkIds,
+        //   businessEditorID: membersEditorIds,
+        //   message: this.input,
+        // };
         data = {
-          userID: membersPeopleIds,
-          businessID: membersBusinessIds,
-          networkID: membersNetworkIds,
-          businessEditorID: membersEditorIds,
+          businessID: this.groupAdminId,
           message: this.input,
+          attachment: this.file,
         };
       }
 
@@ -3723,7 +3693,7 @@ export default {
 .new-msg-filter-list {
   padding: 15px !important;
   /* border: 1px solid black; */
-  max-height: 600px !important;
+  max-height: 530px !important;
   overflow-y: auto;
   overflow-x: hidden;
   /* background-color: lightblue; */

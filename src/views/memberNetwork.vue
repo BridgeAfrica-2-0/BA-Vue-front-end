@@ -41,7 +41,9 @@ import Footer from "../components/footer";
 import Posts from "@/components/businessf/tabs/owner/networks/postNetwork";
 import Parent from "../components/memberNetworkF/parent";
 import Media from "@/components/owner/tabs/media";
-import Members from "../components/memberNetworkF/members";
+//import Members from "../components/memberNetworkF/members";
+
+import Members from '@/components/businessf/tabs/owner/networks/member';
 import Feedback from "../components/memberNetworkF/feedback";
 
 import { WhoIsIt } from "@/mixins";

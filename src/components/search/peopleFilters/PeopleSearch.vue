@@ -1,5 +1,7 @@
 <template>
-  <div>
+  <div v-if="islogin" >
+
+    
     <h6>
       {{ $t("search.Sponsored_Result") }}
       <fas-icon class="icons" :icon="['fas', 'exclamation-circle']" size="lg" />
@@ -30,6 +32,17 @@
       v-if="this.getKeywork"
     />
   </div>
+
+
+  <div v-else> 
+    
+
+
+       <login />
+    
+     </div>
+
+
 </template>
 
 <script>
@@ -39,7 +52,7 @@ import { loader, search } from "@/mixins";
 
 import Sponsor from "@/components/search/sponsoredBusiness";
 import People from "@/components/search/people";
-
+import login from "@/components/search/login";
 import Loader from "@/components/Loader";
 
 export default {
@@ -48,10 +61,12 @@ export default {
     Sponsor,
     People,
     Loader,
+    login,
   },
 
   data: () => ({
     pageHasLoad: false,
+     islogin:true,
   }),
 
   computed: {
@@ -74,6 +89,7 @@ export default {
 
   created() {
     //this.getAuth();
+    this.islogin=this.$store.getters["auth/isLogged"];
     this.init();
   },
 

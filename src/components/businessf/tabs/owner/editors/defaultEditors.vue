@@ -42,7 +42,8 @@ import FeedbackNetwork from '@/components/businessf/tabs/owner/editors/feedbackE
 import MediaNetwork from '@/components/owner/tabs/media';
 import MemberNetwork from '@/components/businessf/tabs/owner/networks/memberNetwork';
 
-import Members from '@/components/businessf/tabs/owner/editors/member';
+import Members from '@/components/businessf/tabs/owner/networks/member';
+//import Members from '@/components/businessf/tabs/owner/editors/member';
 
 import PostNetwork from '@/components/businessf/tabs/owner/editors/postEditor';
 

@@ -1,5 +1,6 @@
 <template>
-  <div>
+ <div v-if="islogin" >
+
     <h6>
       {{ $t("search.Sponsored_Result") }}
       <fas-icon class="icons" :icon="['fas', 'exclamation-circle']" size="lg" />
@@ -34,6 +35,16 @@
       v-if="this.getKeywork"
     />
   </div>
+
+   <div v-else> 
+    
+
+
+       <login />
+    
+     </div>
+
+
 </template>
 
 <script>
@@ -44,17 +55,19 @@ import { loader, search, PostComponentMixin } from "@/mixins";
 
 import Post from "@/components/businessOwner/ownerPostComponent";
 import Loader from "@/components/Loader";
-
+import login from "@/components/search/login";
 export default {
   mixins: [loader, search, PostComponentMixin],
   components: {
     Sponsor,
     Post,
-    Loader,
+    login,
+        Loader,
   },
 
   data: () => ({
     pageHasLoad: false,
+    islogin:true,
   }),
 
   destroyed() {
@@ -90,6 +103,7 @@ export default {
   },
 
   created() {
+    this.islogin=this.$store.getters["auth/isLogged"];
     if (this.$route.query.uuid) {
       this.singlePost();
       return true;

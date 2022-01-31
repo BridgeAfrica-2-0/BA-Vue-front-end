@@ -336,7 +336,7 @@
                   size="lg"
                 />
 
-                <h6>{{ $t("search.People") }}</h6>
+                <h6>{{ $t("search.People") }}</h6>  anna
               </div>
 
               <MiniPeople />

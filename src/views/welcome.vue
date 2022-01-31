@@ -89,7 +89,21 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div id="preview">
-                      <img v-if="img_url" :src="img_url" />
+                      <!-- <img v-if="img_url" :src="img_url" /> -->
+
+                       <vue-cropper  v-if="img_url"
+                    :src="selectedFile"
+                    ref="cropper"
+                    original:true
+                    info:false
+                    canScale:true
+                    maxImgSize:1000
+                    
+                    :size="1"
+                    drag-mode="move"
+                    :view-mode="1"
+                  />
+
                     </div>
 
                     <div class="text-center">
@@ -289,7 +303,24 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div id="preview">
-                      <img v-if="img_url" :src="img_url" />
+                      <!-- <img v-if="img_url" :src="img_url" /> -->
+
+
+                    <vue-cropper  v-if="img_url"
+                    :src="selectedFile"
+                    ref="cropper"
+                    original:true
+                    info:false
+                    canScale:true
+                    maxImgSize:1000
+                    
+                    :size="1"
+                    drag-mode="move"
+                    :view-mode="1"
+                  />
+
+
+
                     </div>
 
                     <div class="text-center">
@@ -449,7 +480,21 @@
                     />
 
                     <div id="preview">
-                      <img v-if="logoimg_url" :src="logoimg_url" />
+                      <!-- <img v-if="logoimg_url" :src="logoimg_url" /> -->
+
+                          <vue-cropper  v-if="logoimg_url"
+                    :src="selectedFile"
+                    ref="cropperr"
+                    original:true
+                    info:false
+                    canScale:true
+                    maxImgSize:1000
+                    
+                    :size="1"
+                    drag-mode="move"
+                    :view-mode="1"
+                  />
+
                     </div>
 
                     <div class="text-center">
@@ -842,6 +887,9 @@ import moment from "moment";
 import { required, email, minLength } from "vuelidate/lib/validators";
 import AutocompleteLocation from "@/components/AutocompleteLocation";
 
+import VueCropper from "vue-cropperjs";
+import "cropperjs/dist/cropper.css";
+
 export default {
   mixins: [validationMixin],
   data() {
@@ -856,6 +904,7 @@ export default {
       locality: [],
       division: [],
       selectedusecase: "",
+      selectedFile:null,
       keywordds: [],
       first_page: "true",
       country: "",
@@ -1308,6 +1357,22 @@ export default {
       return new Promise((resolve, reject) => {
         this.sendingB = true;
 
+                
+this.cropedImage = this.$refs.cropperr.getCroppedCanvas().toDataURL();
+
+this.$refs.cropperr.getCroppedCanvas().toBlob((blob) => {
+
+     this.logo_path=blob;
+  // formData.append("profile_picture", this.profile_pic);
+   
+   
+
+}, this.mime_type);
+
+
+
+
+
         let formData2 = new FormData();
         formData2.append("logo_path", this.logo_pic);
         formData2.append("region", this.selectedregion);
@@ -1382,13 +1447,27 @@ export default {
         onCancel: this.onCancel,
         color: "#e75c18",
       });
+
+       
+
   console.log("((((((jr ------")
       return new Promise((resolve, reject) => {
         console.log("sending user data");
 
         let formData = new FormData();
-        formData.append("profile_picture", this.profile_pic);
+        
+this.cropedImage = this.$refs.cropper.getCroppedCanvas().toDataURL();
 
+this.$refs.cropper.getCroppedCanvas().toBlob((blob) => {
+
+     this.profile_pic=blob;
+  // formData.append("profile_picture", this.profile_pic);
+   
+   
+
+}, this.mime_type);
+        
+         formData.append("profile_picture", this.profile_pic);
         formData.append("dob", this.dob);
         formData.append("gender", this.gender);
         formData.append("city", this.city);
@@ -1476,15 +1555,54 @@ export default {
     },
 
     onFileChange(e) {
+
       this.profile_pic = e.target.files[0];
       const file = e.target.files[0];
       this.img_url = URL.createObjectURL(file);
+
+      this.mime_type = file.type;
+
+       if (typeof FileReader === "function") {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          this.selectedFile = event.target.result;
+          this.$refs.cropper.replace(this.selectedFile);
+        };
+        reader.readAsDataURL(file);
+      } else {
+        alert("Sorry, FileReader API not supported");
+      }
+
+
     },
+
+
+
+
+   
+
+
+
 
     onLogoChange(e) {
       this.logo_pic = e.target.files[0];
       const logofile = e.target.files[0];
       this.logoimg_url = URL.createObjectURL(logofile);
+
+       this.mime_type = logofile.type;
+
+        if (typeof FileReader === "function") {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          this.selectedFile = event.target.result;
+          this.$refs.cropperr.replace(this.selectedFile);
+        };
+        reader.readAsDataURL(logofile);
+      } else {
+        alert("Sorry, FileReader API not supported");
+      }
+
+
     },
 
     chooselogo: function() {
@@ -1527,6 +1645,7 @@ export default {
     People,
     Business,
     Tutorial,
+    VueCropper,
     // AutocompleteMapbox,
     // businessmap,
     // BusinessAutocomplete,

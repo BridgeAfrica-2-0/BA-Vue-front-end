@@ -40,9 +40,9 @@
           <p class="t-center">- {{ $t("auth.OR") }} -</p>
 
           <md-field :class="getValidationClass('email')">
-            <label for="email"> {{ $t("auth.email") }} </label>
+            <label for="email"> {{ $t("auth.email") }} / {{ $t("auth.Tel") }} </label>
             <md-input
-              type="email"
+              type="text"
               name="email"
               id="email"
               autocomplete="off"
@@ -187,8 +187,8 @@ export default {
         required
       },
       email: {
-        required,
-        email
+        required
+        
       }
     }
   },

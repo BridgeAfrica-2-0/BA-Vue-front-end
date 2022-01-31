@@ -3542,17 +3542,15 @@ export default {
       console.log("type tabs:", this.tabIndex);
       // console.log("selected Chat:", data);
       this.createGroup();
-      let dumId = 7;
-      // this.chatId = data.id;
-      this.$store.commit("networkChat/setSelectedChatId", dumId);
-      let receiver = { receiverID: dumId, keyword: null };
-      this.histBizToUser(receiver);
+
+      // let receiver = { receiverID: dumId, keyword: null };
+      // this.histBizToUser(receiver);
 
       this.newMsg = false;
       // this.chatSelected = { active: true, clickedId: data.id, ...data.chat };
       this.chatSelected = {
         active: true,
-        clickedId: dumId,
+        clickedId: this.chatId,
         name: this.groupName,
       };
       console.log("[DEBUG] Chat selected:", this.chatSelected);

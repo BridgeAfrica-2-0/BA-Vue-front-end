@@ -141,9 +141,11 @@ export default {
         CREATE_GROUP({ commit, state }, data) {
             console.log("group data:", data);
             commit("setLoader", true);
-            return axios.post(`/group/create/business/${state.currentBizId}`, data)
+            axios.post(`/group/create/business/${state.currentBizId}`, data)
                 .then((res) => {
                     commit("setLoader", false);
+                    commit("setSelectedChatId", res.data.data.groupID);
+                    console.log("group created data:", res.data.data);
                 })
                 .catch((err) => {
                     commit("setLoader", false);
@@ -366,19 +368,21 @@ export default {
             await axios.get(`/business-community/business-follower/${state.currentBizId+keyword}`)
                 .then((res) => {
                     let business = res.data.data.data
-                    if (business) {
+                    if (business.length > 0) {
                         business.map((elm) => {
                             state.businesses.push({ accountType: "business", statusType: "follower", ...elm })
                         })
+
                     }
                     axios.get(`/business-community/business-following/${state.currentBizId+keyword}`)
                         .then((res1) => {
                             commit("setLoader", false);
                             if (res1.data.data.data.length > 0) {
                                 res1.data.data.data.map((elm) => {
-                                        state.businesses.push({ accountType: "business", statusType: "following", ...elm })
-                                    })
-                                    // state.businesses.push({ statusType: "following", ...res1.data.data.data })
+                                    state.businesses.push({ accountType: "business", statusType: "following", ...elm })
+                                })
+
+                                // state.businesses.push({ statusType: "following", ...res1.data.data.data })
                             }
                             commit("setBizs", state.businesses);
                         })
@@ -391,6 +395,9 @@ export default {
                     commit("setLoader", false);
                     console.log(err);
                 })
+
+            console.log("Business >: ", state.businesses);
+
         },
 
         async GET_CUR_BIZ({ commit, state }) {

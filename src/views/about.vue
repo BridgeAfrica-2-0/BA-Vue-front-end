@@ -442,7 +442,7 @@
 
     <!-- Blog -->
 
-    <section class="bg-black mb-md-5 py-5">
+    <!-- <section class="bg-black mb-md-5 py-5">
       <h1 class="text-center font-arvo text-light">{{$t("about.Our_Blog")}}</h1>
       <div class="row px-4">
         <div class="col-md-4 mt-3">
@@ -483,7 +483,7 @@
           </div>
         </div>
       </div>
-    </section>
+    </section> -->
 
     <!-- Team -->
 

@@ -2364,6 +2364,8 @@ export default {
 </script>
 
 <style scoped>
+
+
 .icon-color {
   color: #e75c18;
 }

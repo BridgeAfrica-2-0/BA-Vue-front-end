@@ -1,6 +1,7 @@
 <template>
   <div class="map-container"> 
     <MglMap
+    
       :accessToken="accessToken"
       :zoom="zoom"
       :center="center"
@@ -15,9 +16,9 @@
         <div class="marker" slot="marker">
           <div>B{{ key + 1 }}</div>
         </div>
-        <MglPopup :coordinates="[business.lng, business.lat]">
-          <div class="py-4">
-            <div
+        <MglPopup :coordinates="[business.lng, business.lat]" >
+          <div class="py-4 navig">
+            <div 
               class="d-flex justify-content-center flex-column pointer"
               @click="gotoBusiness(business.id)"
             >
@@ -48,29 +49,32 @@
                 :max-chars="100"
               >
               </read-more>
+              
+
+              
             </div>
           </div>
         </MglPopup>
       </MglMarker>
       <MglMarker
-        v-for="(product, key) in products"
+        v-for="(product, key) in productBlock"
         :key="product.id"
         :coordinates="[product.business_lng, product.business_lat]"
       >
         <div class="marker" slot="marker">
           <div>M{{ key + 1 }}</div>
         </div>
-        <MglPopup :coordinates="[product.business_lng, product.business_lat]">
-          <div class="py-4">
-            <div class="d-flex justify-content-center flex-column pointer">
+        <MglPopup :coordinates="[product.business_lng, product.business_lat]" @open="filtre(product.business_id)">
+          <div class="py-4 navig">
+            <div class="d-flex justify-content-center flex-column pointer " v-for="item in FilterProduct" :key="item.id">
               <img :src="product.picture" alt="..." class="img-map" />
               <h6 class="text-center my-3">
-                {{ product.name }}
+                {{ item.name }}
               </h6>
-              <p>{{ product.description }}</p>
+              <p>{{ item.description }}</p>
               <div class="d-flex justify-content-around">
                 <p class="font-weight-bold">Price</p>
-                <p>{{ product.price }} Fcfa</p>
+                <p>{{ item.price }} Fcfa</p>
               </div>
             </div>
           </div>
@@ -90,6 +94,7 @@ export default {
   props: ["businesses", "products", "networks"],
   data() {
     return {
+      filterProduct: null,
       loading: false,
       accessToken: process.env.VUE_APP_MAPBOX_TOKEN,
       mapStyle: "mapbox://styles/mapbox/outdoors-v11",
@@ -98,6 +103,14 @@ export default {
     };
   },
   methods: {
+    filtre(id){
+      console.log('---------',id, '-le-', this.FilterProduct);
+
+     this.filterProduct= this.products.filter(elem =>{
+        return elem.business_id == id
+      })
+      console.log('--',this.products)
+    },
     gotoBusiness(id) {
       this.$router.push(`/business/${id}`);
     },
@@ -107,7 +120,33 @@ export default {
         map.resize();
       });
     },
+
+    filtrer(data, key){
+      let result = [
+      ...new Map(
+        data.map(x => [key(x), x])
+      ).values()
+    ]
+    return result;
+    }
   },
+  computed : {
+    FilterProduct(){
+      return this.filterProduct;
+    },
+    productBlock(){
+      return this.filtrer(this.products, it => it.business_id)
+    }
+  },
+  mounted(){
+    let products = [{nom:"lele", id:1},{nom:"lele1", id:1}, {nom:"lele", id:2}];
+    let unique = [];
+    
+    
+    const subject = [...new Set(products)];
+    console.log(this.products)
+    console.log('filtré ', this.productBlock)
+  }
 };
 </script>
 <style scoped>
@@ -121,9 +160,17 @@ export default {
   height: 100px;
   object-fit: cover;
 }
-.mapboxgl-popup-content {
-  border-radius: 20px !important;
+.mapboxgl-popup-content { 
+  border-radius: 200px !important;
+  max-height: 100px !important;
+ 
 }
+.navig{
+  max-height: 500px ;
+  overflow-y: auto ;
+
+}
+
 .marker {
   border-radius: 100% 100% 100% 0;
   width: 30px;

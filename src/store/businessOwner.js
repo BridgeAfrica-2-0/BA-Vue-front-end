@@ -857,7 +857,7 @@ export default {
         },
 
         async submitPost({ commit }, payload) {
-            return axios.post(`business/store/media/${payload.businessID}/${payload.id}/`, payload.data);
+            return axios.post(`business/store/media/${payload.businessID}/${payload.id}`, payload.data);
         },
 
         async setProfilePic({ commit }, { businessID, id }) {

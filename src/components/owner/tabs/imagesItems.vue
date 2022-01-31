@@ -11,7 +11,7 @@
         alt="media_img"
         v-b-modal="`modal-${im.id}`"
         v-bind="imageProps"
-        style="width:100% !important; height:100% !important"
+        style="width:250px !important; height:250px !important"
       ></b-img>
     
     <video
@@ -354,8 +354,8 @@ export default {
   .img-gall {
     position: relative;
     margin: 5px;
-    float: left;
-    width: 31%;
+    float: left;                                                                                                                      
+    width: auto;
     transition-duration: 0.4s;
     border-radius: 5px;
     -webkit-animation: winanim 0.5s;

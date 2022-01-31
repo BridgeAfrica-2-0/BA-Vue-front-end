@@ -69,7 +69,7 @@
             class="img-gall" v-for="(im, index) in allImages" :key="index"
             :im="im"
             :typeOfMedia="() => typeOfMedia(im.media.path)"
-            :getFullMediaLink="() => getFullMediaLink(im.media.path)"
+            :getFullMediaLink="() => getFullMediaLink(im.media.preview_url)"
             :getYoutubeKey="() => getYoutubeKey(getFullMediaLink(im.media.path))"
             :showImg="() => showImg(getFullMediaLink(im.media.path))"
             :downloadPic="() => downloadPic(im)"
@@ -166,7 +166,7 @@ export default {
       allImages: [],
       strategy: null,
       media: null,
-      imageProps: { width: 205, height: 205 },
+      imageProps: { width: 250, height: 250 },
       Slideimges: [],
       visible: false,
       currentPicture: 0,

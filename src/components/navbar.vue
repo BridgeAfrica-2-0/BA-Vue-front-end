@@ -261,7 +261,7 @@
                         class="d-inline-flex flex-row align-items-center suggest-item cursor-pointer"
                       >
                         <div>
-                          <img :src="profileSenderImange(notification.sender)" class="rounded-circle" alt="" width="30" height="30" />
+                          <img :src="notification.profile_picture" class="rounded-circle" alt="" width="30" height="30" />
                         </div>
                         <div class="d-flex flex-column ml-3">
                           <div>{{ notification.notification_text }}</div>
@@ -714,9 +714,11 @@ export default {
     }),
 
     profileSenderImange(image) {
-      const picture = image.profile_picture 
+      console.log(image)
+      console.log('**************************************')
+      const picture = image.hasOwnProperty('profile_picture')
         ? image.profile_picture 
-        : image.logo_path
+        : image.hasOwnProperty('logo_path')
           ? image.logo_path
           : image.image
 

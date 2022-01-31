@@ -21,8 +21,8 @@
 
     <b-row cols="1">
       <b-col class="ml-0 mr-0"
-        v-for="member in displayfollowers"
-        :key="member.id"
+        v-for="(member, index) in displayfollowers"
+        :key="index"
       >
         <b-skeleton-wrapper :loading="loading" >
           <template #loading>
@@ -34,7 +34,7 @@
           </template>
         <div style="display:none;">{{member['communityNum'] = nFormatter(member.followers)}}</div>
         <div style="display:none;">{{member['type'] = "netwrok"}}</div>
-        <CommunityNetworks :member="member" @BlockUser="BlockUser" @handleFollow="handleFollow" />
+        <CommunityNetworks :member="member" :index="index" @BlockUser="BlockUser" @handleFollow="handleFollow" />
         </b-skeleton-wrapper>
       </b-col>
     </b-row>
@@ -147,17 +147,21 @@ export default {
       this.loading = false;
     },
 
-    BlockUser(user_id) {
-      this.loading = true;
-      console.log("network/"+this.url+"/lock/user/"+user_id);
-      this.axios.delete("network/"+this.url+"/lock/user/"+user_id)
+    BlockUser(user_id, index ) {
+     
+      console.log("network/"+this.url+"/lock/network/"+user_id);
+      this.axios.post("network/"+this.url+"/lock/network/"+user_id)
       .then(response => {
         console.log(response);
-        this.blockUsers();
+
+        this.networkDetails();
+         this.$delete(this.displayfollowers,index);
+
+
         this.loading = false;
         this.flashMessage.show({
           status: "success",
-          message: "User blocked"
+          message: "Network blocked"
         });
       })
       .catch(err => {
@@ -165,10 +169,26 @@ export default {
         this.loading = false;
         this.flashMessage.show({
           status: "error",
-          message: "Unable to blocked User"
+          message: err.response.data.message,
         });
       });
     },
+
+    
+   networkDetails() {
+      console.log("networkDetails");
+      this.$store
+        .dispatch("networkProfileCommunitySidebar/getNetworkDetails", this.url)
+        .then(() => {
+          console.log("ohh year");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+ 
+
 
     async handleFollow(Comdata) {
       console.log("handleFollow", Comdata)
@@ -187,6 +207,8 @@ export default {
         .then(response => {
           console.log("response", response);
           Comdata.is_follow = nextFollowState;
+
+          this.networkDetails();
         })
         .catch(err => console.log(err));
     },

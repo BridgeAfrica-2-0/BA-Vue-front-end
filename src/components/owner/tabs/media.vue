@@ -26,7 +26,9 @@
           :type="type"
           v-else
         />
+        
       </b-tab>
+
       <b-tab :title="$t('profileowner.Albums')" @click="getAlbums">
         <div v-if="!hasLoadAlbum">
           <b-spinner class="load" :label="$t('profileowner.Large_Spinner')"></b-spinner>
@@ -47,27 +49,30 @@
 <script>
 import Album from "./album";
 import Images from "./images";
+import { mapGetters } from "vuex";
 
 import _ from "lodash";
 
-import { mapGetters } from "vuex";
-
 export default {
   props: {
+    
     type: {
       type: String,
       validator: function(value) {
         return ["profile", "network", "business"].indexOf(value) !== -1;
       },
     },
+
     showCoverAlbum: {
       type: Boolean,
       default: () => false,
     },
+
     isEditor: {
       type: Boolean,
       default: () => true,
     },
+
     isablum: {
       type: Boolean,
     },

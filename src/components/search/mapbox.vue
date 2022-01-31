@@ -1,5 +1,5 @@
 <template>
-  <div class="map-container">
+  <div class="map-container"> 
     <MglMap
       :accessToken="accessToken"
       :zoom="zoom"

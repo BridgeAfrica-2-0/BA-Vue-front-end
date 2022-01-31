@@ -1,107 +1,67 @@
 <template>
   <b-container>
     <div class="s-card">
-      <div v-for="request in requests" :key="request.id" class="people-style border shadow">
-        <b-skeleton-wrapper :loading="loading">
-          <template #loading>
-            <b-card>
-              <b-skeleton width="85%"></b-skeleton>
-              <b-skeleton width="55%"></b-skeleton>
-              <b-skeleton width="70%"></b-skeleton>
-            </b-card>
-          </template>
-            
-        <b-row class="mb-1">
-          <b-col md="3" cols="4" sm="3" lg="3" class="my-auto">
-            <b-avatar
-              class="p-avater"
-              variant="primary"
-              :src="request.profile_picture"
-            ></b-avatar>
-          </b-col>
 
-          <b-col md="8" cols="8" lg="8" sm="8">
-            <div>
-              <b-row class="shift">
-                <b-col md="12" lg="12" xl="6" sm="6">
-                  <div class="e-name">
-                    <b-row>
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="12"
-                        xl="12"
-                        class="mt-lg-2"
-                      >
-                        <div class="mt-2 mt-lg-0 mt-xl-0 username">
-                          <b> {{request.fullname}} </b>
-                        </div>
-                      </b-col>
+      <h6 class="font-weight-bolder">
+          {{ $t("network.All_Members") }} 
+        </h6>
+        <hr width="100%" />
 
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="12"
-                        xl="12"
-                        class="mt-3 mt-lg-2 mt-xl-0"
-                      >
-                        <h6 class="follower">5K {{ $t('network.Community') }}</h6>
-                      </b-col>
-                    </b-row>
-                  </div>
-                </b-col>
+   
 
-                <b-col lg="12" xl="6" cols="12" sm="6" md="12">
-                  <div>
-                    <b-row class="mt-lg-0">
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="12"
-                        xl="12"
-                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
-                      >
-                        <b-button
-                          block
-                          variant="primary"
-                          size="sm"
-                          class="b-background flexx pobtn shadow"
-                          @click="ApproveRequest(request.user_id)"
-                        >
-                          <span class="btn-text text-center">{{ $t('network.Approve') }}</span>
-                        </b-button>
-                      </b-col>
+           <div  v-for="(editor, index)  in requests" :key="index">
 
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="12"
-                        xl="12"
-                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
+              <p class="">
+                <span class="d-inline-flex">
+                  <b-avatar
+                    class="d-inline-block"
+                    variant="primary"
+                    :src="editor.profile_picture"
+                    :text="editor.fullname.charAt(0)"
+                    size="3.5rem"
+                  ></b-avatar>
+                  <h5 class="m-0 mt-2 bold username d-inline-block ml-2">
+                   
+
+                    <router-link
+                        :to="'/profile/'+editor.user_id"
                       >
-                        <b-button
-                          block
-                          size="sm"
-                          class="b-background flexx pobtn shadow text-center"
-                          variant="primary"
-                          @click="DeclineRequest(request.user_id)"
-                        >
-                          <span class="btn-com text-center">{{ $t('network.Decline') }}</span>
-                        </b-button>
-                      </b-col>
-                    </b-row>
-                  </div>
-                </b-col>
-              </b-row>
+                          {{ editor.fullname }}
+                      </router-link>
+
+                  </h5>
+                </span>
+                <span class="float-right mt-1">
+                  <b-dropdown
+                    size="lg"
+                    variant="link"
+                    toggle-class="text-decoration-none"
+                    no-caret
+                  >
+                    <template #button-content>
+                      <b-icon-three-dots-vertical  variant="primary"></b-icon-three-dots-vertical
+                      ><span class="sr-only">{{ $t("network.Settings") }}</span>
+                    </template>
+                    <b-dropdown-item
+                      href="#"
+                    @click="ApproveRequest(editor.user_id, index)"
+                    >
+                     {{ $t('network.Approve') }}
+                    </b-dropdown-item>
+                    <b-dropdown-item
+                      href="#"
+                      @click="DeclineRequest(editor.user_id, index )"
+                    >
+                      <b-icon-trash-fill variant="primary"></b-icon-trash-fill>
+                      {{ $t('network.Decline') }}
+                    </b-dropdown-item>
+                  </b-dropdown>
+                </span>
+              </p>
             </div>
-          </b-col>
-        </b-row>
-        </b-skeleton-wrapper>
-      </div>
+
+
+
       <b-row>
         <b-col cols="12">
         <infinite-loading ref="InfiniteLoading" @infinite="infiniteHandler">
@@ -110,9 +70,93 @@
         </infinite-loading>
         </b-col>
       </b-row>
+   
+     <h6 class="font-weight-bolder">
+          {{ $t("network.Bussiness") }}
+        </h6>
+        <hr width="100%" />
 
-      
+         <b-row class="mt-4">
+      <b-col cols="12">
+
+           <div  v-for="(editor, index)  in business" :key="index">
+
+              <p class="">
+                <span class=" d-inline-flex ">
+                  <b-avatar
+                    class="d-inline-block"
+                    square
+                    variant="primary"
+                    :src="editor.profile_picture"
+                    :text="editor.fullname.charAt(0)"
+                    size="3.5rem"
+                  ></b-avatar>
+                  <h5 class="m-0 mt-2 bold username d-inline-block ml-2">
+                   
+
+                    <router-link
+                        :to="'/profile/'+editor.user_id"
+                      >
+                          {{ editor.fullname }}
+                      </router-link>
+
+                  </h5>
+                </span>
+                <span class="float-right mt-1">
+                  <b-dropdown
+                    size="lg"
+                    variant="link"
+                    toggle-class="text-decoration-none"
+                    no-caret
+                  >
+                    <template #button-content>
+                      <b-icon-three-dots-vertical  variant="primary"></b-icon-three-dots-vertical
+                      ><span class="sr-only">{{ $t("network.Settings") }}</span>
+                    </template>
+                    <b-dropdown-item
+                      href="#"
+                      @click="BApproveRequest(editor.user_id, index)"
+                    >
+                     
+
+                     {{ $t('network.Approve') }}
+
+                    </b-dropdown-item>
+                    <b-dropdown-item
+                      href="#"
+                       @click="BDeclineRequest(editor.user_id, index )"
+                    >
+                      
+                    {{ $t('network.Decline') }}
+
+                    </b-dropdown-item>
+                  </b-dropdown>
+                </span>
+              </p>
+            </div>
+
+      </b-col>   
+
+         </b-row>
+
+
+
+      <b-row>
+        <b-col cols="12">
+        <infinite-loading ref="BInfiniteLoading" @infinite="BinfiniteHandler">
+            <div class="text-red" slot="no-more">{{ $t('network.No_More_Request') }}</div>
+            <div class="text-red" slot="no-results">{{ $t('network.No_More_Request') }}</div>
+        </infinite-loading>
+        </b-col>
+      </b-row>
+    
     </div>
+
+
+
+
+
+
   </b-container>
 </template>
 
@@ -121,9 +165,14 @@ export default {
   data() {
     return {
       url:null,
-      page:0,
+      page:1,
+
+      businesspage:1,
+
       loading: false,
-      requests: []
+      requests: [],
+
+      business:[],
     }
   },
 
@@ -131,6 +180,8 @@ export default {
     this.url =  this.$route.params.id !== undefined ? this.$route.params.id : this.$router.push('notFound');
   },
   methods: {
+
+
     infiniteHandler($state) {
        console.log("loop");
        console.log("network/"+this.url+"/members/users/request/"+this.page);
@@ -151,18 +202,43 @@ export default {
       }) .catch((err) => {
           console.log({ err: err });
       })
+    },    
+
+
+
+
+      BinfiniteHandler($state) {
+
+
+      this.axios
+      .get("network/"+this.url+"/members/business/request/"+this.businesspage)
+      .then(({ data }) => {
+      
+        if (data.data.length) {
+        this.businesspage += 1;
+       
+        this.business.push(...data.data);
+          $state.loaded();
+          } else {   
+          $state.complete();
+        }
+      }) .catch((err) => {
+          console.log({ err: err });
+      })
     },
-    ApproveRequest: function(user_id){
-      this.loading = true;
+
+
+
+
+    ApproveRequest: function(user_id, index){
+    
       console.log('user_id: ', user_id);
       this.axios.get("network/"+this.url+"/members/request/approve/"+user_id)
       .then(() => {
-        this.requests = [];
-        this.$nextTick(() => {
-          this.page = 0;
-          this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
-        });
-        console.log('ohh yeah');
+      
+
+       this.$delete(this.requests,index);
+
         this.loading = false;
         this.flashMessage.show({
           status: "success",
@@ -178,17 +254,80 @@ export default {
         });
       });
     },
-    DeclineRequest: function(user_id){
+
+
+
+
+
+    
+    BApproveRequest: function(user_id, index){
+    
+      console.log('user_id: ', user_id);
+      this.axios.get("network/"+this.url+"/members/business/request/approve/"+user_id)  
+      .then(() => {
+      
+
+       this.$delete(this.business,index);
+
+        this.loading = false;
+        this.flashMessage.show({
+          status: "success",
+          message: this.$t('network.Request_Approved')
+        });
+      })
+      .catch(err => {
+        console.log({ err: err });
+        this.loading = false;
+        this.flashMessage.show({
+          status: "error",
+          message: this.$t('network.Unable_to_Approve_Request')
+        });
+      });
+    },
+
+
+
+
+
+
+    
+    BDeclineRequest: function(user_id, index ){
       this.loading = true;
       console.log('user_id: ', user_id);
-      this.axios.get("network/"+this.url+"/members/request/decline/"+user_id)
+      this.axios.get("network/"+this.url+"/business/request/decline/"+user_id)
       .then(() => {
-        this.requests = [];
-        this.$nextTick(() => {
-          this.page = 0;
-          this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
+        
+
+        this.$delete(this.business,index);   
+
+       
+        this.flashMessage.show({
+          status: "success",
+          message: this.$t('network.Request_Deleted')
         });
-        console.log('ohh yeah');
+      })
+      .catch(err => {
+        console.log({ err: err });
+        this.loading = false;
+        this.flashMessage.show({
+          status: "error",
+          message: this.$t('network.Unable_to_Deleted_Request')
+        });
+      });
+    },
+
+
+    
+    DeclineRequest: function(user_id, index ){
+      this.loading = true;
+      console.log('user_id: ', user_id);
+      this.axios.get("network/"+this.url+"/members/business/request/decline/"+user_id)
+      .then(() => {
+          
+
+        this.$delete(this.requests,index);   
+
+       
         this.loading = false;
         this.flashMessage.show({
           status: "success",
@@ -440,7 +579,7 @@ f-right {
     text-overflow: ellipsis;
     overflow: hidden;
     width: 100%;
-    height: 1.2em;
+    height: 1.5em;
     white-space: nowrap;
   }
   .follower {

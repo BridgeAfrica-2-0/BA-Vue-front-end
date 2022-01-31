@@ -6,7 +6,7 @@ export default {
 
   state: {
     appLanguage: 'fr',
-    user: null,
+    user: [],
     isVerified: null,
     passwordToken: null,
     registerData: null,

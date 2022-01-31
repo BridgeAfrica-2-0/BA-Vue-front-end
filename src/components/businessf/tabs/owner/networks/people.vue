@@ -1,19 +1,10 @@
 <template>
   <div>
-    <div style="overflow-y: scroll" class="s-cardd">
-      <div
-        v-for="people in peoples"
-        :key="people.id"
-        class="people-style border shadow"
-      >
-        <b-row class="mb-1">
-          <div style="display: none">{{ (people["type"] = "user") }}</div>
-          <b-col md="3" cols="4" lg="3" class="my-auto">
-            <b-avatar
-              class="p-avater"
-              variant="primary"
-              :src="people.profile_picutre"
-            ></b-avatar>
+    <div class="s-cardd">
+      <div class="people-style border shadow" v-for="item in users" :key="item.id">
+        <b-row class="mb-1">      
+          <b-col md="3" cols="4" lg="3" class="my-auto">  
+            <b-avatar class="p-avater" variant="light" :src="item.profile_picutre"></b-avatar>
           </b-col>
 
           <b-col md="8" cols="8" lg="8">
@@ -24,20 +15,14 @@
                     <b-row>
                       <b-col md="6" lg="6" cols="6" sm="6" class="mt-lg-2">
                         <div class="mt-2 mt-lg-0 mt-xl-0 username">
-                          <b> {{ people.name.substring(0, 10) + "..." }} </b>
+                            <router-link :to="'/profile/' + item.id">
+                              {{ item.name }} 
+                            </router-link>
                         </div>
                       </b-col>
 
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="6"
-                        class="mt-3 mt-lg-2 mt-xl-2"
-                      >
-                        <h6 class="follower">
-                          {{ people.followers }} {{ $t("network.Community") }}
-                        </h6>
+                      <b-col md="6" lg="6" cols="6" sm="6" class="mt-3 mt-lg-2 mt-xl-2">
+                        <h6 class="follower">{{ count(item.followers) }} {{ $t('businessowner.Community') }}</h6>
                       </b-col>
                     </b-row>
                   </div>
@@ -46,49 +31,25 @@
                 <b-col lg="12" xl="12" cols="12" sm="12" md="12">
                   <div class="e-name">
                     <b-row class="mt-lg-0">
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="6"
-                        xl="6"
-                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
-                      >
-                        <BtnCtaMessage :element="people" type="people" />
+                      <b-col md="6" lg="6" cols="6" sm="6" xl="6" class="mt-2 mt-lg-2 mt-xl-2 btn-2 center">
+                        <BtnCtaMessage :element="item" type="people" />
                       </b-col>
 
-                      <b-col
-                        md="6"
-                        lg="6"
-                        cols="6"
-                        sm="6"
-                        xl="6"
-                        class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
-                      >
+                      <b-col md="6" lg="6" cols="6" sm="6" xl="6" class="mt-2 mt-lg-2 mt-xl-2 btn-2 center">
                         <b-button
                           block
                           size="sm"
-                          class="
-                            b-background
-                            flexx
-                            pobtn
-                            shadow
-                            mr-lg-3 mr-xl-3
-                          "
+                           :id="'followbtn'+item.id"
+                          class="b-background flexx pobtn shadow mr-lg-3 mr-xl-3"
+                          :class="item.is_follow !== 0 && 'u-btn'"
                           variant="primary"
-                          @click="$emit('handleFollow', people)"
-                          :style="people.is_follow !== 0 ? 'background-color: rgb(162,107,80);' : ''"
+                          @click="handleFollow(item)"
                         >
                           <i
-                            :class="
-                              people.is_follow
-                                ? 'fas fa-user-minus fa-lg btn-icon'
-                                : 'fas fa-user-plus fa-lg btn-icon'
-                            "
+                            class="fas fa-lg btn-icon"
+                            :class="item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"
                           ></i>
-                          <span class="btn-com">{{
-                            $t("network.Community")
-                          }}</span>
+                          <span class="btn-com"> {{ $t('businessowner.Community') }}</span>
                         </b-button>
                       </b-col>
                     </b-row>
@@ -100,13 +61,146 @@
         </b-row>
       </div>
     </div>
-    <!-- {{peoples}} -->
+
+    <infinite-loading @infinite="infiniteHandler"></infinite-loading>
   </div>
 </template>
 
+
 <script>
+import axios from 'axios';
 export default {
-  props: ["peoples"],
+  props: ['type'],
+  data() {
+    return {
+      page: 1,
+      net_id: null,
+      users: [],
+      options: {  
+        rewind: true,
+        autoplay: true,
+        perPage: 1,
+        pagination: false,
+
+        type: 'loop',
+        perMove: 1,
+      },
+    };
+  },
+
+  mounted() {
+    this.net_id = this.$route.params.id;
+  },
+
+  computed: {
+    activeAccount() {
+      return this.$store.getters['auth/profilConnected'];
+    },
+  },
+
+  methods: {
+
+
+       cta(data) {
+      console.log(data);
+      this.$store.commit('businessChat/setSelectedChat', data);
+      let path = '';
+      if (this.activeAccount.user_type == 'business') {
+        path = '/business_owner/' + this.activeAccount.id;
+      } else if (this.activeAccount.user_type == 'network') {
+        path = '/';
+      } else path = '/messaging';
+
+      // this.$router.push({ path: `${path}`, query: { tabId: 1, msgTabId: 1 } });
+      this.$router.push({ path: `/business_owner/${this.activeAccount.id}`, query: { tabId: 1, msgTabId: 0 } });
+    },
+
+
+    count(number) {
+      if (number >= 1000000) {
+        return number / 1000000 + 'M';
+      }
+      if (number >= 1000) {
+        return number / 1000 + 'K';
+      } else return number;
+    },
+
+    infiniteHandler($state) {
+    
+     const url = `network/community/people/${this.net_id}/`;
+
+    
+      axios
+        .get(url + this.page)
+        .then(({ data }) => {
+          if (this.type == 'Follower') {
+            if (data.data.user_followers.length) {
+              this.page += 1;
+
+              this.users.push(...data.data.user_followers);
+              $state.loaded();
+            } else {
+              $state.complete();
+            }
+          } else {
+            if (data.data.user_following.length) {
+              this.page += 1;
+
+              this.users.push(...data.data.user_following);
+              $state.loaded();
+            } else {
+              $state.complete();
+            }
+          }
+        })
+        .catch(err => {
+          console.log({ err: err });
+        });
+    },
+
+   
+   UserDetails() {   
+      this.$store
+        .dispatch("networkProfileCommunitySidebar/getUserDetails", this.net_id)   
+        .then(() => {
+          console.log("ohh year");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },  
+
+
+    async handleFollow(user) {
+      
+      console.log("yoo ma gee");
+       document.getElementById("followbtn"+user.id).disabled = true;
+      const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
+      const nextFollowState = user.is_follow === 0 ? 1 : 0;
+      const data = {
+        id: user.id,
+        type: 'user',
+      };
+
+      await axios
+        .post(uri, data)
+        .then(({ data }) => {
+          console.log(data);
+          user.is_follow = nextFollowState;
+           document.getElementById("followbtn"+user.id).disabled = false;
+
+           this.UserDetails();
+        })
+         
+          .catch((err) =>{  
+          
+          console.log({err:err})  ;
+           document.getElementById("followbtn"+user.id).disabled =  false;
+          
+        });
+    },
+
+  },
 };
 </script>
 
@@ -114,7 +208,7 @@ export default {
 @media only screen and (min-width: 768px) {
   .s-cardd {
     padding-left: 6px;
-    padding-right: 2px;
+    padding-right: 6px;
   }
 
   .btn-text {
@@ -150,8 +244,8 @@ export default {
   }
 
   .s-cardd {
-    padding-left: 6px;
-    padding-right: 2px;
+    padding-left: 4px;
+    padding-right: 4px;
   }
 }
 
@@ -164,6 +258,10 @@ export default {
 
 .btn {
   border-radius: 5px;
+}
+
+.u-btn {
+  filter: grayscale(0.6);
 }
 
 .flexx {

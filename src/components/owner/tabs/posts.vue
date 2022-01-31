@@ -179,12 +179,12 @@
 
         <Community />
 
-        <Media />
+        <Media @on:media="(value) => redirectToMedia(value)" />
       </b-col>
 
       <b-col md="12" lg="7" xl="8" class="m-0 p-0 px-lg-4 post-padding ">
 
-        <owner-post />
+        <owner-post  />
       </b-col>
     </b-row>
   </div>
@@ -207,9 +207,12 @@ export default {
     OwnerPost,
     Community,
   },
-
+ 
   created() {
-    console.log("Load User Info");
+
+    this.workedAt = this.$t("profileowner.Current_or_Last_Organization");
+    this.studiedAt = this.$t("profileowner.Last_Education");
+
     this.$store
       .dispatch("profile/loadUserPostIntro", null)
       .then((response) => {
@@ -232,6 +235,7 @@ export default {
         console.log({ error: error });
       });
   },
+
   computed: {
     info: function() {
       return this.$store.getters["profile/getUserPostIntro"];
@@ -241,11 +245,12 @@ export default {
       return this.$store.state.profile.Tcommunity;
     },
   },
+
   data() {
     return {
       userProfileOwner: {
-        workedAt: this.$t("profileowner.Current_or_Last_Organization"),
-        studiedAt: this.$t("profileowner.Last_Education"),
+        workedAt: null,
+        studiedAt: null,
         homeTown: "Dummy",
         currentCity: "Dummy",
         numbersOfFollowers: 256,
@@ -263,7 +268,15 @@ export default {
       currentCityState: null,
     };
   },
+
   methods: {
+    
+    redirectToMedia: function(value){
+      console.log('redirectToMedia in posts')
+      if (value)
+        this.$emit('on:media', true)
+    },
+
     nFormatter(num) {
       if (num >= 1000000000) {
         return (num / 1000000000).toFixed(1).replace(/\.0$/, "") + "G";
@@ -349,11 +362,28 @@ export default {
     height: 40px;
   }
 
-  .post-padding{
+  
+}
+
+
+@media (min-width: 1200px) {
+  .profile-pic {
+    width: 64px;
+    height: 64px;
+  }
+  .comment-pic {
+    width: 40px;
+    height: 40px;
+  }
+
+  .post-padding{ 
         padding-left: 60px !important;
     padding-right: 70px !important;
   }
 }
+
+
+
 @media (max-width: 768px) {
   .profile-pic {
     width: 40px;

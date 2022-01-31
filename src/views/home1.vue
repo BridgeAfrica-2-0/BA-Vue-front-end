@@ -18,14 +18,14 @@
               class="input-group-text border-left-0 color-mobile"
               style="width: 40px; border-right: none; background-color: white"
             > 
-            <!-- <Button @click.native="getKeyword" style="width: 5px; height:20px " /> -->
-              <i
+            <Button @click.native="getKeyword" media="mobile" />
+              <!-- <i
                 class="bx bx-search"
                 style="color: #e75c18"
                 font-scale="1.5"
                 @click="getKeyword"
               
-              ></i>
+              ></i> -->
             </span>
           </div>
 
@@ -112,7 +112,7 @@
               <option :value="$t('home.Yaounde') " />
             </datalist>
              <slot name="button">
-                <Button @click.native="getKeyword" />
+                <Button @click.native="getKeyword" media='desktop' />
               </slot>
             <!-- <div
               class="input-group-append"
@@ -809,20 +809,24 @@ export default {
       this.$refs.mobileinput.style.display = "block";
     },
 
-    getKeyword(e) { console.log(this.credentials.keyword)
-      if (e.keyCode === 13) {console.log("touche entrez")}
+     getKeyword() {
+      console.log(this.credentials.keyword, '---mm')
       if (!this.credentials.keyword) return false;
 
-      if (this.$route.name != 'Search') {
-        this.$store
-          .dispatch('allSearch/SEARCH', {
-            keyword: this.credentials.keyword,
-          })
-          .catch((err) => {
-            console.log('Error erro!');
-          });
+      if (this.$route.name != "Search") {
+        console.log("the keyword is: ", this.credentials.keyword);
+        // this.$store
+        //   .dispatch("allSearch/SEARCH", {
+        //     keyword: this.credentials.keyword,
+        //   })
+        //   .catch((err) => {
+        //     console.log("Error erro!");
+        //   });
 
-        this.$router.push({ name: 'Search' });
+        this.$router.push({
+          name: "GlobalSearch",
+          query: { keyword: this.credentials.keyword },
+        });
       }
     },
 

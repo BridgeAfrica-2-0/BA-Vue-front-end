@@ -3,7 +3,11 @@
     <b-row>
       <b-col cols="12" class="mx-auto">
         <b-input-group class="mb-2 px-md-3 mx-auto">
-          <b-input-group-prepend @onclick="search" is-text style="cursor:pointer;">
+          <b-input-group-prepend
+            @onclick="search"
+            is-text
+            style="cursor: pointer"
+          >
             <b-icon-search class="text-primary border-none"></b-icon-search>
           </b-input-group-prepend>
           <b-form-input
@@ -12,7 +16,8 @@
             type="text"
             class="form-control"
             v-model="searchTitle"
-            @keyup="search" 
+            @keyup="search"
+            
           ></b-form-input>
         </b-input-group>
       </b-col>
@@ -21,7 +26,9 @@
     <b-row class="mt-4">
       <b-col cols="12">
         <h6 class="font-weight-bolder">
-          {{ $t('network.Network_Admins') }} ({{nFormatter(admins.length)}})
+          {{ $t("network.Network_Admins") }} ({{
+            nFormatter(adminss.admin_count)
+          }})
         </h6>
         <hr width="100%" />
         <b-skeleton-wrapper :loading="loading">
@@ -44,7 +51,11 @@
                     size="3.5rem"
                   ></b-avatar>
                   <h5 class="m-0 bold username d-inline-block ml-2">
-                    {{admin.fullname}}
+                     <router-link
+                        :to="'/profile/'+admin.user_id"
+                      >
+                           {{ admin.fullname }}
+                      </router-link>
                   </h5>
                 </span>
                 <span class="float-right mt-1">
@@ -56,28 +67,50 @@
                   >
                     <template #button-content>
                       <b-icon-three-dots-vertical></b-icon-three-dots-vertical
-                      ><span class="sr-only">{{ $t('network.Settings') }}</span>
+                      ><span class="sr-only">{{ $t("network.Settings") }}</span>
                     </template>
-                    <b-dropdown-item href="#" @click="removeAsAdmin(admin.user_id)">
-                      <b-icon-trash-fill></b-icon-trash-fill> {{ $t('network.Remove_as_Admin') }}
+
+
+                    <!-- <b-dropdown-item
+                      href="#"
+                      @click="removeAsAdmin(admin.user_id)"
+                    >
+                      <b-icon-trash-fill></b-icon-trash-fill>
+                      {{ $t("network.Remove_as_Admin") }}
                     </b-dropdown-item>
-                    <b-dropdown-item href="#" @click="removeFromNetworks(admin.user_id)">
-                      <b-icon-trash-fill></b-icon-trash-fill> {{ $t('network.Remove_From_Networks') }}
-                    </b-dropdown-item>
+                    <b-dropdown-item
+                      href="#"
+                      @click="removeFromNetworks(admin.user_id)"
+                    >
+                      <b-icon-trash-fill></b-icon-trash-fill>
+                      {{ $t("network.Remove_From_Networks") }}
+                    </b-dropdown-item> -->
+
+
                   </b-dropdown>
                 </span>
               </p>
             </div>
           </div>
-          <div v-else>{{ $t('network.No_Result_On_Admins') }}</div>
+          <div v-else>{{ $t("network.No_Result_On_Admins") }}</div>
         </b-skeleton-wrapper>
+      </b-col>
+      <b-col cols="12">
+        <infinite-loading @infinite="AinfiniteHandler" ref="AinfiniteLoading"   :identifier="ainfiniteId" >
+          <div class="text-red" slot="no-more">
+            {{ $t("network.No_More_Request") }}
+          </div>
+          <div class="text-red" slot="no-results">
+            {{ $t("network.No_More_Request") }}
+          </div>
+        </infinite-loading>
       </b-col>
     </b-row>
 
     <b-row class="mt-4">
       <b-col cols="12">
         <h6 class="font-weight-bolder">
-          Editors ({{nFormatter(editors.length)}})
+          Editors ({{ nFormatter(editorss.editor_count) }})
         </h6>
         <hr width="100%" />
         <b-skeleton-wrapper :loading="loading">
@@ -89,7 +122,7 @@
             </b-card>
           </template>
           <div class="scroll" v-if="editors.length != 0">
-            <div v-for="editor in editors" :key="editor.id">
+            <div v-for="(editor, index) in editors" :key="editor.id">
               <p class="">
                 <span class="">
                   <b-avatar
@@ -100,7 +133,14 @@
                     size="3.5rem"
                   ></b-avatar>
                   <h5 class="m-0 bold username d-inline-block ml-2">
-                    {{editor.fullname}}
+                   
+
+                    <router-link
+                        :to="'/profile/'+editor.user_id"
+                      >
+                          {{ editor.fullname }}
+                      </router-link>
+
                   </h5>
                 </span>
                 <span class="float-right mt-1">
@@ -111,29 +151,49 @@
                     no-caret
                   >
                     <template #button-content>
-                      <b-icon-three-dots-vertical></b-icon-three-dots-vertical
-                      ><span class="sr-only">{{ $t('network.Settings') }}</span>
+                      <b-icon-three-dots-vertical  variant="primary"></b-icon-three-dots-vertical
+                      ><span class="sr-only">{{ $t("network.Settings") }}</span>
                     </template>
-                    <b-dropdown-item href="#" @click="removeAsEditor(editor.user_id)">
-                      <b-icon-trash-fill></b-icon-trash-fill> Remove as Editor
+                    <b-dropdown-item
+                      href="#"
+                      @click="removeAsEditor(editor.user_id, index)"
+                    >
+                      <b-icon-trash-fill variant="primary"></b-icon-trash-fill> Remove as Editor
                     </b-dropdown-item>
-                    <b-dropdown-item href="#" @click="removeFromNetworks(editor.user_id)">
-                      <b-icon-trash-fill></b-icon-trash-fill> {{ $t('network.Remove_From_Networks') }}
+                    <b-dropdown-item
+                      href="#"
+                      @click="removeFromNetworks(editor.user_id, index,'editor')"
+                    >
+                      <b-icon-trash-fill variant="primary"></b-icon-trash-fill>
+                      {{ $t("network.Remove_From_Networks") }}
                     </b-dropdown-item>
                   </b-dropdown>
                 </span>
               </p>
             </div>
           </div>
-          <div v-else>{{ $t('network.No_Result_On_Admins') }}</div>
+          <div v-else>{{ $t("network.No_Result_On_Admins") }}</div>
         </b-skeleton-wrapper>
+      </b-col>
+
+      <b-col cols="12">
+        <infinite-loading @infinite="EinfiniteHandler"   :identifier="einfiniteId" ref="EinfiniteLoading">
+          <div class="text-red" slot="no-more">
+            {{ $t("network.No_More_Request") }}
+          </div>
+          <div class="text-red" slot="no-results">
+            {{ $t("network.No_More_Request") }}
+          </div>
+        </infinite-loading>
       </b-col>
     </b-row>
 
     <b-row class="mt-4">
-      <b-col cols="12" >
+      <b-col cols="12">
         <h6 class="font-weight-bolder">
-          {{ $t('network.Bussiness') }} ({{nFormatter(business.length)}})
+          {{ $t("network.Bussiness") }} ({{
+            nFormatter(businesss.business_count)
+          }})
         </h6>
         <hr width="100%" />
         <b-skeleton-wrapper :loading="loading">
@@ -145,7 +205,7 @@
             </b-card>
           </template>
           <div class="scroll" v-if="business.length != 0">
-            <div v-for="busines in business" :key="busines.id">
+            <div v-for="(busines,index) in business" :key="busines.id">
               <p class="">
                 <span class="">
                   <b-avatar
@@ -156,8 +216,12 @@
                     :text="busines.name.charAt(0)"
                     size="3.5rem"
                   ></b-avatar>
-                  <h5 class="m-0  username d-inline-block ml-2">
-                    {{busines.name}}
+                  <h5 class="m-0 username d-inline-block ml-2">
+                    {{ busines.name }}    <router-link
+                        :to="'/business/'+busines.business_id"
+                      >
+                           {{ busines.name }}
+                      </router-link>
                   </h5>
                 </span>
                 <span class="float-right mt-1">
@@ -168,26 +232,42 @@
                     no-caret
                   >
                     <template #button-content>
-                      <b-icon-three-dots-vertical></b-icon-three-dots-vertical
-                      ><span class="sr-only">{{ $t('network.Settings') }}</span>
+                      <b-icon-three-dots-vertical variant="primary"></b-icon-three-dots-vertical
+                      ><span class="sr-only">{{ $t("network.Settings") }}</span>
                     </template>
-                    <b-dropdown-item href="#" @click="removeFromNetworks(busines.business_id)">
-                      <b-icon-trash-fill></b-icon-trash-fill> {{ $t('network.Remove_From_Networks') }}
+                    <b-dropdown-item
+                      href="#"
+                      @click="removeBusinessFromNetwork(busines.business_id, index)"
+                    >
+                      <b-icon-trash-fill></b-icon-trash-fill>
+                      {{ $t("network.Remove_From_Networks") }}
                     </b-dropdown-item>
                   </b-dropdown>
                 </span>
               </p>
             </div>
           </div>
-          <div v-else>{{ $t('network.No_Result_On_Networks') }}</div>
+          <div v-else>{{ $t("network.No_Result_On_Networks") }}</div>
         </b-skeleton-wrapper>
+      </b-col>
+      <b-col col="12">
+        <infinite-loading @infinite="BinfiniteHandler"   :identifier="binfiniteId"  ref="BinfiniteLoading">
+          <div class="text-red" slot="no-more">
+            {{ $t("network.No_More_Request") }}
+          </div>
+          <div class="text-red" slot="no-results">
+            {{ $t("network.No_More_Request") }}
+          </div>
+        </infinite-loading>
       </b-col>
     </b-row>
 
-    <b-row class="mt-4" >
+    <b-row class="mt-4">
       <b-col cols="12">
         <h6 class="font-weight-bolder">
-          {{ $t('network.All_Members') }} ({{nFormatter(members.length)}})
+          {{ $t("network.All_Members") }} ({{
+            nFormatter(memberss.user_count)
+          }})
         </h6>
         <hr width="100%" />
         <b-skeleton-wrapper :loading="loading">
@@ -198,7 +278,8 @@
               <b-skeleton width="70%"></b-skeleton>
             </b-card>
           </template>
-          <div v-for="member in members" :key="member.id" >
+
+          <div v-for="(member, index ) in members" :key="member.id">
             <p class="">
               <span class="">
                 <b-avatar
@@ -209,7 +290,11 @@
                   size="3.5rem"
                 ></b-avatar>
                 <h5 class="m-0 username d-inline-block ml-2">
-                  {{member.fullname}}
+                     <router-link
+                        :to="'/profile/'+member.user_id"
+                      >
+                          {{ member.fullname }}
+                      </router-link>
                 </h5>
               </span>
               <span class="float-right mt-1">
@@ -220,14 +305,26 @@
                   no-caret
                 >
                   <template #button-content>
-                    <b-icon-three-dots-vertical></b-icon-three-dots-vertical
-                    ><span class="sr-only">{{ $t('network.Settings') }}</span>
+                    <b-icon-three-dots-vertical variant="primary"></b-icon-three-dots-vertical
+                    ><span class="sr-only">{{ $t("network.Settings") }}</span>
                   </template>
                   <b-dropdown-item href="#" @click="makeAdmin(member.user_id)">
-                    <b-icon-person-plus-fill></b-icon-person-plus-fill> {{ $t('network.Make_Admin') }}
+                    <b-icon-person-plus-fill variant="primary"></b-icon-person-plus-fill>
+                    {{ $t("network.Make_Editor") }}
                   </b-dropdown-item>
-                  <b-dropdown-item href="#" @click="removeFromNetworks(member.user_id)">
-                    <b-icon-trash-fill></b-icon-trash-fill> {{ $t('network.Remove_From_Networks') }}
+
+                  <b-dropdown-item href="#" @click=" handleFollow(member, 'user')">
+                    <b-icon-person-plus-fill  variant="primary"></b-icon-person-plus-fill>
+                    {{ member.is_follow !== 0  ? 'Unfollow' : 'Follow' }}  
+                  </b-dropdown-item>
+
+
+                  <b-dropdown-item
+                    href="#"
+                    @click="removeFromNetworks(member.user_id, index, 'member')"
+                  >   
+                    <b-icon-trash-fill variant="primary"></b-icon-trash-fill>
+                    {{ $t("network.Remove_From_Networks") }}
                   </b-dropdown-item>
                 </b-dropdown>
               </span>
@@ -236,9 +333,13 @@
         </b-skeleton-wrapper>
       </b-col>
       <b-col col="12">
-        <infinite-loading @infinite="infiniteHandler" ref="infiniteLoading">
-          <div class="text-red" slot="no-more">{{ $t('network.No_More_Request') }}</div>
-          <div class="text-red" slot="no-results">{{ $t('network.No_More_Request') }}</div>
+        <infinite-loading @infinite="infiniteHandler"  :identifier="infiniteId" ref="infiniteLoading">
+          <div class="text-red" slot="no-more">
+            {{ $t("network.No_More_Request") }}
+          </div>
+          <div class="text-red" slot="no-results">
+            {{ $t("network.No_More_Request") }}
+          </div>
         </infinite-loading>
       </b-col>
     </b-row>
@@ -246,49 +347,66 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "member",
   data() {
     return {
-      url:null,
+      url: null,
       perPage: null,
-      page: 0,
+      page: 1,
+      businessPage: 1,
+      adminpage: 1,
+      editorspage: 1,
+      
+
+      infiniteId:1,
+      ainfiniteId:188,
+      einfiniteId:889,
+      bnfiniteId:19999,
+
       currentPage: null,
       searchTitle: "",
       members: [],
-
+      business: [],
+      admins: [],
+      editors: [],
       currentIndex: -1,
-      loading: false
+      loading: false,
     };
   },
   computed: {
-    admins() {
+    adminss() {
       return this.$store.state.networkProfileMembers.admins;
     },
-    editors() {
+    editorss() {
       return this.$store.state.networkProfileMembers.editors;
     },
-    business() {
+    businesss() {
       return this.$store.state.networkProfileMembers.business;
-    }
+    },
+    memberss() {
+      return this.$store.state.networkProfileMembers.members;
+    },
   },
-  mounted(){
-    this.url = this.$route.params.id
-    this.getAdmins()
-    this.getEditors()
-    this.getBusiness()
-  },
-  methods:{
+  mounted() {
+    this.url = this.$route.params.id;
+    //  this.getAdmins()
+    //  this.getEditors()
+    //  this.getBusiness()
 
+    //  this.getmembers()
+  },
+  methods: {
     nFormatter(num) {
       if (num >= 1000000000) {
-        return (num / 1000000000).toFixed(1).replace(/\.0$/, '') + 'G';
+        return (num / 1000000000).toFixed(1).replace(/\.0$/, "") + "G";
       }
       if (num >= 1000000) {
-        return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+        return (num / 1000000).toFixed(1).replace(/\.0$/, "") + "M";
       }
       if (num >= 1000) {
-        return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+        return (num / 1000).toFixed(1).replace(/\.0$/, "") + "K";
       }
       return num;
     },
@@ -304,235 +422,471 @@ export default {
     },
 
     infiniteHandler($state) {
-      console.log("loop");
       const data = this.getRequestDatas(this.searchTitle);
-      console.log('keyword: '+data);
+      console.log("keyword: " + data);
       let formData = new FormData();
-      formData.append('keyword', data);
+      formData.append("keyword", data);
       let lien = "";
-      if(data == ""){
-          lien =  'network/'+this.url+'/members/list/'+this.page;
-      }else{ lien ='network/'+this.url+'/members/list/'+this.page+','+ formData}
-
+      if (data == "") {
+        lien = "network/" + this.url + "/members/list/" + this.page;
+      } else {
+        lien =
+          "network/" + this.url + "/members/list/" + this.page + "?keyword="+ this.searchTitle;
+      }
 
       this.axios
         .post(lien)
         .then(({ data }) => {
-        console.log(data);
-        console.log(this.page);
-        console.log(Object.values(data.data));
-        let object = Object.values(data.data);
-        if (object.length) {
-          console.log("Pushing data");
-          object.map((item) => {
-            this.members.push(item);
-            console.log(item);
-          })
-          this.page += 1;
-          $state.loaded();
-        } else {
-          $state.complete();
-        }
-      }) .catch((err) => {
-          console.log({ err: err });
-      })
+          console.log("hey you");
+          console.log(data);
+          if (data.data.users.length) {
+            console.log("hey you too");
+            console.log("loading data of page " + this.page);
+            console.log(data.data.users);
+            this.members.push(...data.data.users);
+
+            this.page += 1;
+            $state.loaded();
+          } else {
+            $state.complete();
+          }
+        })
+        .catch((err) => {
+          //  console.log({ err: err });
+        });
     },
 
+    //admin loading
 
+    AinfiniteHandler($state) {
+      const data =  this.searchTitle;
+  
+      let formData = new FormData();
+      formData.append("keyword", data);
+      let lien = "";
+      if (data == "") {
+        lien = "network/" + this.url + "/members/admin/" + this.adminpage;
+      } else {
+        lien =
+          "network/" +
+          this.url +
+          "/members/admin/" +    
+          this.adminpage  + "?keyword="+ this.searchTitle;
+      }
+
+      this.axios
+        .post(lien)
+        .then(({ data }) => {
+          console.log("hey you");
+          console.log(data);
+          if (data.data.admin.length) {
+            this.admins.push(...data.data.admin);
+
+            this.adminpage += 1;
+            $state.loaded();
+          } else {
+            $state.complete();
+          }
+        })
+        .catch((err) => {
+          //  console.log({ err: err });
+        });
+    },
+
+    //editor infinite loading
+
+    EinfiniteHandler($state) {
+      const data =  this.searchTitle;
+
+      let formData = new FormData();
+      formData.append("keyword", data);
+      let lien = "";
+      if (data == "") {
+        lien = "network/" + this.url + "/members/editor/" + this.page;
+      } else {
+        lien =
+          "network/" +
+          this.url +
+          "/members/editor/" +
+          this.page  + "?keyword="+ this.searchTitle;
+      }
+
+      this.axios
+        .post(lien)
+        .then(({ data }) => {
+          if (data.data.editor.length) {
+            this.editors.push(...data.data.editor);
+
+            this.editorspage += 1;
+            $state.loaded();
+          } else {
+            $state.complete();
+          }
+        })
+        .catch((err) => {
+          //  console.log({ err: err });
+        });
+    },
+
+    //admin loading
+
+    //business infinite loading
+
+    BinfiniteHandler($state) {
+      const data = this.searchTitle;
+      console.log("keyword: " + data);
+      let formData = new FormData();
+      formData.append("keyword", data);
+      let lien = "";
+      if (data == "") {
+        this.url + "/members/business";
+        lien = "network/" + this.url + "/members/business/" + this.businessPage;
+      } else {
+        lien =
+          "network/" +
+          this.url +
+          "/members/business/" +
+          this.businessPage + "?keyword="+ this.searchTitle;
+      }
+
+      this.axios
+        .post(lien)
+        .then(({ data }) => {
+          console.log("hey you");
+          console.log(data);
+          if (data.data.businesses.length) {
+            console.log("hey you too");
+            console.log("loading data of page " + this.page);
+            console.log(data.data.businesses);
+            this.business.push(...data.data.businesses);
+
+            this.businessPage += 1;
+            $state.loaded();
+          } else {
+            $state.complete();
+          }
+        })
+        .catch((err) => {
+          //  console.log({ err: err });
+        });
+    },
 
     getAdmins() {
       this.loading = true;
-      const data = this.getRequestDatas(this.searchTitle);
-      console.log('keyword: '+data);
+      const data =  this.searchTitle;
+      console.log("keyword: " + data);
       this.$store
         .dispatch("networkProfileMembers/getadmins", {
-          'path':this.url+"/members/admin",
-          'keyword':data
-          })
+          path: this.url + "/members/admin",
+          keyword: data,
+        })
         .then(() => {
-          console.log('Admins Available');
+          console.log("Admins Available");
           this.loading = false;
         })
-        .catch(err => {
+        .catch((err) => {
+          console.log({ err: err });
+          this.loading = false;
+        });
+    },
+
+    getmembers() {
+    
+      const data =  this.searchTitle;
+      console.log("keyword: " + data);
+      this.$store
+        .dispatch("networkProfileMembers/getmembers", {
+          path: this.url + "/members/list",
+          keyword: data,
+        })
+        .then(() => {
+          console.log("members Available");
+          this.loading = false;
+        })
+        .catch((err) => {
           console.log({ err: err });
           this.loading = false;
         });
     },
 
     getEditors() {
-      this.loading = true;
-      const data = this.getRequestDatas(this.searchTitle);
-      console.log('keyword: '+data);
+     
+      const data =  this.searchTitle;
+      console.log("keyword: " + data);
       this.$store
         .dispatch("networkProfileMembers/geteditors", {
-          'path':this.url+"/members/editor",
-          'keyword':data
-          })
+          path: this.url + "/members/editor",
+          keyword: data,
+        })
         .then(() => {
-          console.log('Editors Available');
+          console.log("Editors Available");
           this.loading = false;
         })
-        .catch(err => {
+        .catch((err) => {
           console.log({ err: err });
           this.loading = false;
         });
-    },
- 
-    getBusiness() {
-      this.loading = true;
-      const data = this.getRequestDatas(this.searchTitle);
-      this.$store
-        .dispatch("networkProfileMembers/getbusiness", {
-          'path':this.url+"/members/business",
-          'keyword':data
-          })
-        .then(() => {
-          console.log('Business Available');
-          this.loading = false;
-        })
-        .catch(err => {
-          console.log({ err: err });
-          this.loading = false;
-        });
-    },
-    search() {
-      this.loading = true;
-      console.log("searching...");
-      console.log(this.searchTitle);
-      this.$nextTick(() => {
-        this.members = [];
-        this.page = 0;
-        this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
-      });
-      this.getAdmins();
-      this.getEditors();
-      this.getBusiness();
     },
 
-    makeAdmin: function(user_id){
+    getBusiness() {
+    
+      const data =  this.searchTitle;
+      this.$store
+        .dispatch("networkProfileMembers/getbusiness", {
+          path: this.url + "/members/business",
+          keyword: data,
+        })
+        .then(() => {
+          console.log("Business Available");
+          this.loading = false;
+        })
+        .catch((err) => {
+          console.log({ err: err });
+          this.loading = false;
+        });
+    },
+
+    search() {
+
+       this.infiniteId+= 1;
+      this.ainfiniteId+= 1;
+      this.einfiniteId+= 1;
+      this.binfiniteId+= 1;
+
+       this.page= 1;
+       this. businessPage=1;
+      this. adminpage= 1;
+      this.editorspage= 1;
+       
+ 
+
+      this.members = [];
+      this.business = [];
+      this.admins = [];
+      this.editors = [];
+
+      this.$refs.infiniteLoading.attemptLoad();
+      this.$refs.AinfiniteLoading.attemptLoad();
+      this.$refs.EinfiniteLoading.attemptLoad();
+      this.$refs.EinfiniteLoading.attemptLoad();
+    },
+
+    makeAdmin: function (user_id) {
       console.log(user_id);
       this.loading = true;
-       let path = {
-        url:this.url,
-        id: user_id 
-       };
+      let path = {
+        url: this.url,
+        id: user_id,
+      };
 
       this.$store
         .dispatch("networkProfileMembers/makeAdmin", path)
         .then(({ data }) => {
           console.log(data);
-        console.log('ohh yeah');
-        this.flashMessage.show({
-          status: "success",
-          message: 'make as editor successfuly'
+          console.log("ohh yeah");
+          this.flashMessage.show({
+            status: "success",
+            message: "make as editor successfuly",
+          });
+          this.searchTitle = "";
+          // this.getMembers();
+          this.getAdmins();
+          this.getBusiness();
+          this.loading = false;
+        })
+        .catch((err) => {
+          console.log({ err: err });
+          this.loading = false;
+          this.flashMessage.show({
+            status: "error",
+            message: this.$t("network.Unable_To_Set_Member_As_Admin"),
+          });
         });
-        this.searchTitle = "";
-        // this.getMembers();
-        this.getAdmins();
-        this.getBusiness();
-        this.loading = false;
-      })
-      .catch(err => {
-        console.log({ err: err });
-        this.loading = false;
-        this.flashMessage.show({
-          status: "error",
-          message: this.$t('network.Unable_To_Set_Member_As_Admin')
-        });
-      });
     },
-    removeAsAdmin: function(user_id){
+    removeAsAdmin: function (user_id) {
       this.loading = true;
-      console.log("----",user_id);
+      console.log("----", user_id);
       let path = {
-        url:this.url,
-        id: user_id
+        url: this.url,
+        id: user_id,
       };
       this.$store
         .dispatch("networkProfileMembers/removeAsAdmin", path)
         .then(({ data }) => {
           console.log(data);
-        console.log('ohh yeah');
-        this.searchTitle = "";
-        // this.getMembers();
-        this.getAdmins();
-        this.getBusiness();
-        this.loading = false;
-        this.flashMessage.show({
-          status: "success",
-          message: this.$t('network.Member_Successfully_Removed_As_Admin')
+          console.log("ohh yeah");
+          this.searchTitle = "";
+          // this.getMembers();
+          this.getAdmins();
+          this.getBusiness();
+          this.loading = false;
+          this.flashMessage.show({
+            status: "success",
+            message: this.$t("network.Member_Successfully_Removed_As_Admin"),
+          });
+        })
+        .catch((err) => {
+          console.log({ err: err });
+          this.loading = false;
+          this.flashMessage.show({
+            status: "error",
+            message: this.$t("network.Unable_To_Remove_Member_As_Admin"),
+          });
         });
-      })
-      .catch(err => {
-        console.log({ err: err });
-        this.loading = false;
-        this.flashMessage.show({
-          status: "error",
-          message: this.$t('network.Unable_To_Remove_Member_As_Admin')
-        });
-      });
-		},
-    removeAsEditor: function(user_id){
-      this.loading = true;
-      console.log("----",user_id);
+    },
+    removeAsEditor: function (user_id, index) {
+     
       let path = {
-        url:this.url,
-        id: user_id
+        url: this.url,
+        id: user_id,
       };
       this.$store
         .dispatch("networkProfileMembers/removeAsEditor", path)
         .then(({ data }) => {
           console.log(data);
-        console.log('ohh yeah');
-        this.searchTitle = "";
-        this.getEditors();
-        this.loading = false;
-        this.flashMessage.show({
-          status: "success",
-          message: "Member Successfully Removed As Editor"
+        
+         
+       this.$delete(this.editors,index);
+      
+      
+         
+          this.flashMessage.show({
+            status: "success",
+            message: "Member Successfully Removed As Editor",
+          });
+        })
+        .catch((err) => {
+          console.log({ err: err });
+         
+          this.flashMessage.show({
+            status: "error",
+            message: "Unable To Remove Member As Editor",
+          });
         });
-      })
-      .catch(err => {
-        console.log({ err: err });
-        this.loading = false;
-        this.flashMessage.show({
-          status: "error",
-          message: "Unable To Remove Member As Editor"
-        });
-      });
-		},
-    removeFromNetworks: function(user_id){
-      this.loading = true;
+    },
+
+
+
+     
+    removeBusinessFromNetwork: function (user_id, index) {
+
+      // this.loading = true;
       let path = {
-        url:this.url,
-        id: user_id
+        url: this.url,
+        id: user_id,
+      };
+      this.$store
+        .dispatch("networkProfileMembers/removeAsremoveBusinessFromNetworkAdmin", path)
+        .then(({ data }) => {
+          console.log(data);
+          console.log("ohh yeah");
+          this.searchTitle = "";
+        
+
+     
+       this.$delete(this.business,index);
+ 
+
+         
+          this.flashMessage.show({
+            status: "success",
+            message: this.$t(
+              "network.Member_Successfully_Removed_From_Network"
+            ),
+          });
+        })
+        .catch((err) => {
+          console.log({ err: err });
+          this.loading = false;
+          this.flashMessage.show({
+            status: "error",
+            message: this.$t("network.Unable_to_Remove_Member_From_Network"),
+          });
+        });
+    },
+
+
+
+
+    removeFromNetworks: function (user_id, index, type) {
+
+      // this.loading = true;
+      let path = {
+        url: this.url,
+        id: user_id,
       };
       this.$store
         .dispatch("networkProfileMembers/removeAsAdmin", path)
         .then(({ data }) => {
           console.log(data);
-        console.log('ohh yeah');
-        this.searchTitle = "";
-        // this.getMembers();
-        this.getAdmins();
-        this.getBusiness();
-        this.loading = false;
-        this.flashMessage.show({
-          status: "success",
-          message: this.$t('network.Member_Successfully_Removed_From_Network')
-        });
-      })
-      .catch(err => {
-        console.log({ err: err });
-        this.loading = false;
-        this.flashMessage.show({
-          status: "error",
-          message: this.$t('network.Unable_to_Remove_Member_From_Network')
-        });
-      });
-		},
+          console.log("ohh yeah");
+          this.searchTitle = "";
+        
 
-  }
+
+         if(type=="member"){
+         this.$delete(this.members,index);
+      }
+
+      if(type=="editor"){
+       this.$delete(this.editors,index);
+      }
+
+      if(type=="busines"){
+       this.$delete(this.business,index);
+      }
+
+         
+          this.flashMessage.show({
+            status: "success",
+            message: this.$t(
+              "network.Member_Successfully_Removed_From_Network"
+            ),
+          });
+        })
+        .catch((err) => {
+          console.log({ err: err });
+          this.loading = false;
+          this.flashMessage.show({
+            status: "error",
+            message: this.$t("network.Unable_to_Remove_Member_From_Network"),
+          });
+        });
+    },
+
+
+
+    async handleFollow(user, type) {
+     
+
+      const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
+      const nextFollowState = user.is_follow === 0 ? 1 : 0;
+      const data = {
+        id: user.user_id,
+        type: type,
+      };
+
+      await axios
+        .post(uri, data)
+        .then((response) => {
+       
+          user.is_follow = nextFollowState;
+
+            this.flashMessage.show({
+            status: "success",
+            message: "success",
+          });
+        
+        })
+        .catch((err) => {
+          console.log(err);
+       
+        });
+    },
+
+
+
+  },
 };
 </script>
 
@@ -540,10 +894,10 @@ export default {
 hr {
   border: solid 1px dimgray;
 }
-.scroll{
+.scroll {
   max-height: 200px;
   overflow-y: scroll;
+  overflow-x: hidden;
   scrollbar-width: thin;
 }
-
 </style>

@@ -323,6 +323,11 @@ export default {
 }
 
 @media only screen and (min-width: 768px) {
+
+   .btn{
+    font-size:13px !important;
+  }
+  
   .title {
     font-size: 20px;
     color: black;

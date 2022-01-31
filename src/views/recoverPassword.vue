@@ -95,6 +95,18 @@
               />
             </md-field>
 
+
+
+
+          <p class="mt-5 mt-md-2"   v-if="showOtp && !showConfirm "  >       
+            {{ $t("verification.Didnt_recieved_the_verification_OTP") }}
+            <b-link @click.prevent="resendOtp()">   
+              {{ $t("verification.Resend_OTP") }}
+            </b-link>
+          </p>
+
+          
+
          <div class="center"    v-if="showOtp && !showConfirm " >
             <b-button
               class="buttonn mt-5"
@@ -168,7 +180,7 @@
                 type="text"
                 name="tel"
                 id="tel"
-                v-model="form.tel"
+                v-model="form.phone"
                 required
               />
             </md-field>
@@ -222,12 +234,7 @@
           <br />
           <br />
 
-          <!-- <p class="mt-5 mt-md-2">
-            {{ $t("verification.Didnt_recieved_the_verification_OTP") }}
-            <b-link @click.prevent="resendOtp()">
-              {{ $t("verification.Resend_OTP") }}
-            </b-link>
-          </p> -->
+         
         </div>
 
         <div></div>
@@ -320,22 +327,23 @@ export default {
       }
     },
 
+
+
     resendOtp() {
       let url = "";
-      if (this.chosemethod == "tel") {
-        url = "user/phone/sendOtp";
+     
+      if (this.chosemethod == "email") {
+        url = "user/resetemail";
       } else {
-        url = "user/email/sendOtp";
+        url = "user/reset";
       }
 
-      this.sending = true;
-
-      axios
-        .post(url, {
-          email: this.auth.email,
-          phone: this.auth.phone,
-        })
-        .then((response) => {
+      this.$store
+        .dispatch("auth/verifyuser", {
+          url: url,
+          email: this.form.email,
+          phone: this.form.phone,
+        }).then((response) => {
           if (response.status === 200) {
             console.log("response: ", response);
             this.flashMessage.show({
@@ -352,35 +360,11 @@ export default {
         .catch((err) => {
           console.log({ err: err });
 
-          if (err.response.status == 422) {
-            console.log({ err: err });
-            console.log(err.response.data.message);
-
-            this.flashMessage.show({
-              status: "error",
-
-              message: this.flashErrors(err.response.data.errors),
-              blockClass: "custom-block-class",
-            });
-          } else {
-            this.flashMessage.show({
-              status: "error",
-
-              message: this.$t("auth.resend_otp_failed"),
-            });
-            console.log({ err: err });
-          }
+         
 
           this.sending = false;
         });
     },
-
-
-
-
-
-
-
 
     
     VerifyOtp() {

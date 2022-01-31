@@ -7,12 +7,16 @@
         <b-col cols="12" class="p-3">
           <b-tabs content-class="mt-3" pills small fill lazy v-model="tabIndex">
             <b-tab :title="$t('profileowner.Posts')" href="#post">
-              <Post />
+              <Post @on:media="(value) => goToMedia(value)" />
             </b-tab>
-            <b-tab :title="$t('profileowner.About')" href="#about"><About /></b-tab>
-                <b-tab :title="$t('profileowner.Media')" href="#media">
+            <b-tab :title="$t('profileowner.About')" href="#about">
+              <About />
+            </b-tab>
+            
+            <b-tab :title="$t('profileowner.Media')" href="#media">
               <Media type="profile" />
             </b-tab>
+            
             <b-tab :title="$t('profileowner.Business')" href="#business" class="m-0 p-0">
               <Bussiness />
             </b-tab>
@@ -28,11 +32,14 @@
         </b-col>
       </b-row>
     </div>
+
+    <Footer> </Footer>
   </div>
 </template>
 
 <script>
 import navbar from '@/components/navbar';
+import Footer from '@/components/footer';
 import headPage from '@/components/ownerHeadpage';
 import Post from '@/components/owner/tabs/posts';
 import About from '@/components/owner/tabs/about';
@@ -53,6 +60,7 @@ export default {
     navbar,
     headPage,
     Post,
+    Footer,
     About,
     Media,
     Networks,
@@ -75,6 +83,14 @@ export default {
     ...mapMutations({
       auth: 'auth/profilConnected',
     }),
+
+    goToMedia(value) {
+
+      if (value)
+        this.tabIndex = 2
+      
+      console.log("go to media")
+    },
 
     async getAuth() {
       const response = await this.$repository.share.switch(null, 'reset');

@@ -111,7 +111,7 @@
                 <b-form-textarea
                   id="textarea-small"
                   autofocus
-                  class="mb-2 border-none"
+                  class="mb-2 border-none mt-3"
                   :placeholder="$t('businessowner.Post_a_business_update')"
                   v-model="edit_description"
                 ></b-form-textarea>
@@ -122,7 +122,7 @@
                   <b-form-textarea
                     id="textarea-small"
                     autofocus
-                    class="mb-2 border-none"
+                    class="mb-2 border-none mt-3"
                     :placeholder="$t('businessowner.Post_a_business_update')"
                     v-model="edit_description"
                   ></b-form-textarea>
@@ -463,7 +463,7 @@
                 <b-form-textarea
                   id="textarea-small"
                   autofocus
-                  class="mb-2 border-none"
+                  class="mb-2 border-none mt-3"
                   :placeholder="$t('businessowner.Post_a_business_update')"
                   v-model="createPost.postBusinessUpdate"
                 ></b-form-textarea>
@@ -804,7 +804,6 @@ export default {
 
       this.delete.forEach((value, index) => {
         formData2.append("deleteImg[" + index + "]", value.id);
-
         console.log(value);
       });
 

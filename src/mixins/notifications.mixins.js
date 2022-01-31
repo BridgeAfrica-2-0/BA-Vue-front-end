@@ -1,8 +1,9 @@
 
 import { initPusher } from '@/pusher-notification';
 import { initRedis } from '@/redis-notification'
-
 import { mapGetters, mapActions, mapMutations } from "vuex";
+
+import {notification} from "@/helpers"
 
 export const Pusher = {
 
@@ -34,7 +35,7 @@ export const Redis = {
 
   data: () => ({
     strategy: null,
-    hasInitRedis: false
+    hasInitRedis: false,
   }),
 
   computed: {
@@ -49,8 +50,7 @@ export const Redis = {
       deep: true,
       handler: function (newValue) {
         initRedis(this.$store.state.auth.user.accessToken)
-        if (this.$store.state.auth.profilConnected && this.$store.state.auth.profilConnected.user_type)
-          this.updateEventListener(this.$store.state.auth.profilConnected.user_type)
+        this.updateEventListener(this.$store.state.auth.profilConnected.user_type)
       }
     },
 
@@ -67,16 +67,12 @@ export const Redis = {
     listenBusinessEvent() {
 
       const $event = `business-channel.${this.profile.id}`
+      console.log($event)
       window.Redis.private($event)
         .listen(".BusinessNotificationEvent", payload => {
           console.log(payload)
           this.newNotificationBusiness({ init: false, data: payload.data })
         })
-
-      /* this.$echo.private($event).listen('BusinessNotificationEvent', (payload) => {
-         console.log(payload)
-        this.newNotificationBusiness({ init: false, data: payload.data })
-      }); */
     },
 
     listenProfileEvent() {
@@ -87,26 +83,27 @@ export const Redis = {
 
       window.Redis.private($event)
         .listen(".UserNotification", payload => {
+          
+          const type  = notification(payload.notification)
+          
+          this.$notify({
+            text: `new notification for user: ${payload.notification.notification_text}`,
+          });
+
           this.newNotificationProfile({ init: false, data: payload.notification })
         })
-
-      /* this.$echo.private($event).listen('UserNotification', (payload) => {
-        this.newNotificationProfile({ init: false, data: payload.notification })
-      }); */
     },
 
     listenNetworkeEvent() {
 
       const $event = `network-channel.${this.profile.id}`;
 
+      console.log($event)
+
       window.Redis.private($event)
         .listen(".NetworkNotification", payload => {
           this.newNotificationNetwork({ init: false, data: payload.notification })
         })
-
-      /* this.$echo.private($event).listen('NetworkNotification', (payload) => {
-        this.newNotificationNetwork({ init: false, data: payload.notification })
-      }); */
     },
 
     updateEventListener(type) {
@@ -122,12 +119,18 @@ export const Redis = {
 
   created() {
     console.log('in notification mixins, check it')
+    initRedis(this.$store.state.auth.user.accessToken)
 
-    this.strategy = {
+    /* this.strategy = {
       user: () => this.listenProfileEvent(),
       network: () => this.listenNetworkeEvent(),
       business: () => this.listenBusinessEvent()
-    }
+    } */
+
+
+    this.listenProfileEvent()
+    this.listenNetworkeEvent()
+    this.listenBusinessEvent()
 
   }
 }

@@ -36,6 +36,37 @@
           >
             <b-form-input
               class="mt-2 mb-2"
+              v-model="newphone"
+              :placeholder="$t('profileowner.phone')"
+              type="number"
+              required
+            ></b-form-input>
+
+            <div class="fosrm-group text-right w-100">
+              <button type="submit" class="btn btn-primary orange">
+                {{ $t("profileowner.Save") }}
+              </button>
+            </div>
+          </form>
+        </div>
+      </b-modal>
+
+      <b-modal
+        id="phonemodal1"
+        :title="$t('profileowner.Add_Phone_Number')"
+        hide-footer
+        ref="phonemodal1"
+        @close="cancel"
+      >
+        <div class="modal-body">
+          <form
+            class="form"
+            action=""
+            method="post"
+            @submit.prevent="savePhone"
+          >
+            <b-form-input
+              class="mt-2 mb-2"
               v-model="info.user.phone"
               :placeholder="$t('profileowner.phone')"
               type="number"
@@ -315,8 +346,8 @@
           type="button"
           class="btn btn-outline-primary float-md-right"
           data-toggle="modal"
-          data-target="#phonemodal"
-          v-b-modal.phonemodal
+          data-target="#phonemodal1"
+          v-b-modal.phonemodal1
         >
           {{ $t("profileowner.Edit") }}
         </button>
@@ -331,7 +362,7 @@
           {{ $t("profileowner.Add_Contacts") }} </a
         ><br />
 
-        <div v-for="con in info.user_contact" :key="con.id">
+        <div v-for="con in info.user_contact" :key="con.id"> 
           <span> {{ con.phone_number }} </span>
           <ul class="website navbar-nav pull-right">
             <li class="nav-item dropdown">
@@ -481,6 +512,7 @@
 
 <script>
 import moment from "moment";
+import axios from 'axios';
 export default {
   data() {
     const now = new Date();
@@ -505,6 +537,7 @@ export default {
       websiteInput: null,
       sociallinkInput: null,
       index: null,
+      newphone: null
     };
   },
   created() {
@@ -550,7 +583,7 @@ export default {
 deleteContact(id){
       console.log("---",id)
       
-      this.$store.dispatch("profile/deleteContact", {id: id})
+      this.$store.dispatch("profile/deleteContact", id)
       .then(res => {
         this.$store.dispatch("profile/loadUserPostIntro", null);
       });
@@ -623,10 +656,24 @@ deleteContact(id){
           this.$refs["modal-7"].hide();
         });
     },
+
+    savePhone(){
+      console.log('--',this.info.user.phone);
+      let data = { phone: this.info.user.phone}
+      axios.post('profile/update-phone', data)
+      .then(res => {
+        console.log(res)
+        this.$store.dispatch("profile/loadUserPostIntro", null);
+         this.$refs["phonemodal1"].hide()
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    },
     savePhoneNumber() {
       this.$store
         .dispatch("profile/updateUserBasicInfosMobilePhones", {
-          mobilePhones: this.info.user.phone,
+          mobilePhones: this.newphone,
         })
         .then((response) => {
           this.$store.dispatch("profile/loadUserPostIntro", null);

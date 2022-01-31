@@ -92,6 +92,7 @@ new MapboxGeocoder({
 accessToken: mapboxgl.accessToken,
 mapboxgl: mapboxgl,
 countries: "cm",
+placeholder: "Address"
 }).
 on("result", (e) => { 
         let response = e.result;
@@ -123,6 +124,10 @@ on("result", (e) => {
   width: 100%;
 }
 
+.mapboxgl-ctrl-top-right{
+    background-color: black !important;
+    font-size: 100px;
+  }
 .geocoder {
   position: absolute;
   z-index: 1;

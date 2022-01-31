@@ -14,6 +14,7 @@
     >
       <router-view />
     </transition>
+    <notifications group="app" position="bottom right" classes="my-custom-class"/>
   </div>
 </template>
 <script>

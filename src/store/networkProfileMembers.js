@@ -73,11 +73,24 @@ export default {
         return data;
       })
     },
+
+
+    removeBusinessFromNetwork({commit}, data ){
+    
+      return axios
+      .delete(`network/${data.url}/business/remove/${data.id}`)
+      .then(({ data }) => {
+        console.log(data);
+        return data;
+      })
+    },
+
+
     removeAsEditor({commit}, data ){
       console.log("removeAsEditor");
       console.log(data);  
       return axios
-      .delete(`network/${data.url}/remove/editor/${data.id}`)
+      .put(`network/${data.url}/remove/editor/${data.id}`)
       .then(({ data }) => {
         console.log(data);
         return data;
@@ -115,7 +128,19 @@ export default {
           commit("setbusiness", data.data);
         console.log(data);
       })
-    }
+    },
+
+    getmembers( {commit}, data ){
+     
+     
+    return axios
+    .post(`network/${data.path}`, { "keyword": data.keyword})   
+    .then(({ data }) => {
+        commit("setmembers", data.data);
+        
+      console.log(data);
+    })
+  }
 
   },
 };

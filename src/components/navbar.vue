@@ -366,7 +366,7 @@
                       <span class="mr-2 w-full"
                         ><fas-icon class="violet search" :icon="['fas', 'cogs']"
                       /></span>
-                      {{ $t("general.Account_Settings") }}
+                      {{ $t("general.Account_Settings") }}    
                     </router-link>
                     <hr class="h-divider" />
                     <div class="other-menu suggest-item cursor-pointer">
@@ -715,7 +715,6 @@ export default {
 
     profileSenderImange(image) {
       console.log(image)
-      console.log('**************************************')
       const picture = image.hasOwnProperty('profile_picture')
         ? image.profile_picture 
         : image.hasOwnProperty('logo_path')

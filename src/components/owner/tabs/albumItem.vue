@@ -2,15 +2,14 @@
   <div class ="createp img-gall predit2"
     @mouseover="upHere = true"
     @mouseleave="upHere = false"
-    
-    
   >
     <a>
       <span>
         <img 
           class="card-img album-img img-fluid" 
           :src="cover(album.cover)" 
-          :style="getStyle" />
+          :style="getStyle" 
+        />
       </span>
       <div class="createdesc botmedia">
         <div class="botmediadess-position" v-if="loading">

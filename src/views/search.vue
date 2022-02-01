@@ -336,7 +336,7 @@
                   size="lg"
                 />
 
-                <h6>{{ $t("search.People") }}</h6>
+                <h6>{{ $t("search.People") }}</h6>  anna
               </div>
 
               <MiniPeople />
@@ -2364,6 +2364,8 @@ export default {
 </script>
 
 <style scoped>
+
+
 .icon-color {
   color: #e75c18;
 }

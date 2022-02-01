@@ -11,7 +11,7 @@
         <div class="col-md-12 col-lg-2 col-xl-2 text-center">
           <a class="d-inline-block align-top mt-1" href="#">
             <img src="@/assets/logo.png" alt="" class="balogo desktop" loading="lazy" />
-            <img src="@/assets/img/BAC-clear-dotted-logo.png" alt="" class="balogo mobile" loading="lazy" />
+            <!-- <img src="@/assets/img/BAC-clear-dotted-logo.png" alt="" class="balogo mobile" loading="lazy" /> -->
           </a>
         </div>
       <div class="container p-0">
@@ -151,7 +151,8 @@ export default {
     height: 50px ;
   }
   .desktop{
-    display: none;
+    /* display: none; */
+    width: 200px;
   }
 
   .navstyle{

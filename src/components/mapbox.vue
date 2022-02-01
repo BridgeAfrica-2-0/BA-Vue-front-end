@@ -23,8 +23,15 @@
   </div>
 </template>
 <script>
+/** 
+  *this component is for display  the mapbox in the system  
+*/
 import { MglMap, MglPopup, MglMarker } from "vue-mapbox";
 export default {
+  /**
+   * this props contains the data that will be displayed by the mapbox
+   * @public
+   */
   props: ["business"],
   components: {
     MglMap,

@@ -347,6 +347,9 @@
 </template>
 
 <script>
+/**
+ * this component is used to display the introductory information of a business it also allows to edit them
+ */
 import AutocompleteLocation from "@/components/AutocompleteLocation";
 import VuePhoneNumberInput from "vue-phone-number-input";
 import axios from "axios";
@@ -446,7 +449,10 @@ export default {
      * Used to edit biography
      * @return void
      */
-
+/**
+ * this method is used to retrieve the information provided by the mapbox
+ * @private
+ */
     getGeoCoderResult(response) {
       this.form.address = response.address;
       console.log('teststststst')
@@ -456,7 +462,12 @@ export default {
       console.log("yoo mother fuckers");
       console.log(response);
     },
-
+/**
+ * this method is used to properly format the country, 
+ * region, city, town and district in order to send this
+ *  in the correct format expected by the api
+ * @private
+ */
     LocationFormat(data){
       let keyword = '';
       data.map(item =>{
@@ -476,7 +487,10 @@ export default {
       })
       return keyword.substring(0, keyword.length-1);
     },
-
+    /**
+     * this method is used to transform the elements of the array into a character string
+     * @private
+     */
     ArrayString(words){
        let keyword = '';
         words.map(item =>{
@@ -485,6 +499,12 @@ export default {
 
         return keyword.substring(0, keyword.length-1);
     },
+
+    /**
+     * this method is used to transform the elements of the array into a character string
+     * in particular for the  subcategory Id
+     * @private
+     */
 
     stringArray(words){
          let keyword = "";
@@ -500,6 +520,12 @@ export default {
 
         return keyword.substring(0, keyword.length-1);
     },
+
+    /**
+     * this method is used to transform the elements of the array into a character string
+     * in particular for the  category Id
+     * @private
+     */
     stringArray1(words){
         let keyword = '';
         words.map(item =>{
@@ -514,6 +540,11 @@ export default {
         return keyword.substring(0, keyword.length-1);
     },
 
+    /**
+     * this method makes it possible to retrieve information relating to the business
+     * @private
+     */
+
     editBusiness() {
       console.log("editBusiness");
       this.axios
@@ -526,6 +557,8 @@ export default {
           console.log({ err: err });
         });
     },
+
+    
     setEditData(business) {
       console.log("setting editBusiness data");
       console.log(business);

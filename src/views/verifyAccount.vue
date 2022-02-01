@@ -296,13 +296,21 @@ export default {
 
     Verify() {
       this.sending = true;
+      let phone=null;
+      if(this.chosemethod == "tel"){
+
+        phone=this.auth.phone;
+      }else{
+
+        phone = this.auth.email; 
+      }
      
       this.$store
         .dispatch("auth/verify", {
           OTP: this.token,
           id: this.auth.id,
-          phone: this.auth.email,
-         // phone: this.auth.phone,
+          phone: phone,
+         
         })
         .then((response) => {
           this.sending = false;

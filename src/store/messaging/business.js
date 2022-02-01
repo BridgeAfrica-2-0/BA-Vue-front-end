@@ -1,5 +1,4 @@
 import axios from "axios";
-import business from "../business";
 
 export default {
     namespaced: true,

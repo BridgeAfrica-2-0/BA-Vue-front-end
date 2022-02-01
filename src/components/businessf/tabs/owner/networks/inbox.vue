@@ -2935,12 +2935,12 @@ export default {
       // socket: io(process.env.VUE_APP_CHAT_SERVER_URL_DEV, {
       //   transports: ["websocket", "polling", "flashsocket"],
       // }),
-      socket: io(process.env.VUE_APP_CHAT_SERVER_URL, {
-        transports: ["websocket", "polling", "flashsocket"],
-      }),
-      // socket: io("http://localhost:7000", {
+      // socket: io(process.env.VUE_APP_CHAT_SERVER_URL, {
       //   transports: ["websocket", "polling", "flashsocket"],
       // }),
+      socket: io("http://localhost:7000", {
+        transports: ["websocket", "polling", "flashsocket"],
+      }),
 
       nameSpace: {
         status: false,
@@ -3664,7 +3664,7 @@ export default {
 
       console.log("Group members:", this.groupMembers);
       let data = {};
-      if (this.groupMembers.length) {
+      if (this.groupMembers.length > 0) {
         // this.groupMembers.map((member)=>{
         //   if()
         // })
@@ -3720,7 +3720,7 @@ export default {
           message: this.input,
           attachment: this.file,
         };
-
+        console.log("here:...", data);
         this.formData.append("attachment", this.file);
         this.socket.emit("groupMessage", data);
       }

@@ -24,22 +24,45 @@
 
 <script>
 export default {
+  /**
+   * The custom HTML `<BtnCtaMessage>` component.
+   *
+   * @author Edouard Yonga
+   * Copyright (c) Bridge Africa. All rights reserved.
+*/
+  name: 'BtnCtaMessage',
   props: {
+    /**
+       * Element is the data of the disired inbox redirection
+       * A call to action button that redirect the clicked element to his inbox
+    */
     element: {
       type: Object,
       required: true,
     },
+    /**
+       * Take the Type of inbox (business,profile or network)
+    */
     type: {
       type: String,
     },
+    /**
+       * To differentiate the styling of the btn 
+    */
     header: {
       default: false,
       type: Boolean,
     },
+    /**
+       * Boolean that will later be used in the inbox to extrat the business ID of the product
+    */
     isProduct: {
       default: false,
       type: Boolean,
     },
+    /**
+       * To difrentiat the text on the button 
+    */
     isBuyNow: {
       default: false,
       type: Boolean,
@@ -65,7 +88,15 @@ export default {
   },
 
   methods: {
+    /**
+       * This will be ignored on rendering
+       * @private
+    */
     cta() {
+       /**
+         * Fired when the button is clicked.
+         * 
+         */
       console.log(this.element);
       this.$store.commit("businessChat/setSelectedChat", {
         isProduct: this.isProduct,

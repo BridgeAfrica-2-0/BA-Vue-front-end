@@ -2935,12 +2935,13 @@ export default {
       // socket: io(process.env.VUE_APP_CHAT_SERVER_URL_DEV, {
       //   transports: ["websocket", "polling", "flashsocket"],
       // }),
-      // socket: io(process.env.VUE_APP_CHAT_SERVER_URL, {
-      //   transports: ["websocket", "polling", "flashsocket"],
-      // }),
-      socket: io("http://localhost:7000", {
+      socket: io(process.env.VUE_APP_CHAT_SERVER_URL, {
         transports: ["websocket", "polling", "flashsocket"],
       }),
+      // socket: io("http://localhost:7000", {
+      //   transports: ["websocket", "polling", "flashsocket"],
+      //   rejectUnauthorized:   false,
+      // }),
 
       nameSpace: {
         status: false,

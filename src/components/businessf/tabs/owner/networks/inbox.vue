@@ -2940,6 +2940,7 @@ export default {
       }),
       // socket: io("http://localhost:7000", {
       //   transports: ["websocket", "polling", "flashsocket"],
+      //   rejectUnauthorized:   false,
       // }),
 
       nameSpace: {
@@ -3404,8 +3405,9 @@ export default {
         memberID: this.selectedMember.toString(),
         networkEditorsID: this.selectedEditor.toString(),
       });
+      this.newMsg = false;
 
-      this.getChatList({ type: "group" });
+      // this.getChatList({ type: "group" });
     },
     createRoom(receiver_business_id) {
       // let sender_business_id = this.currentUser.user.id;
@@ -3663,7 +3665,7 @@ export default {
 
       console.log("Group members:", this.groupMembers);
       let data = {};
-      if (this.groupMembers.length) {
+      if (this.groupMembers.length > 0) {
         // this.groupMembers.map((member)=>{
         //   if()
         // })
@@ -3719,7 +3721,7 @@ export default {
           message: this.input,
           attachment: this.file,
         };
-
+        console.log("here:...", data);
         this.formData.append("attachment", this.file);
         this.socket.emit("groupMessage", data);
       }

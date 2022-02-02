@@ -118,6 +118,12 @@
 </template>
 
 <script>
+ /**
+   * The custom HTML `<market>` component.
+   *
+   * @author Edouard Yonga
+   * Copyright (c) Bridge Africa. All rights reserved.
+*/
 import ProductDetails from "@/components/businessf/ProductDetails.vue";
 import login from "@/components/search/login";
 export default {
@@ -158,16 +164,32 @@ export default {
   },
 
   methods: {
+     /**
+       * This will be ignored on rendering
+       * @private
+    */
     getProductDetails(product) {
+       /**
+         * Fired when the button is clicked.
+         */
       console.log(product);
       this.product = product;
       this.viewProduct = true;
     },
+
+
+     /**
+       * This will be ignored on rendering
+       * @private
+    */
     changePage(value) {
       // this.$store.commit("marketSearch/setProducts", '');
       // this.$store.commit("marketSearch/setLoader", true);
-
       // this.prodLoader = true;
+      /**
+         * Fired when the button is clicked.
+         */
+
       this.currentPage = value;
 
       this.$store
@@ -184,7 +206,14 @@ export default {
         });
     },
 
+ /**
+       * This will be ignored on rendering
+       * @private
+    */
     async getProducts() {
+      /**
+         * Fired before the DOM is loaded.
+         */
       // this.prodLoader = true;
       await this.$store
         .dispatch("marketSearch/getProducts")
@@ -202,18 +231,31 @@ export default {
         });
     },
 
+ /**
+       * This will be ignored on rendering
+       * @private
+    */
     buyNow(prod) {
+      /**
+         * Fired when the button is clicked.
+         */
       this.AddToCard(prod);
       this.$router.push({ name: "payment" });
     },
 
+ /**
+       * This will be ignored on rendering
+       * @private
+    */
     AddToCard(id, val) {
+       /**
+         * Fired when the button is clicked.
+         */
       console.log("add to card ", id);
       this.$store
         .dispatch("cart/addToCart", id)
         .then((response) => {
           console.log("----", this.getStatus);
-
           this.flashMessage.show({
             status: "success",
             message: this.getStatus,

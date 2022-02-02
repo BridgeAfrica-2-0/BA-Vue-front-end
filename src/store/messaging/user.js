@@ -156,6 +156,48 @@ export default {
                 })
         },
         // [NO BUG]
+        GET_USERS_CHAT_LIST_Dos({ commit, state }, data) {
+            commit("setUsers", []);
+            console.log("[data]:", data);
+            console.log("currentuser:", state.currentUser.user);
+
+            if (data.type == 'user') {
+                axios.get(`/messages/userListing`)
+                    .then((res) => {
+                        console.log("User chat list: ", res.data.data);
+                        commit("setChatList", res.data.data ? res.data.data : {
+                            data: []
+                        });
+                    })
+
+            } else if (data.type == 'business') {
+                axios.get(`/messages/userBusiness`)
+                    .then((res) => {
+                        console.log("Business chat list: ", res.data.data);
+                        commit("setChatList", res.data.data ? res.data.data : {
+                            data: []
+                        });
+                    })
+
+            } else if (data.type == "network") {
+                axios.get(`/messages/userNetwork`)
+                    .then((res) => {
+                        console.log("Network chat list: ", res.data.data);
+                        commit("setChatList", res.data.data ? res.data.data : {
+                            data: []
+                        });
+                    })
+
+            } else {
+                axios.get(`group/list/users/${state.currentUser.user.id}`)
+                    .then((res) => {
+                        console.log("Business GROUPS: ", res.data.data);
+                        commit("setChatList", res.data.data ? res.data.data : {
+                            data: []
+                        });
+                    })
+            }
+        },
         GET_USERS_CHAT_LIST({ commit, state }, data) {
             commit("setUsers", []);
             console.log("[data]:", data);

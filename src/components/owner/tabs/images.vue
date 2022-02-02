@@ -68,7 +68,7 @@
           <Picture
             class="img-gall" v-for="(im, index) in allImages" :key="index"
             :im="im"
-            :typeOfMedia="() => typeOfMedia(im.media.path)"
+            :typeOfMedia="() => typeOfMedia(im.media.preview_url)"
             :getFullMediaLink="() => getFullMediaLink(im.media.preview_url)"
             :getYoutubeKey="() => getYoutubeKey(getFullMediaLink(im.media.path))"
             :showImg="() => showImg(getFullMediaLink(im.media.path))"
@@ -402,7 +402,9 @@ export default {
     //set an image as a cover photo
 
     setCoverPic(id) {
+
       this.loading = true;
+      
       const data =
         "business" == this.type || "network" == this.type
           ? { businessID: this.$route.params.id, id: id }

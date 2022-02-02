@@ -16,6 +16,7 @@
                   <b-form-tags
                     input-id="tags-separators"
                     tag-variant="primary"
+                    class="font-12"
                     separator=" ,"
                     :placeholder="
                       $t('network.Enter_keyword_alert_separate_by_space_or')
@@ -253,5 +254,9 @@ export default {
 <style scoped>
 .a-left {
   text-align: left;
+}
+
+.font-12{
+  font-size: 14px;
 }
 </style>

@@ -17,7 +17,6 @@
             class="form-control"
             v-model="searchTitle"
             @keyup="search"
-            
           ></b-form-input>
         </b-input-group>
       </b-col>
@@ -27,7 +26,7 @@
       <b-col cols="12">
         <h6 class="font-weight-bolder">
           {{ $t("network.Network_Admins") }} ({{
-            nFormatter(adminss.admin_count)
+            nFormatter(adminss)
           }})
         </h6>
         <hr width="100%" />
@@ -51,11 +50,9 @@
                     size="3.5rem"
                   ></b-avatar>
                   <h5 class="m-0 bold username d-inline-block ml-2">
-                     <router-link
-                        :to="'/profile/'+admin.user_id"
-                      >
-                           {{ admin.fullname }}
-                      </router-link>
+                    <router-link :to="'/profile/' + admin.user_id">
+                      {{ admin.fullname }}
+                    </router-link>
                   </h5>
                 </span>
                 <span class="float-right mt-1">
@@ -69,7 +66,6 @@
                       <b-icon-three-dots-vertical></b-icon-three-dots-vertical
                       ><span class="sr-only">{{ $t("network.Settings") }}</span>
                     </template>
-
 
                     <!-- <b-dropdown-item
                       href="#"
@@ -85,8 +81,6 @@
                       <b-icon-trash-fill></b-icon-trash-fill>
                       {{ $t("network.Remove_From_Networks") }}
                     </b-dropdown-item> -->
-
-
                   </b-dropdown>
                 </span>
               </p>
@@ -96,7 +90,11 @@
         </b-skeleton-wrapper>
       </b-col>
       <b-col cols="12">
-        <infinite-loading @infinite="AinfiniteHandler" ref="AinfiniteLoading"   :identifier="ainfiniteId" >
+        <infinite-loading
+          @infinite="AinfiniteHandler"
+          ref="AinfiniteLoading"
+          :identifier="ainfiniteId"
+        >
           <div class="text-red" slot="no-more">
             {{ $t("network.No_More_Request") }}
           </div>
@@ -110,7 +108,7 @@
     <b-row class="mt-4">
       <b-col cols="12">
         <h6 class="font-weight-bolder">
-          Editors ({{ nFormatter(editorss.editor_count) }})
+          Editors ({{ nFormatter(editorss) }})
         </h6>
         <hr width="100%" />
         <b-skeleton-wrapper :loading="loading">
@@ -133,14 +131,9 @@
                     size="3.5rem"
                   ></b-avatar>
                   <h5 class="m-0 bold username d-inline-block ml-2">
-                   
-
-                    <router-link
-                        :to="'/profile/'+editor.user_id"
-                      >
-                          {{ editor.fullname }}
-                      </router-link>
-
+                    <router-link :to="'/profile/' + editor.user_id">
+                      {{ editor.fullname }}
+                    </router-link>
                   </h5>
                 </span>
                 <span class="float-right mt-1">
@@ -151,18 +144,23 @@
                     no-caret
                   >
                     <template #button-content>
-                      <b-icon-three-dots-vertical  variant="primary"></b-icon-three-dots-vertical
+                      <b-icon-three-dots-vertical
+                        variant="primary"
+                      ></b-icon-three-dots-vertical
                       ><span class="sr-only">{{ $t("network.Settings") }}</span>
                     </template>
                     <b-dropdown-item
                       href="#"
                       @click="removeAsEditor(editor.user_id, index)"
                     >
-                      <b-icon-trash-fill variant="primary"></b-icon-trash-fill> Remove as Editor
+                      <b-icon-trash-fill variant="primary"></b-icon-trash-fill>
+                      Remove as Editor
                     </b-dropdown-item>
                     <b-dropdown-item
                       href="#"
-                      @click="removeFromNetworks(editor.user_id, index,'editor')"
+                      @click="
+                        removeFromNetworks(editor.user_id, index, 'editor')
+                      "
                     >
                       <b-icon-trash-fill variant="primary"></b-icon-trash-fill>
                       {{ $t("network.Remove_From_Networks") }}
@@ -177,7 +175,11 @@
       </b-col>
 
       <b-col cols="12">
-        <infinite-loading @infinite="EinfiniteHandler"   :identifier="einfiniteId" ref="EinfiniteLoading">
+        <infinite-loading
+          @infinite="EinfiniteHandler"
+          :identifier="einfiniteId"
+          ref="EinfiniteLoading"
+        >
           <div class="text-red" slot="no-more">
             {{ $t("network.No_More_Request") }}
           </div>
@@ -192,7 +194,7 @@
       <b-col cols="12">
         <h6 class="font-weight-bolder">
           {{ $t("network.Bussiness") }} ({{
-            nFormatter(businesss.business_count)
+            nFormatter(businesss)
           }})
         </h6>
         <hr width="100%" />
@@ -205,7 +207,7 @@
             </b-card>
           </template>
           <div class="scroll" v-if="business.length != 0">
-            <div v-for="(busines,index) in business" :key="busines.id">
+            <div v-for="(busines, index) in business" :key="busines.id">
               <p class="">
                 <span class="">
                   <b-avatar
@@ -217,11 +219,10 @@
                     size="3.5rem"
                   ></b-avatar>
                   <h5 class="m-0 username d-inline-block ml-2">
-                    {{ busines.name }}    <router-link
-                        :to="'/business/'+busines.business_id"
-                      >
-                           {{ busines.name }}
-                      </router-link>
+                    {{ busines.name }}
+                    <router-link :to="'/business/' + busines.business_id">
+                      {{ busines.name }}
+                    </router-link>
                   </h5>
                 </span>
                 <span class="float-right mt-1">
@@ -232,12 +233,16 @@
                     no-caret
                   >
                     <template #button-content>
-                      <b-icon-three-dots-vertical variant="primary"></b-icon-three-dots-vertical
+                      <b-icon-three-dots-vertical
+                        variant="primary"
+                      ></b-icon-three-dots-vertical
                       ><span class="sr-only">{{ $t("network.Settings") }}</span>
                     </template>
                     <b-dropdown-item
                       href="#"
-                      @click="removeBusinessFromNetwork(busines.business_id, index)"
+                      @click="
+                        removeBusinessFromNetwork(busines.business_id, index)
+                      "
                     >
                       <b-icon-trash-fill></b-icon-trash-fill>
                       {{ $t("network.Remove_From_Networks") }}
@@ -251,7 +256,11 @@
         </b-skeleton-wrapper>
       </b-col>
       <b-col col="12">
-        <infinite-loading @infinite="BinfiniteHandler"   :identifier="binfiniteId"  ref="BinfiniteLoading">
+        <infinite-loading
+          @infinite="BinfiniteHandler"
+          :identifier="binfiniteId"
+          ref="BinfiniteLoading"
+        >
           <div class="text-red" slot="no-more">
             {{ $t("network.No_More_Request") }}
           </div>
@@ -266,7 +275,7 @@
       <b-col cols="12">
         <h6 class="font-weight-bolder">
           {{ $t("network.All_Members") }} ({{
-            nFormatter(memberss.user_count)
+            nFormatter(memberss)
           }})
         </h6>
         <hr width="100%" />
@@ -279,7 +288,7 @@
             </b-card>
           </template>
 
-          <div v-for="(member, index ) in members" :key="member.id">
+          <div v-for="(member, index) in members" :key="member.id">
             <p class="">
               <span class="">
                 <b-avatar
@@ -290,11 +299,9 @@
                   size="3.5rem"
                 ></b-avatar>
                 <h5 class="m-0 username d-inline-block ml-2">
-                     <router-link
-                        :to="'/profile/'+member.user_id"
-                      >
-                          {{ member.fullname }}
-                      </router-link>
+                  <router-link :to="'/profile/' + member.user_id">
+                    {{ member.fullname }}
+                  </router-link>
                 </h5>
               </span>
               <span class="float-right mt-1">
@@ -305,24 +312,32 @@
                   no-caret
                 >
                   <template #button-content>
-                    <b-icon-three-dots-vertical variant="primary"></b-icon-three-dots-vertical
+                    <b-icon-three-dots-vertical
+                      variant="primary"
+                    ></b-icon-three-dots-vertical
                     ><span class="sr-only">{{ $t("network.Settings") }}</span>
                   </template>
                   <b-dropdown-item href="#" @click="makeAdmin(member.user_id)">
-                    <b-icon-person-plus-fill variant="primary"></b-icon-person-plus-fill>
+                    <b-icon-person-plus-fill
+                      variant="primary"
+                    ></b-icon-person-plus-fill>
                     {{ $t("network.Make_Editor") }}
                   </b-dropdown-item>
 
-                  <b-dropdown-item href="#" @click=" handleFollow(member, 'user')">
-                    <b-icon-person-plus-fill  variant="primary"></b-icon-person-plus-fill>
-                    {{ member.is_follow !== 0  ? 'Unfollow' : 'Follow' }}  
+                  <b-dropdown-item
+                    href="#"
+                    @click="handleFollow(member, 'user')"
+                  >
+                    <b-icon-person-plus-fill
+                      variant="primary"
+                    ></b-icon-person-plus-fill>
+                    {{ member.is_follow !== 0 ? "Unfollow" : "Follow" }}
                   </b-dropdown-item>
-
 
                   <b-dropdown-item
                     href="#"
                     @click="removeFromNetworks(member.user_id, index, 'member')"
-                  >   
+                  >
                     <b-icon-trash-fill variant="primary"></b-icon-trash-fill>
                     {{ $t("network.Remove_From_Networks") }}
                   </b-dropdown-item>
@@ -333,7 +348,11 @@
         </b-skeleton-wrapper>
       </b-col>
       <b-col col="12">
-        <infinite-loading @infinite="infiniteHandler"  :identifier="infiniteId" ref="infiniteLoading">
+        <infinite-loading
+          @infinite="infiniteHandler"
+          :identifier="infiniteId"
+          ref="infiniteLoading"
+        >
           <div class="text-red" slot="no-more">
             {{ $t("network.No_More_Request") }}
           </div>
@@ -358,12 +377,17 @@ export default {
       businessPage: 1,
       adminpage: 1,
       editorspage: 1,
-      
 
-      infiniteId:1,
-      ainfiniteId:188,
-      einfiniteId:889,
-      bnfiniteId:19999,
+      infiniteId: 1,
+      ainfiniteId: 188,
+      einfiniteId: 889,
+      bnfiniteId: 19999,
+
+      adminss: null,
+      editorss: null,
+
+      businesss: null,
+      memberss: null,
 
       currentPage: null,
       searchTitle: "",
@@ -375,20 +399,7 @@ export default {
       loading: false,
     };
   },
-  computed: {
-    adminss() {
-      return this.$store.state.networkProfileMembers.admins;
-    },
-    editorss() {
-      return this.$store.state.networkProfileMembers.editors;
-    },
-    businesss() {
-      return this.$store.state.networkProfileMembers.business;
-    },
-    memberss() {
-      return this.$store.state.networkProfileMembers.members;
-    },
-  },
+
   mounted() {
     this.url = this.$route.params.id;
     //  this.getAdmins()
@@ -431,7 +442,12 @@ export default {
         lien = "network/" + this.url + "/members/list/" + this.page;
       } else {
         lien =
-          "network/" + this.url + "/members/list/" + this.page + "?keyword="+ this.searchTitle;
+          "network/" +
+          this.url +
+          "/members/list/" +
+          this.page +
+          "?keyword=" +
+          this.searchTitle;
       }
 
       this.axios
@@ -443,6 +459,7 @@ export default {
             console.log("hey you too");
             console.log("loading data of page " + this.page);
             console.log(data.data.users);
+            this.memberss = data.data.user_count;
             this.members.push(...data.data.users);
 
             this.page += 1;
@@ -459,8 +476,8 @@ export default {
     //admin loading
 
     AinfiniteHandler($state) {
-      const data =  this.searchTitle;
-  
+      const data = this.searchTitle;
+
       let formData = new FormData();
       formData.append("keyword", data);
       let lien = "";
@@ -470,8 +487,10 @@ export default {
         lien =
           "network/" +
           this.url +
-          "/members/admin/" +    
-          this.adminpage  + "?keyword="+ this.searchTitle;
+          "/members/admin/" +
+          this.adminpage +
+          "?keyword=" +
+          this.searchTitle;
       }
 
       this.axios
@@ -481,6 +500,7 @@ export default {
           console.log(data);
           if (data.data.admin.length) {
             this.admins.push(...data.data.admin);
+            this.adminss = data.data.admin_count;
 
             this.adminpage += 1;
             $state.loaded();
@@ -496,7 +516,7 @@ export default {
     //editor infinite loading
 
     EinfiniteHandler($state) {
-      const data =  this.searchTitle;
+      const data = this.searchTitle;
 
       let formData = new FormData();
       formData.append("keyword", data);
@@ -508,7 +528,9 @@ export default {
           "network/" +
           this.url +
           "/members/editor/" +
-          this.page  + "?keyword="+ this.searchTitle;
+          this.page +
+          "?keyword=" +
+          this.searchTitle;
       }
 
       this.axios
@@ -516,7 +538,7 @@ export default {
         .then(({ data }) => {
           if (data.data.editor.length) {
             this.editors.push(...data.data.editor);
-
+            this.editorss = data.data.editor_count;
             this.editorspage += 1;
             $state.loaded();
           } else {
@@ -546,7 +568,9 @@ export default {
           "network/" +
           this.url +
           "/members/business/" +
-          this.businessPage + "?keyword="+ this.searchTitle;
+          this.businessPage +
+          "?keyword=" +
+          this.searchTitle;
       }
 
       this.axios
@@ -559,7 +583,7 @@ export default {
             console.log("loading data of page " + this.page);
             console.log(data.data.businesses);
             this.business.push(...data.data.businesses);
-
+            this.businesss = data.data.business_count;
             this.businessPage += 1;
             $state.loaded();
           } else {
@@ -573,7 +597,7 @@ export default {
 
     getAdmins() {
       this.loading = true;
-      const data =  this.searchTitle;
+      const data = this.searchTitle;
       console.log("keyword: " + data);
       this.$store
         .dispatch("networkProfileMembers/getadmins", {
@@ -591,8 +615,7 @@ export default {
     },
 
     getmembers() {
-    
-      const data =  this.searchTitle;
+      const data = this.searchTitle;
       console.log("keyword: " + data);
       this.$store
         .dispatch("networkProfileMembers/getmembers", {
@@ -610,8 +633,7 @@ export default {
     },
 
     getEditors() {
-     
-      const data =  this.searchTitle;
+      const data = this.searchTitle;
       console.log("keyword: " + data);
       this.$store
         .dispatch("networkProfileMembers/geteditors", {
@@ -629,8 +651,7 @@ export default {
     },
 
     getBusiness() {
-    
-      const data =  this.searchTitle;
+      const data = this.searchTitle;
       this.$store
         .dispatch("networkProfileMembers/getbusiness", {
           path: this.url + "/members/business",
@@ -647,18 +668,15 @@ export default {
     },
 
     search() {
+      this.infiniteId += 1;
+      this.ainfiniteId += 1;
+      this.einfiniteId += 1;
+      this.binfiniteId += 1;
 
-       this.infiniteId+= 1;
-      this.ainfiniteId+= 1;
-      this.einfiniteId+= 1;
-      this.binfiniteId+= 1;
-
-       this.page= 1;
-       this. businessPage=1;
-      this. adminpage= 1;
-      this.editorspage= 1;
-       
- 
+      this.page = 1;
+      this.businessPage = 1;
+      this.adminpage = 1;
+      this.editorspage = 1;
 
       this.members = [];
       this.business = [];
@@ -735,7 +753,6 @@ export default {
         });
     },
     removeAsEditor: function (user_id, index) {
-     
       let path = {
         url: this.url,
         id: user_id,
@@ -744,12 +761,9 @@ export default {
         .dispatch("networkProfileMembers/removeAsEditor", path)
         .then(({ data }) => {
           console.log(data);
-        
-         
-       this.$delete(this.editors,index);
-      
-      
-         
+
+          this.$delete(this.editors, index);
+
           this.flashMessage.show({
             status: "success",
             message: "Member Successfully Removed As Editor",
@@ -757,7 +771,7 @@ export default {
         })
         .catch((err) => {
           console.log({ err: err });
-         
+
           this.flashMessage.show({
             status: "error",
             message: "Unable To Remove Member As Editor",
@@ -765,29 +779,24 @@ export default {
         });
     },
 
-
-
-     
     removeBusinessFromNetwork: function (user_id, index) {
-
       // this.loading = true;
       let path = {
         url: this.url,
         id: user_id,
       };
       this.$store
-        .dispatch("networkProfileMembers/removeAsremoveBusinessFromNetworkAdmin", path)
+        .dispatch(
+          "networkProfileMembers/removeAsremoveBusinessFromNetworkAdmin",
+          path
+        )
         .then(({ data }) => {
           console.log(data);
           console.log("ohh yeah");
           this.searchTitle = "";
-        
 
-     
-       this.$delete(this.business,index);
- 
+          this.$delete(this.business, index);
 
-         
           this.flashMessage.show({
             status: "success",
             message: this.$t(
@@ -805,11 +814,7 @@ export default {
         });
     },
 
-
-
-
     removeFromNetworks: function (user_id, index, type) {
-
       // this.loading = true;
       let path = {
         url: this.url,
@@ -821,22 +826,19 @@ export default {
           console.log(data);
           console.log("ohh yeah");
           this.searchTitle = "";
-        
 
+          if (type == "member") {
+            this.$delete(this.members, index);
+          }
 
-         if(type=="member"){
-         this.$delete(this.members,index);
-      }
+          if (type == "editor") {
+            this.$delete(this.editors, index);
+          }
 
-      if(type=="editor"){
-       this.$delete(this.editors,index);
-      }
+          if (type == "busines") {
+            this.$delete(this.business, index);
+          }
 
-      if(type=="busines"){
-       this.$delete(this.business,index);
-      }
-
-         
           this.flashMessage.show({
             status: "success",
             message: this.$t(
@@ -854,11 +856,7 @@ export default {
         });
     },
 
-
-
     async handleFollow(user, type) {
-     
-
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
       const data = {
@@ -869,23 +867,17 @@ export default {
       await axios
         .post(uri, data)
         .then((response) => {
-       
           user.is_follow = nextFollowState;
 
-            this.flashMessage.show({
+          this.flashMessage.show({
             status: "success",
             message: "success",
           });
-        
         })
         .catch((err) => {
           console.log(err);
-       
         });
     },
-
-
-
   },
 };
 </script>

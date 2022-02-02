@@ -8,7 +8,7 @@
         v-for="item in businesses"
         :key="item.id"
       >
-        <div class="people-style shadow">
+        <div class="people-style shadow h-100">
           <b-row>
             <b-col md="8" xl="8" lg="12" cols="12" sm="8">
               <div class="d-inline-flex">

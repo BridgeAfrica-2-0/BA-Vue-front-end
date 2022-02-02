@@ -230,13 +230,23 @@
                 label-class=" pt-0"
                 class="mb-0"
               >
-                <b-form-input
+              {{createdNetwork.address}}
+                <!-- <b-form-input
                   v-model="createdNetwork.address"
                   id="network_name"
                   placeholder=""
                   required
                 >
-                </b-form-input>
+                </b-form-input> -->
+
+                 <div class="" style="height: 200px; overflow:hidden">
+                  <AutocompleteLocation
+                  
+                    :region="region"
+                    @get-address-details="getGeoCoderResult"
+                  />
+                </div>
+
               </b-form-group>
             </b-col>
 
@@ -587,6 +597,7 @@
 import axios from "axios";
 import Multiselect from "vue-multiselect";
 import VuePhoneNumberInput from "vue-phone-number-input";
+import AutocompleteLocation from "@/components/AutocompleteLocation";
 export default {
 
   props:{
@@ -665,6 +676,7 @@ export default {
   components: {
     Multiselect,
     VuePhoneNumberInput,
+    AutocompleteLocation
   },
 
   mounted() {
@@ -737,6 +749,14 @@ export default {
   },
 
   methods: {
+
+    getGeoCoderResult(response) {console.log(response);
+      this.coordinates = response.coordinates;
+      this.createdNetwork.address = response.address;
+      console.log("yoo mother fuckers");
+      console.log(response);
+    },
+
     flashErrors(errors) {
       let err = "";
       Object.values(errors).forEach((element) => {

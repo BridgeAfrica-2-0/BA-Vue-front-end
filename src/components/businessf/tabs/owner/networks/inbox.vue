@@ -3376,8 +3376,16 @@ export default {
         this.formData.append("receiver_network_id", data.receiver_business_id);
         this.formData.append("receiver_id", data.receiver_business_id);
         this.formData.append("type", data.type);
-
-        this.saveMessage(this.formData);
+        if (this.currentBizId == data.sender_network_id) {
+          this.saveMessage(this.formData);
+        } else {
+          // this.$store.dispatch("networkChat/GET_BIZS_CHAT_LIST_Dos", {
+          //   type: this.type,
+          // });
+          console.log("Here here 3");
+          // this.$store.dispatch("userChat/GET_USERS_CHAT_LIST", {type:data.type})
+        }
+        // this.saveMessage(this.formData);
         //  if(data.newChatLoad) this.getList({type:data.type})
       });
       console.log("listenning...");

@@ -1820,7 +1820,7 @@ export default {
     formatHeadChatName(value) {
       var name = "";
 
-      console.log("Value--:", value);
+      // console.log("Value--:", value);
       // console.log("Current:", this.currentUser);
       if (this.ctaSelected) {
         name = value.name;
@@ -1837,24 +1837,24 @@ export default {
               : value.name
             : value.name;
         } else if (this.type == "business") {
-          name = value.receiver
-            ? value.receiver.name
-            : value.sender
-            ? value.sender.name
-            : value.receiver_business
+          name = value.receiver_business
             ? value.receiver_business.name
             : value.sender_business
             ? value.sender_business.name
-            : value.name;
-        } else if (this.type == "network") {
-          name = value.receiver
+            : value.receiver
             ? value.receiver.name
             : value.sender
             ? value.sender.name
-            : value.receiver_network
+            : value.name;
+        } else if (this.type == "network") {
+          name = value.receiver_network
             ? value.receiver_network.name
             : value.sender_network
             ? value.sender_network.name
+            : value.receiver
+            ? value.receiver.name
+            : value.sender
+            ? value.sender.name
             : value.name;
           // name = value.receiver_network
           //   ? value.receiver_network.name
@@ -1967,11 +1967,20 @@ export default {
         //   console.log("zee-occurence:", this.occurence);
         // }
 
+        if (this.currentUser.user.id == data.sender_id) {
+          this.saveMessage(this.formData, data.type);
+        } else {
+          console.log("Here here 1");
+          // this.type = data.type;
+          // this.$store.dispatch("userChat/GET_USERS_CHAT_LIST_Dos", {
+          //   type: this.type,
+          // });
+        }
         // console.log("zee-occurence:", this.occurence);
 
         // this.currentUser.user.id == data.sender_id
         //   ? this.saveMessage(this.formData, data.type)
-        //   : (this.occurence += 1);
+        //   : console.log("Receiver...");
         // console.log("Receiver...");
       });
       console.log("listenning...");

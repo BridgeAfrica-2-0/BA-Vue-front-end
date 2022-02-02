@@ -453,6 +453,51 @@ export default {
         },
 
         // [NO BUG]
+        GET_BIZS_CHAT_LIST_Dos({ commit, state }, data) {
+
+            if (data.type == 'user') {
+                axios.get(`/messages/networkUser/${state.currentBizId}`)
+                    .then((res) => {
+                        commit("setChatList", res.data.data ? res.data.data : {
+                            data: []
+                        });
+                    })
+                    .catch((err) => {
+                        commit("setLoader", false);
+                        console.log(err);
+                    })
+            } else if (data.type == 'network') {
+                axios.get(`/messages/networkListing/${state.currentBizId}`)
+                    .then((res) => {
+                        commit("setChatList", res.data.data ? res.data.data : {
+                            data: []
+                        });
+                    })
+                    .catch((err) => {
+                        commit("setLoader", false);
+                        console.log(err);
+                    })
+            } else if (data.type == 'business') {
+                axios.get(`/messages/networkBusiness/${state.currentBizId}`)
+                    .then((res) => {
+                        commit("setChatList", res.data.data ? res.data.data : {
+                            data: []
+                        });
+                    })
+                    .catch((err) => {
+                        commit("setLoader", false);
+                        console.log(err);
+                    })
+            } else {
+                axios.get(`group/list/admin/network/${state.currentBizId}`)
+                    .then((res) => {
+                        console.log("Business GROUPS: ", res.data.data);
+                        commit("setChatList", res.data.data ? res.data.data : {
+                            data: []
+                        });
+                    })
+            }
+        },
         GET_BIZS_CHAT_LIST({ commit, state }, data) {
 
             commit("setLoader", true);
@@ -461,8 +506,6 @@ export default {
             if (data.type == 'user') {
                 axios.get(`/messages/networkUser/${state.currentBizId+keyword}`)
                     .then((res) => {
-                        commit("setLoader", false);
-                        console.log("business chat list: ", res.data.data);
                         commit("setChatList", res.data.data ? res.data.data : {
                             data: []
                         });

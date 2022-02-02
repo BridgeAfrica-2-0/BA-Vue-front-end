@@ -1,8 +1,9 @@
 <template>
   <div class="container">
-    <b-row>
+    <b-row class="padding-post"> 
       <b-col cols="12" class="f-left">
-        <div v-for="post in owner_post" :key="post.id" :loading="load" class="mb-4">
+    
+        <div v-for="(post, index) in owner_post" :key="index" :loading="load" class="mb-4 border p-3 rounded">
           <div class="mb-2">
             <div class="f-left">
               <b-row class="px-md-3">
@@ -10,23 +11,24 @@
                   <b-avatar
                     class="d-inline-block mt-1"
                     variant="primary"
-                    :src="post.profile_picture"
+                    :square="post.poster_type!=user"
+                    :src="post.user_picture"
                     size="3.5rem"
                   ></b-avatar>
                 </b-col>
                 <b-col cols="10" md="11" class="pt-2">
                   <h6 class="m-0 font-weight-bolder">
-                    {{ post.name }}
+                    {{ post.user_name }}
                     <span class="float-right">
                       <b-dropdown size="lg" variant="link" toggle-class="text-decoration-none" no-caret>
                         <template #button-content>
                           <b-icon-three-dots-vertical></b-icon-three-dots-vertical
                           ><span class="sr-only">{{ $t('network.Settings') }} </span>
                         </template>
-                        <b-dropdown-item @click="approved(post.id)" :loading="load">
+                        <b-dropdown-item @click="approved(post.id, index)" :loading="load">
                           {{ $t('network.Approved') }}
                         </b-dropdown-item>
-                        <b-dropdown-item @click="unapproved(post.id)" :loading="load">
+                        <b-dropdown-item @click="unapproved(post.id, index)" :loading="load">
                           {{ $t('network.Unapproved') }}
                         </b-dropdown-item>
                       </b-dropdown>
@@ -77,11 +79,26 @@
         </div>
       </b-col>
     </b-row>
+
+
+
+     <infinite-loading
+          @infinite="infiniteHandler"
+          ref="AinfiniteLoading"
+          :identifier="ainfiniteId"
+        >
+          <div class="text-red" slot="no-more">
+            {{ $t("network.No_More_Request") }}
+          </div>
+          <div class="text-red" slot="no-results">
+            {{ $t("network.No_More_Request") }}
+          </div>
+        </infinite-loading>
+
+
     <b-row>
       <b-col>
-        <b-card bg-variant="white" text-variant="black" class="text-center" v-if="owner_post < 1">
-          <b-card-text>{{ $t('network.No_Pending_Posts_To_Show') }}</b-card-text>
-        </b-card>
+      
       </b-col>
     </b-row>
   </div>
@@ -192,7 +209,7 @@ export default {
     },
 
     infiniteHandler($state) {
-      let url = 'network/show/posts/pending/' + this.url + '?page=' + this.page;
+      let url = 'show/posts/pending/' + this.url + '?page=' + this.page;
 
       if (this.page == 1) {
         this.owner_post.splice(0);
@@ -214,7 +231,7 @@ export default {
         });
     },
 
-    approved(id) {
+    approved(id, index) {
       let loader = this.$loading.show({
         container: this.fullPage ? null : this.$refs.creatform,
         canCancel: true,
@@ -222,15 +239,15 @@ export default {
         color: '#e75c18',
       });
 
-      this.networkId = this.getNetwork.id;
+      
       let payload = {
-        network_id: this.networkId,
+        network_id:  this.url,
         post_id: id,
       };
       this.approvedPost(payload)
         .then(() => {
-          this.page = 1;
-          this.infiniteId += 1;
+          
+          this.$delete(this.ownerPost, index);
           loader.hide();
         })
         .catch((err) => {
@@ -257,7 +274,7 @@ export default {
         });
     },
 
-    unapproved(id) {
+    unapproved(id, index) {
       let loader = this.$loading.show({
         container: this.fullPage ? null : this.$refs.creatform,
         canCancel: true,
@@ -265,15 +282,15 @@ export default {
         color: '#e75c18',
       });
 
-      this.networkId = this.getNetwork.id;
+      
       let payload = {
-        network_id: this.networkId,
+        network_id: this. this.url,
         post_id: id,
       };
       this.unapprovedPost(payload)
         .then(() => {
-          this.page = 1;
-          this.infiniteId += 1;
+          
+            this.$delete(this.ownerPost, index);
           loader.hide();
         })
         .catch((err) => {
@@ -340,6 +357,18 @@ export default {
 </script>
 
 <style>
+
+
+@media (min-width: 762px) {
+
+.padding-post{
+
+  padding-Left:40px;
+   padding-right:40px
+}
+
+}
+
 .h-lg-250 {
   height: 350px !important;
 }

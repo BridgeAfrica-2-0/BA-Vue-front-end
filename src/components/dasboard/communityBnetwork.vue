@@ -172,16 +172,16 @@ export default {
 
     infiniteHandler($state) {
       const url =
-        this.type === "Follower"
-          ? `business/community/business-follower/${this.biz_id}/`
-          : `business/community/business-following/${this.biz_id}/`;
+        this.type === "Follower"     
+          ? `business/community/network-follower/${this.biz_id}/`
+          : `business/community/network-following/${this.biz_id}/`;
 
       axios
         .get(url + this.page)
         .then(({ data }) => {
           if (this.type == "Follower") {
-            if (data.data.business_followers.length) {
-              this.businesses.push(...data.data.business_followers);
+            if (data.data.network_followers.length) {
+              this.businesses.push(...data.data.network_followers);
               this.page += 1;
 
               $state.loaded();
@@ -189,8 +189,8 @@ export default {
               $state.complete();
             }
           } else {
-            if (data.data.business_following.length) {
-              this.businesses.push(...data.data.business_following);
+            if (data.data.network_following.length) {
+              this.businesses.push(...data.data.network_following);
               this.page += 1;
 
               $state.loaded();

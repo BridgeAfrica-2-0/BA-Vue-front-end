@@ -18,7 +18,7 @@
                 <router-link :to="{name: 'Membar Network Follower', params: {id:item.id}}">
                   <strong class="title">{{ item.name }}</strong>
                 </router-link>
-                <br />
+                
                 {{ item.category }}
                 <br />
                 {{ count(item.followers) }} {{ $t("businessowner.Community") }}      <span  v-if="!foll_id" @click="BlockUser(item.id, index)"  class="ml-3"  style="cursor: pointer">  
@@ -125,20 +125,21 @@ export default {
     return {
       page: 1,
       biz_id: null,
+      network:[],
       infiniteId: +new Date(),
       options: {
         rewind: true,
         autoplay: true,
         perPage: 1,
         pagination: false,
-
+        
         type: "loop",
         perMove: 1,
       },
     };
   },
   computed: {
-    network() {
+    old_network() {
       if (this.type == "Follower") {
         return this.$store.state.businessOwner.NcommunityFollower
           .network_followers;

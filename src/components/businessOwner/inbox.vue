@@ -3277,6 +3277,9 @@ export default {
         this.formData.append("businessEditorID", data.businessEditorID);
 
         this.saveMessage(this.formData);
+        this.$store.dispatch("businessChat/GET_BIZS_CHAT_LIST_Dos", {
+            type: this.type
+          });
       });
       this.socket.on("privateMessage", (data) => {
         console.log("Received");
@@ -3292,6 +3295,9 @@ export default {
         this.formData.append("type", data.type);
 
         this.saveMessage(this.formData);
+        this.$store.dispatch("businessChat/GET_BIZS_CHAT_LIST_Dos", {
+            type: this.type
+          });
       });
       console.log("listenning...");
     },

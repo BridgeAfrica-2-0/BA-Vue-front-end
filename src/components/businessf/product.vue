@@ -18,7 +18,7 @@
               <div class="center-img">
                 <img
                   :src="product.picture"
-                  class="r-image cursor-pointer"
+                  class="r-image cursor-pointer  sizee"
                   @click="productDetails(product)"
                 />
               </div>
@@ -573,6 +573,7 @@ h6 {
     width: 100px;
     height: 100px;
     padding: 4px;
+    object-fit: cover;
   }
   .title {
     font-size: 16px;
@@ -730,5 +731,9 @@ h6 {
     line-height: 35px;
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
+}
+
+.sizee{
+  object-fit: cover;
 }
 </style>

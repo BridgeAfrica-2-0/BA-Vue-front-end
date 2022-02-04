@@ -37,9 +37,9 @@
                     </span>
                     <br />
                     {{ count(item.followers) }}
-                    {{ $t("dashboard.Community") }}   <span   @click="BlockUser(item.id, index)" class="ml-3"  style="cursor: pointer">  
+                    {{ $t("dashboard.Community") }}  <span   v-if="!foll_id"   @click="BlockUser(item.id, index)" class="ml-3"  style="cursor: pointer">  
                       
-                      <b-icon
+                            <b-icon   
                               font-scale="1"
                               icon="exclamation-octagon"
                               v-b-tooltip.hover

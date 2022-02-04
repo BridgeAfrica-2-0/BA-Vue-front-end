@@ -67,6 +67,9 @@
   <!-- </header>  -->
 </template>
 <script>
+/**
+ * this component is the header of the site page of the system
+ */
 export default {
   data(){
     return {
@@ -82,6 +85,10 @@ export default {
 
   methods:{
 
+/**
+ * this fuction is use to change the user language
+ * @private
+ */
     change(lang){
       this.$i18n.locale = lang;
 

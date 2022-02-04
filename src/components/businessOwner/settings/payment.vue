@@ -258,7 +258,7 @@ export default {
           this.DefaultPayment();
           this.flashMessage.show({
             status: "success",
-            message: this.$t("businessowner.Payment_Complete"),
+            message: this.$t("businessowner.Payment_number_Complete"),
           });
         })
         .catch((err) => {
@@ -267,7 +267,7 @@ export default {
           console.log({ err: err });
           this.flashMessage.show({
             status: "error",
-            message: this.$t("businessowner.Unable_Complete_Payment"),
+            message: this.$t("businessowner.un_able_to_save_payment_number"),
           });
         });
     },

@@ -262,19 +262,20 @@ export default {
      loadMore({ commit }, url) {
     return   axios.get(`network/${url}`);
 
-      
+        
     },
 
     //approve pending post
     async approvedPost({ commit }, payload) {
-      const res = await axios.post(`network/${payload.network_id}/post/approve`, payload);
+      const res = await axios.get(`network/posts/approve/${payload.network_id}/${payload.post_id}`, payload);
 
-      commit("setApprovedPost", res.data);
+      commit("setApprovedPost", res.data);   
     },
 
     //decline pending post
     async unapprovedPost({ commit }, payload) {
-      const res = await axios.post(`network/${payload.network_id}/post/decline`, payload);
+       
+      const res = await axios.get(`network/posts/decline/${payload.network_id}/${payload.post_id}`, payload);
 
       commit("setDeclinedPost", res.data);
     },

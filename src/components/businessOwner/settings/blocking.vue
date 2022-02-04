@@ -14,7 +14,7 @@
         <b-skeleton-wrapper :loading="loading">
           <template #loading>
             <b-card>
-              <b-skeleton type="avatar"></b-skeleton>
+              <b-skeleton type="avatar"></b-skeleton>   
               <b-skeleton width="55%"></b-skeleton>
               <b-skeleton width="70%"></b-skeleton>
             </b-card>
@@ -22,6 +22,7 @@
           <b-list class="d-flex align-items-center m-list">
             <b-avatar
               variant="primary"
+              :square="blockuser.banned_type!='user'"
               :text="blockuser.name.charAt(0)"
               :src="blockuser.profile_picture"
               class="mr-3"

@@ -11,6 +11,8 @@
     "Add_Network":"Add Network",
     "Product_Name": "Product Name",
     "Product_Description": "Product Description",
+    "unable_to_save_payment_number":"Unable to save payment number",
+    "Payment_number_save_Complete":"Payment number saved",
     "Conditions": "Conditions",
     "Published": "Public",
     "Add": "Add",

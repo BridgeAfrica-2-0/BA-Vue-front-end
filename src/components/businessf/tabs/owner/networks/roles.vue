@@ -74,7 +74,7 @@
     <div class="b-bottom">
       <b-container>
         <h5 class="a-text">{{ $t('network.Existing_Editors') }}</h5>
-        <div v-if="editors != 0">
+        <div >
           <b-list-group v-for="editor in editors" :key="editor.user_id">
             <b-list class="d-flex align-items-center m-list">
               <b-avatar 
@@ -95,23 +95,34 @@
                     <template #button-content>
                       <b-icon
                         icon="three-dots-vertical"
-                        animation="cylon-vertical"
+                       variant="primary"
                         font-scale="1"
                       ></b-icon>
                     </template>
                     <b-dropdown-item href="#" @click="$bvModal.show('edit-editor'); selectObject(editor)">{{ $t('network.Edit') }}</b-dropdown-item>
-                    <b-dropdown-item href="#" @click="$bvModal.show('delete-editor'); selectObject(editor)"> {{ $t('network.Delete') }} </b-dropdown-item>
+                    <!-- <b-dropdown-item href="#" @click="$bvModal.show('delete-editor'); selectObject(editor)"> {{ $t('network.Delete') }} </b-dropdown-item> -->
                   </b-dropdown>
                 </div>
               </span>
             </b-list>
           </b-list-group>
+
+           <infinite-loading
+          @infinite="EinfiniteHandler"
+          ref="EinfiniteLoading"
+          :identifier="einfiniteId" >
+        
+         <div class="text-red" slot="no-more">
+            {{ $t("network.No_More_Request") }}
+          </div>
+          <div class="text-red" slot="no-results">
+            {{ $t("network.No_More_Request") }}
+          </div>
+        </infinite-loading>
+
+
         </div>
-        <div v-else>
-          <b-card bg-variant="white" text-variant="black" class="text-center">
-            <b-card-text>{{ $t('network.No_Editor_Available') }}.</b-card-text>
-          </b-card>
-        </div>
+      
 
         <div>
           <b-modal id="edit-editor" hide-footer>
@@ -164,6 +175,8 @@ export default {
 			return {
         url: null,
         SPassign: false,
+        editors:[],
+         editorspage: 1,
         clickedObject: {},
         form: {
           name: "",
@@ -180,7 +193,7 @@ export default {
     roles() {
        return this.$store.state.NetworkSettings.roles;
     },
-    editors() {
+    old_editors() {
       return this.$store.state.NetworkSettings.editors;
     },
   },
@@ -193,6 +206,36 @@ export default {
   },
 
   methods:{
+
+
+     EinfiniteHandler($state) {
+    
+
+      let lien = "";
+     
+        lien = "network/" + this.$route.params.id + "/members/editor/" + this.editorspage;
+     
+
+      this.axios
+        .post(lien)
+        .then(({ data }) => {
+          if (data.data.editor.length) {
+            this.editors.push(...data.data.editor);
+           
+            this.editorspage += 1;
+            $state.loaded();
+          } else {
+            $state.complete();
+          }
+        })
+        .catch((err) => {
+        
+        });
+    },
+
+
+
+
      
     getFollowers() {
       console.log("getFollowers");

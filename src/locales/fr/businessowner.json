@@ -13,6 +13,9 @@
     "Conditions": "Conditions",
     "Published": "Publique",
     "Add": "Ajouter",
+    "unable_to_save_payment_number":"Impossible d'enregistrer le numéro de paiement",
+    "Payment_number_save_Complete":"Numéro de paiement enregistré",
+
     "Product_Details": "Détails du Produit",
     "Message": "Message",
     "Checkout_on_website": "Vérification sur le site web",

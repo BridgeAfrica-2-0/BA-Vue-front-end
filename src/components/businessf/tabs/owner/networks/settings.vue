@@ -164,7 +164,7 @@
             @input="Region"
             :placeholder="$t('network.Search')"
             label="name"
-            track-by="id"
+            track-by="country_id"
             :options="countries"
             :multiple="true"
           ></multiselect>
@@ -187,7 +187,7 @@
             @input="Division"
             :placeholder="$t('network.Search')"
             label="name"
-            track-by="id"
+            track-by="regions_id"
             :options="regions"
             :multiple="true"
           ></multiselect>
@@ -210,7 +210,7 @@
             @input="Municipality"
             :placeholder="$t('network.Search')"
             label="name"
-            track-by="id"
+            track-by="division_id"
             :options="divisions"
             :multiple="true"
           ></multiselect>
@@ -233,7 +233,7 @@
             @input="Locality"
             :placeholder="$t('network.Search')"
             label="name"
-            track-by="id"
+            track-by="council_id"
             :options="municipalities"
             :multiple="true"
           ></multiselect>
@@ -250,7 +250,7 @@
           label-size="md"
           label-class="font-weight-bold pt-0"
           class="mb-0"
-        >
+        >   
           <multiselect
             v-model="locality"
             :placeholder="$t('network.Search')"
@@ -539,7 +539,7 @@ export default {
       this.region.push({ id: this.editnetworkinfo.region_id, name: this.editnetworkinfo.region })
       this.division.push({ id: this.editnetworkinfo.division_id, name: this.editnetworkinfo.division })
       this.municipality.push({ id: this.editnetworkinfo.council_id, name: this.editnetworkinfo.council })
-      this.locality=this.editnetworkinfo.neighborhood;
+      this.locality=this.editnetworkinfo.neighborhood_name;
 
       this.Region();
       this.Division();
@@ -568,22 +568,7 @@ export default {
       formData.append('allow_business', editnetworkinfo.allow_business);
       formData.append('description', editnetworkinfo.description);
 
-      console.log('name', editnetworkinfo.admin_name);
-      console.log('network_categories_id', this.selectedcategories);
-      console.log("country_id", this.selectedcountry);
-      console.log("region_id", this.selectedregion);
-      console.log("division_id", this.selecteddivision);
-      console.log("council_id", this.selectedmunicipality);
-      console.log("neighborhood_id", this.selectedlocality);
-      console.log('primary_phone', editnetworkinfo.primary_phone);
-      console.log('secondary_phone', editnetworkinfo.secondary_phone);
-      console.log('email', editnetworkinfo.email);
-      console.log('purpose', editnetworkinfo.purpose);
-      console.log('special_needs', editnetworkinfo.special_needs);
-      console.log('address', editnetworkinfo.address);
-      console.log('allow_business', editnetworkinfo.allow_business);
-      console.log('description', editnetworkinfo.description);
-      console.log(formData);
+     
       this.$store
         .dispatch("NetworkSettings/updateNetworkInfo", {
           path: "update/"+this.url,
@@ -591,7 +576,7 @@ export default {
         })
         .then(({ data }) => {
         console.log(data);
-        this.getEditNetworkInfo();
+       // this.getEditNetworkInfo();
         console.log(this.networkInfo);
         this.Lspinner = false;
         this.flashMessage.show({

@@ -19,8 +19,18 @@
             <br />
             {{ item.followers }} {{ $t("profilefollower.Community") }}<br />
 
-            {{ item.about_network }}
-            <b-link>{{ $t("profilefollower.Read_More") }}</b-link>
+           
+            
+
+             <read-more
+                      :more-str="$t('search.read_more')"
+                      class="readmore"
+                      :text="item.about_network"
+                      link="#"
+                      :less-str="$t('search.read_less')"
+                      :max-chars="100"
+                    >
+                    </read-more>
           </p>
         </b-col>
 

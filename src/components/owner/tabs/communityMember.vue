@@ -27,14 +27,13 @@
                             class="mt-lg-2"
                           >
                             <div class="mt-3 mt-lg-0 mt-xl-0 username">
-                              <router-link
-                                :to="{
-                                  name: 'Follower',
-                                  params: { id: item.id },
-                                }"
-                              >
-                                <b>{{ item.name }}</b>
-                              </router-link>
+                            
+
+
+                               <router-link :to="'/profile/' + item.id">
+                      {{ item.name }}
+                    </router-link> 
+
                             </div>
                           </b-col>
 

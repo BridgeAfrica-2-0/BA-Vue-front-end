@@ -18,7 +18,7 @@
       >
         <template #img>
           <img
-            class="d-block img-fluid w-100"
+            class="d-block img-fluid w-100 sizee"
             width="180"
             height="180"
             :src="product.img"
@@ -67,6 +67,11 @@ export default {
 </script>
 
 <style scoped>
+
+.sizee{
+  object-fit: cover;
+}
+
 .product-slide img {
   display: block;
   height: 200px;

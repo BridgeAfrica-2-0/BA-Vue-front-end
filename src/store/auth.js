@@ -1,4 +1,5 @@
 import axios from 'axios';
+import router from '../router';
 axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 
 export default {
@@ -143,9 +144,14 @@ export default {
       state.passwordToken = data;
     },
 
-    clearUserData() {
+    clearUserData(state) {
       localStorage.removeItem('user');
+      state.user=[];
     // location.reload();
+   // this.$router.push({ name: "Login" });
+
+    //router.push({ name: "Login" });
+
 
     },
 
@@ -263,7 +269,8 @@ export default {
     },
 
     logout({ commit }) {
-      commit('clearUserData');
+     commit('clearUserData');
+  
     },
 
     recoverPassword2({ commit }, data) {

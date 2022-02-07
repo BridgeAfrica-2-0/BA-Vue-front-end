@@ -125,6 +125,7 @@ export default {
   data() {
     return {
       items: [],
+         islogin:true,
       disable:false,
       options: {
         rewind: true,
@@ -157,14 +158,15 @@ export default {
   },
 
   created() {
+     this.islogin=this.$store.getters["auth/isLogged"];
     this.init();
   },
 
   methods: {
     init: async function () {
-      const request = await this.$repository.search.sponsors();
+    if(this.islogin) { const request = await this.$repository.search.sponsors();
 
-      if (request.success) this.items = request.data;
+      if (request.success) this.items = request.data;}   
     },
 
     gotoBusiness(id){

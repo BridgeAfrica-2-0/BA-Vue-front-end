@@ -71,7 +71,18 @@
               <h6 class="text-center my-3">
                 {{ item.name }}
               </h6>
-              <p>{{ item.description }}</p>
+
+              <read-more
+                :more-str="$t('search.read_more')"
+                class="readmore"
+                :text="item.description "
+                link="#"
+                :less-str="$t('search.read_less')"
+                :max-chars="50"
+              >
+              </read-more>
+
+              <!-- <p>{{ item.description }}</p> -->
               <div class="d-flex justify-content-around">
                 <p class="font-weight-bold">Price</p>
                 <p>{{ item.price }} Fcfa</p>
@@ -109,7 +120,9 @@ export default {
      this.filterProduct= this.products.filter(elem =>{
         return elem.business_id == id
       })
-      console.log('--',this.products)
+      console.log('--original',this.products) ; 
+      console.log('--marker',this.productBlock)
+      console.log('--popup',this.FilterProduct);
     },
     gotoBusiness(id) {
       this.$router.push(`/business/${id}`);
@@ -161,12 +174,12 @@ export default {
   object-fit: cover;
 }
 .mapboxgl-popup-content { 
-  border-radius: 200px !important;
+  /* border-radius: 200px !important;
   max-height: 100px !important;
- 
+  */
 }
 .navig{
-  max-height: 500px ;
+  max-height: 200px ;
   overflow-y: auto ;
 
 }

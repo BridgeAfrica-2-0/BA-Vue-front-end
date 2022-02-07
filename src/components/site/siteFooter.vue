@@ -182,6 +182,9 @@
 </template>
 
 <script>
+/**
+ * this component is the footer of the site page of the system 
+ */
 export default {};
 </script>
 

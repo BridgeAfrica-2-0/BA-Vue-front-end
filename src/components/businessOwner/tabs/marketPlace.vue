@@ -154,6 +154,27 @@
           >
             {{ $t('businessowner.This_Product_Is_On_Discount') }}
           </b-form-checkbox>
+
+
+ <b-form-group    v-if="newProduct.on_discount==1"
+            id="input-group-1"
+            :label="$t('businessowner.discount_Price')"
+            label-for="input-1"
+            label-size=""
+          >
+
+   
+
+            <b-form-input
+              v-model="newProduct.discount_price"
+              class="mt-1"
+              type="number"
+              id="price"
+              required
+            ></b-form-input>
+          </b-form-group>
+
+
   
           <b-form-group
             id="conditions"
@@ -440,7 +461,10 @@
   
         //init data
         this.newProduct.business_id = this.$route.params.id;
+       
         this.newProduct.categoryId = this.multiselecvalue.id;
+     
+
         this.newProduct.subCategoryId = this.filterselectvalue
           .map((el) => el.subcategory_id)
           .join();
@@ -532,7 +556,7 @@
           id: newTag.substring(0, 2) + Math.floor(Math.random() * 10000000),
         };
         this.multiselec.push(tag);
-        this.multiselecvalue.push(tag);
+        this.multiselecvalue.push(tag); 
       },
       addFilter(newTag) {
         const tag = {

@@ -1,13 +1,9 @@
-
 <template>
   <div>
-  
-
     <!-- ======= Header ======= -->
-    
 
-     <site-header class="topbar" />   
-  
+    <site-header class="topbar" />
+
     <!-- End Header -->
 
     <div class="container p-0">
@@ -17,8 +13,8 @@
             <span
               class="input-group-text border-left-0 color-mobile"
               style="width: 40px; border-right: none; background-color: white"
-            > 
-            <Button @click.native="getKeyword" media="mobile" />
+            >
+              <Button @click.native="getKeyword" media="mobile" />
               <!-- <i
                 class="bx bx-search"
                 style="color: #e75c18"
@@ -48,7 +44,7 @@
             <span
               class="input-group-text border-left-0 color-mobile"
               style="width: 40px; border-right: none; background-color: white"
-            > 
+            >
               <i class="bx bx-map" style="color: #e75c18" font-scale="1.5"> </i>
             </span>
           </div>
@@ -66,6 +62,7 @@
             v-on:click="toggleinput()"
             v-model="word2"
           />
+          <button class="button" @click="getKeyword">GO</button>
         </div>
       </form>
     </div>
@@ -76,7 +73,11 @@
         <div class="search">
           <div class="topp-div d-none d-md-none d-lg-block">
             <p>
-              {{ $t('home.Empowering_Businesses_And_Consumers_With_Digital_Presence_To_Buy_And_Sell_Online') }}
+              {{
+                $t(
+                  "home.Empowering_Businesses_And_Consumers_With_Digital_Presence_To_Buy_And_Sell_Online"
+                )
+              }}
             </p>
           </div>
         </div>
@@ -108,12 +109,12 @@
             />
 
             <datalist id="browsers">
-              <option :value="$t('home.Current_Location') "></option>
-              <option :value="$t('home.Yaounde') " />
+              <option :value="$t('home.Current_Location')"></option>
+              <option :value="$t('home.Yaounde')" />
             </datalist>
-             <slot name="button">
-                <Button @click.native="getKeyword" media='desktop' />
-              </slot>
+            <slot name="button">
+              <Button @click.native="getKeyword" media="desktop" />
+            </slot>
             <!-- <div
               class="input-group-append"
               style="
@@ -144,17 +145,22 @@
     >
       <div class="mobile-top-div d-lg-none p-2">
         <h3 style="font-size: 20px">
-          {{ $t('home.Empowering_Businesses_And_Consumers_With_Digital_Presence_To_Buy_And_Sell_Online') }}
+          {{
+            $t(
+              "home.Empowering_Businesses_And_Consumers_With_Digital_Presence_To_Buy_And_Sell_Online"
+            )
+          }}
         </h3>
       </div>
     </div>
 
-    <br> <br>
+    <br />
+    <br />
     <section id="about" class="about mt-md-30">
       <div class="container aos-init aos-animate" data-aos="fade-up">
         <div class="section-title">
           <h3 class="head-text bridge-header">
-            {{ $t('home.Find_Businesses_Institutions') }}
+            {{ $t("home.Find_Businesses_Institutions") }}
           </h3>
         </div>
 
@@ -168,7 +174,6 @@
                 padding-right: 15px;
                 padding-left: 15px;
               "
-
             >
               <div
                 class="bg-light border rounded shadow card"
@@ -188,7 +193,7 @@
                       font-size: 0.99em;
                     "
                   >
-                    {{ $t('home.Agriculture') }}
+                    {{ $t("home.Agriculture") }}
                   </h3>
                   <p
                     class="card-text"
@@ -227,7 +232,7 @@
                       font-size: 0.99em;
                     "
                   >
-                    {{ $t('home.Mayor_Councils') }}
+                    {{ $t("home.Mayor_Councils") }}
                   </h3>
                   <p
                     class="card-text"
@@ -266,7 +271,7 @@
                       font-size: 0.99em;
                     "
                   >
-                    {{ $t('home.Restaurants') }}
+                    {{ $t("home.Restaurants") }}
                   </h3>
                   <p
                     class="card-text"
@@ -305,7 +310,7 @@
                       font-size: 0.99em;
                     "
                   >
-                    {{ $t('home.Pharmacies') }}
+                    {{ $t("home.Pharmacies") }}
                   </h3>
                   <p
                     class="card-text"
@@ -338,25 +343,26 @@
           >
             <div class="content">
               <h3 class="bridge-header f-30px">
-                {{ $t('home.Business_Identities_and_Online_Marketplace') }}
+                {{ $t("home.Business_Identities_and_Online_Marketplace") }}
               </h3>
               <p>
-                {{ $t('home.We_help_businesses_to_easily_create_their_websites') }}, 
-                {{ $t('home.buy_and_sell_online_through_our_online_marketplace') }}
+                {{
+                  $t("home.We_help_businesses_to_easily_create_their_websites")
+                }},
+                {{
+                  $t("home.buy_and_sell_online_through_our_online_marketplace")
+                }}
                 <br />
               </p>
 
               <div class="text-center w-100">
-                <router-link :to="{name: 'signup'}">
-
-                <button
-                  class="btn btn-primary mt-5 bridge-btn float-left bridge-btn"
-                 
-                >
-                  {{ $t('home.Sign_up')}}
-                </button>
+                <router-link :to="{ name: 'signup' }">
+                  <button
+                    class="btn btn-primary mt-5 bridge-btn float-left bridge-btn"
+                  >
+                    {{ $t("home.Sign_up") }}
+                  </button>
                 </router-link>
-               
               </div>
             </div>
           </div>
@@ -398,22 +404,29 @@
                 />
               </div>
             </div> -->
-            
-             <div class="scroll-container ">
+
+            <div class="scroll-container ">
               <div class="scroll-element js-scroll slide-left text-center">
-
-                <video class="business-vid1" playsinline autoplay muted loop poster="assets/img/Home scroll copy.png"
-                  id="Test_Video">
-
-                  <source src="../assets/video/identity.mp4" type="video/mp4">
+                <video
+                  class="business-vid1"
+                  playsinline
+                  autoplay
+                  muted
+                  loop
+                  poster="assets/img/Home scroll copy.png"
+                  id="Test_Video"
+                >
+                  <source src="../assets/video/identity.mp4" type="video/mp4" />
                 </video>
-
               </div>
               <div class="scroll-caption hidde " id="hidde">
-
-
-                <img src="../assets/img/african-farmer.jpg" height="700px" class="d-none d-xl-block"
-                  style="height: 700px; margin-left: -300px;" alt="">
+                <img
+                  src="../assets/img/african-farmer.jpg"
+                  height="700px"
+                  class="d-none d-xl-block"
+                  style="height: 700px; margin-left: -300px;"
+                  alt=""
+                />
               </div>
             </div>
           </div>
@@ -437,23 +450,31 @@
             "
           >
             <div class="content">
-              <h3 class="bridge-header">{{ $t('home.Online_Business_Databases') }}</h3>
+              <h3 class="bridge-header">
+                {{ $t("home.Online_Business_Databases") }}
+              </h3>
               <p>
-                {{ $t('home.Our_online_business_directory_helps_to_make_businesses_visible_and_locatable') }} , 
-                {{ $t('home.and_enables_consumers_to_search_for_and_compare_product_prices') }}
+                {{
+                  $t(
+                    "home.Our_online_business_directory_helps_to_make_businesses_visible_and_locatable"
+                  )
+                }}
+                ,
+                {{
+                  $t(
+                    "home.and_enables_consumers_to_search_for_and_compare_product_prices"
+                  )
+                }}
               </p>
 
               <div class="text-center w-100">
-               <router-link :to="{name: 'signup'}">
-
-                <button
-                  class="btn btn-primary mt-5 bridge-btn float-left bridge-btn"
-                
-                >
-                  {{ $t('home.Sign_up') }}
-                </button>
-               </router-link>
-               
+                <router-link :to="{ name: 'signup' }">
+                  <button
+                    class="btn btn-primary mt-5 bridge-btn float-left bridge-btn"
+                  >
+                    {{ $t("home.Sign_up") }}
+                  </button>
+                </router-link>
               </div>
             </div>
           </div>
@@ -501,21 +522,26 @@
             "
           >
             <div class="content">
-              <h3 class="bridge-header">{{$t('home.Community_Engagement')}}</h3>
+              <h3 class="bridge-header">
+                {{ $t("home.Community_Engagement") }}
+              </h3>
               <p>
-                {{ $t('home.We_allow_businesses_and_consumers_to_follow_one_another') }} , 
-                {{ $t('home.receive_notifications_and_send_direct_messages') }}
+                {{
+                  $t(
+                    "home.We_allow_businesses_and_consumers_to_follow_one_another"
+                  )
+                }}
+                ,
+                {{ $t("home.receive_notifications_and_send_direct_messages") }}
               </p>
 
               <div class="text-center w-100">
-                <router-link :to="{name: 'signup'}">
-
-                <button
-                  class="btn btn-primary mt-5 bridge-btn float-left bridge-btn"
-                 
-                >
-                  {{ $t('home.Sign_up') }}
-                </button>
+                <router-link :to="{ name: 'signup' }">
+                  <button
+                    class="btn btn-primary mt-5 bridge-btn float-left bridge-btn"
+                  >
+                    {{ $t("home.Sign_up") }}
+                  </button>
                 </router-link>
               </div>
             </div>
@@ -563,21 +589,23 @@
             "
           >
             <div class="content">
-              <h3 class="bridge-header">{{ $t('home.Online_and_Offline') }}</h3>
+              <h3 class="bridge-header">{{ $t("home.Online_and_Offline") }}</h3>
               <p>
-                {{ $t('home.For_businesses_and_consumers_in_zones_of_low_or_no_internet_penetration') }}, 
-                {{ $t('home.our_platform_works_offline_via_SMS_and_USSD') }}
+                {{
+                  $t(
+                    "home.For_businesses_and_consumers_in_zones_of_low_or_no_internet_penetration"
+                  )
+                }},
+                {{ $t("home.our_platform_works_offline_via_SMS_and_USSD") }}
               </p>
 
               <div class="text-center w-100">
-                <router-link :to="{name: 'signup'}">
-
-                <button
-                  class="btn btn-primary mt-5 bridge-btn float-left bridge-btn"
-                 
-                >
-                  {{ $t('home.Sign_up') }}
-                </button>
+                <router-link :to="{ name: 'signup' }">
+                  <button
+                    class="btn btn-primary mt-5 bridge-btn float-left bridge-btn"
+                  >
+                    {{ $t("home.Sign_up") }}
+                  </button>
                 </router-link>
               </div>
             </div>
@@ -669,25 +697,22 @@
                 <li data-target="#carousel-1" data-slide-to="1"></li>
               </ol>
             </div> -->
-         
-          <div>
-  <b-carousel
-    id="carousel-no-animation"
-    style="text-shadow: 0px 0px 2px #000"
-    no-animation
-    indicators
-    img-width="1024"
-    img-height="480"
-  >
-    <b-carousel-slide
-      caption=""
-      :img-src="img1"
-    ></b-carousel-slide>
-    <b-carousel-slide
-      caption=""
-      :img-src="require('../assets/img/coach2.png')"
-    ></b-carousel-slide>
-    <!-- <b-carousel-slide
+
+            <div>
+              <b-carousel
+                id="carousel-no-animation"
+                style="text-shadow: 0px 0px 2px #000"
+                no-animation
+                indicators
+                img-width="1024"
+                img-height="480"
+              >
+                <b-carousel-slide caption="" :img-src="img1"></b-carousel-slide>
+                <b-carousel-slide
+                  caption=""
+                  :img-src="require('../assets/img/coach2.png')"
+                ></b-carousel-slide>
+                <!-- <b-carousel-slide
       caption="Third Slide"
       img-src="https://picsum.photos/1024/480/?image=22"
     ></b-carousel-slide>
@@ -695,10 +720,8 @@
       caption="Fourth Slide"
       img-src="https://picsum.photos/1024/480/?image=23"
     ></b-carousel-slide> -->
-  </b-carousel>
-</div>
-
-
+              </b-carousel>
+            </div>
           </div>
 
           <div
@@ -716,16 +739,21 @@
             &nbsp;
 
             <div class="content">
-              <h3 class="bridge-header">{{ $t('home.Digital_literacy') }}</h3>
+              <h3 class="bridge-header">{{ $t("home.Digital_literacy") }}</h3>
               <p>
-                {{ $t('home.We_provide_face_to_face_digital_literacy_trainings') }} 
-                {{ $t('home.for_businesses_who_lack_digital_know_how_through_our_army_of_digital_coaches') }}
+                {{
+                  $t("home.We_provide_face_to_face_digital_literacy_trainings")
+                }}
+                {{
+                  $t(
+                    "home.for_businesses_who_lack_digital_know_how_through_our_army_of_digital_coaches"
+                  )
+                }}
               </p>
-                <router-link :to="{name: 'signup'}">
-
-              <button class="btn btn-primary mt-5 bridge-btn bridge-btn mb-3">
-                {{ $t('home.See_Videos') }}
-              </button>
+              <router-link :to="{ name: 'signup' }">
+                <button class="btn btn-primary mt-5 bridge-btn bridge-btn mb-3">
+                  {{ $t("home.See_Videos") }}
+                </button>
               </router-link>
             </div>
           </div>
@@ -733,84 +761,85 @@
       </div>
     </section>
     <!-- End Why Us Section -->
-     <SiteFooter />
-   
+    <SiteFooter />
 
     <!-- <div id="preloader"></div> -->
   </div>
 </template>
 
-
-
-    
-
 <script>
-
-import SiteFooter from '../components/site/siteFooter';
+/**
+ * this page is the home page of the system
+ */
+import SiteFooter from "../components/site/siteFooter";
 import "../assets/js/main.js";
 // import "../assets/js/js.js";
-import Button from '@/components/ButtonNavBarFind.vue';
-import SiteHeader from '../components/site/siteHeader';
+import Button from "@/components/ButtonNavBarFind.vue";
+import SiteHeader from "../components/site/siteHeader";
 export default {
-  components: {Button, SiteHeader,SiteFooter},
-  data(){
+  components: { Button, SiteHeader, SiteFooter },
+  data() {
     return {
-      expanded:true,
-      word1:'',
-      word2:'',
-      img1:require('../assets/img/coach.png')
-    }
+      expanded: true,
+      word1: "",
+      word2: "",
+      img1: require("../assets/img/coach.png"),
+    };
   },
-
-
 
   props: {
     credentials: {
       type: Object,
-      default: function () {
+      default: function() {
         return {
-          keyword: '',
-          placeholder: this.$t('home.All'),
+          keyword: "",
+          placeholder: this.$t("home.All"),
         };
       },
     },
   },
 
-  methods:{
-
-    businessOwner(){
+  methods: {
+    businessOwner() {
       this.$store
-    .dispatch("homeRedirection/businessInfos")
-    .then(res => {
-      this.$router.push({ name: 'BusinessOwner', params: { id: this.$store.state.homeRedirection.idbissf} })
-      console.log(this.$store.state.homeRedirection.idbissf);
-    })
-    .catch(err =>{
-      console.log(err);
-    })
+        .dispatch("homeRedirection/businessInfos")
+        .then((res) => {
+          this.$router.push({
+            name: "BusinessOwner",
+            params: { id: this.$store.state.homeRedirection.idbissf },
+          });
+          console.log(this.$store.state.homeRedirection.idbissf);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
-    search(){
-        this.$router.push({ name: 'Search' })
+    search() {
+      this.$router.push({ name: "Search" });
     },
 
-    community(){
-       this.$router.push({ name: 'signup' })
+    community() {
+      this.$router.push({ name: "signup" });
     },
 
-    Expanded(a){
-      if(a== 1){
-        this.expanded= false;
-      }else if(a == 2){
-         this.expanded= true;
+    Expanded(a) {
+      if (a == 1) {
+        this.expanded = false;
+      } else if (a == 2) {
+        this.expanded = true;
       }
     },
 
-     toggleinput() {
+    toggleinput() {
       this.$refs.mobileinput.style.display = "block";
     },
 
-     getKeyword() {
-      console.log(this.credentials.keyword, '---mm')
+  /**
+   * this fuction id for make a search 
+   * @private
+   */
+    getKeyword() {
+      console.log(this.credentials.keyword, "---mm");
       if (!this.credentials.keyword) return false;
 
       if (this.$route.name != "Search") {
@@ -830,78 +859,60 @@ export default {
       }
     },
 
-    animation(){
-      console.log("annimation----")
-  var id = null;
-  var elem = document.getElementById("Test_Video");
-  var pos = 0;
-  clearInterval(id);
-  id = setInterval(frame, 5);
-  function frame() {
-    if (pos == 50) {
+    animation() {
+      console.log("annimation----");
+      var id = null;
+      var elem = document.getElementById("Test_Video");
+      var pos = 0;
       clearInterval(id);
-    } else {
-      pos++;
-      // elem.style.top = pos + 'px';
-      
+      id = setInterval(frame, 5);
+      function frame() {
+        if (pos == 50) {
+          clearInterval(id);
+        } else {
+          pos++;
+          // elem.style.top = pos + 'px';
 
-      elem.style.zIndex = "1";
-      elem.style.left = pos + 'px';
-    if(pos == 50){
-      // document.getElementById("animation").removeEventListener("scroll")
-       elem.style.left = 0 + 'px';
-    }
-  } 
-} 
-
-
-  }
+          elem.style.zIndex = "1";
+          elem.style.left = pos + "px";
+          if (pos == 50) {
+            // document.getElementById("animation").removeEventListener("scroll")
+            elem.style.left = 0 + "px";
+          }
+        }
+      }
+    },
   },
-  mounted(){
-      
-
-    
-
-//     document.getElementById("animation").addEventListener("scroll", () => {
-//     this.animation();
-// });
+  mounted() {
+    //     document.getElementById("animation").addEventListener("scroll", () => {
+    //     this.animation();
+    // });
 
     // document.getElementById("animation").addEventListener("scroll", () => {
     // this.animation();
     // window.removeEventListener("scroll")
-// });
-
-
+    // });
 
     var v = document.getElementById("Test_Video");
-
 
     var v2 = document.getElementById("Test_Video2");
 
     var v3 = document.getElementById("Test_Video3");
 
-
     v.playbackRate = 0.8;
     v2.playbackRate = 0.8;
     v3.playbackRate = 0.8;
 
-
-
     const scrollElements = document.querySelectorAll(".js-scroll");
 
-
     const scrollElements2 = document.querySelectorAll(".hidde");
-
-
-
 
     const elementInView = (el, dividend = 1) => {
       const elementTop = el.getBoundingClientRect().top;
       // console.log(document.documentElement.clientHeight);
 
       return (
-        elementTop <=
-        (30) / dividend
+        elementTop <= 30 / dividend
         //( 100) / dividen
       );
     };
@@ -910,122 +921,91 @@ export default {
       const elementTop = el.getBoundingClientRect().top;
 
       return (
-        elementTop > (window.innerHeight || document.documentElement.clientHeight)
+        elementTop >
+        (window.innerHeight || document.documentElement.clientHeight)
       );
     };
 
     const displayScrollElement = (element) => {
       element.classList.add("scrolled");
-
-
-
-
-
     };
 
     const displayScrollElement2 = (element) => {
       element.classList.add("js-scrolll");
-
-
-
-
-
     };
 
     const hideScrollElement2 = (element) => {
       element.classList.remove("js-scrolll");
-
     };
-
 
     const hideScrollElement = (element) => {
       element.classList.remove("scrolled");
-
     };
 
-
     const handleScrollAnimation = () => {
-
       scrollElements.forEach((el) => {
         if (elementInView(el, 1.25)) {
           displayScrollElement(el);
-
-
-
         } else if (elementOutofView(el)) {
           hideScrollElement(el);
-
-
-
         }
       });
-
 
       scrollElements2.forEach((el) => {
         if (elementInView(el, 1.25)) {
           displayScrollElement2(el);
-
-
-
-
         } else if (elementOutofView(el)) {
           hideScrollElement2(el);
-
-
-
-
         }
-      })
-
-    }
+      });
+    };
 
     window.addEventListener("scroll", () => {
       handleScrollAnimation();
     });
-
-
-
-
- 
-
-  }
+  },
 };
 </script>
 
 <style>
+@import "../assets/vendor/bootstrap/css/bootstrap.min.css";
+@import "../assets/vendor/boxicons/css/boxicons.min.css";
+@import "../assets/vendor/remixicon/remixicon.css";
+@import "../assets/vendor/venobox/venobox.css";
 
-
-@import "../assets/vendor/bootstrap/css/bootstrap.min.css" ; 
- @import "../assets/vendor/boxicons/css/boxicons.min.css" ;
-@import "../assets/vendor/remixicon/remixicon.css" ;
-@import "../assets/vendor/venobox/venobox.css" ;
-
-@import "../assets/css/style1.css" ;
-
+@import "../assets/css/style1.css";
 
 /* @import "../assets/css/style.css"; */
-@import "../assets/vendor/aos/aos.css" ;
+@import "../assets/vendor/aos/aos.css";
 @import "../assets/vendor/owl.carousel/assets/owl.carousel.min.css";
 @import "../assets/vendor/icofont/icofont.min.css";
 @import url("https://fonts.googleapis.com/css2?family=Merriweather&family=Merriweather+Sans:wght@300&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Jost:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i");
 
-.zoomInUp{
+.zoomInUp {
   background-color: #cc4d0d;
 }
-.couleur{
-  color: #e75c18 ;
+.couleur {
+  color: #e75c18;
+}
+
+.button {
+  background-color: #ffffff;
+  border-color: #cc4d0d ;
+  border: solid 2px ;
+  color: #cc4d0d;
+
   
 }
-.bold{
+.bold {
   font-weight: bold;
   font-size: 16px;
 }
-.taillev1{
-    height: 670px !important;
-    width: 400px;
-    margin-left: 130px;
-    margin-right: 190px;
+.taillev1 {
+  height: 670px !important;
+  width: 400px;
+  margin-left: 130px;
+  margin-right: 190px;
 }
 .blec-container {
   position: absolute;
@@ -1077,7 +1057,6 @@ export default {
   color: #fff;
   transition: 0.4s;
   border-radius: 10px;
- 
 }
 
 .bridge-btn:hover {
@@ -1113,51 +1092,49 @@ export default {
     margin-top: 20px;
   }
 
-  .hidde{
+  .hidde {
     display: none;
   }
 }
 
 @media only screen and (min-width: 768px) {
-
-.scroll-container {
-   
+  .scroll-container {
     width: 1000px !important;
-}
+  }
   .d-xl-block {
     display: block !important;
     /* margin-left: 100px !important; */
-    
-        /* height: 530px !important;
-    width: 390px */
-}
-.taille{
-  height: 704px;
-}
 
-  .sizeimg{
+    /* height: 530px !important;
+    width: 390px */
+  }
+  .taille {
+    height: 704px;
+  }
+
+  .sizeimg {
     border: solid;
     margin-left: -190px;
     margin-right: -20px;
   }
-  .size_video1{
+  .size_video1 {
     width: 400px !important;
     height: 700px !important;
   }
 
-  .bridge-btn{
+  .bridge-btn {
     width: 124px;
     height: 48px;
   }
-  .b-logo{
+  .b-logo {
     width: 100px !important;
     height: 70px !important;
   }
-  .size_nav{
+  .size_nav {
     font-size: 14px !important;
     color: #343a40 !important;
   }
-  .text_box{
+  .text_box {
     font-size: 25px !important;
     /* height: 166px !important;
     width: 500px !important; */
@@ -1166,7 +1143,6 @@ export default {
     padding-left: 50px !important;
     padding-right: 50px;
     font-size: 14px !important ;
-  
   }
 
   .topp-div {
@@ -1206,7 +1182,7 @@ export default {
 
   .business-vid1 {
     height: 704px !important;
-    width: 396px ;
+    width: 396px;
     z-index: 1;
     position: relative;
   }
@@ -1336,7 +1312,6 @@ export default {
 
 /*General styling for structure*/
 
-
 .container {
   max-width: 1280px;
   width: 95%;
@@ -1349,7 +1324,7 @@ header h2 {
 
 .scroll-container {
   min-height: 450px;
-  
+
   display: flex;
   align-items: center;
   box-sizing: border-box;
@@ -1367,9 +1342,8 @@ header h2 {
 }
 
 .scroll-caption {
-  
-      margin-left: 200px;
-    height: 700px !important;
+  margin-left: 200px;
+  height: 700px !important;
 }
 
 footer {

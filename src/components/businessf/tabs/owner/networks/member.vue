@@ -522,7 +522,7 @@ export default {
       formData.append("keyword", data);
       let lien = "";
       if (data == "") {
-        lien = "network/" + this.url + "/members/editor/" + this.page;
+        lien = "network/" + this.url + "/members/editor/" + this.editorspage;
       } else {
         lien =
           "network/" +

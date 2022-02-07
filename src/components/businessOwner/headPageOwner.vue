@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div>   
     <div class="container-fluid" style="padding: 0px">
       <div class="splide" v-if="business_info.cover.length">
-        <splide :options="options" class="banner r-image">
+        <splide :options="options" :key="business_info.cover.length" class="banner r-image">
           <splide-slide v-for="cover in business_info.cover" :key="cover.id">
             <img :src="cover.media_url" class="r-image" />
           </splide-slide>
@@ -182,7 +182,7 @@
                   </template>
 
                   <b-dropdown-item @click="selectCover">
-                    {{ $t("businessowner.Change_Cover") }}</b-dropdown-item
+                    {{ $t("businessowner.Add_Cover") }}</b-dropdown-item
                   >
 
                   <b-dropdown-item >  <router-link :to="'/business/'+url " >   {{
@@ -252,7 +252,7 @@ export default {
       this.$store
         .dispatch("businessOwner/businessInfo", this.url)
         .then(() => {
-          console.log("hey yeah");
+          
         })
         .catch((err) => {
           console.log({ err: err });
@@ -370,12 +370,12 @@ export default {
           });
 
           loader.hide();
-          this.$refs["modalxl"].hide();
+         // this.$refs["coverphoto"].hide();  
         })
 
         .catch((err) => {
           
-          if (err.response && err.response.status == 422) {
+          if (err.response && err.response.status == 422) {    
             this.flashMessage.show({
               status: "error",
               message: err.response.data.message,
@@ -408,6 +408,7 @@ export default {
   watch: {
     "$store.state.businessOwner.businessInfo": function (data) {
       console.log(data)
+   
       this.updatePictureState(data.logo_path);
       this.addCoverPictureBusiness(data.cover);
     },

@@ -219,6 +219,7 @@ new Vue({
           error => {
             if (error.response) {
               if (error.response.status === 401) {
+              
                 this.$store.dispatch('auth/logout');
                 console.log('error has ocurred', error);
               }

@@ -69,6 +69,8 @@ export default {
         SEARCH({ commit, state, getters }, data) {
             console.log("[here]:", data);
             let islogin = this.getters["auth/isLogged"];
+            console.log("testing user login --------");
+            console.log(islogin);
 
             commit("setNetworks", { data: [] });
             commit("setPeoples", { data: [] });

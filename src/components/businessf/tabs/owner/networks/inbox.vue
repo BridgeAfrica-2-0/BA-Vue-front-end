@@ -410,7 +410,7 @@
                   <b-col class="col-1 mt-3 ma-4">
                     <b-icon
                       @click="showMessages(true)"
-                      icon="arrow-left-square-fill"
+                      icon="objArrow-left-square-fill"
                       font-scale="1"
                       aria-hidden="true"
                       class="primary"
@@ -2886,11 +2886,11 @@
 
 <script>
 /**
-   * The custom HTML `<inboxNetwork>` component.
-   *
-   * @author Edouard Yonga
-   * Copyright (c) Bridge Africa. All rights reserved.
-*/
+ * The custom HTML `<inboxNetwork>` component.
+ *
+ * @author Edouard Yonga
+ * Copyright (c) Bridge Africa. All rights reserved.
+ */
 import EmojiPicker from "vue-emoji-picker";
 import io from "socket.io-client";
 import moment from "moment";
@@ -3069,6 +3069,7 @@ export default {
     window.addEventListener("resize", () => {
       this.screenWidth = window.screen.width;
     });
+    this.getUniqueListBy();
   },
   created() {
     this.socketListenners();
@@ -3118,10 +3119,33 @@ export default {
     },
   },
   methods: {
+    /**
+     * This methode is a debounce that triger the search after 1 second
+     * @private
+     */
     onPressSearchNewChat: _.debounce(function (e) {
       console.log("press...", e);
       this.getList(e);
     }, 1000),
+
+    getUniqueListBy() {
+      let objArr = [
+        { id: 12, name: "goku" },
+        { id: 11, name: "vegekudd" },
+        { id: 11, name: "vegeku" },
+      ];
+
+      let out = [
+        ...new Map(objArr.map((item) => [item["name"], item])).values(),
+      ];
+      console.log("ZZZ:", out);
+      return out;
+    },
+
+    /**
+     * This methode is used to get the appropriate name from an object
+     * @private
+     */
     formatName(value) {
       var name = "";
       // console.log("Value:", value);
@@ -3150,6 +3174,11 @@ export default {
 
       return name;
     },
+
+    /**
+     * This methode is used to get the appropriate image from an object
+     * @private
+     */
     getImage(data) {
       // console.log("data IN", data);
       let image = data.image;
@@ -3185,6 +3214,12 @@ export default {
       // console.log(this.type);
       return finale;
     },
+
+    /**
+     * This methode is used to get the appropriate image from an object in
+     * the chatList (leftside chat list)
+     * @private
+     */
     chatListImage(value) {
       var image = "";
       let user = require("@/assets/profile_white.png");
@@ -3222,9 +3257,21 @@ export default {
       // console.log("chatlist image:", image);
       return image;
     },
+
+    /**
+     * This methode is used to get the appropriate image from an object in
+     * the chatList (leftside chat list)
+     * @private
+     */
     getCurBiz() {
       this.$store.dispatch("networkChat/GET_CUR_BIZ");
     },
+
+    /**
+     * This methode is used to get the appropriate image from an object in
+     * the chatList (leftside chat list)
+     * @private
+     */
     getName(chat) {
       return chat.business_i_d
         ? chat.business_i_d.name
@@ -3356,12 +3403,11 @@ export default {
     async socketListenners() {
       this.socket.on("groupMessage", (data) => {
         console.log("group message Received");
-        this.audio.play();
+        // this.audio.play();
         console.log(data);
         this.chats.push(data);
 
         this.formData.append("message", data.message);
-
         this.formData.append("userID", data.userID);
         this.formData.append("businessID", data.businessID);
         this.formData.append("networkID", data.networkID);
@@ -3370,8 +3416,8 @@ export default {
 
         this.saveMessage(this.formData);
         this.$store.dispatch("networkChat/GET_BIZS_CHAT_LIST_Dos", {
-            type: this.type
-          });
+          type: this.type,
+        });
       });
       this.socket.on("privateMessage", (data) => {
         console.log("Received");
@@ -3388,7 +3434,7 @@ export default {
         if (this.currentBizId == data.sender_network_id) {
           this.saveMessage(this.formData);
           this.$store.dispatch("networkChat/GET_BIZS_CHAT_LIST_Dos", {
-            type: this.type
+            type: this.type,
           });
         } else {
           // this.$store.dispatch("networkChat/GET_BIZS_CHAT_LIST_Dos", {
@@ -3491,6 +3537,9 @@ export default {
       this.$store.dispatch("networkChat/GET_USERS", {
         keyword: keyword,
       });
+
+      let users = this.getUniqueListBy(this.users, "id");
+      console.log("Users upDown:", users);
     },
     getBizs(keyword) {
       this.initFilter();
@@ -3727,20 +3776,20 @@ export default {
           membersMemberIds.push(biz.memberID);
         });
 
-        // data = {
-        //   userID: membersPeopleIds,
-        //   businessID: membersBusinessIds,
-        //   networkID: membersNetworkIds,
-        //   networkEditorID: membersEditorIds,
-        //   memberID: membersMemberIds,
-        //   message: this.input,
-        //   attachment: this.file,
-        // };
         data = {
-          networkID: this.groupAdminId,
+          userID: membersPeopleIds,
+          businessID: membersBusinessIds,
+          networkID: membersNetworkIds,
+          networkEditorID: membersEditorIds,
+          memberID: membersMemberIds,
           message: this.input,
           attachment: this.file,
         };
+        // data = {
+        //   networkID: this.groupAdminId,
+        //   message: this.input,
+        //   attachment: this.file,
+        // };
         console.log("here:...", data);
         this.formData.append("attachment", this.file);
         this.socket.emit("groupMessage", data);

@@ -558,7 +558,10 @@ export default {
         });
     },
 
-    
+    /**
+     * this method allows to pre-fill the form which allows to edit a business
+     * @private
+     */
     setEditData(business) {
       console.log("setting editBusiness data");
       console.log(business);
@@ -583,6 +586,10 @@ export default {
       this.Locality();
     },
 
+/**
+ * this method allows to take into account all the categories selected by the user 
+ * @private
+ */
      addFilter(newTag) {
       const tag = {
         name: newTag,
@@ -591,6 +598,11 @@ export default {
       this.multiselec.push(tag);
       this.filterselectvalue.push(tag);
     },
+
+    /**
+ * this method is triggered each time a category is selected to retrieve all corresponding sub-categories  
+ * @private
+ */
     subcategories() {
       console.log(this.pcategories," subcategories here", this.selectedcategories);
       let formData2 = new FormData();
@@ -605,6 +617,10 @@ export default {
         });
     },
  
+ /**
+ * this method allows to take into account all the subcategories selected by the user 
+ * @private
+ */
     addTag(newTag) {
       const tag = {
         name: newTag,
@@ -613,6 +629,11 @@ export default {
       this.multiselec.push(tag);
       this.multiselecvalue.push(tag);
     },
+
+    /**
+     * this method is used to return all information related to a business
+     * @private
+     */
     businessInfos() {
       // this.$store.dispatch("businessOwner/businessInfo", this.url);
        this.$store
@@ -630,6 +651,10 @@ export default {
       )
     },
 
+/**
+ * this method is used to search for regions when a country is selected
+ * @private
+ */
     change(val) {
       console.log(val);
 
@@ -649,6 +674,10 @@ export default {
       });
     },
 
+/**
+ * this method is used to put the list of countries in the right format 
+ * @private
+ */
     getCountry() {
       this.$store.dispatch("auth/country").then((res) => {
         console.log("------------------------", this.$store.state.auth.country);
@@ -661,6 +690,11 @@ export default {
         });
       });
     },
+
+    /**
+     * this method is used to put the list of categories in the right format for display
+     * @private
+     */
     getCathegorie() {
       this.$store.dispatch("auth/categories").then((res) => {
         console.log("---", this.$store.state.auth.categories);
@@ -674,6 +708,11 @@ export default {
         });
       });
     },
+
+    /**
+     * method not used
+     * @private
+     */
     getValidationClass(fieldName) {
       const field = this.$v.form[fieldName];
       if (field) {
@@ -683,6 +722,10 @@ export default {
       }
     },
 
+/**
+ * method used to validate and submit the form to update a business
+ * @private
+ */
     validate() {
       this.$v.form.$touch();
       if (this.$v.form.$anyError) {
@@ -696,6 +739,10 @@ export default {
       }
     },
 
+/**
+ * method used to  submit the form to update a business
+ * @private
+ */
     UpdateBusiness() {
       let formData2 = new FormData();
     console.log("----ttt",this.select_filterss, "----ggg ", this.filterselectvalue)
@@ -776,6 +823,10 @@ export default {
       // this.center={ lat:10, lng: 20 }
     },
 
+/**
+ * not used
+ * @private
+ */
     editBio() {
       this.edit1 = !this.edit1;
     },

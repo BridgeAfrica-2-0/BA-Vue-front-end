@@ -53,6 +53,10 @@
 </template>
 
 <script>
+/**
+ * this component is for display and edit biography
+ * @author Marcellin-dev
+ */
 export default {
   data() {
     return {
@@ -99,6 +103,10 @@ export default {
       });
   },
 
+/**
+ * this method is for launch the date in the form for edit 
+ * @private
+ */
   methods: {
     edit(value) {
       if (value === 0) {
@@ -118,6 +126,11 @@ export default {
       }
       this.editing = !this.editing;
     },
+
+    /**
+     * this method is for save the information after edit 
+     * @private
+     */
     save() {
       this.edited = true;
       this.successmsg = this.$t("profileowner.Profile_was_succesfully_Edited");

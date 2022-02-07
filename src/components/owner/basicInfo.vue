@@ -98,6 +98,10 @@
 </template>
 
 <script>
+/**
+ * this component is for display the basic infos of the user 
+ * @author marcellin-dev
+ */
 export default {
   data() {
     return {

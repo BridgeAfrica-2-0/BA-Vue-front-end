@@ -45,9 +45,9 @@
       <Insight />
     </div>
 
-    <div class="mt-3 d-block d-md-none" v-if="selectedIdd == '8'">
+    <!-- <div class="mt-3 d-block d-md-none" v-if="selectedIdd == '8'">
       <Pending />
-    </div>
+    </div> -->
 
     <b-row class="center-content d-none d-md-block">
       <b-col cols="10">
@@ -81,9 +81,9 @@
                 <b-card-text> <Insight /> </b-card-text
               ></b-tab>
 
-              <b-tab :title="$t('general.Pending_Post')">
+              <!-- <b-tab :title="$t('general.Pending_Post')">
                 <b-card-text> <Pending /> </b-card-text
-              ></b-tab>
+              ></b-tab> -->
 
               <!-- <b-tab title="Payment">
                 <b-card-text> <Payment /> </b-card-text
@@ -122,7 +122,7 @@ import Payment from "@/components/businessOwner/settings/payment";
 import Blocking from "@/components/businessOwner/settings/blocking";
 import Notification from "@/components/businessOwner/notification";
 import LyTab from "@/tab/src/index.vue";
-import Pending from "@/components/businessOwner/pending";
+//import Pending from "@/components/businessOwner/pending";
 import Insight from "@/components/businessOwner/insight";
 
 export default {
@@ -163,7 +163,7 @@ export default {
     // General,
     // Roles,
     Notification,
-    Pending,
+   // Pending,
     LyTab,
     Insight,
     // Info,

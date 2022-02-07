@@ -511,6 +511,10 @@
 </template>
 
 <script>
+/**
+ * this component is for display contact and basic information of the user 
+ * @author Marcellin-dev
+ */
 import moment from "moment";
 import axios from 'axios';
 export default {
@@ -579,7 +583,10 @@ export default {
   },
   methods: {
 
-
+/**
+ * this method is for delete contact of the user 
+ * @private
+ */
 deleteContact(id){
       console.log("---",id)
       
@@ -589,6 +596,10 @@ deleteContact(id){
       });
     
     },
+    /**
+     * this method is for get the gender and display well
+     * @private
+     */
     getgender() {
       if (this.info.user.gender == "female") {
         this.usergen = "F";
@@ -597,6 +608,10 @@ deleteContact(id){
       }
     },
 
+    /**
+     * this method is for cancel
+     * @private
+     */
     cancel() {
       console.log("Cancel edit birth date user  ++++++");
       this.basicInfo = JSON.parse(
@@ -604,6 +619,11 @@ deleteContact(id){
       );
       this.phoneInput = null;
     },
+
+    /**
+     * this method is for update date of birth
+     * @private
+     */
     saveBirthDate() {
       console.log("this.birthDate STARTTTTT");
       console.log(this.birthDate);
@@ -627,6 +647,10 @@ deleteContact(id){
         });
     },
 
+     /**
+     * this method is for update gender
+     * @private
+     */
     saveGender() {
       console.log("save new gender user start +++++");
       console.log(this.basicInfo.gender);
@@ -657,6 +681,10 @@ deleteContact(id){
         });
     },
 
+    /**
+     * this method is for update principal phone number
+     * @private
+     */
     savePhone(){
       console.log('--',this.info.user.phone);
       let data = { phone: this.info.user.phone}
@@ -670,6 +698,11 @@ deleteContact(id){
         console.log(err)
       })
     },
+
+    /**
+     * this method is for update secondary phones numbers
+     * @private
+     */
     savePhoneNumber() {
       this.$store
         .dispatch("profile/updateUserBasicInfosMobilePhones", {
@@ -691,6 +724,11 @@ deleteContact(id){
           this.$refs["phonemodal"].hide();
         });
     },
+
+    /**
+     * this method is for update principal currency city
+     * @private
+     */
     saveCurrentCity() {
       console.log("save new current City user start +++++");
       console.log(this.basicInfo.currentCity);
@@ -722,6 +760,11 @@ deleteContact(id){
           this.$refs["currentcityModal"].hide();
         });
     },
+
+    /**
+     * this method is for update principal home town
+     * @private
+     */
     saveHomeTown() {
       this.$store
         .dispatch("profile/updateUserBasicInfosHomeTown", {
@@ -743,6 +786,11 @@ deleteContact(id){
           this.$refs["hometownModal"].hide();
         });
     },
+
+    /**
+     * this method is for add  website
+     * @private
+     */
     saveWebsite() {
       this.$store
         .dispatch("profile/updateUserBasicInfosWebsites", {
@@ -776,6 +824,11 @@ deleteContact(id){
          
         });
     },
+
+    /**
+     * this method is for delete website
+     * @private
+     */
     deleteWebsite(website) {
       console.log("save new websites user start +++++");
       console.log(website);
@@ -795,6 +848,11 @@ deleteContact(id){
           this.$refs["websiteEModal"].hide();
         });
     },
+
+    /**
+     * this method is for save website
+     * @private
+     */
     saveEWebsite() {
       console.log("save new websites user start +++++");
       this.$store
@@ -815,6 +873,11 @@ deleteContact(id){
           this.$refs["websiteEModal"].hide();
         });
     },
+
+    /**
+     * this method is for add social link
+     * @private
+     */
     saveSocialLink() {
       console.log("save new sociallinks  user start +++++");
       if (this.basicInfo.socialLinks.includes(this.sociallinkInput)) {
@@ -856,6 +919,11 @@ deleteContact(id){
           this.$refs["sociallinkModal"].hide();
         });
     },
+
+    /**
+     * this method is for delete website, social link 
+     * @private
+     */
     deleteElement(type, value) {
       switch (type) {
         case "website":
@@ -877,6 +945,11 @@ deleteContact(id){
           break;
       }
     },
+
+    /**
+     * this method is for edit website, social link, 
+     * @private
+     */
     edit(type, value) {
       switch (type) {
         case "website":
@@ -899,6 +972,7 @@ deleteContact(id){
           this.$refs["sociallinkModal"].show();
       }
     },
+    
     redirect(website) {
       console.log(website);
       window.location.replace(website);

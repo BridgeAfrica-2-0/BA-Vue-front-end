@@ -15,6 +15,8 @@
                 <div class="col-9">
                   <b-form-tags
                     input-id="tags-separators"
+                    tag-variant="primary"
+                    class="font-12"
                     separator=" ,"
                     :placeholder="
                       $t('network.Enter_keyword_alert_separate_by_space_or')
@@ -159,7 +161,7 @@ export default {
       listTag = listTag.substring(1);
 
       let data = {
-        network_id: 1,
+        networkId:  this.$route.params.id,
         keywork: listTag,
       };
       //this.$store.commit("keywordOperationOnNetwork/setListKeyWord", data);
@@ -252,5 +254,9 @@ export default {
 <style scoped>
 .a-left {
   text-align: left;
+}
+
+.font-12{
+  font-size: 14px;
 }
 </style>

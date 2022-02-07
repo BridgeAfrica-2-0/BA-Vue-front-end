@@ -84,7 +84,7 @@ export default {
     getfollowers({ commit }, networkId) {
       console.log("networkId: ", networkId);
       return axios
-        .post(`/network/${networkId}/members/list`)
+        .get(`/network/${networkId}/members-assign`)
         .then(({ data }) => {
           commit("setfollowers", data.data);
           console.log("data: ", data);

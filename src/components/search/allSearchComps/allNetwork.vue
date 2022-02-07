@@ -121,8 +121,8 @@
 
     <!-- End pagination -->
 
-    <b-modal id="modal-sm" size="sm" hide-header>
-      {{ $t("search.Do_you_want_to_join_this_network") }}?
+    <b-modal v-model="show" id="modal-sm" size="sm" hide-header>
+      <p class="text-center">Unable to join network!</p>
     </b-modal>
   </div>
 </template>
@@ -134,6 +134,7 @@ export default {
   props: ["title", "image"],
   data() {
     return {
+      show: false,
       showAction: null,
       viewProduct: false,
       total: 0,
@@ -168,7 +169,10 @@ export default {
         .then((response) => {
           user.is_follow = nextFollowState;
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          this.show = true;
+          console.log(err);
+        });
     },
     async handleJoin(user) {
       const uri = user.is_member == 0 ? `/add-member` : `/remove-member`;
@@ -182,7 +186,10 @@ export default {
         .then((response) => {
           user.is_member = nextFollowState;
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          this.show = true;
+          console.log(err);
+        });
     },
 
     changePage(value) {

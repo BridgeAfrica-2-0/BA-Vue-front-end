@@ -714,10 +714,10 @@ export default {
     }),
 
     profileSenderImange(image) {
-      console.log(image)
-      const picture = image.hasOwnProperty('profile_picture')
-        ? image.profile_picture 
-        : image.hasOwnProperty('logo_path')
+      
+      const picture = image && image.profile_picture
+        ? image && image.profile_picture 
+        : image && image.logo_path
           ? image.logo_path
           : image.image
 

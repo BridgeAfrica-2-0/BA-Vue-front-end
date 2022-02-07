@@ -711,6 +711,7 @@
 
                   <div class="col-md" style="width: 100%; height: 200px; overflow:hidden">
                     <AutocompleteLocation
+                      :infos="infos"
                       :region="region"
                       @get-address-details="getGeoCoderResult"
                     />
@@ -1683,6 +1684,16 @@ export default {
   },
 
   computed: {
+
+    infos: function() {
+      
+     let infos= {
+        lat: this.center.lat,
+        lng: this.center.lng,
+        address: this.address
+      }
+      return infos ;
+    },
     selectedKeywords: function() {
       let selectedUsers = [];
       this.business_keyword.forEach((item) => {

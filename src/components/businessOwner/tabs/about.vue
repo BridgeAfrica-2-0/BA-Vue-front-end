@@ -485,6 +485,7 @@
            <div class="" style="height: 200px; overflow:hidden">
                   <AutocompleteLocation
                   
+                    :infos="business_about_input"
                     :region="region"
                     @get-address-details="getGeoCoderResult"
                   />
@@ -894,7 +895,10 @@ export default {
   },
   methods: {
 
-    getGeoCoderResult(response) {console.log(response);
+    getGeoCoderResult(response) {console.log('res map ---',response);
+
+       this.business_about_input.lng = response.coordinates[0];
+      this.business_about_input.lat = response.coordinates[1];
       this.coordinates = response.coordinates;
       this.business_about_input.address = response.address;
       console.log("yoo mother fuckers");
@@ -916,7 +920,9 @@ export default {
     stringArray(words) {
       let keyword = "";
       words.map((item) => {
-        if (item.subcategoryId) {
+        if (item.subcategory_id) {
+          keyword += item.subcategory_id + ",";
+        } else if (item.subcategoryId){
           keyword += item.subcategoryId + ",";
         } else {
           keyword += item.id + ",";
@@ -1042,7 +1048,9 @@ export default {
           console.log(this.multiselecvalue, " --sous cat --- ",this.filterselectvalue);
           
           this.test();
-          console.log(this.business_about_input);
+          
+       
+          console.log('test-------',this.business_about_input.lat, '------:',this.business_about_input.lng);
 
           var dat = {
             business_id: this.$route.params.id,

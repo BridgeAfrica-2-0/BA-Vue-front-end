@@ -561,7 +561,7 @@
         </div>
 
         <div class="form-group">
-          <label for="description">{{$t("businessowner.Description")}}</label><br />
+          <label  @click="input1" for="description">{{$t("businessowner.Description")}}</label><br />
           <textarea
             type="text"
             id="description"
@@ -581,6 +581,7 @@
               label-size="md"
               label-class=" pt-0 "
               class="mb-0"
+             
             >
               <b-form-group class="mb-0" v-slot="{ ariaDescribedby }">
                 <b-form-radio-group
@@ -593,14 +594,14 @@
                 ></b-form-radio-group>
                 <br />
                 <b-container>
-                  <b-row v-for="day in dayOfWorks" :key="day.day">
+                  <b-row v-for="(day, index) in dayOfWorks" :key="index">
                     <b-col cols="6"
                       ><b-form-checkbox
                         id=""
                         class="a-text text"
                         name="works"
                         v-model="day.check"
-                        :checked="day.check"
+                        :checked="isCheck(day)"
                       >
                         {{ day.day }}</b-form-checkbox
                       ></b-col
@@ -608,8 +609,9 @@
 
                     <b-col
                       ><b-form-input
+                        @change="input(index, day)"
                         name="start"
-                        type="text"
+                        type="time"
                         v-model="day.opening_time"
                         :required="day.check ? 'required' : null"
                       ></b-form-input
@@ -617,8 +619,9 @@
                     --
                     <b-col
                       ><b-form-input
+                      @change="input(index, day)"
                         name="end"
-                        type="text"
+                        type="time"
                         v-model="day.closing_time"
                         :required="day.check ? 'required' : null"
                       ></b-form-input
@@ -681,38 +684,40 @@ export default {
       municipality: [],
       locality: [],
       dayOfWorks: [
-        { day: "Monday", opening_time: null, closing_time: null, check: false },
+        { day: "monday", mon_start: null, mon_end: null, check: false },
         {
-          day: "Tuesday",
-          opening_time: null,
-          closing_time: null,
+          day: "tuesday",
+          tues_start: null,
+          tues_end: null,
           check: false,
         },
         {
-          day: "Wednesday",
-          opening_time: null,
-          closing_time: null,
+          day: "wednesday",
+          wed_start: null,
+          wed_end: null,
           check: false,
         },
         {
-          day: "Thursday",
-          opening_time: null,
-          closing_time: null,
+          day: "thursday",
+          thurs_start: null,
+          thurs_end: null,
           check: false,
         },
-        { day: "Friday", opening_time: null, closing_time: null, check: false },
+        { day: "friday", fri_start: null, fri_end: null, check: false },
         {
-          day: "Saturday",
-          opening_time: null,
-          closing_time: null,
+          day: "saturday",
+          sat_start: null,
+          sat_end: null,
           check: false,
         },
-        { day: "Sunday", opening_time: null, closing_time: null, check: false },
+        { day: "sunday", sun_start: null, sun_end: null, check: false },
       ],
+      
       business_about: {},
       business_about_input: {},
       openNow: null,
       open: null,
+      tempo: {}
     };
   },
   watch: {
@@ -755,7 +760,8 @@ export default {
         this.business_about = JSON.parse(
           JSON.stringify(this.$store.getters["businessOwner/getBusinessAbout"])
         );
-        this.dayOfWorks = this.initialize(this.dayOfWorks);
+        // this.dayOfWorks = this.initialize(this.dayOfWorks);
+        this.dayOfWorks = this.business_about.business_open_hours;
       })
       .catch((error) => {
         console.log("error from the server or browser error(2) ++++", error);
@@ -776,6 +782,11 @@ export default {
     this.editBusiness();
   },
   computed: {
+    isCheck(data){
+      if(data.opening_time && data.closing_time){
+        return true
+      }else return false
+    },
     showPen() {
       if (this.$route.name == 'BusinessFollower' || this.$route.name == 'BusinessEditor'){
         return false ;
@@ -900,7 +911,109 @@ export default {
   methods: {
 
 
+    input1(){
+         
+      this.dayOfWorks.map((item) =>{
+          if(item.day == "monday"){
+              this.dayOfWorks[0].mon_start =this.dayOfWorks[0].opening_time;
+              this.dayOfWorks[0].mon_end =this.dayOfWorks[0].closing_time;
+              this.dayOfWorks[0].monday =this.dayOfWorks[0].day;
+          }else  if(item.day == "tuesday"){
+              this.dayOfWorks[1].tues_start =this.dayOfWorks[1].opening_time;
+              this.dayOfWorks[1].tues_end =this.dayOfWorks[1].closing_time;
+              this.dayOfWorks[1].tuesday =this.dayOfWorks[1].day;
+          } else  if(item.day == "wednesday"){
+              this.dayOfWorks[2].wed_start =this.dayOfWorks[2].opening_time;
+              this.dayOfWorks[2].wed_end =this.dayOfWorks[2].closing_time;
+              this.dayOfWorks[2].wednesday =this.dayOfWorks[2].day;
+          } else  if(item.day == "thursday"){
+              this.dayOfWorks[3].thurs_start =this.dayOfWorks[3].opening_time;
+              this.dayOfWorks[3].thurs_end =this.dayOfWorks[3].closing_time;
+              this.dayOfWorks[3].thursday =this.dayOfWorks[3].day;
+          } else  if(item.day == "friday"){
+              this.dayOfWorks[4].fri_start =this.dayOfWorks[4].opening_time;
+              this.dayOfWorks[4].fri_end =this.dayOfWorks[4].closing_time;
+              this.dayOfWorks[4].friday =this.dayOfWorks[4].day;
+          } else  if(item.day == "saturday"){
+              this.dayOfWorks[5].sat_start =this.dayOfWorks[5].opening_time;
+              this.dayOfWorks[5].sat_end =this.dayOfWorks[5].closing_time;
+              this.dayOfWorks[5].saturday =this.dayOfWorks[5].day;
+          } else  if(item.day == "sunday"){
+              this.dayOfWorks[6].sun_start =this.dayOfWorks[6].opening_time;
+              this.dayOfWorks[6].sun_end =this.dayOfWorks[6].closing_time;
+              this.dayOfWorks[6].sunday =this.dayOfWorks[6].day;
+          }
+        })
+        console.log('---input: ',this.dayOfWorks);
+        console.log('---input: ',...this.dayOfWorks);
+       
+        this.dayOfWorks.map((item) =>{
+
+            Object.entries(item).forEach(
+            ([key, valeur]) => {
+              this.tempo[key] = valeur 
+            }
+          );
+
+          // for (let key in item) {
+          //     tempo.key = item.key
+          //   }
+         
+        })
+        console.log('good: ',this.tempo)
+    },
+
+    input(index, data){
+
+          // switch(index) {
+          //       case 0:
+          //         if(data.opening_time && data.closing_time){
+                    
+          //           this.dayOfWorks[0].monday = "monday";
+          //           this.dayOfWorks[0].mon_start =data.opening_time;
+          //           this.dayOfWorks[0].mon_end =data.closing_time;
+          //         }
+          //         break;
+          //       case 1:
+          //        if(data.opening_time && data.closing_time){
+                   
+          //        }
+          //         break;
+          //       default:
+                  // code block
+// }
+        // console.log('---input: ', index, '---',data, "data ",this.dayOfWorks)
+        // this.dayOfWorks.map((item) =>{
+        //   if(item.day == "monday"){
+        //       this.dayOfWorks[0].mon_start =data.opening_time;
+        //       this.dayOfWorks[0].mon_end =data.closing_time;
+        //   }else  if(item.day == "tuesday"){
+        //       this.dayOfWorks[1].tues_start =data.opening_time;
+        //       this.dayOfWorks[1].tues_end =data.closing_time;
+        //   } else  if(item.day == "wednesday"){
+        //       this.dayOfWorks[2].wed_start =data.opening_time;
+        //       this.dayOfWorks[2].wed_end =data.closing_time;
+        //   } else  if(item.day == "thursday"){
+        //       this.dayOfWorks[3].thurs_start =data.opening_time;
+        //       this.dayOfWorks[3].thurs_end =data.closing_time;
+        //   } else  if(item.day == "friday"){
+        //       this.dayOfWorks[4].fri_start =data.opening_time;
+        //       this.dayOfWorks[4].fri_end =data.closing_time;
+        //   } else  if(item.day == "saturday"){
+        //       this.dayOfWorks[5].sat_start =data.opening_time;
+        //       this.dayOfWorks[5].sat_end =data.closing_time;
+        //   } else  if(item.day == "sunday"){
+        //       this.dayOfWorks[6].sun_start =data.opening_time;
+        //       this.dayOfWorks[6].sun_end =data.closing_time;
+        //   }
+        // })
+        // console.log("final :", this.dayOfWorks)
+    },
+    /**
+
+
 /**
+
      * this method is used to retrieve information from the mapbox
      * @private
      */
@@ -1100,9 +1213,14 @@ export default {
           console.log(this.multiselecvalue, " --sous cat --- ",this.filterselectvalue);
           
           this.test();
+
+          console.log(this.business_about_input);
+          this.input1();
+
           
        
           console.log('test-------',this.business_about_input.lat, '------:',this.business_about_input.lng);
+
 
           var dat = {
             business_id: this.$route.params.id,
@@ -1124,12 +1242,19 @@ export default {
               neigborhood: this.ArrayString(this.selectedlocality), //this.business_about_input.council[0].neighborhood_id,
               
               city: this.business_about_input.city,
-              openHours: this.business_about_input.business_open_hours,
+              ...this.tempo,
               lat: this.business_about_input.lat,
               lng: this.business_about_input.lng,
               address: this.business_about_input.address,
             },
           };
+
+        //   Object.entries(this.tempo).forEach(
+        //   ([key, valeur]) => {
+        //     dat.data[key] = valeur
+        //   }
+        // );
+          console.log('test envoi: ',dat)
           this.$store
             .dispatch(
               "businessOwner/updateUserBusinessAbout",

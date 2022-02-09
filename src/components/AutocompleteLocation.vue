@@ -6,6 +6,10 @@
   </div>
 </template>
 <script>
+
+/**
+ * this component is for select automaticaly the location in the map by search 
+ */
 import Mapbox from "mapbox-gl";
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 export default {
@@ -35,6 +39,11 @@ export default {
       };
       this.$emit("get-address-details", details);
     },
+
+    /**
+     * use to init the mapbox 
+     * @private
+     */
     initmap() {
       let mapboxgl = this.mapbox; 
       mapboxgl.accessToken = this.accessToken;
@@ -92,8 +101,10 @@ map.addControl(
 new MapboxGeocoder({
 accessToken: mapboxgl.accessToken,
 mapboxgl: mapboxgl,
+
 countries: "cm",
 placeholder: this.infos ? this.infos.address : 'Address'
+
 }).
 on("result", (e) => { 
         let response = e.result;

@@ -509,7 +509,7 @@
                 </b-form-checkbox>
                 <br />
 
-                <!-- {{ businessInfo.business_open_hours }} -->
+                
                 <b-container v-if="!openHour">
                   <span v-if="businessInfo.business_open_hours > 0">
                     <div
@@ -530,7 +530,7 @@
                           ></b-col
                         >
 
-                        <b-col>
+                        <b-col>   {{openHours.opening_time}}
                           <b-form-input
                             name=""
                             type="time"
@@ -541,7 +541,7 @@
                                 openHours.closing_time
                               )
                             "
-                            v-model="openHours.opening_time"
+                            v-model="openHours.opening_time"  
                           ></b-form-input> </b-col
                         >- -<b-col
                           ><b-form-input

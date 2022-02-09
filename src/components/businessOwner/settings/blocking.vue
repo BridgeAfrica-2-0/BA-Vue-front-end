@@ -21,7 +21,7 @@
           </template>
           <b-list class="d-flex align-items-center m-list">
             <b-avatar
-              variant="primary"
+              variant="light"
               :square="blockuser.banned_type!='user'"
               :text="blockuser.name.charAt(0)"
               :src="blockuser.profile_picture"
@@ -29,7 +29,7 @@
               size="4em"
             ></b-avatar>
             <span class="mr-auto">{{blockuser.name}}</span>
-            <span class="mr-auto" @click="UnblockBlockUser(blockuser)"><b-link href="#">{{ $t('settings.Unblock') }}</b-link></span>
+            <span class="" @click="UnblockBlockUser(blockuser)"><b-link href="#">{{ $t('settings.Unblock') }}</b-link></span>
           </b-list>
         </b-skeleton-wrapper>
       </b-list-group>

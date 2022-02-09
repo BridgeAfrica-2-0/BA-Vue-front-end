@@ -42,7 +42,7 @@
                           >
                             <h6 class="follower">
                               {{ count(item.followers) }}
-                              {{ $t("businessowner.Community") }}    <span  class="ml-2"  @click="BlockUser(item.id, index)" style="cursor: pointer">   <b-icon
+                              {{ $t("businessowner.Community") }}    <span   v-if="from !='BusinessFollower' " class="ml-2"  @click="BlockUser(item.id, index)" style="cursor: pointer">   <b-icon
                               font-scale="1"
                               icon="exclamation-octagon"
                               v-b-tooltip.hover
@@ -146,6 +146,11 @@ export default {
       return this.$store.getters["auth/profilConnected"];
     },
 
+    from(){
+        return  this.$route.name;
+    },
+
+
     old_users() {
       if (this.type == "Follower") {
         return this.$store.state.businessOwner.UcommunityFollower
@@ -185,13 +190,13 @@ export default {
       };
 
     
+      
       let fd = new FormData();
-      fd.append("id", dataInfo.id);
-      fd.append("type", dataInfo.refernce);
-      this.$store.dispatch("profile/Block", {
-        path: "block/entity",
-        formData: fd
-        })
+      fd.append("banned_id", dataInfo.id);
+      fd.append("banned_type", dataInfo.refernce);  
+      
+
+      axios.post("business/community-banned/"+this.biz_id , fd)
       .then(response => {
         
       this.businessCommunityTotal();

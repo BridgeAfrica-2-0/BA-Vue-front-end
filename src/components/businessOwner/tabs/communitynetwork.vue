@@ -3,7 +3,7 @@
     <b-modal id="modal-sm" size="sm" hide-header>
       {{ $t("businessowner.Do_you_want_to_join_this_network") }}?
     </b-modal>
-
+ 
     <b-row>
       <b-col lg="6" sm="12" class="p-2" v-for="(item, index) in network" :key="index">
         <div class="people-style shadow h-100">
@@ -21,7 +21,7 @@
                 
                 {{ item.category }}
                 <br />
-                {{ count(item.followers) }} {{ $t("businessowner.Community") }}      <span  v-if="!foll_id" @click="BlockUser(item.id, index)"  class="ml-3"  style="cursor: pointer">  
+                {{ count(item.followers) }} {{ $t("businessowner.Community") }}      <span  v-if="from !='BusinessFollower' " @click="BlockUser(item.id, index)"  class="ml-3"  style="cursor: pointer">  
                       
                       <b-icon
                               font-scale="1"
@@ -139,6 +139,11 @@ export default {
     };
   },
   computed: {
+
+    from(){
+        return  this.$route.name;
+    },
+
     old_network() {
       if (this.type == "Follower") {
         return this.$store.state.businessOwner.NcommunityFollower
@@ -178,12 +183,11 @@ export default {
 
     
       let fd = new FormData();
-      fd.append("id", dataInfo.id);
-      fd.append("type", dataInfo.refernce);
-      this.$store.dispatch("profile/Block", {
-        path: "block/entity",
-        formData: fd
-        })
+      fd.append("banned_id", dataInfo.id);
+      fd.append("banned_type", dataInfo.refernce);  
+      
+
+      axios.post("business/community-banned/"+this.biz_id , fd)
       .then(response => {
         
         this.businessCommunityTotal();

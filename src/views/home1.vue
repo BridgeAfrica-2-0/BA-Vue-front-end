@@ -45,7 +45,9 @@
               class="input-group-text border-left-0 color-mobile"
               style="width: 40px; border-right: none; background-color: white"
             >
-              <i class="bx bx-map" style="color: #e75c18" font-scale="1.5"> </i>
+              
+
+              <b-icon style="color: #e75c18" font-scale="1.5" icon="geo-alt">  </b-icon>
             </span>
           </div>
 
@@ -772,7 +774,7 @@
  * this page is the home page of the system
  */
 import SiteFooter from "../components/site/siteFooter";
-import "../assets/js/main.js";
+//import "../assets/js/main.js";
 // import "../assets/js/js.js";
 import Button from "@/components/ButtonNavBarFind.vue";
 import SiteHeader from "../components/site/siteHeader";
@@ -968,17 +970,17 @@ export default {
 </script>
 
 <style>
-@import "../assets/vendor/bootstrap/css/bootstrap.min.css";
+/* @import "../assets/vendor/bootstrap/css/bootstrap.min.css";
 @import "../assets/vendor/boxicons/css/boxicons.min.css";
 @import "../assets/vendor/remixicon/remixicon.css";
-@import "../assets/vendor/venobox/venobox.css";
+@import "../assets/vendor/venobox/venobox.css"; */
 
 @import "../assets/css/style1.css";
 
 /* @import "../assets/css/style.css"; */
-@import "../assets/vendor/aos/aos.css";
+/* @import "../assets/vendor/aos/aos.css";
 @import "../assets/vendor/owl.carousel/assets/owl.carousel.min.css";
-@import "../assets/vendor/icofont/icofont.min.css";
+@import "../assets/vendor/icofont/icofont.min.css"; */
 @import url("https://fonts.googleapis.com/css2?family=Merriweather&family=Merriweather+Sans:wght@300&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Jost:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i");
 

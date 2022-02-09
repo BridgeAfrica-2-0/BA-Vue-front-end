@@ -77,7 +77,7 @@
           </b-container>
         </div>
 
-        <label class="typo__label">{{ $t('businessowner.Filters') }}</label>
+        <label class="typo__label">{{ $t("businessowner.Filters") }}</label>
         <div>
           <b-card no-body>
             <b-tabs pills card vertical>
@@ -90,7 +90,10 @@
                   <!-- {{ filters.filters }}
                   <br /><br />
                   {{ select_filterss }} -->
-                  <b-form-group :label="$t('businessowner.Filters')" class="colorblack">
+                  <b-form-group
+                    :label="$t('businessowner.Filters')"
+                    class="colorblack"
+                  >
                     <b-form-checkbox-group
                       id=""
                       class="colorblack"
@@ -130,7 +133,11 @@
                 tag-variant="primary"
                 :limit="limit"
                 :tag-validator="validator"
-                :placeholder="$t('businessowner.Enter_new_keywords_separated_by_space_comma_or_semicolon')"
+                :placeholder="
+                  $t(
+                    'businessowner.Enter_new_keywords_separated_by_space_comma_or_semicolon'
+                  )
+                "
                 no-add-on-enter
               ></b-form-tags>
             </b-form-group>
@@ -145,7 +152,11 @@
               label-size="md"
               label-class="font-weight-bold pt-0 username"
               class="mb-0"
-              ><VuePhoneNumberInput default-country-code="CM" v-model="businessInfo.phone"  required/>
+              ><VuePhoneNumberInput
+                default-country-code="CM"
+                v-model="businessInfo.phone"
+                required
+              />
             </b-form-group>
           </b-container>
         </div>
@@ -158,7 +169,10 @@
               label-size="md"
               label-class="font-weight-bold pt-0 username"
               class="mb-0"
-              ><VuePhoneNumberInput default-country-code="CM" v-model="businessInfo.secondary_phone" />
+              ><VuePhoneNumberInput
+                default-country-code="CM"
+                v-model="businessInfo.secondary_phone"
+              />
             </b-form-group>
           </b-container>
         </div>
@@ -248,7 +262,7 @@
                 unchecked-value="website A/V"
                 v-model="businessForm_website"
               >
-                {{ $t('businessowner.This_Business_does_not_have_a_Website') }}
+                {{ $t("businessowner.This_Business_does_not_have_a_Website") }}
               </b-form-checkbox>
             </b-form-group>
           </b-container>
@@ -278,7 +292,7 @@
                 unchecked-value="email A/V"
                 v-model="businessForm_email"
               >
-                {{ $t('businessowner.This_Business_does_not_have_a_Email') }}
+                {{ $t("businessowner.This_Business_does_not_have_a_Email") }}
               </b-form-checkbox>
             </b-form-group>
           </b-container>
@@ -391,7 +405,6 @@
         <div class="b-bottom">
           <b-container>
             <b-form-group
-        
               label-cols-lg="3"
               :label="$t('businessowner.Neighbourhood')"
               label-size="md"
@@ -447,27 +460,29 @@
                 v-model="Aaddress"
                 value="address A/V"
               >
-                {{ $t('businessowner.This_Business_has_an_address') }}</b-form-checkbox
+                {{
+                  $t("businessowner.This_Business_has_an_address")
+                }}</b-form-checkbox
               >
 
               <b-container v-if="Aaddress">
                 <b-row class="text">
                   <b-col>
-                    <p>{{ $t('businessowner.Street_Address') }}</p>
+                    <p>{{ $t("businessowner.Street_Address") }}</p>
                     <b-form-input
                       name=""
                       v-model="businessInfo.Street"
                     ></b-form-input>
                   </b-col>
                   <b-col>
-                    <p>{{ $t('businessowner.City') }}</p>
+                    <p>{{ $t("businessowner.City") }}</p>
                     <b-form-input
                       name=""
                       v-model="businessInfo.city"
                     ></b-form-input
                   ></b-col>
                   <b-col>
-                    <p>{{ $t('businessowner.Postal_Code') }}</p>
+                    <p>{{ $t("businessowner.Postal_Code") }}</p>
                     <b-form-input
                       name=""
                       v-model="businessInfo.PostalCode"
@@ -503,17 +518,22 @@
                   name="checkbox-1"
                   switch
                   value="1"
-                  @change="setOpenHours('null', 'null', 'null')"
                 >
-                  {{ openHour ? "Always Open" : $t('businessowner.Open_for_selected_hours') }}
+                  {{
+                    openHour
+                      ? "Always Open"
+                      : $t("businessowner.Open_for_selected_hours")
+                  }}
                 </b-form-checkbox>
                 <br />
 
-                
+         
                 <b-container v-if="!openHour">
-                  <span v-if="businessInfo.business_open_hours > 0">
+                  <span v-if="bizOpenHours">
+
+                        {{bizOpenHours}}
                     <div
-                      v-for="openHours in businessInfo.business_open_hours"
+                      v-for="openHours in bizOpenHours"
                       :key="openHours.id"
                     >
                       <b-row>
@@ -526,11 +546,11 @@
                             value="Mon_disabled"
                             unchecked-value="0"
                           >
-                            {{ openHours.day }}</b-form-checkbox
-                          ></b-col
+                            {{ openHours.day }}
+                          </b-form-checkbox></b-col
                         >
 
-                        <b-col>   {{openHours.opening_time}}
+                        <b-col>
                           <b-form-input
                             name=""
                             type="time"
@@ -541,7 +561,7 @@
                                 openHours.closing_time
                               )
                             "
-                            v-model="openHours.opening_time"  
+                            v-model="openHours.opening_time"
                           ></b-form-input> </b-col
                         >- -<b-col
                           ><b-form-input
@@ -562,8 +582,8 @@
                     </div>
                   </span>
                   <span v-else>
-                    {{ setOpenHours('null', 'null', 'null')}}
-                     <div>
+                    {{ setOpenHours("null", "null", "null") }}
+                    <div>
                       <b-row>
                         <b-col cols="2"
                           ><b-form-checkbox
@@ -572,23 +592,28 @@
                             name=""
                             value="Mon_disabled"
                             unchecked-value="0"
-                          >Mondey</b-form-checkbox>
+                            >Mondey</b-form-checkbox
+                          >
                         </b-col>
                         <b-col>
                           <b-form-input
                             name=""
                             type="time"
-                            v-model="businessInfo.mon_start"
-                          ></b-form-input> 
-                          </b-col>- -<b-col>
+                            v-model="
+                              businessInfo.business_open_hours[0].mon_start
+                            "
+                          ></b-form-input> </b-col
+                        >- -<b-col>
                           <b-form-input
                             name=""
                             type="time"
-                            v-model="businessInfo.mon_end"
+                            v-model="
+                              businessInfo.business_open_hours[0].mon_end
+                            "
                           ></b-form-input
                         ></b-col>
                       </b-row>
-                        <b-row>
+                      <b-row>
                         <b-col cols="2"
                           ><b-form-checkbox
                             id=""
@@ -596,23 +621,28 @@
                             name=""
                             value="Mon_disabled"
                             unchecked-value="0"
-                          >Tuesday</b-form-checkbox>
+                            >Tuesday {{ businessInfo.business_open_hours }}
+                          </b-form-checkbox>
                         </b-col>
                         <b-col>
                           <b-form-input
                             name=""
                             type="time"
-                            v-model="businessInfo.tues_start"
-                          ></b-form-input> 
-                          </b-col>- -<b-col>
+                            v-model="
+                              businessInfo.business_open_hours[1].tues_start
+                            "
+                          ></b-form-input> </b-col
+                        >- -<b-col>
                           <b-form-input
                             name=""
                             type="time"
-                            v-model="businessInfo.tues_end"
+                            v-model="
+                              businessInfo.business_open_hours[1].tues_end
+                            "
                           ></b-form-input
                         ></b-col>
                       </b-row>
-                        <b-row>
+                      <b-row>
                         <b-col cols="2"
                           ><b-form-checkbox
                             id=""
@@ -620,15 +650,16 @@
                             name=""
                             value="Mon_disabled"
                             unchecked-value="0"
-                          >Wednesday</b-form-checkbox>
+                            >Wednesday</b-form-checkbox
+                          >
                         </b-col>
                         <b-col>
                           <b-form-input
                             name=""
                             type="time"
                             v-model="businessInfo.wed_start"
-                          ></b-form-input> 
-                          </b-col>- -<b-col>
+                          ></b-form-input> </b-col
+                        >- -<b-col>
                           <b-form-input
                             name=""
                             type="time"
@@ -636,7 +667,7 @@
                           ></b-form-input
                         ></b-col>
                       </b-row>
-                        <b-row>
+                      <b-row>
                         <b-col cols="2"
                           ><b-form-checkbox
                             id=""
@@ -644,15 +675,16 @@
                             name=""
                             value="Mon_disabled"
                             unchecked-value="0"
-                          >Thursday</b-form-checkbox>
+                            >Thursday</b-form-checkbox
+                          >
                         </b-col>
                         <b-col>
                           <b-form-input
                             name=""
                             type="time"
                             v-model="businessInfo.thurs_start"
-                          ></b-form-input> 
-                          </b-col>- -<b-col>
+                          ></b-form-input> </b-col
+                        >- -<b-col>
                           <b-form-input
                             name=""
                             type="time"
@@ -660,7 +692,7 @@
                           ></b-form-input
                         ></b-col>
                       </b-row>
-                        <b-row>
+                      <b-row>
                         <b-col cols="2"
                           ><b-form-checkbox
                             id=""
@@ -668,15 +700,16 @@
                             name=""
                             value="Mon_disabled"
                             unchecked-value="0"
-                          >Friday</b-form-checkbox>
+                            >Friday</b-form-checkbox
+                          >
                         </b-col>
                         <b-col>
                           <b-form-input
                             name=""
                             type="time"
                             v-model="businessInfo.fri_start"
-                          ></b-form-input> 
-                          </b-col>- -<b-col>
+                          ></b-form-input> </b-col
+                        >- -<b-col>
                           <b-form-input
                             name=""
                             type="time"
@@ -684,7 +717,7 @@
                           ></b-form-input
                         ></b-col>
                       </b-row>
-                        <b-row>
+                      <b-row>
                         <b-col cols="2"
                           ><b-form-checkbox
                             id=""
@@ -692,15 +725,16 @@
                             name=""
                             value="Mon_disabled"
                             unchecked-value="0"
-                          >Saturday</b-form-checkbox>
+                            >Saturday</b-form-checkbox
+                          >
                         </b-col>
                         <b-col>
                           <b-form-input
                             name=""
                             type="time"
                             v-model="businessInfo.sat_start"
-                          ></b-form-input> 
-                          </b-col>- -<b-col>
+                          ></b-form-input> </b-col
+                        >- -<b-col>
                           <b-form-input
                             name=""
                             type="time"
@@ -708,7 +742,7 @@
                           ></b-form-input
                         ></b-col>
                       </b-row>
-                        <b-row>
+                      <b-row>
                         <b-col cols="2"
                           ><b-form-checkbox
                             id=""
@@ -716,15 +750,16 @@
                             name=""
                             value="Mon_disabled"
                             unchecked-value="0"
-                          >Sunday</b-form-checkbox>
+                            >Sunday</b-form-checkbox
+                          >
                         </b-col>
                         <b-col>
                           <b-form-input
                             name=""
                             type="time"
                             v-model="businessInfo.sun_start"
-                          ></b-form-input> 
-                          </b-col>- -<b-col>
+                          ></b-form-input> </b-col
+                        >- -<b-col>
                           <b-form-input
                             name=""
                             type="time"
@@ -743,19 +778,17 @@
 
         <div class="b-bottomm">
           <b-button
-          :disabled="loading"
+            :disabled="loading"
             variant="primary"
             class="a-button-l"
             @click="updateInfo(businessInfo)"
             ><b-spinner v-if="Lspinner" small type="grow"></b-spinner>
-            {{ $t('businessowner.Save_Changes') }}
-            </b-button
-          >
+            {{ $t("businessowner.Save_Changes") }}
+          </b-button>
           <br />
           <br />
         </div>
       </b-form>
-
     </b-container>
     <b-container v-else>
       <div class="text-center">
@@ -792,7 +825,7 @@ export default {
       Lspinner: false,
 
       editbiz: "",
-      loading:false,
+      loading: false,
 
       multiselecvalue: [],
       filterselectvalue: [],
@@ -804,24 +837,17 @@ export default {
       locality: [],
 
       Aaddress: "",
-      openHour: "",
+      openHour: [
+        { day: "monday", opening_time: null, closing_time: null },
+        { day: "tuesday", opening_time: null, closing_time: null },
+        { day: "wednesday", opening_time: null, closing_time: null },
+        { day: "thursday", opening_time: null, closing_time: null },
+        { day: "friday", opening_time: null, closing_time: null },
+        { day: "saturday", opening_time: null, closing_time: null },
+        { day: "sunday", opening_time: null, closing_time: null },
+      ],
       openDaysStatus: [],
-      Odays: {
-        mS: "",
-        mE: "",
-        tuS: "",
-        tuE: "",
-        wS: "",
-        wE: "",
-        thS: "",
-        thE: "",
-        fS: "",
-        fE: "",
-        saS: "",
-        saE: "",
-        suS: "",
-        suE: "",
-      },
+
       businessForm_email: "",
       businessForm_website: "",
       openHours: {
@@ -970,6 +996,14 @@ export default {
     businessInfo() {
       return this.$store.state.businessSettingInfo.businessInfo;
     },
+
+    bizOpenHours(){
+ 
+     return  this.businessInfo.business_open_hours.length !==0 ? this.businessInfo.business_open_hours : this.openHour;
+     
+
+    },
+
     scategories() {
       return this.$store.state.auth.subcategories;
     },
@@ -1051,7 +1085,7 @@ export default {
     this.editBusiness();
     this.categories();
     this.Country();
-    console.log("-----",this.businessInfo);
+    console.log("-----", this.businessInfo);
   },
 
   methods: {
@@ -1183,13 +1217,35 @@ export default {
     },
 
     setOpenHours(day, startTime, endDay) {
-      
+      console.log("yoo ma gee");
+
       switch (day) {
+        //  this.businessInfo.business_open_hours.forEach((item) => {
+
+        // switch (item.day) {
+
+        // case "monday":
+        //   formData.append("mon_start", item.opening_time);
+        //    formData.append("mon_end", item.closing_time);
+
+        //   break;
+        // case "tuesday":
+        //    formData.append("tues_start", item.opening_time);
+        //    formData.append("tues_end", item.closing_time);
+
+        //   break;
+
         case "Monday":
           console.log("monday");
-          this.businessInfo["monday"] = day;
-          this.businessInfo["mon_start"] = startTime;
-          this.businessInfo["mon_end"] = endDay;
+          this.businessInfo.business_open_hours = day;
+
+          this.businessInfo.business_open_hours.mon_start = startTime;
+
+          this.businessInfo.business_open_hours.mon_end = endDay;
+
+          //  this.businessInfo["mon_start"] = startTime;
+          //  this.businessInfo["mon_end"] = endDay;
+
           break;
         case "Tuesday":
           console.log("Tues_disabled");
@@ -1306,7 +1362,7 @@ export default {
 
     updateInfo: function (businessInfo) {
       this.Lspinner = true;
-      this.loading = true
+      this.loading = true;
       console.log("updateInfo", businessInfo);
 
       let formData = new FormData();
@@ -1329,7 +1385,10 @@ export default {
       formData.append("about_business", businessInfo.about_business);
       formData.append("website", businessInfo.website);
       formData.append("email", businessInfo.email);
-      formData.append("location_description", businessInfo.location_description);
+      formData.append(
+        "location_description",
+        businessInfo.location_description
+      );
       formData.append("address", businessInfo.city);
       formData.append("Street", businessInfo.Street);
       formData.append("city", businessInfo.city);
@@ -1337,33 +1396,71 @@ export default {
       formData.append("lat", businessInfo.lat);
       formData.append("lng", businessInfo.lng);
 
-      formData.append("monday", businessInfo.monday);
-      formData.append("mon_start", businessInfo.mon_start);
-      formData.append("mon_end", businessInfo.mon_end);
-      formData.append("tuesday", businessInfo.tuesday);
-      formData.append("tues_start", businessInfo.tues_start);
-      formData.append("tues_end", businessInfo.tues_end);
-      formData.append("wednesday", businessInfo.wednesday);
-      formData.append("wed_start", businessInfo.wed_start);
-      formData.append("wed_end", businessInfo.wed_end);
-      formData.append("thursday", businessInfo.thursday);
-      formData.append("thurs_start", businessInfo.thurs_start);
-      formData.append("thurs_end", businessInfo.thurs_end);
-      formData.append("friday", businessInfo.friday);
-      formData.append("fri_start", businessInfo.fri_start);
-      formData.append("fri_end", businessInfo.fri_end);
-      formData.append("saturday", businessInfo.saturday);
-      formData.append("sat_start", businessInfo.sat_start);
-      formData.append("sat_end", businessInfo.sat_end);
-      formData.append("sunday", businessInfo.sunday);
-      formData.append("sun_start", businessInfo.sun_start);
-      formData.append("sun_end", businessInfo.sun_end);
+      this.businessInfo.business_open_hours.forEach((item) => {
+        switch (item.day) {
+          case "monday":
+            formData.append("mon_start", item.opening_time);
+            formData.append("mon_end", item.closing_time);
+
+            break;
+          case "tuesday":
+            formData.append("tues_start", item.opening_time);
+            formData.append("tues_end", item.closing_time);
+
+            break;
+          case "wednesday":
+            formData.append("wed_start", item.opening_time);
+            formData.append("wed_end", item.closing_time);
+
+            break;
+          case "thursday":
+            formData.append("thurs_start", item.opening_time);
+            formData.append("thurs_end", item.closing_time);
+            break;
+          case "friday":
+            formData.append("fri_start", item.opening_time);
+            formData.append("fri_end", item.closing_time);
+
+            break;
+          case "saturday":
+            formData.append("sat_start", item.opening_time);
+            formData.append("sat_end", item.closing_time);
+
+            break;
+          case "sunday":
+            formData.append("sun_start", item.opening_time);
+            formData.append("sun_end", item.closing_time);
+            break;
+        }
+      });
+
+      // formData.append("monday", businessInfo.monday);
+      // formData.append("mon_start", businessInfo.mon_start);
+      // formData.append("mon_end", businessInfo.mon_end);
+      // formData.append("tuesday", businessInfo.tuesday);
+      // formData.append("tues_start", businessInfo.tues_start);
+      // formData.append("tues_end", businessInfo.tues_end);
+      // formData.append("wednesday", businessInfo.wednesday);
+      // formData.append("wed_start", businessInfo.wed_start);
+      // formData.append("wed_end", businessInfo.wed_end);
+      // formData.append("thursday", businessInfo.thursday);
+      // formData.append("thurs_start", businessInfo.thurs_start);
+      // formData.append("thurs_end", businessInfo.thurs_end);
+      // formData.append("friday", businessInfo.friday);
+      // formData.append("fri_start", businessInfo.fri_start);
+      // formData.append("fri_end", businessInfo.fri_end);
+      // formData.append("saturday", businessInfo.saturday);
+      // formData.append("sat_start", businessInfo.sat_start);
+      // formData.append("sat_end", businessInfo.sat_end);
+      // formData.append("sunday", businessInfo.sunday);
+      // formData.append("sun_start", businessInfo.sun_start);
+      // formData.append("sun_end", businessInfo.sun_end);
 
       console.log(formData);
       this.$store
         .dispatch("businessSettingInfo/UpdateInfomation", {
           path: "business/update/" + this.url,
-          data:formData,
+          data: formData,
         })
         .then(({ data }) => {
           console.log(data);
@@ -1372,19 +1469,19 @@ export default {
           this.Lspinner = false;
           this.flashMessage.show({
             status: "success",
-            message: this.$t('businessowner.Changes_Made_Successfuly'),
+            message: this.$t("businessowner.Changes_Made_Successfuly"),
           });
-          this.loading = false
+          this.loading = false;
         })
         .catch((err) => {
           console.log({ err: err });
           this.Lspinner = false;
-          this.loading = false
+          this.loading = false;
           this.flashMessage.show({
             status: "error",
-            message: this.$t('businessowner.Unable_To_Make_Changes'),
+            message: this.$t("businessowner.Unable_To_Make_Changes"),
           });
-          this.loading = false
+          this.loading = false;
         });
     },
   },

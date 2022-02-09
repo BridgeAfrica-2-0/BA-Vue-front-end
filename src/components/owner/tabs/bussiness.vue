@@ -40,7 +40,24 @@
                     />
 
                     <div id="preview">
-                      <img v-if="logoimg_url" :src="logoimg_url" />
+                      <!-- <img v-if="logoimg_url" :src="logoimg_url" /> -->
+
+
+                      
+                     <vue-cropper  v-if="logoimg_url"
+                    :src="selectedFile"
+                    ref="cropperr"
+                    original:true
+                    info:false
+                    canScale:true
+                    maxImgSize:1000
+                    
+                    :size="1"
+                    drag-mode="move"
+                    :view-mode="1"
+                  />
+
+
                     </div>
                     <br />
                     <div class="text-center">
@@ -711,6 +728,7 @@
 
                   <div class="col-md" style="width: 100%; height: 200px; overflow:hidden">
                     <AutocompleteLocation
+                      :infos="infos"
                       :region="region"
                       @get-address-details="getGeoCoderResult"
                     />
@@ -913,11 +931,16 @@ import { required, email, minLength } from "vuelidate/lib/validators";
 import VuePhoneNumberInput from "vue-phone-number-input";
 import "vue-phone-number-input/dist/vue-phone-number-input.css";
 
+
+import VueCropper from "vue-cropperjs";
+import "cropperjs/dist/cropper.css";
+
 export default {
   mixins: [validationMixin],
   data() {
     return {
       useas: "",
+      selectedFile:null,
       page: 1,
       bizId: "",
       profileBusinesss: [],
@@ -1433,6 +1456,24 @@ export default {
         });
 
         let formData2 = new FormData();
+       
+
+
+        
+   if(this.logo_pic != '')  {            
+this.cropedImage = this.$refs.cropperr.getCroppedCanvas().toDataURL();
+
+this.$refs.cropperr.getCroppedCanvas().toBlob((blob) => {
+
+     this.logo_pic=blob;
+  // formData.append("profile_picture", this.profile_pic);
+   
+   
+
+}, this.mime_type);
+
+   }
+
         formData2.append("logo_path", this.logo_pic);
 
         formData2.append("region", this.selectedregion);
@@ -1634,11 +1675,38 @@ export default {
       this.img_url = URL.createObjectURL(file);
     },
 
+    // onLogoChange(e) {
+    //   this.logo_pic = e.target.files[0];
+    //   const logofile = e.target.files[0];
+    //   this.logoimg_url = URL.createObjectURL(logofile);
+    // },
+
+
+
+    
+
     onLogoChange(e) {
       this.logo_pic = e.target.files[0];
       const logofile = e.target.files[0];
       this.logoimg_url = URL.createObjectURL(logofile);
+
+       this.mime_type = logofile.type;
+
+        if (typeof FileReader === "function") {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          this.selectedFile = event.target.result;
+          this.$refs.cropperr.replace(this.selectedFile);
+        };
+        reader.readAsDataURL(logofile);
+      } else {
+        alert("Sorry, FileReader API not supported");
+      }
+
+
     },
+
+
 
     chooselogo: function() {
       document.getElementById("logo").click();
@@ -1680,9 +1748,20 @@ export default {
     Multiselect,
     VuePhoneNumberInput,
     AutocompleteLocation,
+    VueCropper,
   },
 
   computed: {
+
+    infos: function() {
+      
+     let infos= {
+        lat: this.center.lat,
+        lng: this.center.lng,
+        address: this.address
+      }
+      return infos ;
+    },
     selectedKeywords: function() {
       let selectedUsers = [];
       this.business_keyword.forEach((item) => {

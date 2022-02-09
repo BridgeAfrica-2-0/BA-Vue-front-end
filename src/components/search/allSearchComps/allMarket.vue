@@ -105,6 +105,9 @@ export default {
     prodLoader() {
       return this.$store.getters["allSearch/getLoader"];
     },
+    getStatus() {
+      return this.$store.state.cart.status;
+    },
   },
 
   methods: {
@@ -126,7 +129,7 @@ export default {
       this.product = product;
       console.log("add to card ", this.product.id);
       this.$store
-        .dispatch("cart/addToCart", product)
+        .dispatch("cart/addToCart", this.product)
         .then((response) => {
           this.flashMessage.show({
             status: "success",

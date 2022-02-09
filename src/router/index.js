@@ -58,8 +58,12 @@ import OrderDetails from "@/views/OrderDetails";
 import businessordersdetail from "@/views/businessordersdetail"
 import businessOwnerOrders from "@/views/businessOwnerOrders"
 import payment from "@/views/payment";
-import about from "@/views/about";
-import contact from "@/views/contact";
+// import about from "@/views/about";
+// import contact from "@/views/contact";
+
+const about = () => import('@/views/about');
+const contact = () => import('@/views/contact');
+
 import cart from "@/views/card";
 
 Vue.use(VueRouter);

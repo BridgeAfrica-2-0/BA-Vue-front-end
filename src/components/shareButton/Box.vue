@@ -18,7 +18,8 @@
       @keypress.enter="search(name)"
     ></b-form-input>
 
-    <b-form-input v-if = "contacts.length && !isCommunity"
+    <b-form-input
+      v-if="contacts.length && !isCommunity"
       :placeholder="placeholder"
       class="input-search mb-2"
       v-model="text"
@@ -179,7 +180,7 @@ export default {
       else this.getContacts();
     },
   },
-  
+
   mounted() {
     this.search();
   },
@@ -187,9 +188,8 @@ export default {
   methods: {
     debounceInput: _.debounce(function (e) {
       if (e) {
-        
         const result = this.all.filter((contact) => {
-          return contact.name.toLowerCase().includes(e.toLowerCase())
+          return contact.name.toLowerCase().includes(e.toLowerCase());
         });
 
         if (result.length) this.contacts = result;
@@ -259,7 +259,7 @@ export default {
 
     search(keyword) {
       this.sentList = [];
-      
+
       if (this.type == "people") {
         this.$store.dispatch("userChat/GET_USERS", keyword);
       } else if (this.type == "business") {
@@ -297,7 +297,7 @@ export default {
 <style scoped>
 .list {
   border: 1px solid black;
-  max-height: 330px !important;
+  max-height: 240px !important;
   overflow-y: auto;
 }
 

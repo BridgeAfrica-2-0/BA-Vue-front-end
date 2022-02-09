@@ -3278,8 +3278,8 @@ export default {
 
         this.saveMessage(this.formData);
         this.$store.dispatch("businessChat/GET_BIZS_CHAT_LIST_Dos", {
-            type: this.type
-          });
+          type: this.type,
+        });
       });
       this.socket.on("privateMessage", (data) => {
         console.log("Received");
@@ -3296,8 +3296,8 @@ export default {
 
         this.saveMessage(this.formData);
         this.$store.dispatch("businessChat/GET_BIZS_CHAT_LIST_Dos", {
-            type: this.type
-          });
+          type: this.type,
+        });
       });
       console.log("listenning...");
     },
@@ -3598,18 +3598,18 @@ export default {
         membersEditor.map((biz) => {
           membersEditorIds.push(biz.businessEditorsID);
         });
-        // data = {
-        //   userID: membersPeopleIds,
-        //   businessID: membersBusinessIds,
-        //   networkID: membersNetworkIds,
-        //   businessEditorID: membersEditorIds,
-        //   message: this.input,
-        // };
         data = {
-          businessID: this.groupAdminId,
+          userID: membersPeopleIds,
+          businessID: membersBusinessIds,
+          networkID: membersNetworkIds,
+          businessEditorID: membersEditorIds,
           message: this.input,
-          attachment: this.file,
         };
+        // data = {
+        //   businessID: this.groupAdminId,
+        //   message: this.input,
+        //   attachment: this.file,
+        // };
       }
 
       this.socket.emit("groupMessage", data);

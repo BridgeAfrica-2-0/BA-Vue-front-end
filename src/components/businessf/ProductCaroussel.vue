@@ -18,7 +18,7 @@
       >
         <template #img>
           <img
-            class="d-block img-fluid w-100"
+            class="d-block img-fluid w-100 sizee"
             width="180"
             height="180"
             :src="product.img"
@@ -86,5 +86,9 @@ export default {
   /* .caroussel-product{
 			height: 400px !important;
 		} */
+}
+
+.sizee{
+  object-fit: cover !important;
 }
 </style>

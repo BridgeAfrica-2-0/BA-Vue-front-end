@@ -3,7 +3,7 @@
     <b-row class="padding-post"> 
       <b-col cols="12" class="f-left">
     
-        <div v-for="(post, index) in owner_post" :key="index" :loading="load" class="mb-4 border p-3 rounded">
+        <div v-for="(post, index) in owner_post" :key="index" class="mb-4 border p-3 rounded">
           <div class="mb-2">
             <div class="f-left">
               <b-row class="px-md-3">
@@ -25,10 +25,10 @@
                           <b-icon-three-dots-vertical></b-icon-three-dots-vertical
                           ><span class="sr-only">{{ $t('network.Settings') }} </span>
                         </template>
-                        <b-dropdown-item @click="approved(post.id, index)" :loading="load">
+                        <b-dropdown-item @click="approved(post.id, index)"  >
                           {{ $t('network.Approved') }}
                         </b-dropdown-item>
-                        <b-dropdown-item @click="unapproved(post.id, index)" :loading="load">
+                        <b-dropdown-item @click="unapproved(post.id, index)" >
                           {{ $t('network.Unapproved') }}
                         </b-dropdown-item>
                       </b-dropdown>
@@ -85,7 +85,7 @@
      <infinite-loading
           @infinite="infiniteHandler"
           ref="AinfiniteLoading"
-          :identifier="ainfiniteId"
+         
         >
           <div class="text-red" slot="no-more">
             {{ $t("network.No_More_Request") }}
@@ -123,6 +123,7 @@ export default {
       },
       moment: moment,
       page: 1,
+      
       infiniteId: +new Date(),
       post: this.$store.state.businessOwner.ownerPost,
       url: null,
@@ -284,7 +285,7 @@ export default {
 
       
       let payload = {
-        network_id: this. this.url,
+        network_id:this.url,
         post_id: id,
       };
       this.unapprovedPost(payload)

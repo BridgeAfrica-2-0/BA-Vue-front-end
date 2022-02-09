@@ -35,7 +35,7 @@
                     </span>
                     <br />
                     {{ count(item.followers) }}
-                    {{ $t("businessowner.Community") }}  <span v-if="!foll_id"  @click="BlockUser(item.id, index)" class="ml-3"  style="cursor: pointer">  
+                    {{ $t("businessowner.Community") }}  <span   v-if="from !='BusinessFollower' "  @click="BlockUser(item.id, index)" class="ml-3"  style="cursor: pointer">  
                       
                       <b-icon
                               font-scale="1"
@@ -161,6 +161,7 @@ export default {
   data() {
     return {
       businesses: [],
+      disable:false,
       biz_id: null,
       page: 1,
       infiniteId: +new Date(),
@@ -177,6 +178,14 @@ export default {
   },
 
   computed: {
+
+
+    from(){
+        return  this.$route.name;
+    },
+
+
+
     old_businesses() {
       if (this.type == "Follower") {
         return this.$store.state.businessOwner.BcommunityFollower
@@ -217,14 +226,21 @@ export default {
         type: this.type,
       };
 
+
+
+      
+      // this.$store.dispatch("profile/Block", {
+      //   path: "block/entity",
+      //   formData: fd
+      //   })
+
     
       let fd = new FormData();
-      fd.append("id", dataInfo.id);
-      fd.append("type", dataInfo.refernce);
-      this.$store.dispatch("profile/Block", {
-        path: "block/entity",
-        formData: fd
-        })
+      fd.append("banned_id", dataInfo.id);
+      fd.append("banned_type", dataInfo.refernce);  
+      
+
+      axios.post("business/community-banned/"+this.biz_id , fd)
       .then(response => {
         
       this.businessCommunityTotal();

@@ -94,6 +94,9 @@
   </div>
 </template>
 <script>
+/**
+ * this component is for contact us view 
+ */
 import Contact from "../components/site/contact";
 import SiteFooter from "../components/site/siteFooter";
 import SiteHeader from "../components/site/siteHeader";

@@ -356,6 +356,7 @@ h6 {
 
     height: 100px;
     padding: 4px;
+    object-fit: cover;
   }
 
   .title {

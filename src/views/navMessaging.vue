@@ -1939,7 +1939,7 @@ export default {
         this.getChatList({ type: this.getChatList({ type: data.type }) });
       });
 
-      this.socket.on("privateMessage", (data) => {
+       this.socket.on("privateMessage", (data) => {
         console.log("Received");
         console.log(data);
         this.userToUser.push(data);
@@ -1969,6 +1969,9 @@ export default {
 
         if (this.currentUser.user.id == data.sender_id) {
           this.saveMessage(this.formData, data.type);
+          this.$store.dispatch("userChat/GET_USERS_CHAT_LIST_Dos", {
+            type: this.type
+          });
         } else {
           console.log("Here here 1");
           // this.type = data.type;

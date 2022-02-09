@@ -634,6 +634,10 @@
   </div>
 </template>
 <script>
+
+/**
+ * this component is for the about us information 
+ */
 import Contact from '../components/site/contact';
 import SiteFooter from '../components/site/siteFooter';
 import SiteHeader from '../components/site/siteHeader';
@@ -700,6 +704,11 @@ export default {
     },
   },
   methods: {
+
+    /**
+     * this fuction is for change ressources 
+     * @private
+     */
     changeResource(resource) {
       this.selectedResource = resource;
     },

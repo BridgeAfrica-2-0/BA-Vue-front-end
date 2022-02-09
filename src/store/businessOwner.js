@@ -389,7 +389,8 @@ export default {
         },
 
         addCoverPicture(state, pictures){
-
+            
+            console.log(pictures);
             if (Array.isArray(pictures))
                 state.businessInfo.cover = pictures
             else{

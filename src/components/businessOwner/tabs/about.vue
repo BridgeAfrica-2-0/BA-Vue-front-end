@@ -639,6 +639,10 @@
 </template>
 
 <script>
+/**
+ * this component is for display and edit the information about business
+ * @private
+ */
 import VuePhoneNumberInput from "vue-phone-number-input";
 //import moment from "moment";
 import { validationMixin } from "vuelidate";
@@ -893,14 +897,22 @@ export default {
     },
   },
   methods: {
-
+    /**
+     * this method is used to retrieve information from the mapbox
+     * @private
+     */
     getGeoCoderResult(response) {console.log(response);
       this.coordinates = response.coordinates;
       this.business_about_input.address = response.address;
       console.log("yoo mother fuckers");
       console.log(response);
     },
-    
+
+      /**
+     * this method is used to transform the elements of the array into a character string
+     * in particular for the  category Id
+     * @private
+     */
     stringArray1(words) {
       let keyword = "";
       words.map((item) => {
@@ -913,6 +925,12 @@ export default {
       console.log("id ici ---", words, "---", keyword);
       return keyword.substring(0, keyword.length - 1);
     },
+
+    /**
+     * this method is used to transform the elements of the array into a character string
+     * in particular for the  subcategory Id
+     * @private
+     */
     stringArray(words) {
       let keyword = "";
       words.map((item) => {
@@ -926,6 +944,10 @@ export default {
       return keyword.substring(0, keyword.length - 1);
     },
 
+     /**
+     * this method is used to transform the elements of the array into a character string
+     * @private
+     */
     ArrayString(words) {
       let keyword = "";
       words.map((item) => {
@@ -934,6 +956,11 @@ export default {
 
       return keyword.substring(0, keyword.length - 1);
     },
+
+    /**
+     * this method is used to load information from the business
+     * @private
+     */
     loadBusinessAbout() {
       this.$store
         .dispatch("businessOwner/loadUserBusinessAbout", {
@@ -948,9 +975,19 @@ export default {
           );
         });
     },
+
+    /**
+     * used to validate the tags
+     * @private
+     */
     validator(tag) {
       return tag.length > 2 && tag.length < 20;
     },
+
+    /**
+ * this method allows to take into account all the subcategories selected by the user 
+ * @private
+ */
     addTag(newTag) {
       const tag = {
         name: newTag,
@@ -959,6 +996,11 @@ export default {
       this.multiselec.push(tag);
       this.multiselecvalue.push(tag);
     },
+
+   /**
+ * this method allows to take into account all the categories selected by the user 
+ * @private
+ */
     addFilter(newTag) {
       console.log("sous cat --- ",this.filterselectvalue)
       const tag = {
@@ -971,6 +1013,10 @@ export default {
     selectHour(day) {
       this.openNow = day;
     },
+    /**
+     * initialize the working days
+     * @private
+     */
     initialize(daysOfWorks) {
       const zdaysOfWorks = daysOfWorks.map((day) => {
         this.open =
@@ -989,12 +1035,19 @@ export default {
       console.log(zdaysOfWorks);
       return zdaysOfWorks;
     },
+
+
     cancel() {
       console.log("cancel method ");
       this.business_about_input = JSON.parse(
         JSON.stringify(this.business_about)
       );
     },
+
+    /**
+     * Use to update either the biography or all business information depending on the case
+     * @private
+     */
     validate(type) {
       switch (type) {
         case "modifyBiography":
@@ -1116,6 +1169,9 @@ export default {
           break;
       }
     },
+    /**transform the array containing the keywords into a string
+     * @private
+     */
     stringKeyword(words) {
       let keyword = "";
       words.map((item) => {
@@ -1137,11 +1193,21 @@ export default {
       console.log(this.business_about_input.business_open_hours);
       this.business_about_input.business_open_hours = businessAddress;
     },
+
+    /**
+     * using to load information of the business in the edit form
+     * @private
+     */
     load() {
       this.business_about_input = JSON.parse(
         JSON.stringify(this.business_about)
       );
     },
+
+    /**
+     * using to dispatch categorie
+     * @private
+     */
     categories() {
       this.$store
         .dispatch("auth/categories")
@@ -1152,6 +1218,11 @@ export default {
           console.log({ err: err });
         });
     },
+
+    /**
+     * using to dispatch subcategorie
+     * @private
+     */
     subcategories() {
       console.log("subcategories here");
       let formData2 = new FormData();
@@ -1165,6 +1236,11 @@ export default {
           console.log({ err: err });
         });
     },
+
+    /**
+     * using to dispatch filter
+     * @private
+     */
     filters() {
       this.$store
         .dispatch("auth/filters")
@@ -1185,6 +1261,11 @@ export default {
           console.log({ err: err });
         });
     },
+
+    /**
+     * using to dispatch country
+     * @private
+     */
     Country() {
       this.$store
         .dispatch("auth/country")
@@ -1195,6 +1276,11 @@ export default {
           console.log({ err: err });
         });
     },
+
+    /**
+     * using to dispatch region
+     * @private
+     */
     Region() {
       let formData2 = new FormData();
       formData2.append("countryId", this.selectedcountry);
@@ -1207,6 +1293,11 @@ export default {
           console.log({ err: err });
         });
     },
+
+    /**
+     * using to dispatch division
+     * @private
+     */
     Division() {
       console.log("----", this.selectedregion);
       let formData2 = new FormData();
@@ -1220,6 +1311,11 @@ export default {
           console.log({ err: err });
         });
     },
+
+    /**
+     * using to dispatch municipality
+     * @private
+     */
     Municipality() {
       let formData2 = new FormData();
       formData2.append("divisionId", this.selecteddivision);
@@ -1232,6 +1328,11 @@ export default {
           console.log({ err: err });
         });
     },
+
+    /**
+     * using to dispatch locality
+     * @private
+     */
     Locality() {
       console.log("Locality");
       let formData2 = new FormData();
@@ -1245,6 +1346,11 @@ export default {
           console.log({ err: err });
         });
     },
+
+    /**
+     * this method makes it possible to retrieve information relating to the business
+     * @private
+     */    
     editBusiness() {
       console.log("editBusiness");
       this.axios
@@ -1257,6 +1363,11 @@ export default {
           console.log({ err: err });
         });
     },
+
+    /**
+     * this method allows to pre-fill the form which allows to edit a business
+     * @private
+     */
     setEditData(business) {
       console.log("setting editBusiness data");
       console.log(business);

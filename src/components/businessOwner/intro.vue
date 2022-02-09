@@ -347,6 +347,9 @@
 </template>
 
 <script>
+/**
+ * this component is used to display the introductory information of a business it also allows to edit them
+ */
 import AutocompleteLocation from "@/components/AutocompleteLocation";
 import VuePhoneNumberInput from "vue-phone-number-input";
 import axios from "axios";
@@ -446,7 +449,10 @@ export default {
      * Used to edit biography
      * @return void
      */
-
+/**
+ * this method is used to retrieve the information provided by the mapbox
+ * @private
+ */
     getGeoCoderResult(response) {
       this.form.address = response.address;
       console.log('teststststst')
@@ -456,7 +462,12 @@ export default {
       console.log("yoo mother fuckers");
       console.log(response);
     },
-
+/**
+ * this method is used to properly format the country, 
+ * region, city, town and district in order to send this
+ *  in the correct format expected by the api
+ * @private
+ */
     LocationFormat(data){
       let keyword = '';
       data.map(item =>{
@@ -476,7 +487,10 @@ export default {
       })
       return keyword.substring(0, keyword.length-1);
     },
-
+    /**
+     * this method is used to transform the elements of the array into a character string
+     * @private
+     */
     ArrayString(words){
        let keyword = '';
         words.map(item =>{
@@ -485,6 +499,12 @@ export default {
 
         return keyword.substring(0, keyword.length-1);
     },
+
+    /**
+     * this method is used to transform the elements of the array into a character string
+     * in particular for the  subcategory Id
+     * @private
+     */
 
     stringArray(words){
          let keyword = "";
@@ -500,6 +520,12 @@ export default {
 
         return keyword.substring(0, keyword.length-1);
     },
+
+    /**
+     * this method is used to transform the elements of the array into a character string
+     * in particular for the  category Id
+     * @private
+     */
     stringArray1(words){
         let keyword = '';
         words.map(item =>{
@@ -514,6 +540,11 @@ export default {
         return keyword.substring(0, keyword.length-1);
     },
 
+    /**
+     * this method makes it possible to retrieve information relating to the business
+     * @private
+     */
+
     editBusiness() {
       console.log("editBusiness");
       this.axios
@@ -526,6 +557,11 @@ export default {
           console.log({ err: err });
         });
     },
+
+    /**
+     * this method allows to pre-fill the form which allows to edit a business
+     * @private
+     */
     setEditData(business) {
       console.log("setting editBusiness data");
       console.log(business);
@@ -550,6 +586,10 @@ export default {
       this.Locality();
     },
 
+/**
+ * this method allows to take into account all the categories selected by the user 
+ * @private
+ */
      addFilter(newTag) {
       const tag = {
         name: newTag,
@@ -558,6 +598,11 @@ export default {
       this.multiselec.push(tag);
       this.filterselectvalue.push(tag);
     },
+
+    /**
+ * this method is triggered each time a category is selected to retrieve all corresponding sub-categories  
+ * @private
+ */
     subcategories() {
       console.log(this.pcategories," subcategories here", this.selectedcategories);
       let formData2 = new FormData();
@@ -572,6 +617,10 @@ export default {
         });
     },
  
+ /**
+ * this method allows to take into account all the subcategories selected by the user 
+ * @private
+ */
     addTag(newTag) {
       const tag = {
         name: newTag,
@@ -580,6 +629,11 @@ export default {
       this.multiselec.push(tag);
       this.multiselecvalue.push(tag);
     },
+
+    /**
+     * this method is used to return all information related to a business
+     * @private
+     */
     businessInfos() {
       // this.$store.dispatch("businessOwner/businessInfo", this.url);
        this.$store
@@ -597,6 +651,10 @@ export default {
       )
     },
 
+/**
+ * this method is used to search for regions when a country is selected
+ * @private
+ */
     change(val) {
       console.log(val);
 
@@ -616,6 +674,10 @@ export default {
       });
     },
 
+/**
+ * this method is used to put the list of countries in the right format 
+ * @private
+ */
     getCountry() {
       this.$store.dispatch("auth/country").then((res) => {
         console.log("------------------------", this.$store.state.auth.country);
@@ -628,6 +690,11 @@ export default {
         });
       });
     },
+
+    /**
+     * this method is used to put the list of categories in the right format for display
+     * @private
+     */
     getCathegorie() {
       this.$store.dispatch("auth/categories").then((res) => {
         console.log("---", this.$store.state.auth.categories);
@@ -641,6 +708,11 @@ export default {
         });
       });
     },
+
+    /**
+     * method not used
+     * @private
+     */
     getValidationClass(fieldName) {
       const field = this.$v.form[fieldName];
       if (field) {
@@ -650,6 +722,10 @@ export default {
       }
     },
 
+/**
+ * method used to validate and submit the form to update a business
+ * @private
+ */
     validate() {
       this.$v.form.$touch();
       if (this.$v.form.$anyError) {
@@ -663,6 +739,10 @@ export default {
       }
     },
 
+/**
+ * method used to  submit the form to update a business
+ * @private
+ */
     UpdateBusiness() {
       let formData2 = new FormData();
     console.log("----ttt",this.select_filterss, "----ggg ", this.filterselectvalue)
@@ -743,6 +823,10 @@ export default {
       // this.center={ lat:10, lng: 20 }
     },
 
+/**
+ * not used
+ * @private
+ */
     editBio() {
       this.edit1 = !this.edit1;
     },

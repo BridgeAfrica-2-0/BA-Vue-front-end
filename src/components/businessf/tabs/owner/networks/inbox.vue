@@ -2885,6 +2885,12 @@
 </template>
 
 <script>
+/**
+   * The custom HTML `<inboxNetwork>` component.
+   *
+   * @author Edouard Yonga
+   * Copyright (c) Bridge Africa. All rights reserved.
+*/
 import EmojiPicker from "vue-emoji-picker";
 import io from "socket.io-client";
 import moment from "moment";
@@ -3363,6 +3369,9 @@ export default {
         this.formData.append("memberID", data.memberID);
 
         this.saveMessage(this.formData);
+        this.$store.dispatch("networkChat/GET_BIZS_CHAT_LIST_Dos", {
+            type: this.type
+          });
       });
       this.socket.on("privateMessage", (data) => {
         console.log("Received");
@@ -3378,6 +3387,9 @@ export default {
         this.formData.append("type", data.type);
         if (this.currentBizId == data.sender_network_id) {
           this.saveMessage(this.formData);
+          this.$store.dispatch("networkChat/GET_BIZS_CHAT_LIST_Dos", {
+            type: this.type
+          });
         } else {
           // this.$store.dispatch("networkChat/GET_BIZS_CHAT_LIST_Dos", {
           //   type: this.type,

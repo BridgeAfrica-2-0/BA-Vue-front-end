@@ -91,7 +91,7 @@
                     <template #button-content>
                       <b-icon
                         icon="three-dots-vertical"
-                        animation="cylon-vertical"
+                        variant="primary"
                         font-scale="1"
                       ></b-icon>
                     </template>

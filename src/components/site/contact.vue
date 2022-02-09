@@ -64,6 +64,9 @@
   </section>
 </template>
 <script>
+/**
+ * this component is form of contact us 
+ */
 import axios from 'axios'
 export default {
   data() {
@@ -78,6 +81,10 @@ export default {
   },
   methods : {
 
+    /**
+     * this function is for submit the message of the user to contact 
+     * @private
+     */
     Contact(event){
       event.preventDefault()
       console.log(this.contact)

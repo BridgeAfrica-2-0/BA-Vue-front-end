@@ -3,16 +3,19 @@
     :block="header"
     variant="primary"
     size="sm"
-    :class="header ? 'message size' : 'b-background flexx shadow'"
+    style="position: relative"
+    :class="
+      header
+        ? 'message size text-center'
+        : 'b-background flexx shadow text-center'
+    "
     @click="cta()"
   >
     <span v-if="header" style="margin-left: -3px">
       <i class="fas fa-envelope fa-lg btn-icon"></i>
       <span class="ml-1"> {{ $t("businessf.Message") }}</span>
     </span>
-    <span v-else-if="isBuyNow" style="display: inline-flex">
-      <span class="btn-text" style="margin-top: -1px"> Buy Now</span>
-    </span>
+    <span v-else-if="isBuyNow" class="btn-text centralize"> Buy Now </span>
     <span v-else style="display: inline-flex">
       <i class="fas fa-envelope fa-lg btn-icon pb-3 mt-1 mr-1 mt-sm-1"></i>
       <span class="btn-text" style="margin-top: -1px">
@@ -29,40 +32,40 @@ export default {
    *
    * @author Edouard Yonga
    * Copyright (c) Bridge Africa. All rights reserved.
-*/
-  name: 'BtnCtaMessage',
+   */
+  name: "BtnCtaMessage",
   props: {
     /**
-       * Element is the data of the disired inbox redirection
-       * A call to action button that redirect the clicked element to his inbox
-    */
+     * Element is the data of the disired inbox redirection
+     * A call to action button that redirect the clicked element to his inbox
+     */
     element: {
       type: Object,
       required: true,
     },
     /**
-       * Take the Type of inbox (business,profile or network)
-    */
+     * Take the Type of inbox (business,profile or network)
+     */
     type: {
       type: String,
     },
     /**
-       * To differentiate the styling of the btn 
-    */
+     * To differentiate the styling of the btn
+     */
     header: {
       default: false,
       type: Boolean,
     },
     /**
-       * Boolean that will later be used in the inbox to extrat the business ID of the product
-    */
+     * Boolean that will later be used in the inbox to extrat the business ID of the product
+     */
     isProduct: {
       default: false,
       type: Boolean,
     },
     /**
-       * To difrentiat the text on the button 
-    */
+     * To difrentiat the text on the button
+     */
     isBuyNow: {
       default: false,
       type: Boolean,
@@ -89,14 +92,14 @@ export default {
 
   methods: {
     /**
-       * This will be ignored on rendering
-       * @private
-    */
+     * This will be ignored on rendering
+     * @private
+     */
     cta() {
-       /**
-         * Fired when the button is clicked.
-         * 
-         */
+      /**
+       * Fired when the button is clicked.
+       *
+       */
       console.log(this.element);
       this.$store.commit("businessChat/setSelectedChat", {
         isProduct: this.isProduct,
@@ -134,6 +137,14 @@ export default {
 </script>
 
 <style scoped>
+.centralize {
+  position: absolute;
+  top: 40%;
+  left: 44%;
+  transform: translate(-40%, -40%);
+  display: block;
+  font-size: 16px;
+}
 .b-background {
   background-color: #e75c18;
   color: white;

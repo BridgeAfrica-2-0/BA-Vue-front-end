@@ -49,7 +49,6 @@
               />
             </b-input-group>
 
-
             <span style="display: none" ref="mobileinput">
               <b-input-group class="b-shadow mt-2">
                 <div
@@ -114,7 +113,7 @@
               />
 
               <slot name="button">
-                <Button @click.native="getKeyword" media='desktop' />
+                <Button @click.native="getKeyword" media="desktop" />
               </slot>
             </form>
           </span>
@@ -197,7 +196,14 @@
                     <div v-for="message in messages" :key="message.id">
                       <hr class="h-divider" />
                       <div
-                        class="d-inline-flex flex-row justify-content-between align-items-center suggest-item cursor-pointer"
+                        class="
+                          d-inline-flex
+                          flex-row
+                          justify-content-between
+                          align-items-center
+                          suggest-item
+                          cursor-pointer
+                        "
                       >
                         <div class="d-inline-flex flex-row align-items-center">
                           <div>
@@ -258,10 +264,22 @@
                     >
                       <hr class="h-divider" />
                       <div
-                        class="d-inline-flex flex-row align-items-center suggest-item cursor-pointer"
+                        class="
+                          d-inline-flex
+                          flex-row
+                          align-items-center
+                          suggest-item
+                          cursor-pointer
+                        "
                       >
                         <div>
-                          <img :src="profileSenderImange(notification.sender)" class="rounded-circle" alt="" width="30" height="30" />
+                          <img
+                            :src="profileSenderImange(notification.sender)"
+                            class="rounded-circle"
+                            alt=""
+                            width="30"
+                            height="30"
+                          />
                         </div>
                         <div class="d-flex flex-column ml-3">
                           <div>{{ notification.notification_text }}</div>
@@ -332,15 +350,21 @@
                       <Activity class="w-full" />
                     </div>
 
-
                     <a
                       v-if="'user' != user.user_type"
                       @click.prevent="switchToProfile"
                       href="#"
-                      class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+                      class="
+                        other-menu
+                        suggest-item
+                        cursor-pointer
+                        text-decoration-none text-dark
+                      "
                     >
                       <span class="mr-2"
-                        ><fas-icon class="violet search" :icon="['fas', 'user']"
+                        ><fas-icon
+                          class="violet search"
+                          :icon="['fas', 'user']"
                       /></span>
                       Profile
                     </a>
@@ -348,7 +372,12 @@
 
                     <router-link
                       :to="{ name: 'orders' }"
-                      class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+                      class="
+                        other-menu
+                        suggest-item
+                        cursor-pointer
+                        text-decoration-none text-dark
+                      "
                     >
                       <span class="mr-2"
                         ><fas-icon
@@ -361,10 +390,18 @@
 
                     <router-link
                       :to="{ name: 'settings' }"
-                      class="other-menu suggest-item cursor-pointer text-decoration-none text-dark w-full"
+                      class="
+                        other-menu
+                        suggest-item
+                        cursor-pointer
+                        text-decoration-none text-dark
+                        w-full
+                      "
                     >
                       <span class="mr-2 w-full"
-                        ><fas-icon class="violet search" :icon="['fas', 'cogs']"
+                        ><fas-icon
+                          class="violet search"
+                          :icon="['fas', 'cogs']"
                       /></span>
                       {{ $t("general.Account_Settings") }}
                     </router-link>
@@ -403,7 +440,12 @@
                     <a
                       @click="logout"
                       href="#"
-                      class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+                      class="
+                        other-menu
+                        suggest-item
+                        cursor-pointer
+                        text-decoration-none text-dark
+                      "
                     >
                       <span class="mr-2"
                         ><fas-icon
@@ -449,12 +491,15 @@
             <div class="other-menu suggest-item cursor-pointer">
               <router-link
                 :to="navLink('home')"
-                class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+                class="
+                  other-menu
+                  suggest-item
+                  cursor-pointer
+                  text-decoration-none text-dark
+                "
               >
                 <span class="mr-3"
-                  ><fas-icon
-                    class="violet search"
-                    :icon="['fas', 'home']"
+                  ><fas-icon class="violet search" :icon="['fas', 'home']"
                 /></span>
                 Home
               </router-link>
@@ -464,7 +509,12 @@
             <div class="other-menu suggest-item cursor-pointer">
               <router-link
                 :to="{ name: 'GlobalSearch' }"
-                class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+                class="
+                  other-menu
+                  suggest-item
+                  cursor-pointer
+                  text-decoration-none text-dark
+                "
               >
                 <span class="mr-3"
                   ><fas-icon
@@ -475,12 +525,18 @@
               </router-link>
             </div>
             <hr class="h-divider" />
-              
+
             <div
               v-if="'user' != user.user_type"
               @click.prevent="switchToProfile"
               href="#"
-              class="other-menu suggest-item cursor-pointer text-decoration-none text-dark mx-1"
+              class="
+                other-menu
+                suggest-item
+                cursor-pointer
+                text-decoration-none text-dark
+                mx-1
+              "
             >
               <span class="mr-3">
                 <fas-icon
@@ -492,7 +548,12 @@
             </div>
             <router-link
               :to="{ name: 'orders' }"
-              class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+              class="
+                other-menu
+                suggest-item
+                cursor-pointer
+                text-decoration-none text-dark
+              "
             >
               <span class="mr-3"
                 ><fas-icon
@@ -505,7 +566,12 @@
 
             <router-link
               :to="{ name: 'settings' }"
-              class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+              class="
+                other-menu
+                suggest-item
+                cursor-pointer
+                text-decoration-none text-dark
+              "
             >
               <span class="mr-3"
                 ><fas-icon class="violet search" :icon="['fas', 'cogs']"
@@ -545,10 +611,17 @@
             <a
               href="#"
               @click.prevent="logout"
-              class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+              class="
+                other-menu
+                suggest-item
+                cursor-pointer
+                text-decoration-none text-dark
+              "
             >
               <span class="mr-3"
-                ><fas-icon class="violet search" :icon="['fas', 'sign-out-alt']"
+                ><fas-icon
+                  class="violet search"
+                  :icon="['fas', 'sign-out-alt']"
               /></span>
               {{ $t("general.Logout") }}
             </a>
@@ -582,7 +655,7 @@ export default {
   props: {
     credentials: {
       type: Object,
-      default: function() {
+      default: function () {
         return {
           keyword: "",
           placeholder: this.$t("general.All"),
@@ -672,12 +745,13 @@ export default {
   },
 
   watch: {
-    "$store.state.auth.profilConnected": function() {
+    "$store.state.auth.profilConnected": function () {
+      console.log("AUTH CHANGED!!!");
       this.updateNotificationEvent();
       this.userOwnPage = this.onRedirect();
     },
 
-    "$i18n.locale": async function() {
+    "$i18n.locale": async function () {
       const response = await this.$repository.notification.changeLanguage(
         this.$i18n.locale
       );
@@ -696,11 +770,9 @@ export default {
   },
   //image.profile_picture image.logo_path, image.image
   filters: {
-    
     stringify(value) {
       return JSON.stringify(value, null, 2);
     },
-
   },
 
   methods: {
@@ -714,13 +786,13 @@ export default {
     }),
 
     profileSenderImange(image) {
-      const picture = image.profile_picture 
-        ? image.profile_picture 
+      const picture = image.profile_picture
+        ? image.profile_picture
         : image.logo_path
-          ? image.logo_path
-          : image.image
+        ? image.logo_path
+        : image.image;
 
-      return picture
+      return picture;
     },
 
     ...mapMutations({
@@ -764,13 +836,15 @@ export default {
 
     updateNotificationEvent() {
       try {
-        const newRouteNotificationApi = this.notificationPatterns[
-          this.$store.state.auth.profilConnected.user_type
-        ]();
+        const newRouteNotificationApi =
+          this.notificationPatterns[
+            this.$store.state.auth.profilConnected.user_type
+          ]();
 
-        const newRouteMessageApi = this.messagePatterns[
-          this.$store.state.auth.profilConnected.user_type
-        ]();
+        const newRouteMessageApi =
+          this.messagePatterns[
+            this.$store.state.auth.profilConnected.user_type
+          ]();
 
         this.newNotification(newRouteNotificationApi);
         this.newMessage(newRouteMessageApi);
@@ -797,7 +871,7 @@ export default {
     },
 
     getKeyword() {
-      console.log(this.credentials.keyword)
+      console.log(this.credentials.keyword);
       if (!this.credentials.keyword) return false;
 
       if (this.$route.name != "Search") {
@@ -843,7 +917,7 @@ export default {
         .catch(() => console.log("error"));
     },
 
-    logout: async function() {
+    logout: async function () {
       let loader = this.$loading.show({
         container: this.$refs.formContainer,
         canCancel: true,
@@ -869,7 +943,7 @@ export default {
       loader.hide();
     },
 
-    switchToProfile: async function() {
+    switchToProfile: async function () {
       let loader = this.$loading.show({
         container: this.$refs.formContainer,
         canCancel: true,
@@ -893,12 +967,12 @@ export default {
       this.$refs.mobileinput.style.display = "block";
     },
 
-    getNetworks: async function() {
+    getNetworks: async function () {
       let request = await this.$repository.share.getNetworks();
       if (request.success) this.setNetworks(request.data);
     },
 
-    getBusiness: async function() {
+    getBusiness: async function () {
       let request = await this.$repository.share.getBusiness();
       if (request.success) this.setBusiness(request.data);
     },

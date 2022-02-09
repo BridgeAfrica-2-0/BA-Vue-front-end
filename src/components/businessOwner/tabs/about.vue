@@ -471,6 +471,7 @@
             >
               {{ business_about_input.address }}
 
+
               <div class="" style="height: 200px; overflow:hidden">
                 <AutocompleteLocation
                   :region="region"
@@ -479,6 +480,7 @@
               </div>
             </b-form-group>
           </div>
+
         </div>
 
         <div class="row">
@@ -904,45 +906,52 @@ export default {
     },
   },
   methods: {
-    input1() {
-      this.dayOfWorks.map((item) => {
-        if (item.day == "monday") {
-          this.dayOfWorks[0].mon_start = this.dayOfWorks[0].opening_time;
-          this.dayOfWorks[0].mon_end = this.dayOfWorks[0].closing_time;
-          this.dayOfWorks[0].monday = this.dayOfWorks[0].day;
-        } else if (item.day == "tuesday") {
-          this.dayOfWorks[1].tues_start = this.dayOfWorks[1].opening_time;
-          this.dayOfWorks[1].tues_end = this.dayOfWorks[1].closing_time;
-          this.dayOfWorks[1].tuesday = this.dayOfWorks[1].day;
-        } else if (item.day == "wednesday") {
-          this.dayOfWorks[2].wed_start = this.dayOfWorks[2].opening_time;
-          this.dayOfWorks[2].wed_end = this.dayOfWorks[2].closing_time;
-          this.dayOfWorks[2].wednesday = this.dayOfWorks[2].day;
-        } else if (item.day == "thursday") {
-          this.dayOfWorks[3].thurs_start = this.dayOfWorks[3].opening_time;
-          this.dayOfWorks[3].thurs_end = this.dayOfWorks[3].closing_time;
-          this.dayOfWorks[3].thursday = this.dayOfWorks[3].day;
-        } else if (item.day == "friday") {
-          this.dayOfWorks[4].fri_start = this.dayOfWorks[4].opening_time;
-          this.dayOfWorks[4].fri_end = this.dayOfWorks[4].closing_time;
-          this.dayOfWorks[4].friday = this.dayOfWorks[4].day;
-        } else if (item.day == "saturday") {
-          this.dayOfWorks[5].sat_start = this.dayOfWorks[5].opening_time;
-          this.dayOfWorks[5].sat_end = this.dayOfWorks[5].closing_time;
-          this.dayOfWorks[5].saturday = this.dayOfWorks[5].day;
-        } else if (item.day == "sunday") {
-          this.dayOfWorks[6].sun_start = this.dayOfWorks[6].opening_time;
-          this.dayOfWorks[6].sun_end = this.dayOfWorks[6].closing_time;
-          this.dayOfWorks[6].sunday = this.dayOfWorks[6].day;
-        }
-      });
-      console.log("---input: ", this.dayOfWorks);
-      console.log("---input: ", ...this.dayOfWorks);
+  
 
-      this.dayOfWorks.map((item) => {
-        Object.entries(item).forEach(([key, valeur]) => {
-          this.tempo[key] = valeur;
-        });
+    input1(){
+         
+      this.dayOfWorks.map((item) =>{
+          if(item.day == "monday"){
+              this.dayOfWorks[0].mon_start =this.dayOfWorks[0].opening_time;
+              this.dayOfWorks[0].mon_end =this.dayOfWorks[0].closing_time;
+              this.dayOfWorks[0].monday =this.dayOfWorks[0].day;
+          }else  if(item.day == "tuesday"){
+              this.dayOfWorks[1].tues_start =this.dayOfWorks[1].opening_time;
+              this.dayOfWorks[1].tues_end =this.dayOfWorks[1].closing_time;
+              this.dayOfWorks[1].tuesday =this.dayOfWorks[1].day;
+          } else  if(item.day == "wednesday"){
+              this.dayOfWorks[2].wed_start =this.dayOfWorks[2].opening_time;
+              this.dayOfWorks[2].wed_end =this.dayOfWorks[2].closing_time;
+              this.dayOfWorks[2].wednesday =this.dayOfWorks[2].day;
+          } else  if(item.day == "thursday"){
+              this.dayOfWorks[3].thurs_start =this.dayOfWorks[3].opening_time;
+              this.dayOfWorks[3].thurs_end =this.dayOfWorks[3].closing_time;
+              this.dayOfWorks[3].thursday =this.dayOfWorks[3].day;
+          } else  if(item.day == "friday"){
+              this.dayOfWorks[4].fri_start =this.dayOfWorks[4].opening_time;
+              this.dayOfWorks[4].fri_end =this.dayOfWorks[4].closing_time;
+              this.dayOfWorks[4].friday =this.dayOfWorks[4].day;
+          } else  if(item.day == "saturday"){
+              this.dayOfWorks[5].sat_start =this.dayOfWorks[5].opening_time;
+              this.dayOfWorks[5].sat_end =this.dayOfWorks[5].closing_time;
+              this.dayOfWorks[5].saturday =this.dayOfWorks[5].day;
+          } else  if(item.day == "sunday"){
+              this.dayOfWorks[6].sun_start =this.dayOfWorks[6].opening_time;
+              this.dayOfWorks[6].sun_end =this.dayOfWorks[6].closing_time;
+              this.dayOfWorks[6].sunday =this.dayOfWorks[6].day;
+          }
+        })
+        console.log('---input: ',this.dayOfWorks);
+        console.log('---input: ',...this.dayOfWorks);
+       
+        this.dayOfWorks.map((item) =>{
+
+            Object.entries(item).forEach(
+            ([key, valeur]) => {
+              this.tempo[key] = valeur 
+            }
+          );
+
 
         // for (let key in item) {
         //     tempo.key = item.key
@@ -995,16 +1004,21 @@ export default {
       // console.log("final :", this.dayOfWorks)
     },
     /**
+
+
+/**
+
      * this method is used to retrieve information from the mapbox
      * @private
      */
-    getGeoCoderResult(response) {
-      console.log(response);
-      this.coordinates = response.coordinates;
-      this.business_about_input.address = response.address;
-      console.log("yoo mother fuckers");
-      console.log(response);
-    },
+
+
+    getGeoCoderResult(response) {console.log('res map ---',response);
+     this.business_about_input.address = response.address;
+       this.business_about_input.lng = response.coordinates[0];
+      this.business_about_input.lat = response.coordinates[1];
+},
+
 
     /**
      * this method is used to transform the elements of the array into a character string
@@ -1032,7 +1046,9 @@ export default {
     stringArray(words) {
       let keyword = "";
       words.map((item) => {
-        if (item.subcategoryId) {
+        if (item.subcategory_id) {
+          keyword += item.subcategory_id + ",";
+        } else if (item.subcategoryId){
           keyword += item.subcategoryId + ",";
         } else {
           keyword += item.id + ",";
@@ -1196,8 +1212,15 @@ export default {
           );
 
           this.test();
+
           console.log(this.business_about_input);
           this.input1();
+
+          
+       
+          console.log('test-------',this.business_about_input.lat, '------:',this.business_about_input.lng);
+
+
           var dat = {
             business_id: this.$route.params.id,
             data: {

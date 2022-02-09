@@ -751,14 +751,19 @@ export default {
           JSON.stringify(this.$store.getters["businessOwner/getBusinessAbout"])
         );
         // this.dayOfWorks = this.initialize(this.dayOfWorks);
-        this.dayOfWorks = this.business_about.business_open_hours;
+        if(this.business_about.business_open_hours.length >= 1){
 
-        this.business_about.business_open_hours.forEach((element, index) => {
-         if(element.opening_time && element.closing_time){
-            this.dayOfWorks[index].check = true;
-         }else { this.dayOfWorks[index].check = false; }
-
+          this.dayOfWorks = this.business_about.business_open_hours;
+  
+          this.business_about.business_open_hours.forEach((element, index) => {
+  
+           if(element.opening_time && element.closing_time){
+              this.dayOfWorks[index].check = true;
+           }else { this.dayOfWorks[index].check = false; }
         });
+        
+        }
+
       })
       .catch((error) => {
         console.log("error from the server or browser error(2) ++++", error);

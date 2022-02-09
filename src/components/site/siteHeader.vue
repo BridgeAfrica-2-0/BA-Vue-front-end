@@ -10,7 +10,7 @@
     <!-- <b-navbar toggleable="lg" variant="faded" type="light"> -->
         <div class="col-md-12 col-lg-2 col-xl-2 text-center">
           <a class="d-inline-block align-top mt-1" href="#">
-            <img src="@/assets/logo.png" alt="" class="balogo desktop mobile" loading="lazy" />
+            <img src="@/assets/logo.png" alt="" class="balogo desktop mobile1" loading="lazy" />
             <!-- <img src="@/assets/img/BAC-clear-dotted-logo.png" alt="" class="balogo mobile" loading="lazy" /> -->
           </a>
         </div>
@@ -118,7 +118,9 @@ export default {
 @media (min-width: 992px)
 {
 
-
+.poslang{
+  /* margin-bottom: 10px; */
+}
 .navbar-expand-lg {
     
     padding-right: 0px;
@@ -149,9 +151,9 @@ export default {
   .pos{
      margin-top: -20px;
   }
-  .mobile{
-    width: 140px !important;
-  }
+.mobile1{
+  width: 140px !important;
+}
   
   .balogo{
     width: 70px ;
@@ -192,7 +194,7 @@ export default {
     height: 70px ;
   }
   .mobile{
-    width: 200px ;
+    display: none;
   }
 }
 </style>

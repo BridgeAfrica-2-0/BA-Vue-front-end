@@ -13,13 +13,13 @@
 import Mapbox from "mapbox-gl";
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 export default {
-  props: ["region"],
+  props: ["region", "infos"],
   data() {
     return {
       loading: false,
       accessToken: process.env.VUE_APP_MAPBOX_TOKEN,
       mapStyle: "mapbox://styles/mapbox/outdoors-v11",
-      center: [11.504929555178624, 3.8465173382452815], // Lng,Lat
+      // center: [11.504929555178624, 3.8465173382452815], // Lng,Lat
       zoom: 5,
     };
   },
@@ -27,6 +27,7 @@ export default {
     this.mapbox = Mapbox;
   },
   mounted() {
+    console.log('-----::', this.infos)
     this.initmap();
   },
   methods: {
@@ -91,17 +92,19 @@ export default {
 const map = new mapboxgl.Map({
 container: 'map',
 style: 'mapbox://styles/mapbox/streets-v11',
-center: [-79.4512, 43.6568],
-zoom: 13
-});
+center: [this.infos ? this.infos.lat : 9.297899, this.infos ? this.infos.lng : 13.39646 ],
+zoom: 3
+}); 
  
 // Add the control to the map.
 map.addControl(
 new MapboxGeocoder({
 accessToken: mapboxgl.accessToken,
 mapboxgl: mapboxgl,
-// countries: "cm",
-placeholder: "Address"
+
+countries: "cm",
+placeholder: this.infos ? this.infos.address : 'Address'
+
 }).
 on("result", (e) => { 
         let response = e.result;

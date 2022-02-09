@@ -1357,19 +1357,19 @@ export default {
       return new Promise((resolve, reject) => {
         this.sendingB = true;
 
-                
+   if(this.logo_pic != '')  {            
 this.cropedImage = this.$refs.cropperr.getCroppedCanvas().toDataURL();
 
 this.$refs.cropperr.getCroppedCanvas().toBlob((blob) => {
 
-     this.logo_path=blob;
+     this.logo_pic=blob;
   // formData.append("profile_picture", this.profile_pic);
    
    
 
 }, this.mime_type);
 
-
+   }
 
 
 
@@ -1454,7 +1454,11 @@ this.$refs.cropperr.getCroppedCanvas().toBlob((blob) => {
       return new Promise((resolve, reject) => {
         console.log("sending user data");
 
+        console.log(this.profile_pic );
+
         let formData = new FormData();
+
+        if(this.profile_pic != '') {   
         
 this.cropedImage = this.$refs.cropper.getCroppedCanvas().toDataURL();
 
@@ -1466,6 +1470,11 @@ this.$refs.cropper.getCroppedCanvas().toBlob((blob) => {
    
 
 }, this.mime_type);
+
+ }
+ 
+
+    console.log("fuck");
         
          formData.append("profile_picture", this.profile_pic);
         formData.append("dob", this.dob);

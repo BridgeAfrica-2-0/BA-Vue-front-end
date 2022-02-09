@@ -1,5 +1,5 @@
 <template>
-  <div style="overflow-x: hidden; color: black">  
+  <div style="overflow-x: hidden; color: black">
     <Nav :credentials.sync="searchParams" id="top">
       <template v-slot:button>
         <Button
@@ -135,7 +135,7 @@
             name="subCategories-list-modal"
             class="mt-2"
           >
-          <img
+            <img
               class="img-fluid picture"
               style="max-height: 26px"
               :src="category.category.cat_image"
@@ -317,7 +317,7 @@
                   size="lg"
                 />
 
-                {{ $t("search.Businesses") }} 
+                {{ $t("search.Businesses") }}
               </h6>
 
               <MiniBusiness :businesses="businesses" />
@@ -336,7 +336,7 @@
                   size="lg"
                 />
 
-                <h6>{{ $t("search.People") }}</h6>  anna
+                <h6>{{ $t("search.People") }}</h6>
               </div>
 
               <MiniPeople />
@@ -415,7 +415,7 @@
                   size="lg"
                 />
 
-                {{ $t("search.Businesses") }} 
+                {{ $t("search.Businesses") }}
               </h6>
               <!-- <b-spinner
                 v-if="prodLoaderr"
@@ -490,7 +490,12 @@
                     class="mx-3"
                   >
                     <b-spinner small v-if="prodLoader"></b-spinner>
-                    <span v-else><b-icon icon="arrow-clockwise" aria-hidden="true"></b-icon></span>
+                    <span v-else
+                      ><b-icon
+                        icon="arrow-clockwise"
+                        aria-hidden="true"
+                      ></b-icon
+                    ></span>
                   </b-button>
                 </div>
               </h6>
@@ -554,8 +559,12 @@ import SubNav from "@/components/subnav";
 import Sponsor from "@/components/search/sponsoredBusiness";
 import Button from "@/components/ButtonNavBarFind";
 
-import { PostComponent, PeopleComponent, PostFilter, PeopleFilter } from "@/components/search";
-
+import {
+  PostComponent,
+  PeopleComponent,
+  PostFilter,
+  PeopleFilter,
+} from "@/components/search";
 
 import BusinessComponent from "@/components/search/business";
 //import login from "@/components/search/login";
@@ -630,8 +639,7 @@ export default {
   created() {
     this.islogin = this.$store.getters["auth/isLogged"];
 
-
-    if (this.$route.query.keyword){
+    if (this.$route.query.keyword) {
       this.searchParams.keyword = this.$route.query.keyword;
     }
 
@@ -672,7 +680,7 @@ export default {
       strategyForComponent: null,
       notFoundComponentTitle: "",
       isComponent: null,
-      isFilter:null,
+      isFilter: null,
       strategyForPlaceHolder: {},
       strategyForNotFoundComponentTitle: {},
 
@@ -1748,16 +1756,16 @@ export default {
 
       this.strategyForComponent = {
         2: () => ({
-          component:PeopleComponent,
-          filter:PeopleFilter
+          component: PeopleComponent,
+          filter: PeopleFilter,
         }),
         5: () => ({
-          component:PostComponent,
-          filter: PostFilter
+          component: PostComponent,
+          filter: PostFilter,
         }),
         1: () => ({
-          component:BusinessComponent,
-          filter: null
+          component: BusinessComponent,
+          filter: null,
         }),
       };
 
@@ -1784,8 +1792,8 @@ export default {
     changeComponent() {
       try {
         const data = this.strategyForComponent[this.selectedId]();
-        this.isComponent = data.component
-        this.isFilter = data.filter
+        this.isComponent = data.component;
+        this.isFilter = data.filter;
       } catch (error) {
         this.isComponent = null;
         this.isFilter = null;
@@ -2364,8 +2372,6 @@ export default {
 </script>
 
 <style scoped>
-
-
 .icon-color {
   color: #e75c18;
 }

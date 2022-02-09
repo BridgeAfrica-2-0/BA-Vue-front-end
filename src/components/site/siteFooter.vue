@@ -95,18 +95,14 @@
 
               <div class="social-links mt-3 text-left">
                 <a href="https://twitter.com/bridgeafricacom" class="twitter bridge-icon" target="_blank"
-                  ><i class="bx bxl-twitter"></i
-                ></a>
+                  >     <b-icon icon="twitter"  class="twitter bridge-icon" > </b-icon>  </a> 
                 <a href="http://facebook.com/bridgeafricacom" class="facebook bridge-icon" target="_blank"
-                  ><i class="bx bxl-facebook"></i
-                ></a>
+                  >  <b-icon icon="facebook"  class="facebook bridge-icon" > </b-icon>  </a>
                 <a href="https://instagram.com/bridgeafricacom" class="instagram bridge-icon" target="_blank"
-                  ><i class="bx bxl-instagram"></i
-                ></a>
+                  >  <b-icon icon="instagram"  class=" instagram bridge-icon" > </b-icon>   </a>
 
                 <a href="https://www.youtube.com/channel/UC8JjdBDrz7GsqnO7kpEEHvA" class="youtube bridge-icon" target="_blank"
-                  ><i class="bx bxl-youtube"></i
-                ></a>
+                  >  <b-icon icon="youtube"  class="youtube bridge-icon" > </b-icon>    </a>
               </div>
 
               <br />

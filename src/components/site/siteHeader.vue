@@ -118,9 +118,7 @@ export default {
 @media (min-width: 992px)
 {
 
-.poslang{
-  /* margin-bottom: 10px; */
-}
+
 .navbar-expand-lg {
     
     padding-right: 0px;

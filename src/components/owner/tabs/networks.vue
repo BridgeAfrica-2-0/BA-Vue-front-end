@@ -471,7 +471,23 @@
                 />
 
                 <div id="preview">
-                  <img v-if="logoimg_url" :src="logoimg_url" />
+                  <!-- <img v-if="logoimg_url" :src="logoimg_url" /> -->
+
+
+                  <vue-cropper  v-if="logoimg_url"
+                    :src="selectedFile"
+                    ref="cropperr"
+                    original:true
+                    info:false
+                    canScale:true
+                    maxImgSize:1000
+                    
+                    :size="1"
+                    drag-mode="move"
+                    :view-mode="1"
+                  />
+
+
                 </div>
                 <br />
                 <div class="text-center">
@@ -598,6 +614,11 @@ import axios from "axios";
 import Multiselect from "vue-multiselect";
 import VuePhoneNumberInput from "vue-phone-number-input";
 import AutocompleteLocation from "@/components/AutocompleteLocation";
+
+
+import VueCropper from "vue-cropperjs";
+import "cropperjs/dist/cropper.css";
+
 export default {
 
   props:{
@@ -610,6 +631,7 @@ export default {
   data() {
     return {
       page: 1,
+      
       multiselecvalue: [],
       infiniteId: 1,
       logoimg_url: null,
@@ -676,7 +698,8 @@ export default {
   components: {
     Multiselect,
     VuePhoneNumberInput,
-    AutocompleteLocation
+    AutocompleteLocation,
+    VueCropper
   },
 
   mounted() {
@@ -806,7 +829,28 @@ export default {
       this.logo = e.target.files[0];
       const logofile = e.target.files[0];
       this.logoimg_url = URL.createObjectURL(logofile);
+
+
+      this.mime_type = logofile.type;
+
+        if (typeof FileReader === "function") {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          this.selectedFile = event.target.result;
+          this.$refs.cropperr.replace(this.selectedFile);
+        };
+        reader.readAsDataURL(logofile);
+      } else {
+        alert("Sorry, FileReader API not supported");
+      }
+
+
     },
+
+
+   
+
+
 
     Region() {
       let formData2 = new FormData();
@@ -1111,6 +1155,22 @@ export default {
       fd.append("division_id", this.selecteddivision);
       fd.append("council_id", this.selectedmunicipality);
       fd.append("neighbourhood", this.selectedlocality);
+
+         
+   if(this.logo != '')  {            
+this.cropedImage = this.$refs.cropperr.getCroppedCanvas().toDataURL();
+
+this.$refs.cropperr.getCroppedCanvas().toBlob((blob) => {
+
+     this.logo=blob;
+  // formData.append("profile_picture", this.profile_pic);
+   
+   
+
+}, this.mime_type);
+
+   }
+
       fd.append("image", this.logo);
 
       fd.append("allow_business", this.createdNetwork.allow_business);

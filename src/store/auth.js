@@ -150,7 +150,7 @@ export default {
     // location.reload();
    // this.$router.push({ name: "Login" });
 
-    //router.push({ name: "Login" });
+    router.push({ name: "Login" });
 
 
     },

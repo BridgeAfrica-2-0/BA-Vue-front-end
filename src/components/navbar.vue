@@ -208,11 +208,19 @@
                         <div class="d-inline-flex flex-row align-items-center">
                           <div>
                             <img
-                              :src="profileSenderImange(message.sender)"
-                              class="rounded-circle"
+                              :src="
+                                profileSenderImange(
+                                  message.sender
+                                    ? message.sender
+                                    : message.sender_network
+                                    ? message.sender_network
+                                    : message.sender_business
+                                )
+                              "
+                              class="rounded"
                               alt=""
-                              width="30"
-                              height="30"
+                              width="40"
+                              height="65"
                             />
                           </div>
                           <div class="d-flex flex-column ml-1 line-size">
@@ -220,6 +228,10 @@
                               {{
                                 message.sender_business
                                   ? message.sender_business.name
+                                  : message.sender_network
+                                  ? message.sender_network.name
+                                  : message.sender
+                                  ? message.sender.name
                                   : ""
                               }}
                             </div>
@@ -786,11 +798,14 @@ export default {
     }),
 
     profileSenderImange(image) {
-      const picture = image.profile_picture
+      // console.log("image is:", image);
+      const picture = image
         ? image.profile_picture
-        : image.logo_path
-        ? image.logo_path
-        : image.image;
+          ? image.profile_picture
+          : image.logo_path
+          ? image.logo_path
+          : image.image
+        : "";
 
       return picture;
     },

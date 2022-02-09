@@ -52,18 +52,19 @@ export default {
         },
 
         async FIND_BUSINESS({ commit, state }, payload) {
-            console.log("business search start");
+            console.log("business search start", payload);
 
-            console.log(payload);
+            console.log();
             commit("setLoading", true);
+            // let main = payload.main ? payload.main : false
 
-            return await axios.get(`search`, {
+            return await axios.get(`search/business`, {
                 params: {
                     keyword: state.keyword,
+                    main: "vrai",
                     location: payload.location,
                     lat: state.geo.lat,
                     lng: state.geo.lng,
-
                     categoryId: payload.cat_id,
                     subCategoryId: payload.sub_cat,
                     filterId: payload.filter_id,
@@ -93,7 +94,7 @@ export default {
 
             console.log(pagge);
             console.log(payload.keyword);
-            return axios.get(`search?page=`+pagge, {
+            return axios.get(`search/business?page=` + pagge, {
                 keyword: payload.keyword,
                 location: payload.location,
                 categoryId: payload.category,

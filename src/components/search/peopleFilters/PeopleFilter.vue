@@ -178,13 +178,13 @@ export default {
 
   watch: {
     selectedPeople: function () {
-      this.onProcess();
+      this.onProcess('people');
     },
     selectedBuisness: function () {
-      this.onProcess();
+      this.onProcess('business');
     },
     selectedNetwork: function () {
-      this.onProcess();
+      this.onProcess('network');
     },
   },
 
@@ -209,9 +209,10 @@ export default {
     onProcess: _.debounce(function (e) {
       this.page(1);
 
-      const user = this.map(this.selectedPeople, `user`);
-      const buisness = this.map(this.selectedBuisness, `buisness`);
-      const network = this.map(this.selectedNetwork, `network`);
+      
+      const user = (e == 'people') ? this.map(this.selectedPeople, `user`): [];
+      const buisness = (e == 'business') ? this.map(this.selectedBuisness, `buisness`): [];
+      const network = (e == 'network') ? this.map(this.selectedNetwork, `network`) : [];
 
 
       const data = [...user, ...buisness, ...network].reduce((hash, value) => {
@@ -249,11 +250,13 @@ export default {
         this.page(1);
         this.stack({data:{ profession: e, keyword: this.postKeyword },page: 1});
         this.setCallback(this.$repository.search.findUserByParam);
+        
         this._onFindUser({
           profession: e,
           keyword: this.postKeyword,
           page: 1,
         });
+        
         this.hide()
       }
     }, 1000),

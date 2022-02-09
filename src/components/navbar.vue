@@ -146,7 +146,7 @@
                   :to="navLink('home')"
                   class="nav-link text-dark hov"
                 >
-                  Home
+                  Dashboard
                 </router-link>
               </div>
 

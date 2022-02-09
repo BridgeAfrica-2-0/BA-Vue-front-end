@@ -25,7 +25,7 @@
           <p style="font-size: 1rem; font-weight: bold">
             {{ plural }}
           </p>
-
+          
           <b-button
             v-if="upHere"
             variant="outline-primary"

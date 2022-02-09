@@ -26,6 +26,7 @@
           </b-modal>
 
           <AlbumItem
+            :style="getStyle"
             v-for="album in strategy[type]().albums"
             :key="album.id"
             :album="album"

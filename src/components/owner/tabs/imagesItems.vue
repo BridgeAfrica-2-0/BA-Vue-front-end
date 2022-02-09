@@ -11,7 +11,7 @@
         alt="media_img"
         v-b-modal="`modal-${im.id}`"
         v-bind="imageProps"
-        style="width:250px !important; height:250px !important"
+        :style="getStyle"
       ></b-img>
     
     <video

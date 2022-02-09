@@ -485,6 +485,7 @@
            <div class="" style="height: 200px; overflow:hidden">
                   <AutocompleteLocation
                   
+                    :infos="business_about_input"
                     :region="region"
                     @get-address-details="getGeoCoderResult"
                   />
@@ -909,6 +910,7 @@ export default {
   },
   methods: {
 
+
     input1(){
          
       this.dayOfWorks.map((item) =>{
@@ -1008,15 +1010,19 @@ export default {
         // console.log("final :", this.dayOfWorks)
     },
     /**
+
+
+/**
+
      * this method is used to retrieve information from the mapbox
      * @private
      */
-    getGeoCoderResult(response) {console.log(response);
-      this.coordinates = response.coordinates;
-      this.business_about_input.address = response.address;
-      console.log("yoo mother fuckers");
-      console.log(response);
-    },
+
+    getGeoCoderResult(response) {console.log('res map ---',response);
+     this.business_about_input.address = response.address;
+       this.business_about_input.lng = response.coordinates[0];
+      this.business_about_input.lat = response.coordinates[1];
+},
 
       /**
      * this method is used to transform the elements of the array into a character string
@@ -1044,7 +1050,9 @@ export default {
     stringArray(words) {
       let keyword = "";
       words.map((item) => {
-        if (item.subcategoryId) {
+        if (item.subcategory_id) {
+          keyword += item.subcategory_id + ",";
+        } else if (item.subcategoryId){
           keyword += item.subcategoryId + ",";
         } else {
           keyword += item.id + ",";
@@ -1205,8 +1213,15 @@ export default {
           console.log(this.multiselecvalue, " --sous cat --- ",this.filterselectvalue);
           
           this.test();
+
           console.log(this.business_about_input);
           this.input1();
+
+          
+       
+          console.log('test-------',this.business_about_input.lat, '------:',this.business_about_input.lng);
+
+
           var dat = {
             business_id: this.$route.params.id,
             data: {

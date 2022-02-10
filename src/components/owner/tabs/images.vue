@@ -63,8 +63,7 @@
           </a>
         </div>
       </div>
-     
-      
+   
           <Picture
             class="img-gall" v-for="(im, index) in allImages" :key="index"
             :im="im"
@@ -80,16 +79,16 @@
             :imageProps="imageProps"
             :isEditor="isEditor"
             :type="type"
-            :getStyle="getStyle"
+            style="width:''"
           />
         
-
       <vue-easy-lightbox
         :visible="visible"
         :imgs="Slideimges"
         :index="currentPicture"
         @hide="handleHide"
-      ></vue-easy-lightbox>
+      >
+      </vue-easy-lightbox>
 
     </div>
   </div>
@@ -166,7 +165,7 @@ export default {
       allImages: [],
       strategy: null,
       media: null,
-      imageProps: { width: 205, height: 205 },
+      imageProps: { width: 250, height: 250 },
       Slideimges: [],
       visible: false,
       currentPicture: 0,
@@ -402,7 +401,9 @@ export default {
     //set an image as a cover photo
 
     setCoverPic(id) {
+
       this.loading = true;
+      
       const data =
         "business" == this.type || "network" == this.type
           ? { businessID: this.$route.params.id, id: id }
@@ -545,7 +546,9 @@ export default {
   margin: auto;
   display: block !important;
 }
+
 </style>
+
 <style>
 .options {
   background: #e75c18;
@@ -623,8 +626,6 @@ export default {
   .image-wrap {
     border: 4px dashed #e75c18;
     position: relative;
-
-    position: relative;
     margin: 5px;
     float: left;
     width: 46.5%;
@@ -638,6 +639,7 @@ export default {
 }
 
 @media only screen and (min-width: 768px) and (max-width: 1331px) {
+  
   .img-gall {
     background-size: contain;
     cursor: pointer;
@@ -646,6 +648,7 @@ export default {
   }
 
   .img-gall {
+  
     position: relative;
     margin: 5px;
     float: left;
@@ -687,7 +690,7 @@ export default {
     position: relative;
     margin: 5px;
     float: left;
-    width: 45.5%;
+    /* width: 45.5%; */
     height: 175px;
     transition-duration: 0.4s;
     border-radius: 5px;

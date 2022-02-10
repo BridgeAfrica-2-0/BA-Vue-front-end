@@ -55,7 +55,7 @@ export default {
       if (request.success)
         this.flashMessage.success({
           time: 5000,
-          message: `this.$t(general.Share_to) ${this.contact.name}`,
+          message: `Operation success`,
         });
 
       this.loading = false;

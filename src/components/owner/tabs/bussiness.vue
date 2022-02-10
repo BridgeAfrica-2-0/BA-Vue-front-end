@@ -333,12 +333,12 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="Neighbor" class="username">
-                        {{ $t("profileowner.Adress") }} : {{address}} </label
+                        {{ $t("profileowner.Adress") }} : {{address}}--- </label
                       >
                     </div>
                 <div style="width: 100%; height: 200px; overflow:hidden">
                   <AutocompleteLocation
-                   
+                    :infos="infos"
                     :region="region"
                     @get-address-details="getGeoCoderResult"
                   />
@@ -723,15 +723,15 @@
                       <label for="Neighbor" class="username">
                         {{ $t("profileowner.Adress") }} : {{address}} </label
                       >
-                    </div>
-                  </div>
 
-                  <div class="col-md" style="width: 100%; height: 200px; overflow:hidden">
+                  <div class="" style="width: 100%; height: 250px; overflow:hidden">
                     <AutocompleteLocation
                       :infos="infos"
                       :region="region"
                       @get-address-details="getGeoCoderResult"
                     />
+                  </div>
+                    </div>
                   </div>
                 </div>
               </div>

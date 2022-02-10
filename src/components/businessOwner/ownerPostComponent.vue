@@ -252,6 +252,7 @@ import { NoMoreDataForComment, isYourOwnPostMixins } from "@/mixins";
 import Comment from "./comment";
 import light from "../lightbox";
 
+
 export default {
   name: "ownerPostComponent",
   mixins: [NoMoreDataForComment, isYourOwnPostMixins],

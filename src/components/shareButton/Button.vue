@@ -580,7 +580,7 @@ export default {
       this.flashMessage.show({
         status: "success",
         blockClass: "custom-block-class",
-        message: "You just copied the link to the clipboard: " + e.text,
+        message: "You just copied the link to the clipboard" ,
       });
     },
 

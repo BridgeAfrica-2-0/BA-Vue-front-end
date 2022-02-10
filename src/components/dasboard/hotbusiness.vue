@@ -14,7 +14,7 @@
             <div class="pl-3 flx100">
               <p class="textt">
                 <strong class="title">
-                  <router-link :to="'business/' + item.id">
+                  <router-link :to="{name:'BusinessOwner', params:{id: item.id}}">
                     {{ item.name }}
                   </router-link>
                 </strong>

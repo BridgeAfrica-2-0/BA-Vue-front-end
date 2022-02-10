@@ -149,6 +149,18 @@ export default {
   },
 
   methods: {
+
+    getTotalCommunity(){
+         this.$store
+      .dispatch("profile/Tcommunity")
+      .then((response) => {})
+      .catch((error) => {
+        console.log({ error: error });
+      });
+    },
+
+
+
     gotoBusiness(id) {
       this.$router.push(`/business/${id}?tabId=1`);
     },
@@ -177,6 +189,7 @@ export default {
           console.log(response);
           user.is_follow = nextFollowState;
           document.getElementById("followbtn" + user.id).disabled = false;
+          this.getTotalCommunity();
         })
         .catch((err) => {
           console.log({ err: err });

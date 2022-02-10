@@ -11,7 +11,7 @@
         <b-row>
           <b-col
             cols="6"
-            class="m-media m-0 p-0"
+            class="m-media m-0 p-0 mt-2"
             v-for="post in posts"
             :key="post.id"
           >
@@ -23,15 +23,22 @@
                 allowfullscreen
                 class="s-embed"
               ></b-embed>
-              <p class="text">
+              <!-- <p class="text">
 
                 {{ $t('dashboard.video_name') }} <br />
                 {{ $t('dashboard.video_description') }}
 
-              </p>
+              </p> -->
             </div>
           </b-col>
         </b-row>
+   <br>  
+
+   <p class="text-center"> 
+        <b-link href="https://www.youtube.com/watch?v=-4oUr7s_aD4&list=PLFJI1PXxh7D5dohknvccnaWBIUb7wP1f2&index=12">  View More  </b-link>
+    
+     </p> 
+     
       </div>
     </b-card>
   </div>
@@ -44,42 +51,76 @@ export default {
       posts: [
         {
           id: 1,
-          video: "https://www.youtube.com/embed/JKJECtmqviQ",
-          title: "Title 1",
-          text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
-        },
+          video: "https://www.youtube.com/embed/X7ZK3elhVGI",
+           },
 
         {
           id: 2,
-          video: "https://www.youtube.com/embed/xVISKL18jLs",
-          title: "Title 1",
-          text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
-        },
+          video: "https://www.youtube.com/embed/0-QElbdS65o",
+          },
 
         {
-          id: 4,
-          video: "https://www.youtube.com/embed/nMBQrM1FHZw",
-          title: "Title 1",
-          text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
-        },
+          id: 4,  
+          video: "https://www.youtube.com/embed/embed/-h4VD53PHHY",
+         },
 
         {
           id: 5,
-          video: "https://www.youtube.com/embed/iPhGrDZhaAU",
-          title: "Title 1",
-          text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
-        },
+          video: "https://www.youtube.com/embed/vbgShfVz9Iw",
+         },
         {
+          id: 6,
+          video: "https://www.youtube.com/embed/FFd3M5tBGmo",
+          },
+
+
+           {
           id: 7,
-          image: "https://picsum.photos/300/150/?image=41",
-          title: "Title 2",
-          text:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quisquam sequi, ullam aliquam ab illo suscipit, earum quam, doloribus id sit consequuntur tempora molestiae blanditiis."
-        }
+          video: "https://www.youtube.com/embed/yaXcd-okF5I",
+          },
+
+
+
+           {
+          id: 8,
+          video: "https://www.youtube.com/embed//BJ1fRB37XRg",
+          },
+
+
+
+           {
+          id: 9,
+          video: "https://www.youtube.com/embed/hdXKfd10hP0",
+          },
+
+
+            {
+          id: 10,
+          video: "https://www.youtube.com/embed/c3qwM7K3134",
+          },
+
+
+            {
+          id: 11,
+          video: "https://www.youtube.com/embed/qlJIwRI1AEI",
+          },
+
+
+            {
+          id: 12,
+          video: "https://www.youtube.com/embed/-4oUr7s_aD4",
+          },
+
+
+
+            {
+          id: 13,
+          video: "https://www.youtube.com/embed/xE_MDyTftuY",
+          },
+
+
+        
+
       ]
     };
   },

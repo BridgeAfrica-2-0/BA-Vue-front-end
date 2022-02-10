@@ -286,7 +286,7 @@
         </div>
         <!-- SUB-CATEGORIES -->
         <div class="mt-2">
-          <label class="typo__label"> {{ $t('businessowner.Sub_Category') }}</label>    
+          <label class="typo__label"> {{ $t('businessowner.Sub_Category') }}  </label>    
           <multi-select
             v-model="filterselectvalue"
            
@@ -300,8 +300,8 @@
         </div>
         <label class="typo__label">{{ $t('businessowner.Filters') }} </label>
         <div>
-          <b-card no-body>
-            <b-tabs pills card vertical>
+          <b-card no-body> 
+            <b-tabs pills card vertical>  
               <b-tab
                 :title="filters.name"
                 v-for="filters in filterselectvalue"
@@ -499,10 +499,15 @@ selectedcategories: function() {
   
  this.multiselecvalue = product.categories[0];
 
-   this.filterselectvalue =this.getfilters(); 
+   //this.filterselectvalue =this.getfilters(); 
+
+   this.filterselectvalue =product.subcategories;  
+
+   this.filterselectvalue.filters=product.filters;  
 
     this.select_filterss = this.editfilters(product.filters);
-    
+
+   
 
    this.subcategories();
 
@@ -520,6 +525,29 @@ selectedcategories: function() {
 
       return fil;
     },
+
+
+    
+    getsubCat(){
+        let selectedUsers=[];
+         this.scategories.forEach((item) => {
+
+
+            this. product.subcategories.forEach((itemm) => {
+        if (item.subcategory_id == itemm.id) {
+          selectedUsers.push(item);
+        } 
+      });
+
+
+      });
+
+      console.log(selectedUsers);
+
+      return selectedUsers;
+
+    },
+
 
 
     getfilters(){

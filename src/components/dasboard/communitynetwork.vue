@@ -135,6 +135,19 @@ export default {
     },
   },
   methods: {
+
+
+    getTotalCommunity(){
+         this.$store
+      .dispatch("profile/Tcommunity")
+      .then((response) => {})
+      .catch((error) => {
+        console.log({ error: error });
+      });
+    },
+
+
+
     async handle (user) {
       document.getElementById("joinbtn" + user.id).disabled = true;
       const uri = user.is_member === 0 ? `/add-member` : `/remove-member`;
@@ -171,6 +184,7 @@ export default {
         .then((response) => {
           user.is_follow = nextFollowState;
           document.getElementById("followbtn" + user.id).disabled = false;
+          this.getTotalCommunity();
         })
         .catch((err) => {
           console.log(err);

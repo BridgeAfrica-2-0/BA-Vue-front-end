@@ -6,6 +6,7 @@
           <b-form-input
             aria-label="Text input with checkbox"
             :placeholder="$t('profileowner.Search_Something')"
+              v-model="keywords"
           ></b-form-input>
 
           <b-input-group-prepend  @click="$refs.search.search()" is-text>

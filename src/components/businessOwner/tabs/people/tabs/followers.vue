@@ -8,7 +8,7 @@
             :placeholder="$t('businessowner.Search_Something')"
             v-model="keywords"
           ></b-form-input>
-
+bbb
           <b-input-group-prepend is-text  @click="$refs.search.search()">
             <b-icon-search  class="text-primary border-none"></b-icon-search>
           </b-input-group-prepend>

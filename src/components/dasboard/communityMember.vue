@@ -141,6 +141,18 @@ export default {
   },
 
   methods: {
+
+  getTotalCommunity(){
+         this.$store
+      .dispatch("profile/Tcommunity")
+      .then((response) => {})
+      .catch((error) => {
+        console.log({ error: error });
+      });
+    },
+
+
+
     count(number) {
       if (number >= 1000000) {
         return number / 1000000 + "M";
@@ -164,6 +176,7 @@ export default {
         .post(uri, data)
         .then(({ data }) => {
           console.log(data);
+          this.getTotalCommunity();
           user.is_follow = nextFollowState;
           document.getElementById("followbtn" + user.id).disabled = false;
         })

@@ -256,8 +256,8 @@ export default {
       },
 
       email: {
-        required,
-        email,
+       // required,
+       email,
       },
     },
   },

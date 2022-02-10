@@ -475,7 +475,7 @@
                 <fas-icon class="icons" :icon="['fas', 'store']" size="lg" />
                 {{ $t("search.Market") }}
                 <b-button
-                  to="/checkout"
+                  to="/cart"
                   size="sm"
                   variant="primary"
                   class="float-right"

@@ -198,6 +198,7 @@
                                 class="d-inline-block profile-pic"
                                 variant="primary"
                                 :src="chatListImage(chat)"
+                                square
                               ></b-avatar>
 
                               <h6 class="mt-2 d-inline-block ml-2">
@@ -285,6 +286,7 @@
                                 class="d-inline-block profile-pic"
                                 variant="primary"
                                 :src="chatListImage(chat)"
+                                square
                               ></b-avatar>
 
                               <h6 class="mt-2 d-inline-block ml-2">
@@ -969,6 +971,7 @@
                                 class="d-inline-block profile-pic"
                                 variant="primary"
                                 :src="chatListImage(chat)"
+                                square
                               ></b-avatar>
 
                               <h6 class="mt-2 d-inline-block ml-2">
@@ -1057,6 +1060,7 @@
                                 class="d-inline-block profile-pic"
                                 variant="primary"
                                 :src="chatListImage(chat)"
+                                square
                               ></b-avatar>
 
                               <h6 class="mt-2 d-inline-block ml-2">
@@ -1939,7 +1943,7 @@ export default {
         this.getChatList({ type: this.getChatList({ type: data.type }) });
       });
 
-       this.socket.on("privateMessage", (data) => {
+      this.socket.on("privateMessage", (data) => {
         console.log("Received");
         console.log(data);
         this.userToUser.push(data);
@@ -1970,7 +1974,7 @@ export default {
         if (this.currentUser.user.id == data.sender_id) {
           this.saveMessage(this.formData, data.type);
           this.$store.dispatch("userChat/GET_USERS_CHAT_LIST_Dos", {
-            type: this.type
+            type: this.type,
           });
         } else {
           console.log("Here here 1");

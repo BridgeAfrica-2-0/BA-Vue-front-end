@@ -469,17 +469,19 @@
               label-for="input-2"
               label-size="sm"
             >
-              {{ business_about_input.address }}
+              <!-- {{ business_about_input.address }} -->
 
 
-              <div class="" style="height: 200px; overflow:hidden">
+              <div class="" style="height: 250px; overflow:hidden">
                 <AutocompleteLocation
+                  :infos="business_about_input"
                   :region="region"
                   @get-address-details="getGeoCoderResult"
                 />
               </div>
             </b-form-group>
           </div>
+          
 
         </div>
 

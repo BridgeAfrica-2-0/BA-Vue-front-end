@@ -272,7 +272,7 @@
         </b-form-group>
         <!-- CATEGORIES -->
         <div class="mt-2">
-          <label class="typo__label"> {{ $t('businessowner.Category') }} </label> 
+          <label class="typo__label"> {{ $t('businessowner.Category') }}  </label> 
           <multi-select
             v-model="multiselecvalue"
             @input="subcategories"
@@ -441,16 +441,9 @@ export default {
 
 
 selectedcategories: function() {
-      let selectedUsers = [];
-
-      this.multiselecvalue.forEach((item) => {
-        if (item.id) {
-          selectedUsers.push(item.id);
-        } else {
-          selectedUsers.push(item.category_id);
-        }
-      });
-      return selectedUsers;
+     
+   
+      return  this.multiselecvalue.id;
     },
 
 
@@ -498,11 +491,13 @@ selectedcategories: function() {
   methods: {
 
      callactions(product){
+
+       console.log(product);
   this.product=product;
   this.selectedImagePrv= product.picture;
 
   
- this.multiselecvalue = product.categories;
+ this.multiselecvalue = product.categories[0];
 
    this.filterselectvalue =this.getfilters(); 
 
@@ -728,9 +723,15 @@ selectedcategories: function() {
         this.$store.dispatch("auth/categories");
     },
     subcategories() {
-      //get subcategories
+     
+
+      console.log("yoo mother bba fucker");
+
+       console.log(this.selectedcategories);
       let formData2 = new FormData();
-      console.log(this.selectedcategories);
+
+       console.log("yoo mother bba fucker");
+     
       formData2.append("categoryId", this.selectedcategories);
       this.$store.dispatch("auth/subcategories", formData2);
     },

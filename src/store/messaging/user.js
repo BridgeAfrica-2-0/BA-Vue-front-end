@@ -100,6 +100,46 @@ export default {
     },
 
     actions: {
+        GET_COMMUNITY_USERS({ commit, state }, data) {
+            commit("setUsers", []);
+
+            commit("setLoader", true);
+            let keyword = data ? '/' + data : ''
+            axios.get(`/community/listing/users${keyword}`)
+                .then((res) => {
+                    commit("setLoader", false);
+                    let userFinal = []
+                    let users = res.data.data
+                    users.map((user) => {
+                        userFinal.push(user.user)
+                    })
+                    commit("setUsers", userFinal);
+                    console.log("community people:", userFinal);
+                    // commit("businessChat/setUsers", usersFinal);
+                })
+                .catch((err) => {
+                    commit("setLoader", false);
+                    console.log(err);
+                })
+        },
+        GET_COMMUNITY_BIZS({ commit, state }, data) {
+            commit("setUsers", []);
+
+            commit("setLoader", true);
+            let keyword = data ? '/' + data : ''
+            let usersFinal = []
+            axios.get(`/community/listing/users${keyword}`)
+                .then((res) => {
+                    commit("setLoader", false);
+                    let users = res.data.data
+                    commit("setUsers", users);
+                    // commit("businessChat/setUsers", usersFinal);
+                })
+                .catch((err) => {
+                    commit("setLoader", false);
+                    console.log(err);
+                })
+        },
         GET_USERS({ commit, state }, data) {
             commit("setUsers", []);
 

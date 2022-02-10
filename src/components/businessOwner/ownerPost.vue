@@ -93,8 +93,9 @@
             <b-col cols="1" class="m-0 p-0"></b-col>
             <b-col cols="2" class="m-0 p-0">
               <b-avatar
+                :square =" 'user' === profile.user_type ? false : true"
                 class="d-inline-block avat"
-                variant="primary"
+                variant="ligth"
                 :src="business_intro.logo_path"
               ></b-avatar>
             </b-col>
@@ -107,7 +108,7 @@
           <b-row>
             <b-col cols="1" md="1" cl ass="m-0 p-0"></b-col>
             <b-col cols="10" md="10" class="m-0 p-0">
-              <div class="cursor mt-2">
+              <!-- <div class="cursor mt-2">
                 <b-form-textarea
                   id="textarea-small"
                   autofocus
@@ -115,7 +116,7 @@
                   :placeholder="$t('businessowner.Post_a_business_update')"
                   v-model="edit_description"
                 ></b-form-textarea>
-                </div>
+              </div> -->
 
                 <div class="cursor mt-2">
 
@@ -129,7 +130,7 @@
 
                   <i></i>
                 </div>
-                <div class="bordder">
+               <!--  <div class="bordder">
                   <span class="float-left"> {{ $t('businessowner.Add_to_Your_Post') }} </span>
                   <span class="float-right">
                     <b-button-group size="sm" class="">
@@ -151,9 +152,14 @@
                         ref="document"
                       />
 
-                      <b-button :title="$t('businessowner.Add_Movie')" size="sm" variant="outline-primary" @click="$refs.movies.click()">
+                      <b-button 
+                        :title="$t('businessowner.Add_Movie')" 
+                        size="sm" 
+                        variant="outline-primary" 
+                        @click="$refs.movies.click()">
                         <fas-icon class="icons" :icon="['fas', 'photo-video']" size="lg" />
                       </b-button>
+
                       <b-button
                         :title="$t('businessowner.Add_Hyperlink')"
                         size="sm"
@@ -162,11 +168,12 @@
                       >
                         <fas-icon class="icons" :icon="['fas', 'file']" size="lg" />
                       </b-button>
+
                     </b-button-group>
                   </span>
 
-                <i></i>
-              </div>
+                  <i></i>
+                </div> -->
               <div class="bordder">
                 <span class="float-left">
                   {{ $t("businessowner.Add_to_Your_Post") }}
@@ -423,7 +430,7 @@
                 <span>
                   <b-button @click="updatePost" variant="primary" block
                     ><b-icon icon="cursor-fill" variant="primary"></b-icon>
-                    {{ $t("businessowner.Publish") }}+++++</b-button
+                    {{ $t("businessowner.Publish") }}</b-button
                   >
                 </span>
               </div>

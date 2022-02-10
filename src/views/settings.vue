@@ -591,7 +591,7 @@ export default {
         .dispatch("profileSettingsEdit/userInfos")
         .then((response) => {
           this.selected = this.$store.state.profileSettingsEdit.userInfos.payement_method;
-          console.log("-----------------------" + this.selected);
+         
           // if(this.$store.state.profileSettingsEdit.userInfos.gender == "male"){
 
           //   }else { this.selectedGender = 1 }
@@ -714,6 +714,7 @@ export default {
     },
 
     getRegion() {
+      console.log(this.country,'id country: ',this.selectedCounty)
       let data = { countryId: this.selectedCounty };
       this.$store
         .dispatch("auth/region", data)
@@ -793,9 +794,24 @@ export default {
     // }
   },
 
+beforeMount(){
+  this.userInfos();
+  
+},
   mounted() {
-    this.userInfos();
+    this.selectedCounty = this.$store.state.profileSettingsEdit.userInfos.country.id;
+          this.selectedRegion = this.$store.state.profileSettingsEdit.userInfos.region.id;
+          this.selectedDivision = this.$store.state.profileSettingsEdit.userInfos.division.id;
+          this.selectedMunicipality = this.$store.state.profileSettingsEdit.userInfos.council.id;
+          this.selectedNeighbor = this.$store.state.profileSettingsEdit.userInfos.neigborhood.id;
+
+     
     this.getCountry();
+    this.getRegion();
+    this.getDivision();
+    this.getMunicipality();
+    this.getNeighbor();
+
     // this.getLocality();
 
     var that = this;

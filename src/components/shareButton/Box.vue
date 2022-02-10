@@ -92,6 +92,7 @@
 
 <script>
 import _ from "lodash";
+
 import Contact from "./Link.vue";
 
 import Loader from "@/components/Loader";
@@ -188,8 +189,6 @@ export default {
     debounceInput: _.debounce(function (e) {
       if (e) {
         const result = this.all.filter((contact) => {
-          console.log(contact.name.toLowerCase());
-          console.log(e.toLowerCase());
           return contact.name.toLowerCase().includes(e.toLowerCase());
         });
 
@@ -233,38 +232,99 @@ export default {
       console.log("Type:", this.type);
       if (this.profilConnected.user_type == "user") {
         if (this.type == "people") {
-          this.$store.dispatch("userChat/SHARE_POST_USER", payload);
+          this.$store
+            .dispatch("userChat/SHARE_POST_USER", payload)
+            .then((res) => {
+              this.flashMessage.success({
+                time: 5000,
+                message: `Post shared successfully!`,
+              });
+            });
         } else if (this.type == "business") {
-          this.$store.dispatch("userChat/SHARE_POST_BUSINESS", payload);
+          this.$store
+            .dispatch("userChat/SHARE_POST_BUSINESS", payload)
+            .then((res) => {
+              this.flashMessage.success({
+                time: 5000,
+                message: `Post shared successfully!`,
+              });
+            });
         } else {
-          this.$store.dispatch("userChat/SHARE_POST_NETWORK", payload);
+          this.$store
+            .dispatch("userChat/SHARE_POST_NETWORK", payload)
+            .then((res) => {
+              this.flashMessage.success({
+                time: 5000,
+                message: `Post shared successfully!`,
+              });
+            });
         }
       } else if (this.profilConnected.user_type == "business") {
         if (this.type == "people") {
-          this.$store.dispatch("businessChat/SHARE_POST_USER", payload);
+          this.$store
+            .dispatch("businessChat/SHARE_POST_USER", payload)
+            .then((res) => {
+              this.flashMessage.success({
+                time: 5000,
+                message: `Post shared successfully!`,
+              });
+            });
         } else if (this.type == "business") {
-          this.$store.dispatch("businessChat/SHARE_POST_BUSINESS", payload);
+          this.$store
+            .dispatch("businessChat/SHARE_POST_BUSINESS", payload)
+            .then((res) => {
+              this.flashMessage.success({
+                time: 5000,
+                message: `Post shared successfully!`,
+              });
+            });
         } else {
-          this.$store.dispatch("businessChat/SHARE_POST_NETWORK", payload);
+          this.$store
+            .dispatch("businessChat/SHARE_POST_NETWORK", payload)
+            .then((res) => {
+              this.flashMessage.success({
+                time: 5000,
+                message: `Post shared successfully!`,
+              });
+            });
         }
       } else {
         if (this.type == "people") {
-          this.$store.dispatch("networkChat/SHARE_POST_USER", payload);
+          this.$store
+            .dispatch("networkChat/SHARE_POST_USER", payload)
+            .then((res) => {
+              this.flashMessage.success({
+                time: 5000,
+                message: `Post shared successfully!`,
+              });
+            });
         } else if (this.type == "business") {
-          this.$store.dispatch("networkChat/SHARE_POST_BUSINESS", payload);
+          this.$store
+            .dispatch("networkChat/SHARE_POST_BUSINESS", payload)
+            .then((res) => {
+              this.flashMessage.success({
+                time: 5000,
+                message: `Post shared successfully!`,
+              });
+            });
         } else {
-          this.$store.dispatch("networkChat/SHARE_POST_NETWORK", payload);
+          this.$store
+            .dispatch("networkChat/SHARE_POST_NETWORK", payload)
+            .then((res) => {
+              this.flashMessage.success({
+                time: 5000,
+                message: `Post shared successfully!`,
+              });
+            });
         }
       }
     },
 
     search(keyword) {
       this.sentList = [];
-      console.log("Keywork:", keyword);
-      console.log("type:", this.type);
 
       if (this.type == "people") {
-        this.$store.dispatch("userChat/GET_USERS", keyword);
+        this.$store.dispatch("userChat/GET_COMMUNITY_USERS", keyword);
       } else if (this.type == "business") {
         this.$store.dispatch("userChat/GET_BIZS", keyword);
       } else if (this.type == "network") {

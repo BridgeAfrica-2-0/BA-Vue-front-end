@@ -209,6 +209,7 @@
                                   class="d-inline-block profile-pic"
                                   variant="primary"
                                   :src="chatListImage(chatSelected.chat)"
+                                  square
                                 ></b-avatar>
 
                                 <h6 class="mt-2 d-inline-block ml-2">
@@ -294,6 +295,7 @@
                                 class="d-inline-block profile-pic"
                                 variant="primary"
                                 :src="chatListImage(chatSelected.chat)"
+                                square
                               ></b-avatar>
 
                               <h6 class="mt-2 d-inline-block ml-2">
@@ -1634,6 +1636,7 @@
                                   class="d-inline-block profile-pic"
                                   variant="primary"
                                   :src="chatListImage(chat)"
+                                  square
                                 ></b-avatar>
 
                                 <h6 class="mt-2 d-inline-block ml-2">
@@ -1724,6 +1727,7 @@
                                 class="d-inline-block profile-pic"
                                 variant="primary"
                                 :src="chatListImage(chat)"
+                                square
                               ></b-avatar>
 
                               <h6 class="mt-2 d-inline-block ml-2">

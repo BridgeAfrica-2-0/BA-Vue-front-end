@@ -1,10 +1,11 @@
 <template>
   <div class="main">
     <div class="images imageslg">
-      <div>
+      <div>    
         <img
-          :src="info.user.cover_picture"
-          v-if="info.user.cover_picture != null"
+         
+           :src="info.user.cover_picture ? info.user.cover_picture : getCustomCover[0]"
+      
           class="banner"
         />
       </div>
@@ -12,7 +13,7 @@
         <b-col cols="6" class="avata">
           <div>
             <b-avatar
-              v-if="info.user.profile_picture != null"
+              v-if="info.user.profile_picture != null"  
               :src="info.user.profile_picture"
               class="float-left avatar"
               badge-variant="primary"
@@ -192,16 +193,17 @@ import Businesses from "@/components/follower/tabs/businesses";
 import Network from "@/components/follower/tabs/networkk";
 import axios from "axios";
 import { knowWhoIsConnected } from "@/mixins";
+import {defaultCoverImage} from '@/mixins';
 
 export default {
-  mixins: [knowWhoIsConnected],
+  mixins: [knowWhoIsConnected,defaultCoverImage],
   name: "Home",
   data() {
     return {
       foll_id: "",
     };
   },
-
+  
   components: {
     Post,
     About,
@@ -212,6 +214,8 @@ export default {
   },
 
   created() {
+
+    this.currentAuthType = 'profile'
 
      this.foll_id = this.$route.params.id;
 

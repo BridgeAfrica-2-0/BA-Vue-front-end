@@ -134,11 +134,13 @@ export default {
                 id: img.id,
                 content: img.content,
                 media: { 
-                  path: picture.path, type: picture.type, id: picture.id 
+                  path: picture.path, 
+                  type: picture.type, 
+                  id: picture.id,
+                  preview_url: picture.preview_url 
                 },
               };
             });
-
             return render;
           });
         return _.flatten(newData);

@@ -34,13 +34,6 @@
             </b-col>
           </b-row>
         </div>
-
-       
-
-
-
-
-
       </div>
     </b-card>
   </div>

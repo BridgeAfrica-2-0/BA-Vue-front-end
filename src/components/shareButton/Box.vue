@@ -92,6 +92,7 @@
 
 <script>
 import _ from "lodash";
+
 import Contact from "./Link.vue";
 
 import Loader from "@/components/Loader";
@@ -188,8 +189,6 @@ export default {
     debounceInput: _.debounce(function (e) {
       if (e) {
         const result = this.all.filter((contact) => {
-          console.log(contact.name.toLowerCase());
-          console.log(e.toLowerCase());
           return contact.name.toLowerCase().includes(e.toLowerCase());
         });
 
@@ -260,8 +259,6 @@ export default {
 
     search(keyword) {
       this.sentList = [];
-      console.log("Keywork:", keyword);
-      console.log("type:", this.type);
 
       if (this.type == "people") {
         this.$store.dispatch("userChat/GET_USERS", keyword);

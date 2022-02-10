@@ -8,6 +8,8 @@ export const date = (value) => moment(value).format("dddd, MMMM Do YYYY, h:mm:ss
 
 export const fullMediaLink = (media) => {
 
+    console.log(media)
+
     if (media) {
         const scheme = axios.defaults.baseURL.substring(0, axios.defaults.baseURL.length - 8)
         const render = media.startsWith("https://www.youtube.com") ?

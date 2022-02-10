@@ -208,7 +208,7 @@ export default {
               "business" == type
 
                 ? item.is_owner ? `You are now connected as ${item.name}` : `You are now redirect to ${item.name}`
-                : item.is_owner ? `You are now connected as ${item.name}` : `You are now redirect to ${item.name}`,
+                : ( item.is_owner  || item.is_editor ) ? `You are now connected as ${item.name}` : `You are now redirect to ${item.name}`,
 
           });
 

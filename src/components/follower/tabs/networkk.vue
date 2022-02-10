@@ -11,7 +11,7 @@
       {{ $t("profilefollower.Do_you_want_to_join_this_network") }}
     </b-modal>
 
-    <div class="mx-auto text-center my-5"  v-if="!network.length"  >
+    <div class="mx-auto text-center my-5"  v-if="!network.length & !loading"  >
         <p class="my-2" >
           No Network found
         </p>
@@ -130,6 +130,7 @@ export default {
   data() {
     return {
       page: 1,
+      loading:false,
       network: [],
       foll_id: "",
       options: {
@@ -202,8 +203,8 @@ export default {
 
     infiniteHandler($state) {
       let url = "network?id=" + this.foll_id + "&page=" + this.page;
-
-      if (this.page == 1) {
+      this.loading=true;
+      if (this.page == 1) {  
         this.network.splice(0);
       }
 
@@ -214,6 +215,7 @@ export default {
           if (data.data.length) {
             if (this.page == 1) {
               this.network.push(...data.data);
+              this.loading=false;
             }
             this.page += 1;
 

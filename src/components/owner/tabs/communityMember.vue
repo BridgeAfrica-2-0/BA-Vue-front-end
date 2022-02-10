@@ -21,7 +21,7 @@
                         <b-row>
                           <b-col
                             md="6"
-                            lg="12"
+                            lg="12"        
                             cols="6"
                             xl="12"
                             class="mt-lg-2"
@@ -303,11 +303,10 @@ export default {
       } else {
         url = "profile/user/following/";
       }
-      console.log( url + this.page + "?keyword=" + this.searchh + "&id=" + this.foll_id);
 
       axios
         .get(
-          url + this.page + "?keyword=" + this.searchh + "&id=" + this.foll_id
+          url + this.page +  "?id=" + this.foll_id +"&keyword=" + this.searchh
         )
         .then(({ data }) => {
           console.log(data);

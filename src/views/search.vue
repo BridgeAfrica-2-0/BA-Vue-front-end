@@ -571,7 +571,7 @@ import BusinessComponent from "@/components/search/business";
 
 import { loader } from "@/mixins";
 
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapActions, mapMutations } from "vuex";
 
 export default {
   components: {
@@ -612,6 +612,7 @@ export default {
     businesses() {
       return this.$store.getters["allSearch/getBusinesses"];
     },
+
     miniproducts() {
       return this.$store.getters["allSearch/getProducts"];
     },
@@ -625,26 +626,26 @@ export default {
     products() {
       return this.$store.state.market.products;
     },
+
     categories() {
       return this.$store.getters["marketSearch/getCategories"];
     },
+
     subCategories() {
       return this.$store.getters["marketSearch/getSubCat"];
     },
+
     subFilters() {
       return this.$store.getters["marketSearch/getSubFilters"];
     },
   },
 
   created() {
-    this.islogin = this.$store.getters["auth/isLogged"];
-
     if (this.$route.query.keyword) {
       this.searchParams.keyword = this.$route.query.keyword;
     }
 
     this.onProcessQuery();
-
     this.getLocation();
 
     this.strategY = {
@@ -1621,6 +1622,32 @@ export default {
   },
 
   methods: {
+    ...mapMutations({
+      auth: "auth/profilConnected",
+    }),
+
+    ...mapActions({
+      userStore: "search/FIND_USER",
+      postStore: "search/FIND_POST",
+      postKeyword: "search/POST_KEYWORD",
+      lauchLoader: "search/LOADING",
+      page: "search/SET_CURRENT_PAGINATION_PAGE",
+      stack: "search/STACK_VALUE",
+      setCallback: "search/SET_CURRENT_PAGINATE_CALLBACK",
+      reset: "search/RESET_RESULT",
+      findBusiness: "business/FIND_BUSINESS",
+      getGeo: "business/getGeo",
+    }),
+
+    async getAuth() {
+      const response = await this.$repository.share.WhoIsConnect({
+        networkId: null,
+        type: null,
+      });
+
+      if (response.success) this.auth(response.data);
+    },
+
     onProcessQuery() {
       if (this.$route.query.market) {
         this.selectedId = 4;
@@ -1635,9 +1662,11 @@ export default {
       this.$refs.More.visible = true;
       this.$emit("parentcategory", "More");
     },
+
     onLeaveMore() {
       this.$refs.More.visible = false;
     },
+
     getKeyword(data) {
       var keyword = this.searchParams.keyword;
 
@@ -1709,19 +1738,6 @@ export default {
         });
     },
 
-    ...mapActions({
-      userStore: "search/FIND_USER",
-      postStore: "search/FIND_POST",
-      postKeyword: "search/POST_KEYWORD",
-      lauchLoader: "search/LOADING",
-      page: "search/SET_CURRENT_PAGINATION_PAGE",
-      stack: "search/STACK_VALUE",
-      setCallback: "search/SET_CURRENT_PAGINATE_CALLBACK",
-      reset: "search/RESET_RESULT",
-      findBusiness: "business/FIND_BUSINESS",
-      getGeo: "business/getGeo",
-    }),
-
     getLocation() {
       const success = (position) => {
         const latitude = position.coords.latitude;
@@ -1780,15 +1796,18 @@ export default {
 
     changeNotFoundTitle() {
       try {
-        this.notFoundComponentTitle =
-          this.strategyForNotFoundComponentTitle[this.selectedId]();
+        this.notFoundComponentTitle = this.strategyForNotFoundComponentTitle[
+          this.selectedId
+        ]();
       } catch (error) {
         this.notFoundComponentTitle = "";
       }
     },
+
     changeBusinessPage(id) {
       this.businessPage = id;
     },
+
     changeComponent() {
       try {
         const data = this.strategyForComponent[this.selectedId]();
@@ -1924,8 +1943,7 @@ export default {
           break;
 
         case "MC":
-          this.selectcategories =
-            this.Mayor_councils_filters_and_public_institution;
+          this.selectcategories = this.Mayor_councils_filters_and_public_institution;
 
           break;
 
@@ -1993,6 +2011,7 @@ export default {
 
       this.$refs["myfilters"].show();
     },
+
     getFilter() {
       this.subFilters = [];
       this.$store
@@ -2006,6 +2025,7 @@ export default {
           console.error(err);
         });
     },
+
     searchFilter() {
       console.log(this.catChose);
       var catId = this.catChose ? this.catChose.category.id : "";
@@ -2022,6 +2042,7 @@ export default {
 
       this.$bvModal.hide("myModall");
     },
+
     getCategory(value) {
       console.log("value:", value);
 

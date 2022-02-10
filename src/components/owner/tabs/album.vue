@@ -26,6 +26,7 @@
           </b-modal>
 
           <AlbumItem
+            :style="getStyle"
             v-for="album in strategy[type]().albums"
             :key="album.id"
             :album="album"
@@ -35,10 +36,7 @@
             :showAlbumPictures="() => showAlbumPictures(album)"
             :type="type"
             :isEditor="isEditor"
-            :showCoverAlbum="
-              showCoverAlbum ? 
-              'Cover' == album.name ? true : false
-              : false"
+            :showCoverAlbum=" showCoverAlbum ?  'Cover' == album.name ? true : false: false"
           />
 
         </div>
@@ -268,8 +266,12 @@ export default {
                 id: '',
                 content: '',
                 media: { 
-                  path: picture.path, type: picture.type, id: picture.id 
+                  path: picture.path, 
+                  type: picture.type, 
+                  id: picture.id,
+                  preview_url: picture.preview_url 
                 },
+                
               };
             });
 

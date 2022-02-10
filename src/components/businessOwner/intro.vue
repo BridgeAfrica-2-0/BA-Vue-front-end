@@ -220,7 +220,7 @@
 
             <div style="width: 100%; height: 200px; overflow:hidden">
                   <AutocompleteLocation
-                  
+                    :infos="form"
                     :region="region"
                     @get-address-details="getGeoCoderResult"
                   />

@@ -3,9 +3,8 @@
     <b-container class="text">
       <b-container class="bv-example-row">
         <b-row>
-          <!-- {{ Packages }}
-          ---------------
-          {{ dataPackages }} -->
+        
+        
           <b-col cols="12" md="12">
             <div>
               <b-table-simple hover caption-top responsive>
@@ -21,7 +20,7 @@
                   </b-tr>
                 </b-thead>
 
-                <b-tbody v-for="Package in Packages.packages" :key="Package.id">
+                <b-tbody v-for="Package in Packages.packages" :key="Package.id"> 
                   <b-tr
                     @click="ToggleModal(Package.name, Package.id)"
                     :variant="

@@ -9,14 +9,14 @@
 
     <h6 class="mt-3 fw-b">{{ subtitle }}</h6>
 
-    <b-form-input
+    <!-- <b-form-input
       v-if="isCommunity"
       :placeholder="`${placeholder}... press enter`"
       class="input-search mb-2"
       v-model="name"
       type="search"
       @keypress.enter="search(name)"
-    ></b-form-input>
+    ></b-form-input> -->
 
     <b-form-input
       v-if="contacts.length && !isCommunity"
@@ -36,7 +36,7 @@
           v-for="(elmt, index) in listElmts"
           :key="index"
         >
-          <b-avatar class="mr-3" :src="elmt.profile_picture"></b-avatar>
+          <b-avatar class="mr-3" :src="getImage(elmt)"></b-avatar>
           <span class="mr-auto">{{ elmt.name }}</span>
 
           <b-button
@@ -180,10 +180,6 @@ export default {
     },
   },
 
-  mounted() {
-    this.search();
-  },
-
   methods: {
     debounceInput: _.debounce(function (e) {
       if (e) {
@@ -206,10 +202,20 @@ export default {
 
     community: function () {
       console.log(this.isCommunity);
-      // if (this.isCommunity == "people") {
-      // } else if (this.isCommunity == "people") {
-      // } else {
-      // }
+      this.search();
+    },
+    getImage(elmt) {
+      let imagePath = elmt
+        ? elmt.profile_picture
+          ? elmt.profile_picture
+          : elmt.logo_path
+          ? elmt.logo_path
+          : elmt.image
+          ? elmt.image
+          : ""
+        : "";
+
+      return imagePath;
     },
 
     reset() {
@@ -227,8 +233,9 @@ export default {
         businessReceiverId: data.receiver_id,
         networkReceiverId: data.receiver_id,
         receiverId: data.receiver_id,
-        postId: data.post_id,
+        postId: data.post_id
       };
+      console.log("data :", data);
       this.sentList.push(this.current);
       console.log("Type:", this.type);
       if (this.profilConnected.user_type == "user") {
@@ -238,7 +245,7 @@ export default {
             .then((res) => {
               this.flashMessage.success({
                 time: 5000,
-                message: `Post shared successfully!`,
+                message: `Post shared successfully!`
               });
             });
         } else if (this.type == "business") {
@@ -324,14 +331,66 @@ export default {
     search(keyword) {
       this.sentList = [];
       console.log("Keywork:", keyword);
-      console.log("type:", this.type);
+      console.log("type:", this.isCommunity);
+      console.log("user type:", this.profilConnected.user_type);
+      switch (this.profilConnected.user_type) {
+        case "user":
+          if (this.isCommunity == "people") {
+            this.$store.dispatch("userChat/GET_COMMUNITY_USERS", keyword);
+          } else if (this.isCommunity == "business") {
+            this.$store.dispatch("userChat/GET_COMMUNITY_BIZS", keyword);
+          } else {
+            this.$store.dispatch("userChat/GET_COMMUNITY_NETS", keyword);
+          }
+          break;
 
-      if (this.type == "people") {
-        this.$store.dispatch("userChat/GET_COMMUNITY_USERS", keyword);
-      } else if (this.type == "business") {
-        this.$store.dispatch("userChat/GET_BIZS", keyword);
-      } else if (this.type == "network") {
-        this.$store.dispatch("userChat/GET_NETS", keyword);
+        case "business":
+          if (this.isCommunity == "people") {
+            this.$store.dispatch("businessChat/GET_COMMUNITY_USERS", {
+              id: this.profilConnected.id,
+              keyword: keyword,
+            });
+          } else if (this.isCommunity == "business") {
+            this.$store.dispatch("businessChat/GET_COMMUNITY_BIZS", {
+              id: this.profilConnected.id,
+              keyword: keyword,
+            });
+          } else {
+            this.$store.dispatch("businessChat/GET_COMMUNITY_NETS", {
+              id: this.profilConnected.id,
+              keyword: keyword,
+            });
+          }
+          break;
+
+        case "network":
+          if (this.isCommunity == "people") {
+            this.$store.dispatch("networkChat/GET_COMMUNITY_USERS", {
+              id: this.profilConnected.id,
+              keyword: keyword,
+            });
+          } else if (this.isCommunity == "business") {
+            this.$store.dispatch("networkChat/GET_COMMUNITY_BIZS", {
+              id: this.profilConnected.id,
+              keyword: keyword,
+            });
+          } else {
+            this.$store.dispatch("networkChat/GET_COMMUNITY_NETS", {
+              id: this.profilConnected.id,
+              keyword: keyword,
+            });
+          }
+          break;
+
+        default:
+          if (this.isCommunity == "people") {
+            this.$store.dispatch("userChat/GET_COMMUNITY_USERS", keyword);
+          } else if (this.isCommunity == "business") {
+            this.$store.dispatch("userChat/GET_COMMUNITY_BIZS", keyword);
+          } else {
+            this.$store.dispatch("userChat/GET_COMMUNITY_NETS", keyword);
+          }
+          break;
       }
     },
     getContacts: async function () {

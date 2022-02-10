@@ -1175,6 +1175,12 @@
                             ><i class="fas fa-share fa-xs pl-1"></i>Shared
                             post</small
                           ><br />
+                          <img
+                            v-if="sharedImg(chat)"
+                            :src="sharedImg(chat)"
+                            class="sharedImg"
+                          />
+                          <br />
                           <span class="font-italic">{{
                             chat.post_details.content
                           }}</span>
@@ -1203,6 +1209,12 @@
                             ><i class="fas fa-share fa-xs pl-1"></i>Shared
                             post</small
                           ><br />
+                          <img
+                            v-if="sharedImg(chat)"
+                            :src="sharedImg(chat)"
+                            class="sharedImg"
+                          />
+                          <br />
                           <span class="font-italic">{{
                             chat.post_details.content
                           }}</span>
@@ -1754,6 +1766,16 @@ export default {
       console.log("press...");
       this.getList(e);
     }, 1000),
+    sharedImg(share) {
+      let image = share.business_post_image
+        ? share.business_post_image.media_url
+        : share.network_post_image
+        ? share.network_post_image.media_url
+        : share.post_image
+        ? share.post_image.media_url
+        : null;
+      return `https://qa-bridgeafrica-api.maxinemoffett.com/${image}`;
+    },
     chatListImage(value) {
       var image = "";
       let user = require("@/assets/profile_white.png");
@@ -2254,6 +2276,10 @@ export default {
 </script>
 
 <style scoped>
+.sharedImg {
+  max-width: 80%;
+  max-height: 40%;
+}
 .b-avatar .b-avatar-img img {
   background-color: white !important;
 }

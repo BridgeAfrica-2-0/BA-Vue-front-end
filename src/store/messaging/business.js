@@ -14,16 +14,19 @@ export default {
         chats: [],
         chatList: [],
         groupMembers: [],
+        community: [],
 
         type: 2,
         selectedChat: null,
         selectedChatId: null,
-
         loader: false,
         success: false
     },
     getters: {
         // get data
+        getCommunity(state) {
+            return state.community;
+        },
         getCurrentBizId(state) {
             return state.currentBizId;
         },
@@ -93,6 +96,9 @@ export default {
     },
     mutations: {
         //set data
+        setCommunity(state, data) {
+            state.community = data;
+        },
         setCurrentBizId(state, data) {
             state.currentBizId = data
         },
@@ -137,6 +143,71 @@ export default {
     },
 
     actions: {
+
+        // COMMUNITY
+        GET_COMMUNITY_USERS({ commit, rootState }, data) {
+            commit("setCommunity", []);
+            commit("setLoader", true);
+            let keyword = data.keyword ? '/' + data.keyword : ''
+            axios.get(`/community/listing/business/${data.id}/user${keyword}`)
+                .then((res) => {
+                    commit("setLoader", false);
+                    let userFinal = []
+                    let users = res.data.data
+                    users.map((user) => {
+                        userFinal.push(user.user)
+                    })
+                    rootState.userChat.users = userFinal
+                    console.log("rootState:", rootState.userChat.users);
+                })
+                .catch((err) => {
+                    commit("setLoader", false);
+                    console.log(err)
+                })
+        },
+        GET_COMMUNITY_BIZS({ commit, rootState }, data) {
+            commit("setCommunity", []);
+            commit("setLoader", true);
+            let keyword = data.keyword ? '/' + data.keyword : ''
+            axios.get(`/community/listing/businesses/${data.id + keyword}`)
+                .then((res) => {
+                    commit("setLoader", false);
+                    let userFinal = []
+                    let users = res.data.data
+                    users.map((user) => {
+                        userFinal.push(user.business)
+                    })
+                    rootState.userChat.users = userFinal
+                    console.log("rootState:", rootState.userChat.users);
+                })
+                .catch((err) => {
+                    commit("setLoader", false);
+                    console.log(err);
+                })
+        },
+
+        GET_COMMUNITY_NETS({ commit, rootState }, data) {
+            commit("setCommunity", []);
+            commit("setLoader", true);
+            let keyword = data.keyword ? '/' + data.keyword : ''
+            axios.get(`community/listing/business/${data.id}/network${keyword}`)
+                .then((res) => {
+                    commit("setLoader", false);
+                    let userFinal = []
+                    let users = res.data.data
+                    users.map((user) => {
+                        userFinal.push(user.network)
+                    })
+                    rootState.userChat.users = userFinal
+                    console.log("rootState:", rootState.userChat.users);
+                })
+                .catch((err) => {
+                    commit("setLoader", false);
+                    console.log(err);
+                })
+        },
+
+        // ---------------
         CREATE_GROUP({ commit, state }, data) {
             console.log("group data:", data);
             commit("setLoader", true);

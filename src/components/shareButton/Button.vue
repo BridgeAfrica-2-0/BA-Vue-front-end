@@ -7,7 +7,7 @@
       subtitle="All peoples"
       :type="'people'"
       :post="post"
-      :listElmts="users"
+      :listElmts="community"
       :isCommunity="isCommunity"
     >
       <template v-slot:owner>
@@ -36,7 +36,7 @@
       :type="'network'"
       :post="post"
       :update="update"
-      :listElmts="networks"
+      :listElmts="community"
       :isCommunity="isCommunity"
     >
       <template v-slot:owner>
@@ -92,7 +92,7 @@
       :type="'business'"
       :post="post"
       :update="update"
-      :listElmts="bizs"
+      :listElmts="community"
       :isCommunity="isCommunity"
     >
       <template v-slot:owner>
@@ -504,6 +504,7 @@ export default {
     update: null,
     link: null,
     isCommunity: false,
+    community: null,
   }),
 
   created() {
@@ -512,7 +513,7 @@ export default {
     this.link = `${window.location.protocol}//${window.location.host}/search?uuid=${this.post.id}`;
   },
   mounted() {
-    this.getUsers("");
+    // this.getUsers("");
     this.getBizs();
     this.getNetworks();
   },
@@ -521,6 +522,7 @@ export default {
     ...mapGetters({
       profile: "auth/profilConnected",
     }),
+
     users() {
       return this.$store.getters["userChat/getUsers"];
     },
@@ -552,6 +554,10 @@ export default {
   },
 
   watch: {
+    "$store.state.userChat.users": function (e) {
+      this.community = e;
+      console.log("DATA CHANGED!!!", this.community);
+    },
     modal: function (value) {
       this.strategy = [
         "modal-1",
@@ -567,7 +573,7 @@ export default {
 
   methods: {
     getUsers(keyword) {
-      this.$store.dispatch("userChat/GET_USERS", keyword);
+      this.$store.dispatch("userChat/GET_COMMUNITY_USERS", keyword);
     },
     getBizs(keyword) {
       this.$store.dispatch("businessChat/GET_BIZS", keyword);
@@ -580,7 +586,7 @@ export default {
       this.flashMessage.show({
         status: "success",
         blockClass: "custom-block-class",
-        message: "You just copied the link to the clipboard: " + e.text,
+        message: "You just copied the link to the clipboard" ,
       });
     },
 
@@ -588,7 +594,7 @@ export default {
       this.flashMessage.show({
         status: "success",
         blockClass: "custom-block-class",
-        message: this.$t('search.Failed_to_copy_the_text_to_the_clipboard'),
+        message: this.$t("search.Failed_to_copy_the_text_to_the_clipboard"),
       });
     },
 
@@ -636,7 +642,7 @@ export default {
       if (request.success)
         this.flashMessage.success({
           time: 5000,
-          message: this.$t('search.Operation_success'),
+          message: this.$t("search.Operation_success"),
         });
     },
   },

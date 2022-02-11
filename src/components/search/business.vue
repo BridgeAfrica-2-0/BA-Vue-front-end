@@ -252,7 +252,7 @@ export default {
       console.log("business search mounted");
       this.$store.commit("business/setLoading", true);
 
-      this.findBusiness({})
+      this.findBusiness({main:true})
         .then((res) => {
           console.log("business list: ", res);
           console.log(this.business);

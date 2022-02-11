@@ -106,7 +106,7 @@
       @infinite="infiniteHandler"
     ></infinite-loading>
 
-    <div class="h-100 w-100" v-if="networks.length < 1 && !loader">
+    <div class="h-100 w-100" v-if="profileNetworks.length < 1 && !loader">
       <div class="mx-auto text-center my-5" v-if="type == 'others'">
         <h2 class="my-3">
           {{ $t("profileowner.Build_networks_around_your_Business") }}
@@ -130,7 +130,7 @@
         </p>
       </div>
       <div class="mx-auto text-center my-5" v-else>
-        <p class="my-2" v-if="!networks.length">
+        <p class="my-2" v-if="!profileNetworks.length">
           {{$t("profileowner.No_network_found")}}
         </p>
       </div>
@@ -934,7 +934,6 @@ export default {
     // },
 
     infiniteHandler($state) {
-      console.log("network?page=" + this.page);
 
       let url = this.type == 'others' ? "network?page=" + this.page : 
 `business/network/${this.$route.params.id}/${this.page}`
@@ -989,7 +988,7 @@ export default {
 
       axios
         .post("network", newNetwork)
-        .then((res) => {
+        .then(({ data }) => {
           loader.hide();
           this.success.state = true;
           this.success.msg = "Operation was successful !!";
@@ -1002,16 +1001,17 @@ export default {
             blockClass: "custom-block-class",
           });
 
+          this.profileNetworks.push(data.data)
           this.$refs["netmodal"].hide();
 
           setTimeout(() => {
             this.success.state = false;
           }, 5000);
 
-          this.getNetworks();
+          /* this.getNetworks();
 
           this.page = 1;
-          this.infiniteId += 1;
+          this.infiniteId += 1; */
         })
         .catch((err) => {
           console.log({ err: err });

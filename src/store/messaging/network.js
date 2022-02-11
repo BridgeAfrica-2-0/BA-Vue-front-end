@@ -140,6 +140,74 @@ export default {
     },
 
     actions: {
+
+        // COMMUNITY
+        GET_COMMUNITY_USERS({ commit, rootState }, data) {
+            rootState.userChat.users = []
+            commit("setLoader", true);
+            let keyword = data.keyword ? '/' + data.keyword : ''
+            axios.get(`/community/listing/network/${data.id}/user${keyword}`)
+                .then((res) => {
+                    commit("setLoader", false);
+                    let userFinal = []
+                    let users = res.data.data
+                    users.map((user) => {
+                        userFinal.push(user.user)
+                    })
+                    rootState.userChat.users = userFinal
+                    console.log("rootState:", rootState.userChat.users);
+                })
+                .catch((err) => {
+                    commit("setLoader", false);
+                    console.log(err)
+                })
+        },
+        GET_COMMUNITY_BIZS({ commit, rootState }, data) {
+            rootState.userChat.users = []
+            commit("setLoader", true);
+            let keyword = data.keyword ? '/' + data.keyword : ''
+            axios.get(`/community/listing/network/${data.id}/business${keyword}`)
+                .then((res) => {
+                    commit("setLoader", false);
+                    let userFinal = []
+                    let users = res.data.data
+                    users.map((user) => {
+                        userFinal.push(user.business)
+                    })
+                    rootState.userChat.users = userFinal
+                    console.log("rootState:", rootState.userChat.users);
+                })
+                .catch((err) => {
+                    commit("setLoader", false);
+                    console.log(err);
+                })
+        },
+
+        GET_COMMUNITY_NETS({ commit, rootState }, data) {
+            rootState.userChat.users = []
+            commit("setLoader", true);
+            let keyword = data.keyword ? '/' + data.keyword : ''
+
+            axios.get(`community/listing/networks/${data.id + keyword}`)
+                .then((res) => {
+                    commit("setLoader", false);
+                    let userFinal = []
+                    let users = res.data.data
+                    users.map((user) => {
+                        userFinal.push(user.network)
+                    })
+                    rootState.userChat.users = userFinal
+                    console.log("rootState:", rootState.userChat.users);
+                })
+                .catch((err) => {
+                    commit("setLoader", false);
+                    console.log(err);
+                })
+        },
+
+        // ---------------
+
+
         CREATE_GROUP({ commit, state }, data) {
             console.log("group data:", data);
             commit("setLoader", true);
@@ -561,8 +629,9 @@ export default {
         SHARE_POST_NETWORK({ commit }, data) {
             commit("setLoader", true)
             var payload = data.data
+            console.log("Data -> shared -::- ", data);
 
-            return axios.post(`/share/post/network`, payload)
+            return axios.post(`/share/post/network`, data)
                 .then((res) => {
                     commit("setLoader", false)
                     console.log("Post shared...", res.data.data);
@@ -577,8 +646,9 @@ export default {
         SHARE_POST_USER({ commit }, data) {
             commit("setLoader", true)
             var payload = data.data
+            console.log("Data -> shared: ", data);
 
-            return axios.post(`/share/post/network/user`, payload)
+            return axios.post(`/share/post/network/user`, data)
                 .then((res) => {
                     commit("setLoader", false)
                     console.log("Post shared...", res.data.data);
@@ -592,8 +662,9 @@ export default {
         SHARE_POST_BUSINESS({ commit }, data) {
             commit("setLoader", true)
             var payload = data.data
+            console.log("Data -> shared: ", data);
 
-            return axios.post(`/share/post/network/business`, payload)
+            return axios.post(`/share/post/network/business`, data)
                 .then((res) => {
                     commit("setLoader", false)
                     console.log("Post shared...", res.data.data);

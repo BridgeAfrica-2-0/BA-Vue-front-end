@@ -24,7 +24,7 @@
         <img class="img-fluid picture" :src="business.picture" />
         <div class="text-lost">
           <b>
-            <router-link :to="'business/' + business.id">
+            <router-link  :to="{name:'BusinessOwner', params:{id:business.id}}">
               {{ business.name }}
             </router-link>
           </b>

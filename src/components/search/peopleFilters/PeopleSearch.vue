@@ -32,22 +32,14 @@
       v-if="this.getKeywork"
     />
   </div>
-
-
-  <div v-else> 
-    
-
-
-       <login />
-    
-     </div>
-
+  
+  <login v-else />
 
 </template>
 
 <script>
-import { mapGetters, mapActions, mapMutations } from "vuex";
 
+import { mapGetters, mapActions, mapMutations } from "vuex";
 import { loader, search } from "@/mixins";
 
 import Sponsor from "@/components/search/sponsoredBusiness";
@@ -70,6 +62,7 @@ export default {
   }),
 
   computed: {
+
     ...mapGetters({
       peoples: "search/GET_RESULT_USER",
       canScrool: "search/END_INITIAL_REQUEST",
@@ -81,6 +74,7 @@ export default {
     loadingIsActive: function () {
       return this.loaderState && this.peoples.length ? true : false;
     },
+    
   },
 
   mounted() {

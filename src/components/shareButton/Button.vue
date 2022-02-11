@@ -7,7 +7,7 @@
       subtitle="All peoples"
       :type="'people'"
       :post="post"
-      :listElmts="users"
+      :listElmts="community"
       :isCommunity="isCommunity"
     >
       <template v-slot:owner>
@@ -36,7 +36,7 @@
       :type="'network'"
       :post="post"
       :update="update"
-      :listElmts="networks"
+      :listElmts="community"
       :isCommunity="isCommunity"
     >
       <template v-slot:owner>
@@ -92,7 +92,7 @@
       :type="'business'"
       :post="post"
       :update="update"
-      :listElmts="bizs"
+      :listElmts="community"
       :isCommunity="isCommunity"
     >
       <template v-slot:owner>
@@ -504,6 +504,7 @@ export default {
     update: null,
     link: null,
     isCommunity: false,
+    community: null,
   }),
 
   created() {
@@ -512,7 +513,7 @@ export default {
     this.link = `${window.location.protocol}//${window.location.host}/search?uuid=${this.post.id}`;
   },
   mounted() {
-    this.getUsers("");
+    // this.getUsers("");
     this.getBizs();
     this.getNetworks();
   },
@@ -521,6 +522,7 @@ export default {
     ...mapGetters({
       profile: "auth/profilConnected",
     }),
+
     users() {
       return this.$store.getters["userChat/getUsers"];
     },
@@ -552,6 +554,10 @@ export default {
   },
 
   watch: {
+    "$store.state.userChat.users": function (e) {
+      this.community = e;
+      console.log("DATA CHANGED!!!", this.community);
+    },
     modal: function (value) {
       this.strategy = [
         "modal-1",

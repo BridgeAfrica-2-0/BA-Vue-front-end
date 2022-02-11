@@ -102,7 +102,6 @@ export default {
     actions: {
         GET_COMMUNITY_USERS({ commit, state }, data) {
             commit("setUsers", []);
-
             commit("setLoader", true);
             let keyword = data ? '/' + data : ''
             axios.get(`/community/listing/users${keyword}`)
@@ -124,22 +123,47 @@ export default {
         },
         GET_COMMUNITY_BIZS({ commit, state }, data) {
             commit("setUsers", []);
-
             commit("setLoader", true);
             let keyword = data ? '/' + data : ''
-            let usersFinal = []
-            axios.get(`/community/listing/users${keyword}`)
+            axios.get(`community/listing/user/business${keyword}`)
                 .then((res) => {
                     commit("setLoader", false);
+                    let userFinal = []
                     let users = res.data.data
-                    commit("setUsers", users);
-                    // commit("businessChat/setUsers", usersFinal);
+                    users.map((user) => {
+                        userFinal.push(user.business)
+                    })
+                    commit("setUsers", userFinal);
                 })
                 .catch((err) => {
                     commit("setLoader", false);
                     console.log(err);
                 })
         },
+
+        GET_COMMUNITY_NETS({ commit, state }, data) {
+            commit("setUsers", []);
+            commit("setLoader", true);
+            let keyword = data ? '/' + data : ''
+            axios.get(`community/listing/user/network${keyword}`)
+                .then((res) => {
+                    commit("setLoader", false);
+                    let userFinal = []
+                    let users = res.data.data
+                    users.map((user) => {
+                        userFinal.push(user.network)
+                    })
+                    console.log('user network:', userFinal);
+                    commit("setUsers", userFinal);
+                })
+                .catch((err) => {
+                    commit("setLoader", false);
+                    console.log(err);
+                })
+        },
+
+
+        // -----------------------------------
         GET_USERS({ commit, state }, data) {
             commit("setUsers", []);
 

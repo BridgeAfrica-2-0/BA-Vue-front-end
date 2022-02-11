@@ -4,6 +4,7 @@
       {{ $t("dashboard.Do_you_want_to_join_this_network") }}
     </b-modal>
 
+
     <div class="people-style shadow" v-for="item in network" :key="item.id">
       <b-row>
      
@@ -142,6 +143,22 @@ export default {
 
   methods: {
 
+
+
+
+getTotalCommunity(){
+         this.$store
+      .dispatch("profile/Tcommunity")
+      .then((response) => {})
+      .catch((error) => {
+        console.log({ error: error });
+      });
+    },
+
+
+
+    
+
      count(number) {
       if (number >= 1000000) {
         return number / 1000000 + "M";
@@ -212,6 +229,7 @@ export default {
         .then((response) => {
           user.is_follow = nextFollowState;
           document.getElementById("followbtn" + user.id).disabled = false;
+          this.getTotalCommunity();
         })
         .catch((err) => {
           console.log({ err: err });

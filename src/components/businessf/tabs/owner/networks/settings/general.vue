@@ -93,7 +93,7 @@
   <b-container v-else>
     <div class="text-center">
       <b-spinner
-        style="width: 6rem; height: 6rem"
+        style="width: 3.5rem; height: 3.5rem"
         label="Text Centered Large Spinner"
         variant="primary"
       ></b-spinner>
@@ -135,6 +135,12 @@ export default {
         {
           text: this.$t("network.Approval_by_editor_and_admin"),
           value: "Admin and editor",
+          disabled: false,
+        },
+
+         {
+          text: this.$t("network.auto_approval"),
+          value: "Only",
           disabled: false,
         },
       ],

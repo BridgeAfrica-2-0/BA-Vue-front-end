@@ -13,7 +13,9 @@
         </b-col>
         <b-col md="5" cols="7" lg="9" xl="5" sm="5">
           <p class="textt text">
-            <strong class="title"> {{ member.name }} </strong> <br />
+            <strong class="title"> <router-link :to="'/network/' + member.id">
+                {{ member.name }} 
+              </router-link>   </strong> <br />
             {{ member.category[0].name }}
             <br />
             {{ member.communityNum }}

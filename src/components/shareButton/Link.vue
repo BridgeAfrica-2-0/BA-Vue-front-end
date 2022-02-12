@@ -55,7 +55,7 @@ export default {
       if (request.success)
         this.flashMessage.success({
           time: 5000,
-          message: `Operation success`,
+          message: this.$t("search.Operation_success"),
         });
 
       this.loading = false;

@@ -87,9 +87,8 @@ export default {
   },
   watch: {
     "$route.query.selectedId": function(){
-      console.log('test')
+      
       this.selectedId = this.$route.params.selectedId != 0 ? this.$route.params.selectedId : 0
-      console.log(this.selectedId)
     },
 
      "$route.query.tabId": function () {
@@ -143,7 +142,6 @@ export default {
               params: { id: this.foll_id },
             });
             break;
-
           case "network_editor":
             this.$router.push({
               name: "NetworkEditors",

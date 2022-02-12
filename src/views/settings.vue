@@ -128,7 +128,7 @@
 
                               <b-td class="a-text text">
                                 <b-link href="#">
-                                  {{getUserInfos.country ? getUserInfos.country.name : Null}}
+                                  {{ getUserInfos && getUserInfos.country ? getUserInfos.country.name : Null}}
                                 </b-link>
                               </b-td>
                             </b-tr>
@@ -600,7 +600,6 @@ export default {
           // console.log("-----------------"+this.selectedCounty);
         })
         .catch((err) => {
-          console.log("--------- error: ");
           console.error(err);
         });
     },
@@ -822,13 +821,16 @@ beforeMount(){
     if (that.size == "") {
       that.size = window.innerWidth;
     }
-  },
 
+    
+  },
   created() {
     if ("account" === this.$route.query.tab) {
       this.activeTab = 2;
     }
-  },
+  }
+
+  
 };
 </script>
 

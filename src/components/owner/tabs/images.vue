@@ -79,7 +79,8 @@
             :imageProps="imageProps"
             :isEditor="isEditor"
             :type="type"
-            style="width:''"
+            :getStyle="getStyle"
+            :style="getStyle"
           />
         
       <vue-easy-lightbox
@@ -182,8 +183,6 @@ export default {
   },
 
   created() {
-
-    console.log(this.images)
     this.allImages = this.images
    
     this.url = this.$route.params.id;

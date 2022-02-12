@@ -204,10 +204,48 @@ export default {
       currentTab: 0,
       tabIndex: null,
       tabs: ["#post", "#about", "#media", "#market", "#community"],
-      options: {
+     
+    };
+  },
+
+  computed: {
+    business_info() {
+      return this.$store.state.businessOwner.businessInfo;
+    },
+
+
+
+     perPage() {
+      if (this.business_info.cover) {
+        if (this.business_info.cover.length == 1) {
+          return 1;
+        } else if (this.business_info.cover.length == 2) {
+          return 2;
+        } else {
+          return 3;
+        }
+      } else {
+        return 3;
+      }
+    },
+
+    perPageM() {
+      if (this.business_info.cover) {
+        if (this.business_info.cover.length == 1) {
+          return 1;
+        } else {
+          return 2;
+        }
+      } else {
+        return 3;
+      }
+    },
+
+    options() {
+      return {
         rewind: true,
         autoplay: true,
-        perPage: 3,
+        perPage: this.perPage,
         pagination: false,
 
         type: "loop",
@@ -219,18 +257,14 @@ export default {
             gap: "0rem",
           },
           992: {
-            perPage: 2,
+            perPage: this.perPageM,
             gap: "1rem",
           },
         },
-      },
-    };
-  },
-
-  computed: {
-    business_info() {
-      return this.$store.state.businessOwner.businessInfo;
+      };
     },
+
+
   },
 
   created() {

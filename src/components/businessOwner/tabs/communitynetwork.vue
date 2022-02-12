@@ -253,21 +253,7 @@ export default {
       });
     },
     search() {
-      console.log("search started");
-      console.log(this.type);
-
-      if (this.type == "Follower") {
-        console.log("follower");
-        this.$store.commit("profile/setNcommunityFollower", {
-          network_followers: [],
-          total_network_follower: 0,
-        });
-      } else {
-        this.$store.commit("profile/setNcommunityFollowing", {
-          network_following: [],
-          total_network_following: 0,
-        });
-      }
+      this.network=[];
 
       this.page = 1;
       this.infiniteId += 1;

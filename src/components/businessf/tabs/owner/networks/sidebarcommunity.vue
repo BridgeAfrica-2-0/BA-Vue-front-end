@@ -118,7 +118,7 @@
                 </template>
                 <!-- <div class="s-comcard">{{networkdetails.Network_followers}}</div> -->
                 <div class="s-comcard">
-                  <Network type="Followers"
+                  <Network type="Follower"
                   />
                 </div>
               </b-tab>

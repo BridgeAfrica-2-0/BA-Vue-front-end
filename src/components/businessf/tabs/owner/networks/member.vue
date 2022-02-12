@@ -219,7 +219,7 @@
                     size="3.5rem"
                   ></b-avatar>
                   <h5 class="m-0 username d-inline-block ml-2">
-                    {{ busines.name }}
+                    
                     <router-link :to="'/business/' + busines.business_id">
                       {{ busines.name }}
                     </router-link>

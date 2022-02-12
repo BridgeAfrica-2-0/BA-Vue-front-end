@@ -4,8 +4,6 @@ window.io = require('socket.io-client');
 
 export const initRedis = (token) => {
 
-  console.log(token)
-
   window.Redis = new Echo({
     broadcaster: 'socket.io',
     host: 'http://maxinemoffett.com:6001',

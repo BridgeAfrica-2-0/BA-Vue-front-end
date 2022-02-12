@@ -79,7 +79,8 @@
             :imageProps="imageProps"
             :isEditor="isEditor"
             :type="type"
-            style="width:''"
+            :getStyle="getStyle"
+            :style="getStyle"
           />
         
       <vue-easy-lightbox

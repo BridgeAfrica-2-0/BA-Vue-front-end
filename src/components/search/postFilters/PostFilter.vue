@@ -73,13 +73,13 @@
         >
           <b-card>
             <b-form-group v-slot="{ bui }">
-              <b-form-checkbox-group
+              <b-form-radio-group
                 v-model="selectedBuisness"
                 :options="optionsBuisness"
                 :aria-describedby="bui"
                 name="bui-2a"
                 stacked
-              ></b-form-checkbox-group>
+              ></b-form-radio-group>
             </b-form-group>
           </b-card>
         </b-collapse>
@@ -108,13 +108,13 @@
         >
           <b-card>
             <b-form-group v-slot="{ people }">
-              <b-form-checkbox-group
+              <b-form-radio-group
                 v-model="selectedPeople"
                 :options="optionsPeople"
                 :aria-describedby="people"
                 name="people-2a"
                 stacked
-              ></b-form-checkbox-group>
+              ></b-form-radio-group>
             </b-form-group>
           </b-card>
         </b-collapse>
@@ -143,13 +143,13 @@
         >
           <b-card>
             <b-form-group v-slot="{ network }">
-              <b-form-checkbox-group
+              <b-form-radio-group
                 v-model="selectedNetwork"
                 :options="optionsNetwork"
                 :aria-describedby="network"
                 name="network-2a"
                 stacked
-              ></b-form-checkbox-group>
+              ></b-form-radio-group>
             </b-form-group>
           </b-card>
         </b-collapse>

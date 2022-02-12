@@ -68,4 +68,4 @@ export const notification = (notification) => {
     </div>
 `}
 
-const wrapperErrors = (errors) => Object.values(errors).map(err => err)
+export const wrapperErrors = (errors) => Object.values(errors).map(err => err[0])

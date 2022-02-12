@@ -183,8 +183,6 @@ export default {
   },
 
   created() {
-
-    console.log(this.images)
     this.allImages = this.images
    
     this.url = this.$route.params.id;

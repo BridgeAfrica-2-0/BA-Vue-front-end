@@ -509,7 +509,7 @@
                   <div class="drag-text">
                     <i class="fa fa-plus"> </i>
                     <h3 class="username">
-                      {{ $t("profileowner.Business_Logo") }}
+                      {{ $t("businessowner.NetworkLogo") }}
                     </h3>
                   </div>
 
@@ -1011,20 +1011,24 @@ export default {
 
         })
         .catch((err) => {
-        
-          const errors = wrapperErrors(err.response.data.errors)
-          console.log(errors)
-          this.success.state = true;
-          this.flashMessage.show({
-            status: "error",
-            message: "Something went wrong",
-            blockClass: "custom-block-class",
-          });
           
+          if (err.response.data.errors){
+            const errors = wrapperErrors(err.response.data.errors)
+            errors.map(e => this.flashMessage.show({
+                  status: "error",
+                  message: e,
+                  blockClass: "custom-block-class",
+                })
+            )
+          }
+          
+          this.success.state = true;
           this.success.msg = "Something wen't wrong !!";
+          
           setTimeout(() => {
             this.success.state = false;
           }, 5000);
+          
           loader.hide();
         });
     },

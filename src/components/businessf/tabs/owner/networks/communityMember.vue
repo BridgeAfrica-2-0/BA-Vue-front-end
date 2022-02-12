@@ -19,7 +19,7 @@
                     <b-row>
                       <b-col md="6" lg="12" cols="6" xl="12" class="mt-lg-2">
                         <div class="mt-3 mt-lg-0 mt-xl-0 username">
-                          <b> {{ member.name }} </b>
+                          <b> <router-link :to="'profile/'+member.id" > {{ member.name }}   </router-link>  </b>
                         </div>
                       </b-col>
 

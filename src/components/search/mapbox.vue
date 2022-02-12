@@ -11,7 +11,7 @@
       <MglMarker
         v-for="(business, key) in businesses"
         :key="business.id"
-        :coordinates="[business.lng, business.lat]"
+        :coordinates="[business.lng , business.lat]"
       >
         <div class="marker" slot="marker">
           <div>B{{ key + 1 }}</div>
@@ -159,10 +159,15 @@ export default {
     const subject = [...new Set(products)];
     console.log(this.products)
     console.log('filtré ', this.productBlock)
+    console.log('mes data business', this.businesses, "data product: ",this.products);
+
+    let rand = Math.floor(Math.random() * 10000) /100000000 ; 
+    console.log("random : ", rand)
+
   }
 };
 </script>
-<style scoped>
+<style scoped> 
 @import url("https://api.tiles.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css");
 .map-container {
   width: 100%;

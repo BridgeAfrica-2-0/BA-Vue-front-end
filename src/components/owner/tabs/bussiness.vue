@@ -333,12 +333,12 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="Neighbor" class="username">
-                        {{ $t("profileowner.Adress") }} : {{address}}--- </label
+                        {{ $t("profileowner.Adress") }} : {{address}} </label
                       >
                     </div>
                 <div style="width: 100%; height: 200px; overflow:hidden">
                   <AutocompleteLocation
-                    :infos="infos"
+                    
                     :region="region"
                     @get-address-details="getGeoCoderResult"
                   />
@@ -432,7 +432,17 @@
         <div>
           <form-wizard @on-complete="updateBusiness">
             <tab-content :title="$t('profileowner.Business_Indentity')">
-              <div class="form-card mb-2">
+
+               <div class="text-center"  v-if="updateloading">
+      <b-spinner
+        style="width: 2.5rem; height: 2.5rem"
+        label="Text Centered Large Spinner"
+        variant="primary"
+      ></b-spinner>
+    </div>
+
+
+              <div  v-if="!updateloading" class="form-card mb-2">
                 <div class="row">
                   <div class="col-md-6">
                     <input
@@ -441,7 +451,7 @@
                       @change="onLogoChange"
                       hidden
                     />
-
+  
                     <div id="preview">
                       <img v-if="logoimg_url" :src="logoimg_url" />
                     </div>
@@ -721,7 +731,7 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="Neighbor" class="username">
-                        {{ $t("profileowner.Adress") }} : {{address}} </label
+                        {{ $t("profileowner.Adress") }} :  </label
                       >
 
                   <div class="" style="width: 100%; height: 250px; overflow:hidden">
@@ -941,6 +951,7 @@ export default {
     return {
       useas: "",
       selectedFile:null,
+      updateloading:false,
       page: 1,
       bizId: "",
       profileBusinesss: [],
@@ -962,7 +973,7 @@ export default {
       division: [],
       municipality: [],
       locality: [],
-      username: this.$store.state.auth.user.user.name,
+      username: this.$store.state.auth.user.user.name, 
       img_url: null,
       select_filterss: [],
       sendingP: false,
@@ -1085,6 +1096,8 @@ export default {
     editBusiness(id) {
       this.bizId = id;
 
+      this.updateloading=true;
+
       axios
         .get("business/edit/" + id)
         .then(({ data }) => {
@@ -1098,18 +1111,36 @@ export default {
     },
 
     deleteBusiness(id) {
+
+
+      this.$confirm(
+        {
+          message: `Are you sure?`,
+          button: {
+            no: 'No',
+            yes: 'Yes'
+          },
+          /**
+          * Callback Function
+          * @param {Boolean} confirm
+          */
+          callback: confirm => {
+            if (confirm) {
+             
+                
+                  
       let loader = this.$loading.show({
         container: this.fullPage ? null : this.$refs.preview,
         canCancel: true,
         onCancel: this.onCancel,
         color: "#e75c18",
-      });
+      });       
 
       let url = "business/delete/" + id;
       this.$store
         .dispatch("profile/deleteBusiness", url)
-        .then(() => {
-          console.log("wow biz {{ $t('profileowner.delete')}}d");
+        .then((data) => {
+         
 
           loader.hide();
 
@@ -1119,7 +1150,7 @@ export default {
           this.$refs.infiniteLoading.attemptLoad();
           this.flashMessage.show({
             status: "success",
-            message: "Business {{ $t('profileowner.Delete')}}",
+            message: "Business deleted",
             blockClass: "custom-block-class",
           });
         })
@@ -1128,10 +1159,18 @@ export default {
           loader.hide();
           this.flashMessage.show({
             status: "error",
-            message: "Unable to {{ $t('profileowner.Delete')}} this Business",
+            message: "Unable to delete your Business",
             blockClass: "custom-block-class",
           });
         });
+            }
+
+          }
+        }
+      )
+
+
+
     },
 
     cancel() {
@@ -1171,6 +1210,10 @@ export default {
     },
 
     setEditData(business) {
+
+      this.logoimg_url=business.logo_path;
+        
+
       this.logo_url = business.logo;
       this.business_name = business.name;
       this.about = business.about_business;
@@ -1192,7 +1235,7 @@ export default {
       this.website = business.website;
       this.locality = business.neigborhood;
       this.email = business.email;
-      this.time_zone = business.timeZone;
+      this.time_zone = business.timezone;
       this.address = business.address;
 
       //  this.keywordds= business.keywords;
@@ -1204,6 +1247,7 @@ export default {
       this.Division();
       this.Municipality();
       this.Locality();
+      this.updateloading=false;
     },
     getpFilters: function() {
       let sub_cat = [];
@@ -1487,7 +1531,7 @@ this.$refs.cropperr.getCroppedCanvas().toBlob((blob) => {
         formData2.append("lat", this.coordinates[1]);
         formData2.append("lng", this.coordinates[0]);
         formData2.append("phone", this.phone1);
-        formData2.append("phone2", this.phone2);
+        formData2.append("secondary_phone", this.phone2);
         formData2.append("email", this.email);
         formData2.append("website", this.website);
 
@@ -1580,8 +1624,8 @@ this.$refs.cropperr.getCroppedCanvas().toBlob((blob) => {
         formData2.append("neigborhood", this.selectedlocality);
         formData2.append("lat", this.center.lat);
         formData2.append("lng", this.center.lng);
-        formData2.append("phone1", this.phone1);
-        formData2.append("phone2", this.phone2);
+        formData2.append("phone", this.phone1);
+        formData2.append("secondary_phone", this.phone2);
 
         if (this.email) formData2.append("email", this.email);
 

@@ -52,8 +52,14 @@ import productDetails from './productDetails';
 
 Vue.use(Vuex);
 
+<<<<<<< HEAD
 //axios.defaults.baseURL = process.env.VUE_APP_API_URL; 
 axios.defaults.baseURL = "https://courage4.maxinemoffett.com/api/v1/";
+=======
+ axios.defaults.baseURL = process.env.VUE_APP_API_URL; 
+
+ //axios.defaults.baseURL ="https://stiving.loca.lt/api/v1/";
+>>>>>>> main
 
 export default new Vuex.Store({
     modules: {

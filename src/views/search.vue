@@ -520,7 +520,7 @@
             </div>
             <div v-if="selectedId == '0'">
               <mapbox
-                :businesses="businessess.data"
+                :businesses="businesses.data"
                 :products="miniproducts.data"
                 :networks="mininetworks.data"
               />

@@ -60,7 +60,7 @@
                 </div>
               </div>
 
-              <div>
+              <div class="flx70">
                 <p class="textt text">
                   <strong class="title">
                     <router-link :to="'/network/' + network.id">
@@ -142,6 +142,7 @@
       size="lg"
       v-model="showModal"
       ref="netmodal"
+        @close="cancel"
     >
       <b-container>
         <b-form>
@@ -222,33 +223,6 @@
               </div>
             </b-col>
 
-            <b-col md="6">
-              <b-form-group
-                label-cols-lg="12"
-                :label="$t('profileowner.Network_Address')"
-                label-size="md"
-                label-class=" pt-0"
-                class="mb-0"
-              >
-              {{createdNetwork.address}}
-                <!-- <b-form-input
-                  v-model="createdNetwork.address"
-                  id="network_name"
-                  placeholder=""
-                  required
-                >
-                </b-form-input> -->
-
-                 <div class="" style="height: 200px; overflow:hidden">
-                  <AutocompleteLocation
-                  
-                    :region="region"
-                    @get-address-details="getGeoCoderResult"
-                  />
-                </div>
-
-              </b-form-group>
-            </b-col>
 
             <b-col md="6">
               <div class="form-group">
@@ -453,6 +427,46 @@
                 ></b-form-textarea>
               </b-form-group>
             </b-col>
+
+           
+
+
+           
+            <b-col md="6">
+              <b-form-group
+                label-cols-lg="12"
+                :label="$t('profileowner.Network_Address')"
+                label-size="md"
+                label-class=" pt-0"
+                class="mb-0"
+              >
+           
+
+
+                 <div class="" style="height: 200px; overflow:hidden">
+                  <AutocompleteLocation
+                  
+                    :region="region"
+                    @get-address-details="getGeoCoderResult"
+                  />
+                </div>
+
+
+               
+
+              </b-form-group>
+       
+
+
+
+
+
+
+ 
+
+
+
+            </b-col>
             <b-col md="6">
               <b-form-group
                 label-cols-lg="12"
@@ -472,7 +486,7 @@
 
                 <div id="preview">
                   <!-- <img v-if="logoimg_url" :src="logoimg_url" /> -->
-
+       
 
                   <vue-cropper  v-if="logoimg_url"
                     :src="selectedFile"
@@ -773,6 +787,45 @@ export default {
   },
 
   methods: {
+
+
+
+    cancel(){
+
+
+       
+    console.log("yoo mother fucker");
+        this.logoimg_url= '';
+      this.selectedFile='';
+      this.createdNetwork.id = '';
+      this.createdNetwork.image = '';
+      this.createdNetwork.name = '';
+      this.createdNetwork.email = '';
+      this.createdNetwork.country_id ='';
+      this.createdNetwork.primary_phone ='';
+      this.createdNetwork.city = '';
+      this.createdNetwork.secondary_phone ='';
+      this.createdNetwork.network_category_id ='';
+      this.createdNetwork.business_id ='';
+      this.createdNetwork.address = '';
+      this.createdNetwork.neighbourhood = '';
+      this.createdNetwork.network_categories = ''
+      this.createdNetwork.purpose = '';
+      this.createdNetwork.special_needs = '';
+      this.createdNetwork.allow_business ='';
+
+      this.country = [];
+      this.region = [];
+      this.division = [];
+      this.municipality =[];
+      this.localities = [];
+
+
+
+
+    },
+
+    
 
     getGeoCoderResult(response) {console.log(response);
       this.coordinates = response.coordinates;
@@ -1223,7 +1276,8 @@ export default {
         .catch((err) => {
           console.log({ err: err });
         });
-
+      this.logoimg_url= network.image;
+      this.selectedFile=network.image;
       this.createdNetwork.id = network.id;
       this.createdNetwork.image = network.image;
       this.createdNetwork.name = network.name;
@@ -1805,5 +1859,9 @@ p {
 
 .t-color {
   color: #000;
+}
+
+.flx70{
+      flex-basis: 70%;
 }
 </style>

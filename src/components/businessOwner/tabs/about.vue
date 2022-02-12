@@ -582,10 +582,10 @@
                   name="open"
                   :aria-describedby="ariaDescribedby"
                   v-model="open"
-                  disabled
+                  :disabled="false"
                 ></b-form-radio-group>
                 <br />
-                <b-container>
+                <b-container v-if="displayHour1">
                   <b-row v-for="(day, index) in dayOfWorks" :key="index">
                     <b-col cols="6"
                       ><b-form-checkbox
@@ -708,13 +708,20 @@ export default {
       business_about: {},
       business_about_input: {},
       openNow: null,
-      open: null,
+      open: "Open for selected hours",
       tempo: {},
+      displayHour: true,
+      displayHour1: true
     };
   },
   watch: {
     open(value) {
       console.log("change open value ", value);
+      if(value == "Always Open"){
+        this.displayHour1 = false
+      }else if(value == "Open for selected hours"){
+        this.displayHour1 = true
+      }
     },
     dayOfWorks: {
       handler(newValue, oldValue) {
@@ -724,11 +731,11 @@ export default {
             num = num + 1;
           }
         });
-        if (num >= 7) {
-          this.open = "Always Open";
-        } else {
-          this.open = "Open for selected hours";
-        }
+        // if (num >= 7) {
+        //   this.open = "Always Open";
+        // } else {
+        //   this.open = "Open for selected hours";
+        // }
         console.log(newValue);
         console.log(oldValue);
       },
@@ -1246,7 +1253,7 @@ export default {
               division: this.ArrayString(this.selecteddivision), //this.business_about_input.division[0].division_id,
               council: this.ArrayString(this.selectedmunicipality), //this.business_about_input.council[0].council_id,
               neigborhood: this.ArrayString(this.selectedlocality), //this.business_about_input.council[0].neighborhood_id,
-
+              alway: !this.displayHour1 ? "vrai" : "faux",
               city: this.business_about_input.city,
               ...this.tempo,
               lat: this.business_about_input.lat,
@@ -1286,6 +1293,7 @@ export default {
               ];
               this.$refs["addressBusinessModal"].hide();
               console.log("update user business about end");
+             
             })
             .catch((error) => {
               console.log(error, "update user business about end++++");

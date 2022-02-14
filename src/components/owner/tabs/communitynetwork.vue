@@ -120,6 +120,7 @@ export default {
   data() {
     return {
       page: 1,
+      network:[],
       foll_id: null,
       infiniteId: +new Date(),
       options: {
@@ -134,7 +135,7 @@ export default {
     };
   },
   computed: {
-    network() {
+    old_network() {
       if (this.type == 'Follower') {
         return this.$store.state.profile.NcommunityFollower.network_followers;
       } else {

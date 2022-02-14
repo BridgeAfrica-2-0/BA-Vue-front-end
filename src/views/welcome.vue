@@ -319,7 +319,6 @@
                     :view-mode="1"
                   />
 
-
                     </div>
 
                     <div class="text-center">

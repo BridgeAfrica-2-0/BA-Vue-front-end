@@ -474,7 +474,7 @@
                 <span class="mr-3"
                   ><fas-icon class="violet search" :icon="['fas', 'home']"
                 /></span>
-                Home
+                Dashboard
               </router-link>
             </div>
             <hr class="h-divider" />
@@ -493,6 +493,36 @@
               </router-link>
             </div>
             <hr class="h-divider" />
+
+             <div class="other-menu suggest-item cursor-pointer" v-if="islogin">
+              <router-link
+                :to="newRedirection('message')"
+                class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+              >
+                <span class="mr-3"
+                  ><fas-icon
+                    class="violet search"
+                    :icon="['fas', 'comment']"
+                /></span>
+                Messages
+              </router-link>
+            </div>
+            <hr class="h-divider" v-if="islogin"/>
+
+             <div class="other-menu suggest-item cursor-pointer" v-if="islogin">
+              <router-link
+                :to="newRedirection('notification')"
+                class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+              >
+                <span class="mr-3"
+                  ><fas-icon
+                    class="violet search"
+                    :icon="['fas', 'bell']"
+                /></span>
+                {{ $t("general.Notifications") }}
+              </router-link>
+            </div>
+            <hr class="h-divider" v-if="islogin"/>
 
             <div
               v-if="'user' != user.user_type"

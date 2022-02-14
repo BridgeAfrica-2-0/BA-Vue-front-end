@@ -173,6 +173,8 @@ import Popularnetwork from "@/components/dasboard/popularnetwork";
 import mapbox from "@/components/mapbox";
 import { WhoIsIt } from "@/mixins";
 
+import { mapGetters, mapActions} from 'vuex'
+
 export default {
   name: "dashboard",
   
@@ -211,6 +213,19 @@ export default {
   },
 
   methods: {
+    ...mapMutations({
+      auth: 'auth/profilConnected',
+    }),
+
+    async checkIfItNetwork(){
+      if ("network" == this.profile.user_type){
+        const request = await this.$repository.share.switch(null,"reset");
+
+        if (request.status)
+          this.auth()
+      }
+      
+    },
     async switchBusiness(value) {
       this.data1 = false;
       console.log("business switch" + value);
@@ -346,6 +361,9 @@ export default {
   },
 
   created() {
+    
+    this.checkIfItNetwork();
+
     this.$store
       .dispatch("ProfileAndBusinessDetails/getdetails")
       .then((response) => {
@@ -355,7 +373,6 @@ export default {
 
     this.dashboardPpost();
 
-    
   },
 
   mounted(){
@@ -371,6 +388,9 @@ export default {
   },
 
   computed: {
+    ...mapGetters({
+      profile: 'auth/profilConnected'
+    }),
     selectedBusiness: function(){
       let data = this.$store.state.dashboard.dashboard_business;
       data.lat= data.latitute;

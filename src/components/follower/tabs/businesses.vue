@@ -29,9 +29,9 @@
                     <p class="ml-3 textt text-left">
                      
                        
-                          <router-link :to="'business/'+item.id">
+                          <router-link :to="'/business/'+item.id">
 
-                      <strong class="title over" > {{ item.name }}  </strong> </router-link>   <br />
+                      <strong class="title over" > {{ item.name }}</strong> </router-link>   <br />
 
                       <span v-for="cat in item.category" :key="cat.name">
                         {{ cat.name }}

@@ -173,7 +173,7 @@ import Popularnetwork from "@/components/dasboard/popularnetwork";
 import mapbox from "@/components/mapbox";
 import { WhoIsIt } from "@/mixins";
 
-import { mapGetters, mapActions} from 'vuex'
+import { mapGetters, mapActions, mapMutations} from 'vuex'
 
 export default {
   name: "dashboard",

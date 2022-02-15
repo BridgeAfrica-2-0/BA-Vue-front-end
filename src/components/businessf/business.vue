@@ -286,7 +286,7 @@ export default {
       }
     },
 
-    $route(to, from) { console.log("----route--")
+    $route(to, from) { 
       if ("#media" == to.hash) this.showCoverAlbum = true;
 
       this.currentTab = this.tabs.findIndex((tab) => tab === to.hash);
@@ -313,7 +313,7 @@ export default {
       const uri = !this.hasBeFollow ? `/follow-community` : `/unfollow`;
       const nextFollowState = !this.hasBeFollow ? 1 : 0;
       const data = {
-        id: this.business_info.id,
+        id: this.business_info.id ? this.business_info.id : this.$route.params.id,
         type: "business",
       };
 

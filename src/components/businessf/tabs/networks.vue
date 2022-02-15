@@ -218,6 +218,7 @@ export default {
       this.createdNetwork.allow_business = network.allow_business;
       this.showModal = true;
     },
+
     edit() {
       const fd = new FormData();
       fd.append("_method", "PUT");
@@ -229,12 +230,15 @@ export default {
       fd.append("special_needs", this.createdNetwork.special_needs);
       fd.append("business_image", this.createdNetwork.business_image);
       fd.append("allow_busines", this.createdNetwork.allow_busines);
+      
       let data = {
         id: this.createdNetwork.id,
         data: fd,
       };
+      
       this.editNetwork(data);
     },
+    
     selectImage(e) {
       this.createdNetwork.business_image = e.target.files[0];
     },

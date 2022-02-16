@@ -57,7 +57,6 @@ export default {
     },
 
 
-
     setAppLanguage(state, language) { 
       state.appLanguage = language;
       localStorage.setItem("lang", language); // Whenever we change the appLanguage we save it to the localStorage
@@ -75,13 +74,10 @@ export default {
     },
 
 
-
     setPasswordReset(state, userData) {
       state.password_reset = userData;
      
     },
-
-
 
 
     setneigbourhoods(state, data) {
@@ -147,16 +143,16 @@ export default {
     clearUserData(state) {
       localStorage.removeItem('user');
       state.user=[];
-    // location.reload();
-   // this.$router.push({ name: "Login" });
+      // location.reload();
+      // this.$router.push({ name: "Login" });
 
-    router.push({ name: "Login" });
-
+      router.push({ name: "Login" });
 
     },
 
-    profilConnected(state, payload) {
-      state.profilConnected = payload
+
+    profilConnected(state, payload=null) {
+      state.profilConnected = (payload) ?  payload : { ...state.user.user, user_type: 'user'};
     },
   },
 
@@ -291,13 +287,7 @@ export default {
       });
     },
 
-
-     
-
-
     verifyuser({ commit }, payload) {
-
- 
 
       return axios.post(payload.url, payload).then(({ data }) => {
         console.log(data.data);
@@ -311,8 +301,6 @@ export default {
 
     VerifyOtp({ commit }, payload) {
 
- 
-
       return axios.post(payload.url, payload).then(({ data }) => {
        // console.log(data.data);
 
@@ -321,12 +309,7 @@ export default {
       });
     },
 
-
-       
-
     ResetPassword({ commit }, payload) {
-
- 
 
       return axios.post(payload.url, payload).then(({ data }) => {
         console.log(data.data);
@@ -334,12 +317,6 @@ export default {
         //commit('setUserData', data.data);
       });
     },
-
-
-
-
-    
-
 
   },
 

@@ -116,6 +116,7 @@ export default {
   data() {
     return {
       page: 1,
+       islogin:'',
       foll_id: null,
       users: [],
       options: {
@@ -132,6 +133,7 @@ export default {
 
   mounted() {
     this.foll_id = this.$route.params.id ? this.$route.params.id : "";
+     this.islogin=this.$store.getters["auth/isLogged"];
   },
 
   computed: {
@@ -159,10 +161,14 @@ export default {
 
     infiniteHandler($state) {
       console.log(this.foll_id);
-      const url =
+      let url =
         this.type == "Follower"
           ? "profile/user/follower/"
           : "profile/user/following/";
+
+           if(!this.islogin){
+            url='guest/'+url;
+          }
       axios
         .get(url + this.page + "?id=" + this.foll_id)
         .then(({ data }) => {

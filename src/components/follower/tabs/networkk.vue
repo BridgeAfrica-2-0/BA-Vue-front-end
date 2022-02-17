@@ -130,6 +130,7 @@ export default {
   data() {
     return {
       page: 1,
+      islogin:'',
       loading:false,
       network: [],
       foll_id: "",
@@ -144,13 +145,9 @@ export default {
       },
     };
   },
-  computed: {
-    old_network() {
-      return this.$store.state.follower.profileNetwork;
-    },
-  },
-
+ 
   mounted() {
+     this.islogin=this.$store.getters["auth/isLogged"];
     this.foll_id = this.$route.params.id;
   },
 
@@ -203,6 +200,12 @@ export default {
 
     infiniteHandler($state) {
       let url = "network?id=" + this.foll_id + "&page=" + this.page;
+
+      if(!this.islogin){
+            url='guest/'+url;
+          }
+
+
       this.loading=true;
       if (this.page == 1) {  
         this.network.splice(0);

@@ -498,7 +498,7 @@ export const ResizeMediaImage = {
 
   computed: {
     getStyle() {
-      return ['network'].includes(this.type) ? "width: 226px !important;height: 226px !important" : "width: 200px !important;height: 200px !important"
+      return ['network'].includes(this.type) ? "width: 226px !important;height: 226px !important" : "width: 160px !important;height: 160px !important"
     }
   },
 

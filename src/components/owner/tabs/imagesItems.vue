@@ -152,18 +152,24 @@ export default {
       addCoverPictureProfile: "auth/addCoverPicture",
       
     }),
+
     async onDownloadPic() {
-      let loader = this.$loading.show({
-        container: this.$refs[`sHowMedia-${this.im.id}`],
-        canCancel: true,
-        onCancel: this.onCancel,
-        color: "#e75c18",
-      });
+      
+      const imageSrc = this.getFullOriginalMediaLink()
+      
+      const image = await fetch(imageSrc)
+      const imageBlog = await image.blob()
+      const imageURL = URL.createObjectURL(imageBlog)
+      const splitName = imageSrc.split('/')
+      
+      const link = document.createElement('a')
+      link.href = imageURL
+      link.download = splitName[splitName.length-1]
 
-      this.loading = true;
-      this.loading = await this.downloadPic();
-
-      loader.hide();
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+    
     },
 
     async onDeleteImage() {
@@ -226,6 +232,7 @@ export default {
         })
         .finally(() => loader.hide());
     },
+
   },
 };
 </script>

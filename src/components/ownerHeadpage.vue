@@ -37,7 +37,7 @@
             <input
               type="file"
               id="cover_pic"
-              @change="selectMoviesOutsidePost"
+              @change="selectCropCoverModal"
               accept="video/mpeg, video/mp4, image/*"
               hidden
               ref="movie"
@@ -178,10 +178,21 @@
             </b-modal>
 
             <!-- second modal box  to edit the big cover photo -->
-            <b-modal id="coverphoto" ref="coverphoto" @ok="submitCover" :title="$t('profileowner.Upload_Cover_Photo')">
+            <b-modal id="coverphoto" ref="coverphotoCropping" @ok="submitCover" :title="$t('profileowner.Upload_Cover_Photo')">
               <div class="w3-container">
                 <div id="preview">
-                  <img :src="img_url" />
+                  <vue-cropper
+                    :src="selectedFile"
+                    ref="cropperphotoCropping"
+                    original:true
+                    info:false
+                    canScale:true
+                    maxImgSize:1000
+                    
+                    :size="1"
+                    drag-mode="move"
+                    :view-mode="1"
+                  />
                 </div>
               </div>
             </b-modal>
@@ -199,7 +210,6 @@ import "cropperjs/dist/cropper.css";
 
 
 import {defaultCoverImage} from '@/mixins';
-
 import { mapMutations, mapGetters } from 'vuex'
 
 export default {
@@ -310,6 +320,22 @@ export default {
         reader.onload = (event) => {
           this.selectedFile = event.target.result;
           this.$refs.cropper.replace(this.selectedFile);
+        };
+        reader.readAsDataURL(file);
+      } else {
+        alert("Sorry, FileReader API not supported");
+      }
+    },
+
+    selectCropCoverModal(e) {
+      this.$refs["coverphotoCropping"].show();
+      const file = e.target.files[0];
+      this.mime_type = file.type;
+      if (typeof FileReader === "function") {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          this.selectedFile = event.target.result;
+          this.$refs.cropperphotoCropping.replace(this.selectedFile);
         };
         reader.readAsDataURL(file);
       } else {
@@ -529,23 +555,33 @@ export default {
     },
 
     submitCover() {
+
       let loader = this.$loading.show({
         container: this.fullPage ? null : this.$refs.preview,
         canCancel: true,
         onCancel: this.onCancel,
         color: "#e75c18",
       });
-      let formData = new FormData();
+
+      if(this.selectedFile)  {            
+        this.cropedImage = this.$refs.cropperphotoCropping.getCroppedCanvas().toDataURL();
+
+        this.$refs.cropperphotoCropping.getCroppedCanvas().toBlob((blob) => {
+
+             this.cover_photo=blob;
+          
+             let formData = new FormData();
+
       formData.append("image", this.cover_photo);
-      this.axios
-        .post("user/upload-cover", formData, {
+      
+      this.axios.post("user/upload-cover", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
-        })
-        .then((response) => {
+      })
+      .then((response) => {
           console.log(response);
-          this.$store
+        this.$store
             .dispatch("profile/loadUserPostIntro", null)
             .then((response) => {
              
@@ -556,15 +592,15 @@ export default {
               });
               loader.hide();
               this.$refs["modalxl"].hide();
-            })
-            .catch((error) => {
-              console.log(error);
-              this.flashMessage.show({
-                status: "error",
-                message: error.response.data.message,
-                blockClass: "custom-block-class",
-              });
-            });
+        })
+        .catch((error) => {
+          console.log(error);
+          this.flashMessage.show({
+            status: "error",
+            message: error.response.data.message,
+            blockClass: "custom-block-class",
+        });
+      });
         })
         .catch((err) => {
           console.log({ err: err });
@@ -584,6 +620,15 @@ export default {
             });
           }
         });
+           
+           
+
+        }, this.mime_type);
+
+     }
+
+    
+      
     },
   },
 

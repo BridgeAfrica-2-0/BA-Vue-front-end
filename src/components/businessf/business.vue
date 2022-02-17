@@ -216,6 +216,7 @@ export default {
 
 
      perPage() {
+      console.log(this.business_info.cover)
       if (this.business_info.cover) {
         if (this.business_info.cover.length == 1) {
           return 1;
@@ -286,8 +287,9 @@ export default {
       }
     },
 
-    $route(to, from) { console.log("----route--")
-      if ("#media" == to.hash) this.showCoverAlbum = true;
+    $route(to, from) { 
+      if ("#media" == to.hash)
+        this.showCoverAlbum = true;
 
       this.currentTab = this.tabs.findIndex((tab) => tab === to.hash);
     },
@@ -307,13 +309,11 @@ export default {
     },
 
     async handleFollow() {
-      console.log(this.business_info);
-      // document.getElementById("followbtn").disabled = true;
-
+      
       const uri = !this.hasBeFollow ? `/follow-community` : `/unfollow`;
       const nextFollowState = !this.hasBeFollow ? 1 : 0;
       const data = {
-        id: this.business_info.id,
+        id: this.business_info.id ? this.business_info.id : this.$route.params.id,
         type: "business",
       };
 

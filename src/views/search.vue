@@ -598,7 +598,6 @@ export default {
     MiniMarket,
     PostComponent,
     PeopleComponent,
-
     // Footer,
   },
 
@@ -608,7 +607,9 @@ export default {
     ...mapGetters({
       prodLoaderr: "business/getloadingState",
       businessess: "business/getBusiness",
+      profileConnected: "auth/profilConnected"
     }),
+
     businesses() {
       return this.$store.getters["allSearch/getBusinesses"];
     },
@@ -1604,6 +1605,10 @@ export default {
     };
   },
 
+  destroyed(){
+    this.checkIfItNetwork()
+  },
+
   watch: {
     selectedId: function () {
       this.changeComponent();
@@ -1611,11 +1616,11 @@ export default {
       this.changeNotFoundTitle();
     },
 
+
     searchParams: {
       immediate: true,
       deep: true,
       handler(newValue, oldValue) {
-        console.log("Prop changed: ", newValue, " | was: ", oldValue);
         this.$store.commit("business/setKeyword", newValue.keyword);
       },
     },
@@ -1625,6 +1630,8 @@ export default {
     ...mapMutations({
       auth: "auth/profilConnected",
     }),
+
+
 
     ...mapActions({
       userStore: "search/FIND_USER",
@@ -1638,6 +1645,16 @@ export default {
       findBusiness: "business/FIND_BUSINESS",
       getGeo: "business/getGeo",
     }),
+
+    async checkIfItNetwork(){
+      if ("network" == this.profileConnected.user_type){
+        const request = await this.$repository.share.switch(null,"reset");
+
+        if (request.status)
+          this.auth()
+      }
+      
+    },
 
     async getAuth() {
       const response = await this.$repository.share.WhoIsConnect({

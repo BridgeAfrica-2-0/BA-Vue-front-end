@@ -177,6 +177,7 @@ import Media from "@/components/owner/tabs/media";
 import MarketPlace from "./tabs/marketPlace";
 import Community from "@/components/businessOwner/tabs/memberNetwork";
 import Networks from "./tabs/networks";
+import { isGuestUser } from '@/helpers';
 
 import { defaultCoverImage } from "@/mixins";
 
@@ -204,17 +205,14 @@ export default {
       currentTab: 0,
       tabIndex: null,
       tabs: ["#post", "#about", "#media", "#market", "#community"],
-     
+      isGuestUser: isGuestUser,
     };
   },
 
   computed: {
     business_info() {
-      return this.$store.state.businessOwner.businessInfo;
+      return this.isGuestUser ? this.$store.state.businessGuest.businessInfo: this.$store.state.businessOwner.businessInfo;
     },
-
-
-
      perPage() {
       if (this.business_info.cover) {
         if (this.business_info.cover.length == 1) {
@@ -264,7 +262,6 @@ export default {
       };
     },
 
-
   },
 
   created() {
@@ -298,8 +295,6 @@ export default {
     this.ownerPost();
   },
   methods: {
-
-    
     gotoCoverImages() {
       this.showCoverAlbum = true;
       this.key = this.key + 1;
@@ -307,9 +302,6 @@ export default {
     },
 
     async handleFollow() {
-      console.log(this.business_info);
-      // document.getElementById("followbtn").disabled = true;
-
       const uri = !this.hasBeFollow ? `/follow-community` : `/unfollow`;
       const nextFollowState = !this.hasBeFollow ? 1 : 0;
       const data = {
@@ -335,8 +327,9 @@ export default {
     },
 
     businessInfo() {
+      const dispatchMethod = this.isGuestUser ? "businessGuest/businessInfo": "businessOwner/businessInfo";
       this.$store
-        .dispatch("businessOwner/businessInfo", this.url_data)
+        .dispatch(dispatchMethod, this.url_data)
         .then(() => {
           console.log("hey yeah");
         })
@@ -346,8 +339,9 @@ export default {
     },
 
     businessCommunityTotal() {
+      const dispatchMethod = this.isGuestUser ? "businessGuest/businessCommunityTotal": "businessOwner/businessCommunityTotal";
       this.$store
-        .dispatch("businessOwner/businessCommunityTotal", this.url_data)
+        .dispatch(dispatchMethod, this.url_data)
         .then(() => {
           console.log("hey yeah");
         })
@@ -357,8 +351,9 @@ export default {
     },
 
     ownerPost() {
+      const dispatchMethod = this.isGuestUser ? "businessGuest/ownerPost": "businessOwner/ownerPost";
       this.$store
-        .dispatch("businessOwner/ownerPost", this.url_data)
+        .dispatch(dispatchMethod, this.url_data)
         .then(() => {
           console.log("hey yeah");
         })

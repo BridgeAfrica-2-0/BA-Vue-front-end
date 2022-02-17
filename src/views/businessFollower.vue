@@ -15,6 +15,7 @@ import Footer from "../components/footer";
 
 export default {
   name: "Home",
+  props: ['isGuestUser'],
   components: {
     navbar,
     Business,
@@ -30,7 +31,8 @@ export default {
   },
   created() {
     this.foll_id = this.$route.params.id;
-this.isloaded = true;
+    this.isloaded = true;
+    if (!this.isGuestUser) {
     this.$store
       .dispatch("businessOwner/roleCheck", this.foll_id)
       .then((data) => {
@@ -45,6 +47,12 @@ this.isloaded = true;
           this.$router.push({ name: "notFound" });
         }
       });
+    }
+
+    //add guest user flag
+    if (this.isGuestUser) {
+      localStorage.setItem('isGuestUser', true);
+    }
   },
 
   watch: {

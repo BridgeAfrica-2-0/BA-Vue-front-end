@@ -154,6 +154,7 @@
 <script>
 // import moment from 'moment';
 import axios from "axios";
+import { isGuestUser } from '@/helpers';
 
 export default {
   props: ["type", "searchh"],
@@ -174,6 +175,7 @@ export default {
         type: "loop",
         perMove: 1,
       },
+      isGuestUser: isGuestUser 
     };
   },
 
@@ -206,17 +208,18 @@ export default {
   },
 
   methods: {
-
-        businessCommunityTotal() {
-      this.$store
-        .dispatch("businessOwner/businessCommunityTotal", this.biz_id)
+      
+  businessCommunityTotal() {
+    const dispatchMethod = isGuestUser ? "businessGuest/businessCommunityTotal" : "businessOwner/businessCommunityTotal";
+    this.$store
+        .dispatch(dispatchMethod, this.biz_id)
         .then(() => {
           console.log("hey yeah");
         })
         .catch((err) => {
           console.log({ err: err });
         });
-    },
+  },
 
   BlockUser(id, index) {
 
@@ -337,12 +340,13 @@ export default {
 
     infiniteHandler($state) {
       let url = null;
-
+      const basePrefix = this.isGuestUser ? 'guest/' : '';
       if (this.type == "Follower") {
-        url = "business/community/business-follower/" + this.biz_id + "/";
+        url = basePrefix+"business/community/business-follower/" + this.biz_id + "/";
       } else {
-        url = "business/community/business-following/" + this.biz_id + "/";
+        url = basePrefix+"business/community/business-following/" + this.biz_id + "/";
       }
+      console.log('url', url);
       axios
         .get(url + this.page + "?keyword=" + this.searchh)
         .then(({ data }) => {

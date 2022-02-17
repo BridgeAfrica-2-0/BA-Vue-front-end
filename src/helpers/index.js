@@ -68,4 +68,12 @@ export const notification = (notification) => {
     </div>
 `}
 
+export const isGuestUser = () => {
+    let check = false;
+    if (localStorage.getItem('isGuestUser')) {
+        check = true;
+    }  
+    return check;
+}
+
 export const wrapperErrors = (errors) => Object.values(errors).map(err => err[0])

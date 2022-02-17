@@ -18,6 +18,7 @@
 
 <script>
 import Post from "@/components/businessOwner/ownerPostComponent";
+import { isGuestUser } from '@/helpers';
 
 import { WhoIsIt, PostComponentMixin } from "@/mixins";
 export default {
@@ -51,6 +52,7 @@ export default {
       },
       isSubmitted: false,
       fileImageArr: [],
+      isGuestUser: isGuestUser,
     };
   },
 
@@ -103,7 +105,12 @@ export default {
     },
 
     infiniteHandler($state) {
-      let url = "business/show/post/" + this.url + "/" + this.page;
+      let url = '';
+      if (isGuestUser){
+        url = "guest/business/show/post/" + this.url + "/" + this.page;
+      } else {
+        url = "business/show/post/" + this.url + "/" + this.page;
+      }
       if (this.page == 1) {
         this.owner_post.splice(0);
       }

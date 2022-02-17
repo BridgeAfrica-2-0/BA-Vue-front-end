@@ -672,10 +672,11 @@ export default {
         // Get networks from the backend
         async getNetworks({ commit }) {
             let sucData = [];
+            const token = JSON.parse(localStorage.getItem('user'))
             await axios
                 .get('network/', {
                     headers: {
-                        Authorization: 'Bearer ' + localStorage.getItem('access_token'),
+                        Authorization: 'Bearer ' + token.accessToken,
                     },
                 })
                 .then(res => {

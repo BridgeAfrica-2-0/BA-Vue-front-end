@@ -67,6 +67,7 @@
             :im="im"
             :typeOfMedia="() => typeOfMedia(im.media.path)"
             :getFullMediaLink="() => getFullMediaLink(im.media.preview_url)"
+            :getFullOriginalMediaLink="() => getFullMediaLink(im.media.path)"
             :getYoutubeKey="() => getYoutubeKey(getFullMediaLink(im.media.path))"
             :showImg="() => showImg(getFullMediaLink(im.media.path))"
             :downloadPic="() => downloadPic(im)"
@@ -296,10 +297,8 @@ export default {
     },
 
     loadImages() {
-      const pictures = this.images
-        .filter((e) => e.media.length)
-        .map((e) => {
-          return this.getFullMediaLink(e.media[0].path);
+      const pictures = this.images.map((e) => {
+          return this.getFullMediaLink(e.media.path);
         });
       this.Slideimges = pictures;
     },

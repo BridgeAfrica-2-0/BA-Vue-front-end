@@ -13,7 +13,7 @@
         v-bind="imageProps"
         :style="getStyle"
       ></b-img>
-    
+
     <video
       :style="getStyle"
       controls
@@ -39,7 +39,7 @@
     <b-modal hide-footer :id="`modal-${im.id}`" title="Details" size="md">
       <img
         class="card-img"
-        :src="getFullMediaLink()"
+        :src="getFullOriginalMediaLink()"
         @click="() => showImg()"
         alt="media_img"
       />
@@ -107,6 +107,7 @@ export default {
     "typeOfMedia",
     "getFullMediaLink",
     "getYoutubeKey",
+    "getFullOriginalMediaLink",
     "showImg",
     "downloadPic",
     "setProfilePic",
@@ -117,6 +118,7 @@ export default {
   ],
 
   created() {
+    
     this.uuid = this.isAlbum
       ? `modal-album-${this.im.id}`
       : `modal-picture-${this.im.id}`;

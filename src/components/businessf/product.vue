@@ -311,6 +311,7 @@
     </b-modal>
     <!-- PRODUCT DETAILS MODAL -->
     <ProductDetails
+      v-if="product"
       @closemodal="closeDetailsProduct"
       :showModal="viewProduct"
       :product="product"

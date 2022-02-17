@@ -126,6 +126,7 @@ export const knowWhoIsConnected = {
       const response = await this.$repository.share.WhoIsConnect({ networkId: type, type });
 
       if (response.success) this.auth(response.data);
+
     },
   },
 
@@ -303,6 +304,7 @@ export const commentMixins = {
     },
 
     onShowReply: async function () {
+
       const request = await this.$repository.share.fetchReplyComment({
         post: this.uuid,
         comment: this.comment.id,
@@ -325,7 +327,7 @@ export const commentMixins = {
         'NetworkEditors',
         'networks',
         "Membar Network Follower",
-        "memberNetwork",].includes(this.$route.name))
+        "memberNetwork"].includes(this.$route.name))
         data = Object.assign(data, { networkId: this.$route.params.id });
 
       const request = await this.$repository.share.createReplyComment({

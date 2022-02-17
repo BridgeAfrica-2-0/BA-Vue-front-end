@@ -228,6 +228,7 @@
       :onDelete="() => onDelete(comment.id)"
       @update-comment="(text) => onUpdate({ uuid: comment.id, text })"
     />
+    
     <Loader v-if="loadComment" />
     <NoMoreData
       v-if="comments.length && !loadComment"

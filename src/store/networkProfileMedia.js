@@ -60,15 +60,38 @@ export default {
 
 
   actions: {
-    getAlbumImages({ commit }, { businessId, albumId }) {
-      return axios.get("network/album/show/" + businessId + '/' + albumId).then(({ data }) => {
+    getAlbumImages({ commit,rootGetters }, { businessId, albumId }) {
+
+      
+      let auth=rootGetters['auth/isLogged'];  
+        let url="network/album/show/" + businessId + '/' + albumId;
+  
+        if(!auth){    
+          url ="guest/network/album/show/" + businessId + '/' + albumId;
+        }
+
+
+
+
+      return axios.get(url).then(({ data }) => {
         commit("setAlbumImages", data.data);
 
       });
     },
-    getImages({ commit }, networkId) {
+    getImages({ commit,rootGetters }, networkId) {
+    
+        let auth=rootGetters['auth/isLogged'];  
+        let url=`network/post/media/${networkId}`;
+  
+        if(!auth){    
+          url =`guest/network/post/media/${networkId}`; 
+        }
+
+        
+
+
       return axios
-        .get(`network/post/media/${networkId}`)
+        .get(url)
         .then(({ data }) => {
           commit("setImages", data.data);
           console.log(data);
@@ -76,9 +99,20 @@ export default {
         });
     },
 
-    getAlbums({ commit }, networkId) {
+    getAlbums({ commit,rootGetters }, networkId) {
+
+
+      let auth=rootGetters['auth/isLogged'];  
+        let url=`network/album/index/${networkId}`;
+  
+        if(!auth){    
+          url =`guest/network/album/index/${networkId}`; 
+        }
+
+
+
       return axios
-        .get(`network/album/index/${networkId}`)
+        .get(url)
         .then(({ data }) => {
           commit("setAlbums", data.data);
           console.log(data);

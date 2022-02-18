@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="s-cardd">
+    <div class="s-cardd"> 
       <div class="people-style border shadow" v-for="item in users" :key="item.id">
         <b-row class="mb-1">      
           <b-col md="3" cols="4" lg="3" class="my-auto">  
@@ -73,6 +73,7 @@ export default {
   props: ['type'],
   data() {
     return {
+      islogin:'',
       page: 1,
       net_id: null,
       users: [],
@@ -89,6 +90,7 @@ export default {
   },
 
   mounted() {
+    this.islogin=this.$store.getters["auth/isLogged"];
     this.net_id = this.$route.params.id;
   },
 
@@ -127,9 +129,12 @@ export default {
 
     infiniteHandler($state) {
     
-     const url = `network/community/people/${this.net_id}/`;
+     let url = `network/community/people/${this.net_id}/`;
 
-    
+      if(!this.islogin){
+            url='guest/'+url;
+          }
+
       axios
         .get(url + this.page)
         .then(({ data }) => {

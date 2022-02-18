@@ -133,6 +133,8 @@ export default {
 
   data() {
     return {
+
+      islogin:'',
       options: {
         rewind: true,
         autoplay: true,
@@ -151,6 +153,8 @@ export default {
 
 
    mounted() {
+
+    this.islogin=this.$store.getters["auth/isLogged"];
     this.networkId = this.$route.params.id;
    }, 
 
@@ -175,9 +179,12 @@ export default {
 
       infiniteHandler($state) { 
 
-      const url = `network/community/businesses/${this.networkId}/`;
-      
-        
+      let url = `network/community/businesses/${this.networkId}/`;    
+               
+        if(!this.islogin){
+            url='guest/'+url;
+          }
+
 
       axios
         .get(url + this.page)

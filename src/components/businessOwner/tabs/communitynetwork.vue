@@ -3,9 +3,15 @@
     <b-modal id="modal-sm" size="sm" hide-header>
       {{ $t("businessowner.Do_you_want_to_join_this_network") }}?
     </b-modal>
- 
+
     <b-row>
-      <b-col lg="6" sm="12" class="p-2" v-for="(item, index) in network" :key="index">
+      <b-col
+        lg="6"
+        sm="12"
+        class="p-2"
+        v-for="(item, index) in network"
+        :key="index"
+      >
         <div class="people-style shadow h-100">
           <b-row>
             <b-col md="3" xl="3" lg="3" cols="5" sm="3">
@@ -15,23 +21,33 @@
             </b-col>
             <b-col md="5" cols="7" lg="7" xl="5" sm="5">
               <p class="textt">
-                <router-link :to="{name: 'Membar Network Follower', params: {id:item.id}}">
+                <router-link
+                  :to="{
+                    name: 'Membar Network Follower',
+                    params: { id: item.id },
+                  }"
+                >
                   <strong class="title">{{ item.name }}</strong>
                 </router-link>
-                
+
                 {{ item.category }}
                 <br />
-                {{ count(item.followers) }} {{ $t("businessowner.Community") }}      <span  v-if="from !='BusinessFollower' " @click="BlockUser(item.id, index)"  class="ml-3"  style="cursor: pointer">  
-                      
-                      <b-icon
-                              font-scale="1"
-                              icon="exclamation-octagon"
-                              v-b-tooltip.hover
-                              title="Block This Network"
-                              variant="danger"
-                            ></b-icon>
-                            
-                              </span>  <br />
+                {{ count(item.followers) }} {{ $t("businessowner.Community") }}
+                <span
+                  v-if="from != 'BusinessFollower'"
+                  @click="BlockUser(item.id, index)"
+                  class="ml-3"
+                  style="cursor: pointer"
+                >
+                  <b-icon
+                    font-scale="1"
+                    icon="exclamation-octagon"
+                    v-b-tooltip.hover
+                    title="Block This Network"
+                    variant="danger"
+                  ></b-icon>
+                </span>
+                <br />
 
                 <span class="location">
                   <b-icon-geo-alt class="ico"></b-icon-geo-alt>
@@ -48,7 +64,6 @@
                   :max-chars="50"
                 >
                 </read-more>
-                
               </p>
             </b-col>
 
@@ -87,7 +102,7 @@
                     <b-button
                       block
                       size="sm"
-                      :id="'followbtn'+item.id"
+                      :id="'followbtn' + item.id"
                       class="b-background flexx pobtn shadow mr-lg-3 mr-xl-3"
                       :class="item.is_follow !== 0 && 'u-btn'"
                       variant="primary"
@@ -95,12 +110,15 @@
                     >
                       <i
                         class="fas fa-lg btn-icon"
-                        :class="item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'"
+                        :class="
+                          item.is_follow !== 0
+                            ? 'fa-user-minus'
+                            : 'fa-user-plus'
+                        "
                       ></i>
-                        <span class="btn-com">Join</span>
+                      <span class="btn-com">Join</span>
                     </b-button>
                   </b-col>
-
                 </b-row>
               </div>
             </b-col>
@@ -119,29 +137,31 @@
 
 <script>
 import axios from "axios";
+import { isGuestUser } from "@/helpers";
+
 export default {
   props: ["type", "searchh"],
   data() {
     return {
       page: 1,
       biz_id: null,
-      network:[],
+      network: [],
       infiniteId: +new Date(),
       options: {
         rewind: true,
         autoplay: true,
         perPage: 1,
         pagination: false,
-        
+
         type: "loop",
         perMove: 1,
       },
+      isGuestUser: isGuestUser,
     };
   },
   computed: {
-
-    from(){
-        return  this.$route.name;
+    from() {
+      return this.$route.name;
     },
 
     old_network() {
@@ -159,8 +179,7 @@ export default {
   },
 
   methods: {
-
-   businessCommunityTotal() {
+    businessCommunityTotal() {
       this.$store
         .dispatch("businessOwner/businessCommunityTotal", this.biz_id)
         .then(() => {
@@ -171,47 +190,40 @@ export default {
         });
     },
 
-
-      
-  BlockUser(id, index) {
-
-     let dataInfo = {
+    BlockUser(id, index) {
+      let dataInfo = {
         id: id,
         refernce: "network",
         type: this.type,
       };
 
-    
       let fd = new FormData();
       fd.append("banned_id", dataInfo.id);
-      fd.append("banned_type", dataInfo.refernce);  
-      
+      fd.append("banned_type", dataInfo.refernce);
 
-      axios.post("business/community-banned/"+this.biz_id , fd)
-      .then(response => {
-        
-        this.businessCommunityTotal();
-        this.$delete(this.network,index);
-        console.log("user deleted");
+      axios
+        .post("business/community-banned/" + this.biz_id, fd)
+        .then((response) => {
+          this.businessCommunityTotal();
+          this.$delete(this.network, index);
+          console.log("user deleted");
 
-        console.log(response);
-        this.flashMessage.show({
-          status: "success",
-          message: dataInfo.refernce + " blocked"
+          console.log(response);
+          this.flashMessage.show({
+            status: "success",
+            message: dataInfo.refernce + " blocked",
+          });
+        })
+        .catch((err) => {
+          console.log({ err: err });
+          this.flashMessage.show({
+            status: "error",
+            message: "Unable to blocked " + dataInfo.refernce,
+          });
         });
-      })
-      .catch(err => {
-        console.log({ err: err });
-        this.flashMessage.show({
-          status: "error",
-          message: "Unable to blocked " + dataInfo.refernce
-        });
-      });
     },
 
-
-
-      count(number) {
+    count(number) {
       if (number >= 1000000) {
         return number / 1000000 + "M";
       }
@@ -220,15 +232,21 @@ export default {
       } else return number;
     },
 
+    networkJoin: async function(item) {
+      const status = item.is_follow;
 
+      const request = !status
+        ? await this.$repository.share.jointNetwork({
+            id: item.id,
+            type: "network",
+          })
+        : await this.$repository.share.removeNetwork({
+            id: item.id,
+            type: "network",
+          });
 
-    networkJoin: async function(item){
-      const status = item.is_follow
-
-      const request = !status ? await this.$repository.share.jointNetwork({id: item.id , type: "network"}) : await this.$repository.share.removeNetwork({id: item.id , type: "network"})
-      
-      if (request.success){
-        item = Object.assign(item, {is_follow: status ? 0 : 1})
+      if (request.success) {
+        item = Object.assign(item, { is_follow: status ? 0 : 1 });
         this.flashMessage.show({
           status: "success",
           title: request.data,
@@ -253,7 +271,7 @@ export default {
       });
     },
     search() {
-      this.network=[];
+      this.network = [];
 
       this.page = 1;
       this.infiniteId += 1;
@@ -285,14 +303,12 @@ export default {
 
     infiniteHandler($state) {
       let url = null;
-
+      const basePrefix = this.isGuestUser ? 'guest/' : '';
       if (this.type == "Follower") {
-        url = "business/community/network-follower/" + this.biz_id + "/";
+        url = basePrefix+"business/community/network-follower/" + this.biz_id + "/";
       } else {
-        url = "business/community/network-following/" + this.biz_id + "/";
+        url = basePrefix+"business/community/network-following/" + this.biz_id + "/";
       }
-
-      console.log(url + this.page + "?keyword=" + this.searchh);
       axios
         .get(url + this.page + "?keyword=" + this.searchh)
         .then(({ data }) => {

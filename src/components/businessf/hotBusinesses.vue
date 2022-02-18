@@ -132,6 +132,8 @@
 
 <script>
 import axios from "axios";
+import { isGuestUser } from '@/helpers';
+
 export default {
   props: ["title", "image"],
 
@@ -145,10 +147,10 @@ export default {
         autoplay: true,
         perPage: 1,
         pagination: false,
-
         type: "loop",
         perMove: 1,
       },
+      isGuestUser: isGuestUser,
     };
   },
 
@@ -186,7 +188,7 @@ export default {
     },
 
     infiniteHandler($state) {
-      let url = "profile/hot/business/";
+      let url = this.isGuestUser ? "guest/profile/hot/business/": "profile/hot/business/";
 
       axios
         .get(url + this.page)

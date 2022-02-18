@@ -50,6 +50,7 @@
 import Album from "./album";
 import Images from "./images";
 import { mapGetters } from "vuex";
+import { isGuestUser } from '@/helpers';
 
 import _ from "lodash";
 
@@ -106,6 +107,7 @@ export default {
       strategy: null,
       tabIndex: 0,
       addItem: false,
+      isGuestUser: isGuestUser
     };
   },
 
@@ -203,12 +205,12 @@ export default {
     if (this.isablum) {
       this.tabIndex = 1;
     }
-
+    const dispatchMethod = this.isGuestUser ? 'businessGuest' : 'businessOwner';
     if (this.showCoverAlbum) this.tabIndex = 1;
     this.strategy = {
       business: () => ({
-        album: "businessOwner/getAlbums",
-        image: "businessOwner/getImages",
+        album: dispatchMethod+"/getAlbums",
+        image: dispatchMethod+"/getImages",
         pictures: this.getBusinessPictures,
       }),
       profile: () => ({

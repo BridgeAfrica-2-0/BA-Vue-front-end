@@ -96,8 +96,8 @@ const actions = {
 
 
 
-  async getAllShippingAdd({ commit }) {
-    await axios.get('shipping/checkout/shippingAddresses')
+  async getAllShippingAdd({ commit }, prefix = '') {
+    await axios.get(prefix+'shipping/checkout/shippingAddresses')
       .then((response) => {
         console.log(response.data)
         commit('setAllShipping', response.data.data)

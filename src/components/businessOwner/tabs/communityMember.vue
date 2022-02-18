@@ -121,6 +121,8 @@
 
 <script>
 import axios from "axios";
+import { isGuestUser } from '@/helpers';
+
 export default {
   props: ["type", "searchh"],
   data() {
@@ -138,6 +140,7 @@ export default {
         type: "loop",
         perMove: 1,
       },
+      isGuestUser: isGuestUser 
     };
   },
 
@@ -282,11 +285,12 @@ export default {
 
     infiniteHandler($state) {
       let url = null;
+      const basePrefix = this.isGuestUser ? 'guest/' : '';
 
       if (this.type == "Follower") {
-        url = "business/community/people-follower/" + this.biz_id + "/";
+        url = basePrefix+"business/community/people-follower/" + this.biz_id + "/";
       } else {
-        url = "business/community/people-following/" + this.biz_id + "/";
+        url = basePrefix+"business/community/people-following/" + this.biz_id + "/";
       }
 
       console.log(url + this.page + "?keyword=" + this.searchh);

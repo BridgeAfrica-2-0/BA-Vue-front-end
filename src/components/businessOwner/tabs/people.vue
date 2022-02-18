@@ -69,6 +69,8 @@
 
 <script>
 import axios from 'axios';
+import { isGuestUser } from '@/helpers';
+
 export default {
   props: ['type'],
   data() {
@@ -83,8 +85,9 @@ export default {
         pagination: false,
 
         type: 'loop',
-        perMove: 1,
+        perMove: 1
       },
+      isGuestUser: isGuestUser
     };
   },
 
@@ -100,9 +103,7 @@ export default {
   },
 
   methods: {
-
-
-       cta(data) {
+    cta(data) {
       console.log(data);
       this.$store.commit('businessChat/setSelectedChat', data);
       let path = '';
@@ -111,8 +112,6 @@ export default {
       } else if (this.activeAccount.user_type == 'network') {
         path = '/';
       } else path = '/messaging';
-
-      // this.$router.push({ path: `${path}`, query: { tabId: 1, msgTabId: 1 } });
       this.$router.push({ path: `/business_owner/${this.activeAccount.id}`, query: { tabId: 1, msgTabId: 0 } });
     },
 
@@ -127,11 +126,17 @@ export default {
     },
 
     infiniteHandler($state) {
-      const url =
-        this.type === 'Follower'
-          ? `business/community/people-follower/${this.biz_id}/`
-          : `business/community/people-following/${this.biz_id}/`;
-
+      let url = '';
+      console.log('this.isGuestUser', this.isGuestUser);
+      if (this.isGuestUser) {
+        url = this.type === 'Follower'
+          ? `guest/business/community/people-follower/${this.biz_id}/`
+          : `guest/business/community/people-following/${this.biz_id}/`;
+      } else {
+        url = this.type === 'Follower'
+          ? `guest/business/community/people-follower/${this.biz_id}/`
+          : `guest/business/community/people-following/${this.biz_id}/`;
+      }
       axios
         .get(url + this.page)
         .then(({ data }) => {
@@ -161,8 +166,10 @@ export default {
     },
 
      businessCommunityTotal() {
+      const dispatchMethod = this.isGuestUser ? "businessGuest/businessCommunityTotal": "businessOwner/businessCommunityTotal";
+
       this.$store
-        .dispatch("businessOwner/businessCommunityTotal", this.biz_id)
+        .dispatch(dispatchMethod, this.biz_id)
         .then(() => {
           console.log("hey yeah");
         })

@@ -320,6 +320,8 @@
 
 <script>
 import ProductDetails from "./ProductDetails.vue";
+import { isGuestUser } from "@/helpers";
+
 export default {
   data() {
     return {
@@ -339,6 +341,7 @@ export default {
 
       currentPage: 1,
       nextLoad: false,
+      isGuestUser: isGuestUser,
     };
   },
   components: {
@@ -392,8 +395,10 @@ export default {
         });
     },
 
-    getProducts: async function () {
-      let url = "/market?business_id=" + this.businessId;
+    getProducts: async function() {
+      const basePrefix = this.isGuestUser ? "/guest" : "";
+
+      let url = basePrefix + "/market?business_id=" + this.businessId;
       await this.$store
         .dispatch("market/getBproducts", url)
         .then((res) => {
@@ -442,8 +447,9 @@ export default {
   },
 
   mounted() {
+    const basePrefix = this.isGuestUser ? "guest/" : "";
     this.$store
-      .dispatch("checkout/getAllShippingAdd")
+      .dispatch("checkout/getAllShippingAdd", basePrefix)
       .then(() => {
         console.log(this.shippingAddress);
       })
@@ -733,7 +739,7 @@ h6 {
   }
 }
 
-.sizee{
+.sizee {
   object-fit: cover;
 }
 </style>

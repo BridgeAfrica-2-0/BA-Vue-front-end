@@ -18,6 +18,21 @@ const actions = {
         });
     });
   },
+  async getProductDetailsForGuest({ commit }, idproduct) {
+    return await new Promise((resolve, reject) => {
+      axios
+        .get(`/guest/market/product/detail/${idproduct}`)
+        .then((response) => {
+          commit;
+          console.log(response.data);
+          resolve(response.data.data);
+        })
+        .catch((error) => {
+          console.log(error);
+          reject();
+        });
+    });
+  },
 };
 const mutations = {};
 

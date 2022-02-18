@@ -63,7 +63,7 @@
       </div>
    
           <Picture
-            class="img-gall" v-for="(im, index) in allImages" :key="index"
+             v-for="(im, index) in allImages" :key="index"
             :im="im"
             :typeOfMedia="() => typeOfMedia(im.media.path)"
             :getFullMediaLink="() => getFullMediaLink(im.media.preview_url)"
@@ -79,7 +79,7 @@
             :isEditor="isEditor"
             :type="type"
             :getStyle="getStyle"
-            :style="getStyle"
+            
           />
         
       <vue-easy-lightbox

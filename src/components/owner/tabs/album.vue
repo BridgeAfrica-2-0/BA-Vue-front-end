@@ -3,20 +3,18 @@
     <div class="container-fluid">
       <div class="row" v-if="!showalbum">
         
-          <div  :style="getStyle" class="createp img-gall image-wrapp img-size" v-if="isEditor" v-b-modal.createalbumModal>
-            <div class="">
-              <a>
+          <div  class="createp img-gall dasher" v-if="isEditor" v-b-modal.createalbumModal>
+            
                 <div class="drag-textt">
                   <fas-icon :icon="['fas', 'plus']" />
                   <h3>{{ $t('profileowner.Create_Album') }}</h3>
                 </div>
-              </a>
-            </div>
+             
           </div>
 
           <b-modal hide-footer :title="$t('profileowner.Create_album')" id="createalbumModal">
             <div ref="creatform">
-              <b-form>
+              <b-form @submit="createAlbums">
                 <b-form-input :placeholder="$t('profileowner.Album_name')" v-model="albumInfo.name"></b-form-input>
                 <b-button class="mt-2" variant="primary" @click="createAlbums" :disabled="loading || canCreateAlbum">
                   {{ $t('profileowner.Create') }}</b-button
@@ -26,7 +24,6 @@
           </b-modal>
 
           <AlbumItem
-            :style="getStyle"
             v-for="album in strategy[type]().albums"
             :key="album.id"
             :album="album"
@@ -477,6 +474,11 @@ export default {
 </style>
 
 <style>
+
+.dasher{
+  border: 4px dashed #e75c18;
+}
+
 .text-design {
   align-items: first baseline;
 }

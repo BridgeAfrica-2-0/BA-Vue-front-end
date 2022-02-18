@@ -170,6 +170,7 @@ export default {
   data() {
     return {
       page: 1,
+      islogin:"",
       businesses: [],
 
       infiniteId: +new Date(),
@@ -186,17 +187,13 @@ export default {
   },
 
   mounted() {
+
+     this.islogin=this.$store.getters["auth/isLogged"];
     this.foll_id = this.$route.params.id ? this.$route.params.id : "";
   },
 
   computed: {
-    oldbusinesses() {
-      if (this.type == "Follower") {
-        return this.$store.state.profile.BcommunityFollower.business_followers;
-      } else {
-        return this.$store.state.profile.BcommunityFollowing.business_following;
-      }
-    },
+  
   },
 
   methods: {
@@ -238,7 +235,7 @@ export default {
         type: this.type,
       };
 
-    
+        
       let fd = new FormData();
       fd.append("id", dataInfo.id);
       fd.append("type", dataInfo.refernce);
@@ -327,8 +324,11 @@ export default {
           ? `profile/business/follower/`
           : `profile/business/following/`;
 
-      axios
-        .get(
+          if(!this.islogin){
+            url='guest/'+url;
+          } 
+
+      axios.get(
           url + this.page + "?keyword=" + this.searchh + "&id=" + this.foll_id
         )
         .then(({ data }) => {

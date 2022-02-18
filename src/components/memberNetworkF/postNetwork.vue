@@ -1,7 +1,9 @@
 <template>
   <div>
     
-    <Post
+
+    <div v-if="islogin"> 
+    <Post 
       v-for="(item, index) in owner_post"
       :key="index"
       :post="item"
@@ -13,23 +15,43 @@
       :canBeDelete="false"
       class="p-3"
     />
+  </div>   
+
+
+<div v-else>  
+     <unAuthPost
+      v-for="(item, index) in owner_post"
+      :key="index"
+      :post="item"
+      :mapvideo="() => mapvideo(item.media)"
+      :mapmediae="() => mapmediae(item.media)"
+      :businessLogo="item.user_picture"
+      :editPost="() => editPost(item)"
+      :deletePost="() => deletePost(item)"
+      :canBeDelete="false"
+      class="p-3"
+    />
+ </div>
+
     <infinite-loading @infinite="infiniteHandler"></infinite-loading>
   </div>
 </template>
 
 <script>
 import Post from '@/components/businessOwner/ownerPostComponent';
+import unAuthPost from '@/components/businessOwner/unAuthOwnerPostComponent';
 import { PostComponentMixin } from '@/mixins';
 
 export default {
   mixins: [PostComponentMixin],
   name: 'postNetwork',
   components: {
-    Post,
+    Post,unAuthPost
   },
   data() {
     return {
       page: 1,
+      islogin:'',
       url: null,
       delete: [],
       edit_description: null,
@@ -91,6 +113,7 @@ export default {
     },
   },
   mounted() {
+      this.islogin=this.$store.getters["auth/isLogged"];
     this.url = this.$route.params.id;
   },
 
@@ -108,8 +131,15 @@ export default {
       return num;
     },
     infiniteHandler($state) {
+   
+      let url='network/show/post/' + this.url + '/' + this.page;
+
+        if(!this.islogin){
+            url='guest/'+url;
+          }
+
       this.axios
-        .get('network/show/post/' + this.url + '/' + this.page)
+        .get(url)
         .then(({ data }) => {
           // commit('ownerPost', data.data);
           //  console.log(data);

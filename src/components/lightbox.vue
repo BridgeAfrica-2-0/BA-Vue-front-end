@@ -22,7 +22,7 @@
                 </b-col>    </b-row>
    </div>
 
-   <div class="lb"  v-else  > 
+   <div class="lb"  v-else-if="items.length==3"  > 
 
         <div class="lb-grid" :class="[css,items.length>cells?'lb-grid-' + cells: 'lb-grid-' + items.length]">
             <div class="lb-item" v-for="(src, i) in items" :key="i" @click="show(i)" :style="bg(src)">
@@ -32,6 +32,37 @@
         </div>
 
    </div>
+    <div class="lb"  v-else-if="items.length==4"  > 
+
+        <div class="lb-grid" :class="[css,items.length>cells?'lb-grid-' + cells: 'lb-grid-' + items.length]">
+            <div class="lb-item" v-for="(src, i) in items" :key="i" @click="show(i)" :style="bg(src)">
+
+                <span class="lb-more" v-if="i==cells-1 && items.length - cells>0">{{ items.length - cells}}+</span>
+            </div>
+        </div>
+
+   </div>
+
+    <div class="lb"  v-else-if="items.length==5"  > 
+
+        <div class="lb-grid" :class="[css,items.length>cells?'lb-grid-' + cells: 'lb-grid-' + items.length]">
+            <div class="lb-item" v-for="(src, i) in items" :key="i" @click="show(i)" :style="bg(src)">
+
+                <span class="lb-more" v-if="i==cells-1 && items.length - cells>0">{{ items.length - cells}}+</span>
+            </div>
+        </div>
+
+   </div>
+
+
+
+    <div   v-else class="lb-grid" :class="[css,items.length>cel?'lb-grid-' + cel: 'lb-grid-' + items.length]">
+            <a class="lb-item" v-for="(src, i) in filterItems" :key="i" :href="items[i]" role="link" @click.prevent="show(i)"  :style="bg(src)">
+                <span class="lb-more" v-if="i==cel-1 && items.length - cel>0">{{ items.length - cel}}+</span>
+            </a>
+        </div>
+
+
         <transition enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
             <div class="lb-modal" v-if="index>=0">
                 <button class="btn btn-outline-danger btn-sm lb-modal-close" @click="close">
@@ -95,9 +126,28 @@
             return {
                 src: '',
                 index: -1,
+                cel:5,
                 loading: false,
                 events: []
             }
+        },
+
+        computed:{
+           
+     
+
+      filterItems: function() {
+      let items = [];
+      this.items.forEach((item, i) => {
+          if(i<this.cel){   
+        items.push(item);
+
+         }
+      });
+      return items;
+    },
+
+
         },
 
         methods: {

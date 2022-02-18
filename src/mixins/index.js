@@ -83,7 +83,8 @@ export const WhoIsIt = {
   computed: {
     ...mapGetters({
       profile: 'auth/profilConnected',
-      token: 'auth/getAuthToken'
+      token: 'auth/getAuthToken',
+      isLogin: 'auth/isLogged'
     })
   },
 
@@ -106,12 +107,24 @@ export const WhoIsIt = {
   },
 
   created() {
+    if(this.isLogin){    
     this.getAuth()
+
+    }
   }
 }
 
 export const knowWhoIsConnected = {
 
+
+  computed: {
+    ...mapGetters({
+      profile: 'auth/profilConnected',
+      token: 'auth/getAuthToken',
+      isLogin: 'auth/isLogged'
+    })
+  },
+  
   methods: {
     ...mapMutations({
       auth: 'auth/profilConnected',
@@ -131,7 +144,12 @@ export const knowWhoIsConnected = {
   },
 
   created() {
-    this.getAuth()
+   
+
+    if(this.isLogin){    
+      this.getAuth()
+  
+      }
   }
 }
 

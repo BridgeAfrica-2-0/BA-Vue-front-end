@@ -5,7 +5,7 @@
       <span class="t-color"> {{$t("general.Network")}} </span>
 
       <b-button 
-      v-if="display != 'BusinessFollower' "
+      v-if="display != 'BusinessFollower' && display != 'BusinessFollowerGuest' "
         class="float-right w-auto"
         @click="showmodal(true, 'add')"
         variant="primary"
@@ -93,6 +93,8 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
+import { isGuestUser } from '@/helpers';
+
 export default {
   data() {
     return {
@@ -123,6 +125,7 @@ export default {
         business_image: "",
         allow_business: 0,
       },
+      isGuestUser: isGuestUser
     };
   },
   beforeMount() {
@@ -154,18 +157,21 @@ export default {
   methods: {
     ...mapActions({
       addNetwork: "businessOwner/addNetwork",
-      getNetworks: "businessOwner/getNetworks",
+      getNetworks: isGuestUser ? "businessGuest/getNetworks": "businessOwner/getNetworks",
       editNetwork: "businessOwner/editNetwork",
     }),
 
     infiniteHandler($state) {
-      let url = "business/network/" + this.biz_id + "/" + this.page;
-
+      let url = "business/network/" + this.biz_id + "/" + this.page, dispatchMethod = "businessOwner/loadMore";
+      if (this.isGuestUser ) {
+        url = "guest/business/network/" + this.biz_id + "/" + this.page;
+        dispatchMethod = "businessGuest/loadMore";
+      }
       if (this.page == 1) {
         this.network.splice(0);
       }
       this.$store
-        .dispatch("businessOwner/loadMore", url)
+        .dispatch(dispatchMethod, url)
         .then(({ data }) => {
           console.log(data.data);
           if (data.data.length) {

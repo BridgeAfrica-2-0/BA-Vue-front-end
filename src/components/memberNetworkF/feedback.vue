@@ -97,7 +97,7 @@ export default {
     return {
       url: null,
       moment: moment,
-
+      islogin:'',
       filter: "0",
       filterData: false,
       spinner: false,
@@ -108,12 +108,12 @@ export default {
 
       options: [
         { value: "Improvement", text: this.$t('general.Suggestion_for_Improvement') },
-        { value: "Complaints", text: this.$t('general.Complaints')}
+        { value: "Complain", text: this.$t('general.Complaints')}
       ],
       filters: [
         { value: "0", text: "Any" },
          { value: "Improvement", text: this.$t('general.Suggestion_for_Improvement') },
-        { value: "Complaints", text: this.$t('general.Complaints')}
+        { value: "Complain", text: this.$t('general.Complaints')}
       ],
       feedbackForm: {
         title: "Improvement",
@@ -123,6 +123,8 @@ export default {
   },
   computed: {},
   mounted(){
+
+    this.islogin=this.$store.getters["auth/isLogged"];
     this.url = this.$route.params.id;
   },
   methods: {
@@ -147,21 +149,29 @@ export default {
       this.loading = true;
       this.feedbacks = [];
       this.filterData
-      console.log("searching...");
-      console.log(this.filterData);
+  
       this.$nextTick(() => {
         this.currentPage = 1;
         this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
       });
     },
     infiniteHandler($state) {
-      console.log("loop");
+
+
+      let url="network/"+this.url+"/feedbacks/"+this.currentPage;
+
+        if(!this.islogin){
+            url='guest/'+url;
+          }
+
+
+
       const data = this.getRequestDatas(this.filterData);
-      console.log('keyword: '+data);
+   
       let formData = new FormData();
       formData.append('keyword', data);
       this.axios
-        .post("network/"+this.url+"/feedbacks/"+this.currentPage, formData)
+        .post(url, formData)
         .then(({ data }) => {
         console.log(data);
         console.log(this.currentPage);

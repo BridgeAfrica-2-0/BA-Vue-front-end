@@ -72,6 +72,8 @@
 <script>
 import ProductCaroussel from "./ProductCaroussel";
 import ProductComments from "./ProductComments";
+import { isGuestUser } from "@/helpers";
+
 export default {
   name: "ProductDetails",
   props: {
@@ -97,6 +99,7 @@ export default {
       }),
       canShowModal: false,
       packageProduct: "basic",
+      isGuestUser: isGuestUser
     };
   },
   computed: {},
@@ -121,10 +124,11 @@ export default {
     },
   },
   mounted() {
-    console.log("product", this.product);
+    const dispatchMethod = this.isGuestUser ? 'getProductDetailsForGuest' : 'getProductDetails';
+    
     //get prooduct package type
     this.$store
-      .dispatch("productDetails/getProductDetails", this.product.id)
+      .dispatch("productDetails/"+dispatchMethod, this.product.id)
       .then((product) => {
         this.packageProduct = product.package[0] || this.packageProduct;
         console.log("Package for product : ", this.packageProduct);

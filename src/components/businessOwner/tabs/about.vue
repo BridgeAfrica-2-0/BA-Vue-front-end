@@ -646,6 +646,7 @@ import { required, email, minLength } from "vuelidate/lib/validators";
 import mapbox from "@/components/mapbox";
 import Multiselect from "vue-multiselect";
 import AutocompleteLocation from "@/components/AutocompleteLocation";
+import { isGuestUser } from '@/helpers';
 
 export default {
   components: {
@@ -711,7 +712,8 @@ export default {
       open: "Open for selected hours",
       tempo: {},
       displayHour: true,
-      displayHour1: true
+      displayHour1: true,
+      isGuestUser: isGuestUser
     };
   },
   watch: {
@@ -749,15 +751,16 @@ export default {
       onCancel: this.onCancel,
       color: "#e75c18",
     });
-    console.log("èèèè--- context", this.business_about_input);
+    
+    const dispatchMethod = this.isGuestUser ? "businessGuest": "businessOwner";
     this.$store
-      .dispatch("businessOwner/loadUserBusinessAbout", {
+      .dispatch(dispatchMethod+"/loadUserBusinessAbout", {
         // business_abobusiness_id: this.business_about_input,
         business_id: this.$route.params.id,
       })
       .then((response) => {
         this.business_about = JSON.parse(
-          JSON.stringify(this.$store.getters["businessOwner/getBusinessAbout"])
+          JSON.stringify(this.$store.getters[dispatchMethod+"/getBusinessAbout"])
         );
         // this.dayOfWorks = this.initialize(this.dayOfWorks);
         if(this.business_about.business_open_hours.length >= 1){
@@ -779,7 +782,7 @@ export default {
       })
       .finally(() => {
         this.business_about = JSON.parse(
-          JSON.stringify(this.$store.getters["businessOwner/getBusinessAbout"])
+          JSON.stringify(this.$store.getters[dispatchMethod+"/getBusinessAbout"])
         );
         console.log("-------", this.business_about);
         this.loading = true;
@@ -801,7 +804,8 @@ export default {
     showPen() {
       if (
         this.$route.name == "BusinessFollower" ||
-        this.$route.name == "BusinessEditor"
+        this.$route.name == "BusinessEditor" ||
+         this.$route.name == "BusinessFollowerGuest"
       ) {
         return false;
       } else {
@@ -1500,8 +1504,9 @@ export default {
 
     editBusiness() {
       console.log("editBusiness");
+      const endpoint = this.isGuestUser ? "guest/business/edit/" : "business/edit/";
       this.axios
-        .get("business/edit/" + this.business_id)
+        .get(endpoint + this.business_id)
         .then(({ data }) => {
           console.log("testing: ", data);
           this.setEditData(data.data);

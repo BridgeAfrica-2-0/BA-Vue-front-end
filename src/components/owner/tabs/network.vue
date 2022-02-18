@@ -127,6 +127,7 @@ export default {
   data() {
     return {
       page: 1,
+      islogin:'',
       foll_id: null,
       network: [],
       options: {
@@ -148,6 +149,8 @@ export default {
   },
 
   mounted() {
+
+     this.islogin=this.$store.getters["auth/isLogged"];
     this.foll_id = this.$route.params.id ? this.$route.params.id : "";
   },
 
@@ -177,10 +180,14 @@ export default {
     infiniteHandler($state) {
       console.log("loading network 1 1");
 
-      const url =
+      let url =
         this.type === "Follower"
           ? `profile/network/follower/`
           : `profile/network/following/`;
+
+           if(!this.islogin){
+            url='guest/'+url;
+          }
 
       axios
         .get(url + this.page + "?id=" + this.foll_id)

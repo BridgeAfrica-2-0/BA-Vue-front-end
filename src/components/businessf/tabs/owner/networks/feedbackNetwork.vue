@@ -95,6 +95,7 @@ export default {
   data() {
     return {
       url: null,
+      islogin:'',
       moment: moment,
       filter: "0",
       filterData: false,
@@ -104,12 +105,12 @@ export default {
       feedbacks: [],
       options: [
         { value: "Improvement", text: this.$t('_for_Improvement') },
-        { value: "Complaints", text: this.$t('Complaints') }
+        { value: "Complain", text: this.$t('Complaints') }
       ],
       filters: [
         { value: "0", text: "Any" },
         { value: "Improvement", text: this.$t('general.Suggestion_for_Improvement')},
-        { value: "Complaints", text: this.$t('general.Complaints') }
+        { value: "Complain", text: this.$t('general.Complaints') }
       ],
       feedbackForm: {
         title: "Improvement",
@@ -118,6 +119,7 @@ export default {
     };
   },
   mounted(){
+    this.islogin=this.$store.getters["auth/isLogged"];
     this.url = this.$route.params.id;
   },
   methods: {
@@ -149,29 +151,33 @@ export default {
     },
 
     infiniteHandler($state) {
-      console.log("loop");
+     
       const data = this.getRequestDatas(this.filterData);
-      console.log('keyword: '+data);
+     
       let formData = new FormData();
       formData.append('keyword', data);
       console.log("network/"+this.url+"/feedbacks/"+this.currentPage)
+
+      let url="network/"+this.url+"/feedbacks/"+this.currentPage;
+
+        if(!this.islogin){
+            url='guest/'+url;
+          }
+
       this.axios
-        .post("network/"+this.url+"/feedbacks/"+this.currentPage, formData)
+        .post(url, formData)
         .then(({ data }) => {
-        console.log(data.data);
-        console.log(this.currentPage);
-        console.log(Object.values(data.data));
+      
         let object = Object.values(data.data);
         if (object.length) {
-          console.log("Pushing data");
+     
           object.map((item) => {
             this.feedbacks.push(item);
-            console.log(item);
+          
           })
-          console.log(...data.data);
-          // this.feedbacks.push(...data.data);
+     
           this.currentPage += 1;
-          console.log(this.currentPage);
+        
           this.loading = false;
           $state.loaded();
         } else {
@@ -180,7 +186,7 @@ export default {
         }
       }) .catch((err) => {
         this.loading = false;
-        console.log({ err: err });
+     
       })
     },
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="lalala">
+  <div class="lalala">  
     <div class="border mt-2">
       <span>
         <h6 class="title m-3">
@@ -189,10 +189,14 @@ export default {
     },
 
     UserDetails() {   
+
+     
+
       this.$store
         .dispatch("networkProfileCommunitySidebar/getUserDetails", this.url)   
         .then(() => {
-          console.log("ohh year");
+        
+           console.log("loading user community");
         })
         .catch((err) => {
           console.log({ err: err });
@@ -201,10 +205,12 @@ export default {
 
 
     businessDetails() {
+
+   
       this.$store
         .dispatch("networkProfileCommunitySidebar/getBusinessDetails", this.url)
         .then(() => {
-          console.log("ohh year");
+             console.log("loading bix community");
         })
         .catch((err) => {
           console.log({ err: err });
@@ -213,11 +219,13 @@ export default {
 
 
     networkDetails() {
-      console.log("networkDetails");
+     
+      
+
       this.$store
         .dispatch("networkProfileCommunitySidebar/getNetworkDetails", this.url)
         .then(() => {
-          console.log("ohh year");
+         console.log("loading network community");
         })
         .catch((err) => {
           console.log({ err: err });

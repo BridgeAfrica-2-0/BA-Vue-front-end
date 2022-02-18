@@ -377,7 +377,7 @@ export default {
       businessPage: 1,
       adminpage: 1,
       editorspage: 1,
-
+      islogin:'',
       infiniteId: 1,
       ainfiniteId: 188,
       einfiniteId: 889,
@@ -401,6 +401,7 @@ export default {
   },
 
   mounted() {
+       this.islogin=this.$store.getters["auth/isLogged"];
     this.url = this.$route.params.id;
     //  this.getAdmins()
     //  this.getEditors()
@@ -450,6 +451,12 @@ export default {
           this.searchTitle;
       }
 
+
+       if(!this.islogin){
+            lien='guest/'+lien;
+          }
+
+
       this.axios
         .post(lien)
         .then(({ data }) => {
@@ -493,6 +500,11 @@ export default {
           this.searchTitle;
       }
 
+ if(!this.islogin){
+            lien='guest/'+lien;
+          }
+
+
       this.axios
         .post(lien)
         .then(({ data }) => {
@@ -533,6 +545,11 @@ export default {
           this.searchTitle;
       }
 
+       if(!this.islogin){
+            lien='guest/'+lien;
+          }
+
+
       this.axios
         .post(lien)
         .then(({ data }) => {
@@ -555,6 +572,8 @@ export default {
     //business infinite loading
 
     BinfiniteHandler($state) {
+
+      
       const data = this.searchTitle;
       console.log("keyword: " + data);
       let formData = new FormData();
@@ -572,6 +591,11 @@ export default {
           "?keyword=" +
           this.searchTitle;
       }
+
+       if(!this.islogin){
+            lien='guest/'+lien;
+          }
+
 
       this.axios
         .post(lien)

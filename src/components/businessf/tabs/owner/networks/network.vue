@@ -132,6 +132,7 @@ export default {
   data() {
     return {
       page: 1,
+      islogin:'',
       net_id: null,
       network: [],
       options: {
@@ -158,6 +159,7 @@ export default {
   },
 
   mounted() {
+    this.islogin=this.$store.getters["auth/isLogged"];
     this.net_id = this.$route.params.id;
   },
 
@@ -182,7 +184,12 @@ export default {
     infiniteHandler($state) {
      
 
-      const url = `network/community/networks/${this.net_id}/`
+      let url = `network/community/networks/${this.net_id}/`
+        if(!this.islogin){
+            url='guest/'+url;
+          }
+
+
       axios
         .get(url + this.page)
         .then(({ data }) => {

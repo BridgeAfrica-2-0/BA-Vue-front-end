@@ -318,7 +318,7 @@ const routes = [
     name: "Membar Network Follower",
     component: memberNetworkFollower,
     meta: {
-      auth: true,
+     // auth: true,
     },
 
   },

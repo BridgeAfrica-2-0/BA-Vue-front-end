@@ -36,19 +36,42 @@ export default {
   actions: {
 
 
-    getUserDetails( {commit}, networkId ){
+    getUserDetails( {commit,rootGetters}, networkId ){
+
+
+
+
+        let auth=rootGetters['auth/isLogged'];  
+        let url=`network/community/people/${networkId}`;
+  
+        if(!auth){    
+          url = `guest/network/community/people/${networkId}`; 
+        }
+
+        
+
       return axios
-      .get(`network/community/people/${networkId}`)
+      .get(url)
       .then(({ data }) => {
-          commit("setUserDetails", data.data);
+       commit("setUserDetails", data.data);
         console.log(data);
 
       })
     },
 
-    getBusinessDetails( {commit}, networkId ){
+    getBusinessDetails( {commit,rootGetters}, networkId ){
+
+
+      let auth=rootGetters['auth/isLogged'];  
+      let url=`network/community/businesses/${networkId}`;
+
+      if(!auth){    
+        url = `guest/network/community/businesses/${networkId}`; 
+      }
+
+
       return axios
-      .get(`network/community/businesses/${networkId}`)
+      .get(url)
       .then(({ data }) => {
           commit("setBusinessDetails", data.data);
         console.log(data);
@@ -56,9 +79,20 @@ export default {
       })
     },
 
-    getNetworkDetails( {commit}, networkId ){
+    getNetworkDetails( {commit,rootGetters}, networkId ){
+
+      
+      let auth=rootGetters['auth/isLogged'];  
+      let url=`network/community/networks/${networkId}`;
+
+      if(!auth){    
+        url = `guest/network/community/networks/${networkId}`; 
+      }
+
+
+
       return axios
-      .get(`network/community/networks/${networkId}`)
+      .get(url)
       .then(({ data }) => {
           commit("setnetworkDetails", data.data);
         console.log(data);

@@ -1569,6 +1569,7 @@ this.$refs.cropperr.getCroppedCanvas().toBlob((blob) => {
             this.infiniteId += 1;
             this.profileBusinesss = [];
             this.$refs.infiniteLoading.attemptLoad();
+            this.cancel()
             resolve(true);
           })
           .catch((err) => {

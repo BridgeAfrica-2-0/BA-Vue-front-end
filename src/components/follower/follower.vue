@@ -219,12 +219,12 @@ export default {
 
      this.foll_id = this.$route.params.id;
 
-    this.$store
-      .dispatch("follower/loadUserPostIntro", this.foll_id)
-      .then((response) => {})
-      .catch((error) => {   
-        console.log({ error: error });
-      });
+    // this.$store
+    //   .dispatch("follower/loadUserPostIntro", this.foll_id)
+    //   .then((response) => {})
+    //   .catch((error) => {   
+    //     console.log({ error: error });   
+    //   });
   },
 
   methods:{

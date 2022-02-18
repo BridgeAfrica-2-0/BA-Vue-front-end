@@ -427,7 +427,7 @@ const routes = [
     name: "Follower",
     component: Follower,
     meta: {
-      auth: true,
+    //  auth: true,
     },
   },
   

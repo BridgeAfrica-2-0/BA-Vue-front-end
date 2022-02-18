@@ -29,9 +29,9 @@
                     <p class="ml-3 textt text-left">
                      
                        
-                          <router-link :to="'business/'+item.id">
+                          <router-link :to="'/business/'+item.id">
 
-                      <strong class="title over" > {{ item.name }}  </strong> </router-link>   <br />
+                      <strong class="title over" > {{ item.name }}</strong> </router-link>   <br />
 
                       <span v-for="cat in item.category" :key="cat.name">
                         {{ cat.name }}
@@ -164,6 +164,7 @@ export default {
   data() {
     return {
       noBusiness: false,
+      islogin:'',
       foll_id: "",
       page: 1,
       busineses: [],
@@ -209,10 +210,12 @@ export default {
     },
 
     infiniteHandler($state) {
-      if (this.page == 1) {
-        this.busineses.splice(0);
-      }
+     
       let url = "business/user?page=" + this.page + "&id=" + this.foll_id;
+
+      if(!this.islogin){
+            url='guest/'+url;
+          }
 
       this.$store
         .dispatch("follower/loadMoreUserBusiness", url)
@@ -241,6 +244,8 @@ export default {
     },
   },
   mounted() {
+
+     this.islogin=this.$store.getters["auth/isLogged"];
     this.foll_id = this.$route.params.id;
     // this.$store
     // 	.dispatch("follower/profileBusiness", this.foll_id)

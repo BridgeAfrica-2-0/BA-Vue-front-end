@@ -214,6 +214,7 @@ export default {
       return this.isGuestUser ? this.$store.state.businessGuest.businessInfo: this.$store.state.businessOwner.businessInfo;
     },
      perPage() {
+      console.log(this.business_info.cover)
       if (this.business_info.cover) {
         if (this.business_info.cover.length == 1) {
           return 1;
@@ -283,8 +284,9 @@ export default {
       }
     },
 
-    $route(to, from) { console.log("----route--")
-      if ("#media" == to.hash) this.showCoverAlbum = true;
+    $route(to, from) { 
+      if ("#media" == to.hash)
+        this.showCoverAlbum = true;
 
       this.currentTab = this.tabs.findIndex((tab) => tab === to.hash);
     },
@@ -305,7 +307,7 @@ export default {
       const uri = !this.hasBeFollow ? `/follow-community` : `/unfollow`;
       const nextFollowState = !this.hasBeFollow ? 1 : 0;
       const data = {
-        id: this.business_info.id,
+        id: this.business_info.id ? this.business_info.id : this.$route.params.id,
         type: "business",
       };
 

@@ -21,6 +21,7 @@ export default {
     Business,
     Footer,
   },
+
   data() {
     return {
       tabIndex: null,
@@ -39,10 +40,6 @@ export default {
         this.isloaded = true;
       })
       .catch((error) => {
-        console.log({ error: error });
-
-        console.log(error.response.status);
-
         if (error.response.status == 404) {
           this.$router.push({ name: "notFound" });
         }
@@ -57,14 +54,10 @@ export default {
 
   watch: {
     $route(to, from) {
-      console.log(to.hash);
       this.tabIndex = this.tabs.findIndex((tab) => tab === to.hash);
 
-      console.log(from);
     },
   },
-  computed: {},
-  methods: {},
 };
 </script>
 

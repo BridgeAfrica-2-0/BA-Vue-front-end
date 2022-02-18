@@ -120,14 +120,38 @@ export default {
       commit("ownerPostImages", res.data);
     },
 
-    async getAlbumImages({ commit }, id) {
-      const res = await axios.get(`profile/album/pictures/${id}`);
+    async getAlbumImages({commit, rootGetters}, id) {
+
+      
+      let auth=rootGetters['auth/isLogged'];
+      let url=`profile/album/pictures/${id}`;
+
+      if(!auth){    
+        url =`guest/profile/album/pictures/${id}`; 
+      }
+
+
+      const res = await axios.get(url);
       commit("setAlbumImages", res.data.data);
     },
 
     // for albums
-    async getAlbums({ commit }, id) {
-      const res = await axios.get("profile/album/show?id="+id);
+    async getAlbums({commit, rootGetters},  id) {
+
+
+
+
+        let auth=rootGetters['auth/isLogged'];
+        let url="profile/album/show?id="+id;
+  
+        if(!auth){    
+          url ="guest/profile/album/show?id="+id ; 
+        }
+
+
+
+
+      const res = await axios.get(url);
       commit("setAlbums", res.data.data.album);
     },
 
@@ -145,8 +169,19 @@ export default {
     },
 
     // for images
-    async getImages({ commit }, id) {
-      const res = await axios.get("profile/post/media?id="+id);
+    async getImages({commit, rootGetters}, id) {
+
+        let auth=rootGetters['auth/isLogged'];
+        let url="profile/post/media?id="+id
+  
+        if(!auth){    
+          url ="guest/profile/post/media?id="+id  
+        }
+
+
+
+
+      const res = await axios.get(url);   
       commit("setImages", res.data.data);
     },
 

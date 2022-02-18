@@ -83,7 +83,8 @@ export const WhoIsIt = {
   computed: {
     ...mapGetters({
       profile: 'auth/profilConnected',
-      token: 'auth/getAuthToken'
+      token: 'auth/getAuthToken',
+      isLogin: 'auth/isLogged'
     })
   },
 
@@ -106,12 +107,24 @@ export const WhoIsIt = {
   },
 
   created() {
+    if(this.isLogin){    
     this.getAuth()
+
+    }
   }
 }
 
 export const knowWhoIsConnected = {
 
+
+  computed: {
+    ...mapGetters({
+      profile: 'auth/profilConnected',
+      token: 'auth/getAuthToken',
+      isLogin: 'auth/isLogged'
+    })
+  },
+  
   methods: {
     ...mapMutations({
       auth: 'auth/profilConnected',
@@ -130,7 +143,12 @@ export const knowWhoIsConnected = {
   },
 
   created() {
-    this.getAuth()
+   
+
+    if(this.isLogin){    
+      this.getAuth()
+  
+      }
   }
 }
 
@@ -496,7 +514,7 @@ export const ResizeMediaImage = {
 
   computed: {
     getStyle() {
-      return ['network'].includes(this.type) ? "width: 226px !important;height: 226px !important" : "width: 250px !important;height: 250px !important"
+      return ['network'].includes(this.type) ? "width: 226px !important;height: 226px !important" : "width: 200px !important;height: 200px !important"
     }
   },
 

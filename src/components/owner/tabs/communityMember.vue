@@ -145,6 +145,7 @@ export default {
   data() {
     return {
       page: 1,
+       islogin:'',
       foll_id: null,
       users: [],
       infiniteId: +new Date(),
@@ -303,6 +304,10 @@ export default {
       } else {
         url = "profile/user/following/";
       }
+
+       if(!this.islogin){
+            url='guest/'+url;
+          }
 
       axios
         .get(

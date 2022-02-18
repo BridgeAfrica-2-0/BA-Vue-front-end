@@ -288,7 +288,8 @@
         </div>
       </div>
 
-  
+ 
+  <div   v-if="islogin" >    
        <Post
         v-for="(item, index) in owner_post"
         :key="index"
@@ -300,16 +301,37 @@
         :deletePost="() => deletePost(item)"
         
       />
+</div>
+<div v-else>  
+      <unAuthPost  
+        v-for="(item, index) in owner_post"
+        :key="index"
+        :post="item"
+        :mapvideo="() => mapvideo(item.media)"
+        :mapmediae="() => mapmediae(item.media)"
+        :businessLogo="item.profile_picture"
+        :editPost="() => editPost(item)"
+        :deletePost="() => deletePost(item)"
+        
+         />
+</div>
+      
 
      
 
-      <div class="mx-auto text-center my-5" >
-        <p class="my-2" v-if="!owner_post.length">
-          No Post found
-        </p>
-      </div>
 
-      <infinite-loading :identifier="infiniteId" ref="infiniteLoading" @infinite="infiniteHandler"></infinite-loading>
+      <infinite-loading :identifier="infiniteId" ref="infiniteLoading" @infinite="infiniteHandler">    
+
+
+         <div class="text-red" slot="no-more">
+            {{ $t("network.No_More_Request") }}
+          </div>
+          <div class="text-red mt-5" slot="no-results">
+            {{ $t("network.No_More_Request") }}
+          </div>
+
+
+      </infinite-loading>
     
   </div>
 </template>
@@ -318,6 +340,7 @@
 
 
 import Post from '@/components/businessOwner/ownerPostComponent';
+import unAuthPost from '@/components/businessOwner/unAuthOwnerPostComponent';
 
 import moment from 'moment';
 import axios from 'axios';
@@ -325,7 +348,8 @@ import axios from 'axios';
 export default {
   name: 'postNetwork',
   components: {
-   Post
+   Post,
+   unAuthPost
   },
   data() {
     return {
@@ -333,6 +357,8 @@ export default {
         autoplay: 0,
       },
       moment: moment,
+      owner_post:[],
+      islogin:'',
       page: 1,
       infiniteId: +new Date(),
       post: this.$store.state.businessOwner.ownerPost,
@@ -416,12 +442,14 @@ export default {
     },
 
     infiniteHandler($state) {
-      console.log('user/post/' + this.page);
+    
       let url = 'user/post/' + this.page+'?id='+this.$route.params.id;
 
-      if (this.page == 1) {
-        this.owner_post.splice(0);
-      }
+       if(!this.islogin){
+            url='guest/profile/'+url;
+          }
+
+     
       this.$store
         .dispatch('profile/loadMore', url)
 
@@ -804,15 +832,13 @@ export default {
       return this.$store.getters['profile/getUserPostIntro'];
     },
 
-    owner_post() {
-      return this.$store.state.profile.ownerPost;
-    },
-
+   
     profileNamePost() {
       return 'yoo';
     },
   },
   mounted() {
+    this.islogin=this.$store.getters["auth/isLogged"];
     this.url = this.$route.params.id;
   },
 };

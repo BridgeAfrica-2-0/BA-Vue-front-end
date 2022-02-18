@@ -107,6 +107,7 @@ export default {
   watch: {
     selected(newValue, oldValue) {
       // Handle changes in individual notifications checkboxes
+      //console.log(newValue)
       if (newValue.length === 0) {
         this.indeterminate = false;
         this.selectAll = false;
@@ -155,7 +156,7 @@ export default {
     readAll(data) {
       let formData = new FormData();
       for (let i = 0; i < data.length; i++) {
-          console.log(data[i]);
+          //console.log(data[i]);
           formData.append('ids['+i+']', data[i]);
       }
       let res = this.readNotifiactions(formData);
@@ -176,7 +177,7 @@ export default {
       this.checked = false;
       let formData = new FormData();
       for (let i = 0; i < data.length; i++) {
-          console.log(data[i]);
+          //console.log(data[i]);
           formData.append('ids['+i+']', data[i]);
       }
       let res = this.deleteNotifications(formData);
@@ -199,18 +200,18 @@ export default {
     },
     
     select(checked) {
-      console.log("this.selectAll: "+this.selectAll);
-      console.log("checked: "+checked);
+      /* console.log("this.selectAll: "+this.selectAll);
+      console.log("checked: "+checked); */
       this.selected = [];
       if (checked) {
         for (let notification in this.getNotificationsStore) {
             this.selected.push(this.getNotificationsStore[notification].id.toString());
-            console.log("this.notifications[notification].id: "+this.getNotificationsStore[notification].id);
+            //console.log("this.notifications[notification].id: "+this.getNotificationsStore[notification].id);
         }
       }
     },
     updateCheckall: function() {
-      if (this.notifications.length === this.selected.length) {
+      if (this.getNotificationsStore.length === this.selected.length) {
         this.selectAll = true;
       } else {
         this.selectAll = false;

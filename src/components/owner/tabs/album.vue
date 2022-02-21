@@ -134,7 +134,7 @@ import { mapActions, mapGetters, mapMutations } from 'vuex';
 
 import defaultImage from '@/assets/img/nothing.jpg';
 
-import { fullMediaLink } from '@/helpers';
+import { fullMediaLink,isGuestUser } from '@/helpers';
 
 import { ResizeMediaImage } from '@/mixins'
 
@@ -233,21 +233,34 @@ export default {
 
   computed: {
     ...mapGetters({
-      getAlbumsProfile: 'UserProfileOwner/getAlbums',
-      getAlbumImageProfile: 'UserProfileOwner/getAlbumImage',
-      albumImagesProfile: 'UserProfileOwner/getalbumImages',
 
-      getAlbumsBusiness: 'businessOwner/getAlbums',
-      getAlbumImageBusiness: 'businessOwner/getAlbumImage',
-      albumImagesBusiness: 'businessOwner/getalbumImages',
+        getAlbumsProfile: 'UserProfileOwner/getAlbums',
+        getAlbumImageProfile: 'UserProfileOwner/getAlbumImage',
+        albumImagesProfile: 'UserProfileOwner/getalbumImages',
 
-      getAlbumsNetwork: 'networkProfileMedia/getAlbums',
-      getAlbumImageNetwork: 'networkProfileMedia/getAlbumImage',
-      albumImagesNetwork: 'networkProfileMedia/getAlbumImages',
+        getAlbumsNetwork: 'networkProfileMedia/getAlbums',
+        getAlbumImageNetwork: 'networkProfileMedia/getAlbumImage',
+        albumImagesNetwork: 'networkProfileMedia/getAlbumImages',
 
-      profile: 'auth/profilConnected'
+        profile: 'auth/profilConnected'
+
     }),
 
+    getAlbumsBusiness(){ 
+      const isAuth = isGuestUser()
+      return isAuth ? this.$store.getters["businessGuest/getAlbums"] : this.$store.getters["businessOwner/getAlbums"]
+    },
+
+    getAlbumImageBusiness(){
+      const isAuth = isGuestUser()
+      return isAuth ? this.$store.getters["businessGuest/getAlbumImage"]:this.$store.getters["businessOwner/getAlbumImage"]
+    },
+
+    albumImagesBusiness(){
+      const isAuth = isGuestUser()
+      return isAuth ? this.$store.getters["businessGuest/getalbumImages"]:this.$store.getters["businessOwner/getalbumImages"]
+    },
+    
     canCreateAlbum() {
       return this.albumInfo.name ? false : true;
     },
@@ -290,7 +303,6 @@ export default {
       fetchAlbums: 'UserProfileOwner/getAlbums',
 
       createAlbumBusiness: 'businessOwner/createAlbum',
-      getAlbumProfileImages: 'businessOwner/getAlbumImages',
       fetchAlbumsBusiness: 'businessOwner/getAlbums',
       deleteAlbumBusiness: 'businessOwner/deletedAlbum',
       updateAlbumBusiness: 'businessOwner/updatedAlbum',
@@ -301,6 +313,13 @@ export default {
       deleteAlbumNetwork: 'networkProfileMedia/deletedAlbum',
       updateAlbumNetwork: 'networkProfileMedia/updatedAlbum',
     }),
+
+
+    getAlbumProfileImages(){
+      const isAuth = isGuestUser()
+      return isAuth ? this.$store.getters["businessGuest/getAlbumImages"] : this.$store.getters["businessOwner/getAlbumImages"]
+
+    },
 
     getFullMediaLink: fullMediaLink,
 

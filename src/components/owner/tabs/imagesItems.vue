@@ -1,96 +1,5 @@
 <template>
-  <!-- <div  
-    :ref="`sHowMedia-${im.id}`"
-    style="`${getStyle};position:relative`"
-  >
-      <b-img
-        v-if="typeOfMedia() == 'image' && !loading"
-        class="card-img btn p-0 album-img "
-        
-        :src="getFullMediaLink()"
-        alt="media_img"
-        v-b-modal="`modal-${im.id}`"
-        v-bind="imageProps"
-        :style="getStyle"
-      ></b-img>
-
-    <video
-      :style="getStyle"
-      controls
-      v-else-if="typeOfMedia() == 'video' && !loading"
-      class="card-img btn p-0 album-img"
-    >
-      <source :src="getFullMediaLink()" />
-    </video>
-    <youtube
-      :style="getStyle"
-      class="card-img btn p-0 album-img"
-      v-if="typeOfMedia == 'youtube' && !loading"
-      :video-id="getYoutubeKey()"
-      :player-vars="playerVars"
-    ></youtube>
-
-    <div class="botmediadess-position" v-if="loading">
-      <b-spinner
-        style="width: 3rem; height: 3rem; color: #e75c18"
-        :label="$t('profileowner.Large_Spinner')"
-      ></b-spinner>
-    </div>
-    <b-modal hide-footer :id="`modal-${im.id}`" title="Details" size="md">
-      <img
-        class="card-img"
-        :src="getFullOriginalMediaLink()"
-        @click="() => showImg()"
-        alt="media_img"
-      />
-      <p class="my-4">{{ content }}</p>
-    </b-modal>
-    <div class="mediadesc" v-if="!['youtube'].includes(typeOfMedia())">
-      <ul class="navbar-nav pull-right options">
-        <li class="nav-item dropdown m-0 p-0">
-          <b-dropdown
-            size="sm"
-            class="float-right"
-            variant="link"
-            toggle-class="text-decoration-none"
-            no-caret
-          >
-            <template #button-content>
-              <b-icon icon="three-dots-vertical" color="white" variant="light">
-              </b-icon>
-            </template>
-
-            <b-dropdown-item @click="onDownloadPic()">
-              {{ $t("profileowner.Download") }}</b-dropdown-item
-            >
-
-            <b-dropdown-item
-              href="#"
-              @click="onSetProfilePic()"
-              v-if="isEditor && !['video'].includes(typeOfMedia())"
-            >
-              {{ $t("profileowner.Make_Profile_Picture") }}
-            </b-dropdown-item>
-
-            <b-dropdown-item
-              @click="onSetCoverPic()"
-              v-if="
-                isEditor &&
-                  !['video'].includes(typeOfMedia()) &&
-                  type != 'network'
-              "
-            >
-              {{ $t("profileowner.Make_Cover_Photo") }}
-            </b-dropdown-item>
-            <b-dropdown-item href="#" @click="onDeleteImage()" v-if="isEditor">
-              {{ $t("profileowner.Delete") }}
-            </b-dropdown-item>
-          </b-dropdown>
-        </li>
-      </ul>
-    </div>
-  </div> -->
-
+  
   <div class="img-gall">
       <b-img
         v-if="typeOfMedia() == 'image' && !loading"
@@ -175,12 +84,13 @@
       />
       <p class="my-4">{{ content }}</p>
     </b-modal>
+    
   </div>
 </template>
 
 <script>
 
-import { mapMutations } from 'vuex'
+import { mapMutations,mapGetters } from 'vuex'
 
 export default {
   props: [
@@ -220,6 +130,12 @@ export default {
         cover: ({ media_url }) => this.addCoverPictureProfile(media_url),
       },
     };
+  },
+
+  computed:{
+    ...mapGetters({
+      auth: "auth/profilConnected"
+    })
   },
 
   data() {

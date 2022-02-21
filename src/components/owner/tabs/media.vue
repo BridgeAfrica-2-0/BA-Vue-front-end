@@ -107,7 +107,7 @@ export default {
       strategy: null,
       tabIndex: 0,
       addItem: false,
-      isGuestUser: isGuestUser
+      isGuestUser: isGuestUser()
     };
   },
 
@@ -119,10 +119,14 @@ export default {
   computed: {
     ...mapGetters({
       getProfilePictures: "UserProfileOwner/getImages",
-      getBusinessPictures: "businessOwner/getAllImages",
       getNetworkPictures: "networkProfileMedia/getImages",
       profile: "auth/profilConnected",
     }),
+
+    getBusinessPictures(){
+      return this.isGuestUser ? this.$store.getters["businessGuest/getAllImages"] : this.$store.getters["businessOwner/getAllImages"]
+    }
+
   },
 
   methods: {
@@ -207,6 +211,7 @@ export default {
     }
     const dispatchMethod = this.isGuestUser ? 'businessGuest' : 'businessOwner';
     if (this.showCoverAlbum) this.tabIndex = 1;
+
     this.strategy = {
       business: () => ({
         album: dispatchMethod+"/getAlbums",

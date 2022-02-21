@@ -39,7 +39,7 @@
       </b-modal>
 
       <div
-        :style="getStyle"
+        
         class="createp img-gall image-wrapp img-size"
         v-if="isEditor ? (!canUpload ? true : false) : false"
         @click="$refs.movie.click()"
@@ -182,7 +182,11 @@ export default {
   },
 
   created() {
+    
+
     this.allImages = this.images
+
+
    
     this.url = this.$route.params.id;
 
@@ -323,15 +327,9 @@ export default {
     },
 
     removePicture(imageID, key) {
-      const newImage = this.allImages.map((im, index) => {
-        if (index == key) {
-          return im.media.filter((i) => i.id != imageID);
-        } else {
-          return im;
-        }
-      });
+      const newImages = this.allImages.filter( image => image.media.id != imageID );
 
-      this.allImages = newImage;
+      this.allImages = newImages;
     },
 
     downloadPic(media) {
@@ -368,7 +366,7 @@ export default {
 
     deleteImage(id, key) {
       this.loading = true;
-      this.pattern[this.type]()
+      return this.pattern[this.type]()
         .deleteImagePicture(id)
         .then(() => {
           this.removePicture(id, key);
@@ -389,7 +387,7 @@ export default {
           this.loading = false;
           this.flashMessage.show({
             status: "error",
-            message: error.response.data.message,
+            message: "something wrong happen",
           });
           return false;
         });
@@ -405,7 +403,7 @@ export default {
           ? { businessID: this.$route.params.id, id: id }
           : id;
 
-      this.pattern[this.type]()
+      return this.pattern[this.type]()
         .setCoverPicture(data)
         .then(() => {
           this.loading = false;
@@ -413,7 +411,7 @@ export default {
             status: "success",
             message: "Cover Picture succesfully set",
           });
-          return false;
+          return true;
         })
         .catch((error) => {
           this.sending = false;

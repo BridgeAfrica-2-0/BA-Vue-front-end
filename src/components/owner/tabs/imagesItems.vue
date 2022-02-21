@@ -292,8 +292,9 @@ export default {
           } catch (error) {
             console.error(error);
           }
+          loader.hide()
         })
-        .finally(() => loader.hide());
+        .catch(() => loader.hide());
     },
     //set image as profile pic
 
@@ -316,7 +317,7 @@ export default {
             console.error(error);
           }
         })
-        .finally(() => loader.hide());
+        .catch(() => loader.hide());
     },
 
   },

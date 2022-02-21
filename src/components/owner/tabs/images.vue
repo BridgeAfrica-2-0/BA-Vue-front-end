@@ -5,7 +5,7 @@
       :label="$t('profileowner.Large_Spinner')"
     ></b-spinner>
   </div>
-  <div fluid v-else>
+  <div fluid v-else class="container-fluid">
     <p v-if="!allImages.length" style="font-size: 3rem">
       {{ $t("profileowner.No_items_found") }}
     </p>
@@ -37,10 +37,10 @@
           {{ $t("profileowner.Publish") }}</b-button
         >
       </b-modal>
-
+      <div class="row">
       <div
         
-        class="createp img-gall image-wrapp img-size"
+        class="createp img-gall dasher"
         v-if="isEditor ? (!canUpload ? true : false) : false"
         @click="$refs.movie.click()"
       >
@@ -89,7 +89,7 @@
         @hide="handleHide"
       >
       </vue-easy-lightbox>
-
+      </div>
     </div>
   </div>
  
@@ -539,6 +539,9 @@ export default {
   align-self: center !important;
   margin: auto;
   display: block !important;
+}
+.dasher{
+  border: 4px dashed #e75c18;
 }
 
 </style>

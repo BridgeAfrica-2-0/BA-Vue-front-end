@@ -9,7 +9,7 @@
       </b-col>
 
       <b-col md="8" lg="7" xl="8">
-        <Post   class="postpadding" />
+        <Post />
       </b-col>
     </b-row>
   </div>

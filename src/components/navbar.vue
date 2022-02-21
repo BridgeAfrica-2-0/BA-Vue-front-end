@@ -832,20 +832,27 @@ export default {
     },
 
     newRedirection(type) {
-      const newPath = this.redirectionPatterns[type][this.user.user_type]();
+      try {
+        console.log(this.redirectionPatterns[type])
+        const newPath = this.redirectionPatterns[type][this.user.user_type]();
 
-      if (newPath) {
-        let path = { name: newPath.name };
+        if (newPath) {
+          let path = { name: newPath.name };
 
-        if (newPath.params)
-          path = Object.assign(path, { params: newPath.params });
+          if (newPath.params)
+            path = Object.assign(path, { params: newPath.params });
 
-        if (newPath.query) path = Object.assign(path, { query: newPath.query });
+          if (newPath.query) path = Object.assign(path, { query: newPath.query });
 
-        return path;
+          return path;
+        }
+
+        return { name: this.$route.name };
+      
+      }catch(err){
+        console.log(err)
       }
-
-      return { name: this.$route.name };
+      
     },
 
     getKeyword() {

@@ -189,7 +189,7 @@ export default {
     this.strategy = {
       business: () => ({
         albums: this.getAlbumsBusiness,
-        showalbum: this.getAlbumProfileImages,
+        showalbum: isGuestUser() ?  this.getAlbumProfileImagesGuest : this.getAlbumProfileImages,
         showAlbumImages: this.albumImagesBusiness,
         createAlbum: this.createAlbumBusiness,
         fetchAlbums: this.fetchAlbumsBusiness,
@@ -306,6 +306,8 @@ export default {
       fetchAlbumsBusiness: 'businessOwner/getAlbums',
       deleteAlbumBusiness: 'businessOwner/deletedAlbum',
       updateAlbumBusiness: 'businessOwner/updatedAlbum',
+      getAlbumProfileImages: "businessOwner/getAlbumImages",
+      getAlbumProfileImagesGuest: "businessGuest/getAlbumImages",
 
       createAlbumNetwork: 'networkProfileMedia/createAlbum',
       getAlbumNetworkImages: 'networkProfileMedia/getAlbumImages',
@@ -314,12 +316,6 @@ export default {
       updateAlbumNetwork: 'networkProfileMedia/updatedAlbum',
     }),
 
-
-    getAlbumProfileImages(){
-      const isAuth = isGuestUser()
-      return isAuth ? this.$store.getters["businessGuest/getAlbumImages"] : this.$store.getters["businessOwner/getAlbumImages"]
-
-    },
 
     getFullMediaLink: fullMediaLink,
 

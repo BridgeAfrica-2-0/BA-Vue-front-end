@@ -63,10 +63,23 @@ export default {
       localStorage.setItem("lang", language); // Whenever we change the appLanguage we save it to the localStorage
     },
 
-
-    setUserDataa(state, userData) {
+    upUserData(state, userData) {
+            
+      console.log('setting user data');
+      console.log(userData);
       state.user.user = userData.user;
-      localStorage.setItem("user.user", JSON.stringify(userData.user))
+      localStorage.setItem("user.user", JSON.stringify(userData.user)) ;
+      console.log(state.user);
+    },
+
+       
+    setUserDataa(state, userData) {
+       
+      console.log('setting user data');
+      console.log(userData);
+      state.user.user = userData.user;
+      console.log(state.user);
+      localStorage.setItem("user.user", JSON.stringify(userData.user))  
     },
 
     setSignupData(state, userData) {
@@ -245,8 +258,9 @@ export default {
     completeWelcome({ commit }) {
       // localStorage.removeItem('user');
       return axios.get('user/completewelcome').then(({ data }) => {
-        console.log(data);
-        commit("setUserDataa", data.data);
+        console.log(data.data);
+       // commit('setUserDataa', data.data);
+        commit('upUserData', data.data);
       });
     },
 

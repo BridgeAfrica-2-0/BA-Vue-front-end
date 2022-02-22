@@ -366,9 +366,16 @@ export default {
 
   created() {
 
-     if (this.Profile_complete == null) {
-        this.showcompleteprofile=true;    
-      } 
+       
+    this.$store
+      .dispatch('profile/loadUserPostIntro', null)
+      .then((response) => {
+       
+      })
+      .catch((error) => {
+      
+      });
+
     
     this.checkIfItNetwork();
 
@@ -384,6 +391,13 @@ export default {
   },
 
   mounted(){
+
+   
+
+     if (this.Profile_complete == null) {
+        this.showcompleteprofile=true;    
+      } 
+
     this.$store
       .dispatch("ProfileAndBusinessDetails/getdetails")
       .then((response) => {
@@ -411,7 +425,7 @@ export default {
     },
     Profile_complete(){
 
-      return this.$store.state.auth.user.user.profile_complete
+      return this.$store.state.profile.profileIntro.user.profile_complete;
     }
   },
 

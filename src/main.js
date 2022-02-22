@@ -205,7 +205,10 @@ new Vue({
     i18n,
     created() {
         let userInfo = localStorage.getItem('user');
-        i18n.locale = localStorage.getItem('lang');
+        const browserLanguage = window.navigator.userLanguage || window.navigator.language;
+        
+        this.$i18n.locale =  "fr-Fr" == browserLanguage ? 'fr' : 'en'
+
         let lang = localStorage.getItem('lang') ? localStorage.getItem('lang') : "en";
 
         if (userInfo) {

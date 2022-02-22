@@ -70,7 +70,7 @@
 		methods: {
 			setLocale(lang) {
 				this.$i18n.locale = lang;
-				this.togglenav();
+				//this.togglenav();
 				sessionStorage.setItem("locale", lang);
 			},
 		},

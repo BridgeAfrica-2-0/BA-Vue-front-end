@@ -5,7 +5,7 @@
       :label="$t('profileowner.Large_Spinner')"
     ></b-spinner>
   </div>
-  <div fluid v-else>
+  <div fluid v-else class="container-fluid">
     <p v-if="!allImages.length" style="font-size: 3rem">
       {{ $t("profileowner.No_items_found") }}
     </p>
@@ -37,10 +37,10 @@
           {{ $t("profileowner.Publish") }}</b-button
         >
       </b-modal>
-
+      <div class="row">
       <div
-        :style="getStyle"
-        class="createp img-gall image-wrapp img-size"
+        
+        class="createp img-gall dasher"
         v-if="isEditor ? (!canUpload ? true : false) : false"
         @click="$refs.movie.click()"
       >
@@ -63,10 +63,11 @@
       </div>
    
           <Picture
-            class="img-gall" v-for="(im, index) in allImages" :key="index"
+             v-for="(im, index) in allImages" :key="index"
             :im="im"
             :typeOfMedia="() => typeOfMedia(im.media.path)"
             :getFullMediaLink="() => getFullMediaLink(im.media.preview_url)"
+            :getFullOriginalMediaLink="() => getFullMediaLink(im.media.path)"
             :getYoutubeKey="() => getYoutubeKey(getFullMediaLink(im.media.path))"
             :showImg="() => showImg(getFullMediaLink(im.media.path))"
             :downloadPic="() => downloadPic(im)"
@@ -78,7 +79,7 @@
             :isEditor="isEditor"
             :type="type"
             :getStyle="getStyle"
-            :style="getStyle"
+            
           />
         
       <vue-easy-lightbox
@@ -88,7 +89,7 @@
         @hide="handleHide"
       >
       </vue-easy-lightbox>
-
+      </div>
     </div>
   </div>
  
@@ -181,7 +182,11 @@ export default {
   },
 
   created() {
+    
+
     this.allImages = this.images
+
+
    
     this.url = this.$route.params.id;
 
@@ -296,10 +301,8 @@ export default {
     },
 
     loadImages() {
-      const pictures = this.images
-        .filter((e) => e.media.length)
-        .map((e) => {
-          return this.getFullMediaLink(e.media[0].path);
+      const pictures = this.images.map((e) => {
+          return this.getFullMediaLink(e.media.path);
         });
       this.Slideimges = pictures;
     },
@@ -324,15 +327,9 @@ export default {
     },
 
     removePicture(imageID, key) {
-      const newImage = this.allImages.map((im, index) => {
-        if (index == key) {
-          return im.media.filter((i) => i.id != imageID);
-        } else {
-          return im;
-        }
-      });
+      const newImages = this.allImages.filter( image => image.media.id != imageID );
 
-      this.allImages = newImage;
+      this.allImages = newImages;
     },
 
     downloadPic(media) {
@@ -369,7 +366,7 @@ export default {
 
     deleteImage(id, key) {
       this.loading = true;
-      this.pattern[this.type]()
+      return this.pattern[this.type]()
         .deleteImagePicture(id)
         .then(() => {
           this.removePicture(id, key);
@@ -390,7 +387,7 @@ export default {
           this.loading = false;
           this.flashMessage.show({
             status: "error",
-            message: error.response.data.message,
+            message: "something wrong happen",
           });
           return false;
         });
@@ -406,7 +403,7 @@ export default {
           ? { businessID: this.$route.params.id, id: id }
           : id;
 
-      this.pattern[this.type]()
+      return this.pattern[this.type]()
         .setCoverPicture(data)
         .then(() => {
           this.loading = false;
@@ -414,7 +411,7 @@ export default {
             status: "success",
             message: "Cover Picture succesfully set",
           });
-          return false;
+          return true;
         })
         .catch((error) => {
           this.sending = false;
@@ -542,6 +539,9 @@ export default {
   align-self: center !important;
   margin: auto;
   display: block !important;
+}
+.dasher{
+  border: 4px dashed #e75c18;
 }
 
 </style>

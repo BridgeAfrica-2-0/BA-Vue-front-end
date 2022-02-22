@@ -3,20 +3,18 @@
     <div class="container-fluid">
       <div class="row" v-if="!showalbum">
         
-          <div  :style="getStyle" class="createp img-gall image-wrapp img-size" v-if="isEditor" v-b-modal.createalbumModal>
-            <div class="">
-              <a>
+          <div  class="createp img-gall dasher" v-if="isEditor" v-b-modal.createalbumModal>
+            
                 <div class="drag-textt">
                   <fas-icon :icon="['fas', 'plus']" />
                   <h3>{{ $t('profileowner.Create_Album') }}</h3>
                 </div>
-              </a>
-            </div>
+             
           </div>
 
           <b-modal hide-footer :title="$t('profileowner.Create_album')" id="createalbumModal">
             <div ref="creatform">
-              <b-form>
+              <b-form @submit="createAlbums">
                 <b-form-input :placeholder="$t('profileowner.Album_name')" v-model="albumInfo.name"></b-form-input>
                 <b-button class="mt-2" variant="primary" @click="createAlbums" :disabled="loading || canCreateAlbum">
                   {{ $t('profileowner.Create') }}</b-button
@@ -26,7 +24,6 @@
           </b-modal>
 
           <AlbumItem
-            :style="getStyle"
             v-for="album in strategy[type]().albums"
             :key="album.id"
             :album="album"
@@ -137,7 +134,7 @@ import { mapActions, mapGetters, mapMutations } from 'vuex';
 
 import defaultImage from '@/assets/img/nothing.jpg';
 
-import { fullMediaLink } from '@/helpers';
+import { fullMediaLink,isGuestUser } from '@/helpers';
 
 import { ResizeMediaImage } from '@/mixins'
 
@@ -192,7 +189,7 @@ export default {
     this.strategy = {
       business: () => ({
         albums: this.getAlbumsBusiness,
-        showalbum: this.getAlbumProfileImages,
+        showalbum: isGuestUser() ?  this.getAlbumProfileImagesGuest : this.getAlbumProfileImages,
         showAlbumImages: this.albumImagesBusiness,
         createAlbum: this.createAlbumBusiness,
         fetchAlbums: this.fetchAlbumsBusiness,
@@ -236,21 +233,34 @@ export default {
 
   computed: {
     ...mapGetters({
-      getAlbumsProfile: 'UserProfileOwner/getAlbums',
-      getAlbumImageProfile: 'UserProfileOwner/getAlbumImage',
-      albumImagesProfile: 'UserProfileOwner/getalbumImages',
 
-      getAlbumsBusiness: 'businessOwner/getAlbums',
-      getAlbumImageBusiness: 'businessOwner/getAlbumImage',
-      albumImagesBusiness: 'businessOwner/getalbumImages',
+        getAlbumsProfile: 'UserProfileOwner/getAlbums',
+        getAlbumImageProfile: 'UserProfileOwner/getAlbumImage',
+        albumImagesProfile: 'UserProfileOwner/getalbumImages',
 
-      getAlbumsNetwork: 'networkProfileMedia/getAlbums',
-      getAlbumImageNetwork: 'networkProfileMedia/getAlbumImage',
-      albumImagesNetwork: 'networkProfileMedia/getAlbumImages',
+        getAlbumsNetwork: 'networkProfileMedia/getAlbums',
+        getAlbumImageNetwork: 'networkProfileMedia/getAlbumImage',
+        albumImagesNetwork: 'networkProfileMedia/getAlbumImages',
 
-      profile: 'auth/profilConnected'
+        profile: 'auth/profilConnected'
+
     }),
 
+    getAlbumsBusiness(){ 
+      const isAuth = isGuestUser()
+      return isAuth ? this.$store.getters["businessGuest/getAlbums"] : this.$store.getters["businessOwner/getAlbums"]
+    },
+
+    getAlbumImageBusiness(){
+      const isAuth = isGuestUser()
+      return isAuth ? this.$store.getters["businessGuest/getAlbumImage"]:this.$store.getters["businessOwner/getAlbumImage"]
+    },
+
+    albumImagesBusiness(){
+      const isAuth = isGuestUser()
+      return isAuth ? this.$store.getters["businessGuest/getalbumImages"]:this.$store.getters["businessOwner/getalbumImages"]
+    },
+    
     canCreateAlbum() {
       return this.albumInfo.name ? false : true;
     },
@@ -293,10 +303,11 @@ export default {
       fetchAlbums: 'UserProfileOwner/getAlbums',
 
       createAlbumBusiness: 'businessOwner/createAlbum',
-      getAlbumProfileImages: 'businessOwner/getAlbumImages',
       fetchAlbumsBusiness: 'businessOwner/getAlbums',
       deleteAlbumBusiness: 'businessOwner/deletedAlbum',
       updateAlbumBusiness: 'businessOwner/updatedAlbum',
+      getAlbumProfileImages: "businessOwner/getAlbumImages",
+      getAlbumProfileImagesGuest: "businessGuest/getAlbumImages",
 
       createAlbumNetwork: 'networkProfileMedia/createAlbum',
       getAlbumNetworkImages: 'networkProfileMedia/getAlbumImages',
@@ -304,6 +315,7 @@ export default {
       deleteAlbumNetwork: 'networkProfileMedia/deletedAlbum',
       updateAlbumNetwork: 'networkProfileMedia/updatedAlbum',
     }),
+
 
     getFullMediaLink: fullMediaLink,
 
@@ -477,6 +489,11 @@ export default {
 </style>
 
 <style>
+
+.dasher{
+  border: 4px dashed #e75c18;
+}
+
 .text-design {
   align-items: first baseline;
 }

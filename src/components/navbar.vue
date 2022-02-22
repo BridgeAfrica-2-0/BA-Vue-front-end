@@ -239,7 +239,7 @@
                       </div>
                     </div>
                     <hr class="h-divider" />
-                    <router-link :to="newRedirection('message')">
+                    <router-link :to="newRedirection('message')" v-if="islogin">
                       <u>{{ $t("general.See_Inbox") }}</u>
                     </router-link>
                   </div>
@@ -294,7 +294,7 @@
                     </div>
                     <hr class="h-divider" />
 
-                    <router-link :to="newRedirection('notification')"
+                    <router-link  v-if="islogin" :to="newRedirection('notification')"
                       ><u>{{
                         $t("general.See_all_Notifications")
                       }}</u></router-link
@@ -643,7 +643,7 @@ export default {
   data() {
     return {
       isActive: false,
-      islogin: true,
+      islogin: null,
       shownav: false,
       notifications: [],
       messages: [],
@@ -655,6 +655,7 @@ export default {
       users: [],
     };
   },
+
   computed: {
     ...mapGetters({
       hasLauchNetworkRequest: "social/INIT",
@@ -669,7 +670,8 @@ export default {
   created() {
     //check for authentication
 
-    this.islogin = this.$store.getters["auth/isLogged"];
+    this.islogin = this.$store.getters["auth/profilConnected"];
+
 
     if (this.islogin) {
       this.init();
@@ -723,7 +725,7 @@ export default {
 
   watch: {
     "$store.state.auth.profilConnected": function () {
-      console.log("AUTH CHANGED!!!");
+      
       this.updateNotificationEvent();
       this.userOwnPage = this.onRedirect();
     },
@@ -745,7 +747,7 @@ export default {
         });
     },
   },
-  //image.profile_picture image.logo_path, image.image
+  
   filters: {
     stringify(value) {
       return JSON.stringify(value, null, 2);
@@ -832,20 +834,27 @@ export default {
     },
 
     newRedirection(type) {
-      const newPath = this.redirectionPatterns[type][this.user.user_type]();
+      try {
+        
+        const newPath = this.redirectionPatterns[type][this.user.user_type]();
 
-      if (newPath) {
-        let path = { name: newPath.name };
+        if (newPath) {
+          let path = { name: newPath.name };
 
-        if (newPath.params)
-          path = Object.assign(path, { params: newPath.params });
+          if (newPath.params)
+            path = Object.assign(path, { params: newPath.params });
 
-        if (newPath.query) path = Object.assign(path, { query: newPath.query });
+          if (newPath.query) path = Object.assign(path, { query: newPath.query });
 
-        return path;
+          return path;
+        }
+
+        return { name: this.$route.name };
+      
+      }catch(err){
+        console.log(err)
       }
-
-      return { name: this.$route.name };
+      
     },
 
     getKeyword() {

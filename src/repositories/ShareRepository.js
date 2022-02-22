@@ -162,7 +162,7 @@ class Repository {
     } catch (error) {
       return {
         success: false,
-        data: error.response.message
+        data: error.response.data.errors
       }
     }
   }
@@ -180,7 +180,7 @@ class Repository {
     } catch (error) {
       return {
         success: false,
-        data: error.response.message
+        data: error.response.data.errors
       }
     }
   }
@@ -195,7 +195,7 @@ class Repository {
     } catch (error) {
       return {
         success: false,
-        data: error.response.message
+        data: error.response.data.errors
       }
     }
   }
@@ -211,7 +211,7 @@ class Repository {
     } catch (error) {
       return {
         success: false,
-        data: error.response.message
+        data: error.response.data.errors
       }
     }
   }
@@ -227,7 +227,7 @@ class Repository {
     } catch (error) {
       return {
         success: false,
-        data: error.response.message
+        data: error.response.data.errors
       }
     }
   }
@@ -243,7 +243,7 @@ class Repository {
     } catch (error) {
       return {
         success: false,
-        data: error.response.message
+        data: error.response.data.errors
       }
     }
   }
@@ -259,7 +259,7 @@ class Repository {
     } catch (error) {
       return {
         success: false,
-        data: error.response.message
+        data: error.response.data.errors
       }
     }
   }
@@ -275,7 +275,7 @@ class Repository {
     } catch (error) {
       return {
         success: false,
-        data: error.response.message
+        data: error.response.data.errors
       }
     }
   }
@@ -291,7 +291,7 @@ class Repository {
     } catch (error) {
       return {
         success: false,
-        data: error.response.message
+        data: error.response.data.errors
       }
     }
   }

@@ -170,7 +170,7 @@
           <ShareButton
             :post="item"
             :type="'profile'"
-            v-if="!isMemberNetworkFollower || canBeDelete"
+            v-if="profile || !isMemberNetworkFollower || canBeDelete"
           />
         </b-col>
       </b-row>
@@ -181,7 +181,7 @@
       v-if="
         !isDisplayInSearch
           ? !isMemberNetworkFollower
-            ? (profile.id == item.post_id ? item.post_id : item.id) &&
+            ? ((profile && profile.id) == item.post_id ? item.post_id : item.id) &&
               canBeDelete
             : false
           : false
@@ -228,6 +228,7 @@
       :onDelete="() => onDelete(comment.id)"
       @update-comment="(text) => onUpdate({ uuid: comment.id, text })"
     />
+    
     <Loader v-if="loadComment" />
     <NoMoreData
       v-if="comments.length && !loadComment"
@@ -305,6 +306,7 @@ export default {
     strategy: null,
   }),
 
+
   created() {
     this.item = this.post;
     this.posterID = this.post.poster_id
@@ -313,25 +315,24 @@ export default {
 
     this.strategy = {
       user: () => {
-        return "user" == this.profile.user_type &&
-          "user" == this.post.poster_type &&
-          this.profile.id == this.posterID
+        return "user" == (this.profile && this.profile.user_type) &&
+          "user" == this.post.poster_type && (this.profile && this.profile.id) == this.posterID
           ? { name: "profile_owner" }
           : { name: "Follower", params: { id: this.posterID } };
       },
 
       business: () => {
-        return "business" == this.profile.user_type &&
+        return "business" == (this.profile && this.profile.user_type) &&
           "business" == this.post.poster_type &&
-          this.profile.id == this.posterID
+          (this.profile && this.profile.id) == this.posterID
           ? { name: "BusinessOwner", params: { id: this.posterID } }
           : { name: "BusinessFollower", params: { id: this.posterID } };
       },
 
       network: () => {
-        return "network" == this.profile.user_type &&
+        return "network" == (this.profile && this.profile.user_type) &&
           "business" == this.post.poster_type &&
-          this.profile.id == this.posterID
+          (this.profile && this.profile.id) == this.posterID
           ? { name: "networks", params: { id: this.posterID } }
           : { name: "networks", params: { id: this.posterID } };
       },
@@ -460,6 +461,17 @@ export default {
     },
 
     onLike: async function() {
+
+      if (!this.profile) {
+        this.flashMessage.show({
+          status: "error",
+          blockClass: "custom-block-class",
+          message: "You must loggin to perform that action",
+        });
+
+        return false
+      }
+
       if (this.isDisplayInSearch) return false;
 
       if (!this.canBeDelete) return false;

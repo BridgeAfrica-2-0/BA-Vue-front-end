@@ -131,6 +131,7 @@ export default {
     },
     getters: {
         getAlbums(state) {
+            console.log('you are')
             return state.albums;
         },
 
@@ -555,6 +556,7 @@ export default {
                 });
             return response_;
         },
+        
         getAlbumImages({ commit }, { businessId, albumId }) {
             return axios.get("guest/business/album/show/" + businessId + '/' + albumId).then(({ data }) => {
                 commit("setAlbumImages", data.data);

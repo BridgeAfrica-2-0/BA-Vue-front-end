@@ -194,6 +194,7 @@ export default {
       this.chosenNetwork = network;
       this.viewnetwork = true;
     },
+    
     showmodal(state, arg) {
       this.showModal = state;
       if (arg == "edit") {

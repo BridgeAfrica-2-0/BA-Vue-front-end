@@ -231,7 +231,7 @@ const routes = [
     name: "profile_owner",
     component: profile_owner,
     meta: {
-      auth: true,
+     // auth: true,
     },
   },
   {

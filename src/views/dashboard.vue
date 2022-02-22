@@ -3,6 +3,8 @@
     <navbar></navbar>
 
     <div class="text-justify p-card pr-1">
+    
+      <CompleteProfile class="mb-2"  v-if="showcompleteprofile" />
       <CarousselDashboard class="mm-top" /> <br />
 
       <div v-if="selectedb == 'owner'"> 
@@ -156,7 +158,7 @@ import BusinessDashboard from "@/components/dasboard/businessDashboard";
 import ComunitiDashboard from "@/components/dasboard/comunitiDashboard";
 
 import ComunitiBdashboard from "@/components/dasboard/comunitiBdashboard";
-
+import CompleteProfile from "@/components/dasboard/completeProfile";
 import Insights from "@/components/dasboard/insights";
 import CommunityActivity from "@/components/dasboard/communityActivity";
 
@@ -190,7 +192,8 @@ export default {
       category: "",
       boptions: [],
       detail: null,
-      data1: null
+      data1: null,
+      showcompleteprofile:false,
     };
   },
 
@@ -205,6 +208,7 @@ export default {
     Insights,
     Popularnetwork,
     // Map,
+    CompleteProfile,
     EmptyBusiness,
     Profile,
     CarousselDashboard,
@@ -361,6 +365,10 @@ export default {
   },
 
   created() {
+
+     if (this.Profile_complete == null) {
+        this.showcompleteprofile=true;    
+      } 
     
     this.checkIfItNetwork();
 
@@ -381,7 +389,7 @@ export default {
       .then((response) => {
         this.getbusiness();
        this.data1 = true;
-        console.log('response----',response.data.business[0])
+      
       });
 
     this.dashboardPpost();
@@ -401,6 +409,10 @@ export default {
     details() {
       return this.$store.getters["ProfileAndBusinessDetails/getdetails"];
     },
+    Profile_complete(){
+
+      return this.$store.state.auth.user.user.profile_complete
+    }
   },
 
   watch: {

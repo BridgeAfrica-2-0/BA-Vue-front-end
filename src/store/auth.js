@@ -25,6 +25,7 @@ export default {
     division: [],
     profilConnected: null,
     password_reset: [],
+    last_path:null,
   },
 
   mutations: {
@@ -143,11 +144,14 @@ export default {
     clearUserData(state) {
       localStorage.removeItem('user');
       state.user=[];
-      // location.reload();
-      // this.$router.push({ name: "Login" });
+  
 
-      router.push({ name: "Login" });
+      var currentUrl = window.location.pathname;
 
+      // console.log(router.app._route);
+     
+      router.push({ name: 'Login', query: { redirect: currentUrl } });
+  
     },
 
 
@@ -265,6 +269,8 @@ export default {
     },
 
     logout({ commit }) {
+
+   
      commit('clearUserData');
   
     },

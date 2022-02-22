@@ -2,6 +2,7 @@
   <div>
     <div v-if="filterType == '0' || filterType == '1' || filterType == '4'">
       <div v-if="subCategories.length">
+        <p><b>{{categoryName}}</b></p>
         <span>
           <b-form-radio
             v-for="(subCat, index) in subCategories.slice(0, 4)"
@@ -23,6 +24,7 @@
           variant="primary"
           label="Spinning"
         ></b-spinner>
+
         <span v-if="subFilter.length">
           <h6>{{ $t("search.Filters") }}</h6>
           <b-form-radio
@@ -508,17 +510,17 @@
 import { PeopleFilter, PostFilter } from "@/components/search";
 export default {
   name: "filters",
-  props: ["filterType", "Selectedcategory", "Selectedparentcategory"],
+  props: ["filterType", "Selectedcategory", "Selectedparentcategory", "categoryName"],
   watch: {
     filterType: function (newId) {
       try {
         this.currentFilter = this.strategies[newId]();
       } catch (error) {
-        this.currentFilter = null;
+        this.categoryName = null;
       }
     },
     Selectedparentcategory: function (newVal) {
-      console.log(newVal);
+      
       switch (newVal) {
         case "Agriculture":
           this.selectcategories = this.agriculture_filters;
@@ -1537,6 +1539,7 @@ export default {
       ],
     };
   },
+
   computed: {
     lneighbourhoods() {
       return this.$store.getters["auth/neigbourhoods"];
@@ -1572,6 +1575,7 @@ export default {
       return this.$store.getters["marketSearch/getLoader"];
     },
   },
+
   created() {
     this.getCountries();
     this.getUserNeibourhoods();
@@ -1580,6 +1584,7 @@ export default {
       5: () => PostFilter,
     };
   },
+
   methods: {
     getFilter(subCat) {
       // this.filterLoader = true;
@@ -1618,7 +1623,7 @@ export default {
             console.error(err);
             // this.filterLoader = false;
           });
-      } else if (this.filterType == 1) {
+      } else if (this.filterType == 1 || this.filterType == 0) {
         // method to search for a business lol
         this.$store
           .dispatch("marketSearch/getFilter", subCat.id)
@@ -1651,14 +1656,17 @@ export default {
             console.error(err);
             // this.filterLoader = false;
           });
-      } else if (this.filterType == 0) {
-        console.log("[DEBUG] Filter: ", subCat);
-        this.allSearch({
-          cat_id: subCat.cat_id,
-          sub_cat: subCat.id,
-          filter_id: subCat.id,
-        });
-      }
+
+          if (this.filterType == 0) {
+            console.log("[DEBUG] Filter: ", subCat);
+            this.allSearch({
+              cat_id: subCat.cat_id,
+              sub_cat: subCat.id,
+              filter_id: subCat.id,
+            });
+          }
+
+      } 
     },
     searchProducts(data) {
       this.$store

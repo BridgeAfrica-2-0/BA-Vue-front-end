@@ -67,6 +67,7 @@
 
     <SubNav
       @category="getCategory"
+      @on:category:name="(name) => categoryName = name"
       @parentcategory="getparentCategory"
       style="margin-top: -25px"
     />
@@ -288,6 +289,7 @@
               v-bind:filterType="selectedId"
               v-bind:Selectedcategory="Selectedcategory"
               v-bind:Selectedparentcategory="Selectedparentcategory"
+              :categoryName.sync="categoryName"
             />
           </div>
         </b-col>
@@ -556,6 +558,7 @@ import Filters from "@/components/search/filters";
 
 import SubNav from "@/components/subnav";
 
+
 import Sponsor from "@/components/search/sponsoredBusiness";
 import Button from "@/components/ButtonNavBarFind";
 
@@ -663,6 +666,7 @@ export default {
 
   data() {
     return {
+      categoryName:"",
       catChose: "",
       subCatChose: "",
       filterChose: "",
@@ -1853,7 +1857,6 @@ export default {
       try {
         this.strategy[`${this.selectedId}`]();
       } catch (error) {
-        console.log(error);
         console.warn(`Implement function for selectedId=${this.selectedId}`);
       }
     },

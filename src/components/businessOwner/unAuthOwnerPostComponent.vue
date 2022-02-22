@@ -3,12 +3,7 @@
     <div class="mt-0">
       <div class="d-inline-flex">
         <span md="1" class="m-0 p-0">
-          <!-- <b-avatar
-            class="logo-sizee avat"
-            :square="'user' == item.poster_type ? false : true"
-            variant="primary"
-            :src="item.user_picture"
-          ></b-avatar> -->
+         
           <b-avatar
             class="p-avater"
             :square="'user' == item.poster_type ? false : true"
@@ -26,41 +21,7 @@
           <p class="duration">{{ item.created_at | now }}</p>
         </div>
 
-        <div
-          class="toright"
-          v-if="
-            'dashboard' !== $route.name
-              ? !isDisplayInSearch
-                ? isYourOwnPost && canBeDelete
-                : false
-              : false
-          "
-        >
-          <b-dropdown
-            variant="link"
-            size="sm"
-            no-caret
-            v-if="show != 'Follower'"
-          >
-            <template #button-content>
-              <b-icon
-                icon="three-dots"
-                variant="primary"
-                aria-hidden="true"
-              ></b-icon>
-            </template>
-
-            <b-dropdown-item-button variant="info" @click="editPost">
-              <b-icon icon="pencil" aria-hidden="true"></b-icon>
-              {{ $t("businessowner.Edit") }}
-            </b-dropdown-item-button>
-
-            <b-dropdown-item-button variant="danger" @click="deletePost">
-              <b-icon icon="trash-fill" aria-hidden="true"></b-icon>
-              {{ $t("businessowner.Delete") }}
-            </b-dropdown-item-button>
-          </b-dropdown>
-        </div>
+       
       </div>
 
       <div class="mt-2 ml-3 p-0">
@@ -167,60 +128,18 @@
             ></b-icon>
             {{ item.comment_count | nFormatter }}
           </span>
-          <ShareButton
+          <!-- <ShareButton
             :post="item"
             :type="'profile'"
-            v-if="profile || !isMemberNetworkFollower || canBeDelete"
-          />
+            v-if="!isMemberNetworkFollower || canBeDelete"
+          /> -->
         </b-col>
       </b-row>
     </div>
 
-    <div
-      class="mt-2 d-inline-flex w-100"
-      v-if="
-        !isDisplayInSearch
-          ? !isMemberNetworkFollower
-            ? ((profile && profile.id) == item.post_id ? item.post_id : item.id) &&
-              canBeDelete
-            : false
-          : false
-      "
-    >
-      <div class="m-md-0 p-md-0">
-        <b-avatar
-          b-avatar
-          class="logo-sizee-18 avat img-fluid avat-comment avatar-border bg-light"
-          variant="primary"
-          :square="'user' == profile.user_type ? false : true"
-          :src="profile.profile_picture"
-        ></b-avatar>
-      </div>
+    
 
-      <div class="p-0 m-0 pr-3 inline-comment" style="position: relative;">
-        <textarea-autosize
-          :placeholder="$t('businessowner.Post_a_Comment')"
-          v-model="comment"
-          class="comment py-2 pr-5 pl-3"
-          :min-height="30"
-          :max-height="47"
-          @keypress.enter="onCreateComment"
-        />
-        <b-spinner
-          style="color: rgb(231, 92, 24);"
-          class="send-cmt"
-          v-if="createCommentRequestIsActive"
-        ></b-spinner>
-        <fas-icon
-          class="primary send-cmt"
-          :icon="['fas', 'paper-plane']"
-          @click="onCreateComment"
-          v-if="comment.trim().length >= 1 && !createCommentRequestIsActive"
-        />
-      </div>
-    </div>
-
-    <Comment
+    <!-- <Comment
       v-for="comment in comments"
       :key="comment.updated_at"
       :item="comment"
@@ -228,7 +147,6 @@
       :onDelete="() => onDelete(comment.id)"
       @update-comment="(text) => onUpdate({ uuid: comment.id, text })"
     />
-    
     <Loader v-if="loadComment" />
     <NoMoreData
       v-if="comments.length && !loadComment"
@@ -236,7 +154,7 @@
       :moreDataTitle="$t('businessowner.Show_more_comments')"
       :noDataTitle="''"
       @click.native="onShowComment"
-    />
+    /> -->
   </div>
 </template>
 
@@ -245,23 +163,23 @@ import { mapMutations } from "vuex";
 
 import { formatNumber, fromNow } from "@/helpers";
 
-import Loader from "@/components/Loader";
-import { ShareButton } from "@/components/shareButton";
+//import Loader from "@/components/Loader";
+//import { ShareButton } from "@/components/shareButton";
 
-import { NoMoreDataForComment, isYourOwnPostMixins } from "@/mixins";
+//import { NoMoreDataForComment, isYourOwnPostMixins } from "@/mixins";
 
-import Comment from "./comment";
+//import Comment from "./comment";
 import light from "../lightbox";
 
 
 export default {
   name: "ownerPostComponent",
-  mixins: [NoMoreDataForComment, isYourOwnPostMixins],
+ // mixins: [NoMoreDataForComment, isYourOwnPostMixins],
   components: {
-    Comment,
+  //  Comment,
     light,
-    Loader,
-    ShareButton,
+  //  Loader,
+  //  ShareButton,
   },
 
   props: {
@@ -306,35 +224,21 @@ export default {
     strategy: null,
   }),
 
-
   created() {
     this.item = this.post;
     this.posterID = this.post.poster_id
-      ? this.post.poster_id
-      : this.post.user_id;
-
+    
     this.strategy = {
       user: () => {
-        return "user" == (this.profile && this.profile.user_type) &&
-          "user" == this.post.poster_type && (this.profile && this.profile.id) == this.posterID
-          ? { name: "profile_owner" }
-          : { name: "Follower", params: { id: this.posterID } };
+        return  { name: "Follower", params: { id: this.posterID } }
       },
 
       business: () => {
-        return "business" == (this.profile && this.profile.user_type) &&
-          "business" == this.post.poster_type &&
-          (this.profile && this.profile.id) == this.posterID
-          ? { name: "BusinessOwner", params: { id: this.posterID } }
-          : { name: "BusinessFollower", params: { id: this.posterID } };
+        return  { name: "BusinessFollower", params: { id: this.posterID } };
       },
 
       network: () => {
-        return "network" == (this.profile && this.profile.user_type) &&
-          "business" == this.post.poster_type &&
-          (this.profile && this.profile.id) == this.posterID
-          ? { name: "networks", params: { id: this.posterID } }
-          : { name: "networks", params: { id: this.posterID } };
+        return { name: "networks", params: { id: this.posterID } }
       },
     };
     if (!this.isDisplayInSearch) this.comments = this.post.comments;
@@ -461,17 +365,6 @@ export default {
     },
 
     onLike: async function() {
-
-      if (!this.profile) {
-        this.flashMessage.show({
-          status: "error",
-          blockClass: "custom-block-class",
-          message: "You must loggin to perform that action",
-        });
-
-        return false
-      }
-
       if (this.isDisplayInSearch) return false;
 
       if (!this.canBeDelete) return false;

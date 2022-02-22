@@ -49,12 +49,14 @@ import productComments from './productComments';
 import { social } from './social';
 import networkSetting from './networkSetting';
 import productDetails from './productDetails';
+import businessGuest from './businessGuest';
 
 Vue.use(Vuex);
 
- axios.defaults.baseURL = process.env.VUE_APP_API_URL; 
 
- //axios.defaults.baseURL ="https://stiving.loca.lt/api/v1/";
+axios.defaults.baseURL = process.env.VUE_APP_API_URL;
+//axios.defaults.baseURL = "http://edson.maxinemoffett.com/api/v1/";
+
 
 export default new Vuex.Store({
     modules: {
@@ -104,6 +106,7 @@ export default new Vuex.Store({
         networkSetting,
         profileOrders,
         productComments,
-        productDetails
+        productDetails,
+        businessGuest
     }
 })

@@ -25,6 +25,7 @@ export default {
     division: [],
     profilConnected: null,
     password_reset: [],
+    last_path:null,
   },
 
   mutations: {
@@ -57,16 +58,28 @@ export default {
     },
 
 
-
     setAppLanguage(state, language) { 
       state.appLanguage = language;
       localStorage.setItem("lang", language); // Whenever we change the appLanguage we save it to the localStorage
     },
 
-
-    setUserDataa(state, userData) {
+    upUserData(state, userData) {
+            
+      console.log('setting user data');
+      console.log(userData);
       state.user.user = userData.user;
-      localStorage.setItem("user.user", JSON.stringify(userData.user))
+      localStorage.setItem("user.user", JSON.stringify(userData.user)) ;
+      console.log(state.user);
+    },
+
+       
+    setUserDataa(state, userData) {
+       
+      console.log('setting user data');
+      console.log(userData);
+      state.user.user = userData.user;
+      console.log(state.user);
+      localStorage.setItem("user.user", JSON.stringify(userData.user))  
     },
 
     setSignupData(state, userData) {
@@ -75,13 +88,10 @@ export default {
     },
 
 
-
     setPasswordReset(state, userData) {
       state.password_reset = userData;
      
     },
-
-
 
 
     setneigbourhoods(state, data) {
@@ -147,16 +157,19 @@ export default {
     clearUserData(state) {
       localStorage.removeItem('user');
       state.user=[];
-    // location.reload();
-   // this.$router.push({ name: "Login" });
+  
 
-    router.push({ name: "Login" });
+      var currentUrl = window.location.pathname;
 
-
+      // console.log(router.app._route);
+     
+      router.push({ name: 'Login', query: { redirect: currentUrl } });
+  
     },
 
-    profilConnected(state, payload) {
-      state.profilConnected = payload
+
+    profilConnected(state, payload=null) {
+      state.profilConnected = (payload) ?  payload : { ...state.user.user, user_type: 'user'};
     },
   },
 
@@ -245,8 +258,9 @@ export default {
     completeWelcome({ commit }) {
       // localStorage.removeItem('user');
       return axios.get('user/completewelcome').then(({ data }) => {
-        console.log(data);
-        commit("setUserDataa", data.data);
+        console.log(data.data);
+       // commit('setUserDataa', data.data);
+        commit('upUserData', data.data);
       });
     },
 
@@ -269,6 +283,8 @@ export default {
     },
 
     logout({ commit }) {
+
+   
      commit('clearUserData');
   
     },
@@ -291,13 +307,7 @@ export default {
       });
     },
 
-
-     
-
-
     verifyuser({ commit }, payload) {
-
- 
 
       return axios.post(payload.url, payload).then(({ data }) => {
         console.log(data.data);
@@ -311,8 +321,6 @@ export default {
 
     VerifyOtp({ commit }, payload) {
 
- 
-
       return axios.post(payload.url, payload).then(({ data }) => {
        // console.log(data.data);
 
@@ -321,12 +329,7 @@ export default {
       });
     },
 
-
-       
-
     ResetPassword({ commit }, payload) {
-
- 
 
       return axios.post(payload.url, payload).then(({ data }) => {
         console.log(data.data);
@@ -334,12 +337,6 @@ export default {
         //commit('setUserData', data.data);
       });
     },
-
-
-
-
-    
-
 
   },
 

@@ -32,7 +32,6 @@
         </b-col>
       </b-row>
     </div>
-
     <Footer> </Footer>
   </div>
 </template>

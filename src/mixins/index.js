@@ -83,7 +83,8 @@ export const WhoIsIt = {
   computed: {
     ...mapGetters({
       profile: 'auth/profilConnected',
-      token: 'auth/getAuthToken'
+      token: 'auth/getAuthToken',
+      isLogin: 'auth/isLogged'
     })
   },
 
@@ -106,12 +107,24 @@ export const WhoIsIt = {
   },
 
   created() {
+    if(this.isLogin){    
     this.getAuth()
+
+    }
   }
 }
 
 export const knowWhoIsConnected = {
 
+
+  computed: {
+    ...mapGetters({
+      profile: 'auth/profilConnected',
+      token: 'auth/getAuthToken',
+      isLogin: 'auth/isLogged'
+    })
+  },
+  
   methods: {
     ...mapMutations({
       auth: 'auth/profilConnected',
@@ -126,11 +139,17 @@ export const knowWhoIsConnected = {
       const response = await this.$repository.share.WhoIsConnect({ networkId: type, type });
 
       if (response.success) this.auth(response.data);
+
     },
   },
 
   created() {
-    this.getAuth()
+   
+
+    if(this.isLogin){    
+      this.getAuth()
+  
+      }
   }
 }
 
@@ -303,6 +322,7 @@ export const commentMixins = {
     },
 
     onShowReply: async function () {
+
       const request = await this.$repository.share.fetchReplyComment({
         post: this.uuid,
         comment: this.comment.id,
@@ -325,7 +345,7 @@ export const commentMixins = {
         'NetworkEditors',
         'networks',
         "Membar Network Follower",
-        "memberNetwork",].includes(this.$route.name))
+        "memberNetwork"].includes(this.$route.name))
         data = Object.assign(data, { networkId: this.$route.params.id });
 
       const request = await this.$repository.share.createReplyComment({
@@ -357,7 +377,7 @@ export const isYourOwnPostMixins = {
 
   computed: {
     isYourOwnPost() {
-      return (this.profile.id == this.item.user_id) && (this.profile.user_type == this.item.poster_type)
+      return ( (this.profile && this.profile.id) == this.item.user_id) && ( (this.profile && this.profile.user_type) == this.item.poster_type)
     },
     ...mapGetters({
       profile: 'auth/profilConnected',
@@ -496,7 +516,7 @@ export const ResizeMediaImage = {
 
   computed: {
     getStyle() {
-      return ['network'].includes(this.type) ? "width: 226px !important;height: 226px !important" : "width: 250px !important;height: 250px !important"
+      return ['network'].includes(this.type) ? "width: 226px !important;height: 226px !important" : "width: 160px !important;height: 160px !important"
     }
   },
 

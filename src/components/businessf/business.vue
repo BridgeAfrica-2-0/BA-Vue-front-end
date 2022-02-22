@@ -177,6 +177,7 @@ import Media from "@/components/owner/tabs/media";
 import MarketPlace from "./tabs/marketPlace";
 import Community from "@/components/businessOwner/tabs/memberNetwork";
 import Networks from "./tabs/networks";
+import { isGuestUser } from '@/helpers';
 
 import { defaultCoverImage } from "@/mixins";
 
@@ -204,10 +205,46 @@ export default {
       currentTab: 0,
       tabIndex: null,
       tabs: ["#post", "#about", "#media", "#market", "#community"],
-      options: {
+      isGuestUser: isGuestUser,
+    };
+  },
+
+  computed: {
+    business_info() {
+      return this.isGuestUser ? this.$store.state.businessGuest.businessInfo: this.$store.state.businessOwner.businessInfo;
+    },
+     perPage() {
+      console.log(this.business_info.cover)
+      if (this.business_info.cover) {
+        if (this.business_info.cover.length == 1) {
+          return 1;
+        } else if (this.business_info.cover.length == 2) {
+          return 2;
+        } else {
+          return 3;
+        }
+      } else {
+        return 3;
+      }
+    },
+
+    perPageM() {
+      if (this.business_info.cover) {
+        if (this.business_info.cover.length == 1) {
+          return 1;
+        } else {
+          return 2;
+        }
+      } else {
+        return 3;
+      }
+    },
+
+    options() {
+      return {
         rewind: true,
         autoplay: true,
-        perPage: 3,
+        perPage: this.perPage,
         pagination: false,
 
         type: "loop",
@@ -219,18 +256,13 @@ export default {
             gap: "0rem",
           },
           992: {
-            perPage: 2,
+            perPage: this.perPageM,
             gap: "1rem",
           },
         },
-      },
-    };
-  },
-
-  computed: {
-    business_info() {
-      return this.$store.state.businessOwner.businessInfo;
+      };
     },
+
   },
 
   created() {
@@ -252,8 +284,9 @@ export default {
       }
     },
 
-    $route(to, from) { console.log("----route--")
-      if ("#media" == to.hash) this.showCoverAlbum = true;
+    $route(to, from) { 
+      if ("#media" == to.hash)
+        this.showCoverAlbum = true;
 
       this.currentTab = this.tabs.findIndex((tab) => tab === to.hash);
     },
@@ -264,8 +297,6 @@ export default {
     this.ownerPost();
   },
   methods: {
-
-    
     gotoCoverImages() {
       this.showCoverAlbum = true;
       this.key = this.key + 1;
@@ -273,13 +304,10 @@ export default {
     },
 
     async handleFollow() {
-      console.log(this.business_info);
-      // document.getElementById("followbtn").disabled = true;
-
       const uri = !this.hasBeFollow ? `/follow-community` : `/unfollow`;
       const nextFollowState = !this.hasBeFollow ? 1 : 0;
       const data = {
-        id: this.business_info.id,
+        id: this.business_info.id ? this.business_info.id : this.$route.params.id,
         type: "business",
       };
 
@@ -301,8 +329,9 @@ export default {
     },
 
     businessInfo() {
+      const dispatchMethod = this.isGuestUser ? "businessGuest/businessInfo": "businessOwner/businessInfo";
       this.$store
-        .dispatch("businessOwner/businessInfo", this.url_data)
+        .dispatch(dispatchMethod, this.url_data)
         .then(() => {
           console.log("hey yeah");
         })
@@ -312,8 +341,9 @@ export default {
     },
 
     businessCommunityTotal() {
+      const dispatchMethod = this.isGuestUser ? "businessGuest/businessCommunityTotal": "businessOwner/businessCommunityTotal";
       this.$store
-        .dispatch("businessOwner/businessCommunityTotal", this.url_data)
+        .dispatch(dispatchMethod, this.url_data)
         .then(() => {
           console.log("hey yeah");
         })
@@ -323,8 +353,9 @@ export default {
     },
 
     ownerPost() {
+      const dispatchMethod = this.isGuestUser ? "businessGuest/ownerPost": "businessOwner/ownerPost";
       this.$store
-        .dispatch("businessOwner/ownerPost", this.url_data)
+        .dispatch(dispatchMethod, this.url_data)
         .then(() => {
           console.log("hey yeah");
         })

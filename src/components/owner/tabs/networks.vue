@@ -523,7 +523,7 @@
                   <div class="drag-text">
                     <i class="fa fa-plus"> </i>
                     <h3 class="username">
-                      {{ $t("profileowner.Business_Logo") }}
+                      {{ $t("businessowner.NetworkLogo") }}
                     </h3>
                   </div>
 
@@ -629,6 +629,7 @@ import Multiselect from "vue-multiselect";
 import VuePhoneNumberInput from "vue-phone-number-input";
 import AutocompleteLocation from "@/components/AutocompleteLocation";
 
+import {wrapperErrors} from "@/helpers"
 
 import VueCropper from "vue-cropperjs";
 import "cropperjs/dist/cropper.css";
@@ -1061,25 +1062,26 @@ export default {
             this.success.state = false;
           }, 5000);
 
-          /* this.getNetworks();
-
-          this.page = 1;
-          this.infiniteId += 1; */
         })
         .catch((err) => {
-          console.log({ err: err });
+          
+          if (err.response.data.errors){
+            const errors = wrapperErrors(err.response.data.errors)
+            errors.map(e => this.flashMessage.show({
+                  status: "error",
+                  message: e,
+                  blockClass: "custom-block-class",
+                })
+            )
+          }
+          
           this.success.state = true;
-          this.flashMessage.show({
-            status: "error",
-
-            message: "Something went wrong",
-
-            blockClass: "custom-block-class",
-          });
           this.success.msg = "Something wen't wrong !!";
+          
           setTimeout(() => {
             this.success.state = false;
           }, 5000);
+          
           loader.hide();
         });
     },
@@ -1210,17 +1212,14 @@ export default {
       fd.append("neighbourhood", this.selectedlocality);
 
          
-   if(this.logo != '')  {            
-this.cropedImage = this.$refs.cropperr.getCroppedCanvas().toDataURL();
+   if(this.logo)  {            
+    this.cropedImage = this.$refs.cropperr.getCroppedCanvas().toDataURL();
 
-this.$refs.cropperr.getCroppedCanvas().toBlob((blob) => {
-
-     this.logo=blob;
-  // formData.append("profile_picture", this.profile_pic);
+    this.$refs.cropperr.getCroppedCanvas().toBlob((blob) => {
+      this.logo=blob;
+      // formData.append("profile_picture", this.profile_pic);
    
-   
-
-}, this.mime_type);
+   }, this.mime_type);
 
    }
 

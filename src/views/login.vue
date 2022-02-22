@@ -247,14 +247,14 @@ export default {
             message: this.$t('auth.Successfully_Register')
           });
 
-          if (this.$store.state.auth.user.user.profile_complete == null) {
-            this.$router.push({ name: "welcome" });
+          if (this.$store.state.last_path== null) {
+            this.$router.toRef(this.$store.state.last_path);
           } else {
             this.$router.push({ name: "dashboard" });
           }
         })
         .catch(err => {
-          console.log({ err: err });
+          console.log({ err: err });   
         });
     },
 
@@ -279,11 +279,15 @@ export default {
         .then(() => {
           this.sending = false;
 
-          if (this.$store.state.auth.user.user.profile_complete == null) {
-            this.$router.push({ name: "welcome" });
-          } else {
-            this.$router.push({ name: "dashboard" });
-          }
+          // if (this.$store.state.auth.user.user.profile_complete == null) {
+          //   this.$router.push({ name: "welcome" });
+          // } else {
+          //   this.$router.push({ name: "dashboard" });
+          // }
+
+
+           this.$router.push(this.$route.query.redirect || '/dashboard')
+
         })
         .catch(err => {
           console.log(err);

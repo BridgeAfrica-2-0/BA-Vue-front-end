@@ -3,14 +3,9 @@
     @mouseover="upHere = true"
     @mouseleave="upHere = false"
   >
-    <a>
-      <span>
-        <img 
-          class="card-img album-img img-fluid" 
-          :src="cover(album.cover)" 
-          :style="getStyle" 
-        />
-      </span>
+    
+      <img :src="cover(album.cover)"  alt="" class="card-img">
+      
       <div class="createdesc botmedia">
         <div class="botmediadess-position" v-if="loading">
           <b-spinner
@@ -36,9 +31,7 @@
           </b-button>
         </div>
       </div>
-    </a>
-
-    <div class="mediadesc" v-if="canBeUpdate && isEditor">
+      <div class="mediadesc" v-if="canBeUpdate && isEditor">
       <ul class="navbar-nav pull-right options">
         <li class="nav-item dropdown">
           <b-dropdown
@@ -65,6 +58,7 @@
       </ul>
     </div>
   </div>
+  
 </template>
 
 <script>

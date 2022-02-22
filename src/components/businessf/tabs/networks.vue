@@ -5,7 +5,7 @@
       <span class="t-color"> {{$t("general.Network")}} </span>
 
       <b-button 
-      v-if="display != 'BusinessFollower' "
+      v-if="display != 'BusinessFollower' && display != 'BusinessFollowerGuest' "
         class="float-right w-auto"
         @click="showmodal(true, 'add')"
         variant="primary"
@@ -93,6 +93,8 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
+import { isGuestUser } from '@/helpers';
+
 export default {
   data() {
     return {
@@ -123,6 +125,7 @@ export default {
         business_image: "",
         allow_business: 0,
       },
+      isGuestUser: isGuestUser
     };
   },
   beforeMount() {
@@ -154,18 +157,21 @@ export default {
   methods: {
     ...mapActions({
       addNetwork: "businessOwner/addNetwork",
-      getNetworks: "businessOwner/getNetworks",
+      getNetworks: isGuestUser ? "businessGuest/getNetworks": "businessOwner/getNetworks",
       editNetwork: "businessOwner/editNetwork",
     }),
 
     infiniteHandler($state) {
-      let url = "business/network/" + this.biz_id + "/" + this.page;
-
+      let url = "business/network/" + this.biz_id + "/" + this.page, dispatchMethod = "businessOwner/loadMore";
+      if (this.isGuestUser ) {
+        url = "guest/business/network/" + this.biz_id + "/" + this.page;
+        dispatchMethod = "businessGuest/loadMore";
+      }
       if (this.page == 1) {
         this.network.splice(0);
       }
       this.$store
-        .dispatch("businessOwner/loadMore", url)
+        .dispatch(dispatchMethod, url)
         .then(({ data }) => {
           console.log(data.data);
           if (data.data.length) {
@@ -188,6 +194,7 @@ export default {
       this.chosenNetwork = network;
       this.viewnetwork = true;
     },
+    
     showmodal(state, arg) {
       this.showModal = state;
       if (arg == "edit") {
@@ -218,6 +225,7 @@ export default {
       this.createdNetwork.allow_business = network.allow_business;
       this.showModal = true;
     },
+
     edit() {
       const fd = new FormData();
       fd.append("_method", "PUT");
@@ -229,12 +237,15 @@ export default {
       fd.append("special_needs", this.createdNetwork.special_needs);
       fd.append("business_image", this.createdNetwork.business_image);
       fd.append("allow_busines", this.createdNetwork.allow_busines);
+      
       let data = {
         id: this.createdNetwork.id,
         data: fd,
       };
+      
       this.editNetwork(data);
     },
+    
     selectImage(e) {
       this.createdNetwork.business_image = e.target.files[0];
     },

@@ -181,7 +181,7 @@ export default {
         .then(({ data }) => {
           if (this.type == "Follower") {
             if (data.data.network_followers.length) {
-              this.businesses.push(...data.data.network_followers);
+              this.network.push(...data.data.network_followers);
               this.page += 1;
 
               $state.loaded();
@@ -190,7 +190,7 @@ export default {
             }
           } else {
             if (data.data.network_following.length) {
-              this.businesses.push(...data.data.network_following);
+              this.network.push(...data.data.network_following);
               this.page += 1;
 
               $state.loaded();

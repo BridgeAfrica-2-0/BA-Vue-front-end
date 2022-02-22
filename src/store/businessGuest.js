@@ -131,6 +131,7 @@ export default {
     },
     getters: {
         getAlbums(state) {
+            console.log('you are')
             return state.albums;
         },
 
@@ -442,7 +443,7 @@ export default {
         async loadUserBusinessAbout({ commit }, payload) {
             let response_ = null;
             const id_Business = 2;
-            await axios.get("business/edit" +
+            await axios.get("guest/business/edit" +
                     "/" +
                     payload.business_id
 
@@ -511,7 +512,7 @@ export default {
             let config = {};
             if (payload !== null) {
                 url =
-                    'business/insights/' +
+                    'guest/business/insights/' +
                     payload.business_id +
                     '?dateStarting=' +
                     payload.startDate +
@@ -524,7 +525,7 @@ export default {
                     },
                 };
             } else {
-                url = 'business/insights';
+                url = 'guest/business/insights';
                 config = {
                     method: 'POST',
                     headers: {
@@ -555,43 +556,44 @@ export default {
                 });
             return response_;
         },
+        
         getAlbumImages({ commit }, { businessId, albumId }) {
-            return axios.get("business/album/show/" + businessId + '/' + albumId).then(({ data }) => {
+            return axios.get("guest/business/album/show/" + businessId + '/' + albumId).then(({ data }) => {
                 commit("setAlbumImages", data.data);
                 console.log(data);
             });
         },
 
         getImages({ commit }, busineeId) {
-            return axios.get("business/post/media/" + busineeId).then(({ data }) => {
+            return axios.get("guest/business/post/media/" + busineeId).then(({ data }) => {
                 commit("setImages", data.data);
                 console.log(data);
             });
         },
 
         getAlbums({ commit }, busineeId) {
-            return axios.get("business/album/index/" + busineeId).then(({ data }) => {
+            return axios.get("guest/business/album/index/" + busineeId).then(({ data }) => {
                 commit("setAlbums", data.data);
                 console.log(data);
             });
         },
 
         ownerPost({ commit }, busineeId) {
-            return axios.get("business/show/post/" + busineeId).then(({ data }) => {
+            return axios.get("guest/business/show/post/" + busineeId).then(({ data }) => {
                 commit("ownerPost", data.data);
                 console.log(data);
             });
         },
 
         ownerPostImages({ commit }, busineeId) {
-            return axios.get("business/show/images/" + busineeId).then(({ data }) => {
+            return axios.get("guest/business/show/images/" + busineeId).then(({ data }) => {
                 commit("ownerPostImages", data.data);
                 console.log(data);
             });
         },
 
         businessInfo({ commit }, busineeId) {
-            return axios.get("business/info/" + busineeId).then(({ data }) => {
+            return axios.get("guest/business/info/" + busineeId).then(({ data }) => {
                 commit("setBusinessInfo", data.data);
                 console.log(data);
             });
@@ -599,7 +601,7 @@ export default {
 
         CommunityBusiness({ commit }, businessId) {
             return axios
-                .get("business/community/business/" + businessId)
+                .get("guest/business/community/business/" + businessId)
                 .then(({ data }) => {
                     commit("setCommunityBusiness", data.data);
                     console.log(data);
@@ -616,7 +618,7 @@ export default {
 
         CommunityPeople({ commit }, businessId) {
             return axios
-                .get("business/community/people/" + businessId)
+                .get("guest/business/community/people/" + businessId)
                 .then(({ data }) => {
                     commit("setCommunityPeople", data.data);
                     console.log(data);
@@ -652,7 +654,7 @@ export default {
 
         businessCommunityTotal({ commit }, businessId) {
             return axios
-                .get("business/community/total/" + businessId)
+                .get("guest/business/community/total/" + businessId)
                 .then(({ data }) => {
                     commit("setCommunityTotal", data.data);
                     console.log(data);
@@ -672,11 +674,10 @@ export default {
         // Get networks from the backend
         async getNetworks({ commit }) {
             let sucData = [];
-            const token = JSON.parse(localStorage.getItem('user'))
             await axios
-                .get('network/', {
+                .get('guest/network/', {
                     headers: {
-                        Authorization: 'Bearer ' + token.accessToken,
+                        Authorization: 'Bearer ' + localStorage.getItem('access_token'),
                     },
                 })
                 .then(res => {

@@ -1,7 +1,6 @@
 <template>
   <div ref="wrapper">
     <Navbar />
-
     <div class="container wahala" v-if="hasLoad">
       <b-row>
         <b-col cols="12" md="12" lg="12" xl="12">
@@ -69,7 +68,8 @@
                                 }}</b-link>
                               </b-td>
                             </b-tr>
-                            <br />
+
+                            <br /> 
 
                             <b-tr>
                               <b-td class="a-text text"
@@ -128,7 +128,7 @@
 
                               <b-td class="a-text text">
                                 <b-link href="#">
-                                  {{getUserInfos.country ? getUserInfos.country.name : Null}}
+                                  {{ getUserInfos && getUserInfos.country ? getUserInfos.country.name : null}}
                                 </b-link>
                               </b-td>
                             </b-tr>
@@ -441,6 +441,8 @@
       </b-row>
     </div>
 
+    <p v-else></p>
+
     <Footer />
   </div>
 </template>
@@ -571,11 +573,9 @@ export default {
 
   methods: {
     update1Strength(newPass){
-      console.log(newPass)
       this.psw1Strength = this.checkPassword(newPass);
     },
     update2Strength(newPass1){
-      console.log(newPass1)
       this.psw2Strength = this.checkPassword(newPass1);
     },
     checkPassword(pass){
@@ -600,7 +600,6 @@ export default {
           // console.log("-----------------"+this.selectedCounty);
         })
         .catch((err) => {
-          console.log("--------- error: ");
           console.error(err);
         });
     },
@@ -798,20 +797,24 @@ beforeMount(){
   this.userInfos();
   
 },
-  mounted() {
-    this.selectedCounty = this.$store.state.profileSettingsEdit.userInfos.country.id;
-          this.selectedRegion = this.$store.state.profileSettingsEdit.userInfos.region.id;
-          this.selectedDivision = this.$store.state.profileSettingsEdit.userInfos.division.id;
-          this.selectedMunicipality = this.$store.state.profileSettingsEdit.userInfos.council.id;
-          this.selectedNeighbor = this.$store.state.profileSettingsEdit.userInfos.neigborhood.id;
 
-     
+watch: {
+  "$store.state.profileSettingsEdit.userInfos": function(){
+    this.selectedCounty = this.$store.state.profileSettingsEdit.userInfos.country.id;
+    this.selectedRegion = this.$store.state.profileSettingsEdit.userInfos.region.id;
+    this.selectedDivision = this.$store.state.profileSettingsEdit.userInfos.division.id;
+    this.selectedMunicipality = this.$store.state.profileSettingsEdit.userInfos.council.id;
+    this.selectedNeighbor = this.$store.state.profileSettingsEdit.userInfos.neigborhood.id;
+
     this.getCountry();
     this.getRegion();
     this.getDivision();
     this.getMunicipality();
     this.getNeighbor();
-
+  }
+},
+  mounted() {
+    
     // this.getLocality();
 
     var that = this;
@@ -822,13 +825,16 @@ beforeMount(){
     if (that.size == "") {
       that.size = window.innerWidth;
     }
-  },
 
+    
+  },
   created() {
     if ("account" === this.$route.query.tab) {
       this.activeTab = 2;
     }
-  },
+  }
+
+  
 };
 </script>
 

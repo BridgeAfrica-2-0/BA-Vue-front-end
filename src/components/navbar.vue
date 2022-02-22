@@ -239,7 +239,7 @@
                       </div>
                     </div>
                     <hr class="h-divider" />
-                    <router-link :to="newRedirection('message')">
+                    <router-link :to="newRedirection('message')" v-if="islogin">
                       <u>{{ $t("general.See_Inbox") }}</u>
                     </router-link>
                   </div>
@@ -294,7 +294,7 @@
                     </div>
                     <hr class="h-divider" />
 
-                    <router-link :to="newRedirection('notification')"
+                    <router-link  v-if="islogin" :to="newRedirection('notification')"
                       ><u>{{
                         $t("general.See_all_Notifications")
                       }}</u></router-link
@@ -474,7 +474,7 @@
                 <span class="mr-3"
                   ><fas-icon class="violet search" :icon="['fas', 'home']"
                 /></span>
-                Home
+                Dashboard
               </router-link>
             </div>
             <hr class="h-divider" />
@@ -493,6 +493,36 @@
               </router-link>
             </div>
             <hr class="h-divider" />
+
+             <div class="other-menu suggest-item cursor-pointer" v-if="islogin">
+              <router-link
+                :to="newRedirection('message')"
+                class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+              >
+                <span class="mr-3"
+                  ><fas-icon
+                    class="violet search"
+                    :icon="['fas', 'comment']"
+                /></span>
+                Messages
+              </router-link>
+            </div>
+            <hr class="h-divider" v-if="islogin"/>
+
+             <div class="other-menu suggest-item cursor-pointer" v-if="islogin">
+              <router-link
+                :to="newRedirection('notification')"
+                class="other-menu suggest-item cursor-pointer text-decoration-none text-dark"
+              >
+                <span class="mr-3"
+                  ><fas-icon
+                    class="violet search"
+                    :icon="['fas', 'bell']"
+                /></span>
+                {{ $t("general.Notifications") }}
+              </router-link>
+            </div>
+            <hr class="h-divider" v-if="islogin"/>
 
             <div
               v-if="'user' != user.user_type"
@@ -613,7 +643,7 @@ export default {
   data() {
     return {
       isActive: false,
-      islogin: true,
+      islogin: null,
       shownav: false,
       notifications: [],
       messages: [],
@@ -625,6 +655,7 @@ export default {
       users: [],
     };
   },
+
   computed: {
     ...mapGetters({
       hasLauchNetworkRequest: "social/INIT",
@@ -639,7 +670,8 @@ export default {
   created() {
     //check for authentication
 
-    this.islogin = this.$store.getters["auth/isLogged"];
+    this.islogin = this.$store.getters["auth/profilConnected"];
+
 
     if (this.islogin) {
       this.init();
@@ -693,7 +725,7 @@ export default {
 
   watch: {
     "$store.state.auth.profilConnected": function () {
-      console.log("AUTH CHANGED!!!");
+      
       this.updateNotificationEvent();
       this.userOwnPage = this.onRedirect();
     },
@@ -715,7 +747,7 @@ export default {
         });
     },
   },
-  //image.profile_picture image.logo_path, image.image
+  
   filters: {
     stringify(value) {
       return JSON.stringify(value, null, 2);
@@ -802,20 +834,27 @@ export default {
     },
 
     newRedirection(type) {
-      const newPath = this.redirectionPatterns[type][this.user.user_type]();
+      try {
+        
+        const newPath = this.redirectionPatterns[type][this.user.user_type]();
 
-      if (newPath) {
-        let path = { name: newPath.name };
+        if (newPath) {
+          let path = { name: newPath.name };
 
-        if (newPath.params)
-          path = Object.assign(path, { params: newPath.params });
+          if (newPath.params)
+            path = Object.assign(path, { params: newPath.params });
 
-        if (newPath.query) path = Object.assign(path, { query: newPath.query });
+          if (newPath.query) path = Object.assign(path, { query: newPath.query });
 
-        return path;
+          return path;
+        }
+
+        return { name: this.$route.name };
+      
+      }catch(err){
+        console.log(err)
       }
-
-      return { name: this.$route.name };
+      
     },
 
     getKeyword() {
@@ -883,7 +922,7 @@ export default {
 
         if (response.success) {
           loader.hide();
-          this.$router.push({ name: "home1" });
+         // this.$router.push({ name: "home1" });
           this.Logout();
         }
         return false;

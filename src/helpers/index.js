@@ -8,7 +8,6 @@ export const date = (value) => moment(value).format("dddd, MMMM Do YYYY, h:mm:ss
 
 export const fullMediaLink = (media) => {
 
-    console.log(media)
 
     if (media) {
         const scheme = axios.defaults.baseURL.substring(0, axios.defaults.baseURL.length - 8)
@@ -68,3 +67,13 @@ export const notification = (notification) => {
         </div>
     </div>
 `}
+
+export const isGuestUser = () => {
+    let check = false;
+    if (localStorage.getItem('isGuestUser')) {
+        check = true;
+    }  
+    return check;
+}
+
+export const wrapperErrors = (errors) => Object.values(errors).map(err => err[0])

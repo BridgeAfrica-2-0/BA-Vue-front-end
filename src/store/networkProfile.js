@@ -190,9 +190,19 @@ export default {
       return num;
     },
 
-    getnetworkInfo( {commit}, networkId ){
+    getnetworkInfo( {commit,rootGetters}, networkId ){  
+      
+      
+      let auth=rootGetters['auth/isLogged'];  
+      let url=`network/${networkId}/about/information`;
+
+      if(!auth){    
+        url = `guest/network/${networkId}/about/information`; 
+      }
+
+
       return axios
-      .get(`network/${networkId}/about/information`)
+      .get(url)
       .then(({ data }) => {
           commit("setNetworkInfo", data.data);
         console.log(data);

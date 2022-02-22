@@ -1,8 +1,8 @@
 <template>
   <div>   
-    <div class="container-fluid" style="padding: 0px">
+    <div class="container-fluid" style="padding: 0px"> 
       <div class="splide" v-if="business_info.cover.length">
-        <splide :options="options" :key="business_info.cover.length" class="banner r-image">
+        <splide :options="options" :perPage="perPage" :key="business_info.cover.length" class="banner r-image">
           <splide-slide v-for="cover in business_info.cover" :key="cover.id">
             <img :src="cover.media_url" class="r-image" />
           </splide-slide>
@@ -165,7 +165,7 @@
                 >
                   <fas-icon
                     class="mr-2"
-                    :icon="['fas', 'pencil-alt']"
+                    :icon="['fas', 'plus']"
                     size="lg"
                   />
                   {{ $t("businessowner.Add_Cover") }}
@@ -219,26 +219,7 @@ export default {
       cover_photo: null,
       profile_photo: null,
 
-      options: {
-        rewind: true,
-        autoplay: true,
-        perPage: 3,
-        pagination: false,
-
-        type: "loop",
-        perMove: 1,
-
-        breakpoints: {
-          760: {
-            perPage: 1,
-            gap: "0rem",
-          },
-          992: {
-            perPage: 2,
-            gap: "1rem",
-          },
-        },
-      },
+    
     };
   },
 
@@ -403,6 +384,63 @@ export default {
     business_info() {
       return this.$store.state.businessOwner.businessInfo;
     },
+
+     perPage(){
+       if(this.business_info.cover){
+
+
+     
+       if (this.business_info.cover.length==1){
+         return 1;
+       }else if(this.business_info.cover.length==2){
+         return 2;
+       }else{
+       return 3;
+       }
+         }else{   return 3}
+      
+     },
+
+
+     perPageM(){
+
+       if(this.business_info.cover){
+       if (this.business_info.cover.length==1){
+         return 1;}
+       else{
+       return 2;
+       } }else{return 3}
+      
+     },
+
+
+
+options(){   
+
+      return {
+        rewind: true,
+        autoplay: true,
+        perPage:this.perPage,
+        pagination: false,
+
+        type: "loop",
+        perMove: 1,
+
+        breakpoints: {
+          760: {
+            perPage: 1,
+            gap: "0rem",
+          },
+          992: {
+        
+             perPage:this.perPageM,
+            gap: "1rem",
+          },
+        },
+      };
+
+},
+
   },
 
   watch: {

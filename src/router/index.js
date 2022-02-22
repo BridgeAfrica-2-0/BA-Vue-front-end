@@ -231,7 +231,7 @@ const routes = [
     name: "profile_owner",
     component: profile_owner,
     meta: {
-      auth: true,
+     // auth: true,
     },
   },
   {
@@ -318,7 +318,7 @@ const routes = [
     name: "Membar Network Follower",
     component: memberNetworkFollower,
     meta: {
-      auth: true,
+     // auth: true,
     },
 
   },
@@ -344,16 +344,12 @@ const routes = [
     name: "Login",
     component: Login,
   },
-
    
   {
     path: "/auth/google/callback",
     name: "Login",
     component: Login,
   },
-
-
-  
 
   {
     path: "/login/validation",
@@ -401,8 +397,7 @@ const routes = [
       auth: true,
     },
   },
-
-
+  
   {
     path: "/businessvisitor",
     name: "BusinessVisitor",
@@ -432,7 +427,7 @@ const routes = [
     name: "Follower",
     component: Follower,
     meta: {
-      auth: true,
+    //  auth: true,
     },
   },
   
@@ -469,7 +464,12 @@ const routes = [
     name: "notFound",
     component: notFound,
   },
-
+  {
+    path: "/business/:id/guest",
+    name: "BusinessFollowerGuest",
+    component: businessFollower,
+    props: { isGuestUser: true }
+  }
 ];
 
 const router = new VueRouter({
@@ -482,6 +482,12 @@ router.beforeEach((to, from, next) => {
   const loggedIn = localStorage.getItem("user");
 
   if (to.matched.some((record) => record.meta.auth) && !loggedIn) {
+    
+    if (to.name == 'BusinessFollower') {
+      next("/business/"+to.params.id+"/guest");
+      return;
+    }
+    
     next("/login");
     return;
   }

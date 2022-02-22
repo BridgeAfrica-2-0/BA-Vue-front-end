@@ -139,6 +139,8 @@
 import Business from "@/components/businessOwner/tabs/business";
 import People from "@/components/businessOwner/tabs/people";
 import Network from "@/components/businessOwner/tabs/network";
+import { isGuestUser } from '@/helpers';
+
 export default {
   name: "comunitiDashboard",
 
@@ -147,10 +149,12 @@ export default {
     Business,
     Network,
   },
-
+  data() {
+    return {
+      isGuestUser: isGuestUser,
+    };
+  },
   methods: {
-
-    
     nFormatter(num) {
       if (num >= 1000000000) {
         return (num / 1000000000).toFixed(1).replace(/\.0$/, "") + "G";
@@ -167,7 +171,7 @@ export default {
 
   computed: {
     total() {
-      return this.$store.state.businessOwner.Tcommunity;
+      return this.isGuestUser ? this.$store.state.businessGuest.Tcommunity : this.$store.state.businessOwner.Tcommunity;
     },
   },
 };

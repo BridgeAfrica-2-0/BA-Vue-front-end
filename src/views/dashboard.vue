@@ -3,6 +3,8 @@
     <navbar></navbar>
 
     <div class="text-justify p-card pr-1">
+    
+      <CompleteProfile class="mb-2"  v-if="showcompleteprofile" />
       <CarousselDashboard class="mm-top" /> <br />
 
       <div v-if="selectedb == 'owner'"> 
@@ -156,7 +158,7 @@ import BusinessDashboard from "@/components/dasboard/businessDashboard";
 import ComunitiDashboard from "@/components/dasboard/comunitiDashboard";
 
 import ComunitiBdashboard from "@/components/dasboard/comunitiBdashboard";
-
+import CompleteProfile from "@/components/dasboard/completeProfile";
 import Insights from "@/components/dasboard/insights";
 import CommunityActivity from "@/components/dasboard/communityActivity";
 
@@ -173,6 +175,8 @@ import Popularnetwork from "@/components/dasboard/popularnetwork";
 import mapbox from "@/components/mapbox";
 import { WhoIsIt } from "@/mixins";
 
+import { mapGetters, mapActions, mapMutations} from 'vuex'
+
 export default {
   name: "dashboard",
   
@@ -188,7 +192,8 @@ export default {
       category: "",
       boptions: [],
       detail: null,
-      data1: null
+      data1: null,
+      showcompleteprofile:false,
     };
   },
 
@@ -203,6 +208,7 @@ export default {
     Insights,
     Popularnetwork,
     // Map,
+    CompleteProfile,
     EmptyBusiness,
     Profile,
     CarousselDashboard,
@@ -211,6 +217,19 @@ export default {
   },
 
   methods: {
+    ...mapMutations({
+      auth: 'auth/profilConnected',
+    }),
+
+    async checkIfItNetwork(){
+      if ("network" == this.profile.user_type){
+        const request = await this.$repository.share.switch(null,"reset");
+
+        if (request.status)
+          this.auth()
+      }
+      
+    },
     async switchBusiness(value) {
       this.data1 = false;
       console.log("business switch" + value);
@@ -346,6 +365,20 @@ export default {
   },
 
   created() {
+
+       
+    this.$store
+      .dispatch('profile/loadUserPostIntro', null)
+      .then((response) => {
+       
+      })
+      .catch((error) => {
+      
+      });
+
+    
+    this.checkIfItNetwork();
+
     this.$store
       .dispatch("ProfileAndBusinessDetails/getdetails")
       .then((response) => {
@@ -355,22 +388,31 @@ export default {
 
     this.dashboardPpost();
 
-    
   },
 
   mounted(){
+
+   
+
+     if (this.Profile_complete == null) {
+        this.showcompleteprofile=true;    
+      } 
+
     this.$store
       .dispatch("ProfileAndBusinessDetails/getdetails")
       .then((response) => {
         this.getbusiness();
        this.data1 = true;
-        console.log('response----',response.data.business[0])
+      
       });
 
     this.dashboardPpost();
   },
 
   computed: {
+    ...mapGetters({
+      profile: 'auth/profilConnected'
+    }),
     selectedBusiness: function(){
       let data = this.$store.state.dashboard.dashboard_business;
       data.lat= data.latitute;
@@ -381,6 +423,10 @@ export default {
     details() {
       return this.$store.getters["ProfileAndBusinessDetails/getdetails"];
     },
+    Profile_complete(){
+
+      return this.$store.state.profile.profileIntro.user.profile_complete;
+    }
   },
 
   watch: {

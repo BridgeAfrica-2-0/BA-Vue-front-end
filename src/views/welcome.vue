@@ -4,6 +4,42 @@
 
     <md-progress-bar md-mode="indeterminate" v-if="sendingB" />
 
+
+
+     
+
+  <div>
+
+  <b-modal id="modal-center" ref="welcomemodal" centered hide-footer hide-header>
+  
+      <div class="container-fluid">      
+
+        <img src="@/assets/welcome.png" class="w-image" alt="">
+
+         <h4 class="text-center username f-30">
+          {{ $t("welcome.Hello") }} <b> {{ username }}    </b
+          >    {{$t("auth.you_are_ready_to_start")}}
+        </h4>
+        <br />
+       
+
+        <p class="text f-16">
+        {{$t("auth.welcome_text")}} 
+                  
+        </p>    
+
+
+
+          <div class="mt-5 ">  <b-button variant="primary" class="float-left w-120" @click="skipToDashboard"> {{$t("auth.skip")}} </b-button>  <b-button variant="danger" class="float-right w-120" @click="continueWelcome"> {{$t("auth.continue")}} </b-button>   </div>
+
+      </div>
+  </b-modal>
+</div>
+
+
+
+
+
     <div
       v-if="first_page == 'true'"
       class="container border mt-5 modal-lg p-welcome "
@@ -318,8 +354,6 @@
                     drag-mode="move"
                     :view-mode="1"
                   />
-
-
 
                     </div>
 
@@ -984,6 +1018,19 @@ export default {
   },
 
   methods: {
+
+    skipToDashboard(){
+
+   this.$router.push("/dashboard");
+
+    },
+
+    continueWelcome(){
+
+       this.$refs["welcomemodal"].hide();
+
+    },
+
     changeTab(e,e1){
       console.log('-----',e, '--',e1)
       if(e == 1 && e1 == 0) this.showMap = true;
@@ -1638,7 +1685,13 @@ this.$refs.cropper.getCroppedCanvas().toBlob((blob) => {
   },
 
   mounted() {
-    // this.peopleAround();
+   
+    const lal = this.$route.query.show;
+    
+     if(lal!='yes'){
+     this.$refs["welcomemodal"].show();
+     }
+    
     this.locateGeoLocation();
 
     this.Country();
@@ -1769,6 +1822,14 @@ import "vue-form-wizard/dist/vue-form-wizard.min.css";
 </script>
 
 <style>
+.w-image{
+  max-height: 300px;
+  object-fit: cover;
+  width: 100%;
+}
+.w-120{
+  width: 120px;;
+}
 #preview {
   display: flex;
   justify-content: center;

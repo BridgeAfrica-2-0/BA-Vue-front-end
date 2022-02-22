@@ -98,6 +98,7 @@ class Repository {
 
   async getNetworkAndBusiness(networkId = null) {
     try {
+      if (localStorage.getItem('isGuestUser')) return { success: true, data: [] };
       const link = networkId ? `user-business-network?networkId=${networkId}` : `user-business-network`
 
       console.log(link)
@@ -161,13 +162,15 @@ class Repository {
     } catch (error) {
       return {
         success: false,
-        data: error.response.message
+        data: error.response.data.errors
       }
     }
   }
 
   async WhoIsConnect({ networkId, type }) {
     try {
+      if (localStorage.getItem('isGuestUser')) return { success: true, data: [] };
+
       const response = await axios.get(type ? `interface?networkId=${networkId}` : `interface`)
       return {
         success: true,
@@ -177,7 +180,7 @@ class Repository {
     } catch (error) {
       return {
         success: false,
-        data: error.response.message
+        data: error.response.data.errors
       }
     }
   }
@@ -192,7 +195,7 @@ class Repository {
     } catch (error) {
       return {
         success: false,
-        data: error.response.message
+        data: error.response.data.errors
       }
     }
   }
@@ -208,7 +211,7 @@ class Repository {
     } catch (error) {
       return {
         success: false,
-        data: error.response.message
+        data: error.response.data.errors
       }
     }
   }
@@ -224,7 +227,7 @@ class Repository {
     } catch (error) {
       return {
         success: false,
-        data: error.response.message
+        data: error.response.data.errors
       }
     }
   }
@@ -240,7 +243,7 @@ class Repository {
     } catch (error) {
       return {
         success: false,
-        data: error.response.message
+        data: error.response.data.errors
       }
     }
   }
@@ -256,7 +259,7 @@ class Repository {
     } catch (error) {
       return {
         success: false,
-        data: error.response.message
+        data: error.response.data.errors
       }
     }
   }
@@ -272,7 +275,7 @@ class Repository {
     } catch (error) {
       return {
         success: false,
-        data: error.response.message
+        data: error.response.data.errors
       }
     }
   }
@@ -288,7 +291,7 @@ class Repository {
     } catch (error) {
       return {
         success: false,
-        data: error.response.message
+        data: error.response.data.errors
       }
     }
   }

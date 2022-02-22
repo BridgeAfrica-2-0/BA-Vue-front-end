@@ -120,6 +120,8 @@ export default {
   data() {
     return {
       page: 1,
+      islogin:'',
+      network:[],
       foll_id: null,
       infiniteId: +new Date(),
       options: {
@@ -134,7 +136,7 @@ export default {
     };
   },
   computed: {
-    network() {
+    old_network() {
       if (this.type == 'Follower') {
         return this.$store.state.profile.NcommunityFollower.network_followers;
       } else {
@@ -144,6 +146,7 @@ export default {
   },
 
   mounted() {
+     this.islogin=this.$store.getters["auth/isLogged"];
     this.foll_id = this.$route.params.id ? this.$route.params.id : '';
   },
 
@@ -298,6 +301,10 @@ export default {
       } else {
         url = 'profile/network/following/';
       }
+
+       if(!this.islogin){
+            url='guest/'+url;
+          }
 
       axios
         .get(url + this.page + '?keyword=' + this.searchh + '&id=' + this.foll_id)

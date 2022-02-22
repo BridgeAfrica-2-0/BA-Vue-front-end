@@ -15,7 +15,7 @@
             <div class="flx100">
               <p class="textt">
                 <strong class="title">
-                  <router-link :to="'business/' + item.id">
+                  <router-link :to="'/business/' + item.id">
                   {{ item.name }}
                   </router-link>
                 </strong>
@@ -140,6 +140,7 @@ export default {
   data() {
     return {
       page: 1,
+       islogin:'',
       foll_id: null,
       biz_id: null,
       businesses: [],
@@ -170,6 +171,7 @@ export default {
   },
 
   mounted() {
+     this.islogin=this.$store.getters["auth/isLogged"];
     this.foll_id = this.$route.params.id ? this.$route.params.id : "";
   },
 
@@ -193,6 +195,10 @@ export default {
         this.type === "Follower"
           ? `profile/business/follower/`
           : `profile/business/following/`;
+
+           if(!this.islogin){
+            url='guest/'+url;
+          }
 
       console.log(this.foll_id);
 

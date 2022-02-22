@@ -600,8 +600,19 @@ export default {
         });
     },
 
-    getImages({ commit }) {
-      return axios.get("profile/user/media").then(({ data }) => {
+    getImages({ commit, rootGetters }) {
+
+        let auth=rootGetters['auth/isLogged'];  
+        let url='profile/user/media';
+  
+        if(!auth){    
+          url = 'guest/profile/user/media';  
+        }
+
+
+
+
+      return axios.get(url).then(({ data }) => {
         commit("setImages", data.data);
         console.log(data);
       });
@@ -721,16 +732,28 @@ export default {
 
 
 
-    async loadUserPostIntro(context, payload) {
+    async loadUserPostIntro({ commit, rootGetters }, payload) {
+
+   
+
+
+        let auth=rootGetters['auth/isLogged'];  
+        let url='userIntro';
+  
+        if(!auth){    
+          url = 'guest/profile/userIntro';  
+        }
+
+
       let response_ = null;
-      await axios.get('userIntro')
+      await axios.get(url)
 
         .then(response => {
           if (!response) {
             throw "Cannot Found User Post Intro";
           }
           response_ = response.data[0];
-          context.commit("editPostUserIntro", response.data.data);
+          commit("editPostUserIntro", response.data.data);
         })
         .catch(error => {
           console.log("Load User Intro Echec");

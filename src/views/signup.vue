@@ -73,9 +73,9 @@
           </div>
 
           <md-field :class="getValidationClass('email')">
-            <label for="email"> {{ $t("auth.email") }} </label>
+            <label for="email"> {{ $t("auth.email") }} {{ $t("auth.or") }}  {{ $t("auth.Tel") }}  </label>
             <md-input
-              type="email"
+              type="text"
               name="email"
               id="email"
               autocomplete="email"
@@ -83,20 +83,20 @@
               :disabled="sending"
             />
             <span class="md-error" v-if="!$v.form.email.required">
-              {{ $t("auth.the_email_is_required") }}
+              {{ $t("auth.email_or_tel_is_required") }}
             </span>
             <span class="md-error" v-else-if="!$v.form.email.email"
               >{{ $t("auth.invalid_email") }}
             </span>
           </md-field>
 
-          <md-field :class="getValidationClass('tel')">
+          <!-- <md-field :class="getValidationClass('tel')">
             <label for="tel"> {{ $t("auth.Tel") }} </label>
             <md-input type="number" name="tel" id="tel" v-model="form.tel" />
             <span class="md-error" v-if="!$v.form.tel.required">
               {{ $t("auth.tel_is_required") }}
             </span>
-          </md-field>
+          </md-field> -->
 
           <md-field :class="getValidationClass('password')">
             <label for="password"> {{ $t("auth.Password") }} </label>
@@ -251,13 +251,10 @@ export default {
          sameAsPassword: sameAs('password')
       },
 
-      tel: {
-        required,
-      },
 
       email: {
-       // required,
-       email,
+        required,
+     
       },
     },
   },

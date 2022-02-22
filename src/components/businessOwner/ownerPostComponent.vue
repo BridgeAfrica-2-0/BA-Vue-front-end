@@ -308,7 +308,6 @@ export default {
 
 
   created() {
-    console.log(this.profile)
     this.item = this.post;
     this.posterID = this.post.poster_id
       ? this.post.poster_id

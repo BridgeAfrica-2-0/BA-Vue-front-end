@@ -239,7 +239,7 @@
                       </div>
                     </div>
                     <hr class="h-divider" />
-                    <router-link :to="newRedirection('message')">
+                    <router-link :to="newRedirection('message')" v-if="islogin">
                       <u>{{ $t("general.See_Inbox") }}</u>
                     </router-link>
                   </div>
@@ -294,7 +294,7 @@
                     </div>
                     <hr class="h-divider" />
 
-                    <router-link :to="newRedirection('notification')"
+                    <router-link  v-if="islogin" :to="newRedirection('notification')"
                       ><u>{{
                         $t("general.See_all_Notifications")
                       }}</u></router-link
@@ -643,7 +643,7 @@ export default {
   data() {
     return {
       isActive: false,
-      islogin: true,
+      islogin: null,
       shownav: false,
       notifications: [],
       messages: [],
@@ -655,6 +655,7 @@ export default {
       users: [],
     };
   },
+
   computed: {
     ...mapGetters({
       hasLauchNetworkRequest: "social/INIT",
@@ -669,7 +670,8 @@ export default {
   created() {
     //check for authentication
 
-    this.islogin = this.$store.getters["auth/isLogged"];
+    this.islogin = this.$store.getters["auth/profilConnected"];
+
 
     if (this.islogin) {
       this.init();
@@ -723,7 +725,7 @@ export default {
 
   watch: {
     "$store.state.auth.profilConnected": function () {
-      console.log("AUTH CHANGED!!!");
+      
       this.updateNotificationEvent();
       this.userOwnPage = this.onRedirect();
     },
@@ -745,7 +747,7 @@ export default {
         });
     },
   },
-  //image.profile_picture image.logo_path, image.image
+  
   filters: {
     stringify(value) {
       return JSON.stringify(value, null, 2);
@@ -833,7 +835,7 @@ export default {
 
     newRedirection(type) {
       try {
-        console.log(this.redirectionPatterns[type])
+        
         const newPath = this.redirectionPatterns[type][this.user.user_type]();
 
         if (newPath) {

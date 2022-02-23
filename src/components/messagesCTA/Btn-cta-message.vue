@@ -1,5 +1,9 @@
 <template>
-  <b-button
+  <b-button :icon="shop" variant="primary" v-if="isBuyNow" @click="cta()">
+    <span>Buy now</span>
+  </b-button>
+
+  <b-button v-else
     :block="header"
     variant="primary"
     size="sm"
@@ -15,7 +19,7 @@
       <i class="fas fa-envelope fa-lg btn-icon"></i>
       <span class="ml-1"> {{ $t("businessf.Message") }}</span>
     </span>
-    <span v-else-if="isBuyNow" class="btn-text centralize"> Buy Now </span>
+    <!-- <span v-else-if="isBuyNow" >Buy Now</span> -->
     <span v-else style="display: inline-flex">
       <i class="fas fa-envelope fa-lg btn-icon pb-3 mt-1 mr-1 mt-sm-1"></i>
       <span class="btn-text" style="margin-top: -1px">
@@ -23,6 +27,7 @@
       >
     </span>
   </b-button>
+
 </template>
 
 <script>
@@ -100,7 +105,7 @@ export default {
        * Fired when the button is clicked.
        *
        */
-      console.log(this.element);
+      
       this.$store.commit("businessChat/setSelectedChat", {
         isProduct: this.isProduct,
         ...this.element,

@@ -290,6 +290,7 @@
               v-bind:Selectedcategory="Selectedcategory"
               v-bind:Selectedparentcategory="Selectedparentcategory"
               :categoryName.sync="categoryName"
+              :findByCategory="(val) => getCategory(val)"
             />
           </div>
         </b-col>
@@ -533,6 +534,7 @@
     </div>
   </div>
 </template>
+
 
 <script>
 import _ from "lodash";

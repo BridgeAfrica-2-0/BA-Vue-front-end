@@ -14,31 +14,18 @@
               :id="'dropdown-' + index"
             >
               <template slot="button-content">
-                <span
-
-                  
-                  @click="() => {
-                   showSubCat(category.category, category.sub_cat)
-                   bcategory({ cat_id: category.category.id })
-                 }">
+                <span @click="() => {
+                  showSubCat(category.category, category.sub_cat)
+                  bcategory({ cat_id: category.category.id })
+                }">
                   {{ category.category.name }}
                 </span>
               </template>
               <hr
-                style="
-                  margin-top: -10px;
-                  background-color: red;
-                  height: 3px;
-                  width: 41%;
-                  float: left;
-                "
+                style="margin-top: -10px;background-color: red;height: 3px;width: 41%;float: left;"
               />
               <br />
-              <div 
-
-              :id="`category-${category.category.id}`"
-              @mouseleave="hideSubCat(category.category.id)" 
-              :ref="category.category.id">
+              <div :ref="category.category.id">
                 <b-row>
                   <b-dropdown-item
                     v-for="(subCat, subIndex) in category.sub_cat.slice(0, 6)"
@@ -52,7 +39,6 @@
                         class="img-fluid picture logo-img"
                         :src="subCat.cat_image"
                       />
-
                       {{ subCat.name }}
                     </b-col>
                   </b-dropdown-item>
@@ -122,15 +108,24 @@ export default {
       return this.$store.getters["marketSearch/getSubCat"];
     },
   },
+
+  watch:{
+    "$store.state.marketSearch.categories":function(categories){
+      this.showSubCat(categories[0].category, categories[0].sub_cat, false)
+    }
+  },
+
   created() {
     this.getCategories();
   },
   methods: {
+    
     bcategory(category) {
       console.log("HOVER...", category);
       this.$emit("category", category);
-      // console.log(category);
+      
     },
+
     getCategories() {
       this.$store
         .dispatch("marketSearch/getCategories")
@@ -141,15 +136,18 @@ export default {
           console.log("Error erro!");
         });
     },
+
     async getProducts() {
       console.log("PRoducts ", this.$store.getters["marketSearch/getProducts"]);
       await this.$store.dispatch("marketSearch/getProducts");
     },
+
     async searchProduct(data) {
       console.log("clicked...");
       await this.$store.dispatch("marketSearch/searchProducts", data);
       // console.log("PRoducts ", this.$store.getters["marketSearch/getProducts"]);
     },
+
     searchByCat(data) {
       console.log("nani...");
       this.allSearch(data);
@@ -166,24 +164,24 @@ export default {
           console.log("Error erro!");
         });
     },
-    showSubCat(category, subCat) {
-      
-      this.$store.commit("marketSearch/setSubFilters", []);
+
+    showSubCat(category, subCat, show=true) {
+
       this.$refs[category.id][0].visible = true;
 
-      this.$emit("parentcategory", category.id);
-      this.$emit("on:category:name", category.name)
+      if (show)
+        this.$emit("parentcategory", category.id);
+
+      this.$emit("on:category:name", category.name )
       // this.subCategories.push(subCat);
       // this.searchProduct({ catId: catId, cat_id: catId });
       this.$store.commit("marketSearch/setSubCat", subCat);
-
       if (!subCat.length) this.hideSubCat(category.id);
       // console.log("Subcat:", this.subCategories);
     },
+
     hideSubCat(catId) {
-
-      
-
+      console.log("hide me ---------------------------------------")
       this.$refs[catId][0].visible = false;
       this.subCategories = [];
     },

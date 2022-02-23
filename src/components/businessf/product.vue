@@ -67,8 +67,8 @@
             </div>
 
             <div class="ml-2">
-              <b-button variant="primary" @click="handleAddToCard(product)"
-                ><span>{{ $t("general.Add_to_Cart") }}</span>
+              <b-button variant="primary" style="width:100%" @click="handleAddToCard(product)"
+                >{{ $t("general.Add_to_Cart") }}
               </b-button>
             </div>
           </div>

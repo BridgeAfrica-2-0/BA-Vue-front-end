@@ -47,6 +47,7 @@
           <hr />
         </span>
       </div>
+
       <b-modal ref="myfilters" id="myModalll" hide-footer title=" ">
         <div style="column-count: 2">
           <b-form-radio
@@ -410,7 +411,7 @@
 
     <component :is="currentFilter" />
 
-    <b-modal ref="myfilters" id="userNeighbourhood" hide-footer title=" ">
+    <b-modal ref="myfilters" id="userNeighbourhood" hide-footer title="GGGG">
       <b-form-group
         label-cols-lg="12"
         :label="$t('search.Neighbourhood')"

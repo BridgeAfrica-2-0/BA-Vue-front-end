@@ -1,5 +1,5 @@
 <template>
-  <b-button :icon="shop" variant="primary" v-if="isBuyNow" @click="cta()">
+  <b-button variant="primary" v-if="isBuyNow" @click="cta()" style="width:100%">
     <span>Buy now</span>
   </b-button>
 

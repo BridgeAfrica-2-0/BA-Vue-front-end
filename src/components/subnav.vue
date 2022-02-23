@@ -7,15 +7,17 @@
           <span
             v-for="(category, index) in categories.slice(0, 6)"
             :key="index"
-            @mouseleave="hideSubCat(category.category.id)"
+            
             
           >
             <b-nav-item-dropdown
               :id="'dropdown-' + index"
             >
               <template slot="button-content">
-                <span 
-                                @click="() => {
+                <span
+
+                  
+                  @click="() => {
                    showSubCat(category.category, category.sub_cat)
                    bcategory({ cat_id: category.category.id })
                  }">
@@ -34,7 +36,8 @@
               <br />
               <div 
 
-
+              :id="`category-${category.category.id}`"
+              @mouseleave="hideSubCat(category.category.id)" 
               :ref="category.category.id">
                 <b-row>
                   <b-dropdown-item
@@ -178,8 +181,9 @@ export default {
       // console.log("Subcat:", this.subCategories);
     },
     hideSubCat(catId) {
-      console.log('hide subcategory')
-      console.log(this.$refs[catId][0])
+
+      
+
       this.$refs[catId][0].visible = false;
       this.subCategories = [];
     },

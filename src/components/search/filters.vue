@@ -2,7 +2,8 @@
   <div>
     <div v-if="filterType == '0' || filterType == '1' || filterType == '4'">
       <div v-if="subCategories.length">
-        <p><b>{{categoryName}}</b></p>
+        
+        <b-form-select v-model="categoryName" :options="categoriesAll"></b-form-select>
         <span>
           <b-form-radio
             v-for="(subCat, index) in subCategories.slice(0, 4)"
@@ -509,9 +510,19 @@
 <script>
 import { PeopleFilter, PostFilter } from "@/components/search";
 export default {
+  
   name: "filters",
+
   props: ["filterType", "Selectedcategory", "Selectedparentcategory", "categoryName"],
+  
   watch: {
+    
+    categoryName:function(value){
+      const cat = this.$store.getters["marketSearch/getCategories"].find(r => r.category.name === value)
+
+      this.showSubCat(cat.category.id, cat.category.sub_cat)
+    },
+
     filterType: function (newId) {
       try {
         this.currentFilter = this.strategies[newId]();
@@ -519,6 +530,7 @@ export default {
         this.categoryName = null;
       }
     },
+
     Selectedparentcategory: function (newVal) {
       
       switch (newVal) {
@@ -549,6 +561,7 @@ export default {
           break;
       }
     },
+
     Selectedcategory: function (newVal) {
       this.showform = false;
       console.log(newVal);
@@ -705,7 +718,9 @@ export default {
           break;
       }
     },
+
   },
+
   data() {
     return {
       // [Edouard] data
@@ -1541,12 +1556,28 @@ export default {
   },
 
   computed: {
+    
     lneighbourhoods() {
       return this.$store.getters["auth/neigbourhoods"];
     },
-    categories() {
-      return this.$store.getters["marketSearch/getCategories"];
+
+    categoriesAll() {
+
+      const category = this.$store.getters["marketSearch/getCategories"].map(e => {
+        return {
+          "id": e.category.id,
+          "value": e.category.name,
+          "text":e.category.name,
+          "sub_cat": e.category.sub_cat
+        }
+      })
+      return category
     },
+
+    categories() {
+      return this.$store.getters["marketSearch/getCategories"]
+    },
+
     subCategories() {
       return this.$store.getters["marketSearch/getSubCat"];
     },
@@ -1586,6 +1617,22 @@ export default {
   },
 
   methods: {
+
+    showSubCat(category, subCat) {
+      
+      this.$store.commit("marketSearch/setSubFilters", []);
+      
+
+      this.$emit("parentcategory", category.id);
+      this.$emit("on:category:name", category.name)
+      // this.subCategories.push(subCat);
+      // this.searchProduct({ catId: catId, cat_id: catId });
+      this.$store.commit("marketSearch/setSubCat", subCat);
+
+      //if (!subCat.length) this.hideSubCat(category.id);
+      // console.log("Subcat:", this.subCategories);
+    },
+
     getFilter(subCat) {
       // this.filterLoader = true;
       console.log("[SUbcat]:", subCat);

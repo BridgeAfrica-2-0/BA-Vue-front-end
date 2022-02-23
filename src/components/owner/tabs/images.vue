@@ -286,7 +286,7 @@ export default {
     },
 
     showImg(index) {
-      console.log(index)
+      
       this.currentPicture = this.Slideimges.indexOf(index);
       this.visible = true;
     },

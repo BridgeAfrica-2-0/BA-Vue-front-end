@@ -35,9 +35,9 @@
                     {{ count(item.followers) }}
                     {{ $t("dashboard.Community") }} <br />
 
-                    <span class="location">
+                    <span class="location"  v-for="country in item.country" :key="country.name">
                       <b-icon-geo-alt class="ico"></b-icon-geo-alt
-                      >{{ item.country }}
+                      >{{ country.name }}
                     </span>
                     <br />
                     <read-more

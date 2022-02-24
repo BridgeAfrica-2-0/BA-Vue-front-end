@@ -89,6 +89,7 @@
 
 <script>
 import { MglMap, MglPopup, MglMarker } from "vue-mapbox";
+import { isGuestUser } from '@/helpers';
 export default {
   data() {
     return {
@@ -96,6 +97,7 @@ export default {
       mapStyle: "mapbox://styles/mapbox/outdoors-v11",
       coordinates: [11.504929555178624, 3.8465173382452815], // Lng,Lat
       zoom: 11,
+      isGuestUser: isGuestUser,
     };
   },
 
@@ -106,7 +108,7 @@ export default {
   },
   computed: {
     business_intro() {
-      return this.$store.state.businessOwner.businessInfo;
+      return this.isGuestUser ? this.$store.state.businessGuest.businessInfo: this.$store.state.businessOwner.businessInfo;
     },
   },
 };

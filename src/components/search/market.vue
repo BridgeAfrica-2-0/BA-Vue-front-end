@@ -83,8 +83,10 @@
                 cols="4"
                 class="mt-2 text-center"
               >
-                <b-button variant="primary" @click="AddToCard(prod)"
-                  ><span>Add to Cart</span>
+                <b-button variant="primary" style="width:100%" @click="AddToCard(prod)"
+                  >
+                  <b-icon icon="cart4"></b-icon>
+                  <span>Add to Cart</span>
                 </b-button>
               </b-col>
             </b-row>

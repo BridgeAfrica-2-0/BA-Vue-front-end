@@ -79,7 +79,6 @@
             :isEditor="isEditor"
             :type="type"
             :getStyle="getStyle"
-            
           />
         
       <vue-easy-lightbox
@@ -287,6 +286,7 @@ export default {
     },
 
     showImg(index) {
+      
       this.currentPicture = this.Slideimges.indexOf(index);
       this.visible = true;
     },

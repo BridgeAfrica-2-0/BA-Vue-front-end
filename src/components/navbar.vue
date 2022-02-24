@@ -805,7 +805,7 @@ export default {
         this.getGeo({ lat: latitude, lng: longitude });
 
         //time to get some neighbourhood mother fuckers ?lat=3.87374300&lng=11.49966000
-        this.getNeigbourhoods({ lat: "", lng: "" });
+        this.getNeigbourhoods({ lat: "", lng: "" });    
       };
 
       const error = (err) => {

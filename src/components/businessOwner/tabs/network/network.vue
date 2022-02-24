@@ -56,7 +56,7 @@ export default {
   },
   computed: {
     total() {
-      return this.isGuestUser ? this.$store.state.businessGuest.Tcommunity: this.$store.state.businessOwner.Tcommunity;
+      return this.isGuestUser() ? this.$store.state.businessGuest.Tcommunity: this.$store.state.businessOwner.Tcommunity;
     },
   },
 };

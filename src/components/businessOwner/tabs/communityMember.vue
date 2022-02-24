@@ -285,7 +285,7 @@ export default {
 
     infiniteHandler($state) {
       let url = null;
-      const basePrefix = this.isGuestUser ? 'guest/' : '';
+      const basePrefix = this.isGuestUser() ? 'guest/' : '';
 
       if (this.type == "Follower") {
         url = basePrefix+"business/community/people-follower/" + this.biz_id + "/";

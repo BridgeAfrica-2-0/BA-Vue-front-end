@@ -24,12 +24,17 @@
 <script>
 import Followers from "./tabs/followers";
 import Following from "./tabs/following";
+import { isGuestUser } from "@/helpers";
 export default {
   components: {
     Followers,
     Following
   }
-  ,
+  , data() {
+    return {
+      isGuestUser: isGuestUser,
+    };
+  },
    methods: {
    
 
@@ -50,9 +55,15 @@ export default {
 
   },
   computed: {
-    total() {
-      return this.$store.state.businessOwner.Tcommunity;
+   
+
+     total() {
+      return this.isGuestUser()
+        ? this.$store.state.businessGuest.Tcommunity
+        : this.$store.state.businessOwner.Tcommunity;
     },
+
+
   },
 };
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div class="lalala">
-    <div class=" border mt-2 ">
+    <div class=" border mt-2 "> 
       <span>
         <h6 class="title m-3">
           <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
@@ -171,7 +171,7 @@ export default {
 
   computed: {
     total() {
-      return this.isGuestUser ? this.$store.state.businessGuest.Tcommunity : this.$store.state.businessOwner.Tcommunity;
+      return this.isGuestUser() ? this.$store.state.businessGuest.Tcommunity : this.$store.state.businessOwner.Tcommunity;
     },
   },
 };

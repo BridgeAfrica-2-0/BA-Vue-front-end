@@ -155,7 +155,20 @@
         </b-col>
 
         <b-modal ref="myfilters" id="myModall" hide-footer title=" ">
-          <div class="d-block d- d-sm-block d-md-block d-lg-block d-xl-none">
+          <div class="d-block d- d-sm-block d-md-block d-lg-block d-xl-none">   
+
+           <!-- lllllllllll -->
+
+           <div class="ml-3">
+            <Filters
+              v-bind:filterType="selectedId"
+              v-bind:Selectedcategory="Selectedcategory"
+              v-bind:Selectedparentcategory="Selectedparentcategory"
+            />
+
+           </div>
+
+           
             <div v-if="!isFilter">
               <!-- Category -->
               <div v-if="categories.length > 0">
@@ -652,7 +665,7 @@ export default {
     this.strategY = {
       users: () => this.onFindUser(),
       all: () => this.getKeyword(),
-      market: () => this.searchProducts(),
+      market: () => this.searchProducts({}),
       network: () => this.searchNetworks(),
       business: () => this.onFindBusiness(),
     };
@@ -1621,7 +1634,21 @@ export default {
       immediate: true,
       deep: true,
       handler(newValue, oldValue) {
-        this.$store.commit("business/setKeyword", newValue.keyword);
+        if(this.selectedId==0){   
+        this.$store.commit("allSearch/setKeyword", newValue.keyword);
+
+        }
+
+        else if(this.selectedId==1){
+            
+            
+         this.$store.commit("business/setKeyword", newValue.keyword);
+        }else if(this.selectedId==4){
+          
+           this.$store.commit("marketSearch/setKeyword", newValue.keyword);
+
+        }
+
       },
     },
   },
@@ -1688,8 +1715,7 @@ export default {
       var keyword = this.searchParams.keyword;
 
       let elm = data ? data : keyword ? { keyword: keyword } : { keyword: "" };
-      console.log("the keyword is: ", this.searchParams.keyword);
-      console.log("keyword: ", data);
+     
 
       this.$store
         .dispatch("allSearch/SEARCH", elm)
@@ -1734,6 +1760,7 @@ export default {
     },
 
     searchProducts(data) {
+    
       this.$store
         .dispatch("marketSearch/searchProducts", data)
         .then((res) => {

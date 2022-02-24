@@ -11,6 +11,9 @@ export default {
         success: false,
         neighbourhoods: [],
 
+        keyword: null,
+        location: null,
+
     },
     getters: {
         getProducts(state) {
@@ -46,6 +49,15 @@ export default {
         setUserNeighbourhoods(state, payload) {
             state.neighbourhoods = payload;
         },
+
+        setKeyword(state, data) {
+            state.keyword = data;
+        },
+
+        setLocation(state, data) {
+            state.location = data;
+        },
+
         setProducts(state, data) {
             state.products = data;
         },
@@ -168,15 +180,28 @@ export default {
             commit("setProducts", { data: [] });
             commit("setLoader", true);
 
-            let keyword = data.keyword ? data.keyword : ''
+            let keyword = state.keyword ? state.keyword : ''
             let cat_id = data.cat_id ? data.cat_id : ''
             let sub_cat = data.sub_cat ? data.sub_cat : ''
             let filter_id = data.filter_id ? data.filter_id : ''
             let page = data.page ? data.page : ''
             let distance = data.distanceInKM ? data.distanceInKM : ''
 
+
+            //blec implementation
+           
+            let countryId = data.country_id ? "&countryId=" + data.country_id : "";
+            let regionId = data.region_id ? "&regionId=" + data.region_id : "";
+            let divisionId = data.division_id ? "&divisionId=" + data.division_id : "";
+            let councilId = data.council_id ? "&councilId=" + data.council_id : "";
+            let city = data.city ? "&city=" + data.city : "";
+            let neighbourhoodId=data.neighborhood_id ?  "&neighbourhoodId=" + data.neighborhood_id : "";
+            let neighbourhood = data.neighbourhood ? "&neighbourhood=" + data.neighbourhood : "";
+
+          
+
             try {
-                const res = await axios.get(`market/search?keyword=${keyword}&cat_id=${cat_id}&sub_cat_id=${sub_cat}&filter_id=${filter_id}&distanceInKM=${distance}&page=${page}`);
+                const res = await axios.get(`market/search?keyword=${keyword}&cat_id=${cat_id}&sub_cat_id=${sub_cat}&filter_id=${filter_id}&distanceInKM=${distance}&page=${page}`+ countryId+regionId+divisionId+councilId+city+neighbourhoodId+neighbourhood);
                 commit("setLoader", false);
                 console.log("Search results: ", res.data);
                 commit("setProducts", res.data);

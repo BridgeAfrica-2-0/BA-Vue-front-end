@@ -393,7 +393,7 @@
                   id="Test_Video"
                  
                 >
-                  <source src="../assets/video/identity.mp4" type="video/mp4" />
+                  <source muted preload="metadata" src="../assets/video/identity.mp4" type="video/mp4" />
                 </video>
               </div>
               <div class="scroll-caption  hidde" id="hidde">
@@ -418,7 +418,7 @@
                   poster="assets/img/Home scroll copy.png"
                   id="Test_Video"
                 >
-                  <source src="../assets/video/identity.mp4" type="video/mp4" />
+                  <source muted preload="metadata" src="../assets/video/identity.mp4" type="video/mp4" />
                 </video>
               </div>
               <div class="scroll-caption hidde " id="hidde">
@@ -501,7 +501,7 @@
               poster="assets/img/Home scroll copy.png"
               id="Test_Video2"
             >
-              <source src="../assets/video/search.mp4" type="video/mp4" />
+              <source muted preload="metadata" src="../assets/video/search.mp4" type="video/mp4" />
             </video>
           </div>
         </div>
@@ -569,7 +569,7 @@
               poster="assets/img/Home scroll copy.png"
               id="Test_Video3"
             >
-              <source src="../assets/video/messaging.mp4" type="video/mp4" />
+              <source muted preload="metadata" src="../assets/video/messaging.mp4" type="video/mp4" />
             </video>
           </div>
         </div>
@@ -633,7 +633,7 @@
               poster="assets/img/Home scroll copy.png"
               id="Test_Video3"
             >
-              <source src="../assets/video/offline.mp4" type="video/mp4" />
+              <source muted preload="metadata" src="../assets/video/offline.mp4" type="video/mp4" />
             </video>
           </div>
         </div>
@@ -778,6 +778,7 @@ import SiteFooter from "../components/site/siteFooter";
 // import "../assets/js/js.js";
 import Button from "@/components/ButtonNavBarFind.vue";
 import SiteHeader from "../components/site/siteHeader";
+import VLazyImage from "v-lazy-image/v2";
 export default {
   components: { Button, SiteHeader, SiteFooter },
   data() {

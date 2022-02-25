@@ -109,6 +109,7 @@
     <b-pagination
       v-if="networks.next || networks.previous"
       v-model="currentPage"
+      pills
       :total-rows="networks.total"
       :per-page="networks.per_page"
       aria-controls="my-table"

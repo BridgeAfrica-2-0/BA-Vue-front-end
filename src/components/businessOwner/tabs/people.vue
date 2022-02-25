@@ -127,15 +127,15 @@ export default {
 
     infiniteHandler($state) {
       let url = '';
-      console.log('this.isGuestUser', this.isGuestUser);
-      if (this.isGuestUser) {
+     
+      if (this.isGuestUser()) {
         url = this.type === 'Follower'
           ? `guest/business/community/people-follower/${this.biz_id}/`
           : `guest/business/community/people-following/${this.biz_id}/`;
       } else {
         url = this.type === 'Follower'
-          ? `guest/business/community/people-follower/${this.biz_id}/`
-          : `guest/business/community/people-following/${this.biz_id}/`;
+          ? `business/community/people-follower/${this.biz_id}/`
+          : `business/community/people-following/${this.biz_id}/`;
       }
       axios
         .get(url + this.page)
@@ -166,7 +166,7 @@ export default {
     },
 
      businessCommunityTotal() {
-      const dispatchMethod = this.isGuestUser ? "businessGuest/businessCommunityTotal": "businessOwner/businessCommunityTotal";
+      const dispatchMethod = this.isGuestUser() ? "businessGuest/businessCommunityTotal": "businessOwner/businessCommunityTotal";
 
       this.$store
         .dispatch(dispatchMethod, this.biz_id)

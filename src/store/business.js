@@ -27,6 +27,11 @@ export default {
         setKeyword(state, data) {
             state.keyword = data;
         },
+
+        setLocation(state, data) {
+            state.location = data;
+        },
+
         setBusinesses(state, data) {
             state.businesses = data;
 
@@ -58,18 +63,29 @@ export default {
             commit("setLoading", true);
             // let main = payload.main ? payload.main : false
 
+           
+
             return await axios.get(`search/business`, {
                 params: {
                     keyword: state.keyword,
                     main: "vrai",
                     location: payload.location,
-                    lat: state.geo.lat,
-                    lng: state.geo.lng,
+                   // lat: state.geo.lat,
+                   // lng: state.geo.lng,
                     categoryId: payload.cat_id,
                     subCategoryId: payload.sub_cat,
                     filterId: payload.filter_id,
                     distance: payload.distance,
+                    countryId:payload.country_id,
+                    regionId:payload.region_id,
+                    divisionId:payload.division_id,
+                    councilId:payload.council_id,
+
                     neighbourhoodId: payload.neighbourhood,
+                    neighbourhood:payload.neighbourhood,
+                    city:payload.city,
+
+
 
                 }
             }).then(({ data }) => {
@@ -90,7 +106,7 @@ export default {
         NEXT_PAGE({ commit, state }, pagge) {
 
             let payload = state.searchState;
-            console.log("business page number ");
+            console.log("business page number ");  
 
             console.log(pagge);
             console.log(payload.keyword);

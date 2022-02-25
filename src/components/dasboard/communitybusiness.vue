@@ -152,6 +152,7 @@ export default {
   data() {
     return {
       page: 2,
+      businesses:[],
       disable: false,
       options: {
         rewind: true,
@@ -166,7 +167,7 @@ export default {
   },
 
   computed: {
-    businesses() {
+    old_businesses() {
       if (this.type == "Follower") {
         return this.$store.state.profile.BcommunityFollower.business_followers;
       } else {

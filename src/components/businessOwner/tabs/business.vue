@@ -197,10 +197,22 @@ export default {
     },
 
     infiniteHandler($state) {
-      const url =
-        this.type === "Follower"
+     
+
+           let url ="";
+       
+
+      if (this.isGuestUser()) {
+        url = this.type === 'Follower'
+          ? `guest/business/community/business-follower/${this.biz_id}/`
+          : `guest/business/community/business-following/${this.biz_id}/`;
+      } else {
+        url = this.type === 'Follower'
           ? `business/community/business-follower/${this.biz_id}/`
           : `business/community/business-following/${this.biz_id}/`;
+      }
+
+
 
       axios
         .get(url + this.page)

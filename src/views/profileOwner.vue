@@ -18,7 +18,7 @@
             </b-tab>
             
             <b-tab :title="$t('profileowner.Business')" href="#business" class="m-0 p-0">
-              <Bussiness />
+              <Bussiness />  
             </b-tab>
         
             <b-tab :title="$t('profileowner.Networks')">

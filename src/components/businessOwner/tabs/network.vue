@@ -124,12 +124,14 @@
 
 <script>
 import axios from "axios";
+import { isGuestUser } from '@/helpers';
 
 export default {
   props: ["type"],
   data() {
     return {
       page: 1,
+       isGuestUser: isGuestUser,
       biz_id: null,
       network: [],
       options: {
@@ -180,10 +182,21 @@ export default {
     infiniteHandler($state) {
       console.log("loading network 1 1");
 
-      const url =
-        this.type === "Follower"
+      let url ="";
+       
+
+           if (this.isGuestUser()) {
+        url = this.type === 'Follower'
+          ? `guest/business/community/network-follower/${this.biz_id}/`
+          : `guest/business/community/network-following/${this.biz_id}/`;
+      } else {
+        url = this.type === 'Follower'
           ? `business/community/network-follower/${this.biz_id}/`
           : `business/community/network-following/${this.biz_id}/`;
+      }
+
+
+
 
       axios
         .get(url + this.page)

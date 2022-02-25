@@ -117,7 +117,8 @@ export default {
 
   data() {
     return {
-      page: 2,
+      page: 1,
+      users:[],
       options: {
         rewind: true,
         autoplay: true,
@@ -131,7 +132,7 @@ export default {
   },
 
   computed: {
-    users() {
+    old_users() {
       if (this.type == "Follower") {
         return this.$store.state.profile.UcommunityFollower.user_followers;
       } else {

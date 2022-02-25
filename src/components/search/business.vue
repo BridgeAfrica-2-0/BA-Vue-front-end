@@ -140,6 +140,7 @@
       v-if="business.next || business.previous"
       v-model="currentPage"
       :total-rows="total"
+      pills
       :per-page="per_page"
       aria-controls="my-table"
       @change="changePage"
@@ -198,7 +199,7 @@ export default {
   },
 
   mounted() {
-    this.getBusiness();
+    this.getBusiness();  
   },
   created(){
    

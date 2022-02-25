@@ -66,6 +66,7 @@
     </Nav>
 
     <SubNav
+      @onChangeCategoryName="(val) => categoryName = val"
       @category="getCategory"
       @parentcategory="getparentCategory"
       style="margin-top: -25px"
@@ -157,18 +158,18 @@
         <b-modal ref="myfilters" id="myModall" hide-footer title=" ">
           <div class="d-block d- d-sm-block d-md-block d-lg-block d-xl-none">   
 
-           <!-- lllllllllll -->
-
            <div class="ml-3">
             <Filters
               v-bind:filterType="selectedId"
               v-bind:Selectedcategory="Selectedcategory"
               v-bind:Selectedparentcategory="Selectedparentcategory"
+              v-bind:categoryNameSelected="categoryName"
+              @onFinByCategory="getCategory"
             />
 
            </div>
 
-<!--            
+          <!--            
             <div v-if="!isFilter">
             
               <div v-if="categories.length > 0">
@@ -301,6 +302,8 @@
               v-bind:filterType="selectedId"
               v-bind:Selectedcategory="Selectedcategory"
               v-bind:Selectedparentcategory="Selectedparentcategory"
+              v-bind:categoryNameSelected="categoryName"
+              @onFinByCategory="getCategory"
             />
           </div>
         </b-col>
@@ -679,7 +682,7 @@ export default {
       catChose: "",
       subCatChose: "",
       filterChose: "",
-
+      categoryName:"",
       islogin: true,
       searchParams: {
         keyword: "",
@@ -2101,8 +2104,7 @@ export default {
     },
 
     getCategory(value) {
-      console.log("value:", value);
-
+      
       this.Selectedcategory = value;
 
       if (this.selectedId == 4) {

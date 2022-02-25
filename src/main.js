@@ -99,7 +99,6 @@ Vue.prototype.$axios = axios;
 //     console.log(err);
 //   });
 
-
 Vue.use(VueSocialauth, {
     providers: {
         facebook: {

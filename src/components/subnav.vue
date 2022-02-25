@@ -110,8 +110,10 @@ export default {
   },
 
   watch:{
-    "$store.state.marketSearch.categories":function(categories){
-      this.showSubCat(categories[0].category, categories[0].sub_cat, false)
+
+    "$store.state.marketSearch.categories": function(categories){
+      if (categories.length)
+        this.showSubCat(categories[0].category, categories[0].sub_cat, false)
     }
   },
 
@@ -121,7 +123,6 @@ export default {
   methods: {
     
     bcategory(category) {
-      console.log("HOVER...", category);
       this.$emit("category", category);
       
     },
@@ -165,27 +166,32 @@ export default {
         });
     },
 
+
     showSubCat(category, subCat, show=true) {
 
+      
+      this.$store.commit("marketSearch/setSubFilters", []);
       this.$refs[category.id][0].visible = true;
 
       if (show)
         this.$emit("parentcategory", category.id);
 
-      this.$emit("on:category:name", category.name )
+      this.$emit("onChangeCategoryName", category.name);
       // this.subCategories.push(subCat);
       // this.searchProduct({ catId: catId, cat_id: catId });
       this.$store.commit("marketSearch/setSubCat", subCat);
       if (!subCat.length) this.hideSubCat(category.id);
       // console.log("Subcat:", this.subCategories);
+
     },
 
     hideSubCat(catId) {
-      console.log("hide me ---------------------------------------")
+
       this.$refs[catId][0].visible = false;
       this.subCategories = [];
+
     },
-    // ------------------------------------
+
     onOverMore() {
       this.$refs.More.visible = true;
       this.$emit("parentcategory", "More");

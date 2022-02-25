@@ -45,6 +45,7 @@
 
       <b-form-select v-model="nameOfCategory" :options="categoriesAll" class="mb-2"></b-form-select>
 
+      {{nameOfCategory}} 
 
       <div   class="mt-3" v-if="subCategories.length">
         <span>
@@ -693,30 +694,25 @@ export default {
 
   name: "filters",
 
-  props: ["filterType", "findByCategory", "Selectedcategory", "Selectedparentcategory", "categoryName"],
-  
+  props: ["filterType", "onFinByCategory", "Selectedcategory", "Selectedparentcategory", "categoryNameSelected"],
   watch: {
 
-
-
      query(newQuery) {
-      axios.get(`neighborhoods/${newQuery}`).then(({ data }) => {
-        this.$store.commit("auth/setneigbourhoods", data.data);
-      });
+        axios.get(`neighborhoods/${newQuery}`).then(({ data }) => {
+          this.$store.commit("auth/setneigbourhoods", data.data);
+        });
 
-      //  this.allSearch({neighbourhood:newQuery});
+        this.searchParams.neighbourhood = newQuery;
 
-      this.searchParams.neighbourhood = newQuery;
+        let data = { city: newQuery };
 
-      let data = { city: newQuery };
-
-      if (this.filterType == 1) {
-        this.searchBusiness(this.searchParams);
-      } else if (this.filterType == 4) {
-        this.searchProducts(this.searchParams);
-      } else if (this.filterType == 0) {
-        this.allSearch(this.searchParams);
-      }
+        if (this.filterType == 1) {
+          this.searchBusiness(this.searchParams);
+        } else if (this.filterType == 4) {
+          this.searchProducts(this.searchParams);
+        } else if (this.filterType == 0) {
+          this.allSearch(this.searchParams);
+        }
     },
 
     city(newQuery) {
@@ -731,32 +727,20 @@ export default {
       } else if (this.filterType == 0) {
         this.allSearch(this.searchParams);
       }
-
-
     },
 
     
-    categoryName:function(value){
-      this.nameOfCategory = value
+    categoryNameSelected: function(newValue,oldValue) {
+      console.log('#######################')
+      this.nameOfCategory = newValue
     },
 
     nameOfCategory:function(value){
       
       const cat = this.$store.getters["marketSearch/getCategories"].find(r => r.category.name === value)
 
-     // this.findByCategory({ cat_id: cat.category.id })
-     
-
-     this.searchParams.cat_id = cat.category.id;
-
-      if (this.filterType == 1) {
-        this.searchBusiness(this.searchParams);
-      } else if (this.filterType == 4) {
-        this.searchProducts(this.searchParams);
-      } else if (this.filterType == 0) {
-        this.allSearch(this.searchParams);
-      }
-
+      this.$emit("onFinByCategory", {cat_id: cat.category.id })
+      
 
       this.showSubCat(cat.sub_cat)
     },
@@ -1816,6 +1800,7 @@ export default {
     };
   },
 
+
   computed: {
     
     lneighbourhoods() {
@@ -1869,7 +1854,8 @@ export default {
   },
 
   created() {
-    this.nameOfCategory = this.categoryName
+    
+    this.nameOfCategory = this.categoryNameSelected
     this.getCountries();
     this.getUserNeibourhoods();
     this.strategies = {
@@ -2009,16 +1995,17 @@ export default {
             console.error(err);
             // this.filterLoader = false;
           });
-      } else if (this.filterType == 0) {
-        console.log("[DEBUG] Filter: ", subCat);
-        // this.allSearch({
-        //   cat_id: subCat.cat_id,
-        //   sub_cat: subCat.id,
-        //   filter_id: subCat.id,
-        // });
+          if (this.filterType == 0) {
+            console.log("[DEBUG] Filter: ", subCat);
+            this.allSearch({
+               cat_id: subCat.cat_id,
+               sub_cat: subCat.id,
+               filter_id: subCat.id,
+            });
 
-        this.allSearch(this.searchParams);
-      }
+            
+          }
+      } 
     },
     searchProducts(data) {
       this.$store

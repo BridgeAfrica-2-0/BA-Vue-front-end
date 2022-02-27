@@ -273,7 +273,7 @@ export default {
           .map((img) => {
             let render = img.media.map((picture) => {
               return {
-                id: '',
+                id: picture.id,
                 content: '',
                 media: { 
                   path: picture.path, 

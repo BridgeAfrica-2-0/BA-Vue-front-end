@@ -204,10 +204,12 @@ new Vue({
     store,
     i18n,
     created() {
-        let userInfo = localStorage.getItem('user');
-        const browserLanguage = window.navigator.userLanguage || window.navigator.language;
         
-        this.$i18n.locale =  "fr-Fr" == browserLanguage ? 'fr' : 'en'
+        let userInfo = localStorage.getItem('user');
+
+        const browserLanguage = window.navigator.userLanguage || window.navigator.language;
+                
+        this.$i18n.locale =  "fr-FR" == browserLanguage || "fr" == browserLanguage || "FR" == browserLanguage  ? 'fr' : 'en'
 
         let lang = localStorage.getItem('lang') ? localStorage.getItem('lang') : "en";
 

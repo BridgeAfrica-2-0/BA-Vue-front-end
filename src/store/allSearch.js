@@ -11,6 +11,9 @@ export default {
 
         loader: false,
         success: false,
+
+        keyword: null,
+        location: null,
     },
     getters: {
         // get data
@@ -44,6 +47,15 @@ export default {
         setNetworks(state, data) {
             state.networks = data;
         },
+
+        setKeyword(state, data) {
+            state.keyword = data;
+        },
+
+        setLocation(state, data) {
+            state.location = data;
+        },
+
         setPeoples(state, data) {
             state.peoples = data;
         },
@@ -83,10 +95,20 @@ export default {
             let page = 1;
             const TYPES = ["business", "user", "network", "market", "post"];
             let catId = data.cat_id ? "catId=" + data.cat_id : "";
-            let keyword = data.keyword ? "&keyword=" + data.keyword : "";
+            let keyword = state.keyword ? "&keyword=" + state.keyword : "";
 
             let subCatId = data.sub_cat ? "&subCatId=" + data.sub_cat : "";
             let filterId = data.filter_id ? "&filterId=" + data.filter_id : "";
+
+            //blec implementation for location search 
+
+            let countryId = data.country_id ? "&countryId=" + data.country_id : "";
+            let regionId = data.region_id ? "&regionId=" + data.region_id : "";
+            let divisionId = data.division_id ? "&divisionId=" + data.division_id : "";
+            let councilId = data.council_id ? "&councilId=" + data.council_id : "";
+            let city = data.city ? "&city=" + data.city : "";
+            let neighbourhoodId=data.neighborhood_id ?  "&neighbourhoodId=" + data.neighborhood_id : "";
+            let neighbourhood = data.neighbourhood ? "&neighbourhood=" + data.neighbourhood : "";
 
             let url = "";
 
@@ -94,11 +116,11 @@ export default {
 
                 if (!islogin) {
 
-                    url = `/visitor/search/${type}?${catId+subCatId+filterId+keyword}`;
+                    url = `/visitor/search/${type}?${catId+subCatId+countryId+regionId+filterId+divisionId+councilId+city+neighbourhood+neighbourhoodId+keyword}`;
 
                 } else {
                     // console.log(`type => ${type} keyword = ${keyword}`);
-                    url = `/search/${type}?${catId+subCatId+filterId+keyword}`;
+                    url = `/search/${type}?${catId+subCatId+filterId+countryId+regionId+divisionId+councilId+city+neighbourhood+neighbourhoodId+keyword}`;
 
 
                 }

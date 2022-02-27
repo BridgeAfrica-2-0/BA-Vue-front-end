@@ -119,6 +119,8 @@ export default {
       ? `modal-album-${this.im.id}`
       : `modal-picture-${this.im.id}`;
 
+    console.log(this.uuid, this.im.id)
+
     this.strategy = {
       BusinessOwner: {
         picture: ({ media_url }) => this.updatePictureState(media_url),

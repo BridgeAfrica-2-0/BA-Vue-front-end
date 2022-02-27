@@ -1,6 +1,8 @@
 <template>
-  <div class="p-2">
+  <div class="p-2"> 
     <b-row>
+
+     
       <b-col
         lg="6"
         sm="12"
@@ -8,6 +10,9 @@
         v-for="(item, index) in businesses"
         :key="index"
       >
+
+
+   
         <div class="people-style shadow h-100">    
           <b-row>
             <b-col md="8" xl="8" lg="12" cols="12" sm="8">
@@ -210,7 +215,7 @@ export default {
   methods: {
       
   businessCommunityTotal() {
-    const dispatchMethod = isGuestUser ? "businessGuest/businessCommunityTotal" : "businessOwner/businessCommunityTotal";
+    const dispatchMethod = isGuestUser() ? "businessGuest/businessCommunityTotal" : "businessOwner/businessCommunityTotal";
     this.$store
         .dispatch(dispatchMethod, this.biz_id)
         .then(() => {
@@ -303,7 +308,7 @@ export default {
     },
 
     async handleFollow(user) {
-      console.log("yoo ma gee");
+     
       document.getElementById("followbtn" + user.id).disabled = true;
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
@@ -340,7 +345,7 @@ export default {
 
     infiniteHandler($state) {
       let url = null;
-      const basePrefix = this.isGuestUser ? 'guest/' : '';
+      const basePrefix = this.isGuestUser() ? 'guest/' : '';  
       if (this.type == "Follower") {
         url = basePrefix+"business/community/business-follower/" + this.biz_id + "/";
       } else {

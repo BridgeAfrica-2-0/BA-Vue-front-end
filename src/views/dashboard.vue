@@ -4,7 +4,7 @@
 
     <div class="text-justify p-card pr-1">
     
-      <CompleteProfile class="mb-2"  v-if="showcompleteprofile" />
+      <CompleteProfile class="mb-2"  v-if="!Profile_complete" />
       <CarousselDashboard class="mm-top" /> <br />
 
       <div v-if="selectedb == 'owner'"> 
@@ -394,9 +394,6 @@ export default {
 
    
 
-     if (this.Profile_complete == null) {
-        this.showcompleteprofile=true;    
-      } 
 
     this.$store
       .dispatch("ProfileAndBusinessDetails/getdetails")
@@ -426,6 +423,7 @@ export default {
     Profile_complete(){
 
       return this.$store.state.profile.profileIntro.user.profile_complete;
+   
     }
   },
 

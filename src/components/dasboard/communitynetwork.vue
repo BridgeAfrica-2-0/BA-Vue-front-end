@@ -113,6 +113,7 @@ export default {
   data() {
     return {
       page: 2,
+      network:[],
       options: {
         rewind: true,
         autoplay: true,
@@ -126,7 +127,7 @@ export default {
   },
 
   computed: {
-    network() {
+    old_network() {
       if (this.type == "Follower") {
         return this.$store.state.profile.NcommunityFollower.network_followers;
       } else {

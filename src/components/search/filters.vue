@@ -1,7 +1,52 @@
 <template>
   <div>
+
+     <div  v-if="filterType == '0' || filterType == '1' || filterType == '4'"  class="mt-2 mb-2">
+      <b-button
+        class="float-right"
+        size="sm"
+        variant="outline-primary"
+        @click="resetFilters"
+        >{{ $t("search.Reset") }}</b-button
+      >
+      <br />
+      <!-- Category -->
+      <!-- <div v-if="categories.length > 0">
+        <b-form-group
+          label-cols-lg="3"
+          :label="$t('search.Categories')"
+          label-size="md"
+          label-class="font-weight-bold pt-0"
+          class="mb-0 pt-6 text-left"
+        >
+        </b-form-group>
+        <b-form-select
+          v-model="networkSelect.category"
+          :options="categories"
+          value-field="category.id"
+          text-field="category.name"
+          @change="allSearchByCat({ cat_id: networkSelect.category })"
+        >
+        </b-form-select>
+      </div>
+      <hr /> -->
+    </div>
+
     <div v-if="filterType == '0' || filterType == '1' || filterType == '4'">
-      <div v-if="subCategories.length">
+
+       <b-form-group
+          label-cols-lg="3"
+          :label="$t('search.Categories')"
+          label-size="md"
+          label-class="font-weight-bold pt-0"
+          class="mb-0 pt-6 text-left"
+        >
+        </b-form-group>
+
+      <b-form-select v-model="nameOfCategory" :options="categoriesAll" class="mb-2"></b-form-select>
+
+
+      <div   class="mt-3" v-if="subCategories.length">
         <span>
           <b-form-radio
             v-for="(subCat, index) in subCategories.slice(0, 4)"
@@ -23,6 +68,7 @@
           variant="primary"
           label="Spinning"
         ></b-spinner>
+
         <span v-if="subFilter.length">
           <h6>{{ $t("search.Filters") }}</h6>
           <b-form-radio
@@ -37,7 +83,7 @@
             {{ filter.name }}
           </b-form-radio>
 
-          <b-link v-b-modal="'myModalll'"> {{ $t("search.See_all") }} </b-link>
+          <b-link v-b-modal="'myModalll'">{{ $t("search.See_all") }}</b-link>
           <hr />
         </span>
         <span v-if="noFilter.length">
@@ -45,6 +91,7 @@
           <hr />
         </span>
       </div>
+
       <b-modal ref="myfilters" id="myModalll" hide-footer title=" ">
         <div style="column-count: 2">
           <b-form-radio
@@ -68,6 +115,164 @@
           {{ $t("search.Search") }}
         </b-button> -->
       </b-modal>
+
+      <!--  blec implementation for neigbourhood stuff -->
+
+      <div v-if="filterType == '0' || filterType == '1' || filterType == '4'">
+        <div>
+          <div>
+            <b-form-group
+              label-cols-lg="3"
+              :label="$t('search.Country')"
+              label-size="md"
+              label-class="font-weight-bold pt-0"
+              class="mb-0 pt-6 text-left"
+            >
+            </b-form-group>
+            <b-form-select
+              v-model="networkSelect.country"
+              :options="countries"
+              value-field="id"
+              text-field="name"
+              @change="getBRegions()"
+            >
+            </b-form-select>
+          </div>
+
+          <!-- Region -->
+          <div class="mt-1" v-if="networkFilter.region">
+            <b-form-group
+              label-cols-lg="3"
+              :label="$t('search.Region')"
+              label-size="md"
+              label-class="font-weight-bold pt-0"
+              class="mb-0 text-left"
+            >
+            </b-form-group>
+
+            <b-form-select
+              v-model="networkSelect.region"
+              :options="regions"
+              value-field="id"
+              text-field="name"
+              @change="getBDivisions()"
+            >
+            </b-form-select>
+          </div>
+
+          <hr />
+
+          <!-- city -->
+          <div>
+            <b-form-group
+              label-cols-lg="3"
+              :label="$t('search.City')"
+              label-size="md"
+              label-class="font-weight-bold pt-0"
+              class="mb-0 text-left"
+            >
+            </b-form-group>
+            <b-form-input v-model="city" value-field="id" text-field="name">
+            </b-form-input>
+          </div>
+
+          <div>
+            <b-form-group
+              label-cols-lg="3"
+              :label="$t('search.Neighbourhood')"
+              label-size="md"
+              label-class="font-weight-bold pt-0"
+              class="mb-0 mt-3 text-left"
+            >
+            </b-form-group>
+
+            <vue-bootstrap-typeahead
+              v-model="query"
+              :data="lneighbourhoods"
+              :minMatchingChars="0"
+              :maxMatches="10"
+              :serializer="(item) => item.name"
+              placeholder="Where"
+              class=""
+            />
+
+            <b-link class="float-right mt-2 mb-2" @click="showMoreFilters">
+              More
+            </b-link>
+            <br />
+          </div>
+
+          <div class="more" v-if="showMore">
+            <hr />
+
+            <!-- Division -->
+            <div v-if="networkFilter.division">
+              <b-form-group
+                label-cols-lg="3"
+                :label="$t('search.Division')"
+                label-size="md"
+                label-class="font-weight-bold pt-0"
+                class="mb-0 text-left"
+              >
+              </b-form-group>
+              <b-form-select
+                v-model="networkSelect.division"
+                :options="divisions"
+                value-field="id"
+                text-field="name"
+                @change="getBCouncils()"
+              >
+              </b-form-select>
+            </div>
+
+            <!-- Council -->
+            <div v-if="networkFilter.council">
+              <b-form-group
+                label-cols-lg="3"
+                :label="$t('search.Council')"
+                label-size="md"
+                label-class="font-weight-bold pt-0"
+                class="mb-0 text-left"
+              >
+              </b-form-group>
+              <b-form-select
+                v-model="networkSelect.council"
+                :options="councils"
+                value-field="id"
+                text-field="name"
+                @change="
+                  getBNeighbourhoods({ council_id: networkSelect.council })
+                "
+              >
+              </b-form-select>
+            </div>
+
+            <!-- Neighbourhood -->
+            <div v-if="networkFilter.neighbourhood">
+              <b-form-group
+                label-cols-lg="3"
+                :label="$t('search.Neighbourhood')"
+                label-size="md"
+                label-class="font-weight-bold pt-0"
+                class="mb-0 text-left"
+              >
+              </b-form-group>
+              <b-form-select
+                v-model="networkSelect.neighbourhood"
+                :options="neighbourhoods"
+                value-field="id"
+                text-field="name"
+                @change="
+                  searchNeigbourhoods({
+                    neighborhood_id: networkSelect.neighbourhood,
+                  })
+                "
+              >
+              </b-form-select>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <span v-if="showform == true">
         <b-form-group
@@ -208,36 +413,7 @@
       </div>
     </div>
 
-    <div v-if="filterType == '0'">
-      <b-button
-        class="float-right"
-        size="sm"
-        variant="outline-primary"
-        @click="allSearchByCat({})"
-        >{{ $t("search.Reset") }}</b-button
-      >
-      <br />
-      <!-- Category -->
-      <!-- <div v-if="categories.length > 0">
-        <b-form-group
-          label-cols-lg="3"
-          :label="$t('search.Categories')"
-          label-size="md"
-          label-class="font-weight-bold pt-0"
-          class="mb-0 pt-6 text-left"
-        >
-        </b-form-group>
-        <b-form-select
-          v-model="networkSelect.category"
-          :options="categories"
-          value-field="category.id"
-          text-field="category.name"
-          @change="allSearchByCat({ cat_id: networkSelect.category })"
-        >
-        </b-form-select>
-      </div>
-      <hr /> -->
-    </div>
+   
 
     <!-- Network -->
     <div v-if="filterType == '1' || filterType == '4'">
@@ -408,7 +584,7 @@
 
     <component :is="currentFilter" />
 
-    <b-modal ref="myfilters" id="userNeighbourhood" hide-footer title=" ">
+    <b-modal ref="myfilters" id="userNeighbourhood" hide-footer title="GGGG">
       <b-form-group
         label-cols-lg="12"
         :label="$t('search.Neighbourhood')"
@@ -506,19 +682,96 @@
 
 <script>
 import { PeopleFilter, PostFilter } from "@/components/search";
+
+import VueBootstrapTypeahead from "vue-bootstrap-typeahead";
+
+import axios from "axios";
 export default {
+  components: {
+    VueBootstrapTypeahead,
+  },
+
   name: "filters",
-  props: ["filterType", "Selectedcategory", "Selectedparentcategory"],
+
+  props: ["filterType", "findByCategory", "Selectedcategory", "Selectedparentcategory", "categoryName"],
+  
   watch: {
+
+
+
+     query(newQuery) {
+      axios.get(`neighborhoods/${newQuery}`).then(({ data }) => {
+        this.$store.commit("auth/setneigbourhoods", data.data);
+      });
+
+      //  this.allSearch({neighbourhood:newQuery});
+
+      this.searchParams.neighbourhood = newQuery;
+
+      let data = { city: newQuery };
+
+      if (this.filterType == 1) {
+        this.searchBusiness(this.searchParams);
+      } else if (this.filterType == 4) {
+        this.searchProducts(this.searchParams);
+      } else if (this.filterType == 0) {
+        this.allSearch(this.searchParams);
+      }
+    },
+
+    city(newQuery) {
+      let data = { city: newQuery };
+
+      this.searchParams.city = newQuery;
+
+      if (this.filterType == 1) {
+        this.searchBusiness(this.searchParams);
+      } else if (this.filterType == 4) {
+        this.searchProducts(this.searchParams);
+      } else if (this.filterType == 0) {
+        this.allSearch(this.searchParams);
+      }
+
+
+    },
+
+    
+    categoryName:function(value){
+      this.nameOfCategory = value
+    },
+
+    nameOfCategory:function(value){
+      
+      const cat = this.$store.getters["marketSearch/getCategories"].find(r => r.category.name === value)
+
+     // this.findByCategory({ cat_id: cat.category.id })
+     
+
+     this.searchParams.cat_id = cat.category.id;
+
+      if (this.filterType == 1) {
+        this.searchBusiness(this.searchParams);
+      } else if (this.filterType == 4) {
+        this.searchProducts(this.searchParams);
+      } else if (this.filterType == 0) {
+        this.allSearch(this.searchParams);
+      }
+
+
+      this.showSubCat(cat.sub_cat)
+    },
+
     filterType: function (newId) {
       try {
         this.currentFilter = this.strategies[newId]();
       } catch (error) {
-        this.currentFilter = null;
+        this.nameOfCategory = null;
+        this.currentFilter = newId;
       }
     },
+
     Selectedparentcategory: function (newVal) {
-      console.log(newVal);
+      
       switch (newVal) {
         case "Agriculture":
           this.selectcategories = this.agriculture_filters;
@@ -547,9 +800,10 @@ export default {
           break;
       }
     },
+
     Selectedcategory: function (newVal) {
       this.showform = false;
-      console.log(newVal);
+      
       switch (newVal) {
         case "More":
           this.$refs["myfilters1"].show();
@@ -703,17 +957,40 @@ export default {
           break;
       }
     },
+
   },
+
   data() {
     return {
+      query: "",
+      city: "",
+      showMore: false,
       // [Edouard] data
+      nameOfCategory:null,
       distance: "",
       selected_sub_cat: [],
       newCategories: [],
       selectedFilter: [],
       filterLoader: false,
-      noFilter: "",
+      noFilter: [],
       selectedneigbourhood: null,
+
+      searchParams: {
+        cat_id: null,
+        sub_cat: null,
+        filter_id: null,
+        division_id: null,
+        region_id: null,
+        country_id: null,
+        neighbourhood: null,
+        city: null,
+
+        council_id: null,
+        neighborhood_id: null,
+        distanceInKM: null,
+        price_range: null,
+      },
+
       networkFilter: {
         category: false,
         region: false,
@@ -721,6 +998,7 @@ export default {
         council: false,
         neighbourhood: false,
       },
+
       networkSelect: {
         category: null,
         country: null,
@@ -729,7 +1007,7 @@ export default {
         council: null,
         neighbourhood: null,
       },
-      // -----------------
+      
       strategies: null,
       currentFilter: null,
       slide: 0,
@@ -1537,13 +1815,30 @@ export default {
       ],
     };
   },
+
   computed: {
+    
     lneighbourhoods() {
       return this.$store.getters["auth/neigbourhoods"];
     },
-    categories() {
-      return this.$store.getters["marketSearch/getCategories"];
+
+    categoriesAll() {
+
+      const category = this.$store.getters["marketSearch/getCategories"].map(e => {
+        return {
+          "id": e.category.id,
+          "value": e.category.name,
+          "text":e.category.name,
+          "sub_cat": e.category.sub_cat
+        }
+      })
+      return category
     },
+
+    categories() {
+      return this.$store.getters["marketSearch/getCategories"]
+    },
+
     subCategories() {
       return this.$store.getters["marketSearch/getSubCat"];
     },
@@ -1572,7 +1867,9 @@ export default {
       return this.$store.getters["marketSearch/getLoader"];
     },
   },
+
   created() {
+    this.nameOfCategory = this.categoryName
     this.getCountries();
     this.getUserNeibourhoods();
     this.strategies = {
@@ -1580,17 +1877,75 @@ export default {
       5: () => PostFilter,
     };
   },
+
   methods: {
+    resetFilters() {
+      this.searchParams.country_id = null;
+      this.searchParams.region_id = null;
+      this.searchParams.division_id = null;
+      this.searchParams.council_id = null;
+     
+      this.selectedFilter=null;
+      this.selected_sub_cat=null;
+
+      this.searchParams.neighborhood_id = null;
+
+      this.networkSelect.region = null;
+      this.networkSelect.division = null;
+      this.networkSelect.council = null;
+      this.networkSelect.neighbourhood = null;
+
+      this.searchParams.cat_id = null;
+      this.searchParams.sub_cat = null;
+      this.searchParams.filter_id = null;
+
+      this.searchParams.neighbourhood = null;
+      this.searchParams.city = null;
+      this.searchParams.distanceInKM = null;
+      this.searchParams.price_range = null;
+
+
+        if (this.filterType == 1) {
+        this.searchBusiness(this.searchParams);
+      } else if (this.filterType == 4) {
+        this.searchProducts(this.searchParams);
+      } else if (this.filterType == 0) {
+        this.allSearch(this.searchParams);
+      }
+      
+    },
+
+      showSubCat(subCat) {
+    
+        this.$store.commit("marketSearch/setSubFilters", []);
+        // this.subCategories.push(subCat);
+        // this.searchProduct({ catId: catId, cat_id: catId });
+        this.$store.commit("marketSearch/setSubCat", subCat);
+  
+        //if (!subCat.length) this.hideSubCat(category.id);
+        // console.log("Subcat:", this.subCategories);
+
+      },
+
+
+    showMoreFilters() {
+      this.showMore = true;
+    },
+
     getFilter(subCat) {
       // this.filterLoader = true;
-      console.log("[SUbcat]:", subCat);
+
+      this.searchParams.cat_id = subCat.cat_id;
+      this.searchParams.sub_cat = subCat.id;
+
       this.noFilter = "";
       this.$store.commit("marketSearch/setSubFilters", []);
       if (this.filterType == 4) {
         this.$store
           .dispatch("marketSearch/getFilter", subCat.id)
           .then((res) => {
-            this.searchProducts({ cat_id: subCat.cat_id, sub_cat: subCat.id });
+            // this.searchProducts({ cat_id: subCat.cat_id, sub_cat: subCat.id });
+            this.searchProducts(this.searchParams);
             console.log("Filters: ");
             console.log(res.data.data);
             if (res.data.data.length === 0) {
@@ -1612,18 +1967,21 @@ export default {
               });
             });
             this.$store.commit("marketSearch/setSubFilters", filter);
-            console.log("[DeBUG] FILTER: ", this.subFilter);
+            //console.log("[DeBUG] FILTER: ", this.subFilter);
           })
           .catch((err) => {
             console.error(err);
             // this.filterLoader = false;
           });
-      } else if (this.filterType == 1) {
+      } else if (this.filterType == 1 || this.filterType == 0) {
         // method to search for a business lol
         this.$store
           .dispatch("marketSearch/getFilter", subCat.id)
           .then((res) => {
-            this.searchBusiness({ cat_id: subCat.cat_id, sub_cat: subCat.id });
+            // this.searchBusiness({ cat_id: subCat.cat_id, sub_cat: subCat.id });
+
+            this.searchBusiness(this.searchParams);
+
             console.log("Filters: ");
             console.log(res.data.data);
             if (res.data.data.length === 0) {
@@ -1645,7 +2003,7 @@ export default {
               });
             });
             this.$store.commit("marketSearch/setSubFilters", filter);
-            console.log("[DeBUG] FILTER: ", this.subFilter);
+            //console.log("[DeBUG] FILTER: ", this.subFilter);
           })
           .catch((err) => {
             console.error(err);
@@ -1653,11 +2011,13 @@ export default {
           });
       } else if (this.filterType == 0) {
         console.log("[DEBUG] Filter: ", subCat);
-        this.allSearch({
-          cat_id: subCat.cat_id,
-          sub_cat: subCat.id,
-          filter_id: subCat.id,
-        });
+        // this.allSearch({
+        //   cat_id: subCat.cat_id,
+        //   sub_cat: subCat.id,
+        //   filter_id: subCat.id,
+        // });
+
+        this.allSearch(this.searchParams);
       }
     },
     searchProducts(data) {
@@ -1671,7 +2031,6 @@ export default {
         });
     },
     allSearch(data) {
-      console.log("[data]: ", data);
       this.$store
         .dispatch("allSearch/SEARCH", data)
         .then((res) => {
@@ -1691,36 +2050,55 @@ export default {
           console.log("Error erro!");
         });
     },
+
     searchByFilter(filter) {
-      // this.showform = false;
+      // this.searchProducts({
+      //     cat_id: filter.cat_id,
+      //     sub_cat: filter.sub_cat_id,
+      //     filter_id: filter.id,
+      //   });
+
+      this.searchParams.filter_id = filter.id;
+      this.searchParams.cat_id = filter.cat_id;
+      this.searchParams.sub_cat = filter.cat_id;
+
       if (this.filterType == 1) {
         console.log("[DEBUG] Filter: ", filter);
-        this.searchBusiness({
-          cat_id: filter.cat_id,
-          sub_cat: filter.sub_cat_id,
-          filter_id: filter.id,
-        });
+        // this.searchBusiness({
+        //   cat_id: filter.cat_id,
+        //   sub_cat: filter.sub_cat_id,
+        //   filter_id: filter.id,
+        // });
+
+        this.searchBusiness(this.searchParams);
+
         this.$bvModal.hide("myModalllo");
       } else if (this.filterType == 4) {
         console.log("[DEBUG] Filter: ", filter);
-        this.searchProducts({
-          cat_id: filter.cat_id,
-          sub_cat: filter.sub_cat_id,
-          filter_id: filter.id,
-        });
+        // this.searchProducts({
+        //   cat_id: filter.cat_id,
+        //   sub_cat: filter.sub_cat_id,
+        //   filter_id: filter.id,
+        // });
+
+        this.searchProducts(this.searchParams);
+
         this.$bvModal.hide("myModalllo");
       } else if (this.filterType == 0) {
         console.log("[DEBUG] Filter: ", filter);
-        this.allSearch({
-          cat_id: filter.cat_id,
-          sub_cat: filter.id,
-          filter_id: filter.id,
-        });
+        // this.allSearch({
+        //   cat_id: filter.cat_id,
+        //   sub_cat: filter.id,
+        //   filter_id: filter.id,
+        // });
+
+        this.allSearch(this.searchParams);
+
         this.$bvModal.hide("myModalllo");
       }
     },
     getUserNeibourhoods() {
-      console.log("[debug] neigbourhood: ", this.userNeighbourhoods);
+      //console.log("[debug] neigbourhood: ", this.userNeighbourhoods);
       this.$store
         .dispatch("marketSearch/getUserNeigbourhoods")
         .then((res) => {
@@ -1729,44 +2107,53 @@ export default {
         .catch((err) => {
           console.log("Error erro!");
         });
-      console.log("[debug]neigbourhood: ", this.userNeighbourhoods);
+      //console.log("[debug]neigbourhood: ", this.userNeighbourhoods);
     },
+
     searchByNeigbourhood(nei) {
       let data = {
         location: nei,
       };
+
+      this.searchParams.neighbourhood = nei;
+
       if (this.filterType == 4) {
-        this.searchProducts(data);
+        this.searchProducts(this.searchParams);
       } else if (this.filterType == 1) {
-        this.searchBusiness(data);
+        this.searchBusiness(this.searchParams);
       }
     },
     searchByDistance(value) {
-      console.log("[DEBUG] PRICE: ", value);
-      console.log("[DEBUG] subcat: ", this.subCategories[0].cat_id);
+      /* console.log("[DEBUG] PRICE: ", value);
+      console.log("[DEBUG] subcat: ", this.subCategories[0].cat_id); */
       let data = {
         distanceInKM: this.distance,
       };
+      this.searchParams.distanceInKM = this.distance;
+
       if (this.filterType == 1) {
-        this.searchProducts(data);
+        this.searchProducts(this.searchParams);
       }
       if (this.filterType == 1) {
-        this.searchBusiness(data);
+        this.searchBusiness(this.searchParams);
       }
     },
     searchByPrice(value) {
-      console.log("[DEBUG] PRICE: ", value);
-      console.log("[DEBUG] subcat: ", this.subCategories[0].cat_id);
+      /* console.log("[DEBUG] PRICE: ", value);
+      console.log("[DEBUG] subcat: ", this.subCategories[0].cat_id); */
       let catId = this.subCategories[0].cat_id;
       let data = {
         cat_id: catId,
         price_range: `${[180, value]}`,
       };
+
+      this.searchParams.price_range = `${[180, value]}`;
+
       this.searchProducts(data);
     },
     // Network search filter
     getCountries() {
-      console.log("[debug] Networks: ", this.networkSelect);
+      //console.log("[debug] Networks: ", this.networkSelect);
       this.$store
         .dispatch("networkSearch/COUNTRIES")
         .then((res) => {
@@ -1777,10 +2164,202 @@ export default {
         .catch((err) => {
           console.log("Error erro!");
         });
-      console.log("[debug]country: ", this.countries);
+      //console.log("[debug]country: ", this.countries);
     },
+
+    //blec location filters  i;plementation  bbbbbbb
+
+    getBRegions() {
+      let data = { country_id: this.networkSelect.country };
+
+      this.searchParams.country_id = this.networkSelect.country;
+      this.searchParams.region_id = null;
+      this.searchParams.division_id = null;
+      this.searchParams.council_id = null;
+
+      this.searchParams.neighborhood_id = null;
+
+     
+      this.$store
+        .dispatch("networkSearch/REGIONS", data)
+        .then((res) => {
+          if (this.networkSelect.region) this.getBDivisions();
+
+          this.networkFilter = {
+            category: false,
+            region: true,
+            division: false,
+            council: false,
+            neighbourhood: false,
+          };
+
+          this.networkSelect.region = null;
+          this.networkSelect.division = null;
+          this.networkSelect.council = null;
+          this.networkSelect.neighbourhood = null;
+          console.log("regions: ", this.regions);
+        })
+        .catch((err) => {
+          console.log("Error erro!");
+        });
+
+
+         if (this.filterType == 1) {
+        this.searchBusiness(this.searchParams);
+      } else if (this.filterType == 4) {
+        this.searchProducts(this.searchParams);
+      } else if (this.filterType == 0) {
+        this.allSearch(this.searchParams);
+      }
+
+
+    },
+
+    getBDivisions() {
+      let data = { region_id: this.networkSelect.region };
+
+      this.searchParams.division_id = null;
+      this.searchParams.council_id = null;
+
+      this.searchParams.neighborhood_id = null;
+
+      this.searchParams.region_id = this.networkSelect.region;
+
+      if (this.filterType == 1) {
+        this.searchBusiness(this.searchParams);
+      } else if (this.filterType == 4) {
+        this.searchProducts(this.searchParams);
+      } else if (this.filterType == 0) {
+        this.allSearch(this.searchParams);
+      }
+
+      this.$store
+        .dispatch("networkSearch/DIVISIONS", data)
+        .then((res) => {
+          if (this.networkSelect.division) this.getBCouncils();
+          this.networkFilter = {
+            category: false,
+            region: true,
+            division: true,
+            council: false,
+            neighbourhood: false,
+          };
+
+          this.networkSelect.division = null;
+          this.networkSelect.council = null;
+          this.networkSelect.neighbourhood = null;
+        })
+        .catch((err) => {
+          console.log("Error erro!");
+        });
+    },
+
+    async getBCouncils() {
+      const data = { division_id: this.networkSelect.division };
+
+      this.searchParams.division_id = this.networkSelect.division;
+
+      this.searchParams.council_id = null;
+
+      this.searchParams.neighborhood_id = null;
+
+      if (this.filterType == 1) {
+        this.searchBusiness(this.searchParams);
+      } else if (this.filterType == 4) {
+        this.searchProducts(this.searchParams);
+      } else if (this.filterType == 0) {
+        this.allSearch(this.searchParams);
+      }
+
+      await this.$store
+        .dispatch("networkSearch/COUNCILS", data)
+        .then((res) => {
+          console.log("councils: ", this.councils);
+
+          this.networkFilter = {
+            category: false,
+            region: true,
+            division: true,
+            council: true,
+            neighbourhood: false,
+          };
+
+          this.networkSelect.neighbourhood = null;
+        })
+        .catch((err) => {
+          console.log("Error erro!");
+        });
+      if (this.networkSelect.council) {
+        console.log("Here...");
+        this.searchParams.council_id = this.networkSelect.council;
+
+        this.searchParams.neighborhood_id = null;
+
+        //this.getBNeighbourhoods({ council_id: this.networkSelect.council });
+
+        this.getBNeighbourhoods(this.searchParams);
+      }
+
+      if (this.filterType == 1) {
+        this.searchBusiness(this.searchParams);
+      } else if (this.filterType == 4) {
+        this.searchProducts(this.searchParams);
+      } else if (this.filterType == 0) {
+        this.allSearch(this.searchParams);
+      }
+    },
+
+    async searchNeigbourhoods(data) {
+      this.searchParams.neighborhood_id = data.neighborhood_id;
+
+      if (this.filterType == 1) {
+        this.searchBusiness(this.searchParams);
+      } else if (this.filterType == 4) {
+        this.searchProducts(this.searchParams);
+      } else if (this.filterType == 0) {
+        this.allSearch(this.searchParams);
+      }
+    },
+
+    async getBNeighbourhoods(data) {
+      this.searchParams.council_id = this.networkSelect.council;
+
+      if (this.filterType == 1) {
+        this.searchBusiness(this.searchParams);
+      } else if (this.filterType == 4) {
+        this.searchProducts(this.searchParams);
+      } else if (this.filterType == 0) {
+        this.allSearch(this.searchParams);
+      }
+
+      await this.$store
+        .dispatch("networkSearch/NEIGHBOURHOODS", data)
+        .then((res) => {
+          console.log("Neighbourhoods: ", this.neighbourhoods);
+          this.networkFilter = {
+            category: false,
+            region: true,
+            division: true,
+            council: true,
+            neighbourhood: true,
+          };
+        })
+        .catch((err) => {
+          console.log("Error erro!");
+        });
+      if (this.filterType == 1) {
+        this.searchBusiness(this.searchParams);
+      } else if (this.filterType == 4) {
+        this.searchProducts(this.searchParams);
+      } else if (this.filterType == 0) {
+        this.allSearch(this.searchParams);
+      }
+    },
+
+    //bbbbbbbbbb
+
     getRegions() {
-      console.log("[debug] Networks: ", this.networkSelect);
+      //console.log("[debug] Networks: ", this.networkSelect);
       const data = { country_id: this.networkSelect.country };
       this.searchNetworks(data);
       this.$store
@@ -1798,7 +2377,7 @@ export default {
           this.networkSelect.division = null;
           this.networkSelect.council = null;
           this.networkSelect.neighbourhood = null;
-          console.log("regions: ", this.regions);
+          //console.log("regions: ", this.regions);
         })
         .catch((err) => {
           console.log("Error erro!");
@@ -1810,7 +2389,7 @@ export default {
       // }
     },
     getDivisions() {
-      console.log("[debug] networks: ", this.networkSelect);
+      //console.log("[debug] networks: ", this.networkSelect);
       const data = { region_id: this.networkSelect.region };
       this.searchNetworks(data);
       this.$store
@@ -1836,7 +2415,7 @@ export default {
         });
     },
     async getCouncils() {
-      console.log("[debug] networks...: ", this.networkSelect);
+      //console.log("[debug] networks...: ", this.networkSelect);
       const data = { division_id: this.networkSelect.division };
       await this.$store
         .dispatch("networkSearch/COUNCILS", data)
@@ -1863,14 +2442,14 @@ export default {
       this.searchNetworks(data);
     },
     async getNeighbourhoods(data) {
-      console.log("[debug] networks...: ", this.networkSelect);
+      /* console.log("[debug] networks...: ", this.networkSelect);
       console.log("DATA:", data);
-      console.log("[debug] Neighbourhoods: ", this.neighbourhoods);
+      console.log("[debug] Neighbourhoods: ", this.neighbourhoods); */
       this.searchNetworks(data);
       await this.$store
         .dispatch("networkSearch/NEIGHBOURHOODS", data)
         .then((res) => {
-          console.log("Neighbourhoods: ", this.neighbourhoods);
+          //console.log("Neighbourhoods: ", this.neighbourhoods);
           this.networkFilter = {
             category: false,
             region: true,
@@ -1883,7 +2462,6 @@ export default {
           console.log("Error erro!");
         });
       this.searchNetworks(data);
-
     },
     networkFilterFill() {
       if (this.networkFilter.region == false) this.getRegions();
@@ -1926,7 +2504,7 @@ export default {
     },
     async searchNetworks(data) {
       this.networkFilter.category = true;
-      console.log("Data:", data);
+      
       await this.$store
         .dispatch("networkSearch/SEARCH", data)
         .then((res) => {
@@ -1939,7 +2517,7 @@ export default {
     // END Network search filter
     // All Search
     allSearchByCat(data) {
-      console.log("the category is: ", data);
+      
       this.$store
         .dispatch("allSearch/SEARCH", data)
         .then((res) => {
@@ -1951,7 +2529,7 @@ export default {
     },
     // Not ED code
     selectedsidebar() {
-      console.log(this.default_category);
+      
       switch (this.default_category) {
         case "Primary Education":
           this.categories_filters = this.primary_eduction_filters;

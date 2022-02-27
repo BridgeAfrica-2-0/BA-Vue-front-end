@@ -139,8 +139,8 @@
         }
     },
     "browserslist": [
-        "> 5%",
-        "last 10 versions",
+        "defaults",
+        "not ie 11",
         "not dead"
     ]
 }

@@ -155,9 +155,22 @@
         </b-col>
 
         <b-modal ref="myfilters" id="myModall" hide-footer title=" ">
-          <div class="d-block d- d-sm-block d-md-block d-lg-block d-xl-none">
+          <div class="d-block d- d-sm-block d-md-block d-lg-block d-xl-none">   
+
+           <!-- lllllllllll -->
+
+           <div class="ml-3">
+            <Filters
+              v-bind:filterType="selectedId"
+              v-bind:Selectedcategory="Selectedcategory"
+              v-bind:Selectedparentcategory="Selectedparentcategory"
+            />
+
+           </div>
+
+<!--            
             <div v-if="!isFilter">
-              <!-- Category -->
+            
               <div v-if="categories.length > 0">
                 <b-form-group
                   label-cols-lg="3"
@@ -180,11 +193,11 @@
                   </option>
                 </b-form-select>
               </div>
-            </div>
+            </div> 
 
             <hr v-if="!isFilter" />
             <div v-if="!isFilter">
-              <!-- sub Category -->
+             
               <div v-if="catChose">
                 <b-form-group
                   label-cols-lg="3"
@@ -212,7 +225,7 @@
             <hr v-if="!isFilter" />
 
             <div v-if="!isFilter">
-              <!-- Filters -->
+              
               <div v-if="subFilters.length > 0">
                 <b-form-group
                   label-cols-lg="3"
@@ -236,7 +249,7 @@
                 </b-form-select>
               </div>
             </div>
-
+     -->
             <component :is="isFilter" />
             <hr v-if="!isFilter" />
 
@@ -652,7 +665,7 @@ export default {
     this.strategY = {
       users: () => this.onFindUser(),
       all: () => this.getKeyword(),
-      market: () => this.searchProducts(),
+      market: () => this.searchProducts({}),
       network: () => this.searchNetworks(),
       business: () => this.onFindBusiness(),
     };
@@ -1621,7 +1634,28 @@ export default {
       immediate: true,
       deep: true,
       handler(newValue, oldValue) {
-        this.$store.commit("business/setKeyword", newValue.keyword);
+        if(this.selectedId==0){   
+        this.$store.commit("allSearch/setKeyword", newValue.keyword);
+
+        }
+
+        else if(this.selectedId==1){
+            
+            
+         this.$store.commit("business/setKeyword", newValue.keyword);
+        }else if(this.selectedId==4){
+          
+           this.$store.commit("marketSearch/setKeyword", newValue.keyword);
+
+        }
+
+        else if(this.selectedId==3){
+          
+           this.$store.commit("networkSearch/setKeyword", newValue.keyword);
+
+        }
+        
+
       },
     },
   },
@@ -1685,14 +1719,17 @@ export default {
     },
 
     getKeyword(data) {
+
+      
       var keyword = this.searchParams.keyword;
 
       let elm = data ? data : keyword ? { keyword: keyword } : { keyword: "" };
-      console.log("the keyword is: ", this.searchParams.keyword);
-      console.log("keyword: ", data);
+
+       this.$store.commit("allSearch/setKeyword", keyword);
+     
 
       this.$store
-        .dispatch("allSearch/SEARCH", elm)
+        .dispatch("allSearch/SEARCH", {keyword:keyword})
         .then((res) => {
           // console.log("categories loaded!");
         })
@@ -1734,6 +1771,9 @@ export default {
     },
 
     searchProducts(data) {
+    
+   
+     console.log(data);
       this.$store
         .dispatch("marketSearch/searchProducts", data)
         .then((res) => {
@@ -1777,7 +1817,7 @@ export default {
         5: () => this.onFindPost(),
         1: () => this.onFindBusiness(),
         3: () => this.searchNetworks(),
-        4: () => this.searchProducts(),
+        4: () => this.searchProducts({}),
       };
 
       this.strategyForPlaceHolder = {
@@ -2050,11 +2090,11 @@ export default {
       var filterId = this.filterChose ? this.filterChose : "";
       var data = { cat_id: catId, sub_cat: subCatId, filter_id: filterId };
       if (this.selectedId == 4) {
-        this.searchProducts(data);
+       // this.searchProducts(data);
       } else if (this.selectedId == 1) {
-        this.searchBusiness(data);
+      //  this.searchBusiness(data);
       } else if (this.selectedId == 0) {
-        this.allSearchByCat(data);
+      //  this.allSearchByCat(data);
       }
 
       this.$bvModal.hide("myModall");

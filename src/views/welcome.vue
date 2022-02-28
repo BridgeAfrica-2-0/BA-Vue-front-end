@@ -1050,7 +1050,6 @@ export default {
       this.Neighbor =  details.address;
       this.coordinates = details.coordinates;
       this.address = details.address;
-      console.log(details);
     },
     flashErrors(errors) {
       let err = "";
@@ -1293,8 +1292,8 @@ export default {
           formData2.append("council", this.selectedmunicipality);
 
           formData2.append("neigborhood", this.selectedlocality);
-          formData2.append("lat", this.businessInstanceCenter[1]);
-          formData2.append("lng", this.businessInstanceCenter[0]);
+          formData2.append("lat",  this.coordinates[1]);
+          formData2.append("lng",  this.coordinates[0]);
 
           formData2.append("name", this.form.business_name);
            formData2.append("keywords", this.selectedKeywords);

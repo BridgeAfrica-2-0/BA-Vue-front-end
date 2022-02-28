@@ -196,7 +196,7 @@ export default {
       this.currentPage = value;
 
       this.$store
-        .dispatch("marketSearch/nextPage", this.currentPage)
+        .dispatch("marketSearch/nextPage", {url:this.products.next, page:this.currentPage } )
         .then((res) => {
           console.log("products list: ");
           console.log(this.products);

@@ -34,10 +34,10 @@ export default {
     },
 
     UpdateInfomation({ commit }, businessData) {
+
+     // let data={ ...}
       return axios
-        .post(businessData.path, businessData.data, {
-          headers: { "Content-Type": "multipart/form-data" },
-        })
+        .post(businessData.path,   businessData.data)
         .then(({ data }) => {
           return data;
         })

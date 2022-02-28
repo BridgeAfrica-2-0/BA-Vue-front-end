@@ -470,9 +470,10 @@ export default {
 
 
         async updateUserBusinessAbout({ commit }, payload) {
+
+            
             let response_ = null;
-            const id_Business = 47;
-            console.log("-------testt----", payload)
+          
             await axios.post("business/update" +
                     "/" +
                     payload.business_id, payload.data
@@ -481,7 +482,6 @@ export default {
                 .then(response => {
 
 
-                    console.log('update user Business About response (1) +++++++', response);
                     if (response.status !== 200 && response.status !== 201) {
                         throw 'Error From The Server';
                     }

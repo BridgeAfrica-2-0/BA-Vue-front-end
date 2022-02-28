@@ -1919,7 +1919,7 @@ export default {
     },
 
     getFilter(subCat) {
-      // this.filterLoader = true;
+      
 
       this.searchParams.cat_id = subCat.cat_id;
       this.searchParams.sub_cat = subCat.id;
@@ -1959,7 +1959,7 @@ export default {
             console.error(err);
             // this.filterLoader = false;
           });
-      } else if (this.filterType == 1 || this.filterType == 0) {
+      } else if (this.filterType == 1 ) {
         // method to search for a business lol
         this.$store
           .dispatch("marketSearch/getFilter", subCat.id)

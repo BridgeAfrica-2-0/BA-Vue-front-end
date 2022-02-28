@@ -103,29 +103,15 @@ export default {
             });
         },
 
-        NEXT_PAGE({ commit, state }, pagge) {
+        NEXT_PAGE({ commit, state }, payload) {
 
-            let payload = state.searchState;
-            console.log("business page number ");  
+          
 
-            console.log(pagge);
-            console.log(payload.keyword);
-            return axios.get(`search/business?page=` + pagge, {
-                keyword: payload.keyword,
-                location: payload.location,
-                categoryId: payload.category,
-                subCategoryId: payload.subcategory,
-                filterId: payload.filter,
-                distance: payload.distance,
-                lat: state.geo.lat,
-                lng: state.geo.lng,
-                neighbourhoodId: payload.neighbourhood,
-
-            }).then(({ data }) => {
-                console.log(data);
+            return axios.get(payload.url+'&page='+payload.page).then(({ data }) => {
+              
                 commit("setBusinesses", data);
                 commit("setSponsoredBusinesses", data.data.sponsord);
-                commit("setSearchState", payload);
+               
                 commit("setLoading", false);
 
             }).catch(error => {

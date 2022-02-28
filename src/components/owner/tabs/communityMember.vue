@@ -163,6 +163,7 @@ export default {
 
   mounted() {
     this.foll_id = this.$route.params.id ? this.$route.params.id : "";
+    this.islogin=this.$store.getters["auth/isLogged"];
   },
 
   computed: {
@@ -307,6 +308,7 @@ export default {
 
        if(!this.islogin){
             url='guest/'+url;
+            alert("fuck you");
           }
 
       axios

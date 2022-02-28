@@ -12,6 +12,12 @@
               <splide-slide cl>
                 <img :src="value.logo_path" class="r-image" />
               </splide-slide>
+
+              
+                    <splide-slide  v-for="cover in item.covers" :key="cover" cl>
+                      <img :src="cover" class="r-image" />   
+                    </splide-slide>
+                    
             </splide>
           </div>
         </b-col>

@@ -99,7 +99,24 @@
             <b-modal id="logomodal" ref="logomodal" @ok="submitLogo" :title="$t('profileowner.Upload_Your_Logo')">
               <div class="w3-container">
                 <div id="preview">
-                  <img :src="img_url" />
+
+                 <vue-cropper
+                    :src="logoselectedFile"
+                    ref="logocropper"
+                    :aspect-ratio="6.5 / 3"
+                    drag-mode="move"
+                    :view-mode="1"
+
+                     original:true
+                    info:false
+                    canScale:true
+                    maxImgSize:1000
+                    
+                    :size="1"
+                   
+                  />
+
+
                 </div>
               </div>
             </b-modal>
@@ -120,6 +137,12 @@
                     :aspect-ratio="6.5 / 3"
                     drag-mode="move"
                     :view-mode="1"
+                    original:true
+                    info:false
+                    canScale:true
+                    maxImgSize:1000
+                    
+                    :size="1"
                   />
                 </div>
               </div>
@@ -232,7 +255,7 @@ export default {
       profile_photo: null,
       cropedImage: null,
       selectedFile: null,
-
+      logoselectedFile:null,
       options: {
         rewind: true,
         autoplay: true,
@@ -280,6 +303,23 @@ export default {
       const file = e.target.files[0];
       this.img_url = URL.createObjectURL(file);
       this.$refs["logomodal"].show();
+
+
+
+     
+      this.mime_type = file.type;
+      if (typeof FileReader === "function") {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          this.logoselectedFile = event.target.result;
+          this.$refs.logocropper.replace(this.logoselectedFile);
+        };
+        reader.readAsDataURL(file);
+      } else {
+        alert("Sorry, FileReader API not supported");
+      }
+ 
+
     },
 
     selectlogo() {
@@ -351,7 +391,85 @@ export default {
       document.getElementById("profile-imag").click();
     },
 
-    submitLogo() {
+
+
+    
+
+  submitLogo() {
+      this.cropedImage = this.$refs.logocropper.getCroppedCanvas().toDataURL();
+      this.$refs.logocropper.getCroppedCanvas().toBlob((blob) => {
+      
+
+        let loader = this.$loading.show({
+            container: this.fullPage ? null : this.$refs.preview,
+            canCancel: true,
+            onCancel: this.onCancel,
+            color: '#e75c18',
+          });
+
+          let formData = new FormData();
+          formData.append("image", blob);
+        this.axios
+          .post("user/upload/profile-picture", formData, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          })
+          .then((response) => {
+
+            
+            this.flashMessage.show({
+                status: "success",
+                message: this.$t("profileowner.Logo_Updated"),
+                blockClass: "custom-block-class",
+              });
+              
+              loader.hide();
+              
+
+            this.$store
+              .dispatch("profile/loadUserPostIntro", null)
+              .then((response) => {
+                console.log(response);
+                this.flashMessage.show({
+                  status: "success",
+                  message: this.$t("profileowner.Cover_Updated"),
+                  blockClass: "custom-block-class",
+                });
+                loader.hide();
+                this.$refs["modalxl"].hide();
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+
+            this.editCoverNull();
+          })
+          .catch((err) => {
+            console.log({ err: err });
+            if (err.response.status == 422) {
+              console.log({ err: err });
+              this.flashMessage.show({
+                status: "error",
+                message: err.response.data.message,
+                blockClass: "custom-block-class",
+              });
+              loader.hide();
+            } else {
+              this.flashMessage.show({
+                status: "error",
+                message: this.$t("profileowner.Unable_to_upload_your_image"),
+                blockClass: "custom-block-class",
+              });
+              console.log({ err: err });
+              loader.hide();
+            }
+          });
+      }, this.mime_type);
+    },
+
+
+    submitLogob() {
       let loader = this.$loading.show({
         container: this.fullPage ? null : this.$refs.preview,
         canCancel: true,

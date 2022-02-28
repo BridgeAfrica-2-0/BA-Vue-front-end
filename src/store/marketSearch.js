@@ -148,11 +148,11 @@ export default {
                     console.error(err);
                 });
         },
-        nextPage({ commit, state }, page) {
+        nextPage({ commit, state }, payload) {
             commit("setLoader", true);
             commit("setProducts", { data: [] });
 
-            return axios.get(`market/search?page=${page}`)
+            return axios.get(payload.url+"&page"+payload.page)
                 .then((res) => {
                     commit("setLoader", false);
 

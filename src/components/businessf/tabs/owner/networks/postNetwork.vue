@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="p-post">
     <!-- DOM to Create Post By A UserOwner-->
     <b-card class="px-md-3 mb-3 mt-2">
       <b-row class="mt-2">
@@ -425,6 +425,7 @@
       :businessLogo="item.profile_picture"
       :editPost="() => editPost(item)"
       :deletePost="() => deletePost(item)"
+   
     />
 
     <infinite-loading
@@ -954,7 +955,33 @@ export default {
 .color-site {
   color: #e75c18;
 }
+
+  @media (min-width: 1200px ) {  
+      
+       .p-post{
+
+    padding-right:40px;
+    padding-left:40px;
+  }
+
+  }
+
+
+    @media (min-width: 1300px ) {  
+      
+       .p-post{
+
+    padding-right:50px;
+    padding-left:50px;
+  }
+
+  }
+
+
 @media (min-width: 762px) {
+
+ 
+
   .avat {
     width: 64px;
     height: 64px;

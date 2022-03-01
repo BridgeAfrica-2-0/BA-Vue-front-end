@@ -7,7 +7,7 @@
     <!-- End Header -->
 
     <div class="container p-0">
-      <form class="d-block d-lg-none">
+      <form class="d-block d-lg-none"  @submit.prevent="getKeyword">
         <div class="mt-3 mr-5 input-group b-shadow">
           <div class="input-group-append color-mobile" style="border: none">
             <span
@@ -36,21 +36,22 @@
             data-original-title=""
             title=""
             v-model="credentials.keyword"
+              v-on:click="toggleinput()"
           />
         </div>
 
-        <div class="mt-1 mb-2 input-group b-shadow">
+        <div class="mt-1 mb-2 input-group b-shadow"  style="display: none; "   ref="mobileinput" >
           <div class="input-group-append color-mobile" style="border: none">
             <span
               class="input-group-text border-left-0 color-mobile"
-              style="width: 40px; border-right: none; background-color: white"
+              style="width: 40px; border-right: none; background-color: white;   border:none"
             >
               
 
               <b-icon style="color: #e75c18" font-scale="1.5" icon="geo-alt">  </b-icon>
             </span>
           </div>
-
+<!-- 
           <input
             id="search-ba"
             type="search"
@@ -63,8 +64,27 @@
             title=""
             v-on:click="toggleinput()"
             v-model="word2"
-          />
-          <button class="button" @click="getKeyword">GO</button>
+          /> -->
+
+
+           
+
+
+               <vue-bootstrap-typeahead
+                v-model="word2"
+                :data="neigbourhoods"
+                :minMatchingChars="0"
+                :maxMatches="10"
+              
+                :serializer="(item) => item.name"
+                :placeholder="placeholder"
+                class="search-hh m-wheree"
+              />
+
+
+
+
+          <button class="button" @click="getKeyword" >GO</button>  
         </div>
       </form>
     </div>
@@ -97,23 +117,20 @@
               v-model="credentials.keyword"
             />
 
-            <input
-              id="search-location"
-              ref="foo"
-              type="search"
-              list="browsers"
-              data-toggle="popover"
-              class="form-control search-h"
-              :placeholder="$t('home.Location')"
-              aria-label="search bridge africa"
-              data-original-title=""
-              title=""
-            />
+             
+             
 
-            <datalist id="browsers">
-              <option :value="$t('home.Current_Location')"></option>
-              <option :value="$t('home.Yaounde')" />
-            </datalist>
+             <vue-bootstrap-typeahead
+                v-model="word2"
+                :data="neigbourhoods"
+                :minMatchingChars="0"
+                :maxMatches="10"
+              
+                :serializer="(item) => item.name"
+                :placeholder="placeholder"
+                class="search-hh w-44"
+              />
+
             <slot name="button">
               <Button @click.native="getKeyword" media="desktop" />
             </slot>
@@ -774,18 +791,23 @@
  * this page is the home page of the system
  */
 import SiteFooter from "../components/site/siteFooter";
+import VueBootstrapTypeahead from "vue-bootstrap-typeahead";
 //import "../assets/js/main.js";
 // import "../assets/js/js.js";
 import Button from "@/components/ButtonNavBarFind.vue";
 import SiteHeader from "../components/site/siteHeader";
 import VLazyImage from "v-lazy-image/v2";
+import { mapGetters, mapActions, mapMutations } from "vuex";
+import axios from "axios";
 export default {
-  components: { Button, SiteHeader, SiteFooter },
+  components: { Button, SiteHeader, SiteFooter,VueBootstrapTypeahead },
   data() {
     return {
       expanded: true,
+      location: "",
       word1: "",
       word2: "",
+      placeholder:this.$t('home.Location'),
       img1: require("../assets/img/coach.png"),
     };
   },
@@ -802,7 +824,78 @@ export default {
     },
   },
 
+  created(){
+   
+    this.getLocation();
+
+  },
+
+
+
+   computed: {
+    ...mapGetters({
+      hasLauchNetworkRequest: "social/INIT",
+      user: "auth/profilConnected",
+      auth: "auth/user",
+      neigbourhoods: "auth/neigbourhoods",
+    }),
+
+    query(){
+
+      return this.credentials.location;
+    }
+  },
+
+
+  watch:{
+
+     word2(newQuery) {
+      axios
+        .get(`neighborhoods/${newQuery}`)
+        .then(({ data }) => {
+          this.$store.commit("auth/setneigbourhoods", data.data);
+        });
+    },
+  },
+
   methods: {
+
+
+     ...mapActions({
+     
+      getGeo: "business/getGeo",
+      getNeigbourhoods: "auth/neigbourhoods",
+     
+    }),
+
+
+   toggleinput() {
+      this.$refs.mobileinput.style.display = "inline-flex";
+  
+       
+      
+    },
+
+     getLocation() {
+      const success = (position) => {
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
+
+        this.getGeo({ lat: latitude, lng: longitude });
+
+        //time to get some neighbourhood mother fuckers ?lat=3.87374300&lng=11.49966000
+        this.getNeigbourhoods({ lat: latitude, lng: longitude });    
+      };
+
+      const error = (err) => {
+        console.log(error);
+      };
+
+      // This will open permission popup
+      navigator.geolocation.getCurrentPosition(success, error);
+    },
+
+
     businessOwner() {
       this.$store
         .dispatch("homeRedirection/businessInfos")
@@ -833,9 +926,7 @@ export default {
       }
     },
 
-    toggleinput() {
-      this.$refs.mobileinput.style.display = "block";
-    },
+   
 
   /**
    * this fuction id for make a search 
@@ -857,7 +948,7 @@ export default {
 
         this.$router.push({
           name: "GlobalSearch",
-          query: { keyword: this.credentials.keyword },
+          query: { keyword: this.credentials.keyword, location:this.word2 },
         });
       }
     },
@@ -1494,4 +1585,34 @@ footer a {
   margin-left: -90px;
   color: white;
 }
+
+.w-44 {
+  width: 44%;
+}
+
+
+@media only screen and (min-width: 768px) {
+  .search-hh .form-control {
+    height: 48px !important;
+    margin-bottom: 0;
+    border-radius: 0px;
+    border-bottom: hidden;
+  }
+}
+
+
+.m-wheree{
+   width: 77.8%;
+    padding: 0px;
+    margin: 0px;
+    border-radius: 0px;
+    border: none;
+}
+
+.m-wheree input{
+  border: none;
+}
+
+
+
 </style>

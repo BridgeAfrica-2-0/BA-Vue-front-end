@@ -59,7 +59,7 @@ export default {
         async FIND_BUSINESS({ commit, state }, payload) {
             console.log("business search start", payload);
 
-            console.log();
+           
             commit("setLoading", true);
             // let main = payload.main ? payload.main : false
 
@@ -72,8 +72,8 @@ export default {
                     location: payload.location,
                    // lat: state.geo.lat,
                    // lng: state.geo.lng,
-                    categoryId: payload.cat_id,
-                    subCategoryId: payload.sub_cat,
+                    catId: payload.cat_id,
+                    subCatId: payload.sub_cat,
                     filterId: payload.filter_id,
                     distance: payload.distance,
                     countryId:payload.country_id,
@@ -82,8 +82,12 @@ export default {
                     councilId:payload.council_id,
 
                     neighbourhoodId: payload.neighbourhood,
-                    neighbourhood:payload.neighbourhood,
+                    neighbourhood:payload.neighbourhood? payload.neighbourhood : state.location,
                     city:payload.city,
+
+
+
+
 
 
 

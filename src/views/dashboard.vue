@@ -2,7 +2,7 @@
   <div style="overflow-x: hidden" class="dashboard">
     <navbar></navbar>
 
-    <div class="text-justify p-card pr-1">
+    <div class="text-justify p-card pr-1">    
     
       <CompleteProfile class="mb-2"  v-if="!Profile_complete" />
       <CarousselDashboard class="mm-top" /> <br />
@@ -193,7 +193,7 @@ export default {
       boptions: [],
       detail: null,
       data1: null,
-      showcompleteprofile:false,
+      showcompleteprofile:true,
     };
   },
 
@@ -370,6 +370,17 @@ export default {
     this.$store
       .dispatch('profile/loadUserPostIntro', null)
       .then((response) => {
+   
+       if(this.$store.state.profile.profileIntro.user.profile_complete) { 
+           
+           this.showcompleteprofile =true;
+      }else{
+
+       this.showcompleteprofile =false;
+      }
+
+        
+        
        
       })
       .catch((error) => {
@@ -422,7 +433,10 @@ export default {
     },
     Profile_complete(){
 
-      return this.$store.state.profile.profileIntro.user.profile_complete;
+   
+     return this.showcompleteprofile;
+
+      
    
     }
   },

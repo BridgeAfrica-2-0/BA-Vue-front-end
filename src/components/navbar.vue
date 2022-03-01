@@ -46,10 +46,11 @@
                 data-original-title=""
                 title=""
                 v-on:click="toggleinput()"
+                 v-on:keyup.enter="getKeyword"
               />
             </b-input-group>
 
-            <span style="display: none" ref="mobileinput">
+            <span style="display: none; " ref="mobileinput">
               <b-input-group class="b-shadow mt-2">
                 <div
                   class="input-group-append color-mobile"
@@ -57,7 +58,7 @@
                 >
                   <span
                     class="input-group-text border-left-0 color-mobile"
-                    style="width: 40px; border-right: none"
+                    style="width: 40px;  border:none"
                   >
                     <b-icon
                       icon="geo-alt"
@@ -67,23 +68,17 @@
                   </span>
                 </div>
 
-                <input
-                  id="search-ba"
-                  type="search"
-                  list="browsers"
-                  data-toggle="popover"
-                  class="form-control search-mobile"
-                  style="border-left: none"
-                  :placeholder="$t('general.Where')"
-                  aria-label=""
-                  data-original-title=""
-                  title=""
-                />
-
-                <datalist id="browsers">
-                  <option value=" Current Location "></option>
-                  <option value="Yaounde " />
-                </datalist>
+               
+                <vue-bootstrap-typeahead
+                v-model="credentials.location"
+                :data="neigbourhoods"
+                :minMatchingChars="0"
+                :maxMatches="10"
+              
+                :serializer="(item) => item.name"
+                :placeholder="credentials.location_placeholder"
+                class="search-hh m-where"
+              />
               </b-input-group>
             </span>
           </form>
@@ -100,15 +95,17 @@
                 aria-label=""
                 data-original-title=""
                 title=""
+                v-on:keyup.enter="getKeyword"
               />
 
               <vue-bootstrap-typeahead
-                v-model="query"
+                v-model="credentials.location"
                 :data="neigbourhoods"
                 :minMatchingChars="0"
                 :maxMatches="10"
+              
                 :serializer="(item) => item.name"
-                placeholder="Where"
+                :placeholder="credentials.location_placeholder"
                 class="search-hh w-44"
               />
 
@@ -120,7 +117,7 @@
           <div id="search-popover" class="d-none"></div>
         </div>
 
-        <div class="col-md-12 col-lg-1 col-xl-4">
+        <div class="col-md-12 col-lg-1 col-xl-4" ref="toglercontainer" >
           <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
           <button
@@ -138,7 +135,7 @@
             <fas-icon class="primary search" :icon="['fas', 'bars']" />
           </button>
 
-          <div style="float: right">
+          <div style="float: right" ref="isnaav">
             <b-collapse id="nav-collapse" is-nav>
               <div class="nav-item">
                 <router-link
@@ -636,6 +633,9 @@ export default {
         return {
           keyword: "",
           placeholder: this.$t("general.All"),
+          location:  '',
+          location_placeholder:this.$t("home.Location"),
+          
         };
       },
     },
@@ -650,7 +650,7 @@ export default {
       notificationPatterns: null,
       messagePatterns: null,
       redirectionPatterns: null,
-      query: "",
+     // query: "",
       selectedUser: null,
       users: [],
     };
@@ -663,6 +663,11 @@ export default {
       auth: "auth/user",
       neigbourhoods: "auth/neigbourhoods",
     }),
+
+    query(){
+
+      return this.credentials.location;
+    }
   },
   beforeMount() {
     this.getLocation();
@@ -741,7 +746,7 @@ export default {
 
     query(newQuery) {
       axios
-        .get(`business-community/neighborhood/${newQuery}`)
+        .get(`neighborhoods/${newQuery}`)
         .then(({ data }) => {
           this.$store.commit("auth/setneigbourhoods", data.data);
         });
@@ -763,6 +768,7 @@ export default {
       getNeigbourhoods: "auth/neigbourhoods",
       Logout: "auth/logout",
     }),
+
 
     profileSenderImange(image) {
       // console.log("image is:", image);
@@ -805,7 +811,7 @@ export default {
         this.getGeo({ lat: latitude, lng: longitude });
 
         //time to get some neighbourhood mother fuckers ?lat=3.87374300&lng=11.49966000
-        this.getNeigbourhoods({ lat: "", lng: "" });    
+        this.getNeigbourhoods({ lat: latitude, lng: longitude });    
       };
 
       const error = (err) => {
@@ -858,11 +864,12 @@ export default {
     },
 
     getKeyword() {
-      console.log(this.credentials.keyword);
+
+
       if (!this.credentials.keyword) return false;
 
       if (this.$route.name != "Search") {
-        console.log("the keyword is: ", this.credentials.keyword);
+        
         this.$store
           .dispatch("allSearch/SEARCH", {
             keyword: this.credentials.keyword,
@@ -873,7 +880,7 @@ export default {
 
         this.$router.push({
           name: "GlobalSearch",
-          query: { keyword: this.credentials.keyword },
+          query: { keyword: this.credentials.keyword,  location:this.credentials.location, },
         });
       }
     },
@@ -952,6 +959,15 @@ export default {
 
     toggleinput() {
       this.$refs.mobileinput.style.display = "block";
+  
+         this.$refs.toglercontainer.style.marginTop = "25px";
+       this.$refs.toglercontainer.style.position = "absolute";
+
+       this.$refs.toglercontainer.style.right = "1%";
+
+       this.$refs.isnaav.style.display = "none";
+       
+      
     },
 
     getNetworks: async function () {
@@ -1007,6 +1023,18 @@ export default {
 };
 </script>
 <style>
+
+.m-where{
+  width: 87.8%;
+    padding: 0px;
+    margin: 0px;
+    border-radius: 0px;
+    border: none;
+}
+
+.m-where input{
+  border: none;
+}
 .vbst-item:hover {
   color: white !important;
 }

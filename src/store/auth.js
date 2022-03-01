@@ -9,7 +9,7 @@ export default {
     appLanguage: 'fr',
     user: [],
     isVerified: null,
-    passwordToken: null,
+    passwordToken: null, 
     registerData: null,
     neigbourhoods: [],
     businessAround: [],
@@ -161,9 +161,11 @@ export default {
 
       var currentUrl = window.location.pathname;
 
+      window.location.href = "/login";
+
       // console.log(router.app._route);
      
-      router.push({ name: 'Login', query: { redirect: currentUrl } });
+     // router.push({ name: 'Login', query: { redirect: currentUrl } });
   
     },
 

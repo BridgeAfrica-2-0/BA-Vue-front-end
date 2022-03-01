@@ -191,6 +191,7 @@
               v-model="query"
               :data="lneighbourhoods"
               :minMatchingChars="0"
+              @hit="searchThisNeibourhood(query)"
               :maxMatches="10"
               :serializer="(item) => item.name"
               placeholder="Where"
@@ -369,7 +370,7 @@
       <!-- <b-link v-b-modal="'distance'"> {{ $t("search.See_all") }} </b-link> -->
 
       <div>
-        <span v-if="filterType == '1' || filterType == '4'">
+        <!-- <span v-if="filterType == '1' || filterType == '4'">
           <b-form-group
             label-cols-lg="12"
             :label="$t('search.Neighbourhood')"
@@ -410,7 +411,7 @@
             ></b-form-input>
             <div class="mt-2 text-left">min: 100 Max: {{ priceRange }}</div>
           </span>
-        </span>
+        </span> -->
       </div>
     </div>
 
@@ -695,24 +696,14 @@ export default {
   name: "filters",
 
   props: ["filterType", "onFinByCategory", "Selectedcategory", "Selectedparentcategory", "categoryNameSelected"],
-  watch: {
+  watch: { 
 
      query(newQuery) {
         axios.get(`neighborhoods/${newQuery}`).then(({ data }) => {
           this.$store.commit("auth/setneigbourhoods", data.data);
         });
 
-        this.searchParams.neighbourhood = newQuery;
-
-        let data = { city: newQuery };
-
-        if (this.filterType == 1) {
-          this.searchBusiness(this.searchParams);
-        } else if (this.filterType == 4) {
-          this.searchProducts(this.searchParams);
-        } else if (this.filterType == 0) {
-          this.allSearch(this.searchParams);
-        }
+        
     },
 
     city(newQuery) {
@@ -2095,6 +2086,23 @@ export default {
           console.log("Error erro!");
         });
       //console.log("[debug]neigbourhood: ", this.userNeighbourhoods);
+    },
+
+    searchThisNeibourhood(keyword){
+
+          
+          this.searchParams.neighbourhood = keyword;
+
+        
+
+        if (this.filterType == 1) {
+          this.searchBusiness(this.searchParams);
+        } else if (this.filterType == 4) {
+          this.searchProducts(this.searchParams);
+        } else if (this.filterType == 0) {
+          this.allSearch(this.searchParams);
+        }
+
     },
 
     searchByNeigbourhood(nei) {

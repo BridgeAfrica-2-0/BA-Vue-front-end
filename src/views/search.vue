@@ -660,6 +660,8 @@ export default {
   created() {
     if (this.$route.query.keyword) {
       this.searchParams.keyword = this.$route.query.keyword;
+      this.searchParams.location = this.$route.query.location;
+      this.searchParams.location_placeholder=this.$route.query.location ? this.$route.query.location:this.$t("home.Location");
     }
 
     this.onProcessQuery();
@@ -687,6 +689,7 @@ export default {
       searchParams: {
         keyword: "",
         cat_id: "",
+        location:"",
         placeholder: "Find In All",
       },
       strategY: null,
@@ -1637,24 +1640,32 @@ export default {
       immediate: true,
       deep: true,
       handler(newValue, oldValue) {
+       
         if(this.selectedId==0){   
         this.$store.commit("allSearch/setKeyword", newValue.keyword);
+         this.$store.commit("allSearch/setLocation", newValue.location);
 
         }
 
         else if(this.selectedId==1){
             
             
+         this.$store.commit("business/setLocation", newValue.location);
          this.$store.commit("business/setKeyword", newValue.keyword);
         }else if(this.selectedId==4){
           
            this.$store.commit("marketSearch/setKeyword", newValue.keyword);
+
+            this.$store.commit("marketSearch/setLocation", newValue.location);
 
         }
 
         else if(this.selectedId==3){
           
            this.$store.commit("networkSearch/setKeyword", newValue.keyword);
+
+           
+           this.$store.commit("networkSearch/setLocation", newValue.location);
 
         }
         
@@ -1725,14 +1736,16 @@ export default {
 
       
       var keyword = this.searchParams.keyword;
+      var location = this.searchParams.location;
 
       let elm = data ? data : keyword ? { keyword: keyword } : { keyword: "" };
 
        this.$store.commit("allSearch/setKeyword", keyword);
+       this.$store.commit("allSearch/setLOcation", keyword);
      
 
       this.$store
-        .dispatch("allSearch/SEARCH", {keyword:keyword})
+        .dispatch("allSearch/SEARCH", {keyword:keyword, location:location})
         .then((res) => {
           // console.log("categories loaded!");
         })
@@ -1744,9 +1757,9 @@ export default {
     async onFindBusiness() {
       this.$store.commit("business/setLoading", true);
 
-      if (this.searchParams.keyword.trim()) console.log("init search");
-      await this.findBusiness({ keyword: this.searchParams.keyword });
-      //  await  this.findBusiness({ keyword: this.searchParams.keyword, location: this.searchParams.location });
+      if (this.searchParams.keyword.trim()) 
+      await this.findBusiness({ keyword: this.searchParams.keyword, location:this.searchParams.location });
+     
       this.$store.commit("business/setLoading", false);
     },
 

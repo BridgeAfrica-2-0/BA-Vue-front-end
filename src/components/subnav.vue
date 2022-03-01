@@ -109,13 +109,13 @@ export default {
     },
   },
 
-  watch:{
+  /* watch:{
 
     "$store.state.marketSearch.categories": function(categories){
       if (categories.length)
         this.showSubCat(categories[0].category, categories[0].sub_cat, false)
     }
-  },
+  }, */
 
   created() {
     this.getCategories();
@@ -182,6 +182,11 @@ export default {
       this.$store.commit("marketSearch/setSubCat", subCat);
       if (!subCat.length) this.hideSubCat(category.id);
       // console.log("Subcat:", this.subCategories);
+
+      this.$emit('update:keyword', {
+        keyword: category.name,
+        cat_id: category.id
+      })
 
     },
 

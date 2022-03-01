@@ -69,6 +69,7 @@
       @onChangeCategoryName="(val) => categoryName = val"
       @category="getCategory"
       @parentcategory="getparentCategory"
+      @update:keyword="(val) => searchParams = Object.assign(searchParams,val)"
       style="margin-top: -25px"
     />
 

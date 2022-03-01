@@ -35,6 +35,7 @@
     <div v-if="filterType == '0' || filterType == '1' || filterType == '4'">
 
        <b-form-group
+          v-if="nameOfCategory"
           label-cols-lg="3"
           :label="$t('search.Categories')"
           label-size="md"
@@ -43,11 +44,10 @@
         >
         </b-form-group>
 
-      <b-form-select v-model="nameOfCategory" :options="categoriesAll" class="mb-2"></b-form-select>
+      <b-form-select v-model="nameOfCategory" :options="categoriesAll" class="mb-2" v-if="nameOfCategory"></b-form-select>
 
-      {{nameOfCategory}} 
 
-      <div   class="mt-3" v-if="subCategories.length">
+      <div   class="mt-3" v-if="subCategories.length && nameOfCategory">
         <span>
           <b-form-radio
             v-for="(subCat, index) in subCategories.slice(0, 4)"
@@ -695,7 +695,7 @@ export default {
 
   name: "filters",
 
-  props: ["filterType", "onFinByCategory", "Selectedcategory", "Selectedparentcategory", "categoryNameSelected"],
+  props: ["filterType", "Selectedcategory", "Selectedparentcategory", "categoryNameSelected"],
   watch: { 
 
      query(newQuery) {
@@ -722,7 +722,6 @@ export default {
 
     
     categoryNameSelected: function(newValue,oldValue) {
-      console.log('#######################')
       this.nameOfCategory = newValue
     },
 
@@ -732,7 +731,6 @@ export default {
 
       this.$emit("onFinByCategory", {cat_id: cat.category.id })
       
-
       this.showSubCat(cat.sub_cat)
     },
 

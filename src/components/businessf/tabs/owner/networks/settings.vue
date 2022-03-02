@@ -13,7 +13,7 @@
           <b-form-input
             id="bname"
             placeholder=""
-            v-model="editnetworkinfo.admin_name"
+            v-model="editnetworkinfo.name"
             required
           ></b-form-input>
         </b-form-group>
@@ -325,7 +325,7 @@
   </b-container>
   <b-container v-else>
     <div class="text-center">
-      <b-spinner style="width: 6rem; height: 6rem;" label="Text Centered Large Spinner" variant="primary"></b-spinner>
+      <b-spinner style="width: 3.5rem; height: 3.5rem;" label="Text Centered Large Spinner" variant="primary"></b-spinner>
     </div>
   </b-container>
 </template>

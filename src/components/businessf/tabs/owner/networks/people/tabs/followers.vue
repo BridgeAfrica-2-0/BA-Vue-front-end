@@ -87,7 +87,7 @@ export default {
 
  UserDetails() {   
       this.$store
-        .dispatch("networkProfileCommunitySidebar/getUserDetails", this.net_id)   
+        .dispatch("networkProfileCommunitySidebar/getUserDetails", this.url)   
         .then(() => {
           console.log("ohh year");
         })

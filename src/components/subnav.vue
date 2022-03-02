@@ -78,7 +78,7 @@
                 >
                   <b-dropdown-item
                     class="ml-1"
-                    @click="bcategory({ cat_id: category.category.id })"
+                    @click="bcategory({ cat_id: category.category.id }, category.category)"
                   >
                     {{ category.category.name }}
                   </b-dropdown-item>
@@ -117,14 +117,25 @@ export default {
     }
   }, */
 
+
   created() {
     this.getCategories();
   },
+
   methods: {
     
-    bcategory(category) {
-      this.$emit("category", category);
+    bcategory(category, value = null) {
       
+      this.$emit("category", category);
+
+    
+      if (category){
+        this.$emit('update:keyword', {
+          keyword: value.name,
+          cat_id: value.id
+        })
+      }
+        
     },
 
     getCategories() {

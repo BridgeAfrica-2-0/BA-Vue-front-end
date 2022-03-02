@@ -1725,12 +1725,12 @@ export default {
     // [ED]----------
 
     onOverMore() {
-      this.$refs.More.visible = true;
+      this.$refs.more.visible = true;
       this.$emit("parentcategory", "More");
     },
 
     onLeaveMore() {
-      this.$refs.More.visible = false;
+      this.$refs.more.visible = false;
     },
 
     getKeyword(data) {

@@ -726,6 +726,8 @@ export default {
     },
 
     nameOfCategory:function(value){
+
+      if (!value.length) return false
       
       const cat = this.$store.getters["marketSearch/getCategories"].find(r => r.category.name === value)
 
@@ -1880,13 +1882,15 @@ export default {
       this.searchParams.price_range = null;
 
 
-        if (this.filterType == 1) {
+        /* if (this.filterType == 1) {
         this.searchBusiness(this.searchParams);
       } else if (this.filterType == 4) {
         this.searchProducts(this.searchParams);
       } else if (this.filterType == 0) {
         this.allSearch(this.searchParams);
-      }
+      } */
+
+      this.nameOfCategory = ""
       
     },
 

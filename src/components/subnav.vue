@@ -30,7 +30,13 @@
                   <b-dropdown-item
                     v-for="(subCat, subIndex) in category.sub_cat.slice(0, 6)"
                     :key="subIndex"
-                    @click="bcategory({ cat_id: subCat.cat_id, id: subCat.id })"
+                    @click="() => {
+                      $emit('update:keyword', {
+                        keyword: subCat.name,
+                        cat_id: subCat.cat_id
+                      });
+                      bcategory({ cat_id: subCat.cat_id, id: subCat.id })
+                    }"
                     href="#"
                     class="ml-2"
                   >
@@ -125,11 +131,14 @@ export default {
   methods: {
     
     bcategory(category, value = null) {
+
+      
       
       this.$emit("category", category);
 
     
-      if (category){
+      if (value){
+        this.$emit("onChangeCategoryName", value.name);
         this.$emit('update:keyword', {
           keyword: value.name,
           cat_id: value.id

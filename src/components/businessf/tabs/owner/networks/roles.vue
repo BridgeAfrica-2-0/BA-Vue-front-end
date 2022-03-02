@@ -75,7 +75,7 @@
       <b-container>
         <h5 class="a-text">{{ $t('network.Existing_Editors') }}</h5>
         <div >
-          <b-list-group v-for="editor in editors" :key="editor.user_id">
+          <b-list-group v-for=" ( editor , index) in editors" :key="editor.user_id">
             <b-list class="d-flex align-items-center m-list">
               <b-avatar 
                 class="mr-3" 
@@ -100,7 +100,7 @@
                       ></b-icon>
                     </template>
                     <b-dropdown-item href="#" @click="$bvModal.show('edit-editor'); selectObject(editor)">{{ $t('network.Edit') }}</b-dropdown-item>
-                    <!-- <b-dropdown-item href="#" @click="$bvModal.show('delete-editor'); selectObject(editor)"> {{ $t('network.Delete') }} </b-dropdown-item> -->
+                     <b-dropdown-item href="#" @click="deleteEditorr(editor,index)"> {{ $t('network.delete') }} </b-dropdown-item> 
                   </b-dropdown>
                 </div>
               </span>
@@ -177,6 +177,7 @@ export default {
         SPassign: false,
         editors:[],
          editorspage: 1,
+         einfiniteId:1,
         clickedObject: {},
         form: {
           name: "",
@@ -206,6 +207,63 @@ export default {
   },
 
   methods:{
+
+
+
+
+    
+    deleteEditorr(editor, index){
+     
+       
+      
+       this.$confirm(
+        {
+          message: `Are you sure?`,
+          button: {
+            no: 'No',
+            yes: 'Yes'
+          },
+          /**
+          * Callback Function
+          * @param {Boolean} confirm
+          */
+          callback: confirm => {
+            if (confirm) {
+                   
+                
+
+
+      this.$store
+        .dispatch("NetworkSettings/deleteEditor", {
+          path: "network/"+this.url+"/remove/editor/"+editor.user_id,
+        })
+        .then(({ data }) => {
+        console.log(data);
+     
+         this.$delete(this.editors, index);
+
+        this.flashMessage.show({
+          status: "success",
+          message: this.$t('network.Editor_Deleted')
+        });
+          
+      })
+      .catch(err => {
+        console.log({ err: err });
+        this.flashMessage.show({
+          status: "error",
+          message: this.$t('network.Unable_To_Delete_Editor')
+        });
+      });
+
+
+
+            }
+          }
+        }
+      )
+
+    },
 
 
      EinfiniteHandler($state) {
@@ -281,7 +339,9 @@ export default {
         .then(({ data }) => {
         console.log(data);
         console.log('ohh yeah');
-        this.displayEditor();
+        
+       
+      
         this.flashMessage.show({
           status: "success",
           message: this.$t('network.New_Role_Updated')
@@ -309,6 +369,10 @@ export default {
           formData: formData,
         })
         .then(({ data }) => {
+
+           this.einfiniteId +=1
+        
+      this.$refs.EinfiniteLoading.attemptLoad();
         console.log(data);
         console.log('ohh yeah');
         this.getFollowers();
@@ -354,8 +418,13 @@ export default {
       });
 		},
 
+    
+
     selectObject(object){
+
 			this.clickedObject = object
+
+      
 		},
 
   },

@@ -180,8 +180,8 @@ export default {
     },
 
     deleteEditor({ commit }, payload) {
-      console.log("payload", payload)
-      return axios.delete(`/network/${payload.path}`)
+      
+      return axios.put(payload.path)   
       .then(({ data }) => {
         return data;
       });

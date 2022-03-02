@@ -663,13 +663,16 @@ export default {
         .dispatch("auth/country")
         .then((response) => {
           console.log(this.country);
-          this.hasLoad = true;
+          
         })
         .catch((err) => {
           console.log("--------- error: ");
           console.error(err);
         })
-        .finally(() => loader.hide());
+        .finally(() => {
+          loader.hide();
+          this.hasLoad = true;
+        });
     },
 
     changePassword() {

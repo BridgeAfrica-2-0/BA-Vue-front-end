@@ -69,6 +69,7 @@
       @onChangeCategoryName="(val) => categoryName = val"
       @category="getCategory"
       @parentcategory="getparentCategory"
+      @update:keyword="(val) => searchParams = Object.assign(searchParams,val)"
       style="margin-top: -25px"
     />
 
@@ -1724,12 +1725,12 @@ export default {
     // [ED]----------
 
     onOverMore() {
-      this.$refs.More.visible = true;
+      this.$refs.more.visible = true;
       this.$emit("parentcategory", "More");
     },
 
     onLeaveMore() {
-      this.$refs.More.visible = false;
+      this.$refs.more.visible = false;
     },
 
     getKeyword(data) {

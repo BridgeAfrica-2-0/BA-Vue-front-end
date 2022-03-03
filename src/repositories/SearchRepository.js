@@ -41,6 +41,25 @@ class Repository {
     }
   }
 
+
+  async matching(keyword) {
+    try {
+      
+
+      const response = await axios.get(`search/category?keyword=${keyword}`)
+      return {
+        success: (response.data.data) ? true : false,
+        data: (response.data.data) ? response.data.data : []
+      }
+
+    } catch (error) {
+      return {
+        success: false,
+        data: error.response.data.message
+      }
+    }
+  }
+
   async findPostByBuisness(credentials) {
     try {
       const { page, data } = credentials

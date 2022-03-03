@@ -443,6 +443,8 @@ import { mapGetters, mapMutations } from "vuex";
 
 import Post from "@/components/businessOwner/ownerPostComponent";
 
+
+
 export default {
   name: "postNetwork",
   mixins: [AllPostFeatureMixin],
@@ -818,6 +820,21 @@ export default {
     },
 
     async submitPost() {
+
+      let url = "network/post/create/" + this.url ; 
+
+      if(this.postStatus== "member"){    
+           
+           url = "network/member-post/create/" + this.url ;
+      }   
+
+
+if(this.postStatus== "editors"){    
+           
+           url = "network/editor-post/create/" + this.url ;
+      }   
+
+
       this.loading = true;
       this.isUploading = true;
       this.fileImageArr = this.createPost.movies;
@@ -836,7 +853,7 @@ export default {
   
       formData2.append("content", this.createPost.postNetworkUpdate);
       await this.axios
-        .post("network/post/create/" + this.url, formData2, {
+        .post( url, formData2, {
           headers: {
             "Content-Type": "multipart/form-data",
           },

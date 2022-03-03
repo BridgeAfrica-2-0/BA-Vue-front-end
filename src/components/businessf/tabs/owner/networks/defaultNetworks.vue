@@ -29,7 +29,7 @@
           <h6 class="h6">{{ $t('network.Members') }}</h6>
         </template>
 
-        <Members> </Members>
+        <Members from="admin"> </Members>
       </b-tab>
 
       <b-tab>

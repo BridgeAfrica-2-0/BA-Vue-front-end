@@ -4,11 +4,11 @@
       <b-col cols="12" class="mx-auto">
         <b-input-group class="mb-2 px-md-3 mx-auto">
           <b-input-group-prepend
-            @onclick="search"
+            
             is-text
             style="cursor: pointer"
           >
-            <b-icon-search class="text-primary border-none"></b-icon-search>
+            <b-icon-search @onclick="search" class="text-primary border-none"></b-icon-search>
           </b-input-group-prepend>
           <b-form-input
             aria-label="Text input with checkbox"
@@ -16,7 +16,7 @@
             type="text"
             class="form-control"
             v-model="searchTitle"
-            @keyup="search"
+             v-on:keyup.enter="search"
           ></b-form-input>
         </b-input-group>
       </b-col>
@@ -57,6 +57,8 @@
                 </span>
                 <span class="float-right mt-1">
                   <b-dropdown
+
+                   v-if="from=='admin'"
                     size="lg"
                     variant="link"
                     toggle-class="text-decoration-none"
@@ -140,6 +142,7 @@
                   <b-dropdown
                     size="lg"
                     variant="link"
+                    v-if="from=='admin'"
                     toggle-class="text-decoration-none"
                     no-caret
                   >
@@ -229,6 +232,7 @@
                   <b-dropdown
                     size="lg"
                     variant="link"
+                    v-if="from=='admin'"
                     toggle-class="text-decoration-none"
                     no-caret
                   >
@@ -271,6 +275,7 @@
       </b-col>
     </b-row>
 
+
     <b-row class="mt-4">
       <b-col cols="12">
         <h6 class="font-weight-bolder">
@@ -279,14 +284,11 @@
           }})
         </h6>
         <hr width="100%" />
-        <b-skeleton-wrapper :loading="loading">
-          <template #loading>
-            <b-card>
-              <b-skeleton width="85%"></b-skeleton>
-              <b-skeleton width="55%"></b-skeleton>
-              <b-skeleton width="70%"></b-skeleton>
-            </b-card>
-          </template>
+       
+
+          <div class="memh">  
+
+            
 
           <div v-for="(member, index) in members" :key="member.id">
             <p class="">
@@ -317,7 +319,7 @@
                     ></b-icon-three-dots-vertical
                     ><span class="sr-only">{{ $t("network.Settings") }}</span>
                   </template>
-                  <b-dropdown-item href="#" @click="makeAdmin(member.user_id)">
+                  <b-dropdown-item  v-if="from=='admin'|| from=='editor'"  href="#" @click="makeAdmin(member.user_id)">
                     <b-icon-person-plus-fill
                       variant="primary"
                     ></b-icon-person-plus-fill>
@@ -334,7 +336,7 @@
                     {{ member.is_follow !== 0 ? "Unfollow" : "Follow" }}
                   </b-dropdown-item>
 
-                  <b-dropdown-item
+                  <b-dropdown-item v-if="from=='admin'|| from=='editor'"
                     href="#"
                     @click="removeFromNetworks(member.user_id, index, 'member')"
                   >
@@ -345,9 +347,11 @@
               </span>
             </p>
           </div>
-        </b-skeleton-wrapper>
-      </b-col>
-      <b-col col="12">
+
+
+
+
+           <b-col col="12">
         <infinite-loading
           @infinite="infiniteHandler"
           :identifier="infiniteId"
@@ -361,6 +365,11 @@
           </div>
         </infinite-loading>
       </b-col>
+
+            </div>
+       
+      </b-col>
+     
     </b-row>
   </div>
 </template>
@@ -399,6 +408,8 @@ export default {
       loading: false,
     };
   },
+
+  props: ['from'],
 
   mounted() {
        this.islogin=this.$store.getters["auth/isLogged"];
@@ -463,8 +474,7 @@ export default {
           console.log("hey you");
           console.log(data);
           if (data.data.users.length) {
-            console.log("hey you too");
-            console.log("loading data of page " + this.page);
+            
             console.log(data.data.users);
             this.memberss = data.data.user_count;
             this.members.push(...data.data.users);
@@ -508,8 +518,7 @@ export default {
       this.axios
         .post(lien)
         .then(({ data }) => {
-          console.log("hey you");
-          console.log(data);
+        
           if (data.data.admin.length) {
             this.admins.push(...data.data.admin);
             this.adminss = data.data.admin_count;
@@ -540,7 +549,7 @@ export default {
           "network/" +
           this.url +
           "/members/editor/" +
-          this.page +
+          this.editorspage +
           "?keyword=" +
           this.searchTitle;
       }
@@ -692,10 +701,12 @@ export default {
     },
 
     search() {
-      this.infiniteId += 1;
+
+      
+       this.infiniteId += 1;
       this.ainfiniteId += 1;
-      this.einfiniteId += 1;
-      this.binfiniteId += 1;
+       this.einfiniteId += 1;
+       this.binfiniteId += 1;
 
       this.page = 1;
       this.businessPage = 1;
@@ -708,9 +719,9 @@ export default {
       this.editors = [];
 
       this.$refs.infiniteLoading.attemptLoad();
-      this.$refs.AinfiniteLoading.attemptLoad();
-      this.$refs.EinfiniteLoading.attemptLoad();
-      this.$refs.EinfiniteLoading.attemptLoad();
+       this.$refs.AinfiniteLoading.attemptLoad();
+       this.$refs.EinfiniteLoading.attemptLoad();
+       this.$refs.EinfiniteLoading.attemptLoad();
     },
 
     makeAdmin: function (user_id) {
@@ -915,5 +926,12 @@ hr {
   overflow-y: scroll;
   overflow-x: hidden;
   scrollbar-width: thin;
+}
+
+.memh{
+
+   height:400px;
+   overflow: auto;
+    overflow-x:hidden;
 }
 </style>

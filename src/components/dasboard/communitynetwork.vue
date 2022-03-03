@@ -112,7 +112,7 @@ export default {
 
   data() {
     return {
-      page: 2,
+      page: 1,
       network:[],
       options: {
         rewind: true,

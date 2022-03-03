@@ -146,9 +146,9 @@ export default {
     },
 
      BlockUser(user_id, index) {
-     // this.loading = true;
-      console.log("----",user_id);
-      console.log("network/"+this.url+"/lock/user/"+user_id);
+
+       
+     
       this.axios.post("network/"+this.url+"/lock/user/"+user_id)
       .then(response => {
         console.log(response);
@@ -176,7 +176,7 @@ export default {
 
  UserDetails() {   
       this.$store
-        .dispatch("networkProfileCommunitySidebar/getUserDetails", this.this.url)   
+        .dispatch("networkProfileCommunitySidebar/getUserDetails", this.url)   
         .then(() => {
           console.log("ohh year");
         })

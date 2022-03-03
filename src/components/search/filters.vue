@@ -46,7 +46,7 @@
 
       <div   class="mt-3" v-if="subCategories.length && nameOfCategory">
         <span>
-          {{subCategories}}
+          
           <b-form-radio
             v-for="(subCat, index) in subCategories.slice(0,5)"
             v-model="selected_sub_cat"
@@ -1887,7 +1887,7 @@ export default {
   methods: {
 
     matching(cat){
-        console.log(cat)
+        
         this.$emit('onFinByCategory', {cat_id: cat.id })
         
         this.showSubCat(cat.sub_category)
@@ -2007,8 +2007,6 @@ export default {
 
             this.searchBusiness(this.searchParams);
 
-            console.log("Filters: ");
-            console.log(res.data.data);
             if (res.data.data.length === 0) {
               let subName = "";
               this.subCategories.map((sub) => {
@@ -2034,7 +2032,8 @@ export default {
             console.error(err);
             // this.filterLoader = false;
           });
-          if (this.filterType == 0) {
+          
+      } else if (this.filterType == 0) {
             console.log("[DEBUG] Filter: ", subCat);
             this.allSearch({
                cat_id: subCat.cat_id,
@@ -2044,7 +2043,6 @@ export default {
 
             
           }
-      } 
     },
 
     searchProducts(data) {

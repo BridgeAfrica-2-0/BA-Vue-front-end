@@ -179,8 +179,11 @@
                       <label for="username" class="username">
                         {{ $t("welcome.DOB") }} :</label
                       ><br />
+   
 
-                      <b-form-datepicker
+                      <DropdownDatepicker   minAge="12"   v-model="dob" style="width:100%"   dropdownClass="form-control mr-1 w-100" class="d-inline-flex" />
+
+                      <!-- <b-form-datepicker
                         name="dob"
                         :max="min"
                         id="dob"
@@ -188,7 +191,7 @@
                         class=" text"
                         :locale="this.$i18n.locale"
                         :placeholder="$t('welcome.DOB')"
-                      ></b-form-datepicker>
+                      ></b-form-datepicker> -->
                     </div>
 
                     <div class="form-group">
@@ -394,14 +397,18 @@
                         {{ $t("welcome.DOB") }} :</label
                       ><br />
 
-                      <b-form-datepicker
+    
+
+                      <DropdownDatepicker   minAge="12"   v-model="dob" style="width:100%"   dropdownClass="form-control mr-1 w-100" class="d-inline-flex" />
+
+                      <!-- <b-form-datepicker
                         name="dob"
                         :max="min"
                         id="dob"
                         v-model="dob"
                         class=" text"
                         :placeholder="$t('welcome.DOB')"
-                      ></b-form-datepicker>
+                      ></b-form-datepicker> -->
                     </div>
 
                     <div class="form-group">
@@ -915,6 +922,8 @@ import Tutorial from "@/components/dasboard/tutorial";
 
 import axios from "axios";
 
+import DropdownDatepicker from 'vue-dropdown-datepicker'; 
+
 import Multiselect from "vue-multiselect";
 import { validationMixin } from "vuelidate";
 import moment from "moment";
@@ -929,6 +938,7 @@ export default {
   data() {
     return {
       useas: "",
+      monthShortValues:['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
       businessInstanceCenter: [11.504929555178624, 3.8465173382452815],
       municipality: [],
       min: moment()
@@ -956,7 +966,7 @@ export default {
       showMap: true,
       sendingB: false,
       profile_pic: "",
-      dob: null,
+      dob: "2041-02-08",
       gender: null,
       city: null,
       Neighbor: null,
@@ -1707,6 +1717,7 @@ this.$refs.cropper.getCroppedCanvas().toBlob((blob) => {
     Business,
     Tutorial,
     VueCropper,
+    DropdownDatepicker,
     // AutocompleteMapbox,
     // businessmap,
     // BusinessAutocomplete,

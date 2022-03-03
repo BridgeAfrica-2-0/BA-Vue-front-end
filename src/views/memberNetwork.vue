@@ -13,7 +13,7 @@
           <b-tabs content-class="mt-3" lazy fill pills>
             <b-tab :title="$t('memnetwork.Posts')"><Posts :postStatus="'member'" /></b-tab>
             <b-tab :title="$t('memnetwork.Media')"><Media :type="'network'" :isEditor="false" /></b-tab>
-            <b-tab :title="$t('memnetwork.Members')"><Members /></b-tab>
+            <b-tab :title="$t('memnetwork.Members')"><Members from="member" /></b-tab>
             <b-tab :title="$t('memnetwork.Feedback')"><Feedback /></b-tab>
           </b-tabs>
         </b-col>

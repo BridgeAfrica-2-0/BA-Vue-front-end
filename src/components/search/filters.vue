@@ -13,7 +13,7 @@
     </div>
 
     <br/>
-
+    
     <div v-if="filterType == '0' || filterType == '1' || filterType == '4'">
 
        <b-form-group
@@ -42,9 +42,9 @@
         </b-badge>
       </div>
 
-      <b-spinner style="width: 3rem; height: 3rem;" label="Large Spinner" v-if="loading"></b-spinner>
+      <b-spinner style="width: 1rem; height: 1rem; color:#e75c18" label="Large Spinner" v-if="loading"></b-spinner>
 
-      <div   class="mt-3" v-if="subCategories.length && nameOfCategory">
+      <div   class="mt-3" v-if="subCategories.length">
         <span>
           
           <b-form-radio
@@ -187,7 +187,6 @@
           <div class="more" v-if="showMore ">
             <hr />
 
-
              <!-- Region -->
           <div class="mt-1" v-if="networkFilter.region">
             <b-form-group
@@ -210,8 +209,6 @@
           </div>
 
           <hr />
-
-
 
             <!-- Division -->
             <div v-if="networkFilter.division">
@@ -714,6 +711,7 @@ export default {
 
     activateMatching: async function(value){
       if (value){
+        this.matchingCategory = []
         this.$store.commit("marketSearch/setSubFilters", []);
         this.loading = true
         const response = await this.$repository.search.matching(value.name);
@@ -1808,7 +1806,6 @@ export default {
   computed: {
     
     categoryRendering() {
-      console.log(this.matchingCategory)
       return this.matchingCategory
     },
 
@@ -1886,9 +1883,12 @@ export default {
         })
     },
 
-    resetFilters() {
+    resetFilters(restName) {
+      
       this.matchingCategory = []
-      this.activateMatching= false
+      this.activateMatching = false
+      this.nameOfCategory = null
+      this.$store.commit("marketSearch/setSubCat",[])
       this.searchParams.country_id = null;
       this.searchParams.region_id = null;
       this.searchParams.division_id = null;

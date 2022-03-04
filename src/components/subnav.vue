@@ -88,7 +88,12 @@
                 >
                   <b-dropdown-item
                     class="ml-1"
-                    @click="bcategory({ cat_id: category.category.id }, category.category)"
+                    @click="
+                    () => {
+                      $emit('onChangeCategoryName', category.category.name);
+                      bcategory({ cat_id: category.category.id })
+                      $emit('activate:matching:category', null)
+                    }"
                   >
                     {{ category.category.name }}
                   </b-dropdown-item>

@@ -100,7 +100,15 @@
         >
           <b-link
             class="cat"
-            @click="getCategory({ cat_id: category.category.id })"
+            @click="
+              () => {
+                categoryName = category.category.name
+                getCategory({ cat_id: category.category.id })
+                searchParams = Object.assign(searchParams, {
+                  keyword: category.category.name,
+                  cat_id: category.category.id,
+                  })
+              }"
           >
             <img
               class="img-fluid picture logo-img"
@@ -264,7 +272,7 @@
               class="m-3 float-right"
               @click="searchFilter"
             >
-              {{ $t("search.Search") }}
+              {{ $t("search.Search") }} @@@@
             </b-button>
           </div>
 
@@ -1648,7 +1656,7 @@ export default {
       handler(newValue, oldValue) {
        
         if(this.selectedId==0){   
-        this.$store.commit("allSearch/setKeyword", newValue.keyword);
+        this.$store.commit("allSearch/setKeyword", newValue.keyword); 
          this.$store.commit("allSearch/setLocation", newValue.location);
 
         }
@@ -1740,7 +1748,8 @@ export default {
 
     getKeyword(data) {
 
-      
+      console.log(this.searchParams)
+
       var keyword = this.searchParams.keyword;
       var location = this.searchParams.location;
 
@@ -1749,7 +1758,9 @@ export default {
        this.$store.commit("allSearch/setKeyword", keyword);
        this.$store.commit("allSearch/setLOcation", keyword);
      
-
+       if (this.searchParams.keyword)
+        this.activateMatching = {name:this.searchParams.keyword}
+      
       this.$store
         .dispatch("allSearch/SEARCH", {keyword:keyword, location:location})
         .then((res) => {
@@ -1758,10 +1769,15 @@ export default {
         .catch((err) => {
           console.log("Error erro!");
         });
+
+        
     },
 
     async onFindBusiness() {
       this.$store.commit("business/setLoading", true);
+      
+      if (this.searchParams.keyword)
+        this.activateMatching = {name:this.searchParams.keyword}
 
       if (this.searchParams.keyword.trim()) 
       await this.findBusiness({ keyword: this.searchParams.keyword, location:this.searchParams.location });
@@ -1807,6 +1823,10 @@ export default {
     },
 
     searchNetworks(data) {
+      
+      if (this.searchParams.keyword)
+        this.activateMatching = {name:this.searchParams.keyword}
+
       this.$store
         .dispatch("networkSearch/SEARCH", data)
         .then((res) => {

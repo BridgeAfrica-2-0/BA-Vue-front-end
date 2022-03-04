@@ -59,14 +59,14 @@
       @close="cancel"
       @ok="updatesave"
     >
-      <div style="width: 100px">
+      <!-- <div style="width: 100px">
         <b-form-select
           class="mb-2"
           size="sm"
           v-model="editData.access"
           :options="options"
         ></b-form-select>
-      </div>
+      </div> -->
       <b-form-input
         class="mt-2 mb-2"
         v-model="editData.school_name"
@@ -112,14 +112,14 @@
       @close="cancel"
       @ok="save"
     >
-      <div style="width: 100px">
+      <!-- <div style="width: 100px">
         <b-form-select
           class="mb-2"
           size="sm"
           v-model="educationInput.access"
           :options="options"
         ></b-form-select>
-      </div>
+      </div> -->
       <b-form-input
         class="mt-2 mb-2"
         v-model="educationInput.schoolName"
@@ -217,6 +217,15 @@ export default {
   },
   methods: {
 
+     flashErrors(errors) {
+      let err = "";
+      Object.values(errors).forEach((element) => {
+        err = element[0];
+      });
+
+      return err;
+    },
+
     cancel() {
       console.log("Cancel Another Action in User  ++++++");
       this.educations = JSON.parse(  
@@ -282,14 +291,8 @@ export default {
           })
            return 1;
       }
-      else if (!this.educationInput.major){
-        this.flashMessage.show({
-            status: "error",
-            message: "major is required",
-            blockClass: "custom-block-class",
-          })
-           return 1;
-      }else { return 0;}
+     
+     else { return 0;}
     },
 
     save(bvModalEvt) {
@@ -323,9 +326,32 @@ export default {
           })
 
         })
-        .catch(error => {
-          console.log(error);
-          console.log("not save/edit/delete Education user end error(2) +++++");
+        .catch(err => {
+
+
+         if (err.response.status == 422) {
+               
+                console.log(err.response.data.message);
+
+                this.flashMessage.show({
+                  status: "error",
+
+                  message: this.flashErrors(err.response.data.errors),
+                  blockClass: "custom-block-class",
+                });
+              } else{    
+
+
+
+           this.flashMessage.show({
+            status: "error",
+            message: "can not add education",
+            blockClass: "custom-block-class",
+          })
+
+           }
+
+
         })
         .finally(() => {
           this.$store.dispatch("profile/loadUserProfileAbout", null);
@@ -338,11 +364,11 @@ export default {
           this.index = null;
           this.educationInput = {
             access: "private",
-            schoolName: null,
+            schoolName: '',
             graduated: false,
-            durationFrom: null,
-            durationTo: null,
-            major: null
+            durationFrom: '',
+            durationTo: '',
+            major: ''
           };
           console.log(this.educations);
           this.$refs["educationModal"].hide();

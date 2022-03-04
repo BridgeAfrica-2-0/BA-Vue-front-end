@@ -38,8 +38,9 @@
             </b-link>
             <br />
 
+
             <span class="k15 duration">
-              {{ info.user.community }} {{ $t("profilefollower.Community") }}
+              {{ info.user.followers }} {{ $t("profilefollower.Community") }}
             </span>
           </div>
         </b-col>
@@ -106,7 +107,7 @@
           <div class="d-inline-block mt-4 ml-4 float-left texts">
             <h6 class="font-weight-bolder name">{{ info.user.name }}</h6>
             <p class="details">
-              {{ info.user.community }} {{ $t("profilefollower.Community") }}
+              {{ info.user.followers }} {{ $t("profilefollower.Community") }}
             </p>
           </div>
         </b-col>

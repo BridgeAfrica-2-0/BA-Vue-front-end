@@ -140,30 +140,10 @@
             </b-form-select>
           </div>
 
-          <!-- Region -->
-          <div class="mt-1" v-if="networkFilter.region">
-            <b-form-group
-              label-cols-lg="3"
-              :label="$t('search.Region')"
-              label-size="md"
-              label-class="font-weight-bold pt-0"
-              class="mb-0 text-left"
-            >
-            </b-form-group>
-
-            <b-form-select
-              v-model="networkSelect.region"
-              :options="regions"
-              value-field="id"
-              text-field="name"
-              @change="getBDivisions()"
-            >
-            </b-form-select>
-          </div>
-
-          <hr />
+         
 
           <!-- city -->
+          <div v-if="!showMore">  
           <div>
             <b-form-group
               label-cols-lg="3"
@@ -198,14 +178,42 @@
               class=""
             />
 
-            <b-link class="float-right mt-2 mb-2" @click="showMoreFilters">
+            <b-link  v-if="networkFilter.region" class="float-right mt-2 mb-2" @click="showMoreFilters">
               More
             </b-link>
             <br />
           </div>
 
-          <div class="more" v-if="showMore">
+           </div>
+
+          <div class="more" v-if="showMore ">
             <hr />
+
+
+             <!-- Region -->
+          <div class="mt-1" v-if="networkFilter.region">
+            <b-form-group
+              label-cols-lg="3"
+              :label="$t('search.Region')"
+              label-size="md"
+              label-class="font-weight-bold pt-0"
+              class="mb-0 text-left"
+            >
+            </b-form-group>
+
+            <b-form-select
+              v-model="networkSelect.region"
+              :options="regions"
+              value-field="id"
+              text-field="name"
+              @change="getBDivisions()"
+            >
+            </b-form-select>
+          </div>
+
+          <hr />
+
+
 
             <!-- Division -->
             <div v-if="networkFilter.division">
@@ -272,6 +280,11 @@
               >
               </b-form-select>
             </div>
+
+             <b-link  v-if="networkFilter.region" class="float-right mt-2 mb-2" @click="hideMoreFilters">
+             Hide More
+            </b-link>
+
           </div>
         </div>
       </div>
@@ -418,7 +431,7 @@
    
 
     <!-- Network -->
-    <div v-if="filterType == '1' || filterType == '4'">
+    <!-- <div v-if="filterType == '1' || filterType == '4'">
       <hr />
       <b-form-group
         label-cols-lg="12"
@@ -442,7 +455,7 @@
           </b-col>
         </b-row>
       </b-form-group>
-    </div>
+    </div> -->
     <!-- End Network -->
 
     <!-- Network -->
@@ -628,31 +641,7 @@
       </b-form-group>
     </b-modal>
 
-    <b-modal ref="myfilters" id="distance" hide-footer title=" ">
-      <b-form-group
-        label-cols-lg="12"
-        :label="$t('search.Distance')"
-        label-size="md"
-        label-class="font-weight-bold pt-0 text-left"
-        class="mb-0 text-left"
-      >
-        <b-form-checkbox id="" class="a-text" name="" value="">
-          3km</b-form-checkbox
-        >
-
-        <b-form-checkbox id="" class="a-text" name="" value="">
-          9km</b-form-checkbox
-        >
-
-        <b-form-checkbox id="" class="a-text" name="" value="">
-          15km</b-form-checkbox
-        >
-
-        <b-form-checkbox id="" class="a-text" name="" value="">
-          25km</b-form-checkbox
-        >
-      </b-form-group>
-    </b-modal>
+   
 
     <!-- Sub categories modal -->
     <b-modal ref="myfilters1" id="myModalllo" hide-footer title=" ">
@@ -1909,6 +1898,10 @@ export default {
 
     showMoreFilters() {
       this.showMore = true;
+    },
+
+    hideMoreFilters(){
+      this.showMore = false;
     },
 
     getFilter(subCat) {

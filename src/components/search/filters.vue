@@ -9,28 +9,10 @@
         @click="resetFilters"
         >{{ $t("search.Reset") }}</b-button
       >
-      <br />
-      <!-- Category -->
-      <!-- <div v-if="categories.length > 0">
-        <b-form-group
-          label-cols-lg="3"
-          :label="$t('search.Categories')"
-          label-size="md"
-          label-class="font-weight-bold pt-0"
-          class="mb-0 pt-6 text-left"
-        >
-        </b-form-group>
-        <b-form-select
-          v-model="networkSelect.category"
-          :options="categories"
-          value-field="category.id"
-          text-field="category.name"
-          @change="allSearchByCat({ cat_id: networkSelect.category })"
-        >
-        </b-form-select>
-      </div>
-      <hr /> -->
+
     </div>
+
+    <br/>
 
     <div v-if="filterType == '0' || filterType == '1' || filterType == '4'">
 
@@ -44,13 +26,29 @@
         >
         </b-form-group>
 
-      <b-form-select v-model="nameOfCategory" :options="categoriesAll" class="mb-2" v-if="nameOfCategory"></b-form-select>
+      <b-form-select 
+        v-model="nameOfCategory" 
+        :options="categoriesAll" 
+        class="mb-2" v-if="nameOfCategory && !activateMatching">
+          
+        </b-form-select>
 
+      <div v-if="activateMatching" class="pb-2">
+        <b-badge 
+          v-for="item in categoryRendering" 
+          :key="item.id" :class="[ item.actived ? 'actived' : 'inactied' , 'p-1' ,'m-1']" 
+          @click="matching(item)">
+            {{item.category}}
+        </b-badge>
+      </div>
+
+      <b-spinner style="width: 3rem; height: 3rem;" label="Large Spinner" v-if="loading"></b-spinner>
 
       <div   class="mt-3" v-if="subCategories.length && nameOfCategory">
         <span>
+          
           <b-form-radio
-            v-for="(subCat, index) in subCategories.slice(0, 4)"
+            v-for="(subCat, index) in subCategories.slice(0,5)"
             v-model="selected_sub_cat"
             :key="index"
             :value="subCat.id"
@@ -466,8 +464,8 @@
         size="sm"
         variant="outline-primary"
         @click="networkFilterReset()"
-        >Reset</b-button
-      >
+        >Reset
+      </b-button>
       <br />
       <div>
         <!-- Category -->
@@ -684,7 +682,7 @@ export default {
 
   name: "filters",
 
-  props: ["filterType", "Selectedcategory", "Selectedparentcategory", "categoryNameSelected"],
+  props: ["filterType", "activateMatching", "Selectedcategory", "Selectedparentcategory", "categoryNameSelected"],
   watch: { 
 
      query(newQuery) {
@@ -714,7 +712,31 @@ export default {
       this.nameOfCategory = newValue
     },
 
-    nameOfCategory:function(value){
+    activateMatching: async function(value){
+      if (value){
+        this.$store.commit("marketSearch/setSubFilters", []);
+        this.loading = true
+        const response = await this.$repository.search.matching(value.name);
+
+        if (response.success){
+            this.matchingCategory = response.data.map((item) => { 
+
+              const sub = item.sub_category.map(c => ({ ...c, cat_id: item.id}))
+              
+              return  {
+                ...item, actived:false,
+                sub_category: sub
+              }
+            })
+            
+            this.loading = false
+        }else{
+          this.loading = false
+        }
+      }
+    },
+
+    nameOfCategory: function(value){
 
       if (!value.length) return false
       
@@ -926,6 +948,8 @@ export default {
 
   data() {
     return {
+      loading:false,
+      matchingCategory: [],
       query: "",
       city: "",
       showMore: false,
@@ -1783,6 +1807,11 @@ export default {
 
   computed: {
     
+    categoryRendering() {
+      console.log(this.matchingCategory)
+      return this.matchingCategory
+    },
+
     lneighbourhoods() {
       return this.$store.getters["auth/neigbourhoods"];
     },
@@ -1845,7 +1874,21 @@ export default {
   },
 
   methods: {
+
+    matching(cat){
+        
+        this.$emit('onFinByCategory', {cat_id: cat.id })
+        
+        this.showSubCat(cat.sub_category)
+
+        this.matchingCategory = this.matchingCategory.map(item => {
+          return (item.id === cat.id) ? {...item, actived: true} : {...item, actived: false}
+        })
+    },
+
     resetFilters() {
+      this.matchingCategory = []
+      this.activateMatching= false
       this.searchParams.country_id = null;
       this.searchParams.region_id = null;
       this.searchParams.division_id = null;
@@ -1906,9 +1949,12 @@ export default {
 
     getFilter(subCat) {
       
-
+      
       this.searchParams.cat_id = subCat.cat_id;
       this.searchParams.sub_cat = subCat.id;
+      console.log('--------------------')
+      console.log(this.searchParams )
+      console.log(this.filterType )
 
       this.noFilter = "";
       this.$store.commit("marketSearch/setSubFilters", []);
@@ -1954,8 +2000,6 @@ export default {
 
             this.searchBusiness(this.searchParams);
 
-            console.log("Filters: ");
-            console.log(res.data.data);
             if (res.data.data.length === 0) {
               let subName = "";
               this.subCategories.map((sub) => {
@@ -1981,7 +2025,8 @@ export default {
             console.error(err);
             // this.filterLoader = false;
           });
-          if (this.filterType == 0) {
+          
+      } else if (this.filterType == 0) {
             console.log("[DEBUG] Filter: ", subCat);
             this.allSearch({
                cat_id: subCat.cat_id,
@@ -1991,8 +2036,8 @@ export default {
 
             
           }
-      } 
     },
+
     searchProducts(data) {
       this.$store
         .dispatch("marketSearch/searchProducts", data)
@@ -2003,6 +2048,7 @@ export default {
           console.log("Error erro!");
         });
     },
+
     allSearch(data) {
       this.$store
         .dispatch("allSearch/SEARCH", data)
@@ -2013,6 +2059,7 @@ export default {
           console.log("Error erro!");
         });
     },
+
     searchBusiness(data) {
       this.$store
         .dispatch("business/FIND_BUSINESS", data)
@@ -2378,10 +2425,13 @@ export default {
       //   neighbourhood:null
       // }
     },
+
     getDivisions() {
       //console.log("[debug] networks: ", this.networkSelect);
       const data = { region_id: this.networkSelect.region };
+      
       this.searchNetworks(data);
+      
       this.$store
         .dispatch("networkSearch/DIVISIONS", data)
         .then((res) => {
@@ -2404,6 +2454,7 @@ export default {
           console.log("Error erro!");
         });
     },
+
     async getCouncils() {
       //console.log("[debug] networks...: ", this.networkSelect);
       const data = { division_id: this.networkSelect.division };
@@ -2453,6 +2504,7 @@ export default {
         });
       this.searchNetworks(data);
     },
+    
     networkFilterFill() {
       if (this.networkFilter.region == false) this.getRegions();
       if (
@@ -2475,6 +2527,7 @@ export default {
       }
       this.networkFilter.region = true;
     },
+    
     networkFilterReset() {
       this.searchNetworks({ keyword: "" });
       this.networkFilter = {
@@ -2492,6 +2545,7 @@ export default {
         neighbourhood: [],
       };
     },
+
     async searchNetworks(data) {
       this.networkFilter.category = true;
       
@@ -2504,6 +2558,7 @@ export default {
           console.error(err);
         });
     },
+
     // END Network search filter
     // All Search
     allSearchByCat(data) {
@@ -2517,6 +2572,7 @@ export default {
           console.log("Error erro!");
         });
     },
+
     // Not ED code
     selectedsidebar() {
       
@@ -2722,6 +2778,7 @@ export default {
           break;
       }
     },
+
     switchcategories() {
       switch (this.default_category) {
         case "Professional_and_home_service":
@@ -2779,12 +2836,31 @@ export default {
 </script>
 
 <style scoped>
+
+.inactied {
+  cursor: pointer;
+  font-size: 14px;
+  color: #e75c18;
+  border: 1px solid #e75c18;
+  background: transparent;
+}
+
+.actived {
+  cursor: pointer;
+  font-size: 14px;
+  color: white;
+  border: 1px solid #e75c18;
+  background: #e75c18;
+}
+
 .br-3 {
   border-radius: 5px;
 }
+
 .logo-img {
   width: 60px;
 }
+
 @media only screen and (max-width: 768px) {
   h4 {
     font-size: 15px;

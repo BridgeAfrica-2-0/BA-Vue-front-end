@@ -17,6 +17,7 @@
                 <span @click="() => {
                   showSubCat(category.category, category.sub_cat)
                   bcategory({ cat_id: category.category.id })
+                  $emit('activate:matching:category', null)
                 }">
                   {{ category.category.name }}
                 </span>
@@ -30,7 +31,16 @@
                   <b-dropdown-item
                     v-for="(subCat, subIndex) in category.sub_cat.slice(0, 6)"
                     :key="subIndex"
-                    @click="bcategory({ cat_id: subCat.cat_id, id: subCat.id })"
+                    @click="() => {
+                      $emit('update:keyword', {
+                        keyword: subCat.name,
+                        cat_id: subCat.cat_id
+                      });
+                      $emit('activate:matching:category', {name:subCat.name})
+                      bcategory({ cat_id: subCat.cat_id, id: subCat.id })
+                      $store.commit('marketSearch/setSubCat', [])
+                      
+                    }"
                     href="#"
                     class="ml-2"
                   >
@@ -98,7 +108,8 @@
 export default {
   name: "subnav",
   data() {
-    return {};
+    return {
+    };
   },
   computed: {
     categories() {
@@ -125,11 +136,13 @@ export default {
   methods: {
     
     bcategory(category, value = null) {
-      
+
       this.$emit("category", category);
 
     
-      if (category){
+      if (value){
+
+        this.$emit("onChangeCategoryName", value.name);
         this.$emit('update:keyword', {
           keyword: value.name,
           cat_id: value.id

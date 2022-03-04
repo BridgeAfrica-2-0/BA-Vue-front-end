@@ -70,6 +70,8 @@
       @category="getCategory"
       @parentcategory="getparentCategory"
       @update:keyword="(val) => searchParams = Object.assign(searchParams,val)"
+
+      @activate:matching:category="(val) => activateMatching=val"
       style="margin-top: -25px"
     />
 
@@ -166,6 +168,7 @@
               v-bind:Selectedparentcategory="Selectedparentcategory"
               v-bind:categoryNameSelected="categoryName"
               @onFinByCategory="getCategory"
+              :activateMatching="activateMatching"
             />
 
            </div>
@@ -305,6 +308,7 @@
               v-bind:Selectedparentcategory="Selectedparentcategory"
               v-bind:categoryNameSelected="categoryName"
               @onFinByCategory="getCategory"
+              :activateMatching="activateMatching"
             />
           </div>
         </b-col>
@@ -682,6 +686,7 @@ export default {
 
   data() {
     return {
+      activateMatching:null,
       catChose: "",
       subCatChose: "",
       filterChose: "",

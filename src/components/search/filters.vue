@@ -40,6 +40,8 @@
           @click="matching(item)">
             {{item.category}}
         </b-badge>
+
+        <span v-if="activateMatching && !loading && !categoryRendering.length">Not data found</span>
       </div>
 
       <b-spinner style="width: 1rem; height: 1rem; color:#e75c18" label="Large Spinner" v-if="loading"></b-spinner>
@@ -1952,10 +1954,7 @@ export default {
       
       this.searchParams.cat_id = subCat.cat_id;
       this.searchParams.sub_cat = subCat.id;
-      console.log('--------------------')
-      console.log(this.searchParams )
-      console.log(this.filterType )
-
+      
       this.noFilter = "";
       this.$store.commit("marketSearch/setSubFilters", []);
       if (this.filterType == 4) {
@@ -1991,7 +1990,7 @@ export default {
             console.error(err);
             // this.filterLoader = false;
           });
-      } else if (this.filterType == 1 ) {
+      } else if (this.filterType == 1  || this.filterType == 0 ) {
         // method to search for a business lol
         this.$store
           .dispatch("marketSearch/getFilter", subCat.id)
@@ -2025,9 +2024,8 @@ export default {
             console.error(err);
             // this.filterLoader = false;
           });
-          
-      } else if (this.filterType == 0) {
-            console.log("[DEBUG] Filter: ", subCat);
+
+          if (this.filterType == 0) {
             this.allSearch({
                cat_id: subCat.cat_id,
                sub_cat: subCat.id,
@@ -2036,6 +2034,8 @@ export default {
 
             
           }
+          
+      }
     },
 
     searchProducts(data) {

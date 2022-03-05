@@ -272,7 +272,7 @@
               class="m-3 float-right"
               @click="searchFilter"
             >
-              {{ $t("search.Search") }} @@@@
+              {{ $t("search.Search") }}
             </b-button>
           </div>
 
@@ -1748,7 +1748,8 @@ export default {
 
     getKeyword(data) {
 
-      console.log(this.searchParams)
+      this.$store.commit("marketSearch/setSubFilters", []);
+      this.$store.commit("marketSearch/setSubCat", []);
 
       var keyword = this.searchParams.keyword;
       var location = this.searchParams.location;
@@ -1774,6 +1775,10 @@ export default {
     },
 
     async onFindBusiness() {
+
+      this.$store.commit("marketSearch/setSubFilters", []);
+      this.$store.commit("marketSearch/setSubCat", []);
+
       this.$store.commit("business/setLoading", true);
       
       if (this.searchParams.keyword)
@@ -1810,8 +1815,9 @@ export default {
 
     searchProducts(data) {
     
-   
-     console.log(data);
+      this.$store.commit("marketSearch/setSubFilters", []);
+      this.$store.commit("marketSearch/setSubCat", []);
+      
       this.$store
         .dispatch("marketSearch/searchProducts", data)
         .then((res) => {

@@ -44,7 +44,7 @@
 
                 <span v-for="cat in item.category" :key="cat.name">
                   {{ cat.name }}
-                </span>
+                </span> <br>
 
                 {{ count(item.followers) }}
                 {{ $t("dashboard.Community") }} <br />

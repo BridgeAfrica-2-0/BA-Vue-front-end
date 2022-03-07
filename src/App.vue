@@ -1,5 +1,13 @@
 .<template>
   <div id="app" class="" ref="formContainer">
+
+    <div ref="loaderr" :class="{fadde:showfadde, sep:showblock } ">    <semipolar-spinner
+  :animation-duration="2000"
+  :size="65"
+  :color="'#ff1d5e'"
+/>    
+
+</div>
     <div id="flashmessage">
       <FlashMessage />
         <vue-confirm-dialog></vue-confirm-dialog>
@@ -19,6 +27,7 @@
 </template>
 <script>
 import { Redis } from "@/mixins";
+ import { SemipolarSpinner} from 'epic-spinners';
 
 import { mapGetters, mapActions } from "vuex";
 
@@ -28,8 +37,12 @@ export default {
   data() {
     return {
       prevHeight: 0,
+   
+      showblock:true,
+         showfadde:false,
     };
   },
+  components:{SemipolarSpinner},
 
   computed: mapGetters({
     auth: "auth/profilConnected",
@@ -45,7 +58,29 @@ export default {
     },
   },
 
+  
+ created(){
+   
+
+   window.addEventListener("load", this.onWindowLoad);
+   
+
+  },
+
   methods: {
+
+     onWindowLoad() {
+            console.log("window load event");
+
+          
+            this.showfadde=true;
+
+            this.alert(this.showfadde);
+
+            // $(".se-pre-con").fadeOut("slow");;
+        },
+
+
     ...mapActions({
       setNetworks: "social/FIND_USER_NETWORK",
       setBusiness: "social/FIND_USER_BUSNESS",
@@ -87,6 +122,21 @@ export default {
   transition-timing-function: ease;
   overflow: hidden;
 }
+
+
+
+.fadde{
+ 
+
+ transition-duration: 3.3s;
+    transition-property: height, opacity;
+    transition-timing-function: ease;
+    overflow: hidden;
+    opacity: 0;
+    z-index: 0 !important;
+
+}
+
 
 .fade-enter,
 .fade-leave-active {
@@ -189,4 +239,32 @@ li .nav-link:hover {
     font-size: 9px;
   }
 }
+
+
+
+.no-js #loader { display: none;  }
+.js #loader { display: block; position: absolute; left: 100px; top: 0; }
+.sep{
+	position: fixed;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	z-index: 9999;
+  background: #fff;
+	// background: url(https://i.gifer.com/origin/d3/d3f472b06590a25cb4372ff289d81711_w200.gif) center no-repeat #fff;
+}
+
+
+.semipolar-spinner{   
+    height: 65px;
+    width: 65px;
+    position: absolute;
+    margin-top: 15%;
+    margin-left: 50%;
+
+  }
+
+
 </style>
+

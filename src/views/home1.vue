@@ -6,6 +6,12 @@
 
     <!-- End Header -->
 
+
+
+
+
+
+
     <div class="container p-0">
       <form class="d-block d-lg-none"  @submit.prevent="getKeyword">
         <div class="mt-3 mr-5 input-group b-shadow">
@@ -790,6 +796,9 @@
 /**
  * this page is the home page of the system
  */
+
+
+ 
 import SiteFooter from "../components/site/siteFooter";
 import VueBootstrapTypeahead from "vue-bootstrap-typeahead";
 //import "../assets/js/main.js";
@@ -824,8 +833,11 @@ export default {
     },
   },
 
+
   created(){
    
+
+   window.addEventListener("load", this.onWindowLoad);
     this.getLocation();
 
   },
@@ -860,7 +872,7 @@ export default {
 
   methods: {
 
-
+    
      ...mapActions({
      
       getGeo: "business/getGeo",

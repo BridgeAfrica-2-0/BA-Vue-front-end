@@ -26,6 +26,7 @@
         "core-js": "^3.6.5",
         "dotenv": "^10.0.0",
         "emoji-vue": "^0.2.4",
+        "epic-spinners": "^1.1.0",
         "infinite-loading": "^0.2.8",
         "ioredis": "^4.28.0",
         "laravel-echo": "^1.11.3",

@@ -33,7 +33,7 @@
             <br />
             {{ network.purpose }}
             <br />
-            {{ network.member_count }} {{ $t("search.Community_member") }}
+            {{ count(network.community) }}  {{ $t("dashboard.Community") }} 
             <br />
 
             <span class="location">
@@ -173,6 +173,16 @@ export default {
   },
 
   methods: {
+
+      count(number) {
+      if (number >= 1000000) {
+        return number / 1000000 + "M";
+      }
+      if (number >= 1000) {
+        return number / 1000 + "K";
+      } else return number;
+    },
+    
     async handleFollow(user) {
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
       const nextFollowState = user.is_follow === 0 ? 1 : 0;

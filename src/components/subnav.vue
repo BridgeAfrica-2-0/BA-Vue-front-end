@@ -32,13 +32,14 @@
                     v-for="(subCat, subIndex) in category.sub_cat.slice(0, 6)"
                     :key="subIndex"
                     @click="() => {
+                      $store.commit('marketSearch/setSubCat', [])
                       $emit('update:keyword', {
                         keyword: subCat.name,
                         cat_id: subCat.cat_id
                       });
                       $emit('activate:matching:category', {name:subCat.name})
                       bcategory({ cat_id: subCat.cat_id, id: subCat.id })
-                      $store.commit('marketSearch/setSubCat', [])
+                      
                       
                     }"
                     href="#"
@@ -88,7 +89,12 @@
                 >
                   <b-dropdown-item
                     class="ml-1"
-                    @click="bcategory({ cat_id: category.category.id }, category.category)"
+                    @click="
+                    () => {
+                      $emit('onChangeCategoryName', category.category.name);
+                      bcategory({ cat_id: category.category.id })
+                      $emit('activate:matching:category', null)
+                    }"
                   >
                     {{ category.category.name }}
                   </b-dropdown-item>

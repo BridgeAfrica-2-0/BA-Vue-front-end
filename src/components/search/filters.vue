@@ -13,7 +13,7 @@
     </div>
 
     <br/>
-
+    
     <div v-if="filterType == '0' || filterType == '1' || filterType == '4'">
 
        <b-form-group
@@ -40,11 +40,13 @@
           @click="matching(item)">
             {{item.category}}
         </b-badge>
+
+        <span v-if="activateMatching && !loading && !categoryRendering.length">Not data found</span>
       </div>
 
-      <b-spinner style="width: 3rem; height: 3rem;" label="Large Spinner" v-if="loading"></b-spinner>
+      <b-spinner style="width: 1rem; height: 1rem; color:#e75c18" label="Large Spinner" v-if="loading"></b-spinner>
 
-      <div   class="mt-3" v-if="subCategories.length && nameOfCategory">
+      <div   class="mt-3" v-if="subCategories.length">
         <span>
           
           <b-form-radio
@@ -187,7 +189,6 @@
           <div class="more" v-if="showMore ">
             <hr />
 
-
              <!-- Region -->
           <div class="mt-1" v-if="networkFilter.region">
             <b-form-group
@@ -210,8 +211,6 @@
           </div>
 
           <hr />
-
-
 
             <!-- Division -->
             <div v-if="networkFilter.division">
@@ -714,6 +713,7 @@ export default {
 
     activateMatching: async function(value){
       if (value){
+        this.matchingCategory = []
         this.$store.commit("marketSearch/setSubFilters", []);
         this.loading = true
         const response = await this.$repository.search.matching(value.name);
@@ -1808,7 +1808,6 @@ export default {
   computed: {
     
     categoryRendering() {
-      console.log(this.matchingCategory)
       return this.matchingCategory
     },
 
@@ -1886,9 +1885,12 @@ export default {
         })
     },
 
-    resetFilters() {
+    resetFilters(restName) {
+      
       this.matchingCategory = []
-      this.activateMatching= false
+      this.activateMatching = false
+      this.nameOfCategory = null
+      this.$store.commit("marketSearch/setSubCat",[])
       this.searchParams.country_id = null;
       this.searchParams.region_id = null;
       this.searchParams.division_id = null;
@@ -1952,10 +1954,7 @@ export default {
       
       this.searchParams.cat_id = subCat.cat_id;
       this.searchParams.sub_cat = subCat.id;
-      console.log('--------------------')
-      console.log(this.searchParams )
-      console.log(this.filterType )
-
+      
       this.noFilter = "";
       this.$store.commit("marketSearch/setSubFilters", []);
       if (this.filterType == 4) {
@@ -1991,7 +1990,7 @@ export default {
             console.error(err);
             // this.filterLoader = false;
           });
-      } else if (this.filterType == 1 ) {
+      } else if (this.filterType == 1  || this.filterType == 0 ) {
         // method to search for a business lol
         this.$store
           .dispatch("marketSearch/getFilter", subCat.id)
@@ -2025,9 +2024,8 @@ export default {
             console.error(err);
             // this.filterLoader = false;
           });
-          
-      } else if (this.filterType == 0) {
-            console.log("[DEBUG] Filter: ", subCat);
+
+          if (this.filterType == 0) {
             this.allSearch({
                cat_id: subCat.cat_id,
                sub_cat: subCat.id,
@@ -2036,6 +2034,8 @@ export default {
 
             
           }
+          
+      }
     },
 
     searchProducts(data) {

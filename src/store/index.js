@@ -1,7 +1,9 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+
 import axios from 'axios';
 import auth from './auth';
+
 import profileOrderDetail from './profileOrderDetail';
 import businessBlocking from './businessBlocking';
 import dashboard from './dashboard';

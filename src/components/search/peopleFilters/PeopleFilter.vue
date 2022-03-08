@@ -246,9 +246,9 @@ export default {
     },
 
     debounceInput: _.debounce(function (e) {
-      if (e && this.postKeyword) {
+      if (e) {
         this.page(1);
-        this.stack({data:{ profession: e, keyword: this.postKeyword },page: 1});
+        this.stack({data:{ profession: e, keyword: this.postKeyword ? this.postKeyword: "" },page: 1});
         this.setCallback(this.$repository.search.findUserByParam);
         
         this._onFindUser({
@@ -256,7 +256,7 @@ export default {
           keyword: this.postKeyword,
           page: 1,
         });
-        
+
         this.hide()
       }
     }, 1000),

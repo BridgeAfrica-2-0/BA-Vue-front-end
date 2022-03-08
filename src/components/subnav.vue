@@ -8,8 +8,8 @@
             v-for="(category, index) in categories.slice(0, 6)"
             :key="index"
             
-            
           >
+          
             <b-nav-item-dropdown
               :id="'dropdown-' + index"
             >

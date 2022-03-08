@@ -238,9 +238,7 @@ export default {
   destroyed() {
     this.$emit("reste");
   },
-  // computed: mapGetters({
-  //   auth: "auth/profilConnected",
-  // }),
+  
 
   methods: {
     ...mapActions({
@@ -270,8 +268,10 @@ export default {
       updateItem: "UserProfileOwner/updateAlbumItem",
       updateItemBusiness: "businessOwner/updateAlbumItem",
       updateItemNetwork: "networkProfileMedia/updateAlbumItem",
+
+      updateAllAlbums: "notification/UPDATE_ALBUM",
       
-    }),
+    }), 
 
     getFullMediaLink: fullMediaLink,
 
@@ -478,6 +478,10 @@ export default {
 
       this.pattern[this.type]()
         .submitPost(payload)
+        .then((picture) => {
+          this.updateAllAlbums(true)
+          return true
+        })
         .then(() => {
           this.pattern[this.type]().updateItem({ id: albumId, action: "add" });
           this.pattern[this.type]().getAlbumImages(data);

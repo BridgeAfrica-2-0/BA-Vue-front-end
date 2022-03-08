@@ -29,4 +29,9 @@ export const mutations = {
       return notif;
     });
   },
+
+  [TYPES.UPDATE_ALBUM](state, payload) {
+    state.updateAlbum = payload
+  },
+
 };

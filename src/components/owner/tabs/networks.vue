@@ -225,7 +225,7 @@
 
 
             <b-col md="6">
-              <div class="form-group">
+              <div class="form-group mt-3">
                 <label for="country" class="username">
                   {{ $t("profileowner.Country") }} :</label
                 ><br />
@@ -241,7 +241,7 @@
               </div>
             </b-col>
             <b-col md="6">
-              <div class="form-group">
+              <div class="form-group mt-3">
                 <label for="country" class="username">
                   {{ $t("profileowner.Region") }} :</label
                 ><br />

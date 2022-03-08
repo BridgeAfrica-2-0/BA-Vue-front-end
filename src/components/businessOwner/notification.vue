@@ -2,7 +2,7 @@
   <div class="container" style="">
     <div class="container">
       <b-row>
-        <b-col>
+        <b-col md="4">
           <div class="b-bottom f-left">
             <b-form-checkbox
               v-model="selectAll"
@@ -13,22 +13,25 @@
             >{{ $t("general.Select_All") }}</b-form-checkbox>
           </div>
         </b-col>
-        <b-col>
-          <div class="b-bottomn f-right">
-            <b-button 
-              variant="primary" 
-              @click="readAll(selected)" 
-              :disabled="indeterminate ? false : true"
-              class="a-button-l duration"
-            >{{ $t('network.Mark_as_Read') }}</b-button>
-            &nbsp;
-            <b-button 
+        <b-col md="8">
+          <b-row>
+            <b-col>
+              <b-button 
+                variant="primary" 
+                @click="readAll(selected)" 
+                :disabled="indeterminate ? false : true"
+                class="a-button-l duration"
+              >{{ $t('network.Mark_as_Read') }}</b-button>
+            </b-col>
+            <b-col>
+              <b-button 
               variant="outline-primary"
               @click="deleteAll(selected)" 
               :disabled="indeterminate ? false : true"
               class="a-button-l duration"
-            >{{ $t('network.Delete') }}</b-button>
-          </div>
+              >{{ $t('network.Delete') }}</b-button>
+            </b-col>
+          </b-row>
         </b-col>
       </b-row>
       <br />
@@ -49,12 +52,11 @@
                   v-model="selected"
                   :value="notification.id"
                   @change="updateCheckall"
-                  :disabled="notification.mark_as_read ? true : false"
                   class="m-left-top"
                 ></b-form-checkbox>
                 <b-avatar
                   class="d-inline-block profile-pic"
-                  variant="primary"
+                  variant="light"
                   :text="notification.reference_type.charAt(0,1)"
                   :src="notification.image"
                 ></b-avatar>
@@ -97,7 +99,8 @@ export default {
   }),
 
   beforeMount() {
-    this.getNotifications(this.$route.params.id).then((e) => this.realTimeNotification({ init: true, data: e }));
+    this.getNotifications(this.$route.params.id)
+      .then((e) => this.realTimeNotification({ init: true, data: e }));
   },
 
   filters: {
@@ -153,46 +156,49 @@ export default {
 
     // getting getters from the store
 
-    readAll(data) {
+
+    async readAll(data) {
+      console.log(data)
       let formData = new FormData();
       for (let i = 0; i < data.length; i++) {
           //console.log(data[i]);
           formData.append('ids['+i+']', data[i]);
       }
-      let res = this.readNotifiactions(formData);
-      if (res) {
-        this.getNotifications(this.$route.params.id)
-        this.flashMessage.show({
-          status: "success",
-          message: "Successful"
-        });
-      } else {
-        this.flashMessage.show({
-          status: "error",
-          message: "Unable to mark as read"
-        });
-      }
+      
+      this.readNotifiactions({ ids:data})
+        .then(() => {
+          this.getNotifications(this.$route.params.id)
+          this.flashMessage.show({
+            status: "success",
+            message: "Successful"
+          });
+        })
+        .catch(() => {
+          this.flashMessage.show({
+            status: "error",
+            message: "Unable to mark as read"
+          });
+        })
     },
+
     deleteAll(data) {
       this.checked = false;
-      let formData = new FormData();
-      for (let i = 0; i < data.length; i++) {
-          //console.log(data[i]);
-          formData.append('ids['+i+']', data[i]);
-      }
-      let res = this.deleteNotifications(formData);
-      if (res) {
-        this.getNotifications(this.$route.params.id)
-        this.flashMessage.show({
-          status: "success",
-          message: "Deleted Successful"
-        });
-      } else {
-        this.flashMessage.show({
-          status: "error",
-          message: "Unable to Delete as Notification"
-        });
-      }
+      
+      this.deleteNotifications({ ids:data})
+        .then(() => {
+          this.getNotifications(this.$route.params.id)
+          this.flashMessage.show({
+            status: "success",
+            message: "Deleted Successful"
+          });
+        })
+        .catch(() => {
+            this.flashMessage.show({
+              status: "error",
+              message: "Unable to Delete as Notification"
+            });
+        })
+
     },
 
     deleteOne(id) {

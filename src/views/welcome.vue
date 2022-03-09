@@ -88,7 +88,7 @@
           ></b-form-radio-group>
         </b-form-group>
         <div class="text-center">
-          <b-button variant="outline-primary" @click="choseModal">
+          <b-button variant="outline-primary" class="first-step-btn" @click="choseModal">
             {{ $t("welcome.Continue") }} <b-icon icon="arrow-right"> </b-icon>
           </b-button>
         </div>
@@ -2006,6 +2006,10 @@ import "vue-form-wizard/dist/vue-form-wizard.min.css";
 
 .vue-form-wizard.md .wizard-icon-circle {
   border-color: #e75c18 !important;
+}
+.first-step-btn {
+  z-index: 1;
+  position: relative;
 }
 </style>
 

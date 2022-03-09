@@ -465,12 +465,18 @@
           <div class="col-6">
             <b-form-group
               id="input-group-2"
-              label="Adress :"
+              label="Address :"
               label-for="input-2"
               label-size="sm"
             >
-              <!-- {{ business_about_input.address }} -->
-
+                  <input
+                        type="text"
+                        name="alias"
+                        id="Neighbor"
+                        v-model="business_about_input.address"
+                        placeholder="Neighborhood"
+                        class="form-control text"
+                      />
 
               <div class="" style="height: 250px; overflow:hidden">
                 <AutocompleteLocation

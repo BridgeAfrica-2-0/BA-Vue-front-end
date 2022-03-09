@@ -552,7 +552,7 @@ export default {
       console.log("updateInfo", editnetworkinfo)
 
       let formData = new FormData();
-      formData.append('name', editnetworkinfo.admin_name);
+      formData.append('name', editnetworkinfo.name);
       formData.append('network_categories_id', this.selectedcategories);
       formData.append("country_id", this.selectedcountry);
       formData.append("region_id", this.selectedregion);

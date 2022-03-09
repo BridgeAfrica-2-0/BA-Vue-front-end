@@ -247,11 +247,9 @@ export default {
             message: this.$t('auth.Successfully_Register')
           });
 
-          if (this.$store.state.last_path== null) {
-            this.$router.toRef(this.$store.state.last_path);
-          } else {
+          
             this.$router.push({ name: "dashboard" });
-          }
+          
         })
         .catch(err => {
           console.log({ err: err });   

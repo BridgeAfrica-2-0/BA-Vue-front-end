@@ -237,12 +237,10 @@
         <div class="modal-body">
           <form class="form-inline" action="" method="post">
             <div class="input-group col-md-12 pl-0 pr-0 mb-4 selec">
-              <label class="col-md-3 pl-0 pr-0 control-label">{{
-                $t("profileowner.Birth_Year")
-              }}</label>
-              <div class="col-md-9 pr-0 pl-0">
+              
+              <div class="col-md-12 pr-0 pl-0">
                 <div class="form-group">
-                  <b-form-datepicker
+                  <!-- <b-form-datepicker
                     name="dob"
                     :max="min"
                     id="dob"
@@ -250,7 +248,13 @@
                     class="text"
                     :locale="this.$i18n.locale"
                     :placeholder="$t('welcome.DOB')"
-                  ></b-form-datepicker>
+                  ></b-form-datepicker> -->
+
+
+                  
+                      <DropdownDatepicker v-model="birthDate.date"  :defaultDate="birthDate.date"  minAge="18"  style="width:100%"   dropdownClass="form-control mr-1 w-100" class="d-inline-flex" />
+
+
                 </div>
               </div>
             </div>
@@ -517,6 +521,7 @@
  */
 import moment from "moment";
 import axios from 'axios';
+import DropdownDatepicker from 'vue-dropdown-datepicker'; 
 export default {
   data() {
     const now = new Date();
@@ -544,6 +549,7 @@ export default {
       newphone: null
     };
   },
+  components:{DropdownDatepicker},
   created() {
     this.basicInfo = JSON.parse(
       JSON.stringify(this.$store.getters["profile/getProfileAboutBasicInfos"])

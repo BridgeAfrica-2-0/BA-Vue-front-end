@@ -33,11 +33,11 @@ export default {
     }
   },
 
-  actions: {
+  actions: {     
 
     getfollowers( {commit}, businessId ){
       return axios
-      .get(`business/community/people-follower/${businessId}`)
+      .get(`business/role/display-users/${businessId}`)
       .then(({ data }) => {
           commit("setfollowers", data.data);
         console.log(data);

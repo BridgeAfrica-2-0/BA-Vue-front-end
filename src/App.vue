@@ -1,7 +1,7 @@
 .<template>
   <div id="app" class="" ref="formContainer">
 
-    <div ref="loaderr" :class="{fadde:showfadde, sep:showblock } ">    <semipolar-spinner
+    <div ref="loaderr"  v-if="showfaddeB" :class="{fadde:showfadde, sep:showblock } ">    <semipolar-spinner
   :animation-duration="2000"
   :size="65"
   :color="'#ff1d5e'"
@@ -40,6 +40,7 @@ export default {
    
       showblock:true,
          showfadde:false,
+         showfaddeB:true,
     };
   },
   components:{SemipolarSpinner},
@@ -75,11 +76,28 @@ export default {
           
             this.showfadde=true;
 
-            this.alert(this.showfadde);
+         
 
-            // $(".se-pre-con").fadeOut("slow");;
+         
+
+       setTimeout(() => {
+        this.loadfinish()
+        }, 2000);
+
+
         },
 
+
+       loadfinish(){
+
+      
+         this.showblock=false;
+
+         this.showfadde=false;
+         this.showfaddeB=false;
+        
+
+      },
 
     ...mapActions({
       setNetworks: "social/FIND_USER_NETWORK",

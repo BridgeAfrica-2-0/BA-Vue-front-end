@@ -59,14 +59,9 @@
       @close="cancel"
       @ok="updatesave"
     >
-      <!-- <div style="width: 100px">
-        <b-form-select
-          class="mb-2"
-          size="sm"
-          v-model="editData.access"
-          :options="options"
-        ></b-form-select>
-      </div> -->
+     
+
+     
       <b-form-input
         class="mt-2 mb-2"
         v-model="editData.school_name"
@@ -79,21 +74,24 @@
         name="checkbox-1"
         :value="editData.is_graduated ? 1 : 0"
       >
-        {{ $t('profileowner.Graduated') }}
+        {{ $t('profileowner.Graduated') }} 
       </b-form-checkbox>
-      <label>{{ $t('profileowner.Duration_From') }}</label>
-      <b-form-datepicker
-        id="example-datepicker-1"
-        v-model="editData.startDate"
-        class="mb-2"
-      ></b-form-datepicker>
+       
+      <div class="form-group">
+     <label>{{ $t('profileowner.Duration_From') }}</label>  //  {{editData.startDate}}
+      
+ <DropdownDatepicker  v-model="editData.startDate" :defaultDate="editData.startDate"    style="width:100%"   dropdownClass="form-control mr-1 w-100" class="d-inline-flex" />
+      </div>
 
-      <label>{{ $t('profileowner.To') }}</label>
-      <b-form-datepicker
-        id="example-datepicker"
-        v-model="editData.endDate"
-        class="mb-2"
-      ></b-form-datepicker>
+      <div class="form-group">
+
+ <label>{{ $t('profileowner.To') }}</label>
+          
+ <DropdownDatepicker  v-model="editData.endDate" :defaultDate="editData.endDate"    style="width:100%"   dropdownClass="form-control mr-1 w-100" class="d-inline-flex" />
+
+      </div>
+
+
       <b-form-input
         class="mt-2"
         v-model="editData.major_subjects"
@@ -112,14 +110,8 @@
       @close="cancel"
       @ok="save"
     >
-      <!-- <div style="width: 100px">
-        <b-form-select
-          class="mb-2"
-          size="sm"
-          v-model="educationInput.access"
-          :options="options"
-        ></b-form-select>
-      </div> -->
+     
+
       <b-form-input
         class="mt-2 mb-2"
         v-model="educationInput.schoolName"
@@ -135,24 +127,31 @@
       >
         {{ $t('profileowner.Graduated') }}
       </b-form-checkbox>
-      <label>{{ $t('profileowner.Duration_From') }}</label>
-      <b-form-datepicker
-        id="example-datepicker-1"
-        v-model="educationInput.durationFrom"
-        class="mb-2"
-      ></b-form-datepicker>
+     
+      
+      <div class="form-group">
+     <label>{{ $t('profileowner.Duration_From') }}</label>
+      
+ <DropdownDatepicker  v-model="educationInput.durationFrom"     style="width:100%"   dropdownClass="form-control mr-1 w-100" class="d-inline-flex" />
+      </div>
 
-      <label>{{ $t('profileowner.To') }}</label>
-      <b-form-datepicker
-        id="example-datepicker"
-        v-model="educationInput.durationTo"
-        class="mb-2"
-      ></b-form-datepicker>
+      <div class="form-group">
+
+ <label>{{ $t('profileowner.To') }}</label>
+          
+ <DropdownDatepicker      v-model="educationInput.durationTo"    style="width:100%"   dropdownClass="form-control mr-1 w-100" class="d-inline-flex" />
+
+      </div>
+
       <b-form-input
         class="mt-2"
         v-model="educationInput.major"
         :placeholder="$t('profileowner.Major')"
       ></b-form-input>
+
+
+
+      
     </b-modal>
 
     
@@ -163,6 +162,7 @@
 <script>
 
 import { diffBetweenTwoDate } from '@/helpers'
+import DropdownDatepicker from 'vue-dropdown-datepicker'; 
 
 export default {
   data() {
@@ -184,6 +184,8 @@ export default {
       index: null
     }
   },
+
+components:{DropdownDatepicker},
 
   created() {
     this.educations = JSON.parse(

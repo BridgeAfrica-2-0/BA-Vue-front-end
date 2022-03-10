@@ -1,5 +1,6 @@
 <template>
-  <div class="p-post">
+  <div class="p-post">   
+
     <!-- DOM to Create Post By A UserOwner-->
     <b-card class="px-md-3 mb-3 mt-2">
       <b-row class="mt-2">
@@ -91,7 +92,8 @@
           </b-row>
         </b-col>
       </b-row>
-      <div v-if="postStatus != 'member'" class="pending-post-view pt-2 mt-3">
+
+      <div v-if="postStatus != 'member' && pendingPost.data>0 " class="pending-post-view pt-2 mt-3">
         <p class="text-center">
 <!-- {{pendingPost.data}} -->
           {{$t("network.Your")}}  {{$t("network.Posts_are_pending_for_approval")}}.&nbsp;&nbsp;&nbsp;&nbsp;
@@ -102,6 +104,8 @@
           >
         </p>
       </div>
+
+
     </b-card>
 
     <!-- User Posts Listing Section-->
@@ -468,7 +472,7 @@ export default {
       edit_id: null,
       comments: [],
       fullPage: false,
-
+      pendingPost:[],
       createPost: {
         // profile_picture: this.$store.getters.getProfilePicture,
         postNetworkUpdate: "",
@@ -484,6 +488,7 @@ export default {
     ...mapGetters({
       profile: "auth/profilConnected",
       owner_post: "networkProfile/getOwnerPost",
+      pending_post:"networkSetting/allPendingPost"
     }),
 
     business_logo() {
@@ -498,6 +503,7 @@ export default {
   created() {
     this.getAuth();
     this.url = this.$route.params.id;
+    this.AllPendingPost();
   },
 
   methods: {
@@ -514,7 +520,7 @@ export default {
     },
 
     AllPendingPost() {
-      console.log("AllPendingPost");
+     
       this.axios
         .get("network/" + this.url + "/post/count-pending-posts")
         .then(({ data }) => {

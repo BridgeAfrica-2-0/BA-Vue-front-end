@@ -5,7 +5,7 @@
         <template slot="title" class="tt-color">
           <h6 class="h6">{{$t("general.Posts")}}</h6>
         </template>
-        <post-network @changeSelected="changeSelected"></post-network>
+        <post-network @changeSelected="changeSelected"  :postStatus="'editors'"   ></post-network>
       </b-tab>
       <b-tab>
         <template slot="title" class="tt-color">
@@ -45,7 +45,8 @@ import MemberNetwork from '@/components/businessf/tabs/owner/networks/memberNetw
 import Members from '@/components/businessf/tabs/owner/networks/member';
 //import Members from '@/components/businessf/tabs/owner/editors/member';
 
-import PostNetwork from '@/components/businessf/tabs/owner/editors/postEditor';
+//import PostNetwork from '@/components/businessf/tabs/owner/editors/postEditor';
+import PostNetwork from "@/components/businessf/tabs/owner/networks/postNetwork";
 
 export default {
   name: 'default',

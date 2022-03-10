@@ -43,7 +43,7 @@
           ><br />
           All Selected: <strong>{{ selectAll }}</strong>
         </div> -->
-        <b-col cols="12" v-for="(notification, index) in getNotificationsStore" :key="index">
+        <b-col cols="12" v-for="(notification, index) in all" :key="index">
           <div :class="notification.mark_as_read ? 'text-secondary' : 'font-weight-bold'">
             <p class="">
               <span style="display:inline-flex">
@@ -57,15 +57,16 @@
                 <b-avatar
                   class="d-inline-block profile-pic"
                   variant="light"
-                  :text="notification.reference_type.charAt(0,1)"
-                  :src="notification.image"
+                  :src="notification.profile_picture"
                 ></b-avatar>
                 <span class="m-0  d-inline-block ml-2 username">
                   {{ notification.reference_type}}
                   <div class="duration">{{ notification.created_at | fromNow }}</div>
                 </span>
               </span>
-              <span v-if="!notification.mark_as_read" class="float-right mt-1"> <b-badge pill variant="primary" class="text-primary">.</b-badge></span>
+              <span v-if="!notification.mark_as_read" class="float-right mt-1">
+                <b-badge pill variant="primary" class="text-primary">.</b-badge>
+              </span>
             </p>
             <p class="text">{{ notification.notification_text }}</p>                  
           </div>
@@ -80,7 +81,6 @@
             <p>{{ $t('businessowner.No_notifications_to_show') }} </p>
           </b-row>
         </b-col>
-        <hr width="100%" />
       </b-row>
     </div>
   </div>
@@ -95,7 +95,8 @@ export default {
     all: 24,
     selected: [],
     selectAll: false,
-    indeterminate: false
+    indeterminate: false,
+    getNotificationsStore:[]
   }),
 
   beforeMount() {
@@ -103,14 +104,29 @@ export default {
       .then((e) => this.realTimeNotification({ init: true, data: e }));
   },
 
+  
+
   filters: {
     fromNow,
   },
 
   watch: {
-    selected(newValue, oldValue) {
-      // Handle changes in individual notifications checkboxes
-      //console.log(newValue)
+    selected(currentValue, oldValue) {
+
+      let newValue = currentValue
+      
+      /* const removeNotification = (notifId) => {
+        newValue = newValue.filter(notif => notif.id != notifId)
+      }
+
+      const findNotification = () => {
+        const tabNotification = this.getNotificationsStore.map(notif => notif.mark_as_read ? removeNotification(notif.id) : notif)
+
+        console.log(tabNotification)
+      }
+
+      findNotification() */
+
       if (newValue.length === 0) {
         this.indeterminate = false;
         this.selectAll = false;
@@ -121,13 +137,16 @@ export default {
         this.indeterminate = true;
         this.selectAll = false;
       }
+    },
+
+    "$store.state.businessOwner.notifications": function(newValue){
+      this.all = newValue
     }
+
   },
 
   computed: {
-    getNotificationsStore() {
-      return this.getRealTimeNotification.length ? this.getRealTimeNotification : this.sendNotifications();
-    },
+
     loader() {
       return this.getLoader();
     },
@@ -135,6 +154,7 @@ export default {
       getRealTimeNotification: 'notification/NEW_BUSINESS_NOTIFICATION',
     }),
   },
+
   methods: {
     // getting actions from the store
     ...mapActions({
@@ -158,20 +178,18 @@ export default {
 
 
     async readAll(data) {
-      console.log(data)
-      let formData = new FormData();
-      for (let i = 0; i < data.length; i++) {
-          //console.log(data[i]);
-          formData.append('ids['+i+']', data[i]);
-      }
       
       this.readNotifiactions({ ids:data})
         .then(() => {
-          this.getNotifications(this.$route.params.id)
+          
           this.flashMessage.show({
             status: "success",
             message: "Successful"
           });
+          this.all = this.all.map(notif => 
+            data.includes(notif.id) ? {...notif, mark_as_read:1} : notif)
+
+          this.selected = []
         })
         .catch(() => {
           this.flashMessage.show({
@@ -186,11 +204,14 @@ export default {
       
       this.deleteNotifications({ ids:data})
         .then(() => {
-          this.getNotifications(this.$route.params.id)
+          
           this.flashMessage.show({
             status: "success",
             message: "Deleted Successful"
           });
+
+          this.all = this.all.filter(notif => !data.includes(notif.id))
+          this.selected = []
         })
         .catch(() => {
             this.flashMessage.show({
@@ -206,12 +227,13 @@ export default {
     },
     
     select(checked) {
-      /* console.log("this.selectAll: "+this.selectAll);
-      console.log("checked: "+checked); */
+
+      console.log("this.selectAll: "+this.selectAll);
+      console.log("checked: "+checked)
       this.selected = [];
       if (checked) {
-        for (let notification in this.getNotificationsStore) {
-            this.selected.push(this.getNotificationsStore[notification].id.toString());
+        for (let notification in this.all) {
+            this.selected.push(this.all[notification].id.toString());
             //console.log("this.notifications[notification].id: "+this.getNotificationsStore[notification].id);
         }
       }

@@ -192,6 +192,10 @@ export default {
                 return state.notifications;
             }
         },
+
+        getAllNotifications(state) {
+            return state.notifications;
+        },
         // sending checked value
         sendChecked(state) {
             return state.checked;

@@ -1668,10 +1668,9 @@ export default {
          this.$store.commit("business/setKeyword", newValue.keyword);
         }else if(this.selectedId==4){
           
-           this.$store.commit("marketSearch/setKeyword", newValue.keyword);
+          this.$store.commit("marketSearch/setKeyword", newValue.keyword);
 
-            this.$store.commit("marketSearch/setLocation", newValue.location);
-
+          this.$store.commit("marketSearch/setLocation", newValue.location);
         }
 
         else if(this.selectedId==3){

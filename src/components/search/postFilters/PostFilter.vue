@@ -230,11 +230,7 @@ export default {
     },
 
     isPostHaveNotSeen: function (newValue) {
-      if (!this.keyword && newValue) {
-        this.isPostHaveNotSeen = false;
-        this.onNotified("the keyword does not exist");
-        return false;
-      }
+     
       if (newValue) {
         this.page(1);
         this.newCallbackForPagination(
@@ -255,11 +251,7 @@ export default {
     },
 
     created_at: function (newValue) {
-      console.log(newValue)
-      if (!this.keyword && newValue) {
-        this.onNotified("the keyword does not exist");
-        return false;
-      }
+     
       if (newValue) {
         this.page(1);
         this.newCallbackForPagination(

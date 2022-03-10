@@ -13,7 +13,7 @@
     </div>
 
     <br/>
-    
+
     <div v-if="filterType == '0' || filterType == '1' || filterType == '4'">
 
        <b-form-group
@@ -1890,6 +1890,8 @@ export default {
       this.matchingCategory = []
       this.activateMatching = false
       this.nameOfCategory = null
+      this.query = null
+      this.city= null
       this.$store.commit("marketSearch/setSubCat",[])
       this.searchParams.country_id = null;
       this.searchParams.region_id = null;

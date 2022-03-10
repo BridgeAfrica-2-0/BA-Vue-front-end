@@ -14,4 +14,8 @@ export const getters = {
   [TYPES.NEW_NETWORK_NOTIFICATION](state) {
     return state.networks
   }, // [TYPES.NEW_NETWORK_NOTIFICATION]
+
+  [TYPES.UPDATE_ALBUM](state, payload) {
+    return state.updateAlbum
+  },
 }

@@ -7,7 +7,7 @@
           @click.native="strategY['all']"
           v-if="selectedId == 0"
         />
-
+        
         <Button
           media="desktop"
           @click.native="strategY['business']"

@@ -133,6 +133,7 @@ export default {
 
 
 <style lang="less">
+
 .fade-enter-active,
 .fade-leave-active {
   transition-duration: 0.3s;
@@ -141,20 +142,14 @@ export default {
   overflow: hidden;
 }
 
-
-
 .fadde{
- 
-
- transition-duration: 3.3s;
-    transition-property: height, opacity;
-    transition-timing-function: ease;
-    overflow: hidden;
-    opacity: 0;
-    z-index: 0 !important;
-
+  transition-duration: 3.3s;
+  transition-property: height, opacity;
+  transition-timing-function: ease;
+  overflow: hidden;
+  opacity: 0;
+  z-index: 0 !important;
 }
-
 
 .fade-enter,
 .fade-leave-active {
@@ -164,7 +159,6 @@ export default {
 @import "./assets/css/main.css";
 @import "./assets/css/style.css";
 @import "./assets/css/bootstrap.css";
-
 @import "./assets/icon/iconfont.css";
 
 @import "https://pro.fontawesome.com/releases/v5.10.0/css/all.css";
@@ -176,35 +170,45 @@ export default {
   color: #2c3e50;
   margin-left: 5px;
 }
+
 #flashmessage {
   position: absolute;
   z-index: 9999 !important;
 }
+
 .primary {
   color: #e75c18;
 }
+
 .primary-bg {
   background-color: #e75c18;
 }
+
 .green {
   color: #32a400;
 }
+
 .green-bg {
   background-color: #32a400;
 }
+
 .yellow {
   color: #ffd200;
 }
+
 .yellow-bg {
   background-color: #ffd200;
 }
+
 .nav-link {
   color: #000;
 }
+
 li .nav-link:hover {
   background-color: #e75c18;
   color: #fff;
 }
+
 .nav-pills .nav-link.active,
 .nav-pills .show > .nav-link {
   background-color: #e75c18;
@@ -213,9 +217,11 @@ li .nav-link:hover {
 .alert-primary {
   background-color: #e9a07c;
 }
+
 .red {
   color: #ff0000;
 }
+
 .red-bg {
   background-color: #ff0000;
 }
@@ -223,13 +229,16 @@ li .nav-link:hover {
 .purple {
   color: #6263;
 }
+
 .purple-bg {
   background-color: #6263;
 }
+
 .card-header {
   border: none;
   background-color: red;
 }
+
 #nav {
   padding: 30px;
 
@@ -242,6 +251,7 @@ li .nav-link:hover {
     }
   }
 }
+
 .toggle {
   color: #fff;
   background-color: #000;
@@ -258,8 +268,6 @@ li .nav-link:hover {
   }
 }
 
-
-
 .no-js #loader { display: none;  }
 .js #loader { display: block; position: absolute; left: 100px; top: 0; }
 .sep{
@@ -273,16 +281,13 @@ li .nav-link:hover {
 	// background: url(https://i.gifer.com/origin/d3/d3f472b06590a25cb4372ff289d81711_w200.gif) center no-repeat #fff;
 }
 
-
 .semipolar-spinner{   
-    height: 65px;
-    width: 65px;
-    position: absolute;
-    margin-top: 15%;
-    margin-left: 50%;
-
-  }
-
+  height: 65px;
+  width: 65px;
+  position: absolute;
+  margin-top: 15%;
+  margin-left: 50%;
+}
 
 </style>
 

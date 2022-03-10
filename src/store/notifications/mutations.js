@@ -29,8 +29,9 @@ export const mutations = {
     });
   },
 
-  [TYPES.UPDATE_ALBUM](state, payload) {
-    state.updateAlbum = payload
+  [TYPES.UPDATE_ALBUM](state) {
+    console.log("what are she doing")
+    state.updateAlbum = !state.updateAlbum
   },
 
 };

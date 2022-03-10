@@ -1828,6 +1828,9 @@ export default {
     },
 
     searchNetworks(data) {
+
+
+      const newParams =  data ? data : {keyword:this.searchParams.keyword}
       
       if (this.searchParams.keyword)
         this.activateMatching = {name:this.searchParams.keyword}

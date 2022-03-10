@@ -133,7 +133,6 @@ export default {
         async SEARCH({ commit, state }, data) {
             commit("setNetworks", { data: [] });
             commit("setLoader", true);
-            console.log("[DEBUG] HELLO NETWORK SEARCH", data);
             let page
             let keyword
             let catId
@@ -156,7 +155,7 @@ export default {
                 distanceInKM = data.distanceInKM ? "&distanceInKM=" + data.distanceInKM : ''
             }
 
-            console.log("[debug] page:", page);
+            
             try {
                 const res = await axios.get(`network/search?keyword=${keyword}&page=${page + catId+countryId+regionId+divisionId+councilId+neighborhood_id+distanceInKM}`);
                 commit("setLoader", false);

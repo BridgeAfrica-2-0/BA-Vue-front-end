@@ -88,7 +88,7 @@
           ></b-form-radio-group>
         </b-form-group>
         <div class="text-center">
-          <b-button variant="outline-primary" @click="choseModal">
+          <b-button variant="outline-primary" class="first-step-btn" @click="choseModal">
             {{ $t("welcome.Continue") }} <b-icon icon="arrow-right"> </b-icon>
           </b-button>
         </div>
@@ -181,7 +181,7 @@
                       ><br />
    
 
-                      <DropdownDatepicker   minAge="12"   v-model="dob" style="width:100%"   dropdownClass="form-control mr-1 w-100" class="d-inline-flex" />
+                      <DropdownDatepicker   minAge="18"   v-model="dob" style="width:100%"   dropdownClass="form-control mr-1 w-100" class="d-inline-flex" />
 
                       <!-- <b-form-datepicker
                         name="dob"
@@ -399,7 +399,7 @@
 
     
 
-                      <DropdownDatepicker   minAge="12"   v-model="dob" style="width:100%"   dropdownClass="form-control mr-1 w-100" class="d-inline-flex" />
+                      <DropdownDatepicker   minAge="18"   v-model="dob" style="width:100%"   dropdownClass="form-control mr-1 w-100" class="d-inline-flex" />
 
                       <!-- <b-form-datepicker
                         name="dob"
@@ -609,7 +609,7 @@
                   </div>
                 </div>
 
-                <div>
+                <div class="form-group">
                   <label class="typo__label">
                     {{ $t("welcome.Category") }}
                   </label>
@@ -627,7 +627,7 @@
                   ></multiselect>
                 </div>
 
-                <div>
+                <div class="form-group">
                   <label class="typo__label">
                     {{ $t("welcome.Sub_Category") }}</label
                   >
@@ -644,6 +644,7 @@
                   ></multiselect>
                 </div>
 
+                <div class="form-group">  
                 <label v-if="filterselectvalue.length" class="typo__label">{{
                   $t("welcome.Fiters")
                 }}</label>
@@ -680,7 +681,7 @@
                     </b-tabs>
                   </b-card>
                 </div>
-
+           </div>
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
@@ -2006,6 +2007,10 @@ import "vue-form-wizard/dist/vue-form-wizard.min.css";
 
 .vue-form-wizard.md .wizard-icon-circle {
   border-color: #e75c18 !important;
+}
+.first-step-btn {
+  z-index: 1;
+  position: relative;
 }
 </style>
 

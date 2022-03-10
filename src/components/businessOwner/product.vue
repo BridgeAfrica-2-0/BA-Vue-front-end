@@ -303,7 +303,7 @@
           <b-card no-body> 
             <b-tabs pills card vertical>  
               <b-tab
-                :title="filters.name"
+                :title="filters.name"  
                 v-for="filters in filterselectvalue"
                 :key="filters.id"
                 active
@@ -315,6 +315,8 @@
                       v-model="select_filterss"
                       name="filters"
                     >
+
+                 
                       <b-form-checkbox
                         class="colorblack"
                         v-for="fil in filters.filters"
@@ -463,6 +465,10 @@ selectedcategories: function() {
     },
 
 
+   
+
+
+
 
 
     // selectedcategories: function () {
@@ -498,20 +504,26 @@ selectedcategories: function() {
 
   
  this.multiselecvalue = product.categories[0];
+ 
 
-   //this.filterselectvalue =this.getfilters(); 
+   this.subcategories();
 
-   this.filterselectvalue =product.subcategories;  
+   
 
-   this.filterselectvalue.filters=product.filters;  
+   console.log(this.filterselectvalue);
+
+ 
+
+  // this.filterselectvalue =product.subcategories;  
+
+   //this.filterselectvalue.filters=product.filters;  
 
     this.select_filterss = this.editfilters(product.filters);
 
    
 
-   this.subcategories();
 
-   this.getfilters();
+   //this.getfilters();
 
      },
 
@@ -662,7 +674,7 @@ selectedcategories: function() {
       formData.append("is_service", Product.is_service);
       formData.append("in_stock", Product.in_stock);
       formData.append("tax_amount", 200);  
-      formData.append("kg", 7);
+      formData.append("kg", Product.kg);
       formData.append("categories",  this.multiselecvalue.id);
       formData.append("subcategories",this.filterselectvalue
         .map((el) => el.subcategory_id)
@@ -674,12 +686,11 @@ selectedcategories: function() {
       formData.append("picture", this.pro_img);
 
       console.log(this.pro_img);
-      this.$store
-        .dispatch("market/UpdateProduct", {
-          path: "market/"+Product.id,
-          formData: formData,
-        })
-        .then(({ data }) => {
+
+     
+     axios.post("market/"+Product.id, formData, {
+          headers: { "Content-Type": "multipart/form-data" },
+        }).then(({ data }) => {
           this.sendingp=false;
           console.log(data);
           this.flashMessage.show({
@@ -750,19 +761,30 @@ selectedcategories: function() {
     categories(){
         this.$store.dispatch("auth/categories");
     },
-    subcategories() {
-     
 
-      console.log("yoo mother bba fucker");
+    
+   
 
-       console.log(this.selectedcategories);
+  async  subcategories() {
+    
+
       let formData2 = new FormData();
 
-       console.log("yoo mother bba fucker");
+     
      
       formData2.append("categoryId", this.selectedcategories);
-      this.$store.dispatch("auth/subcategories", formData2);
+     await this.$store.dispatch("auth/subcategories", formData2) .then(() => {
+         
+         this.filterselectvalue =this.getfilters(); 
+         
+        })
+     
+    
+      
+      
+
     },
+
     addTag(newTag) {
       const tag = {
         name: newTag,

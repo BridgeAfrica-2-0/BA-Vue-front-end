@@ -159,7 +159,7 @@
 
     <div class="body p-2">
       <b-row>
-        <b-col cols="12" class="p-0 p-md-3">
+        <b-col cols="12" class=" p-md-3">
           <b-tabs lazy content-class="mt-3" fill pills>
             <b-tab :title="$t('profilefollower.Posts')" active>
               <Post />
@@ -189,7 +189,9 @@
 import Post from "@/components/businessfollower/tabs/posts";
 import About from "@/components/follower/tabs/about";  
 import Media from "@/components/businessfollower/tabs/media";
-import Community from "@/components/follower/tabs/community";
+//import Community from "@/components/follower/tabs/community";
+
+import Community from "@/components/owner/tabs/comunitiDashboard"; 
 import Businesses from "@/components/follower/tabs/businesses";
 import Network from "@/components/follower/tabs/networkk";
 import axios from "axios";

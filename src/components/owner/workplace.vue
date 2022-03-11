@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div>   today  {{today}}
     <b>{{ $t('profileowner.WorkPlace') }}</b>  
     <hr />
     <b-link class="mt-4 text-decoration-none" v-b-modal.modal-9>
@@ -120,7 +120,7 @@
     
  
       
- <DropdownDatepicker  v-model="editData.startDate" :defaultDate="editData.startDate"    style="width:100%"   dropdownClass="form-control mr-1 w-100" class="d-inline-flex" />
+ <DropdownDatepicker  v-model="editData.startDate" :defaultDate="editData.startDate"   :maxDate="today"    style="width:100%"   dropdownClass="form-control mr-1 w-100" class="d-inline-flex" />
       </div>
 
       <div class="form-group">
@@ -129,7 +129,7 @@
       <label v-if="!editData.currently_working" for="endDate">{{ $t('profileowner.End_Date') }}</label>
 
           
- <DropdownDatepicker  v-if="!editData.currently_working"  v-model="editData.endDate" :defaultDate="editData.endDate"    style="width:100%"   dropdownClass="form-control mr-1 w-100" class="d-inline-flex" />
+ <DropdownDatepicker  v-if="!editData.currently_working"  v-model="editData.endDate" :defaultDate="editData.endDate"   :maxDate="today"    style="width:100%"   dropdownClass="form-control mr-1 w-100" class="d-inline-flex" />
 
       </div>
 
@@ -210,7 +210,7 @@
       ></b-form-datepicker> -->
  
       
- <DropdownDatepicker  v-model="workPlaceInput.startDate" :defaultDate="workPlaceInput.startDate"    style="width:100%"   dropdownClass="form-control mr-1 w-100" class="d-inline-flex" />
+ <DropdownDatepicker  v-model="workPlaceInput.startDate" :defaultDate="workPlaceInput.startDate"  :maxDate="today" style="width:100%"   dropdownClass="form-control mr-1 w-100" class="d-inline-flex" />
       </div>
 
       <div class="form-group">
@@ -219,7 +219,7 @@
       <label v-if="!workPlaceInput.currentlyWorking" for="endDate">{{ $t('profileowner.End_Date') }}</label>
 
           
- <DropdownDatepicker v-if="!workPlaceInput.currentlyWorking" v-model="workPlaceInput.endDate" :defaultDate="workPlaceInput.endDate"    style="width:100%"   dropdownClass="form-control mr-1 w-100" class="d-inline-flex" />
+ <DropdownDatepicker v-if="!workPlaceInput.currentlyWorking" v-model="workPlaceInput.endDate" :defaultDate="workPlaceInput.endDate"   :maxDate="today"  style="width:100%"   dropdownClass="form-control mr-1 w-100" class="d-inline-flex" />
 
       </div>
       <!-- <b-form-datepicker
@@ -244,6 +244,7 @@ export default {
   data() {
     return {
       editData:[],
+       today :new Date().toISOString().slice(0, 10),
       options: [
         { value: null, text: this.$t('profileowner.Select') },
         { value: "private", text: this.$t('profileowner.Private') },

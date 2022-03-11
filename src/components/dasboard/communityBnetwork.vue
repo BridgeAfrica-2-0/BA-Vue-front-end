@@ -142,6 +142,14 @@ export default {
           console.log(response);
           user.is_member = nextFollowState;
           document.getElementById("joinbtn" + user.id).disabled = false;
+
+           this.flashMessage.show({
+            status: "success",
+            message: response.data.message,
+            blockClass: "custom-block-class",
+          })
+
+
         })
         .catch((err) => {
           console.log(err);

@@ -1,6 +1,6 @@
 <template>
   <div class="mt-3">
-    <div class="">
+    <div class="lal">
       <b-card
         class="f-left"
         style="padding:0px; margin-left: -12px;

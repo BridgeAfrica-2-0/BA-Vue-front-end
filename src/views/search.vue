@@ -65,6 +65,8 @@
       </template>
     </Nav>
 
+   
+
     <SubNav
       @onChangeCategoryName="(val) => categoryName = val"
       @category="getCategory"
@@ -636,7 +638,8 @@ export default {
     ...mapGetters({
       prodLoaderr: "business/getloadingState",
       businessess: "business/getBusiness",
-      profileConnected: "auth/profilConnected"
+      profileConnected: "auth/profilConnected",
+      user:"auth/user"
     }),
 
     businesses() {
@@ -671,11 +674,22 @@ export default {
   },
 
   created() {
+ this.islogin=this.$store.getters["auth/isLogged"];
+
     if (this.$route.query.keyword) {
       this.searchParams.keyword = this.$route.query.keyword;
-      this.searchParams.location = this.$route.query.location;
-      this.searchParams.location_placeholder=this.$route.query.location ? this.$route.query.location:this.$t("home.Location");
     }
+     
+     if(this.islogin) {   
+      this.searchParams.location = this.$route.query.location ? this.$route.query.location:this.$store.getters["auth/user"].user.address;
+
+      this.searchParams.location_placeholder=this.searchParams.location ? this.searchParams.location : this.$t("home.Location");
+    
+     }else{
+     
+      this.searchParams.location_placeholder=this.$t("home.Location");
+
+     }
 
     this.onProcessQuery();
     this.getLocation();
@@ -699,7 +713,7 @@ export default {
       subCatChose: "",
       filterChose: "",
       categoryName:"",
-      islogin: true,
+      islogin: false,
       searchParams: {
         keyword: "",
         cat_id: "",

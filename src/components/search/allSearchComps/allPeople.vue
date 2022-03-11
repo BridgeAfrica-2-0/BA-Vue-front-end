@@ -327,7 +327,7 @@ f-right {
 
 @media only screen and (min-width: 1200px) {
   .btn {
-    width: 123px;
+    width: 127px;
     height: 38px;
     font-size: 14px;
   }
@@ -457,7 +457,7 @@ f-right {
   }
 
   .btn {
-    width: 123px;
+    width: 127px;
     height: 38px;
     font-size: 14px;
   }
@@ -498,7 +498,7 @@ f-right {
   }
 
   .btn {
-    width: 85px;
+    width: 97px;
     height: 28px;
     font-size: 10px;
   }

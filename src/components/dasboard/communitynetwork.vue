@@ -149,7 +149,8 @@ export default {
 
 
 
-    async handle (user) {
+
+    async handleJoin(user) {
       document.getElementById("joinbtn" + user.id).disabled = true;
       const uri = user.is_member === 0 ? `/add-member` : `/remove-member`;
       const nextFollowState = user.is_member === 0 ? 1 : 0;
@@ -164,6 +165,14 @@ export default {
           console.log(response);
           user.is_member = nextFollowState;
           document.getElementById("joinbtn" + user.id).disabled = false;
+
+           this.flashMessage.show({
+            status: "success",
+            message: response.data.message,
+            blockClass: "custom-block-class",
+          })
+
+
         })
         .catch((err) => {
           console.log(err);
@@ -340,7 +349,7 @@ export default {
     font-size: 10px;
 
     height: 28px;
-    width: 85px;
+    width: 97px;
   }
 
   .r-image {

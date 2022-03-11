@@ -680,7 +680,7 @@ f-right {
   }
 
   .btn {
-    width: 85px;
+    width: 97px;
     height: 28px;
     font-size: 10px;
   }

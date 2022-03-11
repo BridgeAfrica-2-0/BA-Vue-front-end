@@ -2,6 +2,15 @@
   <div>
     <!-- ======= Header ======= -->
 
+
+
+      <div ref="loaderr"  v-if="showfaddeB" :class="{fadde:showfadde, sep:showblock } ">    <semipolar-spinner
+  :animation-duration="2000"
+  :size="65"
+  :color="'#ff1d5e'"
+/>     </div>
+
+
     <site-header class="topbar" />
 
     <!-- End Header -->
@@ -807,15 +816,21 @@ import Button from "@/components/ButtonNavBarFind.vue";
 import SiteHeader from "../components/site/siteHeader";
 import VLazyImage from "v-lazy-image/v2";
 import { mapGetters, mapActions, mapMutations } from "vuex";
+ import { SemipolarSpinner} from 'epic-spinners';
 import axios from "axios";
 export default {
-  components: { Button, SiteHeader, SiteFooter,VueBootstrapTypeahead },
+  components: { Button, SiteHeader, SiteFooter,VueBootstrapTypeahead,SemipolarSpinner },
   data() {
     return {
       expanded: true,
       location: "",
       word1: "",
       word2: "",
+      
+      showblock:true,
+         showfadde:false,
+         showfaddeB:true,
+
       placeholder:this.$t('home.Location'),
       img1: require("../assets/img/coach.png"),
     };
@@ -871,6 +886,36 @@ export default {
   },
 
   methods: {
+
+     onWindowLoad() {
+            console.log("window load event");
+
+          
+            this.showfadde=true;
+
+         
+
+         
+
+       setTimeout(() => {
+        this.loadfinish()
+        }, 2000);
+
+
+        },
+
+
+       loadfinish(){
+
+      
+        //  this.showblock=false;
+
+        //  this.showfadde=false;
+        //  this.showfaddeB=false;
+        
+
+      },
+
 
     
      ...mapActions({
@@ -1624,6 +1669,41 @@ footer a {
 .m-wheree input{
   border: none;
 }
+
+
+
+</style>
+
+<style scoped>
+
+
+
+@media only screen and (max-width: 768px) {
+  
+    .semipolar-spinner{   
+  height: 65px;
+  width: 65px;
+  position: absolute;
+  margin-top: 50%;
+  margin-left: 42%;
+}
+
+}
+
+
+@media only screen and (min-width: 768px) {
+
+
+.semipolar-spinner{   
+  height: 65px;
+  width: 65px;
+  position: absolute;
+  margin-top: 15%;
+  margin-left: 45%;
+}
+
+}
+
 
 
 

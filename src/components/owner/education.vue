@@ -80,14 +80,14 @@
       <div class="form-group">
      <label>{{ $t('profileowner.Duration_From') }}</label>  //  {{editData.startDate}}
       
- <DropdownDatepicker  v-model="editData.startDate" :defaultDate="editData.startDate"    style="width:100%"   dropdownClass="form-control mr-1 w-100" class="d-inline-flex" />
+ <DropdownDatepicker  v-model="editData.startDate" :defaultDate="editData.startDate"  :maxDate="today"    style="width:100%"   dropdownClass="form-control mr-1 w-100" class="d-inline-flex" />
       </div>
 
       <div class="form-group">
 
  <label>{{ $t('profileowner.To') }}</label>
           
- <DropdownDatepicker  v-model="editData.endDate" :defaultDate="editData.endDate"    style="width:100%"   dropdownClass="form-control mr-1 w-100" class="d-inline-flex" />
+ <DropdownDatepicker  v-model="editData.endDate" :defaultDate="editData.endDate"   :maxDate="today"    style="width:100%"   dropdownClass="form-control mr-1 w-100" class="d-inline-flex" />
 
       </div>
 
@@ -132,14 +132,14 @@
       <div class="form-group">
      <label>{{ $t('profileowner.Duration_From') }}</label>
       
- <DropdownDatepicker  v-model="educationInput.durationFrom"     style="width:100%"   dropdownClass="form-control mr-1 w-100" class="d-inline-flex" />
+ <DropdownDatepicker  v-model="educationInput.durationFrom"     style="width:100%"   :maxDate="today"   dropdownClass="form-control mr-1 w-100" class="d-inline-flex" />
       </div>
 
       <div class="form-group">
 
  <label>{{ $t('profileowner.To') }}</label>
           
- <DropdownDatepicker      v-model="educationInput.durationTo"    style="width:100%"   dropdownClass="form-control mr-1 w-100" class="d-inline-flex" />
+ <DropdownDatepicker      v-model="educationInput.durationTo"    style="width:100%"  :maxDate="today"    dropdownClass="form-control mr-1 w-100" class="d-inline-flex" />
 
       </div>
 
@@ -168,6 +168,7 @@ export default {
   data() {
     return {
       editData:[],
+       today :new Date().toISOString().slice(0, 10),
       options: [
         { value: null, text: this.$t('profileowner.Select') },
         { value: "private", text: this.$t('profileowner.Private') },

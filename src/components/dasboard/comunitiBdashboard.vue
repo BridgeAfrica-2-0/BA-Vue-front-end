@@ -1,5 +1,5 @@
 <template>
-  <div class="lalla">
+  <div class="lalla lalala">
     <b-card
       class="border-0 p-0 m-0"
       style="

@@ -184,6 +184,15 @@ getTotalCommunity(){
           console.log(response);
           user.is_member = nextFollowState;
           document.getElementById("joinbtn" + user.id).disabled = false;
+
+          
+           this.flashMessage.show({
+            status: "success",
+            message: response.data.message,
+            blockClass: "custom-block-class",
+          })
+
+
         })
         .catch((err) => {
           console.log(err);
@@ -229,6 +238,7 @@ getTotalCommunity(){
         .then((response) => {
           user.is_follow = nextFollowState;
           document.getElementById("followbtn" + user.id).disabled = false;
+         
           this.getTotalCommunity();
         })
         .catch((err) => {
@@ -346,7 +356,7 @@ getTotalCommunity(){
     font-size: 10px;
 
     height: 28px;
-    width: 85px;
+    width: 97px;
   }
 
   .r-image {

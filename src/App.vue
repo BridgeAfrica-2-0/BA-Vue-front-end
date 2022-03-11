@@ -1,17 +1,11 @@
 .<template>
   <div id="app" class="" ref="formContainer">
 
-    <div ref="loaderr"  v-if="showfaddeB" :class="{fadde:showfadde, sep:showblock } ">    <semipolar-spinner
-  :animation-duration="2000"
-  :size="65"
-  :color="'#ff1d5e'"
-/>    
-
-</div>
+   
     <div id="flashmessage">
       <FlashMessage />
         <vue-confirm-dialog></vue-confirm-dialog>
-    </div>
+    </div> 
 
     <transition
       name="fade"
@@ -27,7 +21,7 @@
 </template>
 <script>
 import { Redis } from "@/mixins";
- import { SemipolarSpinner} from 'epic-spinners';
+
 
 import { mapGetters, mapActions } from "vuex";
 
@@ -43,7 +37,7 @@ export default {
          showfaddeB:true,
     };
   },
-  components:{SemipolarSpinner},
+ 
 
   computed: mapGetters({
     auth: "auth/profilConnected",
@@ -63,7 +57,7 @@ export default {
  created(){
    
 
-   window.addEventListener("load", this.onWindowLoad);
+  
    
 
   },
@@ -133,6 +127,19 @@ export default {
 
 
 <style lang="less">
+
+ .splide__arrow--next{
+
+width: 20px !important;
+    height: 20px !important;
+}
+
+ .splide__arrow--prev{
+
+width: 20px !important;
+    height: 20px !important
+
+}
 
 .fade-enter-active,
 .fade-leave-active {
@@ -281,12 +288,26 @@ li .nav-link:hover {
 	// background: url(https://i.gifer.com/origin/d3/d3f472b06590a25cb4372ff289d81711_w200.gif) center no-repeat #fff;
 }
 
-.semipolar-spinner{   
-  height: 65px;
-  width: 65px;
-  position: absolute;
-  margin-top: 15%;
-  margin-left: 50%;
+
+
+@media only screen and (max-width: 768px) {
+   
+
+  .lalala .nav-pills .nav-link {
+    border-radius: 0.25rem !important;
+    font-size: 12px !important;
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+}
+
+
+
+  .lal .nav-pills .nav-link {
+    border-radius: 0.25rem !important;
+    font-size: 12px !important;
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+}
 }
 
 </style>

@@ -163,7 +163,10 @@ export default {
     this.islogin = this.$store.getters["auth/isLogged"];
 
     console.log(this.islogin);
+    if(this.islogin){  
     this.getProducts();
+
+     }
   },
 
   methods: {

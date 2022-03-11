@@ -346,7 +346,7 @@
 
 
 
-            <b-col md="6" class="pt-3">
+            <b-col md="6">
               <b-form-group
                 label-cols-lg="12"
                 :label="$t('profileowner.Primary_Phone')"

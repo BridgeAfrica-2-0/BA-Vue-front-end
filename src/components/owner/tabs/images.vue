@@ -380,17 +380,11 @@ export default {
             status: "success",
             message: "Media Deleted",
           });
+
+          this.updateAllAlbums()
           return false;
         })
-        .catch((error) => {
-          this.sending = false;
-          this.loading = false;
-          this.flashMessage.show({
-            status: "error",
-            message: "something wrong happen",
-          });
-          return false;
-        });
+        
     },
     //set an image as a cover photo
 
@@ -479,7 +473,7 @@ export default {
       this.pattern[this.type]()
         .submitPost(payload)
         .then((picture) => {
-          this.updateAllAlbums(true)
+          this.updateAllAlbums()
           return true
         })
         .then(() => {

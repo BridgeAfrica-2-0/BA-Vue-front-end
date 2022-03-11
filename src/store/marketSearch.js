@@ -200,15 +200,12 @@ export default {
             let neighbourhood = data.neighbourhood ? "&neighbourhood=" + data.neighbourhood : "&neighbourhood=" + state.location;
 
           
-
             try {
-                const res = await axios.get(`market/search?keyword=${keyword}&cat_id=${cat_id}&sub_cat_id=${sub_cat}&filter_id=${filter_id}&distanceInKM=${distance}&page=${page}`+ countryId+regionId+divisionId+councilId+city+neighbourhoodId+neighbourhood);
+                const res = await axios.get(`search/market?keyword=${keyword}&cat_id=${cat_id}&sub_cat_id=${sub_cat}&filter_id=${filter_id}&distanceInKM=${distance}&page=${page}`+ countryId+regionId+divisionId+councilId+city+neighbourhoodId+neighbourhood);
                 commit("setLoader", false);
-                console.log("Search results: ", res.data);
                 commit("setProducts", res.data);
             } catch (err) {
                 commit("setLoader", false);
-                console.log(err);
             }
         },
 

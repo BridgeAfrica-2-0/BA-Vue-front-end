@@ -12,7 +12,6 @@ export const mutations = {
   }, //[TYPES.FIND_USER_NETWORK]
 
   [TYPES.NEW_PROFILE_NOTIFICATION](state, payload) {
-    console.log(payload)
     if (payload.init) state.profile = payload.data;
     else state.profile = [...state.profile, payload.data];
   }, // [TYPES.INIT]
@@ -30,8 +29,9 @@ export const mutations = {
     });
   },
 
-  [TYPES.UPDATE_ALBUM](state, payload) {
-    state.updateAlbum = payload
+  [TYPES.UPDATE_ALBUM](state) {
+    console.log("what are she doing")
+    state.updateAlbum = !state.updateAlbum
   },
 
 };

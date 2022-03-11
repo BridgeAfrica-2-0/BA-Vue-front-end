@@ -36,6 +36,7 @@
         <Album
           :isEditor="isEditor"
           :type="type"
+          :key="forReload"
           
           :getAlbums="getAlbums"
           :getImages="getImages"
@@ -80,11 +81,13 @@ export default {
   },
 
   watch: {
-    
+      
     "$store.state.notification.updateAlbum": function(canBeUpload){
-      console.log('what are you doing .....')
-      if (canBeUpload)
+      
+      if (canBeUpload){
         this.getAlbums()
+        this.forReload = this.forReload ++
+      }
     },
 
     showCoverAlbum: function(newValue){
@@ -114,7 +117,8 @@ export default {
       strategy: null,
       tabIndex: 0,
       addItem: false,
-      isGuestUser: isGuestUser()
+      isGuestUser: isGuestUser(),
+      forReload:0
     };
   },
 

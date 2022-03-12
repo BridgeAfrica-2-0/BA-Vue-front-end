@@ -379,8 +379,8 @@ export default {
     padding-top: 6px;
     font-size: 10px;
 
-    height: 28px;
-    width: 85px;
+    height: 28px;  
+     width: 97px;
   }
 
   .r-image {

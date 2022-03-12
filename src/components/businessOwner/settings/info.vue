@@ -38,7 +38,7 @@
                 @input="subcategories"
                 :tag-placeholder="$t('businessowner.Add_this_as_new_tag')"
                 :placeholder="$t('businessowner.Search_or_add_a_tag')"
-                :label="$t('businessowner.name')"
+                label="name"
                 track-by="id"
                 :options="pcategories"
                 :multiple="true"
@@ -66,7 +66,7 @@
                 v-model="filterselectvalue"
                 :tag-placeholder="$t('businessowner.Add_this_as_new_tag')"
                 :placeholder="$t('businessowner.Search_or_add_a_tag')"
-                :label="$t('businessowner.name')"
+                label="name"
                 track-by="subcategory_id"
                 :options="scategories"
                 :multiple="true"
@@ -314,7 +314,7 @@
                 v-model="country"
                 @input="Region"
                 :placeholder="$t('businessowner.Search')"
-                :label="$t('businessowner.name')"
+                label="name"
                 track-by="id"
                 :options="countries"
                 :multiple="true"
@@ -340,7 +340,7 @@
                 v-model="region"
                 @input="Division"
                 :placeholder="$t('businessowner.Search')"
-                :label="$t('businessowner.name')"
+                label="name"
                 track-by="id"
                 :options="regions"
                 :multiple="true"
@@ -365,7 +365,7 @@
                 v-model="division"
                 @input="Municipality"
                 :placeholder="$t('businessowner.Search')"
-                :label="$t('businessowner.name')"
+                label="name"
                 track-by="id"
                 :options="divisions"
                 :multiple="true"
@@ -390,7 +390,7 @@
                 v-model="municipality"
                 @input="Locality"
                 :placeholder="$t('businessowner.Search')"
-                :label="$t('businessowner.name')"
+                label="name"
                 track-by="id"
                 :options="municipalities"
                 :multiple="true"
@@ -414,7 +414,7 @@
               <multiselect
                 v-model="locality"
                 :placeholder="$t('businessowner.Search')"
-                :label="$t('businessowner.name')"
+                label="name"
                 track-by="id"
                 :options="localities"
                 :multiple="true"
@@ -543,7 +543,10 @@
                 <b-container v-if="displayHour1">
                   <b-row v-for="(day, index) in dayOfWorks" :key="index">
                     <b-col cols="6"
-                      ><b-form-checkbox
+                      >  
+                      
+                      
+                      <b-form-checkbox
                         id=""
                         class="a-text text"
                         name="works"
@@ -551,22 +554,26 @@
                         :checked="day.check"
                       >
                         {{ day.day }}</b-form-checkbox
-                      ></b-col
-                    >
+                      >
+                    
 
-                    <b-col
-                      ><b-form-input
+                      <b-form-input
                         @change="input(index, day)"
                         name="start"
                         type="time"
                         v-model="day.opening_time"
                         :required="day.check ? 'required' : null"
                       ></b-form-input
-                    ></b-col>
-                    --
-                    <b-col
-                      ><b-form-input
+                    >   
+                    
+                   
+                     
+                     </b-col>
+                  
+                    <b-col cols="6"
+                      >  <br>  <b-form-input
                         @change="input(index, day)"
+                        class="mt-1"
                         name="end"
                         type="time"
                         v-model="day.closing_time"

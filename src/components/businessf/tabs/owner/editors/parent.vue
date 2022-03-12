@@ -49,7 +49,7 @@
               <p class="a-center">
                 <b-icon icon="people-fill" variant="primary"></b-icon>
                 <span class="pivate text">
-                  {{ nFormatter(networkInfo.commuity) }}
+                 {{ nFormatter(networkInfo.community) }}
                   {{ $t('general.community') }} 
                 </span>
               </p>

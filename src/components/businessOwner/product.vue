@@ -278,12 +278,12 @@
             @input="subcategories"
            
             :placeholder="$t('businessowner.Search_or_add_a_tag')"
-            :label="$t('businessowner.name')"
+            label="name"
             track-by="id"
             :options="BuCategories"
            
           ></multi-select>
-        </div>
+        </div>  
         <!-- SUB-CATEGORIES -->
         <div class="mt-2">
           <label class="typo__label"> {{ $t('businessowner.Sub_Category') }}  </label>    
@@ -291,12 +291,12 @@
             v-model="filterselectvalue"
            
             :placeholder="$t('businessowner.Search_or_add_a_tag')"
-            :label="$t('businessowner.name')"
+            label="name"
             track-by="subcategory_id"
             :options="scategories"
             :multiple="true"
          
-          ></multi-select>
+          ></multi-select> 
         </div>
         <label class="typo__label">{{ $t('businessowner.Filters') }} </label>
         <div>

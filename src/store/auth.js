@@ -287,7 +287,7 @@ export default {
     logout({ commit }) {
 
    
-     //commit('clearUserData');
+     commit('clearUserData');
   
     },
 

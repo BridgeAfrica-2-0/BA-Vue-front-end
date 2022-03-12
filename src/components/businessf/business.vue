@@ -205,7 +205,7 @@ export default {
       currentTab: 0,
       tabIndex: null,
       tabs: ["#post", "#about", "#media", "#market", "#community"],
-      isGuestUser: isGuestUser,
+      isGuestUser: isGuestUser(),
     };
   },
 

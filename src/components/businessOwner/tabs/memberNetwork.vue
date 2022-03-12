@@ -8,7 +8,7 @@
              <template slot="title">
             {{ $t('businessowner.People') }}
             <span class="spa-color">
-              {{ nFormatter( total.total_user_follower) }}
+              {{ nFormatter( total.total_people) }}
             </span>
           </template>
           
@@ -19,7 +19,7 @@
              <template slot="title">
             {{ $t('businessowner.Businesses') }}
             <span class="spa-color">
-              {{ nFormatter( total.total_business_follower) }}
+              {{ nFormatter( total.total_business) }}
             </span>
           </template>
           
@@ -29,7 +29,7 @@
              <template slot="title">
             {{$t('businessowner.Network') }}
             <span class="spa-color">
-              {{ nFormatter( total.total_network_follower) }}
+              {{ nFormatter( total.total_network) }}
             </span>
           </template>
           

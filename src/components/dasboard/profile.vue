@@ -45,14 +45,14 @@
             <router-link to="/messaging">
               {{ $t("dashboard.Messages") }}</router-link
             >
-            <span class="badge rounded-pill bg-primary float-right mt-1">
+            <span class="badge rounded-pill bg-primary white float-right mt-1">
               {{ profile.message }}
             </span>
           </p>
           <p class="mb-1">
             <b-icon-bell-fill class="text-primary"></b-icon-bell-fill>
             {{ $t("dashboard.Notifications") }}
-            <span class="badge rounded-pill bg-primary float-right mt-1">
+            <span class="badge rounded-pill bg-primary white float-right mt-1">
               {{ profile.notification }}
             </span>
           </p>

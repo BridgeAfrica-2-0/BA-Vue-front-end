@@ -127,6 +127,7 @@
 
 <script>
 import moment from "moment";
+import { isGuestUser } from '@/helpers';
 import axios from "axios";
 
 export default {
@@ -144,7 +145,12 @@ export default {
 
         type: "loop",
         perMove: 1,
+   
+  
+        
       },
+
+       isGuestUser: isGuestUser
     };
   },
 
@@ -383,7 +389,7 @@ export default {
     font-size: 10px;
 
     height: 28px;
-    width: 85px;
+    width: 97px;
   }
 
   .r-image {

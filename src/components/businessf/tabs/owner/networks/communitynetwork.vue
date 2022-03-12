@@ -209,7 +209,7 @@ export default {
     padding-top: 6px;
     font-size: 10px;
     height: 28px;
-    width: 85px;
+    width: 97px;
   }
   .r-image {
     border-radius: 8px;
@@ -247,8 +247,8 @@ export default {
   .btn {
     padding-top: 6px;
     height: 38px;
-    width: 123px;
-    font-size: 14px;
+    width: 125px;
+    font-size: 13px;
   }
   .r-image {
     border-radius: 8px;

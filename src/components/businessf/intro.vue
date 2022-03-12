@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div> 
     <b-card title="" header-tag="header" footer-tag="footer">
       <h6 class="mb-2">
         <b>{{ $t("businessf.Intro") }}</b>
@@ -97,7 +97,7 @@ export default {
       mapStyle: "mapbox://styles/mapbox/outdoors-v11",
       coordinates: [11.504929555178624, 3.8465173382452815], // Lng,Lat
       zoom: 11,
-      isGuestUser: isGuestUser,
+      isGuestUser: isGuestUser(),
     };
   },
 

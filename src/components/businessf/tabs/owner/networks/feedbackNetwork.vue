@@ -60,7 +60,7 @@
                   <b-col cols="2" md="1" class="float-right">
                     <span 
                       @click="deleteFeedback(feedback.id)"
-                    > <b-link><b-icon icon="trash-fill" aria-hidden="true"></b-icon></b-link>
+                    > <b-link><b-icon icon="trash-fill" variant="primary" aria-hidden="true"></b-icon></b-link>
                     </span>
                   </b-col>
                 </b-row>

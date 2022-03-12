@@ -521,7 +521,8 @@ export default {
 
   .btn {
     padding-top: 6px;
-
+    
+    font-size: 13px;
     height: 38px;
     width: 123px;
   }

@@ -238,9 +238,9 @@ export default {
 }
 @media only screen and (min-width: 1200px) {
   .btn {
-    width: 123px;
+    width: 125px;
     height: 38px;
-    font-size: 14px;
+    font-size: 13px;
   }
   .center {
     text-align: right;
@@ -341,9 +341,9 @@ export default {
     margin-left: -5px;
   }
   .btn {
-    width: 123px;
+    width: 125px;
     height: 38px;
-    font-size: 14px;
+    font-size: 13px;
   }
   .center {
     text-align: right;
@@ -376,7 +376,7 @@ export default {
     white-space: nowrap;
   }
   .btn {
-    width: 85px;
+    width: 97px;
     height: 28px;
     font-size: 10px;
   }

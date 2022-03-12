@@ -127,6 +127,20 @@ export default {
   },
 
   methods: {
+
+
+     businessCommunityTotal() {
+      this.$store
+        .dispatch("businessOwner/businessCommunityTotal", this.biz_id)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+
     async handleJoin(user) {
       document.getElementById("joinbtn" + user.id).disabled = true;
       const uri = user.is_member === 0 ? `/add-member` : `/remove-member`;
@@ -142,7 +156,7 @@ export default {
           console.log(response);
           user.is_member = nextFollowState;
           document.getElementById("joinbtn" + user.id).disabled = false;
-
+          this.businessCommunityTotal();
            this.flashMessage.show({
             status: "success",
             message: response.data.message,

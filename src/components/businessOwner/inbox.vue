@@ -446,7 +446,7 @@
                   </b-col>
                   <b-col class="col-2" @click="info = true">
                     <b-avatar
-                      variant="light"
+                      variant="primary"
                       :square= "type == 'user' ? false : true"
                       :src="chatListImage(chatSelected)"
                       size="50"
@@ -524,7 +524,7 @@
                   ></b-spinner>
                 </div>
                 <div v-else v-for="chat in chats" :key="chat.id">
-                  <!-- {{ chat }}<br /> -->
+                 
                   <div
                     v-if="
                       currentBizId != chat.sender_business_id &&
@@ -1009,7 +1009,7 @@
                                 </tr>
                               </div>
                               <hr />
-                              <h5>{{ $t("general.Members") }}</h5>
+                              <!-- <h5>{{ $t("general.Members") }}</h5>
                               <div v-if="allMembers">
                                 <tr
                                   v-for="(biz, index) in allMembers"
@@ -1041,7 +1041,7 @@
                                     </b-form-group>
                                   </td>
                                 </tr>
-                              </div>
+                              </div> -->
                               <hr />
                             </b-tab>
                             <b-tab
@@ -1286,7 +1286,10 @@
                                   </td>
                                 </tr>
                               </div>
-                              <h2 v-else>{{ $t("general.No_Editor") }}</h2>
+                              <h2 v-else>
+                                 {{bizs}}
+                                {{ $t("general.No_Editor") }}
+                              </h2>
 
                               <!-- End Chats -->
                             </b-tab>
@@ -1547,7 +1550,7 @@
                               })
                             "
                           >
-                            <!-- <small class="small">{{ chat }}</small> -->
+                            
 
                             <b-col class="col-8">
                               <span style="display: inline-flex">
@@ -1729,7 +1732,7 @@
                             })
                           "
                         >
-                          <!-- {{ chat }} -->
+                         
                           <b-col class="col-8">
                             <span style="display: inline-flex">
                               <b-avatar
@@ -1859,7 +1862,7 @@
                 <b-row class="desk" v-if="chatSelected.active">
                   <b-col class="col-2" @click="info = true">
                     <b-avatar
-                      variant="light"
+                      variant="primary"
                       :square= "type == 'user' ? false : true"
                       :src="chatListImage(chatSelected)"
                       size="50"
@@ -1929,7 +1932,7 @@
                   ></b-spinner>
                 </div>
                 <div v-else v-for="chat in chats" :key="chat.id">
-                  <!-- {{ chat }}<br /> -->
+                  
                   <div
                     v-if="
                       currentBizId != chat.sender_business_id &&
@@ -2940,18 +2943,23 @@ export default {
     userInfo() {
       return this.$store.getters["businessChat/getUserInfo"];
     },
+
     bizs() {
       return this.$store.getters["businessChat/getBizs"];
     },
+
     allBizs() {
       return this.$store.getters["userChat/getBizs"];
     },
+
     users() {
       return this.$store.getters["userChat/getUsers"];
     },
+
     nets() {
       return this.$store.getters["userChat/getNets"];
     },
+
     chatList() {
       return this.$store.getters["businessChat/getChatList"];
     },
@@ -2960,9 +2968,11 @@ export default {
       // return this.$store.getters['userChat/getUser'];
       return this.$store.getters["auth/profilConnected"];
     },
+
     chats() {
       return this.$store.getters["businessChat/getChats"];
     },
+
     newChatLoader() {
       return this.$store.getters["userChat/getLoader"];
     },
@@ -2970,6 +2980,7 @@ export default {
       return this.$store.getters["businessChat/getLoader"];
     },
     receiver() {
+      
       return this.chats[0] ? this.chats[0].receiver : "";
     },
     resultQuery() {

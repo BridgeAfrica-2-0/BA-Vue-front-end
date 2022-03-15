@@ -496,21 +496,24 @@ export default {
         },
         async GET_NETWORK_MEMBERS({ commit, state }) {
             commit("setBizs", []);
-            state.members = []
+            commit("setLoader", true);
+            let members = []
 
             await axios.post(`network/${state.currentBizId}/members/list`)
                 .then((res) => {
-                    commit("setLoader", false);
-                    let members = res.data.data
+                    
+                    let render = res.data.data.users
+                    
 
-                    if (members.length > 0) {
-                        members.map((elm) => {
-                            state.members.push({ accountType: "member", ...elm, id: elm.user_id })
+                    if (render.length > 0) {
+                        render.map((elm) => {
+                            members.push({ accountType: "member", ...elm, id: elm.user_id })
                         })
 
                     }
-                    console.log("member:", state.members);
-                    commit("setBizs", state.members);
+                    
+                    commit("setBizs", members);
+                    commit("setLoader", false);
                 })
                 .catch((err) => {
                     commit("setLoader", false);

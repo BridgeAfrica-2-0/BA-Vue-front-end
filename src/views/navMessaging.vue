@@ -637,13 +637,14 @@
                   ></b-icon>
                 </b-col>
                 <b-col>
+
                   <b-form-input
                     id="textarea"
                     v-model="newSearchQuery"
                     class="input-background"
                     style="width: 100%"
                     :placeholder="`Type the name of the ${type}`"
-                    @keydown="onPressSearchNewChat"
+                    @input="onPressSearchNewChat"
                   ></b-form-input>
                   <br />
                 </b-col>
@@ -2017,7 +2018,7 @@ export default {
     },
     getCreatedAt(data) {
       if (moment(data).isBefore(moment())) {
-        return moment(data).format("lll");
+        return moment(data).format("L");
       } else {
         // return moment(data).format('LT');
         return moment(data).fromNow();

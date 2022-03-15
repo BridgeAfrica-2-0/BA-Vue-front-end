@@ -446,7 +446,8 @@
                   </b-col>
                   <b-col class="col-2" @click="info = true">
                     <b-avatar
-                      variant="primary"
+                      variant="light"
+                      :square= "type == 'user' ? false : true"
                       :src="chatListImage(chatSelected)"
                       size="50"
                     ></b-avatar>
@@ -1858,7 +1859,8 @@
                 <b-row class="desk" v-if="chatSelected.active">
                   <b-col class="col-2" @click="info = true">
                     <b-avatar
-                      variant="primary"
+                      variant="light"
+                      :square= "type == 'user' ? false : true"
                       :src="chatListImage(chatSelected)"
                       size="50"
                     ></b-avatar>

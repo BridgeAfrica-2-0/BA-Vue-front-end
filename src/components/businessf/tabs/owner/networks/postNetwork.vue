@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div class="p-post">   
+
     <!-- DOM to Create Post By A UserOwner-->
     <b-card class="px-md-3 mb-3 mt-2">
       <b-row class="mt-2">
@@ -91,7 +92,8 @@
           </b-row>
         </b-col>
       </b-row>
-      <div v-if="postStatus != 'member'" class="pending-post-view pt-2 mt-3">
+
+      <div v-if="postStatus != 'member' && pendingPost.data>0 " class="pending-post-view pt-2 mt-3">
         <p class="text-center">
 <!-- {{pendingPost.data}} -->
           {{$t("network.Your")}}  {{$t("network.Posts_are_pending_for_approval")}}.&nbsp;&nbsp;&nbsp;&nbsp;
@@ -102,6 +104,8 @@
           >
         </p>
       </div>
+
+
     </b-card>
 
     <!-- User Posts Listing Section-->
@@ -425,6 +429,7 @@
       :businessLogo="item.profile_picture"
       :editPost="() => editPost(item)"
       :deletePost="() => deletePost(item)"
+   
     />
 
     <infinite-loading
@@ -441,6 +446,8 @@ import { AllPostFeatureMixin } from "@/mixins";
 import { mapGetters, mapMutations } from "vuex";
 
 import Post from "@/components/businessOwner/ownerPostComponent";
+
+
 
 export default {
   name: "postNetwork",
@@ -465,7 +472,7 @@ export default {
       edit_id: null,
       comments: [],
       fullPage: false,
-
+      pendingPost:[],
       createPost: {
         // profile_picture: this.$store.getters.getProfilePicture,
         postNetworkUpdate: "",
@@ -481,6 +488,7 @@ export default {
     ...mapGetters({
       profile: "auth/profilConnected",
       owner_post: "networkProfile/getOwnerPost",
+      pending_post:"networkSetting/allPendingPost"
     }),
 
     business_logo() {
@@ -495,6 +503,7 @@ export default {
   created() {
     this.getAuth();
     this.url = this.$route.params.id;
+    this.AllPendingPost();
   },
 
   methods: {
@@ -511,7 +520,7 @@ export default {
     },
 
     AllPendingPost() {
-      console.log("AllPendingPost");
+     
       this.axios
         .get("network/" + this.url + "/post/count-pending-posts")
         .then(({ data }) => {
@@ -817,6 +826,21 @@ export default {
     },
 
     async submitPost() {
+
+      let url = "network/post/create/" + this.url ; 
+
+      if(this.postStatus== "member"){    
+           
+           url = "network/member-post/create/" + this.url ;
+      }   
+
+
+if(this.postStatus== "editors"){    
+           
+           url = "network/editor-post/create/" + this.url ;
+      }   
+
+
       this.loading = true;
       this.isUploading = true;
       this.fileImageArr = this.createPost.movies;
@@ -835,7 +859,7 @@ export default {
   
       formData2.append("content", this.createPost.postNetworkUpdate);
       await this.axios
-        .post("network/post/create/" + this.url, formData2, {
+        .post( url, formData2, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
@@ -954,7 +978,33 @@ export default {
 .color-site {
   color: #e75c18;
 }
+
+  @media (min-width: 1200px ) {  
+      
+       .p-post{
+
+    padding-right:40px;
+    padding-left:40px;
+  }
+
+  }
+
+
+    @media (min-width: 1300px ) {  
+      
+       .p-post{
+
+    padding-right:50px;
+    padding-left:50px;
+  }
+
+  }
+
+
 @media (min-width: 762px) {
+
+ 
+
   .avat {
     width: 64px;
     height: 64px;

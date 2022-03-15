@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="p-post">
     
 
     <div v-if="islogin"> 
@@ -443,6 +443,34 @@ export default {
 </script>
 
 <style scoped>
+
+
+  @media (min-width: 1200px ) {  
+      
+       .p-post{
+
+    padding-right:40px;
+    padding-left:40px;
+  }
+
+  }
+
+
+
+ @media (min-width: 1300px ) {  
+      
+       .p-post{
+
+    padding-right:40px;
+    padding-left:40px;
+  }
+
+  }
+
+  
+
+
+
 .custom-block-class {
   position: absolute;
   z-index: 1;

@@ -9,9 +9,15 @@
         <b-col md="4" xl="3" lg="3" cols="5" sm="3">
           <div class="center-img">
             <splide :options="options" class="r-image">
-              <splide-slide cl>
+              <splide-slide cl> 
                 <img :src="value.logo_path" class="r-image" />
               </splide-slide>
+
+              
+                    <splide-slide  v-for="cover in value.covers" :key="cover" cl>
+                      <img :src="cover" class="r-image" />   
+                    </splide-slide>
+                    
             </splide>
           </div>
         </b-col>

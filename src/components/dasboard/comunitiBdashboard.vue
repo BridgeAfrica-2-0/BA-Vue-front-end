@@ -1,5 +1,5 @@
 <template>
-  <div class="lalla">
+  <div class="lalla lalala">
     <b-card
       class="border-0 p-0 m-0"
       style="
@@ -18,7 +18,7 @@
             <template slot="title">
               {{ $t('dashboard.People') }}
               <span class="spa-color">
-               {{ nFormatter(total.total_user_follower) }}
+               {{ nFormatter(total.total_people) }}
               </span>
             </template>
 
@@ -74,7 +74,7 @@
             <template slot="title">
               {{ $t('dashboard.Businesses') }}
               <span class="spa-color">
-               {{ nFormatter(total.total_business_follower ) }}
+               {{ nFormatter(total.total_business ) }}
               </span>
             </template>
 
@@ -127,7 +127,7 @@
             <template slot="title">
              {{ $t('dashboard.Network') }}
               <span class="spa-color">
-               {{ nFormatter(total.total_network_follower ) }}
+               {{ nFormatter(total.total_network ) }}
               </span>
             </template>
 

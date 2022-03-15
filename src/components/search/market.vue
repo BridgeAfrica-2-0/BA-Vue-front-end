@@ -163,7 +163,10 @@ export default {
     this.islogin = this.$store.getters["auth/isLogged"];
 
     console.log(this.islogin);
+    if(this.islogin){  
     this.getProducts();
+
+     }
   },
 
   methods: {
@@ -196,7 +199,7 @@ export default {
       this.currentPage = value;
 
       this.$store
-        .dispatch("marketSearch/nextPage", this.currentPage)
+        .dispatch("marketSearch/nextPage", {url:this.products.next, page:this.currentPage } )
         .then((res) => {
           console.log("products list: ");
           console.log(this.products);

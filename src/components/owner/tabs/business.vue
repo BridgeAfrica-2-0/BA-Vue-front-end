@@ -10,6 +10,12 @@
                 <splide-slide>
                   <img :src="item.picture" class="r-image" />
                 </splide-slide>
+
+                
+                    <splide-slide  v-for="cover in item.covers" :key="cover" cl>
+                      <img :src="cover" class="r-image" />   
+                    </splide-slide>
+                    
               </splide>
             </div>
             <div class="flx100">
@@ -83,7 +89,7 @@
                       item.is_follow !== 0 ? 'fa-user-minus' : 'fa-user-plus'
                     "
                   ></i>
-                  <span class="btn-com">Community</span>
+                  <span class="btn-com">{{$t("profileowner.Community")}}</span>
                 </b-button>
               </b-col>
 
@@ -114,7 +120,9 @@
                   @click="gotobusiness(item.id)"
                 >
                   <i class="fas fa-map-marked-alt fa-lg btn-icon"></i>
-                  <span class="btn-text">Direction</span>
+                  <span class="btn-text">{{
+                        $t("dashboard.Direction")
+                      }}</span>
                 </b-button>
               </b-col>
             </b-row>
@@ -377,7 +385,7 @@ export default {
     font-size: 10px;
 
     height: 28px;
-    width: 85px;
+    width: 97px;
   }
 
   .r-image {
@@ -428,7 +436,7 @@ export default {
   .btn {
     padding-top: 6px;
     height: 38px;
-    width: 110px;
+    width: 115px;
     font-size: 12px;
     margin-left: -10px;
 

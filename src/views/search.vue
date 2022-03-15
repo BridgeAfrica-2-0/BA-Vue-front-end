@@ -7,7 +7,7 @@
           @click.native="strategY['all']"
           v-if="selectedId == 0"
         />
-
+        
         <Button
           media="desktop"
           @click.native="strategY['business']"
@@ -65,9 +65,15 @@
       </template>
     </Nav>
 
+   
+
     <SubNav
+      @onChangeCategoryName="(val) => categoryName = val"
       @category="getCategory"
       @parentcategory="getparentCategory"
+      @update:keyword="(val) => searchParams = Object.assign(searchParams,val)"
+
+      @activate:matching:category="(val) => activateMatching=val"
       style="margin-top: -25px"
     />
 
@@ -96,7 +102,15 @@
         >
           <b-link
             class="cat"
-            @click="getCategory({ cat_id: category.category.id })"
+            @click="
+              () => {
+                categoryName = category.category.name
+                getCategory({ cat_id: category.category.id })
+                searchParams = Object.assign(searchParams, {
+                  keyword: category.category.name,
+                  cat_id: category.category.id,
+                  })
+              }"
           >
             <img
               class="img-fluid picture logo-img"
@@ -157,18 +171,19 @@
         <b-modal ref="myfilters" id="myModall" hide-footer title=" ">
           <div class="d-block d- d-sm-block d-md-block d-lg-block d-xl-none">   
 
-           <!-- lllllllllll -->
-
            <div class="ml-3">
             <Filters
               v-bind:filterType="selectedId"
               v-bind:Selectedcategory="Selectedcategory"
               v-bind:Selectedparentcategory="Selectedparentcategory"
+              v-bind:categoryNameSelected="categoryName"
+              @onFinByCategory="getCategory"
+              :activateMatching="activateMatching"
             />
 
            </div>
 
-<!--            
+          <!--            
             <div v-if="!isFilter">
             
               <div v-if="categories.length > 0">
@@ -301,6 +316,9 @@
               v-bind:filterType="selectedId"
               v-bind:Selectedcategory="Selectedcategory"
               v-bind:Selectedparentcategory="Selectedparentcategory"
+              v-bind:categoryNameSelected="categoryName"
+              @onFinByCategory="getCategory"
+              :activateMatching="activateMatching"
             />
           </div>
         </b-col>
@@ -620,7 +638,8 @@ export default {
     ...mapGetters({
       prodLoaderr: "business/getloadingState",
       businessess: "business/getBusiness",
-      profileConnected: "auth/profilConnected"
+      profileConnected: "auth/profilConnected",
+      user:"auth/user"
     }),
 
     businesses() {
@@ -655,9 +674,22 @@ export default {
   },
 
   created() {
+ this.islogin=this.$store.getters["auth/isLogged"];
+
     if (this.$route.query.keyword) {
       this.searchParams.keyword = this.$route.query.keyword;
     }
+     
+     if(this.islogin) {   
+      this.searchParams.location = this.$route.query.location ? this.$route.query.location:this.$store.getters["auth/user"].user.address;
+
+      this.searchParams.location_placeholder=this.searchParams.location ? this.searchParams.location : this.$t("home.Location");
+    
+     }else{
+     
+      this.searchParams.location_placeholder=this.$t("home.Location");
+
+     }
 
     this.onProcessQuery();
     this.getLocation();
@@ -676,14 +708,16 @@ export default {
 
   data() {
     return {
+      activateMatching:null,
       catChose: "",
       subCatChose: "",
       filterChose: "",
-
-      islogin: true,
+      categoryName:"",
+      islogin: false,
       searchParams: {
         keyword: "",
         cat_id: "",
+        location:"",
         placeholder: "Find In All",
       },
       strategY: null,
@@ -1634,24 +1668,31 @@ export default {
       immediate: true,
       deep: true,
       handler(newValue, oldValue) {
+       
         if(this.selectedId==0){   
-        this.$store.commit("allSearch/setKeyword", newValue.keyword);
+        this.$store.commit("allSearch/setKeyword", newValue.keyword); 
+         this.$store.commit("allSearch/setLocation", newValue.location);
 
         }
 
         else if(this.selectedId==1){
             
             
+         this.$store.commit("business/setLocation", newValue.location);
          this.$store.commit("business/setKeyword", newValue.keyword);
         }else if(this.selectedId==4){
           
-           this.$store.commit("marketSearch/setKeyword", newValue.keyword);
+          this.$store.commit("marketSearch/setKeyword", newValue.keyword);
 
+          this.$store.commit("marketSearch/setLocation", newValue.location);
         }
 
         else if(this.selectedId==3){
           
            this.$store.commit("networkSearch/setKeyword", newValue.keyword);
+
+           
+           this.$store.commit("networkSearch/setLocation", newValue.location);
 
         }
         
@@ -1710,40 +1751,55 @@ export default {
     // [ED]----------
 
     onOverMore() {
-      this.$refs.More.visible = true;
+      this.$refs.more.visible = true;
       this.$emit("parentcategory", "More");
     },
 
     onLeaveMore() {
-      this.$refs.More.visible = false;
+      this.$refs.more.visible = false;
     },
 
     getKeyword(data) {
 
-      
+      this.$store.commit("marketSearch/setSubFilters", []);
+      this.$store.commit("marketSearch/setSubCat", []);
+
       var keyword = this.searchParams.keyword;
+      var location = this.searchParams.location;
 
       let elm = data ? data : keyword ? { keyword: keyword } : { keyword: "" };
 
        this.$store.commit("allSearch/setKeyword", keyword);
+       this.$store.commit("allSearch/setLOcation", keyword);
      
-
+       if (this.searchParams.keyword)
+        this.activateMatching = {name:this.searchParams.keyword}
+      
       this.$store
-        .dispatch("allSearch/SEARCH", {keyword:keyword})
+        .dispatch("allSearch/SEARCH", {keyword:keyword, location:location})
         .then((res) => {
           // console.log("categories loaded!");
         })
         .catch((err) => {
           console.log("Error erro!");
         });
+
+        
     },
 
     async onFindBusiness() {
-      this.$store.commit("business/setLoading", true);
 
-      if (this.searchParams.keyword.trim()) console.log("init search");
-      await this.findBusiness({ keyword: this.searchParams.keyword });
-      //  await  this.findBusiness({ keyword: this.searchParams.keyword, location: this.searchParams.location });
+      this.$store.commit("marketSearch/setSubFilters", []);
+      this.$store.commit("marketSearch/setSubCat", []);
+
+      this.$store.commit("business/setLoading", true);
+      
+      if (this.searchParams.keyword)
+        this.activateMatching = {name:this.searchParams.keyword}
+
+      if (this.searchParams.keyword.trim()) 
+      await this.findBusiness({ keyword: this.searchParams.keyword, location:this.searchParams.location });
+     
       this.$store.commit("business/setLoading", false);
     },
 
@@ -1772,8 +1828,9 @@ export default {
 
     searchProducts(data) {
     
-   
-     console.log(data);
+      this.$store.commit("marketSearch/setSubFilters", []);
+      this.$store.commit("marketSearch/setSubCat", []);
+      
       this.$store
         .dispatch("marketSearch/searchProducts", data)
         .then((res) => {
@@ -1785,6 +1842,13 @@ export default {
     },
 
     searchNetworks(data) {
+
+
+      const newParams =  data ? data : {keyword:this.searchParams.keyword}
+      
+      if (this.searchParams.keyword)
+        this.activateMatching = {name:this.searchParams.keyword}
+
       this.$store
         .dispatch("networkSearch/SEARCH", data)
         .then((res) => {
@@ -2101,8 +2165,7 @@ export default {
     },
 
     getCategory(value) {
-      console.log("value:", value);
-
+      
       this.Selectedcategory = value;
 
       if (this.selectedId == 4) {

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div>   today  {{today}}
     <b>{{ $t('profileowner.WorkPlace') }}</b>  
     <hr />
     <b-link class="mt-4 text-decoration-none" v-b-modal.modal-9>
@@ -60,14 +60,14 @@
       @close="cancel"
       @ok="updatesave"
     >
-      <div class="div-design">
+      <!-- <div class="div-design">
        <b-form-select
           class="mb-2"
           size="sm"
           v-model="editData.access"
           :options="options"
         ></b-form-select> 
-      </div>
+      </div> -->
       <b-form-input
         class="mt-2"
         v-model="editData.company_name"
@@ -97,7 +97,7 @@
       >
         {{ $t('profileowner.Currently_Working') }}
       </b-form-checkbox>
-      <label>{{ $t('profileowner.Start_Date') }}</label>
+      <!-- <label>{{ $t('profileowner.Start_Date') }}</label>
       <b-form-datepicker
         id="example-datepicker"
         v-model="editData.startDate"
@@ -111,7 +111,31 @@
         v-model="editData.endDate"
         class="mb-2"
         :placeholder="$t('profileowner.End_Date')"
-      ></b-form-datepicker>
+      ></b-form-datepicker> -->
+
+
+
+      <div class="form-group">
+      <label  for="startDate">{{ $t('profileowner.Start_Date') }}</label>
+    
+ 
+      
+ <DropdownDatepicker  v-model="editData.startDate" :defaultDate="editData.startDate"   :maxDate="today"    style="width:100%"   dropdownClass="form-control mr-1 w-100" class="d-inline-flex" />
+      </div>
+
+      <div class="form-group">
+
+
+      <label v-if="!editData.currently_working" for="endDate">{{ $t('profileowner.End_Date') }}</label>
+
+          
+ <DropdownDatepicker  v-if="!editData.currently_working"  v-model="editData.endDate" :defaultDate="editData.endDate"   :maxDate="today"    style="width:100%"   dropdownClass="form-control mr-1 w-100" class="d-inline-flex" />
+
+      </div>
+
+
+
+
     </b-modal>
 
     <b-modal
@@ -121,34 +145,50 @@
       @close="cancel"
       @ok="save"
     >
-      <div class="div-design">
+      <!-- <div class="div-design">
         <b-form-select
           class="mb-2"
           size="sm"
           v-model="workPlaceInput.access"
           :options="options"
         ></b-form-select>
-      </div>
+      </div> -->
+      <div class="form-group">
       <b-form-input
         class="mt-2"
         v-model="workPlaceInput.companyName"
         :placeholder="$t('profileowner.Company')"
       ></b-form-input>
+
+      </div>
+
+      <div class="form-group">
       <b-form-input
         class="mt-2"
         v-model="workPlaceInput.position"
         :placeholder="$t('profileowner.Position')"
       ></b-form-input>
+
+      </div>
+
+      <div class="form-group">
       <b-form-input
         class="mt-2"
         v-model="workPlaceInput.cityTown"
         :placeholder="$t('profileowner.City')"
       ></b-form-input>
+      </div>
+
+      <div class="form-group">
       <b-form-input
         class="mt-2"
         v-model="workPlaceInput.jobResponsibilities"
         :placeholder="$t('profileowner.Responsibilities')"
       ></b-form-input>
+
+      </div>
+
+      <div class="form-group">
       <b-form-checkbox
         id="checkbox-1"
         v-model="workPlaceInput.currentlyWorking"
@@ -157,21 +197,38 @@
       >
         {{ $t('profileowner.Currently_Working') }}
       </b-form-checkbox>
+
+      </div>
+
+      <div class="form-group">
       <label for="startDate">{{ $t('profileowner.Start_Date') }}</label>
-      <b-form-datepicker
+      <!-- <b-form-datepicker
         id="startDate"
         v-model="workPlaceInput.startDate"
         class="mb-2"
         :placeholder="$t('profileowner.Start_Date')"
-      ></b-form-datepicker>
+      ></b-form-datepicker> -->
+ 
+      
+ <DropdownDatepicker  v-model="workPlaceInput.startDate" :defaultDate="workPlaceInput.startDate"  :maxDate="today" style="width:100%"   dropdownClass="form-control mr-1 w-100" class="d-inline-flex" />
+      </div>
+
+      <div class="form-group">
+
+
       <label v-if="!workPlaceInput.currentlyWorking" for="endDate">{{ $t('profileowner.End_Date') }}</label>
-      <b-form-datepicker
+
+          
+ <DropdownDatepicker v-if="!workPlaceInput.currentlyWorking" v-model="workPlaceInput.endDate" :defaultDate="workPlaceInput.endDate"   :maxDate="today"  style="width:100%"   dropdownClass="form-control mr-1 w-100" class="d-inline-flex" />
+
+      </div>
+      <!-- <b-form-datepicker
         v-if="!workPlaceInput.currentlyWorking"
         id="endDater"
         v-model="workPlaceInput.endDate"
         class="mb-2"
         :placeholder="$t('profileowner.End_Date')"
-      ></b-form-datepicker>
+      ></b-form-datepicker> -->
     </b-modal>
 
     
@@ -181,11 +238,13 @@
 
 <script>
 import { diffBetweenTwoDate } from '@/helpers'
+import DropdownDatepicker from 'vue-dropdown-datepicker'; 
 export default {
 
   data() {
     return {
       editData:[],
+       today :new Date().toISOString().slice(0, 10),
       options: [
         { value: null, text: this.$t('profileowner.Select') },
         { value: "private", text: this.$t('profileowner.Private') },
@@ -211,6 +270,8 @@ export default {
       index: null,
     }
   },
+
+  components:{DropdownDatepicker},
 
   created() {
     this.educationAndWorks.workPlaces = this.work

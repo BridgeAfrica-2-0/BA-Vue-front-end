@@ -155,6 +155,7 @@ export default {
       addCoverPictureBusiness: "businessOwner/addCoverPicture",
       addCoverPictureProfile: "auth/addCoverPicture",
       
+      
     }),
 
     async onDownloadPic() {
@@ -177,6 +178,7 @@ export default {
     },
 
     async onDeleteImage() {
+      
       let loader = this.$loading.show({
         container: this.$refs[`sHowMedia-${this.im.id}`],
         canCancel: true,
@@ -184,10 +186,21 @@ export default {
         color: "#e75c18",
       });
 
-      this.loading = true;
-      this.loading = await this.deleteImage();
 
-      loader.hide();
+      this.deleteImage()
+      .then(() => {
+        this.loading = false;
+      })
+      .catch((error) => {
+          this.sending = false;
+          this.loading = false;
+          this.flashMessage.show({
+            status: "error",
+            message: "something wrong happen",
+          });
+          return false;
+        })
+      .finally(() => loader.hide())
     },
     //set an image as a cover photo
 

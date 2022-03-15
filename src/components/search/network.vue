@@ -33,7 +33,7 @@
             <br />
             {{ network.purpose }}
             <br />
-            {{ network.member_count }} {{ $t("search.Community_member") }}
+            {{ count(network.community) }}  {{ $t("dashboard.Community") }} 
             <br />
 
             <span class="location">
@@ -173,6 +173,16 @@ export default {
   },
 
   methods: {
+
+      count(number) {
+      if (number >= 1000000) {
+        return number / 1000000 + "M";
+      }
+      if (number >= 1000) {
+        return number / 1000 + "K";
+      } else return number;
+    },
+    
     async handleFollow(user) {
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
@@ -199,6 +209,11 @@ export default {
         .post(uri, data)
         .then((response) => {
           user.is_member = nextFollowState;
+          this.flashMessage.show({
+            status: "success",
+            message: response.data.message,
+            blockClass: "custom-block-class",
+          })
         })
         .catch((err) => console.log(err));
     },
@@ -333,7 +348,7 @@ export default {
     font-size: 10px;
 
     height: 28px;
-    width: 85px;
+    width: 97px;
   }
 
   .r-image {
@@ -385,7 +400,7 @@ export default {
     padding-top: 6px;
 
     height: 38px;
-    width: 123px;
+    width: 127px;
   }
 
   .r-image {

@@ -253,10 +253,15 @@ export default {
 
     //getting pending post, 
     async getPendingPost({ commit }, networkId) {
-      const res = await axios.get(`network/${networkId}/post/pending`);
+      const res = await axios.get(`show/posts/pending/${networkId}`);
 
       commit("setPendingPost", res.data);
     },
+
+
+
+
+
     //load more pending post
 
      loadMore({ commit }, url) {

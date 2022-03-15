@@ -249,7 +249,7 @@
               @input="subcategories"
               :tag-placeholder="$t('businessowner.Add_this_as_new_tag')"
               :placeholder="$t('businessowner.Search_or_add_a_tag')"
-              :label="$t('businessowner.name')"
+              label="name"
               track-by="id"
               :options="BuCategories"
              
@@ -262,7 +262,7 @@
               v-model="filterselectvalue"
            
               :placeholder="$t('businessowner.Search_or_add_a_tag')"
-              :label="$t('businessowner.name')"
+              label="name"
               track-by="subcategory_id"
               :options="scategories"
               :multiple="true"

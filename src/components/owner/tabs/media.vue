@@ -36,7 +36,8 @@
         <Album
           :isEditor="isEditor"
           :type="type"
-          v-else
+          :key="forReload"
+          
           :getAlbums="getAlbums"
           :getImages="getImages"
           :showCoverAlbum="showCoverAlbum"
@@ -49,7 +50,7 @@
 <script>
 import Album from "./album";
 import Images from "./images";
-import { mapGetters } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 import { isGuestUser } from '@/helpers';
 
 import _ from "lodash";
@@ -80,6 +81,15 @@ export default {
   },
 
   watch: {
+      
+    "$store.state.notification.updateAlbum": function(canBeUpload){
+      
+      if (canBeUpload){
+        this.getAlbums()
+        this.forReload = this.forReload ++
+      }
+    },
+
     showCoverAlbum: function(newValue){
       if (newValue){
         this.tabIndex = 1
@@ -107,7 +117,8 @@ export default {
       strategy: null,
       tabIndex: 0,
       addItem: false,
-      isGuestUser: isGuestUser()
+      isGuestUser: isGuestUser(),
+      forReload:0
     };
   },
 
@@ -115,6 +126,7 @@ export default {
     Album,
     Images,
   },
+
 
   computed: {
     ...mapGetters({
@@ -130,6 +142,10 @@ export default {
   },
 
   methods: {
+    ...mapMutations({
+      updateAllAlbums: "notification/UPDATE_ALBUM",
+    }),
+
     all() {
       const wrapper = (data) => {
         const newData = data
@@ -169,7 +185,10 @@ export default {
           .catch((err) => {
             this.hasLoadAlbum = true;
           })
-          .finally(() => console.log("End load album"));
+          .finally(() => {
+            console.log("End load album")
+            this.updateAllAlbums(false)
+          });
         //}
       } catch (error) {
         console.log(error);

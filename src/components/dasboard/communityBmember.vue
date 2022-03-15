@@ -138,6 +138,20 @@ export default {
   },
 
   methods: {
+
+    
+     businessCommunityTotal() {
+      this.$store
+        .dispatch("businessOwner/businessCommunityTotal", this.biz_id)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+
     count(number) {
       if (number >= 1000000) {
         return number / 1000000 + "M";
@@ -163,6 +177,8 @@ export default {
           console.log(data);
           user.is_follow = nextFollowState;
           document.getElementById("followbtn" + user.id).disabled = false;
+
+          this.businessCommunityTotal();
         })
 
         .catch((err) => {
@@ -545,7 +561,7 @@ f-right {
   }
 
   .btn {
-    width: 85px;
+    width: 97px;
     height: 28px;
     font-size: 10px;
   }

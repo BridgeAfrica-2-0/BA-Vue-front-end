@@ -465,12 +465,18 @@
           <div class="col-6">
             <b-form-group
               id="input-group-2"
-              label="Adress :"
+              label="Address :"
               label-for="input-2"
               label-size="sm"
             >
-              <!-- {{ business_about_input.address }} -->
-
+                  <input
+                        type="text"
+                        name="alias"
+                        id="Neighbor"
+                        v-model="business_about_input.address"
+                        placeholder="Neighborhood"
+                        class="form-control text"
+                      />
 
               <div class="" style="height: 250px; overflow:hidden">
                 <AutocompleteLocation
@@ -566,6 +572,27 @@
           ></textarea>
         </div>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         <div class="b-bottom">
           <b-container>
             <b-form-group
@@ -575,7 +602,7 @@
               label-class=" pt-0 "
               class="mb-0"
             >
-              <b-form-group class="mb-0" v-slot="{ ariaDescribedby }">
+              <b-form-group class="mb-0" v-slot="{ ariaDescribedby }">       
                 <b-form-radio-group
                   class="a-text text"
                   :options="['Always Open', 'Open for selected hours']"
@@ -733,11 +760,7 @@ export default {
             num = num + 1;
           }
         });
-        // if (num >= 7) {
-        //   this.open = "Always Open";
-        // } else {
-        //   this.open = "Open for selected hours";
-        // }
+       
         console.log(newValue);
         console.log(oldValue);
       },
@@ -970,57 +993,10 @@ export default {
             }
           );
 
-
-        // for (let key in item) {
-        //     tempo.key = item.key
-        //   }
       });
       console.log("good: ", this.tempo);
     },
 
-    input(index, data) {
-      // switch(index) {
-      //       case 0:
-      //         if(data.opening_time && data.closing_time){
-      //           this.dayOfWorks[0].monday = "monday";
-      //           this.dayOfWorks[0].mon_start =data.opening_time;
-      //           this.dayOfWorks[0].mon_end =data.closing_time;
-      //         }
-      //         break;
-      //       case 1:
-      //        if(data.opening_time && data.closing_time){
-      //        }
-      //         break;
-      //       default:
-      // code block
-      // }
-      // console.log('---input: ', index, '---',data, "data ",this.dayOfWorks)
-      // this.dayOfWorks.map((item) =>{
-      //   if(item.day == "monday"){
-      //       this.dayOfWorks[0].mon_start =data.opening_time;
-      //       this.dayOfWorks[0].mon_end =data.closing_time;
-      //   }else  if(item.day == "tuesday"){
-      //       this.dayOfWorks[1].tues_start =data.opening_time;
-      //       this.dayOfWorks[1].tues_end =data.closing_time;
-      //   } else  if(item.day == "wednesday"){
-      //       this.dayOfWorks[2].wed_start =data.opening_time;
-      //       this.dayOfWorks[2].wed_end =data.closing_time;
-      //   } else  if(item.day == "thursday"){
-      //       this.dayOfWorks[3].thurs_start =data.opening_time;
-      //       this.dayOfWorks[3].thurs_end =data.closing_time;
-      //   } else  if(item.day == "friday"){
-      //       this.dayOfWorks[4].fri_start =data.opening_time;
-      //       this.dayOfWorks[4].fri_end =data.closing_time;
-      //   } else  if(item.day == "saturday"){
-      //       this.dayOfWorks[5].sat_start =data.opening_time;
-      //       this.dayOfWorks[5].sat_end =data.closing_time;
-      //   } else  if(item.day == "sunday"){
-      //       this.dayOfWorks[6].sun_start =data.opening_time;
-      //       this.dayOfWorks[6].sun_end =data.closing_time;
-      //   }
-      // })
-      // console.log("final :", this.dayOfWorks)
-    },
     /**
 
 
@@ -1266,20 +1242,13 @@ export default {
             },
           };
 
-          //   Object.entries(this.tempo).forEach(
-          //   ([key, valeur]) => {
-          //     dat.data[key] = valeur
-          //   }
-          // );
+         
           console.log("test envoi: ", dat);
           this.$store
             .dispatch(
               "businessOwner/updateUserBusinessAbout",
               dat
-              // {
-              //   business_about: this.business_about_input,
-              //   business_id: this.business_id,
-              // }
+              
             )
             .then((response) => {
               console.log(

@@ -241,8 +241,8 @@
 </template>
 
 <script>
-import { mapMutations } from "vuex";
 
+import { mapMutations } from "vuex";
 import { formatNumber, fromNow } from "@/helpers";
 
 import Loader from "@/components/Loader";
@@ -500,8 +500,9 @@ export default {
     },
 
     onCreateComment: async function() {
+      
       if (
-        !(this.comment.trim().length > 2 && !this.createCommentRequestIsActive)
+        !(this.comment.trim().length >= 1 && !this.createCommentRequestIsActive)
       )
         return false;
 

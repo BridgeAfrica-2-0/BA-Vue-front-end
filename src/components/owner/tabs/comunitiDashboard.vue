@@ -1,5 +1,5 @@
 <template>
-  <div class="lalaa">
+  <div class="lalaa lalala">
     <div class=" border mt-2 ">
       <span>
         <h6 class="title m-3">

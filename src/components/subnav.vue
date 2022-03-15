@@ -8,8 +8,8 @@
             v-for="(category, index) in categories.slice(0, 6)"
             :key="index"
             
-            
           >
+          
             <b-nav-item-dropdown
               :id="'dropdown-' + index"
             >
@@ -17,6 +17,7 @@
                 <span @click="() => {
                   showSubCat(category.category, category.sub_cat)
                   bcategory({ cat_id: category.category.id })
+                  $emit('activate:matching:category', null)
                 }">
                   {{ category.category.name }}
                 </span>
@@ -30,7 +31,17 @@
                   <b-dropdown-item
                     v-for="(subCat, subIndex) in category.sub_cat.slice(0, 6)"
                     :key="subIndex"
-                    @click="bcategory({ cat_id: subCat.cat_id, id: subCat.id })"
+                    @click="() => {
+                      $store.commit('marketSearch/setSubCat', [])
+                      $emit('update:keyword', {
+                        keyword: subCat.name,
+                        cat_id: subCat.cat_id
+                      });
+                      $emit('activate:matching:category', {name:subCat.name})
+                      bcategory({ cat_id: subCat.cat_id, id: subCat.id })
+                      
+                      
+                    }"
                     href="#"
                     class="ml-2"
                   >
@@ -78,7 +89,12 @@
                 >
                   <b-dropdown-item
                     class="ml-1"
-                    @click="bcategory({ cat_id: category.category.id })"
+                    @click="
+                    () => {
+                      $emit('onChangeCategoryName', category.category.name);
+                      bcategory({ cat_id: category.category.id })
+                      $emit('activate:matching:category', null)
+                    }"
                   >
                     {{ category.category.name }}
                   </b-dropdown-item>
@@ -98,7 +114,8 @@
 export default {
   name: "subnav",
   data() {
-    return {};
+    return {
+    };
   },
   computed: {
     categories() {
@@ -109,21 +126,35 @@ export default {
     },
   },
 
-  watch:{
-    "$store.state.marketSearch.categories":function(categories){
-      this.showSubCat(categories[0].category, categories[0].sub_cat, false)
+  /* watch:{
+
+    "$store.state.marketSearch.categories": function(categories){
+      if (categories.length)
+        this.showSubCat(categories[0].category, categories[0].sub_cat, false)
     }
-  },
+  }, */
+
 
   created() {
     this.getCategories();
   },
+
   methods: {
     
-    bcategory(category) {
-      console.log("HOVER...", category);
+    bcategory(category, value = null) {
+
       this.$emit("category", category);
-      
+
+    
+      if (value){
+
+        this.$emit("onChangeCategoryName", value.name);
+        this.$emit('update:keyword', {
+          keyword: value.name,
+          cat_id: value.id
+        })
+      }
+        
     },
 
     getCategories() {
@@ -165,27 +196,37 @@ export default {
         });
     },
 
+
     showSubCat(category, subCat, show=true) {
 
+      
+      this.$store.commit("marketSearch/setSubFilters", []);
       this.$refs[category.id][0].visible = true;
 
       if (show)
         this.$emit("parentcategory", category.id);
 
-      this.$emit("on:category:name", category.name )
+      this.$emit("onChangeCategoryName", category.name);
       // this.subCategories.push(subCat);
       // this.searchProduct({ catId: catId, cat_id: catId });
       this.$store.commit("marketSearch/setSubCat", subCat);
       if (!subCat.length) this.hideSubCat(category.id);
       // console.log("Subcat:", this.subCategories);
+
+      this.$emit('update:keyword', {
+        keyword: category.name,
+        cat_id: category.id
+      })
+
     },
 
     hideSubCat(catId) {
-      console.log("hide me ---------------------------------------")
+
       this.$refs[catId][0].visible = false;
       this.subCategories = [];
+
     },
-    // ------------------------------------
+
     onOverMore() {
       this.$refs.More.visible = true;
       this.$emit("parentcategory", "More");

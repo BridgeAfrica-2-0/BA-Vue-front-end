@@ -192,6 +192,10 @@ export default {
                 return state.notifications;
             }
         },
+
+        getAllNotifications(state) {
+            return state.notifications;
+        },
         // sending checked value
         sendChecked(state) {
             return state.checked;
@@ -470,9 +474,10 @@ export default {
 
 
         async updateUserBusinessAbout({ commit }, payload) {
+
+            
             let response_ = null;
-            const id_Business = 47;
-            console.log("-------testt----", payload)
+          
             await axios.post("business/update" +
                     "/" +
                     payload.business_id, payload.data
@@ -481,7 +486,6 @@ export default {
                 .then(response => {
 
 
-                    console.log('update user Business About response (1) +++++++', response);
                     if (response.status !== 200 && response.status !== 201) {
                         throw 'Error From The Server';
                     }
@@ -765,42 +769,17 @@ export default {
         },
 
         // Sending a read request
-        async readNotifiactions({ dispatch, commit }, payload) {
-            let items = {
-                ids: [],
-            };
-
-            payload.forEach(element => {
-                let objId = {
-                    id: null,
-                };
-                objId.id = element.id;
-                items.ids.push(objId);
-            });
-            await axios
-                .post('notification/mark-read', items)
-                .then(() => {
-                    dispatch('getNotifications');
-                })
+        readNotifiactions({ dispatch, commit }, payload) {
+            
+            return axios
+                .post('notification/mark-read', payload)
                 .catch(err => [console.log(err)]);
         },
 
         // Delete All Notifications
-        async deleteNotifications({ dispatch, commit }, payload) {
-            let items = {
-                ids: [],
-            };
-
-            payload.forEach(element => {
-                let objId = {
-                    id: null,
-                };
-                objId.id = element;
-                items.ids.push(objId);
-            });
-            await axios.post('notification/deleteAll', items).then(() => {
-                dispatch('getNotifications');
-            });
+        deleteNotifications({ dispatch, commit }, payload) {
+            
+            return axios.post('notification/deleteAll', payload)
         },
         // delete a single notification
         delete({ dispatch }, id) {

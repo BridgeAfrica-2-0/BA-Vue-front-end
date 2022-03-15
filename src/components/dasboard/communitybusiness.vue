@@ -8,6 +8,8 @@
         v-for="item in businesses"
         :key="item.id"
       >
+
+   
         <div class="people-style shadow h-100">
           <b-row>
             <b-col md="8" xl="8" lg="12" cols="12" sm="8">
@@ -17,6 +19,14 @@
                     <splide-slide cl>
                       <img :src="item.picture" class="r-image" />   
                     </splide-slide>
+
+
+
+                    <splide-slide  v-for="cover in item.covers" :key="cover" cl>
+                      <img :src="cover" class="r-image" />   
+                    </splide-slide>
+
+
                   </splide>
                 </div>
                 <div class="pl-3 flx100">
@@ -151,7 +161,7 @@ export default {
 
   data() {
     return {
-      page: 2,
+      page: 1,
       businesses:[],
       disable: false,
       options: {
@@ -371,7 +381,7 @@ export default {
     font-size: 10px;
 
     height: 28px;
-    width: 85px;
+    width: 97px;
   }
 
   .r-image {

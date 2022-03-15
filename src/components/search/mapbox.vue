@@ -110,19 +110,15 @@ export default {
       accessToken: process.env.VUE_APP_MAPBOX_TOKEN,
       mapStyle: "mapbox://styles/mapbox/outdoors-v11",
       center: [11.504929555178624, 3.8465173382452815], // Lng,Lat
-      zoom: 5,
+      zoom: 12,
     };
   },
   methods: {
     filtre(id){
-      console.log('---------',id, '-le-', this.FilterProduct);
 
      this.filterProduct= this.products.filter(elem =>{
         return elem.business_id == id
       })
-      console.log('--original',this.products) ; 
-      console.log('--marker',this.productBlock)
-      console.log('--popup',this.FilterProduct);
     },
     gotoBusiness(id) {
       this.$router.push(`/business/${id}`);
@@ -154,15 +150,8 @@ export default {
   mounted(){
     let products = [{nom:"lele", id:1},{nom:"lele1", id:1}, {nom:"lele", id:2}];
     let unique = [];
-    
-    
     const subject = [...new Set(products)];
-    console.log(this.products)
-    console.log('filtré ', this.productBlock)
-    console.log('mes data business', this.businesses, "data product: ",this.products);
-
     let rand = Math.floor(Math.random() * 10000) /100000000 ; 
-    console.log("random : ", rand)
 
   }
 };

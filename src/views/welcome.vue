@@ -88,7 +88,7 @@
           ></b-form-radio-group>
         </b-form-group>
         <div class="text-center">
-          <b-button variant="outline-primary" @click="choseModal">
+          <b-button variant="outline-primary" class="first-step-btn" @click="choseModal">
             {{ $t("welcome.Continue") }} <b-icon icon="arrow-right"> </b-icon>
           </b-button>
         </div>
@@ -179,8 +179,11 @@
                       <label for="username" class="username">
                         {{ $t("welcome.DOB") }} :</label
                       ><br />
+   
 
-                      <b-form-datepicker
+                      <DropdownDatepicker   minAge="18"   v-model="dob" style="width:100%"   dropdownClass="form-control mr-1 w-100" class="d-inline-flex" />
+
+                      <!-- <b-form-datepicker
                         name="dob"
                         :max="min"
                         id="dob"
@@ -188,7 +191,7 @@
                         class=" text"
                         :locale="this.$i18n.locale"
                         :placeholder="$t('welcome.DOB')"
-                      ></b-form-datepicker>
+                      ></b-form-datepicker> -->
                     </div>
 
                     <div class="form-group">
@@ -394,14 +397,18 @@
                         {{ $t("welcome.DOB") }} :</label
                       ><br />
 
-                      <b-form-datepicker
+    
+
+                      <DropdownDatepicker   minAge="18"   v-model="dob" style="width:100%"   dropdownClass="form-control mr-1 w-100" class="d-inline-flex" />
+
+                      <!-- <b-form-datepicker
                         name="dob"
                         :max="min"
                         id="dob"
                         v-model="dob"
                         class=" text"
                         :placeholder="$t('welcome.DOB')"
-                      ></b-form-datepicker>
+                      ></b-form-datepicker> -->
                     </div>
 
                     <div class="form-group">
@@ -602,7 +609,7 @@
                   </div>
                 </div>
 
-                <div>
+                <div class="form-group">
                   <label class="typo__label">
                     {{ $t("welcome.Category") }}
                   </label>
@@ -620,7 +627,7 @@
                   ></multiselect>
                 </div>
 
-                <div>
+                <div class="form-group">
                   <label class="typo__label">
                     {{ $t("welcome.Sub_Category") }}</label
                   >
@@ -637,6 +644,7 @@
                   ></multiselect>
                 </div>
 
+                <div class="form-group">  
                 <label v-if="filterselectvalue.length" class="typo__label">{{
                   $t("welcome.Fiters")
                 }}</label>
@@ -673,7 +681,7 @@
                     </b-tabs>
                   </b-card>
                 </div>
-
+           </div>
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
@@ -915,6 +923,8 @@ import Tutorial from "@/components/dasboard/tutorial";
 
 import axios from "axios";
 
+import DropdownDatepicker from 'vue-dropdown-datepicker'; 
+
 import Multiselect from "vue-multiselect";
 import { validationMixin } from "vuelidate";
 import moment from "moment";
@@ -929,6 +939,7 @@ export default {
   data() {
     return {
       useas: "",
+      monthShortValues:['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
       businessInstanceCenter: [11.504929555178624, 3.8465173382452815],
       municipality: [],
       min: moment()
@@ -956,7 +967,7 @@ export default {
       showMap: true,
       sendingB: false,
       profile_pic: "",
-      dob: null,
+      dob: "2041-02-08",
       gender: null,
       city: null,
       Neighbor: null,
@@ -1050,7 +1061,6 @@ export default {
       this.Neighbor =  details.address;
       this.coordinates = details.coordinates;
       this.address = details.address;
-      console.log(details);
     },
     flashErrors(errors) {
       let err = "";
@@ -1293,8 +1303,8 @@ export default {
           formData2.append("council", this.selectedmunicipality);
 
           formData2.append("neigborhood", this.selectedlocality);
-          formData2.append("lat", this.businessInstanceCenter[1]);
-          formData2.append("lng", this.businessInstanceCenter[0]);
+          formData2.append("lat",  this.coordinates[1]);
+          formData2.append("lng",  this.coordinates[0]);
 
           formData2.append("name", this.form.business_name);
            formData2.append("keywords", this.selectedKeywords);
@@ -1708,6 +1718,7 @@ this.$refs.cropper.getCroppedCanvas().toBlob((blob) => {
     Business,
     Tutorial,
     VueCropper,
+    DropdownDatepicker,
     // AutocompleteMapbox,
     // businessmap,
     // BusinessAutocomplete,
@@ -1996,6 +2007,10 @@ import "vue-form-wizard/dist/vue-form-wizard.min.css";
 
 .vue-form-wizard.md .wizard-icon-circle {
   border-color: #e75c18 !important;
+}
+.first-step-btn {
+  z-index: 1;
+  position: relative;
 }
 </style>
 

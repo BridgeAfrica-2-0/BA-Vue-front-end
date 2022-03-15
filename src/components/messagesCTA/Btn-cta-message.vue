@@ -22,7 +22,7 @@
     <!-- <span v-else-if="isBuyNow" >Buy Now</span> -->
     <span v-else style="display: inline-flex">
       <i class="fas fa-envelope fa-lg btn-icon pb-3 mt-1 mr-1 mt-sm-1"></i>
-      <span class="btn-text" style="margin-top: -1px">
+      <span class="btn-text blecmsg mt-md-0" >
         {{ $t("businessf.Message") }}</span
       >
     </span>
@@ -185,5 +185,12 @@ export default {
   .mt-sm-1 {
     margin-top: 1px !important;
   }
+
+
+  .blecmsg{
+   margin-top: -1px;
 }
+}
+
+
 </style>

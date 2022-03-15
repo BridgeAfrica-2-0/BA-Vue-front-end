@@ -364,7 +364,7 @@ export default {
     font-size: 10px;
 
     height: 28px;
-    width: 85px;
+    width: 97px;
   }
 
   .r-image {
@@ -415,7 +415,7 @@ export default {
   .btn {
     padding-top: 6px;
     height: 38px;
-    width: 110px;
+    width: 115px;
     font-size: 12px;
     margin-left: -10px;
 

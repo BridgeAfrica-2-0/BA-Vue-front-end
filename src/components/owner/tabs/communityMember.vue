@@ -163,6 +163,7 @@ export default {
 
   mounted() {
     this.foll_id = this.$route.params.id ? this.$route.params.id : "";
+    this.islogin=this.$store.getters["auth/isLogged"];
   },
 
   computed: {
@@ -307,6 +308,7 @@ export default {
 
        if(!this.islogin){
             url='guest/'+url;
+            alert("fuck you");
           }
 
       axios
@@ -502,9 +504,9 @@ f-right {
 
 @media only screen and (min-width: 1200px) {
   .btn {
-    width: 123px;
+    width: 125px;
     height: 38px;
-    font-size: 14px;
+    font-size: 13px;
   }
 
   .center {
@@ -637,9 +639,9 @@ f-right {
   }
 
   .btn {
-    width: 123px;
+    width: 125px;
     height: 38px;
-    font-size: 14px;
+    font-size: 13px;
   }
 
   .center {
@@ -678,7 +680,7 @@ f-right {
   }
 
   .btn {
-    width: 85px;
+    width: 97px;
     height: 28px;
     font-size: 10px;
   }

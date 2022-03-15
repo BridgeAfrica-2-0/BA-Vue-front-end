@@ -238,9 +238,7 @@ export default {
   destroyed() {
     this.$emit("reste");
   },
-  // computed: mapGetters({
-  //   auth: "auth/profilConnected",
-  // }),
+  
 
   methods: {
     ...mapActions({
@@ -270,8 +268,10 @@ export default {
       updateItem: "UserProfileOwner/updateAlbumItem",
       updateItemBusiness: "businessOwner/updateAlbumItem",
       updateItemNetwork: "networkProfileMedia/updateAlbumItem",
+
+      updateAllAlbums: "notification/UPDATE_ALBUM",
       
-    }),
+    }), 
 
     getFullMediaLink: fullMediaLink,
 
@@ -380,17 +380,11 @@ export default {
             status: "success",
             message: "Media Deleted",
           });
+
+          this.updateAllAlbums()
           return false;
         })
-        .catch((error) => {
-          this.sending = false;
-          this.loading = false;
-          this.flashMessage.show({
-            status: "error",
-            message: "something wrong happen",
-          });
-          return false;
-        });
+        
     },
     //set an image as a cover photo
 
@@ -478,6 +472,10 @@ export default {
 
       this.pattern[this.type]()
         .submitPost(payload)
+        .then((picture) => {
+          this.updateAllAlbums()
+          return true
+        })
         .then(() => {
           this.pattern[this.type]().updateItem({ id: albumId, action: "add" });
           this.pattern[this.type]().getAlbumImages(data);

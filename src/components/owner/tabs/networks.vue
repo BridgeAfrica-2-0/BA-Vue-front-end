@@ -69,12 +69,12 @@
                     </router-link>
                   </strong>
                   <br />
-                  <!--                    
+                                     
                       
-                      <span class="m-1" v-for=" cat in network.assign_categories" :key="cat.id "> {{cat.name}}  </span> -->
+                      <span class="m-1" v-for=" cat in network.assign_categories" :key="cat.id "> {{cat.name}}  </span>
                   <br />
 
-                  {{ network.member_count }} Community <br />
+                  {{ network.community }} Community <br />
 
                   <span class="location">
                     <b-icon-geo-alt class="ico"></b-icon-geo-alt>
@@ -225,7 +225,7 @@
 
 
             <b-col md="6">
-              <div class="form-group">
+              <div class="form-group mt-3">
                 <label for="country" class="username">
                   {{ $t("profileowner.Country") }} :</label
                 ><br />
@@ -241,7 +241,7 @@
               </div>
             </b-col>
             <b-col md="6">
-              <div class="form-group">
+              <div class="form-group mt-3">
                 <label for="country" class="username">
                   {{ $t("profileowner.Region") }} :</label
                 ><br />
@@ -346,7 +346,7 @@
 
 
 
-            <b-col md="6" class="pt-3">
+            <b-col md="6">
               <b-form-group
                 label-cols-lg="12"
                 :label="$t('profileowner.Primary_Phone')"
@@ -1100,16 +1100,17 @@ export default {
         .then((res) => {
           this.success.state = true;
           this.success.msg = "Operation was successful !!";
-          setTimeout(() => {
-            this.success.state = false;
-          }, 5000);
-          this.profileNetworks = this.profileNetworks.map(net => {
-            if (net.id == editedNetwork.id)
-              return res.data.data
-            else
-              return net
-          })
+          
+          // this.profileNetworks = this.profileNetworks.map(net => {
+          //   if (net.id == editedNetwork.id)
+          //     return res.data.data
+          //   else
+          //     return net
+          // })
           //this.getNetworks();
+
+            this.profileNetworks=[];
+           this.infiniteId += 1;
           loader.hide();
           this.showmodal(false, "edit")
           console.log('update sucess')
@@ -1209,7 +1210,7 @@ export default {
       fd.append("country_id", this.selectedcountry);
       fd.append("division_id", this.selecteddivision);
       fd.append("council_id", this.selectedmunicipality);
-      fd.append("neighbourhood", this.selectedlocality);
+      fd.append("neighborhood_id", this.selectedlocality);
 
          
    if(this.logo)  {            

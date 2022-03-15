@@ -13,7 +13,7 @@
             type="text"
             class="form-control"
             v-model="searchTitle"
-          ></b-form-input>
+          ></b-form-input> 
         </b-input-group>
       </b-col>
     </b-row>
@@ -21,7 +21,7 @@
 
     <b-row cols="1">
       <b-col class="ml-0 mr-0"
-        v-for=" (member, index) in displayfollowers"
+        v-for=" (member, index) in displayfollowing"
         :key="index"
       >
 
@@ -65,7 +65,9 @@ export default {
       page: 1,
       loading: false,
       peoplefollowing: [],
-      displayfollowing: []
+      displayfollowing: [],
+
+       displayfollowers: []
     };
   },
   mounted(){
@@ -117,12 +119,11 @@ export default {
       console.log('keyword: '+keyword);
       let formData = new FormData();
       formData.append('keyword', keyword);
-      console.log("network/"+this.url+"/people/following/"+this.page);
+     
       this.axios
       .post("network/"+this.url+"/people/following/"+this.page, formData)
       .then(({ data }) => {
-       console.log(data);
-       console.log(this.page);
+      
         if(keyword){
           this.displayfollowing = data.data;
           this.searchTitle = "";
@@ -130,8 +131,7 @@ export default {
         }else{
           if (data.data.length) {
             this.page += 1;
-            console.log(this.page);
-            console.log(...data.data);
+            
             this.peoplefollowing.push(...data.data);
             this.displayfollowing = this.peoplefollowing;
             $state.loaded();
@@ -146,15 +146,15 @@ export default {
     },
 
      BlockUser(user_id, index) {
-     // this.loading = true;
-      console.log("----",user_id);
-      console.log("network/"+this.url+"/lock/user/"+user_id);
+
+       
+     
       this.axios.post("network/"+this.url+"/lock/user/"+user_id)
       .then(response => {
         console.log(response);
         // this.blockUsers();
         this.UserDetails();
-         this.$delete(this.displayfollowers,index);
+         this.$delete(this.displayfollowing,index);
         this.loading = false;
         this.flashMessage.show({
           status: "success",
@@ -176,7 +176,7 @@ export default {
 
  UserDetails() {   
       this.$store
-        .dispatch("networkProfileCommunitySidebar/getUserDetails", this.net_id)   
+        .dispatch("networkProfileCommunitySidebar/getUserDetails", this.url)   
         .then(() => {
           console.log("ohh year");
         })
@@ -206,8 +206,22 @@ export default {
           Comdata.is_follow = nextFollowState;
 
            this.UserDetails();
+
+           this.flashMessage.show({
+          status: "success",
+          message: response.request.message
+        });
+        
         })
-        .catch(err => console.log(err));
+        .catch((err) => {
+          console.log({ err: err });
+
+          this.flashMessage.show({
+          status: "error",
+          message: err.message
+        });
+
+        });
     },
 
   }

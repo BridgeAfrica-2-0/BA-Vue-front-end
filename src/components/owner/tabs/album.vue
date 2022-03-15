@@ -104,7 +104,7 @@
         {{ $t('profileowner.Back') }}
       </b-button>
       <span class="text-center ml-2 f-20"> {{ this.album_name }}</span>
-
+      
       <Images
         @update:item="() => updateItem()"
         :showCreateForm="isEditor"
@@ -314,6 +314,10 @@ export default {
       fetchAlbumsNetwork: 'networkProfileMedia/getAlbums',
       deleteAlbumNetwork: 'networkProfileMedia/deletedAlbum',
       updateAlbumNetwork: 'networkProfileMedia/updatedAlbum',
+    }),
+
+    ...mapMutations({
+      updateAllAlbums: "notification/UPDATE_ALBUM",
     }),
 
 

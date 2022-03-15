@@ -17,6 +17,12 @@
                     <splide-slide cl>
                       <img :src="item.logo_path" class="r-image" />
                     </splide-slide>
+
+                    
+                    <splide-slide  v-for="cover in item.covers" :key="cover" cl>
+                      <img :src="cover" class="r-image" />   
+                    </splide-slide>
+                    
                   </splide>
                 </div>
                 <div class="pl-3 flx100">
@@ -161,6 +167,21 @@ export default {
   },
 
   methods: {
+
+    
+     businessCommunityTotal() {
+      this.$store
+        .dispatch("businessOwner/businessCommunityTotal", this.biz_id)
+        .then(() => {
+          console.log("hey yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+    },
+
+
+
     async handleFollow(user) {
       document.getElementById("followbtn" + user.id).disabled = true;
 
@@ -177,6 +198,7 @@ export default {
           console.log(response);
           user.is_follow = nextFollowState;
           document.getElementById("followbtn" + user.id).disabled = false;
+          this.businessCommunityTotal();
         })
         .catch((err) => {
           console.log(err);
@@ -335,7 +357,7 @@ export default {
     font-size: 10px;
 
     height: 28px;
-    width: 85px;
+    width: 97px;
   }
 
   .r-image {

@@ -131,7 +131,7 @@ export default {
     this.foll_id = this.$route.params.id;
 
     this.$store
-      .dispatch("networkDetails/roleCheck", this.foll_id)
+      .dispatch("networkDetails/roleCheck", this.foll_id)  
       .then((data) => {
         let role = data.data.data;
         console.log(role);
@@ -179,6 +179,8 @@ export default {
   //     this.selectedId = this.$route.query.tabId;
   //   },
   // },
+
+ 
 
 
   methods: {

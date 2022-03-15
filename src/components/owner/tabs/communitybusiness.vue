@@ -17,6 +17,12 @@
                     <splide-slide>
                       <img :src="item.picture" class="r-image" />
                     </splide-slide>
+
+                    
+                    <splide-slide  v-for="cover in item.covers" :key="cover" cl>
+                      <img :src="cover" class="r-image" />   
+                    </splide-slide>
+                    
                   </splide>
                 </div>
                 <div class="flx100">
@@ -465,7 +471,7 @@ export default {
     font-size: 10px;
 
     height: 28px;
-    width: 85px;
+    width: 97px;
   }
 
   .r-image {
@@ -515,7 +521,8 @@ export default {
 
   .btn {
     padding-top: 6px;
-
+    
+    font-size: 13px;
     height: 38px;
     width: 123px;
   }

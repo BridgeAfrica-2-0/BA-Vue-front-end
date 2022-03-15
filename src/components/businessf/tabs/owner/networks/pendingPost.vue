@@ -4,6 +4,7 @@
       <b-col cols="12" class="f-left">
     
         <div v-for="(post, index) in owner_post" :key="index" class="mb-4 border p-3 rounded">
+
           <div class="mb-2">
             <div class="f-left">
               <b-row class="px-md-3">
@@ -37,7 +38,7 @@
                   <p>
                     {{ moment(post.created_at).fromNow() }} - 
                     <span class="text-primary">{{ post.comment }}</span>
-                  </p>
+                  </p>    
                 </b-col>
               </b-row>
               <!-- <b-row>
@@ -64,6 +65,8 @@
             </p>
           </div>
 
+               <div v-if="post.media"> 
+
           <div v-if="post.media.length > 0" class="">
             <span v-for="video in mapvideo(post.media)" :key="video">
               <youtube
@@ -76,6 +79,8 @@
 
             <light css=" " :cells="post.media.length" :items="mapmediae(post.media)"></light>
           </div>
+
+      </div>
         </div>
       </b-col>
     </b-row>
@@ -123,7 +128,7 @@ export default {
       },
       moment: moment,
       page: 1,
-      
+      owner_post:[],
       infiniteId: +new Date(),
       post: this.$store.state.businessOwner.ownerPost,
       url: null,
@@ -212,9 +217,7 @@ export default {
     infiniteHandler($state) {
       let url = 'show/posts/pending/' + this.url + '?page=' + this.page;
 
-      if (this.page == 1) {
-        this.owner_post.splice(0);
-      }
+     
       this.$store
         .dispatch('networkSetting/loadMore', url)
         .then(({ data }) => { console.log("------",data)
@@ -245,10 +248,12 @@ export default {
         network_id:  this.url,
         post_id: id,
       };
+
+     
       this.approvedPost(payload)
         .then(() => {
-          
-          this.$delete(this.ownerPost, index);
+     
+          this.$delete(this.owner_post, index);
           loader.hide();
         })
         .catch((err) => {
@@ -291,7 +296,7 @@ export default {
       this.unapprovedPost(payload)
         .then(() => {
           
-            this.$delete(this.ownerPost, index);
+            this.$delete(this.owner_post, index);
           loader.hide();
         })
         .catch((err) => {
@@ -341,14 +346,14 @@ export default {
       if (!this.isSubmitted) {
         this.createPost.hyperlinks = [];
         this.createPost.movies = [];
-        this.createPost.postBusinessUpdate = '';
+        this.createPost.postBusinessUpdate = '';  
       }
     },
   },
   computed: {
     ...mapGetters({
       info: 'networkSetting/getNetwork',
-      owner_post: 'networkSetting/allPendingPost',
+    //  owner_post: 'networkSetting/allPendingPost',
     }),
   },
   mounted() {

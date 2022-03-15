@@ -11,6 +11,13 @@
                 <splide-slide cl>
                   <img :src="item.logo_path" class="r-image" />
                 </splide-slide>
+
+
+                 <splide-slide  v-for="cover in item.covers" :key="cover" cl>
+                      <img :src="cover" class="r-image" />   
+                    </splide-slide>
+
+                    
               </splide>
             </div>
             <div class="flx100">
@@ -372,8 +379,8 @@ export default {
     padding-top: 6px;
     font-size: 10px;
 
-    height: 28px;
-    width: 85px;
+    height: 28px;  
+     width: 97px;
   }
 
   .r-image {

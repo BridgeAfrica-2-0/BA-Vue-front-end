@@ -59,14 +59,9 @@
       @close="cancel"
       @ok="updatesave"
     >
-      <div style="width: 100px">
-        <b-form-select
-          class="mb-2"
-          size="sm"
-          v-model="editData.access"
-          :options="options"
-        ></b-form-select>
-      </div>
+     
+
+     
       <b-form-input
         class="mt-2 mb-2"
         v-model="editData.school_name"
@@ -79,21 +74,24 @@
         name="checkbox-1"
         :value="editData.is_graduated ? 1 : 0"
       >
-        {{ $t('profileowner.Graduated') }}
+        {{ $t('profileowner.Graduated') }} 
       </b-form-checkbox>
-      <label>{{ $t('profileowner.Duration_From') }}</label>
-      <b-form-datepicker
-        id="example-datepicker-1"
-        v-model="editData.startDate"
-        class="mb-2"
-      ></b-form-datepicker>
+       
+      <div class="form-group">
+     <label>{{ $t('profileowner.Duration_From') }}</label>  //  {{editData.startDate}}
+      
+ <DropdownDatepicker  v-model="editData.startDate" :defaultDate="editData.startDate"  :maxDate="today"    style="width:100%"   dropdownClass="form-control mr-1 w-100" class="d-inline-flex" />
+      </div>
 
-      <label>{{ $t('profileowner.To') }}</label>
-      <b-form-datepicker
-        id="example-datepicker"
-        v-model="editData.endDate"
-        class="mb-2"
-      ></b-form-datepicker>
+      <div class="form-group">
+
+ <label>{{ $t('profileowner.To') }}</label>
+          
+ <DropdownDatepicker  v-model="editData.endDate" :defaultDate="editData.endDate"   :maxDate="today"    style="width:100%"   dropdownClass="form-control mr-1 w-100" class="d-inline-flex" />
+
+      </div>
+
+
       <b-form-input
         class="mt-2"
         v-model="editData.major_subjects"
@@ -112,14 +110,8 @@
       @close="cancel"
       @ok="save"
     >
-      <div style="width: 100px">
-        <b-form-select
-          class="mb-2"
-          size="sm"
-          v-model="educationInput.access"
-          :options="options"
-        ></b-form-select>
-      </div>
+     
+
       <b-form-input
         class="mt-2 mb-2"
         v-model="educationInput.schoolName"
@@ -135,24 +127,31 @@
       >
         {{ $t('profileowner.Graduated') }}
       </b-form-checkbox>
-      <label>{{ $t('profileowner.Duration_From') }}</label>
-      <b-form-datepicker
-        id="example-datepicker-1"
-        v-model="educationInput.durationFrom"
-        class="mb-2"
-      ></b-form-datepicker>
+     
+      
+      <div class="form-group">
+     <label>{{ $t('profileowner.Duration_From') }}</label>
+      
+ <DropdownDatepicker  v-model="educationInput.durationFrom"     style="width:100%"   :maxDate="today"   dropdownClass="form-control mr-1 w-100" class="d-inline-flex" />
+      </div>
 
-      <label>{{ $t('profileowner.To') }}</label>
-      <b-form-datepicker
-        id="example-datepicker"
-        v-model="educationInput.durationTo"
-        class="mb-2"
-      ></b-form-datepicker>
+      <div class="form-group">
+
+ <label>{{ $t('profileowner.To') }}</label>
+          
+ <DropdownDatepicker      v-model="educationInput.durationTo"    style="width:100%"  :maxDate="today"    dropdownClass="form-control mr-1 w-100" class="d-inline-flex" />
+
+      </div>
+
       <b-form-input
         class="mt-2"
         v-model="educationInput.major"
         :placeholder="$t('profileowner.Major')"
       ></b-form-input>
+
+
+
+      
     </b-modal>
 
     
@@ -163,11 +162,13 @@
 <script>
 
 import { diffBetweenTwoDate } from '@/helpers'
+import DropdownDatepicker from 'vue-dropdown-datepicker'; 
 
 export default {
   data() {
     return {
       editData:[],
+       today :new Date().toISOString().slice(0, 10),
       options: [
         { value: null, text: this.$t('profileowner.Select') },
         { value: "private", text: this.$t('profileowner.Private') },
@@ -184,6 +185,8 @@ export default {
       index: null
     }
   },
+
+components:{DropdownDatepicker},
 
   created() {
     this.educations = JSON.parse(
@@ -216,6 +219,15 @@ export default {
     },
   },
   methods: {
+
+     flashErrors(errors) {
+      let err = "";
+      Object.values(errors).forEach((element) => {
+        err = element[0];
+      });
+
+      return err;
+    },
 
     cancel() {
       console.log("Cancel Another Action in User  ++++++");
@@ -282,14 +294,8 @@ export default {
           })
            return 1;
       }
-      else if (!this.educationInput.major){
-        this.flashMessage.show({
-            status: "error",
-            message: "major is required",
-            blockClass: "custom-block-class",
-          })
-           return 1;
-      }else { return 0;}
+     
+     else { return 0;}
     },
 
     save(bvModalEvt) {
@@ -323,9 +329,32 @@ export default {
           })
 
         })
-        .catch(error => {
-          console.log(error);
-          console.log("not save/edit/delete Education user end error(2) +++++");
+        .catch(err => {
+
+
+         if (err.response.status == 422) {
+               
+                console.log(err.response.data.message);
+
+                this.flashMessage.show({
+                  status: "error",
+
+                  message: this.flashErrors(err.response.data.errors),
+                  blockClass: "custom-block-class",
+                });
+              } else{    
+
+
+
+           this.flashMessage.show({
+            status: "error",
+            message: "can not add education",
+            blockClass: "custom-block-class",
+          })
+
+           }
+
+
         })
         .finally(() => {
           this.$store.dispatch("profile/loadUserProfileAbout", null);
@@ -338,11 +367,11 @@ export default {
           this.index = null;
           this.educationInput = {
             access: "private",
-            schoolName: null,
+            schoolName: '',
             graduated: false,
-            durationFrom: null,
-            durationTo: null,
-            major: null
+            durationFrom: '',
+            durationTo: '',
+            major: ''
           };
           console.log(this.educations);
           this.$refs["educationModal"].hide();

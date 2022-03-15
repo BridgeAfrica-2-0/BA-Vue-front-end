@@ -38,7 +38,7 @@
                 @input="subcategories"
                 :tag-placeholder="$t('businessowner.Add_this_as_new_tag')"
                 :placeholder="$t('businessowner.Search_or_add_a_tag')"
-                :label="$t('businessowner.name')"
+                label="name"
                 track-by="id"
                 :options="pcategories"
                 :multiple="true"
@@ -66,7 +66,7 @@
                 v-model="filterselectvalue"
                 :tag-placeholder="$t('businessowner.Add_this_as_new_tag')"
                 :placeholder="$t('businessowner.Search_or_add_a_tag')"
-                :label="$t('businessowner.name')"
+                label="name"
                 track-by="subcategory_id"
                 :options="scategories"
                 :multiple="true"
@@ -314,7 +314,7 @@
                 v-model="country"
                 @input="Region"
                 :placeholder="$t('businessowner.Search')"
-                :label="$t('businessowner.name')"
+                label="name"
                 track-by="id"
                 :options="countries"
                 :multiple="true"
@@ -340,7 +340,7 @@
                 v-model="region"
                 @input="Division"
                 :placeholder="$t('businessowner.Search')"
-                :label="$t('businessowner.name')"
+                label="name"
                 track-by="id"
                 :options="regions"
                 :multiple="true"
@@ -365,7 +365,7 @@
                 v-model="division"
                 @input="Municipality"
                 :placeholder="$t('businessowner.Search')"
-                :label="$t('businessowner.name')"
+                label="name"
                 track-by="id"
                 :options="divisions"
                 :multiple="true"
@@ -390,7 +390,7 @@
                 v-model="municipality"
                 @input="Locality"
                 :placeholder="$t('businessowner.Search')"
-                :label="$t('businessowner.name')"
+                label="name"
                 track-by="id"
                 :options="municipalities"
                 :multiple="true"
@@ -414,7 +414,7 @@
               <multiselect
                 v-model="locality"
                 :placeholder="$t('businessowner.Search')"
-                :label="$t('businessowner.name')"
+                label="name"
                 track-by="id"
                 :options="localities"
                 :multiple="true"
@@ -503,278 +503,107 @@
           </b-container>
         </div>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         <div class="b-bottom">
           <b-container>
             <b-form-group
-              label-cols-lg="3"
+              label-cols-lg="12"
               :label="$t('businessowner.Business_Hours')"
               label-size="md"
-              label-class="font-weight-bold pt-0 username"
+              label-class=" pt-0 "
               class="mb-0"
             >
-              <b-form-group class="mb-0">
-                <b-form-checkbox
-                  v-model="openHour"
-                  name="checkbox-1"
-                  switch
-                  value="1"
-                >
-                  {{
-                    openHour
-                      ? "Always Open"
-                      : $t("businessowner.Open_for_selected_hours")
-                  }}
-                </b-form-checkbox>
+              <b-form-group class="mb-0" v-slot="{ ariaDescribedby }">       
+                <b-form-radio-group
+                  class="a-text text"
+                  :options="['Always Open', 'Open for selected hours']"
+                  name="open"
+                  :aria-describedby="ariaDescribedby"
+                  v-model="open"
+                  :disabled="false"
+                ></b-form-radio-group>
                 <br />
+                <b-container v-if="displayHour1">
+                  <b-row v-for="(day, index) in dayOfWorks" :key="index">
+                    <b-col cols="6"
+                      >  
+                      
+                      
+                      <b-form-checkbox
+                        id=""
+                        class="a-text text"
+                        name="works"
+                        v-model="day.check"
+                        :checked="day.check"
+                      >
+                        {{ day.day }}</b-form-checkbox
+                      >
+                    
 
-         
-                <b-container v-if="!openHour">
-                  <span v-if="bizOpenHours">
-
-                        {{bizOpenHours}}
-                    <div
-                      v-for="openHours in bizOpenHours"
-                      :key="openHours.id"
-                    >
-                      <b-row>
-                        <b-col cols="2"
-                          ><b-form-checkbox
-                            id=""
-                            class="a-text text"
-                            name=""
-                            v-model="openDaysStatus"
-                            value="Mon_disabled"
-                            unchecked-value="0"
-                          >
-                            {{ openHours.day }}
-                          </b-form-checkbox></b-col
-                        >
-
-                        <b-col>
-                          <b-form-input
-                            name=""
-                            type="time"
-                            @change="
-                              setOpenHours(
-                                openHours.day,
-                                openHours.opening_time,
-                                openHours.closing_time
-                              )
-                            "
-                            v-model="openHours.opening_time"
-                          ></b-form-input> </b-col
-                        >- -<b-col
-                          ><b-form-input
-                            name=""
-                            type="time"
-                            @change="
-                              setOpenHours(
-                                openHours.day,
-                                openHours.opening_time,
-                                openHours.closing_time
-                              )
-                            "
-                            v-model="openHours.closing_time"
-                          ></b-form-input
-                        ></b-col>
-                      </b-row>
-                      <br />
-                    </div>
-                  </span>
-                  <span v-else>
-                    {{ setOpenHours("null", "null", "null") }}
-                    <div>
-                      <b-row>
-                        <b-col cols="2"
-                          ><b-form-checkbox
-                            id=""
-                            class="a-text text"
-                            name=""
-                            value="Mon_disabled"
-                            unchecked-value="0"
-                            >Mondey</b-form-checkbox
-                          >
-                        </b-col>
-                        <b-col>
-                          <b-form-input
-                            name=""
-                            type="time"
-                            v-model="
-                              businessInfo.business_open_hours[0].mon_start
-                            "
-                          ></b-form-input> </b-col
-                        >- -<b-col>
-                          <b-form-input
-                            name=""
-                            type="time"
-                            v-model="
-                              businessInfo.business_open_hours[0].mon_end
-                            "
-                          ></b-form-input
-                        ></b-col>
-                      </b-row>
-                      <b-row>
-                        <b-col cols="2"
-                          ><b-form-checkbox
-                            id=""
-                            class="a-text text"
-                            name=""
-                            value="Mon_disabled"
-                            unchecked-value="0"
-                            >Tuesday {{ businessInfo.business_open_hours }}
-                          </b-form-checkbox>
-                        </b-col>
-                        <b-col>
-                          <b-form-input
-                            name=""
-                            type="time"
-                            v-model="
-                              businessInfo.business_open_hours[1].tues_start
-                            "
-                          ></b-form-input> </b-col
-                        >- -<b-col>
-                          <b-form-input
-                            name=""
-                            type="time"
-                            v-model="
-                              businessInfo.business_open_hours[1].tues_end
-                            "
-                          ></b-form-input
-                        ></b-col>
-                      </b-row>
-                      <b-row>
-                        <b-col cols="2"
-                          ><b-form-checkbox
-                            id=""
-                            class="a-text text"
-                            name=""
-                            value="Mon_disabled"
-                            unchecked-value="0"
-                            >Wednesday</b-form-checkbox
-                          >
-                        </b-col>
-                        <b-col>
-                          <b-form-input
-                            name=""
-                            type="time"
-                            v-model="businessInfo.wed_start"
-                          ></b-form-input> </b-col
-                        >- -<b-col>
-                          <b-form-input
-                            name=""
-                            type="time"
-                            v-model="businessInfo.wed_end"
-                          ></b-form-input
-                        ></b-col>
-                      </b-row>
-                      <b-row>
-                        <b-col cols="2"
-                          ><b-form-checkbox
-                            id=""
-                            class="a-text text"
-                            name=""
-                            value="Mon_disabled"
-                            unchecked-value="0"
-                            >Thursday</b-form-checkbox
-                          >
-                        </b-col>
-                        <b-col>
-                          <b-form-input
-                            name=""
-                            type="time"
-                            v-model="businessInfo.thurs_start"
-                          ></b-form-input> </b-col
-                        >- -<b-col>
-                          <b-form-input
-                            name=""
-                            type="time"
-                            v-model="businessInfo.thurs_end"
-                          ></b-form-input
-                        ></b-col>
-                      </b-row>
-                      <b-row>
-                        <b-col cols="2"
-                          ><b-form-checkbox
-                            id=""
-                            class="a-text text"
-                            name=""
-                            value="Mon_disabled"
-                            unchecked-value="0"
-                            >Friday</b-form-checkbox
-                          >
-                        </b-col>
-                        <b-col>
-                          <b-form-input
-                            name=""
-                            type="time"
-                            v-model="businessInfo.fri_start"
-                          ></b-form-input> </b-col
-                        >- -<b-col>
-                          <b-form-input
-                            name=""
-                            type="time"
-                            v-model="businessInfo.fri_end"
-                          ></b-form-input
-                        ></b-col>
-                      </b-row>
-                      <b-row>
-                        <b-col cols="2"
-                          ><b-form-checkbox
-                            id=""
-                            class="a-text text"
-                            name=""
-                            value="Mon_disabled"
-                            unchecked-value="0"
-                            >Saturday</b-form-checkbox
-                          >
-                        </b-col>
-                        <b-col>
-                          <b-form-input
-                            name=""
-                            type="time"
-                            v-model="businessInfo.sat_start"
-                          ></b-form-input> </b-col
-                        >- -<b-col>
-                          <b-form-input
-                            name=""
-                            type="time"
-                            v-model="businessInfo.sat_end"
-                          ></b-form-input
-                        ></b-col>
-                      </b-row>
-                      <b-row>
-                        <b-col cols="2"
-                          ><b-form-checkbox
-                            id=""
-                            class="a-text text"
-                            name=""
-                            value="Mon_disabled"
-                            unchecked-value="0"
-                            >Sunday</b-form-checkbox
-                          >
-                        </b-col>
-                        <b-col>
-                          <b-form-input
-                            name=""
-                            type="time"
-                            v-model="businessInfo.sun_start"
-                          ></b-form-input> </b-col
-                        >- -<b-col>
-                          <b-form-input
-                            name=""
-                            type="time"
-                            v-model="businessInfo.sun_end"
-                          ></b-form-input
-                        ></b-col>
-                      </b-row>
-                      <br />
-                    </div>
-                  </span>
+                      <b-form-input
+                        @change="input(index, day)"
+                        name="start"
+                        type="time"
+                        v-model="day.opening_time"
+                        :required="day.check ? 'required' : null"
+                      ></b-form-input
+                    >   
+                    
+                   
+                     
+                     </b-col>
+                  
+                    <b-col cols="6"
+                      >  <br>  <b-form-input
+                        @change="input(index, day)"
+                        class="mt-1"
+                        name="end"
+                        type="time"
+                        v-model="day.closing_time"
+                        :required="day.check ? 'required' : null"
+                      ></b-form-input
+                    ></b-col>
+                  </b-row>
+                  <br />
                 </b-container>
               </b-form-group>
             </b-form-group>
           </b-container>
         </div>
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
 
         <div class="b-bottomm">
           <b-button
@@ -847,6 +676,46 @@ export default {
         { day: "sunday", opening_time: null, closing_time: null },
       ],
       openDaysStatus: [],
+
+
+       dayOfWorks: [
+        { day: "monday", mon_start: null, mon_end: null, check: false },
+        {
+          day: "tuesday",
+          tues_start: null,
+          tues_end: null,
+          check: false,
+        },
+        {
+          day: "wednesday",
+          wed_start: null,
+          wed_end: null,
+          check: false,
+        },
+        {
+          day: "thursday",
+          thurs_start: null,
+          thurs_end: null,
+          check: false,
+        },
+        { day: "friday", fri_start: null, fri_end: null, check: false },
+        {
+          day: "saturday",
+          sat_start: null,
+          sat_end: null,
+          check: false,
+        },
+        { day: "sunday", sun_start: null, sun_end: null, check: false },
+      ],
+
+
+       openNow: null,
+      
+      open: "Open for selected hours",
+      tempo: {},
+
+      displayHour: true,
+      displayHour1: true,
 
       businessForm_email: "",
       businessForm_website: "",
@@ -992,6 +861,33 @@ export default {
     };
   },
 
+
+
+   watch: {
+    open(value) {
+      console.log("change open value ", value);
+      if(value == "Always Open"){
+        this.displayHour1 = false
+      }else if(value == "Open for selected hours"){
+        this.displayHour1 = true
+      }
+    },
+    dayOfWorks: {
+      handler(newValue, oldValue) {
+        let num = 0;
+        newValue.map((day) => {
+          if (day.check) {
+            num = num + 1;
+          }
+        });
+       
+        console.log(newValue);
+        console.log(oldValue);
+      },
+      deep: true,
+    },
+  },
+
   computed: {
     businessInfo() {
       return this.$store.state.businessSettingInfo.businessInfo;
@@ -1080,15 +976,129 @@ export default {
   },
 
   mounted() {
-    this.url = this.$route.params.id;
-    this.getBusinessInfo();
-    this.editBusiness();
+   
+    
     this.categories();
     this.Country();
     console.log("-----", this.businessInfo);
+
+  
+   //this.businessInfo()
+
+
+
+
+        
+
+
   },
 
+
+
+
+
+   created() {
+      this.url = this.$route.params.id;
+   
+    this.getBusinessInfo();
+    this.editBusiness();
+    const dispatchMethod = this.isGuestUser ? "businessGuest": "businessOwner";
+    this.$store
+      .dispatch(dispatchMethod+"/loadUserBusinessAbout", {
+      
+        business_id: this.$route.params.id,
+      })
+      .then((response) => {
+        this.business_about = JSON.parse(
+          JSON.stringify(this.$store.getters[dispatchMethod+"/getBusinessAbout"])
+        );
+      
+      
+     if(this.businessInfo.business_open_hours.length >= 1){
+
+       console.log("biz hour initialised");
+
+          this.dayOfWorks = this.businessInfo.business_open_hours;
+  
+          this.businessInfo.business_open_hours.forEach((element, index) => {
+  
+           if(element.opening_time && element.closing_time){
+              this.dayOfWorks[index].check = true;
+           }else { this.dayOfWorks[index].check = false; }
+        });
+        
+        }
+
+      })
+      .catch((error) => {
+        console.log("error from the server or browser error(2) ++++", error);
+      })
+      .finally(() => {
+        this.business_about = JSON.parse(
+          JSON.stringify(this.$store.getters[dispatchMethod+"/getBusinessAbout"])
+        );
+      
+       
+      });
+  },
+
+
   methods: {
+
+
+
+    
+
+
+     input1(){
+         
+      this.dayOfWorks.map((item) =>{
+          if(item.day == "monday"){
+              this.dayOfWorks[0].mon_start =this.dayOfWorks[0].opening_time;
+              this.dayOfWorks[0].mon_end =this.dayOfWorks[0].closing_time;
+              this.dayOfWorks[0].monday =this.dayOfWorks[0].day;
+          }else  if(item.day == "tuesday"){
+              this.dayOfWorks[1].tues_start =this.dayOfWorks[1].opening_time;
+              this.dayOfWorks[1].tues_end =this.dayOfWorks[1].closing_time;
+              this.dayOfWorks[1].tuesday =this.dayOfWorks[1].day;
+          } else  if(item.day == "wednesday"){
+              this.dayOfWorks[2].wed_start =this.dayOfWorks[2].opening_time;
+              this.dayOfWorks[2].wed_end =this.dayOfWorks[2].closing_time;
+              this.dayOfWorks[2].wednesday =this.dayOfWorks[2].day;
+          } else  if(item.day == "thursday"){
+              this.dayOfWorks[3].thurs_start =this.dayOfWorks[3].opening_time;
+              this.dayOfWorks[3].thurs_end =this.dayOfWorks[3].closing_time;
+              this.dayOfWorks[3].thursday =this.dayOfWorks[3].day;
+          } else  if(item.day == "friday"){
+              this.dayOfWorks[4].fri_start =this.dayOfWorks[4].opening_time;
+              this.dayOfWorks[4].fri_end =this.dayOfWorks[4].closing_time;
+              this.dayOfWorks[4].friday =this.dayOfWorks[4].day;
+          } else  if(item.day == "saturday"){
+              this.dayOfWorks[5].sat_start =this.dayOfWorks[5].opening_time;
+              this.dayOfWorks[5].sat_end =this.dayOfWorks[5].closing_time;
+              this.dayOfWorks[5].saturday =this.dayOfWorks[5].day;
+          } else  if(item.day == "sunday"){
+              this.dayOfWorks[6].sun_start =this.dayOfWorks[6].opening_time;
+              this.dayOfWorks[6].sun_end =this.dayOfWorks[6].closing_time;
+              this.dayOfWorks[6].sunday =this.dayOfWorks[6].day;
+          }
+        })
+        
+       
+        this.dayOfWorks.map((item) =>{
+
+            Object.entries(item).forEach(
+            ([key, valeur]) => {
+              this.tempo[key] = valeur 
+            }
+          );
+
+      });
+     
+    },
+
+
+
     validator(tag) {
       return tag.length > 2 && tag.length < 20;
     },
@@ -1313,7 +1323,7 @@ export default {
     },
 
     getBusinessInfo() {
-      console.log("getBusinessInfo function trigard");
+      
       this.$store
         .dispatch("businessSettingInfo/getBusinessInfo", this.url)
         .then(() => {
@@ -1361,111 +1371,62 @@ export default {
     },
 
     updateInfo: function (businessInfo) {
+
+       this.input1();
+       
+     
       this.Lspinner = true;
       this.loading = true;
       console.log("updateInfo", businessInfo);
 
-      let formData = new FormData();
-      formData.append("name", this.businessInfo.name);
-      formData.append("categoryId", this.selectedcategories);
-      formData.append("subCategoryId", this.selectedsubcategories);
-      formData.append("filterId", this.select_filterss);
+     
+      var dat = { 
+        "name": this.businessInfo.name,
+                   "categoryId": this.selectedcategories.toString(),
+                   "subCategoryId": this.selectedsubcategories.toString(),
+                   "filterId": this.select_filterss.toString(),
+                   "country": this.selectedcountry.toString(),
+                   "region": this.selectedregion.toString(),
+                   "division": this.selecteddivision.toString(),
+                   "council": this.selectedmunicipality.toString(),
+                   "neigborhood":this.selectedlocality.toString(),
+                   "alway": !this.displayHour1 ? "vrai" : "faux",
+                   "keywords": String(businessInfo.keywords),
+                   "primary_phone": businessInfo.phone,
+                   "secondary_phone": businessInfo.secondary_phone,
+                   "timezone": businessInfo.timezone,
+                   "about_business": businessInfo.about_business,
+                   "website": businessInfo.website,
+                   "email": businessInfo.email,
+                    "location_description": businessInfo.location_description,
+                    "address": businessInfo.city,
+                    "Street": businessInfo.Street,
+                    "city": businessInfo.city,
+                    "PostalCode": businessInfo.PostalCode,
+                    "lat": businessInfo.lat,
+                    "lng": businessInfo.lng,
+                    ...this.tempo
 
-      formData.append("country", this.selectedcountry);
-      formData.append("region", this.selectedregion);
-      formData.append("division", this.selecteddivision);
-      formData.append("council", this.selectedmunicipality);
-      formData.append("neigborhood", this.selectedlocality);
 
-      // console.log(String(this.businessInfo.keywords));
-      formData.append("keywords", String(businessInfo.keywords));
-      formData.append("primary_phone", businessInfo.phone);
-      formData.append("secondary_phone", businessInfo.secondary_phone);
-      formData.append("timezone", businessInfo.timezone);
-      formData.append("about_business", businessInfo.about_business);
-      formData.append("website", businessInfo.website);
-      formData.append("email", businessInfo.email);
-      formData.append(
-        "location_description",
-        businessInfo.location_description
-      );
-      formData.append("address", businessInfo.city);
-      formData.append("Street", businessInfo.Street);
-      formData.append("city", businessInfo.city);
-      formData.append("PostalCode", businessInfo.PostalCode);
-      formData.append("lat", businessInfo.lat);
-      formData.append("lng", businessInfo.lng);
 
-      this.businessInfo.business_open_hours.forEach((item) => {
-        switch (item.day) {
-          case "monday":
-            formData.append("mon_start", item.opening_time);
-            formData.append("mon_end", item.closing_time);
 
-            break;
-          case "tuesday":
-            formData.append("tues_start", item.opening_time);
-            formData.append("tues_end", item.closing_time);
 
-            break;
-          case "wednesday":
-            formData.append("wed_start", item.opening_time);
-            formData.append("wed_end", item.closing_time);
+      }
 
-            break;
-          case "thursday":
-            formData.append("thurs_start", item.opening_time);
-            formData.append("thurs_end", item.closing_time);
-            break;
-          case "friday":
-            formData.append("fri_start", item.opening_time);
-            formData.append("fri_end", item.closing_time);
 
-            break;
-          case "saturday":
-            formData.append("sat_start", item.opening_time);
-            formData.append("sat_end", item.closing_time);
+      
 
-            break;
-          case "sunday":
-            formData.append("sun_start", item.opening_time);
-            formData.append("sun_end", item.closing_time);
-            break;
-        }
-      });
 
-      // formData.append("monday", businessInfo.monday);
-      // formData.append("mon_start", businessInfo.mon_start);
-      // formData.append("mon_end", businessInfo.mon_end);
-      // formData.append("tuesday", businessInfo.tuesday);
-      // formData.append("tues_start", businessInfo.tues_start);
-      // formData.append("tues_end", businessInfo.tues_end);
-      // formData.append("wednesday", businessInfo.wednesday);
-      // formData.append("wed_start", businessInfo.wed_start);
-      // formData.append("wed_end", businessInfo.wed_end);
-      // formData.append("thursday", businessInfo.thursday);
-      // formData.append("thurs_start", businessInfo.thurs_start);
-      // formData.append("thurs_end", businessInfo.thurs_end);
-      // formData.append("friday", businessInfo.friday);
-      // formData.append("fri_start", businessInfo.fri_start);
-      // formData.append("fri_end", businessInfo.fri_end);
-      // formData.append("saturday", businessInfo.saturday);
-      // formData.append("sat_start", businessInfo.sat_start);
-      // formData.append("sat_end", businessInfo.sat_end);
-      // formData.append("sunday", businessInfo.sunday);
-      // formData.append("sun_start", businessInfo.sun_start);
-      // formData.append("sun_end", businessInfo.sun_end);
-
-      console.log(formData);
       this.$store
         .dispatch("businessSettingInfo/UpdateInfomation", {
           path: "business/update/" + this.url,
-          data: formData,
+         
+          data:dat
         })
         .then(({ data }) => {
           console.log(data);
           this.getBusinessInfo();
-          console.log(this.business_form);
+        
           this.Lspinner = false;
           this.flashMessage.show({
             status: "success",

@@ -52,7 +52,7 @@
                       href="#"
                       @click="DeclineRequest(editor.user_id, index )"
                     >
-                      <b-icon-trash-fill variant="primary"></b-icon-trash-fill>
+                      
                       {{ $t('network.Decline') }}
                     </b-dropdown-item>
                   </b-dropdown>

@@ -71,7 +71,7 @@
       <b-container>
         <h5 class="a-text">{{ $t('businessowner.Existing_Editors') }}</h5>
         <div v-if="editors != 0">
-          <b-list-group v-for="editor in editors" :key="editor.id">
+          <b-list-group v-for="(editor, index) in editors" :key="editor.id">
             <b-list class="d-flex align-items-center m-list">
               <b-avatar
                 class="mr-3"
@@ -96,11 +96,13 @@
                       ></b-icon>
                     </template>
                     <b-dropdown-item href="#" @click="$bvModal.show('edit-editor'); selectObject(editor)">{{ $t('businessowner.Edit') }}</b-dropdown-item>
-                    <b-dropdown-item href="#" @click="$bvModal.show('delete-editor'); selectObject(editor)"> {{ $t('businessowner.Delete') }} </b-dropdown-item>
+                    
+                     <b-dropdown-item href="#" @click="deleteEditor(editor,index)"> {{ $t('businessowner.Delete') }} </b-dropdown-item> 
+                    <!-- <b-dropdown-item href="#" @click="$bvModal.show('delete-editor'); selectObject(editor)"> {{ $t('businessowner.Delete') }} </b-dropdown-item> -->
                   </b-dropdown>
                 </div>
               </span>
-            </b-list>
+            </b-list>         
           </b-list-group>
         </div>
         <div v-else>
@@ -283,7 +285,65 @@ export default {
           });
         });
     },
-    deleteEditor: function (clickedObject) {
+
+
+
+    
+    deleteEditor(editor, index){
+     
+       
+      
+       this.$confirm(
+        {
+          message: `Are you sure?`,
+          button: {
+            no: 'No',
+            yes: 'Yes'
+          },
+          /**
+          * Callback Function
+          * @param {Boolean} confirm
+          */
+          callback: confirm => {
+            if (confirm) {
+                   
+                
+
+
+      this.$store
+        .dispatch("businessRole/deleteEditor", {
+          path: "business/role/delete/" + this.url+"?id="+this.url+"&user_id="+editor.id,
+        })
+        .then(({ data }) => {
+        console.log(data);
+     
+         this.$delete(this.editors, index);
+
+        this.flashMessage.show({
+          status: "success",
+         message: this.$t('businessowner.Editor_Deleted'),
+        });
+          
+      })
+      .catch(err => {
+        console.log({ err: err });
+        this.flashMessage.show({
+          status: "error",
+         message: err.response.data.message,
+        });
+      });
+
+
+
+            }
+          }
+        }
+      )
+
+    },
+
+
+    deleteEditorr: function (clickedObject) {
       this.$store
         .dispatch("businessRole/deleteEditor", {
           path: "business/role/delete/" + clickedObject.id,

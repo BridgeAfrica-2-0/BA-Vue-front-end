@@ -868,6 +868,9 @@
                         <splide-slide cl>
                           <img :src="business.logo_path" class="r-image" />
                         </splide-slide>
+
+                        
+                        
                       </splide>
                     </div>
                   </div>

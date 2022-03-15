@@ -421,6 +421,7 @@
                   <b-col class="col-3" @click="info = true">
                     <b-avatar
                       variant="primary"
+                      :square = "type == 'user' ? false : true"
                       :src="chatListImage(chatSelected.chat)"
                       size="50"
                     ></b-avatar>
@@ -1234,7 +1235,7 @@
 
                             <!-- End Chats -->
                           </b-tab>
-                          <b-tab title="Members" @click="getNetworkMembers()">
+                          <b-tab title="Members++" @click="getNetworkMembers()">
                             <!-- Length :{{ bizs }} -->
 
                             <div v-if="loader" class="text-center">
@@ -1850,6 +1851,7 @@
                 <b-row class="desk" v-if="chatSelected.active">
                   <b-col class="col-3" @click="info = true">
                     <b-avatar
+                      :square = "type == 'user' ? false : true"
                       variant="primary"
                       :src="chatListImage(chatSelected.chat)"
                       size="50"
@@ -3518,6 +3520,7 @@ export default {
       this.selectedEditor = [];
       this.selectedMember = [];
     },
+
     getNetworkMembers(keyword) {
       this.initFilter();
       this.$store.dispatch("networkChat/GET_NETWORK_MEMBERS", {

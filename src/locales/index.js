@@ -8,5 +8,4 @@ export const defaultLocale = 'en'
 export const languages = {
     en,
     fr,
-
 }

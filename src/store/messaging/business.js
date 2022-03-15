@@ -495,20 +495,27 @@ export default {
 
         async GET_EDITORS({ commit, state }) {
             commit("setBizs", []);
-            state.editors = []
+            commit("setLoader", true);
+            
+            let render = []
 
             await axios.get(`/business/role/editor/${state.currentBizId}`)
                 .then((res) => {
                     commit("setLoader", false);
                     let editor = res.data.data
+                    
+                    console.log(editor)
+                    
                     if (editor.length > 0) {
                         editor.map((elm) => {
-                            state.editors.push({ accountType: "editor", ...elm })
+                            render.push({ accountType: "editor", ...elm })
                         })
 
                     }
-                    console.log("editor:", state.editors);
-                    commit("setBizs", state.editors);
+
+                    console.log("editor:", render);
+                    
+                    commit("setBizs", render);
                 })
                 .catch((err) => {
                     commit("setLoader", false);

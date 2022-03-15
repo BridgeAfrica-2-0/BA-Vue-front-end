@@ -13,7 +13,7 @@
                 <b-col class="p-2">
                   <b-avatar
                     class="d-inline-block profile-pic"
-                    variant="primary"
+                    variant="light"
                     :src="
                       getImage({
                         type: 'user',
@@ -70,7 +70,7 @@
                       <div class="messages">
                         <div v-if="loader" class="text-center mt-6 pt-6">
                           <b-spinner
-                            variant="primary"
+                            variant="light"
                             label="Spinning"
                             class="centralizer"
                           ></b-spinner>
@@ -108,7 +108,7 @@
                             <span style="display: inline-flex">
                               <b-avatar
                                 class="d-inline-block"
-                                variant="primary"
+                                variant="light"
                                 :src="chatListImage(chat)"
                               ></b-avatar>
 
@@ -159,7 +159,7 @@
                       <div class="messages">
                         <div v-if="loader" class="text-center mt-12 pt-12">
                           <b-spinner
-                            variant="primary"
+                            variant="light"
                             label="Spinning"
                             class="centralizer"
                           ></b-spinner>
@@ -196,7 +196,7 @@
                             <span style="display: inline-flex">
                               <b-avatar
                                 class="d-inline-block profile-pic"
-                                variant="primary"
+                                variant="light"
                                 :src="chatListImage(chat)"
                                 square
                               ></b-avatar>
@@ -247,7 +247,7 @@
                       <div class="messages">
                         <div v-if="loader" class="text-center mt-12 pt-12">
                           <b-spinner
-                            variant="primary"
+                            variant="light"
                             label="Spinning"
                             class="centralizer"
                           ></b-spinner>
@@ -284,7 +284,7 @@
                             <span style="display: inline-flex">
                               <b-avatar
                                 class="d-inline-block profile-pic"
-                                variant="primary"
+                                variant="light"
                                 :src="chatListImage(chat)"
                                 square
                               ></b-avatar>
@@ -333,7 +333,7 @@
                 </b-col>
                 <b-col class="col-3" @click="info = true">
                   <b-avatar
-                    variant="primary"
+                    variant="light"
                     :src="chatListImage(chatSelected)"
                     size="60"
                   ></b-avatar>
@@ -378,7 +378,7 @@
             >
               <div v-if="loader" class="text-center mt-12 pt-12">
                 <b-spinner
-                  variant="primary"
+                  variant="light"
                   label="Spinning"
                   class="spinner centralizer"
                 ></b-spinner>
@@ -589,7 +589,7 @@
             <div class="info-bottom">
               <b-avatar
                 class="info-avatar"
-                variant="primary"
+                variant="light"
                 :src="chatSelected.profile_picture"
                 size="200"
               ></b-avatar>
@@ -637,13 +637,14 @@
                   ></b-icon>
                 </b-col>
                 <b-col>
+
                   <b-form-input
                     id="textarea"
                     v-model="newSearchQuery"
                     class="input-background"
                     style="width: 100%"
                     :placeholder="`Type the name of the ${type}`"
-                    @keydown="onPressSearchNewChat"
+                    @input="onPressSearchNewChat"
                   ></b-form-input>
                   <br />
                 </b-col>
@@ -700,7 +701,7 @@
                         <td>
                           <b-avatar
                             class="d-inline-block"
-                            variant="primary"
+                            variant="light"
                             size="30"
                             :src="
                               getImage({
@@ -729,7 +730,7 @@
                         <td>
                           <b-avatar
                             class="d-inline-block"
-                            variant="primary"
+                            variant="light"
                             size="30"
                             :src="
                               getImage({
@@ -758,7 +759,7 @@
                         <td>
                           <b-avatar
                             class="d-inline-block"
-                            variant="primary"
+                            variant="light"
                             size="30"
                             :src="
                               getImage({
@@ -787,7 +788,7 @@
                 <b-col class="p-2">
                   <b-avatar
                     class="d-inline-block profile-pic"
-                    variant="primary"
+                    variant="light"
                     :src="
                       getImage({
                         type: 'user',
@@ -881,7 +882,7 @@
                             <span style="display: inline-flex">
                               <b-avatar
                                 class="d-inline-block profile-pic"
-                                variant="primary"
+                                variant="light"
                                 :src="chatListImage(chat)"
                               ></b-avatar>
 
@@ -969,7 +970,7 @@
                             <span style="display: inline-flex">
                               <b-avatar
                                 class="d-inline-block profile-pic"
-                                variant="primary"
+                                variant="light"
                                 :src="chatListImage(chat)"
                                 square
                               ></b-avatar>
@@ -1058,7 +1059,7 @@
                             <span style="display: inline-flex">
                               <b-avatar
                                 class="d-inline-block profile-pic"
-                                variant="primary"
+                                variant="light"
                                 :src="chatListImage(chat)"
                                 square
                               ></b-avatar>
@@ -1095,7 +1096,8 @@
               <b-row class="desk" v-if="chatSelected.active">
                 <b-col class="col-3" @click="info = true">
                   <b-avatar
-                    variant="primary"
+                    variant="light"
+                    :square="type == 'user' ? false : true"
                     :src="chatListImage(chatSelected)"
                     size="60"
                   ></b-avatar>
@@ -1384,7 +1386,7 @@
             <div class="info-bottom">
               <b-avatar
                 class="info-avatar"
-                variant="primary"
+                variant="light"
                 :src="chatSelected.profile_picture"
                 size="200"
               ></b-avatar>
@@ -1482,7 +1484,7 @@
                         <td>
                           <b-avatar
                             class="d-inline-block"
-                            variant="primary"
+                            variant="light"
                             size="30"
                             :src="
                               getImage({
@@ -1511,7 +1513,7 @@
                         <td>
                           <b-avatar
                             class="d-inline-block"
-                            variant="primary"
+                            variant="light"
                             size="30"
                             :src="
                               getImage({
@@ -1540,7 +1542,7 @@
                         <td>
                           <b-avatar
                             class="d-inline-block"
-                            variant="primary"
+                            variant="light"
                             size="30"
                             :src="
                               getImage({
@@ -2016,7 +2018,7 @@ export default {
     },
     getCreatedAt(data) {
       if (moment(data).isBefore(moment())) {
-        return moment(data).format("lll");
+        return moment(data).format("L");
       } else {
         // return moment(data).format('LT');
         return moment(data).fromNow();
@@ -2029,15 +2031,14 @@ export default {
       } else if (this.type == "business") {
         this.$store.dispatch("userChat/GET_BIZS", keyword);
       } else {
-        console.log("network");
+        
         this.$store.dispatch("userChat/GET_NETS", keyword);
       }
     },
     getChatList(data) {
       this.type = data.type;
 
-      console.log("[data...]", data);
-      console.log("[data...]", this.type);
+     
 
       this.chatSelected.active = this.ctaSelected ? true : false;
       this.newMsg = false;
@@ -2048,7 +2049,7 @@ export default {
           console.log("->[Data logged]<-");
         })
         .catch(() => console.log("error"));
-      console.log("testing...");
+      
 
       this.socket.emit("create-chatList", this.currentUser.user.id);
 
@@ -2193,7 +2194,7 @@ export default {
     },
     newMessage(arg) {
       this.getList();
-      console.log("hey");
+      
       this.rightSide = false;
       this.newMsg = arg;
       this.show = false;

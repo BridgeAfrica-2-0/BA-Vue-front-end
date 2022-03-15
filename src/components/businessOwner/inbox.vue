@@ -926,7 +926,7 @@
                                             :src="
                                               getImage({
                                                 type: 'business',
-                                                image: chat.logo_path,
+                                                image: biz.logo_path,
                                               })
                                             "
                                           ></b-avatar>
@@ -1287,7 +1287,6 @@
                                 </tr>
                               </div>
                               <h2 v-else>
-                                 {{bizs}}
                                 {{ $t("general.No_Editor") }}
                               </h2>
 
@@ -3381,9 +3380,9 @@ export default {
       this.selectedEditor = [];
       this.selectedMember = [];
     },
+
     getEditors(keyword) {
       this.initFilter();
-
       this.$store.dispatch("businessChat/GET_EDITORS", {
         keyword: keyword,
       });

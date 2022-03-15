@@ -803,7 +803,7 @@
                       currentUser
                         ? currentUser.user.name.split(" ")[0]
                         : "loading..."
-                    }} ++++++++++++++
+                    }}
                   </h1>
                 </b-col>
                 <b-col>
@@ -1096,6 +1096,7 @@
                 <b-col class="col-3" @click="info = true">
                   <b-avatar
                     variant="light"
+                    :square="type == 'user' ? false : true"
                     :src="chatListImage(chatSelected)"
                     size="60"
                   ></b-avatar>
@@ -2029,15 +2030,14 @@ export default {
       } else if (this.type == "business") {
         this.$store.dispatch("userChat/GET_BIZS", keyword);
       } else {
-        console.log("network");
+        
         this.$store.dispatch("userChat/GET_NETS", keyword);
       }
     },
     getChatList(data) {
       this.type = data.type;
 
-      console.log("[data...]", data);
-      console.log("[data...]", this.type);
+     
 
       this.chatSelected.active = this.ctaSelected ? true : false;
       this.newMsg = false;
@@ -2048,7 +2048,7 @@ export default {
           console.log("->[Data logged]<-");
         })
         .catch(() => console.log("error"));
-      console.log("testing...");
+      
 
       this.socket.emit("create-chatList", this.currentUser.user.id);
 
@@ -2193,7 +2193,7 @@ export default {
     },
     newMessage(arg) {
       this.getList();
-      console.log("hey");
+      
       this.rightSide = false;
       this.newMsg = arg;
       this.show = false;

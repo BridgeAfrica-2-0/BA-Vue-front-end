@@ -15,7 +15,7 @@ export default {
         chatList: [],
         groupMembers: [],
         community: [],
-
+        lastcreatedgroup:{},
         type: 2,
         selectedChat: null,
         selectedChatId: null,
@@ -68,6 +68,16 @@ export default {
         getSelectedChatId(state) {
             return state.selectedChatId;
         },
+
+
+
+        getlastcreatedgroup(state) {
+            return state.lastcreatedgroup;
+        },
+
+
+        
+
         getSelectedChat(state) {
             return state.selectedChat;
         },
@@ -122,6 +132,12 @@ export default {
         },
         setSelectedChatId(state, data) {
             state.selectedChatId = data
+        },
+
+        lastCreatedGroup(state, data){
+           
+            state.lastcreatedgroup = data
+             
         },
         setSelectedChat(state, data) {
             state.selectedChat = data
@@ -208,14 +224,19 @@ export default {
         },
 
         // ---------------
-        CREATE_GROUP({ commit, state }, data) {
+         async  CREATE_GROUP({ commit, state }, data) {
             console.log("group data:", data);
             commit("setLoader", true);
-            axios.post(`/group/create/business/${state.currentBizId}`, data)
+          await  axios.post(`/group/create/business/${state.currentBizId}`, data)
                 .then((res) => {
                     commit("setLoader", false);
                     commit("setSelectedChatId", res.data.data.groupID);
                     console.log("group created data:", res.data.data);
+
+                    commit("lastCreatedGroup", res.data.data);
+
+                    return res.data.data;
+
                 })
                 .catch((err) => {
                     commit("setLoader", false);

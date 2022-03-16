@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div>   
     <head-page-owner @goto-cover-images="gotoCoverImages"></head-page-owner>
     <div class="row">
       <div class="text-justify mt-2 container-fluid">

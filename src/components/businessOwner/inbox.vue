@@ -1,5 +1,6 @@
 <template>
   <div>
+
     <b-container>
       <div v-if="mobile">
         <b-row class="chat-box">
@@ -63,7 +64,7 @@
                     v-model="tabIndex"
                     content-class="mt-12 ma-4 pt-6"
                     fill
-                  >
+                  >   
                     <b-tab
                       :title="$t('businessowner.Users')"
                       @click="getChatList({ type: 'user' })"
@@ -72,7 +73,7 @@
                       <b-row class="pa-6">
                         <b-col class="mb-6 pb-6">
                           <input
-                            v-model="searchQuery"
+                            v-model="searchQuery" 
                             class="form-control input-background"
                             :placeholder="this.$t('general.Search_chat_list')"
                             @keypress.enter="
@@ -2933,6 +2934,17 @@ export default {
     chatId() {
       return this.$store.getters["businessChat/getSelectedChatId"];
     },
+
+
+
+lastcreatedgroup() {
+      return this.$store.getters["businessChat/getlastcreatedgroup"];
+    },
+
+
+    
+
+    
     currentBizId() {
       return this.$store.getters["businessChat/getCurrentBizId"];
     },
@@ -3173,7 +3185,7 @@ export default {
         ? chat.network_editor_i_d.name
         : chat.business_editor_i_d
         ? chat.business_editor_i_d.name
-        : "Anonymous";
+        : this.$t('businessowner.me');
     },
     convert(bytes, decimals = 2) {
       if (bytes === 0) return "0 Bytes";
@@ -3320,13 +3332,33 @@ export default {
       console.log("listenning...");
     },
     async createGroup(receiver_business_id) {
-      await this.$store.dispatch("businessChat/CREATE_GROUP", {
+
+    
+     await this.$store.dispatch("businessChat/CREATE_GROUP", {
         groupName: this.groupName,
         userID: this.selectedPeople.toString(),
         businessID: this.selectedBusiness.toString(),
         networkID: this.selectedNetwork.toString(),
         businessEditorsID: this.selectedEditor.toString(),
+      }).then(()=>{
+
+       
+
+
+       this.selectedChat({ type: 'group',
+                       chat: this.lastcreatedgroup,
+                         id: this.chatId,
+                           });
+
+
+
       });
+
+
+           
+
+
+
       console.log("chat id selected:", this.chatId);
       this.socket.emit("create-group", this.chatId);
 
@@ -3341,7 +3373,9 @@ export default {
       console.log("ROOMS: ", this.room);
       this.tabIndex = 3;
       // this.getChatList({ type: "group" });
+      
     },
+
     createRoom(receiver_business_id) {
       // let sender_business_id = this.currentUser.user.id;
       let sender_business_id = this.currentBizId;
@@ -3470,7 +3504,11 @@ export default {
       this.$bvModal.hide("group-name");
       console.log("type tabs:", this.tabIndex);
 
-      await this.createGroup();
+       this.createGroup()
+      
+      
+
+      this.getChatList({ type: "group" });
 
       // this.$store.commit("businessChat/setSelectedChatId", this.chatId);
       // let receiver = { receiverID: this.chatId, keyword: null };
@@ -3484,10 +3522,32 @@ export default {
         groupName: this.groupName,
       };
 
-      this.getChatList({ type: "group" });
+     
+
+  
+
+  
+console.log("blec debugging ---");
+
+ console.log( this.lastcreatedgroup );
+
+
+      this.selectedChat({ type: 'group',
+                       chat: this.lastcreatedgroup,
+                         id: this.chatId,
+                           });
+
+
+
+
+
+
+    //  this.getChatList({ type: "group" });
       console.log("[DEBUG] Chat selected:", this.chatSelected);
       // this.groupName = "";
     },
+
+    //lalalala
     selectedChat(data) {
       console.log("[type tabs]", this.tabIndex);
       // this.scrollToBottom();
@@ -3496,7 +3556,7 @@ export default {
 
       this.createRoom(data.id);
       if (this.type == "group") {
-        this.createGroup();
+       // this.createGroup();
       }
       this.rightSide = screenX > 930;
 

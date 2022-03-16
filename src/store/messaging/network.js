@@ -105,6 +105,13 @@ export default {
         setChats(state, data) {
             state.chats = data
         },
+
+
+        setEditor(state, data) {
+            state.editors = data
+        },
+
+
         setBizs(state, data) {
             state.bizs = data;
         },
@@ -472,20 +479,23 @@ export default {
 
         async GET_EDITORS({ commit, state }) {
             commit("setBizs", []);
-            state.editors = []
+           // state.editors = []
 
             await axios.post(`/network/${state.currentBizId}/members/editor`)
                 .then((res) => {
                     commit("setLoader", false);
                     let editor = res.data.data
-                    if (editor.length > 0) {
-                        editor.map((elm) => {
-                                state.editors.push({ accountType: "editor", ...elm, name: elm.fullname, id: elm.user_id })
-                            })
-                            // state.editors = { accountType: "business", ...res.data.data }
-                    }
-                    console.log("editor:", state.editors);
-                    commit("setBizs", state.editors);
+                    // if (editor.length > 0) {
+                    //     editor.map((elm) => {
+                    //             state.editors.push({ accountType: "editor", ...elm, name: elm.fullname, id: elm.user_id })
+                    //         })
+                    //         // state.editors = { accountType: "business", ...res.data.data }
+                    // }
+                   // console.log("editor:", state.editors);
+                    //commit("setBizs", state.editors);
+                    commit("setEditor", editor);
+
+                    
                 })
                 .catch((err) => {
                     commit("setLoader", false);

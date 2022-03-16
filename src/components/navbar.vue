@@ -662,6 +662,8 @@ export default {
       user: "auth/profilConnected",
       auth: "auth/user",
       neigbourhoods: "auth/neigbourhoods",
+
+      cities: "auth/cities",
     }),
 
     query(){
@@ -746,11 +748,24 @@ export default {
 
     query(newQuery) {
       axios
-        .get(`neighborhoods/${newQuery}`)
+        .get(`visitor/search/city?city=/${newQuery}`)
         .then(({ data }) => {
           this.$store.commit("auth/setneigbourhoods", data.data);
         });
     },
+
+
+    // old query method
+    // query(newQuery) {
+    //   axios
+    //     .get(`neighborhoods/${newQuery}`)
+    //     .then(({ data }) => {
+    //       this.$store.commit("auth/setneigbourhoods", data.data);
+    //     });
+    // },
+
+
+
   },
   
   filters: {

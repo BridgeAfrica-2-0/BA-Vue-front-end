@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div>  
     <b-container>
       <!-- Mobile -->
       <div v-if="mobile">
@@ -69,7 +69,7 @@
                         <b-col class="mb-6 pb-6">
                           <input
                             v-model="searchQuery"
-                            class="form-control input-background"
+                            class="form-control input-background mb-2"
                             :placeholder="$t('general.Search_chat_list')"
                             @keypress.enter="
                               getChatList({
@@ -124,7 +124,7 @@
                                 <b-avatar
                                   class="d-inline-block profile-pic"
                                   variant="primary"
-                                  :src="chatListImage(chatSelected.chat)"
+                                  :src="chatListImage(chat)"
                                 ></b-avatar>
 
                                 <h6 class="mt-2 d-inline-block ml-2">
@@ -155,7 +155,7 @@
                         <b-col class="mb-6 pb-6">
                           <input
                             v-model="searchQuery"
-                            class="form-control input-background"
+                            class="form-control input-background mb-2"
                             :placeholder="$t('general.Search_chat_list')"
                             @keypress.enter="
                               getChatList({
@@ -207,8 +207,8 @@
                               <span style="display: inline-flex">
                                 <b-avatar
                                   class="d-inline-block profile-pic"
-                                  variant="primary"
-                                  :src="chatListImage(chatSelected.chat)"
+                                  variant="light"
+                                  :src="chatListImage(chat)"
                                   square
                                 ></b-avatar>
 
@@ -294,7 +294,7 @@
                               <b-avatar
                                 class="d-inline-block profile-pic"
                                 variant="primary"
-                                :src="chatListImage(chatSelected.chat)"
+                               :src="chatListImage(chat)"
                                 square
                               ></b-avatar>
 
@@ -324,7 +324,7 @@
                         <b-col class="mb-6 pb-6">
                           <input
                             v-model="searchQuery"
-                            class="form-control input-background"
+                            class="form-control input-background mb-2"
                             :placeholder="$t('general.Search_chat_list')"
                             @keypress.enter="
                               getChatList({
@@ -412,17 +412,19 @@
                   <b-col class="col-1 mt-3 ma-4">
                     <b-icon
                       @click="showMessages(true)"
-                      icon="objArrow-left-square-fill"
+                      icon="Arrow-left-square-fill"
                       font-scale="1"
                       aria-hidden="true"
+                      variant="primay"
                       class="primary"
                     ></b-icon>
                   </b-col>
                   <b-col class="col-3" @click="info = true">
+                 
                     <b-avatar
-                      variant="primary"
+                      variant="light"
                       :square = "type == 'user' ? false : true"
-                      :src="chatListImage(chatSelected.chat)"
+                     :src="chatListImage(chatSelected)"
                       size="50"
                     ></b-avatar>
                   </b-col>
@@ -630,7 +632,7 @@
                     <div class="wrapper">
                       <emoji-picker @emoji="append" :search="search">
                         <div
-                          class="emoji-invoker"
+                          class="emoji-invoker pr-2 pl-2"
                           slot="emoji-invoker"
                           slot-scope="{ events: { click: clickEvent } }"
                           @click.stop="clickEvent"
@@ -705,7 +707,7 @@
           <b-col v-if="info">
             <div class="info-nav">
               <b-button class="primary-bg" @click="showInfo(false)">
-                <fas-icon :icon="['fas', 'arrow-left']" />
+                <fas-icon class="primary" :icon="['fas', 'arrow-left']"  />
               </b-button>
               <span class="cnt-info"
                 >{{ $t("businessowner.Contact_Info") }}
@@ -714,7 +716,7 @@
             <div class="info-bottom">
               <b-avatar
                 class="info-avatar"
-                variant="primary"
+                variant="light"
                 :src="chatSelected.logo_path"
                 size="200"
               ></b-avatar>
@@ -837,7 +839,7 @@
                                       >
                                         <b-avatar
                                           class="d-inline-block"
-                                          variant="primary"
+                                          variant="light"
                                           size="30"
                                         ></b-avatar>
                                         <span class="bold">
@@ -871,7 +873,7 @@
                                       >
                                         <b-avatar
                                           class="d-inline-block"
-                                          variant="primary"
+                                          variant="light"
                                           size="30"
                                         ></b-avatar>
                                         <span class="bold">
@@ -905,7 +907,7 @@
                                       >
                                         <b-avatar
                                           class="d-inline-block"
-                                          variant="primary"
+                                          variant="light"
                                           size="30"
                                         ></b-avatar>
                                         <span class="bold">
@@ -918,7 +920,7 @@
                               </tr>
                             </div>
                             <hr />
-                            <h5>{{ $t("general.Editors") }}</h5>
+                            <h5>{{ $t("general.Editors") }}</h5> 
                             <div v-if="allEditors">
                               <tr
                                 v-for="(biz, index) in allEditors"
@@ -939,7 +941,7 @@
                                       >
                                         <b-avatar
                                           class="d-inline-block"
-                                          variant="primary"
+                                          variant="light"
                                           size="30"
                                         ></b-avatar>
                                         <span class="bold">
@@ -973,7 +975,7 @@
                                       >
                                         <b-avatar
                                           class="d-inline-block"
-                                          variant="primary"
+                                          variant="light"
                                           size="30"
                                         ></b-avatar>
                                         <span class="bold">
@@ -1038,7 +1040,7 @@
                                       >
                                         <b-avatar
                                           class="d-inline-block"
-                                          variant="primary"
+                                          variant="light"
                                           size="30"
                                         ></b-avatar>
                                         <span class="bold">
@@ -1105,7 +1107,7 @@
                                       <!-- @input="selectedMember(elm)" -->
                                       <b-avatar
                                         class="d-inline-block"
-                                        variant="primary"
+                                        variant="light"
                                         size="30"
                                       ></b-avatar>
                                       <span class="bold">
@@ -1171,7 +1173,7 @@
                                       >
                                         <b-avatar
                                           class="d-inline-block"
-                                          variant="primary"
+                                          variant="light"
                                           size="30"
                                         ></b-avatar>
                                         <span class="bold">
@@ -1199,9 +1201,9 @@
                                 class="centralizer"
                               ></b-spinner>
                             </div>
-                            <div v-if="bizs.length">
+                            <div v-if="allEditors.length">
                               <tr
-                                v-for="(biz, index) in bizs"
+                                v-for="(biz, index) in allEditors"
                                 :key="index"
                                 class="p-2 message"
                               >
@@ -1219,7 +1221,7 @@
                                       >
                                         <b-avatar
                                           class="d-inline-block"
-                                          variant="primary"
+                                          variant="light"
                                           size="30"
                                         ></b-avatar>
                                         <span class="bold">
@@ -1265,7 +1267,7 @@
                                       >
                                         <b-avatar
                                           class="d-inline-block"
-                                          variant="primary"
+                                          variant="light"
                                           size="30"
                                         ></b-avatar>
                                         <span class="bold">
@@ -1318,7 +1320,7 @@
                               <td>
                                 <b-avatar
                                   class="d-inline-block"
-                                  variant="primary"
+                                  variant="light"
                                   size="30"
                                   :src="
                                     getImage({
@@ -1347,7 +1349,7 @@
                               <td>
                                 <b-avatar
                                   class="d-inline-block"
-                                  variant="primary"
+                                  variant="light"
                                   size="30"
                                   :src="
                                     getImage({
@@ -1376,7 +1378,7 @@
                               <td>
                                 <b-avatar
                                   class="d-inline-block"
-                                  variant="primary"
+                                  variant="light"
                                   size="30"
                                   :src="
                                     getImage({
@@ -1427,7 +1429,7 @@
                 <b-col class="p-2">
                   <b-avatar
                     class="d-inline-block profile-pic"
-                    variant="primary"
+                    variant="light"
                     :src="currentBiz.profile_picture"
                     square
                   ></b-avatar>
@@ -1491,7 +1493,7 @@
                         <b-col class="mb-6 pb-6">
                           <input
                             v-model="searchQuery"
-                            class="form-control input-background"
+                            class="form-control input-background mb-2"
                             :placeholder="$t('general.Search_chat_list')"
                             @keypress.enter="
                               getChatList({
@@ -1544,7 +1546,7 @@
                               <span style="display: inline-flex">
                                 <b-avatar
                                   class="d-inline-block profile-pic"
-                                  variant="primary"
+                                  variant="light"
                                   :src="chatListImage(chat)"
                                 ></b-avatar>
 
@@ -1581,7 +1583,7 @@
                         <b-col class="mb-6 pb-6">
                           <input
                             v-model="searchQuery"
-                            class="form-control input-background"
+                            class="form-control input-background mb-2"
                             :placeholder="$t('general.Search_chat_list')"
                             @keypress.enter="
                               getChatList({
@@ -1635,7 +1637,7 @@
                               <span style="display: inline-flex">
                                 <b-avatar
                                   class="d-inline-block profile-pic"
-                                  variant="primary"
+                                  variant="light"
                                   :src="chatListImage(chat)"
                                   square
                                 ></b-avatar>
@@ -1673,7 +1675,7 @@
                         <b-col class="mb-6 pb-6">
                           <input
                             v-model="searchQuery"
-                            class="form-control input-background"
+                            class="form-control input-background mb-2"
                             :placeholder="$t('general.Search_chat_list')"
                             @keypress.enter="
                               getChatList({
@@ -1726,7 +1728,7 @@
                             <span style="display: inline-flex">
                               <b-avatar
                                 class="d-inline-block profile-pic"
-                                variant="primary"
+                                variant="light"
                                 :src="chatListImage(chat)"
                                 square
                               ></b-avatar>
@@ -1762,7 +1764,7 @@
                         <b-col class="mb-6 pb-6">
                           <input
                             v-model="searchQuery"
-                            class="form-control input-background"
+                            class="form-control input-background mb-2"
                             :placeholder="$t('general.Search_chat_list')"
                             @keypress.enter="
                               getChatList({
@@ -1810,7 +1812,7 @@
                               <span style="display: inline-flex">
                                 <b-avatar
                                   class="d-inline-block profile-pic"
-                                  variant="primary"
+                                  variant="light"
                                   :src="require('@/assets/default_group.png')"
                                 ></b-avatar>
 
@@ -1850,10 +1852,12 @@
               <div class="chat-nav shadow">
                 <b-row class="desk" v-if="chatSelected.active">
                   <b-col class="col-3" @click="info = true">
+
+                   
                     <b-avatar
                       :square = "type == 'user' ? false : true"
-                      variant="primary"
-                      :src="chatListImage(chatSelected.chat)"
+                      variant="light"
+                      :src="chatListImage(chatSelected)"
                       size="50"
                     ></b-avatar>
                   </b-col>
@@ -2161,7 +2165,7 @@
             <div class="info-bottom">
               <b-avatar
                 class="info-avatar"
-                variant="primary"
+                variant="light"
                 :src="chatSelected.logo_path"
                 size="200"
               ></b-avatar>
@@ -2284,7 +2288,7 @@
                                       >
                                         <b-avatar
                                           class="d-inline-block"
-                                          variant="primary"
+                                          variant="light"
                                           size="30"
                                         ></b-avatar>
                                         <span class="bold">
@@ -2318,7 +2322,7 @@
                                       >
                                         <b-avatar
                                           class="d-inline-block"
-                                          variant="primary"
+                                          variant="light"
                                           size="30"
                                         ></b-avatar>
                                         <span class="bold">
@@ -2352,7 +2356,7 @@
                                       >
                                         <b-avatar
                                           class="d-inline-block"
-                                          variant="primary"
+                                          variant="light"
                                           size="30"
                                         ></b-avatar>
                                         <span class="bold">
@@ -2366,6 +2370,8 @@
                             </div>
                             <hr />
                             <h5>{{ $t("general.Editors") }}</h5>
+
+                            
                             <div v-if="allEditors">
                               <tr
                                 v-for="(biz, index) in allEditors"
@@ -2386,7 +2392,7 @@
                                       >
                                         <b-avatar
                                           class="d-inline-block"
-                                          variant="primary"
+                                          variant="light"
                                           size="30"
                                         ></b-avatar>
                                         <span class="bold">
@@ -2420,7 +2426,7 @@
                                       >
                                         <b-avatar
                                           class="d-inline-block"
-                                          variant="primary"
+                                          variant="light"
                                           size="30"
                                         ></b-avatar>
                                         <span class="bold">
@@ -2485,7 +2491,7 @@
                                       >
                                         <b-avatar
                                           class="d-inline-block"
-                                          variant="primary"
+                                          variant="light"
                                           size="30"
                                         ></b-avatar>
                                         <span class="bold">
@@ -2552,7 +2558,7 @@
                                       <!-- @input="selectedMember(elm)" -->
                                       <b-avatar
                                         class="d-inline-block"
-                                        variant="primary"
+                                        variant="light"
                                         size="30"
                                       ></b-avatar>
                                       <span class="bold">
@@ -2618,7 +2624,7 @@
                                       >
                                         <b-avatar
                                           class="d-inline-block"
-                                          variant="primary"
+                                          variant="light"
                                           size="30"
                                         ></b-avatar>
                                         <span class="bold">
@@ -2646,9 +2652,9 @@
                                 class="centralizer"
                               ></b-spinner>
                             </div>
-                            <div v-if="bizs.length">
+                            <div v-if="allEditors.length">
                               <tr
-                                v-for="(biz, index) in bizs"
+                                v-for="(biz, index) in allEditors"
                                 :key="index"
                                 class="p-2 message"
                               >
@@ -2666,7 +2672,7 @@
                                       >
                                         <b-avatar
                                           class="d-inline-block"
-                                          variant="primary"
+                                          variant="light"
                                           size="30"
                                         ></b-avatar>
                                         <span class="bold">
@@ -2712,7 +2718,7 @@
                                       >
                                         <b-avatar
                                           class="d-inline-block"
-                                          variant="primary"
+                                          variant="light"
                                           size="30"
                                         ></b-avatar>
                                         <span class="bold">
@@ -2765,7 +2771,7 @@
                               <td>
                                 <b-avatar
                                   class="d-inline-block"
-                                  variant="primary"
+                                  variant="light"
                                   size="30"
                                   :src="user.profile_picture"
                                 ></b-avatar>
@@ -2789,7 +2795,7 @@
                               <td>
                                 <b-avatar
                                   class="d-inline-block"
-                                  variant="primary"
+                                  variant="light"
                                   size="30"
                                   :src="
                                     getImage({
@@ -2818,7 +2824,7 @@
                               <td>
                                 <b-avatar
                                   class="d-inline-block"
-                                  variant="primary"
+                                  variant="light"
                                   size="30"
                                   :src="
                                     getImage({
@@ -2984,6 +2990,15 @@ export default {
     all() {
       return this.$store.getters["networkChat/getAll"];
     },
+
+    
+
+lastcreatedgroup() {
+      return this.$store.getters["businessChat/getlastcreatedgroup"];
+    },
+
+
+
     allNetworks() {
       return this.$store.getters["networkChat/getAllNetworks"];
     },
@@ -3289,7 +3304,7 @@ export default {
         ? chat.network_editor_i_d.name
         : chat.business_editor_i_d
         ? chat.business_editor_i_d.name
-        : "Anonymous";
+        : this.$t('businessowner.me');
     },
     convert(bytes, decimals = 2) {
       if (bytes === 0) return "0 Bytes";
@@ -3476,7 +3491,28 @@ export default {
         networkID: this.selectedNetwork.toString(),
         memberID: this.selectedMember.toString(),
         networkEditorsID: this.selectedEditor.toString(),
+      }).then(()=>{
+
+       
+
+    
+
+
+                     this.selectedChat({
+                                type: 'group',
+                                chat: this.lastcreatedgroup,
+                                id: this.chatId,
+                              });
+
+
+
+
+    
+
+
       });
+
+
       this.newMsg = false;
 
       // this.getChatList({ type: "group" });
@@ -3624,15 +3660,15 @@ export default {
       // let receiver = { receiverID: dumId, keyword: null };
       // this.histBizToUser(receiver);
 
-      this.newMsg = false;
-      // this.chatSelected = { active: true, clickedId: data.id, ...data.chat };
-      this.chatSelected = {
-        active: true,
-        clickedId: this.chatId,
-        name: this.groupName,
-      };
+      // this.newMsg = false;
+      // // this.chatSelected = { active: true, clickedId: data.id, ...data.chat };
+      // this.chatSelected = {
+      //   active: true,
+      //   clickedId: this.chatId, 
+      //   name: this.groupName,
+      // };
       console.log("[DEBUG] Chat selected:", this.chatSelected);
-      this.groupName = "";
+     // this.groupName = "";
     },
     selectedChat(data) {
       console.log("[type tabs]", this.tabIndex);
@@ -3641,7 +3677,7 @@ export default {
       console.log("[selected Chat]", data);
       this.createRoom(data.id);
       if (this.type == "group") {
-        this.createGroup();
+       // this.createGroup();
       }
       // this.chatId = data.id;
       this.rightSide = screenX > 930;
@@ -3669,11 +3705,15 @@ export default {
 
       this.newMsg = false;
       // this.chatSelected = { active: true, clickedId: data.id, ...data.chat };
+  let chatname= data.chat.name ? data.chat.name : data.chat.groupName;
+  chatname= chatname ? chatname:data.groupName;
+      
       this.chatSelected = {
         id: data.id,
         active: true,
         clickedId: data.id,
-        name: data.chat.name ? data.chat.name : data.chat.groupName,
+        name: chatname,
+
         chat: data.chat,
       };
       this.groupAdminId = data.chat.admin_networkID
@@ -3913,15 +3953,15 @@ export default {
 .chat-nav {
   position: relative;
   min-height: 70px;
-  border-right: 2px solid #ccc;
+  /* border-right: 2px solid #ccc; */
   width: 100%;
-  padding: 10px;
+  /* padding: 10px; */
 }
 
 .chats {
   /* border: 2px solid green; */
   height: 540px;
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
 }
 
@@ -3943,7 +3983,7 @@ h1 {
 }
 
 .messages {
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
   height: 500px;
 }
@@ -4117,7 +4157,7 @@ li {
     padding: 10px;
   }
   .messages-mobile {
-    overflow-y: scroll;
+    overflow-y: auto;
     overflow-x: hidden;
     height: 690px;
     border-top: none;

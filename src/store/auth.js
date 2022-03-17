@@ -12,6 +12,7 @@ export default {
     passwordToken: null, 
     registerData: null,
     neigbourhoods: [],
+    cities:[],
     businessAround: [],
     peopleAround: [],
     categories: [],
@@ -97,6 +98,11 @@ export default {
     setneigbourhoods(state, data) {
       state.neigbourhoods = data;
     },
+
+    setCities(state, data) {
+      state.cities = data;
+    },
+
 
     setCountry(state, data) {
       state.country = data;
@@ -204,6 +210,20 @@ export default {
       });
 
     },
+
+    cities({ commit }, payload) {
+
+
+      return axios.get("visitor/search/city").then(({ data }) => {
+
+        console.log("logging data for neigbourhood");
+        console.log(data);
+        commit("setCities", data.data);
+
+      });
+
+    },
+
 
     country({ commit }) {
 

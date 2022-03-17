@@ -681,7 +681,10 @@ export default {
     }
      
      if(this.islogin) {   
-      this.searchParams.location = this.$route.query.location ? this.$route.query.location:this.$store.getters["auth/user"].user.address;
+        
+      
+
+      this.searchParams.location = this.$route.query.location ? this.$route.query.location:this.$store.getters["auth/user"].user.city;
 
       this.searchParams.location_placeholder=this.searchParams.location ? this.searchParams.location : this.$t("home.Location");
     

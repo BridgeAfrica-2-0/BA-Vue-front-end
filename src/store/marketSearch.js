@@ -194,10 +194,10 @@ export default {
             let regionId = data.region_id ? "&regionId=" + data.region_id : "";
             let divisionId = data.division_id ? "&divisionId=" + data.division_id : "";
             let councilId = data.council_id ? "&councilId=" + data.council_id : "";
-            let city = data.city ? "&city=" + data.city : "";
+            let city = data.city ? "&city=" + data.city : "&city=" + state.location;
             let neighbourhoodId=data.neighborhood_id ?  "&neighbourhoodId=" + data.neighborhood_id : "";
             
-            let neighbourhood = data.neighbourhood ? "&neighbourhood=" + data.neighbourhood : "&neighbourhood=" + state.location;
+            let neighbourhood = data.neighbourhood ? "&neighbourhood=" + data.neighbourhood : "";
 
           
             try {

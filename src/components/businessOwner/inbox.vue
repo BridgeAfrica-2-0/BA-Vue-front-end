@@ -74,7 +74,7 @@
                         <b-col class="mb-6 pb-6">
                           <input
                             v-model="searchQuery" 
-                            class="form-control input-background"
+                            class="form-control input-background mb-2"
                             :placeholder="this.$t('general.Search_chat_list')"
                             @keypress.enter="
                               getChatList({
@@ -164,7 +164,7 @@
                         <b-col class="mb-6 pb-6">
                           <input
                             v-model="searchQuery"
-                            class="form-control input-background"
+                            class="form-control input-background mb-2 "
                             :placeholder="$t('general.Search_chat_list')"
                             @keypress.enter="
                               getChatList({
@@ -345,7 +345,7 @@
                         <b-col class="mb-6 pb-6">
                           <input
                             v-model="searchQuery"
-                            class="form-control input-background"
+                            class="form-control input-background mb-2"
                             :placeholder="$t('general.Search_chat_list')"
                             @keypress.enter="
                               getChatList({
@@ -1502,7 +1502,7 @@
                         <b-col class="mb-6 pb-6">
                           <input
                             v-model="searchQuery"
-                            class="form-control input-background"
+                            class="form-control input-background mb-2"
                             :placeholder="this.$t('general.Search_chat_list')"
                             @keypress.enter="
                               getChatList({
@@ -1593,7 +1593,7 @@
                         <b-col class="mb-6 pb-6">
                           <input
                             v-model="searchQuery"
-                            class="form-control input-background"
+                            class="form-control input-background mb-2"
                             :placeholder="$t('general.Search_chat_list')"
                             @keypress.enter="
                               getChatList({
@@ -1684,7 +1684,7 @@
                         <b-col class="mb-6 pb-6">
                           <input
                             v-model="searchQuery"
-                            class="form-control input-background"
+                            class="form-control input-background mb-2"
                             :placeholder="$t('general.Search_chat_list')"
                             @keypress.enter="
                               getChatList({
@@ -1773,7 +1773,7 @@
                         <b-col class="mb-6 pb-6">
                           <input
                             v-model="searchQuery"
-                            class="form-control input-background"
+                            class="form-control input-background mb-2 "
                             :placeholder="$t('general.Search_chat_list')"
                             @keypress.enter="
                               getChatList({
@@ -3815,15 +3815,15 @@ console.log("blec debugging ---");
 .chat-nav {
   position: relative;
   min-height: 70px;
-  border-right: 2px solid #ccc;
+  /* border-right: 2px solid #ccc; */
   width: 100%;
-  padding: 10px;
+  /* padding: 10px; */
 }
 
 .chats {
   /* border: 2px solid green; */
   height: 540px;
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
 }
 
@@ -3845,7 +3845,7 @@ h1 {
 }
 
 .messages {
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
   height: 500px;
 }
@@ -4003,7 +4003,7 @@ li {
     padding: 10px;
   }
   .messages-mobile {
-    overflow-y: scroll;
+    overflow-y: auto;
     overflow-x: hidden;
     height: 690px;
     border-top: none;

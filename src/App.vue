@@ -51,15 +51,15 @@ export default {
         "network" === newProfile.user_type ? newProfile.id : null
       );
     },
+
+    "$i18n.locale": function(newLanguage){
+      localStorage.setItem('lang', newLanguage) 
+    }
   },
 
   
  created(){
    
-
-  
-   
-
   },
 
   methods: {

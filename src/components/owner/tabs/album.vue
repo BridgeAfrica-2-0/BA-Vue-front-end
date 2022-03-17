@@ -7,7 +7,7 @@
             
                 <div class="drag-textt">
                   <fas-icon :icon="['fas', 'plus']" />
-                  <h3>{{ $t('profileowner.Create_Album') }}</h3>
+                  <h3 style="font-size: 1.60rem">{{ $t('profileowner.Create_Album') }}</h3>
                 </div>
              
           </div>

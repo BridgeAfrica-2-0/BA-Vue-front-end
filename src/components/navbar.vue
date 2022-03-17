@@ -376,12 +376,16 @@
                       :to="{ name: 'settings' }"
                       class="other-menu suggest-item cursor-pointer text-decoration-none text-dark w-full"
                     >
-                      <span class="mr-2 w-full"
+                      <span 
+                        class="mr-2 w-full"
+                        style="display: inline-block;"
                         ><fas-icon
                           class="violet search"
                           :icon="['fas', 'cogs']"
-                      /></span>
-                      {{ $t("general.Account_Settings") }}
+                      />
+                        {{ $t("general.Account_Settings") }}
+                      </span>
+                      
                     </router-link>
                     <hr class="h-divider" />
                     <div class="other-menu suggest-item cursor-pointer">

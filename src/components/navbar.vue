@@ -269,13 +269,11 @@
                         class="d-inline-flex flex-row align-items-center suggest-item cursor-pointer"
                       >
                         <div>
-                          <img
-                            :src="profileSenderImange(notification.sender)"
-                            class="rounded-circle"
-                            alt=""
-                            width="30"
-                            height="30"
-                          />
+                          <b-avatar
+                            :src="notification.profile_picture"
+                            size="2rem"
+                          >
+                          </b-avatar>
                         </div>
                         <div class="d-flex flex-column ml-3">
                           <div>{{ notification.notification_text }}</div>
@@ -771,14 +769,14 @@ export default {
 
 
     profileSenderImange(image) {
-      // console.log("image is:", image);
-      const picture = image
-        ? image.profile_picture
+      if (!image)
+        return null;
+
+      const picture = image.profile_picture
           ? image.profile_picture
           : image.logo_path
-          ? image.logo_path
-          : image.image
-        : "";
+            ? image.logo_path
+            : image.image ? image.image : null ;
 
       return picture;
     },

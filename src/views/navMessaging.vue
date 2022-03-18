@@ -54,13 +54,13 @@
                       <b-row class="pa-6">
                         <b-col class="mb-6 pb-6">
                           <input
-                            v-model="searchQuery"
-                            class="form-control input-background mb-2"
+                            v-model="searchQueryUser"
+                            class="form-control input-background  mb-2"
                             :placeholder="$t('general.Search_chat_list')"
                             @keypress.enter="
                               getChatList({
                                 type: 'user',
-                                keyword: searchQuery,
+                                keyword: searchQueryUser,
                               })
                             "
                           />
@@ -143,13 +143,13 @@
                       <b-row class="pa-6">
                         <b-col class="mb-6 pb-6">
                           <input
-                            v-model="searchQuery"
+                            v-model="searchQueryBusiness"
                             class="form-control input-background  mb-2"
                             :placeholder="$t('general.Search_chat_list')"
                             @keypress.enter="
                               getChatList({
                                 type: 'business',
-                                keyword: searchQuery,
+                                keyword: searchQueryBusiness,
                               })
                             "
                           />
@@ -231,13 +231,13 @@
                       <b-row class="pa-6">
                         <b-col class="mb-6 pb-6">
                           <input
-                            v-model="searchQuery"
+                            v-model="searchQueryNetwork"
                             class="form-control input-background  mb-2"
                             :placeholder="$t('general.Search_chat_list')"
                             @keypress.enter="
                               getChatList({
                                 type: 'network',
-                                keyword: searchQuery,
+                                keyword: searchQueryNetwork,
                               })
                             "
                           />
@@ -828,13 +828,13 @@
                       <b-row class="pa-6">
                         <b-col class="mb-6 pb-6">
                           <input
-                            v-model="searchQuery"
+                            v-model="searchQueryUser"
                             class="form-control input-background  mb-2"
                             :placeholder="$t('general.Search_chat_list')"
                             @keypress="
                               getChatList({
                                 type: 'user',
-                                keyword: searchQuery,
+                                keyword: searchQueryUser,
                               })
                             "
                           />
@@ -897,11 +897,7 @@
                             <small class="text-center">
                               {{ getCreatedAt(chat.created_at) }}
                             </small>
-                            <!-- <p class="text-center">
-                              <b-badge variant="info">
-                                {{ chat.receiver_id }}
-                              </b-badge>
-                            </p> -->
+
                           </b-col>
                         </b-row>
                       </div>
@@ -917,13 +913,13 @@
                       <b-row class="pa-6">
                         <b-col class="mb-6 pb-6">
                           <input
-                            v-model="searchQuery"
+                            v-model="searchQueryBusiness"
                             class="form-control input-background  mb-2"
                             :placeholder="$t('general.Search_chat_list')"
                             @keypress.enter="
                               getChatList({
                                 type: 'business',
-                                keyword: searchQuery,
+                                keyword: searchQueryBusiness,
                               })
                             "
                           />
@@ -1006,13 +1002,13 @@
                       <b-row class="pa-6">
                         <b-col class="mb-6 pb-6">
                           <input
-                            v-model="searchQuery"
-                            class="form-control input-background  mb-2 "
+                            v-model="searchQueryNetwork"
+                            class="form-control input-background  mb-2"
                             :placeholder="$t('general.Search_chat_list')"
                             @keypress.enter="
                               getChatList({
                                 type: 'network',
-                                keyword: searchQuery,
+                                keyword: searchQueryNetwork,
                               })
                             "
                           />
@@ -1624,6 +1620,9 @@ export default {
       showsearch: true,
       selecteduser: false,
       searchQuery: "",
+      searchQueryUser: "",
+      searchQueryBusiness: "",
+      searchQueryNetwork: "",
       newSearchQuery: "",
       newMsg: false,
       show: false,

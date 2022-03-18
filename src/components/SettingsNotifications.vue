@@ -39,13 +39,14 @@
               >
               </b-form-checkbox>
               <!-- AVATAR NOTIF -->
-              <b-avatar v-if="!notif.avatar" variant="primary"></b-avatar>
-              <b-avatar v-else :src="notif.avatar ? notif.avatar: notif.profile_picture"></b-avatar>
+              
+              <b-avatar  :src="notif.profile_picture"></b-avatar>
               <div class="ml-2">
                 <p class="mb-0 font-weight-bold">{{ notif.name }}</p>
                 <p class="mb-0 text-secondary">{{ formatDate(notif.created_at) }}</p>
               </div>
             </div>
+            
             <p class="mb-0">
               <!-- {{
                 notif.notification_text.length > 226

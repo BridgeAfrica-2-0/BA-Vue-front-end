@@ -33,8 +33,13 @@
 										text="English"
 										class="m-2"
 									>
-										<b-dropdown-item-button @click="setLocale('en')">{{ $t("general.English") }}</b-dropdown-item-button>
-										<b-dropdown-item-button @click="setLocale('fr')">{{ $t("general.French") }}</b-dropdown-item-button>
+										<b-dropdown-item-button 
+											@click="setLocale('en')" 
+											:active="$i18n.locale == 'en' ? true : false">{{ $t("general.English") }}</b-dropdown-item-button>
+										<b-dropdown-item-button 
+											@click="setLocale('fr')"
+											:active="$i18n.locale == 'en' ? false : true"
+										>{{ $t("general.French") }}</b-dropdown-item-button>
 									</b-dropdown>
 								</li>
 								<li class="nav-item dropdown show">

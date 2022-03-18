@@ -490,14 +490,18 @@
     <div class="mt-5">
       <h1 class="color-black text-center font-arvo functionality-heading text-center letter-spacing">{{$t("about.MEET_OUR_TEAM")}}</h1>
       <div class="row justify-content-center p-5">
+        
+
         <div class="col-md-3 m-3 border border-dark team-div px-5 pt-5">
           <img
-            src="../assets/img/team/lorent.png"
+            src="../assets/img/team/maxine.png"
             alt="img"
             class="rounded-circle d-block m-auto team-img"
           />
-          <p class="text-center team-name color-black mt-5">Lorenzo Tencati</p>
-          <p class="text-center team-position color-black">{{$t("about.Advisory_Board_to_CEO")}}</p>
+
+          <p class="text-center team-name color-black mt-5">Maxine Moffet</p>
+
+          <p class="text-center team-position color-black">{{$t("about.Co_founder")}}</p>
         </div>
 
         <div class="col-md-3 m-3 border border-dark team-div px-5 pt-5">
@@ -542,14 +546,12 @@
 
         <div class="col-md-3 m-3 border border-dark team-div px-5 pt-5">
           <img
-            src="../assets/img/team/maxine.png"
+            src="../assets/img/team/lorent.png"
             alt="img"
             class="rounded-circle d-block m-auto team-img"
           />
-
-          <p class="text-center team-name color-black mt-5">Maxine Moffet</p>
-
-          <p class="text-center team-position color-black">{{$t("about.Co_founder")}}</p>
+          <p class="text-center team-name color-black mt-5">Lorenzo Tencati</p>
+          <p class="text-center team-position color-black">{{$t("about.Advisory_Board_to_CEO")}}</p>
         </div>
       </div>
     </div>

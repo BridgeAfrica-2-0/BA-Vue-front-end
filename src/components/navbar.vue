@@ -269,13 +269,13 @@
                         class="d-inline-flex flex-row align-items-center suggest-item cursor-pointer"
                       >
                         <div>
-                          <img
+
+                          <b-avatar
                             :src="notification.profile_picture"
-                            class="rounded-circle"
-                            alt=""
-                            width="30"
-                            height="30"
-                          />
+                            size="2rem"
+                          >
+                          </b-avatar>
+                          
                         </div>
                         <div class="d-flex flex-column ml-3">
                           <div>{{ notification.notification_text }}</div>
@@ -378,12 +378,16 @@
                       :to="{ name: 'settings' }"
                       class="other-menu suggest-item cursor-pointer text-decoration-none text-dark w-full"
                     >
-                      <span class="mr-2 w-full"
+                      <span 
+                        class="mr-2 w-full"
+                        style="display: inline-block;"
                         ><fas-icon
                           class="violet search"
                           :icon="['fas', 'cogs']"
-                      /></span>
-                      {{ $t("general.Account_Settings") }}
+                      />
+                        {{ $t("general.Account_Settings") }}
+                      </span>
+                      
                     </router-link>
                     <hr class="h-divider" />
                     <div class="other-menu suggest-item cursor-pointer">
@@ -786,14 +790,14 @@ export default {
 
 
     profileSenderImange(image) {
-      // console.log("image is:", image);
-      const picture = image
-        ? image.profile_picture
+      if (!image)
+        return null;
+
+      const picture = image.profile_picture
           ? image.profile_picture
           : image.logo_path
-          ? image.logo_path
-          : image.image
-        : "";
+            ? image.logo_path
+            : image.image ? image.image : null ;
 
       return picture;
     },

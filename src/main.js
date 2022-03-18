@@ -203,15 +203,31 @@ new Vue({
     router,
     store,
     i18n,
+    methods:{
+        setDefaultLanguage(){
+
+            let lang = localStorage.getItem('lang')
+
+            if (lang && (lang == 'fr' || lang == 'en')){
+                this.$i18n.locale = lang
+                return lang
+            }
+
+            const browserLanguage = window.navigator.userLanguage || window.navigator.language;
+
+            this.$i18n.locale =  "fr-FR" == browserLanguage || "fr" == browserLanguage || "FR" == browserLanguage  ? 'fr' : 'en'
+            
+        }
+    },
+    
     created() {
         
         let userInfo = localStorage.getItem('user');
 
-        const browserLanguage = window.navigator.userLanguage || window.navigator.language;
+        
                 
-        this.$i18n.locale =  "fr-FR" == browserLanguage || "fr" == browserLanguage || "FR" == browserLanguage  ? 'fr' : 'en'
-
-        let lang = localStorage.getItem('lang') ? localStorage.getItem('lang') : "en";
+        
+        let lang = this.setDefaultLanguage()
 
         if (userInfo) {
             let userData = JSON.parse(userInfo);

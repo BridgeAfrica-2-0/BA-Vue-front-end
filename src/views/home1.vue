@@ -864,13 +864,30 @@ export default {
       hasLauchNetworkRequest: "social/INIT",
       user: "auth/profilConnected",
       auth: "auth/user",
-      neigbourhoods: "auth/neigbourhoods",
+     // neigbourhoods: "auth/neigbourhoods",
     }),
 
     query(){
 
       return this.credentials.location;
-    }
+    },
+
+
+
+    neigbourhoods(){
+
+    let nei=  this.$store.getters["auth/cities"];
+const arrayFailed = Object.entries(nei).map((arr) => ({
+  id: arr[0],
+  name: arr[1],
+}));
+
+return arrayFailed;
+
+
+  },
+
+
   },
 
 
@@ -878,11 +895,15 @@ export default {
 
      word2(newQuery) {
       axios
-        .get(`neighborhoods/${newQuery}`)
+           .get(`visitor/search/city?city=${newQuery}`)
         .then(({ data }) => {
-          this.$store.commit("auth/setneigbourhoods", data.data);
+          this.$store.commit("auth/setCities", data.data);
         });
     },
+
+
+    
+
   },
 
   methods: {
@@ -1698,8 +1719,8 @@ footer a {
   height: 65px;
   width: 65px;
   position: absolute;
-  margin-top: 15%;
-  margin-left: 45%;
+  margin-top: 22%;
+  margin-left: 47%;
 }
 
 }

@@ -1,5 +1,6 @@
 <template>
-  <header class="">
+  <header class=""> 
+
     <nav class="navbar navbar-expand-xl p-3 mb-3 rounded">
       <div class="container-fluid">
         <div class="col-md-12 col-lg-2 col-xl-2 text-center">
@@ -604,6 +605,7 @@
       </div>
     </nav>
 
+
     <div></div>
   </header>
 </template>
@@ -661,10 +663,27 @@ export default {
       hasLauchNetworkRequest: "social/INIT",
       user: "auth/profilConnected",
       auth: "auth/user",
-      neigbourhoods: "auth/neigbourhoods",
+     // neigbourhoods: "auth/neigbourhoods",
 
-      cities: "auth/cities",
+      neigbourhoods: "auth/cities",
     }),
+
+
+//   neigbourhoods(){
+
+// //     let nei=  this.$store.getters["auth/cities"];
+// // const arrayFailed = Object.entries(nei).map((arr) => ({
+// //   id: arr[0],
+// //   name: arr[1],
+// // }));
+
+// return this.$store.getters["auth/cities"];
+
+
+//   },
+
+
+
 
     query(){
 
@@ -748,9 +767,11 @@ export default {
 
     query(newQuery) {
       axios
-        .get(`visitor/search/city?city=/${newQuery}`)
+        .get(`visitor/search/city?city=${newQuery}`)
         .then(({ data }) => {
-          this.$store.commit("auth/setneigbourhoods", data.data);
+
+          console.log(data);
+          this.$store.commit("auth/setCities", data.data);
         });
     },
 

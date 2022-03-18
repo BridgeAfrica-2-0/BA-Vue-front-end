@@ -7,14 +7,15 @@ export default {
     networkInfo: [],
     networks: [],
     loader: false,
-    success: false,
+    success: false, 
     communityPeople: [],
     CommunityBusiness: [],
     communityTotal: [],
     albums: [],
     images: [],
     albumImages: [],
-
+    businesses:[],
+    users:[],
     ownerPost: [],
     ownerPostImages: [],
     selected:0
@@ -55,6 +56,18 @@ export default {
     }
   },
   mutations: {
+
+    setUsers(state, data){
+     
+      state.users=data;
+
+    },
+
+    setBusinesses(state, data){
+      state.businesses=data;
+    },
+
+    
     setSelected(state, val){
       state.selected = val;
     },
@@ -145,6 +158,23 @@ export default {
   },
 
   actions: {
+
+
+    users({ commit }, url) {
+      return axios.get(url).then(({ data }) => {
+        console.log(data);
+        commit('setUsers', data.data.users);
+      });
+    },
+
+
+    busineses({ commit }, url) {
+      return axios.get(url).then(({ data }) => {
+        console.log(data);
+        commit('setBusinesses', data.data.businesses);
+      });
+    },
+
 
     Selected({commit}){
         commit('setSelected', 4)

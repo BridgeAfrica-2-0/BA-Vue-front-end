@@ -10,7 +10,7 @@
                 <b-col class="p-2">
                   <b-avatar
                     class="d-inline-block profile-pic"
-                    variant="primary"
+                    variant="light"
                     :src="currentBiz.profile_picture"
                     square
                   ></b-avatar>
@@ -126,7 +126,7 @@
                               <span style="display: inline-flex">
                                 <b-avatar
                                   class="d-inline-block profile-pic"
-                                  variant="primary"
+                                  variant="light"
                                   :src="chatListImage(chat)"
                                   
                                 ></b-avatar>
@@ -217,7 +217,7 @@
                               <span style="display: inline-flex">
                                 <b-avatar
                                   class="d-inline-block profile-pic"
-                                  variant="primary"
+                                  variant="light"
                                   :src="chatListImage(chat)"
                                   square
                                 ></b-avatar>
@@ -309,7 +309,7 @@
                             <span style="display: inline-flex">
                               <b-avatar
                                 class="d-inline-block profile-pic"
-                                variant="primary"
+                                variant="light"
                                 :src="chatListImage(chat)"
                                 square
                               ></b-avatar>
@@ -360,7 +360,7 @@
                       <div class="messages">
                         <div v-if="loader" class="text-center">
                           <b-spinner
-                            variant="primary"
+                            variant="light"
                             label="Spinning"
                             class="centralizer"
                           ></b-spinner>
@@ -393,7 +393,7 @@
                               <span style="display: inline-flex">
                                 <b-avatar
                                   class="d-inline-block profile-pic"
-                                  variant="primary"
+                                  variant="light"
                                   :src="require('@/assets/default_group.png')"
                                   square
                                 ></b-avatar>
@@ -447,7 +447,7 @@
                   </b-col>
                   <b-col class="col-2" @click="info = true">
                     <b-avatar
-                      variant="primary"
+                      variant="light"
                       :square= "type == 'user' ? false : true"
                       :src="chatListImage(chatSelected)"
                       size="50"
@@ -761,7 +761,7 @@
             <div class="info-bottom">
               <b-avatar
                 class="info-avatar"
-                variant="primary"
+                variant="light"
                 :src="chatSelected.logo_path"
                 size="200"
               ></b-avatar>
@@ -887,7 +887,7 @@
                                         >
                                           <b-avatar
                                             class="d-inline-block"
-                                            variant="primary"
+                                            variant="light"
                                             size="30"
                                             :src="biz.profile_picture"
                                           ></b-avatar>
@@ -922,7 +922,7 @@
                                         >
                                           <b-avatar
                                             class="d-inline-block"
-                                            variant="primary"
+                                            variant="light"
                                             size="30"
                                             :src="
                                               getImage({
@@ -962,7 +962,7 @@
                                         >
                                           <b-avatar
                                             class="d-inline-block"
-                                            variant="primary"
+                                            variant="light"
                                             size="30"
                                             :src="biz.image"
                                           ></b-avatar>
@@ -997,7 +997,7 @@
                                         >
                                           <b-avatar
                                             class="d-inline-block"
-                                            variant="primary"
+                                            variant="light"
                                             size="30"
                                           ></b-avatar>
                                           <span class="bold">
@@ -1096,7 +1096,7 @@
                                         >
                                           <b-avatar
                                             class="d-inline-block"
-                                            variant="primary"
+                                            variant="light"
                                             size="30"
                                           ></b-avatar>
                                           <span class="bold">
@@ -1163,7 +1163,7 @@
                                         <!-- @input="selectedMember(elm)" -->
                                         <b-avatar
                                           class="d-inline-block"
-                                          variant="primary"
+                                          variant="light"
                                           size="30"
                                         ></b-avatar>
                                         <span class="bold">
@@ -1226,7 +1226,7 @@
                                         >
                                           <b-avatar
                                             class="d-inline-block"
-                                            variant="primary"
+                                            variant="light"
                                             size="30"
                                           ></b-avatar>
                                           <span class="bold">
@@ -1275,7 +1275,7 @@
                                         >
                                           <b-avatar
                                             class="d-inline-block"
-                                            variant="primary"
+                                            variant="light"
                                             size="30"
                                           ></b-avatar>
                                           <span class="bold">
@@ -1328,7 +1328,7 @@
                                 <td>
                                   <b-avatar
                                     class="d-inline-block"
-                                    variant="primary"
+                                    variant="light"
                                     size="30"
                                     :src="
                                       getImage({
@@ -1357,7 +1357,7 @@
                                 <td>
                                   <b-avatar
                                     class="d-inline-block"
-                                    variant="primary"
+                                    variant="light"
                                     size="30"
                                     :src="
                                       getImage({
@@ -1386,7 +1386,7 @@
                                 <td>
                                   <b-avatar
                                     class="d-inline-block"
-                                    variant="primary"
+                                    variant="light"
                                     size="30"
                                     :src="
                                       getImage({
@@ -1438,7 +1438,7 @@
                 <b-col class="p-2">
                   <b-avatar
                     class="d-inline-block profile-pic"
-                    variant="primary"
+                    variant="light"
                     :src="currentBiz.profile_picture"
                     square
                   ></b-avatar>
@@ -1556,7 +1556,7 @@
                               <span style="display: inline-flex">
                                 <b-avatar
                                   class="d-inline-block profile-pic"
-                                  variant="primary"
+                                  variant="light"
                                   :src="chatListImage(chat)"
                                 ></b-avatar>
 
@@ -1646,7 +1646,7 @@
                               <span style="display: inline-flex">
                                 <b-avatar
                                   class="d-inline-block profile-pic"
-                                  variant="primary"
+                                  variant="light"
                                   :src="chatListImage(chat)"
                                   square
                                 ></b-avatar>
@@ -1737,7 +1737,7 @@
                             <span style="display: inline-flex">
                               <b-avatar
                                 class="d-inline-block profile-pic"
-                                variant="primary"
+                                variant="light"
                                 :src="chatListImage(chat)"
                                 square
                               ></b-avatar>
@@ -1821,7 +1821,7 @@
                               <span style="display: inline-flex">
                                 <b-avatar
                                   class="d-inline-block profile-pic"
-                                  variant="primary"
+                                  variant="light"
                                   :src="require('@/assets/default_group.png')"
                                 ></b-avatar>
 
@@ -1862,7 +1862,7 @@
                 <b-row class="desk" v-if="chatSelected.active">
                   <b-col class="col-2" @click="info = true">
                     <b-avatar
-                      variant="primary"
+                      variant="light"
                       :square= "type == 'user' ? false : true"
                       :src="chatListImage(chatSelected)"
                       size="50"
@@ -2176,7 +2176,7 @@
             <div class="info-bottom">
               <b-avatar
                 class="info-avatar"
-                variant="primary"
+                variant="light"
                 :src="chatSelected.logo_path"
                 size="200"
               ></b-avatar>
@@ -2295,7 +2295,7 @@
                                         >
                                           <b-avatar
                                             class="d-inline-block"
-                                            variant="primary"
+                                            variant="light"
                                             size="30"
                                           ></b-avatar>
                                           <span class="bold">
@@ -2329,7 +2329,7 @@
                                         >
                                           <b-avatar
                                             class="d-inline-block"
-                                            variant="primary"
+                                            variant="light"
                                             size="30"
                                           ></b-avatar>
                                           <span class="bold">
@@ -2363,7 +2363,7 @@
                                         >
                                           <b-avatar
                                             class="d-inline-block"
-                                            variant="primary"
+                                            variant="light"
                                             size="30"
                                           ></b-avatar>
                                           <span class="bold">
@@ -2397,7 +2397,7 @@
                                         >
                                           <b-avatar
                                             class="d-inline-block"
-                                            variant="primary"
+                                            variant="light"
                                             size="30"
                                           ></b-avatar>
                                           <span class="bold">
@@ -2463,7 +2463,7 @@
                                         >
                                           <b-avatar
                                             class="d-inline-block"
-                                            variant="primary"
+                                            variant="light"
                                             size="30"
                                           ></b-avatar>
                                           <span class="bold">
@@ -2530,7 +2530,7 @@
                                         <!-- @input="selectedMember(elm)" -->
                                         <b-avatar
                                           class="d-inline-block"
-                                          variant="primary"
+                                          variant="light"
                                           size="30"
                                         ></b-avatar>
                                         <span class="bold">
@@ -2593,7 +2593,7 @@
                                         >
                                           <b-avatar
                                             class="d-inline-block"
-                                            variant="primary"
+                                            variant="light"
                                             size="30"
                                           ></b-avatar>
                                           <span class="bold">
@@ -2642,7 +2642,7 @@
                                         >
                                           <b-avatar
                                             class="d-inline-block"
-                                            variant="primary"
+                                            variant="light"
                                             size="30"
                                           ></b-avatar>
                                           <span class="bold">
@@ -2693,7 +2693,7 @@
                                 <td>
                                   <b-avatar
                                     class="d-inline-block"
-                                    variant="primary"
+                                    variant="light"
                                     size="30"
                                     :src="
                                       getImage({
@@ -2722,7 +2722,7 @@
                                 <td>
                                   <b-avatar
                                     class="d-inline-block"
-                                    variant="primary"
+                                    variant="light"
                                     size="30"
                                     :src="
                                       getImage({
@@ -2751,7 +2751,7 @@
                                 <td>
                                   <b-avatar
                                     class="d-inline-block"
-                                    variant="primary"
+                                    variant="light"
                                     size="30"
                                     :src="
                                       getImage({

@@ -2016,11 +2016,14 @@ export default {
       console.log("listenning...");
     },
     getCreatedAt(data) {
-      if (moment(data).isBefore(moment())) {
+
+      const date = moment().diff(moment(data), 'days')
+      console.log(date >= 1)
+      if (date >= 1) {
         return moment(data).format("L");
       } else {
         // return moment(data).format('LT');
-        return moment(data).fromNow();
+        return moment(data).format('hh:mm')
       }
     },
     getList(keyword) {

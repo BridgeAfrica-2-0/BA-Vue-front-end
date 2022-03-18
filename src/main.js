@@ -216,6 +216,8 @@ new Vue({
             const browserLanguage = window.navigator.userLanguage || window.navigator.language;
 
             this.$i18n.locale =  "fr-FR" == browserLanguage || "fr" == browserLanguage || "FR" == browserLanguage  ? 'fr' : 'en'
+
+            return this.$i18n.locale
             
         }
     },
@@ -224,8 +226,6 @@ new Vue({
         
         let userInfo = localStorage.getItem('user');
 
-        
-                
         
         let lang = this.setDefaultLanguage()
 

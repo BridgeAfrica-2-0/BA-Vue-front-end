@@ -674,7 +674,7 @@ export default {
   },
 
   created() {
- this.islogin=this.$store.getters["auth/isLogged"];
+    this.islogin=this.$store.getters["auth/isLogged"];
 
     if (this.$route.query.keyword) {
       this.searchParams.keyword = this.$route.query.keyword;
@@ -705,7 +705,9 @@ export default {
       business: () => this.onFindBusiness(),
     };
 
-    this.getKeyword();
+    if (!this.$route.query.uuid)
+      this.getKeyword();
+    
     this.initialize();
   },
 

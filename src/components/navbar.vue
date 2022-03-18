@@ -270,7 +270,7 @@
                       >
                         <div>
                           <img
-                            :src="profileSenderImange(notification.sender)"
+                            :src="notification.profile_picture"
                             class="rounded-circle"
                             alt=""
                             width="30"

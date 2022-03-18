@@ -11,6 +11,7 @@ export const mutations = {
   }, //[TYPES.FIND_USER]
 
   [TYPES.FIND_POST](state, payload) {
+    console.log(payload)
     if (state.page > 1)
       state.posts = [...state.posts, ...payload]
     else

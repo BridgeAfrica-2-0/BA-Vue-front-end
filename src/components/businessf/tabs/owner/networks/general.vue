@@ -1,5 +1,17 @@
 <template>
   <div>
+
+    
+       <b-modal hide-footer id="modal-addm" ref="modal-addm" :title="$t('network.add_members')">
+        <div>
+         
+
+          <addmember />
+
+        </div>
+      </b-modal>
+
+
     <div class="mt-3 d-block d-md-none" v-if="selectedIdd == '2'">
       <Notification />
     </div>
@@ -87,7 +99,7 @@
 
 <script>
 import Roles from '@/components/businessf/tabs/owner/networks/roles';
-
+import addmember from "./addmember";
 import MemberShip from '@/components/businessf/tabs/owner/networks/memberShip';
 import KeywordAlert from '@/components/businessf/tabs/owner/networks/keywordAlert';
 
@@ -157,6 +169,7 @@ watch: {
     PendingPost,
     Settings,
     LyTab,
+    addmember
   },
 
   data() {

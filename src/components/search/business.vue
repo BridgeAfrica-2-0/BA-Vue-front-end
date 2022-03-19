@@ -457,6 +457,7 @@ export default {
 
     height: 38px;
     width: 127px;
+    font-size: 13px;
   }
 
   .r-image {

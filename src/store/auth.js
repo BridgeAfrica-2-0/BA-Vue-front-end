@@ -12,7 +12,7 @@ export default {
     passwordToken: null, 
     registerData: null,
     neigbourhoods: [],
-    cities:[],
+    cities:[{name:"bbl", id:1}],
     businessAround: [],
     peopleAround: [],
     categories: [],
@@ -374,6 +374,8 @@ export default {
     profilConnected: state => state.profilConnected,
 
     neigbourhoods: state => state.neigbourhoods,
+
+    cities: state => state.cities,
 
     getAppLanguage: (state) => state.appLanguage
 

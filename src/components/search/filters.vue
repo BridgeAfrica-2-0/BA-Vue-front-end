@@ -153,8 +153,19 @@
               class="mb-0 text-left"
             >
             </b-form-group>
-            <b-form-input v-model="city" value-field="id" text-field="name">
-            </b-form-input>
+          
+                 <vue-bootstrap-typeahead
+              v-model="city"
+              :data="cities"
+              :minMatchingChars="0"
+              @hit="searchThiscity(query)"
+              :maxMatches="10"
+              :serializer="(item) => item.name"
+              placeholder="City"
+              class=""
+            />
+
+
           </div>
 
           <div>
@@ -693,17 +704,12 @@ export default {
     },
 
     city(newQuery) {
-      let data = { city: newQuery };
 
-      this.searchParams.city = newQuery;
-
-      if (this.filterType == 1) {
-        this.searchBusiness(this.searchParams);
-      } else if (this.filterType == 4) {
-        this.searchProducts(this.searchParams);
-      } else if (this.filterType == 0) {
-        this.allSearch(this.searchParams);
-      }
+      axios.get(`visitor/search/city?city=${newQuery}`).then(({ data }) => {
+          this.$store.commit("auth/setCities", data.data);
+        });
+        
+     
     },
 
     
@@ -1815,6 +1821,20 @@ export default {
       return this.$store.getters["auth/neigbourhoods"];
     },
 
+
+ cities() {
+    
+      let nei=  this.$store.getters["auth/cities"];
+const arrayFailed = Object.entries(nei).map((arr) => ({
+  id: arr[0],
+  name: arr[1],
+}));
+
+return arrayFailed;
+
+    },
+
+
     categoriesAll() {
 
       const category = this.$store.getters["marketSearch/getCategories"].map(e => {
@@ -2148,6 +2168,25 @@ export default {
         }
 
     },
+
+
+searchThiscity(keyword){
+
+ let data = { city: keyword };
+
+      this.searchParams.city = keyword;
+
+      if (this.filterType == 1) {
+        this.searchBusiness(this.searchParams);
+      } else if (this.filterType == 4) {
+        this.searchProducts(this.searchParams);
+      } else if (this.filterType == 0) {
+        this.allSearch(this.searchParams);
+      }
+
+
+},
+
 
     searchByNeigbourhood(nei) {
       let data = {

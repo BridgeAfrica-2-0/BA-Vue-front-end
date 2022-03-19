@@ -864,7 +864,7 @@ export default {
       hasLauchNetworkRequest: "social/INIT",
       user: "auth/profilConnected",
       auth: "auth/user",
-     // neigbourhoods: "auth/neigbourhoods",
+      neigbourhoods: "auth/cities",
     }),
 
     query(){
@@ -874,18 +874,18 @@ export default {
 
 
 
-    neigbourhoods(){
+//     neigbourhoods(){
 
-    let nei=  this.$store.getters["auth/cities"];
-const arrayFailed = Object.entries(nei).map((arr) => ({
-  id: arr[0],
-  name: arr[1],
-}));
+//     let nei=  this.$store.getters["auth/cities"];
+// const arrayFailed = Object.entries(nei).map((arr) => ({
+//   id: arr[0],
+//   name: arr[1],
+// }));
 
-return arrayFailed;
+// return arrayFailed;
 
 
-  },
+//   },
 
 
   },

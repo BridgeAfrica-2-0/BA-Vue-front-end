@@ -1825,12 +1825,12 @@ export default {
  cities() {
     
       let nei=  this.$store.getters["auth/cities"];
-const arrayFailed = Object.entries(nei).map((arr) => ({
-  id: arr[0],
-  name: arr[1],
-}));
+// const arrayFailed = Object.entries(nei).map((arr) => ({
+//   id: arr[0],
+//   name: arr[1],
+// }));
 
-return arrayFailed;
+return nei;
 
     },
 

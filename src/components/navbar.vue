@@ -70,10 +70,10 @@
                 </div>
 
                
-                <vue-bootstrap-typeahead
+                <vue-bootstrap-typeahead    
                 v-model="credentials.location"
                 :data="neigbourhoods"
-                :minMatchingChars="0"
+                :minMatchingChars="1"
                 :maxMatches="10"
               
                 :serializer="(item) => item.name"
@@ -102,7 +102,7 @@
               <vue-bootstrap-typeahead
                 v-model="credentials.location"
                 :data="neigbourhoods"
-                :minMatchingChars="0"
+                :minMatchingChars="1"
                 :maxMatches="10"
               
                 :serializer="(item) => item.name"
@@ -695,6 +695,7 @@ export default {
     }
   },
   beforeMount() {
+    this.getCities();
     this.getLocation();
   },
   created() {
@@ -843,6 +844,24 @@ export default {
       return link[this.user.user_type]();
     },
 
+
+  getCities(){
+
+
+
+this.$store
+          .dispatch("auth/cities", {
+           
+          })
+          .catch((err) => {
+            console.log({err:err});
+          });
+
+
+
+
+      },
+
     getLocation() {
       const success = (position) => {
         const latitude = position.coords.latitude;
@@ -904,7 +923,7 @@ export default {
     },
 
     getKeyword() {
-
+ 
 
       if (!this.credentials.keyword) return false;
 

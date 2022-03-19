@@ -78,6 +78,10 @@ export default {
     },
 
     actions: {
+        setLOcation({commit}, payload){
+            commit("setLocation", payload)
+        },
+
         SEARCH({ commit, state, getters }, data) {
             console.log("[here]:", data);
             let islogin = this.getters["auth/isLogged"];

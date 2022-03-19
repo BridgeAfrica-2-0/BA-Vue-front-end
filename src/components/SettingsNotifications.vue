@@ -23,7 +23,9 @@
         >
       </div>
     </div>
+    
     <!-- NOTIFICATIONS CONTENT -->
+
     <div id="notifs">
       <!-- NOTIFICATIONS ITEMS -->
       <div class="notif-item my-2" v-for="(notif, $index) in allNotifs" :key="$index">
@@ -46,7 +48,7 @@
                 <p class="mb-0 text-secondary">{{ formatDate(notif.created_at) }}</p>
               </div>
             </div>
-            
+
             <p class="mb-0">
               <!-- {{
                 notif.notification_text.length > 226

@@ -270,11 +270,13 @@
                         class="d-inline-flex flex-row align-items-center suggest-item cursor-pointer"
                       >
                         <div>
+
                           <b-avatar
                             :src="notification.profile_picture"
                             size="2rem"
                           >
                           </b-avatar>
+                          
                         </div>
                         <div class="d-flex flex-column ml-3">
                           <div>{{ notification.notification_text }}</div>

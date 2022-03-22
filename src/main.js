@@ -235,6 +235,7 @@ new Vue({
             this.$store.commit('auth/setUserData', userData);
         }
 
+
         axios.interceptors.response.use(
           response => response,
           error => {
@@ -254,7 +255,7 @@ new Vue({
              //   config.headers.Authorization = `Bearer ${user.accessToken}`;
             }
 
-            config.headers.common['Language'] = lang;
+            config.headers.common['Language'] = localStorage.getItem('lang') ? localStorage.getItem('lang')  : 'en' ;
             // config.headers.common['Language'] = i18n.fallbackLocale;
 
             return config;

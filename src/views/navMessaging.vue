@@ -123,11 +123,9 @@
                             <small class="text-center small">
                               {{ getCreatedAt(chat.created_at) }}
                             </small>
-                            <!-- <p class="text-center">
-                              <b-badge variant="info">
-                                {{ chat.receiver_id }}
-                              </b-badge>
-                            </p> -->
+                            <small class="text-center">
+                              <b-badge variant="light" v-if="chat.message_count" class="count">{{chat.message_count}}</b-badge>
+                            </small>
                           </b-col>
                         </b-row>
                       </div>
@@ -212,11 +210,9 @@
                             <small class="text-center small">
                               {{ getCreatedAt(chat.created_at) }}
                             </small>
-                            <!-- <p class="text-center">
-                              <b-badge variant="info">
-                                {{ chat.receiver_id }}
-                              </b-badge>
-                            </p> -->
+                            <small class="text-center">
+                              <b-badge variant="light" v-if="chat.message_count" class="count">{{chat.message_count}}</b-badge>
+                            </small>
                           </b-col>
                         </b-row>
                       </div>
@@ -300,11 +296,9 @@
                             <small class="text-center small">
                               {{ getCreatedAt(chat.created_at) }}
                             </small>
-                            <!-- <p class="text-center">
-                              <b-badge variant="info">
-                                {{ chat.receiver_id }}
-                              </b-badge>
-                            </p> -->
+                            <small class="text-center">
+                              <b-badge variant="light" v-if="chat.message_count" class="count">{{chat.message_count}}</b-badge>
+                            </small>
                           </b-col>
                         </b-row>
                       </div>
@@ -897,6 +891,9 @@
                             <small class="text-center">
                               {{ getCreatedAt(chat.created_at) }}
                             </small>
+                            <small class="text-center">
+                              <b-badge variant="light" v-if="chat.message_count" class="count">{{chat.message_count}}</b-badge>
+                            </small>
 
                           </b-col>
                         </b-row>
@@ -982,11 +979,9 @@
                             <small class="text-center">
                               {{ getCreatedAt(chat.created_at) }}
                             </small>
-                            <!-- <p class="text-center">
-                              <b-badge variant="info">
-                                {{ chat.receiver_id }}
-                              </b-badge>
-                            </p> -->
+                            <small class="text-center">
+                              <b-badge variant="light" v-if="chat.message_count" class="count">{{chat.message_count}}</b-badge>
+                            </small>
                           </b-col>
                         </b-row>
                       </div>
@@ -1071,11 +1066,9 @@
                             <small class="text-center">
                               {{ getCreatedAt(chat.created_at) }}
                             </small>
-                            <!-- <p class="text-center">
-                              <b-badge variant="info">
-                                {{ chat.receiver_id }}
-                              </b-badge>
-                            </p> -->
+                            <small class="text-center">
+                              <b-badge variant="light" v-if="chat.message_count" class="count">{{chat.message_count}}</b-badge>
+                            </small>
                           </b-col>
                         </b-row>
                       </div>
@@ -2108,6 +2101,8 @@ export default {
     },
     selectedChat(data) {
       // this.scrollToBottom();
+
+
       console.log("currentUser:", this.currentUser.user.id);
       console.log("Data logged:", data);
       console.log("free up:", this.ctaSelected);
@@ -2143,6 +2138,9 @@ export default {
         ? data.chat.name
         : data.chat.groupName),
         console.log("[DEBUG] Chat selected:", this.chatSelected);
+
+
+      data.chat.message_count = 0 
     },
     searchUser(keyword) {
       this.$store
@@ -2279,6 +2277,12 @@ export default {
 </script>
 
 <style scoped>
+.count{
+  background: #e75c18!important;
+  color: white;
+  font-size: 13px;
+  border-radius: 12px;
+}
 .sharedImg {
   max-width: 80%;
   max-height: 40%;

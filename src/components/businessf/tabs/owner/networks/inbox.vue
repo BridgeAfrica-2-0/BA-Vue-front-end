@@ -2236,7 +2236,7 @@
                     v-model="newSearchQuery"
                     class="input-background"
                     style="width: 100%"
-                    :placeholder="
+                    placeholder="
                       $t('businessowner.Type_the_name_of_person_or_Business')
                     "
                     @input="onPressSearchNewChat"

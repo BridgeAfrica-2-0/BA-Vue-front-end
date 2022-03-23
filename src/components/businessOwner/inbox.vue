@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <b-container>
       <div v-if="mobile">
         <b-row class="chat-box">
@@ -64,7 +63,7 @@
                     v-model="tabIndex"
                     content-class="mt-12 ma-4 pt-6"
                     fill
-                  >   
+                  >
                     <b-tab
                       :title="$t('businessowner.Users')"
                       @click="getChatList({ type: 'user' })"
@@ -73,7 +72,7 @@
                       <b-row class="pa-6">
                         <b-col class="mb-6 pb-6">
                           <input
-                            v-model="searchQuery" 
+                            v-model="searchQuery"
                             class="form-control input-background mb-2"
                             :placeholder="this.$t('general.Search_chat_list')"
                             @keypress.enter="
@@ -128,7 +127,6 @@
                                   class="d-inline-block profile-pic"
                                   variant="light"
                                   :src="chatListImage(chat)"
-                                  
                                 ></b-avatar>
 
                                 <h6 class="mt-2 d-inline-block ml-2">
@@ -448,7 +446,7 @@
                   <b-col class="col-2" @click="info = true">
                     <b-avatar
                       variant="light"
-                      :square= "type == 'user' ? false : true"
+                      :square="type == 'user' ? false : true"
                       :src="chatListImage(chatSelected)"
                       size="50"
                     ></b-avatar>
@@ -525,11 +523,10 @@
                   ></b-spinner>
                 </div>
                 <div v-else v-for="chat in chats" :key="chat.id">
-                 
                   <div
                     v-if="
                       currentBizId != chat.sender_business_id &&
-                      currentBizId != chat.businessID
+                        currentBizId != chat.businessID
                     "
                   >
                     <b-row class="p-2">
@@ -900,6 +897,7 @@
                                   </td>
                                 </tr>
                               </div>
+
                               <hr />
                               <h5>{{ $t("general.Business") }}</h5>
                               <div v-if="allBusiness">
@@ -940,6 +938,7 @@
                                   </td>
                                 </tr>
                               </div>
+
                               <hr />
                               <h5>{{ $t("general.Network") }}</h5>
                               <div v-if="allNetworks">
@@ -975,6 +974,7 @@
                                   </td>
                                 </tr>
                               </div>
+
                               <hr />
                               <h5>{{ $t("general.Editors") }}</h5>
                               <div v-if="allEditors">
@@ -1009,6 +1009,7 @@
                                   </td>
                                 </tr>
                               </div>
+
                               <hr />
                               <!-- <h5>{{ $t("general.Members") }}</h5>
                               <div v-if="allMembers">
@@ -1108,6 +1109,7 @@
                                   </td>
                                 </tr>
                               </div>
+
                               <h2 v-else>{{ $t("general.No_data") }}</h2>
 
                               <!-- End Chats -->
@@ -1174,6 +1176,7 @@
                                   </td>
                                 </tr>
                               </div>
+
                               <h2 v-else>{{ $t("general.No_Business") }}</h2>
 
                               <!-- End Chats -->
@@ -1238,6 +1241,7 @@
                                   </td>
                                 </tr>
                               </div>
+
                               <h2 v-else>{{ $t("general.No_Network") }}</h2>
 
                               <!-- End Chats -->
@@ -1287,6 +1291,7 @@
                                   </td>
                                 </tr>
                               </div>
+
                               <h2 v-else>
                                 {{ $t("general.No_Editor") }}
                               </h2>
@@ -1550,8 +1555,6 @@
                               })
                             "
                           >
-                            
-
                             <b-col class="col-8">
                               <span style="display: inline-flex">
                                 <b-avatar
@@ -1592,13 +1595,13 @@
                       <b-row class="pa-6">
                         <b-col class="mb-6 pb-6">
                           <input
-                            v-model="searchQuery"
+                            v-model="searchQueryBusiness"
                             class="form-control input-background mb-2"
                             :placeholder="$t('general.Search_chat_list')"
                             @keypress.enter="
                               getChatList({
                                 type: 'business',
-                                keyword: searchQuery,
+                                keyword: searchQueryBusiness,
                               })
                             "
                           />
@@ -1683,13 +1686,13 @@
                       <b-row class="pa-6">
                         <b-col class="mb-6 pb-6">
                           <input
-                            v-model="searchQuery"
+                            v-model="searchQueryNetwork"
                             class="form-control input-background mb-2"
                             :placeholder="$t('general.Search_chat_list')"
                             @keypress.enter="
                               getChatList({
                                 type: 'network',
-                                keyword: searchQuery,
+                                keyword: searchQueryNetwork,
                               })
                             "
                           />
@@ -1732,7 +1735,6 @@
                             })
                           "
                         >
-                         
                           <b-col class="col-8">
                             <span style="display: inline-flex">
                               <b-avatar
@@ -1772,13 +1774,13 @@
                       <b-row class="pa-6">
                         <b-col class="mb-6 pb-6">
                           <input
-                            v-model="searchQuery"
+                            v-model="searchQueryGroups"
                             class="form-control input-background mb-2 "
                             :placeholder="$t('general.Search_chat_list')"
                             @keypress.enter="
                               getChatList({
                                 type: 'group',
-                                keyword: searchQuery,
+                                keyword: searchQueryGroups,
                               })
                             "
                           />
@@ -1863,7 +1865,7 @@
                   <b-col class="col-2" @click="info = true">
                     <b-avatar
                       variant="light"
-                      :square= "type == 'user' ? false : true"
+                      :square="type == 'user' ? false : true"
                       :src="chatListImage(chatSelected)"
                       size="50"
                     ></b-avatar>
@@ -1932,11 +1934,10 @@
                   ></b-spinner>
                 </div>
                 <div v-else v-for="chat in chats" :key="chat.id">
-                  
                   <div
                     v-if="
                       currentBizId != chat.sender_business_id &&
-                      currentBizId != chat.businessID
+                        currentBizId != chat.businessID
                     "
                   >
                     <b-row class="p-2">
@@ -2267,6 +2268,27 @@
                             card
                           >
                             <b-tab :title="$t('general.All')" @click="getAll()">
+                              <!-- All Selection -->
+                              <b-row>
+                                <b-col>
+                                  <b-card>
+                                    <b-row class="text-center">
+                                      <b-col>
+                                        <b-form-group>
+                                          <b-form-radio-group
+                                            id="radio-group-1"
+                                            v-model="selectedselectOptionAll"
+                                            :options="selectOptionsAll"
+                                            name="radio-options"
+                                            @change="selectAllForAllTab"
+                                          ></b-form-radio-group>
+                                        </b-form-group>
+                                      </b-col>
+                                    </b-row>
+                                  </b-card>
+                                </b-col>
+                              </b-row>
+                              <!-- All Selection -->
                               <div v-if="loader" class="text-center">
                                 <b-spinner
                                   variant="primary"
@@ -2307,6 +2329,7 @@
                                   </td>
                                 </tr>
                               </div>
+
                               <hr />
                               <h5>{{ $t("general.Business") }}</h5>
                               <div v-if="allBusiness">
@@ -2341,6 +2364,7 @@
                                   </td>
                                 </tr>
                               </div>
+
                               <hr />
                               <h5>Network</h5>
                               <div v-if="allNetworks">
@@ -2375,11 +2399,12 @@
                                   </td>
                                 </tr>
                               </div>
+
                               <hr />
                               <h5>Editors</h5>
-                              <div v-if="allEditors">
-                                <tr
-                                  v-for="(biz, index) in allEditors"
+                              <div v-if="bizs.length">
+                                 <tr
+                                  v-for="(biz, index) in bizs"
                                   :key="index"
                                   class="p-2 message"
                                 >
@@ -2475,6 +2500,7 @@
                                   </td>
                                 </tr>
                               </div>
+
                               <h2 v-else>{{ $t("general.No_data") }}</h2>
 
                               <!-- End Chats -->
@@ -2541,6 +2567,7 @@
                                   </td>
                                 </tr>
                               </div>
+
                               <h2 v-else>{{ $t("general.No_Business") }}</h2>
 
                               <!-- End Chats -->
@@ -2605,6 +2632,7 @@
                                   </td>
                                 </tr>
                               </div>
+
                               <h2 v-else>{{ $t("general.No_Network") }}</h2>
 
                               <!-- End Chats -->
@@ -2654,6 +2682,7 @@
                                   </td>
                                 </tr>
                               </div>
+
                               <h2 v-else>{{ $t("general.No_Editor") }}</h2>
 
                               <!-- End Chats -->
@@ -2853,7 +2882,8 @@ export default {
         { text: "Following", value: "following" },
       ],
       selectedselectOption: "",
-
+      selectOptionsAll: [{ text: "All", value: "all" }],
+      selectedselectOptionAll: "",
       selectedBusiness: [],
       selectedPeople: [],
       selectedNetwork: [],
@@ -2898,6 +2928,9 @@ export default {
       text: "",
       selected: [],
       messages: null,
+      searchQueryBusiness: "",
+      searchQueryNetwork: "",
+      searchQueryGroups: "",
     };
   },
   watch: {
@@ -2935,16 +2968,10 @@ export default {
       return this.$store.getters["businessChat/getSelectedChatId"];
     },
 
-
-
-lastcreatedgroup() {
+    lastcreatedgroup() {
       return this.$store.getters["businessChat/getlastcreatedgroup"];
     },
 
-
-    
-
-    
     currentBizId() {
       return this.$store.getters["businessChat/getCurrentBizId"];
     },
@@ -2991,7 +3018,6 @@ lastcreatedgroup() {
       return this.$store.getters["businessChat/getLoader"];
     },
     receiver() {
-      
       return this.chats[0] ? this.chats[0].receiver : "";
     },
     resultQuery() {
@@ -3065,7 +3091,7 @@ lastcreatedgroup() {
     },
   },
   methods: {
-    onPressSearchNewChat: _.debounce(function (e) {
+    onPressSearchNewChat: _.debounce(function(e) {
       console.log("press...");
       this.getList(e);
     }, 1000),
@@ -3185,7 +3211,7 @@ lastcreatedgroup() {
         ? chat.network_editor_i_d.name
         : chat.business_editor_i_d
         ? chat.business_editor_i_d.name
-        : this.$t('businessowner.me');
+        : this.$t("businessowner.me");
     },
     convert(bytes, decimals = 2) {
       if (bytes === 0) return "0 Bytes";
@@ -3278,7 +3304,35 @@ lastcreatedgroup() {
         default:
       }
     },
+    selectAllForAllTab(val) {
+      this.selectedPeople = [];
+      if (val == "all") {
+        this.allUsers.map((biz) => {
+          this.selectedPeople.push(biz.id);
+        });
+      }
 
+      this.selectedBusiness = [];
+      if (val == "all") {
+        this.allBusiness.map((biz) => {
+          this.selectedBusiness.push(biz.id);
+        });
+      }
+
+      this.selectedNetwork = [];
+      if (val == "all") {
+        this.allNetworks.map((biz) => {
+          this.selectedNetwork.push(biz.id);
+        });
+      }
+
+      this.selectedEditor = [];
+      if (val == "all") {
+        this.allEditors.map((biz) => {
+          this.selectedEditor.push(biz.id);
+        });
+      }
+    },
     getAll() {
       this.getUsers();
       this.getNetworks();
@@ -3332,32 +3386,21 @@ lastcreatedgroup() {
       console.log("listenning...");
     },
     async createGroup(receiver_business_id) {
-
-    
-     await this.$store.dispatch("businessChat/CREATE_GROUP", {
-        groupName: this.groupName,
-        userID: this.selectedPeople.toString(),
-        businessID: this.selectedBusiness.toString(),
-        networkID: this.selectedNetwork.toString(),
-        businessEditorsID: this.selectedEditor.toString(),
-      }).then(()=>{
-
-       
-
-
-       this.selectedChat({ type: 'group',
-                       chat: this.lastcreatedgroup,
-                         id: this.chatId,
-                           });
-
-
-
-      });
-
-
-           
-
-
+      await this.$store
+        .dispatch("businessChat/CREATE_GROUP", {
+          groupName: this.groupName,
+          userID: this.selectedPeople.toString(),
+          businessID: this.selectedBusiness.toString(),
+          networkID: this.selectedNetwork.toString(),
+          businessEditorsID: this.selectedEditor.toString(),
+        })
+        .then(() => {
+          this.selectedChat({
+            type: "group",
+            chat: this.lastcreatedgroup,
+            id: this.chatId,
+          });
+        });
 
       console.log("chat id selected:", this.chatId);
       this.socket.emit("create-group", this.chatId);
@@ -3373,7 +3416,6 @@ lastcreatedgroup() {
       console.log("ROOMS: ", this.room);
       this.tabIndex = 3;
       // this.getChatList({ type: "group" });
-      
     },
 
     createRoom(receiver_business_id) {
@@ -3388,7 +3430,6 @@ lastcreatedgroup() {
         return moment(data).format("ddd") + " " + moment(data).format("LT");
       } else {
         return moment(data).format("LT");
-        // return moment(data).fromNow();
       }
     },
     getList(keyword) {
@@ -3414,7 +3455,6 @@ lastcreatedgroup() {
       this.selectedEditor = [];
       this.selectedMember = [];
     },
-
     getEditors(keyword) {
       this.initFilter();
       this.$store.dispatch("businessChat/GET_EDITORS", {
@@ -3504,9 +3544,7 @@ lastcreatedgroup() {
       this.$bvModal.hide("group-name");
       console.log("type tabs:", this.tabIndex);
 
-       this.createGroup()
-      
-      
+      this.createGroup();
 
       this.getChatList({ type: "group" });
 
@@ -3522,27 +3560,17 @@ lastcreatedgroup() {
         groupName: this.groupName,
       };
 
-     
+      console.log("blec debugging ---");
 
-  
+      console.log(this.lastcreatedgroup);
 
-  
-console.log("blec debugging ---");
+      this.selectedChat({
+        type: "group",
+        chat: this.lastcreatedgroup,
+        id: this.chatId,
+      });
 
- console.log( this.lastcreatedgroup );
-
-
-      this.selectedChat({ type: 'group',
-                       chat: this.lastcreatedgroup,
-                         id: this.chatId,
-                           });
-
-
-
-
-
-
-    //  this.getChatList({ type: "group" });
+      //  this.getChatList({ type: "group" });
       console.log("[DEBUG] Chat selected:", this.chatSelected);
       // this.groupName = "";
     },
@@ -3556,7 +3584,7 @@ console.log("blec debugging ---");
 
       this.createRoom(data.id);
       if (this.type == "group") {
-       // this.createGroup();
+        // this.createGroup();
       }
       this.rightSide = screenX > 930;
 

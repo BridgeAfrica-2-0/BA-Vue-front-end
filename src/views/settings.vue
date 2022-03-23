@@ -1,7 +1,7 @@
 <template>
   <div ref="wrapper">
     <Navbar />
-    <div class="container wahala" v-if="hasLoad">
+    <div class="container wahala" >
       <b-row>
         <b-col cols="12" md="12" lg="12" xl="12">
           <div class="mbl-wrap">
@@ -441,7 +441,6 @@
       </b-row>
     </div>
 
-    <p v-else></p>
 
     <Footer />
   </div>
@@ -590,6 +589,8 @@ export default {
       this.$store
         .dispatch("profileSettingsEdit/userInfos")
         .then((response) => {
+
+          
           this.selected = this.$store.state.profileSettingsEdit.userInfos.payement_method;
          
           // if(this.$store.state.profileSettingsEdit.userInfos.gender == "male"){
@@ -671,7 +672,7 @@ export default {
         })
         .finally(() => {
           loader.hide();
-          this.hasLoad = true;
+         
         });
     },
 
@@ -803,11 +804,12 @@ beforeMount(){
 
 watch: {
   "$store.state.profileSettingsEdit.userInfos": function(){
-    this.selectedCounty = this.$store.state.profileSettingsEdit.userInfos.country.id;
-    this.selectedRegion = this.$store.state.profileSettingsEdit.userInfos.region.id;
-    this.selectedDivision = this.$store.state.profileSettingsEdit.userInfos.division.id;
-    this.selectedMunicipality = this.$store.state.profileSettingsEdit.userInfos.council.id;
-    this.selectedNeighbor = this.$store.state.profileSettingsEdit.userInfos.neigborhood.id;
+     this.selectedCounty = this.$store.state.profileSettingsEdit.userInfos.country.id;
+     this.selectedRegion = this.$store.state.profileSettingsEdit.userInfos.region.id;
+
+     this.selectedDivision = this.$store.state.profileSettingsEdit.userInfos.division ?this.$store.state.profileSettingsEdit.userInfos.division.id:'';
+    this.selectedMunicipality = this.$store.state.profileSettingsEdit.userInfos.council?this.$store.state.profileSettingsEdit.userInfos.council.id:'';
+    this.selectedNeighbor = this.$store.state.profileSettingsEdit.userInfos.neigborhood ? this.$store.state.profileSettingsEdit.userInfos.neigborhood.id:'';
 
     this.getCountry();
     this.getRegion();
@@ -816,6 +818,8 @@ watch: {
     this.getNeighbor();
   }
 },
+
+
   mounted() {
     
     // this.getLocality();

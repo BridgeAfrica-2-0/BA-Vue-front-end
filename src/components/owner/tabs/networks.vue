@@ -305,7 +305,7 @@
                 ></multiselect>
               </div>
             </b-col>
-            <b-col md="6">
+            <!-- <b-col md="6">
               <b-form-group
                 label-cols-lg="12"
                 :label="$t('profileowner.City')"
@@ -321,7 +321,7 @@
                 >
                 </b-form-input>
               </b-form-group>
-            </b-col>
+            </b-col> -->
 
 
 
@@ -781,6 +781,14 @@ export default {
     selectedmunicipality: function () {
       return this.municipality.id;
     },
+
+    selectedcity: function () {
+      return this.municipality.name;
+    },
+
+
+
+
     selectedlocality: function () {
       return this.locality.id;
     },
@@ -793,8 +801,6 @@ export default {
     cancel(){
 
 
-       
-    console.log("yoo mother fucker");
         this.logoimg_url= '';
       this.selectedFile='';
       this.createdNetwork.id = '';
@@ -877,7 +883,7 @@ export default {
         .catch((err) => {
           console.log({ err: err });
         });
-    },
+    },     
 
     onLogoChangge(e) {
       this.logo = e.target.files[0];
@@ -1190,7 +1196,7 @@ export default {
       fd.append("name", this.createdNetwork.name);
       fd.append("address", this.createdNetwork.address);
       // fd.append("neighbourhood", this.createdNetwork.neighbourhood);
-      fd.append("city", this.createdNetwork.city);
+      fd.append("city", this.selectedcity);
       fd.append("country_id", 2);
       fd.append(
         "primary_phone",

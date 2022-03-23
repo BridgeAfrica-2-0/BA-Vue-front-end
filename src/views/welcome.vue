@@ -252,14 +252,21 @@
                       <label for="city" class="username">
                         {{ $t("welcome.City") }} :</label
                       ><br />
-                      <input
-                        type="text"
-                        name="alias"
-                        id="City"
+
+                      
+
+                        <multiselect
                         v-model="city"
-                        :placeholder="$t('welcome.City')"
-                        class="form-control text"
-                      />
+                      
+                        :multiple="false"
+                        :placeholder="$t('welcome.Search')"
+                        label="name"
+                        track-by="id"
+                        :options="cities"
+                      ></multiselect>
+
+
+                     
                     </div>
                     <div class="form-group">
                       <label for="Neighbour" class="username"> {{$t('welcome.Neighbour')}}:</label
@@ -469,14 +476,26 @@
                       <label for="city" class="username">
                         {{ $t("welcome.City") }} :</label
                       ><br />
-                      <input
+
+                      <multiselect
+                        v-model="city"
+                      
+                        :multiple="false"
+                        :placeholder="$t('welcome.Search')"
+                        label="name"
+                        track-by="id"
+                        :options="cities"
+                      ></multiselect>
+
+
+                      <!-- <input
                         type="text"
                         name="alias"
                         id="City"
                         v-model="city"
                         :placeholder="$t('welcome.City')"
                         class="form-control text"
-                      />
+                      /> -->
                     </div>
                     <div class="form-group">
                       <label for="Neighbour" class="username"> {{$t("welcome.Neighbour")}}:</label
@@ -778,14 +797,26 @@
                       <label for="city" class="username">
                         {{ $t("welcome.City") }} :</label
                       ><br />
-                      <input
+
+                      <multiselect
+                        v-model="city"
+                      
+                        :multiple="false"
+                        :placeholder="$t('welcome.Search')"
+                        label="name"
+                        track-by="id"
+                        :options="cities"
+                      ></multiselect>
+
+
+                      <!-- <input
                         type="text"
                         name="alias"
                         id="City"
                         v-model="city"
                         :placeholder="$t('welcome.City')"
                         class="form-control text"
-                      />
+                      /> -->
                     </div>
                   </div>
                 </div>
@@ -969,8 +1000,8 @@ export default {
       profile_pic: "",
       dob: "2041-02-08",
       gender: null,
-      city: null,
-      Neighbor: null,
+      city:"",
+      Neighbor: "",
       step1: false,
       step2: false,
       logo_pic: "",
@@ -1118,6 +1149,20 @@ export default {
         });
     },
 
+
+getcities(){
+   
+
+   this.$store
+        .dispatch("auth/cities")
+        .then(() => {
+        
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+
+},
     subcategories() {
       let formData2 = new FormData();
       formData2.append("categoryId", this.selectedcategories);
@@ -1295,7 +1340,7 @@ export default {
 
           formData2.append("logo_path", this.logo_pic);
           formData2.append("region", this.selectedregion);
-          formData2.append("city", this.city);
+          formData2.append("city", this.city.name);
           formData2.append("country", this.selectedcountry);
 
           formData2.append("address", this.address);
@@ -1433,7 +1478,7 @@ this.$refs.cropperr.getCroppedCanvas().toBlob((blob) => {
         let formData2 = new FormData();
         formData2.append("logo_path", this.logo_pic);
         formData2.append("region", this.selectedregion);
-        formData2.append("city", this.city);
+        formData2.append("city", this.city.name);
         formData2.append("country", this.selectedcountry);
 
         formData2.append("address", this.adress);
@@ -1531,15 +1576,16 @@ this.$refs.cropper.getCroppedCanvas().toBlob((blob) => {
  }
  
 
-    console.log("fuck");
+   
         
          formData.append("profile_picture", this.profile_pic);
         formData.append("dob", this.dob);
         formData.append("gender", this.gender);
-        formData.append("city", this.city);
+        formData.append("city", this.city.name);
+          formData.append("councilId", this.city.id);
         formData.append("country", this.selectedpcountry);
         formData.append("region", this.selectedpregion);
-        formData.append("city", this.city);
+      
         formData.append("neighbor", this.Neighbor);
         formData.append("lat", this.coordinates[1]);
         formData.append("lng", this.coordinates[0]);
@@ -1707,6 +1753,9 @@ this.$refs.cropper.getCroppedCanvas().toBlob((blob) => {
     this.Country();
     this.categories();
 
+
+    this.getcities();
+
     //this.filters()
 
     //this.Setcategoryfiters()
@@ -1727,7 +1776,13 @@ this.$refs.cropper.getCroppedCanvas().toBlob((blob) => {
 
   computed: {
 
-    
+     
+
+     cities(){
+
+       return this.$store.state.auth.cities;
+     },
+
     selectedcategories: function() {
       let selectedUsers = [];
       this.multiselecvalue.forEach((item) => {

@@ -2051,7 +2051,7 @@
                               toggle-class="text-decoration-none p-0"
                               no-caret
                               right
-                            >
+                            > 
                               <template slot="button-content">
                                 <b><i class="fas fa-ellipsis-v"></i></b>
                               </template>

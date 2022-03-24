@@ -540,6 +540,20 @@
                         ></p>
                         <br />
                         <p v-if="chat.message" class="msg-text mt-0 text">
+                          <span class="text-center float-right mt-n0">
+                            <b-dropdown
+                              variant="link"
+                              size="lg"
+                              toggle-class="text-decoration-none p-0"
+                              no-caret
+                              right
+                            >
+                              <template slot="button-content">
+                                <b><i class="fas fa-ellipsis-v"></i></b>
+                              </template>
+                              <b-dropdown-item>Delete</b-dropdown-item>
+                            </b-dropdown>
+                          </span>
                           <span v-if="chat.attachment">
                             <img :src="chat.attachment" />
                             <!-- <br />
@@ -575,6 +589,21 @@
                           id="sent"
                           class="msg-text-sent text"
                         >
+                        <span class="text-center float-right mt-n0">
+                            <b-dropdown
+                              variant="link"
+                              size="lg"
+                              toggle-class="text-decoration-none p-0"
+                              no-caret
+                              right
+                            >
+                              <template slot="button-content">
+                                <b><i class="fas fa-ellipsis-v"></i></b>
+                              </template>
+                              <b-dropdown-item>Delete</b-dropdown-item>
+                            </b-dropdown>
+                          </span>
+                          
                           <span v-if="chat.attachment">
                             <img :src="chat.attachment" />
                             <!-- <br />
@@ -1948,9 +1977,38 @@
                         <p
                           v-if="chat.attachment"
                           class="msg-text mt-0 text"
-                        ></p>
+                        >
+                        <span class="text-center float-right mt-n0">
+                            <b-dropdown
+                              variant="link"
+                              size="lg"
+                              toggle-class="text-decoration-none"
+                              no-caret
+                              right
+                            >
+                              <template slot="button-content">
+                                <b><i class="fas fa-ellipsis-v"></i></b>
+                              </template>
+                              <b-dropdown-item>Delete</b-dropdown-item>
+                            </b-dropdown>
+                          </span>
+                        <!-- <i class="fa fa-ellipsis-v float-right mt-"></i></p> -->
                         <br />
                         <p v-if="chat.message" class="msg-text mt-0 text">
+                          <span class="text-center float-right mt-n2">
+                            <b-dropdown
+                              variant="link"
+                              size="lg"
+                              toggle-class="text-decoration-none"
+                              no-caret
+                              right
+                            >
+                              <template slot="button-content">
+                                <b><i class="fas fa-ellipsis-v"></i></b>
+                              </template>
+                              <b-dropdown-item>Delete</b-dropdown-item>
+                            </b-dropdown>
+                          </span>
                           <span v-if="chat.attachment">
                             <img :src="chat.attachment" />
                             <!-- <br />
@@ -1986,6 +2044,20 @@
                           id="sent"
                           class="msg-text-sent text"
                         >
+                        <span class="text-center float-right mt-n0">
+                            <b-dropdown
+                              variant="link"
+                              size="lg"
+                              toggle-class="text-decoration-none p-0"
+                              no-caret
+                              right
+                            >
+                              <template slot="button-content">
+                                <b><i class="fas fa-ellipsis-v"></i></b>
+                              </template>
+                              <b-dropdown-item>Delete</b-dropdown-item>
+                            </b-dropdown>
+                          </span>
                           <span v-if="chat.attachment">
                             <img :src="chat.attachment" />
                             <!-- <br />

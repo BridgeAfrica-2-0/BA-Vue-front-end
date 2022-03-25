@@ -1,10 +1,10 @@
 <template>
   <div>
-    <b-card class="px-md-3 border shadow">
+    <b-card class="px-md-3 border shadow blecrr">
       <span>
         <h6 class="title mt-3">
           <fas-icon
-            class="icons icon-color"
+            class="icons icon-color  ml-2 ml-md-0"
             :icon="['fab', 'readme']"
             size="lg"
           />
@@ -12,7 +12,7 @@
         </h6>
       </span>
 
-      <div class="s-card">
+      <div class="ss-card">
         <Post 
           v-for="(item, index) in owner_post"
           :key="index"
@@ -330,10 +330,22 @@ export default {
   margin-top: -5px;
 }
 
-.s-card {
+
+@media only screen and (max-width: 768px) {
+.blecrr .card-body{
+  padding-left: 4px !important;
+
+   padding-right: 2px !important;
+}
+
+.ss-card{
+
   height: 540px;
-  overflow: auto;
-  overflow-x: hidden;
-  padding: 15px;
+    overflow: auto;
+    overflow-x: hidden;
+    padding: 2px;
+    
+}
+
 }
 </style>

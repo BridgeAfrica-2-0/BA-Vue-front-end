@@ -433,7 +433,8 @@ export default {
     padding-top: 6px;
 
     height: 38px;
-    width: 123px;
+    width: 125px;
+    font-size: 13px;
   }
 
   .r-image {

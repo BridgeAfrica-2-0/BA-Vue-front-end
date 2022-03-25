@@ -1,12 +1,12 @@
 <template>
-  <div>
+  <div  style="overflow-x: clip;">
     <span v-if="isloaded">
       <navbar />
-      <Business />
+      <Business :key="foll_id"  class="wahala" />
       <Footer />
     </span>
   </div>
-</template>
+</template> 
 
 <script>
 import navbar from "@/components/navbar";
@@ -30,6 +30,14 @@ export default {
       tabs: ["#post", "#about", "#business", "#media", "#community"],
     };
   },
+
+  beforeRouteUpdate(to, from, next) {
+
+    this.foll_id = to.params.id;
+    next();
+  },
+
+  
   created() {
     this.foll_id = this.$route.params.id;
     this.isloaded = true;

@@ -193,7 +193,7 @@ export default {
       } else return number;
     },
     gotobusiness(id) {
-      this.$router.push(`business/${id}?tabId=1`);
+      this.$router.push(`/business/${id}?tabId=1`);
 
       
     },

@@ -434,6 +434,12 @@
                   <br />
                 </b-card-text>
               </b-tab>
+
+              
+              <b-tab :title="$t('settings.delete_account')">
+                <Delete  />
+              </b-tab>
+
             </b-tabs>
           </div>
         </b-col>
@@ -452,6 +458,7 @@ import Footer from '@/components/footer';
 import SettingsNotifications from '@/components/SettingsNotifications.vue';
 import Payment from "@/components/owner/settings/payment";
 import Blocking from "@/components/owner/settings/blocking";
+import Delete from "@/components/owner/settings/delete";
 import VuePassword from 'vue-password';
 import VuePhoneNumberInput from "vue-phone-number-input";
 
@@ -463,6 +470,7 @@ export default {
     Payment,
     Blocking,
     VuePassword,
+    Delete,
     VuePhoneNumberInput
   },
 

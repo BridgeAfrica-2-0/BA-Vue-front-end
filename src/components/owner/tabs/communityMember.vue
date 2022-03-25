@@ -46,7 +46,7 @@
                           >
                             <h6 class="follower m-15">
                               {{ count(item.followers) }}
-                              {{ $t("profileowner.Community") }}  <span  class="ml-2"  @click="BlockUser(item.id, index)" style="cursor: pointer">   <b-icon
+                              {{ $t("profileowner.Community") }}  <span v-if="!foll_id" class="ml-2"  @click="BlockUser(item.id, index)" style="cursor: pointer">   <b-icon
                               font-scale="1"
                               icon="exclamation-octagon"
                               v-b-tooltip.hover

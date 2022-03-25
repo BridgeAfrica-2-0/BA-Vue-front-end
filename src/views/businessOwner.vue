@@ -1,5 +1,5 @@
 <template>
-  <div class="" style="overflow-y: hidden; padding: 0px" ref="wrapper">
+  <div class="" style="overflow-x: clip; padding: 0px" ref="wrapper"> 
     <navbar />
     <div v-if="isloaded">
       <div class="container-fluid">

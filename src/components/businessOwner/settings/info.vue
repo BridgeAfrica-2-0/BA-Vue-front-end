@@ -1,5 +1,5 @@
 <template>
-  <b-container fluid>
+  <b-container fluid>  
     <b-container v-if="businessInfo != 0" class="bv-example-row">
       <b-form>
         <div class="b-bottom">
@@ -381,7 +381,7 @@
           <b-container>
             <b-form-group
               label-cols-lg="3"
-              :label="$t('businessowner.Municipality')"
+              :label="$t('businessowner.Municipality')+'/'+ $t('businessowner.City')"  
               label-size="md"
               label-class="font-weight-bold pt-0 username"
               class="mb-0"
@@ -474,13 +474,13 @@
                       v-model="businessInfo.Street"
                     ></b-form-input>
                   </b-col>
-                  <b-col>
+                  <!-- <b-col>
                     <p>{{ $t("businessowner.City") }}</p>
                     <b-form-input
                       name=""
                       v-model="businessInfo.city"
                     ></b-form-input
-                  ></b-col>
+                  ></b-col> -->
                   <b-col>
                     <p>{{ $t("businessowner.Postal_Code") }}</p>
                     <b-form-input
@@ -931,48 +931,106 @@ export default {
       });
       return selectedUsers;
     },
-    selectedsubcategories: function () {
+   
+
+     selectedsubcategories: function() {
       let sub_cat = [];
+
       this.filterselectvalue.forEach((item) => {
-        sub_cat.push(item.subcategory_id);
+        if (item.subcategory_id) {
+          sub_cat.push(item.subcategory_id);
+        } else {
+          sub_cat.push(item.subcategoryId);
+        }
       });
       return sub_cat;
     },
-    selectedcountry: function () {
+
+
+     selectedcountry: function() {
       let sub_cat = [];
       this.country.forEach((item) => {
-        sub_cat.push(item.country_id);
+        if (item.country_id) {
+          sub_cat.push(item.country_id);
+        } else {
+          sub_cat.push(item.id);
+        }
       });
       return sub_cat;
     },
-    selectedregion: function () {
+
+     selectedregion: function() {
       let sub_cat = [];
       this.region.forEach((item) => {
-        sub_cat.push(item.region_id);
+        if (item.region_id) {
+          sub_cat.push(item.region_id);
+        } else {
+          sub_cat.push(item.id);
+        }
       });
       return sub_cat;
     },
-    selecteddivision: function () {
+
+
+
+    selecteddivision: function() {
       let sub_cat = [];
       this.division.forEach((item) => {
-        sub_cat.push(item.id);
+        if (item.division_id) {
+          sub_cat.push(item.division_id);
+        } else {
+          sub_cat.push(item.id);
+        }
       });
       return sub_cat;
     },
-    selectedmunicipality: function () {
+
+
+
+ selectedmunicipality: function() {
       let sub_cat = [];
       this.municipality.forEach((item) => {
-        sub_cat.push(item.id);
+        if (item.council_id) {
+          sub_cat.push(item.council_id);
+        } else {
+          sub_cat.push(item.id);
+        }
       });
       return sub_cat;
     },
-    selectedlocality: function () {
+
+
+
+ city: function() {
       let sub_cat = [];
+      this.municipality.forEach((item) => {
+        if (item.council_id) {
+          sub_cat.push(item.name);
+        } else {
+          sub_cat.push(item.name);
+        }
+      });
+      return sub_cat.toString();
+    },
+
+
+   
+
+    
+    selectedlocality: function() {
+      let sub_cat = [];
+      console.log("loging localities");
+      console.log(this.locality);
       this.locality.forEach((item) => {
-        sub_cat.push(item.neighborhood_id);
+        if (item.neighborhood_id) {
+          sub_cat.push(item.neighborhood_id);
+        } else {
+          sub_cat.push(item.id);
+        }
       });
       return sub_cat;
     },
+
   },
 
   mounted() {
@@ -1337,7 +1395,7 @@ export default {
       console.log("editBusiness");
       this.axios
         .get("business/edit/" + this.url)
-        .then(({ data }) => {
+        .then(({ data }) => {  
           console.log("testing: ", data);
           this.editbiz = data.data;
           this.setEditData(data.data);
@@ -1383,7 +1441,8 @@ export default {
       var dat = { 
         "name": this.businessInfo.name,
                    "categoryId": this.selectedcategories.toString(),
-                   "subCategoryId": this.selectedsubcategories.toString(),
+                   "subCategoryId": this.selectedsubcategories.toString(), 
+
                    "filterId": this.select_filterss.toString(),
                    "country": this.selectedcountry.toString(),
                    "region": this.selectedregion.toString(),

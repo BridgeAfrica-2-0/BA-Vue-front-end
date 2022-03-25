@@ -1,7 +1,7 @@
 <template>
     <div>
       <div class="row ">
-        <div class="col-5 col-md-8">
+        <div class="col-4 col-md-8">
           <p>
             <b-icon
               font-scale="1.8"
@@ -13,8 +13,8 @@
           </p>
         </div>
   
-         <div class="col-7 col-md ">
-           <div class="row marg">
+         <div class="col-8 col-md ">
+           <div class="inline-flex marg">
   
            
             <b-button

@@ -1,5 +1,5 @@
  <template>
-  <div class="" style="overflow-y: hidden; padding: 0px">
+  <div class="wahala" style="overflow-x: clip;  padding: 0px">
     <span v-if="isloaded">
       <navbar />
 

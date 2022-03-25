@@ -108,7 +108,9 @@
             class="community size"
             variant="primary"
             id="followbtn"
-            :class="business_info.is_follow !== 0 && 'u-btn'"
+            
+            :class="hasBeFollow !== 0 && 'u-btn'"
+            @click="handleFollow"
           >
             <i class="fas fa-user-plus fa-lg btn-icon"></i>
             <span>{{ $t("businessf.Community") }}</span></b-button
@@ -204,7 +206,7 @@ export default {
       url_data: null,
       currentTab: 0,
       tabIndex: null,
-      tabs: ["#post", "#about", "#media", "#market", "#community"],
+      tabs: ["#post", "#about", "#media", "#market","#network", "#community"],
       isGuestUser: isGuestUser(),
     };
   },
@@ -266,7 +268,11 @@ export default {
   },
 
   created() {
-    this.currentTab = this.$route.query.tabId ? this.$route.query.tabId : 0;
+    this.currentTab = this.$route.query.tabId ? this.$route.query.tabId :this.tabs.findIndex((tab) => tab === this.$route.hash) ;
+
+    
+
+    
     this.currentAuthType = "business";
     this.url_data = this.$route.params.id;
     this.businessInfo();
@@ -289,7 +295,16 @@ export default {
         this.showCoverAlbum = true;
 
       this.currentTab = this.tabs.findIndex((tab) => tab === to.hash);
+
+
+       if ("#about" == to.hash)
+      
+
+      this.currentTab = this.tabs.findIndex((tab) => tab === to.hash);
     },
+
+
+    
   },
 
   mounted() {
@@ -468,7 +483,7 @@ p {
   color: #fff;
 }
 .size {
-  width: 133px;
+  width: 137px;
   height: 38px;
 }
 
@@ -536,8 +551,8 @@ p {
     display: none;
   }
   .see-all {
-    width: 91px;
-    height: 38px;
+    /* width: 91px;
+    height: 38px; */
     position: relative;
     top: 35px;
   }
@@ -556,7 +571,7 @@ p {
     top: 6px;
   }
   .size {
-    width: 112px;
+    width: 120px;
     height: 38px;
   }
   .r-image {
@@ -725,8 +740,8 @@ p {
   }
 
   .see-all {
-    height: 38px;
-    width: 91px;
+    /* height: 38px;
+    width: 91px; */
     position: relative;
     margin-top: -50px;
     left: -20px;

@@ -132,10 +132,15 @@
 		height: 400px;
 	}
 	.chart {
-		display: block;
-		height: 250px;
-		width: 360px;
+	
+		/* height: 250px;
+		width: 360px; */
+
+		height: 100%;
+		width: 100%;
+		padding: 10px;
 	}
+
 	.text-design {
 		line-height: 40px;
 	}
@@ -144,4 +149,29 @@
 		align-content: center;
 		text-align: center;
 	}
+
+	/* @media only screen and (max-width: 365px) {
+
+
+.chart {
+		
+		height: 150px;
+		width: 200px;
+	}
+
+	} */
+</style>
+
+<style>
+
+#doughnut-chart{
+
+	/* height: 100% !important;
+	width: 100% !important; */
+
+	height: 250px !important;
+	
+
+}
+
 </style>

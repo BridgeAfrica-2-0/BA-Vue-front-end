@@ -2,7 +2,7 @@
   <div class="mx-auto" style="overflow-y: hidden">
     <navbar></navbar>
     <head-page></head-page>
-    <div class="container-fluid text-justify corps prof center-content">
+    <div class="container-fluid text-justify corps prof center-content wahala">
       <b-row class="">
         <b-col cols="12" class="p-3">
           <b-tabs content-class="mt-3" pills small fill lazy v-model="tabIndex">

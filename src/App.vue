@@ -128,6 +128,7 @@ export default {
 
 <style lang="less">
 
+
  .splide__arrow--next{
 
 width: 20px !important;

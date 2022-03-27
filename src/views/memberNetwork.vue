@@ -3,7 +3,7 @@
      <span v-if="isloaded">
     <Navbar />
 
-    <b-container fluid class="content">
+    <b-container fluid class="content wahala">
       <b-row>
         <b-col lg="5" xl="4" class=" ">  
           <Parent /> 

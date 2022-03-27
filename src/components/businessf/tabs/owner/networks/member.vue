@@ -44,7 +44,7 @@
                 <span class="">
                   <b-avatar
                     class="d-inline-block"
-                    variant="primary"
+                    variant="light"
                     :src="admin.profile_picture"
                     :text="admin.fullname.charAt(0)"
                     size="3.5rem"
@@ -127,7 +127,7 @@
                 <span class="">
                   <b-avatar
                     class="d-inline-block"
-                    variant="primary"
+                    variant="light"
                     :src="editor.profile_picture"
                     :text="editor.fullname.charAt(0)"
                     size="3.5rem"
@@ -215,7 +215,7 @@
                 <span class="">
                   <b-avatar
                     class="d-inline-block"
-                    variant="primary"
+                    variant="light"
                     square
                     :src="busines.logo_path"
                     :text="busines.name.charAt(0)"
@@ -295,7 +295,7 @@
               <span class="">
                 <b-avatar
                   class="d-inline-block"
-                  variant="primary"
+                  variant="light"
                   :src="member.profile_picture"
                   :text="member.fullname.charAt(0)"
                   size="3.5rem"

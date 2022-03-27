@@ -17,18 +17,16 @@
     </div>
 
     <div class="mt-3 d-block d-md-none" v-if="selectedIdd == '6'">
-      <div class="d-block d-md-none" style="margin-top: 30px">
+      <!-- <div class="d-block d-md-none" style="margin-top: 30px">
         <ly-tab v-model="seetings_id" :items="items" :options="options" class="center-ly" vertical> </ly-tab>
-      </div>
+      </div> -->
 
-      <div class="mt-3 d-block d-md-none" v-if="seetings_id == '3'">
-        <Blocking />
-      </div>
+<Blocking />
+
+      
     </div>
 
-    <div class="mt-3 d-block d-md-none" v-if="selectedIdd == '7'">
-      <Settings />
-    </div>
+   
 
     <b-row class="center-content d-none d-md-block">
       <b-col cols="10">
@@ -77,7 +75,7 @@ import PendingPost from '@/components/businessf/tabs/owner/networks/pendingPost'
 import Notification from '@/components/businessf/tabs/owner/networks/notification';
 
 import Blocking from '@/components/businessf/tabs/owner/networks/settings/blocking';
-import LyTab from '@/tab/src/index.vue';
+//import LyTab from '@/tab/src/index.vue';
 
 export default {
   name: 'settings',
@@ -133,7 +131,7 @@ export default {
     KeywordAlert,
     PendingPost,
     // Settings,
-    LyTab,
+   // LyTab,
   },
 
   data() {

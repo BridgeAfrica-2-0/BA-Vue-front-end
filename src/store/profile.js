@@ -428,15 +428,26 @@ export default {
     },
 
 
-    Tcommunity({ commit }) {
+    Tcommunity({ commit,rootGetters }, foll_id) {
+
+      let auth=rootGetters['auth/isLogged'];  
+
+      let url='profile/total/community?id='+foll_id;
+
+      if(!auth){    
+        url = 'guest/profile/total/community?id='+foll_id;  
+      }
+
 
       return axios
-        .get('profile/total/community')
+        .get(url)
         .then(({ data }) => {
           commit('setTcommunity', data.data);
         });
 
     },
+
+
 
     nFormatter(num) {
       if (num >= 1000000000) {

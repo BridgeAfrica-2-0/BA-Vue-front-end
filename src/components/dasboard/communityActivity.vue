@@ -1,14 +1,14 @@
 <template>
   <div>
-    <b-card class="border shadow">
+    <b-card class="border shadow blecrr">
       <span>
         <h6 class="title mt-3">
-          <fas-icon class="icons icon-color" :icon="['fab', 'readme']" size="lg" />
+          <fas-icon class="icons icon-color ml-2 ml-md-0" :icon="['fab', 'readme']" size="lg" />
           <b class="ml-2">{{ $t('dashboard.Posts') }} </b>
         </h6>
       </span>
 
-      <div class="s-card">
+      <div class="ss-card">
       
          <Post
           v-for="(item, index) in owner_post"
@@ -109,7 +109,7 @@ export default {
       }
       return num;
     },
-
+ 
     infiniteHandler($state) {
       let url = 'profile/dashboard/post/user/' + this.page;
 
@@ -402,4 +402,36 @@ export default {
   position: absolute;
   right: 1%;
 }
+
+
+.ss-card{
+
+  height: 540px;
+    overflow: auto;
+    overflow-x: hidden;
+    padding: 15px;
+    
+}
+
+
+@media only screen and (max-width: 768px) {
+.blecrr .card-body{
+  padding-left: 4px !important;
+
+   padding-right: 2px !important;
+}
+
+.ss-card{
+
+  height: 540px;
+    overflow: auto;
+    overflow-x: hidden;
+    padding: 2px;
+    
+}
+
+}
+
+
+
 </style>

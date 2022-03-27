@@ -475,11 +475,12 @@
                     >
                     </b-icon>
 
-                    <input
+                    <input  
                       style="display: none"
                       type="file"
                       id="file"
                       ref="file"
+                       accept="image/*"
                       @change="handleFileUpload()"
                     />
                   </label>
@@ -1270,6 +1271,7 @@
                       style="display: none"
                       type="file"
                       id="file"
+                      accept="image/*"
                       ref="file"
                       @change="handleFileUpload()"
                     />

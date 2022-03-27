@@ -185,13 +185,13 @@
 </template>
 
 <script>
-//import Post from "@/components/follower/tabs/posts";
+//import Post from "@/components/follower/tabs/posts"; 
 import Post from "@/components/businessfollower/tabs/posts";
 import About from "@/components/follower/tabs/about";  
 import Media from "@/components/businessfollower/tabs/media";
 //import Community from "@/components/follower/tabs/community";
-
-import Community from "@/components/owner/tabs/comunitiDashboard"; 
+import Community from '@/components/owner/tabs/memberNetwork';
+//import Community from "@/components/owner/tabs/comunitiDashboard"; 
 import Businesses from "@/components/follower/tabs/businesses";
 import Network from "@/components/follower/tabs/networkk";
 import axios from "axios";
@@ -409,7 +409,7 @@ p {
 }
 
 .size {
-  width: 142px;
+  width: 145px;
   height: 38px;
 }
 .message {
@@ -425,7 +425,7 @@ p,
 .txt-btn {
   margin-left: 5px;
 
-  font-size: 16px;
+  font-size: 14px;
   color: #fff;
 }
 .avata {

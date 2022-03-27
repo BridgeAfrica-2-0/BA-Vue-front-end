@@ -686,8 +686,8 @@ options(){
   }
 
   .see-all {
-    height: 38px;
-    width: 91px;
+    
+    /* width: 91px; */
     position: relative;
     margin-top: -50px;
     left: -20px;

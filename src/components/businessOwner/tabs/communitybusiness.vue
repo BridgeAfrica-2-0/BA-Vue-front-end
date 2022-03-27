@@ -33,7 +33,7 @@
                   <p class="textt">
                  
                     <router-link
-                      :to="'business/'+item.id"
+                      :to="'/business/'+item.id"
                     >
                       <strong class="title">
                         {{ item.name }}</strong

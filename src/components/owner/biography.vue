@@ -185,6 +185,7 @@ export default {
 @media only screen and (max-width: 768px) {
   .edit-btn {
     margin-left: 129px;
+    font-size: 12px;
   }
   .action-btn {
     display: flex;

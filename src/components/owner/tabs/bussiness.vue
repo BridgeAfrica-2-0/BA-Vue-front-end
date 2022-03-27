@@ -679,7 +679,7 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="country" class="username">
-                        {{ $t("profileowner.Municipality") }} :</label
+                        {{ $t("profileowner.Municipality") }} /{{ $t("profileowner.City") }}:</label
                       ><br />
 
                       <multiselect
@@ -712,7 +712,7 @@
                     </div>
                   </div>
 
-                  <b-col md="6">
+                  <!-- <b-col md="6">
                     <div class="form-group">
                       <label for="website" class="username">
                         {{ $t("profileowner.City") }} :</label
@@ -726,7 +726,7 @@
                         class="form-control text"
                       />
                     </div>
-                  </b-col>
+                  </b-col> -->
 
                   <div class="col-md-6">
                     <div class="form-group">

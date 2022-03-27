@@ -119,6 +119,7 @@
                     <b-button
                       block
                       size="sm"
+                      @click="gotoBusiness(item.id)"
                       class="b-background shadow"
                       variant="primary"
                     >
@@ -181,7 +182,9 @@ export default {
     },
 
 
-
+gotoBusiness(id) {
+      this.$router.push(`/business/${id}#about`);
+    },
     async handleFollow(user) {
       document.getElementById("followbtn" + user.id).disabled = true;
 
@@ -409,7 +412,8 @@ export default {
     padding-top: 6px;
 
     height: 38px;
-    width: 123px;
+    width: 125px;
+    font-size: 13px;
   }
 
   .r-image {

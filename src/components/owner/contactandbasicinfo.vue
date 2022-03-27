@@ -13,7 +13,7 @@
       <div class="col-md-4">
         <button
           type="button"
-          class="btn btn-outline-primary float-md-right"
+          class="btn btn-outline-primary float-md-right btn-edit"
           v-b-modal.dobbb
         >
           {{ $t("profileowner.Edit") }}
@@ -299,7 +299,7 @@
       <div class="col-md-4">
         <button
           type="button"
-          class="btn btn-outline-primary float-md-right"
+          class="btn btn-outline-primary float-md-right btn-edit"
           data-toggle="modal"
           data-target="#genderModal"
           @click="getgender()"
@@ -363,7 +363,7 @@
       <div class="col-md-4">
         <button
           type="button"
-          class="btn btn-outline-primary float-md-right"
+          class="btn btn-outline-primary float-md-right btn-edit"
           data-toggle="modal"
           data-target="#phonemodal1"
           v-b-modal.phonemodal1
@@ -412,7 +412,7 @@
       <div class="col-md-4">
         <button
           type="button"
-          class="btn btn-outline-primary float-md-right"
+          class="btn btn-outline-primary float-md-right btn-edit"
           data-toggle="modal"
           data-target="#currentcityModal"
           v-b-modal.currentcityModal
@@ -427,7 +427,7 @@
       <div class="col-md-4">
         <button
           type="button"
-          class="btn btn-outline-primary float-md-right"
+          class="btn btn-outline-primary float-md-right btn-edit"
           data-toggle="modal"
           data-target="#hometownModal"
           v-b-modal.hometownModal
@@ -445,7 +445,7 @@
           >
         </h6>
         <hr />
-        <div class="media">
+        <div class="">
           <div class="media-body">
             <a v-b-modal.websiteModal data-target="#websiteModal">
               <fas-icon
@@ -1040,5 +1040,12 @@ ul.website {
   display: inline;
 }
 @media only screen and (max-width: 768px) {
+
+  .btn-edit{
+    font-size: 12px;
+  }
 }
+
+
+
 </style>

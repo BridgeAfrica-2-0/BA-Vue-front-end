@@ -2,7 +2,7 @@
   <div class="body" ref="wrapper">
     <navbar />
     <div v-if="isloaded"  >
-      <Profile  :key="foll_id"  v-if="info || isBblock==0" />
+      <Profile  :key="foll_id"  v-if="info || isBblock==0" class="wahala" />
       <notFound v-else />
       <Footer />   
     </div>

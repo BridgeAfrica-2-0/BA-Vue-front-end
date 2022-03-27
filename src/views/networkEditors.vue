@@ -106,7 +106,7 @@ export default {
 
         { label: this.$t("network.Keyword_Alert"), icon: "" },
 
-        { label: this.$t("network.Settings"), icon: "" },
+        { label: this.$t("network.Blocking"), icon: "" },
       ],
 
       options: {

@@ -180,7 +180,7 @@ watch: {
       selectedIdd: 0,
       seetings_id: 0,
       bottomSelectedId: 0,
-      items: [{ label: 'General' }, { label: 'Network Info' }, { label: 'Network Roles ' }, { label: 'Blocking' }],
+      items: [{ label: 'General' },{ label: 'Network Roles ' }, { label: 'Network Info' },  { label: 'Blocking' }],
       options: {
         activeColor: '#1d98bd',
       },

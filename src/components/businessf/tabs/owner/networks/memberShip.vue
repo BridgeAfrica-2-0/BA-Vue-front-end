@@ -13,7 +13,7 @@
 
 
       <h6 class="font-weight-bolder">
-          {{ $t("network.All_") }} 
+          {{ $t("network.all_users") }} 
         </h6>
         <hr width="100%" />
 

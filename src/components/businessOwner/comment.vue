@@ -350,7 +350,7 @@ export default {
   border: solid 1px #ccc;
   margin-left: 40px;
   margin-top: -40px;
-  width: 93%;
+  width: 90%;
 }
 .reply {
   cursor: pointer;

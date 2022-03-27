@@ -846,7 +846,80 @@ export default {
                     commit("setLoader", false);
                     console.log(err);
                 })
-        }
+        },
+
+        DATA_UPDATE_C({ commit, state, dispatch }, data) {
+            commit("setLoader", true);
+            console.log("[DEBUG]: ", data);
+            commit("setChats", data);
+            commit("setLoader", false);
+           
+        },
+        async DELETE_USER_MESSAGE_BY_MESSAGEID({ commit, state, dispatch }, data) {
+            commit("setLoader", true);
+            console.log("[DEBUG]: DELETE_USER_MESSAGE_BY_MESSAGEID ", data);
+            let messageId = data.id;
+
+            await axios.delete(`messages/${messageId}/user`)
+                .then((res) => {
+                    commit("setLoader", false);
+                })
+                .catch((err) => {
+                    commit("setLoader", false);
+                    console.log(err);
+                })
+        },
+
+        async DELETE_BUSINESS_MESSAGE_BY_MESSAGEID_BUSINESSID({ commit, state, dispatch }, data) {
+            commit("setLoader", true);
+            console.log("[DEBUG]: DELETE_BUSINESS_MESSAGE_BY_MESSAGEID_BUSINESSID ", data);
+            let messageId = data.id;
+            let businessId = data.businessId;
+
+            await axios.delete(`messages/${messageId}/business/${businessId}`)
+                .then((res) => {
+                    commit("setLoader", false);
+                })
+                .catch((err) => {
+                    commit("setLoader", false);
+                    console.log(err);
+                })
+        },
+
+        async DELETE_NETWORK_MESSAGE_BY_MESSAGEID_NETWORKID({ commit, state, dispatch }, data) {
+            commit("setLoader", true);
+            console.log("[DEBUG]: DELETE_NETWORK_MESSAGE_BY_MESSAGEID_NETWORKID ", data);
+            let messageId = data.id;
+            let networkId = data.networkId;
+
+            await axios.delete(`messages/${messageId}/network/${networkId}`)
+                .then((res) => {
+                    commit("setLoader", false);
+                })
+                .catch((err) => {
+                    commit("setLoader", false);
+                    console.log(err);
+                })
+        },
+
+        async DELETE_GROUP_MESSAGE_BYGROUP_ID({ commit, state, dispatch }, data) {
+            // commit("setLoader", true);
+            console.log("[DEBUG]: DELETE_GROUP_MESSAGE_BYGROUP_ID ", data);
+            let messageId = data.id;
+            let groupId = data.groupId;
+            let businessId = data.business_admin_id
+
+            await axios.delete(`group/${groupId}/message/${messageId}/business/${businessId}`)
+            .then((res) => {
+
+                // dispatch("DELETE_GROUP_MESSAGE_BYGROUP_ID")
+                commit("setLoader", false);
+            })
+            .catch((err) => {
+                commit("setLoader", false);
+                console.log(err);
+            })
+        },
 
     }
 };

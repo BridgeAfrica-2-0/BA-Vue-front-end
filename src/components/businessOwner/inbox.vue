@@ -551,7 +551,10 @@
                               <template slot="button-content">
                                 <b><i class="fas fa-ellipsis-v"></i></b>
                               </template>
-                              <b-dropdown-item>Delete</b-dropdown-item>
+                              <b-dropdown-item 
+                              @click="deleteMessage(chat , chats , type)">
+                                Delete
+                              </b-dropdown-item>
                             </b-dropdown>
                           </span>
                           <span v-if="chat.attachment">
@@ -600,7 +603,10 @@
                               <template slot="button-content">
                                 <b><i class="fas fa-ellipsis-v"></i></b>
                               </template>
-                              <b-dropdown-item>Delete</b-dropdown-item>
+                              <b-dropdown-item 
+                              @click="deleteMessage(chat , chats , type)">
+                                Delete
+                              </b-dropdown-item>
                             </b-dropdown>
                           </span>
                           
@@ -1989,7 +1995,10 @@
                               <template slot="button-content">
                                 <b><i class="fas fa-ellipsis-v"></i></b>
                               </template>
-                              <b-dropdown-item>Delete</b-dropdown-item>
+                              <b-dropdown-item 
+                              @click="deleteMessage(chat , chats , type)">
+                                Delete
+                              </b-dropdown-item>
                             </b-dropdown>
                           </span>
                         <!-- <i class="fa fa-ellipsis-v float-right mt-"></i></p> -->
@@ -2006,7 +2015,7 @@
                               <template slot="button-content">
                                 <b><i class="fas fa-ellipsis-v"></i></b>
                               </template>
-                              <b-dropdown-item>Delete</b-dropdown-item>
+                              <b-dropdown-item @click="deleteMessage(chat , chats , type)">Delete</b-dropdown-item>
                             </b-dropdown>
                           </span>
                           <span v-if="chat.attachment">
@@ -2055,7 +2064,10 @@
                               <template slot="button-content">
                                 <b><i class="fas fa-ellipsis-v"></i></b>
                               </template>
-                              <b-dropdown-item>Delete</b-dropdown-item>
+                              <b-dropdown-item 
+                              @click="deleteMessage(chat , chats , type)">
+                                Delete
+                              </b-dropdown-item>
                             </b-dropdown>
                           </span>
                           <span v-if="chat.attachment">
@@ -2936,7 +2948,10 @@ export default {
     EmojiPicker,
   },
   data() {
+    
+    
     return {
+      props: ['chats'],
       groupAdminId: null,
       screenWidth: window.screen.width,
       screenX: 0,
@@ -3581,6 +3596,7 @@ export default {
       }
     },
     async histBizToUser(receiverId) {
+      console.log("call storing data here")
       await this.$store
         .dispatch("businessChat/GET_BIZ_TO_USER", receiverId)
         .then(() => {})
@@ -3612,6 +3628,36 @@ export default {
         });
       }
     },
+
+    async deleteMessage(data , chatList , type){
+
+      let dataChat = chatList.filter((b) => { return b.id !== data.id;});
+
+      if(type == "user"){
+        await this.$store.dispatch("businessChat/DELETE_USER_MESSAGE_BY_MESSAGEID", data)
+      }
+
+      if(type == "business"){
+        data.businessId = this.chatSelected.id;
+        console.log(data , "bussiness");
+        await this.$store.dispatch("businessChat/DELETE_BUSINESS_MESSAGE_BY_MESSAGEID_BUSINESSID", data)
+      }
+
+      if(type == "network"){
+        data.networkId = this.chatSelected.id;
+        console.log(data , "network");
+        await this.$store.dispatch("businessChat/DELETE_NETWORK_MESSAGE_BY_MESSAGEID_NETWORKID", data)
+      }
+   
+      if(type == "group"){
+        data.groupId = this.chatSelected.id;
+        await this.$store.dispatch("businessChat/DELETE_GROUP_MESSAGE_BYGROUP_ID", data)
+      }
+
+      this.$store.dispatch("businessChat/DATA_UPDATE_C", dataChat)
+
+    },
+  
     async selectedMultyChat() {
       this.$bvModal.hide("group-name");
       console.log("type tabs:", this.tabIndex);
@@ -3649,6 +3695,7 @@ export default {
 
     //lalalala
     selectedChat(data) {
+     
       console.log("[type tabs]", this.tabIndex);
       // this.scrollToBottom();
       console.log("[selected Chat]", data);
@@ -3663,6 +3710,7 @@ export default {
       this.$store.commit("businessChat/setSelectedChatId", data.id);
       let receiver = { receiverID: data.id, keyword: null };
       if (data.type == "user") {
+         console.log("user click event");
         this.histBizToUser(receiver);
       } else if (this.type == "network") {
         this.histBizToNetwork(receiver);

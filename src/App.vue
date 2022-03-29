@@ -214,7 +214,8 @@ width: 20px !important;
 
 li .nav-link:hover {
   background-color: #e75c18;
-  color: #fff;
+  // color: #fff;
+  color:  #e75c18 !important;
 }
 
 .nav-pills .nav-link.active,

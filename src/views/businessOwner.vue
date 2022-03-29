@@ -261,10 +261,7 @@ export default {
     padding-right: 0px;
   }
 }
-.nav-pills .nav-link.active,
-.nav-pills .show > .nav-link {
-  background-color: #e6e6e6;
-}
+
 .center-ly {
   margin-top: -25px;
 }

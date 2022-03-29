@@ -258,3 +258,33 @@ export default {
   color: black;
 }
 </style>
+
+
+<style >
+
+
+ /* .dropdown .show{
+  color:#e75c18 !important;
+}
+
+.nav-link:active{
+ color:#e75c18 !important;
+}
+
+ dropdown-toggle :active{
+color:#e75c18 !important;
+ }
+
+.dropdown-toggle :hover{
+  color:#e75c18 !important;
+}
+
+.nav-link :hover{
+ color: #e75c18 !important;
+}
+
+.b-nav-dropdown :hover{
+  color: #e75c18 !important;
+} */
+
+</style>

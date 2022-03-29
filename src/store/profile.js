@@ -430,12 +430,17 @@ export default {
 
     Tcommunity({ commit,rootGetters }, foll_id) {
 
+      let id="";
+      if(foll_id){
+        id=foll_id;
+      }
+
       let auth=rootGetters['auth/isLogged'];  
 
-      let url='profile/total/community?id='+foll_id;
+      let url='profile/total/community?id='+id;
 
       if(!auth){    
-        url = 'guest/profile/total/community?id='+foll_id;  
+        url = 'guest/profile/total/community?id='+id;  
       }
 
 

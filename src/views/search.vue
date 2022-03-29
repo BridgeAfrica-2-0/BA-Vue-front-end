@@ -2657,8 +2657,12 @@ export default {
 <style>
 li .nav-link:hover {
   background-color: white;
-  color: #fff;
+  color: #e75c18;
+
+  
 }
+
+
 
 @media only screen and (max-width: 1201px) {
   .leftblock {

@@ -71,7 +71,7 @@ export default {
         
       
        axios
-        .delete('account/delete')
+        .delete('profile/user-account')
        .then(response => {
         
           loader.hide();
@@ -79,6 +79,8 @@ export default {
           status: "success",
           message: "Account Deleted"
         });
+
+         this.$router.push({ name: "Login" });
       })
       .catch(err => {
            loader.hide();

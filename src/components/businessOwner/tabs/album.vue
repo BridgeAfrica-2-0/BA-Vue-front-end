@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="p-3">
     
     <div class="row">
       <div class="container-fluid" v-if="showalbum == false">

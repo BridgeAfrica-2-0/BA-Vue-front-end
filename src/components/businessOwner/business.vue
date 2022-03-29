@@ -17,7 +17,7 @@
               /></b-tab>
               <b-tab :title="$t('businessowner.About')"><About /></b-tab>
               <b-tab :title="$t('businessowner.Media')"
-                ><Media type="business"
+                ><Media type="business" class="p-3"
               /></b-tab>
               <b-tab :title="$t('businessowner.Market')"><MarketPlace /></b-tab>
               <b-tab :title="$t('profileowner.Networks')">

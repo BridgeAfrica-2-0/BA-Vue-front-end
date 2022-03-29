@@ -12,7 +12,15 @@
       :editPost="() => editPost(item)"
       :deletePost="() => deletePost(item)"
     />
-    <infinite-loading @infinite="infiniteHandler"></infinite-loading>
+    <infinite-loading @infinite="infiniteHandler">
+
+        <div slot="no-more" class="mt-5"> {{ $t('general.no_more_most') }} </div>
+        <div slot="no-results" class="mt-5">   {{ $t('general.no_post') }} </div> 
+
+       
+
+
+    </infinite-loading>
   </div>
 </template>
 

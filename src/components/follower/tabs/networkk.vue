@@ -21,7 +21,7 @@
       <b-col
         lg="6"
         sm="12"
-        class="p-2 mb-2"
+        class="p-1 mb-2"
         v-for="item in network"
         :key="item.id"
       >
@@ -351,7 +351,7 @@ export default {
     font-size: 10px;
 
     height: 28px;
-    width: 85px;
+    width: 97px;
   }
 
   .r-image {
@@ -457,6 +457,9 @@ export default {
     margin-right: 8px;
 
     padding: 7px;
+  }
+  .btn{
+    font-size: 13px;
   }
 }
 

@@ -4277,6 +4277,9 @@ input[type="button"].btn-block {
 
 .nav-link:hover, .nav-link:focus {
   text-decoration: none;
+   /* color: white !important; */
+
+ color: #e75c18 i !important;
 }
 
 .nav-link.disabled {
@@ -4354,10 +4357,15 @@ input[type="button"].btn-block {
 }
 
 
+.icon-size {
+  color: #e75c18;
+}
 
 
-
-
+.icons {
+  color: #e75c18;
+  width: 24px;
+}
 .nav-pills .nav-link.active,
 .nav-pills .show > .nav-link {
   color: #fff !important;

@@ -66,10 +66,10 @@
                 :data="neigbourhoods"
                 :minMatchingChars="1"
                 :maxMatches="10"
-              
+               style="border:0px"
                 :serializer="(item) => item.name"
                 :placeholder="credentials.location_placeholder"
-                class="search-hh w-100 "
+                class="search-hh w-100 balala "
               >
 
                <template slot="prepend">
@@ -1331,6 +1331,10 @@ this.$store
     margin: 0px;
     border-radius: 0px;
     border: none;
+}
+
+.balala .form-control{
+  border: 0px;
 }
 }
 </style>

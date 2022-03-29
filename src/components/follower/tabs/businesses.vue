@@ -12,7 +12,7 @@
 
     <div class="business" v-if="noBusiness == false">
       <b-row>
-        <b-col lg="6" class="p-0 mb-2" v-for="item in busineses" :key="item.id">
+        <b-col lg="6" class="p-1 mb-2" v-for="item in busineses" :key="item.id">
          
           <div class="people-style shadow h-100">
             <b-row>

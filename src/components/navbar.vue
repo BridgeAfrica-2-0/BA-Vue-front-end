@@ -57,16 +57,7 @@
                   class="input-group-append color-mobile"
                   style="border: none"
                 >
-                  <span
-                    class="input-group-text border-left-0 color-mobile"
-                    style="width: 40px;  border:none"
-                  >
-                    <b-icon
-                      icon="geo-alt"
-                      style="color: #e75c18"
-                      font-scale="1.5"
-                    ></b-icon>
-                  </span>
+                  
                 </div>
 
                
@@ -75,11 +66,26 @@
                 :data="neigbourhoods"
                 :minMatchingChars="1"
                 :maxMatches="10"
-              
+               style="border:0px"
                 :serializer="(item) => item.name"
                 :placeholder="credentials.location_placeholder"
-                class="search-hh m-where"
-              />
+                class="search-hh w-100 balala "
+              >
+
+               <template slot="prepend">
+        <span
+                    class="input-group-text border-left-0 color-mobile"
+                    style=" width: 40px;  border:none"
+                  >
+                    <b-icon
+                      icon="geo-alt"
+                      style="color: #e75c18"
+                      font-scale="1.5"
+                    ></b-icon>
+                  </span>
+      </template>
+</vue-bootstrap-typeahead >
+
               </b-input-group>
             </span>
           </form>
@@ -1316,5 +1322,19 @@ this.$store
     border-radius: 0px;
     border-bottom: hidden;
   }
+}
+
+@media only screen and (max-width: 768px) {
+.m-where{
+  width: 85.8%;
+    padding: 0px;
+    margin: 0px;
+    border-radius: 0px;
+    border: none;
+}
+
+.balala .form-control{
+  border: 0px;
+}
 }
 </style>

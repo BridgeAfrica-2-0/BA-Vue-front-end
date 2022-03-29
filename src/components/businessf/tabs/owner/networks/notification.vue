@@ -3,7 +3,7 @@
   <div class="container" style=" ">
     <div class="container">
       <b-row>
-        <b-col>
+        <b-col cols="4">
           <div class="b-bottomn f-left">
             <b-form-checkbox
               v-model="selectAll"
@@ -15,8 +15,8 @@
             </b-form-checkbox>
           </div>
         </b-col>
-        <b-col>
-          <div class="b-bottomn f-right">
+        <b-col cols="8">
+          <div class="b-bottomn f-right d-inline-flex">
             <b-button 
               variant="primary" 
               @click="MarkAsRead" 

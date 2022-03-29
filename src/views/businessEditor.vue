@@ -1,5 +1,5 @@
  <template>
-  <div class="" style="overflow-y: hidden; padding: 0px">
+  <div class="wahala" style="overflow-x: clip;  padding: 0px">
     <span v-if="isloaded">
       <navbar />
 
@@ -249,11 +249,6 @@ export default {
     padding-left: 0px;
     padding-right: 0px;
   }
-}
-
-.nav-pills .nav-link.active,
-.nav-pills .show > .nav-link {
-  background-color: #e6e6e6;
 }
 
 .center-ly {

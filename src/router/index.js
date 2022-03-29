@@ -24,28 +24,20 @@ import Modifier from "@/views/modifier";
 import store from "@/store/index.js";
 import Follower from "../views/follower.vue";
 import Visitor from "../views/visitor.vue";
-import profile_owner from "@/views/profileOwner";
-import businessFollower from "@/views/businessFollower";
-import profileFollower from "@/views/profileFollower";
-import businessOwner from "@/views/businessOwner";
-import businessEditor from "@/views/businessEditor";
-import businessVisitor from "@/views/businessVisitor";
-import search from "@/views/search";
+
+
+
+
 import forgotPassword from "@/views/forgotPassword";
 import navMessage from "@/views/navMessaging";
-
-import memberNetworkFollower from "@/views/memberNetworkFollower";
-import memberNetwork from "@/views/memberNetwork";
-
-import networkEditors from "@/views/networkEditors";
 
 import templateView from "@/views/templateView";
 import webSiteCreate from "@/views/webSiteCreate";
 import webSiteCreateTwo from "@/views/webSiteCreateTwo";
 import paidPlan from "@/views/paidPlan";
 import confirmPayment from "@/views/confirmPayment";
-import networks from "@/views/networks";
-import dashboard from "@/views/dashboard";
+
+
 
 import myorders from "@/views/myOders"
 import orders from "@/views/orders"
@@ -58,8 +50,36 @@ import OrderDetails from "@/views/OrderDetails";
 import businessordersdetail from "@/views/businessordersdetail"
 import businessOwnerOrders from "@/views/businessOwnerOrders"
 import payment from "@/views/payment";
+
+import memberNetworkFollower from "@/views/memberNetworkFollower";
+import memberNetwork from "@/views/memberNetwork";
+import networkEditors from "@/views/networkEditors";
+import businessFollower from "@/views/businessFollower";
+import profileFollower from "@/views/profileFollower";
+//import businessOwner from "@/views/businessOwner";
+//import businessEditor from "@/views/businessEditor";
+import businessVisitor from "@/views/businessVisitor";
+//import networks from "@/views/networks";
+//import search from "@/views/search";
+
+
+const search = () => import('@/views/search');
+const networks = () => import('@/views/networks');
+const businessOwner = () => import('@/views/businessOwner');
+ const businessEditor = () => import('@/views/businessEditor');
+// const dashboard = () => import('@/views/dashboard');
+// const dashboard = () => import('@/views/dashboard');
+
+
 // import about from "@/views/about";
 // import contact from "@/views/contact";
+//import dashboard from "@/views/dashboard";
+
+//import profile_owner from "@/views/profileOwner";
+
+const profile_owner = () => import('@/views/profileOwner');
+
+const dashboard = () => import('@/views/dashboard');
 
 const about = () => import('@/views/about');
 const contact = () => import('@/views/contact');

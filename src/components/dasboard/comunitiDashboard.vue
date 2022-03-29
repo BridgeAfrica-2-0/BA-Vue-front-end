@@ -1,6 +1,6 @@
 <template>
     <div class="lalala">
-    <div class=" border mt-2 ">
+    <div class=" border mt-2 ">  
       <span>
         <h6 class="title m-3">
           <fas-icon class="icons" :icon="['fas', 'users']" size="lg" />
@@ -112,7 +112,7 @@ export default {
   mounted(){
     
       this.$store
-      .dispatch("profile/Tcommunity", null)
+      .dispatch("profile/Tcommunity", '') 
       .then((response) => {
        
       })

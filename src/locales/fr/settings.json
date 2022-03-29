@@ -1,6 +1,12 @@
 {
-
+        "delete_account":"Supprimer le compte",
+	"delete_info":"si vous pensez ne plus vouloir utiliser bridgeafrica.com et souhaitez supprimer votre compte, nous nous en chargerons pour vous, mais notez que vous ne pourrez plus vous connecter ou revoir votre profil sur notre plate-forme",
+        "for_more_information_visit":"pour plus d'informations, visitez",
+	"privacy_policy":"politique de confidentialité",
         "Title": "Paramètres",
+        "are_you_sure":"Vous êtes sûr ?",
+		"No":"Non",
+		"Yes":"Oui",
         "General": "Général",
         "Account_Type": "Type de compte",
         "Password": "Mot de passe",

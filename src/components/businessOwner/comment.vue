@@ -1,5 +1,5 @@
 <template>
-  <b-row class="my-4 ml-4" @keydown="onEscape">
+  <b-row class="my-4 ml-1 ml-md-2 ml-xl-4 blaa" @keydown="onEscape">
     <b-col :class="`${proccesEdit ? 'd-flex' : ''}`">
       <b-avatar
         variant="light"
@@ -350,7 +350,7 @@ export default {
   border: solid 1px #ccc;
   margin-left: 40px;
   margin-top: -40px;
-  width: 93%;
+  width: 90%;
 }
 .reply {
   cursor: pointer;
@@ -382,6 +382,7 @@ export default {
   .avat-comment {
     width: 40px;
     height: 40px;
+     margin-right: 2px !important;
   }
 }
 
@@ -389,6 +390,7 @@ export default {
   .avat-comment {
     width: 36px;
     height: 36px;
+   
   }
 }
 </style>
@@ -404,5 +406,9 @@ export default {
 }
 .fs-12 {
   font-size: 12px;
+}
+
+.blaa .b-avatar-img{
+  margin-right: 2px !important;
 }
 </style>

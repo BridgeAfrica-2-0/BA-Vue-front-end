@@ -2,7 +2,7 @@
   <div>   
     <head-page-owner @goto-cover-images="gotoCoverImages"></head-page-owner>
     <div class="row">
-      <div class="text-justify mt-2 container-fluid">
+      <div class="text-justify mt-2 container-fluid wahala">
         <b-row class="center-content">
           <b-col cols="12">
             <b-tabs
@@ -17,7 +17,7 @@
               /></b-tab>
               <b-tab :title="$t('businessowner.About')"><About /></b-tab>
               <b-tab :title="$t('businessowner.Media')"
-                ><Media type="business"
+                ><Media type="business" class="p-3"
               /></b-tab>
               <b-tab :title="$t('businessowner.Market')"><MarketPlace /></b-tab>
               <b-tab :title="$t('profileowner.Networks')">
@@ -98,7 +98,7 @@ export default {
   .nav-fill .nav-item {
     flex: 1 1 auto;
     text-align: center;
-    width: 20px;
+   
   }
 }
 </style>

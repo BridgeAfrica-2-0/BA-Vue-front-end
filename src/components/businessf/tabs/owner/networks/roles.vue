@@ -25,7 +25,7 @@
           </b-form-group>
         </b-col>
 
-        <b-col cols="3">
+        <b-col cols="5" md="3">
           <b-form-group
             label-cols-lg="3"
             :label=" $t('network.Role')"
@@ -45,7 +45,7 @@
           </b-form-group>
         </b-col>
 
-        <b-col cols="2">
+        <b-col cols="12" md="2">
           <b-button variant="primary" class="" @click="assignRole()">
             <b-spinner v-if="SPassign" small type="grow"></b-spinner> {{ $t('network.Assign') }}
           </b-button>

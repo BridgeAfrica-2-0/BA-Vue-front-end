@@ -80,8 +80,8 @@ export default {
 
 @media only screen and (max-width: 768px) {
   .busi-btn {
-    width: 112px;
-    height: 38px;
+    width: 115px;
+    
     font-family: Helvetica Neue;
 
     font-size: 12px;

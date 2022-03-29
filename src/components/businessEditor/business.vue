@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="wahala">
     <head-page-owner @goto-cover-images="gotoCoverImages"></head-page-owner>
     <div class="row">
       <div  class="text-justify mt-2 container-fluid" >
@@ -83,7 +83,7 @@ export default {
   .mobile-tab .nav-fill > .nav-link, .nav-fill .nav-item {
     flex: 1 1 auto;
     text-align: center;
-    width: 20px;
+  
   }
 }
 

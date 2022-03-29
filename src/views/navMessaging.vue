@@ -382,6 +382,23 @@
                   <b-row class="p-1">
                     <b-col>
                       <p class="msg-text mt-0 text">
+                        <span class="text-center float-right mt-n0">
+                            <b-dropdown
+                              variant="link"
+                              size="lg"
+                              toggle-class="text-decoration-none p-0"
+                              no-caret
+                              right
+                            >
+                              <template slot="button-content">
+                                <b><i class="fas fa-ellipsis-v"></i></b>
+                              </template>
+                              <b-dropdown-item 
+                              @click="deleteMessage(chat , userToUser , type)">
+                                Delete
+                              </b-dropdown-item>
+                            </b-dropdown>
+                          </span>
                         <span v-if="chat.attachment">
                           <img :src="chat.attachment" />
                           <!-- <br />
@@ -1155,6 +1172,24 @@
                   <b-row class="p-2">
                     <b-col>
                       <p class="msg-text mt-0 text">
+                        <span class="text-center float-right mt-n0">
+                            <b-dropdown
+                              variant="link"
+                              size="lg"
+                              toggle-class="text-decoration-none p-0"
+                              no-caret
+                              right
+                            >
+                              <template slot="button-content">
+                                <b><i class="fas fa-ellipsis-v"></i></b>
+                              </template>
+                              <b-dropdown-item 
+                              @click="deleteMessage(chat , userToUser , type)">
+                                Delete
+                              </b-dropdown-item>
+                            </b-dropdown>
+                          </span>
+
                         <span v-if="chat.attachment">
                           <img :src="chat.attachment" />
                           <!-- <br />
@@ -1189,6 +1224,24 @@
                   <b-row class="p-2">
                     <b-col>
                       <p id="sent" class="msg-text-sent text">
+                        <span class="text-center float-right mt-n0">
+                            <b-dropdown
+                              variant="link"
+                              size="lg"
+                              toggle-class="text-decoration-none p-0"
+                              no-caret
+                              right
+                            >
+                              <template slot="button-content">
+                                <b><i class="fas fa-ellipsis-v"></i></b>
+                              </template>
+                              <b-dropdown-item 
+                              @click="deleteMessage(chat , userToUser , type)">
+                                Delete
+                              </b-dropdown-item>
+                            </b-dropdown>
+                          </span>
+                          
                         <span v-if="chat.attachment">
                           <img :src="chat.attachment" />
                           <!-- <br />
@@ -2271,6 +2324,35 @@ export default {
       this.input = "";
       this.dismissed();
       this.scrollToBottom();
+    },
+    async deleteMessage(data , chatListData , type){
+    
+      let dataChat = chatListData.filter((b) => { return b.id !== data.id;});
+
+
+      if(type == "user"){
+        await this.$store.dispatch("businessChat/DELETE_USER_MESSAGE_BY_MESSAGEID", data)
+      }
+
+      if(type == "business"){
+        data.businessId = this.chatSelected.id;
+        console.log(data , "bussiness");
+        await this.$store.dispatch("businessChat/DELETE_BUSINESS_MESSAGE_BY_MESSAGEID_BUSINESSID", data)
+      }
+
+      if(type == "network"){
+        data.networkId = this.chatSelected.id;
+        console.log(data , "network");
+        await this.$store.dispatch("businessChat/DELETE_NETWORK_MESSAGE_BY_MESSAGEID_NETWORKID", data)
+      }
+   
+      // if(type == "group"){
+      //   data.groupId = this.chatSelected.id;
+      //   await this.$store.dispatch("businessChat/DELETE_GROUP_MESSAGE_BYGROUP_ID", data)
+      // }
+
+      this.$store.dispatch("userChat/DATA_UPDATE_C", dataChat)
+
     },
   },
 };

@@ -2346,7 +2346,7 @@ export default {
         data.networkId = this.chatSelected.id;
         console.log(data , "network");
         await this.$store.dispatch("businessChat/DELETE_NETWORK_MESSAGE_BY_MESSAGEID_NETWORKID", data)
-      }
+      } 
    
       // if(type == "group"){
       //   data.groupId = this.chatSelected.id;

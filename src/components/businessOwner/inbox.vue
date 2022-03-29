@@ -3627,7 +3627,7 @@ export default {
           type: this.type,
         });
       }
-    },
+    }, 
 
     async deleteMessage(data , chatList , type){
 

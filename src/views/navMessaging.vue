@@ -68,15 +68,15 @@
                       </b-row>
 
                       <div class="messages">
-                        <div v-if="loader" class="text-center mt-6 pt-6">
+                        <!-- <div v-if="loader" class="text-center mt-6 pt-6">
                           <b-spinner
                             variant="light"
                             label="Spinning"
                             class="centralizer"
                           ></b-spinner>
-                        </div>
+                        </div> -->
                         <b-row
-                          v-else
+                        
                           v-for="(chat, index) in chatList"
                           :key="index"
                           :class="[
@@ -155,15 +155,15 @@
                       </b-row>
 
                       <div class="messages">
-                        <div v-if="loader" class="text-center mt-12 pt-12">
+                        <!-- <div v-if="loader" class="text-center mt-12 pt-12">
                           <b-spinner
                             variant="light"
                             label="Spinning"
                             class="centralizer"
                           ></b-spinner>
-                        </div>
+                        </div> -->
                         <b-row
-                          v-else
+                       
                           v-for="(chat, index) in chatList"
                           :key="index"
                           :class="[
@@ -854,15 +854,9 @@
                       </b-row>
 
                       <div class="messages">
-                        <div v-if="loader" class="text-center mt-6 pt-6">
-                          <b-spinner
-                            variant="primary"
-                            label="Spinning"
-                            class="centralizer"
-                          ></b-spinner>
-                        </div>
+                       
                         <b-row
-                          v-else
+                         
                           v-for="(chat, index) in chatList"
                           :key="index"
                           :class="[
@@ -942,15 +936,9 @@
                       </b-row>
 
                       <div class="messages">
-                        <div v-if="loader" class="text-center mt-12 pt-12">
-                          <b-spinner
-                            variant="primary"
-                            label="Spinning"
-                            class="centralizer"
-                          ></b-spinner>
-                        </div>
+                      
                         <b-row
-                          v-else
+                         
                           v-for="(chat, index) in chatList"
                           :key="index"
                           :class="[
@@ -1029,15 +1017,9 @@
                       </b-row>
 
                       <div class="messages">
-                        <div v-if="loader" class="text-center mt-12 pt-12">
-                          <b-spinner
-                            variant="primary"
-                            label="Spinning"
-                            class="centralizer"
-                          ></b-spinner>
-                        </div>
+                        
                         <b-row
-                          v-else
+                          
                           v-for="(chat, index) in chatList"
                           :key="index"
                           :class="[
@@ -1173,24 +1155,7 @@
                   <b-row class="p-2">
                     <b-col>
                       <p class="msg-text mt-0 text">
-                        <span class="text-center float-right mt-n0">
-                            <b-dropdown
-                              variant="link"
-                              size="lg"
-                              toggle-class="text-decoration-none p-0"
-                              no-caret
-                              right
-                            >
-                              <template slot="button-content">
-                                <b><i class="fas fa-ellipsis-v"></i></b>
-                              </template>
-                              <b-dropdown-item 
-                              @click="deleteMessage(chat , userToUser , type)">
-                                Delete
-                              </b-dropdown-item>
-                            </b-dropdown>
-                          </span>
-
+                      
                         <span v-if="chat.attachment">
                           <img :src="chat.attachment" />
                           <!-- <br />
@@ -2155,6 +2120,7 @@ export default {
         .catch(() => console.log("error"));
     },
     selectedChat(data) {
+      
       // this.scrollToBottom();
 
 

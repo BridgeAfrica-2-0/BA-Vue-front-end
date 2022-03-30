@@ -86,13 +86,7 @@
                       </b-row>
 
                       <div class="messages">
-                        <div v-if="loader" class="text-center">
-                          <b-spinner
-                            variant="primary"
-                            label="Spinning"
-                            class="centralizer"
-                          ></b-spinner>
-                        </div>
+                        
                         <div v-if="chatList.length > 0">
                           <b-row
                             v-for="(chat, index) in chatList"
@@ -175,13 +169,7 @@
                       </b-row>
 
                       <div class="messages">
-                        <div v-if="loader" class="text-center">
-                          <b-spinner
-                            variant="primary"
-                            label="Spinning"
-                            class="centralizer"
-                          ></b-spinner>
-                        </div>
+                        
                         <div v-if="chatList.length > 0">
                           <b-row
                             v-for="(chat, index) in chatList"
@@ -605,7 +593,7 @@
                               </template>
                               <b-dropdown-item 
                               @click="deleteMessage(chat , chats , type)">
-                                Delete
+                                Delete 
                               </b-dropdown-item>
                             </b-dropdown>
                           </span>
@@ -1555,13 +1543,7 @@
                       </b-row>
 
                       <div class="messages">
-                        <div v-if="loader" class="text-center">
-                          <b-spinner
-                            variant="primary"
-                            label="Spinning"
-                            class="centralizer"
-                          ></b-spinner>
-                        </div>
+                       
                         <div v-if="chatList.length > 0">
                           <b-row
                             v-for="(chat, index) in chatList"
@@ -1735,15 +1717,9 @@
                       </b-row>
 
                       <div class="messages">
-                        <div v-if="loader" class="text-center mt-12 pt-12">
-                          <b-spinner
-                            variant="primary"
-                            label="Spinning"
-                            class="centralizer"
-                          ></b-spinner>
-                        </div>
+                        
                         <b-row
-                          v-else
+                      
                           v-for="(chat, index) in chatList"
                           :key="index"
                           :class="[
@@ -1823,13 +1799,7 @@
                       </b-row>
 
                       <div class="messages">
-                        <div v-if="loader" class="text-center">
-                          <b-spinner
-                            variant="primary"
-                            label="Spinning"
-                            class="centralizer"
-                          ></b-spinner>
-                        </div>
+                        
                         <div v-if="chatList.length > 0">
                           <b-row
                             v-for="(chat, index) in chatList"
@@ -2004,7 +1974,7 @@
                         <!-- <i class="fa fa-ellipsis-v float-right mt-"></i></p> -->
                         <br />
                         <p v-if="chat.message" class="msg-text mt-0 text">
-                          <span class="text-center float-right mt-n2">
+                          <!-- <span class="text-center float-right mt-n2">
                             <b-dropdown
                               variant="link"
                               size="lg"
@@ -2017,7 +1987,7 @@
                               </template>
                               <b-dropdown-item @click="deleteMessage(chat , chats , type)">Delete</b-dropdown-item>
                             </b-dropdown>
-                          </span>
+                          </span> -->
                           <span v-if="chat.attachment">
                             <img :src="chat.attachment" />
                             <!-- <br />
@@ -2066,7 +2036,7 @@
                               </template>
                               <b-dropdown-item 
                               @click="deleteMessage(chat , chats , type)">
-                                Delete
+                                Delete 
                               </b-dropdown-item>
                             </b-dropdown>
                           </span>

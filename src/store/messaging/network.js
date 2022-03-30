@@ -840,7 +840,7 @@ export default {
                 })
         },
         async GET_BIZ_TO_GROUP({ commit, state, dispatch }, data) {
-            commit("setLoader", true);
+            // commit("setLoader", true);
             console.log("[DEBUG]: ", data);
             let keyword = data.keyword ? '/' + data.keyword : ''
 

@@ -2696,6 +2696,31 @@
                               :title="$t('general.Editor')"
                               @click="getEditors()"
                             >
+
+                   
+                              <!-- All Selection -->
+                              <b-row>
+                                <b-col>
+                                  <b-card>
+                                    <b-row class="text-center">
+                                      <b-col>
+                                        <b-form-group>
+                                          <b-form-radio-group
+                                            id="radio-editor-1"
+                                            v-model="selectedselectOptionAll"
+                                            :options="selectOptionsAll"
+                                            name="radio-options-editor"
+                                            @change="selectAllForAllTab"
+                                          ></b-form-radio-group>
+                                        </b-form-group>
+                                      </b-col>
+                                    </b-row>
+                                  </b-card>
+                                </b-col>
+                              </b-row>
+
+                          
+
                               <div v-if="loader" class="text-center">
                                 <b-spinner
                                   variant="primary"
@@ -3281,6 +3306,7 @@ export default {
 
     selectedAllMulty(val) {
       console.log("new val:", val);
+      console.log(this.tabMemberType , "case here ")
       let selected = [];
       switch (this.tabMemberType) {
         case 1:
@@ -3358,10 +3384,40 @@ export default {
           }
           break;
 
+          case 4:
+
+          this.selectedEditor = [];
+          if (val == "all") {
+            this.bizs.map((biz) => {
+              this.selectedEditor.push(biz.id);
+            });
+          } else if (val == "follower") {
+            selected = this.bizs.filter((biz) => {
+              return biz.statusType === "follower";
+            });
+
+            
+            selected.map((elm) => {
+              this.selectedEditor.push(elm.id);
+              this.groupMembers.push({ type: elm.accountType, id: elm.id });
+            });
+          } else {
+            selected = this.bizs.filter((biz) => {
+              return biz.statusType === "following";
+            });
+            selected.map((elm) => {
+              this.selectedEditor.push(elm.id);
+              this.groupMembers.push({ type: elm.accountType, id: elm.id });
+            });
+          }
+          
+          break;
+
         default:
       }
     },
     selectAllForAllTab(val) {
+      // console.log(val, "Adasd");
       this.selectedPeople = [];
       if (val == "all") {
         this.allUsers.map((biz) => {
@@ -3388,6 +3444,11 @@ export default {
         this.allEditors.map((biz) => {
           this.selectedEditor.push(biz.id);
         });
+
+        this.bizs.map((biz) => {
+          this.selectedEditor.push(biz.id);
+        });
+          
       }
     },
     getAll() {

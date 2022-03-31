@@ -1,5 +1,7 @@
 <template>
   <div class="p-3 pt-0 card-border my-3" style="position: relative">
+
+    
     <div class="mt-0">
       <div class="d-inline-flex">
         <span md="1" class="m-0 p-0">
@@ -31,7 +33,7 @@
           v-if="
             'dashboard' !== $route.name
               ? !isDisplayInSearch
-                ? isYourOwnPost && canBeDelete
+                ? (isYourOwnPost && canBeDelete)||from=='network'
                 : false
               : false
           "
@@ -186,7 +188,7 @@
             : false
           : false
       "
-    >
+    >   
       <div class="m-md-0 p-md-0">
         <b-avatar
           b-avatar
@@ -220,7 +222,7 @@
       </div>
     </div>
 
-    <Comment
+    <Comment 
       v-for="comment in comments"
       :key="comment.updated_at"
       :item="comment"
@@ -239,7 +241,7 @@
     />
   </div>
 </template>
-
+  
 <script>
 
 import { mapMutations } from "vuex";
@@ -282,6 +284,12 @@ export default {
       type: Boolean,
       default: () => true,
     },
+
+    from: {
+      
+      default: () => 'others',
+    },
+
   },
 
   watch: {

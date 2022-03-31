@@ -27,7 +27,7 @@
               />
               <br />
               <div :ref="category.category.id">
-                <b-row>
+                <div style="columns: 2;">
                   <b-dropdown-item
                     v-for="(subCat, subIndex) in category.sub_cat.slice(0, 6)"
                     :key="subIndex"
@@ -61,7 +61,7 @@
                       />
                       More</b-dropdown-item
                     > -->
-                </b-row>
+                </div>
               </div>
             </b-nav-item-dropdown>
           </span>

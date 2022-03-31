@@ -59,13 +59,17 @@
                   <img :src="network.image" class="r-image" />
                 </div>
               </div>
-
+ 
               <div class="flx70">
                 <p class="textt text">
                   <strong class="title">
-                    <router-link :to="'/network/' + network.id">
+                    <router-link :to="'/network_member/' + network.id">
                       {{ network.name }}
-                      <span>{{ `${network.is_owner ? network.is_approve ? '(Approved)' :'(UnApproved)' : ''}` }}</span>
+                      <!-- <span>{{ `${network.is_owner ? network.is_approve ? '(Approved)' :'(UnApproved)' : ''}` }}</span>
+                       -->
+  
+                      <span v-if="type!='business'" >   <b-icon  v-if="network.is_approve" icon="check-circle-fill" variant="primary"> </b-icon>     </span>
+                       
                     </router-link>
                   </strong>
                   <br />

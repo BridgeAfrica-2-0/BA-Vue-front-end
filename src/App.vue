@@ -212,11 +212,11 @@ width: 20px !important;
   color: #000;
 }
 
-li .nav-link:hover {
-  background-color: #e75c18;
-  // color: #fff;
-  color:  #e75c18 !important;
-}
+// li .nav-link:hover {
+//   background-color: #e75c18;
+//   // color: #fff;
+//   color:  #e75c18 !important;
+// }
 
 .nav-pills .nav-link.active,
 .nav-pills .show > .nav-link {

@@ -424,6 +424,7 @@
       v-for="item in owner_post"
       :key="item.updated_at"
       :post="item"
+      from="network"
       :mapvideo="() => mapvideo(item.media)"
       :mapmediae="() => mapmediae(item.media)"
       :businessLogo="item.profile_picture"

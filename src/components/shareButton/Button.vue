@@ -122,6 +122,7 @@
       toggle-class="text-decoration-none"
       no-caret
       position="bottom"
+      ref="dropdown"
     >
       <template #button-content>
         <b-icon class="primary" icon="share" />
@@ -213,6 +214,8 @@
         data-toggle="popover"
         role="button"
         data-original-title=""
+     
+         @click.capture.native.stop.prevent="showc = !showc"
       >
         <span class="text-ored">
           <b-avatar
@@ -228,8 +231,9 @@
         </div>
       </b-dropdown-item>
 
-      <b-popover :target="`sharing-community-${uuid}`" triggers="hover focus">
-        <div class="popover-body">
+
+      <b-popover :show.sync="showc"  :target="`sharing-community-${uuid}`"  triggers="hover focus click" style=" z-index: 99999">
+        <div class="popover-body" style=" z-index: 99999">
           <div
             @mousedown="open(`modal-1-${uuid}`, 'people')"
             class="
@@ -326,9 +330,9 @@
       <b-dropdown-item
         class="d-flex py-2 cursor-pointer"
         :id="`sharing-via-${uuid}`"
-        role="button"
-        data-original-title=""
-        ref="button"
+        @click.capture.native.stop.prevent="show = !show"
+      
+       
       >
         <span class="text-ored">
           <b-avatar
@@ -346,10 +350,12 @@
 
       <b-popover
         :target="`sharing-via-${uuid}`"
-        triggers="hover focus"
+        triggers="hover focus click"
+        :show.sync="show"
         placement="left"
+         style=" z-index: 99999"
       >
-        <div class="popover-body">
+        <div class="popover-body"  style=" z-index: 99999">
           <div
             @mousedown="onShareVia('email')"
             class="
@@ -505,6 +511,8 @@ export default {
     link: null,
     isCommunity: false,
     community: null,
+    show:false,
+    showc:false
   }),
 
   created() {
@@ -572,6 +580,16 @@ export default {
   },
 
   methods: {
+    showw(){
+      
+          
+
+      return false;
+    },
+
+
+
+
     getUsers(keyword) {
       this.$store.dispatch("userChat/GET_COMMUNITY_USERS", keyword);
     },
@@ -694,4 +712,18 @@ a[class="dropdown-item"]:active {
 .flex-direction {
   flex-direction: column;
 }
+</style>
+
+<style scoped>
+.popover-body{
+  z-index: 99999 !important;
+}
+
+.popover.b-popover {
+    display: block;
+    opacity: 1;
+    outline: 0;
+    z-index: 99999;
+}
+
 </style>

@@ -6,7 +6,7 @@
       </b-button>
       <br />
     </div>
-    <div class="b-bottom">
+    <div class="b-bottom"> 
       <b-container>
         <b-form-group
           label-cols-lg="3"
@@ -197,6 +197,18 @@ export default {
   },
 
   methods:{
+
+    flashErrors(errors) {
+      let err = "";
+      Object.values(errors).forEach((element) => {
+        err = element[0];
+      });
+
+      return err;
+    },
+
+
+
     validator(tag) {
       return tag.length > 2 && tag.length < 20
     },
@@ -222,7 +234,12 @@ export default {
       });
     },
 
+
+
+
     updateGeneralInfo: function(){
+
+     
       this.SPupdateGeneralInfo = !this.SPupdateGeneralInfo;
       let formData = new FormData();
       formData.append('visibility', this.business_form.visibility);
@@ -234,7 +251,7 @@ export default {
       console.log(formData);
       this.axios.post("business/general/update/"+this.url, formData)
       .then(() => {
-        this.getBusiness();
+        this.getBusiness(); 
         console.log(this.business_form);
         this.SPupdateGeneralInfo = !this.SPupdateGeneralInfo;
         this.flashMessage.show({
@@ -242,13 +259,28 @@ export default {
           message: this.$t('businessowner.Changes_Made_Successfuly')
         });  
       })
-      .catch(err => {
-        console.log({ err: err });
+      .catch((err) => {
+ console.log({ err: err });
+   let diserror=this.flashErrors(err.response.data.errors);
         this.SPupdateGeneralInfo = !this.SPupdateGeneralInfo;
+         if (err.response.status == 422) {
+  
+  
+            this.flashMessage.show({
+          status: "success",
+          message: diserror
+        }); 
+        
+
+
+         }else{    
+       
         this.flashMessage.show({
           status: "error",
           message: this.$t('businessowner.Unable_To_Make_Changes')
         });
+
+         }
       });
     },
 

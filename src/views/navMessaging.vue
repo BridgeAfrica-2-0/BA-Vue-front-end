@@ -2,7 +2,7 @@
   <div>
     <Navbar />
 
-    <b-container>
+    <b-container class="wahala">
       <!-- selected Chat  -->
 
       <div v-if="mobile">
@@ -47,7 +47,7 @@
                   <b-tabs
                     v-model="tabIndex"
                     content-class="mt-12 ma-4 pt-6"
-                    fill
+                    fill pills
                   >
                     <b-tab title="User" @click="getChatList({ type: 'user' })">
                       <!-- Users Chats Available  -->
@@ -816,7 +816,7 @@
                   <b-tabs
                     v-model="tabIndex"
                     content-class="mt-12 ma-4 pt-6"
-                    fill
+                    fill pills
                   >
                     <b-tab title="User" @click="getChatList({ type: 'user' })">
                       <!-- Users Chats Available  -->

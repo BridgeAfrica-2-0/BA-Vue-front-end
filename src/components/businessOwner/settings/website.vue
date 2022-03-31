@@ -405,7 +405,8 @@ export default {
     return {
       url: null,
       moment: moment,
-
+      default_package:{package_id: 1, name: "basic", status: 0, start_at: null, expired_at: null, laravel_through_key: 29},
+        
       modalShowBasics: false,
       modalShowPremium: false,
       bntStatus: false,
@@ -450,10 +451,33 @@ export default {
     };
   },
 
+  watch:{
+
+     Packages: {
+      
+
+
+       handler(newValue, oldValue) { 
+
+          if(!newValue.user_actived_plan.length){
+
+      this.Packages.user_actived_plan.push(this.default_package);
+       
+      }
+
+           
+        }
+
+     }
+
+  },
+
   computed: {
     Packages() {
-      return this.$store.state.businessAccountType.accounts;
+
+      return this.$store.state.businessAccountType.accounts ;
     },
+    
   },
 
   mounted() {

@@ -66,7 +66,7 @@
                           />
                         </b-col>
                       </b-row>
-
+ 
                       <div class="messages">
                         <!-- <div v-if="loader" class="text-center mt-6 pt-6">
                           <b-spinner

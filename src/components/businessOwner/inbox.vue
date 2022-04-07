@@ -142,7 +142,7 @@
                             </b-col>
                           </b-row>
                         </div>
-                        <h2 v-else>{{ $t("businessowner.No_chat") }}</h2>
+                        <h2 v-else>{{ $t("businessowner.No_chat") }} ---</h2>
                       </div>
 
                       <!-- End Chats -->
@@ -1679,6 +1679,25 @@
                             </b-col>
 
                             <b-col class="col-4 text-center">
+
+                              <span class="text-center float-right mt-n0">
+                                <b-dropdown
+                                  variant="link"
+                                  size="lg"
+                                  toggle-class="text-decoration-none p-0"
+                                  no-caret
+                                  right
+                                >
+                                  <template slot="button-content">
+                                    <b><i class="fas fa-ellipsis-v"></i></b>
+                                  </template>
+                                  <b-dropdown-item 
+                                  @click="deleteChat(chat , chatList , type)">
+                                    Delete
+                                  </b-dropdown-item>
+                                </b-dropdown>
+                              </span>
+
                               <small class="text-center small">
                                 {{ getCreatedAt(chat.created_at) }}
                               </small>
@@ -1763,6 +1782,24 @@
                           </b-col>
 
                           <b-col class="col-4 text-center">
+                            <span class="text-center float-right mt-n0">
+                                <b-dropdown
+                                  variant="link"
+                                  size="lg"
+                                  toggle-class="text-decoration-none p-0"
+                                  no-caret
+                                  right
+                                >
+                                  <template slot="button-content">
+                                    <b><i class="fas fa-ellipsis-v"></i></b>
+                                  </template>
+                                  <b-dropdown-item 
+                                  @click="deleteChat(chat , chatList , type)">
+                                    Delete
+                                  </b-dropdown-item>
+                                </b-dropdown>
+                              </span>
+                              
                             <small class="text-center small">
                               {{ getCreatedAt(chat.created_at) }}
                             </small>
@@ -3687,6 +3724,12 @@ export default {
 
       this.$store.dispatch("businessChat/DATA_UPDATE_C", dataChat)
 
+    },
+    async deleteChat(data , chatList , type){
+
+      let dataChat = chatList.filter((b) => { return b.id !== data.id;});
+
+      console.log(dataChat , "this for chat delete");
     },
   
     async selectedMultyChat() {

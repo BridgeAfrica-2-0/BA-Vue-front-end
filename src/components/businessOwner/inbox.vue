@@ -48,7 +48,7 @@
                     >
                       {{ $t("businessowner.New_Chat") }}</b-dropdown-item
                     >
-                    <b-dropdown-item
+                    <b-dropdown-item v-if="isPremium"
                       @click="newMessage({ newmsg: true, bulk: true })"
                     >
                       {{ $t("businessowner.New_Group_Chat") }}
@@ -322,7 +322,7 @@
 
                       <!-- End Chats -->
                     </b-tab>
-                    <b-tab
+                    <b-tab  v-if="isPremium"
                       :title="$t('general.Groups')"
                       @click="getChatList({ type: 'group' })"
                     >
@@ -853,7 +853,7 @@
                       class="input-background"
                       style="width: 100%"
                       :placeholder="
-                        $t('businessowner.Type_the_name_of_person_or_Business')
+                        $t('general.Type_the_name_of_person_or_Business')
                       "
                       @keydown="onPressSearchNewChat"
                     ></b-form-input>
@@ -1505,7 +1505,7 @@
                     >
                       {{ $t("businessowner.New_Chat") }}</b-dropdown-item
                     >
-                    <b-dropdown-item
+                    <b-dropdown-item v-if="isPremium"
                       @click="newMessage({ newmsg: true, bulk: true })"
                     >
                       {{ $t("businessowner.New_Group_Chat") }}
@@ -1777,7 +1777,7 @@
 
                       <!-- End Chats -->
                     </b-tab>
-                    <b-tab
+                    <b-tab v-if="isPremium"
                       :title="$t('general.Groups')"
                       @click="getChatList({ type: 'group' })"
                     >
@@ -2294,9 +2294,7 @@
                       v-model="newSearchQuery"
                       class="input-background"
                       style="width: 100%"
-                      :placeholder="
-                        $t('businessowner.Type_the_name_of_person_or_Business')
-                      "
+                      :placeholder="$t('general.Type_the_name_of_person_or_Business')"
                       @input="onPressSearchNewChat"
                     ></b-form-input>
                     <br />
@@ -2913,6 +2911,7 @@ import EmojiPicker from "vue-emoji-picker";
 import io from "socket.io-client";
 import moment from "moment";
 import _ from "lodash";
+import { isPremium } from '@/helpers';
 export default {
   components: {
     EmojiPicker,
@@ -2922,6 +2921,7 @@ export default {
     
     return {
       props: ['chats'],
+      isPremium: isPremium(),
       groupAdminId: null,
       screenWidth: window.screen.width,
       screenX: 0,

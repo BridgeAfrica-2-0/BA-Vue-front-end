@@ -787,9 +787,7 @@
                     v-model="newSearchQuery"
                     class="input-background"
                     style="width: 100%"
-                    :placeholder="
-                      $t('businessowner.Type_the_name_of_person_or_Business')
-                    "
+                    :placeholder="$t('general.Type_the_name_of_person_or_Business')"
                     @input="onPressSearchNewChat"
                   ></b-form-input>
                 </b-col>
@@ -960,7 +958,7 @@
                                 v-for="(biz, index) in allMembers"
                                 :key="index"
                                 class="p-2 message"
-                              >
+                              > 
                                 <td>
                                   <b-form-group>
                                     <b-form-checkbox-group
@@ -2236,9 +2234,7 @@
                     v-model="newSearchQuery"
                     class="input-background"
                     style="width: 100%"
-                    placeholder="
-                      $t('businessowner.Type_the_name_of_person_or_Business')
-                    "
+                    :placeholder="$t('general.Type_the_name_of_person_or_Business')"
                     @input="onPressSearchNewChat"
                   ></b-form-input>
                 </b-col>
@@ -2690,7 +2686,7 @@
                           </b-tab>
                           <b-tab title="Members" @click="getNetworkMembers()">
                             <!-- Length :{{ bizs }} -->
-
+  yooo blec  {{selectedMember}}  {{selectedBusiness}}
                             <div v-if="loader" class="text-center">
                               <b-spinner
                                 variant="primary"
@@ -2720,6 +2716,7 @@
                                           class="d-inline-block"
                                           variant="light"
                                           size="30"
+                                          :href="biz.logo_path"
                                         ></b-avatar>
                                         <span class="bold">
                                           {{ biz.fullname }}
@@ -2732,6 +2729,47 @@
                             </div>
 
                             <h2 v-else>{{ $t("general.No_Member") }}</h2>
+
+                            <div v-if="nbizs.length">
+                              <tr
+                                v-for="(biz, index) in nbizs"
+                                :key="index"
+                                class="p-2 message"
+                              >
+                                <td>
+                                  <b-form-group>
+                                    <b-form-checkbox-group
+                                      id="checkbox-group-22"
+                                      v-model="selectedBusiness"
+                                      name="flavour-22"
+                                    >
+
+                                   
+                                       
+                                      <b-form-checkbox
+                                         :id="index + '_id-business'"
+                                        :name="biz.name"
+                                           :value="biz.id"
+                                      >
+                                        <b-avatar
+                                          class="d-inline-block"
+                                          variant="light"
+                                          :href="biz.logo_path"
+                                          square
+                                          size="30"
+                                        ></b-avatar>
+                                        <span class="bold">
+                                          {{ biz.fullname }}
+                                        </span>
+                                      </b-form-checkbox>
+                                    </b-form-checkbox-group>
+                                  </b-form-group>
+                                </td>
+                              </tr>
+                            </div>
+
+                            <h2 v-else>{{ $t("general.No_business") }}</h2>
+
 
                             <!-- End Chats -->
                           </b-tab>
@@ -3001,7 +3039,7 @@ lastcreatedgroup() {
 
     allNetworks() {
       return this.$store.getters["networkChat/getAllNetworks"];
-    },
+    }, 
     allUsers() {
       return this.$store.getters["networkChat/getAllUsers"];
     },
@@ -3037,6 +3075,13 @@ lastcreatedgroup() {
     bizs() {
       return this.$store.getters["networkChat/getBizs"];
     },
+
+
+nbizs() {
+      return this.$store.getters["networkChat/getnBizs"];
+    },
+
+
     chatList() {
       return this.$store.getters["networkChat/getChatList"];
     },

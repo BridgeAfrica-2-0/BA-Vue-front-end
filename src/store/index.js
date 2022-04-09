@@ -16,7 +16,7 @@ import market from './market';
 import networkSearch from './networkSearch';
 import allSearch from './allSearch';
 import ProfileAndBusinessDetails from './ProfileAndBusinessDetails';
-import networkProfileCommunity from './networkProfileCommunity';
+import networkProfileCommunity from './networkProfileCommunity';  
 import networkDetails from './networkDetails';
 import dashboardcommunity from './dashboardcommunity';
 import orderBusiness from './orderBusiness';
@@ -56,7 +56,7 @@ import businessGuest from './businessGuest';
 Vue.use(Vuex);
 
 axios.defaults.baseURL = process.env.VUE_APP_API_URL;
-//axios.defaults.baseURL = "https://courage4.maxinemoffett.com/api/v1/";
+// axios.defaults.baseURL = "https://edson.maxinemoffett.com/api/v1/";
 
 export default new Vuex.Store({
     modules: {

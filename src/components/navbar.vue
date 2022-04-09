@@ -346,12 +346,6 @@
                 </a>
                 <b-popover target="other-menu" triggers="hover" placement="top">
                   <div class="popover-body">
-                    <div
-                      style="width: 100%"
-                      class="d-inline-flex flex-row align-items-center mb-1"
-                    >
-                      <Activity class="w-full" />
-                    </div>
 
                     <a
                       v-if="'user' != user.user_type"
@@ -367,6 +361,15 @@
                       Profile
                     </a>
                     <hr class="h-divider" />
+                    
+                    <div
+                      style="width: 100%"
+                      class="d-inline-flex flex-row align-items-center mb-1"
+                    >
+                      <Activity class="w-full" />
+                    </div>
+
+                    
 
                     <router-link
                       :to="{ name: 'orders' }"

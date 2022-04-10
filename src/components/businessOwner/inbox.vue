@@ -1588,6 +1588,37 @@
                             </b-col>
 
                             <b-col class="col-4 text-center">
+
+                              <span class="text-center float-right mt-n0">
+                                <b-dropdown
+                                  variant="link"
+                                  size="lg"
+                                  toggle-class="text-decoration-none p-0"
+                                  no-caret
+                                  right
+                                >
+                                  <template slot="button-content">
+                                    <b><i class="fas fa-ellipsis-v"></i></b>
+                                  </template>
+                                  <b-dropdown-item 
+                                  @click="deleteChat(
+                                    chat , chatList , 
+                                     {
+                                        type: 'user',
+                                        chat: chat,
+                                        id: chat.sender_id
+                                          ? chat.sender_id
+                                          : chat.receiver_id,
+                                      }
+                                    )">
+                                    Delete
+                                  </b-dropdown-item>
+                                </b-dropdown>
+                              </span>
+
+
+                             
+                              
                               <small class="text-center small">
                                 {{ getCreatedAt(chat.created_at) }}
                               </small>
@@ -1692,7 +1723,17 @@
                                     <b><i class="fas fa-ellipsis-v"></i></b>
                                   </template>
                                   <b-dropdown-item 
-                                  @click="deleteChat(chat , chatList , type)">
+                                  @click="deleteChat(
+                                    chat , chatList , 
+                                    {
+                                      type: 'business',
+                                      chat: chat,
+                                      id:
+                                        chat.sender_business_id == currentBizId
+                                          ? chat.receiver_business_id
+                                          : chat.sender_business_id,
+                                    }
+                                    )">
                                     Delete
                                   </b-dropdown-item>
                                 </b-dropdown>
@@ -1794,7 +1835,13 @@
                                     <b><i class="fas fa-ellipsis-v"></i></b>
                                   </template>
                                   <b-dropdown-item 
-                                  @click="deleteChat(chat , chatList , type)">
+                                  @click="deleteChat(chat , chatList , {
+                              type: 'network',
+                              chat: chat,
+                              id: chat.sender_network_id
+                                ? chat.sender_network_id
+                                : chat.receiver_network_id,
+                            })">
                                     Delete
                                   </b-dropdown-item>
                                 </b-dropdown>
@@ -1877,6 +1924,29 @@
                             </b-col>
 
                             <b-col class="col-4 text-center">
+
+                              <span class="text-center float-right mt-n0 d-none">
+                                <b-dropdown
+                                  variant="link"
+                                  size="lg"
+                                  toggle-class="text-decoration-none p-0"
+                                  no-caret
+                                  right
+                                >
+                                  <template slot="button-content">
+                                    <b><i class="fas fa-ellipsis-v"></i></b>
+                                  </template>
+                                  <b-dropdown-item 
+                                  @click="deleteChat(chat , chatList , {
+                                    type: 'group',
+                                    chat: chat,
+                                    id: chat.id,
+                                  })">
+                                    Delete
+                                  </b-dropdown-item>
+                                </b-dropdown>
+                              </span>
+                              
                               <small class="text-center small">
                                 {{ getCreatedAt(chat.created_at) }}
                               </small>
@@ -3727,9 +3797,18 @@ export default {
     },
     async deleteChat(data , chatList , type){
 
+
+       console.log(type , "ASdasdas chat lisr");
+
+
+   
+
       let dataChat = chatList.filter((b) => { return b.id !== data.id;});
 
-      console.log(dataChat , "this for chat delete");
+      let mainData = {data:dataChat , type:type}
+
+      this.$store.dispatch("businessChat/DELETE_BUSINESS", mainData)
+     
     },
   
     async selectedMultyChat() {
@@ -3769,6 +3848,7 @@ export default {
 
     //lalalala
     selectedChat(data) {
+      
      
       console.log("[type tabs]", this.tabIndex);
       // this.scrollToBottom();

@@ -47,7 +47,8 @@
                   <b-tabs
                     v-model="tabIndex"
                     content-class="mt-12 ma-4 pt-6"
-                    fill pills
+                    fill
+                    pills
                   >
                     <b-tab title="User" @click="getChatList({ type: 'user' })">
                       <!-- Users Chats Available  -->
@@ -55,7 +56,7 @@
                         <b-col class="mb-6 pb-6">
                           <input
                             v-model="searchQueryUser"
-                            class="form-control input-background  mb-2"
+                            class="form-control input-background mb-2"
                             :placeholder="$t('general.Search_chat_list')"
                             @keypress.enter="
                               getChatList({
@@ -66,7 +67,7 @@
                           />
                         </b-col>
                       </b-row>
- 
+
                       <div class="messages">
                         <!-- <div v-if="loader" class="text-center mt-6 pt-6">
                           <b-spinner
@@ -76,7 +77,6 @@
                           ></b-spinner>
                         </div> -->
                         <b-row
-                        
                           v-for="(chat, index) in chatList"
                           :key="index"
                           :class="[
@@ -120,11 +120,44 @@
                           </b-col>
 
                           <b-col class="col-4 text-center">
+                            <span class="text-center float-right mt-n0">
+                              <b-dropdown
+                                variant="link"
+                                size="lg"
+                                toggle-class="text-decoration-none p-0"
+                                no-caret
+                                right
+                              >
+                                <template slot="button-content">
+                                  <b><i class="fas fa-ellipsis-v"></i></b>
+                                </template>
+                                <b-dropdown-item
+                                  @click="
+                                    deleteChat(chat, chatList, {
+                                      type: 'user',
+                                      chat: chat,
+                                      id:
+                                        chat.sender_id == currentUser.user.id
+                                          ? chat.receiver_id
+                                          : chat.sender_id,
+                                    })
+                                  "
+                                >
+                                  Delete
+                                </b-dropdown-item>
+                              </b-dropdown>
+                            </span>
+
                             <small class="text-center small">
                               {{ getCreatedAt(chat.created_at) }}
                             </small>
                             <small class="text-center">
-                              <b-badge variant="light" v-if="chat.message_count" class="count">{{chat.message_count}}</b-badge>
+                              <b-badge
+                                variant="light"
+                                v-if="chat.message_count"
+                                class="count"
+                                >{{ chat.message_count }}</b-badge
+                              >
                             </small>
                           </b-col>
                         </b-row>
@@ -142,7 +175,7 @@
                         <b-col class="mb-6 pb-6">
                           <input
                             v-model="searchQueryBusiness"
-                            class="form-control input-background  mb-2"
+                            class="form-control input-background mb-2"
                             :placeholder="$t('general.Search_chat_list')"
                             @keypress.enter="
                               getChatList({
@@ -163,7 +196,6 @@
                           ></b-spinner>
                         </div> -->
                         <b-row
-                       
                           v-for="(chat, index) in chatList"
                           :key="index"
                           :class="[
@@ -207,11 +239,43 @@
                           </b-col>
 
                           <b-col class="col-4 text-center">
+                            <span class="text-center float-right mt-n0">
+                              <b-dropdown
+                                variant="link"
+                                size="lg"
+                                toggle-class="text-decoration-none p-0"
+                                no-caret
+                                right
+                              >
+                                <template slot="button-content">
+                                  <b><i class="fas fa-ellipsis-v"></i></b>
+                                </template>
+                                <b-dropdown-item
+                                  @click="
+                                    deleteChat(chat, chatList, {
+                                      type: 'business',
+                                      chat: chat,
+                                      id: chat.receiver_business_id
+                                        ? chat.receiver_business_id
+                                        : chat.sender_business_id,
+                                    })
+                                  "
+                                >
+                                  Delete
+                                </b-dropdown-item>
+                              </b-dropdown>
+                            </span>
+
                             <small class="text-center small">
                               {{ getCreatedAt(chat.created_at) }}
                             </small>
                             <small class="text-center">
-                              <b-badge variant="light" v-if="chat.message_count" class="count">{{chat.message_count}}</b-badge>
+                              <b-badge
+                                variant="light"
+                                v-if="chat.message_count"
+                                class="count"
+                                >{{ chat.message_count }}</b-badge
+                              >
                             </small>
                           </b-col>
                         </b-row>
@@ -228,7 +292,7 @@
                         <b-col class="mb-6 pb-6">
                           <input
                             v-model="searchQueryNetwork"
-                            class="form-control input-background  mb-2"
+                            class="form-control input-background mb-2"
                             :placeholder="$t('general.Search_chat_list')"
                             @keypress.enter="
                               getChatList({
@@ -293,11 +357,43 @@
                           </b-col>
 
                           <b-col class="col-4 text-center">
+                            <span class="text-center float-right mt-n0">
+                              <b-dropdown
+                                variant="link"
+                                size="lg"
+                                toggle-class="text-decoration-none p-0"
+                                no-caret
+                                right
+                              >
+                                <template slot="button-content">
+                                  <b><i class="fas fa-ellipsis-v"></i></b>
+                                </template>
+                                <b-dropdown-item
+                                  @click="
+                                    deleteChat(chat, chatList, {
+                                      type: 'network',
+                                      chat: chat,
+                                      id: chat.receiver_network_id
+                                        ? chat.receiver_network_id
+                                        : chat.sender_network_id,
+                                    })
+                                  "
+                                >
+                                  Delete
+                                </b-dropdown-item>
+                              </b-dropdown>
+                            </span>
+
                             <small class="text-center small">
                               {{ getCreatedAt(chat.created_at) }}
                             </small>
                             <small class="text-center">
-                              <b-badge variant="light" v-if="chat.message_count" class="count">{{chat.message_count}}</b-badge>
+                              <b-badge
+                                variant="light"
+                                v-if="chat.message_count"
+                                class="count"
+                                >{{ chat.message_count }}</b-badge
+                              >
                             </small>
                           </b-col>
                         </b-row>
@@ -383,22 +479,23 @@
                     <b-col>
                       <p class="msg-text mt-0 text">
                         <span class="text-center float-right mt-n0">
-                            <b-dropdown
-                              variant="link"
-                              size="lg"
-                              toggle-class="text-decoration-none p-0"
-                              no-caret
-                              right
+                          <b-dropdown
+                            variant="link"
+                            size="lg"
+                            toggle-class="text-decoration-none p-0"
+                            no-caret
+                            right
+                          >
+                            <template slot="button-content">
+                              <b><i class="fas fa-ellipsis-v"></i></b>
+                            </template>
+                            <b-dropdown-item
+                              @click="deleteMessage(chat, userToUser, type)"
                             >
-                              <template slot="button-content">
-                                <b><i class="fas fa-ellipsis-v"></i></b>
-                              </template>
-                              <b-dropdown-item 
-                              @click="deleteMessage(chat , userToUser , type)">
-                                Delete
-                              </b-dropdown-item>
-                            </b-dropdown>
-                          </span>
+                              Delete
+                            </b-dropdown-item>
+                          </b-dropdown>
+                        </span>
                         <span v-if="chat.attachment">
                           <img :src="chat.attachment" />
                           <!-- <br />
@@ -492,12 +589,12 @@
                     >
                     </b-icon>
 
-                    <input  
+                    <input
                       style="display: none"
                       type="file"
                       id="file"
                       ref="file"
-                       accept="image/*"
+                      accept="image/*"
                       @change="handleFileUpload()"
                     />
                   </label>
@@ -649,7 +746,6 @@
                   ></b-icon>
                 </b-col>
                 <b-col>
-
                   <b-form-input
                     id="textarea"
                     v-model="newSearchQuery"
@@ -833,7 +929,8 @@
                   <b-tabs
                     v-model="tabIndex"
                     content-class="mt-12 ma-4 pt-6"
-                    fill pills
+                    fill
+                    pills
                   >
                     <b-tab title="User" @click="getChatList({ type: 'user' })">
                       <!-- Users Chats Available  -->
@@ -841,7 +938,7 @@
                         <b-col class="mb-6 pb-6">
                           <input
                             v-model="searchQueryUser"
-                            class="form-control input-background  mb-2"
+                            class="form-control input-background mb-2"
                             :placeholder="$t('general.Search_chat_list')"
                             @keypress="
                               getChatList({
@@ -854,9 +951,7 @@
                       </b-row>
 
                       <div class="messages">
-                       
                         <b-row
-                         
                           v-for="(chat, index) in chatList"
                           :key="index"
                           :class="[
@@ -900,13 +995,45 @@
                           </b-col>
 
                           <b-col class="col-3 text-center">
+                            <span class="text-center float-right mt-n0">
+                              <b-dropdown
+                                variant="link"
+                                size="lg"
+                                toggle-class="text-decoration-none p-0"
+                                no-caret
+                                right
+                              >
+                                <template slot="button-content">
+                                  <b><i class="fas fa-ellipsis-v"></i></b>
+                                </template>
+                                <b-dropdown-item
+                                  @click="
+                                    deleteChat(chat, chatList, {
+                                      type: 'user',
+                                      chat: chat,
+                                      id:
+                                        chat.sender_id == currentUser.user.id
+                                          ? chat.receiver_id
+                                          : chat.sender_id,
+                                    })
+                                  "
+                                >
+                                  Delete
+                                </b-dropdown-item>
+                              </b-dropdown>
+                            </span>
+
                             <small class="text-center">
                               {{ getCreatedAt(chat.created_at) }}
                             </small>
                             <small class="text-center">
-                              <b-badge variant="light" v-if="chat.message_count" class="count">{{chat.message_count}}</b-badge>
+                              <b-badge
+                                variant="light"
+                                v-if="chat.message_count"
+                                class="count"
+                                >{{ chat.message_count }}</b-badge
+                              >
                             </small>
-
                           </b-col>
                         </b-row>
                       </div>
@@ -923,7 +1050,7 @@
                         <b-col class="mb-6 pb-6">
                           <input
                             v-model="searchQueryBusiness"
-                            class="form-control input-background  mb-2"
+                            class="form-control input-background mb-2"
                             :placeholder="$t('general.Search_chat_list')"
                             @keypress.enter="
                               getChatList({
@@ -936,9 +1063,7 @@
                       </b-row>
 
                       <div class="messages">
-                      
                         <b-row
-                         
                           v-for="(chat, index) in chatList"
                           :key="index"
                           :class="[
@@ -982,11 +1107,43 @@
                           </b-col>
 
                           <b-col class="col-3 text-center">
+                            <span class="text-center float-right mt-n0">
+                              <b-dropdown
+                                variant="link"
+                                size="lg"
+                                toggle-class="text-decoration-none p-0"
+                                no-caret
+                                right
+                              >
+                                <template slot="button-content">
+                                  <b><i class="fas fa-ellipsis-v"></i></b>
+                                </template>
+                                <b-dropdown-item
+                                  @click="
+                                    deleteChat(chat, chatList, {
+                                      type: 'business',
+                                      chat: chat,
+                                      id: chat.receiver_business_id
+                                        ? chat.receiver_business_id
+                                        : chat.sender_business_id,
+                                    })
+                                  "
+                                >
+                                  Delete
+                                </b-dropdown-item>
+                              </b-dropdown>
+                            </span>
+
                             <small class="text-center">
                               {{ getCreatedAt(chat.created_at) }}
                             </small>
                             <small class="text-center">
-                              <b-badge variant="light" v-if="chat.message_count" class="count">{{chat.message_count}}</b-badge>
+                              <b-badge
+                                variant="light"
+                                v-if="chat.message_count"
+                                class="count"
+                                >{{ chat.message_count }}</b-badge
+                              >
                             </small>
                           </b-col>
                         </b-row>
@@ -1004,7 +1161,7 @@
                         <b-col class="mb-6 pb-6">
                           <input
                             v-model="searchQueryNetwork"
-                            class="form-control input-background  mb-2"
+                            class="form-control input-background mb-2"
                             :placeholder="$t('general.Search_chat_list')"
                             @keypress.enter="
                               getChatList({
@@ -1017,9 +1174,7 @@
                       </b-row>
 
                       <div class="messages">
-                        
                         <b-row
-                          
                           v-for="(chat, index) in chatList"
                           :key="index"
                           :class="[
@@ -1063,11 +1218,44 @@
                           </b-col>
 
                           <b-col class="col-3 text-center">
+
+                             <span class="text-center float-right mt-n0">
+                              <b-dropdown
+                                variant="link"
+                                size="lg"
+                                toggle-class="text-decoration-none p-0"
+                                no-caret
+                                right
+                              >
+                                <template slot="button-content">
+                                  <b><i class="fas fa-ellipsis-v"></i></b>
+                                </template>
+                                <b-dropdown-item
+                                  @click="
+                                    deleteChat(chat, chatList, {
+                                      type: 'network',
+                                      chat: chat,
+                                      id: chat.receiver_network_id
+                                        ? chat.receiver_network_id
+                                        : chat.sender_network_id,
+                                    })
+                                  "
+                                >
+                                  Delete
+                                </b-dropdown-item>
+                              </b-dropdown>
+                            </span>
+                            
                             <small class="text-center">
                               {{ getCreatedAt(chat.created_at) }}
                             </small>
                             <small class="text-center">
-                              <b-badge variant="light" v-if="chat.message_count" class="count">{{chat.message_count}}</b-badge>
+                              <b-badge
+                                variant="light"
+                                v-if="chat.message_count"
+                                class="count"
+                                >{{ chat.message_count }}</b-badge
+                              >
                             </small>
                           </b-col>
                         </b-row>
@@ -1155,7 +1343,6 @@
                   <b-row class="p-2">
                     <b-col>
                       <p class="msg-text mt-0 text">
-                      
                         <span v-if="chat.attachment">
                           <img :src="chat.attachment" />
                           <!-- <br />
@@ -1191,23 +1378,24 @@
                     <b-col>
                       <p id="sent" class="msg-text-sent text">
                         <span class="text-center float-right mt-n0">
-                            <b-dropdown
-                              variant="link"
-                              size="lg"
-                              toggle-class="text-decoration-none p-0"
-                              no-caret
-                              right
+                          <b-dropdown
+                            variant="link"
+                            size="lg"
+                            toggle-class="text-decoration-none p-0"
+                            no-caret
+                            right
+                          >
+                            <template slot="button-content">
+                              <b><i class="fas fa-ellipsis-v"></i></b>
+                            </template>
+                            <b-dropdown-item
+                              @click="deleteMessage(chat, userToUser, type)"
                             >
-                              <template slot="button-content">
-                                <b><i class="fas fa-ellipsis-v"></i></b>
-                              </template>
-                              <b-dropdown-item 
-                              @click="deleteMessage(chat , userToUser , type)">
-                                Delete
-                              </b-dropdown-item>
-                            </b-dropdown>
-                          </span>
-                          
+                              Delete
+                            </b-dropdown-item>
+                          </b-dropdown>
+                        </span>
+
                         <span v-if="chat.attachment">
                           <img :src="chat.attachment" />
                           <!-- <br />
@@ -2029,14 +2217,13 @@ export default {
       console.log("listenning...");
     },
     getCreatedAt(data) {
-
-      const date = moment().diff(moment(data), 'days')
-      console.log(date >= 1)
+      const date = moment().diff(moment(data), "days");
+      console.log(date >= 1);
       if (date >= 1) {
         return moment(data).format("L");
       } else {
         // return moment(data).format('LT');
-        return moment(data).format('hh:mm')
+        return moment(data).format("hh:mm");
       }
     },
     getList(keyword) {
@@ -2046,14 +2233,11 @@ export default {
       } else if (this.type == "business") {
         this.$store.dispatch("userChat/GET_BIZS", keyword);
       } else {
-        
         this.$store.dispatch("userChat/GET_NETS", keyword);
       }
     },
     getChatList(data) {
       this.type = data.type;
-
-     
 
       this.chatSelected.active = this.ctaSelected ? true : false;
       this.newMsg = false;
@@ -2064,7 +2248,6 @@ export default {
           console.log("->[Data logged]<-");
         })
         .catch(() => console.log("error"));
-      
 
       this.socket.emit("create-chatList", this.currentUser.user.id);
 
@@ -2120,9 +2303,7 @@ export default {
         .catch(() => console.log("error"));
     },
     selectedChat(data) {
-      
       // this.scrollToBottom();
-
 
       console.log("currentUser:", this.currentUser.user.id);
       console.log("Data logged:", data);
@@ -2160,8 +2341,7 @@ export default {
         : data.chat.groupName),
         console.log("[DEBUG] Chat selected:", this.chatSelected);
 
-
-      data.chat.message_count = 0 
+      data.chat.message_count = 0;
     },
     searchUser(keyword) {
       this.$store
@@ -2215,7 +2395,7 @@ export default {
     },
     newMessage(arg) {
       this.getList();
-      
+
       this.rightSide = false;
       this.newMsg = arg;
       this.show = false;
@@ -2293,42 +2473,63 @@ export default {
       this.dismissed();
       this.scrollToBottom();
     },
-    async deleteMessage(data , chatListData , type){
-    
-      let dataChat = chatListData.filter((b) => { return b.id !== data.id;});
+    async deleteMessage(data, chatListData, type) {
+      let dataChat = chatListData.filter((b) => {
+        return b.id !== data.id;
+      });
 
-
-      if(type == "user"){
-        await this.$store.dispatch("businessChat/DELETE_USER_MESSAGE_BY_MESSAGEID", data)
+      if (type == "user") {
+        await this.$store.dispatch(
+          "businessChat/DELETE_USER_MESSAGE_BY_MESSAGEID",
+          data
+        );
       }
 
-      if(type == "business"){
+      if (type == "business") {
         data.businessId = this.chatSelected.id;
-        console.log(data , "bussiness");
-        await this.$store.dispatch("businessChat/DELETE_BUSINESS_MESSAGE_BY_MESSAGEID_BUSINESSID", data)
+        console.log(data, "bussiness");
+        await this.$store.dispatch(
+          "businessChat/DELETE_BUSINESS_MESSAGE_BY_MESSAGEID_BUSINESSID",
+          data
+        );
       }
 
-      if(type == "network"){
+      if (type == "network") {
         data.networkId = this.chatSelected.id;
-        console.log(data , "network");
-        await this.$store.dispatch("businessChat/DELETE_NETWORK_MESSAGE_BY_MESSAGEID_NETWORKID", data)
-      } 
-   
+        console.log(data, "network");
+        await this.$store.dispatch(
+          "businessChat/DELETE_NETWORK_MESSAGE_BY_MESSAGEID_NETWORKID",
+          data
+        );
+      }
+
       // if(type == "group"){
       //   data.groupId = this.chatSelected.id;
       //   await this.$store.dispatch("businessChat/DELETE_GROUP_MESSAGE_BYGROUP_ID", data)
       // }
 
-      this.$store.dispatch("userChat/DATA_UPDATE_C", dataChat)
+      this.$store.dispatch("userChat/DATA_UPDATE_C", dataChat);
+    },
+    async deleteChat(data, chatList, type) {
+      console.log(type, "User profile chat lisr");
 
+      let dataChat = chatList.filter((b) => {
+        return b.id !== data.id;
+      });
+
+      let mainData = { data: dataChat, type: type };
+
+      console.log("asdasd asd ", mainData);
+
+      this.$store.dispatch("userChat/DELETE_USER_CHAT", mainData)
     },
   },
 };
 </script>
 
 <style scoped>
-.count{
-  background: #e75c18!important;
+.count {
+  background: #e75c18 !important;
   color: white;
   font-size: 13px;
   border-radius: 12px;

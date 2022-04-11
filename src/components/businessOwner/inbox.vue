@@ -2814,7 +2814,7 @@
                                         <b-form-group>
                                           <b-form-radio-group
                                             id="radio-editor-1"
-                                            v-model="selectedselectOptionAll"
+                                            v-model="selectedselectOption"
                                             :options="selectOptionsAll"
                                             name="radio-options-editor"
                                             @change="selectAllForAllTab"
@@ -3548,6 +3548,7 @@ export default {
 
       this.selectedEditor = [];
       if (val == "all") {
+        console.log("editor ,")
         this.allEditors.map((biz) => {
           this.selectedEditor.push(biz.id);
         });

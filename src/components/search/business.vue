@@ -66,7 +66,7 @@
                   :text="item.about_business"
                   link="#"
                   :less-str="$t('search.read_less')"
-                  :max-chars="100"
+                  :max-chars="60"
                 >
                 </read-more>
               </p>

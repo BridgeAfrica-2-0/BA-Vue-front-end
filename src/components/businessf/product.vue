@@ -63,11 +63,12 @@
                 :isProduct="true"
                 :isBuyNow="true"
                 type="business"
+                :isPremium="business_info.package_name"
               />
             </div>
 
             <div class="ml-2">
-              <b-button variant="primary" style="width:100%" @click="handleAddToCard(product)"
+              <b-button  v-if="business_info.package_name=='premium'" variant="primary" style="width:100%" @click="handleAddToCard(product)"
                 >
                 <b-icon icon="cart4"></b-icon>
                 {{ $t("general.Add_to_Cart") }}
@@ -344,16 +345,23 @@ export default {
 
       currentPage: 1,
       nextLoad: false,
-      isGuestUser: isGuestUser,
+      isGuestUser: isGuestUser(),
     };
   },
   components: {
     ProductDetails,
   },
 
+  
+
   computed: {
     products() {
       return this.$store.state.market.products;
+    },
+
+
+ business_info() {
+      return this.isGuestUser ? this.$store.state.businessGuest.businessInfo: this.$store.state.businessOwner.businessInfo;
     },
 
     getStatus() {

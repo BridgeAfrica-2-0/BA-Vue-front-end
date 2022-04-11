@@ -77,4 +77,25 @@ export const isGuestUser = () => {
 
 }
 
+
+export const isPremium = () => {
+    let check = false;
+    let user=localStorage.getItem('user');
+    if(user.user_account_package_id){
+      
+
+        if (user.user_account_package_id==1) {
+            check = false;
+        }else{
+            check = true; 
+        }
+    }
+     
+    
+    return check;
+
+}
+
+
+
 export const wrapperErrors = (errors) => Object.values(errors).map(err => err[0])

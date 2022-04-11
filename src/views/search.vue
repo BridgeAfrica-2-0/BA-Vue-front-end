@@ -690,9 +690,14 @@ export default {
     
      }else{
      
-      this.searchParams.location_placeholder=this.$t("home.Location");
+
+     this.searchParams.location = this.$route.query.location ? this.$route.query.location:'';
+
+      this.searchParams.location_placeholder=  this.$route.query.location ? this.$route.query.location: this.$t("home.Location");
 
      }
+
+    
 
     this.onProcessQuery();
     this.getLocation();
@@ -1775,7 +1780,7 @@ export default {
       let elm = data ? data : keyword ? { keyword: keyword } : { keyword: "" };
 
        this.$store.commit("allSearch/setKeyword", keyword);
-       this.$store.commit("allSearch/setLOcation", keyword);
+       this.$store.commit("allSearch/setLocation", location);
      
        if (this.searchParams.keyword)
         this.activateMatching = {name:this.searchParams.keyword}

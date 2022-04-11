@@ -904,7 +904,7 @@
                       v-model="searchQuery"
                       class="input-background"
                       style="width: 100%"
-                      :placeholder="$t('businessowner.Type_the_name_of_person_or_Business')"
+                      :placeholder="$t('general.Type_the_name_of_person_or_Business')"
                       @keydown.enter="getAll(searchQuery)"
                     ></b-form-input>
 

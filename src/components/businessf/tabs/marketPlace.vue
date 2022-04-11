@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="">
+    <div class="">  
       <!-- MARKET HEADER BAR -->
       <div class="col-12 d-flex align-items-center justify-content-between">
         <p>
@@ -12,7 +12,7 @@
           ></b-icon>
           <span class="font-weight-bold">Market</span>
         </p>
-        <b-button
+        <b-button v-if="business_info.package_name=='premium'"
           variant="outline-primary"
           @click="() => $router.push({ name: 'cart' })"
         >
@@ -35,6 +35,7 @@
 
 <script>
 import Product from "../product";
+import { isGuestUser } from '@/helpers';
 import axios from "axios";
 export default {
   name: "MarketPlace",
@@ -54,12 +55,20 @@ export default {
       multiselecvalue: [],
       filterselectvalue: [],
       select_filterss: [],
+      isGuestUser: isGuestUser(),
       multiselec: [
         { name: "Vue.js", code: "vu" },
         { name: "Javascript", code: "js" },
         { name: "Open Source", code: "os" },
       ],
     };
+  },
+
+  computed:{
+ 
+     business_info() {
+      return this.isGuestUser ? this.$store.state.businessGuest.businessInfo: this.$store.state.businessOwner.businessInfo;
+    },
   },
 
   methods: {

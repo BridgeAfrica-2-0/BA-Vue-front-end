@@ -15,6 +15,7 @@ export default {
         currentBiz: [],
         userInfo: [],
         bizs: [],
+        nbizs:[],
         chats: [],
         chatList: [],
         type: 2,
@@ -60,6 +61,12 @@ export default {
         getBizs(state) {
             return state.bizs;
         },
+
+        getnBizs(state) {
+            return state.nbizs;
+        },
+
+
         getChats(state) {
             return state.chats;
         },
@@ -121,6 +128,10 @@ export default {
            
             state.lastcreatedgroup = data
              
+        },
+
+        nsetBizs(state, data) {
+            state.nbizs = data;
         },
 
 
@@ -526,13 +537,14 @@ export default {
         async GET_NETWORK_MEMBERS({ commit, state }) {
             commit("setBizs", []);
             commit("setLoader", true);
-            let members = []
+            let members = [];
+            let business=[];
 
             await axios.post(`network/${state.currentBizId}/members/list`)
                 .then((res) => {
                     
-                    let render = res.data.data.users
-                    
+                    let render = res.data.data.users;
+                     let biz_render=res.data.data.businesses;
 
                     if (render.length > 0) {
                         render.map((elm) => {
@@ -540,8 +552,21 @@ export default {
                         })
 
                     }
+
+
+                    if (biz_render.length > 0) {
+                        biz_render.map((elm) => {
+                            business.push({ accountType: "business", ...elm, id: elm.business_id })
+                        })
+
+                    }
+                    
+
+                    
                     
                     commit("setBizs", members);
+                    commit("nsetBizs", business);
+
                     commit("setLoader", false);
                 })
                 .catch((err) => {

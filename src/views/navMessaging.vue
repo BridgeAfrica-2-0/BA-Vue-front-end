@@ -525,7 +525,7 @@
                     <b-col>
                       <p id="sent" class="msg-text-sent text">
                         <span v-if="chat.attachment">
-                          <img :src="chat.attachment" />
+                          <!-- <img :src="chat.attachment" /> -->
                           <!-- <br />
                             <b>{{ chat.attachment }}</b> -->
                           <br />

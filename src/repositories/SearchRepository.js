@@ -1,6 +1,8 @@
 
 import axios from "axios"
 
+
+
 class Repository {
 
   async findUserByParam(credentials) {
@@ -45,8 +47,13 @@ class Repository {
   async matching(keyword) {
     try {
       
+     
 
-      const response = await axios.get(`search/category?keyword=${keyword}`)
+    
+      
+    let url=`visitor/search/category?keyword=${keyword}`;
+  
+      const response = await axios.get(url)
       return {
         success: (response.data.data) ? true : false,
         data: (response.data.data) ? response.data.data : []

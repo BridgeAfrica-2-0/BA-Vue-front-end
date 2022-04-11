@@ -72,6 +72,7 @@
                   :isProduct="true"
                   :isBuyNow="true"
                   type="business"
+                   :isPremium="prod.business_package_name "
                 />
               </b-col>
 
@@ -83,7 +84,7 @@
                 cols="4"
                 class="mt-2 text-center"
               >
-                <b-button variant="primary" style="width:100%" @click="AddToCard(prod)"
+                <b-button  v-if="prod.business_package_name =='premium'" variant="primary" style="width:100%" @click="AddToCard(prod)"
                   >
                   <b-icon icon="cart4"></b-icon>
                   <span>Add to Cart</span>

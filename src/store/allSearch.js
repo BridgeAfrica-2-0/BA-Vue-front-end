@@ -78,7 +78,7 @@ export default {
     },
 
     actions: {
-        setLOcation({commit}, payload){
+        setLocation({commit}, payload){
             commit("setLocation", payload)
         },
 

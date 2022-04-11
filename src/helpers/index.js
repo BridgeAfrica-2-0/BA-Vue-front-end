@@ -80,18 +80,17 @@ export const isGuestUser = () => {
 
 export const isPremium = () => {
     let check = false;
-    let user=localStorage.getItem('user');
-    if(user.user_account_package_id){
-      
-
+    let user = JSON.parse(localStorage.getItem('user')).user;
+  
+    if (user.user_account_package_id) {
         if (user.user_account_package_id==1) {
             check = false;
-        }else{
+        } else {
             check = true; 
         }
     }
      
-    
+    console.log('is permium:', check);
     return check;
 
 }

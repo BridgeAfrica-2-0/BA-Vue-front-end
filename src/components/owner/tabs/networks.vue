@@ -59,14 +59,29 @@
                   <img :src="network.image" class="r-image" />
                 </div>
               </div>
-
+ 
               <div class="flx70">
                 <p class="textt text">
                   <strong class="title">
-                    <router-link :to="'/network/' + network.id">
+                    <router-link   v-if="type=='business'" :to="'/network_member/' + network.id">
                       {{ network.name }}
-                      <span>{{ `${network.is_owner ? network.is_approve ? '(Approved)' :'(UnApproved)' : ''}` }}</span>
+                      <!-- <span>{{ `${network.is_owner ? network.is_approve ? '(Approved)' :'(UnApproved)' : ''}` }}</span>
+                       -->
+  
+                      <span v-if="type!='business'" >   <b-icon  v-if="network.is_approve" icon="check-circle-fill" variant="primary"> </b-icon>     </span>
+                       
                     </router-link>
+
+                     <router-link v-else :to="'/network/' + network.id">
+                      {{ network.name }}
+                      <!-- <span>{{ `${network.is_owner ? network.is_approve ? '(Approved)' :'(UnApproved)' : ''}` }}</span>
+                       -->
+  
+                      <span v-if="type!='business'" >   <b-icon  v-if="network.is_approve" icon="check-circle-fill" variant="primary"> </b-icon>     </span>
+                       
+                    </router-link>
+
+
                   </strong>
                   <br />
                                      
@@ -305,7 +320,7 @@
                 ></multiselect>
               </div>
             </b-col>
-            <b-col md="6">
+            <!-- <b-col md="6">
               <b-form-group
                 label-cols-lg="12"
                 :label="$t('profileowner.City')"
@@ -321,7 +336,7 @@
                 >
                 </b-form-input>
               </b-form-group>
-            </b-col>
+            </b-col> -->
 
 
 
@@ -781,6 +796,14 @@ export default {
     selectedmunicipality: function () {
       return this.municipality.id;
     },
+
+    selectedcity: function () {
+      return this.municipality.name;
+    },
+
+
+
+
     selectedlocality: function () {
       return this.locality.id;
     },
@@ -793,8 +816,6 @@ export default {
     cancel(){
 
 
-       
-    console.log("yoo mother fucker");
         this.logoimg_url= '';
       this.selectedFile='';
       this.createdNetwork.id = '';
@@ -877,7 +898,7 @@ export default {
         .catch((err) => {
           console.log({ err: err });
         });
-    },
+    },     
 
     onLogoChangge(e) {
       this.logo = e.target.files[0];
@@ -1190,7 +1211,7 @@ export default {
       fd.append("name", this.createdNetwork.name);
       fd.append("address", this.createdNetwork.address);
       // fd.append("neighbourhood", this.createdNetwork.neighbourhood);
-      fd.append("city", this.createdNetwork.city);
+      fd.append("city", this.selectedcity);
       fd.append("country_id", 2);
       fd.append(
         "primary_phone",

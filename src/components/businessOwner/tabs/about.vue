@@ -410,8 +410,10 @@
 
           <div class="col-6">
             <label for="country" class="username">
-              {{ $t("profileowner.Municipality") }} :</label
+              {{ $t("profileowner.Municipality") }}/ {{$t('businessowner.City')}} :</label
             ><br />
+
+            
 
             <multiselect
               v-model="municipality"
@@ -443,7 +445,9 @@
               ></multiselect>
             </b-form-group>
           </div>
-          <div class="col-6">
+
+          
+          <!-- <div class="col-6">
             <b-form-group
               id="input-group-2"
               :label="$t('businessowner.City')"
@@ -458,7 +462,7 @@
                 required
               ></b-form-input>
             </b-form-group>
-          </div>
+          </div> -->
         </div>
 
         <div class="row">
@@ -934,6 +938,21 @@ export default {
       });
       return sub_cat;
     },
+
+      city: function() {
+      let sub_cat = [];
+      this.municipality.forEach((item) => {
+        if (item.council_id) {
+          sub_cat.push(item.name);
+        } else {
+          sub_cat.push(item.name);
+        }
+      });
+      return sub_cat.toString();
+    },
+
+
+
     selectedlocality: function() {
       let sub_cat = [];
       this.locality.forEach((item) => {
@@ -1234,7 +1253,8 @@ export default {
               council: this.ArrayString(this.selectedmunicipality), //this.business_about_input.council[0].council_id,
               neigborhood: this.ArrayString(this.selectedlocality), //this.business_about_input.council[0].neighborhood_id,
               alway: !this.displayHour1 ? "vrai" : "faux",
-              city: this.business_about_input.city,
+              // city: this.business_about_input.city,
+              city: this.city,
               ...this.tempo,
               lat: this.business_about_input.lat,
               lng: this.business_about_input.lng,

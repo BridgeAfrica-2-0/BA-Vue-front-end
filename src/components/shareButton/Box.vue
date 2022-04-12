@@ -37,7 +37,8 @@
           :key="index"
         >
           <b-avatar class="mr-3" :src="getImage(elmt)"></b-avatar>
-          <span class="mr-auto">{{ elmt.name }}</span>
+          <span class="mr-auto" v-if="elmt"> 
+             {{elmt.name}}</span>
 
           <b-button
             v-if="sentList.some((n) => n === index)"

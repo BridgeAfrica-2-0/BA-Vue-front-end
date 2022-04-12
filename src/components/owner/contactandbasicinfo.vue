@@ -13,7 +13,7 @@
       <div class="col-md-4">
         <button
           type="button"
-          class="btn btn-outline-primary float-md-right"
+          class="btn btn-outline-primary float-md-right btn-edit"
           v-b-modal.dobbb
         >
           {{ $t("profileowner.Edit") }}
@@ -96,12 +96,27 @@
             method="post"
             @submit.prevent="saveCurrentCity"
           >
-            <b-form-input
+            <!-- <b-form-input
               class="mt-2 mb-2"
               :placeholder="$t('profileowner.Current_City')"
               type="text"
               v-model="info.user.city"
-            ></b-form-input>
+            ></b-form-input> -->
+
+  
+             <multiselect
+                        v-model="info.user.council"
+                      
+                        :multiple="false"
+                        :placeholder="$t('welcome.Search')"
+                        label="name"
+                        track-by="id"
+                        :options="cities"
+                      ></multiselect>
+
+
+
+  <br>  <br>
 
             <div class="fosrm-group text-right w-100">
               <button type="submit" class="btn btn-primary orange">
@@ -284,7 +299,7 @@
       <div class="col-md-4">
         <button
           type="button"
-          class="btn btn-outline-primary float-md-right"
+          class="btn btn-outline-primary float-md-right btn-edit"
           data-toggle="modal"
           data-target="#genderModal"
           @click="getgender()"
@@ -348,7 +363,7 @@
       <div class="col-md-4">
         <button
           type="button"
-          class="btn btn-outline-primary float-md-right"
+          class="btn btn-outline-primary float-md-right btn-edit"
           data-toggle="modal"
           data-target="#phonemodal1"
           v-b-modal.phonemodal1
@@ -397,7 +412,7 @@
       <div class="col-md-4">
         <button
           type="button"
-          class="btn btn-outline-primary float-md-right"
+          class="btn btn-outline-primary float-md-right btn-edit"
           data-toggle="modal"
           data-target="#currentcityModal"
           v-b-modal.currentcityModal
@@ -412,7 +427,7 @@
       <div class="col-md-4">
         <button
           type="button"
-          class="btn btn-outline-primary float-md-right"
+          class="btn btn-outline-primary float-md-right btn-edit"
           data-toggle="modal"
           data-target="#hometownModal"
           v-b-modal.hometownModal
@@ -430,7 +445,7 @@
           >
         </h6>
         <hr />
-        <div class="media">
+        <div class="">
           <div class="media-body">
             <a v-b-modal.websiteModal data-target="#websiteModal">
               <fas-icon
@@ -520,6 +535,8 @@
  * @author Marcellin-dev
  */
 import moment from "moment";
+
+import Multiselect from "vue-multiselect";
 import axios from 'axios';
 import DropdownDatepicker from 'vue-dropdown-datepicker'; 
 export default {
@@ -549,7 +566,7 @@ export default {
       newphone: null
     };
   },
-  components:{DropdownDatepicker},
+  components:{DropdownDatepicker,Multiselect},
   created() {
     this.basicInfo = JSON.parse(
       JSON.stringify(this.$store.getters["profile/getProfileAboutBasicInfos"])
@@ -572,8 +589,19 @@ export default {
         );
         console.log("Load User birth Date end ++++++", this.basicInfo);
       });
+
+
+       this.getcities();
   },
   computed: {
+
+     cities(){
+
+       return this.$store.state.auth.cities;
+     },
+
+
+
     birthDate() {
       let dob = this.info.user.dob;
       let check = moment(dob, "YYYY/MM/DD");
@@ -593,6 +621,23 @@ export default {
  * this method is for delete contact of the user 
  * @private
  */
+
+
+getcities(){    
+   
+
+   this.$store
+        .dispatch("auth/cities")
+        .then(() => {
+        
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
+
+},
+  
+
 deleteContact(id){
       console.log("---",id)
       
@@ -738,7 +783,7 @@ deleteContact(id){
     saveCurrentCity() {
       console.log("save new current City user start +++++");
       console.log(this.basicInfo.currentCity);
-      let data = {city: this.info.user.city,}
+      let data = {city: this.info.user.council.name}  
       this.$store
         .dispatch("profile/updateUserBasicInfosCurrentCity", data)
         .then((response) => {
@@ -995,5 +1040,12 @@ ul.website {
   display: inline;
 }
 @media only screen and (max-width: 768px) {
+
+  .btn-edit{
+    font-size: 12px;
+  }
 }
+
+
+
 </style>

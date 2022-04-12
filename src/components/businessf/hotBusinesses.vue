@@ -110,6 +110,7 @@
                     <b-button
                       block
                       size="sm"
+                      @click="gotoBusiness(item.id)"
                       class="b-background shadow"
                       variant="primary"
                     >
@@ -163,6 +164,22 @@ export default {
         return number / 1000 + "K";
       } else return number;
     },
+
+
+     gotoBusiness(id) {
+
+       if(this.$route.name == 'BusinessFollower'){
+          // this.$emit('gotoabout')
+          this.$router.push(`/business/${id}#about`);
+          console.log("direction --")
+      }else {
+
+        this.$router.push(`/business/${id}?tabId=1`);
+      }
+      // this.$router.push(`/business/${id}?tabId=1`);
+    },
+
+
 
     async handleFollow(user) {
       document.getElementById("followbtn" + user.id).disabled = true;
@@ -322,7 +339,7 @@ export default {
     font-size: 10px;
 
     height: 28px;
-    width: 85px;
+    width: 97px;
   }
 
   .r-image {
@@ -373,7 +390,7 @@ export default {
   .btn {
     padding-top: 6px;
     height: 38px;
-    width: 110px;
+    width: 115px;
     font-size: 12px;
     margin-left: -10px;
 

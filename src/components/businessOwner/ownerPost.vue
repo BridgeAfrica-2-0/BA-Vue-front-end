@@ -3,7 +3,7 @@
     <!-- DOM to Create Post By A UserOwner-->
     <b-card class="px-md-3 mb-3">
       <b-row class="mt-2">
-        <b-col cols="3" md="1" class="m-md-0 p-md-0">
+        <b-col cols="2" md="1" class="m-md-0 p-0">
           <b-avatar
             variant="primary"
             :square =" 'user' === profile.user_type ? false : true"
@@ -12,7 +12,7 @@
           ></b-avatar>
         </b-col>
         <b-col cols="9" md="11" class="p-0 m-0 pr-3">
-          <input :placeholder="$t('businessowner.Post_a_business_update')" v-b-modal.modal-xl_ class="comment" type="text" />
+          <input :placeholder="$t('businessowner.Post_a_business_update')" v-b-modal.modal-xl_ class="comment commented" type="text" />
           <fas-icon class="primary send-cmt" :icon="['fas', 'paper-plane']" />
         </b-col>
       </b-row>
@@ -1248,14 +1248,15 @@ export default {
   }
 }
 @media (max-width: 762px) {
-  .commentt[data-v-41fcb621] {
-    width: 99%;
+  .commented {
+    width: 118% !important;
     border: solid 1 px #ccc;
     border-radius: 25 px;
     background-color: #ddd;
     height: 34 px;
     padding-left: 10 px;
-    margin-left: 2%;
+    margin-left: -7% !important;
+    font-size: 12px;
   }
 
   .post-btn {
@@ -1264,7 +1265,7 @@ export default {
   }
   .send-cmt {
     position: relative;
-    margin-left: 90%;
+    margin-left: 100%;
     top: -28px;
     cursor: pointer;
   }

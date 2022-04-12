@@ -80,10 +80,10 @@ export default {
                     regionId:payload.region_id,
                     divisionId:payload.division_id,
                     councilId:payload.council_id,
-
+                    city:payload.city ? payload.city:state.location ,
                     neighbourhoodId: payload.neighbourhood,
-                    neighbourhood:payload.neighbourhood? payload.neighbourhood : state.location,
-                    city:payload.city,
+                   // neighbourhood:payload.neighbourhood? payload.neighbourhood : state.location,
+                   
 
 
 

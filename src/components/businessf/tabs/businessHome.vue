@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-row>
-      <b-col md="12" lg="5" xl="4">
+      <b-col md="12" lg="5" xl="4" class="mobile-center">
         <Intro />
         <Media />
         <Followers  />
@@ -48,5 +48,12 @@ export default {
   padding-right:60px
  }
  }
- 
+
+ @media only screen and (max-width: 768px) {
+ mobile-padding{
+
+       padding: 4px;
+    padding-left: 16px;
+ }
+ }
  </style>

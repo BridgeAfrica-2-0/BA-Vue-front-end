@@ -2,7 +2,7 @@
   <div>
     <Navbar />
 
-    <b-container>
+    <b-container class="wahala">
       <!-- selected Chat  -->
 
       <div v-if="mobile">
@@ -13,7 +13,7 @@
                 <b-col class="p-2">
                   <b-avatar
                     class="d-inline-block profile-pic"
-                    variant="primary"
+                    variant="light"
                     :src="
                       getImage({
                         type: 'user',
@@ -47,20 +47,20 @@
                   <b-tabs
                     v-model="tabIndex"
                     content-class="mt-12 ma-4 pt-6"
-                    fill
+                    fill pills
                   >
                     <b-tab title="User" @click="getChatList({ type: 'user' })">
                       <!-- Users Chats Available  -->
                       <b-row class="pa-6">
                         <b-col class="mb-6 pb-6">
                           <input
-                            v-model="searchQuery"
-                            class="form-control input-background"
+                            v-model="searchQueryUser"
+                            class="form-control input-background  mb-2"
                             :placeholder="$t('general.Search_chat_list')"
                             @keypress.enter="
                               getChatList({
                                 type: 'user',
-                                keyword: searchQuery,
+                                keyword: searchQueryUser,
                               })
                             "
                           />
@@ -68,15 +68,15 @@
                       </b-row>
 
                       <div class="messages">
-                        <div v-if="loader" class="text-center mt-6 pt-6">
+                        <!-- <div v-if="loader" class="text-center mt-6 pt-6">
                           <b-spinner
-                            variant="primary"
+                            variant="light"
                             label="Spinning"
                             class="centralizer"
                           ></b-spinner>
-                        </div>
+                        </div> -->
                         <b-row
-                          v-else
+                        
                           v-for="(chat, index) in chatList"
                           :key="index"
                           :class="[
@@ -108,7 +108,7 @@
                             <span style="display: inline-flex">
                               <b-avatar
                                 class="d-inline-block"
-                                variant="primary"
+                                variant="light"
                                 :src="chatListImage(chat)"
                               ></b-avatar>
 
@@ -123,11 +123,9 @@
                             <small class="text-center small">
                               {{ getCreatedAt(chat.created_at) }}
                             </small>
-                            <!-- <p class="text-center">
-                              <b-badge variant="info">
-                                {{ chat.receiver_id }}
-                              </b-badge>
-                            </p> -->
+                            <small class="text-center">
+                              <b-badge variant="light" v-if="chat.message_count" class="count">{{chat.message_count}}</b-badge>
+                            </small>
                           </b-col>
                         </b-row>
                       </div>
@@ -143,13 +141,13 @@
                       <b-row class="pa-6">
                         <b-col class="mb-6 pb-6">
                           <input
-                            v-model="searchQuery"
-                            class="form-control input-background"
+                            v-model="searchQueryBusiness"
+                            class="form-control input-background  mb-2"
                             :placeholder="$t('general.Search_chat_list')"
                             @keypress.enter="
                               getChatList({
                                 type: 'business',
-                                keyword: searchQuery,
+                                keyword: searchQueryBusiness,
                               })
                             "
                           />
@@ -157,15 +155,15 @@
                       </b-row>
 
                       <div class="messages">
-                        <div v-if="loader" class="text-center mt-12 pt-12">
+                        <!-- <div v-if="loader" class="text-center mt-12 pt-12">
                           <b-spinner
-                            variant="primary"
+                            variant="light"
                             label="Spinning"
                             class="centralizer"
                           ></b-spinner>
-                        </div>
+                        </div> -->
                         <b-row
-                          v-else
+                       
                           v-for="(chat, index) in chatList"
                           :key="index"
                           :class="[
@@ -196,7 +194,7 @@
                             <span style="display: inline-flex">
                               <b-avatar
                                 class="d-inline-block profile-pic"
-                                variant="primary"
+                                variant="light"
                                 :src="chatListImage(chat)"
                                 square
                               ></b-avatar>
@@ -212,11 +210,9 @@
                             <small class="text-center small">
                               {{ getCreatedAt(chat.created_at) }}
                             </small>
-                            <!-- <p class="text-center">
-                              <b-badge variant="info">
-                                {{ chat.receiver_id }}
-                              </b-badge>
-                            </p> -->
+                            <small class="text-center">
+                              <b-badge variant="light" v-if="chat.message_count" class="count">{{chat.message_count}}</b-badge>
+                            </small>
                           </b-col>
                         </b-row>
                       </div>
@@ -231,13 +227,13 @@
                       <b-row class="pa-6">
                         <b-col class="mb-6 pb-6">
                           <input
-                            v-model="searchQuery"
-                            class="form-control input-background"
+                            v-model="searchQueryNetwork"
+                            class="form-control input-background  mb-2"
                             :placeholder="$t('general.Search_chat_list')"
                             @keypress.enter="
                               getChatList({
                                 type: 'network',
-                                keyword: searchQuery,
+                                keyword: searchQueryNetwork,
                               })
                             "
                           />
@@ -247,7 +243,7 @@
                       <div class="messages">
                         <div v-if="loader" class="text-center mt-12 pt-12">
                           <b-spinner
-                            variant="primary"
+                            variant="light"
                             label="Spinning"
                             class="centralizer"
                           ></b-spinner>
@@ -284,7 +280,7 @@
                             <span style="display: inline-flex">
                               <b-avatar
                                 class="d-inline-block profile-pic"
-                                variant="primary"
+                                variant="light"
                                 :src="chatListImage(chat)"
                                 square
                               ></b-avatar>
@@ -300,11 +296,9 @@
                             <small class="text-center small">
                               {{ getCreatedAt(chat.created_at) }}
                             </small>
-                            <!-- <p class="text-center">
-                              <b-badge variant="info">
-                                {{ chat.receiver_id }}
-                              </b-badge>
-                            </p> -->
+                            <small class="text-center">
+                              <b-badge variant="light" v-if="chat.message_count" class="count">{{chat.message_count}}</b-badge>
+                            </small>
                           </b-col>
                         </b-row>
                       </div>
@@ -333,7 +327,7 @@
                 </b-col>
                 <b-col class="col-3" @click="info = true">
                   <b-avatar
-                    variant="primary"
+                    variant="light"
                     :src="chatListImage(chatSelected)"
                     size="60"
                   ></b-avatar>
@@ -378,7 +372,7 @@
             >
               <div v-if="loader" class="text-center mt-12 pt-12">
                 <b-spinner
-                  variant="primary"
+                  variant="light"
                   label="Spinning"
                   class="spinner centralizer"
                 ></b-spinner>
@@ -388,6 +382,23 @@
                   <b-row class="p-1">
                     <b-col>
                       <p class="msg-text mt-0 text">
+                        <span class="text-center float-right mt-n0">
+                            <b-dropdown
+                              variant="link"
+                              size="lg"
+                              toggle-class="text-decoration-none p-0"
+                              no-caret
+                              right
+                            >
+                              <template slot="button-content">
+                                <b><i class="fas fa-ellipsis-v"></i></b>
+                              </template>
+                              <b-dropdown-item 
+                              @click="deleteMessage(chat , userToUser , type)">
+                                Delete
+                              </b-dropdown-item>
+                            </b-dropdown>
+                          </span>
                         <span v-if="chat.attachment">
                           <img :src="chat.attachment" />
                           <!-- <br />
@@ -417,7 +428,7 @@
                     <b-col>
                       <p id="sent" class="msg-text-sent text">
                         <span v-if="chat.attachment">
-                          <img :src="chat.attachment" />
+                          <!-- <img :src="chat.attachment" /> -->
                           <!-- <br />
                             <b>{{ chat.attachment }}</b> -->
                           <br />
@@ -481,11 +492,12 @@
                     >
                     </b-icon>
 
-                    <input
+                    <input  
                       style="display: none"
                       type="file"
                       id="file"
                       ref="file"
+                       accept="image/*"
                       @change="handleFileUpload()"
                     />
                   </label>
@@ -589,7 +601,7 @@
             <div class="info-bottom">
               <b-avatar
                 class="info-avatar"
-                variant="primary"
+                variant="light"
                 :src="chatSelected.profile_picture"
                 size="200"
               ></b-avatar>
@@ -637,13 +649,14 @@
                   ></b-icon>
                 </b-col>
                 <b-col>
+
                   <b-form-input
                     id="textarea"
                     v-model="newSearchQuery"
                     class="input-background"
                     style="width: 100%"
                     :placeholder="`Type the name of the ${type}`"
-                    @keydown="onPressSearchNewChat"
+                    @input="onPressSearchNewChat"
                   ></b-form-input>
                   <br />
                 </b-col>
@@ -700,7 +713,7 @@
                         <td>
                           <b-avatar
                             class="d-inline-block"
-                            variant="primary"
+                            variant="light"
                             size="30"
                             :src="
                               getImage({
@@ -729,7 +742,7 @@
                         <td>
                           <b-avatar
                             class="d-inline-block"
-                            variant="primary"
+                            variant="light"
                             size="30"
                             :src="
                               getImage({
@@ -758,7 +771,7 @@
                         <td>
                           <b-avatar
                             class="d-inline-block"
-                            variant="primary"
+                            variant="light"
                             size="30"
                             :src="
                               getImage({
@@ -787,7 +800,7 @@
                 <b-col class="p-2">
                   <b-avatar
                     class="d-inline-block profile-pic"
-                    variant="primary"
+                    variant="light"
                     :src="
                       getImage({
                         type: 'user',
@@ -820,20 +833,20 @@
                   <b-tabs
                     v-model="tabIndex"
                     content-class="mt-12 ma-4 pt-6"
-                    fill
+                    fill pills
                   >
                     <b-tab title="User" @click="getChatList({ type: 'user' })">
                       <!-- Users Chats Available  -->
                       <b-row class="pa-6">
                         <b-col class="mb-6 pb-6">
                           <input
-                            v-model="searchQuery"
-                            class="form-control input-background"
+                            v-model="searchQueryUser"
+                            class="form-control input-background  mb-2"
                             :placeholder="$t('general.Search_chat_list')"
                             @keypress="
                               getChatList({
                                 type: 'user',
-                                keyword: searchQuery,
+                                keyword: searchQueryUser,
                               })
                             "
                           />
@@ -841,15 +854,9 @@
                       </b-row>
 
                       <div class="messages">
-                        <div v-if="loader" class="text-center mt-6 pt-6">
-                          <b-spinner
-                            variant="primary"
-                            label="Spinning"
-                            class="centralizer"
-                          ></b-spinner>
-                        </div>
+                       
                         <b-row
-                          v-else
+                         
                           v-for="(chat, index) in chatList"
                           :key="index"
                           :class="[
@@ -881,7 +888,7 @@
                             <span style="display: inline-flex">
                               <b-avatar
                                 class="d-inline-block profile-pic"
-                                variant="primary"
+                                variant="light"
                                 :src="chatListImage(chat)"
                               ></b-avatar>
 
@@ -896,11 +903,10 @@
                             <small class="text-center">
                               {{ getCreatedAt(chat.created_at) }}
                             </small>
-                            <!-- <p class="text-center">
-                              <b-badge variant="info">
-                                {{ chat.receiver_id }}
-                              </b-badge>
-                            </p> -->
+                            <small class="text-center">
+                              <b-badge variant="light" v-if="chat.message_count" class="count">{{chat.message_count}}</b-badge>
+                            </small>
+
                           </b-col>
                         </b-row>
                       </div>
@@ -916,13 +922,13 @@
                       <b-row class="pa-6">
                         <b-col class="mb-6 pb-6">
                           <input
-                            v-model="searchQuery"
-                            class="form-control input-background"
+                            v-model="searchQueryBusiness"
+                            class="form-control input-background  mb-2"
                             :placeholder="$t('general.Search_chat_list')"
                             @keypress.enter="
                               getChatList({
                                 type: 'business',
-                                keyword: searchQuery,
+                                keyword: searchQueryBusiness,
                               })
                             "
                           />
@@ -930,15 +936,9 @@
                       </b-row>
 
                       <div class="messages">
-                        <div v-if="loader" class="text-center mt-12 pt-12">
-                          <b-spinner
-                            variant="primary"
-                            label="Spinning"
-                            class="centralizer"
-                          ></b-spinner>
-                        </div>
+                      
                         <b-row
-                          v-else
+                         
                           v-for="(chat, index) in chatList"
                           :key="index"
                           :class="[
@@ -969,7 +969,7 @@
                             <span style="display: inline-flex">
                               <b-avatar
                                 class="d-inline-block profile-pic"
-                                variant="primary"
+                                variant="light"
                                 :src="chatListImage(chat)"
                                 square
                               ></b-avatar>
@@ -985,11 +985,9 @@
                             <small class="text-center">
                               {{ getCreatedAt(chat.created_at) }}
                             </small>
-                            <!-- <p class="text-center">
-                              <b-badge variant="info">
-                                {{ chat.receiver_id }}
-                              </b-badge>
-                            </p> -->
+                            <small class="text-center">
+                              <b-badge variant="light" v-if="chat.message_count" class="count">{{chat.message_count}}</b-badge>
+                            </small>
                           </b-col>
                         </b-row>
                       </div>
@@ -1005,13 +1003,13 @@
                       <b-row class="pa-6">
                         <b-col class="mb-6 pb-6">
                           <input
-                            v-model="searchQuery"
-                            class="form-control input-background"
+                            v-model="searchQueryNetwork"
+                            class="form-control input-background  mb-2"
                             :placeholder="$t('general.Search_chat_list')"
                             @keypress.enter="
                               getChatList({
                                 type: 'network',
-                                keyword: searchQuery,
+                                keyword: searchQueryNetwork,
                               })
                             "
                           />
@@ -1019,15 +1017,9 @@
                       </b-row>
 
                       <div class="messages">
-                        <div v-if="loader" class="text-center mt-12 pt-12">
-                          <b-spinner
-                            variant="primary"
-                            label="Spinning"
-                            class="centralizer"
-                          ></b-spinner>
-                        </div>
+                        
                         <b-row
-                          v-else
+                          
                           v-for="(chat, index) in chatList"
                           :key="index"
                           :class="[
@@ -1058,7 +1050,7 @@
                             <span style="display: inline-flex">
                               <b-avatar
                                 class="d-inline-block profile-pic"
-                                variant="primary"
+                                variant="light"
                                 :src="chatListImage(chat)"
                                 square
                               ></b-avatar>
@@ -1074,11 +1066,9 @@
                             <small class="text-center">
                               {{ getCreatedAt(chat.created_at) }}
                             </small>
-                            <!-- <p class="text-center">
-                              <b-badge variant="info">
-                                {{ chat.receiver_id }}
-                              </b-badge>
-                            </p> -->
+                            <small class="text-center">
+                              <b-badge variant="light" v-if="chat.message_count" class="count">{{chat.message_count}}</b-badge>
+                            </small>
                           </b-col>
                         </b-row>
                       </div>
@@ -1095,7 +1085,8 @@
               <b-row class="desk" v-if="chatSelected.active">
                 <b-col class="col-3" @click="info = true">
                   <b-avatar
-                    variant="primary"
+                    variant="light"
+                    :square="type == 'user' ? false : true"
                     :src="chatListImage(chatSelected)"
                     size="60"
                   ></b-avatar>
@@ -1164,6 +1155,7 @@
                   <b-row class="p-2">
                     <b-col>
                       <p class="msg-text mt-0 text">
+                      
                         <span v-if="chat.attachment">
                           <img :src="chat.attachment" />
                           <!-- <br />
@@ -1198,6 +1190,24 @@
                   <b-row class="p-2">
                     <b-col>
                       <p id="sent" class="msg-text-sent text">
+                        <span class="text-center float-right mt-n0">
+                            <b-dropdown
+                              variant="link"
+                              size="lg"
+                              toggle-class="text-decoration-none p-0"
+                              no-caret
+                              right
+                            >
+                              <template slot="button-content">
+                                <b><i class="fas fa-ellipsis-v"></i></b>
+                              </template>
+                              <b-dropdown-item 
+                              @click="deleteMessage(chat , userToUser , type)">
+                                Delete
+                              </b-dropdown-item>
+                            </b-dropdown>
+                          </span>
+                          
                         <span v-if="chat.attachment">
                           <img :src="chat.attachment" />
                           <!-- <br />
@@ -1279,6 +1289,7 @@
                       style="display: none"
                       type="file"
                       id="file"
+                      accept="image/*"
                       ref="file"
                       @change="handleFileUpload()"
                     />
@@ -1384,7 +1395,7 @@
             <div class="info-bottom">
               <b-avatar
                 class="info-avatar"
-                variant="primary"
+                variant="light"
                 :src="chatSelected.profile_picture"
                 size="200"
               ></b-avatar>
@@ -1482,7 +1493,7 @@
                         <td>
                           <b-avatar
                             class="d-inline-block"
-                            variant="primary"
+                            variant="light"
                             size="30"
                             :src="
                               getImage({
@@ -1511,7 +1522,7 @@
                         <td>
                           <b-avatar
                             class="d-inline-block"
-                            variant="primary"
+                            variant="light"
                             size="30"
                             :src="
                               getImage({
@@ -1540,7 +1551,7 @@
                         <td>
                           <b-avatar
                             class="d-inline-block"
-                            variant="primary"
+                            variant="light"
                             size="30"
                             :src="
                               getImage({
@@ -1622,6 +1633,9 @@ export default {
       showsearch: true,
       selecteduser: false,
       searchQuery: "",
+      searchQueryUser: "",
+      searchQueryBusiness: "",
+      searchQueryNetwork: "",
       newSearchQuery: "",
       newMsg: false,
       show: false,
@@ -2015,11 +2029,14 @@ export default {
       console.log("listenning...");
     },
     getCreatedAt(data) {
-      if (moment(data).isBefore(moment())) {
-        return moment(data).format("lll");
+
+      const date = moment().diff(moment(data), 'days')
+      console.log(date >= 1)
+      if (date >= 1) {
+        return moment(data).format("L");
       } else {
         // return moment(data).format('LT');
-        return moment(data).fromNow();
+        return moment(data).format('hh:mm')
       }
     },
     getList(keyword) {
@@ -2029,15 +2046,14 @@ export default {
       } else if (this.type == "business") {
         this.$store.dispatch("userChat/GET_BIZS", keyword);
       } else {
-        console.log("network");
+        
         this.$store.dispatch("userChat/GET_NETS", keyword);
       }
     },
     getChatList(data) {
       this.type = data.type;
 
-      console.log("[data...]", data);
-      console.log("[data...]", this.type);
+     
 
       this.chatSelected.active = this.ctaSelected ? true : false;
       this.newMsg = false;
@@ -2048,7 +2064,7 @@ export default {
           console.log("->[Data logged]<-");
         })
         .catch(() => console.log("error"));
-      console.log("testing...");
+      
 
       this.socket.emit("create-chatList", this.currentUser.user.id);
 
@@ -2104,7 +2120,10 @@ export default {
         .catch(() => console.log("error"));
     },
     selectedChat(data) {
+      
       // this.scrollToBottom();
+
+
       console.log("currentUser:", this.currentUser.user.id);
       console.log("Data logged:", data);
       console.log("free up:", this.ctaSelected);
@@ -2140,6 +2159,9 @@ export default {
         ? data.chat.name
         : data.chat.groupName),
         console.log("[DEBUG] Chat selected:", this.chatSelected);
+
+
+      data.chat.message_count = 0 
     },
     searchUser(keyword) {
       this.$store
@@ -2193,7 +2215,7 @@ export default {
     },
     newMessage(arg) {
       this.getList();
-      console.log("hey");
+      
       this.rightSide = false;
       this.newMsg = arg;
       this.show = false;
@@ -2271,11 +2293,46 @@ export default {
       this.dismissed();
       this.scrollToBottom();
     },
+    async deleteMessage(data , chatListData , type){
+    
+      let dataChat = chatListData.filter((b) => { return b.id !== data.id;});
+
+
+      if(type == "user"){
+        await this.$store.dispatch("businessChat/DELETE_USER_MESSAGE_BY_MESSAGEID", data)
+      }
+
+      if(type == "business"){
+        data.businessId = this.chatSelected.id;
+        console.log(data , "bussiness");
+        await this.$store.dispatch("businessChat/DELETE_BUSINESS_MESSAGE_BY_MESSAGEID_BUSINESSID", data)
+      }
+
+      if(type == "network"){
+        data.networkId = this.chatSelected.id;
+        console.log(data , "network");
+        await this.$store.dispatch("businessChat/DELETE_NETWORK_MESSAGE_BY_MESSAGEID_NETWORKID", data)
+      } 
+   
+      // if(type == "group"){
+      //   data.groupId = this.chatSelected.id;
+      //   await this.$store.dispatch("businessChat/DELETE_GROUP_MESSAGE_BYGROUP_ID", data)
+      // }
+
+      this.$store.dispatch("userChat/DATA_UPDATE_C", dataChat)
+
+    },
   },
 };
 </script>
 
 <style scoped>
+.count{
+  background: #e75c18!important;
+  color: white;
+  font-size: 13px;
+  border-radius: 12px;
+}
 .sharedImg {
   max-width: 80%;
   max-height: 40%;
@@ -2332,7 +2389,7 @@ export default {
 .chats {
   /* border: 2px solid green; */
   height: 540px;
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
 }
 
@@ -2353,7 +2410,7 @@ h1 {
 }
 
 .messages {
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
   height: 500px;
 }
@@ -2539,7 +2596,7 @@ li {
     padding: 10px;
   }
   .messages-mobile {
-    overflow-y: scroll;
+    overflow-y: auto;
     overflow-x: hidden;
     height: 690px;
     border-top: none;

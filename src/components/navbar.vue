@@ -1,5 +1,6 @@
 <template>
-  <header class="">
+  <header class=""> 
+
     <nav class="navbar navbar-expand-xl p-3 mb-3 rounded">
       <div class="container-fluid">
         <div class="col-md-12 col-lg-2 col-xl-2 text-center">
@@ -56,9 +57,25 @@
                   class="input-group-append color-mobile"
                   style="border: none"
                 >
-                  <span
+                  
+                </div>
+
+               
+                <vue-bootstrap-typeahead    
+                v-model="credentials.location"
+                :data="neigbourhoods"
+                :minMatchingChars="1"
+                :maxMatches="10"
+               style="border:0px"
+                :serializer="(item) => item.name"
+                :placeholder="credentials.location_placeholder"
+                class="search-hh w-100 balala "
+              >
+
+               <template slot="prepend">
+        <span
                     class="input-group-text border-left-0 color-mobile"
-                    style="width: 40px;  border:none"
+                    style=" width: 40px;  border:none"
                   >
                     <b-icon
                       icon="geo-alt"
@@ -66,19 +83,9 @@
                       font-scale="1.5"
                     ></b-icon>
                   </span>
-                </div>
+      </template>
+</vue-bootstrap-typeahead >
 
-               
-                <vue-bootstrap-typeahead
-                v-model="credentials.location"
-                :data="neigbourhoods"
-                :minMatchingChars="0"
-                :maxMatches="10"
-              
-                :serializer="(item) => item.name"
-                :placeholder="credentials.location_placeholder"
-                class="search-hh m-where"
-              />
               </b-input-group>
             </span>
           </form>
@@ -101,7 +108,7 @@
               <vue-bootstrap-typeahead
                 v-model="credentials.location"
                 :data="neigbourhoods"
-                :minMatchingChars="0"
+                :minMatchingChars="1"
                 :maxMatches="10"
               
                 :serializer="(item) => item.name"
@@ -269,13 +276,13 @@
                         class="d-inline-flex flex-row align-items-center suggest-item cursor-pointer"
                       >
                         <div>
-                          <img
-                            :src="profileSenderImange(notification.sender)"
-                            class="rounded-circle"
-                            alt=""
-                            width="30"
-                            height="30"
-                          />
+
+                          <b-avatar
+                            :src="notification.profile_picture"
+                            size="2rem"
+                          >
+                          </b-avatar>
+                          
                         </div>
                         <div class="d-flex flex-column ml-3">
                           <div>{{ notification.notification_text }}</div>
@@ -339,12 +346,6 @@
                 </a>
                 <b-popover target="other-menu" triggers="hover" placement="top">
                   <div class="popover-body">
-                    <div
-                      style="width: 100%"
-                      class="d-inline-flex flex-row align-items-center mb-1"
-                    >
-                      <Activity class="w-full" />
-                    </div>
 
                     <a
                       v-if="'user' != user.user_type"
@@ -360,6 +361,15 @@
                       Profile
                     </a>
                     <hr class="h-divider" />
+                    
+                    <div
+                      style="width: 100%"
+                      class="d-inline-flex flex-row align-items-center mb-1"
+                    >
+                      <Activity class="w-full" />
+                    </div>
+
+                    
 
                     <router-link
                       :to="{ name: 'orders' }"
@@ -378,12 +388,16 @@
                       :to="{ name: 'settings' }"
                       class="other-menu suggest-item cursor-pointer text-decoration-none text-dark w-full"
                     >
-                      <span class="mr-2 w-full"
+                      <span 
+                        class="mr-2 w-full"
+                        style="display: inline-block;"
                         ><fas-icon
                           class="violet search"
                           :icon="['fas', 'cogs']"
-                      /></span>
-                      {{ $t("general.Account_Settings") }}
+                      />
+                        {{ $t("general.Account_Settings") }}
+                      </span>
+                      
                     </router-link>
                     <hr class="h-divider" />
                     <div class="other-menu suggest-item cursor-pointer">
@@ -604,6 +618,7 @@
       </div>
     </nav>
 
+
     <div></div>
   </header>
 </template>
@@ -661,8 +676,27 @@ export default {
       hasLauchNetworkRequest: "social/INIT",
       user: "auth/profilConnected",
       auth: "auth/user",
-      neigbourhoods: "auth/neigbourhoods",
+     // neigbourhoods: "auth/neigbourhoods",
+
+      neigbourhoods: "auth/cities",
     }),
+
+
+//   neigbourhoods(){
+
+// //     let nei=  this.$store.getters["auth/cities"];
+// // const arrayFailed = Object.entries(nei).map((arr) => ({
+// //   id: arr[0],
+// //   name: arr[1],
+// // }));
+
+// return this.$store.getters["auth/cities"];
+
+
+//   },
+
+
+
 
     query(){
 
@@ -670,6 +704,7 @@ export default {
     }
   },
   beforeMount() {
+    this.getCities();
     this.getLocation();
   },
   created() {
@@ -746,11 +781,26 @@ export default {
 
     query(newQuery) {
       axios
-        .get(`neighborhoods/${newQuery}`)
+        .get(`visitor/search/city?city=${newQuery}`)
         .then(({ data }) => {
-          this.$store.commit("auth/setneigbourhoods", data.data);
+
+          console.log(data);
+          this.$store.commit("auth/setCities", data.data);
         });
     },
+
+
+    // old query method
+    // query(newQuery) {
+    //   axios
+    //     .get(`neighborhoods/${newQuery}`)
+    //     .then(({ data }) => {
+    //       this.$store.commit("auth/setneigbourhoods", data.data);
+    //     });
+    // },
+
+
+
   },
   
   filters: {
@@ -771,14 +821,14 @@ export default {
 
 
     profileSenderImange(image) {
-      // console.log("image is:", image);
-      const picture = image
-        ? image.profile_picture
+      if (!image)
+        return null;
+
+      const picture = image.profile_picture
           ? image.profile_picture
           : image.logo_path
-          ? image.logo_path
-          : image.image
-        : "";
+            ? image.logo_path
+            : image.image ? image.image : null ;
 
       return picture;
     },
@@ -802,6 +852,24 @@ export default {
       };
       return link[this.user.user_type]();
     },
+
+
+  getCities(){
+
+
+
+this.$store
+          .dispatch("auth/cities", {
+           
+          })
+          .catch((err) => {
+            console.log({err:err});
+          });
+
+
+
+
+      },
 
     getLocation() {
       const success = (position) => {
@@ -864,7 +932,7 @@ export default {
     },
 
     getKeyword() {
-
+ 
 
       if (!this.credentials.keyword) return false;
 
@@ -1257,5 +1325,19 @@ export default {
     border-radius: 0px;
     border-bottom: hidden;
   }
+}
+
+@media only screen and (max-width: 768px) {
+.m-where{
+  width: 85.8%;
+    padding: 0px;
+    margin: 0px;
+    border-radius: 0px;
+    border: none;
+}
+
+.balala .form-control{
+  border: 0px;
+}
 }
 </style>

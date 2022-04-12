@@ -4,6 +4,7 @@ export default {
     namespaced: true,
     state: {
         editors: [],
+        lastcreatedgroup:{},
         groupMembers: [],
         all: [],
         users: [],
@@ -14,6 +15,7 @@ export default {
         currentBiz: [],
         userInfo: [],
         bizs: [],
+        nbizs:[],
         chats: [],
         chatList: [],
         type: 2,
@@ -54,11 +56,17 @@ export default {
             return state.userInfo;
         },
         getCurrentBiz(state) {
-            return state.currentBiz;
+            return state.currentBiz;   
         },
         getBizs(state) {
             return state.bizs;
         },
+
+        getnBizs(state) {
+            return state.nbizs;
+        },
+
+
         getChats(state) {
             return state.chats;
         },
@@ -92,7 +100,12 @@ export default {
         // sending success value
         getSuccess(state) {
             return state.success;
-        }
+        },
+        getlastcreatedgroup(state) {
+            return state.lastcreatedgroup;
+        },
+
+
     },
     mutations: {
         //set data
@@ -105,6 +118,23 @@ export default {
         setChats(state, data) {
             state.chats = data
         },
+
+
+        setEditor(state, data) {
+            state.editors = data
+        },
+
+        lastCreatedGroup(state, data){
+           
+            state.lastcreatedgroup = data
+             
+        },
+
+        nsetBizs(state, data) {
+            state.nbizs = data;
+        },
+
+
         setBizs(state, data) {
             state.bizs = data;
         },
@@ -208,14 +238,17 @@ export default {
         // ---------------
 
 
-        CREATE_GROUP({ commit, state }, data) {
+      async  CREATE_GROUP({ commit, state }, data) {
             console.log("group data:", data);
             commit("setLoader", true);
-            return axios.post(`/group/create/network/${state.currentBizId}`, data)
+             await axios.post(`/group/create/network/${state.currentBizId}`, data)
                 .then((res) => {
                     console.log("group created:", res.data.data);
                     commit("setLoader", false);
-                    commit("setSelectedChatId", res.data.data.groupID)
+                    commit("setSelectedChatId", res.data.data.groupID);
+                    commit("lastCreatedGroup", res.data.data);
+
+                    return res;
                 })
                 .catch((err) => {
                     commit("setLoader", false);
@@ -471,21 +504,28 @@ export default {
         },
 
         async GET_EDITORS({ commit, state }) {
-            commit("setBizs", []);
-            state.editors = []
-
+          //  commit("setBizs", []);
+           // state.editors = []
+         let edit=[];
             await axios.post(`/network/${state.currentBizId}/members/editor`)
                 .then((res) => {
                     commit("setLoader", false);
-                    let editor = res.data.data
-                    if (editor.length > 0) {
-                        editor.map((elm) => {
-                                state.editors.push({ accountType: "editor", ...elm, name: elm.fullname, id: elm.user_id })
+                    let editor = res.data.data;
+
+                    if (editor.editor.length > 0) {
+                        editor.editor.map((elm) => {
+                            edit.push({ accountType: "editor", ...elm, name: elm.fullname, id: elm.user_id })
                             })
                             // state.editors = { accountType: "business", ...res.data.data }
                     }
-                    console.log("editor:", state.editors);
-                    commit("setBizs", state.editors);
+
+                   // console.log("editor:", state.editors);
+                    commit("setBizs", edit);
+
+                   //commit("setBizs",editor.editor);
+                    commit("setEditor", edit);  
+
+                    
                 })
                 .catch((err) => {
                     commit("setLoader", false);
@@ -496,21 +536,38 @@ export default {
         },
         async GET_NETWORK_MEMBERS({ commit, state }) {
             commit("setBizs", []);
-            state.members = []
+            commit("setLoader", true);
+            let members = [];
+            let business=[];
 
             await axios.post(`network/${state.currentBizId}/members/list`)
                 .then((res) => {
-                    commit("setLoader", false);
-                    let members = res.data.data
+                    
+                    let render = res.data.data.users;
+                     let biz_render=res.data.data.businesses;
 
-                    if (members.length > 0) {
-                        members.map((elm) => {
-                            state.members.push({ accountType: "member", ...elm, id: elm.user_id })
+                    if (render.length > 0) {
+                        render.map((elm) => {
+                            members.push({ accountType: "member", ...elm, id: elm.user_id })
                         })
 
                     }
-                    console.log("member:", state.members);
-                    commit("setBizs", state.members);
+
+
+                    if (biz_render.length > 0) {
+                        biz_render.map((elm) => {
+                            business.push({ accountType: "business", ...elm, id: elm.business_id })
+                        })
+
+                    }
+                    
+
+                    
+                    
+                    commit("setBizs", members);
+                    commit("nsetBizs", business);
+
+                    commit("setLoader", false);
                 })
                 .catch((err) => {
                     commit("setLoader", false);
@@ -808,7 +865,7 @@ export default {
                 })
         },
         async GET_BIZ_TO_GROUP({ commit, state, dispatch }, data) {
-            commit("setLoader", true);
+            // commit("setLoader", true);
             console.log("[DEBUG]: ", data);
             let keyword = data.keyword ? '/' + data.keyword : ''
 

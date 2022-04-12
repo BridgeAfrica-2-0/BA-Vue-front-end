@@ -1,7 +1,8 @@
 <template>
-    <div>
+    <div> 
+ 
       <div class="row ">
-        <div class="col-5 col-md-8">
+        <div class="col-4 col-md-8">
           <p>
             <b-icon
               font-scale="1.8"
@@ -13,11 +14,11 @@
           </p>
         </div>
   
-         <div class="col-7 col-md ">
-           <div class="row marg">
+         <div class="col-8 col-md ">
+           <div class="inline-flex marg float-right">
   
            
-            <b-button
+            <b-button v-if="isPremium"
               class=" mx-1"
               variant="outline-primary"
               @click="displayOrders"
@@ -320,6 +321,7 @@
   import Product from "../product";
   import Orders from "@/views/businessOwnerOrders";
   import Archive from "../archive";
+  import { isPremium } from '@/helpers';
   export default {
     name: "MarketPlace",
     components: {
@@ -330,6 +332,7 @@
     },
     data() {
       return {
+        isPremium: isPremium(),
         options: ["list", "of", "options"],
         orders: false,
         archive: false,
@@ -359,7 +362,7 @@
           tax_amount: "",
           kg: "",
         },
-        products: [],
+       // products: [],
         val: "",
         msg: "",
         success: false,
@@ -376,6 +379,12 @@
       scategories() {
         return this.$store.state.auth.subcategories;
       },
+
+       products() {
+        return this.$store.state.market.products;
+      },
+
+
       selectedcategories: function () {
         let selectedCatUsers = [];
         if (this.multiselecvalue.id) {
@@ -537,8 +546,21 @@
         this.selectedImagePrv = URL.createObjectURL(file);
         console.log("this.selectedImagePrv", this.selectedImagePrv);
       },
-      createProduct() {
+      createProduct() {  
+ 
+        if(!this.isPremium && this.products.data.length <=10){
+             this.flashMessage.show({
+              status: 'success',
+              
+              message: this.$t('general.max_product_reach')
+              
+           
+            });
+  
+        }else{   
         this.showModal = !this.showModal;
+
+        }
       },
   
       categories(){
@@ -570,8 +592,7 @@
     beforeMount() {
       //this.loader = true;
       this.businessId = this.$route.params.id;
-      
-  
+
       this.categories();
       this.subcategories();
     },

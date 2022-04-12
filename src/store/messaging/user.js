@@ -491,7 +491,14 @@ export default {
                     commit("setLoader", false);
                     console.log(err);
                 })
-        }
+        },
+        DATA_UPDATE_C({ commit, state, dispatch }, data) {
+            commit("setLoader", true);
+            console.log("[DEBUG userToUser]: ", data);
+            commit("setUserToUser", data);
+            commit("setLoader", false);
+           
+        },
 
 
     }

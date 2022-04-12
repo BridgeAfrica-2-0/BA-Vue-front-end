@@ -289,7 +289,7 @@ export default {
     },
 
     gotobusiness(id) {
-      this.$router.push(`business/${id}?tabId=1`);
+      this.$router.push(`/business/${id}?tabId=1`);
       
     },
     async handleFollow(user) {

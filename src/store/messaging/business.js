@@ -15,7 +15,7 @@ export default {
         chatList: [],
         groupMembers: [],
         community: [],
-
+        lastcreatedgroup:{},
         type: 2,
         selectedChat: null,
         selectedChatId: null,
@@ -68,6 +68,16 @@ export default {
         getSelectedChatId(state) {
             return state.selectedChatId;
         },
+
+
+
+        getlastcreatedgroup(state) {
+            return state.lastcreatedgroup;
+        },
+
+
+        
+
         getSelectedChat(state) {
             return state.selectedChat;
         },
@@ -122,6 +132,12 @@ export default {
         },
         setSelectedChatId(state, data) {
             state.selectedChatId = data
+        },
+
+        lastCreatedGroup(state, data){
+           
+            state.lastcreatedgroup = data
+             
         },
         setSelectedChat(state, data) {
             state.selectedChat = data
@@ -208,14 +224,19 @@ export default {
         },
 
         // ---------------
-        CREATE_GROUP({ commit, state }, data) {
+         async  CREATE_GROUP({ commit, state }, data) {
             console.log("group data:", data);
             commit("setLoader", true);
-            axios.post(`/group/create/business/${state.currentBizId}`, data)
+          await  axios.post(`/group/create/business/${state.currentBizId}`, data)
                 .then((res) => {
                     commit("setLoader", false);
                     commit("setSelectedChatId", res.data.data.groupID);
                     console.log("group created data:", res.data.data);
+
+                    commit("lastCreatedGroup", res.data.data);
+
+                    return res.data.data;
+
                 })
                 .catch((err) => {
                     commit("setLoader", false);
@@ -495,20 +516,27 @@ export default {
 
         async GET_EDITORS({ commit, state }) {
             commit("setBizs", []);
-            state.editors = []
+            commit("setLoader", true);
+            
+            let render = []
 
             await axios.get(`/business/role/editor/${state.currentBizId}`)
                 .then((res) => {
                     commit("setLoader", false);
                     let editor = res.data.data
+                    
+                    console.log(editor)
+                    
                     if (editor.length > 0) {
                         editor.map((elm) => {
-                            state.editors.push({ accountType: "editor", ...elm })
+                            render.push({ accountType: "editor", ...elm })
                         })
 
                     }
-                    console.log("editor:", state.editors);
-                    commit("setBizs", state.editors);
+
+                    console.log("editor:", render);
+                    
+                    commit("setBizs", render);
                 })
                 .catch((err) => {
                     commit("setLoader", false);
@@ -818,7 +846,80 @@ export default {
                     commit("setLoader", false);
                     console.log(err);
                 })
-        }
+        },
+
+        DATA_UPDATE_C({ commit, state, dispatch }, data) {
+            commit("setLoader", true);
+            console.log("[DEBUG]: ", data);
+            commit("setChats", data);
+            commit("setLoader", false);
+           
+        },
+        async DELETE_USER_MESSAGE_BY_MESSAGEID({ commit, state, dispatch }, data) {
+            commit("setLoader", true);
+            console.log("[DEBUG]: DELETE_USER_MESSAGE_BY_MESSAGEID ", data);
+            let messageId = data.id;
+
+            await axios.delete(`messages/${messageId}/user`)
+                .then((res) => {
+                    commit("setLoader", false);
+                })
+                .catch((err) => {
+                    commit("setLoader", false);
+                    console.log(err);
+                })
+        },
+
+        async DELETE_BUSINESS_MESSAGE_BY_MESSAGEID_BUSINESSID({ commit, state, dispatch }, data) {
+            commit("setLoader", true);
+            console.log("[DEBUG]: DELETE_BUSINESS_MESSAGE_BY_MESSAGEID_BUSINESSID ", data);
+            let messageId = data.id;
+            let businessId = data.businessId;
+
+            await axios.delete(`messages/${messageId}/business/${businessId}`)
+                .then((res) => {
+                    commit("setLoader", false);
+                })
+                .catch((err) => {
+                    commit("setLoader", false);
+                    console.log(err);
+                })
+        },
+
+        async DELETE_NETWORK_MESSAGE_BY_MESSAGEID_NETWORKID({ commit, state, dispatch }, data) {
+            commit("setLoader", true);
+            console.log("[DEBUG]: DELETE_NETWORK_MESSAGE_BY_MESSAGEID_NETWORKID ", data);
+            let messageId = data.id;
+            let networkId = data.networkId;
+
+            await axios.delete(`messages/${messageId}/network/${networkId}`)
+                .then((res) => {
+                    commit("setLoader", false);
+                })
+                .catch((err) => {
+                    commit("setLoader", false);
+                    console.log(err);
+                })
+        },
+
+        async DELETE_GROUP_MESSAGE_BYGROUP_ID({ commit, state, dispatch }, data) {
+            // commit("setLoader", true);
+            console.log("[DEBUG]: DELETE_GROUP_MESSAGE_BYGROUP_ID ", data);
+            let messageId = data.id;
+            let groupId = data.groupId;
+            let businessId = data.business_admin_id
+
+            await axios.delete(`group/${groupId}/message/${messageId}/business/${businessId}`)
+            .then((res) => {
+
+                // dispatch("DELETE_GROUP_MESSAGE_BYGROUP_ID")
+                commit("setLoader", false);
+            })
+            .catch((err) => {
+                commit("setLoader", false);
+                console.log(err);
+            })
+        },
 
     }
 };

@@ -1,5 +1,5 @@
 <template>
-  <b-button variant="primary" v-if="isBuyNow" @click="cta()" style="width:100%">
+  <b-button variant="primary" v-if="isBuyNow" @click="handleAddToCard" style="width:100%">
     <span>Buy now</span>
   </b-button>
 
@@ -75,6 +75,10 @@ export default {
       default: false,
       type: Boolean,
     },
+
+    isPremium:{
+         default: '',
+    }
   },
   data() {
     return {
@@ -93,6 +97,12 @@ export default {
     activeAccount() {
       return this.$store.getters["auth/profilConnected"];
     },
+
+
+       getStatus() {
+      return this.$store.state.cart.status;
+    },
+
   },
 
   methods: {
@@ -100,11 +110,58 @@ export default {
      * This will be ignored on rendering
      * @private
      */
+
+      handleAddToCard() {
+
+        if (this.isProduct) {
+          
+
+      if(this.isPremium =='premium'){
+        
+
+      let product=this.element;
+      this.$store
+        .dispatch("cart/addToCart", product)
+        .then((response) => {
+          this.flashMessage.show({
+            status: "success",
+            message: this.getStatus,
+          });
+
+
+           this.$router.push({ name: "payment" });
+        })
+        .catch((err) => {
+          console.log({ err: err });
+          this.flashMessage.show({
+            status: "error",
+            message: "error occur",
+          });
+        });
+
+
+
+      }else{
+  
+
+  this.cta();
+      }
+        
+      }
+ 
+     
+
+        
+    },    
+
+
     cta() {
       /**
        * Fired when the button is clicked.
        *
        */
+
+      
       
       this.$store.commit("businessChat/setSelectedChat", {
         isProduct: this.isProduct,
@@ -113,6 +170,7 @@ export default {
       let path = "";
 
       if (this.isProduct) {
+ 
         path = "/messaging";
       } else {
         if (this.activeAccount.user_type == "business") {

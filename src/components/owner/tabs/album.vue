@@ -7,7 +7,7 @@
             
                 <div class="drag-textt">
                   <fas-icon :icon="['fas', 'plus']" />
-                  <h3>{{ $t('profileowner.Create_Album') }}</h3>
+                  <h3 style="font-size: 1.60">{{ $t('profileowner.Create_Album') }}</h3>
                 </div>
              
           </div>
@@ -654,7 +654,21 @@ export default {
     -webkit-backface-visibility: visible;
     backface-visibility: visible;
   }
+
+  .drag-textt {
+  text-align: center;
+  font-weight: 100;
+  text-transform: uppercase;
+  color: #000;
+  width: 120px;
+  height: 120px;
+  position: absolute;
+  top: 15%;
+  left: 2%;
 }
+}
+
+@media (min-width: 762px) {
 
 .drag-textt {
   text-align: center;
@@ -666,5 +680,8 @@ export default {
   position: absolute;
   top: 25%;
   left: 25%;
+
+}
+
 }
 </style>

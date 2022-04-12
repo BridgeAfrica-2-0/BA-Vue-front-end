@@ -51,15 +51,15 @@ export default {
         "network" === newProfile.user_type ? newProfile.id : null
       );
     },
+
+    "$i18n.locale": function(newLanguage){
+      localStorage.setItem('lang', newLanguage) 
+    }
   },
 
   
  created(){
    
-
-  
-   
-
   },
 
   methods: {
@@ -127,6 +127,7 @@ export default {
 
 
 <style lang="less">
+
 
  .splide__arrow--next{
 
@@ -211,10 +212,11 @@ width: 20px !important;
   color: #000;
 }
 
-li .nav-link:hover {
-  background-color: #e75c18;
-  color: #fff;
-}
+// li .nav-link:hover {
+//   background-color: #e75c18;
+//   // color: #fff;
+//   color:  #e75c18 !important;
+// }
 
 .nav-pills .nav-link.active,
 .nav-pills .show > .nav-link {

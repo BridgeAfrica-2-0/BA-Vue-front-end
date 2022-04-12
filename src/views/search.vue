@@ -674,22 +674,30 @@ export default {
   },
 
   created() {
- this.islogin=this.$store.getters["auth/isLogged"];
+    this.islogin=this.$store.getters["auth/isLogged"];
 
     if (this.$route.query.keyword) {
       this.searchParams.keyword = this.$route.query.keyword;
     }
      
      if(this.islogin) {   
-      this.searchParams.location = this.$route.query.location ? this.$route.query.location:this.$store.getters["auth/user"].user.address;
+        
+      
+
+      this.searchParams.location = this.$route.query.location ? this.$route.query.location:this.$store.getters["auth/user"].user.city;
 
       this.searchParams.location_placeholder=this.searchParams.location ? this.searchParams.location : this.$t("home.Location");
     
      }else{
      
-      this.searchParams.location_placeholder=this.$t("home.Location");
+
+     this.searchParams.location = this.$route.query.location ? this.$route.query.location:'';
+
+      this.searchParams.location_placeholder=  this.$route.query.location ? this.$route.query.location: this.$t("home.Location");
 
      }
+
+    
 
     this.onProcessQuery();
     this.getLocation();
@@ -702,7 +710,9 @@ export default {
       business: () => this.onFindBusiness(),
     };
 
-    this.getKeyword();
+    if (!this.$route.query.uuid)
+      this.getKeyword();
+    
     this.initialize();
   },
 
@@ -1770,7 +1780,7 @@ export default {
       let elm = data ? data : keyword ? { keyword: keyword } : { keyword: "" };
 
        this.$store.commit("allSearch/setKeyword", keyword);
-       this.$store.commit("allSearch/setLOcation", keyword);
+       this.$store.commit("allSearch/setLocation", location);
      
        if (this.searchParams.keyword)
         this.activateMatching = {name:this.searchParams.keyword}
@@ -2652,8 +2662,12 @@ export default {
 <style>
 li .nav-link:hover {
   background-color: white;
-  color: #fff;
+  color: #e75c18;
+
+  
 }
+
+
 
 @media only screen and (max-width: 1201px) {
   .leftblock {

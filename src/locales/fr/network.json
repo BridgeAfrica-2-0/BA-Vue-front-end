@@ -11,6 +11,16 @@
     "Neighbourhood": "Quartier",
     "City": "Ville",
     "Country": "Pays",
+    "all_users":"Tous les utilisateurs",
+    "add_People":"Ajouter des personnes",
+    "add_users":"Ajout les membres",
+    "add_members":"Ajout les membres",
+    "add_Businesses":"Ajouter les entreprises",
+    "select_users":"Sélectionner les utilisateurs",
+    "select_businesses":"Sélectionnez les entreprises",
+
+    "All_people":"Toutes les personnes",
+
     "Keyword": "Mots Clé",
     "auto_approval":"Auto",
     "Your":"Vos",

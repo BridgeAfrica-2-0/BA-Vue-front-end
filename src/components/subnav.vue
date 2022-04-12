@@ -27,7 +27,7 @@
               />
               <br />
               <div :ref="category.category.id">
-                <b-row>
+                <div style="columns: 2;">
                   <b-dropdown-item
                     v-for="(subCat, subIndex) in category.sub_cat.slice(0, 6)"
                     :key="subIndex"
@@ -61,7 +61,7 @@
                       />
                       More</b-dropdown-item
                     > -->
-                </b-row>
+                </div>
               </div>
             </b-nav-item-dropdown>
           </span>
@@ -257,4 +257,34 @@ export default {
 .drop-text {
   color: black;
 }
+</style>
+
+
+<style >
+
+
+ /* .dropdown .show{
+  color:#e75c18 !important;
+}
+
+.nav-link:active{
+ color:#e75c18 !important;
+}
+
+ dropdown-toggle :active{
+color:#e75c18 !important;
+ }
+
+.dropdown-toggle :hover{
+  color:#e75c18 !important;
+}
+
+.nav-link :hover{
+ color: #e75c18 !important;
+}
+
+.b-nav-dropdown :hover{
+  color: #e75c18 !important;
+} */
+
 </style>

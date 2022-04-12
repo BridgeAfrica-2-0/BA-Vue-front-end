@@ -1,5 +1,5 @@
 <template>
-  <div class="" style="overflow-y: hidden; padding: 0px" ref="wrapper">
+  <div class="" style="overflow-x: clip; padding: 0px" ref="wrapper"> 
     <navbar />
     <div v-if="isloaded">
       <div class="container-fluid">
@@ -261,10 +261,7 @@ export default {
     padding-right: 0px;
   }
 }
-.nav-pills .nav-link.active,
-.nav-pills .show > .nav-link {
-  background-color: #e6e6e6;
-}
+
 .center-ly {
   margin-top: -25px;
 }

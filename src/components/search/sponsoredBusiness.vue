@@ -296,13 +296,13 @@ export default {
   .location {
     margin-bottom: 30px;
   }
-
+ 
   .btn {
     padding-top: 6px;
     font-size: 10px;
 
     height: 28px;
-    width: 85px;
+    width: 97px;
   }
 
   .r-image {
@@ -354,7 +354,8 @@ export default {
     padding-top: 6px;
 
     height: 38px;
-    width: 123px;
+    width: 127px;
+    font-size: 13px;
   }
 
   .r-image {

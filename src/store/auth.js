@@ -12,6 +12,7 @@ export default {
     passwordToken: null, 
     registerData: null,
     neigbourhoods: [],
+    cities:[{name:"bbl", id:1}],
     businessAround: [],
     peopleAround: [],
     categories: [],
@@ -98,6 +99,11 @@ export default {
       state.neigbourhoods = data;
     },
 
+    setCities(state, data) {
+      state.cities = data;
+    },
+
+
     setCountry(state, data) {
       state.country = data;
     },
@@ -161,7 +167,7 @@ export default {
 
       var currentUrl = window.location.pathname;
 
-      window.location.href = "/login";
+    //  window.location.href = "/login";
 
       // console.log(router.app._route);
      
@@ -204,6 +210,20 @@ export default {
       });
 
     },
+
+    cities({ commit }, payload) {
+
+
+      return axios.get("visitor/search/city").then(({ data }) => {
+
+        console.log("logging data for neigbourhood");
+        console.log(data);
+        commit("setCities", data.data);
+
+      });
+
+    },
+
 
     country({ commit }) {
 
@@ -354,6 +374,8 @@ export default {
     profilConnected: state => state.profilConnected,
 
     neigbourhoods: state => state.neigbourhoods,
+
+    cities: state => state.cities,
 
     getAppLanguage: (state) => state.appLanguage
 

@@ -283,7 +283,7 @@
                   <div v-if="municipalities.length" class="col-md-6">
                     <div class="form-group">
                       <label for="country" class="username">
-                        {{ $t("profileowner.Municipality") }} :</label
+                        {{ $t("profileowner.Municipality") }} / {{ $t("profileowner.City") }} :</label
                       ><br />
 
                       <multiselect
@@ -314,7 +314,7 @@
                     </div>
                   </div>
 
-                  <div class="col-md-6">
+                  <!-- <div class="col-md-6">
                     <div class="form-group">
                       <label for="website" class="username">
                         {{ $t("profileowner.City") }} :</label
@@ -328,7 +328,7 @@
                         class="form-control text"
                       />
                     </div>
-                  </div>
+                  </div> -->
 
                   <div class="col-md-6">
                     <div class="form-group">
@@ -679,7 +679,7 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="country" class="username">
-                        {{ $t("profileowner.Municipality") }} :</label
+                        {{ $t("profileowner.Municipality") }} /{{ $t("profileowner.City") }}:</label
                       ><br />
 
                       <multiselect
@@ -712,7 +712,7 @@
                     </div>
                   </div>
 
-                  <b-col md="6">
+                  <!-- <b-col md="6">
                     <div class="form-group">
                       <label for="website" class="username">
                         {{ $t("profileowner.City") }} :</label
@@ -726,7 +726,7 @@
                         class="form-control text"
                       />
                     </div>
-                  </b-col>
+                  </b-col> -->
 
                   <div class="col-md-6">
                     <div class="form-group">
@@ -984,7 +984,7 @@ export default {
       profile_pic: "",
       dob: null,
       gender: null,
-      city: null,
+     // city: null,
       Neighbor: null,
       step1: false,
       step2: false,
@@ -1904,6 +1904,24 @@ this.$refs.cropperr.getCroppedCanvas().toBlob((blob) => {
       });
       return sub_cat;
     },
+
+
+      city: function() {
+      let sub_cat = [];
+      this.municipality.forEach((item) => {
+        if (item.council_id) {
+          sub_cat.push(item.name);
+        } else {
+          sub_cat.push(item.name);
+        }
+      });
+      return sub_cat.toString();
+    },
+
+
+
+
+    
     selectedlocality: function() {
       let sub_cat = [];
       console.log("loging localities");

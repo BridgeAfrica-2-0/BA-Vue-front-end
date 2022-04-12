@@ -14,6 +14,7 @@
       {{ $t("search.Posting") }}
     </h6>
     <Loader v-if="!pageHasLoad || loaderState" />
+  
     <NotFound v-if="!posts.length && !loaderState" :title="title" />
     <div v-else>
       <Post
@@ -28,21 +29,18 @@
         :isDisplayInSearch="true"
       />
     </div>
-
     <ScrollLoader
       :loading="loadingIsActive"
       color="#ced4da"
       v-if="this.getKeywork"
     />
+
+
   </div>
 
    <div v-else> 
-    
-
-
-       <login />
-    
-     </div>
+    <login />
+  </div>
 
 
 </template>
@@ -56,6 +54,7 @@ import { loader, search, PostComponentMixin } from "@/mixins";
 import Post from "@/components/businessOwner/ownerPostComponent";
 import Loader from "@/components/Loader";
 import login from "@/components/search/login";
+
 export default {
   mixins: [loader, search, PostComponentMixin],
   components: {
@@ -103,13 +102,18 @@ export default {
   },
 
   created() {
+
     this.islogin=this.$store.getters["auth/isLogged"];
+
+    if (this.$store.getters["auth/isLogged"])
+      this.getAuth();
+    
     if (this.$route.query.uuid) {
       this.singlePost();
       return true;
     }
 
-    this.getAuth();
+    
     this.init();
   },
 
@@ -126,11 +130,15 @@ export default {
     }),
 
     async singlePost() {
+      this.setLoaderState(true);
       const response = await this.$repository.post.single({
         uuid: this.$route.query.uuid,
       });
 
-      if (response.success) this.postStore(response.data);
+      if (response.success) {
+        this.setLoaderState(false);
+        this.postStore(response.data);
+      }
     },
 
     async getAuth() {
@@ -148,6 +156,8 @@ export default {
         type,
       });
       if (response.success) this.auth(response.data);
+
+      this.pageHasLoad = true;
     },
 
     init: async function () {

@@ -2,8 +2,18 @@
   <b-container>
     <div class="s-card">
 
+     <b-button variant="primary" class="float-right" v-b-modal.modal-addm> {{$t('network.add_members')}}  </b-button> 
+
+     <br>
+
+
+    
+
+
+
+
       <h6 class="font-weight-bolder">
-          {{ $t("network.All_Members") }} 
+          {{ $t("network.all_users") }} 
         </h6>
         <hr width="100%" />
 
@@ -158,9 +168,11 @@
 
 
   </b-container>
-</template>
+</template> 
 
 <script>
+
+
 export default {
   data() {
     return {
@@ -175,6 +187,12 @@ export default {
       business:[],
     }
   },
+
+  components: {
+    
+    
+  },
+
 
   mounted() {
     this.url =  this.$route.params.id !== undefined ? this.$route.params.id : this.$router.push('notFound');
@@ -602,7 +620,7 @@ f-right {
     white-space: nowrap;
   }
   .btn {
-    width: 85px;
+    width: 95px;
     height: 28px;
     font-size: 10px;
   }

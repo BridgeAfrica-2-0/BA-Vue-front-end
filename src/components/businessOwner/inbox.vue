@@ -9,7 +9,7 @@
                 <b-col class="p-2">
                   <b-avatar
                     class="d-inline-block profile-pic"
-                    variant="primary"
+                    variant="light"
                     :src="currentBiz.profile_picture"
                     square
                   ></b-avatar>
@@ -48,7 +48,7 @@
                     >
                       {{ $t("businessowner.New_Chat") }}</b-dropdown-item
                     >
-                    <b-dropdown-item
+                    <b-dropdown-item v-if="isPremium"
                       @click="newMessage({ newmsg: true, bulk: true })"
                     >
                       {{ $t("businessowner.New_Group_Chat") }}
@@ -73,7 +73,7 @@
                         <b-col class="mb-6 pb-6">
                           <input
                             v-model="searchQuery"
-                            class="form-control input-background"
+                            class="form-control input-background mb-2"
                             :placeholder="this.$t('general.Search_chat_list')"
                             @keypress.enter="
                               getChatList({
@@ -86,13 +86,7 @@
                       </b-row>
 
                       <div class="messages">
-                        <div v-if="loader" class="text-center">
-                          <b-spinner
-                            variant="primary"
-                            label="Spinning"
-                            class="centralizer"
-                          ></b-spinner>
-                        </div>
+                        
                         <div v-if="chatList.length > 0">
                           <b-row
                             v-for="(chat, index) in chatList"
@@ -125,9 +119,8 @@
                               <span style="display: inline-flex">
                                 <b-avatar
                                   class="d-inline-block profile-pic"
-                                  variant="primary"
+                                  variant="light"
                                   :src="chatListImage(chat)"
-                                  
                                 ></b-avatar>
 
                                 <h6 class="mt-2 d-inline-block ml-2">
@@ -163,7 +156,7 @@
                         <b-col class="mb-6 pb-6">
                           <input
                             v-model="searchQuery"
-                            class="form-control input-background"
+                            class="form-control input-background mb-2 "
                             :placeholder="$t('general.Search_chat_list')"
                             @keypress.enter="
                               getChatList({
@@ -176,13 +169,7 @@
                       </b-row>
 
                       <div class="messages">
-                        <div v-if="loader" class="text-center">
-                          <b-spinner
-                            variant="primary"
-                            label="Spinning"
-                            class="centralizer"
-                          ></b-spinner>
-                        </div>
+                        
                         <div v-if="chatList.length > 0">
                           <b-row
                             v-for="(chat, index) in chatList"
@@ -216,7 +203,7 @@
                               <span style="display: inline-flex">
                                 <b-avatar
                                   class="d-inline-block profile-pic"
-                                  variant="primary"
+                                  variant="light"
                                   :src="chatListImage(chat)"
                                   square
                                 ></b-avatar>
@@ -308,7 +295,7 @@
                             <span style="display: inline-flex">
                               <b-avatar
                                 class="d-inline-block profile-pic"
-                                variant="primary"
+                                variant="light"
                                 :src="chatListImage(chat)"
                                 square
                               ></b-avatar>
@@ -335,7 +322,7 @@
 
                       <!-- End Chats -->
                     </b-tab>
-                    <b-tab
+                    <b-tab  v-if="isPremium"
                       :title="$t('general.Groups')"
                       @click="getChatList({ type: 'group' })"
                     >
@@ -344,7 +331,7 @@
                         <b-col class="mb-6 pb-6">
                           <input
                             v-model="searchQuery"
-                            class="form-control input-background"
+                            class="form-control input-background mb-2"
                             :placeholder="$t('general.Search_chat_list')"
                             @keypress.enter="
                               getChatList({
@@ -359,7 +346,7 @@
                       <div class="messages">
                         <div v-if="loader" class="text-center">
                           <b-spinner
-                            variant="primary"
+                            variant="light"
                             label="Spinning"
                             class="centralizer"
                           ></b-spinner>
@@ -392,7 +379,7 @@
                               <span style="display: inline-flex">
                                 <b-avatar
                                   class="d-inline-block profile-pic"
-                                  variant="primary"
+                                  variant="light"
                                   :src="require('@/assets/default_group.png')"
                                   square
                                 ></b-avatar>
@@ -446,7 +433,8 @@
                   </b-col>
                   <b-col class="col-2" @click="info = true">
                     <b-avatar
-                      variant="primary"
+                      variant="light"
+                      :square="type == 'user' ? false : true"
                       :src="chatListImage(chatSelected)"
                       size="50"
                     ></b-avatar>
@@ -523,11 +511,10 @@
                   ></b-spinner>
                 </div>
                 <div v-else v-for="chat in chats" :key="chat.id">
-                  <!-- {{ chat }}<br /> -->
                   <div
                     v-if="
                       currentBizId != chat.sender_business_id &&
-                      currentBizId != chat.businessID
+                        currentBizId != chat.businessID
                     "
                   >
                     <b-row class="p-2">
@@ -541,6 +528,23 @@
                         ></p>
                         <br />
                         <p v-if="chat.message" class="msg-text mt-0 text">
+                          <span class="text-center float-right mt-n0">
+                            <b-dropdown
+                              variant="link"
+                              size="lg"
+                              toggle-class="text-decoration-none p-0"
+                              no-caret
+                              right
+                            >
+                              <template slot="button-content">
+                                <b><i class="fas fa-ellipsis-v"></i></b>
+                              </template>
+                              <b-dropdown-item 
+                              @click="deleteMessage(chat , chats , type)">
+                                Delete
+                              </b-dropdown-item>
+                            </b-dropdown>
+                          </span>
                           <span v-if="chat.attachment">
                             <img :src="chat.attachment" />
                             <!-- <br />
@@ -576,6 +580,24 @@
                           id="sent"
                           class="msg-text-sent text"
                         >
+                        <span class="text-center float-right mt-n0">
+                            <b-dropdown
+                              variant="link"
+                              size="lg"
+                              toggle-class="text-decoration-none p-0"
+                              no-caret
+                              right
+                            >
+                              <template slot="button-content">
+                                <b><i class="fas fa-ellipsis-v"></i></b>
+                              </template>
+                              <b-dropdown-item 
+                              @click="deleteMessage(chat , chats , type)">
+                                Delete 
+                              </b-dropdown-item>
+                            </b-dropdown>
+                          </span>
+                          
                           <span v-if="chat.attachment">
                             <img :src="chat.attachment" />
                             <!-- <br />
@@ -759,7 +781,7 @@
             <div class="info-bottom">
               <b-avatar
                 class="info-avatar"
-                variant="primary"
+                variant="light"
                 :src="chatSelected.logo_path"
                 size="200"
               ></b-avatar>
@@ -831,7 +853,7 @@
                       class="input-background"
                       style="width: 100%"
                       :placeholder="
-                        $t('businessowner.Type_the_name_of_person_or_Business')
+                        $t('general.Type_the_name_of_person_or_Business')
                       "
                       @keydown="onPressSearchNewChat"
                     ></b-form-input>
@@ -885,7 +907,7 @@
                                         >
                                           <b-avatar
                                             class="d-inline-block"
-                                            variant="primary"
+                                            variant="light"
                                             size="30"
                                             :src="biz.profile_picture"
                                           ></b-avatar>
@@ -898,6 +920,7 @@
                                   </td>
                                 </tr>
                               </div>
+
                               <hr />
                               <h5>{{ $t("general.Business") }}</h5>
                               <div v-if="allBusiness">
@@ -920,12 +943,12 @@
                                         >
                                           <b-avatar
                                             class="d-inline-block"
-                                            variant="primary"
+                                            variant="light"
                                             size="30"
                                             :src="
                                               getImage({
                                                 type: 'business',
-                                                image: chat.logo_path,
+                                                image: biz.logo_path,
                                               })
                                             "
                                           ></b-avatar>
@@ -938,6 +961,7 @@
                                   </td>
                                 </tr>
                               </div>
+
                               <hr />
                               <h5>{{ $t("general.Network") }}</h5>
                               <div v-if="allNetworks">
@@ -960,7 +984,7 @@
                                         >
                                           <b-avatar
                                             class="d-inline-block"
-                                            variant="primary"
+                                            variant="light"
                                             size="30"
                                             :src="biz.image"
                                           ></b-avatar>
@@ -973,6 +997,7 @@
                                   </td>
                                 </tr>
                               </div>
+
                               <hr />
                               <h5>{{ $t("general.Editors") }}</h5>
                               <div v-if="allEditors">
@@ -995,7 +1020,7 @@
                                         >
                                           <b-avatar
                                             class="d-inline-block"
-                                            variant="primary"
+                                            variant="light"
                                             size="30"
                                           ></b-avatar>
                                           <span class="bold">
@@ -1007,8 +1032,9 @@
                                   </td>
                                 </tr>
                               </div>
+
                               <hr />
-                              <h5>{{ $t("general.Members") }}</h5>
+                              <!-- <h5>{{ $t("general.Members") }}</h5>
                               <div v-if="allMembers">
                                 <tr
                                   v-for="(biz, index) in allMembers"
@@ -1040,7 +1066,7 @@
                                     </b-form-group>
                                   </td>
                                 </tr>
-                              </div>
+                              </div> -->
                               <hr />
                             </b-tab>
                             <b-tab
@@ -1094,7 +1120,7 @@
                                         >
                                           <b-avatar
                                             class="d-inline-block"
-                                            variant="primary"
+                                            variant="light"
                                             size="30"
                                           ></b-avatar>
                                           <span class="bold">
@@ -1106,6 +1132,7 @@
                                   </td>
                                 </tr>
                               </div>
+
                               <h2 v-else>{{ $t("general.No_data") }}</h2>
 
                               <!-- End Chats -->
@@ -1161,7 +1188,7 @@
                                         <!-- @input="selectedMember(elm)" -->
                                         <b-avatar
                                           class="d-inline-block"
-                                          variant="primary"
+                                          variant="light"
                                           size="30"
                                         ></b-avatar>
                                         <span class="bold">
@@ -1172,6 +1199,7 @@
                                   </td>
                                 </tr>
                               </div>
+
                               <h2 v-else>{{ $t("general.No_Business") }}</h2>
 
                               <!-- End Chats -->
@@ -1224,7 +1252,7 @@
                                         >
                                           <b-avatar
                                             class="d-inline-block"
-                                            variant="primary"
+                                            variant="light"
                                             size="30"
                                           ></b-avatar>
                                           <span class="bold">
@@ -1236,6 +1264,7 @@
                                   </td>
                                 </tr>
                               </div>
+
                               <h2 v-else>{{ $t("general.No_Network") }}</h2>
 
                               <!-- End Chats -->
@@ -1273,7 +1302,7 @@
                                         >
                                           <b-avatar
                                             class="d-inline-block"
-                                            variant="primary"
+                                            variant="light"
                                             size="30"
                                           ></b-avatar>
                                           <span class="bold">
@@ -1285,7 +1314,10 @@
                                   </td>
                                 </tr>
                               </div>
-                              <h2 v-else>{{ $t("general.No_Editor") }}</h2>
+
+                              <h2 v-else>
+                                {{ $t("general.No_Editor") }}
+                              </h2>
 
                               <!-- End Chats -->
                             </b-tab>
@@ -1324,7 +1356,7 @@
                                 <td>
                                   <b-avatar
                                     class="d-inline-block"
-                                    variant="primary"
+                                    variant="light"
                                     size="30"
                                     :src="
                                       getImage({
@@ -1353,7 +1385,7 @@
                                 <td>
                                   <b-avatar
                                     class="d-inline-block"
-                                    variant="primary"
+                                    variant="light"
                                     size="30"
                                     :src="
                                       getImage({
@@ -1382,7 +1414,7 @@
                                 <td>
                                   <b-avatar
                                     class="d-inline-block"
-                                    variant="primary"
+                                    variant="light"
                                     size="30"
                                     :src="
                                       getImage({
@@ -1434,7 +1466,7 @@
                 <b-col class="p-2">
                   <b-avatar
                     class="d-inline-block profile-pic"
-                    variant="primary"
+                    variant="light"
                     :src="currentBiz.profile_picture"
                     square
                   ></b-avatar>
@@ -1473,7 +1505,7 @@
                     >
                       {{ $t("businessowner.New_Chat") }}</b-dropdown-item
                     >
-                    <b-dropdown-item
+                    <b-dropdown-item v-if="isPremium"
                       @click="newMessage({ newmsg: true, bulk: true })"
                     >
                       {{ $t("businessowner.New_Group_Chat") }}
@@ -1498,7 +1530,7 @@
                         <b-col class="mb-6 pb-6">
                           <input
                             v-model="searchQuery"
-                            class="form-control input-background"
+                            class="form-control input-background mb-2"
                             :placeholder="this.$t('general.Search_chat_list')"
                             @keypress.enter="
                               getChatList({
@@ -1511,13 +1543,7 @@
                       </b-row>
 
                       <div class="messages">
-                        <div v-if="loader" class="text-center">
-                          <b-spinner
-                            variant="primary"
-                            label="Spinning"
-                            class="centralizer"
-                          ></b-spinner>
-                        </div>
+                       
                         <div v-if="chatList.length > 0">
                           <b-row
                             v-for="(chat, index) in chatList"
@@ -1546,13 +1572,11 @@
                               })
                             "
                           >
-                            <!-- <small class="small">{{ chat }}</small> -->
-
                             <b-col class="col-8">
                               <span style="display: inline-flex">
                                 <b-avatar
                                   class="d-inline-block profile-pic"
-                                  variant="primary"
+                                  variant="light"
                                   :src="chatListImage(chat)"
                                 ></b-avatar>
 
@@ -1588,13 +1612,13 @@
                       <b-row class="pa-6">
                         <b-col class="mb-6 pb-6">
                           <input
-                            v-model="searchQuery"
-                            class="form-control input-background"
+                            v-model="searchQueryBusiness"
+                            class="form-control input-background mb-2"
                             :placeholder="$t('general.Search_chat_list')"
                             @keypress.enter="
                               getChatList({
                                 type: 'business',
-                                keyword: searchQuery,
+                                keyword: searchQueryBusiness,
                               })
                             "
                           />
@@ -1642,7 +1666,7 @@
                               <span style="display: inline-flex">
                                 <b-avatar
                                   class="d-inline-block profile-pic"
-                                  variant="primary"
+                                  variant="light"
                                   :src="chatListImage(chat)"
                                   square
                                 ></b-avatar>
@@ -1679,13 +1703,13 @@
                       <b-row class="pa-6">
                         <b-col class="mb-6 pb-6">
                           <input
-                            v-model="searchQuery"
-                            class="form-control input-background"
+                            v-model="searchQueryNetwork"
+                            class="form-control input-background mb-2"
                             :placeholder="$t('general.Search_chat_list')"
                             @keypress.enter="
                               getChatList({
                                 type: 'network',
-                                keyword: searchQuery,
+                                keyword: searchQueryNetwork,
                               })
                             "
                           />
@@ -1693,15 +1717,9 @@
                       </b-row>
 
                       <div class="messages">
-                        <div v-if="loader" class="text-center mt-12 pt-12">
-                          <b-spinner
-                            variant="primary"
-                            label="Spinning"
-                            class="centralizer"
-                          ></b-spinner>
-                        </div>
+                        
                         <b-row
-                          v-else
+                      
                           v-for="(chat, index) in chatList"
                           :key="index"
                           :class="[
@@ -1728,12 +1746,11 @@
                             })
                           "
                         >
-                          <!-- {{ chat }} -->
                           <b-col class="col-8">
                             <span style="display: inline-flex">
                               <b-avatar
                                 class="d-inline-block profile-pic"
-                                variant="primary"
+                                variant="light"
                                 :src="chatListImage(chat)"
                                 square
                               ></b-avatar>
@@ -1760,7 +1777,7 @@
 
                       <!-- End Chats -->
                     </b-tab>
-                    <b-tab
+                    <b-tab v-if="isPremium"
                       :title="$t('general.Groups')"
                       @click="getChatList({ type: 'group' })"
                     >
@@ -1768,13 +1785,13 @@
                       <b-row class="pa-6">
                         <b-col class="mb-6 pb-6">
                           <input
-                            v-model="searchQuery"
-                            class="form-control input-background"
+                            v-model="searchQueryGroups"
+                            class="form-control input-background mb-2 "
                             :placeholder="$t('general.Search_chat_list')"
                             @keypress.enter="
                               getChatList({
                                 type: 'group',
-                                keyword: searchQuery,
+                                keyword: searchQueryGroups,
                               })
                             "
                           />
@@ -1782,13 +1799,7 @@
                       </b-row>
 
                       <div class="messages">
-                        <div v-if="loader" class="text-center">
-                          <b-spinner
-                            variant="primary"
-                            label="Spinning"
-                            class="centralizer"
-                          ></b-spinner>
-                        </div>
+                        
                         <div v-if="chatList.length > 0">
                           <b-row
                             v-for="(chat, index) in chatList"
@@ -1817,7 +1828,7 @@
                               <span style="display: inline-flex">
                                 <b-avatar
                                   class="d-inline-block profile-pic"
-                                  variant="primary"
+                                  variant="light"
                                   :src="require('@/assets/default_group.png')"
                                 ></b-avatar>
 
@@ -1858,7 +1869,8 @@
                 <b-row class="desk" v-if="chatSelected.active">
                   <b-col class="col-2" @click="info = true">
                     <b-avatar
-                      variant="primary"
+                      variant="light"
+                      :square="type == 'user' ? false : true"
                       :src="chatListImage(chatSelected)"
                       size="50"
                     ></b-avatar>
@@ -1927,11 +1939,10 @@
                   ></b-spinner>
                 </div>
                 <div v-else v-for="chat in chats" :key="chat.id">
-                  <!-- {{ chat }}<br /> -->
                   <div
                     v-if="
                       currentBizId != chat.sender_business_id &&
-                      currentBizId != chat.businessID
+                        currentBizId != chat.businessID
                     "
                   >
                     <b-row class="p-2">
@@ -1942,9 +1953,41 @@
                         <p
                           v-if="chat.attachment"
                           class="msg-text mt-0 text"
-                        ></p>
+                        >
+                        <span class="text-center float-right mt-n0">
+                            <b-dropdown
+                              variant="link"
+                              size="lg"
+                              toggle-class="text-decoration-none"
+                              no-caret
+                              right
+                            >
+                              <template slot="button-content">
+                                <b><i class="fas fa-ellipsis-v"></i></b>
+                              </template>
+                              <b-dropdown-item 
+                              @click="deleteMessage(chat , chats , type)">
+                                Delete
+                              </b-dropdown-item>
+                            </b-dropdown>
+                          </span>
+                        <!-- <i class="fa fa-ellipsis-v float-right mt-"></i></p> -->
                         <br />
                         <p v-if="chat.message" class="msg-text mt-0 text">
+                          <!-- <span class="text-center float-right mt-n2">
+                            <b-dropdown
+                              variant="link"
+                              size="lg"
+                              toggle-class="text-decoration-none"
+                              no-caret
+                              right
+                            >
+                              <template slot="button-content">
+                                <b><i class="fas fa-ellipsis-v"></i></b>
+                              </template>
+                              <b-dropdown-item @click="deleteMessage(chat , chats , type)">Delete</b-dropdown-item>
+                            </b-dropdown>
+                          </span> -->
                           <span v-if="chat.attachment">
                             <img :src="chat.attachment" />
                             <!-- <br />
@@ -1980,6 +2023,23 @@
                           id="sent"
                           class="msg-text-sent text"
                         >
+                        <span class="text-center float-right mt-n0">
+                            <b-dropdown
+                              variant="link"
+                              size="lg"
+                              toggle-class="text-decoration-none p-0"
+                              no-caret
+                              right
+                            > 
+                              <template slot="button-content">
+                                <b><i class="fas fa-ellipsis-v"></i></b>
+                              </template>
+                              <b-dropdown-item 
+                              @click="deleteMessage(chat , chats , type)">
+                                Delete 
+                              </b-dropdown-item>
+                            </b-dropdown>
+                          </span>
                           <span v-if="chat.attachment">
                             <img :src="chat.attachment" />
                             <!-- <br />
@@ -2171,7 +2231,7 @@
             <div class="info-bottom">
               <b-avatar
                 class="info-avatar"
-                variant="primary"
+                variant="light"
                 :src="chatSelected.logo_path"
                 size="200"
               ></b-avatar>
@@ -2234,9 +2294,7 @@
                       v-model="newSearchQuery"
                       class="input-background"
                       style="width: 100%"
-                      :placeholder="
-                        $t('businessowner.Type_the_name_of_person_or_Business')
-                      "
+                      :placeholder="$t('general.Type_the_name_of_person_or_Business')"
                       @input="onPressSearchNewChat"
                     ></b-form-input>
                     <br />
@@ -2262,6 +2320,27 @@
                             card
                           >
                             <b-tab :title="$t('general.All')" @click="getAll()">
+                              <!-- All Selection -->
+                              <b-row>
+                                <b-col>
+                                  <b-card>
+                                    <b-row class="text-center">
+                                      <b-col>
+                                        <b-form-group>
+                                          <b-form-radio-group
+                                            id="radio-group-1"
+                                            v-model="selectedselectOptionAll"
+                                            :options="selectOptionsAll"
+                                            name="radio-options"
+                                            @change="selectAllForAllTab"
+                                          ></b-form-radio-group>
+                                        </b-form-group>
+                                      </b-col>
+                                    </b-row>
+                                  </b-card>
+                                </b-col>
+                              </b-row>
+                              <!-- All Selection -->
                               <div v-if="loader" class="text-center">
                                 <b-spinner
                                   variant="primary"
@@ -2290,7 +2369,7 @@
                                         >
                                           <b-avatar
                                             class="d-inline-block"
-                                            variant="primary"
+                                            variant="light"
                                             size="30"
                                           ></b-avatar>
                                           <span class="bold">
@@ -2302,6 +2381,7 @@
                                   </td>
                                 </tr>
                               </div>
+
                               <hr />
                               <h5>{{ $t("general.Business") }}</h5>
                               <div v-if="allBusiness">
@@ -2324,7 +2404,7 @@
                                         >
                                           <b-avatar
                                             class="d-inline-block"
-                                            variant="primary"
+                                            variant="light"
                                             size="30"
                                           ></b-avatar>
                                           <span class="bold">
@@ -2336,6 +2416,7 @@
                                   </td>
                                 </tr>
                               </div>
+
                               <hr />
                               <h5>Network</h5>
                               <div v-if="allNetworks">
@@ -2358,7 +2439,7 @@
                                         >
                                           <b-avatar
                                             class="d-inline-block"
-                                            variant="primary"
+                                            variant="light"
                                             size="30"
                                           ></b-avatar>
                                           <span class="bold">
@@ -2370,11 +2451,12 @@
                                   </td>
                                 </tr>
                               </div>
+
                               <hr />
                               <h5>Editors</h5>
-                              <div v-if="allEditors">
-                                <tr
-                                  v-for="(biz, index) in allEditors"
+                              <div v-if="bizs.length">
+                                 <tr
+                                  v-for="(biz, index) in bizs"
                                   :key="index"
                                   class="p-2 message"
                                 >
@@ -2392,7 +2474,7 @@
                                         >
                                           <b-avatar
                                             class="d-inline-block"
-                                            variant="primary"
+                                            variant="light"
                                             size="30"
                                           ></b-avatar>
                                           <span class="bold">
@@ -2458,7 +2540,7 @@
                                         >
                                           <b-avatar
                                             class="d-inline-block"
-                                            variant="primary"
+                                            variant="light"
                                             size="30"
                                           ></b-avatar>
                                           <span class="bold">
@@ -2470,6 +2552,7 @@
                                   </td>
                                 </tr>
                               </div>
+
                               <h2 v-else>{{ $t("general.No_data") }}</h2>
 
                               <!-- End Chats -->
@@ -2525,7 +2608,7 @@
                                         <!-- @input="selectedMember(elm)" -->
                                         <b-avatar
                                           class="d-inline-block"
-                                          variant="primary"
+                                          variant="light"
                                           size="30"
                                         ></b-avatar>
                                         <span class="bold">
@@ -2536,6 +2619,7 @@
                                   </td>
                                 </tr>
                               </div>
+
                               <h2 v-else>{{ $t("general.No_Business") }}</h2>
 
                               <!-- End Chats -->
@@ -2588,7 +2672,7 @@
                                         >
                                           <b-avatar
                                             class="d-inline-block"
-                                            variant="primary"
+                                            variant="light"
                                             size="30"
                                           ></b-avatar>
                                           <span class="bold">
@@ -2600,6 +2684,7 @@
                                   </td>
                                 </tr>
                               </div>
+
                               <h2 v-else>{{ $t("general.No_Network") }}</h2>
 
                               <!-- End Chats -->
@@ -2609,6 +2694,31 @@
                               :title="$t('general.Editor')"
                               @click="getEditors()"
                             >
+
+                   
+                              <!-- All Selection -->
+                              <b-row>
+                                <b-col>
+                                  <b-card>
+                                    <b-row class="text-center">
+                                      <b-col>
+                                        <b-form-group>
+                                          <b-form-radio-group
+                                            id="radio-editor-1"
+                                            v-model="selectedselectOptionAll"
+                                            :options="selectOptionsAll"
+                                            name="radio-options-editor"
+                                            @change="selectAllForAllTab"
+                                          ></b-form-radio-group>
+                                        </b-form-group>
+                                      </b-col>
+                                    </b-row>
+                                  </b-card>
+                                </b-col>
+                              </b-row>
+
+                          
+
                               <div v-if="loader" class="text-center">
                                 <b-spinner
                                   variant="primary"
@@ -2637,7 +2747,7 @@
                                         >
                                           <b-avatar
                                             class="d-inline-block"
-                                            variant="primary"
+                                            variant="light"
                                             size="30"
                                           ></b-avatar>
                                           <span class="bold">
@@ -2649,6 +2759,7 @@
                                   </td>
                                 </tr>
                               </div>
+
                               <h2 v-else>{{ $t("general.No_Editor") }}</h2>
 
                               <!-- End Chats -->
@@ -2688,7 +2799,7 @@
                                 <td>
                                   <b-avatar
                                     class="d-inline-block"
-                                    variant="primary"
+                                    variant="light"
                                     size="30"
                                     :src="
                                       getImage({
@@ -2717,7 +2828,7 @@
                                 <td>
                                   <b-avatar
                                     class="d-inline-block"
-                                    variant="primary"
+                                    variant="light"
                                     size="30"
                                     :src="
                                       getImage({
@@ -2746,7 +2857,7 @@
                                 <td>
                                   <b-avatar
                                     class="d-inline-block"
-                                    variant="primary"
+                                    variant="light"
                                     size="30"
                                     :src="
                                       getImage({
@@ -2825,12 +2936,17 @@ import EmojiPicker from "vue-emoji-picker";
 import io from "socket.io-client";
 import moment from "moment";
 import _ from "lodash";
+import { isPremium } from '@/helpers';
 export default {
   components: {
     EmojiPicker,
   },
   data() {
+    
+    
     return {
+      props: ['chats'],
+      isPremium: isPremium(),
       groupAdminId: null,
       screenWidth: window.screen.width,
       screenX: 0,
@@ -2848,7 +2964,8 @@ export default {
         { text: "Following", value: "following" },
       ],
       selectedselectOption: "",
-
+      selectOptionsAll: [{ text: "All", value: "all" }],
+      selectedselectOptionAll: "",
       selectedBusiness: [],
       selectedPeople: [],
       selectedNetwork: [],
@@ -2893,6 +3010,9 @@ export default {
       text: "",
       selected: [],
       messages: null,
+      searchQueryBusiness: "",
+      searchQueryNetwork: "",
+      searchQueryGroups: "",
     };
   },
   watch: {
@@ -2929,6 +3049,11 @@ export default {
     chatId() {
       return this.$store.getters["businessChat/getSelectedChatId"];
     },
+
+    lastcreatedgroup() {
+      return this.$store.getters["businessChat/getlastcreatedgroup"];
+    },
+
     currentBizId() {
       return this.$store.getters["businessChat/getCurrentBizId"];
     },
@@ -2938,18 +3063,23 @@ export default {
     userInfo() {
       return this.$store.getters["businessChat/getUserInfo"];
     },
+
     bizs() {
       return this.$store.getters["businessChat/getBizs"];
     },
+
     allBizs() {
       return this.$store.getters["userChat/getBizs"];
     },
+
     users() {
       return this.$store.getters["userChat/getUsers"];
     },
+
     nets() {
       return this.$store.getters["userChat/getNets"];
     },
+
     chatList() {
       return this.$store.getters["businessChat/getChatList"];
     },
@@ -2958,9 +3088,11 @@ export default {
       // return this.$store.getters['userChat/getUser'];
       return this.$store.getters["auth/profilConnected"];
     },
+
     chats() {
       return this.$store.getters["businessChat/getChats"];
     },
+
     newChatLoader() {
       return this.$store.getters["userChat/getLoader"];
     },
@@ -3041,7 +3173,7 @@ export default {
     },
   },
   methods: {
-    onPressSearchNewChat: _.debounce(function (e) {
+    onPressSearchNewChat: _.debounce(function(e) {
       console.log("press...");
       this.getList(e);
     }, 1000),
@@ -3161,7 +3293,7 @@ export default {
         ? chat.network_editor_i_d.name
         : chat.business_editor_i_d
         ? chat.business_editor_i_d.name
-        : "Anonymous";
+        : this.$t("businessowner.me");
     },
     convert(bytes, decimals = 2) {
       if (bytes === 0) return "0 Bytes";
@@ -3174,6 +3306,7 @@ export default {
 
     selectedAllMulty(val) {
       console.log("new val:", val);
+      console.log(this.tabMemberType , "case here ")
       let selected = [];
       switch (this.tabMemberType) {
         case 1:
@@ -3251,10 +3384,73 @@ export default {
           }
           break;
 
+          case 4:
+
+          this.selectedEditor = [];
+          if (val == "all") {
+            this.bizs.map((biz) => {
+              this.selectedEditor.push(biz.id);
+            });
+          } else if (val == "follower") {
+            selected = this.bizs.filter((biz) => {
+              return biz.statusType === "follower";
+            });
+
+            
+            selected.map((elm) => {
+              this.selectedEditor.push(elm.id);
+              this.groupMembers.push({ type: elm.accountType, id: elm.id });
+            });
+          } else {
+            selected = this.bizs.filter((biz) => {
+              return biz.statusType === "following";
+            });
+            selected.map((elm) => {
+              this.selectedEditor.push(elm.id);
+              this.groupMembers.push({ type: elm.accountType, id: elm.id });
+            });
+          }
+          
+          break;
+
         default:
       }
     },
+    selectAllForAllTab(val) {
+    
+      this.selectedPeople = [];
+      if (val == "all") {
+        this.allUsers.map((biz) => {
+          this.selectedPeople.push(biz.id);
+        });
+      }
 
+      this.selectedBusiness = [];
+      if (val == "all") {
+        this.allBusiness.map((biz) => {
+          this.selectedBusiness.push(biz.id);
+        });
+      }
+
+      this.selectedNetwork = [];
+      if (val == "all") {
+        this.allNetworks.map((biz) => {
+          this.selectedNetwork.push(biz.id);
+        });
+      }
+
+      this.selectedEditor = [];
+      if (val == "all") {
+        this.allEditors.map((biz) => {
+          this.selectedEditor.push(biz.id);
+        });
+
+        this.bizs.map((biz) => {
+          this.selectedEditor.push(biz.id);
+        });
+          
+      }
+    },
     getAll() {
       this.getUsers();
       this.getNetworks();
@@ -3266,14 +3462,8 @@ export default {
       this.filePreview = false;
     },
     socketListenners() {
-      // this.socket.on("generalMessage", (data) => {
-      //   console.log("Received");
-      //   console.log(data);
-      //   this.messages.push(data);
-      // });
+
       this.socket.on("groupMessage", (data) => {
-        console.log("group message Received");
-        console.log(data);
         this.chats.push(data);
         this.formData.append("message", data.message);
 
@@ -3288,11 +3478,8 @@ export default {
         });
       });
       this.socket.on("privateMessage", (data) => {
-        console.log("Received");
-        console.log(data);
+    
         this.chats.push(data);
-        console.log(this.chats);
-
         this.formData.append("sender_business_id", data.sender_business_id);
         this.formData.append("message", data.message);
         this.formData.append("receiver_business_id", data.receiver_business_id);
@@ -3305,19 +3492,24 @@ export default {
           type: this.type,
         });
       });
-      console.log("listenning...");
     },
     async createGroup(receiver_business_id) {
-      await this.$store.dispatch("businessChat/CREATE_GROUP", {
-        groupName: this.groupName,
-        userID: this.selectedPeople.toString(),
-        businessID: this.selectedBusiness.toString(),
-        networkID: this.selectedNetwork.toString(),
-        businessEditorsID: this.selectedEditor.toString(),
-      });
-      console.log("chat id selected:", this.chatId);
+      await this.$store
+        .dispatch("businessChat/CREATE_GROUP", {
+          groupName: this.groupName,
+          userID: this.selectedPeople.toString(),
+          businessID: this.selectedBusiness.toString(),
+          networkID: this.selectedNetwork.toString(),
+          businessEditorsID: this.selectedEditor.toString(),
+        })
+        .then(() => {
+          this.selectedChat({
+            type: "group",
+            chat: this.lastcreatedgroup,
+            id: this.chatId,
+          });
+        });
       this.socket.emit("create-group", this.chatId);
-
       let sender_business_id = this.chatId;
       this.room = [
         sender_business_id,
@@ -3326,15 +3518,13 @@ export default {
         ...this.selectedNetwork,
         ...this.selectedEditor,
       ];
-      console.log("ROOMS: ", this.room);
       this.tabIndex = 3;
-      // this.getChatList({ type: "group" });
     },
+
     createRoom(receiver_business_id) {
-      // let sender_business_id = this.currentUser.user.id;
+   
       let sender_business_id = this.currentBizId;
       this.room = [receiver_business_id, sender_business_id];
-      console.log("ROOMS: ", this.room);
       this.socket.emit("create", this.room);
     },
     getCreatedAt(data) {
@@ -3342,7 +3532,6 @@ export default {
         return moment(data).format("ddd") + " " + moment(data).format("LT");
       } else {
         return moment(data).format("LT");
-        // return moment(data).fromNow();
       }
     },
     getList(keyword) {
@@ -3357,7 +3546,6 @@ export default {
     },
     getUserInfo() {
       this.$store.dispatch("networkChat/GET_USER_INFO").then(() => {
-        console.log("user info: ", this.userInfo);
       });
     },
     initFilter() {
@@ -3370,7 +3558,6 @@ export default {
     },
     getEditors(keyword) {
       this.initFilter();
-
       this.$store.dispatch("businessChat/GET_EDITORS", {
         keyword: keyword,
       });
@@ -3395,23 +3582,19 @@ export default {
           keyword: keyword,
         })
         .then(() => {
-          console.log("currentBiz: ", this.currentBiz);
+          
         })
         .catch(() => console.log("error"));
     },
     getChatList(data) {
-      // alert("Clicked!")
       this.type = data.type;
       this.chatSelected.active = false;
       this.newMsg = false;
-      console.log("tab type:", this.tabIndex);
-
       this.$store.dispatch("businessChat/GET_BIZS_CHAT_LIST", data);
       // this.scrollToBottom();
     },
 
     async histBizToBiz(data) {
-      console.log("search data:", data);
       if (data.type == "user") {
         await this.$store.dispatch("businessChat/GET_BIZ_TO_USER", data);
       } else if (data.type == "network") {
@@ -3436,10 +3619,8 @@ export default {
     },
     async histBizToGroup(receiverId) {
       await this.$store.dispatch("businessChat/GET_BIZ_TO_GROUP", receiverId);
-      console.log("group members: ++++>", this.groupMembers);
     },
     saveMessage(data) {
-      console.log("[DEBUG SAVE]", { data: data, type: this.type });
       if (this.type == "group") {
         this.$store.dispatch("businessChat/SAVE_GROUP_CHAT", {
           data: data,
@@ -3453,38 +3634,60 @@ export default {
           type: this.type,
         });
       }
+    }, 
+
+    async deleteMessage(data , chatList , type){
+
+      let dataChat = chatList.filter((b) => { return b.id !== data.id;});
+
+      if(type == "user"){
+        await this.$store.dispatch("businessChat/DELETE_USER_MESSAGE_BY_MESSAGEID", data)
+      }
+
+      if(type == "business"){
+        data.businessId = this.chatSelected.id;
+        await this.$store.dispatch("businessChat/DELETE_BUSINESS_MESSAGE_BY_MESSAGEID_BUSINESSID", data)
+      }
+
+      if(type == "network"){
+        data.networkId = this.chatSelected.id;
+        await this.$store.dispatch("businessChat/DELETE_NETWORK_MESSAGE_BY_MESSAGEID_NETWORKID", data)
+      }
+   
+      if(type == "group"){
+        data.groupId = this.chatSelected.id;
+        await this.$store.dispatch("businessChat/DELETE_GROUP_MESSAGE_BYGROUP_ID", data)
+      }
+
+      this.$store.dispatch("businessChat/DATA_UPDATE_C", dataChat)
+
     },
+  
     async selectedMultyChat() {
       this.$bvModal.hide("group-name");
-      console.log("type tabs:", this.tabIndex);
-
-      await this.createGroup();
-
-      // this.$store.commit("businessChat/setSelectedChatId", this.chatId);
-      // let receiver = { receiverID: this.chatId, keyword: null };
-      // this.histBizToUser(receiver);
+    
+      this.createGroup();
+      this.getChatList({ type: "group" });
       this.type = "group";
       this.newMsg = false;
-      // this.chatSelected = { active: true, clickedId: this.chatId, ...data.chat };
       this.chatSelected = {
         active: true,
         clickedId: this.chatId,
         groupName: this.groupName,
       };
 
-      this.getChatList({ type: "group" });
-      console.log("[DEBUG] Chat selected:", this.chatSelected);
-      // this.groupName = "";
-    },
-    selectedChat(data) {
-      console.log("[type tabs]", this.tabIndex);
-      // this.scrollToBottom();
-      console.log("[selected Chat]", data);
-      this.chatId = data.id;
+      this.selectedChat({
+        type: "group",
+        chat: this.lastcreatedgroup,
+        id: this.chatId,
+      });
 
+    },
+    selectedChat(data) {  
+      this.chatId = data.id;
       this.createRoom(data.id);
       if (this.type == "group") {
-        this.createGroup();
+        this.socket.emit("create-group", this.chatId);
       }
       this.rightSide = screenX > 930;
 
@@ -3511,14 +3714,14 @@ export default {
       this.groupAdminId = data.chat.admin_businessID
         ? data.chat.admin_businessID
         : null;
-      console.log("[DEBUG] Chat selected:", this.chatSelected);
+      
     },
 
     searchChatList(keyword) {
       this.$store
         .dispatch("userChat/GET_USERS", keyword)
         .then(() => {
-          console.log("->[Data logged]<-");
+          
         })
         .catch(() => console.log("error"));
     },
@@ -3550,15 +3753,7 @@ export default {
         receiver_id: this.chatId,
         attachment: this.file,
       });
-      console.log("SENT...", {
-        type: this.type,
-        message: this.input,
-        sender_business_id: this.currentBizId,
-        room: this.room,
-        receiver_business_id: this.chatSelected.id,
-        receiver_id: this.chatId,
-        // attachment: this.file,
-      });
+     
       this.input = "";
       this.dismissed();
       this.scrollToBottom();
@@ -3568,12 +3763,10 @@ export default {
       var membersBuiness = [];
       var membersNetwork = [];
       var membersEditor = [];
-      console.log("Group members:", this.groupMembers);
+      
       let data = {};
       if (this.groupMembers.length) {
-        // this.groupMembers.map((member)=>{
-        //   if()
-        // })
+        
         membersPeople = this.groupMembers.filter((member) => {
           return member.userID != null;
         });
@@ -3611,26 +3804,10 @@ export default {
           businessEditorID: membersEditorIds,
           message: this.input,
         };
-        // data = {
-        //   businessID: this.groupAdminId,
-        //   message: this.input,
-        //   attachment: this.file,
-        // };
+
       }
 
       this.socket.emit("groupMessage", data);
-
-      // this.socket.emit("groupMessage", {
-      //   type: this.type,
-      //   message: this.input,
-      //   sender_business_id: this.currentBiz.id,
-      //   room: this.room,
-      //   receiver_business_id: this.chatSelected.id,
-      //   receiver_id: this.chatId,
-      //   group_id: this.chatId,
-      // });
-
-      console.log("SENT...");
       this.input = "";
       this.dismissed();
       this.scrollToBottom();
@@ -3646,9 +3823,6 @@ export default {
       if (validImageTypes.includes(fileType)) {
         this.$bvModal.show("preview-file");
       }
-
-      console.log("file:", this.preview);
-      console.log("preview:", this.filePreview);
     },
 
     //---------------
@@ -3692,7 +3866,6 @@ export default {
         behavior: "smooth",
       });
       // this.$refs.feed.scrollTop = this.$refs.feed.scrollHeight - this.$refs.feed.clientHeight;
-      console.log(this.$refs.feed.scrollTop);
     },
   },
 };
@@ -3743,15 +3916,15 @@ export default {
 .chat-nav {
   position: relative;
   min-height: 70px;
-  border-right: 2px solid #ccc;
+  /* border-right: 2px solid #ccc; */
   width: 100%;
-  padding: 10px;
+  /* padding: 10px; */
 }
 
 .chats {
   /* border: 2px solid green; */
   height: 540px;
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
 }
 
@@ -3773,7 +3946,7 @@ h1 {
 }
 
 .messages {
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
   height: 500px;
 }
@@ -3931,7 +4104,7 @@ li {
     padding: 10px;
   }
   .messages-mobile {
-    overflow-y: scroll;
+    overflow-y: auto;
     overflow-x: hidden;
     height: 690px;
     border-top: none;

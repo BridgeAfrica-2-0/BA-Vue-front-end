@@ -1003,14 +1003,14 @@ export default {
   }
 }
 @media (max-width: 762px) {
-  .commentt[data-v-41fcb621] {
-    width: 118%;
+  .commentt{
+    width: 118% !important;
     border: solid 1 px #ccc;
     border-radius: 25 px;
     background-color: #ddd;
     height: 34 px;
     padding-left: 10 px;
-    margin-left: -7%;
+    margin-left: -7% !important;
   }
 
   .post-btn {
@@ -1055,6 +1055,7 @@ export default {
   height: 34px;
   padding-left: 10px;
   margin-left: 8%;
+  
 }
 .comment:focus {
   outline: none;

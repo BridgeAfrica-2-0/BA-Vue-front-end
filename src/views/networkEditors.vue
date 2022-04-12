@@ -65,7 +65,10 @@ import navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import Default from "@/components/businessf/tabs/owner/editors/defaultEditors";
 
-import Inbox from "@/components/businessf/tabs/owner/editors/inbox";
+// import Inbox from "@/components/businessf/tabs/owner/editors/inbox";
+
+import Inbox from "@/components/businessf/tabs/owner/networks/inbox";
+
 import General from "@/components/businessf/tabs/owner/editors/general";
 
 import LyTab from "@/tab/src/index.vue";
@@ -103,7 +106,7 @@ export default {
 
         { label: this.$t("network.Keyword_Alert"), icon: "" },
 
-        { label: this.$t("network.Settings"), icon: "" },
+        { label: this.$t("network.Blocking"), icon: "" },
       ],
 
       options: {

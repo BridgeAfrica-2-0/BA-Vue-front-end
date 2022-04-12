@@ -65,6 +65,7 @@ export default {
     return {
       perPage: 3,
       currentPage: 1,
+       foll_id: null,
       items: [
         { id: 1, first_name: "Fred", last_name: "Flintstone" },
         { id: 2, first_name: "Wilma", last_name: "Flintstone" },
@@ -80,6 +81,18 @@ export default {
   },
 
   methods: {
+
+      getTotalCommunity(){
+
+        
+         this.$store
+      .dispatch("profile/Tcommunity", this.foll_id)
+      .then((response) => {})
+      .catch((error) => {
+        console.log({ error: error });
+      });
+    },
+
 
     	nFormatter(num) {
 				if (num >= 1000000000) {
@@ -134,6 +147,9 @@ export default {
   mounted() {
       this.isLoading = true;
 
+        this.foll_id = this.$route.params.id ? this.$route.params.id : '';
+  
+    this.getTotalCommunity();
      
     console.log("Load User Profile Community start+++++++");
     this.community();

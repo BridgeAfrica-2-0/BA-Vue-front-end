@@ -6,9 +6,9 @@
 
         <comunitiDashboard />
 
-        <br />
+        <br />    
 
-        <b-card>
+        <b-card  v-if="!isPremium">
           <div class="text-center">
             <span class="username text-center mb-3">
               <b> {{ $t("businessowner.Upgrade_Your_Business_Account") }} </b>
@@ -58,6 +58,7 @@ import Intro from "../intro";
 import comunitiDashboard from "./comunitiDashboard";
 //import Personalise from "./personalise";
 import Post from "../ownerPost";
+ import { isPremium } from '@/helpers';
 export default {
   name: "posts",
   components: {
@@ -67,6 +68,13 @@ export default {
     // Personalise,
     Post,
   },
+
+  data() {
+      return {
+        isPremium: isPremium(),
+      }
+      
+      }
 };
 </script>
 

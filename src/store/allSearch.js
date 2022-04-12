@@ -11,7 +11,7 @@ export default {
 
         loader: false,
         success: false,
-
+        suggestedKeyword:[],
         keyword: null,
         location: null,
     },
@@ -51,6 +51,12 @@ export default {
         setKeyword(state, data) {
             state.keyword = data;
         },
+
+
+        setSuggestedKeyword(state, data) {
+           
+            state.suggestedKeyword=data;
+        },  
 
         setLocation(state, data) {
             state.location = data;

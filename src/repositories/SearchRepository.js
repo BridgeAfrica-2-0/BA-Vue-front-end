@@ -67,6 +67,30 @@ class Repository {
     }
   }
 
+
+  async sugesstion(keyword) {
+    try {
+      
+     
+
+    
+      
+    let url=`visitor/search/suggested-keyword?keyword=${keyword}`;
+  
+      const response = await axios.get(url)
+      return {
+        success: (response.data.data) ? true : false,
+        data: (response.data.data) ? response.data.data : []
+      }
+
+    } catch (error) {
+      return {
+        success: false,
+        data: error.response.data.message
+      }
+    }
+  }
+
   async findPostByBuisness(credentials) {
     try {
       const { page, data } = credentials
@@ -119,7 +143,7 @@ class Repository {
   }
 
 }
-
+      
 export default new Repository()
 
 

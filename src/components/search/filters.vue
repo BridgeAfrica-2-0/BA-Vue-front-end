@@ -41,6 +41,28 @@
             {{item.category}}
         </b-badge>
 
+  
+
+         <span v-if="suggestedKeyword.length">
+          <h6 class="bold">{{ $t("search.suggested_keywords") }}</h6>
+          <b-form-radio
+            v-for="(filter, i) in suggestedKeyword.slice(0, 4)"
+            :key="i.value"
+            v-model="searchkeyword"
+            :value="filter.id"
+            @change="changesearchkeyword(filter)"
+            name="sub-filters"
+            class="m-1 br-3"
+          >
+            {{ filter.suggested_keyword }}
+          </b-form-radio>
+
+          <!-- <b-link v-b-modal="'myModalll'">{{ $t("search.See_all") }}</b-link> -->
+          <hr />
+        </span>
+
+        
+
         <span v-if="activateMatching && !loading && !categoryRendering.length">Not data found</span>
       </div>
 
@@ -724,7 +746,7 @@ export default {
         this.loading = true
         const response = await this.$repository.search.matching(value.name);
 
-        if (response.success){
+        if (response.success){ 
             this.matchingCategory = response.data.map((item) => { 
 
               const sub = item.sub_category.map(c => ({ ...c, cat_id: item.id}))
@@ -741,6 +763,14 @@ export default {
         }
       }
     },
+
+
+
+
+     
+
+
+
 
     nameOfCategory: function(value){
 
@@ -961,6 +991,7 @@ export default {
       showMore: false,
       // [Edouard] data
       nameOfCategory:null,
+      searchkeyword:'',
       distance: "",
       selected_sub_cat: [],
       newCategories: [],
@@ -1821,6 +1852,10 @@ export default {
       return this.$store.getters["auth/neigbourhoods"];
     },
 
+     suggestedKeyword() {
+      return this.$store.state.allSearch.suggestedKeyword;
+    },
+
 
  cities() {
     
@@ -1903,6 +1938,11 @@ return nei;
         this.matchingCategory = this.matchingCategory.map(item => {
           return (item.id === cat.id) ? {...item, actived: true} : {...item, actived: false}
         })
+    },
+
+
+    changesearchkeyword(keyword){
+    this.$emit('updateSearchKeyword', keyword.suggested_keyword)
     },
 
     resetFilters(restName) {

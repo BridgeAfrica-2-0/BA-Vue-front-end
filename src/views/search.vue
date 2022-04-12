@@ -178,6 +178,7 @@
               v-bind:Selectedparentcategory="Selectedparentcategory"
               v-bind:categoryNameSelected="categoryName"
               @onFinByCategory="getCategory"
+               @updateSearchKeyword="updateSearchKeyword"
               :activateMatching="activateMatching"
             />
 
@@ -318,6 +319,7 @@
               v-bind:Selectedparentcategory="Selectedparentcategory"
               v-bind:categoryNameSelected="categoryName"
               @onFinByCategory="getCategory"
+                @updateSearchKeyword="updateSearchKeyword"
               :activateMatching="activateMatching"
             />
           </div>
@@ -1678,6 +1680,8 @@ export default {
       immediate: true,
       deep: true,
       handler(newValue, oldValue) {
+
+        this.activateSuggestion(newValue.keyword);
        
         if(this.selectedId==0){   
         this.$store.commit("allSearch/setKeyword", newValue.keyword); 
@@ -1740,6 +1744,32 @@ export default {
       }
       
     },
+
+
+
+updateSearchKeyword(keyword){
+    console.log(keyword);
+    this.searchParams.keyword=keyword;
+},
+
+
+      activateSuggestion: async function(value){
+      if (value){
+     
+        
+      
+        const response = await this.$repository.search.sugesstion(value);
+
+        if (response.success){ 
+          console.log(response.data);
+            
+            this.$store.commit("allSearch/setSuggestedKeyword", response.data); 
+            
+        }
+      }
+      },
+
+
 
     async getAuth() {
       const response = await this.$repository.share.WhoIsConnect({

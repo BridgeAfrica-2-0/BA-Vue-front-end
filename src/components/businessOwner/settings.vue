@@ -16,9 +16,9 @@
         <General />
       </div>
 
-      <div class="mt-3 d-block d-md-none" v-if="seetings_id == '4'">
+      <!-- <div class="mt-3 d-block d-md-none" v-if="seetings_id == '4'">
         <Website />
-      </div>
+      </div> -->
 
       <div class="mt-3 d-block d-md-none" v-if="seetings_id == '3'">
         <Payment />
@@ -32,7 +32,7 @@
         <Info />
       </div>
 
-      <div class="mt-3 d-block d-md-none" v-if="seetings_id == '5'">
+      <div class="mt-3 d-block d-md-none" v-if="seetings_id == '4'">
         <Blocking />
       </div>
     </div>
@@ -89,9 +89,9 @@
                 <b-card-text> <Payment /> </b-card-text
               ></b-tab>
 
-              <b-tab :title="$t('businessowner.Account_Type')">
+              <!-- <b-tab :title="$t('businessowner.Account_Type')">
                 <b-card-text> <Website /> </b-card-text
-              ></b-tab>
+              ></b-tab> -->
               <b-tab :title="$t('businessowner.Blocking')">
                 <b-card-text> <Blocking /> </b-card-text
               ></b-tab>
@@ -115,7 +115,7 @@ import Roles from "@/components/businessOwner/settings/roles";
 
 import Info from "@/components/businessOwner/settings/info";
 
-import Website from "@/components/businessOwner/settings/website";
+//import Website from "@/components/businessOwner/settings/website";
 
 import Payment from "@/components/businessOwner/settings/payment";
 
@@ -173,7 +173,7 @@ export default {
     LyTab,
     Insight,
     Info,
-    Website,
+   // Website,
     Payment,
     Blocking,
   },
@@ -191,7 +191,7 @@ export default {
         { label: "Business Info" },
         { label: "Business Roles" },
         { label: "payment " },
-        { label: "Account Type" },
+       
 
         { label: "Blocking" },
       ],

@@ -33,11 +33,9 @@
                   <h5 class="m-0 mt-2 bold username d-inline-block ml-2">
                    
 
-                    <router-link
-                        :to="'/profile/'+editor.user_id"
-                      >
+                    <router-link :to="'/profile/'+editor.user_id" >
                           {{ editor.fullname }}
-                      </router-link>
+                      </router-link>      
 
                   </h5>
                 </span>
@@ -105,7 +103,7 @@
                    
 
                     <router-link
-                        :to="'/profile/'+editor.user_id"
+                        :to="'/business/'+editor.user_id"
                       >
                           {{ editor.fullname }}
                       </router-link>
@@ -339,7 +337,7 @@ export default {
     DeclineRequest: function(user_id, index ){
       this.loading = true;
       console.log('user_id: ', user_id);
-      this.axios.get("network/"+this.url+"/members/business/request/decline/"+user_id)
+      this.axios.get("network/"+this.url+"/members/request/decline/"+user_id)
       .then(() => {
           
 

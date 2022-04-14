@@ -1745,11 +1745,24 @@ export default {
       
     },
 
-
+ 
 
 updateSearchKeyword(keyword){
-    console.log(keyword);
-    this.searchParams.keyword=keyword;
+   console.log(keyword);
+   this.searchParams.keyword=keyword;
+  if(this.selectedId == 0){
+   this.getKeyword()
+  }else if(this.selectedId == 1){
+    this.onFindBusiness()
+  }else if(this.selectedId==3){
+
+    this.searchNetworks()
+  }else if(this.selectedId == 4){
+    this.searchProducts({})
+  }
+
+
+    
 },
 
 

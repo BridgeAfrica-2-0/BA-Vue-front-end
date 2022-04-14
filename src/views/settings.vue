@@ -23,6 +23,11 @@
                   </b-row>
                 </b-card-text>
               </b-tab>
+
+             <b-tab :title="$t('businessowner.Account_Type')">
+                <b-card-text> <Website /> </b-card-text
+              ></b-tab> 
+
               <b-tab :title="$t('settings.General')">
                 <b-card-text class="mt-3">
                   <b-row>
@@ -459,6 +464,7 @@ import SettingsNotifications from '@/components/SettingsNotifications.vue';
 import Payment from "@/components/owner/settings/payment";
 import Blocking from "@/components/owner/settings/blocking";
 import Delete from "@/components/owner/settings/delete";
+import Website from "@/components/owner/settings/website";
 import VuePassword from 'vue-password';
 import VuePhoneNumberInput from "vue-phone-number-input";
 
@@ -469,6 +475,7 @@ export default {
     SettingsNotifications,
     Payment,
     Blocking,
+    Website,
     VuePassword,
     Delete,
     VuePhoneNumberInput

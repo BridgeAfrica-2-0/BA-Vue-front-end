@@ -548,7 +548,7 @@
       },
       createProduct() {  
  
-        if(!this.isPremium && this.products.data.length <=10){
+        if(!this.isPremium && this.products.data.length >10){
              this.flashMessage.show({
               status: 'success',
               

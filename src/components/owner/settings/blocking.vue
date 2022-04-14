@@ -27,7 +27,7 @@
             
             <span class="mr-auto">
               <b-avatar
-                variant="primary"
+                variant="light"
                 :text="blockuser.name.charAt(0)"
                 :src="blockuser.profile_picture"
                 class="mr-3"
@@ -35,7 +35,7 @@
               ></b-avatar>
             {{ blockuser.name }}
             </span>
-            <span class="mr-auto" @click="UnblockBlockUser(blockuser, 'user')">
+            <span class="float-right" @click="UnblockBlockUser(blockuser, 'user')">
               <b-link href="#">{{ $t("settings.Unblock") }}</b-link>
             </span>
           </b-list>
@@ -43,7 +43,7 @@
       </b-list-group>
     </b-container>
     <b-container v-else>
-      <b-card bg-variant="white" text-variant="black" class="text-center">
+      <b-card  bg-variant="white" text-variant="black" class="text-center mb-1">
         <b-card-text
           >{{ $t("settings.No_Blocked_User_Available") }}.</b-card-text
         >
@@ -86,7 +86,7 @@
       </b-list-group>
     </b-container>
     <b-container v-else>
-      <b-card bg-variant="white" text-variant="black" class="text-center">
+      <b-card bg-variant="white" text-variant="black" class="text-center mt-2">
         <b-card-text class="font-mobile-14">{{ $t("settings.No_Blocked_Business_Available") }}.</b-card-text>
       </b-card>
     </b-container>
@@ -118,7 +118,7 @@
       </b-list-group>
     </b-container>
     <b-container v-else>
-      <b-card bg-variant="white" text-variant="black" class="text-center">
+      <b-card bg-variant="white" text-variant="black" class="text-center mt-2">
         <b-card-text class="font-mobile-14">{{ $t("settings.No_Blocked_Network_Available") }}.</b-card-text>
       </b-card>
     </b-container>

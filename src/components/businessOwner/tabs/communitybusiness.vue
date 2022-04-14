@@ -240,6 +240,17 @@ export default {
       };
 
 
+ this.$confirm(
+        {
+          message: `Are you sure?`,
+          button: {
+            no: 'No',
+            yes: 'Yes'
+          },
+        
+          callback: confirm => {
+            if (confirm) {
+      
 
       
       // this.$store.dispatch("profile/Block", {
@@ -273,6 +284,8 @@ export default {
           message: "Unable to blocked " + dataInfo.refernce
         });
       });
+
+            }}})
     },
 
     gotoBusiness(id) {

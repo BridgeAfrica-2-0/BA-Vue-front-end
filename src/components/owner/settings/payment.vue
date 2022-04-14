@@ -72,7 +72,7 @@
               ></b-form-radio>
             </div>
           </div>
-          <div class="my-4 operator">
+          <!-- <div class="my-4 operator">
             <div class="operator-img-box">
               <img
                 :src="require('@/assets/img/payment/expressU.jpg')"
@@ -92,7 +92,7 @@
                 class="operator-select"
               ></b-form-radio>
             </div>
-          </div>
+          </div> -->
 
           <div class="row p-2">
             <div class="col">

@@ -76,8 +76,8 @@
       </p>
     </b-card>
     <b-row>
-      <b-col col="12">
-        <infinite-loading @infinite="infiniteHandler" ref="infiniteLoading">
+      <b-col cols="12">
+        <infinite-loading @infinite="infiniteHandler" ref="infiniteLoading"   :identifier="infiniteId">
           <div class="text-red" slot="no-more">{{ $t('general.No_More_Request') }}</div>
           <div class="text-red" slot="no-results">{{ $t('general.No_More_Request') }}</div>
         </infinite-loading>
@@ -101,7 +101,7 @@ export default {
       filter: "0",
       filterData: false,
       spinner: false,
-
+      infiniteId:1,
       currentPage: 1,
       currentIndex: -1,
       feedbacks: [],
@@ -149,11 +149,18 @@ export default {
       this.loading = true;
       this.feedbacks = [];
       this.filterData
+
+
+         this.currentPage = 1;
+        this.$refs.infiniteLoading.attemptLoad();
+        
   
-      this.$nextTick(() => {
-        this.currentPage = 1;
-        this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
-      });
+      // this.$nextTick(() => {
+      //   this.currentPage = 1;
+
+      //   this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
+      
+      // });
     },
     infiniteHandler($state) {
 
@@ -208,14 +215,23 @@ export default {
       formData.append('description', this.feedbackForm.description);
       console.log('title', this.feedbackForm.title);
       console.log('description', this.feedbackForm.description);
-      this.axios.post("network/"+this.url+"/feedback/create", formData)
+      this.axios.post("network/"+this.url+"/feedback/create", formData)   
       .then(() => {
         this.feedbacks = [];
-        this.$nextTick(() => {
-          this.page = 0;
-          this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
-        });
-        console.log('ohh yeah');
+
+        
+        this.currentPage = 1;
+        this.$refs.infiniteLoading.attemptLoad();
+      
+      
+
+        // this.$nextTick(() => {
+        //   this.page = 0;
+        //   this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
+
+           
+        // });
+  
         this.spinner = false;
         this.flashMessage.show({
           status: "success",

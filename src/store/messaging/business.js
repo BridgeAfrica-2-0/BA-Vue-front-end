@@ -15,7 +15,7 @@ export default {
         chatList: [],
         groupMembers: [],
         community: [],
-        lastcreatedgroup:{},
+        lastcreatedgroup: {},
         type: 2,
         selectedChat: null,
         selectedChatId: null,
@@ -76,7 +76,7 @@ export default {
         },
 
 
-        
+
 
         getSelectedChat(state) {
             return state.selectedChat;
@@ -134,10 +134,10 @@ export default {
             state.selectedChatId = data
         },
 
-        lastCreatedGroup(state, data){
-           
+        lastCreatedGroup(state, data) {
+
             state.lastcreatedgroup = data
-             
+
         },
         setSelectedChat(state, data) {
             state.selectedChat = data
@@ -224,10 +224,10 @@ export default {
         },
 
         // ---------------
-         async  CREATE_GROUP({ commit, state }, data) {
+        async CREATE_GROUP({ commit, state }, data) {
             console.log("group data:", data);
             commit("setLoader", true);
-          await  axios.post(`/group/create/business/${state.currentBizId}`, data)
+            await axios.post(`/group/create/business/${state.currentBizId}`, data)
                 .then((res) => {
                     commit("setLoader", false);
                     commit("setSelectedChatId", res.data.data.groupID);
@@ -250,9 +250,9 @@ export default {
             let keyword = data.keyword ? '/' + data.keyword : ''
 
             // await axios.get(`group/list/businesses/${state.currentBizId + keyword }`)
-            await axios.get(`group/list/admin/business/${state.currentBizId + keyword }`)
+            await axios.get(`group/list/admin/business/${state.currentBizId + keyword}`)
 
-            .then((res) => {
+                .then((res) => {
                     commit("setLoader", false);
                     console.log("Business GROUPS: ", res.data.data);
                     commit("setChatList", res.data.data ? res.data.data : {
@@ -281,7 +281,7 @@ export default {
                     commit("setLoader", false);
                     console.log(err);
                 })
-                // commit("setCurrentBiz", rootGetters['auth/profilConnected']);
+            // commit("setCurrentBiz", rootGetters['auth/profilConnected']);
 
         },
         async GET_GROUP_MEMBERS({ commit, state }, data) {
@@ -359,14 +359,14 @@ export default {
                     commit("setLoader", false);
                     console.log(err);
                 })
-                // axios.get(`/business/role/editor/${state.currentBizId}${keyword}`)
-                //     .then((res) => {
-                //         let result = res.data.data
-                //         result.map((editor) => {
-                //             editors.push({ accountType: 'editor', ...editor })
-                //         })
-                //         console.log("editors", editors);
-                //     })
+            // axios.get(`/business/role/editor/${state.currentBizId}${keyword}`)
+            //     .then((res) => {
+            //         let result = res.data.data
+            //         result.map((editor) => {
+            //             editors.push({ accountType: 'editor', ...editor })
+            //         })
+            //         console.log("editors", editors);
+            //     })
 
         },
 
@@ -376,7 +376,7 @@ export default {
 
             commit("setLoader", true);
             let keyword = data.keyword ? '/' + data.keyword : ''
-            return axios.get(`/business-community/people-follower/${state.currentBizId+keyword}`)
+            return axios.get(`/business-community/people-follower/${state.currentBizId + keyword}`)
                 .then((res) => {
                     commit("setLoader", false);
                     let users = res.data.data.data
@@ -386,7 +386,7 @@ export default {
                         })
                     }
 
-                    axios.get(`/business-community/people-following/${state.currentBizId+keyword}`)
+                    axios.get(`/business-community/people-following/${state.currentBizId + keyword}`)
                         .then((res1) => {
                             commit("setLoader", false);
 
@@ -413,7 +413,7 @@ export default {
 
             commit("setLoader", true);
             let keyword = data.keyword ? '/' + data.keyword : ''
-            return axios.get(`/business-community/network-follower/${state.currentBizId+keyword}`)
+            return axios.get(`/business-community/network-follower/${state.currentBizId + keyword}`)
                 .then((res) => {
                     commit("setLoader", false);
 
@@ -424,14 +424,14 @@ export default {
                         })
                     }
 
-                    axios.get(`/business-community/network-following/${state.currentBizId+keyword}`)
+                    axios.get(`/business-community/network-following/${state.currentBizId + keyword}`)
                         .then((res1) => {
                             commit("setLoader", false);
                             if (res1.data.data.data.length > 0) {
                                 res1.data.data.data.map((elm) => {
-                                        state.networks.push({ statusType: "following", ...elm })
-                                    })
-                                    // state.businesses.push({ statusType: "following", ...res1.data.data.data })
+                                    state.networks.push({ statusType: "following", ...elm })
+                                })
+                                // state.businesses.push({ statusType: "following", ...res1.data.data.data })
                             }
 
                             commit("setBizs", state.networks);
@@ -456,7 +456,7 @@ export default {
 
             let keyword = data.keyword ? '/' + data.keyword : ''
 
-            await axios.get(`/business-community/business-follower/${state.currentBizId+keyword}`)
+            await axios.get(`/business-community/business-follower/${state.currentBizId + keyword}`)
                 .then((res) => {
                     let business = res.data.data.data
                     if (business.length > 0) {
@@ -465,7 +465,7 @@ export default {
                         })
 
                     }
-                    axios.get(`/business-community/business-following/${state.currentBizId+keyword}`)
+                    axios.get(`/business-community/business-following/${state.currentBizId + keyword}`)
                         .then((res1) => {
                             commit("setLoader", false);
                             if (res1.data.data.data.length > 0) {
@@ -497,7 +497,7 @@ export default {
                 .then((res) => {
                     commit("setLoader", false);
                     let bizs = res.data.data
-                        // console.log('businesses +++:', bizs)
+                    // console.log('businesses +++:', bizs)
 
                     let curBiz = bizs.filter((biz) => {
                         return state.currentBizId == biz.id
@@ -510,23 +510,23 @@ export default {
                     commit("setLoader", false);
                     console.log(err);
                 })
-                // commit("setCurrentBiz", rootGetters['auth/profilConnected']);
+            // commit("setCurrentBiz", rootGetters['auth/profilConnected']);
 
         },
 
         async GET_EDITORS({ commit, state }) {
             commit("setBizs", []);
             commit("setLoader", true);
-            
+
             let render = []
 
             await axios.get(`/business/role/editor/${state.currentBizId}`)
                 .then((res) => {
                     commit("setLoader", false);
                     let editor = res.data.data
-                    
+
                     console.log(editor)
-                    
+
                     if (editor.length > 0) {
                         editor.map((elm) => {
                             render.push({ accountType: "editor", ...elm })
@@ -535,14 +535,14 @@ export default {
                     }
 
                     console.log("editor:", render);
-                    
+
                     commit("setBizs", render);
                 })
                 .catch((err) => {
                     commit("setLoader", false);
                     console.log(err);
                 })
-                // commit("setCurrentBiz", rootGetters['auth/profilConnected']);
+            // commit("setCurrentBiz", rootGetters['auth/profilConnected']);
 
         },
 
@@ -574,7 +574,7 @@ export default {
                         });
                     })
             } else {
-                axios.get(`group/list/admin/business/${state.currentBizId }`)
+                axios.get(`group/list/admin/business/${state.currentBizId}`)
                     .then((res) => {
                         console.log("Business GROUPS: ", res.data.data);
                         commit("setChatList", res.data.data ? res.data.data : {
@@ -589,7 +589,7 @@ export default {
             let keyword = data.keyword ? '/' + data.keyword : ''
 
             if (data.type == 'user') {
-                axios.get(`/messages/businessUser/${state.currentBizId+keyword}`)
+                axios.get(`/messages/businessUser/${state.currentBizId + keyword}`)
                     .then((res) => {
                         commit("setLoader", false);
                         console.log("business chat list: ", res.data.data);
@@ -628,7 +628,7 @@ export default {
                         console.log(err);
                     })
             } else {
-                axios.get(`group/list/admin/business/${state.currentBizId + keyword }`)
+                axios.get(`group/list/admin/business/${state.currentBizId + keyword}`)
                     .then((res) => {
                         commit("setLoader", false);
                         console.log("Business GROUPS: ", res.data.data);
@@ -702,10 +702,10 @@ export default {
             if (type == 'business') {
                 if (exec < 1) {
                     axios.post(`/messages/BusinesstoBusiness`, payload, {
-                            headers: {
-                                'Content-Type': 'multipart/form-data'
-                            }
-                        })
+                        headers: {
+                            'Content-Type': 'multipart/form-data'
+                        }
+                    })
                         .then((res) => {
                             exec += 1
                             console.log("Message saved...", res.data.data);
@@ -717,10 +717,10 @@ export default {
             } else if (type == 'user') {
                 if (exec < 1) {
                     axios.post(`/messages/BusinesstoUser`, payload, {
-                            headers: {
-                                'Content-Type': 'multipart/form-data'
-                            }
-                        })
+                        headers: {
+                            'Content-Type': 'multipart/form-data'
+                        }
+                    })
                         .then((res) => {
                             exec += 1
 
@@ -766,10 +766,10 @@ export default {
             let sender_id = data.sender_id
 
             return axios.post(`/group/${group_id}/business/${sender_id}/admin`, payload, {
-                    headers: {
-                        'Content-Type': 'multipart/form-data'
-                    }
-                })
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
                 .then((res) => {
                     console.log("Message saved...", res.data.data);
                 })
@@ -853,7 +853,7 @@ export default {
             console.log("[DEBUG]: ", data);
             commit("setChats", data);
             commit("setLoader", false);
-           
+
         },
         async DELETE_USER_MESSAGE_BY_MESSAGEID({ commit, state, dispatch }, data) {
             commit("setLoader", true);
@@ -910,15 +910,64 @@ export default {
             let businessId = data.business_admin_id
 
             await axios.delete(`group/${groupId}/message/${messageId}/business/${businessId}`)
-            .then((res) => {
+                .then((res) => {
 
-                // dispatch("DELETE_GROUP_MESSAGE_BYGROUP_ID")
-                commit("setLoader", false);
-            })
-            .catch((err) => {
-                commit("setLoader", false);
-                console.log(err);
-            })
+                    // dispatch("DELETE_GROUP_MESSAGE_BYGROUP_ID")
+                    commit("setLoader", false);
+                })
+                .catch((err) => {
+                    commit("setLoader", false);
+                    console.log(err);
+                })
+        },
+
+        async DELETE_BUSINESS({ commit, state, dispatch }, data) {
+
+            commit("setLoader", true);
+            console.log("[DEBUG]: DELETE_BUSINESS", data);
+
+            const chatData = data.data
+            const typeData = data.type
+
+            var urlDelte = "";
+
+            switch (data.type.type) {
+
+                case "user":
+                    urlDelte = `messages/businessOwner/${typeData.chat.sender_business_id}/business/${typeData.id}/chat`
+                    break;
+
+                case "business":
+                    urlDelte = `messages/businessOwner/${typeData.chat.sender_business_id}/business/${typeData.id}/chat`
+                    break;
+                case "network":
+                    urlDelte = `messages/businessOwner/${typeData.chat.sender_business_id}/business/${typeData.id}/chat`
+                    break;
+
+
+                // case "business":
+                //         urlDelte = `messages/businessOwner/${typeData.sender_business_id}/business/${data.id}/chat`
+                //         break;
+
+                default:
+                    urlDelte = ""
+                    break;
+            }
+
+            if(data.type.type != "group"){
+
+                commit("setChatList", chatData);
+                await axios.delete(urlDelte)
+                    .then((res) => {
+                        commit("setChatList", chatData);
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    })
+
+            }
+            
+
         },
 
     }

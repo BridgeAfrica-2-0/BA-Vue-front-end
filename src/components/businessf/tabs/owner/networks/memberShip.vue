@@ -486,11 +486,7 @@ f-right {
   margin-bottom: 10px;
 }
 @media only screen and (min-width: 1200px) {
-  .btn {
-    width: 123px;
-    height: 38px;
-    font-size: 14px;
-  }
+
   .center {
     text-align: right;
   }
@@ -502,11 +498,11 @@ f-right {
   }
   .btn-2 {
     margin-left: 0px;
-    width: 90px;
+  
   }
   .btn-1 {
     margin-left: 0px;
-    width: 90px;
+ 
   }
   .people-style {
     border-top-left-radius: 40px;
@@ -535,9 +531,7 @@ f-right {
     margin-right: -15px;
     margin-top: 3px;
   }
-  .btn {
-    width: 90px;
-  }
+  
   .btn-2 {
     margin-left: -15px;
     width: 90px;
@@ -583,7 +577,7 @@ f-right {
     margin-left: -5px;
   }
   .btn {
-    width: 123px;
+  
     height: 38px;
     font-size: 14px;
   }

@@ -1,5 +1,13 @@
 <template>
+
+<div>   
+
+   
+   <peopleSkeleton  :loading="false" />
+
+
   <div class="people-style border shadow">
+
     <b-row class="mb-1">
       <b-col md="3" cols="4" sm="3" class="my-auto">
         <b-avatar
@@ -41,7 +49,7 @@
                     xl="12"
                     class="mt-3 mt-lg-1 mt-xl-0"
                   >
-                    <h6 class="follower text">
+                    <h6 class="follower text mt-xl-3">
                       {{ people.followers }} {{ $t("search.Community") }}
                     </h6>
                   </b-col>
@@ -101,12 +109,12 @@
         </div>
       </b-col>
     </b-row>
-  </div>
+  </div> </div>
 </template>
 
 <script>
 import axios from "axios";
-
+import peopleSkeleton from "@/components/peopleSkeleton";
 export default {
   name: "PeopleComponent",
   props: {
@@ -114,6 +122,12 @@ export default {
       type: Object,
     },
   },
+
+   components: {
+    peopleSkeleton
+    
+  },
+
 
   methods: {
     async handleFollow(user) {

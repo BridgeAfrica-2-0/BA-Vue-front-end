@@ -30,9 +30,7 @@
                 {{ network.name }}
               </router-link>
             </strong>
-            <br />
-            {{ network.purpose }}
-            <br />
+           
             {{ count(network.community) }}  {{ $t("dashboard.Community") }} 
             <br />
 

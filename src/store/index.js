@@ -9,7 +9,7 @@ import businessBlocking from './businessBlocking';
 import dashboard from './dashboard';
 import businessGeneral from './businessGeneral';
 import businessRole from './businessRole';
-import businessAccountType from './businessAccountType';
+import profileAccountType from './profileAccountType';
 import businessOwner from './businessOwner';
 import marketSearch from './marketSearch';
 import market from './market';
@@ -55,8 +55,8 @@ import businessGuest from './businessGuest';
 
 Vue.use(Vuex);
 
- axios.defaults.baseURL = process.env.VUE_APP_API_URL;
- //axios.defaults.baseURL = "https://courage4.maxinemoffett.com/api/v1/";
+ //axios.defaults.baseURL = process.env.VUE_APP_API_URL;
+ axios.defaults.baseURL = "https://edson.maxinemoffett.com/api/v1/";
 
 export default new Vuex.Store({
     modules: {
@@ -81,7 +81,7 @@ export default new Vuex.Store({
         businessChat,
         businessGeneral,
         businessRole,
-        businessAccountType,
+        profileAccountType,
         business,
         networkProfileFeedback,
         NetworkSettings,

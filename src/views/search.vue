@@ -1895,7 +1895,8 @@ updateSearchKeyword(keyword){
     },
 
     searchNetworks(data) {
-
+    
+   
 
       const newParams =  data ? data : {keyword:this.searchParams.keyword}
       
@@ -1931,7 +1932,7 @@ updateSearchKeyword(keyword){
     initialize() {
       this.strategy = {
         2: () => this.onFindUser(),
-        5: () => this.onFindPost(),
+        5: () => this.onFindPost(), 
         1: () => this.onFindBusiness(),
         3: () => this.searchNetworks(),
         4: () => this.searchProducts({}),
@@ -2228,6 +2229,26 @@ updateSearchKeyword(keyword){
       } else if (this.selectedId == 0) {
         this.allSearchByCat({ cat_id: value.cat_id, sub_cat: value.id });
       }
+
+        else if (this.selectedId == 3) {
+        this.searchNetworks({ cat_id: value.cat_id, sub_cat: value.id,keyword:this.searchParams.keyword });
+      }
+
+
+
+ else if (this.selectedId ==5) {
+
+   this._onFindPost();
+      }
+
+ else if (this.selectedId == 2) {
+
+   this._onFindUser();
+           }
+
+
+
+      
     },
 
     allSearchByCat(data) {

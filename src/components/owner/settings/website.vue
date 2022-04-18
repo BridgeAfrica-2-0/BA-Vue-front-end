@@ -1,7 +1,7 @@
 <template>
   <b-container class="container-fluid">
     <b-container class="text">
-      <b-container class="bv-example-row">
+      <b-container class="bv-example-row">  
         <b-row>
         
         
@@ -62,7 +62,7 @@
           v-model="modalShowBasics"
           centered
           size="xl"
-          hide-footer="true"
+          hide-footer
           no-stacking
           header-bg-variant="light"
           body-bg-variant="light"
@@ -142,7 +142,7 @@
           v-model="modalShowPremium"
           centered
           size="xl"
-          hide-footer="true"
+          hide-footer
           header-bg-variant="light"
           body-bg-variant="light"
           no-stacking
@@ -475,7 +475,7 @@ export default {
   computed: {
     Packages() {
 
-      return this.$store.state.businessAccountType.accounts ;
+      return this.$store.state.profileAccountType.accounts ;
     },
     
   },
@@ -504,8 +504,8 @@ export default {
 
     getAccounts() {
       this.$store
-        .dispatch("businessAccountType/getaccounts", {
-          path: `settings/packages/${this.url}`,
+        .dispatch("profileAccountType/getaccounts", {
+        path: `profile/settings/packages`
         })
         .then(() => {
           console.log("ohh yeah");
@@ -518,29 +518,36 @@ export default {
     confirmPayment() {
       this.show = true;
       let date = this.getNow();
-      console.log(date);
-      console.log("PaymentForm:", this.PaymentForm);
+    
       let formData = new FormData();
       formData.append("subscribe", this.PaymentForm.subscribe);
       formData.append("phone", this.PaymentForm.phone);
       formData.append("operator", this.PaymentForm.operator);
       formData.append("package_id", this.PaymentForm.package_id);
-      // formData.append("start_at", date.startDate)
+    
       this.$store
-        .dispatch("businessAccountType/confirmPayment", {
-          path: `settings/packages/${this.url}`,
+        .dispatch("profileAccountType/confirmPayment", {
+          path: `profile/settings/packages`,
           formData: formData,
         })
         .then(({ data }) => {
-          console.log(data);
-          console.log("ohh yeah");
-          this.$refs["AcRequestPayment"].hide();
-          this.show = false;
+            
+            this.$refs["AcRequestPayment"].hide();
+            this.show = false;
+          if(this.PaymentForm.operator == "ORANGE"){
+
+             window.location.href =data.payment_url;
+          }
+          
+         else if(this.PaymentForm.operator == "MTN"){
+          
           this.getAccounts();
           this.flashMessage.show({
             status: "success",
             message: this.$t("businessowner.Transaction_Completed"),
           });
+         }
+
         })
         .catch((err) => {
           console.log({ err: err });

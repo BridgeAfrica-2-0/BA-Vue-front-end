@@ -180,7 +180,7 @@
               v-model="city"
               :data="cities"
               :minMatchingChars="0"
-              @hit="searchThiscity(query)"
+              @hit="searchThiscity(city)"
               :maxMatches="10"
               :serializer="(item) => item.name"
               placeholder="City"

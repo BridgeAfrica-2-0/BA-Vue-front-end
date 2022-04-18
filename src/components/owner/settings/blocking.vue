@@ -76,7 +76,7 @@
               {{ blockbusines.name }}
             </span>
             <span
-              class="mr-auto"
+              class="float-right"
               @click="UnblockBlockUser(blockbusines, 'business')"
               >
               <b-link href="#">{{ $t("settings.Unblock") }}</b-link>
@@ -110,7 +110,7 @@
               size="4em"
             ></b-avatar>
             <span class="mr-auto">{{ blocknet.name }}</span>
-            <span class="mr-auto" @click="UnblockBlockUser(blocknet, 'network')"
+            <span class="float-right" @click="UnblockBlockUser(blocknet, 'network')"
               ><b-link href="#">{{ $t("settings.Unblock") }}</b-link></span
             >
           </b-list>
@@ -118,7 +118,7 @@
       </b-list-group>
     </b-container>
     <b-container v-else>
-      <b-card bg-variant="white" text-variant="black" class="text-center mt-2">
+      <b-card bg-variant="white" text-variant="black" class="text-center mt-2">  
         <b-card-text class="font-mobile-14">{{ $t("settings.No_Blocked_Network_Available") }}.</b-card-text>
       </b-card>
     </b-container>

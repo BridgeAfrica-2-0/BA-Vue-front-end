@@ -1,7 +1,7 @@
 <template>
   <b-container class="container-fluid">
     <b-container class="text">
-      <b-container class="bv-example-row">
+      <b-container class="bv-example-row">  {{Packages}}
         <b-row>
         
         
@@ -475,7 +475,7 @@ export default {
   computed: {
     Packages() {
 
-      return this.$store.state.businessAccountType.accounts ;
+      return this.$store.state.profileAccountType.accounts ;
     },
     
   },
@@ -502,10 +502,12 @@ export default {
       }
     },
 
+
+
     getAccounts() {
       this.$store
-        .dispatch("businessAccountType/getaccounts", {
-          path: `settings/packages/${this.url}`,
+        .dispatch("profileAccountType/getaccounts", {
+          path: `profile/settings/packages`,
         })
         .then(() => {
           console.log("ohh yeah");
@@ -527,7 +529,7 @@ export default {
       formData.append("package_id", this.PaymentForm.package_id);
       // formData.append("start_at", date.startDate)
       this.$store
-        .dispatch("businessAccountType/confirmPayment", {
+        .dispatch("profileAccountType/confirmPayment", {
           path: `settings/packages/${this.url}`,
           formData: formData,
         })

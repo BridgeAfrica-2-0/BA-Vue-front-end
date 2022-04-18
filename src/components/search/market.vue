@@ -11,7 +11,30 @@
         {{ $t("search.No_product_available_for_that_search") }}!
       </a></b-alert
     >
-    <div
+
+
+    
+     <b-skeleton-wrapper :loading="islogin">
+      <template #loading>
+        <b-card class="border people-style shadow h-100">
+  <div class="row">
+  
+     <div class="col-3"> <b-skeleton-img width="100px" height="100px"></b-skeleton-img>   </div> 
+<div class="col-9" >
+          <b-skeleton class="" width="85%"></b-skeleton>
+          <b-skeleton width="55%"></b-skeleton>
+          <b-skeleton width="70%"></b-skeleton>
+           <b-skeleton width="90%"></b-skeleton>
+</div>
+  </div>
+        </b-card>
+      </template>
+
+   
+    </b-skeleton-wrapper>
+
+
+    <!-- <div
       v-for="(prod, index) in products.data"
       :key="index"
       class="people-style shadow h-100"
@@ -64,15 +87,15 @@
                 cols="4"
                 class="mt-2 text-center"
               >
-                <!-- <b-button variant="primary" @click="buyNow(prod)"
+         <b-button variant="primary" @click="buyNow(prod)"
                   ><span> {{ $t("search.Buy_now") }} </span>
-                </b-button> -->
+                </b-button> 
                 <BtnCtaMessage
                   :element="prod"
                   :isProduct="true"
                   :isBuyNow="true"
                   type="business"
-                   :isPremium="prod.business_package_name "
+                   :isPremium="prod.user_package_name "
                 />
               </b-col>
 
@@ -84,7 +107,7 @@
                 cols="4"
                 class="mt-2 text-center"
               >
-                <b-button  v-if="prod.business_package_name =='premium'" variant="primary" style="width:100%" @click="AddToCard(prod)"
+                <b-button  v-if="prod.user_package_name =='premium'" variant="primary" style="width:100%" @click="AddToCard(prod)"
                   >
                   <b-icon icon="cart4"></b-icon>
                   <span>Add to Cart</span>
@@ -94,6 +117,71 @@
           </div>
         </b-col>
       </b-row>
+    </div> -->
+
+     <div
+      v-for="(product, index) in products.data"
+      :key="index"
+      class="people-style p-3 shadow h-100"
+    >
+      <div class="d-inline-flex">
+        <div>
+          <div class="center-img">
+            <img
+              :src="product.picture"
+              class="r-image cursor-pointer"
+              @click="productDetails(product)"
+            />
+          </div>
+        </div>
+
+        <div class="flx50">
+          <p class="text">
+            <strong
+              class="title cursor-pointer"
+              @click="productDetails(product)"
+            >
+              {{ product.name }}
+            </strong>
+            <br />
+
+            <read-more
+              more-str="read more"
+              class="readmore"
+              :text="product.description"
+              link="#"
+              less-str="read less"
+              :max-chars="100"
+            >
+            </read-more>
+            <span class="price username mt-2"> {{ product.price }} FCFA </span>
+          </p>
+        </div>
+      </div>
+      <br />
+      <div class="d-inline-flex float-right mt-2">
+        <div class="">
+          <!-- <b-button variant="primary" @click="buyNow(product)"
+            ><span>{{ $t("general.Buy_Now") }}</span>
+          </b-button> -->
+          <BtnCtaMessage
+            :element="product"
+            :isProduct="true"
+            :isBuyNow="true"
+            type="business"
+            :isPremium="product.user_package_name "  
+          />
+        </div>
+
+        <div class="ml-2">
+          <b-button  v-if="product.user_package_name =='premium'" variant="primary" @click="handleAddToCard(product)"
+            ><span> <b-icon icon="cart4"></b-icon> {{ $t("general.Add_to_Cart") }}</span>
+          </b-button>
+        </div>
+      </div>
+
+      <br />
+      <br />
     </div>
 
     <!-- pagination -->
@@ -292,10 +380,30 @@ button.pagination {
   margin-left: 60px;
 }
 
+
+
+.flx50 {
+  flex-basis: 80%;
+}
+
+.spin {
+  text-align: center;
+  margin-top: 10%;
+  margin-bottom: 10%;
+  width: 4rem;
+  height: 4rem;
+}
+
+.discount {
+  color: orange;
+  margin-left: 60px;
+}
+.cursor-pointer {
+  cursor: pointer;
+}
 p {
   text-align: left;
 }
-
 input {
   border-radius: 15px;
   padding: 5px;
@@ -310,7 +418,6 @@ input:focus {
   position: relative;
   left: -24px;
 }
-
 .prod {
   max-width: 14rem;
   cursor: pointer;
@@ -338,171 +445,123 @@ h6 {
 .reply {
   cursor: pointer;
 }
-
 @media only screen and (min-width: 768px) {
-  .center-img {
-    margin-right: -60px;
-  }
-
   .marge {
     margin-left: 200px;
   }
   .pos {
     margin-left: 200px;
   }
+  .center-img {
+    margin-right: -60px;
+  }
 }
-
 .buybtn {
   width: 100px;
 }
-
 .marketbtn {
   margin-bottom: 3px;
   float: right;
 }
-
 .price {
   font-size: 18px;
 }
-
 .people-style {
   border-top-left-radius: 10px;
-
   border-bottom-left-radius: 10px;
-
   border-top-right-radius: 5px;
-
   border-bottom-right-radius: 5px;
-
   background: white;
-
   background-color: #fff;
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
   margin-bottom: 10px;
-
-  padding: 3px;
-  padding-bottom: 26px;
 }
-
 @media only screen and (max-width: 540px) {
   .text {
     color: #000;
-
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
     color: rgba(117, 114, 128, 1);
     text-align: left;
-
     font-weight: normal;
     line-height: 20px;
     font-style: normal;
-
     padding: 1px;
     text-align: left;
-
-    margin-left: -30px;
-
+    /* margin-left: -30px; */
     line-height: 25px;
   }
-
   .r-image {
     border-top-left-radius: 10px;
-
     border-bottom-left-radius: 10px;
-
     border-top-right-radius: 10px;
-
     border-bottom-right-radius: 10px;
-
     width: 100px;
-
     height: 100px;
     padding: 4px;
   }
-
   .title {
     font-size: 16px;
     color: black;
-
     line-height: 35px;
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
-
   .btn {
     padding-top: 6px;
     font-size: 10px;
-
     height: 28px;
     width: 85px;
   }
 }
-
 @media only screen and (min-width: 540px) and (max-width: 762px) {
   .text {
     color: #000;
-
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
     color: rgba(117, 114, 128, 1);
     text-align: left;
-
     font-weight: normal;
     line-height: 20px;
     font-style: normal;
-
     padding: 1px;
     text-align: left;
-
     margin-right: -5px;
-
     line-height: 25px;
+    margin-left: 75px;
   }
-
   .r-image {
     border-top-left-radius: 10px;
-
     border-bottom-left-radius: 10px;
-
     border-top-right-radius: 10px;
-
     border-bottom-right-radius: 10px;
-
     height: 100px;
     width: 100px;
-
     padding: 4px;
   }
-
   .btn {
     padding-top: 6px;
-
     height: 38px;
-    width: 123px;
+    min-width: 123px;
   }
-
   .title {
     font-size: 20px;
     color: black;
-
     line-height: 35px;
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 }
-
 .discount {
   color: orange;
   margin-left: 60px;
 }
-
 p {
   text-align: left;
 }
-
 input {
   border-radius: 15px;
   padding: 5px;
@@ -517,7 +576,6 @@ input:focus {
   position: relative;
   left: -24px;
 }
-
 .prod {
   max-width: 14rem;
   cursor: pointer;
@@ -546,7 +604,6 @@ input:focus {
   top: -28px;
   cursor: pointer;
 }
-
 h6 {
   text-align: center;
   font-weight: bold;
@@ -564,56 +621,41 @@ h6 {
 .reply {
   cursor: pointer;
 }
-
 @media only screen and (min-width: 762px) {
   .text {
     color: #000;
-
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 30px;
     color: rgba(117, 114, 128, 1);
     text-align: left;
-
     font-weight: normal;
     line-height: 20px;
     font-style: normal;
-
     padding: 1px;
     text-align: left;
-
     margin-right: -5px;
-
     line-height: 25px;
+    margin-left: 75px;
   }
-
   .r-image {
     border-top-left-radius: 10px;
-
     border-bottom-left-radius: 10px;
-
     border-top-right-radius: 10px;
-
     border-bottom-right-radius: 10px;
-
     height: 160px;
     width: 160px;
-
     padding: 4px;
   }
-
   .btn {
     padding-top: 6px;
-
     height: 38px;
     width: 123px;
   }
-
   .title {
     font-size: 20px;
     color: black;
-
     line-height: 35px;
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }

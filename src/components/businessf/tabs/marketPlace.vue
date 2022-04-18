@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div> 
     <div class="">  
       <!-- MARKET HEADER BAR -->
       <div class="col-12 d-flex align-items-center justify-content-between">
@@ -12,7 +12,7 @@
           ></b-icon>
           <span class="font-weight-bold">Market</span>
         </p>
-        <b-button v-if="business_info.package_name=='premium'"
+        <b-button v-if="business_info.business_package_name=='premium'"
           variant="outline-primary"
           @click="() => $router.push({ name: 'cart' })"
         >

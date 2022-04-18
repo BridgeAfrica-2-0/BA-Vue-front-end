@@ -184,7 +184,7 @@ export default {
 
   computed: {
     defaultPayment() {
-      return this.$store.state.businessAccountType.defaultPayment;
+      return this.$store.state.profileAccountType.defaultPayment;
     },
     countries() {
       return this.$store.state.auth.country;
@@ -227,7 +227,7 @@ export default {
     DefaultPayment() {
       console.log("defaultPayment");
       this.$store
-        .dispatch("businessAccountType/getDefaultPayment", {
+        .dispatch("profileAccountType/getDefaultPayment", {
           path: `get-payement-method/${this.url}`,
         })
         .then(() => {
@@ -246,7 +246,7 @@ export default {
       formData.append("payement_method", this.PaymentForm.operator);
       formData.append("phone", this.PaymentForm.phone);
       this.$store
-        .dispatch("businessAccountType/confirmPayment", {
+        .dispatch("profileAccountType/confirmPayment", {
           path: `update-payement-method/${this.url}`,
           formData: formData,
         })

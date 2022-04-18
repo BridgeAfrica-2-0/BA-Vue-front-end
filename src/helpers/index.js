@@ -81,14 +81,14 @@ export const isGuestUser = () => {
 export const isPremium = () => {
     let check = false;
     let user=localStorage.getItem('user');
-    if(user.user_account_package_id){
+    if(user.user_package){
       
-
-        if (user.user_account_package_id==1) {
-            check = false;
-        }else{
-            check = true; 
-        }
+       if(user.user_package=="premium"){
+           check=true;
+       }else if(user.user_package=="basic"){
+           check =false;
+       }
+       
     }
      
     

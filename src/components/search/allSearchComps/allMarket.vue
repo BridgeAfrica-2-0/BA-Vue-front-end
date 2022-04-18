@@ -61,12 +61,12 @@
             :isProduct="true"
             :isBuyNow="true"
             type="business"
-            :isPremium="product.business_package_name "
+            :isPremium="product.user_package_name "  
           />
         </div>
 
         <div class="ml-2">
-          <b-button  v-if="product.business_package_name =='premium'" variant="primary" @click="handleAddToCard(product)"
+          <b-button  v-if="product.user_package_name =='premium'" variant="primary" @click="handleAddToCard(product)"
             ><span>{{ $t("general.Add_to_Cart") }}</span>
           </b-button>
         </div>

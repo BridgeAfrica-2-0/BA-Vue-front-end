@@ -1,11 +1,14 @@
 <template>
   <div>
     <div class="">
-      <b-spinner
+      <!-- <b-spinner
         v-if="loader"
         variant="primary"
         :label="$t('search.Spinning')"
-      ></b-spinner>
+      ></b-spinner> -->
+
+         <peopleSkeleton  :loading="loader" />
+           <peopleSkeleton  :loading="loader" />
 
       <b-alert v-if="users.total == 0" show variant="warning"
         ><a href="#" class="alert-link">
@@ -113,6 +116,7 @@
 
 <script>
 import axios from "axios";
+import peopleSkeleton from "@/components/peopleSkeleton";
 export default {
   computed: {
     users() {
@@ -121,6 +125,12 @@ export default {
     loader() {
       return this.$store.getters["allSearch/getLoader"];
     },
+  },
+
+  
+   components: {
+    peopleSkeleton
+    
   },
 
   methods: {

@@ -1,6 +1,6 @@
 <template>
   <div style="overflow-x: hidden; color: black">
-    <Nav :credentials.sync="searchParams" id="top">
+    <Nav :credentials.sync="searchParams" @updateSearchKeyword="updateSearchKeyword" id="top">
       <template v-slot:button>
         <Button
           media="desktop"
@@ -72,7 +72,7 @@
       @category="getCategory"
       @parentcategory="getparentCategory"
       @update:keyword="(val) => searchParams = Object.assign(searchParams,val)"
-
+      
       @activate:matching:category="(val) => activateMatching=val"
       style="margin-top: -25px"
     />
@@ -179,6 +179,7 @@
               v-bind:categoryNameSelected="categoryName"
               @onFinByCategory="getCategory"
                @updateSearchKeyword="updateSearchKeyword"
+               @updateSearchLocation="updateSearchLocation"
               :activateMatching="activateMatching"
             />
 
@@ -320,6 +321,7 @@
               v-bind:categoryNameSelected="categoryName"
               @onFinByCategory="getCategory"
                 @updateSearchKeyword="updateSearchKeyword"
+                @updateSearchLocation="updateSearchLocation"
               :activateMatching="activateMatching"
             />
           </div>
@@ -680,6 +682,7 @@ export default {
 
     if (this.$route.query.keyword) {
       this.searchParams.keyword = this.$route.query.keyword;
+      
     }
      
      if(this.islogin) {   
@@ -1681,7 +1684,7 @@ export default {
       deep: true,
       handler(newValue, oldValue) {
 
-        this.activateSuggestion(newValue.keyword);
+       // this.activateSuggestion(newValue.keyword);
        
         if(this.selectedId==0){   
         this.$store.commit("allSearch/setKeyword", newValue.keyword); 
@@ -1745,10 +1748,20 @@ export default {
       
     },
 
- 
+ updateSearchLocation(location){
+
+   
+   
+    this.searchParams.location = location;
+
+    this.searchParams.location_placeholder=  location;
+    
+
+ },
 
 updateSearchKeyword(keyword){
-   console.log(keyword);
+  
+  //  this.activateSuggestion(keyword);
    this.searchParams.keyword=keyword;
   if(this.selectedId == 0){
    this.getKeyword()
@@ -1767,6 +1780,8 @@ updateSearchKeyword(keyword){
 
 
       activateSuggestion: async function(value){
+     
+        this.$store.commit("allSearch/setSuggestedKeyword", []); 
       if (value){
      
         
@@ -1819,6 +1834,7 @@ updateSearchKeyword(keyword){
 
       var keyword = this.searchParams.keyword;
       var location = this.searchParams.location;
+      
 
       let elm = data ? data : keyword ? { keyword: keyword } : { keyword: "" };
 
@@ -1827,6 +1843,7 @@ updateSearchKeyword(keyword){
      
        if (this.searchParams.keyword)
         this.activateMatching = {name:this.searchParams.keyword}
+        this.activateSuggestion(this.searchParams.keyword);
       
       this.$store
         .dispatch("allSearch/SEARCH", {keyword:keyword, location:location})
@@ -1849,6 +1866,7 @@ updateSearchKeyword(keyword){
       
       if (this.searchParams.keyword)
         this.activateMatching = {name:this.searchParams.keyword}
+        this.activateSuggestion(this.searchParams.keyword);
 
       if (this.searchParams.keyword.trim()) 
       await this.findBusiness({ keyword: this.searchParams.keyword, location:this.searchParams.location });
@@ -1883,6 +1901,9 @@ updateSearchKeyword(keyword){
     
       this.$store.commit("marketSearch/setSubFilters", []);
       this.$store.commit("marketSearch/setSubCat", []);
+
+      this.activateMatching = {name:this.searchParams.keyword};
+        this.activateSuggestion(this.searchParams.keyword);
       
       this.$store
         .dispatch("marketSearch/searchProducts", data)
@@ -1902,6 +1923,7 @@ updateSearchKeyword(keyword){
       
       if (this.searchParams.keyword)
         this.activateMatching = {name:this.searchParams.keyword}
+        this.activateSuggestion(this.searchParams.keyword);
 
       this.$store
         .dispatch("networkSearch/SEARCH", data)
@@ -2049,6 +2071,7 @@ updateSearchKeyword(keyword){
             keyword: this.searchParams.keyword.trim(),
           },
         });
+        this.activateSuggestion(this.searchParams.keyword);
         this._onFindUser();
       } else this.onNotified("the word must have at least 3 letters");
     },
@@ -2179,7 +2202,7 @@ updateSearchKeyword(keyword){
 
         case "Tailoring":
           this.selectcategories = this.Tailoring;
-          console.log("fuck you");
+          
 
           break;
       }
@@ -2221,6 +2244,7 @@ updateSearchKeyword(keyword){
     getCategory(value) {
       
       this.Selectedcategory = value;
+
 
       if (this.selectedId == 4) {
         this.searchProducts({ cat_id: value.cat_id, sub_cat: value.id });
@@ -2510,7 +2534,7 @@ updateSearchKeyword(keyword){
 
         case "Tailoring":
           this.selectcategories = this.Tailoring;
-          console.log("fuck you");
+          
           break;
 
         //health ubits

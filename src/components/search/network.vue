@@ -1,12 +1,17 @@
 <template>
   <div v-if="islogin">
-    <b-spinner
+    <!-- <b-spinner
       v-if="loader"
       variant="primary"
       :label="$t('search.Spinning')"
-    ></b-spinner>
+    ></b-spinner> -->
 
-    <b-alert v-if="networks.data.length === 0" show variant="warning"
+
+    <Skeleton  :loading="loader" />
+      <Skeleton  :loading="loader" />
+
+
+    <b-alert v-if="networks.data.length == 0 && !loader " show variant="warning"
       ><a href="#" class="alert-link">
         {{ $t("search.No_Network_available") }}!
       </a>
@@ -130,6 +135,7 @@
 <script>
 import axios from "axios";
 import login from "@/components/search/login";
+import Skeleton from "@/components/skeleton";
 export default {
   props: ["title", "image"],
   data() {
@@ -147,6 +153,7 @@ export default {
 
   components: {
     login,
+    Skeleton
   },
 
   computed: {

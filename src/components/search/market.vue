@@ -1,10 +1,13 @@
 <template>
   <div v-if="islogin">
-    <b-spinner
+    <!-- <b-spinner
       v-if="prodLoader"
       variant="primary"
       :label="$t('search.Spinning')"
-    ></b-spinner>
+    ></b-spinner> -->
+
+    <Skeleton  :loading="prodLoader" />
+      <Skeleton  :loading="prodLoader" />
 
     <b-alert v-if="products.data.length === 0" show variant="warning"
       ><a href="#" class="alert-link">
@@ -14,24 +17,6 @@
 
 
     
-     <b-skeleton-wrapper :loading="islogin">
-      <template #loading>
-        <b-card class="border people-style shadow h-100">
-  <div class="row">
-  
-     <div class="col-3"> <b-skeleton-img width="100px" height="100px"></b-skeleton-img>   </div> 
-<div class="col-9" >
-          <b-skeleton class="" width="85%"></b-skeleton>
-          <b-skeleton width="55%"></b-skeleton>
-          <b-skeleton width="70%"></b-skeleton>
-           <b-skeleton width="90%"></b-skeleton>
-</div>
-  </div>
-        </b-card>
-      </template>
-
-   
-    </b-skeleton-wrapper>
 
 
     <!-- <div
@@ -218,6 +203,7 @@
 */
 import ProductDetails from "@/components/businessf/ProductDetails.vue";
 import login from "@/components/search/login";
+import Skeleton from "@/components/skeleton";
 export default {
   data() {
     return {
@@ -246,6 +232,7 @@ export default {
   components: {
     ProductDetails,
     login,
+    Skeleton
   },
 
   created() {

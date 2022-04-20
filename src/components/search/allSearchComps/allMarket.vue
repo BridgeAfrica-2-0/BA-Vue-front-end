@@ -1,10 +1,13 @@
 <template>
   <div>
-    <b-spinner
+    <!-- <b-spinner
       v-if="prodLoader"
       variant="primary"
       :label="$t('search.Spinning')"
-    ></b-spinner>
+    ></b-spinner> -->
+
+     <Skeleton  :loading="prodLoader" />
+      <Skeleton  :loading="prodLoader" />
 
     <b-alert v-if="products.total == 0" show variant="warning"
       ><a href="#" class="alert-link">
@@ -85,6 +88,7 @@
 
 <script>
 import ProductDetails from "@/components/businessf/ProductDetails.vue";
+import Skeleton from "@/components/skeleton";
 export default {
   props: ["products"],
   data() {
@@ -100,6 +104,7 @@ export default {
 
   components: {
     ProductDetails,
+    Skeleton
   },
 
   computed: {

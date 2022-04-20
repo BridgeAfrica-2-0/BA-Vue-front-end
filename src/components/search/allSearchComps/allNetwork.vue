@@ -1,13 +1,16 @@
 <template>
   <div>
-    <b-spinner
+    <!-- <b-spinner
       v-if="loader"
       variant="primary"
       :label="$t('search.Spinning')"
-    ></b-spinner>
+    ></b-spinner> -->
+
+     <Skeleton  :loading="loader" />
+      <Skeleton  :loading="loader" />
 
     <b-alert
-      v-if="networks.total == 0 || networks.data.length == 0"
+      v-if="networks.total == 0"
       show
       variant="warning"
       ><a href="#" class="alert-link"
@@ -128,6 +131,7 @@
 
 <script>
 import axios from "axios";
+import Skeleton from "@/components/skeleton";
 
 export default {
   props: ["title", "image"],
@@ -143,6 +147,13 @@ export default {
       nextLoad: false,
     };
   },
+
+  components: {
+  
+    Skeleton
+  },
+
+
   created() {
     //console.log("Mini Networks => ".this.network());
   },

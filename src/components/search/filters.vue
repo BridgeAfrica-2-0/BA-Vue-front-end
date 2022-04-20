@@ -33,16 +33,8 @@
           
         </b-form-select>
 
-      <div v-if="activateMatching" class="pb-2">
-        <b-badge 
-          v-for="item in categoryRendering" 
-          :key="item.id" :class="[ item.actived ? 'actived' : 'inactied' , 'p-1' ,'m-1']" 
-          @click="matching(item)">
-            {{item.category}}
-        </b-badge>
 
-  
-
+        
          <span v-if="suggestedKeyword.length">
           <h6 class="bold">{{ $t("search.suggested_keywords") }}</h6>
           <b-form-radio
@@ -60,6 +52,19 @@
           <!-- <b-link v-b-modal="'myModalll'">{{ $t("search.See_all") }}</b-link> -->
           <hr />
         </span>
+
+        
+
+      <div v-if="activateMatching" class="pb-2">
+        <b-badge 
+          v-for="item in categoryRendering" 
+          :key="item.id" :class="[ item.actived ? 'actived' : 'inactied' , 'p-1' ,'m-1']" 
+          @click="matching(item)">
+            {{item.category}}
+        </b-badge>
+
+  
+
 
         
 
@@ -181,6 +186,7 @@
               :data="cities"
               :minMatchingChars="0"
               @hit="searchThiscity(city)"
+              v-on:keyup.enter="searchThiscity(city)"
               :maxMatches="10"
               :serializer="(item) => item.name"
               placeholder="City"
@@ -2212,7 +2218,12 @@ return nei;
 
 searchThiscity(keyword){
 
+ 
+
  let data = { city: keyword };
+
+
+ this.$emit('updateSearchLocation', keyword);
 
       this.searchParams.city = keyword;
 

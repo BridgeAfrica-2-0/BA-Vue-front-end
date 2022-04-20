@@ -1,10 +1,13 @@
 <template>
   <div> 
-    <b-spinner
+    <!-- <b-spinner
       v-if="loader"
       variant="primary"
       :label="$t('search.Spinning')"
-    ></b-spinner>
+    ></b-spinner> -->
+
+    <Skeleton  :loading="loader" />
+    <Skeleton  :loading="loader" />
 
     <b-alert v-if="businesses.total == 0" show variant="warning"
       ><a href="#" class="alert-link">
@@ -147,6 +150,7 @@
 <script>
 import moment from "moment";
 import axios from "axios";
+import Skeleton from "@/components/skeleton";
 
 export default {
   data() {
@@ -163,6 +167,10 @@ export default {
     };
   },
   props: ["businesses"],
+  components: {
+
+    Skeleton
+  },
   computed: {
     loader() {
       return this.$store.getters["allSearch/getLoader"];

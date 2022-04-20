@@ -142,7 +142,7 @@
                             </b-col>
                           </b-row>
                         </div>
-                        <h2 v-else>{{ $t("businessowner.No_chat") }}</h2>
+                        <h2 v-else>{{ $t("businessowner.No_chat") }} ---</h2>
                       </div>
 
                       <!-- End Chats -->
@@ -1588,6 +1588,37 @@
                             </b-col>
 
                             <b-col class="col-4 text-center">
+
+                              <span class="text-center float-right mt-n0">
+                                <b-dropdown
+                                  variant="link"
+                                  size="lg"
+                                  toggle-class="text-decoration-none p-0"
+                                  no-caret
+                                  right
+                                >
+                                  <template slot="button-content">
+                                    <b><i class="fas fa-ellipsis-v"></i></b>
+                                  </template>
+                                  <b-dropdown-item 
+                                  @click="deleteChat(
+                                    chat , chatList , 
+                                     {
+                                        type: 'user',
+                                        chat: chat,
+                                        id: chat.sender_id
+                                          ? chat.sender_id
+                                          : chat.receiver_id,
+                                      }
+                                    )">
+                                    Delete
+                                  </b-dropdown-item>
+                                </b-dropdown>
+                              </span>
+
+
+                             
+                              
                               <small class="text-center small">
                                 {{ getCreatedAt(chat.created_at) }}
                               </small>
@@ -1679,6 +1710,35 @@
                             </b-col>
 
                             <b-col class="col-4 text-center">
+
+                              <span class="text-center float-right mt-n0">
+                                <b-dropdown
+                                  variant="link"
+                                  size="lg"
+                                  toggle-class="text-decoration-none p-0"
+                                  no-caret
+                                  right
+                                >
+                                  <template slot="button-content">
+                                    <b><i class="fas fa-ellipsis-v"></i></b>
+                                  </template>
+                                  <b-dropdown-item 
+                                  @click="deleteChat(
+                                    chat , chatList , 
+                                    {
+                                      type: 'business',
+                                      chat: chat,
+                                      id:
+                                        chat.sender_business_id == currentBizId
+                                          ? chat.receiver_business_id
+                                          : chat.sender_business_id,
+                                    }
+                                    )">
+                                    Delete
+                                  </b-dropdown-item>
+                                </b-dropdown>
+                              </span>
+
                               <small class="text-center small">
                                 {{ getCreatedAt(chat.created_at) }}
                               </small>
@@ -1763,6 +1823,30 @@
                           </b-col>
 
                           <b-col class="col-4 text-center">
+                            <span class="text-center float-right mt-n0">
+                                <b-dropdown
+                                  variant="link"
+                                  size="lg"
+                                  toggle-class="text-decoration-none p-0"
+                                  no-caret
+                                  right
+                                >
+                                  <template slot="button-content">
+                                    <b><i class="fas fa-ellipsis-v"></i></b>
+                                  </template>
+                                  <b-dropdown-item 
+                                  @click="deleteChat(chat , chatList , {
+                              type: 'network',
+                              chat: chat,
+                              id: chat.sender_network_id
+                                ? chat.sender_network_id
+                                : chat.receiver_network_id,
+                            })">
+                                    Delete
+                                  </b-dropdown-item>
+                                </b-dropdown>
+                              </span>
+                              
                             <small class="text-center small">
                               {{ getCreatedAt(chat.created_at) }}
                             </small>
@@ -1840,6 +1924,29 @@
                             </b-col>
 
                             <b-col class="col-4 text-center">
+
+                              <span class="text-center float-right mt-n0 d-none">
+                                <b-dropdown
+                                  variant="link"
+                                  size="lg"
+                                  toggle-class="text-decoration-none p-0"
+                                  no-caret
+                                  right
+                                >
+                                  <template slot="button-content">
+                                    <b><i class="fas fa-ellipsis-v"></i></b>
+                                  </template>
+                                  <b-dropdown-item 
+                                  @click="deleteChat(chat , chatList , {
+                                    type: 'group',
+                                    chat: chat,
+                                    id: chat.id,
+                                  })">
+                                    Delete
+                                  </b-dropdown-item>
+                                </b-dropdown>
+                              </span>
+                              
                               <small class="text-center small">
                                 {{ getCreatedAt(chat.created_at) }}
                               </small>
@@ -2705,7 +2812,7 @@
                                         <b-form-group>
                                           <b-form-radio-group
                                             id="radio-editor-1"
-                                            v-model="selectedselectOptionAll"
+                                            v-model="selectedselectOption"
                                             :options="selectOptionsAll"
                                             name="radio-options-editor"
                                             @change="selectAllForAllTab"
@@ -3417,7 +3524,7 @@ export default {
       }
     },
     selectAllForAllTab(val) {
-      // console.log(val, "Adasd");
+    
       this.selectedPeople = [];
       if (val == "all") {
         this.allUsers.map((biz) => {
@@ -3441,6 +3548,7 @@ export default {
 
       this.selectedEditor = [];
       if (val == "all") {
+        console.log("editor ,")
         this.allEditors.map((biz) => {
           this.selectedEditor.push(biz.id);
         });
@@ -3462,14 +3570,8 @@ export default {
       this.filePreview = false;
     },
     socketListenners() {
-      // this.socket.on("generalMessage", (data) => {
-      //   console.log("Received");
-      //   console.log(data);
-      //   this.messages.push(data);
-      // });
+
       this.socket.on("groupMessage", (data) => {
-        console.log("group message Received");
-        console.log(data);
         this.chats.push(data);
         this.formData.append("message", data.message);
 
@@ -3484,11 +3586,8 @@ export default {
         });
       });
       this.socket.on("privateMessage", (data) => {
-        console.log("Received");
-        console.log(data);
+    
         this.chats.push(data);
-        console.log(this.chats);
-
         this.formData.append("sender_business_id", data.sender_business_id);
         this.formData.append("message", data.message);
         this.formData.append("receiver_business_id", data.receiver_business_id);
@@ -3501,7 +3600,6 @@ export default {
           type: this.type,
         });
       });
-      console.log("listenning...");
     },
     async createGroup(receiver_business_id) {
       await this.$store
@@ -3519,10 +3617,7 @@ export default {
             id: this.chatId,
           });
         });
-
-      console.log("chat id selected:", this.chatId);
       this.socket.emit("create-group", this.chatId);
-
       let sender_business_id = this.chatId;
       this.room = [
         sender_business_id,
@@ -3531,16 +3626,13 @@ export default {
         ...this.selectedNetwork,
         ...this.selectedEditor,
       ];
-      console.log("ROOMS: ", this.room);
       this.tabIndex = 3;
-      // this.getChatList({ type: "group" });
     },
 
     createRoom(receiver_business_id) {
-      // let sender_business_id = this.currentUser.user.id;
+   
       let sender_business_id = this.currentBizId;
       this.room = [receiver_business_id, sender_business_id];
-      console.log("ROOMS: ", this.room);
       this.socket.emit("create", this.room);
     },
     getCreatedAt(data) {
@@ -3562,7 +3654,6 @@ export default {
     },
     getUserInfo() {
       this.$store.dispatch("networkChat/GET_USER_INFO").then(() => {
-        console.log("user info: ", this.userInfo);
       });
     },
     initFilter() {
@@ -3599,23 +3690,19 @@ export default {
           keyword: keyword,
         })
         .then(() => {
-          console.log("currentBiz: ", this.currentBiz);
+          
         })
         .catch(() => console.log("error"));
     },
     getChatList(data) {
-      // alert("Clicked!")
       this.type = data.type;
       this.chatSelected.active = false;
       this.newMsg = false;
-      console.log("tab type:", this.tabIndex);
-
       this.$store.dispatch("businessChat/GET_BIZS_CHAT_LIST", data);
       // this.scrollToBottom();
     },
 
     async histBizToBiz(data) {
-      console.log("search data:", data);
       if (data.type == "user") {
         await this.$store.dispatch("businessChat/GET_BIZ_TO_USER", data);
       } else if (data.type == "network") {
@@ -3627,7 +3714,6 @@ export default {
       }
     },
     async histBizToUser(receiverId) {
-      console.log("call storing data here")
       await this.$store
         .dispatch("businessChat/GET_BIZ_TO_USER", receiverId)
         .then(() => {})
@@ -3641,10 +3727,8 @@ export default {
     },
     async histBizToGroup(receiverId) {
       await this.$store.dispatch("businessChat/GET_BIZ_TO_GROUP", receiverId);
-      console.log("group members: ++++>", this.groupMembers);
     },
     saveMessage(data) {
-      console.log("[DEBUG SAVE]", { data: data, type: this.type });
       if (this.type == "group") {
         this.$store.dispatch("businessChat/SAVE_GROUP_CHAT", {
           data: data,
@@ -3670,13 +3754,11 @@ export default {
 
       if(type == "business"){
         data.businessId = this.chatSelected.id;
-        console.log(data , "bussiness");
         await this.$store.dispatch("businessChat/DELETE_BUSINESS_MESSAGE_BY_MESSAGEID_BUSINESSID", data)
       }
 
       if(type == "network"){
         data.networkId = this.chatSelected.id;
-        console.log(data , "network");
         await this.$store.dispatch("businessChat/DELETE_NETWORK_MESSAGE_BY_MESSAGEID_NETWORKID", data)
       }
    
@@ -3688,30 +3770,34 @@ export default {
       this.$store.dispatch("businessChat/DATA_UPDATE_C", dataChat)
 
     },
+    async deleteChat(data , chatList , type){
+
+
+       console.log(type , "ASdasdas chat lisr");
+
+
+   
+
+      let dataChat = chatList.filter((b) => { return b.id !== data.id;});
+
+      let mainData = {data:dataChat , type:type}
+
+      this.$store.dispatch("businessChat/DELETE_BUSINESS", mainData)
+     
+    },
   
     async selectedMultyChat() {
       this.$bvModal.hide("group-name");
-      console.log("type tabs:", this.tabIndex);
-
+    
       this.createGroup();
-
       this.getChatList({ type: "group" });
-
-      // this.$store.commit("businessChat/setSelectedChatId", this.chatId);
-      // let receiver = { receiverID: this.chatId, keyword: null };
-      // this.histBizToUser(receiver);
       this.type = "group";
       this.newMsg = false;
-      // this.chatSelected = { active: true, clickedId: this.chatId, ...data.chat };
       this.chatSelected = {
         active: true,
         clickedId: this.chatId,
         groupName: this.groupName,
       };
-
-      console.log("blec debugging ---");
-
-      console.log(this.lastcreatedgroup);
 
       this.selectedChat({
         type: "group",
@@ -3719,29 +3805,18 @@ export default {
         id: this.chatId,
       });
 
-      //  this.getChatList({ type: "group" });
-      console.log("[DEBUG] Chat selected:", this.chatSelected);
-      // this.groupName = "";
     },
-
-    //lalalala
-    selectedChat(data) {
-     
-      console.log("[type tabs]", this.tabIndex);
-      // this.scrollToBottom();
-      console.log("[selected Chat]", data);
+    selectedChat(data) {  
       this.chatId = data.id;
-
       this.createRoom(data.id);
       if (this.type == "group") {
-        // this.createGroup();
+        this.socket.emit("create-group", this.chatId);
       }
       this.rightSide = screenX > 930;
 
       this.$store.commit("businessChat/setSelectedChatId", data.id);
       let receiver = { receiverID: data.id, keyword: null };
       if (data.type == "user") {
-         console.log("user click event");
         this.histBizToUser(receiver);
       } else if (this.type == "network") {
         this.histBizToNetwork(receiver);
@@ -3762,14 +3837,14 @@ export default {
       this.groupAdminId = data.chat.admin_businessID
         ? data.chat.admin_businessID
         : null;
-      console.log("[DEBUG] Chat selected:", this.chatSelected);
+      
     },
 
     searchChatList(keyword) {
       this.$store
         .dispatch("userChat/GET_USERS", keyword)
         .then(() => {
-          console.log("->[Data logged]<-");
+          
         })
         .catch(() => console.log("error"));
     },
@@ -3801,15 +3876,7 @@ export default {
         receiver_id: this.chatId,
         attachment: this.file,
       });
-      console.log("SENT...", {
-        type: this.type,
-        message: this.input,
-        sender_business_id: this.currentBizId,
-        room: this.room,
-        receiver_business_id: this.chatSelected.id,
-        receiver_id: this.chatId,
-        // attachment: this.file,
-      });
+     
       this.input = "";
       this.dismissed();
       this.scrollToBottom();
@@ -3819,12 +3886,10 @@ export default {
       var membersBuiness = [];
       var membersNetwork = [];
       var membersEditor = [];
-      console.log("Group members:", this.groupMembers);
+      
       let data = {};
       if (this.groupMembers.length) {
-        // this.groupMembers.map((member)=>{
-        //   if()
-        // })
+        
         membersPeople = this.groupMembers.filter((member) => {
           return member.userID != null;
         });
@@ -3862,26 +3927,10 @@ export default {
           businessEditorID: membersEditorIds,
           message: this.input,
         };
-        // data = {
-        //   businessID: this.groupAdminId,
-        //   message: this.input,
-        //   attachment: this.file,
-        // };
+
       }
 
       this.socket.emit("groupMessage", data);
-
-      // this.socket.emit("groupMessage", {
-      //   type: this.type,
-      //   message: this.input,
-      //   sender_business_id: this.currentBiz.id,
-      //   room: this.room,
-      //   receiver_business_id: this.chatSelected.id,
-      //   receiver_id: this.chatId,
-      //   group_id: this.chatId,
-      // });
-
-      console.log("SENT...");
       this.input = "";
       this.dismissed();
       this.scrollToBottom();
@@ -3897,9 +3946,6 @@ export default {
       if (validImageTypes.includes(fileType)) {
         this.$bvModal.show("preview-file");
       }
-
-      console.log("file:", this.preview);
-      console.log("preview:", this.filePreview);
     },
 
     //---------------
@@ -3943,7 +3989,6 @@ export default {
         behavior: "smooth",
       });
       // this.$refs.feed.scrollTop = this.$refs.feed.scrollHeight - this.$refs.feed.clientHeight;
-      console.log(this.$refs.feed.scrollTop);
     },
   },
 };

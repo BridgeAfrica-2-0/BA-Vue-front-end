@@ -498,6 +498,51 @@ export default {
             commit("setLoader", false);
            
         },
+        async DELETE_USER_CHAT({ commit, state }, data){
+
+            commit("setLoader", true);
+            console.log("[DEBUG]: DELETE_BUSINESS", data);
+
+            const chatData = data.data
+            const typeData = data.type
+
+            var urlDelte = "";
+
+            switch (data.type.type) {
+
+                case "user":
+                    // /api/v1/messages/user/{userId}/chat
+                    urlDelte = `messages/user/${typeData.id}/chat`
+                    break;
+
+                case "business":
+                    urlDelte = `messages/business/${typeData.id}/chat`
+                    break;
+                case "network":
+                    urlDelte = `messages/network/${typeData.id}/chat`
+                    break;
+                default:
+                    urlDelte = ""
+                    break;
+            }
+
+            commit("setChatList", chatData);
+            await axios.delete(urlDelte)
+            .then((res) => {
+                commit("setChatList", chatData);
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+
+            
+
+
+            // console.log(data,"sadhashdahdhas - -- 1 ")
+
+        },
+
+        
 
 
     }

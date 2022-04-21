@@ -65,7 +65,7 @@ export default {
   methods: {
 
      onWindowLoad() {
-            console.log("window load event");
+         
 
           
             this.showfadde=true;

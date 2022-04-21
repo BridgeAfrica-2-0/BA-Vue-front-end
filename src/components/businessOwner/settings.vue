@@ -16,9 +16,7 @@
         <General />
       </div>
 
-      <!-- <div class="mt-3 d-block d-md-none" v-if="seetings_id == '4'">
-        <Website />
-      </div> -->
+    
 
       <div class="mt-3 d-block d-md-none" v-if="seetings_id == '3'">
         <Payment />
@@ -88,10 +86,6 @@
               <b-tab :title="$t('businessowner.Payment')">
                 <b-card-text> <Payment /> </b-card-text
               ></b-tab>
-
-              <!-- <b-tab :title="$t('businessowner.Account_Type')">
-                <b-card-text> <Website /> </b-card-text
-              ></b-tab> -->
               <b-tab :title="$t('businessowner.Blocking')">
                 <b-card-text> <Blocking /> </b-card-text
               ></b-tab>
@@ -115,14 +109,12 @@ import Roles from "@/components/businessOwner/settings/roles";
 
 import Info from "@/components/businessOwner/settings/info";
 
-//import Website from "@/components/businessOwner/settings/website";
-
 import Payment from "@/components/businessOwner/settings/payment";
 
 import Blocking from "@/components/businessOwner/settings/blocking";
 import Notification from "@/components/businessOwner/notification";
 import LyTab from "@/tab/src/index.vue";
-import Pending from "@/components/businessOwner/pending";   
+import Pending from "@/components/businessOwner/pending";
 import Insight from "@/components/businessOwner/insight";
 
 export default {
@@ -173,7 +165,7 @@ export default {
     LyTab,
     Insight,
     Info,
-   // Website,
+    // Website,
     Payment,
     Blocking,
   },
@@ -191,7 +183,6 @@ export default {
         { label: "Business Info" },
         { label: "Business Roles" },
         { label: "payment " },
-       
 
         { label: "Blocking" },
       ],

@@ -1,11 +1,7 @@
 <template>
   <div>
     <div class="">
-      <!-- <b-spinner
-        v-if="loader"
-        variant="primary"
-        :label="$t('search.Spinning')"
-      ></b-spinner> -->
+     
 
          <peopleSkeleton  :loading="loader" />
            <peopleSkeleton  :loading="loader" />

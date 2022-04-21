@@ -52,9 +52,7 @@
                 </b-tbody>
               </b-table-simple>
             </div>
-            <!-- <b-button variant="outline" class="btn-outline-primary" v-b-modal.PackageDelete>
-              Delete Account
-            </b-button> -->
+          
           </b-col>
         </b-row>
         <!-- Basics -->
@@ -344,44 +342,6 @@
           </div>
         </b-modal>
 
-        <!-- Delete Account -->
-        <!-- <b-modal id="PackageDelete" centered  title="Delete Acitve Package❗❗" size="sm" hide-footer class="alert alert-success">
-          <div class="">
-            <div>
-              <b-table-simple responsive>
-                <b-thead>
-                  <b-tr>
-                    <b-th class="a-text username"> Package </b-th>
-                    <b-th>Information</b-th>
-                  </b-tr>
-                </b-thead>
-                <b-tbody>
-                  <b-tr>
-                    <b-td class="a-text"> Name: </b-td>
-                    <b-td class="a-text"> {{Packages.user_actived_plan[0].name}} </b-td>
-                  </b-tr>
-                  <b-tr>
-                    <b-td class="a-text"> Start Date: </b-td>
-                    <b-td class="a-text"> {{Packages.user_actived_plan[0].start_at}} </b-td>
-                  </b-tr>
-                  <b-tr>
-                    <b-td class="a-text"> Expiring Date: </b-td>
-                    <b-td class="a-text"> {{Packages.user_actived_plan[0].expired_at}} </b-td>
-                  </b-tr>
-                </b-tbody>
-              </b-table-simple>
-            </div>
-
-            <div class="row p-2">
-              <div class="col">
-                <button
-                  @click="deletePackage()"
-                  class="float-right btn-custom p-2 btn btn-primary mt-2"
-                > Delete</button>
-              </div>
-            </div>
-          </div>
-        </b-modal> -->
       </b-container>
 
       <b-container class="m-footer">
@@ -405,7 +365,7 @@ export default {
     return {
       url: null,
       moment: moment,
-      default_package:{package_id: 1, name: "basic", status: 0, start_at: null, expired_at: null, laravel_through_key: 29},
+      default_package:{package_id: 1, name: "basic"},
         
       modalShowBasics: false,
       modalShowPremium: false,
@@ -425,29 +385,7 @@ export default {
         minimumFractionDigits: 2,
       }),
 
-      dataPackages: {
-        packages: [
-          {
-            id: 1,
-            name: "basic",
-          },
-          {
-            id: 2,
-            name: "premium",
-          },
-        ],
-        premium_package_prices: [1000, 12000],
-        user_actived_plan: [
-          {
-            package_id: 2,
-            name: "premium",
-            status: 1,
-            start_at: "2021-10-18 13:00:33",
-            expired_at: "2021-11-18 13:00:33",
-            laravel_through_key: 1,
-          },
-        ],
-      },
+      
     };
   },
 
@@ -679,10 +617,7 @@ export default {
 }
 </style>
 <style scoped>
-/* .d-flex .img {
-		display: block;
-		width: 60px !important;
-	} */
+
 .btn-custom {
   height: 38px;
   min-width: 123px;

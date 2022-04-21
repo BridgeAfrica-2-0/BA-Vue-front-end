@@ -1,13 +1,17 @@
 <template>
   <div style="overflow-x: hidden; color: black">
-    <Nav :credentials.sync="searchParams" @updateSearchKeyword="updateSearchKeyword" id="top">
+    <Nav
+      :credentials.sync="searchParams"
+      @updateSearchKeyword="updateSearchKeyword"
+      id="top"
+    >
       <template v-slot:button>
         <Button
           media="desktop"
           @click.native="strategY['all']"
           v-if="selectedId == 0"
         />
-        
+
         <Button
           media="desktop"
           @click.native="strategY['business']"
@@ -65,15 +69,15 @@
       </template>
     </Nav>
 
-   
-
     <SubNav
-      @onChangeCategoryName="(val) => categoryName = val"
+      @onChangeCategoryName="(val) => (categoryName = val)"
       @category="getCategory"
       @parentcategory="getparentCategory"
-      @update:keyword="(val) => searchParams = Object.assign(searchParams,val)"
-      @activateSuggestion ="activateSuggestion"
-      @activate:matching:category="(val) => activateMatching=val"
+      @update:keyword="
+        (val) => (searchParams = Object.assign(searchParams, val))
+      "
+      @activateSuggestion="activateSuggestion"
+      @activate:matching:category="(val) => (activateMatching = val)"
       style="margin-top: -25px"
     />
 
@@ -104,13 +108,14 @@
             class="cat"
             @click="
               () => {
-                categoryName = category.category.name
-                getCategory({ cat_id: category.category.id })
+                categoryName = category.category.name;
+                getCategory({ cat_id: category.category.id });
                 searchParams = Object.assign(searchParams, {
                   keyword: category.category.name,
                   cat_id: category.category.id,
-                  })
-              }"
+                });
+              }
+            "
           >
             <img
               class="img-fluid picture logo-img"
@@ -169,23 +174,21 @@
         </b-col>
 
         <b-modal ref="myfilters" id="myModall" hide-footer title=" ">
-          <div class="d-block d- d-sm-block d-md-block d-lg-block d-xl-none">   
+          <div class="d-block d- d-sm-block d-md-block d-lg-block d-xl-none">
+            <div class="ml-3">
+              <Filters
+                v-bind:filterType="selectedId"
+                v-bind:Selectedcategory="Selectedcategory"
+                v-bind:Selectedparentcategory="Selectedparentcategory"
+                v-bind:categoryNameSelected="categoryName"
+                @onFinByCategory="getCategory"
+                @updateSearchKeyword="updateSearchKeyword"
+                @updateSearchLocation="updateSearchLocation"
+                :activateMatching="activateMatching"
+              />
+            </div>
 
-           <div class="ml-3">
-            <Filters
-              v-bind:filterType="selectedId"
-              v-bind:Selectedcategory="Selectedcategory"
-              v-bind:Selectedparentcategory="Selectedparentcategory"
-              v-bind:categoryNameSelected="categoryName"
-              @onFinByCategory="getCategory"
-               @updateSearchKeyword="updateSearchKeyword"
-               @updateSearchLocation="updateSearchLocation"
-              :activateMatching="activateMatching"
-            />
-
-           </div>
-
-          <!--            
+            <!--            
             <div v-if="!isFilter">
             
               <div v-if="categories.length > 0">
@@ -320,8 +323,8 @@
               v-bind:Selectedparentcategory="Selectedparentcategory"
               v-bind:categoryNameSelected="categoryName"
               @onFinByCategory="getCategory"
-                @updateSearchKeyword="updateSearchKeyword"
-                @updateSearchLocation="updateSearchLocation"
+              @updateSearchKeyword="updateSearchKeyword"
+              @updateSearchLocation="updateSearchLocation"
               :activateMatching="activateMatching"
             />
           </div>
@@ -643,7 +646,7 @@ export default {
       prodLoaderr: "business/getloadingState",
       businessess: "business/getBusiness",
       profileConnected: "auth/profilConnected",
-      user:"auth/user"
+      user: "auth/user",
     }),
 
     businesses() {
@@ -678,31 +681,29 @@ export default {
   },
 
   created() {
-    this.islogin=this.$store.getters["auth/isLogged"];
+    this.islogin = this.$store.getters["auth/isLogged"];
 
     if (this.$route.query.keyword) {
       this.searchParams.keyword = this.$route.query.keyword;
-      
     }
-     
-     if(this.islogin) {   
-        
-      
 
-      this.searchParams.location = this.$route.query.location ? this.$route.query.location:this.$store.getters["auth/user"].user.city;
+    if (this.islogin) {
+      this.searchParams.location = this.$route.query.location
+        ? this.$route.query.location
+        : this.$store.getters["auth/user"].user.city;
 
-      this.searchParams.location_placeholder=this.searchParams.location ? this.searchParams.location : this.$t("home.Location");
-    
-     }else{
-     
+      this.searchParams.location_placeholder = this.searchParams.location
+        ? this.searchParams.location
+        : this.$t("home.Location");
+    } else {
+      this.searchParams.location = this.$route.query.location
+        ? this.$route.query.location
+        : "";
 
-     this.searchParams.location = this.$route.query.location ? this.$route.query.location:'';
-
-      this.searchParams.location_placeholder=  this.$route.query.location ? this.$route.query.location: this.$t("home.Location");
-
-     }
-
-    
+      this.searchParams.location_placeholder = this.$route.query.location
+        ? this.$route.query.location
+        : this.$t("home.Location");
+    }
 
     this.onProcessQuery();
     this.getLocation();
@@ -715,24 +716,23 @@ export default {
       business: () => this.onFindBusiness(),
     };
 
-    if (!this.$route.query.uuid)
-      this.getKeyword();
-    
+    if (!this.$route.query.uuid) this.getKeyword();
+
     this.initialize();
   },
 
   data() {
     return {
-      activateMatching:null,
+      activateMatching: null,
       catChose: "",
       subCatChose: "",
       filterChose: "",
-      categoryName:"",
+      categoryName: "",
       islogin: false,
       searchParams: {
         keyword: "",
         cat_id: "",
-        location:"",
+        location: "",
         placeholder: "Find In All",
       },
       strategY: null,
@@ -1667,8 +1667,8 @@ export default {
     };
   },
 
-  destroyed(){
-    this.checkIfItNetwork()
+  destroyed() {
+    this.checkIfItNetwork();
   },
 
   watch: {
@@ -1678,42 +1678,27 @@ export default {
       this.changeNotFoundTitle();
     },
 
-
     searchParams: {
       immediate: true,
       deep: true,
       handler(newValue, oldValue) {
+        // this.activateSuggestion(newValue.keyword);
 
-       // this.activateSuggestion(newValue.keyword);
-       
-        if(this.selectedId==0){   
-        this.$store.commit("allSearch/setKeyword", newValue.keyword); 
-         this.$store.commit("allSearch/setLocation", newValue.location);
-
-        }
-
-        else if(this.selectedId==1){
-            
-            
-         this.$store.commit("business/setLocation", newValue.location);
-         this.$store.commit("business/setKeyword", newValue.keyword);
-        }else if(this.selectedId==4){
-          
+        if (this.selectedId == 0) {
+          this.$store.commit("allSearch/setKeyword", newValue.keyword);
+          this.$store.commit("allSearch/setLocation", newValue.location);
+        } else if (this.selectedId == 1) {
+          this.$store.commit("business/setLocation", newValue.location);
+          this.$store.commit("business/setKeyword", newValue.keyword);
+        } else if (this.selectedId == 4) {
           this.$store.commit("marketSearch/setKeyword", newValue.keyword);
 
           this.$store.commit("marketSearch/setLocation", newValue.location);
+        } else if (this.selectedId == 3) {
+          this.$store.commit("networkSearch/setKeyword", newValue.keyword);
+
+          this.$store.commit("networkSearch/setLocation", newValue.location);
         }
-
-        else if(this.selectedId==3){
-          
-           this.$store.commit("networkSearch/setKeyword", newValue.keyword);
-
-           
-           this.$store.commit("networkSearch/setLocation", newValue.location);
-
-        }
-        
-
       },
     },
   },
@@ -1722,8 +1707,6 @@ export default {
     ...mapMutations({
       auth: "auth/profilConnected",
     }),
-
-
 
     ...mapActions({
       userStore: "search/FIND_USER",
@@ -1738,66 +1721,46 @@ export default {
       getGeo: "business/getGeo",
     }),
 
-    async checkIfItNetwork(){
-      if ("network" == this.profileConnected.user_type){
-        const request = await this.$repository.share.switch(null,"reset");
+    async checkIfItNetwork() {
+      if ("network" == this.profileConnected.user_type) {
+        const request = await this.$repository.share.switch(null, "reset");
 
-        if (request.status)
-          this.auth()
+        if (request.status) this.auth();
       }
-      
     },
 
- updateSearchLocation(location){
+    updateSearchLocation(location) {
+      this.searchParams.location = location;
 
-   
-   
-    this.searchParams.location = location;
+      this.searchParams.location_placeholder = location;
+    },
 
-    this.searchParams.location_placeholder=  location;
-    
+    updateSearchKeyword(keyword) {
+      //  this.activateSuggestion(keyword);
+      this.searchParams.keyword = keyword;
+      if (this.selectedId == 0) {
+        this.getKeyword();
+      } else if (this.selectedId == 1) {
+        this.onFindBusiness();
+      } else if (this.selectedId == 3) {
+        this.searchNetworks();
+      } else if (this.selectedId == 4) {
+        this.searchProducts({});
+      }
+    },
 
- },
-
-updateSearchKeyword(keyword){
-  
-  //  this.activateSuggestion(keyword);
-   this.searchParams.keyword=keyword;
-  if(this.selectedId == 0){
-   this.getKeyword()
-  }else if(this.selectedId == 1){
-    this.onFindBusiness()
-  }else if(this.selectedId==3){
-
-    this.searchNetworks()
-  }else if(this.selectedId == 4){
-    this.searchProducts({})
-  }
-
-
-    
-},
-
-
-      activateSuggestion: async function(value){
-      
-        this.$store.commit("allSearch/setSuggestedKeyword", []); 
-      if (value){
-     
-        
-      
+    activateSuggestion: async function (value) {
+      this.$store.commit("allSearch/setSuggestedKeyword", []);
+      if (value) {
         const response = await this.$repository.search.sugesstion(value);
 
-        if (response.success){ 
+        if (response.success) {
           console.log(response.data);
-            
-            this.$store.commit("allSearch/setSuggestedKeyword", response.data); 
-            
+
+          this.$store.commit("allSearch/setSuggestedKeyword", response.data);
         }
       }
-      },
-
-
+    },
 
     async getAuth() {
       const response = await this.$repository.share.WhoIsConnect({
@@ -1828,49 +1791,47 @@ updateSearchKeyword(keyword){
     },
 
     getKeyword(data) {
-
       this.$store.commit("marketSearch/setSubFilters", []);
       this.$store.commit("marketSearch/setSubCat", []);
 
       var keyword = this.searchParams.keyword;
       var location = this.searchParams.location;
-      
 
       let elm = data ? data : keyword ? { keyword: keyword } : { keyword: "" };
 
-       this.$store.commit("allSearch/setKeyword", keyword);
-       this.$store.commit("allSearch/setLocation", location);
-     
-       if (this.searchParams.keyword)
-        this.activateMatching = {name:this.searchParams.keyword}
-        this.activateSuggestion(this.searchParams.keyword);
-      
+      this.$store.commit("allSearch/setKeyword", keyword);
+      this.$store.commit("allSearch/setLocation", location);
+
+      if (this.searchParams.keyword)
+        this.activateMatching = { name: this.searchParams.keyword };
+      this.activateSuggestion(this.searchParams.keyword);
+
       this.$store
-        .dispatch("allSearch/SEARCH", {keyword:keyword, location:location})
+        .dispatch("allSearch/SEARCH", { keyword: keyword, location: location })
         .then((res) => {
           // console.log("categories loaded!");
         })
         .catch((err) => {
           console.log("Error erro!");
         });
-
-        
     },
 
     async onFindBusiness() {
-
       this.$store.commit("marketSearch/setSubFilters", []);
       this.$store.commit("marketSearch/setSubCat", []);
 
       this.$store.commit("business/setLoading", true);
-      
-      if (this.searchParams.keyword)
-        this.activateMatching = {name:this.searchParams.keyword}
-        this.activateSuggestion(this.searchParams.keyword);
 
-      if (this.searchParams.keyword.trim()) 
-      await this.findBusiness({ keyword: this.searchParams.keyword, location:this.searchParams.location });
-     
+      if (this.searchParams.keyword)
+        this.activateMatching = { name: this.searchParams.keyword };
+      this.activateSuggestion(this.searchParams.keyword);
+
+      if (this.searchParams.keyword.trim())
+        await this.findBusiness({
+          keyword: this.searchParams.keyword,
+          location: this.searchParams.location,
+        });
+
       this.$store.commit("business/setLoading", false);
     },
 
@@ -1898,13 +1859,12 @@ updateSearchKeyword(keyword){
     },
 
     searchProducts(data) {
-    
       this.$store.commit("marketSearch/setSubFilters", []);
       this.$store.commit("marketSearch/setSubCat", []);
 
-      this.activateMatching = {name:this.searchParams.keyword};
-        this.activateSuggestion(this.searchParams.keyword);
-      
+      this.activateMatching = { name: this.searchParams.keyword };
+      this.activateSuggestion(this.searchParams.keyword);
+
       this.$store
         .dispatch("marketSearch/searchProducts", data)
         .then((res) => {
@@ -1916,14 +1876,11 @@ updateSearchKeyword(keyword){
     },
 
     searchNetworks(data) {
-    
-   
+      const newParams = data ? data : { keyword: this.searchParams.keyword };
 
-      const newParams =  data ? data : {keyword:this.searchParams.keyword}
-      
       if (this.searchParams.keyword)
-        this.activateMatching = {name:this.searchParams.keyword}
-        this.activateSuggestion(this.searchParams.keyword);
+        this.activateMatching = { name: this.searchParams.keyword };
+      this.activateSuggestion(this.searchParams.keyword);
 
       this.$store
         .dispatch("networkSearch/SEARCH", data)
@@ -1954,7 +1911,7 @@ updateSearchKeyword(keyword){
     initialize() {
       this.strategy = {
         2: () => this.onFindUser(),
-        5: () => this.onFindPost(), 
+        5: () => this.onFindPost(),
         1: () => this.onFindBusiness(),
         3: () => this.searchNetworks(),
         4: () => this.searchProducts({}),
@@ -1993,9 +1950,8 @@ updateSearchKeyword(keyword){
 
     changeNotFoundTitle() {
       try {
-        this.notFoundComponentTitle = this.strategyForNotFoundComponentTitle[
-          this.selectedId
-        ]();
+        this.notFoundComponentTitle =
+          this.strategyForNotFoundComponentTitle[this.selectedId]();
       } catch (error) {
         this.notFoundComponentTitle = "";
       }
@@ -2141,7 +2097,8 @@ updateSearchKeyword(keyword){
           break;
 
         case "MC":
-          this.selectcategories = this.Mayor_councils_filters_and_public_institution;
+          this.selectcategories =
+            this.Mayor_councils_filters_and_public_institution;
 
           break;
 
@@ -2202,7 +2159,6 @@ updateSearchKeyword(keyword){
 
         case "Tailoring":
           this.selectcategories = this.Tailoring;
-          
 
           break;
       }
@@ -2231,20 +2187,18 @@ updateSearchKeyword(keyword){
       var filterId = this.filterChose ? this.filterChose : "";
       var data = { cat_id: catId, sub_cat: subCatId, filter_id: filterId };
       if (this.selectedId == 4) {
-       // this.searchProducts(data);
+        // this.searchProducts(data);
       } else if (this.selectedId == 1) {
-      //  this.searchBusiness(data);
+        //  this.searchBusiness(data);
       } else if (this.selectedId == 0) {
-      //  this.allSearchByCat(data);
+        //  this.allSearchByCat(data);
       }
 
       this.$bvModal.hide("myModall");
     },
 
     getCategory(value) {
-      
       this.Selectedcategory = value;
-
 
       if (this.selectedId == 4) {
         this.searchProducts({ cat_id: value.cat_id, sub_cat: value.id });
@@ -2252,27 +2206,17 @@ updateSearchKeyword(keyword){
         this.searchBusiness({ cat_id: value.cat_id, sub_cat: value.id });
       } else if (this.selectedId == 0) {
         this.allSearchByCat({ cat_id: value.cat_id, sub_cat: value.id });
+      } else if (this.selectedId == 3) {
+        this.searchNetworks({
+          cat_id: value.cat_id,
+          sub_cat: value.id,
+          keyword: this.searchParams.keyword,
+        });
+      } else if (this.selectedId == 5) {
+        this._onFindPost();
+      } else if (this.selectedId == 2) {
+        this._onFindUser();
       }
-
-        else if (this.selectedId == 3) {
-        this.searchNetworks({ cat_id: value.cat_id, sub_cat: value.id,keyword:this.searchParams.keyword });
-      }
-
-
-
- else if (this.selectedId ==5) {
-
-   this._onFindPost();
-      }
-
- else if (this.selectedId == 2) {
-
-   this._onFindUser();
-           }
-
-
-
-      
     },
 
     allSearchByCat(data) {
@@ -2534,7 +2478,7 @@ updateSearchKeyword(keyword){
 
         case "Tailoring":
           this.selectcategories = this.Tailoring;
-          
+
           break;
 
         //health ubits
@@ -2751,11 +2695,7 @@ updateSearchKeyword(keyword){
 li .nav-link:hover {
   background-color: white;
   color: #e75c18;
-
-  
 }
-
-
 
 @media only screen and (max-width: 1201px) {
   .leftblock {

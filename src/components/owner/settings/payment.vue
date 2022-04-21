@@ -1,7 +1,13 @@
 <template>
   <b-container class="container-fluid">
     <b-container>
-      <p class="text">{{$t("businessowner.Select_a_payment_method_for_your_bridget_africa_account")}}</p>
+      <p class="text">
+        {{
+          $t(
+            "businessowner.Select_a_payment_method_for_your_bridget_africa_account"
+          )
+        }}
+      </p>
     </b-container>
 
     <div class="b-bottom">
@@ -72,27 +78,6 @@
               ></b-form-radio>
             </div>
           </div>
-          <!-- <div class="my-4 operator">
-            <div class="operator-img-box">
-              <img
-                :src="require('@/assets/img/payment/expressU.jpg')"
-                alt="EXPRESS UNION"
-              />
-            </div>
-            <div class="operator-name">
-              <p class="mb-0 mx-4 title-font-size font-weight-bold">
-                Express Union
-              </p>
-            </div>
-            <div class="operator-select-box ml-md-2">
-              <b-form-radio
-                v-model="PaymentForm.operator"
-                name="operator"
-                value="EXPRESS"
-                class="operator-select"
-              ></b-form-radio>
-            </div>
-          </div> -->
 
           <div class="row p-2">
             <div class="col">
@@ -125,7 +110,9 @@
         <div class="row">
           <div class="col-10 col-sm-9 col-md-8">
             <b-form-input
-              :placeholder="PaymentForm.phone ? PaymentForm.phone : '237 6XX XXX XXX'"
+              :placeholder="
+                PaymentForm.phone ? PaymentForm.phone : '237 6XX XXX XXX'
+              "
               id="number"
               v-model="PaymentForm.phone"
               type="tel"
@@ -148,7 +135,7 @@
 <script>
 export default {
   name: "payment",
-  props: ['profileId'],
+  props: ["profileId"],
   data() {
     return {
       url: null,
@@ -164,7 +151,7 @@ export default {
         subscribe: "type",
         phone: "",
         operator: "",
-        country: ""
+        country: "",
       },
 
       show: false,
@@ -180,8 +167,8 @@ export default {
     },
   },
 
-  mounted(){
-    console.log("profileId", this.profileId)
+  mounted() {
+    console.log("profileId", this.profileId);
     this.url = this.profileId;
     this.DefaultPayment();
   },
@@ -209,22 +196,22 @@ export default {
       this.RequestPayment = !this.RequestPayment;
       if (this.operator !== "") this.$emit("requestpayment", this.operator);
     },
-    
+
     DefaultPayment() {
       console.log("defaultPayment");
       this.$store
-      .dispatch("profileSettingsEdit/getDefaultPayment", {
-        path: `payment-method`
+        .dispatch("profileSettingsEdit/getDefaultPayment", {
+          path: `payment-method`,
         })
-      .then(() => {
-        console.log(this.defaultPayment);
-        this.PaymentForm.operator = this.defaultPayment.payment_method;
-        this.PaymentForm.phone = this.defaultPayment.phone;
-        console.log('ohh yeah');
-      })
-      .catch(err => {
-        console.log({ err: err });
-      });
+        .then(() => {
+          console.log(this.defaultPayment);
+          this.PaymentForm.operator = this.defaultPayment.payment_method;
+          this.PaymentForm.phone = this.defaultPayment.phone;
+          console.log("ohh yeah");
+        })
+        .catch((err) => {
+          console.log({ err: err });
+        });
     },
 
     confirmDefaltPayment() {

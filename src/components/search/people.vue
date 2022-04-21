@@ -1,115 +1,111 @@
 <template>
+  <div>
+    <peopleSkeleton :loading="false" />
 
-<div>   
+    <div class="people-style border shadow">
+      <b-row class="mb-1">
+        <b-col md="3" cols="4" sm="3" class="my-auto">
+          <b-avatar
+            variant="light"
+            class="p-avater"
+            :src="people.profile_picutre"
+          ></b-avatar>
+        </b-col>
 
-   
-   <peopleSkeleton  :loading="false" />
-
-
-  <div class="people-style border shadow">
-
-    <b-row class="mb-1">
-      <b-col md="3" cols="4" sm="3" class="my-auto">
-        <b-avatar
-          variant="light"
-          class="p-avater"
-          :src="people.profile_picutre"
-        ></b-avatar>
-      </b-col>
-
-      <b-col md="8" cols="8" sm="8">
-        <div>
-          <b-row class="shift">
-            <b-col md="12" lg="6" xl="6" sm="6">
-              <div class="e-name">
-                <b-row>
-                  <b-col
-                    md="6"
-                    lg="12"
-                    cols="6"
-                    sm="12"
-                    xl="12"
-                    class="mt-lg-2"
-                  >
-                    <div class="mt-2 mt-lg-0 mt-xl-0 username">
-                      <router-link
-                        :to="{ name: 'Follower', params: { id: people.id } }"
-                      >
-                        <b>{{ people.name }}</b>
-                      </router-link>
-                      {{ people.profile_picture }}
-                    </div>
-                  </b-col>
-
-                  <b-col
-                    md="6"
-                    lg="12"
-                    cols="6"
-                    sm="12"
-                    xl="12"
-                    class="mt-3 mt-lg-1 mt-xl-0"
-                  >
-                    <h6 class="follower text mt-xl-3">
-                      {{ people.followers }} {{ $t("search.Community") }}
-                    </h6>
-                  </b-col>
-                </b-row>
-              </div>
-            </b-col>
-
-            <b-col lg="6" xl="6" cols="12" sm="6" md="12">
-              <div>
-                <b-row class="mt-lg-0">
-                  <b-col
-                    md="6"
-                    lg="12"
-                    cols="6"
-                    sm="12"
-                    xl="12"
-                    class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
-                  >
-                    <BtnCtaMessage :element="people" type="people" />
-                  </b-col>
-
-                  <b-col
-                    md="6"
-                    lg="12"
-                    cols="6"
-                    sm="12"
-                    xl="12"
-                    class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
-                  >
-                    <b-button
-                      block
-                      size="sm"
-                      class="b-background flexx pobtn shadow"
-                      :class="people.is_follow !== 0 && 'u-btn'"
-                      :id="'followbtn' + people.id"
-                      variant="primary"
-                      @click="handleFollow(people)"
+        <b-col md="8" cols="8" sm="8">
+          <div>
+            <b-row class="shift">
+              <b-col md="12" lg="6" xl="6" sm="6">
+                <div class="e-name">
+                  <b-row>
+                    <b-col
+                      md="6"
+                      lg="12"
+                      cols="6"
+                      sm="12"
+                      xl="12"
+                      class="mt-lg-2"
                     >
-                      <i
-                        class="fas fa-lg btn-icon"
-                        :class="
-                          people.is_follow !== 0
-                            ? 'fa-user-minus'
-                            : 'fa-user-plus'
-                        "
-                      ></i>
+                      <div class="mt-2 mt-lg-0 mt-xl-0 username">
+                        <router-link
+                          :to="{ name: 'Follower', params: { id: people.id } }"
+                        >
+                          <b>{{ people.name }}</b>
+                        </router-link>
+                        {{ people.profile_picture }}
+                      </div>
+                    </b-col>
 
-                      <span class="btn-com">
-                        {{ $t("search.Community") }}
-                      </span>
-                    </b-button>
-                  </b-col>
-                </b-row>
-              </div>
-            </b-col>
-          </b-row>
-        </div>
-      </b-col>
-    </b-row>
-  </div> </div>
+                    <b-col
+                      md="6"
+                      lg="12"
+                      cols="6"
+                      sm="12"
+                      xl="12"
+                      class="mt-3 mt-lg-1 mt-xl-0"
+                    >
+                      <h6 class="follower text mt-xl-3">
+                        {{ people.followers }} {{ $t("search.Community") }}
+                      </h6>
+                    </b-col>
+                  </b-row>
+                </div>
+              </b-col>
+
+              <b-col lg="6" xl="6" cols="12" sm="6" md="12">
+                <div>
+                  <b-row class="mt-lg-0">
+                    <b-col
+                      md="6"
+                      lg="12"
+                      cols="6"
+                      sm="12"
+                      xl="12"
+                      class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
+                    >
+                      <BtnCtaMessage :element="people" type="people" />
+                    </b-col>
+
+                    <b-col
+                      md="6"
+                      lg="12"
+                      cols="6"
+                      sm="12"
+                      xl="12"
+                      class="mt-2 mt-lg-2 mt-xl-2 btn-2 center"
+                    >
+                      <b-button
+                        block
+                        size="sm"
+                        class="b-background flexx pobtn shadow"
+                        :class="people.is_follow !== 0 && 'u-btn'"
+                        :id="'followbtn' + people.id"
+                        variant="primary"
+                        @click="handleFollow(people)"
+                      >
+                        <i
+                          class="fas fa-lg btn-icon"
+                          :class="
+                            people.is_follow !== 0
+                              ? 'fa-user-minus'
+                              : 'fa-user-plus'
+                          "
+                        ></i>
+
+                        <span class="btn-com">
+                          {{ $t("search.Community") }}
+                        </span>
+                      </b-button>
+                    </b-col>
+                  </b-row>
+                </div>
+              </b-col>
+            </b-row>
+          </div>
+        </b-col>
+      </b-row>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -123,11 +119,9 @@ export default {
     },
   },
 
-   components: {
-    peopleSkeleton
-    
+  components: {
+    peopleSkeleton,
   },
-
 
   methods: {
     async handleFollow(user) {

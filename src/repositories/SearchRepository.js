@@ -46,13 +46,13 @@ class Repository {
 
   async matching(keyword) {
     try {
-      
-     
 
-    
-      
-    let url=`visitor/search/category?keyword=${keyword}`;
-  
+
+
+
+
+      let url = `visitor/search/category?keyword=${keyword}`;
+
       const response = await axios.get(url)
       return {
         success: (response.data.data) ? true : false,
@@ -70,13 +70,13 @@ class Repository {
 
   async sugesstion(keyword) {
     try {
-      
-     
 
-    
-      
-    let url=`visitor/search/suggested-keyword?keyword=${keyword}`;
-  
+
+
+
+
+      let url = `visitor/search/suggested-keyword?keyword=${keyword}`;
+
       const response = await axios.get(url)
       return {
         success: (response.data.data) ? true : false,
@@ -143,7 +143,7 @@ class Repository {
   }
 
 }
-      
+
 export default new Repository()
 
 

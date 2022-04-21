@@ -1,13 +1,7 @@
 <template>
   <div v-if="islogin">
-    <!-- <b-spinner
-      v-if="prodLoader"
-      variant="primary"
-      :label="$t('search.Spinning')"
-    ></b-spinner> -->
-
-    <Skeleton  :loading="prodLoader" />
-      <Skeleton  :loading="prodLoader" />
+    <Skeleton :loading="prodLoader" />
+    <Skeleton :loading="prodLoader" />
 
     <b-alert v-if="products.data.length === 0" show variant="warning"
       ><a href="#" class="alert-link">
@@ -15,96 +9,7 @@
       </a></b-alert
     >
 
-
-    
-
-
-    <!-- <div
-      v-for="(prod, index) in products.data"
-      :key="index"
-      class="people-style shadow h-100"
-    >
-      <b-row>
-        <b-col md="4" cols="4">
-          <div class="center-img">
-            <img fluid :src="prod.picture" center class="r-image" />
-          </div>
-        </b-col>
-        <b-col md="4" cols="8">
-          <div class="flx100">
-            <p class="textt">
-              <strong
-                class="title cursor-pointer"
-                @click="getProductDetails(prod)"
-              >
-                {{ prod.name }}
-              </strong>
-              <br />
-
-              <span class="price">
-                <strong> {{ prod.price }} Fcfa </strong>
-              </span>
-              <br />
-              <strong> {{ $t("search.Description") }} </strong>
-              <br />
-
-              <read-more
-                :more-str="$t('search.read_more')"
-                class="readmore"
-                :text="prod.description"
-                link="#"
-                :less-str="$t('search.read_less')"
-                :max-chars="100"
-              >
-              </read-more>
-            </p>
-          </div>
-        </b-col>
-
-        <b-col md="4" cols="12">
-          <div class="s-button">
-            <b-row align-h="center">
-              <b-col
-                md="12"
-                lg="4"
-                xl="12"
-                sm="12"
-                cols="4"
-                class="mt-2 text-center"
-              >
-         <b-button variant="primary" @click="buyNow(prod)"
-                  ><span> {{ $t("search.Buy_now") }} </span>
-                </b-button> 
-                <BtnCtaMessage
-                  :element="prod"
-                  :isProduct="true"
-                  :isBuyNow="true"
-                  type="business"
-                   :isPremium="prod.user_package_name "
-                />
-              </b-col>
-
-              <b-col
-                md="12"
-                lg="4"
-                xl="12"
-                sm="12"
-                cols="4"
-                class="mt-2 text-center"
-              >
-                <b-button  v-if="prod.user_package_name =='premium'" variant="primary" style="width:100%" @click="AddToCard(prod)"
-                  >
-                  <b-icon icon="cart4"></b-icon>
-                  <span>Add to Cart</span>
-                </b-button>
-              </b-col>
-            </b-row>
-          </div>
-        </b-col>
-      </b-row>
-    </div> -->
-
-     <div
+    <div
       v-for="(product, index) in products.data"
       :key="index"
       class="people-style p-3 shadow h-100"
@@ -146,21 +51,24 @@
       <br />
       <div class="d-inline-flex float-right mt-2">
         <div class="">
-          <!-- <b-button variant="primary" @click="buyNow(product)"
-            ><span>{{ $t("general.Buy_Now") }}</span>
-          </b-button> -->
           <BtnCtaMessage
             :element="product"
             :isProduct="true"
             :isBuyNow="true"
             type="business"
-            :isPremium="product.user_package_name "  
+            :isPremium="product.user_package_name"
           />
         </div>
 
         <div class="ml-2">
-          <b-button  v-if="product.user_package_name =='premium'" variant="primary" @click="handleAddToCard(product)"
-            ><span> <b-icon icon="cart4"></b-icon> {{ $t("general.Add_to_Cart") }}</span>
+          <b-button
+            v-if="product.user_package_name == 'premium'"
+            variant="primary"
+            @click="handleAddToCard(product)"
+            ><span>
+              <b-icon icon="cart4"></b-icon>
+              {{ $t("general.Add_to_Cart") }}</span
+            >
           </b-button>
         </div>
       </div>
@@ -195,12 +103,12 @@
 </template>
 
 <script>
- /**
-   * The custom HTML `<market>` component.
-   *
-   * @author Edouard Yonga
-   * Copyright (c) Bridge Africa. All rights reserved.
-*/
+/**
+ * The custom HTML `<market>` component.
+ *
+ * @author Edouard Yonga
+ * Copyright (c) Bridge Africa. All rights reserved.
+ */
 import ProductDetails from "@/components/businessf/ProductDetails.vue";
 import login from "@/components/search/login";
 import Skeleton from "@/components/skeleton";
@@ -232,50 +140,48 @@ export default {
   components: {
     ProductDetails,
     login,
-    Skeleton
+    Skeleton,
   },
 
   created() {
     this.islogin = this.$store.getters["auth/isLogged"];
 
     console.log(this.islogin);
-    if(this.islogin){  
-    this.getProducts();
-
-     }
+    if (this.islogin) {
+      this.getProducts();
+    }
   },
 
   methods: {
-     /**
-       * This will be ignored on rendering
-       * @private
-    */
+    /**
+     * This will be ignored on rendering
+     * @private
+     */
     getProductDetails(product) {
-       /**
-         * Fired when the button is clicked.
-         */
+      /**
+       * Fired when the button is clicked.
+       */
       console.log(product);
       this.product = product;
       this.viewProduct = true;
     },
 
-
-     /**
-       * This will be ignored on rendering
-       * @private
-    */
+    /**
+     * This will be ignored on rendering
+     * @private
+     */
     changePage(value) {
-      // this.$store.commit("marketSearch/setProducts", '');
-      // this.$store.commit("marketSearch/setLoader", true);
-      // this.prodLoader = true;
       /**
-         * Fired when the button is clicked.
-         */
+       * Fired when the button is clicked.
+       */
 
       this.currentPage = value;
 
       this.$store
-        .dispatch("marketSearch/nextPage", {url:this.products.next, page:this.currentPage } )
+        .dispatch("marketSearch/nextPage", {
+          url: this.products.next,
+          page: this.currentPage,
+        })
         .then((res) => {
           console.log("products list: ");
           console.log(this.products);
@@ -288,50 +194,43 @@ export default {
         });
     },
 
- /**
-       * This will be ignored on rendering
-       * @private
-    */
+    /**
+     * This will be ignored on rendering
+     * @private
+     */
     async getProducts() {
       /**
-         * Fired before the DOM is loaded.
-         */
-      // this.prodLoader = true;
+       * Fired before the DOM is loaded.
+       */
+
       await this.$store
         .dispatch("marketSearch/searchProducts", {})
         .then((res) => {
-         
-          // this.prodLoader = false;
           this.total = this.products.total;
         })
-        .catch((err) => {
-          // this.prodLoader = false;
-          console.log("loader: ", this.prodLoader);
-          console.log("products error: ");
-          console.error(err);
-        });
+        .catch((err) => {});
     },
 
- /**
-       * This will be ignored on rendering
-       * @private
-    */
+    /**
+     * This will be ignored on rendering
+     * @private
+     */
     buyNow(prod) {
       /**
-         * Fired when the button is clicked.
-         */
+       * Fired when the button is clicked.
+       */
       this.AddToCard(prod);
       this.$router.push({ name: "payment" });
     },
 
- /**
-       * This will be ignored on rendering
-       * @private
-    */
+    /**
+     * This will be ignored on rendering
+     * @private
+     */
     AddToCard(id, val) {
-       /**
-         * Fired when the button is clicked.
-         */
+      /**
+       * Fired when the button is clicked.
+       */
       console.log("add to card ", id);
       this.$store
         .dispatch("cart/addToCart", id)
@@ -344,7 +243,6 @@ export default {
           if (val) this.$router.push({ name: "payment" });
         })
         .catch((error) => {
-          console.log(error);
           this.flashMessage.show({
             status: "error",
             message: "error occur",
@@ -366,8 +264,6 @@ button.pagination {
   color: orange;
   margin-left: 60px;
 }
-
-
 
 .flx50 {
   flex-basis: 80%;

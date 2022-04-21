@@ -1,29 +1,30 @@
 <template>
-
-<div>   
-
-   <b-skeleton-wrapper :loading="loading">
+  <div>
+    <b-skeleton-wrapper :loading="loading">
       <template #loading>
         <div class="border people-style shadow h-100">
-  <div class="row">
-  
-     <b-col md="3" cols="4" sm="3" class="my-auto" > <b-skeleton type="avatar"  class="p-avater" ></b-skeleton>   </b-col> 
- <b-col md="8" cols="8" sm="8" class="mt-2" style="margin-left:-15px">
-          <b-skeleton class="" width="85%"></b-skeleton>
-          <b-skeleton width="55%"></b-skeleton>
-         
-           <b-skeleton width="90%"></b-skeleton>
- </b-col>
-  </div>
+          <div class="row">
+            <b-col md="3" cols="4" sm="3" class="my-auto">
+              <b-skeleton type="avatar" class="p-avater"></b-skeleton>
+            </b-col>
+            <b-col
+              md="8"
+              cols="8"
+              sm="8"
+              class="mt-2"
+              style="margin-left: -15px"
+            >
+              <b-skeleton class="" width="85%"></b-skeleton>
+              <b-skeleton width="55%"></b-skeleton>
+
+              <b-skeleton width="90%"></b-skeleton>
+            </b-col>
+          </div>
         </div>
       </template>
-
-   
     </b-skeleton-wrapper>
-
-    </div> 
-    
-      </template>
+  </div>
+</template>
 
 
       
@@ -35,16 +36,13 @@ export default {
   props: {
     loading: {
       type: Boolean,
-      default:false
+      default: false,
     },
   },
-
 };
 </script>
 
 <style scoped>
-
-
 .people-style {
   border-top-left-radius: 40px;
 
@@ -62,15 +60,12 @@ export default {
   margin-bottom: 10px;
 }
 
-
-
 @media only screen and (max-width: 768px) {
   .p-avater {
     margin-right: -15px;
     margin-top: 3px;
   }
 
-  
   .people-style {
     border-top-left-radius: 40px;
 
@@ -90,8 +85,6 @@ export default {
     margin-right: 5px;
     margin-left: 5px;
   }
-
-  
 }
 
 @media only screen and (max-width: 520px) {
@@ -100,7 +93,6 @@ export default {
     margin-top: 3px;
   }
 
-
   .people-style {
     border-top-left-radius: 40px;
 
@@ -120,19 +112,15 @@ export default {
     margin-right: 5px;
     margin-left: 5px;
   }
-
-  
 }
 
 @media only screen and (min-width: 764px) {
-  
   .p-avater {
     width: 95px;
     height: 95px;
     margin-bottom: -4px;
     margin-left: -5px;
   }
-
 }
 
 @media only screen and (min-width: 764px) and (max-width: 991.18px) {
@@ -142,8 +130,6 @@ export default {
 }
 
 @media only screen and (max-width: 762px) {
-  
-
   .p-avater {
     width: 75px;
     height: 75px;
@@ -151,9 +137,5 @@ export default {
     margin-left: -5px;
     margin-top: -4px;
   }
-
-
-
 }
-
 </style>

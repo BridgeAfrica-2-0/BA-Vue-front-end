@@ -72,7 +72,7 @@
       @category="getCategory"
       @parentcategory="getparentCategory"
       @update:keyword="(val) => searchParams = Object.assign(searchParams,val)"
-      
+      @activateSuggestion ="activateSuggestion"
       @activate:matching:category="(val) => activateMatching=val"
       style="margin-top: -25px"
     />
@@ -1780,7 +1780,7 @@ updateSearchKeyword(keyword){
 
 
       activateSuggestion: async function(value){
-     
+      
         this.$store.commit("allSearch/setSuggestedKeyword", []); 
       if (value){
      

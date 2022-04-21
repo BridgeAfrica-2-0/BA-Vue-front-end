@@ -35,7 +35,7 @@
 
 
         
-         <span v-if="suggestedKeyword.length">
+         <span >
           <h6 class="bold">{{ $t("search.suggested_keywords") }}</h6>
           <b-form-radio
             v-for="(filter, i) in suggestedKeyword.slice(0, 4)"
@@ -49,7 +49,8 @@
             {{ filter.suggested_keyword }}
           </b-form-radio>
 
-          <!-- <b-link v-b-modal="'myModalll'">{{ $t("search.See_all") }}</b-link> -->
+        
+           <b-link v-b-modal="'suggestedmodal'">{{ $t("search.See_all") }}</b-link>
           <hr />
         </span>
 
@@ -704,6 +705,50 @@
         >{{ $t("search.Search") }}
       </b-button> -->
     </b-modal>
+
+
+
+
+
+<!-- Sub categories modal -->
+    <b-modal ref="suggestedmodal" id="suggestedmodal" hide-footer title=" ">
+      <div style="column-count: 2">
+       
+
+
+          <b-form-radio
+            v-for="(filter, i) in suggestedKeyword"
+            :key="i.value"
+            v-model="searchkeyword"
+            :value="filter.id"
+            @change="changesearchkeyword(filter)"
+            name="sub-filters"
+            class="m-1 br-3"
+          >
+            {{ filter.suggested_keyword }}
+          </b-form-radio>
+
+
+
+      </div>
+
+      <!-- <br />
+      <b-button
+        @click="searchByFilter(filter)"
+        :disabled="selected_sub_cat.length < 1"
+        variant="primary"
+        class="m-3 float-right"
+        >{{ $t("search.Search") }}
+      </b-button> -->
+    </b-modal>
+
+
+
+  
+
+
+
+
   </div>
 </template>
 

@@ -13,7 +13,7 @@
                 ></b-avatar>
               </b-col>
 
-              <b-col md="8" cols="8" sm="8">
+              <b-col md="8" cols="8" sm="8">    
                 <div>
                   <b-row class="shift">
                     <b-col md="12" lg="6" xl="6">
@@ -36,7 +36,7 @@
                           <b-col
                             md="6"
                             lg="12"
-                            cols="6"
+                            cols="6"  
                             xl="12"
                             class="mt-2 mt-lg-1 mt-xl-2"
                           >
@@ -192,7 +192,16 @@ export default {
         type: this.type,
       };
 
-    
+     this.$confirm(
+        {
+          message: `Are you sure?`,
+          button: {
+            no: 'No',
+            yes: 'Yes'
+          },
+        
+          callback: confirm => {
+            if (confirm) {
       
       let fd = new FormData();
       fd.append("banned_id", dataInfo.id);
@@ -219,6 +228,8 @@ export default {
           message: "Unable to blocked " + dataInfo.refernce
         });
       });
+
+            }}})
     },  
 
     cta(data) {

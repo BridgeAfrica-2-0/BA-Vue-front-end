@@ -7,8 +7,7 @@
           <span
             v-for="(category, index) in categories.slice(0, 6)"
             :key="index"
-            
-          >
+           >
           
             <b-nav-item-dropdown
               :id="'dropdown-' + index"
@@ -18,6 +17,8 @@
                   showSubCat(category.category, category.sub_cat)
                   bcategory({ cat_id: category.category.id })
                   $emit('activate:matching:category', null)
+                  $emit('activateSuggestion',category.category.name)
+                  
                 }">
                   {{ category.category.name }}
                 </span>
@@ -38,6 +39,7 @@
                         cat_id: subCat.cat_id
                       });
                       $emit('activate:matching:category', {name:subCat.name})
+                       $emit('activateSuggestion',subCat.name)
                       bcategory({ cat_id: subCat.cat_id, id: subCat.id })
                       
                       
@@ -94,6 +96,7 @@
                       $emit('onChangeCategoryName', category.category.name);
                       bcategory({ cat_id: category.category.id })
                       $emit('activate:matching:category', null)
+                      $emit('activateSuggestion', subCat.name)
                     }"
                   >
                     {{ category.category.name }}
@@ -185,7 +188,7 @@ export default {
       this.searchProduct(data);
     },
     allSearch(data) {
-      console.log("[data]: ", data);
+    
       this.$store
         .dispatch("allSearch/SEARCH", data)
         .then((res) => {

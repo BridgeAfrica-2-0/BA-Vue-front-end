@@ -73,31 +73,6 @@ Vue.use(ReadMore);
 
 Vue.prototype.$axios = axios;
 
-// const firebaseConfig = {
-//   apiKey: process.env.API_KEY,
-//   authDomain: process.env.AUTH_DOMAIN,
-//   projectId: process.env.PROJECT_ID,
-//   storageBucket: process.env.STORAGE_BUCKET,
-//   messagingSenderId: process.env.MESSAGING_SENDER_ID,
-//   appId: process.env.APP_ID,
-//   measurementId: process.env.MEARSUREMENT_ID,
-// };
-
-// firebase.initializeApp(firebaseConfig);
-
-// const messaging = firebase.messaging();
-
-// messaging
-//   .requestPermission()
-//   .then(() => {
-//     return messaging.getToken();
-//   })
-//   .then((token) => {
-//     console.log(token);
-//   })
-//   .catch((err) => {
-//     console.log(err);
-//   });
 
 Vue.use(VueSocialauth, {
     providers: {

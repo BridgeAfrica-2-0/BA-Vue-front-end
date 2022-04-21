@@ -110,7 +110,7 @@
     <b-row class="mt-4">
       <b-col cols="12">
         <h6 class="font-weight-bolder">
-          Editors ({{ nFormatter(editorss) }})
+          Editors ({{ nFormatter(editorss) }}) 
         </h6>
         <hr width="100%" />
         <b-skeleton-wrapper :loading="loading">
@@ -568,6 +568,7 @@ export default {
             this.editorspage += 1;
             $state.loaded();
           } else {
+             this.editorss = 0;
             $state.complete();
           }
         })

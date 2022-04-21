@@ -33,7 +33,7 @@
         </p>
         <p class="d-flex justify-content-start align-items-start">
           <b-icon icon="link" class="primary icon-size"></b-icon>
-          {{ business_intro.website }}
+           <span v-if="business_intro.website !='null'">   {{ business_intro.website }}  </span> 
         </p>
         <p class="d-flex justify-content-start align-items-start">
           <b-icon icon="people-fill" class="primary icon-size"></b-icon>
@@ -41,11 +41,11 @@
         </p>
         <p class="d-flex justify-content-start align-items-start">
           <b-icon icon="telephone-fill" class="primary icon-size"></b-icon>
-          {{ business_intro.phone1 }}
+        <span v-if="business_intro.phone1 !='null' ">    {{ business_intro.phone1 }}  </span>
         </p>
         <p class="d-flex justify-content-start align-items-start">
           <b-icon icon="envelope-fill" class="primary icon-size"></b-icon>
-          {{ business_intro.email }}
+        <span v-if="business_intro.email !='null'">      {{ business_intro.email }}  </span>
         </p>
         <p class="d-flex justify-content-start align-items-start">
           <b-icon icon="clock" class="primary icon-size"></b-icon>

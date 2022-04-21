@@ -197,6 +197,21 @@ export default {
         type: this.type,
       };
 
+
+       this.$confirm(
+        {
+          message: `Are you sure?`,
+          button: {
+            no: 'No',
+            yes: 'Yes'
+          },
+        
+          callback: confirm => {
+            if (confirm) {
+      
+
+
+
       let fd = new FormData();
       fd.append("banned_id", dataInfo.id);
       fd.append("banned_type", dataInfo.refernce);
@@ -220,7 +235,9 @@ export default {
             status: "error",
             message: "Unable to blocked " + dataInfo.refernce,
           });
-        });
+        });  
+
+            }}})
     },
 
     count(number) {

@@ -1,7 +1,9 @@
 <template>
   <div>
-
-     <div  v-if="filterType == '0' || filterType == '1' || filterType == '4'"  class="mt-2 mb-2">
+    <div
+      v-if="filterType == '0' || filterType == '1' || filterType == '4'"
+      class="mt-2 mb-2"
+    >
       <b-button
         class="float-right"
         size="sm"
@@ -9,48 +11,72 @@
         @click="resetFilters"
         >{{ $t("search.Reset") }}</b-button
       >
-
     </div>
 
-    <br/>
+    <br />
 
     <div v-if="filterType == '0' || filterType == '1' || filterType == '4'">
+      <b-form-group
+        v-if="nameOfCategory"
+        label-cols-lg="3"
+        :label="$t('search.Categories')"
+        label-size="md"
+        label-class="font-weight-bold pt-0"
+        class="mb-0 pt-6 text-left"
+      >
+      </b-form-group>
 
-       <b-form-group
-          v-if="nameOfCategory"
-          label-cols-lg="3"
-          :label="$t('search.Categories')"
-          label-size="md"
-          label-class="font-weight-bold pt-0"
-          class="mb-0 pt-6 text-left"
+      <b-form-select
+        v-model="nameOfCategory"
+        :options="categoriesAll"
+        class="mb-2"
+        v-if="nameOfCategory && !activateMatching"
+      >
+      </b-form-select>
+
+      <span>
+        <h6 class="bold">{{ $t("search.suggested_keywords") }}</h6>
+        <b-form-radio
+          v-for="(filter, i) in suggestedKeyword.slice(0, 4)"
+          :key="i.value"
+          v-model="searchkeyword"
+          :value="filter.id"
+          @change="changesearchkeyword(filter)"
+          name="sub-filters"
+          class="m-1 br-3"
         >
-        </b-form-group>
+          {{ filter.suggested_keyword }}
+        </b-form-radio>
 
-      <b-form-select 
-        v-model="nameOfCategory" 
-        :options="categoriesAll" 
-        class="mb-2" v-if="nameOfCategory && !activateMatching">
-          
-        </b-form-select>
+        <b-link v-b-modal="'suggestedmodal'">{{ $t("search.See_all") }}</b-link>
+        <hr />
+      </span>
 
       <div v-if="activateMatching" class="pb-2">
-        <b-badge 
-          v-for="item in categoryRendering" 
-          :key="item.id" :class="[ item.actived ? 'actived' : 'inactied' , 'p-1' ,'m-1']" 
-          @click="matching(item)">
-            {{item.category}}
+        <b-badge
+          v-for="item in categoryRendering"
+          :key="item.id"
+          :class="[item.actived ? 'actived' : 'inactied', 'p-1', 'm-1']"
+          @click="matching(item)"
+        >
+          {{ item.category }}
         </b-badge>
 
-        <span v-if="activateMatching && !loading && !categoryRendering.length">Not data found</span>
+        <span v-if="activateMatching && !loading && !categoryRendering.length"
+          >Not data found</span
+        >
       </div>
 
-      <b-spinner style="width: 1rem; height: 1rem; color:#e75c18" label="Large Spinner" v-if="loading"></b-spinner>
+      <b-spinner
+        style="width: 1rem; height: 1rem; color: #e75c18"
+        label="Large Spinner"
+        v-if="loading"
+      ></b-spinner>
 
-      <div   class="mt-3" v-if="subCategories.length">
+      <div class="mt-3" v-if="subCategories.length">
         <span>
-          
           <b-form-radio
-            v-for="(subCat, index) in subCategories.slice(0,5)"
+            v-for="(subCat, index) in subCategories.slice(0, 5)"
             v-model="selected_sub_cat"
             :key="index"
             :value="subCat.id"
@@ -140,88 +166,88 @@
             </b-form-select>
           </div>
 
-         
-
           <!-- city -->
-          <div v-if="!showMore">  
-          <div>
-            <b-form-group
-              label-cols-lg="3"
-              :label="$t('search.City')"
-              label-size="md"
-              label-class="font-weight-bold pt-0"
-              class="mb-0 text-left"
-            >
-            </b-form-group>
-          
-                 <vue-bootstrap-typeahead
-              v-model="city"
-              :data="cities"
-              :minMatchingChars="0"
-              @hit="searchThiscity(query)"
-              :maxMatches="10"
-              :serializer="(item) => item.name"
-              placeholder="City"
-              class=""
-            />
+          <div v-if="!showMore">
+            <div>
+              <b-form-group
+                label-cols-lg="3"
+                :label="$t('search.City')"
+                label-size="md"
+                label-class="font-weight-bold pt-0"
+                class="mb-0 text-left"
+              >
+              </b-form-group>
 
+              <vue-bootstrap-typeahead
+                v-model="city"
+                :data="cities"
+                :minMatchingChars="0"
+                @hit="searchThiscity(city)"
+                v-on:keyup.enter="searchThiscity(city)"
+                :maxMatches="10"
+                :serializer="(item) => item.name"
+                placeholder="City"
+                class=""
+              />
+            </div>
 
+            <div>
+              <b-form-group
+                label-cols-lg="3"
+                :label="$t('search.Neighbourhood')"
+                label-size="md"
+                label-class="font-weight-bold pt-0"
+                class="mb-0 mt-3 text-left"
+              >
+              </b-form-group>
+
+              <vue-bootstrap-typeahead
+                v-model="query"
+                :data="lneighbourhoods"
+                :minMatchingChars="0"
+                @hit="searchThisNeibourhood(query)"
+                :maxMatches="10"
+                :serializer="(item) => item.name"
+                placeholder="Where"
+                class=""
+              />
+
+              <b-link
+                v-if="networkFilter.region"
+                class="float-right mt-2 mb-2"
+                @click="showMoreFilters"
+              >
+                More
+              </b-link>
+              <br />
+            </div>
           </div>
 
-          <div>
-            <b-form-group
-              label-cols-lg="3"
-              :label="$t('search.Neighbourhood')"
-              label-size="md"
-              label-class="font-weight-bold pt-0"
-              class="mb-0 mt-3 text-left"
-            >
-            </b-form-group>
-
-            <vue-bootstrap-typeahead
-              v-model="query"
-              :data="lneighbourhoods"
-              :minMatchingChars="0"
-              @hit="searchThisNeibourhood(query)"
-              :maxMatches="10"
-              :serializer="(item) => item.name"
-              placeholder="Where"
-              class=""
-            />
-
-            <b-link  v-if="networkFilter.region" class="float-right mt-2 mb-2" @click="showMoreFilters">
-              More
-            </b-link>
-            <br />
-          </div>
-
-           </div>
-
-          <div class="more" v-if="showMore ">
+          <div class="more" v-if="showMore">
             <hr />
 
-             <!-- Region -->
-          <div class="mt-1" v-if="networkFilter.region">
-            <b-form-group
-              label-cols-lg="3"
-              :label="$t('search.Region')"
-              label-size="md"
-              label-class="font-weight-bold pt-0"
-              class="mb-0 text-left"
-            >
-            </b-form-group>
+            <!-- Region -->
+            <div class="mt-1" v-if="networkFilter.region">
+              <b-form-group
+                label-cols-lg="3"
+                :label="$t('search.Region')"
+                label-size="md"
+                label-class="font-weight-bold pt-0"
+                class="mb-0 text-left"
+              >
+              </b-form-group>
 
-            <b-form-select
-              v-model="networkSelect.region"
-              :options="regions"
-              value-field="id"
-              text-field="name"
-              @change="getBDivisions()"
-            >
-            </b-form-select>
-          </div>
+              <b-form-select
+                v-model="networkSelect.region"
+                :options="regions"
+                value-field="id"
+                text-field="name"
+                @change="getBDivisions()"
+              >
+              </b-form-select>
+            </div>
 
-          <hr />
+            <hr />
 
             <!-- Division -->
             <div v-if="networkFilter.division">
@@ -289,10 +315,13 @@
               </b-form-select>
             </div>
 
-             <b-link  v-if="networkFilter.region" class="float-right mt-2 mb-2" @click="hideMoreFilters">
-             Hide More
+            <b-link
+              v-if="networkFilter.region"
+              class="float-right mt-2 mb-2"
+              @click="hideMoreFilters"
+            >
+              Hide More
             </b-link>
-
           </div>
         </div>
       </div>
@@ -435,8 +464,6 @@
         </span> -->
       </div>
     </div>
-
-   
 
     <!-- Network -->
     <!-- <div v-if="filterType == '1' || filterType == '4'">
@@ -649,8 +676,6 @@
       </b-form-group>
     </b-modal>
 
-   
-
     <!-- Sub categories modal -->
     <b-modal ref="myfilters1" id="myModalllo" hide-footer title=" ">
       <div style="column-count: 2">
@@ -664,6 +689,32 @@
           class=""
         >
           {{ sub.name }}
+        </b-form-radio>
+      </div>
+
+      <!-- <br />
+      <b-button
+        @click="searchByFilter(filter)"
+        :disabled="selected_sub_cat.length < 1"
+        variant="primary"
+        class="m-3 float-right"
+        >{{ $t("search.Search") }}
+      </b-button> -->
+    </b-modal>
+
+    <!-- Sub categories modal -->
+    <b-modal ref="suggestedmodal" id="suggestedmodal" hide-footer title=" ">
+      <div style="column-count: 2">
+        <b-form-radio
+          v-for="(filter, i) in suggestedKeyword"
+          :key="i.value"
+          v-model="searchkeyword"
+          :value="filter.id"
+          @change="changesearchkeyword(filter)"
+          name="sub-filters"
+          class="m-1 br-3"
+        >
+          {{ filter.suggested_keyword }}
         </b-form-radio>
       </div>
 
@@ -692,65 +743,68 @@ export default {
 
   name: "filters",
 
-  props: ["filterType", "activateMatching", "Selectedcategory", "Selectedparentcategory", "categoryNameSelected"],
-  watch: { 
-
-     query(newQuery) {
-        axios.get(`neighborhoods/${newQuery}`).then(({ data }) => {
-          this.$store.commit("auth/setneigbourhoods", data.data);
-        });
-
-        
+  props: [
+    "filterType",
+    "activateMatching",
+    "Selectedcategory",
+    "Selectedparentcategory",
+    "categoryNameSelected",
+  ],
+  watch: {
+    query(newQuery) {
+      axios.get(`neighborhoods/${newQuery}`).then(({ data }) => {
+        this.$store.commit("auth/setneigbourhoods", data.data);
+      });
     },
 
     city(newQuery) {
-
       axios.get(`visitor/search/city?city=${newQuery}`).then(({ data }) => {
-          this.$store.commit("auth/setCities", data.data);
-        });
-        
-     
+        this.$store.commit("auth/setCities", data.data);
+      });
     },
 
-    
-    categoryNameSelected: function(newValue,oldValue) {
-      this.nameOfCategory = newValue
+    categoryNameSelected: function (newValue, oldValue) {
+      this.nameOfCategory = newValue;
     },
 
-    activateMatching: async function(value){
-      if (value){
-        this.matchingCategory = []
+    activateMatching: async function (value) {
+      if (value) {
+        this.matchingCategory = [];
         this.$store.commit("marketSearch/setSubFilters", []);
-        this.loading = true
+        this.loading = true;
         const response = await this.$repository.search.matching(value.name);
 
-        if (response.success){
-            this.matchingCategory = response.data.map((item) => { 
+        if (response.success) {
+          this.matchingCategory = response.data.map((item) => {
+            const sub = item.sub_category.map((c) => ({
+              ...c,
+              cat_id: item.id,
+            }));
 
-              const sub = item.sub_category.map(c => ({ ...c, cat_id: item.id}))
-              
-              return  {
-                ...item, actived:false,
-                sub_category: sub
-              }
-            })
-            
-            this.loading = false
-        }else{
-          this.loading = false
+            return {
+              ...item,
+              actived: false,
+              sub_category: sub,
+            };
+          });
+
+          this.loading = false;
+        } else {
+          this.loading = false;
         }
       }
     },
 
-    nameOfCategory: function(value){
+    nameOfCategory: function (value) {
+      if (!value.length) return false;
 
-      if (!value.length) return false
-      
-      const cat = this.$store.getters["marketSearch/getCategories"].find(r => r.category.name === value)
+      const cat = this.$store.getters["marketSearch/getCategories"].find(
+        (r) => r.category.name === value
+      );
 
-      this.$emit("onFinByCategory", {cat_id: cat.category.id })
-      
-      this.showSubCat(cat.sub_cat)
+      this.$emit("onFinByCategory", { cat_id: cat.category.id });
+
+      this.showSubCat(cat.sub_cat);
     },
 
     filterType: function (newId) {
@@ -763,7 +817,6 @@ export default {
     },
 
     Selectedparentcategory: function (newVal) {
-      
       switch (newVal) {
         case "Agriculture":
           this.selectcategories = this.agriculture_filters;
@@ -795,7 +848,7 @@ export default {
 
     Selectedcategory: function (newVal) {
       this.showform = false;
-      
+
       switch (newVal) {
         case "More":
           this.$refs["myfilters1"].show();
@@ -949,18 +1002,18 @@ export default {
           break;
       }
     },
-
   },
 
   data() {
     return {
-      loading:false,
+      loading: false,
       matchingCategory: [],
       query: "",
       city: "",
       showMore: false,
       // [Edouard] data
-      nameOfCategory:null,
+      nameOfCategory: null,
+      searchkeyword: "",
       distance: "",
       selected_sub_cat: [],
       newCategories: [],
@@ -1001,7 +1054,7 @@ export default {
         council: null,
         neighbourhood: null,
       },
-      
+
       strategies: null,
       currentFilter: null,
       slide: 0,
@@ -1810,46 +1863,45 @@ export default {
     };
   },
 
-
   computed: {
-    
     categoryRendering() {
-      return this.matchingCategory
+      return this.matchingCategory;
     },
 
     lneighbourhoods() {
       return this.$store.getters["auth/neigbourhoods"];
     },
 
-
- cities() {
-    
-      let nei=  this.$store.getters["auth/cities"];
-// const arrayFailed = Object.entries(nei).map((arr) => ({
-//   id: arr[0],
-//   name: arr[1],
-// }));
-
-return nei;
-
+    suggestedKeyword() {
+      return this.$store.state.allSearch.suggestedKeyword;
     },
 
+    cities() {
+      let nei = this.$store.getters["auth/cities"];
+      // const arrayFailed = Object.entries(nei).map((arr) => ({
+      //   id: arr[0],
+      //   name: arr[1],
+      // }));
+
+      return nei;
+    },
 
     categoriesAll() {
-
-      const category = this.$store.getters["marketSearch/getCategories"].map(e => {
-        return {
-          "id": e.category.id,
-          "value": e.category.name,
-          "text":e.category.name,
-          "sub_cat": e.category.sub_cat
+      const category = this.$store.getters["marketSearch/getCategories"].map(
+        (e) => {
+          return {
+            id: e.category.id,
+            value: e.category.name,
+            text: e.category.name,
+            sub_cat: e.category.sub_cat,
+          };
         }
-      })
-      return category
+      );
+      return category;
     },
 
     categories() {
-      return this.$store.getters["marketSearch/getCategories"]
+      return this.$store.getters["marketSearch/getCategories"];
     },
 
     subCategories() {
@@ -1882,8 +1934,7 @@ return nei;
   },
 
   created() {
-    
-    this.nameOfCategory = this.categoryNameSelected
+    this.nameOfCategory = this.categoryNameSelected;
     this.getCountries();
     this.getUserNeibourhoods();
     this.strategies = {
@@ -1893,33 +1944,36 @@ return nei;
   },
 
   methods: {
+    matching(cat) {
+      this.$emit("onFinByCategory", { cat_id: cat.id });
 
-    matching(cat){
-        
-        this.$emit('onFinByCategory', {cat_id: cat.id })
-        
-        this.showSubCat(cat.sub_category)
+      this.showSubCat(cat.sub_category);
 
-        this.matchingCategory = this.matchingCategory.map(item => {
-          return (item.id === cat.id) ? {...item, actived: true} : {...item, actived: false}
-        })
+      this.matchingCategory = this.matchingCategory.map((item) => {
+        return item.id === cat.id
+          ? { ...item, actived: true }
+          : { ...item, actived: false };
+      });
+    },
+
+    changesearchkeyword(keyword) {
+      this.$emit("updateSearchKeyword", keyword.suggested_keyword);
     },
 
     resetFilters(restName) {
-      
-      this.matchingCategory = []
-      this.activateMatching = false
-      this.nameOfCategory = null
-      this.query = null
-      this.city= null
-      this.$store.commit("marketSearch/setSubCat",[])
+      this.matchingCategory = [];
+      this.activateMatching = false;
+      this.nameOfCategory = null;
+      this.query = null;
+      this.city = null;
+      this.$store.commit("marketSearch/setSubCat", []);
       this.searchParams.country_id = null;
       this.searchParams.region_id = null;
       this.searchParams.division_id = null;
       this.searchParams.council_id = null;
-     
-      this.selectedFilter=null;
-      this.selected_sub_cat=null;
+
+      this.selectedFilter = null;
+      this.selected_sub_cat = null;
 
       this.searchParams.neighborhood_id = null;
 
@@ -1937,8 +1991,7 @@ return nei;
       this.searchParams.distanceInKM = null;
       this.searchParams.price_range = null;
 
-
-        /* if (this.filterType == 1) {
+      /* if (this.filterType == 1) {
         this.searchBusiness(this.searchParams);
       } else if (this.filterType == 4) {
         this.searchProducts(this.searchParams);
@@ -1946,37 +1999,31 @@ return nei;
         this.allSearch(this.searchParams);
       } */
 
-      this.nameOfCategory = ""
-      
+      this.nameOfCategory = "";
     },
 
-      showSubCat(subCat) {
-    
-        this.$store.commit("marketSearch/setSubFilters", []);
-        // this.subCategories.push(subCat);
-        // this.searchProduct({ catId: catId, cat_id: catId });
-        this.$store.commit("marketSearch/setSubCat", subCat);
-  
-        //if (!subCat.length) this.hideSubCat(category.id);
-        // console.log("Subcat:", this.subCategories);
+    showSubCat(subCat) {
+      this.$store.commit("marketSearch/setSubFilters", []);
+      // this.subCategories.push(subCat);
+      // this.searchProduct({ catId: catId, cat_id: catId });
+      this.$store.commit("marketSearch/setSubCat", subCat);
 
-      },
-
+      //if (!subCat.length) this.hideSubCat(category.id);
+      // console.log("Subcat:", this.subCategories);
+    },
 
     showMoreFilters() {
       this.showMore = true;
     },
 
-    hideMoreFilters(){
+    hideMoreFilters() {
       this.showMore = false;
     },
 
     getFilter(subCat) {
-      
-      
       this.searchParams.cat_id = subCat.cat_id;
       this.searchParams.sub_cat = subCat.id;
-      
+
       this.noFilter = "";
       this.$store.commit("marketSearch/setSubFilters", []);
       if (this.filterType == 4) {
@@ -2012,7 +2059,7 @@ return nei;
             console.error(err);
             // this.filterLoader = false;
           });
-      } else if (this.filterType == 1  || this.filterType == 0 ) {
+      } else if (this.filterType == 1 || this.filterType == 0) {
         // method to search for a business lol
         this.$store
           .dispatch("marketSearch/getFilter", subCat.id)
@@ -2047,16 +2094,13 @@ return nei;
             // this.filterLoader = false;
           });
 
-          if (this.filterType == 0) {
-            this.allSearch({
-               cat_id: subCat.cat_id,
-               sub_cat: subCat.id,
-               filter_id: subCat.id,
-            });
-
-            
-          }
-          
+        if (this.filterType == 0) {
+          this.allSearch({
+            cat_id: subCat.cat_id,
+            sub_cat: subCat.id,
+            filter_id: subCat.id,
+          });
+        }
       }
     },
 
@@ -2152,27 +2196,22 @@ return nei;
       //console.log("[debug]neigbourhood: ", this.userNeighbourhoods);
     },
 
-    searchThisNeibourhood(keyword){
+    searchThisNeibourhood(keyword) {
+      this.searchParams.neighbourhood = keyword;
 
-          
-          this.searchParams.neighbourhood = keyword;
-
-        
-
-        if (this.filterType == 1) {
-          this.searchBusiness(this.searchParams);
-        } else if (this.filterType == 4) {
-          this.searchProducts(this.searchParams);
-        } else if (this.filterType == 0) {
-          this.allSearch(this.searchParams);
-        }
-
+      if (this.filterType == 1) {
+        this.searchBusiness(this.searchParams);
+      } else if (this.filterType == 4) {
+        this.searchProducts(this.searchParams);
+      } else if (this.filterType == 0) {
+        this.allSearch(this.searchParams);
+      }
     },
 
+    searchThiscity(keyword) {
+      let data = { city: keyword };
 
-searchThiscity(keyword){
-
- let data = { city: keyword };
+      this.$emit("updateSearchLocation", keyword);
 
       this.searchParams.city = keyword;
 
@@ -2183,10 +2222,7 @@ searchThiscity(keyword){
       } else if (this.filterType == 0) {
         this.allSearch(this.searchParams);
       }
-
-
-},
-
+    },
 
     searchByNeigbourhood(nei) {
       let data = {
@@ -2257,7 +2293,6 @@ searchThiscity(keyword){
 
       this.searchParams.neighborhood_id = null;
 
-     
       this.$store
         .dispatch("networkSearch/REGIONS", data)
         .then((res) => {
@@ -2281,16 +2316,13 @@ searchThiscity(keyword){
           console.log("Error erro!");
         });
 
-
-         if (this.filterType == 1) {
+      if (this.filterType == 1) {
         this.searchBusiness(this.searchParams);
       } else if (this.filterType == 4) {
         this.searchProducts(this.searchParams);
       } else if (this.filterType == 0) {
         this.allSearch(this.searchParams);
       }
-
-
     },
 
     getBDivisions() {
@@ -2470,9 +2502,9 @@ searchThiscity(keyword){
     getDivisions() {
       //console.log("[debug] networks: ", this.networkSelect);
       const data = { region_id: this.networkSelect.region };
-      
+
       this.searchNetworks(data);
-      
+
       this.$store
         .dispatch("networkSearch/DIVISIONS", data)
         .then((res) => {
@@ -2545,7 +2577,7 @@ searchThiscity(keyword){
         });
       this.searchNetworks(data);
     },
-    
+
     networkFilterFill() {
       if (this.networkFilter.region == false) this.getRegions();
       if (
@@ -2568,7 +2600,7 @@ searchThiscity(keyword){
       }
       this.networkFilter.region = true;
     },
-    
+
     networkFilterReset() {
       this.searchNetworks({ keyword: "" });
       this.networkFilter = {
@@ -2589,7 +2621,7 @@ searchThiscity(keyword){
 
     async searchNetworks(data) {
       this.networkFilter.category = true;
-      
+
       await this.$store
         .dispatch("networkSearch/SEARCH", data)
         .then((res) => {
@@ -2603,7 +2635,6 @@ searchThiscity(keyword){
     // END Network search filter
     // All Search
     allSearchByCat(data) {
-      
       this.$store
         .dispatch("allSearch/SEARCH", data)
         .then((res) => {
@@ -2616,7 +2647,6 @@ searchThiscity(keyword){
 
     // Not ED code
     selectedsidebar() {
-      
       switch (this.default_category) {
         case "Primary Education":
           this.categories_filters = this.primary_eduction_filters;
@@ -2877,7 +2907,6 @@ searchThiscity(keyword){
 </script>
 
 <style scoped>
-
 .inactied {
   cursor: pointer;
   font-size: 14px;

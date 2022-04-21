@@ -223,7 +223,7 @@ export default {
         GET_USERS_CHAT_LIST_Dos({ commit, state }, data) {
             commit("setUsers", []);
             console.log("[data]:", data);
-            console.log("currentuser:", state.currentUser.user);
+            
 
             if (data.type == 'user') {
                 axios.get(`/messages/userListing`)
@@ -266,7 +266,6 @@ export default {
             commit("setUsers", []);
             console.log("[data]:", data);
 
-            console.log("currentuser:", state.currentUser.user);
 
             commit("setLoader", true);
             let keyword = data.keyword ? '/' + data.keyword : ''

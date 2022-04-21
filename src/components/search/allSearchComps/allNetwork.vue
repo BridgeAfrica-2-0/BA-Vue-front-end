@@ -1,15 +1,9 @@
 <template>
   <div>
-    <b-spinner
-      v-if="loader"
-      variant="primary"
-      :label="$t('search.Spinning')"
-    ></b-spinner>
+    <Skeleton :loading="loader" />
+    <Skeleton :loading="loader" />
 
-    <b-alert
-      v-if="networks.total == 0 || networks.data.length == 0"
-      show
-      variant="warning"
+    <b-alert v-if="networks.total == 0" show variant="warning"
       ><a href="#" class="alert-link"
         >{{ $t("search.No_Network_available") }}!
       </a>
@@ -33,10 +27,8 @@
                 {{ network.name }}
               </router-link>
             </strong>
-            <br />
-            {{ network.purpose }}
-            <br />
-            {{ count(network.community) }}  {{ $t("dashboard.Community") }} 
+
+            {{ count(network.community) }} {{ $t("dashboard.Community") }}
             <br />
 
             <span class="location">
@@ -105,22 +97,6 @@
         </b-col>
       </b-row>
     </div>
-
-    <!-- pagination -->
-
-    <!-- <b-pagination
-      v-if="networks.next || networks.previous"
-      v-model="currentPage"
-      :total-rows="networks.total"
-      :per-page="networks.per_page"
-      aria-controls="my-table"
-      @change="changePage"
-      align="center"
-      :disabled="networks.data.length > 0 ? false : true"
-    ></b-pagination> -->
-
-    <!-- End pagination -->
-
     <b-modal v-model="show" id="modal-sm" size="sm" hide-header>
       <p class="text-center">Unable to join network!</p>
     </b-modal>
@@ -129,6 +105,7 @@
 
 <script>
 import axios from "axios";
+import Skeleton from "@/components/skeleton";
 
 export default {
   props: ["title", "image"],
@@ -144,6 +121,11 @@ export default {
       nextLoad: false,
     };
   },
+
+  components: {
+    Skeleton,
+  },
+
   created() {
     //console.log("Mini Networks => ".this.network());
   },
@@ -157,8 +139,6 @@ export default {
   },
 
   methods: {
-
-     
     async handleFollow(user) {
       const uri = user.is_follow === 0 ? `/follow-community` : `/unfollow`;
       const nextFollowState = user.is_follow === 0 ? 1 : 0;
@@ -192,8 +172,7 @@ export default {
             status: "success",
             message: response.data.message,
             blockClass: "custom-block-class",
-          })
-          
+          });
         })
         .catch((err) => {
           this.show = true;

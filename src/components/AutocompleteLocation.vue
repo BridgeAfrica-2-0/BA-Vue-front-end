@@ -27,12 +27,12 @@ export default {
     this.mapbox = Mapbox;
   },
   mounted() {
-    console.log('-----::', this.infos)
+  
     this.initmap();
   },
   methods: {
     handleResult(response) {
-      console.log(response.result);
+    
       let details = {
         coordinates: response.result.center,
         address: response.result.text,
@@ -53,13 +53,13 @@ export default {
     //     zoom: this.zoom,
     //     center: this.center,
     //   });
-    //   console.log(this.region);
+    
     //   var regon =
     //     this.region && this.region.length > 0
     //       ? this.region[0].name.toLowerCase()
     //       : "centre";
     //   regon = regon.charAt(0).toUpperCase() + regon.slice(1);
-    //   console.log(this.region);
+  
     //   const geocoder = new MapboxGeocoder({
     //     accessToken: mapboxgl.accessToken,
     //     mapboxgl: mapboxgl,

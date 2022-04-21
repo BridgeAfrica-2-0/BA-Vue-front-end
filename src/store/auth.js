@@ -167,7 +167,7 @@ export default {
 
       var currentUrl = window.location.pathname;
 
-    //  window.location.href = "/login";
+      window.location.href = "/login";
 
       // console.log(router.app._route);
      

@@ -1,5 +1,5 @@
 <template>
-  <div class="container" style="">
+  <div class="container" style="">  
     <div class="container">
       <b-row>
         <b-col md="4">
@@ -46,6 +46,8 @@
         <b-col cols="12" v-for="(notification, index) in all" :key="index">
           <div :class="notification.mark_as_read ? 'text-secondary' : 'font-weight-bold'">
             <p class="">
+
+            
               <span style="display:inline-flex">
                 <b-form-checkbox
                   name="checkbox-1"
@@ -60,7 +62,7 @@
                   :src="notification.profile_picture"
                 ></b-avatar>
                 <span class="m-0  d-inline-block ml-2 username">
-                  {{ notification.reference_type}}
+                  {{ notification.userName}}
                   <div class="duration">{{ notification.created_at | fromNow }}</div>
                 </span>
               </span>

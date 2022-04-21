@@ -1,7 +1,7 @@
 <template>
   <b-container class="container-fluid">
     <b-container class="text">
-      <b-container class="bv-example-row">  {{Packages}}
+      <b-container class="bv-example-row">  
         <b-row>
         
         
@@ -52,9 +52,7 @@
                 </b-tbody>
               </b-table-simple>
             </div>
-            <!-- <b-button variant="outline" class="btn-outline-primary" v-b-modal.PackageDelete>
-              Delete Account
-            </b-button> -->
+          
           </b-col>
         </b-row>
         <!-- Basics -->
@@ -62,7 +60,7 @@
           v-model="modalShowBasics"
           centered
           size="xl"
-          hide-footer="true"
+          hide-footer
           no-stacking
           header-bg-variant="light"
           body-bg-variant="light"
@@ -142,7 +140,7 @@
           v-model="modalShowPremium"
           centered
           size="xl"
-          hide-footer="true"
+          hide-footer
           header-bg-variant="light"
           body-bg-variant="light"
           no-stacking
@@ -344,44 +342,6 @@
           </div>
         </b-modal>
 
-        <!-- Delete Account -->
-        <!-- <b-modal id="PackageDelete" centered  title="Delete Acitve Package❗❗" size="sm" hide-footer class="alert alert-success">
-          <div class="">
-            <div>
-              <b-table-simple responsive>
-                <b-thead>
-                  <b-tr>
-                    <b-th class="a-text username"> Package </b-th>
-                    <b-th>Information</b-th>
-                  </b-tr>
-                </b-thead>
-                <b-tbody>
-                  <b-tr>
-                    <b-td class="a-text"> Name: </b-td>
-                    <b-td class="a-text"> {{Packages.user_actived_plan[0].name}} </b-td>
-                  </b-tr>
-                  <b-tr>
-                    <b-td class="a-text"> Start Date: </b-td>
-                    <b-td class="a-text"> {{Packages.user_actived_plan[0].start_at}} </b-td>
-                  </b-tr>
-                  <b-tr>
-                    <b-td class="a-text"> Expiring Date: </b-td>
-                    <b-td class="a-text"> {{Packages.user_actived_plan[0].expired_at}} </b-td>
-                  </b-tr>
-                </b-tbody>
-              </b-table-simple>
-            </div>
-
-            <div class="row p-2">
-              <div class="col">
-                <button
-                  @click="deletePackage()"
-                  class="float-right btn-custom p-2 btn btn-primary mt-2"
-                > Delete</button>
-              </div>
-            </div>
-          </div>
-        </b-modal> -->
       </b-container>
 
       <b-container class="m-footer">
@@ -405,7 +365,7 @@ export default {
     return {
       url: null,
       moment: moment,
-      default_package:{package_id: 1, name: "basic", status: 0, start_at: null, expired_at: null, laravel_through_key: 29},
+      default_package:{package_id: 1, name: "basic"},
         
       modalShowBasics: false,
       modalShowPremium: false,
@@ -425,29 +385,7 @@ export default {
         minimumFractionDigits: 2,
       }),
 
-      dataPackages: {
-        packages: [
-          {
-            id: 1,
-            name: "basic",
-          },
-          {
-            id: 2,
-            name: "premium",
-          },
-        ],
-        premium_package_prices: [1000, 12000],
-        user_actived_plan: [
-          {
-            package_id: 2,
-            name: "premium",
-            status: 1,
-            start_at: "2021-10-18 13:00:33",
-            expired_at: "2021-11-18 13:00:33",
-            laravel_through_key: 1,
-          },
-        ],
-      },
+      
     };
   },
 
@@ -502,12 +440,10 @@ export default {
       }
     },
 
-
-
     getAccounts() {
       this.$store
         .dispatch("profileAccountType/getaccounts", {
-          path: `profile/settings/packages`,
+        path: `profile/settings/packages`
         })
         .then(() => {
           console.log("ohh yeah");
@@ -520,29 +456,36 @@ export default {
     confirmPayment() {
       this.show = true;
       let date = this.getNow();
-      console.log(date);
-      console.log("PaymentForm:", this.PaymentForm);
+    
       let formData = new FormData();
       formData.append("subscribe", this.PaymentForm.subscribe);
       formData.append("phone", this.PaymentForm.phone);
       formData.append("operator", this.PaymentForm.operator);
       formData.append("package_id", this.PaymentForm.package_id);
-      // formData.append("start_at", date.startDate)
+    
       this.$store
         .dispatch("profileAccountType/confirmPayment", {
-          path: `settings/packages/${this.url}`,
+          path: `profile/settings/packages`,
           formData: formData,
         })
         .then(({ data }) => {
-          console.log(data);
-          console.log("ohh yeah");
-          this.$refs["AcRequestPayment"].hide();
-          this.show = false;
+            
+            this.$refs["AcRequestPayment"].hide();
+            this.show = false;
+          if(this.PaymentForm.operator == "ORANGE"){
+
+             window.location.href =data.payment_url;
+          }
+          
+         else if(this.PaymentForm.operator == "MTN"){
+          
           this.getAccounts();
           this.flashMessage.show({
             status: "success",
             message: this.$t("businessowner.Transaction_Completed"),
           });
+         }
+
         })
         .catch((err) => {
           console.log({ err: err });
@@ -674,10 +617,7 @@ export default {
 }
 </style>
 <style scoped>
-/* .d-flex .img {
-		display: block;
-		width: 60px !important;
-	} */
+
 .btn-custom {
   height: 38px;
   min-width: 123px;

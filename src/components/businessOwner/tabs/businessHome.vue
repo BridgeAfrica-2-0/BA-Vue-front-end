@@ -8,7 +8,7 @@
 
         <br />
 
-        <b-card>
+        <b-card v-if="!isPremium">
           <div class="text-center">
             <span class="username text-center mb-3">
               <b> {{ $t("businessowner.Upgrade_Your_Business_Account") }} </b>
@@ -39,15 +39,19 @@
               alt="Kitten"
             />
 
-            <b-button @click="$emit('pageChange')" variant="primary" class="text-center mt-3">
+            <b-button
+              @click="$emit('pageChange')"
+              variant="primary"
+              class="text-center mt-3"
+            >
               {{ $t("businessowner.Upgrade_Now") }}
             </b-button>
           </div>
         </b-card>
       </b-col>
 
-      <b-col md="8" lg="7" xl="8" class="postpadding" >
-        <Post />    
+      <b-col md="8" lg="7" xl="8" class="postpadding">
+        <Post />
       </b-col>
     </b-row>
   </div>
@@ -58,6 +62,7 @@ import Intro from "../intro";
 import comunitiDashboard from "./comunitiDashboard";
 //import Personalise from "./personalise";
 import Post from "../ownerPost";
+import { isPremium } from "@/helpers";
 export default {
   name: "posts",
   components: {
@@ -66,6 +71,12 @@ export default {
     comunitiDashboard,
     // Personalise,
     Post,
+  },
+
+  data() {
+    return {
+      isPremium: isPremium(),
+    };
   },
 };
 </script>
@@ -78,12 +89,10 @@ export default {
   position: relative;
 }
 
- @media only screen and (min-width: 1200px) {
- .postpadding{
-
-  padding-left:70px;
-  padding-right:60px
- }
- }
-
+@media only screen and (min-width: 1200px) {
+  .postpadding {
+    padding-left: 70px;
+    padding-right: 60px;
+  }
+}
 </style>

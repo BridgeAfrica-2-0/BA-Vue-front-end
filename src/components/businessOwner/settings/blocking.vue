@@ -92,7 +92,7 @@ export default {
         this.loading = false;
         this.flashMessage.show({
           status: "success",
-          message: this.$t('settings.User_Unblocked')
+          message: this.$t('businessowner.user_unblocked')
         });
 			})
       .catch(err => {

@@ -2,6 +2,12 @@
   <div v-if="islogin">  
 
   
+    <Skeleton  :loading="prodLoader" />
+    <Skeleton  :loading="prodLoader" />
+    <Skeleton  :loading="prodLoader" />
+
+
+
      <NotFoundComponent
       v-if="business.data.length < 1 && prodLoader == false"
       :title="title"
@@ -166,11 +172,13 @@ import { mapGetters, mapActions } from "vuex";
 import axios from "axios";
 import login from "@/components/search/login";
 import NotFoundComponent from "@/components/NotFoundComponent";
+import Skeleton from "@/components/skeleton";
 export default {
   props: ["image"],
   components: {
     NotFoundComponent,
-    login
+    login,
+    Skeleton
   },
 
   data() {

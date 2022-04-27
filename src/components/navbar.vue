@@ -936,7 +936,14 @@ this.$store
 
       if (!this.credentials.keyword) return false;
 
-      if (this.$route.name != "Search") {
+     
+       if (this.$route.name != "search") {
+   
+      this.$emit('updateSearchKeyword', this.credentials.keyword)
+       }
+     
+
+      if (this.$route.name != "search") {
         
         this.$store
           .dispatch("allSearch/SEARCH", {

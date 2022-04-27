@@ -42,7 +42,7 @@ export default {
     getaccounts( {commit}, Data ){
       console.log("getaccounts");
       return axios
-      .get(`business/${Data.path}`)
+      .get(`${Data.path}`)
       .then(({ data }) => {
           commit("setaccounts", data.data);
         console.log(data);
@@ -54,7 +54,7 @@ export default {
       console.log("confirmPayment");
       console.log(Data);
       return axios
-      .post(`business/${Data.path}`, Data.formData)
+      .post(`${Data.path}`, Data.formData)
       .then(({ data }) => {
         console.log(data);
         return data

@@ -33,11 +33,9 @@
                   <h5 class="m-0 mt-2 bold username d-inline-block ml-2">
                    
 
-                    <router-link
-                        :to="'/profile/'+editor.user_id"
-                      >
+                    <router-link :to="'/profile/'+editor.user_id" >
                           {{ editor.fullname }}
-                      </router-link>
+                      </router-link>      
 
                   </h5>
                 </span>
@@ -105,7 +103,7 @@
                    
 
                     <router-link
-                        :to="'/profile/'+editor.user_id"
+                        :to="'/business/'+editor.user_id"
                       >
                           {{ editor.fullname }}
                       </router-link>
@@ -339,7 +337,7 @@ export default {
     DeclineRequest: function(user_id, index ){
       this.loading = true;
       console.log('user_id: ', user_id);
-      this.axios.get("network/"+this.url+"/members/business/request/decline/"+user_id)
+      this.axios.get("network/"+this.url+"/members/request/decline/"+user_id)
       .then(() => {
           
 
@@ -488,11 +486,7 @@ f-right {
   margin-bottom: 10px;
 }
 @media only screen and (min-width: 1200px) {
-  .btn {
-    width: 123px;
-    height: 38px;
-    font-size: 14px;
-  }
+
   .center {
     text-align: right;
   }
@@ -504,11 +498,11 @@ f-right {
   }
   .btn-2 {
     margin-left: 0px;
-    width: 90px;
+  
   }
   .btn-1 {
     margin-left: 0px;
-    width: 90px;
+ 
   }
   .people-style {
     border-top-left-radius: 40px;
@@ -537,9 +531,7 @@ f-right {
     margin-right: -15px;
     margin-top: 3px;
   }
-  .btn {
-    width: 90px;
-  }
+  
   .btn-2 {
     margin-left: -15px;
     width: 90px;
@@ -585,7 +577,7 @@ f-right {
     margin-left: -5px;
   }
   .btn {
-    width: 123px;
+  
     height: 38px;
     font-size: 14px;
   }

@@ -1,10 +1,7 @@
 <template>
-  <div> 
-    <b-spinner
-      v-if="loader"
-      variant="primary"
-      :label="$t('search.Spinning')"
-    ></b-spinner>
+  <div>
+    <Skeleton :loading="loader" />
+    <Skeleton :loading="loader" />
 
     <b-alert v-if="businesses.total == 0" show variant="warning"
       ><a href="#" class="alert-link">
@@ -27,10 +24,9 @@
                   <img :src="item.logo_path" class="r-image" />
                 </splide-slide>
 
-                 <splide-slide  v-for="cover in item.covers" :key="cover" cl>
-                      <img :src="cover" class="r-image" />   
-                    </splide-slide>
-                    
+                <splide-slide v-for="cover in item.covers" :key="cover" cl>
+                  <img :src="cover" class="r-image" />
+                </splide-slide>
               </splide>
             </div>
             <div class="flx100">
@@ -44,7 +40,8 @@
 
                 <span v-for="cat in item.category" :key="cat.name">
                   {{ cat.name }}
-                </span> <br>
+                </span>
+                <br />
 
                 {{ count(item.followers) }}
                 {{ $t("dashboard.Community") }} <br />
@@ -88,7 +85,6 @@
                 <b-button
                   block
                   size="sm"
-               
                   :id="'followbtn' + item.id"
                   :class="item.is_follow !== 0 && 'u-btn'"
                   variant="primary"
@@ -147,6 +143,7 @@
 <script>
 import moment from "moment";
 import axios from "axios";
+import Skeleton from "@/components/skeleton";
 
 export default {
   data() {
@@ -163,6 +160,9 @@ export default {
     };
   },
   props: ["businesses"],
+  components: {
+    Skeleton,
+  },
   computed: {
     loader() {
       return this.$store.getters["allSearch/getLoader"];

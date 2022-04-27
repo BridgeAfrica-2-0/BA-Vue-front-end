@@ -11,7 +11,7 @@ export default {
 
         loader: false,
         success: false,
-
+        suggestedKeyword:[],
         keyword: null,
         location: null,
     },
@@ -52,6 +52,12 @@ export default {
             state.keyword = data;
         },
 
+
+        setSuggestedKeyword(state, data) {
+           
+            state.suggestedKeyword=data;
+        },  
+
         setLocation(state, data) {
             state.location = data;
         },
@@ -85,9 +91,8 @@ export default {
         SEARCH({ commit, state, getters }, data) {
             console.log("[here]:", data);
             let islogin = this.getters["auth/isLogged"];
-            console.log("testing user login --------");
-            console.log(islogin);
-
+           
+           
             commit("setNetworks", { data: [] });
             commit("setPeoples", { data: [] });
             commit("setProducts", { data: [] });

@@ -11,5 +11,5 @@ navigator.serviceWorker.register('firebase-messaging-sw.js', { scope: "firebase-
         const messaging = firebase.messaging();
         messaging.useServiceWorker(registration);
     }).catch(err => {
-        console.log(err)
+       
     })

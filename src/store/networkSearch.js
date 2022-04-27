@@ -131,6 +131,7 @@ export default {
             }
         },
         async SEARCH({ commit, state }, data) {
+       
             commit("setNetworks", { data: [] });
             commit("setLoader", true);
             let page

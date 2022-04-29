@@ -561,6 +561,8 @@
                 :businesses="businesses.data"
                 :products="miniproducts.data"
                 :networks="mininetworks.data"
+                :defaultLocation="searchParams.location"
+                :isSearched="isSearched"
               />
             </div>
           </div>
@@ -763,7 +765,7 @@ export default {
 
       businessPage: 1,
       //selectcategories:[],
-
+      isSearched: false,
       categories_filters: [],
       items: [
         { label: this.$t("search.All") },
@@ -1810,6 +1812,7 @@ export default {
         .dispatch("allSearch/SEARCH", { keyword: keyword, location: location })
         .then((res) => {
           // console.log("categories loaded!");
+          this.isSearched = !this.isSearched;
         })
         .catch((err) => {
           console.log("Error erro!");

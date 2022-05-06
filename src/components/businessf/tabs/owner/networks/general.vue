@@ -1,12 +1,10 @@
 <template>
   <div>
-
-    
-       <b-modal hide-footer id="modal-addm" ref="modal-addm" :title="$t('network.add_members')">
+<b-modal hide-footer id="modal-addm" ref="modal-addm" :title="$t('network.add_members')">
         <div>
          
 
-          <addmember />
+          <addmember   @hideModal="hideModal"  />
 
         </div>
       </b-modal>
@@ -187,7 +185,13 @@ watch: {
     }
   },
 
-  methods: {},
+  methods: {
+
+    hideModal(){
+
+      this.$refs["modal-addm"].hide();
+    }
+  },
 }
 
 </script>

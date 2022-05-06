@@ -302,17 +302,19 @@
               </div>
             </tab-content>
 
+               <tab-content :title="$t('welcome.Follow_People')">
+              <div class="div-h h-400">
+                <People />
+              </div>
+            </tab-content>
+
             <tab-content :title="$t('welcome.Follow_Businesses')">
               <div class="div-h h-400">
                 <Business />
               </div>
             </tab-content>
 
-            <tab-content :title="$t('welcome.Follow_People')">
-              <div class="div-h h-400">
-                <People />
-              </div>
-            </tab-content>
+         
 
             <tab-content :title="$t('welcome.Tutorial')">
               <div class="div-h">

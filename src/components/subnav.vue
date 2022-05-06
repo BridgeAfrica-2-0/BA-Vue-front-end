@@ -47,13 +47,13 @@
                     href="#"
                     class="ml-2"
                   >
-                    <b-col cols="6">
+                   
                       <img
                         class="img-fluid picture logo-img"
                         :src="subCat.cat_image"
                       />
                       {{ subCat.name }}
-                    </b-col>
+                 
                   </b-dropdown-item>
 
                   <!-- <b-dropdown-item @click="category('More')" href="#"

@@ -16,25 +16,10 @@
     <br />
 
     <div v-if="filterType == '0' || filterType == '1' || filterType == '4'">
-      <b-form-group
-        v-if="nameOfCategory"
-        label-cols-lg="3"
-        :label="$t('search.Categories')"
-        label-size="md"
-        label-class="font-weight-bold pt-0"
-        class="mb-0 pt-6 text-left"
-      >
-      </b-form-group>
 
-      <b-form-select
-        v-model="nameOfCategory"
-        :options="categoriesAll"
-        class="mb-2"
-        v-if="nameOfCategory && !activateMatching"
-      >
-      </b-form-select>
+  
 
-      <span>
+        <span v-if="suggestedKeyword.length">
         <h6 class="bold">{{ $t("search.suggested_keywords") }}</h6>
         <b-form-radio
           v-for="(filter, i) in suggestedKeyword.slice(0, 4)"
@@ -51,6 +36,28 @@
         <b-link v-b-modal="'suggestedmodal'">{{ $t("search.See_all") }}</b-link>
         <hr />
       </span>
+
+
+
+      <b-form-group
+        v-if="nameOfCategory"
+        label-cols-lg="3"
+        :label="$t('search.Categories')"
+        label-size="md"
+        label-class="font-weight-bold pt-0"
+        class="mb-0 pt-6 text-left"
+      >
+   
+
+      <b-form-select
+        v-model="nameOfCategory"
+        :options="categoriesAll"
+        class="mb-2"
+        v-if="nameOfCategory && !activateMatching"
+      >
+      </b-form-select>
+
+      </b-form-group>
 
       <div v-if="activateMatching" class="pb-2">
         <b-badge
@@ -1953,7 +1960,7 @@ export default {
         return item.id === cat.id
           ? { ...item, actived: true }
           : { ...item, actived: false };
-      });
+      }); 
     },
 
     changesearchkeyword(keyword) {

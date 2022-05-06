@@ -355,13 +355,13 @@
                     <label class="username">
                       {{ $t("profileowner.Phone1") }}
                     </label>
-                    <VuePhoneNumberInput fetch-country v-model="phone1" />
+                    <VuePhoneNumberInput default-country-code="CM" v-model="phone1" />
                   </b-col>
                   <b-col md="6">
                     <label class="username">
                       {{ $t("profileowner.Phone2") }}
                     </label>
-                    <VuePhoneNumberInput fetch-country v-model="phone2" />
+                    <VuePhoneNumberInput default-country-code="CM" v-model="phone2" />
                   </b-col>
                 </b-row>
 
@@ -754,13 +754,13 @@
                     <label class="username">
                       {{ $t("profileowner.Phone1") }}
                     </label>
-                    <VuePhoneNumberInput fetch-country v-model="phone1" />
+                    <VuePhoneNumberInput  default-country-code="CM" v-model="phone1" />
                   </b-col>
                   <b-col md="6">
                     <label class="username">
                       {{ $t("profileowner.Phone2") }}
                     </label>
-                    <VuePhoneNumberInput fetch-country v-model="phone2" />
+                    <VuePhoneNumberInput default-country-code="CM" v-model="phone2" />
                   </b-col>
                 </b-row>
 

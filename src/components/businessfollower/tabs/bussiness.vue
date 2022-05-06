@@ -273,11 +273,11 @@
                 <b-row>
                   <b-col md="6">
                     <label class="username"> Phone1 </label>
-                    <VuePhoneNumberInput v-model="phone1" />
+                    <VuePhoneNumberInput  default-country-code="CM" v-model="phone1" />
                   </b-col>
                   <b-col md="6">
                     <label class="username"> Phone2 </label>
-                    <VuePhoneNumberInput v-model="phone2" />
+                    <VuePhoneNumberInput  default-country-code="CM" v-model="phone2" />
                   </b-col>
                 </b-row>
 
@@ -585,11 +585,11 @@
                 <b-row>
                   <b-col md="6">
                     <label class="username"> Phone1 </label>
-                    <VuePhoneNumberInput v-model="phone1" />
+                    <VuePhoneNumberInput  default-country-code="CM" v-model="phone1" />
                   </b-col>
                   <b-col md="6">
                     <label class="username"> Phone2 </label>
-                    <VuePhoneNumberInput v-model="phone2" />
+                    <VuePhoneNumberInput  default-country-code="CM" v-model="phone2" />
                   </b-col>
                 </b-row>
 

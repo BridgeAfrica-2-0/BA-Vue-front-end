@@ -285,7 +285,7 @@
                           
                         </div>
                         <div class="d-flex flex-column ml-3">
-                          <div>{{ notification.notification_text }}</div>
+                          <div class="wrap-text">{{ notification.notification_text }}</div>
                           <div class="small text-muted">
                             <span class="text-capitalize">
                               {{

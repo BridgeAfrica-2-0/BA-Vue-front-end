@@ -128,6 +128,26 @@ export default {
 
 <style lang="less">
 
+.wrap-text{
+      overflow-wrap: anywhere;
+}
+.wrapp-text{
+
+  white-space: normal;
+  
+    width: 100%;
+ 
+    word-wrap: break-word;
+}
+
+
+.dropdown-menu li, .dropdown-menu li a {
+    white-space: normal;
+    float: left;
+    
+    height: auto;
+    word-wrap: break-word;
+}
 
  .splide__arrow--next{
 

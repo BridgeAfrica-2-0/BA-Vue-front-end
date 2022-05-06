@@ -33,7 +33,7 @@
         </p>
         <p class="d-flex justify-content-start align-items-start">
           <b-icon icon="link" class="primary icon-size"></b-icon>
-           <span v-if="business_intro.website !='null'">   {{ business_intro.website }}  </span> 
+           <span v-if="business_intro.website !='null'" class="wrap-text">   {{ business_intro.website }}  </span> 
         </p>
         <p class="d-flex justify-content-start align-items-start">
           <b-icon icon="people-fill" class="primary icon-size"></b-icon>
@@ -164,7 +164,7 @@
             class=""
           >
             <VuePhoneNumberInput
-            fetch-country
+             default-country-code="CM"
             v-model="form.phone1"
           />
             

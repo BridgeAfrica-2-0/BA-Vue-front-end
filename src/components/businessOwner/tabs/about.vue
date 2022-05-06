@@ -504,7 +504,7 @@
               label-size="sm"
             >
               <VuePhoneNumberInput
-                fetch-country
+                 default-country-code="CM"
                 v-model="business_about_input.phone1"
               />
             </b-form-group>
@@ -517,7 +517,7 @@
               label-size="sm"
             >
               <VuePhoneNumberInput
-                fetch-country
+                 default-country-code="CM"
                 v-model="business_about_input.phone2"
               />
             </b-form-group>

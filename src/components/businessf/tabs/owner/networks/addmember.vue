@@ -98,7 +98,7 @@ export default {
   },
 
   data() {
-    return {
+    return {  
       net_id:this.$route.params.id,
       selectedpeople:null,
       selectedbusiness:null
@@ -139,9 +139,10 @@ export default {
       this.axios.post(`network/${this.net_id}/businesses/add`, formData2)
         .then(() => {
         
-          loader.hide();
-
-
+          loader.hide();  
+        
+          this.hideModal();
+   
           this.flashMessage.show({
             status: "success",
             message: "Business added",
@@ -152,7 +153,7 @@ export default {
         .catch((err) => {
           console.log({ err: err });
             loader.hide();
-
+   
             this.flashMessage.show({
             status: "error",
             message: err.response.data.message,
@@ -184,7 +185,9 @@ export default {
         
           loader.hide();
 
+           this.hideModal();
 
+         
           this.flashMessage.show({
             status: "success",
             message: "members added",
@@ -195,7 +198,7 @@ export default {
         .catch((err) => {
           console.log({ err: err });
 
-    
+     
 
             loader.hide();
 
@@ -212,7 +215,13 @@ export default {
 
 
 
+ hideModal(){
+      
+      this.selectedpeople=[];
+ this.selectedbusiness=[];
 
+ this.$emit("hideModal");
+ },
 
      people(keyword) {
 

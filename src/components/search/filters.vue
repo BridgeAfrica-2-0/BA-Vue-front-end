@@ -47,7 +47,7 @@
         label-class="font-weight-bold pt-0"
         class="mb-0 pt-6 text-left"
       >
-      </b-form-group>
+   
 
       <b-form-select
         v-model="nameOfCategory"
@@ -57,7 +57,7 @@
       >
       </b-form-select>
 
-   
+      </b-form-group>
 
       <div v-if="activateMatching" class="pb-2">
         <b-badge

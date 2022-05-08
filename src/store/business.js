@@ -57,14 +57,7 @@ export default {
         },
 
         async FIND_BUSINESS({ commit, state }, payload) {
-            console.log("business search start", payload);
-
-           
             commit("setLoading", true);
-            // let main = payload.main ? payload.main : false
-
-           
-
             return await axios.get(`search/business`, {
                 params: {
                     keyword: state.keyword,
@@ -82,15 +75,6 @@ export default {
                     councilId:payload.council_id,
                     city:payload.city ? payload.city:state.location ,
                     neighbourhoodId: payload.neighbourhood,
-                   // neighbourhood:payload.neighbourhood? payload.neighbourhood : state.location,
-                   
-
-
-
-
-
-
-
                 }
             }).then(({ data }) => {
                 commit("setLoading", false);
@@ -108,9 +92,6 @@ export default {
         },
 
         NEXT_PAGE({ commit, state }, payload) {
-
-          
-
             return axios.get(payload.url+'&page='+payload.page).then(({ data }) => {
               
                 commit("setBusinesses", data);

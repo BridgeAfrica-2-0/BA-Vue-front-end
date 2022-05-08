@@ -1,13 +1,7 @@
 <template>
   <div v-if="islogin">  
-
-  
     <Skeleton  :loading="prodLoader" />
-    <Skeleton  :loading="prodLoader" />
-    <Skeleton  :loading="prodLoader" />
-
-
-
+    
      <NotFoundComponent
       v-if="business.data.length < 1 && prodLoader == false"
       :title="title"
@@ -151,20 +145,17 @@
     <b-pagination
       v-if="business.next || business.previous"
       v-model="currentPage"
-      :total-rows="total"
+      :total-rows="business.total"
       pills
-      :per-page="per_page"
+      :per-page="business.per_page"
       aria-controls="my-table"
       @change="changePage"
       align="center"
     ></b-pagination>
-  </div>  <div v-else> 
-    
-
-
+  </div>  
+  <div v-else> 
        <login />
-    
-     </div>
+  </div>
 </template>
 
 <script>
@@ -180,7 +171,6 @@ export default {
     login,
     Skeleton
   },
-
   data() {
     return {
       total: 0,
@@ -190,19 +180,16 @@ export default {
       currentPage: 1,
       nextLoad: false,
       title: this.$t("search.No_Business_Found"),
-
       options: {
         rewind: true,
         autoplay: true,
         perPage: 1,
         pagination: false,
-
         type: "loop",
         perMove: 1,
       },
     };
   },
-
   computed: {
     ...mapGetters({
       searchstate: "business/getSearchState",
@@ -211,20 +198,14 @@ export default {
       prodLoader: "business/getloadingState",
     }),
   },
-
   mounted() {
     if(this.islogin){
-    this.getBusiness();  
-
-  }
+      this.getBusiness();  
+    }
   },
   created(){
-   
-      this.islogin=this.$store.getters["auth/isLogged"];
-     
-     console.log(this.islogin);
+    this.islogin = this.$store.getters["auth/isLogged"];
   },
-
   methods: {
     count(number) {
       if (number >= 1000000) {
@@ -237,7 +218,6 @@ export default {
     gotoBusiness(id) {
       this.$router.push(`/business/${id}#about`);
     },
-
     async handleFollow(user) {
       document.getElementById("followbtn" + user.id).disabled = true;
 
@@ -260,20 +240,14 @@ export default {
           document.getElementById("followbtn" + user.id).disabled = false;
         });
     },
-
     ...mapActions({
       findBusiness: "business/FIND_BUSINESS",
       nextPage: "business/NEXT_PAGE",
     }),
-
     getBusiness() {
-      console.log("business search mounted");
       this.$store.commit("business/setLoading", true);
-
       this.findBusiness({main:true})
         .then((res) => {
-          console.log("business list: ", res);
-          console.log(this.business);
           this.$store.commit("business/setLoading", false);
           this.total = this.business.total;
         })
@@ -282,25 +256,13 @@ export default {
           console.error(err);
         });
     },
-
     changePage(value) {
-     
-     
-     
       this.$parent.changeBusinessPage(value);
-
-    
-     
       this.currentPage = value;
-
-      this.nextPage({url:this.business.next, page:value})
+      const endpoint = this.business.next != "" ? this.business.next : this.business.previous;
+      this.nextPage({url: endpoint, page:value})
         .then((res) => {
-          console.log("business list: ");
-          console.log(this.business);
-       
-        })
-        .catch((err) => {
-         
+        }).catch((err) => {
           this.total = this.business.total;
           console.error(err);
         });

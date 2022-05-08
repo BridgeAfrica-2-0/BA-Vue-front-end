@@ -1,7 +1,6 @@
 <template>
   <div>
     <Skeleton :loading="loader" />
-    <Skeleton :loading="loader" />
 
     <b-alert v-if="businesses.total == 0" show variant="warning"
       ><a href="#" class="alert-link">

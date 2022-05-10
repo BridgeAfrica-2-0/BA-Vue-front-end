@@ -75,6 +75,7 @@ export default {
                     councilId:payload.council_id,
                     city:payload.city ? payload.city:state.location ,
                     neighbourhoodId: payload.neighbourhood,
+                    limit: 10
                 }
             }).then(({ data }) => {
                 commit("setLoading", false);

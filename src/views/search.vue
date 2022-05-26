@@ -561,7 +561,7 @@
                 :businesses="businesses.data"
                 :products="miniproducts.data"
                 :networks="mininetworks.data"
-                :defaultLocation="searchParams.location"
+                :defaultLocation="searchParams.location.label"
                 :isSearched="isSearched"
               />
             </div>
@@ -690,17 +690,26 @@ export default {
     }
 
     if (this.islogin) {
-      this.searchParams.location = this.$route.query.location
-        ? this.$route.query.location
-        : this.$store.getters["auth/user"].user.city;
+
+      if (this.$store.getters["auth/user"].user.city_id) {
+          this.searchParams.location = this.$route.query.city_id;      
+      } else if (this.$route.query.location) {
+          this.searchParams.location = this.$route.query.location;
+      } else {
+          this.searchParams.location = { code: 64, label: 'Youndae' };
+      }
 
       this.searchParams.location_placeholder = this.searchParams.location
         ? this.searchParams.location
         : this.$t("home.Location");
+      
     } else {
-      this.searchParams.location = this.$route.query.location
-        ? this.$route.query.location
-        : "";
+    
+      if (this.$route.query.location) {
+          this.searchParams.location = this.$route.query.location;
+      } else {
+          this.searchParams.location = { code: 64, label: 'Youndae' };
+      }
 
       this.searchParams.location_placeholder = this.$route.query.location
         ? this.$route.query.location

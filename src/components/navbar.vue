@@ -60,31 +60,12 @@
                   
                 </div>
 
-               
-                <vue-bootstrap-typeahead    
-                v-model="credentials.location"
-                :data="neigbourhoods"
-                :minMatchingChars="1"
-                :maxMatches="10"
-               style="border:0px"
-                :serializer="(item) => item.name"
-                :placeholder="credentials.location_placeholder"
-                class="search-hh w-100 balala "
-              >
-
-               <template slot="prepend">
-        <span
-                    class="input-group-text border-left-0 color-mobile"
-                    style=" width: 40px;  border:none"
-                  >
-                    <b-icon
-                      icon="geo-alt"
-                      style="color: #e75c18"
-                      font-scale="1.5"
-                    ></b-icon>
-                  </span>
-      </template>
-</vue-bootstrap-typeahead >
+                 <v-select 
+               :options="citiesValues"
+               class="search-hh w-100 city-search"
+               style="border-left: none"
+               :v-model="credentials.location"
+               ></v-select>
 
               </b-input-group>
             </span>
@@ -103,18 +84,14 @@
                 data-original-title=""
                 title=""
                 v-on:keyup.enter="getKeyword"
-              />
-
-              <vue-bootstrap-typeahead
-                v-model="credentials.location"
-                :data="neigbourhoods"
-                :minMatchingChars="1"
-                :maxMatches="10"
+              />              
               
-                :serializer="(item) => item.name"
-                :placeholder="credentials.location_placeholder"
-                class="search-hh w-44"
-              />
+              <v-select 
+                :options="citiesValues"
+                class="search-hh w-44 city-search"
+                style="border-left: none"
+                :v-model="credentials.location"
+               ></v-select>
 
               <slot name="button">
                 <Button @click.native="getKeyword" media="desktop" />
@@ -625,20 +602,17 @@
 
 <script>
 import _ from "lodash";
-
 import Button from "@/components/ButtonNavBarFind.vue";
 import Activity from "@/components/ShowActivity.vue";
 // import NavBarNotifications from '@/components/NavBarNotifications.vue';
 import { mapGetters, mapActions, mapMutations } from "vuex";
 import axios from "axios";
-import VueBootstrapTypeahead from "vue-bootstrap-typeahead";
 
 export default {
   name: "navbar",
   components: {
     Button,
     Activity,
-    VueBootstrapTypeahead,
     // NavBarNotifications
   },
   props: {
@@ -649,8 +623,7 @@ export default {
           keyword: "",
           placeholder: this.$t("general.All"),
           location:  '',
-          location_placeholder:this.$t("home.Location"),
-          
+          location_placeholder:this.$t("home.Location")
         };
       },
     },
@@ -668,6 +641,7 @@ export default {
      // query: "",
       selectedUser: null,
       users: [],
+      citiesValues: []
     };
   },
 
@@ -677,29 +651,9 @@ export default {
       user: "auth/profilConnected",
       auth: "auth/user",
      // neigbourhoods: "auth/neigbourhoods",
-
-      neigbourhoods: "auth/cities",
+      cities: "auth/cities",
     }),
-
-
-//   neigbourhoods(){
-
-// //     let nei=  this.$store.getters["auth/cities"];
-// // const arrayFailed = Object.entries(nei).map((arr) => ({
-// //   id: arr[0],
-// //   name: arr[1],
-// // }));
-
-// return this.$store.getters["auth/cities"];
-
-
-//   },
-
-
-
-
     query(){
-
       return this.credentials.location;
     }
   },
@@ -761,6 +715,8 @@ export default {
 
       this.updateNotificationEvent();
     }
+    
+    console.log('updated city: ', this.credentials.location);
   },
 
   watch: {
@@ -783,24 +739,9 @@ export default {
       axios
         .get(`visitor/search/city?city=${newQuery}`)
         .then(({ data }) => {
-
-          console.log(data);
           this.$store.commit("auth/setCities", data.data);
         });
     },
-
-
-    // old query method
-    // query(newQuery) {
-    //   axios
-    //     .get(`neighborhoods/${newQuery}`)
-    //     .then(({ data }) => {
-    //       this.$store.commit("auth/setneigbourhoods", data.data);
-    //     });
-    // },
-
-
-
   },
   
   filters: {
@@ -855,23 +796,21 @@ export default {
 
 
   getCities(){
-
-
-
-this.$store
-          .dispatch("auth/cities", {
-           
+      this.$store.dispatch("auth/cities", {})
+         .then(() => {
+            const cities = this.$store.getters["auth/cities"];
+            for (let index in cities) {
+                this.citiesValues.push({
+                  label: cities[index].name,
+                  code: cities[index].id
+                });
+            }
           })
           .catch((err) => {
             console.log({err:err});
           });
-
-
-
-
-      },
-
-    getLocation() {
+  },
+  getLocation() {
       const success = (position) => {
         const latitude = position.coords.latitude;
         const longitude = position.coords.longitude;
@@ -932,17 +871,13 @@ this.$store
     },
 
     getKeyword() {
- 
 
       if (!this.credentials.keyword) return false;
-
      
-       if (this.$route.name != "search") {
-   
-      this.$emit('updateSearchKeyword', this.credentials.keyword)
-       }
+      if (this.$route.name != "search") { 
+        this.$emit('updateSearchKeyword', this.credentials.keyword)
+      }
      
-
       if (this.$route.name != "search") {
         
         this.$store
@@ -955,7 +890,7 @@ this.$store
 
         this.$router.push({
           name: "GlobalSearch",
-          query: { keyword: this.credentials.keyword,  location:this.credentials.location, },
+          query: { keyword: this.credentials.keyword,  location: this.credentials.location, },
         });
       }
     },
@@ -1346,5 +1281,9 @@ this.$store
 .balala .form-control{
   border: 0px;
 }
+}
+
+.city-search .vs__dropdown-toggle {
+  height: 100% !important;
 }
 </style>

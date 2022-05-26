@@ -25,10 +25,6 @@ import BtnCtaMessage from "@/components/messagesCTA/Btn-cta-message";
 Vue.component('BtnCtaMessage', BtnCtaMessage);
 Vue.use(ShareNetwork);
 
-import VueBootstrapTypeahead from 'vue-bootstrap-typeahead'
-
-Vue.use('vue-bootstrap-typeahead', VueBootstrapTypeahead)
-
 // don't comment that 2 line URGENT
 import plugin from './http';
 Vue.use(plugin);

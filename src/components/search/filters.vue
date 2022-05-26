@@ -185,7 +185,14 @@
               >
               </b-form-group>
 
-              <vue-bootstrap-typeahead
+              <v-select 
+               :options="citiesValues"
+               class="search-hh w-100 city-search"
+               style="border-left: none"
+               :v-model="searchParams.city"
+               ></v-select>
+
+              <!--<vue-bootstrap-typeahead
                 v-model="city"
                 :data="cities"
                 :minMatchingChars="0"
@@ -195,7 +202,7 @@
                 :serializer="(item) => item.name"
                 placeholder="City"
                 class=""
-              />
+              />-->
             </div>
 
             <div>
@@ -764,11 +771,11 @@ export default {
       });
     },
 
-    city(newQuery) {
+    /*city(newQuery) {
       axios.get(`visitor/search/city?city=${newQuery}`).then(({ data }) => {
         this.$store.commit("auth/setCities", data.data);
       });
-    },
+    },*/
 
     categoryNameSelected: function (newValue, oldValue) {
       this.nameOfCategory = newValue;
@@ -1037,7 +1044,7 @@ export default {
         region_id: null,
         country_id: null,
         neighbourhood: null,
-        city: null,
+        city: { code: 64, label: 'Youndae' },
 
         council_id: null,
         neighborhood_id: null,
@@ -1085,6 +1092,7 @@ export default {
       default_category: "Agriculture",
       selectedfilter: "",
       map: false,
+      citiesValues: [],
       Finished_Branded_Products_filters: [
         { value: "Peanuts", text: "Peanuts" },
         { value: "Chocolate", text: "Chocolate" },
@@ -1883,16 +1891,6 @@ export default {
       return this.$store.state.allSearch.suggestedKeyword;
     },
 
-    cities() {
-      let nei = this.$store.getters["auth/cities"];
-      // const arrayFailed = Object.entries(nei).map((arr) => ({
-      //   id: arr[0],
-      //   name: arr[1],
-      // }));
-
-      return nei;
-    },
-
     categoriesAll() {
       const category = this.$store.getters["marketSearch/getCategories"].map(
         (e) => {
@@ -1943,6 +1941,7 @@ export default {
   created() {
     this.nameOfCategory = this.categoryNameSelected;
     this.getCountries();
+    this.getCities();
     this.getUserNeibourhoods();
     this.strategies = {
       2: () => PeopleFilter,
@@ -2504,6 +2503,22 @@ export default {
       //   council:null,
       //   neighbourhood:null
       // }
+    },
+
+    getCities(){
+      this.$store.dispatch("auth/cities", {})
+         .then(() => {
+            const cities =  this.$store.getters["auth/cities"];
+            for (let index in cities) {
+                this.citiesValues.push({
+                  label: cities[index].name,
+                  code: cities[index].id
+                });
+            }
+          })
+          .catch((err) => {
+            console.log({err:err});
+          });
     },
 
     getDivisions() {

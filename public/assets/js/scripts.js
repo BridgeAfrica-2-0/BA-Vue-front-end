@@ -1,23 +1,86 @@
 setTimeout(function(){ 
 window.onscroll = function () {
 	scrollFunction();
-	scrollFunctionBTT(); // back to top button
+	//scrollFunctionBTT(); // back to top button
 };
 
 window.onload = function () {
+	removeFadeOut(document.getElementById('loading'), 2000);
 	scrollFunction();
+	
+	
+	
 };
 
+
+function removeFadeOut( el, speed ) {
+    var seconds = speed/1000;
+    el.style.transition = "opacity "+seconds+"s ease";
+
+    el.style.opacity = 0;
+    setTimeout(function() {
+        el.parentNode.removeChild(el);
+    }, speed);
+}
+
+
+var lastScrollTop = 40;
+
+
+
+
+
 function scrollFunction() {
+
+	
+
 	if (document.documentElement.scrollTop > 30) {
 		document.getElementById("navbarExample").classList.add("top-nav-collapse");
 
 		document.getElementById("primary-menu").classList.add("black-text");
 
+
+
+		//check for scroll up and scroll down
+
+		if(lastScrollTop > document.documentElement.scrollTop ){
+             
+			
+			document.getElementById("navbarExample").classList.add("top-nav-collapse");
+
+			document.getElementById("primary-menu").classList.add("black-text");
+			document.getElementById("navbarExample").classList.remove("d-none");
+
+			document.getElementById("blacklogo").classList.remove("d-none");
+			document.getElementById("whitelogo").classList.add("d-none");
+
+			document.getElementById("mblacklogo").classList.remove("d-none");
+			document.getElementById("mwhitelogo").classList.add("d-none");
+			  
+		}else{
+
+			document.getElementById("navbarExample").classList.add("d-none");
+	//	document.getElementById("primary-menu").classList.remove("black-text");
+			  
+
+
+		}
+
+
+
 	} else if ( document.documentElement.scrollTop < 30 ) {
+
+		document.getElementById("blacklogo").classList.add("d-none");
+		document.getElementById("whitelogo").classList.remove("d-none");
+
+		document.getElementById("mblacklogo").classList.add("d-none");
+		document.getElementById("mwhitelogo").classList.remove("d-none");
+
 		document.getElementById("navbarExample").classList.remove("top-nav-collapse");
 		document.getElementById("primary-menu").classList.remove("black-text");
 	}
+
+	lastScrollTop=document.documentElement.scrollTop;
 }
 // Navbar on mobile
 let elements = document.querySelectorAll(".nav-link:not(.dropdown-toggle)");
@@ -125,13 +188,13 @@ var imageSlider = new Swiper('.image-slider', {
 myButton = document.getElementById("myBtn");
 
 // When the user scrolls down 20px from the top of the document, show the button
-function scrollFunctionBTT() {
-	if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-		myButton.style.display = "block";
-	} else {
-		myButton.style.display = "none";
-	}
-}
+// function scrollFunctionBTT() {
+// 	if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+// 		myButton.style.display = "block";
+// 	} else {
+// 		myButton.style.display = "none";
+// 	}
+// }
 
 // When the user clicks on the button, scroll to the top of the document
 document.getElementById('myBtn').onclick = topFunction;

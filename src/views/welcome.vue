@@ -16,10 +16,10 @@
 
         <img src="@/assets/welcome.png" class="w-image" alt="">
 
-         <h4 class="text-center username f-30">
+         <h2 class="text-center username ">
           {{ $t("welcome.Hello") }} <b> {{ username }}    </b
           >    {{$t("auth.you_are_ready_to_start")}}
-        </h4>
+        </h2>
         <br />
        
 

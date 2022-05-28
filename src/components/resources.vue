@@ -1,150 +1,317 @@
 <template>
-
-  
-
-
-      <!-- Our Resources -->
-    <section class="resources bg-black py-5 px-4">
-      <h1 class="text-center font-arvo text-light">  Digital Education to help you make more money online  </h1>
-      <div class="row justify-content-center my-5">
-        <div class="col-md-8">
-          <div class="d-flex justify-content-around tabs-resource">
-            <b-button
-              pill
-              :variant="selectedResource == 'all' ? 'primary' : 'outline-primary'"
-              @click="changeResource('all')"
-              >{{$t("about.Show_All")}}</b-button
-            >
-            <b-button
-              pill
-              :variant="selectedResource == 'bridgeafrica' ? 'primary' : 'outline-primary'"
-              @click="changeResource('bridgeafrica')"
-              >bridgeafrica.com</b-button
-            >
-            <b-button
-              pill
-              :variant="selectedResource == 'cameroon' ? 'primary' : 'outline-primary'"
-              @click="changeResource('cameroon')"
-              >Cameroon Gallery</b-button
-            >
-            <b-button
-              pill
-              :variant="selectedResource == 'cunsulting' ? 'primary' : 'outline-primary'"
-              @click="changeResource('cunsulting')"
-              >{{$t("about.Consulting")}}</b-button
-            >
-            <b-button
-              pill
-              :variant="selectedResource == 'media' ? 'primary' : 'outline-primary'"
-              @click="changeResource('media')"
-              >{{$t("about.Media_Production")}}</b-button
-            >
-          </div>
+  <!-- Our Resources -->
+  <section class="resources bg-black py-5 px-4">
+    <h1 class="text-center h1-text  font-arvo text-light">
+      Digital Education to help you make more money online
+    </h1>
+    <div class="row justify-content-center my-5">
+      <div class="col-md-8">
+        <div class="d-flex justify-content-around tabs-resource">
+         
+         
+         
+         
         </div>
       </div>
+    </div>
 
-      <div class="row">
-        <div v-for="resource in getResources" :key="resource.id" class="col-md-4 mt-4 resource-div">
-          <div class="resource-img-div">
-            <img :src="resource.img_url" alt="..." class="resource-img" />
-          </div>
-          <div class="resource-title">
-            <p v-if="resource.title.length > 25">{{ resource.title.substring(0, 25) }}...</p>
-            <p v-else>
-              {{ resource.title }}
-            </p>
+    <div class="row">
+      <div
+        v-for="resource in getResources"
+        :key="resource.id"
+        class="col-md-4 mt-4 resource-div"
+      >
+        <div class="resource-img-div">
+         <img :src="resource.picture" alt="..." class="resource-img" /> 
 
-            <div class="resource-line"></div>
-          </div>
+          <!-- <b-embed
+            type="iframe"
+            aspect="16by9"
+            :src="resource.video"
+            allowfullscreen
+            class="s-embed resource-img"
+          ></b-embed> -->
+        </div>
+        <div class="resource-title mt-3">
+          <p v-if="resource.title.length > 25">
+            {{ resource.title.substring(0, 25) }}...
+          </p>
+          <p v-else>
+          <b-link :href="resource.video"> {{ resource.title }}  </b-link> 
+          </p>
+
+          <div class="resource-line"></div>
         </div>
       </div>
-    </section>
-
- 
+    </div>
+  </section>
 </template>
 
 
       
 <script>
-
-
 export default {
   name: "Resources",
 
   data() {
     return {
-      subEmail: '',
-      selectedResource: 'all',
-      resources: [
-        {
-          id: '1',
-          title: this.$t('general.HOW_TO_USE_BRIDGEAFRICA'),
-          img_url:
-            require('../assets/img/about/WSIS-thumbnail-1024x592-1-thegem-portfolio-masonry-img11.png'),
-          tag: ['bridgeafrica', 'cameroon', 'cunsulting', 'media'],
-        },
-        {
-          id: '2',
-          title: this.$t("general.BETA_LAUNCH_OF_BRIDGEAFRICA"),
-          img_url:
-            require('../assets/img/about/THINDFDF-1024x743-1-thegem-portfolio-masonry-img12.png'),
-          tag: ['bridgeafrica', 'cameroon'],
-        },
-        {
-          id: '3',
-          title: this.$t('general.Partners_with_Pea'),
-          img_url:
-            require('../assets/img/about/mapoure-1024x576-1-thegem-portfolio-masonry-14.png'),
-          tag: ['bridgeafrica', 'media'],
-        },
-        {
-          id: '4',
+      subEmail: "",
+      selectedResource: "bridgeafrica",
+      
+      eng_videos:[
+        
 
-          title: 'BridgeAfrica.com Gives Digital Literacy Training (Demo)',
-          img_url: require('../assets/img/about/000000-img15.png'),
 
-          tag: ['cunsulting', 'media'],
+
+     {
+          id: "1",
+          title: " SELLING ON BRIDGEAFRICA.COM",
+          tag: ["bridgeafrica"],
+           picture: "assets/images/training/mod14/EN.jpg",
+          video: "https://youtu.be/EwQrPYxYuj8",
         },
+
+
+
+
+         {
+          id: "2",
+          title: "USING BRIDGEAFRICA.COM AS A CUSTOMER",
+          tag: ["bridgeafrica"],
+           picture: "assets/images/training/mod15/EN.jpg",
+          video: "https://youtu.be/xkJScXdGP4o",
+        },
+
+
+
+        
+         {
+          id: "3",
+          title: " HOW TO CREATE A WEBSITE ON BRIDGEAFRICA.COM",
+          tag: ["bridgeafrica"],
+           picture: "assets/images/training/mod13/EN.jpg",
+          video: "https://youtu.be/Q86VsRmoU0Q",
+        },
+        
+
+         {
+          id: "4",
+          title: "packaging",
+          tag: ["bridgeafrica"],
+           picture: "assets/images/training/mod4/EN.jpg",
+          video: "https://youtu.be/8fOVIxnAK0A",
+        },
+
+
+
         {
-          id: '5',
-          title: this.$t('general.Cameroon_Gallery_Commercial'),
-          img_url:
-            require('../assets/img/about/caeroon-gallery-thegem-portfolio-masonry-16.jpg'),
-          tag: ['cameroon', 'media'],
+          id: "5",
+          title: "BRANDING",
+          tag: ["bridgeafrica"],
+           picture: "assets/images/training/mod5/EN.jpg",
+          video: "https://youtu.be/ePeiO76aVAc",
         },
+
+
+         {
+          id: "6",
+          title: "BRANDING",
+          tag: ["bridgeafrica"],
+           picture: "assets/images/training/mod2/EN.jpg",
+          video: "https://youtu.be/ePeiO76aVAc",
+        },
+
+
+         {
+          id: "7",
+          title: "BRANDING",
+          tag: ["bridgeafrica"],
+           picture: "assets/images/training/mod3/EN.jpg",
+          video: "https://youtu.be/ePeiO76aVAc",
+        },
+
+          {
+          id: "8",
+          title: "BRANDING",
+          tag: ["bridgeafrica"],
+           picture: "assets/images/training/mod6/EN.jpg",
+          video: "https://youtu.be/ePeiO76aVAc",
+        },
+
+
+
+          {
+          id: "9",
+          title: "BRANDING",
+          tag: ["bridgeafrica"],
+           picture: "assets/images/training/mod7/EN.jpg",
+          video: "https://youtu.be/ePeiO76aVAc",
+        },
+
+
+
+          {
+          id: "10",
+          title: "BRANDING",
+          tag: ["bridgeafrica"],
+           picture: "assets/images/training/mod8/EN.jpg",
+          video: "https://youtu.be/ePeiO76aVAc",
+        },
+
+
+
+
+
       ],
-    };},
+
+
+        fr_videos:[
+
+
+          {
+          id: "1",
+          title: "UTILISER BRIDGEAFRICA.COM EN TANT QUE CLIENT",
+          tag: ["bridgeafrica"],
+           picture: "assets/images/training/mod2/FR.jpg",
+          video: "https://youtu.be/0S8Kc7bgMY8",
+        },
+
+
+        {
+          id: "2",
+          title: "UTILISER BRIDGEAFRICA.COM EN TANT QUE CLIENT",
+          tag: ["bridgeafrica"],
+           picture: "assets/images/training/mod3/FR.jpg",
+          video: "https://youtu.be/0S8Kc7bgMY8",
+        },
+
+   {
+          id: "3",
+          title: "UTILISER BRIDGEAFRICA.COM EN TANT QUE CLIENT",
+          tag: ["bridgeafrica"],
+           picture: "assets/images/training/mod6/FR.jpg",
+          video: "https://youtu.be/0S8Kc7bgMY8",
+        },
+
+
+
+        {
+          id: "4",
+          title: "UTILISER BRIDGEAFRICA.COM EN TANT QUE CLIENT",
+          tag: ["bridgeafrica"],
+           picture: "assets/images/training/mod7/FR.jpg",
+          video: "https://youtu.be/0S8Kc7bgMY8",
+        },
+
+
+
+        {
+          id: "5",
+          title: "UTILISER BRIDGEAFRICA.COM EN TANT QUE CLIENT",
+          tag: ["bridgeafrica"],
+           picture: "assets/images/training/mod8/FR.jpg",
+          video: "https://youtu.be/0S8Kc7bgMY8",
+        },
+
+
+
+         
+         {
+          id: "6",
+          title: "UTILISER BRIDGEAFRICA.COM EN TANT QUE CLIENT",
+          tag: ["bridgeafrica"],
+           picture: "assets/images/training/mod15/FR.jpg",
+          video: "https://youtu.be/0S8Kc7bgMY8",
+        },
+
+
+
+         {
+          id: "7",
+          title: "VENDRE SUR BRIDGEAFRICA",
+          tag: ["bridgeafrica"],
+           picture: "assets/images/training/mod14/FR.jpg",
+          video: "https://youtu.be/0S8Kc7bgMY8",
+        },
+
+
+        {
+          id: "8",
+          title: "COMMENT CRÉER UN SITE WEB SUR BRIDGEAFRICA.COM",
+          tag: ["bridgeafrica"],
+           picture: "assets/images/training/mod13/FR.jpg",
+          video: "https://youtu.be/0S8Kc7bgMY8",
+        },
+
+         {
+          id: "9",
+          title: "Emballage",
+          tag: ["bridgeafrica"],
+           picture: "assets/images/training/mod4/FR.jpg",
+          video: "https://youtu.be/bhpQoA7rp30",
+        },
+
+
+{
+          id: "10",
+          title: "BRANDING",
+          tag: ["bridgeafrica"],
+           picture: "assets/images/training/mod5/FR.jpg",
+          video: "https://youtu.be/UoppCYEMehM",
+        },
+
+
+
+
+      ],
+
+
+    };
+  },
 
   computed: {
     getResources() {
-      if (this.selectedResource == 'all') {
+      if (this.selectedResource == "all") {
         return this.resources;
       }
-      return this.resources.filter(res => {
+      return this.resources.filter((res) => {
         if (res.tag.includes(this.selectedResource)) {
+          console.log(res.tag);
           return res;
         }
       });
     },
+
+
+    resources(){
+
+      if(this.$i18n.locale == 'en'){ 
+        return this.eng_videos;
+      }
+      else{
+   return this.fr_videos;
+      }
+    }
   },
 
-
-   methods: {
-
+  methods: {
     /**
-     * this fuction is for change ressources 
+     * this fuction is for change ressources
      * @private
      */
     changeResource(resource) {
       this.selectedResource = resource;
     },
   },
-
- 
 };
 </script>
 
 <style scoped>
+@media (max-width: 768px) {
+.h1-text{
+
+font-size: 18px;
+}}
 
 .bg-black {
   background-color: #000000;
@@ -187,13 +354,14 @@ export default {
   background-color: #ffffff;
   color: #000000;
   text-align: center;
+  margin-top: -39px;
 }
 .resource-title p {
   text-align: center;
   font-size: 20px;
   letter-spacing: 0px;
   font-weight: 700;
-  font-family: 'Arvo';
+  font-family: "Arvo";
 }
 .resource-line {
   border: 1px solid black;
@@ -203,8 +371,9 @@ export default {
   transition: 0.3s ease-in-out;
 }
 
-.mt-md-4, .my-md-4 {
-    margin-top: 0rem !important;
+.mt-md-4,
+.my-md-4 {
+  margin-top: 0rem !important;
 }
 
 @media only screen and (max-width: 660px) {
@@ -212,6 +381,14 @@ export default {
     font-size: 27px;
     padding: 60px 40px;
   }
+  .resource-title {
+  padding: 30px 0;
+  background-color: #ffffff;
+  color: #000000;
+  text-align: center;
+  margin-top: -100px;
+}
+
   .header-img-text p {
     margin-bottom: 0px;
   }
@@ -258,6 +435,6 @@ export default {
   .footer-icon-text {
     left: 50%;
     top: 30px;
-  }}
-
+  }
+}
 </style>

@@ -127,16 +127,10 @@ export default {
             TYPES.map((type) => {
 
                 if (!islogin) {
-
                     url = `/visitor/search/${type}?${catId+subCatId+countryId+regionId+filterId+divisionId+councilId+city+neighbourhood+neighbourhoodId+keyword}`;
-
                 } else {
-                    // console.log(`type => ${type} keyword = ${keyword}`);
                     url = `/search/${type}?${catId+subCatId+filterId+countryId+regionId+divisionId+councilId+city+neighbourhood+neighbourhoodId+keyword}`;
-
-
                 }
-                console.log(url);
                 axios
                     .get(url)
                     .then((res) => {

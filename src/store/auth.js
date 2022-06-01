@@ -214,7 +214,7 @@ export default {
     cities({ commit }, payload) {
 
 
-      return axios.get("visitor/search/city").then(({ data }) => {
+      return axios.get("profile/city").then(({ data }) => {
 
         console.log("logging data for neigbourhood");
         console.log(data);

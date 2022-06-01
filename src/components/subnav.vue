@@ -56,13 +56,7 @@
                  
                   </b-dropdown-item>
 
-                  <!-- <b-dropdown-item @click="category('More')" href="#"
-                      ><img
-                        class="img-fluid picture logo-img"
-                        src="@/assets/icons/more.png"
-                      />
-                      More</b-dropdown-item
-                    > -->
+             
                 </div>
               </div>
             </b-nav-item-dropdown>
@@ -129,15 +123,6 @@ export default {
     },
   },
 
-  /* watch:{
-
-    "$store.state.marketSearch.categories": function(categories){
-      if (categories.length)
-        this.showSubCat(categories[0].category, categories[0].sub_cat, false)
-    }
-  }, */
-
-
   created() {
     this.getCategories();
   },
@@ -164,7 +149,6 @@ export default {
       this.$store
         .dispatch("marketSearch/getCategories")
         .then((res) => {
-          // console.log("categories loaded!");
         })
         .catch((err) => {
           console.log("Error erro!");
@@ -177,9 +161,7 @@ export default {
     },
 
     async searchProduct(data) {
-      console.log("clicked...");
       await this.$store.dispatch("marketSearch/searchProducts", data);
-      // console.log("PRoducts ", this.$store.getters["marketSearch/getProducts"]);
     },
 
     searchByCat(data) {

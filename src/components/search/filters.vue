@@ -41,18 +41,12 @@
 
       <b-form-group
         v-if="nameOfCategory"
-        label-cols-lg="3"
-        :label="$t('search.Categories')"
-        label-size="md"
-        label-class="font-weight-bold pt-0"
         class="mb-0 pt-6 text-left"
       >
-   
-
       <b-form-select
         v-model="nameOfCategory"
         :options="categoriesAll"
-        class="mb-2"
+        class="mb-2 select-category"
         v-if="nameOfCategory && !activateMatching"
       >
       </b-form-select>
@@ -1062,7 +1056,7 @@ export default {
 
       networkSelect: {
         category: null,
-        country: null,
+        country: 1,
         region: null,
         division: null,
         council: null,
@@ -3018,5 +3012,8 @@ select {
   height: 350px;
   overflow: auto;
   overflow-x: hidden;
+}
+.select-category {
+  margin-top: 20px;
 }
 </style>

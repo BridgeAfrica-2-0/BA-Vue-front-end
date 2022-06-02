@@ -7,8 +7,17 @@
     "EMAIL":"E-MAIL",
     "no_more_most":"No More Post",
     "no_post":"No Post",
+    "help_small_and_medium_size":"Help small and medium business get digital, make money and sell to the whole world ",
+    "all_in_1_platform":"All in 1 platform that helps businesses create a digital presence to sell online",
+    "support_real_time":"Supporting real time financial transaction and logistic ",
+    "connecting_local_demand":"Connecting local demand to affordable local supply ",
+ 
+    "Load_more":"Load More",
+    "business_plan":"Business Plan ",
+    "business_creation":"Business Creation ",
+    "digital_busines":"Digital Busineses ",
 
-   "homepage_landing":" Connecting Businesses And Customers  To Global E-commerce. Making It Easier For Them To Find Each Other ",
+    "homepage_landing":" Connecting Businesses And Customers  To Global E-commerce. Making It Easier For Them To Find Each Other ",
     "hair_dresser":"Hair Dresser",
     "handicraft":"Handicraft",
     "agriculture":"Agriculture",
@@ -43,7 +52,7 @@
     "make_your_business_visible":"Make your business visible and locatable with the help of our business directory to reach a wider market",
     "community_engageMent":" COMMUNITY ENGAGEMENT",
     "engage_with_your_customers":"Engage with your customers today through messaging; follow each other, and receive instant notifications",
-    "helping_small_medium_size_biz":"HELPING SMALL AND MEDIUM BUSINESS GO DIGITAL, MAKE MONEY, AND TRADE WITH THE WORLD",
+    "helping_small_medium_size_biz":"HELPING SMALL AND MEDIUM BUSINESES GO DIGITAL, MAKE MONEY, AND TRADE WITH THE WORLD",
     "explore_biz":"EXPLORE BUSINESES",
     "about_us":"ABOUT US",
     "digital_education_to_money":" Digital Education to help you make more money online",
@@ -52,6 +61,9 @@
     "update_cart":"Update Cart",
     "No_Member":"No member",
     "Add_to_Your_Post":"Add to your post",
+
+    "reach_a_wide_range":"Reach a wide community with our group messaging functionality ",
+    "advance_messaging":"Advanced messaging system",
     
     "Cameroon":"Cameroon",
     "Find_Pharmacies":"Find pharmacies",

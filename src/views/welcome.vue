@@ -16,7 +16,7 @@
 
         <img src="@/assets/welcome.png" class="w-image" alt="">
 
-         <h2 class="text-center username ">
+         <h2 class="text-center  ">
           {{ $t("welcome.Hello") }} <b> {{ username }}    </b
           >    {{$t("auth.you_are_ready_to_start")}}
         </h2>

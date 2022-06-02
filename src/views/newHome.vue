@@ -21,14 +21,17 @@
           <router-link to="/">
             <a class="d-block d-lg-none" rel="home" style="margin-left: -15%">
               <span class="logo" style="min-width: 148px"
-                ><img   id="mwhitelogo"
+                ><img
+                  id="mwhitelogo"
                   src="https://home.maxinemoffett.com/wp-content/uploads/thegem-logos/logo_d2ecc795468a764490859da0a01cd521_1x.png"
                 />
 
-                 <img  class="d-none"  id="mblacklogo" width="148px"
-                      src="assets/images/black_logo.png"
-                    />
-
+                <img
+                  class="d-none"
+                  id="mblacklogo"
+                  width="148px"
+                  src="assets/images/black_logo.png"
+                />
               </span>
             </a>
           </router-link>
@@ -40,14 +43,8 @@
               id="navbarSideCollapse"
               aria-label="Toggle navigation"
             >
-                   <fas-icon
-                   
-                    class="primary"
-                    :icon="['fa', 'bars']"
-                    size="lg"
-                  />   
-                  
-            </button>  
+              <fas-icon class="primary" :icon="['fa', 'bars']" size="lg" />
+            </button>
           </a>
         </div>
 
@@ -82,26 +79,24 @@
             </li>
 
             <li class="nav-item">
-              
-                <a class="nav-link" href="#details"
-                  >  
-                </a>
-            
+              <a class="nav-link" href="#details"> </a>
             </li>
 
-
-            <li class=" nav-item menu-item-logo d-none d-lg-block">
+            <li class="nav-item menu-item-logo d-none d-lg-block">
               <div class="site-logo" style="width: 164px">
                 <a href="https://home.maxinemoffett.com/" rel="home">
-                  <span class="logo" style="min-width: 148px; margin-left:30%"
-                    ><img  class="" id="whitelogo"
+                  <span class="logo" style="min-width: 148px; margin-left: 30%"
+                    ><img
+                      class=""
+                      id="whitelogo"
                       src="https://home.maxinemoffett.com/wp-content/uploads/thegem-logos/logo_d2ecc795468a764490859da0a01cd521_1x.png"
                     />
 
-                    <img class="d-none" id="blacklogo"
+                    <img
+                      class="d-none"
+                      id="blacklogo"
                       src="assets/images/black_logo.png"
                     />
-
                   </span>
                 </a>
               </div>
@@ -123,19 +118,6 @@
               </router-link>
             </li>
 
-            <!-- <li class="nav-item">
-              <router-link to="search">
-                <a class="nav-link" href="#features">
-                  <b-icon
-                    icon="search"
-                    style="float: left"
-                    font-scale="1.5"
-                    class="margin-top:5px"
-                  ></b-icon
-                ></a>
-              </router-link>
-            </li> -->
-
             <li class="nav-item">
               <b-dropdown variant="ligth white">
                 <template #button-content>
@@ -143,7 +125,7 @@
                   <span class="poslang mt-2"></span>
                 </template>
                 <b-dropdown-item @click="change('en')">
-                  <img
+                  <b-img-lazy
                     src="../assets/img/about/en.png"
                     class="size poslang"
                     alt=""
@@ -151,7 +133,7 @@
                   EN</b-dropdown-item
                 >
                 <b-dropdown-item @click="change('fr')"
-                  ><img
+                  ><b-img-lazy
                     src="../assets/img/la-france.png"
                     class="size poslang"
                     alt=""
@@ -161,33 +143,27 @@
               </b-dropdown>
             </li>
           </ul>
-          <!-- <span class="nav-item">
-              <a class="btn-solid-sm" href="#contact">Get quote</a>
-          </span> -->
         </div>
       </div>
     </nav>
-      <div id="loading" @click="closeLoad">
-
-         <semipolar-spinner
-  :animation-duration="2000"
-  :size="65"
-  :color="'#ff1d5e'"
-  class="loading-image"
-/>
-
-   </div>
+    <div id="loading" @click="closeLoad">
+      <semipolar-spinner
+        :animation-duration="2000"
+        :size="65"
+        :color="'#ff1d5e'"
+        class="loading-image"
+      />
+    </div>
     <header id="header" class="header">
-
-    
-
       <div class="container herro">
         <div class="row">
           <div class="col-lg-7 col-xl-6">
             <div class="text-container">
-              <h1 class="h1-large">
-                {{ $t("general.homepage_landing") }}
-              </h1>
+              <sequential-entrance fromLeft delay="2000">
+                <h1 class="h1-large">
+                  {{ $t("general.homepage_landing") }}
+                </h1>
+              </sequential-entrance>
 
               <div>
                 <b-input-group class="mb-2 float-right">
@@ -240,9 +216,11 @@
     <!-- about section -->
 
     <div class="about_bg p-5">
-      <h1 class="h1-text mt-5 text-center white"> ABOUT US </h1>
+      <h1 class="h1-text mt-5 text-center white">
+        {{ $t("general.about_us") }}
+      </h1>
       <h6 class="text-center white mt-3">
-        Helping small and medium busineses get online and sale to he world
+        {{ $t("general.help_small_and_medium_size") }}
       </h6>
 
       <div class="container mb-md-5">
@@ -250,12 +228,11 @@
           <div class="col-md-4 p-0 text-center">
             <div class="p-5 about-box1">
               <div class="rounded-circle icon-tbg">
-                <b-icon icon="heart" class="white mt-3"></b-icon>
+                <b-icon icon="briefcase" class="white mt-3"></b-icon>
               </div>
 
-             
               <p class="mt-3 white">
-               All in 1 platform for businesess to create a digital presence to promote their products and service
+                {{ $t("general.all_in_1_platform") }}
               </p>
             </div>
           </div>
@@ -263,13 +240,11 @@
           <div class="col-md-4 p-0 text-center">
             <div class="p-5 about-box1">
               <div class="rounded-circle icon-tbg">
-                <b-icon icon="credit-card" class="white mt-3"></b-icon>
-                
+                <b-icon icon="cart-check" class="white mt-3"></b-icon>
               </div>
 
-              
               <p class="mt-3 white">
-                Supporting real Time financial transactions and logistics
+                {{ $t("general.support_real_time") }}
               </p>
             </div>
           </div>
@@ -282,58 +257,26 @@
 
               <!-- <h5 class="mt-5 white">To-Do_Task</h5> -->
               <p class="mt-3 white">
-                Connecting customers ad busineses so they can find real matches
+                {{ $t("general.connecting_local_demand") }}
               </p>
             </div>
           </div>
-
-    
         </div>
       </div>
     </div>
 
-        
-    <div class="container">  
-         
-          <img src="assets/images/abou.png"  class="" style="margin-top:-90px" /> 
-           </div>
-<!-- 
-    <div class="container-flex">
-      <div class="row">
-        <div class="col-md-6 about-bg order-2 order-md-1">
-          <div class="about-pic" />
-        </div>
-
-        <div class="col-md-6 pr-100 pl-100 order-1 order-md-2">
-          <div style="vertical-align: middle" class="pt-100">
-            <h1 class="text-center mb-20 pb-25">
-              {{ $t("general.about_us") }}
-            </h1>
-
-            <p class="text">
-              We are a technology firm, on a mission to digitalise businesses
-              and consumers in Africa. Through this platform, we help SMEs
-              create websites, gain database visibility, sell online and
-              network. We equally manage an online artisanal platform,
-              cameroongallery.com, which helps craft artists sell their goods
-              globally. Through our consulting services, we provide expert
-              support to public and private entities.
-            </p>
-
-            <div class="text-center m-2 p-2 m-md-5 p-md-5">
-              <b-button variant="outline-primary">
-                {{ $t("general.view_more") }}
-              </b-button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> -->
+    <div class="container text-center">
+      <b-img-lazy
+        src="assets/images/aboutt.png"
+        class=""
+        style="margin-top: -100px"
+      />
+    </div>
 
     <!-- end about section -->
 
     <!-- start explore Busineses -->
-    <div class="pb-100 pt-100">
+    <div class="pb-100 pt-50">
       <div class="text-center pb-100">
         <h1 class="h1-text">{{ $t("general.explore_biz") }}</h1>
       </div>
@@ -342,7 +285,7 @@
         <splide :options="options" class="r-image">
           <splide-slide v-for="item in hotbiz" :key="item.id">
             <div class="hotbizz text-center">
-              <img :src="item.picture" class="r-image" />
+              <b-img-lazy :src="item.picture" class="r-image" />
 
               <div class="hotbizcontent">
                 <div class="text-center hotbizname">
@@ -369,12 +312,15 @@
     <div class="africanprints-overlay">
       <div class="africanprints">
         <div class="container text-center">
-          <h1 class="h1-text white p-2 p-md-5">
-            {{ $t("general.helping_small_medium_size_biz") }}
-          </h1>
+          <sequential-entrance fromLeft>
+            <h1 class="h1-text white p-2 p-md-5">
+              {{ $t("general.helping_small_medium_size_biz") }}
+            </h1>
+          </sequential-entrance>
         </div>
       </div>
     </div>
+
     <!-- end african print title -->
 
     <!-- how bridge works -->
@@ -389,7 +335,7 @@
       <div class="row">
         <div class="col-md-6 text-center">
           <div class="container">
-            <img
+            <b-img-lazy
               style="margin-top: -150px"
               src="https://home.maxinemoffett.com/wp-content/uploads/2022/05/Group-3809-1-579x1024.png"
               alt=""
@@ -406,7 +352,6 @@
                     variant="primary"
                     class="primary home-icon"
                     :icon="['fa', 'briefcase']"
-                  
                   />
                 </h3>
               </span>
@@ -428,7 +373,6 @@
                     variant="primary home-icon"
                     class="primary"
                     :icon="['fas', 'database']"
-                    
                   />
                 </h3>
               </span>
@@ -451,7 +395,6 @@
                     variant="primary"
                     class="primary home-icon"
                     :icon="['fas', 'comments']"
-                    
                   />
                 </h3>
               </span>
@@ -474,9 +417,11 @@
     <div class="africanprints-overlay" style="margin-top: -200px">
       <div class="africanprints">
         <div class="container text-center">
-          <h1 class="h1-text white p-1 p-md-5">
-            {{ $t("general.helping_small_medium_size_biz") }}
-          </h1>
+          <sequential-entrance fromLeft>
+            <h1 class="h1-text white p-1 p-md-5">
+              {{ $t("general.helping_small_medium_size_biz") }}
+            </h1>
+          </sequential-entrance>
         </div>
       </div>
     </div>
@@ -504,7 +449,11 @@
 
               <span class="p-2 m-2 mr-4">
                 <h3 class="hbaworks-icon">
-                  <b-icon icon="search" class="home-icon" variant="primary"></b-icon>
+                  <b-icon
+                    icon="search"
+                    class="home-icon"
+                    variant="primary"
+                  ></b-icon>
                 </h3>
               </span>
             </div>
@@ -522,19 +471,18 @@
 
               <span class="p-2 m-2 mr-4">
                 <h3 class="hbaworks-icon">
-                  <b-icon icon="shop" class="home-icon" variant="primary"></b-icon>
+                  <b-icon
+                    icon="shop"
+                    class="home-icon"
+                    variant="primary"
+                  ></b-icon>
                 </h3>
               </span>
             </div>
           </div>
         </div>
         <div class="col-md-4 text-center">
-           
-           
-           <img transition="fade" :src="images[currentNumber]" />
-
-         
-
+          <b-img-lazy transition="fade" :src="images[currentNumber]" />
         </div>
         <div class="col-md-4">
           <div class="container text-left">
@@ -664,12 +612,32 @@
                       </p>
                     </span>
                   </div>
+
+                  <div class="d-inline-flex mt-5 mt-xl-3">
+                    <span class="p-2 pt-md-1 m-2 mt-md-1 mr-4">
+                      <b-icon
+                        icon="chat-dots"
+                        scale="3"
+                        class=""
+                        variant="primary"
+                      ></b-icon>
+                    </span>
+
+                    <span>
+                      <h3 class="hbaworks-header white font-16 font-poppin">
+                        {{ $t("general.advance_messaging") }}
+                      </h3>
+                      <p class="hba-works-text white font-14 font-poppin">
+                        {{ $t("general.reach_a_wide_range") }}
+                      </p>
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
           <div class="col-md-5 advance-account-fit">
-            <img
+            <b-img-lazy
               class="quotes advance_pic"
               src="assets/images/digital1.jpg"
               alt="alternative"
@@ -710,7 +678,7 @@
           </div>
 
           <div class="col-md-6 pl-126 pr-21">
-            <img
+            <b-img-lazy
               class="quotes"
               src="https://home.maxinemoffett.com/wp-content/uploads/2022/05/fashion-designing-schools-in-cameroon-1.jpg"
               alt="alternative"
@@ -722,7 +690,7 @@
       <div>
         <div class="row">
           <div class="col-md-7 p-0 order-2 order-md-1">
-            <img
+            <b-img-lazy
               class="quotes"
               src="https://home.maxinemoffett.com/wp-content/uploads/2022/05/csm_senegal-agriculture-food_georges_gobet_afp_35f00077fb_1.jpg"
               alt="alternative"
@@ -805,7 +773,7 @@
 
                 <div class="col-md-8">
                   <div class="biz-konnect-video">
-                    <img
+                    <b-img-lazy
                       class="quotes biz-cover"
                       :src="item.picture"
                       alt="alternative"
@@ -848,62 +816,55 @@ import axios from "axios";
 import Newsletter from "../components/newsletter";
 import Resources from "../components/resources";
 import SiteFooter from "../components/site/siteFooter";
- import { SemipolarSpinner} from 'epic-spinners';
+import { SemipolarSpinner } from "epic-spinners";
+
+import "animate.css";
 export default {
   components: {
     Newsletter,
     SiteFooter,
     Resources,
-    SemipolarSpinner
+    SemipolarSpinner,
   },
 
   data() {
     return {
-      images: ['https://home.maxinemoffett.com/wp-content/uploads/elementor/thumbs/Frame-3757-poppczshscggt8jfy8jjrq86hv1d65q8coghrc3z2y.png',  'https://home.maxinemoffett.com/wp-content/uploads/elementor/thumbs/Frame-3759-poppdcy8g0yhbs0bte8bqmwmt98i5x6h2hlah7kgj4.png'],
+      images: [
+        "https://home.maxinemoffett.com/wp-content/uploads/elementor/thumbs/Frame-3757-poppczshscggt8jfy8jjrq86hv1d65q8coghrc3z2y.png",
+        "https://home.maxinemoffett.com/wp-content/uploads/elementor/thumbs/Frame-3759-poppdcy8g0yhbs0bte8bqmwmt98i5x6h2hlah7kgj4.png",
+      ],
       currentNumber: 0,
 
-      hotbiz: [
-
+      hotbiz_fr: [
         {
           id: "516",
           picture: "assets/images/AFRICAN CULTURE.jpg",
           name: "African Tradition",
           description:
-            "Production of african wear from all regions of Cameroon, with specialty in the grassfield attire",
+            "Production de vêtements africains de toutes les régions du Cameroun, avec une spécialisation dans les vêtements des champs.",
         },
-
 
         {
           id: "3711",
           picture: "assets/images/bibi.jpg",
           name: "Vin Bibi",
-          description:
-            "Production de vin blanc moueleux",
+          description: "Production de vin blanc moueleux",
         },
 
-
-    {
+        {
           id: "3712",
           picture: "assets/images/silas.jpg",
           name: "Silas Construction",
           description:
-            "Silas Construction  can handle all your construction needs. We offer residential construction, commercial construction, construction ",
+            "Silas Construction peut répondre à tous vos besoins en matière de construction. ",
         },
 
-
-
-
-
-         {
+        {
           id: "36",
           picture: "assets/images/emma.jpg",
           name: "Emma Fashion",
-          description:
-            "Embroidery , hand-made",
+          description: "Embroidery , hand-made",
         },
-
-
-
 
         {
           id: "3705",
@@ -912,7 +873,7 @@ export default {
           description:
             "Customisation des bijoux, sac et chaussures avec du tissu pagne et formation sur la customisation",
         },
-  
+
         {
           id: "3272",
           picture: "assets/images/edo.jpg",
@@ -924,7 +885,7 @@ export default {
         {
           id: "3709",
           picture: "assets/images/aissa.jpg",
-          
+
           name: "Aissa Couture",
           description:
             "Entreprise de production de viande de lapin et autres produits connexes.",
@@ -936,6 +897,70 @@ export default {
           name: "OKAPI",
           description:
             "OKAPI est spécialisé dans la transformation de fruits exotiques en jus naturelles et dérivés. Elle innove dans la conception de nouvelles saveurs originales.",
+        },
+      ],
+
+      hotbiz_eng: [
+        {
+          id: "516",
+          picture: "assets/images/EN/AFRICAN CULTURE.jpg",
+          name: "African Tradition",
+          description:
+            "Production of african wear from all regions of Cameroon, with specialty in the grassfield attire",
+        },
+
+        {
+          id: "3711",
+          picture: "assets/images/EN/bibi.jpg",
+          name: "Vin Bibi",
+          description: "Production of soft white wine",
+        },
+
+        {
+          id: "3712",
+          picture: "assets/images/EN/silas.jpg",
+          name: "Silas Construction",
+          description: "Manufacturing of industrial machines",
+        },
+
+        {
+          id: "36",
+          picture: "assets/images/EN/emma.jpg",
+          name: "Emma Fashion",
+          description: "Embroidery , hand-made",
+        },
+
+        {
+          id: "3705",
+          picture: "assets/images/EN/GERAR.jpg",
+          name: "Gerar Fashion",
+          description:
+            "Customization of jewelry, bags and shoes with loincloth and training on customization",
+        },
+
+        {
+          id: "3272",
+          picture: "assets/images/EN/edo.jpg",
+          name: "Saveurs du Lapin",
+          description:
+            "Specializing in woven fabric, shirts, pants, decoration, placemats and more",
+        },
+
+        {
+          id: "3709",
+          picture: "assets/images/EN/ETS AISSA.jpg",
+
+          name: "Aissa Couture",
+          description:
+            "Company producing rabbit meat and other related products.",
+        },
+
+        {
+          id: "3708",
+          picture: "assets/images/EN/okapi.jpg",
+          name: "OKAPI",
+          description:
+            "OKAPI is specialized in the transformation of exotic fruits into natural juices and derivatives. It innovates in the conception of new original flavors.",
         },
       ],
 
@@ -976,15 +1001,13 @@ export default {
           name: "ETS Aissa ",
         },
 
-
-         {
+        {
           video: "https://www.youtube.com/embed/BqgkXMUm858",
           picture: "assets/images/biz/silas.jpg",
           name: "George Silas",
         },
 
-
-         {
+        {
           video: "https://www.youtube.com/embed/7aIMDB6_tWg",
           picture: "assets/images/biz/ema.jpg",
           name: "Emma Fashion",
@@ -992,7 +1015,6 @@ export default {
       ],
       selected_video: "",
       show_loader: false,
-      
 
       options: {
         rewind: true,
@@ -1025,7 +1047,7 @@ export default {
       img: require("../assets/img/about/en.png"),
       lang: "EN",
       keyword: "",
-      timer: null
+      timer: null,
     };
   },
 
@@ -1033,51 +1055,47 @@ export default {
     let externalScript = document.createElement("script");
     externalScript.setAttribute("src", "/assets/js/scripts.js");
     document.head.appendChild(externalScript);
-     
-     this.startRotation();
+
+    this.startRotation();
 
     this.loadbusineses();
   },
 
- 
-
- 
-
+  computed: {
+    hotbiz() {
+      if (this.$i18n.locale == "en") {
+        return this.hotbiz_eng;
+      } else {
+        return this.hotbiz_fr;
+      }
+    },
+  },
 
   methods: {
+    startRotation: function () {
+      this.timer = setInterval(this.next, 10000);
+    },
 
-    startRotation: function() {
-            this.timer = setInterval(this.next, 10000);
-        },
+    next: function () {
+      if (this.currentNumber == 1) {
+        this.currentNumber = 0;
+      } else {
+        this.currentNumber = 1;
+      }
+    },
+    closeLoad() {
+      this.removeFadeOut(document.getElementById("loading"), 2000);
+    },
 
-        next: function() {
-          if(this.currentNumber == 1){   
-           
-           this.currentNumber = 0
+    removeFadeOut(el, speed) {
+      var seconds = speed / 1000;
+      el.style.transition = "opacity " + seconds + "s ease";
 
-          }else{
-              this.currentNumber = 1
-          }
-        }
-        ,
-
-
-        closeLoad(){
-    this.removeFadeOut(document.getElementById('loading'), 2000);
-        },
-
-
-       removeFadeOut( el, speed ) {
-    var seconds = speed/1000;
-    el.style.transition = "opacity "+seconds+"s ease";
-
-    el.style.opacity = 0;
-    setTimeout(function() {
+      el.style.opacity = 0;
+      setTimeout(function () {
         el.parentNode.removeChild(el);
-    }, speed);
-}
-,
-
+      }, speed);
+    },
     search() {
       if (!this.keyword) return false;
 
@@ -1143,7 +1161,10 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 
-.home-icon{
+.pt-50 {
+  padding-top: 50px;
+}
+.home-icon {
   font-size: 35px;
 }
 
@@ -1154,7 +1175,8 @@ export default {
   opacity: 1;
   position: absolute;
 }
-.fade-enter, .fade-leave {
+.fade-enter,
+.fade-leave {
   opacity: 0;
   visibility: hidden;
 }
@@ -1177,12 +1199,10 @@ export default {
   z-index: 100;
 }
 
-
-.advance_pic{
+.advance_pic {
   height: 450px;
   object-fit: cover;
 }
-
 
 .mt-100 {
   margin-top: 100px;
@@ -1224,7 +1244,6 @@ export default {
 .bg-dark {
   background-color: #000000 !important;
 }
-
 
 .font-14 {
   font-size: 14px !important;
@@ -1280,7 +1299,8 @@ export default {
 }
 
 .r-image {
-  height: 450px !important;
+  height: 410px !important;
+  object-fit: contain;
 }
 
 .pl-21 {
@@ -1528,7 +1548,7 @@ export default {
   text-transform: capitalize;
 }
 
-.nav-item{
+.nav-item {
   text-align: center;
 }
 </style>

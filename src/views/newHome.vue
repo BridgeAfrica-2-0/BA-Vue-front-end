@@ -21,10 +21,7 @@
           <router-link to="/">
             <a class="d-block d-lg-none" rel="home" style="margin-left: -15%">
               <span class="logo" style="min-width: 148px"
-                ><img
-                  id="mwhitelogo"
-                  src="https://home.maxinemoffett.com/wp-content/uploads/thegem-logos/logo_d2ecc795468a764490859da0a01cd521_1x.png"
-                />
+                ><img id="mwhitelogo" src="assets/images/bawhitelogo.png" />
 
                 <img
                   class="d-none"
@@ -84,12 +81,12 @@
 
             <li class="nav-item menu-item-logo d-none d-lg-block">
               <div class="site-logo" style="width: 164px">
-                <a href="https://home.maxinemoffett.com/" rel="home">
+                <a href="/" rel="home">
                   <span class="logo" style="min-width: 148px; margin-left: 30%"
                     ><img
                       class=""
                       id="whitelogo"
-                      src="https://home.maxinemoffett.com/wp-content/uploads/thegem-logos/logo_d2ecc795468a764490859da0a01cd521_1x.png"
+                      src="assets/images/bawhitelogo.png"
                     />
 
                     <img
@@ -337,7 +334,7 @@
           <div class="container">
             <b-img-lazy
               style="margin-top: -150px"
-              src="https://home.maxinemoffett.com/wp-content/uploads/2022/05/Group-3809-1-579x1024.png"
+              src="assets/images/Group-3809-1-579x1024.png"
               alt=""
             />
           </div>
@@ -680,7 +677,7 @@
           <div class="col-md-6 pl-126 pr-21">
             <b-img-lazy
               class="quotes"
-              src="https://home.maxinemoffett.com/wp-content/uploads/2022/05/fashion-designing-schools-in-cameroon-1.jpg"
+              src="assets/images/fashion-designing-schools-in-cameroon-1.jpg"
               alt="alternative"
             />
           </div>
@@ -692,7 +689,7 @@
           <div class="col-md-7 p-0 order-2 order-md-1">
             <b-img-lazy
               class="quotes"
-              src="https://home.maxinemoffett.com/wp-content/uploads/2022/05/csm_senegal-agriculture-food_georges_gobet_afp_35f00077fb_1.jpg"
+              src="assets/images/csm_senegal-agriculture-food_georges_gobet_afp_35f00077fb_1.jpg"
               alt="alternative"
             />
           </div>
@@ -830,8 +827,8 @@ export default {
   data() {
     return {
       images: [
-        "https://home.maxinemoffett.com/wp-content/uploads/elementor/thumbs/Frame-3757-poppczshscggt8jfy8jjrq86hv1d65q8coghrc3z2y.png",
-        "https://home.maxinemoffett.com/wp-content/uploads/elementor/thumbs/Frame-3759-poppdcy8g0yhbs0bte8bqmwmt98i5x6h2hlah7kgj4.png",
+        "assets/images/Frame-3757-poppczshscggt8jfy8jjrq86hv1d65q8coghrc3z2y.png",
+        "assets/images/Frame-3759-poppdcy8g0yhbs0bte8bqmwmt98i5x6h2hlah7kgj4.png",
       ],
       currentNumber: 0,
 
@@ -1142,9 +1139,7 @@ export default {
       axios
         .get(url)
         .then(({ data }) => {
-          //   if (data.data.length) {
-          //    //this.hotbiz=data.data;
-          //   }
+         
         })
         .catch((err) => {
           console.log({ err: err });
@@ -1222,7 +1217,7 @@ export default {
   background: rgb(255, 255, 255, 0.15);
 }
 
-.about-box1::hover .icon-tbg,
+.about-box1:hover .icon-tbg,
 .about-box1:hover ~ .icon-tbg {
   color: #fff;
   background-color: #000;
@@ -1496,14 +1491,6 @@ export default {
 .header {
   height: 100vh;
 }
-
-/* #primary-menu.no-responsive {
-    text-align: left;
-    white-space: nowrap;
-    display: inline-block;
-    font-size: 0;
-    margin: 0 -20px;
-} */
 
 @media (min-width: 768px) {
   .navbar-collapse ul {

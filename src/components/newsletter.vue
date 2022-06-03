@@ -38,6 +38,12 @@
 
 export default {
   name: "Newsletter",
+
+  data(){
+    return{
+      subEmail:''
+    }
+  }
  
 };
 </script>

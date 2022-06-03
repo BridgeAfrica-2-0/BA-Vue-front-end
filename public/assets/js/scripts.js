@@ -1,205 +1,177 @@
-setTimeout(function(){ 
-window.onscroll = function () {
-	scrollFunction();
-	//scrollFunctionBTT(); // back to top button
-};
+setTimeout(function () {
+	window.onscroll = function () {
+		scrollFunction();
 
-window.onload = function () {
-	removeFadeOut(document.getElementById('loading'), 2000);
-	scrollFunction();
-	
-	
-	
-};
+	};
 
-
-function removeFadeOut( el, speed ) {
-    var seconds = speed/1000;
-    el.style.transition = "opacity "+seconds+"s ease";
-
-    el.style.opacity = 0;
-    setTimeout(function() {
-        el.parentNode.removeChild(el);
-    }, speed);
-}
-
-
-var lastScrollTop = 40;
+	window.onload = function () {
+		removeFadeOut(document.getElementById('loading'), 2000);
+		scrollFunction();
 
 
 
+	};
 
 
-function scrollFunction() {
+	function removeFadeOut(el, speed) {
+		var seconds = speed / 1000;
+		el.style.transition = "opacity " + seconds + "s ease";
 
-	
-
-	if (document.documentElement.scrollTop > 30) {
-		document.getElementById("navbarExample").classList.add("top-nav-collapse");
-
-		document.getElementById("primary-menu").classList.add("black-text");
-
+		el.style.opacity = 0;
+		setTimeout(function () {
+			el.parentNode.removeChild(el);
+		}, speed);
+	}
 
 
-		//check for scroll up and scroll down
+	var lastScrollTop = 40;
 
-		if(lastScrollTop > document.documentElement.scrollTop ){
-             
-			
+
+
+
+
+	function scrollFunction() {
+
+
+
+		if (document.documentElement.scrollTop > 30) {
 			document.getElementById("navbarExample").classList.add("top-nav-collapse");
 
 			document.getElementById("primary-menu").classList.add("black-text");
-			document.getElementById("navbarExample").classList.remove("d-none");
-
-			document.getElementById("blacklogo").classList.remove("d-none");
-			document.getElementById("whitelogo").classList.add("d-none");
-
-			document.getElementById("mblacklogo").classList.remove("d-none");
-			document.getElementById("mwhitelogo").classList.add("d-none");
-			  
-		}else{
-
-			document.getElementById("navbarExample").classList.add("d-none");
-	//	document.getElementById("primary-menu").classList.remove("black-text");
-			  
 
 
+
+			if (lastScrollTop > document.documentElement.scrollTop) {
+
+
+				document.getElementById("navbarExample").classList.add("top-nav-collapse");
+
+				document.getElementById("primary-menu").classList.add("black-text");
+				document.getElementById("navbarExample").classList.remove("d-none");
+
+				document.getElementById("blacklogo").classList.remove("d-none");
+				document.getElementById("whitelogo").classList.add("d-none");
+
+				document.getElementById("mblacklogo").classList.remove("d-none");
+				document.getElementById("mwhitelogo").classList.add("d-none");
+
+			} else {
+
+				document.getElementById("navbarExample").classList.add("d-none");
+
+			}
+
+
+
+		} else if (document.documentElement.scrollTop < 30) {
+
+			document.getElementById("blacklogo").classList.add("d-none");
+			document.getElementById("whitelogo").classList.remove("d-none");
+
+			document.getElementById("mblacklogo").classList.add("d-none");
+			document.getElementById("mwhitelogo").classList.remove("d-none");
+
+			document.getElementById("navbarExample").classList.remove("top-nav-collapse");
+			document.getElementById("primary-menu").classList.remove("black-text");
 		}
 
-
-
-	} else if ( document.documentElement.scrollTop < 30 ) {
-
-		document.getElementById("blacklogo").classList.add("d-none");
-		document.getElementById("whitelogo").classList.remove("d-none");
-
-		document.getElementById("mblacklogo").classList.add("d-none");
-		document.getElementById("mwhitelogo").classList.remove("d-none");
-
-		document.getElementById("navbarExample").classList.remove("top-nav-collapse");
-		document.getElementById("primary-menu").classList.remove("black-text");
+		lastScrollTop = document.documentElement.scrollTop;
 	}
 
-	lastScrollTop=document.documentElement.scrollTop;
-}
-// Navbar on mobile
-let elements = document.querySelectorAll(".nav-link:not(.dropdown-toggle)");
+	let elements = document.querySelectorAll(".nav-link:not(.dropdown-toggle)");
 
-for (let i = 0; i < elements.length; i++) {
-	elements[i].addEventListener("click", () => {
+	for (let i = 0; i < elements.length; i++) {
+		elements[i].addEventListener("click", () => {
+			document.querySelector(".offcanvas-collapse").classList.toggle("open");
+		});
+	}
+
+	document.querySelector(".navbar-toggler").addEventListener("click", () => {
 		document.querySelector(".offcanvas-collapse").classList.toggle("open");
 	});
-}
 
-document.querySelector(".navbar-toggler").addEventListener("click", () => {
-  	document.querySelector(".offcanvas-collapse").classList.toggle("open");
-});
 
-// Hover on desktop
-function toggleDropdown(e) {
-	const _d = e.target.closest(".dropdown");
-	let _m = document.querySelector(".dropdown-menu", _d);
-
-	setTimeout(
-		function () {
-		const shouldOpen = _d.matches(":hover");
-		_m.classList.toggle("show", shouldOpen);
-		_d.classList.toggle("show", shouldOpen);
-
-		_d.setAttribute("aria-expanded", shouldOpen);
-		},
-		e.type === "mouseleave" ? 300 : 0
-	);
-}
-
-// On hover
-const dropdownCheck = document.querySelector('.dropdown');
-
-if (dropdownCheck !== null) { 
-	document.querySelector(".dropdown").addEventListener("mouseleave", toggleDropdown);
-	document.querySelector(".dropdown").addEventListener("mouseover", toggleDropdown);
-
-	// On click
-	document.querySelector(".dropdown").addEventListener("click", (e) => {
+	function toggleDropdown(e) {
 		const _d = e.target.closest(".dropdown");
 		let _m = document.querySelector(".dropdown-menu", _d);
-		if (_d.classList.contains("show")) {
-			_m.classList.remove("show");
-			_d.classList.remove("show");
-		} else {
-			_m.classList.add("show");
-			_d.classList.add("show");
+
+		setTimeout(
+			function () {
+				const shouldOpen = _d.matches(":hover");
+				_m.classList.toggle("show", shouldOpen);
+				_d.classList.toggle("show", shouldOpen);
+
+				_d.setAttribute("aria-expanded", shouldOpen);
+			},
+			e.type === "mouseleave" ? 300 : 0
+		);
+	}
+
+	const dropdownCheck = document.querySelector('.dropdown');
+
+	if (dropdownCheck !== null) {
+		document.querySelector(".dropdown").addEventListener("mouseleave", toggleDropdown);
+		document.querySelector(".dropdown").addEventListener("mouseover", toggleDropdown);
+
+		document.querySelector(".dropdown").addEventListener("click", (e) => {
+			const _d = e.target.closest(".dropdown");
+			let _m = document.querySelector(".dropdown-menu", _d);
+			if (_d.classList.contains("show")) {
+				_m.classList.remove("show");
+				_d.classList.remove("show");
+			} else {
+				_m.classList.add("show");
+				_d.classList.add("show");
+			}
+		});
+	}
+
+	var cardSlider = new Swiper('.card-slider', {
+		autoplay: {
+			delay: 4000,
+			disableOnInteraction: false
+		},
+		loop: true,
+		navigation: {
+			nextEl: '.swiper-button-next',
+			prevEl: '.swiper-button-prev'
 		}
 	});
-}
-  
-
-/* Card Slider - Swiper */
-var cardSlider = new Swiper('.card-slider', {
-	autoplay: {
-		delay: 4000,
-		disableOnInteraction: false
-	},
-	loop: true,
-	navigation: {
-		nextEl: '.swiper-button-next',
-		prevEl: '.swiper-button-prev'
-	}
-});
 
 
-/* Image Slider - Swiper */
-var imageSlider = new Swiper('.image-slider', {
-	autoplay: {
-		delay: 3000,
-		disableOnInteraction: false
-	},
-	loop: true,
-	spaceBetween: 50,
-	slidesPerView: 5,
-	breakpoints: {
-		// when window is <= 575px
-		575: {
-			slidesPerView: 1,
-			spaceBetween: 10
+	var imageSlider = new Swiper('.image-slider', {
+		autoplay: {
+			delay: 3000,
+			disableOnInteraction: false
 		},
-		// when window is <= 767px
-		767: {
-			slidesPerView: 2,
-			spaceBetween: 20
-		},
-		// when window is <= 991px
-		991: {
-			slidesPerView: 3,
-			spaceBetween: 20
-		},
-		// when window is <= 1199px
-		1199: {
-			slidesPerView: 4,
-			spaceBetween: 20
-		},
+		loop: true,
+		spaceBetween: 50,
+		slidesPerView: 5,
+		breakpoints: {
 
-	}
-});
+			575: {
+				slidesPerView: 1,
+				spaceBetween: 10
+			},
+			// when window is <= 767px
+			767: {
+				slidesPerView: 2,
+				spaceBetween: 20
+			},
+			// when window is <= 991px
+			991: {
+				slidesPerView: 3,
+				spaceBetween: 20
+			},
+			// when window is <= 1199px
+			1199: {
+				slidesPerView: 4,
+				spaceBetween: 20
+			},
+
+		}
+	});
 
 
-/* Back To Top Button */
-// Get the button
-myButton = document.getElementById("myBtn");
 
-// When the user scrolls down 20px from the top of the document, show the button
-// function scrollFunctionBTT() {
-// 	if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-// 		myButton.style.display = "block";
-// 	} else {
-// 		myButton.style.display = "none";
-// 	}
-// }
-
-// When the user clicks on the button, scroll to the top of the document
-document.getElementById('myBtn').onclick = topFunction;
-function topFunction() {
-	document.body.scrollTop = 0; // for Safari
-	document.documentElement.scrollTop = 0; // for Chrome, Firefox, IE and Opera
-}
 }, 500);

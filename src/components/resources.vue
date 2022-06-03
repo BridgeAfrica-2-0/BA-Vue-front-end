@@ -731,7 +731,7 @@ export default {
       }
       return this.resources.filter((res) => {
         if (res.tag.includes(this.selectedResource)) {
-          console.log(res.tag);
+         
           return res;
         }
       });

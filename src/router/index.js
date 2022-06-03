@@ -122,7 +122,7 @@ const routes = [
 
 
   {
-    path: "/",
+    path: "oldhome",
     name: "home1",
     component: home1,
 
@@ -438,7 +438,7 @@ const routes = [
   },
 
   {
-    path: "/newhome",
+    path: "/",
     name: "newHome",
     component: newHome,
 

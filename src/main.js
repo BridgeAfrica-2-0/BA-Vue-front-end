@@ -22,6 +22,12 @@ import VueSocialauth from 'vue-social-auth';
 import ShareNetwork from 'vue-social-sharing';
 import BtnCtaMessage from "@/components/messagesCTA/Btn-cta-message";
 
+import SequentialEntrance from 'vue-sequential-entrance'
+import 'vue-sequential-entrance/vue-sequential-entrance.css'
+Vue.use(SequentialEntrance);
+
+
+
 Vue.component('BtnCtaMessage', BtnCtaMessage);
 Vue.use(ShareNetwork);
 

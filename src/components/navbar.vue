@@ -15,7 +15,7 @@
 
           <router-link
             class="d-inline-block align-top mt-1"
-            :to="{ name: 'home1' }"
+            :to="{ name: 'newHome' }"
           >
             <img src="@/assets/logo.png" alt="" class="balogo" loading="lazy" />
           </router-link>
@@ -913,7 +913,7 @@ export default {
     navLink(type) {
       const link = {
         home: () => {
-          return this.profile ? { name: "dashboard" } : { name: "home1" };
+          return this.profile ? { name: "dashboard" } : { name: "newHome" };
         },
       };
       try {
@@ -955,7 +955,7 @@ export default {
 
         if (response.success) {
           loader.hide();
-         // this.$router.push({ name: "home1" });
+        
           this.Logout();
         }
         return false;

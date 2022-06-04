@@ -561,7 +561,7 @@
                 :businesses="businesses.data"
                 :products="miniproducts.data"
                 :networks="mininetworks.data"
-                :defaultLocation="searchParams.location.label"
+                :defaultLocation="searchParams.location"
                 :isSearched="isSearched"
               />
             </div>
@@ -696,7 +696,7 @@ export default {
       } else if (this.$route.query.location) {
           this.searchParams.location = this.$route.query.location;
       } else {
-          this.searchParams.location = { code: 64, label: 'Youndae' };
+          this.searchParams.location = { code: 62, label: 'Yaoundé' };
       }
 
       this.searchParams.location_placeholder = this.searchParams.location
@@ -708,7 +708,7 @@ export default {
       if (this.$route.query.location) {
           this.searchParams.location = this.$route.query.location;
       } else {
-          this.searchParams.location = { code: 64, label: 'Youndae' };
+          this.searchParams.location = { code: 62, label: 'Yaoundé' };
       }
 
       this.searchParams.location_placeholder = this.$route.query.location

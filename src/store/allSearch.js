@@ -118,7 +118,8 @@ export default {
             let city = data.city ? "&city=" + data.city : "";
             let neighbourhoodId=data.neighborhood_id ?  "&neighbourhoodId=" + data.neighborhood_id : "";
     
-            let neighbourhood = data.neighbourhood ? "&neighbourhood=" + data.neighbourhood : "&city=" + state.location?.code;
+            //let neighbourhood = data.neighbourhood ? "&neighbourhood=" + data.neighbourhood : "&city=" + state.location?.code;
+            let neighbourhood = data.neighbourhood ? "&neighbourhood=" + data.neighbourhood : "&city=62";
 
             
 

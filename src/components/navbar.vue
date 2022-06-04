@@ -57,15 +57,19 @@
                   class="input-group-append color-mobile"
                   style="border: none"
                 >
-                  
+                  <multiselect 
+                   :value="city" 
+                    :options="citiesValues" 
+                    placeholder="Select City" 
+                    class="search-hh w-100"
+                    style="border-left: none"
+                    label="label" 
+                    track-by="code"
+                    @input="setSelectedLocation"
+              ></multiselect>
+    
                 </div>
 
-                 <v-select 
-               :options="citiesValues"
-               class="search-hh w-100 city-search"
-               style="border-left: none"
-               :v-model="credentials.location"
-               ></v-select>
 
               </b-input-group>
             </span>
@@ -85,13 +89,18 @@
                 title=""
                 v-on:keyup.enter="getKeyword"
               />              
-              
-              <v-select 
-                :options="citiesValues"
-                class="search-hh w-44 city-search"
-                style="border-left: none"
-                :v-model="credentials.location"
-               ></v-select>
+
+              <multiselect 
+             :value="city" 
+              :options="citiesValues" 
+              placeholder="Select City" 
+              class="search-hh w-44 city-search"
+              style="border-left: none"
+               label="label" 
+               track-by="code"
+               @input="setSelectedLocation"
+              ></multiselect>
+
 
               <slot name="button">
                 <Button @click.native="getKeyword" media="desktop" />
@@ -622,7 +631,7 @@ export default {
         return {
           keyword: "",
           placeholder: this.$t("general.All"),
-          location:  '',
+          location:  { code: 62, label: 'Yaoundé' },
           location_placeholder:this.$t("home.Location")
         };
       },
@@ -641,7 +650,8 @@ export default {
      // query: "",
       selectedUser: null,
       users: [],
-      citiesValues: []
+      citiesValues: [],
+      city: { code: 62, label: 'Yaoundé' }
     };
   },
 
@@ -653,17 +663,16 @@ export default {
      // neigbourhoods: "auth/neigbourhoods",
       cities: "auth/cities",
     }),
-    query(){
-      return this.credentials.location;
-    }
+    // query(){
+    //   return this.credentials.location;
+    // }
   },
   beforeMount() {
-    this.getCities();
-    this.getLocation();
+    // this.getLocation();
   },
   created() {
     //check for authentication
-
+    this.getCities();
     this.islogin = this.$store.getters["auth/profilConnected"];
 
 
@@ -760,6 +769,13 @@ export default {
       Logout: "auth/logout",
     }),
 
+    setSelectedLocation(value)
+    {
+      this.city = value;
+      console.log('selected location', value.code);
+      // this. selectedCity = {code: value.code, label: value.label };
+      // this.credentials.location = {code: value.code, label: value.label };
+    },
 
     profileSenderImange(image) {
       if (!image)
@@ -1283,7 +1299,7 @@ export default {
 }
 }
 
-.city-search .vs__dropdown-toggle {
+.city-search .multiselect__tags,.city-search .multiselect__select{
   height: 100% !important;
 }
 </style>

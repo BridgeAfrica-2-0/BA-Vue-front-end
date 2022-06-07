@@ -668,15 +668,11 @@
             </p>
 
             <div class="text-center m-2 p-2 p-md-2">
-
-           
-              <router-link to="network_follower/2"> 
+              <router-link to="network_follower/2">
                 <b-button variant="outline-primary">
-                {{ $t("general.view_more") }}
-              </b-button>
-              
-               </router-link>
-              
+                  {{ $t("general.view_more") }}
+                </b-button>
+              </router-link>
             </div>
           </div>
 
@@ -710,11 +706,11 @@
             </p>
 
             <div class="text-center m-2 p-2 p-md-2">
-                <router-link to="network_follower/2"> 
-              <b-button variant="outline-primary"
-                >{{ $t("general.view_more") }}
-              </b-button>
-                </router-link>
+              <router-link to="network_follower/2">
+                <b-button variant="outline-primary"
+                  >{{ $t("general.view_more") }}
+                </b-button>
+              </router-link>
             </div>
           </div>
         </div>
@@ -883,9 +879,8 @@ export default {
           id: "3272",
           picture: "assets/images/edo.jpg",
           name: "Saveurs du Lapin",
-            description:
+          description:
             "Entreprise de production de viande de lapin et autres produits connexes.",
-          
         },
 
         {
@@ -893,8 +888,8 @@ export default {
           picture: "assets/images/aissa.jpg",
 
           name: "Aissa Couture",
-        
-            description:
+
+          description:
             "Spécialité du tissu tissé, chemises, pantalon, décoration, set de table et autres.",
         },
 
@@ -952,17 +947,15 @@ export default {
 
           description:
             "Company producing rabbit meat and other related products.",
-         
         },
 
         {
           id: "3709",
           picture: "assets/images/EN/ETS AISSA.jpg",
-     
+
           name: "Aissa Couture",
-           description:
+          description:
             "Specializing in woven fabric, shirts, pants, decoration, placemats and more",
-          
         },
 
         {
@@ -1151,9 +1144,7 @@ export default {
 
       axios
         .get(url)
-        .then(({ data }) => {
-         
-        })
+        .then(({ data }) => {})
         .catch((err) => {
           console.log({ err: err });
         });

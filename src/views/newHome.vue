@@ -668,9 +668,15 @@
             </p>
 
             <div class="text-center m-2 p-2 p-md-2">
-              <b-button variant="outline-primary">
+
+           
+              <router-link to="network_follower/2"> 
+                <b-button variant="outline-primary">
                 {{ $t("general.view_more") }}
               </b-button>
+              
+               </router-link>
+              
             </div>
           </div>
 
@@ -704,9 +710,11 @@
             </p>
 
             <div class="text-center m-2 p-2 p-md-2">
+                <router-link to="network_follower/2"> 
               <b-button variant="outline-primary"
                 >{{ $t("general.view_more") }}
               </b-button>
+                </router-link>
             </div>
           </div>
         </div>
@@ -875,8 +883,9 @@ export default {
           id: "3272",
           picture: "assets/images/edo.jpg",
           name: "Saveurs du Lapin",
-          description:
-            "Spécialité du tissu tissé, chemises, pantalon, décoration, set de table et autres.",
+            description:
+            "Entreprise de production de viande de lapin et autres produits connexes.",
+          
         },
 
         {
@@ -884,8 +893,9 @@ export default {
           picture: "assets/images/aissa.jpg",
 
           name: "Aissa Couture",
-          description:
-            "Entreprise de production de viande de lapin et autres produits connexes.",
+        
+            description:
+            "Spécialité du tissu tissé, chemises, pantalon, décoration, set de table et autres.",
         },
 
         {
@@ -939,17 +949,20 @@ export default {
           id: "3272",
           picture: "assets/images/EN/edo.jpg",
           name: "Saveurs du Lapin",
+
           description:
-            "Specializing in woven fabric, shirts, pants, decoration, placemats and more",
+            "Company producing rabbit meat and other related products.",
+         
         },
 
         {
           id: "3709",
           picture: "assets/images/EN/ETS AISSA.jpg",
-
+     
           name: "Aissa Couture",
-          description:
-            "Company producing rabbit meat and other related products.",
+           description:
+            "Specializing in woven fabric, shirts, pants, decoration, placemats and more",
+          
         },
 
         {

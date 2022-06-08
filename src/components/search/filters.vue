@@ -42,6 +42,10 @@
       <b-form-group
         v-if="nameOfCategory"
         class="mb-0 pt-6 text-left"
+        label-cols-lg="12"
+        :label="$t('search.Category')"
+        label-size="md"
+        label-class="font-weight-bold pt-0"
       >
       <b-form-select
         v-model="nameOfCategory"
@@ -173,7 +177,7 @@
               >
               </b-form-group>
                   <multiselect 
-                  :value="searchParams.city" 
+                  :value="city" 
                   :options="citiesValues" 
                   placeholder="Select City" 
                   class="search-hh w-100 city-search"
@@ -635,7 +639,7 @@ export default {
     "activateMatching",
     "Selectedcategory",
     "Selectedparentcategory",
-    "categoryNameSelected",
+    "categoryNameSelected"
   ],
   watch: {
     query(newQuery) {
@@ -892,7 +896,6 @@ export default {
       loading: false,
       matchingCategory: [],
       query: "",
-      city: "",
       showMore: false,
       // [Edouard] data
       nameOfCategory: null,
@@ -913,7 +916,7 @@ export default {
         region_id: null,
         country_id: null,
         neighbourhood: null,
-        city: { code: 62, label: 'Yaoundé' },
+        city: null,
 
         council_id: null,
         neighborhood_id: null,
@@ -1748,6 +1751,9 @@ export default {
   },
 
   computed: {
+    city(){
+     return this.$store.getters["allSearch/getLocation"];
+    },
     categoryRendering() {
       return this.matchingCategory;
     },
@@ -1840,7 +1846,7 @@ export default {
       this.activateMatching = false;
       this.nameOfCategory = null;
       this.query = null;
-      this.city = null;
+      // this.city = null;
       this.$store.commit("marketSearch/setSubCat", []);
       this.searchParams.country_id = null;
       this.searchParams.region_id = null;
@@ -1862,7 +1868,7 @@ export default {
       this.searchParams.filter_id = null;
 
       this.searchParams.neighbourhood = null;
-      this.searchParams.city = null;
+      this.searchParams.location = { code: 62, label: 'Yaoundé' };
       this.searchParams.distanceInKM = null;
       this.searchParams.price_range = null;
 
@@ -2375,19 +2381,13 @@ export default {
     },
 
     getCities(){
-      this.$store.dispatch("auth/cities", {})
-         .then(() => {
-            const cities =  this.$store.getters["auth/cities"];
-            for (let index in cities) {
-                this.citiesValues.push({
-                  label: cities[index].name,
-                  code: cities[index].id
-                });
-            }
-          })
-          .catch((err) => {
-            console.log({err:err});
-          });
+      const cities =  this.$store.getters["auth/cities"];
+      for (let index in cities) {
+        this.citiesValues.push({
+          label: cities[index].name,
+          code: cities[index].id
+        });
+      }
     },
 
     getDivisions() {
@@ -2793,6 +2793,11 @@ export default {
           break;
       }
     },
+    setSelectedLocation(value)
+    {
+      this.city = value;
+      this.$emit("updateSearchLocation", {code: value.code, label: value.label });
+    }
   },
 };
 </script>
@@ -2887,8 +2892,5 @@ select {
   height: 350px;
   overflow: auto;
   overflow-x: hidden;
-}
-.select-category {
-  margin-top: 20px;
 }
 </style>

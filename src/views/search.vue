@@ -561,7 +561,7 @@
                 :businesses="businesses.data"
                 :products="miniproducts.data"
                 :networks="mininetworks.data"
-                :defaultLocation="searchParams.location"
+                :defaultLocation="searchParams.location.label"
                 :isSearched="isSearched"
               />
             </div>
@@ -692,7 +692,8 @@ export default {
     if (this.islogin) {
 
       if (this.$store.getters["auth/user"].user.city_id) {
-          this.searchParams.location = this.$route.query.city_id;      
+          // this.searchParams.location = this.$route.query.city_id; 
+          this.searchParams.location = { code: 62, label: 'Yaoundé' };     
       } else if (this.$route.query.location) {
           this.searchParams.location = this.$route.query.location;
       } else {
@@ -715,6 +716,7 @@ export default {
         ? this.$route.query.location
         : this.$t("home.Location");
     }
+
 
     this.onProcessQuery();
     this.getLocation();

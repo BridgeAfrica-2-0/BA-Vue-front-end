@@ -647,11 +647,9 @@ export default {
       notificationPatterns: null,
       messagePatterns: null,
       redirectionPatterns: null,
-     // query: "",
       selectedUser: null,
       users: [],
       citiesValues: [],
-      city: { code: 62, label: 'Yaoundé' }
     };
   },
 
@@ -663,9 +661,9 @@ export default {
      // neigbourhoods: "auth/neigbourhoods",
       cities: "auth/cities",
     }),
-    // query(){
-    //   return this.credentials.location;
-    // }
+    city(){
+      return this.credentials.location;
+    }
   },
   beforeMount() {
     // this.getLocation();
@@ -768,15 +766,11 @@ export default {
       getNeigbourhoods: "auth/neigbourhoods",
       Logout: "auth/logout",
     }),
-
     setSelectedLocation(value)
     {
       this.city = value;
-      console.log('selected location', value.code);
-      // this. selectedCity = {code: value.code, label: value.label };
-      // this.credentials.location = {code: value.code, label: value.label };
+      this.credentials.location = {code: value.code, label: value.label };
     },
-
     profileSenderImange(image) {
       if (!image)
         return null;

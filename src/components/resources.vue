@@ -12,16 +12,25 @@
               <b-button
               pill
               :variant="selectedResource == 'bridgeafrica' ? 'primary' : 'outline-primary'"
+              class="f-12"
               @click="changeResource('bridgeafrica')"
               >{{$t("about.Show_All")}}</b-button
             >
-            <b-button
+
+             <b-button class="f-12"
+              pill
+              :variant="selectedResource == 'hba' ? 'primary' : 'outline-primary'"
+              @click="changeResource('hba')"
+              > {{ $t("general.how_to_use_bridgeafrica") }}  </b-button
+            >
+
+            <b-button class="f-12"
               pill
               :variant="selectedResource == 'Plan' ? 'primary' : 'outline-primary'"
               @click="changeResource('Plan')"
               > {{ $t("general.business_plan") }}  </b-button
             >
-            <b-button
+            <b-button class="f-12"
               pill
               :variant="selectedResource == 'Digital' ? 'primary' : 'outline-primary'"
               @click="changeResource('Digital')"
@@ -29,7 +38,7 @@
             >
 
 
-              <b-button
+              <b-button class="f-12"
               pill
               :variant="selectedResource == 'creation' ? 'primary' : 'outline-primary'"
               @click="changeResource('creation')"
@@ -38,7 +47,7 @@
 
 
             
-              <b-button
+              <b-button class="f-12"
               pill
               :variant="selectedResource == 'fufulde' ? 'primary' : 'outline-primary'"
               @click="changeResource('fufulde')"
@@ -66,8 +75,8 @@
 
         </div>
         <div class="resource-title mt-3">
-          <p v-if="resource.title.length > 25">
-            {{ resource.title.substring(0, 25) }}...
+          <p v-if="resource.title.length > 115">
+            {{ resource.title.substring(0, 115) }}...
           </p>
           <p v-else>
           <b-link :href="resource.video"> {{ resource.title }}  </b-link> 
@@ -81,6 +90,11 @@
       <div> 
         <b-spinner  v-if="loading" variant="success" class="mt-2" label="Spinning" ></b-spinner>
           </div>
+         
+ </div>
+
+    </div>
+     <div class="text-center">  
       <b-button v-if="show_more"
         class="mt-3 "
         style="width:200px"
@@ -89,9 +103,8 @@
               @click="loadMore"
               >{{$t("general.Load_more")}}</b-button
             >
- </div>
 
-    </div>
+             </div>
   </section>
 </template>
 
@@ -117,7 +130,7 @@ export default {
          {
           id: "1",
           title: "developing competitive products",
-          tag: ["bridgeafrica","Plan"],
+          tag: ["bridgeafrica","Plan"],  
            picture: "assets/images/training/mod1/EN.jpg",
           video: "https://youtu.be/X7ZK3elhVGI",
         },
@@ -128,7 +141,7 @@ export default {
   {
           id: "2",
           title: "How To Register Your Business",
-          tag: ["bridgeafrica",'creation'],
+          tag: ["bridgeafrica","hba",'creation'],
            picture: "assets/images/training/mod2/EN.jpg",
           video: "https://youtu.be/BJ1fRB37XRg",
         },
@@ -231,7 +244,7 @@ export default {
      {
           id: "13",
           title: " SELLING ON BRIDGEAFRICA.COM",
-          tag: ["bridgeafrica",'creation'],
+          tag: ["bridgeafrica","hba",'creation'],
            picture: "assets/images/training/mod14/EN.jpg",
           video: "https://youtu.be/EwQrPYxYuj8",
         },
@@ -242,7 +255,7 @@ export default {
          {
           id: "14",
           title: "USING BRIDGEAFRICA.COM AS A CUSTOMER",
-          tag: ["bridgeafrica",'creation'],
+          tag: ["bridgeafrica","hba",'creation'],
            picture: "assets/images/training/mod15/EN.jpg",
           video: "https://youtu.be/xkJScXdGP4o",
         },
@@ -253,7 +266,7 @@ export default {
          {
           id: "15",
           title: " HOW TO CREATE A WEBSITE ON BRIDGEAFRICA.COM",
-          tag: ["bridgeafrica",'creation'],
+          tag: ["bridgeafrica","hba",'creation'],
            picture: "assets/images/training/mod13/EN.jpg",
           video: "https://youtu.be/Q86VsRmoU0Q",
         },
@@ -439,7 +452,7 @@ export default {
           {
           id: "1",
           title: "Comment enregistrer votre entreprise",
-          tag: ["bridgeafrica",'creation'],
+          tag: ["bridgeafrica",'hba','creation'],
            picture: "assets/images/training/mod2/FR.jpg",
           video: "https://youtu.be/6njJyiMZA68",
         },
@@ -514,7 +527,7 @@ export default {
 
          {
           id: "13",
-          title: "IDENTIFIER ET DÉVELOPPER LES LIENS AVEC LE MARCHÉ : CONSTRUIRE VOTRE RÉSEAU",
+          title: "IDENTIFIER ET DÉVELOPPER LES LIENS AVEC LE MARCHÉ  CONSTRUIRE VOTRE RÉSEAU",
           tag: ["bridgeafrica","Digital"],
            picture: "assets/images/training/mod10/FR.jpg",
           video: "https://youtu.be/INywx9vMfp4",
@@ -543,7 +556,7 @@ export default {
         {
           id: "8",
           title: "COMMENT CRÉER UN SITE WEB SUR BRIDGEAFRICA.COM",
-          tag: ["bridgeafrica",'creation'],
+          tag: ["bridgeafrica","hba",'creation'],
            picture: "assets/images/training/mod13/FR.jpg",
           video: "https://youtu.be/0S8Kc7bgMY8",
         },
@@ -552,7 +565,7 @@ export default {
      {
           id: "7",
           title: "VENDRE SUR BRIDGEAFRICA",
-          tag: ["bridgeafrica",'creation'],
+          tag: ["bridgeafrica",'hba','creation'],
            picture: "assets/images/training/mod14/FR.jpg",
           video: "https://youtu.be/0S8Kc7bgMY8",
         },
@@ -561,7 +574,7 @@ export default {
          {
           id: "6",
           title: "UTILISER BRIDGEAFRICA.COM EN TANT QUE CLIENT",
-          tag: ["bridgeafrica",'creation'],
+          tag: ["bridgeafrica",'hba','creation'],
            picture: "assets/images/training/mod15/FR.jpg",
           video: "https://youtu.be/0S8Kc7bgMY8",
         },
@@ -581,7 +594,7 @@ export default {
           {
           id: "17",
           title: "Comment enregistrer votre entreprise",
-          tag: ["bridgeafrica",'fufulde'],
+          tag: ["bridgeafrica",'hba','fufulde'],
            picture: "assets/images/training/mod2/FFU.jpg",
           video: "https://youtu.be/qlJIwRI1AEI",
         },
@@ -590,7 +603,7 @@ export default {
         {
           id: "18",
           title: "Définir un plan d'entreprise",
-          tag: ["bridgeafrica","fufulde"],
+          tag: ["bridgeafrica",'hba',"fufulde"],
            picture: "assets/images/training/mod3/FFU.jpg",
           video: "https://youtu.be/96QS4J0b8F4",
         },
@@ -983,5 +996,9 @@ font-size: 18px;
     left: 50%;
     top: 30px;
   }
+}
+
+.f-12{
+  font-size: 12px;
 }
 </style>

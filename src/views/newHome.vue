@@ -538,6 +538,8 @@
               <h1 class="h1-text p-md-3 text-center text-md-left white mt-2">
                 {{ $t("general.create_an_advance_account") }}
               </h1>
+
+              <p class="white font-14 font-poppin"> While you can use Bridge Africa for free through a basic account, upgrading to an advanced account will give you abilities to do the full e-commerce transaction cycle.</p>
             </div>
           </div>
 
@@ -751,7 +753,7 @@
 
       <div class="hotbiz">
         <splide :options="optionss" class="r-image">
-          <splide-slide v-for="item in videos" :key="item.id">
+          <splide-slide v-for="item in fr_videos" :key="item.id">
             <div class="container">
               <div class="row">
                 <div class="col-md-4">
@@ -967,52 +969,105 @@ export default {
         },
       ],
 
-      videos: [
+
+         fr_videos: [
         {
           video: "https://www.youtube.com/embed/CrjFkoU5eqs",
-          picture: "assets/images/biz/africa.jpg",
+          picture: "assets/images/biz/FR/african culture fr.jpg",
           name: "African Culture",
         },
 
         {
           video: "https://www.youtube.com/embed/7XZ4SAKiQMM",
-          picture: "assets/images/biz/Vin BIBI.jpg",
+          picture: "assets/images/biz/FR/bibi fr.jpg",
           name: "Vin Bibi",
         },
 
         {
           video: "https://www.youtube.com/embed/1eIXf4Nu-F0",
-          picture: "assets/images/biz/Gerar Fashion.jpg",
+          picture: "assets/images/biz/FR/Gerar fr.jpg",
           name: "Gerar Fashion",
         },
 
         {
           video: "https://www.youtube.com/embed/vO53J95E2GA",
-          picture: "assets/images/biz/EDO RAISSA.jpg",
+          picture: "assets/images/biz/FR/EDO RAISSA 2.jpg",
           name: "Edo Raissa",
         },
 
         {
           video: "https://www.youtube.com/embed/7XZ4SAKiQMM",
-          picture: "assets/images/biz/OKAPI.jpg",
+          picture: "assets/images/biz/FR/OKAPI 1.jpg",
           name: "Okapi",
         },
 
         {
           video: "https://www.youtube.com/embed/xyD30G01nOg",
-          picture: "assets/images/biz/aissa.jpg",
+          picture: "assets/images/biz/FR/ETS Aissa 3.jpg",
           name: "ETS Aissa ",
         },
 
         {
           video: "https://www.youtube.com/embed/BqgkXMUm858",
-          picture: "assets/images/biz/silas.jpg",
+          picture: "assets/images/biz/FR/SILAS FR.jpg",
           name: "George Silas",
         },
 
         {
           video: "https://www.youtube.com/embed/7aIMDB6_tWg",
-          picture: "assets/images/biz/ema.jpg",
+          picture: "assets/images/biz/FR/emma fr.jpg",
+          name: "Emma Fashion",
+        },
+      ],
+
+
+
+      en_videos: [
+        {
+          video: "https://www.youtube.com/embed/CrjFkoU5eqs",
+          picture: "assets/images/biz/EN/AFRICAN CULTURE.jpg",
+          name: "African Culture",
+        },
+
+        {
+          video: "https://www.youtube.com/embed/7XZ4SAKiQMM",
+          picture: "assets/images/biz/EN/Bibi.jpg",
+          name: "Vin Bibi",
+        },
+
+        {
+          video: "https://www.youtube.com/embed/1eIXf4Nu-F0",
+          picture: "assets/images/biz/EN/Gerar Fashion.jpg",
+          name: "Gerar Fashion",
+        },
+
+        {
+          video: "https://www.youtube.com/embed/vO53J95E2GA",
+          picture: "assets/images/biz/EN/edo en.jpg",
+          name: "Edo Raissa",
+        },
+
+        {
+          video: "https://www.youtube.com/embed/7XZ4SAKiQMM",
+          picture: "assets/images/biz/EN/OKAPI EN.jpg",
+          name: "Okapi",
+        },
+
+        {
+          video: "https://www.youtube.com/embed/xyD30G01nOg",
+          picture: "assets/images/biz/EN/aissa.jpg",
+          name: "ETS Aissa ",
+        },
+
+        {
+          video: "https://www.youtube.com/embed/BqgkXMUm858",
+          picture: "assets/images/biz/EN/SILAS.jpg",
+          name: "George Silas",
+        },
+
+        {
+          video: "https://www.youtube.com/embed/7aIMDB6_tWg",
+          picture: "assets/images/biz/EN/Emma Fashion.jpg",
           name: "Emma Fashion",
         },
       ],

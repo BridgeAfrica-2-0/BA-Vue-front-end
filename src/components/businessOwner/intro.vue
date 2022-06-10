@@ -1,5 +1,5 @@
 <template>
-  <div>  
+  <div> 
     <b-card title="" header-tag="header" footer-tag="footer">
       <div
         style="float:right"

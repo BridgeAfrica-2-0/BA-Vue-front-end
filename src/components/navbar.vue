@@ -181,7 +181,7 @@
                     /> </span
                 ></a>
                 <b-popover target="messages" triggers="hover" placement="top">
-                  <div class="popover-body">
+                  <div class="popover-body" v-if="messages.length">
                     <p class="font-weight-bold">Messages</p>
                     <div v-for="message in messages" :key="message.id">
                       <hr class="h-divider" />
@@ -219,7 +219,7 @@
                               }}
                             </div>
                             <div class="small text-muted">
-                              {{ message.message.substring(0, 20) }}
+                              {{ checkIfExists(message, 'message') && message.message != null ? message.message.substring(0, 20) : '' }}
                             </div>
                           </div>
                         </div>
@@ -1039,8 +1039,12 @@ export default {
         })
         .catch((error) => console.log(error));
     },
+    checkIfExists(object, key) {
+      return _.has(object, key);
+    }
   },
 };
+
 </script>
 <style>
 
